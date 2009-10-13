@@ -1,0 +1,54 @@
+#SHIP
+Name         Kuat Shipyard~
+Filename     byss.shipyard~
+Description  ~
+Owner        ~
+Pilot        Darrik~
+Copilot      ~
+Class        2
+Tractorbeam  0
+Shipyard     32050
+Hanger       32050
+Turret1      32071
+Turret2      32070
+Statet0      0
+Statet1      0
+Statet2      0
+Lasers       10
+Missiles     100
+Maxmissiles  100
+Rockets     0
+Maxrockets  0
+Torpedos     0
+Maxtorpedos  0
+Lastdoc      32050
+Firstroom    32050
+Lastroom     32099
+Shield       1000
+Maxshield    1000
+Hull         10000
+Maxhull      10000
+Maxenergy    30000
+Hyperspeed   255
+Comm         0
+Chaff        0
+Maxchaff     0
+Sensor       0
+Astro_array  0
+Realspeed    1
+Type         2
+Cockpit      32099
+Coseat       32099
+Pilotseat    32099
+Gunseat      32099
+Navseat      32099
+Engineroom   0
+Entrance     32099
+Shipstate    1
+Missilestate 0
+Energy       30000
+Manuever     0
+Home         byss~
+End
+
+#END

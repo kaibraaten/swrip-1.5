@@ -1,0 +1,42 @@
+#SHIP
+Name         Durgas barge~
+Filename     durgas.barge~
+Description  ~
+Owner        Durga~
+Pilot        ~
+Copilot      Test~
+Class        1
+Tractorbeam  0
+Shipyard     10427
+Hanger       10409
+Turret1      10405
+Turret2      10406
+Statet0      0
+Statet1      0
+Statet2      0
+Laserstr     0
+Missiles     0
+Maxmissiles  0
+Lastdoc      10427
+Firstroom    10400
+Lastroom     10410
+Shield       0
+Maxshield    0
+Hull         0
+Maxhull      0
+Maxenergy    0
+Hyperspeed   0
+Comm         0
+Sensor       0
+Astro_array  0
+Realspeed    0
+Type         0
+Cockpit      10400
+Entrance     10402
+Objectnum    10496
+Shipstate    0
+Missilestate 0
+Energy       0
+End
+
+#END

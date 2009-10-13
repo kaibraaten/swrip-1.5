@@ -1,0 +1,450 @@
+#AREA   Cloning Station~
+
+
+
+#AUTHOR Durga~
+
+#RANGES
+0 103 0 103
+$
+
+#RESETMSG &CThe filtered air carries the distinct scent of medicine.~
+
+#FLAGS
+0
+
+#ECONOMY 0 130056569
+
+#MOBILES
+#10000
+firstmob~
+a newly created firstmob~
+Some god abandoned a newly created firstmob here.
+~
+~
+1 0 0 Z
+1 0 0 0d0+0 0d0+0
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#10001
+doctor Bnokkt~
+Doctor Bnokkt~
+Doctor Bnokkt is the head of the cloning facilities.
+~
+~
+33554435 0 0 Z
+50 0 -25 10d10+500 5d4+2
+1000 0
+8 8 1
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 0
+10 10 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#10002
+c-7hp64 personal assistant droid~
+a c-7hp64 personal assistant droid~
+A c-7hp64 personal assistant droid is here.
+~
+~
+67108867 0 0 Z
+50 0 -25 10d10+5000 1d4+2
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+> death_prog 100~
+mpoload 10003
+~
+|
+#10003
+facility guard~
+a facility guard~
+A Facility guard stands at attention.
+~
+~
+3 0 0 Z
+100 0 -150 20d10+1000 10d4+2
+0 0
+8 8 0
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 0
+20 20 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#10004
+Cloning Nurse~
+a shapely nurse~
+A shapely nurse is standing here, handing out hospital clothes.
+~
+~
+33554435 0 0 Z
+1 0 0 0d0+0 0d0+0
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 -262145 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+> speech_prog Hello Hi~
+say Why hello, oh you poor thing!
+say Here, let me give you theese.
+mpechoat $n The nurse gives you a compassionate look.
+mpoload 10004
+give scrubs $n
+mpforce $n wear scrubs
+emote giggles as she helps you into your new garb.
+say There! Much better!
+smile $n
+~
+> act_prog blushes.~
+if sex($n) == 1
+say Oh stop it! It's nothing I haven't seen before.
+giggle
+'Besides, it's nothing to be ashamed of.
+say Size really doesn't matter.
+else
+if sex($n) == 0
+say Oh honey, you really ought to work out more.
+shake
+else
+if sex($n) == 2
+say It's such a shame to see a woman letting herself go like that.
+tisk
+endif
+endif
+endif
+~
+|
+#10005
+A Vending Machine~
+A vending machine~
+A vending machine rests against the wall here.
+~
+~
+33554435 0 0 Z
+1 0 0 0d0+0 0d0+0
+0 0
+8 8 0
+10 10 10 25 10 10 10
+0 0 0 0 0
+37 0 0 0 -262145 134217728 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#10009
+clerk~
+a clerk~
+A clerk is here to take your payment.
+~
+~
+1 0 0 Z
+1 0 0 0d0+0 0d0+0
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#0
+
+
+#OBJECTS
+#10000
+bookend~
+a newly created bookend~
+Some god dropped a newly created bookend here.~
+~
+13 0 0
+0 0 0 0
+1 0 0
+#10001
+sparti cloning cylinder~
+a sparti cloning cylinder~
+A sparti cloning cylinder is here.~
+~
+13 0 0
+0 0 0 0
+1 0 0
+#10002
+desc~
+a newly created desc~
+Some god dropped a newly created desc here.~
+~
+13 0 0
+0 0 0 0
+1 0 0
+#10003
+facility deed ~
+the deed~
+OOooOOoo the deed to the cloning facilities is here.~
+~
+84 0 0
+0 0 0 0
+1 0 0
+#10004
+Hospital Scrubs~
+White hospital scrubs~
+White hospital scrubs have been discarded in a pile here.~
+~
+9 0 1025
+2 2 0 0
+3 0 0
+E
+leggings~
+These leggings will offer good protection until you can get better. They
+can be found at the Darkhaven Academy.
+~
+#10009
+sparti cloning cylinder~
+a newly created sparti cloning cylinder~
+Some god dropped a newly created sparti cloning cylinder here.~
+~
+13 0 0
+0 0 0 0
+1 0 0
+#0
+
+
+#ROOMS
+#10000
+Inside a Sparti Cloning Cylinder~
+&cYou awaken inside a tube of semi-viscous grey-blue liquid. You find you
+have only glimpses of what scientists would describe as muscle memory. You
+remember how to function, but not how you can across the knowledge to
+begin with. Outside the tank you see people preparing to open the tank,
+there are things you recognise...flash-readers and the sort. But you still
+can't recall how you know. 
+
+&rYour clone has no memories of it's past life, simply how to
+function. Also remember that you don't know that you have died,
+and simply because your clone exists, is not reason to suspect that
+your original has died.
+ 
+&WRemember to clone again. You might regret it if you don't.
+~
+0 8650756 1
+D10
+~
+~
+264192 -1 10009
+> act_prog enters~
+mpat 122 mpecho $n enters from a cloning chamber.
+~
+|
+S
+#10001
+Pay Counter~
+After the long wait you are finally here. Now all that is left to do is to
+pay the clerk, sign a few papers and give a tissue sample. (To do this
+type "clone")
+~
+0 12 1
+D3
+~
+~
+0 -1 10007
+S
+#10002
+In a Small Sterile Room~
+This small room smells strongly of antiseptic.  There is a large flat
+table, that is covered with removable paper.  You assume that this is
+where blood and tissue samples are taken, as well as where new clones are
+examined. There are several medical instruments hanging on hooks on the
+walls.  Some of them look to horrible to even imagine their use.
+~
+0 12 1
+D3
+~
+~
+0 -1 10003
+S
+#10003
+A Clinic Hallway~
+This small hallway leads from the lobby of the facilities to a set of
+locked blastdoors.  To the east is a small doctor's office.  To the west
+is a large room filled with exercise equipment.
+~
+0 12 1
+D1
+~
+~
+0 -1 10002
+D2
+~
+~
+0 -1 10007
+D3
+~
+~
+0 -1 10004
+S
+#10004
+Exercise Room.~
+This room is filled with various pieces of exercise equipment.   It is
+available for young clones to regain their strength as they become
+accustomed to their new forms after gestation and an accelerated growth
+period. All of the equipment has gauges to monitor the progress and vital
+signs of the clones.
+~
+0 12 1
+D0
+~
+~
+0 -1 10005
+D1
+~
+~
+0 -1 10003
+D2
+~
+~
+0 -1 10009
+S
+#10005
+Rest Area~
+This area of the complex is set up as a small lounge.  There are several
+couches and chairs scattered about the room, along with a few tables. A
+curtain at the back hides a few cots for those who are tired.
+ 
+ 
+You may quit and re-enter the game from here.
+~
+0 8388620 1
+D2
+~
+~
+0 -1 10004
+S
+#10006
+Desert Landing Pad~
+You stand upon a small landing pad on a relatively unknown planet somewhere
+in the core worlds. Dense jungle surrounds this clearing, and the only
+manmade structure visible is a small building to the north. 
+~
+0 28 1
+D0
+~
+~
+0 -1 10007
+D1
+~
+~
+0 -1 32297
+S
+#10007
+The cloning Facilities~
+The actual livable portion of this building is small and almost bunkerlike.
+  The rest of the immense edifice lies below where you stand. Cloning
+requires considerable energy, and you can sense the hum of the engines
+under your feet. The owners of this establishment have salvaged a couple
+of cloning cylinders, found after the cloning wars, and turned them into a
+small but profitable business.
+~
+0 12 1
+D0
+~
+~
+0 -1 10003
+D1
+~
+~
+0 -1 10008
+D2
+~
+~
+0 -1 10006
+D3
+~
+~
+0 -1 10010
+S
+#10008
+Standing in Line~
+You stand in a long line waiting for your turn to be cloned.
+There is nothing to do but stand here and wait.
+~
+0 12 1
+D3
+~
+~
+0 -1 10007
+> rand_prog 100~
+mpechoat $n You finally make it to the front of the line.
+mpechoaround $n $n Moves to the front of the line.
+mptransfer $n 10001
+~
+|
+S
+#10009
+The Cloning Chamber~
+This large room contains the tops of some cloning cylinders, but from the
+rumors you have heard, there must be many more below this level. Many
+pipes and wires run haphazardly from the cylinders.   There is no way to
+enter the cloning chambers from here.  You must go stand in line.
+~
+0 12 1
+D0
+~
+~
+0 -1 10004
+S
+#10010
+The Office~
+This large office contains a very fine wood desk as well as several
+expensive looking paintings. There is a small tree in one corner of the
+room and a large bookcase on one wall.
+~
+0 1024 1
+D1
+~
+~
+0 -1 10007
+S
+#10011
+Storage Chamber~
+~
+0 12 1
+S
+#0
+
+
+#RESETS
+M 1 10009 1 10001
+M 1 10001 1 10010
+M 1 10002 1 10010
+M 1 10003 1 10010
+M 1 10005 1 10007
+G 1 10424 1
+G 1 10314 1
+M 1 10004 1 10009
+G 1 10004 1
+G 1 10004 1
+G 1 10004 1
+O 1 10001 1 10009
+S
+
+
+#SHOPS
+ 10005    0  0  0  0  0   120  90         0 23    ; A vending machine
+0
+
+
+#REPAIRS
+0
+
+
+#SPECIALS
+S
+
+
+#$

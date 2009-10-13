@@ -1,0 +1,83 @@
+#SHIP
+Name         Mon Calamari Shipyard~
+PersonalName         Mon Calamari Shipyard~
+Filename     mcsy.ship~
+Description  ~
+Owner        The Rebel Alliance~
+Pilot        32310~
+Copilot      32310 Casen~
+Class        3
+Tractorbeam  255
+Shipyard     45
+Hanger       1900
+Cargohold       0
+Vx           5505078
+Vy           -1506952
+Vz           -54462
+Turret1      1977
+Turret2      1992
+Turret3      1994
+Turret4      1905
+Turret5      1922
+Turret6      0
+Turret7      0
+Turret8      0
+Turret9      0
+Turret0      0
+Statet0      0
+Statei0      0
+Statet1      0
+Statet2      0
+Lasers       20
+Missiles     100
+Maxmissiles  100
+Rockets     0
+Maxrockets  0
+Torpedos     0
+Maxtorpedos  0
+Lastdoc      45
+Firstroom    1900
+Lastroom     1994
+Shield       4000
+Maxshield    4000
+Hull         30000
+Maxhull      30000
+Maxenergy    30000
+Hyperspeed   255
+Comm         255
+Chaff        25
+Maxchaff     25
+Sensor       255
+Astro_array  0
+Realspeed    255
+Type         1
+Cockpit      1923
+Coseat       1923
+Pilotseat    1923
+Gunseat      1924
+Navseat      1923
+Engineroom   0
+Entrance     1900
+Shipstate    1
+Missilestate 0
+Energy       30000
+Manuever     0
+Alarm        0
+UpgradeBlock 0
+Ions         15
+Maxcargo     1000
+Cargo0         0
+Cargo1         0
+Cargo2         0
+Cargo3         0
+Cargo4         0
+Cargo5         0
+Cargo6         0
+Cargo7         0
+Cargo8         0
+Cargo9         0
+CaughtSmug     0
+Dockingports   0
+Guard   0
+Home         Mon Calamari~
+End

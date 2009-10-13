@@ -1,0 +1,977 @@
+#AREA   Sorosuub Spacecraft~
+
+
+
+#AUTHOR Durga~
+
+#RANGES
+0 0 0 103
+$
+
+#FLAGS
+2
+
+#ECONOMY 0 31250000
+
+#MOBILES
+#0
+
+
+#OBJECTS
+#6000
+The Raider~
+The Raider~
+The Raider is good in hit and run operations.~
+~
+81 0 0
+0 0 0 0
+1 0 0
+#6001
+Slave I~
+Slave I~
+The Slave I is a strange looking spacecraft.~
+~
+81 0 0
+0 0 0 0
+1 0 0
+#6002
+slave II~
+Slave II~
+Slave II is a ship feared by many.~
+~
+13 1073741824 0
+0 0 0 0
+1 0 0
+#6003
+CF-90 Barricade Runner~
+the CF-90 Barricade Runner~
+The CF-90 Barricade Runner is a fairly large warship.~
+~
+13 1073741824 0
+0 0 0 0
+1 0 0
+#6004
+YV-2400~
+YV-2400~
+YV-2400 is a newer model corellian transport.~
+~
+13 1073741824 0
+0 0 0 0
+1 0 0
+#6010
+z-100 Centurion z6010~
+a Z-100 Centurion~
+A Z-100 Centurion.~
+~
+13 1073741824 0
+0 0 0 0
+1 0 0
+#6011
+z-100 Centurion z6011~
+a Z-100 Centurion~
+A Z-100 Centurion.~
+~
+13 1073741824 0
+0 0 0 0
+1 0 0
+#6012
+z-100 Centurion z6012~
+a Z-100 Centurion~
+A Z-100 Centurion.~
+~
+13 1073741824 0
+0 0 0 0
+1 0 0
+#6013
+z-100 Centurion z6013~
+a Z-100 Centurion~
+A Z-100 Centurion.~
+~
+13 1073741824 0
+0 0 0 0
+1 0 0
+#6014
+z-100 Centurion z6014~
+a Z-100 Centurion~
+A Z-100 Centurion.~
+~
+13 1073741824 0
+0 0 0 0
+1 0 0
+#6015
+z-100 Centurion z6015~
+a Z-100 Centurion~
+A Z-100 Centurion.~
+~
+13 1073741824 0
+0 0 0 0
+1 0 0
+#6016
+z-100 Centurion z6016~
+a Z-100 Centurion~
+A Z-100 Centurion.~
+~
+13 1073741824 0
+0 0 0 0
+1 0 0
+#6017
+z-100 Centurion z6017~
+a Z-100 Centurion~
+A Z-100 Centurion.~
+~
+13 1073741824 0
+0 0 0 0
+1 0 0
+#6018
+z-100 Centurion z6018~
+a Z-100 Centurion~
+A Z-100 Centurion.~
+~
+13 1073741824 0
+0 0 0 0
+1 0 0
+#6019
+z-100 Centurion z6019~
+a Z-100 Centurion~
+A Z-100 Centurion.~
+~
+13 1073741824 0
+0 0 0 0
+1 0 0
+#6020
+z-100 Centurion z6020~
+a Z-100 Centurion~
+A Z-100 Centurion.~
+~
+13 1073741824 0
+0 0 0 0
+1 0 0
+#6021
+z-100 Centurion z6021~
+a Z-100 Centurion~
+A Z-100 Centurion.~
+~
+13 1073741824 0
+0 0 0 0
+1 0 0
+#6022
+z-100 Centurion z6022~
+a Z-100 Centurion~
+A Z-100 Centurion.~
+~
+13 1073741824 0
+0 0 0 0
+1 0 0
+#6023
+z-100 Centurion z6023~
+a Z-100 Centurion~
+A Z-100 Centurion.~
+~
+13 1073741824 0
+0 0 0 0
+1 0 0
+#6024
+z-100 Centurion z6024~
+a Z-100 Centurion~
+A Z-100 Centurion.~
+~
+13 1073741824 0
+0 0 0 0
+1 0 0
+#6025
+z-100 Centurion z6025~
+a Z-100 Centurion~
+A Z-100 Centurion.~
+~
+13 1073741824 0
+0 0 0 0
+1 0 0
+#6026
+z-100 Centurion z6026~
+a Z-100 Centurion~
+A Z-100 Centurion.~
+~
+13 1073741824 0
+0 0 0 0
+1 0 0
+#6027
+z-100 Centurion z6027~
+a Z-100 Centurion~
+A Z-100 Centurion.~
+~
+13 1073741824 0
+0 0 0 0
+1 0 0
+#6028
+z-100 Centurion z6028~
+a Z-100 Centurion~
+A Z-100 Centurion.~
+~
+13 1073741824 0
+0 0 0 0
+1 0 0
+#6029
+z-100 Centurion z6029~
+a Z-100 Centurion~
+A Z-100 Centurion.~
+~
+13 1073741824 0
+0 0 0 0
+1 0 0
+#6030
+sorosuub system hopper~
+a sorosuub system hopper~
+A sorosuub system hopper is here.~
+~
+81 1073741824 0
+0 0 0 0
+1 0 0
+#6031
+sorosuub system hopper~
+a sorosuub system hopper~
+A sorosuub system hopper is here.~
+~
+81 1073741824 0
+0 0 0 0
+1 0 0
+#6032
+sorosuub system hopper~
+a sorosuub system hopper~
+A sorosuub system hopper is here.~
+~
+81 1073741824 0
+0 0 0 0
+1 0 0
+#6033
+sorosuub system hopper~
+a sorosuub system hopper~
+A sorosuub system hopper is here.~
+~
+81 1073741824 0
+0 0 0 0
+1 0 0
+#6034
+sorosuub system hopper~
+a sorosuub system hopper~
+A sorosuub system hopper is here.~
+~
+81 1073741824 0
+0 0 0 0
+1 0 0
+#6035
+sorosuub system hopper~
+a sorosuub system hopper~
+A sorosuub system hopper is here.~
+~
+81 1073741824 0
+0 0 0 0
+1 0 0
+#6036
+sorosuub system hopper~
+a sorosuub system hopper~
+A sorosuub system hopper is here.~
+~
+81 1073741824 0
+0 0 0 0
+1 0 0
+#6037
+sorosuub system hopper~
+a sorosuub system hopper~
+A sorosuub system hopper is here.~
+~
+81 1073741824 0
+0 0 0 0
+1 0 0
+#6038
+sorosuub system hopper~
+a sorosuub system hopper~
+A sorosuub system hopper is here.~
+~
+81 1073741824 0
+0 0 0 0
+1 0 0
+#6039
+sorosuub system hopper~
+a sorosuub system hopper~
+A sorosuub system hopper is here.~
+~
+81 1073741824 0
+0 0 0 0
+1 0 0
+#6040
+sorosuub system hopper~
+a sorosuub system hopper~
+A sorosuub system hopper is here.~
+~
+81 1073741824 0
+0 0 0 0
+1 0 0
+#6041
+sorosuub system hopper~
+a sorosuub system hopper~
+A sorosuub system hopper is here.~
+~
+81 1073741824 0
+0 0 0 0
+1 0 0
+#6042
+sorosuub system hopper~
+a sorosuub system hopper~
+A sorosuub system hopper is here.~
+~
+81 1073741824 0
+0 0 0 0
+1 0 0
+#6043
+sorosuub system hopper~
+a sorosuub system hopper~
+A sorosuub system hopper is here.~
+~
+81 1073741824 0
+0 0 0 0
+1 0 0
+#6044
+sorosuub system hopper~
+a sorosuub system hopper~
+A sorosuub system hopper is here.~
+~
+81 1073741824 0
+0 0 0 0
+1 0 0
+#6045
+sorosuub system hopper~
+a sorosuub system hopper~
+A sorosuub system hopper is here.~
+~
+81 1073741824 0
+0 0 0 0
+1 0 0
+#6046
+sorosuub system hopper~
+a sorosuub system hopper~
+A sorosuub system hopper is here.~
+~
+81 1073741824 0
+0 0 0 0
+1 0 0
+#6047
+sorosuub system hopper~
+a sorosuub system hopper~
+A sorosuub system hopper is here.~
+~
+81 1073741824 0
+0 0 0 0
+1 0 0
+#6048
+sorosuub system hopper~
+a sorosuub system hopper~
+A sorosuub system hopper is here.~
+~
+81 1073741824 0
+0 0 0 0
+1 0 0
+#6049
+sorosuub system hopper~
+a sorosuub system hopper~
+A sorosuub system hopper is here.~
+~
+81 1073741824 0
+0 0 0 0
+1 0 0
+#6099
+dud~
+a newly created dud~
+Some god dropped a newly created dud here.~
+~
+13 0 0
+0 0 0 0
+1 0 0
+#0
+
+
+#ROOMS
+#6000
+The Raider~
+The cockpit of the ship is not very roomy, this ship was designed to be
+fast and deadly, rather than luxurious like others. It is an extremely
+formidable ship, capable of taking on even the most well armormed fighters
+and light mid-ships.
+~
+0 4 1
+S
+#6010
+Z-100 Centurion ~
+An upgrade on the old z-95's the z-100 or  century fighter  as it is
+betterknown, is alot more powerfull than it elder counterpart. It is
+basically  a cross of the older z-95 and . Incoms X-wings making it a
+versitile fighter.four forward  firing lasers combined with its torpedo
+launcher make it quite a powerfull fighter and it's compact size makes it
+easy to stow in the hangers of larger capital ships 
+~
+0 536870924 1
+S
+#6011
+Z-100 Centurion ~
+An upgrade on the old z-95's the z-100 or  century fighter as it is
+betterknown, is alot more powerfull than it elder counterpart. It is
+basically  a cross of the older z-95 and Incoms X-wings making it a
+versitile fighter. Four forward  firing lasers combined with its torpedo
+launcher make it quite a powerfull fighter and it's compact size makes it
+easy to stow in the hangers of larger capital ships 
+~
+0 536870924 1
+S
+#6012
+Z-100 Centurion ~
+An upgrade on the old z-95's the z-100 or  century fighter  as it is
+betterknown, is alot more powerfull than it elder counterpart. It is
+basically  a cross of the older z-95 and Incoms X-wings making it a
+versitile fighter. Four forward  firing lasers combined with its torpedo
+launcher make it quite a powerfull fighter and it's compact size makes it
+easy to stow in the hangers of larger capital ships 
+~
+0 536870924 1
+S
+#6013
+Z-100 Centurion ~
+An upgrade on the old z-95's the z-100 or  century fighter  as it is
+betterknown, is alot more powerfull than it elder counterpart. It is
+basically  a cross of the older z-95 and Incoms X-wings making it a
+versitile fighter. Four forward  firing lasers combined with its torpedo
+launcher make it quite a powerfull fighter and it's compact size makes it
+easy to stow in the hangers of larger capital ships 
+~
+0 536870924 1
+S
+#6014
+Z-100 Centurion ~
+An upgrade on the old z-95's the z-100 or  century fighter  as it is
+betterknown, is alot more powerfull than it elder counterpart. It is
+basically  a cross of the older z-95 and Incoms X-wings making it a
+versitile fighter. Four forward  firing lasers combined with its torpedo
+launcher make it quite a powerfull fighter and it's compact size makes it
+easy to stow in the hangers of larger capital ships 
+~
+0 536870924 1
+S
+#6015
+Z-100 Centurion ~
+An upgrade on the old z-95's the z-100 or  century fighter  as it is
+betterknown, is alot more powerfull than it elder counterpart. It is
+basically  a cross of the older z-95 and Incoms X-wings making it a
+versitile fighter. Four forward  firing lasers combined with its torpedo
+launcher make it quite a powerfull fighter and it's compact size makes it
+easy to stow in the hangers of larger capital ships 
+~
+0 536870924 1
+S
+#6016
+Z-100 Centurion ~
+An upgrade on the old z-95's the z-100 or  century fighter  as it is
+betterknown, is alot more powerfull than it elder counterpart. It is
+basically  a cross of the older z-95 and Incoms X-wings making it a
+versitile fighter. Four forward  firing lasers combined with its torpedo
+launcher make it quite a powerfull fighter and it's compact size makes it
+easy to stow in the hangers of larger capital ships 
+~
+0 536870924 1
+S
+#6017
+Z-100 Centurion ~
+An upgrade on the old z-95's the z-100 or  century fighter  as it is
+betterknown, is alot more powerfull than it elder counterpart. It is
+basically  a cross of the older z-95 and Incoms X-wings making it a
+versitile fighter. Four forward  firing lasers combined with its torpedo
+launcher make it quite a powerfull fighter and it's compact size makes it
+easy to stow in the hangers of larger capital ships 
+~
+0 536870924 1
+S
+#6018
+Z-100 Centurion ~
+An upgrade on the old z-95's the z-100 or  century fighter  as it is
+betterknown, is alot more powerfull than it elder counterpart. It is
+basically  a cross of the older z-95 and Incoms X-wings making it a
+versitile fighter. Four forward  firing lasers combined with its torpedo
+launcher make it quite a powerfull fighter and it's compact size makes it
+easy to stow in the hangers of larger capital ships 
+~
+0 536870924 1
+S
+#6019
+Z-100 Centurion ~
+An upgrade on the old z-95's the z-100 or  century fighter  as it is
+betterknown, is alot more powerfull than it elder counterpart. It is
+basically  a cross of the older z-95 and Incoms X-wings making it a
+versitile fighter. Four forward  firing lasers combined with its torpedo
+launcher make it quite a powerfull fighter and it's compact size makes it
+easy to stow in the hangers of larger capital ships 
+~
+0 536870924 1
+S
+#6020
+Z-100 Centurion ~
+An upgrade on the old z-95's the z-100 or  century fighter  as it is
+betterknown, is alot more powerfull than it elder counterpart. It is
+basically  a cross of the older z-95 and Incoms X-wings making it a
+versitile fighter. Four forward  firing lasers combined with its torpedo
+launcher make it quite a powerfull fighter and it's compact size makes it
+easy to stow in the hangers of larger capital ships 
+~
+0 536870924 1
+S
+#6021
+Z-100 Centurion ~
+An upgrade on the old z-95's the z-100 or  century fighter  as it is
+betterknown, is alot more powerfull than it elder counterpart. It is
+basically  a cross of the older z-95 and Incoms X-wings making it a
+versitile fighter. Four forward  firing lasers combined with its torpedo
+launcher make it quite a powerfull fighter and it's compact size makes it
+easy to stow in the hangers of larger capital ships 
+~
+0 536870924 1
+S
+#6022
+Z-100 Centurion ~
+An upgrade on the old z-95's the z-100 or  century fighter  as it is
+betterknown, is alot more powerfull than it elder counterpart. It is
+basically  a cross of the older z-95 and Incoms X-wings making it a
+versitile fighter. Four forward  firing lasers combined with its torpedo
+launcher make it quite a powerfull fighter and it's compact size makes it
+easy to stow in the hangers of larger capital ships 
+~
+0 536870924 1
+S
+#6023
+Z-100 Centurion ~
+An upgrade on the old z-95's the z-100 or  century fighter  as it is
+betterknown, is alot more powerfull than it elder counterpart. It is
+basically  a cross of the older z-95 and Incoms X-wings making it a
+versitile fighter. Four forward  firing lasers combined with its torpedo
+launcher make it quite a powerfull fighter and it's compact size makes it
+easy to stow in the hangers of larger capital ships 
+~
+0 536870924 1
+S
+#6024
+Z-100 Centurion ~
+An upgrade on the old z-95's the z-100 or  century fighter  as it is
+betterknown, is alot more powerfull than it elder counterpart. It is
+basically  a cross of the older z-95 and Incoms X-wings making it a
+versitile fighter. Four forward  firing lasers combined with its torpedo
+launcher make it quite a powerfull fighter and it's compact size makes it
+easy to stow in the hangers of larger capital ships 
+~
+0 536870924 1
+S
+#6025
+Z-100 Centurion ~
+An upgrade on the old z-95's the z-100 or  century fighter  as it is
+betterknown, is alot more powerfull than it elder counterpart. It is
+basically  a cross of the older z-95 and Incoms X-wings making it a
+versitile fighter. Four forward  firing lasers combined with its torpedo
+launcher make it quite a powerfull fighter and it's compact size makes it
+easy to stow in the hangers of larger capital ships 
+~
+0 536870924 1
+S
+#6026
+Z-100 Centurion ~
+An upgrade on the old z-95's the z-100 or  century fighter  as it is
+betterknown, is alot more powerfull than it elder counterpart. It is
+basically  a cross of the older z-95 and Incoms X-wings making it a
+versitile fighter. Four forward  firing lasers combined with its torpedo
+launcher make it quite a powerfull fighter and it's compact size makes it
+easy to stow in the hangers of larger capital ships 
+~
+0 536870924 1
+S
+#6027
+Z-100 Centurion ~
+An upgrade on the old z-95's the z-100 or  century fighter  as it is
+betterknown, is alot more powerfull than it elder counterpart. It is
+basically  a cross of the older z-95 and Incoms X-wings making it a
+versitile fighter. Four forward  firing lasers combined with its torpedo
+launcher make it quite a powerfull fighter and it's compact size makes it
+easy to stow in the hangers of larger capital ships 
+~
+0 536870924 1
+S
+#6028
+Z-100 Centurion ~
+An upgrade on the old z-95's the z-100 or  century fighter  as it is
+betterknown, is alot more powerfull than it elder counterpart. It is
+basically  a cross of the older z-95 and Incoms X-wings making it a
+versitile fighter. Four forward  firing lasers combined with its torpedo
+launcher make it quite a powerfull fighter and it's compact size makes it
+easy to stow in the hangers of larger capital ships 
+~
+0 536870924 1
+S
+#6029
+Z-100 Centurion ~
+An upgrade on the old z-95's the z-100 or  century fighter  as it is
+betterknown, is alot more powerfull than it elder counterpart. It is
+basically  a cross of the older z-95 and Incoms X-wings making it a
+versitile fighter. Four forward  firing lasers combined with its torpedo
+launcher make it quite a powerfull fighter and it's compact size makes it
+easy to stow in the hangers of larger capital ships 
+~
+0 536870924 1
+S
+#6030
+Sorosuub System Hopper~
+The sorosuub system hopper is a small shuttle designed for short voyages.
+It is equiped with a hyperdrive but long journeys could get tiresome in
+such a confined space. The hoppers only defence is some weak shielding
+suitable for protection against small bits of debris but pretty much
+useless in combat.
+~
+0 1610612748 1
+S
+#6031
+Sorosuub System Hopper~
+The sorosuub system hopper is a small shuttle designed for short voyages.
+It is equiped with a hyperdrive but long journeys could get tiresome in
+such a confined space. The hoppers only defence is some weak shielding
+suitable for protection against small bits of debris but pretty much
+useless in combat. 
+~
+0 1610612748 1
+S
+#6032
+Sorosuub System Hopper~
+The sorosuub system hopper is a small shuttle designed for short voyages.
+It is equiped with a hyperdrive but long journeys could get tiresome in
+such a confined space. The hoppers only defence is some weak shielding
+suitable for protection against small bits of debris but pretty much
+useless in combat. 
+~
+0 1610612748 1
+S
+#6033
+Sorosuub System Hopper~
+The sorosuub system hopper is a small shuttle designed for short voyages.
+It is equiped with a hyperdrive but long journeys could get tiresome in
+such a confined space. The hoppers only defence is some weak shielding
+suitable for protection against small bits of debris but pretty much
+useless in combat.
+~
+0 1610612748 1
+S
+#6034
+Sorosuub System Hopper~
+The sorosuub system hopper is a small shuttle designed for short voyages.
+It is equiped with a hyperdrive but long journeys could get tiresome in
+such a confined space. The hoppers only defence is some weak shielding
+suitable for protection against small bits of debris but pretty much
+useless in combat.
+~
+0 1610612748 1
+S
+#6035
+Sorosuub System Hopper~
+The sorosuub system hopper is a small shuttle designed for short voyages.
+It is equiped with a hyperdrive but long journeys could get tiresome in
+such a confined space. The hoppers only defence is some weak shielding
+suitable for protection against small bits of debris but pretty much
+useless in combat. 
+~
+0 1610612748 1
+S
+#6036
+Sorosuub System Hopper~
+The sorosuub system hopper is a small shuttle designed for short voyages.
+It is equiped with a hyperdrive but long journeys could get tiresome in
+such a confined space. The hoppers only defence is some weak shielding
+suitable for protection against small bits of debris but pretty much
+useless in combat. 
+~
+0 1610612748 1
+S
+#6037
+Sorosuub System Hopper~
+The sorosuub system hopper is a small shuttle designed for short voyages.
+It is equiped with a hyperdrive but long journeys could get tiresome in
+such a confined space. The hoppers only defence is some weak shielding
+suitable for protection against small bits of debris but pretty much
+useless in combat. 
+~
+0 1610612748 1
+S
+#6038
+Sorosuub System Hopper~
+The sorosuub system hopper is a small shuttle designed for short voyages.
+It is equiped with a hyperdrive but long journeys could get tiresome in
+such a confined space. The hoppers only defence is some weak shielding
+suitable for protection against small bits of debris but pretty much
+useless in combat. 
+~
+0 1610612748 1
+S
+#6039
+Sorosuub System Hopper~
+The sorosuub system hopper is a small shuttle designed for short voyages.
+It is equiped with a hyperdrive but long journeys could get tiresome in
+such a confined space. The hoppers only defence is some weak shielding
+suitable for protection against small bits of debris but pretty much
+useless in combat. 
+~
+0 1610612748 1
+S
+#6040
+Sorosuub System Hopper~
+The sorosuub system hopper is a small shuttle designed for short voyages.
+It is equiped with a hyperdrive but long journeys could get tiresome in
+such a confined space. The hoppers only defence is some weak shielding
+suitable for protection against small bits of debris but pretty much
+useless in combat. 
+~
+0 1610612748 1
+S
+#6041
+Sorosuub System Hopper~
+The sorosuub system hopper is a small shuttle designed for short voyages.
+It is equiped with a hyperdrive but long journeys could get tiresome in
+such a confined space. The hoppers only defence is some weak shielding
+suitable for protection against small bits of debris but pretty much
+useless in combat. 
+~
+0 1610612748 1
+S
+#6042
+Sorosuub System Hopper~
+The sorosuub system hopper is a small shuttle designed for short voyages.
+It is equiped with a hyperdrive but long journeys could get tiresome in
+such a confined space. The hoppers only defence is some weak shielding
+suitable for protection against small bits of debris but pretty much
+useless in combat. 
+~
+0 1610612748 1
+S
+#6043
+Sorosuub System Hopper~
+The sorosuub system hopper is a small shuttle designed for short voyages.
+It is equiped with a hyperdrive but long journeys could get tiresome in
+such a confined space. The hoppers only defence is some weak shielding
+suitable for protection against small bits of debris but pretty much
+useless in combat. 
+~
+0 1610612748 1
+S
+#6044
+Sorosuub System Hopper~
+The sorosuub system hopper is a small shuttle designed for short voyages.
+It is equiped with a hyperdrive but long journeys could get tiresome in
+such a confined space. The hoppers only defence is some weak shielding
+suitable for protection against small bits of debris but pretty much
+useless in combat. 
+~
+0 1610612748 1
+S
+#6045
+Robert's Badass Starfighter.~
+~
+0 1610612748 1
+S
+#6046
+Sorosuub System Hopper~
+The sorosuub system hopper is a small shuttle designed for short voyages.
+It is equiped with a hyperdrive but long journeys could get tiresome in
+such a confined space. The hoppers only defence is some weak shielding
+suitable for protection against small bits of debris but pretty much
+useless in combat.
+~
+0 1610612748 1
+S
+#6047
+Sorosuub System Hopper~
+The sorosuub system hopper is a small shuttle designed for short voyages.
+It is equiped with a hyperdrive but long journeys could get tiresome in
+such a confined space. The hoppers only defence is some weak shielding
+suitable for protection against small bits of debris but pretty much
+useless in combat. 
+~
+0 1610612748 1
+S
+#6048
+Sorosuub System Hopper~
+The sorosuub system hopper is a small shuttle designed for short voyages.
+It is equiped with a hyperdrive but long journeys could get tiresome in
+such a confined space. The hoppers only defence is some weak shielding
+suitable for protection against small bits of debris but pretty much
+useless in combat. 
+~
+0 1610612748 1
+S
+#6049
+Sorosuub System Hopper~
+The sorosuub system hopper is a small shuttle designed for short voyages.
+It is equiped with a hyperdrive but long journeys could get tiresome in
+such a confined space. The hoppers only defence is some weak shielding
+suitable for protection against small bits of debris but pretty much
+useless in combat. 
+~
+0 1610612748 1
+S
+#6050
+Cockpit of Prototype Z-120 Pheonix~
+This brand new decendent of the z-95 is the smallest, fastest, and most
+manueverable yet. The cockpit is small and cramped but has excellent
+visibility. 
+~
+0 1610612740 1 0 0 1
+S
+#6051
+Skipray Cockpit~
+The skipray blastboat was originally made for imperial use as a scout craft
+but was dropped in the early planning stages. Several were made anyways
+and were put up for public sale. Although a fairly small craft the
+blastboat is equiped with a very powerful arsenal. Probably one of the
+best armed midships currently available. 
+~
+0 1610612736 1
+D1
+~
+~
+0 -1 6052
+D2
+~
+~
+0 -1 6054
+D3
+~
+~
+0 -1 6053
+S
+#6052
+Co Pilots Seat~
+The weapons pannel is quite impressive. Taking this ship into battle will
+be a real treat
+~
+0 1610612736 1
+D3
+~
+~
+0 -1 6051
+S
+#6053
+Pilots Seat~
+A standard flight panel is here.
+~
+0 1610612736 1
+D1
+~
+~
+0 -1 6051
+S
+#6054
+Metal Hallway~
+The no thrills hallway has a bumpy metal floor and curved walls that are
+divided with metalic beams.
+~
+0 1610612736 1
+D0
+~
+~
+0 -1 6051
+D2
+~
+~
+0 -1 6055
+D5
+~
+~
+0 -1 6056
+S
+#6055
+Metal Hallway~
+The no thrills hallway has a bumpy metal floor and curved walls that are
+divided with metalic beams.
+~
+0 1610612736 1
+D0
+~
+~
+0 -1 6054
+D1
+~
+~
+0 -1 6057
+D2
+~
+~
+0 -1 6059
+D3
+~
+~
+0 -1 6058
+S
+#6056
+Entrance Ramp~
+~
+0 1610612736 1
+D4
+~
+~
+0 -1 6054
+S
+#6057
+Crew Lounge~
+A small couch and a couple of game tables offer some time out in the
+lounge. There is a small vending macjine here as well.
+~
+0 1610612736 1
+D3
+~
+~
+0 -1 6055
+S
+#6058
+Crew Quarters~
+This simple bunkroom contains for bunks stacked against the walls and a
+couple of small lockers. 
+~
+0 1619001344 1
+D1
+~
+~
+0 -1 6055
+S
+#6059
+Rear Turret~
+This turret is mounted gyroscopycaly to giving it an excellent targetting
+arc.
+~
+0 1610612736 1
+D0
+~
+~
+0 -1 6055
+S
+#6098
+Floating in a void~
+~
+0 1073741828 1
+S
+#0
+
+
+#RESETS
+O 1 6099 1 6098
+S
+
+
+#SHOPS
+0
+
+
+#REPAIRS
+0
+
+
+#SPECIALS
+S
+
+
+#$

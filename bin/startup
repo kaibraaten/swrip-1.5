@@ -1,0 +1,68 @@
+#!/bin/bash
+
+# Set the port number.
+port=7000
+if [ -n "$1" ]; then port=$1; fi
+
+# Obtain SWR base directory.
+swrdir=~/swr
+if [ -n "$2" ]; then swrdir=$2; fi
+
+# Check that startup script or game binary isn't already running.
+[ -e $swrdir/log/startup.pid ] && if [ /proc/`cat $swrdir/log/startup.pid`/exe \
+-ef $swrdir/bin/startup ]; then
+echo Error: Startup script already running.
+exit 1
+fi
+[ -e $swrdir/log/current.log ] && if [ /proc/`sed "2,\\$d;s/^.*PID: //" \
+$swrdir/log/current.log`/exe -ef $swrdir/bin/swrip ]; then
+echo Error: Game binary already running.
+exit 1
+fi
+
+cd $swrdir/area
+ulimit -s 1024
+rm -f shutdown.txt
+
+# Write startup PID file.
+echo $$ > ../log/startup.pid
+
+(
+until [ -e shutdown.txt ]
+do
+    # If you want to have logs in a different directory,
+    #   change the 'logfile=' line to reflect the directory name.
+index=1000
+while
+logfile=../log/$index.log
+[ -e $logfile ]
+do
+if [ $index -lt 1100 ]
+then
+let index=index+1
+else
+rm -f $logfile
+fi
+done
+ln -sf $logfile ../log/current.log
+
+    # Record starting time
+    date > $logfile
+    date > ../area/boot.txt
+
+    # Run game.
+nohup ../bin/swrip $port >& $logfile
+
+# make back up of bug log and start fresh
+if [ -e $swrdir/system/bugs.txt ]
+then
+if [ -e $swrdir/system/bugs.txt.bak ]; then rm $swrdir/system/bugs.txt.bak; fi
+mv $swrdir/system/bugs.txt $swrdir/system/bugs.txt.bak
+touch $swrdir/system/bugs.txt
+fi
+
+    # Restart, giving old connections a chance to die.
+sleep 15
+done
+rm -f shutdown.txt ../log/current.log ../log/current.log.size ../log/startup.pid
+)&

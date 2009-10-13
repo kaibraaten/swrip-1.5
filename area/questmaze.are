@@ -1,0 +1,5133 @@
+#AREA   A labyrinth~
+
+
+
+#AUTHOR Darrik~
+
+#RANGES
+0 0 0 0
+$
+
+#FLAGS
+2
+
+#ECONOMY 0 6250000
+
+#MOBILES
+#23570
+a trap~
+a decoy of you.~
+A decoy of you.
+~
+~
+3 0 0 Z
+1 0 0 0d0+0 0d0+0
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#0
+
+
+#OBJECTS
+#23505
+a trap~
+a trap~
+A trap is embedded in the doorway here.~
+~
+13 570425376 0
+0 0 0 0
+1 0 0
+> greet_prog 100~
+mpechoat $n A large blade flips out of the doorway and bits into you!
+mpechoaround $n A large blade flips out and bites into the newcomer!
+mpdamage $n 100
+~
+|
+#23548
+lever~
+a lever~
+A lever is embedded in the wall.~
+~
+37 0 0
+522 23589 0 0
+1 0 0
+#23567
+a lever~
+a lever~
+A lever is set in the wall.~
+~
+37 33554432 0
+2578 23547 0 0
+1 0 0
+#23570
+a trap~
+a trap~
+A trap is embedded in the walls and ceiling.~
+~
+44 0 0
+1000 0 0 0
+1 0 0
+> entry_prog 100~
+mpechoat $n Flame shoots out of hidden nossles and sears you! 
+mpechoaround $n Flame shoots out of hidden nossles and sears the newcomer!
+mpdamage $n 300
+~
+|
+#23590
+a key~
+a a key~
+A a key is here.~
+~
+13 0 0
+0 0 0 0
+1 0 0
+#23644
+a stone~
+the stone~
+A stone seems to sit in a whole in the corner.~
+~
+39 0 0
+522 23698 0 0
+1 0 0
+#23699
+key~
+a key~
+A key is here.~
+~
+13 0 0
+0 0 0 0
+1 0 0
+#0
+
+
+#ROOMS
+#23500
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround 
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D0
+~
+~
+0 -1 23599
+D3
+~
+~
+0 -1 23501
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23501
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D1
+~
+~
+0 -1 23500
+D2
+~
+~
+0 -1 23502
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23502
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround 
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D0
+~
+~
+0 -1 23501
+D2
+~
+~
+0 -1 23503
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23503
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D0
+~
+~
+0 -1 23502
+D1
+~
+~
+0 -1 23504
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23504
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D0
+~
+~
+0 -1 23603
+D1
+~
+~
+0 -1 23505
+D2
+~
+~
+0 -1 23605
+D3
+~
+~
+0 -1 23503
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23505
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D0
+~
+~
+0 -1 23506
+D3
+~
+~
+0 -1 23504
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23506
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D0
+~
+~
+0 -1 23507
+D2
+~
+~
+0 -1 23505
+D3
+~
+~
+0 -1 23598
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23507
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround 
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers 
+and monsters of the deepest parts of the galaxy lie between you and your 
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D1
+~
+~
+0 -1 23508
+D2
+~
+~
+0 -1 23506
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23508
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround 
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers 
+and monsters of the deepest parts of the galaxy lie between you and your 
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D0
+~
+~
+0 -1 23526
+D2
+~
+~
+0 -1 23509
+D3
+~
+~
+0 -1 23507
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23509
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround 
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers 
+and monsters of the deepest parts of the galaxy lie between you and your 
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D0
+~
+~
+0 -1 23508
+D1
+~
+~
+0 -1 23514
+D2
+~
+~
+0 -1 23510
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23510
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8201 13
+D0
+~
+~
+0 -1 23509
+D2
+~
+~
+0 -1 23511
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23511
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D0
+~
+~
+0 -1 23510
+D3
+~
+~
+0 -1 23512
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23512
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D1
+~
+~
+0 -1 23511
+D3
+~
+~
+0 -1 23513
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23513
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D1
+~
+~
+0 -1 23512
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23514
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D0
+~
+~
+0 -1 23516
+D2
+~
+~
+0 -1 23515
+D3
+~
+~
+0 -1 23509
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23515
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8201 13
+D0
+~
+~
+0 -1 23514
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23516
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D1
+~
+~
+0 -1 23517
+D2
+~
+~
+0 -1 23514
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23517
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D0
+~
+~
+0 -1 23522
+D2
+~
+~
+0 -1 23518
+D3
+~
+~
+0 -1 23516
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23518
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of thread
+or a piece of paper to map your way, if I were you.  Traps, levers and
+monsters of the deepest parts of the galaxy lie between you and your goal.
+To get out, just say 'igiveup'.&R&W 
+~
+0 8201 13
+D0
+~
+~
+0 -1 23517
+D2
+~
+~
+0 -1 23519
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23519
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround 
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers 
+and monsters of the deepest parts of the galaxy lie between you and your 
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D0
+~
+~
+0 -1 23518
+D2
+~
+~
+0 -1 23520
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23520
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround 
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers 
+and monsters of the deepest parts of the galaxy lie between you and your 
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D0
+~
+~
+0 -1 23519
+D3
+~
+~
+0 -1 23521
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23521
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround 
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers 
+and monsters of the deepest parts of the galaxy lie between you and your 
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D1
+~
+~
+0 -1 23520
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23522
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround 
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers 
+and monsters of the deepest parts of the galaxy lie between you and your 
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D0
+~
+~
+0 -1 23523
+D2
+~
+~
+0 -1 23517
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23523
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8201 13
+D0
+~
+~
+0 -1 23524
+D2
+~
+~
+0 -1 23522
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23524
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8201 13
+D0
+~
+~
+0 -1 23525
+D2
+~
+~
+0 -1 23523
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23525
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8201 13
+D2
+~
+~
+0 -1 23524
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23526
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D1
+~
+~
+0 -1 23531
+D2
+~
+~
+0 -1 23508
+D3
+~
+~
+0 -1 23527
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23527
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D0
+~
+~
+0 -1 23528
+D1
+~
+~
+0 -1 23526
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23528
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D1
+~
+~
+0 -1 23529
+D2
+~
+~
+0 -1 23527
+D3
+~
+~
+0 -1 23530
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23529
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D3
+~
+~
+0 -1 23528
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23530
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8201 13
+D1
+~
+~
+0 -1 23528
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23531
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D0
+~
+~
+0 -1 23532
+D3
+~
+~
+0 -1 23526
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23532
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D0
+~
+~
+0 -1 23533
+D2
+~
+~
+0 -1 23531
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23533
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8201 13
+D2
+~
+~
+0 -1 23532
+D3
+~
+~
+0 -1 23534
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23534
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D1
+~
+~
+0 -1 23533
+D3
+~
+~
+0 -1 23535
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23535
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D0
+~
+~
+0 -1 23536
+D1
+~
+~
+0 -1 23534
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23536
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D0
+~
+~
+0 -1 23549
+D1
+~
+~
+0 -1 23537
+D2
+~
+~
+0 -1 23535
+D3
+~
+~
+0 -1 23552
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23537
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D0
+~
+~
+0 -1 23540
+D1
+~
+~
+0 -1 23538
+D3
+~
+~
+0 -1 23536
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23538
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D0
+~
+~
+0 -1 23539
+D3
+~
+~
+0 -1 23537
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23539
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D2
+~
+~
+0 -1 23538
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23540
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D0
+~
+~
+0 -1 23541
+D2
+~
+~
+0 -1 23537
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23541
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8201 13
+D1
+~
+~
+0 -1 23546
+D2
+~
+~
+0 -1 23540
+D3
+~
+~
+0 -1 23542
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23542
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D1
+~
+~
+0 -1 23541
+D3
+~
+~
+0 -1 23543
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23543
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D1
+~
+~
+0 -1 23542
+D3
+~
+~
+0 -1 23544
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23544
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D1
+~
+~
+0 -1 23543
+D3
+~
+~
+0 -1 23545
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23545
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D1
+~
+~
+0 -1 23544
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23546
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D1
+~
+~
+0 -1 23547
+D3
+~
+~
+0 -1 23541
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23547
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D2
+~
+~
+39 23548 23548
+D3
+~
+~
+0 -1 23546
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23548
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D0
+~
+~
+7 23548 23547
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23549
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D2
+~
+~
+0 -1 23536
+D3
+~
+~
+0 -1 23550
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23550
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D1
+~
+~
+0 -1 23549
+D3
+~
+~
+0 -1 23551
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23551
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D1
+~
+~
+0 -1 23550
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23552
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D1
+~
+~
+0 -1 23536
+D3
+~
+~
+0 -1 23553
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23553
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D1
+~
+~
+0 -1 23552
+D3
+~
+~
+0 -1 23554
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23554
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D0
+~
+~
+0 -1 23555
+D1
+~
+~
+0 -1 23553
+D2
+~
+~
+0 -1 23591
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23555
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D2
+~
+~
+0 -1 23554
+D3
+~
+~
+0 -1 23556
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23556
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D0
+~
+~
+0 -1 23558
+D1
+~
+~
+0 -1 23555
+D3
+~
+~
+0 -1 23557
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23557
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D1
+~
+~
+0 -1 23556
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23558
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D2
+~
+~
+0 -1 23556
+D3
+~
+~
+0 -1 23559
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23559
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D1
+~
+~
+0 -1 23558
+D3
+~
+~
+0 -1 23560
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23560
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D1
+~
+~
+0 -1 23559
+D2
+~
+~
+0 -1 23561
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23561
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D0
+~
+~
+0 -1 23560
+D2
+~
+~
+0 -1 23562
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23562
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D0
+~
+~
+0 -1 23561
+D2
+~
+~
+0 -1 23563
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23563
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D0
+~
+~
+0 -1 23562
+D1
+~
+~
+0 -1 23568
+D2
+~
+~
+0 -1 23564
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23564
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D0
+~
+~
+0 -1 23563
+D2
+~
+~
+0 -1 23565
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23565
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D0
+~
+~
+0 -1 23564
+D2
+~
+~
+0 -1 23566
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23566
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D0
+~
+~
+0 -1 23565
+D2
+~
+~
+0 -1 23567
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23567
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D0
+~
+~
+0 -1 23566
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23568
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D0
+~
+~
+0 -1 23569
+D1
+~
+~
+0 -1 23570
+D3
+~
+~
+0 -1 23563
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23569
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D2
+~
+~
+0 -1 23568
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23570
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D0
+~
+~
+0 -1 23571
+D2
+~
+~
+0 -1 23572
+D3
+~
+~
+0 -1 23568
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23571
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D2
+~
+~
+0 -1 23570
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23572
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D0
+~
+~
+0 -1 23570
+D2
+~
+~
+0 -1 23573
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23573
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8201 13
+D0
+~
+~
+0 -1 23572
+D2
+~
+~
+0 -1 23574
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23574
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D0
+~
+~
+0 -1 23573
+D1
+~
+~
+0 -1 23575
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23575
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D2
+~
+~
+0 -1 23576
+D3
+~
+~
+0 -1 23574
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23576
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D0
+~
+~
+0 -1 23575
+D2
+~
+~
+0 -1 23577
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23577
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D0
+~
+~
+0 -1 23576
+D2
+~
+~
+0 -1 23578
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23578
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D0
+~
+~
+0 -1 23577
+D1
+~
+~
+0 -1 23579
+D3
+~
+~
+0 -1 23580
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23579
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D3
+~
+~
+0 -1 23578
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23580
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D0
+~
+~
+0 -1 23581
+D1
+~
+~
+0 -1 23578
+D3
+~
+~
+0 -1 23583
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23581
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D0
+~
+~
+0 -1 23582
+D2
+~
+~
+0 -1 23580
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23582
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D2
+~
+~
+0 -1 23581
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23583
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D0
+~
+~
+0 -1 23586
+D1
+~
+~
+0 -1 23580
+D3
+~
+~
+0 -1 23584
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23584
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D0
+~
+~
+0 -1 23585
+D1
+~
+~
+0 -1 23583
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23585
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D2
+~
+~
+0 -1 23584
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23586
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D0
+~
+~
+0 -1 23587
+D2
+~
+~
+0 -1 23583
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23587
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D0
+~
+~
+0 -1 23588
+D2
+~
+~
+0 -1 23586
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23588
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D0
+~
+~
+0 -1 23589
+D2
+~
+~
+0 -1 23587
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23589
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D0
+~
+~
+39 23590 23590
+D2
+~
+~
+0 -1 23588
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23590
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D2
+~
+~
+7 23590 23589
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23591
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D0
+~
+~
+0 -1 23554
+D2
+~
+~
+0 -1 23592
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23592
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D0
+~
+~
+0 -1 23591
+D2
+~
+~
+0 -1 23593
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23593
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D0
+~
+~
+0 -1 23592
+D1
+~
+~
+0 -1 23594
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23594
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8201 13
+D0
+~
+~
+0 -1 23595
+D3
+~
+~
+0 -1 23593
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23595
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8201 13
+D0
+~
+~
+0 -1 23596
+D1
+~
+~
+0 -1 23600
+D2
+~
+~
+0 -1 23594
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23596
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D1
+~
+~
+0 -1 23597
+D2
+~
+~
+0 -1 23595
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23597
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8201 13
+D3
+~
+~
+0 -1 23596
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23598
+The Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround 
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers 
+and monsters of the deepest parts of the galaxy lie between you and your 
+goal. To get out, just say 'igiveup'.&R&W
+~
+0 8201 13
+D1
+~
+~
+0 -1 23506
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23599
+Beginning of the Labyrinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8204 13
+D2
+~
+~
+3 -1 23500
+S
+#23600
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W  
+~
+0 8200 13
+D0
+~
+~
+0 -1 23601
+D3
+~
+~
+0 -1 23595
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23601
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D0
+~
+~
+0 -1 23602
+D2
+~
+~
+0 -1 23600
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23602
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D1
+~
+~
+0 -1 23603
+D2
+~
+~
+0 -1 23601
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23603
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D2
+~
+~
+0 -1 23504
+D3
+~
+~
+0 -1 23602
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23604
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8204 13
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23605
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D0
+~
+~
+0 -1 23504
+D2
+~
+~
+0 -1 23606
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23606
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D0
+~
+~
+0 -1 23605
+D3
+~
+~
+0 -1 23607
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23607
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D1
+~
+~
+0 -1 23606
+D3
+~
+~
+0 -1 23608
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23608
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D0
+~
+~
+0 -1 23609
+D1
+~
+~
+0 -1 23607
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23609
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D2
+~
+~
+0 -1 23608
+D3
+~
+~
+0 -1 23610
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23610
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D1
+~
+~
+0 -1 23609
+D3
+~
+~
+0 -1 23611
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23611
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D0
+~
+~
+0 -1 23612
+D1
+~
+~
+0 -1 23610
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23612
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D1
+~
+~
+0 -1 23613
+D2
+~
+~
+0 -1 23611
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23613
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D1
+~
+~
+0 -1 23614
+D3
+~
+~
+0 -1 23612
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23614
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D0
+~
+~
+0 -1 23615
+D3
+~
+~
+0 -1 23613
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23615
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W  
+~
+0 8200 13
+D1
+~
+~
+0 -1 23617
+D2
+~
+~
+0 -1 23614
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23616
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8204 13
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23617
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D1
+~
+~
+0 -1 23618
+D3
+~
+~
+0 -1 23615
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23618
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D0
+~
+~
+0 -1 23619
+D3
+~
+~
+0 -1 23617
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23619
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D2
+~
+~
+0 -1 23618
+D3
+~
+~
+0 -1 23620
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23620
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D1
+~
+~
+0 -1 23619
+D3
+~
+~
+0 -1 23621
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23621
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D1
+~
+~
+0 -1 23620
+D3
+~
+~
+0 -1 23622
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23622
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D1
+~
+~
+0 -1 23621
+D2
+~
+~
+0 -1 23623
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23623
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D0
+~
+~
+0 -1 23622
+D2
+~
+~
+0 -1 23624
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23624
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D0
+~
+~
+0 -1 23623
+D3
+~
+~
+0 -1 23625
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23625
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D0
+~
+~
+0 -1 23626
+D1
+~
+~
+0 -1 23624
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23626
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D0
+~
+~
+0 -1 23627
+D2
+~
+~
+0 -1 23625
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23627
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D2
+~
+~
+0 -1 23626
+D3
+~
+~
+0 -1 23628
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23628
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D1
+~
+~
+0 -1 23627
+D2
+~
+~
+0 -1 23629
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23629
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D0
+~
+~
+0 -1 23628
+D3
+~
+~
+0 -1 23630
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23630
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D0
+~
+~
+0 -1 23631
+D1
+~
+~
+0 -1 23629
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23631
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D2
+~
+~
+0 -1 23630
+D3
+~
+~
+0 -1 23632
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23632
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D1
+~
+~
+0 -1 23631
+D2
+~
+~
+0 -1 23633
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23633
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W  
+~
+0 8200 13
+D0
+~
+~
+0 -1 23632
+D3
+~
+~
+0 -1 23634
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23634
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D0
+~
+~
+0 -1 23635
+D1
+~
+~
+0 -1 23633
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23635
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D2
+~
+~
+0 -1 23634
+D3
+~
+~
+0 -1 23636
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23636
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D1
+~
+~
+0 -1 23635
+D2
+~
+~
+0 -1 23637
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23637
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D0
+~
+~
+0 -1 23636
+D2
+~
+~
+0 -1 23638
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23638
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D0
+~
+~
+0 -1 23637
+D1
+~
+~
+0 -1 23639
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23639
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D1
+~
+~
+0 -1 23640
+D3
+~
+~
+0 -1 23638
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23640
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D1
+~
+~
+0 -1 23641
+D3
+~
+~
+0 -1 23639
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23641
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D1
+~
+~
+0 -1 23642
+D3
+~
+~
+0 -1 23640
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23642
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D2
+~
+~
+0 -1 23643
+D3
+~
+~
+0 -1 23641
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23643
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D0
+~
+~
+0 -1 23642
+D2
+~
+~
+0 -1 23644
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23644
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D0
+~
+~
+0 -1 23643
+D3
+~
+~
+0 -1 23645
+E
+stone~
+The stone lies in a small depression. Perhaps you can push it.
+~
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23645
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D0
+~
+~
+0 -1 23646
+D1
+~
+~
+0 -1 23644
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23646
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D2
+~
+~
+0 -1 23645
+D3
+~
+~
+0 -1 23647
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23647
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D1
+~
+~
+0 -1 23646
+D3
+~
+~
+0 -1 23648
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23648
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D1
+~
+~
+0 -1 23647
+D3
+~
+~
+0 -1 23649
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23649
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D1
+~
+~
+0 -1 23648
+D2
+~
+~
+0 -1 23650
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23650
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D0
+~
+~
+0 -1 23649
+D2
+~
+~
+0 -1 23651
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23651
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W  
+~
+0 8200 13
+D0
+~
+~
+0 -1 23650
+D2
+~
+~
+0 -1 23652
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23652
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D0
+~
+~
+0 -1 23651
+D2
+~
+~
+0 -1 23653
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23653
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D0
+~
+~
+0 -1 23652
+D1
+~
+~
+0 -1 23654
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23654
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D2
+~
+~
+0 -1 23655
+D3
+~
+~
+0 -1 23653
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23655
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D0
+~
+~
+0 -1 23654
+D3
+~
+~
+0 -1 23656
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23656
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D1
+~
+~
+0 -1 23655
+D2
+~
+~
+0 -1 23657
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23657
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D0
+~
+~
+0 -1 23656
+D1
+~
+~
+0 -1 23658
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23658
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D1
+~
+~
+0 -1 23659
+D3
+~
+~
+0 -1 23657
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23659
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D1
+~
+~
+0 -1 23660
+D3
+~
+~
+0 -1 23658
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23660
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D1
+~
+~
+0 -1 23661
+D3
+~
+~
+0 -1 23659
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23661
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D0
+~
+~
+0 -1 23662
+D3
+~
+~
+0 -1 23660
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23662
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D2
+~
+~
+0 -1 23661
+D3
+~
+~
+0 -1 23663
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23663
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D1
+~
+~
+0 -1 23662
+D3
+~
+~
+0 -1 23664
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23664
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D0
+~
+~
+0 -1 23665
+D1
+~
+~
+0 -1 23663
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23665
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D0
+~
+~
+0 -1 23666
+D2
+~
+~
+0 -1 23664
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23666
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D2
+~
+~
+0 -1 23665
+D3
+~
+~
+0 -1 23667
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23667
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D0
+~
+~
+0 -1 23668
+D1
+~
+~
+0 -1 23666
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23668
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D0
+~
+~
+0 -1 23669
+D2
+~
+~
+0 -1 23667
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23669
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D1
+~
+~
+0 -1 23670
+D2
+~
+~
+0 -1 23668
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23670
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D2
+~
+~
+0 -1 23671
+D3
+~
+~
+0 -1 23669
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23671
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D0
+~
+~
+0 -1 23670
+D1
+~
+~
+0 -1 23672
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23672
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D1
+~
+~
+0 -1 23673
+D3
+~
+~
+0 -1 23671
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23673
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D1
+~
+~
+0 -1 23674
+D3
+~
+~
+0 -1 23672
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23674
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D1
+~
+~
+0 -1 23675
+D3
+~
+~
+0 -1 23673
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23675
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D2
+~
+~
+0 -1 23676
+D3
+~
+~
+0 -1 23674
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23676
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D0
+~
+~
+0 -1 23675
+D1
+~
+~
+0 -1 23677
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23677
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D1
+~
+~
+0 -1 23678
+D3
+~
+~
+0 -1 23676
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23678
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D1
+~
+~
+0 -1 23679
+D3
+~
+~
+0 -1 23677
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23679
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D2
+~
+~
+0 -1 23680
+D3
+~
+~
+0 -1 23678
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23680
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D0
+~
+~
+0 -1 23679
+D3
+~
+~
+0 -1 23681
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23681
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D1
+~
+~
+0 -1 23680
+D2
+~
+~
+0 -1 23682
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23682
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D0
+~
+~
+0 -1 23681
+D1
+~
+~
+0 -1 23683
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23683
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W  
+~
+0 8200 13
+D2
+~
+~
+0 -1 23684
+D3
+~
+~
+0 -1 23682
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23684
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W  
+~
+0 8200 13
+D0
+~
+~
+0 -1 23683
+D3
+~
+~
+0 -1 23685
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23685
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D1
+~
+~
+0 -1 23684
+D3
+~
+~
+0 -1 23686
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23686
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D0
+~
+~
+0 -1 23687
+D1
+~
+~
+0 -1 23685
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23687
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D0
+~
+~
+0 -1 23688
+D2
+~
+~
+0 -1 23686
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23688
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D2
+~
+~
+0 -1 23687
+D3
+~
+~
+0 -1 23689
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23689
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D1
+~
+~
+0 -1 23688
+D2
+~
+~
+0 -1 23690
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23690
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W  
+~
+0 8200 13
+D0
+~
+~
+0 -1 23689
+D2
+~
+~
+0 -1 23691
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23691
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D0
+~
+~
+0 -1 23690
+D3
+~
+~
+0 -1 23692
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23692
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D0
+~
+~
+0 -1 23693
+D1
+~
+~
+0 -1 23691
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23693
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D0
+~
+~
+0 -1 23694
+D2
+~
+~
+0 -1 23692
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23694
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D0
+~
+~
+0 -1 23695
+D2
+~
+~
+0 -1 23693
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23695
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D2
+~
+~
+0 -1 23694
+D3
+~
+~
+0 -1 23696
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23696
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D1
+~
+~
+0 -1 23695
+D2
+~
+~
+0 -1 23697
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23697
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D0
+~
+~
+0 -1 23696
+D3
+~
+~
+0 -1 23698
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23698
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D0
+~
+~
+39 23699 23699
+D1
+~
+~
+0 -1 23697
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#23699
+The Labryinth~
+&cThe Labyrinth is a underground maze.  Smooth durasteel walls surround
+you, making it difficult to tell where you are. I'd bring a ball of 
+thread or a piece of paper to map your way, if I were you.  Traps, levers
+and monsters of the deepest parts of the galaxy lie between you and your
+goal. To get out, just say 'igiveup'.&R&W 
+~
+0 8200 13
+D2
+~
+~
+6 -1 23698
+> speech_prog igiveup~
+if isimmort($n)
+else
+mptransfer $n 23599
+endif
+~
+|
+S
+#0
+
+
+#RESETS
+O 1 23505 1 23505
+O 1 23505 1 23512
+O 1 23505 1 23520
+O 1 23505 1 23528
+O 1 23505 1 23532
+O 1 23505 1 23540
+O 1 23505 1 23557
+O 1 23567 1 23567
+O 1 23505 1 23567
+O 1 23548 1 23548
+O 1 23505 1 23548
+D 0 23548 0 2
+O 1 23505 1 23579
+O 1 23505 1 23570
+O 1 23505 1 23582
+O 1 23505 1 23585
+O 1 23505 1 23594
+O 1 23505 1 23624
+O 1 23505 1 23630
+O 1 23505 1 23644
+O 1 23644 1 23644
+O 1 23505 1 23654
+O 1 23505 1 23558
+O 1 23505 1 23678
+O 1 23505 1 23683
+S
+
+
+#SHOPS
+0
+
+
+#REPAIRS
+0
+
+
+#SPECIALS
+S
+
+
+#$

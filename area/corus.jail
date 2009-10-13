@@ -1,0 +1,657 @@
+#AREA   Coruscant Prison~
+
+
+
+#AUTHOR Durga~
+
+#RANGES
+0 0 0 103
+$
+
+#FLAGS
+0
+
+#ECONOMY 0 6250000
+
+#MOBILES
+#9000
+dude~
+a newly created dude~
+Some god abandoned a newly created dude here.
+~
+~
+1 0 0 Z
+1 0 0 0d0+0 0d0+0
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#9049
+dude~
+a newly created dude~
+Some god abandoned a newly created dude here.
+~
+~
+1 0 0 Z
+1 0 0 0d0+0 0d0+0
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#0
+
+
+#OBJECTS
+#9000
+jail key~
+a jail key~
+A key is here~
+~
+12 0 1
+0 0 0 0
+1 0 0
+#9001
+sink~
+a sink~
+A sink is here.~
+~
+25 1073741824 0
+1000 1000 0 0
+1 0 0
+#9002
+mush~
+some mush~
+Some day old mush is here for you to eat.~
+~
+19 0 1
+20 0 0 0
+2 5 0
+#9049
+dud~
+a dud~
+A dud is here.~
+~
+13 0 0
+0 0 0 0
+1 0 0
+#0
+
+
+#ROOMS
+#9000
+New Prisoner Processing~
+~
+0 0 1
+D8
+~
+~
+0 -1 9018
+S
+#9001
+Coruscant Penitentiary~
+~
+0 4 1
+D2
+~
+~
+0 -1 337
+D8
+~
+~
+0 -1 9003
+D9
+~
+~
+0 -1 9002
+S
+#9002
+Prisoner Entrance~
+~
+0 12 1
+D6
+~
+~
+0 -1 9001
+D9
+~
+~
+0 -1 9004
+S
+#9003
+Vistor Entrance~
+~
+0 8 1
+D7
+~
+~
+0 -1 9001
+D8
+~
+~
+0 -1 9017
+S
+#9004
+Outside Checkpoint A~
+~
+0 8 1
+D2
+~
+~
+3 9000 9005
+D6
+~
+~
+0 -1 9002
+> act_prog p opens the door.~
+mpat 122 mpecho $n just opened the Coruscant jail door. 
+mpat 109 mpecho $n just opened the jail door. 
+~
+|
+S
+#9005
+Inside Checkpoint A~
+~
+0 0 1
+D0
+~
+~
+7 -1 9004
+D2
+~
+~
+0 -1 9006
+> speech_prog exit door~
+if clan($n) == The Empire
+mpat 9004 open s
+mpat 122 mpecho $n just commanded the Coruscant jail be opened. 
+mpat 109 mpecho $n just commanded the Coruscant jail be opened. 
+else
+if clan($n) == The Death Commandos
+mpat 9004 open s
+else
+mptransfer $n 9000
+endif
+endif
+~
+|
+S
+#9006
+A Prison Corridor~
+~
+0 0 1
+D0
+~
+~
+0 -1 9005
+D1
+~
+~
+0 -1 9009
+D2
+~
+~
+0 -1 9007
+S
+#9007
+Outside Check Point B~
+~
+0 0 1
+D0
+~
+~
+0 -1 9006
+D2
+~
+~
+0 -1 9008
+S
+#9008
+Inside Check Point B~
+~
+0 0 1
+D0
+~
+~
+0 -1 9007
+D2
+~
+~
+0 -1 9000
+D8
+~
+~
+0 -1 9010
+S
+#9009
+Staff Check Point~
+~
+0 0 1
+D3
+~
+~
+0 -1 9006
+S
+#9010
+A Prison Corridor~
+~
+0 0 1
+D1
+~
+~
+0 -1 9011
+D7
+~
+~
+0 -1 9008
+S
+#9011
+Outside Checkpoint C~
+~
+0 0 1
+D1
+~
+~
+0 -1 9012
+D2
+~
+~
+0 -1 9020
+D3
+~
+~
+0 -1 9010
+S
+#9012
+A Prison Corridor~
+~
+0 0 1
+D3
+~
+~
+0 -1 9011
+D6
+~
+~
+0 -1 9013
+S
+#9013
+Viewing Room Checkpoint~
+~
+0 0 1
+D0
+~
+~
+0 -1 9014
+D9
+~
+~
+0 -1 9012
+S
+#9014
+Viewing Room~
+~
+0 0 1
+D0
+~
+~
+33554432 -1 9015
+D2
+~
+~
+0 -1 9013
+S
+#9015
+Visiting Room~
+~
+0 8 1
+D0
+~
+~
+0 -1 9016
+D2
+~
+~
+33554432 -1 9014
+S
+#9016
+Inside Visitors Checkpoint~
+~
+0 8 1
+D0
+~
+~
+0 -1 9017
+D2
+~
+~
+0 -1 9015
+S
+#9017
+Outside Visitors Checkpoint~
+~
+0 8 1
+D2
+~
+~
+0 -1 9016
+D7
+~
+~
+0 -1 9003
+S
+#9018
+Strip Search~
+~
+0 0 1
+D1
+~
+~
+0 -1 9019
+S
+#9019
+Prison Garments~
+~
+0 0 1
+D6
+~
+~
+0 -1 9010
+S
+#9020
+Inside Checkpoint C~
+~
+0 0 1
+D0
+~
+~
+0 -1 9011
+D2
+~
+~
+0 -1 9021
+S
+#9021
+A Prison Corridor~
+~
+0 0 1
+D0
+~
+~
+0 -1 9020
+D1
+~
+~
+0 -1 9030
+D2
+~
+~
+0 -1 9022
+S
+#9022
+A Prison Corridor~
+~
+0 0 1
+D0
+~
+~
+0 -1 9021
+D2
+~
+~
+0 -1 9023
+S
+#9023
+A Prison Corridor~
+~
+0 0 1
+D0
+~
+~
+0 -1 9022
+D1
+~
+~
+0 -1 9024
+D3
+~
+~
+0 -1 9025
+S
+#9024
+CellBlock Checkpoint~
+~
+0 0 1
+D1
+~
+~
+0 -1 9026
+D3
+~
+~
+0 -1 9023
+S
+#9025
+CellBlock Checkpoint~
+~
+0 0 1
+D1
+~
+~
+0 -1 9023
+S
+#9026
+Cellblock A~
+~
+0 0 1
+D0
+~
+Cell~
+0 -1 9029
+D1
+~
+~
+0 -1 9027
+D3
+~
+~
+0 -1 9024
+S
+#9027
+Cellblock A~
+~
+0 0 1
+D1
+~
+~
+0 -1 9028
+D3
+~
+~
+0 -1 9026
+S
+#9028
+Cellblock A~
+~
+0 0 1
+D3
+~
+~
+0 -1 9027
+S
+#9029
+A Cell~
+You may safely quit and reenter the game from here.
+ 
+~
+0 545259520 1
+D2
+~
+Cell~
+0 -1 9026
+S
+#9030
+Outside the Dining Area~
+~
+0 0 1
+D0
+~
+~
+0 -1 9031
+D1
+~
+~
+0 -1 9033
+D3
+~
+~
+0 -1 9021
+S
+#9031
+Prison Dining Room~
+~
+0 0 1
+D1
+~
+~
+0 -1 9032
+D2
+~
+~
+0 -1 9030
+S
+#9032
+Food Line~
+~
+0 0 1
+D2
+~
+~
+33554432 -1 9033
+D3
+~
+~
+0 -1 9031
+S
+#9033
+The Prison Kitchen~
+~
+0 0 1
+D0
+~
+~
+33554432 -1 9032
+D3
+~
+~
+0 -1 9030
+S
+#9034
+Floating in a void~
+~
+0 4 1
+S
+#9035
+Floating in a void~
+~
+0 4 1
+S
+#9036
+Floating in a void~
+~
+0 4 1
+S
+#9037
+Floating in a void~
+~
+0 4 1
+S
+#9038
+Floating in a void~
+~
+0 4 1
+S
+#9039
+Floating in a void~
+~
+0 4 1
+S
+#9040
+Floating in a void~
+~
+0 4 1
+S
+#9041
+Floating in a void~
+~
+0 4 1
+S
+#9042
+Floating in a void~
+~
+0 4 1
+S
+#9043
+Floating in a void~
+~
+0 4 1
+S
+#9044
+Floating in a void~
+~
+0 4 1
+S
+#9045
+Floating in a void~
+~
+0 4 1
+S
+#9046
+Floating in a void~
+~
+0 4 1
+S
+#9047
+Floating in a void~
+~
+0 4 1
+S
+#9048
+Floating in a void~
+~
+0 4 1
+S
+#9049
+Floating in a void~
+~
+0 4 1
+S
+#0
+
+
+#RESETS
+D 0 9005 0 2
+D 0 9004 2 1
+O 1 9001 1 9033
+O 1 9002 1 9032
+S
+
+
+#SHOPS
+0
+
+
+#REPAIRS
+0
+
+
+#SPECIALS
+S
+
+
+#$

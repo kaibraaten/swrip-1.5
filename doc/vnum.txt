@@ -1,0 +1,15 @@
+ ****************************************************************************
+ * [S]imulated [M]edieval [A]dventure multi[U]ser [G]ame      |   \\._.//   *
+ * -----------------------------------------------------------|   (0...0)   *
+ * SMAUG 1.0 (C) 1994, 1995, 1996, 1997 by Derek Snider       |    ).:.(    *
+ * -----------------------------------------------------------|    {o o}    *
+ * SMAUG code team: Thoric, Altrag, Blodkai, Narn, Haus,      |   / ' ' \   *
+ * Scryn, Rennard, Swordbearer, Gorog, Grishnakh and Tricops  |~'~.VxvxV.~'~*
+ ****************************************************************************
+
+The following commands will reveal vnum usage:
+
+zones		- reports the vnums used by installed areas
+vnums		- reports the vnums assigned to area builders
+newzones	- reports the vnums used by loaded prototype areas
+checkvnums	- will check to see if a vnum range conflicts with another area

@@ -1,0 +1,54 @@
+#SHIP
+Name         Fast Attack Patrol Ship 32150~
+Filename     fast.attack.32150~
+Description  ~
+Owner        Blacksun~
+Pilot        Lela~
+Copilot      Lela~
+Class        1
+Tractorbeam  0
+Shipyard     1000
+Hanger       0
+Turret1      0
+Turret2      0
+Statet0      0
+Statet1      0
+Statet2      0
+Lasers       4
+Missiles     0
+Maxmissiles  0
+Rockets     0
+Maxrockets  0
+Torpedos     0
+Maxtorpedos  0
+Lastdoc      203
+Firstroom    32250
+Lastroom     32259
+Shield       0
+Maxshield    100
+Hull         1000
+Maxhull      1000
+Maxenergy    8000
+Hyperspeed   125
+Comm         0
+Chaff        10
+Maxchaff     10
+Sensor       0
+Astro_array  0
+Realspeed    125
+Type         0
+Cockpit      32250
+Coseat       32250
+Pilotseat    32250
+Gunseat      32250
+Navseat      32250
+Engineroom   32257
+Entrance     32254
+Shipstate    0
+Missilestate 0
+Energy       7070
+Manuever     101
+Home         Coruscant System~
+End
+
+#END

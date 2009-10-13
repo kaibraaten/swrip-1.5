@@ -1,0 +1,1854 @@
+#AREA   SSD Executor~
+
+
+
+#AUTHOR Darrik~
+
+#RANGES
+0 0 0 105
+$
+
+#FLAGS
+2
+
+#ECONOMY 0 9999584
+
+#MOBILES
+#11600
+Detention Overseer~
+the detention overseer~
+The Detention Overseer watches his security board here.
+~
+~
+1073741827 0 0 Z
+74 0 -85 14d10+740 7d4+2
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+14 14 0 0 0 0 32 2
+0 0 0 0 0 0 0 0
+#11601
+a stormtrooper~
+a stormtrooper~
+An imperial stormtrooper patrols the ship.
+~
+Dressed in white armored space suits over black body gloves the storm
+trooper is a sight well recognized throughout the galaxy. Known and
+feared. They are the Empires elite troopers. They are well trained
+and fearless. They have been conditioned with unquestioning loyalty
+to their superiors and will always execute their orders precisly and
+without question.
+~
+1073741825 0 -500 Z
+33 0 25 0d0+0 4d4+0
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#11602
+An Imperial Engineer~
+an imperial engineer~
+An imperial engineer labors to keep the engines in peak condition.
+~
+~
+1073741825 0 0 Z
+100 0 -150 20d10+1000 10d4+2
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+20 20 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#0
+
+
+#OBJECTS
+#11600
+detention cell key~
+a detention cell key~
+Whoever left this detention cell lying around is guaranteed a execution~
+~
+18 0 5
+0 0 0 0
+1 0 0
+#11601
+The Detention board~
+a The Detention board~
+The Detention Board~
+~
+13 1073741824 0
+0 0 0 0
+1 0 0
+#11602
+Turbolift list~
+A destination list~
+A list of destinations .~
+~
+13 1073741824 0
+0 0 0 0
+1 0 0
+E
+Turbolift list~
+Turbolift Destinations:
+ 
+Lower Level:     Service
+Barracks Level:  Barracks
+ 
+1: Main
+2: Medical
+3: Detention
+4: Officers
+5: Command
+6: Work Floor
+~
+#0
+
+
+#ROOMS
+#11501
+The Main Hanger of the Super Star Destroyer Executor~
+The main hanger is an enormous hanger with areas sectioned off for all
+types of ships. In the middle of the hanger the floor is mechanicly
+designed to seperate and open up allowing large ships to enter and leave.
+There are also smaller launch tunnels that can be used by smaller ships.
+~
+0 536870968 1
+D1
+~
+~
+0 -1 11596
+D3
+~
+~
+0 -1 11598
+D4
+~
+~
+0 -1 11502
+D5
+~
+~
+0 -1 11600
+S
+#11502
+Balcony Overlooking the Main Hanger~
+The main hanger is an enormous hanger with areas sectioned off for all
+types of ships. In the middle of the hanger the floor is mechanicly
+designed to seperate and open up allowing large ships to enter and leave.
+There are also smaller launch tunnels that can be used by smaller ships.
+~
+0 536870912 1
+D2
+~
+~
+0 -1 11503
+D5
+~
+~
+0 -1 11501
+S
+#11503
+A Corridor ~
+This corridor looks like just about every other corridor on the spaceship.
+Imperial designs aren't the most original but they do convey a strong
+message. The walls are standard imperial blue-grey and the floor is a
+polished jet black. 
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11502
+D2
+~
+~
+0 -1 11504
+S
+#11504
+East Corridor~
+This corridor looks like just about every other corridor on the spaceship.
+Imperial designs aren't the most original but they do convey a strong
+message. The walls are standard imperial blue-grey and the floor is a
+polished jet black. 
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11503
+D2
+~
+~
+0 -1 11505
+D3
+~
+~
+0 -1 11506
+S
+#11505
+East Corridor~
+This corridor looks like just about every other corridor on the spaceship.
+Imperial designs aren't the most original but they do convey a strong
+message. The walls are standard imperial blue-grey and the floor is a
+polished jet black. 
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11504
+D2
+~
+~
+0 -1 11519
+S
+#11506
+Royal Corridor~
+This corridor looks like just about every other corridor on the spaceship.
+Imperial designs aren't the most original but they do convey a strong
+message. The walls are standard imperial blue-grey and the floor is a
+polished jet black. 
+~
+0 536870912 1
+D1
+~
+~
+0 -1 11504
+D3
+~
+~
+0 -1 11507
+S
+#11507
+Royal Corridor~
+This corridor looks like just about every other corridor on the spaceship.
+Imperial designs aren't the most original but they do convey a strong
+message. The walls are standard imperial blue-grey and the floor is a
+polished jet black. 
+~
+0 536870912 1
+D1
+~
+~
+0 -1 11506
+D2
+~
+~
+0 -1 11508
+D3
+~
+~
+0 -1 11509
+S
+#11508
+Royal Throne Room~
+When the Emperor feels the need to travel, he resides here in his throne
+room.  In his presence all cower, with the exception of his imperial
+guards. 
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11507
+S
+#11509
+Royal Corridor~
+This corridor looks like just about every other corridor on the spaceship.
+Imperial designs aren't the most original but they do convey a strong
+message. The walls are standard imperial blue-grey and the floor is a
+polished jet black. 
+~
+0 536870912 1
+D1
+~
+~
+0 -1 11507
+D3
+~
+~
+0 -1 11510
+S
+#11510
+West Corridor~
+This corridor looks like just about every other corridor on the spaceship.
+Imperial designs aren't the most original but they do convey a strong
+message. The walls are standard imperial blue-grey and the floor is a
+polished jet black. 
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11521
+D1
+~
+~
+0 -1 11509
+D2
+~
+~
+0 -1 11511
+S
+#11511
+West Corridor~
+This corridor looks like just about every other corridor on the spaceship.
+Imperial designs aren't the most original but they do convey a strong
+message. The walls are standard imperial blue-grey and the floor is a
+polished jet black. 
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11510
+D2
+~
+~
+0 -1 11512
+S
+#11512
+West Corridor~
+This corridor looks like just about every other corridor on the spaceship.
+Imperial designs aren't the most original but they do convey a strong
+message. The walls are standard imperial blue-grey and the floor is a
+polished jet black. 
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11511
+D1
+~
+~
+0 -1 11514
+D2
+~
+~
+0 -1 11513
+S
+#11513
+Cargo Hold~
+~
+0 537395200 1
+D0
+~
+~
+0 -1 11512
+S
+#11514
+A Corridor~
+This corridor looks like just about every other corridor on the spaceship.
+Imperial designs aren't the most original but they do convey a strong
+message. The walls are standard imperial blue-grey and the floor is a
+polished jet black. 
+~
+0 536870912 1
+D1
+~
+~
+0 -1 11516
+D2
+~
+~
+0 -1 11515
+D3
+~
+~
+0 -1 11512
+S
+#11515
+Cargo Hold~
+~
+0 537395200 1
+D0
+~
+~
+0 -1 11514
+S
+#11516
+A Corridor~
+This corridor looks like just about every other corridor on the spaceship.
+Imperial designs aren't the most original but they do convey a strong
+message. The walls are standard imperial blue-grey and the floor is a
+polished jet black. 
+~
+0 536870912 1
+D1
+~
+~
+0 -1 11517
+D3
+~
+~
+0 -1 11514
+S
+#11517
+A Corridor~
+This corridor looks like just about every other corridor on the spaceship.
+Imperial designs aren't the most original but they do convey a strong
+message. The walls are standard imperial blue-grey and the floor is a
+polished jet black. 
+~
+0 536870912 1
+D1
+~
+~
+0 -1 11519
+D2
+~
+~
+0 -1 11518
+D3
+~
+~
+0 -1 11516
+S
+#11518
+Cargo Hold~
+~
+0 537395200 1
+D0
+~
+~
+0 -1 11517
+S
+#11519
+East Corridor~
+This corridor looks like just about every other corridor on the spaceship.
+Imperial designs aren't the most original but they do convey a strong
+message. The walls are standard imperial blue-grey and the floor is a
+polished jet black. 
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11505
+D2
+~
+~
+0 -1 11520
+D3
+~
+~
+0 -1 11517
+S
+#11520
+Cargo Hold~
+~
+0 537395200 1
+D0
+~
+~
+0 -1 11519
+S
+#11521
+A Corridor~
+This corridor looks like just about every other corridor on the spaceship.
+Imperial designs aren't the most original but they do convey a strong
+message. The walls are standard imperial blue-grey and the floor is a
+polished jet black.
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11522
+D2
+~
+~
+0 -1 11510
+S
+#11522
+Turbolift~
+This Turbolift runs along the center point of the ship.  There is a list on
+the wall with possible destinations 
+~
+0 536870916 1
+> speech_prog main 1~
+mpecho The turbolift quickly moves to the hanger level.
+mpechoat $n The doors open and you step out.
+mpechoaround $n The doors open and $n steps out before they reclose.
+mptransfer $n 11521
+mpat 11521 mpechoaround $n $n arrives from a turbolift.
+~
+> entry_prog 100~
+mpechoat $n The turbolift door closes behind you.
+mpechoaround $n The doors open and close briefly letting $n in.
+mpecho An electonic voice says. "What level please."
+~
+> speech_prog medical 2~
+mpecho The turbolift quickly moves to the medical level.
+mpechoat $n The doors open and you step out.
+mpechoaround $n The doors open and $n steps out before they reclose.
+mptransfer $n 11523
+mpat 11523 mpechoaround $n $n arrives from a turbolift.
+~
+> speech_prog detention 3~
+mpecho The turbolift quickly moves to the detention level.
+mpechoat $n The doors open and you step out.
+mpechoaround $n The doors open and $n steps out before they reclose.
+mptransfer $n 11531
+mpat 11531 mpechoaround $n $n arrives from a turbolift.
+~
+> speech_prog 4 officers officer~
+mpecho The turbolift quickly moves to the officers deck.
+mpechoat $n The doors open and you step out.
+mpechoaround $n The doors open and $n steps out before they
+reclose.
+mptransfer $n 11542
+mpat 11542 mpechoaround $n $n arrives from a turbolift.
+~
+> speech_prog command 5~
+mpecho The turbolift quickly moves to the command level.
+mpechoat $n The doors open and you step out.
+mpechoaround $n The doors open and $n steps out before they reclose.
+mptransfer $n 11559
+mpat 11559 mpechoaround $n $n arrives from a turbolift.
+~
+> speech_prog work 6~
+mpecho The turbolift quickly moves to the work floor.
+mpechoat $n The doors open and you step out.
+mpechoaround $n The doors open and $n steps out before they reclose.
+mptransfer $n 11584
+mpat 11584 mpechoaround $n $n arrives from a turbolift.
+~
+> speech_prog auxiliary~
+mpecho The turbolift quickly moves to the auxiliary bridge.
+mpechoat $n The doors open and you step out.
+mpechoaround $n The doors open and $n steps out before they reclose.
+mptransfer $n 11589
+mpat 11589 mpechoaround $n $n arrives from a turbolift.
+~
+> speech_prog barracks b~
+mpecho The turbolift quickly moves to the barracks.
+mpechoat $n The doors open and you step out.
+mpechoaround $n The doors open and $n steps out before they reclose.
+mptransfer $n 11590
+mpat 11590 mpechoaround $n $n arrives from a turbolift.
+~
+> speech_prog service droids droid lower l~
+mpecho The turbolift quickly moves to the service area.
+mpechoat $n The doors open and you step out.
+mpechoaround $n The doors open and $n steps out before they reclose.
+mptransfer $n 11595
+mpat 11595 mpechoaround $n $n arrives from a turbolift.
+~
+|
+S
+#11523
+Medical Level~
+This level is dedicated to the treatment of the crews ills.  Doctors,
+nurses, and patients swarm around.
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11522
+D2
+~
+~
+0 -1 11524
+S
+#11524
+Medical Level~
+This level is dedicated to the treatment of the crews ills.  Doctors,
+nurses, and patients swarm around.
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11523
+D1
+~
+~
+0 -1 11530
+D2
+~
+~
+0 -1 11525
+D3
+~
+~
+0 -1 11529
+S
+#11525
+Intensive Care~
+This room is filled with bacta tanks for the use of the crew.
+~
+0 536870916 1
+D0
+~
+~
+0 -1 11524
+D1
+~
+~
+0 -1 11527
+D2
+~
+~
+0 -1 11526
+D3
+~
+~
+0 -1 11528
+S
+#11526
+Bacta Tank~
+~
+0 536870916 1 0 0 1
+D0
+~
+~
+0 -1 11525
+> rand_prog 100~
+mpechoat $n A healing warmth spreads over your body.
+feel heal $n
+~
+|
+S
+#11527
+Bacta Tank~
+~
+0 536870916 1 0 0 1
+D3
+~
+~
+0 -1 11525
+> rand_prog 100~
+mpechoat $n A healing warmth spreads over your body.
+feel heal $n
+~
+|
+S
+#11528
+bacta Tank~
+~
+0 536870916 1 0 0 1
+D1
+~
+~
+0 -1 11525
+> rand_prog 100~
+mpechoat $n A healing warmth spreads over your body.
+feel heal $n
+~
+|
+S
+#11529
+Surgery~
+Surgical tools lie neatly here waiting for a patient.  With the trials of
+battle, most of the time, a patient is either too far gone or not damaged
+enough to need the delicate hand of a surgeon droid.
+~
+0 536870912 1
+D1
+~
+~
+0 -1 11524
+S
+#11530
+Recovery~
+Beds are here filled with recovering patients Nurses and medical droids go
+from bed to bed, checking on each. 
+~
+0 536870912 1
+D3
+~
+~
+0 -1 11524
+S
+#11531
+Detention Level~
+The Detention level is lined with cells.  Stormtroopers walk the corridor
+preventing prisoners from getting out, and rescuers from getting in.
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11522
+D2
+~
+~
+0 -1 11532
+S
+#11532
+Detention Level~
+The Detention level is lined with cells.  Stormtroopers walk the corridor
+preventing prisoners from getting out, and rescuers from getting in.
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11531
+D1
+~
+gate~
+3 11600 11535
+D2
+~
+~
+0 -1 11533
+D3
+~
+gate~
+3 11600 11536
+S
+#11533
+Detention Level~
+The Detention level is lined with cells.  Stormtroopers walk the corridor
+preventing prisoners from getting out, and rescuers from getting in.
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11532
+D1
+~
+gate~
+3 11600 11538
+D2
+~
+~
+0 -1 11534
+D3
+~
+gate~
+3 11600 11537
+S
+#11534
+Detention Level~
+The Detention level is lined with cells.  Stormtroopers walk the corridor
+preventing prisoners from getting out, and rescuers from getting in.
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11533
+D1
+~
+gate~
+3 11600 11539
+D2
+~
+~
+0 -1 11541
+D3
+~
+gate~
+3 11600 11540
+S
+#11535
+Detention Cell~
+~
+0 545259520 1
+D3
+~
+~
+35 -1 11532
+> speech_prog ration food~
+mpoload 10313
+drop ration
+mpecho A ration comes flying down a chute on the wall.
+~
+> speech_prog water thirsty~
+mpoload 301
+drop glass
+mpecho A droid hand extends with a glass of water.
+mpecho The hand places the glass on the table and retracts.
+~
+|
+S
+#11536
+Detention Cell~
+~
+0 545259520 1
+D1
+~
+~
+33 -1 11532
+> speech_prog water thirsty~
+mpoload 301
+drop glass
+mpecho A droid hand extends with a glass of water.
+mpecho The hand places the glass on the table and retracts.
+~
+> speech_prog ration food~
+mpoload 10313
+drop ration
+mpecho A ration comes flying down a chute on the wall.
+~
+|
+S
+#11537
+Detention Cell~
+~
+0 545259520 1
+D1
+~
+~
+33 -1 11533
+> speech_prog water thirsty~
+mpoload 301
+drop glass
+mpecho A droid hand extends with a glass of water.
+mpecho The hand places the glass on the table and retracts.
+~
+> speech_prog ration food~
+mpoload 10313
+drop ration
+mpecho A ration comes flying down a chute on the wall.
+~
+|
+S
+#11538
+Detention Cell~
+~
+0 545259520 1
+D3
+~
+~
+33 -1 11533
+> speech_prog ration food~
+mpoload 10313
+drop ration
+mpecho A ration comes flying down a chute on the wall.
+>speech water thirsty
+~
+> speech_prog water thirsty~
+mpoload 301
+drop glass
+mpecho A droid hand extends with a glass of water.
+mpecho The hand places the glass on the table and retracts.
+~
+|
+S
+#11539
+Detention Cell~
+~
+0 545259520 1
+D3
+~
+~
+6 -1 11534
+> speech_prog ration food~
+mpoload 10313
+drop ration
+mpecho A ration comes flying down a chute on the wall.
+~
+> speech_prog water thirsty~
+mpoload 301
+drop glass
+mpecho A droid hand extends with a glass of water.
+mpecho The hand places the glass on the table and retracts.
+~
+|
+S
+#11540
+Detention Cell~
+~
+0 545259520 1
+D1
+~
+~
+33 -1 11534
+> speech_prog water thirsty~
+mpoload 301
+drop glass
+mpecho A droid hand extends with a glass of water.
+mpecho The hand places the glass on the table and retracts.
+~
+> speech_prog ration food~
+mpoload 10313
+drop ration
+mpecho A ration comes flying down a chute on the wall.
+>speech water thirsty
+~
+|
+S
+#11541
+Detention Overseer's Office~
+The Overseer's office is rather plain.  A navy commander, you'd find him on
+a recruiting poster.  A mistake that cost the empire a victory-class star
+destroyer lead to his demotion from captain. Friends in high places
+allowed him to recieve the position of overseer on the fleet flagship.
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11534
+S
+#11542
+Officer's Deck~
+This corridor looks like just about every other corridor on the spaceship.
+Imperial designs aren't the most original but they do convey a strong
+message. The walls are standard imperial blue-grey and the floor is a
+polished jet black.
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11522
+D2
+~
+~
+0 -1 11543
+S
+#11543
+Officer's Deck~
+This corridor looks like just about every other corridor on the spaceship.
+Imperial designs aren't the most original but they do convey a strong
+message. The walls are standard imperial blue-grey and the floor is a
+polished jet black.
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11542
+D1
+~
+~
+0 -1 11545
+D2
+~
+~
+0 -1 11546
+D3
+~
+~
+0 -1 11544
+S
+#11544
+Officer's Lounge~
+The ship's officers come here to keep in touch with the others, and to
+communicate with the rest of the empire. 
+~
+0 536870912 1
+D1
+~
+~
+0 -1 11543
+S
+#11545
+Mail Room~
+The mail recieved for the crew and that which is outbound goes through this
+room. 
+~
+0 536870912 1
+D3
+~
+~
+0 -1 11543
+S
+#11546
+Officer's Deck~
+This corridor looks like just about every other corridor on the spaceship.
+Imperial designs aren't the most original but they do convey a strong
+message. The walls are standard imperial blue-grey and the floor is a
+polished jet black.
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11543
+D1
+~
+~
+0 -1 11548
+D2
+~
+~
+0 -1 11549
+D3
+~
+~
+0 -1 11547
+S
+#11547
+Nav Officer's Quarters~
+~
+0 538968064 1
+D1
+~
+~
+0 -1 11546
+S
+#11548
+Gunnery Sergeant's Quarters~
+~
+0 538968064 1
+D3
+~
+~
+0 -1 11546
+S
+#11549
+Officer's Deck~
+This corridor looks like just about every other corridor on the spaceship.
+Imperial designs aren't the most original but they do convey a strong
+message. The walls are standard imperial blue-grey and the floor is a
+polished jet black.
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11546
+D1
+~
+~
+0 -1 11550
+D2
+~
+~
+0 -1 11552
+D3
+~
+~
+0 -1 11551
+S
+#11550
+Second Officer's Quarters~
+~
+0 538968064 1
+D3
+~
+~
+0 -1 11549
+S
+#11551
+First Officer's Quarters~
+~
+0 538968064 1
+D1
+~
+~
+0 -1 11549
+S
+#11552
+Officer's Deck~
+This corridor looks like just about every other corridor on the spaceship.
+Imperial designs aren't the most original but they do convey a strong
+message. The walls are standard imperial blue-grey and the floor is a
+polished jet black.
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11549
+D1
+~
+~
+0 -1 11553
+D2
+~
+~
+0 -1 11555
+D3
+~
+~
+0 -1 11554
+S
+#11553
+An Empty Apartment~
+~
+0 547356672 1
+D3
+~
+~
+0 -1 11552
+S
+#11554
+Admiral's Quarters~
+~
+0 538968064 1
+D1
+~
+~
+0 -1 11552
+S
+#11555
+Officer's Deck~
+This corridor looks like just about every other corridor on the spaceship.
+Imperial designs aren't the most original but they do convey a strong
+message. The walls are standard imperial blue-grey and the floor is a
+polished jet black.
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11552
+D1
+~
+~
+0 -1 11556
+D2
+~
+~
+0 -1 11557
+S
+#11556
+Fleet Commander's Quarters~
+Executor is normally part of a fleet.  The Fleet Commander stays here
+during those periods. 
+~
+0 545259520 1
+D3
+~
+~
+0 -1 11555
+S
+#11557
+Lord Vader's Quarters~
+This suite is held for Darth Vader at all times.  It is death to anyone who
+is found staying in it. 
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11555
+D1
+~
+~
+0 -1 11558
+S
+#11558
+Isolation Chamber~
+This Chamber is where Lord Vader regenerates.  The air is a high-oxygen mix
+that he is able to breath without the use of his suit. 
+~
+0 637600768 1
+D3
+~
+~
+0 -1 11557
+> rand_prog 100~
+mpechoat $n The power of the dark side swirls through the room.
+mpechoat $n You feel its touch ease you.
+feel 'cure critical' $n
+~
+|
+S
+#11559
+Command Level~
+This corridor looks like just about every other corridor on the spaceship.
+Imperial designs aren't the most original but they do convey a strong
+message. The walls are standard imperial blue-grey and the floor is a
+polished jet black. 
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11522
+D2
+~
+~
+0 -1 11582
+D6
+~
+~
+0 -1 11560
+S
+#11560
+Bridge Turbolift~
+The bridge turbolift will quickly deposit you onto the bridge. 
+~
+0 536870916 1
+> entry_prog 100~
+mpecho The turbolift quickly moves to the bridge.
+mpechoat $n The doors open and you step out.
+mpechoaround $n The doors open and $n steps out.
+mptransfer $n 11561
+mpat 11561 mpechoaround $n $n arrives from a turbolift.
+~
+|
+S
+#11561
+A Stairwell over looking the bridge~
+The Bridge of the SSD Executor is impressive in its size.  Dozens of
+officers work here at various terminals.  The Work stations are down  a
+small set of stairs, while those on the flag deck and look down and watch.
+~
+0 536870912 1
+D2
+~
+~
+0 -1 11562
+D5
+~
+~
+0 -1 11567
+D6
+~
+~
+0 -1 11576
+D7
+~
+~
+0 -1 11581
+D8
+~
+~
+0 -1 11565
+D9
+~
+~
+0 -1 11563
+S
+#11562
+Bridge Turbolift~
+The bridge turbolift will return you quickly to the command deck
+~
+0 536870916 1
+> entry_prog 100~
+mpecho The turbolift quickly moves to the command deck.
+mpechat $n The doors open and you step out.
+mpechoaround $n The doors open and $n steps out.
+mptransfer $n 11559
+mpat 11559 mpechoaround $n $n arrives from a turbolift.
+~
+|
+S
+#11563
+Turret Tunnel~
+You crawl through a short tunnel to reach the turret.
+~
+0 536870912 1
+D2
+~
+~
+0 -1 11564
+D6
+~
+~
+0 -1 11561
+S
+#11564
+TurboLaser Turret~
+This is the command station for one of the Executor's powerful Turbolaser
+Turrets. 
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11563
+S
+#11565
+Turret Tunnel~
+You crawl through a short tunnel to reach the turret. 
+~
+0 536870912 1
+D2
+~
+~
+0 -1 11566
+D7
+~
+~
+0 -1 11561
+S
+#11566
+Turret~
+This is the command station for one of the Executor's powerful Turbolaser
+Turrets. 
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11565
+S
+#11567
+Work Floor~
+The Bridge of the SSD Executor is impressive in its size.  Dozens of
+officers work here at various terminals.  The Work stations are down  a
+small set of stairs, while those on the flag deck and look down and watch.
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11571
+D2
+~
+~
+0 -1 11570
+D4
+~
+~
+0 -1 11561
+D8
+~
+~
+0 -1 11568
+D9
+~
+~
+0 -1 11569
+S
+#11568
+Sensor Station~
+~
+0 536870912 1
+D7
+~
+~
+0 -1 11567
+S
+#11569
+Astro Array Control Station~
+~
+0 536870912 1
+D6
+~
+~
+0 -1 11567
+S
+#11570
+Communications Console~
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11567
+S
+#11571
+Work Floor~
+The Bridge of the SSD Executor is impressive in its size.  Dozens of
+officers work here at various terminals.  The Work stations are down  a
+small set of stairs, while those on the flag deck and look down and watch.
+~
+0 536870912 1
+D1
+~
+~
+0 -1 11573
+D2
+~
+~
+0 -1 11567
+D3
+~
+~
+0 -1 11572
+D6
+~
+~
+0 -1 11575
+D7
+~
+~
+0 -1 11574
+S
+#11572
+Navigation Station~
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11574
+D1
+~
+~
+0 -1 11571
+S
+#11573
+Gunners Station~
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11575
+D3
+~
+~
+0 -1 11571
+S
+#11574
+Pilot's Station~
+~
+0 536870912 1
+D1
+~
+~
+0 -1 11575
+D2
+~
+~
+0 -1 11572
+D8
+~
+~
+0 -1 11571
+S
+#11575
+CoPilot's Station~
+~
+0 536870912 1
+D2
+~
+~
+0 -1 11573
+D3
+~
+~
+0 -1 11574
+D9
+~
+~
+0 -1 11571
+S
+#11576
+Flag Deck~
+The Bridge of the SSD Executor is impressive in its size.  Dozens of
+officers work here at various terminals.  The Work stations are down a
+small set of stairs, while those on the flag deck and look down and watch.
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11577
+D9
+~
+~
+0 -1 11561
+S
+#11577
+Flag Deck~
+The Bridge of the SSD Executor is impressive in its size.  Dozens of
+officers work here at various terminals.  The Work stations are down a
+small set of stairs, while those on the flag deck and look down and watch.
+~
+0 536870912 1
+D2
+~
+~
+0 -1 11576
+D7
+~
+~
+0 -1 11578
+S
+#11578
+Flag Deck~
+The Bridge of the SSD Executor is impressive in its size.  Dozens of
+officers work here at various terminals.  The Work stations are down a
+small set of stairs, while those on the flag deck and look down and watch.
+This section of the deck also affords a view through the huge bridge
+viewscreen 
+~
+0 536870912 1
+D3
+~
+~
+0 -1 11579
+D8
+~
+~
+0 -1 11577
+S
+#11579
+Flag Deck~
+The Bridge of the SSD Executor is impressive in its size.  Dozens of
+officers work here at various terminals.  The Work stations are down a
+small set of stairs, while those on the flag deck and look down and watch.
+This section of the deck also affords a view through the huge bridge
+viewscreen 
+~
+0 536870912 1
+D1
+~
+~
+0 -1 11578
+D9
+~
+~
+0 -1 11580
+S
+#11580
+Flag Deck~
+The Bridge of the SSD Executor is impressive in its size.  Dozens of
+officers work here at various terminals.  The Work stations are down a
+small set of stairs, while those on the flag deck and look down and watch.
+~
+0 536870912 1
+D2
+~
+~
+0 -1 11581
+D6
+~
+~
+0 -1 11579
+S
+#11581
+Flag Deck~
+The Bridge of the SSD Executor is impressive in its size.  Dozens of
+officers work here at various terminals.  The Work stations are down a
+small set of stairs, while those on the flag deck and look down and watch.
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11580
+D8
+~
+~
+0 -1 11561
+S
+#11582
+Command Level~
+This corridor looks like just about every other corridor on the spaceship.
+Imperial designs aren't the most original but they do convey a strong
+message. The walls are standard imperial blue-grey and the floor is a
+polished jet black.
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11559
+D2
+~
+~
+0 -1 11583
+S
+#11583
+Engineering~
+The Engineering Room of the Executor dwarfs even the Emperor's throne room.
+ It has to be that size to be able to hold it Super-class destroyer's
+powerful, and huge, engines, and still fit all the crew members that are
+required to keep them running.
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11582
+S
+#11584
+Work Level~
+On this level, the important transactions of the crew are the least of the
+activity. Also on this level is the mighty factory and refinery Lord Vader
+ordered to have installed on his ship.  This floor is above everything
+else and well back from the bridge module.  A seperate module to itself,
+it can be jettisoned and, unbeknownst to the work crew, detonated from the
+bridge.
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11522
+D2
+~
+~
+0 -1 11585
+S
+#11585
+Work Level~
+On this level, the important transactions of the crew are the least of the
+activity. Also on this level is the mighty factory and refinery Lord Vader
+ordered to have installed on his ship.  This floor is above everything
+else and well back from the bridge module.  A seperate module to itself,
+it can be jettisoned and, unbeknownst to the work crew, detonated from the
+bridge.
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11584
+D1
+~
+~
+0 -1 11586
+D2
+~
+~
+0 -1 11588
+D3
+~
+~
+0 -1 11587
+S
+#11586
+Ship Factory~
+On this level, the important transactions of the crew are the least of the
+activity. Also on this level is the mighty factory and refinery Lord Vader
+ordered to have installed on his ship.  This floor is above everything
+else and well back from the bridge module.  A seperate module to itself,
+it can be jettisoned and, unbeknownst to the work crew, detonated from the
+bridge.
+~
+0 603979776 1
+D3
+~
+~
+0 -1 11585
+S
+#11587
+Ship Refinery~
+On this level, the important transactions of the crew are the least of the
+activity. Also on this level is the mighty factory and refinery Lord Vader
+ordered to have installed on his ship.  This floor is above everything
+else and well back from the bridge module.  A seperate module to itself,
+it can be jettisoned and, unbeknownst to the work crew, detonated from the
+bridge.
+~
+0 570425344 1
+D1
+~
+~
+0 -1 11585
+S
+#11588
+Ship Repair Facility~
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11585
+S
+#11589
+Auxiliary Bridge~
+The Aux bridge is useless until the main bridge has been destroyed.  Then
+this small room becomes the next command center. Manned at all times, the
+meer destruction of the main bridge will no longer doom this ship. 
+~
+0 536870912 1
+D2
+~
+~
+0 -1 11522
+S
+#11590
+Barracks Level~
+This corridor looks like just about every other corridor on the spaceship.
+Imperial designs aren't the most original but they do convey a strong
+message. The walls are standard imperial blue-grey and the floor is a
+polished jet black. 
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11522
+D2
+~
+~
+0 -1 11591
+S
+#11591
+Barracks level~
+This corridor looks like just about every other corridor on the spaceship.
+Imperial designs aren't the most original but they do convey a strong
+message. The walls are standard imperial blue-grey and the floor is a
+polished jet black. 
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11590
+D1
+~
+~
+0 -1 11592
+D2
+~
+~
+0 -1 11594
+D3
+~
+~
+0 -1 11593
+S
+#11592
+Barracks~
+Out of the way and out of sight, the off-duty soldiers come here to rest 
+ 
+ 
+It is safe to enter and exit the game here.
+~
+0 545259520 1
+D3
+~
+~
+0 -1 11591
+S
+#11593
+Barracks~
+out of the way and out of sight, the off-duty crew comes here to rest.
+ 
+It is safe to enter and exit the game here.
+~
+0 545259520 1
+D1
+~
+~
+0 -1 11591
+S
+#11594
+Crew Mess~
+The mess of the executor was designed to hold half of the off-duty shift at
+a time.  It is the size of a corellian corvette. 
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11591
+S
+#11595
+Service Area~
+This small area is where the droids are kept, out of the way until they are
+needed.  The many tools required to run this ship are stored here, as
+well. 
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11522
+S
+#11596
+East Bay~
+The main hanger is an enormous hanger with areas sectioned off for all
+types of ships. In the middle of the hanger the floor is mechanicly
+designed to seperate and open up allowing large ships to enter and leave.
+There are also smaller launch tunnels that can be used by smaller ships.
+~
+0 536870912 1
+D3
+~
+~
+0 -1 11501
+D5
+~
+~
+0 -1 11597
+S
+#11597
+Transport Hanger~
+The main hanger is an enormous hanger with areas sectioned off for all
+types of ships. In the middle of the hanger the floor is mechanicly
+designed to seperate and open up allowing large ships to enter and leave.
+There are also smaller launch tunnels that can be used by smaller ships.
+~
+0 536870912 1
+D4
+~
+~
+0 -1 11596
+S
+#11598
+West bay~
+The main hanger is an enormous hanger with areas sectioned off for all
+types of ships. In the middle of the hanger the floor is mechanicly
+designed to seperate and open up allowing large ships to enter and leave.
+There are also smaller launch tunnels that can be used by smaller ships.
+~
+0 536870912 1
+D1
+~
+~
+0 -1 11501
+D5
+~
+~
+0 -1 11599
+S
+#11599
+Troop Deployment Hanger~
+The main hanger is an enormous hanger with areas sectioned off for all
+types of ships. In the middle of the hanger the floor is mechanicly
+designed to seperate and open up allowing large ships to enter and leave.
+There are also smaller launch tunnels that can be used by smaller ships.
+~
+0 536870912 1
+D4
+~
+~
+0 -1 11598
+S
+#11600
+Fighter Bay~
+The main hanger is an enormous hanger with areas sectioned off for all
+types of ships. In the middle of the hanger the floor is mechanicly
+designed to seperate and open up allowing large ships to enter and leave.
+There are also smaller launch tunnels that can be used by smaller ships.
+~
+0 536870912 1
+D4
+~
+~
+0 -1 11501
+S
+#0
+
+
+#RESETS
+M 1 11600 1 11541
+E 1 11600 1 3
+O 1 11601 1 11531
+O 1 38 1 11545
+M 1 11601 1 11501
+E 1 32250 1 13
+E 1 50 1 16
+G 1 32254 1
+O 1 11602 1 11522
+M 1 10365 2 11595
+M 1 32001 9 11591
+G 1 50 1
+M 1 32001 9 11591
+G 1 50 1
+M 1 6704 2 11530
+M 1 11602 1 11583
+S
+
+
+#SHOPS
+0
+
+
+#REPAIRS
+0
+
+
+#SPECIALS
+M  11601 spec_stormtrooper
+S
+
+
+#$

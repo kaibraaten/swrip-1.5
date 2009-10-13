@@ -1,0 +1,22 @@
+#SPACE
+Name         Wroona~
+Filename     Wroona~
+Type         1~
+Locationa      Landing Pad 0148~
+Locationb      ~
+Locationc      ~
+Doca          4300
+Docb          0
+Docc          0
+Gravity     0
+Xpos          -4000113
+Ypos          -3998912
+Zpos          -31230
+HX            0
+HY            0
+HZ            0
+SP            0
+Trainer       0
+End
+
+#END

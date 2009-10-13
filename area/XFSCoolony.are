@@ -1,0 +1,824 @@
+#AREA   {PROTO} Darrik's area in progress~
+
+
+
+#AUTHOR Darrik~
+
+#RANGES
+0 0 0 0
+$
+
+#FLAGS
+0
+
+#ECONOMY 0 0
+
+#MOBILES
+#0
+
+
+#OBJECTS
+#0
+
+
+#ROOMS
+#1800
+The hanger level~
+The hanger for the space colony consists of a large, open canopy. Six 
+tunnels lead out past atmosphere shields to the surrounding space.  Black
+lines as wide as the entrances lead from space to the center of the open
+floor, where a large pad lies. Collapsible staircases lead down from the
+landing pads to the areas below. One of these staircases lead up to a
+security door to the upper levels. Two solid doors stand to either side of
+one of the entry tunnels. Keypads are imbedded next to them waiting for 
+entry codes. The light grey durasteel walls rise high above the hanger
+floor.  A dotted yellow line has been painted three meters off the ground,
+making it clear where the floor ends and where the walls begin.
+~
+0 536870920 0
+D0
+~
+~
+0 -1 1807
+D2
+~
+~
+0 -1 1808
+D4
+~
+~
+0 -1 1801
+D5
+~
+~
+0 -1 1809
+E
+up~
+The staircase is created from foldable durasteel plating. Made to crumple
+in  the event of an accident to prevent damage to spacecraft, it is not
+the safest  place to hang around on.  The stairs lead up to a single door
+built over head,  leading into an upper level. A keypad is imbedded into
+the wall next to it. A passcode is required for entry.
+~
+E
+u~
+The staircase is created from foldable durasteel plating. Made to crumple
+in  the event of an accident to prevent damage to spacecraft, it is not
+the safest  place to hang around on.  The stairs lead up to a single door
+built over head,  leading into an upper level. A keypad is imbedded into
+the wall next to it. A passcode is required for entry.
+~
+S
+#1801
+Colony defense control~
+~
+0 536870920 0
+D0
+~
+~
+0 -1 1802
+D1
+~
+~
+0 -1 1803
+D2
+~
+~
+0 -1 1804
+D3
+~
+~
+0 -1 1805
+D4
+~
+~
+0 -1 1806
+D5
+~
+~
+0 -1 1800
+E
+up~
+~
+S
+#1802
+A non-operational turbo-laser~
+~
+0 536870920 0
+D2
+~
+~
+0 -1 1801
+S
+#1803
+A turbo-laser~
+~
+0 536870920 0
+D3
+~
+~
+0 -1 1801
+S
+#1804
+A non-operational turbo-laser~
+~
+0 536870920 0
+D0
+~
+~
+0 -1 1801
+S
+#1805
+A turbo-laser~
+~
+0 536870920 0
+D1
+~
+~
+0 -1 1801
+S
+#1806
+Colony command center~
+~
+0 536870920 0
+D5
+~
+~
+0 -1 1801
+S
+#1807
+A package pick-up area~
+~
+0 536870920 0
+D2
+~
+~
+0 -1 1800
+S
+#1808
+A package pick-up area~
+~
+0 536870920 0
+D0
+~
+~
+0 -1 1800
+S
+#1809
+The commercial level~
+~
+0 536870920 0
+D0
+~
+~
+0 -1 1810
+D2
+~
+~
+0 -1 1811
+D4
+~
+~
+0 -1 1800
+D5
+~
+~
+0 -1 1816
+S
+#1810
+An open area~
+~
+0 536870920 0
+D1
+~
+~
+0 -1 1813
+D2
+~
+~
+0 -1 1809
+D3
+~
+~
+0 -1 1812
+S
+#1811
+An open area~
+~
+0 536870920 0
+D0
+~
+~
+0 -1 1809
+D1
+~
+~
+0 -1 1815
+D3
+~
+~
+0 -1 1814
+S
+#1812
+A shop stall~
+~
+0 805306376 0
+D1
+~
+~
+0 -1 1810
+S
+#1813
+A shop stall~
+~
+0 805306376 0
+D3
+~
+~
+0 -1 1810
+S
+#1814
+A shop stall~
+~
+0 805306376 0
+D1
+~
+~
+0 -1 1811
+S
+#1815
+A shop stall~
+~
+0 805306376 0
+D3
+~
+~
+0 -1 1811
+S
+#1816
+The residental level~
+~
+0 536870920 0
+D0
+~
+~
+0 -1 1817
+D2
+~
+~
+0 -1 1818
+D4
+~
+~
+0 -1 1809
+D5
+~
+~
+0 -1 1840
+S
+#1817
+The northern residential wing~
+~
+0 536870920 0
+D0
+~
+~
+7 1835 1835
+D1
+~
+~
+0 -1 1820
+D2
+~
+~
+0 -1 1816
+D3
+~
+~
+0 -1 1819
+S
+#1818
+The southern residential wing~
+~
+0 536870920 0
+D0
+~
+~
+0 -1 1816
+D1
+~
+~
+0 -1 1822
+D2
+~
+~
+7 1838 1838
+D3
+~
+~
+0 -1 1821
+S
+#1819
+The northern residential wing~
+~
+0 536870920 0
+D0
+~
+~
+0 -1 1831
+D1
+~
+~
+0 -1 1817
+D3
+~
+~
+0 -1 1830
+D9
+~
+~
+0 -1 1829
+S
+#1820
+The northern residential wing~
+~
+0 536870920 0
+D0
+~
+~
+0 -1 1834
+D1
+~
+~
+0 -1 1833
+D2
+~
+~
+0 -1 1832
+D3
+~
+~
+0 -1 1817
+S
+#1821
+The southern residential wing~
+~
+0 536870920 0
+D1
+~
+~
+0 -1 1818
+D2
+~
+~
+0 -1 1825
+D3
+~
+~
+0 -1 1824
+D7
+~
+~
+0 -1 1823
+S
+#1822
+The southern residential wing~
+~
+0 536870920 0
+D1
+~
+~
+0 -1 1827
+D2
+~
+~
+0 -1 1826
+D3
+~
+~
+0 -1 1818
+D6
+~
+~
+0 -1 1828
+S
+#1823
+Some empty quarters~
+~
+0 546308104 0
+D8
+~
+~
+0 -1 1821
+S
+#1824
+Some empty quarters~
+~
+0 546308104 0
+D1
+~
+~
+0 -1 1821
+S
+#1825
+Some empty quarters~
+~
+0 546308104 0
+D0
+~
+~
+0 -1 1821
+S
+#1826
+Some empty quarters~
+~
+0 546308104 0
+D0
+~
+~
+0 -1 1822
+S
+#1827
+Some empty quarters~
+~
+0 546308104 0
+D3
+~
+~
+0 -1 1822
+S
+#1828
+Some empty quarters~
+~
+0 546308104 0
+D9
+~
+~
+0 -1 1822
+S
+#1829
+Some empty quarters~
+~
+0 546308104 0
+D6
+~
+~
+0 -1 1819
+S
+#1830
+Some empty quarters~
+~
+0 546308104 0
+D1
+~
+~
+0 -1 1819
+S
+#1831
+Some empty quarters~
+~
+0 546308104 0
+D2
+~
+~
+0 -1 1819
+S
+#1832
+Some empty quarters~
+~
+0 546308104 0
+D0
+~
+~
+0 -1 1820
+S
+#1833
+Some empty quarters~
+~
+0 546308104 0
+D3
+~
+~
+0 -1 1820
+S
+#1834
+Some empty quarters~
+~
+0 546308104 0
+D2
+~
+~
+0 -1 1820
+S
+#1835
+Floating in a void~
+~
+0 536870920 0
+D0
+~
+~
+0 -1 1836
+D2
+~
+~
+7 1835 1817
+S
+#1836
+Floating in a void~
+~
+0 536870920 0
+D2
+~
+~
+0 -1 1835
+D3
+~
+~
+2063 1837 1837
+S
+#1837
+Floating in a void~
+~
+0 536870920 0
+D1
+~
+~
+7 1837 1836
+S
+#1838
+Floating in a void~
+~
+0 536870920 0
+D0
+~
+~
+7 1838 1818
+D2
+~
+~
+0 -1 1839
+S
+#1839
+Floating in a void~
+~
+0 536870920 0
+D0
+~
+~
+0 -1 1838
+S
+#1840
+The lower level~
+~
+0 536870920 0
+D0
+~
+~
+0 -1 1841
+D2
+~
+~
+0 -1 1844
+D4
+~
+~
+0 -1 1816
+D5
+~
+~
+0 -1 1849
+S
+#1841
+Cargo deck~
+~
+0 536870920 0
+D1
+~
+~
+0 -1 1843
+D2
+~
+~
+0 -1 1840
+D3
+~
+~
+0 -1 1842
+S
+#1842
+A small cargo bay~
+~
+0 536870920 0
+D1
+~
+~
+0 -1 1841
+S
+#1843
+A small cargo bay~
+~
+0 536870920 0
+D3
+~
+~
+0 -1 1841
+S
+#1844
+Colony recreation wing~
+~
+0 536870920 0
+D0
+~
+~
+0 -1 1840
+D1
+~
+~
+0 -1 1845
+D3
+~
+~
+0 -1 1847
+S
+#1845
+Colony mess hall~
+~
+0 536870920 0
+D0
+~
+~
+0 -1 1846
+D3
+~
+~
+0 -1 1844
+S
+#1846
+The primary kitchen~
+~
+0 536870920 0
+D2
+~
+~
+0 -1 1845
+S
+#1847
+Colony lounge~
+~
+0 536870920 0
+D0
+~
+~
+0 -1 1848
+D1
+~
+~
+0 -1 1844
+S
+#1848
+Colony mail center~
+~
+0 536870920 0
+D2
+~
+~
+0 -1 1847
+S
+#1849
+The engineering level~
+~
+0 637534216 0
+D4
+~
+~
+0 -1 1840
+S
+#1850
+Floating in a void~
+~
+0 536870924 0
+S
+#1851
+Floating in a void~
+~
+0 4 1
+S
+#1852
+Floating in a void~
+~
+0 4 1
+S
+#1853
+Floating in a void~
+~
+0 4 1
+S
+#1854
+Floating in a void~
+~
+0 4 1
+S
+#1855
+Floating in a void~
+~
+0 4 1
+S
+#1856
+Floating in a void~
+~
+0 4 1
+S
+#1857
+Floating in a void~
+~
+0 4 1
+S
+#1858
+Floating in a void~
+~
+0 4 1
+S
+#1859
+Floating in a void~
+~
+0 4 1
+S
+#1860
+Floating in a void~
+~
+0 4 1
+S
+#1861
+Floating in a void~
+~
+0 4 1
+S
+#1862
+Floating in a void~
+~
+0 4 1
+S
+#1863
+Floating in a void~
+~
+0 4 1
+S
+#1864
+Floating in a void~
+~
+0 4 1
+S
+#1865
+Floating in a void~
+~
+0 4 1
+S
+#1866
+Floating in a void~
+~
+0 4 1
+S
+#1867
+Floating in a void~
+~
+0 4 1
+S
+#1868
+Floating in a void~
+~
+0 4 1
+S
+#1869
+Floating in a void~
+~
+0 4 1
+S
+#1870
+Floating in a void~
+~
+0 4 1
+S
+#0
+
+
+#RESETS
+D 0 1837 1 2
+D 0 1817 0 2
+D 0 1818 2 2
+O 1 38 1 1848
+S
+
+
+#SHOPS
+0
+
+
+#REPAIRS
+0
+
+
+#SPECIALS
+S
+
+
+#$

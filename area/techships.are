@@ -1,0 +1,1350 @@
+#AREA   Tech ships~
+
+
+
+#AUTHOR Darrik~
+
+#RANGES
+0 0 0 103
+$
+
+#FLAGS
+2
+
+#ECONOMY 0 6468311
+
+#MOBILES
+#0
+
+
+#OBJECTS
+#0
+
+
+#ROOMS
+#11100
+Pilot's Chair~
+~
+0 4 1
+S
+#11101
+Pilot's Chair~
+~
+0 536870916 1
+D1
+~
+~
+0 -1 11102
+D8
+~
+~
+0 -1 11103
+S
+#11102
+Co-pilot's Chair~
+~
+0 536870912 1
+D3
+~
+~
+0 -1 11101
+D9
+~
+~
+0 -1 11103
+S
+#11103
+Captain's Chair~
+~
+0 536870912 1
+D2
+~
+~
+0 -1 11106
+D6
+~
+~
+0 -1 11102
+D7
+~
+~
+0 -1 11101
+S
+#11104
+Navigator's Console~
+~
+0 536870916 1
+S
+#11105
+Gunner's Chair~
+~
+0 536870916 1
+S
+#11106
+Bridge~
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11103
+D2
+~
+~
+0 -1 11107
+S
+#11107
+Central Corridor~
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11106
+D1
+~
+~
+0 -1 11112
+D2
+~
+~
+0 -1 11108
+D3
+~
+~
+0 -1 11114
+S
+#11108
+Central Corridor~
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11107
+D1
+~
+~
+0 -1 11116
+D2
+~
+~
+0 -1 11109
+D3
+~
+~
+0 -1 11119
+S
+#11109
+Central Corridor~
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11108
+D1
+~
+~
+0 -1 11122
+D2
+~
+~
+0 -1 11110
+S
+#11110
+Central Corridor~
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11109
+D2
+~
+~
+0 -1 11111
+D3
+~
+~
+0 -1 11125
+S
+#11111
+Engineroom~
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11110
+S
+#11112
+Quarters~
+~
+0 536870912 1
+D1
+~
+~
+0 -1 11113
+D3
+~
+~
+0 -1 11107
+S
+#11113
+An Empty Apartment~
+~
+0 547356676 1
+D3
+~
+~
+0 -1 11112
+S
+#11114
+Quarters~
+~
+0 536870912 1
+D1
+~
+~
+0 -1 11107
+D3
+~
+~
+0 -1 11115
+S
+#11115
+Officer's Quarters~
+~
+0 545259520 1
+D1
+~
+~
+0 -1 11114
+S
+#11116
+East Corridor~
+~
+0 536870912 1
+D1
+~
+~
+0 -1 11117
+D3
+~
+~
+0 -1 11108
+S
+#11117
+East Corridor~
+~
+0 536870912 1
+D3
+~
+~
+0 -1 11116
+D4
+~
+~
+0 -1 11126
+D5
+~
+~
+0 -1 11118
+S
+#11118
+Chaser Hanger~
+~
+0 536870960 1
+D4
+~
+~
+0 -1 11117
+S
+#11119
+West Corridor~
+~
+0 536870912 1
+D1
+~
+~
+0 -1 11108
+D3
+~
+~
+0 -1 11120
+S
+#11120
+West Corridor~
+~
+0 536870912 1
+D1
+~
+~
+0 -1 11119
+D4
+~
+~
+0 -1 11127
+D5
+~
+~
+0 -1 11121
+S
+#11121
+Bacta Tank~
+~
+0 536870912 1
+D4
+~
+~
+0 -1 11120
+> rand_prog 100~
+feel heal $n
+~
+|
+S
+#11122
+Research and Development~
+~
+0 536870912 1
+D1
+~
+~
+0 -1 11123
+D2
+~
+~
+0 -1 11128
+D3
+~
+~
+0 -1 11109
+S
+#11123
+Workshop~
+~
+0 637534208 1
+D0
+~
+~
+0 -1 11129
+D2
+~
+~
+0 -1 11124
+D3
+~
+~
+0 -1 11122
+S
+#11124
+Repair Shop~
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11123
+S
+#11125
+Transaction Room~
+~
+0 536871168 1
+D1
+~
+~
+0 -1 11110
+S
+#11126
+Turret~
+~
+0 536870912 1
+D5
+~
+~
+0 -1 11117
+S
+#11127
+Turret~
+~
+0 536870912 1
+D5
+~
+~
+0 -1 11120
+S
+#11128
+Equipment and Supplies~
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11122
+S
+#11129
+Insulated room~
+This roomm has been insulated with soundproof materials, making it utterly
+quiet.  A dampening field disables your comlink while you are in here.
+~
+0 537395212 1
+D2
+~
+~
+0 -1 11123
+S
+#11130
+Floating in a void~
+~
+0 4 1
+S
+#11140
+Falcon Hallway~
+The Boarding ramp of the Millenium Falcon is a large metal door moved by
+hydraulics.  The pumps to either side wheeze as the ramp goes up or down,
+in disorder.  The hallway leading deep in the Falcon is plated with rusted
+panels and control faces.  You can see where new plates have been welded
+in. However, the floor plates are in perfect repair, as you are pleased to
+note.
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11146
+D1
+~
+~
+0 -1 11141
+D2
+~
+~
+0 -1 11143
+D4
+~
+~
+0 -1 11147
+D5
+~
+~
+0 -1 11144
+D10
+~
+smuggle~
+526336 -1 11142
+S
+#11141
+Lounge~
+A Hologame, two couches, and a small kitchen are found in the lounge.
+Smugglers, wookies, droids, and jedis have all been known to spend the
+boredom of hyperspace in this room. 
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11145
+D3
+~
+~
+0 -1 11140
+S
+#11142
+Smuggling Compartment~
+You can see this compartment was designed to be undetectable by scanners.
+~
+0 545260544 1
+D4
+~
+~
+33 -1 11140
+S
+#11143
+Cockpit~
+The Cockpit of the Falcon holds four seats, two of which are for the pilot
+and the copilot. Although the pilot seat seems to be normal size, the
+copilot seat looks as if it was made for a being larger than the normal
+human.  Control panels have been wired in haphazardly, making you wonder
+how this ship stays in one piece.
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11140
+S
+#11144
+Lower Turret~
+The Turrets of the Falcon hold quad laser cannons.  As you climb into the
+seat, you have to adjust yourself to the different gravity field
+orientated at a 90 degree angle to the rest of the ship. 
+~
+0 536870912 1
+D4
+~
+~
+0 -1 11140
+S
+#11145
+Sleeping Compartment~
+~
+0 545259520 1
+D2
+~
+~
+0 -1 11141
+S
+#11146
+Engineroom~
+The EngineRoom is simply a mess.  Panels, spare parts, tools, and other
+junk are all mixed with the working parts of the ship, making it
+impossible to tell what goes where when making repairs. 
+~
+0 536870912 1
+D2
+~
+~
+0 -1 11140
+S
+#11147
+Upper Turret~
+The Turrets of the Falcon hold quad laser cannons.  As you climb into the
+seat, you have to adjust yourself to the different gravity field
+orientated at a 90 degree angle to the rest of the ship. 
+~
+0 536870912 1
+D5
+~
+~
+0 -1 11140
+S
+#11148
+Fleet Commander's Quarters~
+~
+0 545260548 1
+D7
+~
+~
+0 -1 11169
+S
+#11149
+An Empty Apartment~
+~
+0 547357696 1 0 0 1
+D6
+~
+~
+0 -1 11169
+S
+#11150
+Cockpit~
+~
+0 536870912 1
+D2
+~
+~
+0 -1 11151
+S
+#11151
+Central Corridor~
+~
+0 0 1
+D0
+~
+~
+0 -1 11150
+D2
+~
+~
+0 -1 11154
+D4
+~
+~
+0 -1 11152
+D5
+~
+~
+0 -1 11153
+S
+#11152
+Turret~
+~
+0 0 1
+D5
+~
+~
+0 -1 11151
+S
+#11153
+Turret~
+~
+0 0 1
+D4
+~
+~
+0 -1 11151
+S
+#11154
+Central Corridor~
+~
+0 0 1
+D0
+~
+~
+0 -1 11151
+D2
+~
+~
+0 -1 11155
+S
+#11155
+Central Corridor~
+~
+0 0 1
+D0
+~
+~
+0 -1 11154
+D1
+~
+~
+0 -1 11156
+D2
+~
+~
+0 -1 11158
+D3
+~
+~
+0 -1 11157
+D5
+~
+~
+0 -1 11159
+S
+#11156
+The Workshop~
+~
+0 100663296 1
+D3
+~
+~
+0 -1 11155
+> rand_prog 100~
+mpechoat Your bruises and cuts fade in the warmth of the bacta.
+feel heal $n
+feel heal $n
+~
+|
+S
+#11157
+Cargo Bay~
+~
+0 8388608 1
+D1
+~
+~
+0 -1 11155
+S
+#11158
+Engine Room~
+~
+0 0 1
+D0
+~
+~
+0 -1 11155
+S
+#11159
+Boarding Ramp~
+~
+0 0 1
+D4
+~
+~
+0 -1 11155
+S
+#11160
+Pilot's Chair~
+~
+0 536870912 1
+D1
+~
+~
+0 -1 11162
+D8
+~
+~
+0 -1 11161
+S
+#11161
+Captain's Chair~
+~
+0 536870912 1
+D1
+~
+~
+0 -1 11164
+D2
+~
+~
+0 -1 11165
+D3
+~
+~
+0 -1 11163
+D6
+~
+~
+0 -1 11162
+D7
+~
+~
+0 -1 11160
+S
+#11162
+CoPilot's Chair~
+~
+0 536870912 1
+D3
+~
+~
+0 -1 11160
+D9
+~
+~
+0 -1 11161
+S
+#11163
+Nav Station~
+~
+0 536870912 1
+D1
+~
+~
+0 -1 11161
+S
+#11164
+Gunner's Station~
+~
+0 536870912 1
+D3
+~
+~
+0 -1 11161
+S
+#11165
+Turbolift~
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11161
+D5
+~
+~
+0 -1 11166
+S
+#11166
+Turbolift~
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11169
+D4
+~
+~
+0 -1 11165
+D5
+~
+~
+0 -1 11167
+S
+#11167
+Turbolift~
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11172
+D4
+~
+~
+0 -1 11166
+D5
+~
+~
+0 -1 11168
+S
+#11168
+Turbolift~
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11173
+D4
+~
+~
+0 -1 11167
+S
+#11169
+Flag Deck~
+The high techs come here to watch as their cruiser captures vessels and
+conquers planets.
+~
+0 536870912 1
+D2
+~
+~
+0 -1 11166
+D6
+~
+~
+0 -1 11170
+D7
+~
+~
+0 -1 11171
+D8
+~
+~
+0 -1 11148
+D9
+~
+~
+0 -1 11149
+S
+#11170
+Flag Deck~
+The high techs come here to watch as their cruiser captures vessels and
+conquers planets.
+~
+0 536870912 1
+D3
+~
+~
+0 -1 11171
+D9
+~
+~
+0 -1 11169
+S
+#11171
+Flag Deck~
+The high techs come here to watch as their cruiser captures vessels and
+conquers planets.
+~
+0 536870912 1
+D1
+~
+~
+0 -1 11170
+D8
+~
+~
+0 -1 11169
+S
+#11172
+Medical Bay~
+The cruiser's medbay is top of the line, equipped with several bacta tanks.
+~
+0 536870912 1
+D2
+~
+~
+0 -1 11167
+> rand_prog 100~
+feel 'heal' $n
+mpecho You feel the Bacta working
+~
+|
+S
+#11173
+Hallway~
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11174
+D2
+~
+~
+0 -1 11168
+D8
+~
+~
+0 -1 11181
+D9
+~
+~
+0 -1 11180
+S
+#11174
+Crew Quarters~
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11175
+D1
+~
+~
+0 -1 11177
+D2
+~
+~
+0 -1 11173
+D3
+~
+~
+0 -1 11176
+S
+#11175
+Crew Quarters~
+~
+0 536870912 1
+D1
+~
+~
+0 -1 11179
+D2
+~
+~
+0 -1 11174
+D3
+~
+~
+0 -1 11178
+S
+#11176
+Mora Fenhin's quarters~
+~
+0 613417988 1
+D1
+~
+~
+0 -1 11174
+S
+#11177
+An Empty Apartment~
+~
+0 614466564 1
+D3
+~
+~
+0 -1 11174
+S
+#11178
+An Empty Apartment~
+~
+0 614465540 1
+D1
+~
+~
+0 -1 11175
+S
+#11179
+An Empty Apartment~
+~
+0 614466564 1
+D3
+~
+~
+0 -1 11175
+S
+#11180
+Hallway~
+~
+0 536870912 1
+D6
+~
+~
+0 -1 11173
+D8
+~
+~
+0 -1 11182
+S
+#11181
+Hallway~
+~
+0 536870912 1
+D7
+~
+~
+0 -1 11173
+D9
+~
+~
+0 -1 11182
+S
+#11182
+Hallway~
+~
+0 536870912 1
+D2
+~
+~
+0 -1 11183
+D6
+~
+~
+0 -1 11181
+D7
+~
+~
+0 -1 11180
+S
+#11183
+Hallway~
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11182
+D2
+~
+~
+0 -1 11188
+D4
+~
+~
+0 -1 11184
+S
+#11184
+Work Floor~
+This Floor is filled with work areas where techs can build, engineer, and
+repair. 
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11187
+D1
+~
+~
+0 -1 11185
+D3
+~
+~
+0 -1 11186
+D5
+~
+~
+0 -1 11183
+S
+#11185
+Workshop~
+~
+0 603979776 1
+D3
+~
+~
+0 -1 11184
+S
+#11186
+Refinery~
+~
+0 570425344 1
+D1
+~
+~
+0 -1 11184
+S
+#11187
+Electronics~
+~
+0 536870912 1
+D2
+~
+~
+0 -1 11184
+S
+#11188
+Hallway~
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11183
+D2
+~
+~
+0 -1 11189
+S
+#11189
+Turbolift~
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11188
+D4
+~
+~
+0 -1 11190
+S
+#11190
+Turbolift~
+~
+0 536870912 1
+D2
+~
+~
+0 -1 11193
+D4
+~
+~
+0 -1 11191
+D5
+~
+~
+0 -1 11189
+S
+#11191
+Turbolift~
+~
+0 536870912 1
+D2
+~
+~
+0 -1 11194
+D4
+~
+~
+0 -1 11192
+D5
+~
+~
+0 -1 11190
+S
+#11192
+Turbolift~
+~
+0 536870912 1
+D2
+~
+~
+0 -1 11197
+D5
+~
+~
+0 -1 11191
+S
+#11193
+Engineering~
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11190
+S
+#11194
+Weapon's Systems~
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11191
+D1
+~
+~
+0 -1 11195
+D3
+~
+~
+0 -1 11196
+S
+#11195
+Turret~
+~
+0 536870912 1
+D3
+~
+~
+0 -1 11194
+S
+#11196
+Turret~
+~
+0 536870912 1
+D1
+~
+~
+0 -1 11194
+S
+#11197
+Hallway~
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11192
+D1
+~
+~
+0 -1 11198
+D2
+~
+~
+0 -1 11202
+D3
+~
+~
+0 -1 11200
+D5
+~
+~
+0 -1 11205
+S
+#11198
+Hanger Corridor~
+~
+0 536870912 1
+D1
+~
+~
+0 -1 11199
+D3
+~
+~
+0 -1 11197
+S
+#11199
+Hanger~
+This large and massive hanger echoes with the various sounds of engineers
+at work. Spread out across the bay, the innards of a dozen ships being
+repaired lay strewn across the floor. Towards the hanger's entrance there
+seems to be ample space to land. 
+~
+0 536870912 1
+D1
+~
+~
+0 -1 11203
+D10
+~
+akula~
+526336 -1 11161
+S
+#11200
+Storage Corridor~
+~
+0 536870912 1
+D1
+~
+~
+0 -1 11197
+D3
+~
+~
+0 -1 11201
+S
+#11201
+Storage Room~
+~
+0 537395200 1
+D1
+~
+~
+0 -1 11200
+S
+#11202
+Hallway~
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11197
+D3
+~
+~
+0 -1 11204
+S
+#11203
+Ship's Lounge~
+This spacious and comfortable lounge houses plenty of room for customers
+and friends to relax while waiting for armor or just to sit and talk.
+Boasting all the amenities of any rich corporation, the wealth of the
+owning company is reflected in the rich decor around the room. The air
+filtering in to the room is just the right temperature, while the music
+gently filtered over the speaker system seems hardly noticeable. 
+~
+0 545259520 1
+D3
+~
+~
+0 -1 11199
+S
+#11204
+Mess Hall~
+~
+0 536870912 1
+D1
+~
+~
+0 -1 11202
+S
+#11205
+Boarding Ramp~
+~
+0 536870912 1
+D4
+~
+~
+0 -1 11197
+S
+#0
+
+
+#RESETS
+O 1 5099 1 11113
+M 1 10501 2 11128
+G 1 32280 1
+G 1 32210 1
+G 1 10313 1
+G 1 10497 1
+G 1 32234 1
+G 1 32281 1
+O 1 9001 1 11128
+O 1 38 1 11122
+M 1 11112 2 11184
+G 1 32280 1
+G 1 32281 1
+G 1 324 1
+G 1 10497 1
+G 1 900 1
+O 1 38 1 11203
+S
+
+
+#SHOPS
+0
+
+
+#REPAIRS
+0
+
+
+#SPECIALS
+S
+
+
+#$

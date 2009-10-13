@@ -1,0 +1,42 @@
+#SHIP
+Name         Frigate Schrodier I~
+Filename     frigate.0001~
+Description  ~
+Owner        ~
+Pilot        ~
+Copilot      ~
+Class        1
+Tractorbeam  0
+Shipyard     0
+Hanger       0
+Turret1      0
+Turret2      0
+Statet0      0
+Statet1      0
+Statet2      0
+Laserstr     100
+Missiles     20
+Maxmissiles  20
+Lastdoc      0
+Firstroom    0
+Lastroom     0
+Shield       0
+Maxshield    800
+Hull         1000
+Maxhull      1000
+Maxenergy    10000
+Hyperspeed   160
+Comm         0
+Sensor       0
+Astro_array  0
+Realspeed    80
+Type         0
+Cockpit      0
+Entrance     0
+Objectnum    0
+Shipstate    0
+Missilestate 0
+Energy       10000
+End
+
+#END

@@ -1,0 +1,2401 @@
+#AREA   Coruscant - Monument Plaza~
+
+
+
+#AUTHOR Exar/Durga~
+
+#RANGES
+50 100 0 103
+$
+
+#FLAGS
+0
+
+#ECONOMY 0 31294418
+
+#MOBILES
+#26000
+droid remote small floating~
+a modified remote~
+A droid is floating around here, monitoring you.
+~
+This is an older model remote that has been modified to act as a shop-
+keeper in this clothing store.  From time to time it *piffs* around the
+room, but it always keeps its central scanner on you.
+~
+33554435 0 0 Z
+1 0 0 0d0+0 0d0+0
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 1050624 0 0 0
+0 0 0 0 0 0 0 0
+#26001
+plaza guard~
+a plaza guard~
+A plaza guard stands at her post.
+~
+~
+3 0 0 Z
+50 0 -25 10d10+500 5d4+2
+0 0
+8 8 2
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 0
+10 10 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#26002
+plaza guard~
+a plaza guard~
+A plaza guard stands at his post.
+~
+~
+3 0 0 Z
+50 0 -25 10d10+500 5d4+2
+0 0
+8 8 1
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#26003
+plaza guard~
+a plaza guard~
+A plaza guard stands at his post.
+~
+~
+3 0 0 Z
+40 0 0 8d10+400 4d4+2
+0 0
+8 8 1
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 0
+8 8 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+> entry_prog obliki~
+say Hey! What are YOU doing here Mr Obliki?!?
+kill obliki
+~
+|
+#26004
+quarren store clerk~
+quarren store clerk~
+A quarren store clerk organizes her shop.
+~
+~
+33554435 0 0 Z
+20 0 50 4d10+200 2d4+2
+0 0
+8 8 0
+13 13 13 13 13 13 13
+0 0 0 0 0
+15 0 0 0 16777216 16777216 0
+4 4 0 0 1050624 0 0 0
+0 0 0 0 0 0 0 0
+#26005
+receptionist~
+a receptionist~
+A receptionist sits at her desk.
+~
+~
+3 0 0 Z
+50 0 -25 10d10+500 5d4+2
+0 0
+8 8 2
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 0
+10 10 0 0 3072 0 0 0
+0 0 0 0 0 0 0 0
+#26006
+shopkeeper droid~
+a shopkeeper droid~
+A droid is here scanning your purchaces.
+~
+This droid is a very rudimentry humanoid shape. Its voice synthesyser is
+worn out and makes a slight hissing sound when it speaks.
+~
+100663299 0 0 Z
+50 0 -25 0d0+0 0d0+0
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 1050624 0 0 0
+0 0 0 0 0 0 0 0
+#26007
+Hutt~
+a Hutt~
+A Hutt is here discussing business.
+~
+~
+3 0 0 Z
+50 0 -25 10d10+500 5d4+2
+400 0
+8 8 0
+13 13 13 13 13 13 13
+0 0 0 0 0
+4 0 0 0 17 16 0
+10 10 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#26008
+adarian businessman~
+an adarian businessman~
+An adarian businessman is here.
+~
+~
+3 0 0 Z
+30 0 25 6d10+300 3d4+2
+200 0
+8 8 1
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 0
+6 6 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#26009
+Hutt~
+a Hutt~
+A Hutt is checking out plaza operations.
+~
+~
+3 0 0 Z
+60 0 -50 12d10+600 6d4+2
+0 0
+8 8 0
+13 13 13 13 13 13 13
+0 0 0 0 0
+9 0 0 0 524289 524288 0
+12 12 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#26010
+executive~
+an executive~
+An executive is conducting business.
+~
+~
+3 0 0 Z
+20 0 50 4d10+200 2d4+2
+0 0
+8 8 0
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 0
+4 4 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#26011
+bounty hunter twi'lek~
+a bounty hunter~
+A Twi'lek is dressed in battle armor.
+~
+~
+3 0 0 Z
+60 0 -50 12d10+600 6d4+2
+0 0
+8 8 1
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 0
+12 12 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#26012
+plaza guard~
+a plaza guard~
+A plaza guard stands at his post.
+~
+~
+1073741827 0 0 Z
+90 0 -125 18d10+900 9d4+2
+0 0
+8 8 1
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 0
+18 18 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#26013
+shopkeeper droid~
+a shopkeeper droid~
+A droid is here scanning your purchaces.
+~
+This droid is a very rudimentry humanoid shape. Its voice synthesyser is
+worn out and makes a slight hissing sound when it speaks.
+~
+1174405123 0 0 Z
+50 0 -25 0d0+0 0d0+0
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 1050624 0 0 0
+0 0 0 0 0 0 0 0
+#26099
+dummy~
+a newly created dummy~
+Some god abandoned a newly created dummy here.
+~
+~
+1 0 0 Z
+1 0 0 0d0+0 0d0+0
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#0
+
+
+#OBJECTS
+#26000
+map-pad pad datapad blinking~
+a map-pad~
+A datapad of some sort is blinking on the ground.~
+~
+45 0 0
+0 0 0 0
+1 25 2
+E
+map-pad pad datapad blinking~
+O--O
+              |  |
+        O--O  O--O  O--O
+        |  |  |  |  |  |
+        O--O  O--O  O--O
+        |  |  |  |  |  |
+  O--O--O--O--O--O--O--O
+  |  |  |  |  |  |  |  |
+  O--O--O--O--O--O--O--O
+        |  |  |  |  |  |
+  O--O--O--O--O--O--O--O
+  |  |  |  |  |  |  |  |
+  O--O--O--O--O--O--O--O
+        |  |  |  |  |  |
+  O--O--O--O--O--O--O--O
+  |  |  |  |  |  |  |  |
+  O--O--O--O--O--O--O--O
+        |  |  |  |  |  |
+        O--O  O--O  O--O
+        |  |  |  |  |  |
+        O--O  O--O  O--O
+              |  |
+              O--O
+~
+#26001
+shirt tee-shirt t-shirt~
+a t-shirt~
+A thin, white shirt is being trampled on the ground.~
+~
+9 0 9 1
+0 2 0 0
+1 25 2
+E
+t-shirt shirt thin~
+This shirt has the words, "I saw Monument Plaza!" pasted on the front in
+bright letters.  Despite its stupidity, you recall having seen several
+sentients wearing in.
+~
+#26002
+cap hat plastic~
+an adjustable cap~
+A cap has been left here for the scavengers.~
+~
+9 0 17
+0 2 0 0
+1 10 1
+E
+cap adjustable~
+There is a picture of several statues on the front of the cap.  The rest
+is brown and shaped like the mountain peak in the center of the plaza.
+~
+A
+25 1
+#26003
+jacket plastic shiney~
+a plastic jacket~
+A pile of shiney plastic has been discarded here.~
+~
+9 0 9 20
+0 5 0 0
+1 100 10
+E
+jacket plastic ugly shiney~
+~
+E
+jacket plastic ugly shiney~
+This jacket must be the most repulsive peice of clothing you have
+ever layed eyes on.
+~
+#26004
+leg sheath~
+a leg sheath~
+A leg sheath... big deal.~
+~
+15 0 33 128
+15 0 0 0
+1 30 3
+#26005
+superconductor~
+a superconductor~
+A superconductor is used in high energy devices.~
+~
+71 0 1
+0 0 0 0
+1 1000 100
+#26006
+key~
+A key~
+A key is hanging on the wall here.~
+~
+18 33554432 1
+0 0 0 0
+1 0 0
+#26007
+some thin synthafabric satin fabric~
+some thin synthafabric~
+Some thin synthafabric would make a nice shirt~
+~
+74 0 1 4
+1 1 0 0
+1 40 4
+A
+14 10
+A
+36 10
+#26008
+durasteel plating hard leather fabric~
+durasteel plating~
+Durasteel plating was left here.~
+~
+74 0 1 32
+6 6 0 0
+5 75 7
+#26009
+some toughened bantha hide fabric~
+some toughened bantha hide~
+Some toughened bantha hide would make an excellent outermost garment.~
+~
+74 0 1 128
+4 4 0 0
+5 35 3
+#26010
+chemestry set~
+a chemestry set~
+A chemestry set might produce something useful.~
+~
+91 8192 1
+500 0 0 0
+1 25 2
+#26011
+sheet thin silver~
+a sheet of thin silver~
+A sheet of thin silver is stashed away in a corner.~
+~
+75 33554432 1
+0 3 0 0
+2 100 10
+#26012
+keycard~
+a keycard~
+A keycard was dropped here.~
+~
+13 0 16385
+0 0 0 0
+1 0 0
+#26020
+small t-shirt~
+a small t-shirt~
+A small t-shirt is getting trampled.~
+~
+9 262144 9 2
+0 2 0 0
+1 20 2
+A
+2 1
+#26021
+medium t-shirt~
+a medium t-shirt~
+A medium t-shirt is getting trampled.~
+~
+9 -2147475456 9 2
+0 2 0 0
+1 20 2
+#26022
+large t-shirt~
+a large t-shirt~
+A large t-shirt is getting trampled.~
+~
+9 8 9 2
+0 2 0 0
+1 20 2
+A
+2 1
+#26023
+huge t-shirt~
+a huge t-shirt~
+A huge t-shirt is getting trampled.~
+~
+9 8 9 2
+0 2 0 0
+1 20 2
+A
+2 1
+#26024
+a small sweater~
+a small sweater~
+A small sweater is getting stepped on~
+~
+9 270336 9 32
+0 5 0 0
+1 50 5
+A
+27 2
+#26025
+a medium sweater~
+a medium sweater~
+A medium sweater is getting stepped on~
+~
+9 -2146951168 9 32
+0 5 0 0
+1 50 5
+A
+27 2
+#26026
+a large sweater~
+a large sweater~
+A large sweater is getting stepped on~
+~
+9 532480 9 32
+0 5 0 0
+1 50 5
+A
+27 2
+#26027
+a huge sweater~
+a huge sweater~
+A huge sweater is getting stepped on~
+~
+9 8 9 32
+0 5 0 0
+1 50 5
+A
+27 2
+#26028
+small heavy vest~
+a small heavy vest~
+A small heavy vest is somewhat blast resistant.~
+~
+9 262144 9 64
+0 7 0 0
+1 100 10
+A
+14 -10
+#26029
+large heavy vest~
+a large heavy vest~
+A large heavy vest is somewhat blast resistant.~
+~
+9 524288 9 64
+0 7 0 0
+1 100 10
+A
+14 -10
+#26064
+small table~
+a small table~
+A small table is here.~
+~
+12 0 0
+4 0 1 0
+1 0 0
+#26097
+a keycard~
+a keycard~
+A keycard was dropped here.~
+~
+13 0 16385
+0 0 0 0
+1 0 0
+#26098
+The Plaza Deed~
+the plaza deed~
+The Deed of the Plaza is yours to capture~
+~
+84 33554432 1
+0 0 0 0
+1 0 0
+#26099
+dud~
+a newly created dud~
+Some god dropped a newly created dud here.~
+~
+13 0 0
+0 0 0 0
+1 0 0
+#0
+
+
+#ROOMS
+#26000
+The Center of Monument Plaza~
+The ground pushes upwards at the center of this rectangular plaza, showing
+the main feature of the plaza - bare rock.   The plaza was built around
+one of the peaks of the Menari mountain range. Enormous statues are placed
+in orderly fashion throughout the area, most seem to be made of native
+rock from the mountain.   Around the perimeter of the plaza are a
+multitude of small stores and shops.
+~
+0 0 1
+D0
+~
+~
+0 -1 26001
+D1
+~
+~
+0 -1 26004
+D2
+~
+~
+0 -1 26002
+D3
+~
+~
+0 -1 26003
+S
+#26001
+Northern Side of Monument Plaza~
+An average sized statue in the plaza, although huge by any normal
+standards, is of a squat looking alien creature. It is hunched over
+slightly and stands with a cane. At the foot of the monument an
+inscription drones on about this creatures deads. Not exactly exciting bed
+time reading. 
+~
+0 0 1
+D0
+~
+~
+0 -1 26009
+D1
+~
+~
+0 -1 26007
+D2
+~
+~
+0 -1 26000
+D3
+~
+~
+0 -1 26008
+S
+#26002
+The Center of Monument Plaza~
+The ground pushes upwards at the center of this rectangular plaza, showing
+the main feature of the plaza - bare rock.   The plaza was built around
+one of the peaks of the Menari mountain range. Enormous statues are placed
+in orderly fashion throughout the area, most seem to be made of native
+rock from the mountain.   Around the perimeter of the plaza are a
+multitude of small stores and shops.
+~
+0 0 1
+D0
+~
+~
+0 -1 26000
+D1
+~
+~
+0 -1 26006
+D2
+~
+~
+0 -1 26010
+D3
+~
+~
+0 -1 26005
+S
+#26003
+The Center of Monument Plaza~
+The ground pushes in the center of the plaza showing the main feature
+of the plaza - bare bock. The plaza is built surrounding one of the
+peaks of one of the Menari Mountain Range. The surface of the
+mountain is exposed in several places but is most promenant here at
+the true peak. Throught the rest of the plaza are enormous statues,
+ost carved out of the rock. Around the perimeter are a multitude of
+small stores and shops.
+~
+0 0 1
+D0
+~
+~
+0 -1 26008
+D1
+~
+~
+0 -1 26000
+D2
+~
+~
+0 -1 26005
+D3
+~
+~
+0 -1 26027
+S
+#26004
+North of the Guard's Post~
+You stand before an enormous statue. It rises at least 50 stories above the
+peak of this mountain. The statue is of a human wearing a long stone robe
+and holding a lightsaber out in front of him. A guards post is to the
+south of here. A large rock juts out of the ground to the south west.
+~
+0 0 1
+D0
+~
+~
+0 -1 26007
+D1
+~
+~
+0 -1 26017
+D2
+~
+~
+0 -1 26006
+D3
+~
+~
+0 -1 26000
+S
+#26005
+The Center of Monument Plaza~
+The ground pushes in the center of the plaza showing the main feature
+of the plaza - bare bock. The plaza is built surrounding one of the
+peaks of one of the Menari Mountain Range. The surface of the
+mountain is exposed in several places but is most promenant here at
+the true peak. Throught the rest of the plaza are enormous statues,
+ost carved out of the rock. Around the perimeter are a multitude of
+small stores and shops.
+~
+0 0 1
+D0
+~
+~
+0 -1 26003
+D1
+~
+~
+0 -1 26002
+D2
+~
+~
+0 -1 26013
+D3
+~
+~
+0 -1 26026
+S
+#26006
+At the Guard's Post~
+The guards post is a flat platform raised slightly above the the main
+walkways. To the north is one of the larger statues in the plaza to the
+west the mountain juts out above the floor forming a high peak. 
+~
+0 0 1
+D0
+~
+~
+0 -1 26004
+D1
+~
+~
+0 -1 26016
+D2
+~
+~
+0 -1 26014
+D3
+~
+~
+0 -1 26002
+S
+#26007
+Northern Side of Monument Plaza~
+You stand just north of one of the largest statues in the plaza. The air
+high up on the mountain is thin but clean and fresh. Refreshing compared
+to the heavy stale air found throughout the rest of the coruscant. 
+~
+0 0 1
+D0
+~
+~
+0 -1 26011
+D1
+~
+~
+0 -1 26018
+D2
+~
+~
+0 -1 26004
+D3
+~
+~
+0 -1 26001
+S
+#26008
+Northern Side of Monument Plaza~
+You stand in a northern area of monument plaza. All around the plaza is
+uroounded by shops selling all kinds of overpriced things. Throught the
+center of the plaza are enourmous monuments erected in the past. The
+largest monument in the plaza lies directly to the west of you. It appears
+alot newer than most of the statues here but seems to be poorly kept
+compared to the rest.
+~
+0 0 1
+D0
+~
+~
+0 -1 26012
+D1
+~
+~
+0 -1 26001
+D2
+~
+~
+0 -1 26003
+D3
+~
+~
+0 -1 26028
+S
+#26009
+Northern Side of Monument Plaza~
+You stand on the northetn end of monument plaza, the popular mall built
+high on a peek in the Menari Mountain range in the southern part of
+Coruscant. To the south are many large monuments depicting heroes (and
+villians) of the past. In the center of the plaza the peek of the mountain
+pushes up above the palace floor coming to a high peak. To the north a
+wide walkway leads to a lookout point on the mountain
+~
+0 0 1
+D0
+~
+~
+0 -1 26041
+D1
+~
+~
+0 -1 26011
+D2
+~
+~
+0 -1 26001
+D3
+~
+~
+0 -1 26012
+S
+#26010
+Southern Side of Monument Plaza~
+You stand in a southern part of Monument Plaza, one of Coruscants many
+tourist traps. The center of the squre is just to the north where the peak
+of a Menari Mountain pushes through the center of the plaza. Around the
+perimeter of the plaza are dozens of small shops. Scattered throughout the
+plaza are many enormous statues.
+~
+0 0 1
+D0
+~
+~
+0 -1 26002
+D1
+~
+~
+0 -1 26014
+D2
+~
+~
+0 -1 26022
+D3
+~
+~
+0 -1 26013
+S
+#26011
+Northern Side of Monument Plaza~
+You stand along the northern edge of monument plaza. To the south of you
+lie several monuments of astronomical size. To your north and around the
+perimiter of the plaza are many shops. You stand along the northern edge
+of monument plaza. To the south of you lie several monuments of
+astronomical size. To your north and around the perimiter of the plaza are
+many shops. A large rock extends high out of the center of the paza.
+~
+0 0 1
+D1
+~
+~
+0 -1 26019
+D2
+~
+~
+0 -1 26007
+D3
+~
+~
+0 -1 26009
+S
+#26012
+Northern Side of Monument Plaza~
+You stand on the northetn end of monument plaza, the popular mall built
+high on a peek in the Menari Mountain range in the southern part of
+Coruscant. To the south are many large monuments depicting heroes (and
+villians) of the past. In the center of the plaza the peek of the mountain
+pushes up above the palace floor coming to a high peak. To the north a
+wide walkway leads to a lookout point on the mountain 
+~
+0 0 1
+D0
+~
+~
+0 -1 26040
+D1
+~
+~
+0 -1 26009
+D2
+~
+~
+0 -1 26008
+D3
+~
+~
+0 -1 26029
+S
+#26013
+Southern Side of Monument Plaza~
+You stand in a southern part of Monument Plaza, one of Coruscants many
+tourist traps. The center of the squre is just to the north where the peak
+of a Menari Mountain pushes through the center of the plaza. Around the
+perimeter of the plaza are dozens of small shops. Scattered throughout the
+plaza are many enormous statues.
+~
+0 0 1
+D0
+~
+~
+0 -1 26005
+D1
+~
+~
+0 -1 26010
+D2
+~
+~
+0 -1 26023
+D3
+~
+~
+0 -1 26025
+S
+#26014
+Southern Side of Monument Plaza~
+A small group of statues is here clustered together. A plaque on the bottom
+tells the story of the battle of Endor. The people depicted in this
+monument were responsible for destroying the second death star and ending
+the reign of the self proclaimed emp 
+~
+0 0 1
+D0
+~
+~
+0 -1 26006
+D1
+~
+~
+0 -1 26015
+D2
+~
+~
+0 -1 26021
+D3
+~
+~
+0 -1 26010
+S
+#26015
+Southeast Corner of Monument Plaza~
+Standing here, southeast of the center of the plaza, you can see most
+of the square.  Far to the northeast is an eatery: the sign is too small
+to read from here, though.  To your south is a mid-sized statue, and to
+the west are several more statues.
+~
+0 0 1
+D0
+~
+~
+0 -1 26016
+D1
+~
+~
+0 -1 26075
+D2
+~
+~
+0 -1 26020
+D3
+~
+~
+0 -1 26014
+S
+#26016
+East of the Guard's Post~
+Here, directly east of the guard post, you stand at the base of one of
+the smallest statues in the plaza.  It is one of an Old Republic Officer,
+dressed in full ceremonial garb, saluting the center of the square.  As
+usual there is a plaque at the bottom of the statue giving details about
+why this man deserved a place here.  The plaza continues north and south,
+and the guard post is to the west.
+~
+0 0 1
+D0
+~
+~
+0 -1 26017
+D1
+~
+~
+0 -1 26076
+D2
+~
+~
+0 -1 26015
+D3
+~
+~
+0 -1 26006
+S
+#26017
+Northeast of the Guard's Post~
+You are standing just to the northeast of a guard's post.  Apparently
+even here, in this great monument there is still a need for officials
+of the law.  There is a lesser statue to your north and south, and a
+rather large one to your west.
+~
+0 0 1
+D0
+~
+~
+0 -1 26018
+D1
+~
+~
+0 -1 26077
+D2
+~
+~
+0 -1 26016
+D3
+~
+~
+0 -1 26004
+S
+#26018
+Northeast Corner of Monument Plaza~
+You are standing at the eastern most edge of Monument Plaza, and slightly
+to the north of its center.  You are directly at the base of one of the
+lesser statues of the Plaza, but it still dwarfs you in comparison.  A
+plaque on its side gives details about the person's life and great
+acheivements, but it must have been written by a mark 2 power droid, because
+no seems to be able to stave off boredom for more than 3 or 4 lines.
+The Plaza continues to the north, south, and west.
+~
+0 0 1
+D0
+~
+~
+0 -1 26019
+D1
+~
+~
+0 -1 26078
+D2
+~
+~
+0 -1 26017
+D3
+~
+~
+0 -1 26007
+E
+plaque~
+~
+S
+#26019
+Northeast Corner of Monument Plaza~
+You are standing in the most northerly section of Monument Plaza. A row of
+shops lie immediatly to your north and lead off westward. Several other
+citizens are here, admiring the square and the sheer beauty of the area. 
+Compared to much of the rest of Coruscant, this is a virtual paradise.  
+~
+0 0 1
+D0
+~
+~
+0 -1 26037
+D1
+~
+~
+0 -1 26079
+D2
+~
+~
+0 -1 26018
+D3
+~
+~
+0 -1 26011
+S
+#26020
+Southeast Corner of Monument Plaza~
+You are now standing in the more south easterly corner of Monument
+Plaza.  A mid-sized statue, meaning 30-40 stories, looms above you in
+testament to some ancient hero.  This particular statue is non-human,
+posessing four arms, six legs, and a head protruding from its underbelly.
+As usual there is a plaque at its base explaining its story.  The plaza
+extends before you to the north and the west.
+~
+0 0 1
+D0
+~
+~
+0 -1 26015
+D1
+~
+~
+0 -1 26074
+D2
+~
+~
+0 -1 336
+D3
+~
+~
+0 -1 26021
+D8
+~
+~
+0 -1 447
+S
+#26021
+Southern Side of Monument Plaza~
+You stand in the southern part of monument plaza close to the easern
+corner. The plaza hotel is directly to the south of you. To the south east
+is an entrance to the turbocar system. Shops lie to your west and around
+the outside walls of the plaza. Many enormous monuments can be found
+throughout hte plaza to the north. 
+~
+0 0 1
+D0
+~
+~
+0 -1 26014
+D1
+~
+~
+0 -1 26020
+D2
+~
+~
+0 -1 26050
+D3
+~
+~
+0 -1 26022
+S
+#26022
+Southern Side of Monument Plaza~
+You stand upon the southern side of Monument Plaza in the Menari Mountain
+Range on Coruscant. This large mall is built around the tip of one of the
+peaks in the mountain range. Directly to the south is a row of shops which
+extends around the plaza. Throught the plaza are many enormous statues.
+Most depict Heroes of the old Republic although there are many newer ones
+built by the Empire in their short reign and by the newly reformed
+Republic. The turbocar system and and plaza hotel are to the further to
+the east. The offices are at the western corner.
+~
+0 0 1
+D0
+~
+~
+0 -1 26010
+D1
+~
+~
+0 -1 26021
+D2
+~
+~
+0 -1 26073
+D3
+~
+~
+0 -1 26023
+S
+#26023
+Southern Side of Monument Plaza~
+You stand upon the southern side of Monument Plaza in the Menari Mountain
+Range on Coruscant. This large mall is built around the tip of one of the
+peaks in the mountain range. Directly to the south is a row of shops which
+extends around the plaza. Throught the plaza are many enormous statues.
+Most depict Heroes of the old Republic although there are many newer ones
+built by the Empire in their short reign and by the newly reformed
+Republic. The turbocar system and and plaza hotel are to the further to
+the east. The offices are at the western corner.
+~
+0 0 1
+D0
+~
+~
+0 -1 26013
+D1
+~
+~
+0 -1 26022
+D2
+~
+~
+0 -1 26072
+D3
+~
+~
+0 -1 26024
+S
+#26024
+Southern Side of Monument Plaza~
+You stand upon the southern side of Monument Plaza in the Menari Mountain
+Range on Coruscant. This large mall is built around the tip of one of the
+peaks in the mountain range. Directly to the south is a row of shops which
+extends around the plaza. Throught the plaza are many enormous statues.
+Most depict Heroes of the old Republic although there are many newer ones
+built by the Empire in their short reign and by the newly reformed
+Republic. The turbocar system and and plaza hotel are to the further to
+the east. The offices are at the western corner.
+~
+0 0 1
+D0
+~
+~
+0 -1 26025
+D1
+~
+~
+0 -1 26023
+D2
+~
+~
+0 -1 26071
+D3
+~
+~
+0 -1 26030
+S
+#26025
+Southern Side of Monument Plaza~
+The statue hear is one of the larger statues in the plaza. It is a
+depiction of one of the greatest architects in the history of coruscant
+who designed several of the older buildings in the cities core. A few of
+wich still stand in their original form ( although most of them have been
+built over top of and are buried beneath several newer structures.
+~
+0 0 1
+D0
+~
+~
+0 -1 26026
+D1
+~
+~
+0 -1 26013
+D2
+~
+~
+0 -1 26024
+D3
+~
+~
+0 -1 26031
+S
+#26026
+West Side of Monument Plaza~
+You stand before an old statue that is one of the smaller ones. It depicts
+a woman scratching her chin and gazing up at the stars. You stand before
+an old statue that is one of the smaller ones. It depicts a woman
+scratching her chin and gazing up at the stars. The plaque tells the story
+of this womans many technological achievements which included an algorithm
+that enabled artificial inteligence units to run at almost 100th of their
+previous size.
+~
+0 0 1
+D0
+~
+~
+0 -1 26027
+D1
+~
+~
+0 -1 26005
+D2
+~
+~
+0 -1 26025
+D3
+~
+~
+0 -1 26032
+S
+#26027
+West Side of Monument Plaza~
+This raised platform is used as a second security post during peek tourist
+seasons. It was built manly in response to the defacing of Palpatines
+statue although it has had little effect to this end. Most guards simply
+turn their heads to such acts. 
+~
+0 0 1
+D0
+~
+~
+0 -1 26028
+D1
+~
+~
+0 -1 26003
+D2
+~
+~
+0 -1 26026
+D3
+~
+~
+0 -1 26033
+S
+#26028
+Northern Side of Monument Plaza~
+The enormous statue before towers above all the others in the statue and is
+a true sign of the hubris the man it depicts once displayed. It is a
+monument to the late Senator Palpatine, the self proclaimed emporer who
+died 20 years ago in the battle of Endor. The statue was built during his
+reign here on Coruscant probably under his direct orders. The inscription
+is illegible underneath layers of nasty graffitti.
+~
+0 0 1
+D0
+~
+~
+0 -1 26029
+D1
+~
+~
+0 -1 26008
+D2
+~
+~
+0 -1 26027
+D3
+~
+~
+0 -1 26034
+S
+#26029
+Northern Side of Monument Plaza~
+You stand along the northernmost edge of monument plaza. To the north-west
+is the entrance to Chat's Fast Food Palace. Beyond that are various shops
+encircling the remainder of the plaza. Directly to the south of you is one
+of the largest monuments in the plaza. Others are scattered throughout the
+south and east of here. 
+~
+0 0 1
+D1
+~
+~
+0 -1 26012
+D2
+~
+~
+0 -1 26028
+D3
+~
+~
+0 -1 26035
+S
+#26030
+Southwest Corner of Monument Plaza~
+You stand in the southeast corner of monument plaza, one of the nicer areas
+of coruscant located on top of one of the menari mountains. To the west is
+the entrance to the plaza offices. Far to the east is the plaza hotel and
+turbocar station. There is a monument here that depicts a verpine shaking
+hands with a mon calamarian. Throughout the plaza are dozens of other
+monuments, some towering stories high.
+~
+0 0 1
+D0
+~
+~
+0 -1 26031
+D1
+~
+~
+0 -1 26024
+D2
+~
+~
+0 -1 26080
+D3
+~
+~
+1 -1 26057
+S
+#26031
+Southwest Corner of Monument Plaza~
+You stand along the western edge of Monument Plaza, the large mall built
+around the peak of one of the Menari Mountains on Coruscant. Because of
+its location it is one of the nicer areas of coruscant. A freesh breeze
+and clean air are a refreshing change to the busy dirty streets. The
+preimiter of the plaza is line with shops while the center of the plaza is
+filled with enourmous monuments of old heroes. 
+~
+0 0 1
+D0
+~
+~
+0 -1 26032
+D1
+~
+~
+0 -1 26025
+D2
+~
+~
+0 -1 26030
+D3
+~
+~
+0 -1 26066
+S
+#26032
+West Side of Monument Plaza~
+You stand along the western edge of Monument Plaza, the large mall built
+around the peak of one of the Menari Mountains on Coruscant. Because of
+its location it is one of the nicer areas of coruscant. A freesh breeze
+and clean air are a refreshing change to the busy dirty streets. The
+preimiter of the plaza is line with shops while the center of the plaza is
+filled with enourmous monuments of old heroes.  
+~
+0 0 1
+D0
+~
+~
+0 -1 26033
+D1
+~
+~
+0 -1 26026
+D2
+~
+~
+0 -1 26031
+D3
+~
+~
+0 -1 26067
+S
+#26033
+West Side of Monument Plaza~
+You stand along the western edge of Monument Plaza, the large mall built
+around the peak of one of the Menari Mountains on Coruscant. Because of
+its location it is one of the nicer areas of coruscant. A freesh breeze
+and clean air are a refreshing change to the busy dirty streets. The
+preimiter of the plaza is line with shops while the center of the plaza is
+filled with enourmous monuments of old heroes.  
+~
+0 0 1
+D0
+~
+~
+0 -1 26034
+D1
+~
+~
+0 -1 26027
+D2
+~
+~
+0 -1 26032
+D3
+~
+~
+0 -1 26068
+S
+#26034
+Northwest Corner of Monument Plaza~
+You are walking along the Western end of monument plaza. Directly to your
+east is an enormous statue of a well known if not well liked hooded
+figure. Shops are all alogn the four sides of the plaza. To the far south
+east is the plaza hotel and transit station. 
+~
+0 0 1
+D0
+~
+~
+0 -1 26035
+D1
+~
+~
+0 -1 26028
+D2
+~
+~
+0 -1 26033
+D3
+~
+~
+0 -1 26069
+S
+#26035
+Northwest Corner of Monument Plaza~
+You stand in the northwest corner of Monument Plaza. It sports some of the
+largest statues in the Galaxy but the bigger attaction for the locals is
+the fact that its one of the few places in Coruscant you can actually
+touch bare rock in its natural state. A restaurant is to the north and
+many shops are to the west and south of here. 
+~
+0 0 1
+D0
+~
+~
+0 -1 26047
+D1
+~
+~
+0 -1 26029
+D2
+~
+~
+0 -1 26034
+D3
+~
+~
+0 -1 26070
+S
+#26036
+Inside a Souvenir Shop~
+You are standing in front of a rack of cheap clothing and clothing-
+related merchandise.  Most of the items are inexpensive T-Shirts
+plastered with ill-thought out slogans and repulsive logos.  A floating
+droid which seems to be a modified remote shoots around over your head
+making notes of all your purchases and charging you for them.  To the
+north is a library of some kind and to the east is an exit.
+~
+0 8 1
+D0
+~
+~
+0 -1 26038
+D1
+~
+~
+0 -1 26037
+S
+#26037
+The Checkout Counter~
+The checkout counter is little more than a relic now, as people pay
+as they go nowadays.  Each part of this souvenir shop specializes in
+a different genre of gift.  To your immediate north are holo-images
+of the Plaza from different angles, to the northwest are datadisks
+containing stories about the statues that eternally dwell here.  To
+the west is a small clothing section, with T-shirts bearing logos
+such as "I saw Monument Plaza" and other equally unimaginative
+phrases.
+~
+0 8 1
+D0
+~
+~
+0 -1 26039
+D2
+~
+~
+0 -1 26019
+D3
+~
+~
+0 -1 26036
+S
+#26038
+The Back of a Souvenir Shop~
+Here, in the small back corner of Heff's Souvenir shop, lies a largly
+unorganised, but amazingly unique, collection of datatapes.  Each
+tape , no more than two inches square, contains the sotry of one of the
+statues in the Plaza.  Few shoppers notice this trove of treasure, and
+fewer still stop to examine it.  There are tapes here from some of the
+great authors of all time, spanned the centuries, even the eons in some
+cases!  Surely the price charged here is but a fraction of the tapes'
+true value.  To your south is a T-shirt stand and to the east is the
+visuals section.
+~
+0 8 1
+D1
+~
+~
+0 -1 26039
+D2
+~
+~
+0 -1 26036
+S
+#26039
+The Back of a Souvenir Shop~
+Here, at the back of the shop, there are literally hundreds of images
+of the Plaza frozen in holocubes.  Every conceivable angle, along with
+a few utterly unconceivable, has been recorded and put on sale here.
+A vid-term on the wall flickers through what would seem to be a list of
+all the images captured here.  To your south is the checkout counter
+and to the west is a small collection of data tapes.
+~
+0 8 1
+D2
+~
+~
+0 -1 26037
+D3
+~
+~
+0 -1 26038
+S
+#26040
+Plaza Walkway~
+This walkway extends north from the plaza between two buildings. It ends at
+get ammo back ammo railing to the north past which you can see the glow of
+the city far bellow. To the south many statues tower over the main part of
+the plaza.
+~
+0 0 1
+D0
+~
+~
+0 -1 26045
+D1
+~
+~
+0 -1 26041
+D2
+~
+~
+0 -1 26012
+S
+#26041
+Plaza Walkway~
+This walkway extends north from the plaza between two buildings. It ends at
+get ammo back ammo railing to the north past which you can see the glow of
+the city far bellow. To the south many statues tower over the main part of
+the plaza.
+~
+0 0 1
+D0
+~
+~
+0 -1 26044
+D2
+~
+~
+0 -1 26009
+D3
+~
+~
+0 -1 26040
+S
+#26042
+Plaza Lookout~
+This has to be one of the most beautiful spots on Coruscant. The lookout is
+on the top of one of the Menari mountains. To the north and far bellow the
+lights of imperial city sretch from the base of the mountain as far as the
+eye can see. To the east and west many snow covered mounain peaks push up
+into the haze. The air is clean and fresh and the cool breeze is very
+refreshing.
+~
+0 0 1
+D1
+~
+~
+0 -1 26043
+D2
+~
+~
+0 -1 26045
+S
+#26043
+Plaza Lookout~
+This has to be one of the most beautiful spots on Coruscant. The lookout is
+on the top of one of the Menari mountains. To the north and far bellow the
+lights of imperial city sretch from the base of the mountain as far as the
+eye can see. To the east and west many snow covered mounain peaks push up
+into the haze. The air is clean and fresh and the cool breeze is very
+refreshing.
+~
+0 0 1
+D2
+~
+~
+0 -1 26044
+D3
+~
+~
+0 -1 26042
+S
+#26044
+Plaza Walkway~
+This walkway extends north from the plaza between two buildings. It ends at
+get ammo back ammo railing to the north past which you can see the glow of
+the city far bellow. To the south many statues tower over the main part of
+the plaza.
+~
+0 0 1
+D0
+~
+~
+0 -1 26043
+D2
+~
+~
+0 -1 26041
+D3
+~
+~
+0 -1 26045
+S
+#26045
+Plaza Walkway~
+This walkway extends north from the plaza between two buildings. It ends at
+a railing to the north past which you can see the glow of the city far
+bellow. To the south many statues tower over the main part of the plaza.
+~
+0 0 1
+D0
+~
+~
+0 -1 26042
+D1
+~
+~
+0 -1 26044
+D2
+~
+~
+0 -1 26040
+S
+#26046
+The Bar~
+There are five stools here, in front of bar.  Other patrons wander around,
+looking out the window from time to time and admiring the great statues of
+Monument Plaza.  The barkeep looks far more civilized than most you have seen,
+and serves up drinks with a smile.  A plethora of different drinks line
+the shelves behind him, suited for all tastes and all races.
+~
+0 0 1
+D0
+~
+~
+0 -1 26049
+D3
+~
+~
+0 -1 26047
+S
+#26047
+The Checkout Counter~
+You stand at the checkout counter to Chat's Fast Food Palace.  Chat
+himself is manning the credit-chip scanner, smiling and shaking hands all
+the while.  The line of people move forward as they slip their credit-chip
+past the scanner and quickly exit.  From their haste, you can guess the
+meal won't be the most memorable part of their visit here.
+~
+0 0 1
+D0
+~
+~
+0 -1 26048
+D1
+~
+~
+0 -1 26046
+D2
+~
+~
+0 -1 26035
+S
+#26048
+At a Plastic Table~
+This portion of the Chat's fast food palace is dominated by a cheap
+plastic table.  In its center a holo-image of a human female asks for
+your order.  To the east you can see a similar scene, and to the south
+lies the checkout counter and Monument Plaza.
+~
+0 0 1
+D1
+~
+~
+0 -1 26049
+D2
+~
+~
+0 -1 26047
+S
+#26049
+At a Plastic Table~
+A large, cheap-looking plastic table dominates this part of the fast food
+restaurant. At its center a holo-image of a human waitress in a short skirt
+asks for your order, and then waits patiently with a smile.  You can see
+another similar table to west, and the view of Monument Plaza is only slightly
+spoiled by the dirty window through which you can see it to the south.
+~
+0 0 1
+D2
+~
+~
+0 -1 26046
+D3
+~
+~
+0 -1 26048
+S
+#26050
+Entrance to Plaza Hotel~
+You stand in a wide hallway that stretches from the a set of double doors
+to the north to the lobby to the south The room is decorated with many
+paintings in protective casings and a plush green carpet. 
+~
+0 12 1
+D0
+~
+~
+0 -1 26021
+D2
+~
+~
+0 -1 26051
+S
+#26051
+Plaza Hotel Lobby~
+The hotel lobby is a large room decorated with a lush green carpet several
+paintings and a few musch smaller versions of the monuments located
+outside. There is large hotel desk on the west wall. An exit to west leads
+to a shop. 
+~
+0 8 1
+D0
+~
+~
+0 -1 26050
+D1
+~
+~
+0 -1 448
+D2
+~
+~
+0 -1 26052
+S
+#26052
+Turbolift Up~
+This small turbolift is nicely decorated with an emorald carpet and
+panneled walls. It rides quickly and swiftly to the next level and then
+pauses waiting for you to leave.
+~
+0 8 1
+D0
+~
+~
+0 -1 26053
+S
+#26053
+Hotel Hallway~
+The hallway is decorated much like the rest of the hotel with green
+carpetting and paintings an holographs of the plaza and the monuments.
+~
+0 8 1
+D0
+~
+~
+0 -1 26055
+D2
+~
+~
+0 -1 26054
+S
+#26054
+Turbolift Down~
+This small turbolift is nicely decorated with an emorald carpet and
+panneled walls. It rides quickly and swiftly to the next level and then
+pauses waiting for you to leave. 
+~
+0 8 1
+D0
+~
+~
+0 -1 26051
+S
+#26055
+Hotel Hallway~
+The hallway is decorated much like the rest of the hotel with green
+carpetting and paintings an holographs of the plaza and the monuments.
+~
+0 8 1
+D0
+~
+~
+8388647 -1 26056
+D1
+~
+~
+7 -1 26056
+D2
+~
+~
+0 -1 26053
+D3
+~
+~
+8388647 -1 26056
+S
+#26056
+A Hotel Room~
+~
+0 8388616 1
+D3
+~
+~
+0 -1 26055
+S
+#26057
+Plaza Reception~
+~
+0 4 1
+D1
+~
+~
+1 -1 26030
+D3
+~
+~
+0 -1 26058
+S
+#26058
+Stairs to the Offices~
+~
+0 8 1
+D1
+~
+~
+0 -1 26057
+D4
+~
+~
+0 -1 26059
+S
+#26059
+Top of the Stairs~
+~
+0 8 1
+D3
+~
+~
+0 -1 26060
+D5
+~
+~
+0 -1 26058
+S
+#26060
+A Hallway~
+~
+0 8 1
+D0
+~
+~
+0 -1 26065
+D1
+~
+~
+0 -1 26059
+D2
+~
+~
+0 -1 26064
+D3
+~
+~
+0 -1 26061
+S
+#26061
+A Hallway~
+~
+0 8 1
+D0
+~
+~
+0 -1 26062
+D1
+~
+~
+0 -1 26060
+D2
+~
+~
+8388647 26097 26063
+S
+#26062
+An Office~
+~
+0 8 1
+D2
+~
+~
+0 -1 26061
+S
+#26063
+File Room~
+~
+0 8 1
+D0
+~
+~
+3 -1 26061
+S
+#26064
+An Office~
+~
+0 8 1
+D0
+~
+~
+0 -1 26060
+S
+#26065
+An Office~
+~
+0 8 1
+D2
+~
+~
+0 -1 26060
+S
+#26066
+A Wine Shop~
+This shop is like most of the shops here in the plaza: over decorated with
+tacky tourist stuff and overpriced. As soon as you walk in the door you
+are hounded by an attendant droid who "knows just what you need". The weak
+willed usually end up leaving with far less money and several things that
+they didn't want in the first place. 
+~
+0 12 1
+D1
+~
+~
+0 -1 26031
+S
+#26067
+An Adult Only Store~
+This shop is like most of the shops here in the plaza: over decorated with
+tacky tourist stuff and overpriced. As soon as you walk in the door you
+are hounded by an attendant droid who "knows just what you need". The weak
+willed usually end up leaving with far less money and several things that
+they didn't want in the first place.
+~
+0 12 1
+D1
+~
+~
+0 -1 26032
+S
+#26068
+A Toy Store~
+This shop is like most of the shops here in the plaza: over decorated with
+tacky tourist stuff and overpriced. As soon as you walk in the door you
+are hounded by an attendant droid who "knows just what you need". The weak
+willed usually end up leaving with far less money and several things that
+they didn't want in the first place.
+~
+0 12 1
+D1
+~
+~
+0 -1 26033
+S
+#26069
+A Crafts Store~
+This shop is like most of the shops here in the plaza: over decorated with
+tacky tourist stuff and overpriced. As soon as you walk in the door you
+are hounded by an attendant droid who "knows just what you need". The weak
+willed usually end up leaving with far less money and several things that
+they didn't want in the first place.
+~
+0 12 1
+D1
+~
+~
+0 -1 26034
+S
+#26070
+A Pawn Shop~
+This shop is like most of the shops here in the plaza: over decorated with
+tacky tourist stuff and overpriced. As soon as you walk in the door you
+are hounded by an attendant droid who "knows just what you need". The weak
+willed usually end up leaving with far less money and several things that
+they didn't want in the first place.
+~
+0 12 1
+D1
+~
+~
+0 -1 26035
+S
+#26071
+An Appliance Store~
+This shop is like most of the shops here in the plaza: over decorated with
+tacky tourist stuff and overpriced. As soon as you walk in the door you
+are hounded by an attendant droid who "knows just what you need". The weak
+willed usually end up leaving with far less money and several things that
+they didn't want in the first place. 
+~
+0 12 1
+D0
+~
+~
+0 -1 26024
+S
+#26072
+A Computer Store~
+This shop is like most of the shops here in the plaza: over decorated with
+tacky tourist stuff and overpriced. As soon as you walk in the door you
+are hounded by an attendant droid who "knows just what you need". The weak
+willed usually end up leaving with far less money and several things that
+they didn't want in the first place.
+~
+0 12 1
+D0
+~
+~
+0 -1 26023
+S
+#26073
+a Jewelry Store~
+This shop is like most of the shops here in the plaza: over decorated with
+tacky tourist stuff and overpriced. As soon as you walk in the door you
+are hounded by an attendant droid who "knows just what you need". The weak
+willed usually end up leaving with far less money and several things that
+they didn't want in the first place.
+~
+0 12 1
+D0
+~
+~
+0 -1 26022
+D2
+~
+~
+7 26012 26083
+S
+#26074
+A Clothing Store~
+This shop is like most of the shops here in the plaza: over decorated with
+tacky tourist stuff and overpriced. As soon as you walk in the door you
+are hounded by an attendant droid who "knows just what you need". The weak
+willed usually end up leaving with far less money and several things that
+they didn't want in the first place.
+~
+0 12 1
+D3
+~
+~
+0 -1 26020
+S
+#26075
+A Fabric Shop~
+This shop is like most of the shops here in the plaza: over decorated with
+tacky tourist stuff and overpriced. As soon as you walk in the door you
+are hounded by an attendant droid who "knows just what you need". The weak
+willed usually end up leaving with far less money and several things that
+they didn't want in the first place. 
+~
+0 12 1
+D3
+~
+~
+0 -1 26015
+S
+#26076
+An Electronics Shop~
+This shop is like most of the shops here in the plaza: over decorated with
+tacky tourist stuff and overpriced. As soon as you walk in the door you
+are hounded by an attendant droid who "knows just what you need". The weak
+willed usually end up leaving with far less money and several things that
+they didn't want in the first place. 
+~
+0 12 1
+D1
+~
+~
+7 26006 26082
+D3
+~
+~
+0 -1 26016
+S
+#26077
+A Hobby Shop~
+This shop is like most of the shops here in the plaza: over decorated with
+tacky tourist stuff and overpriced. As soon as you walk in the door you
+are hounded by an attendant droid who "knows just what you need". The weak
+willed usually end up leaving with far less money and several things that
+they didn't want in the first place.
+~
+0 12 1
+D3
+~
+~
+0 -1 26017
+S
+#26078
+A Book Store~
+This shop is like most of the shops here in the plaza: over decorated with
+tacky tourist stuff and overpriced. As soon as you walk in the door you
+are hounded by an attendant droid who "knows just what you need". The weak
+willed usually end up leaving with far less money and several things that
+they didn't want in the first place. 
+~
+0 12 1
+D3
+~
+~
+0 -1 26018
+S
+#26079
+A Shoe Store~
+This shop is like most of the shops here in the plaza: over decorated with
+tacky tourist stuff and overpriced. As soon as you walk in the door you
+are hounded by an attendant droid who "knows just what you need". The weak
+willed usually end up leaving with far less money and several things that
+they didn't want in the first place.
+~
+0 12 1
+D3
+~
+~
+0 -1 26019
+S
+#26080
+A Variety Store~
+This shop is like most of the shops here in the plaza: over decorated with
+tacky tourist stuff and overpriced. As soon as you walk in the door you
+are hounded by an attendant droid who "knows just what you need". The weak
+willed usually end up leaving with far less money and several things that
+they didn't want in the first place.
+~
+0 4 1
+D0
+~
+~
+0 -1 26030
+S
+#26081
+Floating in a void~
+~
+0 4 1
+S
+#26082
+Back Room~
+~
+0 4 1
+D3
+~
+~
+3 -1 26076
+S
+#26083
+The Back Room~
+~
+0 4 1
+D0
+~
+~
+3 -1 26073
+S
+#26084
+Floating in a void~
+~
+0 4 1
+S
+#26085
+Floating in a void~
+~
+0 4 1
+S
+#26086
+Floating in a void~
+~
+0 4 1
+S
+#26087
+Floating in a void~
+~
+0 4 1
+S
+#26088
+Floating in a void~
+~
+0 4 1
+S
+#26089
+Floating in a void~
+~
+0 4 1
+S
+#26090
+Floating in a void~
+~
+0 4 1
+S
+#26091
+Floating in a void~
+~
+0 4 1
+S
+#26092
+Floating in a void~
+~
+0 4 1
+S
+#26093
+Floating in a void~
+~
+0 4 1
+S
+#26094
+Floating in a void~
+~
+0 4 1
+S
+#26095
+Floating in a void~
+~
+0 4 1
+S
+#26096
+Floating in a void~
+~
+0 4 1
+S
+#26097
+Floating in a void~
+~
+0 4 1
+S
+#26098
+Floating in a void~
+~
+0 4 1
+S
+#26099
+Floating in a void~
+~
+0 4 1
+S
+#0
+
+
+#RESETS
+M 0 26000 1 26036
+G 1 26002 1
+G 1 26003 1
+G 1 26001 1
+E 1 32275 1 16
+D 0 26055 0 2
+D 0 26055 1 2
+D 0 26055 3 2
+D 0 26030 3 1
+D 0 26061 2 2
+O 1 26098 1 26063
+D 0 26063 0 1
+O 1 26006 1 26076
+D 0 26076 1 2
+M 1 26001 2 26006
+M 1 26002 2 26027
+M 1 26003 2 26057
+M 1 26005 1 26057
+E 1 26097 1 17
+M 1 26003 2 26057
+D 0 26057 1 0
+M 1 26007 1 26065
+M 1 26008 1 26065
+M 1 26009 1 26058
+O 1 26011 1 26083
+D 0 26083 0 1
+M 1 26012 1 26073
+G 1 26012 1
+D 0 26073 2 2
+M 1 26013 1 26074
+G 1 26023 1
+G 1 26022 1
+G 1 26021 1
+G 1 26020 1
+G 1 26027 1
+G 1 26026 1
+G 1 26025 1
+G 1 26024 1
+G 1 26029 1
+G 1 26028 1
+E 1 58 1 16
+M 1 26006 2 26077
+G 1 26010 1
+M 1 26004 1 26075
+G 1 26007 1
+G 1 26008 1
+G 1 32281 1
+G 1 26009 1
+O 1 26005 1 26082
+D 0 26082 3 1
+M 1 26010 1 26064
+M 1 26011 1 26064
+M 1 26009 1 26064
+O 1 26064 1 26064
+S
+
+
+#SHOPS
+ 26000    0  0  0  0  0     9   0         0 23    ; a modified remote
+ 26004   74  0  0  0  0   120  90         0 23    ; quarren store clerk
+ 26006    0  0  0  0  0   120  90         0 23    ; a shopkeeper droid
+ 26013    0  0  0  0  0   120  90         0 23    ; a shopkeeper droid
+0
+
+
+#REPAIRS
+0
+
+
+#SPECIALS
+S
+
+
+#$

@@ -1,0 +1,54 @@
+#SHIP
+Name         The Outrider~
+Filename     yv-2400~
+Description  ~
+Owner        Strider~
+Pilot        ~
+Copilot      ~
+Class        1
+Tractorbeam  0
+Shipyard     203
+Hanger       6485
+Turret1      6494
+Turret2      6495
+Statet0      0
+Statet1      0
+Statet2      0
+Lasers       6
+Missiles     10
+Maxmissiles  10
+Rockets     0
+Maxrockets  0
+Torpedos     0
+Maxtorpedos  0
+Lastdoc      11206
+Firstroom    6473
+Lastroom     6499
+Shield       0
+Maxshield    500
+Hull         4500
+Maxhull      4500
+Maxenergy    20000
+Hyperspeed   255
+Comm         255
+Chaff        0
+Maxchaff     0
+Sensor       255
+Astro_array  255
+Realspeed    130
+Type         0
+Cockpit      6478
+Coseat       6479
+Pilotseat    6479
+Gunseat      6480
+Navseat      6479
+Engineroom   6487
+Entrance     6473
+Shipstate    0
+Missilestate 0
+Energy       20000
+Manuever     120
+Home         hoth~
+End
+
+#END

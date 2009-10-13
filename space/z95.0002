@@ -1,0 +1,55 @@
+#SHIP
+Name         Z-95 Headhunter 0002~
+Filename     z95.0002~
+Description  ~
+Owner        Public~
+Pilot        ~
+Copilot      ~
+Class        0
+Tractorbeam  0
+Shipyard     45
+Hanger       0
+Turret1      0
+Turret2      0
+Statet0      0
+Statet1      0
+Statet2      0
+Lasers       2
+Missiles     6
+Maxmissiles  6
+Rockets     0
+Maxrockets  0
+Torpedos     0
+Maxtorpedos  0
+Lastdoc      45
+Firstroom    32100
+Lastroom     32100
+Shield       0
+Maxshield    20
+Hull         140
+Maxhull      140
+Maxenergy    2000
+Hyperspeed   0
+Comm         1
+Chaff        0
+Maxchaff     0
+Sensor       50
+Astro_array  50
+Realspeed    100
+Type         0
+Cockpit      32100
+Coseat       32100
+Pilotseat    32100
+Gunseat      32100
+Navseat      32100
+Engineroom   0
+Entrance     32100
+Objectnum    32001
+Shipstate    0
+Missilestate 0
+Energy       2000
+Manuever     86
+Home         ~
+End
+
+#END

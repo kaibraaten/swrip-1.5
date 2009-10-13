@@ -1,0 +1,1398 @@
+#AREA   Hunters Guild~
+
+
+
+#AUTHOR Bleeds~
+
+#RANGES
+0 0 0 103
+$
+
+#RESETMSG A cleaning droid sweeps by, narrowly missing you.~
+
+#FLAGS
+0
+
+#ECONOMY 0 14560142
+
+#MOBILES
+#6600
+guild registerer~
+Registerer~
+A young bounty hunter stands here taking your applications.
+~
+This bounty hunter is fairly young and doing his part to get into guild
+management. Offering to take care of the registraiton of new members.
+~
+1073741825 0 0 Z
+30 0 25 6d10+300 3d9+2
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 67108863 67108863 0
+6 6 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+> speech_prog work~
+' your looking for work eh.
+peer $n
+' well you might have the makings of a hunter 
+' lets see what jobs we have available right now.
+~
+> speech_prog jobs~
+, gets a list from under the counter.
+' hmm right now we have the following contracts.
+, looks at list.
+' a disinegration contract for a small time smuggler.
+' Hmm got a bounty for some old guy thats been oggling girls on adari
+too.
+~
+> speech_prog smuggler~
+' yup he's wanted dead by someone. 
+' payment is 2000 credits upon proof of disinigration
+smile $n
+' interested?
+~
+> speech_prog yes~
+' great , just bring me back proof of disinegration to collect your
+bounty.
+~
+> give_prog smugglers ear~
+if ovnuminv(6611) >= 1
+' ahh great, our employer will be happy
+smile $n
+mpgain $n 3 200
+mpwithdraw 2000
+give 2000 credits $n
+' our payment as agreed upon.
+else 
+' Bah this is useless
+sneer $n
+' i hope you do better in the future
+endif
+mpat 10299 drop all
+mpat 10299 mppurge
+~
+> speech_prog old~
+' yeah some dirty old man been looking up the wrong skirt.
+snicker $n
+' but hes worth 5k , and that almost buys my time too
+smile $n 
+' need to bring back his "privates" as proof
+evil
+~
+> give_prog privates~
+if ovnuminv(7316) >= 1
+'ewww , either way here's yer cash'
+chuckle
+mpwithdraw 5000
+give 5000 credits $n
+mpgain $n 3 10000
+' you might make a good Bounty hunter after all.
+smile $n
+pat $n
+else 
+' bah can't even do a simple job
+frown $n
+' I hope you do better in the future
+endif
+mpat 10299 drop all
+mpat 10299 mppurge
+~
+|
+#6601
+Record runner~
+record runner~
+A plebe is here running for records
+~
+~
+1073741825 0 0 Z
+20 0 50 4d10+200 2d4+2
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+4 4 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#6602
+receptionist~
+the receptionist~
+A receptionist is here accepting your bounty's.
+~
+She looks as tough as nails but what do you expect she works here after
+all.
+~
+1073741825 32 0 Z
+90 0 -125 18d10+900 9d10+2
+0 0
+8 8 0
+20 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+18 18 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+> act_prog gives~
+if ovnuminv(11101) >= 1
+Say Great! I've been waiting for this package for ages!
+mpwithdraw 2500
+give 2500 credits $n
+mpgain $n 5 100000
+mpat 10299 drop all
+mpat 10299 mppurge
+endif
+~
+> act_prog Willard~
+if ovnuminv(11113) >= 1
+nod $n
+say This one has eluded us for a while now.  Thank you. 
+mpwithdraw 10000
+give 10000 credits $n
+mpgain $n 3 5000
+drop 10000 credits
+else
+say That's not Commander Willard!
+endif
+mpat 10299 drop all
+mpat 10299 mppurge
+~
+> act_prog Zuggs~
+if ovnuminv(21812) >= 1
+nod $n
+say This one has eluded us for a while now.  Thank you. 
+mpwithdraw 20000
+give 20000 credits $n
+mpgain $n 3 25000
+drop 20000 credits
+else
+say That's not Commodor Zuggs!
+endif
+mpat 10299 drop all
+mpat 10299 mppurge
+~
+> act_prog Hasti~
+~
+> act_prog Willard~
+if name($n) == Willard
+mpwithdraw 15000
+give $n 15000 credits
+drop 15000 credits
+say Well, Commander Willard...
+mpecho Two guards escort Willard through a door.
+say Good job.
+mpgain $r 3 15000
+mppurge willard
+endif
+~
+> act_prog sleejat~
+if name($n) == Sleejat
+mpwithdraw 40000
+give $n 40000 credits
+drop 40000 credits
+say Excellent work!!
+mpgain $r 3 40000
+mppurge sleejat
+endif
+~
+> act_prog gives~
+if ovnuminv(23150) >= 1
+nod $n
+say We are most pleased with
+your
+work.
+mpwithdraw 25000
+give 25000 credits $n
+drop 25000 credits
+mpgain $n 3 21500
+endif
+if ovnuminv(10216) >= 1
+mpwithdraw 20000
+give 20000 credits $n
+drop 20000 credits
+mpgain $n 3 30000
+endif
+if ovnuminv(28610) >= 1
+nod $n
+say This one has eluded us for a while now.  Thank you. 
+mpwithdraw 20000
+give 20000 credits $n
+mpgain $n 3 20000
+drop 20000 credits
+endif
+if ovnuminv(3202) >= 1
+nod $n
+say This one has eluded us for a while now.  Thank you. 
+mpwithdraw 15000
+give 15000 credits $n
+mpgain $n 3 16000
+drop 20000 credits
+endif
+mpat 10299 drop all
+mpat 10299 purge
+drop 100000000 credits
+~
+|
+#6603
+Salesman~
+salesman~
+A Salesman is here selling his latest wares.
+~
+As fast as new products become available to Bounty Hunters, this salesman
+somehow gets them. Of course they can be a little pricy. But that what you
+pay to get the best i guess. 
+~
+1107296257 0 0 Z
+100 0 -150 20d10+1000 10d4+2
+0 0
+8 8 0
+20 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1048577 3 0
+20 20 0 0 3148800 0 0 0
+0 0 0 0 0 0 0 0
+#6604
+ophelia head nurse woman human~
+Head Nurse Ophelia~
+A slender nurse in a head nurse's slicks
+~
+This alien is glancing around watching his back. Obviously he is wanted by
+someone for something , just if you could figure out by who and for what,
+~
+3 0 0 Z
+25 0 37 5d10+250 2d4+2
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+5 0 0 0 33 32 0
+5 5 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+> act_prog p arrives~
+emote blushes furiously and stammers for a moment... 
+say H-hello there, $n. Nice to see you. 
+emote smiles like there's no tomorrow. 
+say Can I do something for you, dear? 
+emote stands up, brushing out her dress. 
+emote crosses the room to stand before you, looking you over. 
+~
+|
+#6605
+Armist Ghesinn barkeep~
+Armist~
+The barkeep, Armist Ghesinn.
+~
+Standing nearly two meters in height, and brawny as a gundark, Ghesinn is
+an imposing figure. Or, he would be, if he could keep the self-contented
+grin off his face. Like a great-uncle, Armist has trained several of the
+younger hunters in tracking and other areas. He is looked upon kindly by
+the majority of the guild, and is known for breaking up ill-advised fights
+between the often egotistical hunters. Armist was once a reknowned
+Imperial Commando leader, having more than a hundred successful missions
+under his belt, and only a handful of failures.
+~
+1073741825 0 0 Z
+1 0 0 0d0+0 0d0+0
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 -262145 1 0
+0 0 0 0 1059080 0 0 0
+0 0 0 0 0 0 0 0
+#0
+
+
+#OBJECTS
+#6600
+terminal board message~
+a terminal~
+A galactic net message terminal is installed on the wall here.~
+~
+12 1073741824 0
+0 0 0 0
+1 0 0
+E
+terminal board message~
+A small computer terminal is installed on the wall for passengers to
+leave comments to the operators. To learn more about its usage type
+'HELP MESSAGE'.
+~
+#6601
+guildmasters desk~
+guildmasters desk~
+A giant wooden desk.~
+~
+13 1073741824 0
+0 0 0 0
+1 0 0
+E
+guildmasters desk~
+This desk is huge and made of the finest woods credits can find. Kept
+impecable by the guildmasters secratary you wonder if he even does any
+work.
+~
+#6602
+guildmasters chair~
+guildmasters  chair~
+A giant managers chair.~
+~
+13 0 0
+2 0 2 0
+1 0 0
+E
+guildmasters chair~
+this chair is so cushy its digusting.
+~
+#6603
+Guest chair~
+guest chair~
+A uncomfortable guests chair.~
+~
+12 0 0
+2 0 2 0
+1 0 0
+E
+Guest chair~
+A chair four legs and a seat.
+~
+#6604
+small table~
+small table~
+A small table is here acting as a desk.~
+~
+12 1073741824 0
+3 0 1 0
+100 0 0
+E
+small table~
+This table is coverd in paper work , It's obvious who is low man on the
+totem pole here.
+~
+#6605
+Small Desk~
+small desk~
+A small desk sits here.~
+~
+12 1073741824 0
+0 0 0 0
+1 0 0
+E
+Small Desk~
+A small desk is here covered in paperwork , some of it looks like it might
+be important. 
+~
+E
+Paper~
+This paper says a single word: Labria : wonder what it means
+~
+#6606
+Managers chair~
+managers chair~
+A small managers chair.~
+~
+12 0 0
+2 0 2 0
+100 0 0
+E
+Managers chair~
+This chair looks well used by the poor sole that has to sit on it.
+~
+#6607
+thermal detonator~
+thermal detonator~
+A small silver ball lies here.~
+~
+82 0 16385
+2000 3000 0 0
+1 900000 5
+E
+thermal detonator~
+once you arm this baby run for your life.
+~
+#6608
+Riot gun~
+a Riot Gun.~
+A riot gun is lying here~
+~
+5 0 8193
+0 10 4 6 2000 2000
+15 3000 300
+A
+18 1
+A
+19 1
+#6609
+advanced ammunition cell~
+an advanced ammunition cell~
+An advanced ammunition cell was dropped here.~
+~
+57 0 1
+2000 0 0 0
+1 100 10
+#6610
+Creshaldyne Heavy Combat Helmet~
+Creshaldyne Heavy Combat Helmet~
+A pale grey helmet lies here.~
+~
+9 21135360 17
+0 9 0 0
+1 2000 200
+A
+26 16777216
+> use_prog 100~
+mpechoat $n &YYou feel as if your eyes can see further.
+~
+|
+#6611
+Smugglers ear~
+smugglers ear~
+A bloodied ear lies in the dust here.~
+~
+13 0 16385
+10 0 0 0
+1 1 0
+#6612
+Locris ppl-3 wrist laser~
+Locris PPL-3 Wrist Laser~
+A wrist blaster lies here on the ground.~
+~
+9 0 4097
+0 2 0 0
+1 3000 300
+E
+Locris ppl-3 wrist laser~
+A small blaster that fits around your wrist.
+~
+E
+Locris ppl-3 wrist laser~
+~
+A
+18 3
+A
+19 3
+> use_prog 100~
+mpechoat $n &YThe laser seems perfect for your wrist.
+~
+|
+#6613
+Third Body~
+&YThird Body&R&W~
+A &Y Third Body&R&W is here.~
+~
+9 0 9 96
+10 10 0 0
+1 0 0
+> use_prog 100~
+feel good $n
+mpechoat $n &YYou feel stronger.
+~
+|
+#6614
+a plaque~
+a plaque~
+A plaque is tacked to the wall.~
+~
+12 1073741824 0
+0 0 0 0
+1 0 0
+E
+a plaque~
+A list of bounty hunters to distinguish the guild, both a part of it and
+rogue hunters with great ability: Boba Fett, Borrsk, Kada the Ewok, and
+many others.
+~
+#6615
+Assassins Guild Board~
+a Hunter's Guild Board~
+The Assassins Guild Board~
+~
+12 1073741824 0
+0 0 0 0
+1000 0 0
+#6616
+list~
+a list~
+&z:|: A list of goods :|:~
+~
+13 1073741824 0
+0 0 0 0
+1 0 0
+E
+list~
+1) A key to the guild facilities.
+2) Poisoning power from Kintyre
+3) Locris corporation's latest wrist laser.
+4) Creshaldyne's 360 degree combat helm.
+5) Sorosuub's common Medpack
+6) Northern Sun's canteen
+7) Northern Sun's combat rations
+8) Surronian Bioware shield (defel only)
+~
+#6617
+list~
+a list~
+A list of bounties~
+~
+13 1073741824 0
+0 0 0 0
+1 0 0
+E
+list~
+&Y Wanted: Dead 
+&CCommander Zuggs - Imperial Traitor
+Ishi Tib - Jabba Remnant
+Kendalina - Escaped Prisoner
+Wulgren - Renegade Pirate
+ 
+ &rWanted: Dead or Alive
+&zHasti Troujow - Corporate Sector
+Commander Willard - Rebel Agent
+Nilz Yomm - Rebel Agent
+~
+> exa_prog 100~
+if clan($n) == the hunters guild
+mpecho The list clicks as it checks your ID
+mpechoat $n &rPermission granted&w
+else
+mpecho The list clicks as it checks your ID
+mpechoat $n &rPermission Denied&w
+mpforce rece say $n, you fool.
+mpforce rece 'You must be a Hunter.
+mpforce rece punch $n
+endif
+~
+|
+#6637
+a small key~
+a small key~
+A small key was dropped here~
+~
+13 0 5
+0 0 0 0
+1 1 0
+#0
+
+
+#ROOMS
+#6600
+Security Door~
+&pA great entryway looms over one corner of the small pathway, it's twin
+doors carved in strange tongues, or seemingly so. Designs seem to flow
+through the text like a sea around a continent.  The designs all seem to
+bask in the subject of death, from Carkassian Thumpers tearing each others
+throats out, to a man hanging from the bottom of an L shaped character of
+the text. All of the designs are brought into starke contrast, as each
+carving has been filled with some semi-transperant silver or red metal
+that makes the entire grotesque doorway all the more striking against it's
+obsidian dark surface. The door itself appears to be exuding the sharp
+stench of some unidentifiable spice.     
+~
+0 4 1
+D0
+~
+~
+1 -1 6601
+D2
+~
+~
+0 -1 5604
+S
+#6601
+Security Checkpoint~
+&pTwo standard weapon/biological scanners are implanted into the walls,
+scanning what few sentients and non-sentients decide to pass through this
+hall.  The ceiling and floor are lined with lime colored glow panels, some
+occassionally flickering. 
+~
+0 8 1
+D0
+~
+~
+0 -1 6602
+D2
+~
+~
+1 -1 6600
+S
+#6602
+First Floor Hallway~
+&pThe room sprawls around in silence, pictures and plants scattered through
+the room as if a small tornado was allowed to decorate the room. 
+~
+0 8 1
+D0
+~
+~
+0 -1 6606
+D1
+~
+~
+0 -1 6604
+D2
+~
+~
+0 -1 6601
+D3
+~
+~
+0 -1 6603
+S
+#6603
+Lounge~
+&pThe lounge of the Guild is lavishly furnished, no expenses spared. Large
+mosaics and statues surround the room, and soothing music in the way of
+some unidentifiable pipe plays lowly in the backround.  It seems obvious
+that the casual observer would guess this a relaxation pit for the rich
+and famous of the galaxy rather than a place to put an ignoble end to some
+sapient member of the galactic community. 
+~
+0 0 1
+D1
+~
+~
+0 -1 6602
+S
+#6604
+Bounty Placement Office~
+&pIt is in this office that all bounty's must be placed. A small line up of
+all races is here each with a personal grudge against someone.  Hope you
+brought enough credit to get you bounty noticed.  
+~
+0 8 1
+D3
+~
+~
+0 -1 6602
+S
+#6605
+Floating in a void~
+~
+0 1073741828 1
+S
+#6606
+&W&zCentral Turbolift&W~
+&cThis turbolift is rediculously state-of-the-art. You can see that it's
+internal frame work is carved from zhicera wood: an expensive luxury
+woodwork job from the backwater world of Yharos most likely. The controls
+present you with four options, the ground floor, the Guild compound
+quarters on the second floor, the upper hallway, and the roof entrance.
+~
+0 12 1
+D10
+~
+sanctuary~
+526336 -1 6624
+D10
+~
+Roof~
+524288 -1 6634
+D10
+~
+Prison~
+526336 -1 6638
+D10
+~
+1st Floor~
+524288 -1 6602
+D10
+~
+2nd Floor~
+524288 -1 6607
+D10
+~
+3rd Floor~
+524288 -1 6610
+S
+#6607
+Quarter's Hallway~
+All the rooms along this hall are owned by various Hunters. being caught
+here and not being a hunter could be dangerous to your health
+~
+0 12 1
+D0
+~
+~
+0 -1 6608
+D1
+~
+~
+0 -1 6622
+D2
+~
+~
+0 -1 6606
+D3
+~
+~
+0 -1 6621
+S
+#6608
+Quarter's Hallway~
+All the rooms along this hall are owned by various Hunters. being caught
+here and not being a hunter could be dangerous to your health
+~
+0 4 1
+D0
+~
+~
+0 -1 6609
+D1
+~
+~
+0 -1 6619
+D2
+~
+~
+0 -1 6607
+D3
+~
+~
+0 -1 6620
+S
+#6609
+Quarter's Hallway~
+All the rooms along this hall are owned by various Hunters. being caught
+here and not being a hunter could be dangerous to your health
+~
+0 4 1
+D1
+~
+~
+0 -1 6617
+D2
+~
+~
+0 -1 6608
+D3
+~
+~
+0 -1 6618
+S
+#6610
+Upper Hallway~
+The upper hall of this building is all offices, it is somewhere on this
+hall that all bounty hunters must register.  As well the offices of the
+leader,first and second are on this floor. 
+~
+0 12 1
+D0
+~
+~
+0 -1 6611
+D1
+~
+~
+0 -1 6616
+D2
+~
+~
+0 -1 6606
+D3
+~
+~
+0 -1 6615
+S
+#6611
+Upper Hallway~
+The upper hall of this building is all offices, it is somewhere on this
+hall that all bounty hunters must register.  As well the offices of the
+leader,first and second are on this floor. 
+~
+0 12 1
+D0
+~
+~
+0 -1 6612
+D1
+~
+~
+0 -1 6614
+D2
+~
+~
+0 -1 6610
+D3
+~
+~
+0 -1 6613
+S
+#6612
+Master Hunter's Office~
+This luxerious office is dominated by a large oak desk. A plush carpet
+lines the floor and  a giant window behind the desk offers a wonderfull
+view of tatooine. teo chairs sit before the desk and it is obvious by
+there placement that they are intended for guest of the guildmaster.
+~
+0 12 1
+D2
+~
+~
+0 -1 6611
+D5
+~
+~
+0 -1 6621
+S
+#6613
+Hunter Varssk's Office~
+The office of the first is moderate in size, from the in and out box on his
+desk you see that he is always kept bust with day to day life of the
+guild.  A small interview chair sits to   one side of the desk so he may
+preform peliminary interviews for the guildmaster.
+~
+0 12 1
+D1
+~
+~
+0 -1 6611
+S
+#6614
+Hunter Zaver's Office~
+/ l This somewhat cramped office is carpeted and has a small desk along the
+east wall. The desc is coverd in a pile of paper work that looks as if it
+hasn't been touched in months.  best to leave here before you disturb
+anything. 
+~
+0 12 1
+D3
+~
+~
+0 -1 6611
+S
+#6615
+Hall of Records~
+this large room houses a complete listing of all the guilds curent and past
+hunters aswell as each of there acusitions. A young apprentice hunter is
+here running for each file that is requested as part of his training to
+undersand each hunters tecnique and abilties.
+~
+0 12 1
+D1
+~
+~
+0 -1 6610
+S
+#6616
+Registration Office~
+All hunters must be registerd with the guild to not be registerd makes you
+an outlaw of the guild aswell as a common murderer. Anyone hunting
+outsides the guild will be hunted and punished unless it was done with one
+of the guild leaders approval. 
+~
+0 12 1
+D3
+~
+~
+0 -1 6610
+S
+#6617
+An Empty Apartment~
+~
+0 10485772 1
+D3
+~
+~
+0 -1 6609
+S
+#6618
+An Empty Apartment~
+~
+0 10485772 1
+D1
+~
+~
+0 -1 6609
+S
+#6619
+&B7~
+~
+0 9437196 1
+D3
+~
+~
+0 -1 6608
+S
+#6620
+&YVarssk's &Rplacid retreat&w~
+~
+0 11534340 1
+D1
+~
+~
+0 -1 6608
+S
+#6621
+&pAn Assassin's Pad&R&W~
+&G&WThe room is completely uncluttered, featuring only a small chest, and a
+neatly kept bed. A small pot of what could be assumed to be some type of
+alchohol with rose-like petals in it, keeps the room smelling of wisteria.
+~
+0 9437196 1
+D1
+~
+~
+0 -1 6607
+D4
+~
+~
+0 -1 6612
+S
+#6622
+&W&w&rJourneyman Protector Outpost &RD43Z&W-&RCF2A&W&w~
+~
+0 9437196 1
+D3
+~
+~
+0 -1 6607
+S
+#6623
+Deep Below Tatooine's Surface~
+This hallway is know of only to the hunters guild members to tell anyone of
+this hall is to bring all the hunters down on your head. Remeber this and
+Hunt Well.
+~
+0 4 1
+S
+#6624
+Secret Hallway~
+&pThe main hallway of the guild, normally occassioned only to seasoned
+assassins and unpredictable apprentice assassins, this is one of the few
+places in the galaxy where one can wander near such creatures. This is the
+hallowed ground of the guild, where only the blood of traitors may fall to
+the ground. Bright glowpanels, doors, and numerous electronics line the
+walls of the hall. 
+~
+0 12 1
+D0
+~
+~
+2051 -1 6625
+D1
+~
+~
+0 -1 6630
+D2
+~
+~
+0 -1 6606
+D10
+~
+Freezer~
+526336 -1 6627
+D10
+~
+Burn~
+526336 -1 6629
+> entry_prog 100~
+if clan($n) == The Assassins Guild
+else
+mpecho Someone yells, 'You don't belong here!'
+mpforce $n s
+endif
+~
+|
+S
+#6625
+&cThe Hidden Hall&R&W~
+&pThe hidden hall is known to few of the assassins, although for those that
+do know of it, it is a place of celebration. Both life and death are
+common jokes to those assassins that gather here, and lining the walls
+under light purple glowlining, are multiple skins and trophies, preserved
+for the amusement and awe of later assassins. 
+~
+0 12 1
+D1
+~
+~
+0 -1 6628
+D2
+~
+door~
+11 -1 6624
+D10
+~
+Relay~
+526336 -1 6626
+S
+#6626
+Communications Relay~
+~
+0 12 1
+D2
+~
+~
+0 -1 6625
+S
+#6627
+Hall of Training~
+A large hall is here for the training of all hunters in both skill level
+and physical attributes. Various machines line the walls and all traing is
+regulated by an expirienced hunter. 
+~
+0 12 1
+D8
+~
+~
+0 -1 6624
+S
+#6628
+Ghesinn's Bar~
+&OYou stand in a well sized and lit, unorthodoxly clean, bar. This is the
+gathering place of Hunters without a target, or are merely taking some
+time off. Armist Ghesinn, a former Imperial Commando Captain, stands
+behind the bar, his usual idiot grin evident on his face as he cleans mugs
+and swaps both brew and story with the few customers. 
+~
+0 8 1
+D3
+~
+~
+0 -1 6625
+S
+#6629
+Bounty Hunter Equipmet~
+Although nothing is for sale now , we hope in the future to possess hunter
+speacial equipment. 
+~
+0 12 1
+D1
+~
+~
+0 -1 6624
+S
+#6630
+Medical Wing~
+&G&WThe medical wing is brightly lit, featuring numerous medical droids and
+a sparse number of biological assistants. However, the staff of the
+medical wing of the guild is easily explanable; Most wounded guild members
+don't make it home. 
+~
+0 4 1
+D1
+~
+~
+0 -1 6631
+D3
+~
+west~
+524288 -1 6624
+S
+#6631
+Head Nurse's Office~
+&G&WThe head nurse's office is typically bland, smelling of solvents and
+bacta from the tank just to the east of it.  The room is dimly lit, in
+almost soothing blue tones. Obviously someone likes to do their business,
+whether it be in mind or body, here. 
+~
+0 12 1
+D1
+~
+~
+1 -1 6632
+D3
+~
+~
+0 -1 6630
+> entry_prog 100~
+mpecho &bThe lights in the room snap on abruptly...
+mpecho &OThere is a flurry of motion behind the desk as the chair turns..
+~
+|
+S
+#6632
+Bacta Tank~
+~
+0 12 1
+D3
+~
+~
+1 -1 6631
+> rand_prog 100~
+feel heal $n
+feel heal $n
+feel refresh $n
+feel refresh $n
+~
+|
+S
+#6633
+Security box~
+This room monitor's the landing pad and those that walk through
+it.
+~
+0 1073741828 1
+D0
+~
+~
+8388643 6637 6637
+D1
+~
+~
+33554432 -1 6635
+S
+#6634
+Large Roof~
+~
+0 0 1
+D0
+~
+~
+0 -1 6606
+D2
+~
+~
+0 -1 6635
+D3
+~
+~
+0 -1 6637
+> entry_prog 100~
+if clan($n) == The Hunters Guild
+mpat 6636 mpecho Hunter $n just entered the landing pad area. 
+else
+if clan($n) == The Empire
+mpat 6636 mpecho Imperial $n just entered the landing pad area.
+else
+if clan($n) == The Rebel Alliance
+mpat 6636 mpecho Rebel $n just entered the landing pad area. 
+else
+mpat 6636 mpecho $n just entered the landing pad area. 
+endif
+endif
+endif
+~
+|
+S
+#6635
+Guild Private Landing Pad~
+~
+0 48 1
+D0
+~
+~
+16777216 -1 6634
+> entry_prog 100~
+if clan($n) == The Hunters Guild
+mpat 6633 mpecho Hunter $n just entered the landing pad
+area.
+if clan($n) == The Empire
+mpat 6633 mpecho Imperial $n just entered the landing pad area.
+else
+if clan($n) == The Rebel Alliance
+mpat 6633 mpecho Rebel $n just entered the landing pad area.
+else
+mpat 6633 mpecho $n just entered the landing pad area.
+endif
+endif
+endif
+~
+|
+S
+#6636
+Security Box~
+This room monitor's the landing pad and those that walk through it.
+~
+0 1073741824 1
+D1
+~
+~
+33554432 -1 6635
+S
+#6637
+Large Roof~
+~
+0 0 1
+D1
+~
+~
+0 -1 6634
+D2
+~
+~
+7 6637 6633
+S
+#6638
+A dark hallway~
+Pitted durasteel forms the walls and ceiling above.  Rough stone  is
+chiseled to make the floor, leaving the possibility of tripping  sentients
+unfamiliar with the hallway.  The corridor ends to the north  at 3 doors.
+Pitted durasteel forms the walls and ceiling above.  Rough stone  is
+chiseled to make the floor, leaving the possibility of tripping  sentients
+unfamiliar with the hallway.  A steel door leads north,  with a control
+pad to the right.
+~
+0 1073741824 1
+D0
+~
+~
+7 6637 6639
+D4
+~
+~
+0 -1 6606
+> entry_prog 5~
+if clan($n) == The Hunters Guild
+else
+mpechoat $n You trip on the uneven ground.
+if rand(50)
+mpforce $n sit
+else
+mpforce $n rest
+endif
+endif
+~
+|
+S
+#6639
+A dark hallway~
+Pitted durasteel forms the walls and ceiling above.  Rough stone  is
+chiseled to make the floor, leaving the possibility of tripping  sentients
+unfamiliar with the hallway.  The corridor ends to the north  at 3 doors.
+~
+0 1073741952 1
+D0
+~
+~
+3 -1 6642
+D1
+~
+~
+3 -1 6640
+D2
+~
+~
+7 6637 6638
+D3
+~
+~
+3 -1 6641
+> entry_prog 20~
+if clan($n) == The Hunters Guild
+else
+mpechoat $n You trip on the uneven ground.
+if rand(50)
+mpforce $n sit
+else
+mpforce $n rest
+endif
+endif
+~
+|
+S
+#6640
+A dark cell~
+The dark cell was carved out of the stone forming the foundation of  the
+building above.  A ledge carved to form a stone bed lines one wall,  while
+a quarter metre hole, a hand deep, forms the privy. The dark cell was
+carved out of the stone forming the foundation of  the building above.  A
+ledge carved to form a stone bed lines one wall,  while a quarter metre
+hole, a hand deep, forms the privy. 
+~
+0 1082130561 1
+D3
+~
+~
+35 -1 6639
+S
+#6641
+A dark cell~
+~
+0 1082130561 1
+D1
+~
+~
+35 -1 6639
+S
+#6642
+A dark cell~
+The dark cell was carved out of the stone forming the foundation of  the
+building above.  A ledge carved to form a stone bed lines one wall,  while
+a quarter metre hole, a hand deep, forms the privy.   
+~
+0 1082130561 1
+D2
+~
+~
+35 -1 6639
+S
+#6643
+Floating in a void~
+~
+0 1073741828 1
+S
+#6650
+Floating in a void~
+~
+0 1073741828 1
+S
+#0
+
+
+#RESETS
+M 1 32050 1 6627
+E 1 32275 1 16
+O 0 6603 2 6614
+O 0 6603 2 6613
+O 0 6605 1 6613
+O 0 6606 1 6613
+M 0 6600 1 6616
+M 0 6601 1 6615
+D 0 6637 2 2
+M 1 204 60 6635
+M 1 204 60 6635
+M 1 204 60 6635
+M 1 204 60 6635
+O 1 6601 1 6612
+O 1 6602 1 6612
+O 1 6603 1 6612
+O 1 38 1 6612
+O 1 32201 1 6603
+O 1 6615 1 6624
+D 0 6624 0 1
+D 0 6638 0 2
+D 0 6639 0 1
+D 0 6639 1 1
+D 0 6639 2 2
+D 0 6639 3 1
+M 1 6603 2 6629
+G 1 5652 1
+G 1 10313 1
+G 1 10314 1
+G 1 32254 1
+G 1 6610 1
+G 1 6612 1
+G 1 33 1
+G 1 6637 1
+O 1 6616 1 6629
+M 1 6602 1 6604
+O 1 6617 1 6604
+M 1 6604 1 6631
+O 1 2205 1 6631
+O 1 38 1 6626
+M 1 6605 1 6628
+G 1 2222 1
+G 1 9551 1
+G 1 2218 1
+G 1 2214 1
+G 1 2220 1
+O 1 2213 1 6628
+S
+
+
+#SHOPS
+ 6603   73  5  6  9 82   100  90         0 23    ; salesman
+ 6605    0  0  0  0  0   120   0         0 23    ; Armist
+0
+
+
+#REPAIRS
+ 6603    9  5  0         100   1         0 23    ; salesman
+0
+
+
+#SPECIALS
+S
+
+
+#$

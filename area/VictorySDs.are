@@ -1,0 +1,1925 @@
+#AREA   VSD's Drebbin and Judicator~
+
+
+
+#AUTHOR Darrik~
+
+#RANGES
+0 0 0 105
+$
+
+#FLAGS
+2
+
+#ECONOMY 0 6255960
+
+#MOBILES
+#0
+
+
+#OBJECTS
+#11701
+A list~
+a list~
+A list of destinations~
+~
+13 0 0
+0 0 0 0
+1 0 0
+E
+A list~
+Levels:
+ 
+1.  Hanger - hangers, engineering, and turrets
+2.  Service
+3.  Soldier's - barracks and detention
+4.  Officer
+5.  Medical
+6.  Bridge
+~
+#0
+
+
+#ROOMS
+#11700
+The Main Hanger of the VSD Drebbin~
+The main hanger is an enormous hanger with areas sectioned off for all
+types of ships. In the middle of the hanger the floor is mechanicly
+designed to seperate and open up allowing large ships to enter and leave.
+There are also smaller launch tunnels that can be used by smaller ships.
+~
+0 536870920 1
+D4
+~
+~
+0 -1 11701
+S
+#11701
+The Main Hanger~
+The main hanger is an enormous hanger with areas sectioned off for all
+types of ships. In the middle of the hanger the floor is mechanicly
+designed to seperate and open up allowing large ships to enter and leave.
+There are also smaller launch tunnels that can be used by smaller ships.
+~
+0 536870912 1
+D1
+~
+~
+0 -1 11702
+D2
+~
+~
+0 -1 11704
+D3
+~
+~
+0 -1 11703
+D5
+~
+~
+0 -1 11700
+S
+#11702
+Tie Fighter Hanger~
+The tie fighter hanger is aranged differently than a standard hanger. The
+TIE Fighters are arranged in rows, suspended by thibk metal arms. When
+they are ready to launch they are lowered through airlocks below them and
+then released.
+~
+0 536870912 1
+D3
+~
+~
+0 -1 11701
+S
+#11703
+Transport Hanger~
+The transport hanger is similar to the main hanger except that the ships
+exit through shield walls along the outermost wall of the hanger. Another
+main difference is that the ships are all of two types: assault transports
+designed to carry and deploy troopers and large vehicle transports used to
+carry ground assault vehicles.
+~
+0 536870912 1
+D1
+~
+~
+0 -1 11701
+S
+#11704
+A Corridor~
+This corridor looks like just about every other corridor on the spaceship.
+Imperial designs aren't the most original but they do convey a strong
+message. The walls are standard imperial blue-grey and the floor is a
+polished jet black. 
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11701
+D2
+~
+~
+0 -1 11705
+S
+#11705
+A Corridor~
+This corridor looks like just about every other corridor on the spaceship.
+Imperial designs aren't the most original but they do convey a strong
+message. The walls are standard imperial blue-grey and the floor is a
+polished jet black. 
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11704
+D1
+~
+~
+0 -1 11745
+D2
+~
+~
+0 -1 11706
+D3
+~
+~
+0 -1 11746
+D5
+~
+~
+0 -1 11709
+S
+#11706
+A Turbolift~
+This turbolift is located near the rear of the ship enabling it to reach
+all levels of the destroyer. It is voice activated. Just say the level you
+want to be let off on. There is a small "list" of avalable levels on the
+wall.
+~
+0 536870916 1
+> speech_prog hanger 1~
+mpecho "Hanger Level"
+mpechoat $n You step out.
+mpechoaround $n $n steps out.
+mptransfer $n 11705
+mpat 11705 mpechoaround $n $n arrives.
+~
+> entry_prog 100~
+mpechoat $n The turbolift door closes.
+mpechoaround $n The doors open and close.
+mpecho An electronic voice says. "What level."
+~
+> speech_prog service 2~
+mpecho "Service Level"
+mpechoat $n You step out.
+mpechoaround $n $n steps out.
+mptransfer $n 11715
+mpat 11715 mpechoaround $n $n arrives.
+~
+> speech_prog soldiers 3~
+mpecho "Soldiers Level"
+mpechoat $n You step out.
+mpechoaround $n $n steps out.
+mptransfer $n 11716
+mpat 11716 mpechoaround $n $n arrives.
+~
+> speech_prog officers officer 4~
+mpecho "Officer Level"
+mpechoat $n You step out.
+mpechoaround $n $n step out.
+mptransfer $n 11717
+mpat 11717 mpechoaround $n $n arrives.
+~
+> speech_prog medical 5~
+mpecho "Medical Level"
+mpechoat $n You step out.
+mpechoaround $n $n steps out.
+mptransfer $n 11718
+mpat 11718 mpechoaround $n $n arrives.
+~
+> speech_prog bridge 6~
+mpecho "The bridge"
+mpechoat $n You step out.
+mpechoaround $n $n steps out.
+mptransfer $n 11719
+mpat 11719 mpechoaround $n $n arrives.
+~
+|
+S
+#11707
+Engineering~
+The engineering deck is located around the ships main reactor. Catwalks are
+made of solid grating connect various computer consoles and other pieces
+of machinery.
+~
+0 536870912 1
+D2
+~
+~
+0 -1 11710
+D3
+~
+~
+0 -1 11709
+S
+#11708
+Engineering~
+The engineering deck is located around the ships main reactor. Catwalks are
+made of solid grating connect various computer consoles and other pieces
+of machinery.
+~
+0 536870912 1
+D1
+~
+~
+0 -1 11709
+D2
+~
+~
+0 -1 11712
+S
+#11709
+Engineering Deck~
+The engineering deck is located around the ships main reactor. Catwalks are
+made of solid grating connect various computer consoles and other pieces
+of machinery.
+~
+0 536870912 1
+D1
+~
+~
+0 -1 11707
+D3
+~
+~
+0 -1 11708
+D4
+~
+~
+0 -1 11705
+S
+#11710
+Engineering~
+The engineering deck is located around the ships main reactor. Catwalks are
+made of solid grating connect various computer consoles and other pieces
+of machinery.
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11707
+D2
+~
+~
+0 -1 11711
+S
+#11711
+Engineering~
+The engineering deck is located around the ships main reactor. Catwalks are
+made of solid grating connect various computer consoles and other pieces
+of machinery.
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11710
+D3
+~
+~
+0 -1 11714
+S
+#11712
+Engineering~
+The engineering deck is located around the ships main reactor. Catwalks are
+made of solid grating connect various computer consoles and other pieces
+of machinery.
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11708
+D2
+~
+~
+0 -1 11713
+S
+#11713
+Engineering~
+The engineering deck is located around the ships main reactor. Catwalks are
+made of solid grating connect various computer consoles and other pieces
+of machinery.
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11712
+D1
+~
+~
+0 -1 11714
+S
+#11714
+Main Engineering Console~
+The main reactor control is a large computer console containing the
+controls for the ships main reactor as well as for monitoring the
+functions of the rest of engineering. This would be an ideal location to
+cordinate the ships engineering efforts and you will often fiend the chief
+of engineering posted here. 
+~
+0 536870912 1
+D1
+~
+~
+0 -1 11711
+D3
+~
+~
+0 -1 11713
+S
+#11715
+Service~
+The service level appears similar to all other levels of the ship. The
+floor is the same polished black and the walls are the same blue-grey that
+adorns the rest of the ship. The most recognisable difference is the
+nature of the sounds. The sounds of droids far outweighs the sound of
+humans on this part of the ship.
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11743
+D1
+~
+~
+0 -1 11744
+D2
+~
+~
+0 -1 11706
+D3
+~
+~
+3 -1 11742
+S
+#11716
+Soldier's Deck~
+The barracks area of imperial installations is an interesting mix of
+youthful energy and strict order. This is a strange combination of sweat
+and polish. The sounds of seargents shouting orders to the north mixes
+with the loud chatter of off duty trops to the west.
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11734
+D1
+~
+~
+0 -1 11741
+D2
+~
+~
+0 -1 11706
+D3
+~
+~
+0 -1 11740
+S
+#11717
+Officers Deck~
+The officers section of the darkhand contains the same uninspiring
+architecture as the rest of the ship. However the atmosphere is slightly
+lighter by the addition of a few personal touches added by the officers
+such as a small sculpture on a pedistal near the northern corridor.
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11733
+D1
+~
+~
+0 -1 11732
+D2
+~
+~
+0 -1 11706
+D3
+~
+~
+0 -1 11731
+S
+#11718
+Medical Deck~
+The medical level smells of strongly of antiseptic. A sign on the wall
+saying "emergency" points to the west.  There are a few chairs along the
+wall to sit and wait in if the emergency room is full.
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11726
+D2
+~
+~
+0 -1 11706
+D3
+~
+~
+0 -1 11725
+S
+#11719
+Bridge~
+The bridge of the star destroyer is a large room with several work stations
+around the perimeter and a raised command section in the center. It is
+wider than it is long and a large transparisteel view window covers the
+front wall. Several other large monitors give views from ship mounted
+cameras giving a complete view of whats outside the ship.
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11720
+D2
+~
+~
+0 -1 11706
+D6
+~
+~
+0 -1 11722
+D7
+~
+~
+0 -1 11721
+S
+#11720
+The Captain's Chair~
+This chair is raised somewhat above the rest of the bridge. This not only
+gives the captain a good view of the rest of the bridge but makes the
+captain look more powerful. It is standard imperial practice that lower
+ranks should always have to look up at their superiors. There are very few
+controls located here as the captains job is mostly to issue orders to the
+rest of the crew.
+~
+0 536870912 1
+D1
+~
+~
+0 -1 11722
+D2
+~
+~
+0 -1 11719
+D3
+~
+~
+0 -1 11721
+D6
+~
+~
+0 -1 11723
+D7
+~
+~
+0 -1 11724
+S
+#11721
+Navigator's Console~
+The navigator station contains a large computer with several monitors used
+in comparing charts and maps and making complex calculations. Most of this
+is done by the computer and monitored by the navigator. 
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11724
+D1
+~
+~
+0 -1 11720
+D8
+~
+~
+0 -1 11719
+S
+#11722
+Gunner's Chair~
+The gunners station contains controls for monitoring and manipulating the
+ships main lasers as well as the ships missile launchers torpedos and
+bombs. There are several turrets located around the ship however that are
+controlled from inside the turret and not from here. 
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11723
+D3
+~
+~
+0 -1 11720
+D9
+~
+~
+0 -1 11719
+S
+#11723
+CoPilot's Chair~
+The co pilot station contains controls for the ships defence systems. The
+most important controls being those for monitering and controlling the
+ships shields. 
+~
+0 536870912 1
+D2
+~
+~
+0 -1 11722
+D3
+~
+~
+0 -1 11724
+D9
+~
+~
+0 -1 11720
+S
+#11724
+Pilot's Chair~
+The pilots job is heavily assisted by computer on larger ships thus the
+controls at this station resemble a large computer panel rather than being
+centered around a flight stick like in starfighters. There are dozens of
+minitors around the station giving smaller versions of the large wall
+mounted ones as well as dozens of others monitering different aspects of
+the ships flight.
+~
+0 536870912 1
+D1
+~
+~
+0 -1 11723
+D2
+~
+~
+0 -1 11721
+D8
+~
+~
+0 -1 11720
+S
+#11725
+Recovery~
+The recovery rooms are semi-pleasant decorated in a soft white. There are
+several beds devidable by curtains lining the walls. Each bed has some
+monitoring equipment beside it. The room has a very sterile smell.
+~
+0 536870912 1
+D1
+~
+~
+0 -1 11718
+S
+#11726
+A Hallway~
+This corridor looks like just about every other corridor on the spaceship.
+Imperial designs aren't the most original but they do convey a strong
+message. The walls are standard imperial blue-grey and the floor is a
+polished jet black.
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11728
+D2
+~
+~
+0 -1 11718
+D3
+~
+~
+0 -1 11727
+S
+#11727
+Emergency~
+This room is filled with several stretchers and a couple dozen chairs. The
+back of the room is section off by several curtains. A door to the north
+has a sign on it saying "Medical staff only" 
+~
+0 536870912 1
+D1
+~
+~
+0 -1 11726
+S
+#11728
+Intensive Care~
+The intensive care unit is for people who need constant monitoring. The are
+several beds here surrounded by medical equipment as well as an equal
+number of bacta tanks. 
+~
+0 536870912 1
+D1
+~
+~
+0 -1 11729
+D2
+~
+~
+0 -1 11726
+D3
+~
+~
+0 -1 11730
+S
+#11729
+Bacta Tank~
+You are floating in a tank gelatnous red liquid. A small air hose is and
+mask available for you to breath through. There is not much to do here but
+rest and heal.    When you are done healing leave and let someone else
+have a turn. 
+~
+0 536870912 1
+D3
+~
+~
+0 -1 11728
+S
+#11730
+Bacta Tank~
+You are floating in a tank gelatnous red liquid. A small air hose is and
+mask available for you to breath through. There is not much to do here but
+rest and heal.    When you are done healing leave and let someone else
+have a turn. 
+~
+0 536870912 1
+D1
+~
+~
+0 -1 11728
+S
+#11731
+Officer's Lounge~
+This is a comfortable room with several couches. There are several game and
+card tables about the room. The games played at them are mostly strategy
+games designed to force competition between opponents at a high
+intellectual level. 
+~
+0 536870912 1
+D1
+~
+~
+0 -1 11717
+S
+#11732
+Dining Room~
+The dining area somewhat tasteful. There are several large tables
+throughout the room. Each is covered in a fine table cloth and set in a
+manner generally considered proper amongst most human worlds and
+especially on all imperial controlled worlds. 
+~
+0 536870912 1
+D3
+~
+~
+0 -1 11717
+S
+#11733
+Officer's Quarters~
+This corridor looks like just about every other corridor on the spaceship.
+Imperial designs aren't the most original but they do convey a strong
+message. The walls are standard imperial blue-grey and the floor is a
+polished jet black.
+~
+0 536870912 1
+D1
+~
+~
+7 -1 11733
+D2
+~
+~
+0 -1 11717
+D3
+~
+~
+7 -1 11733
+S
+#11734
+Barracks~
+The barracks area of imperial installations is an interesting mix of
+youthful energy and strict order. This is a strange combination of sweat
+and polish. The sounds of seargents shouting orders to the north mixes
+with the loud chatter of off duty trops to the west.
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11737
+D1
+~
+~
+0 -1 11736
+D2
+~
+~
+0 -1 11716
+D3
+~
+~
+0 -1 11735
+S
+#11735
+Barracks~
+This is a standard looking miitary bunkroom. Rows of stacked beds line the
+walls. At the end of each bed is a foot locker. Small closets are on the
+walls inbetween the beds. The room is clean and very orderly.  
+~
+0 536870912 1
+D1
+~
+~
+0 -1 11734
+S
+#11736
+Barracks~
+This is a standard looking miitary bunkroom. Rows of stacked beds line the
+walls. At the end of each bed is a foot locker. Small closets are on the
+walls inbetween the beds. The room is clean and very orderly. 
+~
+0 536870912 1
+D3
+~
+~
+0 -1 11734
+S
+#11737
+Drill Hall~
+The drill hall is an enormous hall taking up a large portion of this deck.
+It is devided into several sections. A blaster range is used for target
+practice at the north east corner of the room. The south east section is
+taken up by an obsticle course containing climbing walls. The west section
+contains several types of artificial terrain used for combat simulation.
+The center of the room however is empty and used for the standard drills
+that take up many hours of the day. 
+~
+0 536870912 1
+D2
+~
+~
+0 -1 11734
+D6
+~
+~
+0 -1 11738
+S
+#11738
+Drill Hall~
+The drill hall is an enormous hall taking up a large portion of this deck.
+It is devided into several sections. A blaster range is used for target
+practice at the north east corner of the room. The south east section is
+taken up by an obsticle course containing climbing walls. The west section
+contains several types of artificial terrain used for combat simulation.
+The center of the room however is empty and used for the standard drills
+that take up many hours of the day. 
+~
+0 536870912 1
+D1
+~
+~
+33554432 -1 11739
+D9
+~
+~
+0 -1 11737
+S
+#11739
+Target Room~
+~
+0 536870912 1
+D3
+~
+~
+33554432 -1 11738
+S
+#11740
+Detention~
+This room contains a control desk for monitering the detention block. There
+are many automated defence guns positioned about the room as well as
+several cameras monitering the activity here.
+~
+0 536870912 1
+D0
+~
+~
+7 -1 11740
+D1
+~
+~
+0 -1 11716
+D2
+~
+~
+7 -1 11740
+S
+#11741
+Detention~
+This room contains a control desk for monitering the detention block. There
+are many automated defence guns positioned about the room as well as
+several cameras monitering the activity here.
+~
+0 536870912 1
+D0
+~
+~
+7 -1 11741
+D2
+~
+~
+7 -1 11741
+D3
+~
+~
+0 -1 11716
+S
+#11742
+Trash Compactor~
+You can think of about 10 million other places youd rather be right now.
+The coom is filled with garbage and foul smeliing water. The door seems to
+be locked. To top it all off the walls are slowly closing in around you.
+~
+0 536870912 1
+D1
+~
+~
+1 -1 11715
+> rand_prog 100~
+mpecho The walls slowly crush you.
+feel harm $n
+~
+|
+S
+#11743
+Storage Closet~
+This room is very long. It consists of several rows of shelves stacked to
+the ceiling. Each shelf is filled with labelled boxes, crates or loose
+parts. Maybe searching through this room could produce something usefull.
+~
+0 536870912 1
+D2
+~
+~
+0 -1 11715
+S
+#11744
+Droid Maintenance Room~
+As far as droid maintenance rooms go this one is very organized. The stacks
+of parts and equipment found in most technical areas do not exist. Instead
+anything not in use seems to be put away in one of hundreds of wall
+mounted drawers. Only very large machines are left out along with rows of
+droids either recharging or in a state of repair. Even these however are
+lined up in an organized maner giving a strong sense of order to the
+place.
+~
+0 536870912 1
+D3
+~
+~
+0 -1 11715
+S
+#11745
+Hallway To Turrets~
+This corridor looks like just about every other corridor on the spaceship.
+Imperial designs aren't the most original but they do convey a strong
+message. The walls are standard imperial blue-grey and the floor is a
+polished jet black.
+~
+0 536870912 1
+D1
+~
+~
+0 -1 11747
+D3
+~
+~
+0 -1 11705
+S
+#11746
+Hallway to Turrets~
+This corridor looks like just about every other corridor on the spaceship.
+Imperial designs aren't the most original but they do convey a strong
+message. The walls are standard imperial blue-grey and the floor is a
+polished jet black.
+~
+0 536870912 1
+D1
+~
+~
+0 -1 11705
+D3
+~
+~
+0 -1 11748
+S
+#11747
+Turret~
+This swivelling laser turret is located in a good position to cover most of
+the ships belly and side. The seat is gyroscopicly suspended and attached
+to the cannon so that they all swivel as a single unit enabling excellent
+target tracking.
+~
+0 536870912 1 0 0 1
+D3
+~
+~
+0 -1 11745
+S
+#11748
+Turret~
+This swivelling laser turret is located in a good position to cover most of
+the ships belly and side. The seat is gyroscopicly suspended and attached
+to the cannon so that they all swivel as a single unit enabling excellent
+target tracking.
+~
+0 536870912 1
+D1
+~
+~
+0 -1 11746
+S
+#11750
+The Main Hanger of the VSD Judicator~
+The main hanger is an enormous hanger with areas sectioned off for all
+types of ships. In the middle of the hanger the floor is mechanicly
+designed to seperate and open up allowing large ships to enter and leave.
+There are also smaller launch tunnels that can be used by smaller ships.
+~
+0 536870920 1
+D4
+~
+~
+0 -1 11751
+S
+#11751
+The Main Hanger~
+The main hanger is an enormous hanger with areas sectioned off for all
+types of ships. In the middle of the hanger the floor is mechanicly
+designed to seperate and open up allowing large ships to enter and leave.
+There are also smaller launch tunnels that can be used by smaller ships.
+~
+0 536870912 1
+D1
+~
+~
+0 -1 11752
+D2
+~
+~
+0 -1 11754
+D3
+~
+~
+0 -1 11753
+D5
+~
+~
+0 -1 11750
+S
+#11752
+Tie Fighter Hanger~
+The tie fighter hanger is aranged differently than a standard hanger. The
+TIE Fighters are arranged in rows, suspended by thibk metal arms. When
+they are ready to launch they are lowered through airlocks below them and
+then released.
+~
+0 536870912 1
+D3
+~
+~
+0 -1 11751
+S
+#11753
+Transport Hanger~
+The transport hanger is similar to the main hanger except that the ships
+exit through shield walls along the outermost wall of the hanger. Another
+main difference is that the ships are all of two types: assault transports
+designed to carry and deploy troopers and large vehicle transports used to
+carry ground assault vehicles.
+~
+0 536870912 1
+D1
+~
+~
+0 -1 11751
+S
+#11754
+A Corridor~
+This corridor looks like just about every other corridor on the spaceship.
+Imperial designs aren't the most original but they do convey a strong
+message. The walls are standard imperial blue-grey and the floor is a
+polished jet black.
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11751
+D2
+~
+~
+0 -1 11755
+S
+#11755
+A Corridor~
+This corridor looks like just about every other corridor on the spaceship.
+Imperial designs aren't the most original but they do convey a strong
+message. The walls are standard imperial blue-grey and the floor is a
+polished jet black.
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11754
+D1
+~
+~
+0 -1 11796
+D2
+~
+~
+0 -1 11756
+D3
+~
+~
+0 -1 11797
+D5
+~
+~
+0 -1 11757
+S
+#11756
+A Turbolift~
+This turbolift is located near the rear of the ship enabling it to reach
+all levels of the destroyer. It is voice activated. Just say the level you
+want to be let off on. There is a small "list" of avalable levels on the
+wall.
+~
+0 536870916 1
+> speech_prog hanger 1~
+mpecho "Hanger Level"
+mpechoat $n You step out.
+mpechoaround $n $n steps out.
+mptransfer $n 11755
+mpat 11755 mpechoaround $n $n arrives.
+~
+> entry_prog 100~
+mpechoat $n The turbolift door closes.
+mpechoaround $n The doors open and close.
+mpecho An electronic voice says. "What level."
+~
+> speech_prog service 2~
+mpecho "Service Level"
+mpechoat $n You step out.
+mpechoaround $n $n steps out.
+mptransfer $n 11765
+mpat 11765 mpechoaround $n $n arrives.
+~
+> speech_prog soldiers soldier 3~
+mpecho "Soldiers Level"
+mpechoat $n You step out.
+mpechoaround $n $n steps out.
+mptransfer $n 11766
+mpat 11766 mpechoaround $n $n arrives.
+~
+> speech_prog officers officer 4~
+mpecho "Officer Level"
+mpechoat $n You step out.
+mpechoaround $n $n step out.
+mptransfer $n 11767
+mpat 11767 mpechoaround $n $n arrives.
+~
+> speech_prog medical 5~
+mpecho "Medical Level"
+mpechoat $n You step out.
+mpechoaround $n $n steps out.
+mptransfer $n 11768
+mpat 11768 mpechoaround $n $n arrives.
+ 
+~
+> speech_prog bridge 6~
+mpecho "The bridge"
+mpechoat $n You step out.
+mpechoaround $n $n steps out.
+mptransfer $n 11769
+mpat 11769 mpechoaround $n $n arrives.
+~
+|
+S
+#11757
+Engineering Deck~
+The engineering deck is located around the ships main reactor. Catwalks are
+made of solid grating connect various computer consoles and other pieces
+of machinery.
+~
+0 536870912 1
+D1
+~
+~
+0 -1 11759
+D3
+~
+~
+0 -1 11758
+D4
+~
+~
+0 -1 11755
+S
+#11758
+Engineering~
+The engineering deck is located around the ships main reactor. Catwalks are
+made of solid grating connect various computer consoles and other pieces
+of machinery.
+~
+0 536870912 1
+D1
+~
+~
+0 -1 11757
+D2
+~
+~
+0 -1 11760
+S
+#11759
+Engineering~
+The engineering deck is located around the ships main reactor. Catwalks are
+made of solid grating connect various computer consoles and other pieces
+of machinery.
+~
+0 536870912 1
+D2
+~
+~
+0 -1 11761
+D3
+~
+~
+0 -1 11757
+S
+#11760
+Engineering~
+The engineering deck is located around the ships main reactor. Catwalks are
+made of solid grating connect various computer consoles and other pieces
+of machinery.
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11758
+D2
+~
+~
+0 -1 11762
+S
+#11761
+Engineering~
+The engineering deck is located around the ships main reactor. Catwalks are
+made of solid grating connect various computer consoles and other pieces
+of machinery.
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11759
+D2
+~
+~
+0 -1 11763
+S
+#11762
+Engineering~
+The engineering deck is located around the ships main reactor. Catwalks are
+made of solid grating connect various computer consoles and other pieces
+of machinery.
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11760
+D1
+~
+~
+0 -1 11764
+S
+#11763
+Engineering~
+The engineering deck is located around the ships main reactor. Catwalks are
+made of solid grating connect various computer consoles and other pieces
+of machinery.
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11761
+D3
+~
+~
+0 -1 11764
+S
+#11764
+Main Engineering Console~
+The main reactor control is a large computer console containing the
+controls for the ships main reactor as well as for monitoring the
+functions of the rest of engineering. This would be an ideal location to
+cordinate the ships engineering efforts and you will often fiend the chief
+of engineering posted here. 
+~
+0 536870912 1
+D1
+~
+~
+0 -1 11763
+D3
+~
+~
+0 -1 11762
+S
+#11765
+Service Level~
+The service level appears similar to all other levels of the ship. The
+floor is the same polished black and the walls are the same blue-grey that
+adorns the rest of the ship. The most recognisable difference is the
+nature of the sounds. The sounds of droids far outweighs the sound of
+humans on this part of the ship.
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11793
+D1
+~
+~
+0 -1 11794
+D2
+~
+~
+0 -1 11756
+D3
+~
+~
+3 -1 11792
+S
+#11766
+Soldier's Deck~
+The barracks area of imperial installations is an interesting mix of
+youthful energy and strict order. This is a strange combination of sweat
+and polish. The sounds of seargents shouting orders to the north mixes
+with the loud chatter of off duty trops to the west. 
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11784
+D1
+~
+~
+0 -1 11791
+D2
+~
+~
+0 -1 11756
+D3
+~
+~
+0 -1 11790
+S
+#11767
+Officers Deck~
+The officers section of the darkhand contains the same uninspiring
+architecture as the rest of the ship. However the atmosphere is slightly
+lighter by the addition of a few personal touches added by the officers
+such as a small sculpture on a pedistal near the northern corridor.
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11783
+D1
+~
+~
+0 -1 11782
+D2
+~
+~
+0 -1 11756
+D3
+~
+~
+0 -1 11781
+S
+#11768
+Medical Deck~
+The medical level smells of strongly of antiseptic. A sign on the wall
+saying "emergency" points to the west.  There are a few chairs along the
+wall to sit and wait in if the emergency room is full.
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11776
+D2
+~
+~
+0 -1 11756
+D3
+~
+~
+0 -1 11775
+S
+#11769
+Bridge~
+The bridge of the star destroyer is a large room with several work stations
+around the perimeter and a raised command section in the center. It is
+wider than it is long and a large transparisteel view window covers the
+front wall. Several other large monitors give views from ship mounted
+cameras giving a complete view of whats outside the ship.
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11770
+D2
+~
+~
+0 -1 11756
+D6
+~
+~
+0 -1 11772
+D7
+~
+~
+0 -1 11771
+S
+#11770
+The Captain's Chair~
+This chair is raised somewhat above the rest of the bridge. This not only
+gives the captain a good view of the rest of the bridge but makes the
+captain look more powerful. It is standard imperial practice that lower
+ranks should always have to look up at their superiors. There are very few
+controls located here as the captains job is mostly to issue orders to the
+rest of the crew.
+~
+0 536870912 1
+D1
+~
+~
+0 -1 11772
+D2
+~
+~
+0 -1 11769
+D3
+~
+~
+0 -1 11771
+D6
+~
+~
+0 -1 11773
+D7
+~
+~
+0 -1 11774
+S
+#11771
+Navigator's Console~
+The navigator station contains a large computer with several monitors used
+in comparing charts and maps and making complex calculations. Most of this
+is done by the computer and monitored by the navigator. 
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11774
+D1
+~
+~
+0 -1 11770
+D8
+~
+~
+0 -1 11769
+S
+#11772
+Gunner's Chair~
+The gunners station contains controls for monitoring and manipulating the
+ships main lasers as well as the ships missile launchers torpedos and
+bombs. There are several turrets located around the ship however that are
+controlled from inside the turret and not from here. 
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11773
+D3
+~
+~
+0 -1 11770
+D9
+~
+~
+0 -1 11769
+S
+#11773
+CoPilot's Chair~
+The co pilot station contains controls for the ships defence systems. The
+most important controls being those for monitering and controlling the
+ships shields. 
+~
+0 536870912 1
+D2
+~
+~
+0 -1 11772
+D3
+~
+~
+0 -1 11774
+D9
+~
+~
+0 -1 11770
+S
+#11774
+Pilot's Chair~
+The pilots job is heavily assisted by computer on larger ships thus the
+controls at this station resemble a large computer panel rather than being
+centered around a flight stick like in starfighters. There are dozens of
+minitors around the station giving smaller versions of the large wall
+mounted ones as well as dozens of others monitering different aspects of
+the ships flight.
+~
+0 536870912 1
+D1
+~
+~
+0 -1 11773
+D2
+~
+~
+0 -1 11771
+D8
+~
+~
+0 -1 11770
+S
+#11775
+Recovery~
+The recovery rooms are semi-pleasant decorated in a soft white. There are
+several beds devidable by curtains lining the walls. Each bed has some
+monitoring equipment beside it. The room has a very sterile smell.
+~
+0 536870912 1
+D1
+~
+~
+0 -1 11768
+S
+#11776
+A Hallway~
+This corridor looks like just about every other corridor on the spaceship.
+Imperial designs aren't the most original but they do convey a strong
+message. The walls are standard imperial blue-grey and the floor is a
+polished jet black.
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11778
+D2
+~
+~
+0 -1 11768
+D3
+~
+~
+0 -1 11777
+S
+#11777
+Emergency~
+This room is filled with several stretchers and a couple dozen chairs. The
+back of the room is section off by several curtains. A door to the north
+has a sign on it saying "Medical staff only" 
+~
+0 536870912 1
+D1
+~
+~
+0 -1 11776
+S
+#11778
+Intensive Care~
+The intensive care unit is for people who need constant monitoring. The are
+several beds here surrounded by medical equipment as well as an equal
+number of bacta tanks. 
+~
+0 536870912 1
+D1
+~
+~
+0 -1 11779
+D2
+~
+~
+0 -1 11776
+D3
+~
+~
+0 -1 11780
+S
+#11779
+Bacta Tank~
+You are floating in a tank gelatnous red liquid. A small air hose is and
+mask available for you to breath through. There is not much to do here but
+rest and heal.    When you are done healing leave and let someone else
+have a turn. 
+~
+0 536870912 1
+D3
+~
+~
+0 -1 11778
+> rand_prog 100~
+feel heal $n
+~
+|
+S
+#11780
+Bacta Tank~
+You are floating in a tank gelatnous red liquid. A small air hose is and
+mask available for you to breath through. There is not much to do here but
+rest and heal.    When you are done healing leave and let someone else
+have a turn. 
+~
+0 536870912 1
+D1
+~
+~
+0 -1 11778
+> rand_prog 100~
+feel heal $n
+~
+|
+S
+#11781
+Officer's Lounge~
+This is a comfortable room with several couches. There are several game and
+card tables about the room. The games played at them are mostly strategy
+games designed to force competition between opponents at a high
+intellectual level.
+~
+0 536870912 1
+D1
+~
+~
+0 -1 11767
+S
+#11782
+Dining Room~
+The dining area somewhat tasteful. There are several large tables
+throughout the room. Each is covered in a fine table cloth and set in a
+manner generally considered proper amongst most human worlds and
+especially on all imperial controlled worlds.
+~
+0 536870912 1
+D3
+~
+~
+0 -1 11767
+S
+#11783
+Officer's Quarters~
+This corridor looks like just about every other corridor on the spaceship.
+Imperial designs aren't the most original but they do convey a strong
+message. The walls are standard imperial blue-grey and the floor is a
+polished jet black. 
+~
+0 536870912 1
+D0
+~
+~
+7 -1 11783
+D1
+~
+~
+7 -1 11783
+D2
+~
+~
+0 -1 11767
+D3
+~
+~
+7 -1 11783
+S
+#11784
+Barracks~
+The barracks area of imperial installations is an interesting mix of
+youthful energy and strict order. This is a strange combination of sweat
+and polish. The sounds of seargents shouting orders to the north mixes
+with the loud chatter of off duty trops to the west.
+~
+0 536870912 1
+D0
+~
+~
+0 -1 11787
+D1
+~
+~
+0 -1 11786
+D2
+~
+~
+0 -1 11766
+D3
+~
+~
+0 -1 11790
+S
+#11785
+Barracks~
+The barracks area of imperial installations is an interesting mix of
+youthful energy and strict order. This is a strange combination of sweat
+and polish. The sounds of seargents shouting orders to the north mixes
+with the loud chatter of off duty trops to the west.
+~
+0 545259520 1
+D1
+~
+~
+0 -1 11784
+S
+#11786
+Barracks~
+The barracks area of imperial installations is an interesting mix of
+youthful energy and strict order. This is a strange combination of sweat
+and polish. The sounds of seargents shouting orders to the north mixes
+with the loud chatter of off duty trops to the west.
+~
+0 545259520 1
+D3
+~
+~
+0 -1 11784
+S
+#11787
+Drill Hall~
+The drill hall is an enormous hall taking up a large portion of this deck.
+It is devided into several sections. A blaster range is used for target
+practice at the north east corner of the room. The south east section is
+taken up by an obsticle course containing climbing walls. The west section
+contains several types of artificial terrain used for combat simulation.
+The center of the room however is empty and used for the standard drills
+that take up many hours of the day. 
+~
+0 536870912 1
+D2
+~
+~
+0 -1 11784
+D6
+~
+~
+0 -1 11788
+S
+#11788
+Drill hall~
+The drill hall is an enormous hall taking up a large portion of this deck.
+It is devided into several sections. A blaster range is used for target
+practice at the north east corner of the room. The south east section is
+taken up by an obsticle course containing climbing walls. The west section
+contains several types of artificial terrain used for combat simulation.
+The center of the room however is empty and used for the standard drills
+that take up many hours of the day.
+~
+0 536870912 1
+D1
+~
+~
+33554432 -1 11789
+D9
+~
+~
+0 -1 11787
+S
+#11789
+Target Room~
+~
+0 536870912 1
+D3
+~
+~
+33554432 -1 11788
+S
+#11790
+Detention~
+This room contains a control desk for monitering the detention block. There
+are many automated defence guns positioned about the room as well as
+several cameras monitering the activity here.
+~
+0 536870912 1
+D0
+~
+~
+7 -1 11790
+D1
+~
+~
+0 -1 11766
+D2
+~
+~
+7 -1 11790
+S
+#11791
+Dentention~
+This room contains a control desk for monitering the detention block. There
+are many automated defence guns positioned about the room as well as
+several cameras monitering the activity here.
+~
+0 536870912 1
+D0
+~
+~
+7 -1 11791
+D2
+~
+~
+7 -1 11791
+D3
+~
+~
+0 -1 11766
+S
+#11792
+Trash Compactor~
+You can think of about 10 million other places youd rather be right now.
+The coom is filled with garbage and foul smeliing water. The door seems to
+be locked. To top it all off the walls are slowly closing in around you.
+~
+0 536870912 1
+D1
+~
+~
+3 -1 11765
+> rand_prog 100~
+mpecho The walls close around you.
+feel harm $n
+~
+|
+S
+#11793
+Storage Closet~
+This room is very long. It consists of several rows of shelves stacked to
+the ceiling. Each shelf is filled with labelled boxes, crates or loose
+parts. Maybe searching through this room could produce something usefull.
+~
+0 536870912 1
+D2
+~
+~
+0 -1 11765
+S
+#11794
+Droid Maintenance Room~
+As far as droid maintenance rooms go this one is very organized. The stacks
+of parts and equipment found in most technical areas do not exist. Instead
+anything not in use seems to be put away in one of hundreds of wall
+mounted drawers. Only very large machines are left out along with rows of
+droids either recharging or in a state of repair. Even these however are
+lined up in an organized maner giving a strong sense of order to the
+place.
+~
+0 536870912 1
+D3
+~
+~
+0 -1 11765
+S
+#11796
+Hallway to Turrets~
+This corridor looks like just about every other corridor on the spaceship.
+Imperial designs aren't the most original but they do convey a strong
+message. The walls are standard imperial blue-grey and the floor is a
+polished jet black.
+~
+0 536870912 1
+D1
+~
+~
+0 -1 11798
+D3
+~
+~
+0 -1 11755
+S
+#11797
+Hallway to Turrets~
+This corridor looks like just about every other corridor on the spaceship.
+Imperial designs aren't the most original but they do convey a strong
+message. The walls are standard imperial blue-grey and the floor is a
+polished jet black.
+~
+0 536870912 1
+D1
+~
+~
+0 -1 11755
+D3
+~
+~
+0 -1 11799
+S
+#11798
+Turret~
+This swivelling laser turret is located in a good position to cover most of
+the ships belly and side. The seat is gyroscopicly suspended and attached
+to the cannon so that they all swivel as a single unit enabling excellent
+target tracking.
+~
+0 536870912 1
+D3
+~
+~
+0 -1 11796
+S
+#11799
+Turret~
+This swivelling laser turret is located in a good position to cover most of
+the ships belly and side. The seat is gyroscopicly suspended and attached
+to the cannon so that they all swivel as a single unit enabling excellent
+target tracking.
+~
+0 536870912 1
+D1
+~
+~
+0 -1 11797
+S
+#0
+
+
+#RESETS
+D 0 11715 3 1
+M 1 413 3 11739
+O 1 11701 1 11706
+M 1 413 4 11789
+D 0 11765 3 1
+O 1 11701 1 11756
+O 1 10430 1 11732
+S
+
+
+#SHOPS
+0
+
+
+#REPAIRS
+0
+
+
+#SPECIALS
+S
+
+
+#$

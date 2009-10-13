@@ -1,0 +1,42 @@
+#SHIP
+Name         ~
+Filename     ~
+Description  ~
+Owner        ~
+Pilot        ~
+Copilot      ~
+Class        0
+Tractorbeam  0
+Shipyard     0
+Hanger       0
+Turret1      0
+Turret2      0
+Statet0      0
+Statet1      0
+Statet2      0
+Laserstr     0
+Missiles     0
+Maxmissiles  0
+Lastdoc      0
+Firstroom    0
+Lastroom     0
+Shield       0
+Maxshield    0
+Hull         0
+Maxhull      0
+Maxenergy    0
+Hyperspeed   0
+Comm         0
+Sensor       0
+Astro_array  0
+Realspeed    0
+Type         0
+Cockpit      0
+Entrance     0
+Objectnum    0
+Shipstate    0
+Missilestate 0
+Energy       0
+End
+
+#END

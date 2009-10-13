@@ -1,0 +1,55 @@
+#SHIP
+Name         Assault Shuttle 32335~
+Filename     as32335~
+Description  ~
+Owner        ~
+Pilot        ~
+Copilot      ~
+Class        1
+Tractorbeam  0
+Shipyard     32050
+Hanger       0
+Turret1      32339
+Turret2      0
+Statet0      0
+Statet1      0
+Statet2      0
+Lasers       3
+Missiles     8
+Maxmissiles  8
+Rockets     0
+Maxrockets  0
+Torpedos     0
+Maxtorpedos  0
+Lastdoc      32050
+Firstroom    32335
+Lastroom     32339
+Shield       0
+Maxshield    100
+Hull         1000
+Maxhull      1000
+Maxenergy    5000
+Hyperspeed   160
+Comm         0
+Chaff        0
+Maxchaff     0
+Sensor       100
+Astro_array  100
+Realspeed    80
+Type         0
+Cockpit      32335
+Coseat       32336
+Pilotseat    32335
+Gunseat      32336
+Navseat      32336
+Engineroom   0
+Entrance     32337
+Objectnum    32335
+Shipstate    0
+Missilestate 0
+Energy       0
+Manuever     65
+Home         ~
+End
+
+#END

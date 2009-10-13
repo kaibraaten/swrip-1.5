@@ -1,0 +1,34 @@
+SW: Rise in Power MUD Codbase v1.0 (SWRiP) is derived from SWReality 1.0, following 
+a long chain of expansions starting with DikuMud; therefore, it is bound by all the
+licenses described in the included files.
+
+SWRiP, copyright (c) 2001, was created by Mark Miller (Darrik Vequir), with the advice
+and input of his staff.
+
+SWRiP is published 'As is'. It will be supported by Darrik Vequir as he can, with 
+limits mentioned below. SWRiP and its author are not liable for any impact running 
+this code may make when run.  
+
+To use and modify this code, all conditions must be met by the previous licenses 
+for each derivative.  Also, Darrik Vequir must be mentioned as author of the 
+SWRiP Codebase along with the copyright notice in the help credits file.
+The 'SWRIP' helpfile, along with the help file 'Credits' listing the derivatives 
+and their notices, and all other help files required by each license supplied 
+with this code, must be included with each distribution.  Except for the 
+'credits' help file, which can be added to, but not deleted, each of these 
+files must be kept intact as shipped.
+
+Any one who uses the SWRiP code should send an email to Darrik@swrip.net
+informing him of this.  Once that has been done, he will assist you with
+any problems you may have as his time allows.
+
+Personal Note:
+SWRiP will be an ongoing project for me.  I will endeavour to publish snippets and perhaps 
+updated version as my time allows.  As is, it is extremely stable and includes many 
+features not found elsewhere.  I hope you enjoy the code as much as I have, and can 
+create such a community as was found on Rise in Power up to its closing.
+
+Good luck to you all,
+
+Darrik Vequir
+Darrik@swrip.net

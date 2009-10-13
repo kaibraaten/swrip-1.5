@@ -1,0 +1,55 @@
+#SHIP
+Name         Assault Shuttle 32305~
+Filename     as32305~
+Description  ~
+Owner        ~
+Pilot        ~
+Copilot      ~
+Class        1
+Tractorbeam  0
+Shipyard     32050
+Hanger       0
+Turret1      32309
+Turret2      0
+Statet0      0
+Statet1      0
+Statet2      0
+Lasers       3
+Missiles     8
+Maxmissiles  8
+Rockets     0
+Maxrockets  0
+Torpedos     0
+Maxtorpedos  0
+Lastdoc      32050
+Firstroom    32305
+Lastroom     32309
+Shield       0
+Maxshield    100
+Hull         1000
+Maxhull      1000
+Maxenergy    5000
+Hyperspeed   160
+Comm         0
+Chaff        0
+Maxchaff     0
+Sensor       100
+Astro_array  100
+Realspeed    80
+Type         0
+Cockpit      32305
+Coseat       32306
+Pilotseat    32305
+Gunseat      32306
+Navseat      32306
+Engineroom   0
+Entrance     32307
+Objectnum    32305
+Shipstate    0
+Missilestate 0
+Energy       5000
+Manuever     65
+Home         ~
+End
+
+#END

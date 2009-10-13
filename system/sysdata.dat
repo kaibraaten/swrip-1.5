@@ -1,0 +1,30 @@
+#SYSTEM
+Highplayers    40
+Highplayertime Sun Apr 23 22:11:23 2000~
+Nameresolving  0
+Waitforauth    1
+Readallmail    103
+Readmailfree   101
+Writemailfree  1
+Takeothersmail 102
+Muse           102
+Think          102
+Build          102
+Log            103
+Protoflag      102
+Overridepriv   103
+Msetplayer     104
+Stunplrvsplr   50
+Stunregular    0
+Damplrvsplr    103
+Damplrvsmob    103
+Dammobvsplr    103
+Dammobvsmob    103
+Forcepc        101
+Guildoverseer  Darrik~
+Guildadvisor   Laagos~
+Saveflags      4045
+Savefreq       20
+End
+
+#END

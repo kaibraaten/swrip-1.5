@@ -1,0 +1,134 @@
+#AREA   The Jedi Teacher's Room~
+
+
+
+#AUTHOR Robert~
+
+#RANGES
+0 0 75 103
+$
+
+#FLAGS
+0
+
+#ECONOMY 0 6250000
+
+#MOBILES
+#3198
+an old man~
+an old man~
+An old man sits here.
+~
+~
+1073742851 0 0 Z
+1 0 0 0d0+0 0d0+0
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+> speech_prog notes? notes note~
+say They mentioned some minor techniques used by the ancient jedi. 
+say Specifically, the meditation techniques they used to find the force,
+and to rest.
+~
+> speech_prog Yoda? Yoda hermit forcer force meditate~
+say Ah, yes, an old hermit lived here some time ago. I found some notes he
+had left.
+say They were faded as if they hadnt been moved since they were brought
+here. 
+say They certainly were not written in this place.
+~
+|
+#3199
+an old man~
+a newly created an old man~
+Some god abandoned a newly created an old man here.
+~
+~
+1 0 0 Z
+1 0 0 0d0+0 0d0+0
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#0
+
+
+#OBJECTS
+#3198
+an objhect~
+a an objhect~
+A an objhect is here.~
+~
+13 0 0
+0 0 0 0
+1 0 0
+#3199
+an object~
+a an object~
+A an object is here.~
+~
+13 0 0
+0 0 0 0
+1 0 0
+#0
+
+
+#ROOMS
+#3198
+LIving Quarters~
+The cave is tiny.  The ceiling is barely one meter above the floor.  It is
+appearently lived in though judging by the conditions of the room.  Only a
+small creature could live here.  A cushion with a dark green blanket seems
+to serve as a bed for this small individual.  A hole in the cave wall
+serves as a small window, through which you can see outdoors.  Outside the
+window you can see various parts of planet Dagobah.  For the most part all
+you can see is swampy marsh lands.  Tall trees with long vines are
+everywhere within view.  The floor is made up almost entirely of some
+powdery brown substance.  After further investigation the substance
+appears to be dirt.  In the center of the room hangs a small blackened
+wood pot.  the pot contains an odd smelling soup like substance.  Small
+chunks of something float around in the soup.  The pot is warm, it has
+been used recently.  Snakes slither about with soft motions, they seema t
+ease in this environment. The room has a powerful aura to it.  The force
+is quite strong in here. 
+~
+0 4 1
+D2
+~
+~
+0 -1 8233
+S
+#3199
+Floating in a void~
+~
+0 4 1
+S
+#0
+
+
+#RESETS
+M 1 3198 1 3198
+O 1 5099 1 3198
+S
+
+
+#SHOPS
+0
+
+
+#REPAIRS
+0
+
+
+#SPECIALS
+S
+
+
+#$

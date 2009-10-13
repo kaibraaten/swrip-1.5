@@ -1,0 +1,3 @@
+
+Release v1.0.1 is now compatible with Windows when compiling in cgywin.  All you need to do is copy Makefile-win to overwrite Makefile, and it should compile without any problems.  Let me know if you encounter any at Darrik@swrip.net
+
