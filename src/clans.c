@@ -385,7 +385,7 @@ void fread_planet( PLANET_DATA *planet, FILE *fp )
 	        char aName[MAX_STRING_LENGTH];
                 AREA_DATA *pArea;
                 	        
-	     	sprintf (aName, fread_string(fp));
+	     	sprintf (aName, "%s", fread_string(fp));
 		for( pArea = first_area ; pArea ; pArea = pArea->next )
 	          if (pArea->filename && !str_cmp(pArea->filename , aName ) )
 	          {

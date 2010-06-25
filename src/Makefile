@@ -1,6 +1,6 @@
 BINARY = swrip
 #WFLAGS = -Werror -Wall -Wformat-security -Wpointer-arith -Wcast-align -Wwrite-strings -Wshadow -Wextra -Wno-unused-parameter -Wredundant-decls
-WFLAGS = -Wall -Werror
+WFLAGS = -Wall -Werror -Wformat-security -Wpointer-arith -Wcast-align
 
 CCFLAGS = -g3 -MMD $(WFLAGS) $(USE_DLSYM) $(DEBUG_TELNET)
 LDFLAGS = -lm -lcrypt

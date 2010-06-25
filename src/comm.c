@@ -1518,7 +1518,7 @@ void nanny( DESCRIPTOR_DATA *d, char *argument )
             return;
         }
         
-	sprintf( buf, ch->name );
+	sprintf( buf, "%s", ch->name );
 	d->character->desc = NULL;
 	free_char( d->character );
 	fOld = load_char_obj( d, buf, FALSE );
