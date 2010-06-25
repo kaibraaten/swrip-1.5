@@ -468,9 +468,6 @@ void boot_db( void )
     log_string("Making wizlist");
     make_wizlist();
 
-    log_string("Initializing request pipe");
-    init_request_pipe();
-
     fBootDb		= TRUE;
 
     nummobsloaded	= 0;

@@ -561,11 +561,6 @@ void game_loop( )
 	update_handler( );
 
 	/*
-	 * Check REQUESTS pipe
-	 */
-        check_requests( );
-
-	/*
 	 * Output.
 	 */
 	for ( d = first_descriptor; d; d = d_next )
@@ -1294,22 +1289,8 @@ bool write_to_descriptor( int desc, char *txt, int length )
 
 void show_title( DESCRIPTOR_DATA *d )
 {
-    CHAR_DATA *ch;
-
-    ch = d->character;
-
-    if ( !IS_SET( ch->pcdata->flags, PCFLAG_NOINTRO ) )
-    {
-	if (IS_SET(ch->act, PLR_ANSI))
-	  send_ansi_title(ch);
-	else
-	  send_ascii_title(ch);
-    }
-    else
-    {
-      write_to_buffer( d, "Press enter...\n\r", 0 );
-    }
-    d->connected = CON_PRESS_ENTER;
+  write_to_buffer( d, "Press enter...\n\r", 0 );
+  d->connected = CON_PRESS_ENTER;
 }
 
 /*

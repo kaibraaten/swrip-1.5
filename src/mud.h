@@ -4072,7 +4072,6 @@ DECLARE_DO_FUN( do_retran       );
 DECLARE_DO_FUN(	do_return	);
 DECLARE_DO_FUN(	do_revert	);
 DECLARE_DO_FUN(	do_rgrub 	);
-DECLARE_DO_FUN( do_rip		);
 DECLARE_DO_FUN( do_rlist	);
 DECLARE_DO_FUN( do_rreset	);
 DECLARE_DO_FUN(	do_rset		);
@@ -4431,10 +4430,6 @@ char *	crypt		args( ( const char *key, const char *salt ) );
 #define BOARD_FILE	"boards.txt"		/* For bulletin boards	 */
 #define SHUTDOWN_FILE	"shutdown.txt"		/* For 'shutdown'	 */
 
-#define RIPSCREEN_FILE	SYSTEM_DIR "mudrip.rip"
-#define RIPTITLE_FILE	SYSTEM_DIR "mudtitle.rip"
-#define ANSITITLE_FILE	SYSTEM_DIR "mudtitle.ans"
-#define ASCTITLE_FILE	SYSTEM_DIR "mudtitle.asc"
 #define BOOTLOG_FILE	SYSTEM_DIR "boot.txt"	  /* Boot up error file	 */
 #define BUG_FILE	SYSTEM_DIR "bugs.txt"	  /* For 'bug' and bug( )*/
 #define IDEA_FILE	SYSTEM_DIR "ideas.txt"	  /* For 'idea'		 */
@@ -4443,7 +4438,6 @@ char *	crypt		args( ( const char *key, const char *salt ) );
 #define WIZLIST_FILE	SYSTEM_DIR "WIZLIST"	  /* Wizlist		 */
 #define WHO_FILE	SYSTEM_DIR "WHO"	  /* Who output file	 */
 #define WEBWHO_FILE	SYSTEM_DIR "WEBWHO"	  /* WWW Who output file */
-#define REQUEST_PIPE	SYSTEM_DIR "REQUESTS"	  /* Request FIFO	 */
 #define SKILL_FILE	SYSTEM_DIR "skills.dat"   /* Skill table	 */
 #define HERB_FILE	SYSTEM_DIR "herbs.dat"	  /* Herb table		 */
 #define SOCIAL_FILE	SYSTEM_DIR "socials.dat"  /* Socials		 */
@@ -4480,10 +4474,6 @@ void	add_follower	args( ( CHAR_DATA *ch, CHAR_DATA *master ) );
 void	stop_follower	args( ( CHAR_DATA *ch ) );
 void	die_follower	args( ( CHAR_DATA *ch ) );
 bool	is_same_group	args( ( CHAR_DATA *ach, CHAR_DATA *bch ) );
-void	send_rip_screen args( ( CHAR_DATA *ch ) );
-void	send_rip_title	args( ( CHAR_DATA *ch ) );
-void	send_ansi_title args( ( CHAR_DATA *ch ) );
-void	send_ascii_title args( ( CHAR_DATA *ch ) );
 void	to_channel	args( ( const char *argument, int channel,
 				const char *verb, sh_int level ) );
 void  	talk_auction    args( ( char *argument ) );
@@ -4990,10 +4980,6 @@ bool	saves_spell_staff	args( ( int level, CHAR_DATA *victim ) );
 ch_ret	obj_cast_spell	args( ( int sn, int level, CHAR_DATA *ch, CHAR_DATA *victim, OBJ_DATA *obj ) );
 int	dice_parse	args( (CHAR_DATA *ch, int level, char *exp) );
 SK *	get_skilltype	args( ( int sn ) );
-
-/* request.c */
-void	init_request_pipe	args( ( void ) );
-void	check_requests		args( ( void ) );
 
 /* save.c */
 /* object saving defines for fread/write_obj. -- Altrag */

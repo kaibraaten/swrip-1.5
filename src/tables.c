@@ -593,7 +593,6 @@ DO_FUN *skill_function( char *name )
 	if ( !str_cmp( name, "do_return" ))		return do_return;
 	if ( !str_cmp( name, "do_revert" ))		return do_revert;
 	if ( !str_cmp( name, "do_rgrub" ))		return do_rgrub;
-	if ( !str_cmp( name, "do_rip" ))		return do_rip;
 	if ( !str_cmp( name, "do_rlist" ))		return do_rlist;
         if ( !str_cmp( name, "do_roster" ))             return do_roster;
 	if ( !str_cmp( name, "do_rpedit" ))		return do_rpedit;
@@ -1277,7 +1276,6 @@ char *skill_name( DO_FUN *skill )
     if ( skill == do_return )		return "do_return";
     if ( skill == do_revert )		return "do_revert";
     if ( skill == do_rgrub )		return "do_rgrub";
-    if ( skill == do_rip )		return "do_rip";
     if ( skill == do_rlist )		return "do_rlist";
     if ( skill == do_roster )           return "do_roster";
     if ( skill == do_rpedit )		return "do_rpedit";
