@@ -9,7 +9,7 @@ port=7000
 if [ -n "$1" ]; then port=$1; fi
 
 # Obtain SWR base directory.
-swrdir=~/swr
+swrdir=..
 if [ -n "$2" ]; then swrdir=$2; fi
 
 # Check that startup script or game binary isn't already running.
