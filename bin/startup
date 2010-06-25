@@ -1,5 +1,9 @@
 #!/bin/bash
 
+#
+#SWRiP startup script
+#
+
 # Set the port number.
 port=7000
 if [ -n "$1" ]; then port=$1; fi
