@@ -1842,7 +1842,7 @@ void pullorpush( CHAR_DATA *ch, OBJ_DATA *obj, bool pull )
     char buf[MAX_STRING_LENGTH];
     CHAR_DATA		*rch;
     bool		 isup;
-    ROOM_INDEX_DATA	*room,  *to_room;
+    ROOM_INDEX_DATA	*room,  *to_room = NULL;
     EXIT_DATA		*pexit, *pexit_rev;
     int			 edir;
     char		*txt;

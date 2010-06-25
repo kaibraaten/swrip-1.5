@@ -2493,19 +2493,6 @@ bool space_in_range_h( SHIP_DATA *ship, SPACE_DATA *object )
   return FALSE;
 }	
 
-char * print_distance_ship( SHIP_DATA *ship, SHIP_DATA *target )
-{
-	char *buf;
-	float hx, hy, hz;
-	hx = target->vx - ship->vx;
-	hy = target->vy - ship->vy;
-	hz = target->vz - ship->vz;
-	
-	
-	sprintf( buf, "%.0f %.0f %.0f", hx, hy, hz);
-	
-	return buf;
-}
 void echo_to_system( int color , SHIP_DATA *ship , char *argument , SHIP_DATA *ignore )
 {
      SHIP_DATA *target;
@@ -7014,280 +7001,279 @@ void do_accelerate( CHAR_DATA *ch, char *argument )
 
 void do_trajectory_actual( CHAR_DATA *ch, char *argument )
 {
-    char  buf[MAX_STRING_LENGTH];
-    char  arg2[MAX_INPUT_LENGTH];
-    char  arg3[MAX_INPUT_LENGTH];
-    int chance;
-    float vx,vy,vz;
-    SHIP_DATA *ship;
+  char  buf[MAX_STRING_LENGTH];
+  char  arg2[MAX_INPUT_LENGTH];
+  char  arg3[MAX_INPUT_LENGTH];
+  int chance;
+  float vx,vy,vz;
+  SHIP_DATA *ship;
     
   
-    	        if (  (ship = ship_from_cockpit(ch->in_room->vnum))  == NULL )
-    	        {
-    	            send_to_char("&RYou must be in the cockpit of a ship to do that!\n\r",ch);
-    	            return;
-    	        }
-                
-                if ( ship->class > SHIP_PLATFORM )
-    	        {
-    	            send_to_char("&RThis isn't a spacecraft!\n\r",ch);
-    	            return;
-    	        }
-    	        
-                if (  (ship = ship_from_pilotseat(ch->in_room->vnum))  == NULL )
-    	        {
-    	            send_to_char("&RYour not in the pilots seat.\n\r",ch);
-    	            return;
-    	        }
-                
-                if ( autofly(ship))
-    	        {
-    	            send_to_char("&RYou'll have to turn off the ships autopilot first.\n\r",ch);
-    	            return;
-    	        }
-    	        
-                if (ship->shipstate == SHIP_DISABLED)
-    	        {
-    	            send_to_char("&RThe ships drive is disabled. Unable to manuever.\n\r",ch);
-    	            return;
-    	        }
-                if  ( ship->class == SHIP_PLATFORM )
-                {
-                   send_to_char( "&RPlatforms can't turn!\n\r" , ch );
-                   return;
-                }   
-
-    	        if (ship->shipstate == SHIP_HYPERSPACE)
-                {
-                  send_to_char("&RYou can only do that in realspace!\n\r",ch);
-                  return;   
-                }
-    	        if (ship->shipstate == SHIP_DOCKED)
-    	        {
-    	            send_to_char("&RYou can't do that until after you've launched!\n\r",ch);
-    	            return;
-    	        }
-    	        if (ship->shipstate != SHIP_READY)
-    	        {
-    	            send_to_char("&RPlease wait until the ship has finished its current manouver.\n\r",ch);
-    	            return;
-    	        }
-    	        if ( ship->energy < (ship->currspeed/10) )
-    	        {
-    	           send_to_char("&RTheres not enough fuel!\n\r",ch);
-    	           return;
-    	        }
-    	        
-                if ( ship->class == FIGHTER_SHIP )
-                    chance = IS_NPC(ch) ? ch->top_level
-	                 : (int)  (ch->pcdata->learned[gsn_starfighters]) ;
-                if ( ship->class == MIDSIZE_SHIP )
-                    chance = IS_NPC(ch) ? ch->top_level
-	                 : (int)  (ch->pcdata->learned[gsn_midships]) ;
-
-/* changed mobs so they can not fly capital ships. Forcers could possess mobs
-   and fly them - Darrik Vequir */
-                if ( ship->class == CAPITAL_SHIP )
-                    chance = IS_NPC(ch) ? 0
-	                 : (int) (ch->pcdata->learned[gsn_capitalships]);
-                if ( number_percent( ) > chance )
-    		{ 
-	        send_to_char("&RYou fail to work the controls properly.\n\r",ch);
-	        if ( ship->class == FIGHTER_SHIP )
-                    learn_from_failure( ch, gsn_starfighters );
-                if ( ship->class == MIDSIZE_SHIP )
-    	            learn_from_failure( ch, gsn_midships );
-                if ( ship->class == CAPITAL_SHIP )
-                    learn_from_failure( ch, gsn_capitalships );
-    	   	return;	
-    	        }
-    	
-    argument = one_argument( argument, arg2 );
-    argument = one_argument( argument, arg3 );
-            
-    vx = atof( arg2 );
-    vy = atof( arg3 );
-    vz = atof( argument );
-            
-    if ( vx == ship->vx && vy == ship->vy && vz == ship->vz )
+  if (  (ship = ship_from_cockpit(ch->in_room->vnum))  == NULL )
     {
-       ch_printf( ch , "The ship is already at %.0f %.0f %.0f !" ,vx,vy,vz);
+      send_to_char("&RYou must be in the cockpit of a ship to do that!\n\r",ch);
+      return;
+    }
+                
+  if ( ship->class > SHIP_PLATFORM )
+    {
+      send_to_char("&RThis isn't a spacecraft!\n\r",ch);
+      return;
+    }
+    	        
+  if (  (ship = ship_from_pilotseat(ch->in_room->vnum))  == NULL )
+    {
+      send_to_char("&RYour not in the pilots seat.\n\r",ch);
+      return;
+    }
+                
+  if ( autofly(ship))
+    {
+      send_to_char("&RYou'll have to turn off the ships autopilot first.\n\r",ch);
+      return;
+    }
+    	        
+  if (ship->shipstate == SHIP_DISABLED)
+    {
+      send_to_char("&RThe ships drive is disabled. Unable to manuever.\n\r",ch);
+      return;
+    }
+  if  ( ship->class == SHIP_PLATFORM )
+    {
+      send_to_char( "&RPlatforms can't turn!\n\r" , ch );
+      return;
+    }   
+
+  if (ship->shipstate == SHIP_HYPERSPACE)
+    {
+      send_to_char("&RYou can only do that in realspace!\n\r",ch);
+      return;   
+    }
+  if (ship->shipstate == SHIP_DOCKED)
+    {
+      send_to_char("&RYou can't do that until after you've launched!\n\r",ch);
+      return;
+    }
+  if (ship->shipstate != SHIP_READY)
+    {
+      send_to_char("&RPlease wait until the ship has finished its current manouver.\n\r",ch);
+      return;
+    }
+  if ( ship->energy < (ship->currspeed/10) )
+    {
+      send_to_char("&RTheres not enough fuel!\n\r",ch);
+      return;
+    }
+    	        
+  if ( ship->class == FIGHTER_SHIP )
+    chance = IS_NPC(ch) ? ch->top_level
+      : (int)  (ch->pcdata->learned[gsn_starfighters]) ;
+  if ( ship->class == MIDSIZE_SHIP )
+    chance = IS_NPC(ch) ? ch->top_level
+      : (int)  (ch->pcdata->learned[gsn_midships]) ;
+
+  /* changed mobs so they can not fly capital ships. Forcers could possess mobs
+     and fly them - Darrik Vequir */
+  if ( ship->class == CAPITAL_SHIP )
+    chance = IS_NPC(ch) ? 0
+      : (int) (ch->pcdata->learned[gsn_capitalships]);
+  if ( number_percent( ) > chance )
+    { 
+      send_to_char("&RYou fail to work the controls properly.\n\r",ch);
+      if ( ship->class == FIGHTER_SHIP )
+	learn_from_failure( ch, gsn_starfighters );
+      if ( ship->class == MIDSIZE_SHIP )
+	learn_from_failure( ch, gsn_midships );
+      if ( ship->class == CAPITAL_SHIP )
+	learn_from_failure( ch, gsn_capitalships );
+      return;	
+    }
+    	
+  argument = one_argument( argument, arg2 );
+  argument = one_argument( argument, arg3 );
+            
+  vx = atof( arg2 );
+  vy = atof( arg3 );
+  vz = atof( argument );
+            
+  if ( vx == ship->vx && vy == ship->vy && vz == ship->vz )
+    {
+      ch_printf( ch , "The ship is already at %.0f %.0f %.0f !" ,vx,vy,vz);
     }
 
-    if( vx == 0 && vy == 0 && vz == 0 )
-    	vz = ship->vz+1;
+  if( vx == 0 && vy == 0 && vz == 0 )
+    vz = ship->vz+1;
                 
-    ship->hx = vx - ship->vx;
-    ship->hy = vy - ship->vy;
-    ship->hz = vz - ship->vz;
-    
-    ship->energy -= (ship->currspeed/10);
+  ship->hx = vx - ship->vx;
+  ship->hy = vy - ship->vy;
+  ship->hz = vz - ship->vz;
+  
+  ship->energy -= (ship->currspeed/10);
        
-    ch_printf( ch ,"&GNew course set, aproaching %.0f %.0f %.0f.\n\r" , vx,vy,vz );            
-    act( AT_PLAIN, "$n manipulates the ships controls.", ch, NULL, argument , TO_ROOM );
+  ch_printf( ch ,"&GNew course set, aproaching %.0f %.0f %.0f.\n\r" , vx,vy,vz );            
+  act( AT_PLAIN, "$n manipulates the ships controls.", ch, NULL, argument , TO_ROOM );
                          
-    echo_to_cockpit( AT_YELLOW ,ship, "The ship begins to turn.\n\r" );                        
-    sprintf( buf, "%s turns altering its present course." , ship->name );
-    echo_to_system( AT_ORANGE , ship , buf , NULL );
+  echo_to_cockpit( AT_YELLOW ,ship, "The ship begins to turn.\n\r" );                        
+  sprintf( buf, "%s turns altering its present course." , ship->name );
+  echo_to_system( AT_ORANGE , ship , buf , NULL );
                                                             
-    if ( ship->class == FIGHTER_SHIP || ( ship->class == MIDSIZE_SHIP && ship->manuever > 50 ) )
-        ship->shipstate = SHIP_BUSY_3;
-    else if ( ship->class == MIDSIZE_SHIP || ( ship->class == CAPITAL_SHIP && ship->manuever > 50 ) )
-        ship->shipstate = SHIP_BUSY_2;
-    else
-        ship->shipstate = SHIP_BUSY;     
+  if ( ship->class == FIGHTER_SHIP || ( ship->class == MIDSIZE_SHIP && ship->manuever > 50 ) )
+    ship->shipstate = SHIP_BUSY_3;
+  else if ( ship->class == MIDSIZE_SHIP || ( ship->class == CAPITAL_SHIP && ship->manuever > 50 ) )
+    ship->shipstate = SHIP_BUSY_2;
+  else
+    ship->shipstate = SHIP_BUSY;     
    
-    if ( ship->class == FIGHTER_SHIP )
-        learn_from_success( ch, gsn_starfighters );
-    if ( ship->class == MIDSIZE_SHIP )
-        learn_from_success( ch, gsn_midships );
-    if ( ship->class == CAPITAL_SHIP )
-        learn_from_success( ch, gsn_capitalships );
+  if ( ship->class == FIGHTER_SHIP )
+    learn_from_success( ch, gsn_starfighters );
+  if ( ship->class == MIDSIZE_SHIP )
+    learn_from_success( ch, gsn_midships );
+  if ( ship->class == CAPITAL_SHIP )
+    learn_from_success( ch, gsn_capitalships );
     	
 }
 
 void do_trajectory( CHAR_DATA *ch, char *argument )
 {
-    char  buf[MAX_STRING_LENGTH];
-    char  arg2[MAX_INPUT_LENGTH];
-    char  arg3[MAX_INPUT_LENGTH];
-    int chance;
-    float vx,vy,vz;
-    SHIP_DATA *ship;
+  char  buf[MAX_STRING_LENGTH];
+  char  arg2[MAX_INPUT_LENGTH];
+  char  arg3[MAX_INPUT_LENGTH];
+  int chance;
+  float vx,vy,vz;
+  SHIP_DATA *ship;
     
   
-    	        if (  (ship = ship_from_cockpit(ch->in_room->vnum))  == NULL )
-    	        {
-    	            send_to_char("&RYou must be in the cockpit of a ship to do that!\n\r",ch);
-    	            return;
-    	        }
-                
-                if ( ship->class > SHIP_PLATFORM )
-    	        {
-    	            send_to_char("&RThis isn't a spacecraft!\n\r",ch);
-    	            return;
-    	        }
-    	        
-                if (  (ship = ship_from_pilotseat(ch->in_room->vnum))  == NULL )
-    	        {
-    	            send_to_char("&RYour not in the pilots seat.\n\r",ch);
-    	            return;
-    	        }
-                
-                if ( autofly(ship))
-    	        {
-    	            send_to_char("&RYou'll have to turn off the ships autopilot first.\n\r",ch);
-    	            return;
-    	        }
-    	        
-                if (ship->shipstate == SHIP_DISABLED)
-    	        {
-    	            send_to_char("&RThe ships drive is disabled. Unable to manuever.\n\r",ch);
-    	            return;
-    	        }
-                if  ( ship->class == SHIP_PLATFORM )
-                {
-                   send_to_char( "&RPlatforms can't turn!\n\r" , ch );
-                   return;
-                }   
+  if (  (ship = ship_from_cockpit(ch->in_room->vnum))  == NULL )
+    {
+      send_to_char("&RYou must be in the cockpit of a ship to do that!\n\r",ch);
+      return;
+    }
+  
+  if ( ship->class > SHIP_PLATFORM )
+    {
+      send_to_char("&RThis isn't a spacecraft!\n\r",ch);
+      return;
+    }
+  
+  if (  (ship = ship_from_pilotseat(ch->in_room->vnum))  == NULL )
+    {
+      send_to_char("&RYour not in the pilots seat.\n\r",ch);
+      return;
+    }
+  
+  if ( autofly(ship))
+    {
+      send_to_char("&RYou'll have to turn off the ships autopilot first.\n\r",ch);
+      return;
+    }
+  
+  if (ship->shipstate == SHIP_DISABLED)
+    {
+      send_to_char("&RThe ships drive is disabled. Unable to manuever.\n\r",ch);
+      return;
+    }
+  if  ( ship->class == SHIP_PLATFORM )
+    {
+      send_to_char( "&RPlatforms can't turn!\n\r" , ch );
+      return;
+    }   
 
-    	        if (ship->shipstate == SHIP_HYPERSPACE)
-                {
-                  send_to_char("&RYou can only do that in realspace!\n\r",ch);
-                  return;   
-                }
-    	        if (ship->shipstate == SHIP_LANDED)
-    	        {
-    	            send_to_char("&RYou can't do that until after you've launched!\n\r",ch);
-    	            return;
-    	        }
-    	        if (ship->docking != SHIP_READY)
-    	        {
-    	            send_to_char("&RYou can't do that while docked to another ship!\n\r",ch);
-    	            return;
-    	        }
-    	        if (ship->shipstate != SHIP_READY && ship->shipstate != SHIP_TRACTORED)
-    	        {
-    	            send_to_char("&RPlease wait until the ship has finished its current manouver.\n\r",ch);
-    	            return;
-    	        }
-    	        if ( ship->energy < (ship->currspeed/10) )
-    	        {
-    	           send_to_char("&RTheres not enough fuel!\n\r",ch);
-    	           return;
-    	        }
+  if (ship->shipstate == SHIP_HYPERSPACE)
+    {
+      send_to_char("&RYou can only do that in realspace!\n\r",ch);
+      return;   
+    }
+  if (ship->shipstate == SHIP_LANDED)
+    {
+      send_to_char("&RYou can't do that until after you've launched!\n\r",ch);
+      return;
+    }
+  if (ship->docking != SHIP_READY)
+    {
+      send_to_char("&RYou can't do that while docked to another ship!\n\r",ch);
+      return;
+    }
+  if (ship->shipstate != SHIP_READY && ship->shipstate != SHIP_TRACTORED)
+    {
+      send_to_char("&RPlease wait until the ship has finished its current manouver.\n\r",ch);
+      return;
+    }
+  if ( ship->energy < (ship->currspeed/10) )
+    {
+      send_to_char("&RTheres not enough fuel!\n\r",ch);
+      return;
+    }
     	        
-                if ( ship->class == FIGHTER_SHIP )
-                    chance = IS_NPC(ch) ? ch->top_level
-	                 : (int)  (ch->pcdata->learned[gsn_starfighters]) ;
-                if ( ship->class == MIDSIZE_SHIP )
-                    chance = IS_NPC(ch) ? ch->top_level
-	                 : (int)  (ch->pcdata->learned[gsn_midships]) ;
-
-/* changed mobs so they can not fly capital ships. Forcers could possess mobs
-   and fly them - Darrik Vequir */
-                if ( ship->class == CAPITAL_SHIP )
-                    chance = IS_NPC(ch) ? 0
-	                 : (int) (ch->pcdata->learned[gsn_capitalships]);
-                if ( number_percent( ) > chance )
-    		{ 
-	        send_to_char("&RYou fail to work the controls properly.\n\r",ch);
-	        if ( ship->class == FIGHTER_SHIP )
-                    learn_from_failure( ch, gsn_starfighters );
-                if ( ship->class == MIDSIZE_SHIP )
-    	            learn_from_failure( ch, gsn_midships );
-                if ( ship->class == CAPITAL_SHIP )
-                    learn_from_failure( ch, gsn_capitalships );
-    	   	return;	
-    	        }
+  if ( ship->class == FIGHTER_SHIP )
+    chance = IS_NPC(ch) ? ch->top_level
+      : (int)  (ch->pcdata->learned[gsn_starfighters]) ;
+  if ( ship->class == MIDSIZE_SHIP )
+    chance = IS_NPC(ch) ? ch->top_level
+      : (int)  (ch->pcdata->learned[gsn_midships]) ;
+  
+  /* changed mobs so they can not fly capital ships. Forcers could possess mobs
+     and fly them - Darrik Vequir */
+  if ( ship->class == CAPITAL_SHIP )
+    chance = IS_NPC(ch) ? 0
+      : (int) (ch->pcdata->learned[gsn_capitalships]);
+  if ( number_percent( ) > chance )
+    { 
+      send_to_char("&RYou fail to work the controls properly.\n\r",ch);
+      if ( ship->class == FIGHTER_SHIP )
+	learn_from_failure( ch, gsn_starfighters );
+      if ( ship->class == MIDSIZE_SHIP )
+	learn_from_failure( ch, gsn_midships );
+      if ( ship->class == CAPITAL_SHIP )
+	learn_from_failure( ch, gsn_capitalships );
+      return;	
+    }
     	
-    argument = one_argument( argument, arg2 );
-    argument = one_argument( argument, arg3 );
+  argument = one_argument( argument, arg2 );
+  argument = one_argument( argument, arg3 );
 
-    if( arg2 && arg2[0] != '\0' )
-      vx = atof( arg2 );
-    else
-      vx = 0;
+  if( arg2[0] != '\0' )
+    vx = atof( arg2 );
+  else
+    vx = 0;
 
-    if( arg3 && arg3[0] != '\0' )
-      vy = atof( arg3 );
-    else
-      vy = 0;
+  if( arg3[0] != '\0' )
+    vy = atof( arg3 );
+  else
+    vy = 0;
 
-    if( argument && argument[0] != '\0' )
-      vz = atof( argument );
-    else if ( vx != ship->vx && vy != ship->vy )
-      vz = 0;
-    else
-      vz = 1;
+  if( argument && argument[0] != '\0' )
+    vz = atof( argument );
+  else if ( vx != ship->vx && vy != ship->vy )
+    vz = 0;
+  else
+    vz = 1;
             
-    ship->hx = vx;
-    ship->hy = vy;
-    ship->hz = vz;
+  ship->hx = vx;
+  ship->hy = vy;
+  ship->hz = vz;
     
-    ship->energy -= (ship->currspeed/10);
+  ship->energy -= (ship->currspeed/10);
        
-    ch_printf( ch ,"&GNew course set, aproaching %.0f %.0f %.0f.\n\r" , vx,vy,vz );            
-    act( AT_PLAIN, "$n manipulates the ships controls.", ch, NULL, argument , TO_ROOM );
+  ch_printf( ch ,"&GNew course set, aproaching %.0f %.0f %.0f.\n\r" , vx,vy,vz );            
+  act( AT_PLAIN, "$n manipulates the ships controls.", ch, NULL, argument , TO_ROOM );
                          
-    echo_to_cockpit( AT_YELLOW ,ship, "The ship begins to turn.\n\r" );                        
-    sprintf( buf, "%s turns altering its present course." , ship->name );
-    echo_to_system( AT_ORANGE , ship , buf , NULL );
+  echo_to_cockpit( AT_YELLOW ,ship, "The ship begins to turn.\n\r" );                        
+  sprintf( buf, "%s turns altering its present course." , ship->name );
+  echo_to_system( AT_ORANGE , ship , buf , NULL );
                                                             
-    if ( ship->class == FIGHTER_SHIP || ( ship->class == MIDSIZE_SHIP && ship->manuever > 50 ) )
-        ship->shipstate = SHIP_BUSY_3;
-    else if ( ship->class == MIDSIZE_SHIP || ( ship->class == CAPITAL_SHIP && ship->manuever > 50 ) )
-        ship->shipstate = SHIP_BUSY_2;
-    else
-        ship->shipstate = SHIP_BUSY;     
+  if ( ship->class == FIGHTER_SHIP || ( ship->class == MIDSIZE_SHIP && ship->manuever > 50 ) )
+    ship->shipstate = SHIP_BUSY_3;
+  else if ( ship->class == MIDSIZE_SHIP || ( ship->class == CAPITAL_SHIP && ship->manuever > 50 ) )
+    ship->shipstate = SHIP_BUSY_2;
+  else
+    ship->shipstate = SHIP_BUSY;     
    
-    if ( ship->class == FIGHTER_SHIP )
-        learn_from_success( ch, gsn_starfighters );
-    if ( ship->class == MIDSIZE_SHIP )
-        learn_from_success( ch, gsn_midships );
-    if ( ship->class == CAPITAL_SHIP )
-        learn_from_success( ch, gsn_capitalships );
-    	
+  if ( ship->class == FIGHTER_SHIP )
+    learn_from_success( ch, gsn_starfighters );
+  if ( ship->class == MIDSIZE_SHIP )
+    learn_from_success( ch, gsn_midships );
+  if ( ship->class == CAPITAL_SHIP )
+    learn_from_success( ch, gsn_capitalships );
 }
 
 void do_buyship(CHAR_DATA *ch, char *argument )
@@ -10144,7 +10130,7 @@ void do_calculate(CHAR_DATA *ch, char *argument )
     if( !is_number(arg1) && arg1[0] != '-')
     {
       ship->currjump = spaceobject_from_name( arg1 );
-      if ( arg2 && arg2[0] != '\0' )
+      if ( arg2[0] != '\0' )
         distance = atoi(arg2);
       if( ship->currjump )
       {
@@ -10154,7 +10140,7 @@ void do_calculate(CHAR_DATA *ch, char *argument )
         found = TRUE;
       }
     }  
-    else if( arg2 && arg3 && arg2[0] != '\0' && arg2[0] != '\0' )
+    else if( arg2[0] != '\0' && arg2[0] != '\0' )
     {
     	ship->jx = atoi(arg1);
     	ship->jy = atoi(arg2);
@@ -10334,7 +10320,7 @@ void do_calculate_diff(CHAR_DATA *ch, char *argument )
     	   	   return;
     	   	}
 
-    if( arg2 && arg3 && arg2[0] != '\0' && arg3[0] != '\0')
+    if( arg2[0] != '\0' && arg3[0] != '\0')
     {
     	ship->jx = ship->vx + atoi(arg1);
     	ship->jy = ship->vy + atoi(arg2);
@@ -10973,7 +10959,7 @@ void do_findserin( CHAR_DATA *ch, char *argument )
         return;
      }
 
-     if ( !arg || arg[0] == '\0' )
+     if ( arg[0] == '\0' )
      {
          ch_printf( ch, "&cList of Serins:  \n\n\r" );
 	 for( bus = 0; bus < MAX_BUS; bus++ )

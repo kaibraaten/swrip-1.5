@@ -2966,7 +2966,7 @@ char *fread_string( FILE *fp )
 	     *plast = '\0';
 	     return STRALLOC( buf );
 	}
-	switch ( *plast = getc( fp ) )
+	switch ( (int)(*plast = getc( fp ) ) )
 	{
 	default:
 	    plast++; ln++;
@@ -3037,7 +3037,7 @@ char *fread_string_nohash( FILE *fp )
 	   *plast = '\0';
 	   return str_dup( buf );
 	}
-	switch ( *plast = getc( fp ) )
+	switch ( (int)( *plast = getc( fp ) ) )
 	{
 	default:
 	    plast++; ln++;

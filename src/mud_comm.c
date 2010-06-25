@@ -708,7 +708,7 @@ void do_mpinvis( CHAR_DATA *ch, char *argument )
     }
  
     argument = one_argument( argument, arg );
-    if ( arg && arg[0] != '\0' )
+    if ( arg[0] != '\0' )
     {
         if ( !is_number( arg ) )
         {

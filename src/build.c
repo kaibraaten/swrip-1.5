@@ -762,7 +762,7 @@ char *copy_buffer( CHAR_DATA *ch )
       strcpy( tmp, ch->editor->line[x] );
       smush_tilde( tmp );
       len = strlen(tmp);
-      if ( tmp && tmp[len-1] == '~' )
+      if ( tmp[len-1] == '~' )
         tmp[len-1] = '\0';
       else
         strcat( tmp, "\n\r" );
@@ -1817,7 +1817,7 @@ void do_mset( CHAR_DATA *ch, char *argument )
 	    return;
 	}
 
-	if ( !arg3 || arg3[0] == '\0' )
+	if ( arg3[0] == '\0' )
 	{
 	    STRFREE( victim->pcdata->clan_name );
 	    victim->pcdata->clan_name	= STRALLOC( "" );
@@ -3277,7 +3277,7 @@ void do_oset( CHAR_DATA *ch, char *argument )
 	int bitv;
 
 	argument = one_argument( argument, arg2 );
-	if ( !arg2 || arg2[0] == '\0' || !argument || argument[0] == 0 )
+	if ( arg2[0] == '\0' || !argument || argument[0] == 0 )
 	{
 	   send_to_char( "Usage: oset <object> affect <field> <value>\n\r", ch );
            send_to_char( "Affect Fields:\n\r", ch );
@@ -3397,7 +3397,7 @@ void do_oset( CHAR_DATA *ch, char *argument )
 
     if ( !str_cmp( arg2, "ed" ) )
     {
-	if ( !arg3 || arg3[0] == '\0' )
+	if ( arg3[0] == '\0' )
 	{
 	    send_to_char( "Syntax: oset <object> ed <keywords>\n\r",
 		ch );
@@ -3467,7 +3467,7 @@ void do_oset( CHAR_DATA *ch, char *argument )
     
     if ( !str_cmp( arg2, "rmed" ) )
     {
-	if ( !arg3 || arg3[0] == '\0' )
+	if ( arg3[0] == '\0' )
 	{
 	   send_to_char( "Syntax: oset <object> rmed <keywords>\n\r", ch );
 	   return;
@@ -4599,7 +4599,7 @@ void do_redit( CHAR_DATA *ch, char *argument )
 
 	argument = one_argument( argument, arg2 );
 	argument = one_argument( argument, arg3 );
-	if ( !arg2 || arg2[0] == '\0' )
+	if ( arg2[0] == '\0' )
 	{
 	    send_to_char( "Create, change or remove an exit.\n\r", ch );
 	    send_to_char( "Usage: redit exit <dir> [room] [flags] [key] [keywords]\n\r", ch );
@@ -4612,7 +4612,7 @@ void do_redit( CHAR_DATA *ch, char *argument )
 	    case '+':	edir = get_dir(arg2+1);	addexit = TRUE;	  break;
 	    case '#':	edir = atoi(arg2+1);	numnotdir = TRUE; break;  
 	}
-	if ( !arg3 || arg3[0] == '\0' )
+	if ( arg3[0] == '\0' )
 	    evnum = 0;
 	else
 	    evnum = atoi( arg3 );
@@ -4682,7 +4682,7 @@ void do_redit( CHAR_DATA *ch, char *argument )
 	    }
 	}
 	argument = one_argument( argument, arg3 );
-	if ( arg3 && arg3[0] != '\0' )
+	if ( arg3[0] != '\0' )
 	    xit->exit_info = atoi( arg3 );
 	if ( argument && argument[0] != '\0' )
 	{
@@ -4718,7 +4718,7 @@ void do_redit( CHAR_DATA *ch, char *argument )
 
 	argument = one_argument( argument, arg2 );
 	argument = one_argument( argument, arg3 );
-	if ( !arg2 || arg2[0] == '\0' )
+	if ( arg2[0] == '\0' )
 	{
 	    send_to_char( "Create, change or remove a two-way exit.\n\r", ch );
 	    send_to_char( "Usage: redit bexit <dir> [room] [flags] [key] [keywords]\n\r", ch );
@@ -4791,7 +4791,7 @@ void do_redit( CHAR_DATA *ch, char *argument )
     if ( !str_cmp( arg, "exdistance" ) )
     {
 	argument = one_argument( argument, arg2 );
-	if ( !arg2 || arg2[0] == '\0' )
+	if ( arg2[0] == '\0' )
 	{
 	   send_to_char( "Set the distance (in rooms) between this room, and the destination room.\n\r", ch );
 	   send_to_char( "Usage: redit exdistance <dir> [distance]\n\r", ch );
@@ -4820,7 +4820,7 @@ void do_redit( CHAR_DATA *ch, char *argument )
     if ( !str_cmp( arg, "exdesc" ) )
     {
 	argument = one_argument( argument, arg2 );
-	if ( !arg2 || arg2[0] == '\0' )
+	if ( arg2[0] == '\0' )
 	{
 	   send_to_char( "Create or clear a description for an exit.\n\r", ch );
 	   send_to_char( "Usage: redit exdesc <dir> [description]\n\r", ch );

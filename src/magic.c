@@ -5553,7 +5553,7 @@ ch_ret spell_midas_touch( int sn, int level, CHAR_DATA *ch, void *vo )
     }
 
     if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE )
-    &&   get_trust( victim ) < LEVEL_IMMORTAL )
+    &&   get_trust( ch ) < LEVEL_IMMORTAL )
     {
 	send_to_char( "That item is not for mortal hands to touch!\n\r", ch );
 	return rSPELL_FAILED;   /* Thoric */

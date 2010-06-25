@@ -2031,7 +2031,7 @@ char *itoa(int foo)
 void do_group( CHAR_DATA *ch, char *argument )
 {
     char arg[MAX_INPUT_LENGTH];
-    CHAR_DATA *victim;
+    CHAR_DATA *victim = NULL;
 
     one_argument( argument, arg );
 
@@ -2132,7 +2132,7 @@ void do_group( CHAR_DATA *ch, char *argument )
 	  send_to_char( "You have no eligible group members.\n\r", ch );
 	else
 	{
-     	   act( AT_ACTION, "$n groups $s followers.", ch, NULL, victim, TO_ROOM );
+     	   act( AT_ACTION, "$n groups $s followers.", ch, NULL, NULL, TO_ROOM );
 	   send_to_char( "You group your followers.\n\r", ch );
 	}
     return;

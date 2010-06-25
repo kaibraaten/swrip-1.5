@@ -4618,6 +4618,7 @@ void do_propeganda ( CHAR_DATA *ch , char *argument )
        return;
    }
 
+   planet = ch->in_room->area->planet;
     argument = one_argument( argument, arg1 );
 
     if ( ch->mount )
@@ -4684,7 +4685,7 @@ void do_propeganda ( CHAR_DATA *ch , char *argument )
 
     if ( !ch->pcdata->clan )
     {
-    sprintf( buf, "You speak to them about the evils of %s" , planet->governed_by ? planet->governed_by->name : "their current leaders" );
+      sprintf( buf, "You speak to them about the evils of %s" , planet->governed_by ? planet->governed_by->name : "their current leaders" );
     ch_printf( ch, buf );
     act( AT_ACTION, "$n speaks about the planets organization.\n\r", ch, NULL, victim, TO_VICT    );
     act( AT_ACTION, "$n tells $N about the evils of their organization.\n\r",  ch, NULL, victim, TO_NOTVICT );
@@ -5756,7 +5757,7 @@ void do_makedisguise( CHAR_DATA *ch, char *argument )
     		argument = one_argument( argument, arg1 );
 		argument = one_argument( argument, arg2 );
 
-    	        if ( !argument || !arg1 || !arg2 || argument[0] == '\0' || arg2[0] == '\0' || arg1[0] == '\0' )
+    	        if ( !argument || argument[0] == '\0' || arg2[0] == '\0' || arg1[0] == '\0' )
                 {
                   send_to_char( "&RUsage: Makedisguise <sex> <race> <name>\n\r&w", ch);
                   return;   

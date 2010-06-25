@@ -323,16 +323,7 @@ sh_int get_age( CHAR_DATA *ch )
  */
 sh_int get_curr_str( CHAR_DATA *ch )
 {
-    sh_int max;
-
-/*  if (!IS_NPC(ch))
-    {
-      max  = 20 + race_table[ch->race].str_plus;
-      max = UMIN(max,25);
-    }
-    else
-*/  max  = 25;
-
+    sh_int max = 25;
     return URANGE( 3, ch->perm_str + ch->mod_str, max );
 }
 
@@ -343,16 +334,7 @@ sh_int get_curr_str( CHAR_DATA *ch )
  */
 sh_int get_curr_int( CHAR_DATA *ch )
 {
-    sh_int max;
-
-/*  if (!IS_NPC(ch))
-    {
-      max  = 20 + race_table[ch->race].int_plus;
-      max = UMIN(max,25);
-    }
-    else
-*/   max  = 25;
-
+    sh_int max = 25;
     return URANGE( 3, ch->perm_int + ch->mod_int, max );
 }
 
@@ -363,16 +345,7 @@ sh_int get_curr_int( CHAR_DATA *ch )
  */
 sh_int get_curr_wis( CHAR_DATA *ch )
 {
-    sh_int max;
-
-/*    if (!IS_NPC(ch))
-    {
-      max  = 20 + race_table[ch->race].wis_plus;
-      max = UMIN(max,25);
-    }
-    else
-*/    max  = 25;
-
+    sh_int max = 25;
     return URANGE( 3, ch->perm_wis + ch->mod_wis, max );
 }
 
@@ -383,15 +356,7 @@ sh_int get_curr_wis( CHAR_DATA *ch )
  */
 sh_int get_curr_dex( CHAR_DATA *ch )
 {
-    sh_int max;
-/*  if (!IS_NPC(ch))
-    {
-      max  = 20 + race_table[ch->race].dex_plus;
-      max = UMIN(max,25);
-    }
-    else
-*/  max  = 25;
-
+    sh_int max = 25;
     return URANGE( 3, ch->perm_dex + ch->mod_dex, max );
 }
 
@@ -402,17 +367,8 @@ sh_int get_curr_dex( CHAR_DATA *ch )
  */
 sh_int get_curr_con( CHAR_DATA *ch )
 {
-    sh_int max;
-    max = UMIN(max,25);
-/*  if (!IS_NPC(ch))
-    {
-      max  = 20 + race_table[ch->race].con_plus;
-      max = UMIN(max,25);
-    }
-    else
-*/  max  = 25;
-
-    return URANGE( 3, ch->perm_con + ch->mod_con, max );
+  sh_int max = 25;
+  return URANGE( 3, ch->perm_con + ch->mod_con, max );
 
 }
 
@@ -421,16 +377,7 @@ sh_int get_curr_con( CHAR_DATA *ch )
  */
 sh_int get_curr_cha( CHAR_DATA *ch )
 {
-    sh_int max;
-/*  if (!IS_NPC(ch))
-    {
-      max  = 20 + race_table[ch->race].cha_plus;
-      max = UMIN(max,25);
-    }
-    else
-*/    max  = 25;
-
-
+    sh_int max = 25;
     return URANGE( 3, ch->perm_cha + ch->mod_cha, max );
 }
 
@@ -439,23 +386,13 @@ sh_int get_curr_cha( CHAR_DATA *ch )
  */
 sh_int get_curr_lck( CHAR_DATA *ch )
 {
-    sh_int max;
-
-/*  if (!IS_NPC(ch))
-    {
-      max  = 20 + race_table[ch->race].lck_plus;
-      max = UMIN(max,25);
-    }
-    else
-*/    max  = 25;
-
-
+    sh_int max = 25;
     return URANGE( 3, ch->perm_lck + ch->mod_lck, max );
 }
 
 sh_int get_curr_frc( CHAR_DATA *ch )
 {
-    sh_int max;
+    sh_int max = 0;
     if (!IS_NPC(ch))
     {
       max  = 20 + race_table[ch->race].frc_plus;

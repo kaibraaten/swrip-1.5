@@ -470,7 +470,7 @@ void do_tractorbeam( CHAR_DATA *ch, char *argument )
 void do_tractorbeam(CHAR_DATA *ch, char *argument )
 {
     char arg[MAX_INPUT_LENGTH];
-    int chance, origchance, distance;
+    int chance, distance;
     SHIP_DATA *ship;
     SHIP_DATA *target;
     char buf[MAX_STRING_LENGTH];
@@ -654,9 +654,7 @@ void do_tractorbeam(CHAR_DATA *ch, char *argument )
 	     chance += ship->currspeed - target->currspeed;
 	     chance += ship->manuever - target->manuever;
 	     chance -= distance/(10*(target->class+1));
-	     chance -= origchance;
 	     chance /= 2;
-	     chance += origchance;
              chance = URANGE( 1 , chance , 99 );
 
                 if ( number_percent( ) >= chance )

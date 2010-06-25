@@ -450,10 +450,6 @@ struct	descriptor_data
     char *		pagepoint;
     char		pagecmd;
     char		pagecolor;
-    int			auth_inc;
-    int			auth_state;
-    char		abuf[ 256 ];
-    int			auth_fd;
     char *		user;
     int 		atimes;
     int			newstate;
@@ -2080,10 +2076,6 @@ typedef enum
 /* Board Types */
 typedef enum { BOARD_NOTE, BOARD_MAIL } board_types;
 
-/* Auth Flags */
-#define FLAG_WRAUTH		      1
-#define FLAG_AUTH		      2
-
 /***************************************************************************
  *                                                                         *
  *                   VALUES OF INTEREST TO AREA BUILDERS                   *
@@ -3190,7 +3182,7 @@ do								\
 #ifdef HASHSTR
 #define STRALLOC(point)		str_alloc((point))
 #define QUICKLINK(point)	quick_link((point))
-#define QUICKMATCH(p1, p2)	(int) (p1) == (int) (p2)
+#define QUICKMATCH(p1, p2)	((int) (p1) == (int) (p2))
 #define STRFREE(point)						\
 do								\
 {								\
@@ -3205,7 +3197,7 @@ do								\
 #else
 #define STRALLOC(point)		str_dup((point))
 #define QUICKLINK(point)	str_dup((point))
-#define QUICKMATCH(p1, p2)	strcmp((p1), (p2)) == 0
+#define QUICKMATCH(p1, p2)	(strcmp((p1), (p2)) == 0)
 #define STRFREE(point)						\
 do								\
 {								\

@@ -4071,15 +4071,10 @@ void do_force( CHAR_DATA *ch, char *argument )
 void do_invis( CHAR_DATA *ch, char *argument )
 {
     char arg[MAX_INPUT_LENGTH];
-    sh_int level;
+    sh_int level = 0;
     
-    /*
-    if ( IS_NPC(ch))
-	return;
-    */
-
     argument = one_argument( argument, arg );
-    if ( arg && arg[0] != '\0' )
+    if ( arg[0] != '\0' )
     {
 	if ( !is_number( arg ) )
 	{

@@ -2057,8 +2057,6 @@ void aggr_update( void )
 
 	for ( wch = ch->in_room->first_person; wch; wch = ch_next )
 	{
-	    int count;
-
 	    ch_next	= wch->next_in_room;
 
 
@@ -2080,7 +2078,7 @@ void aggr_update( void )
 
 	    if ( !victim )
 	    {
-		bug( "Aggr_update: null victim.", count );
+		bug( "Aggr_update: null victim." );
 		continue;
 	    }
 
