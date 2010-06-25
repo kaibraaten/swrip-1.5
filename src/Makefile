@@ -26,7 +26,7 @@ all:		 $(BINARY)
 $(BINARY):	$(OBJ)
 		@echo "Linking" $(BINARY)
 		@$(CC) -o $@ $^ $(LDFLAGS)
-		@mv $(BINARY) ../
+		@mv $(BINARY) ../bin
 		@echo "Done."
 
 $(ODIR)/%.o:	 %.c
@@ -36,4 +36,4 @@ $(ODIR)/%.o:	 %.c
 -include $(ODIR)/*.d
 
 clean :
-		-rm -f $(BINARY) *~ $(ODIR)/*.o ../core* $(ODIR)/*.d
+		-rm -f ../bin/$(BINARY) *~ $(ODIR)/*.o ../core* $(ODIR)/*.d
