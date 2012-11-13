@@ -80,13 +80,13 @@ struct serin_shuttle serin[MAX_BUS] =
 {
 {
   "Pluogus", 0, 32140, 0,
-    { 201, 21943, 28613, 21100, 28038, 10500, 201 },
+    { 201, 21944, 28613, 21100, 28038, 10500, 201 },
     { "Coruscant", "Corulag", "Kashyyyk", "Mon Calamari", "Gamorr", "Corellia", "Coruscant" }
 
 },
 {
   "Tocca", 0, 32410, 0,
-    { 5550, 21943, 10500, 29001, 11800, 4100, 23082, 5550 },
+    { 5550, 21944, 10500, 29001, 11800, 4100, 23082, 5550 },
     { "Ord Mantell", "Corulag", "Corellia", "Adari", "Roche", "Sullust", "Kuat", "Ord Mantell" }
 
 },
@@ -110,7 +110,7 @@ struct serin_shuttle serin[MAX_BUS] =
 },
 {
   "Edena", 0, 32440, 0,
-    { 28247, 201, 21943, 23082, 10500, 29001, 4305, 28247 },
+    { 28247, 201, 21944, 23082, 10500, 29001, 4305, 28247 },
     { "Byss", "Coruscant", "Corulag", "Kuat", "Corellia", "Adari", "Wroona", "Byss"}
 
 },
