@@ -1,0 +1,3272 @@
+#AREA   Nar Shaddaa~
+
+
+
+#AUTHOR Skeesh~
+
+#RANGES
+0 0 0 0
+$
+
+#FLAGS
+0
+
+#ECONOMY 0 0
+
+#MOBILES
+#500
+Auctioner~
+a newly created Auctioner~
+~
+~
+1 0 0 Z
+1 0 0 0d0+0 0d0+0
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#501
+A Gotal bouncers is standing here not allowing any droids to enter~
+a newly created A Gotal bouncers is standing here not allowing any droids to enter~
+Some god abandoned a newly created A Gotal bouncers is standing here not allowing any droids to enter here.
+~
+~
+1 0 0 Z
+50 0 -25 10d10+500 5d4+2
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+10 10 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#502
+A Talz is standing here waiting for someone to serve~
+A talz~
+A talz bartender is ready to serve you
+~
+~
+65 0 0 Z
+35 0 12 7d10+350 3d4+2
+500 0
+8 8 1
+20 2 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 2
+7 7 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#503
+Chubb Scutt~
+a newly created Chubb Scutt~
+A nonhumanoid citizen marches around looking for something
+~
+~
+1 0 0 Z
+1 0 0 0d0+0 0d0+0
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#504
+A small rodent~
+A rodent~
+A large rodent is looking for some food is being shoved around
+~
+~
+133 0 0 Z
+1 0 97 0d10+10 0d4+2
+0 0
+8 8 0
+2 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#505
+Binary load~
+A binary load~
+A binary load is working hard
+~
+~
+1 0 0 Z
+15 0 62 3d10+150 1d4+2
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+3 3 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#506
+A protocal droid is waiting here to help you out~
+a newly created A protocal droid is waiting here to help you out~
+A protocal droid is waiting here to help you 
+~
+~
+67108865 0 0 Z
+5 0 87 1d10+50 0d4+2
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+1 1 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#507
+Superviser~
+A superviser~
+A Superviser is obviously supervising everyone
+~
+~
+1 0 0 Z
+100 0 -150 20d10+1000 10d4+2
+0 0
+8 8 1
+13 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+20 20 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#508
+A human~
+A human~
+A human is standing here waiting for the shuttle
+~
+~
+65 0 0 Z
+10 0 75 2d10+100 1d4+2
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+2 2 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#509
+A secretary~
+a newly created A secretary~
+A secretary is standing behind a counter
+~
+~
+1 0 0 Z
+25 0 37 5d10+250 2d4+2
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+5 5 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#510
+Hutt citizen~
+a newly created Hutt citizen~
+A Hutt citizen is wandering around
+~
+~
+1 0 2 Z
+10 0 75 2d10+100 1d4+2
+100 0
+8 8 2
+11 10 10 10 10 10 10
+0 0 0 0 0
+4 0 0 0 1 1 0
+2 2 65536 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#511
+smuggler~
+A smuggler~
+A suspicious looking man
+~
+~
+65 0 -20 Z
+50 0 -25 10d10+500 5d4+2
+350 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+10 10 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#512
+Hutt~
+A hutt~
+A hutt is hovering the cash register
+~
+~
+65 0 0 Z
+80 0 5 16d10+800 8d4+2
+0 0
+8 8 1
+16 10 10 10 10 10 10
+0 0 0 0 0
+4 0 0 0 1 1 0
+17 15 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#513
+A worker~
+a newly created A worker~
+A worker is trying to make something
+~
+~
+1 0 0 Z
+10 0 75 2d10+100 1d4+2
+0 0
+8 8 2
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+2 2 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#514
+A human expert craftswoman~
+Human craftsmen~
+A human expert craftsmen
+~
+~
+1 0 0 Z
+1 0 0 0d0+0 0d0+0
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#515
+Doctor~
+A doctor~
+A doctor is looking at his patients
+~
+~
+1 0 0 Z
+35 0 12 7d10+350 3d4+2
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+3 0 0 0 9 8 0
+7 7 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#516
+A tourist~
+A tourist~
+A tourist is looking through the travel guides
+~
+~
+65 0 10 Z
+5 0 87 1d10+50 0d4+2
+0 0
+8 8 2
+8 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 256 256 0
+1 1 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#517
+A traffic officer~
+A traffic officer~
+A traffic officer is montering a screen
+~
+~
+1 0 5 Z
+20 0 50 4d10+200 2d4+2
+0 0
+8 8 2
+11 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+4 4 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#521
+A vendin droid~
+a newly created A vendin droid~
+A vending droid
+~
+~
+1 0 0 Z
+1 0 0 0d0+0 0d0+0
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#522
+A Chubb Scutt is drinking at incredible speed~
+Chubb~
+A Chubb Scutt is drinking at incredible speed
+~
+~
+1 0 10 Z
+10 0 75 2d10+100 1d4+2
+5 0
+8 8 1
+10 10 10 10 10 10 10
+0 0 0 0 0
+90 0 0 0 1684104531 1684104530 0
+2 2 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#523
+A large hutt~
+A large hutt~
+A large hutt
+~
+~
+1 0 -2 Z
+12 0 70 2d10+120 1d4+2
+0 0
+8 8 1
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+2 2 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#524
+A deveronian information broker~
+Devaronian~
+A devaronian information broker 
+~
+~
+1 0 0 Z
+20 0 50 4d10+200 2d4+2
+350 0
+8 8 1
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+4 4 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#525
+A Cycy Loctob is selling contraband items to whoever is interested~
+A Cycy Loctob~
+A Cycy Loctob is selling contraband items to whoever is interested
+~
+~
+1 0 -3 Z
+12 0 70 2d10+120 1d4+2
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+2 2 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#526
+A human citizen~
+A human citizen~
+A human citizen
+~
+~
+1 0 0 Z
+10 0 75 2d10+100 1d4+2
+50 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+2 2 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#527
+A Shistavanen Wolfman~
+A Shistavanen Wolfman~
+A Shistavanen Wolfman
+~
+~
+1 0 0 Z
+30 0 25 6d10+300 3d4+2
+10 0
+8 8 0
+13 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+6 6 0 0 0 0 16 0
+0 0 0 0 0 0 0 0
+#528
+A twi'lek is looking for someone~
+A twi'lek~
+A twi'lek is looking for someone
+~
+~
+1 0 -2 Z
+1 0 0 0d0+0 0d0+0
+0 0
+8 8 1
+10 10 10 10 10 10 10
+0 0 0 0 0
+2 0 0 0 5 4 0
+0 0 8192 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#529
+A old man is trying to walk up the catwalk~
+A old man is trying to walk up the catwalk~
+A old man is trying to walk up the catwalk
+~
+~
+65 0 0 Z
+5 0 87 1d10+50 0d4+2
+0 0
+8 8 1
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+1 1 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#530
+A Gamorean is easily walking up the catwalk~
+A Gamorrean ~
+A Gamorrean is easily walking up the catwalk
+~
+~
+65 0 0 Z
+35 0 12 7d10+350 3d4+2
+0 0
+8 8 0
+14 8 10 10 10 10 10
+0 0 0 0 0
+7 0 0 0 16384 16384 0
+7 7 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#531
+A chadra-fran ~
+A chadra-fan~
+A chadra-fan is waiting for a shuttle
+~
+~
+1 0 0 Z
+10 0 75 2d10+100 1d4+2
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+14 0 0 0 8388608 8388608 0
+2 2 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#532
+A hutt hostess~
+A hutt hostess~
+A hutt hostess
+~
+~
+1 0 0 Z
+50 0 -25 10d10+500 5d4+2
+0 0
+8 8 2
+10 10 10 10 10 10 10
+0 0 0 0 0
+4 0 0 0 17 16 0
+10 10 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#534
+A rodian is waiting in line for a room~
+A rodian~
+A rodian is waiting in line for a room
+~
+~
+1 0 0 Z
+20 0 50 4d10+200 2d4+2
+0 0
+8 8 1
+10 10 10 10 10 10 10
+0 0 0 0 0
+3 0 0 0 8 8 0
+4 4 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#535
+A diagona~
+A diagona~
+A diagona is going through the trash
+~
+~
+97 0 0 Z
+75 0 -87 15d10+750 7d4+2
+0 0
+8 8 0
+13 5 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 3
+15 15 74752 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#536
+A extremely large diagona~
+A very large diagona~
+A extremely large diagona
+~
+~
+33 0 0 Z
+100 0 -150 20d10+1000 10d4+2
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 4
+20 20 8192 0 256 0 0 0
+0 0 0 0 0 0 0 0
+#537
+A Askajian is walking toward the music~
+a newly created A Askajian is walking toward the music~
+A Askajian is walking toward the music
+~
+~
+65 0 0 Z
+1 0 0 0d0+0 0d0+0
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#538
+A local citizen is waiting for something good to bid on~
+a newly created A local citizen is waiting for something good to bid on~
+A local citizen is waiting for something good to bid on 
+~
+~
+1 0 0 Z
+10 0 75 2d10+100 1d4+2
+0 0
+8 8 2
+9 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+2 2 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#539
+A small time bounty hunter~
+A bounty hunter~
+A small time bounty hunter
+~
+~
+1 0 0 Z
+45 0 -12 9d10+450 4d4+2
+0 0
+8 8 1
+11 10 7 10 10 10 10
+0 0 0 0 0
+6 0 0 0 65 64 0
+9 9 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#540
+Landing pad guard~
+guard~
+Landing pad guard
+~
+~
+1 0 0 Z
+70 0 -75 14d10+700 7d4+2
+0 0
+8 8 1
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+14 14 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#541
+A hutt is really pigging out on food~
+A hutt~
+A hutt is really pigging out on food 
+~
+~
+1 0 0 Z
+25 0 37 5d10+250 2d4+2
+0 0
+8 8 1
+10 10 10 10 10 10 10
+0 0 0 0 0
+4 0 0 0 17 16 0
+5 5 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#542
+The hutt's wife is looking at her husband devouring food in seconds~
+A hutt~
+The hutt's wife is looking at her husband devouring food in seconds
+~
+~
+65 0 0 Z
+16 0 60 3d10+160 1d4+2
+0 0
+8 8 2
+10 10 10 10 10 10 10
+0 0 0 0 0
+4 0 0 0 17 16 0
+3 3 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#543
+A bith is slowly taking a bite out of his sandwich~
+A bith~
+A bith is slowly taking a bite out of his sandwich
+~
+~
+65 0 0 Z
+13 0 67 2d10+130 1d4+2
+0 0
+8 8 1
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+2 2 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#544
+Pot belly human is hardly awake~
+a newly created Pot belly human is hardly awake~
+A pot belly human is hardly awake
+~
+~
+1 0 0 Z
+45 0 -12 9d10+450 4d4+2
+0 0
+8 8 1
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+9 9 0 0 2048 0 0 0
+0 0 0 0 0 0 0 0
+#545
+A small bug is crawling beneath tables and picking up whatever it can~
+A small bug~
+A small bug is crawling beneath tables and picking up whatever it can
+~
+~
+69 0 0 Z
+1 0 0 0d0+0 0d0+0
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 256 0 0 0
+0 0 0 0 0 0 0 0
+#546
+A large man is barely awake~
+A fat man~
+A fat man is barely awake
+~
+~
+1 0 0 Z
+1 0 0 0d0+0 0d0+0
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#547
+A smuggler is looking around for refuge~
+A smuggler~
+A smuggler is looking around for refuge
+~
+~
+1 0 0 Z
+50 0 -25 10d10+500 5d4+2
+0 0
+8 8 1
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+10 10 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#548
+A strongly built quarren is easily lifting bags~
+A strongly built quarren~
+A strongly built quarren is easily lifting bags
+~
+~
+65 0 0 Z
+1 0 0 0d0+0 0d0+0
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+15 0 0 0 33 32 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#549
+A ithorian citizen~
+A ithorian~
+A ithorian citizen
+~
+~
+1 0 0 Z
+20 0 50 4d10+200 2d4+2
+0 0
+8 8 1
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+4 4 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#550
+A large man is storing up boxes~
+A large man~
+A large man is storing up boxes
+~
+~
+1 0 0 Z
+22 0 45 4d10+220 2d4+2
+0 0
+8 8 1
+10 10 10 10 10 5 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+4 4 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#551
+A smuggler is waiting inside the turbo-lift~
+A smuggler~
+A smuggler is waiting inside the turbo-lift
+~
+~
+65 0 0 Z
+35 0 12 7d10+350 3d4+2
+0 0
+8 8 2
+10 10 10 10 10 10 10
+0 0 0 0 0
+6 0 0 0 65 64 0
+7 7 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#552
+A small alien is looking curiously about~
+a newly created A small alien is looking curiously about~
+A small alien is looking curiously about
+~
+~
+65 0 0 Z
+7 0 82 1d10+70 0d4+2
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+1 1 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#553
+A large wookiee is hauling large crates~
+a newly created A large wookiee is hauling large crates~
+A large wookiee is hauling large crates
+~
+~
+1 0 0 Z
+32 0 20 6d10+320 3d4+2
+0 0
+8 8 1
+12 7 10 10 10 7 10
+0 0 0 0 0
+1 0 0 0 2 2 0
+6 6 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#554
+A smaller alien is aiding his wookiee friend~
+a newly created A smaller alien is aiding his wookiee friend~
+A smaller alien is aiding his wookiee friend
+~
+~
+1 0 0 Z
+8 0 80 1d10+80 0d4+2
+0 0
+8 8 1
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+1 1 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#555
+A human is running like crazy around here~
+human~
+A human is running like crazy around
+~
+~
+1 0 0 Z
+12 0 70 2d10+120 1d4+2
+0 0
+8 8 1
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+2 2 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#556
+A kubaz is walking around~
+a newly created A kubaz is walking around~
+A kubaz is walking around not knowing what to do
+~
+~
+1 0 0 Z
+14 0 65 2d10+140 1d4+2
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+2 2 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#557
+A droid is gibbering out anything~
+a newly created A droid is gibbering out anything~
+A droid is gibbering out anything
+~
+~
+1 0 0 Z
+1 0 0 0d0+0 0d0+0
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#558
+A rodian is carefully handling cargo~
+A rodian~
+A rodian is carefully handling cargo
+~
+~
+1 0 0 Z
+22 0 45 4d10+220 2d4+2
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+4 4 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#559
+A small smuggler is waiting for someone to land~
+smuggler~
+A small smuggler is waiting for someone to land 
+~
+~
+1 0 0 Z
+21 0 47 4d10+210 2d4+2
+0 0
+8 8 1
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+4 4 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#560
+A beautiful women is, standing beside her husband~
+a newly created A beautiful women is, standing beside her husband~
+A beautiful woman is, standing beside her husband
+~
+~
+1 0 0 Z
+26 0 35 5d10+260 2d4+2
+0 0
+8 8 2
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+5 5 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#561
+A handsome man is standing beside her wife, also waiting for someone~
+a newly created A handsome man is standing beside her wife, also waiting for someone~
+A handsome man is standing beside her wife, also waiting for someone
+~
+~
+1 0 0 Z
+1 0 0 0d0+0 0d0+0
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#562
+A experienced smuggler is just hanging around~
+A experienced smuggler~
+A experienced smuggler is just hanging around 
+~
+~
+1 0 0 Z
+25 0 37 5d10+250 2d4+2
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+5 5 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#563
+A information broker~
+a newly created A information broker~
+A information broker
+~
+~
+65 0 0 Z
+24 0 40 4d10+240 2d4+2
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+4 4 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#564
+A human bounty hunter is wearing unsual armor~
+a newly created A human bounty hunter is wearing unsual armor~
+Some god abandoned a newly created A human bounty hunter is wearing unsual armor here.
+~
+~
+1 0 0 Z
+1 0 0 0d0+0 0d0+0
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#565
+The bith band leader is playing the fizz~
+a newly created The bith band leader is playing the fizz~
+The bith band leader is playing the fizz
+~
+~
+1 0 0 Z
+32 0 20 6d10+320 3d4+2
+0 0
+8 8 1
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+6 6 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#566
+A bith is playing a weird type of keyboard~
+a newly created A bith is playing a weird type of keyboard~
+A bith is playing a weird type of keyboard
+~
+~
+1 0 0 Z
+13 0 67 2d10+130 1d4+2
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+2 2 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#567
+A hutt is listening attentively to the band~
+A hutt~
+A hutt is listening attentively to the band 
+~
+~
+1 0 0 Z
+9 0 77 1d10+90 0d4+2
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+4 0 0 0 16 16 0
+1 1 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#568
+A hutt is patiently waiting for his caravel to come~
+A hutt~
+A hutt is patiently waiting for his caravel
+~
+~
+65 0 0 Z
+50 0 -25 10d10+500 5d4+2
+700 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+4 0 0 0 17 16 0
+10 10 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#569
+A defel assasin is swaying in the shadows, barely noticed by some people~
+Defel~
+A defel assasin is swaying in the shadows, barely noticed by some people
+~
+~
+1 0 0 Z
+44 0 -10 8d10+440 4d4+2
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+12 0 0 0 2097152 2097152 0
+8 8 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#570
+A Gank bodyguard is watching your every mouvement~
+Gank bodyguard~
+A Gank bodyguard is watching your every mouvement
+~
+~
+1 0 0 Z
+44 0 -10 8d10+440 4d4+2
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+8 8 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#571
+A protocal droid is following his master everywhere~
+A protocal droid~
+A protocal droid is following his master and translating languages
+~
+~
+67108865 0 0 Z
+1 0 0 0d0+0 0d0+0
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#572
+A gank has lost his master~
+a newly created A gank has lost his master~
+A gank bodyguard has lost his master and is looking for him
+~
+~
+1 0 0 Z
+33 0 17 6d10+330 3d4+2
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+6 6 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#573
+A tourist is waiting for his luggages~
+A tourist~
+A tourist is waiting for his luggages
+~
+~
+1 0 0 Z
+1 0 0 0d0+0 0d0+0
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#0
+
+
+#OBJECTS
+#500
+Booth~
+a Booth~
+A Booth is here.~
+~
+13 0 0
+0 0 0 0
+1 0 0
+#501
+Large oak podium~
+a Large oak podium~
+A polished oak podium stands here solidely.
+
+~
+~
+13 0 0
+0 0 0 0
+1 0 0
+#502
+A slug thrower pistol~
+a A slug thrower pistol~
+A A slug thrower pistol is here.~
+~
+5 8519680 8193
+0 2 2 6 5 5
+1 0 0
+#503
+Prax Arms Stealth-2VX Palm Shooter~
+Prax Arms Stealth-2VX Palm Shooter~
+A Prax Arms Stealth-2VX Palm Shooter is here.~
+~
+5 16 8193
+0 2 10 9 10 10
+1 1000 100
+#504
+Darts~
+a Darts~
+A Darts is here.~
+~
+86 0 16385
+3 0 0 0
+1 0 0
+#505
+Drearian Defense Conglomerate Defender Blaster~
+a Drearian Defense Conglomerate Defender Blaster~
+A Drearian Defense Conglomerate Defender Blaster is here.~
+~
+5 0 8193
+0 1 2 6 1000 1000
+1 2500 250
+#506
+Oversize coat~
+a Oversize coat~
+A Oversize coat is here.~
+~
+9 8 1033 2
+0 25 0 0
+4 0 0
+#507
+Chair~
+a Chair~
+A Chair is here.~
+~
+13 0 0
+0 0 0 0
+50 0 0
+#509
+Large trench coat~
+a Large trench coat~
+A Large trench coat is here.~
+~
+9 -2139095040 1033
+0 2 0 0
+1 0 0
+#510
+Small Briefcase~
+a Small Briefcase~
+A Small Briefcase is here.~
+~
+15 0 16385
+0 0 0 0
+1 0 0
+#511
+Dirty glass~
+a Dirty glass~
+A Dirty glass is here.~
+~
+13 0 16385
+0 0 0 0
+1 0 0
+#512
+Cyborg leg~
+a Cyborg leg~
+A Cyborg leg is here.~
+~
+9 0 33
+0 0 0 0
+1 0 0
+A
+1 10
+#513
+briefcase~
+a briefcase~
+A briefcase is here.~
+~
+15 0 1
+10 0 0 0
+1 0 0
+#514
+Klatooine patty frog~
+a Klatooine patty frogs~
+Klatooine patty frog~
+~
+19 0 1
+0 0 0 0
+1 0 0
+#517
+Dark Jedi Cape~
+A Dark Jedi Cape~
+A Dark Jedi Cape~
+~
+9 -2147483584 1025
+0 9 0 0
+1 0 0
+#518
+BlasTech DH-17 blaster pistol~
+a BlasTech DH-17 blaster pistol~
+A BlasTech DH-17 blaster pistol is here.~
+~
+13 0 0
+0 0 0 0
+1 0 0
+#520
+A guide~
+A guide~
+A A guide is here.~
+~
+13 0 16385
+0 0 0 0
+1 0 0
+#522
+A black robe~
+a A black robe~
+A A black robe is here.~
+~
+9 -2138963968 1025 32
+0 0 0 0
+5 10 1
+#523
+A large black cape~
+A long black cape~
+A A large black cape is here.~
+~
+9 0 5
+0 0 0 0
+6 0 0
+#524
+A dirty old shirt~
+dirty old shirt~
+A A dirty old shirt is here.~
+~
+9 0 9
+0 0 0 0
+1 0 0
+#525
+A black one peice suit~
+a A black one peice suit~
+A A black one peice suit is here.~
+~
+9 0 9
+0 2 0 0
+1 0 0
+#526
+A small shirt~
+Small shirt~
+Small shirt~
+~
+9 0 9
+0 5 0 0
+1 0 0
+#527
+A large bag~
+a A large bag~
+Large bag filled with someone's possesions~
+~
+13 0 16385
+0 0 0 0
+1 0 0
+#528
+A large oak desc~
+A nicely polished oak desc~
+A A large oak desc is here.~
+~
+12 0 0
+0 0 0 0
+100 0 0
+#529
+A rancor skin jacket~
+A rancor skin jacket~
+A A rancor skin jacket is here.~
+~
+9 0 9
+0 4 0 0
+1 0 0
+#530
+A small legal vibro blade~
+A vibro blade~
+A A small legal vibro blade is here.~
+~
+5 0 8192
+0 0 0 2 99 99
+1 0 0
+#531
+A large box~
+a A large box~
+A A large box is here.~
+~
+12 0 0
+0 0 0 0
+1000 0 0
+#532
+Blastech sporting blaster~
+a Blastech sporting blaster~
+A Blastech sporting blaster is here.~
+~
+5 0 8193
+0 0 0 6 1000 1000
+1 0 0
+#533
+A blue parka~
+Blue parka~
+Blue parka~
+~
+9 0 9
+0 6 0 0
+1 0 0
+#535
+fizz~
+a fizz~
+A fizz is here.~
+~
+13 0 16385
+0 0 0 0
+1 0 0
+#536
+Fingerless gloves~
+a A fingerless glove~
+Fingerless gloves~
+~
+9 8 129
+0 2 0 0
+1 0 0
+#537
+small dagger~
+a small dagger~
+A small dagger is here.~
+~
+5 4194304 8193
+0 0 0 2
+2 50 5
+#538
+pair of glaces~
+A unusual pair of glaces~
+A pair of glaces look incredibly weird.  They seem to be all red.~
+~
+62 0 131073
+0 0 0 0
+1 0 0
+#539
+A large monitor~
+monitor~
+A Monitor is hanging on the wall~
+~
+12 0 0
+0 0 0 0
+1 0 0
+#540
+a pair of speakers~
+a a pair of speakers~
+A pair of speakers~
+~
+12 0 0
+0 0 0 0
+1 0 0
+#541
+control panel~
+a control panel~
+A control panel is here.~
+~
+39 0 0
+-1 0 0 0
+1 0 0
+#0
+
+
+#ROOMS
+#500
+Spaceport Bravo-Beta~
+Welcome to Nar Shaddaa, spaceport moon of the famous Nal Hutta. It is
+considered "Smugglers Paradise" to incoming people. Spaceport Bravo-Beta
+is one of the many spaceports in Nar Shaddaa.  This spaceport is puny
+compared to the most larger ones.  The spaceport is always busy, filled
+with people. A large sheet of transparesteel lies above your head.  You
+can see incoming ships of all types.  You must watch your step to survive
+in Nar Shaddaa.  It's a tough life here in Nar Shaddaa.
+~
+0 8 1
+D0
+~
+~
+0 -1 506
+D2
+~
+~
+0 -1 516
+D5
+~
+~
+0 -1 572
+D8
+~
+~
+0 -1 502
+D9
+~
+~
+0 -1 501
+S
+#501
+Spaceport Bravo-Beta Bistro entrance~
+A large sign hangs in front of the entrance way.  It says Bravo-Beta
+bistro. Music trails of from the middle of the bistro. The entrance is
+very large, large enough for a hutt to fit through. The hight of the
+entrance is very high since some hutts have trouble crawling in, so they
+use repulsor sleds. The bistro is open for everyone.
+~
+0 8 1
+D0
+~
+~
+0 -1 503
+D6
+~
+~
+0 -1 500
+S
+#502
+Lost and Found of Spaceport Bravo-Beta~
+You enter a large room.  The walls are painted white. It's a very plain
+room with absolutely no decorations.  Little money was spent for this room
+and it was only made because the public wanted one. It's very dusty, and
+would make anyone sneeze.  A large, bright lamp hangs over your head.
+White light pours from the lamp right on you.  The room is filled with
+dirty boxes filled with people's posessions. 
+~
+0 8 1
+D7
+~
+~
+0 -1 500
+S
+#503
+Bravo-Beta bistro~
+A large number of people and aliens are stationed here.  It is amazing how
+many people there are. There are many booths, but most of them are used.  
+A band is playing a familiar song but can't seem to recall the name.  Many
+aliens are selling information while others are just hanging around.  A
+bar is also stationed on the east side of you.  Make sure to visit
+everything in the bistro.
+~
+0 8 1
+D1
+~
+~
+0 -1 504
+D2
+~
+~
+0 -1 501
+D3
+~
+~
+0 -1 505
+S
+#504
+Bistro bar~
+A large booth is lying in front of you.  A large Talz, is cleaning out the
+dirt out of a dirty glass.  You conclude that it must be the bartender. 
+Many shelfs are stuck into the wall.  You notice various forms of liquor
+and drinks.  Many red stool a laid out for people to sit on.  A large
+whole is in between every two stools.  It's for the large hutts that need
+something to drink.  Besides how would a hutt fit on one of those puny
+stools?
+~
+0 8 1
+D3
+~
+~
+0 -1 503
+S
+#505
+Large Booth~
+It is very likely for you to find a booth so don't fell lucky.  The seat is
+very large and is capable of seating up to 5 people. It is empty though.
+The seat is blood red but is very comfortable.  There are many holes in
+the seats with pading coming out of it . Some holes are taped up or
+stapled together.  Hey sit back and relax.
+~
+0 8 1
+D1
+~
+~
+0 -1 503
+S
+#506
+Spaceport Terminal~
+You now stand in the terminal of Spaceport Bravo-Beta.  You look around
+sanning your surronding and you see that they're a lot of people walking
+about minding their own buisness. The room slits of into many directions
+but there is no sign to tell you where to go.  Someone could get lost in
+such a large spaceport. Luckily a monitor hangs above your head to tell
+you the flight of Nar Shaddaa.  The monitor is in several languages so
+almost every type of race can read it.  Most of the flights go to Nal
+Hutta.
+Which way will you go?
+~
+0 8 1
+D0
+~
+~
+0 -1 510
+D1
+~
+~
+0 -1 507
+D2
+~
+~
+0 -1 500
+D3
+~
+~
+0 -1 508
+D5
+~
+~
+0 -1 517
+D6
+~
+~
+0 -1 533
+S
+#507
+Shuttle stop~
+Everyone is waiting for a shuttle to bring them somewhere.  This shuttle
+brings you to one of Nar Shaddaa's closest cities. Many people are in lign
+to board onto the shuttle.  A large uneasy lign is formed.  It is most
+likely that you won't be able to make the next shuttle.   Patience is the
+key!
+~
+0 8 1
+D3
+~
+~
+0 -1 506
+S
+#508
+Spaceport hotel lobby~
+You stand in the Spaceport hotel lobby of Bravo-Beta.  Not many people are
+staying at this hotel since people are leaving to Nar Shaddaa's many
+cities.  It is still open for everyone.  The hotel is very convenient
+because it leads straight of into the Spaceport.  It is great for quick
+depatures and quick visits.
+~
+0 8 1
+D1
+~
+~
+0 -1 506
+D3
+~
+~
+0 -1 509
+D4
+~
+~
+0 -1 568
+S
+#509
+Reception desc~
+A large booth is here.  Behind the large booth is a large hutt hostess. 
+The reason for the reception desk is because you may find a room with a
+bacta tank.  Ifyou will pay here a amount of money. Several large clocks
+are hanged behind here and showing the times of many other planets. The
+desk is made of oak and his been recently polshed.  A small lign is formed
+behind you as other people wait for their turn.
+~
+0 8 1
+D1
+~
+~
+0 -1 508
+S
+#510
+Spaceport terminal~
+The spaceport terminal is very large.  A large monitor hangs above your
+head and displays the various flights. Beside the monitor is a pair of
+speakers which announce's flights.  The spaceport terminal splits of in
+almost every direction. 
+~
+0 8 1
+D0
+~
+~
+0 -1 515
+D1
+~
+~
+0 -1 511
+D2
+~
+~
+0 -1 506
+D3
+~
+~
+0 -1 513
+D6
+~
+~
+0 -1 514
+D7
+~
+~
+0 -1 518
+S
+#511
+Entrance to landing pads~
+A huge gate blocks your way to the landings pads.  It has been rusted and
+abused sveral times.  Two security guards stand beside the gate, waiting
+for unauthorized people to try to enter. You can hear the ROAR of engines
+taking of into space.  You can smell engine fuel as the sound gets
+smaller. Just ask the guards to open the door and maybe they shall do it. 
+If they don't a little bribing won't hurt .
+~
+0 8 1
+D0
+~
+Gate~
+3 -1 512
+D3
+~
+~
+0 -1 510
+S
+#512
+Landing pad 101~
+You stand on a HUGE platform.  It is filled with atleast fix to ten ships. 
+Most of them a refueling and some of them or getting ready to launch. The
+breeze of fresh air passes by, but then you get the smell of burnt power
+packs and smoke form blown up power converters.  Some people are loading
+things into their ships but it is unknown to what they are loading.  The
+platform is not even guarded one bit except for a couple of traffic
+officers directing incoming ships.
+~
+0 0 1
+D1
+~
+~
+0 -1 521
+D2
+~
+~
+33 -1 511
+S
+#513
+Spaceport Bravo-Beta Hutt caravel launching bay entrance~
+A large door stands in front of you which is large enough for a hutt to fit
+through.  Many hutts slide through the automatic door in front of you,
+trailing behind them a slime trail.  Following the hutts are their
+"Minions and goons" to accompany them to Nal Hutta.  On top of the door is
+a large scanner, scanning for weapons.  It is very noticeable so if you
+are smart enough, you'd put it away. 
+~
+0 0 1
+D1
+~
+~
+0 -1 510
+S
+#514
+Spaceport store~
+You stand in a small room containing: key chains, ammo cells and more
+accesories.  It is large enough to fit a couple of hutts but can get to
+crowded.  It is not crowded now and you only notice a small child reading
+out of the magazine area.  A large fan cools you down as it spins in one
+direction   A large cashier stand in front of a large hutt. He seems to
+know what he is doing.   It may not seem to have much security but you
+will never know.
+~
+0 8 1
+D0
+~
+workshop~
+1 -1 526
+D9
+~
+~
+0 -1 510
+S
+#515
+Turbo-lift:Level 1~
+It is very crampy in the Turbo-lift.  As many people try to squeeze their
+way in but get pushed back out.  A speaker is stuck right into the wall
+and is playing soothing and relaxing music. The walls are white and the
+floor is tiled black. 
+~
+0 12 1 0 0 2
+D0
+~
+~
+0 -1 553
+D2
+~
+~
+0 -1 510
+D5
+~
+~
+0 -1 528
+S
+#516
+Auctioning room~
+You now stand in a pretty large room.  A large podium is stationed at the
+far end of the room. Many chairs are set out for people to sit down. 
+Surrounded by many glass cases filled with neat objects, you discover that
+the room is quite neat.
+~
+0 -2147483636 1
+D0
+~
+~
+0 -1 500
+S
+#517
+Stairway~
+You head your way down the staircase.  A large railing is stuck firmly to
+the wall to help people go down. The stairs are kind of slippery because
+there are already washed.  Not many people follow you down into the
+darkness of the stairway.  A light hangs from the side of the wall and
+provides the only light.
+~
+0 4 1
+D4
+~
+~
+0 -1 506
+D5
+~
+~
+0 -1 523
+S
+#518
+Shaft car~
+A platform slowly moves upwards toward the roof.  You can see the edges of
+the shaft from the bottom.  Nothing really to see.  The shaft car makes a
+funny kind of nois as it creaks up to it's destination. It is a very slow
+ride and it seems practicaly forever to reach the top.  Patience is a
+virtue. 
+~
+0 12 1
+D4
+~
+~
+0 -1 519
+D8
+~
+~
+0 -1 510
+S
+#519
+Shaft car~
+THe car suddenly stops.  Atlast after a long ride you have reached the top.
+The shaft car rumbles for a minute then dies.  You can hear the creaks in
+the spokes of the shaft car.  You can now see a large catwalk laid out
+before you. 
+~
+0 12 1
+D0
+~
+~
+0 -1 520
+D5
+~
+~
+0 -1 518
+S
+#520
+Before the catwalk~
+You stand infront a large catwalk overlooking the whole spaceport.  You can
+see all the way down to the other end of the catwalk.  Beside you is a
+switch for the shaft car going up or down.  It isn't a very large area so
+if there is a lot of people standing here, some of them would get pushed
+onto the catwalk. Luckly there is hardly anyone standing in this area.
+~
+0 12 1
+D0
+~
+~
+0 -1 527
+D2
+~
+~
+0 -1 519
+S
+#521
+Bridge~
+A large bridge is linked together between two landing pads.  It is wide
+enough for many people and can also support many tons of weight. Engine
+exaust fills the air as you smell the gas right in your face.  A lot of
+ships start landing a refueling their ships.    The width of the bridge is
+very wide and could fit many hutts standing side by side.  It is very busy
+and is crossed many times. 
+~
+0 4 1
+D1
+~
+~
+0 -1 522
+D3
+~
+~
+0 -1 512
+S
+#522
+Landing pad 102~
+You now stand on a even larger platform than before.  You can smell the
+engine exaust.   Many large freighters start landing on the platform. 
+Their repulsor lifts, lift some of your hair on your head.  Many people
+are on the platform waiting for arrivals but most of them are standing
+back because the don't want to get blown away by the incoming ships
+~
+0 52 1
+D3
+~
+~
+0 -1 521
+S
+#523
+Stairway~
+You continue down the dark stairway.  It doesn't seem very hard for you to
+climb down, but going up is going to take some effort. The staircase
+splits of to the left and then to the right.  A long gloomy hallway
+continues down as you turn to the left.  The staircase is very wide so
+many people can go down. The staircase continues further down.
+~
+0 4 1
+D1
+~
+~
+0 -1 524
+D3
+~
+~
+0 -1 546
+D4
+~
+~
+0 -1 517
+D5
+~
+~
+0 -1 558
+S
+#524
+Hallway to the Medical bay~
+The roof is shaped roundly around your head and is quite high up.   It
+leads further down to room but you can't make it out completely. You hear
+cries of agony from the Medical bay as it trails of.    A large white
+light hangs above your head, as you notice a bit more further down the
+hallway. You conitnue down the hallway until it meets up to the medical
+bay.
+~
+0 0 1
+D1
+~
+~
+0 -1 525
+D3
+~
+~
+0 -1 523
+S
+#525
+Medical bay~
+A large desc sits in front of you and behind it, is a Verpine secretary.  
+A large stack of papers are piled up.   Behind the desc, a large door
+stands firm.  It sudenly swings open and you get a glimpse of a large
+Bacta tank containing a bunch of people.  
+~
+0 4 1
+D3
+~
+~
+0 -1 524
+S
+#526
+Bravo-Beta shop work room~
+You now stand in a large workshop filled with people creating new things. 
+Some creative some not so creative. Everyone is the room seems extremely
+busy working on something.  Many large tables are set out for people to
+work on.   Maybe you should start making or build something creative. 
+This place is only for the skilled so take your time working.  A large
+sign hangs on the wall just left of you. 
+~
+0 67108872 1
+D2
+~
+~
+33 -1 514
+S
+#527
+Catwalk~
+You now stand on a large catwalk.  You can get a great view of the You now
+stand on a large catwalk.  You can get a great view of the spaceport
+northern section.  You look down and you see many people walking towards
+their destination. It is very wide, but you could still easily fall down
+since there is no railing on the sides.  Many people have complained
+aboutthis but nothing has changed. The catwalk leads way further down.
+~
+0 0 1
+D0
+~
+~
+0 -1 540
+D1
+~
+~
+0 -1 529
+D2
+~
+~
+0 -1 520
+D3
+~
+~
+0 -1 531
+S
+#528
+Turbo-lift:Level 2~
+The turbo-lift goes down and a terrifying speed, then stops abruptly.  You
+lurch foward as it stops.  A large speaker announces "Level 2 of Spaceport
+Bravo-Beta". The door opens for you to step out.
+~
+0 262144 1 0 0 2
+D0
+~
+~
+0 -1 534
+D4
+~
+~
+0 -1 515
+D5
+~
+~
+0 -1 538
+S
+#529
+Of ledge...~
+Looks like you made a wrong turn.  You slip and start to fall down towards
+the ground.  Maybe you should have though before walking in this
+direction.
+~
+0 16777220 1
+D5
+~
+~
+0 -1 532
+S
+#530
+Spaceport terminal~
+The terminal seems extremely large and someone could get lost in such a
+large spaceport.  There is no one to help you and asking for help would be
+stupid.  Everyone is in a rush one way or another.  Many binary loads
+start working here with their large claws.  The spaceport splits off in a
+couple of directions and there is actually a sign to direct you the way.
+~
+0 12 1
+D1
+~
+~
+0 -1 532
+D2
+~
+~
+0 -1 533
+D3
+~
+~
+0 -1 579
+E
+sign~
+Welcome to Spaceport Bravo-Beta. Here you will find many things, including
+landing pads, stores and much much more.  To exit the spaceport is simple.
+All you have to do is find the hallway and you are on your way out. Thank
+you for visiting Spaceport Bravo-Beta.
+~
+S
+#531
+Of ledge...~
+You suddenly drop at a terrying speed.  You will probably die of break
+something as the ground gets closer to your view.  Watch your steop next
+time.
+~
+0 4 1
+S
+#532
+Spaceport Terminal Nothern side~
+You step into the nothern side of the spaceport terminal.  It is very
+similar to the rest of the rooms but is a bit larger. You look over your
+head and see a large catwalk. A large group of people surrond you as you
+continue your way into the spaceport.
+~
+0 4 1
+D0
+~
+~
+0 -1 554
+D1
+~
+~
+0 -1 552
+D2
+~
+~
+0 -1 553
+D3
+~
+~
+0 -1 530
+S
+#533
+Spaceport Terminal Eastern side~
+You now stand in a large terminal but is the same size as the rest of the
+terminals.   It is almost as busy as the other spaceports but people
+quickly leave the eastern side of the spaceport.   Many large windows a
+set out so you can see out of them.  It is very busy outside but there
+doesn't seem to be an exit to outside.  I guess you have to find another
+way.
+~
+0 0 1
+D0
+~
+~
+0 -1 530
+D9
+~
+~
+0 -1 506
+S
+#534
+The control room of the garbage compacter~
+Many monitors surrond you.  Many of them just are just black or white.  The
+screen doesn't have many commands but a simple letter on each one.  There
+are many doors leading to a seperate garbage room.  The garbage room is
+used for maintaining the spacepo  ort nice and clean.  Many janitor droids
+are busy dumping garbage they have collected. The room has a very bad
+odour as you struggle to clamp your noise shut. EWWW!  You notice a panel
+infront of the entrance of each door.
+~
+0 0 1
+D0
+~
+Compacter~
+3 -1 537
+D1
+~
+Compacter~
+3 -1 535
+D2
+~
+~
+0 -1 528
+D3
+~
+Compacter~
+3 -1 536
+S
+#535
+Garbage compacter~
+Your foot suddenly sinks into the smelly filled compacter as you step into
+it.  The odor invades your noise as you desperately try to cover it.  Many
+scraps of metal have been crushed into a very nice square. The more is
+warm and is yellow.  The compacter is very disgusting and so far no one
+has volunteered to clean it up.
+~
+0 0 1
+D3
+~
+~
+33 -1 534
+S
+#536
+Garbage compacter~
+Your foot suddenly sinks into the smelly filled compacter as you step into
+it.  The odor invades your noise as you desperately try to cover it.  Many
+scraps of metal have been crushed into a very nice square. The more is
+warm and is yellow.  The compacter is very disgusting and so far no one
+has volunteered to clean it up.
+~
+0 4 1
+D1
+~
+~
+33 -1 534
+S
+#537
+A large garbage compacter~
+The smell gets even worse.  You trip over some wires but quickly bring
+yourself back up.  This is the largest garbage compacter.  The yellowish
+green water is up to waist level on most humans.  No one has dared you
+come in.  Once you've stepped out, your you're trapped until someone opens
+the door for you.
+~
+0 4 1
+S
+#538
+Turbo-lift:Level 3~
+The turbo-lift suddenly stops at it's destination.  The music stops as you
+get in or out. A very bad smell comes from the south, even the workers
+have to take a break and get some fresh air after a while.
+~
+0 0 1 0 0 2
+D2
+~
+~
+0 -1 539
+D4
+~
+~
+0 -1 528
+D5
+~
+~
+0 -1 577
+S
+#539
+Storage room~
+Many large boxes are placed foward everywhere. A whole bunch of aliens and
+humanoids are working hard lifting heavy boxes.  The room is very bright,
+but the light is partially covered by the boxes stacked up on together.
+Aiding the humans and aliens are large binary loads lifting up with their
+huge claws. 
+~
+0 0 1
+D0
+~
+~
+0 -1 538
+S
+#540
+Catwalk~
+The catwalk is farely large.  It can support many people and their is a
+sign to prove it.  Even though the sign tells you it is safe, do be
+careful.  Not many people patrol on this catwalk for their is no support
+for anyone.  Once you have fallen, it's a long way down my friend.  You
+may bend over to take a look down below but it can be very risky.  No
+accidents have occured....yet.
+~
+0 4 1
+D0
+~
+~
+0 -1 573
+D1
+~
+~
+0 -1 541
+D2
+~
+~
+0 -1 527
+D3
+~
+~
+0 -1 544
+S
+#541
+Off ledge~
+A long way down! 
+~
+0 16777220 1
+D3
+~
+~
+0 -1 540
+D5
+~
+~
+0 -1 542
+S
+#542
+Falling down~
+You fall extremely fast, as you desperately try to find something to grab
+onto. Your blood rushed to your head.. FAST!! Everything is happening very
+fast.  Just hope you will survive this fall.
+~
+0 16777220 1
+D5
+~
+~
+0 -1 543
+S
+#543
+DOWN...~
+You continue to fall down into the darkness.
+~
+0 16777216 1
+D5
+~
+~
+0 -1 545
+S
+#544
+Of ledge~
+You suddenly slip and fall down. A long way down!
+~
+0 0 1
+D1
+~
+~
+0 -1 540
+S
+#545
+A small platform~
+You now stand on a large platform.  It is very thin and you can easily fall
+down.  You are surrounded by darkness as you can barely see anything. Not
+many people linger here, but a couple of citizens are in sight.  The
+platform continues down and as you look up you see the catwalk.  A large
+door is front of you, but that is all you can see.
+~
+0 0 1
+D0
+~
+~
+0 -1 547
+S
+#546
+Gift shop~
+You are surrond by interssing artifacts.  Shelves and shelves of nice items
+just waiting for people to buy them. A droid is waiting for people to come
+in, and is obviously operating 24hrs a day.   The gift shop is not very
+large but can contain several people.  You notice that the entrance door
+is extremely larga and makes a funny noise once you walk in. It is quite
+interesting.
+~
+0 0 1
+D0
+~
+~
+0 -1 550
+D1
+~
+~
+0 -1 523
+S
+#547
+Small platform~
+The platform is plain white as you bend over to look at it.  The darkness
+surrounds you look a large blanket.  Luckily there is a sign of light
+coming from the wall of the platform. You hear noises from the north.  You
+look straight up to find any signs of the clear blue sky but find nothing
+but black. You continue your way on the platform, who knows what you can
+find.
+~
+0 0 1
+D0
+~
+~
+0 -1 548
+D2
+~
+~
+0 -1 545
+S
+#548
+Small platform~
+You stand in front a large stiped yellow door. It is clamp shut but
+automatically stays open when you open it. You are still engulfed in
+darkness but light shines through the crack of the door. 
+~
+0 0 1
+D0
+~
+Door~
+1 -1 549
+D2
+~
+~
+0 -1 547
+S
+#549
+Inside the Spaceport~
+Light litteraly blinds you as you open the door.  It takes a little while
+to adjust to the light but you will get use to it. It is extremely crowded
+in the shipyard, amazing how many people surround you. You can smell
+perfum, tabac and ale all in one.  It is very loud as everyone begins to
+talk at the same time indulging in conversations.
+~
+0 0 1
+D1
+~
+~
+0 -1 559
+D2
+~
+~
+0 -1 548
+S
+#550
+Behind the counter~
+You manage to get behind the counter of the gift shop.  The droid does not
+appreciate it.  Stuck on the wall is a large defense turret in case of
+robberies like the one you are trying to make.  A large cash register is
+laid out on the counter in front of you.  Behind your head, is a whole
+stack of goods and other items to buy.  Be careful, not everyone
+appreciates someone behind the counter of their store.
+~
+0 8 1
+D0
+~
+~
+3 -1 551
+D2
+~
+~
+0 -1 546
+S
+#551
+In the large safe~
+You somehow get in the large safe of the gift shop.  Not much is in here
+and the safe is actually not needed.  The room is made out of pure
+durasteel and can deflect several high powered blaster bolts.  A large
+lamp hangs violently over your head.  You feel the credits under you feet.
+ This room is highly secured.
+~
+0 0 1
+D2
+~
+~
+33 -1 550
+S
+#552
+Spaceport food court~
+The food court of the spaceport is very very large. They're aren't any
+seats avaible because everyone is in one.  You might have to share a seat
+with someone. It smells like klatooine patty frogs, one of Nal Hutta's and
+Nar Shaddaa's best delicase. Many aliens are carrying trays full of food
+while others are just lounging in theire chairs.  Maids, and workers are
+busy cleaning up tables for other people to sit in.
+~
+0 0 1
+D3
+~
+~
+0 -1 532
+S
+#553
+Back of the turbo-lift~
+You push your way through into the back of the turbo-lfit.  Another door is
+faced in your direction.  It leades to the nothern side of the spaceport.
+~
+0 0 1
+D0
+~
+~
+0 -1 532
+D2
+~
+~
+0 -1 515
+S
+#554
+Spaceport terminal~
+You can now see the exit for the spaceport.  Many people are gathering
+around, trying to find people that hve just arrived.  Also, taxi drivers
+are waiting for customers holding up a sign.  Light pours in from the
+windows above your head.  This time there is no speakers or monitors. You
+may exit the spaceport further up.
+~
+0 0 1
+D0
+~
+~
+0 -1 557
+D1
+~
+~
+0 -1 555
+D2
+~
+~
+0 -1 532
+D3
+~
+~
+0 -1 556
+S
+#555
+Taxi service~
+A large counter is set in front of you.  The room is very small and stuffy.
+ A large lign up is started in front of you.   You may get a taxi ride, if
+you pay the service droid the amount he wants.  The taxi comes in every
+couple times, and is 24hrs a day.   The taxi is said to be very large, and
+can fit lots of people.  Quickly board the taxi when it comes.
+~
+0 4 1
+D3
+~
+~
+0 -1 554
+S
+#556
+Rental~
+Many speeders are in front of you.  You now are in the spaceport rental
+shop for speeders. You may rent speeders for a large or small amount of
+time.  A droid is ready to serve you all day long.  The security is quite
+tight around here, but not to tight.  You may not buy the speeders and
+over due time will cost you money. Type LIST for a large variety of
+speeders you can rent. 
+~
+0 0 1
+D1
+~
+~
+0 -1 554
+S
+#557
+Exit the spaceport~
+As the door opens automaticly, you intake a small breath of fresh air. 
+Ahhhh!  How great it is to go outside. At last you may go outside. You can
+hear speeders rush by, and people scurrying about the city streets. 
+Several people enter and exit the spaceport every now and then.  Nar
+Shaddaa is a large place and someone could get lost easily.  Be careful out
+there.
+~
+0 0 1
+D0
+~
+~
+0 -1 576
+D2
+~
+~
+0 -1 554
+S
+#558
+Stairway~
+The stairway is not getting any brighter.  The rail is here for your
+support so you don't fall down but no one has actually fell down. Not many
+people are here, because most of them don't know where this stairway leads
+to.    You hear many cries, but can't pin point where it is.
+~
+0 0 1
+D4
+~
+~
+0 -1 523
+D5
+~
+~
+0 -1 559
+S
+#559
+Inside the spaceport~
+You are now standin inside the spaceport.  This is the second floor of the
+spaceport. The spaceport consists of 2 floors, or so it is said to be. A
+staircase leads up back to the first floor. It is very large and filled up
+with people and large crates filled with personal things. Not many workers
+are here to help people out.  Who said this place had to be nice?
+~
+0 0 1
+D1
+~
+~
+0 -1 561
+D3
+~
+~
+0 -1 549
+D4
+~
+~
+0 -1 558
+D5
+~
+~
+0 -1 583
+D6
+~
+~
+0 -1 560
+S
+#560
+Spaceport lounge~
+A large quiet lounge is here for people to rest.  Some people are a sleep. 
+This is a place to recover after a long journey. It is kept silent and not
+word is a loud.  Littering is prohibted as a signs tells you. You can stay
+here for as long as you want to.
+~
+0 8750080 1
+D9
+~
+~
+0 -1 559
+S
+#561
+Inside the spaceport~
+Many directions slip of together now.  You can see many things.  In front
+of you is a large slanted catwalk going upwards. It get's more and more
+busy as you keep on going. Even more people are now in the spaceport.  You
+get pushed around like a rag doll, and it takes you a while to get through
+this crowd.
+~
+0 0 1
+D0
+~
+~
+0 -1 562
+D1
+~
+~
+0 -1 574
+D3
+~
+~
+0 -1 559
+S
+#562
+On the slanted catwalk~
+You step onto the large slanted catwalk and quickly loose your stepping. 
+You regather yourself back up and continue. It is not that hard to walk up
+the catwalk, but takes a little time. You try to look up diagonaly but all
+you see is the catwalk.  The catwalk ends onto a small two way
+intersection, the splits of in another direction.
+~
+0 0 1
+D2
+~
+~
+0 -1 561
+D4
+~
+~
+0 -1 563
+S
+#563
+Slanted catwalk~
+The catwalk gets very hard now.  It takes a lot of time and effort to get
+up.  You think to yourself, how can hutts get up here? You can look down
+at the people below, as you see tiny bald spots on their heads. The
+catwalk continues further up, then splits off in the other direction.
+~
+0 0 1
+D4
+~
+~
+0 -1 564
+D5
+~
+~
+0 -1 562
+S
+#564
+Up the catwalk~
+You made it up the catwalk.  Or atleast half of it.  There more on the east
+side.  You find out that there is nothing here on the end of this catwalk.
+You can look down below and see people.  Compared to you, they look like
+little myrmins (insectes).  It you were to fall, it would hurt a lot. 
+Luckily there is railing here. 
+~
+0 0 1
+D4
+~
+~
+0 -1 572
+D5
+~
+~
+0 -1 563
+S
+#565
+Higher part of the catwalk~
+~
+0 4 1
+S
+#566
+A time share~
+This room is for sale for anyone who wants one.  It is large, comfy and is
+nicely decorated. The time share comes with a kitchen, pation, and a small
+living room.  It has a extremely small holo projector and a built in
+comlink for communication.
+~
+0 2097152 1
+D9
+~
+~
+0 -1 567
+S
+#567
+Hotel intersection~
+You stand inside the spaceport hotel.  It is a large intersection leading
+to rooms, suites and time shares.  There is no one to tell you the way but
+only numbers in all type of languages on the wall. If you were listening,
+you will know which number you are staying in. If you are just visiting
+then have fun.  A small signs directs you to the small indoor pool.
+~
+0 0 1
+D5
+~
+~
+0 -1 568
+D6
+~
+Door~
+3 -1 566
+D7
+~
+~
+3 -1 569
+D8
+~
+Door~
+3 -1 570
+D9
+~
+Door~
+3 -1 571
+S
+#568
+Stairs~
+You climb up the stairs of the hotel room.  The stairs in width are very
+small.  You would have to squish if you met someone on the way up or down.
+Fortunately there is no one in sight.  The stair leads to the rooms and
+suites and other several places.  Large lamps are secured tighly onto the
+wall. They're aren't very many stairs to go up.
+~
+0 0 1 0 0 1
+D4
+~
+~
+0 -1 567
+D5
+~
+~
+0 -1 508
+S
+#569
+Hotel room~
+A large hotel room it is...compared to some other.  A large king size bed
+is waiting for someone to sleep on.  The room is nice smelling and
+recently cleaned.  You may settle in a stay here for the night.  You may
+QUIT here. The room can only contain one person tho.
+~
+0 8388608 1 0 0 1
+D8
+~
+~
+0 -1 567
+S
+#570
+Hotel room~
+A large hotel room it is...compared to some other.  A large king size bed
+is waiting for someone to sleep on.  The room is nice smelling and
+recently cleaned.  You may settle in a stay here for the night.  You may
+QUIT here. Only one person can stay in here.
+~
+0 0 1 0 0 1
+D7
+~
+~
+0 -1 567
+S
+#571
+Hotel room~
+A large hotel room it is...compared to some other.  A large king size bed
+is waiting for someone to sleep on.  The room is nice smelling and
+recently cleaned.  You may settle in a stay here for the night.  You may
+QUIT here.
+~
+0 0 1 0 0 1
+D6
+~
+~
+0 -1 567
+S
+#572
+Catwalk~
+The catwalk gets harder and harder, even comming down. The catwalk goes
+very high up and you can't see the end of it.  Your almost there.  Come
+on! If there where to be more than one person, you would get pushed of. 
+Continue your way up or down.
+~
+0 0 1
+D4
+~
+~
+0 -1 500
+D5
+~
+~
+0 -1 564
+S
+#573
+End of the catwalk~
+You finally make it through the large catwalk.  They're starting to build a
+railing here so you won't fall down. There is nothing really to see here
+except for the people below you.  The sun is shining bright through the
+window or the moon. Might as well go back.
+~
+0 0 1
+D2
+~
+~
+0 -1 540
+S
+#574
+Traffic control room~
+A large group of people are sitting in front of computer screens.  Some are
+answering people on the comlinks. This place is the traffic control.  They
+assist you and tell you where to land.  Of course everyone is too busy to
+notice you.  The room is bathed it red and green. The light source comes
+from the computer screens itself. A staircase leads up, as a little bit of
+light shines down. 
+~
+0 8 1
+D3
+~
+~
+0 -1 561
+D4
+~
+~
+0 -1 575
+S
+#575
+Observation deck~
+The room is filled with transparasteel.  Light pours in from every
+direction.  It is a very beautiful sight.  You can see vertical city of
+Nar Shaddaa.  Large factories produce large quantities of smog. In the air
+you see many star ships and freighters orbiting Nar Shaddaa spaceport
+lisntening for directions. Not many people are aloud in here but everyone
+is to busy working than to notice you. It's an amazing sight isn't it?
+~
+0 0 1
+D5
+~
+~
+0 -1 574
+S
+#576
+City street~
+The city streets are very crowded. Speeders pass by you with incredible
+speed. Nar Shaddaa is a very busy place and also very big. The Bravo-Beta
+spaceport is south of where you are standing.  Many towers and buildings
+are every where you look.
+~
+0 0 1
+D0
+~
+~
+0 -1 584
+D2
+~
+~
+0 -1 557
+S
+#577
+Turbo-lift:Level 4~
+Level 4 is where most of the cargo and baggage go.  The turbo-lift stops at
+this level then goes back up for other people waiting to use it.
+~
+0 0 1
+D2
+~
+~
+0 -1 578
+D4
+~
+~
+0 -1 538
+S
+#578
+Cargo area~
+Precious cargo a being carefully handled by the workers.  They wouldn't
+want an angry costumer.  The room is filled with boxes bags, and other
+types of cargo. A large machine is carrying a whole stack load of bags,
+then ships it of to be carried to the baggage claim.  The baggage claim is
+only for people taking the shuttles.
+~
+0 0 1
+D0
+~
+~
+0 -1 577
+D2
+~
+~
+0 -1 581
+S
+#579
+Baggage claim~
+A large conveyer belt is here bringing up baggage.  Not many people are
+here since mostly everyone has a ship of their own.  This place is only
+for people riding on shuttles and transports. Bags are being token of the
+belt.  A large pile of bag and boxes are here, probably forgotten.
+~
+0 8 1
+D1
+~
+~
+0 -1 530
+D5
+~
+~
+0 -1 582
+S
+#580
+Outdoor landing pad~
+Large transports and shuttles land here.  ONLY the transports and shuttles.
+ This place is very busy unloading the belongings of people aboard these
+ships. The landing pard is farely large.  Enough to have a couple of
+shuttles on at the same time.  People are get off their shuttles then walk
+toward the spaceport. You can smell the engine fuel, as smog fills the
+air.  This place also a refueling station for the shuttles .
+~
+0 48 1
+D0
+~
+~
+0 -1 581
+S
+#581
+Unloading area~
+This part is where people unload their bags and go to the baggage claim.  A
+large conveyer belt is here so the workerscan put the bags on.  A red
+button and a green button a secured onto the wall, of course the controls
+for the belt. This part is only for workers. Why would anyone want to come
+here? 
+~
+0 0 1
+D0
+~
+~
+0 -1 578
+D2
+~
+~
+0 -1 580
+D4
+~
+~
+0 -1 582
+S
+#582
+The conveyer belt~
+Why did you get on the belt.  The metal under you is hard and cold.  Many
+bags and boxes are in front and in the back of you.  You manage to squish
+your way through the tunnel.  This is brutal .
+~
+0 0 1 0 0 1
+D4
+~
+~
+0 -1 579
+D5
+~
+~
+0 -1 581
+S
+#583
+Stairway~
+The stairway leads down down down, into the darkness.  There hardly any
+people comming down the stairs.  The stairways leads down to the deepest
+catacombs of vertical city. Leading up is the spaceport Bravo-Beta.  You
+are pretty much outside of the spaceport. Luckily, there is a glowrods
+built into the wall.
+~
+0 4 1
+D4
+~
+~
+0 -1 559
+S
+#584
+City streets of vertical city~
+Many towers forms a circle around you.  Vertical city is extremely busy. 
+Almost everyone here is carrying a weapon for safety.  Some concealing
+their weapons while others leave it in the open. The road is busy and
+filled with speeders.  They're aren't any police patroling around so it
+isn't very safe around here.
+~
+0 0 1
+D0
+~
+~
+0 -1 587
+D2
+~
+~
+0 -1 576
+D6
+~
+~
+0 -1 585
+D7
+~
+~
+0 -1 586
+S
+#585
+Vertical city~
+Large shadows linger above you.  Cloud cars, and repulsor lifts fly
+steadily toward their destination.  Also the towers cover your view as you
+try to find the sun. Many people are begging for money, trying to get just
+a few credits from someone.  It is heard that Shug Ninx, the famous
+mechanic lives here.  Maybe you should visit him on buying some ships and
+parts. 
+~
+0 0 1
+D9
+~
+~
+0 -1 584
+S
+#586
+Vertical city~
+The towers stand tall.  Their shadows invades you.  This is what it is like
+in Nar Shaddaa smuggler's moon.  The planet is filled with smugglers
+stopping by.   Speeders pass you so fast that you can barely make out the
+color of the speeder.
+~
+0 0 1
+D8
+~
+~
+0 -1 584
+S
+#587
+Vertical city~
+You can hear music playing from one of the buildings but you can't just put
+finger on it. Vertical city is very large, and has many towers.  It seems
+that a large crowd is walking toward the music.  Where could the music be
+comming from.
+~
+0 0 1
+D0
+~
+~
+0 -1 588
+D2
+~
+~
+0 -1 584
+S
+#588
+Vertical city~
+A very loud music trails of north from where you are standing.  Now a lot
+of people are walking toward the music with a determined face. Speeders
+rush past you, also going toward the music.   The towers are still here. 
+It seems that the whole city is filled with large towers. Most towers are
+very large but some are pretty small. A large sign is put up on one of the
+towers.  It is an avertissment of Klatooine patty frogs.  You should be
+walking toward the music since everyone else is.
+~
+0 0 1
+D0
+~
+~
+0 -1 589
+D2
+~
+~
+0 -1 587
+S
+#589
+Entrance to the Cantina~
+You now stand in front of the famous "Vertical City Cantina".  There are
+other cantina's  in vertical city but none are as good as this one. The
+music is very loud but it seems that most people like it.  A large number
+of people are entering the cantina. The cantina is a great place to find
+out information and hire spies and assasins.  Many hutt crime lords come
+into the cantina. That is why the door is so large.  They're two bouncers
+which guard the place.  The seems to be at ease. Somehow droids are
+allowed inside the cantina.  Well atleast you think so.  They're aren't
+any droid detectors.
+~
+0 0 1
+D0
+~
+~
+0 -1 590
+D2
+~
+~
+0 -1 588
+S
+#590
+Inside the cantina~
+The music is now playing very loud.  You can see the band playing some
+sorte of music.  The audience seems to like it a lot. The cantina is very
+large compared to most others.  It's got many posters of advertissments.
+Booths are every where you look, in every direction.  You can't seem to
+find the bar. The cantina has many aliens and humanoids but the most
+common is hutts. 
+~
+0 0 1
+D0
+~
+~
+0 -1 593
+D1
+~
+~
+0 -1 591
+D2
+~
+~
+0 -1 589
+S
+#591
+Cantina~
+It is extremely crowded inside here.  A large shadow hangs over one
+particular conrer of the cantina.  Large lights bathe the room green and
+white.    Hutt seems to be the dominant species around Nar Shaddaa and
+espiecally this cantina.  The cantina is not one bit quiet as you hear
+many people talking mixed with the music.
+~
+0 0 1
+D1
+~
+~
+0 -1 592
+D3
+~
+~
+0 -1 590
+S
+#592
+Booth~
+The padding is very nice and comfortable.  It is a very large booth with a
+small coffey table in the middle.   The seat is farely large and can fit a
+large hutt.   You are very lucky that you actually found a booth in the
+cantina. The table is dirty and has not been cleaned yet.  You can
+actually see the band from where you are sitting.
+~
+0 4 1
+D3
+~
+~
+0 -1 591
+S
+#593
+Cantina~
+You stand with a large group of people.  You get a glimpse of the bar.  Up
+on the stage is a jizz band of Bith. Most people are trying to find a
+booth.  You can buy information here and most likely weapons of any sort. 
+They don't serve any food, but only booze.  Some aliens are drunk. The
+band seems to be draw stares from the crowd.
+~
+0 0 1
+D2
+~
+~
+0 -1 590
+D4
+~
+~
+0 -1 594
+D6
+~
+~
+0 -1 596
+S
+#594
+Up on the stage~
+If you were standing from the cantina floor you now notice that they're a
+lot of people.  The crowd begins to "Boo" at you.    A band of Bith are
+playing some sorte of music but is very amuzing to the ear. The floor is
+made out of tiles.  You get a glimpse of the side of the stage and see a
+curtin. 
+~
+0 4 1
+D0
+~
+~
+0 -1 595
+D5
+~
+~
+0 -1 593
+S
+#595
+Back of the Stage~
+You now stand in the back of the stage where no one can actually see you.
+The music is pretty loud and nice.  It is very stuffy in the back of the
+stage and also very dusty.  Large group of boxes are piled up onto each
+other.  Nothing really here in the back of the stage.
+~
+0 4 1
+D2
+~
+~
+0 -1 594
+S
+#596
+Bar~
+Many large red stools are laid out in front, firmly stuck into the ground. 
+A large bartender waits your order as he cleans a cup. It is extremely
+crowded around the bar, since everyone want something to drink. They serve
+a large vareity of whisky and acohol.  There are a lot of drunk aliens
+hanging around the bar. Most of the stools are filled with heavily drunk
+people as they desperately try to keep themselves up.
+~
+0 0 1
+D6
+~
+~
+0 -1 597
+D9
+~
+~
+0 -1 593
+S
+#597
+Behind the bar~
+You now stand behind the bar.  You are not wanted behind the bar and the
+bartender will most likely kick you out.  You see large shelves of booze
+and some sorte of acohol. The table is very wet.  Under you, located
+around your knees are a couple of cupboards also filled with acohol.
+~
+0 0 1
+D9
+~
+~
+0 -1 596
+S
+#599
+Floating in a void~
+~
+0 4 1
+S
+#0
+
+
+#RESETS
+M 1 506 1 502
+D 0 511 0 1
+D 0 512 2 0
+M 1 512 1 514
+E 1 506 1 5
+M 1 310 3 514
+D 0 514 0 0
+M 1 513 1 526
+M 1 514 1 526
+O 1 507 1 526
+D 0 526 2 0
+D 0 534 0 1
+D 0 534 1 1
+D 0 534 3 1
+D 0 548 0 0
+D 0 551 2 0
+D 0 567 6 1
+D 0 567 7 1
+D 0 567 8 1
+D 0 567 9 1
+M 1 507 1 575
+M 1 515 1 525
+O 1 32231 1 525
+M 1 517 1 574
+E 1 32228 1 13
+M 1 516 1 546
+G 1 520 1
+M 1 310 4 550
+M 1 521 1 550
+D 0 550 0 1
+M 1 502 1 504
+E 1 511 1 17
+G 1 511 1
+M 1 522 1 504
+M 1 527 1 505
+M 1 523 1 503
+E 1 10312 1 16
+M 1 524 1 503
+E 1 56 1 16
+M 1 529 1 564
+E 1 524 1 5
+M 1 530 1 563
+E 1 28020 1 16
+E 1 28120 1 3
+E 1 21059 1 6
+E 1 28017 1 14
+E 1 28011 1 13
+M 1 508 1 507
+G 1 513 1
+E 1 510 1 17
+E 1 505 1 16
+M 1 531 1 507
+M 1 505 2 562
+O 1 32208 1 508
+M 1 532 1 509
+M 1 534 1 509
+E 1 45 1 17
+E 1 316 1 16
+E 1 529 1 5
+O 1 528 1 509
+M 1 535 1 535
+M 1 535 2 536
+M 1 536 1 537
+M 1 537 1 587
+M 1 538 1 516
+O 1 501 1 516
+M 1 541 1 552
+M 1 542 1 552
+M 1 543 1 552
+G 1 201 1
+E 1 525 1 5
+M 1 545 1 552
+M 1 546 1 555
+M 1 547 1 533
+E 1 526 1 5
+G 1 32230 1
+M 1 552 1 553
+M 1 550 1 539
+M 1 553 1 539
+M 1 554 1 539
+O 1 531 1 539
+M 1 556 1 554
+M 1 557 1 559
+M 1 526 1 532
+E 1 318 1 7
+M 1 504 1 532
+M 1 551 1 515
+M 1 558 1 578
+M 1 559 1 521
+M 1 560 1 522
+M 1 561 1 522
+M 1 510 1 500
+E 1 32258 1 13
+G 1 514 1
+M 1 528 1 500
+E 1 21061 1 8
+E 1 522 1 12
+M 1 564 1 592
+M 1 563 1 590
+M 1 565 1 594
+E 1 535 1 17
+M 1 566 1 594
+M 1 567 1 593
+E 1 536 1 9
+M 1 525 1 585
+E 1 538 1 20
+M 1 569 1 586
+E 1 537 1 16
+M 1 511 1 506
+G 1 504 1
+E 1 509 1 5
+E 1 503 1 16
+E 1 32228 1 13
+M 1 549 1 506
+E 1 530 1 16
+M 1 562 1 506
+E 1 532 1 16
+E 1 533 1 5
+O 1 539 1 506
+M 1 505 2 510
+M 1 539 1 510
+E 1 32238 1 20
+E 1 54 1 16
+O 1 540 1 510
+M 1 572 1 530
+M 1 568 1 513
+M 1 570 1 513
+M 1 571 1 513
+M 1 548 1 579
+M 1 573 1 579
+S
+
+
+#SHOPS
+0
+
+
+#REPAIRS
+0
+
+
+#SPECIALS
+S
+
+
+#$
