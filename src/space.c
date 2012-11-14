@@ -1674,7 +1674,6 @@ void save_spaceobject( SPACE_DATA *spaceobject )
 
   sprintf( filename, "%s%s", SPACE_DIR, spaceobject->filename );
 
-  fclose( fpReserve );
   if ( ( fp = fopen( filename, "w" ) ) == NULL )
     {
       bug( "save_spaceobject: fopen", 0 );
@@ -1707,9 +1706,8 @@ void save_spaceobject( SPACE_DATA *spaceobject )
       fprintf( fp, "End\n\n"                                            );
       fprintf( fp, "#END\n"                                             );
     }
+
   fclose( fp );
-  fpReserve = fopen( NULL_FILE, "r" );
-  return;
 }
 
 
@@ -1917,7 +1915,7 @@ void load_space( )
   log_string( "Loading space..." );
 
   sprintf( spaceobjectlist, "%s%s", SPACE_DIR, SPACE_LIST );
-  fclose( fpReserve );
+
   if ( ( fpList = fopen( spaceobjectlist, "r" ) ) == NULL )
     {
       perror( spaceobjectlist );
@@ -1937,10 +1935,9 @@ void load_space( )
           bug( buf, 0 );
         }
     }
+
   fclose( fpList );
   log_string(" Done spaceobjects " );
-  fpReserve = fopen( NULL_FILE, "r" );
-  return;
 }
 
 void do_setspaceobject( CHAR_DATA *ch, char *argument )
@@ -2804,7 +2801,6 @@ void save_ship( SHIP_DATA *ship )
 
   sprintf( filename, "%s%s", SHIP_DIR, ship->filename );
 
-  fclose( fpReserve );
   if ( ( fp = fopen( filename, "w" ) ) == NULL )
     {
       bug( "save_ship: fopen", 0 );
@@ -2918,8 +2914,6 @@ void save_ship( SHIP_DATA *ship )
   */
 
   fclose( fp );
-  fpReserve = fopen( NULL_FILE, "r" );
-  return;
 }
 
 
@@ -3486,7 +3480,7 @@ void load_ships( )
   log_string( "Loading ships..." );
 
   sprintf( shiplist, "%s%s", SHIP_DIR, SHIP_LIST );
-  fclose( fpReserve );
+
   if ( ( fpList = fopen( shiplist, "r" ) ) == NULL )
     {
       perror( shiplist );
@@ -3508,10 +3502,9 @@ void load_ships( )
         }
 
     }
+
   fclose( fpList );
   log_string(" Done ships " );
-  fpReserve = fopen( NULL_FILE, "r" );
-  return;
 }
 
 void resetship( SHIP_DATA *ship )

@@ -143,7 +143,6 @@ void save_clan( CLAN_DATA *clan )
 
   sprintf( filename, "%s%s", CLAN_DIR, clan->filename );
 
-  fclose( fpReserve );
   if ( ( fp = fopen( filename, "w" ) ) == NULL )
     {
       bug( "save_clan: fopen", 0 );
@@ -181,9 +180,8 @@ void save_clan( CLAN_DATA *clan )
       fprintf( fp, "End\n\n"                                            );
       fprintf( fp, "#END\n"                                             );
     }
+
   fclose( fp );
-  fpReserve = fopen( NULL_FILE, "r" );
-  return;
 }
 
 void save_planet( PLANET_DATA *planet )
@@ -207,7 +205,6 @@ void save_planet( PLANET_DATA *planet )
 
   sprintf( filename, "%s%s", PLANET_DIR, planet->filename );
 
-  fclose( fpReserve );
   if ( ( fp = fopen( filename, "w" ) ) == NULL )
     {
       bug( "save_planet: fopen", 0 );
@@ -233,9 +230,8 @@ void save_planet( PLANET_DATA *planet )
       fprintf( fp, "End\n\n"                                            );
       fprintf( fp, "#END\n"                                             );
     }
+
   fclose( fp );
-  fpReserve = fopen( NULL_FILE, "r" );
-  return;
 }
 
 
@@ -701,7 +697,7 @@ void load_clans( )
   log_string( "Loading clans..." );
 
   sprintf( clanlist, "%s%s", CLAN_DIR, CLAN_LIST );
-  fclose( fpReserve );
+
   if ( ( fpList = fopen( clanlist, "r" ) ) == NULL )
     {
       perror( clanlist );
@@ -723,7 +719,6 @@ void load_clans( )
     }
   fclose( fpList );
   log_string(" Done clans\r\nSorting clans...." );
-  fpReserve = fopen( NULL_FILE, "r" );
 
   for ( clan=first_clan ; clan ; clan = clan->next )
     {
@@ -755,7 +750,7 @@ void load_planets( )
   log_string( "Loading planets..." );
 
   sprintf( planetlist, "%s%s", PLANET_DIR, PLANET_LIST );
-  fclose( fpReserve );
+
   if ( ( fpList = fopen( planetlist, "r" ) ) == NULL )
     {
       perror( planetlist );
@@ -777,8 +772,6 @@ void load_planets( )
     }
   fclose( fpList );
   log_string(" Done planets " );
-  fpReserve = fopen( NULL_FILE, "r" );
-  return;
 }
 
 void do_make( CHAR_DATA *ch, char *argument )
@@ -2850,7 +2843,6 @@ void load_senate( )
     log_string( "Loading disintigrations..." );
 
     sprintf( bountylist, "%s%s", SYSTEM_DIR, DISINTIGRATION_LIST );
-    fclose( fpReserve );
     if ( ( fpList = fopen( bountylist, "r" ) ) == NULL )
     {
     perror( bountylist );
@@ -2870,7 +2862,6 @@ void load_senate( )
     }
     fclose( fpList );
     log_string(" Done bounties " );
-    fpReserve = fopen( NULL_FILE, "r" );
 
     return;
   */

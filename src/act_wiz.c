@@ -3714,23 +3714,19 @@ void save_banlist( void )
   BAN_DATA *pban;
   FILE *fp;
 
-  fclose( fpReserve );
   if ( !(fp = fopen( SYSTEM_DIR BAN_LIST, "w" )) )
     {
       bug( "Save_banlist: Cannot open " BAN_LIST, 0 );
       perror(BAN_LIST);
-      fpReserve = fopen( NULL_FILE, "r" );
       return;
     }
+
   for ( pban = first_ban; pban; pban = pban->next )
     fprintf( fp, "%d %s~~%s~\n", pban->level, pban->name, pban->ban_time );
+
   fprintf( fp, "-1\n" );
   fclose( fp );
-  fpReserve = fopen( NULL_FILE, "r" );
-  return;
 }
-
-
 
 void do_ban( CHAR_DATA *ch, char *argument )
 {

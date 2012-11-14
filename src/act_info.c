@@ -2226,12 +2226,11 @@ void do_hset( CHAR_DATA *ch, char *argument )
       log_string_plus( "Saving help.are...", LOG_NORMAL, LEVEL_GREATER );
 
       rename( "help.are", "help.are.bak" );
-      fclose( fpReserve );
+
       if ( ( fpout = fopen( "help.are", "w" ) ) == NULL )
         {
           bug( "hset save: fopen", 0 );
           perror( "help.are" );
-          fpReserve = fopen( NULL_FILE, "r" );
           return;
         }
 
@@ -2242,7 +2241,6 @@ void do_hset( CHAR_DATA *ch, char *argument )
 
       fprintf( fpout, "0 $~\n\n\n#$\n" );
       fclose( fpout );
-      fpReserve = fopen( NULL_FILE, "r" );
       send_to_char( "Saved.\r\n", ch );
       return;
     }

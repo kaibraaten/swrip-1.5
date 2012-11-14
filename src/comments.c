@@ -403,8 +403,8 @@ void do_comment( CHAR_DATA *ch, char *argument )
 
 
 #ifdef NOTDEFD
-      fclose( fpReserve );
       sprintf( notefile, "%s/%s", BOARD_DIR, board->note_file );
+
       if ( ( fp = fopen( notefile, "a" ) ) == NULL )
         {
           perror( notefile );
@@ -420,7 +420,6 @@ void do_comment( CHAR_DATA *ch, char *argument )
                    );
           fclose( fp );
         }
-      fpReserve = fopen( NULL_FILE, "r" );
 #endif
 
       send_to_char( "Ok.\r\n", ch );

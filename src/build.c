@@ -5678,12 +5678,11 @@ void fold_area( AREA_DATA *tarea, char *filename, bool install )
 
   sprintf( buf, "%s.bak", filename );
   rename( filename, buf );
-  fclose( fpReserve );
+
   if ( ( fpout = fopen( filename, "w" ) ) == NULL )
     {
       bug( "fold_area: fopen", 0 );
       perror( filename );
-      fpReserve = fopen( NULL_FILE, "r" );
       return;
     }
 
@@ -6064,8 +6063,6 @@ void fold_area( AREA_DATA *tarea, char *filename, bool install )
   /* END */
   fprintf( fpout, "#$\n" );
   fclose( fpout );
-  fpReserve = fopen( NULL_FILE, "r" );
-  return;
 }
 
 void do_savearea( CHAR_DATA *ch, char *argument )

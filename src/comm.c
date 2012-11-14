@@ -67,7 +67,6 @@ DESCRIPTOR_DATA *   first_descriptor = NULL; /* First descriptor */
 DESCRIPTOR_DATA *   last_descriptor = NULL;  /* Last descriptor              */
 DESCRIPTOR_DATA *   d_next = NULL;          /* Next descriptor in loop      */
 int                 num_descriptors = 0;
-FILE *              fpReserve = NULL;    /* Reserved file handle         */
 bool                mud_down = FALSE;       /* Shutdown                     */
 bool                wizlock = FALSE;     /* Game is wizlocked            */
 time_t              boot_time = 0;
@@ -171,20 +170,6 @@ int main( int argc, char **argv )
 
   /* Set reboot time string for do_time */
   get_reboot_string();
-
-  /*
-   * Reserve two channels for our use.
-   */
-  if ( ( fpReserve = fopen( NULL_FILE, "r" ) ) == NULL )
-    {
-      perror( NULL_FILE );
-      exit( 1 );
-    }
-  if ( ( fpLOG = fopen( NULL_FILE, "r" ) ) == NULL )
-    {
-      perror( NULL_FILE );
-      exit( 1 );
-    }
 
   /*
    * Get the port number.

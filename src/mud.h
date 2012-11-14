@@ -3599,8 +3599,6 @@ extern		OBJ_DATA	  *	all_obj;
 extern		char			bug_buf		[];
 extern		time_t			current_time;
 extern		bool			fLogAll;
-extern		FILE *			fpReserve;
-extern		FILE *			fpLOG;
 extern		char			log_buf		[];
 extern		TIME_INFO_DATA		time_info;
 extern		WEATHER_DATA		weather_info;
@@ -4281,10 +4279,6 @@ DECLARE_SPELL_FUN(      spell_cure_addiction                );
  * AREA_LIST contains a list of areas to boot.
  * All files are read in completely at bootup.
  * Most output files (bug, idea, typo, shutdown) are append-only.
- *
- * The NULL_FILE is held open so that we have a stream handle in reserve,
- *   so players can go ahead and telnet to all the other descriptors.
- * Then we close it whenever we need to open a file (e.g. a save file).
  */
 #define PLAYER_DIR	"../player/"	/* Player files			*/
 #define BACKUP_DIR	"../backup/"    /* Backup Player files		*/
@@ -4300,7 +4294,6 @@ DECLARE_SPELL_FUN(      spell_cure_addiction                );
 #define SYSTEM_DIR	"../system/"	/* Main system files		*/
 #define PROG_DIR	"mudprogs/"	/* MUDProg files		*/
 #define CORPSE_DIR	"../corpses/"	/* Corpses			*/
-#define NULL_FILE	"/dev/null"	/* To reserve one stream	*/
 #define AREA_LIST	"area.lst"	/* List of areas		*/
 #define BAN_LIST        "ban.lst"       /* List of bans                 */
 #define CLAN_LIST	"clan.lst"	/* List of clans		*/

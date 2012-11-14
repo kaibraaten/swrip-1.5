@@ -101,7 +101,7 @@ void load_bounties( )
   log_string( "Loading disintigrations..." );
 
   sprintf( bountylist, "%s%s", SYSTEM_DIR, DISINTIGRATION_LIST );
-  fclose( fpReserve );
+
   if ( ( fpList = fopen( bountylist, "r" ) ) == NULL )
     {
       perror( bountylist );
@@ -130,9 +130,6 @@ void load_bounties( )
 
   fclose( fpList );
   log_string(" Done bounties " );
-  fpReserve = fopen( NULL_FILE, "r" );
-
-  return;
 }
 
 void do_bounties( CHAR_DATA *ch, char *argument )

@@ -2550,21 +2550,18 @@ void write_char_mobile( CHAR_DATA *ch , char *argument )
   if ( IS_NPC( ch ) || !ch->pcdata->pet )
     return;
 
-  fclose( fpReserve );
   if ( (fp = fopen( argument, "w")) == NULL )
     {
       sprintf(buf, "Write_char_mobile: couldn't open %s for writing!\r\n",
               argument );
       bug(buf, 0 );
-      fpReserve = fopen( NULL_FILE, "r" );
       return;
     }
+
   mob = ch->pcdata->pet;
   REMOVE_BIT( mob->affected_by, AFF_CHARM );
   fwrite_mobile( fp, mob );
   fclose( fp );
-  fpReserve = fopen( NULL_FILE, "r" );
-  return;
 }
 
 /*
@@ -2576,17 +2573,14 @@ void read_char_mobile( char *argument )
   CHAR_DATA *mob;
   char buf[MAX_STRING_LENGTH];
 
-  fclose( fpReserve );
   if ( (fp = fopen( argument, "r")) == NULL )
     {
       sprintf(buf, "Read_char_mobile: couldn't open %s for reading!\r\n",
               argument );
       bug(buf, 0 );
-      fpReserve = fopen( NULL_FILE, "r" );
       return;
     }
+
   mob = fread_mobile( fp );
   fclose( fp );
-  fpReserve = fopen( NULL_FILE, "r" );
-
 }
