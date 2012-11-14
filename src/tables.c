@@ -261,6 +261,7 @@ DO_FUN *skill_function( char *name )
 	if ( !str_cmp( name, "do_compare" ))		return do_compare;
 	if ( !str_cmp( name, "do_config" ))		return do_config;
 	if ( !str_cmp( name, "do_consider" ))		return do_consider;
+	if ( !str_cmp( name, "do_copyover" ))           return do_copyover;
 	if ( !str_cmp( name, "do_copyship" ))		return do_copyship;
 	if ( !str_cmp( name, "do_credits" ))		return do_credits;
 	if ( !str_cmp( name, "do_cset" ))		return do_cset;
@@ -841,6 +842,7 @@ char *spell_name( SPELL_FUN *spell )
 
 char *skill_name( DO_FUN *skill )
 {   
+  if ( skill == do_copyover)    return "do_copyover";
     if ( skill == do_findserin)    return "do_findserin";
     if ( skill == do_renameship)    return "do_renameship";
     if ( skill == do_showplanet)    return "do_showplanet";

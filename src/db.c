@@ -394,7 +394,7 @@ void shutdown_mud( char *reason )
 /*
  * Big mama top level function.
  */
-void boot_db( void )
+void boot_db( bool fCopyOver )
 {
     sh_int wear, x;
 
@@ -789,7 +789,11 @@ ASSIGN_GSN( gsn_yevethan, "yevethan" );
 
     /* init_maps ( ); */
 
-    return;
+    if( fCopyOver )
+      {
+	log_string( "Running copyover_recover." );
+	copyover_recover();
+      }
 }
 
 

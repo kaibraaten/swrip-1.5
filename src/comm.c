@@ -130,11 +130,13 @@ bool	pager_output		args( ( DESCRIPTOR_DATA *d ) );
 void	mail_count		args( ( CHAR_DATA *ch ) );
 
 
+int port = 0;
 
 int main( int argc, char **argv )
 {
     struct timeval now_time;
-    int port;
+    /*int port;*/
+    bool fCopyOver = FALSE;
 
     /*
      * Memory debugging if needed.
@@ -217,6 +219,28 @@ int main( int argc, char **argv )
 	    fprintf( stderr, "Port number must be above 1024.\n" );
 	    exit( 1 );
 	}
+
+	if( argv[2] && argv[2][0] )
+	  {
+	    fCopyOver = TRUE;
+#if defined(AMIGA) || defined(__MORPHOS__)
+	    control = ObtainSocket( atoi( argv[3] ), PF_INET, SOCK_STREAM, IPPROTO_TC\
+				    P );
+#ifdef SWR2_USE_IMC
+	    imcsocket = ObtainSocket( atoi( argv[4] ), PF_INET, SOCK_STREAM, IPPROTO_\
+				      TCP );
+#endif /* imc */
+#else
+	    control = atoi( argv[3] );
+#ifdef SWR2_USE_IMC
+	    imcsocket = atoi( argv[4] );
+#endif /* imc */
+#endif
+	  }
+	else
+	  {
+	    fCopyOver = FALSE;
+	  }
     }
 
     /*
@@ -226,12 +250,17 @@ int main( int argc, char **argv )
     bootup = TRUE;
     log_string(log_buf);
     log_string("Booting Database");
-    boot_db( );
+    boot_db(fCopyOver);
     log_string("Initializing socket");
-    control  = init_socket( port   );
-    control2 = init_socket( port+1 );
-    conclient= init_socket( port+10);
-    conjava  = init_socket( port+20);
+
+    if( !fCopyOver )
+      {
+	control  = init_socket( port   );
+	control2 = init_socket( port+1 );
+	conclient= init_socket( port+10);
+	conjava  = init_socket( port+20);
+      }
+
     sprintf( log_buf, "Rise in Power ready on port %d.", port );
     log_string( log_buf );
     bootup = FALSE;
@@ -651,11 +680,30 @@ void game_loop( )
     return;
 }
 
+void init_descriptor(DESCRIPTOR_DATA *dnew, int desc)
+{
+  CREATE( dnew, DESCRIPTOR_DATA, 1 );
+  dnew->next          = NULL;
+  dnew->descriptor    = desc;
+  dnew->connected     = CON_GET_NAME;
+  dnew->outsize       = 2000;
+  dnew->idle          = 0;
+  dnew->lines         = 0;
+  dnew->scrlen        = 24;
+  /*dnew->port          = ntohs( sock.sin_port );*/
+  dnew->user          = STRALLOC("unknown");
+  dnew->newstate      = 0;
+  dnew->prevcolor     = 0x07;
+  dnew->original      = NULL;
+  dnew->character     = NULL;
+
+  CREATE( dnew->outbuf, char, dnew->outsize );
+}
 
 void new_descriptor( int new_desc )
 {
     char buf[MAX_STRING_LENGTH];
-    DESCRIPTOR_DATA *dnew;
+    DESCRIPTOR_DATA *dnew = NULL;
     BAN_DATA *pban;
     struct hostent  *from;
     char *hostname;
@@ -698,22 +746,9 @@ void new_descriptor( int new_desc )
     if ( check_bad_desc( new_desc ) )
       return;
 
-    CREATE( dnew, DESCRIPTOR_DATA, 1 );
-    dnew->next		= NULL;
-    dnew->descriptor	= desc;
-    dnew->connected	= CON_GET_NAME;
-    dnew->outsize	= 2000;
-    dnew->idle		= 0;
-    dnew->lines		= 0;
-    dnew->scrlen	= 24;
-    dnew->port		= ntohs( sock.sin_port );
-    dnew->user 		= STRALLOC("unknown");
-    dnew->newstate	= 0;
-    dnew->prevcolor	= 0x07;
-    dnew->original      = NULL;
-    dnew->character     = NULL;
 
-    CREATE( dnew->outbuf, char, dnew->outsize );
+    init_descriptor(dnew, desc);
+    dnew->port = ntohs( sock.sin_port );
 
     strcpy( buf, inet_ntoa( sock.sin_addr ) );
     sprintf( log_buf, "Sock.sinaddr:  %s, port %hd.",

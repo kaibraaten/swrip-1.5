@@ -401,7 +401,7 @@ typedef enum
   CON_WAIT_1,		CON_WAIT_2,		CON_WAIT_3,
   CON_ACCEPTED,         CON_GET_PKILL,		CON_READ_IMOTD,
   CON_GET_NEW_EMAIL,    CON_GET_MSP,            CON_GET_NEW_CLASS,
-  CON_ROLL_STATS,	CON_STATS_OK
+  CON_ROLL_STATS,	CON_STATS_OK,           CON_COPYOVER_RECOVER
 } connection_types;
 
 /*
@@ -3649,6 +3649,7 @@ extern		struct act_prog_data *	mob_act_list;
  * Command functions.
  * Defined in act_*.c (mostly).
  */
+DECLARE_DO_FUN( do_copyover );
 DECLARE_DO_FUN(	do_nohelps	);
 DECLARE_DO_FUN(	do_skin		);
 DECLARE_DO_FUN( do_dismiss	);
@@ -4429,6 +4430,7 @@ char *	crypt		args( ( const char *key, const char *salt ) );
 
 #define BOARD_FILE	"boards.txt"		/* For bulletin boards	 */
 #define SHUTDOWN_FILE	"shutdown.txt"		/* For 'shutdown'	 */
+#define COPYOVER_FILE   SYSTEM_DIR "copyover.dat"
 
 #define BOOTLOG_FILE	SYSTEM_DIR "boot.txt"	  /* Boot up error file	 */
 #define BUG_FILE	SYSTEM_DIR "bugs.txt"	  /* For 'bug' and bug( )*/
@@ -4466,6 +4468,9 @@ char *	crypt		args( ( const char *key, const char *salt ) );
 #define DE	DEITY_DATA
 #define SK	SKILLTYPE
 #define SH      SHIP_DATA
+
+/* copyover.c */
+void copyover_recover( void );
 
 /* act_comm.c */
 void    sound_to_room( ROOM_INDEX_DATA *room , char *argument );
@@ -4647,7 +4652,7 @@ void	reset_area	args( ( AREA_DATA * pArea ) );
 /* db.c */
 void	show_file	args( ( CHAR_DATA *ch, char *filename ) );
 char *	str_dup		args( ( char const *str ) );
-void	boot_db		args( ( void ) );
+void	boot_db( bool fCopyover );
 void	area_update	args( ( void ) );
 void	add_char	args( ( CHAR_DATA *ch ) );
 CD *	create_mobile	args( ( MOB_INDEX_DATA *pMobIndex ) );
