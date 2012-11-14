@@ -51,7 +51,7 @@ void end_compress( DESCRIPTOR_DATA *d );
 SOCKET init_socket( int port );
 void new_descriptor( SOCKET new_desc );
 bool read_from_descriptor( DESCRIPTOR_DATA * d );
-bool write_to_descriptor( DESCRIPTOR_DATA *d, const char *txt, int length );
+bool write_to_descriptor( int d, const char *txt, int length );
 void init_descriptor( DESCRIPTOR_DATA * dnew, SOCKET desc );
 void free_desc( DESCRIPTOR_DATA * d );
 
@@ -102,7 +102,7 @@ void do_copyover( CHAR_DATA * ch, char *argument )
 
     if( !d->character || d->connected != CON_PLAYING )	/* drop those logging on */
     {
-      write_to_descriptor( d, "\r\nSorry, we are rebooting."
+      write_to_descriptor( d->descriptor, "\r\nSorry, we are rebooting."
 			   " Come back in a few minutes.\r\n", 0 );
       close_socket( d, FALSE );	/* throw'em out */
     }
@@ -131,7 +131,7 @@ void do_copyover( CHAR_DATA * ch, char *argument )
       fprintf( fp, "%d %d %s %s\n", cur_desc, 0, /*d->mccp ? 1 : 0,*/
 	       och->name, d->host );
       save_char_obj( och );
-      write_to_descriptor( d, buf, 0 );
+      write_to_descriptor( d->descriptor, buf, 0 );
       /*
       end_compress( d );
       */
@@ -187,7 +187,7 @@ void do_copyover( CHAR_DATA * ch, char *argument )
 #define _execl execl
 #endif
   /*_execl( filename, filename,*/
-  _execl( "swrip", "swrip",
+  _execl( "../bin/swrip", "../bin/swrip",
 	 buf, "copyover", buf2, buf3, NULL );
 
   /* Failed - sucessful exec will not return */
@@ -213,7 +213,7 @@ void copyover_recover( void )
 
   fp = fopen( COPYOVER_FILE, "r" );
 
-  if( !fp )			/* there are some descriptors open which will hang forever then ? */
+  if( !fp )
   {
     perror( "copyover_recover:fopen" );
     log_string( "Copyover file not found. Exitting.\r\n" );
@@ -244,9 +244,10 @@ void copyover_recover( void )
     d->host = STRALLOC( host );
 
     /* Write something, and check if it goes error-free */
-    if( !write_to_descriptor( d, "\r\nThe surge of Light passes leaving you unscathed and your world reshaped anew\r\n", 0 ) )
+    if( !write_to_descriptor( d->descriptor, "\r\nThe surge of Light passes leaving you unscathed and your world reshaped anew\r\n", 0 ) )
     {
       /*closesocket( desc );*/
+      bug("copyover_recover: couldn't write to socket %d", desc);
       free_desc(d);
       continue;
     }
@@ -264,7 +265,7 @@ void copyover_recover( void )
 
     if( !fOld )		/* Player file not found?! */
     {
-      write_to_descriptor( d,
+      write_to_descriptor( d->descriptor,
 			   "\r\nSomehow, your character was lost in the copyover sorry.\r\n",
 			   0 );
       close_socket( d, FALSE );
@@ -273,7 +274,7 @@ void copyover_recover( void )
     {
       char argument[MAX_INPUT_LENGTH];
       snprintf( argument, MAX_INPUT_LENGTH, "%s", "auto noprog" );
-      write_to_descriptor( d, "\r\nCopyover recovery complete.\r\n", 0 );
+      write_to_descriptor( d->descriptor, "\r\nCopyover recovery complete.\r\n", 0 );
 
       /* Just In Case,  Someone said this isn't necassary, but _why_
 	 do we want to dump someone in limbo? */
