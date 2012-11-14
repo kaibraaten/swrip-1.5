@@ -1,0 +1,2303 @@
+#AREA   Endor~
+
+
+
+#AUTHOR Thrawn~
+
+#RANGES
+2 100 2 100
+$
+
+#RESETMSG You hear the calls of the forest birds being carried through the Forest air.~
+
+#FLAGS
+0
+
+#ECONOMY 0 31250251
+
+#MOBILES
+#3000
+ewok female~
+An ewok female~
+An Ewok female is tending to the young here.
+~
+~
+1 0 0 Z
+3 0 100 1d4+10 1d2+2
+0 0
+8 8 2
+13 13 13 13 13 13 13
+0 0 0 0 0
+10 0 0 0 128 128 0
+0 0 0 0 0 0 0 0
+2048 0 0 0 0 0 0 0
+#3001
+gorax ~
+a gorax~
+A Giant Gorax is thundering through the trees.
+~
+~
+4129 0 0 Z
+101 0 -120 11d20+1500 7d10+0
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 128 128 0
+25 20 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+> greet_prog 100~
+if race($n) == ewok
+smile
+cack
+'mmmm dinner!
+evil
+mpkill $n
+endif
+~
+|
+#3002
+male ewok~
+an ewok male~
+A male Ewok is going about his business.
+~
+~
+1 0 0 Z
+3 0 92 0d10+30 0d4+2
+0 0
+8 8 1
+13 13 13 13 13 13 13
+0 0 0 0 0
+10 0 0 0 128 128 0
+0 0 0 0 0 0 0 0
+2048 0 0 0 0 0 0 0
+#3003
+ewok child~
+an ewok child~
+An ewok child is playing here.
+~
+~
+129 0 0 Z
+1 0 0 1d1+30 1d3+3
+0 0
+8 8 1
+13 13 13 13 13 13 13
+0 0 0 0 0
+7 0 0 0 128 128 1
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#3004
+Wicket~
+Wicket~
+Wicket Leader of the Ewok people stands here spear in hand.
+~
+~
+3 0 0 Z
+12 0 70 2d10+120 1d4+2
+20 0
+8 8 1
+13 13 13 13 13 13 13
+0 0 0 0 0
+1 0 0 0 128 128 0
+3 5 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#3005
+supply keeper~
+ewok supply keeper~
+An ewok is here, keeping watch over the supplies.
+~
+~
+3 0 0 Z
+3 0 100 1d4+10 1d2+2
+0 0
+8 8 2
+13 13 13 13 13 13 13
+0 0 0 0 0
+10 0 0 0 128 128 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#0
+
+
+#OBJECTS
+#3000
+leather hood~
+a leather hood~
+A small hood has been dropped here.~
+~
+9 262144 17
+5 5 0 0
+1 0 0
+#3001
+spear~
+a spear~
+A spear lies here in the dirt.~
+~
+5 262144 8193
+12 1 4 11
+1 0 0
+#3002
+feathered head dress~
+feathered head dress~
+A feathered head dress lies here.~
+~
+9 262144 17
+2 2 0 0
+1 0 0
+#3003
+leather wrist guards~
+leather wrist guard~
+A feathered head dress lies here.~
+~
+9 262144 4097
+2 2 0 0
+1 0 0
+#3004
+bone necklace~
+a bone necklace~
+A small pile of bones lie here.~
+~
+9 262144 5
+2 2 0 0
+1 0 0
+#3005
+a wooden shield~
+a wooden shield~
+A wooden shield is collecting dust~
+~
+9 262144 513
+5 5 0 0
+1 0 0
+#3006
+fruit~
+some dried fruit~
+Some dried fruit should last for a long time without going bad.~
+~
+19 0 1
+10 0 0 0
+1 8 0
+#3007
+fresh vegitables~
+fresh vegitables~
+Some vegitables are attracting flies here.~
+~
+19 0 1
+10 0 0 0
+1 9 0
+#3008
+small canteen~
+a small canteen~
+A belt sized canteen was dropped here.~
+~
+17 0 1
+10 10 0 0
+1 10 1
+#0
+
+
+#ROOMS
+#3000
+Ewok Nursery House~
+You stand in the middle of a room filled with little ewok children they
+range  in size from very tiny and crawling on fur blankets to the near
+adolecents playing with toy bows arrows and spears. The room is littered
+with an abundant amount of  toys for the children to play with. Its a
+rather room for ewok standards and has been put to use from what you can
+guess to be a very very long time. There are few females here tending to
+the young as well as the cries of the new born infants.
+~
+0 4 1
+D0
+~
+~
+0 -1 3008
+D1
+~
+~
+0 -1 3006
+D2
+~
+~
+0 -1 3004
+D3
+~
+~
+0 -1 3002
+> rand_prog 40~
+mpecho The children scream with excitement.
+~
+|
+S
+#3001
+Walkway Around the Nursery~
+The walkway is made from some very sturdy planks of wood that seem to
+be able to withstand alot of weight as well as alot of the pressure
+the forest elements have (and can) throw at it. The ewoks very rarely
+get visitors to their village, so quite naturaly they are a little 
+cautious when it comes to new people here, but they do eventualy 
+accept your presence and let you in on the village celebrations.
+The walkways are very high up from the ground, this is due to the
+carnivors that inhabit the planet with the ewok people. The most feared
+beast is the humanoid behemoth Gorax, who are the main reason for the 
+village being so high off the ground.
+~
+0 0 1
+D1
+~
+~
+0 -1 3008
+D2
+~
+~
+0 -1 3002
+S
+#3002
+Walkway Around the Nursery~
+The walkway is made from some very sturdy planks of wood that seem to
+be able to withstand alot of weight as well as alot of the pressure
+get visitors to their village, so quite naturaly they are a little 
+cautious when it comes to new people here, but they do eventualy 
+accept your presence and let you in on the village celebrations.
+The walkways are very high up from the ground, this is due to the
+carnivors that inhabit the planet with the ewok people. The most feared
+beast is the humanoid behemoth Gorax, who are the main reason for the 
+village being so high off the ground.
+~
+0 0 1
+D0
+~
+~
+0 -1 3001
+D1
+~
+~
+0 -1 3000
+D2
+~
+~
+0 -1 3003
+S
+#3003
+Walkway Around the Nursery~
+The walkway is made from some very sturdy planks of wood that seem to
+be able to withstand alot of weight as well as alot of the pressure
+the forest elements have (and can) throw at it. The ewoks very rarely
+get visitors to their village, so quite naturaly they are a little 
+cautious when it comes to new people here, but they do eventualy 
+accept your presence and let you in on the village celebrations.
+The walkways are very high up from the ground, this is due to the
+carnivors that inhabit the planet with the ewok people. The most feared
+beast is the humanoid behemoth Gorax, who are the main reason for the 
+village being so high off the ground.
+~
+0 0 1
+D0
+~
+~
+0 -1 3002
+D3
+~
+~
+0 -1 3004
+S
+#3004
+Walkway Around the Nursery~
+The walkway is made from some very sturdy planks of wood that seem to
+be able to withstand alot of weight as well as alot of the pressure
+the forest elements have (and can) throw at it. The ewoks very rarely
+get visitors to their village, so quite naturaly they are a little 
+cautious when it comes to new people here, but they do eventualy 
+accept your presence and let you in on the village celebrations.
+The walkways are very high up from the ground, this is due to the
+carnivors that inhabit the planet with the ewok people. The most feared
+beast is the humanoid behemoth Gorax, who are the main reason for the 
+village being so high off the ground.
+~
+0 0 1
+D0
+~
+~
+0 -1 3000
+D1
+~
+~
+0 -1 3003
+D3
+~
+~
+0 -1 3005
+S
+#3005
+Walkway Around the Nursery~
+The walkway is made from some very sturdy planks of wood that seem to
+be able to withstand alot of weight as well as alot of the pressure
+the forest elements have (and can) throw at it. The ewoks very rarely
+get visitors to their village, so quite naturaly they are a little 
+cautious when it comes to new people here, but they do eventualy 
+accept your presence and let you in on the village celebrations.
+The walkways are very high up from the ground, this is due to the
+carnivors that inhabit the planet with the ewok people. The most feared
+beast is the humanoid behemoth Gorax, who are the main reason for the 
+village being so high off the ground.
+~
+0 4 1
+D0
+~
+~
+0 -1 3006
+D1
+~
+~
+0 -1 3004
+D8
+~
+~
+0 -1 3009
+S
+#3006
+Walkway Around the Nursery~
+The walkway is made from some very sturdy planks of wood that seem to
+be able to withstand alot of weight as well as alot of the pressure
+the forest elements have (and can) throw at it. The ewoks very rarely
+get visitors to their village, so quite naturaly they are a little 
+cautious when it comes to new people here, but they do eventualy 
+accept your presence and let you in on the village celebrations.
+The walkways are very high up from the ground, this is due to the
+carnivors that inhabit the planet with the ewok people. The most feared
+beast is the humanoid behemoth Gorax, who are the main reason for the 
+village being so high off the ground.
+~
+0 4 1
+D0
+~
+~
+0 -1 3007
+D2
+~
+~
+0 -1 3005
+D3
+~
+~
+0 -1 3000
+S
+#3007
+Walkway Around the Nursery~
+The walkway is made from some very sturdy planks of wood that seem to
+be able to withstand alot of weight as well as alot of the pressure
+the forest elements have (and can) throw at it. The ewoks very rarely
+get visitors to their village, so quite naturaly they are a little 
+cautious when it comes to new people here, but they do eventualy 
+accept your presence and let you in on the village celebrations.
+The walkways are very high up from the ground, this is due to the
+carnivors that inhabit the planet with the ewok people. The most feared
+village being so high off the ground.
+~
+0 4 1
+D2
+~
+~
+0 -1 3006
+D3
+~
+~
+0 -1 3008
+S
+#3008
+Walkway Around the Nursery~
+The walkway is made from some very sturdy planks of wood that seem to
+be able to withstand alot of weight as well as alot of the pressure
+the forest elements have (and can) throw at it. The ewoks very rarely
+get visitors to their village, so quite naturaly they are a little 
+cautious when it comes to new people here, but they do eventualy 
+accept your presence and let you in on the village celebrations.
+The walkways are very high up from the ground, this is due to the
+carnivors that inhabit the planet with the ewok people. The most feared
+beast is the humanoid behemoth Gorax, who are the main reason for the 
+village being so high off the ground.
+~
+0 0 1
+D1
+~
+~
+0 -1 3007
+D2
+~
+~
+0 -1 3000
+D3
+~
+~
+0 -1 3001
+S
+#3009
+Rope Bridge~
+The bridge is suppported buy a very sturdy rope that has large 
+wooden planks for easy walking and balance. Strangly enough the
+bridge seems to be rather ridged and barely sways under a stronge 
+gust of wind. The native ewoks don't even seem to notice any swaying
+at all as some run past you and others just walk past paying no 
+attention to your presence.
+~
+0 0 1
+D7
+~
+~
+0 -1 3005
+D8
+~
+~
+0 -1 3010
+S
+#3010
+Rope Bridge~
+The bridge is suppported buy a very sturdy rope that has large 
+wooden planks for easy walking and balance. Strangly enough the
+bridge seems to be rather ridged and barely sways under a stronge 
+gust of wind. The native ewoks don't even seem to notice any swaying
+at all as some run past you and others just walk past paying no 
+attention to your presence.
+~
+0 0 1
+D7
+~
+~
+0 -1 3009
+D8
+~
+~
+0 -1 3011
+S
+#3011
+Rope Bridge~
+The bridge is suppported buy a very sturdy rope that has large 
+wooden planks for easy walking and balance. Strangly enough the
+bridge seems to be rather ridged and barely sways under a stronge 
+gust of wind. The native ewoks don't even seem to notice any swaying
+at all as some run past you and others just walk past paying no 
+attention to your presence.
+~
+0 0 1
+D7
+~
+~
+0 -1 3010
+D8
+~
+~
+0 -1 3012
+S
+#3012
+Walkway~
+The walkway is made from very sturdy planks of wood that seem to
+be able to withstand alot of weight as well as alot of pressure
+the forest elements have (and can) throw at it. The ewoks very rarely
+get visitors to their villages, so quite naturaly they are a little
+cautious when it comes to new people here, but they do eventually
+accept your presence and let you in on the village celebrations.
+The walkways are very high up from the ground, this is due to the
+beast is the humanoid behemoth Gorax, who are the main reson for the 
+village being so high up in the Endor Trees.
+~
+0 0 1
+D1
+~
+~
+0 -1 3013
+D2
+~
+~
+0 -1 3019
+D7
+~
+~
+0 -1 3011
+S
+#3013
+Walkway~
+The walkway is made from very sturdy planks of wood that seem to
+be able to withstand alot of weight as well as alot of pressure
+the forest elements have (and can) throw at it. The ewoks very rarely
+get visitors to their villages, so quite naturaly they are a little
+cautious when it comes to new people here, but they do eventually
+accept your presence and let you in on the village celebrations.
+The walkways are very high up from the ground, this is due to the
+beast is the humanoid behemoth Gorax, who are the main reson for the 
+village being so high up in the Endor Trees.
+~
+0 0 1
+D1
+~
+~
+0 -1 3014
+D2
+~
+~
+0 -1 3044
+D3
+~
+~
+0 -1 3012
+S
+#3014
+Walkway~
+The walkway is made from very sturdy planks of wood that seem to
+be able to withstand alot of weight as well as alot of pressure
+the forest elements have (and can) throw at it. The ewoks very rarely
+get visitors to their villages, so quite naturaly they are a little
+cautious when it comes to new people here, but they do eventually
+accept your presence and let you in on the village celebrations.
+The walkways are very high up from the ground, this is due to the
+beast is the humanoid behemoth Gorax, who are the main reson for the 
+village being so high up in the Endor Trees.
+~
+0 0 1
+D2
+~
+~
+0 -1 3015
+D3
+~
+~
+0 -1 3013
+S
+#3015
+Walkway~
+The walkway is made from very sturdy planks of wood that seem to
+be able to withstand alot of weight as well as alot of pressure
+the forest elements have (and can) throw at it. The ewoks very rarely
+get visitors to their villages, so quite naturaly they are a little
+cautious when it comes to new people here, but they do eventually
+accept your presence and let you in on the village celebrations.
+The walkways are very high up from the ground, this is due to the
+beast is the humanoid behemoth Gorax, who are the main reson for the 
+village being so high up in the Endor Trees.
+~
+0 0 1
+D0
+~
+~
+0 -1 3014
+D2
+~
+~
+0 -1 3016
+D3
+~
+~
+0 -1 3045
+S
+#3016
+Walkway~
+The walkway is made from very sturdy planks of wood that seem to
+be able to withstand alot of weight as well as alot of pressure
+the forest elements have (and can) throw at it. The ewoks very rarely
+get visitors to their villages, so quite naturaly they are a little
+cautious when it comes to new people here, but they do eventually
+accept your presence and let you in on the village celebrations.
+The walkways are very high up from the ground, this is due to the
+beast is the humanoid behemoth Gorax, who are the main reson for the 
+village being so high up in the Endor Trees.
+~
+0 0 1
+D0
+~
+~
+0 -1 3015
+D3
+~
+~
+0 -1 3017
+S
+#3017
+Walkway~
+The walkway is made from very sturdy planks of wood that seem to
+be able to withstand alot of weight as well as alot of pressure
+the forest elements have (and can) throw at it. The ewoks very rarely
+get visitors to their villages, so quite naturaly they are a little
+cautious when it comes to new people here, but they do eventually
+accept your presence and let you in on the village celebrations.
+The walkways are very high up from the ground, this is due to the
+beast is the humanoid behemoth Gorax, who are the main reson for the 
+village being so high up in the Endor Trees.
+~
+0 0 1
+D0
+~
+~
+0 -1 3047
+D1
+~
+~
+0 -1 3016
+D2
+~
+~
+0 -1 3020
+D3
+~
+~
+0 -1 3018
+S
+#3018
+Walkway~
+The walkway is made from very sturdy planks of wood that seem to
+be able to withstand alot of weight as well as alot of pressure
+the forest elements have (and can) throw at it. The ewoks very rarely
+get visitors to their villages, so quite naturaly they are a little
+cautious when it comes to new people here, but they do eventually
+accept your presence and let you in on the village celebrations.
+The walkways are very high up from the ground, this is due to the
+beast is the humanoid behemoth Gorax, who are the main reson for the 
+village being so high up in the Endor Trees.
+~
+0 0 1
+D0
+~
+~
+0 -1 3019
+D1
+~
+~
+0 -1 3017
+S
+#3019
+Walkway~
+The walkway is made from very sturdy planks of wood that seem to
+be able to withstand alot of weight as well as alot of pressure
+the forest elements have (and can) throw at it. The ewoks very rarely
+get visitors to their villages, so quite naturaly they are a little
+cautious when it comes to new people here, but they do eventually
+accept your presence and let you in on the village celebrations.
+The walkways are very high up from the ground, this is due to the
+beast is the humanoid behemoth Gorax, who are the main reson for the 
+village being so high up in the Endor Trees.
+~
+0 0 1
+D0
+~
+~
+0 -1 3012
+D1
+~
+~
+0 -1 3046
+D2
+~
+~
+0 -1 3018
+S
+#3020
+Rope Bridge~
+The bridge is suppported buy a very sturdy rope that has large 
+wooden planks for easy walking and balance. Strangly enough the
+bridge seems to be rather ridged and barely sways under a stronge 
+gust of wind. The native ewoks don't even seem to notice any swaying
+at all as some run past you and others just walk past paying no 
+attention to your presence.
+~
+0 0 1
+D0
+~
+~
+0 -1 3017
+D2
+~
+~
+0 -1 3022
+S
+#3021
+Walkway~
+The walkway is made from very sturdy planks of wood that seem to
+be able to withstand alot of weight as well as alot of pressure
+the forest elements have (and can) throw at it. The ewoks very rarely
+get visitors to their villages, so quite naturaly they are a little
+cautious when it comes to new people here, but they do eventually
+accept your presence and let you in on the village celebrations.
+The walkways are very high up from the ground, this is due to the
+beast is the humanoid behemoth Gorax, who are the main reson for the 
+village being so high up in the Endor Trees.
+~
+0 0 1
+D1
+~
+~
+0 -1 3022
+D2
+~
+~
+0 -1 3024
+S
+#3022
+Walkway~
+The walkway is made from very sturdy planks of wood that seem to
+be able to withstand alot of weight as well as alot of pressure
+the forest elements have (and can) throw at it. The ewoks very rarely
+get visitors to their villages, so quite naturaly they are a little
+cautious when it comes to new people here, but they do eventually
+accept your presence and let you in on the village celebrations.
+The walkways are very high up from the ground, this is due to the
+beast is the humanoid behemoth Gorax, who are the main reson for the 
+village being so high up in the Endor Trees.
+~
+0 0 1
+D0
+~
+~
+0 -1 3020
+D1
+~
+~
+0 -1 3023
+D2
+~
+~
+0 -1 3048
+D3
+~
+~
+0 -1 3021
+S
+#3023
+Walkway~
+The walkway is made from very sturdy planks of wood that seem to
+be able to withstand alot of weight as well as alot of pressure
+the forest elements have (and can) throw at it. The ewoks very rarely
+get visitors to their villages, so quite naturaly they are a little
+cautious when it comes to new people here, but they do eventually
+accept your presence and let you in on the village celebrations.
+The walkways are very high up from the ground, this is due to the
+beast is the humanoid behemoth Gorax, who are the main reson for the 
+village being so high up in the Endor Trees.
+~
+0 0 1
+D2
+~
+~
+0 -1 3028
+D3
+~
+~
+0 -1 3022
+D6
+~
+~
+0 -1 3029
+S
+#3024
+Walkway~
+The walkway is made from very sturdy planks of wood that seem to
+be able to withstand alot of weight as well as alot of pressure
+the forest elements have (and can) throw at it. The ewoks very rarely
+get visitors to their villages, so quite naturaly they are a little
+cautious when it comes to new people here, but they do eventually
+accept your presence and let you in on the village celebrations.
+The walkways are very high up from the ground, this is due to the
+beast is the humanoid behemoth Gorax, who are the main reson for the 
+village being so high up in the Endor Trees.
+~
+0 0 1
+D0
+~
+~
+0 -1 3021
+D1
+~
+~
+0 -1 3059
+D2
+~
+~
+0 -1 3025
+S
+#3025
+Walkway~
+The walkway is made from very sturdy planks of wood that seem to
+be able to withstand alot of weight as well as alot of pressure
+the forest elements have (and can) throw at it. The ewoks very rarely
+get visitors to their villages, so quite naturaly they are a little
+cautious when it comes to new people here, but they do eventually
+accept your presence and let you in on the village celebrations.
+The walkways are very high up from the ground, this is due to the
+beast is the humanoid behemoth Gorax, who are the main reson for the 
+village being so high up in the Endor Trees.
+~
+0 0 1
+D0
+~
+~
+0 -1 3024
+D1
+~
+~
+0 -1 3026
+S
+#3026
+Walkway~
+The walkway is made from very sturdy planks of wood that seem to
+be able to withstand alot of weight as well as alot of pressure
+the forest elements have (and can) throw at it. The ewoks very rarely
+get visitors to their villages, so quite naturaly they are a little
+cautious when it comes to new people here, but they do eventually
+accept your presence and let you in on the village celebrations.
+The walkways are very high up from the ground, this is due to the
+beast is the humanoid behemoth Gorax, who are the main reson for the 
+village being so high up in the Endor Trees.
+~
+0 0 1
+D0
+~
+~
+0 -1 3050
+D1
+~
+~
+0 -1 3027
+D3
+~
+~
+0 -1 3025
+S
+#3027
+Walkway~
+The walkway is made from very sturdy planks of wood that seem to
+be able to withstand alot of weight as well as alot of pressure
+the forest elements have (and can) throw at it. The ewoks very rarely
+get visitors to their villages, so quite naturaly they are a little
+cautious when it comes to new people here, but they do eventually
+accept your presence and let you in on the village celebrations.
+The walkways are very high up from the ground, this is due to the
+beast is the humanoid behemoth Gorax, who are the main reson for the 
+village being so high up in the Endor Trees.
+~
+0 0 1
+D0
+~
+~
+0 -1 3028
+D3
+~
+~
+0 -1 3026
+S
+#3028
+Walkway~
+The walkway is made from very sturdy planks of wood that seem to
+the forest elements have (and can) throw at it. The ewoks very rarely
+get visitors to their villages, so quite naturaly they are a little
+cautious when it comes to new people here, but they do eventually
+accept your presence and let you in on the village celebrations.
+The walkways are very high up from the ground, this is due to the
+beast is the humanoid behemoth Gorax, who are the main reson for the 
+village being so high up in the Endor Trees.
+~
+0 0 1
+D0
+~
+~
+0 -1 3023
+D2
+~
+~
+0 -1 3027
+D3
+~
+~
+0 -1 3049
+S
+#3029
+Rope Bridge~
+The bridge is suppported buy a very sturdy rope that has large 
+wooden planks for easy walking and balance. Strangly enough the
+bridge seems to be rather ridged and barely sways under a stronge 
+gust of wind. The native ewoks don't even seem to notice any swaying
+at all as some run past you and others just walk past paying no 
+attention to your presence.
+~
+0 0 1
+D6
+~
+~
+0 -1 3030
+D9
+~
+~
+0 -1 3023
+S
+#3030
+Rope Bridge~
+The bridge is suppported buy a very sturdy rope that has large 
+wooden planks for easy walking and balance. Strangly enough the
+bridge seems to be rather ridged and barely sways under a stronge 
+gust of wind. The native ewoks don't even seem to notice any swaying
+at all as some run past you and others just walk past paying no 
+attention to your presence.
+~
+0 0 1
+D6
+~
+~
+0 -1 3031
+D9
+~
+~
+0 -1 3029
+S
+#3031
+Rope Bridge~
+The bridge is suppported buy a very sturdy rope that has large 
+wooden planks for easy walking and balance. Strangly enough the
+bridge seems to be rather ridged and barely sways under a stronge 
+gust of wind. The native ewoks don't even seem to notice any swaying
+at all as some run past you and others just walk past paying no 
+attention to your presence.
+~
+0 0 1
+D1
+~
+~
+0 -1 3032
+D9
+~
+~
+0 -1 3030
+S
+#3032
+Rope Bridge~
+The bridge is suppported buy a very sturdy rope that has large 
+wooden planks for easy walking and balance. Strangly enough the
+bridge seems to be rather ridged and barely sways under a stronge 
+gust of wind. The native ewoks don't even seem to notice any swaying
+at all as some run past you and others just walk past paying no 
+attention to your presence.
+~
+0 0 1
+D0
+~
+~
+0 -1 3060
+D1
+~
+~
+0 -1 3033
+D3
+~
+~
+0 -1 3031
+S
+#3033
+Rope Bridge~
+The bridge is suppported buy a very sturdy rope that has large 
+wooden planks for easy walking and balance. Strangly enough the
+bridge seems to be rather ridged and barely sways under a stronge 
+gust of wind. The native ewoks don't even seem to notice any swaying
+at all as some run past you and others just walk past paying no 
+attention to your presence.
+~
+0 0 1
+D3
+~
+~
+0 -1 3032
+D6
+~
+~
+0 -1 3034
+S
+#3034
+Rope Bridge~
+The bridge is suppported buy a very sturdy rope that has large 
+wooden planks for easy walking and balance. Strangly enough the
+bridge seems to be rather ridged and barely sways under a stronge 
+gust of wind. The native ewoks don't even seem to notice any swaying
+at all as some run past you and others just walk past paying no 
+attention to your presence.
+~
+0 0 1
+D6
+~
+~
+0 -1 3035
+D9
+~
+~
+0 -1 3033
+S
+#3035
+Rope Bridge~
+The bridge is suppported buy a very sturdy rope that has large 
+wooden planks for easy walking and balance. Strangly enough the
+bridge seems to be rather ridged and barely sways under a stronge 
+gust of wind. The native ewoks don't even seem to notice any swaying
+at all as some run past you and others just walk past paying no 
+attention to your presence.
+~
+0 0 1
+D6
+~
+~
+0 -1 3036
+D9
+~
+~
+0 -1 3034
+S
+#3036
+Walkway~
+The walkway is made from very sturdy planks of wood that seem to
+be able to withstand alot of weight as well as alot of pressure
+the forest elements have (and can) throw at it. The ewoks very rarely
+get visitors to their villages, so quite naturaly they are a little
+cautious when it comes to new people here, but they do eventually
+accept your presence and let you in on the village celebrations.
+The walkways are very high up from the ground, this is due to the
+beast is the humanoid behemoth Gorax, who are the main reson for the 
+village being so high up in the Endor Trees.
+~
+0 0 1
+D0
+~
+~
+0 -1 3037
+D1
+~
+~
+0 -1 3043
+D9
+~
+~
+0 -1 3035
+S
+#3037
+Walkway~
+The walkway is made from very sturdy planks of wood that seem to
+be able to withstand alot of weight as well as alot of pressure
+the forest elements have (and can) throw at it. The ewoks very rarely
+get visitors to their villages, so quite naturaly they are a little
+cautious when it comes to new people here, but they do eventually
+accept your presence and let you in on the village celebrations.
+The walkways are very high up from the ground, this is due to the
+beast is the humanoid behemoth Gorax, who are the main reson for the 
+village being so high up in the Endor Trees.
+~
+0 0 1
+D0
+~
+~
+0 -1 3038
+D1
+~
+~
+0 -1 3055
+D2
+~
+~
+0 -1 3036
+S
+#3038
+Walkway~
+The walkway is made from very sturdy planks of wood that seem to
+be able to withstand alot of weight as well as alot of pressure
+the forest elements have (and can) throw at it. The ewoks very rarely
+get visitors to their villages, so quite naturaly they are a little
+cautious when it comes to new people here, but they do eventually
+accept your presence and let you in on the village celebrations.
+The walkways are very high up from the ground, this is due to the
+beast is the humanoid behemoth Gorax, who are the main reson for the 
+village being so high up in the Endor Trees.
+~
+0 0 1
+D1
+~
+~
+0 -1 3039
+D2
+~
+~
+0 -1 3037
+S
+#3039
+Walkway~
+The walkway is made from very sturdy planks of wood that seem to
+be able to withstand alot of weight as well as alot of pressure
+the forest elements have (and can) throw at it. The ewoks very rarely
+get visitors to their villages, so quite naturaly they are a little
+cautious when it comes to new people here, but they do eventually
+accept your presence and let you in on the village celebrations.
+The walkways are very high up from the ground, this is due to the
+beast is the humanoid behemoth Gorax, who are the main reson for the 
+village being so high up in the Endor Trees.
+~
+0 0 1
+D1
+~
+~
+0 -1 3040
+D2
+~
+~
+0 -1 3052
+D3
+~
+~
+0 -1 3038
+S
+#3040
+Walkway~
+The walkway is made from very sturdy planks of wood that seem to
+be able to withstand alot of weight as well as alot of pressure
+the forest elements have (and can) throw at it. The ewoks very rarely
+get visitors to their villages, so quite naturaly they are a little
+cautious when it comes to new people here, but they do eventually
+accept your presence and let you in on the village celebrations.
+The walkways are very high up from the ground, this is due to the
+beast is the humanoid behemoth Gorax, who are the main reson for the 
+village being so high up in the Endor Trees.
+~
+0 0 1
+D2
+~
+~
+0 -1 3041
+D3
+~
+~
+0 -1 3039
+S
+#3041
+Walkway~
+The walkway is made from very sturdy planks of wood that seem to
+be able to withstand alot of weight as well as alot of pressure
+the forest elements have (and can) throw at it. The ewoks very rarely
+get visitors to their villages, so quite naturaly they are a little
+cautious when it comes to new people here, but they do eventually
+accept your presence and let you in on the village celebrations.
+The walkways are very high up from the ground, this is due to the
+beast is the humanoid behemoth Gorax, who are the main reson for the 
+village being so high up in the Endor Trees.
+~
+0 0 1
+D0
+~
+~
+0 -1 3040
+D2
+~
+~
+0 -1 3042
+D3
+~
+~
+0 -1 3053
+S
+#3042
+Walkway~
+The walkway is made from very sturdy planks of wood that seem to
+be able to withstand alot of weight as well as alot of pressure
+the forest elements have (and can) throw at it. The ewoks very rarely
+get visitors to their villages, so quite naturaly they are a little
+cautious when it comes to new people here, but they do eventually
+accept your presence and let you in on the village celebrations.
+The walkways are very high up from the ground, this is due to the
+beast is the humanoid behemoth Gorax, who are the main reson for the 
+village being so high up in the Endor Trees.
+~
+0 0 1
+D0
+~
+~
+0 -1 3041
+D3
+~
+~
+0 -1 3043
+S
+#3043
+Walkway~
+The walkway is made from very sturdy planks of wood that seem to
+be able to withstand alot of weight as well as alot of pressure
+the forest elements have (and can) throw at it. The ewoks very rarely
+get visitors to their villages, so quite naturaly they are a little
+cautious when it comes to new people here, but they do eventually
+accept your presence and let you in on the village celebrations.
+The walkways are very high up from the ground, this is due to the
+beast is the humanoid behemoth Gorax, who are the main reson for the 
+village being so high up in the Endor Trees.
+~
+0 0 1
+D0
+~
+~
+0 -1 3054
+D1
+~
+~
+0 -1 3042
+D3
+~
+~
+0 -1 3036
+S
+#3044
+Ewoke House Hold~
+The houses of the ewoks are littered with feathers pieces of leather
+spear and arrow heads as well as shatfs for the weapons. You also 
+see the odd insect scurrying around picking up crumbs from the 
+morning breakfast and then scampering off into the shadows to eat
+their new found dinner. From the outside you here the cries of the
+birds deep in the forest as well as the territorial disputes between
+rival preditors battling for more territory and mates. The ewoks
+on the other hand sound as though they are planning for the morning
+hunt as well as their everyday chores the do to make their living 
+area more sutable for themselves and their young.
+~
+0 0 1
+D0
+~
+~
+0 -1 3013
+S
+#3045
+Ewoke House Hold~
+The houses of the ewoks are littered with feathers pieces of leather
+spear and arrow heads as well as shatfs for the weapons. You also 
+see the odd insect scurrying around picking up crumbs from the 
+morning breakfast and then scampering off into the shadows to eat
+their new found dinner. From the outside you here the cries of the
+birds deep in the forest as well as the territorial disputes between
+rival preditors battling for more territory and mates. The ewoks
+on the other hand sound as though they are planning for the morning
+hunt as well as their everyday chores the do to make their living 
+area more sutable for themselves and their young.
+~
+0 0 1
+D1
+~
+~
+0 -1 3015
+S
+#3046
+Ewoke House Hold~
+The houses of the ewoks are littered with feathers pieces of leather
+spear and arrow heads as well as shatfs for the weapons. You also 
+see the odd insect scurrying around picking up crumbs from the 
+morning breakfast and then scampering off into the shadows to eat
+their new found dinner. From the outside you here the cries of the
+birds deep in the forest as well as the territorial disputes between
+rival preditors battling for more territory and mates. The ewoks
+on the other hand sound as though they are planning for the morning
+hunt as well as their everyday chores the do to make their living 
+area more sutable for themselves and their young.
+~
+0 0 1
+D3
+~
+~
+0 -1 3019
+S
+#3047
+Ewoke House Hold~
+The houses of the ewoks are littered with feathers pieces of leather
+spear and arrow heads as well as shatfs for the weapons. You also 
+see the odd insect scurrying around picking up crumbs from the 
+morning breakfast and then scampering off into the shadows to eat
+their new found dinner. From the outside you here the cries of the
+birds deep in the forest as well as the territorial disputes between
+rival preditors battling for more territory and mates. The ewoks
+on the other hand sound as though they are planning for the morning
+hunt as well as their everyday chores the do to make their living 
+area more sutable for themselves and their young.
+~
+0 0 1
+D2
+~
+~
+0 -1 3017
+S
+#3048
+Ewoke House Hold~
+The houses of the ewoks are littered with feathers pieces of leather
+spear and arrow heads as well as shatfs for the weapons. You also 
+see the odd insect scurrying around picking up crumbs from the 
+morning breakfast and then scampering off into the shadows to eat
+their new found dinner. From the outside you here the cries of the
+birds deep in the forest as well as the territorial disputes between
+rival preditors battling for more territory and mates. The ewoks
+on the other hand sound as though they are planning for the morning
+hunt as well as their everyday chores the do to make their living 
+area more sutable for themselves and their young.
+~
+0 0 1
+D0
+~
+~
+0 -1 3022
+S
+#3049
+Ewoks Guest House~
+The houses of the ewoks are littered with feathers pieces of leather
+spear and arrow heads as well as shatfs for the weapons. You also 
+see the odd insect scurrying around picking up crumbs from the 
+morning breakfast and then scampering off into the shadows to eat
+their new found dinner. From the outside you here the cries of the
+birds deep in the forest as well as the territorial disputes between
+rival preditors battling for more territory and mates. The ewoks
+on the other hand sound as though they are planning for the morning
+hunt as well as their everyday chores the do to make their living 
+area more sutable for themselves and their young.
+~
+0 8388608 1
+D1
+~
+~
+0 -1 3028
+S
+#3050
+Ewoke House Hold~
+The houses of the ewoks are littered with feathers pieces of leather
+spear and arrow heads as well as shatfs for the weapons. You also 
+see the odd insect scurrying around picking up crumbs from the 
+morning breakfast and then scampering off into the shadows to eat
+their new found dinner. From the outside you here the cries of the
+birds deep in the forest as well as the territorial disputes between
+rival preditors battling for more territory and mates. The ewoks
+on the other hand sound as though they are planning for the morning
+hunt as well as their everyday chores the do to make their living 
+area more sutable for themselves and their young.
+~
+0 0 1
+D2
+~
+~
+0 -1 3026
+S
+#3051
+Ewoke House Hold~
+The houses of the ewoks are littered with feathers pieces of leather
+spear and arrow heads as well as shatfs for the weapons. You also 
+see the odd insect scurrying around picking up crumbs from the 
+morning breakfast and then scampering off into the shadows to eat
+their new found dinner. From the outside you here the cries of the
+birds deep in the forest as well as the territorial disputes between
+rival preditors battling for more territory and mates. The ewoks
+on the other hand sound as though they are planning for the morning
+hunt as well as their everyday chores the do to make their living 
+area more sutable for themselves and their young.
+~
+0 0 1
+D3
+~
+~
+0 -1 3024
+S
+#3052
+Ewoke House Hold~
+The houses of the ewoks are littered with feathers pieces of leather
+spear and arrow heads as well as shatfs for the weapons. You also 
+see the odd insect scurrying around picking up crumbs from the 
+morning breakfast and then scampering off into the shadows to eat
+their new found dinner. From the outside you here the cries of the
+birds deep in the forest as well as the territorial disputes between
+rival preditors battling for more territory and mates. The ewoks
+on the other hand sound as though they are planning for the morning
+hunt as well as their everyday chores the do to make their living 
+area more sutable for themselves and their young.
+~
+0 0 1
+D0
+~
+~
+0 -1 3039
+S
+#3053
+Ewoke House Hold~
+The houses of the ewoks are littered with feathers pieces of leather
+spear and arrow heads as well as shatfs for the weapons. You also 
+see the odd insect scurrying around picking up crumbs from the 
+morning breakfast and then scampering off into the shadows to eat
+their new found dinner. From the outside you here the cries of the
+birds deep in the forest as well as the territorial disputes between
+rival preditors battling for more territory and mates. The ewoks
+on the other hand sound as though they are planning for the morning
+hunt as well as their everyday chores the do to make their living 
+area more sutable for themselves and their young.
+~
+0 0 1
+D1
+~
+~
+0 -1 3041
+S
+#3054
+Ewoke House Hold~
+The houses of the ewoks are littered with feathers pieces of leather
+spear and arrow heads as well as shatfs for the weapons. You also 
+see the odd insect scurrying around picking up crumbs from the 
+morning breakfast and then scampering off into the shadows to eat
+their new found dinner. From the outside you here the cries of the
+birds deep in the forest as well as the territorial disputes between
+rival preditors battling for more territory and mates. The ewoks
+on the other hand sound as though they are planning for the morning
+hunt as well as their everyday chores the do to make their living 
+area more sutable for themselves and their young.
+~
+0 0 1
+D2
+~
+~
+0 -1 3043
+S
+#3055
+Ewoke House Hold~
+The houses of the ewoks are littered with feathers pieces of leather
+spear and arrow heads as well as shatfs for the weapons. You also 
+see the odd insect scurrying around picking up crumbs from the 
+morning breakfast and then scampering off into the shadows to eat
+their new found dinner. From the outside you here the cries of the
+birds deep in the forest as well as the territorial disputes between
+rival preditors battling for more territory and mates. The ewoks
+on the other hand sound as though they are planning for the morning
+hunt as well as their everyday chores the do to make their living 
+area more sutable for themselves and their young.
+~
+0 0 1
+D3
+~
+~
+0 -1 3037
+S
+#3056
+Ewoke House Hold~
+The houses of the ewoks are littered with feathers pieces of leather
+spear and arrow heads as well as shatfs for the weapons. You also 
+see the odd insect scurrying around picking up crumbs from the 
+morning breakfast and then scampering off into the shadows to eat
+their new found dinner. From the outside you here the cries of the
+birds deep in the forest as well as the territorial disputes between
+rival preditors battling for more territory and mates. The ewoks
+on the other hand sound as though they are planning for the morning
+hunt as well as their everyday chores the do to make their living 
+area more sutable for themselves and their young.
+~
+0 4 1
+S
+#3057
+Ewoke House Hold~
+The houses of the ewoks are littered with feathers pieces of leather
+spear and arrow heads as well as shatfs for the weapons. You also 
+see the odd insect scurrying around picking up crumbs from the 
+morning breakfast and then scampering off into the shadows to eat
+their new found dinner. From the outside you here the cries of the
+birds deep in the forest as well as the territorial disputes between
+rival preditors battling for more territory and mates. The ewoks
+on the other hand sound as though they are planning for the morning
+hunt as well as their everyday chores the do to make their living 
+area more sutable for themselves and their young.
+~
+0 4 1
+S
+#3058
+Ewoke House Hold~
+The houses of the ewoks are littered with feathers pieces of leather
+spear and arrow heads as well as shatfs for the weapons. You also 
+see the odd insect scurrying around picking up crumbs from the 
+morning breakfast and then scampering off into the shadows to eat
+their new found dinner. From the outside you here the cries of the
+birds deep in the forest as well as the territorial disputes between
+rival preditors battling for more territory and mates. The ewoks
+on the other hand sound as though they are planning for the morning
+hunt as well as their everyday chores the do to make their living 
+area more sutable for themselves and their young.
+~
+0 4 1
+S
+#3059
+Ewok Food Supplies~
+The houses of the ewoks are littered with feathers pieces of leather
+spear and arrow heads as well as shatfs for the weapons. You also 
+see the odd insect scurrying around picking up crumbs from the 
+morning breakfast and then scampering off into the shadows to eat
+their new found dinner. From the outside you here the cries of the
+birds deep in the forest as well as the territorial disputes between
+rival preditors battling for more territory and mates. The ewoks
+on the other hand sound as though they are planning for the morning
+hunt as well as their everyday chores the do to make their living 
+area more sutable for themselves and their young.
+~
+0 4 1
+D3
+~
+~
+0 -1 3024
+S
+#3060
+Landing Area~
+Strangly enough, even though the ewok people do not get many 
+visitors they seemed to have keep the now very old landing area the 
+republic built in its days of rebellion, and have kept it in very good 
+with a few minor problems though, such as the decorations strune around
+to make the place look pretty but covering some fairly important 
+instruments vital to safe landings and such. other then thoese few flaws
+the places appears to be in good condition.
+~
+0 4 1
+D2
+~
+~
+0 -1 3032
+D8
+~
+~
+0 -1 3061
+S
+#3061
+Jungle Trail~
+The path is over grown with vegitation and looks as though it hasn't
+been used in avery long time. The Ewoks it seems have developed a new form
+of hunting the doesn't really need them to venture into the jungle to far
+as well as the fear of the ravinous jnugle preditors the roam around here
+looking for stray ewoks or anything else in that manner.
+~
+0 4 1
+D4
+~
+~
+0 -1 3062
+D7
+~
+~
+0 -1 3060
+S
+#3062
+Jungle Trail~
+The path is over grown with vegitation and looks as though it hasn't
+been used in avery long time. The Ewoks it seems have developed a new form
+of hunting the doesn't really need them to venture into the jungle to far
+as well as the fear of the ravinous jnugle preditors the roam around here
+looking for stray ewoks or anything else in that manner.
+~
+0 0 1
+D5
+~
+~
+0 -1 3061
+D9
+~
+~
+0 -1 3063
+S
+#3063
+Jungle Trail~
+The path is over grown with vegitation and looks as though it hasn't
+been used in avery long time. The Ewoks it seems have developed a new form
+of hunting the doesn't really need them to venture into the jungle to far
+as well as the fear of the ravinous jnugle preditors the roam around here
+looking for stray ewoks or anything else in that manner.
+~
+0 0 1
+D5
+~
+~
+0 -1 3064
+D6
+~
+~
+0 -1 3062
+S
+#3064
+Jungle Trail~
+The path is over grown with vegitation and looks as though it hasn't
+been used in avery long time. The Ewoks it seems have developed a new form
+of hunting the doesn't really need them to venture into the jungle to far
+as well as the fear of the ravinous jnugle preditors the roam around here
+looking for stray ewoks or anything else in that manner.
+~
+0 0 1
+D0
+~
+~
+0 -1 3065
+D4
+~
+~
+0 -1 3063
+S
+#3065
+Jungle Trail~
+The path is over grown with vegitation and looks as though it hasn't been
+used in avery long time. The Ewoks it seems have developed a new form of
+hunting the doesn't really need them to venture into the jungle to far as
+well as the fear of the ravinous jnugle preditors the roam around here
+looking for stray ewoks or anything else in that manner. You can also make
+out what looks to be remains of an old imperial base to the west.
+~
+0 0 1
+D2
+~
+~
+0 -1 3064
+D3
+~
+~
+0 -1 3066
+D9
+~
+~
+0 -1 3067
+S
+#3066
+Destoried Impierial Shield Genorator~
+The Base was once the main shield generator for the Death Star that was
+destoryed so many years ago by the now New Republic. It has now over
+grown with many different types of vegitation as well it has become the 
+home for many insects and other vermin who do not wish to be seen in the
+light of day.
+~
+0 4 1
+D1
+~
+~
+0 -1 3065
+S
+#3067
+Jungle Trail~
+The path is over grown with vegitation and looks as though it hasn't been
+used in avery long time. The Ewoks it seems have developed a new form of
+hunting the doesn't really need them to venture into the jungle to far as
+well as the fear of the ravinous jnugle preditors the roam around here
+looking for stray ewoks or anything else in that manner.
+~
+0 0 1
+D0
+~
+~
+0 -1 3068
+D6
+~
+~
+0 -1 3065
+S
+#3068
+Jungle Trail~
+The path is over grown with vegitation and looks as though it hasn't been
+used in avery long time. The Ewoks it seems have developed a new form of
+hunting the doesn't really need them to venture into the jungle to far as
+well as the fear of the ravinous jnugle preditors the roam around here
+looking for stray ewoks or anything else in that manner.
+~
+0 0 1
+D2
+~
+~
+0 -1 3067
+D5
+~
+~
+0 -1 3069
+S
+#3069
+Jungle Trail~
+The path is over grown with vegitation and looks as though it hasn't been
+used in avery long time. The Ewoks it seems have developed a new form of
+hunting the doesn't really need them to venture into the jungle to far as
+well as the fear of the ravinous jnugle preditors the roam around here
+looking for stray ewoks or anything else in that manner.
+~
+0 0 1
+D4
+~
+~
+0 -1 3068
+D9
+~
+~
+0 -1 3070
+S
+#3070
+Jungle Trail~
+The path is over grown with vegitation and looks as though it hasn't been
+used in avery long time. The Ewoks it seems have developed a new form of
+hunting the doesn't really need them to venture into the jungle to far as
+well as the fear of the ravinous jnugle preditors the roam around here
+looking for stray ewoks or anything else in that manner.
+~
+0 0 1
+D0
+~
+~
+0 -1 3075
+D3
+~
+~
+0 -1 3071
+D6
+~
+~
+0 -1 3069
+D9
+~
+~
+0 -1 3099
+S
+#3071
+Jungle Trail~
+The path is over grown with vegitation and looks as though it hasn't been
+used in avery long time. The Ewoks it seems have developed a new form of
+hunting the doesn't really need them to venture into the jungle to far as
+well as the fear of the ravinous jnugle preditors the roam around here
+looking for stray ewoks or anything else in that manner.
+~
+0 0 1
+D1
+~
+~
+0 -1 3070
+D9
+~
+~
+0 -1 3072
+S
+#3072
+Jungle Trail~
+The path is over grown with vegitation and looks as though it hasn't been
+used in avery long time. The Ewoks it seems have developed a new form of
+hunting the doesn't really need them to venture into the jungle to far as
+well as the fear of the ravinous jnugle preditors the roam around here
+looking for stray ewoks or anything else in that manner.
+~
+0 0 1
+D2
+~
+~
+0 -1 3073
+D6
+~
+~
+0 -1 3071
+S
+#3073
+Jungle Trail~
+The path is over grown with vegitation and looks as though it hasn't been
+used in avery long time. The Ewoks it seems have developed a new form of
+hunting the doesn't really need them to venture into the jungle to far as
+well as the fear of the ravinous jnugle preditors the roam around here
+looking for stray ewoks or anything else in that manner.
+~
+0 0 1
+D0
+~
+~
+0 -1 3072
+D6
+~
+~
+0 -1 3074
+S
+#3074
+Historical Funeral Pyre~
+You stand before a very historical spot. The vegetation has not grown back
+and you can feel a cold creeping darkness running through you veins
+sending shivers up and down your spine. This is the place where Luke
+Skywalker burned the reamins of his fathers body. You can still make out
+the burned ground as well as see melted bits of Vaders body armor
+scattered about. There are no insects here and the sounds of the forest
+does not seem to be able to penetrate the dark aura the funeral pyre
+radiates. The place also seems to cause interference with your comlink,
+strange.
+~
+0 65536 1
+D9
+~
+~
+0 -1 3073
+S
+#3075
+Jungle Path~
+The path is over grown with vegitation and looks as though it hasn't been
+used in avery long time. The Ewoks it seems have developed a new form of
+hunting the doesn't really need them to venture into the jungle to far as
+well as the fear of the ravinous jnugle preditors the roam around here
+looking for stray ewoks or anything else in that manner.
+~
+0 0 1
+D2
+~
+~
+0 -1 3070
+D4
+~
+~
+0 -1 3076
+S
+#3076
+Jungle Path~
+The path is over grown with vegitation and looks as though it hasn't been
+used in avery long time. The Ewoks it seems have developed a new form of
+hunting the doesn't really need them to venture into the jungle to far as
+well as the fear of the ravinous jnugle preditors the roam around here
+looking for stray ewoks or anything else in that manner.
+~
+0 0 1
+D1
+~
+~
+0 -1 3077
+D5
+~
+~
+0 -1 3075
+S
+#3077
+Jungle Path~
+The path is over grown with vegitation and looks as though it hasn't been
+used in avery long time. The Ewoks it seems have developed a new form of
+hunting the doesn't really need them to venture into the jungle to far as
+well as the fear of the ravinous jnugle preditors the roam around here
+looking for stray ewoks or anything else in that manner.
+~
+0 0 1
+D0
+~
+~
+0 -1 3078
+D3
+~
+~
+0 -1 3076
+S
+#3078
+Jungle Path~
+The path is over grown with vegitation and looks as though it hasn't been
+used in avery long time. The Ewoks it seems have developed a new form of
+hunting the doesn't really need them to venture into the jungle to far as
+well as the fear of the ravinous jnugle preditors the roam around here
+looking for stray ewoks or anything else in that manner.
+~
+0 0 1
+D2
+~
+~
+0 -1 3077
+D6
+~
+~
+0 -1 3079
+S
+#3079
+Jungle Path~
+The path is over grown with vegitation and looks as though it hasn't been
+used in avery long time. The Ewoks it seems have developed a new form of
+hunting the doesn't really need them to venture into the jungle to far as
+well as the fear of the ravinous jnugle preditors the roam around here
+looking for stray ewoks or anything else in that manner.
+~
+0 0 1
+D5
+~
+~
+0 -1 3080
+D9
+~
+~
+0 -1 3078
+S
+#3080
+Jungle Path~
+The path is over grown with vegitation and looks as though it hasn't been
+used in avery long time. The Ewoks it seems have developed a new form of
+hunting the doesn't really need them to venture into the jungle to far as
+well as the fear of the ravinous jnugle preditors the roam around here
+looking for stray ewoks or anything else in that manner.
+~
+0 0 1
+D4
+~
+~
+0 -1 3079
+D5
+~
+~
+0 -1 3081
+S
+#3081
+Jungle Path~
+The path is over grown with vegitation and looks as though it hasn't been
+used in avery long time. The Ewoks it seems have developed a new form of
+hunting the doesn't really need them to venture into the jungle to far as
+well as the fear of the ravinous jnugle preditors the roam around here
+looking for stray ewoks or anything else in that manner.
+~
+0 0 1
+D0
+~
+~
+0 -1 3082
+D4
+~
+~
+0 -1 3080
+S
+#3082
+Jungle Path~
+The path is over grown with vegitation and looks as though it hasn't been
+used in avery long time. The Ewoks it seems have developed a new form of
+hunting the doesn't really need them to venture into the jungle to far as
+well as the fear of the ravinous jnugle preditors the roam around here
+looking for stray ewoks or anything else in that manner.
+~
+0 0 1
+D2
+~
+~
+0 -1 3081
+D9
+~
+~
+0 -1 3083
+S
+#3083
+Jungle Path~
+The path is over grown with vegitation and looks as though it hasn't been
+used in avery long time. The Ewoks it seems have developed a new form of
+hunting the doesn't really need them to venture into the jungle to far as
+well as the fear of the ravinous jnugle preditors the roam around here
+looking for stray ewoks or anything else in that manner. 
+~
+0 0 1
+D2
+~
+~
+0 -1 3084
+D6
+~
+~
+0 -1 3082
+S
+#3084
+Jungle Path~
+The path is over grown with vegitation and looks as though it hasn't been
+used in avery long time. The Ewoks it seems have developed a new form of
+hunting the doesn't really need them to venture into the jungle to far as
+well as the fear of the ravinous jnugle preditors the roam around here
+looking for stray ewoks or anything else in that manner.
+~
+0 0 1
+D0
+~
+~
+0 -1 3083
+D5
+~
+~
+0 -1 3085
+S
+#3085
+Jungle Path~
+The path is over grown with vegitation and looks as though it hasn't been
+used in avery long time. The Ewoks it seems have developed a new form of
+hunting the doesn't really need them to venture into the jungle to far as
+well as the fear of the ravinous jnugle preditors the roam around here
+looking for stray ewoks or anything else in that manner.
+~
+0 0 1
+D4
+~
+~
+0 -1 3084
+D8
+~
+~
+0 -1 3086
+S
+#3086
+Jungle Path~
+The path is over grown with vegitation and looks as though it hasn't been
+used in avery long time. The Ewoks it seems have developed a new form of
+hunting the doesn't really need them to venture into the jungle to far as
+well as the fear of the ravinous jnugle preditors the roam around here
+looking for stray ewoks or anything else in that manner.
+~
+0 0 1
+D3
+~
+~
+0 -1 3087
+D7
+~
+~
+0 -1 3085
+S
+#3087
+Jungle Path~
+The path is over grown with vegitation and looks as though it hasn't been
+used in avery long time. The Ewoks it seems have developed a new form of
+hunting the doesn't really need them to venture into the jungle to far as
+well as the fear of the ravinous jnugle preditors the roam around here
+looking for stray ewoks or anything else in that manner.
+~
+0 0 1
+D1
+~
+~
+0 -1 3086
+D9
+~
+~
+0 -1 3088
+S
+#3088
+Jungle Path~
+The path is over grown with vegitation and looks as though it hasn't been
+used in avery long time. The Ewoks it seems have developed a new form of
+hunting the doesn't really need them to venture into the jungle to far as
+well as the fear of the ravinous jnugle preditors the roam around here
+looking for stray ewoks or anything else in that manner. 
+~
+0 0 1
+D2
+~
+~
+0 -1 3089
+D6
+~
+~
+0 -1 3087
+S
+#3089
+Jungle Path~
+The path is over grown with vegitation and looks as though it hasn't been
+used in avery long time. The Ewoks it seems have developed a new form of
+hunting the doesn't really need them to venture into the jungle to far as
+well as the fear of the ravinous jnugle preditors the roam around here
+looking for stray ewoks or anything else in that manner.
+~
+0 0 1
+D0
+~
+~
+0 -1 3088
+D4
+~
+~
+0 -1 3090
+S
+#3090
+Jungle Path~
+The path is over grown with vegitation and looks as though it hasn't been
+used in avery long time. The Ewoks it seems have developed a new form of
+hunting the doesn't really need them to venture into the jungle to far as
+well as the fear of the ravinous jnugle preditors the roam around here
+looking for stray ewoks or anything else in that manner.
+~
+0 0 1
+D4
+~
+~
+0 -1 3091
+D5
+~
+~
+0 -1 3089
+S
+#3091
+Jungle Path~
+The path is over grown with vegitation and looks as though it hasn't been
+used in avery long time. The Ewoks it seems have developed a new form of
+hunting the doesn't really need them to venture into the jungle to far as
+well as the fear of the ravinous jnugle preditors the roam around here
+looking for stray ewoks or anything else in that manner.
+~
+0 0 1
+D0
+~
+~
+0 -1 3092
+D5
+~
+~
+0 -1 3090
+S
+#3092
+Jungle Path~
+The path is over grown with vegitation and looks as though it hasn't been
+used in avery long time. The Ewoks it seems have developed a new form of
+hunting the doesn't really need them to venture into the jungle to far as
+well as the fear of the ravinous jnugle preditors the roam around here
+looking for stray ewoks or anything else in that manner.
+~
+0 0 1
+D2
+~
+~
+0 -1 3091
+D3
+~
+~
+0 -1 3093
+S
+#3093
+Jungle Path~
+The path is over grown with vegitation and looks as though it hasn't been
+used in avery long time. The Ewoks it seems have developed a new form of
+hunting the doesn't really need them to venture into the jungle to far as
+well as the fear of the ravinous jnugle preditors the roam around here
+looking for stray ewoks or anything else in that manner.
+~
+0 0 1
+D1
+~
+~
+0 -1 3092
+D8
+~
+~
+0 -1 3094
+S
+#3094
+Jungle Path~
+The path is over grown with vegitation and looks as though it hasn't been
+used in avery long time. The Ewoks it seems have developed a new form of
+hunting the doesn't really need them to venture into the jungle to far as
+well as the fear of the ravinous jnugle preditors the roam around here
+looking for stray ewoks or anything else in that manner.
+~
+0 0 1
+D1
+~
+~
+0 -1 3095
+D7
+~
+~
+0 -1 3093
+S
+#3095
+Jungle Path~
+The path is over grown with vegitation and looks as though it hasn't been
+used in avery long time. The Ewoks it seems have developed a new form of
+hunting the doesn't really need them to venture into the jungle to far as
+well as the fear of the ravinous jnugle preditors the roam around here
+looking for stray ewoks or anything else in that manner.
+~
+0 0 1
+D3
+~
+~
+0 -1 3024
+D7
+~
+~
+0 -1 3096
+S
+#3096
+Jungle Path~
+The path is over grown with vegitation and looks as though it hasn't been
+used in avery long time. The Ewoks it seems have developed a new form of
+hunting the doesn't really need them to venture into the jungle to far as
+well as the fear of the ravinous jnugle preditors the roam around here
+looking for stray ewoks or anything else in that manner.
+~
+0 0 1
+D1
+~
+~
+0 -1 3097
+D8
+~
+~
+0 -1 3095
+S
+#3097
+Jungle Path~
+The path is over grown with vegitation and looks as though it hasn't been
+used in avery long time. The Ewoks it seems have developed a new form of
+hunting the doesn't really need them to venture into the jungle to far as
+well as the fear of the ravinous jnugle preditors the roam around here
+looking for stray ewoks or anything else in that manner.
+~
+0 0 1
+D0
+~
+~
+0 -1 3098
+D3
+~
+~
+0 -1 3096
+S
+#3098
+Jungle Path~
+The path is over grown with vegitation and looks as though it hasn't been
+used in avery long time. The Ewoks it seems have developed a new form of
+hunting the doesn't really need them to venture into the jungle to far as
+well as the fear of the ravinous jnugle preditors the roam around here
+looking for stray ewoks or anything else in that manner.
+~
+0 0 1
+D2
+~
+~
+0 -1 3097
+D4
+~
+~
+0 -1 3099
+S
+#3099
+Jungle Path~
+The path is over grown with vegitation and looks as though it hasn't been
+used in avery long time. The Ewoks it seems have developed a new form of
+hunting the doesn't really need them to venture into the jungle to far as
+well as the fear of the ravinous jnugle preditors the roam around here
+looking for stray ewoks or anything else in that manner.
+~
+0 0 1
+D5
+~
+~
+0 -1 3098
+D6
+~
+~
+0 -1 3070
+S
+#0
+
+
+#RESETS
+M 1 3001 1 3068
+M 1 3000 1 3000
+M 1 3000 1 3000
+M 0 3002 20 3013
+M 0 3000 20 3013
+M 1 3001 2 3080
+M 1 3001 3 3072
+M 1 3005 1 3059
+G 1 3006 1
+G 1 3007 1
+G 1 3008 1
+M 0 3003 15 3000
+M 1 3004 0 3055
+E 1 3000 1 6
+E 1 3001 1 16
+E 1 3004 1 3
+E 1 3005 1 11
+E 1 3003 1 14
+E 1 3003 1 15
+S
+
+
+#SHOPS
+ 3005    0  0  0  0  0   120  90         0 23    ; ewok supply keeper
+0
+
+
+#REPAIRS
+0
+
+
+#SPECIALS
+S
+
+
+#$
