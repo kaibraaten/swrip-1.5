@@ -863,6 +863,14 @@ Log         0
 End
 
 #COMMAND
+Name        copyover~
+Code        do_copyover
+Position    0
+Level       104
+Log         1
+End
+
+#COMMAND
 Name        down~
 Code        do_down
 Position    8
@@ -992,7 +1000,7 @@ End
 
 #COMMAND
 Name        degradeship~
-Code        do_degradeship
+Code        reserved
 Position    0
 Level       105
 Log         0
@@ -1024,7 +1032,7 @@ End
 
 #COMMAND
 Name        dontresolve~
-Code        do_dontresolve
+Code        reserved
 Position    0
 Level       104
 Log         1
@@ -1600,7 +1608,7 @@ End
 
 #COMMAND
 Name        install_module~
-Code        do_install_module
+Code        reserved
 Position    0
 Level       105
 Log         0
@@ -1608,7 +1616,7 @@ End
 
 #COMMAND
 Name        instmod~
-Code        do_install_module
+Code        reserved
 Position    0
 Level       105
 Log         0
@@ -3088,7 +3096,7 @@ End
 
 #COMMAND
 Name        rip~
-Code        do_rip
+Code        reserved
 Position    0
 Level       0
 Log         0
@@ -3208,7 +3216,7 @@ End
 
 #COMMAND
 Name        remove_module~
-Code        do_remove_module
+Code        reserved
 Position    0
 Level       105
 Log         0
@@ -3671,14 +3679,6 @@ Log         0
 End
 
 #COMMAND
-Name        senate~
-Code        do_senate
-Position    0
-Level       105
-Log         0
-End
-
-#COMMAND
 Name        sound~
 Code        do_sound
 Position    0
@@ -3768,7 +3768,7 @@ End
 
 #COMMAND
 Name        show_modules~
-Code        do_show_modules
+Code        reserved
 Position    0
 Level       1
 Log         0
@@ -3984,7 +3984,7 @@ End
 
 #COMMAND
 Name        upgradeship~
-Code        do_upgradeship
+Code        reserved
 Position    5
 Level       104
 Log         0
@@ -3992,7 +3992,7 @@ End
 
 #COMMAND
 Name        unload~
-Code        do_unload
+Code        reserved
 Position    0
 Level       105
 Log         0
