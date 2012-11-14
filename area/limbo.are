@@ -13,7 +13,7 @@ $
 #FLAGS
 2
 
-#ECONOMY 0 42255975
+#ECONOMY 0 42215975
 
 #MOBILES
 #1
@@ -643,10 +643,33 @@ A janitor cleans up the ship here.
 mpat 32179 drop all
 ~
 |
+#99
+Last Mobile~
+a newly created Last Mobile~
+Some god abandoned a newly created Last Mobile here.
+~
+~
+1073741825 0 0 Z
+1 0 0 0d0+0 0d0+0
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
 #0
 
 
 #OBJECTS
+#1
+First Object~
+a First Object~
+A First Object is here.~
+~
+13 1073741824 0
+0 0 0 0
+1 0 0
 #2
 credit credits~
 a credit~
@@ -1878,6 +1901,11 @@ A wet grey mist hangs over this large yard of old an unused vessels.
 Ships of all types and sizes rest here empty and abandoned...
 ~
 0 536870916 1
+S
+#99
+Last Room~
+~
+0 1073741824 1
 S
 #0
 
