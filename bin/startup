@@ -26,6 +26,8 @@ fi
 
 cd $swrdir/area
 ulimit -s 1024
+ulimit -c unlimited
+
 rm -f shutdown.txt
 
 # Write startup PID file.
