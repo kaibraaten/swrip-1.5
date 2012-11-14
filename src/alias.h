@@ -1,4 +1,4 @@
- /***************************************************************************
+/***************************************************************************
  *                   Star Wars: Rise in Power MUD Codebase                  *
  *--------------------------------------------------------------------------*
  * SWRiP Code Additions and changes from the SWReality and Smaug Code       *
@@ -20,20 +20,20 @@
 /******************************************************
             Desolation of the Dragon MUD II
       (C) 1997, 1998  Jesse DeFer and Heath Leach
- http://dotd.mudservices.com  dotd@dotd.mudservices.com 
- ******************************************************/
+ http://dotd.mudservices.com  dotd@dotd.mudservices.com
+******************************************************/
 
-typedef struct	alias_type		ALIAS_DATA;
+typedef struct  alias_type              ALIAS_DATA;
 
-struct	alias_type
+struct  alias_type
 {
-    ALIAS_DATA *	next;
-    ALIAS_DATA *	prev;
-    char *		name;
-    char * 		cmd;
+  ALIAS_DATA *  next;
+  ALIAS_DATA *  prev;
+  char *                name;
+  char *                cmd;
 };
 
-DECLARE_DO_FUN( do_alias	);
+DECLARE_DO_FUN( do_alias        );
 
-void	free_aliases		args( ( CHAR_DATA *ch ) );
-bool	check_alias			args( ( CHAR_DATA *ch, char *command, char *argument ) );
+void    free_aliases            args( ( CHAR_DATA *ch ) );
+bool    check_alias                     args( ( CHAR_DATA *ch, char *command, char *argument ) );

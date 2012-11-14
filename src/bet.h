@@ -22,9 +22,6 @@
  ****************************************************************************/
 #include <ctype.h>
 
-
-#define triggerthis callas105
-
 /*
  * The following code was written by Erwin Andreasen for the automated
  * auction command.
