@@ -32,6 +32,7 @@
 #include <fcntl.h>
 #include <signal.h>
 #include <stdarg.h>
+#include <crypt.h>
 #include "mud.h"
 
 /*

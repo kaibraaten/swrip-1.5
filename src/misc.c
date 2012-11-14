@@ -28,6 +28,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
+#include <crypt.h>
 #include "mud.h"
 
 #define CLONEGOLD 1000

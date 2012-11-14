@@ -36,20 +36,12 @@ typedef unsigned char bool;
 /*
  * Accommodate old non-Ansi compilers.
  */
-#if defined(TRADITIONAL)
-#define const
-#define args( list )			( )
-#define DECLARE_DO_FUN( fun )		void fun( )
-#define DECLARE_SPEC_FUN( fun )		bool fun( )
-#define DECLARE_SPELL_FUN( fun )	ch_ret fun( )
-#else
 #define args( list )			list
 #define DECLARE_DO_FUN( fun )		DO_FUN    fun
 #define DECLARE_SPEC_FUN( fun )		SPEC_FUN  fun
 #define DECLARE_SPELL_FUN( fun )	SPELL_FUN fun
-#endif
-/* IMP rooms */
 
+/* IMP rooms */
 #define IMP_ROOM1 109
 #define IMP_ROOM2 122
 
@@ -57,18 +49,7 @@ typedef unsigned char bool;
                              room->vnum == IMP_ROOM1?0: \
                              room->vnum == IMP_ROOM2?0:1)
 
-#define TEMP_FILE	SYSTEM_DIR "charsave.tmp"
 
-/* List of badnames */
-
-#define BAD_NAME_FILE  SYSTEM_DIR "badnames.lst"
-
-/* List of IP matches which we should not resolve */
-
-/*
- * Short scalar types.
- * Diavolo reports AIX compiler has bugs with short types.
- */
 #if	!defined(FALSE)
 #define FALSE	 0
 #endif
@@ -145,9 +126,9 @@ typedef struct  membersort_data         MS_DATA;     /* List for sorted roster l
 /*
  * Function types.
  */
-typedef	void	DO_FUN		args( ( CHAR_DATA *ch, char *argument ) );
-typedef bool	SPEC_FUN	args( ( CHAR_DATA *ch ) );
-typedef ch_ret	SPELL_FUN	args( ( int sn, int level, CHAR_DATA *ch, void *vo ) );
+typedef	void	DO_FUN		( CHAR_DATA *ch, char *argument );
+typedef bool	SPEC_FUN	( CHAR_DATA *ch );
+typedef ch_ret	SPELL_FUN	( int sn, int level, CHAR_DATA *ch, void *vo );
 
 #define DUR_CONV	23.333333333333333333333333
 #define HIDDEN_TILDE	'*'
@@ -4300,6 +4281,7 @@ DECLARE_SPELL_FUN(      spell_cure_addiction                );
  * These are all very standard library functions,
  *   but some systems have incomplete or non-ansi header files.
  */
+/*
 #if	defined(_AIX)
 char *	crypt		args( ( const char *key, const char *salt ) );
 #endif
@@ -4343,15 +4325,11 @@ int	ungetc		args( ( int c, FILE *stream ) );
 char *	crypt		args( ( const char *key, const char *salt ) );
 int	fclose		args( ( FILE *stream ) );
 int	fprintf		args( ( FILE *stream, const char *format, ... ) );
-/*
 #if 	defined(SYSV)
-*/
 size_t 	fread		args( ( void *ptr, size_t size, size_t n,
-/*				FILE *stream ) );
 #else
 int	fread		args( ( void *ptr, int size, int n, FILE *stream ) );
 #endif
-*/
 int	fseek		args( ( FILE *stream, long offset, int ptrname ) );
 void	perror		args( ( const char *s ) );
 int	ungetc		args( ( int c, FILE *stream ) );
@@ -4360,17 +4338,18 @@ int	ungetc		args( ( int c, FILE *stream ) );
 #if	defined(ultrix)
 char *	crypt		args( ( const char *key, const char *salt ) );
 #endif
-
+*/
 /*
  * The crypt(3) function is not available on some operating systems.
  * In particular, the U.S. Government prohibits its export from the
  *   United States to foreign countries.
  * Turn on NOCRYPT to keep passwords in plain text.
  */
+/*
 #if	defined(NOCRYPT)
 #define crypt(s1, s2)	(s1)
 #endif
-
+*/
 
 /*
  * Data files used by the server.
@@ -4398,7 +4377,6 @@ char *	crypt		args( ( const char *key, const char *salt ) );
 #define PROG_DIR	"mudprogs/"	/* MUDProg files		*/
 #define CORPSE_DIR	"../corpses/"	/* Corpses			*/
 #define NULL_FILE	"/dev/null"	/* To reserve one stream	*/
-
 #define AREA_LIST	"area.lst"	/* List of areas		*/
 #define BAN_LIST        "ban.lst"       /* List of bans                 */
 #define CLAN_LIST	"clan.lst"	/* List of clans		*/
@@ -4414,8 +4392,10 @@ char *	crypt		args( ( const char *key, const char *salt ) );
 
 #define BOARD_FILE	"boards.txt"		/* For bulletin boards	 */
 #define SHUTDOWN_FILE	"shutdown.txt"		/* For 'shutdown'	 */
-#define COPYOVER_FILE   SYSTEM_DIR "copyover.dat"
 
+#define BAD_NAME_FILE   SYSTEM_DIR "badnames.lst"
+#define COPYOVER_FILE   SYSTEM_DIR "copyover.dat"
+#define TEMP_FILE       SYSTEM_DIR "charsave.tmp"
 #define BOOTLOG_FILE	SYSTEM_DIR "boot.txt"	  /* Boot up error file	 */
 #define BUG_FILE	SYSTEM_DIR "bugs.txt"	  /* For 'bug' and bug( )*/
 #define IDEA_FILE	SYSTEM_DIR "ideas.txt"	  /* For 'idea'		 */

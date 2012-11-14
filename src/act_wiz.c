@@ -29,6 +29,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <errno.h>
+#include <crypt.h>
 #include "mud.h"
 
 #define RESTORE_INTERVAL 21600
