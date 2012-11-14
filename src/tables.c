@@ -155,7 +155,6 @@ DO_FUN *skill_function( char *name )
       if ( !str_cmp( name, "do_addbounty" ))          return do_addbounty;
       if ( !str_cmp( name, "do_addresident" ))  return do_addresident;
       if ( !str_cmp( name, "do_addsalary" ))            return do_addsalary;
-      if ( !str_cmp( name, "do_addsenator" ))         return do_addsenator;
       if ( !str_cmp( name, "do_addpilot" ))             return do_addpilot;
       if ( !str_cmp( name, "do_add_patrol" ))   return do_add_patrol;
       if ( !str_cmp( name, "do_adjusttractorbeam" ))    return do_adjusttractorbeam;
@@ -570,7 +569,6 @@ DO_FUN *skill_function( char *name )
       if ( !str_cmp( name, "do_remove" ))               return do_remove;
       if ( !str_cmp( name, "do_rempilot" ))           return do_rempilot;
       if ( !str_cmp( name, "do_remresident" ))  return do_remresident;
-      if ( !str_cmp( name, "do_remsenator" ))         return do_remsenator;
       if ( !str_cmp( name, "do_renameship" ))           return do_renameship;
       if ( !str_cmp( name, "do_rent" ))         return do_rent;
       if ( !str_cmp( name, "do_repair" ))               return do_repair;
@@ -618,7 +616,6 @@ DO_FUN *skill_function( char *name )
       if ( !str_cmp( name, "do_seduce" ))               return do_seduce;
       if ( !str_cmp( name, "do_sell" ))         return do_sell;
       if ( !str_cmp( name, "do_sellship" ))           return do_sellship;
-      if ( !str_cmp( name, "do_senate" ))             return do_senate;
       if ( !str_cmp( name, "do_setblaster" ))           return do_setblaster;
       if ( !str_cmp( name, "do_sellhome" ))             return do_sellhome;
       if ( !str_cmp( name, "do_set_boot_time" ))        return do_set_boot_time;
@@ -872,7 +869,6 @@ char *skill_name( DO_FUN *skill )
   if ( skill == do_bribe )     return "do_bribe";
   if ( skill == do_seduce )     return "do_seduce";
   if ( skill == do_mass_propeganda )     return "do_mass_propeganda";
-  if ( skill == do_senate )     return "do_senate";
   if ( skill == do_autopilot )     return "do_autopilot";
   if ( skill == do_allspeeders )     return "do_allspeeders";
   if ( skill == do_speeders )     return "do_speeders";
@@ -951,7 +947,6 @@ char *skill_name( DO_FUN *skill )
   if ( skill == do_refuel )         return "do_refuel";
   if ( skill == do_addpilot )         return "do_addpilot";
   if ( skill == do_addresident )        return "do_addresident";
-  if ( skill == do_addsenator )         return "do_addsenator";
   if ( skill == do_rempilot )         return "do_rempilot";
   if ( skill == do_remresident )        return "do_remresident";
   if ( skill == do_aassign )            return "do_aassign";

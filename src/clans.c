@@ -38,9 +38,6 @@ CLAN_DATA * last_clan;
 MEMBER_LIST * first_member_list;
 MEMBER_LIST * last_member_list;
 
-SENATE_DATA * first_senator;
-SENATE_DATA * last_senator;
-
 PLANET_DATA * first_planet;
 PLANET_DATA * last_planet;
 
@@ -2799,128 +2796,6 @@ void do_empower ( CHAR_DATA *ch , char *argument )
 
 }
 
-void save_senate( )
-{
-  /*
-    BOUNTY_DATA *tbounty;
-    FILE *fpout;
-    char filename[256];
-
-    sprintf( filename, "%s%s", SYSTEM_DIR, BOUNTY_LIST );
-    fpout = fopen( filename, "w" );
-    if ( !fpout )
-    {
-    bug( "FATAL: cannot open bounty.lst for writing!\r\n", 0 );
-    return;
-    }
-    for ( tbounty = first_bounty; tbounty; tbounty = tbounty->next )
-    {
-    fprintf( fpout, "%s\n", tbounty->target );
-    fprintf( fpout, "%ld\n", tbounty->amount );
-    }
-    fprintf( fpout, "$\n" );
-    fclose( fpout );
-  */
-}
-
-void load_senate( )
-{
-  first_senator = NULL;
-  last_senator = NULL;
-  /*
-    FILE *fpList;
-    char *target;
-    char bountylist[256];
-    BOUNTY_DATA *bounty;
-    long int  amount;
-
-    first_bounty = NULL;
-    last_bounty = NULL;
-
-    first_disintigration = NULL;
-    last_disintigration = NULL;
-
-    log_string( "Loading disintigrations..." );
-
-    sprintf( bountylist, "%s%s", SYSTEM_DIR, DISINTIGRATION_LIST );
-    if ( ( fpList = fopen( bountylist, "r" ) ) == NULL )
-    {
-    perror( bountylist );
-    exit( 1 );
-    }
-
-    for ( ; ; )
-    {
-    target = feof( fpList ) ? "$" : fread_word( fpList );
-    if ( target[0] == '$' )
-    break;
-    CREATE( bounty, BOUNTY_DATA, 1 );
-    LINK( bounty, first_disintigration, last_disintigration, next, prev );
-    bounty->target = STRALLOC(target);
-    amount = fread_number( fpList );
-    bounty->amount = amount;
-    }
-    fclose( fpList );
-    log_string(" Done bounties " );
-
-    return;
-  */
-}
-
-void do_senate( CHAR_DATA *ch, char *argument )
-{
-  /*
-    GOV_DATA *gov;
-    int count = 0;
-
-    set_char_color( AT_WHITE, ch );
-    send_to_char( "\r\nGoverning Area                 Controlled By             Value\r\n", ch );
-    for ( gov = first_gov; gov; gov = gov->next )
-    {
-    set_char_color( AT_YELLOW, ch );
-    ch_printf( ch, "%-30s %-25s %-15ld\r\n", gov->name, gov->controlled_by , gov->value );
-    count++;
-    }
-
-    if ( !count )
-    {
-    set_char_color( AT_GREY, ch );
-    send_to_char( "There are no governments to capture at this time.\r\n", ch );
-    return;
-    }
-  */
-}
-
-void do_addsenator( CHAR_DATA *ch , char *argument )
-{
-  /*
-    GOVE_DATA *gov;
-
-    CREATE( gov, GOV_DATA, 1 );
-    LINK( gov, first_gov, last_gov, next, prev );
-
-    gov->name           = STRALLOC( argument );
-    gov->value          = atoi( arg2 );
-    gov->vnum           = object;
-    gov->controlled_by  = STRALLOC( "" );
-
-    ch_printf( ch, "OK, making %s.\r\n", argument );
-    save_govs();
-  */
-}
-
-void do_remsenator( CHAR_DATA *ch , char *argument )
-
-{
-  /*
-    UNLINK( bounty, first_bounty, last_bounty, next, prev );
-    STRFREE( bounty->target );
-    DISPOSE( bounty );
-
-    save_bounties();
-  */
-}
-
 long get_taxes( PLANET_DATA *planet )
 {
   long gain;
@@ -2931,17 +2806,6 @@ long get_taxes( PLANET_DATA *planet )
 
   return gain;
 }
-
-/*
-  (link)->prev          = (insert)->prev;
-  if ( !(insert)->prev )
-  (first)                       = (link);
-  else
-  (insert)->prev->next  = (link);
-  (insert)->prev                = (link);
-  (link)->next          = (insert);
-*/
-
 
 void do_addsalary ( CHAR_DATA *ch , char *argument )
 {

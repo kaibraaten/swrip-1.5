@@ -100,7 +100,6 @@ typedef struct  storeroom		STOREROOM;
 typedef struct  guard_data		GUARD_DATA;
 typedef struct  space_data              SPACE_DATA;
 typedef	struct	clan_data		CLAN_DATA;
-typedef	struct	senate_data		SENATE_DATA;
 typedef struct  ship_data               SHIP_DATA;
 typedef struct  missile_data            MISSILE_DATA;
 typedef struct  tourney_data            TOURNEY_DATA;
@@ -893,13 +892,6 @@ struct guard_data
     CHAR_DATA  * mob;
     ROOM_INDEX_DATA * reset_loc;
     PLANET_DATA * planet;
-};
-
-struct  senate_data
-{
-    SENATE_DATA * next;
-    SENATE_DATA * prev;
-    char * 	  name;
 };
 
 struct  storeroom
@@ -3568,8 +3560,6 @@ extern          SPACE_DATA        *     first_spaceobject;
 extern          SPACE_DATA        *     last_spaceobject;
 extern          PLANET_DATA       *     first_planet;
 extern          PLANET_DATA       *     last_planet;
-extern          SENATE_DATA       *     first_senator;
-extern          SENATE_DATA       *     last_senator;
 extern          BOUNTY_DATA       *     first_bounty;
 extern          BOUNTY_DATA       *     last_bounty;
 extern          BOUNTY_DATA       *     first_disintigration;
@@ -3835,9 +3825,6 @@ DECLARE_DO_FUN(	do_compare	);
 DECLARE_DO_FUN(	do_config	);
 DECLARE_DO_FUN(	do_consider	);
 DECLARE_DO_FUN( do_cutdoor     );
-DECLARE_DO_FUN( do_senate	);
-DECLARE_DO_FUN( do_addsenator	);
-DECLARE_DO_FUN( do_remsenator	);
 DECLARE_DO_FUN( do_credits	);
 DECLARE_DO_FUN(	do_cset		);
 DECLARE_DO_FUN(	do_degradeship	);
@@ -4302,7 +4289,6 @@ DECLARE_SPELL_FUN(      spell_cure_addiction                );
 #define SPACE_LIST      "space.lst"
 #define BOUNTY_LIST     "bounty.lst"      
 #define DISINTIGRATION_LIST	"disintigration.lst"
-#define SENATE_LIST	"senate.lst"	/* List of senators		*/
 #define GUILD_LIST      "guild.lst"     /* List of guilds               */
 #define GOD_LIST	"gods.lst"	/* List of gods			*/
 #define GUARD_LIST	"guard.lst"
@@ -4430,8 +4416,6 @@ int     get_wanted_flag( char *flag );
 CL *	get_clan( char *name );
 void	load_clans( void );
 void	save_clan( CLAN_DATA *clan );
-void	load_senate( void );
-void	save_senate( void );
 PLANET_DATA *	get_planet( char *name );
 void	load_planets( void );
 void	save_planet( PLANET_DATA *planet );

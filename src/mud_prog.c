@@ -766,19 +766,7 @@ int mprog_do_ifcheck( char *ifcheck, CHAR_DATA *mob, CHAR_DATA *actor,
             return FALSE;
           return mprog_seval(npc_race[chkchar->race], opr, rval, mob);
         }
-      if ( !str_cmp(chck, "council") ||  !str_cmp(chck, "senator") )
-        {
-          SENATE_DATA *senator;
 
-          if ( IS_NPC(chkchar) )
-            return FALSE;
-          if ( IS_IMMORTAL(chkchar) )
-            return TRUE;
-          for ( senator = first_senator; senator; senator = senator->next )
-            if ( !str_cmp( chkchar->name, senator->name ) )
-              return TRUE;
-          return FALSE;
-        }
       if ( !str_cmp(chck, "clantype") )
         {
           if ( IS_NPC(chkchar) || !chkchar->pcdata->clan )

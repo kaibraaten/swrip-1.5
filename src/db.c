@@ -759,8 +759,6 @@ void boot_db( bool fCopyOver )
     load_boards( );
     log_string( "Loading clans" );
     load_clans( );
-    log_string( "Loading senate" );
-    load_senate( );
     log_string( "Loading bans" );
     load_banlist( );
     log_string( "Loading corpses" );
