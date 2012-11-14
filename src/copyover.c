@@ -51,7 +51,6 @@ void end_compress( DESCRIPTOR_DATA *d );
 SOCKET init_socket( int port );
 void new_descriptor( SOCKET new_desc );
 bool read_from_descriptor( DESCRIPTOR_DATA * d );
-bool write_to_descriptor( int d, const char *txt, int length );
 void init_descriptor( DESCRIPTOR_DATA * dnew, SOCKET desc );
 void free_desc( DESCRIPTOR_DATA * d );
 

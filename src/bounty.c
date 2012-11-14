@@ -37,8 +37,8 @@ BOUNTY_DATA * first_disintigration;
 BOUNTY_DATA * last_disintigration;
 
 
-void   disintigration args ( ( CHAR_DATA *ch , CHAR_DATA *victim , long amount ) );
-void nodisintigration args ( ( CHAR_DATA *ch , CHAR_DATA *victim , long amount ) );
+void disintigration( CHAR_DATA *ch , CHAR_DATA *victim , long amount );
+void nodisintigration( CHAR_DATA *ch , CHAR_DATA *victim , long amount );
 int xp_compute( CHAR_DATA *ch , CHAR_DATA *victim);
 
 void save_disintigrations()

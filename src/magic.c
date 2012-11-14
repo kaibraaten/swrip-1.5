@@ -31,10 +31,10 @@
 /*
  * Local functions.
  */
-void    say_spell       args( ( CHAR_DATA *ch, int sn ) );
-CHAR_DATA *make_poly_mob args( (CHAR_DATA *ch, int vnum) );
-ch_ret  spell_affect    args( ( int sn, int level, CHAR_DATA *ch, void *vo ) );
-ch_ret  spell_affectchar args( ( int sn, int level, CHAR_DATA *ch, void *vo ) );
+void    say_spell( CHAR_DATA *ch, int sn );
+CHAR_DATA *make_poly_mob( CHAR_DATA *ch, int vnum );
+ch_ret  spell_affect( int sn, int level, CHAR_DATA *ch, void *vo );
+ch_ret  spell_affectchar( int sn, int level, CHAR_DATA *ch, void *vo );
 
 /*
  * Is immune to a damage type

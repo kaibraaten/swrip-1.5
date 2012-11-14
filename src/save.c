@@ -59,9 +59,9 @@ static  OBJ_DATA *      rgObjNest       [MAX_NEST];
 /*
  * Local functions.
  */
-void    fwrite_char     args( ( CHAR_DATA *ch, FILE *fp ) );
-void    fread_char      args( ( CHAR_DATA *ch, FILE *fp, bool preload) );
-void    write_corpses   args( ( CHAR_DATA *ch, char *name ) );
+void    fwrite_char( CHAR_DATA *ch, FILE *fp );
+void    fread_char( CHAR_DATA *ch, FILE *fp, bool preload );
+void    write_corpses( CHAR_DATA *ch, char *name );
 CHAR_DATA *  fread_mobile( FILE *fp );
 void write_char_mobile( CHAR_DATA *ch , char *argument );
 void read_char_mobile( char *argument );

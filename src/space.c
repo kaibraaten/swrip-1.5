@@ -153,28 +153,26 @@ char *  const   station_name [MAX_STATION] =
   };
 
 /* local routines */
-void    fread_ship      args( ( SHIP_DATA *ship, FILE *fp ) );
-bool    load_ship_file  args( ( char *shipfile ) );
-void    write_ship_list args( ( void ) );
-void    fread_spaceobject      args( ( SPACE_DATA *spaceobject, FILE *fp ) );
-bool    load_spaceobject  args( ( char *spaceobjectfile ) );
-void    write_spaceobject_list args( ( void ) );
-void    resetship args( ( SHIP_DATA *ship ) );
-void    approachland args( ( SHIP_DATA *ship, char *arg ) );
-void    landship args( ( SHIP_DATA *ship, char *arg ) );
-void    launchship args( ( SHIP_DATA *ship ) );
-bool    land_bus args( ( SHIP_DATA *ship, int destination ) );
-void    launch_bus args( ( SHIP_DATA *ship ) );
-void    echo_to_room_dnr args( ( int ecolor , ROOM_INDEX_DATA *room ,  char *argument ) );
-ch_ret drive_ship( CHAR_DATA *ch, SHIP_DATA *ship, EXIT_DATA  *exit , int fall );
+void    fread_ship( SHIP_DATA *ship, FILE *fp );
+bool    load_ship_file( char *shipfile );
+void    write_ship_list( void );
+void    fread_spaceobject( SPACE_DATA *spaceobject, FILE *fp );
+bool    load_spaceobject( char *spaceobjectfile );
+void    write_spaceobject_list( void );
+void    resetship( SHIP_DATA *ship );
+void    approachland( SHIP_DATA *ship, char *arg );
+void    landship( SHIP_DATA *ship, char *arg );
+void    launchship( SHIP_DATA *ship );
+bool    land_bus( SHIP_DATA *ship, int destination );
+void    launch_bus( SHIP_DATA *ship );
+void    echo_to_room_dnr( int ecolor, ROOM_INDEX_DATA *room, char *argument );
+ch_ret drive_ship( CHAR_DATA *ch, SHIP_DATA *ship, EXIT_DATA *exit, int fall );
 bool    autofly(SHIP_DATA *ship);
 bool is_facing( SHIP_DATA *ship , SHIP_DATA *target );
 void sound_to_ship( SHIP_DATA *ship , char *argument );
 void modtrainer( SHIP_DATA *ship, short class );
 void makedebris( SHIP_DATA *ship );
 bool space_in_range_h( SHIP_DATA *ship, SPACE_DATA *space);
-/* from comm.c */
-bool    write_to_descriptor     args( ( int desc, char *txt, int length ) );
 
 ROOM_INDEX_DATA *generate_exit( ROOM_INDEX_DATA *in_room, EXIT_DATA **pexit );
 

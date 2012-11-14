@@ -37,13 +37,10 @@
 BOARD_DATA *            first_board;
 BOARD_DATA *            last_board;
 
-bool    is_note_to      args( ( CHAR_DATA *ch, NOTE_DATA *pnote ) );
-void    note_attach     args( ( CHAR_DATA *ch ) );
-void    note_remove     args( ( CHAR_DATA *ch, BOARD_DATA *board,
-                                NOTE_DATA *pnote ) );
-void    do_note         args( ( CHAR_DATA *ch, char *arg_passed, bool IS_MAIL) );
-
-
+bool    is_note_to( CHAR_DATA *ch, NOTE_DATA *pnote );
+void    note_attach( CHAR_DATA *ch );
+void    note_remove( CHAR_DATA *ch, BOARD_DATA *board, NOTE_DATA *pnote );
+void    do_note( CHAR_DATA *ch, char *arg_passed, bool IS_MAIL );
 
 bool can_remove( CHAR_DATA *ch, BOARD_DATA *board )
 {

@@ -55,7 +55,7 @@ const   char    echo_on_str     [] = { IAC, WONT, TELOPT_ECHO, '\0' };
 const   char    go_ahead_str    [] = { IAC, GA, '\0' };
 
 bool bootup = FALSE;
-void    save_sysdata args( ( SYSTEM_DATA sys ) );
+void    save_sysdata( SYSTEM_DATA sys );
 
 /*  from act_info?  */
 void    show_condition( CHAR_DATA *ch, CHAR_DATA *victim );
@@ -88,38 +88,30 @@ int                 maxdesc = 0;
 /*
  * OS-dependent local functions.
  */
-void    game_loop               args( ( ) );
-int     init_socket             args( ( int port ) );
-void    new_descriptor          args( ( int new_desc ) );
-bool    read_from_descriptor    args( ( DESCRIPTOR_DATA *d ) );
-bool    write_to_descriptor     args( ( int desc, char *txt, int length ) );
-
+void    game_loop( void );
+int     init_socket( int port );
+void    new_descriptor( int new_desc );
+bool    read_from_descriptor( DESCRIPTOR_DATA *d );
 
 /*
  * Other local functions (OS-independent).
  */
-bool    check_parse_name        args( ( char *name ) );
-bool    check_reconnect         args( ( DESCRIPTOR_DATA *d, char *name,
-                                        bool fConn ) );
-bool    check_playing           args( ( DESCRIPTOR_DATA *d, char *name, bool kick ) );
-bool    check_multi             args( ( DESCRIPTOR_DATA *d, char *name ) );
-int     main                    args( ( int argc, char **argv ) );
-void    nanny                   args( ( DESCRIPTOR_DATA *d, char *argument ) );
-bool    flush_buffer            args( ( DESCRIPTOR_DATA *d, bool fPrompt ) );
-void    read_from_buffer        args( ( DESCRIPTOR_DATA *d ) );
-void    stop_idling             args( ( CHAR_DATA *ch ) );
-void    free_desc               args( ( DESCRIPTOR_DATA *d ) );
-void    display_prompt          args( ( DESCRIPTOR_DATA *d ) );
-int     make_color_sequence     args( ( const char *col, char *buf,
-                                        DESCRIPTOR_DATA *d ) );
-void    set_pager_input         args( ( DESCRIPTOR_DATA *d,
-                                        char *argument ) );
-bool    pager_output            args( ( DESCRIPTOR_DATA *d ) );
+bool    check_parse_name( char *name );
+bool    check_reconnect( DESCRIPTOR_DATA *d, char *name, bool fConn );
+bool    check_playing( DESCRIPTOR_DATA *d, char *name, bool kick );
+bool    check_multi( DESCRIPTOR_DATA *d, char *name );
+int     main( int argc, char **argv );
+void    nanny( DESCRIPTOR_DATA *d, char *argument );
+bool    flush_buffer( DESCRIPTOR_DATA *d, bool fPrompt );
+void    read_from_buffer( DESCRIPTOR_DATA *d );
+void    stop_idling( CHAR_DATA *ch );
+void    free_desc( DESCRIPTOR_DATA *d );
+void    display_prompt( DESCRIPTOR_DATA *d );
+int     make_color_sequence( const char *col, char *buf, DESCRIPTOR_DATA *d );
+void    set_pager_input( DESCRIPTOR_DATA *d, char *argument );
+bool    pager_output( DESCRIPTOR_DATA *d );
 
-
-
-void    mail_count              args( ( CHAR_DATA *ch ) );
-
+void    mail_count( CHAR_DATA *ch );
 
 int port = 0;
 

@@ -48,16 +48,15 @@ GUARD_DATA * first_guard;
 GUARD_DATA * last_guard;
 
 /* local routines */
-void    fread_clan      args( ( CLAN_DATA *clan, FILE *fp ) );
-bool    load_clan_file  args( ( char *clanfile ) );
-void    write_clan_list args( ( void ) );
-void    fread_planet    args( ( PLANET_DATA *planet, FILE *fp ) );
-bool    load_planet_file        args( ( char *planetfile ) );
-void    write_planet_list       args( ( void ) );
-void    save_member_list        args( ( MEMBER_LIST *members_list ) );
-void    show_members            args( ( CHAR_DATA *ch, char *argument, char *format ) );
-void    remove_member           args( ( CHAR_DATA *ch ) );
-
+void    fread_clan( CLAN_DATA *clan, FILE *fp );
+bool    load_clan_file( char *clanfile );
+void    write_clan_list( void );
+void    fread_planet( PLANET_DATA *planet, FILE *fp );
+bool    load_planet_file( char *planetfile );
+void    write_planet_list( void );
+void    save_member_list( MEMBER_LIST *members_list );
+void    show_members( CHAR_DATA *ch, char *argument, char *format );
+void    remove_member( CHAR_DATA *ch );
 
 /*
  * Get pointer to clan structure from clan name.

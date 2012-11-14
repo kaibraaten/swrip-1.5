@@ -41,17 +41,15 @@ int ris_save( CHAR_DATA *ch, int chance, int ris );
 /*
  * Local functions.
  */
-void    dam_message     args( ( CHAR_DATA *ch, CHAR_DATA *victim, int dam,
-                                int dt ) );
-void    death_cry       args( ( CHAR_DATA *ch ) );
-void    group_gain      args( ( CHAR_DATA *ch, CHAR_DATA *victim ) );
-int     xp_compute      args( ( CHAR_DATA *gch, CHAR_DATA *victim ) );
-int     align_compute   args( ( CHAR_DATA *gch, CHAR_DATA *victim ) );
-ch_ret  one_hit         args( ( CHAR_DATA *ch, CHAR_DATA *victim, int dt ) );
-int     obj_hitroll     args( ( OBJ_DATA *obj ) );
+void    dam_message( CHAR_DATA *ch, CHAR_DATA *victim, int dam, int dt );
+void    death_cry( CHAR_DATA *ch );
+void    group_gain( CHAR_DATA *ch, CHAR_DATA *victim );
+int     xp_compute( CHAR_DATA *gch, CHAR_DATA *victim );
+int     align_compute( CHAR_DATA *gch, CHAR_DATA *victim );
+ch_ret  one_hit( CHAR_DATA *ch, CHAR_DATA *victim, int dt );
+int     obj_hitroll( OBJ_DATA *obj );
 bool    get_cover( CHAR_DATA *ch );
 bool    dual_flip = FALSE;
-
 
 /*
  * Check to see if weapon is poisoned.
@@ -775,7 +773,6 @@ ch_ret one_hit( CHAR_DATA *ch, CHAR_DATA *victim, int dt )
       if ( prof_gsn != -1 )
         learn_from_failure( ch, prof_gsn );
       damage( ch, victim, 0, dt );
-      tail_chain( );
       return rNONE;
     }
 
@@ -1127,7 +1124,6 @@ ch_ret one_hit( CHAR_DATA *ch, CHAR_DATA *victim, int dt )
         }
     }
 
-  tail_chain( );
   return retcode;
 }
 
@@ -1762,7 +1758,6 @@ ch_ret damage( CHAR_DATA *ch, CHAR_DATA *victim, int dam, int dt )
     if ( !npcvict && IS_SET( victim->act, PLR_FLEE ) )
       do_flee( victim, "" );
 
-  tail_chain( );
   return rNONE;
 }
 

@@ -45,36 +45,32 @@
 
 /* Externals */
 extern  int     top_reset;
-char *          sprint_reset    args( ( CHAR_DATA *ch, RESET_DATA *pReset,
-                                        short num, bool rlist ) );
-RESET_DATA *    parse_reset     args( ( AREA_DATA *tarea, char *argument,
-                                        CHAR_DATA *ch ) );
-int             get_wearloc     args( ( char *type ) );
-int             get_trapflag    args( ( char *flag ) );
-int             get_exflag      args( ( char *flag ) );
-int             get_rflag       args( ( char *flag ) );
+char *          sprint_reset( CHAR_DATA *ch, RESET_DATA *pReset,
+                                        short num, bool rlist );
+RESET_DATA *    parse_reset( AREA_DATA *tarea, char *argument,
+			     CHAR_DATA *ch );
+int             get_wearloc( char *type );
+int             get_trapflag( char *flag );
+int             get_exflag( char *flag );
+int             get_rflag( char *flag );
 extern  char *  const           wear_locs[];
 extern  char *  const           ex_flags[];
 
-bool is_room_reset  args( ( RESET_DATA *pReset, ROOM_INDEX_DATA *aRoom,
-                            AREA_DATA *pArea ) );
-void add_obj_reset  args( ( AREA_DATA *pArea, char cm, OBJ_DATA *obj,
-                            int v2, int v3 ) );
-void delete_reset   args( ( AREA_DATA *pArea, RESET_DATA *pReset ) );
-void instaroom      args( ( AREA_DATA *pArea, ROOM_INDEX_DATA *pRoom,
-                            bool dodoors ) );
+bool is_room_reset( RESET_DATA *pReset, ROOM_INDEX_DATA *aRoom,
+		    AREA_DATA *pArea );
+void add_obj_reset( AREA_DATA *pArea, char cm, OBJ_DATA *obj, int v2, int v3 );
+void delete_reset( AREA_DATA *pArea, RESET_DATA *pReset );
+void instaroom( AREA_DATA *pArea, ROOM_INDEX_DATA *pRoom, bool dodoors );
 #define RID ROOM_INDEX_DATA
-RID *find_room      args( ( CHAR_DATA *ch, char *argument,
-                            ROOM_INDEX_DATA *pRoom ) );
+RID *find_room( CHAR_DATA *ch, char *argument, ROOM_INDEX_DATA *pRoom );
 #undef RID
-void edit_reset     args( ( CHAR_DATA *ch, char *argument, AREA_DATA *pArea,
-                            ROOM_INDEX_DATA *aRoom ) );
+void edit_reset( CHAR_DATA *ch, char *argument, AREA_DATA *pArea,
+		 ROOM_INDEX_DATA *aRoom );
 #define RD RESET_DATA
-RD *find_reset      args( ( AREA_DATA *pArea, ROOM_INDEX_DATA *pRoom,
-                            int num ) );
+RD *find_reset( AREA_DATA *pArea, ROOM_INDEX_DATA *pRoom, int num );
 #undef RD
-void list_resets    args( ( CHAR_DATA *ch, AREA_DATA *pArea,
-                            ROOM_INDEX_DATA *pRoom, int start, int end ) );
+void list_resets( CHAR_DATA *ch, AREA_DATA *pArea,
+		  ROOM_INDEX_DATA *pRoom, int start, int end );
 
 
 

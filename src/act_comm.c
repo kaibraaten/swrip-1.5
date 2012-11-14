@@ -40,11 +40,11 @@ void send_control_page_to_char(CHAR_DATA * ch, char page);
 /*
  * Local functions.
  */
-void    talk_channel    args( ( CHAR_DATA *ch, char *argument,
-                                int channel, const char *verb ) );
+void    talk_channel( CHAR_DATA *ch, char *argument,
+		      int channel, const char *verb );
 
-char *  scramble        args( ( const char *argument, int modifier ) );
-char *  drunk_speech    args( ( const char *argument, CHAR_DATA *ch ) );
+char *  scramble( const char *argument, int modifier );
+char *  drunk_speech( const char *argument, CHAR_DATA *ch );
 
 
 void sound_to_room( ROOM_INDEX_DATA *room , char *argument )

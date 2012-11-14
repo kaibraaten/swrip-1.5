@@ -76,22 +76,19 @@ struct act_prog_data *mob_act_list;
  * Local function prototypes
  */
 
-char *  mprog_next_command      args( ( char* clist ) );
-bool    mprog_seval             args( ( char* lhs, char* opr, char* rhs,
-                                        CHAR_DATA *mob ) );
-bool    mprog_veval             args( ( int lhs, char* opr, int rhs,
-                                        CHAR_DATA *mob ) );
-int     mprog_do_ifcheck        args( ( char* ifcheck, CHAR_DATA* mob,
-                                        CHAR_DATA* actor, OBJ_DATA* obj,
-                                        void* vo, CHAR_DATA* rndm ) );
-void    mprog_translate         args( ( char ch, char* t, CHAR_DATA* mob,
-                                        CHAR_DATA* actor, OBJ_DATA* obj,
-                                        void* vo, CHAR_DATA* rndm ) );
-void    mprog_driver            args( ( char* com_list, CHAR_DATA* mob,
-                                        CHAR_DATA* actor, OBJ_DATA* obj,
-                                        void* vo, bool single_step ) );
+char *mprog_next_command( char* clist );
+bool mprog_seval( char* lhs, char* opr, char* rhs, CHAR_DATA *mob );
+bool mprog_veval( int lhs, char* opr, int rhs, CHAR_DATA *mob );
+int mprog_do_ifcheck( char* ifcheck, CHAR_DATA* mob, CHAR_DATA* actor,
+		      OBJ_DATA* obj, void* vo, CHAR_DATA* rndm );
+void mprog_translate( char ch, char* t, CHAR_DATA* mob,
+		      CHAR_DATA* actor, OBJ_DATA* obj,
+		      void* vo, CHAR_DATA* rndm );
+void mprog_driver( char* com_list, CHAR_DATA* mob,
+		   CHAR_DATA* actor, OBJ_DATA* obj,
+		   void* vo, bool single_step );
 
-bool mprog_keyword_check        args( ( const char *argu, const char *argl ) );
+bool mprog_keyword_check( const char *argu, const char *argl );
 
 
 void oprog_wordlist_check( char *arg, CHAR_DATA *mob, CHAR_DATA *actor, OBJ_DATA *obj, void *vo, int type, OBJ_DATA *iobj );
@@ -104,20 +101,6 @@ void rprog_wordlist_check( char *arg, CHAR_DATA *mob, CHAR_DATA *actor,
 /***************************************************************************
  * Local function code and brief comments.
  */
-
-/* if you dont have these functions, you damn well should... */
-
-#ifdef DUNNO_STRSTR
-char * strstr(s1,s2) const char *s1; const char *s2;
-{
-  char *cp;
-  int i,j=strlen(s1)-strlen(s2),k=strlen(s2);
-  if(j<0)
-    return NULL;
-  for(i=0; i<=j && strncmp(s1++,s2, k)!=0; i++);
-  return (i>j) ? NULL : (s1-1);
-}
-#endif
 
 #define RID ROOM_INDEX_DATA
 

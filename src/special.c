@@ -49,7 +49,7 @@
 #define ROOM_JAIL_QUARREN_1     6931
 #define ROOM_JAIL_QUARREN_2     6932
 
-bool  remove_obj      args( ( CHAR_DATA *ch, int iWear, bool fReplace ) );
+bool  remove_obj( CHAR_DATA *ch, int iWear, bool fReplace );
 
 /*
  * The following special functions are available for mobiles.

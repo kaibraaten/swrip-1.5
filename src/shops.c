@@ -63,12 +63,12 @@ float cost_equation( OBJ_DATA *obj )
  */
 
 #define CD      CHAR_DATA
-CD *    find_keeper     args( ( CHAR_DATA *ch ) );
-CD *    find_keeper_q   args( ( CHAR_DATA *ch, bool message ) );
-CD *    find_fixer      args( ( CHAR_DATA *ch ) );
-int     get_cost        args( ( CHAR_DATA *ch, CHAR_DATA *keeper,
-                                OBJ_DATA *obj, bool fBuy ) );
-int     get_repaircost  args( ( CHAR_DATA *keeper, OBJ_DATA *obj ) );
+CD *    find_keeper( CHAR_DATA *ch );
+CD *    find_keeper_q( CHAR_DATA *ch, bool message );
+CD *    find_fixer( CHAR_DATA *ch );
+int     get_cost( CHAR_DATA *ch, CHAR_DATA *keeper,
+		  OBJ_DATA *obj, bool fBuy );
+int     get_repaircost( CHAR_DATA *keeper, OBJ_DATA *obj );
 #undef CD
 
 /*

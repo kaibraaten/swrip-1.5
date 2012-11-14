@@ -60,7 +60,7 @@ ROOM_INDEX_DATA * vroom_hash [64];
 /*
  * Local functions.
  */
-bool    has_key         args( ( CHAR_DATA *ch, int key ) );
+bool    has_key( CHAR_DATA *ch, int key );
 
 
 char *  const           sect_names[SECT_MAX][2] =

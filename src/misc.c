@@ -59,9 +59,9 @@
 
 /* Local functions */
 
-void generate_quest     args(( CHAR_DATA *ch, CHAR_DATA *questman ));
-void quest_update       args(( void ));
-bool qchance            args(( int num ));
+void generate_quest( CHAR_DATA *ch, CHAR_DATA *questman );
+void quest_update( void );
+bool qchance( int num );
 
 bool qchance( int num )
 {

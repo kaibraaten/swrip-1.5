@@ -40,17 +40,13 @@ char * const save_flag[] =
     "r17", "r18", "r19", "r20", "r21", "r22", "r23", "r24", "r25", "r26", "r27",
     "r28", "r29", "r30", "r31" };
 
-
-/* from comm.c */
-bool    write_to_descriptor     args( ( int desc, char *txt, int length ) );
-
 /*
  * Local functions.
  */
-ROOM_INDEX_DATA * find_location args( ( CHAR_DATA *ch, char *arg ) );
-void              save_banlist  args( ( void ) );
-void              close_area    args( ( AREA_DATA *pArea ) );
-int               get_color (char *argument); /* function proto */
+ROOM_INDEX_DATA * find_location( CHAR_DATA *ch, char *arg );
+void              save_banlist( void );
+void              close_area( AREA_DATA *pArea );
+int               get_color(char *argument); /* function proto */
 bool              check_for_immroom( CHAR_DATA *ch, ROOM_INDEX_DATA *location);
 
 
@@ -5534,7 +5530,7 @@ void do_for (CHAR_DATA *ch, char *argument)
     } /* if strchr */
 } /* do_for */
 
-void save_sysdata  args( ( SYSTEM_DATA sys ) );
+void save_sysdata( SYSTEM_DATA sys );
 
 void do_cset( CHAR_DATA *ch, char *argument )
 {

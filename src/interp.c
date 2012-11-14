@@ -37,8 +37,7 @@ void subtract_times( struct timeval *etime, struct timeval *stime );
 
 
 
-bool    check_social    args( ( CHAR_DATA *ch, char *command,
-                                char *argument ) );
+bool    check_social( CHAR_DATA *ch, char *command, char *argument );
 
 
 /*
@@ -466,8 +465,6 @@ void interpret( CHAR_DATA *ch, char *argument )
               (int) (time_used.tv_sec),(int) (time_used.tv_usec) );
       log_string_plus(log_buf, LOG_NORMAL, get_trust(ch));
     }
-
-  tail_chain( );
 }
 
 CMDTYPE *find_command( char *command )

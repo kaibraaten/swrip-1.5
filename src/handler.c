@@ -1350,7 +1350,7 @@ int count_obj_list( OBJ_INDEX_DATA *pObjIndex, OBJ_DATA *list )
 /*
  * Move an obj out of a room.
  */
-void    write_corpses   args( ( CHAR_DATA *ch, char *name ) );
+void write_corpses( CHAR_DATA *ch, char *name );
 
 int falling;
 

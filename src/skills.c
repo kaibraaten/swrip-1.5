@@ -64,7 +64,7 @@ bool check_illegal_psteal( CHAR_DATA *ch, CHAR_DATA *victim );
 void failed_casting( struct skill_type *skill, CHAR_DATA *ch,
                      CHAR_DATA *victim, OBJ_DATA *obj );
 
-int     xp_compute      args( ( CHAR_DATA *gch, CHAR_DATA *victim ) );
+int     xp_compute( CHAR_DATA *gch, CHAR_DATA *victim );
 
 ROOM_INDEX_DATA *generate_exit( ROOM_INDEX_DATA *in_room, EXIT_DATA **pexit );
 
@@ -362,7 +362,6 @@ bool check_skill( CHAR_DATA *ch, char *command, char *argument )
   end_timer(&time_used);
   update_userec(&time_used, &skill_table[sn]->userec);
 
-  tail_chain( );
   return TRUE;
 }
 
@@ -4044,7 +4043,8 @@ void do_berserk( CHAR_DATA *ch, char *argument )
 }
 
 /* External from fight.c */
-ch_ret one_hit  args( ( CHAR_DATA *ch, CHAR_DATA *victim, int dt ) );
+ch_ret one_hit( CHAR_DATA *ch, CHAR_DATA *victim, int dt );
+
 void do_hitall( CHAR_DATA *ch, char *argument )
 {
   CHAR_DATA *vch;
