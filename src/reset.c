@@ -41,6 +41,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
+#include <ctype.h>
 #include "mud.h"
 
 /* Externals */
@@ -53,8 +54,8 @@ int             get_wearloc( char *type );
 int             get_trapflag( char *flag );
 int             get_exflag( char *flag );
 int             get_rflag( char *flag );
-extern  char *  const           wear_locs[];
-extern  char *  const           ex_flags[];
+extern  const char *  const           wear_locs[];
+extern  const char *  const           ex_flags[];
 
 bool is_room_reset( RESET_DATA *pReset, ROOM_INDEX_DATA *aRoom,
 		    AREA_DATA *pArea );
@@ -1829,7 +1830,7 @@ void list_resets( CHAR_DATA *ch, AREA_DATA *pArea, ROOM_INDEX_DATA *pRoom,
           break;
         case 'B':
           {
-            char * const *flagarray;
+            const char * const * flagarray;
 
             strcpy(pbuf, "BIT: ");
             pbuf += 5;

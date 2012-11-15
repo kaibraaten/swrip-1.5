@@ -35,7 +35,7 @@ const   short   movement_loss   [SECT_MAX]      =
     1, 2, 2, 3, 4, 6, 4, 1, 6, 10, 6, 5, 7, 4
   };
 
-char *  const   dir_name        []              =
+const char *  const   dir_name        []              =
   {
     "north", "east", "south", "west", "up", "down",
     "northeast", "northwest", "southeast", "southwest", "somewhere"

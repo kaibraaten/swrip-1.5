@@ -32,20 +32,7 @@
 #include <dirent.h>
 #include "mud.h"
 
-#if defined(KEY)
-#undef KEY
-#endif
-
 void init_supermob();
-
-#define KEY( literal, field, value )            \
-  if ( !str_cmp( word, literal ) )              \
-    {                                           \
-      field  = value;                           \
-      fMatch = TRUE;                            \
-      break;                                    \
-    }
-
 
 /*
  * Globals.
@@ -2925,7 +2912,7 @@ void boot_log( const char *str, ... )
 /*
  * Dump a text file to a player, a line at a time               -Thoric
  */
-void show_file( CHAR_DATA *ch, char *filename )
+void show_file( CHAR_DATA *ch, const char *filename )
 {
   FILE *fp;
   char buf[MAX_STRING_LENGTH];
@@ -5242,4 +5229,26 @@ void do_check_vnums( CHAR_DATA *ch, char *argument )
     }
   */
   return;
+}
+
+/*
+ * Append a string to a file.
+ */
+void append_file( CHAR_DATA *ch, const char *file, const char *str )
+{
+  FILE *fp;
+
+  if ( IS_NPC(ch) || str[0] == '\0' )
+    return;
+
+  if ( ( fp = fopen( file, "a" ) ) == NULL )
+    {
+      send_to_char( "Could not open the file!\n\r", ch );
+    }
+  else
+    {
+      fprintf( fp, "[%5d] %s: %s\n",
+	       ch->in_room ? ch->in_room->vnum : 0, ch->name, str );
+      fclose( fp );
+    }
 }

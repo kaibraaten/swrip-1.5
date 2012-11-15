@@ -400,8 +400,7 @@ tiny_affect_loc_name(int location)
   return "(?)";
 }
 
-char *
-get_race( CHAR_DATA *ch)
+const char *get_race( CHAR_DATA *ch)
 {
   if ( ch->race < MAX_NPC_RACE && ch->race >= 0)
     return ( npc_race[ch->race] );

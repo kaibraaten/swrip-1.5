@@ -28,7 +28,6 @@
 #define  MAX_NUM_OPS           32
 #define  GR_NUM_FIELDS         12
 #define  GO_NUM_FIELDS         24
-#define  UMIN(a, b)            ((a) < (b) ? (a) : (b))
 
 typedef  struct gr_struct       GR_STRUCT;
 typedef  struct go_struct       GO_STRUCT;

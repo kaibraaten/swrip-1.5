@@ -43,21 +43,6 @@ float cost_equation( OBJ_DATA *obj )
   return (100/(count));
 }
 
-
-
-#if defined(KEY)
-#undef KEY
-#endif
-
-#define KEY( literal, field, value )            \
-  if ( !strcmp( word, literal ) )               \
-    {                                           \
-      field  = value;                           \
-      fMatch = TRUE;                            \
-      break;                                    \
-    }
-
-
 /*
  * Local functions
  */

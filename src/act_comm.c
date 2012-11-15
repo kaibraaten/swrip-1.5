@@ -2362,14 +2362,16 @@ int countlangs( int languages )
   return numlangs;
 }
 
-char * const lang_names[] = { "common", "wookiee", "twilek", "rodian", "hutt",
-                              "mon calamari", "shistavanen", "ewok", "ithorian",
-                              "gotal", "devaronian", "barabel", "firrerreo",
-                              "bothan", "gamorrean", "togorian", "kubaz",
-                              "jawa", "clan", "adarian", "verpine", "defel",
-                              "trandoshan", "chadra-fan", "quarren", "sullustan",
-                              "falleen", "binary", "yevethan", "gand", "duros",
-                              "coynite", "" };
+const char * const lang_names[] =
+  { "common", "wookiee", "twilek", "rodian", "hutt",
+    "mon calamari", "shistavanen", "ewok", "ithorian",
+    "gotal", "devaronian", "barabel", "firrerreo",
+    "bothan", "gamorrean", "togorian", "kubaz",
+    "jawa", "clan", "adarian", "verpine", "defel",
+    "trandoshan", "chadra-fan", "quarren", "sullustan",
+    "falleen", "binary", "yevethan", "gand", "duros",
+    "coynite", ""
+  };
 
 void do_speak( CHAR_DATA *ch, char *argument )
 {

@@ -231,6 +231,7 @@ void show_high_hash( int top );
 char *scramble( const char *argument, int modifier );
 
 /* Random number stuff */
+void init_mm( void );
 int number_fuzzy( int number );
 int number_range( int from, int to );
 int number_percent( void );

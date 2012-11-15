@@ -1714,19 +1714,6 @@ void save_spaceobject( SPACE_DATA *spaceobject )
 /*
  * Read in actual spaceobject data.
  */
-
-#if defined(KEY)
-#undef KEY
-#endif
-
-#define KEY( literal, field, value )            \
-  if ( !str_cmp( word, literal ) )              \
-    {                                           \
-      field  = value;                           \
-      fMatch = TRUE;                            \
-      break;                                    \
-    }
-
 void fread_spaceobject( SPACE_DATA *spaceobject, FILE *fp )
 {
   char buf[MAX_STRING_LENGTH];
@@ -2920,19 +2907,6 @@ void save_ship( SHIP_DATA *ship )
 /*
  * Read in actual ship data.
  */
-
-#if defined(KEY)
-#undef KEY
-#endif
-
-#define KEY( literal, field, value )            \
-  if ( !str_cmp( word, literal ) )              \
-    {                                           \
-      field  = value;                           \
-      fMatch = TRUE;                            \
-      break;                                    \
-    }
-
 void fread_cargohold( SHIP_DATA *ship, FILE *fp )
 {
 

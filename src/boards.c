@@ -1183,18 +1183,6 @@ BOARD_DATA *read_board( char *boardfile, FILE *fp )
 
   CREATE( board, BOARD_DATA, 1 );
 
-#ifdef KEY
-#undef KEY
-#endif
-#define KEY( literal, field, value )            \
-  if ( !str_cmp( word, literal ) )              \
-    {                                           \
-      field  = value;                           \
-      fMatch = TRUE;                            \
-      break;                                    \
-    }
-
-
   for ( ; ; )
     {
       word   = feof( fp ) ? "End" : fread_word( fp );

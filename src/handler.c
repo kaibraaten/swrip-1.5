@@ -2357,7 +2357,7 @@ bool can_drop_obj( CHAR_DATA *ch, OBJ_DATA *obj )
 /*
  * Return ascii name of an item type.
  */
-char *item_type_name( OBJ_DATA *obj )
+const char *item_type_name( OBJ_DATA *obj )
 {
   if ( obj->item_type < 1 || obj->item_type > MAX_ITEM_TYPE )
     {
@@ -2373,7 +2373,7 @@ char *item_type_name( OBJ_DATA *obj )
 /*
  * Return ascii name of an affect location.
  */
-char *affect_loc_name( int location )
+const char *affect_loc_name( int location )
 {
   switch ( location )
     {
@@ -2450,12 +2450,10 @@ char *affect_loc_name( int location )
   return "(unknown)";
 }
 
-
-
 /*
  * Return ascii name of an affect bit vector.
  */
-char *affect_bit_name( int vector )
+const char *affect_bit_name( int vector )
 {
   static char buf[512];
 
@@ -2500,7 +2498,7 @@ char *affect_bit_name( int vector )
 /*
  * Return ascii name of extra flags vector.
  */
-char *extra_bit_name( int extra_flags )
+const char *extra_bit_name( int extra_flags )
 {
   static char buf[512];
 
@@ -2539,7 +2537,7 @@ char *extra_bit_name( int extra_flags )
 /*
  * Return ascii name of magic flags vector. - Scryn
  */
-char *magic_bit_name( int magic_flags )
+const char *magic_bit_name( int magic_flags )
 {
   static char buf[512];
 

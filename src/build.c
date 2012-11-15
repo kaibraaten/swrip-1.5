@@ -39,7 +39,7 @@ extern bool     fBootDb;
 
 /* planet constants for vip and wanted flags */
 
-char *  const   planet_flags [] =
+const char *  const   planet_flags [] =
   {
     "coruscant", "kashyyyk", "ryloth", "rodia", "nal hutta", "mon calamari",
     "honoghr", "gamorr", "tatooine", "adari", "byss", "endor", "roche", "af'el", "trandosh",
@@ -47,7 +47,7 @@ char *  const   planet_flags [] =
     "roche", "dathomir", "sullust", "p28", "p29", "p30", "p31"
   };
 
-char *  const   weapon_table    [13] =
+const char *  const   weapon_table    [13] =
   {
     "none",
     "vibro-axe",  "vibro-blade",  "lightsaber", "whip", "claw",
@@ -55,25 +55,25 @@ char *  const   weapon_table    [13] =
     "force pike", "w12"
   };
 
-char *  const   spice_table    [] =
+const char *  const   spice_table    [] =
   {
     "glitterstim", "carsanum", "ryll","andris","lumni","s5","s6","s7","s8","s9"
   };
 
-char *  const   crystal_table    [8] =
+const char *  const   crystal_table    [8] =
   {
     "non-adegan", "kathracite", "relacite", "danite", "mephite", "ponite", "illum", "corusca"
   };
 
 
-char *  const   ex_flags [] =
+const char *  const   ex_flags [] =
   {
     "isdoor", "closed", "locked", "secret", "swim", "pickproof", "fly", "climb",
     "dig", "r1", "nopassdoor", "hidden", "passage", "portal", "r2", "r3",
     "can_climb", "can_enter", "can_leave", "auto", "r4", "searchable",
     "bashed", "bashproof", "nomob", "window", "can_look" };
 
-char *  const   r_flags [] =
+const char *  const   r_flags [] =
   {
     "dark", "reserved", "nomob", "indoors", "can_land", "can_fly", "no_drive",
     "nomagic", "bank", "private", "safe", "remove_this_flag", "petshop", "arena",
@@ -82,7 +82,7 @@ char *  const   r_flags [] =
     "recruit", "plr_shop", "spacecraft", "prototype", "auction"
   };
 
-char *  const   o_flags [] =
+const char *  const   o_flags [] =
   {
     "glow", "hum", "dark", "hutt_size", "contraband", "invis", "magic", "nodrop", "bless",
     "antigood", "antievil", "antineutral", "noremove", "inventory",
@@ -91,13 +91,13 @@ char *  const   o_flags [] =
     "hidden", "poisoned", "covering", "deathrot", "burried", "prototype", "human_size"
   };
 
-char *  const   mag_flags       [] =
+const char *  const   mag_flags       [] =
   {
     "returning", "backstabber", "bane", "loyal", "haste", "drain",
     "lightning_blade"
   };
 
-char *  const   w_flags [] =
+const char *  const   w_flags [] =
   {
     "take", "finger", "neck", "body", "head", "legs", "feet", "hands", "arms",
     "shield", "about", "waist", "wrist", "wield", "hold", "_dual_", "ears", "eyes",
@@ -105,7 +105,7 @@ char *  const   w_flags [] =
     "r7","r8","r9","r10","r11","r12","r13"
   };
 
-char *  const   area_flags      [] =
+const char *  const   area_flags      [] =
   {
     "nopkill", "noquest", "changed", "r3", "r4", "r5", "r6", "r7", "r8",
     "r9", "r10", "r11", "r12", "r13", "r14", "r15", "r16", "r17",
@@ -113,7 +113,7 @@ char *  const   area_flags      [] =
     "r25","r26","r27","r28","r29","r30","r31"
   };
 
-char *  const   o_types [] =
+const char *  const   o_types [] =
   {
     "none", "light", "scroll", "_wand", "staff", "weapon", "_fireweapon", "missile",
     "treasure", "armor", "potion", "rope", "furniture", "trash", "_oldtrap",
@@ -131,7 +131,7 @@ char *  const   o_types [] =
     "disguise_fabric", "hair"
   };
 
-char *  const   a_types [] =
+const char *  const   a_types [] =
   {
     "none", "strength", "dexterity", "intelligence", "wisdom", "constitution",
     "sex", "null", "level", "age", "height", "weight", "force", "hit", "move",
@@ -144,7 +144,7 @@ char *  const   a_types [] =
     "stripsn", "remove", "dig", "full", "thirst", "drunk", "blood", "snipe"
   };
 
-char *  const   a_flags [] =
+const char *  const   a_flags [] =
   {
     "blind", "invisible", "detect_evil", "detect_invis", "detect_magic",
     "detect_hidden", "weaken", "sanctuary", "faerie_fire", "infrared", "curse",
@@ -153,7 +153,7 @@ char *  const   a_flags [] =
     "scrying", "fireshield", "shockshield", "r1", "iceshield", "possess",
     "berserk", "aqua_breath" };
 
-char *  const   act_flags [] =
+const char *  const   act_flags [] =
   {
     "npc", "sentinel", "scavenger", "r3", "r3", "aggressive", "stayarea",
     "wimpy", "pet", "train", "practice", "immortal", "deadly", "polyself",
@@ -161,7 +161,7 @@ char *  const   act_flags [] =
     "secretive", "polymorphed", "mobinvis", "noassist", "nokill", "droid", "nocorpse",
     "r28", "r29", "prototype", "r31" };
 
-char *  const   pc_flags [] =
+const char *  const   pc_flags [] =
   {
     "r1", "deadly", "unauthed", "norecall", "nointro", "gag", "retired", "guest",
     "nosummon", "pageron", "notitled", "room", "r6", "r7", "r8", "r9", "r10", "r11", "r12", "r13",
@@ -169,7 +169,7 @@ char *  const   pc_flags [] =
     "r25"
   };
 
-char *  const   plr_flags [] =
+const char *  const   plr_flags [] =
   {
     "npc", "boughtpet", "shovedrag", "autoexits", "autoloot", "autosac", "blank",
     "outcast", "brief", "combine", "prompt", "telnet_ga", "holylight",
@@ -178,7 +178,7 @@ char *  const   plr_flags [] =
     "flee" ,"autocred", "automap", "afk"
   };
 
-char *  const   trap_flags [] =
+const char *  const   trap_flags [] =
   {
     "room", "obj", "enter", "leave", "open", "close", "get", "put", "pick",
     "unlock", "north", "south", "east", "r1", "west", "up", "down", "examine",
@@ -186,7 +186,7 @@ char *  const   trap_flags [] =
     "r14", "r15"
   };
 
-char *  const   wear_locs [] =
+const char *  const   wear_locs [] =
   {
     "light", "finger1", "finger2", "neck1", "neck2", "body", "head", "legs",
     "feet", "hands", "arms", "shield", "about", "waist", "wrist1", "wrist2",
@@ -194,7 +194,7 @@ char *  const   wear_locs [] =
     "over"
   };
 
-char *  const   ris_flags [] =
+const char *  const   ris_flags [] =
   {
     "fire", "cold", "electricity", "energy", "blunt", "pierce", "slash", "acid",
     "poison", "drain", "sleep", "charm", "hold", "nonmagic", "plus1", "plus2",
@@ -202,7 +202,7 @@ char *  const   ris_flags [] =
     "r4", "r5", "r6", "r7", "r8", "r9", "r10"
   };
 
-char *  const   trig_flags [] =
+const char *  const   trig_flags [] =
   {
     "up", "unlock", "lock", "d_north", "d_south", "d_east", "d_west", "d_up",
     "d_down", "door", "container", "open", "close", "passage", "oload", "mload",
@@ -211,7 +211,7 @@ char *  const   trig_flags [] =
     "showroomdesc", "autoreturn", "r2", "r3"
   };
 
-char *  const   part_flags [] =
+const char *  const   part_flags [] =
   {
     "head", "arms", "legs", "heart", "brains", "guts", "hands", "feet", "fingers",
     "ear", "eye", "long_tongue", "eyestalks", "tentacles", "fins", "wings",
@@ -220,7 +220,7 @@ char *  const   part_flags [] =
     "r1", "r2"
   };
 
-char *  const   attack_flags [] =
+const char *  const   attack_flags [] =
   {
     "bite", "claws", "tail", "sting", "punch", "kick",
     "r6", "r7", "r8", "r9", "r10", "r11", "r12", "r13", "r14", "r15", "r16", "r17",
@@ -228,7 +228,7 @@ char *  const   attack_flags [] =
     "r30", "r31"
   };
 
-char *  const   defense_flags [] =
+const char *  const   defense_flags [] =
   {
     "parry", "dodge", "r2", "r3", "r4" ,"r5",
     "r6", "r7", "r8", "r9", "r10", "r11", "r12", "r13", "r14", "r15", "r16", "r17",
@@ -249,33 +249,13 @@ char *  const   defense_flags [] =
  *  hour and time, rand and randiw, speech and speechiw
  *
  */
-char *  const   mprog_flags [] =
+const char *  const   mprog_flags [] =
   {
     "act", "speech", "rand", "fight", "death", "hitprcnt", "entry", "greet",
     "allgreet", "give", "bribe", "hour", "time", "wear", "remove", "sac",
     "look", "exa", "zap", "get", "drop", "damage", "repair", "randiw",
     "speechiw", "pull", "push", "sleep", "rest", "leave", "script", "use"
   };
-
-
-char *flag_string( int bitvector, char * const flagarray[] )
-{
-  static char buf[MAX_STRING_LENGTH];
-  int x;
-
-  buf[0] = '\0';
-  for ( x = 0; x < 32 ; x++ )
-    if ( IS_SET( bitvector, 1 << x ) )
-      {
-        strcat( buf, flagarray[x] );
-        strcat( buf, " " );
-      }
-  if ( (x=strlen( buf )) > 0 )
-    buf[--x] = '\0';
-
-  return buf;
-}
-
 
 bool can_rmodify( CHAR_DATA *ch, ROOM_INDEX_DATA *room )
 {
@@ -342,7 +322,6 @@ bool can_oedit( CHAR_DATA *ch, OBJ_INDEX_DATA *obj )
   send_to_char( "That object is not in your allocated range.\r\n", ch );
   return FALSE;
 }
-
 
 bool can_mmodify( CHAR_DATA *ch, CHAR_DATA *mob )
 {
@@ -631,53 +610,6 @@ int get_langflag( char *flag )
       return lang_array[x];
   return LANG_UNKNOWN;
 }
-
-/*
- * Remove carriage returns from a line
- */
-char *strip_cr( char *str )
-{
-  static char newstr[MAX_STRING_LENGTH];
-  int i, j;
-
-  for ( i=j=0; str[i] != '\0'; i++ )
-    if ( str[i] != '\r' )
-      {
-        newstr[j++] = str[i];
-      }
-  newstr[j] = '\0';
-  return newstr;
-}
-
-
-/*
- * Removes the tildes from a line, except if it's the last character.
- */
-void smush_tilde( char *str )
-{
-  int len;
-  char last;
-  char *strptr;
-
-  strptr = str;
-
-  len  = strlen( str );
-  if ( len )
-    last = strptr[len-1];
-  else
-    last = '\0';
-
-  for ( ; *str != '\0'; str++ )
-    {
-      if ( *str == '~' )
-        *str = '-';
-    }
-  if ( len )
-    strptr[len-1] = last;
-
-  return;
-}
-
 
 void start_editing( CHAR_DATA *ch, char *data )
 {

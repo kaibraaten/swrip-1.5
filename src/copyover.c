@@ -119,7 +119,7 @@ void do_copyover( CHAR_DATA * ch, char *argument )
 
       if( cur_desc == SOCKET_ERROR )
       {
-	fprintf( out_stream, "ReleaseCopyOfSocket() failed.\n" );
+	fprintf( stdout, "ReleaseCopyOfSocket() failed.\n" );
 	fclose( fp );
 	exit( 1 );
       }
@@ -159,7 +159,7 @@ void do_copyover( CHAR_DATA * ch, char *argument )
   if( error_code == -1 )
   {
     bug( "Copyover failure, executable could not be run." );
-    fprintf( out_stream, "Failed to run %s\n", sysdata.exe_filename );
+    fprintf( stdout, "Failed to run %s\n", sysdata.exe_filename );
     ch_printf( ch, "Copyover FAILED!\r\n" );
   }
   else
@@ -172,25 +172,18 @@ void do_copyover( CHAR_DATA * ch, char *argument )
   sprintf( buf, "%d", port );
   sprintf( buf2, "%d", control );
 
-  /*
-  fclose( out_stream );
-  out_stream = NULL;
-  */
-
-  /*char filename[256];*/
+  char filename[256];
 
 #ifdef _WIN32
   sprintf(filename, "\"%s\"", sysdata.exe_filename);
 #else
-  /*sprintf(filename, "%s", sysdata.exe_filename);*/
+  sprintf(filename, "%s", "../bin/swrip");
 #define _execl execl
 #endif
-  /*_execl( filename, filename,*/
-  _execl( "../bin/swrip", "../bin/swrip",
+  _execl( filename, filename,
 	 buf, "copyover", buf2, buf3, NULL );
 
   /* Failed - sucessful exec will not return */
-  /*out_stream = open_log_file();*/
   perror( "do_copyover: execl" );
   send_to_char( "Copyover FAILED!\r\n", ch );
   ch_printf(ch, "%s\r\n", strerror(errno));

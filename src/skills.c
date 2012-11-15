@@ -25,31 +25,31 @@
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
+#include <ctype.h>
 #include "mud.h"
-#include "bet.h"
 
-char * const spell_flag[] =
+const char * const spell_flag[] =
   { "water", "earth", "air", "astral", "area", "distant", "reverse",
     "save_half_dam", "save_negates", "accumulative", "recastable", "noscribe",
     "nobrew", "group", "object", "character", "secretskill", "pksensitive" };
 
-char * const spell_saves[] =
+const char * const spell_saves[] =
   { "none", "poison_death", "wands", "para_petri", "breath", "spell_staff" };
 
-char * const spell_damage[] =
+const char * const spell_damage[] =
   { "none", "fire", "cold", "electricity", "energy", "acid", "poison", "drain" };
 
-char * const spell_action[] =
+const char * const spell_action[] =
   { "none", "create", "destroy", "resist", "suscept", "divinate", "obscure",
     "change" };
 
-char * const spell_power[] =
+const char * const spell_power[] =
   { "none", "minor", "greater", "major" };
 
-char * const spell_class[] =
+const char * const spell_class[] =
   { "none", "lunar", "solar", "travel", "summon", "life", "death", "illusion" };
 
-char * const target_type[] =
+const char * const target_type[] =
   { "ignore", "offensive", "defensive", "self", "objinv" };
 
 

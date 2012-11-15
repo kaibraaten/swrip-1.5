@@ -77,9 +77,9 @@ struct act_prog_data *mob_act_list;
  */
 
 char *mprog_next_command( char* clist );
-bool mprog_seval( char* lhs, char* opr, char* rhs, CHAR_DATA *mob );
-bool mprog_veval( int lhs, char* opr, int rhs, CHAR_DATA *mob );
-int mprog_do_ifcheck( char* ifcheck, CHAR_DATA* mob, CHAR_DATA* actor,
+bool mprog_seval( const char* lhs, const char* opr, const char* rhs, CHAR_DATA *mob );
+bool mprog_veval( int lhs, const char* opr, int rhs, CHAR_DATA *mob );
+int mprog_do_ifcheck( const char* ifcheck, CHAR_DATA* mob, CHAR_DATA* actor,
 		      OBJ_DATA* obj, void* vo, CHAR_DATA* rndm );
 void mprog_translate( char ch, char* t, CHAR_DATA* mob,
 		      CHAR_DATA* actor, OBJ_DATA* obj,
@@ -158,7 +158,8 @@ char *mprog_next_command( char *clist )
  *  still have trailing spaces so be careful when editing since:
  *  "guard" and "guard " are not equal.
  */
-bool mprog_seval( char *lhs, char *opr, char *rhs, CHAR_DATA *mob )
+bool mprog_seval( const char *lhs, const char *opr,
+		  const char *rhs, CHAR_DATA *mob )
 {
 
   if ( !str_cmp( opr, "==" ) )
@@ -176,7 +177,7 @@ bool mprog_seval( char *lhs, char *opr, char *rhs, CHAR_DATA *mob )
 
 }
 
-bool mprog_veval( int lhs, char *opr, int rhs, CHAR_DATA *mob )
+bool mprog_veval( int lhs, const char *opr, int rhs, CHAR_DATA *mob )
 {
 
   if ( !str_cmp( opr, "==" ) )
@@ -215,14 +216,14 @@ bool mprog_veval( int lhs, char *opr, int rhs, CHAR_DATA *mob )
  * Redone by Altrag.. kill all that big copy-code that performs the
  * same action on each variable..
  */
-int mprog_do_ifcheck( char *ifcheck, CHAR_DATA *mob, CHAR_DATA *actor,
+int mprog_do_ifcheck( const char *ifcheck, CHAR_DATA *mob, CHAR_DATA *actor,
                       OBJ_DATA *obj, void *vo, CHAR_DATA *rndm )
 {
   char cvar[MAX_INPUT_LENGTH];
   char chck[MAX_INPUT_LENGTH];
   char opr[MAX_INPUT_LENGTH];
   char rval[MAX_INPUT_LENGTH];
-  char *point = ifcheck;
+  const char *point = ifcheck;
   char *pchck = chck;
   CHAR_DATA *chkchar = NULL;
   OBJ_DATA *chkobj = NULL;
@@ -742,7 +743,7 @@ int mprog_do_ifcheck( char *ifcheck, CHAR_DATA *mob, CHAR_DATA *actor,
       if ( !str_cmp(chck, "race") )
         {
           if ( IS_NPC(chkchar) )
-            return mprog_seval(npc_race[chkchar->race], opr, rval, mob);
+            return mprog_seval((char*)npc_race[chkchar->race], opr, rval, mob);
           return mprog_seval((char *)race_table[chkchar->race].race_name, opr,
                              rval, mob);
         }

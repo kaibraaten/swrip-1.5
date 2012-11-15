@@ -170,7 +170,7 @@ const   struct  race_type       race_table      [MAX_RACE]      =
   };
 
 
-char *  const   npc_race        [MAX_NPC_RACE] =
+const char *  const   npc_race        [MAX_NPC_RACE] =
   {
     "Human", "Wookiee", "Twi'lek", "Rodian", "Hutt", "Mon Calamari", "Shistavanen",
     "Gamorrean", "Jawa", "Adarian", "Ewok", "Verpine", "Defel", "Trandoshan", "Chadra-Fan",
@@ -188,7 +188,7 @@ char *  const   npc_race        [MAX_NPC_RACE] =
   };
 
 
-char *  const   ability_name    [MAX_ABILITY] =
+const char *  const   ability_name    [MAX_ABILITY] =
   {
     "combat", "piloting", "engineering", "bounty hunting", "smuggling", "diplomacy",
     "leadership", "force", "commando"
@@ -500,7 +500,7 @@ const   struct  liq_type        liq_table       [LIQ_MAX]       =
     { "sweet tea",              "tan",          {  0, 2,  6 }   }
   };
 
-char *  const   attack_table    [13] =
+const char *  const   attack_table    [13] =
   {
     "hit",
     "slice",  "stab",  "slash", "whip", "claw",

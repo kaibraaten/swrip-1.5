@@ -79,7 +79,6 @@ int arena_pot;
 int bet_pot;
 int barena = 0;
 
-extern int parsebet (const int currentbet, char *s);
 extern int advatoi (char *s);
 
 void do_bet(CHAR_DATA *ch, char *argument)

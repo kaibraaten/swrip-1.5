@@ -235,19 +235,6 @@ void save_planet( PLANET_DATA *planet )
 /*
  * Read in actual clan data.
  */
-
-#if defined(KEY)
-#undef KEY
-#endif
-
-#define KEY( literal, field, value )            \
-  if ( !str_cmp( word, literal ) )              \
-    {                                           \
-      field  = value;                           \
-      fMatch = TRUE;                            \
-      break;                                    \
-    }
-
 void fread_clan( CLAN_DATA *clan, FILE *fp )
 {
   char buf[MAX_STRING_LENGTH];

@@ -7,7 +7,6 @@
 #ifdef __cplusplus
 extern "C"
 #endif
-void init_mm( void );
 
 int umin( int check, int ncheck )
 {

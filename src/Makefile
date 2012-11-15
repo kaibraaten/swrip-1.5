@@ -3,13 +3,13 @@ BINARY = swrip
 WFLAGS = -Wall -Werror -Wformat-security -Wpointer-arith -Wcast-align -Wno-unused-but-set-variable
 
 #Comment out the next line if your system doesn't have dlsym functionality.
-USE_DLSYM = -DSWR2_USE_DLSYM
+#USE_DLSYM = -DSWR2_USE_DLSYM
 
 #IMC2 - Comment out to dsable IMC2 support
-IMC = 1
+#IMC = 1
 
 #Change from 0 to 1 to enable telnet debug logging.
-DEBUG_TELNET = -DSWR2_DEBUG_TELNET=0
+DEBUG_TELNET = -DSWRIP_DEBUG_TELNET=0
 
 CCFLAGS = -g3 -MMD -Iswr_support $(WFLAGS) $(USE_DLSYM) $(DEBUG_TELNET)
 LDFLAGS = -lm -lcrypt -lz -Lswr_support -lswr_support -Wl,-rpath,./src/swr_support
@@ -63,4 +63,4 @@ $(ODIR)/%.o:	 %.c
 -include $(ODIR)/*.d
 
 clean:
-		-rm -f ../bin/$(BINARY) *~ $(ODIR)/*.o ../area/core.*
+		-rm -f ../bin/$(BINARY) *~ $(ODIR)/*.o $(ODIR)/*.d ../area/core.*

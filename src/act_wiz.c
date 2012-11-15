@@ -34,7 +34,7 @@
 
 #define RESTORE_INTERVAL 21600
 
-char * const save_flag[] =
+const char * const save_flag[] =
   { "death", "kill", "passwd", "drop", "put", "give", "auto", "zap",
     "auction", "get", "receive", "idle", "backup", "r13", "r14", "r15", "r16",
     "r17", "r18", "r19", "r20", "r21", "r22", "r23", "r24", "r25", "r26", "r27",

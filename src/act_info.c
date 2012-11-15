@@ -33,7 +33,7 @@
 
 ROOM_INDEX_DATA *generate_exit( ROOM_INDEX_DATA *in_room, EXIT_DATA **pexit );
 
-char *  const   where_name      [] =
+const char *  const   where_name      [] =
   {
     "<used as light>     ",
     "<worn on finger>    ",

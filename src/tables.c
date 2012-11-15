@@ -24,20 +24,8 @@
 #include <time.h>
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h>
 #include "mud.h"
-
-#if defined(KEY)
-#undef KEY
-#endif
-
-#define KEY( literal, field, value )            \
-  if ( !str_cmp( word, literal ) )              \
-    {                                           \
-      field  = value;                           \
-      fMatch = TRUE;                            \
-      break;                                    \
-    }
-
 
 /* global variables */
 int top_sn;
@@ -46,7 +34,7 @@ int top_herb;
 SKILLTYPE *             skill_table     [MAX_SKILL];
 SKILLTYPE *             herb_table      [MAX_HERB];
 
-char * const skill_tname[] = { "unknown", "Spell", "Skill", "Weapon", "Tongue", "Herb" };
+const char * const skill_tname[] = { "unknown", "Spell", "Skill", "Weapon", "Tongue", "Herb" };
 
 SPELL_FUN *spell_function( char *name )
 {

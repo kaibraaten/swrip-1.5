@@ -26,6 +26,7 @@
 #include <sys/cdefs.h>
 #include <sys/time.h>
 #include <math.h>
+#include "swr_support.h"
 
 /* #include <malloc_dbg.h> */
 
@@ -3272,38 +3273,38 @@ extern  const	struct	frc_app_type	frc_app		[26];
 
 extern	const	struct	race_type	race_table	[MAX_RACE];
 extern	const	struct	liq_type	liq_table	[LIQ_MAX];
-extern	char *	const			attack_table	[13];
-extern	char *  const	        	ability_name	[MAX_ABILITY];
+extern	const char *	const			attack_table	[13];
+extern	const char *  const	        	ability_name	[MAX_ABILITY];
 
-extern	char *	const	skill_tname	[];
+extern	const char *	const	skill_tname	[];
 extern	short	const	movement_loss	[SECT_MAX];
-extern	char *	const	dir_name	[];
-extern	char *	const	where_name	[];
+extern	const char *	const	dir_name	[];
+extern	const char *	const	where_name	[];
 extern	const	short	rev_dir		[];
 extern	const	int	trap_door	[];
-extern	char *	const	r_flags		[];
-extern	char *	const	w_flags		[];
-extern	char *	const	o_flags		[];
-extern	char *	const	a_flags		[];
-extern	char *	const	o_types		[];
-extern	char *	const	a_types		[];
-extern	char *	const	act_flags	[];
-extern  char *  const   planet_flags    [];
-extern  char *  const   weapon_table    [13];
-extern  char *  const   spice_table     [];
-extern	char *	const	plr_flags	[];
-extern	char *	const	pc_flags	[];
-extern	char *	const	trap_flags	[];
-extern	char *	const	ris_flags	[];
-extern	char *	const	trig_flags	[];
-extern	char *	const	part_flags	[];
-extern	char *	const	npc_race	[];
-extern	char *	const	defense_flags	[];
-extern	char *	const	attack_flags	[];
-extern	char *	const	area_flags	[];
+extern	const char *	const	r_flags		[];
+extern	const char *	const	w_flags		[];
+extern	const char *	const	o_flags		[];
+extern	const char *	const	a_flags		[];
+extern	const char *	const	o_types		[];
+extern	const char *	const	a_types		[];
+extern	const char *	const	act_flags	[];
+extern  const char *  const   planet_flags    [];
+extern  const char *  const   weapon_table    [13];
+extern  const char *  const   spice_table     [];
+extern	const char *	const	plr_flags	[];
+extern	const char *	const	pc_flags	[];
+extern	const char *	const	trap_flags	[];
+extern	const char *	const	ris_flags	[];
+extern	const char *	const	trig_flags	[];
+extern	const char *	const	part_flags	[];
+extern	const char *	const	npc_race	[];
+extern	const char *	const	defense_flags	[];
+extern	const char *	const	attack_flags	[];
+extern	const char *	const	area_flags	[];
 
 extern	int	const	lang_array      [];
-extern	char *	const	lang_names      [];
+extern	const char *	const	lang_names      [];
 
 /*
  * Global variables.
@@ -4212,7 +4213,6 @@ BD *	get_board( OBJ_DATA *obj );
 void	free_note( NOTE_DATA *pnote );
 
 /* build.c */
-char *	flag_string( int bitvector, char * const flagarray[] );
 int	get_mpflag( char *flag );
 int	get_dir( char *txt  );
 int     get_vip_flag( char *flag );
@@ -4321,7 +4321,8 @@ RD  *	place_reset( AREA_DATA *tarea, char letter,
 void	reset_area( AREA_DATA * pArea );
 
 /* db.c */
-void	show_file( CHAR_DATA *ch, char *filename );
+void    append_file( CHAR_DATA *ch, const char *file, const char *str );
+void	show_file( CHAR_DATA *ch, const char *filename );
 void	boot_db( bool fCopyover );
 void	area_update( void );
 void	add_char( CHAR_DATA *ch );
@@ -4527,11 +4528,11 @@ bool	room_is_private( CHAR_DATA *ch, ROOM_INDEX_DATA *pRoomIndex );
 bool	can_see( CHAR_DATA *ch, CHAR_DATA *victim );
 bool	can_see_obj( CHAR_DATA *ch, OBJ_DATA *obj );
 bool	can_drop_obj( CHAR_DATA *ch, OBJ_DATA *obj );
-char *	item_type_name( OBJ_DATA *obj );
-char *	affect_loc_name( int location );
-char *	affect_bit_name( int vector );
-char *	extra_bit_name( int extra_flags );
-char *	magic_bit_name( int magic_flags );
+const char *	item_type_name( OBJ_DATA *obj );
+const char *	affect_loc_name( int location );
+const char *	affect_bit_name( int vector );
+const char *	extra_bit_name( int extra_flags );
+const char *	magic_bit_name( int magic_flags );
 ch_ret	check_for_trap( CHAR_DATA *ch, OBJ_DATA *obj, int flag );
 ch_ret	check_room_for_traps( CHAR_DATA *ch, int flag );
 bool	is_trapped( OBJ_DATA *obj );
@@ -4661,7 +4662,7 @@ int max_level( CHAR_DATA *ch, int ability );
 bool    is_droid( CHAR_DATA *ch );
 
 /* newscore.c */
-char *  get_race( CHAR_DATA *ch );
+const char *get_race( CHAR_DATA *ch );
 
 /* badname functions */
 bool	check_bad_name( char *name );
