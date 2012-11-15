@@ -35,7 +35,6 @@ int     xp_compute( CHAR_DATA *ch , CHAR_DATA *victim );
 ROOM_INDEX_DATA *generate_exit( ROOM_INDEX_DATA *in_room, EXIT_DATA **pexit );
 int ris_save( CHAR_DATA *ch, int chance, int ris );
 CHAR_DATA *get_char_room_mp( CHAR_DATA *ch, char *argument );
-bool    autofly(SHIP_DATA *ship);
 bool    aff_paralysis( CHAR_DATA *ch, CHAR_DATA *victim );
 
 extern int      top_affect;

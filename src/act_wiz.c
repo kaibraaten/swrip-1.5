@@ -43,9 +43,7 @@ const char * const save_flag[] =
 /*
  * Local functions.
  */
-ROOM_INDEX_DATA * find_location( CHAR_DATA *ch, char *arg );
 void              save_banlist( void );
-void              close_area( AREA_DATA *pArea );
 int               get_color(char *argument); /* function proto */
 bool              check_for_immroom( CHAR_DATA *ch, ROOM_INDEX_DATA *location);
 
@@ -59,6 +57,8 @@ time_t new_boot_time_t;
 extern struct tm new_boot_struct;
 extern OBJ_INDEX_DATA *obj_index_hash[MAX_KEY_HASH];
 extern MOB_INDEX_DATA *mob_index_hash[MAX_KEY_HASH];
+extern ROOM_INDEX_DATA *room_index_hash[MAX_KEY_HASH];
+extern bool mud_down;
 
 bool check_for_immroom( CHAR_DATA *ch, ROOM_INDEX_DATA *location)
 {
@@ -2238,7 +2238,6 @@ void do_reboo( CHAR_DATA *ch, char *argument )
 void do_reboot( CHAR_DATA *ch, char *argument )
 {
   char buf[MAX_STRING_LENGTH];
-  extern bool mud_down;
   CHAR_DATA *vch;
   SHIP_DATA *ship;
 
@@ -2275,20 +2274,15 @@ void do_reboot( CHAR_DATA *ch, char *argument )
   return;
 }
 
-
-
 void do_shutdow( CHAR_DATA *ch, char *argument )
 {
   send_to_char( "If you want to SHUTDOWN, spell it out.\r\n", ch );
   return;
 }
 
-
-
 void do_shutdown( CHAR_DATA *ch, char *argument )
 {
   char buf[MAX_STRING_LENGTH];
-  extern bool mud_down;
   CHAR_DATA *vch;
   SHIP_DATA *ship;
 
@@ -4964,9 +4958,6 @@ void do_destro( CHAR_DATA *ch, char *argument )
  */
 void close_area( AREA_DATA *pArea )
 {
-  extern ROOM_INDEX_DATA *room_index_hash[MAX_KEY_HASH];
-  extern OBJ_INDEX_DATA   *obj_index_hash[MAX_KEY_HASH];
-  extern MOB_INDEX_DATA   *mob_index_hash[MAX_KEY_HASH];
   CHAR_DATA *ech;
   CHAR_DATA *ech_next;
   OBJ_DATA *eobj;
@@ -5304,8 +5295,6 @@ void do_destroy( CHAR_DATA *ch, char *argument )
     }
   return;
 }
-extern ROOM_INDEX_DATA *       room_index_hash         [MAX_KEY_HASH]; /* db.c */
-
 
 /* Super-AT command:
 

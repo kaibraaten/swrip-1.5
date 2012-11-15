@@ -27,14 +27,6 @@
 #include <time.h>
 #include "mud.h"
 
-/*double sqrt( double x );*/
-
-/*
- * External functions
- */
-
-void    show_list_to_char( OBJ_DATA *list, CHAR_DATA *ch,
-			   bool fShort, bool fShowNothing );
 /*
  * Local functions.
  */

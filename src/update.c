@@ -50,7 +50,6 @@ void    obj_act_update( void );
 void    char_check( void );
 void    drunk_randoms( CHAR_DATA *ch );
 void    halucinations( CHAR_DATA *ch );
-void    subtract_times( struct timeval *etime, struct timeval *stime );
 
 /*
  * Global Variables

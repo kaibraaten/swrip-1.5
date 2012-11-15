@@ -1083,7 +1083,6 @@ void read_from_buffer( DESCRIPTOR_DATA *d )
 bool flush_buffer( DESCRIPTOR_DATA *d, bool fPrompt )
 {
   char buf[MAX_INPUT_LENGTH];
-  extern bool mud_down;
   CHAR_DATA *ch;
 
   ch = d->original ? d->original : d->character;

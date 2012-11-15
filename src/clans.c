@@ -53,7 +53,6 @@ bool    load_planet_file( char *planetfile );
 void    write_planet_list( void );
 void    save_member_list( MEMBER_LIST *members_list );
 void    show_members( CHAR_DATA *ch, char *argument, char *format );
-void    remove_member( CHAR_DATA *ch );
 
 /*
  * Get pointer to clan structure from clan name.

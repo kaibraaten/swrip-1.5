@@ -51,6 +51,10 @@ int file_ver;
 void fwrite_comments( CHAR_DATA *ch, FILE *fp );
 void fread_comment( CHAR_DATA *ch, FILE *fp );
 
+extern FILE *fpArea;
+extern char strArea[MAX_INPUT_LENGTH];
+extern int falling;
+
 /*
  * Array of containers read for proper re-nesting of objects.
  */
@@ -771,8 +775,6 @@ bool load_char_obj( DESCRIPTOR_DATA *d, char *name, bool preload )
   bool found;
   struct stat fst;
   int i, x;
-  extern FILE *fpArea;
-  extern char strArea[MAX_INPUT_LENGTH];
   char buf[MAX_INPUT_LENGTH];
 
   CREATE( ch, CHAR_DATA, 1 );
@@ -2119,9 +2121,6 @@ void load_corpses( void )
 {
   DIR *dp;
   struct dirent *de;
-  extern FILE *fpArea;
-  extern char strArea[MAX_INPUT_LENGTH];
-  extern int falling;
 
   if ( !(dp = opendir(CORPSE_DIR)) )
     {
@@ -2185,9 +2184,6 @@ void load_storerooms( void )
 {
   DIR *dp;
   struct dirent *de;
-  extern FILE *fpArea;
-  extern char strArea[MAX_INPUT_LENGTH];
-  extern int falling;
   char buf[MAX_INPUT_LENGTH];
 
   if ( !(dp = opendir(STOREROOM_DIR)) )
@@ -2334,9 +2330,6 @@ void load_vendors( void )
   DIR *dp;
   CHAR_DATA *mob;
   struct dirent *de;
-  extern FILE *fpArea;
-  extern char strArea[MAX_INPUT_LENGTH];
-  extern int falling;
 
   if ( !(dp = opendir(VENDOR_DIR)) )
     {

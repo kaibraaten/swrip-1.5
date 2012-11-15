@@ -32,7 +32,9 @@
 typedef  struct gr_struct       GR_STRUCT;
 typedef  struct go_struct       GO_STRUCT;
 
-int get_otype( char *type );    /* fun prototype for fun in build.c */
+extern OBJ_INDEX_DATA *obj_index_hash[MAX_KEY_HASH];
+extern ROOM_INDEX_DATA *room_index_hash[MAX_KEY_HASH];
+extern MOB_INDEX_DATA *mob_index_hash[MAX_KEY_HASH];
 
 struct field_struct         /* field table - info re each field          */
 {
@@ -108,7 +110,6 @@ void rgrub_help (CHAR_DATA *ch)
 
 void do_rgrub (CHAR_DATA *ch, char *argument)
 {
-  extern    ROOM_INDEX_DATA *room_index_hash[MAX_KEY_HASH];
   char arg1[MAX_STRING_LENGTH];
   char arg2[MAX_STRING_LENGTH];
   char arg3[MAX_STRING_LENGTH];
@@ -1213,7 +1214,6 @@ void do_grub (CHAR_DATA *ch, char *argument)
 
 void do_showlayers( CHAR_DATA *ch, char *argument )
 {
-  extern    OBJ_INDEX_DATA  *obj_index_hash[MAX_KEY_HASH];
   OBJ_INDEX_DATA *pObj;
   char arg1[MAX_STRING_LENGTH];
 
@@ -1343,9 +1343,6 @@ void diag_ins (OBJ_INDEX_DATA *p, int siz, OBJ_INDEX_DATA **f, CHAR_DATA *ch)
 void do_diagnose( CHAR_DATA *ch, char *argument )
 {
 #define   DIAG_MAX_SIZE  1000
-  extern    OBJ_INDEX_DATA  *obj_index_hash[MAX_KEY_HASH];
-  extern    ROOM_INDEX_DATA *room_index_hash[MAX_KEY_HASH];
-  extern    MOB_INDEX_DATA  *mob_index_hash[MAX_KEY_HASH];
   OBJ_INDEX_DATA *pObj;
   OBJ_INDEX_DATA **freq;                        /* dynamic array of pointers */
   char arg1 [MAX_INPUT_LENGTH];

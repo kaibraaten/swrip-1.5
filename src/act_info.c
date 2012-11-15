@@ -68,7 +68,6 @@ const char *  const   where_name      [] =
 void    show_char_to_char_0( CHAR_DATA *victim, CHAR_DATA *ch );
 void    show_char_to_char_1( CHAR_DATA *victim, CHAR_DATA *ch );
 void    show_char_to_char( CHAR_DATA *list, CHAR_DATA *ch );
-void    show_char_to_char( CHAR_DATA *list, CHAR_DATA *ch );
 void    show_ships_to_char( SHIP_DATA *ship, CHAR_DATA *ch );
 bool    check_blind( CHAR_DATA *ch );
 void    show_condition( CHAR_DATA *ch, CHAR_DATA *victim );

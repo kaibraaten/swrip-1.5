@@ -167,7 +167,6 @@ bool    land_bus( SHIP_DATA *ship, int destination );
 void    launch_bus( SHIP_DATA *ship );
 void    echo_to_room_dnr( int ecolor, ROOM_INDEX_DATA *room, char *argument );
 ch_ret drive_ship( CHAR_DATA *ch, SHIP_DATA *ship, EXIT_DATA *exit, int fall );
-bool    autofly(SHIP_DATA *ship);
 bool is_facing( SHIP_DATA *ship , SHIP_DATA *target );
 void sound_to_ship( SHIP_DATA *ship , char *argument );
 void modtrainer( SHIP_DATA *ship, short class );

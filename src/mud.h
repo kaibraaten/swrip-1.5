@@ -3344,9 +3344,6 @@ extern		SHOP_DATA	  *	last_shop;
 extern		REPAIR_DATA	  *	first_repair;
 extern		REPAIR_DATA	  *	last_repair;
 
-extern 		SPACE_DATA	  *	first_spaceobject;
-extern 		SPACE_DATA	  *	last_spaceobject;
-
 extern		BAN_DATA	  *	first_ban;
 extern		BAN_DATA	  *	last_ban;
 extern		CHAR_DATA	  *	first_char;
@@ -3478,7 +3475,6 @@ DECLARE_DO_FUN( do_enlist );
 DECLARE_DO_FUN( do_resign );
 DECLARE_DO_FUN( do_pluogus ); 
 DECLARE_DO_FUN( do_findserin );
-DECLARE_DO_FUN( do_tractorbeam );
 DECLARE_DO_FUN( do_makearmor );
 DECLARE_DO_FUN( do_makejewelry );
 DECLARE_DO_FUN( do_makegrenade );
@@ -3510,7 +3506,6 @@ DECLARE_DO_FUN( do_jumpvector );
 DECLARE_DO_FUN( do_reload );
 DECLARE_DO_FUN( do_tractorbeam ); 
 DECLARE_DO_FUN( do_radar );
-DECLARE_DO_FUN( do_recall ); 
 DECLARE_DO_FUN( do_buyship );
 DECLARE_DO_FUN( do_buyhome );
 DECLARE_DO_FUN( do_renameship);
@@ -4197,7 +4192,6 @@ RID *	find_location( CHAR_DATA *ch, char *arg );
 void    echo_to_room( short AT_COLOR, ROOM_INDEX_DATA *room, char *argument );
 void	echo_to_all( short AT_COLOR, char *argument, short tar );
 void   	get_reboot_string( void );
-struct tm *update_time( struct tm *old_time );
 void	free_social( SOCIALTYPE *social );
 void	add_social( SOCIALTYPE *social );
 void	free_command( CMDTYPE *command );
@@ -4874,32 +4868,17 @@ void oprog_wear_trigger( CHAR_DATA *ch, OBJ_DATA *obj );
 bool oprog_use_trigger( CHAR_DATA *ch, OBJ_DATA *obj, 
                         CHAR_DATA *vict, OBJ_DATA *targ, void *vo );
 void oprog_remove_trigger( CHAR_DATA *ch, OBJ_DATA *obj );
-void oprog_sac_trigger( CHAR_DATA *ch, OBJ_DATA *obj );
-void oprog_damage_trigger( CHAR_DATA *ch, OBJ_DATA *obj );
-void oprog_repair_trigger( CHAR_DATA *ch, OBJ_DATA *obj );
-void oprog_drop_trigger( CHAR_DATA *ch, OBJ_DATA *obj );
-void oprog_zap_trigger( CHAR_DATA *ch, OBJ_DATA *obj );
-char *oprog_type_to_name( int type );
-
-/*
- * MUD_PROGS START HERE
- * (object stuff)
- */
-void oprog_greet_trigger( CHAR_DATA *ch );
-void oprog_speech_trigger( char *txt, CHAR_DATA *ch );
-void oprog_random_trigger( OBJ_DATA *obj );
-void oprog_random_trigger( OBJ_DATA *obj );
-void oprog_remove_trigger( CHAR_DATA *ch, OBJ_DATA *obj );
-void oprog_sac_trigger( CHAR_DATA *ch, OBJ_DATA *obj );
-void oprog_get_trigger( CHAR_DATA *ch, OBJ_DATA *obj );
-void oprog_damage_trigger( CHAR_DATA *ch, OBJ_DATA *obj );
-void oprog_repair_trigger( CHAR_DATA *ch, OBJ_DATA *obj );
-void oprog_drop_trigger( CHAR_DATA *ch, OBJ_DATA *obj );
 void oprog_examine_trigger( CHAR_DATA *ch, OBJ_DATA *obj );
+void oprog_sac_trigger( CHAR_DATA *ch, OBJ_DATA *obj );
+void oprog_damage_trigger( CHAR_DATA *ch, OBJ_DATA *obj );
+void oprog_repair_trigger( CHAR_DATA *ch, OBJ_DATA *obj );
+void oprog_drop_trigger( CHAR_DATA *ch, OBJ_DATA *obj );
 void oprog_zap_trigger( CHAR_DATA *ch, OBJ_DATA *obj );
+void oprog_greet_trigger( CHAR_DATA *ch );
+void oprog_get_trigger( CHAR_DATA *ch, OBJ_DATA *obj );
+char *oprog_type_to_name( int type );
 void oprog_pull_trigger( CHAR_DATA *ch, OBJ_DATA *obj );
 void oprog_push_trigger( CHAR_DATA *ch, OBJ_DATA *obj );
-
 
 /* mud prog defines */
 

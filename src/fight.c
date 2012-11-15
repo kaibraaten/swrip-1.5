@@ -42,7 +42,6 @@ int ris_save( CHAR_DATA *ch, int chance, int ris );
  * Local functions.
  */
 void    dam_message( CHAR_DATA *ch, CHAR_DATA *victim, int dam, int dt );
-void    death_cry( CHAR_DATA *ch );
 void    group_gain( CHAR_DATA *ch, CHAR_DATA *victim );
 int     xp_compute( CHAR_DATA *gch, CHAR_DATA *victim );
 int     align_compute( CHAR_DATA *gch, CHAR_DATA *victim );

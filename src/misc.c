@@ -60,7 +60,6 @@
 /* Local functions */
 
 void generate_quest( CHAR_DATA *ch, CHAR_DATA *questman );
-void quest_update( void );
 bool qchance( int num );
 
 bool qchance( int num )
