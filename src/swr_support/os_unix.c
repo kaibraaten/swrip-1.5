@@ -60,7 +60,7 @@ void os_cleanup( void )
   }
 }
 
-int set_nonblocking( SOCKET sock )
+int set_nonblocking( socket_t sock )
 {
   return fcntl( sock, F_SETFL, O_NONBLOCK );
 }

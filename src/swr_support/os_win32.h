@@ -39,6 +39,8 @@ typedef int ssize_t;
 #define strcasecmp stricmp
 #endif
 
+typedef SOCKET socket_t;
+
 typedef int socklen_t;
 #define GETERROR WSAGetLastError()
 #define EWOULDBLOCK WSAEWOULDBLOCK

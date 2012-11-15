@@ -37,7 +37,7 @@ __near struct Library *SocketBase = NULL;
 __near struct Library *UserGroupBase = NULL;
 __near struct UtilityBase *UtilityBase = NULL;
 
-#if defined(__MORPHOS__) && defined(SWR2_USE_DLSYM)
+#if defined(__MORPHOS__) && defined(SWRIP_USE_DLSYM)
 struct Library *DynLoadBase = NULL;
 #endif
 
@@ -136,7 +136,7 @@ void os_setup( void )
     exit( 1 );
   }
 
-#if defined(__MORPHOS__) && defined(SWR2_USE_DLSYM)
+#if defined(__MORPHOS__) && defined(SWRIP_USE_DLSYM)
   if( !( DynLoadBase = OpenLibrary( (CONST_STRPTR) "dynload.library", 51 ) ) )
   {
     fprintf( out_stream, "%s (%s:%d) - Failed to open dynload.library\n",
@@ -148,7 +148,7 @@ void os_setup( void )
 
 void os_cleanup( void )
 {
-#if defined(__MORPHOS__) && defined(SWR2_USE_DLSYM)
+#if defined(__MORPHOS__) && defined(SWRIP_USE_DLSYM)
   if( DynLoadBase )
   {
     CloseLibrary( DynLoadBase );
@@ -184,7 +184,7 @@ void os_cleanup( void )
   }
 }
 
-int set_nonblocking( SOCKET sock )
+int set_nonblocking( socket_t sock )
 {
   char optval = 1;
   return IoctlSocket( sock, FIONBIO, &optval );

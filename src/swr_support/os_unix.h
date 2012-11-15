@@ -45,7 +45,7 @@
 #include <unistd.h>
 /*#include <arpa/telnet.h>*/
 
-#ifdef SWR2_USE_DLSYM
+#ifdef SWRIP_USE_DLSYM
 #include <dlfcn.h>
 #endif
 
@@ -55,7 +55,7 @@ static const int INVALID_SOCKET = -1;
 static const int SOCKET_ERROR = -1;
 #define GETERROR errno
 #define closesocket close
-typedef int SOCKET;
+typedef int socket_t;
 typedef char sockbuf_t;
 
 #endif /* include guard */

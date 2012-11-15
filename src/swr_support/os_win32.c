@@ -132,7 +132,7 @@ int gettimeofday( struct timeval *tv, struct timezone *tz )
   return 0;
 }
 
-int set_nonblocking( SOCKET sock )
+int set_nonblocking( socket_t sock )
 {
   unsigned long optval = 1;
   return ioctlsocket( sock, FIONBIO, &optval );
