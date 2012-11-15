@@ -63,11 +63,15 @@ typedef unsigned char                   bool;
  * Memory allocation macros.
  */
 
+/*
+ * NOTE: Do NOT change from calloc to malloc. This will lead to undefined
+ * behaviour because a lot of the code assumes the memory is initialized.
+ */
 #define CREATE(result, type, number)                            \
 do                                                              \
   {                                                               \
  if (!((result) = (type *) calloc ((number), sizeof(type))))  \
-   { perror("malloc failure"); abort(); }                  \
+   { perror("calloc failure"); abort(); }                  \
   } while(0)
 
 #define RECREATE(result,type,number)                            \

@@ -1074,7 +1074,6 @@ void fread_char( CHAR_DATA *ch, FILE *fp, bool preload )
                 }
               else
                 {
-                  int sn;
                   char *sname = fread_word(fp);
 
                   if ( (sn=skill_lookup(sname)) < 0 )
@@ -1512,7 +1511,6 @@ void fread_char( CHAR_DATA *ch, FILE *fp, bool preload )
 
           if ( !str_cmp( word, "Spell" ) )
             {
-              int sn;
               int value;
 
               if ( preload )
@@ -1623,7 +1621,6 @@ void fread_char( CHAR_DATA *ch, FILE *fp, bool preload )
           KEY( "Toplevel",      ch->top_level,          fread_number( fp ) );
           if ( !str_cmp( word, "Tongue" ) )
             {
-              int sn;
               int value;
 
               if ( preload )
@@ -1678,7 +1675,6 @@ void fread_char( CHAR_DATA *ch, FILE *fp, bool preload )
         case 'W':
           if ( !str_cmp( word, "Weapon" ) )
             {
-              int sn;
               int value;
 
               if ( preload )

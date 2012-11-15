@@ -1280,12 +1280,17 @@ void reset_area( AREA_DATA *pArea )
   mob = NULL;
   obj = NULL;
   lastobj = NULL;
+
   if ( !pArea->first_reset )
     {
-      bug( "%s: reset_area: no resets", (int)pArea->filename );
+      /* Why raise a bug on this? An area having no resets is
+         perfectly valid in many cases. */
+      /*bug( "%s: reset_area: no resets", (int)pArea->filename );*/
       return;
     }
+
   level = 0;
+
   for ( pReset = pArea->first_reset; pReset; pReset = next_reset )
     {
       next_reset = pReset->next;

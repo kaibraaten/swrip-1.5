@@ -1095,23 +1095,22 @@ bool gr_parse_operand (CHAR_DATA *ch, char *arg, bool *or_sw, int *op_num)
 /*
  * Read the input file to select records matching the search criteria
  */
-void gr_read (
-              CHAR_DATA *ch, int op_num, bool or_sw, int dis_num)
+void gr_read( CHAR_DATA *ch, int op_num, bool or_sw, int dis_num)
 {
   FILE *fp;
   bool res;                                 /* result of a boolean exp   */
   bool title_sw = FALSE;                    /* only print title once     */
   int  tot_match = 0;                       /* total records matched     */
   GR_STRUCT r;                              /* input (physical record)   */
-  char sex[]   = "NMF";                     /* convert sex to text       */
-  char class[] = "MCTWVDRAPN";              /* convert class to text     */
-  char race[][3] =                          /* convert race to text      */
+  char sex_map[]   = "NMF";                     /* convert sex to text       */
+  char class_map[] = "MCTWVDRAPN";              /* convert class to text     */
+  char race_map[][3] =                          /* convert race to text      */
     {"Hu", "El", "Dw", "Ha", "Px", "Va", "Og", "HO", "HT", "HE", "Gi",
      "Dr", "SE", "Li", "Gn"};
-  char clan[][4] = {
+  char clan_map[][4] = {
     "   ", "Gui", "DS ", "MS ", "RB ", "AR ", "Bru", "Las","Nos", "Tre",
     "Ven", "Inc", "Baa", "Rol"};
-  char council[][4] =
+  char council_map[][4] =
     {"   ", "CoE", "MC ", "NC ", "Pro", "PK ", "QC ", "Neo", "Cod", "AC ",
      "Sym", "VC "};
 
@@ -1141,10 +1140,11 @@ void gr_read (
           if ( tot_match <= dis_num )         /* print record if applicable */
             ch_printf(ch,
                       "%-12s %2hd %c %2s %c %3s %3s %5hd %11ld %-15s %6lu %c\r\n",
-                      r.name, r.level, sex[(unsigned char) r.sex],
-                      race[(unsigned char) r.race], class[(unsigned char) r.class],
-                      clan[(unsigned char) r.clan],
-                      council[(unsigned char) r.council],
+                      r.name, r.level, sex_map[(unsigned char) r.sex],
+                      race_map[(unsigned char) r.race],
+		      class_map[(unsigned char) r.class],
+                      clan_map[(unsigned char) r.clan],
+                      council_map[(unsigned char) r.council],
                       r.room, r.gold, r.site, r.last, r.pkill);
         }
       fread( &r, sizeof(r), 1, fp);
@@ -1379,7 +1379,7 @@ void do_diagnose( CHAR_DATA *ch, char *argument )
     {
 #define DIAG_RF_MAX_SIZE 5000
       ROOM_INDEX_DATA *pRoom;
-      int match, lo, hi, hit_cou, cou, vnum[DIAG_RF_MAX_SIZE];
+      int match, lo, hi, hit_cou, vnum[DIAG_RF_MAX_SIZE];
 
       if (!*arg2)                                   /* empty arg gets help scrn */
         {
@@ -1612,7 +1612,7 @@ void do_diagnose( CHAR_DATA *ch, char *argument )
   if (!str_cmp(arg1, "mrc"))
     {
       MOB_INDEX_DATA *pm;
-      short cou, race, dis_num, vnum1, vnum2, dis_cou = 0;
+      short race_num, dis_num, vnum1, vnum2, dis_cou = 0;
 
       if ( !*arg2 || !*arg3 || !*arg4 || !*arg5
            ||  !isdigit(*arg2) || !isdigit(*arg3) || !isdigit(*arg4)
@@ -1623,7 +1623,7 @@ void do_diagnose( CHAR_DATA *ch, char *argument )
           return;
         }
       dis_num  = UMIN(atoi (arg2), DIAG_MAX_SIZE);
-      race     = atoi (arg3);
+      race_num     = atoi (arg3);
       vnum1    = atoi (arg4);
       vnum2    = atoi (arg5);
       /*
@@ -1638,7 +1638,7 @@ void do_diagnose( CHAR_DATA *ch, char *argument )
             for (pm = mob_index_hash[cou]; pm; pm = pm->next)
               {
                 if ( pm->vnum >= vnum1 && pm->vnum <= vnum2
-                     &&   pm->race==race && dis_cou++ < dis_num )
+                     &&   pm->race==race_num && dis_cou++ < dis_num )
                   pager_printf( ch, "%5d %s\r\n", pm->vnum, pm->player_name );
               }
         }

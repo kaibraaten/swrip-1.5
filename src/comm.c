@@ -112,12 +112,9 @@ bool    pager_output( DESCRIPTOR_DATA *d );
 
 void    mail_count( CHAR_DATA *ch );
 
-int port = 0;
-
 int main( int argc, char **argv )
 {
   struct timeval now_time;
-  /*int port;*/
   bool fCopyOver = FALSE;
 
   /*
@@ -174,7 +171,7 @@ int main( int argc, char **argv )
   /*
    * Get the port number.
    */
-  port = 4000;
+  sysdata.port = 4000;
   if ( argc > 1 )
     {
       if ( !is_number( argv[1] ) )
@@ -182,7 +179,7 @@ int main( int argc, char **argv )
           fprintf( stderr, "Usage: %s [port #]\n", argv[0] );
           exit( 1 );
         }
-      else if ( ( port = atoi( argv[1] ) ) <= 1024 )
+      else if ( ( sysdata.port = atoi( argv[1] ) ) <= 1024 )
         {
           fprintf( stderr, "Port number must be above 1024.\n" );
           exit( 1 );
@@ -223,10 +220,10 @@ int main( int argc, char **argv )
 
   if( !fCopyOver )
     {
-      control  = init_socket( port   );
+      control  = init_socket( sysdata.port   );
     }
 
-  sprintf( log_buf, "Rise in Power ready on port %d.", port );
+  sprintf( log_buf, "Rise in Power ready on port %d.", sysdata.port );
   log_string( log_buf );
   bootup = FALSE;
   game_loop( );
@@ -239,7 +236,6 @@ int main( int argc, char **argv )
   exit( 0 );
   return 0;
 }
-
 
 int init_socket( int port )
 {

@@ -1716,10 +1716,10 @@ void do_bashdoor( CHAR_DATA *ch, char *argument )
 
   if ( ( pexit = find_door( ch, arg, FALSE ) ) != NULL )
     {
-      ROOM_INDEX_DATA *to_room;
-      EXIT_DATA       *pexit_rev;
-      int              chance;
-      char          *keyword;
+      ROOM_INDEX_DATA *to_room = NULL;
+      EXIT_DATA       *pexit_rev = NULL;
+      int              bash_chance = 0;
+      char          *keyword = NULL;
 
       if ( !IS_SET( pexit->exit_info, EX_CLOSED ) )
         {
@@ -1734,13 +1734,13 @@ void do_bashdoor( CHAR_DATA *ch, char *argument )
       else
         keyword = pexit->keyword;
       if ( !IS_NPC(ch) )
-        chance = ch->pcdata->learned[gsn_bashdoor] / 2;
+        bash_chance = ch->pcdata->learned[gsn_bashdoor] / 2;
       else
-        chance = 90;
+        bash_chance = 90;
 
       if ( !IS_SET( pexit->exit_info, EX_BASHPROOF )
            &&   ch->move >= 15
-           &&   number_percent( ) < ( chance + 4 * ( get_curr_str( ch ) - 19 ) ) )
+           &&   number_percent( ) < ( bash_chance + 4 * ( get_curr_str( ch ) - 19 ) ) )
         {
           REMOVE_BIT( pexit->exit_info, EX_CLOSED );
           if ( IS_SET( pexit->exit_info, EX_LOCKED ) )

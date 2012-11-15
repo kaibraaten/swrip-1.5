@@ -2761,6 +2761,7 @@ struct	system_data
     char       *guild_advisor;		/* guild overseer and advisor. */ 
     int		save_flags;		/* Toggles for saving conditions */
     short	save_frequency;		/* How old to autosave someone */
+  short port;
 };
 
 

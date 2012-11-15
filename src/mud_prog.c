@@ -344,7 +344,6 @@ int mprog_do_ifcheck( const char *ifcheck, CHAR_DATA *mob, CHAR_DATA *actor,
   if ( !str_cmp(chck, "mobinroom") )
     {
       int vnum = atoi(cvar);
-      int lhsvl;
       CHAR_DATA *oMob;
 
       if ( vnum < 1 || vnum > 32767 )

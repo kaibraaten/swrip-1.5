@@ -769,12 +769,12 @@ void move_ships( )
           for( spaceobj = first_spaceobject; spaceobj; spaceobj = spaceobj->next )
             if( space_in_range_h( ship, spaceobj ) )
               {
-                int damage;
+                int dmg;
                 echo_to_room( AT_YELLOW, get_room_index(ship->pilotseat), "Hyperjump complete.");
                 echo_to_ship( AT_YELLOW, ship, "The ship slams to a halt as it comes out of hyperspace.");
                 sprintf( buf ,"%s enters the starsystem at %.0f %.0f %.0f" , ship->name, ship->vx, ship->vy, ship->vz );
-                damage = 15* number_range( 1, 4 );
-                ship->hull -= damage;
+                dmg = 15* number_range( 1, 4 );
+                ship->hull -= dmg;
                 echo_to_ship( AT_YELLOW, ship, "The hull cracks from the pressure.");
                 ship->vx = ship->cx;
                 ship->vy = ship->cy;
@@ -952,7 +952,7 @@ void recharge_ships( )
   SHIP_DATA *ship;
   char buf[MAX_STRING_LENGTH];
   bool closeem = FALSE;
-  int distance, origchance = 100;
+  int distance, origthe_chance = 100;
   baycount++;
 
   if ( baycount >= 60 )
@@ -1058,7 +1058,7 @@ void recharge_ships( )
             {
               if (ship->target0 && ship->statet0 != LASER_DAMAGED )
                 {
-                  int chance = 75;
+                  int the_chance = 75;
                   SHIP_DATA * target = ship->target0;
                   int shots, guns;
                   int whichguns = 0;
@@ -1091,16 +1091,16 @@ void recharge_ships( )
                                 + abs(target->vy - ship->vy)
                                 + abs(target->vz - ship->vz);
                               distance /= 3;
-                              chance += target->class - ship->class;
-                              chance += ship->currspeed - target->currspeed;
-                              chance += ship->manuever - target->manuever;
-                              chance -= distance/(10*(target->class+1));
-                              chance -= origchance;
-                              chance /= 2;
-                              chance += origchance;
-                              chance = URANGE( 1 , chance , 99 );
+                              the_chance += target->class - ship->class;
+                              the_chance += ship->currspeed - target->currspeed;
+                              the_chance += ship->manuever - target->manuever;
+                              the_chance -= distance/(10*(target->class+1));
+                              the_chance -= origthe_chance;
+                              the_chance /= 2;
+                              the_chance += origthe_chance;
+                              the_chance = URANGE( 1 , the_chance , 99 );
 
-                              if ( number_percent( ) > chance )
+                              if ( number_percent( ) > the_chance )
                                 {
                                   sprintf( buf , "%s fires at you but misses." , ship->name);
                                   echo_to_cockpit( AT_ORANGE , target , buf );
@@ -1449,7 +1449,7 @@ void update_space( )
               check_hostile( ship );
               if (ship->target0 )
                 {
-                  int chance = 50;
+                  int the_chance = 50;
                   int projectiles = -1;
 
                   if ( !ship->target0->target0 && autofly(ship->target0))
@@ -1488,14 +1488,14 @@ void update_space( )
                     {
                       if ( ship->class > 1 || is_facing( ship , target ) )
                         {
-                          chance -= target->manuever/5;
-                          chance -= target->currspeed/20;
-                          chance += target->class*target->class*25;
-                          chance -= ( abs(target->vx - ship->vx)/100 );
-                          chance -= ( abs(target->vy - ship->vy)/100 );
-                          chance -= ( abs(target->vz - ship->vz)/100 );
-                          chance += ( 30 );
-                          chance = URANGE( 10 , chance , 90 );
+                          the_chance -= target->manuever/5;
+                          the_chance -= target->currspeed/20;
+                          the_chance += target->class*target->class*25;
+                          the_chance -= ( abs(target->vx - ship->vx)/100 );
+                          the_chance -= ( abs(target->vy - ship->vy)/100 );
+                          the_chance -= ( abs(target->vz - ship->vz)/100 );
+                          the_chance += ( 30 );
+                          the_chance = URANGE( 10 , the_chance , 90 );
 
                           if( ( target->class == SHIP_PLATFORM || ( target->class == CAPITAL_SHIP && target->currspeed < 50 )) && ship->rockets > 0 )
                             projectiles = HEAVY_ROCKET;
@@ -1510,7 +1510,7 @@ void update_space( )
                           else
                             projectiles = -1;
 
-                          if ( number_percent( ) > chance || projectiles == -1 )
+                          if ( number_percent( ) > the_chance || projectiles == -1 )
                             {
                             }
                           else
@@ -5512,7 +5512,7 @@ bool extract_ship( SHIP_DATA *ship )
 void damage_ship_ch( SHIP_DATA *ship , int min , int max , CHAR_DATA *ch )
 {
   short ionFactor = 1;
-  int damage , shield_dmg;
+  int dmg , shield_dmg;
   long xp;
   bool ions = FALSE;
   char  logbuf[MAX_STRING_LENGTH];
@@ -5521,10 +5521,10 @@ void damage_ship_ch( SHIP_DATA *ship , int min , int max , CHAR_DATA *ch )
   if ( min < 0 && max < 0 )
     {
       ions = TRUE;
-      damage = number_range( max*(-1), min*(-1) );
+      dmg = number_range( max*(-1), min*(-1) );
     }
   else
-    damage = number_range( min , max );
+    dmg = number_range( min , max );
 
   if ( ions == TRUE )
     ionFactor = 2;
@@ -5535,14 +5535,14 @@ void damage_ship_ch( SHIP_DATA *ship , int min , int max , CHAR_DATA *ch )
 
   if ( ship->shield > 0 )
     {
-      shield_dmg = UMIN( ship->shield , damage );
-      damage -= shield_dmg;
+      shield_dmg = UMIN( ship->shield , dmg );
+      dmg -= shield_dmg;
       ship->shield -= shield_dmg;
       if ( ship->shield == 0 )
         echo_to_cockpit( AT_BLOOD , ship , "Shields down..." );
     }
 
-  if ( damage > 0 )
+  if ( dmg > 0 )
     {
       if ( number_range(1, 100) <= 5*ionFactor && ship->shipstate != SHIP_DISABLED )
         {
@@ -5578,7 +5578,7 @@ void damage_ship_ch( SHIP_DATA *ship , int min , int max , CHAR_DATA *ch )
         }
       if ( ions == FALSE )
         {
-          ship->hull -= damage*5;
+          ship->hull -= dmg * 5;
         }
     }
 
@@ -5604,7 +5604,7 @@ void damage_ship_ch( SHIP_DATA *ship , int min , int max , CHAR_DATA *ch )
 
 void damage_ship( SHIP_DATA *ship , SHIP_DATA *assaulter, int min , int max )
 {
-  int damage , shield_dmg;
+  int dmg , shield_dmg;
   char buf[MAX_STRING_LENGTH];
   char logbuf[MAX_STRING_LENGTH];
   short ionFactor = 1;
@@ -5613,18 +5613,18 @@ void damage_ship( SHIP_DATA *ship , SHIP_DATA *assaulter, int min , int max )
   if ( min < 0 && max < 0 )
     {
       ions = TRUE;
-      damage = number_range( max*(-1), min*(-1) );
+      dmg = number_range( max*(-1), min*(-1) );
     }
   else
-    damage = number_range( min , max );
+    dmg = number_range( min , max );
 
   if ( ions == TRUE )
     ionFactor = 2;
 
   if ( ship->shield > 0 )
     {
-      shield_dmg = UMIN( ship->shield , damage );
-      damage -= shield_dmg;
+      shield_dmg = UMIN( ship->shield , dmg );
+      dmg -= shield_dmg;
       ship->shield -= shield_dmg;
       if ( ship->shield == 0 )
         echo_to_cockpit( AT_BLOOD , ship , "Shields down..." );
@@ -5632,14 +5632,14 @@ void damage_ship( SHIP_DATA *ship , SHIP_DATA *assaulter, int min , int max )
 
   if ( ship->shield > 0 )
     {
-      shield_dmg = UMIN( ship->shield , damage );
-      damage -= shield_dmg;
+      shield_dmg = UMIN( ship->shield , dmg );
+      dmg -= shield_dmg;
       ship->shield -= shield_dmg;
       if ( ship->shield == 0 )
         echo_to_cockpit( AT_BLOOD , ship , "Shields down..." );
     }
 
-  if ( damage > 0 )
+  if ( dmg > 0 )
     {
       if ( number_range(1, 100) <= 5*ionFactor && ship->shipstate != SHIP_DISABLED )
         {
@@ -5675,11 +5675,11 @@ void damage_ship( SHIP_DATA *ship , SHIP_DATA *assaulter, int min , int max )
         }
       if ( ions == FALSE )
         {
-          ship->hull -= damage*5;
+          ship->hull -= dmg * 5;
         }
     }
 
-  ship->hull -= damage*5;
+  ship->hull -= dmg * 5;
 
   if ( ship->hull <= 0 )
     {
@@ -5715,7 +5715,7 @@ void destroy_ship( SHIP_DATA *ship , CHAR_DATA *ch )
   if ( ship->class == FIGHTER_SHIP )
 
     echo_to_ship( AT_WHITE + AT_BLINK , ship , "A blinding flahs of light burns your eyes...");
-  echo_to_ship( AT_WHITE , ship , "But before you have a chance to scream...\r\nYou are ripped apart as your spacecraft explodes...");
+  echo_to_ship( AT_WHITE , ship , "But before you have a the_chance to scream...\r\nYou are ripped apart as your spacecraft explodes...");
 
 #ifdef NODEATH
   resetship(ship);
@@ -6010,7 +6010,7 @@ void do_launch( CHAR_DATA *ch, char *argument )
   char arg2[MAX_INPUT_LENGTH];
   SPACE_DATA *destin;
 
-  int chance, class;
+  int the_chance, class;
   long price = 0;
   SHIP_DATA *ship;
   char buf[MAX_STRING_LENGTH];
@@ -6092,15 +6092,15 @@ void do_launch( CHAR_DATA *ch, char *argument )
     }
 
   if ( ship->class <= FIGHTER_SHIP )
-    chance = IS_NPC(ch) ? ch->top_level
+    the_chance = IS_NPC(ch) ? ch->top_level
       : (int)  (ch->pcdata->learned[gsn_starfighters]) ;
   if ( ship->class == MIDSIZE_SHIP )
-    chance = IS_NPC(ch) ? ch->top_level
+    the_chance = IS_NPC(ch) ? ch->top_level
       : (int)  (ch->pcdata->learned[gsn_midships]) ;
   if ( ship->class == CAPITAL_SHIP )
-    chance = IS_NPC(ch) ? ch->top_level
+    the_chance = IS_NPC(ch) ? ch->top_level
       : (int) (ch->pcdata->learned[gsn_capitalships]);
-  if ( number_percent( ) < chance )
+  if ( number_percent( ) < the_chance )
     {
 
       if( 0 )
@@ -6344,7 +6344,7 @@ void launchship( SHIP_DATA *ship )
 void do_land( CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  int chance;
+  int the_chance;
   SHIP_DATA *ship;
   SHIP_DATA *target;
   int vx, vy ,vz;
@@ -6535,12 +6535,12 @@ void do_land( CHAR_DATA *ch, char *argument )
     }
 
   if ( ship->class == FIGHTER_SHIP )
-    chance = IS_NPC(ch) ? ch->top_level
+    the_chance = IS_NPC(ch) ? ch->top_level
       : (int)  (ch->pcdata->learned[gsn_starfighters]) ;
   if ( ship->class == MIDSIZE_SHIP )
-    chance = IS_NPC(ch) ? ch->top_level
+    the_chance = IS_NPC(ch) ? ch->top_level
       : (int)  (ch->pcdata->learned[gsn_midships]) ;
-  if ( number_percent( ) < chance )
+  if ( number_percent( ) < the_chance )
     {
       set_char_color( AT_GREEN, ch );
       send_to_char( "Landing sequence initiated.\r\n", ch);
@@ -6709,7 +6709,7 @@ void landship( SHIP_DATA *ship, char *arg )
 
 void do_accelerate( CHAR_DATA *ch, char *argument )
 {
-  int chance;
+  int the_chance;
   int change;
   SHIP_DATA *ship;
   char buf[MAX_STRING_LENGTH];
@@ -6781,17 +6781,17 @@ void do_accelerate( CHAR_DATA *ch, char *argument )
     }
 
   if ( ship->class == FIGHTER_SHIP )
-    chance = IS_NPC(ch) ? ch->top_level
+    the_chance = IS_NPC(ch) ? ch->top_level
       : (int)  (ch->pcdata->learned[gsn_starfighters]) ;
   if ( ship->class == MIDSIZE_SHIP )
-    chance = IS_NPC(ch) ? ch->top_level
+    the_chance = IS_NPC(ch) ? ch->top_level
       : (int)  (ch->pcdata->learned[gsn_midships]) ;
   /* changed mobs so they can not fly capital ships. Forcers could possess mobs
      and fly them - Darrik Vequir */
   if ( ship->class == CAPITAL_SHIP )
-    chance = IS_NPC(ch) ? 0
+    the_chance = IS_NPC(ch) ? 0
       : (int) (ch->pcdata->learned[gsn_capitalships]);
-  if ( number_percent( ) >= chance )
+  if ( number_percent( ) >= the_chance )
     {
       send_to_char("&RYou fail to work the controls properly.\r\n",ch);
       if ( ship->class == FIGHTER_SHIP )
@@ -6845,7 +6845,7 @@ void do_trajectory_actual( CHAR_DATA *ch, char *argument )
   char  buf[MAX_STRING_LENGTH];
   char  arg2[MAX_INPUT_LENGTH];
   char  arg3[MAX_INPUT_LENGTH];
-  int chance;
+  int the_chance;
   float vx,vy,vz;
   SHIP_DATA *ship;
 
@@ -6907,18 +6907,18 @@ void do_trajectory_actual( CHAR_DATA *ch, char *argument )
     }
 
   if ( ship->class == FIGHTER_SHIP )
-    chance = IS_NPC(ch) ? ch->top_level
+    the_chance = IS_NPC(ch) ? ch->top_level
       : (int)  (ch->pcdata->learned[gsn_starfighters]) ;
   if ( ship->class == MIDSIZE_SHIP )
-    chance = IS_NPC(ch) ? ch->top_level
+    the_chance = IS_NPC(ch) ? ch->top_level
       : (int)  (ch->pcdata->learned[gsn_midships]) ;
 
   /* changed mobs so they can not fly capital ships. Forcers could possess mobs
      and fly them - Darrik Vequir */
   if ( ship->class == CAPITAL_SHIP )
-    chance = IS_NPC(ch) ? 0
+    the_chance = IS_NPC(ch) ? 0
       : (int) (ch->pcdata->learned[gsn_capitalships]);
-  if ( number_percent( ) > chance )
+  if ( number_percent( ) > the_chance )
     {
       send_to_char("&RYou fail to work the controls properly.\r\n",ch);
       if ( ship->class == FIGHTER_SHIP )
@@ -6979,7 +6979,7 @@ void do_trajectory( CHAR_DATA *ch, char *argument )
   char  buf[MAX_STRING_LENGTH];
   char  arg2[MAX_INPUT_LENGTH];
   char  arg3[MAX_INPUT_LENGTH];
-  int chance;
+  int the_chance;
   float vx,vy,vz;
   SHIP_DATA *ship;
 
@@ -7046,18 +7046,18 @@ void do_trajectory( CHAR_DATA *ch, char *argument )
     }
 
   if ( ship->class == FIGHTER_SHIP )
-    chance = IS_NPC(ch) ? ch->top_level
+    the_chance = IS_NPC(ch) ? ch->top_level
       : (int)  (ch->pcdata->learned[gsn_starfighters]) ;
   if ( ship->class == MIDSIZE_SHIP )
-    chance = IS_NPC(ch) ? ch->top_level
+    the_chance = IS_NPC(ch) ? ch->top_level
       : (int)  (ch->pcdata->learned[gsn_midships]) ;
 
   /* changed mobs so they can not fly capital ships. Forcers could possess mobs
      and fly them - Darrik Vequir */
   if ( ship->class == CAPITAL_SHIP )
-    chance = IS_NPC(ch) ? 0
+    the_chance = IS_NPC(ch) ? 0
       : (int) (ch->pcdata->learned[gsn_capitalships]);
-  if ( number_percent( ) > chance )
+  if ( number_percent( ) > the_chance )
     {
       send_to_char("&RYou fail to work the controls properly.\r\n",ch);
       if ( ship->class == FIGHTER_SHIP )
@@ -7491,7 +7491,7 @@ void do_info(CHAR_DATA *ch, char *argument )
 
 void do_autorecharge(CHAR_DATA *ch, char *argument )
 {
-  int chance;
+  int the_chance;
   SHIP_DATA *ship;
   int recharge;
 
@@ -7514,9 +7514,9 @@ void do_autorecharge(CHAR_DATA *ch, char *argument )
       return;
     }
 
-  chance = IS_NPC(ch) ? ch->top_level
+  the_chance = IS_NPC(ch) ? ch->top_level
     : (int)  (ch->pcdata->learned[gsn_shipsystems]) ;
-  if ( number_percent( ) > chance )
+  if ( number_percent( ) > the_chance )
     {
       send_to_char("&RYou fail to work the controls properly.\r\n",ch);
       learn_from_failure( ch, gsn_shipsystems );
@@ -7794,7 +7794,7 @@ void do_closehatch(CHAR_DATA *ch, char *argument )
 
 void do_status(CHAR_DATA *ch, char *argument )
 {
-  int chance;
+  int the_chance;
   SHIP_DATA *ship;
   SHIP_DATA *target;
 
@@ -7823,9 +7823,9 @@ void do_status(CHAR_DATA *ch, char *argument )
       return;
     }
 
-  chance = IS_NPC(ch) ? ch->top_level
+  the_chance = IS_NPC(ch) ? ch->top_level
     : (int)  (ch->pcdata->learned[gsn_shipsystems]) ;
-  if ( number_percent( ) > chance )
+  if ( number_percent( ) > the_chance )
     {
       send_to_char("&RYou cant figure out what the readout means.\r\n",ch);
       learn_from_failure( ch, gsn_shipsystems );
@@ -7898,7 +7898,7 @@ void do_status(CHAR_DATA *ch, char *argument )
 
 void do_hyperspace(CHAR_DATA *ch, char *argument )
 {
-  int chance;
+  int the_chance;
   float tx, ty, tz;
   SHIP_DATA *ship;
   SHIP_DATA *dship;
@@ -7991,8 +7991,6 @@ void do_hyperspace(CHAR_DATA *ch, char *argument )
         }
       else
         {
-          float tx, ty, tz;
-
           for( spaceobject = first_spaceobject; spaceobject; spaceobject = spaceobject->next )
             if( space_in_range( ship, spaceobject ) )
               {
@@ -8097,18 +8095,18 @@ void do_hyperspace(CHAR_DATA *ch, char *argument )
     }
 
   if ( ship->class == FIGHTER_SHIP )
-    chance = IS_NPC(ch) ? ch->top_level
+    the_chance = IS_NPC(ch) ? ch->top_level
       : (int)  (ch->pcdata->learned[gsn_starfighters]) ;
   if ( ship->class == MIDSIZE_SHIP )
-    chance = IS_NPC(ch) ? ch->top_level
+    the_chance = IS_NPC(ch) ? ch->top_level
       : (int)  (ch->pcdata->learned[gsn_midships]) ;
 
   /* changed mobs so they can not fly capital ships. Forcers could possess mobs
      and fly them - Darrik Vequir */
   if ( ship->class == CAPITAL_SHIP )
-    chance = IS_NPC(ch) ? 0
+    the_chance = IS_NPC(ch) ? 0
       : (int) (ch->pcdata->learned[gsn_capitalships]);
-  if ( number_percent( ) > chance )
+  if ( number_percent( ) > the_chance )
     {
       send_to_char("&RYou can't figure out which lever to use.\r\n",ch);
       if ( ship->class == FIGHTER_SHIP )
@@ -8168,7 +8166,7 @@ void do_hyperspace(CHAR_DATA *ch, char *argument )
 void do_target(CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  int chance;
+  int the_chance;
   SHIP_DATA *ship;
   SHIP_DATA *target, *dship;
   char buf[MAX_STRING_LENGTH];
@@ -8281,9 +8279,9 @@ void do_target(CHAR_DATA *ch, char *argument )
             }
         }
 
-      chance = IS_NPC(ch) ? ch->top_level
+      the_chance = IS_NPC(ch) ? ch->top_level
         : (int)  (ch->pcdata->learned[gsn_weaponsystems]) ;
-      if ( number_percent( ) < chance )
+      if ( number_percent( ) < the_chance )
         {
           send_to_char( "&GTracking target.\r\n", ch);
           act( AT_PLAIN, "$n makes some adjustments on the targeting computer.", ch,
@@ -8385,7 +8383,7 @@ void do_target(CHAR_DATA *ch, char *argument )
 
 void do_fire(CHAR_DATA *ch, char *argument )
 {
-  int chance, origchance, distance;
+  int the_chance, origthe_chance, distance;
   SHIP_DATA *ship;
   SHIP_DATA *target;
   char buf[MAX_STRING_LENGTH];
@@ -8427,13 +8425,13 @@ void do_fire(CHAR_DATA *ch, char *argument )
     }
 
 
-  chance = IS_NPC(ch) ? ch->top_level
+  the_chance = IS_NPC(ch) ? ch->top_level
     : (int) ( ch->perm_dex*2 + ch->pcdata->learned[gsn_spacecombat]/3
               + ch->pcdata->learned[gsn_spacecombat2]/3 + ch->pcdata->learned[gsn_spacecombat3]/3 );
-  origchance = chance;
+  origthe_chance = the_chance;
 
   if ( ship->class > SHIP_PLATFORM && !IS_NPC(ch))
-    ((ch->pcdata->learned[gsn_speeders] == 100) ? (chance -= 100 - ch->pcdata->learned[gsn_speedercombat]) : (chance = 0));
+    ((ch->pcdata->learned[gsn_speeders] == 100) ? (the_chance -= 100 - ch->pcdata->learned[gsn_speedercombat]) : (the_chance = 0));
 
   if ( ch->in_room->vnum == ship->gunseat && !str_prefix( argument , "lasers") )
     {
@@ -8487,18 +8485,18 @@ void do_fire(CHAR_DATA *ch, char *argument )
         + abs(target->vy - ship->vy)
         + abs(target->vz - ship->vz);
       distance /= 3;
-      chance += target->class - ship->class;
-      chance += ship->currspeed - target->currspeed;
-      chance += ship->manuever - target->manuever;
-      chance -= distance/(10*(target->class+1));
-      chance -= origchance;
-      chance /= 2;
-      chance += origchance;
-      chance = URANGE( 1 , chance , 99 );
+      the_chance += target->class - ship->class;
+      the_chance += ship->currspeed - target->currspeed;
+      the_chance += ship->manuever - target->manuever;
+      the_chance -= distance/(10*(target->class+1));
+      the_chance -= origthe_chance;
+      the_chance /= 2;
+      the_chance += origthe_chance;
+      the_chance = URANGE( 1 , the_chance , 99 );
 
       act( AT_PLAIN, "$n presses the fire button.", ch,
            NULL, argument , TO_ROOM );
-      if ( number_percent( ) > chance )
+      if ( number_percent( ) > the_chance )
         {
           sprintf( buf , "Lasers fire from %s at you but miss." , ship->name);
           echo_to_cockpit( AT_ORANGE , target , buf );
@@ -8603,18 +8601,18 @@ void do_fire(CHAR_DATA *ch, char *argument )
         + abs(target->vy - ship->vy)
         + abs(target->vz - ship->vz);
       distance /= 3;
-      chance += target->class - ship->class;
-      chance += ship->currspeed - target->currspeed;
-      chance += ship->manuever - target->manuever;
-      chance -= distance/(10*(target->class+1));
-      chance -= origchance;
-      chance /= 2;
-      chance += origchance;
-      chance = URANGE( 1 , chance , 99 );
+      the_chance += target->class - ship->class;
+      the_chance += ship->currspeed - target->currspeed;
+      the_chance += ship->manuever - target->manuever;
+      the_chance -= distance/(10*(target->class+1));
+      the_chance -= origthe_chance;
+      the_chance /= 2;
+      the_chance += origthe_chance;
+      the_chance = URANGE( 1 , the_chance , 99 );
 
       act( AT_PLAIN, "$n presses the fire button.", ch,
            NULL, argument , TO_ROOM );
-      if ( number_percent( ) > chance )
+      if ( number_percent( ) > the_chance )
         {
           sprintf( buf , "Ion cannons fire from %s at you, but the blue plasma narrowly misses." , ship->name);
           echo_to_cockpit( AT_ORANGE , target , buf );
@@ -8717,21 +8715,21 @@ void do_fire(CHAR_DATA *ch, char *argument )
         + abs(target->vy - ship->vy)
         + abs(target->vz - ship->vz);
       distance /= 3;
-      chance += target->class - ship->class;
-      chance += ship->currspeed - target->currspeed;
-      chance += ship->manuever - target->manuever;
-      chance -= distance/(10*(target->class+1));
-      chance -= origchance;
-      chance /= 2;
-      chance += origchance;
+      the_chance += target->class - ship->class;
+      the_chance += ship->currspeed - target->currspeed;
+      the_chance += ship->manuever - target->manuever;
+      the_chance -= distance/(10*(target->class+1));
+      the_chance -= origthe_chance;
+      the_chance /= 2;
+      the_chance += origthe_chance;
 
-      chance += 30;
+      the_chance += 30;
 
-      chance = URANGE( 20 , chance , 99 );
+      the_chance = URANGE( 20 , the_chance , 99 );
 
       act( AT_PLAIN, "$n presses the fire button.", ch,
            NULL, argument , TO_ROOM );
-      if ( number_percent( ) > chance )
+      if ( number_percent( ) > the_chance )
         {
           send_to_char( "&RYou fail to lock onto your target!", ch );
           ship->missilestate = MISSILE_RELOAD_2;
@@ -8818,21 +8816,21 @@ void do_fire(CHAR_DATA *ch, char *argument )
         + abs(target->vy - ship->vy)
         + abs(target->vz - ship->vz);
       distance /= 3;
-      chance += target->class - ship->class;
-      chance += ship->currspeed - target->currspeed;
-      chance += ship->manuever - target->manuever;
-      chance -= distance/(10*(target->class+1));
-      chance -= origchance;
-      chance /= 2;
-      chance += origchance;
+      the_chance += target->class - ship->class;
+      the_chance += ship->currspeed - target->currspeed;
+      the_chance += ship->manuever - target->manuever;
+      the_chance -= distance/(10*(target->class+1));
+      the_chance -= origthe_chance;
+      the_chance /= 2;
+      the_chance += origthe_chance;
 
-      chance += 30;
+      the_chance += 30;
 
-      chance = URANGE( 20 , chance , 99 );
+      the_chance = URANGE( 20 , the_chance , 99 );
 
       act( AT_PLAIN, "$n presses the fire button.", ch,
            NULL, argument , TO_ROOM );
-      if ( number_percent( ) > chance )
+      if ( number_percent( ) > the_chance )
         {
           send_to_char( "&RYou fail to lock onto your target!", ch );
           ship->missilestate = MISSILE_RELOAD_2;
@@ -8921,21 +8919,21 @@ void do_fire(CHAR_DATA *ch, char *argument )
         + abs(target->vy - ship->vy)
         + abs(target->vz - ship->vz);
       distance /= 3;
-      chance += target->class - ship->class;
-      chance += ship->currspeed - target->currspeed;
-      chance += ship->manuever - target->manuever;
-      chance -= distance/(10*(target->class+1));
-      chance -= origchance;
-      chance /= 2;
-      chance += origchance;
+      the_chance += target->class - ship->class;
+      the_chance += ship->currspeed - target->currspeed;
+      the_chance += ship->manuever - target->manuever;
+      the_chance -= distance/(10*(target->class+1));
+      the_chance -= origthe_chance;
+      the_chance /= 2;
+      the_chance += origthe_chance;
 
-      chance += 30;
+      the_chance += 30;
 
-      chance = URANGE( 20 , chance , 99 );
+      the_chance = URANGE( 20 , the_chance , 99 );
 
       act( AT_PLAIN, "$n presses the fire button.", ch,
            NULL, argument , TO_ROOM );
-      if ( number_percent( ) > chance )
+      if ( number_percent( ) > the_chance )
         {
           send_to_char( "&RYou fail to lock onto your target!", ch );
           ship->missilestate = MISSILE_RELOAD_2;
@@ -9016,18 +9014,18 @@ void do_fire(CHAR_DATA *ch, char *argument )
         + abs(target->vy - ship->vy)
         + abs(target->vz - ship->vz);
       distance /= 3;
-      chance += target->class - CAPITAL_SHIP+1;
-      chance += ship->currspeed - target->currspeed;
-      chance += 100 - target->manuever;
-      chance -= distance/(10*(target->class+1));
-      chance -= origchance;
-      chance /= 2;
-      chance += origchance;
-      chance = URANGE( 1 , chance , 99 );
+      the_chance += target->class - CAPITAL_SHIP+1;
+      the_chance += ship->currspeed - target->currspeed;
+      the_chance += 100 - target->manuever;
+      the_chance -= distance/(10*(target->class+1));
+      the_chance -= origthe_chance;
+      the_chance /= 2;
+      the_chance += origthe_chance;
+      the_chance = URANGE( 1 , the_chance , 99 );
 
       act( AT_PLAIN, "$n presses the fire button.", ch,
            NULL, argument , TO_ROOM );
-      if ( number_percent( ) > chance )
+      if ( number_percent( ) > the_chance )
         {
           sprintf( buf , "Turbolasers fire from %s at you but miss." , ship->name);
           echo_to_cockpit( AT_ORANGE , target , buf );
@@ -9114,18 +9112,18 @@ void do_fire(CHAR_DATA *ch, char *argument )
         + abs(target->vy - ship->vy)
         + abs(target->vz - ship->vz);
       distance /= 3;
-      chance += target->class - CAPITAL_SHIP+1;
-      chance += ship->currspeed - target->currspeed;
-      chance += 100 - target->manuever;
-      chance -= distance/(10*(target->class+1));
-      chance -= origchance;
-      chance /= 2;
-      chance += origchance;
-      chance = URANGE( 1 , chance , 99 );
+      the_chance += target->class - CAPITAL_SHIP+1;
+      the_chance += ship->currspeed - target->currspeed;
+      the_chance += 100 - target->manuever;
+      the_chance -= distance/(10*(target->class+1));
+      the_chance -= origthe_chance;
+      the_chance /= 2;
+      the_chance += origthe_chance;
+      the_chance = URANGE( 1 , the_chance , 99 );
 
       act( AT_PLAIN, "$n presses the fire button.", ch,
            NULL, argument , TO_ROOM );
-      if ( number_percent( ) > chance )
+      if ( number_percent( ) > the_chance )
         {
           sprintf( buf, "Turbolasers fire from %s barely missing %s." , ship->name, target->name );
           if(ship->class > SHIP_PLATFORM)
@@ -9208,18 +9206,18 @@ void do_fire(CHAR_DATA *ch, char *argument )
         + abs(target->vy - ship->vy)
         + abs(target->vz - ship->vz);
       distance /= 3;
-      chance += target->class - CAPITAL_SHIP+1;
-      chance += ship->currspeed - target->currspeed;
-      chance += 100 - target->manuever;
-      chance -= distance/(10*(target->class+1));
-      chance -= origchance;
-      chance /= 2;
-      chance += origchance;
-      chance = URANGE( 1 , chance , 99 );
+      the_chance += target->class - CAPITAL_SHIP+1;
+      the_chance += ship->currspeed - target->currspeed;
+      the_chance += 100 - target->manuever;
+      the_chance -= distance/(10*(target->class+1));
+      the_chance -= origthe_chance;
+      the_chance /= 2;
+      the_chance += origthe_chance;
+      the_chance = URANGE( 1 , the_chance , 99 );
 
       act( AT_PLAIN, "$n presses the fire button.", ch,
            NULL, argument , TO_ROOM );
-      if ( number_percent( ) > chance )
+      if ( number_percent( ) > the_chance )
         {
           sprintf( buf, "Turbolasers fire from %s barely missing %s." , ship->name, target->name );
           echo_to_system( AT_ORANGE , ship , buf , target );
@@ -9296,18 +9294,18 @@ void do_fire(CHAR_DATA *ch, char *argument )
         + abs(target->vy - ship->vy)
         + abs(target->vz - ship->vz);
       distance /= 3;
-      chance += target->class - (CAPITAL_SHIP+1);
-      chance += ship->currspeed - target->currspeed;
-      chance += 100 - target->manuever;
-      chance -= distance/(10*(target->class+1));
-      chance -= origchance;
-      chance /= 2;
-      chance += origchance;
-      chance = URANGE( 1 , chance , 99 );
+      the_chance += target->class - (CAPITAL_SHIP+1);
+      the_chance += ship->currspeed - target->currspeed;
+      the_chance += 100 - target->manuever;
+      the_chance -= distance/(10*(target->class+1));
+      the_chance -= origthe_chance;
+      the_chance /= 2;
+      the_chance += origthe_chance;
+      the_chance = URANGE( 1 , the_chance , 99 );
 
       act( AT_PLAIN, "$n presses the fire button.", ch,
            NULL, argument , TO_ROOM );
-      if ( number_percent( ) > chance )
+      if ( number_percent( ) > the_chance )
         {
           sprintf( buf, "Turbolasers fire from %s barely missing %s." , ship->name, target->name );
           echo_to_system( AT_ORANGE , ship , buf , target );
@@ -9384,18 +9382,18 @@ void do_fire(CHAR_DATA *ch, char *argument )
         + abs(target->vy - ship->vy)
         + abs(target->vz - ship->vz);
       distance /= 3;
-      chance += target->class - (CAPITAL_SHIP+1);
-      chance += ship->currspeed - target->currspeed;
-      chance += 100 - target->manuever;
-      chance -= distance/(10*(target->class+1));
-      chance -= origchance;
-      chance /= 2;
-      chance += origchance;
-      chance = URANGE( 1 , chance , 99 );
+      the_chance += target->class - (CAPITAL_SHIP+1);
+      the_chance += ship->currspeed - target->currspeed;
+      the_chance += 100 - target->manuever;
+      the_chance -= distance/(10*(target->class+1));
+      the_chance -= origthe_chance;
+      the_chance /= 2;
+      the_chance += origthe_chance;
+      the_chance = URANGE( 1 , the_chance , 99 );
 
       act( AT_PLAIN, "$n presses the fire button.", ch,
            NULL, argument , TO_ROOM );
-      if ( number_percent( ) > chance )
+      if ( number_percent( ) > the_chance )
         {
           sprintf( buf, "Turbolasers fire from %s barely missing %s." , ship->name, target->name );
           echo_to_system( AT_ORANGE , ship , buf , target );
@@ -9472,18 +9470,18 @@ void do_fire(CHAR_DATA *ch, char *argument )
         + abs(target->vy - ship->vy)
         + abs(target->vz - ship->vz);
       distance /= 3;
-      chance += target->class - (CAPITAL_SHIP+1);
-      chance += ship->currspeed - target->currspeed;
-      chance += 100 - target->manuever;
-      chance -= distance/(10*(target->class+1));
-      chance -= origchance;
-      chance /= 2;
-      chance += origchance;
-      chance = URANGE( 1 , chance , 99 );
+      the_chance += target->class - (CAPITAL_SHIP+1);
+      the_chance += ship->currspeed - target->currspeed;
+      the_chance += 100 - target->manuever;
+      the_chance -= distance/(10*(target->class+1));
+      the_chance -= origthe_chance;
+      the_chance /= 2;
+      the_chance += origthe_chance;
+      the_chance = URANGE( 1 , the_chance , 99 );
 
       act( AT_PLAIN, "$n presses the fire button.", ch,
            NULL, argument , TO_ROOM );
-      if ( number_percent( ) > chance )
+      if ( number_percent( ) > the_chance )
         {
           sprintf( buf, "Turbolasers fire from %s barely missing %s." , ship->name, target->name );
           echo_to_system( AT_ORANGE , ship , buf , target );
@@ -9560,18 +9558,18 @@ void do_fire(CHAR_DATA *ch, char *argument )
         + abs(target->vy - ship->vy)
         + abs(target->vz - ship->vz);
       distance /= 3;
-      chance += target->class - (CAPITAL_SHIP+1);
-      chance += ship->currspeed - target->currspeed;
-      chance += 100 - target->manuever;
-      chance -= distance/(10*(target->class+1));
-      chance -= origchance;
-      chance /= 2;
-      chance += origchance;
-      chance = URANGE( 1 , chance , 99 );
+      the_chance += target->class - (CAPITAL_SHIP+1);
+      the_chance += ship->currspeed - target->currspeed;
+      the_chance += 100 - target->manuever;
+      the_chance -= distance/(10*(target->class+1));
+      the_chance -= origthe_chance;
+      the_chance /= 2;
+      the_chance += origthe_chance;
+      the_chance = URANGE( 1 , the_chance , 99 );
 
       act( AT_PLAIN, "$n presses the fire button.", ch,
            NULL, argument , TO_ROOM );
-      if ( number_percent( ) > chance )
+      if ( number_percent( ) > the_chance )
         {
           sprintf( buf, "Turbolasers fire from %s barely missing %s." , ship->name, target->name );
           echo_to_system( AT_ORANGE , ship , buf , target );
@@ -9648,18 +9646,18 @@ void do_fire(CHAR_DATA *ch, char *argument )
         + abs(target->vy - ship->vy)
         + abs(target->vz - ship->vz);
       distance /= 3;
-      chance += target->class - (CAPITAL_SHIP+1);
-      chance += ship->currspeed - target->currspeed;
-      chance += 100 - target->manuever;
-      chance -= distance/(10*(target->class+1));
-      chance -= origchance;
-      chance /= 2;
-      chance += origchance;
-      chance = URANGE( 1 , chance , 99 );
+      the_chance += target->class - (CAPITAL_SHIP+1);
+      the_chance += ship->currspeed - target->currspeed;
+      the_chance += 100 - target->manuever;
+      the_chance -= distance/(10*(target->class+1));
+      the_chance -= origthe_chance;
+      the_chance /= 2;
+      the_chance += origthe_chance;
+      the_chance = URANGE( 1 , the_chance , 99 );
 
       act( AT_PLAIN, "$n presses the fire button.", ch,
            NULL, argument , TO_ROOM );
-      if ( number_percent( ) > chance )
+      if ( number_percent( ) > the_chance )
         {
           sprintf( buf, "Turbolasers fire from %s barely missing %s." , ship->name, target->name );
           echo_to_system( AT_ORANGE , ship , buf , target );
@@ -9736,18 +9734,18 @@ void do_fire(CHAR_DATA *ch, char *argument )
         + abs(target->vy - ship->vy)
         + abs(target->vz - ship->vz);
       distance /= 3;
-      chance += target->class - (CAPITAL_SHIP+1);
-      chance += ship->currspeed - target->currspeed;
-      chance += 100 - target->manuever;
-      chance -= distance/(10*(target->class+1));
-      chance -= origchance;
-      chance /= 2;
-      chance += origchance;
-      chance = URANGE( 1 , chance , 99 );
+      the_chance += target->class - (CAPITAL_SHIP+1);
+      the_chance += ship->currspeed - target->currspeed;
+      the_chance += 100 - target->manuever;
+      the_chance -= distance/(10*(target->class+1));
+      the_chance -= origthe_chance;
+      the_chance /= 2;
+      the_chance += origthe_chance;
+      the_chance = URANGE( 1 , the_chance , 99 );
 
       act( AT_PLAIN, "$n presses the fire button.", ch,
            NULL, argument , TO_ROOM );
-      if ( number_percent( ) > chance )
+      if ( number_percent( ) > the_chance )
         {
           sprintf( buf, "Turbolasers fire from %s barely missing %s." , ship->name, target->name );
           echo_to_system( AT_ORANGE , ship , buf , target );
@@ -9824,18 +9822,18 @@ void do_fire(CHAR_DATA *ch, char *argument )
         + abs(target->vy - ship->vy)
         + abs(target->vz - ship->vz);
       distance /= 3;
-      chance += target->class - (CAPITAL_SHIP+1);
-      chance += ship->currspeed - target->currspeed;
-      chance += 100 - target->manuever;
-      chance -= distance/(10*(target->class+1));
-      chance -= origchance;
-      chance /= 2;
-      chance += origchance;
-      chance = URANGE( 1 , chance , 99 );
+      the_chance += target->class - (CAPITAL_SHIP+1);
+      the_chance += ship->currspeed - target->currspeed;
+      the_chance += 100 - target->manuever;
+      the_chance -= distance/(10*(target->class+1));
+      the_chance -= origthe_chance;
+      the_chance /= 2;
+      the_chance += origthe_chance;
+      the_chance = URANGE( 1 , the_chance , 99 );
 
       act( AT_PLAIN, "$n presses the fire button.", ch,
            NULL, argument , TO_ROOM );
-      if ( number_percent( ) > chance )
+      if ( number_percent( ) > the_chance )
         {
           sprintf( buf, "Turbolasers fire from %s barely missing %s." , ship->name, target->name );
           echo_to_system( AT_ORANGE , ship , buf , target );
@@ -9888,7 +9886,7 @@ void do_calculate(CHAR_DATA *ch, char *argument )
   char arg2[MAX_INPUT_LENGTH];
   char arg3[MAX_INPUT_LENGTH];
   char buf[MAX_INPUT_LENGTH];
-  int chance , distance = 0;
+  int the_chance , distance = 0;
   SHIP_DATA *ship;
   SPACE_DATA *spaceobj, *spaceobject;
   bool found = FALSE;
@@ -9959,9 +9957,9 @@ void do_calculate(CHAR_DATA *ch, char *argument )
                             }
       */                  return;
     }
-  chance = IS_NPC(ch) ? ch->top_level
+  the_chance = IS_NPC(ch) ? ch->top_level
     : (int)  (ch->pcdata->learned[gsn_navigation]) ;
-  if ( number_percent( ) > chance )
+  if ( number_percent( ) > the_chance )
     {
       send_to_char("&RYou cant seem to figure the charts out today.\r\n",ch);
       learn_from_failure( ch, gsn_navigation );
@@ -10081,7 +10079,7 @@ void do_calculate_diff(CHAR_DATA *ch, char *argument )
   char arg2[MAX_INPUT_LENGTH];
   char arg3[MAX_INPUT_LENGTH];
   char buf[MAX_INPUT_LENGTH];
-  int chance , distance = 0;
+  int the_chance , distance = 0;
   SHIP_DATA *ship;
   SPACE_DATA *spaceobj, *spaceobject;
   bool found = FALSE;
@@ -10152,9 +10150,9 @@ void do_calculate_diff(CHAR_DATA *ch, char *argument )
                             }
       */                  return;
     }
-  chance = IS_NPC(ch) ? ch->top_level
+  the_chance = IS_NPC(ch) ? ch->top_level
     : (int)  (ch->pcdata->learned[gsn_navigation]) ;
-  if ( number_percent( ) > chance )
+  if ( number_percent( ) > the_chance )
     {
       send_to_char("&RYou cant seem to figure the charts out today.\r\n",ch);
       learn_from_failure( ch, gsn_navigation );
@@ -10250,7 +10248,7 @@ void do_calculate_diff(CHAR_DATA *ch, char *argument )
 void do_recharge(CHAR_DATA *ch, char *argument )
 {
   int recharge;
-  int chance;
+  int the_chance;
   SHIP_DATA *ship;
 
 
@@ -10277,9 +10275,9 @@ void do_recharge(CHAR_DATA *ch, char *argument )
       return;
     }
 
-  chance = IS_NPC(ch) ? ch->top_level
+  the_chance = IS_NPC(ch) ? ch->top_level
     : (int) (ch->pcdata->learned[gsn_shipsystems]);
-  if ( number_percent( ) > chance )
+  if ( number_percent( ) > the_chance )
     {
       send_to_char("&RYou fail to work the controls properly.\r\n",ch);
       learn_from_failure( ch, gsn_shipsystems );
@@ -10302,7 +10300,7 @@ void do_recharge(CHAR_DATA *ch, char *argument )
 void do_repairship(CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  int chance, change;
+  int the_chance, change;
   SHIP_DATA *ship;
 
   strcpy( arg, argument );
@@ -10326,9 +10324,9 @@ void do_repairship(CHAR_DATA *ch, char *argument )
           return;
         }
 
-      chance = IS_NPC(ch) ? ch->top_level
+      the_chance = IS_NPC(ch) ? ch->top_level
         : (int) (ch->pcdata->learned[gsn_shipmaintenance]);
-      if ( number_percent( ) < chance )
+      if ( number_percent( ) < the_chance )
         {
           send_to_char( "&GYou begin your repairs\r\n", ch);
           act( AT_PLAIN, "$n begins repairing the ships $T.", ch,
@@ -10431,7 +10429,7 @@ void do_repairship(CHAR_DATA *ch, char *argument )
 void do_addpilot(CHAR_DATA *ch, char *argument )
 {
   SHIP_DATA *ship;
-  int chance;
+  int the_chance;
 
   if (  (ship = ship_from_cockpit(ch->in_room->vnum))  == NULL )
     {
@@ -10439,9 +10437,9 @@ void do_addpilot(CHAR_DATA *ch, char *argument )
       return;
     }
 
-  chance = number_percent( );
+  the_chance = number_percent( );
 
-  if ( IS_NPC(ch) || chance >= ch->pcdata->learned[gsn_slicing] )
+  if ( IS_NPC(ch) || the_chance >= ch->pcdata->learned[gsn_slicing] )
     {
       if ( !check_pilot( ch , ship ) )
         {
@@ -10456,7 +10454,7 @@ void do_addpilot(CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( chance < ch->pcdata->learned[gsn_slicing] )
+  if ( the_chance < ch->pcdata->learned[gsn_slicing] )
     learn_from_success( ch, gsn_slicing );
 
   if ( str_cmp( ship->pilot , "" ) )
@@ -10486,7 +10484,7 @@ void do_addpilot(CHAR_DATA *ch, char *argument )
 
 void do_rempilot(CHAR_DATA *ch, char *argument )
 {
-  int chance;
+  int the_chance;
   SHIP_DATA *ship;
 
   if (  (ship = ship_from_cockpit(ch->in_room->vnum))  == NULL )
@@ -10500,8 +10498,8 @@ void do_rempilot(CHAR_DATA *ch, char *argument )
       send_to_char( "&RYou can't do that here.\r\n" , ch );
       return;
     }
-  chance = number_percent( );
-  if ( IS_NPC(ch) || chance >= ch->pcdata->learned[gsn_slicing] )
+  the_chance = number_percent( );
+  if ( IS_NPC(ch) || the_chance >= ch->pcdata->learned[gsn_slicing] )
     {
       if ( !check_pilot( ch , ship ) )
         {
@@ -10516,7 +10514,7 @@ void do_rempilot(CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( chance < ch->pcdata->learned[gsn_slicing] )
+  if ( the_chance < ch->pcdata->learned[gsn_slicing] )
     learn_from_success( ch, gsn_slicing );
 
   if ( !str_cmp( ship->pilot , argument ) )
@@ -10544,7 +10542,7 @@ void do_rempilot(CHAR_DATA *ch, char *argument )
 void do_radar( CHAR_DATA *ch, char *argument )
 {
   SHIP_DATA *target;
-  int chance;
+  int the_chance;
   SHIP_DATA *ship;
   MISSILE_DATA *missile;
   SPACE_DATA *spaceobj;
@@ -10580,9 +10578,9 @@ void do_radar( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  chance = IS_NPC(ch) ? ch->top_level
+  the_chance = IS_NPC(ch) ? ch->top_level
     : (int)  (ch->pcdata->learned[gsn_navigation]) ;
-  if ( number_percent( ) > chance )
+  if ( number_percent( ) > the_chance )
     {
       send_to_char("&RYou fail to work the controls properly.\r\n",ch);
       learn_from_failure( ch, gsn_navigation );
@@ -10708,7 +10706,7 @@ void do_radar( CHAR_DATA *ch, char *argument )
 void do_autotrack( CHAR_DATA *ch, char *argument )
 {
   SHIP_DATA *ship;
-  int chance;
+  int the_chance;
 
   if (  (ship = ship_from_cockpit(ch->in_room->vnum))  == NULL )
     {
@@ -10751,9 +10749,9 @@ void do_autotrack( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  chance = IS_NPC(ch) ? ch->top_level
+  the_chance = IS_NPC(ch) ? ch->top_level
     : (int)  (ch->pcdata->learned[gsn_shipsystems]) ;
-  if ( number_percent( ) > chance )
+  if ( number_percent( ) > the_chance )
     {
       send_to_char("&RYour not sure which switch to flip.\r\n",ch);
       learn_from_failure( ch, gsn_shipsystems );
@@ -11115,7 +11113,7 @@ ch_ret drive_ship( CHAR_DATA *ch, SHIP_DATA *ship, EXIT_DATA  *pexit , int fall 
   char *txt;
   char *dtxt;
   ch_ret retcode;
-  short door, distance, chance;
+  short door, distance, the_chance;
   bool drunk = FALSE;
   CHAR_DATA * rch;
   CHAR_DATA * next_rch;
@@ -11334,9 +11332,9 @@ ch_ret drive_ship( CHAR_DATA *ch, SHIP_DATA *ship, EXIT_DATA  *pexit , int fall 
               }
       }
 
-  chance = IS_NPC(ch) ? ch->top_level
+  the_chance = IS_NPC(ch) ? ch->top_level
     : (int)  (ch->pcdata->learned[gsn_speeders]) ;
-  if ( number_percent( ) > chance )
+  if ( number_percent( ) > the_chance )
     {
       send_to_char("&RYou can't figure out which switch it is.\r\n",ch);
       learn_from_failure( ch, gsn_speeders );
@@ -11434,7 +11432,7 @@ void do_bomb( CHAR_DATA *ch, char *argument )
 
 void do_chaff( CHAR_DATA *ch, char *argument )
 {
-  int chance;
+  int the_chance;
   SHIP_DATA *ship;
 
 
@@ -11478,9 +11476,9 @@ void do_chaff( CHAR_DATA *ch, char *argument )
       send_to_char("&RYou don't have any chaff to release!\r\n",ch);
       return;
     }
-  chance = IS_NPC(ch) ? ch->top_level
+  the_chance = IS_NPC(ch) ? ch->top_level
     : (int)  (ch->pcdata->learned[gsn_weaponsystems]) ;
-  if ( number_percent( ) > chance )
+  if ( number_percent( ) > the_chance )
     {
       send_to_char("&RYou can't figure out which switch it is.\r\n",ch);
       learn_from_failure( ch, gsn_weaponsystems );
@@ -11653,7 +11651,7 @@ void makedebris( SHIP_DATA *ship )
    void do_hmm( CHAR_DATA *ch, char *argument )
    {
    char arg[MAX_INPUT_LENGTH];
-   int chance;
+   int the_chance;
    SHIP_DATA *ship;
 
    strcpy( arg, argument );
@@ -11694,15 +11692,15 @@ void makedebris( SHIP_DATA *ship )
    }
 
    if ( ship->class == FIGHTER_SHIP )
-   chance = IS_NPC(ch) ? ch->top_level
+   the_chance = IS_NPC(ch) ? ch->top_level
    : (int)  (ch->pcdata->learned[gsn_starfighters]) ;
    if ( ship->class == MIDSIZE_SHIP )
-   chance = IS_NPC(ch) ? ch->top_level
+   the_chance = IS_NPC(ch) ? ch->top_level
    : (int)  (ch->pcdata->learned[gsn_midships]) ;
    if ( ship->class == CAPITAL_SHIP )
-   chance = IS_NPC(ch) ? ch->top_level
+   the_chance = IS_NPC(ch) ? ch->top_level
    : (int) (ch->pcdata->learned[gsn_capitalships]);
-   if ( number_percent( ) < chance )
+   if ( number_percent( ) < the_chance )
    {
    send_to_char( "&G\r\n", ch);
    act( AT_PLAIN, "$n does  ...", ch,
@@ -11765,7 +11763,7 @@ void makedebris( SHIP_DATA *ship )
    void do_hmm( CHAR_DATA *ch, char *argument )
    {
    char arg[MAX_INPUT_LENGTH];
-   int chance;
+   int the_chance;
    SHIP_DATA *ship;
 
 
@@ -11803,15 +11801,15 @@ void makedebris( SHIP_DATA *ship )
    }
 
    if ( ship->class == FIGHTER_SHIP )
-   chance = IS_NPC(ch) ? ch->top_level
+   the_chance = IS_NPC(ch) ? ch->top_level
    : (int)  (ch->pcdata->learned[gsn_starfighters]) ;
    if ( ship->class == MIDSIZE_SHIP )
-   chance = IS_NPC(ch) ? ch->top_level
+   the_chance = IS_NPC(ch) ? ch->top_level
    : (int)  (ch->pcdata->learned[gsn_midships]) ;
    if ( ship->class == CAPITAL_SHIP )
-   chance = IS_NPC(ch) ? ch->top_level
+   the_chance = IS_NPC(ch) ? ch->top_level
    : (int) (ch->pcdata->learned[gsn_capitalships]);
-   if ( number_percent( ) > chance )
+   if ( number_percent( ) > the_chance )
    {
    send_to_char("&RYou fail to work the controls properly.\r\n",ch);
    if ( ship->class == FIGHTER_SHIP )

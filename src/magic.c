@@ -447,26 +447,32 @@ void say_spell( CHAR_DATA *ch, int sn )
 /*
  * Make adjustments to saving throw based in RIS                -Thoric
  */
-int ris_save( CHAR_DATA *ch, int chance, int ris )
+int ris_save( CHAR_DATA *ch, int save_chance, int ris )
 {
-  short modifier;
+  short modifier = 10;
 
-  modifier = 10;
   if ( IS_SET(ch->immune, ris ) )
     modifier -= 10;
+
   if ( ch->race == RACE_DROID && ( ris == SD_POISON || ris == SD_DRAIN ) )
     modifier -= 10;
+
   if ( ch->race == RACE_DROID && ris == RIS_MAGIC )
     modifier -= 5;
+
   if ( IS_SET(ch->resistant, ris ) )
     modifier -= 2;
+
   if ( IS_SET(ch->susceptible, ris ) )
     modifier += 2;
+
   if ( modifier <= 0 )
     return 1000;
+
   if ( modifier == 10 )
-    return chance;
-  return (chance * modifier) / 10;
+    return save_chance;
+
+  return (save_chance * modifier) / 10;
 }
 
 
@@ -1754,7 +1760,7 @@ ch_ret spell_charm_person( int sn, int level, CHAR_DATA *ch, void *vo )
 {
   CHAR_DATA *victim = (CHAR_DATA *) vo;
   AFFECT_DATA af;
-  int chance;
+  int charm_chance;
   char buf[MAX_STRING_LENGTH];
   SKILLTYPE *skill = get_skilltype(sn);
 
@@ -1778,14 +1784,14 @@ ch_ret spell_charm_person( int sn, int level, CHAR_DATA *ch, void *vo )
       return rSPELL_FAILED;
     }
 
-  chance = ris_save( victim, level, RIS_CHARM );
+  charm_chance = ris_save( victim, level, RIS_CHARM );
 
   if ( IS_AFFECTED(victim, AFF_CHARM)
-       ||   chance == 1000
+       ||   charm_chance == 1000
        ||   IS_AFFECTED(ch, AFF_CHARM)
        ||   level < victim->top_level
        ||        circle_follow( victim, ch )
-       ||   saves_spell_staff( chance, victim ) )
+       ||   saves_spell_staff( charm_chance, victim ) )
     {
       failed_casting( skill, ch, victim, NULL );
       return rSPELL_FAILED;
@@ -2313,7 +2319,7 @@ ch_ret spell_energy_drain( int sn, int level, CHAR_DATA *ch, void *vo )
 {
   CHAR_DATA *victim = (CHAR_DATA *) vo;
   int dam;
-  int chance;
+  int drain_chance;
   SKILLTYPE *skill = get_skilltype(sn);
 
   if ( IS_SET( victim->immune, RIS_MAGIC ) )
@@ -2327,9 +2333,9 @@ ch_ret spell_energy_drain( int sn, int level, CHAR_DATA *ch, void *vo )
   ch->alignment = URANGE( -1000, ch->alignment, 1000 );
   sith_penalty( ch );
 
+  drain_chance = ris_save( victim, victim->top_level, RIS_DRAIN );
 
-  chance = ris_save( victim, victim->top_level, RIS_DRAIN );
-  if ( chance == 1000 || saves_spell_staff( chance, victim ) )
+  if ( drain_chance == 1000 || saves_spell_staff( drain_chance, victim ) )
     {
       failed_casting( skill, ch, victim, NULL ); /* SB */
       return rSPELL_FAILED;
@@ -2977,7 +2983,7 @@ ch_ret spell_poison( int sn, int level, CHAR_DATA *ch, void *vo )
 {
   CHAR_DATA *victim = (CHAR_DATA *) vo;
   AFFECT_DATA af;
-  int chance;
+  int poison_chance;
   bool first = TRUE;
 
   send_to_char("You feel the hatred grow within you!\r\n", ch);
@@ -2985,11 +2991,14 @@ ch_ret spell_poison( int sn, int level, CHAR_DATA *ch, void *vo )
   ch->alignment = URANGE( -1000, ch->alignment, 1000 );
   sith_penalty( ch );
 
-  chance = ris_save( victim, level, RIS_POISON );
-  if ( chance == 1000 || saves_poison_death( chance, victim ) )
+  poison_chance = ris_save( victim, level, RIS_POISON );
+
+  if ( poison_chance == 1000 || saves_poison_death( poison_chance, victim ) )
     return rSPELL_FAILED;
+
   if ( IS_AFFECTED( victim, AFF_POISON ) )
     first = FALSE;
+
   af.type      = sn;
   af.duration  = level * DUR_CONV;
   af.location  = APPLY_STR;
@@ -3108,7 +3117,7 @@ ch_ret spell_sleep( int sn, int level, CHAR_DATA *ch, void *vo )
 {
   AFFECT_DATA af;
   int retcode;
-  int chance;
+  int sleep_chance;
   int tmp;
   CHAR_DATA *victim;
   SKILLTYPE *skill = get_skilltype(sn);
@@ -3141,9 +3150,9 @@ ch_ret spell_sleep( int sn, int level, CHAR_DATA *ch, void *vo )
     tmp = level;
 
   if ( IS_AFFECTED(victim, AFF_SLEEP)
-       ||       (chance=ris_save(victim, tmp, RIS_SLEEP)) == 1000
+       ||       (sleep_chance=ris_save(victim, tmp, RIS_SLEEP)) == 1000
        ||  (victim != ch && IS_SET(victim->in_room->room_flags, ROOM_SAFE))
-       ||   saves_spell_staff( chance, victim ) )
+       ||   saves_spell_staff( sleep_chance, victim ) )
     {
       failed_casting( skill, ch, victim, NULL );
       if ( ch == victim )
@@ -4433,7 +4442,7 @@ ch_ret spell_affectchar( int sn, int level, CHAR_DATA *ch, void *vo )
   SMAUG_AFF *saf;
   SKILLTYPE *skill = get_skilltype(sn);
   CHAR_DATA *victim = (CHAR_DATA *) vo;
-  int chance;
+  int aff_chance;
   ch_ret retcode = rNONE;
 
   if ( SPELL_FLAG( skill, SF_RECASTABLE ) )
@@ -4461,18 +4470,21 @@ ch_ret spell_affectchar( int sn, int level, CHAR_DATA *ch, void *vo )
           ch->alignment = ch->alignment - 100;
           ch->alignment = URANGE( -1000, ch->alignment, 1000 );
           sith_penalty( ch );
+          aff_chance = ris_save( victim, level, RIS_POISON );
 
-          chance = ris_save( victim, level, RIS_POISON );
           if ( victim->race == RACE_DROID )
-            chance = 1000;
-          if ( chance == 1000 )
+            aff_chance = 1000;
+
+          if ( aff_chance == 1000 )
             {
               retcode = rVICT_IMMUNE;
+
               if ( SPELL_FLAG(skill, SF_STOPONFAIL) )
                 return retcode;
+
               continue;
             }
-          if ( saves_poison_death( chance, victim ) )
+          if ( saves_poison_death( aff_chance, victim ) )
             {
               if ( SPELL_FLAG(skill, SF_STOPONFAIL) )
                 return retcode;
@@ -4483,10 +4495,12 @@ ch_ret spell_affectchar( int sn, int level, CHAR_DATA *ch, void *vo )
         case AFF_BLIND: af.type = gsn_blindness;        break;
         case AFF_INVISIBLE:     af.type = gsn_invis;            break;
         case AFF_SLEEP: af.type = gsn_sleep;
-          chance = ris_save( victim, level, RIS_SLEEP );
+          aff_chance = ris_save( victim, level, RIS_SLEEP );
+
           if ( victim->race == RACE_DROID )
-            chance = 1000;
-          if ( chance == 1000 )
+            aff_chance = 1000;
+
+          if ( aff_chance == 1000 )
             {
               retcode = rVICT_IMMUNE;
               if ( SPELL_FLAG(skill, SF_STOPONFAIL) )
@@ -4495,10 +4509,10 @@ ch_ret spell_affectchar( int sn, int level, CHAR_DATA *ch, void *vo )
             }
           break;
         case AFF_CHARM:         af.type = gsn_charm_person;
-          chance = ris_save( victim, level, RIS_CHARM );
+          aff_chance = ris_save( victim, level, RIS_CHARM );
           if ( victim->race == RACE_DROID )
-            chance = 1000;
-          if ( chance == 1000 )
+            aff_chance = 1000;
+          if ( aff_chance == 1000 )
             {
               retcode = rVICT_IMMUNE;
               if ( SPELL_FLAG(skill, SF_STOPONFAIL) )

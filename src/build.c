@@ -3960,12 +3960,12 @@ void do_redit( CHAR_DATA *ch, char *argument )
   char arg2[MAX_INPUT_LENGTH];
   char arg3[MAX_INPUT_LENGTH];
   char buf [MAX_STRING_LENGTH];
-  ROOM_INDEX_DATA       *location, *tmp;
-  EXTRA_DESCR_DATA      *ed;
-  char          dir;
-  EXIT_DATA             *xit, *texit;
-  int                   value;
-  int                   edir, ekey, evnum;
+  ROOM_INDEX_DATA       *location = NULL, *tmp = NULL;
+  EXTRA_DESCR_DATA      *ed = NULL;
+  char          dir = '\0';
+  EXIT_DATA             *xit = NULL, *texit = NULL;
+  int                   value = 0;
+  int                   edir = 0, ekey = 0, evnum = 0;
   char          *origarg = argument;
 
   if ( !ch->desc )
@@ -4642,7 +4642,7 @@ void do_redit( CHAR_DATA *ch, char *argument )
    */
   if ( !str_cmp( arg, "bexit" ) )
     {
-      EXIT_DATA *xit, *rxit;
+      EXIT_DATA *this_exit, *rxit;
       char tmpcmd[MAX_INPUT_LENGTH];
       ROOM_INDEX_DATA *tmploc;
       int vnum, exnum;
@@ -4675,40 +4675,47 @@ void do_redit( CHAR_DATA *ch, char *argument )
       exnum = edir;
       if ( numnotdir )
         {
-          if ( (xit = get_exit_num(tmploc, edir)) != NULL )
-            edir = xit->vdir;
+          if ( (this_exit = get_exit_num(tmploc, edir)) != NULL )
+            edir = this_exit->vdir;
         }
       else
-        xit = get_exit(tmploc, edir);
+        this_exit = get_exit(tmploc, edir);
+
       rxit = NULL;
       vnum = 0;
       rvnum[0] = '\0';
-      if ( xit )
+
+      if ( this_exit )
         {
-          vnum = xit->vnum;
+          vnum = this_exit->vnum;
           if ( arg3[0] != '\0' )
             sprintf( rvnum, "%d", tmploc->vnum );
-          if ( xit->to_room )
-            rxit = get_exit(xit->to_room, rev_dir[edir]);
+          if ( this_exit->to_room )
+            rxit = get_exit(this_exit->to_room, rev_dir[edir]);
           else
             rxit = NULL;
         }
       sprintf( tmpcmd, "exit %s %s %s", arg2, arg3, argument );
       do_redit( ch, tmpcmd );
+
       if ( numnotdir )
-        xit = get_exit_num(tmploc, exnum);
+        this_exit = get_exit_num(tmploc, exnum);
       else
-        xit = get_exit(tmploc, edir);
-      if ( !rxit && xit )
+        this_exit = get_exit(tmploc, edir);
+
+      if ( !rxit && this_exit )
         {
-          vnum = xit->vnum;
+          vnum = this_exit->vnum;
+
           if ( arg3[0] != '\0' )
             sprintf( rvnum, "%d", tmploc->vnum );
-          if ( xit->to_room )
-            rxit = get_exit(xit->to_room, rev_dir[edir]);
+
+          if ( this_exit->to_room )
+            rxit = get_exit(this_exit->to_room, rev_dir[edir]);
           else
             rxit = NULL;
         }
+
       if ( vnum )
         {
           sprintf( tmpcmd, "%d redit exit %d %s %s",
@@ -4960,12 +4967,12 @@ void do_mcreate( CHAR_DATA *ch, char *argument )
  */
 void edit_buffer( CHAR_DATA *ch, char *argument )
 {
-  DESCRIPTOR_DATA *d;
-  EDITOR_DATA *edit;
+  DESCRIPTOR_DATA *d = NULL;
+  EDITOR_DATA *edit = NULL;
   char cmd[MAX_INPUT_LENGTH];
   char buf[MAX_INPUT_LENGTH];
-  short x, line, max_buf_lines;
-  bool save;
+  short line = 0, max_buf_lines = 0;
+  bool save = FALSE;
 
   if ( (d = ch->desc) == NULL )
     {
@@ -5032,6 +5039,7 @@ void edit_buffer( CHAR_DATA *ch, char *argument )
           send_to_char( "Buffer cleared.\r\n> ", ch );
           return;
         }
+
       if ( !str_cmp( cmd+1, "r" ) )
         {
           char word1[MAX_INPUT_LENGTH];
@@ -5148,6 +5156,8 @@ void edit_buffer( CHAR_DATA *ch, char *argument )
                 send_to_char( "Out of range.\r\n> ", ch );
               else
                 {
+		  int x = 0;
+
                   for ( x = ++edit->numlines; x > line; x-- )
                     strcpy( edit->line[x], edit->line[x-1] );
                   strcpy( edit->line[line], "" );
@@ -5172,6 +5182,8 @@ void edit_buffer( CHAR_DATA *ch, char *argument )
                 send_to_char( "Out of range.\r\n> ", ch );
               else
                 {
+		  int x = 0;
+
                   if ( line == 0 && edit->numlines == 1 )
                     {
                       memset( edit, '\0', sizeof(EDITOR_DATA) );
@@ -5180,11 +5192,15 @@ void edit_buffer( CHAR_DATA *ch, char *argument )
                       send_to_char( "Line deleted.\r\n> ", ch );
                       return;
                     }
+
                   for ( x = line; x < (edit->numlines - 1); x++ )
                     strcpy( edit->line[x], edit->line[x+1] );
+
                   strcpy( edit->line[edit->numlines--], "" );
+
                   if ( edit->on_line > edit->numlines )
                     edit->on_line = edit->numlines;
+
                   send_to_char( "Line deleted.\r\n> ", ch );
                 }
             }
@@ -5221,9 +5237,13 @@ void edit_buffer( CHAR_DATA *ch, char *argument )
             send_to_char( "Buffer is empty.\r\n> ", ch );
           else
             {
+	      int x = 0;
+
               send_to_char( "------------------\r\n", ch );
+
               for ( x = 0; x < edit->numlines; x++ )
                 ch_printf( ch, "%2d> %s\r\n", x+1, edit->line[x] );
+
               send_to_char( "------------------\r\n> ", ch );
             }
           return;

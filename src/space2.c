@@ -48,7 +48,7 @@ bool ship_was_in_range( SHIP_DATA *ship, SHIP_DATA *target )
 
 void do_jumpvector( CHAR_DATA *ch, char *argument )
 {
-  int chance, num;
+  int the_chance, num;
   float randnum, tx, ty, tz;
   SHIP_DATA *ship;
   SHIP_DATA *target;
@@ -92,9 +92,9 @@ void do_jumpvector( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  chance = IS_NPC(ch) ? ch->top_level
+  the_chance = IS_NPC(ch) ? ch->top_level
     : (int)  (ch->pcdata->learned[gsn_jumpvector]) ;
-  if ( number_percent( ) > chance )
+  if ( number_percent( ) > the_chance )
     {
       send_to_char("&RYou cant figure out the course vectors correctly.\r\n",ch);
       learn_from_failure( ch, gsn_shipsystems );
@@ -287,7 +287,7 @@ void do_tractorbeam( CHAR_DATA *ch, char *argument )
 {
 
   char arg[MAX_INPUT_LENGTH];
-  int chance;
+  int the_chance;
   SHIP_DATA *ship;
   SHIP_DATA *target;
   char buf[MAX_STRING_LENGTH];
@@ -422,14 +422,14 @@ void do_tractorbeam( CHAR_DATA *ch, char *argument )
 
 
 
-  chance = IS_NPC(ch) ? ch->top_level
+  the_chance = IS_NPC(ch) ? ch->top_level
     : (int)  (ch->pcdata->learned[gsn_tractorbeams]);
 
-  /* This is just a first guess chance modifier, feel free to change if needed */
+  /* This is just a first guess the_chance modifier, feel free to change if needed */
 
-  chance = chance * ( ship->tractorbeam / (target->currspeed+1 ) );
+  the_chance = the_chance * ( ship->tractorbeam / (target->currspeed+1 ) );
 
-  if ( number_percent( ) < chance )
+  if ( number_percent( ) < the_chance )
     {
       set_char_color( AT_GREEN, ch );
       send_to_char( "Capture sequence initiated.\r\n", ch);
@@ -470,7 +470,7 @@ void do_tractorbeam( CHAR_DATA *ch, char *argument )
 void do_tractorbeam(CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  int chance, distance;
+  int the_chance, distance;
   SHIP_DATA *ship;
   SHIP_DATA *target;
   char buf[MAX_STRING_LENGTH];
@@ -599,10 +599,10 @@ void do_tractorbeam(CHAR_DATA *ch, char *argument )
             }
         }
 
-      chance = IS_NPC(ch) ? ch->top_level
+      the_chance = IS_NPC(ch) ? ch->top_level
         : (int)  (ch->pcdata->learned[gsn_tractorbeams]) ;
 
-      if ( number_percent( ) < chance )
+      if ( number_percent( ) < the_chance )
         {
           send_to_char( "&GTracking target.\r\n", ch);
           act( AT_PLAIN, "$n makes some adjustments on the targeting computer.", ch,
@@ -644,20 +644,20 @@ void do_tractorbeam(CHAR_DATA *ch, char *argument )
       send_to_char("&RThe ship has left the starsytem. Targeting aborted.\r\n",ch);
       return;
     }
-  chance = IS_NPC(ch) ? ch->top_level
+  the_chance = IS_NPC(ch) ? ch->top_level
     : (int)  (ch->pcdata->learned[gsn_tractorbeams]) ;
   distance = abs(target->vx - ship->vx)
     + abs(target->vy - ship->vy)
     + abs(target->vz - ship->vz);
   distance /= 3;
-  chance += target->class - ship->class;
-  chance += ship->currspeed - target->currspeed;
-  chance += ship->manuever - target->manuever;
-  chance -= distance/(10*(target->class+1));
-  chance /= 2;
-  chance = URANGE( 1 , chance , 99 );
+  the_chance += target->class - ship->class;
+  the_chance += ship->currspeed - target->currspeed;
+  the_chance += ship->manuever - target->manuever;
+  the_chance -= distance/(10*(target->class+1));
+  the_chance /= 2;
+  the_chance = URANGE( 1 , the_chance , 99 );
 
-  if ( number_percent( ) >= chance )
+  if ( number_percent( ) >= the_chance )
     {
       send_to_char("&RYou fail to work the controls properly.\r\n",ch);
       learn_from_failure( ch, gsn_tractorbeams );
@@ -867,7 +867,7 @@ void do_undock(CHAR_DATA *ch, char *argument)
 {
   char arg[MAX_INPUT_LENGTH];
 
-  int chance = 0;
+  int the_chance = 0;
   SHIP_DATA *ship;
   SHIP_DATA *eShip = NULL;
 
@@ -922,15 +922,15 @@ void do_undock(CHAR_DATA *ch, char *argument)
   eShip = ship->docked;
 
   if ( ship->class == FIGHTER_SHIP )
-    chance = IS_NPC(ch) ? ch->top_level
+    the_chance = IS_NPC(ch) ? ch->top_level
       : (int)  (ch->pcdata->learned[gsn_starfighters]) ;
   if ( ship->class == MIDSIZE_SHIP )
-    chance = IS_NPC(ch) ? ch->top_level
+    the_chance = IS_NPC(ch) ? ch->top_level
       : (int)  (ch->pcdata->learned[gsn_midships]) ;
   if ( ship->class == CAPITAL_SHIP )
-    chance = IS_NPC(ch) ? ch->top_level
+    the_chance = IS_NPC(ch) ? ch->top_level
       : (int) (ch->pcdata->learned[gsn_capitalships]);
-  if ( number_percent( ) > chance )
+  if ( number_percent( ) > the_chance )
     {
       send_to_char("&RYou can't figure out which lever to use.\r\n",ch);
       if ( ship->class == FIGHTER_SHIP )
@@ -1026,7 +1026,7 @@ void do_dock(CHAR_DATA *ch, char *argument)
 {
   char arg[MAX_INPUT_LENGTH];
 
-  int chance = 0;
+  int the_chance = 0;
   SHIP_DATA *ship;
   SHIP_DATA *eShip = NULL;
 
@@ -1182,15 +1182,15 @@ void do_dock(CHAR_DATA *ch, char *argument)
 
 
   if ( ship->class == FIGHTER_SHIP )
-    chance = IS_NPC(ch) ? ch->top_level
+    the_chance = IS_NPC(ch) ? ch->top_level
       : (int)  (ch->pcdata->learned[gsn_starfighters]) ;
   if ( ship->class == MIDSIZE_SHIP )
-    chance = IS_NPC(ch) ? ch->top_level
+    the_chance = IS_NPC(ch) ? ch->top_level
       : (int)  (ch->pcdata->learned[gsn_midships]) ;
   if ( ship->class == CAPITAL_SHIP )
-    chance = IS_NPC(ch) ? ch->top_level
+    the_chance = IS_NPC(ch) ? ch->top_level
       : (int) (ch->pcdata->learned[gsn_capitalships]);
-  if ( number_percent( ) > chance )
+  if ( number_percent( ) > the_chance )
     {
       send_to_char("&RYou can't figure out which lever to use.\r\n",ch);
       if ( ship->class == FIGHTER_SHIP )
@@ -1288,7 +1288,7 @@ void do_request(CHAR_DATA *ch, char *argument)
 {
   char arg[MAX_INPUT_LENGTH];
   char buf[MAX_STRING_LENGTH];
-  int chance = 0;
+  int the_chance = 0;
   SHIP_DATA *ship;
   SHIP_DATA *eShip = NULL;
 
@@ -1367,8 +1367,8 @@ void do_request(CHAR_DATA *ch, char *argument)
     }
 
 
-  chance = IS_NPC(ch) ? ch->top_level : (int) (ch->pcdata->learned[gsn_fake_signal]);
-  if ( (eShip->class == SHIP_PLATFORM ? 1 : (number_percent( ) >= chance)) && !check_pilot(ch,eShip) )
+  the_chance = IS_NPC(ch) ? ch->top_level : (int) (ch->pcdata->learned[gsn_fake_signal]);
+  if ( (eShip->class == SHIP_PLATFORM ? 1 : (number_percent( ) >= the_chance)) && !check_pilot(ch,eShip) )
     {
       send_to_char("&RHey! That's not your ship!",ch);
       return;
@@ -1379,7 +1379,7 @@ void do_request(CHAR_DATA *ch, char *argument)
       send_to_char("&RThat ship's bay doors are already open!\r\n",ch);
       return;
     }
-  if ( chance && !check_pilot(ch, eShip) )
+  if ( the_chance && !check_pilot(ch, eShip) )
     learn_from_success(ch, gsn_fake_signal);
 
   send_to_char("&RYou open the bay doors of the remote ship.",ch);
@@ -1743,7 +1743,7 @@ void do_override(CHAR_DATA *ch, char *argument)
 
 void do_guard( CHAR_DATA *ch, char *argument )
 {
-  int chance;
+  int the_chance;
   SHIP_DATA *ship;
 
 
@@ -1765,9 +1765,9 @@ void do_guard( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  chance = IS_NPC(ch) ? ch->top_level
+  the_chance = IS_NPC(ch) ? ch->top_level
     : (int)  (ch->pcdata->learned[gsn_shipsystems]) ;
-  if ( number_percent( ) > chance )
+  if ( number_percent( ) > the_chance )
     {
       send_to_char("&RYou fail to work the controls properly.\r\n",ch);
       learn_from_failure( ch, gsn_shipsystems );
@@ -1815,7 +1815,7 @@ void do_sabotage(CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   char buf[MAX_INPUT_LENGTH];
-  int chance, change;
+  int the_chance, change;
   SHIP_DATA *ship;
 
   strcpy( arg, argument );
@@ -1838,9 +1838,9 @@ void do_sabotage(CHAR_DATA *ch, char *argument )
           return;
         }
 
-      chance = IS_NPC(ch) ? ch->top_level
+      the_chance = IS_NPC(ch) ? ch->top_level
         : (int) (ch->pcdata->learned[gsn_sabotage]);
-      if ( number_percent( ) < chance )
+      if ( number_percent( ) < the_chance )
         {
           send_to_char( "&GYou begin your work.\r\n", ch);
           act( AT_PLAIN, "$n begins working on the ship's $T.", ch,

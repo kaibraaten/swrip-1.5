@@ -55,7 +55,6 @@ void init_descriptor( DESCRIPTOR_DATA * dnew, SOCKET desc );
 void free_desc( DESCRIPTOR_DATA * d );
 
 /*  Warm reboot stuff, gotta make sure to thank Erwin for this :) */
-extern int port;		/* Port number to be used       */
 extern SOCKET control;		/* Controlling descriptor       */
 
 void do_copyover( CHAR_DATA * ch, char *argument )
@@ -152,7 +151,7 @@ void do_copyover( CHAR_DATA * ch, char *argument )
 
 #if defined(AMIGA) || defined(__MORPHOS__)
   sprintf( buf, "run >NIL: %s %d copyover %d %s",
-	   sysdata.exe_filename, port, coded_control, buf3 );
+	   sysdata.exe_filename, sysdata.port, coded_control, buf3 );
 
   error_code = System( (CONST_STRPTR) buf, NULL );
 
@@ -169,7 +168,7 @@ void do_copyover( CHAR_DATA * ch, char *argument )
 
 #else
   /* exec - descriptors are inherited */
-  sprintf( buf, "%d", port );
+  sprintf( buf, "%d", sysdata.port );
   sprintf( buf2, "%d", control );
 
   char filename[256];

@@ -36,7 +36,7 @@ extern char             lastplayercmd[MAX_INPUT_LENGTH];
 extern CHAR_DATA *      gch_prev;
 
 /* From Skills.c */
-int ris_save( CHAR_DATA *ch, int chance, int ris );
+int ris_save( CHAR_DATA *ch, int chnce, int ris );
 
 /*
  * Local functions.
@@ -418,7 +418,7 @@ void violence_update( void )
  */
 ch_ret multi_hit( CHAR_DATA *ch, CHAR_DATA *victim, int dt )
 {
-  int     chance;
+  int     hit_chance;
   int       dual_bonus;
   ch_ret  retcode;
 
@@ -438,8 +438,9 @@ ch_ret multi_hit( CHAR_DATA *ch, CHAR_DATA *victim, int dt )
   /* Very high chance of hitting compared to chance of going berserk */
   /* 40% or higher is always hit.. don't learn anything here though. */
   /* -- Altrag */
-  chance = IS_NPC(ch) ? 100 : (ch->pcdata->learned[gsn_berserk]*5/2);
-  if ( IS_AFFECTED(ch, AFF_BERSERK) && number_percent() < chance )
+  hit_chance = IS_NPC(ch) ? 100 : (ch->pcdata->learned[gsn_berserk]*5/2);
+
+  if ( IS_AFFECTED(ch, AFF_BERSERK) && number_percent() < hit_chance )
     if ( (retcode = one_hit( ch, victim, dt )) != rNONE ||
          who_fighting( ch ) != victim )
       return retcode;
@@ -447,8 +448,8 @@ ch_ret multi_hit( CHAR_DATA *ch, CHAR_DATA *victim, int dt )
   if ( get_eq_char( ch, WEAR_DUAL_WIELD ) )
     {
       dual_bonus = IS_NPC(ch) ? (ch->skill_level[COMBAT_ABILITY] / 10) : (ch->pcdata->learned[gsn_dual_wield] / 10);
-      chance = IS_NPC(ch) ? ch->top_level : ch->pcdata->learned[gsn_dual_wield];
-      if ( number_percent( ) < chance )
+      hit_chance = IS_NPC(ch) ? ch->top_level : ch->pcdata->learned[gsn_dual_wield];
+      if ( number_percent( ) < hit_chance )
         {
           learn_from_success( ch, gsn_dual_wield );
           retcode = one_hit( ch, victim, dt );
@@ -469,7 +470,7 @@ ch_ret multi_hit( CHAR_DATA *ch, CHAR_DATA *victim, int dt )
    */
   if ( IS_NPC(ch) && ch->numattacks > 0 )
     {
-      for ( chance = 0; chance <= ch->numattacks; chance++ )
+      for ( hit_chance = 0; hit_chance <= ch->numattacks; hit_chance++ )
         {
           retcode = one_hit( ch, victim, dt );
           if ( retcode != rNONE || who_fighting( ch ) != victim )
@@ -478,9 +479,9 @@ ch_ret multi_hit( CHAR_DATA *ch, CHAR_DATA *victim, int dt )
       return retcode;
     }
 
-  chance = IS_NPC(ch) ? ch->top_level
+  hit_chance = IS_NPC(ch) ? ch->top_level
     : (int) ((ch->pcdata->learned[gsn_second_attack]+dual_bonus)/1.5);
-  if ( number_percent( ) < chance )
+  if ( number_percent( ) < hit_chance )
     {
       learn_from_success( ch, gsn_second_attack );
       retcode = one_hit( ch, victim, dt );
@@ -490,9 +491,9 @@ ch_ret multi_hit( CHAR_DATA *ch, CHAR_DATA *victim, int dt )
   else
     learn_from_failure( ch, gsn_second_attack );
 
-  chance = IS_NPC(ch) ? ch->top_level
+  hit_chance = IS_NPC(ch) ? ch->top_level
     : (int) ((ch->pcdata->learned[gsn_third_attack]+(dual_bonus*1.5))/2);
-  if ( number_percent( ) < chance )
+  if ( number_percent( ) < hit_chance )
     {
       learn_from_success( ch, gsn_third_attack );
       retcode = one_hit( ch, victim, dt );
@@ -502,9 +503,9 @@ ch_ret multi_hit( CHAR_DATA *ch, CHAR_DATA *victim, int dt )
   else
     learn_from_failure( ch, gsn_third_attack );
 
-  chance = IS_NPC(ch) ? ch->top_level
+  hit_chance = IS_NPC(ch) ? ch->top_level
     : (int) ((ch->pcdata->learned[gsn_fourth_attack]+(dual_bonus*1.5))/2);
-  if ( number_percent( ) < chance )
+  if ( number_percent( ) < hit_chance )
     {
       learn_from_success( ch, gsn_fourth_attack );
       retcode = one_hit( ch, victim, dt );
@@ -514,9 +515,9 @@ ch_ret multi_hit( CHAR_DATA *ch, CHAR_DATA *victim, int dt )
   else
     learn_from_failure( ch, gsn_fourth_attack );
 
-  chance = IS_NPC(ch) ? ch->top_level
+  hit_chance = IS_NPC(ch) ? ch->top_level
     : (int) ((ch->pcdata->learned[gsn_fifth_attack]+(dual_bonus*1.5))/2);
-  if ( number_percent( ) < chance )
+  if ( number_percent( ) < hit_chance )
     {
       learn_from_success( ch, gsn_fifth_attack );
       retcode = one_hit( ch, victim, dt );
@@ -528,8 +529,8 @@ ch_ret multi_hit( CHAR_DATA *ch, CHAR_DATA *victim, int dt )
 
   retcode = rNONE;
 
-  chance = IS_NPC(ch) ? (int) (ch->top_level / 4) : 0;
-  if ( number_percent( ) < chance )
+  hit_chance = IS_NPC(ch) ? (int) (ch->top_level / 4) : 0;
+  if ( number_percent( ) < hit_chance )
     retcode = one_hit( ch, victim, dt );
 
   if ( retcode == rNONE )
@@ -641,7 +642,7 @@ ch_ret one_hit( CHAR_DATA *ch, CHAR_DATA *victim, int dt )
   int   prof_bonus;
   int   prof_gsn;
   ch_ret retcode;
-  int chance;
+  int hit_chance;
   bool fail;
   AFFECT_DATA af;
 
@@ -830,7 +831,7 @@ ch_ret one_hit( CHAR_DATA *ch, CHAR_DATA *victim, int dt )
   /* check for RIS_PLUSx                                        -Thoric */
   if ( dam )
     {
-      int x, res, imm, sus, mod;
+      int i, res, imm, sus, mod;
 
       if ( plusris )
         plusris = RIS_PLUS1 << UMIN(plusris, 7);
@@ -839,14 +840,14 @@ ch_ret one_hit( CHAR_DATA *ch, CHAR_DATA *victim, int dt )
       imm = res = -1;  sus = 1;
 
       /* find high ris */
-      for ( x = RIS_PLUS1; x <= RIS_PLUS6; x <<= 1 )
+      for ( i = RIS_PLUS1; i <= RIS_PLUS6; i <<= 1 )
         {
-          if ( IS_SET( victim->immune, x ) )
-            imm = x;
-          if ( IS_SET( victim->resistant, x ) )
-            res = x;
-          if ( IS_SET( victim->susceptible, x ) )
-            sus = x;
+          if ( IS_SET( victim->immune, i ) )
+            imm = i;
+          if ( IS_SET( victim->resistant, i ) )
+            res = i;
+          if ( IS_SET( victim->susceptible, i ) )
+            sus = i;
         }
       mod = 10;
       if ( imm >= plusris )
@@ -900,24 +901,26 @@ ch_ret one_hit( CHAR_DATA *ch, CHAR_DATA *victim, int dt )
           dam /= 10;
           wield->value[4] -= 3;
           fail = FALSE;
-          chance = ris_save( victim, ch->skill_level[COMBAT_ABILITY], RIS_PARALYSIS );
-          if ( chance == 1000 )
+          hit_chance = ris_save( victim, ch->skill_level[COMBAT_ABILITY], RIS_PARALYSIS );
+          if ( hit_chance == 1000 )
             fail = TRUE;
           else
-            fail = saves_para_petri( chance, victim );
+            fail = saves_para_petri( hit_chance, victim );
           if ( victim->was_stunned > 0 )
             {
               fail = TRUE;
               victim->was_stunned--;
             }
-          chance = 100 - get_curr_con(victim) - victim->skill_level[COMBAT_ABILITY]/2;
+          hit_chance = 100 - get_curr_con(victim) - victim->skill_level[COMBAT_ABILITY]/2;
           /* harder for player to stun another player */
           if ( !IS_NPC(ch) && !IS_NPC(victim) )
-            chance -= sysdata.stun_plr_vs_plr;
+            hit_chance -= sysdata.stun_plr_vs_plr;
           else
-            chance -= sysdata.stun_regular;
-          chance = URANGE( 5, chance, 95 );
-          if ( !fail && number_percent( ) < chance )
+            hit_chance -= sysdata.stun_regular;
+
+          hit_chance = URANGE( 5, hit_chance, 95 );
+
+          if ( !fail && number_percent() < hit_chance )
             {
               WAIT_STATE( victim, PULSE_VIOLENCE );
               act( AT_BLUE, "Blue rings of energy from $N's blaster knock you down leaving you stunned!", victim, NULL, ch, TO_CHAR );
@@ -1113,10 +1116,8 @@ ch_ret one_hit( CHAR_DATA *ch, CHAR_DATA *victim, int dt )
    */
   if ( IS_NPC(victim) )
     {
-      OBJ_DATA *wield;
-
-      wield = get_eq_char( victim, WEAR_WIELD );
-      if ( wield != NULL && wield->value[3] == WEAPON_BLASTER && get_cover( victim ) == TRUE )
+      OBJ_DATA *wielding = get_eq_char( victim, WEAR_WIELD );
+      if ( wielding != NULL && wielding->value[3] == WEAPON_BLASTER && get_cover( victim ) == TRUE )
         {
           start_hating( victim, ch );
           start_hunting( victim, ch );

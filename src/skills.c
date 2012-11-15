@@ -1217,7 +1217,7 @@ void do_sset( CHAR_DATA *ch, char *argument )
 
 void learn_from_success( CHAR_DATA *ch, int sn )
 {
-  int adept, gain, sklvl, learn, percent, chance;
+  int adept, gain, sklvl, learn, percent, learn_chance;
 
   if ( IS_NPC(ch) || ch->pcdata->learned[sn] <= 0 )
     return;
@@ -1241,12 +1241,13 @@ void learn_from_success( CHAR_DATA *ch, int sn )
     sklvl = ch->skill_level[skill_table[sn]->guild];
   if ( ch->pcdata->learned[sn] < 100 )
     {
-      chance = ch->pcdata->learned[sn] + (5 * skill_table[sn]->difficulty);
+      learn_chance = ch->pcdata->learned[sn] + (5 * skill_table[sn]->difficulty);
       percent = number_percent();
-      if ( percent >= chance )
+
+      if ( percent >= learn_chance )
         learn = 2;
       else
-        if ( chance - percent > 25 )
+        if ( learn_chance - percent > 25 )
           return;
         else
           learn = 1;
@@ -2431,7 +2432,7 @@ void do_tail( CHAR_DATA *ch, char *argument )
 void do_bash( CHAR_DATA *ch, char *argument )
 {
   CHAR_DATA *victim;
-  int chance;
+  int bash_chance;
 
   if ( IS_NPC(ch) && IS_AFFECTED( ch, AFF_CHARM ) )
     {
@@ -2453,15 +2454,18 @@ void do_bash( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  chance = (((get_curr_dex(victim) + get_curr_str(victim))
+  bash_chance = (((get_curr_dex(victim) + get_curr_str(victim))
              -   (get_curr_dex(ch)     + get_curr_str(ch))) * 10) + 10;
   if ( !IS_NPC(ch) && !IS_NPC(victim) )
-    chance += 25;
+    bash_chance += 25;
+
   if ( victim->fighting && victim->fighting->who != ch )
-    chance += 19;
+    bash_chance += 19;
+
   WAIT_STATE( ch, skill_table[gsn_bash]->beats );
+
   if ( IS_NPC(ch)
-       || (number_percent( ) + chance) < ch->pcdata->learned[gsn_bash] )
+       || (number_percent( ) + bash_chance) < ch->pcdata->learned[gsn_bash] )
     {
       learn_from_success( ch, gsn_bash );
       /* do not change anything here!  -Thoric */
@@ -2484,7 +2488,7 @@ void do_stun( CHAR_DATA *ch, char *argument )
 {
   CHAR_DATA *victim;
   AFFECT_DATA af;
-  int chance;
+  int stun_chance;
   bool fail;
 
   if ( IS_NPC(ch) && IS_AFFECTED( ch, AFF_CHARM ) )
@@ -2516,22 +2520,24 @@ void do_stun( CHAR_DATA *ch, char *argument )
 
   WAIT_STATE( ch, skill_table[gsn_stun]->beats );
   fail = FALSE;
-  chance = ris_save( victim, ch->skill_level[COMBAT_ABILITY] , RIS_PARALYSIS );
-  if ( chance == 1000 )
+  stun_chance = ris_save( victim, ch->skill_level[COMBAT_ABILITY] , RIS_PARALYSIS );
+  if ( stun_chance == 1000 )
     fail = TRUE;
   else
-    fail = saves_para_petri( chance, victim );
+    fail = saves_para_petri( stun_chance, victim );
 
-  chance = (((get_curr_dex(victim) + get_curr_str(victim))
+  stun_chance = (((get_curr_dex(victim) + get_curr_str(victim))
              -   (get_curr_dex(ch)     + get_curr_str(ch))) * 10) + 10;
+
   /* harder for player to stun another player */
   if ( !IS_NPC(ch) && !IS_NPC(victim) )
-    chance += sysdata.stun_plr_vs_plr;
+    stun_chance += sysdata.stun_plr_vs_plr;
   else
-    chance += sysdata.stun_regular;
+    stun_chance += sysdata.stun_regular;
+
   if ( !fail
        && (  IS_NPC(ch)
-             || (number_percent( ) + chance) < ch->pcdata->learned[gsn_stun] ) )
+             || (number_percent( ) + stun_chance) < ch->pcdata->learned[gsn_stun] ) )
     {
       learn_from_success( ch, gsn_stun );
       /*    DO *NOT* CHANGE!    -Thoric    */
@@ -2864,7 +2870,7 @@ void do_pick( CHAR_DATA *ch, char *argument )
             {
               CHAR_DATA *victim;
               bool victim_comlink;
-              OBJ_DATA *obj;
+              OBJ_DATA *iter_obj;
               victim = d->original ? d->original : d->character;
 
               if ( d->connected != CON_PLAYING )
@@ -2876,11 +2882,12 @@ void do_pick( CHAR_DATA *ch, char *argument )
               victim_comlink = FALSE;
               if ( IS_IMMORTAL(victim) )
                 victim_comlink = TRUE;
-              for ( obj = victim->last_carrying; obj; obj = obj->prev_content )
+              for ( iter_obj = victim->last_carrying; iter_obj; iter_obj = iter_obj->prev_content )
                 {
-                  if ( obj->pIndexData->item_type == ITEM_COMLINK )
+                  if ( iter_obj->pIndexData->item_type == ITEM_COMLINK )
                     victim_comlink = TRUE;
                 }
+
               if ( !victim_comlink )
                 continue;
 
@@ -2919,7 +2926,7 @@ void do_pick( CHAR_DATA *ch, char *argument )
             {
               CHAR_DATA *victim;
               bool victim_comlink;
-              OBJ_DATA *obj;
+              OBJ_DATA *iter_obj;
               victim = d->original ? d->original : d->character;
 
               if ( d->connected != CON_PLAYING )
@@ -2931,9 +2938,9 @@ void do_pick( CHAR_DATA *ch, char *argument )
               victim_comlink = FALSE;
               if ( IS_IMMORTAL(victim) )
                 victim_comlink = TRUE;
-              for ( obj = victim->last_carrying; obj; obj = obj->prev_content )
+              for ( iter_obj = victim->last_carrying; iter_obj; iter_obj = iter_obj->prev_content )
                 {
-                  if ( obj->pIndexData->item_type == ITEM_COMLINK )
+                  if ( iter_obj->pIndexData->item_type == ITEM_COMLINK )
                     victim_comlink = TRUE;
                 }
               if ( !victim_comlink )
@@ -3884,7 +3891,7 @@ void do_brew( CHAR_DATA *ch, char *argument )
 
 bool check_grip( CHAR_DATA *ch, CHAR_DATA *victim )
 {
-  int chance;
+  int grip_chance;
 
   if ( !IS_AWAKE(victim) )
     return FALSE;
@@ -3893,14 +3900,14 @@ bool check_grip( CHAR_DATA *ch, CHAR_DATA *victim )
     return FALSE;
 
   if ( IS_NPC(victim) )
-    chance  = UMIN( 60, 2 * victim->top_level );
+    grip_chance  = UMIN( 60, 2 * victim->top_level );
   else
-    chance  = (int) (victim->pcdata->learned[gsn_grip] / 2);
+    grip_chance  = (int) (victim->pcdata->learned[gsn_grip] / 2);
 
   /* Consider luck as a factor */
-  chance += (2 * (get_curr_lck(victim) - 13 ) );
+  grip_chance += (2 * (get_curr_lck(victim) - 13 ) );
 
-  if ( number_percent( ) >= chance + victim->top_level - ch->top_level )
+  if ( number_percent( ) >= grip_chance + victim->top_level - ch->top_level )
     {
       learn_from_failure( victim, gsn_grip );
       return FALSE;

@@ -447,7 +447,7 @@ bool load_clan_file( char *clanfile )
   char filename[256];
   CLAN_DATA *clan;
   FILE *fp;
-  bool found;
+  bool found = FALSE;
 
   CREATE( clan, CLAN_DATA, 1 );
   clan->next_subclan = NULL;
@@ -456,7 +456,6 @@ bool load_clan_file( char *clanfile )
   clan->first_subclan = NULL;
   clan->mainclan     = NULL;
 
-  found = FALSE;
   sprintf( filename, "%s%s", CLAN_DIR, clanfile );
 
   if ( ( fp = fopen( filename, "r" ) ) != NULL )
@@ -527,10 +526,10 @@ bool load_clan_file( char *clanfile )
         }
 
       sprintf( filename, "%s%s.vault", CLAN_DIR, clan->filename );
+
       if ( ( fp = fopen( filename, "r" ) ) != NULL )
         {
           int iNest;
-          bool found;
           OBJ_DATA *tobj, *tobj_next;
 
           log_string( "Loading clan storage room" );
@@ -1604,7 +1603,7 @@ void do_shove( CHAR_DATA *ch, char *argument )
   ROOM_INDEX_DATA *to_room;
   ROOM_INDEX_DATA *fromroom;
   SHIP_DATA *ship;
-  int chance;
+  int shove_chance;
 
   argument = one_argument( argument, arg );
   argument = one_argument( argument, arg2 );
@@ -1839,22 +1838,22 @@ void do_shove( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  chance = 50;
+  shove_chance = 50;
 
-  /* Add 3 points to chance for every str point above 15, subtract for
+  /* Add 3 points to shove_chance for every str point above 15, subtract for
      below 15 */
 
-  chance += ((get_curr_str(ch) - 15) * 3);
+  shove_chance += ((get_curr_str(ch) - 15) * 3);
 
-  chance += (ch->top_level - victim->top_level);
+  shove_chance += (ch->top_level - victim->top_level);
 
   /* Debugging purposes - show percentage for testing */
 
-  /* sprintf(buf, "Shove percentage of %s = %d", ch->name, chance);
+  /* sprintf(buf, "Shove percentage of %s = %d", ch->name, shove_chance);
      act( AT_ACTION, buf, ch, NULL, NULL, TO_ROOM );
   */
 
-  if (chance < number_percent( ))
+  if (shove_chance < number_percent( ))
     {
       send_to_char("You failed.\r\n", ch);
       victim->position = POS_STANDING;
@@ -1881,7 +1880,7 @@ void do_drag( CHAR_DATA *ch, char *argument )
   EXIT_DATA *pexit;
   ROOM_INDEX_DATA *to_room;
   bool nogo;
-  int chance;
+  int drag_chance;
   ROOM_INDEX_DATA *fromroom;
   SHIP_DATA *ship;
 
@@ -2115,14 +2114,14 @@ void do_drag( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  chance = 50;
+  drag_chance = 50;
 
 
   /*
-    sprintf(buf, "Drag percentage of %s = %d", ch->name, chance);
+    sprintf(buf, "Drag percentage of %s = %d", ch->name, drag_chance);
     act( AT_ACTION, buf, ch, NULL, NULL, TO_ROOM );
   */
-  if (chance < number_percent( ))
+  if (drag_chance < number_percent( ))
     {
       send_to_char("You failed.\r\n", ch);
       return;
