@@ -6,8 +6,6 @@
 #include "swr_support.h"
 #include "sha256.h"
 
-extern FILE *out_stream;
-
 #define HIDDEN_TILDE    '*'
 
 typedef bool STRING_COMPARATOR( const char*, const char* );
@@ -165,7 +163,7 @@ bool str_cmp( const char *astr, const char *bstr )
   {
     bug( "Str_cmp: null astr." );
     if ( bstr )
-      fprintf( out_stream, "str_cmp: astr: (null)  bstr: %s\n", bstr );
+      fprintf( stdout, "str_cmp: astr: (null)  bstr: %s\n", bstr );
     return TRUE;
   }
 
@@ -173,7 +171,7 @@ bool str_cmp( const char *astr, const char *bstr )
   {
     bug( "Str_cmp: null bstr." );
     if ( astr )
-      fprintf( out_stream, "str_cmp: astr: %s  bstr: (null)\n", astr );
+      fprintf( stdout, "str_cmp: astr: %s  bstr: (null)\n", astr );
     return TRUE;
   }
 

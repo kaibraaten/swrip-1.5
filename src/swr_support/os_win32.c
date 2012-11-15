@@ -27,8 +27,7 @@
 #include <time.h>
 #include "os.h"
 
-extern FILE *out_stream;
-
+/*
 static const char *get_next_filename( const char *directory )
 {
   static char buf[256];
@@ -58,20 +57,15 @@ static const char *get_next_filename( const char *directory )
   snprintf( buf, 256, "%s%d.log", directory, high_num );
   return buf;
 }
-
-FILE *open_log_file(void)
-{
-	fopen( get_next_filename( "log/" ), "w" );
-}
+*/
 
 void os_setup( void )
 {
   WSADATA wsaData;
-  out_stream = open_log_file();
 
   if( WSAStartup( MAKEWORD( 2, 2 ), &wsaData ) != 0 )
   {
-    fprintf( out_stream, "%s (%s:%d) - WSAStartup failed.\n",
+    fprintf( stdout, "%s (%s:%d) - WSAStartup failed.\n",
 	__FUNCTION__, __FILE__, __LINE__ );
     exit( 1 );
   }
@@ -80,12 +74,6 @@ void os_setup( void )
 void os_cleanup( void )
 {
   WSACleanup();
-
-  if( out_stream )
-  {
-    fclose( out_stream );
-    out_stream = 0;
-  }
 }
 
 // gettimeofday for Windows

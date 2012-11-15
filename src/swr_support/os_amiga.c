@@ -41,8 +41,6 @@ __near struct UtilityBase *UtilityBase = NULL;
 struct Library *DynLoadBase = NULL;
 #endif
 
-extern FILE *out_stream;
-
 #ifndef __DATE2__
 #define __DATE2__ __DATE__
 #endif
@@ -51,6 +49,7 @@ extern FILE *out_stream;
 #define VERSTAG "\0$VER: " MUD_NAME " (" __DATE2__ ")"
 const char *VersTag = VERSTAG;
 
+/*
 static const char *get_next_filename( CONST_STRPTR directory )
 {
   static char filename[256];
@@ -105,33 +104,33 @@ static const char *get_next_filename( CONST_STRPTR directory )
   snprintf( filename, 256, "%s%d.log", directory, high_num );
   return filename;
 }
-
+*/
+/*
 FILE *open_log_file(void)
 {
-	return fopen( get_next_filename( (CONST_STRPTR) "PROGDIR:log/" ), "w+" );
+  return fopen( get_next_filename( (CONST_STRPTR) "PROGDIR:log/" ), "w+" );
 }
+*/
 
 void os_setup( void )
 {
-  out_stream = open_log_file()
-
   if( !( SocketBase = OpenLibrary( (CONST_STRPTR) "bsdsocket.library", 2 ) ) )
   {
-    fprintf( out_stream, "%s (%s:%d) - Failed to open bsdsocket.library v2+\n",
+    fprintf( stdout, "%s (%s:%d) - Failed to open bsdsocket.library v2+\n",
 	__FUNCTION__, __FILE__, __LINE__ );
     exit( 1 );
   }
 
   if( !( UserGroupBase = OpenLibrary( (CONST_STRPTR) "usergroup.library", 0 ) ) )
   {
-    fprintf( out_stream, "%s (%s:%d) - Failed to open usergroup.library\n",
+    fprintf( stdout, "%s (%s:%d) - Failed to open usergroup.library\n",
 	__FUNCTION__, __FILE__, __LINE__ );
     exit( 1 );
   }
 
   if( !( UtilityBase = (struct UtilityBase*) OpenLibrary( (CONST_STRPTR) "utility.library", 37 ) ) )
   {
-    fprintf( out_stream, "%s (%s:%d) - Failed to open utility.library\n",
+    fprintf( stdout, "%s (%s:%d) - Failed to open utility.library\n",
 	__FUNCTION__, __FILE__, __LINE__ );
     exit( 1 );
   }
@@ -139,7 +138,7 @@ void os_setup( void )
 #if defined(__MORPHOS__) && defined(SWRIP_USE_DLSYM)
   if( !( DynLoadBase = OpenLibrary( (CONST_STRPTR) "dynload.library", 51 ) ) )
   {
-    fprintf( out_stream, "%s (%s:%d) - Failed to open dynload.library\n",
+    fprintf( stdout, "%s (%s:%d) - Failed to open dynload.library\n",
 	__FUNCTION__, __FILE__, __LINE__ );
     exit( 1 );
   }
@@ -176,12 +175,6 @@ void os_cleanup( void )
     SocketBase = NULL;
   }
   */
-
-  if( out_stream )
-  {
-    fclose( out_stream );
-    out_stream = 0;
-  }
 }
 
 int set_nonblocking( socket_t sock )
