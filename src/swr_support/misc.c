@@ -228,3 +228,83 @@ char *flag_string( int bitvector, const char * const flagarray[] )
 
   return buf;
 }
+
+/*
+ * Simple linear interpolation.
+ */
+int interpolate( int level, int value_00, int value_32 )
+{
+  return value_00 + level * (value_32 - value_00) / 32;
+}
+
+/*
+ * stripclr - removes the color codes from a string.
+ *
+ * Notice: currently setup for the default smaug/swr color code system,
+ * if you do not use these, then you will have to do some editing.
+ *
+ * This function should properly remove the color codes from a string
+ * Not sure if its any use to anyone, but i thought i'd give it out.
+ *
+ * I'm not asking for my name to be displayed, but i would like to have my name\
+ at
+ * least still attached to this function. Altho, it certainly would be nice.
+ *
+ * Feel free to contact me if you have any problems.
+ *
+ * - Gavin - ur_gavin@hotmail.com
+ * - Unknown Regions - http://ur.lynker.com
+ */
+char *stripclr( char *text )
+{
+  int i = 0, j = 0;
+
+  if (!text || text[0] == '\0')
+    {
+      return NULL;
+    }
+  else
+    {
+      char *buf;
+      static char done[MAX_INPUT_LENGTH*2];
+
+      done[0] = '\0';
+
+      if ( (buf = (char *)malloc( strlen(text) * sizeof(text) )) == NULL)
+        return text;
+
+      /* Loop through until you've hit your terminating 0 */
+      while (text[i] != '\0')
+        {
+          while (text[i] == '&')
+            {
+              i += 2;
+            }
+	  if ( text[i] != '\0' )
+            {
+              if ( isspace(text[i]) )
+                {
+                  buf[j] = ' ';
+                  i++;
+                  j++;
+                }
+              else
+                {
+                  buf[j] = text[i];
+                  i++;
+                  j++;
+                }
+            }
+          else
+            buf[j] = '\0';
+        }
+
+      buf[j] = '\0';
+
+      sprintf(done, "%s", buf);
+      buf = realloc(buf, j*sizeof(char));
+      free( buf);
+
+      return done;
+    }
+}

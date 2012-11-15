@@ -238,6 +238,10 @@ int number_door( void );
 int number_bits( int width );
 int dice( int number, int size );
 
+/* misc stuff */
+int interpolate( int level, int value_00, int value_32 );
+char *stripclr( char *text );
+
 /* time_fun.c */
 struct tm *update_time( struct tm *old_time );
 void subtract_times( struct timeval *etime, struct timeval *start_time );

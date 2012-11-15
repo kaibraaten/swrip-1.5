@@ -252,56 +252,6 @@ char *grab_word( char *argument, char *arg_first )
   return argument;
 }
 
-char *wordwrap( char *txt, short wrap )
-{
-  static char buf[MAX_STRING_LENGTH];
-  char *bufp;
-
-  buf[0] = '\0';
-  bufp = buf;
-  if ( txt != NULL )
-    {
-      char line[MAX_STRING_LENGTH];
-      char temp[MAX_STRING_LENGTH];
-      char *ptr, *p;
-      int ln, x;
-
-      ++bufp;
-      line[0] = '\0';
-      ptr = txt;
-      while ( *ptr )
-        {
-          ptr = grab_word( ptr, temp );
-          ln = strlen( line );  x = strlen( temp );
-          if ( (ln + x + 1) < wrap )
-            {
-              if ( line[ln-1] == '.' )
-                strcat( line, "  " );
-              else
-                strcat( line, " " );
-              strcat( line, temp );
-              p = strchr( line, '\n' );
-              if ( !p )
-                p = strchr( line, '\r' );
-              if ( p )
-                {
-                  strcat( buf, line );
-                  line[0] = '\0';
-                }
-            }
-          else
-            {
-              strcat( line, "\r\n" );
-              strcat( buf, line );
-              strcpy( line, temp );
-            }
-        }
-      if ( line[0] != '\0' )
-        strcat( buf, line );
-    }
-  return bufp;
-}
-
 void decorate_room( ROOM_INDEX_DATA *room )
 {
   char buf[MAX_STRING_LENGTH];

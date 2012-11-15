@@ -12,7 +12,7 @@ IMC = 1
 DEBUG_TELNET = -DSWR2_DEBUG_TELNET=0
 
 CCFLAGS = -g3 -MMD -Iswr_support $(WFLAGS) $(USE_DLSYM) $(DEBUG_TELNET)
-LDFLAGS = -lm -lcrypt -lz
+LDFLAGS = -lm -lcrypt -lz -Lswr_support -lswr_support -Wl,-rpath,./src/swr_support
 
 #Uncomment the next line of you're using Solaris and you get linker errors.
 #SOLARIS = 1
@@ -33,7 +33,7 @@ endif
 ODIR = obj
 _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o \
 	boards.o bounty.o build.o clans.o comm.o comments.o const.o \
-	copyover.o db.o fight.o grub.o handler.o hashstr.o interp.o magic.o \
+	copyover.o db.o fight.o grub.o handler.o interp.o magic.o \
 	makeobjs.o mapper.o misc.o mud_comm.o mud_prog.o newarena.o player.o \
 	reset.o save.o shops.o skills.o special.o space.o space2.o \
 	swskills.o tables.o track.o update.o

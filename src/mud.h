@@ -4215,7 +4215,6 @@ void	free_note( NOTE_DATA *pnote );
 char *	flag_string( int bitvector, char * const flagarray[] );
 int	get_mpflag( char *flag );
 int	get_dir( char *txt  );
-char *	strip_cr( char *str  );
 int     get_vip_flag( char *flag );
 int     get_wanted_flag( char *flag );
 
@@ -4323,7 +4322,6 @@ void	reset_area( AREA_DATA * pArea );
 
 /* db.c */
 void	show_file( CHAR_DATA *ch, char *filename );
-char *	str_dup( char const *str );
 void	boot_db( bool fCopyover );
 void	area_update( void );
 void	add_char( CHAR_DATA *ch );
@@ -4335,34 +4333,6 @@ char *	get_extra_descr( const char *name, EXTRA_DESCR_DATA *ed );
 MID *	get_mob_index( short vnum );
 OID *	get_obj_index( int vnum );
 RID *	get_room_index( int vnum );
-char	fread_letter( FILE *fp );
-int	fread_number( FILE *fp );
-char *	fread_string( FILE *fp );
-char *	fread_string_nohash( FILE *fp );
-void	fread_to_eol( FILE *fp );
-char *	fread_word( FILE *fp );
-char *	fread_line( FILE *fp );
-int	number_fuzzy( int number );
-int	number_range( int from, int to );
-int	number_percent( void );
-int	number_door( void );
-int	number_bits( int width );
-int	number_mm( void );
-int	dice( int number, int size );
-int	interpolate( int level, int value_00, int value_32 );
-void	smash_tilde( char *str );
-void	hide_tilde( char *str );
-char *	show_tilde( char *str );
-bool	str_cmp( const char *astr, const char *bstr );
-bool	str_prefix( const char *astr, const char *bstr );
-bool	str_infix( const char *astr, const char *bstr );
-bool	str_suffix( const char *astr, const char *bstr );
-char *	capitalize( const char *str );
-char *	strlower( const char *str );
-char *	strupper( const char *str );
-char *  aoran( const char *str );
-void	append_file( CHAR_DATA *ch, char *file, char *str );
-void	append_to_file( char *file, char *str );
 void	bug( const char *str, ... );
 void	log_string_plus( const char *str, short log_type, short level );
 RID *	make_room( int vnum );
@@ -4514,10 +4484,6 @@ short  get_curr_frc( CHAR_DATA *ch );
 bool	can_take_proto( CHAR_DATA *ch );
 int	can_carry_n( CHAR_DATA *ch );
 int	can_carry_w( CHAR_DATA *ch );
-bool	is_name( const char *str, char *namelist );
-bool	is_name_prefix( const char *str, char *namelist );
-bool	nifty_is_name( char *str, char *namelist );
-bool	nifty_is_name_prefix( char *str, char *namelist );
 void	affect_modify( CHAR_DATA *ch, AFFECT_DATA *paf, bool fAdd );
 void	affect_to_char( CHAR_DATA *ch, AFFECT_DATA *paf );
 void	affect_remove( CHAR_DATA *ch, AFFECT_DATA *paf );
@@ -4610,15 +4576,9 @@ int count_users(OBJ_DATA *obj);
 /* interp.c */
 bool	check_pos( CHAR_DATA *ch, short position );
 void	interpret( CHAR_DATA *ch, char *argument );
-bool	is_number( char *arg );
-int	number_argument( char *argument, char *arg );
-char *	one_argument( char *argument, char *arg_first );
-char *	one_argument2( char *argument, char *arg_first );
 ST *	find_social( char *command );
 CMDTYPE *find_command( char *command );
 void	hash_commands( void );
-void	start_timer( struct timeval *stime );
-time_t	end_timer( struct timeval *stime );
 void	send_timer( struct timerset *vtime, CHAR_DATA *ch );
 void	update_userec( struct timeval *time_used, struct timerset *userec );
 
@@ -4699,16 +4659,6 @@ void    auction_update( void );
 void	remove_portal( OBJ_DATA *portal );
 int max_level( CHAR_DATA *ch, int ability );
 bool    is_droid( CHAR_DATA *ch );
-
-/* hashstr.c */
-char *	str_alloc( char *str );
-char *	quick_link( char *str );
-int	str_free( char *str );
-void	show_hash( int count );
-char *	hash_stats( void );
-char *	check_hash( char *str );
-void	hash_dump( int hash );
-void	show_high_hash( int top );
 
 /* newscore.c */
 char *  get_race( CHAR_DATA *ch );

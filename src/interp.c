@@ -29,16 +29,7 @@
 #include <time.h>
 #include "mud.h"
 
-/*
- * Externals
- */
-
-void subtract_times( struct timeval *etime, struct timeval *stime );
-
-
-
 bool    check_social( CHAR_DATA *ch, char *command, char *argument );
-
 
 /*
  * Log-all switch.
@@ -613,127 +604,6 @@ bool check_social( CHAR_DATA *ch, char *command, char *argument )
   return TRUE;
 }
 
-
-
-/*
- * Return true if an argument is completely numeric.
- */
-bool is_number( char *arg )
-{
-  if ( *arg == '\0' )
-    return FALSE;
-
-  for ( ; *arg != '\0'; arg++ )
-    {
-      if ( !isdigit(*arg) && *arg != '-' )
-        return FALSE;
-    }
-
-  return TRUE;
-}
-
-
-
-/*
- * Given a string like 14.foo, return 14 and 'foo'
- */
-int number_argument( char *argument, char *arg )
-{
-  char *pdot;
-  int number;
-
-  for ( pdot = argument; *pdot != '\0'; pdot++ )
-    {
-      if ( *pdot == '.' )
-        {
-          *pdot = '\0';
-          number = atoi( argument );
-          *pdot = '.';
-          strcpy( arg, pdot+1 );
-          return number;
-        }
-    }
-
-  strcpy( arg, argument );
-  return 1;
-}
-
-
-
-/*
- * Pick off one argument from a string and return the rest.
- * Understands quotes.
- */
-char *one_argument( char *argument, char *arg_first )
-{
-  char cEnd;
-  short count;
-
-  count = 0;
-
-  while ( isspace(*argument) )
-    argument++;
-
-  cEnd = ' ';
-  if ( *argument == '\'' || *argument == '"' )
-    cEnd = *argument++;
-
-  while ( *argument != '\0' || ++count >= 255 )
-    {
-      if ( *argument == cEnd )
-        {
-          argument++;
-          break;
-        }
-      *arg_first = LOWER(*argument);
-      arg_first++;
-      argument++;
-    }
-  *arg_first = '\0';
-
-  while ( isspace(*argument) )
-    argument++;
-
-  return argument;
-}
-
-/*
- * Pick off one argument from a string and return the rest.
- * Understands quotes.  Delimiters = { ' ', '-' }
- */
-char *one_argument2( char *argument, char *arg_first )
-{
-  char cEnd;
-  short count;
-
-  count = 0;
-
-  while ( isspace(*argument) )
-    argument++;
-
-  cEnd = ' ';
-  if ( *argument == '\'' || *argument == '"' )
-    cEnd = *argument++;
-
-  while ( *argument != '\0' || ++count >= 255 )
-    {
-      if ( *argument == cEnd || *argument == '-' )
-        {
-          argument++;
-          break;
-        }
-      *arg_first = LOWER(*argument);
-      arg_first++;
-      argument++;
-    }
-  *arg_first = '\0';
-
-  while ( isspace(*argument) )
-    argument++;
-
-  return argument;
-}
-
 void do_timecmd( CHAR_DATA *ch, char *argument )
 {
   struct timeval stime;
@@ -775,34 +645,6 @@ void do_timecmd( CHAR_DATA *ch, char *argument )
   ch_printf( ch, "Timing took %d.%06d seconds.\r\n",
              etime.tv_sec, etime.tv_usec );
   return;
-}
-
-void start_timer(struct timeval *stime)
-{
-  if ( !stime )
-    {
-      bug( "Start_timer: NULL stime.", 0 );
-      return;
-    }
-  gettimeofday(stime, NULL);
-  return;
-}
-
-time_t end_timer(struct timeval *stime)
-{
-  struct timeval etime;
-
-  /* Mark etime before checking stime, so that we get a better reading.. */
-  gettimeofday(&etime, NULL);
-  if ( !stime || (!stime->tv_sec && !stime->tv_usec) )
-    {
-      bug( "End_timer: bad stime.", 0 );
-      return 0;
-    }
-  subtract_times(&etime, stime);
-  /* stime becomes time used */
-  *stime = etime;
-  return (etime.tv_sec*1000000)+etime.tv_usec;
 }
 
 void send_timer(struct timerset *vtime, CHAR_DATA *ch)
