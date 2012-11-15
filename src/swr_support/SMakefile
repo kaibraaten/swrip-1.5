@@ -1,0 +1,18 @@
+LIBRARIAN = oml
+RM = delete quiet force
+OBJ = bet.o buffer.o file_io.o hashstr.o misc.o os_amiga.o sha256.o \
+	string_handling.o time_fun.o vector3.o
+LIBNAME = swr_support.lib
+
+all:		$(LIBNAME)
+
+.cpp.o:
+		$(CC) $*.cpp
+
+$(LIBNAME):	$(OBJ)
+		$(LIBRARIAN) $@ r <@<
+$(OBJ)
+<
+
+clean:
+		$(RM) \#?.o $(LIBNAME)

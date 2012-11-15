@@ -1,0 +1,27 @@
+ODIR = obj
+_OBJ = bet.o file_io.o hashstr.o misc.o os_morphos.o sha256.o string_handling.o time_fun.o vector3.o
+OBJ  = $(patsubst %,$(ODIR)/%,$(_OBJ))
+
+#Comment out the next line if your system doesn't have dlsym functionality.
+USE_DLSYM = -DSWR2_USE_DLSYM
+
+WFLAGS = -Wall -Wformat-security -Winline -Wpointer-arith -Werror -Wwrite-strings -Wno-long-long -Wconversion
+CFLAGS = -O2 -MMD -ansi $(GCC_MARCH) $(WFLAGS) -I. -I/gg/new-include -noixemul $(SWR2_USE_DLSYM)
+
+LIB_EXT = a
+LIBNAME = libswr_support.$(LIB_EXT)
+
+all:		$(LIBNAME)
+
+$(ODIR)/%.o:	%.c
+		$(CC) -c -o $@ $< $(CFLAGS)
+
+$(LIBNAME):	$(OBJ)
+		ar cru $@ $^
+		ranlib $@
+
+clean:
+		rm -f *.so *.a *~ core* $(ODIR)/*.o $(ODIR)/*.d
+
+-include $(ODIR)/*.d
+

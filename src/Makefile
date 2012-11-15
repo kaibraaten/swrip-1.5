@@ -2,13 +2,32 @@ BINARY = swrip
 #WFLAGS = -Werror -Wall -Wformat-security -Wpointer-arith -Wcast-align -Wwrite-strings -Wshadow -Wextra -Wno-unused-parameter -Wredundant-decls
 WFLAGS = -Wall -Werror -Wformat-security -Wpointer-arith -Wcast-align -Wno-unused-but-set-variable
 
-CCFLAGS = -g3 -MMD $(WFLAGS) $(USE_DLSYM) $(DEBUG_TELNET)
-LDFLAGS = -lm -lcrypt
+#Comment out the next line if your system doesn't have dlsym functionality.
+USE_DLSYM = -DSWR2_USE_DLSYM
+
+#IMC2 - Comment out to dsable IMC2 support
+IMC = 1
+
+#Change from 0 to 1 to enable telnet debug logging.
+DEBUG_TELNET = -DSWR2_DEBUG_TELNET=0
+
+CCFLAGS = -g3 -MMD -Iswr_support $(WFLAGS) $(USE_DLSYM) $(DEBUG_TELNET)
+LDFLAGS = -lm -lcrypt -lz
 
 #Uncomment the next line of you're using Solaris and you get linker errors.
 #SOLARIS = 1
 ifdef SOLARIS
 LDFLAGS += -lsocket -lnsl
+endif
+
+#Only way I know of to detect Cygwin environment
+ifeq ($(shell echo $$OSTYPE),cygwin)
+LDFLAGS += -export-all-symbols
+endif
+
+#On some systems (e.g. FreeBSD) you may need to remove -ldl
+ifdef USE_DLSYM
+LDFLAGS += -ldl -rdynamic
 endif
 
 ODIR = obj
@@ -21,7 +40,15 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o boards.o \
 
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
-all:		$(BINARY)
+ifdef IMC
+OBJ += $(ODIR)/imc.o
+CCFLAGS += -DSWR2_USE_IMC
+endif
+
+all:		libs $(BINARY)
+
+libs:
+		$(MAKE) -C swr_support
 
 $(BINARY):	$(OBJ)
 		@echo "Linking" $(BINARY)
