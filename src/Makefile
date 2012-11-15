@@ -31,7 +31,7 @@ LDFLAGS += -ldl -rdynamic
 endif
 
 ODIR = obj
-_OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o bet.o \
+_OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o \
 	boards.o bounty.o build.o clans.o comm.o comments.o const.o \
 	copyover.o db.o fight.o grub.o handler.o hashstr.o interp.o magic.o \
 	makeobjs.o mapper.o misc.o mud_comm.o mud_prog.o newarena.o player.o \
