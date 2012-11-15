@@ -2431,18 +2431,18 @@ void reboot_check( time_t reset )
       "SYSTEM: Reboot in 10 minutes.",
     };
   static const int times[] = { 10, 30, 60, 120, 180, 240, 300, 600 };
-  static const int timesize =
-    UMIN(sizeof(times)/sizeof(*times), sizeof(tmsg)/sizeof(*tmsg));
+  int timesize = umin(sizeof(times)/sizeof(*times), sizeof(tmsg)/sizeof(*tmsg));
   char buf[MAX_STRING_LENGTH];
-  static int trun;
-  static bool init;
-  SHIP_DATA *ship;
+  static int trun = 0;
+  static bool init = FALSE;
+  SHIP_DATA *ship = NULL;
 
   if ( !init || reset >= current_time )
     {
       for ( trun = timesize-1; trun >= 0; trun-- )
         if ( reset >= current_time+times[trun] )
           break;
+
       init = TRUE;
       return;
     }
