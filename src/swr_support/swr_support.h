@@ -94,6 +94,7 @@ do                                                              \
 #ifdef HASHSTR
 #define STRALLOC(point)         str_alloc((point))
 #define QUICKLINK(point)        quick_link((point))
+#define QUICKMATCH(p1, p2)      ((int) (p1) == (int) (p2))
 #define STRFREE(point)                                          \
 do                                                              \
   {                                                               \
@@ -109,6 +110,7 @@ do                                                              \
 #else
 #define STRALLOC(point)         str_dup((point))
 #define QUICKLINK(point)        str_dup((point))
+#define QUICKMATCH(p1, p2)      (strcmp((p1), (p2)) == 0)
 #define STRFREE(point)                                          \
 do                                                              \
   {                                                               \

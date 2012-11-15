@@ -31,7 +31,6 @@
 
 typedef	int				ch_ret;
 typedef	int				obj_ret;
-typedef unsigned char bool;
 
 /*
  * Accommodate old non-Ansi compilers.
@@ -48,18 +47,6 @@ typedef unsigned char bool;
                              room->vnum == IMP_ROOM1?0: \
                              room->vnum == IMP_ROOM2?0:1)
 
-
-#if	!defined(FALSE)
-#define FALSE	 0
-#endif
-
-#if	!defined(TRUE)
-#define TRUE	 1
-#endif
-
-#if	!defined(BERR)
-#define BERR	 255
-#endif
 
 /*
  * Structure types.
@@ -172,8 +159,6 @@ typedef ch_ret	SPELL_FUN	( int sn, int level, CHAR_DATA *ch, void *vo );
 #define MAX_STRING_LENGTH	 4096  /* buf */
 #define MAX_INPUT_LENGTH	 1024  /* arg */
 #define MAX_INBUF_SIZE		 1024
-
-#define HASHSTR			 /* use string hashing */
 
 #define	MAX_LAYERS		 8	/* maximum clothing layers */
 #define MAX_NEST	       100	/* maximum container nesting */
@@ -3090,183 +3075,6 @@ extern  short			gsn_kubaz;
 extern  short			gsn_togorian;
 extern  short			gsn_yevethan;
 
-
-/*
- * Utility macros.
- */
-#define UMIN(a, b)		((a) < (b) ? (a) : (b))
-#define UMAX(a, b)		((a) > (b) ? (a) : (b))
-#define URANGE(a, b, c)		((b) < (a) ? (a) : ((b) > (c) ? (c) : (b)))
-#define LOWER(c)		((c) >= 'A' && (c) <= 'Z' ? (c)+'a'-'A' : (c))
-#define UPPER(c)		((c) >= 'a' && (c) <= 'z' ? (c)+'A'-'a' : (c))
-#define IS_SET(flag, bit)	((flag) & (bit))
-#define SET_BIT(var, bit)	((var) |= (bit))
-#define REMOVE_BIT(var, bit)	((var) &= ~(bit))
-#define TOGGLE_BIT(var, bit)	((var) ^= (bit))
-
-/*
- * Memory allocation macros.
- */
-
-#define CREATE(result, type, number)				\
-do								\
-{								\
-   if (!((result) = (type *) calloc ((number), sizeof(type))))	\
-	{ perror("malloc failure"); abort(); }			\
-} while(0)
-
-#define RECREATE(result,type,number)				\
-do								\
-{								\
-  if (!((result) = (type *) realloc ((result), sizeof(type) * (number))))\
-	{ perror("realloc failure"); abort(); }			\
-} while(0)
-
-
-#define DISPOSE(point) 						\
-do								\
-{								\
-  if (!(point))							\
-  {								\
-	bug( "Freeing null pointer" ); \
-	fprintf( stderr, "DISPOSEing NULL in %s, line %d\n", __FILE__, __LINE__ ); \
-  }								\
-  else free(point);						\
-  point = NULL;							\
-} while(0)
-
-#ifdef HASHSTR
-#define STRALLOC(point)		str_alloc((point))
-#define QUICKLINK(point)	quick_link((point))
-#define QUICKMATCH(p1, p2)	((int) (p1) == (int) (p2))
-#define STRFREE(point)						\
-do								\
-{								\
-  if (!(point))							\
-  {								\
-	bug( "Freeing null pointer" );	 			\
-	fprintf( stderr, "STRFREEing NULL in %s, line %d\n", __FILE__, __LINE__ ); \
-  }								\
-  else if (str_free((point))==-1) 				\
-    fprintf( stderr, "STRFREEing bad pointer in %s, line %d\n", __FILE__, __LINE__ ); \
-} while(0)
-#else
-#define STRALLOC(point)		str_dup((point))
-#define QUICKLINK(point)	str_dup((point))
-#define QUICKMATCH(p1, p2)	(strcmp((p1), (p2)) == 0)
-#define STRFREE(point)						\
-do								\
-{								\
-  if (!(point))							\
-  {								\
-	bug( "Freeing null pointer" );				\
-	fprintf( stderr, "STRFREEing NULL in %s, line %d\n", __FILE__, __LINE__ ); \
-  }								\
-  else free((point));						\
-} while(0)
-#endif
-
-/* double-linked list handling macros -Thoric */
-
-#define LINK(link, first, last, next, prev)			\
-do								\
-{								\
-    if ( !(first) )						\
-      (first)			= (link);			\
-    else							\
-      (last)->next		= (link);			\
-    (link)->next		= NULL;				\
-    (link)->prev		= (last);			\
-    (last)			= (link);			\
-} while(0)
-
-#define INSERT(link, insert, first, next, prev)			\
-do								\
-{								\
-    (link)->prev		= (insert)->prev;		\
-    if ( !(insert)->prev )					\
-      (first)			= (link);			\
-    else							\
-      (insert)->prev->next	= (link);			\
-    (insert)->prev		= (link);			\
-    (link)->next		= (insert);			\
-} while(0)
-
-#define UNLINK(link, first, last, next, prev)			\
-do								\
-{								\
-    if ( !(link)->prev )					\
-      (first)			= (link)->next;			\
-    else							\
-      (link)->prev->next	= (link)->next;			\
-    if ( !(link)->next )					\
-      (last)			= (link)->prev;			\
-    else							\
-      (link)->next->prev	= (link)->prev;			\
-} while(0)
-
-
-#define CHECK_LINKS(first, last, next, prev, type)		\
-do {								\
-  type *ptr, *pptr = NULL;					\
-  if ( !(first) && !(last) )					\
-    break;							\
-  if ( !(first) )						\
-  {								\
-    bug( "CHECK_LINKS: last with NULL first!  %s.",		\
-        __STRING(first) );					\
-    for ( ptr = (last); ptr->prev; ptr = ptr->prev );		\
-    (first) = ptr;						\
-  }								\
-  else if ( !(last) )						\
-  {								\
-    bug( "CHECK_LINKS: first with NULL last!  %s.",		\
-        __STRING(first) );					\
-    for ( ptr = (first); ptr->next; ptr = ptr->next );		\
-    (last) = ptr;						\
-  }								\
-  if ( (first) )						\
-  {								\
-    for ( ptr = (first); ptr; ptr = ptr->next )			\
-    {								\
-      if ( ptr->prev != pptr )					\
-      {								\
-        bug( "CHECK_LINKS(%s): %p:->prev != %p.  Fixing.",	\
-            __STRING(first), ptr, pptr );			\
-        ptr->prev = pptr;					\
-      }								\
-      if ( ptr->prev && ptr->prev->next != ptr )		\
-      {								\
-        bug( "CHECK_LINKS(%s): %p:->prev->next != %p.  Fixing.",\
-            __STRING(first), ptr, ptr );			\
-        ptr->prev->next = ptr;					\
-      }								\
-      pptr = ptr;						\
-    }								\
-    pptr = NULL;						\
-  }								\
-  if ( (last) )							\
-  {								\
-    for ( ptr = (last); ptr; ptr = ptr->prev )			\
-    {								\
-      if ( ptr->next != pptr )					\
-      {								\
-        bug( "CHECK_LINKS (%s): %p:->next != %p.  Fixing.",	\
-            __STRING(first), ptr, pptr );			\
-        ptr->next = pptr;					\
-      }								\
-      if ( ptr->next && ptr->next->prev != ptr )		\
-      {								\
-        bug( "CHECK_LINKS(%s): %p:->next->prev != %p.  Fixing.",\
-            __STRING(first), ptr, ptr );			\
-        ptr->next->prev = ptr;					\
-      }								\
-      pptr = ptr;						\
-    }								\
-  }								\
-} while(0)
-
-
 #define ASSIGN_GSN(gsn, skill)					\
 do								\
 {								\
@@ -4397,7 +4205,6 @@ void	add_command( CMDTYPE *command );
 
 /* bet.h */
 int advatoi(char *s);
-int parsebet(const int currentbet, char *s);
 
 /* boards.c */
 void	load_boards( void );

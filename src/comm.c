@@ -627,15 +627,6 @@ void game_loop( )
 
       gettimeofday( &last_time, NULL );
       current_time = (time_t) last_time.tv_sec;
-
-      /* Check every 5 seconds...  (don't need it right now)
-         if ( last_check+5 < current_time )
-         {
-         CHECK_LINKS(first_descriptor, last_descriptor, next, prev,
-         DESCRIPTOR_DATA);
-         last_check = current_time;
-         }
-      */
     }
   return;
 }
