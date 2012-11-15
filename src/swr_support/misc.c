@@ -1,6 +1,8 @@
 #include "swr_support.h"
 #include <time.h>
 #include <string.h>
+#include <stdlib.h>
+#include <ctype.h>
 
 #ifdef __cplusplus
 extern "C"
