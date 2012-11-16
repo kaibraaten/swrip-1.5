@@ -485,7 +485,7 @@ int ris_save( CHAR_DATA *ch, int save_chance, int ris )
  * Used for spell dice parsing, ie: 3d8+L-6
  *
  */
-int rd_parse(CHAR_DATA *ch, int level, char *exp)
+int rd_parse(CHAR_DATA *ch, int level, char *expr)
 {
   int x, lop = 0, gop = 0, eop = 0;
   char operation;
@@ -493,20 +493,20 @@ int rd_parse(CHAR_DATA *ch, int level, char *exp)
   int total = 0, len = 0;
 
   /* take care of nulls coming in */
-  if (!exp || !strlen(exp))
+  if (!expr || !strlen(expr))
     return 0;
 
   /* get rid of brackets if they surround the entire expresion */
-  if ((*exp == '(') && !index(exp+1,'(') && exp[strlen(exp)-1] == ')')
+  if ((*expr == '(') && !index(expr+1,'(') && expr[strlen(expr)-1] == ')')
     {
-      exp[strlen(exp)-1] = '\0';
-      exp++;
+      expr[strlen(expr)-1] = '\0';
+      expr++;
     }
 
   /* check if the expresion is just a number */
-  len = strlen(exp);
-  if ( len == 1 && isalpha(exp[0]) )
-    switch(exp[0]) {
+  len = strlen(expr);
+  if ( len == 1 && isalpha(expr[0]) )
+    switch(expr[0]) {
     case 'L': case 'l': return level;
     case 'H': case 'h': return ch->hit;
     case 'M': case 'm': return ch->mana;
@@ -522,13 +522,15 @@ int rd_parse(CHAR_DATA *ch, int level, char *exp)
     }
 
   for (x = 0; x < len; ++x)
-    if (!isdigit(exp[x]) && !isspace(exp[x]))
+    if (!isdigit(expr[x]) && !isspace(expr[x]))
       break;
-  if (x == len) return(atoi(exp));
+
+  if (x == len)
+    return(atoi(expr));
 
   /* break it into 2 parts */
-  for (x = 0; x < (int)strlen(exp); ++x)
-    switch(exp[x]) {
+  for (x = 0; x < (int)strlen(expr); ++x)
+    switch(expr[x]) {
     case '^':
       if (!total)
         eop = x;
@@ -553,10 +555,10 @@ int rd_parse(CHAR_DATA *ch, int level, char *exp)
     if (gop) x = gop;
     else
       x = eop;
-  operation = exp[x];
-  exp[x] = '\0';
-  sexp[0] = exp;
-  sexp[1] = (char *)(exp+x+1);
+  operation = expr[x];
+  expr[x] = '\0';
+  sexp[0] = expr;
+  sexp[1] = (char *)(expr+x+1);
 
   /* work it out */
   total = rd_parse(ch, level, sexp[0]);
@@ -579,12 +581,12 @@ int rd_parse(CHAR_DATA *ch, int level, char *exp)
   return total;
 }
 
-/* wrapper function so as not to destroy exp */
-int dice_parse(CHAR_DATA *ch, int level, char *exp)
+/* wrapper function so as not to destroy expr */
+int dice_parse(CHAR_DATA *ch, int level, char *expr)
 {
   char buf[MAX_INPUT_LENGTH];
 
-  strcpy( buf, exp );
+  strcpy( buf, expr );
   return rd_parse(ch, level, buf);
 }
 

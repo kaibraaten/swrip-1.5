@@ -4327,7 +4327,7 @@ void do_jail ( CHAR_DATA *ch , char *argument )
   CLAN_DATA   *clan =NULL;
   ROOM_INDEX_DATA *jail =NULL;
   char arg[MAX_INPUT_LENGTH];
-  short time;
+  short jail_time;
   bool h_d = FALSE;
   struct tm *tms;
 
@@ -4415,14 +4415,15 @@ void do_jail ( CHAR_DATA *ch , char *argument )
       return;
     }
 
-  time = atoi(arg);
-  if ( time < 0 )
+  jail_time = atoi(arg);
+
+  if ( jail_time < 0 )
     {
       send_to_char( "You cannot hell for negative time.\r\n", ch );
       return;
     }
-  time = atoi(arg);
-  if ( time == 0 && victim->in_room->vnum != 6)
+
+  if ( jail_time == 0 && victim->in_room->vnum != ROOM_VNUM_HELL)
     {
       send_to_char( "Jail restrictions released.\r\n", ch );
       victim->pcdata->jail_vnum = 0;
@@ -4438,6 +4439,7 @@ void do_jail ( CHAR_DATA *ch , char *argument )
 
 
   argument = one_argument(argument, arg);
+
   if ( !*arg || !str_prefix(arg, "hours") )
     h_d = TRUE;
   else if ( str_prefix(arg, "days") )
@@ -4445,16 +4447,19 @@ void do_jail ( CHAR_DATA *ch , char *argument )
       send_to_char( "Is that value in hours or days?\r\n", ch );
       return;
     }
-  else if ( time > 30 )
+  else if ( jail_time > 30 )
     {
       send_to_char( "You may not hell a person for more than 30 days at a time.\r\n", ch );
       return;
     }
+
   tms = localtime(&current_time);
+
   if ( h_d )
-    tms->tm_hour += time;
+    tms->tm_hour += jail_time;
   else
-    tms->tm_mday += time;
+    tms->tm_mday += jail_time;
+
   victim->pcdata->release_date = mktime(tms);
   victim->pcdata->helled_by = STRALLOC(ch->name);
   victim->pcdata->jail_vnum = jail->vnum;
@@ -4466,13 +4471,11 @@ void do_jail ( CHAR_DATA *ch , char *argument )
   act(AT_MAGIC, "$n is dragged in.", victim, NULL, ch, TO_NOTVICT);
   do_look(victim, "auto");
   ch_printf(victim, "Whoops. You broke too many laws.\r\n"
-            "You shall remain in jail for %d %s%s.\r\n", time,
-            (h_d ? "hour" : "day"), (time == 1 ? "" : "s"));
+            "You shall remain in jail for %d %s%s.\r\n", jail_time,
+            (h_d ? "hour" : "day"), (jail_time == 1 ? "" : "s"));
   save_char_obj(victim);        /* used to save ch, fixed by Thoric 09/17/96 */
 
   learn_from_success( ch , gsn_jail );
-
-  return;
 }
 
 void do_smalltalk ( CHAR_DATA *ch , char *argument )

@@ -3025,7 +3025,7 @@ void display_prompt( DESCRIPTOR_DATA *d )
   const char *prompt;
   char buf[MAX_STRING_LENGTH];
   char *pbuf = buf;
-  int stat;
+  int the_stat;
 
   if ( !ch )
     {
@@ -3078,15 +3078,15 @@ void display_prompt( DESCRIPTOR_DATA *d )
           break;
         case '&':
         case '^':
-          stat = make_color_sequence(&prompt[-1], pbuf, d);
-          if ( stat < 0 )
+          the_stat = make_color_sequence(&prompt[-1], pbuf, d);
+          if ( the_stat < 0 )
             --prompt;
-          else if ( stat > 0 )
-            pbuf += stat;
+          else if ( the_stat > 0 )
+            pbuf += the_stat;
           break;
         case '%':
           *pbuf = '\0';
-          stat = 0x80000000;
+          the_stat = 0x80000000;
           switch(*prompt)
             {
             case '%':
@@ -3095,7 +3095,7 @@ void display_prompt( DESCRIPTOR_DATA *d )
               break;
             case 'a':
               if ( ch->top_level >= 10 )
-                stat = ch->alignment;
+                the_stat = ch->alignment;
               else if ( IS_GOOD(ch) )
                 strcpy(pbuf, "good");
               else if ( IS_EVIL(ch) )
@@ -3104,22 +3104,22 @@ void display_prompt( DESCRIPTOR_DATA *d )
                 strcpy(pbuf, "neutral");
               break;
             case 'h':
-              stat = ch->hit;
+              the_stat = ch->hit;
               break;
             case 'H':
-              stat = ch->max_hit;
+              the_stat = ch->max_hit;
               break;
             case 'm':
               if ( IS_IMMORTAL(ch) || ch->skill_level[FORCE_ABILITY] > 1 )
-                stat = ch->mana;
+                the_stat = ch->mana;
               else
-                stat = 0;
+                the_stat = 0;
               break;
             case 'M':
               if ( IS_IMMORTAL(ch) || ch->skill_level[FORCE_ABILITY] > 1 )
-                stat = ch->max_mana;
+                the_stat = ch->max_mana;
               else
-                stat = 0;
+                the_stat = 0;
               break;
             case 'p':
               if ( ch->position == POS_RESTING )
@@ -3130,23 +3130,23 @@ void display_prompt( DESCRIPTOR_DATA *d )
                 strcpy(pbuf, "sitting");
               break;
             case 'u':
-              stat = num_descriptors;
+              the_stat = num_descriptors;
               break;
             case 'U':
-              stat = sysdata.maxplayers;
+              the_stat = sysdata.maxplayers;
               break;
             case 'v':
-              stat = ch->move;
+              the_stat = ch->move;
               break;
             case 'V':
-              stat = ch->max_move;
+              the_stat = ch->max_move;
               break;
             case 'g':
-              stat = ch->gold;
+              the_stat = ch->gold;
               break;
             case 'r':
               if ( IS_IMMORTAL(och) )
-                stat = ch->in_room->vnum;
+                the_stat = ch->in_room->vnum;
               break;
             case 'R':
               if ( IS_SET(och->act, PLR_ROOMVNUM) )
@@ -3161,13 +3161,13 @@ void display_prompt( DESCRIPTOR_DATA *d )
                   sprintf(pbuf, "(Invis) " );
               break;
             case 'I':
-              stat = (IS_NPC(ch) ? (IS_SET(ch->act, ACT_MOBINVIS) ? ch->mobinvis : 0)
+              the_stat = (IS_NPC(ch) ? (IS_SET(ch->act, ACT_MOBINVIS) ? ch->mobinvis : 0)
                       : (IS_SET(ch->act, PLR_WIZINVIS) ? ch->pcdata->wizinvis : 0));
               break;
             }
 
-          if ( (unsigned int)stat != 0x80000000 )
-            sprintf(pbuf, "%d", stat);
+          if ( (unsigned int)the_stat != 0x80000000 )
+            sprintf(pbuf, "%d", the_stat);
 
           pbuf += strlen(pbuf);
           break;

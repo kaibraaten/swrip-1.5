@@ -1169,7 +1169,7 @@ void  do_mpgain( CHAR_DATA *ch, char *argument )
   char arg2[ MAX_INPUT_LENGTH ];
   char arg3[ MAX_INPUT_LENGTH ];
   CHAR_DATA *victim;
-  long exp;
+  long xp;
   int  ability;
 
   if ( IS_AFFECTED( ch, AFF_CHARM ) )
@@ -1213,7 +1213,7 @@ void  do_mpgain( CHAR_DATA *ch, char *argument )
     }
 
   ability = atoi(arg2);
-  exp = atoi(arg3);
+  xp = atoi(arg3);
 
   if( ability < 0 || ability >= MAX_ABILITY )
     {
@@ -1222,18 +1222,17 @@ void  do_mpgain( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if( (exp < 1) )
+  if( (xp < 1) )
     {
       send_to_char( "Mpgain how much?\r\n", ch );
       progbug( "Mpgain: experience out of range", ch );
       return;
     }
 
-  exp =  URANGE(1, exp, ( exp_level( victim->skill_level[ability]+1 ) - exp_level( victim->skill_level[ability]) ) );
+  xp =  URANGE(1, xp, ( exp_level( victim->skill_level[ability]+1 ) - exp_level( victim->skill_level[ability]) ) );
 
-  ch_printf( victim, "You gain %ld %s experience.\r\n", exp, ability_name[ability]  );
-  gain_exp( victim , exp , ability);
-  return;
+  ch_printf( victim, "You gain %ld %s experience.\r\n", xp, ability_name[ability]  );
+  gain_exp( victim, xp, ability);
 }
 
 /*

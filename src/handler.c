@@ -221,22 +221,26 @@ int get_exp( CHAR_DATA *ch , int ability )
  */
 int get_exp_worth( CHAR_DATA *ch )
 {
-  int exp;
+  int xp;
 
-  exp = ch->skill_level[COMBAT_ABILITY] * ch->top_level * 50;
-  exp += ch->max_hit * 2;
-  exp -= (ch->armor-50) * 2;
-  exp += ( ch->barenumdie * ch->baresizedie + GET_DAMROLL(ch) ) * 50;
-  exp += GET_HITROLL(ch) * ch->top_level * 10;
+  xp = ch->skill_level[COMBAT_ABILITY] * ch->top_level * 50;
+  xp += ch->max_hit * 2;
+  xp -= (ch->armor-50) * 2;
+  xp += ( ch->barenumdie * ch->baresizedie + GET_DAMROLL(ch) ) * 50;
+  xp += GET_HITROLL(ch) * ch->top_level * 10;
+
   if ( IS_AFFECTED(ch, AFF_SANCTUARY) )
-    exp += exp * 1.5;
-  if ( IS_AFFECTED(ch, AFF_FIRESHIELD) )
-    exp += exp * 1.2;
-  if ( IS_AFFECTED(ch, AFF_SHOCKSHIELD) )
-    exp += exp * 1.2;
-  exp = URANGE( MIN_EXP_WORTH, exp, MAX_EXP_WORTH );
+    xp += xp * 1.5;
 
-  return exp;
+  if ( IS_AFFECTED(ch, AFF_FIRESHIELD) )
+    xp += xp * 1.2;
+
+  if ( IS_AFFECTED(ch, AFF_SHOCKSHIELD) )
+    xp += xp * 1.2;
+
+  xp = URANGE( MIN_EXP_WORTH, xp, MAX_EXP_WORTH );
+
+  return xp;
 }
 
 /*                                                              -Thoric
@@ -254,7 +258,7 @@ int exp_level( short level)
 /*
  * Get what level ch is based on exp
  */
-short level_exp( CHAR_DATA *ch, int exp )
+short level_exp( CHAR_DATA *ch, int xp )
 {
   int x, lastx, y, tmp;
 
@@ -265,7 +269,7 @@ short level_exp( CHAR_DATA *ch, int exp )
     {
       tmp = exp_level( x);
       lastx = x;
-      if ( tmp > exp )
+      if ( tmp > xp )
         x /= 2;
       else
         if (lastx != x )

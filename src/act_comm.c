@@ -190,58 +190,6 @@ void do_beep( CHAR_DATA *ch, char *argument )
     act( AT_WHITE, "$n beeps: '$t'", ch, scramble(argument, ch->speaking), victim, TO_VICT );
 }
 
-/* Text scrambler -- Altrag */
-char *scramble( const char *argument, int modifier )
-{
-  static char arg[MAX_INPUT_LENGTH];
-  short position;
-  short conversion = 0;
-
-  modifier %= number_range( 80, 300 ); /* Bitvectors get way too large #s */
-  for ( position = 0; position < MAX_INPUT_LENGTH; position++ )
-    {
-      if ( argument[position] == '\0' )
-        {
-          arg[position] = '\0';
-          return arg;
-        }
-      else if ( argument[position] >= 'A' && argument[position] <= 'Z' )
-        {
-          conversion = -conversion + position - modifier + argument[position] - 'A';
-          conversion = number_range( conversion - 5, conversion + 5 );
-          while ( conversion > 25 )
-            conversion -= 26;
-          while ( conversion < 0 )
-            conversion += 26;
-          arg[position] = conversion + 'A';
-        }
-      else if ( argument[position] >= 'a' && argument[position] <= 'z' )
-        {
-          conversion = -conversion + position - modifier + argument[position] - 'a';
-          conversion = number_range( conversion - 5, conversion + 5 );
-          while ( conversion > 25 )
-            conversion -= 26;
-          while ( conversion < 0 )
-            conversion += 26;
-          arg[position] = conversion + 'a';
-        }
-      else if ( argument[position] >= '0' && argument[position] <= '9' )
-        {
-          conversion = -conversion + position - modifier + argument[position] - '0';
-          conversion = number_range( conversion - 2, conversion + 2 );
-          while ( conversion > 9 )
-            conversion -= 10;
-          while ( conversion < 0 )
-            conversion += 10;
-          arg[position] = conversion + '0';
-        }
-      else
-        arg[position] = argument[position];
-    }
-  arg[position] = '\0';
-  return arg;
-}
-
 /* I'll rewrite this later if its still needed.. -- Altrag */
 char *translate( CHAR_DATA *ch, CHAR_DATA *victim, const char *argument )
 {

@@ -4769,14 +4769,6 @@ void do_bestow( CHAR_DATA *ch, char *argument )
   send_to_char( "Done.\r\n", ch );
 }
 
-struct tm *update_time ( struct tm *old_time )
-{
-  time_t time;
-
-  time = mktime(old_time);
-  return localtime(&time);
-}
-
 void do_set_boot_time( CHAR_DATA *ch, char *argument)
 {
   char arg[MAX_INPUT_LENGTH];
@@ -4970,7 +4962,6 @@ void close_area( AREA_DATA *pArea )
   RESET_DATA *ereset_next;
   EXTRA_DESCR_DATA *eed;
   EXTRA_DESCR_DATA *eed_next;
-  EXIT_DATA *exit;
   EXIT_DATA *exit_next;
   MPROG_ACT_LIST *mpact;
   MPROG_ACT_LIST *mpact_next;
@@ -5010,17 +5001,18 @@ void close_area( AREA_DATA *pArea )
     {
       for ( rid = room_index_hash[icnt]; rid; rid = rid_next )
         {
+	  EXIT_DATA *exit_iter = NULL;
           rid_next = rid->next;
 
-          for ( exit = rid->first_exit; exit; exit = exit_next )
+          for ( exit_iter = rid->first_exit; exit_iter; exit_iter = exit_next )
             {
-              exit_next = exit->next;
-              if ( rid->area == pArea || exit->to_room->area == pArea )
+              exit_next = exit_iter->next;
+              if ( rid->area == pArea || exit_iter->to_room->area == pArea )
                 {
-                  STRFREE( exit->keyword );
-                  STRFREE( exit->description );
-                  UNLINK( exit, rid->first_exit, rid->last_exit, next, prev );
-                  DISPOSE( exit );
+                  STRFREE( exit_iter->keyword );
+                  STRFREE( exit_iter->description );
+                  UNLINK( exit_iter, rid->first_exit, rid->last_exit, next, prev );
+                  DISPOSE( exit_iter );
                 }
             }
           if ( rid->area != pArea )
@@ -5757,7 +5749,7 @@ void do_hell( CHAR_DATA *ch, char *argument )
 {
   CHAR_DATA *victim;
   char arg[MAX_INPUT_LENGTH];
-  short time;
+  short hell_time;
   bool h_d = FALSE;
   struct tm *tms;
 
@@ -5783,36 +5775,45 @@ void do_hell( CHAR_DATA *ch, char *argument )
                 ctime(&victim->pcdata->release_date), victim->pcdata->helled_by);
       return;
     }
+
   argument = one_argument(argument, arg);
+
   if ( !*arg || !is_number(arg) )
     {
       send_to_char( "Hell them for how long?\r\n", ch );
       return;
     }
-  time = atoi(arg);
-  if ( time <= 0 )
+
+  hell_time = atoi(arg);
+
+  if ( hell_time <= 0 )
     {
       send_to_char( "You cannot hell for zero or negative time.\r\n", ch );
       return;
     }
+
   argument = one_argument(argument, arg);
+
   if ( !*arg || !str_prefix(arg, "hours") )
-    h_d = TRUE;
+    {
+      h_d = TRUE;
+    }
   else if ( str_prefix(arg, "days") )
     {
       send_to_char( "Is that value in hours or days?\r\n", ch );
       return;
     }
-  else if ( time > 30 )
+  else if ( hell_time > 30 )
     {
       send_to_char( "You may not hell a person for more than 30 days at a time.\r\n", ch );
       return;
     }
   tms = localtime(&current_time);
   if ( h_d )
-    tms->tm_hour += time;
+    tms->tm_hour += hell_time;
   else
-    tms->tm_mday += time;
+    tms->tm_mday += hell_time;
+
   victim->pcdata->release_date = mktime(tms);
   victim->pcdata->helled_by = STRALLOC(ch->name);
   ch_printf(ch, "%s will be released from hell at %24.24s.\r\n", victim->name,
@@ -5823,8 +5824,8 @@ void do_hell( CHAR_DATA *ch, char *argument )
   act(AT_MAGIC, "$n appears in a could of hellish light.", victim, NULL, ch, TO_NOTVICT);
   do_look(victim, "auto");
   ch_printf(victim, "The immortals are not pleased with your actions.\r\n"
-            "You shall remain in hell for %d %s%s.\r\n", time,
-            (h_d ? "hour" : "day"), (time == 1 ? "" : "s"));
+            "You shall remain in hell for %d %s%s.\r\n", hell_time,
+            (h_d ? "hour" : "day"), (hell_time == 1 ? "" : "s"));
   save_char_obj(victim);        /* used to save ch, fixed by Thoric 09/17/96 */
   return;
 }
@@ -6499,14 +6500,15 @@ void do_cedit( CHAR_DATA *ch, char *argument )
 
   if ( !str_cmp( arg2, "log" ) )
     {
-      int log = atoi( argument );
+      int log_type = atoi( argument );
 
-      if ( log < 0 || log > LOG_COMM )
+      if ( log_type < 0 || log_type > LOG_COMM )
         {
           send_to_char( "Log out of range.\r\n", ch );
           return;
         }
-      command->log = log;
+
+      command->log = log_type;
       send_to_char( "Done.\r\n", ch );
       return;
     }

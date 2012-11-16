@@ -1868,6 +1868,7 @@ typedef enum
  */
 #define ROOM_VNUM_LIMBO		      2
 #define ROOM_VNUM_POLY		      3
+#define ROOM_VNUM_HELL                6
 #define ROOM_VNUM_CHAT		  32144
 #define ROOM_VNUM_TEMPLE	  32144
 #define ROOM_VNUM_ALTAR		  32144 

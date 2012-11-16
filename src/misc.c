@@ -2135,7 +2135,7 @@ void do_push( CHAR_DATA *ch, char *argument )
 /* pipe commands (light, tamp, smoke) by Thoric */
 void do_tamp( CHAR_DATA *ch, char *argument )
 {
-  OBJ_DATA *pipe;
+  OBJ_DATA *pipe_obj;
   char arg[MAX_INPUT_LENGTH];
 
   one_argument( argument, arg );
@@ -2148,21 +2148,21 @@ void do_tamp( CHAR_DATA *ch, char *argument )
   if ( ms_find_obj(ch) )
     return;
 
-  if ( (pipe = get_obj_carry( ch, arg )) == NULL )
+  if ( (pipe_obj = get_obj_carry( ch, arg )) == NULL )
     {
       send_to_char( "You aren't carrying that.\r\n", ch );
       return;
     }
-  if ( pipe->item_type != ITEM_PIPE )
+  if ( pipe_obj->item_type != ITEM_PIPE )
     {
       send_to_char( "You can't tamp that.\r\n", ch );
       return;
     }
-  if ( !IS_SET( pipe->value[3], PIPE_TAMPED ) )
+  if ( !IS_SET( pipe_obj->value[3], PIPE_TAMPED ) )
     {
-      act( AT_ACTION, "You gently tamp $p.", ch, pipe, NULL, TO_CHAR );
-      act( AT_ACTION, "$n gently tamps $p.", ch, pipe, NULL, TO_ROOM );
-      SET_BIT( pipe->value[3], PIPE_TAMPED );
+      act( AT_ACTION, "You gently tamp $p.", ch, pipe_obj, NULL, TO_CHAR );
+      act( AT_ACTION, "$n gently tamps $p.", ch, pipe_obj, NULL, TO_ROOM );
+      SET_BIT( pipe_obj->value[3], PIPE_TAMPED );
       return;
     }
   send_to_char( "It doesn't need tamping.\r\n", ch );
@@ -2170,7 +2170,7 @@ void do_tamp( CHAR_DATA *ch, char *argument )
 
 void do_smoke( CHAR_DATA *ch, char *argument )
 {
-  OBJ_DATA *pipe;
+  OBJ_DATA *pipe_obj;
   char arg[MAX_INPUT_LENGTH];
 
   one_argument( argument, arg );
@@ -2183,59 +2183,59 @@ void do_smoke( CHAR_DATA *ch, char *argument )
   if ( ms_find_obj(ch) )
     return;
 
-  if ( (pipe = get_obj_carry( ch, arg )) == NULL )
+  if ( (pipe_obj = get_obj_carry( ch, arg )) == NULL )
     {
       send_to_char( "You aren't carrying that.\r\n", ch );
       return;
     }
-  if ( pipe->item_type != ITEM_PIPE )
+  if ( pipe_obj->item_type != ITEM_PIPE )
     {
-      act( AT_ACTION, "You try to smoke $p... but it doesn't seem to work.", ch, pipe, NULL, TO_CHAR );
-      act( AT_ACTION, "$n tries to smoke $p... (I wonder what $e's been putting his $s pipe?)", ch, pipe, NULL, TO_ROOM );
+      act( AT_ACTION, "You try to smoke $p... but it doesn't seem to work.", ch, pipe_obj, NULL, TO_CHAR );
+      act( AT_ACTION, "$n tries to smoke $p... (I wonder what $e's been putting his $s pipe_obj?)", ch, pipe_obj, NULL, TO_ROOM );
       return;
     }
-  if ( !IS_SET( pipe->value[3], PIPE_LIT ) )
+  if ( !IS_SET( pipe_obj->value[3], PIPE_LIT ) )
     {
-      act( AT_ACTION, "You try to smoke $p, but it's not lit.", ch, pipe, NULL, TO_CHAR );
-      act( AT_ACTION, "$n tries to smoke $p, but it's not lit.", ch, pipe, NULL, TO_ROOM );
+      act( AT_ACTION, "You try to smoke $p, but it's not lit.", ch, pipe_obj, NULL, TO_CHAR );
+      act( AT_ACTION, "$n tries to smoke $p, but it's not lit.", ch, pipe_obj, NULL, TO_ROOM );
       return;
     }
-  if ( pipe->value[1] > 0 )
+  if ( pipe_obj->value[1] > 0 )
     {
-      if ( !oprog_use_trigger( ch, pipe, NULL, NULL, NULL ) )
+      if ( !oprog_use_trigger( ch, pipe_obj, NULL, NULL, NULL ) )
         {
-          act( AT_ACTION, "You draw thoughtfully from $p.", ch, pipe, NULL, TO_CHAR );
-          act( AT_ACTION, "$n draws thoughtfully from $p.", ch, pipe, NULL, TO_ROOM );
+          act( AT_ACTION, "You draw thoughtfully from $p.", ch, pipe_obj, NULL, TO_CHAR );
+          act( AT_ACTION, "$n draws thoughtfully from $p.", ch, pipe_obj, NULL, TO_ROOM );
         }
 
-      if ( IS_VALID_HERB( pipe->value[2] ) && pipe->value[2] < top_herb )
+      if ( IS_VALID_HERB( pipe_obj->value[2] ) && pipe_obj->value[2] < top_herb )
         {
-          int sn                = pipe->value[2] + TYPE_HERB;
+          int sn                = pipe_obj->value[2] + TYPE_HERB;
           SKILLTYPE *skill      = get_skilltype( sn );
 
           WAIT_STATE( ch, skill->beats );
           if ( skill->spell_fun )
             obj_cast_spell( sn, UMIN(skill->min_level, ch->top_level),
                             ch, ch, NULL );
-          if ( obj_extracted( pipe ) )
+          if ( obj_extracted( pipe_obj ) )
             return;
         }
       else
-        bug( "do_smoke: bad herb type %d", pipe->value[2] );
+        bug( "do_smoke: bad herb type %d", pipe_obj->value[2] );
 
-      SET_BIT( pipe->value[3], PIPE_HOT );
-      if ( --pipe->value[1] < 1 )
+      SET_BIT( pipe_obj->value[3], PIPE_HOT );
+      if ( --pipe_obj->value[1] < 1 )
         {
-          REMOVE_BIT( pipe->value[3], PIPE_LIT );
-          SET_BIT( pipe->value[3], PIPE_DIRTY );
-          SET_BIT( pipe->value[3], PIPE_FULLOFASH );
+          REMOVE_BIT( pipe_obj->value[3], PIPE_LIT );
+          SET_BIT( pipe_obj->value[3], PIPE_DIRTY );
+          SET_BIT( pipe_obj->value[3], PIPE_FULLOFASH );
         }
     }
 }
 
 void do_light( CHAR_DATA *ch, char *argument )
 {
-  OBJ_DATA *pipe;
+  OBJ_DATA *pipe_obj;
   char arg[MAX_INPUT_LENGTH];
 
   one_argument( argument, arg );
@@ -2248,27 +2248,27 @@ void do_light( CHAR_DATA *ch, char *argument )
   if ( ms_find_obj(ch) )
     return;
 
-  if ( (pipe = get_obj_carry( ch, arg )) == NULL )
+  if ( (pipe_obj = get_obj_carry( ch, arg )) == NULL )
     {
       send_to_char( "You aren't carrying that.\r\n", ch );
       return;
     }
-  if ( pipe->item_type != ITEM_PIPE )
+  if ( pipe_obj->item_type != ITEM_PIPE )
     {
       send_to_char( "You can't light that.\r\n", ch );
       return;
     }
-  if ( !IS_SET( pipe->value[3], PIPE_LIT ) )
+  if ( !IS_SET( pipe_obj->value[3], PIPE_LIT ) )
     {
-      if ( pipe->value[1] < 1 )
+      if ( pipe_obj->value[1] < 1 )
         {
-          act( AT_ACTION, "You try to light $p, but it's empty.", ch, pipe, NULL, TO_CHAR );
-          act( AT_ACTION, "$n tries to light $p, but it's empty.", ch, pipe, NULL, TO_ROOM );
+          act( AT_ACTION, "You try to light $p, but it's empty.", ch, pipe_obj, NULL, TO_CHAR );
+          act( AT_ACTION, "$n tries to light $p, but it's empty.", ch, pipe_obj, NULL, TO_ROOM );
           return;
         }
-      act( AT_ACTION, "You carefully light $p.", ch, pipe, NULL, TO_CHAR );
-      act( AT_ACTION, "$n carefully lights $p.", ch, pipe, NULL, TO_ROOM );
-      SET_BIT( pipe->value[3], PIPE_LIT );
+      act( AT_ACTION, "You carefully light $p.", ch, pipe_obj, NULL, TO_CHAR );
+      act( AT_ACTION, "$n carefully lights $p.", ch, pipe_obj, NULL, TO_ROOM );
+      SET_BIT( pipe_obj->value[3], PIPE_LIT );
       return;
     }
   send_to_char( "It's already lit.\r\n", ch );
@@ -3219,27 +3219,37 @@ int add_bad_name(char *name)
 
 void do_buzz (CHAR_DATA *ch, char *arg)
 {
-  short exit;
+  short exit_dir;
   ROOM_INDEX_DATA *home;
   EXIT_DATA *exitdat;
 
-  if ( !str_cmp( arg, "n"  ) || !str_cmp( arg, "north"     ) ) exit = 0;
-  else if ( !str_cmp( arg, "e"  ) || !str_cmp( arg, "east"      ) ) exit = 1;
-  else if ( !str_cmp( arg, "s"  ) || !str_cmp( arg, "south"     ) ) exit = 2;
-  else if ( !str_cmp( arg, "w"  ) || !str_cmp( arg, "west"      ) ) exit = 3;
-  else if ( !str_cmp( arg, "u"  ) || !str_cmp( arg, "up"        ) ) exit = 4;
-  else if ( !str_cmp( arg, "d"  ) || !str_cmp( arg, "down"      ) ) exit = 5;
-  else if ( !str_cmp( arg, "ne" ) || !str_cmp( arg, "northeast" ) ) exit = 6;
-  else if ( !str_cmp( arg, "nw" ) || !str_cmp( arg, "northwest" ) ) exit = 7;
-  else if ( !str_cmp( arg, "se" ) || !str_cmp( arg, "southeast" ) ) exit = 8;
-  else if ( !str_cmp( arg, "sw" ) || !str_cmp( arg, "southwest" ) ) exit = 9;
+  if ( !str_cmp( arg, "n"  ) || !str_cmp( arg, "north"     ) )
+    exit_dir = DIR_NORTH;
+  else if ( !str_cmp( arg, "e"  ) || !str_cmp( arg, "east"      ) )
+    exit_dir = DIR_EAST;
+  else if ( !str_cmp( arg, "s"  ) || !str_cmp( arg, "south"     ) )
+    exit_dir = DIR_SOUTH;
+  else if ( !str_cmp( arg, "w"  ) || !str_cmp( arg, "west"      ) )
+    exit_dir = DIR_WEST;
+  else if ( !str_cmp( arg, "u"  ) || !str_cmp( arg, "up"        ) )
+    exit_dir = DIR_UP;
+  else if ( !str_cmp( arg, "d"  ) || !str_cmp( arg, "down"      ) )
+    exit_dir = DIR_DOWN;
+  else if ( !str_cmp( arg, "ne" ) || !str_cmp( arg, "northeast" ) )
+    exit_dir = DIR_NORTHEAST;
+  else if ( !str_cmp( arg, "nw" ) || !str_cmp( arg, "northwest" ) )
+    exit_dir = DIR_NORTHWEST;
+  else if ( !str_cmp( arg, "se" ) || !str_cmp( arg, "southeast" ) )
+    exit_dir = DIR_SOUTHEAST;
+  else if ( !str_cmp( arg, "sw" ) || !str_cmp( arg, "southwest" ) )
+    exit_dir = DIR_SOUTHWEST;
   else
     {
       send_to_char("&RBuzz the home in what direction?\r\n",ch);
       return;
     }
 
-  exitdat = get_exit(ch->in_room,exit);
+  exitdat = get_exit(ch->in_room, exit_dir);
 
   if ( exitdat == NULL )
     {
@@ -3266,8 +3276,6 @@ void do_buzz (CHAR_DATA *ch, char *arg)
   echo_to_room(AT_WHITE,home,"The door buzzer sounds.\r\n");
   send_to_char("You press the door buzzer.\r\n",ch);
   act(AT_ACTION,"$n presses a door buzzer.",ch,NULL,NULL,TO_ROOM);
-
-
 }
 
 void do_invite(CHAR_DATA *ch, char *argument)

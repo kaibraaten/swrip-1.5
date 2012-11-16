@@ -294,7 +294,7 @@ void remove_disintigration( BOUNTY_DATA *bounty )
 void claim_disintigration( CHAR_DATA *ch , CHAR_DATA *victim )
 {
   BOUNTY_DATA *bounty;
-  long int     exp;
+  long int     xp;
   char buf[MAX_STRING_LENGTH];
 
   if ( IS_NPC(victim) )
@@ -320,10 +320,10 @@ void claim_disintigration( CHAR_DATA *ch , CHAR_DATA *victim )
     {
       if ( IS_SET(victim->act , PLR_KILLER ) && !IS_NPC(ch) )
         {
-          exp = URANGE(1, xp_compute(ch, victim) , ( exp_level(ch->skill_level[HUNTING_ABILITY]+1) - exp_level(ch->skill_level[HUNTING_ABILITY]) ));
-          gain_exp( ch , exp , HUNTING_ABILITY );
+          xp = URANGE(1, xp_compute(ch, victim) , ( exp_level(ch->skill_level[HUNTING_ABILITY]+1) - exp_level(ch->skill_level[HUNTING_ABILITY]) ));
+          gain_exp( ch , xp , HUNTING_ABILITY );
           set_char_color( AT_BLOOD, ch );
-          ch_printf( ch, "You receive %ld hunting experience for executing a wanted killer.\r\n", exp );
+          ch_printf( ch, "You receive %ld hunting experience for executing a wanted killer.\r\n", xp );
         }
       else if ( !IS_NPC(ch) )
         {
@@ -339,8 +339,8 @@ void claim_disintigration( CHAR_DATA *ch , CHAR_DATA *victim )
 
   ch->gold += bounty->amount;
 
-  exp = URANGE(1, bounty->amount + xp_compute(ch, victim) , ( exp_level(ch->skill_level[HUNTING_ABILITY]+1) - exp_level(ch->skill_level[HUNTING_ABILITY]) ));
-  gain_exp( ch , exp , HUNTING_ABILITY );
+  xp = URANGE(1, bounty->amount + xp_compute(ch, victim) , ( exp_level(ch->skill_level[HUNTING_ABILITY]+1) - exp_level(ch->skill_level[HUNTING_ABILITY]) ));
+  gain_exp( ch , xp , HUNTING_ABILITY );
 
   set_char_color( AT_BLOOD, ch );
   ch_printf( ch, "You receive %ld experience and %ld credits,\r\n from the bounty on %s\r\n", exp, bounty->amount, bounty->target );

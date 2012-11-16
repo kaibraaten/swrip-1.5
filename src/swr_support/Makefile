@@ -5,7 +5,7 @@ OBJ  = $(patsubst %,$(ODIR)/%,$(_OBJ))
 #Comment out the next line if your system doesn't have dlsym functionality.
 #USE_DLSYM = -DSWRIP_USE_DLSYM
 
-WFLAGS = -Wall -Wshadow -Wformat-security -Winline -Wpointer-arith -Wcast-align -Wredundant-decls -Werror -Wwrite-strings -Wextra
+WFLAGS = -Wall -Wshadow -Wformat-security -Winline -Wpointer-arith -Wcast-align -Wredundant-decls -Werror -Wwrite-strings -Wextra -Wno-char-subscripts
 CFLAGS = -O2 -MMD -pedantic $(GCC_MARCH) $(WFLAGS) -I. $(USE_DLSYM)
 
 #If not Cygwin environment

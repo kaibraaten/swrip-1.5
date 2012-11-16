@@ -2796,15 +2796,3 @@ void auction_update (void)
       auction->item = NULL; /* clear auction */
     } /* switch */
 } /* func */
-
-void subtract_times(struct timeval *etime, struct timeval *stime)
-{
-  etime->tv_sec -= stime->tv_sec;
-  etime->tv_usec -= stime->tv_usec;
-  while ( etime->tv_usec < 0 )
-    {
-      etime->tv_usec += 1000000;
-      etime->tv_sec--;
-    }
-  return;
-}
