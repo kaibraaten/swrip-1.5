@@ -1632,22 +1632,31 @@ SPACE_DATA *spaceobject_from_name( char *name )
  */
 SPACE_DATA *spaceobject_from_vnum( int vnum )
 {
-  SPACE_DATA *spaceobject;
-  SHIP_DATA *ship;
+  SPACE_DATA *spaceobject = NULL;
+  SHIP_DATA *ship = NULL;
 
   for ( spaceobject = first_spaceobject; spaceobject; spaceobject = spaceobject->next )
-    if ( vnum == spaceobject->doca ||
-         vnum == spaceobject->docb ||
-         vnum == spaceobject->docc )
-      return spaceobject;
+    {
+      if ( vnum == spaceobject->doca ||
+	   vnum == spaceobject->docb ||
+	   vnum == spaceobject->docc )
+	{
+	  return spaceobject;
+	}
+    }
 
   for ( ship = first_ship; ship; ship = ship->next )
-    if ( vnum == ship->hanger )
-      {
-        if( !(ship->bayopen) )
-          return NULL;
-        return ship->spaceobject;
-      }
+    {
+      if ( vnum == ship->hanger )
+	{
+	  if( !(ship->bayopen) )
+	    {
+	      return NULL;
+	    }
+
+	  return ship->spaceobject;
+	}
+    }
 
   return NULL;
 }
@@ -3370,7 +3379,9 @@ bool load_ship_file( char *shipfile )
                 ship->cockpit == ROOM_CORUSCANT_TURBOCAR ||
                 ship->cockpit == ROOM_CORUSCANT_SHUTTLE ||
                 isbus  )
-        {}
+        {
+
+	}
       else if ( ( pRoomIndex = get_room_index( ship->lastdoc ) ) != NULL
                 && ship->class != CAPITAL_SHIP && ship->class != SHIP_PLATFORM )
         {
@@ -5351,10 +5362,16 @@ void do_allships( CHAR_DATA *ch, char *argument )
 void ship_to_spaceobject( SHIP_DATA *ship , SPACE_DATA *spaceobject )
 {
   if ( spaceobject == NULL )
-    return;
+    {
+      bug("%s: arg 2 spaceobject == NULL", __FUNCTION__);
+      return;
+    }
 
   if ( ship == NULL )
-    return;
+    {
+      bug("%s: arg 1 ship == NULL", __FUNCTION__);
+      return;
+    }
 
   ship->spaceobject = spaceobject;
 
@@ -6545,7 +6562,7 @@ void do_land( CHAR_DATA *ch, char *argument )
       echo_to_system( AT_YELLOW, ship, buf , NULL );
       echo_to_docked( AT_YELLOW , ship, "The ship begins to enter the atmosphere." );
 
-      echo_to_ship( AT_YELLOW , ship , "The ship slowly begins its landing aproach.");
+      echo_to_ship( AT_YELLOW , ship , "The ship slowly begins its landing approach.");
       ship->dest = STRALLOC(arg);
       ship->shipstate = SHIP_LAND;
       if ( ship->class == FIGHTER_SHIP )
@@ -6639,7 +6656,7 @@ void landship( SHIP_DATA *ship, char *arg )
 
   if ( !ship_to_room( ship , destination ) )
     {
-      echo_to_room( AT_YELLOW , get_room_index(ship->pilotseat), "Could not complete aproach. Landing aborted.");
+      echo_to_room( AT_YELLOW , get_room_index(ship->pilotseat), "Could not complete approach. Landing aborted.");
       echo_to_ship( AT_YELLOW , ship , "The ship pulls back up out of its landing sequence.");
       if (ship->shipstate != SHIP_DISABLED)
         ship->shipstate = SHIP_READY;
@@ -6946,7 +6963,7 @@ void do_trajectory_actual( CHAR_DATA *ch, char *argument )
 
   ship->energy -= (ship->currspeed/10);
 
-  ch_printf( ch ,"&GNew course set, aproaching %.0f %.0f %.0f.\r\n" , vx,vy,vz );
+  ch_printf( ch ,"&GNew course set, approaching %.0f %.0f %.0f.\r\n" , vx,vy,vz );
   act( AT_PLAIN, "$n manipulates the ships controls.", ch, NULL, argument , TO_ROOM );
 
   echo_to_cockpit( AT_YELLOW ,ship, "The ship begins to turn.\r\n" );
@@ -7090,7 +7107,7 @@ void do_trajectory( CHAR_DATA *ch, char *argument )
 
   ship->energy -= (ship->currspeed/10);
 
-  ch_printf( ch ,"&GNew course set, aproaching %.0f %.0f %.0f.\r\n" , vx,vy,vz );
+  ch_printf( ch ,"&GNew course set, approaching %.0f %.0f %.0f.\r\n" , vx,vy,vz );
   act( AT_PLAIN, "$n manipulates the ships controls.", ch, NULL, argument , TO_ROOM );
 
   echo_to_cockpit( AT_YELLOW ,ship, "The ship begins to turn.\r\n" );
