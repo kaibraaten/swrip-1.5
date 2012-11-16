@@ -687,14 +687,6 @@ Log         0
 End
 
 #COMMAND
-Name        clear~
-Code        reserved
-Position    0
-Level       0
-Log         0
-End
-
-#COMMAND
 Name        cedit~
 Code        do_cedit
 Position    0
@@ -729,14 +721,6 @@ End
 #COMMAND
 Name        config~
 Code        do_config
-Position    0
-Level       0
-Log         0
-End
-
-#COMMAND
-Name        councils~
-Code        reserved
 Position    0
 Level       0
 Log         0
@@ -999,14 +983,6 @@ Log         0
 End
 
 #COMMAND
-Name        degradeship~
-Code        reserved
-Position    0
-Level       105
-Log         0
-End
-
-#COMMAND
 Name        decline~
 Code        do_decline
 Position    0
@@ -1027,14 +1003,6 @@ Name        delay~
 Code        do_delay
 Position    0
 Level       103
-Log         1
-End
-
-#COMMAND
-Name        dontresolve~
-Code        reserved
-Position    0
-Level       104
 Log         1
 End
 
@@ -1367,14 +1335,6 @@ Log         0
 End
 
 #COMMAND
-Name        governments~
-Code        reserved
-Position    0
-Level       1
-Log         0
-End
-
-#COMMAND
 Name        getcredits~
 Code        do_collectgold
 Position    0
@@ -1607,22 +1567,6 @@ Log         0
 End
 
 #COMMAND
-Name        install_module~
-Code        reserved
-Position    0
-Level       105
-Log         0
-End
-
-#COMMAND
-Name        instmod~
-Code        reserved
-Position    0
-Level       105
-Log         0
-End
-
-#COMMAND
 Name        jumpvector~
 Code        do_jumpvector
 Position    5
@@ -1799,7 +1743,7 @@ Log         0
 End
 
 #COMMAND
-Name        makestarsystem~
+Name        makespaceobject~
 Code        do_makespaceobject
 Position    0
 Level       103
@@ -2079,14 +2023,6 @@ Log         1
 End
 
 #COMMAND
-Name        makecouncil~
-Code        reserved
-Position    0
-Level       103
-Log         1
-End
-
-#COMMAND
 Name        makerepair~
 Code        do_makerepair
 Position    0
@@ -2239,34 +2175,10 @@ Log         0
 End
 
 #COMMAND
-Name        muse~
-Code        reserved
-Position    0
-Level       102
-Log         0
-End
-
-#COMMAND
 Name        mwhere~
 Code        do_mwhere
 Position    0
 Level       102
-Log         0
-End
-
-#COMMAND
-Name        mpfavor~
-Code        reserved
-Position    0
-Level       1
-Log         0
-End
-
-#COMMAND
-Name        makegovernment~
-Code        reserved
-Position    0
-Level       103
 Log         0
 End
 
@@ -2283,7 +2195,7 @@ Name        makeplanet~
 Code        do_makeplanet
 Position    0
 Level       105
-Log         2
+Log         3
 End
 
 #COMMAND
@@ -2607,14 +2519,6 @@ Log         0
 End
 
 #COMMAND
-Name        opentourney~
-Code        reserved
-Position    0
-Level       105
-Log         1
-End
-
-#COMMAND
 Name        oset~
 Code        do_oset
 Position    0
@@ -2683,14 +2587,6 @@ Name        practice~
 Code        do_practice
 Position    4
 Level       0
-Log         0
-End
-
-#COMMAND
-Name        pagelength~
-Code        reserved
-Position    0
-Level       1
 Log         0
 End
 
@@ -2812,14 +2708,6 @@ Code        do_quest
 Position    6
 Level       0
 Log         0
-End
-
-#COMMAND
-Name        qpset~
-Code        reserved
-Position    0
-Level       102
-Log         1
 End
 
 #COMMAND
@@ -3095,14 +2983,6 @@ Log         0
 End
 
 #COMMAND
-Name        rip~
-Code        reserved
-Position    0
-Level       0
-Log         0
-End
-
-#COMMAND
 Name        rlist~
 Code        do_rlist
 Position    0
@@ -3212,14 +3092,6 @@ Code        do_renameship
 Position    0
 Level       1
 Log         1
-End
-
-#COMMAND
-Name        remove_module~
-Code        reserved
-Position    0
-Level       105
-Log         0
 End
 
 #COMMAND
@@ -3367,15 +3239,7 @@ Log         1
 End
 
 #COMMAND
-Name        setcouncil~
-Code        reserved
-Position    0
-Level       103
-Log         1
-End
-
-#COMMAND
-Name        setstarsystem~
+Name        setspaceobject~
 Code        do_setspaceobject
 Position    0
 Level       103
@@ -3439,7 +3303,7 @@ Log         0
 End
 
 #COMMAND
-Name        showstarsystem~
+Name        showspaceobject~
 Code        do_showspaceobject
 Position    0
 Level       103
@@ -3607,23 +3471,15 @@ Log         1
 End
 
 #COMMAND
-Name        showclass~
-Code        reserved
+Name        starsystems~
+Code        do_spaceobjects
 Position    0
-Level       103
+Level       1
 Log         0
 End
 
 #COMMAND
-Name        setclass~
-Code        reserved
-Position    0
-Level       105
-Log         1
-End
-
-#COMMAND
-Name        starsystems~
+Name        spaceobjects~
 Code        do_spaceobjects
 Position    0
 Level       1
@@ -3767,14 +3623,6 @@ Log         0
 End
 
 #COMMAND
-Name        show_modules~
-Code        reserved
-Position    0
-Level       1
-Log         0
-End
-
-#COMMAND
 Name        tell~
 Code        do_tell
 Position    5
@@ -3811,14 +3659,6 @@ Name        tamp~
 Code        do_tamp
 Position    5
 Level       0
-Log         0
-End
-
-#COMMAND
-Name        think~
-Code        reserved
-Position    0
-Level       103
 Log         0
 End
 
@@ -3979,22 +3819,6 @@ Name        undock~
 Code        do_undock
 Position    0
 Level       1
-Log         0
-End
-
-#COMMAND
-Name        upgradeship~
-Code        reserved
-Position    5
-Level       104
-Log         0
-End
-
-#COMMAND
-Name        unload~
-Code        reserved
-Position    0
-Level       105
 Log         0
 End
 
