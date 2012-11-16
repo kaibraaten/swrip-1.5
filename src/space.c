@@ -2202,7 +2202,7 @@ void do_makespaceobject( CHAR_DATA *ch, char *argument )
   spaceobject->locationc            = STRALLOC( "" );
 
   argument = one_argument( argument, arg );
-  sprintf( filename, "%s.system" , strlower(arg) );
+  sprintf( filename, "%s" , strlower(arg) );
   spaceobject->filename = str_dup( filename );
   save_spaceobject( spaceobject );
   write_spaceobject_list();
