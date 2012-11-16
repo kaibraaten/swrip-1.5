@@ -2186,14 +2186,14 @@ void do_setspaceobject( CHAR_DATA *ch, char *argument )
 
 void showspaceobject( CHAR_DATA *ch , SPACE_DATA *spaceobject )
 {
-  ch_printf( ch, "Space object:%s\r\n", spaceobject->name);
-  ch_printf( ch, "Filename: %s\r\n", spaceobject->filename);
-  ch_printf( ch, "Trainer: %s\r\n", spaceobject->trainer ? "Yes" : "No");
-  ch_printf( ch, "Type: %s (%d)\r\n", capitalize(get_spaceobj_type(spaceobject->type)),
-	     spaceobject->type);
+  ch_printf( ch, "Space object: %s\r\n", spaceobject->name);
+  ch_printf( ch, "Filename:     %s\r\n", spaceobject->filename);
+  ch_printf( ch, "Trainer:      %s\r\n", spaceobject->trainer ? "Yes" : "No");
+  ch_printf( ch, "Type:         %s (%d)\r\n", capitalize(get_spaceobj_type(spaceobject->type)), spaceobject->type);
 
-  ch_printf( ch, "Coordinates: %.0f %0.f %.0f\r\nGravity: %d\r\n",
-             spaceobject->xpos , spaceobject->ypos, spaceobject->zpos, spaceobject->gravity);
+  ch_printf( ch, "Coordinates:  %.0f %0.f %.0f\r\n",
+             spaceobject->xpos , spaceobject->ypos, spaceobject->zpos);
+  ch_printf( ch, "Gravity:      %d\r\n", spaceobject->gravity);
   ch_printf( ch, "     doca: %5d (%s)\r\n",
              spaceobject->doca, spaceobject->locationa);
   ch_printf( ch, "     docb: %5d (%s)\r\n",
