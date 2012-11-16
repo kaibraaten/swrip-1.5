@@ -1408,7 +1408,6 @@ void do_makeclan( CHAR_DATA *ch, char *argument )
 {
   char filename[256];
   CLAN_DATA *clan;
-  bool found;
 
   if ( !argument || argument[0] == '\0' )
     {
@@ -1416,7 +1415,6 @@ void do_makeclan( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  found = FALSE;
   sprintf( filename, "%s%s", CLAN_DIR, strlower(argument) );
 
   CREATE( clan, CLAN_DATA, 1 );
@@ -1438,7 +1436,6 @@ void do_makeplanet( CHAR_DATA *ch, char *argument )
 {
   char filename[256];
   PLANET_DATA *planet;
-  bool found;
 
   if ( !argument || argument[0] == '\0' )
     {
@@ -1446,7 +1443,6 @@ void do_makeplanet( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  found = FALSE;
   sprintf( filename, "%s%s", PLANET_DIR, strlower(argument) );
 
   CREATE( planet, PLANET_DATA, 1 );
@@ -2799,7 +2795,6 @@ void do_addsalary ( CHAR_DATA *ch , char *argument )
   CHAR_DATA *victim;
   CLAN_DATA *clan;
   int salary;
-  bool info = FALSE;
 
   if ( IS_NPC( ch ) || !ch->pcdata->clan )
     {
@@ -2821,9 +2816,6 @@ void do_addsalary ( CHAR_DATA *ch , char *argument )
 
   argument = one_argument( argument, arg );
   argument = one_argument( argument, arg2 );
-  if ( arg2[0] == '\0' )
-    info = TRUE;
-
 
   salary = atoi(arg2);
 

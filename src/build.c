@@ -5045,7 +5045,7 @@ void edit_buffer( CHAR_DATA *ch, char *argument )
           char word1[MAX_INPUT_LENGTH];
           char word2[MAX_INPUT_LENGTH];
           char *sptr, *wptr, *lwptr;
-          int x, count, wordln, word2ln, lineln;
+          int x, count, wordln, lineln;
 
           sptr = one_argument( argument, word1 );
           sptr = one_argument( sptr, word1 );
@@ -5060,7 +5060,9 @@ void edit_buffer( CHAR_DATA *ch, char *argument )
               send_to_char( "Done.\r\n> ", ch );
               return;
             }
-          count = 0;  wordln = strlen(word1);  word2ln = strlen(word2);
+
+          count = 0;
+	  wordln = strlen(word1);
           ch_printf( ch, "Replacing all occurrences of %s with %s...\r\n", word1, word2 );
           for ( x = edit->on_line; x < edit->numlines; x++ )
             {
@@ -6647,7 +6649,7 @@ void do_aset( CHAR_DATA *ch, char *argument )
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
   char arg3[MAX_INPUT_LENGTH];
-  bool proto, found;
+  bool found;
   int vnum, value;
 
   argument = one_argument( argument, arg1 );
@@ -6664,7 +6666,8 @@ void do_aset( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  found = FALSE; proto = FALSE;
+  found = FALSE;
+
   for ( tarea = first_area; tarea; tarea = tarea->next )
     if ( !str_cmp( tarea->filename, arg1 ) )
       {
@@ -6677,7 +6680,6 @@ void do_aset( CHAR_DATA *ch, char *argument )
       if ( !str_cmp( tarea->filename, arg1 ) )
         {
           found = TRUE;
-          proto = TRUE;
           break;
         }
 

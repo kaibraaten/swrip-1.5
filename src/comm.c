@@ -241,8 +241,6 @@ int init_socket( int port )
 {
   char hostname[64];
   struct sockaddr_in     sa;
-  struct hostent        *hp;
-  struct servent        *sp;
   int x = 1;
   int fd;
 
@@ -280,8 +278,6 @@ int init_socket( int port )
   }
 #endif
 
-  hp = gethostbyname( hostname );
-  sp = getservbyname( "service", "mud" );
   memset(&sa, '\0', sizeof(sa));
   sa.sin_family   = AF_INET; /* hp->h_addrtype; */
   sa.sin_port       = htons( port );
@@ -2126,12 +2122,10 @@ void nanny( DESCRIPTOR_DATA *d, char *argument )
                    capitalize( ch->name ) );
           if ( ( fph = fopen( filename, "r" ) ) != NULL )
             {
-              bool found;
               OBJ_DATA *tobj, *tobj_next;
 
               rset_supermob(storeroom);
 
-              found = TRUE;
               for ( ; ; )
                 {
                   char letter;

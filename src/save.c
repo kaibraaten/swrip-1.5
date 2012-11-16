@@ -872,6 +872,7 @@ bool load_char_obj( DESCRIPTOR_DATA *d, char *name, bool preload )
             }
 
           word = fread_word( fp );
+
           if ( !str_cmp( word, "PLAYER" ) )
             {
               fread_char ( ch, fp, preload );
@@ -998,7 +999,7 @@ void fread_char( CHAR_DATA *ch, FILE *fp, bool preload )
   short killcnt;
   bool fMatch;
   time_t lastplayed;
-  int sn, extra;
+  int sn;
 
   file_ver = 0;
   killcnt = 0;
@@ -1397,7 +1398,6 @@ void fread_char( CHAR_DATA *ch, FILE *fp, bool preload )
           KEY( "PKills",        ch->pcdata->pkills,     fread_number( fp ) );
           KEY( "Played",        ch->pcdata->played,     fread_number( fp ) );
           KEY( "Position",      ch->position,           fread_number( fp ) );
-          KEY( "Practice",      extra,          fread_number( fp ) );
           KEY( "Prompt",        ch->pcdata->prompt,     fread_string( fp ) );
           if (!str_cmp ( word, "PTimer" ) )
             {
@@ -2195,7 +2195,6 @@ void load_storerooms( void )
       if ( de->d_name[0] != '.' )
         {
           int iNest;
-          bool found;
           OBJ_DATA *tobj, *tobj_next;
           ROOM_INDEX_DATA *storeroom;
 
@@ -2228,7 +2227,6 @@ void load_storerooms( void )
           for ( iNest = 0; iNest < MAX_NEST; iNest++ )
             rgObjNest[iNest] = NULL;
 
-          found = TRUE;
           for ( ; ; )
             {
               char letter;
@@ -2546,7 +2544,6 @@ void write_char_mobile( CHAR_DATA *ch , char *argument )
 void read_char_mobile( char *argument )
 {
   FILE *fp;
-  CHAR_DATA *mob;
   char buf[MAX_STRING_LENGTH];
 
   if ( (fp = fopen( argument, "r")) == NULL )
@@ -2557,6 +2554,5 @@ void read_char_mobile( char *argument )
       return;
     }
 
-  mob = fread_mobile( fp );
   fclose( fp );
 }

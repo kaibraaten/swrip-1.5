@@ -283,7 +283,7 @@ void do_makeblaster( CHAR_DATA *ch, char *argument )
   bool checktool, checkdura, checkbatt, checkoven, checkcond, checkcirc, checkammo, checkscope;
   OBJ_DATA *obj;
   OBJ_INDEX_DATA *pObjIndex;
-  int vnum, power, scope, ammo, counts, countp;
+  int vnum, power, scope, ammo;
   AFFECT_DATA *paf;
   AFFECT_DATA *paf2;
 
@@ -414,8 +414,6 @@ void do_makeblaster( CHAR_DATA *ch, char *argument )
   power     = 0;
   scope     = 0;
   ammo = 0;
-  countp = 0;
-  counts = 0;
 
   for ( obj = ch->last_carrying; obj; obj = obj->prev_content )
     {

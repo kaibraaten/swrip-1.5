@@ -518,7 +518,6 @@ int move_gain( CHAR_DATA *ch )
 void gain_addiction( CHAR_DATA *ch )
 {
   short drug;
-  ch_ret retcode;
   AFFECT_DATA af;
 
   for ( drug=0 ; drug <= 9 ; drug ++ )
@@ -579,7 +578,7 @@ void gain_addiction( CHAR_DATA *ch )
         {
           ch_printf ( ch, "You feel like you are going to die. You NEED %s\r\n.",   spice_table[drug] );
           worsen_mental_state( ch, 2 );
-          retcode = damage(ch, ch, 5, TYPE_UNDEFINED);
+          damage(ch, ch, 5, TYPE_UNDEFINED);
         }
       else if ( ch->pcdata->addiction[drug] > ch->pcdata->drug_level[drug]+100 )
         {

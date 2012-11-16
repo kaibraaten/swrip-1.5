@@ -1658,10 +1658,6 @@ ch_ret simple_damage( CHAR_DATA *ch, CHAR_DATA *victim, int dam, int dt )
   short dameq;
   bool npcvict;
   OBJ_DATA *damobj;
-  ch_ret retcode;
-
-
-  retcode = rNONE;
 
   if ( !ch )
     {

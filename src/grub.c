@@ -1526,13 +1526,10 @@ void do_diagnose( CHAR_DATA *ch, char *argument )
 
   if (!str_cmp(arg1, "xxxobxxx"))
     {
-      OBJ_INDEX_DATA *px;
       OBJ_DATA       *po, *pt = NULL;
-      AFFECT_DATA    *pa;
       int            i=0;
       char           buf[MAX_STRING_LENGTH];
 
-      pa=NULL;
       ch_printf(ch, "CHAR name=%s \r\n", ch->name);
       strcpy(buf, ch->first_carrying ? ch->first_carrying->name : "NULL");
       ch_printf(ch, "   first_carry=%s\r\n", buf);
@@ -1559,7 +1556,6 @@ void do_diagnose( CHAR_DATA *ch, char *argument )
             }
           if ( ch==po->carried_by || (pt && ch==pt->carried_by) )
             {
-              px = po->pIndexData;
               ch_printf(ch, "\r\n%d OBJ name=%s \r\n", i, po->name);
               strcpy(buf, po->next_content ? po->next_content->name : "NULL");
               ch_printf(ch, "   next_content=%s\r\n", buf);
@@ -1569,41 +1565,6 @@ void do_diagnose( CHAR_DATA *ch, char *argument )
               ch_printf(ch, "   first_content=%s\r\n", buf);
               strcpy(buf, po->last_content ? po->last_content->name : "NULL");
               ch_printf(ch, "   last_content=%s\r\n", buf);
-
-              /*
-                ch_printf(ch,
-                "\r\nINDEX_DATA vnum=%d name=%s level=%d extra_flags=%d\r\n",
-                px->vnum, px->name, px->level, px->extra_flags);
-
-                ch_printf(ch,
-                "v0=%d v1=%d v2=%d v3=%d v4=%d v5=%d item_type=%d\r\n",
-                px->value[0], px->value[1], px->value[2], px->value[3],
-                px->value[4], px->value[5], px->item_type);
-              */
-              /*
-                for (pa=px->first_affect; pa; pa=pa->next)
-                ch_printf(ch,
-                "   type=%d duration=%d location=%d modifier=%d bitvector=%d\r\n",
-                pa->type, pa->duration, pa->location, pa->modifier, pa->bitvector);
-              */
-              /*
-                ch_printf(ch,
-                "\r\nOBJECT_DATA %d name=%s level=%d wear_flags=%d wear_loc=%d\r\n",
-                i, po->name, po->level, po->wear_flags, po->wear_loc);
-              */
-              /*
-                ch_printf(ch,
-                "v0=%d v1=%d v2=%d v3=%d v4=%d v5=%d item_type=%d\r\n",
-                po->value[0], po->value[1], po->value[2], po->value[3],
-                po->value[4], po->value[5], po->item_type);
-              */
-              /*
-                for (pa=po->first_affect; pa; pa=pa->next)
-                ch_printf(ch,
-                "   type=%d duration=%d location=%d modifier=%d bitvector=%d\r\n",
-                pa->type, pa->duration, pa->location, pa->modifier, pa->bitvector);
-              */
-
             }
         }
       return;

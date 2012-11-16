@@ -437,7 +437,9 @@ void move_ships( )
   CHAR_DATA *ch;
   bool ch_found = FALSE;
   short crashsun = 0;
-  int speed;
+
+  /* TODO: Assigned to further down, but never used. Check it out.*/
+  /*int speed = 0;*/
 
   for( spaceobj = first_spaceobject; spaceobj; spaceobj = spaceobj->next )
     {
@@ -851,7 +853,9 @@ void move_ships( )
                   ship->shipstate = SHIP_READY;
                   STRFREE( ship->home );
                   ship->home = STRALLOC( ship->spaceobject->name );
-                  speed = ship->hyperspeed;
+
+		  /* TODO: Never used. Check this out! */
+                  /*speed = ship->hyperspeed;*/
 
                   ship->jx = ship->vx + ship->tx;
                   ship->jy = ship->vy + ship->ty;
@@ -2924,12 +2928,10 @@ void fread_cargohold( SHIP_DATA *ship, FILE *fp )
 
   if ( fp != NULL )
     {
-      bool found;
       OBJ_DATA *tobj, *tobj_next;
 
       rset_supermob(storeroom);
 
-      found = TRUE;
       for ( ; ; )
         {
           char letter;
@@ -2987,7 +2989,6 @@ void fread_ship( SHIP_DATA *ship, FILE *fp )
   char buf[MAX_STRING_LENGTH];
   char *word;
   bool fMatch;
-  int dummy_number;
 
   for ( ; ; )
     {
@@ -3164,7 +3165,6 @@ void fread_ship( SHIP_DATA *ship, FILE *fp )
 
         case 'O':
           KEY( "Owner",            ship->owner,            fread_string( fp ) );
-          KEY( "Objectnum",        dummy_number,        fread_number( fp ) );
           break;
 
         case 'P':
@@ -5815,7 +5815,6 @@ bool ship_to_room(SHIP_DATA *ship , int vnum )
 
 void do_board( CHAR_DATA *ch, char *argument )
 {
-  ROOM_INDEX_DATA *fromroom;
   ROOM_INDEX_DATA *toroom;
   SHIP_DATA *ship;
   SHIP_DATA *eShip = NULL;
@@ -5884,8 +5883,6 @@ void do_board( CHAR_DATA *ch, char *argument )
       act( AT_PLAIN, "You can't go in there riding THAT.", ch, NULL, argument, TO_CHAR );
       return;
     }
-
-  fromroom = ch->in_room;
 
   if ( ( toroom = get_room_index( ship->entrance ) ) != NULL )
     {
@@ -6008,7 +6005,6 @@ void do_launch( CHAR_DATA *ch, char *argument )
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
-  SPACE_DATA *destin;
 
   int the_chance, class;
   long price = 0;
@@ -6021,7 +6017,6 @@ void do_launch( CHAR_DATA *ch, char *argument )
 
   if( arg1[0] != '\0' )
     {
-      destin = spaceobject_from_name( arg1 );
       class = atoi(arg2);
     }
 
@@ -7286,7 +7281,6 @@ void do_clansellship(CHAR_DATA *ch, char *argument )
   long         price;
   SHIP_DATA   *ship;
   CLAN_DATA   *clan;
-  CLAN_DATA   *mainclan;
 
   if ( IS_NPC(ch) || !ch->pcdata )
     {
@@ -7300,7 +7294,6 @@ void do_clansellship(CHAR_DATA *ch, char *argument )
     }
 
   clan = ch->pcdata->clan;
-  mainclan = ch->pcdata->clan->mainclan ? ch->pcdata->clan->mainclan : clan;
 
   if ( ( ch->pcdata->bestowments
          &&    is_name("clanbuyship", ch->pcdata->bestowments))
@@ -11107,13 +11100,12 @@ ch_ret drive_ship( CHAR_DATA *ch, SHIP_DATA *ship, EXIT_DATA  *pexit , int fall 
 {
   ROOM_INDEX_DATA *in_room;
   ROOM_INDEX_DATA *to_room;
-  ROOM_INDEX_DATA *from_room;
   ROOM_INDEX_DATA *original;
   char buf[MAX_STRING_LENGTH];
   char *txt;
   char *dtxt;
   ch_ret retcode;
-  short door, distance, the_chance;
+  short door, the_chance;
   bool drunk = FALSE;
   CHAR_DATA * rch;
   CHAR_DATA * next_rch;
@@ -11142,7 +11134,7 @@ ch_ret drive_ship( CHAR_DATA *ch, SHIP_DATA *ship, EXIT_DATA  *pexit , int fall 
   txt = NULL;
 
   in_room = get_room_index(ship->location);
-  from_room = in_room;
+
   if ( !pexit || (to_room = pexit->to_room) == NULL )
     {
       if ( drunk )
@@ -11153,7 +11145,6 @@ ch_ret drive_ship( CHAR_DATA *ch, SHIP_DATA *ship, EXIT_DATA  *pexit , int fall 
     }
 
   door = pexit->vdir;
-  distance = pexit->distance;
 
   if ( IS_SET( pexit->exit_info, EX_WINDOW )
        &&  !IS_SET( pexit->exit_info, EX_ISDOOR ) )
@@ -11203,11 +11194,6 @@ ch_ret drive_ship( CHAR_DATA *ch, SHIP_DATA *ship, EXIT_DATA  *pexit , int fall 
       return rNONE;
     }
 
-  /*
-    if ( distance > 1 )
-    if ( (to_room=generate_exit(in_room, &pexit)) == NULL )
-    send_to_char( "Alas, you cannot go that way.\r\n", ch );
-  */
   if ( room_is_private( ch, to_room ) )
     {
       send_to_char( "That room is private right now.\r\n", ch );

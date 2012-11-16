@@ -3993,7 +3993,7 @@ void do_afk( CHAR_DATA *ch, char *argument )
 
 void do_slist( CHAR_DATA *ch, char *argument )
 {
-  int sn, i, lFound;
+  int sn, i;
   char skn[MAX_INPUT_LENGTH];
 
   char skn2[MAX_INPUT_LENGTH];
@@ -4047,7 +4047,6 @@ void do_slist( CHAR_DATA *ch, char *argument )
       send_to_pager(skn,ch);
       for (i=lowlev; i <= hilev; i++)
         {
-          lFound= 0;
           for ( sn = 0; sn < top_sn; sn++ )
             {
               if ( !skill_table[sn]->name )

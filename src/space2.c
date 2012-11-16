@@ -1398,7 +1398,6 @@ void do_shiptrack( CHAR_DATA *ch, char *argument)
   char arg2[MAX_INPUT_LENGTH];
   char arg3[MAX_INPUT_LENGTH];
   char buf[MAX_STRING_LENGTH];
-  int speed;
   float hx, hy, hz;
 
   argument = one_argument( argument , arg);
@@ -1461,8 +1460,6 @@ void do_shiptrack( CHAR_DATA *ch, char *argument)
       ship->tracking = TRUE;
       ship->ch = ch;
       do_trajectory( ch, buf);
-
-      speed = ship->hyperspeed;
 
       ship->jx = ship->vx + hx;
       ship->jy = ship->vy + hy;

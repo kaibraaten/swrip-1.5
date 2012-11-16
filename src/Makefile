@@ -1,6 +1,6 @@
 BINARY = swrip
 #WFLAGS = -Werror -Wall -Wformat-security -Wpointer-arith -Wcast-align -Wwrite-strings -Wshadow -Wextra -Wno-unused-parameter -Wredundant-decls
-WFLAGS = -Wall -Werror -Wformat-security -Wpointer-arith -Wcast-align -Wno-unused-but-set-variable -Wredundant-decls -Wshadow
+WFLAGS = -Wall -Werror -Wformat-security -Wpointer-arith -Wcast-align -Wredundant-decls -Wshadow
 
 #Comment out the next line if your system doesn't have dlsym functionality.
 #USE_DLSYM = -DSWRIP_USE_DLSYM

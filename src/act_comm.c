@@ -1952,9 +1952,7 @@ void do_group( CHAR_DATA *ch, char *argument )
   if ( arg[0] == '\0' )
     {
       CHAR_DATA *gch;
-      CHAR_DATA *leader;
 
-      leader = ch->leader ? ch->leader : ch;
       set_char_color( AT_GREEN, ch );
       ch_printf( ch, "%s's group:\r\n", PERS(ch, ch) );
 
@@ -2083,7 +2081,6 @@ void do_group( CHAR_DATA *ch, char *argument )
   act( AT_ACTION, "$N joins $n's group.", ch, NULL, victim, TO_NOTVICT );
   act( AT_ACTION, "You join $n's group.", ch, NULL, victim, TO_VICT    );
   act( AT_ACTION, "$N joins your group.", ch, NULL, victim, TO_CHAR    );
-  return;
 }
 
 

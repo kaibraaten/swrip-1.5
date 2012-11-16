@@ -1633,7 +1633,7 @@ void do_search( CHAR_DATA *ch, char *argument )
   OBJ_DATA *container;
   OBJ_DATA *startobj;
   int percent, door;
-  bool found, room;
+  bool found;
 
   door = -1;
   switch( ch->substate )
@@ -1694,7 +1694,6 @@ void do_search( CHAR_DATA *ch, char *argument )
   ch->substate = SUB_NONE;
   if ( arg[0] == '\0' )
     {
-      room = TRUE;
       startobj = ch->in_room->first_content;
     }
   else
@@ -4247,10 +4246,8 @@ void do_skin( CHAR_DATA *ch, char *argument)
   OBJ_DATA *corpse;
   OBJ_DATA *obj;
   OBJ_DATA *skin;
-  bool found;
   char *name;
   char buf[MAX_STRING_LENGTH];
-  found = FALSE;
 
   if ( argument[0] == '\0' )
     {

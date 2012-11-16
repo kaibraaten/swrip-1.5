@@ -281,11 +281,8 @@ int get_line( char *desc, int max_len )
   void show_map( CHAR_DATA *ch, char *text )
   {
     char buf[MAX_STRING_LENGTH * 2];
-    int x, y, pos;
-    char *p;
+    int x, y;
 
-    pos = 0;
-    p = text;
     buf[0] = '\0';
 
     /* Place Marker 2 - referred to later */

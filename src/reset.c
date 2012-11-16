@@ -1688,7 +1688,6 @@ void list_resets( CHAR_DATA *ch, AREA_DATA *pArea, ROOM_INDEX_DATA *pRoom,
   OBJ_INDEX_DATA *obj, *obj2;
   OBJ_INDEX_DATA *lastobj;
   RESET_DATA *lo_reset;
-  bool found;
   int num = 0;
   const char *rname, *mname, *oname;
   char buf[256];
@@ -1701,7 +1700,6 @@ void list_resets( CHAR_DATA *ch, AREA_DATA *pArea, ROOM_INDEX_DATA *pRoom,
   obj = NULL;
   lastobj = NULL;
   lo_reset = NULL;
-  found = FALSE;
 
   for ( pReset = pArea->first_reset; pReset; pReset = pReset->next )
     {
