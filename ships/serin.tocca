@@ -1,7 +1,7 @@
 #SHIP
-Name         Serin Pluogus~
-PersonalName         Pluogus~
-Filename     serin.pluogus~
+Name         Serin Tocca~
+PersonalName         Tocca~
+Filename     serin.tocca~
 Description  ~
 Owner        public~
 Pilot        ~
@@ -35,32 +35,32 @@ Rockets     0
 Maxrockets  0
 Torpedos     0
 Maxtorpedos  0
-Lastdoc      10500
-Firstroom    32140
-Lastroom     32149
+Lastdoc      21944
+Firstroom    32410
+Lastroom     32419
 Shield       0
 Maxshield    0
-Hull         10000
-Maxhull      10000
-Maxenergy    10000
+Hull         20000
+Maxhull      20000
+Maxenergy    30000
 Hyperspeed   0
 Comm         0
 Chaff        0
 Maxchaff     0
 Sensor       0
 Astro_array  0
-Realspeed    0
+Realspeed    100
 Type         0
-Cockpit      32140
-Coseat       32140
-Pilotseat    32140
-Gunseat      32140
-Navseat      32140
+Cockpit      32410
+Coseat       32410
+Pilotseat    32410
+Gunseat      32410
+Navseat      32410
 Engineroom   0
-Entrance     32149
+Entrance     32411
 Shipstate    1
 Missilestate 0
-Energy       10000
+Energy       30000
 Manuever     0
 Alarm        0
 UpgradeBlock 0

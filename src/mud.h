@@ -4077,7 +4077,7 @@ DECLARE_SPELL_FUN(      spell_cure_addiction                );
 #define GOD_DIR		"../gods/"	/* God Info Dir			*/
 #define BOARD_DIR	"../boards/"	/* Board data dir		*/
 #define CLAN_DIR	"../clans/"	/* Clan data dir		*/
-#define SHIP_DIR        "../space/"
+#define SHIP_DIR        "../ships/"
 #define SPACE_DIR       "../space/"    
 #define PLANET_DIR      "../planets/"    
 #define GUARD_DIR       "../planets/"
