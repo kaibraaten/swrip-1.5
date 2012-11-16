@@ -1,15 +1,15 @@
 #SHIP
-Name         Serin Siego~
-PersonalName         Siego~
-Filename     serin4.ship~
+Name         Serin Cassia~
+PersonalName         Cassia~
+Filename     serin.cassia~
 Description  ~
 Owner        public~
-Pilot        ~
+Pilot        pilot hiril~
 Copilot      ~
 Class        1
 Tractorbeam  0
-Shipyard     45
-Hanger       0
+Shipyard     11206
+Hanger       32427
 Cargohold       0
 Vx           0
 Vy           0
@@ -35,9 +35,9 @@ Rockets     0
 Maxrockets  0
 Torpedos     0
 Maxtorpedos  0
-Lastdoc      4305
-Firstroom    32435
-Lastroom     32439
+Lastdoc      28038
+Firstroom    32425
+Lastroom     32429
 Shield       0
 Maxshield    0
 Hull         10000
@@ -51,13 +51,13 @@ Sensor       0
 Astro_array  0
 Realspeed    0
 Type         0
-Cockpit      32435
-Coseat       32435
-Pilotseat    32435
-Gunseat      32435
-Navseat      32435
+Cockpit      32425
+Coseat       32425
+Pilotseat    32425
+Gunseat      32425
+Navseat      32425
 Engineroom   0
-Entrance     32436
+Entrance     32426
 Shipstate    1
 Missilestate 0
 Energy       10000
