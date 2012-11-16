@@ -1,9 +1,9 @@
 #SPACE
 Name         Tatooine~
-Filename     tatooine.system~
+Filename     tatooine~
 Type         1~
-Locationa      ~
-Locationb      ~
+Locationa      Mos Eisley~
+Locationb      Mos Espa~
 Locationc      ~
 Doca          31847
 Docb          3300
@@ -12,7 +12,7 @@ Seca          0
 Secb          0
 Secc          0
 Gravity     0
-Xpos          100000
+Xpos          1000000
 Ypos          0
 Zpos          0
 HX            0
