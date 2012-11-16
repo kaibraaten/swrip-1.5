@@ -2283,7 +2283,7 @@ Name        makeplanet~
 Code        do_makeplanet
 Position    0
 Level       105
-Log         0
+Log         2
 End
 
 #COMMAND
