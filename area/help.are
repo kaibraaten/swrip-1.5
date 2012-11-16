@@ -847,14 +847,7 @@ to be recharged.  To recharge a blaster, you must find an ammunition cell.
 ~
 
 0 AMOTD~
-Yoda has been installed in Dagobah. Exar kun has been replaced with the
-evil spirit on Yavin. All skills are taught by one of these two (forcer
-skills) 
- 
-The level restriction on Dagobah Yoda's room has been removed.
- 
-Clones now have memory up to the point they died.  You may bounty your
-killer.
+No message of the day for avatars.
 ~
 
 0 ANSI~
@@ -5339,30 +5332,7 @@ Of this rule can result right up to and including slaying and siteban.
 ~
 
 101 IMOTD~
-&W----- &RHelp Files to Read &W----- 
-       &Y* &WHelp Oldnews &Y* 
-       &Y* &R&WHelp Changes &Y* 
-&W----- ----- ------ ----- ----- 
-
-&RNews &W-----
- &Y* &WBuilders need 104+ permission to make area changes. &Y* 
- &Y* &BImm alts must completely justify a pkill.&Y * 
- &Y* &WDo not change stock ship names.&Y * 
- &Y* &WAdd area ideas on the 100 board. &Y* 
- &Y* &CChanges to IMOTD, AMOTD, MOTD. &Y* 
- &Y* &W100 Board cleaned. &Y* 
- &Y* &GWroona system added, report bugs. &Y* 
- 
-&RWelcome New Imms &W-----
- &Y* &BBuilder Sardog
- 
-^z&PPost questions to the Head Admins on the board north of room
-100.^x&R&W
-&pA note from Uly:
-&z---&Y*Don't* savearea non-prototype areas, just foldarea them.
- 
-&RAny immortal who is informed of a family playing here, loggin onto the
-same ip, MUST post it on the multiplay board. &R&w
+No message of the day for immortals.
 ~
 
 1 IMPRANKS~
@@ -6558,54 +6528,7 @@ moronic.
 ~
 
 -1 MOTD~
-I have spent 2 years dedicating much of my time to Rise in Power. 
-I have brought it from an almost-stock Mud to (one of) the best 
-SWR's currently out there.  I took the job, and then took over, 
-because programming is unquestionably my favorite thing to do.  
-I pushed to open RiP because two previous imms that quit RiP opened
-up their own Mud, and I considered us in friendly competition 
-( We were all friends ).  That Mud, of course, is The Dark hand.  
-When I heard it opened, I bugged Uly and Kuthlan until they agreed
-that we should open too.  We chose the name, and Rise in Power was
-born.  Administration was never something I enjoyed, but I appear
-to have been good at it, and being good at things is my second 
-favorite thing.  Players were always a plus.  I enjoyed having them
-to find my bugs.  Probably why I got so upset when the players kept
-whining when I was trying to fix it.
-Anyway, I have spent enough time running a Mud, and not enough time
-coding one.  I simply can not spend the time I want coding when I 
-have to administrate, and I have found I can not trust other 
-administrators to run my Mud for me.  I cared too much.  I will keep
-this account, and I will continue working on the code.  I will 
-release the current version, after I clean it up, although I may 
-remove some of my newer, buggy features, as I want to release 
-something stable.  
-I will keep this copy up as long as I can, at the very least until 
-I get my code copyrighted and then release it.  I will run the 
-changing copy on another port, because I plan on taking on big 
-projects that will make the game unplayable while I create them, 
-and to do so on this copy would defeat the purpose of keeping it 
-up for your enjoyment.  I will not administrate, but I will stay 
-online and monitor, and ban anyone who makes the game unenjoyable 
-for others... the mass pkers, for example.
-Any builders that wish their areas can surely ask for them via email. 
-Any builders who wish their areas to be included in the code release,
-please inform me of this.  I will not release any areas that I do 
-not have permission to release.
-I will make new releases when I am satisfied I have made enough 
-changes to warrant a new release.  I hope you all enjoy the code that
-I have spent so much time on.
-Lastly, I hope you have all enjoyed having me as the owner of RiP.  
-I do hope someone out there creates a new Mud to follow in creating 
-a community for you all.
-I will keep the swrip.net email address so you all can reach me for 
-whatever reason.  My icq is #23751994, but do not expect me to 
-authorize just anyone.  You can send me messages without authorization,
-of course.  I ask that those of you who do know my AIM to keep it 
-to yourselves, as I have tried to use it for my personal life only. 
- 
-Thank you,
-Darrik Vequir
+No message of the day.
 ~
 
 101 MOTDS~
