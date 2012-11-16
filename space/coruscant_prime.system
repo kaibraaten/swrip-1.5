@@ -1,0 +1,25 @@
+#SPACE
+Name         Coruscant Prime~
+Filename     coruscant_prime.system~
+Type         0~
+Locationa      ~
+Locationb      ~
+Locationc      ~
+Doca          0
+Docb          0
+Docc          0
+Seca          0
+Secb          0
+Secc          0
+Gravity     0
+Xpos          0
+Ypos          0
+Zpos          0
+HX            0
+HY            0
+HZ            0
+SP            0
+Trainer       0
+End
+
+#END

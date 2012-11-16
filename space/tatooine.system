@@ -1,0 +1,25 @@
+#SPACE
+Name         Tatooine~
+Filename     tatooine.system~
+Type         1~
+Locationa      ~
+Locationb      ~
+Locationc      ~
+Doca          31847
+Docb          3300
+Docc          0
+Seca          0
+Secb          0
+Secc          0
+Gravity     0
+Xpos          100000
+Ypos          0
+Zpos          0
+HX            0
+HY            0
+HZ            0
+SP            0
+Trainer       0
+End
+
+#END
