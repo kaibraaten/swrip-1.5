@@ -4,6 +4,14 @@ Filename     coruscant~
 BaseValue    0
 Flags        0
 PopSupport   0.000000
+spaceobject   Coruscant~
+Area         menari_spaceport.are~
+Area         coruscant_streets.are~
+Area         corus_jail.are~
+Area         corus_pt2.are~
+Area         grand_towers.are~
+Area         grand_towers_suites.are~
+Area         monument_plaza.are~
 End
 
 #END
