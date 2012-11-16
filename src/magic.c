@@ -527,7 +527,7 @@ int rd_parse(CHAR_DATA *ch, int level, char *exp)
   if (x == len) return(atoi(exp));
 
   /* break it into 2 parts */
-  for (x = 0; x < strlen(exp); ++x)
+  for (x = 0; x < (int)strlen(exp); ++x)
     switch(exp[x]) {
     case '^':
       if (!total)

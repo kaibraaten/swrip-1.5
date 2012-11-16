@@ -69,11 +69,12 @@ bool check_for_immroom( CHAR_DATA *ch, ROOM_INDEX_DATA *location)
 
 int get_saveflag( char *name )
 {
-  int x;
+  size_t x;
 
   for ( x = 0; x < sizeof(save_flag) / sizeof(save_flag[0]); x++ )
     if ( !str_cmp( name, save_flag[x] ) )
       return x;
+
   return -1;
 }
 
@@ -1815,7 +1816,7 @@ void do_owhere( CHAR_DATA *ch, char *argument )
 }
 #endif
 
-void trunc1(char *s, int len)
+void trunc1(char *s, size_t len)
 {
   if ( strlen(s) > len )
     s[len] = '\0';

@@ -98,8 +98,9 @@ void do_alias( CHAR_DATA *ch, char *argument )
     }
   else
     {
-      if (pal->cmd);
-      DISPOSE(pal->cmd);
+      if (pal->cmd)
+	DISPOSE(pal->cmd);
+
       pal->cmd  = str_dup(argument);
       send_to_char("Modified Alias.\r\n", ch);
     }

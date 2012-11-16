@@ -1337,7 +1337,7 @@ void mprog_driver ( char *com_list, CHAR_DATA *mob, CHAR_DATA *actor,
   command_list = tmpcmndlst;
   if ( single_step )
     {
-      if ( mob->mpscriptpos > strlen( tmpcmndlst ) )
+      if ( mob->mpscriptpos > (int)strlen( tmpcmndlst ) )
         mob->mpscriptpos = 0;
       else
         command_list += mob->mpscriptpos;
@@ -1695,7 +1695,7 @@ bool mprog_keyword_check( const char *argu, const char *argl )
   char word[MAX_INPUT_LENGTH];
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
-  int i;
+  size_t i;
   char *arg, *arglist;
   char *start, *end;
 
@@ -1756,7 +1756,7 @@ void mprog_wordlist_check( char *arg, CHAR_DATA *mob, CHAR_DATA *actor,
   char       *start;
   char       *dupl;
   char       *end;
-  int         i;
+  size_t      i;
 
   for ( mprg = mob->pIndexData->mudprogs; mprg; mprg = mprg->next )
     if ( mprg->type & type )
@@ -2539,7 +2539,7 @@ void oprog_wordlist_check( char *arg, CHAR_DATA *mob, CHAR_DATA *actor,
   char       *start;
   char       *dupl;
   char       *end;
-  int         i;
+  size_t      i;
 
   for ( mprg = iobj->pIndexData->mudprogs; mprg; mprg = mprg->next )
     if ( mprg->type & type )
@@ -2786,7 +2786,7 @@ void rprog_wordlist_check( char *arg, CHAR_DATA *mob, CHAR_DATA *actor,
   char       *start;
   char       *dupl;
   char       *end;
-  int         i;
+  size_t      i;
 
   if ( actor && !char_died(actor) && actor->in_room )
     room = actor->in_room;

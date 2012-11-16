@@ -78,7 +78,7 @@ void skill_notfound( CHAR_DATA *ch, char *argument )
 
 int get_ssave( char *name )
 {
-  int x;
+  size_t x;
 
   for ( x = 0; x < sizeof(spell_saves) / sizeof(spell_saves[0]); x++ )
     if ( !str_cmp( name, spell_saves[x] ) )
@@ -88,7 +88,7 @@ int get_ssave( char *name )
 
 int get_starget( char *name )
 {
-  int x;
+  size_t x;
 
   for ( x = 0; x < sizeof(target_type) / sizeof(target_type[0]); x++ )
     if ( !str_cmp( name, target_type[x] ) )
@@ -98,7 +98,7 @@ int get_starget( char *name )
 
 int get_sflag( char *name )
 {
-  int x;
+  size_t x;
 
   for ( x = 0; x < sizeof(spell_flag) / sizeof(spell_flag[0]); x++ )
     if ( !str_cmp( name, spell_flag[x] ) )
@@ -108,7 +108,7 @@ int get_sflag( char *name )
 
 int get_sdamage( char *name )
 {
-  int x;
+  size_t x;
 
   for ( x = 0; x < sizeof(spell_damage) / sizeof(spell_damage[0]); x++ )
     if ( !str_cmp( name, spell_damage[x] ) )
@@ -118,7 +118,7 @@ int get_sdamage( char *name )
 
 int get_saction( char *name )
 {
-  int x;
+  size_t x;
 
   for ( x = 0; x < sizeof(spell_action) / sizeof(spell_action[0]); x++ )
     if ( !str_cmp( name, spell_action[x] ) )
@@ -128,7 +128,7 @@ int get_saction( char *name )
 
 int get_spower( char *name )
 {
-  int x;
+  size_t x;
 
   for ( x = 0; x < sizeof(spell_power) / sizeof(spell_power[0]); x++ )
     if ( !str_cmp( name, spell_power[x] ) )
@@ -138,7 +138,7 @@ int get_spower( char *name )
 
 int get_sclass( char *name )
 {
-  int x;
+  size_t x;
 
   for ( x = 0; x < sizeof(spell_class) / sizeof(spell_class[0]); x++ )
     if ( !str_cmp( name, spell_class[x] ) )
@@ -1890,7 +1890,7 @@ void do_steal( CHAR_DATA *ch, char *argument )
       if ( !IS_NPC(victim) || (ch->pcdata->learned[gsn_steal] < 50 ) )
         learn_from_success( ch, gsn_steal );
 
-      if ( IS_NPC( victim ) );
+      if ( IS_NPC( victim ) )
       {
         xp = UMIN( amount*10 , ( exp_level( ch->skill_level[SMUGGLING_ABILITY]+1 ) - exp_level( ch->skill_level[SMUGGLING_ABILITY])  ) / 35  );
         xp = UMIN( xp , xp_compute( ch, victim ) );
@@ -1949,7 +1949,7 @@ void do_steal( CHAR_DATA *ch, char *argument )
   send_to_char( "Ok.\r\n", ch );
   if ( IS_NPC(victim)  || ch->pcdata->learned[gsn_steal] )
     learn_from_success( ch, gsn_steal );
-  if ( IS_NPC( victim ) );
+  if ( IS_NPC( victim ) )
   {
     xp = UMIN( obj->cost*10 , ( exp_level( ch->skill_level[SMUGGLING_ABILITY]+1) - exp_level( ch->skill_level[SMUGGLING_ABILITY])  ) / 10  );
     xp = UMIN( xp , xp_compute( ch, victim ) );

@@ -920,7 +920,7 @@ void close_socket( DESCRIPTOR_DATA *dclose, bool force )
 
 bool read_from_descriptor( DESCRIPTOR_DATA *d )
 {
-  int iStart;
+  size_t iStart;
 
   /* Hold horses if pending command already. */
   if ( d->incomm[0] != '\0' )
@@ -928,6 +928,7 @@ bool read_from_descriptor( DESCRIPTOR_DATA *d )
 
   /* Check for overflow. */
   iStart = strlen(d->inbuf);
+
   if ( iStart >= sizeof(d->inbuf) - 10 )
     {
       sprintf( log_buf, "%s input overflow!", d->host );
@@ -1174,7 +1175,7 @@ bool flush_buffer( DESCRIPTOR_DATA *d, bool fPrompt )
 /*
  * Append onto an output buffer.
  */
-void write_to_buffer( DESCRIPTOR_DATA *d, const char *txt, int length )
+void write_to_buffer( DESCRIPTOR_DATA *d, const char *txt, size_t length )
 {
   if ( !d )
     {
@@ -1245,9 +1246,9 @@ void write_to_buffer( DESCRIPTOR_DATA *d, const char *txt, int length )
  * If this gives errors on very long blocks (like 'ofind all'),
  *   try lowering the max block size.
  */
-bool write_to_descriptor( int desc, char *txt, int length )
+bool write_to_descriptor( int desc, char *txt, size_t length )
 {
-  int iStart;
+  size_t iStart;
   int nWrite;
   int nBlock;
 
@@ -2510,7 +2511,7 @@ void send_to_char_color( const char *txt, CHAR_DATA *ch )
   return;
 }
 
-void write_to_pager( DESCRIPTOR_DATA *d, const char *txt, int length )
+void write_to_pager( DESCRIPTOR_DATA *d, const char *txt, size_t length )
 {
   if ( length <= 0 )
     length = strlen(txt);
@@ -3164,8 +3165,10 @@ void display_prompt( DESCRIPTOR_DATA *d )
                       : (IS_SET(ch->act, PLR_WIZINVIS) ? ch->pcdata->wizinvis : 0));
               break;
             }
-          if ( stat != 0x80000000 )
+
+          if ( (unsigned int)stat != 0x80000000 )
             sprintf(pbuf, "%d", stat);
+
           pbuf += strlen(pbuf);
           break;
         }

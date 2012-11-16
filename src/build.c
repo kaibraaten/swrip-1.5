@@ -384,7 +384,7 @@ bool can_medit( CHAR_DATA *ch, MOB_INDEX_DATA *mob )
 
 int get_otype( char *type )
 {
-  int x;
+  size_t x;
 
   for ( x = 0; x < (sizeof(o_types) / sizeof(o_types[0]) ); x++ )
     if ( !str_cmp( type, o_types[x] ) )
@@ -394,7 +394,7 @@ int get_otype( char *type )
 
 int get_aflag( char *flag )
 {
-  int x;
+  size_t x;
 
   for ( x = 0; x < 32; x++ )
     if ( !str_cmp( flag, a_flags[x] ) )
@@ -404,7 +404,7 @@ int get_aflag( char *flag )
 
 int get_trapflag( char *flag )
 {
-  int x;
+  size_t x;
 
   for ( x = 0; x < 32; x++ )
     if ( !str_cmp( flag, trap_flags[x] ) )
@@ -414,7 +414,7 @@ int get_trapflag( char *flag )
 
 int get_atype( char *type )
 {
-  int x;
+  size_t x;
 
   for ( x = 0; x < MAX_APPLY_TYPE; x++ )
     if ( !str_cmp( type, a_types[x] ) )
@@ -424,7 +424,7 @@ int get_atype( char *type )
 
 int get_npc_race( char *type )
 {
-  int x;
+  size_t x;
 
   for ( x = 0; x < MAX_NPC_RACE; x++ )
     if ( !str_cmp( type, npc_race[x] ) )
@@ -3493,7 +3493,7 @@ void do_oset( CHAR_DATA *ch, char *argument )
           int x;
 
           value = -1;
-          for ( x = 0; x < sizeof( weapon_table ) / sizeof( weapon_table[0] ); x++ )
+          for ( x = 0; x < (int)(sizeof( weapon_table ) / sizeof( weapon_table[0] )); x++ )
             if ( !str_cmp( arg3, weapon_table[x] ) )
               value = x;
           if ( value < 0 )
@@ -3531,7 +3531,7 @@ void do_oset( CHAR_DATA *ch, char *argument )
           int x;
 
           value = -1;
-          for ( x = 0; x < sizeof( spice_table ) / sizeof( spice_table[0] ); x++ )
+          for ( x = 0; x < (int)(sizeof( spice_table ) / sizeof( spice_table[0] )); x++ )
             if ( !str_cmp( arg3, spice_table[x] ) )
               value = x;
           if ( value < 0 )
@@ -3551,7 +3551,7 @@ void do_oset( CHAR_DATA *ch, char *argument )
           int x;
 
           value = -1;
-          for ( x = 0; x < sizeof( crystal_table ) / sizeof( crystal_table[0] ); x++ )
+          for ( x = 0; x < (int)(sizeof( crystal_table ) / sizeof( crystal_table[0] )); x++ )
             if ( !str_cmp( arg3, crystal_table[x] ) )
               value = x;
           if ( value < 0 )

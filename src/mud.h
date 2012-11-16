@@ -943,8 +943,8 @@ struct	clan_data
     int         spacecraft;
     int		vehicles;
     int         jail;
-    unsigned int enlistroom1;
-    unsigned int enlistroom2;
+    int enlistroom1;
+    int enlistroom2;
     char      * tmpstr;
 };
 
@@ -4293,9 +4293,9 @@ bool autofly( SHIP_DATA *ship );
 
 /* comm.c */
 void	close_socket( DESCRIPTOR_DATA *dclose, bool force );
-bool write_to_descriptor( int desc, char *txt, int length );
-void	write_to_buffer( DESCRIPTOR_DATA *d, const char *txt, int length );
-void	write_to_pager( DESCRIPTOR_DATA *d, const char *txt, int length );
+bool write_to_descriptor( int desc, char *txt, size_t length );
+void	write_to_buffer( DESCRIPTOR_DATA *d, const char *txt, size_t length );
+void	write_to_pager( DESCRIPTOR_DATA *d, const char *txt, size_t length );
 void	send_to_char( const char *txt, CHAR_DATA *ch );
 void	send_to_char_color( const char *txt, CHAR_DATA *ch );
 void	send_to_pager( const char *txt, CHAR_DATA *ch );
