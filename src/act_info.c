@@ -4028,13 +4028,14 @@ void do_slist( CHAR_DATA *ch, char *argument )
     lowlev=hilev;
 
   set_pager_color( AT_CYAN, ch );
-  send_to_pager("SPELL & SKILL LIST\r\n",ch);
+  send_to_pager("SKILL LIST\r\n",ch);
   send_to_pager("------------------\r\n",ch);
 
   for ( ability = -1 ; ability < MAX_ABILITY ; ability++ )
     {
-      if ( ability == FORCE_ABILITY )
+      if ( ability == FORCE_ABILITY && !IS_IMMORTAL(ch) )
         continue;
+
       if ( ability >= 0 )
         {
           sprintf(skn2, "** %s **", ability_name[ability] );

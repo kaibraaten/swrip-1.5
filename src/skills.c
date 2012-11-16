@@ -469,9 +469,9 @@ void do_slookup( CHAR_DATA *ch, char *argument )
                    skill->minimum_position,
                    skill->min_mana,
                    skill->beats );
-        ch_printf( ch, "Flags: %d  Guild: %d  Code: %s\r\n",
+        ch_printf( ch, "Flags: %d  Guild: %s (%d)  Code: %s\r\n",
                    skill->flags,
-                   skill->guild,
+                   ability_name[skill->guild], skill->guild,
 		   skill->skill_fun || skill->spell_fun ? skill->fun_name : "(none set)");
 
         ch_printf( ch, "Dammsg: %s\r\nWearoff: %s\n",

@@ -210,8 +210,8 @@ void do_clone( CHAR_DATA *ch, char *argument )
 
     }
 
-  frc_level = ch->skill_level[7];
-  frc_experience = ch->experience[7];
+  frc_level = ch->skill_level[FORCE_ABILITY];
+  frc_experience = ch->experience[FORCE_ABILITY];
 
   /* Droids and hunters dont get force. DV */
 
@@ -225,14 +225,14 @@ void do_clone( CHAR_DATA *ch, char *argument )
     {
       if(ch->perm_frc > 0)
         {
-          ch->experience[7] = 500;
-          ch->skill_level[7] = 2;
+          ch->experience[FORCE_ABILITY] = 500;
+          ch->skill_level[FORCE_ABILITY] = 2;
         }
     }
   else
     {
-      ch->experience[7] = 0;
-      ch->skill_level[7] = 1;
+      ch->experience[FORCE_ABILITY] = 0;
+      ch->skill_level[FORCE_ABILITY] = 1;
     }
   ch->mana = 100 + 100*ch->perm_frc;
 
@@ -271,8 +271,8 @@ void do_clone( CHAR_DATA *ch, char *argument )
           ch->experience[ability] = 0;
           ch->skill_level[ability] = 1;
         }
-      experience[7] = frc_experience;
-      skill_level[7] = frc_level;
+      experience[FORCE_ABILITY] = frc_experience;
+      skill_level[FORCE_ABILITY] = frc_level;
     }
 
   ch->mana = 100 + (ch->perm_frc*100);
@@ -294,8 +294,8 @@ void do_clone( CHAR_DATA *ch, char *argument )
   else
     save_clone( ch );
   ch->perm_frc = frc;
-  ch->skill_level[7] = frc_level;
-  ch->experience[7] = frc_experience;
+  ch->skill_level[FORCE_ABILITY] = frc_level;
+  ch->experience[FORCE_ABILITY] = frc_experience;
   ch->mana = mana;
   if( ch->pcdata->clones == 2 )
     for(ability = 0; ability < MAX_ABILITY; ability++)
