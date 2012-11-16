@@ -2019,7 +2019,33 @@ void do_setspaceobject( CHAR_DATA *ch, char *argument )
     }
   if ( !str_cmp( arg2, "type" ) )
     {
-      spaceobject->type = atoi( argument );
+      int sotype = 0;
+
+      if( is_number(argument) )
+	{
+	  sotype = atoi( argument );
+	}
+      else
+	{
+	  sotype = get_spaceobj_type_from_name(argument);
+	}
+
+      if( sotype < 0 || sotype >= (int)spaceobj_type_size() )
+	{
+	  size_t n = 0;
+
+	  ch_printf(ch, "Invalid type. Possible values:\r\n");
+
+	  for(n = 0; n < spaceobj_type_size(); ++n)
+	    {
+	      ch_printf(ch, " %s", get_spaceobj_type_table()[n]);
+	    }
+
+	  ch_printf(ch, "\r\n");
+	  return;
+	}
+
+      spaceobject->type = sotype;
       send_to_char( "Done.\r\n", ch );
       save_spaceobject( spaceobject );
       return;
@@ -2160,10 +2186,12 @@ void do_setspaceobject( CHAR_DATA *ch, char *argument )
 
 void showspaceobject( CHAR_DATA *ch , SPACE_DATA *spaceobject )
 {
-  ch_printf( ch, "Space object:%s     Trainer: %s       Filename: %s  Type %d\r\n",
-             spaceobject->name,
-             (spaceobject->trainer ? "Yes" : "No"),
-             spaceobject->filename, spaceobject->type );
+  ch_printf( ch, "Space object:%s\r\n", spaceobject->name);
+  ch_printf( ch, "Filename: %s\r\n", spaceobject->filename);
+  ch_printf( ch, "Trainer: %s\r\n", spaceobject->trainer ? "Yes" : "No");
+  ch_printf( ch, "Type: %s (%d)\r\n", capitalize(get_spaceobj_type(spaceobject->type)),
+	     spaceobject->type);
+
   ch_printf( ch, "Coordinates: %.0f %0.f %.0f\r\nGravity: %d\r\n",
              spaceobject->xpos , spaceobject->ypos, spaceobject->zpos, spaceobject->gravity);
   ch_printf( ch, "     doca: %5d (%s)\r\n",

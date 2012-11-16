@@ -4235,6 +4235,12 @@ void        remove_disintigration( BOUNTY_DATA *bounty );
 void	    claim_disintigration( CHAR_DATA *ch , CHAR_DATA *victim );
 bool        is_disintigration( CHAR_DATA *victim );
 
+/* const.c */
+size_t spaceobj_type_size( void );
+const char *get_spaceobj_type(size_t sotype);
+int get_spaceobj_type_from_name(const char *name);
+const char * const *get_spaceobj_type_table( void );
+
 /* space.c */
 SH        *  get_ship( char *name );
 void         load_ships( void );

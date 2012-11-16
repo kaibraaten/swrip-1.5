@@ -508,7 +508,46 @@ const char *  const   attack_table    [13] =
     "pierce", "suction"
   };
 
+const char * const spaceobj_type[] =
+  {
+    "sun", "planet", "_space_moveobj", "_space_obj"
+  };
 
+const char * const *get_spaceobj_type_table( void )
+{
+  return spaceobj_type;
+}
+
+size_t spaceobj_type_size( void )
+{
+  return sizeof(spaceobj_type) / sizeof(*spaceobj_type);
+}
+
+const char *get_spaceobj_type(size_t sotype)
+{
+  if(sotype >= spaceobj_type_size())
+    {
+      bug("%s: subscript %d out of range", __FUNCTION__, sotype);
+      return NULL;
+    }
+
+  return spaceobj_type[sotype];
+}
+
+int get_spaceobj_type_from_name(const char *name)
+{
+  size_t n = 0;
+
+  for( n = 0; n < spaceobj_type_size(); ++n)
+    {
+      if(!str_prefix(name, spaceobj_type[n]))
+	{
+	  return n;
+	}
+    }
+
+  return -1;
+}
 
 /*
  * The skill and spell table.
