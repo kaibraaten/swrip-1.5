@@ -21,24 +21,44 @@
 *			    Main mud header file			   *
 ****************************************************************************/
 
+#ifndef _MUD_H_
+#define _MUD_H_
+
+#include <swr_support.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>
-#include <sys/cdefs.h>
-#include <sys/time.h>
-#include <math.h>
-#include "swr_support.h"
 
-/* #include <malloc_dbg.h> */
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#if defined(_WIN32)
+#define ZLIB_WINAPI 1
+#endif
+
+#include <zlib.h>
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifndef __MORPHOS__
+#include <math.h> /* built-in */
+#endif
 
 typedef	int				ch_ret;
 typedef	int				obj_ret;
 
-/*
- * Accommodate old non-Ansi compilers.
- */
+#ifdef __cplusplus
+#define DECLARE_DO_FUN( fun )    extern "C" { DO_FUN    fun; } DO_FUN fun##_mangled
+#define DECLARE_SPEC_FUN( fun )  extern "C" { SPEC_FUN  fun; } SPEC_FUN fun##_mangled
+#define DECLARE_SPELL_FUN( fun ) extern "C" { SPELL_FUN fun; } SPELL_FUN fun##_mangled
+#else
 #define DECLARE_DO_FUN( fun )		DO_FUN    fun
 #define DECLARE_SPEC_FUN( fun )		SPEC_FUN  fun
 #define DECLARE_SPELL_FUN( fun )	SPELL_FUN fun
+#endif
 
 /* IMP rooms */
 #define IMP_ROOM1 109
@@ -2763,6 +2783,12 @@ struct	system_data
     int		save_flags;		/* Toggles for saving conditions */
     short	save_frequency;		/* How old to autosave someone */
   short port;
+#ifdef _WIN32
+  HMODULE dl_handle;
+#else
+  void *dl_handle;
+#endif
+  unsigned char *mccp_buf;
 };
 
 
@@ -2858,6 +2884,7 @@ struct	skill_type
     char *	name;			/* Name of skill		*/
     SPELL_FUN *	spell_fun;		/* Spell pointer (for spells)	*/
     DO_FUN *	skill_fun;		/* Skill pointer (for skills)	*/
+  char *fun_name;
     short	target;			/* Legal targets		*/
     short	minimum_position;	/* Position for caster / user	*/
     short	slot;			/* Slot for #OBJECT loading	*/
@@ -3226,13 +3253,14 @@ do								\
  */
 struct	cmd_type
 {
-    CMDTYPE *		next;
-    char *		name;
-    DO_FUN *		do_fun;
-    short		position;
-    short		level;
-    short		log;
-    struct		timerset	userec;
+  CMDTYPE *next;
+  char *name;
+  DO_FUN *do_fun;
+  char *fun_name;
+  short position;
+  short level;
+  short log;
+  struct timerset userec;
 };
 
 
@@ -4125,6 +4153,11 @@ DECLARE_SPELL_FUN(      spell_cure_addiction                );
  * Our function prototypes.
  * One big lump ... this is every function in Merc.
  */
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #define CD	CHAR_DATA
 #define MID	MOB_INDEX_DATA
 #define OD	OBJ_DATA
@@ -4629,8 +4662,8 @@ void load_storerooms( void );
 int get_cost_quit( CHAR_DATA *ch )
 ;
 /* special.c */
-SF *	spec_lookup( const char *name );
-char *	lookup_spec( SPEC_FUN *special );
+SF *spec_lookup( const char *name );
+const char *lookup_spec( SPEC_FUN *special );
 
 /* tables.c */
 int	get_skill( char *skilltype );
@@ -4643,8 +4676,8 @@ void	load_socials( void );
 void	save_socials( void );
 void	load_commands( void );
 void	save_commands( void );
-SPELL_FUN *spell_function( char *name );
-DO_FUN *skill_function( char *name );
+SPELL_FUN *spell_function( const char *name );
+DO_FUN *skill_function( const char *name );
 void	load_herb_table( void );
 void	save_herb_table( void );
 
@@ -4960,3 +4993,8 @@ void rprog_act_trigger( char *buf, ROOM_INDEX_DATA *room, CHAR_DATA *ch,
 #define GET_BET_AMT(ch) ((ch)->bet_amt)
 #define IN_ARENA(ch)            (IS_SET((ch)->in_room->room_flags, ROOM_ARENA))
 
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* include guard */

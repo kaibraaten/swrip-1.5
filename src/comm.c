@@ -112,6 +112,21 @@ bool    pager_output( DESCRIPTOR_DATA *d );
 
 void    mail_count( CHAR_DATA *ch );
 
+static void execute_on_exit( void )
+{
+  /*DISPOSE( sysdata.mccp_buf );*/
+
+#ifdef SWR2_USE_DLSYM
+#ifdef _WIN32
+  FreeLibrary(sysdata.dl_handle);
+#else
+  dlclose( sysdata.dl_handle );
+#endif
+#endif
+
+  os_cleanup();
+}
+
 int main( int argc, char **argv )
 {
   struct timeval now_time;
@@ -129,6 +144,30 @@ int main( int argc, char **argv )
   last_descriptor               = NULL;
   sysdata.NO_NAME_RESOLVING     = TRUE;
   sysdata.WAIT_FOR_AUTH = TRUE;
+
+  os_setup();
+  /*CREATE( sysdata.mccp_buf, unsigned char, COMPRESS_BUF_SIZE );*/
+
+  atexit( execute_on_exit );
+#ifdef SWRIP_USE_DLSYM
+#ifdef _WIN32
+  sysdata.dl_handle = LoadLibraryA("swr.exe");
+
+  if( !sysdata.dl_handle )
+    {
+      fprintf( stdout, "Failed opening dl handle to self: %s\n", GetLastError() );
+      exit( 1 );
+    }
+#else
+  sysdata.dl_handle = dlopen( NULL, RTLD_LAZY );
+
+  if( !sysdata.dl_handle )
+    {
+      fprintf( stdout, "Failed opening dl handle to self: %s\n", dlerror() );
+      exit( 1 );
+    }
+#endif
+#endif
 
   /*
    * Init time.

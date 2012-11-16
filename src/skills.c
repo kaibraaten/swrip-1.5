@@ -472,8 +472,8 @@ void do_slookup( CHAR_DATA *ch, char *argument )
         ch_printf( ch, "Flags: %d  Guild: %d  Code: %s\r\n",
                    skill->flags,
                    skill->guild,
-                   skill->skill_fun ? skill_name(skill->skill_fun)
-                   : spell_name(skill->spell_fun));
+		   skill->skill_fun || skill->spell_fun ? skill->fun_name : "(none set)");
+
         ch_printf( ch, "Dammsg: %s\r\nWearoff: %s\n",
                    skill->noun_damage,
                    skill->msg_off ? skill->msg_off : "(none set)" );
@@ -651,7 +651,9 @@ void do_sset( CHAR_DATA *ch, char *argument )
                        top_sn );
             return;
           }
+
       CREATE( skill, struct skill_type, 1 );
+
       if ( type == SKILL_HERB )
         {
           int max, x;
@@ -664,7 +666,9 @@ void do_sset( CHAR_DATA *ch, char *argument )
         }
       else
         skill_table[top_sn++] = skill;
+
       skill->name = str_dup( argument );
+      skill->fun_name = str_dup( "" );
       skill->noun_damage = str_dup( "" );
       skill->msg_off = str_dup( "" );
       skill->spell_fun = spell_smaug;
@@ -804,22 +808,28 @@ void do_sset( CHAR_DATA *ch, char *argument )
           SPELL_FUN *spellfun;
           DO_FUN    *dofun;
 
-          if ( (spellfun=spell_function(argument)) != spell_notfound )
+          if ( !str_prefix( "spell_", argument )
+	       && (spellfun=spell_function(argument)) != spell_notfound )
             {
               skill->spell_fun = spellfun;
               skill->skill_fun = NULL;
+	      DISPOSE( skill->fun_name );
+	      skill->fun_name = str_dup( argument );
             }
-          else
-            if ( (dofun=skill_function(argument)) != skill_notfound )
-              {
-                skill->skill_fun = dofun;
-                skill->spell_fun = NULL;
-              }
-            else
-              {
-                send_to_char( "Not a spell or skill.\r\n", ch );
-                return;
-              }
+          else if ( !str_prefix( "do_", argument )
+		    && (dofun=skill_function(argument)) != skill_notfound )
+	    {
+	      skill->skill_fun = dofun;
+	      skill->spell_fun = NULL;
+	      DISPOSE( skill->fun_name );
+	      skill->fun_name = str_dup( argument );
+	    }
+	  else
+	    {
+	      send_to_char( "Not a spell or skill.\r\n", ch );
+	      return;
+	    }
+
           send_to_char( "Ok.\r\n", ch );
           return;
         }

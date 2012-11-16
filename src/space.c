@@ -5391,13 +5391,13 @@ void ship_to_spaceobject( SHIP_DATA *ship , SPACE_DATA *spaceobject )
 {
   if ( spaceobject == NULL )
     {
-      bug("%s: arg 2 spaceobject == NULL", __FUNCTION__);
+      /*bug("%s: arg 2 spaceobject == NULL", __FUNCTION__);*/
       return;
     }
 
   if ( ship == NULL )
     {
-      bug("%s: arg 1 ship == NULL", __FUNCTION__);
+      /*bug("%s: arg 1 ship == NULL", __FUNCTION__);*/
       return;
     }
 
