@@ -1,0 +1,25 @@
+#SPACE
+Name         Byss~
+Filename     byss~
+Type         1~
+Locationa      Throne City~
+Locationb      Byss Spaceport~
+Locationc      ~
+Doca          700
+Docb          28247
+Docc          0
+Seca          0
+Secb          0
+Secc          0
+Gravity     0
+Xpos          0
+Ypos          5000000
+Zpos          0
+HX            0
+HY            0
+HZ            0
+SP            0
+Trainer       0
+End
+
+#END

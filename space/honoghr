@@ -1,0 +1,25 @@
+#SPACE
+Name         Honoghr~
+Filename     honoghr~
+Type         1~
+Locationa      Nystao Port~
+Locationb      ~
+Locationc      ~
+Doca          1000
+Docb          0
+Docc          0
+Seca          0
+Secb          0
+Secc          0
+Gravity     0
+Xpos          3000000
+Ypos          3000000
+Zpos          0
+HX            0
+HY            0
+HZ            0
+SP            0
+Trainer       0
+End
+
+#END
