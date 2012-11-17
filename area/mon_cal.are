@@ -13,7 +13,7 @@ $
 #FLAGS
 1
 
-#ECONOMY 0 187437360
+#ECONOMY 0 187437359
 
 #MOBILES
 #21000
@@ -1222,7 +1222,7 @@ for some time barring any accidents.
 8 8 0
 10 10 10 10 10 10 10
 0 0 0 0 0
-0 0 0 0 0 0 0
+0 0 0 0 1 1 0
 3 2 0 0 0 0 0 0
 0 0 0 0 0 0 0 0
 #21101
@@ -1237,7 +1237,7 @@ A janitor droid scoots about picking up your trash
 8 8 0
 10 10 10 10 10 10 10
 0 0 0 0 0
-0 0 0 0 0 0 0
+0 0 0 0 1 1 0
 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0
 #21400
@@ -5243,7 +5243,7 @@ transport. To the North is outside the city. While to the South is the
 intersection of Anna Avenue and Security Road. We hope you enjoy your stay
 here at Coral City (formally Akatamer)!
 ~
-0 4 1
+0 20 1
 D0
 The Docking bay leads out of Akatamer.
 ~

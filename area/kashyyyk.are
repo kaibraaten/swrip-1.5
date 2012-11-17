@@ -13,7 +13,7 @@ $
 #FLAGS
 0 20
 
-#ECONOMY 0 120927388
+#ECONOMY 0 120925198
 
 #MOBILES
 #28600
@@ -581,15 +581,11 @@ livable. The walls that partially surround  the pad have the tools that
 the techs use for the repairs as well as some pictures of female wookiees
 in compromising positions. The only way out is back the way you came.
 ~
-0 0 1
+0 16 1
 D0
 ~
 ~
 0 -1 28612
-D3
-~
-~
-0 -1 28639
 S
 #28614
 Commercial Area~
@@ -1051,10 +1047,6 @@ S
 Landing Pad~
 ~
 0 48 1
-D1
-~
-~
-0 -1 28613
 S
 #28640
 Floating in a void~

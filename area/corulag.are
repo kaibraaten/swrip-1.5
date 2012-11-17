@@ -13,7 +13,7 @@ $
 #FLAGS
 0
 
-#ECONOMY 0 6378380
+#ECONOMY 0 6377935
 
 #MOBILES
 #21800
@@ -262,7 +262,7 @@ A diplomat strolls down the hall.
 8 8 0
 10 10 10 10 10 10 10
 0 0 0 0 0
-0 0 0 0 0 0 0
+0 0 0 0 1 1 0
 10 10 0 0 0 0 0 0
 0 0 0 0 0 0 0 0
 #0

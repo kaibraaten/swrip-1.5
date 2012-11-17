@@ -11,7 +11,7 @@ $
 #FLAGS
 0
 
-#ECONOMY 0 31248721
+#ECONOMY 0 31248639
 
 #MOBILES
 #29000
@@ -312,7 +312,7 @@ sign~
 a sign.~
 A sign has been posted here.
 
-~
+~
 ~
 13 0 0
 0 0 0 0
@@ -328,7 +328,7 @@ gresha~
 a piece of gresha~
 A piece of gresha has been left here.
 
-~
+~
 ~
 19 270592 1
 24 0 0 0
@@ -534,7 +534,7 @@ a small opening.  It appears to be a small cave.  To the north
 and south there isn't really anything special.  Just vast desert
 plains.  To the east is a thin and winding road.
 ~
-0 270336 1
+0 16 1
 D0
 ~
 desert sands~
@@ -565,7 +565,7 @@ to know what lies to the north, east, and west.  It is too
 dark in those directions.  To the south you can see a barren
 plain.
 ~
-0 8448 1
+0 0 1
 D2
 ~
 Plains landing zone~
