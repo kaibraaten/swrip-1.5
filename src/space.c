@@ -63,7 +63,7 @@ int baycount = 0;
 #define SENATEPAD       32055
 #define OUTERPAD        2064
 
-#define SHUTTLESTOP_NONEXISTANT      0
+#define SHUTTLESTOP_NONEXISTANT      2
 #define SHUTTLESTOP_CORUSCANT      201
 #define SHUTTLESTOP_RYLOTH         822
 #define SHUTTLESTOP_ENDOR         3060
@@ -326,13 +326,23 @@ void update_bus( )
       for( bus = 0; bus < MAX_BUS; bus++ )
         {
           if( ship_from_cockpit( serin[bus].cockpitvnum ) == NULL )
-            continue;
+	    {
+	      bug("%s,%d: Serin %s - No ship corresponding to cockpit %d",
+                  __FUNCTION__, __LINE__,
+		  serin[bus].name, serin[bus].cockpitvnum);
+	      continue;
+	    }
+
           target = ship_from_hanger( serin[bus].bus_vnum[serin[bus].planetloc] );
           if ( target != NULL && !target->spaceobject )
             {
-              sprintf( buf,  "An electronic voice says, 'Cannot land at %s ... it seems to have dissapeared.'", serin[bus].bus_stop[serin[bus].planetloc] );
+              sprintf( buf,  "An electronic voice says, 'Cannot land at %s ... it seems to have disappeared.'", serin[bus].bus_stop[serin[bus].planetloc] );
               echo_to_ship( AT_CYAN , ship[bus] , buf );
               bus_pos = 5;
+	      bug("%s,%d: Serin %s - Invalid bus stop %s (%d)",
+		  __FUNCTION__, __LINE__,
+		  serin[bus].name, serin[bus].bus_stop[serin[bus].planetloc],
+		  serin[bus].bus_vnum[serin[bus].planetloc]);
             }
         }
 
@@ -343,7 +353,13 @@ void update_bus( )
       for( bus = 0; bus < MAX_BUS; bus++ )
         {
           if( ship_from_cockpit( serin[bus].cockpitvnum ) == NULL )
-            continue;
+	    {
+              bug("%s,%d: Serin %s - No ship corresponding to cockpit %d",
+                  __FUNCTION__, __LINE__,
+                  serin[bus].name, serin[bus].cockpitvnum);
+              continue;
+            }
+
           launch_bus( ship[bus] );
         }
       bus_pos++;
@@ -353,7 +369,12 @@ void update_bus( )
       for( bus = 0; bus < MAX_BUS; bus++ )
         {
           if( ship_from_cockpit( serin[bus].cockpitvnum ) == NULL )
-            continue;
+	    {
+              bug("%s,%d: Serin %s - No ship corresponding to cockpit %d",
+                  __FUNCTION__, __LINE__,
+                  serin[bus].name, serin[bus].cockpitvnum);
+              continue;
+            }
 
           echo_to_ship( AT_YELLOW , ship[bus] , "The ship lurches slightly as it makes the jump to lightspeed.");
         }
@@ -364,7 +385,13 @@ void update_bus( )
       for( bus = 0; bus < MAX_BUS; bus++ )
         {
           if( ship_from_cockpit( serin[bus].cockpitvnum ) == NULL )
-            continue;
+	    {
+              bug("%s,%d: Serin %s - No ship corresponding to cockpit %d",
+                  __FUNCTION__, __LINE__,
+                  serin[bus].name, serin[bus].cockpitvnum);
+              continue;
+            }
+
           echo_to_ship( AT_YELLOW , ship[bus] , "The ship lurches slightly as it comes out of hyperspace.");
         }
 
@@ -376,8 +403,15 @@ void update_bus( )
       for( bus = 0; bus < MAX_BUS; bus++ )
         {
           if( ship_from_cockpit( serin[bus].cockpitvnum ) == NULL )
-            continue;
+	    {
+              bug("%s,%d: Serin %s - No ship corresponding to cockpit %d",
+                  __FUNCTION__, __LINE__,
+                  serin[bus].name, serin[bus].cockpitvnum);
+              continue;
+            }
+
           destination = serin[bus].bus_vnum[serin[bus].planetloc];
+
           if ( !land_bus( ship[bus], destination ) )
             {
               sprintf( buf, "An electronic voice says, 'Oh My, %s seems to have dissapeared.'" , serin[bus].bus_stop[serin[bus].planetloc] );
@@ -399,7 +433,12 @@ void update_bus( )
       for( bus = 0; bus < MAX_BUS; bus++)
         {
           if( ship_from_cockpit( serin[bus].cockpitvnum ) == NULL )
-            continue;
+	    {
+              bug("%s,%d: Serin %s - No ship corresponding to cockpit %d",
+                  __FUNCTION__, __LINE__,
+                  serin[bus].name, serin[bus].cockpitvnum);
+              continue;
+            }
 
           sprintf( buf, "It continues, 'Next stop, %s'" , serin[bus].bus_stop[serin[bus].planetloc+1] );
           echo_to_ship( AT_CYAN , ship[bus] , "An electronic voice says, 'Preparing for launch.'");
