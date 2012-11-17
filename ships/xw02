@@ -3,17 +3,17 @@ Name         X-wing~
 PersonalName         Red 4~
 Filename     xw02~
 Description  ~
-Owner        The Rebel Alliance~
-Pilot        ~
+Owner        Kai~
+Pilot        Selene~
 Copilot      ~
 Class        0
 Tractorbeam  0
-Shipyard     32000
+Shipyard     203
 Hanger       0
 Cargohold       0
-Vx           5504975
-Vy           -1506845
-Vz           -54547
+Vx           -30
+Vy           -1000077
+Vz           2000085
 Turret1      0
 Turret2      0
 Turret3      0
@@ -35,7 +35,7 @@ Rockets     0
 Maxrockets  0
 Torpedos     4
 Maxtorpedos  4
-Lastdoc      1900
+Lastdoc      10605
 Firstroom    32151
 Lastroom     32151
 Shield       0
@@ -79,5 +79,5 @@ Cargo9         0
 CaughtSmug     0
 Dockingports   0
 Guard   0
-Home         Calamari Sun~
+Home         Coruscant~
 End

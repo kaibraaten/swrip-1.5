@@ -4,11 +4,11 @@ PersonalName         6030~
 Filename     6030~
 Description  ~
 Owner        public~
-Pilot        verazo~
+Pilot        ~
 Copilot      ~
 Class        0
 Tractorbeam  0
-Shipyard     28639
+Shipyard     28613
 Hanger       0
 Cargohold       0
 Vx           -1003694
@@ -35,7 +35,7 @@ Rockets     0
 Maxrockets  0
 Torpedos     0
 Maxtorpedos  0
-Lastdoc      28639
+Lastdoc      28613
 Firstroom    6030
 Lastroom     6030
 Shield       0
