@@ -1971,8 +1971,17 @@ typedef enum
  */
 typedef enum
 {
-  DIR_NORTH, DIR_EAST, DIR_SOUTH, DIR_WEST, DIR_UP, DIR_DOWN,
-  DIR_NORTHEAST, DIR_NORTHWEST, DIR_SOUTHEAST, DIR_SOUTHWEST, DIR_SOMEWHERE
+  DIR_NORTH,     /*  0 */
+  DIR_EAST,      /*  1 */
+  DIR_SOUTH,     /*  2 */
+  DIR_WEST,      /*  3 */
+  DIR_UP,        /*  4 */
+  DIR_DOWN,      /*  5 */
+  DIR_NORTHEAST, /*  6 */
+  DIR_NORTHWEST, /*  7 */
+  DIR_SOUTHEAST, /*  8 */
+  DIR_SOUTHWEST, /*  9 */
+  DIR_SOMEWHERE  /* 10 */
 } dir_types;
 
 #define MAX_DIR			DIR_SOUTHWEST	/* max for normal walking */
@@ -4197,7 +4206,7 @@ char *  translate( CHAR_DATA *ch, CHAR_DATA *victim,
 char *	obj_short( OBJ_DATA *obj );
 
 /* act_info.c */
-int	get_door( char *arg );
+int	get_door( const char *arg );
 char *	format_obj_to_char( OBJ_DATA *obj, CHAR_DATA *ch, bool fShort );
 void	show_list_to_char( OBJ_DATA *list, CHAR_DATA *ch,
 			   bool fShort, bool fShowNothing );

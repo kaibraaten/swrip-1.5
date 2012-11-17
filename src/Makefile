@@ -11,7 +11,7 @@ USE_DLSYM = -DSWRIP_USE_DLSYM
 DEBUG_TELNET = -DSWRIP_DEBUG_TELNET=0
 
 CCFLAGS = -g3 -MMD -Iswr_support $(WFLAGS) $(USE_DLSYM) $(DEBUG_TELNET)
-LDFLAGS = -lm -lcrypt -lz -Lswr_support -lswr_support -Wl,-rpath,../src/swr_support
+LDFLAGS = -lm -lz -Lswr_support -lswr_support -Wl,-rpath,../src/swr_support
 
 #Uncomment the next line of you're using Solaris and you get linker errors.
 #SOLARIS = 1
@@ -41,7 +41,7 @@ OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 ifdef IMC
 OBJ += $(ODIR)/imc.o
-CCFLAGS += -DSWR2_USE_IMC
+CCFLAGS += -DSWRIP_USE_IMC
 endif
 
 all:		libs $(BINARY)

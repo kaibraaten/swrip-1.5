@@ -27,7 +27,6 @@
 #include <string.h>
 #include <time.h>
 #include <unistd.h>
-#include <crypt.h>
 #include "mud.h"
 
 
@@ -902,21 +901,33 @@ bool check_blind( CHAR_DATA *ch )
 /*
  * Returns classical DIKU door direction based on text in arg   -Thoric
  */
-int get_door( char *arg )
+int get_door( const char *arg )
 {
-  int door;
+  int door = DIR_SOMEWHERE;
 
-  if ( !str_cmp( arg, "n"  ) || !str_cmp( arg, "north"    ) ) door = 0;
-  else if ( !str_cmp( arg, "e"  ) || !str_cmp( arg, "east"        ) ) door = 1;
-  else if ( !str_cmp( arg, "s"  ) || !str_cmp( arg, "south"       ) ) door = 2;
-  else if ( !str_cmp( arg, "w"  ) || !str_cmp( arg, "west"        ) ) door = 3;
-  else if ( !str_cmp( arg, "u"  ) || !str_cmp( arg, "up"          ) ) door = 4;
-  else if ( !str_cmp( arg, "d"  ) || !str_cmp( arg, "down"        ) ) door = 5;
-  else if ( !str_cmp( arg, "ne" ) || !str_cmp( arg, "northeast" ) ) door = 6;
-  else if ( !str_cmp( arg, "nw" ) || !str_cmp( arg, "northwest" ) ) door = 7;
-  else if ( !str_cmp( arg, "se" ) || !str_cmp( arg, "southeast" ) ) door = 8;
-  else if ( !str_cmp( arg, "sw" ) || !str_cmp( arg, "southwest" ) ) door = 9;
-  else door = -1;
+  if ( !str_cmp( arg, "n"  ) || !str_cmp( arg, "north"    ) )
+    door = DIR_NORTH;
+  else if ( !str_cmp( arg, "e"  ) || !str_cmp( arg, "east"        ) )
+    door = DIR_EAST;
+  else if ( !str_cmp( arg, "s"  ) || !str_cmp( arg, "south"       ) )
+    door = DIR_SOUTH;
+  else if ( !str_cmp( arg, "w"  ) || !str_cmp( arg, "west"        ) )
+    door = DIR_WEST;
+  else if ( !str_cmp( arg, "u"  ) || !str_cmp( arg, "up"          ) )
+    door = DIR_UP;
+  else if ( !str_cmp( arg, "d"  ) || !str_cmp( arg, "down"        ) )
+    door = DIR_DOWN;
+  else if ( !str_cmp( arg, "ne" ) || !str_cmp( arg, "northeast" ) )
+    door = DIR_NORTHEAST;
+  else if ( !str_cmp( arg, "nw" ) || !str_cmp( arg, "northwest" ) )
+    door = DIR_NORTHWEST;
+  else if ( !str_cmp( arg, "se" ) || !str_cmp( arg, "southeast" ) )
+    door = DIR_SOUTHEAST;
+  else if ( !str_cmp( arg, "sw" ) || !str_cmp( arg, "southwest" ) )
+    door = DIR_SOUTHWEST;
+  else
+    door = -1;
+
   return door;
 }
 
@@ -985,9 +996,10 @@ void do_look ( CHAR_DATA *ch, char *argument )
 
           if ((get_trust(ch) >= LEVEL_IMMORTAL) && (IS_SET(ch->pcdata->flags, PCFLAG_ROOM)))
             {
-              set_char_color(AT_BLUE, ch);       /* Added 10/17 by Kuran of */
+              set_char_color(AT_PURPLE, ch);       /* Added 10/17 by Kuran of */
               send_to_char("{", ch);                     /* SWReality */
-              ch_printf(ch, "%d", ch->in_room->vnum);
+              ch_printf(ch, "%d:", ch->in_room->vnum);
+	      ch_printf(ch, "%s", ch->in_room->area->filename);
               send_to_char("}", ch);
               set_char_color(AT_CYAN, ch);
               send_to_char("[", ch);
@@ -3331,7 +3343,7 @@ void do_password( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( strcmp( crypt( arg1, ch->pcdata->pwd ), ch->pcdata->pwd ) )
+  if ( strcmp( encode_string( arg1 ), ch->pcdata->pwd ) )
     {
       WAIT_STATE( ch, 40 );
       send_to_char( "Wrong password.  Wait 10 seconds.\r\n", ch );
@@ -3348,7 +3360,7 @@ void do_password( CHAR_DATA *ch, char *argument )
   /*
    * No tilde allowed because of player file format.
    */
-  pwdnew = crypt( arg2, ch->name );
+  pwdnew = encode_string( arg2 );
   for ( p = pwdnew; *p != '\0'; p++ )
     {
       if ( *p == '~' )

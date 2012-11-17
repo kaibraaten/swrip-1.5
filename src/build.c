@@ -27,7 +27,6 @@
 #include <string.h>
 #include <time.h>
 #include <unistd.h>
-#include <crypt.h>
 #include "mud.h"
 
 
@@ -1534,7 +1533,7 @@ void do_mset( CHAR_DATA *ch, char *argument )
       /*
        * No tilde allowed because of player file format.
        */
-      pwdnew = crypt( arg3, ch->name );
+      pwdnew = encode_string( arg3 );
       for ( p = pwdnew; *p != '\0'; p++ )
         {
           if ( *p == '~' )

@@ -32,7 +32,6 @@
 #include <fcntl.h>
 #include <signal.h>
 #include <stdarg.h>
-#include <crypt.h>
 #include "mud.h"
 
 /*
@@ -1494,7 +1493,7 @@ void nanny( DESCRIPTOR_DATA *d, char *argument )
     case CON_GET_OLD_PASSWORD:
       write_to_buffer( d, "\r\n", 2 );
 
-      if ( strcmp( crypt( argument, ch->pcdata->pwd ), ch->pcdata->pwd ) )
+      if ( strcmp( encode_string( argument ), ch->pcdata->pwd ) )
         {
           write_to_buffer( d, "Wrong password.\r\n", 0 );
           /* clear descriptor pointer to get rid of bug message in log */
@@ -1583,7 +1582,7 @@ void nanny( DESCRIPTOR_DATA *d, char *argument )
           return;
         }
 
-      pwdnew = crypt( argument, ch->name );
+      pwdnew = encode_string( argument );
       for ( p = pwdnew; *p != '\0'; p++ )
         {
           if ( *p == '~' )
@@ -1604,7 +1603,7 @@ void nanny( DESCRIPTOR_DATA *d, char *argument )
     case CON_CONFIRM_NEW_PASSWORD:
       write_to_buffer( d, "\r\n", 2 );
 
-      if ( strcmp( crypt( argument, ch->pcdata->pwd ), ch->pcdata->pwd ) )
+      if ( strcmp( encode_string( argument ), ch->pcdata->pwd ) )
         {
           write_to_buffer( d, "Passwords don't match.\r\nRetype password: ",
                            0 );

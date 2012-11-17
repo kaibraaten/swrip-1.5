@@ -29,7 +29,6 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <errno.h>
-#include <crypt.h>
 #include "mud.h"
 
 #define RESTORE_INTERVAL 21600
@@ -4923,13 +4922,8 @@ void do_set_boot_time( CHAR_DATA *ch, char *argument)
  */
 void do_form_password( CHAR_DATA *ch, char *argument)
 {
-  char arg[MAX_STRING_LENGTH];
-
-  argument = one_argument(argument, arg);
-
   ch_printf(ch, "Those two arguments encrypted would result in: %s",
-            crypt(arg, argument));
-  return;
+            encode_string(argument));
 }
 
 /*
