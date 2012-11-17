@@ -58,7 +58,7 @@ Gunseat      10197
 Navseat      10197
 Engineroom   0
 Entrance     10198
-Shipstate    0
+Shipstate    1
 Missilestate 0
 Energy       10000
 Manuever     0
