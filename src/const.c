@@ -188,13 +188,31 @@ const char *  const   npc_race        [MAX_NPC_RACE] =
   };
 
 
-const char *  const   ability_name    [MAX_ABILITY] =
+const char * const ability_name[MAX_ABILITY] =
   {
     "combat", "piloting", "engineering", "bounty hunting", "smuggling", "diplomacy",
     "leadership", "force", "commando"
   };
 
+size_t ability_name_size(void)
+{
+  return sizeof(ability_name) / sizeof(*ability_name);
+}
 
+int ability_from_name(const char *arg)
+{
+  size_t a = 0;
+
+  for(a = 0; a < ability_name_size(); ++a)
+    {
+      if(!str_cmp(arg, ability_name[a]))
+	{
+	  return a;
+	}
+    }
+
+  return -1;
+}
 /*
  * Attribute bonus tables.
  */

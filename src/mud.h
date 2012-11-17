@@ -4282,6 +4282,8 @@ size_t spaceobj_type_size( void );
 const char *get_spaceobj_type(size_t sotype);
 int get_spaceobj_type_from_name(const char *name);
 const char * const *get_spaceobj_type_table( void );
+int ability_from_name(const char *arg);
+size_t ability_name_size(void);
 
 /* space.c */
 SH        *  get_ship( char *name );
