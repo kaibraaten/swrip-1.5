@@ -1,0 +1,11 @@
+#PLANET
+Name         Gamorr~
+Filename     gamorr~
+BaseValue    0
+Flags        0
+PopSupport   0.000000
+spaceobject   Gamorr~
+Area         gamorr.are~
+End
+
+#END
