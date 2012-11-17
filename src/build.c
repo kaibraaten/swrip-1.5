@@ -6937,7 +6937,7 @@ void do_rlist( CHAR_DATA *ch, char *argument )
     {
       if ( (room = get_room_index( vnum )) == NULL )
         continue;
-      pager_printf( ch, "%5d) %s\r\n", vnum, room->name );
+      pager_printf( ch, "&w%5d) %s\r\n", vnum, room->name );
     }
   return;
 }

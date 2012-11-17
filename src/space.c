@@ -115,8 +115,8 @@ struct serin_shuttle serin[MAX_BUS] =
     },
     {
       "Siego", 0, 32435, 0,
-      { SHUTTLESTOP_CORUSCANT, SHUTTLESTOP_CORELLIA, SHUTTLESTOP_SPACEMALL, SHUTTLESTOP_HOTH, SHUTTLESTOP_ENDOR, SHUTTLESTOP_NONEXISTANT, SHUTTLESTOP_BYSS, SHUTTLESTOP_CORUSCANT },
-      { "Coruscant", "Corellia", "Corporate Sector Space Mall", "Hoth", "Endor", "Wroona", "Byss", "Coruscant"}
+      { SHUTTLESTOP_CORUSCANT, SHUTTLESTOP_CORELLIA, SHUTTLESTOP_SPACEMALL, SHUTTLESTOP_HOTH, SHUTTLESTOP_ENDOR, SHUTTLESTOP_YAVIN, SHUTTLESTOP_BYSS, SHUTTLESTOP_CORUSCANT },
+      { "Coruscant", "Corellia", "Corporate Sector Space Mall", "Hoth", "Endor", "Yavin IV", "Byss", "Coruscant"}
 
     },
     {
