@@ -68,6 +68,7 @@ int baycount = 0;
 #define SHUTTLESTOP_RYLOTH         822
 #define SHUTTLESTOP_ENDOR         3060
 #define SHUTTLESTOP_YAVIN         6100
+#define SHUTTLESTOP_SPACEMALL     7300
 #define SHUTTLESTOP_CORELLIA     10500
 #define SHUTTLESTOP_HOTH         11206
 #define SHUTTLESTOP_MONCALAMARI  21100
@@ -114,8 +115,8 @@ struct serin_shuttle serin[MAX_BUS] =
     },
     {
       "Siego", 0, 32435, 0,
-      { SHUTTLESTOP_CORUSCANT, SHUTTLESTOP_CORELLIA, SHUTTLESTOP_NONEXISTANT, SHUTTLESTOP_HOTH, SHUTTLESTOP_ENDOR, SHUTTLESTOP_NONEXISTANT, SHUTTLESTOP_BYSS, SHUTTLESTOP_CORUSCANT },
-      { "Coruscant", "Corellia", "Bespin", "Hoth", "Endor", "Wroona", "Byss", "Coruscant"}
+      { SHUTTLESTOP_CORUSCANT, SHUTTLESTOP_CORELLIA, SHUTTLESTOP_SPACEMALL, SHUTTLESTOP_HOTH, SHUTTLESTOP_ENDOR, SHUTTLESTOP_NONEXISTANT, SHUTTLESTOP_BYSS, SHUTTLESTOP_CORUSCANT },
+      { "Coruscant", "Corellia", "Corporate Sector Space Mall", "Hoth", "Endor", "Wroona", "Byss", "Coruscant"}
 
     },
     {
