@@ -2241,14 +2241,14 @@ void update_handler( void )
   static  int     pulse_recharge;
   static  int     pulse_start_arena = PULSE_ARENA;
   static  int     pulse_arena = PULSE_ARENA;
-  struct timeval stime;
+  struct timeval start_time;
   struct timeval etime;
 
   if ( timechar )
     {
       set_char_color(AT_PLAIN, timechar);
       send_to_char( "Starting update timer.\r\n", timechar );
-      gettimeofday(&stime, NULL);
+      gettimeofday(&start_time, NULL);
     }
 
   if ( --pulse_area     <= 0 )
@@ -2349,7 +2349,7 @@ void update_handler( void )
       gettimeofday(&etime, NULL);
       set_char_color(AT_PLAIN, timechar);
       send_to_char( "Update timing complete.\r\n", timechar );
-      subtract_times(&etime, &stime);
+      subtract_times(&etime, &start_time);
       ch_printf( timechar, "Timing took %d.%06d seconds.\r\n",
                  etime.tv_sec, etime.tv_usec );
       timechar = NULL;
