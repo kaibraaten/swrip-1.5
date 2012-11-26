@@ -57,7 +57,7 @@ typedef unsigned char                   bool;
 #define REMOVE_BIT(var, bit)    ((var) &= ~(bit))
 #define TOGGLE_BIT(var, bit)    ((var) ^= (bit))
 
-#define HASHSTR                  /* use string hashing */
+  /*#define HASHSTR*/                  /* use string hashing */
 
 /*
  * Memory allocation macros.
