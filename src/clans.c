@@ -362,8 +362,11 @@ void fread_planet( PLANET_DATA *planet, FILE *fp )
             {
               char aName[MAX_STRING_LENGTH];
               AREA_DATA *pArea;
+	      char *tmp = fread_string(fp);
 
-              sprintf (aName, "%s", fread_string(fp));
+              sprintf (aName, "%s", tmp);
+	      STRFREE(tmp);
+
               for( pArea = first_area ; pArea ; pArea = pArea->next )
                 if (pArea->filename && !str_cmp(pArea->filename , aName ) )
                   {
@@ -411,7 +414,11 @@ void fread_planet( PLANET_DATA *planet, FILE *fp )
         case 'S':
           if ( !str_cmp( word, "spaceobject" ) )
             {
-              planet->spaceobject = spaceobject_from_name ( fread_string(fp) );
+	      char *tmp = fread_string(fp);
+
+              planet->spaceobject = spaceobject_from_name( tmp );
+	      STRFREE(tmp);
+
               if (planet->spaceobject)
                 {
                   SPACE_DATA *spaceobject = planet->spaceobject;
@@ -3176,9 +3183,7 @@ bool load_member_list( char *filename )
 
   for( ; ; )
     {
-      char *word;
-
-      word = fread_word( fp );
+      const char *word = fread_word( fp );
 
       if( !str_cmp( word, "Name" ) )
         {
