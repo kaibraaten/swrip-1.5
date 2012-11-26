@@ -352,7 +352,10 @@ void            mprog_read_programs( FILE* fp, MOB_INDEX_DATA *pMobIndex );
 void            oprog_read_programs( FILE* fp, OBJ_INDEX_DATA *pObjIndex );
 void            rprog_read_programs( FILE* fp, ROOM_INDEX_DATA *pRoomIndex );
 
-void shutdown_mud( char *reason )
+#ifdef __cplusplus
+extern "C" {
+#endif
+void shutdown_mud( const char *reason )
 {
   FILE *fp;
 
@@ -362,7 +365,9 @@ void shutdown_mud( char *reason )
       fclose( fp );
     }
 }
-
+#ifdef __cplusplus
+}
+#endif
 
 /*
  * Big mama top level function.
@@ -3088,7 +3093,7 @@ void make_wizlist( )
   DIR *dp;
   struct dirent *dentry;
   FILE *gfp;
-  char *word;
+  const char *word;
   int ilevel, iflags;
   WIZENT *wiz, *wiznext;
   char buf[MAX_STRING_LENGTH];
@@ -4726,7 +4731,7 @@ void save_sysdata( SYSTEM_DATA sys )
 
 void fread_sysdata( SYSTEM_DATA *sys, FILE *fp )
 {
-  char *word;
+  const char *word;
   bool fMatch;
 
   sys->time_of_max = NULL;

@@ -1061,9 +1061,9 @@ void do_look ( CHAR_DATA *ch, char *argument )
                   {
                     if ( target != ship && target->spaceobject )
                       {
-                        if ( abs(target->vx - ship->vx) < 100*(ship->sensor+10)*((target->class == SHIP_DEBRIS ? 2 : target->class)+1) &&
-                             abs(target->vy - ship->vy) < 100*(ship->sensor+10)*((target->class == SHIP_DEBRIS ? 2 : target->class)+1) &&
-                             abs(target->vz - ship->vz) < 100*(ship->sensor+10)*((target->class == SHIP_DEBRIS ? 2 : target->class)+1) )
+                        if ( abs(target->vx - ship->vx) < 100*(ship->sensor+10)*((target->sclass == SHIP_DEBRIS ? 2 : target->sclass)+1) &&
+                             abs(target->vy - ship->vy) < 100*(ship->sensor+10)*((target->sclass == SHIP_DEBRIS ? 2 : target->sclass)+1) &&
+                             abs(target->vz - ship->vz) < 100*(ship->sensor+10)*((target->sclass == SHIP_DEBRIS ? 2 : target->sclass)+1) )
 
                           ch_printf(ch, "%s    %.0f %.0f %.0f\r\n",
                                     target->name,
@@ -1072,26 +1072,26 @@ void do_look ( CHAR_DATA *ch, char *argument )
                                     (target->vz - ship->vz));
 
 
-                        else if ( abs(target->vx - ship->vx) < 100*(ship->sensor+10)*((target->class == SHIP_DEBRIS ? 2 : target->class)+3) &&
-                                  abs(target->vy - ship->vy) < 100*(ship->sensor+10)*((target->class == SHIP_DEBRIS ? 2 : target->class)+3) &&
-                                  abs(target->vz - ship->vz) < 100*(ship->sensor+10)*((target->class == SHIP_DEBRIS ? 2 : target->class)+3) )
+                        else if ( abs(target->vx - ship->vx) < 100*(ship->sensor+10)*((target->sclass == SHIP_DEBRIS ? 2 : target->sclass)+3) &&
+                                  abs(target->vy - ship->vy) < 100*(ship->sensor+10)*((target->sclass == SHIP_DEBRIS ? 2 : target->sclass)+3) &&
+                                  abs(target->vz - ship->vz) < 100*(ship->sensor+10)*((target->sclass == SHIP_DEBRIS ? 2 : target->sclass)+3) )
                           {
-                            if ( target->class == FIGHTER_SHIP )
+                            if ( target->sclass == FIGHTER_SHIP )
                               ch_printf(ch, "A small metallic mass    %.0f %.0f %.0f\r\n",
                                         (target->vx - ship->vx),
                                         (target->vy - ship->vy),
                                         (target->vz - ship->vz));
-                            if ( target->class == MIDSIZE_SHIP )
+                            if ( target->sclass == MIDSIZE_SHIP )
                               ch_printf(ch, "A goodsize metallic mass    %.0f %.0f %.0f\r\n",
                                         (target->vx - ship->vx),
                                         (target->vy - ship->vy),
                                         (target->vz - ship->vz));
-                            if ( target->class == SHIP_DEBRIS )
+                            if ( target->sclass == SHIP_DEBRIS )
                               ch_printf(ch, "scattered metallic reflections    %.0f %.0f %.0f\r\n",
                                         (target->vx - ship->vx),
                                         (target->vy - ship->vy),
                                         (target->vz - ship->vz));
-                            else if ( target->class >= CAPITAL_SHIP )
+                            else if ( target->sclass >= CAPITAL_SHIP )
                               ch_printf(ch, "A huge metallic mass    %.0f %.0f %.0f\r\n",
                                         (target->vx - ship->vx),
                                         (target->vy - ship->vy),
@@ -2164,7 +2164,7 @@ void do_hedit( CHAR_DATA *ch, char *argument )
     default:
       break;
     case SUB_HELP_EDIT:
-      if ( (pHelp = ch->dest_buf) == NULL )
+      if ( (pHelp = (HELP_DATA*)ch->dest_buf) == NULL )
         {
           bug( "hedit: sub_help_edit: NULL ch->dest_buf", 0 );
           stop_editing( ch );
@@ -4266,7 +4266,7 @@ void do_showstatistic_web( CHAR_DATA *ch, char *argument )
 {
   PC_DATA *pcdata;
   CHAR_DATA *raceCh;
-  int race, class, iR, iC, iC2;
+  int race, pclass, iR, iC, iC2;
   bool chk_race = FALSE;
   FILE *whoout;
 
@@ -4277,11 +4277,11 @@ void do_showstatistic_web( CHAR_DATA *ch, char *argument )
 
   race = get_race_from_name( argument );
   if ( race < 0 )
-    class = get_class_from_name( argument );
+    pclass = get_class_from_name( argument );
   else
     chk_race = TRUE;
 
-  if( race < 0 && class < 0 )
+  if( race < 0 && pclass < 0 )
     {
       fprintf( whoout, "No such race or class\r\n" );
       return;
@@ -4311,7 +4311,7 @@ void do_showstatistic_web( CHAR_DATA *ch, char *argument )
     raceCh->race = race;
   else
     {
-      raceCh->main_ability = class;
+      raceCh->main_ability = pclass;
       raceCh->race = 0;
     }
 
@@ -4356,7 +4356,7 @@ void do_showstatistic_web( CHAR_DATA *ch, char *argument )
     }
   else
     {
-      fprintf( whoout, "&R%s Statistics\r\n", ability_name[class]);
+      fprintf( whoout, "&R%s Statistics\r\n", ability_name[pclass]);
 
       for( iR = 0; iR < MAX_RACE; iR++ )
         {
@@ -4386,7 +4386,7 @@ void do_showstatistic( CHAR_DATA *ch, char *argument )
 {
   PC_DATA *pcdata;
   CHAR_DATA *raceCh;
-  int race, class, iR, iC, iC2;
+  int race, pclass, iR, iC, iC2;
   bool chk_race = FALSE;
   char buf[MAX_INPUT_LENGTH];
   char buf2[MAX_INPUT_LENGTH];
@@ -4396,11 +4396,11 @@ void do_showstatistic( CHAR_DATA *ch, char *argument )
 
   race = get_race_from_name( argument );
   if ( race < 0 )
-    class = get_class_from_name( argument );
+    pclass = get_class_from_name( argument );
   else
     chk_race = TRUE;
 
-  if( race < 0 && class < 0 )
+  if( race < 0 && pclass < 0 )
     {
       send_to_char( "No such race or class.\r\n", ch );
       return;
@@ -4430,7 +4430,7 @@ void do_showstatistic( CHAR_DATA *ch, char *argument )
     raceCh->race = race;
   else
     {
-      raceCh->main_ability = class;
+      raceCh->main_ability = pclass;
       raceCh->race = 0;
     }
 
@@ -4482,7 +4482,7 @@ void do_showstatistic( CHAR_DATA *ch, char *argument )
     }
   else
     {
-      sprintf( buf, "&R%s Statistics\r\n", ability_name[class]);
+      sprintf( buf, "&R%s Statistics\r\n", ability_name[pclass]);
       send_to_pager( buf, ch );
 
       for( iR = 0; iR < MAX_RACE; iR++ )

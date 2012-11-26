@@ -28,7 +28,7 @@ struct map_type
 };
 
 /* Chars for each of the four compass direction exits */
-char map_chars[4] = "|-|-";
+char map_chars[] = "|-|-";
 /* The map itself */
 struct map_type map[MAPX + 1][MAPY + 1];
 

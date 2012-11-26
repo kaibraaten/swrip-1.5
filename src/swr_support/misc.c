@@ -303,7 +303,7 @@ char *stripclr( char *text )
       buf[j] = '\0';
 
       sprintf(done, "%s", buf);
-      buf = realloc(buf, j*sizeof(char));
+      buf = (char*)realloc(buf, j*sizeof(char));
       free( buf);
 
       return done;

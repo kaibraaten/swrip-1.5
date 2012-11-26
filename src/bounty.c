@@ -90,7 +90,7 @@ BOUNTY_DATA *get_disintigration( char *target )
 void load_bounties( )
 {
   FILE *fpList;
-  char *target, *poster;
+  const char *target, *poster;
   char bountylist[256];
   BOUNTY_DATA *bounty;
   long int  amount;

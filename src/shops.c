@@ -1989,8 +1989,7 @@ void fwrite_vendor( FILE *fp, CHAR_DATA *mob )
 CHAR_DATA *  fread_vendor( FILE *fp )
 {
   CHAR_DATA *mob = NULL;
-
-  char *word;
+  const char *word;
   bool fMatch;
   int inroom = 0;
   ROOM_INDEX_DATA *pRoomIndex = NULL;

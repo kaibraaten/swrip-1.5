@@ -46,10 +46,10 @@ GUARD_DATA * last_guard;
 
 /* local routines */
 void    fread_clan( CLAN_DATA *clan, FILE *fp );
-bool    load_clan_file( char *clanfile );
+bool    load_clan_file( const char *clanfile );
 void    write_clan_list( void );
 void    fread_planet( PLANET_DATA *planet, FILE *fp );
-bool    load_planet_file( char *planetfile );
+bool    load_planet_file( const char *planetfile );
 void    write_planet_list( void );
 void    save_member_list( MEMBER_LIST *members_list );
 void    show_members( CHAR_DATA *ch, char *argument, char *format );
@@ -237,7 +237,7 @@ void save_planet( PLANET_DATA *planet )
 void fread_clan( CLAN_DATA *clan, FILE *fp )
 {
   char buf[MAX_STRING_LENGTH];
-  char *word;
+  const char *word;
   bool fMatch;
 
   for ( ; ; )
@@ -342,7 +342,7 @@ void fread_clan( CLAN_DATA *clan, FILE *fp )
 void fread_planet( PLANET_DATA *planet, FILE *fp )
 {
   char buf[MAX_STRING_LENGTH];
-  char *word;
+  const char *word;
   bool fMatch;
 
   for ( ; ; )
@@ -442,7 +442,7 @@ void fread_planet( PLANET_DATA *planet, FILE *fp )
  * Load a clan file
  */
 
-bool load_clan_file( char *clanfile )
+bool load_clan_file( const char *clanfile )
 {
   char filename[256];
   CLAN_DATA *clan;
@@ -588,7 +588,7 @@ bool load_clan_file( char *clanfile )
   return found;
 }
 
-bool load_planet_file( char *planetfile )
+bool load_planet_file( const char *planetfile )
 {
   char filename[256];
   PLANET_DATA *planet;
@@ -667,7 +667,7 @@ bool load_planet_file( char *planetfile )
 void load_clans( )
 {
   FILE *fpList;
-  char *filename;
+  const char *filename;
   char clanlist[256];
   char buf[MAX_STRING_LENGTH];
   CLAN_DATA *clan;
@@ -722,7 +722,7 @@ void load_clans( )
 void load_planets( )
 {
   FILE *fpList;
-  char *filename;
+  const char *filename;
   char planetlist[256];
   char buf[MAX_STRING_LENGTH];
 
@@ -2962,7 +2962,7 @@ void show_members( CHAR_DATA *ch, char *argument, char *format )
                 pager_printf( ch, "[%3d] %12s %15s %7d %7d %10s\r\n",
                               sort->member->level,
                               capitalize(sort->member->name ),
-                              ability_name[sort->member->class],
+                              ability_name[sort->member->mclass],
                               sort->member->kills,
                               sort->member->deaths,
                               sort->member->since );
@@ -2977,7 +2977,7 @@ void show_members( CHAR_DATA *ch, char *argument, char *format )
             pager_printf( ch, "[%3d] %12s %15s %7d %7d %10s\r\n",
                           member->level,
                           capitalize(member->name ),
-                          ability_name[member->class],
+                          ability_name[member->mclass],
                           member->kills,
                           member->deaths,
                           member->since );
@@ -2995,7 +2995,7 @@ void show_members( CHAR_DATA *ch, char *argument, char *format )
             pager_printf( ch, "[%3d] %12s %15s %7d %7d %10s\r\n",
                           member->level,
                           capitalize(member->name),
-                          ability_name[member->class],
+                          ability_name[member->mclass],
                           member->kills,
                           member->deaths,
                           member->since );
@@ -3151,7 +3151,7 @@ void save_member_list( MEMBER_LIST *members_list )
   fprintf( fp, "Name          %s~\n", members_list->name );
   for( member = members_list->first_member; member; member = member->next )
     fprintf( fp, "Member        %s %s %d %d %d %d\n",
-             member->name, member->since, member->kills, member->deaths, member->level, member->class);
+             member->name, member->since, member->kills, member->deaths, member->level, member->mclass);
   fprintf( fp, "End\n\n" );
   fclose( fp );
 
@@ -3194,7 +3194,7 @@ bool load_member_list( char *filename )
             member->kills = fread_number( fp );
             member->deaths = fread_number( fp );
             member->level = fread_number( fp );
-            member->class = fread_number( fp );
+            member->mclass = fread_number( fp );
             LINK( member, members_list->first_member, members_list->last_member, next, prev );
             continue;
           }
@@ -3239,7 +3239,7 @@ void update_member( CHAR_DATA *ch )
                   member->kills = ch->pcdata->pkills;
                   member->deaths = ch->pcdata->clones;
                 }
-              member->class = ch->main_ability;
+              member->mclass = ch->main_ability;
               member->level = ch->top_level;
               return;
             }
@@ -3252,7 +3252,7 @@ void update_member( CHAR_DATA *ch )
             CREATE( member, MEMBER_DATA, 1 );
             member->name = STRALLOC( ch->name );
             member->level = ch->top_level;
-            member->class = ch->main_ability;
+            member->mclass = ch->main_ability;
             sprintf( buf, "[%02d|%02d|%04d]", t->tm_mon+1, t->tm_mday, t->tm_year+1900 );
             member->since = STRALLOC( buf );
             if( ch->pcdata->clan->clan_type == CLAN_PLAIN )

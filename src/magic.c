@@ -1168,7 +1168,7 @@ void do_cast( CHAR_DATA *ch, char *argument )
           return;
         }
       mana = IS_NPC(ch) ? 0 : skill->min_mana;
-      strcpy( staticbuf, ch->dest_buf );
+      strcpy( staticbuf, (const char*)ch->dest_buf );
       target_name = one_argument(staticbuf, arg2);
       DISPOSE( ch->dest_buf );
       ch->substate = SUB_NONE;
@@ -1183,7 +1183,7 @@ void do_cast( CHAR_DATA *ch, char *argument )
                   &&   (t = get_timerptr( tmp, TIMER_DO_FUN )) != NULL
                   &&    t->count >= 1 && t->do_fun == do_cast
                   &&    tmp->tempnum == sn && tmp->dest_buf
-                  &&   !str_cmp( tmp->dest_buf, staticbuf ) )
+                  &&   !str_cmp( (const char*)tmp->dest_buf, staticbuf ) )
               ++cnt;
           if ( cnt >= skill->participants )
             {
@@ -1192,7 +1192,7 @@ void do_cast( CHAR_DATA *ch, char *argument )
                       &&   (t = get_timerptr( tmp, TIMER_DO_FUN )) != NULL
                       &&    t->count >= 1 && t->do_fun == do_cast
                       &&    tmp->tempnum == sn && tmp->dest_buf
-                      &&   !str_cmp( tmp->dest_buf, staticbuf ) )
+                      &&   !str_cmp( (const char*)tmp->dest_buf, staticbuf ) )
                   {
                     extract_timer( tmp, t );
                     act( AT_MAGIC, "Channeling your energy into $n, you help direct the force", ch, NULL, tmp, TO_VICT );

@@ -2002,7 +2002,7 @@ void aggr_update( void )
   /* check mobprog act queue */
   while ( (apdtmp = mob_act_list) != NULL )
     {
-      wch = mob_act_list->vo;
+      wch = (CHAR_DATA*)mob_act_list->vo;
       if ( !char_died(wch) && wch->mpactnum > 0 )
         {
           MPROG_ACT_LIST * tmp_act;
@@ -2155,10 +2155,21 @@ void drunk_randoms( CHAR_DATA *ch )
           if ( drunk > (10+(get_curr_con(ch)/5))
                &&   number_percent() < ( 2 * drunk / 18 ) )
             {
+	      char name[MAX_STRING_LENGTH];
+
+	      //char puke[5];
+	      //sprintf(puke, "%s", "puke");
+
               for ( vch = ch->in_room->first_person; vch; vch = vch->next_in_room )
-                if ( number_percent() < 10 )
-                  rvch = vch;
-              check_social( ch, "puke", (rvch ? rvch->name : "") );
+		{
+		  if ( number_percent() < 10 )
+		    {
+		      rvch = vch;
+		    }
+		}
+
+	      strcpy(name, rvch ? rvch->name : "");
+              check_social( ch, "puke", name);
             }
 
   ch->position = position;

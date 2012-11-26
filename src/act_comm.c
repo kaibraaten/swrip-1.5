@@ -622,7 +622,7 @@ void talk_channel( CHAR_DATA *ch, char *argument, int channel, const char *verb 
               if ( channel == CHANNEL_SYSTEM )
                 if (!ship_in_range( ship, target ) )
                   continue;
-              if (abs(target->vx - ship->vx) > 100*(ship->sensor+10)*((target->class)+1 ))
+              if (abs(target->vx - ship->vx) > 100*(ship->sensor+10)*((target->sclass)+1 ))
                 if ( abs(target->vx - ship->vx) > 100*((ship->comm)+(target->comm)+20) ||
                      abs(target->vy - ship->vy) > 100*((ship->comm)+(target->comm)+20) ||
                      abs(target->vz - ship->vz) > 100*((ship->comm)+(target->comm)+20) )

@@ -38,9 +38,9 @@ bool candock( SHIP_DATA *ship );
 bool ship_was_in_range( SHIP_DATA *ship, SHIP_DATA *target )
 {
   if (target && ship && target != ship )
-    if ( abs(target->ox - ship->vx) < 100*(ship->sensor+10)*((target->class == SHIP_DEBRIS ? 2 : target->class)+3) &&
-         abs(target->oy - ship->vy) < 100*(ship->sensor+10)*((target->class == SHIP_DEBRIS ? 2 : target->class)+3) &&
-         abs(target->oz - ship->vz) < 100*(ship->sensor+10)*((target->class == SHIP_DEBRIS ? 2 : target->class)+3) )
+    if ( abs(target->ox - ship->vx) < 100*(ship->sensor+10)*((target->sclass == SHIP_DEBRIS ? 2 : target->sclass)+3) &&
+         abs(target->oy - ship->vy) < 100*(ship->sensor+10)*((target->sclass == SHIP_DEBRIS ? 2 : target->sclass)+3) &&
+         abs(target->oz - ship->vz) < 100*(ship->sensor+10)*((target->sclass == SHIP_DEBRIS ? 2 : target->sclass)+3) )
       return TRUE;
   return FALSE;
 }
@@ -300,7 +300,7 @@ void do_tractorbeam( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( ship->class > SHIP_PLATFORM )
+  if ( ship->sclass > SHIP_PLATFORM )
     {
       send_to_char("&RThis isn't a spacecraft!\r\n",ch);
       return;
@@ -394,19 +394,19 @@ void do_tractorbeam( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if (ship->class != SHIP_DEBRIS && ship->class <= target->class)
+  if (ship->sclass != SHIP_DEBRIS && ship->sclass <= target->class)
     {
       send_to_char("&RThat ship is too big for your hanger.\r\n",ch);
       return;
     }
 
-  if  ( target->class == SHIP_PLATFORM )
+  if  ( target->sclass == SHIP_PLATFORM )
     {
       send_to_char( "&RYou can't capture platforms.\r\n" , ch );
       return;
     }
 
-  if ( target->class == CAPITAL_SHIP)
+  if ( target->sclass == CAPITAL_SHIP)
     {
       send_to_char("&RYou can't capture capital ships.\r\n",ch);
       return;
@@ -486,7 +486,7 @@ void do_tractorbeam(CHAR_DATA *ch, char *argument )
           return;
         }
 
-      if ( ship->class > SHIP_PLATFORM )
+      if ( ship->sclass > SHIP_PLATFORM )
         {
           send_to_char("&RThis isn't a spacecraft!\r\n",ch);
           return;
@@ -583,12 +583,12 @@ void do_tractorbeam(CHAR_DATA *ch, char *argument )
           return;
         }
 
-      if ( ship->energy < (25 + 25*target->class) )
+      if ( ship->energy < (25 + 25*target->sclass) )
         {
           send_to_char("&RTheres not enough fuel!\r\n",ch);
           return;
         }
-      if( ship->class <= SHIP_PLATFORM)
+      if( ship->sclass <= SHIP_PLATFORM)
         {
           if ( abs(ship->vx-target->vx) > 100+ship->tractorbeam ||
                abs(ship->vy-target->vy) > 100+ship->tractorbeam ||
@@ -618,7 +618,7 @@ void do_tractorbeam(CHAR_DATA *ch, char *argument )
     case 1:
       if ( !ch->dest_buf )
         return;
-      strcpy(arg, ch->dest_buf);
+      strcpy(arg, (const char*)ch->dest_buf);
       DISPOSE( ch->dest_buf);
       break;
 
@@ -650,10 +650,10 @@ void do_tractorbeam(CHAR_DATA *ch, char *argument )
     + abs(target->vy - ship->vy)
     + abs(target->vz - ship->vz);
   distance /= 3;
-  the_chance += target->class - ship->class;
+  the_chance += target->sclass - ship->sclass;
   the_chance += ship->currspeed - target->currspeed;
   the_chance += ship->manuever - target->manuever;
-  the_chance -= distance/(10*(target->class+1));
+  the_chance -= distance/(10*(target->sclass+1));
   the_chance /= 2;
   the_chance = URANGE( 1 , the_chance , 99 );
 
@@ -667,17 +667,17 @@ void do_tractorbeam(CHAR_DATA *ch, char *argument )
   ship->tractored = target;
   target->tractoredby = ship;
   target->shipstate = SHIP_TRACTORED;
-  ship->energy -= 25 + 25*target->class;
+  ship->energy -= 25 + 25*target->sclass;
 
 
-  if ( target->class <= ship->class )
+  if ( target->sclass <= ship->sclass )
     {
       target->currspeed = ship->tractorbeam/2;
       target->hx = ship->vx - target->vx;
       target->hy = ship->vy - target->vy;
       target->hz = ship->vz - target->vz;
     }
-  if ( target->class > ship->class )
+  if ( target->sclass > ship->sclass )
     {
 
       ship->currspeed = ship->tractorbeam/2;
@@ -753,7 +753,7 @@ void do_adjusttractorbeam(CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if( eShip->class >= ship->class )
+  if( eShip->sclass >= ship->sclass )
     {
       echo_to_cockpit( AT_YELLOW, ship, "Tractor Beam set on ship of a greater or equal mass as our own. It will not move.\r\n" );
       return;
@@ -824,7 +824,7 @@ void do_adjusttractorbeam(CHAR_DATA *ch, char *argument )
           send_to_char("&RThe bay is not open.\r\n",ch);
           return;
         }
-      if( ship->class < eShip->class || eShip->class == SHIP_PLATFORM || eShip->class == CAPITAL_SHIP )
+      if( ship->sclass < eShip->sclass || eShip->sclass == SHIP_PLATFORM || eShip->sclass == CAPITAL_SHIP )
         {
           send_to_char("&RThat ship can not land in your bay.\r\n",ch);
           return;
@@ -879,7 +879,7 @@ void do_undock(CHAR_DATA *ch, char *argument)
       return;
     }
 
-  if ( ship->class > SHIP_PLATFORM )
+  if ( ship->sclass > SHIP_PLATFORM )
     {
       send_to_char("&RThis isn't a spacecraft!\r\n",ch);
       return;
@@ -897,7 +897,7 @@ void do_undock(CHAR_DATA *ch, char *argument)
       return;
     }
 
-  if  ( ship->class == SHIP_PLATFORM )
+  if  ( ship->sclass == SHIP_PLATFORM )
     {
       send_to_char( "&RPlatforms can't move!\r\n" , ch );
       return;
@@ -921,29 +921,29 @@ void do_undock(CHAR_DATA *ch, char *argument)
     }
   eShip = ship->docked;
 
-  if ( ship->class == FIGHTER_SHIP )
+  if ( ship->sclass == FIGHTER_SHIP )
     the_chance = IS_NPC(ch) ? ch->top_level
       : (int)  (ch->pcdata->learned[gsn_starfighters]) ;
-  if ( ship->class == MIDSIZE_SHIP )
+  if ( ship->sclass == MIDSIZE_SHIP )
     the_chance = IS_NPC(ch) ? ch->top_level
       : (int)  (ch->pcdata->learned[gsn_midships]) ;
-  if ( ship->class == CAPITAL_SHIP )
+  if ( ship->sclass == CAPITAL_SHIP )
     the_chance = IS_NPC(ch) ? ch->top_level
       : (int) (ch->pcdata->learned[gsn_capitalships]);
   if ( number_percent( ) > the_chance )
     {
       send_to_char("&RYou can't figure out which lever to use.\r\n",ch);
-      if ( ship->class == FIGHTER_SHIP )
+      if ( ship->sclass == FIGHTER_SHIP )
         {
           learn_from_failure( ch, gsn_starfighters );
           learn_from_failure( ch, gsn_shipdocking);
         }
-      if ( ship->class == MIDSIZE_SHIP )
+      if ( ship->sclass == MIDSIZE_SHIP )
         {
           learn_from_failure( ch, gsn_midships );
           learn_from_failure( ch, gsn_shipdocking);
         }
-      if ( ship->class == CAPITAL_SHIP )
+      if ( ship->sclass == CAPITAL_SHIP )
         {
           learn_from_failure( ch, gsn_capitalships );
           learn_from_failure( ch, gsn_shipdocking);
@@ -975,17 +975,17 @@ void do_undock(CHAR_DATA *ch, char *argument)
     }
 
 
-  if ( ship->class == FIGHTER_SHIP )
+  if ( ship->sclass == FIGHTER_SHIP )
     {
       learn_from_success( ch, gsn_starfighters );
       learn_from_success( ch, gsn_shipdocking);
     }
-  if ( ship->class == MIDSIZE_SHIP )
+  if ( ship->sclass == MIDSIZE_SHIP )
     {
       learn_from_success( ch, gsn_midships );
       learn_from_success( ch, gsn_shipdocking);
     }
-  if ( ship->class == CAPITAL_SHIP )
+  if ( ship->sclass == CAPITAL_SHIP )
     {
       learn_from_success( ch, gsn_capitalships );
       learn_from_success( ch, gsn_shipdocking);
@@ -1013,10 +1013,10 @@ bool candock( SHIP_DATA *ship )
   if ( ship->dockingports && count >= ship->dockingports )
     return FALSE;
 
-  if ( ship->class < SHIP_PLATFORM )
-    ports = ship->class + 1;
+  if ( ship->sclass < SHIP_PLATFORM )
+    ports = ship->sclass + 1;
 
-  if ( ship->class != SHIP_PLATFORM && count >= ports )
+  if ( ship->sclass != SHIP_PLATFORM && count >= ports )
     return FALSE;
 
   return TRUE;
@@ -1038,7 +1038,7 @@ void do_dock(CHAR_DATA *ch, char *argument)
       return;
     }
 
-  if ( ship->class > SHIP_PLATFORM )
+  if ( ship->sclass > SHIP_PLATFORM )
     {
       send_to_char("&RThis isn't a spacecraft!\r\n",ch);
       return;
@@ -1063,7 +1063,7 @@ void do_dock(CHAR_DATA *ch, char *argument)
       return;
     }
 
-  if  ( ship->class == SHIP_PLATFORM )
+  if  ( ship->sclass == SHIP_PLATFORM )
     {
       send_to_char( "&RPlatforms can't move!\r\n" , ch );
       return;
@@ -1100,7 +1100,7 @@ void do_dock(CHAR_DATA *ch, char *argument)
       send_to_char("&RYou are already docked!\r\n",ch);
       return;
     }
-  if (ship->shipstate == SHIP_TRACTORED && ship->tractoredby && ship->tractoredby->class >= ship->class )
+  if (ship->shipstate == SHIP_TRACTORED && ship->tractoredby && ship->tractoredby->sclass >= ship->sclass )
     {
       send_to_char("&RYou can not move in a tractorbeam!\r\n",ch);
       return;
@@ -1145,7 +1145,7 @@ void do_dock(CHAR_DATA *ch, char *argument)
       send_to_char("&RYou can't dock with your own ship!\r\n",ch);
       return;
     }
-  if( ship->class > eShip->class )
+  if( ship->sclass > eShip->sclass )
     {
       send_to_char("&RYou can not dock with a ship smaller than yours. Have them dock to you.\r\n",ch);
       return;
@@ -1181,29 +1181,29 @@ void do_dock(CHAR_DATA *ch, char *argument)
 
 
 
-  if ( ship->class == FIGHTER_SHIP )
+  if ( ship->sclass == FIGHTER_SHIP )
     the_chance = IS_NPC(ch) ? ch->top_level
       : (int)  (ch->pcdata->learned[gsn_starfighters]) ;
-  if ( ship->class == MIDSIZE_SHIP )
+  if ( ship->sclass == MIDSIZE_SHIP )
     the_chance = IS_NPC(ch) ? ch->top_level
       : (int)  (ch->pcdata->learned[gsn_midships]) ;
-  if ( ship->class == CAPITAL_SHIP )
+  if ( ship->sclass == CAPITAL_SHIP )
     the_chance = IS_NPC(ch) ? ch->top_level
       : (int) (ch->pcdata->learned[gsn_capitalships]);
   if ( number_percent( ) > the_chance )
     {
       send_to_char("&RYou can't figure out which lever to use.\r\n",ch);
-      if ( ship->class == FIGHTER_SHIP )
+      if ( ship->sclass == FIGHTER_SHIP )
         {
           learn_from_failure( ch, gsn_starfighters );
           learn_from_failure( ch, gsn_shipdocking);
         }
-      if ( ship->class == MIDSIZE_SHIP )
+      if ( ship->sclass == MIDSIZE_SHIP )
         {
           learn_from_failure( ch, gsn_midships );
           learn_from_failure( ch, gsn_shipdocking);
         }
-      if ( ship->class == CAPITAL_SHIP )
+      if ( ship->sclass == CAPITAL_SHIP )
         {
           learn_from_failure( ch, gsn_capitalships );
           learn_from_failure( ch, gsn_shipdocking);
@@ -1266,17 +1266,17 @@ void dockship( CHAR_DATA *ch, SHIP_DATA *ship )
   ship->vz = ship->docked->vz;
   if( ch )
     {
-      if ( ship->class == FIGHTER_SHIP )
+      if ( ship->sclass == FIGHTER_SHIP )
         {
           learn_from_success( ch, gsn_starfighters );
           learn_from_success( ch, gsn_shipdocking);
         }
-      if ( ship->class == MIDSIZE_SHIP )
+      if ( ship->sclass == MIDSIZE_SHIP )
         {
           learn_from_success( ch, gsn_midships );
           learn_from_success( ch, gsn_shipdocking);
         }
-      if ( ship->class == CAPITAL_SHIP )
+      if ( ship->sclass == CAPITAL_SHIP )
         {
           learn_from_success( ch, gsn_capitalships );
           learn_from_success( ch, gsn_shipdocking);
@@ -1300,7 +1300,7 @@ void do_request(CHAR_DATA *ch, char *argument)
       return;
     }
 
-  if ( ship->class > SHIP_PLATFORM )
+  if ( ship->sclass > SHIP_PLATFORM )
     {
       send_to_char("&RThis isn't a spacecraft!",ch);
       return;
@@ -1358,9 +1358,9 @@ void do_request(CHAR_DATA *ch, char *argument)
       return;
     }
 
-  if ( abs(eShip->vx - ship->vx) > 100*(ship->sensor+10)*((eShip->class)+1) ||
-       abs(eShip->vy - ship->vy) > 100*(ship->sensor+10)*((eShip->class)+1) ||
-       abs(eShip->vz - ship->vz) > 100*(ship->sensor+10)*((eShip->class)+1) )
+  if ( abs(eShip->vx - ship->vx) > 100*(ship->sensor+10)*((eShip->sclass)+1) ||
+       abs(eShip->vy - ship->vy) > 100*(ship->sensor+10)*((eShip->sclass)+1) ||
+       abs(eShip->vz - ship->vz) > 100*(ship->sensor+10)*((eShip->sclass)+1) )
     {
       send_to_char("&RThat ship is too far away to remotely open bay doors.\r\n",ch);
       return;
@@ -1368,7 +1368,7 @@ void do_request(CHAR_DATA *ch, char *argument)
 
 
   the_chance = IS_NPC(ch) ? ch->top_level : (int) (ch->pcdata->learned[gsn_fake_signal]);
-  if ( (eShip->class == SHIP_PLATFORM ? 1 : (number_percent( ) >= the_chance)) && !check_pilot(ch,eShip) )
+  if ( (eShip->sclass == SHIP_PLATFORM ? 1 : (number_percent( ) >= the_chance)) && !check_pilot(ch,eShip) )
     {
       send_to_char("&RHey! That's not your ship!",ch);
       return;
@@ -1411,7 +1411,7 @@ void do_shiptrack( CHAR_DATA *ch, char *argument)
       return;
     }
 
-  if ( ship->class > SHIP_PLATFORM )
+  if ( ship->sclass > SHIP_PLATFORM )
     {
       send_to_char("&RThis isn't a spacecraft!",ch);
       return;
@@ -1545,7 +1545,7 @@ void do_transship(CHAR_DATA *ch, char *argument)
   ship->shipyard = arg3;
   ship->shipstate = SHIP_READY;
 
-  if ( ship->class == SHIP_PLATFORM && ship->type != MOB_SHIP )
+  if ( ship->sclass == SHIP_PLATFORM && ship->type != MOB_SHIP )
     {
       send_to_char( "Only nonmob midship/starfighters", ch );
       return;
@@ -1614,7 +1614,7 @@ void do_override(CHAR_DATA *ch, char *argument)
       return;
     }
 
-  if ( ship->class > SHIP_PLATFORM )
+  if ( ship->sclass > SHIP_PLATFORM )
     {
       send_to_char("&RThis isn't a spacecraft!",ch);
       return;
@@ -1756,7 +1756,7 @@ void do_guard( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( ship->class != CAPITAL_SHIP  && ship->class != SHIP_PLATFORM )
+  if ( ship->sclass != CAPITAL_SHIP  && ship->sclass != SHIP_PLATFORM )
     {
       send_to_char("&ROnly capital-class vessels and platforms have this feature.\r\n",ch);
       return;
@@ -1856,7 +1856,7 @@ void do_sabotage(CHAR_DATA *ch, char *argument )
     case 1:
       if ( !ch->dest_buf )
         return;
-      strcpy(arg, ch->dest_buf);
+      strcpy(arg, (const char*)ch->dest_buf);
       DISPOSE( ch->dest_buf);
       break;
 
@@ -2001,7 +2001,7 @@ void do_fuel(CHAR_DATA *ch, char *argument )
       amount = eShip->maxenergy - eShip->energy;
     }
 
-  if( ship->class != SHIP_PLATFORM )
+  if( ship->sclass != SHIP_PLATFORM )
     ship->energy -= amount;
 
   eShip->energy += amount;
@@ -2084,7 +2084,7 @@ bool check_hostile( SHIP_DATA *ship )
   SHIP_DATA *enemy = NULL;
   char buf[MAX_STRING_LENGTH];
 
-  if ( !autofly(ship) || ship->class == SHIP_DEBRIS )
+  if ( !autofly(ship) || ship->sclass == SHIP_DEBRIS )
     return FALSE;
 
   for( target = first_ship; target; target = target->next )

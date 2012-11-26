@@ -1102,7 +1102,7 @@ void save_commands()
 SKILLTYPE *fread_skill( FILE *fp )
 {
   char buf[MAX_STRING_LENGTH];
-  char *word;
+  const char *word;
   bool fMatch;
   SKILLTYPE *skill;
 
@@ -1390,7 +1390,7 @@ void load_herb_table()
 void fread_social( FILE *fp )
 {
   char buf[MAX_STRING_LENGTH];
-  char *word;
+  const char *word;
   bool fMatch;
   SOCIALTYPE *social;
 
@@ -1509,7 +1509,7 @@ void load_socials()
 void fread_command( FILE *fp )
 {
   char buf[MAX_STRING_LENGTH];
-  char *word;
+  const char *word;
   bool fMatch;
   CMDTYPE *command;
 

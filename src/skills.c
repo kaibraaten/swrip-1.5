@@ -298,7 +298,7 @@ bool check_skill( CHAR_DATA *ch, char *command, char *argument )
       if ( (number_percent( ) + skill_table[sn]->difficulty * 5)
            > (IS_NPC(ch) ? 75 : ch->pcdata->learned[sn]) )
         {
-          failed_casting( skill_table[sn], ch, vo, obj );
+          failed_casting( skill_table[sn], ch, (CHAR_DATA*)vo, obj );
           learn_from_failure( ch, sn );
           if ( mana )
             {
@@ -1428,7 +1428,7 @@ void do_detrap( CHAR_DATA *ch, char *argument )
           bug( "do_detrap: ch->dest_buf NULL!", 0 );
           return;
         }
-      strcpy( arg, ch->dest_buf );
+      strcpy( arg, (const char*)ch->dest_buf );
       DISPOSE( ch->dest_buf );
       DISPOSE(ch->dest_buf);
       ch->substate = SUB_NONE;
@@ -1556,7 +1556,7 @@ void do_dig( CHAR_DATA *ch, char *argument )
           bug( "do_dig: dest_buf NULL", 0 );
           return;
         }
-      strcpy( arg, ch->dest_buf );
+      strcpy( arg, (const char*)ch->dest_buf );
       DISPOSE( ch->dest_buf );
       break;
 
@@ -1692,7 +1692,7 @@ void do_search( CHAR_DATA *ch, char *argument )
           bug( "do_search: dest_buf NULL", 0 );
           return;
         }
-      strcpy( arg, ch->dest_buf );
+      strcpy( arg, (const char*)ch->dest_buf );
       DISPOSE( ch->dest_buf );
       break;
     case SUB_TIMER_DO_ABORT:

@@ -419,7 +419,7 @@ void do_note( CHAR_DATA *ch, char *arg_passed, bool IS_MAIL )
           stop_editing( ch );
           return;
         }
-      ed = ch->dest_buf;
+      ed = (EXTRA_DESCR_DATA*)ch->dest_buf;
       STRFREE( ed->description );
       ed->description = copy_buffer( ch );
       stop_editing( ch );
@@ -1164,7 +1164,7 @@ void do_note( CHAR_DATA *ch, char *arg_passed, bool IS_MAIL )
 BOARD_DATA *read_board( char *boardfile, FILE *fp )
 {
   BOARD_DATA *board;
-  char *word;
+  const char *word;
   char  buf[MAX_STRING_LENGTH];
   bool fMatch;
   char letter;

@@ -132,7 +132,7 @@ void do_makeblade( CHAR_DATA *ch, char *argument )
     case 1:
       if ( !ch->dest_buf )
         return;
-      strcpy(arg, ch->dest_buf);
+      strcpy(arg, (const char*)ch->dest_buf);
       DISPOSE( ch->dest_buf);
       break;
 
@@ -381,7 +381,7 @@ void do_makeblaster( CHAR_DATA *ch, char *argument )
     case 1:
       if ( !ch->dest_buf )
         return;
-      strcpy(arg, ch->dest_buf);
+      strcpy(arg, (const char*)ch->dest_buf);
       DISPOSE( ch->dest_buf);
       break;
 
@@ -694,7 +694,7 @@ void do_makelightsaber( CHAR_DATA *ch, char *argument )
     case 1:
       if ( !ch->dest_buf )
         return;
-      strcpy(arg, ch->dest_buf);
+      strcpy(arg, (const char*)ch->dest_buf);
       DISPOSE( ch->dest_buf);
       break;
 
@@ -935,7 +935,7 @@ void do_makespice( CHAR_DATA *ch, char *argument )
     case 1:
       if ( !ch->dest_buf )
         return;
-      strcpy(arg, ch->dest_buf);
+      strcpy(arg, (const char*)ch->dest_buf);
       DISPOSE( ch->dest_buf);
       break;
 
@@ -1089,7 +1089,7 @@ void do_makegrenade( CHAR_DATA *ch, char *argument )
     case 1:
       if ( !ch->dest_buf )
         return;
-      strcpy(arg, ch->dest_buf);
+      strcpy(arg, (const char*)ch->dest_buf);
       DISPOSE( ch->dest_buf);
       break;
 
@@ -1295,7 +1295,7 @@ void do_makelandmine( CHAR_DATA *ch, char *argument )
     case 1:
       if ( !ch->dest_buf )
         return;
-      strcpy(arg, ch->dest_buf);
+      strcpy(arg, (const char*)ch->dest_buf);
       DISPOSE( ch->dest_buf);
       break;
 
@@ -1500,7 +1500,7 @@ void do_makelight( CHAR_DATA *ch, char *argument )
     case 1:
       if ( !ch->dest_buf )
         return;
-      strcpy(arg, ch->dest_buf);
+      strcpy(arg, (const char*)ch->dest_buf);
       DISPOSE( ch->dest_buf);
       break;
 
@@ -1720,9 +1720,9 @@ void do_makejewelry( CHAR_DATA *ch, char *argument )
         return;
       if ( !ch->dest_buf_2 )
         return;
-      strcpy(arg, ch->dest_buf);
+      strcpy(arg, (const char*)ch->dest_buf);
       DISPOSE( ch->dest_buf);
-      strcpy(arg2, ch->dest_buf_2);
+      strcpy(arg2, (const char*)ch->dest_buf_2);
       DISPOSE( ch->dest_buf_2);
       break;
 
@@ -1916,9 +1916,9 @@ void do_makearmor( CHAR_DATA *ch, char *argument )
         return;
       if ( !ch->dest_buf_2 )
         return;
-      strcpy(arg, ch->dest_buf);
+      strcpy(arg, (const char*)ch->dest_buf);
       DISPOSE( ch->dest_buf);
-      strcpy(arg2, ch->dest_buf_2);
+      strcpy(arg2, (const char*)ch->dest_buf_2);
       DISPOSE( ch->dest_buf_2);
       break;
 
@@ -2117,11 +2117,11 @@ void do_makecomlink( CHAR_DATA *ch, char *argument )
     case 1:
       if ( !ch->dest_buf )
         return;
-      strcpy(arg, ch->dest_buf);
+      strcpy(arg, (const char*)ch->dest_buf);
       DISPOSE( ch->dest_buf);
       if ( !ch->dest_buf_2 )
         return;
-      strcpy(arg2, ch->dest_buf_2);
+      strcpy(arg2, (const char*)ch->dest_buf_2);
       DISPOSE( ch->dest_buf_2);
       break;
     case SUB_TIMER_DO_ABORT:
@@ -2318,7 +2318,7 @@ void do_makeshield( CHAR_DATA *ch, char *argument )
     case 1:
       if ( !ch->dest_buf )
         return;
-      strcpy(arg, ch->dest_buf);
+      strcpy(arg, (const char*)ch->dest_buf);
       DISPOSE( ch->dest_buf);
       break;
 
@@ -2542,9 +2542,9 @@ void do_makecontainer( CHAR_DATA *ch, char *argument )
         return;
       if ( !ch->dest_buf_2 )
         return;
-      strcpy(arg, ch->dest_buf);
+      strcpy(arg, (const char*)ch->dest_buf);
       DISPOSE( ch->dest_buf);
-      strcpy(arg2, ch->dest_buf_2);
+      strcpy(arg2, (const char*)ch->dest_buf_2);
       DISPOSE( ch->dest_buf_2);
       break;
 
@@ -2688,7 +2688,7 @@ void do_reinforcements( CHAR_DATA *ch, char *argument )
     case 1:
       if ( !ch->dest_buf )
         return;
-      strcpy(arg, ch->dest_buf);
+      strcpy(arg, (const char*)ch->dest_buf);
       DISPOSE( ch->dest_buf);
       break;
 
@@ -2767,7 +2767,7 @@ void do_postguard( CHAR_DATA *ch, char *argument )
     case 1:
       if ( !ch->dest_buf )
         return;
-      strcpy(arg, ch->dest_buf);
+      strcpy(arg, (const char*)ch->dest_buf);
       DISPOSE( ch->dest_buf);
       break;
 
@@ -3874,7 +3874,7 @@ void do_hijack( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( ship->class > SHIP_PLATFORM )
+  if ( ship->sclass > SHIP_PLATFORM )
     {
       send_to_char("&RThis isn't a spacecraft!\r\n",ch);
       return;
@@ -3898,7 +3898,7 @@ void do_hijack( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if  ( ship->class == SHIP_PLATFORM )
+  if  ( ship->sclass == SHIP_PLATFORM )
     {
       send_to_char( "You can't do that here.\r\n" , ch );
       return;
@@ -3931,13 +3931,13 @@ void do_hijack( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( ship->class == FIGHTER_SHIP )
+  if ( ship->sclass == FIGHTER_SHIP )
     the_chance = IS_NPC(ch) ? ch->top_level
       : (int)  (ch->pcdata->learned[gsn_starfighters]) ;
-  if ( ship->class == MIDSIZE_SHIP )
+  if ( ship->sclass == MIDSIZE_SHIP )
     the_chance = IS_NPC(ch) ? ch->top_level
       : (int)  (ch->pcdata->learned[gsn_midships]) ;
-  if ( ship->class == CAPITAL_SHIP )
+  if ( ship->sclass == CAPITAL_SHIP )
     the_chance = IS_NPC(ch) ? ch->top_level
       : (int) (ch->pcdata->learned[gsn_capitalships]);
   if ( number_percent( ) < the_chance )
@@ -3959,11 +3959,11 @@ void do_hijack( CHAR_DATA *ch, char *argument )
       echo_to_room( AT_YELLOW , get_room_index(ship->location) , buf );
       ship->shipstate = SHIP_LAUNCH;
       ship->currspeed = ship->realspeed;
-      if ( ship->class == FIGHTER_SHIP )
+      if ( ship->sclass == FIGHTER_SHIP )
         learn_from_success( ch, gsn_starfighters );
-      if ( ship->class == MIDSIZE_SHIP )
+      if ( ship->sclass == MIDSIZE_SHIP )
         learn_from_success( ch, gsn_midships );
-      if ( ship->class == CAPITAL_SHIP )
+      if ( ship->sclass == CAPITAL_SHIP )
         learn_from_success( ch, gsn_capitalships );
 
       learn_from_success( ch, gsn_hijack );
@@ -4016,11 +4016,11 @@ void do_hijack( CHAR_DATA *ch, char *argument )
     }
   set_char_color( AT_RED, ch );
   send_to_char("You fail to work the controls properly!\r\n",ch);
-  if ( ship->class == FIGHTER_SHIP )
+  if ( ship->sclass == FIGHTER_SHIP )
     learn_from_failure( ch, gsn_starfighters );
-  if ( ship->class == MIDSIZE_SHIP )
+  if ( ship->sclass == MIDSIZE_SHIP )
     learn_from_failure( ch, gsn_midships );
-  if ( ship->class == CAPITAL_SHIP )
+  if ( ship->sclass == CAPITAL_SHIP )
     learn_from_failure( ch, gsn_capitalships );
   return;
 
@@ -4074,7 +4074,7 @@ void do_add_patrol ( CHAR_DATA *ch , char *argument )
     case 1:
       if ( !ch->dest_buf )
         return;
-      strcpy(arg, ch->dest_buf);
+      strcpy(arg, (const char*)ch->dest_buf);
       DISPOSE( ch->dest_buf);
       break;
 
@@ -4155,7 +4155,7 @@ void do_special_forces ( CHAR_DATA *ch , char *argument )
     case 1:
       if ( !ch->dest_buf )
         return;
-      strcpy(arg, ch->dest_buf);
+      strcpy(arg, (const char*)ch->dest_buf);
       DISPOSE( ch->dest_buf);
       break;
 
@@ -4235,7 +4235,7 @@ void do_elite_guard ( CHAR_DATA *ch , char *argument )
     case 1:
       if ( !ch->dest_buf )
         return;
-      strcpy(arg, ch->dest_buf);
+      strcpy(arg, (const char*)ch->dest_buf);
       DISPOSE( ch->dest_buf);
       break;
 
@@ -5578,7 +5578,7 @@ void do_makebowcaster( CHAR_DATA *ch, char *argument )
     case 1:
       if ( !ch->dest_buf )
         return;
-      strcpy(arg, ch->dest_buf);
+      strcpy(arg, (const char*)ch->dest_buf);
       DISPOSE( ch->dest_buf);
       break;
 
@@ -5832,9 +5832,9 @@ void do_makedisguise( CHAR_DATA *ch, char *argument )
     case 1:
       if ( !ch->dest_buf )
         return;
-      strcpy(arg1, ch->dest_buf);
+      strcpy(arg1, (const char*)ch->dest_buf);
       DISPOSE( ch->dest_buf);
-      strcpy(arg2, ch->dest_buf_2);
+      strcpy(arg2, (const char*)ch->dest_buf_2);
       DISPOSE( ch->dest_buf_2);
       break;
 

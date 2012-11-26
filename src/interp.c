@@ -43,7 +43,7 @@ SOCIALTYPE *social_index[27];   /* hash table for socials   */
 /*
  * Character not in position for command?
  */
-bool check_pos( CHAR_DATA *ch, short position )
+bool check_pos( CHAR_DATA *ch, int position )
 {
   if ( ch->position < position )
     {

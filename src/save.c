@@ -994,7 +994,7 @@ void fread_char( CHAR_DATA *ch, FILE *fp, bool preload )
 {
   char buf[MAX_STRING_LENGTH];
   char *line;
-  char *word;
+  const char *word;
   int x1, x2, x3, x4, x5, x6, x7, x8, x9, x0;
   short killcnt;
   bool fMatch;
@@ -1713,7 +1713,7 @@ void fread_char( CHAR_DATA *ch, FILE *fp, bool preload )
 void fread_obj( CHAR_DATA *ch, FILE *fp, short os_type )
 {
   OBJ_DATA *obj;
-  char *word;
+  const char *word;
   int iNest;
   bool fMatch;
   bool fNest;
@@ -2418,7 +2418,7 @@ void fwrite_mobile( FILE *fp, CHAR_DATA *mob )
 CHAR_DATA *  fread_mobile( FILE *fp )
 {
   CHAR_DATA *mob = NULL;
-  char *word;
+  const char *word;
   bool fMatch;
   int inroom = 0;
   ROOM_INDEX_DATA *pRoomIndex = NULL;

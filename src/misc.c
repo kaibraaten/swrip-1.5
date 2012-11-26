@@ -2628,7 +2628,7 @@ void do_hail( CHAR_DATA *ch , char *argument )
           send_to_char("&RWhy don't you just say it?\r\n",ch);
           return;
         }
-      if (abs(target->vx - ship->vx) > 100*(ship->sensor+10)*((target->class)+1 ))
+      if (abs(target->vx - ship->vx) > 100*(ship->sensor+10)*((target->sclass)+1 ))
         if ( abs(target->vx - ship->vx) > 100*((ship->comm)+(target->comm)+20) ||
              abs(target->vy - ship->vy) > 100*((ship->comm)+(target->comm)+20) ||
              abs(target->vz - ship->vz) > 100*((ship->comm)+(target->comm)+20) )
@@ -2876,7 +2876,7 @@ void do_train( CHAR_DATA *ch, char *argument )
     case 1:
       if ( !ch->dest_buf )
         return;
-      strcpy(arg, ch->dest_buf);
+      strcpy(arg, (const char*)ch->dest_buf);
       DISPOSE( ch->dest_buf);
       break;
 

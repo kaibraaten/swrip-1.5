@@ -358,7 +358,7 @@ int init_socket( int port )
 /*
  * LAG alarm!                                                   -Thoric
  */
-static void caught_alarm()
+static void caught_alarm( int dummy )
 {
   char buf[MAX_STRING_LENGTH];
   bug( "ALARM CLOCK!" );
@@ -2121,7 +2121,7 @@ void nanny( DESCRIPTOR_DATA *d, char *argument )
 
             for ( ship = first_ship; ship; ship = ship->next )
               if ( ch->in_room->vnum >= ship->firstroom && ch->in_room->vnum <= ship->lastroom )
-                if ( ship->class != SHIP_PLATFORM || ship->spaceobject )
+                if ( ship->sclass != SHIP_PLATFORM || ship->spaceobject )
                   char_to_room( ch, ch->in_room );
           }
         else
@@ -2515,7 +2515,7 @@ void stop_idling( CHAR_DATA *ch )
 void send_to_char_color( const char *txt, CHAR_DATA *ch )
 {
   DESCRIPTOR_DATA *d;
-  char *colstr;
+  const char *colstr;
   const char *prevstr = txt;
   char colbuf[20];
   int ln;
@@ -2621,7 +2621,7 @@ void write_to_pager( DESCRIPTOR_DATA *d, const char *txt, size_t length )
 void send_to_pager_color( const char *txt, CHAR_DATA *ch )
 {
   DESCRIPTOR_DATA *d;
-  char *colstr;
+  const char *colstr;
   const char *prevstr = txt;
   char colbuf[20];
   int ln;
@@ -3046,7 +3046,7 @@ char *default_prompt( CHAR_DATA *ch )
 
 int getcolor(char clr)
 {
-  static const char colors[16] = "xrgObpcwzRGYBPCW";
+  static const char colors[] = "xrgObpcwzRGYBPCW";
   int r;
 
   for ( r = 0; r < 16; r++ )

@@ -363,7 +363,7 @@ void do_mpjunk( CHAR_DATA *ch, char *argument )
 int get_color(char *argument)    /* get color code from command string */
 {
   char color[MAX_INPUT_LENGTH];
-  char *cptr;
+  const char *cptr;
   static char const * color_list=
     "_bla_red_dgr_bro_dbl_pur_cya_cha_dch_ora_gre_yel_blu_pin_lbl_whi";
   static char const * blink_list=

@@ -54,8 +54,6 @@ int             get_wearloc( char *type );
 int             get_trapflag( char *flag );
 int             get_exflag( char *flag );
 int             get_rflag( char *flag );
-extern  const char *  const           wear_locs[];
-extern  const char *  const           ex_flags[];
 
 bool is_room_reset( RESET_DATA *pReset, ROOM_INDEX_DATA *aRoom,
 		    AREA_DATA *pArea );
@@ -380,9 +378,9 @@ void edit_reset( CHAR_DATA *ch, char *argument, AREA_DATA *pArea,
   argument = one_argument(argument, arg);
   if ( !*arg || !str_cmp(arg, "?") )
     {
-      char *nm = (ch->substate == SUB_REPEATCMD ? "" : (aRoom ? "rreset "
+      const char *nm = (ch->substate == SUB_REPEATCMD ? "" : (aRoom ? "rreset "
                                                         : "reset "));
-      char *rn = (aRoom ? "" : " [room#]");
+      const char *rn = (aRoom ? "" : " [room#]");
       ch_printf(ch, "Syntax: %s<list|edit|delete|add|insert|place%s>\r\n",
                 nm, (aRoom ? "" : "|area"));
       ch_printf( ch, "Syntax: %sremove <#>\r\n", nm );
@@ -975,9 +973,11 @@ void do_reset( CHAR_DATA *ch, char *argument )
   char *parg;
 
   parg = one_argument(argument, arg);
+
   if ( ch->substate == SUB_REPEATCMD )
     {
-      pArea = ch->dest_buf;
+      pArea = (AREA_DATA*)ch->dest_buf;
+
       if ( pArea && pArea != ch->pcdata->area && pArea != ch->in_room->area )
         {
           AREA_DATA *tmp;
@@ -1017,14 +1017,17 @@ void do_reset( CHAR_DATA *ch, char *argument )
       char fname[80];
 
       sprintf(fname, "%s.are", capitalize(arg));
+
       for ( pArea = first_build; pArea; pArea = pArea->next )
         if ( !str_cmp(fname, pArea->filename) )
           {
             argument = parg;
             break;
           }
+
       if ( !pArea )
         pArea = ch->pcdata->area;
+
       if ( !pArea )
         pArea = ch->in_room->area;
     }
@@ -1045,7 +1048,7 @@ void do_rreset( CHAR_DATA *ch, char *argument )
 
   if ( ch->substate == SUB_REPEATCMD )
     {
-      pRoom = ch->dest_buf;
+      pRoom = (ROOM_INDEX_DATA*)ch->dest_buf;
       if ( !pRoom )
         {
           send_to_char( "Your room pointer got lost.  Reset mode off.\r\n", ch);

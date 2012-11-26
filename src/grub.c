@@ -42,33 +42,28 @@ struct field_struct         /* field table - info re each field          */
   bool    num;             /* is field numeric or char string?          */
 }  gr_fd [GR_NUM_FIELDS], go_fd [GO_NUM_FIELDS];
 
-struct                      /* operand table - info about each operand   */
+struct operand_struct        /* operand table - info about each operand   */
 {
   int             field;
   int             op;
   long            nval;        /* value for numeric operands            */
   char            sval [MAX_FIELD_LENGTH];
   bool            num;          /* is field numeric or char string?      */
-}  gr_op [MAX_NUM_OPS];         /* the above field is stored here as     */
+};
+
+struct operand_struct gr_op [MAX_NUM_OPS]; /* the above field is stored here as     */
                                 /* well as in "fields" for readability   */
-struct                          /* operand table - info about each op    */
-{
-  int             field;
-  int             op;
-  short           nval;        /* value for numeric operands            */
-  char            sval [MAX_FIELD_LENGTH];
-  bool            num;          /* is field numeric or char string?      */
-}  go_op [MAX_NUM_OPS];
+struct operand_struct go_op [MAX_NUM_OPS];
 
 enum gr_field_type          /* enumerates the fields in the input record */
-  {name, sex, class, race, level, room, gold, clan, council,
+  {name, sex, pclass, race, level, room, gold, clan, council,
    site, last, pkill};
 
 struct  gr_struct               /* input record containing pfile info    */
 {
   char    name [MAX_NAME_LENGTH];
   char    sex;
-  char    class;
+  char    pclass;
   char    race;
   char    level;
   short   room;
@@ -900,8 +895,8 @@ bool gr_eval_and (GR_STRUCT r, int op_num)
           if ( !go_eval_num (r.sex, gr_op[cou].op, gr_op[cou].nval) )
             return FALSE;
           else break;
-        case class:
-          if ( !go_eval_num (r.class, gr_op[cou].op, gr_op[cou].nval) )
+        case pclass:
+          if ( !go_eval_num (r.pclass, gr_op[cou].op, gr_op[cou].nval) )
             return FALSE;
           else break;
         case race:
@@ -963,8 +958,8 @@ bool gr_eval_or (GR_STRUCT r, int op_num)
           if ( go_eval_num (r.sex, gr_op[cou].op, gr_op[cou].nval) )
             return TRUE;
           else break;
-        case class:
-          if ( go_eval_num (r.class, gr_op[cou].op, gr_op[cou].nval) )
+        case pclass:
+          if ( go_eval_num (r.pclass, gr_op[cou].op, gr_op[cou].nval) )
             return TRUE;
           else break;
         case race:
@@ -1142,7 +1137,7 @@ void gr_read( CHAR_DATA *ch, int op_num, bool or_sw, int dis_num)
                       "%-12s %2hd %c %2s %c %3s %3s %5hd %11ld %-15s %6lu %c\r\n",
                       r.name, r.level, sex_map[(unsigned char) r.sex],
                       race_map[(unsigned char) r.race],
-		      class_map[(unsigned char) r.class],
+		      class_map[(unsigned char) r.pclass],
                       clan_map[(unsigned char) r.clan],
                       council_map[(unsigned char) r.council],
                       r.room, r.gold, r.site, r.last, r.pkill);

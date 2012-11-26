@@ -60,6 +60,8 @@
 
 #define MAX_PROG_NEST   20
 
+bool MOBtrigger;
+
 int mprog_do_command( char *cmnd, CHAR_DATA *mob, CHAR_DATA *actor,
                       OBJ_DATA *obj, void *vo, CHAR_DATA *rndm,
                       bool ignore, bool ignore_ors );
@@ -2942,7 +2944,7 @@ void room_act_update( void )
 
   while ( (runner = room_act_list) != NULL )
     {
-      ROOM_INDEX_DATA *room = runner->vo;
+      ROOM_INDEX_DATA *room = (ROOM_INDEX_DATA*)runner->vo;
 
       while ( (mpact = room->mpact) != NULL )
         {
@@ -2980,7 +2982,7 @@ void obj_act_update( void )
 
   while ( (runner = obj_act_list) != NULL )
     {
-      OBJ_DATA *obj = runner->vo;
+      OBJ_DATA *obj = (OBJ_DATA*)runner->vo;
 
       while ( (mpact = obj->mpact) != NULL )
         {

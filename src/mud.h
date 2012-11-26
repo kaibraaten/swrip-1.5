@@ -743,7 +743,7 @@ struct	mob_prog_data
     char *	 comlist;
 };
 
-bool	MOBtrigger;
+extern bool MOBtrigger;
 
 /* race dedicated stuff */
 struct	race_type
@@ -793,7 +793,7 @@ struct member_data
 {
 	char 		*name;	/* Name of member */
 	char		*since;	/* Member since */
-	int		class;	/* class of member */
+	int		mclass;	/* class of member */
 	int		level;	/* level of member */
 	int 		deaths;	/* Pdeaths for clans, mdeaths for guilds/orders */
 	int 		kills;	/* Pkills for clans, mkills for guilds/orders */
@@ -989,7 +989,7 @@ struct ship_data
     char *      copilot;
     char *      dest;
     short      type;
-    short      class;
+    short      sclass;
     short      comm;
     short      sensor;
     short      astro_array;
@@ -2235,8 +2235,8 @@ struct	mob_index_data
     int			defenses;
     int			speaks;
     int 		speaking;
-    short		position;
-    short		defposition;
+    int		position;
+    int		defposition;
     short		height;
     short		weight;
     short		race;
@@ -2383,8 +2383,8 @@ struct	char_data
     short		damroll;
     short		hitplus;
     short		damplus;
-    short		position;
-    short		defposition;
+  int		position;
+  int		defposition;
     short		height;
     short		weight;
     short		armor;
@@ -2895,7 +2895,7 @@ struct	skill_type
     DO_FUN *	skill_fun;		/* Skill pointer (for skills)	*/
   char *fun_name;
     short	target;			/* Legal targets		*/
-    short	minimum_position;	/* Position for caster / user	*/
+    int	minimum_position;	/* Position for caster / user	*/
     short	slot;			/* Slot for #OBJECT loading	*/
     short	min_mana;		/* Minimum mana used		*/
     short	beats;			/* Rounds required to use skill	*/
@@ -3266,9 +3266,9 @@ struct	cmd_type
   char *name;
   DO_FUN *do_fun;
   char *fun_name;
-  short position;
+  int position;
   short level;
-  short log;
+  int log;
   struct timerset userec;
 };
 
@@ -3341,7 +3341,8 @@ extern	const char *	const	npc_race	[];
 extern	const char *	const	defense_flags	[];
 extern	const char *	const	attack_flags	[];
 extern	const char *	const	area_flags	[];
-
+extern const char * const wear_locs[];
+extern const char * const ex_flags[];
 extern	int	const	lang_array      [];
 extern	const char *	const	lang_names      [];
 
@@ -4621,7 +4622,7 @@ int	times_killed( CHAR_DATA *ch, CHAR_DATA *mob );
 int count_users(OBJ_DATA *obj);
 
 /* interp.c */
-bool	check_pos( CHAR_DATA *ch, short position );
+bool	check_pos( CHAR_DATA *ch, int position );
 void	interpret( CHAR_DATA *ch, char *argument );
 ST *	find_social( char *command );
 CMDTYPE *find_command( char *command );

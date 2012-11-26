@@ -904,7 +904,9 @@ void do_mset( CHAR_DATA *ch, char *argument )
           ch->substate = SUB_NONE;
           return;
         }
-      victim = ch->dest_buf;
+
+      victim = (CHAR_DATA*)ch->dest_buf;
+
       if ( char_died(victim) )
         {
           send_to_char( "Your victim died!\r\n", ch );
@@ -929,7 +931,8 @@ void do_mset( CHAR_DATA *ch, char *argument )
 
   if ( ch->substate == SUB_REPEATCMD )
     {
-      victim = ch->dest_buf;
+      victim = (CHAR_DATA*)ch->dest_buf;
+
       if ( char_died(victim) )
         {
           send_to_char( "Your victim died!\r\n", ch );
@@ -2728,10 +2731,10 @@ void do_oset( CHAR_DATA *ch, char *argument )
        * the object and index-object lists, searching through the
        * extra_descr lists for a matching pointer...
        */
-      ed  = ch->dest_buf;
+      ed  = (EXTRA_DESCR_DATA*)ch->dest_buf;
       STRFREE( ed->description );
       ed->description = copy_buffer( ch );
-      tmpobj = ch->spare_ptr;
+      tmpobj = (OBJ_DATA*)ch->spare_ptr;
       stop_editing( ch );
       ch->dest_buf = tmpobj;
       ch->substate = ch->tempnum;
@@ -2745,21 +2748,26 @@ void do_oset( CHAR_DATA *ch, char *argument )
           ch->substate = SUB_NONE;
           return;
         }
-      obj = ch->dest_buf;
+
+      obj = (OBJ_DATA*)ch->dest_buf;
+
       if ( obj && obj_extracted(obj) )
         {
           send_to_char( "Your object was extracted!\r\n", ch );
           stop_editing( ch );
           return;
         }
+
       STRFREE( obj->description );
       obj->description = copy_buffer( ch );
+
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
         {
           STRFREE( obj->pIndexData->description );
           obj->pIndexData->description = QUICKLINK( obj->description );
         }
-      tmpobj = ch->spare_ptr;
+
+      tmpobj = (OBJ_DATA*)ch->spare_ptr;
       stop_editing( ch );
       ch->substate = ch->tempnum;
       ch->dest_buf = tmpobj;
@@ -2771,7 +2779,8 @@ void do_oset( CHAR_DATA *ch, char *argument )
 
   if ( ch->substate == SUB_REPEATCMD )
     {
-      obj = ch->dest_buf;
+      obj = (OBJ_DATA*)ch->dest_buf;
+
       if ( obj && obj_extracted(obj) )
         {
           send_to_char( "Your object was extracted!\r\n", ch );
@@ -3978,19 +3987,23 @@ void do_redit( CHAR_DATA *ch, char *argument )
     default:
       break;
     case SUB_ROOM_DESC:
-      location = ch->dest_buf;
+      location = (ROOM_INDEX_DATA*)ch->dest_buf;
+
       if ( !location )
         {
           bug( "redit: sub_room_desc: NULL ch->dest_buf", 0 );
           location = ch->in_room;
         }
+
       STRFREE( location->description );
       location->description = copy_buffer( ch );
       stop_editing( ch );
       ch->substate = ch->tempnum;
       return;
+
     case SUB_ROOM_EXTRA:
-      ed = ch->dest_buf;
+      ed = (EXTRA_DESCR_DATA*)ch->dest_buf;
+
       if ( !ed )
         {
           bug( "redit: sub_room_extra: NULL ch->dest_buf", 0 );
@@ -7109,9 +7122,12 @@ void do_mpedit( CHAR_DATA *ch, char *argument )
           ch->substate = SUB_NONE;
           return;
         }
-      mprog      = ch->dest_buf;
+
+      mprog = (MPROG_DATA*)ch->dest_buf;
+
       if ( mprog->comlist )
         STRFREE( mprog->comlist );
+
       mprog->comlist = copy_buffer( ch );
       stop_editing( ch );
       return;
@@ -7390,9 +7406,12 @@ void do_opedit( CHAR_DATA *ch, char *argument )
           ch->substate = SUB_NONE;
           return;
         }
-      mprog      = ch->dest_buf;
+
+      mprog = (MPROG_DATA*)ch->dest_buf;
+
       if ( mprog->comlist )
         STRFREE( mprog->comlist );
+
       mprog->comlist = copy_buffer( ch );
       stop_editing( ch );
       return;
@@ -7688,9 +7707,12 @@ void do_rpedit( CHAR_DATA *ch, char *argument )
           ch->substate = SUB_NONE;
           return;
         }
-      mprog      = ch->dest_buf;
+
+      mprog = (MPROG_DATA*)ch->dest_buf;
+
       if ( mprog->comlist )
         STRFREE( mprog->comlist );
+
       mprog->comlist = copy_buffer( ch );
       stop_editing( ch );
       return;
