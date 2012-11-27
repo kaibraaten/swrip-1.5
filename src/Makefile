@@ -5,7 +5,7 @@ WFLAGS = -Wall -Werror -Wformat-security -Wpointer-arith -Wcast-align -Wredundan
 USE_DLSYM = -DSWRIP_USE_DLSYM
 
 #IMC2 - Comment out to dsable IMC2 support
-#IMC = 1
+IMC = 1
 
 #Change from 0 to 1 to enable telnet debug logging.
 DEBUG_TELNET = -DSWRIP_DEBUG_TELNET=0

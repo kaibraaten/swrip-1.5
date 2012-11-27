@@ -2448,6 +2448,10 @@ struct killed_data
     char		count;
 };
 
+#ifdef SWRIP_USE_IMC
+#include "imc.h"
+#endif
+
 /*
  * Data which only PC's have.
  */
@@ -2516,7 +2520,9 @@ struct	pc_data
     int			played;
     time_t		logon;
     time_t		save_time;
-    
+#ifdef SWRIP_USE_IMC
+  IMC_CHARDATA *imcchardata;
+#endif    
 };
 
 

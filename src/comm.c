@@ -115,7 +115,7 @@ static void execute_on_exit( void )
 {
   /*DISPOSE( sysdata.mccp_buf );*/
 
-#ifdef SWR2_USE_DLSYM
+#ifdef SWRIP_USE_DLSYM
 #ifdef _WIN32
   FreeLibrary(sysdata.dl_handle);
 #else
@@ -130,6 +130,9 @@ int main( int argc, char **argv )
 {
   struct timeval now_time;
   bool fCopyOver = FALSE;
+#ifdef SWRIP_USE_IMC
+  socket_t imcsocket = INVALID_SOCKET;
+#endif
 
   /*
    * Memory debugging if needed.
@@ -227,15 +230,13 @@ int main( int argc, char **argv )
         {
           fCopyOver = TRUE;
 #if defined(AMIGA) || defined(__MORPHOS__)
-          control = ObtainSocket( atoi( argv[3] ), PF_INET, SOCK_STREAM, IPPROTO_TC\
-                                  P );
-#ifdef SWR2_USE_IMC
-          imcsocket = ObtainSocket( atoi( argv[4] ), PF_INET, SOCK_STREAM, IPPROTO_\
-                                    TCP );
+          control = ObtainSocket( atoi( argv[3] ), PF_INET, SOCK_STREAM, IPPROTO_TCP );
+#ifdef SWRIP_USE_IMC
+          imcsocket = ObtainSocket( atoi( argv[4] ), PF_INET, SOCK_STREAM, IPPROTO_TCP );
 #endif /* imc */
 #else
           control = atoi( argv[3] );
-#ifdef SWR2_USE_IMC
+#ifdef SWRIP_USE_IMC
           imcsocket = atoi( argv[4] );
 #endif /* imc */
 #endif
@@ -249,9 +250,14 @@ int main( int argc, char **argv )
   /*
    * Run the game.
    */
+
   sprintf(log_buf,"PID: %d",getpid());
   bootup = TRUE;
   log_string(log_buf);
+#ifdef SWRIP_USE_IMC
+  log_string( "Starting IMC2" );
+  imc_startup( FALSE, imcsocket, fCopyOver );
+#endif
   log_string("Booting Database");
   boot_db(fCopyOver);
   log_string("Initializing socket");
@@ -266,7 +272,9 @@ int main( int argc, char **argv )
   bootup = FALSE;
   game_loop( );
   close( control  );
-
+#ifdef SWRIP_USE_IMC
+  imc_shutdown( FALSE );
+#endif
   /*
    * That's all, folks.
    */
@@ -578,6 +586,10 @@ void game_loop( )
        * Autonomous game motion.
        */
       update_handler( );
+
+#ifdef SWRIP_USE_IMC
+      imc_loop();
+#endif
 
       /*
        * Output.

@@ -139,11 +139,11 @@ void do_copyover( CHAR_DATA * ch, char *argument )
   fprintf( fp, "-1\n" );
   fclose( fp );
 
-#ifdef SWR2_USE_IMC
+#ifdef SWRIP_USE_IMC
   imc_hotboot();
 #endif
 
-#ifdef SWR2_USE_IMC
+#ifdef SWRIP_USE_IMC
   sprintf( buf3, "%d", imc_getsocket( this_imcmud ) );
 #else
   sprintf( buf3, "%d", -1 );

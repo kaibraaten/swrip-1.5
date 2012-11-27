@@ -582,8 +582,11 @@ void fwrite_char( CHAR_DATA *ch, FILE *fp )
                ch->pcdata->killed[sn].count );
     }
 
+#ifdef SWRIP_USE_IMC
+  imc_savechar( ch, fp );
+#endif
+
   fprintf( fp, "End\n\n" );
-  return;
 }
 
 
@@ -820,6 +823,11 @@ bool load_char_obj( DESCRIPTOR_DATA *d, char *name, bool preload )
   ch->mob_clan                        = STRALLOC( "" );
   ch->was_sentinel                    = NULL;
   ch->plr_home                        = NULL;
+
+#ifdef SWRIP_USE_IMC
+  imc_initchar( ch );
+#endif
+
   found = FALSE;
   sprintf( strsave, "%s%c/%s", PLAYER_DIR, tolower(name[0]),
            capitalize( name ) );
@@ -1316,6 +1324,11 @@ void fread_char( CHAR_DATA *ch, FILE *fp, bool preload )
         case 'I':
           KEY( "IllegalPK",     ch->pcdata->illegal_pk, fread_number( fp ) );
           KEY( "Immune",        ch->immune,             fread_number( fp ) );
+
+#ifdef SWRIP_USE_IMC
+	  if( ( fMatch = imc_loadchar( ch, fp, word ) ) )
+	    break;
+#endif
           break;
         case 'J':
           KEY( "Jailvnum",    ch->pcdata->jail_vnum,          fread_number( fp ) );

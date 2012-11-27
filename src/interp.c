@@ -392,7 +392,11 @@ void interpret( CHAR_DATA *ch, char *argument )
     {
       if ( !check_skill( ch, command, argument )
            &&   !check_alias( ch, command, argument )
-           &&   !check_social( ch, command, argument ) )
+           &&   !check_social( ch, command, argument )
+#ifdef SWRIP_USE_IMC
+	   && !imc_command_hook( ch, command, argument )
+#endif
+	   )
         {
           EXIT_DATA *pexit;
 
