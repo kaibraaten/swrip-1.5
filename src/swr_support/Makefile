@@ -6,7 +6,7 @@ OBJ  = $(patsubst %,$(ODIR)/%,$(_OBJ))
 #USE_DLSYM = -DSWRIP_USE_DLSYM
 
 WFLAGS = -Wall -Wshadow -Wformat-security -Winline -Wpointer-arith -Wcast-align -Wredundant-decls -Werror -Wwrite-strings -Wextra -Wno-char-subscripts
-CFLAGS = -g3 -MMD -pedantic $(GCC_MARCH) $(WFLAGS) -I. $(USE_DLSYM)
+CFLAGS = -g3 -MMD -pedantic $(GCC_MARCH) $(WFLAGS) -I. $(USE_DLSYM) -ansi
 
 #If not Cygwin environment
 ifneq ($(shell echo $$OSTYPE),cygwin)

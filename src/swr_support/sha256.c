@@ -24,6 +24,11 @@
  * SUCH DAMAGE.
  */
 
+#ifdef __STRICT_ANSI__
+/* To include the prototype for snprintf() */
+#define _BSD_SOURCE
+#endif
+
 #include <stdio.h>
 #include <string.h>
 #include "os.h"

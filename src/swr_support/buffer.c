@@ -1,3 +1,8 @@
+#ifdef __STRICT_ANSI__
+/* To include the prototype for vsnprintf() */
+#define _BSD_SOURCE
+#endif
+
 #include "swr_support.h"
 #include <stdlib.h>
 #include <string.h>

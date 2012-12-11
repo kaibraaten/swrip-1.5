@@ -1,3 +1,8 @@
+#ifdef __STRICT_ANSI__
+/* To include the prototype for snprintf() */
+#define _BSD_SOURCE
+#endif
+
 #include <ctype.h>
 #include <string.h>
 #include <stdlib.h>
