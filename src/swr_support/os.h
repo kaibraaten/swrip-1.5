@@ -23,8 +23,8 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#ifndef _SWR2_OS_H_
-#define _SWR2_OS_H_
+#ifndef _SWRIP_OS_H_
+#define _SWRIP_OS_H_
 
 #if defined(_WIN32)
 #include "os_win32.h"

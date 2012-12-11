@@ -2,8 +2,8 @@
  * Dynamically expanding text buffer by Erwin Adreasen.
  * This version was lifted from SocketMUD 2.4
  */
-#ifndef _SWR2_BUFFER_H_
-#define _SWR2_BUFFER_H_
+#ifndef _SWRIP_BUFFER_H_
+#define _SWRIP_BUFFER_H_
 
 #ifdef __cplusplus
 extern "C" {
