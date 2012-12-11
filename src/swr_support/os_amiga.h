@@ -22,8 +22,8 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  * OTHER DEALINGS IN THE SOFTWARE.
  */
-#ifndef _SWR2_OS_AMIGA_H_
-#define _SWR2_OS_AMIGA_H_
+#ifndef _SWRIP_OS_AMIGA_H_
+#define _SWRIP_OS_AMIGA_H_
 
 #if defined __cplusplus
 extern "C" {
@@ -38,7 +38,7 @@ extern "C" {
 #include <proto/socket.h>
 
 typedef long socklen_t;
-typedef long SOCKET;
+typedef long socket_t;
 typedef long ssize_t;
 
 #define INVALID_SOCKET -1

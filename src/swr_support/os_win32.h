@@ -23,8 +23,8 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#ifndef _SWR2_OS_WIN32_H_
-#define _SWR2_OS_WIN32_H_
+#ifndef _SWRIP_OS_WIN32_H_
+#define _SWRIP_OS_WIN32_H_
 
 #include <io.h>
 #include <winsock2.h>
