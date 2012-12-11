@@ -42,13 +42,13 @@
 const   struct  race_type       race_table      [MAX_RACE]      =
   {
     /*  race name          DEF_AFF      st dx ws in cn ch lk fc hp mn re su     RESTRICTION  LANGUAGE */
-    //Firrieron, Barabel, Bothan, Togorian, Dug, Kubaz, Selonian, Gran, Yevetha, (Ooryl) Gand, Duros, Coynite.
+    /* Firrieron, Barabel, Bothan, Togorian, Dug, Kubaz, Selonian, Gran, Yevetha, (Ooryl) Gand, Duros, Coynite.*/
     {
       "Human",  0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,           LANG_COMMON
-    },//nada
+    },/* nada */
     {
       "Wookiee",        0,      4,      -1,     -3,     0,      2,      -2,     0,      0,      +30,    0,      0,      0,      0,          LANG_WOOKIEE
-    },//+cmbt
+    },/* +cmbt */
     {
       "Twi'lek",        0,      0,      2,      2,      2,      -1,     -1,     0,      0,      0,      0,      0,      0,      0,  LANG_TWI_LEK
     },
@@ -57,10 +57,10 @@ const   struct  race_type       race_table      [MAX_RACE]      =
     },
     {
       "Hutt",   0,      5,      -9,     3,      4,      5,      -10,    0,      0,      +700,   0, (RIS_SLEEP+RIS_POISON+RIS_PARALYSIS+RIS_ENERGY), 0,       0,     LANG_HUTT
-    },//--cmbt, -smg, -80bh, ++lead
+    },/* --cmbt, -smg, -80bh, ++lead */
     {
       "Mon Calamari",   AFF_AQUA_BREATH,        1,      -1,     2,      4,      0,      0,      0,      0,      +20,    0, 0, 0,         0,    LANG_MON_CALAMARI
-    },//-cmbt
+    },/* -cmbt */
     {
       "Shistavanen",    AFF_SNEAK,      +3,     +4,     -1,     0,      -2,     -4,     0,      0,      +20,    0, 0, RIS_NONMAGIC+RIS_POISON,  0, LANG_SHISTAVANEN
     },
@@ -78,13 +78,13 @@ const   struct  race_type       race_table      [MAX_RACE]      =
     },
     {
       "Verpine",        0,      0,      0,      +1,     +5,     -1,     0,      0,      0,      0,      0,      0,      0,      0,           LANG_VERPINE
-    },//-cmbt
+    },/* -cmbt */
     {
       "Defel",  AFF_HIDE+AFF_SNEAK,+1,  +3,     -3,     -3,     +1,     0,      0,      0,      +15,    0,      0, 0,   0,           LANG_DEFEL
     },
     {
       "Trandoshan",     AFF_INFRARED,   +3,     -1,     0,      0,      +6,     -1,     0,      0,      +35,    0,      0, 0,   0,           LANG_TRANDOSHAN
-    },//-cmbt(possible)
+    },/* -cmbt(possible) */
     {
       "Chadra-Fan",     AFF_INFRARED,   -3,     +3,     0,      +2,     -1,     0,      0,      0,      -85,    0,      0, 0,   0,           LANG_CHADRA_FAN
     },
@@ -99,7 +99,7 @@ const   struct  race_type       race_table      [MAX_RACE]      =
     },
     {
       "Ithorian",       0,       +5,    +3,     +3,     0,      0,      -4,     0,      0,      -30,    0,      0, 0,   0,           LANG_ITHORIAN
-    },//---cmbt
+    },/* ---cmbt */
     {
       "Devaronian",     0,       +1,    +3,     1,      -1,     -1,     -3,     0,      0,      0,      0,      0,      0,      0,           LANG_DEVARONIAN
     },
@@ -109,62 +109,62 @@ const   struct  race_type       race_table      [MAX_RACE]      =
     {
       "Droid",           AFF_AQUA_BREATH+AFF_INFRARED,          0, -2, +1, +4, -4, +1, 0, 0, 0, 0, 0, RIS_SLEEP+RIS_ELECTRICITY,        0,           LANG_BINARY
     },
-    //"Firrerreo", "Barabel", "Bothan", "Togorian", "Dug", "Kubaz", "Selonian", "Gran", "Yevetha", "Gand", "Duros", "Coynite",
+    /* "Firrerreo", "Barabel", "Bothan", "Togorian", "Dug", "Kubaz", "Selonian", "Gran", "Yevetha", "Gand", "Duros", "Coynite", */
     {
       "Firrerreo",      AFF_AQUA_BREATH,        +1,     -2,     0,      0,      +2,     +3,     0,      0,      +40,    +1000, RIS_FIRE, 0,     0,           LANG_FIRRERREO
     },/*-dip/lead, +1500 mana, no force levels, leave on so that if a forcer does come they have large
         ammounts of mana, but no real force boost*/
     {
       "Barabel",                0,      +5,     -1,     -1,     1,      +5,     -4,     0,      0,      +220,   0, 0, 0,        0,           LANG_BARABEL
-    },//++cmbt, -dip/lead
+    },/* ++cmbt, -dip/lead */
     {
       "Bothan", AFF_SNEAK|AFF_SCRYING,  0,      +3,     -3,     +4,     -4,     +4,     0,      0,      0,      0,      0,      0,      0,           LANG_BOTHAN + LANG_COMMON
-    },//++lead/dip, -eng
+    },/* ++lead/dip, -eng */
     {
       "Togorian",       AFF_DETECT_HIDDEN|AFF_SNEAK,    +4,     +4,     0,      0,      -2,     -11,    0,      0,      +40,    0,      0, 0,   0,           LANG_TOGORIAN
-    },//++cmbt,+bh
+    },/* ++cmbt,+bh */
     {
       "Dug",    AFF_SNEAK,      -2,     +5,     -1,     0,      -1,     -2,     0,      0,      -15,    0,      0,      0,      0,           LANG_HUTT
-    },//+cmbt
+    },/* +cmbt */
     {
       "Kubaz",  AFF_SCRYING,    0,      +3,     -1,     +3,     0,      -2,     0,      0,      0,      0,      0,      0,      0,           LANG_KUBAZ
-    },//++lead,+dip,-pil
+    },/* ++lead,+dip,-pil */
     {
       "Selonian",       0,      +2,     +2,     -5,     -2,     +3,     -1,     0,      0,      +35,    0,      0,      0,      0,           LANG_COMMON
-    },//+combat,--lead/dip/pil
+    },/* +combat,--lead/dip/pil */
     {
       "Gran",   AFF_INFRARED,   +2,     0,      0,      -3,     +3,     -5,     0,      0,      0,      0,      RIS_POISON,     (RIS_SLEEP+RIS_PARALYSIS),      0,           LANG_HUTT
-    },//+bh
+    },/* +bh */
     {
       "Yevetha",        0,      +3,     +1,     -3,     +2,     +2,     -8,     0,      0,      +45,    0,      RIS_POISON+RIS_COLD,    0,      0,           LANG_YEVETHAN
-    },//++combat,+lead/eng,--dip
+    },/* ++combat,+lead/eng,--dip */
     {
       "Gand",   AFF_AQUA_BREATH,        +1,     -3,     +5,     0,      +1,     -2,     0,      0,      0,      0,      0,      0,      0,           LANG_GAND
-    },//+lead/pilot
+    },/* +lead/pilot */
     {
       "Duros",  0,      -1,     +2,     +4,     +2,     -1,     -1,     0,      0,      0,      0,      0,      0,      0,           LANG_DUROS
-    },//++engineer/pilot,--combat, -lead
+    },/* ++engineer/pilot,--combat, -lead */
     {
       "Coynite",        AFF_SNEAK,      +4,     +2,     +1,     0,      +1,     -3,     0,      0,      +30,    0,      0,      0,      0,           LANG_COYNITE
-    },//++combat/lead, +bh, -piloting/dip
+    },/* ++combat/lead, +bh, -piloting/dip */
     {
       "Protocal Droid", AFF_AQUA_BREATH+AFF_INFRARED,   -5,     -5,     +5,     +5,     0,      +5,     0,      0,      0,      0,      0,      RIS_SLEEP+RIS_ELECTRICITY,      0,           LANG_BINARY
-    },//(+)dip
+    },/* (+)dip */
     {
       "Assassin Droid", AFF_AQUA_BREATH+AFF_INFRARED,   +4,     +3,     -15,    +1,     +2,     -9,     0,      0,      100,    0,      0,      0,      0,           LANG_BINARY
-    },//++BH,++combat
+    },/* ++BH,++combat */
     {
       "Gladiator Droid",        AFF_AQUA_BREATH+AFF_INFRARED,   +5,     +3,     -9,     -6,     +4,     -9,     0,      0,      150,    0,      RIS_NONMAGIC,   RIS_SLEEP+RIS_ELECTRICITY,      0,           LANG_BINARY
-    },//(+)combat
+    },/* (+)combat */
     {
       "Astromech",      AFF_AQUA_BREATH+AFF_INFRARED,   0,      -5,     -6,     +5,     -6,     0,      0,      0,      0,      0,      0,      RIS_SLEEP+RIS_ELECTRICITY,      0,           LANG_BINARY
-    },//(+)pil
+    },/* (+)pil */
     {
       "Interrogation Droid",    AFF_AQUA_BREATH+AFF_INFRARED+AFF_FLYING+AFF_FLOATING,   0,      +4,     -9,     +5,     +1,     -5,     0,      0,      0,      0,      0,      RIS_SLEEP+RIS_ELECTRICITY,      0,           LANG_BINARY
-    },//(+)lead
+    },/* (+)lead */
     {
       "God",    AFF_AQUA_BREATH+AFF_INFRARED+AFF_FLYING+AFF_FLOATING,   +5,     +5,     +5,     +5,     +5,     +5,     +5,     +5,     2000,   5000,   0,      RIS_SLEEP+RIS_ELECTRICITY,      0,           LANG_COMMON
-    }//(+)lead
+    }/* (+)lead */
     /*  race name          DEF_AFF      st dx ws in cn ch lk fc hp mn re su     RESTRICTION  LANGUAGE */
 
   };

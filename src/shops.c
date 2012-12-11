@@ -21,6 +21,14 @@
  *                       Shop and repair shop module                       *
  ****************************************************************************/
 
+#ifdef __STRICT_ANSI__
+/* To include the prototype for fchmod() */
+#define _BSD_SOURCE
+
+/* To include the prototype for fileno() */
+#define _POSIX_SOURCE
+#endif
+
 #include <sys/types.h>
 #include <stdio.h>
 #include <string.h>
@@ -386,7 +394,7 @@ void do_buy( CHAR_DATA *ch, char *argument )
       ch->gold  -= maxgold;
       boost_economy( ch->in_room->area, maxgold );
       pet               = create_mobile( pet->pIndexData );
-      //        SET_BIT(ch->act, PLR_BOUGHT_PET);
+      /* SET_BIT(ch->act, PLR_BOUGHT_PET); */
       SET_BIT(pet->act, ACT_PET);
       SET_BIT(pet->affected_by, AFF_CHARM);
 

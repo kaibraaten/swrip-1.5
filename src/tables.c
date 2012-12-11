@@ -825,7 +825,7 @@ DO_FUN *skill_function( const char *name )
   return fun_ptr;
 }
 
-#endif // SWRIP_USE_DLSYM
+#endif /* SWRIP_USE_DLSYM */
 
 /*
  * Function used by qsort to sort skills

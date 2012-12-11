@@ -21,6 +21,11 @@
  *                       Command interpretation module                     *
  ****************************************************************************/
 
+#ifdef __STRICT_ANSI__
+/* To include the prototype for strdup() */
+#define _BSD_SOURCE
+#endif
+
 #include <sys/types.h>
 #include <sys/time.h>
 #include <ctype.h>

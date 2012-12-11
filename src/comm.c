@@ -21,6 +21,11 @@
  *                       Low-level communication module                    *
  ****************************************************************************/
 
+#ifdef __STRICT_ANSI__
+/* To include the prototype for gethostname() */
+#define _BSD_SOURCE
+#endif
+
 #include <sys/types.h>
 #include <sys/time.h>
 #include <sys/stat.h>

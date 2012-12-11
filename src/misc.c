@@ -2738,7 +2738,7 @@ void do_hail( CHAR_DATA *ch , char *argument )
   char_to_room( ch, room );
 
   ch_printf( ch, "A speederbike picks you up and drives you to a safe location.\r\nYou pay the driver %d credits.\r\n", gold );
-  //  send_to_char( "A speederbike picks you up and drives you to a safe location.\r\nYou pay the driver 20 credits.\r\n\n\n" , ch );
+
   act( AT_ACTION, "$n $T", ch, NULL, "arrives on a speederbike, gets off and pays the driver before it leaves.",  TO_ROOM );
 
   if( steal )

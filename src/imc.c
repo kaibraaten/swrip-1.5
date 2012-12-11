@@ -8,6 +8,11 @@
  * License terms are available in the imc2freedom.license file.
  */
 
+#ifdef __STRICT_ANSI__
+/* To include the prototype for various non-ANSI C functions */
+#define _BSD_SOURCE
+#endif
+
 #include <stdarg.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -204,7 +209,7 @@ int imcwait;   /* Reconnect timer */
 int imcconnect_attempts;   /* How many times have we tried to reconnect? */
 unsigned long imc_sequencenumber;   /* sequence# for outgoing packets */
 bool imcpacketdebug = FALSE;
-bool default_packets_registered = FALSE; // Cheesy global for a stupid problem!
+bool default_packets_registered = FALSE; /* Cheesy global for a stupid problem!*/
 time_t imcucache_clock; /* prune ucache stuff regularly */
 time_t imc_time;  /* Current clock time for the client */
 
@@ -1879,7 +1884,7 @@ static void imc_display_channel( IMC_CHANNEL * c, const char *from, char *txt, i
       if( IMCPERM( ch ) < c->level || !imc_hasname( IMC_LISTEN( ch ), c->local_name ) )
          continue;
 
-      // User is ignoring the sender
+      /* User is ignoring the sender */
       if( imc_isignoring( ch, from ) )
          continue;
 
@@ -3285,7 +3290,7 @@ static bool imc_read_socket( void )
    {
       int nRead;
 
-      if( ++loop_count > 100 ) // Yay hackish error traps! 100 loops likely means she's stuck. Break out with whatever is there.
+      if( ++loop_count > 100 ) /* Yay hackish error traps! 100 loops likely means she's stuck. Break out with whatever is there. */
          break;
 
       nRead = recv( this_imcmud->desc, this_imcmud->inbuf + iStart, sizeof( this_imcmud->inbuf ) - 10 - iStart, 0 );
@@ -7326,7 +7331,7 @@ static const char *imc_find_social( CHAR_DATA * ch, const char *sname, const cha
    static char lcSocName[LGST];
    socname[0] = '\0';
 
-   // lower-case the social name before asking the MUD
+   /* lower-case the social name before asking the MUD */
    for (i = 0; i < LGST && sname[i] != '\0'; i++) {
      lcSocName[i] = tolower( (int) sname[i]);
    }

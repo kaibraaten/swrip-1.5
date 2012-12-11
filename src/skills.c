@@ -4306,7 +4306,7 @@ void do_skin( CHAR_DATA *ch, char *argument)
   act( AT_BLOOD, "$n strips the skin from $p.", ch, corpse, NULL, TO_ROOM);
   act( AT_BLOOD, "You strip the skin from $p.", ch, corpse, NULL, TO_CHAR);
   korps = corpse;
-  //  korps               = create_object( get_obj_index(OBJ_VNUM_CORPSE_PC), 0 );
+  /*  korps               = create_object( get_obj_index(OBJ_VNUM_CORPSE_PC), 0 );*/
   skin                = create_object( get_obj_index(OBJ_VNUM_SKIN), 0 );
   name                = IS_NPC(ch) ? korps->short_descr : corpse->short_descr;
   sprintf( buf, skin->short_descr, name );

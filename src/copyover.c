@@ -22,6 +22,11 @@
  ****************************************************************************/
 /* Origional Copyover Code by Erwin S. Andreasen http://www.andreasen.org/ */
 
+#ifdef __STRICT_ANSI__
+/* To include the prototype for snprintf() */
+#define _BSD_SOURCE
+#endif
+
 #include <ctype.h>
 #include <errno.h>
 #include <stdio.h>

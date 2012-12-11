@@ -274,45 +274,45 @@ bool spec_jedi( CHAR_DATA *ch )
   switch ( number_bits( 3 ) )
     {
     case 0:
-      //    act( AT_MAGIC, "$n utters the word 'ciroht'.", ch, NULL, NULL, TO_ROOM );
+      /*    act( AT_MAGIC, "$n utters the word 'ciroht'.", ch, NULL, NULL, TO_ROOM ); */
       spell_smaug( skill_lookup( "armor" ), ch->top_level, ch, victim );
       return TRUE;
 
     case 1:
-      //    act( AT_MAGIC, "$n utters the word 'sunimod'.", ch, NULL, NULL, TO_ROOM );
+      /*    act( AT_MAGIC, "$n utters the word 'sunimod'.", ch, NULL, NULL, TO_ROOM );*/
       spell_smaug( skill_lookup( "alertness" ), ch->top_level, ch, victim );
       return TRUE;
 
     case 2:
-      //    act( AT_MAGIC, "$n utters the word 'suah'.", ch, NULL, NULL, TO_ROOM );
+      /*    act( AT_MAGIC, "$n utters the word 'suah'.", ch, NULL, NULL, TO_ROOM );*/
       spell_cure_blindness( skill_lookup( "cure blindness" ),
                             ch->top_level, ch, victim );
       return TRUE;
 
     case 3:
-      //    act( AT_MAGIC, "$n utters the word 'nran'.", ch, NULL, NULL, TO_ROOM );
+      /*    act( AT_MAGIC, "$n utters the word 'nran'.", ch, NULL, NULL, TO_ROOM );*/
       spell_smaug( skill_lookup( "cure light" ),
                    ch->top_level, ch, victim );
       return TRUE;
 
     case 4:
-      //    act( AT_MAGIC, "$n utters the word 'nyrcs'.", ch, NULL, NULL, TO_ROOM );
+      /*    act( AT_MAGIC, "$n utters the word 'nyrcs'.", ch, NULL, NULL, TO_ROOM );*/
       spell_cure_poison( skill_lookup( "cure poison" ),
                          ch->top_level, ch, victim );
       return TRUE;
 
     case 5:
-      //    act( AT_MAGIC, "$n utters the word 'gartla'.", ch, NULL, NULL, TO_ROOM );
+      /*    act( AT_MAGIC, "$n utters the word 'gartla'.", ch, NULL, NULL, TO_ROOM );*/
       spell_smaug( skill_lookup( "refresh" ), ch->top_level, ch, victim );
       return TRUE;
 
     case 6:
-      //    act( AT_MAGIC, "$n utters the word 'naimad'.", ch, NULL, NULL, TO_ROOM );
+      /*    act( AT_MAGIC, "$n utters the word 'naimad'.", ch, NULL, NULL, TO_ROOM );*/
       spell_smaug( skill_lookup( "cure serious" ), ch->top_level, ch, victim );
       return TRUE;
 
     case 7:
-      //    act( AT_MAGIC, "$n utters the word 'gorog'.", ch, NULL, NULL, TO_ROOM );
+      /*    act( AT_MAGIC, "$n utters the word 'gorog'.", ch, NULL, NULL, TO_ROOM );*/
       spell_smaug( skill_lookup( "beauty" ), ch->top_level, ch, victim );
       return TRUE;
 

@@ -184,7 +184,7 @@ void map_exits( CHAR_DATA *ch, ROOM_INDEX_DATA *pRoom,
       map[exitx][exity].depth = depth;
       map[exitx][exity].vnum = pExit->to_room->vnum;
       map[exitx][exity].info = pExit->exit_info;
-      //      sprintf( buf, "%c", map_chars[door] );
+      /* sprintf( buf, "%c", map_chars[door] ); */
       map[exitx][exity].mapch = map_chars[door];
 
       /* Place Marker 1 - referred to later */
@@ -324,9 +324,9 @@ int get_line( char *desc, int max_len )
     int x, y;
     static char buf[MAX_STRING_LENGTH];
     OBJ_DATA *device;
-    //sprintf( buf, desc );
+    /* sprintf( buf, desc ); */
     /* Remove undesirable characters */
-    //reformat_desc( buf );
+    /* reformat_desc( buf ); */
 
     if ( ( device = get_eq_char( ch, WEAR_HOLD ) ) == NULL )
       {
@@ -375,7 +375,7 @@ int get_line( char *desc, int max_len )
     map_exits( ch, ch->in_room, x, y, 0 );
 
     /* Current position should be a "X" */
-    //  sprintf( buf2, "%c", 'X' );
+    /* sprintf( buf2, "%c", 'X' ); */
     map[x][y].mapch = 'X';
     /* Send the map */
     show_map( ch, buf );

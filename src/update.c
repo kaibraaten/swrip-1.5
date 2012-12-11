@@ -133,7 +133,7 @@ int max_level( CHAR_DATA *ch, int ability)
       if ( ch->main_ability == COMMANDO_ABILITY ) level = 50;
       if ( ch->race == RACE_SHISTAVANEN) level += 35;
       if ( ch->race == RACE_WOOKIEE ) level += 31;
-      //     if ( ch->race == RACE_NOGHRI ) level += 50;
+      /* if ( ch->race == RACE_NOGHRI ) level += 50; */
       if ( ch->race == RACE_GAMORREAN ) level += 30;
       if ( ch->race == RACE_DEFEL ) level += 25;
       if ( ch->race == RACE_TRANDOSHAN ) level += 20;
@@ -307,7 +307,7 @@ int max_level( CHAR_DATA *ch, int ability)
       if ( ch->race == RACE_RODIAN ) level -= 20;
       if ( ch->race == RACE_HUTT ) level += 85;
       if ( ch->race == RACE_MON_CALAMARI ) level += 10;
-      //     if ( ch->race == RACE_NOGHRI ) level -= 50;
+      /* if ( ch->race == RACE_NOGHRI ) level -= 50; */
       if ( ch->race == RACE_GAMORREAN ) level -= 10;
       if ( ch->race == RACE_JAWA ) level -= 10;
       if ( ch->race == RACE_ADARIAN ) level += 40;
@@ -631,7 +631,6 @@ void gain_condition( CHAR_DATA *ch, int iCond, int value )
             {
               set_char_color( AT_HUNGRY, ch );
               send_to_char( "You are STARVING!\r\n",  ch );
-              //          act( AT_HUNGRY, "$n is starved half to death!", ch, NULL, NULL, TO_ROOM);
               worsen_mental_state( ch, 1 );
               retcode = damage(ch, ch, 5, TYPE_UNDEFINED);
             }
@@ -642,7 +641,6 @@ void gain_condition( CHAR_DATA *ch, int iCond, int value )
             {
               set_char_color( AT_THIRSTY, ch );
               send_to_char( "You are DYING of THIRST!\r\n", ch );
-              //          act( AT_THIRSTY, "$n is dying of thirst!", ch, NULL, NULL, TO_ROOM);
               worsen_mental_state( ch, 2 );
               retcode = damage(ch, ch, 5, TYPE_UNDEFINED);
             }
@@ -674,7 +672,7 @@ void gain_condition( CHAR_DATA *ch, int iCond, int value )
             {
               set_char_color( AT_HUNGRY, ch );
               send_to_char( "You are really hungry.\r\n",  ch );
-              //          act( AT_HUNGRY, "You can hear $n's stomach growling.", ch, NULL, NULL, TO_ROOM);
+
               if ( number_bits(1) == 0 )
                 worsen_mental_state( ch, 1 );
             }
@@ -686,7 +684,6 @@ void gain_condition( CHAR_DATA *ch, int iCond, int value )
               set_char_color( AT_THIRSTY, ch );
               send_to_char( "You are really thirsty.\r\n", ch );
               worsen_mental_state( ch, 1 );
-              //          act( AT_THIRSTY, "$n looks a little parched.", ch, NULL, NULL, TO_ROOM);
             }
           break;
 
@@ -1249,7 +1246,6 @@ void char_update( void )
   CHAR_DATA *ch;
   CHAR_DATA *ch_save;
   short save_count = 0;
-  //  struct tm *tms;
 
   ch_save       = NULL;
   for ( ch = last_char; ch; ch = gch_prev )
@@ -2156,9 +2152,6 @@ void drunk_randoms( CHAR_DATA *ch )
                &&   number_percent() < ( 2 * drunk / 18 ) )
             {
 	      char name[MAX_STRING_LENGTH];
-
-	      //char puke[5];
-	      //sprintf(puke, "%s", "puke");
 
               for ( vch = ch->in_room->first_person; vch; vch = vch->next_in_room )
 		{

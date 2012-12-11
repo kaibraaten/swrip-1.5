@@ -21,6 +21,14 @@
  *                   Character saving and loading module                   *
  ****************************************************************************/
 
+#ifdef __STRICT_ANSI__
+/* To include the prototype for fchmod() */
+#define _BSD_SOURCE
+
+/* To include the prototype for fileno() */
+#define _POSIX_SOURCE
+#endif
+
 #include <sys/types.h>
 #include <ctype.h>
 #include <stdio.h>
@@ -1970,8 +1978,8 @@ void fread_obj( CHAR_DATA *ch, FILE *fp, short os_type )
               x1=x2=x3=x4=x5=x6=0;
               sscanf( ln, "%d %d %d %d %d %d", &x1, &x2, &x3, &x4, &x5, &x6 );
               /* clean up some garbage */
-              //                if ( file_ver < 3 )
-              //                   x5=x6=0;
+              /*                if ( file_ver < 3 )
+				x5=x6=0; */
 
               obj->value[0]     = x1;
               obj->value[1]     = x2;

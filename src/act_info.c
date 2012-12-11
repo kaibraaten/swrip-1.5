@@ -72,7 +72,7 @@ bool    check_blind( CHAR_DATA *ch );
 void    show_condition( CHAR_DATA *ch, CHAR_DATA *victim );
 int     get_race_from_name( char *arg );
 int     get_class_from_name( char *arg );
-//Similar Helpfile Snippet Declarations
+/* Similar Helpfile Snippet Declarations */
 short str_similarity( const char *astr, const char *bstr );
 short str_prefix_level( const char *astr, const char *bstr );
 void similar_help_files(CHAR_DATA *ch, char *argument);
@@ -1049,7 +1049,6 @@ void do_look ( CHAR_DATA *ch, char *argument )
               }
             else if (ship->spaceobject )
               {
-                //                 MISSILE_DATA *missile;
                 SHIP_DATA *target;
 
                 set_char_color(  AT_GREEN, ch );
@@ -1977,8 +1976,8 @@ HELP_DATA *get_help( CHAR_DATA *ch, char *argument )
 }
 
 
-//  Ranks by number of matches between two whole words. Coded for the Similar Helpfiles
-//  Snippet by Senir.
+/*  Ranks by number of matches between two whole words. Coded for the Similar Helpfiles
+    Snippet by Senir. */
 short str_similarity( const char *astr, const char *bstr )
 {
   short matches=0;
@@ -1998,8 +1997,8 @@ short str_similarity( const char *astr, const char *bstr )
   return matches;
 }
 
-//  Ranks by number of matches until there's a nonmatching character between two words.
-//  Coded for the Similar Helpfiles Snippet by Senir.
+/* Ranks by number of matches until there's a nonmatching character between two words.
+   Coded for the Similar Helpfiles Snippet by Senir. */
 short str_prefix_level( const char *astr, const char *bstr )
 {
   short matches=0;
@@ -2021,11 +2020,12 @@ short str_prefix_level( const char *astr, const char *bstr )
   return matches;
 }
 
-// Main function of Similar Helpfiles Snippet by Senir. It loops through all of the
-// helpfiles, using the string matching function defined to find the closest matching
-// helpfiles to the argument. It then checks for singles. Then, if matching helpfiles
-// are found at all, it loops through and prints out the closest matching helpfiles.
-// If its a single(there's only one), it opens the helpfile.
+/* Main function of Similar Helpfiles Snippet by Senir. It loops through all of the
+ helpfiles, using the string matching function defined to find the closest matching
+ helpfiles to the argument. It then checks for singles. Then, if matching helpfiles
+ are found at all, it loops through and prints out the closest matching helpfiles.
+ If its a single(there's only one), it opens the helpfile.*/
+
 void similar_help_files(CHAR_DATA *ch, char *argument)
 {
   HELP_DATA *pHelp=NULL;
@@ -2033,16 +2033,7 @@ void similar_help_files(CHAR_DATA *ch, char *argument)
   char *extension;
   short lvl=0;
   bool single=FALSE;
-  // char *argnew;
 
-  /*
-    if ( isdigit(argument[0]) && (index(argument, '.')))
-    {
-    number_argument( argument, argnew );
-    argument = argnew;
-    }
-
-  */
   send_to_pager_color( "&C&BSimilar Help Files:\r\n", ch);
 
   for ( pHelp = first_help; pHelp; pHelp=pHelp->next)
@@ -2120,8 +2111,8 @@ void do_help( CHAR_DATA *ch, char *argument )
 
   if ( (pHelp = get_help( ch, argument )) == NULL )
     {
-      //  Looks better printing out the missed argument before going to similar
-      //  helpfiles. - Senir
+      /* Looks better printing out the missed argument before going to similar
+	 helpfiles. - Senir */
       pager_printf( ch, "&C&wNo help on \'%s\' found.\r\n", argument );
       similar_help_files(ch, argument);
       return;
@@ -2177,16 +2168,7 @@ void do_hedit( CHAR_DATA *ch, char *argument )
     }
   if ( (pHelp = get_help( ch, argument )) == NULL )     /* new help */
     {
-      //        char argnew[MAX_INPUT_LENGTH];
-      int lev;
-
-      /*        if ( isdigit(argument[0]) )
-                {
-                lev = number_argument( argument, argnew );
-                argument = argnew;
-                }
-                else
-      */            lev = get_trust(ch);
+      int lev = get_trust(ch);
       CREATE( pHelp, HELP_DATA, 1 );
       pHelp->keyword = STRALLOC( strupper(argument) );
       pHelp->text    = STRALLOC( "" );

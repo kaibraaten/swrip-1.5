@@ -2981,7 +2981,7 @@ void log_string_plus( const char *str, short log_type, short level )
     case LOG_ALL:
       break;
     default:
-      //          to_channel( str + offset, CHANNEL_LOG, "Log", level );
+      /* to_channel( str + offset, CHANNEL_LOG, "Log", level ); */
       lognone = TRUE;
       break;
     }

@@ -7937,9 +7937,6 @@ void do_rdelete( CHAR_DATA *ch, char *argument )
 
   argument = one_argument( argument, arg );
 
-  /* Temporarily disable this command. */
-  //return;
-
   if ( arg[0] == '\0' )
     {
       send_to_char( "Delete which room?\r\n", ch );

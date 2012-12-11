@@ -5746,7 +5746,6 @@ void do_makedisguise( CHAR_DATA *ch, char *argument )
   OBJ_DATA *obj;
   OBJ_INDEX_DATA *pObjIndex;
   int vnum, sex, race;
-  //  AFFECT_DATA *paf;
 
   strcpy( arg, argument );
 
@@ -5805,12 +5804,6 @@ void do_makedisguise( CHAR_DATA *ch, char *argument )
           send_to_char( "&RYou need something to make it out of.\r\n", ch);
           return;
         }
-
-      //                if ( !checkhair )
-      //                {
-      //                   send_to_char( "&RYou need a power source for your blaster.\r\n", ch);
-      //                   return;
-      //                }
 
       sprintf( sexrace, "%d", (sex*1000) + race );
       the_chance = IS_NPC(ch) ? ch->top_level
@@ -5890,8 +5883,6 @@ void do_makedisguise( CHAR_DATA *ch, char *argument )
 
   if ( number_percent( ) > the_chance*2  || ( !checkneedle ) || ( !checkfabric ) )
     {
-      //     send_to_char( "&RYou hold up your new blaster and aim at a leftover piece of plastic.\r\n", ch);
-      //     send_to_char( "&RYou slowly squeeze the trigger hoping for the best...\r\n", ch);
       send_to_char( "&RYour blaster backfires destroying your weapon and burning your hand.\r\n", ch);
       learn_from_failure( ch, gsn_disguise );
       return;

@@ -1581,7 +1581,7 @@ ch_ret damage( CHAR_DATA *ch, CHAR_DATA *victim, int dam, int dt )
       OBJ_DATA *obj_next;
       int cnt=0;
 
-      //     REMOVE_BIT( victim->act, PLR_ATTACKER ); Removed to add PLR_DONTAUTOFUEL
+      /* REMOVE_BIT( victim->act, PLR_ATTACKER ); Removed to add PLR_DONTAUTOFUEL */
 
       stop_fighting( victim, TRUE );
 

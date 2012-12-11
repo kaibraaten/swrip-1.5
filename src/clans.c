@@ -1574,7 +1574,6 @@ void do_planets( CHAR_DATA *ch, char *argument )
             pager_printf( ch , "%s,  ", area->filename );
           pager_printf( ch, "\r\n" );
         }
-      //        pager_printf( ch, "\r\n" );
 
       count++;
     }
