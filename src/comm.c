@@ -26,30 +26,17 @@
 #define _BSD_SOURCE
 #endif
 
-#include <sys/types.h>
-#include <sys/time.h>
-#include <sys/stat.h>
 #include <ctype.h>
-#include <errno.h>
 #include <stdio.h>
 #include <time.h>
 #include <string.h>
-#include <fcntl.h>
-#include <signal.h>
 #include <stdarg.h>
 #include "mud.h"
 
 /*
  * Socket and TCP/IP stuff.
  */
-#include <unistd.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <netinet/in_systm.h>
-#include <netinet/ip.h>
-#include <arpa/inet.h>
 #include <arpa/telnet.h>
-#include <netdb.h>
 
 static const char go_ahead_str    [] = { (const char)IAC, (const char)GA, '\0' };
 
@@ -78,8 +65,8 @@ struct tm           new_boot_struct;
 char                str_boot_time[MAX_INPUT_LENGTH];
 char                lastplayercmd[MAX_INPUT_LENGTH*2];
 time_t              current_time = 0;       /* Time of this pulse           */
-int                 control = 0;            /* Controlling descriptor       */
-int                 newdesc = 0;            /* New descriptor               */
+socket_t            control = 0;            /* Controlling descriptor       */
+socket_t            newdesc = 0;            /* New descriptor               */
 fd_set              in_set;             /* Set of desc's for reading    */
 fd_set              out_set;            /* Set of desc's for writing    */
 fd_set              exc_set;            /* Set of desc's with errors    */
@@ -88,28 +75,28 @@ int                 maxdesc = 0;
 /*
  * OS-dependent local functions.
  */
-void    game_loop( void );
-int     init_socket( int port );
-void    new_descriptor( int new_desc );
-bool    read_from_descriptor( DESCRIPTOR_DATA *d );
+void game_loop( void );
+socket_t init_socket( short port );
+void new_descriptor( socket_t new_desc );
+bool read_from_descriptor( DESCRIPTOR_DATA *d );
 
 /*
  * Other local functions (OS-independent).
  */
-bool    check_parse_name( char *name );
-bool    check_reconnect( DESCRIPTOR_DATA *d, char *name, bool fConn );
-bool    check_playing( DESCRIPTOR_DATA *d, char *name, bool kick );
-bool    check_multi( DESCRIPTOR_DATA *d, char *name );
-int     main( int argc, char **argv );
-void    nanny( DESCRIPTOR_DATA *d, char *argument );
-bool    flush_buffer( DESCRIPTOR_DATA *d, bool fPrompt );
-void    read_from_buffer( DESCRIPTOR_DATA *d );
-void    stop_idling( CHAR_DATA *ch );
-void    free_desc( DESCRIPTOR_DATA *d );
-void    display_prompt( DESCRIPTOR_DATA *d );
-int     make_color_sequence( const char *col, char *buf, DESCRIPTOR_DATA *d );
-void    set_pager_input( DESCRIPTOR_DATA *d, char *argument );
-bool    pager_output( DESCRIPTOR_DATA *d );
+bool check_parse_name( char *name );
+bool check_reconnect( DESCRIPTOR_DATA *d, char *name, bool fConn );
+bool check_playing( DESCRIPTOR_DATA *d, char *name, bool kick );
+bool check_multi( DESCRIPTOR_DATA *d, char *name );
+int main( int argc, char **argv );
+void nanny( DESCRIPTOR_DATA *d, char *argument );
+bool flush_buffer( DESCRIPTOR_DATA *d, bool fPrompt );
+void read_from_buffer( DESCRIPTOR_DATA *d );
+void stop_idling( CHAR_DATA *ch );
+void free_desc( DESCRIPTOR_DATA *d );
+void display_prompt( DESCRIPTOR_DATA *d );
+int make_color_sequence( const char *col, char *buf, DESCRIPTOR_DATA *d );
+void set_pager_input( DESCRIPTOR_DATA *d, char *argument );
+bool pager_output( DESCRIPTOR_DATA *d );
 
 static void execute_on_exit( void )
 {
@@ -271,7 +258,7 @@ int main( int argc, char **argv )
   log_string( log_buf );
   bootup = FALSE;
   game_loop( );
-  close( control  );
+  closesocket( control  );
 #ifdef SWRIP_USE_IMC
   imc_shutdown( FALSE );
 #endif
@@ -283,42 +270,43 @@ int main( int argc, char **argv )
   return 0;
 }
 
-int init_socket( int port )
+socket_t init_socket( short port )
 {
-  char hostname[64];
-  struct sockaddr_in     sa;
-  int x = 1;
-  int fd;
+  struct sockaddr_in sa;
+#ifdef _WIN32
+  const char optval = 1;
+#else
+  int optval = 1;
+#endif
+  socklen_t optlen = sizeof( optval );
+  socket_t fd = 0;
 
-  gethostname(hostname, sizeof(hostname));
-
-
-  if ( ( fd = socket( AF_INET, SOCK_STREAM, 0 ) ) < 0 )
+  if ( ( fd = socket( PF_INET, SOCK_STREAM, IPPROTO_TCP ) ) == INVALID_SOCKET )
     {
       perror( "Init_socket: socket" );
       exit( 1 );
     }
 
   if ( setsockopt( fd, SOL_SOCKET, SO_REUSEADDR,
-                   (void *) &x, sizeof(x) ) < 0 )
+                   &optval, optlen ) == SOCKET_ERROR )
     {
       perror( "Init_socket: SO_REUSEADDR" );
-      close( fd );
+      closesocket( fd );
       exit( 1 );
     }
 
-#if defined(SO_DONTLINGER) && !defined(SYSV)
+#if defined(SO_DONTLINGER) && !defined(SYSV) && !defined(__sun__)
   {
-    struct      linger  ld;
+    struct linger ld;
 
     ld.l_onoff  = 1;
     ld.l_linger = 1000;
 
     if ( setsockopt( fd, SOL_SOCKET, SO_DONTLINGER,
-                     (void *) &ld, sizeof(ld) ) < 0 )
+                     (void *) &ld, sizeof(ld) ) == SOCKET_ERROR )
       {
         perror( "Init_socket: SO_DONTLINGER" );
-        close( fd );
+        closesocket( fd );
         exit( 1 );
       }
   }
@@ -328,40 +316,22 @@ int init_socket( int port )
   sa.sin_family   = AF_INET; /* hp->h_addrtype; */
   sa.sin_port       = htons( port );
 
-  if ( bind( fd, (struct sockaddr *) &sa, sizeof(sa) ) == -1 )
+  if ( bind( fd, (struct sockaddr *) &sa, sizeof(sa) ) == SOCKET_ERROR )
     {
       perror( "Init_socket: bind" );
-      close( fd );
+      closesocket( fd );
       exit( 1 );
     }
 
-  if ( listen( fd, 50 ) < 0 )
+  if ( listen( fd, 50 ) == SOCKET_ERROR )
     {
       perror( "Init_socket: listen" );
-      close( fd );
+      closesocket( fd );
       exit( 1 );
     }
 
   return fd;
 }
-
-/*
-  static void SegVio()
-  {
-  CHAR_DATA *ch;
-  char buf[MAX_STRING_LENGTH];
-
-  log_string( "SEGMENTATION VIOLATION" );
-  log_string( lastplayercmd );
-  for ( ch = first_char; ch; ch = ch->next )
-  {
-  sprintf( buf, "%cPC: %-20s room: %d", IS_NPC(ch) ? 'N' : ' ',
-  ch->name, ch->in_room->vnum );
-  log_string( buf );
-  }
-  exit(0);
-  }
-*/
 
 /*
  * LAG alarm!                                                   -Thoric
@@ -379,13 +349,13 @@ static void caught_alarm( int dummy )
       log_string( "clearing newdesc" );
     }
   game_loop( );
-  close( control );
+  closesocket( control );
 
   log_string( "Normal termination of game." );
   exit( 0 );
 }
 
-bool check_bad_desc( int desc )
+bool check_bad_desc( socket_t desc )
 {
   if ( FD_ISSET( desc, &exc_set ) )
     {
@@ -398,16 +368,11 @@ bool check_bad_desc( int desc )
 }
 
 
-void accept_new( int ctrl )
+void accept_new( socket_t ctrl )
 {
   static struct timeval null_time;
-  DESCRIPTOR_DATA *d;
-  /* int maxdesc; Moved up for use with id.c as extern */
-
-#if defined(MALLOC_DEBUG)
-  if ( malloc_verify( ) != 1 )
-    abort( );
-#endif
+  DESCRIPTOR_DATA *d = NULL;
+  int result = 0;
 
   /*
    * Poll all active descriptors.
@@ -416,8 +381,9 @@ void accept_new( int ctrl )
   FD_ZERO( &out_set );
   FD_ZERO( &exc_set );
   FD_SET( ctrl, &in_set );
-  maxdesc       = ctrl;
+  maxdesc = ctrl;
   newdesc = 0;
+
   for ( d = first_descriptor; d; d = d->next )
     {
       maxdesc = UMAX( maxdesc, d->descriptor );
@@ -429,7 +395,14 @@ void accept_new( int ctrl )
         break;
     }
 
-  if ( select( maxdesc+1, &in_set, &out_set, &exc_set, &null_time ) < 0 )
+#if defined(AMIGA) || defined(__MORPHOS__)
+  result =
+    WaitSelect( maxdesc + 1, &in_set, &out_set, &exc_set, &null_time, 0 );
+#else
+  result = select( maxdesc + 1, &in_set, &out_set, &exc_set, &null_time );
+#endif
+
+  if( result == SOCKET_ERROR )
     {
       perror( "accept_new: select: poll" );
       exit( 1 );
@@ -656,10 +629,23 @@ void game_loop( )
         if ( secDelta > 0 || ( secDelta == 0 && usecDelta > 0 ) )
           {
             struct timeval stall_time;
-
+	    int result = 0;
+#ifdef _WIN32
+	    fd_set dummy_set;
+	    FD_ZERO( &dummy_set );
+	    FD_SET( control, &dummy_set );
+#endif
             stall_time.tv_usec = usecDelta;
             stall_time.tv_sec  = secDelta;
-            if ( select( 0, NULL, NULL, NULL, &stall_time ) < 0 )
+
+#if defined(AMIGA) || defined(__MORPHOS__)
+	    result = WaitSelect( 0, 0, 0, 0, &stall_time, 0 );
+#elif defined(_WIN32)
+	    result = select( 0, NULL, NULL, &dummy_set, &stall_time );
+#else
+	    result = select( 0, NULL, NULL, NULL, &stall_time );
+#endif
+            if ( result == SOCKET_ERROR )
               {
                 perror( "game_loop: select: stall" );
                 exit( 1 );
@@ -673,7 +659,7 @@ void game_loop( )
   return;
 }
 
-void init_descriptor(DESCRIPTOR_DATA *dnew, int desc)
+void init_descriptor(DESCRIPTOR_DATA *dnew, socket_t desc)
 {
   dnew->next          = NULL;
   dnew->descriptor    = desc;
@@ -683,7 +669,6 @@ void init_descriptor(DESCRIPTOR_DATA *dnew, int desc)
   dnew->lines         = 0;
   dnew->scrlen        = 24;
   /*dnew->port          = ntohs( sock.sin_port );*/
-  dnew->user          = STRALLOC("unknown");
   dnew->newstate      = 0;
   dnew->prevcolor     = 0x07;
   dnew->original      = NULL;
@@ -692,7 +677,7 @@ void init_descriptor(DESCRIPTOR_DATA *dnew, int desc)
   CREATE( dnew->outbuf, char, dnew->outsize );
 }
 
-void new_descriptor( int new_desc )
+void new_descriptor( socket_t new_desc )
 {
   char buf[MAX_STRING_LENGTH];
   DESCRIPTOR_DATA *dnew = NULL;
@@ -700,11 +685,12 @@ void new_descriptor( int new_desc )
   struct hostent  *from;
   char *hostname;
   struct sockaddr_in sock;
-  int desc = 0;
+  socket_t desc = 0;
   socklen_t size = 0;
 
   set_alarm( 20 );
   size = sizeof(sock);
+
   if ( check_bad_desc( new_desc ) )
     {
       set_alarm( 0 );
@@ -713,7 +699,7 @@ void new_descriptor( int new_desc )
 
   set_alarm( 20 );
 
-  if ( ( desc = accept( new_desc, (struct sockaddr *) &sock, &size) ) < 0 )
+  if ( ( desc = accept( new_desc, (struct sockaddr *) &sock, &size) ) == INVALID_SOCKET )
     {
       perror( "New_descriptor: accept");
       /*sprintf(bugbuf, "[*****] BUG: New_descriptor: accept");
@@ -745,7 +731,11 @@ void new_descriptor( int new_desc )
   init_descriptor(dnew, desc);
   dnew->port = ntohs( sock.sin_port );
 
+#if defined(AMIGA) || defined(__MORPHOS__)
+  strcpy( buf, Inet_NtoA( *( ( unsigned long * ) &sock.sin_addr ) ) );
+#else
   strcpy( buf, inet_ntoa( sock.sin_addr ) );
+#endif
   sprintf( log_buf, "Sock.sinaddr:  %s, port %hd.",
            buf, dnew->port );
   log_string_plus( log_buf, LOG_COMM, sysdata.log_level );
@@ -757,6 +747,7 @@ void new_descriptor( int new_desc )
                           sizeof(sock.sin_addr), AF_INET );
   else
     from = NULL;
+
   hostname = STRALLOC( (char *)( from ? from->h_name : "") );
 
   for ( pban = first_ban; pban; pban = pban->next )
@@ -830,15 +821,15 @@ void new_descriptor( int new_desc )
 
 void free_desc( DESCRIPTOR_DATA *d )
 {
-  close( d->descriptor );
+  closesocket( d->descriptor );
   STRFREE( d->host );
   DISPOSE( d->outbuf );
-  STRFREE( d->user );    /* identd */
+
   if ( d->pagebuf )
     DISPOSE( d->pagebuf );
+
   DISPOSE( d );
   --num_descriptors;
-  return;
 }
 
 void close_socket( DESCRIPTOR_DATA *dclose, bool force )
@@ -967,16 +958,13 @@ void close_socket( DESCRIPTOR_DATA *dclose, bool force )
   return;
 }
 
-
 bool read_from_descriptor( DESCRIPTOR_DATA *d )
 {
   size_t iStart;
 
-  /* Hold horses if pending command already. */
   if ( d->incomm[0] != '\0' )
     return TRUE;
 
-  /* Check for overflow. */
   iStart = strlen(d->inbuf);
 
   if ( iStart >= sizeof(d->inbuf) - 10 )
@@ -990,35 +978,44 @@ bool read_from_descriptor( DESCRIPTOR_DATA *d )
 
   for ( ; ; )
     {
-      int nRead;
+#if defined(AMIGA) || defined(__MORPHOS__)
+      ssize_t nRead = recv( d->descriptor, ( UBYTE * ) d->inbuf + iStart,
+                            sizeof( d->inbuf ) - 10 - iStart, 0 );
+#else
+      ssize_t nRead = recv( d->descriptor, d->inbuf + iStart,
+                            sizeof( d->inbuf ) - 10 - iStart, 0 );
+#endif
 
-      nRead = read( d->descriptor, d->inbuf + iStart,
-                    sizeof(d->inbuf) - 10 - iStart );
-      if ( nRead > 0 )
-        {
-          iStart += nRead;
-          if ( d->inbuf[iStart-1] == '\n' || d->inbuf[iStart-1] == '\r' )
-            break;
-        }
-      else if ( nRead == 0 )
+      if ( nRead == 0 )
         {
           log_string_plus( "EOF encountered on read.", LOG_COMM, sysdata.log_level );
           return FALSE;
         }
-      else if ( errno == EWOULDBLOCK )
-        break;
-      else
+
+      if( nRead == SOCKET_ERROR )
         {
-          perror( "Read_from_descriptor" );
-          return FALSE;
+          if( GETERROR == EWOULDBLOCK || GETERROR == EAGAIN )
+            {
+              break;
+            }
+          else
+            {
+              log_string_plus( strerror( GETERROR ), LOG_COMM, sysdata.log_level );
+              return FALSE;
+            }
         }
+
+      iStart += nRead;
+
+      if ( d->inbuf[iStart-1] == '\n' || d->inbuf[iStart-1] == '\r' )
+	{
+	  break;
+	}
     }
 
   d->inbuf[iStart] = '\0';
   return TRUE;
 }
-
-
 
 /*
  * Transfer one line from input buffer to input line.
@@ -1296,10 +1293,10 @@ void write_to_buffer( DESCRIPTOR_DATA *d, const char *txt, size_t length )
  * If this gives errors on very long blocks (like 'ofind all'),
  *   try lowering the max block size.
  */
-bool write_to_descriptor( int desc, char *txt, size_t length )
+bool write_to_descriptor( socket_t desc, char *txt, int length )
 {
-  size_t iStart;
-  int nWrite;
+  int iStart;
+  ssize_t nWrite;
   int nBlock;
 
   if ( length <= 0 )
@@ -1309,10 +1306,15 @@ bool write_to_descriptor( int desc, char *txt, size_t length )
     {
       nBlock = UMIN( length - iStart, 4096 );
 
-      if ( ( nWrite = write( desc, txt + iStart, nBlock ) ) < 0 )
+#if defined(AMIGA) || defined(__MORPHOS__)
+      if( ( nWrite = send( d->descriptor, (char*) txt + iStart, nBlock, 0 ) ) == SOCKET_ERROR )
+#else
+	if( ( nWrite = send( desc, txt + iStart, nBlock, 0 ) ) == SOCKET_ERROR)
+#endif
         {
           char logbuf[MAX_STRING_LENGTH];
-          sprintf(logbuf, "Write_to_descriptor: error on socket %d", desc);
+          sprintf(logbuf, "Write_to_descriptor: error on socket %d: %s",
+		  desc, strerror( GETERROR ) );
           log_string(logbuf);
           perror( "Write_to_descriptor" );
           return FALSE;
@@ -1416,7 +1418,7 @@ bool check_reconnect( DESCRIPTOR_DATA *d, char *name, bool fConn )
               ch->timer  = 0;
               send_to_char( "Reconnecting.\r\n", ch );
               act( AT_ACTION, "$n has reconnected.", ch, NULL, NULL, TO_ROOM );
-              sprintf( log_buf, "%s@%s(%s) reconnected.", ch->name, d->host, d->user );
+              sprintf( log_buf, "%s@%s reconnected.", ch->name, d->host );
               log_string_plus( log_buf, LOG_COMM, UMAX( sysdata.log_level, ch->top_level ) );
               /*
                 if ( ch->top_level < LEVEL_SAVIOR )

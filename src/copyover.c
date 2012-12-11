@@ -28,43 +28,29 @@
 #endif
 
 #include <ctype.h>
-#include <errno.h>
 #include <stdio.h>
 #include <string.h>
 #include <stdarg.h>
 #include "mud.h"
-#include <unistd.h>
-
-/*#include "os.h"*/
-
 
 #ifdef _WIN32
 #include <process.h>
 #endif
 
-typedef int SOCKET;
-
-/* telopt.c */
-/*
-int start_compress( DESCRIPTOR_DATA *d );
-void end_compress( DESCRIPTOR_DATA *d );
-*/
-
 /*
  * OS-dependent local functions.
  */
-SOCKET init_socket( int port );
-void new_descriptor( SOCKET new_desc );
+socket_t init_socket( short port );
+void new_descriptor( socket_t new_desc );
 bool read_from_descriptor( DESCRIPTOR_DATA * d );
-void init_descriptor( DESCRIPTOR_DATA * dnew, SOCKET desc );
+void init_descriptor( DESCRIPTOR_DATA * dnew, socket_t desc );
 void free_desc( DESCRIPTOR_DATA * d );
 
 /*  Warm reboot stuff, gotta make sure to thank Erwin for this :) */
-extern SOCKET control;		/* Controlling descriptor       */
+extern socket_t control;		/* Controlling descriptor       */
 
 void do_copyover( CHAR_DATA * ch, char *argument )
 {
-  /*char filename[256];*/ 
   DESCRIPTOR_DATA *d, *d_next;
   char buf[100];
   FILE *fp = fopen( COPYOVER_FILE, "w" );
@@ -72,7 +58,7 @@ void do_copyover( CHAR_DATA * ch, char *argument )
 #if defined(AMIGA) || defined(__MORPHOS__)
   long error_code = 0;
   static long sockID = 0;
-  SOCKET coded_control = 0;
+  socket_t coded_control = 0;
 #else
   char buf2[100];
 #endif
@@ -113,7 +99,7 @@ void do_copyover( CHAR_DATA * ch, char *argument )
     else
     {
 #if defined(AMIGA) || defined(__MORPHOS__)
-      SOCKET cur_desc = INVALID_SOCKET;
+      socket_t cur_desc = INVALID_SOCKET;
 
 #ifdef __MORPHOS__
       ++sockID;
@@ -129,16 +115,13 @@ void do_copyover( CHAR_DATA * ch, char *argument )
 	exit( 1 );
       }
 #else
-      SOCKET cur_desc = d->descriptor;
+      socket_t cur_desc = d->descriptor;
 #endif
 
       fprintf( fp, "%d %d %s %s\n", cur_desc, 0, /*d->mccp ? 1 : 0,*/
 	       och->name, d->host );
       save_char_obj( och );
       write_to_descriptor( d->descriptor, buf, 0 );
-      /*
-      end_compress( d );
-      */
     }
   }
 
@@ -200,7 +183,7 @@ void copyover_recover( void )
   FILE *fp = NULL;
   char name[100];
   char host[MAX_STRING_LENGTH];
-  SOCKET desc = 0;
+  socket_t desc = 0;
   bool fOld = FALSE;
   int use_mccp = 0;
 
@@ -249,11 +232,6 @@ void copyover_recover( void )
 
     LINK( d, first_descriptor, last_descriptor, next, prev );
     d->connected = CON_COPYOVER_RECOVER; /* negative so close_socket will cut them off */
-
-    /*
-    if( use_mccp )
-      start_compress( d );
-    */
 
     /* Now, find the pfile */
     fOld = load_char_obj( d, name, FALSE );

@@ -401,8 +401,8 @@ struct	descriptor_data
     CHAR_DATA *		original;
     char *		host;
     char *              hostip;
-    int			port;
-    int			descriptor;
+    short		port;
+  socket_t		descriptor;
     short		connected;
     short		idle;
     short		lines;
@@ -421,8 +421,6 @@ struct	descriptor_data
     char *		pagepoint;
     char		pagecmd;
     char		pagecolor;
-    char *		user;
-    int 		atimes;
     int			newstate;
     unsigned char	prevcolor;
 };
@@ -4250,9 +4248,6 @@ void	free_command( CMDTYPE *command );
 void	unlink_command( CMDTYPE *command );
 void	add_command( CMDTYPE *command );
 
-/* bet.h */
-int advatoi(char *s);
-
 /* boards.c */
 void	load_boards( void );
 BD *	get_board( OBJ_DATA *obj );
@@ -4351,20 +4346,20 @@ bool check_hostile( SHIP_DATA *ship );
 bool autofly( SHIP_DATA *ship );
 
 /* comm.c */
-void	close_socket( DESCRIPTOR_DATA *dclose, bool force );
-bool write_to_descriptor( int desc, char *txt, size_t length );
-void	write_to_buffer( DESCRIPTOR_DATA *d, const char *txt, size_t length );
-void	write_to_pager( DESCRIPTOR_DATA *d, const char *txt, size_t length );
-void	send_to_char( const char *txt, CHAR_DATA *ch );
-void	send_to_char_color( const char *txt, CHAR_DATA *ch );
-void	send_to_pager( const char *txt, CHAR_DATA *ch );
-void	send_to_pager_color( const char *txt, CHAR_DATA *ch );
-void	set_char_color( short AType, CHAR_DATA *ch );
-void	set_pager_color( short AType, CHAR_DATA *ch );
-void	ch_printf( CHAR_DATA *ch, char *fmt, ... );
-void	pager_printf(CHAR_DATA *ch, char *fmt, ...);
-void	act( short AType, const char *format, CHAR_DATA *ch,
-	     const void *arg1, const void *arg2, int type );
+void close_socket( DESCRIPTOR_DATA *dclose, bool force );
+bool write_to_descriptor( socket_t desc, char *txt, int length );
+void write_to_buffer( DESCRIPTOR_DATA *d, const char *txt, size_t length );
+void write_to_pager( DESCRIPTOR_DATA *d, const char *txt, size_t length );
+void send_to_char( const char *txt, CHAR_DATA *ch );
+void send_to_char_color( const char *txt, CHAR_DATA *ch );
+void send_to_pager( const char *txt, CHAR_DATA *ch );
+void send_to_pager_color( const char *txt, CHAR_DATA *ch );
+void set_char_color( short AType, CHAR_DATA *ch );
+void set_pager_color( short AType, CHAR_DATA *ch );
+void ch_printf( CHAR_DATA *ch, char *fmt, ... );
+void pager_printf(CHAR_DATA *ch, char *fmt, ...);
+void act( short AType, const char *format, CHAR_DATA *ch,
+	  const void *arg1, const void *arg2, int type );
 
 /* reset.c */
 RD  *	make_reset( char letter, int extra, int arg1, int arg2, int arg3 );

@@ -202,7 +202,7 @@ static void nanny_get_name( DESCRIPTOR_DATA *d, char *argument )
 
       if (d->newstate != 0)
 	{
-	  write_to_buffer( d, "That name is already taken.  Please choose another: ", 0 );
+	  write_to_buffer( d, "That name is already taken. Please choose another: ", 0 );
 	  d->connected = CON_GET_NAME;
 	  return;
 	}
@@ -321,8 +321,7 @@ static void nanny_get_old_password( DESCRIPTOR_DATA *d, char *argument )
   free_char( d->character );
   fOld = load_char_obj( d, buf, FALSE );
   ch = d->character;
-  sprintf( log_buf, "%s@%s(%s) has connected.", ch->name, d->host,
-	   d->user );
+  sprintf( log_buf, "%s@%s has connected.", ch->name, d->host );
 
   if ( ch->top_level < LEVEL_DEMI )
     {

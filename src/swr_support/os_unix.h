@@ -43,6 +43,8 @@
 #include <fcntl.h>
 #include <signal.h>
 #include <unistd.h>
+#include <errno.h>
+
 /*#include <arpa/telnet.h>*/
 
 #ifdef SWRIP_USE_DLSYM

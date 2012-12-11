@@ -1326,8 +1326,8 @@ void do_mstat( CHAR_DATA *ch, char *argument )
              ( IS_NPC( victim ) || !victim->pcdata->clan ) ? "(none)"
              : victim->pcdata->clan->name );
   if( get_trust(ch) >= LEVEL_GOD && !IS_NPC(victim) && victim->desc )
-    ch_printf( ch, "User: %s@%s   Descriptor: %d   Trust: %d   AuthedBy: %s\r\n",
-               victim->desc->user, victim->desc->host, victim->desc->descriptor,
+    ch_printf( ch, "Host: %s   Descriptor: %d   Trust: %d   AuthedBy: %s\r\n",
+               victim->desc->host, victim->desc->descriptor,
                victim->trust, victim->pcdata->authed_by[0] != '\0'
                ? victim->pcdata->authed_by : "(unknown)" );
   if ( !IS_NPC(victim) && victim->pcdata->release_date != 0 )
@@ -3931,7 +3931,7 @@ void do_users( CHAR_DATA *ch, char *argument )
                        d->character ? d->character->name : "(none)",
                        d->hostip );
               if ( ch->top_level >= LEVEL_GOD && ( !d->character || d->character->top_level <= LEVEL_GOD ) )
-                sprintf( buf + strlen( buf ), " (%s@%s)", d->user, d->host  );
+                sprintf( buf + strlen( buf ), " (%s)", d->host  );
               strcat(buf, "\r\n");
               send_to_pager( buf, ch );
             }
@@ -3955,8 +3955,7 @@ void do_users( CHAR_DATA *ch, char *argument )
                             d->host
                             );
               buf[0] = '\0';
-              if (get_trust(ch) >= LEVEL_GOD)
-                sprintf(buf, "| %s", d->user);
+
               strcat(buf, "\r\n");
               send_to_pager( buf, ch );
             }
