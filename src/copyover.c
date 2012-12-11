@@ -77,6 +77,7 @@ void do_copyover( CHAR_DATA * ch, char *argument )
   char buf2[100];
 #endif
   char buf3[100];
+  char filename[256];
 
   if( !fp )
   {
@@ -175,8 +176,6 @@ void do_copyover( CHAR_DATA * ch, char *argument )
   /* exec - descriptors are inherited */
   sprintf( buf, "%d", sysdata.port );
   sprintf( buf2, "%d", control );
-
-  char filename[256];
 
 #ifdef _WIN32
   sprintf(filename, "\"%s\"", sysdata.exe_filename);

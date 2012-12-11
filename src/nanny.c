@@ -4,9 +4,9 @@
 
 #include "mud.h"
 
-static const char echo_off_str    [] = { IAC, WILL, TELOPT_ECHO, '\0' };
-static const char echo_on_str     [] = { IAC, WONT, TELOPT_ECHO, '\0' };
-static const char go_ahead_str    [] = { IAC, GA, '\0' };
+static const char echo_off_str    [] = { (const char)IAC, (const char)WILL, TELOPT_ECHO, '\0' };
+static const char echo_on_str     [] = { (const char)IAC, (const char)WONT, TELOPT_ECHO, '\0' };
+static const char go_ahead_str    [] = { (const char)IAC, (const char)GA, '\0' };
 extern bool wizlock;
 
 /*

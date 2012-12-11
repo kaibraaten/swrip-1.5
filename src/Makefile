@@ -1,5 +1,5 @@
 BINARY = swrip
-WFLAGS = -Wall -Werror -Wformat-security -Wpointer-arith -Wcast-align -Wredundant-decls -Wshadow -Wextra -Wno-unused-parameter -Wno-char-subscripts -Wno-write-strings
+WFLAGS = -Wall -Werror -Wformat-security -Wpointer-arith -Wcast-align -Wredundant-decls -Wshadow -Wextra -Wno-unused-parameter -Wno-char-subscripts -Wno-write-strings -Wno-long-long
 
 #Comment out the next line if your system doesn't have dlsym functionality.
 USE_DLSYM = -DSWRIP_USE_DLSYM
@@ -10,7 +10,7 @@ IMC = 1
 #Change from 0 to 1 to enable telnet debug logging.
 DEBUG_TELNET = -DSWRIP_DEBUG_TELNET=0
 
-CCFLAGS = -g3 -MMD -Iswr_support $(WFLAGS) $(USE_DLSYM) $(DEBUG_TELNET) -ansi
+CCFLAGS = -g3 -MMD -Iswr_support $(WFLAGS) $(USE_DLSYM) $(DEBUG_TELNET) -ansi -pedantic
 LDFLAGS = -lm -lz -Lswr_support -lswr_support -Wl,-rpath,../src/swr_support
 
 #Uncomment the next line of you're using Solaris and you get linker errors.

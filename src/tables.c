@@ -49,7 +49,7 @@ SPELL_FUN *spell_function( const char *name )
       return spell_notfound;
     }
 #else
-  SPELL_FUN *fun_handle = (SPELL_FUN*) dlsym( sysdata.dl_handle, name );
+  SPELL_FUN *fun_handle = (SPELL_FUN*)(long)dlsym( sysdata.dl_handle, name );
 
   if( !fun_handle )
     {
@@ -72,7 +72,7 @@ DO_FUN *skill_function( const char *name )
       return skill_notfound;
     }
 #else
-  DO_FUN *fun_handle = (DO_FUN*) dlsym( sysdata.dl_handle, name );
+  DO_FUN *fun_handle = (DO_FUN*)(long)dlsym( sysdata.dl_handle, name );
 
   if( !fun_handle )
     {

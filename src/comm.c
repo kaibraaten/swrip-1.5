@@ -51,7 +51,7 @@
 #include <arpa/telnet.h>
 #include <netdb.h>
 
-static const char go_ahead_str    [] = { IAC, GA, '\0' };
+static const char go_ahead_str    [] = { (const char)IAC, (const char)GA, '\0' };
 
 #define MAX_NEST        100
 
