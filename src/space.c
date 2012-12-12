@@ -173,7 +173,6 @@ bool    land_bus( SHIP_DATA *ship, int destination );
 void    launch_bus( SHIP_DATA *ship );
 void    echo_to_room_dnr( int ecolor, ROOM_INDEX_DATA *room, char *argument );
 ch_ret drive_ship( CHAR_DATA *ch, SHIP_DATA *ship, EXIT_DATA *exit, int fall );
-bool is_facing( SHIP_DATA *ship , SHIP_DATA *target );
 void sound_to_ship( SHIP_DATA *ship , char *argument );
 void modtrainer( SHIP_DATA *ship, short pclass );
 void makedebris( SHIP_DATA *ship );
@@ -481,45 +480,32 @@ void move_ships( )
   char buf[MAX_STRING_LENGTH];
   CHAR_DATA *ch;
   bool ch_found = FALSE;
-  short crashsun = 0;
 
   /* TODO: Assigned to further down, but never used. Check it out.*/
   /*int speed = 0;*/
 
   for( spaceobj = first_spaceobject; spaceobj; spaceobj = spaceobj->next )
     {
-      if ( spaceobj->speed > 0 )
-        {
+      move_space_object( &spaceobj->pos, &spaceobj->head, spaceobj->speed );
 
-          change = sqrt( spaceobj->hx*spaceobj->hx + spaceobj->hy*spaceobj->hy + spaceobj->hz*spaceobj->hz );
+      if( spaceobj->pos.x > MAX_COORD )
+        spaceobj->pos.x = -MAX_COORD_S;
 
-          if (change > 0)
-            {
-              dx = spaceobj->hx/change;
-              dy = spaceobj->hy/change;
-              dz = spaceobj->hz/change;
-              spaceobj->xpos += (dx * spaceobj->speed/5);
-              spaceobj->ypos += (dy * spaceobj->speed/5);
-              spaceobj->zpos += (dz * spaceobj->speed/5);
-            }
+      if( spaceobj->pos.y > MAX_COORD )
+        spaceobj->pos.y = -MAX_COORD_S;
 
-        }
+      if( spaceobj->pos.z > MAX_COORD )
+        spaceobj->pos.z = -MAX_COORD_S;
 
-      if( spaceobj->xpos > MAX_COORD )
-        spaceobj->xpos = -MAX_COORD_S;
-      if( spaceobj->ypos > MAX_COORD )
-        spaceobj->ypos = -MAX_COORD_S;
-      if( spaceobj->zpos > MAX_COORD )
-        spaceobj->zpos = -MAX_COORD_S;
-      if( spaceobj->xpos < -MAX_COORD )
-        spaceobj->xpos = MAX_COORD_S;
-      if( spaceobj->ypos < -MAX_COORD )
-        spaceobj->ypos = MAX_COORD_S;
-      if( spaceobj->zpos < -MAX_COORD )
-        spaceobj->zpos = MAX_COORD_S;
+      if( spaceobj->pos.x < -MAX_COORD )
+        spaceobj->pos.x = MAX_COORD_S;
 
+      if( spaceobj->pos.y < -MAX_COORD )
+        spaceobj->pos.y = MAX_COORD_S;
+
+      if( spaceobj->pos.z < -MAX_COORD )
+        spaceobj->pos.z = MAX_COORD_S;
     }
-
 
   for ( missile = first_missile; missile; missile = m_next )
     {
@@ -530,22 +516,10 @@ void move_ships( )
 
       if ( target->spaceobject && missile_in_range( ship, missile ) )
         {
-          if ( missile->mx < target->vx )
-            missile->mx += UMIN( missile->speed/5 , target->vx - missile->mx );
-          else if ( missile->mx > target->vx )
-            missile->mx -= UMIN( missile->speed/5 , missile->mx - target->vx );
-          if ( missile->my < target->vy )
-            missile->my += UMIN( missile->speed/5 , target->vy - missile->my );
-          else if ( missile->my > target->vy )
-            missile->my -= UMIN( missile->speed/5 , missile->my - target->vy );
-          if ( missile->mz < target->vz )
-            missile->mz += UMIN( missile->speed/5 , target->vz - missile->mz );
-          else if ( missile->mz > target->vz )
-            missile->mz -= UMIN( missile->speed/5 , missile->mz - target->vz );
+	  missile_set_course_to_ship( missile, target );
+	  missile_move( missile );
 
-          if ( abs(missile->mx) - abs(target->vx) <= 20 && abs(missile->mx) - abs(target->vx) >= -20
-               && abs(missile->my) - abs(target->vy) <= 20 && abs(missile->my) - abs(target->vy) >= -20
-               && abs(missile->mz) - abs(target->vz) <= 20 && abs(missile->mz) - abs(target->vz) >= -20 )
+          if ( missile_distance_to_ship( missile, target ) <= 20 )
             {
               if ( target->chaff_released <= 0)
                 {
@@ -602,103 +576,40 @@ void move_ships( )
       if( ship->shipstate == SHIP_LANDED && ship->spaceobject )
         ship->shipstate = SHIP_READY;
 
-      if ( ship->currspeed > 0 && ship->shipstate != SHIP_LAND && ship->shipstate != SHIP_LAND_2)
+      if ( ship->shipstate != SHIP_LAND && ship->shipstate != SHIP_LAND_2)
         {
-
-          change = sqrt( ship->hx*ship->hx + ship->hy*ship->hy + ship->hz*ship->hz );
-
-          if (change > 0)
-            {
-              dx = ship->hx/change;
-              dy = ship->hy/change;
-              dz = ship->hz/change;
-              ship->vx += (dx * ship->currspeed/5);
-              ship->vy += (dy * ship->currspeed/5);
-              ship->vz += (dz * ship->currspeed/5);
-            }
-
+	  ship_move( ship );
         }
 
-      if ( ship->tractoredby && ship->tractoredby->sclass <= ship->sclass )
-        {
-          ship->tractoredby->currspeed = (ship->tractoredby->tractorbeam)/4;
-          ship->tractoredby->hx = ship->vx - ship->tractoredby->vx;
-          ship->tractoredby->hy = ship->vy - ship->tractoredby->vy;
-          ship->tractoredby->hz = ship->vz - ship->tractoredby->vz;
-
-          /*
-            float hx,hy,hz;
-
-            hx = ship->tractoredby->vx - ship->vx;
-            hy = ship->tractoredby->vy - ship->vy;
-            hz = ship->tractoredby->vz - ship->vz;
-
-            change = sqrt( hx*hx + hy*hy + hz*hz );
-
-            if (change > 0)
-            {
-            dx = hx/change;
-            dy = hy/change;
-            dz = hz/change;
-            ship->vx += UMIN( hx, (dx * (ship->tractoredby->currspeed+25)/5));
-            ship->vy += UMIN( hy, (dy * (ship->tractoredby->currspeed+25)/5));
-            ship->vz += UMIN( hz, (dz * (ship->tractoredby->currspeed+25)/5));
-            }
-
-          */
-        }
-
-      if ( ship->tractoredby && ship->tractoredby->sclass > ship->sclass )
-        {
-
-          ship->currspeed = ship->tractoredby->tractorbeam/4;
-          ship->hx = ship->tractoredby->vx - ship->vx;
-          ship->hy = ship->tractoredby->vy - ship->vy;
-          ship->hz = ship->tractoredby->vz - ship->vz;
-
-          /*
-            float hx,hy,hz;
-
-            hx = ship->tractored->vx - ship->vx;
-            hy = ship->tractored->vy - ship->vy;
-            hz = ship->tractored->vz - ship->vz;
-
-            change = sqrt( hx*hx + hy*hy + hz*hz );
-
-            if (change > 0)
-            {
-            dx = hx/change;
-            dy = hy/change;
-            dz = hz/change;
-            ship->vx += UMIN( hx, (dx * (ship->tractored->currspeed+25)/5));
-            ship->vy += UMIN( hy, (dy * (ship->tractored->currspeed+25)/5));
-            ship->vz += UMIN( hz, (dz * (ship->tractored->currspeed+25)/5));
-            }
-          */
-        }
-
-
+      /*
+       * Tractor beam handling
+       */
       if ( ship->tractoredby )
-        {
-          if ( abs(ship->vx - ship->tractoredby->vx) < 10 &&
-               abs(ship->vy - ship->tractoredby->vy) < 10 &&
-               abs(ship->vz - ship->tractoredby->vz) < 10 )
-            {
-              if ( ship->sclass < ship->tractoredby->sclass )
-                {
-                  ship->vx = ship->tractoredby->vx;
-                  ship->vy = ship->tractoredby->vy;
-                  ship->vz = ship->tractoredby->vz;
-                }
-              if ( ship->sclass >= ship->tractoredby->sclass )
-                {
-                  ship->tractoredby->vx = ship->vx;
-                  ship->tractoredby->vy = ship->vy;
-                  ship->tractoredby->vz = ship->vz;
-                }
-            }
-        }
+	{
+	  /* Tractoring ship is smaller and therefore moves towards target */
+	  if( ship->tractoredby->sclass <= ship->sclass )
+	    {
+	      ship->tractoredby->currspeed = ship->tractoredby->tractorbeam/4;
+	      ship_set_course_to_ship( ship->tractoredby, ship );
 
+	      if( ship_distance_to_ship( ship, ship->tractoredby ) < 10 )
+		{
+		  vector_copy( &ship->tractoredby->pos, &ship->pos );
+		}
+	    }
+
+	  /* Target is smaller and therefore pulled to target */
+	  if ( ship->tractoredby->sclass > ship->sclass )
+	    {
+	      ship->currspeed = ship->tractoredby->tractorbeam/4;
+	      ship_set_course_to_ship( ship, ship->tractoredby );
+
+	      if( ship_distance_to_ship( ship, ship->tractoredby ) < 10 )
+		{
+		  vector_copy( &ship->pos, &ship->tractoredby->pos );
+		}
+	    }
+	}
 
       if ( autofly(ship) )
         continue;
@@ -732,33 +643,32 @@ void move_ships( )
             }
             }
           */
-          if ( spaceobj->type == SPACE_SUN && spaceobj->name && strcmp(spaceobj->name,"") &&
-               abs(ship->vx - spaceobj->xpos) < 10 &&
-               abs(ship->vy - spaceobj->ypos) < 10 &&
-               abs(ship->vz - spaceobj->zpos) < 10 )
-            {
-              /* Why the redundence of code here?
-                 Only need to evade once.  Darrik Vequir */
-              crashsun = 1;
-            }
-
-          if (crashsun == 1)
+          if ( spaceobj->type == SPACE_SUN && spaceobj->name
+	       && strcmp(spaceobj->name,"")
+	       && ship_distance_to_spaceobject( ship, spaceobj ) < 10 )
             {
               /* Evading the sun added by Darrik Vequir */
-
-              ship->hx = 10 * ship->vx;
-              ship->hy = 10 * ship->vy;
-              ship->hz = 10 * ship->vz;
+              ship->head.x = 10 * ship->pos.x;
+              ship->head.y = 10 * ship->pos.y;
+              ship->head.z = 10 * ship->pos.z;
               ship->energy -= ship->currspeed/10;
               ship->currspeed = ship->realspeed;
               echo_to_room( AT_RED , get_room_index(ship->pilotseat), "Automatic Override: Evading to avoid collision with sun!\r\n" );
-              if ( ship->sclass == FIGHTER_SHIP || ( ship->sclass == MIDSIZE_SHIP && ship->manuever > 50 ) )
-                ship->shipstate = SHIP_BUSY_3;
-              else if ( ship->sclass == MIDSIZE_SHIP || ( ship->sclass == CAPITAL_SHIP && ship->manuever > 50 ) )
-                ship->shipstate = SHIP_BUSY_2;
-              else
-                ship->shipstate = SHIP_BUSY;
 
+              if ( ship->sclass == FIGHTER_SHIP
+		   || ( ship->sclass == MIDSIZE_SHIP && ship->manuever > 50 ) )
+		{
+		  ship->shipstate = SHIP_BUSY_3;
+		}
+              else if ( ship->sclass == MIDSIZE_SHIP
+			|| ( ship->sclass == CAPITAL_SHIP && ship->manuever > 50 ) )
+		{
+		  ship->shipstate = SHIP_BUSY_2;
+		}
+              else
+		{
+		  ship->shipstate = SHIP_BUSY;
+		}
             }
 
           /*
@@ -771,10 +681,9 @@ void move_ships( )
 
           if ( ship->currspeed > 0 )
             {
-              if ( spaceobj->type >= SPACE_PLANET && spaceobj->name && strcmp(spaceobj->name,"") &&
-                   abs(ship->vx - spaceobj->xpos) < 10 &&
-                   abs(ship->vy - spaceobj->ypos) < 10 &&
-                   abs(ship->vz - spaceobj->zpos) < 10 )
+              if ( spaceobj->type >= SPACE_PLANET
+		   && spaceobj->name && strcmp(spaceobj->name,"")
+		   && ship_distance_to_spaceobject( ship, spaceobj ) < 10 )
                 {
                   sprintf( buf , "You begin orbitting %s.", spaceobj->name);
                   echo_to_cockpit( AT_YELLOW, ship, buf);
@@ -795,7 +704,7 @@ void move_ships( )
     {
       if (ship->shipstate == SHIP_HYPERSPACE)
         {
-          float tx, ty, tz;
+	  Vector3 tmp;
           float dist, origdist;
 
           ship->hyperdistance -= ship->hyperspeed;
@@ -806,12 +715,14 @@ void move_ships( )
           if ( dist == 0)
             dist = -1;
 
-          tx = ( ship->vx - ship->jx );
-          ty = ( ship->vy - ship->jy );
-          tz = ( ship->vz - ship->jz );
-          ship->cx = ship->vx - (tx*(dist/origdist));
-          ship->cy = ship->vy - (ty*(dist/origdist));
-          ship->cz = ship->vz - (tz*(dist/origdist));
+	  vector_set( &tmp,
+		      ship->pos.x - ship->jump.x,
+		      ship->pos.y - ship->jump.y,
+		      ship->pos.z - ship->jump.z );
+	  vector_set( &ship->hyperpos,
+		      ship->pos.x - ( tmp.x * ( dist / origdist ) )
+		      ship->pos.y - ( tmp.y * ( dist / origdist ) )
+		      ship->pos.z - ( tmp.z * ( dist / origdist ) ) );
 
           ship->count++;
 
@@ -821,13 +732,11 @@ void move_ships( )
                 int dmg;
                 echo_to_room( AT_YELLOW, get_room_index(ship->pilotseat), "Hyperjump complete.");
                 echo_to_ship( AT_YELLOW, ship, "The ship slams to a halt as it comes out of hyperspace.");
-                sprintf( buf ,"%s enters the starsystem at %.0f %.0f %.0f" , ship->name, ship->vx, ship->vy, ship->vz );
+                sprintf( buf ,"%s enters the starsystem at %.0f %.0f %.0f" , ship->name, ship->pos.x, ship->pos.y, ship->pos.z );
                 dmg = 15* number_range( 1, 4 );
                 ship->hull -= dmg;
                 echo_to_ship( AT_YELLOW, ship, "The hull cracks from the pressure.");
-                ship->vx = ship->cx;
-                ship->vy = ship->cy;
-                ship->vz = ship->cz;
+		vector_copy( &ship->pos, &ship->hyperpos );
                 ship_to_spaceobject( ship, ship->currjump );
                 ship->currjump = NULL;
                 echo_to_system( AT_YELLOW, ship, buf , NULL );
@@ -841,9 +750,7 @@ void move_ships( )
               echo_to_room( AT_YELLOW, get_room_index(ship->pilotseat), "Hyperjump complete.");
               echo_to_ship( AT_YELLOW, ship, "The ship slams to a halt as it comes out of hyperspace.  An artificial gravity well surrounds you!");
               sprintf( buf ,"%s enters the starsystem at %.0f %.0f %.0f" , ship->name, ship->vx, ship->vy, ship->vz );
-              ship->vx = ship->cx;
-              ship->vy = ship->cy;
-              ship->vz = ship->cz;
+	      vector_copy( &ship->pos, &ship->hyperpos );
               ship_to_spaceobject( ship, ship->currjump );
               ship->currjump = NULL;
               echo_to_system( AT_YELLOW, ship, buf , NULL );
@@ -853,7 +760,9 @@ void move_ships( )
             }
 
 
-          if (ship->shipstate == SHIP_HYPERSPACE && ship->hyperdistance <= 0 && !ship->tracking)
+          if (ship->shipstate == SHIP_HYPERSPACE
+	      && ship->hyperdistance <= 0
+	      && !ship->tracking)
             {
               ship->count = 0;
               ship_to_spaceobject (ship, ship->currjump);
@@ -866,10 +775,9 @@ void move_ships( )
                 {
                   echo_to_room( AT_YELLOW, get_room_index(ship->pilotseat), "Hyperjump complete.");
                   echo_to_ship( AT_YELLOW, ship, "The ship lurches slightly as it comes out of hyperspace.");
-                  sprintf( buf ,"%s enters the starsystem at %.0f %.0f %.0f" , ship->name, ship->vx, ship->vy, ship->vz );
-                  ship->cx = ship->vx;
-                  ship->cy = ship->vy;
-                  ship->cz = ship->vz;
+                  sprintf( buf ,"%s enters the starsystem at %.0f %.0f %.0f",
+			   ship->name, ship->pos.x, ship->pos.y, ship->pos.z );
+		  vector_copy( &ship->hyperpos, &ship->pos );
                   ship_to_spaceobject( ship, ship->currjump );
                   ship->currjump = NULL;
                   echo_to_system( AT_YELLOW, ship, buf , NULL );
@@ -890,10 +798,8 @@ void move_ships( )
 
                   echo_to_room( AT_YELLOW, get_room_index(ship->pilotseat), "Hyperjump complete.");
                   echo_to_ship( AT_YELLOW, ship, "The ship lurches slightly as it comes out of hyperspace.");
-                  sprintf( buf ,"%s enters the starsystem at %.0f %.0f %.0f" , ship->name, ship->vx, ship->vy, ship->vz );
-                  ship->vx = ship->cx;
-                  ship->vy = ship->cy;
-                  ship->vz = ship->cz;
+                  sprintf( buf ,"%s enters the starsystem at %.0f %.0f %.0f" , ship->name, ship->pos.x, ship->pos.y, ship->pos.z );
+		  vector_copy( &ship->pos, &ship->hyperpos );
                   ship_to_spaceobject( ship, ship->currjump );
                   ship->currjump = NULL;
                   echo_to_system( AT_YELLOW, ship, buf , NULL );
@@ -904,9 +810,10 @@ void move_ships( )
 		  /* TODO: Never used. Check this out! */
                   /*speed = ship->hyperspeed;*/
 
-                  ship->jx = ship->vx + ship->tx;
-                  ship->jy = ship->vy + ship->ty;
-                  ship->jz = ship->vz + ship->tz;
+		  vector_set( &ship->jump,
+			      ship->pos.x + ship->track_vector.x,
+			      ship->pos.y + ship->track_vector.y,
+			      ship->pos.z + ship->track_vector.z );
 
                   for( spaceobj = first_spaceobject; spaceobj; spaceobj = spaceobj->next )
                     if( space_in_range( ship, spaceobj ) )
@@ -914,21 +821,17 @@ void move_ships( )
                         ship->currjump = spaceobj;
                         break;
                       }
+
                   if( !spaceobj )
                     ship->currjump = ship->spaceobject;
 
-                  ship->hyperdistance  = abs(ship->vx - ship->jx) ;
-                  ship->hyperdistance += abs(ship->vy - ship->jy) ;
-                  ship->hyperdistance += abs(ship->vz - ship->jz) ;
-                  ship->hyperdistance /= 50;
-
+		  ship->hyperdistance = vector_distance( &ship->pos, &ship->jump ) / 50;
                   ship->orighyperdistance = ship->hyperdistance;
 
                   ship->count = 0;
                   do_radar( ship->ch, "" );
                 }
             }
-
           else if (ship->count >= 10 && ship->shipstate == SHIP_HYPERSPACE)
             {
               ship->count = 0;
@@ -948,21 +851,13 @@ void move_ships( )
 
       if( ship->docked )
         {
-          ship->vx = ship->docked->vx;
-          ship->vy = ship->docked->vy;
-          ship->vz = ship->docked->vz;
-          ship->cx = ship->docked->cx;
-          ship->cy = ship->docked->cy;
-          ship->cz = ship->docked->cz;
-          ship->ox = ship->docked->ox;
-          ship->oy = ship->docked->oy;
-          ship->oz = ship->docked->oz;
-          ship->jx = ship->docked->jx;
-          ship->jy = ship->docked->jy;
-          ship->jz = ship->docked->jz;
-          ship->hx = ship->docked->hx;
-          ship->hy = ship->docked->hy;
-          ship->hz = ship->docked->hz;
+	  SHIP_DATA *docked = ship->docked;
+	  vector_copy( &ship->pos, &docked->pos );
+	  vector_copy( &ship->hyperpos, &docked->hyperpos );
+	  vector_copy( &ship->originpos, &docked->originpos );
+	  vector_copy( &ship->jump, &docked->jump );
+	  vector_copy( &ship->head, &docked->head );
+
           ship->shipstate = ship->docked->shipstate;
           ship->hyperdistance = ship->docked->hyperdistance;
           ship->currspeed = ship->docked->currspeed;
@@ -973,19 +868,23 @@ void move_ships( )
           ship->currjump = ship->docked->currjump;
         }
 
-      if( ship->vx > MAX_COORD)
-        ship->vx = -MAX_COORD_S;
-      if( ship->vy > MAX_COORD)
-        ship->vy = -MAX_COORD_S;
-      if( ship->vz > MAX_COORD)
-        ship->vz = -MAX_COORD_S;
-      if( ship->vx > MAX_COORD)
-        ship->vx = MAX_COORD_S;
-      if( ship->vy > MAX_COORD)
-        ship->vy = MAX_COORD_S;
-      if( ship->vz > MAX_COORD)
-        ship->vz = MAX_COORD_S;
+      if( ship->pos.x > MAX_COORD)
+        ship->pos.x = -MAX_COORD_S;
 
+      if( ship->pos.y > MAX_COORD)
+        ship->pos.y = -MAX_COORD_S;
+
+      if( ship->pos.z > MAX_COORD)
+        ship->pos.z = -MAX_COORD_S;
+
+      if( ship->pos.x > MAX_COORD)
+        ship->pos.x = MAX_COORD_S;
+
+      if( ship->pos.y > MAX_COORD)
+        ship->pos.y = MAX_COORD_S;
+
+      if( ship->pos.z > MAX_COORD)
+        ship->pos.z = MAX_COORD_S;
     }
   /*
     if (ship->collision)
@@ -1015,7 +914,7 @@ void recharge_ships( )
   for ( ship = first_ship; ship; ship = ship->next )
     {
 
-      if ( ship->sclass == 3 )
+      if ( ship->sclass == SHIP_PLATFORM )
         if ( closeem && ship->guard )
           ship->bayopen = FALSE;
 
@@ -1129,13 +1028,12 @@ void recharge_ships( )
 
                   for ( shots=0 ; shots < guns; shots++ )
                     {
-                      if (ship->shipstate != SHIP_HYPERSPACE && ship->energy > 25
+                      if (ship->shipstate != SHIP_HYPERSPACE
+			  && ship->energy > 25
                           && ship_in_range( ship, target )
-                          && abs(target->vx - ship->vx) <= 1000
-                          && abs(target->vy - ship->vy) <= 1000
-                          && abs(target->vz - ship->vz) <= 1000 )
+			  && ship_distance_to_ship( target, ship ) <= 1000 )
                         {
-                          if ( ship->sclass > 1 || is_facing ( ship , target ) )
+                          if ( ship->sclass > MIDSIZE_SHIP || ship_is_facing_ship( ship , target ) )
                             {
 
                               distance = abs(target->vx - ship->vx)
@@ -1452,7 +1350,7 @@ void update_space( )
           }
 
 
-      if (ship->autotrack && ship->docking == SHIP_READY && ship->target0 && ship->sclass < 3 )
+      if (ship->autotrack && ship->docking == SHIP_READY && ship->target0 && ship->sclass < SHIP_PLATFORM )
         {
 
           target = ship->target0;
@@ -1476,7 +1374,7 @@ void update_space( )
               else
                 ship->shipstate = SHIP_BUSY;
             }
-          else if  ( !is_facing(ship, ship->target0)
+          else if  ( !ship_is_facing_ship(ship, ship->target0)
                      && ship->docked == NULL && ship->shipstate != SHIP_DOCKED )
             {
               ship->hx = ship->target0->vx - ship->vx;
@@ -1537,7 +1435,7 @@ void update_space( )
                       && abs(target->vy - ship->vy) <= 1200
                       && abs(target->vz - ship->vz) <= 1200 )
                     {
-                      if ( ship->sclass > 1 || is_facing( ship , target ) )
+                      if ( ship->sclass > MIDSIZE_SHIP || ship_is_facing_ship( ship , target ) )
                         {
                           the_chance -= target->manuever/5;
                           the_chance -= target->currspeed/20;
@@ -2401,42 +2299,25 @@ bool ship_in_range( SHIP_DATA *ship, SHIP_DATA *target )
 
 bool missile_in_range( SHIP_DATA *ship, MISSILE_DATA *missile )
 {
-  if ( missile && ship )
-    if ( ship->spaceobject &&
-         abs(missile->mx - ship->vx) < 5000 &&
-         abs(missile->my - ship->vy) < 5000 &&
-         abs(missile->mz - ship->vz) < 5000 )
-      return TRUE;
-  return FALSE;
+  return missile && ship && ship->spaceobject
+    && missile_distance_to_ship( missile, ship ) < 5000;
 }
 
 bool space_in_range( SHIP_DATA *ship, SPACE_DATA *object )
 {
-  if (object && ship )
-    if ( ship->spaceobject &&
-         abs(object->xpos - ship->vx) < 100000 &&
-         abs(object->ypos - ship->vy) < 100000 &&
-         abs(object->zpos - ship->vz) < 100000 )
-      return TRUE;
-  return FALSE;
+  return object && ship && ship->spaceobject
+    && ship_distance_to_spaceobject( ship, object ) < 100000;
 }
+
 bool space_in_range_c( SHIP_DATA *ship, SPACE_DATA *object )
 {
-  if (object && ship )
-    if ( abs(object->xpos - ship->vx) < 10000 &&
-         abs(object->ypos - ship->vy) < 10000 &&
-         abs(object->zpos - ship->vz) < 10000 )
-      return TRUE;
-  return FALSE;
+  return object && ship
+    && ship_distance_to_spaceobject( ship, object ) < 10000;
 }
 bool space_in_range_h( SHIP_DATA *ship, SPACE_DATA *object )
 {
-  if (object && ship )
-    if ( abs(object->xpos - ship->cx) < (object->gravity*5) &&
-         abs(object->ypos - ship->cy) < (object->gravity*5) &&
-         abs(object->zpos - ship->cz) < (object->gravity*5) )
-      return TRUE;
-  return FALSE;
+  return object && ship
+    && vector_distance( &object->pos, &ship->hyperpos ) < object->gravity * 5;
 }
 
 void echo_to_system( int color , SHIP_DATA *ship , char *argument , SHIP_DATA *ignore )
@@ -2449,40 +2330,17 @@ void echo_to_system( int color , SHIP_DATA *ship , char *argument , SHIP_DATA *i
   for ( target = first_ship; target; target = target->next )
     {
       if( !ship_in_range( ship, target ) )
-        continue;
-      if (target != ship && target != ignore )
-        if ( abs(target->vx - ship->vx) < 100*(target->sensor+10)*((ship->sclass == SHIP_DEBRIS ? 2 : ship->sclass)+1) &&
-             abs(target->vy - ship->vy) < 100*(target->sensor+10)*((ship->sclass == SHIP_DEBRIS ? 2 : ship->sclass)+1) &&
-             abs(target->vz - ship->vz) < 100*(target->sensor+10)*((ship->sclass == SHIP_DEBRIS ? 2 : ship->sclass)+1) )
+	{
+	  continue;
+	}
 
-
-          echo_to_cockpit( color , target , argument );
+      if (target != ship && target != ignore
+	&& ship_distance_to_ship( ship, target ) < 100*(target->sensor+10)*((ship->sclass == SHIP_DEBRIS ? 2 : ship->sclass)+1))
+	{
+	  echo_to_cockpit( color , target , argument );
+	}
     }
-
 }
-
-bool is_facing( SHIP_DATA *ship , SHIP_DATA *target )
-{
-  float dy, dx, dz, hx, hy, hz;
-  float cosofa;
-
-  hx = ship->hx;
-  hy = ship->hy;
-  hz = ship->hz;
-
-  dx = target->vx - ship->vx;
-  dy = target->vy - ship->vy;
-  dz = target->vz - ship->vz;
-
-  cosofa = ( hx*dx + hy*dy + hz*dz )
-    / ( sqrt(hx*hx+hy*hy+hz*hz) + sqrt(dx*dx+dy*dy+dz*dz) );
-
-  if ( cosofa > 0.75 )
-    return TRUE;
-
-  return FALSE;
-}
-
 
 long int get_ship_value( SHIP_DATA *ship )
 {
@@ -3192,7 +3050,7 @@ void fread_ship( SHIP_DATA *ship, FILE *fp )
               ship->prev_in_room=NULL;
               ship->tcount = 0;
 
-              if( ship->sclass < 3 )
+              if( ship->sclass < SHIP_PLATFORM )
                 ship->bayopen = FALSE;
 
               return;
@@ -4701,7 +4559,7 @@ void do_setship( CHAR_DATA *ch, char *argument )
 
   if ( !str_cmp( arg2, "class" ) )
     {
-      ship->sclass = URANGE( 0, atoi(argument) , 9 );
+      ship->sclass = URANGE( 0, atoi(argument) , WALKER );
       send_to_char( "Done.\r\n", ch );
       save_ship( ship );
       return;
@@ -5486,17 +5344,12 @@ void new_missile( SHIP_DATA *ship , SHIP_DATA *target , CHAR_DATA *ch , int miss
   else
     missile->speed = 50;
 
-  missile->mx = ship->vx;
-  missile->my = ship->vy;
-  missile->mz = ship->vz;
-
+  vector_copy( &missile->pos, &ship->pos );
   missile->spaceobject = spaceobject;
-
 }
 
 void ship_from_spaceobject( SHIP_DATA *ship , SPACE_DATA *spaceobject )
 {
-
   if ( spaceobject == NULL )
     return;
 
@@ -5504,7 +5357,6 @@ void ship_from_spaceobject( SHIP_DATA *ship , SPACE_DATA *spaceobject )
     return;
 
   ship->spaceobject = NULL;
-
 }
 
 void extract_missile( MISSILE_DATA *missile )
@@ -7984,7 +7836,7 @@ void do_status(CHAR_DATA *ch, char *argument )
 void do_hyperspace(CHAR_DATA *ch, char *argument )
 {
   int the_chance;
-  float tx, ty, tz;
+  Vector3 tmp;
   SHIP_DATA *ship;
   SHIP_DATA *dship;
   SPACE_DATA *spaceobject;
@@ -8085,26 +7937,19 @@ void do_hyperspace(CHAR_DATA *ch, char *argument )
           if( !spaceobject )
             ship->currjump = ship->spaceobject;
 
-          tx = ship->vx;
-          ty = ship->vy;
-          tz = ship->vz;
-
-          ship->vx = ship->cx;
-          ship->vy = ship->cy;
-          ship->vz = ship->cz;
-
-          ship->cx = tx;
-          ship->cy = ty;
-          ship->cz = tz;
+	  vector_copy( &tmp, &ship->pos );
+	  vector_copy( &ship->pos, &ship->hyperpos );
+	  vector_copy( &ship->hyperpos, &tmp );
           ship->currjump = NULL;
 
           echo_to_room( AT_YELLOW, get_room_index(ship->pilotseat), "Hyperjump complete.");
           echo_to_ship( AT_YELLOW, ship, "The ship lurches slightly as it comes out of hyperspace.");
-          sprintf( buf ,"%s enters the starsystem at %.0f %.0f %.0f" , ship->name, ship->vx, ship->vy, ship->vz );
+          sprintf( buf ,"%s enters the starsystem at %.0f %.0f %.0f" , ship->name, ship->pos.x, ship->pos.y, ship->pos.z );
           echo_to_system( AT_YELLOW, ship, buf , NULL );
           ship->shipstate = SHIP_READY;
           STRFREE( ship->home );
           ship->home = STRALLOC( ship->spaceobject->name );
+
           if ( str_cmp("Public",ship->owner) )
             save_ship(ship);
 
@@ -8113,10 +7958,11 @@ void do_hyperspace(CHAR_DATA *ch, char *argument )
               {
                 echo_to_room( AT_YELLOW, get_room_index(dship->pilotseat), "Hyperjump complete.");
                 echo_to_ship( AT_YELLOW, dship, "The ship lurches slightly as it comes out of hyperspace.");
-                sprintf( buf ,"%s enters the starsystem at %.0f %.0f %.0f" , dship->name, dship->vx, dship->vy, dship->vz );
+                sprintf( buf ,"%s enters the starsystem at %.0f %.0f %.0f" , dship->name, dship->pos.x, dship->pos.y, dship->pos.z );
                 echo_to_system( AT_YELLOW, dship, buf , NULL );
                 STRFREE( dship->home );
                 dship->home = STRALLOC( ship->home );
+
                 if ( str_cmp("Public",dship->owner) )
                   save_ship(dship);
               }
@@ -8170,9 +8016,7 @@ void do_hyperspace(CHAR_DATA *ch, char *argument )
 
   for( spaceobject = first_spaceobject; spaceobject; spaceobject = spaceobject->next )
     {
-      if( ( abs ( spaceobject->xpos - ship->vx ) < 100+(spaceobject->gravity*5) )
-          && ( abs ( spaceobject->ypos - ship->vy ) < 100+(spaceobject->gravity*5) )
-          && ( abs ( spaceobject->zpos - ship->vz ) < 100+(spaceobject->gravity*5) ) )
+      if( ship_distance_to_spaceobject( ship,  spaceobject ) < 100 + ( spaceobject->gravity * 5 ) )
         {
           ch_printf(ch, "&RYou are too close to %s to make the jump to lightspeed.\r\n", spaceobject->name );
           return;
@@ -8182,6 +8026,7 @@ void do_hyperspace(CHAR_DATA *ch, char *argument )
   if ( ship->sclass == FIGHTER_SHIP )
     the_chance = IS_NPC(ch) ? ch->top_level
       : (int)  (ch->pcdata->learned[gsn_starfighters]) ;
+
   if ( ship->sclass == MIDSIZE_SHIP )
     the_chance = IS_NPC(ch) ? ch->top_level
       : (int)  (ch->pcdata->learned[gsn_midships]) ;
@@ -8191,6 +8036,7 @@ void do_hyperspace(CHAR_DATA *ch, char *argument )
   if ( ship->sclass == CAPITAL_SHIP )
     the_chance = IS_NPC(ch) ? 0
       : (int) (ch->pcdata->learned[gsn_capitalships]);
+
   if ( number_percent( ) > the_chance )
     {
       send_to_char("&RYou can't figure out which lever to use.\r\n",ch);
@@ -8218,35 +8064,21 @@ void do_hyperspace(CHAR_DATA *ch, char *argument )
 
   ship->energy -= 100;
 
-  tx = ship->vx;
-  ty = ship->vy;
-  tz = ship->vz;
-
-  ship->vx = ship->jx;
-  ship->vy = ship->jy;
-  ship->vz = ship->jz;
-
-  ship->cx = tx;
-  ship->cy = ty;
-  ship->cz = tz;
-
-  ship->jx = tx;
-  ship->jy = ty;
-  ship->jz = tz;
-
-  ship->ox = tx;
-  ship->oy = ty;
-  ship->oz = tz;
+  vector_copy( &tmp, &ship->pos );
+  vector_copy( &ship->pos, &ship->jump );
+  vector_copy( &ship->hyperpos, &tmp );
+  vector_copy( &ship->jump, &tmp );
+  vector_copy( &ship->originpos, &tmp );
 
   if ( ship->sclass == FIGHTER_SHIP )
     learn_from_success( ch, gsn_starfighters );
+
   if ( ship->sclass == MIDSIZE_SHIP )
     learn_from_success( ch, gsn_midships );
+
   if ( ship->sclass == CAPITAL_SHIP )
     learn_from_success( ch, gsn_capitalships );
-
 }
-
 
 void do_target(CHAR_DATA *ch, char *argument )
 {
@@ -8559,7 +8391,8 @@ void do_fire(CHAR_DATA *ch, char *argument )
               return;
             }
         }
-      if ( ship->sclass < 2 && !is_facing( ship, target ) )
+      if ( ship->sclass < CAPITAL_SHIP
+	   && !ship_is_facing_ship( ship, target ) )
         {
           send_to_char("&RThe main laser can only fire forward. You'll need to turn your ship!\r\n",ch);
           return;
@@ -8675,7 +8508,7 @@ void do_fire(CHAR_DATA *ch, char *argument )
               return;
             }
         }
-      if ( ship->sclass < 2 && !is_facing( ship, target ) )
+      if ( ship->sclass < CAPITAL_SHIP && !ship_is_facing_ship( ship, target ) )
         {
           send_to_char("&RThe main ion cannon can only fire forward. You'll need to turn your ship!\r\n",ch);
           return;
@@ -8790,7 +8623,8 @@ void do_fire(CHAR_DATA *ch, char *argument )
               return;
             }
         }
-      if ( ship->sclass < 2 && !is_facing( ship, target ) )
+      if ( ship->sclass < CAPITAL_SHIP
+	   && !ship_is_facing_ship( ship, target ) )
         {
           send_to_char("&RMissiles can only fire in a forward. You'll need to turn your ship!\r\n",ch);
           return;
@@ -8892,7 +8726,8 @@ void do_fire(CHAR_DATA *ch, char *argument )
               return;
             }
         }
-      if ( ship->sclass < 2 && !is_facing( ship, target ) )
+      if ( ship->sclass < CAPITAL_SHIP
+	   && !ship_is_facing_ship( ship, target ) )
         {
           send_to_char("&RTorpedos can only fire in a forward direction. You'll need to turn your ship!\r\n",ch);
           return;
@@ -8994,7 +8829,8 @@ void do_fire(CHAR_DATA *ch, char *argument )
               return;
             }
         }
-      if ( ship->sclass < 2 && !is_facing( ship, target ) )
+      if ( ship->sclass < CAPITAL_SHIP
+	   && !ship_is_facing_ship( ship, target ) )
         {
           send_to_char("&RRockets can only fire forward. You'll need to turn your ship!\r\n",ch);
           return;
@@ -10766,26 +10602,22 @@ void do_radar( CHAR_DATA *ch, char *argument )
   for ( missile = first_missile; missile; missile = missile->next )
     {
 
-      if ( abs(missile->mx - ship->vx) < 50*(ship->sensor+10)*2 &&
-           abs(missile->my - ship->vy) < 50*(ship->sensor+10)*2 &&
-           abs(missile->mz - ship->vz) < 50*(ship->sensor+10)*2 )
+      if( missile_distance_to_ship( missile, ship ) < 50*(ship->sensor+10)*2)
         {
           ch_printf(ch, "%s    %d %d %d\r\n",
                     missile->missiletype == CONCUSSION_MISSILE ? "A Concusion missile" :
                     ( missile->missiletype ==  PROTON_TORPEDO ? "A Torpedo" :
                       ( missile->missiletype ==  HEAVY_ROCKET ? "A Heavy Rocket" : "A Heavy Bomb" ) ),
-                    (missile->mx - ship->vx),
-                    (missile->my - ship->vy),
-                    (missile->mz - ship->vz));
+                    (missile->pos.x - ship->pos.x),
+                    (missile->pos.y - ship->pos.y),
+                    (missile->pos.z - ship->pos.z));
         }
     }
 
   ch_printf(ch, "\r\n&WYour Coordinates: %.0f %.0f %.0f\r\n" ,
-            ship->vx , ship->vy, ship->vz);
-
+            ship->pos.x , ship->pos.y, ship->pos.z);
 
   learn_from_success( ch, gsn_navigation );
-
 }
 
 void do_autotrack( CHAR_DATA *ch, char *argument )

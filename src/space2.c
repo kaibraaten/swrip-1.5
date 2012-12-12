@@ -1478,12 +1478,12 @@ void do_shiptrack( CHAR_DATA *ch, char *argument)
       if( !spaceobject )
         ship->currjump = ship->spaceobject;
 
-      if( ship->jx > 15000000 || ship->jy > 15000000 || ship->jz > 15000000 ||
-          ship->jx < -15000000 || ship->jy < -15000000 || ship->jz < -15000000 ||
-          ship->vx > 15000000 || ship->vy > 15000000 || ship->vz > 15000000 ||
-          ship->vx < -15000000 || ship->vy < -15000000 || ship->vz < -15000000 ||
-          ship->hx > 15000000 || ship->hy > 15000000 || ship->hz > 15000000 ||
-          ship->hx < -15000000 || ship->hy < -15000000 || ship->hz < -15000000 )
+      if( ship->jx > MAX_COORD || ship->jy > MAX_COORD || ship->jz > MAX_COORD
+	  || ship->jx < -MAX_COORD || ship->jy < -MAX_COORD || ship->jz < -MAX_COORD
+	  || ship->vx > MAX_COORD || ship->vy > MAX_COORD || ship->vz > MAX_COORD
+	  || ship->vx < -MAX_COORD || ship->vy < -MAX_COORD || ship->vz < -MAX_COORD
+	  || ship->hx > MAX_COORD || ship->hy > MAX_COORD || ship->hz > MAX_COORD
+	  || ship->hx < -MAX_COORD || ship->hy < -MAX_COORD || ship->hz < -MAX_COORD )
         {
           echo_to_cockpit( AT_RED, ship, "WARNING.. Jump coordinates outside of the known galaxy.");
           echo_to_cockpit( AT_RED, ship, "WARNING.. Hyperjump NOT set.");

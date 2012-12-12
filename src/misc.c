@@ -29,6 +29,7 @@
 #include <string.h>
 #include <time.h>
 #include "mud.h"
+#include "vector3_aux.h"
 
 #define CLONEGOLD 1000
 
@@ -2628,15 +2629,13 @@ void do_hail( CHAR_DATA *ch , char *argument )
           send_to_char("&RWhy don't you just say it?\r\n",ch);
           return;
         }
-      if (abs(target->vx - ship->vx) > 100*(ship->sensor+10)*((target->sclass)+1 ))
-        if ( abs(target->vx - ship->vx) > 100*((ship->comm)+(target->comm)+20) ||
-             abs(target->vy - ship->vy) > 100*((ship->comm)+(target->comm)+20) ||
-             abs(target->vz - ship->vz) > 100*((ship->comm)+(target->comm)+20) )
 
-          {
-            send_to_char("&RThat ship is out of the range of your comm system.\r\n&w", ch);
-            return;
-          }
+      if ( ship_distance_to_ship( target, ship ) > 100*(ship->sensor+10)*((target->sclass)+1 )
+	   && ship_distance_to_ship( target, ship ) > 100*((ship->comm)+(target->comm)+20 ) )
+	{
+	  send_to_char("&RThat ship is out of the range of your comm system.\r\n&w", ch);
+	  return;
+	}
 
       strcpy( buf , "You hail the " );
       strcat( buf , target->name );

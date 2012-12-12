@@ -28,7 +28,7 @@
 #include <time.h>
 #include <unistd.h>
 #include "mud.h"
-
+#include "vector3_aux.h"
 
 ROOM_INDEX_DATA *generate_exit( ROOM_INDEX_DATA *in_room, EXIT_DATA **pexit );
 
@@ -1060,41 +1060,36 @@ void do_look ( CHAR_DATA *ch, char *argument )
                   {
                     if ( target != ship && target->spaceobject )
                       {
-                        if ( abs(target->vx - ship->vx) < 100*(ship->sensor+10)*((target->sclass == SHIP_DEBRIS ? 2 : target->sclass)+1) &&
-                             abs(target->vy - ship->vy) < 100*(ship->sensor+10)*((target->sclass == SHIP_DEBRIS ? 2 : target->sclass)+1) &&
-                             abs(target->vz - ship->vz) < 100*(ship->sensor+10)*((target->sclass == SHIP_DEBRIS ? 2 : target->sclass)+1) )
-
-                          ch_printf(ch, "%s    %.0f %.0f %.0f\r\n",
-                                    target->name,
-                                    (target->vx - ship->vx),
-                                    (target->vy - ship->vy),
-                                    (target->vz - ship->vz));
-
-
-                        else if ( abs(target->vx - ship->vx) < 100*(ship->sensor+10)*((target->sclass == SHIP_DEBRIS ? 2 : target->sclass)+3) &&
-                                  abs(target->vy - ship->vy) < 100*(ship->sensor+10)*((target->sclass == SHIP_DEBRIS ? 2 : target->sclass)+3) &&
-                                  abs(target->vz - ship->vz) < 100*(ship->sensor+10)*((target->sclass == SHIP_DEBRIS ? 2 : target->sclass)+3) )
+			if( ship_distance_to_ship( target, ship ) < 100*(ship->sensor+10)*((target->sclass == SHIP_DEBRIS ? 2 : target->sclass)+1 ) )
+			  {
+			    ch_printf(ch, "%s    %.0f %.0f %.0f\r\n",
+				      target->name,
+				      (target->pos.x - ship->pos.x),
+				      (target->pos.y - ship->pos.y),
+				      (target->pos.z - ship->pos.z));
+			  }
+                        else if ( ship_distance_to_ship( target, ship ) < 100*(ship->sensor+10)*((target->sclass == SHIP_DEBRIS ? 2 : target->sclass)+3))
                           {
                             if ( target->sclass == FIGHTER_SHIP )
                               ch_printf(ch, "A small metallic mass    %.0f %.0f %.0f\r\n",
-                                        (target->vx - ship->vx),
-                                        (target->vy - ship->vy),
-                                        (target->vz - ship->vz));
+                                        (target->pos.x - ship->pos.x),
+                                        (target->pos.y - ship->pos.y),
+                                        (target->pos.z - ship->pos.z));
                             if ( target->sclass == MIDSIZE_SHIP )
                               ch_printf(ch, "A goodsize metallic mass    %.0f %.0f %.0f\r\n",
-                                        (target->vx - ship->vx),
-                                        (target->vy - ship->vy),
-                                        (target->vz - ship->vz));
+                                        (target->pos.x - ship->pos.x),
+                                        (target->pos.y - ship->pos.y),
+                                        (target->pos.z - ship->pos.z));
                             if ( target->sclass == SHIP_DEBRIS )
                               ch_printf(ch, "scattered metallic reflections    %.0f %.0f %.0f\r\n",
-                                        (target->vx - ship->vx),
-                                        (target->vy - ship->vy),
-                                        (target->vz - ship->vz));
+                                        (target->pos.x - ship->pos.x),
+                                        (target->pos.y - ship->pos.y),
+                                        (target->pos.z - ship->pos.z));
                             else if ( target->sclass >= CAPITAL_SHIP )
                               ch_printf(ch, "A huge metallic mass    %.0f %.0f %.0f\r\n",
-                                        (target->vx - ship->vx),
-                                        (target->vy - ship->vy),
-                                        (target->vz - ship->vz));
+                                        (target->pos.x - ship->pos.x),
+                                        (target->pos.y - ship->pos.y),
+                                        (target->pos.z - ship->pos.z));
                           }
 
                       }
