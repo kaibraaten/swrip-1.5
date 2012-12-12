@@ -75,7 +75,7 @@
  * }
  */
 static bool ship_is_facing( const SHIP_DATA * const ship,
-    const Vector3 * const target )
+			    const Vector3 * const target )
 {
   Vector3 h, d;
   bool facing = FALSE;
@@ -97,13 +97,13 @@ static bool ship_is_facing( const SHIP_DATA * const ship,
 }
 
 bool ship_is_facing_ship( const SHIP_DATA * const ship,
-    const SHIP_DATA * const target )
+			  const SHIP_DATA * const target )
 {
   return ship_is_facing( ship, &target->pos );
 }
 
-bool ship_is_facing_planet( const SHIP_DATA * const ship,
-    const PLANET_DATA * const target )
+bool ship_is_facing_spaceobject( const SHIP_DATA * const ship,
+				 const SPACE_DATA * const target )
 {
   return ship_is_facing( ship, &target->pos );
 }
@@ -124,13 +124,13 @@ void ship_turn_180( SHIP_DATA * const ship )
  * Towards another ship.
  * ship_set_course( ship, &target->pos );
  *
- * Towards a planet.
- * ship_set_course( ship, &planet->pos );
+ * Towards a spaceobject.
+ * ship_set_course( ship, &spaceobject->pos );
  *
  * Etc, etc...
  */
 void ship_set_course( SHIP_DATA * const ship,
-    const Vector3 * const destination )
+		      const Vector3 * const destination )
 {
   ship->head.x = destination->x - ship->pos.x;
   ship->head.y = destination->y - ship->pos.y;
@@ -139,19 +139,19 @@ void ship_set_course( SHIP_DATA * const ship,
 }
 
 void ship_set_course_to_ship( SHIP_DATA * const ship,
-    const SHIP_DATA * const target )
+			      const SHIP_DATA * const target )
 {
   ship_set_course( ship, &target->pos );
 }
 
-void ship_set_course_to_planet( SHIP_DATA * const ship,
-    const PLANET_DATA * const target )
+void ship_set_course_to_spaceobject( SHIP_DATA * const ship,
+				     const SPACE_DATA * const target )
 {
   ship_set_course( ship, &target->pos );
 }
 
 void missile_set_course_to_ship( MISSILE_DATA * const missile,
-    const SHIP_DATA * const target )
+				 const SHIP_DATA * const target )
 {
   missile->head.x = target->pos.x - missile->pos.x;
   missile->head.y = target->pos.y - missile->pos.y;
@@ -164,7 +164,7 @@ void missile_set_course_to_ship( MISSILE_DATA * const missile,
  * Useful for grouped ships, docked ships, etc.
  */
 void ship_align_heading( SHIP_DATA * const ship,
-    const SHIP_DATA * const target )
+			 const SHIP_DATA * const target )
 {
   vector_copy( &ship->head, &target->head );
 }
@@ -174,7 +174,7 @@ void ship_align_heading( SHIP_DATA * const ship,
  */
 
 static void move_space_object( Vector3 * const pos,
-    const Vector3 * const head, const int speed )
+			       const Vector3 * const head, const int speed )
 {
   if( speed > 0 )
   {
@@ -204,19 +204,19 @@ void missile_move( MISSILE_DATA * const missile )
 }
 
 double ship_distance_to_ship( const SHIP_DATA * const ship,
-    const SHIP_DATA * const target )
+			      const SHIP_DATA * const target )
 {
   return vector_distance( &ship->pos, &target->pos );
 }
 
-double ship_distance_to_planet( const SHIP_DATA * const ship,
-    const PLANET_DATA * const planet )
+double ship_distance_to_spaceobject( const SHIP_DATA * const ship,
+				     const SPACE_DATA * const spaceobject )
 {
-  return vector_distance( &ship->pos, &planet->pos );
+  return vector_distance( &ship->pos, &spaceobject->pos );
 }
 
 double missile_distance_to_ship( const MISSILE_DATA * const missile,
-    const SHIP_DATA * const target )
+				 const SHIP_DATA * const target )
 {
   return vector_distance( &missile->pos, &target->pos );
 }
