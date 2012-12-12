@@ -504,6 +504,8 @@ struct  frc_app_type
 #define RACE_DEFEL             12
 #define RACE_TRANDOSHAN        13
 #define RACE_CHADRA_FAN        14
+#define RACE_QUARREN           15
+#define RACE_SULLUSTAN         16
 #define RACE_FALLEEN           17
 #define RACE_ITHORIAN          18
 #define RACE_DEVARONIAN        19
@@ -527,9 +529,6 @@ struct  frc_app_type
 #define RACE_ASTROMECH_DROID	37
 #define RACE_INTERROGATION_DROID 38
 #define RACE_GOD 		39
-#define RACE_SULLUSTAN         16  /* big mistake was causing mass chaos */
-#define RACE_QUARREN           15
-
 
 /*
  * Languages -- Altrag
@@ -847,34 +846,30 @@ struct cargo_data
 
 struct space_data
 {
-    SPACE_DATA * next;
-    SPACE_DATA * prev;
-    PLANET_DATA * planet;
-    char       * filename;
-    char       * name;
-    char       * locationa;
-    char       * locationb;
-    char       * locationc;
-    int		 type;
-    float          xpos;
-    float          ypos;
-    float          zpos;
-    float          hx;
-    float          hy;
-    float          hz;
-    int          speed;
-    int          doca;
-    int          docb;
-    int		 docc;
-    bool         seca;
-    bool         secb;
-    bool	 secc;
-    int          gravity;
-    int          low;
-    int          high;
-    int          crash;
-    bool	 trainer;
-    CARGO_DATA  *cargo;
+  SPACE_DATA * next;
+  SPACE_DATA * prev;
+  PLANET_DATA * planet;
+  char       * filename;
+  char       * name;
+  char       * locationa;
+  char       * locationb;
+  char       * locationc;
+  int		 type;
+  Vector3 pos;
+  Vector3 head;
+  int          speed;
+  int          doca;
+  int          docb;
+  int		 docc;
+  bool         seca;
+  bool         secb;
+  bool	 secc;
+  int          gravity;
+  int          low;
+  int          high;
+  int          crash;
+  bool	 trainer;
+  CARGO_DATA  *cargo;
 };
 
 struct  bounty_data
@@ -1033,14 +1028,13 @@ struct ship_data
     bool	tracking;
     int		tcount;
     bool	guard;
-    float       tx, ty, tz;
-    float       vx, vy, vz;
-    float       hx, hy, hz;
-    float       jx, jy, jz;
-    float       cx, cy, cz;
-    float       ox, oy, oz;
+  Vector3 track_vector;          /* tx, ty, tz */
+  Vector3 pos;              /* vx, vy, vz  */
+  Vector3 head;               /* hx, hy, hz */
+  Vector3 jump;      /* jx, jy, jz */
+  Vector3 hyperpos;   /* cx, cy, cz */
+  Vector3 originpos;       /* ox, oy, oz */
     int		maneuverdeg;
-    float       goalhx, goalhy, goalhz;
     int         maxenergy;
     int         energy;
     int         shield;
@@ -1125,7 +1119,7 @@ struct missile_data
     short      missiletype;
     short      age;
     int         speed;
-    int         mx, my, mz;
+  Vector3 pos;
 };
 
 

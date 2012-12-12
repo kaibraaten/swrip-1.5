@@ -1448,10 +1448,14 @@ void do_shiptrack( CHAR_DATA *ch, char *argument)
       hy = atoi(arg2);
       hz = atoi(arg3);
       sprintf( buf, "%.0f %.0f %.0f", ship->vx + hx, ship->vy + hy, ship->vz + hz );
-      if( hx < 1000 ) hx *= 10000;
-      if( hy < 1000 ) hy *= 10000;
-      if( hz < 1000 ) hz *= 10000;
+      if( hx < 1000 )
+	hx *= 10000;
 
+      if( hy < 1000 )
+	hy *= 10000;
+
+      if( hz < 1000 )
+	hz *= 10000;
 
       ship->tx = hx;
       ship->ty = hy;
