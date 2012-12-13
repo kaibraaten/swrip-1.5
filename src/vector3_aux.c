@@ -193,6 +193,11 @@ static void move_space_object( Vector3 * const pos,
   }
 }
 
+void spaceobject_move( SPACE_DATA * const spaceobj )
+{
+  move_space_object( &spaceobj->pos, &spaceobj->head, spaceobj->speed );
+}
+
 void ship_move( SHIP_DATA * const ship )
 {
   move_space_object( &ship->pos, &ship->head, ship->currspeed );

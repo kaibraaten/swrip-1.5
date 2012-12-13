@@ -86,6 +86,7 @@ void ship_align_heading( SHIP_DATA * const ship,
  */
 void ship_move( SHIP_DATA * const ship );
 void missile_move( MISSILE_DATA * const m );
+void spaceobject_move( SPACE_DATA * const spaceobj );
 
 double ship_distance_to_ship( const SHIP_DATA * const ship,
 			      const SHIP_DATA * const target );

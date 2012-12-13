@@ -1485,8 +1485,8 @@ void do_shiptrack( CHAR_DATA *ch, char *argument)
 	  || ship->hx > MAX_COORD || ship->hy > MAX_COORD || ship->hz > MAX_COORD
 	  || ship->hx < -MAX_COORD || ship->hy < -MAX_COORD || ship->hz < -MAX_COORD )
         {
-          echo_to_cockpit( AT_RED, ship, "WARNING.. Jump coordinates outside of the known galaxy.");
-          echo_to_cockpit( AT_RED, ship, "WARNING.. Hyperjump NOT set.");
+          echo_to_cockpit( AT_RED, ship, "WARNING... Jump coordinates outside of the known galaxy.");
+          echo_to_cockpit( AT_RED, ship, "WARNING... Hyperjump NOT set.");
           ship->currjump = NULL;
           ship->tracking = FALSE;
           return;
