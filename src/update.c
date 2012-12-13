@@ -60,7 +60,7 @@ OBJ_DATA *      gobj_prev;
 
 CHAR_DATA *     timechar;
 
-char * corpse_descs[] =
+const char * const corpse_descs[] =
   {
     "The corpse of %s will soon be gone.",
     "The corpse of %s lies here.",
@@ -69,7 +69,7 @@ char * corpse_descs[] =
     "The corpse of %s lies here."
   };
 
-char * d_corpse_descs[] =
+const char * const d_corpse_descs[] =
   {
     "The shattered remains %s will soon be gone.",
     "The shattered remains %s are here.",

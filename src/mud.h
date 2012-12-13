@@ -197,7 +197,6 @@ typedef ch_ret	SPELL_FUN	( int sn, int level, CHAR_DATA *ch, void *vo );
 #define MAX_SKILL		  276
 #define MAX_ABILITY		    9
 #define MAX_RL_ABILITY		    8
-#define MAX_RACE		   40
 #define MAX_NPC_RACE		   91
 #define MAX_LEVEL		  105
 #define MAX_SKILL_LEVEL		  150
@@ -529,6 +528,7 @@ struct  frc_app_type
 #define RACE_ASTROMECH_DROID	37
 #define RACE_INTERROGATION_DROID 38
 #define RACE_GOD 		39
+#define MAX_RACE                   40
 
 /*
  * Languages -- Altrag
@@ -3297,20 +3297,20 @@ struct	social_type
 /*
  * Global constants.
  */
-extern  time_t last_restore_all_time;
-extern  time_t boot_time;  /* this should be moved down */
-extern  HOUR_MIN_SEC * set_boot_time; 
-extern  struct  tm *new_boot_time;
-extern  time_t new_boot_time_t;
+extern time_t last_restore_all_time;
+extern time_t boot_time;  /* this should be moved down */
+extern HOUR_MIN_SEC * set_boot_time; 
+extern struct  tm *new_boot_time;
+extern time_t new_boot_time_t;
 
-extern	const	struct	str_app_type	str_app		[26];
-extern	const	struct	int_app_type	int_app		[26];
-extern	const	struct	wis_app_type	wis_app		[26];
-extern	const	struct	dex_app_type	dex_app		[26];
-extern	const	struct	con_app_type	con_app		[26];
-extern	const	struct	cha_app_type	cha_app		[26];
-extern  const	struct	lck_app_type	lck_app		[26];
-extern  const	struct	frc_app_type	frc_app		[26];
+extern const struct str_app_type str_app[];
+extern const struct int_app_type int_app[];
+extern const struct wis_app_type wis_app[];
+extern const struct dex_app_type dex_app[];
+extern const struct con_app_type con_app[];
+extern const struct cha_app_type cha_app[];
+extern const struct lck_app_type lck_app[];
+extern const struct frc_app_type frc_app[];
 
 extern	const	struct	race_type	race_table	[MAX_RACE];
 extern	const	struct	liq_type	liq_table	[LIQ_MAX];

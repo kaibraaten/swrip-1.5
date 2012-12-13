@@ -27,6 +27,7 @@
 #include "mud.h"
 
 /* undef these at EOF */
+/*
 #define AM 95
 #define AC 95
 #define AT 85
@@ -35,11 +36,12 @@
 #define AD 95
 #define AR 90
 #define AA 95
+*/
 
 /*
  * Race table.
  */
-const   struct  race_type       race_table      [MAX_RACE]      =
+const struct race_type race_table[MAX_RACE] =
   {
     /*  race name          DEF_AFF      st dx ws in cn ch lk fc hp mn re su     RESTRICTION  LANGUAGE */
     /* Firrieron, Barabel, Bothan, Togorian, Dug, Kubaz, Selonian, Gran, Yevetha, (Ooryl) Gand, Duros, Coynite.*/
@@ -216,7 +218,7 @@ int ability_from_name(const char *arg)
 /*
  * Attribute bonus tables.
  */
-const   struct  str_app_type    str_app         [26]            =
+const struct str_app_type str_app[] =
   {
     { -5, -4,   0,  0 },  /* 0  */
     { -5, -4,   3,  1 },  /* 1  */
@@ -246,9 +248,7 @@ const   struct  str_app_type    str_app         [26]            =
     { 10, 12, 999, 60 }  /* 25   */
   };
 
-
-
-const   struct  int_app_type    int_app         [26]            =
+const struct int_app_type int_app[] =
   {
     {  3 },     /*  0 */
     {  5 },     /*  1 */
@@ -278,9 +278,7 @@ const   struct  int_app_type    int_app         [26]            =
     { 99 }      /* 25 */
   };
 
-
-
-const   struct  wis_app_type    wis_app         [26]            =
+const struct wis_app_type wis_app[] =
   {
     { 0 },      /*  0 */
     { 0 },      /*  1 */
@@ -310,9 +308,7 @@ const   struct  wis_app_type    wis_app         [26]            =
     { 7 }       /* 25 */
   };
 
-
-
-const   struct  dex_app_type    dex_app         [26]            =
+const struct dex_app_type dex_app[] =
   {
     {   60 },   /* 0 */
     {   50 },   /* 1 */
@@ -342,9 +338,7 @@ const   struct  dex_app_type    dex_app         [26]            =
     { -120 }    /* 25 */
   };
 
-
-
-const   struct  con_app_type    con_app         [26]            =
+const struct con_app_type con_app[] =
   {
     { -4, 20 },   /*  0 */
     { -3, 25 },   /*  1 */
@@ -374,8 +368,7 @@ const   struct  con_app_type    con_app         [26]            =
     {  8, 99 }    /* 25 */
   };
 
-
-const   struct  cha_app_type    cha_app         [26]            =
+const struct cha_app_type cha_app[] =
   {
     { - 60 },   /* 0 */
     { - 50 },   /* 1 */
@@ -406,7 +399,7 @@ const   struct  cha_app_type    cha_app         [26]            =
   };
 
 /* Have to fix this up - not exactly sure how it works (Scryn) */
-const   struct  lck_app_type    lck_app         [26]            =
+const struct lck_app_type lck_app[] =
   {
     {   60 },   /* 0 */
     {   50 },   /* 1 */
@@ -436,7 +429,7 @@ const   struct  lck_app_type    lck_app         [26]            =
     { -120 }    /* 25 */
   };
 
-const   struct  frc_app_type    frc_app         [26]            =
+const struct frc_app_type frc_app[] =
   {
     {    0 },   /* 0 */
     {    0 },   /* 1 */
@@ -466,13 +459,11 @@ const   struct  frc_app_type    frc_app         [26]            =
     {    0 }    /* 25 */
   };
 
-
-
 /*
  * Liquid properties.
  * Used in #OBJECT section of area file.
  */
-const   struct  liq_type        liq_table       [LIQ_MAX]       =
+const struct liq_type liq_table[LIQ_MAX] =
   {
     { "water",                  "clear",        {  0, 1, 10 }   },  /*  0 */
     { "beer",                   "amber",        {  3, 2,  5 }   },
@@ -571,6 +562,7 @@ int get_spaceobj_type_from_name(const char *name)
  * The skill and spell table.
  * Slot numbers must never be changed as they appear in #OBJECTS sections.
  */
+/*
 #define SLOT(n) n
 #define LI LEVEL_IMMORTAL
 
@@ -584,3 +576,4 @@ int get_spaceobj_type_from_name(const char *name)
 #undef AA
 
 #undef LI
+*/
