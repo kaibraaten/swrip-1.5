@@ -31,31 +31,29 @@
 #include <string.h>
 #include <time.h>
 #include "mud.h"
+#include "vector3_aux.h"
 
 void affectshipcargo( SHIP_DATA *ship, int typeCargo, int amount );
 bool candock( SHIP_DATA *ship );
 
 bool ship_was_in_range( SHIP_DATA *ship, SHIP_DATA *target )
 {
-  if (target && ship && target != ship )
-    if ( abs(target->ox - ship->vx) < 100*(ship->sensor+10)*((target->sclass == SHIP_DEBRIS ? 2 : target->sclass)+3) &&
-         abs(target->oy - ship->vy) < 100*(ship->sensor+10)*((target->sclass == SHIP_DEBRIS ? 2 : target->sclass)+3) &&
-         abs(target->oz - ship->vz) < 100*(ship->sensor+10)*((target->sclass == SHIP_DEBRIS ? 2 : target->sclass)+3) )
-      return TRUE;
-  return FALSE;
+  return target && ship && target != ship
+    && ship_distance_to_ship( ship, target ) < 100*(ship->sensor+10)*((target->sclass == SHIP_DEBRIS ? 2 : target->sclass)+3);
 }
-
 
 void do_jumpvector( CHAR_DATA *ch, char *argument )
 {
   int the_chance, num;
-  float randnum, tx, ty, tz;
+  float randnum;
+  Vector3 projected;
   SHIP_DATA *ship;
   SHIP_DATA *target;
   char buf[MAX_STRING_LENGTH];
 
   num = number_range( 1, 16 );
   randnum = 1.0/(float) num;
+
   if (  (ship = ship_from_cockpit(ch->in_room->vnum))  == NULL )
     {
       send_to_char("&RYou must be in the cockpit, turret or engineroom of a ship to do that!\r\n",ch);
@@ -101,42 +99,37 @@ void do_jumpvector( CHAR_DATA *ch, char *argument )
       return;
     }
 
-
   if( target->shipstate == SHIP_HYPERSPACE )
     {
-      tx = (target->vx - target->ox)*randnum;
-      ty = (target->vy - target->oy)*randnum;
-      tz = (target->vz - target->oz)*randnum;
+      projected.x = (target->pos.x - target->originpos.x)*randnum;
+      projected.y = (target->pos.y - target->originpos.y)*randnum;
+      projected.z = (target->pos.z - target->originpos.z)*randnum;
 
       send_to_char("After some deliberation, you figure out its projected course.\r\n", ch);
-      sprintf(buf, "%s Heading: %.0f, %.0f, %.0f", target->name, tx, ty, tz );
+      sprintf(buf, "%s Heading: %.0f, %.0f, %.0f",
+	      target->name, projected.x, projected.y, projected.z );
       echo_to_cockpit( AT_BLOOD, ship , buf );
       learn_from_success( ch, gsn_jumpvector );
       return;
     }
 
-  tx = (target->cx - target->ox)*randnum;
-  ty = (target->cy - target->oy)*randnum;
-  tz = (target->cz - target->oz)*randnum;
+  projected.x = (target->hyperpos.x - target->originpos.x)*randnum;
+  projected.y = (target->hyperpos.y - target->originpos.y)*randnum;
+  projected.z = (target->hyperpos.z - target->originpos.z)*randnum;
 
   send_to_char("After some deliberation, you figure out its projected course.\r\n", ch);
-  sprintf(buf, "%s Heading: %.0f, %.0f, %.0f", target->name, tx, ty, tz  );
+  sprintf(buf, "%s Heading: %.0f, %.0f, %.0f",
+	  target->name, projected.x, projected.y, projected.z  );
   echo_to_cockpit( AT_BLOOD, ship , buf );
   learn_from_success( ch, gsn_jumpvector );
-  return;
-
 }
 
 void do_reload( CHAR_DATA *ch, char *argument )
 {
-
   /* Reload code added by Darrik Vequir */
-
-
   char arg[MAX_INPUT_LENGTH];
   SHIP_DATA *ship;
   short price = 0;
-
 
   strcpy( arg, argument );
 
@@ -386,9 +379,7 @@ void do_tractorbeam( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if (  (abs(target->vx - ship->vx) >= (100+ship->tractorbeam*2)) ||
-        (abs(target->vy - ship->vy) >= (100+ship->tractorbeam*2)) ||
-        (abs(target->vz - ship->vz) >= (100+ship->tractorbeam*2) ) )
+  if( ship_distance_to_ship( ship, target ) >= (100+ship->tractorbeam*2) )
     {
       send_to_char("&R That ship is too far away! You'll have to fly a litlle closer.\r\n",ch);
       return;
@@ -470,7 +461,7 @@ void do_tractorbeam( CHAR_DATA *ch, char *argument )
 void do_tractorbeam(CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  int the_chance, distance;
+  int the_chance;
   SHIP_DATA *ship;
   SHIP_DATA *target;
   char buf[MAX_STRING_LENGTH];
@@ -590,9 +581,7 @@ void do_tractorbeam(CHAR_DATA *ch, char *argument )
         }
       if( ship->sclass <= SHIP_PLATFORM)
         {
-          if ( abs(ship->vx-target->vx) > 100+ship->tractorbeam ||
-               abs(ship->vy-target->vy) > 100+ship->tractorbeam ||
-               abs(ship->vz-target->vz) > 100+ship->tractorbeam )
+	  if ( ship_distance_to_ship( ship, target ) > 100+ship->tractorbeam )
             {
               send_to_char("&RThat ship is too far away to tractor.\r\n",ch);
               return;
@@ -644,16 +633,14 @@ void do_tractorbeam(CHAR_DATA *ch, char *argument )
       send_to_char("&RThe ship has left the starsytem. Targeting aborted.\r\n",ch);
       return;
     }
+
   the_chance = IS_NPC(ch) ? ch->top_level
     : (int)  (ch->pcdata->learned[gsn_tractorbeams]) ;
-  distance = abs(target->vx - ship->vx)
-    + abs(target->vy - ship->vy)
-    + abs(target->vz - ship->vz);
-  distance /= 3;
+
   the_chance += target->sclass - ship->sclass;
   the_chance += ship->currspeed - target->currspeed;
   the_chance += ship->manuever - target->manuever;
-  the_chance -= distance/(10*(target->sclass+1));
+  the_chance -= ship_distance_to_ship( ship, target ) /(10*(target->sclass+1));
   the_chance /= 2;
   the_chance = URANGE( 1 , the_chance , 99 );
 
@@ -669,21 +656,16 @@ void do_tractorbeam(CHAR_DATA *ch, char *argument )
   target->shipstate = SHIP_TRACTORED;
   ship->energy -= 25 + 25*target->sclass;
 
-
   if ( target->sclass <= ship->sclass )
     {
       target->currspeed = ship->tractorbeam/2;
-      target->hx = ship->vx - target->vx;
-      target->hy = ship->vy - target->vy;
-      target->hz = ship->vz - target->vz;
+      ship_set_course_to_ship( target, ship );
     }
+
   if ( target->sclass > ship->sclass )
     {
-
       ship->currspeed = ship->tractorbeam/2;
-      ship->hx = target->vx - ship->vx;
-      ship->hy = target->vy - ship->vy;
-      ship->hz = target->vz - ship->vz;
+      ship_set_course_to_ship( ship, target );
     }
 
   send_to_char( "&GTarget Locked.\r\n", ch);
@@ -709,7 +691,6 @@ void do_adjusttractorbeam(CHAR_DATA *ch, char *argument )
 
   strcpy( arg, argument );
 
-
   if (  (ship = ship_from_coseat(ch->in_room->vnum))  == NULL )
     {
       send_to_char("&RYou must be in the copilot's seat of a ship to do that!\r\n",ch);
@@ -723,7 +704,6 @@ void do_adjusttractorbeam(CHAR_DATA *ch, char *argument )
       send_to_char("&RYour tractor beam is not trained on a ship.\r\n",ch);
       return;
     }
-
 
   if (arg[0] == '\0')
     {
@@ -765,7 +745,6 @@ void do_adjusttractorbeam(CHAR_DATA *ch, char *argument )
       return;
     }
 
-
   if ( !str_cmp( arg, "pull") || !str_cmp( arg, "none" ) )
     {
       echo_to_cockpit( AT_YELLOW, ship, "Tractor Beam set to pull target.\r\n" );
@@ -787,13 +766,12 @@ void do_adjusttractorbeam(CHAR_DATA *ch, char *argument )
 
   if ( !str_cmp( arg, "dock") )
     {
-      if ( abs(ship->vx-eShip->vx) > 100 ||
-           abs(ship->vy-eShip->vy) > 100 ||
-           abs(ship->vz-eShip->vz) > 100 )
+      if ( ship_distance_to_ship(ship, eShip) > 100 )
         {
           send_to_char("&RYou aren't close enough to dock target.\r\n",ch);
           return;
         }
+
       if ( !candock( eShip ) || !candock( ship ) )
         {
           send_to_char("&RYou have no empty docking port.\r\n",ch);
@@ -805,31 +783,32 @@ void do_adjusttractorbeam(CHAR_DATA *ch, char *argument )
       eShip->docked = ship;
       return;
     }
+
   if ( !str_cmp( arg, "land") )
     {
-      if ( abs(ship->vx-eShip->vx) > 100 ||
-           abs(ship->vy-eShip->vy) > 100 ||
-           abs(ship->vz-eShip->vz) > 100 )
+      if ( ship_distance_to_ship(ship, eShip) > 100 )
         {
           send_to_char("&RYou aren't close enough to the target to pull it into your hanger.\r\n",ch);
           return;
         }
+
       if ( !ship->hanger )
         {
           send_to_char("&RYou have no hanger!\r\n",ch);
           return;
         }
+
       if( !ship->bayopen )
         {
           send_to_char("&RThe bay is not open.\r\n",ch);
           return;
         }
+
       if( ship->sclass < eShip->sclass || eShip->sclass == SHIP_PLATFORM || eShip->sclass == CAPITAL_SHIP )
         {
           send_to_char("&RThat ship can not land in your bay.\r\n",ch);
           return;
         }
-
 
       echo_to_cockpit( AT_YELLOW, ship, "Tractor Beam set to land target.\r\n" );
       eShip->shipstate = SHIP_LAND;
@@ -839,13 +818,12 @@ void do_adjusttractorbeam(CHAR_DATA *ch, char *argument )
 
   if ( !str_cmp( arg, "undock" ) )
     {
-      if ( abs(ship->vx-eShip->vx) > 100 ||
-           abs(ship->vy-eShip->vy) > 100 ||
-           abs(ship->vz-eShip->vz) > 100 )
+      if ( ship_distance_to_ship(ship, eShip) > 100 )
         {
           send_to_char("&RYou aren't close enough to the target to pull it off its position.\r\n",ch);
           return;
         }
+
       if ( !eShip->docked )
         {
           send_to_char("&RYour target is not docked.\r\n",ch);
@@ -1171,25 +1149,24 @@ void do_dock(CHAR_DATA *ch, char *argument)
       return;
     }
 
-  if ( abs(ship->vx-eShip->vx) > 100 ||
-       abs(ship->vy-eShip->vy) > 100 ||
-       abs(ship->vz-eShip->vz) > 100 )
+  if ( ship_distance_to_ship(ship, eShip) > 100 )
     {
-      send_to_char("&RYou aren't close enough to dock.  Get a little closer first then try again.\r\n",ch);
+      send_to_char("&RYou aren't close enough to dock. Get a little closer first then try again.\r\n",ch);
       return;
     }
-
-
 
   if ( ship->sclass == FIGHTER_SHIP )
     the_chance = IS_NPC(ch) ? ch->top_level
       : (int)  (ch->pcdata->learned[gsn_starfighters]) ;
+
   if ( ship->sclass == MIDSIZE_SHIP )
     the_chance = IS_NPC(ch) ? ch->top_level
       : (int)  (ch->pcdata->learned[gsn_midships]) ;
+
   if ( ship->sclass == CAPITAL_SHIP )
     the_chance = IS_NPC(ch) ? ch->top_level
       : (int) (ch->pcdata->learned[gsn_capitalships]);
+
   if ( number_percent( ) > the_chance )
     {
       send_to_char("&RYou can't figure out which lever to use.\r\n",ch);
@@ -1261,9 +1238,8 @@ void dockship( CHAR_DATA *ch, SHIP_DATA *ship )
 
   ship->docking = SHIP_DOCKED;
   ship->currspeed = 0;
-  ship->vx = ship->docked->vx;
-  ship->vy = ship->docked->vy;
-  ship->vz = ship->docked->vz;
+  vector_copy( &ship->pos, &ship->docked->pos );
+
   if( ch )
     {
       if ( ship->sclass == FIGHTER_SHIP )
@@ -1349,23 +1325,18 @@ void do_request(CHAR_DATA *ch, char *argument)
       send_to_char("&RThe other ship needs to have its autopilot turned on.\r\n",ch);
       return;
     }
-  if ( abs(eShip->vx - ship->vx) > 100*((ship->comm)+(eShip->comm)+20) ||
-       abs(eShip->vy - ship->vy) > 100*((ship->comm)+(eShip->comm)+20) ||
-       abs(eShip->vz - ship->vz) > 100*((ship->comm)+(eShip->comm)+20) )
 
+  if( ship_distance_to_ship(eShip, ship) > 100*((ship->comm)+(eShip->comm)+20))
     {
       send_to_char("&RThat ship is out of the range of your comm system.\r\n&w", ch);
       return;
     }
 
-  if ( abs(eShip->vx - ship->vx) > 100*(ship->sensor+10)*((eShip->sclass)+1) ||
-       abs(eShip->vy - ship->vy) > 100*(ship->sensor+10)*((eShip->sclass)+1) ||
-       abs(eShip->vz - ship->vz) > 100*(ship->sensor+10)*((eShip->sclass)+1) )
+  if( ship_distance_to_ship(eShip, ship) > 100*(ship->sensor+10)*((eShip->sclass)+1))
     {
       send_to_char("&RThat ship is too far away to remotely open bay doors.\r\n",ch);
       return;
     }
-
 
   the_chance = IS_NPC(ch) ? ch->top_level : (int) (ch->pcdata->learned[gsn_fake_signal]);
   if ( (eShip->sclass == SHIP_PLATFORM ? 1 : (number_percent( ) >= the_chance)) && !check_pilot(ch,eShip) )
@@ -1398,7 +1369,6 @@ void do_shiptrack( CHAR_DATA *ch, char *argument)
   char arg2[MAX_INPUT_LENGTH];
   char arg3[MAX_INPUT_LENGTH];
   char buf[MAX_STRING_LENGTH];
-  float hx, hy, hz;
 
   argument = one_argument( argument , arg);
   argument = one_argument( argument , arg1);
@@ -1432,6 +1402,8 @@ void do_shiptrack( CHAR_DATA *ch, char *argument)
 
   if( !str_cmp( arg, "set" ) )
     {
+      Vector3 head;
+
       if (ship->shipstate == SHIP_HYPERSPACE )
         {
           send_to_char("&RYou can only do that in realspace!\r\n",ch);
@@ -1444,30 +1416,29 @@ void do_shiptrack( CHAR_DATA *ch, char *argument)
           return;
         }
 
-      hx = atoi(arg1);
-      hy = atoi(arg2);
-      hz = atoi(arg3);
-      sprintf( buf, "%.0f %.0f %.0f", ship->vx + hx, ship->vy + hy, ship->vz + hz );
-      if( hx < 1000 )
-	hx *= 10000;
+      vector_set( &head, atoi(arg1), atoi(arg2), atoi(arg3) );
+      sprintf( buf, "%.0f %.0f %.0f", ship->pos.x + head.x,
+	       ship->pos.y + head.y, ship->pos.z + head.z );
 
-      if( hy < 1000 )
-	hy *= 10000;
+      if( head.x < 1000 )
+	head.x *= 10000;
 
-      if( hz < 1000 )
-	hz *= 10000;
+      if( head.y < 1000 )
+	head.y *= 10000;
 
-      ship->tx = hx;
-      ship->ty = hy;
-      ship->tz = hz;
+      if( head.z < 1000 )
+	head.z *= 10000;
+
+      ship->trackvector.x = head.x;
+      ship->trackvector.y = head.y;
+      ship->trackvector.z = head.z;
 
       ship->tracking = TRUE;
       ship->ch = ch;
       do_trajectory( ch, buf);
 
-      ship->jx = ship->vx + hx;
-      ship->jy = ship->vy + hy;
-      ship->jz = ship->vz + hz;
+      vector_set( &ship->jump, ship->pos.x + head.x,
+		  ship->pos.y + head.y, ship->pos.z + head.z );
 
       for( spaceobject = first_spaceobject; spaceobject; spaceobject = spaceobject->next )
         if( space_in_range( ship, spaceobject ) )
@@ -1478,12 +1449,12 @@ void do_shiptrack( CHAR_DATA *ch, char *argument)
       if( !spaceobject )
         ship->currjump = ship->spaceobject;
 
-      if( ship->jx > MAX_COORD || ship->jy > MAX_COORD || ship->jz > MAX_COORD
-	  || ship->jx < -MAX_COORD || ship->jy < -MAX_COORD || ship->jz < -MAX_COORD
-	  || ship->vx > MAX_COORD || ship->vy > MAX_COORD || ship->vz > MAX_COORD
-	  || ship->vx < -MAX_COORD || ship->vy < -MAX_COORD || ship->vz < -MAX_COORD
-	  || ship->hx > MAX_COORD || ship->hy > MAX_COORD || ship->hz > MAX_COORD
-	  || ship->hx < -MAX_COORD || ship->hy < -MAX_COORD || ship->hz < -MAX_COORD )
+      if( ship->jump.x > MAX_COORD || ship->jump.y > MAX_COORD || ship->jump.z > MAX_COORD
+	  || ship->jump.x < -MAX_COORD || ship->jump.y < -MAX_COORD || ship->jump.z < -MAX_COORD
+	  || ship->pos.x > MAX_COORD || ship->pos.y > MAX_COORD || ship->pos.z > MAX_COORD
+	  || ship->pos.x < -MAX_COORD || ship->pos.y < -MAX_COORD || ship->pos.z < -MAX_COORD
+	  || ship->head.x > MAX_COORD || ship->head.y > MAX_COORD || ship->head.z > MAX_COORD
+	  || ship->head.x < -MAX_COORD || ship->head.y < -MAX_COORD || ship->head.z < -MAX_COORD )
         {
           echo_to_cockpit( AT_RED, ship, "WARNING... Jump coordinates outside of the known galaxy.");
           echo_to_cockpit( AT_RED, ship, "WARNING... Hyperjump NOT set.");
@@ -1492,16 +1463,10 @@ void do_shiptrack( CHAR_DATA *ch, char *argument)
           return;
         }
 
-
-      ship->hyperdistance  = abs(ship->vx - ship->jx) ;
-      ship->hyperdistance += abs(ship->vy - ship->jy) ;
-      ship->hyperdistance += abs(ship->vz - ship->jz) ;
-      ship->hyperdistance /= 50;
-
+      ship->hyperdistance = vector_distance( &ship->pos, &ship->jump ) / 50;
       ship->orighyperdistance = ship->hyperdistance;
 
       send_to_char( "Course laid in. Beginning tracking program.\r\n", ch);
-
       return;
     }
   if( !str_cmp( arg, "stop" ) || !str_cmp( arg, "halt" ))
@@ -1656,15 +1621,11 @@ void do_override(CHAR_DATA *ch, char *argument)
       return;
     }
 
-  if ( abs(eShip->vx - ship->vx) > 100*((ship->comm)+(eShip->comm)+20) ||
-       abs(eShip->vy - ship->vy) > 100*((ship->comm)+(eShip->comm)+20) ||
-       abs(eShip->vz - ship->vz) > 100*((ship->comm)+(eShip->comm)+20) )
-
+  if( ship_distance_to_ship(eShip, ship) > 100*((ship->comm)+(eShip->comm)+20))
     {
       send_to_char("&RThat ship is out of the range of your comm system.\r\n&w", ch);
       return;
     }
-
 
   if ( !check_pilot(ch,eShip) )
     {
@@ -2056,18 +2017,6 @@ void do_renameship( CHAR_DATA *ch, char *argument )
   ship->personalname            = STRALLOC( argument );
   save_ship( ship );
   send_to_char( "&RImperial Database: &WTransaction Complete. Name changed.", ch );
-
-}
-
-long get_distance_from_ship( SHIP_DATA *ship, SHIP_DATA *target )
-{
-  long hx, hy, hz;
-
-  hx = abs( target->vx - ship->vx);
-  hy = abs( target->vy - ship->vy);
-  hz = abs( target->vz - ship->vz);
-
-  return hx+hy+hz;
 }
 
 void target_ship( SHIP_DATA *ship, SHIP_DATA *target )
@@ -2100,7 +2049,8 @@ bool check_hostile( SHIP_DATA *ship )
         {
           if ( !str_cmp( target->owner , "The Rebel Alliance" ) || !str_cmp( target->owner , "The New Republic"))
             {
-              tempdistance = get_distance_from_ship( ship, target );
+              tempdistance = ship_distance_to_ship( ship, target );
+
               if( distance == -1 || distance > tempdistance )
                 {
                   distance = tempdistance;
@@ -2108,11 +2058,12 @@ bool check_hostile( SHIP_DATA *ship )
                 }
             }
         }
+
       if ( (!str_cmp( ship->owner , "The Rebel Alliance" )) || (!str_cmp( ship->owner , "The New Republic" )))
         {
           if ( !str_cmp( target->owner , "The Empire" ) )
             {
-              tempdistance = get_distance_from_ship( ship, target );
+              tempdistance = ship_distance_to_ship( ship, target );
               if( distance == -1 || distance > tempdistance )
                 {
                   distance = tempdistance;
@@ -2120,11 +2071,12 @@ bool check_hostile( SHIP_DATA *ship )
                 }
             }
         }
+
       if ( !str_cmp( ship->owner , "Pirates" ) )
         {
           if ( str_cmp(target->owner, "Pirates") )
             {
-              tempdistance = get_distance_from_ship( ship, target );
+              tempdistance = ship_distance_to_ship( ship, target );
               if( distance == -1 || distance > tempdistance )
                 {
                   distance = tempdistance;
@@ -2132,11 +2084,12 @@ bool check_hostile( SHIP_DATA *ship )
                 }
             }
         }
+
       if ( !str_cmp( ship->owner , "Zsinj" ) )
         {
           if ( str_cmp(target->owner, "Zsinj") )
             {
-              tempdistance = get_distance_from_ship( ship, target );
+              tempdistance = ship_distance_to_ship( ship, target );
               if( distance == -1 || distance > tempdistance )
                 {
                   distance = tempdistance;
@@ -2150,7 +2103,7 @@ bool check_hostile( SHIP_DATA *ship )
                str_cmp(target->owner, "The Empire") &&
                target->type != SHIP_IMPERIAL )
             {
-              tempdistance = get_distance_from_ship( ship, target );
+              tempdistance = ship_distance_to_ship( ship, target );
               if( distance == -1 || distance > tempdistance )
                 {
                   distance = tempdistance;

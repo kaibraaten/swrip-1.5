@@ -762,6 +762,8 @@ struct	race_type
     int         language;               /* Default racial language      */
 };
 
+#define MAX_COORD 15000000
+#define MAX_COORD_S 13000000
 #define MAX_BUS 7
 
 typedef enum {
@@ -1028,7 +1030,7 @@ struct ship_data
     bool	tracking;
     int		tcount;
     bool	guard;
-  Vector3 track_vector;          /* tx, ty, tz */
+  Vector3 trackvector;          /* tx, ty, tz */
   Vector3 pos;              /* vx, vy, vz  */
   Vector3 head;               /* hx, hy, hz */
   Vector3 jump;      /* jx, jy, jz */
@@ -1120,6 +1122,7 @@ struct missile_data
     short      age;
     int         speed;
   Vector3 pos;
+  Vector3 head;
 };
 
 

@@ -58,8 +58,6 @@ int baycount = 0;
 
 #define DEGMULTI 149760
 
-#define MAX_COORD 15000000
-#define MAX_COORD_S 13000000
 #define MAX_STATION    10
 #define MAX_BUS_STOP 14
 
@@ -811,9 +809,9 @@ void move_ships( )
                   /*speed = ship->hyperspeed;*/
 
 		  vector_set( &ship->jump,
-			      ship->pos.x + ship->track_vector.x,
-			      ship->pos.y + ship->track_vector.y,
-			      ship->pos.z + ship->track_vector.z );
+			      ship->pos.x + ship->trackvector.x,
+			      ship->pos.y + ship->trackvector.y,
+			      ship->pos.z + ship->trackvector.z );
 
                   for( spaceobj = first_spaceobject; spaceobj; spaceobj = spaceobj->next )
                     if( space_in_range( ship, spaceobj ) )
@@ -1038,7 +1036,7 @@ void recharge_ships( )
                               the_chance += target->sclass - ship->sclass;
                               the_chance += ship->currspeed - target->currspeed;
                               the_chance += ship->manuever - target->manuever;
-                              the_chance -= ( ship_distance_to_ship( ship, target ) / 3 ) / ( 10 * ( target->sclass + 1 ) );
+                              the_chance -= ship_distance_to_ship( ship, target ) / ( 10 * ( target->sclass + 1 ) );
                               the_chance -= origthe_chance;
                               the_chance /= 2;
                               the_chance += origthe_chance;
@@ -8364,7 +8362,7 @@ void do_fire(CHAR_DATA *ch, char *argument )
       the_chance += target->sclass - ship->sclass;
       the_chance += ship->currspeed - target->currspeed;
       the_chance += ship->manuever - target->manuever;
-      the_chance -= (ship_distance_to_ship( ship, target ) / 3 ) / ( 10 * ( target->sclass + 1 ) );
+      the_chance -= ship_distance_to_ship( ship, target ) / ( 10 * ( target->sclass + 1 ) );
       the_chance -= origthe_chance;
       the_chance /= 2;
       the_chance += origthe_chance;
@@ -8474,7 +8472,7 @@ void do_fire(CHAR_DATA *ch, char *argument )
       the_chance += target->sclass - ship->sclass;
       the_chance += ship->currspeed - target->currspeed;
       the_chance += ship->manuever - target->manuever;
-      the_chance -= (ship_distance_to_ship(ship, target) / 3 )/(10*(target->sclass+1));
+      the_chance -= ship_distance_to_ship(ship, target) / (10*(target->sclass+1));
       the_chance -= origthe_chance;
       the_chance /= 2;
       the_chance += origthe_chance;
@@ -8583,7 +8581,7 @@ void do_fire(CHAR_DATA *ch, char *argument )
       the_chance += target->sclass - ship->sclass;
       the_chance += ship->currspeed - target->currspeed;
       the_chance += ship->manuever - target->manuever;
-      the_chance -= (ship_distance_to_ship(ship, target) / 3)/(10*(target->sclass+1));
+      the_chance -= ship_distance_to_ship(ship, target)/(10*(target->sclass+1));
       the_chance -= origthe_chance;
       the_chance /= 2;
       the_chance += origthe_chance;
@@ -8680,7 +8678,7 @@ void do_fire(CHAR_DATA *ch, char *argument )
       the_chance += target->sclass - ship->sclass;
       the_chance += ship->currspeed - target->currspeed;
       the_chance += ship->manuever - target->manuever;
-      the_chance -= ( ship_distance_to_ship( ship, target ) / 3 )/(10*(target->sclass+1));
+      the_chance -= ship_distance_to_ship( ship, target ) / (10*(target->sclass+1));
       the_chance -= origthe_chance;
       the_chance /= 2;
       the_chance += origthe_chance;
@@ -8778,7 +8776,7 @@ void do_fire(CHAR_DATA *ch, char *argument )
       the_chance += target->sclass - ship->sclass;
       the_chance += ship->currspeed - target->currspeed;
       the_chance += ship->manuever - target->manuever;
-      the_chance -= (ship_distance_to_ship(ship, target) / 3) / (10*(target->sclass+1));
+      the_chance -= ship_distance_to_ship(ship, target) / (10*(target->sclass+1));
       the_chance -= origthe_chance;
       the_chance /= 2;
       the_chance += origthe_chance;
@@ -8868,7 +8866,7 @@ void do_fire(CHAR_DATA *ch, char *argument )
       the_chance += target->sclass - CAPITAL_SHIP+1;
       the_chance += ship->currspeed - target->currspeed;
       the_chance += 100 - target->manuever;
-      the_chance -= (ship_distance_to_ship( ship, target ) / 3)/(10*(target->sclass+1));
+      the_chance -= ship_distance_to_ship( ship, target ) / (10*(target->sclass+1));
       the_chance -= origthe_chance;
       the_chance /= 2;
       the_chance += origthe_chance;
@@ -8960,7 +8958,7 @@ void do_fire(CHAR_DATA *ch, char *argument )
       the_chance += target->sclass - CAPITAL_SHIP+1;
       the_chance += ship->currspeed - target->currspeed;
       the_chance += 100 - target->manuever;
-      the_chance -= (ship_distance_to_ship(ship, target) / 3)/(10*(target->sclass+1));
+      the_chance -= ship_distance_to_ship(ship, target) / (10*(target->sclass+1));
       the_chance -= origthe_chance;
       the_chance /= 2;
       the_chance += origthe_chance;
@@ -9049,7 +9047,7 @@ void do_fire(CHAR_DATA *ch, char *argument )
       the_chance += target->sclass - CAPITAL_SHIP+1;
       the_chance += ship->currspeed - target->currspeed;
       the_chance += 100 - target->manuever;
-      the_chance -= (ship_distance_to_ship(ship, target) / 3) / (10*(target->sclass+1));
+      the_chance -= ship_distance_to_ship(ship, target) / (10*(target->sclass+1));
       the_chance -= origthe_chance;
       the_chance /= 2;
       the_chance += origthe_chance;
@@ -9132,7 +9130,7 @@ void do_fire(CHAR_DATA *ch, char *argument )
       the_chance += target->sclass - (CAPITAL_SHIP+1);
       the_chance += ship->currspeed - target->currspeed;
       the_chance += 100 - target->manuever;
-      the_chance -= (ship_distance_to_ship(ship, target) / 3 ) / (10*(target->sclass+1));
+      the_chance -= ship_distance_to_ship(ship, target) / (10*(target->sclass+1));
       the_chance -= origthe_chance;
       the_chance /= 2;
       the_chance += origthe_chance;
@@ -9215,7 +9213,7 @@ void do_fire(CHAR_DATA *ch, char *argument )
       the_chance += target->sclass - (CAPITAL_SHIP+1);
       the_chance += ship->currspeed - target->currspeed;
       the_chance += 100 - target->manuever;
-      the_chance -= (ship_distance_to_ship( ship, target ) / 3 ) / (10*(target->sclass+1));
+      the_chance -= ship_distance_to_ship( ship, target ) / (10*(target->sclass+1));
       the_chance -= origthe_chance;
       the_chance /= 2;
       the_chance += origthe_chance;
@@ -9298,7 +9296,7 @@ void do_fire(CHAR_DATA *ch, char *argument )
       the_chance += target->sclass - (CAPITAL_SHIP+1);
       the_chance += ship->currspeed - target->currspeed;
       the_chance += 100 - target->manuever;
-      the_chance -= (ship_distance_to_ship( ship, target ) / 3) / (10*(target->sclass+1));
+      the_chance -= ship_distance_to_ship( ship, target ) / (10*(target->sclass+1));
       the_chance -= origthe_chance;
       the_chance /= 2;
       the_chance += origthe_chance;
@@ -9382,7 +9380,7 @@ void do_fire(CHAR_DATA *ch, char *argument )
       the_chance += target->sclass - (CAPITAL_SHIP+1);
       the_chance += ship->currspeed - target->currspeed;
       the_chance += 100 - target->manuever;
-      the_chance -= (ship_distance_to_ship( ship, target ) / 3 ) / (10*(target->sclass+1));
+      the_chance -= ship_distance_to_ship( ship, target ) / (10*(target->sclass+1));
       the_chance -= origthe_chance;
       the_chance /= 2;
       the_chance += origthe_chance;
@@ -9465,7 +9463,7 @@ void do_fire(CHAR_DATA *ch, char *argument )
       the_chance += target->sclass - (CAPITAL_SHIP+1);
       the_chance += ship->currspeed - target->currspeed;
       the_chance += 100 - target->manuever;
-      the_chance -= (ship_distance_to_ship( ship, target ) / 3 ) / (10*(target->sclass+1));
+      the_chance -= ship_distance_to_ship( ship, target ) / (10*(target->sclass+1));
       the_chance -= origthe_chance;
       the_chance /= 2;
       the_chance += origthe_chance;
@@ -9548,7 +9546,7 @@ void do_fire(CHAR_DATA *ch, char *argument )
       the_chance += target->sclass - (CAPITAL_SHIP+1);
       the_chance += ship->currspeed - target->currspeed;
       the_chance += 100 - target->manuever;
-      the_chance -= (ship_distance_to_ship( ship, target ) / 3 ) / (10*(target->sclass+1));
+      the_chance -= ship_distance_to_ship( ship, target ) / (10*(target->sclass+1));
       the_chance -= origthe_chance;
       the_chance /= 2;
       the_chance += origthe_chance;
@@ -9631,7 +9629,7 @@ void do_fire(CHAR_DATA *ch, char *argument )
       the_chance += target->sclass - (CAPITAL_SHIP+1);
       the_chance += ship->currspeed - target->currspeed;
       the_chance += 100 - target->manuever;
-      the_chance -= (ship_distance_to_ship( ship, target ) / 3) / (10*(target->sclass+1));
+      the_chance -= ship_distance_to_ship( ship, target ) / (10*(target->sclass+1));
       the_chance -= origthe_chance;
       the_chance /= 2;
       the_chance += origthe_chance;
