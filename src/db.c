@@ -2919,7 +2919,7 @@ void boot_log( const char *str, ... )
 void show_file( CHAR_DATA *ch, const char *filename )
 {
   FILE *fp;
-  char buf[MAX_STRING_LENGTH];
+  signed char buf[MAX_STRING_LENGTH];
   int c;
   int num = 0;
 
@@ -2927,18 +2927,21 @@ void show_file( CHAR_DATA *ch, const char *filename )
     {
       while ( !feof(fp) )
         {
-          while ((buf[num]=fgetc(fp)) != EOF
-                 &&      buf[num] != '\n'
-                 &&      buf[num] != '\r'
-                 &&      num < (MAX_STRING_LENGTH-2))
+          while ( ( buf[ num ] = fgetc( fp ) ) != EOF
+		  && buf[num] != '\n'
+		  && buf[num] != '\r'
+		  && num < (MAX_STRING_LENGTH-2))
             num++;
+
           c = fgetc(fp);
+
           if ( (c != '\n' && c != '\r') || c == buf[num] )
             ungetc(c, fp);
+
           buf[num++] = '\n';
           buf[num++] = '\r';
           buf[num  ] = '\0';
-          send_to_pager( buf, ch );
+          send_to_pager( (const char*) buf, ch );
           num = 0;
         }
     }
@@ -4397,7 +4400,7 @@ void load_buildlist( void )
   int low, hi;
   int mlow, mhi, olow, ohi, rlow, rhi;
   bool badfile = FALSE;
-  char temp;
+  signed char temp;
 
   dp = opendir( GOD_DIR );
   dentry = readdir( dp );
@@ -4418,6 +4421,7 @@ void load_buildlist( void )
           while ( !feof(fp) && !ferror(fp) )
             {
               low = 0; hi = 0; word[0] = 0; line[0] = 0;
+
               if ( (temp = fgetc(fp)) != EOF )
                 ungetc( temp, fp );
               else

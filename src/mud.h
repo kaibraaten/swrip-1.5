@@ -418,7 +418,7 @@ struct	descriptor_data
     unsigned long	pagesize;
     int			pagetop;
     char *		pagepoint;
-    char		pagecmd;
+  signed char		pagecmd;
     char		pagecolor;
     int			newstate;
     unsigned char	prevcolor;
