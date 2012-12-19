@@ -2919,7 +2919,7 @@ void boot_log( const char *str, ... )
 void show_file( CHAR_DATA *ch, const char *filename )
 {
   FILE *fp;
-  signed char buf[MAX_STRING_LENGTH];
+  char buf[MAX_STRING_LENGTH];
   int c;
   int num = 0;
 
@@ -2927,7 +2927,7 @@ void show_file( CHAR_DATA *ch, const char *filename )
     {
       while ( !feof(fp) )
         {
-          while ( ( buf[ num ] = fgetc( fp ) ) != EOF
+          while ( ( buf[ num ] = fgetc( fp ) ) != (char) EOF
 		  && buf[num] != '\n'
 		  && buf[num] != '\r'
 		  && num < (MAX_STRING_LENGTH-2))
@@ -4400,10 +4400,11 @@ void load_buildlist( void )
   int low, hi;
   int mlow, mhi, olow, ohi, rlow, rhi;
   bool badfile = FALSE;
-  signed char temp;
+  int temp;
 
   dp = opendir( GOD_DIR );
   dentry = readdir( dp );
+
   while ( dentry )
     {
       if ( dentry->d_name[0] != '.' )
