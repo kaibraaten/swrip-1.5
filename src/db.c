@@ -408,6 +408,7 @@ void boot_db( bool fCopyOver )
   sysdata.save_flags                    = SV_DEATH | SV_PASSCHG | SV_AUTO
     | SV_PUT | SV_DROP | SV_GIVE
     | SV_AUCTION | SV_ZAPDROP | SV_IDLE;
+
   if ( !load_systemdata(&sysdata) )
     {
       log_string( "Not found.  Creating new configuration." );
@@ -727,41 +728,55 @@ void boot_db( bool fCopyOver )
    * Reset all areas once.
    * Load up the notes file.
    */
-  {
-    log_string( "Fixing exits" );
-    fix_exits( );
-    fBootDb     = FALSE;
-    log_string( "Initializing economy" );
-    initialize_economy( );
-    /*loads vendors on each reboot -Legonas*/
-    log_string ( "Reading in Vendors" );
-    load_vendors ( );
-    log_string ( "Reading in Storerooms" );
-    load_storerooms( );
+  log_string( "Fixing exits" );
+  fix_exits( );
 
-    log_string( "Loading buildlist" );
-    load_buildlist( );
-    log_string( "Loading boards" );
-    load_boards( );
-    log_string( "Loading clans" );
-    load_clans( );
-    log_string( "Loading bans" );
-    load_banlist( );
-    log_string( "Loading corpses" );
-    load_corpses( );
-    log_string( "Loading space" );
-    load_space( );
-    log_string( "Loading ships" );
-    load_ships( );
-    log_string( "Loading bounties" );
-    load_bounties( );
-    log_string( "Loading governments" );
-    load_planets( );
-    log_string( "Resetting areas" );
-    area_update( );
+  fBootDb     = FALSE;
 
-    MOBtrigger = TRUE;
-  }
+  log_string( "Initializing economy" );
+  initialize_economy( );
+
+  /*loads vendors on each reboot -Legonas*/
+  log_string ( "Reading in Vendors" );
+  load_vendors ( );
+
+  log_string ( "Reading in Storerooms" );
+  load_storerooms( );
+
+  log_string( "Loading buildlist" );
+  load_buildlist( );
+
+  log_string( "Loading boards" );
+  load_boards( );
+
+  log_string( "Loading clans" );
+  load_clans( );
+
+  log_string( "Loading bans" );
+  load_banlist( );
+
+  log_string( "Loading corpses" );
+  load_corpses( );
+
+  log_string( "Loading space" );
+  load_space( );
+
+  log_string( "Loading ships" );
+  load_ships( );
+
+  log_string( "Loading bounties" );
+  load_bounties( );
+
+  log_string( "Loading governments" );
+  load_planets( );
+
+  log_string( "Loading shuttles" );
+  load_shuttles();
+
+  log_string( "Resetting areas" );
+  area_update( );
+
+  MOBtrigger = TRUE;
 
   /* init_maps ( ); */
 

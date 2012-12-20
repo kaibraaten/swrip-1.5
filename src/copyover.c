@@ -65,6 +65,10 @@ void do_copyover( CHAR_DATA * ch, char *argument )
   char buf3[100];
   char filename[256];
 
+  /*
+    SHUTTLE_DATA * tshuttle;
+  */
+
   if( !fp )
   {
     char logbuf[MAX_STRING_LENGTH];
@@ -83,6 +87,11 @@ void do_copyover( CHAR_DATA * ch, char *argument )
 #endif
 
   sprintf( buf, "%s", "\r\nA Blinding Flash of light starts heading towards you, before you can think it engulfs you!\r\n" );
+
+  /*
+  for ( tshuttle = first_shuttle; tshuttle; tshuttle = tshuttle->next )
+    save_shuttle(tshuttle);
+  */
 
   /* For each playing descriptor, save its state */
   for( d = first_descriptor; d; d = d_next )
@@ -130,9 +139,6 @@ void do_copyover( CHAR_DATA * ch, char *argument )
 
 #ifdef SWRIP_USE_IMC
   imc_hotboot();
-#endif
-
-#ifdef SWRIP_USE_IMC
   sprintf( buf3, "%d", imc_getsocket( this_imcmud ) );
 #else
   sprintf( buf3, "%d", -1 );

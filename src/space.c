@@ -47,6 +47,11 @@ MISSILE_DATA * last_missile;
 SPACE_DATA * first_spaceobject;
 SPACE_DATA * last_spaceobject;
 
+int baycount = 0;
+
+#define DEGMULTI 149760
+
+#if 0
 int bus_pos =0;
 int bus_planet =0;
 int bus2_planet = 8;
@@ -54,9 +59,6 @@ int bus3_planet = 11;
 int bus4_planet = 3;
 int turbocar_stop =0;
 int corus_shuttle =0;
-int baycount = 0;
-
-#define DEGMULTI 149760
 
 #define MAX_STATION    10
 #define MAX_BUS_STOP 14
@@ -156,6 +158,7 @@ char *  const   station_name [MAX_STATION] =
     "College Station" , "Holographic Zoo of Extinct Animals" ,
     "Dometown Station " , "Monument Plaza"
   };
+#endif
 
 /* local routines */
 void    fread_ship( SHIP_DATA *ship, FILE *fp );
@@ -168,8 +171,10 @@ void    resetship( SHIP_DATA *ship );
 void    approachland( SHIP_DATA *ship, char *arg );
 void    landship( SHIP_DATA *ship, char *arg );
 void    launchship( SHIP_DATA *ship );
+#if 0
 bool    land_bus( SHIP_DATA *ship, int destination );
 void    launch_bus( SHIP_DATA *ship );
+#endif
 void    echo_to_room_dnr( int ecolor, ROOM_INDEX_DATA *room, char *argument );
 ch_ret drive_ship( CHAR_DATA *ch, SHIP_DATA *ship, EXIT_DATA *exit, int fall );
 void sound_to_ship( SHIP_DATA *ship , char *argument );
@@ -194,7 +199,7 @@ void echo_to_room_dnr ( int ecolor , ROOM_INDEX_DATA *room ,  char *argument )
     }
 }
 
-
+#if 0
 bool  land_bus( SHIP_DATA *ship, int destination )
 {
   char buf[MAX_STRING_LENGTH];
@@ -467,6 +472,7 @@ void update_bus( )
         }
     }
 }
+#endif
 
 void move_ships( )
 {
@@ -3180,8 +3186,13 @@ bool load_ship_file( const char *shipfile )
   char filename[256];
   SHIP_DATA *ship;
   FILE *fp;
+  bool found;
+
+#if 0
   bool found, isbus = FALSE;
   int bus;
+#endif
+
   ROOM_INDEX_DATA *pRoomIndex;
   CLAN_DATA *clan;
 
@@ -3241,13 +3252,16 @@ bool load_ship_file( const char *shipfile )
       if( !(ship->dockingports) )
         ship->dockingports = 0;
 
+#if 0
       for( bus = 0; bus < MAX_BUS; bus++ )
         if( ship->cockpit == serin[bus].cockpitvnum )
           isbus = TRUE;
+#endif
 
-      if ( ( !str_cmp("Trainer", ship->owner) || !str_cmp("Public",ship->owner) || ship->type == MOB_SHIP ) && !isbus )
+      if ( ( !str_cmp("Trainer", ship->owner)
+	     || !str_cmp("Public",ship->owner)
+	     || ship->type == MOB_SHIP ) ) /*&& !isbus ) */
         {
-
           if ( ship->sclass != SHIP_PLATFORM && ship->type != MOB_SHIP && ship->sclass != CAPITAL_SHIP )
             {
               extract_ship( ship );
@@ -3305,14 +3319,6 @@ bool load_ship_file( const char *shipfile )
 
 
         }
-
-      else if ( ship->cockpit == ROOM_SENATE_SHUTTLE ||
-                ship->cockpit == ROOM_CORUSCANT_TURBOCAR ||
-                ship->cockpit == ROOM_CORUSCANT_SHUTTLE ||
-                isbus  )
-        {
-
-	}
       else if ( ( pRoomIndex = get_room_index( ship->lastdoc ) ) != NULL
                 && ship->sclass != CAPITAL_SHIP && ship->sclass != SHIP_PLATFORM )
         {
@@ -5738,7 +5744,7 @@ bool ship_to_room(SHIP_DATA *ship , int vnum )
   return TRUE;
 }
 
-
+#if 0
 void do_board( CHAR_DATA *ch, char *argument )
 {
   ROOM_INDEX_DATA *toroom;
@@ -5850,6 +5856,7 @@ void do_board( CHAR_DATA *ch, char *argument )
   else
     send_to_char("That ship has no entrance!\r\n", ch);
 }
+#endif
 
 bool rent_ship( CHAR_DATA *ch , SHIP_DATA *ship )
 {
@@ -5873,6 +5880,7 @@ bool rent_ship( CHAR_DATA *ch , SHIP_DATA *ship )
 
 }
 
+#if 0
 void do_leaveship( CHAR_DATA *ch, char *argument )
 {
   ROOM_INDEX_DATA *fromroom;
@@ -5926,6 +5934,7 @@ void do_leaveship( CHAR_DATA *ch, char *argument )
   else
     send_to_char ( "The exit doesn't seem to be working properly.\r\n", ch );
 }
+#endif
 
 void do_launch( CHAR_DATA *ch, char *argument )
 {
@@ -10554,6 +10563,7 @@ void do_autotrack( CHAR_DATA *ch, char *argument )
 
 }
 
+#if 0
 void do_findserin( CHAR_DATA *ch, char *argument )
 {
   bool ch_comlink = FALSE;
@@ -10625,6 +10635,7 @@ void do_pluogus( CHAR_DATA *ch, char *argument )
   do_findserin( ch, "pluogus" );
   return;
 }
+#endif
 
 #if 0
 void do_pluogus( CHAR_DATA *ch, char *argument )

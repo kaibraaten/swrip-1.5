@@ -1021,6 +1021,7 @@ void do_look ( CHAR_DATA *ch, char *argument )
         do_exits( ch, "" );
 
       show_ships_to_char( ch->in_room->first_ship, ch );
+      show_shuttles_to_char( ch->in_room->first_shuttle, ch );
       show_list_to_char( ch->in_room->first_content, ch, FALSE, FALSE );
       show_char_to_char( ch->in_room->first_person,  ch );
 

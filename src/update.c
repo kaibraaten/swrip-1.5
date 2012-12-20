@@ -2277,9 +2277,8 @@ void update_handler( void )
   if ( --pulse_space   <= 0 )
     {
       pulse_space    = PULSE_SPACE;
-      update_space  ( );
-      update_bus ( );
-      update_traffic ( );
+      update_space( );
+      update_shuttle( );
     }
 
   if ( --pulse_recharge <= 0 )
