@@ -34,8 +34,6 @@ int top_herb;
 SKILLTYPE *             skill_table     [MAX_SKILL];
 SKILLTYPE *             herb_table      [MAX_HERB];
 
-const char * const skill_tname[] = { "unknown", "Spell", "Skill", "Weapon", "Tongue", "Herb" };
-
 #ifdef SWRIP_USE_DLSYM
 
 SPELL_FUN *spell_function( const char *name )

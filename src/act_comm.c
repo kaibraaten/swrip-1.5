@@ -2252,16 +2252,6 @@ bool can_learn_lang( CHAR_DATA *ch, int language )
   return FALSE;
 }
 
-int const lang_array[] = { LANG_COMMON, LANG_WOOKIEE, LANG_TWI_LEK, LANG_RODIAN,
-                           LANG_HUTT, LANG_MON_CALAMARI, LANG_SHISTAVANEN, LANG_EWOK,
-                           LANG_ITHORIAN, LANG_GOTAL, LANG_DEVARONIAN,
-                           LANG_DROID, LANG_SPIRITUAL, LANG_MAGICAL,
-                           LANG_GAMORREAN, LANG_GOD, LANG_ANCIENT, LANG_JAWA,
-                           LANG_CLAN, LANG_ADARIAN, LANG_VERPINE, LANG_DEFEL,
-                           LANG_TRANDOSHAN, LANG_CHADRA_FAN, LANG_QUARREN,
-                           LANG_SULLUSTAN, LANG_FALLEEN, LANG_BINARY,
-                           LANG_YEVETHAN, LANG_GAND, LANG_DUROS, LANG_COYNITE, LANG_UNKNOWN };
-
 /* Note: does not count racial language.  This is intentional (for now). */
 int countlangs( int languages )
 {
@@ -2277,17 +2267,6 @@ int countlangs( int languages )
     }
   return numlangs;
 }
-
-const char * const lang_names[] =
-  { "common", "wookiee", "twilek", "rodian", "hutt",
-    "mon calamari", "shistavanen", "ewok", "ithorian",
-    "gotal", "devaronian", "barabel", "firrerreo",
-    "bothan", "gamorrean", "togorian", "kubaz",
-    "jawa", "clan", "adarian", "verpine", "defel",
-    "trandoshan", "chadra-fan", "quarren", "sullustan",
-    "falleen", "binary", "yevethan", "gand", "duros",
-    "coynite", ""
-  };
 
 void do_speak( CHAR_DATA *ch, char *argument )
 {

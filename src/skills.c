@@ -28,31 +28,6 @@
 #include <ctype.h>
 #include "mud.h"
 
-const char * const spell_flag[] =
-  { "water", "earth", "air", "astral", "area", "distant", "reverse",
-    "save_half_dam", "save_negates", "accumulative", "recastable", "noscribe",
-    "nobrew", "group", "object", "character", "secretskill", "pksensitive" };
-
-const char * const spell_saves[] =
-  { "none", "poison_death", "wands", "para_petri", "breath", "spell_staff" };
-
-const char * const spell_damage[] =
-  { "none", "fire", "cold", "electricity", "energy", "acid", "poison", "drain" };
-
-const char * const spell_action[] =
-  { "none", "create", "destroy", "resist", "suscept", "divinate", "obscure",
-    "change" };
-
-const char * const spell_power[] =
-  { "none", "minor", "greater", "major" };
-
-const char * const spell_class[] =
-  { "none", "lunar", "solar", "travel", "summon", "life", "death", "illusion" };
-
-const char * const target_type[] =
-  { "ignore", "offensive", "defensive", "self", "objinv" };
-
-
 void show_char_to_char( CHAR_DATA *list, CHAR_DATA *ch );
 
 int ris_save( CHAR_DATA *ch, int chance, int ris );
@@ -73,77 +48,6 @@ void skill_notfound( CHAR_DATA *ch, char *argument )
 {
   send_to_char( "Huh?\r\n", ch );
   return;
-}
-
-
-int get_ssave( char *name )
-{
-  size_t x;
-
-  for ( x = 0; x < sizeof(spell_saves) / sizeof(spell_saves[0]); x++ )
-    if ( !str_cmp( name, spell_saves[x] ) )
-      return x;
-  return -1;
-}
-
-int get_starget( char *name )
-{
-  size_t x;
-
-  for ( x = 0; x < sizeof(target_type) / sizeof(target_type[0]); x++ )
-    if ( !str_cmp( name, target_type[x] ) )
-      return x;
-  return -1;
-}
-
-int get_sflag( char *name )
-{
-  size_t x;
-
-  for ( x = 0; x < sizeof(spell_flag) / sizeof(spell_flag[0]); x++ )
-    if ( !str_cmp( name, spell_flag[x] ) )
-      return x;
-  return -1;
-}
-
-int get_sdamage( char *name )
-{
-  size_t x;
-
-  for ( x = 0; x < sizeof(spell_damage) / sizeof(spell_damage[0]); x++ )
-    if ( !str_cmp( name, spell_damage[x] ) )
-      return x;
-  return -1;
-}
-
-int get_saction( char *name )
-{
-  size_t x;
-
-  for ( x = 0; x < sizeof(spell_action) / sizeof(spell_action[0]); x++ )
-    if ( !str_cmp( name, spell_action[x] ) )
-      return x;
-  return -1;
-}
-
-int get_spower( char *name )
-{
-  size_t x;
-
-  for ( x = 0; x < sizeof(spell_power) / sizeof(spell_power[0]); x++ )
-    if ( !str_cmp( name, spell_power[x] ) )
-      return x;
-  return -1;
-}
-
-int get_sclass( char *name )
-{
-  size_t x;
-
-  for ( x = 0; x < sizeof(spell_class) / sizeof(spell_class[0]); x++ )
-    if ( !str_cmp( name, spell_class[x] ) )
-      return x;
-  return -1;
 }
 
 bool is_legal_kill(CHAR_DATA *ch, CHAR_DATA *vch)
@@ -441,31 +345,35 @@ void do_slookup( CHAR_DATA *ch, char *argument )
                    sn, skill->slot, skill_tname[skill->type], skill->name );
         if ( skill->flags )
           {
-            int x;
+            size_t x = 0;
 
             ch_printf( ch, "Damtype: %s  Acttype: %s   Classtype: %s   Powertype: %s\r\n",
-                       spell_damage[SPELL_DAMAGE( skill )],
-                       spell_action[SPELL_ACTION( skill )],
-                       spell_class[SPELL_CLASS( skill )],
-                       spell_power[SPELL_POWER( skill )] );
+                       get_spelldamage_name( SPELL_DAMAGE( skill ) ),
+                       get_spellaction_name( SPELL_ACTION( skill ) ),
+                       get_spellclass_name( SPELL_CLASS( skill ) ),
+                       get_spellpower_name( SPELL_POWER( skill ) ) );
+
             strcpy( buf, "Flags:" );
+
             for ( x = 11; x < 32; x++ )
               if ( SPELL_FLAG( skill, 1 << x ) )
                 {
                   strcat( buf, " " );
-                  strcat( buf, spell_flag[x-11] );
+                  strcat( buf, get_spellflag_name( x-11 ) );
                 }
+
             strcat( buf, "\r\n" );
             send_to_char( buf, ch );
           }
-        ch_printf( ch, "Saves: %s\r\n", spell_saves[(int) skill->saves] );
+
+        ch_printf( ch, "Saves: %s\r\n", get_spellsaves_name( skill->saves ) );
 
         if ( skill->difficulty != '\0' )
           ch_printf( ch, "Difficulty: %d\r\n", (int) skill->difficulty );
 
         ch_printf( ch, "Type: %s  Target: %s  Minpos: %d  Mana: %d  Beats: %d\r\n",
                    skill_tname[skill->type],
-                   target_type[URANGE(TAR_IGNORE, skill->target, TAR_OBJ_INV)],
+                   get_spelltarget_name(URANGE(TAR_IGNORE, skill->target, TAR_OBJ_INV)),
                    skill->minimum_position,
                    skill->min_mana,
                    skill->beats );
@@ -726,7 +634,7 @@ void do_sset( CHAR_DATA *ch, char *argument )
         }
       if ( !str_cmp( arg2, "damtype" ) )
         {
-          int x = get_sdamage( argument );
+          int x = get_spelldamage( argument );
 
           if ( x == -1 )
             send_to_char( "Not a spell damage type.\r\n", ch );
@@ -739,7 +647,7 @@ void do_sset( CHAR_DATA *ch, char *argument )
         }
       if ( !str_cmp( arg2, "acttype" ) )
         {
-          int x = get_saction( argument );
+          int x = get_spellaction( argument );
 
           if ( x == -1 )
             send_to_char( "Not a spell action type.\r\n", ch );
@@ -752,7 +660,7 @@ void do_sset( CHAR_DATA *ch, char *argument )
         }
       if ( !str_cmp( arg2, "classtype" ) )
         {
-          int x = get_sclass( argument );
+          int x = get_spellclass( argument );
 
           if ( x == -1 )
             send_to_char( "Not a spell class type.\r\n", ch );
@@ -765,7 +673,7 @@ void do_sset( CHAR_DATA *ch, char *argument )
         }
       if ( !str_cmp( arg2, "powertype" ) )
         {
-          int x = get_spower( argument );
+          int x = get_spellpower( argument );
 
           if ( x == -1 )
             send_to_char( "Not a spell power type.\r\n", ch );
@@ -778,7 +686,7 @@ void do_sset( CHAR_DATA *ch, char *argument )
         }
       if ( !str_cmp( arg2, "flag" ) )
         {
-          int x = get_sflag( argument );
+          int x = get_spellflag( argument );
 
           if ( x == -1 )
             send_to_char( "Not a spell flag.\r\n", ch );
@@ -791,7 +699,7 @@ void do_sset( CHAR_DATA *ch, char *argument )
         }
       if ( !str_cmp( arg2, "saves" ) )
         {
-          int x = get_ssave( argument );
+          int x = get_spellsave( argument );
 
           if ( x == -1 )
             send_to_char( "Not a saving type.\r\n", ch );
@@ -836,7 +744,7 @@ void do_sset( CHAR_DATA *ch, char *argument )
 
       if ( !str_cmp( arg2, "target" ) )
         {
-          int x = get_starget( argument );
+          int x = get_spelltarget( argument );
 
           if ( x == -1 )
             send_to_char( "Not a valid target type.\r\n", ch );

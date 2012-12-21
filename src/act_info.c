@@ -32,35 +32,6 @@
 
 ROOM_INDEX_DATA *generate_exit( ROOM_INDEX_DATA *in_room, EXIT_DATA **pexit );
 
-const char *  const   where_name      [] =
-  {
-    "<used as light>     ",
-    "<worn on finger>    ",
-    "<worn on finger>    ",
-    "<worn around neck>  ",
-    "<worn around neck>  ",
-    "<worn on body>      ",
-    "<worn on head>      ",
-    "<worn on legs>      ",
-    "<worn on feet>      ",
-    "<worn on hands>     ",
-    "<worn on arms>      ",
-    "<energy shield>     ",
-    "<worn about body>   ",
-    "<worn about waist>  ",
-    "<worn around wrist> ",
-    "<worn around wrist> ",
-    "<wielded>           ",
-    "<held>              ",
-    "<dual wielded>      ",
-    "<worn on ears>      ",
-    "<worn on eyes>      ",
-    "<missile wielded>   ",
-    "<floating>          ",
-    "<worn over body>    "
-  };
-
-
 /*
  * Local functions.
  */
@@ -3989,7 +3960,7 @@ void do_slist( CHAR_DATA *ch, char *argument )
   int lowlev = 1, hilev = 150;
   int col = 0;
   int ability;
-  int filter_ability = ability_from_name(argument);
+  int filter_ability = get_ability(argument);
 
   if ( IS_NPC(ch) )
     {

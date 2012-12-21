@@ -50,10 +50,6 @@ char *          sprint_reset( CHAR_DATA *ch, RESET_DATA *pReset,
                                         short num, bool rlist );
 RESET_DATA *    parse_reset( AREA_DATA *tarea, char *argument,
 			     CHAR_DATA *ch );
-int             get_wearloc( char *type );
-int             get_trapflag( char *flag );
-int             get_exflag( char *flag );
-int             get_rflag( char *flag );
 
 bool is_room_reset( RESET_DATA *pReset, ROOM_INDEX_DATA *aRoom,
 		    AREA_DATA *pArea );
@@ -822,7 +818,7 @@ void edit_reset( CHAR_DATA *ch, char *argument, AREA_DATA *pArea,
     }
   if ( !str_cmp(arg, "bit") )
     {
-      int (*flfunc)(char *type);
+      int (*flfunc)(const char *type);
       int flags = 0;
       char option[MAX_INPUT_LENGTH];
       char *parg;

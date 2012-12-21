@@ -35,227 +35,6 @@ extern int      top_reset;
 extern int      top_ed;
 extern bool     fBootDb;
 
-
-/* planet constants for vip and wanted flags */
-
-const char *  const   planet_flags [] =
-  {
-    "coruscant", "kashyyyk", "ryloth", "rodia", "nal hutta", "mon calamari",
-    "honoghr", "gamorr", "tatooine", "adari", "byss", "endor", "roche", "af'el", "trandosh",
-    "chad", "", "corellia", "hoth", "asteroid", "bespin", "kuat", "socorro", "corulag", "hapes", "wroona",
-    "roche", "dathomir", "sullust", "p28", "p29", "p30", "p31"
-  };
-
-const char *  const   weapon_table    [13] =
-  {
-    "none",
-    "vibro-axe",  "vibro-blade",  "lightsaber", "whip", "claw",
-    "blaster",  "w7", "bludgeon", "bowcaster", "w10",
-    "force pike", "w12"
-  };
-
-const char *  const   spice_table    [] =
-  {
-    "glitterstim", "carsanum", "ryll","andris","lumni","s5","s6","s7","s8","s9"
-  };
-
-const char *  const   crystal_table    [8] =
-  {
-    "non-adegan", "kathracite", "relacite", "danite", "mephite", "ponite", "illum", "corusca"
-  };
-
-
-const char *  const   ex_flags [] =
-  {
-    "isdoor", "closed", "locked", "secret", "swim", "pickproof", "fly", "climb",
-    "dig", "r1", "nopassdoor", "hidden", "passage", "portal", "r2", "r3",
-    "can_climb", "can_enter", "can_leave", "auto", "r4", "searchable",
-    "bashed", "bashproof", "nomob", "window", "can_look" };
-
-const char *  const   r_flags [] =
-  {
-    "dark", "reserved", "nomob", "indoors", "can_land", "can_fly", "no_drive",
-    "nomagic", "bank", "private", "safe", "remove_this_flag", "petshop", "arena",
-    "donation", "nodropall", "silence", "logspeech", "nodrop", "clanstoreroom",
-    "plr_home", "empty_home", "teleport", "hotel", "nofloor", "refinery", "factory",
-    "recruit", "plr_shop", "spacecraft", "prototype", "auction"
-  };
-
-const char *  const   o_flags [] =
-  {
-    "glow", "hum", "dark", "hutt_size", "contraband", "invis", "magic", "nodrop", "bless",
-    "antigood", "antievil", "antineutral", "noremove", "inventory",
-    "antisoldier", "antithief", "antihunter", "antijedi", "small_size", "large_size",
-    "donation", "clanobject", "anticitizen", "antisith", "antipilot",
-    "hidden", "poisoned", "covering", "deathrot", "burried", "prototype", "human_size"
-  };
-
-const char *  const   mag_flags       [] =
-  {
-    "returning", "backstabber", "bane", "loyal", "haste", "drain",
-    "lightning_blade"
-  };
-
-const char *  const   w_flags [] =
-  {
-    "take", "finger", "neck", "body", "head", "legs", "feet", "hands", "arms",
-    "shield", "about", "waist", "wrist", "wield", "hold", "_dual_", "ears", "eyes",
-    "_missile_", "floating","over","disguise","maxwear","r5","r6",
-    "r7","r8","r9","r10","r11","r12","r13"
-  };
-
-const char *  const   area_flags      [] =
-  {
-    "nopkill", "noquest", "changed", "r3", "r4", "r5", "r6", "r7", "r8",
-    "r9", "r10", "r11", "r12", "r13", "r14", "r15", "r16", "r17",
-    "r18", "r19","r20","r21","r22","r23","r24",
-    "r25","r26","r27","r28","r29","r30","r31"
-  };
-
-const char *  const   o_types [] =
-  {
-    "none", "light", "scroll", "_wand", "staff", "weapon", "_fireweapon", "missile",
-    "treasure", "armor", "potion", "rope", "furniture", "trash", "_oldtrap",
-    "container", "_note", "drinkcon", "key", "food", "money", "pen", "_boat",
-    "corpse", "corpse_pc", "fountain", "pill", "_blood", "_bloodstain",
-    "scraps", "_pipe", "_herbcon", "_herb", "_incense", "fire", "book", "switch",
-    "lever", "_pullchain", "button", "dial", "_rune", "_runepouch", "_match", "trap",
-    "map", "_portal", "paper", "_tinder", "lockpick", "_spike", "_disease", "_oil",
-    "fuel", "_shortbow", "_longbow", "_crossbow", "ammo", "_quiver", "shovel",
-    "salve", "rawspice", "lens", "crystal", "duraplast", "battery",
-    "toolkit", "durasteel", "oven", "mirror", "circuit", "superconductor", "comlink", "medpac",
-    "fabric", "rare_metal", "magnet",  "thread", "spice", "smut", "device", "spacecraft",
-    "grenade", "landmine", "government", "droid_corpse", "bolt", "scope",
-    "fightercomp", "midcomp", "capitalcomp","chemical", "disguise",
-    "disguise_fabric", "hair"
-  };
-
-const char *  const   a_types [] =
-  {
-    "none", "strength", "dexterity", "intelligence", "wisdom", "constitution",
-    "sex", "null", "level", "age", "height", "weight", "force", "hit", "move",
-    "credits", "experience", "armor", "hitroll", "damroll", "save_poison", "save_rod",
-    "save_para", "save_breath", "save_spell", "charisma", "affected", "resistant",
-    "immune", "susceptible", "weaponspell", "luck", "backstab", "pick", "track",
-    "steal", "sneak", "hide", "palm", "detrap", "dodge", "peek", "scan", "gouge",
-    "search", "mount", "disarm", "kick", "parry", "bash", "stun", "punch", "climb",
-    "grip", "scribe", "brew", "wearspell", "removespell", "mentalstate", "emotion",
-    "stripsn", "remove", "dig", "full", "thirst", "drunk", "blood", "snipe"
-  };
-
-const char *  const   a_flags [] =
-  {
-    "blind", "invisible", "detect_evil", "detect_invis", "detect_magic",
-    "detect_hidden", "weaken", "sanctuary", "faerie_fire", "infrared", "curse",
-    "_flaming", "poison", "protect", "paralysis", "sneak", "hide", "sleep",
-    "charm", "flying", "pass_door", "floating", "truesight", "detect_traps",
-    "scrying", "fireshield", "shockshield", "r1", "iceshield", "possess",
-    "berserk", "aqua_breath" };
-
-const char *  const   act_flags [] =
-  {
-    "npc", "sentinel", "scavenger", "r3", "r3", "aggressive", "stayarea",
-    "wimpy", "pet", "train", "practice", "immortal", "deadly", "polyself",
-    "meta_aggr", "guardian", "running", "nowander", "mountable", "mounted", "scholar",
-    "secretive", "polymorphed", "mobinvis", "noassist", "nokill", "droid", "nocorpse",
-    "r28", "r29", "prototype", "r31" };
-
-const char *  const   pc_flags [] =
-  {
-    "r1", "deadly", "unauthed", "norecall", "nointro", "gag", "retired", "guest",
-    "nosummon", "pageron", "notitled", "room", "r6", "r7", "r8", "r9", "r10", "r11", "r12", "r13",
-    "r14", "r15", "r16", "r17", "r18", "r19", "r20", "r21", "r22", "r23", "r24",
-    "r25"
-  };
-
-const char *  const   plr_flags [] =
-  {
-    "npc", "boughtpet", "shovedrag", "autoexits", "autoloot", "autosac", "blank",
-    "outcast", "brief", "combine", "prompt", "telnet_ga", "holylight",
-    "wizinvis", "roomvnum","silence", "noemote", "attacker", "notell", "log",
-    "deny", "freeze", "killer","homeresident", "litterbug", "ansi", "rip", "nice",
-    "flee" ,"autocred", "automap", "afk"
-  };
-
-const char *  const   trap_flags [] =
-  {
-    "room", "obj", "enter", "leave", "open", "close", "get", "put", "pick",
-    "unlock", "north", "south", "east", "r1", "west", "up", "down", "examine",
-    "r2", "r3", "r4", "r5", "r6", "r7", "r8", "r9", "r10", "r11", "r12", "r13",
-    "r14", "r15"
-  };
-
-const char *  const   wear_locs [] =
-  {
-    "light", "finger1", "finger2", "neck1", "neck2", "body", "head", "legs",
-    "feet", "hands", "arms", "shield", "about", "waist", "wrist1", "wrist2",
-    "wield", "hold", "dual_wield", "ears", "eyes", "missile_wield", "floating",
-    "over"
-  };
-
-const char *  const   ris_flags [] =
-  {
-    "fire", "cold", "electricity", "energy", "blunt", "pierce", "slash", "acid",
-    "poison", "drain", "sleep", "charm", "hold", "nonmagic", "plus1", "plus2",
-    "plus3", "plus4", "plus5", "plus6", "magic", "paralysis", "steal", "r2", "r3",
-    "r4", "r5", "r6", "r7", "r8", "r9", "r10"
-  };
-
-const char *  const   trig_flags [] =
-  {
-    "up", "unlock", "lock", "d_north", "d_south", "d_east", "d_west", "d_up",
-    "d_down", "door", "container", "open", "close", "passage", "oload", "mload",
-    "teleport", "teleportall", "teleportplus", "death", "cast", "fakeblade",
-    "rand4", "rand6", "trapdoor", "anotherroom", "usedial", "absolutevnum",
-    "showroomdesc", "autoreturn", "r2", "r3"
-  };
-
-const char *  const   part_flags [] =
-  {
-    "head", "arms", "legs", "heart", "brains", "guts", "hands", "feet", "fingers",
-    "ear", "eye", "long_tongue", "eyestalks", "tentacles", "fins", "wings",
-    "tail", "scales", "claws", "fangs", "horns", "tusks", "tailattack",
-    "sharpscales", "beak", "haunches", "hooves", "paws", "forelegs", "feathers",
-    "r1", "r2"
-  };
-
-const char *  const   attack_flags [] =
-  {
-    "bite", "claws", "tail", "sting", "punch", "kick",
-    "r6", "r7", "r8", "r9", "r10", "r11", "r12", "r13", "r14", "r15", "r16", "r17",
-    "r18", "r19", "r20", "r21", "r22", "r23", "r24", "r25", "r26", "r27", "r28", "r29",
-    "r30", "r31"
-  };
-
-const char *  const   defense_flags [] =
-  {
-    "parry", "dodge", "r2", "r3", "r4" ,"r5",
-    "r6", "r7", "r8", "r9", "r10", "r11", "r12", "r13", "r14", "r15", "r16", "r17",
-    "r18", "r19", "r20", "r21", "r22", "r23", "r24", "r25", "r26", "r27", "r28", "r29",
-    "r30", "r31"
-  };
-
-/*
- * Note: I put them all in one big set of flags since almost all of these
- * can be shared between mobs, objs and rooms for the exception of
- * bribe and hitprcnt, which will probably only be used on mobs.
- * ie: drop -- for an object, it would be triggered when that object is
- * dropped; -- for a room, it would be triggered when anything is dropped
- *          -- for a mob, it would be triggered when anything is dropped
- *
- * Something to consider: some of these triggers can be grouped together,
- * and differentiated by different arguments... for example:
- *  hour and time, rand and randiw, speech and speechiw
- *
- */
-const char *  const   mprog_flags [] =
-  {
-    "act", "speech", "rand", "fight", "death", "hitprcnt", "entry", "greet",
-    "allgreet", "give", "bribe", "hour", "time", "wear", "remove", "sac",
-    "look", "exa", "zap", "get", "drop", "damage", "repair", "randiw",
-    "speechiw", "pull", "push", "sleep", "rest", "leave", "script", "use"
-  };
-
 bool can_rmodify( CHAR_DATA *ch, ROOM_INDEX_DATA *room )
 {
   short vnum = room->vnum;
@@ -379,235 +158,6 @@ bool can_medit( CHAR_DATA *ch, MOB_INDEX_DATA *mob )
 
   send_to_char( "That mobile is not in your allocated range.\r\n", ch );
   return FALSE;
-}
-
-int get_otype( char *type )
-{
-  size_t x;
-
-  for ( x = 0; x < (sizeof(o_types) / sizeof(o_types[0]) ); x++ )
-    if ( !str_cmp( type, o_types[x] ) )
-      return x;
-  return -1;
-}
-
-int get_aflag( char *flag )
-{
-  size_t x;
-
-  for ( x = 0; x < 32; x++ )
-    if ( !str_cmp( flag, a_flags[x] ) )
-      return x;
-  return -1;
-}
-
-int get_trapflag( char *flag )
-{
-  size_t x;
-
-  for ( x = 0; x < 32; x++ )
-    if ( !str_cmp( flag, trap_flags[x] ) )
-      return x;
-  return -1;
-}
-
-int get_atype( char *type )
-{
-  size_t x;
-
-  for ( x = 0; x < MAX_APPLY_TYPE; x++ )
-    if ( !str_cmp( type, a_types[x] ) )
-      return x;
-  return -1;
-}
-
-int get_npc_race( char *type )
-{
-  size_t x;
-
-  for ( x = 0; x < MAX_NPC_RACE; x++ )
-    if ( !str_cmp( type, npc_race[x] ) )
-      return x;
-  return -1;
-}
-
-int get_wearloc( char *type )
-{
-  int x;
-
-  for ( x = 0; x < MAX_WEAR; x++ )
-    if ( !str_cmp( type, wear_locs[x] ) )
-      return x;
-  return -1;
-}
-
-int get_exflag( char *flag )
-{
-  int x;
-
-  for ( x = 0; x <= MAX_EXFLAG; x++ )
-    if ( !str_cmp( flag, ex_flags[x] ) )
-      return x;
-  return -1;
-}
-
-int get_rflag( char *flag )
-{
-  int x;
-
-  for ( x = 0; x < 32; x++ )
-    if ( !str_cmp( flag, r_flags[x] ) )
-      return x;
-  return -1;
-}
-
-int get_mpflag( char *flag )
-{
-  int x;
-
-  for ( x = 0; x < 32; x++ )
-    if ( !str_cmp( flag, mprog_flags[x] ) )
-      return x;
-  return -1;
-}
-
-int get_oflag( char *flag )
-{
-  int x;
-
-  for ( x = 0; x < 32; x++ )
-    if ( !str_cmp( flag, o_flags[x] ) )
-      return x;
-  return -1;
-}
-
-int get_areaflag( char *flag )
-{
-  int x;
-
-  for ( x = 0; x < 32; x++ )
-    if ( !str_cmp( flag, area_flags[x] ) )
-      return x;
-  return -1;
-}
-
-int get_wflag( char *flag )
-{
-  int x;
-
-  for ( x = 0; x < 32; x++ )
-    if ( !str_cmp( flag, w_flags[x] ) )
-      return x;
-  return -1;
-}
-
-int get_actflag( char *flag )
-{
-  int x;
-
-  for ( x = 0; x < 32; x++ )
-    if ( !str_cmp( flag, act_flags[x] ) )
-      return x;
-  return -1;
-}
-
-int get_vip_flag( char *flag )
-{
-  int x;
-
-  for ( x = 0; x < 32; x++ )
-    if ( !str_cmp( flag, planet_flags[x] ) )
-      return x;
-  return -1;
-}
-
-int get_wanted_flag( char *flag )
-{
-  int x;
-
-  for ( x = 0; x < 32; x++ )
-    if ( !str_cmp( flag, planet_flags[x] ) )
-      return x;
-  return -1;
-}
-
-int get_pcflag( char *flag )
-{
-  int x;
-
-  for ( x = 0; x < 32; x++ )
-    if ( !str_cmp( flag, pc_flags[x] ) )
-      return x;
-  return -1;
-}
-int get_plrflag( char *flag )
-{
-  int x;
-
-  for ( x = 0; x < 32; x++ )
-    if ( !str_cmp( flag, plr_flags[x] ) )
-      return x;
-  return -1;
-}
-
-int get_risflag( char *flag )
-{
-  int x;
-
-  for ( x = 0; x < 32; x++ )
-    if ( !str_cmp( flag, ris_flags[x] ) )
-      return x;
-  return -1;
-}
-
-int get_trigflag( char *flag )
-{
-  int x;
-
-  for ( x = 0; x < 32; x++ )
-    if ( !str_cmp( flag, trig_flags[x] ) )
-      return x;
-  return -1;
-}
-
-int get_partflag( char *flag )
-{
-  int x;
-
-  for ( x = 0; x < 32; x++ )
-    if ( !str_cmp( flag, part_flags[x] ) )
-      return x;
-  return -1;
-}
-
-int get_attackflag( char *flag )
-{
-  int x;
-
-  for ( x = 0; x < 32; x++ )
-    if ( !str_cmp( flag, attack_flags[x] ) )
-      return x;
-  return -1;
-}
-
-int get_defenseflag( char *flag )
-{
-  int x;
-
-  for ( x = 0; x < 32; x++ )
-    if ( !str_cmp( flag, defense_flags[x] ) )
-      return x;
-  return -1;
-}
-
-int get_langflag( char *flag )
-{
-  int x;
-
-  for ( x = 0; lang_array[x] != LANG_UNKNOWN; x++ )
-    if ( !str_cmp( flag, lang_names[x] ) )
-      return lang_array[x];
-  return LANG_UNKNOWN;
 }
 
 void start_editing( CHAR_DATA *ch, char *data )
@@ -3498,17 +3048,23 @@ void do_oset( CHAR_DATA *ch, char *argument )
     case ITEM_WEAPON:
       if ( !str_cmp( arg2, "weapontype" ) )
         {
-          int x;
+          value = get_weapontype( arg3 );
 
-          value = -1;
-          for ( x = 0; x < (int)(sizeof( weapon_table ) / sizeof( weapon_table[0] )); x++ )
-            if ( !str_cmp( arg3, weapon_table[x] ) )
-              value = x;
           if ( value < 0 )
             {
+	      size_t x = 0;
+
               send_to_char( "Unknown weapon type.\r\n", ch );
               send_to_char( "\r\nChoices:\r\n", ch );
-              send_to_char( "   none, lightsaber, vibro-blade, blaster, force pike, bowcaster, bludgeon\r\n", ch );
+              send_to_char( "   ", ch );
+
+	      for( x = 0; x < weapontable_size(); ++x )
+                {
+                  send_to_char( get_weapontype_name( x ), ch );
+                }
+
+              send_to_char( "\r\n", ch );
+
               return;
             }
           tmp = 3;
@@ -3536,17 +3092,22 @@ void do_oset( CHAR_DATA *ch, char *argument )
       if ( !str_cmp( arg2, "grade" ) )          tmp = 1;
       if ( !str_cmp( arg2, "spicetype" ) )
         {
-          int x;
+          value = get_spicetype( arg3 );
 
-          value = -1;
-          for ( x = 0; x < (int)(sizeof( spice_table ) / sizeof( spice_table[0] )); x++ )
-            if ( !str_cmp( arg3, spice_table[x] ) )
-              value = x;
           if ( value < 0 )
             {
+	      size_t x = 0;
+
               send_to_char( "Unknown spice type.\r\n", ch );
               send_to_char( "\r\nChoices:\r\n", ch );
-              send_to_char( "   glitterstim, carsanum, ryll, andris\r\n", ch );
+	      send_to_char( "   ", ch );
+
+	      for( x = 0; x < spicetable_size(); ++x )
+		{
+		  send_to_char( get_spicetype_name( x ), ch );
+		}
+
+              send_to_char( "\r\n", ch );
               return;
             }
           tmp = 0;
@@ -3556,17 +3117,22 @@ void do_oset( CHAR_DATA *ch, char *argument )
     case ITEM_CRYSTAL:
       if ( !str_cmp( arg2, "gemtype" ) )
         {
-          int x;
+          value = get_crystaltype( arg3 );
 
-          value = -1;
-          for ( x = 0; x < (int)(sizeof( crystal_table ) / sizeof( crystal_table[0] )); x++ )
-            if ( !str_cmp( arg3, crystal_table[x] ) )
-              value = x;
           if ( value < 0 )
             {
+	      size_t x = 0;
+
               send_to_char( "Unknown gem type.\r\n", ch );
               send_to_char( "\r\nChoices:\r\n", ch );
-              send_to_char( "   non-adegan, kathracite, relacite, danite, mephite, ponite, illum, corusca\r\n", ch );
+              send_to_char( "   ", ch );
+
+	      for( x = 0; x < crystaltable_size(); ++x )
+                {
+                  send_to_char( get_crystaltype_name( x ), ch );
+                }
+
+              send_to_char( "\r\n", ch );
               return;
             }
           tmp = 0;
@@ -3721,55 +3287,130 @@ void do_rset( CHAR_DATA *ch, char *argument )
 /*
  * Returns value 0 - 9 based on directional text.
  */
-int get_dir( char *txt )
+int get_dir( const char *txt )
 {
-  int edir;
-  char c1,c2;
+  int edir = 0;
+  char c1, c2;
 
   if ( !str_cmp( txt, "northeast" ) )
     return DIR_NORTHEAST;
+
   if ( !str_cmp( txt, "northwest" ) )
     return DIR_NORTHWEST;
+
   if ( !str_cmp( txt, "southeast" ) )
     return DIR_SOUTHEAST;
+
   if ( !str_cmp( txt, "southwest" ) )
     return DIR_SOUTHWEST;
+
   if ( !str_cmp( txt, "somewhere" ) )
     return 10;
 
   c1 = txt[0];
+
   if ( c1 == '\0' )
     return 0;
+
   c2 = txt[1];
-  edir = 0;
+
   switch ( c1 )
     {
     case 'n':
       switch ( c2 )
         {
-        default:   edir = 0; break;     /* north */
-        case 'e':  edir = 6; break; /* ne        */
-        case 'w':  edir = 7; break; /* nw        */
+        default:
+	  edir = DIR_NORTH;
+	  break;
+
+        case 'e':
+	  edir = DIR_NORTHEAST;
+	  break;
+
+        case 'w':
+	  edir = DIR_NORTHWEST;
+	  break;
         }
-      break;    case '0':  edir = 0; break; /* north */
-    case 'e': case '1':  edir = 1; break; /* east  */
+      break;
+
+    case '0':
+      edir = DIR_NORTH;
+      break;
+
+    case 'e':
+      edir = DIR_EAST;
+      break;
+
+    case '1':
+      edir = DIR_EAST;
+      break;
+
     case 's':
       switch ( c2 )
         {
-        default:   edir = 2; break; /* south */
-        case 'e':  edir = 8; break; /* se        */
-        case 'w':  edir = 9; break; /* sw        */
+        default:
+	  edir = DIR_SOUTH;
+	  break;
+
+        case 'e':
+	  edir = DIR_SOUTHEAST;
+	  break;
+
+        case 'w':
+	  edir = DIR_SOUTHWEST;
+	  break;
         }
-      break;    case '2':  edir = 2; break; /* south */
-    case 'w': case '3':  edir = 3; break; /* west        */
-    case 'u': case '4':  edir = 4; break; /* up  */
-    case 'd': case '5':  edir = 5; break; /* down        */
-    case '6':  edir = 6; break; /* ne    */
-    case '7':  edir = 7; break; /* nw    */
-    case '8':  edir = 8; break; /* se    */
-    case '9':  edir = 9; break; /* sw    */
-    case '?':  edir = 10;break; /* somewhere */
+      break;
+
+    case '2':
+      edir = DIR_SOUTH;
+      break;
+
+    case 'w':
+      edir = DIR_WEST;
+      break;
+
+    case '3':
+      edir = DIR_WEST; 
+      break;
+
+    case 'u':
+      edir = DIR_UP;
+      break;
+
+    case '4':
+      edir = DIR_UP;
+      break;
+
+    case 'd':
+      edir = DIR_DOWN;
+      break;
+
+    case '5':
+      edir = DIR_DOWN;
+      break;
+
+    case '6':
+      edir = DIR_NORTHEAST;
+      break;
+
+    case '7':
+      edir = DIR_NORTHWEST;
+      break;
+
+    case '8':
+      edir = DIR_SOUTHEAST;
+      break;
+
+    case '9':
+      edir = DIR_SOUTHWEST;
+      break;
+
+    case '?':
+      edir = DIR_SOMEWHERE;
+      break;
     }
+
   return edir;
 }
 

@@ -26,17 +26,18 @@
 #include <time.h>
 #include "mud.h"
 
-/* undef these at EOF */
-/*
-#define AM 95
-#define AC 95
-#define AT 85
-#define AW 85
-#define AV 95
-#define AD 95
-#define AR 90
-#define AA 95
-*/
+static int get_in_array( const char *name, const char * const * array,
+                         size_t sz,
+                         bool (*compare_string)( const char*, const char* ) )
+{
+  size_t x = 0;
+
+  for( x = 0; x < sz; ++x )
+    if( !compare_string( name, array[x] ) )
+      return x;
+
+  return -1;
+}
 
 /*
  * Race table.
@@ -172,28 +173,30 @@ const struct race_type race_table[MAX_RACE] =
   };
 
 
-const char *  const   npc_race        [MAX_NPC_RACE] =
+const char *const npc_race[MAX_NPC_RACE] =
   {
-    "Human", "Wookiee", "Twi'lek", "Rodian", "Hutt", "Mon Calamari", "Shistavanen",
-    "Gamorrean", "Jawa", "Adarian", "Ewok", "Verpine", "Defel", "Trandoshan", "Chadra-Fan",
-    "Quarren", "Sullustan", "Falleen", "Ithorian", "Devaronian", "Gotal", "Droid",
-    "Firrerreo", "Barabel", "Bothan", "Togorian", "Dug", "Kubaz", "Selonian", "Gran", "Yevetha", "Gand",
-    "Duros", "Coynite", "Protocal Droid", "Assassin Droid", "Gladiator Droid", "Astromech", "Interrogation Droid",
-    "God", "Sarlac", "Saurin", "Snivvian", "Gand", "Gungan", "Weequay", "Bith",
-    "Ortolan", "Snit", "Cerean", "Ugnaught", "Taun Taun", "Bantha", "Tusken",
-    "Gherkin", "Zabrak", "Dewback", "Rancor", "Ronto", "Noghri",
+    "Human", "Wookiee", "Twi'lek", "Rodian", "Hutt", "Mon Calamari",
+    "Shistavanen", "Gamorrean", "Jawa", "Adarian", "Ewok", "Verpine",
+    "Defel", "Trandoshan", "Chadra-Fan", "Quarren", "Sullustan",
+    "Falleen", "Ithorian", "Devaronian", "Gotal", "Droid", "Firrerreo",
+    "Barabel", "Bothan", "Togorian", "Dug", "Kubaz", "Selonian", "Gran",
+    "Yevetha", "Gand", "Duros", "Coynite", "Protocal Droid",
+    "Assassin Droid", "Gladiator Droid", "Astromech", "Interrogation Droid",
+    "God", "Sarlac", "Saurin", "Snivvian", "Gand", "Gungan", "Weequay",
+    "Bith", "Ortolan", "Snit", "Cerean", "Ugnaught", "Taun Taun", "Bantha",
+    "Tusken", "Gherkin", "Zabrak", "Dewback", "Rancor", "Ronto", "Noghri",
     "r60", "r61", "r62", "r63", "r64", "r65", "r66",
     "r67", "r68", "r69", "r70", "r71", "r72", "r73", "r74",
     "r75", "r76", "r77", "r78","r79", "r80", "r81", "r82",
-    "r83", "r84", "r85", "r86", "r87", "r88"
-    , "r89"
+    "r83", "r84", "r85", "r86", "r87", "r88",
+    "r89"
   };
 
 
 const char * const ability_name[MAX_ABILITY] =
   {
-    "combat", "piloting", "engineering", "bounty hunting", "smuggling", "diplomacy",
-    "leadership", "force", "commando"
+    "combat", "piloting", "engineering", "bounty hunting", "smuggling",
+    "diplomacy", "leadership", "force", "commando"
   };
 
 size_t ability_name_size(void)
@@ -201,20 +204,11 @@ size_t ability_name_size(void)
   return sizeof(ability_name) / sizeof(*ability_name);
 }
 
-int ability_from_name(const char *arg)
+int get_ability( const char *type )
 {
-  size_t a = 0;
-
-  for(a = 0; a < ability_name_size(); ++a)
-    {
-      if(!str_cmp(arg, ability_name[a]))
-	{
-	  return a;
-	}
-    }
-
-  return -1;
+  return get_in_array( type, ability_name, ability_name_size(), str_cmp );
 }
+
 /*
  * Attribute bonus tables.
  */
@@ -509,13 +503,29 @@ const struct liq_type liq_table[LIQ_MAX] =
     { "sweet tea",              "tan",          {  0, 2,  6 }   }
   };
 
-const char *  const   attack_table    [13] =
+const char * const attack_table[] =
   {
     "hit",
     "slice",  "stab",  "slash", "whip", "claw",
     "blast",  "pound", "crush", "shot", "bite",
     "pierce", "suction"
   };
+
+size_t attacktable_size( void )
+{
+  return sizeof( attack_table ) / sizeof( attack_table[0] );
+}
+
+const char *get_attacktype_name( size_t type )
+{
+  if(type <= attacktable_size() )
+    {
+      bug("%s: subscript %d out of range", __FUNCTION__, type);
+      return NULL;
+    }
+
+  return attack_table[type];
+}
 
 const char * const spaceobj_type[] =
   {
@@ -543,37 +553,865 @@ const char *get_spaceobj_type(size_t sotype)
   return spaceobj_type[sotype];
 }
 
-int get_spaceobj_type_from_name(const char *name)
+int get_spaceobj_type_from_name( const char *type )
 {
-  size_t n = 0;
+  return get_in_array( type, spaceobj_type, spaceobj_type_size(), str_prefix );
+}
 
-  for( n = 0; n < spaceobj_type_size(); ++n)
+const char * const skill_tname[] =
+  {
+    "unknown", "Spell", "Skill", "Weapon", "Tongue", "Herb"
+  };
+
+const short movement_loss[SECT_MAX] =
+  {
+    1, 2, 2, 3, 4, 6, 4, 1, 6, 10, 6, 5, 7, 4
+  };
+
+const char * const dir_name[] =
+  {
+    "north", "east", "south", "west", "up", "down",
+    "northeast", "northwest", "southeast", "southwest", "somewhere"
+  };
+
+const short rev_dir[] =
+  {
+    2, 3, 0, 1, 5, 4, 9, 8, 7, 6, 10
+  };
+
+const char * const where_name[] =
+  {
+    "<used as light>     ",
+    "<worn on finger>    ",
+    "<worn on finger>    ",
+    "<worn around neck>  ",
+    "<worn around neck>  ",
+    "<worn on body>      ",
+    "<worn on head>      ",
+    "<worn on legs>      ",
+    "<worn on feet>      ",
+    "<worn on hands>     ",
+    "<worn on arms>      ",
+    "<energy shield>     ",
+    "<worn about body>   ",
+    "<worn about waist>  ",
+    "<worn around wrist> ",
+    "<worn around wrist> ",
+    "<wielded>           ",
+    "<held>              ",
+    "<dual wielded>      ",
+    "<worn on ears>      ",
+    "<worn on eyes>      ",
+    "<missile wielded>   ",
+    "<floating>          ",
+    "<worn over body>    "
+  };
+
+const int trap_door[] =
+  {
+    TRAP_N, TRAP_E, TRAP_S, TRAP_W, TRAP_U, TRAP_D,
+    TRAP_NE, TRAP_NW, TRAP_SE, TRAP_SW
+  };
+
+const char * const sect_names[SECT_MAX][2] =
+  {
+    { "In A Room",      "inside"      }, /* SECT_INSIDE       */
+    { "A City Street",  "cities"      }, /* SECT_CITY         */
+    { "In A Field",     "fields"      }, /* SECT_FIELD        */
+    { "In A Forest",    "forests"     }, /* SECT_FOREST       */
+    { "Hill",           "hills"       }, /* SECT_HILLS        */
+    { "On A Mountain",  "mountains"   }, /* SECT_MOUNTAIN     */
+    { "In The Water",   "waters"      }, /* SECT_WATER_SWIM   */
+    { "In Rough Water", "waters"      }, /* SECT_WATER_NOSWIM */
+    { "Underwater",     "underwaters" }, /* SECT_UNDERWATER   */
+    { "In The Air",     "air"         }, /* SECT_AIR          */
+    { "In A Desert",    "deserts"     }, /* SECT_DESERT       */
+    { "Somewhere",      "unknown"     }, /* SECT_DUNNO        */
+    { "Ocean floor",    "Ocean floor" }, /* SECT_OCEANFLOOR   */
+    { "Underground",    "underground" }  /* SECT_UNDERGROUND  */
+  };
+
+const int sent_total[SECT_MAX] =
+  {
+    4, 24, 4, 4, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1
+  };
+
+const char * const room_sents[SECT_MAX][25] =
+  {
     {
-      if(!str_prefix(name, spaceobj_type[n]))
-	{
-	  return n;
-	}
+      "The smooth walls are made of durasteel.",
+      "You see an occasional rotent moving around.",
+      "You notice the glowrods attached along the ceiling.",
+      "The place has the strong smell of sanitizer and metal."
+    },
+
+    {
+      "You notice the occasional stray looking for food.",
+      "Tall buildings loom on either side of you stretching to the sky.",
+      "Some street people are putting on an interesting display of talent trying to earn some credits.",
+      "Two people nearby shout heated words of argument at one another.",
+      "You think you can make out several shady figures talking down a dark alleyway."
+      "A slight breeze blows through the tall buildings.",
+      "A small crowd of people have gathered at one side of the street.",
+      "Clouds far above you obscure the tops of the highest skyscrapers.",
+      "A speeder moves slowly through the street avoiding pedestrians.",
+      "A cloudcar flys by overhead.",
+      "The air is thick and hard to breath.",
+      "The many smells of the city assault your senses.",
+      "You hear a scream far of in the distance.",
+      "The buildings around you seem endless in number.",
+      "The city stretches seemingly endless in all directions.",
+      "The street is wide and long.",
+      "A swoop rider passes quickly by weaving in and out of pedestrians and other vehicles.",
+      "The surface of the road is worn from many travellers.",
+      "You feel it would be very easy to get lost in such an enormous city.",
+      "You can see other streets above and bellow this one running in many directions.",
+      "There are entrances to several buildings at this level.",
+      "Along the edge of the street railings prevent pedestrians from falling to their death.",
+      "In between the many towers you can see down into depths of the lower city.",
+      "A grate in the street prevents rainwater from building up.",
+      "You can see you reflection in several of the transparisteel windows as you pass by."
+      "You hear a scream far of in the distance.",
+    },
+
+    {
+      "You notice sparce patches of brush and shrubs.",
+      "There is a small cluster of trees far off in the distance.",
+      "Around you are grassy fields as far as the eye can see.",
+      "Throughout the plains a wide variety of weeds and wildflowers are scattered."
+    },
+
+    {
+      "Tall, dark green trees prevent you from seeing very far.",
+      "Many huge trees that look several hundred years old are here.",
+      "You notice a solitary, drooping tree.",
+      "To your left is a patch of bright white, slender trees, slender and tall."
+    },
+
+    {
+      "The rolling hills are lightly speckled with violet wildflowers."
+    },
+
+    {
+      "The rocky mountain pass offers many hiding places."
+    },
+
+    {
+      "The water is smooth as glass."
+    },
+
+    {
+      "Rough waves splash about angrily."
+    },
+
+    {
+      "A small school of fish swims by."
+    },
+
+    {
+      "The land is far far below.",
+      "A misty haze of clouds drifts by."
+    },
+
+    {
+      "Around you is sand as far as the eye can see.",
+      "You think you see the shimmering that might represent water in the distance"
+    },
+
+    {
+      "You notice nothing unusual."
+    },
+
+    {
+      "There are many rocks and coral which litter the ocean floor."
+    },
+
+    {
+      "You stand in a lengthy tunnel of rock."
     }
 
-  return -1;
+  };
+
+const char * const mag_flags[] =
+  {
+    "returning", "backstabber", "bane", "loyal", "haste", "drain",
+    "lightning_blade"
+  };
+
+const char * const r_flags[] =
+  {
+    "dark", "reserved", "nomob", "indoors", "can_land", "can_fly", "no_drive",
+    "nomagic", "bank", "private", "safe", "remove_this_flag", "petshop",
+    "arena", "donation", "nodropall", "silence", "logspeech", "nodrop",
+    "clanstoreroom", "plr_home", "empty_home", "teleport", "hotel", "nofloor",
+    "refinery", "factory", "recruit", "plr_shop", "spacecraft", "prototype",
+    "auction"
+  };
+
+const char * const w_flags[] =
+  {
+    "take", "finger", "neck", "body", "head", "legs", "feet", "hands", "arms",
+    "shield", "about", "waist", "wrist", "wield", "hold", "_dual_", "ears",
+    "eyes", "_missile_", "floating","over","disguise","maxwear","r5","r6",
+    "r7","r8","r9","r10","r11","r12","r13"
+  };
+
+const char * const o_flags[] =
+  {
+    "glow", "hum", "dark", "hutt_size", "contraband", "invis", "magic",
+    "nodrop", "bless", "antigood", "antievil", "antineutral", "noremove",
+    "inventory", "antisoldier", "antithief", "antihunter", "antijedi",
+    "small_size", "large_size", "donation", "clanobject", "anticitizen",
+    "antisith", "antipilot", "hidden", "poisoned", "covering", "deathrot",
+    "burried", "prototype", "human_size"
+  };
+
+const char * const a_flags[] =
+  {
+    "blind", "invisible", "detect_evil", "detect_invis", "detect_magic",
+    "detect_hidden", "weaken", "sanctuary", "faerie_fire", "infrared", "curse",
+    "_flaming", "poison", "protect", "paralysis", "sneak", "hide", "sleep",
+    "charm", "flying", "pass_door", "floating", "truesight", "detect_traps",
+    "scrying", "fireshield", "shockshield", "r1", "iceshield", "possess",
+    "berserk", "aqua_breath"
+  };
+
+const char * const o_types[] =
+  {
+    "none", "light", "scroll", "_wand", "staff", "weapon", "_fireweapon",
+    "missile", "treasure", "armor", "potion", "rope", "furniture", "trash",
+    "_oldtrap", "container", "_note", "drinkcon", "key", "food", "money",
+    "pen", "_boat", "corpse", "corpse_pc", "fountain", "pill", "_blood",
+    "_bloodstain", "scraps", "_pipe", "_herbcon", "_herb", "_incense", "fire",
+    "book", "switch", "lever", "_pullchain", "button", "dial", "_rune",
+    "_runepouch", "_match", "trap", "map", "_portal", "paper", "_tinder",
+    "lockpick", "_spike", "_disease", "_oil", "fuel", "_shortbow", "_longbow",
+    "_crossbow", "ammo", "_quiver", "shovel", "salve", "rawspice", "lens",
+    "crystal", "duraplast", "battery", "toolkit", "durasteel", "oven",
+    "mirror", "circuit", "superconductor", "comlink", "medpac", "fabric",
+    "rare_metal", "magnet",  "thread", "spice", "smut", "device", "spacecraft",
+    "grenade", "landmine", "government", "droid_corpse", "bolt", "scope",
+    "fightercomp", "midcomp", "capitalcomp","chemical", "disguise",
+    "disguise_fabric", "hair"
+  };
+
+const char * const a_types[] =
+  {
+    "none", "strength", "dexterity", "intelligence", "wisdom", "constitution",
+    "sex", "null", "level", "age", "height", "weight", "force", "hit", "move",
+    "credits", "experience", "armor", "hitroll", "damroll", "save_poison",
+    "save_rod", "save_para", "save_breath", "save_spell", "charisma",
+    "affected", "resistant", "immune", "susceptible", "weaponspell", "luck",
+    "backstab", "pick", "track", "steal", "sneak", "hide", "palm", "detrap",
+    "dodge", "peek", "scan", "gouge", "search", "mount", "disarm", "kick",
+    "parry", "bash", "stun", "punch", "climb", "grip", "scribe", "brew",
+    "wearspell", "removespell", "mentalstate", "emotion",
+    "stripsn", "remove", "dig", "full", "thirst", "drunk", "blood", "snipe"
+  };
+
+const char * const act_flags[] =
+  {
+    "npc", "sentinel", "scavenger", "r3", "r3", "aggressive", "stayarea",
+    "wimpy", "pet", "train", "practice", "immortal", "deadly", "polyself",
+    "meta_aggr", "guardian", "running", "nowander", "mountable", "mounted",
+    "scholar", "secretive", "polymorphed", "mobinvis", "noassist", "nokill",
+    "droid", "nocorpse", "r28", "r29", "prototype", "r31"
+ };
+
+const char * const planet_flags[] =
+  {
+    "coruscant", "kashyyyk", "ryloth", "rodia", "nal hutta", "mon calamari",
+    "honoghr", "gamorr", "tatooine", "adari", "byss", "endor", "roche",
+    "af'el", "trandosh", "chad", "", "corellia", "hoth", "asteroid", "bespin",
+    "kuat", "socorro", "corulag", "hapes", "wroona", "roche", "dathomir",
+    "sullust", "p28", "p29", "p30", "p31"
+  };
+
+const char * const weapon_table[13] =
+  {
+    "none",
+    "vibro-axe",  "vibro-blade",  "lightsaber", "whip", "claw",
+    "blaster",  "w7", "bludgeon", "bowcaster", "w10",
+    "force pike", "w12"
+  };
+
+size_t weapontable_size( void )
+{
+  return sizeof(weapon_table) / sizeof(*weapon_table);
+}
+
+const char *get_weapontype_name( size_t type )
+{
+  if( type <= weapontable_size() )
+    {
+      bug("%s: subscript %d out of range", __FUNCTION__, type);
+      return NULL;
+    }
+
+  return weapon_table[type];
+}
+
+const char * const spice_table[] =
+  {
+    "glitterstim", "carsanum", "ryll","andris","lumni","s5","s6","s7","s8","s9"
+  };
+
+size_t spicetable_size(void)
+{
+  return sizeof(spice_table) / sizeof(*spice_table);
+}
+
+const char *get_spicetype_name( size_t type )
+{
+  if( type <= spicetable_size() )
+    {
+      bug("%s: subscript %d out of range", __FUNCTION__, type);
+      return NULL;
+    }
+
+  return spice_table[type];
+}
+
+const char * const plr_flags[] =
+  {
+    "npc", "boughtpet", "shovedrag", "autoexits", "autoloot", "autosac",
+    "blank", "outcast", "brief", "combine", "prompt", "telnet_ga", "holylight",
+    "wizinvis", "roomvnum","silence", "noemote", "attacker", "notell", "log",
+    "deny", "freeze", "killer","homeresident", "litterbug", "ansi", "rip",
+    "nice", "flee" ,"autocred", "automap", "afk"
+  };
+
+const char * const pc_flags[] =
+  {
+    "r1", "deadly", "unauthed", "norecall", "nointro", "gag", "retired",
+    "guest",
+    "nosummon", "pageron", "notitled", "room", "r6", "r7", "r8", "r9", "r10",
+    "r11", "r12", "r13", "r14", "r15", "r16", "r17", "r18", "r19", "r20",
+    "r21", "r22", "r23", "r24", "r25"
+  };
+
+const char * const trap_flags[] =
+  {
+    "room", "obj", "enter", "leave", "open", "close", "get", "put", "pick",
+    "unlock", "north", "south", "east", "r1", "west", "up", "down", "examine",
+    "r2", "r3", "r4", "r5", "r6", "r7", "r8", "r9", "r10", "r11", "r12", "r13",
+    "r14", "r15"
+  };
+
+const char * const ris_flags[] =
+  {
+    "fire", "cold", "electricity", "energy", "blunt", "pierce", "slash",
+    "acid", "poison", "drain", "sleep", "charm", "hold", "nonmagic", "plus1",
+    "plus2", "plus3", "plus4", "plus5", "plus6", "magic", "paralysis",
+    "steal", "r2", "r3", "r4", "r5", "r6", "r7", "r8", "r9", "r10"
+  };
+
+const char * const trig_flags[] =
+  {
+    "up", "unlock", "lock", "d_north", "d_south", "d_east", "d_west", "d_up",
+    "d_down", "door", "container", "open", "close", "passage", "oload",
+    "mload", "teleport", "teleportall", "teleportplus", "death", "cast",
+    "fakeblade", "rand4", "rand6", "trapdoor", "anotherroom", "usedial",
+    "absolutevnum", "showroomdesc", "autoreturn", "r2", "r3"
+  };
+
+const char * const part_flags[] =
+  {
+    "head", "arms", "legs", "heart", "brains", "guts", "hands", "feet",
+    "fingers", "ear", "eye", "long_tongue", "eyestalks", "tentacles", "fins",
+    "wings", "tail", "scales", "claws", "fangs", "horns", "tusks",
+    "tailattack", "sharpscales", "beak", "haunches", "hooves", "paws",
+    "forelegs", "feathers", "r1", "r2"
+  };
+
+const char * const defense_flags[] =
+  {
+    "parry", "dodge", "r2", "r3", "r4" ,"r5",
+    "r6", "r7", "r8", "r9", "r10", "r11", "r12", "r13", "r14", "r15", "r16",
+    "r17", "r18", "r19", "r20", "r21", "r22", "r23", "r24", "r25", "r26",
+    "r27", "r28", "r29", "r30", "r31"
+  };
+
+const char * const attack_flags[] =
+  {
+    "bite", "claws", "tail", "sting", "punch", "kick",
+    "r6", "r7", "r8", "r9", "r10", "r11", "r12", "r13", "r14", "r15", "r16",
+    "r17", "r18", "r19", "r20", "r21", "r22", "r23", "r24", "r25", "r26",
+    "r27", "r28", "r29", "r30", "r31"
+  };
+
+const char * const area_flags[] =
+  {
+    "nopkill", "noquest", "changed", "r3", "r4", "r5", "r6", "r7", "r8",
+    "r9", "r10", "r11", "r12", "r13", "r14", "r15", "r16", "r17",
+    "r18", "r19","r20","r21","r22","r23","r24",
+    "r25","r26","r27","r28","r29","r30","r31"
+  };
+
+const char * const wear_locs[] =
+  {
+    "light", "finger1", "finger2", "neck1", "neck2", "body", "head", "legs",
+    "feet", "hands", "arms", "shield", "about", "waist", "wrist1", "wrist2",
+    "wield", "hold", "dual_wield", "ears", "eyes", "missile_wield", "floating",
+    "over"
+  };
+
+const char * const ex_flags[] =
+  {
+    "isdoor", "closed", "locked", "secret", "swim", "pickproof", "fly",
+    "climb", "dig", "r1", "nopassdoor", "hidden", "passage", "portal", "r2",
+    "r3", "can_climb", "can_enter", "can_leave", "auto", "r4", "searchable",
+    "bashed", "bashproof", "nomob", "window", "can_look"
+  };
+
+const int lang_array[] =
+  {
+    LANG_COMMON, LANG_WOOKIEE, LANG_TWI_LEK, LANG_RODIAN,
+    LANG_HUTT, LANG_MON_CALAMARI, LANG_SHISTAVANEN, LANG_EWOK,
+    LANG_ITHORIAN, LANG_GOTAL, LANG_DEVARONIAN,
+    LANG_DROID, LANG_SPIRITUAL, LANG_MAGICAL,
+    LANG_GAMORREAN, LANG_GOD, LANG_ANCIENT, LANG_JAWA,
+    LANG_CLAN, LANG_ADARIAN, LANG_VERPINE, LANG_DEFEL,
+    LANG_TRANDOSHAN, LANG_CHADRA_FAN, LANG_QUARREN,
+    LANG_SULLUSTAN, LANG_FALLEEN, LANG_BINARY,
+    LANG_YEVETHAN, LANG_GAND, LANG_DUROS, LANG_COYNITE,
+    LANG_UNKNOWN
+  };
+
+const char * const lang_names[] =
+  { "common", "wookiee", "twilek", "rodian", "hutt",
+    "mon calamari", "shistavanen", "ewok", "ithorian",
+    "gotal", "devaronian", "barabel", "firrerreo",
+    "bothan", "gamorrean", "togorian", "kubaz",
+    "jawa", "clan", "adarian", "verpine", "defel",
+    "trandoshan", "chadra-fan", "quarren", "sullustan",
+    "falleen", "binary", "yevethan", "gand", "duros",
+    "coynite", ""
+  };
+
+const char * const crystal_table[8] =
+  {
+    "non-adegan", "kathracite", "relacite", "danite", "mephite",
+    "ponite", "illum", "corusca"
+  };
+
+size_t crystaltable_size( void )
+{
+  return sizeof( crystal_table ) / sizeof( *crystal_table );
+}
+
+const char *get_crystaltype_name( size_t type )
+{
+  if( type <= crystaltable_size() )
+    {
+      bug("%s: subscript %d out of range", __FUNCTION__, type);
+      return NULL;
+    }
+
+  return crystal_table[type];
 }
 
 /*
- * The skill and spell table.
- * Slot numbers must never be changed as they appear in #OBJECTS sections.
+ * Note: I put them all in one big set of flags since almost all of these
+ * can be shared between mobs, objs and rooms for the exception of
+ * bribe and hitprcnt, which will probably only be used on mobs.
+ * ie: drop -- for an object, it would be triggered when that object is
+ * dropped; -- for a room, it would be triggered when anything is dropped
+ *          -- for a mob, it would be triggered when anything is dropped
+ *
+ * Something to consider: some of these triggers can be grouped together,
+ * and differentiated by different arguments... for example:
+ *  hour and time, rand and randiw, speech and speechiw
+ *
  */
-/*
-#define SLOT(n) n
-#define LI LEVEL_IMMORTAL
+const char * const mprog_flags[] =
+  {
+    "act", "speech", "rand", "fight", "death", "hitprcnt", "entry", "greet",
+    "allgreet", "give", "bribe", "hour", "time", "wear", "remove", "sac",
+    "look", "exa", "zap", "get", "drop", "damage", "repair", "randiw",
+    "speechiw", "pull", "push", "sleep", "rest", "leave", "script", "use"
+  };
 
-#undef AM
-#undef AC
-#undef AT
-#undef AW
-#undef AV
-#undef AD
-#undef AR
-#undef AA
+const char * const spell_flag[] =
+  {
+    "water", "earth", "air", "astral", "area", "distant", "reverse",
+    "save_half_dam", "save_negates", "accumulative", "recastable", "noscribe",
+    "nobrew", "group", "object", "character", "secretskill", "pksensitive"
+  };
 
-#undef LI
-*/
+size_t spellflag_size( void )
+{
+  return sizeof( spell_flag ) / sizeof( *spell_flag );
+}
+
+const char *get_spellflag_name( size_t type )
+{
+  if( type <= spellflag_size() )
+    {
+      bug("%s: subscript %d out of range", __FUNCTION__, type);
+      return NULL;
+    }
+
+  return spell_flag[type];
+}
+
+const char * const spell_saves[] =
+  {
+    "none", "poison_death", "wands", "para_petri", "breath", "spell_staff"
+  };
+
+size_t spellsaves_size( void )
+{
+  return sizeof( spell_saves ) / sizeof( *spell_saves );
+}
+
+const char *get_spellsaves_name( size_t type )
+{
+  if( type <= spellsaves_size() )
+    {
+      bug("%s: subscript %d out of range", __FUNCTION__, type);
+      return NULL;
+    }
+
+  return spell_saves[type];
+}
+
+const char * const spell_damage[] =
+  {
+    "none", "fire", "cold", "electricity", "energy", "acid", "poison", "drain"
+  };
+
+size_t spelldamage_size( void )
+{
+  return sizeof( spell_damage ) / sizeof( *spell_damage );
+}
+
+const char *get_spelldamage_name( size_t type )
+{
+  if( type <= spelldamage_size() )
+    {
+      bug("%s: subscript %d out of range", __FUNCTION__, type);
+      return NULL;
+    }
+
+  return spell_damage[type];
+}
+
+const char * const spell_action[] =
+  {
+    "none", "create", "destroy", "resist", "suscept", "divinate", "obscure",
+    "change"
+  };
+
+size_t spellaction_size( void )
+{
+  return sizeof( spell_action ) / sizeof( *spell_action );
+}
+
+const char *get_spellaction_name( size_t type )
+{
+  if( type <= spellaction_size() )
+    {
+      bug("%s: subscript %d out of range", __FUNCTION__, type);
+      return NULL;
+    }
+
+  return spell_action[type];
+}
+
+const char * const spell_power[] =
+  {
+    "none", "minor", "greater", "major"
+  };
+
+size_t spellpower_size( void )
+{
+  return sizeof( spell_power ) / sizeof( *spell_power );
+}
+
+const char *get_spellpower_name( size_t type )
+{
+  if(type <= spellpower_size() )
+    {
+      bug("%s: subscript %d out of range", __FUNCTION__, type);
+      return NULL;
+    }
+
+  return spell_power[type];
+}
+
+const char * const spell_class[] =
+  {
+    "none", "lunar", "solar", "travel", "summon", "life", "death", "illusion"
+  };
+
+size_t spellclass_size( void )
+{
+  return sizeof( spell_class ) / sizeof( *spell_class );
+}
+
+const char *get_spellclass_name( size_t type )
+{
+  if(type <= spellclass_size() )
+    {
+      bug("%s: subscript %d out of range", __FUNCTION__, type);
+      return NULL;
+    }
+
+  return spell_class[type];
+}
+
+const char * const spell_target[] =
+  {
+    "ignore", "offensive", "defensive", "self", "objinv"
+  };
+
+size_t spelltarget_size( void )
+{
+  return sizeof( spell_target ) / sizeof( *spell_target );
+}
+
+const char *get_spelltarget_name( size_t type )
+{
+  if(type <= spelltarget_size() )
+    {
+      bug("%s: subscript %d out of range", __FUNCTION__, type);
+      return NULL;
+    }
+
+  return spell_target[type];
+}
+
+int get_spellsave( const char *name )
+{
+  return get_in_array( name, spell_saves,
+                       sizeof( spell_saves ) / sizeof( spell_saves[0] ),
+                       str_cmp );
+}
+
+int get_spelltarget( const char *name )
+{
+  return get_in_array( name, spell_target,
+                       sizeof( spell_target ) / sizeof( spell_target[0] ),
+                       str_cmp );
+}
+
+int get_spellflag( const char *name )
+{
+  return get_in_array( name, spell_flag,
+                       sizeof( spell_flag ) / sizeof( spell_flag[0] ),
+                       str_cmp );
+}
+
+int get_spelldamage( const char *name )
+{
+  return get_in_array( name, spell_damage,
+                       sizeof( spell_damage ) / sizeof( spell_damage[0] ),
+                       str_cmp );
+}
+
+int get_spellaction( const char *name )
+{
+  return get_in_array( name, spell_action,
+                       sizeof( spell_action ) / sizeof( spell_action[0] ),
+                       str_cmp );
+}
+
+int get_spellpower( const char *name )
+{
+  return get_in_array( name, spell_power,
+                       sizeof( spell_power ) / sizeof( spell_power[0] ),
+                       str_cmp );
+}
+
+int get_spellclass( const char *name )
+{
+  return get_in_array( name, spell_class,
+                       sizeof( spell_class ) / sizeof( spell_class[0] ),
+                       str_cmp );
+}
+
+int get_otype( const char *type )
+{
+  return get_in_array( type, o_types,
+                       sizeof( o_types ) / sizeof( o_types[0] ),
+                       str_cmp );
+}
+
+int get_aflag( const char *flag )
+{
+  return get_in_array( flag, a_flags,
+                       sizeof( a_flags ) / sizeof( a_flags[0] ),
+                       str_cmp );
+}
+
+int get_trapflag( const char *flag )
+{
+  return get_in_array( flag, trap_flags,
+                       sizeof( trap_flags ) / sizeof( trap_flags[0] ),
+		       str_cmp );
+}
+
+int get_atype( const char *type )
+{
+  return get_in_array( type, a_types, MAX_APPLY_TYPE, str_cmp );
+}
+
+int get_npc_race( const char *type )
+{
+  return get_in_array( type, npc_race, MAX_NPC_RACE, str_cmp );
+}
+
+int get_wearloc( const char *type )
+{
+  return get_in_array( type, wear_locs, MAX_WEAR, str_cmp );
+}
+
+int get_exflag( const char *flag )
+{
+  return get_in_array( flag, ex_flags, MAX_EXFLAG, str_cmp );
+}
+
+int get_rflag( const char *flag )
+{
+  return get_in_array( flag, r_flags,
+                       sizeof( r_flags ) / sizeof( r_flags[0] ),
+                       str_cmp );
+}
+
+int get_mpflag( const char *flag )
+{
+  return get_in_array( flag, mprog_flags,
+                       sizeof( mprog_flags ) / sizeof( mprog_flags[0] ),
+                       str_cmp );
+}
+
+int get_oflag( const char *flag )
+{
+  return get_in_array( flag, o_flags,
+                       sizeof( o_flags ) / sizeof( o_flags[0] ),
+                       str_cmp );
+}
+
+int get_areaflag( const char *flag )
+{
+  return get_in_array( flag, area_flags,
+                       sizeof( area_flags ) / sizeof( area_flags[0] ),
+                       str_cmp );
+}
+
+int get_wflag( const char *flag )
+{
+  return get_in_array( flag, w_flags,
+                       sizeof( w_flags ) / sizeof( w_flags[0] ),
+                       str_cmp );
+}
+
+int get_actflag( const char *flag )
+{
+  return get_in_array( flag, act_flags,
+                       sizeof( act_flags ) / sizeof( act_flags[0] ),
+                       str_cmp );
+}
+
+int get_vip_flag( const char *flag )
+{
+  return get_in_array( flag, planet_flags,
+                       sizeof( planet_flags ) / sizeof( planet_flags[0] ),
+                       str_cmp );
+}
+
+int get_wanted_flag( const char *flag )
+{
+  return get_in_array( flag, planet_flags,
+                       sizeof( planet_flags ) / sizeof( planet_flags[0] ),
+                       str_cmp );
+}
+
+int get_pcflag( const char *flag )
+{
+  return get_in_array( flag, pc_flags,
+                       sizeof( pc_flags ) / sizeof( pc_flags[0] ),
+                       str_cmp );
+}
+
+int get_plrflag( const char *flag )
+{
+  return get_in_array( flag, plr_flags,
+                       sizeof( plr_flags ) / sizeof( plr_flags[0] ),
+                       str_cmp );
+}
+
+int get_risflag( const char *flag )
+{
+  return get_in_array( flag, ris_flags,
+                       sizeof( ris_flags ) / sizeof( ris_flags[0] ),
+                       str_cmp );
+}
+
+int get_trigflag( const char *flag )
+{
+  return get_in_array( flag, trig_flags,
+                       sizeof( trig_flags ) / sizeof( trig_flags[0] ),
+                       str_cmp );
+}
+
+int get_partflag( const char *flag )
+{
+  return get_in_array( flag, part_flags,
+                       sizeof( part_flags ) / sizeof( part_flags[0] ),
+                       str_cmp );
+}
+
+int get_attackflag( const char *flag )
+{
+  return get_in_array( flag, attack_flags,
+                       sizeof( attack_flags ) / sizeof( attack_flags[0] ),
+                       str_cmp );
+}
+
+int get_defenseflag( const char *flag )
+{
+  return get_in_array( flag, defense_flags,
+                       sizeof( defense_flags ) / sizeof( defense_flags[0] ),
+                       str_cmp );
+}
+
+int get_langflag( const char *flag )
+{
+  int x = 0;
+
+  for ( x = 0; lang_array[x] != LANG_UNKNOWN; x++ )
+    if ( !str_cmp( flag, lang_names[x] ) )
+      return lang_array[x];
+
+  return LANG_UNKNOWN;
+}
+
+int get_spicetype( const char *type )
+{
+  return get_in_array( type, spice_table,
+                       sizeof( spice_table ) / sizeof( spice_table[0] ),
+                       str_cmp );
+}
+
+int get_weapontype( const char *type )
+{
+  return get_in_array( type, weapon_table,
+                       sizeof( weapon_table ) / sizeof( weapon_table[0] ),
+                       str_cmp );
+}
+
+int get_crystaltype( const char *type )
+{
+  return get_in_array( type, crystal_table,
+                       sizeof( crystal_table ) / sizeof( crystal_table[0] ),
+                       str_cmp );
+}
+
+int get_attacktype( const char *type )
+{
+  return get_in_array( type, attack_table,
+                       sizeof( attack_table ) / sizeof( attack_table[0] ),
+                       str_cmp );
+}

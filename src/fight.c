@@ -2569,13 +2569,15 @@ void dam_message( CHAR_DATA *ch, CHAR_DATA *victim, int dam, int dt )
   else
     if ( dt > TYPE_HIT && is_wielding_poisoned( ch ) )
       {
-        if ( dt < TYPE_HIT + (int)(sizeof(attack_table)/sizeof(attack_table[0]) ))
-          attack        = attack_table[dt - TYPE_HIT];
+        if ( dt < TYPE_HIT + (int) attacktable_size() )
+	  {
+	    attack = get_attacktype_name( dt - TYPE_HIT );
+	  }
         else
           {
             bug( "Dam_message: bad dt %d.", dt );
             dt  = TYPE_HIT;
-            attack  = attack_table[0];
+            attack = get_attacktype_name( 0 );
           }
 
         sprintf( buf1, "$n's poisoned %s %s $N%c", attack, vp, punct );
@@ -2620,13 +2622,15 @@ void dam_message( CHAR_DATA *ch, CHAR_DATA *victim, int dam, int dt )
               }
           }
         else if ( dt >= TYPE_HIT
-                  && dt < TYPE_HIT + (int)(sizeof(attack_table)/sizeof(attack_table[0]) ))
-          attack        = attack_table[dt - TYPE_HIT];
+                  && dt < TYPE_HIT + (int) attacktable_size() )
+	  {
+	    attack = get_attacktype_name( dt - TYPE_HIT );
+	  }
         else
           {
             bug( "Dam_message: bad dt %d.", dt );
             dt  = TYPE_HIT;
-            attack  = attack_table[0];
+            attack = get_attacktype_name( 0 );
           }
 
         sprintf( buf1, "$n's %s %s $N%c",  attack, vp, punct );
