@@ -1230,7 +1230,7 @@ void wear_obj( CHAR_DATA *ch, OBJ_DATA *obj, bool fReplace, short wear_bit )
                   break;
                 default:
                   sprintf( buf, "You cannot wear that on your %s.\r\n",
-                           w_flags[bit] );
+                           wear_flags[bit] );
                   send_to_char( buf, ch );
                 }
             }
@@ -1928,7 +1928,7 @@ void do_wear( CHAR_DATA *ch, char *argument )
           return;
         }
       if ( arg2[0] != '\0' )
-        wear_bit = get_wflag(arg2);
+        wear_bit = get_wearflag(arg2);
       else
         wear_bit = -1;
       wear_obj( ch, obj, TRUE, wear_bit );
@@ -2396,7 +2396,7 @@ void do_auction (CHAR_DATA *ch, char *argument)
           send_to_char( buf, ch );
 
           sprintf( buf, "Worn on: %s\r\n",
-                   flag_string(obj->wear_flags -1, w_flags ) );
+                   flag_string(obj->wear_flags -1, wear_flags ) );
           send_to_char( buf, ch );
 
           set_char_color( AT_BLUE, ch );

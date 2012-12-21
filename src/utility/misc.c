@@ -218,14 +218,18 @@ char *flag_string( int bitvector, const char * const flagarray[] )
   buf[0] = '\0';
 
   for ( x = 0; x < 32 ; x++ )
-    if ( IS_SET( bitvector, 1 << x ) )
     {
-      strcat( buf, flagarray[x] );
-      strcat( buf, " " );
+      if ( IS_SET( bitvector, 1 << x ) )
+	{
+	  strcat( buf, flagarray[x] );
+	  strcat( buf, " " );
+	}
     }
 
   if ( (x=strlen( buf )) > 0 )
-    buf[--x] = '\0';
+    {
+      buf[--x] = '\0';
+    }
 
   return buf;
 }

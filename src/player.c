@@ -216,7 +216,7 @@ void do_score(CHAR_DATA * ch, char *argument)
   for ( drug = 0; drug <= 9; drug++ )
     if ( ch->pcdata->drug_level[drug] > 0 || ch->pcdata->drug_level[drug] > 0 )
       {
-        ch_printf( ch, "%s&c(&C%d&c/&C%d&c) ", spice_table[drug],
+        ch_printf( ch, "%s&c(&C%d&c/&C%d&c) ", get_spicetype_name(drug),
                    ch->pcdata->drug_level[drug],
                    ch->pcdata->addiction[drug] );
       }

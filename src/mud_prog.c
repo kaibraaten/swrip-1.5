@@ -410,7 +410,7 @@ int mprog_do_ifcheck( const char *ifcheck, CHAR_DATA *mob, CHAR_DATA *actor,
       if ( is_number(cvar) )
         type = atoi(cvar);
       else
-        type = get_otype(cvar);
+        type = get_objecttype(cvar);
       if ( type < 0 || type > MAX_ITEM_TYPE )
         {
           progbug("OtypeHere: bad type", mob);
@@ -461,7 +461,7 @@ int mprog_do_ifcheck( const char *ifcheck, CHAR_DATA *mob, CHAR_DATA *actor,
       if ( is_number(cvar) )
         type = atoi(cvar);
       else
-        type = get_otype(cvar);
+        type = get_objecttype(cvar);
       if ( type < 0 || type > MAX_ITEM_TYPE )
         {
           progbug("OtypeRoom: bad type", mob);
@@ -508,7 +508,7 @@ int mprog_do_ifcheck( const char *ifcheck, CHAR_DATA *mob, CHAR_DATA *actor,
       if ( is_number(cvar) )
         type = atoi(cvar);
       else
-        type = get_otype(cvar);
+        type = get_objecttype(cvar);
       if ( type < 0 || type > MAX_ITEM_TYPE )
         {
           progbug("OtypeCarry: bad type", mob);
@@ -555,7 +555,7 @@ int mprog_do_ifcheck( const char *ifcheck, CHAR_DATA *mob, CHAR_DATA *actor,
       if ( is_number(cvar) )
         type = atoi(cvar);
       else
-        type = get_otype(cvar);
+        type = get_objecttype(cvar);
       if ( type < 0 || type > MAX_ITEM_TYPE )
         {
           progbug("OtypeWear: bad type", mob);
@@ -603,7 +603,7 @@ int mprog_do_ifcheck( const char *ifcheck, CHAR_DATA *mob, CHAR_DATA *actor,
       if ( is_number(cvar) )
         type = atoi(cvar);
       else
-        type = get_otype(cvar);
+        type = get_objecttype(cvar);
       if ( type < 0 || type > MAX_ITEM_TYPE )
         {
           progbug("OtypeInv: bad type", mob);
@@ -687,7 +687,7 @@ int mprog_do_ifcheck( const char *ifcheck, CHAR_DATA *mob, CHAR_DATA *actor,
         }
       if ( !str_cmp(chck, "isaffected") )
         {
-          int value = get_aflag(rval);
+          int value = get_affectedflag(rval);
 
           if ( value < 0 || value > 31 )
             {

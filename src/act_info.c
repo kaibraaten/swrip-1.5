@@ -974,7 +974,8 @@ void do_look ( CHAR_DATA *ch, char *argument )
               send_to_char("}", ch);
               set_char_color(AT_CYAN, ch);
               send_to_char("[", ch);
-              send_to_char(flag_string(ch->in_room->room_flags, r_flags), ch);
+              send_to_char(flag_string(ch->in_room->room_flags, room_flags),
+			   ch);
               send_to_char("]", ch);
             }
 

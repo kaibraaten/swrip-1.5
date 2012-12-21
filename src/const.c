@@ -738,7 +738,7 @@ const char * const mag_flags[] =
     "lightning_blade"
   };
 
-const char * const r_flags[] =
+const char * const room_flags[] =
   {
     "dark", "reserved", "nomob", "indoors", "can_land", "can_fly", "no_drive",
     "nomagic", "bank", "private", "safe", "remove_this_flag", "petshop",
@@ -748,7 +748,7 @@ const char * const r_flags[] =
     "auction"
   };
 
-const char * const w_flags[] =
+const char * const wear_flags[] =
   {
     "take", "finger", "neck", "body", "head", "legs", "feet", "hands", "arms",
     "shield", "about", "waist", "wrist", "wield", "hold", "_dual_", "ears",
@@ -756,7 +756,7 @@ const char * const w_flags[] =
     "r7","r8","r9","r10","r11","r12","r13"
   };
 
-const char * const o_flags[] =
+const char * const object_flags[] =
   {
     "glow", "hum", "dark", "hutt_size", "contraband", "invis", "magic",
     "nodrop", "bless", "antigood", "antievil", "antineutral", "noremove",
@@ -766,7 +766,7 @@ const char * const o_flags[] =
     "burried", "prototype", "human_size"
   };
 
-const char * const a_flags[] =
+const char * const affected_flags[] =
   {
     "blind", "invisible", "detect_evil", "detect_invis", "detect_magic",
     "detect_hidden", "weaken", "sanctuary", "faerie_fire", "infrared", "curse",
@@ -776,7 +776,7 @@ const char * const a_flags[] =
     "berserk", "aqua_breath"
   };
 
-const char * const o_types[] =
+const char * const object_types[] =
   {
     "none", "light", "scroll", "_wand", "staff", "weapon", "_fireweapon",
     "missile", "treasure", "armor", "potion", "rope", "furniture", "trash",
@@ -795,7 +795,7 @@ const char * const o_types[] =
     "disguise_fabric", "hair"
   };
 
-const char * const a_types[] =
+const char * const affect_types[] =
   {
     "none", "strength", "dexterity", "intelligence", "wisdom", "constitution",
     "sex", "null", "level", "age", "height", "weight", "force", "hit", "move",
@@ -956,7 +956,7 @@ const char * const wear_locs[] =
     "over"
   };
 
-const char * const ex_flags[] =
+const char * const exit_flags[] =
   {
     "isdoor", "closed", "locked", "secret", "swim", "pickproof", "fly",
     "climb", "dig", "r1", "nopassdoor", "hidden", "passage", "portal", "r2",
@@ -989,7 +989,7 @@ const char * const lang_names[] =
     "coynite", ""
   };
 
-const char * const crystal_table[8] =
+const char * const crystal_table[] =
   {
     "non-adegan", "kathracite", "relacite", "danite", "mephite",
     "ponite", "illum", "corusca"
@@ -1231,17 +1231,17 @@ int get_spellclass( const char *name )
                        str_cmp );
 }
 
-int get_otype( const char *type )
+int get_objecttype( const char *type )
 {
-  return get_in_array( type, o_types,
-                       sizeof( o_types ) / sizeof( o_types[0] ),
+  return get_in_array( type, object_types,
+                       sizeof( object_types ) / sizeof( object_types[0] ),
                        str_cmp );
 }
 
-int get_aflag( const char *flag )
+int get_affectedflag( const char *flag )
 {
-  return get_in_array( flag, a_flags,
-                       sizeof( a_flags ) / sizeof( a_flags[0] ),
+  return get_in_array( flag, affected_flags,
+                       sizeof( affected_flags ) / sizeof( affected_flags[0] ),
                        str_cmp );
 }
 
@@ -1252,9 +1252,9 @@ int get_trapflag( const char *flag )
 		       str_cmp );
 }
 
-int get_atype( const char *type )
+int get_affecttype( const char *type )
 {
-  return get_in_array( type, a_types, MAX_APPLY_TYPE, str_cmp );
+  return get_in_array( type, affect_types, MAX_APPLY_TYPE, str_cmp );
 }
 
 int get_npc_race( const char *type )
@@ -1267,15 +1267,15 @@ int get_wearloc( const char *type )
   return get_in_array( type, wear_locs, MAX_WEAR, str_cmp );
 }
 
-int get_exflag( const char *flag )
+int get_exitflag( const char *flag )
 {
-  return get_in_array( flag, ex_flags, MAX_EXFLAG, str_cmp );
+  return get_in_array( flag, exit_flags, MAX_EXFLAG, str_cmp );
 }
 
-int get_rflag( const char *flag )
+int get_roomflag( const char *flag )
 {
-  return get_in_array( flag, r_flags,
-                       sizeof( r_flags ) / sizeof( r_flags[0] ),
+  return get_in_array( flag, room_flags,
+                       sizeof( room_flags ) / sizeof( room_flags[0] ),
                        str_cmp );
 }
 
@@ -1286,10 +1286,10 @@ int get_mpflag( const char *flag )
                        str_cmp );
 }
 
-int get_oflag( const char *flag )
+int get_objectflag( const char *flag )
 {
-  return get_in_array( flag, o_flags,
-                       sizeof( o_flags ) / sizeof( o_flags[0] ),
+  return get_in_array( flag, object_flags,
+                       sizeof( object_flags ) / sizeof( object_flags[0] ),
                        str_cmp );
 }
 
@@ -1300,10 +1300,10 @@ int get_areaflag( const char *flag )
                        str_cmp );
 }
 
-int get_wflag( const char *flag )
+int get_wearflag( const char *flag )
 {
-  return get_in_array( flag, w_flags,
-                       sizeof( w_flags ) / sizeof( w_flags[0] ),
+  return get_in_array( flag, wear_flags,
+                       sizeof( wear_flags ) / sizeof( wear_flags[0] ),
                        str_cmp );
 }
 

@@ -290,7 +290,7 @@ void do_slookup( CHAR_DATA *ch, char *argument )
       for ( sn = 0; sn < top_sn && skill_table[sn] && skill_table[sn]->name; sn++ )
         pager_printf( ch, "Sn: %4d Slot: %4d Skill/spell: '%-20s' Damtype: %s\r\n",
                       sn, skill_table[sn]->slot, skill_table[sn]->name,
-                      spell_damage[SPELL_DAMAGE( skill_table[sn] )] );
+                      get_spelldamage_name(SPELL_DAMAGE( skill_table[sn] )) );
     }
   else
     if ( !str_cmp( arg, "herbs" ) )
@@ -403,7 +403,7 @@ void do_slookup( CHAR_DATA *ch, char *argument )
             if ( aff->location )
               {
                 strcat( buf, " modifies " );
-                strcat( buf, a_types[aff->location % REVERSE_APPLY] );
+                strcat( buf, affect_types[aff->location % REVERSE_APPLY] );
                 strcat( buf, " by '" );
                 strcat( buf, aff->modifier );
                 if ( aff->bitvector )
@@ -420,7 +420,7 @@ void do_slookup( CHAR_DATA *ch, char *argument )
                   if ( IS_SET(aff->bitvector, 1 << x) )
                     {
                       strcat( buf, " " );
-                      strcat( buf, a_flags[x] );
+                      strcat( buf, affected_flags[x] );
                     }
               }
             if ( aff->duration[0] != '\0' && aff->duration[0] != '0' )
@@ -856,9 +856,9 @@ void do_sset( CHAR_DATA *ch, char *argument )
           argument = one_argument( argument, duration );
 
           if ( location[0] == '!' )
-            loc = get_atype( location+1 ) + REVERSE_APPLY;
+            loc = get_affecttype( location+1 ) + REVERSE_APPLY;
           else
-            loc = get_atype( location );
+            loc = get_affecttype( location );
           if ( (loc % REVERSE_APPLY) < 0
                ||   (loc % REVERSE_APPLY) >= MAX_APPLY_TYPE )
             {
@@ -869,7 +869,7 @@ void do_sset( CHAR_DATA *ch, char *argument )
           while ( argument[0] != 0 )
             {
               argument = one_argument( argument, bitvector );
-              if ( (tmpbit=get_aflag( bitvector )) == -1 )
+              if ( (tmpbit=get_affectedflag( bitvector )) == -1 )
                 ch_printf( ch, "Unknown bitvector: %s.  See AFFECTED_BY\r\n", bitvector );
               else
                 bit |= (1 << tmpbit);

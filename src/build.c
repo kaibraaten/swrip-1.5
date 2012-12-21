@@ -1608,7 +1608,7 @@ void do_mset( CHAR_DATA *ch, char *argument )
       while ( argument[0] != '\0' )
         {
           argument = one_argument( argument, arg3 );
-          value = get_aflag( arg3 );
+          value = get_affectedflag( arg3 );
           if ( value < 0 || value > 31 )
             ch_printf( ch, "Unknown flag: %s\r\n", arg3 );
           else
@@ -2545,7 +2545,7 @@ void do_oset( CHAR_DATA *ch, char *argument )
           send_to_char( "Bolt        Chemical\r\n", ch );
           return;
         }
-      value = get_otype( argument );
+      value = get_objecttype( argument );
       if ( value < 1 )
         {
           ch_printf( ch, "Unknown type: %s\r\n", arg3 );
@@ -2573,7 +2573,7 @@ void do_oset( CHAR_DATA *ch, char *argument )
       while ( argument[0] != '\0' )
         {
           argument = one_argument( argument, arg3 );
-          value = get_oflag( arg3 );
+          value = get_objectflag( arg3 );
           if ( value < 0 || value > 31 )
             ch_printf( ch, "Unknown flag: %s\r\n", arg3 );
           else
@@ -2605,7 +2605,7 @@ void do_oset( CHAR_DATA *ch, char *argument )
       while ( argument[0] != '\0' )
         {
           argument = one_argument( argument, arg3 );
-          value = get_wflag( arg3 );
+          value = get_wearflag( arg3 );
           if ( value < 0 || value > 31 )
             ch_printf( ch, "Unknown flag: %s\r\n", arg3 );
           else
@@ -2783,7 +2783,7 @@ void do_oset( CHAR_DATA *ch, char *argument )
           send_to_char( "punch       climb       grip        scribe        brew\r\n", ch );
           return;
         }
-      loc = get_atype( arg2 );
+      loc = get_affecttype( arg2 );
       if ( loc < 1 )
         {
           ch_printf( ch, "Unknown field: %s\r\n", arg2 );
@@ -2796,7 +2796,7 @@ void do_oset( CHAR_DATA *ch, char *argument )
             {
               argument = one_argument( argument, arg3 );
               if ( loc == APPLY_AFFECT )
-                value = get_aflag( arg3 );
+                value = get_affectedflag( arg3 );
               else
                 value = get_risflag( arg3 );
               if ( value < 0 || value > 31 )
@@ -3863,7 +3863,7 @@ void do_redit( CHAR_DATA *ch, char *argument )
       while ( argument[0] != '\0' )
         {
           argument = one_argument( argument, arg2 );
-          value = get_rflag( arg2 );
+          value = get_roomflag( arg2 );
           if ( value < 0 || value > 31 )
             ch_printf( ch, "Unknown flag: %s\r\n", arg2 );
           else if ( 1 << value == ROOM_PLR_HOME && get_trust(ch) < LEVEL_SUPREME )
@@ -4022,7 +4022,7 @@ void do_redit( CHAR_DATA *ch, char *argument )
             {
               if ( IS_SET( xit->exit_info, 1 << value ) )
                 {
-                  strcat( buf, ex_flags[value] );
+                  strcat( buf, exit_flags[value] );
                   strcat( buf, " " );
                 }
             }
@@ -4033,7 +4033,7 @@ void do_redit( CHAR_DATA *ch, char *argument )
       while ( argument[0] != '\0' )
         {
           argument = one_argument( argument, arg2 );
-          value = get_exflag( arg2 );
+          value = get_exitflag( arg2 );
           if ( value < 0 || value > MAX_EXFLAG )
             ch_printf( ch, "Unknown flag: %s\r\n", arg2 );
           else
@@ -4058,7 +4058,7 @@ void do_redit( CHAR_DATA *ch, char *argument )
         case SUB_NORTH: dir = 'n'; edir = 0; break;
         }
 
-      value = get_exflag(arg2);
+      value = get_exitflag(arg2);
       if ( value < 0 )
         {
           send_to_char("Bad exit flag. \r\n", ch);

@@ -1197,7 +1197,7 @@ void do_shopset( CHAR_DATA *ch, char *argument )
   if ( !str_cmp( arg2, "buy0" ) )
     {
       if ( !is_number(argument) )
-        value = get_otype(argument);
+        value = get_objecttype(argument);
       if ( value < 0 || value > MAX_ITEM_TYPE )
         {
           send_to_char( "Invalid item type!\r\n", ch );
@@ -1211,7 +1211,7 @@ void do_shopset( CHAR_DATA *ch, char *argument )
   if ( !str_cmp( arg2, "buy1" ) )
     {
       if ( !is_number(argument) )
-        value = get_otype(argument);
+        value = get_objecttype(argument);
       if ( value < 0 || value > MAX_ITEM_TYPE )
         {
           send_to_char( "Invalid item type!\r\n", ch );
@@ -1225,7 +1225,7 @@ void do_shopset( CHAR_DATA *ch, char *argument )
   if ( !str_cmp( arg2, "buy2" ) )
     {
       if ( !is_number(argument) )
-        value = get_otype(argument);
+        value = get_objecttype(argument);
       if ( value < 0 || value > MAX_ITEM_TYPE )
         {
           send_to_char( "Invalid item type!\r\n", ch );
@@ -1239,7 +1239,7 @@ void do_shopset( CHAR_DATA *ch, char *argument )
   if ( !str_cmp( arg2, "buy3" ) )
     {
       if ( !is_number(argument) )
-        value = get_otype(argument);
+        value = get_objecttype(argument);
       if ( value < 0 || value > MAX_ITEM_TYPE )
         {
           send_to_char( "Invalid item type!\r\n", ch );
@@ -1253,7 +1253,7 @@ void do_shopset( CHAR_DATA *ch, char *argument )
   if ( !str_cmp( arg2, "buy4" ) )
     {
       if ( !is_number(argument) )
-        value = get_otype(argument);
+        value = get_objecttype(argument);
       if ( value < 0 || value > MAX_ITEM_TYPE )
         {
           send_to_char( "Invalid item type!\r\n", ch );
@@ -1367,11 +1367,11 @@ void do_shopstat( CHAR_DATA *ch, char *argument )
 
   ch_printf( ch, "Keeper: %d  %s\r\n", shop->keeper, mob->short_descr );
   ch_printf( ch, "buy0 [%s]  buy1 [%s]  buy2 [%s]  buy3 [%s]  buy4 [%s]\r\n",
-             o_types[shop->buy_type[0]],
-             o_types[shop->buy_type[1]],
-             o_types[shop->buy_type[2]],
-             o_types[shop->buy_type[3]],
-             o_types[shop->buy_type[4]] );
+             object_types[shop->buy_type[0]],
+             object_types[shop->buy_type[1]],
+             object_types[shop->buy_type[2]],
+             object_types[shop->buy_type[3]],
+             object_types[shop->buy_type[4]] );
   ch_printf( ch, "Profit:  buy %3d%%  sell %3d%%\r\n",
              shop->profit_buy,
              shop->profit_sell );
@@ -1491,7 +1491,7 @@ void do_repairset( CHAR_DATA *ch, char *argument )
   if ( !str_cmp( arg2, "fix0" ) )
     {
       if ( !is_number(argument) )
-        value = get_otype(argument);
+        value = get_objecttype(argument);
       if ( value < 0 || value > MAX_ITEM_TYPE )
         {
           send_to_char( "Invalid item type!\r\n", ch );
@@ -1505,7 +1505,7 @@ void do_repairset( CHAR_DATA *ch, char *argument )
   if ( !str_cmp( arg2, "fix1" ) )
     {
       if ( !is_number(argument) )
-        value = get_otype(argument);
+        value = get_objecttype(argument);
       if ( value < 0 || value > MAX_ITEM_TYPE )
         {
           send_to_char( "Invalid item type!\r\n", ch );
@@ -1519,7 +1519,7 @@ void do_repairset( CHAR_DATA *ch, char *argument )
   if ( !str_cmp( arg2, "fix2" ) )
     {
       if ( !is_number(argument) )
-        value = get_otype(argument);
+        value = get_objecttype(argument);
       if ( value < 0 || value > MAX_ITEM_TYPE )
         {
           send_to_char( "Invalid item type!\r\n", ch );
@@ -1633,9 +1633,9 @@ void do_repairstat( CHAR_DATA *ch, char *argument )
 
   ch_printf( ch, "Keeper: %d  %s\r\n", repair->keeper, mob->short_descr );
   ch_printf( ch, "fix0 [%s]  fix1 [%s]  fix2 [%s]\r\n",
-             o_types[repair->fix_type[0]],
-             o_types[repair->fix_type[1]],
-             o_types[repair->fix_type[2]] );
+             object_types[repair->fix_type[0]],
+             object_types[repair->fix_type[1]],
+             object_types[repair->fix_type[2]] );
   ch_printf( ch, "Profit: %3d%%  Type: %d\r\n",
              repair->profit_fix,
              repair->shop_type );

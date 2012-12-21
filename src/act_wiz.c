@@ -1124,7 +1124,7 @@ void do_rstat( CHAR_DATA *ch, char *argument )
              location->tunnel );
 
   ch_printf( ch, "Room flags: %s\r\n",
-             flag_string(location->room_flags, r_flags) );
+             flag_string(location->room_flags, room_flags) );
   ch_printf( ch, "Description:\r\n%s", location->description );
 
   if ( location->first_extradesc )
@@ -1227,8 +1227,8 @@ void do_ostat( CHAR_DATA *ch, char *argument )
   if ( obj->action_desc[0] != '\0' )
     ch_printf( ch, "Action description: %s.\r\n", obj->action_desc );
 
-  ch_printf( ch, "Wear flags : %s\r\n", flag_string(obj->wear_flags, w_flags) );
-  ch_printf( ch, "Extra flags: %s\r\n", flag_string(obj->extra_flags, o_flags) );
+  ch_printf( ch, "Wear flags : %s\r\n", flag_string(obj->wear_flags, wear_flags) );
+  ch_printf( ch, "Extra flags: %s\r\n", flag_string(obj->extra_flags, object_flags) );
 
   ch_printf( ch, "Number: %d/%d.  Weight: %d/%d.  Layers: %d\r\n",
              1,           get_obj_number( obj ),

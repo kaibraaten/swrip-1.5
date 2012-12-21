@@ -871,14 +871,14 @@ void edit_reset( CHAR_DATA *ch, char *argument, AREA_DATA *pArea,
           vnum = get_dir(arg);
           SET_BIT(num, vnum << BIT_RESET_DOOR_THRESHOLD);
           vnum = pRoom->vnum;
-          flfunc = &get_exflag;
+          flfunc = &get_exitflag;
           reset = NULL;
         }
       else if ( !str_prefix(option, "object") )
         {
           SET_BIT(num, BIT_RESET_OBJECT);
           vnum = 0;
-          flfunc = &get_oflag;
+          flfunc = &get_objectflag;
           if ( !(reset = find_oreset(ch, pArea, aRoom, arg)) )
             return;
         }
@@ -886,7 +886,7 @@ void edit_reset( CHAR_DATA *ch, char *argument, AREA_DATA *pArea,
         {
           SET_BIT(num, BIT_RESET_MOBILE);
           vnum = 0;
-          flfunc = &get_aflag;
+          flfunc = &get_affectedflag;
           if ( !(reset = find_mreset(ch, pArea, aRoom, arg)) )
             return;
         }
@@ -906,7 +906,7 @@ void edit_reset( CHAR_DATA *ch, char *argument, AREA_DATA *pArea,
           else if ( !(pRoom = find_room(ch, arg, aRoom)) )
             return;
           vnum = pRoom->vnum;
-          flfunc = &get_rflag;
+          flfunc = &get_roomflag;
           reset = NULL;
         }
       else
@@ -1868,7 +1868,7 @@ void list_resets( CHAR_DATA *ch, AREA_DATA *pArea, ROOM_INDEX_DATA *pRoom,
                           (room && get_exit(room, door) ? "" : " (NO EXIT!)"), door,
                           rname, pReset->arg1);
                 }
-                flagarray = ex_flags;
+                flagarray = exit_flags;
                 break;
               case BIT_RESET_ROOM:
                 if ( !(room = get_room_index(pReset->arg1)) )
@@ -1876,7 +1876,7 @@ void list_resets( CHAR_DATA *ch, AREA_DATA *pArea, ROOM_INDEX_DATA *pRoom,
                 else
                   rname = room->name;
                 sprintf(pbuf, "Room %s (%d)", rname, pReset->arg1);
-                flagarray = r_flags;
+                flagarray = room_flags;
                 break;
               case BIT_RESET_OBJECT:
                 if ( pReset->arg1 > 0 )
@@ -1890,7 +1890,7 @@ void list_resets( CHAR_DATA *ch, AREA_DATA *pArea, ROOM_INDEX_DATA *pRoom,
                   rname = oname;
                 sprintf(pbuf, "Object %s (%d)", rname,
                         (pReset->arg1 > 0 ? pReset->arg1 : obj ? obj->vnum : 0));
-                flagarray = o_flags;
+                flagarray = object_flags;
                 break;
               case BIT_RESET_MOBILE:
                 if ( pReset->arg1 > 0 )
@@ -1908,7 +1908,7 @@ void list_resets( CHAR_DATA *ch, AREA_DATA *pArea, ROOM_INDEX_DATA *pRoom,
                   rname = mname;
                 sprintf(pbuf, "Mobile %s (%d)", rname,
                         (pReset->arg1 > 0 ? pReset->arg1 : mob ? mob->vnum : 0));
-                flagarray = a_flags;
+                flagarray = affected_flags;
                 break;
               default:
                 sprintf(pbuf, "bad type %d", pReset->arg2 & BIT_RESET_TYPE_MASK);

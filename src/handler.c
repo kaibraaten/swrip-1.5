@@ -2369,7 +2369,7 @@ const char *item_type_name( OBJ_DATA *obj )
       return "(unknown)";
     }
 
-  return o_types[obj->item_type];
+  return object_types[obj->item_type];
 }
 
 
@@ -2991,7 +2991,7 @@ void showaffect( CHAR_DATA *ch, AFFECT_DATA *paf )
             if ( IS_SET( paf->modifier, 1 << x ) )
               {
                 strcat( buf, " " );
-                strcat( buf, a_flags[x] );
+                strcat( buf, affected_flags[x] );
               }
           strcat( buf, "\r\n" );
           break;

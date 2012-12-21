@@ -227,7 +227,7 @@ void do_makeblade( CHAR_DATA *ch, char *argument )
   CREATE( paf, AFFECT_DATA, 1 );
   paf->type               = -1;
   paf->duration           = -1;
-  paf->location           = get_atype( "backstab" );
+  paf->location           = get_affecttype( "backstab" );
   paf->modifier           = level/3;
   paf->bitvector          = 0;
   paf->next               = NULL;
@@ -238,7 +238,7 @@ void do_makeblade( CHAR_DATA *ch, char *argument )
       CREATE( paf2, AFFECT_DATA, 1 );
       paf2->type               = -1;
       paf2->duration           = -1;
-      paf2->location           = get_atype( "hitroll" );
+      paf2->location           = get_affecttype( "hitroll" );
       paf2->modifier           = -2;
       paf2->bitvector          = 0;
       paf2->next               = NULL;
@@ -509,7 +509,7 @@ void do_makeblaster( CHAR_DATA *ch, char *argument )
   CREATE( paf, AFFECT_DATA, 1 );
   paf->type               = -1;
   paf->duration           = -1;
-  paf->location           = get_atype( "hitroll" );
+  paf->location           = get_affecttype( "hitroll" );
   paf->modifier           = URANGE( 0, 1+scope, level/30 );
   paf->bitvector          = 0;
   paf->next               = NULL;
@@ -518,7 +518,7 @@ void do_makeblaster( CHAR_DATA *ch, char *argument )
   CREATE( paf2, AFFECT_DATA, 1 );
   paf2->type               = -1;
   paf2->duration           = -1;
-  paf2->location           = get_atype( "damroll" );
+  paf2->location           = get_affecttype( "damroll" );
   paf2->modifier           = URANGE( 0, power, level/30);
   paf2->bitvector          = 0;
   paf2->next               = NULL;
@@ -529,7 +529,7 @@ void do_makeblaster( CHAR_DATA *ch, char *argument )
       CREATE( paf2, AFFECT_DATA, 1 );
       paf2->type               = -1;
       paf2->duration           = -1;
-      paf2->location           = get_atype( "snipe" );
+      paf2->location           = get_affecttype( "snipe" );
       paf2->modifier           = URANGE( 0, 30 , level/3);
       paf2->bitvector          = 0;
       paf2->next               = NULL;
@@ -838,7 +838,7 @@ void do_makelightsaber( CHAR_DATA *ch, char *argument )
   CREATE( paf, AFFECT_DATA, 1 );
   paf->type               = -1;
   paf->duration           = -1;
-  paf->location           = get_atype( "hitroll" );
+  paf->location           = get_affecttype( "hitroll" );
   paf->modifier           = URANGE( 0, gems, level/30 );
   paf->bitvector          = 0;
   paf->next               = NULL;
@@ -847,7 +847,7 @@ void do_makelightsaber( CHAR_DATA *ch, char *argument )
   CREATE( paf2, AFFECT_DATA, 1 );
   paf2->type               = -1;
   paf2->duration           = -1;
-  paf2->location           = get_atype( "parry" );
+  paf2->location           = get_affecttype( "parry" );
   paf2->modifier           = ( level/3 );
   paf2->bitvector          = 0;
   paf2->next               = NULL;
@@ -1782,7 +1782,7 @@ void do_makejewelry( CHAR_DATA *ch, char *argument )
 
   obj->item_type = ITEM_ARMOR;
   SET_BIT( obj->wear_flags, ITEM_TAKE );
-  value = get_wflag( arg );
+  value = get_wearflag( arg );
   if ( value < 0 || value > 31 )
     SET_BIT( obj->wear_flags, ITEM_WEAR_NECK );
   else
@@ -1966,7 +1966,7 @@ void do_makearmor( CHAR_DATA *ch, char *argument )
 
   obj->item_type = ITEM_ARMOR;
   SET_BIT( obj->wear_flags, ITEM_TAKE );
-  value = get_wflag( arg );
+  value = get_wearflag( arg );
   if ( value < 0 || value > 31 )
     SET_BIT( obj->wear_flags, ITEM_WEAR_BODY );
   else
@@ -2188,7 +2188,7 @@ void do_makecomlink( CHAR_DATA *ch, char *argument )
 
   obj->item_type = ITEM_COMLINK;
   SET_BIT( obj->wear_flags, ITEM_TAKE );
-  value = get_wflag( arg );
+  value = get_wearflag( arg );
   if ( value < 0 || value > 31 )
     SET_BIT( obj->wear_flags, ITEM_WEAR_NECK );
   else
@@ -2592,7 +2592,7 @@ void do_makecontainer( CHAR_DATA *ch, char *argument )
 
   obj->item_type = ITEM_CONTAINER;
   SET_BIT( obj->wear_flags, ITEM_TAKE );
-  value = get_wflag( arg );
+  value = get_wearflag( arg );
   if ( value < 0 || value > 31 )
     SET_BIT( obj->wear_flags, ITEM_HOLD );
   else
@@ -5684,7 +5684,7 @@ void do_makebowcaster( CHAR_DATA *ch, char *argument )
   CREATE( paf, AFFECT_DATA, 1 );
   paf->type               = -1;
   paf->duration           = -1;
-  paf->location           = get_atype( "hitroll" );
+  paf->location           = get_affecttype( "hitroll" );
   paf->modifier           = URANGE( 0, 1+scope, level/30 );
   paf->bitvector          = 0;
   paf->next               = NULL;
@@ -5693,7 +5693,7 @@ void do_makebowcaster( CHAR_DATA *ch, char *argument )
   CREATE( paf2, AFFECT_DATA, 1 );
   paf2->type               = -1;
   paf2->duration           = -1;
-  paf2->location           = get_atype( "damroll" );
+  paf2->location           = get_affecttype( "damroll" );
   paf2->modifier           = URANGE( 0, power, level/30);
   paf2->bitvector          = 0;
   paf2->next               = NULL;
