@@ -44,7 +44,7 @@ extern "C" {
   void show_hash( int count );
   char *hash_stats( void );
   void hash_dump( int );
-  char *check_hash( char* );
+  char *check_hash( const char* );
   void show_high_hash( int );
 
 #ifdef __cplusplus
@@ -195,7 +195,7 @@ void hash_dump( int hash )
   fprintf( stdout, "Total strings in hash %d: %d\r\n", hash, c );
 }
 
-char *check_hash( char *str )
+char *check_hash( const char *str )
 {
   static char buf[1024];
   int len = 0, hash = 0, psize = 0, p = 0, c = 0;

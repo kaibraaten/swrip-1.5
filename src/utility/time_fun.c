@@ -5,7 +5,7 @@
 #include <sys/time.h>
 #endif
 
-#include "swr_support.h"
+#include "utility.h"
 
 #ifdef __cplusplus
 extern "C" {

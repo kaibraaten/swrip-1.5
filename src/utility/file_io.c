@@ -4,7 +4,7 @@
 #include <string.h>
 #include <ctype.h>
 
-#include "swr_support.h"
+#include "utility.h"
 
 /*
  * Uni-directional dependencies. Fix that.
@@ -13,7 +13,6 @@
 extern "C" {
 #endif
   void bug( const char *str, ... );
-  void shutdown_mud( const char *reason );
 #ifdef __cplusplus
 }
 #endif
@@ -70,9 +69,9 @@ float fread_float( FILE *fp )
     if( feof( fp ) )
     {
       bug( "%s: EOF encountered on read.", __FUNCTION__ );
+
       if( fBootDb )
       {
-	shutdown_mud( "Corrupt file somewhere." );
 	exit( EXIT_FAILURE );
       }
       return 0;

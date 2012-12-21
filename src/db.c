@@ -304,33 +304,32 @@ char                    strArea[MAX_INPUT_LENGTH];
 /*
  * Local booting procedures.
  */
-void    boot_log( const char *str, ... );
-void    load_area( FILE *fp );
-void    load_author( AREA_DATA *tarea, FILE *fp );
-void    load_economy( AREA_DATA *tarea, FILE *fp );
-void    load_resetmsg( AREA_DATA *tarea, FILE *fp ); /* Rennard */
-void    load_flags( AREA_DATA *tarea, FILE *fp );
-void    load_helps( AREA_DATA *tarea, FILE *fp );
-void    load_mobiles( AREA_DATA *tarea, FILE *fp );
-void    load_objects( AREA_DATA *tarea, FILE *fp );
-void    load_resets( AREA_DATA *tarea, FILE *fp );
-void    load_rooms( AREA_DATA *tarea, FILE *fp );
-void    load_shops( AREA_DATA *tarea, FILE *fp );
-void    load_repairs( AREA_DATA *tarea, FILE *fp );
-void    load_specials( AREA_DATA *tarea, FILE *fp );
-void    load_ranges( AREA_DATA *tarea, FILE *fp );
-void    load_buildlist( void );
-bool    load_systemdata( SYSTEM_DATA *sys );
-void    load_banlist( void );
-void    initialize_economy( void );
-
-void    fix_exits( void );
+void boot_log( const char *str, ... );
+void load_area( FILE *fp );
+void load_author( AREA_DATA *tarea, FILE *fp );
+void load_economy( AREA_DATA *tarea, FILE *fp );
+void load_resetmsg( AREA_DATA *tarea, FILE *fp ); /* Rennard */
+void load_flags( AREA_DATA *tarea, FILE *fp );
+void load_helps( AREA_DATA *tarea, FILE *fp );
+void load_mobiles( AREA_DATA *tarea, FILE *fp );
+void load_objects( AREA_DATA *tarea, FILE *fp );
+void load_resets( AREA_DATA *tarea, FILE *fp );
+void load_rooms( AREA_DATA *tarea, FILE *fp );
+void load_shops( AREA_DATA *tarea, FILE *fp );
+void load_repairs( AREA_DATA *tarea, FILE *fp );
+void load_specials( AREA_DATA *tarea, FILE *fp );
+void load_ranges( AREA_DATA *tarea, FILE *fp );
+void load_buildlist( void );
+bool load_systemdata( SYSTEM_DATA *sys );
+void load_banlist( void );
+void initialize_economy( void );
+void fix_exits( void );
 
 /*
  * External booting function
  */
-void    load_corpses( void );
-void    renumber_put_resets( AREA_DATA *pArea );
+void load_corpses( void );
+void renumber_put_resets( AREA_DATA *pArea );
 
 /*
  * MUDprogram locals
@@ -339,10 +338,8 @@ void    renumber_put_resets( AREA_DATA *pArea );
 int             mprog_name_to_type( char* name );
 MPROG_DATA *    mprog_file_read( char* f, MPROG_DATA* mprg,
 				 MOB_INDEX_DATA *pMobIndex );
-/* int          oprog_name_to_type( char* name ) ); */
 MPROG_DATA *    oprog_file_read( char* f, MPROG_DATA* mprg,
 				 OBJ_INDEX_DATA *pObjIndex );
-/* int          rprog_name_to_type( char* name ) ); */
 MPROG_DATA *    rprog_file_read( char* f, MPROG_DATA* mprg,
 				 ROOM_INDEX_DATA *pRoomIndex );
 void            load_mudprogs( AREA_DATA *tarea, FILE* fp );
@@ -352,9 +349,6 @@ void            mprog_read_programs( FILE* fp, MOB_INDEX_DATA *pMobIndex );
 void            oprog_read_programs( FILE* fp, OBJ_INDEX_DATA *pObjIndex );
 void            rprog_read_programs( FILE* fp, ROOM_INDEX_DATA *pRoomIndex );
 
-#ifdef __cplusplus
-extern "C" {
-#endif
 void shutdown_mud( const char *reason )
 {
   FILE *fp;
@@ -365,9 +359,6 @@ void shutdown_mud( const char *reason )
       fclose( fp );
     }
 }
-#ifdef __cplusplus
-}
-#endif
 
 /*
  * Big mama top level function.

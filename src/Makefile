@@ -10,8 +10,8 @@ IMC = 1
 #Change from 0 to 1 to enable telnet debug logging.
 DEBUG_TELNET = -DSWRIP_DEBUG_TELNET=0
 
-CCFLAGS = -g3 -MMD -Iswr_support $(WFLAGS) $(USE_DLSYM) $(DEBUG_TELNET) -ansi -pedantic
-LDFLAGS = -lm -lz -Lswr_support -lswr_support -Wl,-rpath,../src/swr_support
+CCFLAGS = -g3 -MMD -Iutility $(WFLAGS) $(USE_DLSYM) $(DEBUG_TELNET) -ansi -pedantic
+LDFLAGS = -lm -lz -Lutility -lutility -Wl,-rpath,../src/utility
 
 #Uncomment the next line of you're using Solaris and you get linker errors.
 #SOLARIS = 1
@@ -47,7 +47,7 @@ endif
 all:		libs $(BINARY)
 
 libs:
-		$(MAKE) -C swr_support
+		$(MAKE) -C utility
 
 $(BINARY):	$(OBJ)
 		@echo "Linking" $(BINARY)

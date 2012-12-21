@@ -24,7 +24,7 @@
 #ifndef _MUD_H_
 #define _MUD_H_
 
-#include <swr_support.h>
+#include <utility.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>

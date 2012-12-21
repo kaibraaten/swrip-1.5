@@ -22,7 +22,7 @@ else
 LIB_EXT = a
 endif
 
-LIBNAME = libswr_support.$(LIB_EXT)
+LIBNAME = libutility.$(LIB_EXT)
 
 all:		$(LIBNAME)
 

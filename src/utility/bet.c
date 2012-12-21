@@ -19,7 +19,7 @@
  ****************************************************************************/
 #include <ctype.h>
 #include <stdlib.h>
-#include "swr_support.h"
+#include "utility.h"
 
 /*
  * The following code was written by Erwin Andreasen for the automated

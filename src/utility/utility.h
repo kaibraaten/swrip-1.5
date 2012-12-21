@@ -1,5 +1,5 @@
-#ifndef _SWR_SUPPORT_H_
-#define _SWR_SUPPORT_H_
+#ifndef _SWR_UTILITY_H_
+#define _SWR_UTILITY_H_
 
 #include <stdio.h>
 #include "vector3.h"
@@ -217,7 +217,7 @@ char *fread_word( FILE *fp );
 char *fread_line( FILE *fp );
 void smash_tilde( char *str );
 void hide_tilde( char *str );
-char *show_tilde( char *str );
+char *show_tilde( const char *str );
 void replace_char( char*, char, char );
 void smush_tilde( char* );
 char *encode_string( const char* );
@@ -228,7 +228,7 @@ char *quick_link( const char *str );
 int str_free( char *str );
 void show_hash( int count );
 char *hash_stats( void );
-char *check_hash( char *str );
+char *check_hash( const char *str );
 void hash_dump( int hash );
 void show_high_hash( int top );
 

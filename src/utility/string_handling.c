@@ -8,13 +8,13 @@
 #include <stdlib.h>
 #include <stdarg.h>
 
-#include "swr_support.h"
+#include "utility.h"
 #include "sha256.h"
 
 #define HIDDEN_TILDE    '*'
 
-typedef bool STRING_COMPARATOR( const char*, const char* );
-typedef char *STRING_TOKENIZER( char*, char* );
+typedef bool (*STRING_COMPARATOR)( const char*, const char* );
+typedef char* (*STRING_TOKENIZER)( char*, char* );
 
 #ifdef __cplusplus
 extern "C" {
@@ -26,15 +26,15 @@ extern "C" {
 
 static bool is_name2( const char*, const char* );
 static bool is_name2_prefix( const char*, const char* );
-static bool is_name_internal( const char*, const char*, STRING_COMPARATOR*, STRING_TOKENIZER* );
+static bool is_name_internal( const char*, const char*, STRING_COMPARATOR, STRING_TOKENIZER );
 static bool nifty_is_name_internal( const char*, const char*,
-                                    STRING_COMPARATOR*, STRING_TOKENIZER* );
+                                    STRING_COMPARATOR, STRING_TOKENIZER );
 /*
  * See if a string is one of the names of an object.
  */
 static bool is_name_internal( const char *str, const char *namelist,
-                              STRING_COMPARATOR *compare_string,
-                              STRING_TOKENIZER *tokenize_string )
+                              STRING_COMPARATOR compare_string,
+                              STRING_TOKENIZER tokenize_string )
 {
   char name[MAX_INPUT_LENGTH];
   char tmp_buf[MAX_INPUT_LENGTH];
@@ -85,8 +85,8 @@ bool is_name2_prefix( const char *str, const char *namelist )
  * Checks if str is a name in namelist supporting multiple keywords
  */
 static bool nifty_is_name_internal( const char *str, const char *namelist,
-                                    STRING_COMPARATOR *compare_string,
-                                    STRING_TOKENIZER *tokenize_string )
+                                    STRING_COMPARATOR compare_string,
+                                    STRING_TOKENIZER tokenize_string )
 {
   char name[MAX_INPUT_LENGTH];
   char tmp_str_buf[MAX_INPUT_LENGTH];
@@ -140,7 +140,7 @@ void hide_tilde( char *str )
   replace_char( str, '~', HIDDEN_TILDE );
 }
 
-char *show_tilde( char *str )
+char *show_tilde( const char *str )
 {
   static char buf[MAX_STRING_LENGTH];
   char *bufptr = buf;
