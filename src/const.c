@@ -518,7 +518,7 @@ size_t attacktable_size( void )
 
 const char *get_attacktype_name( size_t type )
 {
-  if(type <= attacktable_size() )
+  if(type >= attacktable_size() )
     {
       bug("%s: subscript %d out of range", __FUNCTION__, type);
       return NULL;
@@ -563,11 +563,6 @@ const char * const skill_tname[] =
     "unknown", "Spell", "Skill", "Weapon", "Tongue", "Herb"
   };
 
-const short movement_loss[SECT_MAX] =
-  {
-    1, 2, 2, 3, 4, 6, 4, 1, 6, 10, 6, 5, 7, 4
-  };
-
 const char * const dir_name[] =
   {
     "north", "east", "south", "west", "up", "down",
@@ -576,8 +571,158 @@ const char * const dir_name[] =
 
 const short rev_dir[] =
   {
-    2, 3, 0, 1, 5, 4, 9, 8, 7, 6, 10
+    DIR_SOUTH, DIR_WEST, DIR_NORTH, DIR_EAST, DIR_DOWN, DIR_UP,
+    DIR_SOUTHWEST, DIR_SOUTHEAST, DIR_NORTHWEST, DIR_NORTHEAST, DIR_SOMEWHERE
   };
+
+const char *get_dir_name( int dir )
+{
+  if( dir > DIR_SOMEWHERE )
+    {
+      bug("%s: subscript %d out of range", __FUNCTION__, dir);
+      return NULL;
+    }
+
+  return dir_name[dir];
+}
+
+int get_rev_dir( int dir )
+{
+  if( dir > DIR_SOMEWHERE )
+    {
+      bug("%s: subscript %d out of range", __FUNCTION__, dir);
+      return DIR_SOMEWHERE;
+    }
+
+  return rev_dir[dir];
+}
+
+int get_dir( const char *txt )
+{
+  int edir = 0;
+  char c1, c2;
+
+  if ( !str_cmp( txt, get_dir_name( DIR_NORTHEAST ) ) )
+    return DIR_NORTHEAST;
+
+  if ( !str_cmp( txt, get_dir_name( DIR_NORTHWEST ) ) )
+    return DIR_NORTHWEST;
+
+  if ( !str_cmp( txt, get_dir_name( DIR_SOUTHEAST ) ) )
+    return DIR_SOUTHEAST;
+
+  if ( !str_cmp( txt, get_dir_name( DIR_SOUTHWEST ) ) )
+    return DIR_SOUTHWEST;
+
+  if ( !str_cmp( txt, get_dir_name( DIR_SOMEWHERE ) ) )
+    return DIR_SOMEWHERE;
+
+  c1 = txt[0];
+
+  if ( c1 == '\0' )
+    return 0;
+
+  c2 = txt[1];
+
+  switch ( c1 )
+    {
+    case 'n':
+      switch ( c2 )
+        {
+        default:
+          edir = DIR_NORTH;
+          break;
+
+        case 'e':
+          edir = DIR_NORTHEAST;
+          break;
+
+        case 'w':
+          edir = DIR_NORTHWEST;
+          break;
+        }
+      break;
+
+    case '0':
+      edir = DIR_NORTH;
+      break;
+
+    case 'e':
+      edir = DIR_EAST;
+      break;
+
+    case '1':
+      edir = DIR_EAST;
+      break;
+
+    case 's':
+      switch ( c2 )
+        {
+        default:
+          edir = DIR_SOUTH;
+          break;
+
+        case 'e':
+          edir = DIR_SOUTHEAST;
+          break;
+
+        case 'w':
+          edir = DIR_SOUTHWEST;
+          break;
+        }
+      break;
+
+    case '2':
+      edir = DIR_SOUTH;
+      break;
+
+    case 'w':
+      edir = DIR_WEST;
+      break;
+
+    case '3':
+      edir = DIR_WEST;
+      break;
+
+    case 'u':
+      edir = DIR_UP;
+      break;
+
+    case '4':
+      edir = DIR_UP;
+      break;
+
+    case 'd':
+      edir = DIR_DOWN;
+      break;
+
+    case '5':
+      edir = DIR_DOWN;
+      break;
+
+    case '6':
+      edir = DIR_NORTHEAST;
+      break;
+
+    case '7':
+      edir = DIR_NORTHWEST;
+      break;
+
+    case '8':
+      edir = DIR_SOUTHEAST;
+      break;
+
+    case '9':
+      edir = DIR_SOUTHWEST;
+      break;
+
+    case '?':
+      edir = DIR_SOMEWHERE;
+      break;
+    }
+
+  return edir;
+}
 
 const char * const where_name[] =
   {
@@ -629,6 +774,24 @@ const char * const sect_names[SECT_MAX][2] =
     { "Somewhere",      "unknown"     }, /* SECT_DUNNO        */
     { "Ocean floor",    "Ocean floor" }, /* SECT_OCEANFLOOR   */
     { "Underground",    "underground" }  /* SECT_UNDERGROUND  */
+  };
+
+const short movement_loss[SECT_MAX] =
+  {
+    1,  /* SECT_INSIDE */
+    2,  /* SECT_CITY */
+    2,  /* SECT_FIELD */
+    3,  /* SECT_FOREST */
+    4,  /* SECT_HILLS */
+    6,  /* SECT_MOUNTAIN */
+    4,  /* SECT_WATER_SWIM */
+    1,  /* SECT_WATER_NOSWIM */
+    6,  /* SECT_UNDERWATER */
+    10, /* SECT_AIR */
+    6,  /* SECT_DESERT */
+    5,  /* SECT_DUNNO */
+    7,  /* SECT_OCEANFLOOR */
+    4   /* SECT_UNDERGROUND */
   };
 
 const int sent_total[SECT_MAX] =
@@ -842,7 +1005,7 @@ size_t weapontable_size( void )
 
 const char *get_weapontype_name( size_t type )
 {
-  if( type <= weapontable_size() )
+  if( type >= weapontable_size() )
     {
       bug("%s: subscript %d out of range", __FUNCTION__, type);
       return NULL;
@@ -863,7 +1026,7 @@ size_t spicetable_size(void)
 
 const char *get_spicetype_name( size_t type )
 {
-  if( type <= spicetable_size() )
+  if( type >= spicetable_size() )
     {
       bug("%s: subscript %d out of range", __FUNCTION__, type);
       return NULL;
@@ -1002,7 +1165,7 @@ size_t crystaltable_size( void )
 
 const char *get_crystaltype_name( size_t type )
 {
-  if( type <= crystaltable_size() )
+  if( type >= crystaltable_size() )
     {
       bug("%s: subscript %d out of range", __FUNCTION__, type);
       return NULL;
@@ -1046,7 +1209,7 @@ size_t spellflag_size( void )
 
 const char *get_spellflag_name( size_t type )
 {
-  if( type <= spellflag_size() )
+  if( type >= spellflag_size() )
     {
       bug("%s: subscript %d out of range", __FUNCTION__, type);
       return NULL;
@@ -1067,7 +1230,7 @@ size_t spellsaves_size( void )
 
 const char *get_spellsaves_name( size_t type )
 {
-  if( type <= spellsaves_size() )
+  if( type >= spellsaves_size() )
     {
       bug("%s: subscript %d out of range", __FUNCTION__, type);
       return NULL;
@@ -1088,7 +1251,7 @@ size_t spelldamage_size( void )
 
 const char *get_spelldamage_name( size_t type )
 {
-  if( type <= spelldamage_size() )
+  if( type >= spelldamage_size() )
     {
       bug("%s: subscript %d out of range", __FUNCTION__, type);
       return NULL;
@@ -1110,7 +1273,7 @@ size_t spellaction_size( void )
 
 const char *get_spellaction_name( size_t type )
 {
-  if( type <= spellaction_size() )
+  if( type >= spellaction_size() )
     {
       bug("%s: subscript %d out of range", __FUNCTION__, type);
       return NULL;
@@ -1131,7 +1294,7 @@ size_t spellpower_size( void )
 
 const char *get_spellpower_name( size_t type )
 {
-  if(type <= spellpower_size() )
+  if( type >= spellpower_size() )
     {
       bug("%s: subscript %d out of range", __FUNCTION__, type);
       return NULL;
@@ -1152,7 +1315,7 @@ size_t spellclass_size( void )
 
 const char *get_spellclass_name( size_t type )
 {
-  if(type <= spellclass_size() )
+  if( type >= spellclass_size() )
     {
       bug("%s: subscript %d out of range", __FUNCTION__, type);
       return NULL;
@@ -1173,7 +1336,7 @@ size_t spelltarget_size( void )
 
 const char *get_spelltarget_name( size_t type )
 {
-  if(type <= spelltarget_size() )
+  if( type >= spelltarget_size() )
     {
       bug("%s: subscript %d out of range", __FUNCTION__, type);
       return NULL;

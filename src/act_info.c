@@ -869,39 +869,6 @@ bool check_blind( CHAR_DATA *ch )
   return TRUE;
 }
 
-/*
- * Returns classical DIKU door direction based on text in arg   -Thoric
- */
-int get_door( const char *arg )
-{
-  int door = DIR_SOMEWHERE;
-
-  if ( !str_cmp( arg, "n"  ) || !str_cmp( arg, "north"    ) )
-    door = DIR_NORTH;
-  else if ( !str_cmp( arg, "e"  ) || !str_cmp( arg, "east"        ) )
-    door = DIR_EAST;
-  else if ( !str_cmp( arg, "s"  ) || !str_cmp( arg, "south"       ) )
-    door = DIR_SOUTH;
-  else if ( !str_cmp( arg, "w"  ) || !str_cmp( arg, "west"        ) )
-    door = DIR_WEST;
-  else if ( !str_cmp( arg, "u"  ) || !str_cmp( arg, "up"          ) )
-    door = DIR_UP;
-  else if ( !str_cmp( arg, "d"  ) || !str_cmp( arg, "down"        ) )
-    door = DIR_DOWN;
-  else if ( !str_cmp( arg, "ne" ) || !str_cmp( arg, "northeast" ) )
-    door = DIR_NORTHEAST;
-  else if ( !str_cmp( arg, "nw" ) || !str_cmp( arg, "northwest" ) )
-    door = DIR_NORTHWEST;
-  else if ( !str_cmp( arg, "se" ) || !str_cmp( arg, "southeast" ) )
-    door = DIR_SOUTHEAST;
-  else if ( !str_cmp( arg, "sw" ) || !str_cmp( arg, "southwest" ) )
-    door = DIR_SOUTHWEST;
-  else
-    door = -1;
-
-  return door;
-}
-
 void do_look ( CHAR_DATA *ch, char *argument )
 {
   char arg  [MAX_INPUT_LENGTH];
@@ -1215,7 +1182,8 @@ void do_look ( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  door = get_door( arg1 );
+  door = get_dir( arg1 );
+
   if ( ( pexit = find_door( ch, arg1, TRUE ) ) != NULL )
     {
       if ( pexit->keyword )
@@ -1778,12 +1746,12 @@ void do_exits( CHAR_DATA *ch, char *argument )
               if ( IS_SET(pexit->exit_info, EX_CLOSED) )
                 {
                   sprintf( buf + strlen(buf), "%-5s - (closed)\r\n",
-                           capitalize( dir_name[pexit->vdir] ) );
+                           capitalize( get_dir_name(pexit->vdir) ) );
                 }
               else if ( IS_SET(pexit->exit_info, EX_WINDOW) )
                 {
                   sprintf( buf + strlen(buf), "%-5s - (window)\r\n",
-                           capitalize( dir_name[pexit->vdir] ) );
+                           capitalize( get_dir_name(pexit->vdir) ) );
                 }
               else if ( IS_SET(pexit->exit_info, EX_xAUTO) )
                 {
@@ -1795,7 +1763,7 @@ void do_exits( CHAR_DATA *ch, char *argument )
                 }
               else
                 sprintf( buf + strlen(buf), "%-5s - %s\r\n",
-                         capitalize( dir_name[pexit->vdir] ),
+                         capitalize( get_dir_name(pexit->vdir) ),
                          room_is_dark( pexit->to_room )
                          ?  "Too dark to tell"
                          : pexit->to_room->name );
@@ -1803,18 +1771,17 @@ void do_exits( CHAR_DATA *ch, char *argument )
           else
             {
               sprintf( buf + strlen(buf), " %s",
-                       capitalize( dir_name[pexit->vdir] ) );
+                       capitalize( get_dir_name(pexit->vdir) ) );
             }
         }
     }
 
   if ( !found )
     strcat( buf, fAuto ? " none.\r\n" : "None.\r\n" );
-  else
-    if ( fAuto )
-      strcat( buf, ".\r\n" );
+  else if ( fAuto )
+    strcat( buf, ".\r\n" );
+
   send_to_char( buf, ch );
-  return;
 }
 
 char *  const   day_name        [] =

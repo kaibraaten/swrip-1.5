@@ -1864,7 +1864,8 @@ void list_resets( CHAR_DATA *ch, AREA_DATA *pArea, ROOM_INDEX_DATA *pRoom,
                   door = (pReset->arg2 & BIT_RESET_DOOR_MASK)
                     >> BIT_RESET_DOOR_THRESHOLD;
                   door = URANGE(0, door, MAX_DIR+1);
-                  sprintf(pbuf, "Exit %s%s (%d), Room %s (%d)", dir_name[door],
+                  sprintf(pbuf, "Exit %s%s (%d), Room %s (%d)",
+			  get_dir_name(door),
                           (room && get_exit(room, door) ? "" : " (NO EXIT!)"), door,
                           rname, pReset->arg1);
                 }
@@ -1940,7 +1941,7 @@ void list_resets( CHAR_DATA *ch, AREA_DATA *pArea, ROOM_INDEX_DATA *pRoom,
               case 2:   ef_name = "Close and lock";     break;
               }
             sprintf(pbuf, "%s [%d] the %s%s [%d] door %s (%d)\r\n", ef_name,
-                    pReset->arg3, dir_name[pReset->arg2],
+                    pReset->arg3, get_dir_name(pReset->arg2),
                     (room && get_exit(room, pReset->arg2) ? "" : " (NO EXIT!)"),
                     pReset->arg2, rname, pReset->arg1);
           }

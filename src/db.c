@@ -2022,10 +2022,11 @@ void fix_exits( void )
                 {
                   if ( fBootDb )
                     boot_log( "Fix_exits: room %d, exit %s leads to bad vnum (%d)",
-                              pRoomIndex->vnum, dir_name[pexit->vdir], pexit->vnum );
+                              pRoomIndex->vnum, get_dir_name(pexit->vdir),
+			      pexit->vnum );
 
-                  bug( "Deleting %s exit in room %d", dir_name[pexit->vdir],
-                       pRoomIndex->vnum );
+                  bug( "Deleting %s exit in room %d",
+		       get_dir_name(pexit->vdir), pRoomIndex->vnum );
                   extract_exit( pRoomIndex, pexit );
                 }
               else
@@ -2047,7 +2048,7 @@ void fix_exits( void )
             {
               if ( pexit->to_room && !pexit->rexit )
                 {
-                  rev_exit = get_exit_to( pexit->to_room, rev_dir[pexit->vdir], pRoomIndex->vnum );
+                  rev_exit = get_exit_to( pexit->to_room, get_rev_dir(pexit->vdir), pRoomIndex->vnum );
                   if ( rev_exit )
                     {
                       pexit->rexit      = rev_exit;
@@ -4214,7 +4215,7 @@ EXIT_DATA *make_exit( ROOM_INDEX_DATA *pRoomIndex, ROOM_INDEX_DATA *to_room, sho
   if ( to_room )
     {
       pexit->vnum = to_room->vnum;
-      texit = get_exit_to( to_room, rev_dir[door], pRoomIndex->vnum );
+      texit = get_exit_to( to_room, get_rev_dir(door), pRoomIndex->vnum );
       if ( texit )      /* assign reverse exit pointers */
         {
           texit->rexit = pexit;
@@ -4290,7 +4291,7 @@ void fix_area_exits( AREA_DATA *tarea )
         {
           if ( pexit->to_room && !pexit->rexit )
             {
-              rev_exit = get_exit_to( pexit->to_room, rev_dir[pexit->vdir], pRoomIndex->vnum );
+              rev_exit = get_exit_to( pexit->to_room, get_rev_dir(pexit->vdir), pRoomIndex->vnum );
               if ( rev_exit )
                 {
                   pexit->rexit  = rev_exit;

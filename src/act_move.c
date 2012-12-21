@@ -399,7 +399,7 @@ ROOM_INDEX_DATA *generate_exit( ROOM_INDEX_DATA *in_room, EXIT_DATA **pexit )
     }
   if ( !found )
     {
-      bxit = make_exit(room, backroom, rev_dir[vdir]);
+      bxit = make_exit(room, backroom, get_rev_dir(vdir));
       bxit->keyword             = STRALLOC( "" );
       bxit->description = STRALLOC( "" );
       bxit->key         = -1;
@@ -862,21 +862,23 @@ ch_ret move_char( CHAR_DATA *ch, EXIT_DATA *pexit, int fall )
           }
       if ( ch->mount )
         {
-          sprintf( buf, "$n %s %s upon $N.", txt, dir_name[door] );
+          sprintf( buf, "$n %s %s upon $N.", txt, get_dir_name(door) );
           act( AT_ACTION, buf, ch, NULL, ch->mount, TO_NOTVICT );
         }
       else
         {
           sprintf( buf, "$n %s $T.", txt );
-          act( AT_ACTION, buf, ch, NULL, dir_name[door], TO_ROOM );
+          act( AT_ACTION, buf, ch, NULL, get_dir_name(door), TO_ROOM );
         }
     }
 
   rprog_leave_trigger( ch );
+
   if( char_died(ch) )
     return global_retcode;
 
   char_from_room( ch );
+
   if ( ch->mount )
     {
       rprog_leave_trigger( ch->mount );

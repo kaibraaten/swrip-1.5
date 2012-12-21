@@ -3270,7 +3270,7 @@ void do_snipe( CHAR_DATA *ch, char *argument )
   argument = one_argument( argument, arg );
   argument = one_argument( argument, arg2 );
 
-  if ( ( dir = get_door( arg ) ) == -1 || arg2[0] == '\0' )
+  if ( ( dir = get_dir( arg ) ) == -1 || arg2[0] == '\0' )
     {
       send_to_char( "Usage: snipe <dir> <target>\r\n", ch );
       return;
@@ -3331,7 +3331,8 @@ void do_snipe( CHAR_DATA *ch, char *argument )
 
   if ( !pfound )
     {
-      ch_printf( ch, "You don't see that person to the %s!\r\n", dir_name[dir] );
+      ch_printf( ch, "You don't see that person to the %s!\r\n",
+		 get_dir_name(dir) );
       char_from_room( ch );
       char_to_room( ch, was_in_room );
       return;
@@ -3405,10 +3406,10 @@ void do_snipe( CHAR_DATA *ch, char *argument )
 
   if ( number_percent() < the_chance )
     {
-      sprintf( buf , "A blaster shot fires at you from the %s." , dir_name[dir] );
+      sprintf( buf , "A blaster shot fires at you from the %s." , get_dir_name(dir) );
       act( AT_ACTION, buf , victim, NULL, ch, TO_CHAR );
       act( AT_ACTION, "You fire at $N.", ch, NULL, victim, TO_CHAR );
-      sprintf( buf, "A blaster shot fires at $N from the %s." , dir_name[dir] );
+      sprintf( buf, "A blaster shot fires at $N from the %s." , get_dir_name(dir) );
       act( AT_ACTION, buf, ch, NULL, victim, TO_NOTVICT );
 
       one_hit( ch, victim, TYPE_UNDEFINED );
@@ -3423,7 +3424,7 @@ void do_snipe( CHAR_DATA *ch, char *argument )
   else
     {
       act( AT_ACTION, "You fire at $N but don't even come close.", ch, NULL, victim, TO_CHAR );
-      sprintf( buf, "A blaster shot fired from the %s barely misses you." , dir_name[dir] );
+      sprintf( buf, "A blaster shot fired from the %s barely misses you." , get_dir_name(dir) );
       act( AT_ACTION, buf, ch, NULL, victim, TO_ROOM );
       learn_from_failure( ch, gsn_snipe );
     }
@@ -3530,7 +3531,7 @@ void do_throw( CHAR_DATA *ch, char *argument )
 
       victim = NULL;
     }
-  else  if ( ( dir = get_door( arg2 ) ) != -1 )
+  else  if ( ( dir = get_dir( arg2 ) ) != -1 )
     {
       if ( ( pexit = get_exit( ch->in_room, dir ) ) == NULL )
         {
@@ -3624,18 +3625,18 @@ void do_throw( CHAR_DATA *ch, char *argument )
           char_from_room( ch );
           char_to_room( ch, to_room );
 
-          sprintf( buf , "Someone throws %s at you from the %s." , obj->short_descr , dir_name[dir] );
+          sprintf( buf , "Someone throws %s at you from the %s." , obj->short_descr , get_dir_name(dir) );
           act( AT_ACTION, buf , victim, NULL, ch, TO_CHAR );
           act( AT_ACTION, "You throw %p at $N.", ch, obj, victim, TO_CHAR );
-          sprintf( buf, "%s is thrown at $N from the %s." , obj->short_descr , dir_name[dir] );
+          sprintf( buf, "%s is thrown at $N from the %s." , obj->short_descr , get_dir_name(dir) );
           act( AT_ACTION, buf, ch, NULL, victim, TO_NOTVICT );
 
 
         }
       else
         {
-          ch_printf( ch, "You throw %s %s.\r\n", obj->short_descr , dir_name[get_dir( arg2 )] );
-          sprintf( buf, "%s is thrown from the %s." , obj->short_descr , dir_name[dir] );
+          ch_printf( ch, "You throw %s %s.\r\n", obj->short_descr , get_dir_name(get_dir( arg2 ) ) );
+          sprintf( buf, "%s is thrown from the %s." , obj->short_descr , get_dir_name(dir) );
           act( AT_ACTION, buf, ch, NULL, NULL, TO_ROOM );
 
         }

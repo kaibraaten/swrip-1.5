@@ -2029,9 +2029,21 @@ typedef enum
  */
 typedef enum
   {
-    SECT_INSIDE, SECT_CITY, SECT_FIELD, SECT_FOREST, SECT_HILLS, SECT_MOUNTAIN,
-    SECT_WATER_SWIM, SECT_WATER_NOSWIM, SECT_UNDERWATER, SECT_AIR, SECT_DESERT,
-    SECT_DUNNO, SECT_OCEANFLOOR, SECT_UNDERGROUND, SECT_MAX
+    SECT_INSIDE,
+    SECT_CITY,
+    SECT_FIELD,
+    SECT_FOREST,
+    SECT_HILLS,
+    SECT_MOUNTAIN,
+    SECT_WATER_SWIM,
+    SECT_WATER_NOSWIM,
+    SECT_UNDERWATER,
+    SECT_AIR,
+    SECT_DESERT,
+    SECT_DUNNO,
+    SECT_OCEANFLOOR,
+    SECT_UNDERGROUND,
+    SECT_MAX
   } sector_types;
 
 /*
@@ -3326,9 +3338,9 @@ extern const char* const ability_name[];
 
 extern const char * const skill_tname[];
 extern short const movement_loss[];
-extern const char * const dir_name[];
+/*extern const char * const dir_name[];*/
 extern const char * const where_name[];
-extern const short rev_dir[];
+/*extern const short rev_dir[];*/
 extern const int trap_door[];
 extern const char * const sect_names[][2];
 extern const int sent_total[];
@@ -4219,10 +4231,9 @@ extern "C" {
   char *        obj_short( OBJ_DATA *obj );
 
   /* act_info.c */
-  int   get_door( const char *arg );
-  char *        format_obj_to_char( OBJ_DATA *obj, CHAR_DATA *ch, bool fShort );
-  void  show_list_to_char( OBJ_DATA *list, CHAR_DATA *ch,
-                           bool fShort, bool fShowNothing );
+  char *format_obj_to_char( OBJ_DATA *obj, CHAR_DATA *ch, bool fShort );
+  void show_list_to_char( OBJ_DATA *list, CHAR_DATA *ch,
+			  bool fShort, bool fShowNothing );
   void do_showstatistic_web( CHAR_DATA *ch, char *argument );
 
   /* act_move.c */
@@ -4282,6 +4293,8 @@ extern "C" {
   bool        is_disintigration( CHAR_DATA *victim );
 
   /* const.c */
+  const char *get_dir_name( int dir );
+  int get_rev_dir( int dir );
   size_t spaceobj_type_size( void );
   const char *get_spaceobj_type(size_t sotype);
   int get_spaceobj_type_from_name(const char *name);

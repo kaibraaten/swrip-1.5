@@ -3281,137 +3281,6 @@ void do_rset( CHAR_DATA *ch, char *argument )
    * Generate usage message.
    */
   do_rset( ch, "" );
-  return;
-}
-
-/*
- * Returns value 0 - 9 based on directional text.
- */
-int get_dir( const char *txt )
-{
-  int edir = 0;
-  char c1, c2;
-
-  if ( !str_cmp( txt, "northeast" ) )
-    return DIR_NORTHEAST;
-
-  if ( !str_cmp( txt, "northwest" ) )
-    return DIR_NORTHWEST;
-
-  if ( !str_cmp( txt, "southeast" ) )
-    return DIR_SOUTHEAST;
-
-  if ( !str_cmp( txt, "southwest" ) )
-    return DIR_SOUTHWEST;
-
-  if ( !str_cmp( txt, "somewhere" ) )
-    return 10;
-
-  c1 = txt[0];
-
-  if ( c1 == '\0' )
-    return 0;
-
-  c2 = txt[1];
-
-  switch ( c1 )
-    {
-    case 'n':
-      switch ( c2 )
-        {
-        default:
-	  edir = DIR_NORTH;
-	  break;
-
-        case 'e':
-	  edir = DIR_NORTHEAST;
-	  break;
-
-        case 'w':
-	  edir = DIR_NORTHWEST;
-	  break;
-        }
-      break;
-
-    case '0':
-      edir = DIR_NORTH;
-      break;
-
-    case 'e':
-      edir = DIR_EAST;
-      break;
-
-    case '1':
-      edir = DIR_EAST;
-      break;
-
-    case 's':
-      switch ( c2 )
-        {
-        default:
-	  edir = DIR_SOUTH;
-	  break;
-
-        case 'e':
-	  edir = DIR_SOUTHEAST;
-	  break;
-
-        case 'w':
-	  edir = DIR_SOUTHWEST;
-	  break;
-        }
-      break;
-
-    case '2':
-      edir = DIR_SOUTH;
-      break;
-
-    case 'w':
-      edir = DIR_WEST;
-      break;
-
-    case '3':
-      edir = DIR_WEST; 
-      break;
-
-    case 'u':
-      edir = DIR_UP;
-      break;
-
-    case '4':
-      edir = DIR_UP;
-      break;
-
-    case 'd':
-      edir = DIR_DOWN;
-      break;
-
-    case '5':
-      edir = DIR_DOWN;
-      break;
-
-    case '6':
-      edir = DIR_NORTHEAST;
-      break;
-
-    case '7':
-      edir = DIR_NORTHWEST;
-      break;
-
-    case '8':
-      edir = DIR_SOUTHEAST;
-      break;
-
-    case '9':
-      edir = DIR_SOUTHWEST;
-      break;
-
-    case '?':
-      edir = DIR_SOMEWHERE;
-      break;
-    }
-
-  return edir;
 }
 
 char *sprint_reset( CHAR_DATA *ch, RESET_DATA *pReset, short num, bool rlist )
@@ -3552,13 +3421,13 @@ char *sprint_reset( CHAR_DATA *ch, RESET_DATA *pReset, short num, bool rlist )
         {
           strcpy( roomname, "Room: *BAD VNUM*" );
           sprintf( objname, "%s (no exit)",
-                   dir_name[pReset->arg2] );
+                   get_dir_name(pReset->arg2) );
         }
       else
         {
           strcpy( roomname, room->name );
           sprintf( objname, "%s%s",
-                   dir_name[pReset->arg2],
+                   get_dir_name(pReset->arg2),
                    get_exit(room,pReset->arg2) ? "" : " (NO EXIT!)" );
         }
       switch( pReset->arg3 )
@@ -4260,7 +4129,7 @@ void do_redit( CHAR_DATA *ch, char *argument )
         {
           xit->to_room = tmp;
           xit->vnum = evnum;
-          texit = get_exit_to( xit->to_room, rev_dir[edir], location->vnum );
+          texit = get_exit_to( xit->to_room, get_rev_dir(edir), location->vnum );
           if ( texit )
             {
               texit->rexit = xit;
@@ -4344,7 +4213,7 @@ void do_redit( CHAR_DATA *ch, char *argument )
           if ( arg3[0] != '\0' )
             sprintf( rvnum, "%d", tmploc->vnum );
           if ( this_exit->to_room )
-            rxit = get_exit(this_exit->to_room, rev_dir[edir]);
+            rxit = get_exit(this_exit->to_room, get_rev_dir(edir));
           else
             rxit = NULL;
         }
@@ -4364,7 +4233,7 @@ void do_redit( CHAR_DATA *ch, char *argument )
             sprintf( rvnum, "%d", tmploc->vnum );
 
           if ( this_exit->to_room )
-            rxit = get_exit(this_exit->to_room, rev_dir[edir]);
+            rxit = get_exit(this_exit->to_room, get_rev_dir(edir));
           else
             rxit = NULL;
         }
@@ -4372,10 +4241,7 @@ void do_redit( CHAR_DATA *ch, char *argument )
       if ( vnum )
         {
           sprintf( tmpcmd, "%d redit exit %d %s %s",
-                   vnum,
-                   rev_dir[edir],
-                   rvnum,
-                   argument );
+                   vnum, get_rev_dir(edir), rvnum, argument );
           do_at( ch, tmpcmd );
         }
       return;

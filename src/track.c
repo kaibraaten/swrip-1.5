@@ -244,7 +244,8 @@ void do_track( CHAR_DATA *ch, char *argument )
 	 learn_from_failure( ch, gsn_track );
          break;
       default:
-         ch_printf(ch, "You sense a trail %s from here...\r\n", dir_name[dir]);
+         ch_printf(ch, "You sense a trail %s from here...\r\n",
+		   get_dir_name(dir));
 	 learn_from_success( ch, gsn_track );
          break;
    }
@@ -547,10 +548,12 @@ bool mob_snipe( CHAR_DATA *ch, CHAR_DATA *victim )
     char_from_room( ch );
     char_to_room( ch, victim->in_room );    
                 
-       sprintf( buf , "A blaster shot fires at you from the %s." , dir_name[dir] );
+       sprintf( buf , "A blaster shot fires at you from the %s.",
+		get_dir_name(dir) );
        act( AT_ACTION, buf , victim, NULL, ch, TO_CHAR );      
        act( AT_ACTION, "You fire at $N.", ch, NULL, victim, TO_CHAR );         
-       sprintf( buf, "A blaster shot fires at $N from the %s." , dir_name[dir] );
+       sprintf( buf, "A blaster shot fires at $N from the %s.",
+		get_dir_name(dir) );
        act( AT_ACTION, buf, ch, NULL, victim, TO_NOTVICT );  
                                                    
        one_hit( ch, victim, TYPE_UNDEFINED );  

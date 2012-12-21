@@ -10866,7 +10866,7 @@ void do_drive( CHAR_DATA *ch, char *argument )
 
 
 
-  if ( ( dir = get_door( arg ) ) == -1 )
+  if ( ( dir = get_dir( arg ) ) == -1 )
     {
       send_to_char( "Usage: drive <direction>\r\n", ch );
       return;
@@ -11109,10 +11109,10 @@ ch_ret drive_ship( CHAR_DATA *ch, SHIP_DATA *ship, EXIT_DATA  *pexit , int fall 
 
 
   sprintf( buf, "$n %ss the vehicle $T.", txt );
-  act( AT_ACTION, buf, ch, NULL, dir_name[door], TO_ROOM );
+  act( AT_ACTION, buf, ch, NULL, get_dir_name(door), TO_ROOM );
   sprintf( buf, "You %s the vehicle $T.", txt );
-  act( AT_ACTION, buf, ch, NULL, dir_name[door], TO_CHAR );
-  sprintf( buf, "%s %ss %s.", ship->name, txt, dir_name[door] );
+  act( AT_ACTION, buf, ch, NULL, get_dir_name(door), TO_CHAR );
+  sprintf( buf, "%s %ss %s.", ship->name, txt, get_dir_name(door) );
   echo_to_room( AT_ACTION , get_room_index(ship->location) , buf );
 
   extract_ship( ship );
