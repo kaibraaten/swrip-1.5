@@ -1248,7 +1248,7 @@ End
 
 #COMMAND
 Name        findserin~
-Code        do_findserin
+Code        do_showshuttle
 Position    0
 Level       1
 Log         0
@@ -2236,6 +2236,14 @@ Code        do_makedisguise
 Position    0
 Level       105
 Log         0
+End
+
+#COMMAND
+Name        makeshuttle~
+Code        do_makeshuttle
+Position    0
+Level       105
+Log         3
 End
 
 #COMMAND
@@ -3620,6 +3628,14 @@ Code        do_study
 Position    0
 Level       105
 Log         0
+End
+
+#COMMAND
+Name        setshuttle~
+Code        do_setshuttle
+Position    0
+Level       105
+Log         3
 End
 
 #COMMAND
