@@ -4528,7 +4528,7 @@ extern "C" {
   int   get_exp( CHAR_DATA *ch , int ability );
   int   get_exp_worth( CHAR_DATA *ch );
   int   exp_level( short level );
-  short get_trust( CHAR_DATA *ch );
+  short get_trust( const CHAR_DATA *ch );
   short get_age( CHAR_DATA *ch );
   short get_curr_str( CHAR_DATA *ch );
   short get_curr_int( CHAR_DATA *ch );
@@ -4629,6 +4629,7 @@ extern "C" {
   void  add_kill( CHAR_DATA *ch, CHAR_DATA *mob );
   int   times_killed( CHAR_DATA *ch, CHAR_DATA *mob );
   int count_users(OBJ_DATA *obj);
+  bool has_comlink( const CHAR_DATA *ch );
 
   /* interp.c */
   bool  check_pos( CHAR_DATA *ch, int position );

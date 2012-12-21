@@ -64,7 +64,6 @@ void do_beep( CHAR_DATA *ch, char *argument )
 {
   CHAR_DATA *victim;
   char arg[MAX_STRING_LENGTH];
-  OBJ_DATA *obj;
   bool ch_comlink, victim_comlink;
 
   argument = one_argument( argument, arg );
@@ -110,11 +109,7 @@ void do_beep( CHAR_DATA *ch, char *argument )
   if ( IS_IMMORTAL( victim ) )
     victim_comlink = TRUE;
 
-  for ( obj = ch->last_carrying; obj; obj = obj->prev_content )
-    {
-      if (obj->pIndexData->item_type == ITEM_COMLINK)
-        ch_comlink = TRUE;
-    }
+  ch_comlink = has_comlink( ch );
 
   if ( !ch_comlink )
     {
@@ -122,10 +117,9 @@ void do_beep( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  for ( obj = victim->last_carrying; obj; obj = obj->prev_content )
+  if( !victim_comlink )
     {
-      if (obj->pIndexData->item_type == ITEM_COMLINK)
-        victim_comlink = TRUE;
+      victim_comlink = has_comlink( ch );
     }
 
   if ( !victim_comlink )
@@ -350,25 +344,12 @@ void talk_channel( CHAR_DATA *ch, char *argument, int channel, const char *verb 
   int position;
   CLAN_DATA *clan = NULL;
 
-  bool  ch_comlink = FALSE;
-
   if ( channel != CHANNEL_SHOUT && channel != CHANNEL_YELL && channel != CHANNEL_IMMTALK && channel != CHANNEL_OOC
        && channel != CHANNEL_ASK && channel != CHANNEL_NEWBIE && channel != CHANNEL_AVTALK
        && channel != CHANNEL_SHIP && channel != CHANNEL_SYSTEM && channel != CHANNEL_SPACE
        && channel != CHANNEL_103 && channel != CHANNEL_104 && channel != CHANNEL_105  )
     {
-      OBJ_DATA *obj;
-
-      if ( IS_IMMORTAL( ch ) )
-        ch_comlink = TRUE;
-      else
-        for ( obj = ch->last_carrying; obj; obj = obj->prev_content )
-          {
-            if (obj->pIndexData->item_type == ITEM_COMLINK)
-              ch_comlink = TRUE;
-          }
-
-      if ( !ch_comlink )
+      if ( !has_comlink( ch ) )
         {
           send_to_char( "You need a comlink to do that!\r\n", ch);
           return;
@@ -537,7 +518,6 @@ void talk_channel( CHAR_DATA *ch, char *argument, int channel, const char *verb 
            &&  !IS_SET(och->deaf, channel) )
         {
           char *sbuf = argument;
-          ch_comlink = FALSE;
 
           if ( channel != CHANNEL_SHOUT && channel != CHANNEL_YELL && channel != CHANNEL_IMMTALK && channel != CHANNEL_OOC
                && channel != CHANNEL_ASK && channel != CHANNEL_NEWBIE && channel != CHANNEL_AVTALK
@@ -545,19 +525,10 @@ void talk_channel( CHAR_DATA *ch, char *argument, int channel, const char *verb 
                && channel != CHANNEL_103 && channel != CHANNEL_104 && channel != CHANNEL_105
                )
             {
-              OBJ_DATA *obj;
-
-              if ( IS_IMMORTAL( och ) )
-                ch_comlink = TRUE;
-              else
-                for ( obj = och->last_carrying; obj; obj = obj->prev_content )
-                  {
-                    if (obj->pIndexData->item_type == ITEM_COMLINK)
-                      ch_comlink = TRUE;
-                  }
-
-              if ( !ch_comlink )
-                continue;
+	      if( !has_comlink( ch ) )
+		{
+		  continue;
+		}
             }
 
           if ( channel == CHANNEL_IMMTALK && !IS_IMMORTAL(och) )

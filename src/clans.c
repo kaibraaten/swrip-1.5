@@ -2261,8 +2261,6 @@ void do_clan_withdraw( CHAR_DATA *ch, char *argument )
 {
   CLAN_DATA *clan;
   long       amount;
-  OBJ_DATA *obj;
-  bool ch_comlink = FALSE;
 
   if ( IS_NPC( ch ) || !ch->pcdata->clan )
     {
@@ -2280,16 +2278,7 @@ void do_clan_withdraw( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( IS_IMMORTAL( ch ) )
-    ch_comlink = TRUE;
-  else
-    for ( obj = ch->last_carrying; obj; obj = obj->prev_content )
-      {
-        if (obj->pIndexData->item_type == ITEM_COMLINK)
-          ch_comlink = TRUE;
-      }
-
-  if ( !ch_comlink )
+  if ( !has_comlink( ch ) )
     {
       if (!ch->in_room || !IS_SET(ch->in_room->room_flags, ROOM_BANK) )
         {
@@ -2334,8 +2323,6 @@ void do_clan_donate( CHAR_DATA *ch, char *argument )
 {
   CLAN_DATA *clan;
   long       amount;
-  OBJ_DATA *obj;
-  bool ch_comlink = FALSE;
 
   if ( IS_NPC( ch ) || !ch->pcdata->clan )
     {
@@ -2343,16 +2330,7 @@ void do_clan_donate( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( IS_IMMORTAL( ch ) )
-    ch_comlink = TRUE;
-  else
-    for ( obj = ch->last_carrying; obj; obj = obj->prev_content )
-      {
-        if (obj->pIndexData->item_type == ITEM_COMLINK)
-          ch_comlink = TRUE;
-      }
-
-  if ( !ch_comlink )
+  if ( !has_comlink( ch ) )
     {
       if (!ch->in_room || !IS_SET(ch->in_room->room_flags, ROOM_BANK) )
         {
@@ -3280,8 +3258,6 @@ void update_member( CHAR_DATA *ch )
 void do_clanfunds( CHAR_DATA *ch, char *argument )
 {
   CLAN_DATA *clan;
-  OBJ_DATA *obj;
-  bool ch_comlink = FALSE;
 
   if ( IS_NPC( ch ) || !ch->pcdata->clan )
     {
@@ -3289,16 +3265,7 @@ void do_clanfunds( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( IS_IMMORTAL( ch ) )
-    ch_comlink = TRUE;
-  else
-    for ( obj = ch->last_carrying; obj; obj = obj->prev_content )
-      {
-        if (obj->pIndexData->item_type == ITEM_COMLINK)
-          ch_comlink = TRUE;
-      }
-
-  if ( !ch_comlink )
+  if ( !has_comlink( ch ) )
     {
       if (!ch->in_room || !IS_SET(ch->in_room->room_flags, ROOM_BANK) )
         {

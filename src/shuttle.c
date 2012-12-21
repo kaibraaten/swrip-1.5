@@ -990,17 +990,8 @@ void output_shuttle(CHAR_DATA * ch, SHUTTLE_DATA * shuttle)
 void do_pluogus( CHAR_DATA *ch, char *argument )
 {
   SHUTTLE_DATA * shuttle = NULL;
-  bool ch_comlink = FALSE;
-  OBJ_DATA *obj;
-  argument = NULL;
 
-  for ( obj = ch->last_carrying; obj; obj = obj->prev_content )
-    {
-      if (obj->pIndexData->item_type == ITEM_COMLINK)
-        ch_comlink = TRUE;
-    }
-
-  if ( !ch_comlink )
+  if ( !has_comlink( ch ) )
     {
       send_to_char( "You need a comlink to do that!\r\n", ch);
       return;

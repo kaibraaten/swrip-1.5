@@ -287,7 +287,7 @@ short level_exp( CHAR_DATA *ch, int xp )
 /*
  * Retrieve a character's trusted level for permission checking.
  */
-short get_trust( CHAR_DATA *ch )
+short get_trust( const CHAR_DATA *ch )
 {
   if ( !ch )
     return 0;
@@ -3709,4 +3709,24 @@ int times_killed( CHAR_DATA *ch, CHAR_DATA *mob )
       if ( ch->pcdata->killed[x].vnum == 0 )
         break;
   return 0;
+}
+
+bool has_comlink( const CHAR_DATA *ch )
+{
+  OBJ_DATA *obj = NULL;
+
+  if( IS_IMMORTAL( ch ) )
+    {
+      return TRUE;
+    }
+
+  for( obj = ch->last_carrying; obj; obj = obj->prev_content )
+    {
+      if( obj->pIndexData->item_type == ITEM_COMLINK )
+	{
+	  return TRUE;
+	}
+    }
+
+  return FALSE;
 }

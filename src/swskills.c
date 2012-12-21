@@ -3985,21 +3985,10 @@ void do_hijack( CHAR_DATA *ch, char *argument )
         return;
       for ( victim = first_char; victim; victim = victim->next )
         {
-          bool victim_comlink;
-          OBJ_DATA *obj;
-
           if ( !check_pilot(victim,ship) )
             continue;
 
-          victim_comlink = FALSE;
-          if ( IS_IMMORTAL(victim) )
-            victim_comlink = TRUE;
-          for ( obj = victim->last_carrying; obj; obj = obj->prev_content )
-            {
-              if ( obj->pIndexData->item_type == ITEM_COMLINK )
-                victim_comlink = TRUE;
-            }
-          if ( !victim_comlink )
+          if ( !has_comlink( victim ) )
             continue;
 
           if ( !IS_NPC( victim ) && victim->switched )

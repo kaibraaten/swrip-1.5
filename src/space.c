@@ -10566,22 +10566,13 @@ void do_autotrack( CHAR_DATA *ch, char *argument )
 #if 0
 void do_findserin( CHAR_DATA *ch, char *argument )
 {
-  bool ch_comlink = FALSE;
-  OBJ_DATA *obj;
   int next_planet, bus, stopnum = 1;
   char arg[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
   argument = one_argument( argument, arg );
   strcpy ( arg2, argument);
 
-
-  for ( obj = ch->last_carrying; obj; obj = obj->prev_content )
-    {
-      if (obj->pIndexData->item_type == ITEM_COMLINK)
-        ch_comlink = TRUE;
-    }
-
-  if ( !ch_comlink && !IS_IMMORTAL(ch))
+  if ( !has_comlink( ch ) )
     {
       send_to_char( "You need a comlink to do that!\r\n", ch);
       return;
@@ -10640,17 +10631,9 @@ void do_pluogus( CHAR_DATA *ch, char *argument )
 #if 0
 void do_pluogus( CHAR_DATA *ch, char *argument )
 {
-  bool ch_comlink = FALSE;
-  OBJ_DATA *obj;
   int next_planet, itt;
 
-  for ( obj = ch->last_carrying; obj; obj = obj->prev_content )
-    {
-      if (obj->pIndexData->item_type == ITEM_COMLINK)
-        ch_comlink = TRUE;
-    }
-
-  if ( !ch_comlink )
+  if ( !has_comlink( ch ) )
     {
       send_to_char( "You need a comlink to do that!\r\n", ch);
       return;

@@ -3019,8 +3019,6 @@ void do_bank( CHAR_DATA *ch, char *argument )
   char arg3[MAX_INPUT_LENGTH];
   long amount = 0;
   CHAR_DATA *victim;
-  OBJ_DATA *obj;
-  bool ch_comlink = FALSE;
 
   argument = one_argument( argument , arg1 );
   argument = one_argument( argument , arg2 );
@@ -3035,16 +3033,7 @@ void do_bank( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( IS_IMMORTAL( ch ) )
-    ch_comlink = TRUE;
-  else
-    for ( obj = ch->last_carrying; obj; obj = obj->prev_content )
-      {
-        if (obj->pIndexData->item_type == ITEM_COMLINK)
-          ch_comlink = TRUE;
-      }
-
-  if ( !ch_comlink )
+  if ( !has_comlink( ch ) )
     {
       if (!ch->in_room || !IS_SET(ch->in_room->room_flags, ROOM_BANK) )
         {

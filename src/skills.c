@@ -2877,10 +2877,7 @@ void do_pick( CHAR_DATA *ch, char *argument )
             return;
           for ( d = first_descriptor; d; d = d->next )
             {
-              CHAR_DATA *victim;
-              bool victim_comlink;
-              OBJ_DATA *iter_obj;
-              victim = d->original ? d->original : d->character;
+              CHAR_DATA *victim = d->original ? d->original : d->character;
 
               if ( d->connected != CON_PLAYING )
                 continue;
@@ -2888,16 +2885,7 @@ void do_pick( CHAR_DATA *ch, char *argument )
               if ( !check_pilot(victim,ship) )
                 continue;
 
-              victim_comlink = FALSE;
-              if ( IS_IMMORTAL(victim) )
-                victim_comlink = TRUE;
-              for ( iter_obj = victim->last_carrying; iter_obj; iter_obj = iter_obj->prev_content )
-                {
-                  if ( iter_obj->pIndexData->item_type == ITEM_COMLINK )
-                    victim_comlink = TRUE;
-                }
-
-              if ( !victim_comlink )
+              if ( !has_comlink( victim ) )
                 continue;
 
               if ( !IS_NPC( victim ) && victim->switched
@@ -2933,10 +2921,7 @@ void do_pick( CHAR_DATA *ch, char *argument )
             return;
           for ( d = first_descriptor; d; d = d->next )
             {
-              CHAR_DATA *victim;
-              bool victim_comlink;
-              OBJ_DATA *iter_obj;
-              victim = d->original ? d->original : d->character;
+              CHAR_DATA *victim = d->original ? d->original : d->character;
 
               if ( d->connected != CON_PLAYING )
                 continue;
@@ -2944,15 +2929,7 @@ void do_pick( CHAR_DATA *ch, char *argument )
               if ( !check_pilot(victim,ship) )
                 continue;
 
-              victim_comlink = FALSE;
-              if ( IS_IMMORTAL(victim) )
-                victim_comlink = TRUE;
-              for ( iter_obj = victim->last_carrying; iter_obj; iter_obj = iter_obj->prev_content )
-                {
-                  if ( iter_obj->pIndexData->item_type == ITEM_COMLINK )
-                    victim_comlink = TRUE;
-                }
-              if ( !victim_comlink )
+              if ( !has_comlink( victim ) )
                 continue;
 
               if ( !IS_NPC( victim ) && victim->switched
