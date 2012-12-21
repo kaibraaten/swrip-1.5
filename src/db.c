@@ -2967,28 +2967,39 @@ void do_dmesg( CHAR_DATA *ch, char *argument )
  */
 void log_string_plus( const char *str, short log_type, short level )
 {
-  char *strtime;
-  int offset;
-  DESCRIPTOR_DATA *d;
+  char *strtime = ctime( &current_time );
+  int offset = 0;
+  DESCRIPTOR_DATA *d = NULL;
   bool lognone = FALSE;
+  char buf[MAX_STRING_LENGTH];
 
-  strtime                    = ctime( &current_time );
   strtime[strlen(strtime)-1] = '\0';
   fprintf( stderr, "%s :: %s\n", strtime, str );
-  if ( strncmp( str, "Log ", 4 ) == 0 )
-    offset = 4;
+
+  if( strncmp( str, "Log ", 4 ) == 0 )
+    {
+      offset = 4;
+    }
   else
-    offset = 0;
+    {
+      offset = 0;
+    }
+
+  sprintf( buf, "%s&R&w", str + offset );
+
   switch( log_type )
     {
     case LOG_BUILD:
-      to_channel( str + offset, CHANNEL_BUILD, "Build", level );
+      to_channel( buf, CHANNEL_BUILD, "Build", level );
       break;
+
     case LOG_COMM:
-      to_channel( str + offset, CHANNEL_COMM, "Comm", level );
+      to_channel( buf, CHANNEL_COMM, "Comm", level );
       break;
+
     case LOG_ALL:
       break;
+
     default:
       /* to_channel( str + offset, CHANNEL_LOG, "Log", level ); */
       lognone = TRUE;
@@ -2996,32 +3007,34 @@ void log_string_plus( const char *str, short log_type, short level )
     }
 
   if (lognone)
-    for ( d = first_descriptor; d; d = d->next )
-      {
-        CHAR_DATA *och;
-        CHAR_DATA *vch;
+    {
+      for ( d = first_descriptor; d; d = d->next )
+	{
+	  CHAR_DATA *och = d->original ? d->original : d->character;
+	  CHAR_DATA *vch = d->character;
 
-        och = d->original ? d->original : d->character;
-        vch = d->character;
+	  if ( !och || !vch )
+	    {
+	      continue;
+	    }
 
-        if ( !och || !vch )
-          continue;
-        if ( ( vch->top_level < sysdata.log_level )
-             || ( vch->top_level < level ) )
-          continue;
+	  if ( ( vch->top_level < sysdata.log_level )
+	       || ( vch->top_level < level ) )
+	    {
+	      continue;
+	    }
 
-        if ( d->connected == CON_PLAYING
-             &&  !IS_SET(och->deaf, CHANNEL_LOG)
-             &&   vch->top_level >= level )
-          {
-            set_char_color( AT_LOG, vch );
-            send_to_char( "Log: ", vch );
-            send_to_char( str+offset, vch );
-            send_to_char( "&R&w\r\n", vch );
-          }
-      }
-
-  return;
+	  if ( d->connected == CON_PLAYING
+	       && !IS_SET(och->deaf, CHANNEL_LOG)
+	       && vch->top_level >= level )
+	    {
+	      set_char_color( AT_LOG, vch );
+	      send_to_char( "Log: ", vch );
+	      send_to_char( str + offset, vch );
+	      send_to_char( "&R&w\r\n", vch );
+	    }
+	}
+    }
 }
 
 /*

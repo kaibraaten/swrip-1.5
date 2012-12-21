@@ -77,36 +77,36 @@ void do_showshuttle (CHAR_DATA * ch, char * argument)
       if ( first_shuttle == NULL )
         {
           set_char_color( AT_RED, ch );
-          send_to_char("There are no shuttles currently formed.\n\r", ch);
+          send_to_char("There are no shuttles currently formed.\r\n", ch);
           return;
         }
       set_char_color( AT_RED, ch );
-      send_to_char("No such shuttle.\n\rValid shuttles:\n\r", ch);
+      send_to_char("No such shuttle.\r\nValid shuttles:\r\n", ch);
       set_char_color( AT_SHIP, ch );
       for ( shuttle = first_shuttle; shuttle; shuttle = shuttle->next )
-        ch_printf(ch, "Shuttle Name: %s - %s\n\r", shuttle->name,
+        ch_printf(ch, "Shuttle Name: %s - %s\r\n", shuttle->name,
                   shuttle->type == SHUTTLE_TURBOCAR ? "Turbocar" :
                   shuttle->type == SHUTTLE_SPACE ? "Space" :
                   shuttle->type == SHUTTLE_HYPERSPACE ? "Hyperspace" : "Other" );
       return;
     }
   set_char_color( AT_YELLOW, ch );
-  ch_printf(ch, "Shuttle Name: %s - %s\n\r", shuttle->name,
+  ch_printf(ch, "Shuttle Name: %s - %s\r\n", shuttle->name,
             shuttle->type == SHUTTLE_TURBOCAR ? "Turbocar" :
             shuttle->type == SHUTTLE_SPACE ? "Space" :
             shuttle->type == SHUTTLE_HYPERSPACE ? "Hyperspace" : "Other" );
-  ch_printf(ch, "Filename: %s\t\tDelay: %d\n\r", shuttle->filename, shuttle->delay );
+  ch_printf(ch, "Filename: %s\t\tDelay: %d\r\n", shuttle->filename, shuttle->delay );
 
-  ch_printf(ch, "Start Room: %d\tEnd Room: %d\t\tEntrance: %d\n\r",
+  ch_printf(ch, "Start Room: %d\tEnd Room: %d\t\tEntrance: %d\r\n",
             shuttle->start_room, shuttle->end_room,
             shuttle->entrance);
 
-  send_to_char("Stops:\n\r", ch);
+  send_to_char("Stops:\r\n", ch);
   for (stop = shuttle->first_stop; stop; stop = stop->next)
     {
       count += 1;
-      ch_printf(ch, "\tStop # %d\n\r", count );
-      ch_printf(ch, "\t\tStop Name: %s (%d)\n\r", stop->stop_name, stop->room );
+      ch_printf(ch, "\tStop # %d\r\n", count );
+      ch_printf(ch, "\t\tStop Name: %s (%d)\r\n", stop->stop_name, stop->room );
     }
   return;
 }
@@ -120,7 +120,7 @@ void do_makeshuttle (CHAR_DATA * ch, char * argument)
 
   if ( !argument || arg[0] == '\0' || argument[0] == '\0' )
     {
-      send_to_char( "Usage: makeshuttle <filename> <shuttle name>\n\r", ch );
+      send_to_char( "Usage: makeshuttle <filename> <shuttle name>\r\n", ch );
       return;
     }
   shuttle = make_shuttle(arg, argument);
@@ -139,7 +139,7 @@ void do_setshuttle(CHAR_DATA * ch, char * argument)
 
   if ( IS_NPC( ch ) )
     {
-      send_to_char( "Huh?\n\r", ch );
+      send_to_char( "Huh?\r\n", ch );
       return;
     }
 
@@ -148,22 +148,22 @@ void do_setshuttle(CHAR_DATA * ch, char * argument)
 
   if ( arg1[0] == '\0' || arg2[0] == '\0' || argument[0] == '\0')
     {
-      send_to_char( "Usage: setshuttle <shuttle name> <field> <value>\n\r", ch);
-      send_to_char( "Fields:\n\r\tstart_room, last_room, entrance, delay\n\r", ch);
-      send_to_char( "\tname, filename, type, stop, remove shuttle\n\r", ch);\
-      send_to_char("\tsetshuttle <shuttle> stop <add>\n\r",ch);
-      send_to_char("\tsetshuttle <shuttle> stop <stop #> name <value>\n\r",ch);
-      send_to_char("\tsetshuttle <shuttle> stop <stop #> room <value>\n\r",ch);
+      send_to_char( "Usage: setshuttle <shuttle name> <field> <value>\r\n", ch);
+      send_to_char( "Fields:\r\n\tstart_room, last_room, entrance, delay\r\n", ch);
+      send_to_char( "\tname, filename, type, stop, remove shuttle\r\n", ch);\
+      send_to_char("\tsetshuttle <shuttle> stop <add>\r\n",ch);
+      send_to_char("\tsetshuttle <shuttle> stop <stop #> name <value>\r\n",ch);
+      send_to_char("\tsetshuttle <shuttle> stop <stop #> room <value>\r\n",ch);
       return;
     }
 
   shuttle = get_shuttle(arg1);
   if ( !shuttle ) {
     set_char_color( AT_RED, ch );
-    send_to_char("No such shuttle.\n\rValid shuttles:\n\r", ch);
+    send_to_char("No such shuttle.\r\nValid shuttles:\r\n", ch);
     set_char_color( AT_YELLOW, ch );
     for ( shuttle = first_shuttle; shuttle; shuttle = shuttle->next )
-      ch_printf(ch, "Shuttle Name: %s - %s\n\r", shuttle->name,
+      ch_printf(ch, "Shuttle Name: %s - %s\r\n", shuttle->name,
                 shuttle->type == SHUTTLE_TURBOCAR ? "Turbocar" :
                 shuttle->type == SHUTTLE_SPACE ? "Space" :
                 shuttle->type == SHUTTLE_HYPERSPACE ? "Hyperspace" : "Other" );
@@ -176,7 +176,7 @@ void do_setshuttle(CHAR_DATA * ch, char * argument)
     {
       if (value > shuttle->end_room)
         {
-          send_to_char("Uh.. First room should be less than last room.\n\r", ch);
+          send_to_char("Uh.. First room should be less than last room.\r\n", ch);
           return;
         }
       shuttle->start_room = value;
@@ -185,7 +185,7 @@ void do_setshuttle(CHAR_DATA * ch, char * argument)
     {
       if (value < shuttle->start_room)
         {
-          send_to_char("Uh.. First room should be less than last room.\n\r", ch);
+          send_to_char("Uh.. First room should be less than last room.\r\n", ch);
           return;
         }
       shuttle->end_room = value;
@@ -195,7 +195,7 @@ void do_setshuttle(CHAR_DATA * ch, char * argument)
       if (value > shuttle->end_room
           || value < shuttle->start_room )
         {
-          send_to_char("Not within valid range.\n\r", ch);
+          send_to_char("Not within valid range.\r\n", ch);
           return;
         }
       shuttle->entrance = value;
@@ -234,14 +234,14 @@ void do_setshuttle(CHAR_DATA * ch, char * argument)
         shuttle->type = SHUTTLE_HYPERSPACE;
       else
         {
-          send_to_char("Types are: turbocar, space, hyperspace.\n\r", ch);
+          send_to_char("Types are: turbocar, space, hyperspace.\r\n", ch);
           return;
         }
     }
   else if (!str_cmp(arg2, "remove"))
     {
       destroy_shuttle(shuttle);
-      send_to_char("Shuttle Removed.\n\r", ch);
+      send_to_char("Shuttle Removed.\r\n", ch);
       return;
     }
   else if (!str_cmp(arg2, "stop"))
@@ -250,10 +250,10 @@ void do_setshuttle(CHAR_DATA * ch, char * argument)
       argument = one_argument(argument, arg1);
       if (arg1[0] == '\0' || argument[0] == '\0')
         {
-          send_to_char("Usage: \n\r",ch);
-          send_to_char("\tsetshuttle <shuttle> stop <add>\n\r",ch);
-          send_to_char("\tsetshuttle <shuttle> stop <stop #> name <value>\n\r",ch);
-          send_to_char("\tsetshuttle <shuttle> stop <stop #> room <value>\n\r",ch);
+          send_to_char("Usage: \r\n",ch);
+          send_to_char("\tsetshuttle <shuttle> stop <add>\r\n",ch);
+          send_to_char("\tsetshuttle <shuttle> stop <stop #> name <value>\r\n",ch);
+          send_to_char("\tsetshuttle <shuttle> stop <stop #> room <value>\r\n",ch);
           return;
         }
 
@@ -272,7 +272,7 @@ void do_setshuttle(CHAR_DATA * ch, char * argument)
         int count = 0;
         if (arg1[0] == '\0' || argument[0] == '\0')
           {
-            send_to_char("Invalid Param.\n\r", ch);
+            send_to_char("Invalid Param.\r\n", ch);
             return;
           }
         value = is_number( arg1 ) ? atoi( arg1 ) : -1;
@@ -285,7 +285,7 @@ void do_setshuttle(CHAR_DATA * ch, char * argument)
 
         if ( stop == NULL)
           {
-            send_to_char("Invalid Stop\n\r", ch);
+            send_to_char("Invalid Stop\r\n", ch);
             return;
           }
 
@@ -307,10 +307,10 @@ void do_setshuttle(CHAR_DATA * ch, char * argument)
             if (stop->stop_name)
               STRFREE(stop->stop_name);
             DISPOSE(stop);
-            send_to_char("Stop removed.\n\r", ch);
+            send_to_char("Stop removed.\r\n", ch);
             return;
           } else {
-          send_to_char("Invalid Option.\n\r", ch);
+          send_to_char("Invalid Option.\r\n", ch);
           return;
         }
       }
@@ -321,7 +321,7 @@ void do_setshuttle(CHAR_DATA * ch, char * argument)
       return;
     }
   save_shuttle(shuttle);
-  send_to_char("Ok.\n\r", ch);
+  send_to_char("Ok.\r\n", ch);
   return;
 }
 
@@ -350,7 +350,7 @@ void write_shuttle_list( )
   fpout = fopen( filename, "w" );
   if ( !fpout )
     {
-      bug( "FATAL: cannot open shuttle.lst for writing!\n\r", 0 );
+      bug( "FATAL: cannot open shuttle.lst for writing!\r\n", 0 );
       return;
     }
 
@@ -473,12 +473,12 @@ void update_shuttle()
                */
               if ( shuttle->type == SHUTTLE_TURBOCAR )
                 snprintf( buf, MSL,
-                          "An electronic voice says, 'Preparing for departure.'\n\r"
+                          "An electronic voice says, 'Preparing for departure.'\r\n"
                           "It continues, 'Next stop, %s'",
                           shuttle->current->stop_name);
               else
                 snprintf( buf, MSL,
-                          "An electronic voice says, 'Preparing for launch.'\n\r"
+                          "An electronic voice says, 'Preparing for launch.'\r\n"
                           "It continues, 'Next stop, %s'",
                           shuttle->current->stop_name);
               for (room = shuttle->start_room; room <= shuttle->end_room; ++room)
@@ -533,7 +533,7 @@ void update_shuttle()
 
               /* action_desc */
               snprintf( buf, MSL,
-                        "An electronic voice says, 'Welcome to %s'\n\r"
+                        "An electronic voice says, 'Welcome to %s'\r\n"
                         "It continues, 'Please exit through the %s. Enjoy your stay.'",
                         shuttle->current->stop_name,
                         shuttle->type == SHUTTLE_TURBOCAR ? "doors" : "main ramp" );
@@ -592,7 +592,7 @@ void show_shuttles_to_char( SHUTTLE_DATA *shuttle, CHAR_DATA *ch )
         ch_printf( ch , "%-35s", shuttle->name );
       }
       shuttle = shuttle->next_in_room;
-      send_to_char("\n\r&w", ch);
+      send_to_char("\r\n&w", ch);
     }
 
   return;
@@ -752,18 +752,6 @@ bool load_shuttle_file( const char * shuttlefile )
     }
   return found;
 }
-
-#if defined(KEY)
-#undef KEY
-#endif
-
-#define KEY( literal, field, value )            \
-  if ( !str_cmp( word, literal ) )              \
-    {                                           \
-      field  = value;                           \
-      fMatch = TRUE;                            \
-      break;                                    \
-    }
 
 void fread_shuttle( SHUTTLE_DATA *shuttle, FILE *fp )
 {
@@ -959,13 +947,13 @@ void output_shuttle(CHAR_DATA * ch, SHUTTLE_DATA * shuttle)
   if (shuttle->first_stop == NULL) return;
 
   set_char_color(AT_SHIP, ch);
-  ch_printf(ch, "%s Schedule Information:\n\r", shuttle->name );
+  ch_printf(ch, "%s Schedule Information:\r\n", shuttle->name );
 
   stop = shuttle->current;
   /* current port */
   if ( shuttle->state == SHUTTLE_STATE_LANDING || shuttle->state == SHUTTLE_STATE_LANDED )
     {
-      ch_printf( ch, "Currently docked at %s.\n\r", shuttle->current->stop_name );
+      ch_printf( ch, "Currently docked at %s.\r\n", shuttle->current->stop_name );
       stop = stop->next;
     }
 
@@ -996,7 +984,7 @@ void output_shuttle(CHAR_DATA * ch, SHUTTLE_DATA * shuttle)
       if ( (stop = stop->next) == NULL)
         stop = shuttle->first_stop;
     }
-  send_to_char( "\n\r", ch );
+  send_to_char( "\r\n", ch );
 }
 
 void do_pluogus( CHAR_DATA *ch, char *argument )
@@ -1014,20 +1002,20 @@ void do_pluogus( CHAR_DATA *ch, char *argument )
 
   if ( !ch_comlink )
     {
-      send_to_char( "You need a comlink to do that!\n\r", ch);
+      send_to_char( "You need a comlink to do that!\r\n", ch);
       return;
     }
 
   if ((shuttle = get_shuttle("Serin Pluogus")) != NULL)
     {
       output_shuttle(ch, shuttle);
-      send_to_char("\n\r", ch);
+      send_to_char("\r\n", ch);
     }
 
   if ((shuttle = get_shuttle("Serin Tocca")) != NULL)
     {
       output_shuttle(ch, shuttle);
-      send_to_char("\n\r", ch);
+      send_to_char("\r\n", ch);
     }
 
 }
@@ -1042,7 +1030,7 @@ void do_board( CHAR_DATA *ch, char *argument )
 
   if ( !argument || argument[0] == '\0')
     {
-      send_to_char( "Board what?\n\r", ch );
+      send_to_char( "Board what?\r\n", ch );
       return;
     }
 
@@ -1058,19 +1046,19 @@ void do_board( CHAR_DATA *ch, char *argument )
 
       if ( ( toroom = get_room_index( ship->entrance ) ) == NULL )
         {
-          send_to_char("That ship has no entrance!\n\r", ch);
+          send_to_char("That ship has no entrance!\r\n", ch);
           return;
         }
 
       if ( ! ship->hatchopen )
         {
-          send_to_char( "&RThe hatch is closed!\n\r", ch);
+          send_to_char( "&RThe hatch is closed!\r\n", ch);
           return;
         }
 
       if ( ship->shipstate == SHIP_LAUNCH || ship->shipstate == SHIP_LAUNCH_2 )
         {
-          send_to_char("&rThat ship has already started launching!\n\r",ch);
+          send_to_char("&rThat ship has already started launching!\r\n",ch);
           return;
         }
 
@@ -1082,7 +1070,7 @@ void do_board( CHAR_DATA *ch, char *argument )
       name = shuttle->name;
       if ( ( toroom = get_room_index( shuttle->entrance ) ) == NULL )
         {
-          send_to_char("That ship has no entrance!\n\r", ch);
+          send_to_char("That ship has no entrance!\r\n", ch);
           return;
         }
     }
@@ -1106,7 +1094,7 @@ void do_board( CHAR_DATA *ch, char *argument )
         {
           if ( ++count >= toroom->tunnel )
             {
-              send_to_char( "There is no room for you in there.\n\r", ch );
+              send_to_char( "There is no room for you in there.\r\n", ch );
               return;
             }
         }
@@ -1133,19 +1121,19 @@ void do_leaveship( CHAR_DATA *ch, char *argument )
     {
       if  ( ship->sclass == SHIP_PLATFORM )
         {
-          send_to_char( "You can't do that here.\n\r" , ch );
+          send_to_char( "You can't do that here.\r\n" , ch );
           return;
         }
 
       if ( ship->lastdoc != ship->location )
         {
-          send_to_char("&rMaybe you should wait until the ship lands.\n\r",ch);
+          send_to_char("&rMaybe you should wait until the ship lands.\r\n",ch);
           return;
         }
 
       if ( ship->shipstate != SHIP_DOCKED && ship->shipstate != SHIP_DISABLED )
         {
-          send_to_char("&rPlease wait till the ship is properly docked.\n\r",ch);
+          send_to_char("&rPlease wait till the ship is properly docked.\r\n",ch);
           return;
         }
 
@@ -1157,7 +1145,7 @@ void do_leaveship( CHAR_DATA *ch, char *argument )
 
       if ( ( toroom = get_room_index( ship->location ) ) == NULL )
         {
-          send_to_char ( "The exit doesn't seem to be working properly.\n\r", ch );
+          send_to_char ( "The exit doesn't seem to be working properly.\r\n", ch );
           return;
         }
     }
@@ -1165,13 +1153,13 @@ void do_leaveship( CHAR_DATA *ch, char *argument )
     {
       if ( !shuttle->in_room || ( toroom = get_room_index( shuttle->in_room->vnum ) ) == NULL )
         {
-          send_to_char ( "The ship hasn't landed yet. Do you want to kill yourself?\n\r", ch );
+          send_to_char ( "The ship hasn't landed yet. Do you want to kill yourself?\r\n", ch );
           return;
         }
     }
   else
     {
-      send_to_char( "I see no exit here.\n\r" , ch );
+      send_to_char( "I see no exit here.\r\n" , ch );
       return;
     }
 
