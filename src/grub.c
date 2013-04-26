@@ -256,25 +256,25 @@ char *owear_to_disp (short arg)
 
 int owear_to_num (char *arg)
 {
-  if ( !strcmp( arg, "take"    ) ) return  1;
-  if ( !strcmp( arg, "finger"  ) ) return  2;
-  if ( !strcmp( arg, "neck"    ) ) return  3;
-  if ( !strcmp( arg, "body"    ) ) return  4;
-  if ( !strcmp( arg, "head"    ) ) return  5;
-  if ( !strcmp( arg, "legs"    ) ) return  6;
-  if ( !strcmp( arg, "feet"    ) ) return  7;
-  if ( !strcmp( arg, "hands"   ) ) return  8;
-  if ( !strcmp( arg, "arms"    ) ) return  9;
-  if ( !strcmp( arg, "shield"  ) ) return 10;
-  if ( !strcmp( arg, "about"   ) ) return 11;
-  if ( !strcmp( arg, "waist"   ) ) return 12;
-  if ( !strcmp( arg, "wrist"   ) ) return 13;
-  if ( !strcmp( arg, "wield"   ) ) return 14;
-  if ( !strcmp( arg, "hold"    ) ) return 15;
-  if ( !strcmp( arg, "dual"    ) ) return 16;
-  if ( !strcmp( arg, "ears"    ) ) return 17;
-  if ( !strcmp( arg, "eyes"    ) ) return 18;
-  if ( !strcmp( arg, "missile" ) ) return 19;
+  if ( !str_cmp( arg, "take"    ) ) return  1;
+  if ( !str_cmp( arg, "finger"  ) ) return  2;
+  if ( !str_cmp( arg, "neck"    ) ) return  3;
+  if ( !str_cmp( arg, "body"    ) ) return  4;
+  if ( !str_cmp( arg, "head"    ) ) return  5;
+  if ( !str_cmp( arg, "legs"    ) ) return  6;
+  if ( !str_cmp( arg, "feet"    ) ) return  7;
+  if ( !str_cmp( arg, "hands"   ) ) return  8;
+  if ( !str_cmp( arg, "arms"    ) ) return  9;
+  if ( !str_cmp( arg, "shield"  ) ) return 10;
+  if ( !str_cmp( arg, "about"   ) ) return 11;
+  if ( !str_cmp( arg, "waist"   ) ) return 12;
+  if ( !str_cmp( arg, "wrist"   ) ) return 13;
+  if ( !str_cmp( arg, "wield"   ) ) return 14;
+  if ( !str_cmp( arg, "hold"    ) ) return 15;
+  if ( !str_cmp( arg, "dual"    ) ) return 16;
+  if ( !str_cmp( arg, "ears"    ) ) return 17;
+  if ( !str_cmp( arg, "eyes"    ) ) return 18;
+  if ( !str_cmp( arg, "missile" ) ) return 19;
   return 0;
 }
 
@@ -283,7 +283,7 @@ int go_fnam_to_num ( char *arg )
   int cou;
 
   for (cou=0; cou<GO_NUM_FIELDS; cou++)
-    if ( !strcmp(arg, go_fd[cou].nam) )
+    if ( !str_cmp(arg, go_fd[cou].nam) )
       return cou;
   return -1;
 }
@@ -457,12 +457,12 @@ bool go_parse_operand (CHAR_DATA *ch, char *arg, int *op_num, int *sor_ind,
   int  cou;
   char *pch;
 
-  if ( !strcmp(arg, "or"    ) ) return *or_sw    = TRUE;
-  if ( !strcmp(arg, "np"    ) ) return *np_sw    = TRUE;
-  if ( !strcmp(arg, "nm"    ) ) return *nm_sw    = TRUE;
-  if ( !strcmp(arg, "ng"    ) ) return *ng_sw    = TRUE;
-  if ( !strcmp(arg, "do"    ) ) return *do_sw    = TRUE;
-  if ( !strcmp(arg, "d2"    ) ) return *d2_sw = TRUE;
+  if ( !str_cmp(arg, "or"    ) ) return *or_sw    = TRUE;
+  if ( !str_cmp(arg, "np"    ) ) return *np_sw    = TRUE;
+  if ( !str_cmp(arg, "nm"    ) ) return *nm_sw    = TRUE;
+  if ( !str_cmp(arg, "ng"    ) ) return *ng_sw    = TRUE;
+  if ( !str_cmp(arg, "do"    ) ) return *do_sw    = TRUE;
+  if ( !str_cmp(arg, "d2"    ) ) return *d2_sw = TRUE;
 
   if ( arg[0]=='+' || arg[0]=='-')
     {
@@ -1071,7 +1071,7 @@ bool gr_parse_operand (CHAR_DATA *ch, char *arg, bool *or_sw, int *op_num)
 {
   int  cou;
 
-  if ( !strcmp(arg, "or") )
+  if ( !str_cmp(arg, "or") )
     return *or_sw = TRUE;
 
   for (cou=1; cou<=GR_NUM_FIELDS; cou++)          /* check field name    */

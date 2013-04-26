@@ -4574,7 +4574,7 @@ void edit_buffer( CHAR_DATA *ch, char *argument )
               send_to_char( "Need word to replace, and replacement.\r\n> ", ch );
               return;
             }
-          if ( strcmp( word1, word2 ) == 0 )
+          if ( str_cmp( word1, word2 ) == 0 )
             {
               send_to_char( "Done.\r\n> ", ch );
               return;
@@ -5702,7 +5702,7 @@ void do_foldarea( CHAR_DATA *ch, char *argument )
       if ( !str_cmp( tarea->filename, arg ) )
         {
           send_to_char( "Folding...\r\n", ch );
-          if (!strcmp( argument, "remproto") )
+          if (!str_cmp( argument, "remproto") )
             fold_area( tarea, tarea->filename, TRUE );
           else
             fold_area( tarea, tarea->filename, FALSE );

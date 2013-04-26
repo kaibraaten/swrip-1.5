@@ -297,7 +297,7 @@ void show_list_to_char( OBJ_DATA *list, CHAR_DATA *ch, bool fShort, bool fShowNo
                */
               for ( iShow = nShow - 1; iShow >= 0; iShow-- )
                 {
-                  if ( !strcmp( prgpstrShow[iShow], pstrShow ) )
+                  if ( !str_cmp( prgpstrShow[iShow], pstrShow ) )
                     {
                       prgnShow[iShow] += obj->count;
                       fCombine = TRUE;
@@ -2410,7 +2410,7 @@ void do_who( CHAR_DATA *ch, char *argument )
                     strcpy(arg, ch->pcdata->clan->name);
                   if ( (pClan = get_clan (arg)) && (fClanMatch != TRUE))
                     {
-                      if ((ch->top_level >= LEVEL_IMMORTAL) || (ch->pcdata && ch->pcdata->clan && !strcmp(ch->pcdata->clan->name, pClan->name)))
+                      if ((ch->top_level >= LEVEL_IMMORTAL) || (ch->pcdata && ch->pcdata->clan && !str_cmp(ch->pcdata->clan->name, pClan->name)))
                         {
                           fClanMatch = TRUE;
                         }
@@ -2911,7 +2911,7 @@ void do_practice( CHAR_DATA *ch, char *argument )
           if ( skill_table[sn]->guild < 0 || skill_table[sn]->guild >= MAX_ABILITY )
             continue;
 
-          if ( strcmp(skill_table[sn]->name, "reserved") == 0
+          if ( str_cmp(skill_table[sn]->name, "reserved") == 0
                && ( IS_IMMORTAL(ch) ) )
             {
               if ( col % 3 != 0 )
@@ -3260,7 +3260,7 @@ void do_password( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( strcmp( encode_string( arg1 ), ch->pcdata->pwd ) )
+  if ( str_cmp( encode_string( arg1 ), ch->pcdata->pwd ) )
     {
       WAIT_STATE( ch, 40 );
       send_to_char( "Wrong password.  Wait 10 seconds.\r\n", ch );

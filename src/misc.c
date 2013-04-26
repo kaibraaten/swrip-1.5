@@ -2986,7 +2986,7 @@ void do_suicide( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( strcmp( encode_string( argument ), ch->pcdata->pwd ) )
+  if ( str_cmp( encode_string( argument ), ch->pcdata->pwd ) )
     {
       send_to_char( "Sorry wrong password.\r\n", ch );
       sprintf( logbuf , "%s attempting to commit suicide... WRONG PASSWORD!" , ch->name );
@@ -3469,7 +3469,7 @@ void do_aquest(CHAR_DATA *ch, char *argument)
   argument = one_argument(argument, arg1);
   argument = one_argument(argument, arg2);
 
-  if (!strcmp(arg1, "info"))
+  if (!str_cmp(arg1, "info"))
     {
       if (IS_SET(ch->act, PLR_QUESTOR))
         {
@@ -3505,13 +3505,13 @@ void do_aquest(CHAR_DATA *ch, char *argument)
         send_to_char("You aren't currently on a quest.\r\n",ch);
       return;
     }
-  if (!strcmp(arg1, "points"))
+  if (!str_cmp(arg1, "points"))
     {
       sprintf(buf, "You have %d quest points.\r\n",ch->questpoints);
       send_to_char(buf, ch);
       return;
     }
-  else if (!strcmp(arg1, "time"))
+  else if (!str_cmp(arg1, "time"))
     {
       if (!IS_SET(ch->act, PLR_QUESTOR))
         {
@@ -3577,7 +3577,7 @@ void do_aquest(CHAR_DATA *ch, char *argument)
       return;
     }
 
-  if (!strcmp(arg1, "list"))
+  if (!str_cmp(arg1, "list"))
     {
       act(AT_PLAIN,"$n asks $N for a list of quest items.",ch,NULL,questman,TO_ROOM);
       act(AT_PLAIN,"You ask $N for a list of quest items.",ch,NULL,questman,TO_CHAR);
@@ -3597,7 +3597,7 @@ void do_aquest(CHAR_DATA *ch, char *argument)
       return;
     }
 
-  else if (!strcmp(arg1, "buy"))
+  else if (!str_cmp(arg1, "buy"))
     {
       if (arg2[0] == '\0')
         {
@@ -3725,7 +3725,7 @@ void do_aquest(CHAR_DATA *ch, char *argument)
         }
       return;
     }
-  else if (!strcmp(arg1, "request"))
+  else if (!str_cmp(arg1, "request"))
     {
 
       sprintf(buf, "Do to extreme stupidity of its system, the quest system has been removed\r\nThere are other ways to gain quest points now!");
@@ -3765,7 +3765,7 @@ void do_aquest(CHAR_DATA *ch, char *argument)
         }
       return;
     }
-  else if (!strcmp(arg1, "complete"))
+  else if (!str_cmp(arg1, "complete"))
     {
       act(AT_PLAIN,"$n informs $N $e has completed $s quest.", ch, NULL, questman,
           TO_ROOM);

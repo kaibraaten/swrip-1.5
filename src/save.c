@@ -902,7 +902,7 @@ bool load_char_obj( DESCRIPTOR_DATA *d, char *name, bool preload )
               if ( !str_cmp( word, "COMMENT") )
                 fread_comment(ch, fp );         /* Comments     */
               else
-                if ( !strcmp( word, "MOBILE") )
+                if ( !str_cmp( word, "MOBILE") )
                   {
                     CHAR_DATA *mob;
                     mob = fread_mobile( fp );
@@ -2382,11 +2382,11 @@ void load_vendors( void )
                   break;
                 }
               word = fread_word( fpArea );
-              if ( !strcmp(word, "VENDOR" ) )
+              if ( !str_cmp(word, "VENDOR" ) )
                 mob = fread_vendor( fpArea );
-              else if ( !strcmp(word, "OBJECT" ) )
+              else if ( !str_cmp(word, "OBJECT" ) )
                 fread_obj( mob, fpArea, OS_CARRY );
-              else if ( !strcmp( word, "END" ) )
+              else if ( !str_cmp( word, "END" ) )
                 break;
             }
           fclose(fpArea);
@@ -2445,7 +2445,7 @@ CHAR_DATA *  fread_mobile( FILE *fp )
   ROOM_INDEX_DATA *pRoomIndex = NULL;
 
   word   = feof( fp ) ? "EndMobile" : fread_word( fp );
-  if ( !strcmp(word, "Vnum") )
+  if ( !str_cmp(word, "Vnum") )
     {
       int vnum;
 
@@ -2458,7 +2458,7 @@ CHAR_DATA *  fread_mobile( FILE *fp )
             /* So we don't get so many bug messages when something messes up
              * --Shaddai
              */
-            if ( !strcmp( word, "EndMobile" ) )
+            if ( !str_cmp( word, "EndMobile" ) )
               break;
           }
           bug("Fread_mobile: No index data for vnum %d", vnum );
@@ -2472,7 +2472,7 @@ CHAR_DATA *  fread_mobile( FILE *fp )
         /* So we don't get so many bug messages when something messes up
          * --Shaddai
          */
-        if ( !strcmp( word, "EndMobile" ) )
+        if ( !str_cmp( word, "EndMobile" ) )
           break;
       }
       extract_char(mob, TRUE);
@@ -2488,13 +2488,13 @@ CHAR_DATA *  fread_mobile( FILE *fp )
       fread_to_eol( fp );
       break;
     case '#':
-      if ( !strcmp( word, "#OBJECT" ) )
+      if ( !str_cmp( word, "#OBJECT" ) )
         fread_obj ( mob, fp, OS_CARRY );
     case 'D':
       KEY( "Description", mob->description, fread_string(fp));
       break;
     case 'E':
-      if ( !strcmp( word, "EndMobile" ) )
+      if ( !str_cmp( word, "EndMobile" ) )
         {
           if ( inroom == 0 )
             inroom = ROOM_VNUM_TEMPLE;

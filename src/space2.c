@@ -1633,7 +1633,7 @@ void do_override(CHAR_DATA *ch, char *argument)
       return;
     }
 
-  if ( !strcmp( arg2, "shields" ) )
+  if ( !str_cmp( arg2, "shields" ) )
     {
       if( eShip->shield == 0 )
         {
@@ -1650,7 +1650,7 @@ void do_override(CHAR_DATA *ch, char *argument)
           return;
         }
     }
-  if ( !strcmp( arg2, "closebay" ) )
+  if ( !str_cmp( arg2, "closebay" ) )
     {
       eShip->bayopen=FALSE;
       send_to_char( "&GBays Close. Confirmed.\r\n", ch);
@@ -1660,7 +1660,7 @@ void do_override(CHAR_DATA *ch, char *argument)
       return;
     }
 
-  if ( !strcmp( arg2, "stop" ) )
+  if ( !str_cmp( arg2, "stop" ) )
     {
       eShip->currspeed = 0;
       send_to_char( "&GBraking Thrusters. Confirmed.\r\n", ch);
@@ -1670,7 +1670,7 @@ void do_override(CHAR_DATA *ch, char *argument)
       return;
     }
 
-  if ( !strcmp( arg2, "autopilot" ) )
+  if ( !str_cmp( arg2, "autopilot" ) )
     {
       if ( ship->autopilot )
         {
@@ -1688,7 +1688,7 @@ void do_override(CHAR_DATA *ch, char *argument)
         }
     }
 
-  if ( !strcmp( arg2, "openbay" ) )
+  if ( !str_cmp( arg2, "openbay" ) )
     {
       send_to_char("&RYou open the bay doors of the remote ship.",ch);
       act(AT_PLAIN,"$n flips a switch on the control panel.",ch,NULL,argument,TO_ROOM);

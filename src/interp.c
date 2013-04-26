@@ -237,7 +237,7 @@ void interpret( CHAR_DATA *ch, char *argument )
   if ( !cmd )
     {
       /* Changed the order of these ifchecks to prevent crashing. */
-      if ( !argument || !strcmp(argument,"") )
+      if ( !argument || !str_cmp(argument,"") )
         {
           bug( "interpret: null argument!", 0 );
           return;

@@ -778,23 +778,6 @@ void do_newbiechat( CHAR_DATA *ch, char *argument )
   return;
 }
 
-void do_ot( CHAR_DATA *ch, char *argument )
-{
-  do_ordertalk( ch, argument );
-}
-
-void do_ordertalk( CHAR_DATA *ch, char *argument )
-{
-  send_to_char("Huh?\r\n", ch);
-  return;
-}
-
-void do_guildtalk( CHAR_DATA *ch, char *argument )
-{
-  send_to_char("Huh?\r\n", ch);
-  return;
-}
-
 void do_music( CHAR_DATA *ch, char *argument )
 {
   if (NOT_AUTHED(ch))
@@ -1514,14 +1497,14 @@ void do_ansi( CHAR_DATA *ch, char *argument )
       send_to_char( "ANSI ON or OFF?\r\n", ch );
       return;
     }
-  if ( (strcmp(arg,"on")==0) || (strcmp(arg,"ON") == 0) ) {
+  if ( (str_cmp(arg,"on")==0) || (str_cmp(arg,"ON") == 0) ) {
     SET_BIT(ch->act,PLR_ANSI);
     set_char_color( AT_WHITE + AT_BLINK, ch);
     send_to_char( "ANSI ON!!!\r\n", ch);
     return;
   }
 
-  if ( (strcmp(arg,"off")==0) || (strcmp(arg,"OFF") == 0) ) {
+  if ( (str_cmp(arg,"off")==0) || (str_cmp(arg,"OFF") == 0) ) {
     REMOVE_BIT(ch->act,PLR_ANSI);
     send_to_char( "Okay... ANSI support is now off\r\n", ch );
     return;
@@ -1539,7 +1522,7 @@ void do_sound( CHAR_DATA *ch, char *argument )
       send_to_char( "SOUND ON or OFF?\r\n", ch );
       return;
     }
-  if ( (strcmp(arg,"on")==0) || (strcmp(arg,"ON") == 0) ) {
+  if ( (str_cmp(arg,"on")==0) || (str_cmp(arg,"ON") == 0) ) {
     SET_BIT(ch->act,PLR_SOUND);
     set_char_color( AT_WHITE + AT_BLINK, ch);
     send_to_char( "SOUND ON!!!\r\n", ch);
@@ -1547,7 +1530,7 @@ void do_sound( CHAR_DATA *ch, char *argument )
     return;
   }
 
-  if ( (strcmp(arg,"off")==0) || (strcmp(arg,"OFF") == 0) ) {
+  if ( (str_cmp(arg,"off")==0) || (str_cmp(arg,"OFF") == 0) ) {
     REMOVE_BIT(ch->act,PLR_SOUND);
     send_to_char( "Okay... SOUND support is now off\r\n", ch );
     return;
@@ -1909,7 +1892,7 @@ void do_group( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( !strcmp( arg, "disband" ))
+  if ( !str_cmp( arg, "disband" ))
     {
       CHAR_DATA *gch;
       int count = 0;
@@ -1940,7 +1923,7 @@ void do_group( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( !strcmp( arg, "all" ) )
+  if ( !str_cmp( arg, "all" ) )
     {
       CHAR_DATA *rch;
       int count = 0;

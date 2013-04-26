@@ -881,7 +881,7 @@ void repair_one_obj( CHAR_DATA *ch, CHAR_DATA *keeper, OBJ_DATA *obj,
     }
   /* "repair all" gets a 10% surcharge - Gorog */
 
-  else if ( (cost = strcmp("all",arg) ? cost : 11*cost/10) > ch->gold )
+  else if ( (cost = str_cmp("all",arg) ? cost : 11*cost/10) > ch->gold )
     {
       sprintf( buf,
                "$N tells you, 'It will cost %d credit%s to %s %s...'", cost,
@@ -961,7 +961,7 @@ void do_repair( CHAR_DATA *ch, char *argument )
       break;
     }
 
-  if ( !strcmp( argument, "all" ) )
+  if ( !str_cmp( argument, "all" ) )
     {
       for ( obj = ch->first_carrying; obj ; obj = obj->next_content )
         {
@@ -1068,7 +1068,7 @@ void do_appraise( CHAR_DATA *ch, char *argument )
       break;
     }
 
-  if ( !strcmp( arg, "all") )
+  if ( !str_cmp( arg, "all") )
     {
       appraise_all( ch, keeper, fixstr );
       return;
@@ -2006,7 +2006,7 @@ CHAR_DATA *  fread_vendor( FILE *fp )
   char buf [MAX_INPUT_LENGTH];
   char vnum1 [MAX_INPUT_LENGTH];
   word   = feof( fp ) ? "END" : fread_word( fp );
-  if ( !strcmp(word, "Vnum") )
+  if ( !str_cmp(word, "Vnum") )
     {
       int vnum;
 
@@ -2017,7 +2017,7 @@ CHAR_DATA *  fread_vendor( FILE *fp )
           for ( ; ; )
             {
               word   = feof( fp ) ? "END" : fread_word( fp );
-              if ( !strcmp( word, "END" ) )
+              if ( !str_cmp( word, "END" ) )
                 break;
             }
           bug("Fread_mobile: No index data for vnum %d", vnum );
@@ -2029,7 +2029,7 @@ CHAR_DATA *  fread_vendor( FILE *fp )
       for ( ; ; )
         {
           word   = feof( fp ) ? "END" : fread_word( fp );
-          if ( !strcmp( word, "END" ) )
+          if ( !str_cmp( word, "END" ) )
             break;
         }
       extract_char(mob, TRUE);
@@ -2045,7 +2045,7 @@ CHAR_DATA *  fread_vendor( FILE *fp )
       fread_to_eol( fp );
       break;
     case '#':
-      if ( !strcmp( word, "#OBJECT" ) )
+      if ( !str_cmp( word, "#OBJECT" ) )
         {
           fread_obj ( mob, fp, OS_CARRY );
         }
@@ -2055,7 +2055,7 @@ CHAR_DATA *  fread_vendor( FILE *fp )
       break;
     case 'E':
 
-      if ( !strcmp( word, "END" ) )
+      if ( !str_cmp( word, "END" ) )
         {
           if ( inroom == 0 )
             inroom = ROOM_VNUM_VENSTOR;

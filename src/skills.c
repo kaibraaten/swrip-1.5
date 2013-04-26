@@ -88,7 +88,7 @@ bool check_skill( CHAR_DATA *ch, char *command, char *argument )
         break;
       if (first >= top)
         return FALSE;
-      if (strcmp( command, skill_table[sn]->name) < 1)
+      if (str_cmp( command, skill_table[sn]->name) < 1)
         top = sn - 1;
       else
         first = sn + 1;

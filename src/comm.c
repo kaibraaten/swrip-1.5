@@ -1080,7 +1080,7 @@ void read_from_buffer( DESCRIPTOR_DATA *d )
    */
   if ( k > 1 || d->incomm[0] == '!' )
     {
-      if ( d->incomm[0] != '!' && strcmp( d->incomm, d->inlast ) )
+      if ( d->incomm[0] != '!' && str_cmp( d->incomm, d->inlast ) )
         {
           d->repeat = 0;
         }

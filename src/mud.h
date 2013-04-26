@@ -3519,7 +3519,6 @@ DECLARE_DO_FUN( do_sabotage );
 DECLARE_DO_FUN( do_spacetalk );
 DECLARE_DO_FUN( do_hail );
 DECLARE_DO_FUN( do_allships );
-DECLARE_DO_FUN( do_newclan );
 DECLARE_DO_FUN( do_appoint );
 DECLARE_DO_FUN( do_demote );
 DECLARE_DO_FUN( do_empower );
@@ -3744,8 +3743,6 @@ DECLARE_DO_FUN( do_gouge        );
 DECLARE_DO_FUN( do_group        );
 DECLARE_DO_FUN( do_grub         );
 DECLARE_DO_FUN( do_gtell        );
-DECLARE_DO_FUN( do_guilds       );
-DECLARE_DO_FUN( do_guildtalk    );
 DECLARE_DO_FUN( do_hedit        );
 DECLARE_DO_FUN( do_hell         );
 DECLARE_DO_FUN( do_help         );
@@ -3787,7 +3784,6 @@ DECLARE_DO_FUN( do_log          );
 DECLARE_DO_FUN( do_look         );
 DECLARE_DO_FUN( do_low_purge    );
 DECLARE_DO_FUN( do_mailroom     );
-DECLARE_DO_FUN( do_make         );
 DECLARE_DO_FUN( do_makeboard    );
 DECLARE_DO_FUN( do_makeclan     );
 DECLARE_DO_FUN( do_makeship     );
@@ -3830,11 +3826,8 @@ DECLARE_DO_FUN( do_olist        );
 DECLARE_DO_FUN( do_open         );
 DECLARE_DO_FUN( do_opentourney  );
 DECLARE_DO_FUN( do_order        );
-DECLARE_DO_FUN( do_orders       );
-DECLARE_DO_FUN( do_ordertalk    );
 DECLARE_DO_FUN( do_oset         );
 DECLARE_DO_FUN( do_ostat        );
-DECLARE_DO_FUN( do_ot           );
 DECLARE_DO_FUN( do_outcast      );
 DECLARE_DO_FUN( do_override     );
 DECLARE_DO_FUN( do_owhere       );
@@ -4144,7 +4137,6 @@ DECLARE_SPELL_FUN(      spell_cure_addiction                );
 #define SPACE_DIR       "../space/"
 #define PLANET_DIR      "../planets/"
 #define GUARD_DIR       "../planets/"
-#define GUILD_DIR       "../guilds/"    /* Guild data dir               */
 #define BUILD_DIR       "../building/"  /* Online building save dir     */
 #define SYSTEM_DIR      "../system/"    /* Main system files            */
 #define PROG_DIR        "mudprogs/"     /* MUDProg files                */
@@ -4157,7 +4149,6 @@ DECLARE_SPELL_FUN(      spell_cure_addiction                );
 #define SPACE_LIST      "space.lst"
 #define BOUNTY_LIST     "bounty.lst"
 #define DISINTIGRATION_LIST     "disintigration.lst"
-#define GUILD_LIST      "guild.lst"     /* List of guilds               */
 #define GOD_LIST        "gods.lst"      /* List of gods                 */
 #define GUARD_LIST      "guard.lst"
 

@@ -923,7 +923,7 @@ void add_help( HELP_DATA *pHelp )
 
   for ( tHelp = first_help; tHelp; tHelp = tHelp->next )
     if ( pHelp->level == tHelp->level
-         &&   strcmp(pHelp->keyword, tHelp->keyword) == 0 )
+         &&   str_cmp(pHelp->keyword, tHelp->keyword) == 0 )
       {
         bug( "add_help: duplicate: %s.  Deleting.", pHelp->keyword );
         STRFREE( pHelp->text );
@@ -932,7 +932,7 @@ void add_help( HELP_DATA *pHelp )
         return;
       }
     else
-      if ( (match=strcmp(pHelp->keyword[0]=='\'' ? pHelp->keyword+1 : pHelp->keyword,
+      if ( (match=str_cmp(pHelp->keyword[0]=='\'' ? pHelp->keyword+1 : pHelp->keyword,
                          tHelp->keyword[0]=='\'' ? tHelp->keyword+1 : tHelp->keyword)) < 0
            ||   (match == 0 && pHelp->level > tHelp->level) )
         {
@@ -4450,7 +4450,7 @@ void load_buildlist( void )
 
               fgets(line, 80, fp);
               sscanf( line, "%s %d %d", word, &low, &hi );
-              if ( !strcmp( word, "Level" ) )
+              if ( !str_cmp( word, "Level" ) )
                 {
                   if ( low < LEVEL_AVATAR )
                     {
@@ -4459,11 +4459,11 @@ void load_buildlist( void )
                       badfile = TRUE;
                     }
                 }
-              if ( !strcmp( word, "RoomRange" ) )
+              if ( !str_cmp( word, "RoomRange" ) )
                 rlow = low, rhi = hi;
-              else if ( !strcmp( word, "MobRange" ) )
+              else if ( !str_cmp( word, "MobRange" ) )
                 mlow = low, mhi = hi;
-              else if ( !strcmp( word, "ObjRange" ) )
+              else if ( !str_cmp( word, "ObjRange" ) )
                 olow = low, ohi = hi;
             }
           fclose( fp );
@@ -4479,7 +4479,7 @@ void load_buildlist( void )
 #if !defined(READ_AREA)  /* Dont always want to read stuff.. dunno.. shrug */
 
               strcpy( word, fread_word( fp ) );
-              if ( word[0] != '#' || strcmp( &word[1], "AREA" ) )
+              if ( word[0] != '#' || str_cmp( &word[1], "AREA" ) )
                 {
                   sprintf( buf, "Make_buildlist: %s.are: no #AREA found.",
                            dentry->d_name );

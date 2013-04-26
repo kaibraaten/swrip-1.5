@@ -402,8 +402,6 @@ static const DO_FUN_ENTRY command_fun_table[] = {
       if ( !str_cmp( name, "do_grub" ))         return do_grub;
       if ( !str_cmp( name, "do_gtell" ))                return do_gtell;
       if ( !str_cmp( name, "do_guard" ))                return do_guard;
-      if ( !str_cmp( name, "do_guilds" ))               return do_guilds;
-      if ( !str_cmp( name, "do_guildtalk" ))            return do_guildtalk;
       break;
     case 'h':
       if ( !str_cmp( name, "do_hail" ))         return do_hail;
@@ -544,7 +542,6 @@ static const DO_FUN_ENTRY command_fun_table[] = {
       if ( !str_cmp( name, "do_name" ))         return do_name;
       if ( !str_cmp( name, "do_newbiechat" ))           return do_newbiechat;
       if ( !str_cmp( name, "do_newbieset" ))            return do_newbieset;
-      if ( !str_cmp( name, "do_newclan" ))              return do_newclan;
       if ( !str_cmp( name, "do_newzones" ))             return do_newzones;
       if ( !str_cmp( name, "do_noemote" ))              return do_noemote;
       if ( !str_cmp( name, "do_nohelps" ))              return do_nohelps;
@@ -575,8 +572,6 @@ static const DO_FUN_ENTRY command_fun_table[] = {
       if ( !str_cmp( name, "do_opstat" ))               return do_opstat;
       if ( !str_cmp( name, "do_orange" ))               return do_orange;
       if ( !str_cmp( name, "do_order" ))                return do_order;
-      if ( !str_cmp( name, "do_orders" ))               return do_orders;
-      if ( !str_cmp( name, "do_ordertalk" ))            return do_ordertalk;
       if ( !str_cmp( name, "do_oset" ))         return do_oset;
       if ( !str_cmp( name, "do_ostat" ))                return do_ostat;
       if ( !str_cmp( name, "do_outcast" ))              return do_outcast;
@@ -843,7 +838,7 @@ int skill_comp( SKILLTYPE **sk1, SKILLTYPE **sk2 )
     return -1;
   if ( skill1->type > skill2->type )
     return 1;
-  return strcmp( skill1->name, skill2->name );
+  return str_cmp( skill1->name, skill2->name );
 }
 
 /*

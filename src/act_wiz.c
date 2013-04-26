@@ -4597,7 +4597,7 @@ void extract_area_names (char *inp, char *out)
   while (inp && *inp)
     {
       inp = one_argument(inp, buf);
-      if ( (len=strlen(buf)) >= 5 && !strcmp(".are", pbuf+len-4) )
+      if ( (len=strlen(buf)) >= 5 && !str_cmp(".are", pbuf+len-4) )
         {
           if (*out) strcat (out, " ");
           strcat (out, buf);
@@ -4619,7 +4619,7 @@ void remove_area_names (char *inp, char *out)
   while (inp && *inp)
     {
       inp = one_argument(inp, buf);
-      if ( (len=strlen(buf)) < 5 || strcmp(".are", pbuf+len-4) )
+      if ( (len=strlen(buf)) < 5 || str_cmp(".are", pbuf+len-4) )
         {
           if (*out) strcat (out, " ");
           strcat (out, buf);
@@ -5243,7 +5243,7 @@ void do_destroy( CHAR_DATA *ch, char *argument )
 
       sprintf( buf2, "%s.are", capitalize(arg) );
       for ( pArea = first_build; pArea; pArea = pArea->next )
-        if ( !strcmp( pArea->filename, buf2 ) )
+        if ( !str_cmp( pArea->filename, buf2 ) )
           {
             sprintf( buf, "%s%s", BUILD_DIR, buf2 );
             if ( IS_SET( pArea->status, AREA_LOADED ) )
@@ -6061,7 +6061,7 @@ void add_social( SOCIALTYPE *social )
 
   for ( ; tmp; tmp = tmp->next )
     {
-      if ( (x=strcmp(social->name, tmp->name)) == 0 )
+      if ( (x=str_cmp(social->name, tmp->name)) == 0 )
         {
           bug( "Add_social: trying to add duplicate name to bucket %d", hash );
           free_social( social );

@@ -623,7 +623,7 @@ void move_ships( )
         {
           /*          if ( ship->sclass != SHIP_PLATFORM && !autofly(ship) && ship->currspeed < 50)
                       {
-                      if ( (spaceobj->gravity > 50) && strcmp(spaceobj->name,"") && space_in_range( ship, spaceobj ) )
+                      if ( (spaceobj->gravity > 50) && str_cmp(spaceobj->name,"") && space_in_range( ship, spaceobj ) )
                       {
                       if (ship->vx >= spaceobj->xpos + 1 || ship->vx <= spaceobj->xpos - 1 )
                       ship->vx -= URANGE(-3,(spaceobj->gravity)/(ship->vx - spaceobj->xpos)/2,3);
@@ -648,7 +648,7 @@ void move_ships( )
             }
           */
           if ( spaceobj->type == SPACE_SUN && spaceobj->name
-	       && strcmp(spaceobj->name,"")
+	       && str_cmp(spaceobj->name,"")
 	       && ship_distance_to_spaceobject( ship, spaceobj ) < 10 )
             {
               /* Evading the sun added by Darrik Vequir */
@@ -686,7 +686,7 @@ void move_ships( )
           if ( ship->currspeed > 0 )
             {
               if ( spaceobj->type >= SPACE_PLANET
-		   && spaceobj->name && strcmp(spaceobj->name,"")
+		   && spaceobj->name && str_cmp(spaceobj->name,"")
 		   && ship_distance_to_spaceobject( ship, spaceobj ) < 10 )
                 {
                   sprintf( buf , "You begin orbitting %s.", spaceobj->name);
@@ -1262,7 +1262,7 @@ void update_space( )
           too_close = ship->currspeed + 50;
 
           for( spaceobj = first_spaceobject; spaceobj; spaceobj = spaceobj->next )
-            if( spaceobj->name &&  strcmp(spaceobj->name,"")
+            if( spaceobj->name &&  str_cmp(spaceobj->name,"")
 		&& ship_distance_to_spaceobject( ship, spaceobj ) < too_close )
               {
                 sprintf( buf, "Proximity alert: %s  %.0f %.0f %.0f", spaceobj->name,
@@ -9829,7 +9829,7 @@ void do_calculate(CHAR_DATA *ch, char *argument )
   ship->jump.z += distance ? distance : (spaceobject && spaceobject->gravity ? spaceobject->gravity*5 : 0 );
 
   for ( spaceobj = first_spaceobject; spaceobj; spaceobj = spaceobj->next )
-    if ( !spaceobj->trainer && distance && strcmp(spaceobj->name,"")
+    if ( !spaceobj->trainer && distance && str_cmp(spaceobj->name,"")
 	 && vector_distance( &ship->jump, &spaceobj->pos ) <  spaceobj->gravity * 4 )
       {
         echo_to_cockpit( AT_RED, ship, "WARNING.. Jump coordinates too close to stellar object.");
@@ -9991,7 +9991,7 @@ void do_calculate_diff(CHAR_DATA *ch, char *argument )
   ship->jump.z += (distance ? distance : (spaceobject && spaceobject->gravity ? spaceobject->gravity : 0 ) );
 
   for ( spaceobj = first_spaceobject; spaceobj; spaceobj = spaceobj->next )
-    if ( !spaceobj->trainer && distance && strcmp(spaceobj->name,"")
+    if ( !spaceobj->trainer && distance && str_cmp(spaceobj->name,"")
 	 && vector_distance( &ship->jump, &spaceobj->pos ) < spaceobj->gravity * 4 )
       {
         echo_to_cockpit( AT_RED, ship, "WARNING.. Jump coordinates too close to stellar object.");
@@ -10784,7 +10784,7 @@ void do_drive( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( !strcmp( arg, "in" ))
+  if ( !str_cmp( arg, "in" ))
     {
       target = ship_in_room( ship->in_room , arg2 );
       if ( !target )
@@ -10824,7 +10824,7 @@ void do_drive( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( !strcmp( arg, "out" ))
+  if ( !str_cmp( arg, "out" ))
     {
       target = ship_from_hanger(ship->in_room->vnum);
       if (!target)
