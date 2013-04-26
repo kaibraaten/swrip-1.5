@@ -1287,14 +1287,6 @@ Log         0
 End
 
 #COMMAND
-Name        guildtalk~
-Code        do_guildtalk
-Position    0
-Level       0
-Log         0
-End
-
-#COMMAND
 Name        glance~
 Code        do_glance
 Position    5
@@ -1307,14 +1299,6 @@ Name        goto~
 Code        do_goto
 Position    0
 Level       100
-Log         0
-End
-
-#COMMAND
-Name        guilds~
-Code        do_guilds
-Position    0
-Level       0
 Log         0
 End
 
@@ -1716,14 +1700,6 @@ Code        do_log
 Position    0
 Level       105
 Log         1
-End
-
-#COMMAND
-Name        make~
-Code        do_make
-Position    0
-Level       100
-Log         0
 End
 
 #COMMAND
@@ -2475,22 +2451,6 @@ Name        orange~
 Code        do_orange
 Position    0
 Level       103
-Log         0
-End
-
-#COMMAND
-Name        orders~
-Code        do_orders
-Position    0
-Level       0
-Log         0
-End
-
-#COMMAND
-Name        ordertalk~
-Code        do_ordertalk
-Position    0
-Level       0
 Log         0
 End
 
