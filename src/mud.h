@@ -393,38 +393,36 @@ typedef enum
  */
 struct  descriptor_data
 {
-  DESCRIPTOR_DATA *     next;
-  DESCRIPTOR_DATA *     prev;
-  DESCRIPTOR_DATA *     snoop_by;
-  CHAR_DATA *           character;
-  CHAR_DATA *           original;
-  char *                host;
-  char *              hostip;
-  short         port;
-  socket_t              descriptor;
-  short         connected;
-  short         idle;
-  short         lines;
-  short         scrlen;
-  bool          fcommand;
-  char          inbuf           [MAX_INBUF_SIZE];
-  char          incomm          [MAX_INPUT_LENGTH];
-  char          inlast          [MAX_INPUT_LENGTH];
-  int                   repeat;
-  char *                outbuf;
+  DESCRIPTOR_DATA *next;
+  DESCRIPTOR_DATA *prev;
+  DESCRIPTOR_DATA *snoop_by;
+  CHAR_DATA *character;
+  CHAR_DATA *original;
+  char *host;
+  char *hostip;
+  short port;
+  socket_t descriptor;
+  short connected;
+  short idle;
+  short lines;
+  short scrlen;
+  bool fcommand;
+  char inbuf[MAX_INBUF_SIZE];
+  char incomm[MAX_INPUT_LENGTH];
+  char inlast[MAX_INPUT_LENGTH];
+  int  repeat;
+  char *outbuf;
   unsigned long outsize;
-  int                   outtop;
-  char *                pagebuf;
+  int outtop;
+  char *pagebuf;
   unsigned long pagesize;
-  int                   pagetop;
-  char *                pagepoint;
-  signed char           pagecmd;
-  char          pagecolor;
-  int                   newstate;
+  int pagetop;
+  char *pagepoint;
+  signed char pagecmd;
+  char pagecolor;
+  int newstate;
   unsigned char prevcolor;
 };
-
-
 
 /*
  * Attribute bonus structures.
@@ -487,48 +485,47 @@ struct  frc_app_type
 #define FORCE_ABILITY           7
 
 /* the races */
-#define RACE_HUMAN          0
-#define RACE_WOOKIEE            1
-#define RACE_TWI_LEK            2
-#define RACE_RODIAN             3
-#define RACE_HUTT               4
-#define RACE_MON_CALAMARI       5
-#define RACE_NOGHRI             6
-#define RACE_SHISTAVANEN        6
-#define RACE_GAMORREAN          7
-#define RACE_JAWA               8
-#define RACE_ADARIAN            9
-#define RACE_EWOK              10
-#define RACE_VERPINE           11
-#define RACE_DEFEL             12
-#define RACE_TRANDOSHAN        13
-#define RACE_CHADRA_FAN        14
-#define RACE_QUARREN           15
-#define RACE_SULLUSTAN         16
-#define RACE_FALLEEN           17
-#define RACE_ITHORIAN          18
-#define RACE_DEVARONIAN        19
-#define RACE_GOTAL             20
-#define RACE_DROID             21
-#define RACE_FIRRERREO          22
-#define RACE_BARABEL            23
-#define RACE_BOTHAN             24
-#define RACE_TOGARIAN           25
-#define RACE_DUG                26
-#define RACE_KUBAZ              27
-#define RACE_SELONIAN           28
-#define RACE_GRAN               29
-#define RACE_YEVETHA            30
-#define RACE_GAND               31
-#define RACE_DUROS              32
-#define RACE_COYNITE            33
-#define RACE_PROTOCAL_DROID     34
-#define RACE_ASSASSIN_DROID     35
-#define RACE_GLADIATOR_DROID    36
-#define RACE_ASTROMECH_DROID    37
+#define RACE_HUMAN                0
+#define RACE_WOOKIEE              1
+#define RACE_TWI_LEK              2
+#define RACE_RODIAN               3
+#define RACE_HUTT                 4
+#define RACE_MON_CALAMARI         5
+#define RACE_SHISTAVANEN          6
+#define RACE_GAMORREAN            7
+#define RACE_JAWA                 8
+#define RACE_ADARIAN              9
+#define RACE_EWOK                10
+#define RACE_VERPINE             11
+#define RACE_DEFEL               12
+#define RACE_TRANDOSHAN          13
+#define RACE_CHADRA_FAN          14
+#define RACE_QUARREN             15
+#define RACE_SULLUSTAN           16
+#define RACE_FALLEEN             17
+#define RACE_ITHORIAN            18
+#define RACE_DEVARONIAN          19
+#define RACE_GOTAL               20
+#define RACE_DROID               21
+#define RACE_FIRRERREO           22
+#define RACE_BARABEL             23
+#define RACE_BOTHAN              24
+#define RACE_TOGARIAN            25
+#define RACE_DUG                 26
+#define RACE_KUBAZ               27
+#define RACE_SELONIAN            28
+#define RACE_GRAN                29
+#define RACE_YEVETHA             30
+#define RACE_GAND                31
+#define RACE_DUROS               32
+#define RACE_COYNITE             33
+#define RACE_PROTOCAL_DROID      34
+#define RACE_ASSASSIN_DROID      35
+#define RACE_GLADIATOR_DROID     36
+#define RACE_ASTROMECH_DROID     37
 #define RACE_INTERROGATION_DROID 38
-#define RACE_GOD                39
-#define MAX_RACE                   40
+#define RACE_GOD                 39
+#define MAX_RACE                 40
 
 /*
  * Languages -- Altrag

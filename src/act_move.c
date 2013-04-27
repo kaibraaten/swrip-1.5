@@ -75,8 +75,6 @@ int wherehome( CHAR_DATA *ch)
     return ROOM_START_QUARREN;
   if( ch->race  == RACE_SULLUSTAN)
     return ROOM_START_SULLUSTAN;
-  if( ch->race  == RACE_NOGHRI)
-    return ROOM_START_NOGHRI;
 
   return ROOM_VNUM_TEMPLE;
 }
