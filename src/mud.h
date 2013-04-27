@@ -987,7 +987,6 @@ struct ship_data
   short      lasers;
   short      tractorbeam;
   short      manuever;
-  short      upgradeblock;
   short      dockingports;
   bool        bayopen;
   bool        hatchopen;

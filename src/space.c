@@ -2670,7 +2670,6 @@ SHIP_DATA *ship_from_hanger( int vnum )
   return NULL;
 }
 
-
 void save_ship( SHIP_DATA *ship )
 {
   FILE *fp = NULL;
@@ -2681,7 +2680,6 @@ void save_ship( SHIP_DATA *ship )
       bug( "%s: null ship pointer!", __FUNCTION__ );
       return;
     }
-
 
   if ( ship->sclass == SHIP_DEBRIS )
     return;
@@ -2765,7 +2763,6 @@ void save_ship( SHIP_DATA *ship )
       fprintf( fp, "Energy       %d\n", ship->energy            );
       fprintf( fp, "Manuever     %d\n",       ship->manuever          );
       fprintf( fp, "Alarm        %d\n",       ship->alarm             );
-      fprintf( fp, "UpgradeBlock %d\n", ship->upgradeblock      );
       fprintf( fp, "Ions         %d\n",       ship->ions              );
       fprintf( fp, "Dockingports   %d\n",       ship->dockingports        );
       fprintf( fp, "Guard   %d\n",                   ship->guard        );
@@ -2778,14 +2775,10 @@ void save_ship( SHIP_DATA *ship )
 
 void fread_ship( SHIP_DATA *ship, FILE *fp )
 {
-  char buf[MAX_STRING_LENGTH];
-  const char *word;
-  bool fMatch;
-
   for ( ; ; )
     {
-      word   = feof( fp ) ? "End" : fread_word( fp );
-      fMatch = FALSE;
+      const char *word = feof( fp ) ? "End" : fread_word( fp );
+      bool fMatch = FALSE;
 
       switch ( UPPER(word[0]) )
         {
@@ -2808,7 +2801,6 @@ void fread_ship( SHIP_DATA *ship, FILE *fp )
           KEY( "Chaff",       ship->chaff,      fread_number( fp ) );
           break;
 
-
         case 'D':
           KEY( "Description",   ship->description,      fread_string( fp ) );
           KEY( "DockingPorts",    ship->dockingports,      fread_number( fp ) );
@@ -2818,70 +2810,99 @@ void fread_ship( SHIP_DATA *ship, FILE *fp )
           KEY( "Engineroom",    ship->engineroom,      fread_number( fp ) );
           KEY( "Entrance",      ship->entrance,         fread_number( fp ) );
           KEY( "Energy",      ship->energy,        fread_number( fp ) );
+
           if ( !str_cmp( word, "End" ) )
             {
               if (!ship->home)
                 ship->home              = STRALLOC( "" );
+
               if (!ship->name)
                 ship->name              = STRALLOC( "" );
+
               if (!ship->owner)
                 ship->owner             = STRALLOC( "" );
+
               if (!ship->description)
                 ship->description       = STRALLOC( "" );
+
               if (!ship->copilot)
                 ship->copilot   = STRALLOC( "" );
+
               if (!ship->pilot)
                 ship->pilot     = STRALLOC( "" );
+
               if (ship->shipstate != SHIP_DISABLED)
                 ship->shipstate = SHIP_LANDED;
+
               if (ship->statet0 != LASER_DAMAGED)
                 ship->statet0 = LASER_READY;
+
               if (ship->statei0 != LASER_DAMAGED)
                 ship->statei0 = LASER_READY;
+
               if (ship->statet1 != LASER_DAMAGED)
                 ship->statet1 = LASER_READY;
+
               if (ship->statet2 != LASER_DAMAGED)
                 ship->statet2 = LASER_READY;
+
               if (ship->statet3 != LASER_DAMAGED)
                 ship->statet3 = LASER_READY;
+
               if (ship->statet4 != LASER_DAMAGED)
                 ship->statet4 = LASER_READY;
+
               if (ship->statet5 != LASER_DAMAGED)
                 ship->statet5 = LASER_READY;
+
               if (ship->statet6 != LASER_DAMAGED)
                 ship->statet6 = LASER_READY;
+
               if (ship->statet7 != LASER_DAMAGED)
                 ship->statet7 = LASER_READY;
+
               if (ship->statet8 != LASER_DAMAGED)
                 ship->statet8 = LASER_READY;
+
               if (ship->statet9 != LASER_DAMAGED)
                 ship->statet9 = LASER_READY;
+
               if (ship->statet10 != LASER_DAMAGED)
                 ship->statet10 = LASER_READY;
+
               if (ship->missilestate != MISSILE_DAMAGED)
                 ship->missilestate = MISSILE_READY;
+
               if (ship->shipyard <= 0)
                 ship->shipyard = ROOM_LIMBO_SHIPYARD;
+
               if (ship->lastdoc <= 0)
                 ship->lastdoc = ship->shipyard;
+
               ship->bayopen     = FALSE;
               ship->autopilot   = FALSE;
               ship->hatchopen = FALSE;
               ship->tractored    = NULL;
               ship->tractoredby = NULL;
+
               if (ship->navseat <= 0)
                 ship->navseat = ship->cockpit;
+
               if (ship->gunseat <= 0)
                 ship->gunseat = ship->cockpit;
+
               if (ship->coseat <= 0)
                 ship->coseat = ship->cockpit;
+
               if (ship->pilotseat <= 0)
                 ship->pilotseat = ship->cockpit;
+
               if (ship->missiletype == 1)
                 {
                   ship->torpedos = ship->missiles;    /* for back compatability */
                   ship->missiles = 0;
                 }
+
               ship->spaceobject = NULL;
               ship->in_room=NULL;
               ship->next_in_room=NULL;
@@ -2992,10 +3013,6 @@ void fread_ship( SHIP_DATA *ship, FILE *fp )
           KEY( "Torpedos",      ship->torpedos, fread_number( fp ) );
           break;
 
-        case 'U':
-          KEY( "UpgradeBlock",          ship->upgradeblock,     fread_number( fp ) );
-          break;
-
         case 'V':
           KEY( "Vx",          ship->pos.x,     fread_number( fp ) );
           KEY( "Vy",          ship->pos.y,     fread_number( fp ) );
@@ -3004,8 +3021,7 @@ void fread_ship( SHIP_DATA *ship, FILE *fp )
 
       if ( !fMatch )
         {
-          sprintf( buf, "Fread_ship: no match: %s", word );
-          bug( buf, 0 );
+          bug( "%s: no match: %s", __FUNCTION__, word );
         }
     }
 }
@@ -3017,33 +3033,31 @@ void fread_ship( SHIP_DATA *ship, FILE *fp )
 bool load_ship_file( const char *shipfile )
 {
   char filename[256];
-  SHIP_DATA *ship;
-  FILE *fp;
-  bool found;
+  SHIP_DATA *ship = NULL;
+  FILE *fp = NULL;
+  bool found = FALSE;
 
 #if 0
   bool found, isbus = FALSE;
   int bus;
 #endif
 
-  ROOM_INDEX_DATA *pRoomIndex;
-  CLAN_DATA *clan;
+  ROOM_INDEX_DATA *pRoomIndex = NULL;
+  CLAN_DATA *clan = NULL;
 
   CREATE( ship, SHIP_DATA, 1 );
 
-  found = FALSE;
   sprintf( filename, "%s%s", SHIP_DIR, shipfile );
 
   if ( ( fp = fopen( filename, "r" ) ) != NULL )
     {
-
       found = TRUE;
+
       for ( ; ; )
         {
-          char letter;
-          char *word;
+	  const char *word = NULL;
+          char letter = fread_letter( fp );
 
-          letter = fread_letter( fp );
           if ( letter == '*' )
             {
               fread_to_eol( fp );
@@ -3052,36 +3066,40 @@ bool load_ship_file( const char *shipfile )
 
           if ( letter != '#' )
             {
-              bug( "Load_ship_file: # not found.", 0 );
+              bug( "%s: # not found.", __FUNCTION__ );
               break;
             }
 
           word = fread_word( fp );
+
           if ( !str_cmp( word, "SHIP"   ) )
             {
               fread_ship( ship, fp );
             }
-          else
-            if ( !str_cmp( word, "END"  ) )
+          else if ( !str_cmp( word, "END"  ) )
+	    {
               break;
-            else
-              {
-                char buf[MAX_STRING_LENGTH];
-
-                sprintf( buf, "Load_ship_file: bad section: %s.", word );
-                bug( buf, 0 );
-                break;
-              }
+	    }
+	  else
+	    {
+	      bug( "%s: bad section: %s.", __FUNCTION__, word );
+	      break;
+	    }
         }
+
       fclose( fp );
     }
+
   if ( !(found) )
-    DISPOSE( ship );
+    {
+      DISPOSE( ship );
+    }
   else
     {
       LINK( ship, first_ship, last_ship, next, prev );
 
       ship->docking = SHIP_READY;
+
       if( !(ship->dockingports) )
         ship->dockingports = 0;
 
@@ -3149,8 +3167,6 @@ bool load_ship_file( const char *shipfile )
           ship->autorecharge = FALSE;
           ship->autotrack = FALSE;
           ship->autospeed = FALSE;
-
-
         }
       else if ( ( pRoomIndex = get_room_index( ship->lastdoc ) ) != NULL
                 && ship->sclass != CAPITAL_SHIP && ship->sclass != SHIP_PLATFORM )
@@ -3216,16 +3232,9 @@ bool load_ship_file( const char *shipfile )
  */
 void load_ships( )
 {
-  FILE *fpList;
-  const char *filename;
+  FILE *fpList = NULL;
+  const char *filename = NULL;
   char shiplist[256];
-  char buf[MAX_STRING_LENGTH];
-
-
-  first_ship    = NULL;
-  last_ship     = NULL;
-  first_missile = NULL;
-  last_missile = NULL;
 
   log_string( "Loading ships..." );
 
@@ -3239,7 +3248,6 @@ void load_ships( )
 
   for ( ; ; )
     {
-
       filename = feof( fpList ) ? "$" : fread_word( fpList );
 
       if ( filename[0] == '$' )
@@ -3247,10 +3255,8 @@ void load_ships( )
 
       if ( !load_ship_file( filename ) )
         {
-          sprintf( buf, "Cannot load ship file: %s", filename );
-          bug( buf, 0 );
+          bug( "Cannot load ship file: %s", filename );
         }
-
     }
 
   fclose( fpList );
@@ -3262,6 +3268,7 @@ void resetship( SHIP_DATA *ship )
   ship->shipstate = SHIP_READY;
   ship->docking = SHIP_READY;
   ship->docked = NULL;
+
   if ( (ship->sclass != SHIP_PLATFORM && ship->sclass != CAPITAL_SHIP) && ship->type != MOB_SHIP )
     {
       extract_ship( ship );
@@ -3317,7 +3324,7 @@ void resetship( SHIP_DATA *ship )
 #ifndef NODEATHSHIP
   if ( str_cmp("Trainer", ship->owner) && str_cmp("Public",ship->owner) && ship->type != MOB_SHIP )
     {
-      CLAN_DATA *clan;
+      CLAN_DATA *clan = NULL;
 
       if ( ship->type != MOB_SHIP && (clan = get_clan( ship->owner )) != NULL )
         {
@@ -3360,9 +3367,8 @@ void resetship( SHIP_DATA *ship )
 
 void do_resetship( CHAR_DATA *ch, char *argument )
 {
-  SHIP_DATA *ship;
+  SHIP_DATA *ship = get_ship( argument );
 
-  ship = get_ship( argument );
   if (ship == NULL)
     {
       send_to_char("&RNo such ship!",ch);
@@ -3394,9 +3400,9 @@ void do_setship( CHAR_DATA *ch, char *argument )
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
-  SHIP_DATA *ship;
-  int  tempnum;
-  ROOM_INDEX_DATA *roomindex;
+  SHIP_DATA *ship = NULL;
+  int tempnum = 0;
+  ROOM_INDEX_DATA *roomindex = NULL;
 
   if ( IS_NPC( ch ) )
     {
@@ -3423,6 +3429,7 @@ void do_setship( CHAR_DATA *ch, char *argument )
     }
 
   ship = get_ship( arg1 );
+
   if ( !ship )
     {
       send_to_char( "No such ship.\r\n", ch );
@@ -3431,7 +3438,8 @@ void do_setship( CHAR_DATA *ch, char *argument )
 
   if ( !str_cmp( arg2, "owner" ) )
     {
-      CLAN_DATA *clan;
+      CLAN_DATA *clan = NULL;
+
       if ( ship->type != MOB_SHIP && (clan = get_clan( ship->owner )) != NULL )
         {
           if ( ship->sclass <= SHIP_PLATFORM )
@@ -3439,10 +3447,12 @@ void do_setship( CHAR_DATA *ch, char *argument )
           else
             clan->vehicles--;
         }
+
       STRFREE( ship->owner );
       ship->owner = STRALLOC( argument );
       send_to_char( "Done.\r\n", ch );
       save_ship( ship );
+
       if ( ship->type != MOB_SHIP && (clan = get_clan( ship->owner )) != NULL )
         {
           if ( ship->sclass <= SHIP_PLATFORM )
@@ -3450,6 +3460,7 @@ void do_setship( CHAR_DATA *ch, char *argument )
           else
             clan->vehicles++;
         }
+
       return;
     }
 
@@ -3484,11 +3495,13 @@ void do_setship( CHAR_DATA *ch, char *argument )
     {
       tempnum = atoi(argument);
       roomindex = get_room_index(tempnum);
+
       if (roomindex == NULL)
         {
           send_to_char("That room doesn't exist.\r\n",ch);
           return;
         }
+
       ship->firstroom = tempnum;
       ship->lastroom = tempnum;
       ship->cockpit = tempnum;
@@ -3509,31 +3522,37 @@ void do_setship( CHAR_DATA *ch, char *argument )
     {
       tempnum = atoi(argument);
       roomindex = get_room_index(tempnum);
+
       if (roomindex == NULL)
         {
           send_to_char("That room doesn't exist.\r\n",ch);
           return;
         }
+
       if ( tempnum < ship->firstroom )
         {
           send_to_char("The last room on a ship must be greater than or equal to the first room.\r\n",ch);
           return;
         }
+
       if ( ship->sclass == FIGHTER_SHIP && (tempnum - ship->firstroom) > 5 )
         {
           send_to_char("Starfighters may have up to 5 rooms only.\r\n",ch);
           return;
         }
+
       if ( ship->sclass == MIDSIZE_SHIP && (tempnum - ship->firstroom) > 25 )
         {
           send_to_char("Midships may have up to 25 rooms only.\r\n",ch);
           return;
         }
+
       if ( ship->sclass == CAPITAL_SHIP && (tempnum - ship->firstroom) > 100 )
         {
           send_to_char("Capital Ships may have up to 100 rooms only.\r\n",ch);
           return;
         }
+
       ship->lastroom = tempnum;
       send_to_char( "Done.\r\n", ch );
       save_ship( ship );
@@ -3544,21 +3563,25 @@ void do_setship( CHAR_DATA *ch, char *argument )
     {
       tempnum = atoi(argument);
       roomindex = get_room_index(tempnum);
+
       if (roomindex == NULL)
         {
           send_to_char("That room doesn't exist.\r\n",ch);
           return;
         }
+
       if ( tempnum < ship->firstroom || tempnum > ship->lastroom )
         {
           send_to_char("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
         }
+
       if ( tempnum == ship->turret1 || tempnum == ship->turret2 || tempnum == ship->hanger )
         {
           send_to_char("That room is already being used by another part of the ship\r\n",ch);
           return;
         }
+
       ship->cockpit = tempnum;
       send_to_char( "Done.\r\n", ch );
       save_ship( ship );
@@ -3569,93 +3592,112 @@ void do_setship( CHAR_DATA *ch, char *argument )
     {
       tempnum = atoi(argument);
       roomindex = get_room_index(tempnum);
+
       if (roomindex == NULL)
         {
           send_to_char("That room doesn't exist.\r\n",ch);
           return;
         }
+
       if ( tempnum < ship->firstroom || tempnum > ship->lastroom )
         {
           send_to_char("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
         }
+
       if ( tempnum == ship->turret1 || tempnum == ship->turret2 || tempnum == ship->hanger )
         {
           send_to_char("That room is already being used by another part of the ship\r\n",ch);
           return;
         }
+
       ship->pilotseat = tempnum;
       send_to_char( "Done.\r\n", ch );
       save_ship( ship );
       return;
     }
+
   if ( !str_cmp( arg2, "coseat" ) )
     {
       tempnum = atoi(argument);
       roomindex = get_room_index(tempnum);
+
       if (roomindex == NULL)
         {
           send_to_char("That room doesn't exist.\r\n",ch);
           return;
         }
+
       if ( tempnum < ship->firstroom || tempnum > ship->lastroom )
         {
           send_to_char("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
         }
+
       if ( tempnum == ship->turret1 || tempnum == ship->turret2 || tempnum == ship->hanger )
         {
           send_to_char("That room is already being used by another part of the ship\r\n",ch);
           return;
         }
+
       ship->coseat = tempnum;
       send_to_char( "Done.\r\n", ch );
       save_ship( ship );
       return;
     }
+
   if ( !str_cmp( arg2, "navseat" ) )
     {
       tempnum = atoi(argument);
       roomindex = get_room_index(tempnum);
+
       if (roomindex == NULL)
         {
           send_to_char("That room doesn't exist.\r\n",ch);
           return;
         }
+
       if ( tempnum < ship->firstroom || tempnum > ship->lastroom )
         {
           send_to_char("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
         }
+
       if ( tempnum == ship->turret1 || tempnum == ship->turret2 || tempnum == ship->hanger )
         {
           send_to_char("That room is already being used by another part of the ship\r\n",ch);
           return;
         }
+
       ship->navseat = tempnum;
       send_to_char( "Done.\r\n", ch );
       save_ship( ship );
       return;
     }
+
   if ( !str_cmp( arg2, "gunseat" ) )
     {
       tempnum = atoi(argument);
       roomindex = get_room_index(tempnum);
+
       if (roomindex == NULL)
         {
           send_to_char("That room doesn't exist.\r\n",ch);
           return;
         }
+
       if ( tempnum < ship->firstroom || tempnum > ship->lastroom )
         {
           send_to_char("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
         }
+
       if ( tempnum == ship->turret1 || tempnum == ship->turret2 || tempnum == ship->hanger )
         {
           send_to_char("That room is already being used by another part of the ship\r\n",ch);
           return;
         }
+
       ship->gunseat = tempnum;
       send_to_char( "Done.\r\n", ch );
       save_ship( ship );
@@ -3666,16 +3708,19 @@ void do_setship( CHAR_DATA *ch, char *argument )
     {
       tempnum = atoi(argument);
       roomindex = get_room_index(tempnum);
+
       if (roomindex == NULL)
         {
           send_to_char("That room doesn't exist.\r\n",ch);
           return;
         }
+
       if ( tempnum < ship->firstroom || tempnum > ship->lastroom )
         {
           send_to_char("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
         }
+
       ship->entrance = tempnum;
       send_to_char( "Done.\r\n", ch );
       save_ship( ship );
@@ -3686,27 +3731,32 @@ void do_setship( CHAR_DATA *ch, char *argument )
     {
       tempnum = atoi(argument);
       roomindex = get_room_index(tempnum);
+
       if (roomindex == NULL)
         {
           send_to_char("That room doesn't exist.\r\n",ch);
           return;
         }
+
       if ( tempnum < ship->firstroom || tempnum > ship->lastroom )
         {
           send_to_char("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
         }
+
       if ( ship->sclass == FIGHTER_SHIP )
         {
           send_to_char("Starfighters can't have extra laser turrets.\r\n",ch);
           return;
         }
+
       if ( tempnum == ship->cockpit || tempnum == ship->entrance ||
            tempnum == ship->turret2 || tempnum == ship->hanger || tempnum == ship->engineroom )
         {
           send_to_char("That room is already being used by another part of the ship\r\n",ch);
           return;
         }
+
       ship->turret1 = tempnum;
       send_to_char( "Done.\r\n", ch );
       save_ship( ship );
@@ -3717,21 +3767,25 @@ void do_setship( CHAR_DATA *ch, char *argument )
     {
       tempnum = atoi(argument);
       roomindex = get_room_index(tempnum);
+
       if (roomindex == NULL)
         {
           send_to_char("That room doesn't exist.\r\n",ch);
           return;
         }
+
       if ( tempnum < ship->firstroom || tempnum > ship->lastroom )
         {
           send_to_char("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
         }
+
       if ( ship->sclass == FIGHTER_SHIP )
         {
           send_to_char("Starfighters can't have extra laser turrets.\r\n",ch);
           return;
         }
+
       if ( tempnum == ship->cockpit || tempnum == ship->entrance ||
            tempnum == ship->turret1 || tempnum == ship->hanger || tempnum == ship->engineroom )
         {
@@ -3748,32 +3802,38 @@ void do_setship( CHAR_DATA *ch, char *argument )
     {
       tempnum = atoi(argument);
       roomindex = get_room_index(tempnum);
+
       if (roomindex == NULL)
         {
           send_to_char("That room doesn't exist.\r\n",ch);
           return;
         }
+
       if ( tempnum < ship->firstroom || tempnum > ship->lastroom )
         {
           send_to_char("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
         }
+
       if ( ship->sclass == FIGHTER_SHIP )
         {
           send_to_char("Starfighters can't have extra laser turrets.\r\n",ch);
           return;
         }
+
       if ( ship->sclass == MIDSIZE_SHIP )
         {
           send_to_char("Midships can't have more than 2 laser turrets.\r\n",ch);
           return;
         }
+
       if ( tempnum == ship->cockpit || tempnum == ship->entrance ||
            tempnum == ship->turret1 || tempnum == ship->hanger || tempnum == ship->engineroom )
         {
           send_to_char("That room is already being used by another part of the ship\r\n",ch);
           return;
         }
+
       ship->turret3 = tempnum;
       send_to_char( "Done.\r\n", ch );
       save_ship( ship );
@@ -3784,32 +3844,38 @@ void do_setship( CHAR_DATA *ch, char *argument )
     {
       tempnum = atoi(argument);
       roomindex = get_room_index(tempnum);
+
       if (roomindex == NULL)
         {
           send_to_char("That room doesn't exist.\r\n",ch);
           return;
         }
+
       if ( tempnum < ship->firstroom || tempnum > ship->lastroom )
         {
           send_to_char("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
         }
+
       if ( ship->sclass == FIGHTER_SHIP )
         {
           send_to_char("Starfighters can't have extra laser turrets.\r\n",ch);
           return;
         }
+
       if ( ship->sclass == MIDSIZE_SHIP )
         {
           send_to_char("Midships can't have more than 2 laser turrets.\r\n",ch);
           return;
         }
+
       if ( tempnum == ship->cockpit || tempnum == ship->entrance ||
            tempnum == ship->turret1 || tempnum == ship->hanger || tempnum == ship->engineroom )
         {
           send_to_char("That room is already being used by another part of the ship\r\n",ch);
           return;
         }
+
       ship->turret4 = tempnum;
       send_to_char( "Done.\r\n", ch );
       save_ship( ship );
@@ -3821,69 +3887,80 @@ void do_setship( CHAR_DATA *ch, char *argument )
     {
       tempnum = atoi(argument);
       roomindex = get_room_index(tempnum);
+
       if (roomindex == NULL)
         {
           send_to_char("That room doesn't exist.\r\n",ch);
           return;
         }
+
       if ( tempnum < ship->firstroom || tempnum > ship->lastroom )
         {
           send_to_char("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
         }
+
       if ( ship->sclass == FIGHTER_SHIP )
         {
           send_to_char("Starfighters can't have extra laser turrets.\r\n",ch);
           return;
         }
+
       if ( ship->sclass == MIDSIZE_SHIP )
         {
           send_to_char("Midships can't have more than 2 laser turrets.\r\n",ch);
           return;
         }
+
       if ( tempnum == ship->cockpit || tempnum == ship->entrance ||
            tempnum == ship->turret1 || tempnum == ship->hanger || tempnum == ship->engineroom )
         {
           send_to_char("That room is already being used by another part of the ship\r\n",ch);
           return;
         }
+
       ship->turret5 = tempnum;
       send_to_char( "Done.\r\n", ch );
       save_ship( ship );
       return;
     }
 
-
   if ( !str_cmp( arg2, "turret6" ) )
     {
       tempnum = atoi(argument);
       roomindex = get_room_index(tempnum);
+
       if (roomindex == NULL)
         {
           send_to_char("That room doesn't exist.\r\n",ch);
           return;
         }
+
       if ( tempnum < ship->firstroom || tempnum > ship->lastroom )
         {
           send_to_char("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
         }
+
       if ( ship->sclass == FIGHTER_SHIP )
         {
           send_to_char("Starfighters can't have extra laser turrets.\r\n",ch);
           return;
         }
+
       if ( ship->sclass == MIDSIZE_SHIP )
         {
           send_to_char("Midships can't have more than 2 laser turrets.\r\n",ch);
           return;
         }
+
       if ( tempnum == ship->cockpit || tempnum == ship->entrance ||
            tempnum == ship->turret1 || tempnum == ship->hanger || tempnum == ship->engineroom )
         {
           send_to_char("That room is already being used by another part of the ship\r\n",ch);
           return;
         }
+
       ship->turret6 = tempnum;
       send_to_char( "Done.\r\n", ch );
       save_ship( ship );
@@ -3894,100 +3971,115 @@ void do_setship( CHAR_DATA *ch, char *argument )
     {
       tempnum = atoi(argument);
       roomindex = get_room_index(tempnum);
+
       if (roomindex == NULL)
         {
           send_to_char("That room doesn't exist.\r\n",ch);
           return;
         }
+
       if ( tempnum < ship->firstroom || tempnum > ship->lastroom )
         {
           send_to_char("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
         }
+
       if ( ship->sclass == FIGHTER_SHIP )
         {
           send_to_char("Starfighters can't have extra laser turrets.\r\n",ch);
           return;
         }
+
       if ( ship->sclass == MIDSIZE_SHIP )
         {
           send_to_char("Midships can't have more than 2 laser turrets.\r\n",ch);
           return;
         }
+
       if ( tempnum == ship->cockpit || tempnum == ship->entrance ||
            tempnum == ship->turret1 || tempnum == ship->hanger || tempnum == ship->engineroom )
         {
           send_to_char("That room is already being used by another part of the ship\r\n",ch);
           return;
         }
+
       ship->turret7 = tempnum;
       send_to_char( "Done.\r\n", ch );
       save_ship( ship );
       return;
     }
 
-
   if ( !str_cmp( arg2, "turret8" ) )
     {
       tempnum = atoi(argument);
       roomindex = get_room_index(tempnum);
+
       if (roomindex == NULL)
         {
           send_to_char("That room doesn't exist.\r\n",ch);
           return;
         }
+
       if ( tempnum < ship->firstroom || tempnum > ship->lastroom )
         {
           send_to_char("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
         }
+
       if ( ship->sclass == FIGHTER_SHIP )
         {
           send_to_char("Starfighters can't have extra laser turrets.\r\n",ch);
           return;
         }
+
       if ( ship->sclass == MIDSIZE_SHIP )
         {
           send_to_char("Midships can't have more than 2 laser turrets.\r\n",ch);
           return;
         }
+
       if ( tempnum == ship->cockpit || tempnum == ship->entrance ||
            tempnum == ship->turret1 || tempnum == ship->hanger || tempnum == ship->engineroom )
         {
           send_to_char("That room is already being used by another part of the ship\r\n",ch);
           return;
         }
+
       ship->turret8 = tempnum;
       send_to_char( "Done.\r\n", ch );
       save_ship( ship );
       return;
     }
 
-
   if ( !str_cmp( arg2, "turret9" ) )
     {
       tempnum = atoi(argument);
       roomindex = get_room_index(tempnum);
+
       if (roomindex == NULL)
         {
           send_to_char("That room doesn't exist.\r\n",ch);
           return;
         }
+
       if ( tempnum < ship->firstroom || tempnum > ship->lastroom )
         {
           send_to_char("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
         }
+
       if ( ship->sclass == FIGHTER_SHIP )
         {
           send_to_char("Starfighters can't have extra laser turrets.\r\n",ch);
           return;
         }
+
       if ( ship->sclass == MIDSIZE_SHIP )
         {
           send_to_char("Midships can't have more than 2 laser turrets.\r\n",ch);
           return;
         }
+
       if ( tempnum == ship->cockpit || tempnum == ship->entrance ||
            tempnum == ship->turret1 || tempnum == ship->hanger || tempnum == ship->engineroom )
         {
@@ -4000,69 +4092,78 @@ void do_setship( CHAR_DATA *ch, char *argument )
       return;
     }
 
-
   if ( !str_cmp( arg2, "turret0" ) )
     {
       tempnum = atoi(argument);
       roomindex = get_room_index(tempnum);
+
       if (roomindex == NULL)
         {
           send_to_char("That room doesn't exist.\r\n",ch);
           return;
         }
+
       if ( tempnum < ship->firstroom || tempnum > ship->lastroom )
         {
           send_to_char("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
         }
+
       if ( ship->sclass == FIGHTER_SHIP )
         {
           send_to_char("Starfighters can't have extra laser turrets.\r\n",ch);
           return;
         }
+
       if ( ship->sclass == MIDSIZE_SHIP )
         {
           send_to_char("Midships can't have more than 2 laser turrets.\r\n",ch);
           return;
         }
+
       if ( tempnum == ship->cockpit || tempnum == ship->entrance ||
            tempnum == ship->turret1 || tempnum == ship->hanger || tempnum == ship->engineroom )
         {
           send_to_char("That room is already being used by another part of the ship\r\n",ch);
           return;
         }
+
       ship->turret0 = tempnum;
       send_to_char( "Done.\r\n", ch );
       save_ship( ship );
       return;
     }
 
-
   if ( !str_cmp( arg2, "hanger" ) )
     {
       tempnum = atoi(argument);
       roomindex = get_room_index(tempnum);
+
       if (roomindex == NULL && atoi(argument) != 0 )
         {
           send_to_char("That room doesn't exist.\r\n",ch);
           return;
         }
+
       if (( tempnum < ship->firstroom || tempnum > ship->lastroom ) && (atoi(argument) != 0 ))
         {
           send_to_char("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
         }
+
       if ( tempnum == ship->cockpit || tempnum == ship->entrance ||
            tempnum == ship->turret1 || tempnum == ship->turret2 || tempnum == ship->engineroom )
         {
           send_to_char("That room is already being used by another part of the ship\r\n",ch);
           return;
         }
+
       if ( ship->sclass == FIGHTER_SHIP )
         {
           send_to_char("Starfighters are to small to have hangers for other ships!\r\n",ch);
           return;
         }
+
       ship->hanger = tempnum;
       send_to_char( "Done.\r\n", ch );
       save_ship( ship );
@@ -4073,22 +4174,26 @@ void do_setship( CHAR_DATA *ch, char *argument )
     {
       tempnum = atoi(argument);
       roomindex = get_room_index(tempnum);
+
       if (roomindex == NULL)
         {
           send_to_char("That room doesn't exist.\r\n",ch);
           return;
         }
+
       if ( tempnum < ship->firstroom || tempnum > ship->lastroom )
         {
           send_to_char("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
         }
+
       if ( tempnum == ship->cockpit || tempnum == ship->entrance ||
            tempnum == ship->turret1 || tempnum == ship->turret2 || tempnum == ship->hanger )
         {
           send_to_char("That room is already being used by another part of the ship\r\n",ch);
           return;
         }
+
       ship->engineroom = tempnum;
       send_to_char( "Done.\r\n", ch );
       save_ship( ship );
@@ -4099,11 +4204,13 @@ void do_setship( CHAR_DATA *ch, char *argument )
     {
       tempnum = atoi(argument);
       roomindex = get_room_index(tempnum);
+
       if (roomindex == NULL)
         {
           send_to_char("That room doesn't exist.",ch);
           return;
         }
+
       ship->shipyard = tempnum;
       send_to_char( "Done.\r\n", ch );
       save_ship( ship );
@@ -4114,20 +4221,18 @@ void do_setship( CHAR_DATA *ch, char *argument )
     {
       if ( !str_cmp( argument, "rebel" ) )
         ship->type = SHIP_REBEL;
+      else if ( !str_cmp( argument, "imperial" ) )
+	ship->type = SHIP_IMPERIAL;
+      else if ( !str_cmp( argument, "civilian" ) )
+	ship->type = SHIP_CIVILIAN;
+      else if ( !str_cmp( argument, "mob" ) )
+	ship->type = MOB_SHIP;
       else
-        if ( !str_cmp( argument, "imperial" ) )
-          ship->type = SHIP_IMPERIAL;
-        else
-          if ( !str_cmp( argument, "civilian" ) )
-            ship->type = SHIP_CIVILIAN;
-          else
-            if ( !str_cmp( argument, "mob" ) )
-              ship->type = MOB_SHIP;
-            else
-              {
-                send_to_char( "Ship type must be either: rebel, imperial, civilian or mob.\r\n", ch );
-                return;
-              }
+	{
+	  send_to_char( "Ship type must be either: rebel, imperial, civilian or mob.\r\n", ch );
+	  return;
+	}
+
       send_to_char( "Done.\r\n", ch );
       save_ship( ship );
       return;
@@ -4146,6 +4251,7 @@ void do_setship( CHAR_DATA *ch, char *argument )
     {
       if ( ship->personalname )
         STRFREE( ship->personalname );
+
       ship->personalname = STRALLOC( argument );
       send_to_char( "Done.\r\n", ch );
       save_ship( ship );
@@ -4195,22 +4301,13 @@ void do_setship( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "upgradeblock" ) )
-    {
-      if ( ch->top_level < 105 )
-        return;
-      ship->upgradeblock = atoi(argument);
-      send_to_char( "Done.\r\n", ch );
-      save_ship( ship );
-      return;
-    }
-
   if ( !str_cmp( arg2, "lasers" ) )
     {
       if ( ch->top_level == 105 )
         ship->lasers = URANGE( 0, atoi(argument) , 20 );
       else
         ship->lasers = URANGE( 0, atoi(argument) , 10 );
+
       send_to_char( "Done.\r\n", ch );
       save_ship( ship );
       return;
@@ -4222,6 +4319,7 @@ void do_setship( CHAR_DATA *ch, char *argument )
         ship->ions = URANGE( 0, atoi(argument) , 20 );
       else
         ship->ions = URANGE( 0, atoi(argument) , 10 );
+
       send_to_char( "Done.\r\n", ch );
       save_ship( ship );
       return;
@@ -4265,6 +4363,7 @@ void do_setship( CHAR_DATA *ch, char *argument )
         ship->realspeed = URANGE( 0, atoi(argument) , 255 );
       else
         ship->realspeed = URANGE( 0, atoi(argument) , 150 );
+
       send_to_char( "Done.\r\n", ch );
       save_ship( ship );
       return;
@@ -4292,6 +4391,7 @@ void do_setship( CHAR_DATA *ch, char *argument )
         ship->maxshield = URANGE( 0, atoi(argument) , 30000 );
       else
         ship->maxshield = URANGE( 0, atoi(argument) , 1000 );
+
       send_to_char( "Done.\r\n", ch );
       save_ship( ship );
       return;
@@ -4300,13 +4400,16 @@ void do_setship( CHAR_DATA *ch, char *argument )
   if ( !str_cmp( arg2, "hull" ) )
     {
       if ( ch->top_level == 105 )
-        { ship->hull = URANGE( 1, atoi(argument) , 30000 );
+        {
+	  ship->hull = URANGE( 1, atoi(argument) , 30000 );
           ship->maxhull = URANGE( 1, atoi(argument) , 30000 );
         }
-      else {
-        ship->hull = URANGE( 1, atoi(argument) , 20000 );
-        ship->maxhull = URANGE( 1, atoi(argument) , 20000 );
-      }
+      else
+	{
+	  ship->hull = URANGE( 1, atoi(argument) , 20000 );
+	  ship->maxhull = URANGE( 1, atoi(argument) , 20000 );
+	}
+
       send_to_char( "Done.\r\n", ch );
       save_ship( ship );
       return;
@@ -4348,11 +4451,14 @@ void do_setship( CHAR_DATA *ch, char *argument )
   if ( !str_cmp( arg2, "chaff" ) )
     {
       if ( ch->top_level == 105 )
-        { ship->chaff = URANGE( 0, atoi(argument) , 255 );
+        {
+	  ship->chaff = URANGE( 0, atoi(argument) , 255 );
         }
-      else {
-        ship->chaff = URANGE( 0, atoi(argument) , 25 );
-      }
+      else
+	{
+	  ship->chaff = URANGE( 0, atoi(argument) , 25 );
+	}
+
       send_to_char( "Done.\r\n", ch );
       save_ship( ship );
       return;
@@ -4367,12 +4473,11 @@ void do_setship( CHAR_DATA *ch, char *argument )
     }
 
   do_setship( ch, "" );
-  return;
 }
 
 void do_showship( CHAR_DATA *ch, char *argument )
 {
-  SHIP_DATA *ship;
+  SHIP_DATA *ship = NULL;
 
   if ( IS_NPC( ch ) )
     {
@@ -4387,11 +4492,13 @@ void do_showship( CHAR_DATA *ch, char *argument )
     }
 
   ship = get_ship( argument );
+
   if ( !ship )
     {
       send_to_char( "No such ship.\r\n", ch );
       return;
     }
+
   set_char_color( AT_YELLOW, ch );
   ch_printf( ch, "%s %s : %s (%s)\r\nFilename: %s\r\n",
              ship->type == SHIP_REBEL ? "Rebel Alliance" :
@@ -4513,19 +4620,12 @@ void do_showship( CHAR_DATA *ch, char *argument )
       ch_printf( ch, "NO");
     }
   ch_printf(ch, "  Docking Ports: %d", ship->dockingports );
-  ch_printf(ch,"  Alarm: %d   ",ship->alarm);
-
-  if(ship->upgradeblock)
-    ch_printf( ch, "UpgradeBlock: %d\r\n", ship->upgradeblock );
-  else
-    ch_printf( ch, "UpgradeBlock: NO\r\n" );
-
-  return;
+  ch_printf(ch, "  Alarm: %d   ",ship->alarm);
 }
 
 void do_makeship( CHAR_DATA *ch, char *argument )
 {
-  SHIP_DATA *ship;
+  SHIP_DATA *ship = NULL;
   char arg[MAX_INPUT_LENGTH];
 
   argument = one_argument( argument, arg );
@@ -4561,13 +4661,12 @@ void do_makeship( CHAR_DATA *ch, char *argument )
   ship->filename = str_dup( arg );
   save_ship( ship );
   write_ship_list( );
-
 }
 
 void do_copyship( CHAR_DATA *ch, char *argument )
 {
-  SHIP_DATA *ship;
-  SHIP_DATA *old;
+  SHIP_DATA *ship = NULL;
+  SHIP_DATA *old = NULL;
   char arg[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
 
@@ -4621,12 +4720,12 @@ void do_copyship( CHAR_DATA *ch, char *argument )
 
 void do_ships( CHAR_DATA *ch, char *argument )
 {
-  SHIP_DATA *ship;
+  SHIP_DATA *ship = NULL;
   char buf[MAX_STRING_LENGTH];
   char pilottype[MAX_STRING_LENGTH];
   char pilottype2[MAX_STRING_LENGTH];
-  int count;
-  bool owned, set;
+  int count = 0;
+  bool owned = FALSE, set = FALSE;
 
   if ( !IS_NPC(ch) )
     {
@@ -4660,16 +4759,19 @@ void do_ships( CHAR_DATA *ch, char *argument )
               owned = TRUE;
               set = TRUE;
             }
+
           if( !set && !str_cmp( ship->pilot, ch->name ) )
             {
               strcpy( pilottype2, "Pilot" );
               set = TRUE;
             }
+
           if( !set && !str_cmp( ship->pilot, ch->name ) )
             {
               strcpy( pilottype2, "Co-Pilot" );
               set = TRUE;
             }
+
           if( !set )
             {
               strcpy( pilottype2, "Clan-Pilot" );
@@ -4695,14 +4797,12 @@ void do_ships( CHAR_DATA *ch, char *argument )
         {
           send_to_pager( "There are no ships owned by you.\r\n", ch );
         }
-
     }
-
 
   count =0;
   send_to_pager( "&Y\r\nThe following ships are docked here:\r\n", ch );
-
   send_to_pager( "\r\n&WShip                               Owner          Cost/Rent\r\n", ch );
+
   for ( ship = first_ship; ship; ship = ship->next )
     {
       if ( ship->location != ch->in_room->vnum || ship->sclass > SHIP_PLATFORM)
@@ -4718,13 +4818,14 @@ void do_ships( CHAR_DATA *ch, char *argument )
         set_pager_color( AT_BLUE, ch );
 
       sprintf( buf, "%s (%s)", ship->name, ship->personalname );
-
       pager_printf( ch, "%-35s %-15s", buf, ship->owner );
+
       if (ship->type == MOB_SHIP || ship->sclass == SHIP_PLATFORM )
         {
           pager_printf( ch, "\r\n");
           continue;
         }
+
       if ( !str_cmp(ship->owner, "Public") )
         {
           pager_printf( ch, "%ld to rent.\r\n", get_ship_value(ship)/100 );
@@ -4754,6 +4855,7 @@ void do_speeders( CHAR_DATA *ch, char *argument )
       count = 0;
       send_to_pager( "&YThe following are owned by you or by your organization:\r\n", ch );
       send_to_pager( "\r\n&WVehicle                            Owner\r\n",ch);
+
       for ( ship = first_ship; ship; ship = ship->next )
         {
           if ( str_cmp(ship->owner, ch->name) )
@@ -4761,6 +4863,7 @@ void do_speeders( CHAR_DATA *ch, char *argument )
               if ( !ch->pcdata || !ch->pcdata->clan || str_cmp(ship->owner,ch->pcdata->clan->name) || ship->sclass <= SHIP_PLATFORM )
                 continue;
             }
+
           if ( ship->location != ch->in_room->vnum || ship->sclass <= SHIP_PLATFORM)
             continue;
 
@@ -4772,6 +4875,7 @@ void do_speeders( CHAR_DATA *ch, char *argument )
             set_pager_color( AT_DGREEN, ch );
           else
             set_pager_color( AT_BLUE, ch );
+
           sprintf( buf, "%s(%s)", ship->name, ship->personalname );
           pager_printf( ch, "%-35s%-15s ", buf, ship->owner );
 
@@ -4782,9 +4886,7 @@ void do_speeders( CHAR_DATA *ch, char *argument )
         {
           send_to_pager( "There are no land or air vehicles owned by you.\r\n", ch );
         }
-
     }
-
 
   count =0;
   send_to_pager( "&Y\r\nThe following vehicles are parked here:\r\n", ch );
@@ -4792,7 +4894,7 @@ void do_speeders( CHAR_DATA *ch, char *argument )
   send_to_pager( "\r\n&WVehicle                            Owner          Cost/Rent\r\n", ch );
   for ( ship = first_ship; ship; ship = ship->next )
     {
-      if ( ship->location != ch->in_room->vnum || ship->sclass <= SHIP_PLATFORM)
+      if( ship->location != ch->in_room->vnum || ship->sclass <= SHIP_PLATFORM)
         continue;
 
       if (ship->type == MOB_SHIP)
@@ -4803,7 +4905,6 @@ void do_speeders( CHAR_DATA *ch, char *argument )
         set_pager_color( AT_DGREEN, ch );
       else
         set_pager_color( AT_BLUE, ch );
-
 
       sprintf( buf, "%s(%s)", ship->name, ship->personalname );
       pager_printf( ch, "%-35s%-15s ", buf, ship->owner );
