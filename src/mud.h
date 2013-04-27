@@ -4382,24 +4382,26 @@ extern "C" {
 #endif
   bool         check_pilot( CHAR_DATA *ch , SHIP_DATA *ship );
   bool         is_rental( CHAR_DATA *ch , SHIP_DATA *ship );
-  void         echo_to_ship( int color , SHIP_DATA *ship , char *argument );
-  void         echo_to_cockpit( int color, SHIP_DATA *ship, const char *argument );
-  void         echo_to_system( int color, SHIP_DATA *ship, char *argument,
-                               SHIP_DATA *ignore );
+  void         echo_to_ship( int color, SHIP_DATA *ship,
+			     const char *argument );
+  void         echo_to_cockpit( int color, SHIP_DATA *ship,
+				const char *argument );
+  void         echo_to_system( int color, SHIP_DATA *ship,
+			       const char *argument, SHIP_DATA *ignore );
   bool         extract_ship( SHIP_DATA *ship );
-  bool         ship_to_room( SHIP_DATA *ship , int vnum );
+  bool         ship_to_room( SHIP_DATA *ship, int vnum );
   long         get_ship_value( SHIP_DATA *ship );
-  bool         rent_ship( CHAR_DATA *ch , SHIP_DATA *ship );
+  bool         rent_ship( CHAR_DATA *ch, SHIP_DATA *ship );
   void         damage_ship( SHIP_DATA *ship, SHIP_DATA *assaulter,
                             int min, int max );
   void         damage_ship_ch( SHIP_DATA *ship, int min, int max, CHAR_DATA *ch);
   void         destroy_ship( SHIP_DATA *ship , CHAR_DATA *ch );
-  void         ship_to_spaceobject( SHIP_DATA *ship , SPACE_DATA *spaceobject );
-  void         ship_from_spaceobject( SHIP_DATA *ship , SPACE_DATA *spaceobject);
+  void         ship_to_spaceobject( SHIP_DATA *ship, SPACE_DATA *spaceobject );
+  void         ship_from_spaceobject( SHIP_DATA *ship, SPACE_DATA *spaceobject);
   void         new_missile( SHIP_DATA *ship, SHIP_DATA *target, CHAR_DATA *ch,
                             int missiletype );
   void         extract_missile( MISSILE_DATA *missile );
-  SHIP_DATA * ship_in_room( ROOM_INDEX_DATA *room, char *name );
+  SHIP_DATA * ship_in_room( ROOM_INDEX_DATA *room, const char *name );
   void         transship( SHIP_DATA *ship , int destination );
   bool ship_in_range( SHIP_DATA *ship, SHIP_DATA *target );
   bool ship_in_range_c( SHIP_DATA *ship, SHIP_DATA *target );

@@ -168,16 +168,16 @@ void    fread_spaceobject( SPACE_DATA *spaceobject, FILE *fp );
 bool    load_spaceobject( const char *spaceobjectfile );
 void    write_spaceobject_list( void );
 void    resetship( SHIP_DATA *ship );
-void    approachland( SHIP_DATA *ship, char *arg );
-void    landship( SHIP_DATA *ship, char *arg );
+void    approachland( SHIP_DATA *ship, const char *arg );
+void    landship( SHIP_DATA *ship, const char *arg );
 void    launchship( SHIP_DATA *ship );
 #if 0
 bool    land_bus( SHIP_DATA *ship, int destination );
 void    launch_bus( SHIP_DATA *ship );
 #endif
-void    echo_to_room_dnr( int ecolor, ROOM_INDEX_DATA *room, char *argument );
+void    echo_to_room_dnr( int ecolor, ROOM_INDEX_DATA *room, const char *argument );
 ch_ret drive_ship( CHAR_DATA *ch, SHIP_DATA *ship, EXIT_DATA *exit, int fall );
-void sound_to_ship( SHIP_DATA *ship , char *argument );
+void sound_to_ship( SHIP_DATA *ship , const char *argument );
 void modtrainer( SHIP_DATA *ship, short pclass );
 void makedebris( SHIP_DATA *ship );
 bool space_in_range_h( SHIP_DATA *ship, SPACE_DATA *space);
@@ -185,9 +185,10 @@ bool space_in_range_h( SHIP_DATA *ship, SPACE_DATA *space);
 ROOM_INDEX_DATA *generate_exit( ROOM_INDEX_DATA *in_room, EXIT_DATA **pexit );
 
 
-void echo_to_room_dnr ( int ecolor , ROOM_INDEX_DATA *room ,  char *argument )
+void echo_to_room_dnr( int ecolor, ROOM_INDEX_DATA *room,
+		       const char *argument )
 {
-  CHAR_DATA *vic;
+  CHAR_DATA *vic = NULL;
 
   if ( room == NULL )
     return;
@@ -2156,7 +2157,7 @@ void do_spaceobjects( CHAR_DATA *ch, char *argument )
     }
 }
 
-void echo_to_ship( int color , SHIP_DATA *ship , char *argument )
+void echo_to_ship( int color, SHIP_DATA *ship, const char *argument )
 {
   int room = 0;
 
@@ -2166,7 +2167,7 @@ void echo_to_ship( int color , SHIP_DATA *ship , char *argument )
     }
 }
 
-void sound_to_ship( SHIP_DATA *ship , char *argument )
+void sound_to_ship( SHIP_DATA *ship, const char *argument )
 {
   int roomnum = 0;
 
@@ -2251,9 +2252,10 @@ bool space_in_range_h( SHIP_DATA *ship, SPACE_DATA *object )
     && vector_distance( &object->pos, &ship->hyperpos ) < object->gravity * 5;
 }
 
-void echo_to_system( int color , SHIP_DATA *ship , char *argument , SHIP_DATA *ignore )
+void echo_to_system( int color, SHIP_DATA *ship, const char *argument,
+		     SHIP_DATA *ignore )
 {
-  SHIP_DATA *target;
+  SHIP_DATA *target = NULL;
 
   if (!ship->spaceobject)
     return;
@@ -2372,9 +2374,9 @@ void write_ship_list( )
   fclose( fpout );
 }
 
-SHIP_DATA * ship_in_room( ROOM_INDEX_DATA *room, char *name )
+SHIP_DATA * ship_in_room( ROOM_INDEX_DATA *room, const char *name )
 {
-  SHIP_DATA *ship;
+  SHIP_DATA *ship = NULL;
 
   if ( !room )
     return NULL;
@@ -2387,6 +2389,7 @@ SHIP_DATA * ship_in_room( ROOM_INDEX_DATA *room, char *name )
       if ( !str_cmp( name, ship->name ) )
         return ship;
     }
+
   for ( ship = room->first_ship ; ship ; ship = ship->next_in_room )
     {
       if( ship->personalname )
@@ -2395,6 +2398,7 @@ SHIP_DATA * ship_in_room( ROOM_INDEX_DATA *room, char *name )
       if ( nifty_is_name_prefix( name, ship->name ) )
         return ship;
     }
+
   return NULL;
 }
 
@@ -6422,7 +6426,7 @@ void do_land( CHAR_DATA *ch, char *argument )
   return;
 }
 
-void approachland( SHIP_DATA *ship, char *arg)
+void approachland( SHIP_DATA *ship, const char *arg)
 {
   SPACE_DATA *spaceobj;
   char buf[MAX_STRING_LENGTH];
@@ -6469,7 +6473,7 @@ void approachland( SHIP_DATA *ship, char *arg)
   return;
 }
 
-void landship( SHIP_DATA *ship, char *arg )
+void landship( SHIP_DATA *ship, const char *arg )
 {
   SHIP_DATA *target;
   char buf[MAX_STRING_LENGTH];
