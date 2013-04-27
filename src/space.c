@@ -2767,18 +2767,6 @@ void save_ship( SHIP_DATA *ship )
       fprintf( fp, "Alarm        %d\n",       ship->alarm             );
       fprintf( fp, "UpgradeBlock %d\n", ship->upgradeblock      );
       fprintf( fp, "Ions         %d\n",       ship->ions              );
-      fprintf( fp, "Maxcargo     %d\n",       ship->maxcargo              );
-      fprintf( fp, "Cargo0         %d\n",       ship->cargo0              );
-      fprintf( fp, "Cargo1         %d\n",       ship->cargo1              );
-      fprintf( fp, "Cargo2         %d\n",       ship->cargo2              );
-      fprintf( fp, "Cargo3         %d\n",       ship->cargo3              );
-      fprintf( fp, "Cargo4         %d\n",       ship->cargo4              );
-      fprintf( fp, "Cargo5         %d\n",       ship->cargo5              );
-      fprintf( fp, "Cargo6         %d\n",       ship->cargo6              );
-      fprintf( fp, "Cargo7         %d\n",       ship->cargo7              );
-      fprintf( fp, "Cargo8         %d\n",       ship->cargo8              );
-      fprintf( fp, "Cargo9         %d\n",       ship->cargo9              );
-      fprintf( fp, "CaughtSmug     %d\n",       ship->caughtsmug          );
       fprintf( fp, "Dockingports   %d\n",       ship->dockingports        );
       fprintf( fp, "Guard   %d\n",                   ship->guard        );
       fprintf( fp, "Home         %s~\n",      ship->home              );
@@ -2812,17 +2800,6 @@ void fread_ship( SHIP_DATA *ship, FILE *fp )
           break;
 
         case 'C':
-          KEY( "Cargo0",  ship->cargo0, fread_number( fp ) );
-          KEY( "Cargo1",  ship->cargo1, fread_number( fp ) );
-          KEY( "Cargo2",  ship->cargo2, fread_number( fp ) );
-          KEY( "Cargo3",  ship->cargo3, fread_number( fp ) );
-          KEY( "Cargo4",  ship->cargo4, fread_number( fp ) );
-          KEY( "Cargo5",  ship->cargo5, fread_number( fp ) );
-          KEY( "Cargo6",  ship->cargo6, fread_number( fp ) );
-          KEY( "Cargo7",  ship->cargo7, fread_number( fp ) );
-          KEY( "Cargo8",  ship->cargo8, fread_number( fp ) );
-          KEY( "Cargo9",  ship->cargo9, fread_number( fp ) );
-          KEY( "CaughtSmug",  ship->caughtsmug, fread_number( fp ) );
           KEY( "Cockpit",     ship->cockpit,          fread_number( fp ) );
           KEY( "Coseat",     ship->coseat,          fread_number( fp ) );
           KEY( "Class",       ship->sclass,            fread_number( fp ) );
@@ -2948,7 +2925,6 @@ void fread_ship( SHIP_DATA *ship, FILE *fp )
 
         case 'M':
           KEY( "Manuever",   ship->manuever,      fread_number( fp ) );
-          KEY( "Maxcargo",   ship->maxcargo,      fread_number( fp ) );
           KEY( "Maxmissiles",   ship->maxmissiles,      fread_number( fp ) );
           KEY( "Maxtorpedos",   ship->maxtorpedos,      fread_number( fp ) );
           KEY( "Maxrockets",   ship->maxrockets,      fread_number( fp ) );
@@ -3436,21 +3412,13 @@ void do_setship( CHAR_DATA *ch, char *argument )
       send_to_char( "Usage: setship <ship> <field> <values>\r\n", ch );
       send_to_char( "\r\nField being one of:\r\n", ch );
       send_to_char( "filename name personalname owner copilot pilot description home\r\n", ch );
-      send_to_char( "cockpit entrance turret1 turret2 hanger cargohold\r\n", ch );
+      send_to_char( "cockpit entrance turret1 turret2 hanger\r\n", ch );
       send_to_char( "engineroom firstroom lastroom shipyard\r\n", ch );
       send_to_char( "manuever speed hyperspeed tractorbeam\r\n", ch );
       send_to_char( "lasers missiles shield hull energy chaff\r\n", ch );
       send_to_char( "comm sensor astroarray class torpedos\r\n", ch );
       send_to_char( "pilotseat coseat gunseat navseat rockets alarm\r\n", ch );
-      send_to_char( "ions maxcargo cargo# dockingports guard (0-1)\r\n", ch );
-      send_to_char( "\r\n\r\n", ch );
-      send_to_char( "Cargo types:\r\n", ch );
-      send_to_char( "Numbered 1 - 8\r\n", ch );
-      send_to_char( "food metal equipment lumber medical spice\r\n", ch );
-      send_to_char( "weapons valuables\r\n", ch );
-
-
-
+      send_to_char( "ions dockingports guard (0-1)\r\n", ch );
       return;
     }
 
@@ -4101,37 +4069,6 @@ void do_setship( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "cargohold" ) )
-    {
-      tempnum = atoi(argument);
-      roomindex = get_room_index(tempnum);
-      if (roomindex == NULL)
-        {
-          send_to_char("That room doesn't exist.\r\n",ch);
-          return;
-        }
-      if ( tempnum < ship->firstroom || tempnum > ship->lastroom )
-        {
-          send_to_char("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
-          return;
-        }
-      if ( tempnum == ship->cockpit || tempnum == ship->entrance ||
-           tempnum == ship->turret1 || tempnum == ship->turret2 || tempnum == ship->engineroom )
-        {
-          send_to_char("That room is already being used by another part of the ship\r\n",ch);
-          return;
-        }
-      if ( ship->sclass == FIGHTER_SHIP )
-        {
-          send_to_char("Starfighters are to small to have cargo holds!\r\n",ch);
-          return;
-        }
-      ship->cargohold = tempnum;
-      send_to_char( "Done.\r\n", ch );
-      save_ship( ship );
-      return;
-    }
-
   if ( !str_cmp( arg2, "engineroom" ) )
     {
       tempnum = atoi(argument);
@@ -4289,128 +4226,6 @@ void do_setship( CHAR_DATA *ch, char *argument )
       save_ship( ship );
       return;
     }
-
-  if ( !str_cmp( arg2, "maxcargo" ) )
-    {
-      if ( ch->top_level == 105 )
-        ship->maxcargo = URANGE( 0, atoi(argument) , 30000 );
-      else
-        ship->maxcargo = URANGE( 0, atoi(argument) , 1000 );
-      send_to_char( "Done.\r\n", ch );
-      save_ship( ship );
-      return;
-    }
-
-  if ( !str_cmp( arg2, "cargo1" ) )
-    {
-      if ( ch->top_level == 105 )
-        ship->cargo1 = URANGE( 0, atoi(argument) , 30000 );
-      else
-        ship->cargo1 = URANGE( 0, atoi(argument) , ship->maxcargo );
-      send_to_char( "Done.\r\n", ch );
-      save_ship( ship );
-      return;
-    }
-
-  if ( !str_cmp( arg2, "cargo2" ) )
-    {
-      if ( ch->top_level == 105 )
-        ship->cargo2 = URANGE( 0, atoi(argument) , 30000 );
-      else
-        ship->cargo2 = URANGE( 0, atoi(argument) , ship->maxcargo );
-      send_to_char( "Done.\r\n", ch );
-      save_ship( ship );
-      return;
-    }
-
-  if ( !str_cmp( arg2, "cargo3" ) )
-    {
-      if ( ch->top_level == 105 )
-        ship->cargo3 = URANGE( 0, atoi(argument) , 30000 );
-      else
-        ship->cargo3 = URANGE( 0, atoi(argument) , ship->maxcargo );
-      send_to_char( "Done.\r\n", ch );
-      save_ship( ship );
-      return;
-    }
-
-  if ( !str_cmp( arg2, "cargo4" ) )
-    {
-      if ( ch->top_level == 105 )
-        ship->cargo4 = URANGE( 0, atoi(argument) , 30000 );
-      else
-        ship->cargo4 = URANGE( 0, atoi(argument) , ship->maxcargo );
-      send_to_char( "Done.\r\n", ch );
-      save_ship( ship );
-      return;
-    }
-
-  if ( !str_cmp( arg2, "cargo5" ) )
-    {
-      if ( ch->top_level == 105 )
-        ship->cargo5 = URANGE( 0, atoi(argument) , 30000 );
-      else
-        ship->cargo5 = URANGE( 0, atoi(argument) , ship->maxcargo );
-      send_to_char( "Done.\r\n", ch );
-      save_ship( ship );
-      return;
-    }
-
-  if ( !str_cmp( arg2, "cargo6" ) )
-    {
-      if ( ch->top_level == 105 )
-        ship->cargo6 = URANGE( 0, atoi(argument) , 30000 );
-      else
-        ship->cargo6 = URANGE( 0, atoi(argument) , ship->maxcargo );
-      send_to_char( "Done.\r\n", ch );
-      save_ship( ship );
-      return;
-    }
-
-  if ( !str_cmp( arg2, "cargo7" ) )
-    {
-      if ( ch->top_level == 105 )
-        ship->cargo7 = URANGE( 0, atoi(argument) , 30000 );
-      else
-        ship->cargo7 = URANGE( 0, atoi(argument) , ship->maxcargo );
-      send_to_char( "Done.\r\n", ch );
-      save_ship( ship );
-      return;
-    }
-
-  if ( !str_cmp( arg2, "cargo8" ) )
-    {
-      if ( ch->top_level == 105 )
-        ship->cargo8 = URANGE( 0, atoi(argument) , 30000 );
-      else
-        ship->cargo8 = URANGE( 0, atoi(argument) , ship->maxcargo );
-      send_to_char( "Done.\r\n", ch );
-      save_ship( ship );
-      return;
-    }
-
-  if ( !str_cmp( arg2, "cargo9" ) )
-    {
-      if ( ch->top_level == 105 )
-        ship->cargo9 = URANGE( 0, atoi(argument) , 30000 );
-      else
-        ship->cargo9 = URANGE( 0, atoi(argument) , ship->maxcargo );
-      send_to_char( "Done.\r\n", ch );
-      save_ship( ship );
-      return;
-    }
-
-  if ( !str_cmp( arg2, "cargo0" ) )
-    {
-      if ( ch->top_level == 105 )
-        ship->cargo0 = URANGE( 0, atoi(argument) , 30000 );
-      else
-        ship->cargo0 = URANGE( 0, atoi(argument) , ship->maxcargo );
-      send_to_char( "Done.\r\n", ch );
-      save_ship( ship );
-      return;
-    }
-
 
   if ( !str_cmp( arg2, "class" ) )
     {
@@ -4602,11 +4417,10 @@ void do_showship( CHAR_DATA *ch, char *argument )
   ch_printf( ch, "Firstroom: %d   Lastroom: %d",
              ship->firstroom,
              ship->lastroom);
-  ch_printf( ch, "Cockpit: %d   Entrance: %d   Hanger: %d  CargoHold: %d  Engineroom: %d\r\n",
+  ch_printf( ch, "Cockpit: %d   Entrance: %d   Hanger: %d   Engineroom: %d\r\n",
              ship->cockpit,
              ship->entrance,
              ship->hanger,
-             ship->cargohold,
              ship->engineroom);
   ch_printf( ch, "Pilotseat: %d   Coseat: %d   Navseat: %d  Gunseat: %d\r\n",
              ship->pilotseat,
@@ -4706,9 +4520,6 @@ void do_showship( CHAR_DATA *ch, char *argument )
   else
     ch_printf( ch, "UpgradeBlock: NO\r\n" );
 
-  ch_printf(ch, "Maxcargo: %d  Current Cargo: %d\r\n", ship->maxcargo,
-            ship->cargo0 + ship->cargo1 + ship->cargo2 + ship->cargo3 + ship->cargo4
-            + ship->cargo5 + ship->cargo6 + ship->cargo7 + ship->cargo8 + ship->cargo9 );
   return;
 }
 
@@ -7247,11 +7058,9 @@ void do_info(CHAR_DATA *ch, char *argument )
              target->maxenergy);
   ch_printf( ch, "Maximum Speed: %d   Hyperspeed: %d  Value: %d\r\n",
              target->realspeed, target->hyperspeed, get_ship_value( target ));
-  ch_printf( ch, "Maximum Cargo: %d\r\n", target->maxcargo );
 
   act( AT_PLAIN, "$n checks various gages and displays on the control panel.", ch,
        NULL, argument , TO_ROOM );
-
 }
 
 void do_autorecharge(CHAR_DATA *ch, char *argument )
@@ -7259,7 +7068,6 @@ void do_autorecharge(CHAR_DATA *ch, char *argument )
   int the_chance;
   SHIP_DATA *ship;
   int recharge;
-
 
   if (  (ship = ship_from_cockpit(ch->in_room->vnum))  == NULL )
     {

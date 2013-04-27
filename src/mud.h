@@ -102,7 +102,6 @@ typedef struct  time_info_data          TIME_INFO_DATA;
 typedef struct  hour_min_sec            HOUR_MIN_SEC;
 typedef struct  weather_data            WEATHER_DATA;
 typedef struct  bounty_data             BOUNTY_DATA;
-typedef struct  cargo_data              CARGO_DATA;
 typedef struct  planet_data             PLANET_DATA;
 typedef struct  storeroom               STOREROOM;
 typedef struct  guard_data              GUARD_DATA;
@@ -815,41 +814,6 @@ struct member_list
 #define LASER_DAMAGED    -1
 #define LASER_READY       0
 
-struct cargo_data
-{
-  int cargo0;
-  int cargo1;
-  int cargo2;
-  int cargo3;
-  int cargo4;
-  int cargo5;
-  int cargo6;
-  int cargo7;
-  int cargo8;
-  int cargo9;
-  int orgcargo0;
-  int orgcargo1;
-  int orgcargo2;
-  int orgcargo3;
-  int orgcargo4;
-  int orgcargo5;
-  int orgcargo6;
-  int orgcargo7;
-  int orgcargo8;
-  int orgcargo9;
-  int price0;
-  int price1;
-  int price2;
-  int price3;
-  int price4;
-  int price5;
-  int price6;
-  int price7;
-  int price8;
-  int price9;
-  bool smug;
-};
-
 struct space_data
 {
   SPACE_DATA * next;
@@ -875,7 +839,6 @@ struct space_data
   int          high;
   int          crash;
   bool   trainer;
-  CARGO_DATA  *cargo;
 };
 
 struct  bounty_data
@@ -1093,18 +1056,6 @@ struct ship_data
   bool  opentube;
   SHIP_DATA  *docked;
   short      alarm;
-  int maxcargo;
-  int cargo0;
-  int cargo1;
-  int cargo2;
-  int cargo3;
-  int cargo4;
-  int cargo5;
-  int cargo6;
-  int cargo7;
-  int cargo8;
-  int cargo9;
-  short caughtsmug;
   short ions;
   CHAR_DATA *ch;
   SPACE_DATA *inorbitof;
