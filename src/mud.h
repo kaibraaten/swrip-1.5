@@ -4369,7 +4369,7 @@ extern "C" {
   SHIP_DATA  * ship_from_gunseat( int vnum );
   SHIP_DATA  * ship_from_turret( int vnum );
   SHIP_DATA  * ship_from_engine( int vnum );
-  SHIP_DATA  * ship_from_pilot( char *name );
+  SHIP_DATA  * ship_from_pilot( const char *name );
   SHIP_DATA  * get_ship_here( const char *name , SHIP_DATA *eShip );
   void         showspaceobject( CHAR_DATA *ch , SPACE_DATA *spaceobject );
   void         update_space( void );

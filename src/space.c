@@ -2277,7 +2277,7 @@ void echo_to_system( int color, SHIP_DATA *ship, const char *argument,
 
 long int get_ship_value( SHIP_DATA *ship )
 {
-  long int price;
+  long int price = 0;
 
   if (ship->sclass == FIGHTER_SHIP)
     price = 5000;
@@ -2289,50 +2289,50 @@ long int get_ship_value( SHIP_DATA *ship )
     price = 2000;
 
   if ( ship->sclass <= CAPITAL_SHIP )
-    price += ( ship->manuever*100*(1+ship->sclass) );
+    price += ship->manuever * 100 * ( 1 + ship->sclass );
 
-  price += ( ship->tractorbeam * 100 );
-  price += ( ship->realspeed * 10 );
-  price += ( ship->astro_array *5 );
-  price += ( 5 * ship->maxhull );
-  price += ( 2 * ship->maxenergy );
+  price += ship->tractorbeam * 100;
+  price += ship->realspeed * 10;
+  price += ship->astro_array * 5;
+  price += 5 * ship->maxhull;
+  price += 2 * ship->maxenergy;
 
   if (ship->maxenergy > 5000 )
-    price += ( (ship->maxenergy-5000)*20 ) ;
+    price += (ship->maxenergy-5000) * 20;
 
   if (ship->maxenergy > 10000 )
-    price += ( (ship->maxenergy-10000)*50 );
+    price += (ship->maxenergy-10000) * 50;
 
   if (ship->maxhull > 1000)
-    price += ( (ship->maxhull-1000)*10 );
+    price += (ship->maxhull-1000) * 10;
 
   if (ship->maxhull > 10000)
-    price += ( (ship->maxhull-10000)*20 );
+    price += (ship->maxhull-10000) * 20;
 
   if (ship->maxshield > 200)
-    price += ( (ship->maxshield-200)*50 );
+    price += (ship->maxshield-200) * 50;
 
   if (ship->maxshield > 1000)
-    price += ( (ship->maxshield-1000)*100 );
+    price += (ship->maxshield-1000) * 100;
 
   if (ship->realspeed > 100 )
-    price += ( (ship->realspeed-100)*500 ) ;
+    price += (ship->realspeed-100) * 500;
 
   if (ship->lasers > 5 )
-    price += ( (ship->lasers-5)*500 );
+    price += (ship->lasers-5) * 500;
 
   if (ship->maxshield)
-    price += ( 1000 + 10 * ship->maxshield);
+    price += 1000 + 10 * ship->maxshield;
 
   if (ship->lasers)
-    price += ( 500 + 500 * ship->lasers );
+    price += 500 + 500 * ship->lasers;
 
   if (ship->missiles )
-    price += ( 250 * ship->missiles );
+    price += 250 * ship->missiles;
   else if (ship->torpedos )
-    price += ( 500 * ship->torpedos );
+    price += 500 * ship->torpedos;
   else if (ship->rockets )
-    price += ( 1000 * ship->rockets );
+    price += 1000 * ship->rockets;
 
   if (ship->turret1)
     price += 5000;
@@ -2341,35 +2341,37 @@ long int get_ship_value( SHIP_DATA *ship )
     price += 5000;
 
   if (ship->hyperspeed)
-    price += ( 1000 + ship->hyperspeed * 10 );
+    price += 1000 + ship->hyperspeed * 10;
 
   if (ship->hanger)
-    price += ( ship->sclass == MIDSIZE_SHIP ? 50000 : 100000 );
+    price += ship->sclass == MIDSIZE_SHIP ? 50000 : 100000;
 
   price *= 1.5;
 
   return price;
-
 }
 
 void write_ship_list( )
 {
-  SHIP_DATA *tship;
-  FILE *fpout;
+  SHIP_DATA *tship = NULL;
+  FILE *fpout = NULL;
   char filename[256];
 
   sprintf( filename, "%s%s", SHIP_DIR, SHIP_LIST );
   fpout = fopen( filename, "w" );
+
   if ( !fpout )
     {
       bug( "FATAL: cannot open ship.lst for writing!\r\n", 0 );
       return;
     }
+
   for ( tship = first_ship; tship; tship = tship->next )
     {
       if( tship->sclass != SHIP_DEBRIS )
         fprintf( fpout, "%s\n", tship->filename );
     }
+
   fprintf( fpout, "$\n" );
   fclose( fpout );
 }
@@ -2383,20 +2385,28 @@ SHIP_DATA * ship_in_room( ROOM_INDEX_DATA *room, const char *name )
 
   for ( ship = room->first_ship ; ship ; ship = ship->next_in_room )
     {
-      if( ship->personalname )
-        if ( !str_cmp( name, ship->personalname ) )
-          return ship;
+      if( ship->personalname && !str_cmp( name, ship->personalname ) )
+	{
+	  return ship;
+	}
+
       if ( !str_cmp( name, ship->name ) )
-        return ship;
+	{
+	  return ship;
+	}
     }
 
   for ( ship = room->first_ship ; ship ; ship = ship->next_in_room )
     {
-      if( ship->personalname )
-        if ( nifty_is_name_prefix( name, ship->personalname ) )
-          return ship;
+      if( ship->personalname && nifty_is_name_prefix( name, ship->personalname ) )
+	{
+	  return ship;
+	}
+
       if ( nifty_is_name_prefix( name, ship->name ) )
-        return ship;
+	{
+	  return ship;
+	}
     }
 
   return NULL;
@@ -2407,26 +2417,23 @@ SHIP_DATA * ship_in_room( ROOM_INDEX_DATA *room, const char *name )
  */
 SHIP_DATA *get_ship( const char *name )
 {
-  SHIP_DATA *ship;
-
+  SHIP_DATA *ship = NULL;
 
   for ( ship = first_ship; ship; ship = ship->next )
     {
-      if( ship->personalname )
-        if ( !str_cmp( name, ship->personalname ) )
+      if( ship->personalname && !str_cmp( name, ship->personalname ) )
           return ship;
+
       if ( !str_cmp( name, ship->name ) )
         return ship;
-      if( ship->personalname )
-        if ( nifty_is_name_prefix( name, ship->personalname ) )
+
+      if( ship->personalname && nifty_is_name_prefix( name, ship->personalname ) )
           return ship;
+
       if ( nifty_is_name_prefix( name, ship->name ) )
         return ship;
     }
-  /*  for ( ship = first_ship; ship; ship = ship->next )
-      {
-      }
-  */
+
   return NULL;
 }
 
@@ -2435,114 +2442,117 @@ SHIP_DATA *get_ship( const char *name )
  */
 SHIP_DATA *get_ship_here( const char *name , SHIP_DATA *eShip)
 {
-  SHIP_DATA *ship;
-  int number, count = 0;
+  SHIP_DATA *ship = NULL;
   char arg[MAX_INPUT_LENGTH];
+  int number = number_argument( name, arg );
+  int  count = 0;
 
   if ( eShip == NULL )
     return NULL;
-
-  number = number_argument( name, arg );
 
   for ( ship = first_ship ; ship; ship = ship->next )
     {
       if( !ship_in_range( eShip, ship ) )
         continue;
+
       if( !ship->spaceobject )
         continue;
-      if( ship->personalname )
-        if ( !str_cmp( arg, ship->personalname ) )
-          {
-            count++;
-            if( !number || count == number )
-              return ship;
-          }
+
+      if( ship->personalname && !str_cmp( arg, ship->personalname ) )
+	{
+	  count++;
+
+	  if( !number || count == number )
+	    return ship;
+	}
+
       if ( !str_cmp( arg, ship->name ) )
         {
           count++;
+
           if( !number ||  count == number )
             return ship;
         }
     }
+
   count = 0;
+
   for ( ship = first_ship; ship; ship = ship->next )
     {
       if( !ship_in_range( eShip, ship ) )
         continue;
-      if( ship->personalname )
-        if ( nifty_is_name_prefix( arg, ship->personalname ) )
+
+      if( ship->personalname && nifty_is_name_prefix( arg, ship->personalname ) )
           {
             count++;
+
             if(  !number || count == number )
               return ship;
           }
+
       if ( nifty_is_name_prefix( arg, ship->name ) )
         {
           count++;
+
           if(  !number || count == number )
             return ship;
         }
     }
+
   return NULL;
 }
-
 
 /*
  * Get pointer to ship structure from pilot name.
  */
-SHIP_DATA *ship_from_pilot( char *name )
+SHIP_DATA *ship_from_pilot( const char *name )
 {
-  SHIP_DATA *ship;
+  SHIP_DATA *ship = NULL;
 
   for ( ship = first_ship; ship; ship = ship->next )
     if ( !str_cmp( name, ship->pilot ) )
       return ship;
+
   if ( !str_cmp( name, ship->copilot ) )
     return ship;
+
   if ( !str_cmp( name, ship->owner ) )
     return ship;
-  return NULL;
-}
 
-/*
- * Get pointer to # ship structure from pilot name.
- */
-SHIP_DATA *ship_from_pilot_num( char *name, int num )
-{
-  SHIP_DATA *ship;
-  int count = 1;
-
-  if ( !num )
-    num = 1;
-  for ( ship = first_ship; ship; ship = ship->next )
-    {
-      if ( !str_cmp( name, ship->pilot ) && count == num )
-        return ship;
-      if ( !str_cmp( name, ship->copilot ) && count == num )
-        return ship;
-      if ( !str_cmp( name, ship->owner ) && count == num )
-        return ship;
-      count++;
-    }
   return NULL;
 }
 
 /*
  * Get pointer to ship structure from cockpit, turret, or entrance ramp vnum.
  */
-
 SHIP_DATA *ship_from_cockpit( int vnum )
 {
   SHIP_DATA *ship;
 
   for ( ship = first_ship; ship; ship = ship->next )
-    if ( vnum == ship->cockpit || vnum == ship->turret1 || vnum == ship->turret2
-         || vnum == ship->turret3 || vnum == ship->turret4 || vnum == ship->turret5
-         || vnum == ship->turret6 || vnum == ship->turret7 || vnum == ship->turret8
-         || vnum == ship->turret9 || vnum == ship->turret0 || vnum == ship->hanger
-         || vnum == ship->pilotseat || vnum == ship->coseat || vnum == ship->navseat
-         || vnum == ship->gunseat  || vnum == ship->engineroom )
-      return ship;
+    {
+      if ( vnum == ship->cockpit
+	   || vnum == ship->turret1
+	   || vnum == ship->turret2
+	   || vnum == ship->turret3
+	   || vnum == ship->turret4
+	   || vnum == ship->turret5
+	   || vnum == ship->turret6
+	   || vnum == ship->turret7
+	   || vnum == ship->turret8
+	   || vnum == ship->turret9
+	   || vnum == ship->turret0
+	   || vnum == ship->hanger
+	   || vnum == ship->pilotseat
+	   || vnum == ship->coseat
+	   || vnum == ship->navseat
+	   || vnum == ship->gunseat
+	   || vnum == ship->engineroom )
+	{
+	  return ship;
+	}
+    }
+
   return NULL;
 }
 
