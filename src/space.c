@@ -2527,7 +2527,7 @@ SHIP_DATA *ship_from_pilot( const char *name )
  */
 SHIP_DATA *ship_from_cockpit( int vnum )
 {
-  SHIP_DATA *ship;
+  SHIP_DATA *ship = NULL;
 
   for ( ship = first_ship; ship; ship = ship->next )
     {
@@ -2558,47 +2558,51 @@ SHIP_DATA *ship_from_cockpit( int vnum )
 
 SHIP_DATA *ship_from_pilotseat( int vnum )
 {
-  SHIP_DATA *ship;
+  SHIP_DATA *ship = NULL;
 
   for ( ship = first_ship; ship; ship = ship->next )
     if ( vnum == ship->pilotseat )
       return ship;
+
   return NULL;
 }
 
 SHIP_DATA *ship_from_coseat( int vnum )
 {
-  SHIP_DATA *ship;
+  SHIP_DATA *ship = NULL;
 
   for ( ship = first_ship; ship; ship = ship->next )
     if ( vnum == ship->coseat )
       return ship;
+
   return NULL;
 }
 
 SHIP_DATA *ship_from_navseat( int vnum )
 {
-  SHIP_DATA *ship;
+  SHIP_DATA *ship = NULL;
 
   for ( ship = first_ship; ship; ship = ship->next )
     if ( vnum == ship->navseat )
       return ship;
+
   return NULL;
 }
 
 SHIP_DATA *ship_from_gunseat( int vnum )
 {
-  SHIP_DATA *ship;
+  SHIP_DATA *ship = NULL;
 
   for ( ship = first_ship; ship; ship = ship->next )
     if ( vnum == ship->gunseat )
       return ship;
+
   return NULL;
 }
 
 SHIP_DATA *ship_from_engine( int vnum )
 {
-  SHIP_DATA *ship;
+  SHIP_DATA *ship = NULL;
 
   for ( ship = first_ship; ship; ship = ship->next )
     {
@@ -2621,47 +2625,60 @@ SHIP_DATA *ship_from_engine( int vnum )
 
 SHIP_DATA *ship_from_turret( int vnum )
 {
-  SHIP_DATA *ship;
+  SHIP_DATA *ship = NULL;
 
   for ( ship = first_ship; ship; ship = ship->next )
-    if ( vnum == ship->gunseat || vnum == ship->turret1 || vnum == ship->turret2
-         || vnum == ship->turret3 || vnum == ship->turret4 || vnum == ship->turret5
-         || vnum == ship->turret6 || vnum == ship->turret7 || vnum == ship->turret8
-         || vnum == ship->turret9 || vnum == ship->turret0 )
-      return ship;
+    {
+      if ( vnum == ship->gunseat
+	   || vnum == ship->turret1
+	   || vnum == ship->turret2
+	   || vnum == ship->turret3
+	   || vnum == ship->turret4
+	   || vnum == ship->turret5
+	   || vnum == ship->turret6
+	   || vnum == ship->turret7
+	   || vnum == ship->turret8
+	   || vnum == ship->turret9
+	   || vnum == ship->turret0 )
+	{
+	  return ship;
+	}
+    }
+
   return NULL;
 }
 
 SHIP_DATA *ship_from_entrance( int vnum )
 {
-  SHIP_DATA *ship;
+  SHIP_DATA *ship = NULL;
 
   for ( ship = first_ship; ship; ship = ship->next )
     if ( vnum == ship->entrance )
       return ship;
+
   return NULL;
 }
 
 SHIP_DATA *ship_from_hanger( int vnum )
 {
-  SHIP_DATA *ship;
+  SHIP_DATA *ship = NULL;
 
   for ( ship = first_ship; ship; ship = ship->next )
     if ( vnum == ship->hanger )
       return ship;
+
   return NULL;
 }
 
 
 void save_ship( SHIP_DATA *ship )
 {
-  FILE *fp;
+  FILE *fp = NULL;
   char filename[256];
-  char buf[MAX_STRING_LENGTH];
 
   if ( !ship )
     {
-      bug( "save_ship: null ship pointer!", 0 );
+      bug( "%s: null ship pointer!", __FUNCTION__ );
       return;
     }
 
@@ -2671,8 +2688,7 @@ void save_ship( SHIP_DATA *ship )
 
   if ( !ship->filename || ship->filename[0] == '\0' )
     {
-      sprintf( buf, "save_ship: %s has no filename", ship->name );
-      bug( buf, 0 );
+      bug( "%s: %s has no filename", __FUNCTION__, ship->name );
       return;
     }
 
@@ -2680,24 +2696,23 @@ void save_ship( SHIP_DATA *ship )
 
   if ( ( fp = fopen( filename, "w" ) ) == NULL )
     {
-      bug( "save_ship: fopen", 0 );
+      bug( "%s: fopen", __FUNCTION__ );
       perror( filename );
     }
   else
     {
       fprintf( fp, "#SHIP\n" );
-      fprintf( fp, "Name         %s~\n",        ship->name              );
-      fprintf( fp, "PersonalName         %s~\n",        ship->personalname              );
-      fprintf( fp, "Filename     %s~\n",        ship->filename          );
-      fprintf( fp, "Description  %s~\n",        ship->description       );
-      fprintf( fp, "Owner        %s~\n",        ship->owner             );
-      fprintf( fp, "Pilot        %s~\n",      ship->pilot             );
-      fprintf( fp, "Copilot      %s~\n",      ship->copilot           );
+      fprintf( fp, "Name         %s~\n",         ship->name         );
+      fprintf( fp, "PersonalName         %s~\n", ship->personalname );
+      fprintf( fp, "Filename     %s~\n",         ship->filename     );
+      fprintf( fp, "Description  %s~\n",         ship->description  );
+      fprintf( fp, "Owner        %s~\n",         ship->owner        );
+      fprintf( fp, "Pilot        %s~\n",         ship->pilot        );
+      fprintf( fp, "Copilot      %s~\n",         ship->copilot      );
       fprintf( fp, "Class        %d\n", ship->sclass             );
       fprintf( fp, "Tractorbeam  %d\n", ship->tractorbeam       );
       fprintf( fp, "Shipyard     %d\n", ship->shipyard          );
       fprintf( fp, "Hanger       %d\n", ship->hanger            );
-      fprintf( fp, "Cargohold       %d\n",      ship->cargohold         );
       fprintf( fp, "Vx           %.0f\n",       ship->pos.x                );
       fprintf( fp, "Vy           %.0f\n",       ship->pos.y                );
       fprintf( fp, "Vz           %.0f\n",       ship->pos.z                );
@@ -2763,112 +2778,14 @@ void save_ship( SHIP_DATA *ship )
       fprintf( fp, "Cargo7         %d\n",       ship->cargo7              );
       fprintf( fp, "Cargo8         %d\n",       ship->cargo8              );
       fprintf( fp, "Cargo9         %d\n",       ship->cargo9              );
-      fprintf( fp, "CaughtSmug     %d\n",       ship->caughtsmug              );
+      fprintf( fp, "CaughtSmug     %d\n",       ship->caughtsmug          );
       fprintf( fp, "Dockingports   %d\n",       ship->dockingports        );
       fprintf( fp, "Guard   %d\n",                   ship->guard        );
       fprintf( fp, "Home         %s~\n",      ship->home              );
       fprintf( fp, "End\n"                                              );
     }
 
-  /*
-    if ( ship->cargohold )
-    {
-    OBJ_DATA *contents;
-    ROOM_INDEX_DATA *cargoroom;
-    cargoroom = get_room_index(ship->cargohold);
-
-    if ( cargoroom != NULL )
-    {
-    contents = cargoroom->last_content;
-    //          fprintf( fp, "#CARGO\n" );
-
-    if (contents)
-    fwrite_obj(NULL, contents, fp, 0, OS_CARRY );
-    fprintf( fp, "END\n" );
-    fprintf( fp, "#END\n"                                               );
-    }
-    }
-  */
-
   fclose( fp );
-}
-
-
-/*
- * Read in actual ship data.
- */
-void fread_cargohold( SHIP_DATA *ship, FILE *fp )
-{
-
-  ROOM_INDEX_DATA *storeroom = get_room_index(ship->cargohold);
-  OBJ_DATA *obj;
-  OBJ_DATA *obj_next;
-
-  if( !storeroom )
-    return;
-
-  for ( obj = storeroom->first_content; obj; obj = obj_next )
-    {
-      obj_next = obj->next_content;
-      extract_obj( obj );
-    }
-
-  if ( fp != NULL )
-    {
-      OBJ_DATA *tobj, *tobj_next;
-
-      rset_supermob(storeroom);
-
-      for ( ; ; )
-        {
-          char letter;
-          char *word;
-
-          letter = fread_letter( fp );
-          if ( letter == '*' )
-            {
-              fread_to_eol( fp );
-              continue;
-            }
-
-          if ( letter != '#' )
-            {
-              bug( "fread_cargohold: # not found.", 0 );
-              bug( &letter, 0 );
-              bug( ship->name, 0 );
-              break;
-            }
-
-          word = fread_word( fp );
-          if ( !str_cmp( word, "OBJECT" ) )     /* Objects      */
-            {
-              bug( "Read an object!.", 0 );
-              fread_obj  ( supermob, fp, OS_CARRY );
-            }
-          else
-            if ( !str_cmp( word, "END"    ) )   /* Done         */
-              break;
-            else
-              {
-                bug( "fread_cargohold: bad section.", 0 );
-                bug( ship->name, 0 );
-                break;
-              }
-        }
-
-      fclose( fp );
-
-      for ( tobj = supermob->first_carrying; tobj; tobj = tobj_next )
-        {
-          tobj_next = tobj->next_content;
-          obj_from_char( tobj );
-          if( tobj->item_type != ITEM_MONEY )
-            obj_to_room( tobj, storeroom );
-        }
-
-      release_supermob();
-
-    }
 }
 
 void fread_ship( SHIP_DATA *ship, FILE *fp )
@@ -2905,7 +2822,6 @@ void fread_ship( SHIP_DATA *ship, FILE *fp )
           KEY( "Cargo7",  ship->cargo7, fread_number( fp ) );
           KEY( "Cargo8",  ship->cargo8, fread_number( fp ) );
           KEY( "Cargo9",  ship->cargo9, fread_number( fp ) );
-          KEY( "Cargohold",  ship->cargohold, fread_number( fp ) );
           KEY( "CaughtSmug",  ship->caughtsmug, fread_number( fp ) );
           KEY( "Cockpit",     ship->cockpit,          fread_number( fp ) );
           KEY( "Coseat",     ship->coseat,          fread_number( fp ) );

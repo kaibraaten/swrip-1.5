@@ -1063,7 +1063,6 @@ struct ship_data
   int         shipyard;
   int         entrance;
   int         hanger;
-  int         cargohold;
   int         engineroom;
   int         firstroom;
   int         lastroom;
