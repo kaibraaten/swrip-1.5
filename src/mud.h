@@ -530,44 +530,44 @@ struct  frc_app_type
 /*
  * Languages -- Altrag
  */
-#define LANG_COMMON      BV00  /* Human base language */
-#define LANG_WOOKIEE     BV01
-#define LANG_TWI_LEK     BV02
-#define LANG_RODIAN      BV03
-#define LANG_HUTT        BV04
-#define LANG_MON_CALAMARI   BV05
-#define LANG_NOGHRI      BV06
-#define LANG_SHISTAVANEN BV06
-#define LANG_EWOK        BV07
-#define LANG_ITHORIAN    BV08
-#define LANG_GOTAL       BV09
-#define LANG_DEVARONIAN  BV10
-#define LANG_BARABEL       BV11
-#define LANG_DROID       BV11
-#define LANG_FIRRERREO   BV12
-#define LANG_SPIRITUAL  BV12
-#define LANG_BOTHAN     BV13
-#define LANG_MAGICAL    BV13
-#define LANG_GAMORREAN   BV14
-#define LANG_TOGORIAN         BV15
-#define LANG_GOD        BV15
-#define LANG_KUBAZ     BV16
-#define LANG_ANCIENT   BV16
-#define LANG_JAWA        BV17
-#define LANG_CLAN              BV18
-#define LANG_ADARIAN        BV19
-#define LANG_VERPINE        BV20
-#define LANG_DEFEL       BV21
-#define LANG_TRANDOSHAN  BV22
-#define LANG_CHADRA_FAN  BV23
-#define LANG_QUARREN     BV24
-#define LANG_SULLUSTAN   BV25
-#define LANG_FALLEEN     BV26
-#define LANG_BINARY      BV27
-#define LANG_YEVETHAN    BV28
-#define LANG_GAND        BV29
-#define LANG_DUROS       BV30
-#define LANG_COYNITE     BV31
+#define LANG_COMMON       BV00  /* Human base language */
+#define LANG_WOOKIEE      BV01
+#define LANG_TWI_LEK      BV02
+#define LANG_RODIAN       BV03
+#define LANG_HUTT         BV04
+#define LANG_MON_CALAMARI BV05
+#define LANG_NOGHRI       BV06
+#define LANG_SHISTAVANEN  BV06
+#define LANG_EWOK         BV07
+#define LANG_ITHORIAN     BV08
+#define LANG_GOTAL        BV09
+#define LANG_DEVARONIAN   BV10
+#define LANG_BARABEL      BV11
+#define LANG_DROID        BV11
+#define LANG_FIRRERREO    BV12
+#define LANG_SPIRITUAL    BV12
+#define LANG_BOTHAN       BV13
+#define LANG_MAGICAL      BV13
+#define LANG_GAMORREAN    BV14
+#define LANG_TOGORIAN     BV15
+#define LANG_GOD          BV15
+#define LANG_KUBAZ        BV16
+#define LANG_ANCIENT      BV16
+#define LANG_JAWA         BV17
+#define LANG_CLAN         BV18
+#define LANG_ADARIAN      BV19
+#define LANG_VERPINE      BV20
+#define LANG_DEFEL        BV21
+#define LANG_TRANDOSHAN   BV22
+#define LANG_CHADRA_FAN   BV23
+#define LANG_QUARREN      BV24
+#define LANG_SULLUSTAN    BV25
+#define LANG_FALLEEN      BV26
+#define LANG_BINARY       BV27
+#define LANG_YEVETHAN     BV28
+#define LANG_GAND         BV29
+#define LANG_DUROS        BV30
+#define LANG_COYNITE      BV31
 
 #define LANG_UNKNOWN        0  /* Anything that doesnt fit a category */
 #define VALID_LANGS    ( LANG_COMMON | LANG_WOOKIEE | LANG_TWI_LEK | LANG_RODIAN \
@@ -587,13 +587,9 @@ struct  frc_app_type
 #define TO_VICT             2
 #define TO_CHAR             3
 
-
-
 /*
  * Real action "TYPES" for act.
  */
-
-
 #define AT_BLACK            0
 #define AT_BLOOD            1
 #define AT_DGREEN           2
@@ -1009,8 +1005,8 @@ struct ship_data
   int         cockpit;
   int         turret1;
   int         turret2;
-  int                    turret3;
-  int                    turret4;
+  int         turret3;
+  int         turret4;
   int         turret5;
   int         turret6;
   int         turret7;
