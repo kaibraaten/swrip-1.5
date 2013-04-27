@@ -4248,8 +4248,9 @@ extern "C" {
   /* act_wiz.c */
   void    close_area( AREA_DATA *pArea );
   RID * find_location( CHAR_DATA *ch, char *arg );
-  void    echo_to_room( short AT_COLOR, ROOM_INDEX_DATA *room, char *argument );
-  void  echo_to_all( short AT_COLOR, char *argument, short tar );
+  void    echo_to_room( short AT_COLOR, ROOM_INDEX_DATA *room,
+			const char *argument );
+  void  echo_to_all( short AT_COLOR, const char *argument, short tar );
   void          get_reboot_string( void );
   void  free_social( SOCIALTYPE *social );
   void  add_social( SOCIALTYPE *social );
@@ -4351,12 +4352,12 @@ extern "C" {
   int get_spelltarget( const char *txt  );
 
   /* space.c */
-  SH        *  get_ship( char *name );
+  SHIP_DATA  * get_ship( const char *name );
   void         load_ships( void );
   void         save_ship( SHIP_DATA *ship );
   void         load_space( void );
   void         save_spaceobject( SPACE_DATA *spaceobject );
-  SPACE_DATA * spaceobject_from_name( char *name );
+  SPACE_DATA * spaceobject_from_name( const char *name );
   SPACE_DATA * spaceobject_from_vnum( int vnum );
   SHIP_DATA  * ship_from_obj( int vnum );
   SHIP_DATA  * ship_from_entrance( int vnum );
@@ -4369,7 +4370,7 @@ extern "C" {
   SHIP_DATA  * ship_from_turret( int vnum );
   SHIP_DATA  * ship_from_engine( int vnum );
   SHIP_DATA  * ship_from_pilot( char *name );
-  SHIP_DATA  * get_ship_here( char *name , SHIP_DATA *eShip );
+  SHIP_DATA  * get_ship_here( const char *name , SHIP_DATA *eShip );
   void         showspaceobject( CHAR_DATA *ch , SPACE_DATA *spaceobject );
   void         update_space( void );
   void         quest_update( void );
@@ -4382,7 +4383,7 @@ extern "C" {
   bool         check_pilot( CHAR_DATA *ch , SHIP_DATA *ship );
   bool         is_rental( CHAR_DATA *ch , SHIP_DATA *ship );
   void         echo_to_ship( int color , SHIP_DATA *ship , char *argument );
-  void         echo_to_cockpit( int color , SHIP_DATA *ship , char *argument );
+  void         echo_to_cockpit( int color, SHIP_DATA *ship, const char *argument );
   void         echo_to_system( int color, SHIP_DATA *ship, char *argument,
                                SHIP_DATA *ignore );
   bool         extract_ship( SHIP_DATA *ship );

@@ -556,7 +556,7 @@ void do_pardon( CHAR_DATA *ch, char *argument )
 }
 
 
-void echo_to_all( short AT_COLOR, char *argument, short tar )
+void echo_to_all( short AT_COLOR, const char *argument, short tar )
 {
   DESCRIPTOR_DATA *d;
 
@@ -579,7 +579,6 @@ void echo_to_all( short AT_COLOR, char *argument, short tar )
           send_to_char( "\r\n",   d->character );
         }
     }
-  return;
 }
 
 void do_echo( CHAR_DATA *ch, char *argument )
@@ -629,7 +628,7 @@ void do_echo( CHAR_DATA *ch, char *argument )
   echo_to_all ( color, argument, target );
 }
 
-void echo_to_room( short AT_COLOR, ROOM_INDEX_DATA *room, char *argument )
+void echo_to_room( short AT_COLOR, ROOM_INDEX_DATA *room, const char *argument )
 {
   CHAR_DATA *vic;
 

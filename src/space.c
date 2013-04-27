@@ -38,14 +38,14 @@
 #include "mud.h"
 #include "vector3_aux.h"
 
-SHIP_DATA * first_ship;
-SHIP_DATA * last_ship;
+SHIP_DATA *first_ship = NULL;
+SHIP_DATA *last_ship = NULL;
 
-MISSILE_DATA * first_missile;
-MISSILE_DATA * last_missile;
+MISSILE_DATA *first_missile = NULL;
+MISSILE_DATA *last_missile = NULL;
 
-SPACE_DATA * first_spaceobject;
-SPACE_DATA * last_spaceobject;
+SPACE_DATA *first_spaceobject = NULL;
+SPACE_DATA *last_spaceobject = NULL;
 
 int baycount = 0;
 
@@ -476,17 +476,14 @@ void update_bus( )
 
 void move_ships( )
 {
-  SHIP_DATA *ship;
-  MISSILE_DATA *missile;
-  MISSILE_DATA *m_next;
-  SHIP_DATA *target;
-  SPACE_DATA *spaceobj;
+  SHIP_DATA *ship = NULL;
+  MISSILE_DATA *missile = NULL;
+  MISSILE_DATA *m_next = NULL;
+  SHIP_DATA *target = NULL;
+  SPACE_DATA *spaceobj = NULL;
   char buf[MAX_STRING_LENGTH];
-  CHAR_DATA *ch;
+  CHAR_DATA *ch = NULL;
   bool ch_found = FALSE;
-
-  /* TODO: Assigned to further down, but never used. Check it out.*/
-  /*int speed = 0;*/
 
   for( spaceobj = first_spaceobject; spaceobj; spaceobj = spaceobj->next )
     {
@@ -621,32 +618,6 @@ void move_ships( )
 
       for( spaceobj = first_spaceobject; spaceobj; spaceobj = spaceobj->next )
         {
-          /*          if ( ship->sclass != SHIP_PLATFORM && !autofly(ship) && ship->currspeed < 50)
-                      {
-                      if ( (spaceobj->gravity > 50) && str_cmp(spaceobj->name,"") && space_in_range( ship, spaceobj ) )
-                      {
-                      if (ship->vx >= spaceobj->xpos + 1 || ship->vx <= spaceobj->xpos - 1 )
-                      ship->vx -= URANGE(-3,(spaceobj->gravity)/(ship->vx - spaceobj->xpos)/2,3);
-                      if (ship->vy >= spaceobj->ypos + 1 || ship->vy <= spaceobj->ypos - 1 )
-                      ship->vy -= URANGE(-3,(spaceobj->gravity)/(ship->vy - spaceobj->ypos)/2,3);
-                      if (ship->vz >= spaceobj->zpos + 1 || ship->vz <= spaceobj->zpos - 1 )
-                      ship->vz -= URANGE(-3,(spaceobj->gravity)/(ship->vz - spaceobj->zpos)/2,3);
-                      }
-                      }
-          */
-          /*
-            for ( target = ship->spaceobject->first_ship; target; target = target->next_in_spaceobject)
-            {
-            if ( target != ship &&
-            abs(ship->vx - target->vx) < 1 &&
-            abs(ship->vy - target->vy) < 1 &&
-            abs(ship->vz - target->vz) < 1 )
-            {
-            ship->collision = target->maxhull;
-            target->collision = ship->maxhull;
-            }
-            }
-          */
           if ( spaceobj->type == SPACE_SUN && spaceobj->name
 	       && str_cmp(spaceobj->name,"")
 	       && ship_distance_to_spaceobject( ship, spaceobj ) < 10 )
@@ -675,14 +646,6 @@ void move_ships( )
 		}
             }
 
-          /*
-            echo_to_cockpit( AT_BLOOD+AT_BLINK, ship, "You fly directly into the sun.");
-            sprintf( buf , "%s flys directly into %s!", ship->name, ship->spaceobject->star2);
-            echo_to_system( AT_ORANGE , ship , buf , NULL );
-            destroy_ship(ship , NULL);
-            continue;
-          */
-
           if ( ship->currspeed > 0 )
             {
               if ( spaceobj->type >= SPACE_PLANET
@@ -709,7 +672,7 @@ void move_ships( )
       if (ship->shipstate == SHIP_HYPERSPACE)
         {
 	  Vector3 tmp;
-          float dist, origdist;
+          float dist = 0, origdist = 0;
 
           ship->hyperdistance -= ship->hyperspeed;
 
@@ -811,9 +774,6 @@ void move_ships( )
                   STRFREE( ship->home );
                   ship->home = STRALLOC( ship->spaceobject->name );
 
-		  /* TODO: Never used. Check this out! */
-                  /*speed = ship->hyperspeed;*/
-
 		  vector_set( &ship->jump,
 			      ship->pos.x + ship->trackvector.x,
 			      ship->pos.y + ship->trackvector.y,
@@ -890,20 +850,11 @@ void move_ships( )
       if( ship->pos.z > MAX_COORD)
         ship->pos.z = MAX_COORD_S;
     }
-  /*
-    if (ship->collision)
-    {
-    echo_to_cockpit( AT_WHITE+AT_BLINK , ship,  "You have collided with another ship!" );
-    echo_to_ship( AT_RED , ship , "A loud explosion shakes the ship violently!" );
-    damage_ship( ship , NULL, ship->collision , ship->collision );
-    ship->collision = 0;
-    }
-  */
 }
 
-void recharge_ships( )
+void recharge_ships()
 {
-  SHIP_DATA *ship;
+  SHIP_DATA *ship = NULL;
   char buf[MAX_STRING_LENGTH];
   bool closeem = FALSE;
   int origthe_chance = 100;
@@ -1117,7 +1068,9 @@ void recharge_ships( )
                                         }
                                     }
                                 }
+
                               ship->statet0++;
+
                               if ( autofly(target) && !target->target0)
                                 {
                                   sprintf( buf , "You are being targetted by %s." , target->name);
@@ -1131,18 +1084,17 @@ void recharge_ships( )
                 }
             }
         }
-
     }
 }
 
-void update_space( )
+void update_space()
 {
-  SHIP_DATA *ship;
-  SHIP_DATA *target;
+  SHIP_DATA *ship = NULL;
+  SHIP_DATA *target = NULL;
   char buf[MAX_STRING_LENGTH];
-  int too_close, target_too_close;
-  SPACE_DATA *spaceobj;
-  int recharge;
+  int too_close = 0, target_too_close = 0;
+  SPACE_DATA *spaceobj = NULL;
+  int recharge = 0;
 
   for ( ship = first_ship; ship; ship = ship->next )
     {
@@ -1178,13 +1130,16 @@ void update_space( )
           echo_to_room( AT_YELLOW, get_room_index(ship->pilotseat), "Manuever complete.");
           ship->shipstate = SHIP_READY;
         }
+
       if (ship->shipstate == SHIP_BUSY_2)
         ship->shipstate = SHIP_BUSY_3;
+
       if (ship->shipstate == SHIP_BUSY)
         ship->shipstate = SHIP_BUSY_2;
 
       if (ship->shipstate == SHIP_LAND_2)
         landship( ship , ship->dest );
+
       if (ship->shipstate == SHIP_LAND)
         {
           approachland( ship, ship->dest );
@@ -1193,11 +1148,13 @@ void update_space( )
 
       if (ship->shipstate == SHIP_LAUNCH_2)
         launchship( ship );
+
       if (ship->shipstate == SHIP_LAUNCH)
         ship->shipstate = SHIP_LAUNCH_2;
 
       if (ship->docking == SHIP_DOCK_2)
         dockship( ship->ch , ship );
+
       if (ship->docking == SHIP_DOCK)
         ship->docking = SHIP_DOCK_2;
 
@@ -1206,9 +1163,9 @@ void update_space( )
 
       if (ship->autorecharge && ship->maxshield > ship->shield && ship->energy > 100)
         {
-          recharge  = UMIN( ship->maxshield-ship->shield, 10 + ship->sclass*10 );
-          recharge  = UMIN( recharge , ship->energy/2 -100 );
-          recharge  = UMAX( 1, recharge );
+          recharge = UMIN( ship->maxshield-ship->shield, 10 + ship->sclass*10 );
+          recharge = UMIN( recharge , ship->energy/2 -100 );
+          recharge = UMAX( 1, recharge );
           ship->shield += recharge;
           ship->energy -= recharge;
         }
@@ -1221,7 +1178,6 @@ void update_space( )
           ship->shield += recharge;
           ship->energy -= ( recharge*2 + recharge * ship->sclass );
         }
-
 
       if (ship->shield > 0)
         {
@@ -1243,6 +1199,7 @@ void update_space( )
                    ship->pos.x , ship->pos.y, ship->pos.z );
           echo_to_room_dnr( AT_BLUE , get_room_index(ship->pilotseat),  "  Coords: " );
           echo_to_room( AT_LBLUE , get_room_index(ship->pilotseat),  buf );
+
           if ( ship->pilotseat != ship->coseat )
             {
               sprintf( buf, "%d",
@@ -1274,6 +1231,7 @@ void update_space( )
             {
               if( (target->docked && target->docked == ship) || (ship->docked &&  ship->docked == target ) )
                 continue;
+
               if ( ship->docked && target->docked &&
                    target->docked == ship->docked )
                 continue;
@@ -1530,37 +1488,36 @@ void update_space( )
 
       save_ship( ship );
     }
-
 }
 
-
-
-void write_spaceobject_list( )
+void write_spaceobject_list()
 {
-  SPACE_DATA *tspaceobject;
-  FILE *fpout;
+  SPACE_DATA *tspaceobject = NULL;
+  FILE *fpout = NULL;
   char filename[256];
 
   sprintf( filename, "%s%s", SPACE_DIR, SPACE_LIST );
   fpout = fopen( filename, "w" );
+
   if ( !fpout )
     {
       bug( "FATAL: cannot open space.lst for writing!\r\n", 0 );
       return;
     }
+
   for ( tspaceobject = first_spaceobject; tspaceobject; tspaceobject = tspaceobject->next )
     fprintf( fpout, "%s\n", tspaceobject->filename );
+
   fprintf( fpout, "$\n" );
   fclose( fpout );
 }
 
-
 /*
  * Get pointer to space structure from spaceobject name.
  */
-SPACE_DATA *spaceobject_from_name( char *name )
+SPACE_DATA *spaceobject_from_name( const char *name )
 {
-  SPACE_DATA *spaceobject;
+  SPACE_DATA *spaceobject = NULL;
 
   for ( spaceobject = first_spaceobject; spaceobject; spaceobject = spaceobject->next )
     if ( !str_cmp( name, spaceobject->name ) )
@@ -1607,26 +1564,23 @@ SPACE_DATA *spaceobject_from_vnum( int vnum )
   return NULL;
 }
 
-
 /*
  * Save a spaceobject's data to its data file
  */
 void save_spaceobject( SPACE_DATA *spaceobject )
 {
-  FILE *fp;
+  FILE *fp = NULL;
   char filename[256];
-  char buf[MAX_STRING_LENGTH];
 
   if ( !spaceobject )
     {
-      bug( "save_spaceobject: null pointer!", 0 );
+      bug( "%s: null pointer!", __FUNCTION__ );
       return;
     }
 
   if ( !spaceobject->filename || spaceobject->filename[0] == '\0' )
     {
-      sprintf( buf, "save_spaceobject: %s has no filename", spaceobject->name );
-      bug( buf, 0 );
+      bug( "%s: %s has no filename", __FUNCTION__, spaceobject->name );
       return;
     }
 
@@ -1634,35 +1588,35 @@ void save_spaceobject( SPACE_DATA *spaceobject )
 
   if ( ( fp = fopen( filename, "w" ) ) == NULL )
     {
-      bug( "save_spaceobject: fopen", 0 );
+      bug( "%s: fopen", __FUNCTION__ );
       perror( filename );
     }
   else
     {
       fprintf( fp, "#SPACE\n" );
-      fprintf( fp, "Name         %s~\n",        spaceobject->name       );
-      fprintf( fp, "Filename     %s~\n",        spaceobject->filename   );
-      fprintf( fp, "Type         %d~\n",        spaceobject->type       );
-      fprintf( fp, "Locationa      %s~\n",      spaceobject->locationa  );
-      fprintf( fp, "Locationb      %s~\n",      spaceobject->locationb  );
-      fprintf( fp, "Locationc      %s~\n",      spaceobject->locationc  );
-      fprintf( fp, "Doca          %d\n",        spaceobject->doca       );
-      fprintf( fp, "Docb          %d\n",      spaceobject->docb       );
-      fprintf( fp, "Docc          %d\n",      spaceobject->docc       );
-      fprintf( fp, "Seca          %d\n",        spaceobject->seca       );
-      fprintf( fp, "Secb          %d\n",      spaceobject->secb       );
-      fprintf( fp, "Secc          %d\n",      spaceobject->secc       );
-      fprintf( fp, "Gravity     %d\n",       spaceobject->gravity    );
-      fprintf( fp, "Xpos          %.0f\n",       spaceobject->pos.x    );
-      fprintf( fp, "Ypos          %.0f\n",       spaceobject->pos.y    );
-      fprintf( fp, "Zpos          %.0f\n",       spaceobject->pos.z    );
-      fprintf( fp, "HX            %.0f\n",       spaceobject->head.x      );
-      fprintf( fp, "HY            %.0f\n",       spaceobject->head.y      );
-      fprintf( fp, "HZ            %.0f\n",       spaceobject->head.z      );
-      fprintf( fp, "SP            %d\n",       spaceobject->speed   );
-      fprintf( fp, "Trainer       %d\n",       spaceobject->trainer    );
-      fprintf( fp, "End\n\n"                                            );
-      fprintf( fp, "#END\n"                                             );
+      fprintf( fp, "Name         %s~\n",   spaceobject->name      );
+      fprintf( fp, "Filename     %s~\n",   spaceobject->filename  );
+      fprintf( fp, "Type         %d~\n",   spaceobject->type      );
+      fprintf( fp, "Locationa      %s~\n", spaceobject->locationa );
+      fprintf( fp, "Locationb      %s~\n", spaceobject->locationb );
+      fprintf( fp, "Locationc      %s~\n", spaceobject->locationc );
+      fprintf( fp, "Doca          %d\n",   spaceobject->doca      );
+      fprintf( fp, "Docb          %d\n",   spaceobject->docb      );
+      fprintf( fp, "Docc          %d\n",   spaceobject->docc      );
+      fprintf( fp, "Seca          %d\n",   spaceobject->seca      );
+      fprintf( fp, "Secb          %d\n",   spaceobject->secb      );
+      fprintf( fp, "Secc          %d\n",   spaceobject->secc      );
+      fprintf( fp, "Gravity     %d\n",     spaceobject->gravity   );
+      fprintf( fp, "Xpos          %.0f\n", spaceobject->pos.x     );
+      fprintf( fp, "Ypos          %.0f\n", spaceobject->pos.y     );
+      fprintf( fp, "Zpos          %.0f\n", spaceobject->pos.z     );
+      fprintf( fp, "HX            %.0f\n", spaceobject->head.x    );
+      fprintf( fp, "HY            %.0f\n", spaceobject->head.y    );
+      fprintf( fp, "HZ            %.0f\n", spaceobject->head.z    );
+      fprintf( fp, "SP            %d\n",   spaceobject->speed     );
+      fprintf( fp, "Trainer       %d\n",   spaceobject->trainer   );
+      fprintf( fp, "End\n\n" );
+      fprintf( fp, "#END\n" );
     }
 
   fclose( fp );
@@ -1674,15 +1628,10 @@ void save_spaceobject( SPACE_DATA *spaceobject )
  */
 void fread_spaceobject( SPACE_DATA *spaceobject, FILE *fp )
 {
-  char buf[MAX_STRING_LENGTH];
-  const char *word;
-  bool fMatch;
-
-
   for ( ; ; )
     {
-      word   = feof( fp ) ? "End" : fread_word( fp );
-      fMatch = FALSE;
+      const char *word = feof( fp ) ? "End" : fread_word( fp );
+      bool fMatch = FALSE;
 
       switch ( UPPER(word[0]) )
         {
@@ -1696,7 +1645,6 @@ void fread_spaceobject( SPACE_DATA *spaceobject, FILE *fp )
           KEY( "Docb",  spaceobject->docb,          fread_number( fp ) );
           KEY( "Docc",  spaceobject->docc,          fread_number( fp ) );
           break;
-
 
         case 'E':
           if ( !str_cmp( word, "End" ) )
@@ -1736,24 +1684,13 @@ void fread_spaceobject( SPACE_DATA *spaceobject, FILE *fp )
         case 'N':
           KEY( "Name",  spaceobject->name,              fread_string( fp ) );
           break;
-          /*
-            case 'P':
-            break;
 
-            KEY( "Star1",       spaceobject->star1,     fread_string( fp ) );
-            KEY( "Star2",       spaceobject->star2,     fread_string( fp ) );
-            KEY( "S1x",  spaceobject->s1x,          fread_number( fp ) );
-            KEY( "S1y",  spaceobject->s1y,          fread_number( fp ) );
-            KEY( "S1z",  spaceobject->s1z,          fread_number( fp ) );
-            KEY( "S2x",  spaceobject->s2x,          fread_number( fp ) );
-            KEY( "S2y",  spaceobject->s2y,          fread_number( fp ) );
-            KEY( "S2z",  spaceobject->s2z,          fread_number( fp ) );
-          */
         case 'S':
           KEY( "Seca", spaceobject->seca,               fread_number( fp ) );
           KEY( "Secb", spaceobject->secb,               fread_number( fp ) );
           KEY( "Secc", spaceobject->secc,               fread_number( fp ) );
           KEY( "SP", spaceobject->speed,                fread_number( fp ) );
+
         case 'T':
           KEY( "Trainer",  spaceobject->trainer,     fread_number( fp ) );
           KEY( "Type",  spaceobject->type,             fread_number( fp ) );
@@ -1771,8 +1708,7 @@ void fread_spaceobject( SPACE_DATA *spaceobject, FILE *fp )
 
       if ( !fMatch )
         {
-          sprintf( buf, "Fread_spaceobject: no match: %s", word );
-          bug( buf, 0 );
+          bug( "Fread_spaceobject: no match: %s", word );
         }
     }
 }
@@ -1784,26 +1720,23 @@ void fread_spaceobject( SPACE_DATA *spaceobject, FILE *fp )
 bool load_spaceobject( const char *spaceobjectfile )
 {
   char filename[256];
-  SPACE_DATA *spaceobject;
-  FILE *fp;
-  bool found;
+  SPACE_DATA *spaceobject = NULL;
+  FILE *fp = NULL;
+  bool found = FALSE;
 
   CREATE( spaceobject, SPACE_DATA, 1 );
-
-  found = FALSE;
   sprintf( filename, "%s%s", SPACE_DIR, spaceobjectfile );
 
   if ( ( fp = fopen( filename, "r" ) ) != NULL )
     {
-
       found = TRUE;
       LINK( spaceobject, first_spaceobject, last_spaceobject, next, prev );
+
       for ( ; ; )
         {
-          char letter;
-          char *word;
+	  const char *word = NULL;
+          char letter = fread_letter( fp );
 
-          letter = fread_letter( fp );
           if ( letter == '*' )
             {
               fread_to_eol( fp );
@@ -1817,22 +1750,21 @@ bool load_spaceobject( const char *spaceobjectfile )
             }
 
           word = fread_word( fp );
+
           if ( !str_cmp( word, "SPACE"  ) )
             {
               fread_spaceobject( spaceobject, fp );
               break;
             }
-          else
-            if ( !str_cmp( word, "END"  ) )
+          else if ( !str_cmp( word, "END"  ) )
+	    {
               break;
-            else
-              {
-                char buf[MAX_STRING_LENGTH];
-
-                sprintf( buf, "Load_spaceobject_file: bad section: %s.", word );
-                bug( buf, 0 );
-                break;
-              }
+	    }
+	  else
+	    {
+	      bug( "Load_spaceobject_file: bad section: %s.", word );
+	      break;
+	    }
         }
       fclose( fp );
     }
@@ -1846,19 +1778,12 @@ bool load_spaceobject( const char *spaceobjectfile )
 /*
  * Load in all the spaceobject files.
  */
-void load_space( )
+void load_space()
 {
-  FILE *fpList;
-  const char *filename;
+  FILE *fpList = NULL;
   char spaceobjectlist[256];
-  char buf[MAX_STRING_LENGTH];
-
-
-  first_spaceobject     = NULL;
-  last_spaceobject      = NULL;
 
   log_string( "Loading space..." );
-
   sprintf( spaceobjectlist, "%s%s", SPACE_DIR, SPACE_LIST );
 
   if ( ( fpList = fopen( spaceobjectlist, "r" ) ) == NULL )
@@ -1869,15 +1794,14 @@ void load_space( )
 
   for ( ; ; )
     {
-      filename = feof( fpList ) ? "$" : fread_word( fpList );
+      const char *filename = feof( fpList ) ? "$" : fread_word( fpList );
+
       if ( filename[0] == '$' )
         break;
 
-
       if ( !load_spaceobject( filename ) )
         {
-          sprintf( buf, "Cannot load spaceobject file: %s", filename );
-          bug( buf, 0 );
+          bug( "Cannot load spaceobject file: %s", filename );
         }
     }
 
@@ -1912,12 +1836,12 @@ void do_setspaceobject( CHAR_DATA *ch, char *argument )
     }
 
   spaceobject = spaceobject_from_name( arg1 );
+
   if ( !spaceobject )
     {
       send_to_char( "No such spaceobject.\r\n", ch );
       return;
     }
-
 
   if ( !str_cmp( arg2, "trainer" ) )
     {
@@ -1930,6 +1854,7 @@ void do_setspaceobject( CHAR_DATA *ch, char *argument )
       save_spaceobject( spaceobject );
       return;
     }
+
   if ( !str_cmp( arg2, "seca" ) )
     {
       if ( spaceobject->seca )
@@ -1941,6 +1866,7 @@ void do_setspaceobject( CHAR_DATA *ch, char *argument )
       save_spaceobject( spaceobject );
       return;
     }
+
   if ( !str_cmp( arg2, "secb" ) )
     {
       if ( spaceobject->secb )
@@ -1952,6 +1878,7 @@ void do_setspaceobject( CHAR_DATA *ch, char *argument )
       save_spaceobject( spaceobject );
       return;
     }
+
   if ( !str_cmp( arg2, "secc" ) )
     {
       if ( spaceobject->secc )
@@ -1963,6 +1890,7 @@ void do_setspaceobject( CHAR_DATA *ch, char *argument )
       save_spaceobject( spaceobject );
       return;
     }
+
   if ( !str_cmp( arg2, "type" ) )
     {
       int sotype = 0;
@@ -2004,6 +1932,7 @@ void do_setspaceobject( CHAR_DATA *ch, char *argument )
       save_spaceobject( spaceobject );
       return;
     }
+
   if ( !str_cmp( arg2, "docb" ) )
     {
       spaceobject->docb = atoi( argument );
@@ -2011,6 +1940,7 @@ void do_setspaceobject( CHAR_DATA *ch, char *argument )
       save_spaceobject( spaceobject );
       return;
     }
+
   if ( !str_cmp( arg2, "docc" ) )
     {
       spaceobject->docc = atoi( argument );
@@ -2127,7 +2057,6 @@ void do_setspaceobject( CHAR_DATA *ch, char *argument )
     }
 
   do_setspaceobject( ch, "" );
-  return;
 }
 
 void showspaceobject( CHAR_DATA *ch , SPACE_DATA *spaceobject )
@@ -2146,14 +2075,11 @@ void showspaceobject( CHAR_DATA *ch , SPACE_DATA *spaceobject )
              spaceobject->docb, spaceobject->locationb);
   ch_printf( ch, "     docc: %5d (%s)\r\n",
              spaceobject->docc, spaceobject->locationc);
-  return;
 }
 
 void do_showspaceobject( CHAR_DATA *ch, char *argument )
 {
-  SPACE_DATA *spaceobject;
-
-  spaceobject = spaceobject_from_name( argument );
+  SPACE_DATA *spaceobject = spaceobject_from_name( argument );
 
   if ( spaceobject == NULL )
     send_to_char("&RNo such spaceobject.\r\n",ch);
@@ -2178,11 +2104,11 @@ void do_makespaceobject( CHAR_DATA *ch, char *argument )
   CREATE( spaceobject, SPACE_DATA, 1 );
   LINK( spaceobject, first_spaceobject, last_spaceobject, next, prev );
 
-  spaceobject->name             = STRALLOC( argument );
+  spaceobject->name      = STRALLOC( argument );
 
-  spaceobject->locationa            = STRALLOC( "" );
-  spaceobject->locationb            = STRALLOC( "" );
-  spaceobject->locationc            = STRALLOC( "" );
+  spaceobject->locationa = STRALLOC( "" );
+  spaceobject->locationb = STRALLOC( "" );
+  spaceobject->locationc = STRALLOC( "" );
 
   argument = one_argument( argument, arg );
   sprintf( filename, "%s" , strlower(arg) );
@@ -2202,21 +2128,24 @@ void do_spaceobjects( CHAR_DATA *ch, char *argument )
     {
       if( spaceobject->type > SPACE_SUN )
         continue;
+
       if ( !(spaceobject->trainer && (!IS_GOD(ch))) )
         ch_printf( ch, "%s\r\n", spaceobject->name );
+
       count++;
     }
 
   ch_printf( ch, "\r\n" );
-
   set_char_color( AT_NOTE, ch );
 
   for ( spaceobject = first_spaceobject; spaceobject; spaceobject = spaceobject->next )
     {
       if( spaceobject->type != SPACE_PLANET )
         continue;
+
       if ( !(spaceobject->trainer && (!IS_GOD(ch))) )
         ch_printf( ch, "%s\r\n", spaceobject->name );
+
       count++;
     }
 
@@ -2229,25 +2158,25 @@ void do_spaceobjects( CHAR_DATA *ch, char *argument )
 
 void echo_to_ship( int color , SHIP_DATA *ship , char *argument )
 {
-  int room;
+  int room = 0;
 
   for ( room = ship->firstroom ; room <= ship->lastroom ;room++ )
     {
       echo_to_room( color , get_room_index(room) , argument );
     }
-
 }
 
 void sound_to_ship( SHIP_DATA *ship , char *argument )
 {
-  int roomnum;
-  ROOM_INDEX_DATA *room;
-  CHAR_DATA *vic;
+  int roomnum = 0;
 
   for ( roomnum = ship->firstroom ; roomnum <= ship->lastroom ;roomnum++ )
     {
-      room = get_room_index( roomnum );
-      if ( room == NULL ) continue;
+      ROOM_INDEX_DATA *room = get_room_index( roomnum );
+      CHAR_DATA *vic = NULL;
+
+      if ( room == NULL )
+	continue;
 
       for ( vic = room->first_person; vic; vic = vic->next_in_room )
         {
@@ -2255,21 +2184,20 @@ void sound_to_ship( SHIP_DATA *ship , char *argument )
             send_to_char( argument, vic );
         }
     }
-
 }
 
-void echo_to_docked( int color , SHIP_DATA *ship , char *argument )
+void echo_to_docked( int color, SHIP_DATA *ship, const char *argument )
 {
-  SHIP_DATA *dship;
+  SHIP_DATA *dship = NULL;
 
   for( dship = first_ship; dship; dship = dship->next )
     if( dship->docked && dship->docked == ship)
       echo_to_cockpit( color, dship, argument );
 }
 
-void echo_to_cockpit( int color , SHIP_DATA *ship , char *argument )
+void echo_to_cockpit( int color, SHIP_DATA *ship, const char *argument )
 {
-  int room;
+  int room = 0;
 
   for ( room = ship->firstroom ; room <= ship->lastroom ;room++ )
     {
@@ -2283,7 +2211,6 @@ void echo_to_cockpit( int color , SHIP_DATA *ship , char *argument )
            || room == ship->turret9 || room == ship->turret0)
         echo_to_room( color , get_room_index(room) , argument );
     }
-
 }
 
 bool ship_in_range( SHIP_DATA *ship, SHIP_DATA *target )
@@ -2474,7 +2401,7 @@ SHIP_DATA * ship_in_room( ROOM_INDEX_DATA *room, char *name )
 /*
  * Get pointer to ship structure from ship name.
  */
-SHIP_DATA *get_ship( char *name )
+SHIP_DATA *get_ship( const char *name )
 {
   SHIP_DATA *ship;
 
@@ -2502,7 +2429,7 @@ SHIP_DATA *get_ship( char *name )
 /*
  * Checks if ships in a spaceobject and returns poiner if it is.
  */
-SHIP_DATA *get_ship_here( char *name , SHIP_DATA *eShip)
+SHIP_DATA *get_ship_here( const char *name , SHIP_DATA *eShip)
 {
   SHIP_DATA *ship;
   int number, count = 0;
