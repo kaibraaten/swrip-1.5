@@ -375,14 +375,6 @@ Log         0
 End
 
 #COMMAND
-Name        bomb~
-Code        do_bomb
-Position    5
-Level       0
-Log         0
-End
-
-#COMMAND
 Name        bounties~
 Code        do_bounties
 Position    0
