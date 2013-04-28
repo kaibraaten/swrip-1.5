@@ -1159,14 +1159,6 @@ Log         0
 End
 
 #COMMAND
-Name        fly~
-Code        do_fly
-Position    5
-Level       0
-Log         0
-End
-
-#COMMAND
 Name        foldarea~
 Code        do_foldarea
 Position    0
