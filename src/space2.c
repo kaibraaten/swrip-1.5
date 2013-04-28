@@ -232,8 +232,7 @@ void do_openbay( CHAR_DATA *ch, char *argument )
   echo_to_cockpit( AT_YELLOW , ship, "Bay Doors Open");
   send_to_char("You open the bay doors", ch);
   sprintf( buf ,"%s's bay doors open." , ship->name );
-  echo_to_system( AT_YELLOW, ship, buf , NULL );
-
+  echo_to_nearby_ships( AT_YELLOW, ship, buf , NULL );
 }
 
 void do_closebay( CHAR_DATA *ch, char *argument )
@@ -271,8 +270,7 @@ void do_closebay( CHAR_DATA *ch, char *argument )
   echo_to_cockpit( AT_YELLOW , ship, "Bay Doors close");
   send_to_char("You close the bay doors.", ch);
   sprintf( buf ,"%s's bay doors close." , ship->name );
-  echo_to_system( AT_YELLOW, ship, buf , NULL );
-
+  echo_to_nearby_ships( AT_YELLOW, ship, buf , NULL );
 }
 
 #if 0
@@ -1357,7 +1355,7 @@ void do_request(CHAR_DATA *ch, char *argument)
   act(AT_PLAIN,"$n flips a switch on the control panel.",ch,NULL,argument,TO_ROOM);
   eShip->bayopen = TRUE;
   sprintf( buf ,"%s's bay doors open." , eShip->name );
-  echo_to_system( AT_YELLOW, ship, buf , NULL );
+  echo_to_nearby_ships( AT_YELLOW, ship, buf , NULL );
 }
 
 void do_shiptrack( CHAR_DATA *ch, char *argument)
@@ -1656,7 +1654,7 @@ void do_override(CHAR_DATA *ch, char *argument)
       send_to_char( "&GBays Close. Confirmed.\r\n", ch);
       echo_to_cockpit( AT_YELLOW , eShip , "Bays Open");
       sprintf( buf ,"%s's bay doors close." , eShip->name );
-      echo_to_system( AT_YELLOW, eShip, buf , NULL );
+      echo_to_nearby_ships( AT_YELLOW, eShip, buf , NULL );
       return;
     }
 
@@ -1666,7 +1664,7 @@ void do_override(CHAR_DATA *ch, char *argument)
       send_to_char( "&GBraking Thrusters. Confirmed.\r\n", ch);
       echo_to_cockpit( AT_GREY , eShip , "Braking thrusters fire and the ship stops");
       sprintf( buf ,"%s decelerates." , eShip->name );
-      echo_to_system( AT_GREY, eShip, buf , NULL );
+      echo_to_nearby_ships( AT_GREY, eShip, buf , NULL );
       return;
     }
 
@@ -1694,7 +1692,7 @@ void do_override(CHAR_DATA *ch, char *argument)
       act(AT_PLAIN,"$n flips a switch on the control panel.",ch,NULL,argument,TO_ROOM);
       eShip->bayopen = TRUE;
       sprintf( buf ,"%s's bay doors open." , eShip->name );
-      echo_to_system( AT_YELLOW, ship, buf , NULL );
+      echo_to_nearby_ships( AT_YELLOW, ship, buf , NULL );
       return;
     }
 

@@ -3471,7 +3471,6 @@ DECLARE_DO_FUN( do_arm );
 DECLARE_DO_FUN( do_chaff );
 DECLARE_DO_FUN( do_clan_donate );
 DECLARE_DO_FUN( do_clan_withdraw );
-DECLARE_DO_FUN( do_fly );
 DECLARE_DO_FUN( do_drive );
 DECLARE_DO_FUN( do_setblaster );
 DECLARE_DO_FUN( do_ammo );
@@ -4298,7 +4297,7 @@ extern "C" {
   SHIP_DATA  * get_ship( const char *name );
   void         load_ships( void );
   void         save_ship( SHIP_DATA *ship );
-  void         load_space( void );
+  void         load_spaceobjects( void );
   void         save_spaceobject( SPACE_DATA *spaceobject );
   SPACE_DATA * spaceobject_from_name( const char *name );
   SPACE_DATA * spaceobject_from_vnum( int vnum );
@@ -4312,10 +4311,9 @@ extern "C" {
   SHIP_DATA  * ship_from_gunseat( int vnum );
   SHIP_DATA  * ship_from_turret( int vnum );
   SHIP_DATA  * ship_from_engine( int vnum );
-  SHIP_DATA  * ship_from_pilot( const char *name );
   SHIP_DATA  * get_ship_here( const char *name , SHIP_DATA *eShip );
   void         showspaceobject( CHAR_DATA *ch , SPACE_DATA *spaceobject );
-  void         update_space( void );
+  void         update_ships( void );
   void         quest_update( void );
   void         recharge_ships( void );
   void         move_ships( void );
@@ -4329,7 +4327,7 @@ extern "C" {
 			     const char *argument );
   void         echo_to_cockpit( int color, SHIP_DATA *ship,
 				const char *argument );
-  void         echo_to_system( int color, SHIP_DATA *ship,
+  void         echo_to_nearby_ships( int color, SHIP_DATA *ship,
 			       const char *argument, SHIP_DATA *ignore );
   bool         extract_ship( SHIP_DATA *ship );
   bool         ship_to_room( SHIP_DATA *ship, int vnum );

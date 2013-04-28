@@ -2276,8 +2276,8 @@ void update_handler( void )
 
   if ( --pulse_space   <= 0 )
     {
-      pulse_space    = PULSE_SPACE;
-      update_space( );
+      pulse_space = PULSE_SPACE;
+      update_ships( );
       update_shuttle( );
     }
 

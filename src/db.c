@@ -749,8 +749,8 @@ void boot_db( bool fCopyOver )
   log_string( "Loading corpses" );
   load_corpses( );
 
-  log_string( "Loading space" );
-  load_space( );
+  log_string( "Loading spaceobjects" );
+  load_spaceobjects();
 
   log_string( "Loading ships" );
   load_ships( );
