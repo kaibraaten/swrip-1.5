@@ -2679,14 +2679,6 @@ Log         0
 End
 
 #COMMAND
-Name        refuel~
-Code        do_refuel
-Position    5
-Level       0
-Log         0
-End
-
-#COMMAND
 Name        reload~
 Code        do_reload
 Position    5
