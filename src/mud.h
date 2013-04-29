@@ -4370,6 +4370,9 @@ extern "C" {
   void act( short AType, const char *format, CHAR_DATA *ch,
             const void *arg1, const void *arg2, int type );
 
+  /* ships.c */
+  bool ship_is_in_hyperspace( const SHIP_DATA *ship );
+
   /* reset.c */
   RD  * make_reset( char letter, int extra, int arg1, int arg2, int arg3 );
   RD  * add_reset( AREA_DATA *tarea, char letter, int extra,

@@ -44,6 +44,50 @@ void makedebris( SHIP_DATA *ship );
 bool space_in_range_h( SHIP_DATA *ship, SPACE_DATA *space);
 void echo_to_room_dnr( int ecolor, ROOM_INDEX_DATA *room,
 		       const char *argument );
+
+static bool will_collide_with_sun( const SHIP_DATA *ship,
+				   const SPACE_DATA *sun )
+{
+  if ( sun->name
+       && str_cmp( sun->name, "" )
+       && ship_distance_to_spaceobject( ship, sun ) < 10 )
+    {
+      return TRUE;
+    }
+
+  return FALSE;
+}
+
+bool ship_is_in_hyperspace( const SHIP_DATA *ship )
+{
+  return ship->shipstate == SHIP_HYPERSPACE;
+}
+
+static void evade_collision_with_sun( SHIP_DATA *ship, const SPACE_DATA *sun )
+{
+  ship->head.x = 10 * ship->pos.x;
+  ship->head.y = 10 * ship->pos.y;
+  ship->head.z = 10 * ship->pos.z;
+  ship->energy -= ship->currspeed/10;
+  ship->currspeed = ship->realspeed;
+  echo_to_room( AT_RED , get_room_index(ship->pilotseat), "Automatic Override: Evading to avoid collision with sun!\r\n" );
+
+  if ( ship->sclass == FIGHTER_SHIP
+       || ( ship->sclass == MIDSIZE_SHIP && ship->manuever > 50 ) )
+    {
+      ship->shipstate = SHIP_BUSY_3;
+    }
+  else if ( ship->sclass == MIDSIZE_SHIP
+	    || ( ship->sclass == CAPITAL_SHIP && ship->manuever > 50 ) )
+    {
+      ship->shipstate = SHIP_BUSY_2;
+    }
+  else
+    {
+      ship->shipstate = SHIP_BUSY;
+    }
+}
+
 void move_ships( void )
 {
   SHIP_DATA *ship = NULL;
@@ -100,32 +144,11 @@ void move_ships( void )
 
       for( spaceobj = first_spaceobject; spaceobj; spaceobj = spaceobj->next )
         {
-          if ( spaceobj->type == SPACE_SUN && spaceobj->name
-               && str_cmp(spaceobj->name,"")
-               && ship_distance_to_spaceobject( ship, spaceobj ) < 10 )
-            {
-              /* Evading the sun added by Darrik Vequir */
-              ship->head.x = 10 * ship->pos.x;
-              ship->head.y = 10 * ship->pos.y;
-              ship->head.z = 10 * ship->pos.z;
-              ship->energy -= ship->currspeed/10;
-              ship->currspeed = ship->realspeed;
-              echo_to_room( AT_RED , get_room_index(ship->pilotseat), "Automatic Override: Evading to avoid collision with sun!\r\n" );
 
-              if ( ship->sclass == FIGHTER_SHIP
-                   || ( ship->sclass == MIDSIZE_SHIP && ship->manuever > 50 ) )
-                {
-                  ship->shipstate = SHIP_BUSY_3;
-                }
-              else if ( ship->sclass == MIDSIZE_SHIP
-			|| ( ship->sclass == CAPITAL_SHIP && ship->manuever > 50 ) )
-                {
-                  ship->shipstate = SHIP_BUSY_2;
-                }
-              else
-                {
-                  ship->shipstate = SHIP_BUSY;
-                }
+          if ( spaceobj->type == SPACE_SUN
+	       && will_collide_with_sun( ship, spaceobj ) )
+            {
+	      evade_collision_with_sun( ship, spaceobj );
             }
 
           if ( ship->currspeed > 0 )
@@ -151,7 +174,7 @@ void move_ships( void )
 
   for ( ship = first_ship; ship; ship = ship->next )
     {
-      if (ship->shipstate == SHIP_HYPERSPACE)
+      if ( ship_is_in_hyperspace( ship ) )
         {
           Vector3 tmp;
           float dist = 0, origdist = 0;
@@ -176,29 +199,37 @@ void move_ships( void )
           ship->count++;
 
           for( spaceobj = first_spaceobject; spaceobj; spaceobj = spaceobj->next )
-            if( space_in_range_h( ship, spaceobj ) )
-              {
-                int dmg;
-                echo_to_room( AT_YELLOW, get_room_index(ship->pilotseat), "Hyperjump complete.");
-                echo_to_ship( AT_YELLOW, ship, "The ship slams to a halt as it comes out of hyperspace.");
-                sprintf( buf ,"%s enters the starsystem at %.0f %.0f %.0f" , ship->name, ship->pos.x, ship->pos.y, ship->pos.z );
-                dmg = 15* number_range( 1, 4 );
-                ship->hull -= dmg;
-                echo_to_ship( AT_YELLOW, ship, "The hull cracks from the pressure.");
-                vector_copy( &ship->pos, &ship->hyperpos );
-                ship_to_spaceobject( ship, ship->currjump );
-                ship->currjump = NULL;
-                echo_to_nearby_ships( AT_YELLOW, ship, buf , NULL );
-                ship->shipstate = SHIP_READY;
-                STRFREE( ship->home );
-                ship->home = STRALLOC( ship->spaceobject->name );
-              }
+	    {
+	      if( space_in_range_h( ship, spaceobj ) )
+		{
+		  int dmg = 0;
+
+		  echo_to_room( AT_YELLOW, get_room_index(ship->pilotseat),
+				"Hyperjump complete." );
+		  echo_to_ship( AT_YELLOW, ship,
+				"The ship slams to a halt as it comes out of hyperspace." );
+		  sprintf( buf ,"%s enters the starsystem at %.0f %.0f %.0f" , ship->name, ship->pos.x, ship->pos.y, ship->pos.z );
+		  dmg = 15 * number_range( 1, 4 );
+		  ship->hull -= dmg;
+		  echo_to_ship( AT_YELLOW, ship,
+				"The hull cracks from the pressure." );
+		  vector_copy( &ship->pos, &ship->hyperpos );
+		  ship_to_spaceobject( ship, ship->currjump );
+		  ship->currjump = NULL;
+		  echo_to_nearby_ships( AT_YELLOW, ship, buf , NULL );
+		  ship->shipstate = SHIP_READY;
+		  STRFREE( ship->home );
+		  ship->home = STRALLOC( ship->spaceobject->name );
+		}
+	    }
 
           if( target )
             {
-              echo_to_room( AT_YELLOW, get_room_index(ship->pilotseat), "Hyperjump complete.");
-              echo_to_ship( AT_YELLOW, ship, "The ship slams to a halt as it comes out of hyperspace.  An artificial gravity well surrounds you!");
-	      sprintf( buf ,"%s enters the starsystem at %.0f %.0f %.0f" , ship->name, ship->pos.x, ship->pos.y, ship->pos.z );
+              echo_to_room( AT_YELLOW, get_room_index(ship->pilotseat),
+			    "Hyperjump complete.");
+              echo_to_ship( AT_YELLOW, ship, "The ship slams to a halt as it comes out of hyperspace. An artificial gravity well surrounds you!");
+	      sprintf( buf, "%s enters the starsystem at %.0f %.0f %.0f",
+		       ship->name, ship->pos.x, ship->pos.y, ship->pos.z );
               vector_copy( &ship->pos, &ship->hyperpos );
               ship_to_spaceobject( ship, ship->currjump );
               ship->currjump = NULL;
@@ -208,7 +239,7 @@ void move_ships( void )
               ship->home = STRALLOC( ship->spaceobject->name );
             }
 
-          if (ship->shipstate == SHIP_HYPERSPACE
+          if ( ship_is_in_hyperspace( ship )
               && ship->hyperdistance <= 0
               && !ship->tracking)
             {
@@ -234,7 +265,9 @@ void move_ships( void )
                   ship->home = STRALLOC( ship->spaceobject->name );
                 }
             }
-          else if ( ( ship->count >= (ship->tcount ? ship->tcount : 10 ) ) && ship->shipstate == SHIP_HYPERSPACE && ship->tracking == TRUE)
+          else if ( ( ship->count >= (ship->tcount ? ship->tcount : 10 ) )
+		    && ship_is_in_hyperspace( ship )
+		    && ship->tracking == TRUE )
             {
               ship_to_spaceobject (ship, ship->currjump);
 
@@ -263,36 +296,40 @@ void move_ships( void )
                               ship->pos.z + ship->trackvector.z );
 
                   for( spaceobj = first_spaceobject; spaceobj; spaceobj = spaceobj->next )
-                    if( space_in_range( ship, spaceobj ) )
-                      {
-                        ship->currjump = spaceobj;
-                        break;
-                      }
+		    {
+		      if( space_in_range( ship, spaceobj ) )
+			{
+			  ship->currjump = spaceobj;
+			  break;
+			}
+		    }
 
                   if( !spaceobj )
-                    ship->currjump = ship->spaceobject;
+		    {
+		      ship->currjump = ship->spaceobject;
+		    }
 
                   ship->hyperdistance = vector_distance( &ship->pos, &ship->jump ) / 50;
                   ship->orighyperdistance = ship->hyperdistance;
-
                   ship->count = 0;
                   do_radar( ship->ch, "" );
                 }
             }
-	  else if (ship->count >= 10 && ship->shipstate == SHIP_HYPERSPACE)
+	  else if ( ship->count >= 10 && ship_is_in_hyperspace( ship ) )
             {
               ship->count = 0;
-              sprintf( buf ,"%d" , ship->hyperdistance );
+              sprintf( buf, "%d", ship->hyperdistance );
               echo_to_room_dnr( AT_YELLOW , get_room_index(ship->pilotseat), "Remaining jump distance: " );
-              echo_to_room( AT_WHITE , get_room_index(ship->pilotseat),  buf );
-
+              echo_to_room( AT_WHITE , get_room_index(ship->pilotseat), buf );
             }
 
-          if( ship->shipstate == SHIP_HYPERSPACE )
+	    if( ship_is_in_hyperspace( ship ) )
 	    {
-	      if( ship->count%2 && ship->hyperdistance < 10*ship->hyperspeed && ship->hyperdistance > 0 )
+	      if( ship->count % 2
+		  && ship->hyperdistance < 10 * ship->hyperspeed
+		  && ship->hyperdistance > 0 )
 		{
-		  sprintf( buf ,"An alarm sounds. Your hyperjump is ending: %d",
+		  sprintf( buf,"An alarm sounds. Your hyperjump is ending: %d",
 			   ship->hyperdistance );
 		  echo_to_ship( AT_RED , ship,  buf );
 		}
@@ -1310,7 +1347,7 @@ void recharge_ships()
 
                   for ( shots=0 ; shots < guns; shots++ )
                     {
-                      if (ship->shipstate != SHIP_HYPERSPACE
+                      if ( !ship_is_in_hyperspace( ship )
                           && ship->energy > 25
                           && ship_in_range( ship, target )
                           && ship_distance_to_ship( target, ship ) <= 1000 )
@@ -1720,7 +1757,8 @@ void update_ships()
 		    ship->autorecharge=TRUE;
 
 
-                  if (ship->shipstate != SHIP_HYPERSPACE && ship->energy > 25
+                  if ( !ship_is_in_hyperspace( ship )
+		      && ship->energy > 25
                       && ship->missilestate == MISSILE_READY
                       && ship_in_range( ship, target )
                       && ship_distance_to_ship( target, ship ) <= 1200 )
@@ -5368,7 +5406,7 @@ void do_land( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if (ship->shipstate == SHIP_HYPERSPACE)
+  if ( ship_is_in_hyperspace( ship ) )
     {
       send_to_char("&RYou can only do that in realspace!\r\n",ch);
       return;
@@ -5564,7 +5602,7 @@ void do_accelerate( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if (ship->shipstate == SHIP_HYPERSPACE)
+  if ( ship_is_in_hyperspace( ship ) )
     {
       send_to_char("&RYou can only do that in realspace!\r\n",ch);
       return;
@@ -5704,7 +5742,7 @@ void do_trajectory_actual( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if (ship->shipstate == SHIP_HYPERSPACE)
+  if ( ship_is_in_hyperspace( ship ) )
     {
       send_to_char("&RYou can only do that in realspace!\r\n",ch);
       return;
@@ -5836,7 +5874,7 @@ void do_trajectory( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if (ship->shipstate == SHIP_HYPERSPACE)
+  if ( ship_is_in_hyperspace( ship ) )
     {
       send_to_char("&RYou can only do that in realspace!\r\n",ch);
       return;
@@ -6728,52 +6766,64 @@ void do_hyperspace(CHAR_DATA *ch, char *argument )
       send_to_char( "&RPlatforms can't move!\r\n" , ch );
       return;
     }
+
   if (ship->hyperspeed == 0)
     {
       send_to_char("&RThis ship is not equipped with a hyperdrive!\r\n",ch);
       return;
     }
-  if (( !argument || argument[0] == '\0' ) && ship->shipstate == SHIP_HYPERSPACE)
+
+  if (( !argument || argument[0] == '\0' ) && ship_is_in_hyperspace( ship ) )
     {
       send_to_char("&RYou are already travelling lightspeed!\r\n",ch);
       return;
     }
-  if ( argument && !str_cmp( argument, "off" ) &&  ship->shipstate != SHIP_HYPERSPACE )
+
+  if ( argument && !str_cmp( argument, "off" )
+       && !ship_is_in_hyperspace( ship ) )
     {
       send_to_char("&RHyperdrive not active.\r\n",ch);
       return;
     }
+
   if (ship->shipstate == SHIP_DISABLED)
     {
       send_to_char("&RThe ships drive is disabled. Unable to manuever.\r\n",ch);
       return;
     }
+
   if (ship->shipstate == SHIP_LANDED)
     {
       send_to_char("&RYou can't do that until after you've launched!\r\n",ch);
       return;
     }
+
   if (ship->docking != SHIP_READY )
     {
       send_to_char("&RYou can't do that while docked to another ship!\r\n",ch);
       return;
     }
+
   if (ship->tractoredby || ship->tractored )
     {
       send_to_char("&RYou can not move in a tractorbeam!\r\n",ch);
       return;
     }
+
   if (ship->tractored && ship->tractored->sclass > ship->sclass )
     {
       send_to_char("&RYou can not enter hyperspace with your tractor beam locked on.\r\n",ch);
       return;
     }
-  if (ship->shipstate != SHIP_READY && ship->shipstate != SHIP_HYPERSPACE)
+
+  if (ship->shipstate != SHIP_READY && !ship_is_in_hyperspace( ship ) )
     {
       send_to_char("&RPlease wait until the ship has finished its current manouver.\r\n",ch);
       return;
     }
-  if ( argument && !str_cmp( argument, "off" ) &&  ship->shipstate == SHIP_HYPERSPACE)
+
+  if ( argument && !str_cmp( argument, "off" )
+       && ship_is_in_hyperspace( ship ) )
     {
       ship_to_spaceobject (ship, ship->currjump);
 
@@ -6937,7 +6987,7 @@ void do_target(CHAR_DATA *ch, char *argument )
       if ( ship->gunseat != ch->in_room->vnum )
         turret = TRUE;
 
-      if (ship->shipstate == SHIP_HYPERSPACE && ship->sclass <= SHIP_PLATFORM)
+      if ( ship_is_in_hyperspace( ship ) && ship->sclass <= SHIP_PLATFORM)
         {
           send_to_char("&RYou can only do that in realspace!\r\n",ch);
           return;
@@ -7142,7 +7192,7 @@ void do_fire(CHAR_DATA *ch, char *argument )
   if ( ship->gunseat != ch->in_room->vnum )
     turret = TRUE;
 
-  if (ship->shipstate == SHIP_HYPERSPACE && ship->sclass <= SHIP_PLATFORM)
+  if ( ship_is_in_hyperspace( ship ) && ship->sclass <= SHIP_PLATFORM )
     {
       send_to_char("&RYou can only do that in realspace!\r\n",ch);
       return;
@@ -8991,7 +9041,7 @@ void do_repairship(CHAR_DATA *ch, char *argument )
     {
       if (ship->location == ship->lastdoc)
         ship->shipstate = SHIP_LANDED;
-      else if ( ship->shipstate == SHIP_HYPERSPACE )
+      else if ( ship_is_in_hyperspace( ship ) )
         send_to_char("You realize after working that it would be a bad idea to do this while in hyperspace.\r\n", ch);
       else
         ship->shipstate = SHIP_READY;
@@ -9176,7 +9226,7 @@ void do_radar( CHAR_DATA *ch, char *argument )
       }
     }
 
-  if (ship->shipstate == SHIP_HYPERSPACE)
+  if ( ship_is_in_hyperspace( ship ) )
     {
       send_to_char("&RYou can only do that in realspace!\r\n",ch);
       return;
@@ -9407,7 +9457,7 @@ void do_chaff( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if (ship->shipstate == SHIP_HYPERSPACE)
+  if ( ship_is_in_hyperspace( ship ) )
     {
       send_to_char("&RYou can only do that in realspace!\r\n",ch);
       return;
@@ -9631,7 +9681,7 @@ void do_jumpvector( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if( target->shipstate == SHIP_HYPERSPACE )
+  if( ship_is_in_hyperspace( ship ) )
     {
       projected.x = (target->pos.x - target->originpos.x)*randnum;
       projected.y = (target->pos.y - target->originpos.y)*randnum;
@@ -9837,7 +9887,7 @@ void do_tractorbeam(CHAR_DATA *ch, char *argument )
 
 
 
-      if (ship->shipstate == SHIP_HYPERSPACE || !ship->spaceobject )
+      if ( ship_is_in_hyperspace( ship ) || !ship->spaceobject )
         {
           send_to_char("&RYou can only do that in realspace!\r\n",ch);
           return;
@@ -10227,11 +10277,13 @@ void do_undock(CHAR_DATA *ch, char *argument)
       send_to_char( "&RPlatforms can't move!\r\n" , ch );
       return;
     }
-  if (ship->shipstate == SHIP_HYPERSPACE)
+
+  if ( ship_is_in_hyperspace( ship ) )
     {
       send_to_char("&RYou can only do that in realspace!\r\n",ch);
       return;
     }
+
   if ( ship->docked && ship->tractoredby &&
        ship->docked != ship->tractoredby )
     {
@@ -10244,6 +10296,7 @@ void do_undock(CHAR_DATA *ch, char *argument)
       send_to_char("&RYou aren't docked!\r\n",ch);
       return;
     }
+
   eShip = ship->docked;
 
   if ( ship->sclass == FIGHTER_SHIP )
@@ -10365,7 +10418,8 @@ void do_dock(CHAR_DATA *ch, char *argument)
       send_to_char( "&RPlatforms can't move!\r\n" , ch );
       return;
     }
-  if (ship->shipstate == SHIP_HYPERSPACE)
+
+  if ( ship_is_in_hyperspace( ship ) )
     {
       send_to_char("&RYou can only do that in realspace!\r\n",ch);
       return;
@@ -10540,7 +10594,7 @@ void do_request(CHAR_DATA *ch, char *argument)
       return;
     }
 
-  if (ship->shipstate == SHIP_HYPERSPACE )
+  if ( ship_is_in_hyperspace( ship ) )
     {
       send_to_char("&RYou can only do that in realspace!\r\n",ch);
       return;
@@ -10656,7 +10710,7 @@ void do_shiptrack( CHAR_DATA *ch, char *argument)
     {
       Vector3 head;
 
-      if (ship->shipstate == SHIP_HYPERSPACE )
+      if ( ship_is_in_hyperspace( ship ) )
         {
           send_to_char("&RYou can only do that in realspace!\r\n",ch);
           return;
@@ -10721,11 +10775,13 @@ void do_shiptrack( CHAR_DATA *ch, char *argument)
       send_to_char( "Course laid in. Beginning tracking program.\r\n", ch);
       return;
     }
+
   if( !str_cmp( arg, "stop" ) || !str_cmp( arg, "halt" ))
     {
       ship->tracking = FALSE;
       send_to_char( "Tracking program cancelled.\r\n", ch);
-      if( ship->shipstate == SHIP_HYPERSPACE )
+
+      if( ship_is_in_hyperspace( ship ) )
         do_hyperspace( ch, "off" );
     }
 }
@@ -10820,7 +10876,7 @@ void do_override(CHAR_DATA *ch, char *argument)
       return;
     }
 
-  if (ship->shipstate == SHIP_HYPERSPACE )
+  if ( ship_is_in_hyperspace( ship ) )
     {
       send_to_char("&RYou can only do that in realspace!\r\n",ch);
       return;
@@ -11079,7 +11135,7 @@ void do_sabotage(CHAR_DATA *ch, char *argument )
     {
       if (ship->location == ship->lastdoc)
         ship->shipstate = SHIP_DISABLED;
-      else if ( ship->shipstate == SHIP_HYPERSPACE )
+      else if ( ship_is_in_hyperspace( ship ) )
         send_to_char("You realize after working that it would be a bad idea to do this while in hyperspace.\r\n", ch);
       else
         ship->shipstate = SHIP_DISABLED;

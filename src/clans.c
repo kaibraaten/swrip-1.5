@@ -1523,7 +1523,8 @@ void do_capture ( CHAR_DATA *ch , char *argument )
         {
           if( !ship->spaceobject )
             continue;
-          if( ship->shipstate == SHIP_HYPERSPACE || ship->shipstate == SHIP_DISABLED )
+          if( ship_is_in_hyperspace( ship )
+	      || ship->shipstate == SHIP_DISABLED )
             continue;
           if( !space_in_range_c( ship, planet->spaceobject ) )
             continue;

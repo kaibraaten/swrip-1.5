@@ -233,9 +233,6 @@ void update_missiles( void )
     {
       SHIP_DATA *ship = NULL;
       SHIP_DATA *target = NULL;
-      char buf[MAX_STRING_LENGTH];
-      CHAR_DATA *ch = NULL;
-      bool ch_found = FALSE;
 
       m_next = missile->next;
 
@@ -251,22 +248,33 @@ void update_missiles( void )
             {
               if ( target->chaff_released <= 0)
                 {
-                  echo_to_room( AT_YELLOW , get_room_index(ship->gunseat), "Your missile hits its target dead on!" );
-                  echo_to_cockpit( AT_BLOOD, target, "The ship is hit by a missile.");
-                  echo_to_ship( AT_RED , target , "A loud explosion shakes thee ship violently!" );
-                  sprintf( buf, "You see a small explosion as %s is hit by a missile" , target->name );
-                  echo_to_nearby_ships( AT_ORANGE , target , buf , ship );
+		  bool ch_found = FALSE;
+		  CHAR_DATA *ch = NULL;
+		  char buf[MAX_STRING_LENGTH];
+
+                  echo_to_room( AT_YELLOW, get_room_index(ship->gunseat),
+				"Your missile hits its target dead on!" );
+                  echo_to_cockpit( AT_BLOOD, target,
+				   "The ship is hit by a missile.");
+                  echo_to_ship( AT_RED, target,
+				"A loud explosion shakes thee ship violently!" );
+                  sprintf( buf, "You see a small explosion as %s is hit by a missile", target->name );
+                  echo_to_nearby_ships( AT_ORANGE, target, buf, ship );
+
                   for ( ch = first_char; ch; ch = ch->next )
-                    if ( !IS_NPC( ch ) && nifty_is_name( missile->fired_by, ch->name ) )
-                      {
-                        ch_found = TRUE;
-                        damage_ship_ch( target , 30+missile->missiletype*missile->missiletype*30 ,
-                                        50+missile->missiletype*missile->missiletype*missile->missiletype*50 , ch );
-                      }
+		    {
+		      if ( !IS_NPC( ch ) && nifty_is_name( missile->fired_by, ch->name ) )
+			{
+			  ch_found = TRUE;
+			  damage_ship_ch( target, 30 + missile->missiletype * missile->missiletype * 30, 50 + missile->missiletype * missile->missiletype * missile->missiletype * 50, ch );
+			}
+		    }
 
 		  if ( !ch_found )
-                    damage_ship( target , ship, 20+missile->missiletype*missile->missiletype*20 ,
-                                 30+missile->missiletype*missile->missiletype*ship->missiletype*30 );
+		    {
+		      damage_ship( target , ship, 20+missile->missiletype*missile->missiletype*20 ,
+				   30+missile->missiletype*missile->missiletype*ship->missiletype*30 );
+		    }
 
                   extract_missile( missile );
                 }
@@ -297,7 +305,6 @@ void update_missiles( void )
           if (missile->age >= 50)
             extract_missile( missile );
         }
-
     }
 }
 
