@@ -3531,7 +3531,6 @@ DECLARE_DO_FUN( do_calculate_diff );
 DECLARE_DO_FUN( do_guard );
 DECLARE_DO_FUN( do_recharge );
 DECLARE_DO_FUN( do_repairship );
-DECLARE_DO_FUN( do_refuel );
 DECLARE_DO_FUN( do_addpilot );
 DECLARE_DO_FUN( do_addresident );
 DECLARE_DO_FUN( do_rempilot);
@@ -4317,6 +4316,8 @@ extern "C" {
   void         quest_update( void );
   void         recharge_ships( void );
   void         move_ships( void );
+  void update_spaceobjects( void );
+  void update_missiles( void );
 #if 0
   void         update_bus( void );
   void         update_traffic( void );
