@@ -2332,7 +2332,7 @@ void do_shove( CHAR_DATA *ch, char *argument )
               return;
             }
 
-          if ( ship->shipstate != SHIP_LANDED && ship->shipstate != SHIP_DISABLED )
+          if ( ship->shipstate != SHIP_LANDED && !ship_is_disabled( ship ) )
             {
               send_to_char("&rPlease wait till the ship is properly docked.\r\n",ch);
               return;
@@ -2616,7 +2616,7 @@ void do_drag( CHAR_DATA *ch, char *argument )
               return;
             }
 
-          if ( ship->shipstate != SHIP_LANDED && ship->shipstate != SHIP_DISABLED )
+          if ( ship->shipstate != SHIP_LANDED && !ship_is_disabled( ship ) )
             {
               send_to_char("&rPlease wait till the ship is properly docked.\r\n",ch);
               return;

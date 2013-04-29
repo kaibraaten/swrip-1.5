@@ -1523,16 +1523,21 @@ void do_capture ( CHAR_DATA *ch , char *argument )
         {
           if( !ship->spaceobject )
             continue;
-          if( ship_is_in_hyperspace( ship )
-	      || ship->shipstate == SHIP_DISABLED )
+
+          if( ship_is_in_hyperspace( ship ) || ship_is_disabled( ship ) )
             continue;
+
           if( !space_in_range_c( ship, planet->spaceobject ) )
             continue;
+
           sClan = get_clan(ship->owner);
+
           if ( !sClan )
             continue;
+
           if ( sClan->mainclan )
             sClan = sClan->mainclan;
+
           if ( sClan == planet->governed_by )
             {
               send_to_char ( "A planet cannot be captured while protected by orbiting spacecraft.\r\n" , ch );

@@ -3911,15 +3911,15 @@ void do_hijack( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( ship->shipstate != SHIP_LANDED && ship->shipstate != SHIP_DISABLED )
+  if ( ship->shipstate != SHIP_LANDED && !ship_is_disabled( ship ) )
     {
       send_to_char("The ship is not docked right now.\r\n",ch);
       return;
     }
 
-  if ( ship->shipstate == SHIP_DISABLED )
+  if ( ship_is_disabled( ship ) )
     {
-      send_to_char("The ships drive is disabled .\r\n",ch);
+      send_to_char("The ship's drive is disabled .\r\n",ch);
       return;
     }
 

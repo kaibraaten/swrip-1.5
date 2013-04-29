@@ -4372,6 +4372,7 @@ extern "C" {
 
   /* ships.c */
   bool ship_is_in_hyperspace( const SHIP_DATA *ship );
+  bool ship_is_disabled( const SHIP_DATA *ship );
 
   /* reset.c */
   RD  * make_reset( char letter, int extra, int arg1, int arg2, int arg3 );

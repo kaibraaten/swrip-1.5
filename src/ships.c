@@ -58,9 +58,19 @@ static bool will_collide_with_sun( const SHIP_DATA *ship,
   return FALSE;
 }
 
+static bool ship_has_state( const SHIP_DATA *ship, short state )
+{
+  return ship->shipstate == state;
+}
+
 bool ship_is_in_hyperspace( const SHIP_DATA *ship )
 {
-  return ship->shipstate == SHIP_HYPERSPACE;
+  return ship_has_state( ship, SHIP_HYPERSPACE );
+}
+
+bool ship_is_disabled( const SHIP_DATA *ship )
+{
+  return ship_has_state( ship, SHIP_DISABLED );
 }
 
 static void evade_collision_with_sun( SHIP_DATA *ship, const SPACE_DATA *sun )
@@ -402,7 +412,7 @@ void landship( SHIP_DATA *ship, const char *arg )
       echo_to_room( AT_YELLOW , get_room_index(ship->pilotseat), "Could not complete approach. Landing aborted.");
       echo_to_ship( AT_YELLOW , ship , "The ship pulls back up out of its landing sequence.");
 
-      if (ship->shipstate != SHIP_DISABLED)
+      if ( !ship_is_disabled( ship ))
         ship->shipstate = SHIP_READY;
 
       return;
@@ -429,7 +439,7 @@ void landship( SHIP_DATA *ship, const char *arg )
   ship->location = destination;
   ship->lastdoc = ship->location;
 
-  if (ship->shipstate != SHIP_DISABLED)
+  if (!ship_is_disabled( ship ))
     ship->shipstate = SHIP_LANDED;
 
   ship_from_spaceobject(ship, ship->spaceobject);
@@ -551,7 +561,7 @@ void launchship( SHIP_DATA *ship )
 
   ship->location = 0;
 
-  if (ship->shipstate != SHIP_DISABLED)
+  if (!ship_is_disabled( ship ))
     ship->shipstate = SHIP_READY;
 
   plusminus = number_range ( -1 , 2 );
@@ -1462,7 +1472,7 @@ void update_ships()
 
   for ( ship = first_ship; ship; ship = ship->next )
     {
-      if ( ship->spaceobject && ship->energy > 0 && ship->shipstate == SHIP_DISABLED && ship->sclass != SHIP_PLATFORM )
+      if ( ship->spaceobject && ship->energy > 0 && ship_is_disabled( ship ) && ship->sclass != SHIP_PLATFORM )
         ship->energy -= 100;
       else if ( ship->energy > 0 )
         ship->energy += ( 5 + ship->sclass*5 );
@@ -1811,13 +1821,15 @@ void update_ships()
 
                   if( ship->missilestate ==  MISSILE_DAMAGED )
                     ship->missilestate =  MISSILE_READY;
+
                   if( ship->statet0 ==  LASER_DAMAGED )
                     ship->statet0 =  LASER_READY;
+
                   if( ship->statei0 ==  LASER_DAMAGED )
                     ship->statei0 =  LASER_READY;
-                  if( ship->shipstate ==  SHIP_DISABLED )
-                    ship->shipstate =  SHIP_READY;
 
+                  if( ship_is_disabled( ship ) )
+                    ship->shipstate =  SHIP_READY;
                 }
               else
                 ship->currspeed = 0;
@@ -2185,7 +2197,7 @@ void fread_ship( SHIP_DATA *ship, FILE *fp )
               if (!ship->pilot)
                 ship->pilot     = STRALLOC( "" );
 
-              if (ship->shipstate != SHIP_DISABLED)
+              if (!ship_is_disabled( ship ))
                 ship->shipstate = SHIP_LANDED;
 
               if (ship->statet0 != LASER_DAMAGED)
@@ -4246,7 +4258,7 @@ void do_showship( CHAR_DATA *ch, char *argument )
   ch_printf( ch, "Hull: %d/%d  Ship Condition: %s\r\n",
              ship->hull,
              ship->maxhull,
-             ship->shipstate == SHIP_DISABLED ? "Disabled" : "Running");
+             ship_is_disabled( ship ) ? "Disabled" : "Running");
 
   ch_printf( ch, "Shields: %d/%d   Energy(fuel): %d/%d   Chaff: %d \r\n",
              ship->shield,
@@ -4837,7 +4849,7 @@ void damage_ship_ch( SHIP_DATA *ship , int min , int max , CHAR_DATA *ch )
 
   if ( dmg > 0 )
     {
-      if ( number_range(1, 100) <= 5*ionFactor && ship->shipstate != SHIP_DISABLED )
+      if ( number_range(1, 100) <= 5*ionFactor && !ship_is_disabled( ship ) )
         {
           echo_to_cockpit( AT_BLOOD + AT_BLINK , ship , "Ships Drive DAMAGED!" );
           ship->shipstate = SHIP_DISABLED;
@@ -4933,7 +4945,7 @@ void damage_ship( SHIP_DATA *ship , SHIP_DATA *assaulter, int min , int max )
 
   if ( dmg > 0 )
     {
-      if ( number_range(1, 100) <= 5*ionFactor && ship->shipstate != SHIP_DISABLED )
+      if ( number_range(1, 100) <= 5*ionFactor && !ship_is_disabled( ship ) )
         {
           echo_to_cockpit( AT_BLOOD + AT_BLINK , ship , "Ships Drive DAMAGED!" );
 	  ship->shipstate = SHIP_DISABLED;
@@ -5194,7 +5206,7 @@ void do_launch( CHAR_DATA *ch, char *argument )
       send_to_char("&RYou can't do that while docked to another ship!\r\n",ch);
       return;
     }
-  if ( ship->shipstate != SHIP_LANDED && ship->shipstate != SHIP_DISABLED )
+  if ( ship->shipstate != SHIP_LANDED && !ship_is_disabled( ship ) )
     {
       send_to_char("The ship is not docked right now.\r\n",ch);
       return;
@@ -5232,7 +5244,7 @@ void do_launch( CHAR_DATA *ch, char *argument )
 
           price += ( ship->maxhull-ship->hull );
 
-          if (ship->shipstate == SHIP_DISABLED )
+          if (ship_is_disabled( ship ) )
             price += 10000;
           if ( ship->missilestate == MISSILE_DAMAGED )
             price += 5000;
@@ -5246,7 +5258,7 @@ void do_launch( CHAR_DATA *ch, char *argument )
 
       if( IS_SET( ch->act, PLR_DONTAUTOFUEL ) )
         {
-          if( ship->shipstate == SHIP_DISABLED )
+          if( ship_is_disabled( ship ) )
             {
               ch_printf(ch, "Your ship is disabled. You must repair it.\r\n");
               return;
@@ -5387,7 +5399,7 @@ void do_land( CHAR_DATA *ch, char *argument )
       send_to_char("&RCapital ships are to big to land. You'll have to take a shuttle.\r\n",ch);
       return;
     }
-  if (ship->shipstate == SHIP_DISABLED)
+  if (ship_is_disabled( ship ))
     {
       send_to_char("&RThe ships drive is disabled. Unable to land.\r\n",ch);
       return;
@@ -5608,7 +5620,7 @@ void do_accelerate( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if (ship->shipstate == SHIP_DISABLED)
+  if (ship_is_disabled( ship ))
     {
       send_to_char("&RThe ships drive is disabled. Unable to accelerate.\r\n",ch);
       return;
@@ -5731,7 +5743,7 @@ void do_trajectory_actual( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if (ship->shipstate == SHIP_DISABLED)
+  if (ship_is_disabled( ship ))
     {
       send_to_char("&RThe ships drive is disabled. Unable to manuever.\r\n",ch);
       return;
@@ -5863,7 +5875,7 @@ void do_trajectory( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if (ship->shipstate == SHIP_DISABLED)
+  if (ship_is_disabled( ship ))
     {
       send_to_char("&RThe ships drive is disabled. Unable to manuever.\r\n",ch);
       return;
@@ -6497,7 +6509,7 @@ void do_openhatch(CHAR_DATA *ch, char *argument )
                   return;
                 }
               if ( ship->location != ship->lastdoc ||
-                   ( ship->shipstate != SHIP_LANDED && ship->shipstate != SHIP_DISABLED ) )
+                   ( ship->shipstate != SHIP_LANDED && !ship_is_disabled( ship ) ) )
                 {
                   send_to_char("&RPlease wait till the ship lands!\r\n",ch);
                   return;
@@ -6526,7 +6538,7 @@ void do_openhatch(CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( ship->shipstate != SHIP_LANDED && ship->shipstate != SHIP_DISABLED )
+  if ( ship->shipstate != SHIP_LANDED && !ship_is_disabled( ship ) )
     {
       send_to_char( "&RThat ship has already started to launch",ch);
       return;
@@ -6600,7 +6612,7 @@ void do_closehatch(CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( ship->shipstate != SHIP_LANDED && ship->shipstate != SHIP_DISABLED )
+  if ( ship->shipstate != SHIP_LANDED && !ship_is_disabled( ship ) )
     {
       send_to_char( "&RThat ship has already started to launch",ch);
       return;
@@ -6677,7 +6689,7 @@ void do_status(CHAR_DATA *ch, char *argument )
   ch_printf( ch, "&OHull:&Y %d&O/%d  Ship Condition:&Y %s\r\n",
              target->hull,
              target->maxhull,
-             target->shipstate == SHIP_DISABLED ? "Disabled" : "Running");
+             ship_is_disabled( target ) ? "Disabled" : "Running");
   ch_printf( ch, "&OShields:&Y %d&O/%d   Energy(fuel):&Y %d&O/%d\r\n",
              target->shield,
              target->maxshield,
@@ -6786,7 +6798,7 @@ void do_hyperspace(CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if (ship->shipstate == SHIP_DISABLED)
+  if (ship_is_disabled( ship ))
     {
       send_to_char("&RThe ships drive is disabled. Unable to manuever.\r\n",ch);
       return;
@@ -8927,7 +8939,7 @@ void do_recharge(CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if (ship->shipstate == SHIP_DISABLED)
+  if (ship_is_disabled( ship ))
     {
       send_to_char("&RThe ships drive is disabled. Unable to power a recharge order.\r\n",ch);
       return;
@@ -9519,7 +9531,7 @@ void do_drive( CHAR_DATA *ch, char *argument )
     }
 
 
-  if (ship->shipstate == SHIP_DISABLED)
+  if (ship_is_disabled( ship ))
     {
       send_to_char("&RThe drive is disabled.\r\n",ch);
       return;
@@ -9727,7 +9739,7 @@ void do_reload( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if (ship->shipstate == SHIP_DISABLED )
+  if (ship_is_disabled( ship ) )
     price += 200;
   if ( ship->missilestate == MISSILE_DAMAGED )
     price += 100;
@@ -9925,7 +9937,7 @@ void do_tractorbeam(CHAR_DATA *ch, char *argument )
               if( ship->tractored->location )
                 ship->tractored->shipstate = SHIP_LANDED;
               else if ( ship->tractored->shipstate != SHIP_DOCKED ||
-                        ship->tractored->shipstate != SHIP_DISABLED )
+                        !ship_is_disabled( ship->tractored ) )
                 ship->tractored->shipstate = SHIP_READY;
 
             }
@@ -9940,7 +9952,7 @@ void do_tractorbeam(CHAR_DATA *ch, char *argument )
           if( ship->tractored->location )
             ship->tractored->shipstate = SHIP_LANDED;
           else if ( ship->tractored->shipstate != SHIP_DOCKED ||
-                    ship->tractored->shipstate != SHIP_DISABLED )
+                    !ship_is_disabled( ship->tractored ) )
             ship->tractored->shipstate = SHIP_READY;
         }
 
@@ -10425,7 +10437,7 @@ void do_dock(CHAR_DATA *ch, char *argument)
       return;
     }
 
-  if (ship->shipstate == SHIP_DISABLED)
+  if (ship_is_disabled( ship ))
     {
       send_to_char("&RThe ships drive is disabled. Unable to manuever.\r\n",ch);
       return;

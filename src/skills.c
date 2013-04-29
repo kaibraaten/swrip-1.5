@@ -2767,7 +2767,7 @@ void do_pick( CHAR_DATA *ch, char *argument )
           return;
         }
 
-      if ( ship->shipstate != SHIP_LANDED && ship->shipstate != SHIP_DISABLED )
+      if ( ship->shipstate != SHIP_LANDED && !ship_is_disabled( ship ) )
         {
           send_to_char( "&RThat ship has already started to launch",ch);
           return;
