@@ -10,7 +10,7 @@ IMC = 1
 #Change from 0 to 1 to enable telnet debug logging.
 DEBUG_TELNET = -DSWRIP_DEBUG_TELNET=0
 
-CCFLAGS = -g3 -MMD -Iutility $(WFLAGS) $(USE_DLSYM) $(DEBUG_TELNET) -ansi -pedantic
+CCFLAGS = -g3 -MMD -I. -Iutility $(WFLAGS) $(USE_DLSYM) $(DEBUG_TELNET) -ansi -pedantic
 LDFLAGS = -lm -lz -Lutility -lutility -Wl,-rpath,../src/utility
 
 #Uncomment the next line of you're using Solaris and you get linker errors.
@@ -29,6 +29,8 @@ ifdef USE_DLSYM
 LDFLAGS += -ldl -rdynamic
 endif
 
+CMDDIR = commands
+
 ODIR = obj
 _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o \
 	boards.o bounty.o build.o clans.o comm.o comments.o const.o \
@@ -36,7 +38,8 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o \
 	makeobjs.o mapper.o misc.o mud_comm.o mud_prog.o nanny.o newarena.o \
 	planets.o player.o reset.o save.o ships.o shops.o shuttle.o \
 	skills.o special.o space.o spaceobjects.o swskills.o \
-	tables.o track.o update.o vector3_aux.o
+	tables.o track.o update.o vector3_aux.o \
+	$(CMDDIR)/beep.o
 
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
@@ -63,4 +66,4 @@ $(ODIR)/%.o:	 %.c
 -include $(ODIR)/*.d
 
 clean:
-		-rm -f ../bin/$(BINARY) *~ $(ODIR)/*.o $(ODIR)/*.d ../area/core.*
+		-rm -f ../bin/$(BINARY) *~ $(ODIR)/*.o $(ODIR)/*.d $(ODIR)/$(CMDDIR)/*.o $(ODIR)/$(CMDDIR)/*.d ../area/core.*
