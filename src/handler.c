@@ -312,7 +312,7 @@ short get_trust( const CHAR_DATA *ch )
 /*
  * Retrieve a character's age.
  */
-short get_age( CHAR_DATA *ch )
+short get_age( const CHAR_DATA *ch )
 {
   if( IS_NPC(ch) )
     return 17;
@@ -320,66 +320,55 @@ short get_age( CHAR_DATA *ch )
   return 17 + ( ch->pcdata->played + (current_time - ch->pcdata->logon) ) / 1515800;
 }
 
-
-
 /*
  * Retrieve character's current strength.
  */
-short get_curr_str( CHAR_DATA *ch )
+short get_curr_str( const CHAR_DATA *ch )
 {
   short max = 25;
   return URANGE( 3, ch->perm_str + ch->mod_str, max );
 }
 
-
-
 /*
  * Retrieve character's current intelligence.
  */
-short get_curr_int( CHAR_DATA *ch )
+short get_curr_int( const CHAR_DATA *ch )
 {
   short max = 25;
   return URANGE( 3, ch->perm_int + ch->mod_int, max );
 }
 
-
-
 /*
  * Retrieve character's current wisdom.
  */
-short get_curr_wis( CHAR_DATA *ch )
+short get_curr_wis( const CHAR_DATA *ch )
 {
   short max = 25;
   return URANGE( 3, ch->perm_wis + ch->mod_wis, max );
 }
 
-
-
 /*
  * Retrieve character's current dexterity.
  */
-short get_curr_dex( CHAR_DATA *ch )
+short get_curr_dex( const CHAR_DATA *ch )
 {
   short max = 25;
   return URANGE( 3, ch->perm_dex + ch->mod_dex, max );
 }
 
-
-
 /*
  * Retrieve character's current constitution.
  */
-short get_curr_con( CHAR_DATA *ch )
+short get_curr_con( const CHAR_DATA *ch )
 {
   short max = 25;
   return URANGE( 3, ch->perm_con + ch->mod_con, max );
-
 }
 
 /*
  * Retrieve character's current charisma.
  */
-short get_curr_cha( CHAR_DATA *ch )
+short get_curr_cha( const CHAR_DATA *ch )
 {
   short max = 25;
   return URANGE( 3, ch->perm_cha + ch->mod_cha, max );
@@ -388,13 +377,13 @@ short get_curr_cha( CHAR_DATA *ch )
 /*
  * Retrieve character's current luck.
  */
-short get_curr_lck( CHAR_DATA *ch )
+short get_curr_lck( const CHAR_DATA *ch )
 {
   short max = 25;
   return URANGE( 3, ch->perm_lck + ch->mod_lck, max );
 }
 
-short get_curr_frc( CHAR_DATA *ch )
+short get_curr_frc( const CHAR_DATA *ch )
 {
   short max = 0;
   if (!IS_NPC(ch))
@@ -405,10 +394,8 @@ short get_curr_frc( CHAR_DATA *ch )
   else
     max  = 25;
 
-
   return URANGE( 0 , ch->perm_frc + ch->mod_frc, max );
 }
-
 
 /*
  * Retrieve a character's carry capacity.

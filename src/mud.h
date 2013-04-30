@@ -4312,7 +4312,7 @@ extern "C" {
   SHIP_DATA  * ship_from_engine( int vnum );
   SHIP_DATA  * get_ship_here( const char *name , SHIP_DATA *eShip );
   void         showspaceobject( CHAR_DATA *ch , SPACE_DATA *spaceobject );
-  void         move_ships( void );
+  void         update_shipmovement( void );
   void         quest_update( void );
   void         recharge_ships( void );
   void         update_ships( void );
@@ -4530,15 +4530,15 @@ extern "C" {
   int   get_exp_worth( CHAR_DATA *ch );
   int   exp_level( short level );
   short get_trust( const CHAR_DATA *ch );
-  short get_age( CHAR_DATA *ch );
-  short get_curr_str( CHAR_DATA *ch );
-  short get_curr_int( CHAR_DATA *ch );
-  short get_curr_wis( CHAR_DATA *ch );
-  short get_curr_dex( CHAR_DATA *ch );
-  short get_curr_con( CHAR_DATA *ch );
-  short get_curr_cha( CHAR_DATA *ch );
-  short  get_curr_lck( CHAR_DATA *ch );
-  short  get_curr_frc( CHAR_DATA *ch );
+  short get_age( const CHAR_DATA *ch );
+  short get_curr_str( const CHAR_DATA *ch );
+  short get_curr_int( const CHAR_DATA *ch );
+  short get_curr_wis( const CHAR_DATA *ch );
+  short get_curr_dex( const CHAR_DATA *ch );
+  short get_curr_con( const CHAR_DATA *ch );
+  short get_curr_cha( const CHAR_DATA *ch );
+  short  get_curr_lck( const CHAR_DATA *ch );
+  short  get_curr_frc( const CHAR_DATA *ch );
   bool  can_take_proto( CHAR_DATA *ch );
   int   can_carry_n( CHAR_DATA *ch );
   int   can_carry_w( CHAR_DATA *ch );
@@ -4716,8 +4716,8 @@ extern "C" {
   void  reboot_check( time_t reset );
   void    auction_update( void );
   void  remove_portal( OBJ_DATA *portal );
-  int max_level( CHAR_DATA *ch, int ability );
-  bool    is_droid( CHAR_DATA *ch );
+  int max_level( const CHAR_DATA *ch, int ability );
+  bool is_droid( const CHAR_DATA *ch );
 
   /* newscore.c */
   const char *get_race( CHAR_DATA *ch );
@@ -4918,7 +4918,7 @@ extern "C" {
 
 
   MAP_INDEX_DATA *get_map_index(int vnum);
-  void            init_maps();
+  void            init_maps(void);
 
 
   /*

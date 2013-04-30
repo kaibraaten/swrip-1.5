@@ -98,7 +98,7 @@ static void evade_collision_with_sun( SHIP_DATA *ship, const SPACE_DATA *sun )
     }
 }
 
-void move_ships( void )
+void update_shipmovement( void )
 {
   SHIP_DATA *ship = NULL;
   SHIP_DATA *target = NULL;

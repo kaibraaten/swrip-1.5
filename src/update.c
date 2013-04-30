@@ -30,35 +30,37 @@
 #include "mud.h"
 
 /* from swskills.c */
-void    add_reinforcements( CHAR_DATA *ch );
+void add_reinforcements( CHAR_DATA *ch );
+
+/* mud_prog.c */
+void room_act_update( void );
+void obj_act_update( void );
 
 /*
  * Local functions.
  */
-int     hit_gain( CHAR_DATA *ch );
-int     mana_gain( CHAR_DATA *ch );
-int     move_gain( CHAR_DATA *ch );
-void    gain_addiction( CHAR_DATA *ch );
-void    mobile_update( void );
-void    weather_update( void );
-void    update_taxes( void );
-void    char_update( void );
-void    obj_update( void );
-void    aggr_update( void );
-void    room_act_update( void );
-void    obj_act_update( void );
-void    char_check( void );
-void    drunk_randoms( CHAR_DATA *ch );
-void    halucinations( CHAR_DATA *ch );
+static int hit_gain( const CHAR_DATA *ch );
+static int mana_gain( const CHAR_DATA *ch );
+static int move_gain( const CHAR_DATA *ch );
+static void gain_addiction( CHAR_DATA *ch );
+static void mobile_update( void );
+static void weather_update( void );
+static void update_taxes( void );
+static void char_update( void );
+static void obj_update( void );
+static void aggr_update( void );
+static void char_check( void );
+static void drunk_randoms( CHAR_DATA *ch );
+static void halucinations( CHAR_DATA *ch );
 
 /*
  * Global Variables
  */
 
-CHAR_DATA *     gch_prev;
-OBJ_DATA *      gobj_prev;
+CHAR_DATA *     gch_prev = NULL;
+OBJ_DATA *      gobj_prev = NULL;
 
-CHAR_DATA *     timechar;
+CHAR_DATA *     timechar = NULL;
 
 const char * const corpse_descs[] =
   {
@@ -90,23 +92,26 @@ extern int ppl_in_arena;
 extern int ppl_challenged;
 extern int num_in_arena();
 
-
-bool is_droid( CHAR_DATA *ch )
+bool is_droid( const CHAR_DATA *ch )
 {
-
   if ( !ch )
     return FALSE;
 
   if ( ch->race == RACE_DROID )
     return TRUE;
+
   if ( ch->race == RACE_PROTOCAL_DROID )
     return TRUE;
+
   if ( ch->race == RACE_ASSASSIN_DROID )
     return TRUE;
+
   if ( ch->race == RACE_GLADIATOR_DROID )
     return TRUE;
+
   if ( ch->race == RACE_ASTROMECH_DROID )
     return TRUE;
+
   if ( ch->race == RACE_INTERROGATION_DROID )
     return TRUE;
 
@@ -115,7 +120,7 @@ bool is_droid( CHAR_DATA *ch )
 /*
  * Advancement stuff.
  */
-int max_level( CHAR_DATA *ch, int ability)
+int max_level( const CHAR_DATA *ch, int ability)
 {
   int level = 0;
 
@@ -347,25 +352,19 @@ int max_level( CHAR_DATA *ch, int ability)
   return level;
 }
 
-void advance_level( CHAR_DATA *ch , int ability)
+void advance_level( CHAR_DATA *ch, int ability )
 {
-
   if ( ch->top_level < ch->skill_level[ability] && ch->top_level < 100 )
     {
-      ch->top_level = URANGE( 1 , ch->skill_level[ability] , 100 );
+      ch->top_level = URANGE( 1, ch->skill_level[ability], 100 );
     }
 
   if ( !IS_NPC(ch) )
     REMOVE_BIT( ch->act, PLR_BOUGHT_PET );
-
-  return;
 }
 
-
-
-void gain_exp( CHAR_DATA *ch, int gain , int ability )
+void gain_exp( CHAR_DATA *ch, int gain, int ability )
 {
-
   if ( IS_NPC(ch) )
     return;
 
@@ -389,16 +388,12 @@ void gain_exp( CHAR_DATA *ch, int gain , int ability )
       ch_printf( ch, "You have now obtained %s level %d!\r\n", ability_name[ability], ++ch->skill_level[ability] );
       advance_level( ch , ability);
     }
-
-  return;
 }
-
-
 
 /*
  * Regeneration stuff.
  */
-int hit_gain( CHAR_DATA *ch )
+int hit_gain( const CHAR_DATA *ch )
 {
   int gain;
 
@@ -425,7 +420,6 @@ int hit_gain( CHAR_DATA *ch )
 
       if ( ch->pcdata->condition[COND_THIRST] == 0 )
         gain /= 2;
-
     }
 
   if ( IS_AFFECTED(ch, AFF_POISON) )
@@ -440,7 +434,7 @@ int hit_gain( CHAR_DATA *ch )
 
 
 
-int mana_gain( CHAR_DATA *ch )
+int mana_gain( const CHAR_DATA *ch )
 {
   int gain;
 
@@ -479,7 +473,7 @@ int mana_gain( CHAR_DATA *ch )
 
 
 
-int move_gain( CHAR_DATA *ch )
+int move_gain( const CHAR_DATA *ch )
 {
   int gain;
 
@@ -2255,100 +2249,100 @@ void update_handler( void )
       gettimeofday(&start_time, NULL);
     }
 
-  if ( --pulse_area     <= 0 )
+  if ( --pulse_area <= 0 )
     {
-      pulse_area        = number_range( PULSE_AREA / 2, 3 * PULSE_AREA / 2 );
-      area_update       ( );
+      pulse_area = number_range( PULSE_AREA / 2, 3 * PULSE_AREA / 2 );
+      area_update();
       quest_update();
     }
 
-  if ( --pulse_taxes     <= 0 )
+  if ( --pulse_taxes <= 0 )
     {
-      pulse_taxes       = PULSE_TAXES ;
-      update_taxes      ( );
+      pulse_taxes = PULSE_TAXES ;
+      update_taxes();
     }
 
-  if ( --pulse_mobile   <= 0 )
+  if ( --pulse_mobile <= 0 )
     {
-      pulse_mobile      = PULSE_MOBILE;
-      mobile_update  ( );
+      pulse_mobile = PULSE_MOBILE;
+      mobile_update();
     }
 
-  if ( --pulse_space   <= 0 )
+  if ( --pulse_space <= 0 )
     {
       pulse_space = PULSE_SPACE;
-      update_ships( );
-      update_shuttle( );
+      update_ships();
+      update_shuttle();
     }
 
   if ( --pulse_recharge <= 0 )
     {
       pulse_recharge = PULSE_SPACE/3;
-      recharge_ships ( );
+      recharge_ships();
     }
 
-  if ( --pulse_ship   <= 0 )
+  if ( --pulse_ship <= 0 )
     {
-      pulse_ship = PULSE_SPACE/10;
+      pulse_ship = PULSE_SPACE / 10;
       update_spaceobjects();
       update_missiles();
-      update_ships();
+      update_shipmovement();
     }
 
   if ( --pulse_violence <= 0 )
     {
-      pulse_violence    = PULSE_VIOLENCE;
-      violence_update   ( );
+      pulse_violence = PULSE_VIOLENCE;
+      violence_update();
     }
 
-  if ( --pulse_point    <= 0 )
+  if ( --pulse_point <= 0 )
     {
-      pulse_point     = number_range( PULSE_TICK * 0.75, PULSE_TICK * 1.25 );
+      pulse_point = number_range( PULSE_TICK * 0.75, PULSE_TICK * 1.25 );
 
-      /*auth_update     ( );*/                  /* Gorog */
-      weather_update    ( );
-      char_update       ( );
-      obj_update        ( );
-      clear_vrooms      ( );                    /* remove virtual rooms */
+      weather_update();
+      char_update();
+      obj_update();
+      clear_vrooms();
     }
 
   if ( --pulse_second   <= 0 )
     {
       pulse_second      = PULSE_PER_SECOND;
       char_check( );
-      /*reboot_check( "" ); Disabled to check if its lagging a lot - Scryn*/
-      /* Much faster version enabled by Altrag..
-         although I dunno how it could lag too much, it was just a bunch
-         of comparisons.. */
       reboot_check(0);
     }
 
   if ( auction->item && --auction->pulse <= 0 )
     {
       auction->pulse = PULSE_AUCTION;
-      auction_update( );
+      auction_update();
     }
 
   if(in_start_arena || ppl_challenged)
-    if( --pulse_start_arena <= 0)
-      {
-        pulse_start_arena = PULSE_ARENA;
-        start_arena();
-      }
+    {
+      if( --pulse_start_arena <= 0)
+	{
+	  pulse_start_arena = PULSE_ARENA;
+	  start_arena();
+	}
+    }
 
   if(ppl_in_arena)
-    if(( --pulse_arena <= 0) || (num_in_arena()==1))
-      {
-        pulse_arena = PULSE_ARENA;
-        do_game();
-      }
+    {
+      if(( --pulse_arena <= 0) || (num_in_arena()==1))
+	{
+	  pulse_arena = PULSE_ARENA;
+	  do_game();
+	}
+    }
 
-  tele_update( );
-  aggr_update( );
-  obj_act_update ( );
-  room_act_update( );
+  tele_update();
+  aggr_update();
+  obj_act_update();
+  room_act_update();
   clean_obj_queue();            /* dispose of extracted objects */
   clean_char_queue();           /* dispose of dead mobs/quitting chars */
+
   if ( timechar )
     {
       gettimeofday(&etime, NULL);
@@ -2359,10 +2353,7 @@ void update_handler( void )
                  etime.tv_sec, etime.tv_usec );
       timechar = NULL;
     }
-
-  return;
 }
-
 
 void remove_portal( OBJ_DATA *portal )
 {
@@ -2379,6 +2370,7 @@ void remove_portal( OBJ_DATA *portal )
 
   fromRoom = portal->in_room;
   found = FALSE;
+
   if ( !fromRoom )
     {
       bug( "remove_portal: portal->in_room is NULL", 0 );
@@ -2386,11 +2378,13 @@ void remove_portal( OBJ_DATA *portal )
     }
 
   for ( pexit = fromRoom->first_exit; pexit; pexit = pexit->next )
-    if ( IS_SET( pexit->exit_info, EX_PORTAL ) )
-      {
-        found = TRUE;
-        break;
-      }
+    {
+      if ( IS_SET( pexit->exit_info, EX_PORTAL ) )
+	{
+	  found = TRUE;
+	  break;
+	}
+    }
 
   if ( !found )
     {
@@ -2405,20 +2399,9 @@ void remove_portal( OBJ_DATA *portal )
     bug( "remove_portal: toRoom is NULL", 0 );
 
   extract_exit( fromRoom, pexit );
-  /* rendunancy */
-  /* send a message to fromRoom */
-  /* ch = fromRoom->first_person; */
-  /* if(ch!=NULL) */
-  /* act( AT_PLAIN, "A magical portal below winks from existence.", ch, NULL, NULL, TO_ROOM ); */
 
-  /* send a message to toRoom */
   if ( toRoom && (ch = toRoom->first_person) != NULL )
     act( AT_PLAIN, "A magical portal above winks from existence.", ch, NULL, NULL, TO_ROOM );
-
-  /* remove the portal obj: looks better to let update_obj do this */
-  /* extract_obj(portal);  */
-
-  return;
 }
 
 void reboot_check( time_t reset )
@@ -2500,207 +2483,7 @@ void reboot_check( time_t reset )
       --trun;
       return;
     }
-  return;
 }
-
-#if 0
-void reboot_check( char *arg )
-{
-  char buf[MAX_STRING_LENGTH];
-  extern bool mud_down;
-  /*struct tm *timestruct;
-    int timecheck;*/
-  CHAR_DATA *vch;
-
-  /*Bools to show which pre-boot echoes we've done. */
-  static bool thirty  = FALSE;
-  static bool fifteen = FALSE;
-  static bool ten     = FALSE;
-  static bool five    = FALSE;
-  static bool four    = FALSE;
-  static bool three   = FALSE;
-  static bool two     = FALSE;
-  static bool one     = FALSE;
-
-  /* This function can be called by do_setboot when the reboot time
-     is being manually set to reset all the bools. */
-  if ( !str_cmp( arg, "reset" ) )
-    {
-      thirty  = FALSE;
-      fifteen = FALSE;
-      ten     = FALSE;
-      five    = FALSE;
-      four    = FALSE;
-      three   = FALSE;
-      two     = FALSE;
-      one     = FALSE;
-      return;
-    }
-
-  /* If the mud has been up less than 18 hours and the boot time
-     wasn't set manually, forget it. */
-  /* Usage monitor */
-
-  if ((current_time % 1800) == 0)
-    {
-      sprintf(buf, "%s: %d players", ctime(&current_time), num_descriptors);
-      append_to_file(USAGE_FILE, buf);
-    }
-
-  /* Change by Scryn - if mud has not been up 18 hours at boot time - still
-   * allow for warnings even if not up 18 hours
-   */
-  if ( new_boot_time_t - boot_time < 60*60*18
-       && set_boot_time->manual == 0 )
-    {
-      return;
-    }
-  /*
-    timestruct = localtime( &current_time);
-
-    if ( timestruct->tm_hour == set_boot_time->hour
-    && timestruct->tm_min  == set_boot_time->min )*/
-  if ( new_boot_time_t <= current_time )
-    {
-      /* Return auction item to seller */
-      if (auction->item != NULL)
-        {
-          sprintf (buf,"Sale of %s has been stopped by mud.",
-                   auction->item->short_descr);
-          talk_auction (buf);
-          obj_to_char (auction->item, auction->seller);
-          auction->item = NULL;
-          if (auction->buyer != NULL && auction->seller != auction->buyer) /* return money to the buyer */
-            {
-              auction->buyer->gold += auction->bet;
-              send_to_char ("Your money has been returned.\r\n",auction->buyer);
-            }
-        }
-
-      sprintf( buf, "You are forced from these realms by a strong magical presence" );
-      echo_to_all( AT_YELLOW, buf, ECHOTAR_ALL );
-      sprintf( buf, "as life here is reconstructed." );
-      echo_to_all( AT_YELLOW, buf, ECHOTAR_ALL );
-
-      /* Save all characters before booting. */
-      for ( vch = first_char; vch; vch = vch->next )
-        {
-          if ( !IS_NPC( vch ) )
-            save_char_obj( vch );
-        }
-      mud_down = TRUE;
-    }
-
-  /* How many minutes to the scheduled boot? */
-  /*  timecheck = ( set_boot_time->hour * 60 + set_boot_time->min )
-      - ( timestruct->tm_hour * 60 + timestruct->tm_min );
-
-      if ( timecheck > 30  || timecheck < 0 ) return;
-
-      if ( timecheck <= 1 ) */
-  if ( new_boot_time_t - current_time <= 60 )
-    {
-      if ( one == FALSE )
-        {
-          sprintf( buf, "You feel the ground shake as the end comes near!" );
-          echo_to_all( AT_YELLOW, buf, ECHOTAR_ALL );
-          one = TRUE;
-          sysdata.DENY_NEW_PLAYERS = TRUE;
-        }
-      return;
-    }
-
-  /*  if ( timecheck == 2 )*/
-  if ( new_boot_time_t - current_time <= 120 )
-    {
-      if ( two == FALSE )
-        {
-          sprintf( buf, "Lightning crackles in the sky above!" );
-          echo_to_all( AT_YELLOW, buf, ECHOTAR_ALL );
-          two = TRUE;
-          sysdata.DENY_NEW_PLAYERS = TRUE;
-        }
-      return;
-    }
-
-  /*  if ( timecheck == 3 )*/
-  if (new_boot_time_t - current_time <= 180 )
-    {
-      if ( three == FALSE )
-        {
-          sprintf( buf, "Crashes of thunder sound across the land!" );
-          echo_to_all( AT_YELLOW, buf, ECHOTAR_ALL );
-          three = TRUE;
-          sysdata.DENY_NEW_PLAYERS = TRUE;
-        }
-      return;
-    }
-
-  /*  if ( timecheck == 4 )*/
-  if( new_boot_time_t - current_time <= 240 )
-    {
-      if ( four == FALSE )
-        {
-          sprintf( buf, "The sky has suddenly turned midnight black." );
-          echo_to_all( AT_YELLOW, buf, ECHOTAR_ALL );
-          four = TRUE;
-          sysdata.DENY_NEW_PLAYERS = TRUE;
-        }
-      return;
-    }
-
-  /*  if ( timecheck == 5 )*/
-  if( new_boot_time_t - current_time <= 300 )
-    {
-      if ( five == FALSE )
-        {
-          sprintf( buf, "You notice the life forms around you slowly dwindling away." );
-          echo_to_all( AT_YELLOW, buf, ECHOTAR_ALL );
-          five = TRUE;
-          sysdata.DENY_NEW_PLAYERS = TRUE;
-        }
-      return;
-    }
-
-  /*  if ( timecheck == 10 )*/
-  if( new_boot_time_t - current_time <= 600 )
-    {
-      if ( ten == FALSE )
-        {
-          sprintf( buf, "The seas across the realm have turned frigid." );
-          echo_to_all( AT_YELLOW, buf, ECHOTAR_ALL );
-          ten = TRUE;
-        }
-      return;
-    }
-
-  /*  if ( timecheck == 15 )*/
-  if( new_boot_time_t - current_time <= 900 )
-    {
-      if ( fifteen == FALSE )
-        {
-          sprintf( buf, "The aura of magic which once surrounded the realms seems slightly unstable." );
-          echo_to_all( AT_YELLOW, buf, ECHOTAR_ALL );
-          fifteen = TRUE;
-        }
-      return;
-    }
-
-  /*  if ( timecheck == 30 )*/
-  if( new_boot_time_t - current_time <= 1800 )
-    {
-      if ( thirty == FALSE )
-        {
-          sprintf( buf, "You sense a change in the magical forces surrounding you." );
-          echo_to_all( AT_YELLOW, buf, ECHOTAR_ALL );
-          thirty = TRUE;
-        }
-      return;
-    }
-
-  return;
-}
-#endif
 
 /* the auction update*/
 
@@ -2787,14 +2570,17 @@ void auction_update (void)
             }
           else
             obj_to_char (auction->item,auction->seller);
+
           tax = (int)auction->item->cost * 0.05;
           boost_economy( auction->seller->in_room->area, tax );
           sprintf(buf, "The auctioneer charges you an auction fee of %d.\r\n", tax );
           send_to_char(buf, auction->seller);
+
           if ((auction->seller->gold - tax) < 0)
             auction->seller->gold = 0;
           else
             auction->seller->gold -= tax;
+
           if ( IS_SET( sysdata.save_flags, SV_AUCTION ) )
             save_char_obj( auction->seller );
         } /* else */
