@@ -4142,7 +4142,10 @@ extern "C" {
   void copyover_recover( void );
 
   /* act_comm.c */
-  void    sound_to_room( ROOM_INDEX_DATA *room , char *argument );
+  char *drunk_speech( const char *argument, CHAR_DATA *ch );
+  void talk_channel( CHAR_DATA *ch, char *argument,
+		     int channel, const char *verb );
+  void sound_to_room( ROOM_INDEX_DATA *room , char *argument );
   bool  circle_follow( CHAR_DATA *ch, CHAR_DATA *victim );
   void  add_follower( CHAR_DATA *ch, CHAR_DATA *master );
   void  stop_follower( CHAR_DATA *ch );
@@ -4155,8 +4158,6 @@ extern "C" {
                           CHAR_DATA *cch );
   bool    can_learn_lang( CHAR_DATA *ch, int language );
   int     countlangs( int languages );
-  char *  translate( CHAR_DATA *ch, CHAR_DATA *victim,
-                     const char *argument );
   char *        obj_short( OBJ_DATA *obj );
 
   /* act_info.c */

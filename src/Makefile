@@ -39,7 +39,14 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o \
 	planets.o player.o reset.o save.o ships.o shops.o shuttle.o \
 	skills.o special.o space.o spaceobjects.o swskills.o \
 	tables.o track.o update.o vector3_aux.o \
-	$(CMDDIR)/beep.o
+	$(CMDDIR)/allclantalk.o $(CMDDIR)/answer.o $(CMDDIR)/ask.o \
+	$(CMDDIR)/beep.o $(CMDDIR)/chat.o $(CMDDIR)/avtalk.o \
+	$(CMDDIR)/clantalk.o $(CMDDIR)/i103.o $(CMDDIR)/i104.o \
+	$(CMDDIR)/i105.o \
+	$(CMDDIR)/immtalk.o $(CMDDIR)/music.o $(CMDDIR)/newbiechat.o \
+	$(CMDDIR)/ooc.o $(CMDDIR)/quest.o $(CMDDIR)/shiptalk.o \
+	$(CMDDIR)/shout.o $(CMDDIR)/spacetalk.o $(CMDDIR)/systemtalk.o \
+	$(CMDDIR)/wartalk.o $(CMDDIR)/yell.o $(CMDDIR)/say.o
 
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
