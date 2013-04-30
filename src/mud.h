@@ -93,8 +93,6 @@ typedef struct  obj_data                OBJ_DATA;
 typedef struct  obj_index_data          OBJ_INDEX_DATA;
 typedef struct  pc_data                 PC_DATA;
 typedef struct  reset_data              RESET_DATA;
-typedef struct  map_index_data          MAP_INDEX_DATA;   /* maps */
-typedef struct  map_data                MAP_DATA;   /* maps */
 typedef struct  room_index_data         ROOM_INDEX_DATA;
 typedef struct  shop_data               SHOP_DATA;
 typedef struct  repairshop_data         REPAIR_DATA;
@@ -2782,7 +2780,6 @@ struct room_index_data
   SHIP_DATA *   first_ship;
   SHIP_DATA *   last_ship;
   char *                name;
-  MAP_DATA *            map;                 /* maps */
   char *                description;
   int                   vnum;
   int                   room_flags;
@@ -4890,36 +4887,6 @@ extern "C" {
 #define GA_IMMUNE       BV11
 #define GA_SUSCEPTIBLE  BV12
 #define GA_RIS          BV30
-
-
-
-  /*
-   *   Map Structures
-   */
-
-  DECLARE_DO_FUN( do_mapout     );
-  DECLARE_DO_FUN( do_lookmap    );
-
-  struct  map_data      /* contains per-room data */
-  {
-    int vnum;           /* which map this room belongs to */
-    int x;              /* horizontal coordinate */
-    int y;              /* vertical coordinate */
-    char entry;         /* code that shows up on map */
-  };
-
-
-  struct  map_index_data
-  {
-    MAP_INDEX_DATA  *next;
-    int                   vnum;                   /* vnum of the map */
-    int             map_of_vnums[49][81];   /* room vnums aranged as a map */
-  };
-
-
-  MAP_INDEX_DATA *get_map_index(int vnum);
-  void            init_maps(void);
-
 
   /*
    * mudprograms stuff

@@ -75,8 +75,6 @@ int                     nummobsloaded;
 int                     numobjsloaded;
 int                     physicalobjects;
 
-MAP_INDEX_DATA  *       first_map;      /* maps */
-
 AUCTION_DATA    *       auction;        /* auctions */
 
 /* criminals */
@@ -769,16 +767,12 @@ void boot_db( bool fCopyOver )
 
   MOBtrigger = TRUE;
 
-  /* init_maps ( ); */
-
   if( fCopyOver )
     {
       log_string( "Running copyover_recover." );
       copyover_recover();
     }
 }
-
-
 
 /*
  * Load an 'area' header line.

@@ -5422,17 +5422,6 @@ void fold_area( AREA_DATA *tarea, char *filename, bool install )
         fprintf( fpout, "E\n%s~\n%s~\n",
                  ed->keyword, strip_cr( ed->description ));
 
-      if ( room->map )   /* maps */
-        {
-#ifdef OLDMAPS
-          fprintf( fpout, "M\n" );
-          fprintf( fpout, "%s~\n", strip_cr( room->map )        );
-#endif
-          fprintf( fpout, "M %d %d %d %c\n",    room->map->vnum
-                   , room->map->x
-                   , room->map->y
-                   , room->map->entry );
-        }
       if ( room->mudprogs )
         {
           for ( mprog = room->mudprogs; mprog; mprog = mprog->next )
