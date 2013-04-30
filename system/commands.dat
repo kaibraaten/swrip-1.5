@@ -1415,14 +1415,6 @@ Log         0
 End
 
 #COMMAND
-Name        ide~
-Code        do_ide
-Position    0
-Level       0
-Log         0
-End
-
-#COMMAND
 Name        idea~
 Code        do_idea
 Position    0
@@ -2634,14 +2626,6 @@ End
 Name        quaff~
 Code        do_quaff
 Position    5
-Level       0
-Log         0
-End
-
-#COMMAND
-Name        qui~
-Code        do_qui
-Position    0
 Level       0
 Log         0
 End
