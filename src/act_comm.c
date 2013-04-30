@@ -530,92 +530,6 @@ void to_channel( const char *argument, int channel, const char *verb, short leve
     }
 }
 
-void do_ansi( CHAR_DATA *ch, char *argument )
-{
-  char arg[MAX_INPUT_LENGTH];
-
-  one_argument( argument, arg );
-
-  if ( arg[0] == '\0' )
-    {
-      send_to_char( "ANSI ON or OFF?\r\n", ch );
-      return;
-    }
-  if ( (str_cmp(arg,"on")==0) || (str_cmp(arg,"ON") == 0) ) {
-    SET_BIT(ch->act,PLR_ANSI);
-    set_char_color( AT_WHITE + AT_BLINK, ch);
-    send_to_char( "ANSI ON!!!\r\n", ch);
-    return;
-  }
-
-  if ( (str_cmp(arg,"off")==0) || (str_cmp(arg,"OFF") == 0) ) {
-    REMOVE_BIT(ch->act,PLR_ANSI);
-    send_to_char( "Okay... ANSI support is now off\r\n", ch );
-    return;
-  }
-}
-
-void do_sound( CHAR_DATA *ch, char *argument )
-{
-  char arg[MAX_INPUT_LENGTH];
-
-  one_argument( argument, arg );
-
-  if ( arg[0] == '\0' )
-    {
-      send_to_char( "SOUND ON or OFF?\r\n", ch );
-      return;
-    }
-  if ( (str_cmp(arg,"on")==0) || (str_cmp(arg,"ON") == 0) ) {
-    SET_BIT(ch->act,PLR_SOUND);
-    set_char_color( AT_WHITE + AT_BLINK, ch);
-    send_to_char( "SOUND ON!!!\r\n", ch);
-    send_to_char( "!!SOUND(hopeknow)", ch);
-    return;
-  }
-
-  if ( (str_cmp(arg,"off")==0) || (str_cmp(arg,"OFF") == 0) ) {
-    REMOVE_BIT(ch->act,PLR_SOUND);
-    send_to_char( "Okay... SOUND support is now off\r\n", ch );
-    return;
-  }
-}
-
-void do_save( CHAR_DATA *ch, char *argument )
-{
-  if ( IS_NPC(ch) && IS_SET(ch->act, ACT_POLYMORPHED))
-    {
-      send_to_char("You can't save while polymorphed.\r\n", ch);
-      return;
-    }
-
-  if ( IS_NPC(ch) )
-    return;
-
-  if ( !IS_SET( ch->affected_by, race_table[ch->race].affected ) )
-    SET_BIT( ch->affected_by, race_table[ch->race].affected );
-  if ( !IS_SET( ch->resistant, race_table[ch->race].resist ) )
-    SET_BIT( ch->resistant, race_table[ch->race].resist );
-  if ( !IS_SET( ch->susceptible, race_table[ch->race].suscept ) )
-    SET_BIT( ch->susceptible, race_table[ch->race].suscept );
-
-  if ( NOT_AUTHED(ch) )
-    {
-      send_to_char("You can't save untill after you've graduated from the acadamey.\r\n", ch);
-      return;
-    }
-
-  save_char_obj( ch );
-  save_home (ch );
-  if ( IS_SET( ch->in_room->room_flags, ROOM_CLANSTOREROOM ) )
-    save_storeroom( ch->in_room );
-
-  saving_char = NULL;
-  send_to_char( "Ok.\r\n", ch );
-  return;
-}
-
-
 /*
  * Something from original DikuMUD that Merc yanked out.
  * Used to prevent following loops, which can cause problems if people
@@ -631,43 +545,6 @@ bool circle_follow( CHAR_DATA *ch, CHAR_DATA *victim )
       return TRUE;
   return FALSE;
 }
-void do_dismiss( CHAR_DATA *ch, char *argument )
-{
-  char arg[MAX_INPUT_LENGTH];
-  CHAR_DATA *victim;
-
-  one_argument( argument, arg );
-
-  if ( arg[0] == '\0' )
-    {
-      send_to_char( "Dismiss whom?\r\n", ch );
-      return;
-    }
-
-  if ( ( victim = get_char_room( ch, arg ) ) == NULL )
-    {
-      send_to_char( "They aren't here.\r\n", ch );
-      return;
-    }
-
-  if ( ( IS_AFFECTED( victim, AFF_CHARM ) )
-       && ( IS_NPC( victim ) )
-       && ( victim->master == ch ) )
-    {
-      stop_follower( victim );
-      stop_hating( victim );
-      stop_hunting( victim );
-      stop_fearing( victim );
-      act( AT_ACTION, "$n dismisses $N.", ch, NULL, victim, TO_NOTVICT );
-      act( AT_ACTION, "You dismiss $N.", ch, NULL, victim, TO_CHAR );
-    }
-  else
-    {
-      send_to_char( "You cannot dismiss them.\r\n", ch );
-    }
-  return;
-}
-
 
 void do_follow( CHAR_DATA *ch, char *argument )
 {

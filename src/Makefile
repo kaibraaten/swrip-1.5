@@ -49,7 +49,8 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o \
 	$(CMDDIR)/wartalk.o $(CMDDIR)/yell.o $(CMDDIR)/say.o \
 	$(CMDDIR)/tell.o $(CMDDIR)/reply.o $(CMDDIR)/emote.o \
 	$(CMDDIR)/bug.o $(CMDDIR)/idea.o $(CMDDIR)/typo.o $(CMDDIR)/rent.o \
-	$(CMDDIR)/quit.o
+	$(CMDDIR)/quit.o $(CMDDIR)/ansi.o $(CMDDIR)/sound.o $(CMDDIR)/save.o \
+	$(CMDDIR)/dismiss.o
 
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
