@@ -45,7 +45,7 @@ void update_spaceobjects( void )
 
   for( spaceobj = first_spaceobject; spaceobj; spaceobj = spaceobj->next )
     {
-      spaceobject_move( spaceobj );
+      move_spaceobject( spaceobj );
 
       if( spaceobj->pos.x > MAX_COORD )
         spaceobj->pos.x = -MAX_COORD_S;

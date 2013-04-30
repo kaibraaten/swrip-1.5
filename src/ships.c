@@ -116,7 +116,7 @@ void move_ships( void )
 
       if ( ship->shipstate != SHIP_LAND && ship->shipstate != SHIP_LAND_2)
         {
-          ship_move( ship );
+          move_ship( ship );
         }
 
       /*
@@ -1461,7 +1461,7 @@ void recharge_ships()
     }
 }
 
-void update_ships()
+void update_ships( void )
 {
   SHIP_DATA *ship = NULL;
   SHIP_DATA *target = NULL;

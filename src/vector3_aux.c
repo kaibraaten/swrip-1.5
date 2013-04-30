@@ -173,8 +173,8 @@ void ship_align_heading( SHIP_DATA * const ship,
  * Calculate new position based on heading and speed.
  */
 
-static void move_space_object( Vector3 * const pos,
-			       const Vector3 * const head, const int speed )
+static void handle_movement( Vector3 * const pos,
+			     const Vector3 * const head, const int speed )
 {
   if( speed > 0 )
   {
@@ -193,19 +193,19 @@ static void move_space_object( Vector3 * const pos,
   }
 }
 
-void spaceobject_move( SPACE_DATA * const spaceobj )
+void move_spaceobject( SPACE_DATA * const spaceobj )
 {
-  move_space_object( &spaceobj->pos, &spaceobj->head, spaceobj->speed );
+  handle_movement( &spaceobj->pos, &spaceobj->head, spaceobj->speed );
 }
 
-void ship_move( SHIP_DATA * const ship )
+void move_ship( SHIP_DATA * const ship )
 {
-  move_space_object( &ship->pos, &ship->head, ship->currspeed );
+  handle_movement( &ship->pos, &ship->head, ship->currspeed );
 }
 
-void missile_move( MISSILE_DATA * const missile )
+void move_missile( MISSILE_DATA * const missile )
 {
-  move_space_object( &missile->pos, &missile->head, missile->speed );
+  handle_movement( &missile->pos, &missile->head, missile->speed );
 }
 
 double ship_distance_to_ship( const SHIP_DATA * const ship,

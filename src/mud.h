@@ -4312,10 +4312,10 @@ extern "C" {
   SHIP_DATA  * ship_from_engine( int vnum );
   SHIP_DATA  * get_ship_here( const char *name , SHIP_DATA *eShip );
   void         showspaceobject( CHAR_DATA *ch , SPACE_DATA *spaceobject );
-  void         update_ships( void );
+  void         move_ships( void );
   void         quest_update( void );
   void         recharge_ships( void );
-  void         move_ships( void );
+  void         update_ships( void );
   void update_spaceobjects( void );
   void update_missiles( void );
 #if 0

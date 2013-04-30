@@ -242,7 +242,7 @@ void update_missiles( void )
       if ( target->spaceobject && missile_in_range( ship, missile ) )
         {
           missile_set_course_to_ship( missile, target );
-          missile_move( missile );
+          move_missile( missile );
 
           if ( missile_distance_to_ship( missile, target ) <= 20 )
             {

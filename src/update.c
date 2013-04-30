@@ -2292,7 +2292,7 @@ void update_handler( void )
       pulse_ship = PULSE_SPACE/10;
       update_spaceobjects();
       update_missiles();
-      move_ships();
+      update_ships();
     }
 
   if ( --pulse_violence <= 0 )
