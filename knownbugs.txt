@@ -1,0 +1,1 @@
+* do_reply does not check for the presence of a comlink.
