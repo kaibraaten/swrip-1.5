@@ -3805,7 +3805,6 @@ DECLARE_DO_FUN( do_recite       );
 DECLARE_DO_FUN( do_redit        );
 DECLARE_DO_FUN( do_regoto       );
 DECLARE_DO_FUN( do_remove       );
-DECLARE_DO_FUN( do_rent         );
 DECLARE_DO_FUN( do_repair       );
 DECLARE_DO_FUN( do_repairset    );
 DECLARE_DO_FUN( do_repairshops  );
