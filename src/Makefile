@@ -46,18 +46,25 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o \
 	$(CMDDIR)/areas.o \
 	$(CMDDIR)/ask.o \
 	$(CMDDIR)/avtalk.o \
+	$(CMDDIR)/bashdoor.o \
 	$(CMDDIR)/beep.o \
 	$(CMDDIR)/bug.o \
 	$(CMDDIR)/channels.o \
 	$(CMDDIR)/chat.o \
 	$(CMDDIR)/clantalk.o \
+	$(CMDDIR)/climb.o \
+	$(CMDDIR)/close.o \
 	$(CMDDIR)/commands.o \
 	$(CMDDIR)/compare.o \
 	$(CMDDIR)/config.o \
 	$(CMDDIR)/consider.o \
 	$(CMDDIR)/credits.o \
 	$(CMDDIR)/dismiss.o \
+	$(CMDDIR)/down.o \
+	$(CMDDIR)/drag.o \
+	$(CMDDIR)/east.o \
 	$(CMDDIR)/emote.o \
+	$(CMDDIR)/enter.o \
 	$(CMDDIR)/examine.o \
 	$(CMDDIR)/exits.o \
 	$(CMDDIR)/follow.o \
@@ -74,11 +81,17 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o \
 	$(CMDDIR)/idea.o \
 	$(CMDDIR)/immtalk.o \
 	$(CMDDIR)/languages.o \
+	$(CMDDIR)/leave.o \
+	$(CMDDIR)/lock.o \
 	$(CMDDIR)/look.o \
 	$(CMDDIR)/music.o \
 	$(CMDDIR)/newbiechat.o \
 	$(CMDDIR)/nohelps.o \
+	$(CMDDIR)/north.o \
+	$(CMDDIR)/northeast.o \
+	$(CMDDIR)/northwest.o \
 	$(CMDDIR)/ooc.o \
+	$(CMDDIR)/open.o \
 	$(CMDDIR)/order.o \
 	$(CMDDIR)/pager.o \
 	$(CMDDIR)/password.o \
@@ -86,31 +99,43 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o \
 	$(CMDDIR)/quest.o \
 	$(CMDDIR)/quit.o \
 	$(CMDDIR)/reply.o \
+	$(CMDDIR)/rest.o \
 	$(CMDDIR)/save.o \
 	$(CMDDIR)/say.o \
 	$(CMDDIR)/shiptalk.o \
 	$(CMDDIR)/shout.o \
+	$(CMDDIR)/shove.o \
 	$(CMDDIR)/showstatistic.o \
 	$(CMDDIR)/showstatistic_web.o \
+	$(CMDDIR)/sit.o \
+	$(CMDDIR)/sleep.o \
 	$(CMDDIR)/slist.o \
 	$(CMDDIR)/socials.o \
 	$(CMDDIR)/sound.o \
+	$(CMDDIR)/south.o \
+	$(CMDDIR)/southeast.o \
+	$(CMDDIR)/southwest.o \
 	$(CMDDIR)/spacetalk.o \
 	$(CMDDIR)/speak.o \
 	$(CMDDIR)/split.o \
+	$(CMDDIR)/stand.o \
 	$(CMDDIR)/systemtalk.o \
 	$(CMDDIR)/teach.o \
 	$(CMDDIR)/tell.o \
 	$(CMDDIR)/time.o \
 	$(CMDDIR)/typo.o \
-	$(CMDDIR)/yell.o \
+	$(CMDDIR)/unlock.o \
+	$(CMDDIR)/up.o \
+	$(CMDDIR)/wake.o \
 	$(CMDDIR)/wartalk.o \
 	$(CMDDIR)/weather.o \
+	$(CMDDIR)/west.o \
 	$(CMDDIR)/where.o \
 	$(CMDDIR)/who.o \
 	$(CMDDIR)/whois.o \
 	$(CMDDIR)/wimpy.o \
 	$(CMDDIR)/wizlist.o \
+	$(CMDDIR)/yell.o \
 
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 

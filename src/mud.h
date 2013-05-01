@@ -4175,6 +4175,9 @@ extern "C" {
   void do_showstatistic_web( CHAR_DATA *ch, char *argument );
 
   /* act_move.c */
+  bool has_key( CHAR_DATA *ch, int key );
+  void set_bexit_flag( EXIT_DATA *pexit, int flag );
+  void remove_bexit_flag( EXIT_DATA *pexit, int flag );
   ROOM_INDEX_DATA *generate_exit( ROOM_INDEX_DATA *in_room, EXIT_DATA **pexit );
   void  clear_vrooms( void );
   ED *  find_door( CHAR_DATA *ch, char *arg, bool quiet );
