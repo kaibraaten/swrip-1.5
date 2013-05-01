@@ -38,7 +38,6 @@ extern short	top_room;
 
 bool mob_snipe( CHAR_DATA *ch , CHAR_DATA *victim);
 ch_ret  one_hit( CHAR_DATA *ch, CHAR_DATA *victim, int dt );
-ROOM_INDEX_DATA *generate_exit( ROOM_INDEX_DATA *in_room, EXIT_DATA **pexit );
 
 /* You can define or not define TRACK_THOUGH_DOORS, above, depending on
    whether or not you want track to find paths which lead through closed

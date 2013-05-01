@@ -39,8 +39,6 @@ void failed_casting( struct skill_type *skill, CHAR_DATA *ch,
 
 int     xp_compute( CHAR_DATA *gch, CHAR_DATA *victim );
 
-ROOM_INDEX_DATA *generate_exit( ROOM_INDEX_DATA *in_room, EXIT_DATA **pexit );
-
 /*
  * Dummy function
  */

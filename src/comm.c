@@ -43,10 +43,7 @@ static const char go_ahead_str    [] = { (const char)IAC, (const char)GA, '\0' }
 #define MAX_NEST        100
 
 bool bootup = FALSE;
-void    save_sysdata( SYSTEM_DATA sys );
-
-/*  from act_info?  */
-void    show_condition( CHAR_DATA *ch, CHAR_DATA *victim );
+void save_sysdata( SYSTEM_DATA sys );
 
 /*
  * Global variables.

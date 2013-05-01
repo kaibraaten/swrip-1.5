@@ -148,9 +148,6 @@ void    launch_bus( SHIP_DATA *ship );
 #endif
 void    echo_to_room_dnr( int ecolor, ROOM_INDEX_DATA *room, const char *argument );
 
-ROOM_INDEX_DATA *generate_exit( ROOM_INDEX_DATA *in_room, EXIT_DATA **pexit );
-
-
 void echo_to_room_dnr( int ecolor, ROOM_INDEX_DATA *room,
 		       const char *argument )
 {

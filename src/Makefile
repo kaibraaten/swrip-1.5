@@ -52,7 +52,18 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o \
 	$(CMDDIR)/quit.o $(CMDDIR)/ansi.o $(CMDDIR)/sound.o $(CMDDIR)/save.o \
 	$(CMDDIR)/dismiss.o $(CMDDIR)/follow.o $(CMDDIR)/order.o \
 	$(CMDDIR)/group.o $(CMDDIR)/split.o $(CMDDIR)/gtell.o \
-	$(CMDDIR)/speak.o $(CMDDIR)/languages.o
+	$(CMDDIR)/speak.o $(CMDDIR)/languages.o $(CMDDIR)/look.o \
+	$(CMDDIR)/glance.o $(CMDDIR)/examine.o $(CMDDIR)/exits.o \
+	$(CMDDIR)/time.o $(CMDDIR)/weather.o $(CMDDIR)/help.o \
+	$(CMDDIR)/hedit.o $(CMDDIR)/hset.o $(CMDDIR)/hlist.o $(CMDDIR)/who.o \
+	$(CMDDIR)/compare.o $(CMDDIR)/where.o $(CMDDIR)/consider.o \
+	$(CMDDIR)/practice.o $(CMDDIR)/teach.o $(CMDDIR)/wimpy.o \
+	$(CMDDIR)/password.o $(CMDDIR)/socials.o $(CMDDIR)/commands.o \
+	$(CMDDIR)/channels.o $(CMDDIR)/wizlist.o $(CMDDIR)/config.o \
+	$(CMDDIR)/credits.o $(CMDDIR)/areas.o $(CMDDIR)/afk.o \
+	$(CMDDIR)/slist.o $(CMDDIR)/whois.o $(CMDDIR)/pager.o \
+	$(CMDDIR)/showstatistic_web.o $(CMDDIR)/showstatistic.o \
+	$(CMDDIR)/nohelps.o
 
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 

@@ -3407,6 +3407,12 @@ extern          WEATHER_DATA            weather_info;
 extern          AUCTION_DATA      *     auction;
 extern          struct act_prog_data *  mob_act_list;
 
+/*
+ * Place any skill types you don't want them to be able to practice
+ * normally in this list.  Separate each with a space.
+ * (Uses an is_name check). -- Altrag
+ */
+#define CANT_PRAC "Tongue"
 
 /*
  * Command functions.
@@ -4159,12 +4165,18 @@ extern "C" {
   char *        obj_short( OBJ_DATA *obj );
 
   /* act_info.c */
+  int get_race_from_name( char *arg );
+  int get_class_from_name( char *arg );
+  HELP_DATA *get_help( CHAR_DATA *ch, char *argument );
+  void show_condition( CHAR_DATA *ch, CHAR_DATA *victim );
+  bool check_blind( CHAR_DATA *ch );
   char *format_obj_to_char( OBJ_DATA *obj, CHAR_DATA *ch, bool fShort );
   void show_list_to_char( OBJ_DATA *list, CHAR_DATA *ch,
 			  bool fShort, bool fShowNothing );
   void do_showstatistic_web( CHAR_DATA *ch, char *argument );
 
   /* act_move.c */
+  ROOM_INDEX_DATA *generate_exit( ROOM_INDEX_DATA *in_room, EXIT_DATA **pexit );
   void  clear_vrooms( void );
   ED *  find_door( CHAR_DATA *ch, char *arg, bool quiet );
   ED *  get_exit( ROOM_INDEX_DATA *room, short dir );
