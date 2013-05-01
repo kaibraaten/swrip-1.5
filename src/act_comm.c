@@ -21,12 +21,7 @@
  *                         Player communication module                     *
  ****************************************************************************/
 
-
-#include <sys/types.h>
 #include <ctype.h>
-#include <stdio.h>
-#include <string.h>
-#include <time.h>
 #include "mud.h"
 #include "vector3_aux.h"
 
@@ -490,8 +485,6 @@ void talk_channel( CHAR_DATA *ch, char *argument, int channel, const char *verb 
           vch->position = position;
         }
     }
-
-  return;
 }
 
 void to_channel( const char *argument, int channel, const char *verb, short level )
