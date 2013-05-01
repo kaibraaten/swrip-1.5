@@ -2807,14 +2807,6 @@ Log         0
 End
 
 #COMMAND
-Name        rent~
-Code        do_rent
-Position    0
-Level       0
-Log         0
-End
-
-#COMMAND
 Name        repairset~
 Code        do_repairset
 Position    0
