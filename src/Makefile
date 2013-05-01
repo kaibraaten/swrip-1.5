@@ -50,7 +50,8 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o \
 	$(CMDDIR)/tell.o $(CMDDIR)/reply.o $(CMDDIR)/emote.o \
 	$(CMDDIR)/bug.o $(CMDDIR)/idea.o $(CMDDIR)/typo.o $(CMDDIR)/rent.o \
 	$(CMDDIR)/quit.o $(CMDDIR)/ansi.o $(CMDDIR)/sound.o $(CMDDIR)/save.o \
-	$(CMDDIR)/dismiss.o
+	$(CMDDIR)/dismiss.o $(CMDDIR)/follow.o $(CMDDIR)/order.o \
+	$(CMDDIR)/group.o $(CMDDIR)/split.o
 
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
