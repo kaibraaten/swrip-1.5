@@ -683,7 +683,7 @@ static void imc_to_char( const char *txt, CHAR_DATA * ch )
    char buf[LGST * 2];
 
    snprintf( buf, LGST * 2, "%s\033[0m", color_itom( txt, ch ) );
-   send_to_char_color( buf, ch );
+   send_to_char( buf, ch );
 }
 
 /* Modified version of Smaug's ch_printf_color function */
@@ -705,7 +705,7 @@ static void imc_to_pager( const char *txt, CHAR_DATA * ch )
    char buf[LGST * 2];
 
    snprintf( buf, LGST * 2, "%s\033[0m", color_itom( txt, ch ) );
-   send_to_pager_color( buf, ch );
+   send_to_pager( buf, ch );
 }
 
 /* Generic pager_printf type function */

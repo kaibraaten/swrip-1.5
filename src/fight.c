@@ -1691,7 +1691,7 @@ ch_ret damage( CHAR_DATA *ch, CHAR_DATA *victim, int dam, int dt )
             do_look( ch, "in corpse" );
 
           if ( IS_SET(ch->act, PLR_AUTOSAC) )
-            do_sacrifice( ch, "corpse" );
+            do_junk( ch, "corpse" );
         }
       if (IS_NPC(ch) && loot)
         {

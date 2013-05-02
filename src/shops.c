@@ -1725,7 +1725,7 @@ void do_buyvendor (CHAR_DATA *ch, char *argument)
 
   deed = create_object ( get_obj_index(OBJ_VNUM_DEED), 0);
   obj_to_char (deed, ch);
-  send_to_char_color ("&bVery well, you may have a contract for a vendor.\r\n", ch);
+  send_to_char("&bVery well, you may have a contract for a vendor.\r\n", ch);
   ch->gold = ch->gold - COST_BUY_VENDOR;
 
 }
@@ -1966,7 +1966,7 @@ void do_collectgold (CHAR_DATA *ch, char *argument)
   vendor->gold = 0;
   ch->gold += gold;
 
-  send_to_char_color ("&GYour vendor gladly hands over his earnings minus a small fee of course..\r\n",ch);
+  send_to_char("&GYour vendor gladly hands over his earnings minus a small fee of course..\r\n",ch);
   act( AT_ACTION, "$n hands over some money.\r\n", vendor, NULL, NULL, TO_ROOM );
 }
 

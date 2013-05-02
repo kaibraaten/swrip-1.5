@@ -41,6 +41,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o \
 	tables.o track.o update.o vector3_aux.o \
 	$(CMDDIR)/afk.o \
 	$(CMDDIR)/allclantalk.o \
+	$(CMDDIR)/auction.o \
 	$(CMDDIR)/ansi.o \
 	$(CMDDIR)/answer.o \
 	$(CMDDIR)/areas.o \
@@ -48,7 +49,9 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o \
 	$(CMDDIR)/avtalk.o \
 	$(CMDDIR)/bashdoor.o \
 	$(CMDDIR)/beep.o \
+	$(CMDDIR)/brandish.o \
 	$(CMDDIR)/bug.o \
+	$(CMDDIR)/bury.o \
 	$(CMDDIR)/channels.o \
 	$(CMDDIR)/chat.o \
 	$(CMDDIR)/clantalk.o \
@@ -62,12 +65,15 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o \
 	$(CMDDIR)/dismiss.o \
 	$(CMDDIR)/down.o \
 	$(CMDDIR)/drag.o \
+	$(CMDDIR)/drop.o \
 	$(CMDDIR)/east.o \
 	$(CMDDIR)/emote.o \
 	$(CMDDIR)/enter.o \
 	$(CMDDIR)/examine.o \
 	$(CMDDIR)/exits.o \
 	$(CMDDIR)/follow.o \
+	$(CMDDIR)/get.o \
+	$(CMDDIR)/give.o \
 	$(CMDDIR)/glance.o \
 	$(CMDDIR)/group.o \
 	$(CMDDIR)/gtell.o \
@@ -80,6 +86,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o \
 	$(CMDDIR)/i105.o \
 	$(CMDDIR)/idea.o \
 	$(CMDDIR)/immtalk.o \
+	$(CMDDIR)/junk.o \
 	$(CMDDIR)/languages.o \
 	$(CMDDIR)/leave.o \
 	$(CMDDIR)/lock.o \
@@ -96,8 +103,10 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o \
 	$(CMDDIR)/pager.o \
 	$(CMDDIR)/password.o \
 	$(CMDDIR)/practice.o \
+	$(CMDDIR)/put.o \
 	$(CMDDIR)/quest.o \
 	$(CMDDIR)/quit.o \
+	$(CMDDIR)/remove.o \
 	$(CMDDIR)/reply.o \
 	$(CMDDIR)/rest.o \
 	$(CMDDIR)/save.o \
@@ -128,6 +137,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o \
 	$(CMDDIR)/up.o \
 	$(CMDDIR)/wake.o \
 	$(CMDDIR)/wartalk.o \
+	$(CMDDIR)/wear.o \
 	$(CMDDIR)/weather.o \
 	$(CMDDIR)/west.o \
 	$(CMDDIR)/where.o \
@@ -136,6 +146,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o \
 	$(CMDDIR)/wimpy.o \
 	$(CMDDIR)/wizlist.o \
 	$(CMDDIR)/yell.o \
+	$(CMDDIR)/zap.o \
 
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 

@@ -34,9 +34,9 @@ void do_help( CHAR_DATA *ch, char *argument )
    * Strip leading '.' to allow initial blanks.
    */
   if ( pHelp->text[0] == '.' )
-    send_to_pager_color( pHelp->text+1, ch );
+    send_to_pager( pHelp->text+1, ch );
   else
-    send_to_pager_color( pHelp->text  , ch );
+    send_to_pager( pHelp->text  , ch );
 }
 
 static short str_similarity( const char *astr, const char *bstr )
@@ -66,7 +66,7 @@ static void similar_help_files(CHAR_DATA *ch, char *argument)
   short lvl=0;
   bool single=FALSE;
 
-  send_to_pager_color( "&C&BSimilar Help Files:\r\n", ch);
+  send_to_pager( "&C&BSimilar Help Files:\r\n", ch);
 
   for ( pHelp = first_help; pHelp; pHelp=pHelp->next)
     {
@@ -94,7 +94,7 @@ static void similar_help_files(CHAR_DATA *ch, char *argument)
 
   if (lvl==0)
     {
-      send_to_pager_color( "&C&GNo similar help files.\r\n", ch);
+      send_to_pager( "&C&GNo similar help files.\r\n", ch);
       return;
     }
 
@@ -112,7 +112,7 @@ static void similar_help_files(CHAR_DATA *ch, char *argument)
             {
               if (single)
                 {
-                  send_to_pager_color( "&C&GOpening only similar helpfile.&C\r\n", ch);
+                  send_to_pager( "&C&GOpening only similar helpfile.&C\r\n", ch);
                   do_help( ch, buf);
                   return;
                 }

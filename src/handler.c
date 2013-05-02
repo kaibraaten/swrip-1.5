@@ -1100,7 +1100,7 @@ int apply_ac( OBJ_DATA *obj, int iWear )
  * Find a piece of eq on a character.
  * Will pick the top layer if clothing is layered.              -Thoric
  */
-OBJ_DATA *get_eq_char( CHAR_DATA *ch, int iWear )
+OBJ_DATA *get_eq_char( const CHAR_DATA *ch, int iWear )
 {
   OBJ_DATA *obj, *maxobj = NULL;
 

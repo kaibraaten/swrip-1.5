@@ -3584,7 +3584,7 @@ DECLARE_DO_FUN( do_auction      );
 DECLARE_DO_FUN( do_authorize    );
 DECLARE_DO_FUN( do_avtalk       );
 DECLARE_DO_FUN( do_backstab     );
-DECLARE_DO_FUN(   do_badname  );
+DECLARE_DO_FUN( do_badname      );
 DECLARE_DO_FUN( do_balzhur      );
 DECLARE_DO_FUN( do_bamfin       );
 DECLARE_DO_FUN( do_bamfout      );
@@ -3709,6 +3709,7 @@ DECLARE_DO_FUN( do_instazone    );
 DECLARE_DO_FUN( do_inventory    );
 DECLARE_DO_FUN( do_invis        );
 DECLARE_DO_FUN( do_invite       );
+DECLARE_DO_FUN( do_junk         );
 DECLARE_DO_FUN( do_kick         );
 DECLARE_DO_FUN( do_kill         );
 DECLARE_DO_FUN( do_languages    );
@@ -3828,7 +3829,6 @@ DECLARE_DO_FUN( do_rlist        );
 DECLARE_DO_FUN( do_rreset       );
 DECLARE_DO_FUN( do_rset         );
 DECLARE_DO_FUN( do_rstat        );
-DECLARE_DO_FUN( do_sacrifice    );
 DECLARE_DO_FUN( do_addsalary    );
 DECLARE_DO_FUN( do_save         );
 DECLARE_DO_FUN( do_savearea     );
@@ -4191,6 +4191,7 @@ extern "C" {
   int     wherehome( CHAR_DATA *ch );
 
   /* act_obj.c */
+  bool remove_obj( CHAR_DATA *ch, int iWear, bool fReplace );
   obj_ret       damage_obj( OBJ_DATA *obj );
   short get_obj_resistance( OBJ_DATA *obj );
   void    save_clan_storeroom( CHAR_DATA *ch, CLAN_DATA *clan );
@@ -4369,10 +4370,8 @@ extern "C" {
   bool write_to_descriptor( socket_t desc, char *txt, int length );
   void write_to_buffer( DESCRIPTOR_DATA *d, const char *txt, size_t length );
   void write_to_pager( DESCRIPTOR_DATA *d, const char *txt, size_t length );
-  void send_to_char( const char *txt, CHAR_DATA *ch );
-  void send_to_char_color( const char *txt, CHAR_DATA *ch );
-  void send_to_pager( const char *txt, CHAR_DATA *ch );
-  void send_to_pager_color( const char *txt, CHAR_DATA *ch );
+  void send_to_char( const char *txt, const CHAR_DATA *ch );
+  void send_to_pager( const char *txt, const CHAR_DATA *ch );
   void set_char_color( short AType, CHAR_DATA *ch );
   void set_pager_color( short AType, CHAR_DATA *ch );
   void ch_printf( CHAR_DATA *ch, char *fmt, ... );
@@ -4563,7 +4562,7 @@ extern "C" {
   OD *  obj_to_char( OBJ_DATA *obj, CHAR_DATA *ch );
   void  obj_from_char( OBJ_DATA *obj );
   int   apply_ac( OBJ_DATA *obj, int iWear );
-  OD *  get_eq_char( CHAR_DATA *ch, int iWear );
+  OD *  get_eq_char( const CHAR_DATA *ch, int iWear );
   void  equip_char( CHAR_DATA *ch, OBJ_DATA *obj, int iWear );
   void  unequip_char( CHAR_DATA *ch, OBJ_DATA *obj );
   int   count_obj_list( OBJ_INDEX_DATA *obj, OBJ_DATA *list );
@@ -4989,9 +4988,6 @@ extern "C" {
                           OBJ_DATA *obj, void *vo );
 #endif
 
-
-#define send_to_char  send_to_char_color
-#define send_to_pager send_to_pager_color
 #define GET_BETTED_ON(ch)    ((ch)->betted_on)
 #define GET_BET_AMT(ch) ((ch)->bet_amt)
 #define IN_ARENA(ch)            (IS_SET((ch)->in_room->room_flags, ROOM_ARENA))

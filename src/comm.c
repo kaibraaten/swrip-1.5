@@ -1559,28 +1559,7 @@ void stop_idling( CHAR_DATA *ch )
   return;
 }
 
-
-
-/*
- * Write to one char. Commented out in favour of colour
- *
- void send_to_char( const char *txt, CHAR_DATA *ch )
- {
- if ( !ch )
- {
- bug( "Send_to_char: NULL *ch" );
- return;
- }
- if ( txt && ch->desc )
- write_to_buffer( ch->desc, txt, strlen(txt) );
- return;
- }
-*/
-
-/*
- * Same as above, but converts &color codes to ANSI sequences..
- */
-void send_to_char_color( const char *txt, CHAR_DATA *ch )
+void send_to_char( const char *txt, const CHAR_DATA *ch )
 {
   DESCRIPTOR_DATA *d;
   const char *colstr;
@@ -1590,7 +1569,7 @@ void send_to_char_color( const char *txt, CHAR_DATA *ch )
 
   if ( !ch )
     {
-      bug( "Send_to_char_color: NULL *ch" );
+      bug( "Send_to_char: NULL *ch" );
       return;
     }
   if ( !txt || !ch->desc )
@@ -1657,36 +1636,9 @@ void write_to_pager( DESCRIPTOR_DATA *d, const char *txt, size_t length )
   strncpy(d->pagebuf+d->pagetop, txt, length);
   d->pagetop += length;
   d->pagebuf[d->pagetop] = '\0';
-  return;
 }
 
-/* commented out in favour of colour routine
-
-   void send_to_pager( const char *txt, CHAR_DATA *ch )
-   {
-   if ( !ch )
-   {
-   bug( "Send_to_pager: NULL *ch" );
-   return;
-   }
-   if ( txt && ch->desc )
-   {
-   DESCRIPTOR_DATA *d = ch->desc;
-
-   ch = d->original ? d->original : d->character;
-   if ( IS_NPC(ch) || !IS_SET(ch->pcdata->flags, PCFLAG_PAGERON) )
-   {
-   send_to_char(txt, d->character);
-   return;
-   }
-   write_to_pager(d, txt, 0);
-   }
-   return;
-   }
-
-*/
-
-void send_to_pager_color( const char *txt, CHAR_DATA *ch )
+void send_to_pager( const char *txt, const CHAR_DATA *ch )
 {
   DESCRIPTOR_DATA *d;
   const char *colstr;
@@ -1705,7 +1657,7 @@ void send_to_pager_color( const char *txt, CHAR_DATA *ch )
   ch = d->original ? d->original : d->character;
   if ( IS_NPC(ch) || !IS_SET(ch->pcdata->flags, PCFLAG_PAGERON) )
     {
-      send_to_char_color(txt, d->character);
+      send_to_char(txt, d->character);
       return;
     }
   /* Clear out old color stuff */
@@ -2031,7 +1983,7 @@ void act( short AType, const char *format, CHAR_DATA *ch, const void *arg1, cons
       if (to && to->desc)
         {
           set_char_color(AType, to);
-          send_to_char_color( txt, to );
+          send_to_char( txt, to );
         }
       if (MOBtrigger)
         {
