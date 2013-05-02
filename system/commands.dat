@@ -1536,7 +1536,7 @@ End
 
 #COMMAND
 Name        junk~
-Code        do_sacrifice
+Code        do_junk
 Position    0
 Level       105
 Log         0
