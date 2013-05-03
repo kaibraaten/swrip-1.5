@@ -61,8 +61,11 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o \
 	$(CMDDIR)/beep.o \
 	$(CMDDIR)/bestow.o \
 	$(CMDDIR)/bestowarea.o \
+	$(CMDDIR)/boards.o \
 	$(CMDDIR)/bodybag.o \
 	$(CMDDIR)/brandish.o \
+	$(CMDDIR)/bset.o \
+	$(CMDDIR)/bstat.o \
 	$(CMDDIR)/bug.o \
 	$(CMDDIR)/bury.o \
 	$(CMDDIR)/cedit.o \
@@ -128,6 +131,8 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o \
 	$(CMDDIR)/log.o \
 	$(CMDDIR)/look.o \
 	$(CMDDIR)/low_purge.o \
+	$(CMDDIR)/mailroom.o \
+	$(CMDDIR)/makeboard.o \
 	$(CMDDIR)/massign.o \
 	$(CMDDIR)/mfind.o \
 	$(CMDDIR)/minvoke.o \
@@ -144,6 +149,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o \
 	$(CMDDIR)/northeast.o \
 	$(CMDDIR)/northwest.o \
 	$(CMDDIR)/notell.o \
+	$(CMDDIR)/noteroom.o \
 	$(CMDDIR)/notitle.o \
 	$(CMDDIR)/oassign.o \
 	$(CMDDIR)/ofind.o \

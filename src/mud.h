@@ -4126,7 +4126,6 @@ extern "C" {
 #define OID     OBJ_INDEX_DATA
 #define RID     ROOM_INDEX_DATA
 #define SF      SPEC_FUN
-#define BD      BOARD_DATA
 #define CL      CLAN_DATA
 #define EDD     EXTRA_DESCR_DATA
 #define RD      RESET_DATA
@@ -4196,23 +4195,26 @@ extern "C" {
   /* act_wiz.c */
   void save_banlist( void );
   int str_count(const char *psource, const char *ptarget);
-  void    close_area( AREA_DATA *pArea );
-  RID * find_location( CHAR_DATA *ch, char *arg );
-  void    echo_to_room( short AT_COLOR, ROOM_INDEX_DATA *room,
-			const char *argument );
-  void  echo_to_all( short AT_COLOR, const char *argument, short tar );
-  void          get_reboot_string( void );
-  void  free_social( SOCIALTYPE *social );
+  void close_area( AREA_DATA *pArea );
+  RID *find_location( CHAR_DATA *ch, char *arg );
+  void echo_to_room( short AT_COLOR, ROOM_INDEX_DATA *room,
+		     const char *argument );
+  void echo_to_all( short AT_COLOR, const char *argument, short tar );
+  void get_reboot_string( void );
+  void free_social( SOCIALTYPE *social );
   void unlink_social( SOCIALTYPE *social );
-  void  add_social( SOCIALTYPE *social );
-  void  free_command( CMDTYPE *command );
-  void  unlink_command( CMDTYPE *command );
-  void  add_command( CMDTYPE *command );
+  void add_social( SOCIALTYPE *social );
+  void free_command( CMDTYPE *command );
+  void unlink_command( CMDTYPE *command );
+  void add_command( CMDTYPE *command );
 
   /* boards.c */
-  void  load_boards( void );
-  BD *  get_board( OBJ_DATA *obj );
-  void  free_note( NOTE_DATA *pnote );
+  void load_boards( void );
+  BOARD_DATA *get_board( OBJ_DATA *obj );
+  BOARD_DATA *find_board( CHAR_DATA *ch );
+  void free_note( NOTE_DATA *pnote );
+  void write_boards_txt( void );
+  void operate_on_note( CHAR_DATA *ch, char *arg_passed, bool IS_MAIL );
 
   /* clans.c */
   CL *  get_clan( char *name );
@@ -4753,7 +4755,6 @@ extern "C" {
 #undef  OID
 #undef  RID
 #undef  SF
-#undef  BD
 #undef  CL
 #undef  EDD
 #undef  RD

@@ -34,13 +34,12 @@
 #define VOTE_OPEN 1
 #define VOTE_CLOSED 2
 
-BOARD_DATA *            first_board;
-BOARD_DATA *            last_board;
+BOARD_DATA *first_board = NULL;
+BOARD_DATA *last_board = NULL;
 
-bool    is_note_to( CHAR_DATA *ch, NOTE_DATA *pnote );
-void    note_attach( CHAR_DATA *ch );
-void    note_remove( CHAR_DATA *ch, BOARD_DATA *board, NOTE_DATA *pnote );
-void    do_note( CHAR_DATA *ch, char *arg_passed, bool IS_MAIL );
+bool is_note_to( CHAR_DATA *ch, NOTE_DATA *pnote );
+void note_attach( CHAR_DATA *ch );
+void note_remove( CHAR_DATA *ch, BOARD_DATA *board, NOTE_DATA *pnote );
 
 bool can_remove( CHAR_DATA *ch, BOARD_DATA *board )
 {
@@ -53,6 +52,7 @@ bool can_remove( CHAR_DATA *ch, BOARD_DATA *board )
       if ( is_name( ch->name, board->extra_removers ) )
         return TRUE;
     }
+
   return FALSE;
 }
 
@@ -68,15 +68,18 @@ bool can_read( CHAR_DATA *ch, BOARD_DATA *board )
     {
       if ( ch->pcdata->clan && !str_cmp( ch->pcdata->clan->name, board->read_group ) )
         return TRUE;
+
       if ( ch->pcdata->clan && ch->pcdata->clan->mainclan && !str_cmp( ch->pcdata->clan->mainclan->name, board->read_group ) )
         return TRUE;
 
     }
+
   if ( board->extra_readers[0] != '\0' )
     {
       if ( is_name( ch->name, board->extra_readers ) )
         return TRUE;
     }
+
   return FALSE;
 }
 
@@ -91,9 +94,11 @@ bool can_post( CHAR_DATA *ch, BOARD_DATA *board )
     {
       if ( ch->pcdata->clan && !str_cmp( ch->pcdata->clan->name, board->post_group ) )
         return TRUE;
+
       if ( ch->pcdata->clan && ch->pcdata->clan->mainclan && !str_cmp( ch->pcdata->clan->mainclan->name, board->post_group ) )
         return TRUE;
     }
+
   return FALSE;
 }
 
@@ -101,19 +106,21 @@ bool can_post( CHAR_DATA *ch, BOARD_DATA *board )
 /*
  * board commands.
  */
-void write_boards_txt( )
+void write_boards_txt( void )
 {
-  BOARD_DATA *tboard;
-  FILE *fpout;
+  BOARD_DATA *tboard = NULL;
+  FILE *fpout = NULL;
   char filename[256];
 
   sprintf( filename, "%s%s", BOARD_DIR, BOARD_FILE );
   fpout = fopen( filename, "w" );
+
   if ( !fpout )
     {
       bug( "FATAL: cannot open board.txt for writing!\r\n", 0 );
       return;
     }
+
   for ( tboard = first_board; tboard; tboard = tboard->next )
     {
       fprintf( fpout, "Filename          %s~\n", tboard->note_file          );
@@ -130,35 +137,20 @@ void write_boards_txt( )
 
       fprintf( fpout, "End\n" );
     }
+
   fclose( fpout );
 }
 
 BOARD_DATA *get_board( OBJ_DATA *obj )
 {
-  BOARD_DATA *board;
+  BOARD_DATA *board = NULL;
 
   for ( board = first_board; board; board = board->next )
     if ( board->board_obj == obj->pIndexData->vnum )
       return board;
-  return NULL;
-}
-
-BOARD_DATA *find_board( CHAR_DATA *ch )
-{
-  OBJ_DATA *obj;
-  BOARD_DATA  *board;
-
-  for ( obj = ch->in_room->first_content;
-        obj;
-        obj = obj->next_content )
-    {
-      if ( (board = get_board(obj)) != NULL )
-        return board;
-    }
 
   return NULL;
 }
-
 
 bool is_note_to( CHAR_DATA *ch, NOTE_DATA *pnote )
 {
@@ -176,8 +168,6 @@ bool is_note_to( CHAR_DATA *ch, NOTE_DATA *pnote )
 
   return FALSE;
 }
-
-
 
 void note_attach( CHAR_DATA *ch )
 {
@@ -203,9 +193,9 @@ void note_attach( CHAR_DATA *ch )
 
 void write_board( BOARD_DATA *board )
 {
-  FILE *fp;
+  FILE *fp = NULL;
   char filename[256];
-  NOTE_DATA *pnote;
+  NOTE_DATA *pnote = NULL;
 
   /*
    * Rewrite entire list.
@@ -232,6 +222,7 @@ void write_board( BOARD_DATA *board )
                    pnote->text
                    );
         }
+
       fclose( fp );
     }
 }
@@ -244,18 +235,21 @@ void free_note( NOTE_DATA *pnote )
   STRFREE( pnote->to_list );
   STRFREE( pnote->date    );
   STRFREE( pnote->sender  );
+
   if ( pnote->yesvotes )
     DISPOSE( pnote->yesvotes );
+
   if ( pnote->novotes )
     DISPOSE( pnote->novotes );
+
   if ( pnote->abstentions )
     DISPOSE( pnote->abstentions );
+
   DISPOSE( pnote );
 }
 
 void note_remove( CHAR_DATA *ch, BOARD_DATA *board, NOTE_DATA *pnote )
 {
-
   if ( !board )
     {
       bug( "note remove: null board", 0 );
@@ -281,106 +275,17 @@ void note_remove( CHAR_DATA *ch, BOARD_DATA *board, NOTE_DATA *pnote )
 
 OBJ_DATA *find_quill( CHAR_DATA *ch )
 {
-  OBJ_DATA *quill;
+  OBJ_DATA *quill = FALSE;
 
   for ( quill = ch->last_carrying; quill; quill = quill->prev_content )
     if ( quill->item_type == ITEM_PEN
          &&   can_see_obj( ch, quill ) )
       return quill;
+
   return quill;
 }
 
-void do_noteroom( CHAR_DATA *ch, char *argument )
-{
-  BOARD_DATA *board;
-  char arg[MAX_STRING_LENGTH];
-  char arg_passed[MAX_STRING_LENGTH];
-
-  strcpy(arg_passed, argument);
-
-  switch( ch->substate )
-    {
-    case SUB_WRITING_NOTE:
-      do_note(ch, arg_passed, FALSE);
-      break;
-
-    default:
-
-      argument = one_argument(argument, arg);
-      smash_tilde( argument );
-      if (!str_cmp(arg, "write") || !str_cmp(arg, "to")
-          ||  !str_cmp(arg, "subject") || !str_cmp(arg, "show"))
-        {
-          do_note(ch, arg_passed, FALSE);
-          return;
-        }
-
-      board = find_board( ch );
-      if ( !board )
-        {
-          send_to_char( "There is no bulletin board here to look at.\r\n", ch );
-          return;
-        }
-
-      if (board->type != BOARD_NOTE)
-        {
-          send_to_char("You can only use note commands on a message terminal.\r\n", ch);
-          return;
-        }
-      else
-        {
-          do_note(ch, arg_passed, FALSE);
-          return;
-        }
-    }
-}
-
-void do_mailroom(CHAR_DATA *ch, char *argument)
-{
-  BOARD_DATA *board;
-  char arg[MAX_STRING_LENGTH];
-  char arg_passed[MAX_STRING_LENGTH];
-
-  strcpy(arg_passed, argument);
-
-  switch( ch->substate )
-    {
-    case SUB_WRITING_NOTE:
-      do_note(ch, arg_passed, TRUE);
-      break;
-
-    default:
-
-      argument = one_argument(argument, arg);
-      smash_tilde( argument );
-      if (!str_cmp(arg, "write") || !str_cmp(arg, "to")
-          ||  !str_cmp(arg, "subject") || !str_cmp(arg, "show"))
-        {
-          do_note(ch, arg_passed, TRUE);
-          return;
-        }
-
-      board = find_board( ch );
-      if ( !board )
-        {
-          send_to_char( "There is no mail facility here.\r\n", ch );
-          return;
-        }
-
-      if (board->type != BOARD_MAIL)
-        {
-          send_to_char("You can only use mail commands in a post office.\r\n", ch);
-          return;
-        }
-      else
-        {
-          do_note(ch, arg_passed, TRUE);
-          return;
-        }
-    }
-}
-
-void do_note( CHAR_DATA *ch, char *arg_passed, bool IS_MAIL )
+void operate_on_note( CHAR_DATA *ch, char *arg_passed, bool IS_MAIL )
 {
   char buf[MAX_STRING_LENGTH];
   char arg[MAX_INPUT_LENGTH];
@@ -403,7 +308,7 @@ void do_note( CHAR_DATA *ch, char *arg_passed, bool IS_MAIL )
 
   if ( !ch->desc )
     {
-      bug( "do_note: no descriptor", 0 );
+      bug( "%s: no descriptor", __FUNCTION__ );
       return;
     }
 
@@ -411,14 +316,16 @@ void do_note( CHAR_DATA *ch, char *arg_passed, bool IS_MAIL )
     {
     default:
       break;
+
     case SUB_WRITING_NOTE:
       if ( ( paper = get_eq_char(ch, WEAR_HOLD) ) == NULL
            ||     paper->item_type != ITEM_PAPER )
         {
-          bug("do_note: player not holding paper", 0);
+          bug("%s: player not holding paper", __FUNCTION__);
           stop_editing( ch );
           return;
         }
+
       ed = (EXTRA_DESCR_DATA*)ch->dest_buf;
       STRFREE( ed->description );
       ed->description = copy_buffer( ch );
@@ -660,6 +567,7 @@ void do_note( CHAR_DATA *ch, char *arg_passed, bool IS_MAIL )
           write_board( board );
           return;
         }
+
       if ( !str_cmp( arg_passed, "close" ) )
         {
           if ( str_cmp( ch->name, pnote->sender ) )
@@ -684,11 +592,13 @@ void do_note( CHAR_DATA *ch, char *arg_passed, bool IS_MAIL )
       /* Can only vote once on a note. */
       sprintf( buf, "%s %s %s",
                pnote->yesvotes, pnote->novotes, pnote->abstentions );
+
       if ( is_name( ch->name, buf ) )
         {
           send_to_char( "You have already voted on this note.\r\n", ch );
           return;
         }
+
       if ( !str_cmp( arg_passed, "yes" ) )
         {
           sprintf( buf, "%s %s", pnote->yesvotes, ch->name );
@@ -699,6 +609,7 @@ void do_note( CHAR_DATA *ch, char *arg_passed, bool IS_MAIL )
           write_board( board );
           return;
         }
+
       if ( !str_cmp( arg_passed, "no" ) )
         {
           sprintf( buf, "%s %s", pnote->novotes, ch->name );
@@ -709,6 +620,7 @@ void do_note( CHAR_DATA *ch, char *arg_passed, bool IS_MAIL )
           write_board( board );
           return;
         }
+
       if ( !str_cmp( arg_passed, "abstain" ) )
         {
           sprintf( buf, "%s %s", pnote->abstentions, ch->name );
@@ -719,8 +631,10 @@ void do_note( CHAR_DATA *ch, char *arg_passed, bool IS_MAIL )
           write_board( board );
           return;
         }
-      do_note( ch, "", FALSE );
+
+      operate_on_note( ch, "", FALSE );
     }
+
   if ( !str_cmp( arg, "write" ) )
     {
       if ( ch->substate == SUB_RESTRICTED )
@@ -1327,10 +1241,8 @@ void load_boards( void )
   char  boardfile[256];
   char  notefile[256];
 
-  first_board   = NULL;
-  last_board    = NULL;
-
   sprintf( boardfile, "%s%s", BOARD_DIR, BOARD_FILE );
+
   if ( ( board_fp = fopen( boardfile, "r" ) ) == NULL )
     return;
 
@@ -1348,289 +1260,6 @@ void load_boards( void )
             }
         }
     }
-  return;
-}
-
-
-void do_makeboard( CHAR_DATA *ch, char *argument )
-{
-  BOARD_DATA *board;
-
-  if ( !argument || argument[0] == '\0' )
-    {
-      send_to_char( "Usage: makeboard <filename>\r\n", ch );
-      return;
-    }
-
-  smash_tilde( argument );
-
-  CREATE( board, BOARD_DATA, 1 );
-
-  LINK( board, first_board, last_board, next, prev );
-  board->note_file         = str_dup( strlower( argument ) );
-  board->read_group      = str_dup( "" );
-  board->post_group      = str_dup( "" );
-  board->extra_readers   = str_dup( "" );
-  board->extra_removers  = str_dup( "" );
-}
-
-void do_bset( CHAR_DATA *ch, char *argument )
-{
-  BOARD_DATA *board;
-  bool found;
-  char arg1[MAX_INPUT_LENGTH];
-  char arg2[MAX_INPUT_LENGTH];
-  char buf[MAX_STRING_LENGTH];
-  int value;
-
-  argument = one_argument( argument, arg1 );
-  argument = one_argument( argument, arg2 );
-
-  if ( arg1[0] == '\0' || arg2[0] == '\0' )
-    {
-      send_to_char( "Usage: bset <board filename> <field> value\r\n", ch );
-      send_to_char( "\r\nField being one of:\r\n", ch );
-      send_to_char( "  vnum read post remove maxpost filename type\r\n", ch );
-      send_to_char( "  read_group post_group extra_readers extra_removers\r\n", ch );
-      return;
-    }
-
-  value = atoi( argument );
-  found = FALSE;
-  for ( board = first_board; board; board = board->next )
-    if ( !str_cmp( arg1, board->note_file ) )
-      {
-        found = TRUE;
-        break;
-      }
-  if ( !found )
-    {
-      send_to_char( "Board not found.\r\n", ch );
-      return;
-    }
-
-  if ( !str_cmp( arg2, "vnum" ) )
-    {
-      if ( !get_obj_index(value) )
-        {
-          send_to_char( "No such object.\r\n", ch );
-          return;
-        }
-      board->board_obj = value;
-      write_boards_txt( );
-      send_to_char( "Done.\r\n", ch );
-      return;
-    }
-
-  if ( !str_cmp( arg2, "read" ) )
-    {
-      if ( value < 0 || value > MAX_LEVEL )
-        {
-          send_to_char( "Value out of range.\r\n", ch );
-          return;
-        }
-      board->min_read_level = value;
-      write_boards_txt( );
-      send_to_char( "Done.\r\n", ch );
-      return;
-    }
-
-  if ( !str_cmp( arg2, "read_group" ) )
-    {
-      if ( !argument || argument[0] == '\0' )
-        {
-          send_to_char( "No group specified.\r\n", ch );
-          return;
-        }
-      DISPOSE( board->read_group );
-      if ( !str_cmp( argument, "none" ) )
-        board->read_group = str_dup( "" );
-      else
-        board->read_group = str_dup( argument );
-      write_boards_txt( );
-      send_to_char( "Done.\r\n", ch );
-      return;
-    }
-
-  if ( !str_cmp( arg2, "post_group" ) )
-    {
-      if ( !argument || argument[0] == '\0' )
-        {
-          send_to_char( "No group specified.\r\n", ch );
-          return;
-        }
-      DISPOSE( board->post_group );
-      if ( !str_cmp( argument, "none" ) )
-        board->post_group = str_dup( "" );
-      else
-        board->post_group = str_dup( argument );
-      write_boards_txt( );
-      send_to_char( "Done.\r\n", ch );
-      return;
-    }
-
-  if ( !str_cmp( arg2, "extra_removers" ) )
-    {
-      if ( !argument || argument[0] == '\0' )
-        {
-          send_to_char( "No names specified.\r\n", ch );
-          return;
-        }
-      if ( !str_cmp( argument, "none" ) )
-        buf[0] = '\0';
-      else
-        sprintf( buf, "%s %s", board->extra_removers, argument );
-      DISPOSE( board->extra_removers );
-      board->extra_removers = str_dup( buf );
-      write_boards_txt( );
-      send_to_char( "Done.\r\n", ch );
-      return;
-    }
-
-  if ( !str_cmp( arg2, "extra_readers" ) )
-    {
-      if ( !argument || argument[0] == '\0' )
-        {
-          send_to_char( "No names specified.\r\n", ch );
-          return;
-        }
-      if ( !str_cmp( argument, "none" ) )
-        buf[0] = '\0';
-      else
-        sprintf( buf, "%s %s", board->extra_readers, argument );
-      DISPOSE( board->extra_readers );
-      board->extra_readers = str_dup( buf );
-      write_boards_txt( );
-      send_to_char( "Done.\r\n", ch );
-      return;
-    }
-
-  if ( !str_cmp( arg2, "filename" ) )
-    {
-      if ( !argument || argument[0] == '\0' )
-        {
-          send_to_char( "No filename specified.\r\n", ch );
-          return;
-        }
-      DISPOSE( board->note_file );
-      board->note_file = str_dup( argument );
-      write_boards_txt( );
-      send_to_char( "Done.\r\n", ch );
-      return;
-    }
-
-  if ( !str_cmp( arg2, "post" ) )
-    {
-      if ( value < 0 || value > MAX_LEVEL )
-        {
-          send_to_char( "Value out of range.\r\n", ch );
-          return;
-        }
-      board->min_post_level = value;
-      write_boards_txt( );
-      send_to_char( "Done.\r\n", ch );
-      return;
-    }
-
-  if ( !str_cmp( arg2, "remove" ) )
-    {
-      if ( value < 0 || value > MAX_LEVEL )
-        {
-          send_to_char( "Value out of range.\r\n", ch );
-          return;
-        }
-      board->min_remove_level = value;
-      write_boards_txt( );
-      send_to_char( "Done.\r\n", ch );
-      return;
-    }
-
-  if ( !str_cmp( arg2, "maxpost" ) )
-    {
-      if ( value < 1 || value > 1000 )
-        {
-          send_to_char( "Value out of range.\r\n", ch );
-          return;
-        }
-      board->max_posts = value;
-      write_boards_txt( );
-      send_to_char( "Done.\r\n", ch );
-      return;
-    }
-  if ( !str_cmp( arg2, "type" ) )
-    {
-      if ( value < 0 || value > 1 )
-        {
-          send_to_char( "Value out of range.\r\n", ch );
-          return;
-        }
-      board->type = value;
-      write_boards_txt( );
-      send_to_char( "Done.\r\n", ch );
-      return;
-    }
-
-  do_bset( ch, "" );
-  return;
-}
-
-
-void do_bstat( CHAR_DATA *ch, char *argument )
-{
-  BOARD_DATA *board;
-  bool found;
-  char arg[MAX_INPUT_LENGTH];
-
-  argument = one_argument( argument, arg );
-
-  if ( arg[0] == '\0' )
-    {
-      send_to_char( "Usage: bstat <board filename>\r\n", ch );
-      return;
-    }
-
-  found = FALSE;
-  for ( board = first_board; board; board = board->next )
-    if ( !str_cmp( arg, board->note_file ) )
-      {
-        found = TRUE;
-        break;
-      }
-  if ( !found )
-    {
-      send_to_char( "Board not found.\r\n", ch );
-      return;
-    }
-
-  ch_printf( ch, "%-12s Vnum: %5d Read: %2d Post: %2d Rmv: %2d Max: %2d Posts: %d Type: %d\r\n",
-             board->note_file,   board->board_obj,
-             board->min_read_level,      board->min_post_level,
-             board->min_remove_level, board->max_posts,
-             board->num_posts, board->type );
-
-  ch_printf( ch, "Read_group: %-15s Post_group: %-15s \r\nExtra_readers: %-10s\r\n",
-             board->read_group, board->post_group, board->extra_readers );
-  return;
-}
-
-
-void do_boards( CHAR_DATA *ch, char *argument )
-{
-  BOARD_DATA *board;
-
-  if ( !first_board )
-    {
-      send_to_char( "There are no boards.\r\n", ch );
-      return;
-    }
-
-  set_char_color( AT_NOTE, ch );
-  for ( board = first_board; board; board = board->next )
-    ch_printf( ch, "%-16s Vnum: %5d Read: %2d Post: %2d Rmv: %2d Max: %2d Posts: %d Type: %d\r\n",
-               board->note_file,         board->board_obj,
-               board->min_read_level,    board->min_post_level,
-               board->min_remove_level, board->max_posts, board->num_posts,
-               board->type);
 }
 
 void mail_count(CHAR_DATA *ch)
@@ -1644,7 +1273,23 @@ void mail_count(CHAR_DATA *ch)
       for ( note = board->first_note; note; note = note->next )
         if ( is_note_to(ch, note) )
           ++cnt;
+
   if ( cnt )
     ch_printf(ch, "You have %d mail messages waiting.\r\n", cnt);
-  return;
+}
+
+BOARD_DATA *find_board( CHAR_DATA *ch )
+{
+  OBJ_DATA *obj;
+  BOARD_DATA  *board;
+
+  for ( obj = ch->in_room->first_content;
+        obj;
+        obj = obj->next_content )
+    {
+      if ( (board = get_board(obj)) != NULL )
+        return board;
+    }
+
+  return NULL;
 }
