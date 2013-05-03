@@ -42,7 +42,6 @@ void sound_to_room( ROOM_INDEX_DATA *room , char *argument )
   for ( vic = room->first_person; vic; vic = vic->next_in_room )
     if ( !IS_NPC(vic) && IS_SET( vic->act, PLR_SOUND ) )
       send_to_char( argument, vic );
-
 }
 
 char *drunk_speech( const char *argument, CHAR_DATA *ch )

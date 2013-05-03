@@ -24,12 +24,7 @@
  http://dotd.mudservices.com  dotd@dotd.mudservices.com
 ******************************************************/
 
-#include <sys/types.h>
-#include <ctype.h>
-#include <stdio.h>
 #include <string.h>
-#include <time.h>
-#include <sys/stat.h>
 #include "mud.h"
 
 ALIAS_DATA *find_alias( CHAR_DATA *ch, const char *original_argument )

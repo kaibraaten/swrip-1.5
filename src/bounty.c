@@ -26,16 +26,13 @@
 #include <ctype.h>
 #include <stdio.h>
 #include <string.h>
-/* #include <stdlib.h> */
 #include <time.h>
 #include "mud.h"
 
-
-BOUNTY_DATA * first_bounty;
-BOUNTY_DATA * last_bounty;
-BOUNTY_DATA * first_disintigration;
-BOUNTY_DATA * last_disintigration;
-
+BOUNTY_DATA *first_bounty = NULL;
+BOUNTY_DATA *last_bounty = NULL;
+BOUNTY_DATA *first_disintigration = NULL;
+BOUNTY_DATA *last_disintigration = NULL;
 
 void disintigration( CHAR_DATA *ch , CHAR_DATA *victim , long amount );
 void nodisintigration( CHAR_DATA *ch , CHAR_DATA *victim , long amount );
@@ -87,7 +84,7 @@ BOUNTY_DATA *get_disintigration( char *target )
   return NULL;
 }
 
-void load_bounties( )
+void load_bounties( void )
 {
   FILE *fpList;
   const char *target, *poster;
@@ -362,6 +359,6 @@ void do_rembounty(  CHAR_DATA *ch, char *argument )
 
   if ( bounty != NULL )
     remove_disintigration(bounty);
-  return;
 
+  return;
 }

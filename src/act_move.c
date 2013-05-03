@@ -21,12 +21,8 @@
  *                         Player movement module                          *
  ****************************************************************************/
 
-
-#include <sys/types.h>
-#include <stdio.h>
 #include <string.h>
 #include <ctype.h>
-#include <time.h>
 #include "mud.h"
 
 ROOM_INDEX_DATA * vroom_hash [64];
