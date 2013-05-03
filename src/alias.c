@@ -32,18 +32,20 @@
 #include <sys/stat.h>
 #include "mud.h"
 
-ALIAS_DATA *find_alias( CHAR_DATA *ch, char *argument )
+ALIAS_DATA *find_alias( CHAR_DATA *ch, const char *original_argument )
 {
   ALIAS_DATA *pal;
-  char buf[MAX_INPUT_LENGTH];;
+  char alias_name[MAX_INPUT_LENGTH];
+  char argument[MAX_INPUT_LENGTH];
 
   if (!ch || !ch->pcdata)
     return(NULL);
 
-  one_argument(argument, buf);
+  strcpy(argument, original_argument);
+  one_argument(argument, alias_name);
 
   for (pal=ch->pcdata->first_alias;pal;pal=pal->next)
-    if ( !str_prefix(buf, pal->name) )
+    if ( !str_prefix(alias_name, pal->name) )
       return(pal);
 
   return(NULL);
