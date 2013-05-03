@@ -353,28 +353,34 @@ void do_mpjunk( CHAR_DATA *ch, char *argument )
       }
 
   return;
-
 }
 
 /*
  * This function examines a text string to see if the first "word" is a
  * color indicator (e.g. _red, _whi_, _blu).  -  Gorog
  */
-int get_color(char *argument)    /* get color code from command string */
+int get_color(const char *origarg)    /* get color code from command string */
 {
+  char argument[MAX_INPUT_LENGTH];
   char color[MAX_INPUT_LENGTH];
-  const char *cptr;
-  static char const * color_list=
+  const char *cptr = NULL;
+  static char const * color_list =
     "_bla_red_dgr_bro_dbl_pur_cya_cha_dch_ora_gre_yel_blu_pin_lbl_whi";
-  static char const * blink_list=
+  static char const * blink_list =
     "*bla*red*dgr*bro*dbl*pur*cya*cha*dch*ora*gre*yel*blu*pin*lbl*whi";
 
+  strcpy(argument, origarg);
   one_argument (argument, color);
-  if (color[0]!='_' && color[0]!='*') return 0;
+
+  if (color[0]!='_' && color[0]!='*')
+    return 0;
+
   if ( (cptr = strstr(color_list, color)) )
     return (cptr - color_list) / 4;
+
   if ( (cptr = strstr(blink_list, color)) )
     return (cptr - blink_list) / 4 + AT_BLINK;
+
   return 0;
 }
 

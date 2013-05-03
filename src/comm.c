@@ -43,7 +43,6 @@ static const char go_ahead_str    [] = { (const char)IAC, (const char)GA, '\0' }
 #define MAX_NEST        100
 
 bool bootup = FALSE;
-void save_sysdata( SYSTEM_DATA sys );
 
 /*
  * Global variables.
@@ -1727,7 +1726,7 @@ void set_pager_color( short AType, CHAR_DATA *ch )
 
 
 /* source: EOD, by John Booth <???> */
-void ch_printf(CHAR_DATA *ch, char *fmt, ...)
+void ch_printf(const CHAR_DATA *ch, const char *fmt, ...)
 {
   char buf[MAX_STRING_LENGTH*2];        /* better safe than sorry */
   va_list args;
@@ -1739,7 +1738,7 @@ void ch_printf(CHAR_DATA *ch, char *fmt, ...)
   send_to_char(buf, ch);
 }
 
-void pager_printf(CHAR_DATA *ch, char *fmt, ...)
+void pager_printf(const CHAR_DATA *ch, const char *fmt, ...)
 {
   char buf[MAX_STRING_LENGTH*2];
   va_list args;

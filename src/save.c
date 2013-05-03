@@ -44,7 +44,6 @@
  */
 #define SAVEVERSION     3
 
-
 /*
  * Array to keep track of equipment temporarily.                -Thoric
  */

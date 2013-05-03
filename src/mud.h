@@ -3308,6 +3308,7 @@ extern const char * const exit_flags[];
 extern int const lang_array[];
 extern const char * const lang_names[];
 extern const char * const mprog_flags[];
+extern const char * const save_flag[];
 
 /*
  * Global variables.
@@ -3428,7 +3429,6 @@ DECLARE_DO_FUN( do_unfocusalias   );
 DECLARE_DO_FUN( do_members      );
 DECLARE_DO_FUN( do_roster       );
 DECLARE_DO_FUN( do_scatter );
-DECLARE_DO_FUN( do_mortalize );
 DECLARE_DO_FUN( do_delay );
 DECLARE_DO_FUN( do_setplanet );
 DECLARE_DO_FUN( do_makeplanet );
@@ -3642,7 +3642,6 @@ DECLARE_DO_FUN( do_degradeship  );
 DECLARE_DO_FUN( do_deities      );
 DECLARE_DO_FUN( do_deny         );
 DECLARE_DO_FUN( do_description  );
-DECLARE_DO_FUN( do_destro       );
 DECLARE_DO_FUN( do_destroy      );
 DECLARE_DO_FUN( do_detrap       );
 DECLARE_DO_FUN( do_devote       );
@@ -3798,7 +3797,6 @@ DECLARE_DO_FUN( do_quit         );
 DECLARE_DO_FUN( do_rank         );
 DECLARE_DO_FUN( do_rat          );
 DECLARE_DO_FUN( do_rdelete      );
-DECLARE_DO_FUN( do_reboo        );
 DECLARE_DO_FUN( do_reboot       );
 DECLARE_DO_FUN( do_recall       );
 DECLARE_DO_FUN( do_recho        );
@@ -3938,10 +3936,8 @@ DECLARE_DO_FUN( do_mpechoaround );
 DECLARE_DO_FUN( do_mpechoat     );
 DECLARE_DO_FUN( do_mpedit       );
 DECLARE_DO_FUN( do_mpfind       );
-DECLARE_DO_FUN( do_mrange       );
 DECLARE_DO_FUN( do_opedit       );
 DECLARE_DO_FUN( do_opfind       );
-DECLARE_DO_FUN( do_orange       );
 DECLARE_DO_FUN( do_rpedit       );
 DECLARE_DO_FUN( do_rpfind       );
 DECLARE_DO_FUN( do_mpforce      );
@@ -4198,6 +4194,8 @@ extern "C" {
   void    obj_fall( OBJ_DATA *obj, bool through );
 
   /* act_wiz.c */
+  void save_banlist( void );
+  int str_count(const char *psource, const char *ptarget);
   void    close_area( AREA_DATA *pArea );
   RID * find_location( CHAR_DATA *ch, char *arg );
   void    echo_to_room( short AT_COLOR, ROOM_INDEX_DATA *room,
@@ -4205,6 +4203,7 @@ extern "C" {
   void  echo_to_all( short AT_COLOR, const char *argument, short tar );
   void          get_reboot_string( void );
   void  free_social( SOCIALTYPE *social );
+  void unlink_social( SOCIALTYPE *social );
   void  add_social( SOCIALTYPE *social );
   void  free_command( CMDTYPE *command );
   void  unlink_command( CMDTYPE *command );
@@ -4237,6 +4236,7 @@ extern "C" {
   bool        is_disintigration( CHAR_DATA *victim );
 
   /* const.c */
+  int get_saveflag(const char*);
   const char *get_dir_name( int dir );
   int get_rev_dir( int dir );
   size_t spaceobj_type_size( void );
@@ -4374,8 +4374,8 @@ extern "C" {
   void send_to_pager( const char *txt, const CHAR_DATA *ch );
   void set_char_color( short AType, CHAR_DATA *ch );
   void set_pager_color( short AType, CHAR_DATA *ch );
-  void ch_printf( CHAR_DATA *ch, char *fmt, ... );
-  void pager_printf(CHAR_DATA *ch, char *fmt, ...);
+  void ch_printf( const CHAR_DATA *ch, const char *fmt, ... );
+  void pager_printf(const CHAR_DATA *ch, const char *fmt, ...);
   void act( short AType, const char *format, CHAR_DATA *ch,
             const void *arg1, const void *arg2, int type );
 
@@ -4392,7 +4392,8 @@ extern "C" {
   void  reset_area( AREA_DATA * pArea );
 
   /* db.c */
-  void    append_file( CHAR_DATA *ch, const char *file, const char *str );
+  void save_sysdata( SYSTEM_DATA sys );
+  void append_file( CHAR_DATA *ch, const char *file, const char *str );
   void  show_file( CHAR_DATA *ch, const char *filename );
   void  boot_db( bool fCopyover );
   void  area_update( void );
@@ -4493,31 +4494,32 @@ extern "C" {
   void sith_penalty( CHAR_DATA *ch );
 
   /* mud_comm.c */
-  char *        mprog_type_to_name( int type );
+  int get_color(const char *argument);
+  char *mprog_type_to_name( int type );
 
   /* mud_prog.c */
-  void  mprog_wordlist_check( char * arg, CHAR_DATA *mob,
-                              CHAR_DATA* actor, OBJ_DATA* object,
-                              void* vo, int type );
-  void  mprog_percent_check( CHAR_DATA *mob, CHAR_DATA* actor,
-                             OBJ_DATA* object, void* vo, int type );
-  void  mprog_act_trigger( char* buf, CHAR_DATA* mob,
-                           CHAR_DATA* ch, OBJ_DATA* obj, void* vo );
-  void  mprog_bribe_trigger( CHAR_DATA* mob, CHAR_DATA* ch, int amount );
-  void  mprog_entry_trigger( CHAR_DATA* mob );
-  void  mprog_give_trigger( CHAR_DATA* mob, CHAR_DATA* ch, OBJ_DATA* obj );
-  void  mprog_greet_trigger( CHAR_DATA* mob );
-  void    mprog_fight_trigger( CHAR_DATA* mob, CHAR_DATA* ch );
-  void    mprog_hitprcnt_trigger( CHAR_DATA* mob, CHAR_DATA* ch );
-  void    mprog_death_trigger( CHAR_DATA *killer, CHAR_DATA* mob );
-  void    mprog_random_trigger( CHAR_DATA* mob );
-  void    mprog_speech_trigger( char* txt, CHAR_DATA* mob );
-  void    mprog_script_trigger( CHAR_DATA *mob );
-  void    mprog_hour_trigger( CHAR_DATA *mob );
-  void    mprog_time_trigger( CHAR_DATA *mob );
-  void    progbug( char *str, CHAR_DATA *mob );
-  void  rset_supermob( ROOM_INDEX_DATA *room );
-  void  release_supermob( void );
+  void mprog_wordlist_check( char * arg, CHAR_DATA *mob,
+			     CHAR_DATA* actor, OBJ_DATA* object,
+			     void* vo, int type );
+  void mprog_percent_check( CHAR_DATA *mob, CHAR_DATA* actor,
+			    OBJ_DATA* object, void* vo, int type );
+  void mprog_act_trigger( char* buf, CHAR_DATA* mob,
+			  CHAR_DATA* ch, OBJ_DATA* obj, void* vo );
+  void mprog_bribe_trigger( CHAR_DATA* mob, CHAR_DATA* ch, int amount );
+  void mprog_entry_trigger( CHAR_DATA* mob );
+  void mprog_give_trigger( CHAR_DATA* mob, CHAR_DATA* ch, OBJ_DATA* obj );
+  void mprog_greet_trigger( CHAR_DATA* mob );
+  void mprog_fight_trigger( CHAR_DATA* mob, CHAR_DATA* ch );
+  void mprog_hitprcnt_trigger( CHAR_DATA* mob, CHAR_DATA* ch );
+  void mprog_death_trigger( CHAR_DATA *killer, CHAR_DATA* mob );
+  void mprog_random_trigger( CHAR_DATA* mob );
+  void mprog_speech_trigger( char* txt, CHAR_DATA* mob );
+  void mprog_script_trigger( CHAR_DATA *mob );
+  void mprog_hour_trigger( CHAR_DATA *mob );
+  void mprog_time_trigger( CHAR_DATA *mob );
+  void progbug( char *str, CHAR_DATA *mob );
+  void rset_supermob( ROOM_INDEX_DATA *room );
+  void release_supermob( void );
 
   /* player.c */
   void  set_title( CHAR_DATA *ch, char *title );
