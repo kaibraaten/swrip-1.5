@@ -3374,8 +3374,8 @@ extern          PLANET_DATA       *     first_planet;
 extern          PLANET_DATA       *     last_planet;
 extern          BOUNTY_DATA       *     first_bounty;
 extern          BOUNTY_DATA       *     last_bounty;
-extern          BOUNTY_DATA       *     first_disintigration;
-extern          BOUNTY_DATA       *     last_disintigration;
+extern          BOUNTY_DATA       *     first_disintegration;
+extern          BOUNTY_DATA       *     last_disintegration;
 extern          AREA_DATA         *     first_area;
 extern          AREA_DATA         *     last_area;
 extern          AREA_DATA         *     first_build;
@@ -4085,7 +4085,7 @@ DECLARE_SPELL_FUN(      spell_cure_addiction                );
 #define PLANET_LIST      "planet.lst"
 #define SPACE_LIST      "space.lst"
 #define BOUNTY_LIST     "bounty.lst"
-#define DISINTIGRATION_LIST     "disintigration.lst"
+#define DISINTEGRATION_LIST     "disintegration.lst"
 #define GOD_LIST        "gods.lst"      /* List of gods                 */
 #define GUARD_LIST      "guard.lst"
 
@@ -4229,13 +4229,14 @@ extern "C" {
   void remove_member( CHAR_DATA *ch );
 
   /* bounty.c */
-  BOUNTY_DATA  * get_disintigration( char *target );
-  void        load_bounties( void );
-  void        save_bounties( void );
-  void        save_disintigrations( void );
-  void        remove_disintigration( BOUNTY_DATA *bounty );
-  void      claim_disintigration( CHAR_DATA *ch , CHAR_DATA *victim );
-  bool        is_disintigration( CHAR_DATA *victim );
+  void disintegration( const CHAR_DATA *ch, const CHAR_DATA *victim, long amount );
+  BOUNTY_DATA *get_disintegration( const char *target );
+  void load_bounties( void );
+  void save_bounties( void );
+  void save_disintegrations( void );
+  void remove_disintegration( BOUNTY_DATA *bounty );
+  void claim_disintegration( CHAR_DATA *ch , const CHAR_DATA *victim );
+  bool is_disintegration( const CHAR_DATA *victim );
 
   /* const.c */
   int get_saveflag(const char*);
@@ -4450,6 +4451,7 @@ extern "C" {
   void  fold_area( AREA_DATA *tarea, char *filename, bool install );
 
   /* fight.c */
+  int xp_compute( const CHAR_DATA *gch, const CHAR_DATA *victim );
   int   max_fight( CHAR_DATA *ch );
   void  violence_update( void );
   ch_ret        multi_hit( CHAR_DATA *ch, CHAR_DATA *victim, int dt );
@@ -4538,10 +4540,10 @@ extern "C" {
   bool permsneak( CHAR_DATA *ch );
 
   /* handler.c */
-  void    explode( OBJ_DATA *obj );
-  int   get_exp( CHAR_DATA *ch , int ability );
-  int   get_exp_worth( CHAR_DATA *ch );
-  int   exp_level( short level );
+  void explode( OBJ_DATA *obj );
+  int get_exp( const CHAR_DATA *ch , int ability );
+  int get_exp_worth( const CHAR_DATA *ch );
+  int exp_level( short level );
   short get_trust( const CHAR_DATA *ch );
   short get_age( const CHAR_DATA *ch );
   short get_curr_str( const CHAR_DATA *ch );
@@ -4550,26 +4552,26 @@ extern "C" {
   short get_curr_dex( const CHAR_DATA *ch );
   short get_curr_con( const CHAR_DATA *ch );
   short get_curr_cha( const CHAR_DATA *ch );
-  short  get_curr_lck( const CHAR_DATA *ch );
-  short  get_curr_frc( const CHAR_DATA *ch );
-  bool  can_take_proto( CHAR_DATA *ch );
-  int   can_carry_n( CHAR_DATA *ch );
-  int   can_carry_w( CHAR_DATA *ch );
-  void  affect_modify( CHAR_DATA *ch, AFFECT_DATA *paf, bool fAdd );
-  void  affect_to_char( CHAR_DATA *ch, AFFECT_DATA *paf );
-  void  affect_remove( CHAR_DATA *ch, AFFECT_DATA *paf );
-  void  affect_strip( CHAR_DATA *ch, int sn );
-  bool  is_affected( CHAR_DATA *ch, int sn );
-  void  affect_join( CHAR_DATA *ch, AFFECT_DATA *paf );
-  void  char_from_room( CHAR_DATA *ch );
-  void  char_to_room( CHAR_DATA *ch, ROOM_INDEX_DATA *pRoomIndex );
-  OD *  obj_to_char( OBJ_DATA *obj, CHAR_DATA *ch );
-  void  obj_from_char( OBJ_DATA *obj );
-  int   apply_ac( OBJ_DATA *obj, int iWear );
-  OD *  get_eq_char( const CHAR_DATA *ch, int iWear );
-  void  equip_char( CHAR_DATA *ch, OBJ_DATA *obj, int iWear );
-  void  unequip_char( CHAR_DATA *ch, OBJ_DATA *obj );
-  int   count_obj_list( OBJ_INDEX_DATA *obj, OBJ_DATA *list );
+  short get_curr_lck( const CHAR_DATA *ch );
+  short get_curr_frc( const CHAR_DATA *ch );
+  bool can_take_proto( CHAR_DATA *ch );
+  int can_carry_n( CHAR_DATA *ch );
+  int can_carry_w( CHAR_DATA *ch );
+  void affect_modify( CHAR_DATA *ch, AFFECT_DATA *paf, bool fAdd );
+  void affect_to_char( CHAR_DATA *ch, AFFECT_DATA *paf );
+  void affect_remove( CHAR_DATA *ch, AFFECT_DATA *paf );
+  void affect_strip( CHAR_DATA *ch, int sn );
+  bool is_affected( CHAR_DATA *ch, int sn );
+  void affect_join( CHAR_DATA *ch, AFFECT_DATA *paf );
+  void char_from_room( CHAR_DATA *ch );
+  void char_to_room( CHAR_DATA *ch, ROOM_INDEX_DATA *pRoomIndex );
+  OD *obj_to_char( OBJ_DATA *obj, CHAR_DATA *ch );
+  void obj_from_char( OBJ_DATA *obj );
+  int apply_ac( OBJ_DATA *obj, int iWear );
+  OD *get_eq_char( const CHAR_DATA *ch, int iWear );
+  void equip_char( CHAR_DATA *ch, OBJ_DATA *obj, int iWear );
+  void unequip_char( CHAR_DATA *ch, OBJ_DATA *obj );
+  int count_obj_list( OBJ_INDEX_DATA *obj, OBJ_DATA *list );
   void  obj_from_room( OBJ_DATA *obj );
   OD *  obj_to_room( OBJ_DATA *obj, ROOM_INDEX_DATA *pRoomIndex );
   OD *  obj_to_obj( OBJ_DATA *obj, OBJ_DATA *obj_to );
@@ -4641,7 +4643,7 @@ extern "C" {
   void  economize_mobgold( CHAR_DATA *mob );
   bool  economy_has( AREA_DATA *tarea, int gold );
   void  add_kill( CHAR_DATA *ch, CHAR_DATA *mob );
-  int   times_killed( CHAR_DATA *ch, CHAR_DATA *mob );
+  int times_killed( const CHAR_DATA *ch, const CHAR_DATA *mob );
   int count_users(OBJ_DATA *obj);
   bool has_comlink( const CHAR_DATA *ch );
 

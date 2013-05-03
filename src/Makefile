@@ -39,6 +39,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o \
 	planets.o player.o reset.o save.o ships.o shops.o shuttle.o \
 	skills.o special.o space.o spaceobjects.o swskills.o \
 	tables.o track.o update.o vector3_aux.o \
+	$(CMDDIR)/addbounty.o \
 	$(CMDDIR)/advance.o \
 	$(CMDDIR)/afk.o \
 	$(CMDDIR)/alias.o \
@@ -63,6 +64,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o \
 	$(CMDDIR)/bestowarea.o \
 	$(CMDDIR)/boards.o \
 	$(CMDDIR)/bodybag.o \
+	$(CMDDIR)/bounties.o \
 	$(CMDDIR)/brandish.o \
 	$(CMDDIR)/bset.o \
 	$(CMDDIR)/bstat.o \
@@ -175,6 +177,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o \
 	$(CMDDIR)/reboot.o \
 	$(CMDDIR)/recho.o \
 	$(CMDDIR)/regoto.o \
+	$(CMDDIR)/rembounty.o \
 	$(CMDDIR)/remove.o \
 	$(CMDDIR)/reply.o \
 	$(CMDDIR)/rest.o \

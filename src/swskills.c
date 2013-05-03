@@ -31,7 +31,6 @@
 
 void    add_reinforcements( CHAR_DATA *ch );
 ch_ret  one_hit( CHAR_DATA *ch, CHAR_DATA *victim, int dt );
-int     xp_compute( CHAR_DATA *ch , CHAR_DATA *victim );
 int ris_save( CHAR_DATA *ch, int the_chance, int ris );
 CHAR_DATA *get_char_room_mp( CHAR_DATA *ch, char *argument );
 bool    aff_paralysis( CHAR_DATA *ch, CHAR_DATA *victim );

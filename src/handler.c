@@ -208,7 +208,7 @@ bool is_wizvis( CHAR_DATA *ch , CHAR_DATA *victim )
 /*
  * Return how much exp a char has
  */
-int get_exp( CHAR_DATA *ch , int ability )
+int get_exp( const CHAR_DATA *ch, int ability )
 {
   if ( ability >= MAX_ABILITY || ability < 0 )
     return 0;
@@ -219,9 +219,9 @@ int get_exp( CHAR_DATA *ch , int ability )
 /*
  * Calculate roughly how much experience a character is worth
  */
-int get_exp_worth( CHAR_DATA *ch )
+int get_exp_worth( const CHAR_DATA *ch )
 {
-  int xp;
+  int xp = 0;
 
   xp = ch->skill_level[COMBAT_ABILITY] * ch->top_level * 50;
   xp += ch->max_hit * 2;
@@ -3676,7 +3676,7 @@ void add_kill( CHAR_DATA *ch, CHAR_DATA *mob )
  * Return how many times this player has killed this mob        -Thoric
  * Only keeps track of so many (MAX_KILLTRACK), and keeps track by vnum
  */
-int times_killed( CHAR_DATA *ch, CHAR_DATA *mob )
+int times_killed( const CHAR_DATA *ch, const CHAR_DATA *mob )
 {
   int x;
   short vnum, track;

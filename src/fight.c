@@ -43,7 +43,6 @@ int ris_save( CHAR_DATA *ch, int chnce, int ris );
  */
 void    dam_message( CHAR_DATA *ch, CHAR_DATA *victim, int dam, int dt );
 void    group_gain( CHAR_DATA *ch, CHAR_DATA *victim );
-int     xp_compute( CHAR_DATA *gch, CHAR_DATA *victim );
 int     align_compute( CHAR_DATA *gch, CHAR_DATA *victim );
 ch_ret  one_hit( CHAR_DATA *ch, CHAR_DATA *victim, int dt );
 int     obj_hitroll( OBJ_DATA *obj );
@@ -2089,7 +2088,7 @@ void raw_kill( CHAR_DATA *ch, CHAR_DATA *victim )
   stop_fighting( victim, TRUE );
 
   if ( ch && !IS_NPC(ch) && !IS_NPC(victim) )
-    claim_disintigration( ch , victim );
+    claim_disintegration( ch , victim );
 
   /* Take care of polymorphed chars */
   if(IS_NPC(victim) && IS_SET(victim->act, ACT_POLYMORPHED))
@@ -2457,12 +2456,10 @@ int align_compute( CHAR_DATA *gch, CHAR_DATA *victim )
  * Calculate how much XP gch should gain for killing victim
  * Lots of redesigning for new exp system by Thoric
  */
-int xp_compute( CHAR_DATA *gch, CHAR_DATA *victim )
+int xp_compute( const CHAR_DATA *gch, const CHAR_DATA *victim )
 {
   int align;
-  int xp;
-
-  xp      = (get_exp_worth( victim )
+  int xp = (get_exp_worth( victim )
              *  URANGE( 1, (victim->skill_level[COMBAT_ABILITY] - gch->skill_level[COMBAT_ABILITY]) + 10, 20 )) / 10;
   align = gch->alignment - victim->alignment;
 

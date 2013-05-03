@@ -37,8 +37,6 @@ bool check_illegal_psteal( CHAR_DATA *ch, CHAR_DATA *victim );
 void failed_casting( struct skill_type *skill, CHAR_DATA *ch,
                      CHAR_DATA *victim, OBJ_DATA *obj );
 
-int     xp_compute( CHAR_DATA *gch, CHAR_DATA *victim );
-
 /*
  * Dummy function
  */

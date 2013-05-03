@@ -22,82 +22,76 @@
  *                    (  and area capturing as well  )                      *
  ****************************************************************************/
 
-#include <sys/types.h>
-#include <ctype.h>
-#include <stdio.h>
-#include <string.h>
-#include <time.h>
 #include "mud.h"
 
 BOUNTY_DATA *first_bounty = NULL;
 BOUNTY_DATA *last_bounty = NULL;
-BOUNTY_DATA *first_disintigration = NULL;
-BOUNTY_DATA *last_disintigration = NULL;
+BOUNTY_DATA *first_disintegration = NULL;
+BOUNTY_DATA *last_disintegration = NULL;
 
-void disintigration( CHAR_DATA *ch , CHAR_DATA *victim , long amount );
-void nodisintigration( CHAR_DATA *ch , CHAR_DATA *victim , long amount );
-int xp_compute( CHAR_DATA *ch , CHAR_DATA *victim);
+void nodisintegration( CHAR_DATA *ch , CHAR_DATA *victim , long amount );
 
-void save_disintigrations()
+void save_disintegrations()
 {
-  BOUNTY_DATA *tbounty;
-  FILE *fpout;
+  BOUNTY_DATA *tbounty = NULL;
+  FILE *fpout = NULL;
   char filename[256];
 
-  sprintf( filename, "%s%s", SYSTEM_DIR, DISINTIGRATION_LIST );
+  sprintf( filename, "%s%s", SYSTEM_DIR, DISINTEGRATION_LIST );
   fpout = fopen( filename, "w" );
+
   if ( !fpout )
     {
-      bug( "FATAL: cannot open disintigration.lst for writing!\r\n", 0 );
+      bug( "FATAL: cannot open disintegration.lst for writing!\r\n", 0 );
       return;
     }
-  for ( tbounty = first_disintigration; tbounty; tbounty = tbounty->next )
+
+  for ( tbounty = first_disintegration; tbounty; tbounty = tbounty->next )
     {
       fprintf( fpout, "%s\n", tbounty->target );
       fprintf( fpout, "%ld\n", tbounty->amount );
 
       fprintf( fpout, "%s\n", tbounty->poster );
     }
+
   fprintf( fpout, "$\n" );
   fclose( fpout );
-
 }
 
-
-bool is_disintigration( CHAR_DATA *victim )
+bool is_disintegration( const CHAR_DATA *victim )
 {
-  BOUNTY_DATA *bounty;
+  BOUNTY_DATA *bounty = NULL;
 
-  for ( bounty = first_disintigration; bounty; bounty = bounty->next )
+  for ( bounty = first_disintegration; bounty; bounty = bounty->next )
     if ( !str_cmp( victim->name , bounty->target ) )
       return TRUE;
+
   return FALSE;
 }
 
-BOUNTY_DATA *get_disintigration( char *target )
+BOUNTY_DATA *get_disintegration( const char *target )
 {
-  BOUNTY_DATA *bounty;
+  BOUNTY_DATA *bounty = NULL;
 
-  for ( bounty = first_disintigration; bounty; bounty = bounty->next )
+  for ( bounty = first_disintegration; bounty; bounty = bounty->next )
     if ( !str_cmp( target, bounty->target ) )
       return bounty;
+
   return NULL;
 }
 
 void load_bounties( void )
 {
-  FILE *fpList;
-  const char *target, *poster;
+  FILE *fpList = NULL;
+  const char *target = NULL;
+  const char *poster = NULL;
   char bountylist[256];
-  BOUNTY_DATA *bounty;
-  long int  amount;
+  BOUNTY_DATA *bounty = NULL;
+  long amount = 0;
 
-  first_disintigration = NULL;
-  last_disintigration   = NULL;
+  log_string( "Loading disintegrations..." );
 
-  log_string( "Loading disintigrations..." );
-
-  sprintf( bountylist, "%s%s", SYSTEM_DIR, DISINTIGRATION_LIST );
+  sprintf( bountylist, "%s%s", SYSTEM_DIR, DISINTEGRATION_LIST );
 
   if ( ( fpList = fopen( bountylist, "r" ) ) == NULL )
     {
@@ -111,7 +105,7 @@ void load_bounties( void )
       if ( target[0] == '$' )
         break;
       CREATE( bounty, BOUNTY_DATA, 1 );
-      LINK( bounty, first_disintigration, last_disintigration, next, prev );
+      LINK( bounty, first_disintegration, last_disintegration, next, prev );
       bounty->target = STRALLOC(target);
 
       amount = fread_number( fpList );
@@ -129,41 +123,15 @@ void load_bounties( void )
   log_string(" Done bounties " );
 }
 
-void do_bounties( CHAR_DATA *ch, char *argument )
+void disintegration ( const CHAR_DATA *ch , const CHAR_DATA *victim , long amount )
 {
-  BOUNTY_DATA *bounty;
-
-  int count = 0;
-  if ( ( get_trust(ch) < LEVEL_IMMORTAL) && (!ch->pcdata || !ch->pcdata->clan || ( str_cmp(ch->pcdata->clan->name, "the hunters guild") && str_cmp(ch->pcdata->clan->name, "the assassins guild") ) ))
-    {    send_to_char( "\r\nOnly hunters can access that information!\r\n", ch );
-      return;
-    }
-  set_char_color( AT_WHITE, ch );
-  send_to_char( "\r\nBounty                      Amount          Poster\r\n", ch );
-  for ( bounty = first_disintigration; bounty; bounty = bounty->next )
-    {
-      set_char_color( AT_RED, ch );
-      ch_printf( ch, "%-26s %-14ld %-20s\r\n", bounty->target, bounty->amount, bounty->poster );
-      count++;
-    }
-
-  if ( !count )
-    {
-      set_char_color( AT_GREY, ch );
-      send_to_char( "There are no bounties set at this time.\r\n", ch );
-      return;
-    }
-}
-
-void disintigration ( CHAR_DATA *ch , CHAR_DATA *victim , long amount )
-{
-  BOUNTY_DATA *bounty;
-  bool found;
+  BOUNTY_DATA *bounty = NULL;
+  bool found = FALSE;
   char buf[MAX_STRING_LENGTH];
-  CHAR_DATA *p, *p_prev;
-  found = FALSE;
+  CHAR_DATA *p = NULL;
+  CHAR_DATA *p_prev = NULL;
 
-  for ( bounty = first_disintigration; bounty; bounty = bounty->next )
+  for ( bounty = first_disintegration; bounty; bounty = bounty->next )
     {
       if ( !str_cmp( bounty->target , victim->name ))
         {
@@ -175,141 +143,70 @@ void disintigration ( CHAR_DATA *ch , CHAR_DATA *victim , long amount )
   if (! found)
     {
       CREATE( bounty, BOUNTY_DATA, 1 );
-      LINK( bounty, first_disintigration, last_disintigration, next, prev );
+      LINK( bounty, first_disintegration, last_disintegration, next, prev );
 
-      bounty->target      = STRALLOC( victim->name );
-      bounty->amount      = 0;
-
-      bounty->poster      = STRALLOC( ch->name );
+      bounty->target = STRALLOC( victim->name );
+      bounty->amount = 0;
+      bounty->poster = STRALLOC( ch->name );
     }
 
-  bounty->amount      = bounty->amount + amount;
-  save_disintigrations();
+  bounty->amount = bounty->amount + amount;
+  save_disintegrations();
 
-  sprintf( buf, "&R%s has added %ld credits to the bounty on %s.\r\n", ch->name, amount , victim->name );
+  sprintf( buf, "&R%s has added %ld credits to the bounty on %s.\r\n",
+	   ch->name, amount, victim->name );
   send_to_char(buf, ch);
 
   for (p = last_char; p ; p = p_prev )
     {
       p_prev = p->prev;
 
-      if ( ch->pcdata && ch->pcdata->clan && ( !str_cmp(ch->pcdata->clan->name, "the hunters guild") || !str_cmp(ch->pcdata->clan->name, "the assassins guild") ) )
+      if ( ch->pcdata && ch->pcdata->clan
+	   && ( !str_cmp(ch->pcdata->clan->name, "the hunters guild")
+		|| !str_cmp(ch->pcdata->clan->name, "the assassins guild") ) )
         ch_printf(p, buf);
       else if (!IS_NPC(p) && get_trust(p) >= LEVEL_IMMORTAL)
         ch_printf(p, buf);
+
       if (victim == p)
         ch_printf(p, "&RSomeone has added %ld credits to the bounty on you!\r\n", amount );
     }
 }
 
-void do_addbounty( CHAR_DATA *ch, char *argument )
+void remove_disintegration( BOUNTY_DATA *bounty )
 {
-  char arg[MAX_STRING_LENGTH];
-  long int amount;
-  CHAR_DATA *victim;
-
-  if ( !argument || argument[0] == '\0' )
-    {
-      do_bounties( ch , argument );
-      return;
-    }
-
-  argument = one_argument(argument, arg);
-
-  if (argument[0] == '\0' )
-    {
-      send_to_char( "Usage: Addbounty <target> <amount>\r\n", ch );
-      return;
-    }
-
-  if ( ch->pcdata && ch->pcdata->clan && ( !str_cmp(ch->pcdata->clan->name, "the hunters guild") || !str_cmp(ch->pcdata->clan->name, "the assassins guild") ) )
-    {
-      send_to_char( "Your job is to collect bounties not post them.", ch );
-      return;
-    }
-
-  if ( !ch->in_room || ch->in_room->vnum != 6604 )
-    {
-      send_to_char( "You will have to go to the Guild on Tatooine to add a new bounty.", ch );
-      return;
-    }
-
-  if (argument[0] == '\0' )
-    amount = 0;
-  else
-    amount = atoi (argument);
-
-  if ( amount < 5000 )
-    {
-      send_to_char( "A bounty should be at least 5000 credits.\r\n", ch );
-      return;
-    }
-
-  if ( !(victim = get_char_world( ch, arg )) )
-    {
-      send_to_char( "They don't appear to be here .. wait til they log in.\r\n", ch );
-      return;
-    }
-
-  if ( IS_NPC(victim) )
-    {
-      send_to_char( "You can only set bounties on other players .. not mobs!\r\n", ch );
-      return;
-    }
-  if ( victim->pcdata && victim->pcdata->clan && !str_cmp(victim->pcdata->clan->name, "the hunters guild"))
-    {
-      send_to_char( "&RYou can not post bounties on bounty hunters!\r\n", ch);
-      return;
-    }
-
-  if (amount <= 0)
-    {
-      send_to_char( "Nice try! How about 1 or more credits instead...\r\n", ch );
-      return;
-    }
-
-  if (ch->gold < amount)
-    {
-      send_to_char( "You don't have that many credits!\r\n", ch );
-      return;
-    }
-  ch->gold = ch->gold - amount;
-
-  disintigration( ch, victim, amount);
-}
-
-void remove_disintigration( BOUNTY_DATA *bounty )
-{
-  UNLINK( bounty, first_disintigration, last_disintigration, next, prev );
+  UNLINK( bounty, first_disintegration, last_disintegration, next, prev );
   STRFREE( bounty->target );
   STRFREE( bounty->poster );
   DISPOSE( bounty );
 
-  save_disintigrations();
+  save_disintegrations();
 }
 
-void claim_disintigration( CHAR_DATA *ch , CHAR_DATA *victim )
+void claim_disintegration( CHAR_DATA *ch, const CHAR_DATA *victim )
 {
-  BOUNTY_DATA *bounty;
-  long int     xp;
+  BOUNTY_DATA *bounty = NULL;
+  long xp = 0;
   char buf[MAX_STRING_LENGTH];
 
   if ( IS_NPC(victim) )
     return;
 
-  bounty = get_disintigration( victim->name );
+  bounty = get_disintegration( victim->name );
 
   if ( ch == victim )
     {
       if ( bounty != NULL )
-        remove_disintigration(bounty);
+        remove_disintegration(bounty);
       return;
     }
 
   if (bounty &&
-      (!ch->pcdata || !ch->pcdata->clan || ( str_cmp(ch->pcdata->clan->name, "the hunters guild") || str_cmp(ch->pcdata->clan->name, "the assassins guild") ) ) )
+      (!ch->pcdata || !ch->pcdata->clan
+       || ( str_cmp(ch->pcdata->clan->name, "the hunters guild")
+	    || str_cmp(ch->pcdata->clan->name, "the assassins guild") ) ) )
     {
-      remove_disintigration(bounty);
+      remove_disintegration(bounty);
       bounty = NULL;
     }
 
@@ -327,11 +224,8 @@ void claim_disintigration( CHAR_DATA *ch , CHAR_DATA *victim )
           SET_BIT(ch->act, PLR_KILLER );
           ch_printf( ch, "You are now wanted for the murder of %s.\r\n", victim->name );
         }
-      /*             sprintf( buf, "%s is Dead!", victim->name );
-                     echo_to_all ( AT_RED , buf, 0 );
-      */
-      return;
 
+      return;
     }
 
   ch->gold += bounty->amount;
@@ -342,23 +236,11 @@ void claim_disintigration( CHAR_DATA *ch , CHAR_DATA *victim )
   set_char_color( AT_BLOOD, ch );
   ch_printf( ch, "You receive %ld experience and %ld credits,\r\n from the bounty on %s\r\n", exp, bounty->amount, bounty->target );
 
-  sprintf( buf, "The disintigration bounty on %s has been claimed!",victim->name );
+  sprintf( buf, "The disintegration bounty on %s has been claimed!",victim->name );
   echo_to_all ( AT_RED , buf, 0 );
-  /*    sprintf( buf, "%s is Dead!", victim->name );
-        echo_to_all ( AT_RED , buf, 0 );
-  */
 
   if ( !IS_SET(victim->act , PLR_KILLER ) )
     SET_BIT(ch->act, PLR_KILLER );
-  remove_disintigration(bounty);
-}
 
-void do_rembounty(  CHAR_DATA *ch, char *argument )
-{
-  BOUNTY_DATA *bounty = get_disintigration( argument );
-
-  if ( bounty != NULL )
-    remove_disintigration(bounty);
-
-  return;
+  remove_disintegration(bounty);
 }
