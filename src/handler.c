@@ -48,8 +48,7 @@ int              cur_obj_serial;
 bool             cur_obj_extracted;
 obj_ret          global_objcode;
 
-bool is_wizvis( CHAR_DATA *ch , CHAR_DATA *victim );
-
+static bool is_wizvis( const CHAR_DATA *ch, const CHAR_DATA *victim );
 OBJ_DATA *group_object( OBJ_DATA *obj1, OBJ_DATA *obj2 );
 
 void room_explode( OBJ_DATA *obj , CHAR_DATA *xch, ROOM_INDEX_DATA *room );
@@ -195,7 +194,7 @@ void room_explode_2( ROOM_INDEX_DATA *room , int blast )
 
 }
 
-bool is_wizvis( CHAR_DATA *ch , CHAR_DATA *victim )
+static bool is_wizvis( const CHAR_DATA *ch, const CHAR_DATA *victim )
 {
   if ( !IS_NPC(victim)
        &&   IS_SET(victim->act, PLR_WIZINVIS)
@@ -401,7 +400,7 @@ short get_curr_frc( const CHAR_DATA *ch )
  * Retrieve a character's carry capacity.
  * Vastly reduced (finally) due to containers           -Thoric
  */
-int can_carry_n( CHAR_DATA *ch )
+int can_carry_n( const CHAR_DATA *ch )
 {
   int penalty = 0;
 
@@ -429,7 +428,7 @@ int can_carry_n( CHAR_DATA *ch )
 /*
  * Retrieve a character's carry capacity.
  */
-int can_carry_w( CHAR_DATA *ch )
+int can_carry_w( const CHAR_DATA *ch )
 {
   if ( !IS_NPC(ch) && get_trust(ch) >= LEVEL_IMMORTAL )
     return 1000000;
@@ -444,15 +443,14 @@ int can_carry_w( CHAR_DATA *ch )
 /*
  * See if a player/mob can take a piece of prototype eq         -Thoric
  */
-bool can_take_proto( CHAR_DATA *ch )
+bool can_take_proto( const CHAR_DATA *ch )
 {
   if ( IS_IMMORTAL(ch) )
     return TRUE;
+  else if ( IS_NPC(ch) && IS_SET(ch->act, ACT_PROTOTYPE) )
+    return TRUE;
   else
-    if ( IS_NPC(ch) && IS_SET(ch->act, ACT_PROTOTYPE) )
-      return TRUE;
-    else
-      return FALSE;
+    return FALSE;
 }
 
 /*
@@ -808,9 +806,9 @@ void affect_strip( CHAR_DATA *ch, int sn )
 /*
  * Return true if a char is affected by a spell.
  */
-bool is_affected( CHAR_DATA *ch, int sn )
+bool is_affected( const CHAR_DATA *ch, int sn )
 {
-  AFFECT_DATA *paf;
+  AFFECT_DATA *paf = NULL;
 
   for ( paf = ch->first_affect; paf; paf = paf->next )
     if ( paf->type == sn )
@@ -1046,9 +1044,9 @@ void obj_from_char( OBJ_DATA *obj )
   return;
 }
 
-int count_users(OBJ_DATA *obj)
+int count_users(const OBJ_DATA *obj)
 {
-  CHAR_DATA *fch;
+  const CHAR_DATA *fch = NULL;
   int count = 0;
 
   if (obj->in_room == NULL)
@@ -1065,7 +1063,7 @@ int count_users(OBJ_DATA *obj)
 /*
  * Find the ac value of an obj, including position effect.
  */
-int apply_ac( OBJ_DATA *obj, int iWear )
+int apply_ac( const OBJ_DATA *obj, int iWear )
 {
   if ( obj->item_type != ITEM_ARMOR )
     return 0;
@@ -1217,17 +1215,14 @@ void unequip_char( CHAR_DATA *ch, OBJ_DATA *obj )
   return;
 }
 
-
-
 /*
  * Count occurrences of an obj in a list.
  */
-int count_obj_list( OBJ_INDEX_DATA *pObjIndex, OBJ_DATA *list )
+int count_obj_list( const OBJ_INDEX_DATA *pObjIndex, const OBJ_DATA *list )
 {
-  OBJ_DATA *obj;
-  int nMatch;
+  const OBJ_DATA *obj = NULL;
+  int nMatch = 0;
 
-  nMatch = 0;
   for ( obj = list; obj; obj = obj->next_content )
     if ( obj->pIndexData == pObjIndex )
       nMatch++;
@@ -1235,14 +1230,12 @@ int count_obj_list( OBJ_INDEX_DATA *pObjIndex, OBJ_DATA *list )
   return nMatch;
 }
 
-
-
 /*
  * Move an obj out of a room.
  */
 void write_corpses( CHAR_DATA *ch, char *name );
 
-int falling;
+int falling = 0;
 
 void obj_from_room( OBJ_DATA *obj )
 {
@@ -1589,19 +1582,19 @@ void extract_char( CHAR_DATA *ch, bool fPull )
   return;
 }
 
-
 /*
  * Find a char in the room.
  */
-CHAR_DATA *get_char_room( CHAR_DATA *ch, char *argument )
+CHAR_DATA *get_char_room( const CHAR_DATA *ch, const char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   CHAR_DATA *rch;
   int number, count, vnum;
 
   number = number_argument( argument, arg );
+
   if ( !str_cmp( arg, "self" ) )
-    return ch;
+    return (CHAR_DATA*)ch;
 
   if ( get_trust(ch) >= LEVEL_SAVIOR && is_number( arg ) )
     vnum = atoi( arg );
@@ -1648,13 +1641,10 @@ CHAR_DATA *get_char_room( CHAR_DATA *ch, char *argument )
   return NULL;
 }
 
-
-
-
 /*
  * Find a char in the world.
  */
-CHAR_DATA *get_char_world( CHAR_DATA *ch, char *argument )
+CHAR_DATA *get_char_world( const CHAR_DATA *ch, const char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   CHAR_DATA *wch;
@@ -1662,8 +1652,9 @@ CHAR_DATA *get_char_world( CHAR_DATA *ch, char *argument )
 
   number = number_argument( argument, arg );
   count  = 0;
+
   if ( !str_cmp( arg, "self" ) )
-    return ch;
+    return (CHAR_DATA*)ch;
 
   /*
    * Allow reference by vnum for saints+                        -Thoric
@@ -1746,7 +1737,7 @@ CHAR_DATA *get_char_world( CHAR_DATA *ch, char *argument )
  * Find some object with a given index data.
  * Used by area-reset 'P', 'T' and 'H' commands.
  */
-OBJ_DATA *get_obj_type( OBJ_INDEX_DATA *pObjIndex )
+OBJ_DATA *get_obj_type( const OBJ_INDEX_DATA *pObjIndex )
 {
   OBJ_DATA *obj;
 
@@ -1761,15 +1752,13 @@ OBJ_DATA *get_obj_type( OBJ_INDEX_DATA *pObjIndex )
 /*
  * Find an obj in a list.
  */
-OBJ_DATA *get_obj_list( CHAR_DATA *ch, char *argument, OBJ_DATA *list )
+OBJ_DATA *get_obj_list( const CHAR_DATA *ch, const char *argument, OBJ_DATA *list )
 {
   char arg[MAX_INPUT_LENGTH];
-  OBJ_DATA *obj;
-  int number;
-  int count;
+  OBJ_DATA *obj = NULL;
+  int number = number_argument( argument, arg );
+  int count  = 0;
 
-  number = number_argument( argument, arg );
-  count  = 0;
   for ( obj = list; obj; obj = obj->next_content )
     if ( can_see_obj( ch, obj ) && nifty_is_name( arg, obj->name ) )
       if ( (count += obj->count) >= number )
@@ -1780,6 +1769,7 @@ OBJ_DATA *get_obj_list( CHAR_DATA *ch, char *argument, OBJ_DATA *list )
      Added by Narn, Sept/96
   */
   count = 0;
+
   for ( obj = list; obj; obj = obj->next_content )
     if ( can_see_obj( ch, obj ) && nifty_is_name_prefix( arg, obj->name ) )
       if ( (count += obj->count) >= number )
@@ -1791,7 +1781,7 @@ OBJ_DATA *get_obj_list( CHAR_DATA *ch, char *argument, OBJ_DATA *list )
 /*
  * Find an obj in a list...going the other way                  -Thoric
  */
-OBJ_DATA *get_obj_list_rev( CHAR_DATA *ch, char *argument, OBJ_DATA *list )
+OBJ_DATA *get_obj_list_rev( const CHAR_DATA *ch, const char *argument, OBJ_DATA *list )
 {
   char arg[MAX_INPUT_LENGTH];
   OBJ_DATA *obj;
@@ -1823,7 +1813,7 @@ OBJ_DATA *get_obj_list_rev( CHAR_DATA *ch, char *argument, OBJ_DATA *list )
 /*
  * Find an obj in player's inventory.
  */
-OBJ_DATA *get_obj_carry( CHAR_DATA *ch, char *argument )
+OBJ_DATA *get_obj_carry( const CHAR_DATA *ch, const char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   OBJ_DATA *obj;
@@ -1866,7 +1856,7 @@ OBJ_DATA *get_obj_carry( CHAR_DATA *ch, char *argument )
 /*
  * Find an obj in player's equipment.
  */
-OBJ_DATA *get_obj_wear( CHAR_DATA *ch, char *argument )
+OBJ_DATA *get_obj_wear( const CHAR_DATA *ch, const char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   OBJ_DATA *obj;
@@ -1915,7 +1905,7 @@ OBJ_DATA *get_obj_wear( CHAR_DATA *ch, char *argument )
 /*
  * Find an obj in the room or in inventory.
  */
-OBJ_DATA *get_obj_here( CHAR_DATA *ch, char *argument )
+OBJ_DATA *get_obj_here( const CHAR_DATA *ch, const char *argument )
 {
   OBJ_DATA *obj;
 
@@ -1940,7 +1930,7 @@ OBJ_DATA *get_obj_here( CHAR_DATA *ch, char *argument )
 /*
  * Find an obj in the world.
  */
-OBJ_DATA *get_obj_world( CHAR_DATA *ch, char *argument )
+OBJ_DATA *get_obj_world( const CHAR_DATA *ch, const char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   OBJ_DATA *obj;
@@ -1992,7 +1982,7 @@ OBJ_DATA *get_obj_world( CHAR_DATA *ch, char *argument )
  * Used by get/drop/put/quaff/recite/etc
  * Increasingly freaky based on mental state and drunkeness
  */
-bool ms_find_obj( CHAR_DATA *ch )
+bool ms_find_obj( const CHAR_DATA *ch )
 {
   int ms = ch->mental_state;
   int drunk = IS_NPC(ch) ? 0 : ch->pcdata->condition[COND_DRUNK];
@@ -2055,12 +2045,15 @@ bool ms_find_obj( CHAR_DATA *ch )
  * Generic get obj function that supports optional containers.  -Thoric
  * currently only used for "eat" and "quaff".
  */
-OBJ_DATA *find_obj( CHAR_DATA *ch, char *argument, bool carryonly )
+OBJ_DATA *find_obj( CHAR_DATA *ch, const char *orig_argument, bool carryonly )
 {
+  char argument_buffer[MAX_INPUT_LENGTH];
+  char *argument = argument_buffer;
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
   OBJ_DATA *obj;
 
+  strcpy(argument, orig_argument);
   argument = one_argument( argument, arg1 );
   argument = one_argument( argument, arg2 );
 
@@ -2118,7 +2111,7 @@ OBJ_DATA *find_obj( CHAR_DATA *ch, char *argument, bool carryonly )
   return NULL;
 }
 
-int get_obj_number( OBJ_DATA *obj )
+int get_obj_number( const OBJ_DATA *obj )
 {
   return obj->count;
 }
@@ -2127,7 +2120,7 @@ int get_obj_number( OBJ_DATA *obj )
 /*
  * Return weight of an object, including weight of contents.
  */
-int get_obj_weight( OBJ_DATA *obj )
+int get_obj_weight( const OBJ_DATA *obj )
 {
   int weight;
 
@@ -2143,7 +2136,7 @@ int get_obj_weight( OBJ_DATA *obj )
 /*
  * True if room is dark.
  */
-bool room_is_dark( ROOM_INDEX_DATA *pRoomIndex )
+bool room_is_dark( const ROOM_INDEX_DATA *pRoomIndex )
 {
   if ( !pRoomIndex )
     {
@@ -2173,7 +2166,7 @@ bool room_is_dark( ROOM_INDEX_DATA *pRoomIndex )
 /*
  * True if room is private.
  */
-bool room_is_private( CHAR_DATA *ch , ROOM_INDEX_DATA *pRoomIndex )
+bool room_is_private( const CHAR_DATA *ch, const ROOM_INDEX_DATA *pRoomIndex )
 {
   CHAR_DATA *rch;
   int count;
@@ -2213,7 +2206,7 @@ bool room_is_private( CHAR_DATA *ch , ROOM_INDEX_DATA *pRoomIndex )
 /*
  * True if char can see victim.
  */
-bool can_see( CHAR_DATA *ch, CHAR_DATA *victim )
+bool can_see( const CHAR_DATA *ch, const CHAR_DATA *victim )
 {
   if (!victim)
     return FALSE;
@@ -2287,12 +2280,10 @@ bool can_see( CHAR_DATA *ch, CHAR_DATA *victim )
   return TRUE;
 }
 
-
-
 /*
  * True if char can see obj.
  */
-bool can_see_obj( CHAR_DATA *ch, OBJ_DATA *obj )
+bool can_see_obj( const CHAR_DATA *ch, const OBJ_DATA *obj )
 {
   if ( !IS_NPC(ch) && IS_SET(ch->act, PLR_HOLYLIGHT) )
     return TRUE;
@@ -2325,12 +2316,10 @@ bool can_see_obj( CHAR_DATA *ch, OBJ_DATA *obj )
   return TRUE;
 }
 
-
-
 /*
  * True if char can drop obj.
  */
-bool can_drop_obj( CHAR_DATA *ch, OBJ_DATA *obj )
+bool can_drop_obj( const CHAR_DATA *ch, const OBJ_DATA *obj )
 {
   if ( !IS_OBJ_STAT(obj, ITEM_NODROP) )
     return TRUE;
@@ -2348,7 +2337,7 @@ bool can_drop_obj( CHAR_DATA *ch, OBJ_DATA *obj )
 /*
  * Return ascii name of an item type.
  */
-const char *item_type_name( OBJ_DATA *obj )
+const char *item_type_name( const OBJ_DATA *obj )
 {
   if ( obj->item_type < 1 || obj->item_type > MAX_ITEM_TYPE )
     {
@@ -2635,24 +2624,24 @@ ch_ret spring_trap( CHAR_DATA *ch, OBJ_DATA *obj )
 /*
  * Check an object for a trap                                   -Thoric
  */
-ch_ret check_for_trap( CHAR_DATA *ch, OBJ_DATA *obj, int flag )
+ch_ret check_for_trap( CHAR_DATA *ch, const OBJ_DATA *obj, int flag )
 {
   OBJ_DATA *check;
-  ch_ret    retcode;
+  ch_ret retcode = rNONE;
 
   if ( !obj->first_content )
     return rNONE;
-
-  retcode = rNONE;
 
   for ( check = obj->first_content; check; check = check->next_content )
     if ( check->item_type == ITEM_TRAP
          &&   IS_SET(check->value[3], flag) )
       {
         retcode = spring_trap( ch, check );
+
         if ( retcode != rNONE )
           return retcode;
       }
+
   return retcode;
 }
 
@@ -2662,11 +2651,10 @@ ch_ret check_for_trap( CHAR_DATA *ch, OBJ_DATA *obj, int flag )
 ch_ret check_room_for_traps( CHAR_DATA *ch, int flag )
 {
   OBJ_DATA *check;
-  ch_ret    retcode;
-
-  retcode = rNONE;
+  ch_ret retcode = rNONE;
 
   if ( !ch )
+
     return rERROR;
   if ( !ch->in_room || !ch->in_room->first_content )
     return rNONE;
@@ -2682,17 +2670,19 @@ ch_ret check_room_for_traps( CHAR_DATA *ch, int flag )
                 &&   IS_SET(check->value[3], flag) )
         {
           retcode = spring_trap( ch, check );
+
           if ( retcode != rNONE )
             return retcode;
         }
     }
+
   return retcode;
 }
 
 /*
  * return TRUE if an object contains a trap                     -Thoric
  */
-bool is_trapped( OBJ_DATA *obj )
+bool is_trapped( const OBJ_DATA *obj )
 {
   OBJ_DATA *check;
 
@@ -2709,7 +2699,7 @@ bool is_trapped( OBJ_DATA *obj )
 /*
  * If an object contains a trap, return the pointer to the trap -Thoric
  */
-OBJ_DATA *get_trap( OBJ_DATA *obj )
+OBJ_DATA *get_trap( const OBJ_DATA *obj )
 {
   OBJ_DATA *check;
 
@@ -2953,7 +2943,7 @@ void fix_char( CHAR_DATA *ch )
 /*
  * Show an affect verbosely to a character                      -Thoric
  */
-void showaffect( CHAR_DATA *ch, AFFECT_DATA *paf )
+void showaffect( const CHAR_DATA *ch, const AFFECT_DATA *paf )
 {
   char buf[MAX_STRING_LENGTH];
   int x;
@@ -2963,6 +2953,7 @@ void showaffect( CHAR_DATA *ch, AFFECT_DATA *paf )
       bug( "showaffect: NULL paf", 0 );
       return;
     }
+
   if ( paf->location != APPLY_NONE && paf->modifier != 0 )
     {
       switch( paf->location )
@@ -3081,7 +3072,7 @@ void set_cur_char( CHAR_DATA *ch )
 /*
  * Check to see if ch died recently                             -Thoric
  */
-bool char_died( CHAR_DATA *ch )
+bool char_died( const CHAR_DATA *ch )
 {
   EXTRACT_CHAR_DATA *ccd;
 
@@ -3091,6 +3082,7 @@ bool char_died( CHAR_DATA *ch )
   for (ccd = extracted_char_queue; ccd; ccd = ccd->next )
     if ( ccd->ch == ch )
       return TRUE;
+
   return FALSE;
 }
 
@@ -3163,17 +3155,18 @@ void add_timer( CHAR_DATA *ch, short type, short count, DO_FUN *fun, int value )
     }
 }
 
-TIMER *get_timerptr( CHAR_DATA *ch, short type )
+TIMER *get_timerptr( const CHAR_DATA *ch, short type )
 {
   TIMER *timer;
 
   for ( timer = ch->first_timer; timer; timer = timer->next )
     if ( timer->type == type )
       return timer;
+
   return NULL;
 }
 
-short get_timer( CHAR_DATA *ch, short type )
+short get_timer( const CHAR_DATA *ch, short type )
 {
   TIMER *timer;
 
@@ -3208,42 +3201,36 @@ void remove_timer( CHAR_DATA *ch, short type )
     extract_timer( ch, timer );
 }
 
-bool in_soft_range( CHAR_DATA *ch, AREA_DATA *tarea )
+bool in_soft_range( const CHAR_DATA *ch, const AREA_DATA *tarea )
 {
   if ( IS_IMMORTAL(ch) )
     return TRUE;
+  else if ( IS_NPC(ch) )
+    return TRUE;
+  else if ( ch->top_level >= tarea->low_soft_range || ch->top_level <= tarea->hi_soft_range )
+    return TRUE;
   else
-    if ( IS_NPC(ch) )
-      return TRUE;
-    else
-      if ( ch->top_level >= tarea->low_soft_range || ch->top_level <= tarea->hi_soft_range )
-        return TRUE;
-      else
-        return FALSE;
+    return FALSE;
 }
 
-bool in_hard_range( CHAR_DATA *ch, AREA_DATA *tarea )
+bool in_hard_range( const CHAR_DATA *ch, const AREA_DATA *tarea )
 {
   if ( IS_IMMORTAL(ch) )
     return TRUE;
+  else if ( IS_NPC(ch) )
+    return TRUE;
+  else if ( ch->top_level >= tarea->low_hard_range && ch->top_level <= tarea->hi_hard_range )
+    return TRUE;
   else
-    if ( IS_NPC(ch) )
-      return TRUE;
-    else
-      if ( ch->top_level >= tarea->low_hard_range && ch->top_level <= tarea->hi_hard_range )
-        return TRUE;
-      else
-        return FALSE;
+    return FALSE;
 }
-
 
 /*
  * Scryn, standard luck check 2/2/96
  */
-bool chance( CHAR_DATA *ch, short percent )
+bool chance( const CHAR_DATA *ch, short percent )
 {
-  /*  short clan_factor, ms;*/
-  short deity_factor, ms;
+  short ms;
 
   if (!ch)
     {
@@ -3273,31 +3260,23 @@ bool chance( CHAR_DATA *ch, short percent )
    * In most circumstances you'd do best at a perfectly balanced state.
    */
 
-  deity_factor = 0;
-
   ms = 10 - abs(ch->mental_state);
 
-  if ( (number_percent() - get_curr_lck(ch) + 13 - ms) + deity_factor <=
-       percent )
+  if ( (number_percent() - get_curr_lck(ch) + 13 - ms) <= percent )
     return TRUE;
   else
     return FALSE;
 }
 
-bool chance_attrib( CHAR_DATA *ch, short percent, short attrib )
+bool chance_attrib( const CHAR_DATA *ch, short percent, short attrib )
 {
-  /* Scryn, standard luck check + consideration of 1 attrib 2/2/96*/
-  short  deity_factor;
-
   if (!ch)
     {
       bug("Chance: null ch!", 0);
       return FALSE;
     }
 
-  deity_factor = 0;
-
-  if (number_percent() - get_curr_lck(ch) + 13 - attrib + 13 + deity_factor <= percent )
+  if (number_percent() - get_curr_lck(ch) + 13 - attrib + 13 <= percent )
     return TRUE;
   else
     return FALSE;
@@ -3308,7 +3287,7 @@ bool chance_attrib( CHAR_DATA *ch, short percent, short attrib )
 /*
  * Make a simple clone of an object (no extras...yet)           -Thoric
  */
-OBJ_DATA *clone_object( OBJ_DATA *obj )
+OBJ_DATA *clone_object( const OBJ_DATA *obj )
 {
   OBJ_DATA *clone;
 
@@ -3604,13 +3583,14 @@ void lower_economy( AREA_DATA *tarea, int gold )
 /*
  * Check to see if economy has at least this much gold             -Thoric
  */
-bool economy_has( AREA_DATA *tarea, int gold )
+bool economy_has( const AREA_DATA *tarea, int gold )
 {
   int hasgold = ((tarea->high_economy > 0) ? 1 : 0) * 1000000000
     + tarea->low_economy;
 
   if ( hasgold >= gold )
     return TRUE;
+
   return FALSE;
 }
 

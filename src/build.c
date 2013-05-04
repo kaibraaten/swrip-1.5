@@ -30,10 +30,10 @@
 #include "mud.h"
 
 
-extern int      top_affect;
-extern int      top_reset;
-extern int      top_ed;
-extern bool     fBootDb;
+extern int top_affect;
+extern int top_reset;
+extern int top_ed;
+extern bool fBootDb;
 
 bool can_rmodify( CHAR_DATA *ch, ROOM_INDEX_DATA *room )
 {
@@ -42,15 +42,17 @@ bool can_rmodify( CHAR_DATA *ch, ROOM_INDEX_DATA *room )
 
   if ( IS_NPC( ch ) )
     return FALSE;
+
   if ( get_trust( ch ) >= sysdata.level_modify_proto )
     return TRUE;
+
   if ( !ch->pcdata || !(pArea=ch->pcdata->area) )
     {
       send_to_char( "You must have an assigned area to modify this room.\r\n", ch );
       return FALSE;
     }
-  if ( vnum >= pArea->low_r_vnum
-       &&   vnum <= pArea->hi_r_vnum )
+
+  if ( vnum >= pArea->low_r_vnum && vnum <= pArea->hi_r_vnum )
     return TRUE;
 
   send_to_char( "That room is not in your allocated range.\r\n", ch );
@@ -64,15 +66,17 @@ bool can_omodify( CHAR_DATA *ch, OBJ_DATA *obj )
 
   if ( IS_NPC( ch ) )
     return FALSE;
+
   if ( get_trust( ch ) >= sysdata.level_modify_proto )
     return TRUE;
+
   if ( !ch->pcdata || !(pArea=ch->pcdata->area) )
     {
       send_to_char( "You must have an assigned area to modify this object.\r\n", ch );
       return FALSE;
     }
-  if ( vnum >= pArea->low_o_vnum
-       &&   vnum <= pArea->hi_o_vnum )
+
+  if ( vnum >= pArea->low_o_vnum && vnum <= pArea->hi_o_vnum )
     return TRUE;
 
   send_to_char( "That object is not in your allocated range.\r\n", ch );
@@ -86,13 +90,16 @@ bool can_oedit( CHAR_DATA *ch, OBJ_INDEX_DATA *obj )
 
   if ( IS_NPC( ch ) )
     return FALSE;
+
   if ( get_trust( ch ) >= LEVEL_GOD )
     return TRUE;
+
   if ( !ch->pcdata || !(pArea=ch->pcdata->area) )
     {
       send_to_char( "You must have an assigned area to modify this object.\r\n", ch );
       return FALSE;
     }
+
   if ( vnum >= pArea->low_o_vnum
        &&   vnum <= pArea->hi_o_vnum )
     return TRUE;
