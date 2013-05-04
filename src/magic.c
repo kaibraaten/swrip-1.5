@@ -1154,7 +1154,7 @@ void do_cast( CHAR_DATA *ch, char *argument )
       send_to_char( "You stop your concentration\r\n", ch );
       /* should add chance of backfire here */
       return;
-    case 1:
+    case SUB_PAUSE:
       sn = ch->tempnum;
       if ( (skill=get_skilltype(sn)) == NULL )
         {

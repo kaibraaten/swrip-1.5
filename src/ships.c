@@ -7102,7 +7102,7 @@ void do_target(CHAR_DATA *ch, char *argument )
       learn_from_failure( ch, gsn_weaponsystems );
       return;
 
-    case 1:
+    case SUB_PAUSE:
       if ( !ch->dest_buf )
         return;
       strcpy(arg, (const char*)ch->dest_buf);
@@ -9017,7 +9017,7 @@ void do_repairship(CHAR_DATA *ch, char *argument )
       learn_from_failure( ch, gsn_shipmaintenance );
       return;
 
-    case 1:
+    case SUB_PAUSE:
       if ( !ch->dest_buf )
         return;
       strcpy(arg, (const char*)ch->dest_buf);
@@ -10013,7 +10013,7 @@ void do_tractorbeam(CHAR_DATA *ch, char *argument )
       learn_from_failure( ch, gsn_tractorbeams );
       return;
 
-    case 1:
+    case SUB_PAUSE:
       if ( !ch->dest_buf )
         return;
       strcpy(arg, (const char*)ch->dest_buf);
@@ -11111,7 +11111,7 @@ void do_sabotage(CHAR_DATA *ch, char *argument )
       learn_from_failure( ch, gsn_sabotage );
       return;
 
-    case 1:
+    case SUB_PAUSE:
       if ( !ch->dest_buf )
         return;
       strcpy(arg, (const char*)ch->dest_buf);

@@ -35,7 +35,7 @@ extern int top_reset;
 extern int top_ed;
 extern bool fBootDb;
 
-bool can_rmodify( CHAR_DATA *ch, ROOM_INDEX_DATA *room )
+bool can_rmodify( const CHAR_DATA *ch, const ROOM_INDEX_DATA *room )
 {
   short vnum = room->vnum;
   AREA_DATA *pArea;
@@ -59,7 +59,7 @@ bool can_rmodify( CHAR_DATA *ch, ROOM_INDEX_DATA *room )
   return FALSE;
 }
 
-bool can_omodify( CHAR_DATA *ch, OBJ_DATA *obj )
+bool can_omodify( const CHAR_DATA *ch, const OBJ_DATA *obj )
 {
   short vnum = obj->pIndexData->vnum;
   AREA_DATA *pArea;
@@ -83,7 +83,7 @@ bool can_omodify( CHAR_DATA *ch, OBJ_DATA *obj )
   return FALSE;
 }
 
-bool can_oedit( CHAR_DATA *ch, OBJ_INDEX_DATA *obj )
+bool can_oedit( const CHAR_DATA *ch, const OBJ_INDEX_DATA *obj )
 {
   short vnum = obj->vnum;
   AREA_DATA *pArea;
@@ -108,7 +108,7 @@ bool can_oedit( CHAR_DATA *ch, OBJ_INDEX_DATA *obj )
   return FALSE;
 }
 
-bool can_mmodify( CHAR_DATA *ch, CHAR_DATA *mob )
+bool can_mmodify( const CHAR_DATA *ch, const CHAR_DATA *mob )
 {
   short vnum;
   AREA_DATA *pArea;
@@ -145,7 +145,7 @@ bool can_mmodify( CHAR_DATA *ch, CHAR_DATA *mob )
   return FALSE;
 }
 
-bool can_medit( CHAR_DATA *ch, MOB_INDEX_DATA *mob )
+bool can_medit( const CHAR_DATA *ch, const MOB_INDEX_DATA *mob )
 {
   short vnum = mob->vnum;
   AREA_DATA *pArea;
@@ -529,13 +529,7 @@ void do_mset( CHAR_DATA *ch, char *argument )
       argument = one_argument( argument, arg2 );
       strcpy( arg3, argument );
     }
-  /*
-    if ( !str_cmp( arg1, "on" ) )
-    {
-    send_to_char( "Syntax: mset <victim|vnum> on.\r\n", ch );
-    return;
-    }
-  */
+
   if ( arg1[0] == '\0' || (arg2[0] == '\0' && ch->substate != SUB_REPEATCMD)
        ||   !str_cmp( arg1, "?" ) )
     {
@@ -611,28 +605,6 @@ void do_mset( CHAR_DATA *ch, char *argument )
       minattr = 3;
       maxattr = 25;
     }
-
-  /*
-    if ( !str_cmp( arg2, "on" ) )
-    {
-    CHECK_SUBRESTRICTED( ch );
-    ch_printf( ch, "Mset mode on. (Editing %s).\r\n",
-    victim->name );
-    ch->substate = SUB_REPEATCMD;
-    ch->dest_buf = victim;
-    if ( ch->pcdata )
-    {
-    if ( ch->pcdata->subprompt )
-    STRFREE( ch->pcdata->subprompt );
-    if ( IS_NPC(victim) )
-    sprintf( buf, "<&CMset &W#%d&w> %%i", victim->pIndexData->vnum );
-    else
-    sprintf( buf, "<&CMset &W%s&w> %%i", victim->name );
-    ch->pcdata->subprompt = STRALLOC( buf );
-    }
-    return;
-    }
-  */
 
   value = is_number( arg3 ) ? atoi( arg3 ) : -1;
 

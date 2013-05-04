@@ -2872,7 +2872,7 @@ void do_train( CHAR_DATA *ch, char *argument )
       ch->dest_buf = str_dup(arg);
       return;
 
-    case 1:
+    case SUB_PAUSE:
       if ( !ch->dest_buf )
         return;
       strcpy(arg, (const char*)ch->dest_buf);

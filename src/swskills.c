@@ -127,7 +127,7 @@ void do_makeblade( CHAR_DATA *ch, char *argument )
       learn_from_failure( ch, gsn_makeblade );
       return;
 
-    case 1:
+    case SUB_PAUSE:
       if ( !ch->dest_buf )
         return;
       strcpy(arg, (const char*)ch->dest_buf);
@@ -376,7 +376,7 @@ void do_makeblaster( CHAR_DATA *ch, char *argument )
       learn_from_failure( ch, gsn_makeblaster );
       return;
 
-    case 1:
+    case SUB_PAUSE:
       if ( !ch->dest_buf )
         return;
       strcpy(arg, (const char*)ch->dest_buf);
@@ -689,7 +689,7 @@ void do_makelightsaber( CHAR_DATA *ch, char *argument )
       learn_from_failure( ch, gsn_lightsaber_crafting );
       return;
 
-    case 1:
+    case SUB_PAUSE:
       if ( !ch->dest_buf )
         return;
       strcpy(arg, (const char*)ch->dest_buf);
@@ -930,7 +930,7 @@ void do_makespice( CHAR_DATA *ch, char *argument )
       learn_from_failure( ch, gsn_spice_refining );
       return;
 
-    case 1:
+    case SUB_PAUSE:
       if ( !ch->dest_buf )
         return;
       strcpy(arg, (const char*)ch->dest_buf);
@@ -1084,7 +1084,7 @@ void do_makegrenade( CHAR_DATA *ch, char *argument )
       learn_from_failure( ch, gsn_makegrenade );
       return;
 
-    case 1:
+    case SUB_PAUSE:
       if ( !ch->dest_buf )
         return;
       strcpy(arg, (const char*)ch->dest_buf);
@@ -1290,7 +1290,7 @@ void do_makelandmine( CHAR_DATA *ch, char *argument )
       learn_from_failure( ch, gsn_makelandmine );
       return;
 
-    case 1:
+    case SUB_PAUSE:
       if ( !ch->dest_buf )
         return;
       strcpy(arg, (const char*)ch->dest_buf);
@@ -1495,7 +1495,7 @@ void do_makelight( CHAR_DATA *ch, char *argument )
       learn_from_failure( ch, gsn_makelight );
       return;
 
-    case 1:
+    case SUB_PAUSE:
       if ( !ch->dest_buf )
         return;
       strcpy(arg, (const char*)ch->dest_buf);
@@ -1713,7 +1713,7 @@ void do_makejewelry( CHAR_DATA *ch, char *argument )
       learn_from_failure( ch, gsn_makejewelry );
       return;
 
-    case 1:
+    case SUB_PAUSE:
       if ( !ch->dest_buf )
         return;
       if ( !ch->dest_buf_2 )
@@ -1909,7 +1909,7 @@ void do_makearmor( CHAR_DATA *ch, char *argument )
       learn_from_failure( ch, gsn_makearmor );
       return;
 
-    case 1:
+    case SUB_PAUSE:
       if ( !ch->dest_buf )
         return;
       if ( !ch->dest_buf_2 )
@@ -2112,7 +2112,7 @@ void do_makecomlink( CHAR_DATA *ch, char *argument )
       learn_from_failure( ch, gsn_makecomlink );
       return;
 
-    case 1:
+    case SUB_PAUSE:
       if ( !ch->dest_buf )
         return;
       strcpy(arg, (const char*)ch->dest_buf);
@@ -2313,7 +2313,7 @@ void do_makeshield( CHAR_DATA *ch, char *argument )
       learn_from_failure( ch, gsn_makeshield );
       return;
 
-    case 1:
+    case SUB_PAUSE:
       if ( !ch->dest_buf )
         return;
       strcpy(arg, (const char*)ch->dest_buf);
@@ -2535,7 +2535,7 @@ void do_makecontainer( CHAR_DATA *ch, char *argument )
       learn_from_failure( ch, gsn_makecontainer );
       return;
 
-    case 1:
+    case SUB_PAUSE:
       if ( !ch->dest_buf )
         return;
       if ( !ch->dest_buf_2 )
@@ -2683,7 +2683,7 @@ void do_reinforcements( CHAR_DATA *ch, char *argument )
       learn_from_failure( ch, gsn_reinforcements );
       return;
 
-    case 1:
+    case SUB_PAUSE:
       if ( !ch->dest_buf )
         return;
       strcpy(arg, (const char*)ch->dest_buf);
@@ -2762,7 +2762,7 @@ void do_postguard( CHAR_DATA *ch, char *argument )
       learn_from_failure( ch, gsn_postguard );
       return;
 
-    case 1:
+    case SUB_PAUSE:
       if ( !ch->dest_buf )
         return;
       strcpy(arg, (const char*)ch->dest_buf);
@@ -4059,7 +4059,7 @@ void do_add_patrol ( CHAR_DATA *ch , char *argument )
       learn_from_failure( ch, gsn_addpatrol );
       return;
 
-    case 1:
+    case SUB_PAUSE:
       if ( !ch->dest_buf )
         return;
       strcpy(arg, (const char*)ch->dest_buf);
@@ -4140,7 +4140,7 @@ void do_special_forces ( CHAR_DATA *ch , char *argument )
       learn_from_failure( ch, gsn_specialforces );
       return;
 
-    case 1:
+    case SUB_PAUSE:
       if ( !ch->dest_buf )
         return;
       strcpy(arg, (const char*)ch->dest_buf);
@@ -4220,7 +4220,7 @@ void do_elite_guard ( CHAR_DATA *ch , char *argument )
       learn_from_failure( ch, gsn_eliteguard );
       return;
 
-    case 1:
+    case SUB_PAUSE:
       if ( !ch->dest_buf )
         return;
       strcpy(arg, (const char*)ch->dest_buf);
@@ -5168,31 +5168,39 @@ void do_gather_intelligence ( CHAR_DATA *ch , char *argument )
         {
           switch(victim->main_ability)
             {
-            case 0:
+            case COMBAT_ABILITY:
               sprintf( buf, "%s appears to have centered training on combat.", victim->name );
               break;
-            case 1:
+
+            case PILOTING_ABILITY:
               sprintf( buf, "%s appears to have centered training on piloting ships.", victim->name );
               break;
-            case 2:
+
+            case ENGINEERING_ABILITY:
               sprintf( buf, "%s appears to have centered training on engineering.", victim->name );
               break;
-            case 3:
+
+            case HUNTING_ABILITY:
               sprintf( buf, "%s appears to have centered training on bounty hunting.", victim->name );
               break;
-            case 4:
+
+            case SMUGGLING_ABILITY:
               sprintf( buf, "%s appears to have centered training on smuggling.",  victim->name );
               break;
-            case 5:
+
+            case DIPLOMACY_ABILITY:
               sprintf( buf, "%s appears to have centered training on diplomacy.", victim->name );
               break;
-            case 6:
+
+            case LEADERSHIP_ABILITY:
               sprintf( buf, "%s appears to have centered training on leadership.", victim->name );
               break;
-            case 7:
+
+            case FORCE_ABILITY:
               sprintf( buf, "%s appears to have centered attention on studying the force.", victim->name );
               break;
-            case 8:
+
+            case COMMANDO_ABILITY:
               sprintf( buf, "%s has not centered training on anything, but seems to mix smuggling with piloting abilities.", victim->name );
               break;
             default:
@@ -5563,7 +5571,7 @@ void do_makebowcaster( CHAR_DATA *ch, char *argument )
       learn_from_failure( ch, gsn_makebowcaster );
       return;
 
-    case 1:
+    case SUB_PAUSE:
       if ( !ch->dest_buf )
         return;
       strcpy(arg, (const char*)ch->dest_buf);
@@ -5810,7 +5818,7 @@ void do_makedisguise( CHAR_DATA *ch, char *argument )
       learn_from_failure( ch, gsn_disguise );
       return;
 
-    case 1:
+    case SUB_PAUSE:
       if ( !ch->dest_buf )
         return;
       strcpy(arg1, (const char*)ch->dest_buf);

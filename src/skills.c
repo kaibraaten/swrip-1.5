@@ -1325,7 +1325,7 @@ void do_detrap( CHAR_DATA *ch, char *argument )
       add_timer( ch, TIMER_DO_FUN, 3, do_detrap, 1 );
       /*            WAIT_STATE( ch, skill_table[gsn_detrap]->beats ); */
       return;
-    case 1:
+    case SUB_PAUSE:
       if ( !ch->dest_buf )
         {
           send_to_char( "Your detrapping was interrupted!\r\n", ch );
@@ -1452,7 +1452,7 @@ void do_dig( CHAR_DATA *ch, char *argument )
       act( AT_PLAIN, "$n begins digging...", ch, NULL, NULL, TO_ROOM );
       return;
 
-    case 1:
+    case SUB_PAUSE:
       if ( !ch->dest_buf )
         {
           send_to_char( "Your digging was interrupted!\r\n", ch );
@@ -1589,7 +1589,7 @@ void do_search( CHAR_DATA *ch, char *argument )
       ch->dest_buf = str_dup( arg );
       return;
 
-    case 1:
+    case SUB_PAUSE:
       if ( !ch->dest_buf )
         {
           send_to_char( "Your search was interrupted!\r\n", ch );

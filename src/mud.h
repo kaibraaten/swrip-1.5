@@ -4431,24 +4431,24 @@ extern "C" {
   void  sort_area( AREA_DATA *pArea, bool proto );
 
   /* build.c */
-  void  start_editing( CHAR_DATA *ch, char *data );
-  void  stop_editing( CHAR_DATA *ch );
-  void  edit_buffer( CHAR_DATA *ch, char *argument );
-  char *        copy_buffer( CHAR_DATA *ch );
-  bool  can_rmodify( CHAR_DATA *ch, ROOM_INDEX_DATA *room );
-  bool  can_omodify( CHAR_DATA *ch, OBJ_DATA *obj  );
-  bool  can_mmodify( CHAR_DATA *ch, CHAR_DATA *mob );
-  bool  can_medit( CHAR_DATA *ch, MOB_INDEX_DATA *mob );
-  void  free_reset( AREA_DATA *are, RESET_DATA *res );
-  void  free_area( AREA_DATA *are );
-  void  assign_area( CHAR_DATA *ch );
-  EDD * SetRExtra( ROOM_INDEX_DATA *room, char *keywords );
-  bool  DelRExtra( ROOM_INDEX_DATA *room, char *keywords );
-  EDD * SetOExtra( OBJ_DATA *obj, char *keywords );
-  bool  DelOExtra( OBJ_DATA *obj, char *keywords );
-  EDD * SetOExtraProto( OBJ_INDEX_DATA *obj, char *keywords );
-  bool  DelOExtraProto( OBJ_INDEX_DATA *obj, char *keywords );
-  void  fold_area( AREA_DATA *tarea, char *filename, bool install );
+  void start_editing( CHAR_DATA *ch, char *data );
+  void stop_editing( CHAR_DATA *ch );
+  void edit_buffer( CHAR_DATA *ch, char *argument );
+  char *copy_buffer( CHAR_DATA *ch );
+  bool can_rmodify( const CHAR_DATA *ch, const ROOM_INDEX_DATA *room );
+  bool can_omodify( const CHAR_DATA *ch, const OBJ_DATA *obj  );
+  bool can_mmodify( const CHAR_DATA *ch, const CHAR_DATA *mob );
+  bool can_medit( const CHAR_DATA *ch, const MOB_INDEX_DATA *mob );
+  void free_reset( AREA_DATA *are, RESET_DATA *res );
+  void free_area( AREA_DATA *are );
+  void assign_area( CHAR_DATA *ch );
+  EDD *SetRExtra( ROOM_INDEX_DATA *room, char *keywords );
+  bool DelRExtra( ROOM_INDEX_DATA *room, char *keywords );
+  EDD *SetOExtra( OBJ_DATA *obj, char *keywords );
+  bool DelOExtra( OBJ_DATA *obj, char *keywords );
+  EDD *SetOExtraProto( OBJ_INDEX_DATA *obj, char *keywords );
+  bool DelOExtraProto( OBJ_INDEX_DATA *obj, char *keywords );
+  void fold_area( AREA_DATA *tarea, char *filename, bool install );
 
   /* fight.c */
   int xp_compute( const CHAR_DATA *gch, const CHAR_DATA *victim );
