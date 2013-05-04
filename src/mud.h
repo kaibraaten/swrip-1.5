@@ -4432,6 +4432,8 @@ extern "C" {
   void  sort_area( AREA_DATA *pArea, bool proto );
 
   /* build.c */
+  void mpedit( CHAR_DATA *ch, MPROG_DATA *mprg, int mptype, char *argument );
+  void write_area_list( void );
   void start_editing( CHAR_DATA *ch, char *data );
   void stop_editing( CHAR_DATA *ch );
   void edit_buffer( CHAR_DATA *ch, char *argument );
