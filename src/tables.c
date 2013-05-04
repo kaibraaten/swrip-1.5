@@ -489,7 +489,6 @@ static const DO_FUN_ENTRY command_fun_table[] = {
       if ( !str_cmp( name, "do_massign" ))              return do_massign;
       if ( !str_cmp( name, "do_mass_propeganda" ))      return do_mass_propeganda;
       if ( !str_cmp( name, "do_mcreate" ))              return do_mcreate;
-      if ( !str_cmp( name, "do_mdelete" ))              return do_mdelete;
       if ( !str_cmp( name, "do_memory" ))               return do_memory;
       if ( !str_cmp( name, "do_members" ))              return do_members;
       if ( !str_cmp( name, "do_mfind" ))                return do_mfind;
@@ -556,7 +555,6 @@ static const DO_FUN_ENTRY command_fun_table[] = {
     case 'o':
       if ( !str_cmp( name, "do_oassign" ))              return do_oassign;
       if ( !str_cmp( name, "do_ocreate" ))              return do_ocreate;
-      if ( !str_cmp( name, "do_odelete" ))              return do_odelete;
       if ( !str_cmp( name, "do_ofind" ))                return do_ofind;
       if ( !str_cmp( name, "do_ogrub" ))                return do_ogrub;
       if ( !str_cmp( name, "do_oinvoke" ))              return do_oinvoke;

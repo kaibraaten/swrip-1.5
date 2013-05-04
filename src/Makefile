@@ -39,19 +39,22 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o \
 	planets.o player.o reset.o save.o ships.o shops.o shuttle.o \
 	skills.o special.o space.o spaceobjects.o swskills.o \
 	tables.o track.o update.o vector3_aux.o \
+	$(CMDDIR)/aassign.o \
 	$(CMDDIR)/addbounty.o \
 	$(CMDDIR)/advance.o \
 	$(CMDDIR)/afk.o \
 	$(CMDDIR)/alias.o \
 	$(CMDDIR)/allow.o \
-	$(CMDDIR)/at.o \
 	$(CMDDIR)/allclantalk.o \
-	$(CMDDIR)/auction.o \
-	$(CMDDIR)/authorize.o \
 	$(CMDDIR)/ansi.o \
 	$(CMDDIR)/answer.o \
 	$(CMDDIR)/areas.o \
+	$(CMDDIR)/aset.o \
 	$(CMDDIR)/ask.o \
+	$(CMDDIR)/astat.o \
+	$(CMDDIR)/at.o \
+	$(CMDDIR)/auction.o \
+	$(CMDDIR)/authorize.o \
 	$(CMDDIR)/avtalk.o \
 	$(CMDDIR)/balzhur.o \
 	$(CMDDIR)/bamfin.o \
@@ -99,16 +102,18 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o \
 	$(CMDDIR)/examine.o \
 	$(CMDDIR)/exits.o \
 	$(CMDDIR)/fixchar.o \
-	$(CMDDIR)/forceclose.o \
+	$(CMDDIR)/foldarea.o \
 	$(CMDDIR)/follow.o \
 	$(CMDDIR)/for.o \
 	$(CMDDIR)/force.o \
+	$(CMDDIR)/forceclose.o \
 	$(CMDDIR)/form_password.o \
 	$(CMDDIR)/fquit.o \
 	$(CMDDIR)/freeze.o \
 	$(CMDDIR)/get.o \
 	$(CMDDIR)/give.o \
 	$(CMDDIR)/glance.o \
+	$(CMDDIR)/goto.o \
 	$(CMDDIR)/group.o \
 	$(CMDDIR)/gtell.o \
 	$(CMDDIR)/help.o \
@@ -123,11 +128,13 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o \
 	$(CMDDIR)/idea.o \
 	$(CMDDIR)/immortalize.o \
 	$(CMDDIR)/immtalk.o \
+	$(CMDDIR)/installarea.o \
 	$(CMDDIR)/invis.o \
 	$(CMDDIR)/junk.o \
 	$(CMDDIR)/languages.o \
 	$(CMDDIR)/leave.o \
 	$(CMDDIR)/litterbug.o \
+	$(CMDDIR)/loadarea.o \
 	$(CMDDIR)/loadup.o \
 	$(CMDDIR)/lock.o \
 	$(CMDDIR)/log.o \
@@ -136,9 +143,13 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o \
 	$(CMDDIR)/mailroom.o \
 	$(CMDDIR)/makeboard.o \
 	$(CMDDIR)/massign.o \
+	$(CMDDIR)/mcreate.o \
 	$(CMDDIR)/mfind.o \
 	$(CMDDIR)/minvoke.o \
+	$(CMDDIR)/mlist.o \
+	$(CMDDIR)/mpedit.o \
 	$(CMDDIR)/mpfind.o \
+	$(CMDDIR)/mset.o \
 	$(CMDDIR)/mstat.o \
 	$(CMDDIR)/music.o \
 	$(CMDDIR)/mwhere.o \
@@ -154,12 +165,16 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o \
 	$(CMDDIR)/noteroom.o \
 	$(CMDDIR)/notitle.o \
 	$(CMDDIR)/oassign.o \
+	$(CMDDIR)/ocreate.o \
 	$(CMDDIR)/ofind.o \
 	$(CMDDIR)/oinvoke.o \
+	$(CMDDIR)/olist.o \
 	$(CMDDIR)/ooc.o \
+	$(CMDDIR)/opedit.o \
 	$(CMDDIR)/open.o \
 	$(CMDDIR)/opfind.o \
 	$(CMDDIR)/order.o \
+	$(CMDDIR)/oset.o \
 	$(CMDDIR)/ostat.o \
 	$(CMDDIR)/owhere.o \
 	$(CMDDIR)/pager.o \
@@ -174,8 +189,10 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o \
 	$(CMDDIR)/rank.o \
 	$(CMDDIR)/rassign.o \
 	$(CMDDIR)/rat.o \
+	$(CMDDIR)/rdelete.o \
 	$(CMDDIR)/reboot.o \
 	$(CMDDIR)/recho.o \
+	$(CMDDIR)/redit.o \
 	$(CMDDIR)/regoto.o \
 	$(CMDDIR)/rembounty.o \
 	$(CMDDIR)/remove.o \
@@ -187,9 +204,13 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o \
 	$(CMDDIR)/retire.o \
 	$(CMDDIR)/return.o \
 	$(CMDDIR)/retran.o \
+	$(CMDDIR)/rlist.o \
+	$(CMDDIR)/rpedit.o \
 	$(CMDDIR)/rpfind.o \
+	$(CMDDIR)/rset.o \
 	$(CMDDIR)/rstat.o \
 	$(CMDDIR)/save.o \
+	$(CMDDIR)/savearea.o \
 	$(CMDDIR)/say.o \
 	$(CMDDIR)/scatter.o \
 	$(CMDDIR)/sedit.o \
@@ -224,6 +245,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o \
 	$(CMDDIR)/transfer.o \
 	$(CMDDIR)/trust.o \
 	$(CMDDIR)/typo.o \
+	$(CMDDIR)/unfoldarea.o \
 	$(CMDDIR)/unhell.o \
 	$(CMDDIR)/unlock.o \
 	$(CMDDIR)/unsilence.o \
