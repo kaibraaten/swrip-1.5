@@ -187,6 +187,8 @@ typedef ch_ret  SPELL_FUN       ( int sn, int level, CHAR_DATA *ch, void *vo );
  * Increase the max'es if you add more of something.
  * Adjust the pulse numbers to suit yourself.
  */
+#define MIN_VNUM                    1
+#define MAX_VNUM                32767
 #define MAX_EXP_WORTH          500000
 #define MIN_EXP_WORTH              25
 

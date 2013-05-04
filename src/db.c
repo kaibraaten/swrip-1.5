@@ -5011,13 +5011,13 @@ void do_check_vnums( CHAR_DATA *ch, char *argument )
   low_range = atoi(arg2);
   high_range = atoi(argument);
 
-  if (low_range < 1 || low_range > 32767 )
+  if (low_range < MIN_VNUM || low_range > MAX_VNUM )
     {
       send_to_char("Invalid argument for bottom of range.\r\n", ch);
       return;
     }
 
-  if (high_range < 1 || high_range > 32767 )
+  if (high_range < MIN_VNUM || high_range > MAX_VNUM )
     {
       send_to_char("Invalid argument for top of range.\r\n", ch);
       return;

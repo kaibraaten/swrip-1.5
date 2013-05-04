@@ -130,7 +130,7 @@ void do_rgrub (CHAR_DATA *ch, char *argument)
 
       hit_cou = 0;                                 /* number of vnums found */
       lo = (*arg3) ? atoi (arg3) : 0;
-      hi = (*arg4) ? atoi (arg4) : 32767;
+      hi = (*arg4) ? atoi (arg4) : MAX_VNUM;
 
       ch_printf (ch, "\r\nRoom Vnums\r\n");
       for (cou = 0; cou < MAX_KEY_HASH; cou++)
@@ -1385,7 +1385,7 @@ void do_diagnose( CHAR_DATA *ch, char *argument )
 
       hit_cou = 0;                                 /* number of vnums found */
       lo = (*arg3) ? atoi (arg3) : 0;
-      hi = (*arg4) ? atoi (arg4) : 32767;
+      hi = (*arg4) ? atoi (arg4) : MAX_VNUM;
 
       ch_printf (ch, "\r\nRoom Vnums\r\n");
       for (cou = 0; cou < MAX_KEY_HASH; cou++)

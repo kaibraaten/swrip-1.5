@@ -348,7 +348,7 @@ int mprog_do_ifcheck( const char *ifcheck, CHAR_DATA *mob, CHAR_DATA *actor,
       int vnum = atoi(cvar);
       CHAR_DATA *oMob;
 
-      if ( vnum < 1 || vnum > 32767 )
+      if ( vnum < MIN_VNUM || vnum > MAX_VNUM )
         {
           progbug( "Bad vnum to 'mobinroom'", mob );
           return BERR;
@@ -382,7 +382,7 @@ int mprog_do_ifcheck( const char *ifcheck, CHAR_DATA *mob, CHAR_DATA *actor,
       OBJ_DATA *pObj;
       int vnum = atoi(cvar);
 
-      if ( vnum < 1 || vnum > 32767 )
+      if ( vnum < MIN_VNUM || vnum > MAX_VNUM )
         {
           progbug("OvnumHere: bad vnum", mob);
           return BERR;
@@ -436,7 +436,7 @@ int mprog_do_ifcheck( const char *ifcheck, CHAR_DATA *mob, CHAR_DATA *actor,
       OBJ_DATA *pObj;
       int vnum = atoi(cvar);
 
-      if ( vnum < 1 || vnum > 32767 )
+      if ( vnum < MIN_VNUM || vnum > MAX_VNUM )
         {
           progbug("OvnumRoom: bad vnum", mob);
           return BERR;
@@ -484,7 +484,7 @@ int mprog_do_ifcheck( const char *ifcheck, CHAR_DATA *mob, CHAR_DATA *actor,
       OBJ_DATA *pObj;
       int vnum = atoi(cvar);
 
-      if ( vnum < 1 || vnum > 32767 )
+      if ( vnum < MIN_VNUM || vnum > MAX_VNUM )
         {
           progbug("OvnumCarry: bad vnum", mob);
           return BERR;
@@ -530,7 +530,7 @@ int mprog_do_ifcheck( const char *ifcheck, CHAR_DATA *mob, CHAR_DATA *actor,
       OBJ_DATA *pObj;
       int vnum = atoi(cvar);
 
-      if ( vnum < 1 || vnum > 32767 )
+      if ( vnum < MIN_VNUM || vnum > MAX_VNUM )
         {
           progbug("OvnumWear: bad vnum", mob);
           return BERR;
@@ -578,7 +578,7 @@ int mprog_do_ifcheck( const char *ifcheck, CHAR_DATA *mob, CHAR_DATA *actor,
       OBJ_DATA *pObj;
       int vnum = atoi(cvar);
 
-      if ( vnum < 1 || vnum > 32767 )
+      if ( vnum < MIN_VNUM || vnum > MAX_VNUM )
         {
           progbug("OvnumInv: bad vnum", mob);
           return BERR;

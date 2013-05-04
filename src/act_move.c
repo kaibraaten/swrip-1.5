@@ -328,10 +328,11 @@ ROOM_INDEX_DATA *generate_exit( ROOM_INDEX_DATA *in_room, EXIT_DATA **pexit )
   short hash;
   bool found = FALSE;
 
-  if ( in_room->vnum > 32767 )  /* room is virtual */
+  if ( in_room->vnum > MAX_VNUM )  /* room is virtual */
     {
       serial = in_room->vnum;
       roomnum = in_room->tele_vnum;
+
       if ( (serial & 65535) == orig_exit->vnum )
         {
           brvnum = serial >> 16;
@@ -344,6 +345,7 @@ ROOM_INDEX_DATA *generate_exit( ROOM_INDEX_DATA *in_room, EXIT_DATA **pexit )
           ++roomnum;
           distance = orig_exit->distance - 1;
         }
+
       backroom = get_room_index( brvnum );
     }
   else
@@ -357,6 +359,7 @@ ROOM_INDEX_DATA *generate_exit( ROOM_INDEX_DATA *in_room, EXIT_DATA **pexit )
       distance = orig_exit->distance - 1;
       roomnum = r1 < r2 ? 1 : distance;
     }
+
   hash = serial % 64;
 
   for ( room = vroom_hash[hash]; room; room = room->next )
@@ -365,6 +368,7 @@ ROOM_INDEX_DATA *generate_exit( ROOM_INDEX_DATA *in_room, EXIT_DATA **pexit )
         found = TRUE;
         break;
       }
+
   if ( !found )
     {
       CREATE( room, ROOM_INDEX_DATA, 1 );
@@ -378,6 +382,7 @@ ROOM_INDEX_DATA *generate_exit( ROOM_INDEX_DATA *in_room, EXIT_DATA **pexit )
       vroom_hash[hash]  = room;
       ++top_vroom;
     }
+
   if ( !found || (xit=get_exit(room, vdir))==NULL )
     {
       xit = make_exit(room, orig_exit->to_room, vdir);
@@ -386,14 +391,18 @@ ROOM_INDEX_DATA *generate_exit( ROOM_INDEX_DATA *in_room, EXIT_DATA **pexit )
       xit->key          = -1;
       xit->distance = distance;
     }
+
   if ( !found )
     {
       bxit = make_exit(room, backroom, get_rev_dir(vdir));
       bxit->keyword             = STRALLOC( "" );
       bxit->description = STRALLOC( "" );
       bxit->key         = -1;
+
       if ( (serial & 65535) != orig_exit->vnum )
-        bxit->distance = roomnum;
+	{
+	  bxit->distance = roomnum;
+	}
       else
         {
           EXIT_DATA *tmp = get_exit( backroom, vdir );
@@ -402,6 +411,7 @@ ROOM_INDEX_DATA *generate_exit( ROOM_INDEX_DATA *in_room, EXIT_DATA **pexit )
           bxit->distance = fulldist - distance;
         }
     }
+
   *pexit = xit;
   return room;
 }
