@@ -4385,11 +4385,12 @@ extern "C" {
   bool ship_is_disabled( const SHIP_DATA *ship );
 
   /* reset.c */
-  RD  * make_reset( char letter, int extra, int arg1, int arg2, int arg3 );
-  RD  * add_reset( AREA_DATA *tarea, char letter, int extra,
-                   int arg1, int arg2, int arg3 );
-  RD  * place_reset( AREA_DATA *tarea, char letter,
-                     int extra, int arg1, int arg2, int arg3 );
+  char *sprint_reset( CHAR_DATA *ch, RESET_DATA *pReset, short num, bool rlist );
+  RESET_DATA *make_reset( char letter, int extra, int arg1, int arg2, int arg3 );
+  RESET_DATA *add_reset( AREA_DATA *tarea, char letter, int extra,
+			 int arg1, int arg2, int arg3 );
+  RESET_DATA *place_reset( AREA_DATA *tarea, char letter,
+			   int extra, int arg1, int arg2, int arg3 );
   void  reset_area( AREA_DATA * pArea );
 
   /* db.c */

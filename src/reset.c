@@ -46,8 +46,6 @@
 
 /* Externals */
 extern  int     top_reset;
-char *          sprint_reset( CHAR_DATA *ch, RESET_DATA *pReset,
-                                        short num, bool rlist );
 RESET_DATA *    parse_reset( AREA_DATA *tarea, char *argument,
 			     CHAR_DATA *ch );
 
@@ -2218,4 +2216,194 @@ RESET_DATA *place_reset( AREA_DATA *tarea, char letter, int extra, int arg1, int
     }
   LINK( pReset, tarea->first_reset, tarea->last_reset, next, prev );
   return pReset;
+}
+
+char *sprint_reset( CHAR_DATA *ch, RESET_DATA *pReset, short num, bool rlist )
+{
+  static char buf[MAX_STRING_LENGTH];
+  char mobname[MAX_STRING_LENGTH];
+  char roomname[MAX_STRING_LENGTH];
+  char objname[MAX_STRING_LENGTH];
+  static ROOM_INDEX_DATA *room;
+  static OBJ_INDEX_DATA *obj, *obj2;
+  static MOB_INDEX_DATA *mob;
+  int rvnum;
+
+  if ( ch->in_room )
+    rvnum = ch->in_room->vnum;
+  if ( num == 1 )
+    {
+      room = NULL;
+      obj  = NULL;
+      obj2 = NULL;
+      mob  = NULL;
+    }
+
+  switch( pReset->command )
+    {
+    default:
+      sprintf( buf, "%2d) *** BAD RESET: %c %d %d %d %d ***\r\n",
+               num,
+               pReset->command,
+               pReset->extra,
+               pReset->arg1,
+               pReset->arg2,
+               pReset->arg3 );
+      break;
+    case 'M':
+      mob = get_mob_index( pReset->arg1 );
+      room = get_room_index( pReset->arg3 );
+      if ( mob )
+        strcpy( mobname, mob->player_name );
+      else
+        strcpy( mobname, "Mobile: *BAD VNUM*" );
+      if ( room )
+        strcpy( roomname, room->name );
+      else
+        strcpy( roomname, "Room: *BAD VNUM*" );
+      sprintf( buf, "%2d) %s (%d) -> %s (%d) [%d]\r\n",
+               num,
+               mobname,
+               pReset->arg1,
+               roomname,
+               pReset->arg3,
+               pReset->arg2 );
+      break;
+    case 'E':
+      if ( !mob )
+        strcpy( mobname, "* ERROR: NO MOBILE! *" );
+      if ( (obj = get_obj_index( pReset->arg1 )) == NULL )
+        strcpy( objname, "Object: *BAD VNUM*" );
+      else
+        strcpy( objname, obj->name );
+      sprintf( buf, "%2d) %s (%d) -> %s (%s) [%d]\r\n",
+               num,
+               objname,
+               pReset->arg1,
+               mobname,
+               wear_locs[pReset->arg3],
+               pReset->arg2 );
+      break;
+    case 'H':
+      if ( pReset->arg1 > 0
+           &&  (obj = get_obj_index( pReset->arg1 )) == NULL )
+        strcpy( objname, "Object: *BAD VNUM*" );
+      else
+        if ( !obj )
+          strcpy( objname, "Object: *NULL obj*" );
+      sprintf( buf, "%2d) Hide %s (%d)\r\n",
+               num,
+               objname,
+               obj ? obj->vnum : pReset->arg1 );
+      break;
+    case 'G':
+      if ( !mob )
+        strcpy( mobname, "* ERROR: NO MOBILE! *" );
+      if ( (obj = get_obj_index( pReset->arg1 )) == NULL )
+        strcpy( objname, "Object: *BAD VNUM*" );
+      else
+        strcpy( objname, obj->name );
+      sprintf( buf, "%2d) %s (%d) -> %s (carry) [%d]\r\n",
+               num,
+               objname,
+               pReset->arg1,
+               mobname,
+               pReset->arg2 );
+      break;
+    case 'O':
+      if ( (obj = get_obj_index( pReset->arg1 )) == NULL )
+        strcpy( objname, "Object: *BAD VNUM*" );
+      else
+        strcpy( objname, obj->name );
+      room = get_room_index( pReset->arg3 );
+      if ( !room )
+        strcpy( roomname, "Room: *BAD VNUM*" );
+      else
+        strcpy( roomname, room->name );
+      sprintf( buf, "%2d) (object) %s (%d) -> %s (%d) [%d]\r\n",
+               num,
+               objname,
+               pReset->arg1,
+               roomname,
+               pReset->arg3,
+               pReset->arg2 );
+      break;
+    case 'P':
+      if ( (obj2 = get_obj_index( pReset->arg1 )) == NULL )
+        strcpy( objname, "Object1: *BAD VNUM*" );
+      else
+        strcpy( objname, obj2->name );
+      if ( pReset->arg3 > 0
+           &&  (obj = get_obj_index( pReset->arg3 )) == NULL )
+        strcpy( roomname, "Object2: *BAD VNUM*" );
+      else
+        if ( !obj )
+          strcpy( roomname, "Object2: *NULL obj*" );
+        else
+          strcpy( roomname, obj->name );
+      sprintf( buf, "%2d) (Put) %s (%d) -> %s (%d) [%d]\r\n",
+	       num,
+               objname,
+               pReset->arg1,
+               roomname,
+               obj ? obj->vnum : pReset->arg3,
+               pReset->arg2 );
+      break;
+    case 'D':
+      if ( pReset->arg2 < 0 || pReset->arg2 > MAX_DIR+1 )
+        pReset->arg2 = 0;
+      if ( (room = get_room_index( pReset->arg1 )) == NULL )
+        {
+          strcpy( roomname, "Room: *BAD VNUM*" );
+          sprintf( objname, "%s (no exit)",
+                   get_dir_name(pReset->arg2) );
+        }
+      else
+        {
+          strcpy( roomname, room->name );
+          sprintf( objname, "%s%s",
+                   get_dir_name(pReset->arg2),
+                   get_exit(room,pReset->arg2) ? "" : " (NO EXIT!)" );
+        }
+      switch( pReset->arg3 )
+        {
+        default:        strcpy( mobname, "(* ERROR *)" );       break;
+        case 0: strcpy( mobname, "Open" );              break;
+        case 1: strcpy( mobname, "Close" );             break;
+        case 2: strcpy( mobname, "Close and lock" );    break;
+        }
+      sprintf( buf, "%2d) %s [%d] the %s [%d] door %s (%d)\r\n",
+               num,
+               mobname,
+               pReset->arg3,
+               objname,
+               pReset->arg2,
+               roomname,
+               pReset->arg1 );
+      break;
+    case 'R':
+      if ( (room = get_room_index( pReset->arg1 )) == NULL )
+        strcpy( roomname, "Room: *BAD VNUM*" );
+      else
+        strcpy( roomname, room->name );
+      sprintf( buf, "%2d) Randomize exits 0 to %d -> %s (%d)\r\n",
+	       num,
+               pReset->arg2,
+               roomname,
+               pReset->arg1 );
+      break;
+    case 'T':
+      sprintf( buf, "%2d) TRAP: %d %d %d %d (%s)\r\n",
+               num,
+               pReset->extra,
+               pReset->arg1,
+               pReset->arg2,
+               pReset->arg3,
+               flag_string(pReset->extra, trap_flags) );
+      break;
+    }
+  if ( rlist && (!room || (room && room->vnum != rvnum)) )
+    return NULL;
+
+  return buf;
 }
