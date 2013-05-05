@@ -41,6 +41,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o \
 	tables.o track.o update.o vector3_aux.o \
 	$(CMDDIR)/aassign.o \
 	$(CMDDIR)/addbounty.o \
+	$(CMDDIR)/addsalary.o \
 	$(CMDDIR)/advance.o \
 	$(CMDDIR)/afk.o \
 	$(CMDDIR)/alias.o \
@@ -48,6 +49,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o \
 	$(CMDDIR)/allclantalk.o \
 	$(CMDDIR)/ansi.o \
 	$(CMDDIR)/answer.o \
+	$(CMDDIR)/appoint.o \
 	$(CMDDIR)/areas.o \
 	$(CMDDIR)/aset.o \
 	$(CMDDIR)/ask.o \
@@ -73,9 +75,14 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o \
 	$(CMDDIR)/bstat.o \
 	$(CMDDIR)/bug.o \
 	$(CMDDIR)/bury.o \
+	$(CMDDIR)/capture.o \
 	$(CMDDIR)/cedit.o \
 	$(CMDDIR)/channels.o \
 	$(CMDDIR)/chat.o \
+	$(CMDDIR)/clan_donate.o \
+	$(CMDDIR)/clan_withdraw.o \
+	$(CMDDIR)/clanfunds.o \
+	$(CMDDIR)/clans.o \
 	$(CMDDIR)/clantalk.o \
 	$(CMDDIR)/climb.o \
 	$(CMDDIR)/close.o \
@@ -87,6 +94,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o \
 	$(CMDDIR)/credits.o \
 	$(CMDDIR)/cset.o \
 	$(CMDDIR)/delay.o \
+	$(CMDDIR)/demote.o \
 	$(CMDDIR)/deny.o \
 	$(CMDDIR)/destroy.o \
 	$(CMDDIR)/disconnect.o \
@@ -98,6 +106,8 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o \
 	$(CMDDIR)/east.o \
 	$(CMDDIR)/echo.o \
 	$(CMDDIR)/emote.o \
+	$(CMDDIR)/empower.o \
+	$(CMDDIR)/enlist.o \
 	$(CMDDIR)/enter.o \
 	$(CMDDIR)/examine.o \
 	$(CMDDIR)/exits.o \
@@ -128,6 +138,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o \
 	$(CMDDIR)/idea.o \
 	$(CMDDIR)/immortalize.o \
 	$(CMDDIR)/immtalk.o \
+	$(CMDDIR)/induct.o \
 	$(CMDDIR)/installarea.o \
 	$(CMDDIR)/invis.o \
 	$(CMDDIR)/junk.o \
@@ -142,8 +153,10 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o \
 	$(CMDDIR)/low_purge.o \
 	$(CMDDIR)/mailroom.o \
 	$(CMDDIR)/makeboard.o \
+	$(CMDDIR)/makeclan.o \
 	$(CMDDIR)/massign.o \
 	$(CMDDIR)/mcreate.o \
+	$(CMDDIR)/members.o \
 	$(CMDDIR)/mfind.o \
 	$(CMDDIR)/minvoke.o \
 	$(CMDDIR)/mlist.o \
@@ -176,6 +189,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o \
 	$(CMDDIR)/order.o \
 	$(CMDDIR)/oset.o \
 	$(CMDDIR)/ostat.o \
+	$(CMDDIR)/outcast.o \
 	$(CMDDIR)/owhere.o \
 	$(CMDDIR)/pager.o \
 	$(CMDDIR)/pardon.o \
@@ -197,6 +211,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o \
 	$(CMDDIR)/rembounty.o \
 	$(CMDDIR)/remove.o \
 	$(CMDDIR)/reply.o \
+	$(CMDDIR)/resign.o \
 	$(CMDDIR)/rest.o \
 	$(CMDDIR)/restore.o \
 	$(CMDDIR)/restoretime.o \
@@ -205,6 +220,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o \
 	$(CMDDIR)/return.o \
 	$(CMDDIR)/retran.o \
 	$(CMDDIR)/rlist.o \
+	$(CMDDIR)/roster.o \
 	$(CMDDIR)/rpedit.o \
 	$(CMDDIR)/rpfind.o \
 	$(CMDDIR)/rset.o \
@@ -215,9 +231,11 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o \
 	$(CMDDIR)/scatter.o \
 	$(CMDDIR)/sedit.o \
 	$(CMDDIR)/set_boot_time.o \
+	$(CMDDIR)/setclan.o \
 	$(CMDDIR)/shiptalk.o \
 	$(CMDDIR)/shout.o \
 	$(CMDDIR)/shove.o \
+	$(CMDDIR)/showclan.o \
 	$(CMDDIR)/showstatistic.o \
 	$(CMDDIR)/showstatistic_web.o \
 	$(CMDDIR)/shutdown.o \
