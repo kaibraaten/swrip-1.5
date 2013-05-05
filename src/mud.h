@@ -4217,10 +4217,13 @@ extern "C" {
   void operate_on_note( CHAR_DATA *ch, char *arg_passed, bool IS_MAIL );
 
   /* clans.c */
-  CL *  get_clan( char *name );
+  void save_member_list( MEMBER_LIST *members_list );
+  void show_members( CHAR_DATA *ch, char *argument, char *format );
+  void write_clan_list( void );
+  CLAN_DATA *get_clan( char *name );
   void  load_clans( void );
   void  save_clan( CLAN_DATA *clan );
-  PLANET_DATA * get_planet( char *name );
+  PLANET_DATA *get_planet( char *name );
   void  load_planets( void );
   void  save_planet( PLANET_DATA *planet );
   long    get_taxes( PLANET_DATA *planet );
