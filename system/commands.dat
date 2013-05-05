@@ -2007,14 +2007,6 @@ Log         3
 End
 
 #COMMAND
-Name        mdelete~
-Code        do_mdelete
-Position    0
-Level       103
-Log         1
-End
-
-#COMMAND
 Name        memory~
 Code        do_memory
 Position    0
@@ -2332,14 +2324,6 @@ Code        do_ocreate
 Position    0
 Level       102
 Log         3
-End
-
-#COMMAND
-Name        odelete~
-Code        do_odelete
-Position    0
-Level       103
-Log         1
 End
 
 #COMMAND
