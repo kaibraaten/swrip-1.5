@@ -12,7 +12,6 @@ extern bool wizlock;
 /*
  * comm.c
  */
-bool check_parse_name( char *name );
 bool check_playing( DESCRIPTOR_DATA *d, char *name, bool kick );
 bool check_reconnect( DESCRIPTOR_DATA *d, char *name, bool fConn );
 bool check_multi( DESCRIPTOR_DATA *d, char *name );

@@ -166,6 +166,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o \
 	$(CMDDIR)/mstat.o \
 	$(CMDDIR)/music.o \
 	$(CMDDIR)/mwhere.o \
+	$(CMDDIR)/name.o \
 	$(CMDDIR)/newbiechat.o \
 	$(CMDDIR)/newbieset.o \
 	$(CMDDIR)/noemote.o \

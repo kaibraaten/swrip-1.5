@@ -22,7 +22,6 @@
 
 
 #define  MAX_DISPLAY_LINES  14000      /* Size of Sort Array             */
-#define  MAX_NAME_LENGTH       13
 #define  MAX_SITE_LENGTH       16
 #define  MAX_FIELD_LENGTH      20
 #define  MAX_NUM_OPS           32

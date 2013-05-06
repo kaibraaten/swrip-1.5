@@ -187,6 +187,8 @@ typedef ch_ret  SPELL_FUN       ( int sn, int level, CHAR_DATA *ch, void *vo );
  * Increase the max'es if you add more of something.
  * Adjust the pulse numbers to suit yourself.
  */
+#define MIN_NAME_LENGTH             3
+#define MAX_NAME_LENGTH            12
 #define MIN_VNUM                    1
 #define MAX_VNUM                32767
 #define MAX_EXP_WORTH          500000
@@ -4140,6 +4142,7 @@ extern "C" {
   void copyover_recover( void );
 
   /* act_comm.c */
+  bool check_parse_name( const char *name );
   char *drunk_speech( const char *argument, CHAR_DATA *ch );
   void talk_channel( CHAR_DATA *ch, char *argument,
 		     int channel, const char *verb );
