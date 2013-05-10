@@ -13,23 +13,20 @@
  *                      Gorog's Revenge on Unruly Bastards                  *
  ****************************************************************************/
 
-#include <sys/types.h>
 #include <ctype.h>
-#include <stdio.h>
 #include <string.h>
 #include <time.h>
 #include "mud.h"
 
+#define MAX_DISPLAY_LINES  14000      /* Size of Sort Array             */
+#define MAX_SITE_LENGTH       16
+#define MAX_FIELD_LENGTH      20
+#define MAX_NUM_OPS           32
+#define GR_NUM_FIELDS         12
+#define GO_NUM_FIELDS         24
 
-#define  MAX_DISPLAY_LINES  14000      /* Size of Sort Array             */
-#define  MAX_SITE_LENGTH       16
-#define  MAX_FIELD_LENGTH      20
-#define  MAX_NUM_OPS           32
-#define  GR_NUM_FIELDS         12
-#define  GO_NUM_FIELDS         24
-
-typedef  struct gr_struct       GR_STRUCT;
-typedef  struct go_struct       GO_STRUCT;
+typedef struct gr_struct GR_STRUCT;
+typedef struct go_struct GO_STRUCT;
 
 extern OBJ_INDEX_DATA *obj_index_hash[MAX_KEY_HASH];
 extern ROOM_INDEX_DATA *room_index_hash[MAX_KEY_HASH];
@@ -37,9 +34,9 @@ extern MOB_INDEX_DATA *mob_index_hash[MAX_KEY_HASH];
 
 struct field_struct         /* field table - info re each field          */
 {
-  char    nam [MAX_FIELD_LENGTH];
-  bool    num;             /* is field numeric or char string?          */
-}  gr_fd [GR_NUM_FIELDS], go_fd [GO_NUM_FIELDS];
+  char nam[MAX_FIELD_LENGTH];
+  bool num;             /* is field numeric or char string?          */
+} gr_fd [GR_NUM_FIELDS], go_fd [GO_NUM_FIELDS];
 
 struct operand_struct        /* operand table - info about each operand   */
 {
@@ -58,33 +55,33 @@ enum gr_field_type          /* enumerates the fields in the input record */
   {name, sex, pclass, race, level, room, gold, clan, council,
    site, last, pkill};
 
-struct  gr_struct               /* input record containing pfile info    */
+struct gr_struct               /* input record containing pfile info    */
 {
-  char    name [MAX_NAME_LENGTH];
-  char    sex;
-  char    pclass;
-  char    race;
-  char    level;
-  short   room;
-  long    gold;
-  char    clan;
-  char    council;
-  char    site [MAX_SITE_LENGTH];
-  long    last;
-  char    pkill;
+  char name[MAX_NAME_LENGTH];
+  char sex;
+  char pclass;
+  char race;
+  char level;
+  short room;
+  long gold;
+  char clan;
+  char council;
+  char site[MAX_SITE_LENGTH];
+  long last;
+  char pkill;
 };
 
-struct  go_struct                /* input record containing object data  */
+struct go_struct                /* input record containing object data  */
 {
-  short  n[22];
-  char  *s[2];
+  short n[22];
+  const char *s[2];
 };
 
 /*
  * Sort function used by rgrub to sort integers
  */
 
-int rgrub_int_comp(const void *i, const void *j)
+static int rgrub_int_comp(const void *i, const void *j)
 {
   return *(int*)i - *(int*)j;
 }
@@ -92,7 +89,7 @@ int rgrub_int_comp(const void *i, const void *j)
 /*
  * Displays the help screen for the "rgrub" command
  */
-void rgrub_help (CHAR_DATA *ch)
+static void rgrub_help (CHAR_DATA *ch)
 {
   send_to_char( "Syntax:\r\n", ch);
   send_to_char( "rgrub st n lo hi - sector type search.\r\n"
@@ -156,16 +153,20 @@ void do_rgrub (CHAR_DATA *ch, char *argument)
     }
 }
 
-short go_wear_ext (long arg)    /* extract bit set in arg ignoring pos 1 */
+static short go_wear_ext (long arg)    /* extract bit set in arg ignoring pos 1 */
 {
   short cou;
+
   if ( arg <= 1 ) return arg;
+
   for (cou=1; cou<=31; cou++)
-    if ( arg & ( (unsigned long) 1 << cou ) ) return cou + 1;
+    if ( arg & ( (unsigned long) 1 << cou ) )
+      return cou + 1;
+
   return -1;
 }
 
-int go_strcmp( const char *astr, const char *bstr )
+static int go_strcmp( const char *astr, const char *bstr )
 {
   int i;
   for ( ; *astr || *bstr; astr++, bstr++ )
@@ -176,7 +177,7 @@ int go_strcmp( const char *astr, const char *bstr )
   return 0;
 }
 
-void go_init (void)
+static void go_init (void)
 {
   int cou;
 
@@ -211,7 +212,7 @@ void go_init (void)
   strcpy(go_fd[23].nam, "name" );
 }
 
-char *go_otype_to_disp (int arg)
+static const char *go_otype_to_disp (int arg)
 {
   if ( arg==ITEM_LIGHT     ) return "lt";
   if ( arg==ITEM_SCROLL    ) return "sc";
@@ -243,7 +244,7 @@ char *go_otype_to_disp (int arg)
   return NULL;
 }
 
-char *owear_to_disp (short arg)
+static const char *owear_to_disp (short arg)
 {
   static char owear_disp[20][3] =
     { "??", "ta", "fi", "ne", "bo", "he", "le", "fe", "ha", "ar",
@@ -253,7 +254,7 @@ char *owear_to_disp (short arg)
   return owear_disp[ arg ];
 }
 
-int owear_to_num (char *arg)
+static int owear_to_num (const char *arg)
 {
   if ( !str_cmp( arg, "take"    ) ) return  1;
   if ( !str_cmp( arg, "finger"  ) ) return  2;
@@ -277,7 +278,7 @@ int owear_to_num (char *arg)
   return 0;
 }
 
-int go_fnam_to_num ( char *arg )
+static int go_fnam_to_num( const char *arg )
 {
   int cou;
 
@@ -300,8 +301,8 @@ int go_fnam_to_num ( char *arg )
  * 5th parm is n_s - number/string - TRUE is number - FALSE is string
  * 6th parm is direction - TRUE is ascending - FALSE is descending
  */
-void go_sort( CHAR_DATA *ch, GO_STRUCT **p,
-              int ind, int left, int right, bool n_s, bool sor_dir )
+static void go_sort( const CHAR_DATA *ch, GO_STRUCT **p,
+		     int ind, int left, int right, bool n_s, bool sor_dir )
 {
   GO_STRUCT *swap;
   int i=left, j=right, testn = 0;
@@ -347,7 +348,7 @@ void go_sort( CHAR_DATA *ch, GO_STRUCT **p,
   if (i < right) go_sort (ch, p, ind, i, right, n_s, sor_dir );
 }
 
-void go_accum_aff (GO_STRUCT *r, int loc, int mod)
+static void go_accum_aff (GO_STRUCT *r, int loc, int mod)
 {
   enum {OCOUNT, OVNUM, OTYPE, OLEVEL, OWEAR, OAVG, OHR, ODR, OHP, OMP, OAC,
         OSTR, ODEX, OCON, OWIS, OINT, OLUCK,
@@ -374,7 +375,7 @@ void go_accum_aff (GO_STRUCT *r, int loc, int mod)
     }
 }
 
-void display_operand_table (CHAR_DATA *ch, int op_num)
+static void display_operand_table (CHAR_DATA *ch, int op_num)
 {
   int cou;
   char opn[7][3] = {"eq", "ne", "su", "ge", "gt", "le", "lt"};
@@ -394,7 +395,7 @@ void display_operand_table (CHAR_DATA *ch, int op_num)
 /*
  *  Store operand's operator and value in operand table.
  */
-bool go_parse_operator (CHAR_DATA *ch, char *pch, int *op_num)
+static bool go_parse_operator (CHAR_DATA *ch, const char *pch, int *op_num)
 {
   enum op_type {EQ, NE, SU, GE, GT, LE, LT};
   enum {OCOUNT, OVNUM, OTYPE, OLEVEL, OWEAR, OAVG, OHR, ODR, OHP, OMP, OAC,
@@ -449,12 +450,11 @@ bool go_parse_operator (CHAR_DATA *ch, char *pch, int *op_num)
 /*
  * Store operand's field name in the operand table.
  */
-bool go_parse_operand (CHAR_DATA *ch, char *arg, int *op_num, int *sor_ind,
+static bool go_parse_operand (CHAR_DATA *ch, const char *arg, int *op_num, int *sor_ind,
                        bool *sor_dir, bool *or_sw, bool *np_sw, bool *nm_sw, bool *ng_sw,
                        bool *do_sw, bool *d2_sw)
 {
-  int  cou;
-  char *pch;
+  int cou;
 
   if ( !str_cmp(arg, "or"    ) ) return *or_sw    = TRUE;
   if ( !str_cmp(arg, "np"    ) ) return *np_sw    = TRUE;
@@ -465,8 +465,9 @@ bool go_parse_operand (CHAR_DATA *ch, char *arg, int *op_num, int *sor_ind,
 
   if ( arg[0]=='+' || arg[0]=='-')
     {
+      const char *pch = arg + 1;
       *sor_dir = (arg[0]=='+') ? TRUE : FALSE;
-      pch = arg + 1;
+
       if ( pch[0] == '\0')
         {
           pager_printf(ch, "Sorry. Missing sort field: %s\r\n", arg);
@@ -498,7 +499,7 @@ bool go_parse_operand (CHAR_DATA *ch, char *arg, int *op_num, int *sor_ind,
 /*
  * Evaluate one string criteria
  */
-bool go_eval_str (char *lval, int op, char *rval)
+static bool go_eval_str (const char *lval, int op, const char *rval)
 {
   enum op_type {EQ, NE, SU, GE, GT, LE, LT};
   switch (op)
@@ -524,7 +525,7 @@ bool go_eval_str (char *lval, int op, char *rval)
 /*
  * Evaluate one numeric criteria
  */
-bool go_eval_num (long lval, int op, long rval)
+static bool go_eval_num (long lval, int op, long rval)
 {
   enum op_type {EQ, NE, SU, GE, GT, LE, LT};
   switch (op)
@@ -542,7 +543,7 @@ bool go_eval_num (long lval, int op, long rval)
 /*
  * Evaluate one input record to see if it matches all search criteria
  */
-bool go_eval_and (CHAR_DATA *ch, GO_STRUCT *r, int op_num)
+static bool go_eval_and (CHAR_DATA *ch, GO_STRUCT *r, int op_num)
 {
   enum {OCOUNT, OVNUM, OTYPE, OLEVEL, OWEAR, OAVG, OHR, ODR, OHP, OMP, OAC,
         OSTR, ODEX, OCON, OWIS, OINT, OLUCK,
@@ -573,7 +574,7 @@ bool go_eval_and (CHAR_DATA *ch, GO_STRUCT *r, int op_num)
 /*
  * Evaluate one input record to see if it matches any search criteria
  */
-bool go_eval_or (CHAR_DATA *ch, GO_STRUCT *r, int op_num)
+static bool go_eval_or (CHAR_DATA *ch, GO_STRUCT *r, int op_num)
 {
   enum {OCOUNT, OVNUM, OTYPE, OLEVEL, OWEAR, OAVG, OHR, ODR, OHP, OMP, OAC,
         OSTR, ODEX, OCON, OWIS, OINT, OLUCK,
@@ -599,8 +600,8 @@ bool go_eval_or (CHAR_DATA *ch, GO_STRUCT *r, int op_num)
   return FALSE;
 }
 
-void go_display( CHAR_DATA *ch, int dis_num, int tot_match, bool d2_sw,
-                 GO_STRUCT **p)
+static void go_display( CHAR_DATA *ch, int dis_num, int tot_match, bool d2_sw,
+			GO_STRUCT **p)
 {
   enum {OCOUNT, OVNUM, OTYPE, OLEVEL, OWEAR, OAVG, OHR, ODR, OHP, OMP, OAC,
         OSTR, ODEX, OCON, OWIS, OINT, OLUCK,
@@ -671,13 +672,13 @@ void go_display( CHAR_DATA *ch, int dis_num, int tot_match, bool d2_sw,
  * it could be on the ground ... but ... growl ... it could also be
  * in a container carried by someone - or in a container on the ground.
  */
-bool go_read_names( CHAR_DATA *ch, OBJ_DATA *po, GO_STRUCT *r, bool np_sw,
-                    bool nm_sw, bool ng_sw )
+static bool go_read_names( CHAR_DATA *ch, OBJ_DATA *po, GO_STRUCT *r, bool np_sw,
+			   bool nm_sw, bool ng_sw )
 {
   enum {CNAME, ONAME};
   OBJ_DATA *pt;
-  char *ground = "(none)";
-  char *ack    = "(error in data structure)";
+  const char *ground = "(none)";
+  const char *ack    = "(error in data structure)";
 
   r->s[ONAME] = ( po->name ) ? po->name : ack;  /* set object name */
 
@@ -714,9 +715,9 @@ bool go_read_names( CHAR_DATA *ch, OBJ_DATA *po, GO_STRUCT *r, bool np_sw,
   return TRUE;
 }
 
-bool go_read( CHAR_DATA *ch, int dis_num, int op_num, int sor_ind,
-              bool sor_dir, bool or_sw, bool np_sw, bool nm_sw, bool ng_sw,
-              bool d2_sw )
+static bool go_read( CHAR_DATA *ch, int dis_num, int op_num, int sor_ind,
+		     bool sor_dir, bool or_sw, bool np_sw, bool nm_sw, bool ng_sw,
+		     bool d2_sw )
 {
   enum {OCOUNT, OVNUM, OTYPE, OLEVEL, OWEAR, OAVG, OHR, ODR, OHP, OMP, OAC,
         OSTR, ODEX, OCON, OWIS, OINT, OLUCK,
@@ -864,6 +865,7 @@ void do_ogrub (CHAR_DATA *ch, char *argument)
     }
   if ( do_sw )
     display_operand_table (ch, op_num);
+
   if ( !go_read(ch, dis_num, op_num, sor_ind,          /* future expansion*/
                 sor_dir, or_sw, np_sw, nm_sw, ng_sw, d2_sw) )
     return;
@@ -879,9 +881,10 @@ char *gr_strc (char c)           /* convert a char to a str */
 /*
  * Evaluate one input record to see if it matches all search criteria
  */
-bool gr_eval_and (GR_STRUCT r, int op_num)
+static bool gr_eval_and (GR_STRUCT r, int op_num)
 {
-  int  cou;
+  int cou;
+
   for (cou=0; cou<op_num; cou++)
     {
       switch (gr_op[cou].field)
@@ -942,9 +945,10 @@ bool gr_eval_and (GR_STRUCT r, int op_num)
 /*
  * Evaluate one input record to see if it matches any search criteria
  */
-bool gr_eval_or (GR_STRUCT r, int op_num)
+static bool gr_eval_or (GR_STRUCT r, int op_num)
 {
   int cou;
+
   for (cou=0; cou<op_num; cou++)
     {
       switch (gr_op[cou].field)
@@ -1003,7 +1007,7 @@ bool gr_eval_or (GR_STRUCT r, int op_num)
   return FALSE;
 }
 
-void gr_init (void)
+static void gr_init (void)
 {
   strcpy(gr_fd[ 0].nam, "name"   ); gr_fd[0].num=FALSE;
   strcpy(gr_fd[ 1].nam, "sex"    ); gr_fd[ 1].num=TRUE;
@@ -1022,11 +1026,11 @@ void gr_init (void)
 /*
  *  Store operand's operator and value in operand table.
  */
-bool gr_parse_operator (CHAR_DATA *ch, char *pch, int *op_num)
+static bool gr_parse_operator (CHAR_DATA *ch, const char *pch, int *op_num)
 {
   enum op_type {EQ, NE, SU, GE, GT, LE, LT};
   int  cou;
-  char opstr [7][3] = { "=", "!=", "<>", ">=", ">", "<=", "<" };
+  const char opstr [7][3] = { "=", "!=", "<>", ">=", ">", "<=", "<" };
 
   gr_op[*op_num].op = -1;
   for (cou=0; cou<7; cou++)
@@ -1066,9 +1070,9 @@ bool gr_parse_operator (CHAR_DATA *ch, char *pch, int *op_num)
 /*
  * Store operand's field name in the operand table.
  */
-bool gr_parse_operand (CHAR_DATA *ch, char *arg, bool *or_sw, int *op_num)
+static bool gr_parse_operand (CHAR_DATA *ch, const char *arg, bool *or_sw, int *op_num)
 {
-  int  cou;
+  int cou;
 
   if ( !str_cmp(arg, "or") )
     return *or_sw = TRUE;
@@ -1089,22 +1093,22 @@ bool gr_parse_operand (CHAR_DATA *ch, char *arg, bool *or_sw, int *op_num)
 /*
  * Read the input file to select records matching the search criteria
  */
-void gr_read( CHAR_DATA *ch, int op_num, bool or_sw, int dis_num)
+static void gr_read( CHAR_DATA *ch, int op_num, bool or_sw, int dis_num)
 {
   FILE *fp;
   bool res;                                 /* result of a boolean exp   */
   bool title_sw = FALSE;                    /* only print title once     */
   int  tot_match = 0;                       /* total records matched     */
   GR_STRUCT r;                              /* input (physical record)   */
-  char sex_map[]   = "NMF";                     /* convert sex to text       */
-  char class_map[] = "MCTWVDRAPN";              /* convert class to text     */
-  char race_map[][3] =                          /* convert race to text      */
+  const char sex_map[]   = "NMF";                     /* convert sex to text       */
+  const char class_map[] = "MCTWVDRAPN";              /* convert class to text     */
+  const char race_map[][3] =                          /* convert race to text      */
     {"Hu", "El", "Dw", "Ha", "Px", "Va", "Og", "HO", "HT", "HE", "Gi",
      "Dr", "SE", "Li", "Gn"};
-  char clan_map[][4] = {
+  const char clan_map[][4] = {
     "   ", "Gui", "DS ", "MS ", "RB ", "AR ", "Bru", "Las","Nos", "Tre",
     "Ven", "Inc", "Baa", "Rol"};
-  char council_map[][4] =
+  const char council_map[][4] =
     {"   ", "CoE", "MC ", "NC ", "Pro", "PK ", "QC ", "Neo", "Cod", "AC ",
      "Sym", "VC "};
 
@@ -1241,7 +1245,7 @@ void do_showlayers( CHAR_DATA *ch, char *argument )
 /*
  * Sorts the arrays "vnums" and "count" based on the order in "count"
  */
-void zero_sort( int *vnums, int *count, int left, int right )
+static void zero_sort( int *vnums, int *count, int left, int right )
 {
   int i=left, j=right, swap, test;
   test = count[(left + right) / 2];
@@ -1259,9 +1263,10 @@ void zero_sort( int *vnums, int *count, int left, int right )
   if (i < right) zero_sort (vnums, count, i, right);
 }
 
-void diag_visit_obj( CHAR_DATA *ch, OBJ_DATA *obj )
+static void diag_visit_obj( CHAR_DATA *ch, OBJ_DATA *obj )
 {
   pager_printf(ch, "***obj=%s\r\n", obj->name );
+
   if ( obj->first_content )
     {
       diag_visit_obj( ch, obj->first_content );
@@ -1279,7 +1284,7 @@ void diag_visit_obj( CHAR_DATA *ch, OBJ_DATA *obj )
  * Sort function used by diagnose "rf" to sort integers
  */
 
-int diag_int_comp(const void *i, const void *j)
+static int diag_int_comp(const void *i, const void *j)
 {
   return *(int*)i - *(int*)j;
 }
@@ -1287,7 +1292,7 @@ int diag_int_comp(const void *i, const void *j)
 /*
  * Displays the help screen for the "diagnose" command
  */
-void diagnose_help (CHAR_DATA *ch)
+static void diagnose_help (CHAR_DATA *ch)
 {
   send_to_char( "Syntax:\r\n", ch);
   send_to_char( "diagnose of n  -  object frequency top n objects\r\n", ch );
@@ -1302,7 +1307,6 @@ void diagnose_help (CHAR_DATA *ch)
                 "   display all mobs of a particular race/class combo.\r\n"
                 "   e.g. diagnose mrc 50 0 3 7500 7534 - show 50 human warriors "
                 " in Edo.\r\n", ch);
-
 }
 
 /*
@@ -1311,7 +1315,7 @@ void diagnose_help (CHAR_DATA *ch)
  * frequency table which contains the "top n" frequently occurring objects.
  */
 
-void diag_ins (OBJ_INDEX_DATA *p, int siz, OBJ_INDEX_DATA **f, CHAR_DATA *ch)
+static void diag_ins (OBJ_INDEX_DATA *p, int siz, OBJ_INDEX_DATA **f, CHAR_DATA *ch)
 {
   int  cou =  0;                             /* temporary counter */
   int  ins = -1;                             /* insert pos in dynamic f array */
