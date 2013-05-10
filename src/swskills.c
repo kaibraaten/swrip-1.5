@@ -35,10 +35,6 @@ int ris_save( CHAR_DATA *ch, int the_chance, int ris );
 CHAR_DATA *get_char_room_mp( CHAR_DATA *ch, char *argument );
 bool    aff_paralysis( CHAR_DATA *ch, CHAR_DATA *victim );
 
-extern int      top_affect;
-
-
-
 void do_makeblade( CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];

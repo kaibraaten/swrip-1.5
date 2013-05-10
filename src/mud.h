@@ -3319,16 +3319,29 @@ extern const char * const save_flag[];
  */
 extern bool bootup;
 
-extern  int     numobjsloaded;
-extern  int     nummobsloaded;
-extern  int     physicalobjects;
-extern  int     num_descriptors;
-extern  struct  system_data             sysdata;
-extern  int     top_sn;
-extern  int     top_vroom;
-extern  int     top_herb;
-extern  long long high_galaxy_cash;
-extern  long long low_galaxy_cash;
+extern int numobjsloaded;
+extern int nummobsloaded;
+extern int physicalobjects;
+extern int num_descriptors;
+extern struct system_data sysdata;
+extern int top_sn;
+extern int top_vroom;
+extern int top_herb;
+extern int top_affect;
+extern int top_area;
+extern int top_ed;
+extern int top_exit;
+extern int top_help;
+extern int top_mob_index;
+extern int top_obj_index;
+extern int top_reset;
+extern int top_room;
+extern int top_shop;
+extern int top_repair;
+extern int cur_qobjs;
+extern int cur_qchars;
+extern long long high_galaxy_cash;
+extern long long low_galaxy_cash;
 
 extern          CMDTYPE           *     command_hash    [126];
 
@@ -3402,7 +3415,6 @@ extern          CHAR_DATA         *     loading_char;
 extern          CHAR_DATA         *     saving_char;
 extern          OBJ_DATA          *     all_obj;
 
-extern          char                    bug_buf         [];
 extern          time_t                  current_time;
 extern          bool                    fLogAll;
 extern          char                    log_buf         [];
@@ -4402,6 +4414,8 @@ extern "C" {
   void  reset_area( AREA_DATA * pArea );
 
   /* db.c */
+  void show_vnums( CHAR_DATA *ch, int low, int high, bool proto, bool shownl,
+		   const char *loadst, const char *notloadst );
   void save_sysdata( SYSTEM_DATA sys );
   void append_file( CHAR_DATA *ch, const char *file, const char *str );
   void  show_file( CHAR_DATA *ch, const char *filename );

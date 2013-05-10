@@ -79,6 +79,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o \
 	$(CMDDIR)/cedit.o \
 	$(CMDDIR)/channels.o \
 	$(CMDDIR)/chat.o \
+	$(CMDDIR)/check_vnums.o \
 	$(CMDDIR)/clan_donate.o \
 	$(CMDDIR)/clan_withdraw.o \
 	$(CMDDIR)/clanfunds.o \
@@ -99,6 +100,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o \
 	$(CMDDIR)/destroy.o \
 	$(CMDDIR)/disconnect.o \
 	$(CMDDIR)/dismiss.o \
+	$(CMDDIR)/dmsg.o \
 	$(CMDDIR)/dnd.o \
 	$(CMDDIR)/down.o \
 	$(CMDDIR)/drag.o \
@@ -154,9 +156,11 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o \
 	$(CMDDIR)/mailroom.o \
 	$(CMDDIR)/makeboard.o \
 	$(CMDDIR)/makeclan.o \
+	$(CMDDIR)/makewizlist.o \
 	$(CMDDIR)/massign.o \
 	$(CMDDIR)/mcreate.o \
 	$(CMDDIR)/members.o \
+	$(CMDDIR)/memory.o \
 	$(CMDDIR)/mfind.o \
 	$(CMDDIR)/minvoke.o \
 	$(CMDDIR)/mlist.o \
@@ -169,6 +173,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o \
 	$(CMDDIR)/name.o \
 	$(CMDDIR)/newbiechat.o \
 	$(CMDDIR)/newbieset.o \
+	$(CMDDIR)/newzones.o \
 	$(CMDDIR)/noemote.o \
 	$(CMDDIR)/nohelps.o \
 	$(CMDDIR)/noresolve.o \
@@ -272,6 +277,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o \
 	$(CMDDIR)/users.o \
 	$(CMDDIR)/vassign.o \
 	$(CMDDIR)/viewskills.o \
+	$(CMDDIR)/vnums.o \
 	$(CMDDIR)/vsearch.o \
 	$(CMDDIR)/wake.o \
 	$(CMDDIR)/wartalk.o \
@@ -287,6 +293,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o \
 	$(CMDDIR)/wizlock.o \
 	$(CMDDIR)/yell.o \
 	$(CMDDIR)/zap.o \
+	$(CMDDIR)/zones.o \
 
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 

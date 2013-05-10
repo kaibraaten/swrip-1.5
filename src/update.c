@@ -80,8 +80,6 @@ const char * const d_corpse_descs[] =
     "The shattered remains %s are here."
   };
 
-extern int      top_exit;
-
 /*
  * Arena stuff.
  */

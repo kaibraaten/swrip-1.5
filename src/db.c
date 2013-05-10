@@ -21,15 +21,10 @@
  *                      Database management module                         *
  ****************************************************************************/
 
-#include <sys/types.h>
-#include <ctype.h>
-#include <stdio.h>
-#include <stdarg.h>
-#include <string.h>
 #include <time.h>
-#include <unistd.h>
-#include <sys/stat.h>
-#include <dirent.h>
+#include <string.h>
+#include <ctype.h>
+#include <stdarg.h>
 #include "mud.h"
 
 void init_supermob();
@@ -38,266 +33,261 @@ void init_supermob();
  * Globals.
  */
 
-WIZENT *        first_wiz;
-WIZENT *        last_wiz;
+WIZENT *first_wiz = NULL;
+WIZENT *last_wiz = NULL;
 
-time_t                  last_restore_all_time = 0;
+time_t last_restore_all_time = 0;
 
-HELP_DATA *             first_help;
-HELP_DATA *             last_help;
+HELP_DATA *first_help = NULL;
+HELP_DATA *last_help = NULL;
 
-SHOP_DATA *             first_shop;
-SHOP_DATA *             last_shop;
+SHOP_DATA *first_shop = NULL;
+SHOP_DATA *last_shop = NULL;
 
-REPAIR_DATA *           first_repair;
-REPAIR_DATA *           last_repair;
+REPAIR_DATA *first_repair = NULL;
+REPAIR_DATA *last_repair = NULL;
 
-TELEPORT_DATA *         first_teleport;
-TELEPORT_DATA *         last_teleport;
+TELEPORT_DATA *first_teleport = NULL;
+TELEPORT_DATA *last_teleport = NULL;
 
-OBJ_DATA *              extracted_obj_queue;
-EXTRACT_CHAR_DATA *     extracted_char_queue;
+OBJ_DATA *extracted_obj_queue = NULL;
+EXTRACT_CHAR_DATA *extracted_char_queue = NULL;
 
-char                    bug_buf         [2*MAX_INPUT_LENGTH];
-CHAR_DATA *             first_char;
-CHAR_DATA *             last_char;
-char *                  help_greeting;
-char                    log_buf         [2*MAX_INPUT_LENGTH];
+CHAR_DATA *first_char = NULL;
+CHAR_DATA *last_char = NULL;
+char *help_greeting = NULL;
+char log_buf[2*MAX_INPUT_LENGTH];
 
-OBJ_DATA *              first_object;
-OBJ_DATA *              last_object;
-TIME_INFO_DATA          time_info;
-WEATHER_DATA            weather_info;
+OBJ_DATA *first_object = NULL;
+OBJ_DATA *last_object = NULL;
+TIME_INFO_DATA time_info;
+WEATHER_DATA weather_info;
 
-int                     cur_qobjs;
-int                     cur_qchars;
-int                     nummobsloaded;
-int                     numobjsloaded;
-int                     physicalobjects;
+int cur_qobjs = 0;
+int cur_qchars = 0;
+int nummobsloaded = 0;
+int numobjsloaded = 0;
+int physicalobjects = 0;
 
-AUCTION_DATA    *       auction;        /* auctions */
+AUCTION_DATA *auction = NULL;
 
 /* criminals */
-short   gsn_torture;
-short   gsn_disguise;
-short   gsn_cloak;
-short   gsn_beg;
-short   gsn_pickshiplock;
-short   gsn_hijack;
+short gsn_torture;
+short gsn_disguise;
+short gsn_cloak;
+short gsn_beg;
+short gsn_pickshiplock;
+short gsn_hijack;
 
 /* soldiers and officers */
-short   gsn_reinforcements;
-short   gsn_postguard;
-short   gsn_mine;
-short   gsn_grenades;
-short   gsn_first_aid;
-short   gsn_snipe;
-short   gsn_throw;
+short gsn_reinforcements;
+short gsn_postguard;
+short gsn_mine;
+short gsn_grenades;
+short gsn_first_aid;
+short gsn_snipe;
+short gsn_throw;
 
-short   gsn_addpatrol;
-short   gsn_eliteguard;
-short   gsn_specialforces;
-short   gsn_jail;
-short   gsn_smalltalk;
-short   gsn_propeganda;
-short   gsn_bribe;
-short   gsn_seduce;
-short   gsn_masspropeganda;
-short   gsn_gather_intelligence;
-short   gsn_bind;
-
+short gsn_addpatrol;
+short gsn_eliteguard;
+short gsn_specialforces;
+short gsn_jail;
+short gsn_smalltalk;
+short gsn_propeganda;
+short gsn_bribe;
+short gsn_seduce;
+short gsn_masspropeganda;
+short gsn_gather_intelligence;
+short gsn_bind;
 
 /* pilots and smugglers */
-short   gsn_starfighters;
-short   gsn_midships;
-short   gsn_capitalships;
-short   gsn_weaponsystems;
-short   gsn_navigation;
-short   gsn_shipsystems;
-short   gsn_tractorbeams;
-short   gsn_shipmaintenance;
-short   gsn_sabotage;
-short   gsn_spacecombat;
-short   gsn_spacecombat2;
-short   gsn_spacecombat3;
-short   gsn_shipdocking;
-short   gsn_jumpvector;
-short   gsn_speeders;
-short   gsn_speedercombat;
+short gsn_starfighters;
+short gsn_midships;
+short gsn_capitalships;
+short gsn_weaponsystems;
+short gsn_navigation;
+short gsn_shipsystems;
+short gsn_tractorbeams;
+short gsn_shipmaintenance;
+short gsn_sabotage;
+short gsn_spacecombat;
+short gsn_spacecombat2;
+short gsn_spacecombat3;
+short gsn_shipdocking;
+short gsn_jumpvector;
+short gsn_speeders;
+short gsn_speedercombat;
 
 /* player building skills */
-short   gsn_lightsaber_crafting;
-short   gsn_spice_refining;
-short   gsn_makeblade;
-short   gsn_makeblaster;
-short   gsn_makebowcaster;
-short   gsn_makelight;
-short   gsn_makecomlink;
-short   gsn_makegrenade;
-short   gsn_makelandmine;
-short   gsn_makearmor;
-short   gsn_makeshield;
-short   gsn_makecontainer;
-short   gsn_makemissile;
-short   gsn_gemcutting;
-short   gsn_makejewelry;
-short   gsn_fake_signal;
-short   gsn_slicing;
+short gsn_lightsaber_crafting;
+short gsn_spice_refining;
+short gsn_makeblade;
+short gsn_makeblaster;
+short gsn_makebowcaster;
+short gsn_makelight;
+short gsn_makecomlink;
+short gsn_makegrenade;
+short gsn_makelandmine;
+short gsn_makearmor;
+short gsn_makeshield;
+short gsn_makecontainer;
+short gsn_makemissile;
+short gsn_gemcutting;
+short gsn_makejewelry;
+short gsn_fake_signal;
+short gsn_slicing;
 
 /* weaponry */
-short                   gsn_blasters;
-short                  gsn_bowcasters;
-short                  gsn_force_pikes;
-short                   gsn_lightsabers;
-short                   gsn_vibro_blades;
-short                   gsn_flexible_arms;
-short                   gsn_talonous_arms;
-short                   gsn_bludgeons;
-short                   gsn_shieldwork;
+short gsn_blasters;
+short gsn_bowcasters;
+short gsn_force_pikes;
+short gsn_lightsabers;
+short gsn_vibro_blades;
+short gsn_flexible_arms;
+short gsn_talonous_arms;
+short gsn_bludgeons;
+short gsn_shieldwork;
 
 /* thief */
-short                   gsn_detrap;
-short           gsn_backstab;
-short                   gsn_circle;
-short                   gsn_dodge;
-short                   gsn_hide;
-short                   gsn_peek;
-short                   gsn_pick_lock;
-short                   gsn_sneak;
-short                   gsn_steal;
-short                   gsn_gouge;
-short                   gsn_poison_weapon;
+short gsn_detrap;
+short gsn_backstab;
+short gsn_circle;
+short gsn_dodge;
+short gsn_hide;
+short gsn_peek;
+short gsn_pick_lock;
+short gsn_sneak;
+short gsn_steal;
+short gsn_gouge;
+short gsn_poison_weapon;
 
 /* thief & warrior */
-short           gsn_disarm;
-short                   gsn_enhanced_damage;
-short                   gsn_kick;
-short                   gsn_parry;
-short                   gsn_rescue;
-short                   gsn_second_attack;
-short                   gsn_third_attack;
-short           gsn_fourth_attack;
-short                   gsn_fifth_attack;
-short                   gsn_dual_wield;
-short                   gsn_punch;
-short                   gsn_bash;
-short                   gsn_stun;
-short                  gsn_bashdoor;
-short                   gsn_skin;
-short                  gsn_cutdoor;
-short                   gsn_grip;
-short                   gsn_berserk;
-short                   gsn_hitall;
+short gsn_disarm;
+short gsn_enhanced_damage;
+short gsn_kick;
+short gsn_parry;
+short gsn_rescue;
+short gsn_second_attack;
+short gsn_third_attack;
+short gsn_fourth_attack;
+short gsn_fifth_attack;
+short gsn_dual_wield;
+short gsn_punch;
+short gsn_bash;
+short gsn_stun;
+short gsn_bashdoor;
+short gsn_skin;
+short gsn_cutdoor;
+short gsn_grip;
+short gsn_berserk;
+short gsn_hitall;
 
 /* vampire */
-short           gsn_feed;
+short gsn_feed;
 
 /* other   */
-short                   gsn_aid;
-short                   gsn_track;
-short                   gsn_search;
-short                   gsn_dig;
-short                   gsn_mount;
-short                   gsn_bite;
-short                   gsn_claw;
-short                   gsn_sting;
-short                   gsn_tail;
-short                   gsn_scribe;
-short                   gsn_study;
-short                   gsn_brew;
-short                   gsn_climb;
-short                  gsn_scan;
-short                   gsn_slice;
+short gsn_aid;
+short gsn_track;
+short gsn_search;
+short gsn_dig;
+short gsn_mount;
+short gsn_bite;
+short gsn_claw;
+short gsn_sting;
+short gsn_tail;
+short gsn_scribe;
+short gsn_study;
+short gsn_brew;
+short gsn_climb;
+short gsn_scan;
+short gsn_slice;
 
 /* spells */
-short                   gsn_aqua_breath;
-short           gsn_blindness;
-short                   gsn_charm_person;
-short                   gsn_curse;
-short                   gsn_invis;
-short                   gsn_mass_invis;
-short                   gsn_poison;
-short                   gsn_sleep;
-short                   gsn_possess;
-short                   gsn_fireball;
-short                   gsn_chill_touch;
-short                   gsn_lightning_bolt;
+short gsn_aqua_breath;
+short gsn_blindness;
+short gsn_charm_person;
+short gsn_curse;
+short gsn_invis;
+short gsn_mass_invis;
+short gsn_poison;
+short gsn_sleep;
+short gsn_possess;
+short gsn_fireball;
+short gsn_chill_touch;
+short gsn_lightning_bolt;
 
 /* languages */
-short                   gsn_common;
-short                   gsn_wookiee;
-short                   gsn_twilek;
-short                   gsn_rodian;
-short                   gsn_hutt;
-short                   gsn_mon_calamari;
-short                   gsn_noghri;
-short                   gsn_gamorrean;
-short                   gsn_jawa;
-short                  gsn_adarian;
-short                  gsn_ewok;
-short                  gsn_verpine;
-short                  gsn_defel;
-short                  gsn_trandoshan;
-short                  gsn_chadra_fan;
-short                  gsn_quarren;
-short                  gsn_sullustan;
-short                   gsn_barabel;
-short                   gsn_firrerreo;
-short                   gsn_bothan;
-short                   gsn_coynite;
-short                   gsn_duros;
-short                   gsn_gand;
-short                   gsn_kubaz;
-short                   gsn_togorian;
-short                   gsn_yevethan;
+short gsn_common;
+short gsn_wookiee;
+short gsn_twilek;
+short gsn_rodian;
+short gsn_hutt;
+short gsn_mon_calamari;
+short gsn_noghri;
+short gsn_gamorrean;
+short gsn_jawa;
+short gsn_adarian;
+short gsn_ewok;
+short gsn_verpine;
+short gsn_defel;
+short gsn_trandoshan;
+short gsn_chadra_fan;
+short gsn_quarren;
+short gsn_sullustan;
+short gsn_barabel;
+short gsn_firrerreo;
+short gsn_bothan;
+short gsn_coynite;
+short gsn_duros;
+short gsn_gand;
+short gsn_kubaz;
+short gsn_togorian;
+short gsn_yevethan;
 
 /* for searching */
-short                   gsn_first_spell;
-short                   gsn_first_skill;
-short                   gsn_first_weapon;
-short                   gsn_first_tongue;
-short                   gsn_top_sn;
-
+short gsn_first_spell = 0;
+short gsn_first_skill = 0;
+short gsn_first_weapon = 0;
+short gsn_first_tongue = 0;
+short gsn_top_sn = 0;
 
 /*
  * Locals.
  */
-MOB_INDEX_DATA *        mob_index_hash          [MAX_KEY_HASH];
-OBJ_INDEX_DATA *        obj_index_hash          [MAX_KEY_HASH];
-ROOM_INDEX_DATA *       room_index_hash         [MAX_KEY_HASH];
+MOB_INDEX_DATA *mob_index_hash[MAX_KEY_HASH];
+OBJ_INDEX_DATA *obj_index_hash[MAX_KEY_HASH];
+ROOM_INDEX_DATA *room_index_hash[MAX_KEY_HASH];
 
-AREA_DATA *             first_area;
-AREA_DATA *             last_area;
-AREA_DATA *             first_build;
-AREA_DATA *             last_build;
-AREA_DATA *             first_asort;
-AREA_DATA *             last_asort;
-AREA_DATA *             first_bsort;
-AREA_DATA *             last_bsort;
+AREA_DATA *first_area = NULL;
+AREA_DATA *last_area = NULL;
+AREA_DATA *first_build = NULL;
+AREA_DATA *last_build = NULL;
+AREA_DATA *first_asort = NULL;
+AREA_DATA *last_asort = NULL;
+AREA_DATA *first_bsort = NULL;
+AREA_DATA *last_bsort = NULL;
 
-SYSTEM_DATA             sysdata;
+SYSTEM_DATA sysdata;
 
-int                     top_affect;
-int                     top_area;
-int                     top_ed;
-int                     top_exit;
-int                     top_help;
-int                     top_mob_index;
-int                     top_obj_index;
-int                     top_reset;
-int                     top_room;
-int                     top_shop;
-int                     top_repair;
-int                     top_vroom;
+int top_affect = 0;
+int top_area = 0;
+int top_ed = 0;
+int top_exit = 0;
+int top_help = 0;
+int top_mob_index = 0;
+int top_obj_index = 0;
+int top_reset = 0;
+int top_room = 0;
+int top_shop = 0;
+int top_repair = 0;
+int top_vroom = 0;
 
 /*
  * Semi-locals.
  */
-bool                    fBootDb;
-FILE *                  fpArea;
-char                    strArea[MAX_INPUT_LENGTH];
-
-
+bool fBootDb = FALSE;
+FILE *fpArea = NULL;
+char strArea[MAX_INPUT_LENGTH];
 
 /*
  * Local booting procedures.
@@ -411,10 +401,6 @@ void boot_db( bool fCopyOver )
   load_skill_table();
   sort_skill_table();
 
-  gsn_first_spell  = 0;
-  gsn_first_skill  = 0;
-  gsn_first_weapon = 0;
-  gsn_first_tongue = 0;
   gsn_top_sn         = top_sn;
 
   for ( x = 0; x < top_sn; x++ )
@@ -437,31 +423,8 @@ void boot_db( bool fCopyOver )
   make_wizlist();
 
   fBootDb               = TRUE;
-
-  nummobsloaded = 0;
-  numobjsloaded = 0;
-  physicalobjects       = 0;
   sysdata.maxplayers    = 0;
-  first_object  = NULL;
-  last_object           = NULL;
-  first_char            = NULL;
-  last_char             = NULL;
-  first_area            = NULL;
-  last_area             = NULL;
-  first_build           = NULL;
-  last_area             = NULL;
-  first_shop            = NULL;
-  last_shop             = NULL;
-  first_repair  = NULL;
-  last_repair           = NULL;
-  first_teleport        = NULL;
-  last_teleport = NULL;
-  first_asort           = NULL;
-  last_asort            = NULL;
-  extracted_obj_queue   = NULL;
-  extracted_char_queue= NULL;
-  cur_qobjs             = 0;
-  cur_qchars            = 0;
+
   cur_char              = NULL;
   cur_obj               = 0;
   cur_obj_serial        = 0;
@@ -469,10 +432,11 @@ void boot_db( bool fCopyOver )
   cur_obj_extracted     = FALSE;
   cur_room              = NULL;
   quitting_char = NULL;
-  loading_char  = NULL;
-  saving_char           = NULL;
+  loading_char = NULL;
+  saving_char = NULL;
   CREATE( auction, AUCTION_DATA, 1);
   auction->item         = NULL;
+
   for ( wear = 0; wear < MAX_WEAR; wear++ )
     for ( x = 0; x < MAX_LAYERS; x++ )
       save_equipment[wear][x] = NULL;
@@ -481,7 +445,8 @@ void boot_db( bool fCopyOver )
    * Init random number generator.
    */
   log_string("Initializing random number generator");
-  init_mm( );
+  init_mm();
+  srand( time(0) );
 
   /*
    * Set time and weather.
@@ -500,24 +465,33 @@ void boot_db( bool fCopyOver )
     time_info.month     = lmonth % 17;
     time_info.year      = lmonth / 17;
 
-    if ( time_info.hour <  5 ) weather_info.sunlight = SUN_DARK;
-    else if ( time_info.hour <  6 ) weather_info.sunlight = SUN_RISE;
-    else if ( time_info.hour < 19 ) weather_info.sunlight = SUN_LIGHT;
-    else if ( time_info.hour < 20 ) weather_info.sunlight = SUN_SET;
-    else                            weather_info.sunlight = SUN_DARK;
+    if ( time_info.hour <  5 )
+      weather_info.sunlight = SUN_DARK;
+    else if ( time_info.hour <  6 )
+      weather_info.sunlight = SUN_RISE;
+    else if ( time_info.hour < 19 )
+      weather_info.sunlight = SUN_LIGHT;
+    else if ( time_info.hour < 20 )
+      weather_info.sunlight = SUN_SET;
+    else
+      weather_info.sunlight = SUN_DARK;
 
     weather_info.change = 0;
     weather_info.mmhg   = 960;
+
     if ( time_info.month >= 7 && time_info.month <=12 )
       weather_info.mmhg += number_range( 1, 50 );
     else
       weather_info.mmhg += number_range( 1, 80 );
 
-    if ( weather_info.mmhg <=  980 ) weather_info.sky = SKY_LIGHTNING;
-    else if ( weather_info.mmhg <= 1000 ) weather_info.sky = SKY_RAINING;
-    else if ( weather_info.mmhg <= 1020 ) weather_info.sky = SKY_CLOUDY;
-    else                                  weather_info.sky = SKY_CLOUDLESS;
-
+    if ( weather_info.mmhg <=  980 )
+      weather_info.sky = SKY_LIGHTNING;
+    else if ( weather_info.mmhg <= 1000 )
+      weather_info.sky = SKY_RAINING;
+    else if ( weather_info.mmhg <= 1020 )
+      weather_info.sky = SKY_CLOUDY;
+    else
+      weather_info.sky = SKY_CLOUDLESS;
   }
 
 
@@ -685,6 +659,7 @@ void boot_db( bool fCopyOver )
     FILE *fpList;
 
     log_string("Reading in area files...");
+
     if ( ( fpList = fopen( AREA_LIST, "r" ) ) == NULL )
       {
         shutdown_mud( "Unable to open area list" );
@@ -694,12 +669,14 @@ void boot_db( bool fCopyOver )
     for ( ; ; )
       {
         strcpy( strArea, fread_word( fpList ) );
+
         if ( strArea[0] == '$' )
           break;
 
         load_area_file( last_area, strArea );
 
       }
+
     fclose( fpList );
   }
 
@@ -709,7 +686,6 @@ void boot_db( bool fCopyOver )
    *
    */
   init_supermob();
-
 
   /*
    * Fix up exits.
@@ -1867,7 +1843,6 @@ void load_repairs( AREA_DATA *tarea, FILE *fp )
       last_repair               = rShop;
       top_repair++;
     }
-  return;
 }
 
 
@@ -2780,58 +2755,6 @@ ROOM_INDEX_DATA *get_room_index( int vnum )
   return NULL;
 }
 
-void do_memory( CHAR_DATA *ch, char *argument )
-{
-  char arg[MAX_INPUT_LENGTH];
-  int hash;
-
-  argument = one_argument( argument, arg );
-  ch_printf( ch, "Affects %5d    Areas   %5d\r\n",  top_affect, top_area   );
-  ch_printf( ch, "ExtDes  %5d    Exits   %5d\r\n", top_ed,       top_exit   );
-  ch_printf( ch, "Helps   %5d    Resets  %5d\r\n", top_help,   top_reset  );
-  ch_printf( ch, "IdxMobs %5d    Mobs    %5d\r\n", top_mob_index, nummobsloaded );
-  ch_printf( ch, "IdxObjs %5d    Objs    %5d (%d)\r\n", top_obj_index, numobjsloaded, physicalobjects );
-  ch_printf( ch, "Rooms   %5d    VRooms  %5d\r\n", top_room,   top_vroom   );
-  ch_printf( ch, "Shops   %5d    RepShps %5d\r\n", top_shop,   top_repair );
-  ch_printf( ch, "CurOq's %5d    CurCq's %5d\r\n", cur_qobjs,  cur_qchars );
-  ch_printf( ch, "Players %5d    Maxplrs %5d\r\n", num_descriptors, sysdata.maxplayers );
-  ch_printf( ch, "MaxEver %5d    Topsn   %5d (%d)\r\n", sysdata.alltimemax, top_sn, MAX_SKILL );
-  ch_printf( ch, "MaxEver time recorded at:   %s\r\n", sysdata.time_of_max );
-  if ( !str_cmp( arg, "check" ) )
-    {
-#ifdef HASHSTR
-      send_to_char( check_hash(argument), ch );
-#else
-      send_to_char( "Hash strings not enabled.\r\n", ch );
-#endif
-      return;
-    }
-  if ( !str_cmp( arg, "showhigh" ) )
-    {
-#ifdef HASHSTR
-      show_high_hash( atoi(argument) );
-#else
-      send_to_char( "Hash strings not enabled.\r\n", ch );
-#endif
-      return;
-    }
-  if ( argument[0] != '\0' )
-    hash = atoi(argument);
-  else
-    hash = -1;
-  if ( !str_cmp( arg, "hash" ) )
-    {
-#ifdef HASHSTR
-      ch_printf( ch, "Hash statistics:\r\n%s", hash_stats() );
-      if ( hash != -1 )
-        hash_dump( hash );
-#else
-      send_to_char( "Hash strings not enabled.\r\n", ch );
-#endif
-    }
-  return;
-}
-
 /*
  * Reports a bug.
  */
@@ -2946,15 +2869,6 @@ void show_file( CHAR_DATA *ch, const char *filename )
           num = 0;
         }
     }
-}
-
-/*
- * Show the boot log file                                       -Thoric
- */
-void do_dmesg( CHAR_DATA *ch, char *argument )
-{
-  set_pager_color( AT_LOG, ch );
-  show_file( ch, BOOTLOG_FILE );
 }
 
 /*
@@ -3207,13 +3121,6 @@ void make_wizlist( )
   last_wiz = NULL;
 
 }
-
-
-void do_makewizlist( CHAR_DATA *ch, char *argument )
-{
-  make_wizlist();
-}
-
 
 /* mud prog functions */
 
@@ -4594,30 +4501,35 @@ void sort_area( AREA_DATA *pArea, bool proto )
  * Sorted, and flagged if loaded.
  */
 void show_vnums( CHAR_DATA *ch, int low, int high, bool proto, bool shownl,
-                 char *loadst, char *notloadst )
+                 const char *loadst, const char *notloadst )
 {
   AREA_DATA *pArea, *first_sort;
   int count, loaded;
 
   count = 0;    loaded = 0;
   set_pager_color( AT_PLAIN, ch );
+
   if ( proto )
     first_sort = first_bsort;
   else
     first_sort = first_asort;
+
   for ( pArea = first_sort; pArea; pArea = pArea->next_sort )
     {
       if ( IS_SET( pArea->status, AREA_DELETED ) )
         continue;
+
       if ( pArea->low_r_vnum < low )
         continue;
+
       if ( pArea->hi_r_vnum > high )
         break;
+
       if ( IS_SET(pArea->status, AREA_LOADED) )
         loaded++;
-      else
-        if ( !shownl )
+      else if ( !shownl )
           continue;
+
       pager_printf(ch, "%-15s| Rooms: %5d - %-5d"
                    " Objs: %5d - %-5d Mobs: %5d - %-5d%s\r\n",
                    (pArea->filename ? pArea->filename : "(invalid)"),
@@ -4627,77 +4539,8 @@ void show_vnums( CHAR_DATA *ch, int low, int high, bool proto, bool shownl,
                    IS_SET(pArea->status, AREA_LOADED) ? loadst : notloadst );
       count++;
     }
+
   pager_printf( ch, "Areas listed: %d  Loaded: %d\r\n", count, loaded );
-  return;
-}
-
-/*
- * Shows prototype vnums ranges, and if loaded
- */
-
-void do_vnums( CHAR_DATA *ch, char *argument )
-{
-  char arg1[MAX_INPUT_LENGTH];
-  char arg2[MAX_INPUT_LENGTH];
-  int low, high;
-
-  argument = one_argument( argument, arg1 );
-  argument = one_argument( argument, arg2 );
-  low = 0;      high = 32766;
-  if ( arg1[0] != '\0' )
-    {
-      low = atoi(arg1);
-      if ( arg2[0] != '\0' )
-        high = atoi(arg2);
-    }
-  show_vnums( ch, low, high, TRUE, TRUE, " *", "" );
-}
-
-/*
- * Shows installed areas, sorted.  Mark unloaded areas with an X
- */
-void do_zones( CHAR_DATA *ch, char *argument )
-{
-  char arg1[MAX_INPUT_LENGTH];
-  char arg2[MAX_INPUT_LENGTH];
-  int low, high;
-
-  do_vnums( ch, argument);
-
-  argument = one_argument( argument, arg1 );
-  argument = one_argument( argument, arg2 );
-  low = 0;      high = 32766;
-
-  if ( arg1[0] != '\0' )
-    {
-      low = atoi(arg1);
-      if ( arg2[0] != '\0' )
-        high = atoi(arg2);
-    }
-
-  show_vnums( ch, low, high, FALSE, TRUE, "", " X" );
-
-}
-
-/*
- * Show prototype areas, sorted.  Only show loaded areas
- */
-void do_newzones( CHAR_DATA *ch, char *argument )
-{
-  char arg1[MAX_INPUT_LENGTH];
-  char arg2[MAX_INPUT_LENGTH];
-  int low, high;
-
-  argument = one_argument( argument, arg1 );
-  argument = one_argument( argument, arg2 );
-  low = 0;      high = 32766;
-  if ( arg1[0] != '\0' )
-    {
-      low = atoi(arg1);
-      if ( arg2[0] != '\0' )
-        high = atoi(arg2);
-    }
-  show_vnums( ch, low, high, TRUE, FALSE, "", " X" );
 }
 
 /*
@@ -4951,307 +4794,6 @@ void load_banlist( void )
         }
       LINK( pban, first_ban, last_ban, next, prev );
     }
-}
-
-/* Check to make sure range of vnums is free - Scryn 2/27/96 */
-
-void do_check_vnums( CHAR_DATA *ch, char *argument )
-{
-  char buf[MAX_STRING_LENGTH];
-  char buf2[MAX_STRING_LENGTH];
-  AREA_DATA *pArea;
-  char arg1[MAX_STRING_LENGTH];
-  char arg2[MAX_STRING_LENGTH];
-  bool room, mob, obj, all, area_conflict;
-  int low_range, high_range;
-
-  room = FALSE;
-  mob  = FALSE;
-  obj  = FALSE;
-  all  = FALSE;
-
-  argument = one_argument( argument, arg1 );
-  argument = one_argument( argument, arg2 );
-
-  if (arg1[0] == '\0')
-    {
-      send_to_char("Please specify room, mob, object, or all as your first argument.\r\n", ch);
-      return;
-    }
-
-  if(!str_cmp(arg1, "room"))
-    room = TRUE;
-
-  else if(!str_cmp(arg1, "mob"))
-    mob = TRUE;
-
-  else if(!str_cmp(arg1, "object"))
-    obj = TRUE;
-
-  else if(!str_cmp(arg1, "all"))
-    all = TRUE;
-  else
-    {
-      send_to_char("Please specify room, mob, or object as your first argument.\r\n", ch);
-      return;
-    }
-
-  if(arg2[0] == '\0')
-    {
-      send_to_char("Please specify the low end of the range to be searched.\r\n", ch);
-      return;
-    }
-
-  if(argument[0] == '\0')
-    {
-      send_to_char("Please specify the high end of the range to be searched.\r\n", ch);
-      return;
-    }
-
-  low_range = atoi(arg2);
-  high_range = atoi(argument);
-
-  if (low_range < MIN_VNUM || low_range > MAX_VNUM )
-    {
-      send_to_char("Invalid argument for bottom of range.\r\n", ch);
-      return;
-    }
-
-  if (high_range < MIN_VNUM || high_range > MAX_VNUM )
-    {
-      send_to_char("Invalid argument for top of range.\r\n", ch);
-      return;
-    }
-
-  if (high_range < low_range)
-    {
-      send_to_char("Bottom of range must be below top of range.\r\n", ch);
-      return;
-    }
-
-  if (all)
-    {
-      sprintf(buf, "room %d %d", low_range, high_range);
-      do_check_vnums(ch, buf);
-      sprintf(buf, "mob %d %d", low_range, high_range);
-      do_check_vnums(ch, buf);
-      sprintf(buf, "object %d %d", low_range, high_range);
-      do_check_vnums(ch, buf);
-      return;
-    }
-  set_char_color( AT_PLAIN, ch );
-
-  for ( pArea = first_asort; pArea; pArea = pArea->next_sort )
-    {
-      area_conflict = FALSE;
-      if ( IS_SET( pArea->status, AREA_DELETED ) )
-        continue;
-      else
-        if (room)
-          {
-            if ( low_range < pArea->low_r_vnum && pArea->low_r_vnum < high_range )
-              area_conflict = TRUE;
-
-            if ( low_range < pArea->hi_r_vnum && pArea->hi_r_vnum < high_range )
-              area_conflict = TRUE;
-
-            if ( ( low_range >= pArea->low_r_vnum )
-                 && ( low_range <= pArea->hi_r_vnum ) )
-              area_conflict = TRUE;
-
-            if ( ( high_range <= pArea->hi_r_vnum )
-                 && ( high_range >= pArea->low_r_vnum ) )
-              area_conflict = TRUE;
-          }
-
-      if (mob)
-        {
-          if ( low_range < pArea->low_m_vnum && pArea->low_m_vnum < high_range )
-            area_conflict = TRUE;
-
-          if ( low_range < pArea->hi_m_vnum && pArea->hi_m_vnum < high_range )
-            area_conflict = TRUE;
-          if ( ( low_range >= pArea->low_m_vnum )
-               && ( low_range <= pArea->hi_m_vnum ) )
-            area_conflict = TRUE;
-
-          if ( ( high_range <= pArea->hi_m_vnum )
-               && ( high_range >= pArea->low_m_vnum ) )
-            area_conflict = TRUE;
-        }
-
-      if (obj)
-        {
-          if ( low_range < pArea->low_o_vnum && pArea->low_o_vnum < high_range )
-            area_conflict = TRUE;
-
-          if ( low_range < pArea->hi_o_vnum && pArea->hi_o_vnum < high_range )
-            area_conflict = TRUE;
-
-          if ( ( low_range >= pArea->low_o_vnum )
-               && ( low_range <= pArea->hi_o_vnum ) )
-            area_conflict = TRUE;
-
-          if ( ( high_range <= pArea->hi_o_vnum )
-               && ( high_range >= pArea->low_o_vnum ) )
-            area_conflict = TRUE;
-        }
-
-      if (area_conflict)
-        {
-          sprintf(buf, "Conflict:%-15s| ",
-                  (pArea->filename ? pArea->filename : "(invalid)"));
-          if(room)
-            sprintf( buf2, "Rooms: %5d - %-5d\r\n", pArea->low_r_vnum,
-                     pArea->hi_r_vnum);
-          if(mob)
-            sprintf( buf2, "Mobs: %5d - %-5d\r\n", pArea->low_m_vnum,
-                     pArea->hi_m_vnum);
-          if(obj)
-            sprintf( buf2, "Objects: %5d - %-5d\r\n", pArea->low_o_vnum,
-                     pArea->hi_o_vnum);
-
-          strcat( buf, buf2 );
-          send_to_char(buf, ch);
-        }
-    }
-  for ( pArea = first_bsort; pArea; pArea = pArea->next_sort )
-    {
-      area_conflict = FALSE;
-      if ( IS_SET( pArea->status, AREA_DELETED ) )
-        continue;
-      else
-        if (room)
-          {
-            if ( low_range < pArea->low_r_vnum && pArea->low_r_vnum < high_range )
-              area_conflict = TRUE;
-
-            if ( low_range < pArea->hi_r_vnum && pArea->hi_r_vnum < high_range )
-              area_conflict = TRUE;
-
-            if ( ( low_range >= pArea->low_r_vnum )
-                 && ( low_range <= pArea->hi_r_vnum ) )
-              area_conflict = TRUE;
-
-            if ( ( high_range <= pArea->hi_r_vnum )
-                 && ( high_range >= pArea->low_r_vnum ) )
-              area_conflict = TRUE;
-          }
-
-      if (mob)
-        {
-          if ( low_range < pArea->low_m_vnum && pArea->low_m_vnum < high_range )
-            area_conflict = TRUE;
-
-          if ( low_range < pArea->hi_m_vnum && pArea->hi_m_vnum < high_range )
-            area_conflict = TRUE;
-          if ( ( low_range >= pArea->low_m_vnum )
-               && ( low_range <= pArea->hi_m_vnum ) )
-            area_conflict = TRUE;
-
-          if ( ( high_range <= pArea->hi_m_vnum )
-               && ( high_range >= pArea->low_m_vnum ) )
-            area_conflict = TRUE;
-        }
-
-      if (obj)
-        {
-          if ( low_range < pArea->low_o_vnum && pArea->low_o_vnum < high_range )
-            area_conflict = TRUE;
-
-          if ( low_range < pArea->hi_o_vnum && pArea->hi_o_vnum < high_range )
-            area_conflict = TRUE;
-
-          if ( ( low_range >= pArea->low_o_vnum )
-               && ( low_range <= pArea->hi_o_vnum ) )
-            area_conflict = TRUE;
-
-          if ( ( high_range <= pArea->hi_o_vnum )
-               && ( high_range >= pArea->low_o_vnum ) )
-            area_conflict = TRUE;
-        }
-
-      if (area_conflict)
-        {
-          sprintf(buf, "Conflict:%-15s| ",
-                  (pArea->filename ? pArea->filename : "(invalid)"));
-          if(room)
-            sprintf( buf2, "Rooms: %5d - %-5d\r\n", pArea->low_r_vnum,
-                     pArea->hi_r_vnum);
-          if(mob)
-            sprintf( buf2, "Mobs: %5d - %-5d\r\n", pArea->low_m_vnum,
-                     pArea->hi_m_vnum);
-          if(obj)
-            sprintf( buf2, "Objects: %5d - %-5d\r\n", pArea->low_o_vnum,
-                     pArea->hi_o_vnum);
-
-          strcat( buf, buf2 );
-          send_to_char(buf, ch);
-        }
-    }
-
-  /*
-    for ( pArea = first_asort; pArea; pArea = pArea->next_sort )
-    {
-    area_conflict = FALSE;
-    if ( IS_SET( pArea->status, AREA_DELETED ) )
-    continue;
-    else
-    if (room)
-    if((pArea->low_r_vnum >= low_range)
-    && (pArea->hi_r_vnum <= high_range))
-    area_conflict = TRUE;
-
-    if (mob)
-    if((pArea->low_m_vnum >= low_range)
-    && (pArea->hi_m_vnum <= high_range))
-    area_conflict = TRUE;
-
-    if (obj)
-    if((pArea->low_o_vnum >= low_range)
-    && (pArea->hi_o_vnum <= high_range))
-    area_conflict = TRUE;
-
-    if (area_conflict)
-    ch_printf(ch, "Conflict:%-15s| Rooms: %5d - %-5d"
-    " Objs: %5d - %-5d Mobs: %5d - %-5d\r\n",
-    (pArea->filename ? pArea->filename : "(invalid)"),
-    pArea->low_r_vnum, pArea->hi_r_vnum,
-    pArea->low_o_vnum, pArea->hi_o_vnum,
-    pArea->low_m_vnum, pArea->hi_m_vnum );
-    }
-
-    for ( pArea = first_bsort; pArea; pArea = pArea->next_sort )
-    {
-    area_conflict = FALSE;
-    if ( IS_SET( pArea->status, AREA_DELETED ) )
-    continue;
-    else
-    if (room)
-    if((pArea->low_r_vnum >= low_range)
-    && (pArea->hi_r_vnum <= high_range))
-    area_conflict = TRUE;
-
-    if (mob)
-    if((pArea->low_m_vnum >= low_range)
-    && (pArea->hi_m_vnum <= high_range))
-    area_conflict = TRUE;
-
-    if (obj)
-    if((pArea->low_o_vnum >= low_range)
-    && (pArea->hi_o_vnum <= high_range))
-    area_conflict = TRUE;
-
-    if (area_conflict)
-    sprintf(ch, "Conflict:%-15s| Rooms: %5d - %-5d"
-    " Objs: %5d - %-5d Mobs: %5d - %-5d\r\n",
-    (pArea->filename ? pArea->filename : "(invalid)"),
-    pArea->low_r_vnum, pArea->hi_r_vnum,
-    pArea->low_o_vnum, pArea->hi_o_vnum,
-    pArea->low_m_vnum, pArea->hi_m_vnum );
-    }
-  */
-  return;
 }
 
 /*

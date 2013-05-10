@@ -68,8 +68,6 @@ bool qchance( int num )
   else return FALSE;
 }
 
-extern int      top_exit;
-
 void do_buyhome( CHAR_DATA *ch, char *argument )
 {
   ROOM_INDEX_DATA *room;

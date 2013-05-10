@@ -25,8 +25,6 @@
 #include <ctype.h>
 #include "mud.h"
 
-extern int top_ed;
-
 bool can_rmodify( const CHAR_DATA *ch, const ROOM_INDEX_DATA *room )
 {
   short vnum = room->vnum;

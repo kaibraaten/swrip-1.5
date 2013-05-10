@@ -30,11 +30,6 @@
 
 #define BFS_MARK         BV01
 
-extern int              top_exit;
-extern int              top_ed;
-extern int              top_affect;
-extern int              cur_qobjs;
-extern int              cur_qchars;
 extern CHAR_DATA *      gch_prev;
 extern OBJ_DATA  *      gobj_prev;
 
@@ -2858,8 +2853,6 @@ void clean_mob( MOB_INDEX_DATA *mob )
   mob->defposition = 0;    mob->height          = 0;
   mob->weight    = 0;
 }
-
-extern int top_reset;
 
 /*
  * Remove all resets from an area                               -Thoric

@@ -1,7 +1,5 @@
 #include "mud.h"
 
-extern int top_area;
-
 void do_areas( CHAR_DATA *ch, char *argument )
 {
   AREA_DATA *pArea;

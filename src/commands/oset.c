@@ -1,8 +1,6 @@
 #include <string.h>
 #include "mud.h"
 
-extern int top_affect;
-
 void do_oset( CHAR_DATA *ch, char *argument )
 {
   char arg1 [MAX_INPUT_LENGTH];

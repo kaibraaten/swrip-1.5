@@ -1,7 +1,5 @@
 #include "mud.h"
 
-extern int top_area;
-
 /*
  * A complicated to use command as it currently exists.         -Thoric
  * Once area->author and area->name are cleaned up... it will be easier

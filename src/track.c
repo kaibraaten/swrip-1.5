@@ -34,10 +34,8 @@
 
 #define TRACK_THROUGH_DOORS
 
-extern short	top_room;
-
 bool mob_snipe( CHAR_DATA *ch , CHAR_DATA *victim);
-ch_ret  one_hit( CHAR_DATA *ch, CHAR_DATA *victim, int dt );
+ch_ret one_hit( CHAR_DATA *ch, CHAR_DATA *victim, int dt );
 
 /* You can define or not define TRACK_THOUGH_DOORS, above, depending on
    whether or not you want track to find paths which lead through closed

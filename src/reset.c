@@ -45,7 +45,6 @@
 #include "mud.h"
 
 /* Externals */
-extern  int     top_reset;
 RESET_DATA *    parse_reset( AREA_DATA *tarea, char *argument,
 			     CHAR_DATA *ch );
 
