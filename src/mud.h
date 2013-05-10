@@ -3758,7 +3758,6 @@ DECLARE_DO_FUN( do_mlist        );
 DECLARE_DO_FUN( do_mount        );
 DECLARE_DO_FUN( do_mset         );
 DECLARE_DO_FUN( do_mstat        );
-DECLARE_DO_FUN( do_murde        );
 DECLARE_DO_FUN( do_murder       );
 DECLARE_DO_FUN( do_music        );
 DECLARE_DO_FUN( do_mwhere       );

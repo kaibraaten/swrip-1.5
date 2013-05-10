@@ -114,6 +114,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o \
 	$(CMDDIR)/examine.o \
 	$(CMDDIR)/exits.o \
 	$(CMDDIR)/fixchar.o \
+	$(CMDDIR)/flee.o \
 	$(CMDDIR)/foldarea.o \
 	$(CMDDIR)/follow.o \
 	$(CMDDIR)/for.o \
@@ -144,6 +145,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o \
 	$(CMDDIR)/installarea.o \
 	$(CMDDIR)/invis.o \
 	$(CMDDIR)/junk.o \
+	$(CMDDIR)/kill.o \
 	$(CMDDIR)/languages.o \
 	$(CMDDIR)/leave.o \
 	$(CMDDIR)/litterbug.o \
@@ -168,6 +170,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o \
 	$(CMDDIR)/mpfind.o \
 	$(CMDDIR)/mset.o \
 	$(CMDDIR)/mstat.o \
+	$(CMDDIR)/murder.o \
 	$(CMDDIR)/music.o \
 	$(CMDDIR)/mwhere.o \
 	$(CMDDIR)/name.o \
@@ -247,6 +250,8 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o \
 	$(CMDDIR)/shutdown.o \
 	$(CMDDIR)/silence.o \
 	$(CMDDIR)/sit.o \
+	$(CMDDIR)/sla.o \
+	$(CMDDIR)/slay.o \
 	$(CMDDIR)/sleep.o \
 	$(CMDDIR)/slist.o \
 	$(CMDDIR)/snoop.o \
