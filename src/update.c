@@ -389,21 +389,22 @@ void gain_exp( CHAR_DATA *ch, long gain, int ability )
     }
 }
 
-long lose_exp( CHAR_DATA *ch, long loss, int ability )
+long lose_exp( CHAR_DATA *ch, int ability, long loss )
 {
   int current_exp = 0;
   int new_exp = 0;
+  int actual_loss = 0;
 
   if ( IS_NPC(ch) )
     return 0;
 
   current_exp = get_exp( ch, ability );
-  loss = UMAX(loss, 0);
-  new_exp = current_exp - loss;
+  actual_loss = UMAX( loss, 0 );
+  new_exp = current_exp - actual_loss;
 
   set_exp( ch, ability, new_exp );
 
-  return loss;
+  return actual_loss;
 }
 
 /*

@@ -51,7 +51,7 @@ void do_resign( CHAR_DATA *ch, char *argument )
   act( AT_MAGIC, "You resign your position in $t", ch, clan->name, NULL , TO_CHAR );
 
   xp_to_lose = UMAX( get_exp( ch, DIPLOMACY_ABILITY ) - exp_level( ch->skill_level[DIPLOMACY_ABILITY]  ) , 0 );
-  xp_actually_lost = lose_exp( ch, xp_to_lose, DIPLOMACY_ABILITY );
+  xp_actually_lost = lose_exp( ch, DIPLOMACY_ABILITY, xp_to_lose );
   ch_printf( ch, "You lose %ld diplomacy experience.\r\n", xp_actually_lost );
 
   DISPOSE( ch->pcdata->bestowments );

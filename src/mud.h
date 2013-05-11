@@ -4750,7 +4750,7 @@ extern "C" {
   /* update.c */
   void advance_level( CHAR_DATA *ch , int ability );
   void gain_exp( CHAR_DATA *ch, long gain , int ability );
-  long lose_exp( CHAR_DATA *ch, long loss, int ability );
+  long lose_exp( CHAR_DATA *ch, int ability, long loss );
   void gain_condition( CHAR_DATA *ch, int iCond, int value );
   void update_handler( void );
   void reboot_check( time_t reset );

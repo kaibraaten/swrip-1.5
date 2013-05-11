@@ -1616,7 +1616,7 @@ ch_ret damage( CHAR_DATA *ch, CHAR_DATA *victim, int dam, int dt )
       if ( IS_NPC( ch ) && !IS_NPC( victim ) )
         {
           long xp_to_lose = UMAX( ( get_exp( victim, COMBAT_ABILITY ) - exp_level( victim->skill_level[COMBAT_ABILITY] ) ) , 0 );
-	  long xp_actually_lost = lose_exp( victim, xp_to_lose, COMBAT_ABILITY );
+	  long xp_actually_lost = lose_exp( victim, COMBAT_ABILITY, xp_to_lose );
 
           ch_printf( victim, "You lose %ld experience.\r\n", xp_actually_lost );
         }
