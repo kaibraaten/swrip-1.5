@@ -21,8 +21,8 @@
  *                          Main mud header file                           *
  ****************************************************************************/
 
-#ifndef _MUD_H_
-#define _MUD_H_
+#ifndef _SWRIP_MUD_H_
+#define _SWRIP_MUD_H_
 
 #include <utility.h>
 #include <stdio.h>

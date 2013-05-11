@@ -23,8 +23,8 @@
  http://dotd.mudservices.com  dotd@dotd.mudservices.com
 ******************************************************/
 
-#ifndef _ALIAS_H_
-#define _ALIAS_H_
+#ifndef _SWRIP_ALIAS_H_
+#define _SWRIP_ALIAS_H_
 
 typedef struct alias_type ALIAS_DATA;
 

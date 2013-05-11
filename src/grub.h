@@ -16,6 +16,8 @@
 #ifndef _SWRIP_GRUB_H_
 #define _SWRIP_GRUB_H_
 
+#include "mud.h"
+
 #define MAX_DISPLAY_LINES  14000      /* Size of Sort Array             */
 #define MAX_SITE_LENGTH       16
 #define MAX_FIELD_LENGTH      20
@@ -25,10 +27,6 @@
 
 typedef struct gr_struct GR_STRUCT;
 typedef struct go_struct GO_STRUCT;
-
-extern OBJ_INDEX_DATA *obj_index_hash[MAX_KEY_HASH];
-extern ROOM_INDEX_DATA *room_index_hash[MAX_KEY_HASH];
-extern MOB_INDEX_DATA *mob_index_hash[MAX_KEY_HASH];
 
 struct field_struct         /* field table - info re each field          */
 {

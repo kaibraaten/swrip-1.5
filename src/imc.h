@@ -8,8 +8,8 @@
  * License terms are available in the imc2freedom.license file.
  */
 
-#ifndef __IMC2_H__
-#define __IMC2_H__
+#ifndef _SWRIP_IMC2_H_
+#define _SWRIP_IMC2_H_
 
 typedef struct imc_siteinfo SITEINFO;  /* The given mud :) */
 typedef struct imcchar_data IMC_CHARDATA; /* Player flags */

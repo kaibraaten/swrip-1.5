@@ -4,6 +4,10 @@
 #include "mud.h"
 #include "grub.h"
 
+extern OBJ_INDEX_DATA *obj_index_hash[MAX_KEY_HASH];
+extern ROOM_INDEX_DATA *room_index_hash[MAX_KEY_HASH];
+extern MOB_INDEX_DATA *mob_index_hash[MAX_KEY_HASH];
+
 static int diag_int_comp(const void *i, const void *j);
 static void diagnose_help (CHAR_DATA *ch);
 static void diag_ins (OBJ_INDEX_DATA *p, int siz, OBJ_INDEX_DATA **f, CHAR_DATA *ch);

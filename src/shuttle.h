@@ -1,5 +1,5 @@
-#ifndef _OLC_SHUTTLE_
-#define _OLC_SHUTTLE_
+#ifndef _SWRIP_SHUTTLE_H_
+#define _SWRIP_SHUTTLE_H_
 
 #define OLC_SHUTTLE
 

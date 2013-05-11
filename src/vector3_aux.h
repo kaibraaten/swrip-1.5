@@ -23,8 +23,8 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#ifndef _VECTOR3_AUX_H_
-#define _VECTOR3_AUX_H_
+#ifndef _SWRIP_VECTOR3_AUX_H_
+#define _SWRIP_VECTOR3_AUX_H_
 
 #include "mud.h"
 
