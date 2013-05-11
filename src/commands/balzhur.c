@@ -49,7 +49,7 @@ void do_balzhur( CHAR_DATA *ch, char *argument )
 
     for ( ability = 0 ; ability < MAX_ABILITY ; ability++ )
       {
-        victim->experience[ability] = 1;
+        set_exp( victim, ability, 1 );
         victim->skill_level[ability] = 1;
       }
   }

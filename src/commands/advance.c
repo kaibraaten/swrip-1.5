@@ -74,10 +74,12 @@ void do_advance( CHAR_DATA *ch, char *argument )
       send_to_char( "Lowering a player's level!\r\n", ch );
       set_char_color( AT_IMMORT, victim );
       send_to_char( "Cursed and forsaken! The gods have lowered your level.\r\n", victim );
-      victim->experience[ability] = 0;
+      set_exp( victim, ability, 0 );
       victim->skill_level[ability] = 1;
+
       if ( ability == COMBAT_ABILITY )
         victim->max_hit = 500;
+
       if ( ability == FORCE_ABILITY )
         victim->max_mana = 0;
     }
@@ -89,7 +91,7 @@ void do_advance( CHAR_DATA *ch, char *argument )
 
   for ( iLevel = victim->skill_level[ability] ; iLevel < level; iLevel++ )
     {
-      victim->experience[ability] = exp_level(iLevel+1);
-      gain_exp( victim, 0 , ability );
+      set_exp( victim, ability, exp_level(iLevel+1) );
+      gain_exp( victim, 0, ability );
     }
 }
