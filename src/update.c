@@ -361,31 +361,49 @@ void advance_level( CHAR_DATA *ch, int ability )
     REMOVE_BIT( ch->act, PLR_BOUGHT_PET );
 }
 
-void gain_exp( CHAR_DATA *ch, int gain, int ability )
+void gain_exp( CHAR_DATA *ch, long gain, int ability )
 {
   if ( IS_NPC(ch) )
     return;
 
-  ch->experience[ability] = UMAX( 0, ch->experience[ability] + gain );
+  set_exp( ch, ability, UMAX( 0, get_exp( ch, ability ) + gain ) );
 
-  if (NOT_AUTHED(ch) && ch->experience[ability] >= exp_level(ch->skill_level[ability]+1))
+  if (NOT_AUTHED(ch) && get_exp( ch, ability ) >= exp_level(ch->skill_level[ability]+1))
     {
       send_to_char("You can not ascend to a higher level until you are authorized.\r\n", ch);
-      ch->experience[ability] = (exp_level( ch->skill_level[ability]+1 ) - 1);
+      set_exp( ch, ability, exp_level( ch->skill_level[ability]+1 ) - 1);
       return;
     }
 
-  while ( ch->experience[ability] >= exp_level( ch->skill_level[ability]+1))
+  while ( get_exp( ch, ability ) >= exp_level( ch->skill_level[ability]+1))
     {
       if ( ch->skill_level[ability] >= max_level(ch , ability) )
         {
-          ch->experience[ability] = (exp_level( ch->skill_level[ability]+1 ) - 1);
+          set_exp( ch, ability, exp_level( ch->skill_level[ability]+1 ) - 1);
           return;
         }
+
       set_char_color( AT_WHITE + AT_BLINK, ch );
       ch_printf( ch, "You have now obtained %s level %d!\r\n", ability_name[ability], ++ch->skill_level[ability] );
       advance_level( ch , ability);
     }
+}
+
+long lose_exp( CHAR_DATA *ch, long loss, int ability )
+{
+  int current_exp = 0;
+  int new_exp = 0;
+
+  if ( IS_NPC(ch) )
+    return 0;
+
+  current_exp = get_exp( ch, ability );
+  loss = UMAX(loss, 0);
+  new_exp = current_exp - loss;
+
+  set_exp( ch, ability, new_exp );
+
+  return loss;
 }
 
 /*

@@ -373,7 +373,7 @@ void fwrite_char( CHAR_DATA *ch, FILE *fp )
     int ability;
     for ( ability = 0 ; ability < MAX_ABILITY ; ability++ )
       fprintf( fp, "Ability        %d %d %ld\n",
-               ability , ch->skill_level[ability] , ch->experience[ability] );
+               ability, ch->skill_level[ability], get_exp( ch, ability ) );
   }
   fprintf( fp, "Clones         %d\n",   ch->pcdata->clones              );
   fprintf( fp, "Salary_time         %ld\n",     ch->pcdata->salary_date );
@@ -1066,7 +1066,7 @@ void fread_char( CHAR_DATA *ch, FILE *fp, bool preload )
               if ( x0 >= 0 && x0 < MAX_ABILITY )
                 {
                   ch->skill_level[x0] = x1;
-                  ch->experience[x0] = x2;
+                  set_exp( ch, x0, x2 );
                 }
               fMatch = TRUE;
               break;

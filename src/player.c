@@ -97,11 +97,12 @@ void do_score(CHAR_DATA * ch, char *argument)
     for ( ability = 0 ; ability < MAX_RL_ABILITY ; ability++ )
       if ( ability != FORCE_ABILITY || ch->skill_level[FORCE_ABILITY] > 1 )
         ch_printf( ch, "&c%-15s   &CLevel: %-3d   Max: %-3d   Exp: %-10ld   Next: %-10ld\r\n",
-                   ability_name[ability], ch->skill_level[ability], max_level(ch, ability), ch->experience[ability],
+                   ability_name[ability], ch->skill_level[ability], max_level(ch, ability),
+		   get_exp( ch, ability ),
                    exp_level( ch->skill_level[ability]+1 ) );
       else
         ch_printf( ch, "&c%-15s   &CLevel: %-3d   Max: ???   Exp: ???          Next: ???\r\n",
-                   ability_name[ability], ch->skill_level[ability], ch->experience[ability]);
+                   ability_name[ability], ch->skill_level[ability], get_exp( ch, ability ) );
   }
 
   send_to_char("&C----------------------------------------------------------------------------\r\n", ch);
@@ -623,11 +624,12 @@ void do_level( CHAR_DATA *ch, char *argument )
   for ( ability = 0 ; ability < MAX_RL_ABILITY ; ability++ )
     if ( ability != FORCE_ABILITY || ch->skill_level[FORCE_ABILITY] > 1 )
       ch_printf( ch, "%-15s   Level: %-3d   Max: %-3d   Exp: %-10ld   Next: %-10ld\r\n",
-                 ability_name[ability], ch->skill_level[ability], max_level(ch, ability), ch->experience[ability],
+                 ability_name[ability], ch->skill_level[ability], max_level(ch, ability),
+		 get_exp( ch, ability ),
                  exp_level( ch->skill_level[ability]+1 ) );
     else
       ch_printf( ch, "%-15s   Level: %-3d   Max: ???   Exp: ???          Next: ???\r\n",
-                 ability_name[ability], ch->skill_level[ability], ch->experience[ability]);
+                 ability_name[ability], ch->skill_level[ability], get_exp( ch, ability ) );
 }
 
 

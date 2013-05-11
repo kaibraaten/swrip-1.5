@@ -4564,7 +4564,8 @@ extern "C" {
 
   /* handler.c */
   void explode( OBJ_DATA *obj );
-  int get_exp( const CHAR_DATA *ch , int ability );
+  void set_exp( CHAR_DATA *ch, int ability, long xp );
+  long get_exp( const CHAR_DATA *ch, int ability );
   int get_exp_worth( const CHAR_DATA *ch );
   int exp_level( short level );
   short get_trust( const CHAR_DATA *ch );
@@ -4747,13 +4748,14 @@ extern "C" {
   void  hunt_victim( CHAR_DATA *ch );
 
   /* update.c */
-  void  advance_level( CHAR_DATA *ch , int ability );
-  void  gain_exp( CHAR_DATA *ch, int gain , int ability );
-  void  gain_condition( CHAR_DATA *ch, int iCond, int value );
-  void  update_handler( void );
-  void  reboot_check( time_t reset );
-  void    auction_update( void );
-  void  remove_portal( OBJ_DATA *portal );
+  void advance_level( CHAR_DATA *ch , int ability );
+  void gain_exp( CHAR_DATA *ch, long gain , int ability );
+  long lose_exp( CHAR_DATA *ch, long loss, int ability );
+  void gain_condition( CHAR_DATA *ch, int iCond, int value );
+  void update_handler( void );
+  void reboot_check( time_t reset );
+  void auction_update( void );
+  void remove_portal( OBJ_DATA *portal );
   int max_level( const CHAR_DATA *ch, int ability );
   bool is_droid( const CHAR_DATA *ch );
 

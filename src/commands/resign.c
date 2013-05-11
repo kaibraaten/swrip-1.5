@@ -3,7 +3,8 @@
 void do_resign( CHAR_DATA *ch, char *argument )
 {
   CLAN_DATA *clan = NULL;
-  long lose_exp = 0;
+  long xp_to_lose = 0;
+  long xp_actually_lost = 0;
 
   if ( IS_NPC(ch) || !ch->pcdata )
     {
@@ -49,9 +50,9 @@ void do_resign( CHAR_DATA *ch, char *argument )
   ch->pcdata->clan_name = STRALLOC( "" );
   act( AT_MAGIC, "You resign your position in $t", ch, clan->name, NULL , TO_CHAR );
 
-  lose_exp = UMAX( ch->experience[DIPLOMACY_ABILITY] - exp_level( ch->skill_level[DIPLOMACY_ABILITY]  ) , 0 );
-  ch_printf( ch, "You lose %ld diplomacy experience.\r\n", lose_exp );
-  ch->experience[DIPLOMACY_ABILITY] -= lose_exp;
+  xp_to_lose = UMAX( get_exp( ch, DIPLOMACY_ABILITY ) - exp_level( ch->skill_level[DIPLOMACY_ABILITY]  ) , 0 );
+  xp_actually_lost = lose_exp( ch, xp_to_lose, DIPLOMACY_ABILITY );
+  ch_printf( ch, "You lose %ld diplomacy experience.\r\n", xp_actually_lost );
 
   DISPOSE( ch->pcdata->bestowments );
   ch->pcdata->bestowments = str_dup("");

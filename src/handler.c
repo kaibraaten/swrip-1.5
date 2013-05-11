@@ -46,11 +46,11 @@ obj_ret          global_objcode;
 static bool is_wizvis( const CHAR_DATA *ch, const CHAR_DATA *victim );
 OBJ_DATA *group_object( OBJ_DATA *obj1, OBJ_DATA *obj2 );
 
-void room_explode( OBJ_DATA *obj , CHAR_DATA *xch, ROOM_INDEX_DATA *room );
-void room_explode_1( OBJ_DATA *obj , CHAR_DATA *xch, ROOM_INDEX_DATA *room , int blast );
-void room_explode_2( ROOM_INDEX_DATA *room , int blast );
+static void room_explode( OBJ_DATA *obj , CHAR_DATA *xch, ROOM_INDEX_DATA *room );
+static void room_explode_1( OBJ_DATA *obj , CHAR_DATA *xch, ROOM_INDEX_DATA *room , int blast );
+static void room_explode_2( ROOM_INDEX_DATA *room , int blast );
 
-void  explode( OBJ_DATA *obj )
+void explode( OBJ_DATA *obj )
 {
   if ( obj->armed_by )
     {
@@ -91,14 +91,12 @@ void  explode( OBJ_DATA *obj )
 
 void room_explode( OBJ_DATA *obj, CHAR_DATA *xch, ROOM_INDEX_DATA *room )
 {
-  int blast;
-
-  blast = (int) (obj->value[1] / 500) ;
+  int blast = (int) (obj->value[1] / 500) ;
   room_explode_1( obj , xch, room , blast );
   room_explode_2( room , blast );
 }
 
-void room_explode_1( OBJ_DATA *obj , CHAR_DATA *xch, ROOM_INDEX_DATA *room , int blast )
+void room_explode_1( OBJ_DATA *obj, CHAR_DATA *xch, ROOM_INDEX_DATA *room, int blast )
 {
   CHAR_DATA *rch;
   CHAR_DATA *rnext;
@@ -192,8 +190,8 @@ void room_explode_2( ROOM_INDEX_DATA *room , int blast )
 static bool is_wizvis( const CHAR_DATA *ch, const CHAR_DATA *victim )
 {
   if ( !IS_NPC(victim)
-       &&   IS_SET(victim->act, PLR_WIZINVIS)
-       &&   get_trust( ch ) < victim->pcdata->wizinvis )
+       && IS_SET(victim->act, PLR_WIZINVIS)
+       && get_trust( ch ) < victim->pcdata->wizinvis )
     return FALSE;
 
   return TRUE;
@@ -202,12 +200,29 @@ static bool is_wizvis( const CHAR_DATA *ch, const CHAR_DATA *victim )
 /*
  * Return how much exp a char has
  */
-int get_exp( const CHAR_DATA *ch, int ability )
+long get_exp( const CHAR_DATA *ch, int ability )
 {
   if ( ability >= MAX_ABILITY || ability < 0 )
     return 0;
 
   return ch->experience[ability];
+}
+
+void set_exp( CHAR_DATA *ch, int ability, long xp )
+{
+  if ( ability >= MAX_ABILITY || ability < 0 )
+    {
+      bug("%s: ability out of range: %d", __FUNCTION__, ability );
+      return;
+    }
+
+  if( xp < 0 )
+    {
+      bug( "%s: negative value %d invalid", xp );
+      return;
+    }
+
+  ch->experience[ability] = xp;
 }
 
 /*
@@ -242,11 +257,9 @@ int get_exp_worth( const CHAR_DATA *ch )
  */
 int exp_level( short level)
 {
-  int lvl;
+  int lvl = UMAX(0, level - 1);
 
-  lvl = UMAX(0, level - 1);
-
-  return ( lvl * lvl * 500 );
+  return lvl * lvl * 500;
 }
 
 /*
@@ -254,27 +267,30 @@ int exp_level( short level)
  */
 short level_exp( CHAR_DATA *ch, int xp )
 {
-  int x, lastx, y, tmp;
+  int x = LEVEL_SUPREME;
+  int lastx = x;
+  int y = 0;
 
-  x = LEVEL_SUPREME;
-  lastx = x;
-  y = 0;
   while ( !y )
     {
-      tmp = exp_level( x);
+      int tmp = exp_level( x);
+
       lastx = x;
+
       if ( tmp > xp )
         x /= 2;
+      else if (lastx != x )
+	x += ( x / 2 );
       else
-        if (lastx != x )
-          x += ( x / 2 );
-        else
-          y = x;
+	y = x;
     }
+
   if ( y < 1 )
     y = 1;
+
   if ( y > LEVEL_SUPREME )
     y = LEVEL_SUPREME;
+
   return y;
 }
 
