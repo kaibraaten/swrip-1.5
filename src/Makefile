@@ -98,6 +98,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o \
 	$(CMDDIR)/demote.o \
 	$(CMDDIR)/deny.o \
 	$(CMDDIR)/destroy.o \
+	$(CMDDIR)/diagnose.o \
 	$(CMDDIR)/disconnect.o \
 	$(CMDDIR)/dismiss.o \
 	$(CMDDIR)/dmsg.o \
@@ -128,6 +129,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o \
 	$(CMDDIR)/glance.o \
 	$(CMDDIR)/goto.o \
 	$(CMDDIR)/group.o \
+	$(CMDDIR)/grub.o \
 	$(CMDDIR)/gtell.o \
 	$(CMDDIR)/help.o \
 	$(CMDDIR)/hedit.o \
@@ -189,6 +191,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o \
 	$(CMDDIR)/oassign.o \
 	$(CMDDIR)/ocreate.o \
 	$(CMDDIR)/ofind.o \
+	$(CMDDIR)/ogrub.o \
 	$(CMDDIR)/oinvoke.o \
 	$(CMDDIR)/olist.o \
 	$(CMDDIR)/ooc.o \
@@ -228,6 +231,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o \
 	$(CMDDIR)/retire.o \
 	$(CMDDIR)/return.o \
 	$(CMDDIR)/retran.o \
+	$(CMDDIR)/rgrub.o \
 	$(CMDDIR)/rlist.o \
 	$(CMDDIR)/roster.o \
 	$(CMDDIR)/rpedit.o \
@@ -245,6 +249,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o \
 	$(CMDDIR)/shout.o \
 	$(CMDDIR)/shove.o \
 	$(CMDDIR)/showclan.o \
+	$(CMDDIR)/showlayers.o \
 	$(CMDDIR)/showstatistic.o \
 	$(CMDDIR)/showstatistic_web.o \
 	$(CMDDIR)/shutdown.o \
