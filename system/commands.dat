@@ -2079,14 +2079,6 @@ Log         0
 End
 
 #COMMAND
-Name        murde~
-Code        do_murde
-Position    7
-Level       5
-Log         0
-End
-
-#COMMAND
 Name        murder~
 Code        do_murder
 Position    7
