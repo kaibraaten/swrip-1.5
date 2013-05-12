@@ -55,7 +55,7 @@ void do_teach( CHAR_DATA *ch, char *argument )
           return;
         }
 
-      if ( victim->ability_level[skill_table[sn]->guild] < skill_table[sn]->min_level )
+      if ( get_level( victim, skill_table[sn]->guild ) < skill_table[sn]->min_level )
         {
           act( AT_TELL, "$n isn't ready to learn that yet.",
                victim, NULL, ch, TO_VICT );

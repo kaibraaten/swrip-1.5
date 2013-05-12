@@ -69,7 +69,7 @@ void do_advance( CHAR_DATA *ch, char *argument )
    *   Currently, an imp can lower another imp.
    *   -- Swiftest
    */
-  if ( level <= victim->ability_level[ability] )
+  if ( level <= get_level( victim, ability ) )
     {
       send_to_char( "Lowering a player's level!\r\n", ch );
       set_char_color( AT_IMMORT, victim );
@@ -89,7 +89,7 @@ void do_advance( CHAR_DATA *ch, char *argument )
       send_to_char( "The gods feel fit to raise your level!\r\n", victim );
     }
 
-  for ( iLevel = victim->ability_level[ability] ; iLevel < level; iLevel++ )
+  for ( iLevel = get_level( victim, ability ) ; iLevel < level; iLevel++ )
     {
       set_exp( victim, ability, exp_level(iLevel+1) );
       gain_exp( victim, ability, 0 );

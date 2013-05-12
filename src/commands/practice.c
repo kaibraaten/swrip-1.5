@@ -50,7 +50,8 @@ void do_practice( CHAR_DATA *ch, char *argument )
           if ( skill_table[sn]->guild < 0 || skill_table[sn]->guild >= MAX_ABILITY )
             continue;
 
-          if (  ch->pcdata->learned[sn] <= 0  &&  ch->ability_level[skill_table[sn]->guild] < skill_table[sn]->min_level )
+          if ( ch->pcdata->learned[sn] <= 0
+	       && get_level( ch, skill_table[sn]->guild ) < skill_table[sn]->min_level )
             continue;
 
           if ( ch->pcdata->learned[sn] == 0
@@ -113,7 +114,7 @@ void do_practice( CHAR_DATA *ch, char *argument )
         }
 
       if ( can_prac &&  !IS_NPC(ch)
-           &&   ch->ability_level[skill_table[sn]->guild] < skill_table[sn]->min_level )
+           && get_level( ch, skill_table[sn]->guild ) < skill_table[sn]->min_level )
         {
           act( AT_TELL, "$n tells you 'You're not ready to learn that yet...'",
                mob, NULL, ch, TO_VICT );
