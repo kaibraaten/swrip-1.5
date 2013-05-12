@@ -232,7 +232,7 @@ int get_exp_worth( const CHAR_DATA *ch )
 {
   int xp = 0;
 
-  xp = ch->skill_level[COMBAT_ABILITY] * ch->top_level * 50;
+  xp = ch->ability_level[COMBAT_ABILITY] * ch->top_level * 50;
   xp += ch->max_hit * 2;
   xp -= (ch->armor-50) * 2;
   xp += ( ch->barenumdie * ch->baresizedie + GET_DAMROLL(ch) ) * 50;
@@ -591,7 +591,7 @@ void affect_modify( CHAR_DATA *ch, AFFECT_DATA *paf, bool fAdd )
       if ( IS_VALID_SN(mod)
            &&  (skill=skill_table[mod]) != NULL
            &&   skill->type == SKILL_SPELL )
-        if ( (retcode=(*skill->spell_fun) ( mod, ch->skill_level[FORCE_ABILITY], ch, ch )) == rCHAR_DIED
+        if ( (retcode=(*skill->spell_fun) ( mod, ch->ability_level[FORCE_ABILITY], ch, ch )) == rCHAR_DIED
              ||   char_died(ch) )
           return;
       break;
@@ -3642,7 +3642,7 @@ void add_kill( CHAR_DATA *ch, CHAR_DATA *mob )
     return;
 
   vnum = mob->pIndexData->vnum;
-  track = URANGE( 2, ((ch->skill_level[COMBAT_ABILITY]+3) * MAX_KILLTRACK)/LEVEL_AVATAR, MAX_KILLTRACK );
+  track = URANGE( 2, ((ch->ability_level[COMBAT_ABILITY]+3) * MAX_KILLTRACK)/LEVEL_AVATAR, MAX_KILLTRACK );
   for ( x = 0; x < track; x++ )
     if ( ch->pcdata->killed[x].vnum == vnum )
       {
@@ -3677,7 +3677,7 @@ int times_killed( const CHAR_DATA *ch, const CHAR_DATA *mob )
     return 0;
 
   vnum = mob->pIndexData->vnum;
-  track = URANGE( 2, ((ch->skill_level[COMBAT_ABILITY]+3) * MAX_KILLTRACK)/LEVEL_AVATAR, MAX_KILLTRACK );
+  track = URANGE( 2, ((ch->ability_level[COMBAT_ABILITY]+3) * MAX_KILLTRACK)/LEVEL_AVATAR, MAX_KILLTRACK );
   for ( x = 0; x < track; x++ )
     if ( ch->pcdata->killed[x].vnum == vnum )
       return ch->pcdata->killed[x].count;

@@ -352,9 +352,9 @@ int max_level( const CHAR_DATA *ch, int ability)
 
 void advance_level( CHAR_DATA *ch, int ability )
 {
-  if ( ch->top_level < ch->skill_level[ability] && ch->top_level < 100 )
+  if ( ch->top_level < ch->ability_level[ability] && ch->top_level < 100 )
     {
-      ch->top_level = URANGE( 1, ch->skill_level[ability], 100 );
+      ch->top_level = URANGE( 1, ch->ability_level[ability], 100 );
     }
 
   if ( !IS_NPC(ch) )
@@ -368,23 +368,23 @@ void gain_exp( CHAR_DATA *ch, short ability, long gain )
 
   set_exp( ch, ability, UMAX( 0, get_exp( ch, ability ) + gain ) );
 
-  if (NOT_AUTHED(ch) && get_exp( ch, ability ) >= exp_level(ch->skill_level[ability]+1))
+  if (NOT_AUTHED(ch) && get_exp( ch, ability ) >= exp_level(ch->ability_level[ability]+1))
     {
       send_to_char("You can not ascend to a higher level until you are authorized.\r\n", ch);
-      set_exp( ch, ability, exp_level( ch->skill_level[ability]+1 ) - 1);
+      set_exp( ch, ability, exp_level( ch->ability_level[ability]+1 ) - 1);
       return;
     }
 
-  while ( get_exp( ch, ability ) >= exp_level( ch->skill_level[ability]+1))
+  while ( get_exp( ch, ability ) >= exp_level( ch->ability_level[ability]+1))
     {
-      if ( ch->skill_level[ability] >= max_level(ch , ability) )
+      if ( ch->ability_level[ability] >= max_level(ch , ability) )
         {
-          set_exp( ch, ability, exp_level( ch->skill_level[ability]+1 ) - 1);
+          set_exp( ch, ability, exp_level( ch->ability_level[ability]+1 ) - 1);
           return;
         }
 
       set_char_color( AT_WHITE + AT_BLINK, ch );
-      ch_printf( ch, "You have now obtained %s level %d!\r\n", ability_name[ability], ++ch->skill_level[ability] );
+      ch_printf( ch, "You have now obtained %s level %d!\r\n", ability_name[ability], ++ch->ability_level[ability] );
       advance_level( ch , ability);
     }
 }
@@ -461,10 +461,10 @@ int mana_gain( const CHAR_DATA *ch )
     }
   else
     {
-      if ( ch->skill_level[FORCE_ABILITY] <= 1 )
+      if ( ch->ability_level[FORCE_ABILITY] <= 1 )
         return (0 - ch->mana);
 
-      gain = UMIN( 5, ch->skill_level[FORCE_ABILITY] / 2 );
+      gain = UMIN( 5, ch->ability_level[FORCE_ABILITY] / 2 );
 
       if ( ch->position < POS_SLEEPING )
         return 0;
@@ -1332,7 +1332,7 @@ void char_update( void )
           if ( ch->hit  < ch->max_hit )
             ch->hit  += hit_gain(ch);
 
-          if ( ch->mana < ch->max_mana || ch->skill_level[FORCE_ABILITY] == 1 )
+          if ( ch->mana < ch->max_mana || ch->ability_level[FORCE_ABILITY] == 1 )
             ch->mana += mana_gain(ch);
 
           if ( ch->move < ch->max_move )

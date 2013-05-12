@@ -535,7 +535,7 @@ static void nanny_get_new_race( DESCRIPTOR_DATA *d, char *argument )
       return;
     }
 
-  write_to_buffer( d, "\r\nPlease choose a main ability from the folowing classes:\r\n", 0 );
+  write_to_buffer( d, "\r\nPlease choose a main ability from the following classes:\r\n", 0 );
   buf[0] = '\0';
   buf2[0] = '\0';
   halfmax = (MAX_ABILITY/2) + 1;
@@ -719,7 +719,7 @@ static void nanny_get_msp( DESCRIPTOR_DATA *d, char *argument )
 
   for ( ability =0 ; ability < MAX_ABILITY ; ability++ )
     {
-      ch->skill_level[ability] = 0;
+      ch->ability_level[ability] = 0;
     }
 
   ch->top_level = 0;
@@ -881,7 +881,7 @@ if ( (iLang = skill_lookup( "common" )) < 0 )
 
 	for ( ability =0 ; ability < MAX_ABILITY ; ability++ )
 	  {
-	    ch->skill_level[ability] = 1;
+	    ch->ability_level[ability] = 1;
 	    set_exp( ch, ability, 0 );
 	  }
       }

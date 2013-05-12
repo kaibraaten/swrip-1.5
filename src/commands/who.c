@@ -250,7 +250,7 @@ void do_who( CHAR_DATA *ch, char *argument )
 
       if (wch->perm_frc > 0 && (ch->top_level >= LEVEL_GOD) && !IS_IMMORTAL(wch))
         {
-          if(wch->skill_level[FORCE_ABILITY] > 1)
+          if(wch->ability_level[FORCE_ABILITY] > 1)
             force_char = '*';
           else
             force_char = '+';

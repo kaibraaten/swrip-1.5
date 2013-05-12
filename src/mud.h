@@ -2302,8 +2302,8 @@ struct  char_data
   short         substate;
   short         sex;
   short         race;
-  short              top_level;
-  short              skill_level[MAX_ABILITY];
+  short top_level;
+  short ability_level[MAX_ABILITY];
   short         trust;
   short         timer;
   short         wait;
@@ -3114,7 +3114,7 @@ extern  short                   gsn_yevethan;
 
 #define IS_AWAKE(ch)            ((ch)->position > POS_SLEEPING)
 #define GET_AC(ch)              ( (ch)->armor + ( IS_AWAKE(ch) ? dex_app[get_curr_dex(ch)].defensive : 0 ) \
-                                  - ( (ch)->race == RACE_DEFEL ? (ch)->skill_level[COMBAT_ABILITY]*2+5 : (ch)->skill_level[COMBAT_ABILITY]/2 ) )
+                                  - ( (ch)->race == RACE_DEFEL ? (ch)->ability_level[COMBAT_ABILITY]*2+5 : (ch)->ability_level[COMBAT_ABILITY]/2 ) )
 #define GET_HITROLL(ch)         ((ch)->hitroll                          \
                                  +str_app[get_curr_str(ch)].tohit       \
                                  +(2-(abs((ch)->mental_state)/10)))

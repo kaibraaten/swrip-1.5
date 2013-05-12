@@ -50,7 +50,7 @@ void do_balzhur( CHAR_DATA *ch, char *argument )
     for ( ability = 0 ; ability < MAX_ABILITY ; ability++ )
       {
         set_exp( victim, ability, 1 );
-        victim->skill_level[ability] = 1;
+        victim->ability_level[ability] = 1;
       }
   }
   victim->max_hit  = 500;

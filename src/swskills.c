@@ -261,7 +261,7 @@ void do_makeblade( CHAR_DATA *ch, char *argument )
   {
     long xpgain;
 
-    xpgain = UMIN( obj->cost*200 ,( exp_level(ch->skill_level[ENGINEERING_ABILITY]+1) - exp_level(ch->skill_level[ENGINEERING_ABILITY]) ) );
+    xpgain = UMIN( obj->cost*200 ,( exp_level(ch->ability_level[ENGINEERING_ABILITY]+1) - exp_level(ch->ability_level[ENGINEERING_ABILITY]) ) );
     gain_exp(ch, ENGINEERING_ABILITY, xpgain );
     ch_printf( ch , "You gain %d engineering experience.", xpgain );
   }
@@ -547,7 +547,7 @@ void do_makeblaster( CHAR_DATA *ch, char *argument )
   {
     long xpgain;
 
-    xpgain = UMIN( obj->cost*50 ,( exp_level(ch->skill_level[ENGINEERING_ABILITY]+1) - exp_level(ch->skill_level[ENGINEERING_ABILITY]) ) );
+    xpgain = UMIN( obj->cost*50 ,( exp_level(ch->ability_level[ENGINEERING_ABILITY]+1) - exp_level(ch->ability_level[ENGINEERING_ABILITY]) ) );
     gain_exp(ch, ENGINEERING_ABILITY, xpgain );
     ch_printf( ch , "You gain %d engineering experience.", xpgain );
   }
@@ -864,7 +864,7 @@ void do_makelightsaber( CHAR_DATA *ch, char *argument )
   {
     long xpgain;
 
-    xpgain = UMIN( obj->cost*50 , exp_level(ch->skill_level[FORCE_ABILITY]+1) );
+    xpgain = UMIN( obj->cost*50 , exp_level(ch->ability_level[FORCE_ABILITY]+1) );
     gain_exp(ch, FORCE_ABILITY, xpgain );
     ch_printf( ch , "You gain %d force experience.", xpgain );
   }
@@ -979,7 +979,7 @@ void do_makespice( CHAR_DATA *ch, char *argument )
   {
     long xpgain;
 
-    xpgain = UMIN( obj->cost*50 ,( exp_level(ch->skill_level[ENGINEERING_ABILITY]+1) - exp_level(ch->skill_level[ENGINEERING_ABILITY]) ) );
+    xpgain = UMIN( obj->cost*50 ,( exp_level(ch->ability_level[ENGINEERING_ABILITY]+1) - exp_level(ch->ability_level[ENGINEERING_ABILITY]) ) );
     gain_exp(ch, ENGINEERING_ABILITY, xpgain );
     ch_printf( ch , "You gain %d engineering experience.", xpgain );
   }
@@ -1187,7 +1187,7 @@ void do_makegrenade( CHAR_DATA *ch, char *argument )
   {
     long xpgain;
 
-    xpgain = UMIN( obj->cost*50 ,( exp_level(ch->skill_level[ENGINEERING_ABILITY]+1) - exp_level(ch->skill_level[ENGINEERING_ABILITY]) ) );
+    xpgain = UMIN( obj->cost*50 ,( exp_level(ch->ability_level[ENGINEERING_ABILITY]+1) - exp_level(ch->ability_level[ENGINEERING_ABILITY]) ) );
     gain_exp(ch, ENGINEERING_ABILITY, xpgain );
     ch_printf( ch , "You gain %d engineering experience.", xpgain );
   }
@@ -1393,7 +1393,7 @@ void do_makelandmine( CHAR_DATA *ch, char *argument )
   {
     long xpgain;
 
-    xpgain = UMIN( obj->cost*50 ,( exp_level(ch->skill_level[ENGINEERING_ABILITY]+1) - exp_level(ch->skill_level[ENGINEERING_ABILITY]) ) );
+    xpgain = UMIN( obj->cost*50 ,( exp_level(ch->ability_level[ENGINEERING_ABILITY]+1) - exp_level(ch->ability_level[ENGINEERING_ABILITY]) ) );
     gain_exp(ch, ENGINEERING_ABILITY, xpgain );
     ch_printf( ch , "You gain %d engineering experience.", xpgain );
   }
@@ -1595,7 +1595,7 @@ void do_makelight( CHAR_DATA *ch, char *argument )
   {
     long xpgain;
 
-    xpgain = UMIN( obj->cost*100 ,( exp_level(ch->skill_level[ENGINEERING_ABILITY]+1) - exp_level(ch->skill_level[ENGINEERING_ABILITY]) ) );
+    xpgain = UMIN( obj->cost*100 ,( exp_level(ch->ability_level[ENGINEERING_ABILITY]+1) - exp_level(ch->ability_level[ENGINEERING_ABILITY]) ) );
     gain_exp(ch, ENGINEERING_ABILITY, xpgain );
     ch_printf( ch , "You gain %d engineering experience.", xpgain );
   }
@@ -1804,7 +1804,7 @@ void do_makejewelry( CHAR_DATA *ch, char *argument )
   {
     long xpgain;
 
-    xpgain = UMIN( obj->cost*100 ,( exp_level(ch->skill_level[ENGINEERING_ABILITY]+1) - exp_level(ch->skill_level[ENGINEERING_ABILITY]) ) );
+    xpgain = UMIN( obj->cost*100 ,( exp_level(ch->ability_level[ENGINEERING_ABILITY]+1) - exp_level(ch->ability_level[ENGINEERING_ABILITY]) ) );
     gain_exp(ch, ENGINEERING_ABILITY, xpgain );
     ch_printf( ch , "You gain %d engineering experience.", xpgain );
   }
@@ -1987,7 +1987,7 @@ void do_makearmor( CHAR_DATA *ch, char *argument )
   {
     long xpgain;
 
-    xpgain = UMIN( obj->cost*100 ,( exp_level(ch->skill_level[ENGINEERING_ABILITY]+1) - exp_level(ch->skill_level[ENGINEERING_ABILITY]) ) );
+    xpgain = UMIN( obj->cost*100 ,( exp_level(ch->ability_level[ENGINEERING_ABILITY]+1) - exp_level(ch->ability_level[ENGINEERING_ABILITY]) ) );
     gain_exp(ch, ENGINEERING_ABILITY, xpgain );
     ch_printf( ch , "You gain %d engineering experience.", xpgain );
   }
@@ -2209,7 +2209,7 @@ void do_makecomlink( CHAR_DATA *ch, char *argument )
   {
     long xpgain;
 
-    xpgain = UMIN( obj->cost*100 ,( exp_level(ch->skill_level[ENGINEERING_ABILITY]+1) - exp_level(ch->skill_level[ENGINEERING_ABILITY]) ) );
+    xpgain = UMIN( obj->cost*100 ,( exp_level(ch->ability_level[ENGINEERING_ABILITY]+1) - exp_level(ch->ability_level[ENGINEERING_ABILITY]) ) );
     gain_exp(ch, ENGINEERING_ABILITY, xpgain );
     ch_printf( ch , "You gain %d engineering experience.", xpgain );
   }
@@ -2422,7 +2422,7 @@ void do_makeshield( CHAR_DATA *ch, char *argument )
   {
     long xpgain;
 
-    xpgain = UMIN( obj->cost*50 ,( exp_level(ch->skill_level[ENGINEERING_ABILITY]+1) - exp_level(ch->skill_level[ENGINEERING_ABILITY]) ) );
+    xpgain = UMIN( obj->cost*50 ,( exp_level(ch->ability_level[ENGINEERING_ABILITY]+1) - exp_level(ch->ability_level[ENGINEERING_ABILITY]) ) );
     gain_exp(ch, ENGINEERING_ABILITY, xpgain );
     ch_printf( ch , "You gain %d engineering experience.", xpgain );
   }
@@ -2616,7 +2616,7 @@ void do_makecontainer( CHAR_DATA *ch, char *argument )
   {
     long xpgain;
 
-    xpgain = UMIN( obj->cost*100 ,( exp_level(ch->skill_level[ENGINEERING_ABILITY]+1) - exp_level(ch->skill_level[ENGINEERING_ABILITY]) ) );
+    xpgain = UMIN( obj->cost*100 ,( exp_level(ch->ability_level[ENGINEERING_ABILITY]+1) - exp_level(ch->ability_level[ENGINEERING_ABILITY]) ) );
     gain_exp(ch, ENGINEERING_ABILITY, xpgain );
     ch_printf( ch , "You gain %d engineering experience.", xpgain );
   }
@@ -2659,7 +2659,7 @@ void do_reinforcements( CHAR_DATA *ch, char *argument )
           return;
         }
 
-      if ( ch->gold < ch->skill_level[LEADERSHIP_ABILITY] * 50 )
+      if ( ch->gold < ch->ability_level[LEADERSHIP_ABILITY] * 50 )
         {
           ch_printf( ch, "&RYou dont have enough credits to send for reinforcements.\r\n" );
           return;
@@ -2696,7 +2696,7 @@ void do_reinforcements( CHAR_DATA *ch, char *argument )
   ch->substate = SUB_NONE;
 
   send_to_char( "&GYour reinforcements are on the way.\r\n", ch);
-  credits = ch->skill_level[LEADERSHIP_ABILITY] * 50;
+  credits = ch->ability_level[LEADERSHIP_ABILITY] * 50;
   ch_printf( ch, "It cost you %d credits.\r\n", credits);
   ch->gold -= UMIN( credits , ch->gold );
 
@@ -2738,7 +2738,7 @@ void do_postguard( CHAR_DATA *ch, char *argument )
           return;
         }
 
-      if ( ch->gold < ch->skill_level[LEADERSHIP_ABILITY] * 30 )
+      if ( ch->gold < ch->ability_level[LEADERSHIP_ABILITY] * 30 )
         {
           ch_printf( ch, "&RYou dont have enough credits.\r\n", ch );
           return;
@@ -2776,7 +2776,7 @@ void do_postguard( CHAR_DATA *ch, char *argument )
 
   send_to_char( "&GYour guard is on the way.\r\n", ch);
 
-  credits = ch->skill_level[LEADERSHIP_ABILITY] * 30;
+  credits = ch->ability_level[LEADERSHIP_ABILITY] * 30;
   ch_printf( ch, "It cost you %d credits.\r\n", credits);
   ch->gold -= UMIN( credits , ch->gold );
 
@@ -2833,9 +2833,9 @@ void add_reinforcements( CHAR_DATA *ch )
           mob[mob_cnt] = create_mobile( pMobIndex );
           char_to_room( mob[mob_cnt], ch->in_room );
           act( AT_IMMORT, "$N has arrived.", ch, NULL, mob[mob_cnt], TO_ROOM );
-          mob[mob_cnt]->top_level = multiplier / 1.4 * ch->skill_level[LEADERSHIP_ABILITY]/3;
+          mob[mob_cnt]->top_level = multiplier / 1.4 * ch->ability_level[LEADERSHIP_ABILITY]/3;
           for ( ability = 0 ; ability < MAX_ABILITY ; ability++ )
-            mob[mob_cnt]->skill_level[ability] = mob[mob_cnt]->top_level;
+            mob[mob_cnt]->ability_level[ability] = mob[mob_cnt]->top_level;
           mob[mob_cnt]->hit = mob[mob_cnt]->top_level*15;
           mob[mob_cnt]->max_hit = mob[mob_cnt]->hit;
           mob[mob_cnt]->armor = 100- mob[mob_cnt]->top_level*2.5;
@@ -2878,9 +2878,9 @@ void add_reinforcements( CHAR_DATA *ch )
         }
       act( AT_IMMORT, "$N has arrived.", ch, NULL, mob, TO_ROOM );
       send_to_char( "Your guard has arrived.\r\n", ch );
-      mob->top_level = multiplier * ch->skill_level[LEADERSHIP_ABILITY] / 2;
+      mob->top_level = multiplier * ch->ability_level[LEADERSHIP_ABILITY] / 2;
       for ( ability = 0 ; ability < MAX_ABILITY ; ability++ )
-        mob->skill_level[ability] = mob->top_level;
+        mob->ability_level[ability] = mob->top_level;
       mob->hit = mob->top_level*10;
       mob->max_hit = mob->hit;
       mob->armor = 100- mob->top_level*2.5;
@@ -2970,7 +2970,7 @@ void do_torture( CHAR_DATA *ch, char *argument )
   WAIT_STATE( ch, skill_table[gsn_torture]->beats );
 
   fail = FALSE;
-  the_chance = ris_save( victim, (ch->skill_level[LEADERSHIP_ABILITY])/10, RIS_PARALYSIS );
+  the_chance = ris_save( victim, (ch->ability_level[LEADERSHIP_ABILITY])/10, RIS_PARALYSIS );
   if ( the_chance == 1000 )
     fail = TRUE;
   else
@@ -2991,7 +2991,7 @@ void do_torture( CHAR_DATA *ch, char *argument )
       act( AT_SKILL, "You torture $N, leaving $M screaming in pain.", ch, NULL, victim, TO_CHAR );
       act( AT_SKILL, "$n tortures $N, leaving $M screaming in agony!", ch, NULL, victim, TO_NOTVICT );
 
-      dam = dice( ch->skill_level[LEADERSHIP_ABILITY]/80 , 4 );
+      dam = dice( ch->ability_level[LEADERSHIP_ABILITY]/80 , 4 );
       dam = URANGE( 0, victim->max_hit-10, dam );
       victim->hit -= dam;
       victim->max_hit -= dam;
@@ -3798,7 +3798,7 @@ void do_beg( CHAR_DATA *ch, char *argument )
     }
 
   WAIT_STATE( ch, skill_table[gsn_beg]->beats );
-  percent  = number_percent( ) + ch->skill_level[SMUGGLING_ABILITY] + victim->top_level;
+  percent  = number_percent( ) + ch->ability_level[SMUGGLING_ABILITY] + victim->top_level;
 
   if ( percent > ch->pcdata->learned[gsn_beg]  )
     {
@@ -3838,7 +3838,7 @@ void do_beg( CHAR_DATA *ch, char *argument )
   victim->gold -= amount;
   ch_printf( ch, "%s gives you %d credits.\r\n", victim->short_descr , amount );
   learn_from_success( ch, gsn_beg );
-  xp = UMIN( amount*10 , ( exp_level( ch->skill_level[SMUGGLING_ABILITY]+1) - exp_level( ch->skill_level[SMUGGLING_ABILITY])  )  );
+  xp = UMIN( amount*10 , ( exp_level( ch->ability_level[SMUGGLING_ABILITY]+1) - exp_level( ch->ability_level[SMUGGLING_ABILITY])  )  );
   xp = UMIN( xp , xp_compute( ch, victim ) );
   gain_exp( ch, SMUGGLING_ABILITY, xp );
   ch_printf( ch, "&WYou gain %ld smuggling experience points!\r\n", xp );
@@ -4035,7 +4035,7 @@ void do_add_patrol ( CHAR_DATA *ch , char *argument )
           return;
         }
 
-      if ( ch->gold < ch->skill_level[LEADERSHIP_ABILITY] * 30 )
+      if ( ch->gold < ch->ability_level[LEADERSHIP_ABILITY] * 30 )
         {
           ch_printf( ch, "&RYou dont have enough credits.\r\n", ch );
           return;
@@ -4073,7 +4073,7 @@ void do_add_patrol ( CHAR_DATA *ch , char *argument )
 
   send_to_char( "&GYour guard is on the way.\r\n", ch);
 
-  credits = ch->skill_level[LEADERSHIP_ABILITY] * 30;
+  credits = ch->ability_level[LEADERSHIP_ABILITY] * 30;
   ch_printf( ch, "It cost you %d credits.\r\n", credits);
   ch->gold -= UMIN( credits , ch->gold );
 
@@ -4116,7 +4116,7 @@ void do_special_forces ( CHAR_DATA *ch , char *argument )
           return;
         }
 
-      if ( ch->gold < ch->skill_level[LEADERSHIP_ABILITY] * 350 )
+      if ( ch->gold < ch->ability_level[LEADERSHIP_ABILITY] * 350 )
         {
           ch_printf( ch, "&RYou dont have enough credits to send for reinforcements.\r\n" );
           return;
@@ -4153,7 +4153,7 @@ void do_special_forces ( CHAR_DATA *ch , char *argument )
   ch->substate = SUB_NONE;
 
   send_to_char( "&GYour reinforcements are on the way.\r\n", ch);
-  credits = ch->skill_level[LEADERSHIP_ABILITY] * 350;
+  credits = ch->ability_level[LEADERSHIP_ABILITY] * 350;
   ch_printf( ch, "It cost you %d credits.\r\n", credits);
   ch->gold -= UMIN( credits , ch->gold );
 
@@ -4196,7 +4196,7 @@ void do_elite_guard ( CHAR_DATA *ch , char *argument )
           return;
         }
 
-      if ( ch->gold < ch->skill_level[LEADERSHIP_ABILITY] * 200 )
+      if ( ch->gold < ch->ability_level[LEADERSHIP_ABILITY] * 200 )
         {
           ch_printf( ch, "&RYou dont have enough credits.\r\n", ch );
           return;
@@ -4234,7 +4234,7 @@ void do_elite_guard ( CHAR_DATA *ch , char *argument )
 
   send_to_char( "&GYour guard is on the way.\r\n", ch);
 
-  credits = ch->skill_level[LEADERSHIP_ABILITY] * 200;
+  credits = ch->ability_level[LEADERSHIP_ABILITY] * 200;
   ch_printf( ch, "It cost you %d credits.\r\n", credits);
   ch->gold -= UMIN( credits , ch->gold );
 
@@ -4542,7 +4542,7 @@ void do_smalltalk ( CHAR_DATA *ch , char *argument )
 
   WAIT_STATE( ch, skill_table[gsn_smalltalk]->beats );
 
-  if ( percent - ch->skill_level[DIPLOMACY_ABILITY] + victim->top_level > ch->pcdata->learned[gsn_smalltalk]  )
+  if ( percent - ch->ability_level[DIPLOMACY_ABILITY] + victim->top_level > ch->pcdata->learned[gsn_smalltalk]  )
     {
       /*
        * Failure.
@@ -4843,7 +4843,7 @@ void do_bribe ( CHAR_DATA *ch , char *argument )
       planet->pop_support += URANGE( 0.1 , amount/1000 , 2 );
       send_to_char( "Popular support for your organization increases slightly.\r\n", ch );
 
-      amount = UMIN( amount ,( exp_level(ch->skill_level[DIPLOMACY_ABILITY]+1) - exp_level(ch->skill_level[DIPLOMACY_ABILITY]) ) );
+      amount = UMIN( amount ,( exp_level(ch->ability_level[DIPLOMACY_ABILITY]+1) - exp_level(ch->ability_level[DIPLOMACY_ABILITY]) ) );
 
       gain_exp( ch, DIPLOMACY_ABILITY, amount );
       ch_printf( ch, "You gain %d diplomacy experience.\r\n", amount );
@@ -5208,7 +5208,7 @@ void do_gather_intelligence ( CHAR_DATA *ch , char *argument )
 
       if ( the_chance < 55 )
         {
-          if ( victim->skill_level[7] > 1 )
+          if ( victim->ability_level[7] > 1 )
             {
               if ( victim->mana > 1000 )
                 sprintf( buf, "%s appears to have centered his attention on studying the force, and is rumored to excell at its use.", victim->name );
@@ -5719,7 +5719,7 @@ void do_makebowcaster( CHAR_DATA *ch, char *argument )
   {
     long xpgain;
 
-    xpgain = UMIN( obj->cost*50 ,( exp_level(ch->skill_level[ENGINEERING_ABILITY]+1) - exp_level(ch->skill_level[ENGINEERING_ABILITY]) ) );
+    xpgain = UMIN( obj->cost*50 ,( exp_level(ch->ability_level[ENGINEERING_ABILITY]+1) - exp_level(ch->ability_level[ENGINEERING_ABILITY]) ) );
     gain_exp(ch, ENGINEERING_ABILITY, xpgain );
     ch_printf( ch , "You gain %d engineering experience.", xpgain );
   }
@@ -5912,7 +5912,7 @@ void do_makedisguise( CHAR_DATA *ch, char *argument )
   {
     long xpgain;
 
-    xpgain = UMIN( obj->cost*50 ,( exp_level(ch->skill_level[ENGINEERING_ABILITY]+1) - exp_level(ch->skill_level[ENGINEERING_ABILITY]) ) );
+    xpgain = UMIN( obj->cost*50 ,( exp_level(ch->ability_level[ENGINEERING_ABILITY]+1) - exp_level(ch->ability_level[ENGINEERING_ABILITY]) ) );
     gain_exp(ch, ENGINEERING_ABILITY, xpgain );
     ch_printf( ch , "You gain %d engineering experience.", xpgain );
   }

@@ -2227,7 +2227,7 @@ CHAR_DATA *create_mobile( MOB_INDEX_DATA *pMobIndex )
   {
     int ability;
     for ( ability = 0 ; ability < MAX_ABILITY ; ability++ )
-      mob->skill_level[ability] = mob->top_level;
+      mob->ability_level[ability] = mob->top_level;
   }
   mob->act                      = pMobIndex->act;
   mob->affected_by              = pMobIndex->affected_by;

@@ -373,7 +373,7 @@ void fwrite_char( CHAR_DATA *ch, FILE *fp )
     int ability;
     for ( ability = 0 ; ability < MAX_ABILITY ; ability++ )
       fprintf( fp, "Ability        %d %d %ld\n",
-               ability, ch->skill_level[ability], get_exp( ch, ability ) );
+               ability, ch->ability_level[ability], get_exp( ch, ability ) );
   }
   fprintf( fp, "Clones         %d\n",   ch->pcdata->clones              );
   fprintf( fp, "Salary_time         %ld\n",     ch->pcdata->salary_date );
@@ -1065,7 +1065,7 @@ void fread_char( CHAR_DATA *ch, FILE *fp, bool preload )
                       &x0, &x1, &x2 );
               if ( x0 >= 0 && x0 < MAX_ABILITY )
                 {
-                  ch->skill_level[x0] = x1;
+                  ch->ability_level[x0] = x1;
                   set_exp( ch, x0, x2 );
                 }
               fMatch = TRUE;
@@ -1593,8 +1593,8 @@ void fread_char( CHAR_DATA *ch, FILE *fp, bool preload )
                 int ability;
                 for ( ability = 0 ; ability < MAX_ABILITY ; ability++ )
                   {
-                    if ( ch->skill_level[ability] == 0 )
-                      ch->skill_level[ability] = 1;
+                    if ( ch->ability_level[ability] == 0 )
+                      ch->ability_level[ability] = 1;
                   }
               }
               if ( !IS_IMMORTAL( ch ) && !ch->speaking )
@@ -1615,7 +1615,7 @@ void fread_char( CHAR_DATA *ch, FILE *fp, bool preload )
                   hitgain = ( ( int ) ( current_time - lastplayed ) / 60 );
                   ch->hit = URANGE( 1 , ch->hit + hitgain , ch->max_hit );
                   ch->move = URANGE( 1 , ch->move + hitgain , ch->max_move );
-                  if ( ch->skill_level[FORCE_ABILITY] > 1 )
+                  if ( ch->ability_level[FORCE_ABILITY] > 1 )
                     ch->mana = URANGE( 0 , ch->mana + hitgain , ch->max_mana );
                   better_mental_state( ch , hitgain );
                 }
@@ -1627,7 +1627,7 @@ void fread_char( CHAR_DATA *ch, FILE *fp, bool preload )
                   if ( skill_table[sn]->guild < 0 || skill_table[sn]->guild >= MAX_ABILITY )
                     continue;
 
-                  if ( ch->pcdata->learned[sn] > 0 && ch->skill_level[skill_table[sn]->guild] < skill_table[sn]->min_level )
+                  if ( ch->pcdata->learned[sn] > 0 && ch->ability_level[skill_table[sn]->guild] < skill_table[sn]->min_level )
                     ch->pcdata->learned[sn] = 0;
                 }
               return;
