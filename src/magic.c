@@ -3748,52 +3748,6 @@ CHAR_DATA *make_poly_mob(CHAR_DATA *ch, int vnum)
   return mob;
 }
 
-void do_revert(CHAR_DATA *ch, char *argument)
-{
-
-  CHAR_DATA *mob;
-
-  if ( !IS_NPC(ch) || !IS_SET(ch->act, ACT_POLYMORPHED) )
-    {
-      send_to_char("You are not polymorphed.\r\n", ch);
-      return;
-    }
-
-  REMOVE_BIT(ch->act, ACT_POLYMORPHED);
-
-  char_from_room(ch->desc->original);
-
-  if(ch->desc->character)
-    {
-      mob = ch->desc->character;
-      char_to_room(ch->desc->original, ch->desc->character->in_room); /*WORKS!!*/
-      ch->desc->character       = ch->desc->original;
-      ch->desc->original        = NULL;
-      ch->desc->character->desc = ch->desc;
-      ch->desc->character->switched = NULL;
-      ch->desc                  = NULL;
-      extract_char(mob, TRUE);
-      return;
-    }
-
-  /*  else
-      {
-      location = NULL;
-      if(ch->desc->original->pcdata->clan)
-      location = get_room_index(ch->desc->original->pcdata->clan->recall);
-      if(!location)
-      location = get_room_index(ROOM_VNUM_TEMPLE);
-      char_to_room(ch->desc->original, location);
-      }
-  */
-  ch->desc->character       = ch->desc->original;
-  ch->desc->original        = NULL;
-  ch->desc->character->desc = ch->desc;
-  ch->desc->character->switched = NULL;
-  ch->desc                  = NULL;
-  return;
-}
-
 /* Added spells spiral_blast, scorching surge,
    nostrum, and astral   by SB for Augurer class
    7/10/96 */
