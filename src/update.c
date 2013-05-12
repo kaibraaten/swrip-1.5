@@ -377,14 +377,18 @@ void gain_exp( CHAR_DATA *ch, short ability, long gain )
 
   while ( get_exp( ch, ability ) >= exp_level( get_level( ch, ability ) + 1))
     {
-      if ( get_level(ch, ability ) >= max_level( ch, ability ) )
+      short current_level = get_level( ch, ability );
+      short new_level = 0;
+
+      if ( current_level >= max_level( ch, ability ) )
         {
           set_exp( ch, ability, exp_level( get_level( ch, ability ) + 1 ) - 1);
           return;
         }
 
       set_char_color( AT_WHITE + AT_BLINK, ch );
-      ++ch->ability_level[ability];
+      new_level = current_level + 1;
+      set_level( ch, ability, new_level );
 
       ch_printf( ch, "You have now obtained %s level %d!\r\n",
 		 ability_name[ability], get_level( ch, ability ) );

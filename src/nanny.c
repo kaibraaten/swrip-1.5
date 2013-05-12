@@ -719,7 +719,7 @@ static void nanny_get_msp( DESCRIPTOR_DATA *d, char *argument )
 
   for ( ability =0 ; ability < MAX_ABILITY ; ability++ )
     {
-      ch->ability_level[ability] = 0;
+      set_level( ch, ability, 0 );
     }
 
   ch->top_level = 0;
@@ -881,7 +881,7 @@ if ( (iLang = skill_lookup( "common" )) < 0 )
 
 	for ( ability =0 ; ability < MAX_ABILITY ; ability++ )
 	  {
-	    ch->ability_level[ability] = 1;
+	    set_level( ch, ability, 1 );
 	    set_exp( ch, ability, 0 );
 	  }
       }

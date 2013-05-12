@@ -455,13 +455,18 @@ void do_mset( CHAR_DATA *ch, char *argument )
         }
       {
         int ability;
+
         for ( ability = 0 ; ability < MAX_ABILITY ; ability++ )
-          victim->ability_level[ability] = value;
+	  {
+	    set_level( victim, ability, value );
+	  }
       }
+
       victim->top_level = value;
       victim->armor = 100-value*2.5;
       victim->hitroll = value/5;
       victim->damroll = value/5;
+
       if ( IS_NPC(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
         {
           victim->pIndexData->level = value;

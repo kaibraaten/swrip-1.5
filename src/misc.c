@@ -224,13 +224,13 @@ void do_clone( CHAR_DATA *ch, char *argument )
       if(ch->perm_frc > 0)
         {
           set_exp( ch, FORCE_ABILITY, 500 );
-          ch->ability_level[FORCE_ABILITY] = 2;
+          set_level( ch, FORCE_ABILITY, 2 );
         }
     }
   else
     {
       set_exp( ch, FORCE_ABILITY, 0 );
-      ch->ability_level[FORCE_ABILITY] = 1;
+      set_level( ch, FORCE_ABILITY, 1 );
     }
 
   ch->mana = 100 + 100*ch->perm_frc;
@@ -268,7 +268,7 @@ void do_clone( CHAR_DATA *ch, char *argument )
           experience[ability] = get_exp( ch, ability );
           skill_level[ability] = get_level( ch, ability );
           set_exp( ch, ability, 0 );
-          ch->ability_level[ability] = 1;
+          set_level( ch, ability, 1 );
         }
 
       experience[FORCE_ABILITY] = frc_experience;
@@ -295,16 +295,18 @@ void do_clone( CHAR_DATA *ch, char *argument )
     save_clone( ch );
   ch->perm_frc = frc;
 
-  ch->ability_level[FORCE_ABILITY] = frc_level;
+  set_level( ch, FORCE_ABILITY, frc_level );
   set_exp( ch, FORCE_ABILITY, frc_experience );
   ch->mana = mana;
 
   if( ch->pcdata->clones == 2 )
-    for(ability = 0; ability < MAX_ABILITY; ability++)
-      {
-        set_exp( ch, ability, experience[ability] );
-        ch->ability_level[ability] = skill_level[ability];
-      }
+    {
+      for(ability = 0; ability < MAX_ABILITY; ability++)
+	{
+	  set_exp( ch, ability, experience[ability] );
+	  set_level( ch, ability, skill_level[ability] );
+	}
+    }
 
   ch->plr_home = home;
   ch->pcdata->played = played;

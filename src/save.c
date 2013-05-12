@@ -1065,7 +1065,7 @@ void fread_char( CHAR_DATA *ch, FILE *fp, bool preload )
                       &x0, &x1, &x2 );
               if ( x0 >= 0 && x0 < MAX_ABILITY )
                 {
-                  ch->ability_level[x0] = x1;
+                  set_level( ch, x0, x1 );
                   set_exp( ch, x0, x2 );
                 }
               fMatch = TRUE;
@@ -1594,7 +1594,7 @@ void fread_char( CHAR_DATA *ch, FILE *fp, bool preload )
                 for ( ability = 0 ; ability < MAX_ABILITY ; ability++ )
                   {
                     if ( get_level( ch, ability ) == 0 )
-                      ch->ability_level[ability] = 1;
+                      set_level( ch, ability, 1 );
                   }
               }
 

@@ -75,7 +75,7 @@ void do_advance( CHAR_DATA *ch, char *argument )
       set_char_color( AT_IMMORT, victim );
       send_to_char( "Cursed and forsaken! The gods have lowered your level.\r\n", victim );
       set_exp( victim, ability, 0 );
-      victim->ability_level[ability] = 1;
+      set_level( victim, ability, 1 );
 
       if ( ability == COMBAT_ABILITY )
         victim->max_hit = 500;

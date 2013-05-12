@@ -2835,7 +2835,7 @@ void add_reinforcements( CHAR_DATA *ch )
           mob[mob_cnt]->top_level = multiplier / 1.4 * get_level( ch, LEADERSHIP_ABILITY ) / 3;
 
           for ( ability = 0 ; ability < MAX_ABILITY ; ability++ )
-            mob[mob_cnt]->ability_level[ability] = mob[mob_cnt]->top_level;
+            set_level( mob[mob_cnt], ability, mob[mob_cnt]->top_level );
 
           mob[mob_cnt]->hit = mob[mob_cnt]->top_level*15;
           mob[mob_cnt]->max_hit = mob[mob_cnt]->hit;
@@ -2885,13 +2885,14 @@ void add_reinforcements( CHAR_DATA *ch )
       mob->top_level = multiplier * get_level( ch, LEADERSHIP_ABILITY ) / 2;
 
       for ( ability = 0 ; ability < MAX_ABILITY ; ability++ )
-        mob->ability_level[ability] = mob->top_level;
+        set_level( mob, ability, mob->top_level );
 
       mob->hit = mob->top_level*10;
       mob->max_hit = mob->hit;
       mob->armor = 100- mob->top_level*2.5;
       mob->damroll = mob->top_level/5;
       mob->hitroll = mob->top_level/5;
+
       if ( ( pObjIndex = get_obj_index( OBJ_VNUM_BLASTECH_E11 ) ) != NULL )
         {
           blaster = create_object( pObjIndex, mob->top_level );
