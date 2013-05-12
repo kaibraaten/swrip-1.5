@@ -685,36 +685,34 @@ ch_ret one_hit( CHAR_DATA *ch, CHAR_DATA *victim, int dt )
         }
       if ( attacktype == ATCK_BACKSTAB )
         attacktype = 0;
+
       if ( wield && number_percent( ) > 25 )
         attacktype = 0;
+
       switch ( attacktype )
         {
         default:
           break;
+
+	  /* These used to call empty functions so they were just joined
+	     together */
         case ATCK_BITE:
-          do_bite( ch, "" );
-          retcode = global_retcode;
-          break;
         case ATCK_CLAWS:
-          do_claw( ch, "" );
-          retcode = global_retcode;
-          break;
         case ATCK_TAIL:
-          do_tail( ch, "" );
-          retcode = global_retcode;
-          break;
         case ATCK_STING:
-          do_sting( ch, "" );
           retcode = global_retcode;
           break;
+
         case ATCK_PUNCH:
           do_punch( ch, "" );
           retcode = global_retcode;
           break;
+
         case ATCK_KICK:
           do_kick( ch, "" );
           retcode = global_retcode;
           break;
+
         case ATCK_TRIP:
           attacktype = 0;
           break;
