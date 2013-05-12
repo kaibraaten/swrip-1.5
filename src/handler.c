@@ -200,7 +200,7 @@ static bool is_wizvis( const CHAR_DATA *ch, const CHAR_DATA *victim )
 /*
  * Return how much exp a char has
  */
-long get_exp( const CHAR_DATA *ch, int ability )
+long get_exp( const CHAR_DATA *ch, short ability )
 {
   if ( ability >= MAX_ABILITY || ability < 0 )
     return 0;
@@ -208,7 +208,7 @@ long get_exp( const CHAR_DATA *ch, int ability )
   return ch->experience[ability];
 }
 
-void set_exp( CHAR_DATA *ch, int ability, long xp )
+void set_exp( CHAR_DATA *ch, short ability, long xp )
 {
   if ( ability >= MAX_ABILITY || ability < 0 )
     {

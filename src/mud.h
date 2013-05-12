@@ -4564,8 +4564,8 @@ extern "C" {
 
   /* handler.c */
   void explode( OBJ_DATA *obj );
-  void set_exp( CHAR_DATA *ch, int ability, long xp );
-  long get_exp( const CHAR_DATA *ch, int ability );
+  void set_exp( CHAR_DATA *ch, short ability, long xp );
+  long get_exp( const CHAR_DATA *ch, short ability );
   int get_exp_worth( const CHAR_DATA *ch );
   int exp_level( short level );
   short get_trust( const CHAR_DATA *ch );
@@ -4749,8 +4749,8 @@ extern "C" {
 
   /* update.c */
   void advance_level( CHAR_DATA *ch , int ability );
-  void gain_exp( CHAR_DATA *ch, int ability, long gain );
-  long lose_exp( CHAR_DATA *ch, int ability, long loss );
+  void gain_exp( CHAR_DATA *ch, short ability, long gain );
+  long lose_exp( CHAR_DATA *ch, short ability, long loss );
   void gain_condition( CHAR_DATA *ch, int iCond, int value );
   void update_handler( void );
   void reboot_check( time_t reset );
