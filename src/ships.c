@@ -430,7 +430,7 @@ void landship( SHIP_DATA *ship, const char *arg )
       ch = ship->ch;
       xp =  (exp_level( ch->skill_level[PILOTING_ABILITY]+1) - exp_level( ch->skill_level[PILOTING_ABILITY])) ;
       xp = UMIN( get_ship_value( ship ) , xp );
-      gain_exp( ch , xp , PILOTING_ABILITY );
+      gain_exp( ch, PILOTING_ABILITY, xp );
       ch_printf( ch, "&WYou gain %ld points of flight experience!\r\n",
 		 UMIN( get_ship_value( ship ) , xp ) );
       ship->ch = NULL;
@@ -4836,7 +4836,7 @@ void damage_ship_ch( SHIP_DATA *ship , int min , int max , CHAR_DATA *ch )
 
   xp = ( exp_level( ch->skill_level[PILOTING_ABILITY]+1) - exp_level( ch->skill_level[PILOTING_ABILITY]) ) / 25 ;
   xp = UMIN( get_ship_value( ship ) /100 , xp ) ;
-  gain_exp( ch , xp , PILOTING_ABILITY );
+  gain_exp( ch, PILOTING_ABILITY, xp );
 
   if ( ship->shield > 0 )
     {
@@ -4897,7 +4897,7 @@ void damage_ship_ch( SHIP_DATA *ship , int min , int max , CHAR_DATA *ch )
 
       xp =  ( exp_level( ch->skill_level[PILOTING_ABILITY]+1) - exp_level( ch->skill_level[PILOTING_ABILITY]) );
       xp = UMIN( get_ship_value( ship ) , xp );
-      gain_exp( ch , xp , PILOTING_ABILITY);
+      gain_exp( ch, PILOTING_ABILITY, xp);
       ch_printf( ch, "&WYou gain %ld piloting experience!\r\n", xp );
       return;
     }

@@ -92,6 +92,6 @@ void do_advance( CHAR_DATA *ch, char *argument )
   for ( iLevel = victim->skill_level[ability] ; iLevel < level; iLevel++ )
     {
       set_exp( victim, ability, exp_level(iLevel+1) );
-      gain_exp( victim, 0, ability );
+      gain_exp( victim, ability, 0 );
     }
 }

@@ -361,7 +361,7 @@ void advance_level( CHAR_DATA *ch, int ability )
     REMOVE_BIT( ch->act, PLR_BOUGHT_PET );
 }
 
-void gain_exp( CHAR_DATA *ch, long gain, int ability )
+void gain_exp( CHAR_DATA *ch, int ability, long gain )
 {
   if ( IS_NPC(ch) )
     return;

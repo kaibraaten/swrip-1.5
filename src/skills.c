@@ -1138,7 +1138,7 @@ void learn_from_success( CHAR_DATA *ch, int sn )
 
   if ( sn == skill_lookup( "meditate" ) && ch->skill_level[FORCE_ABILITY] < 2 )
     if ( ch->pcdata->learned[sn] < 50 )
-      gain_exp( ch, 25, FORCE_ABILITY );
+      gain_exp( ch, FORCE_ABILITY, 25 );
 
   sklvl = skill_table[sn]->min_level;
 
@@ -1182,7 +1182,8 @@ void learn_from_success( CHAR_DATA *ch, int sn )
               ch_printf( ch, "You gain %d experience points from your success!\r\n", gain );
             }
         }
-      gain_exp( ch, gain, skill_table[sn]->guild );
+
+      gain_exp( ch, skill_table[sn]->guild, gain );
     }
 }
 
@@ -1808,7 +1809,7 @@ void do_steal( CHAR_DATA *ch, char *argument )
       {
         xp = UMIN( amount*10 , ( exp_level( ch->skill_level[SMUGGLING_ABILITY]+1 ) - exp_level( ch->skill_level[SMUGGLING_ABILITY])  ) / 35  );
         xp = UMIN( xp , xp_compute( ch, victim ) );
-        gain_exp( ch, xp , SMUGGLING_ABILITY);
+        gain_exp( ch, SMUGGLING_ABILITY, xp );
         ch_printf( ch, "&WYou gain %ld smuggling experience!\r\n", xp );
       }
       return;
@@ -1867,7 +1868,7 @@ void do_steal( CHAR_DATA *ch, char *argument )
   {
     xp = UMIN( obj->cost*10 , ( exp_level( ch->skill_level[SMUGGLING_ABILITY]+1) - exp_level( ch->skill_level[SMUGGLING_ABILITY])  ) / 10  );
     xp = UMIN( xp , xp_compute( ch, victim ) );
-    gain_exp( ch, xp, SMUGGLING_ABILITY );
+    gain_exp( ch, SMUGGLING_ABILITY, xp );
     ch_printf( ch, "&WYou gain %ld smuggling experience!\r\n", xp );
   }
   separate_obj( obj );

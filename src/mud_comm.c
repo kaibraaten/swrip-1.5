@@ -1238,7 +1238,7 @@ void  do_mpgain( CHAR_DATA *ch, char *argument )
   xp =  URANGE(1, xp, ( exp_level( victim->skill_level[ability]+1 ) - exp_level( victim->skill_level[ability]) ) );
 
   ch_printf( victim, "You gain %ld %s experience.\r\n", xp, ability_name[ability]  );
-  gain_exp( victim, xp, ability);
+  gain_exp( victim, ability, xp );
 }
 
 /*

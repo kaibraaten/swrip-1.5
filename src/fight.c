@@ -1428,7 +1428,7 @@ ch_ret damage( CHAR_DATA *ch, CHAR_DATA *victim, int dam, int dt )
        &&  !IS_NPC(ch) && ch->fighting && ch->fighting->xp )
     {
       xp_gain = (int) (xp_compute( ch, victim ) * 0.1 * dam) / victim->max_hit;
-      gain_exp( ch, xp_gain, COMBAT_ABILITY );
+      gain_exp( ch, COMBAT_ABILITY, xp_gain );
     }
 
   if ( !IS_NPC(victim)
@@ -2379,14 +2379,14 @@ void group_gain( CHAR_DATA *ch, CHAR_DATA *victim )
           send_to_char( buf, gch );
         }
 
-      gain_exp( gch, xp , COMBAT_ABILITY );
+      gain_exp( gch, COMBAT_ABILITY, xp );
 
       if ( lch == gch && members > 1 )
         {
           xp = URANGE( members, xp*members, (exp_level( gch->skill_level[LEADERSHIP_ABILITY]+1) - exp_level(gch->skill_level[LEADERSHIP_ABILITY] )/10) );
           sprintf( buf, "You get %d leadership experience for leading your group to victory.\r\n", xp );
           send_to_char( buf, gch );
-          gain_exp( gch, xp , LEADERSHIP_ABILITY );
+          gain_exp( gch, LEADERSHIP_ABILITY, xp );
         }
 
 
