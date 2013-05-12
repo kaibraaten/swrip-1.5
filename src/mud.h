@@ -200,7 +200,7 @@ typedef ch_ret  SPELL_FUN       ( int sn, int level, CHAR_DATA *ch, void *vo );
 #define MAX_RL_ABILITY              8
 #define MAX_NPC_RACE               91
 #define MAX_LEVEL                 105
-#define MAX_SKILL_LEVEL           150
+#define MAX_ABILITY_LEVEL         150
 #define MAX_CLAN                   50
 #define MAX_PLANET                100
 #define MAX_SHIP                 1000
@@ -3114,7 +3114,7 @@ extern  short                   gsn_yevethan;
 
 #define IS_AWAKE(ch)            ((ch)->position > POS_SLEEPING)
 #define GET_AC(ch)              ( (ch)->armor + ( IS_AWAKE(ch) ? dex_app[get_curr_dex(ch)].defensive : 0 ) \
-                                  - ( (ch)->race == RACE_DEFEL ? (ch)->ability_level[COMBAT_ABILITY]*2+5 : (ch)->ability_level[COMBAT_ABILITY]/2 ) )
+                                  - ( (ch)->race == RACE_DEFEL ? get_level( ch, COMBAT_ABILITY ) * 2 + 5 : get_level( ch, COMBAT_ABILITY ) / 2 ) )
 #define GET_HITROLL(ch)         ((ch)->hitroll                          \
                                  +str_app[get_curr_str(ch)].tohit       \
                                  +(2-(abs((ch)->mental_state)/10)))
@@ -4565,6 +4565,7 @@ extern "C" {
   int get_exp_worth( const CHAR_DATA *ch );
   int exp_level( short level );
   short get_level( const CHAR_DATA *ch, short ability );
+  void set_level( CHAR_DATA *ch, short ability, int newlevel );
   short get_trust( const CHAR_DATA *ch );
   short get_age( const CHAR_DATA *ch );
   short get_curr_str( const CHAR_DATA *ch );

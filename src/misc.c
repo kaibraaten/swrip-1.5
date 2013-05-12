@@ -208,7 +208,7 @@ void do_clone( CHAR_DATA *ch, char *argument )
 
     }
 
-  frc_level = ch->ability_level[FORCE_ABILITY];
+  frc_level = get_level( ch, FORCE_ABILITY );
   frc_experience = get_exp( ch, FORCE_ABILITY );
 
   /* Droids and hunters dont get force. DV */
@@ -266,7 +266,7 @@ void do_clone( CHAR_DATA *ch, char *argument )
       for(ability = 0; ability < MAX_ABILITY; ability++)
         {
           experience[ability] = get_exp( ch, ability );
-          skill_level[ability] = ch->ability_level[ability];
+          skill_level[ability] = get_level( ch, ability );
           set_exp( ch, ability, 0 );
           ch->ability_level[ability] = 1;
         }

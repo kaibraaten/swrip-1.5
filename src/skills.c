@@ -759,7 +759,7 @@ void do_sset( CHAR_DATA *ch, char *argument )
         }
       if ( !str_cmp( arg2, "minlevel" ) )
         {
-          skill->min_level = URANGE( 1, atoi( argument ), MAX_SKILL_LEVEL );
+          skill->min_level = URANGE( 1, atoi( argument ), MAX_ABILITY_LEVEL );
           send_to_char( "Ok.\r\n", ch );
           return;
         }
@@ -886,7 +886,7 @@ void do_sset( CHAR_DATA *ch, char *argument )
         }
       if ( !str_cmp( arg2, "level" ) )
         {
-          skill->min_level = URANGE( 1, atoi( argument ), MAX_SKILL_LEVEL );
+          skill->min_level = URANGE( 1, atoi( argument ), MAX_ABILITY_LEVEL );
           send_to_char( "Ok.\r\n", ch );
           return;
         }

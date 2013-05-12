@@ -21,11 +21,7 @@
  *                      Main structure manipulation module                 *
  ****************************************************************************/
 
-#include <sys/types.h>
-#include <ctype.h>
-#include <stdio.h>
 #include <string.h>
-#include <time.h>
 #include "mud.h"
 
 #define BFS_MARK         BV01
@@ -33,15 +29,15 @@
 extern CHAR_DATA *      gch_prev;
 extern OBJ_DATA  *      gobj_prev;
 
-CHAR_DATA       *cur_char;
-ROOM_INDEX_DATA *cur_room;
-bool             cur_char_died;
-ch_ret           global_retcode;
+CHAR_DATA       *cur_char = NULL;
+ROOM_INDEX_DATA *cur_room = NULL;
+bool             cur_char_died = FALSE;
+ch_ret           global_retcode = rNONE;
 
-int              cur_obj;
-int              cur_obj_serial;
-bool             cur_obj_extracted;
-obj_ret          global_objcode;
+int              cur_obj = 0;
+int              cur_obj_serial = 0;
+bool             cur_obj_extracted = FALSE;
+obj_ret          global_objcode = rNONE;
 
 static bool is_wizvis( const CHAR_DATA *ch, const CHAR_DATA *victim );
 OBJ_DATA *group_object( OBJ_DATA *obj1, OBJ_DATA *obj2 );
@@ -232,7 +228,7 @@ int get_exp_worth( const CHAR_DATA *ch )
 {
   int xp = 0;
 
-  xp = ch->ability_level[COMBAT_ABILITY] * ch->top_level * 50;
+  xp = get_level( ch, COMBAT_ABILITY ) * ch->top_level * 50;
   xp += ch->max_hit * 2;
   xp -= (ch->armor-50) * 2;
   xp += ( ch->barenumdie * ch->baresizedie + GET_DAMROLL(ch) ) * 50;
@@ -591,8 +587,7 @@ void affect_modify( CHAR_DATA *ch, AFFECT_DATA *paf, bool fAdd )
       if ( IS_VALID_SN(mod)
            &&  (skill=skill_table[mod]) != NULL
            &&   skill->type == SKILL_SPELL )
-        if ( (retcode=(*skill->spell_fun) ( mod, ch->ability_level[FORCE_ABILITY], ch, ch )) == rCHAR_DIED
-             ||   char_died(ch) )
+        if ( (retcode=(*skill->spell_fun) ( mod, get_level( ch, FORCE_ABILITY ), ch, ch )) == rCHAR_DIED || char_died(ch) )
           return;
       break;
 
@@ -3642,7 +3637,7 @@ void add_kill( CHAR_DATA *ch, CHAR_DATA *mob )
     return;
 
   vnum = mob->pIndexData->vnum;
-  track = URANGE( 2, ((ch->ability_level[COMBAT_ABILITY]+3) * MAX_KILLTRACK)/LEVEL_AVATAR, MAX_KILLTRACK );
+  track = URANGE( 2, ((get_level( ch, COMBAT_ABILITY ) + 3) * MAX_KILLTRACK)/LEVEL_AVATAR, MAX_KILLTRACK );
   for ( x = 0; x < track; x++ )
     if ( ch->pcdata->killed[x].vnum == vnum )
       {
@@ -3677,7 +3672,7 @@ int times_killed( const CHAR_DATA *ch, const CHAR_DATA *mob )
     return 0;
 
   vnum = mob->pIndexData->vnum;
-  track = URANGE( 2, ((ch->ability_level[COMBAT_ABILITY]+3) * MAX_KILLTRACK)/LEVEL_AVATAR, MAX_KILLTRACK );
+  track = URANGE( 2, ((get_level( ch, COMBAT_ABILITY ) + 3) * MAX_KILLTRACK)/LEVEL_AVATAR, MAX_KILLTRACK );
   for ( x = 0; x < track; x++ )
     if ( ch->pcdata->killed[x].vnum == vnum )
       return ch->pcdata->killed[x].count;
@@ -3710,4 +3705,12 @@ bool has_comlink( const CHAR_DATA *ch )
 short get_level( const CHAR_DATA *ch, short ability )
 {
   return ch->ability_level[ability];
+}
+
+void set_level( CHAR_DATA *ch, short ability, int newlevel )
+{
+  if( newlevel >= 0 && newlevel <= MAX_ABILITY_LEVEL )
+    ch->ability_level[ability] = newlevel;
+  else
+    bug("%s: level out of range: %d", newlevel);
 }
