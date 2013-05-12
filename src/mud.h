@@ -4568,7 +4568,7 @@ extern "C" {
   long get_exp( const CHAR_DATA *ch, short ability );
   int get_exp_worth( const CHAR_DATA *ch );
   int exp_level( short level );
-  short get_ability_level( const CHAR_DATA *ch, short ability );
+  short get_level( const CHAR_DATA *ch, short ability );
   short get_trust( const CHAR_DATA *ch );
   short get_age( const CHAR_DATA *ch );
   short get_curr_str( const CHAR_DATA *ch );

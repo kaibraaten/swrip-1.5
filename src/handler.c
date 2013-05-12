@@ -3707,7 +3707,7 @@ bool has_comlink( const CHAR_DATA *ch )
   return FALSE;
 }
 
-short get_ability_level( const CHAR_DATA *ch, short ability )
+short get_level( const CHAR_DATA *ch, short ability )
 {
   return ch->ability_level[ability];
 }
