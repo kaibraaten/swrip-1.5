@@ -275,6 +275,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o \
 	$(CMDDIR)/teach.o \
 	$(CMDDIR)/tell.o \
 	$(CMDDIR)/time.o \
+	$(CMDDIR)/timecmd.o \
 	$(CMDDIR)/toplevel.o \
 	$(CMDDIR)/transfer.o \
 	$(CMDDIR)/trust.o \
