@@ -76,6 +76,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o \
 	$(CMDDIR)/bug.o \
 	$(CMDDIR)/bury.o \
 	$(CMDDIR)/capture.o \
+	$(CMDDIR)/cast.o \
 	$(CMDDIR)/cedit.o \
 	$(CMDDIR)/channels.o \
 	$(CMDDIR)/chat.o \
@@ -231,6 +232,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o \
 	$(CMDDIR)/retire.o \
 	$(CMDDIR)/return.o \
 	$(CMDDIR)/retran.o \
+	$(CMDDIR)/revert.o \
 	$(CMDDIR)/rgrub.o \
 	$(CMDDIR)/rlist.o \
 	$(CMDDIR)/roster.o \

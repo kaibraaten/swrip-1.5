@@ -56,7 +56,7 @@ bool is_legal_kill(CHAR_DATA *ch, CHAR_DATA *vch)
 }
 
 
-extern char *target_name;       /* from magic.c */
+extern char *spell_target_name;       /* from magic.c */
 
 /*
  * Perform a binary search on a section of the skill table
@@ -127,7 +127,7 @@ bool check_skill( CHAR_DATA *ch, char *command, char *argument )
       CHAR_DATA *victim = NULL;
       OBJ_DATA *obj = NULL;
 
-      target_name = "";
+      spell_target_name = "";
 
       switch ( skill_table[sn]->target )
         {
@@ -141,10 +141,10 @@ bool check_skill( CHAR_DATA *ch, char *command, char *argument )
           if ( argument[0] == '\0' )
             {
               if ( (victim=who_fighting(ch)) != NULL )
-                target_name = victim->name;
+                spell_target_name = victim->name;
             }
           else
-            target_name = argument;
+            spell_target_name = argument;
           break;
 
         case TAR_CHAR_OFFENSIVE:

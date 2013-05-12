@@ -4679,6 +4679,9 @@ extern "C" {
   void  update_userec( struct timeval *time_used, struct timerset *userec );
 
   /* magic.c */
+  void say_spell( CHAR_DATA *ch, int sn );
+  void immune_casting( SKILLTYPE *skill, CHAR_DATA *ch, CHAR_DATA *victim, OBJ_DATA *obj );
+  void *locate_targets( CHAR_DATA *ch, char *arg, int sn, CHAR_DATA **victim, OBJ_DATA **obj );
   bool  process_spell_components( CHAR_DATA *ch, int sn );
   int   ch_slookup( CHAR_DATA *ch, const char *name );
   int   find_spell( CHAR_DATA *ch, const char *name, bool know );

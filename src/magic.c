@@ -32,10 +32,16 @@
 /*
  * Local functions.
  */
-void    say_spell( CHAR_DATA *ch, int sn );
-CHAR_DATA *make_poly_mob( CHAR_DATA *ch, int vnum );
-ch_ret  spell_affect( int sn, int level, CHAR_DATA *ch, void *vo );
-ch_ret  spell_affectchar( int sn, int level, CHAR_DATA *ch, void *vo );
+static CHAR_DATA *make_poly_mob( CHAR_DATA *ch, int vnum );
+static ch_ret spell_affect( int sn, int level, CHAR_DATA *ch, void *vo );
+static ch_ret spell_affectchar( int sn, int level, CHAR_DATA *ch, void *vo );
+
+int pAbort;
+
+/*
+ * The kludgy global is for spells who want more stuff from command line.
+ */
+char *spell_target_name;
 
 /*
  * Is immune to a damage type
@@ -838,13 +844,10 @@ bool process_spell_components( CHAR_DATA *ch, int sn )
   return TRUE;
 }
 
-int pAbort;
-
 /*
  * Locate targets.
  */
-void *locate_targets( CHAR_DATA *ch, char *arg, int sn,
-                      CHAR_DATA **victim, OBJ_DATA **obj )
+void *locate_targets( CHAR_DATA *ch, char *arg, int sn, CHAR_DATA **victim, OBJ_DATA **obj )
 {
   SKILLTYPE *skill = get_skilltype( sn );
   void *vo      = NULL;
@@ -968,410 +971,6 @@ void *locate_targets( CHAR_DATA *ch, char *arg, int sn,
   return vo;
 }
 
-
-/*
- * The kludgy global is for spells who want more stuff from command line.
- */
-char *target_name;
-
-
-/*
- * Cast a spell.  Multi-caster and component support by Thoric
- */
-void do_cast( CHAR_DATA *ch, char *argument )
-{
-  char arg1[MAX_INPUT_LENGTH];
-  char arg2[MAX_INPUT_LENGTH];
-  static char staticbuf[MAX_INPUT_LENGTH];
-  CHAR_DATA *victim;
-  OBJ_DATA *obj;
-  void *vo;
-  int mana;
-  int sn;
-  ch_ret retcode;
-  bool dont_wait = FALSE;
-  SKILLTYPE *skill = NULL;
-  struct timeval time_used;
-
-  retcode = rNONE;
-
-  switch( ch->substate )
-    {
-    default:
-      /* no ordering charmed mobs to cast spells */
-      if ( IS_NPC(ch) && IS_AFFECTED( ch, AFF_CHARM ) )
-        {
-          send_to_char( "You can't seem to do that right now...\r\n", ch );
-          return;
-        }
-
-      if ( IS_SET( ch->in_room->room_flags, ROOM_NO_MAGIC ) )
-        {
-          set_char_color( AT_MAGIC, ch );
-          send_to_char( "You failed.\r\n", ch );
-          return;
-        }
-
-      target_name = one_argument( argument, arg1 );
-      one_argument( target_name, arg2 );
-
-      if ( arg1[0] == '\0' )
-        {
-          send_to_char( "Cast which what where?\r\n", ch );
-          return;
-        }
-
-      if ( get_trust(ch) < LEVEL_GOD )
-        {
-          if ( ( sn = find_spell( ch, arg1, TRUE ) ) < 0
-               || ( !IS_NPC(ch) &&  ch->pcdata->learned[sn] <= 0  ) )
-            {
-              send_to_char( "You can't do that.\r\n", ch );
-              return;
-            }
-          if ( (skill=get_skilltype(sn)) == NULL )
-            {
-              send_to_char( "You can't do that right now...\r\n", ch );
-              return;
-            }
-        }
-      else
-        {
-          if ( (sn=skill_lookup(arg1)) < 0 )
-            {
-              send_to_char( "We didn't create that yet...\r\n", ch );
-              return;
-            }
-          if ( sn >= MAX_SKILL )
-            {
-              send_to_char( "Hmm... that might hurt.\r\n", ch );
-              return;
-            }
-          if ( (skill=get_skilltype(sn)) == NULL )
-            {
-              send_to_char( "Somethis is severely wrong with that one...\r\n", ch );
-              return;
-            }
-          if ( skill->type != SKILL_SPELL )
-            {
-              send_to_char( "That isn't a force power.\r\n", ch );
-              return;
-            }
-          if ( !skill->spell_fun )
-            {
-              send_to_char( "We didn't finish that one yet...\r\n", ch );
-              return;
-            }
-        }
-
-      /*
-       * Something else removed by Merc                 -Thoric
-       */
-      if ( ch->position < skill->minimum_position )
-        {
-          switch( ch->position )
-            {
-            default:
-              send_to_char( "You can't concentrate enough.\r\n", ch );
-              break;
-            case POS_SITTING:
-              send_to_char( "You can't summon enough energy sitting down.\r\n", ch );
-              break;
-            case POS_RESTING:
-              send_to_char( "You're too relaxed to cast that spell.\r\n", ch );
-              break;
-            case POS_FIGHTING:
-              send_to_char( "You can't concentrate enough while fighting!\r\n", ch );
-              break;
-            case POS_SLEEPING:
-              send_to_char( "You dream about great feats of magic.\r\n", ch );
-              break;
-            }
-          return;
-        }
-
-      if ( skill->spell_fun == spell_null )
-        {
-          send_to_char( "That's not a spell!\r\n", ch );
-          return;
-        }
-
-      if ( !skill->spell_fun )
-        {
-          send_to_char( "You cannot cast that... yet.\r\n", ch );
-          return;
-        }
-
-      mana = IS_NPC(ch) ? 0 : skill->min_mana;
-
-      /*
-       * Locate targets.
-       */
-      vo = locate_targets( ch, arg2, sn, &victim, &obj );
-      if ( vo == &pAbort )
-        return;
-
-      if  ( is_safe(ch, victim) )
-        {
-          set_char_color( AT_MAGIC, ch );
-          send_to_char( "You cannot do that to them.\r\n", ch );
-          return;
-        }
-
-
-      if ( !IS_NPC(ch) && ch->mana < mana )
-        {
-          send_to_char( "The force is not strong enough within you.\r\n", ch );
-          return;
-        }
-      if ( skill->participants <= 1 )
-        break;
-      /* multi-participant spells                       -Thoric */
-      add_timer( ch, TIMER_DO_FUN, UMIN(skill->beats / 10, 3),
-                 do_cast, 1 );
-      act( AT_MAGIC, "You begin to feel the force in yourself and those around you...", ch, NULL, NULL, TO_CHAR );
-      act( AT_MAGIC, "$n reaches out with the force to those around...", ch, NULL, NULL, TO_ROOM );
-      sprintf( staticbuf, "%s %s", arg2, target_name );
-      ch->dest_buf = str_dup( staticbuf );
-      ch->tempnum = sn;
-      return;
-    case SUB_TIMER_DO_ABORT:
-      DISPOSE( ch->dest_buf );
-      if ( IS_VALID_SN((sn = ch->tempnum)) )
-        {
-          if ( (skill=get_skilltype(sn)) == NULL )
-            {
-              send_to_char( "Something went wrong...\r\n", ch );
-              bug( "do_cast: SUB_TIMER_DO_ABORT: bad sn %d", sn );
-              return;
-            }
-          mana = IS_NPC(ch) ? 0 : skill->min_mana;
-
-          if ( get_trust(ch) < LEVEL_IMMORTAL)    /* so imms dont lose mana */
-            ch->mana -= mana / 3;
-        }
-      set_char_color( AT_MAGIC, ch );
-      send_to_char( "You stop your concentration\r\n", ch );
-      /* should add chance of backfire here */
-      return;
-    case SUB_PAUSE:
-      sn = ch->tempnum;
-      if ( (skill=get_skilltype(sn)) == NULL )
-        {
-          send_to_char( "Something went wrong...\r\n", ch );
-          bug( "do_cast: substate 1: bad sn %d", sn );
-          return;
-        }
-      if ( !ch->dest_buf || !IS_VALID_SN(sn) || skill->type != SKILL_SPELL )
-        {
-          send_to_char( "Something negates the powers of the force.\r\n", ch );
-          bug( "do_cast: ch->dest_buf NULL or bad sn (%d)", sn );
-          return;
-        }
-      mana = IS_NPC(ch) ? 0 : skill->min_mana;
-      strcpy( staticbuf, (const char*)ch->dest_buf );
-      target_name = one_argument(staticbuf, arg2);
-      DISPOSE( ch->dest_buf );
-      ch->substate = SUB_NONE;
-      if ( skill->participants > 1 )
-        {
-          int cnt = 1;
-          CHAR_DATA *tmp;
-          TIMER *t;
-
-          for ( tmp = ch->in_room->first_person; tmp; tmp = tmp->next_in_room )
-            if (  tmp != ch
-                  &&   (t = get_timerptr( tmp, TIMER_DO_FUN )) != NULL
-                  &&    t->count >= 1 && t->do_fun == do_cast
-                  &&    tmp->tempnum == sn && tmp->dest_buf
-                  &&   !str_cmp( (const char*)tmp->dest_buf, staticbuf ) )
-              ++cnt;
-          if ( cnt >= skill->participants )
-            {
-              for ( tmp = ch->in_room->first_person; tmp; tmp = tmp->next_in_room )
-                if (  tmp != ch
-                      &&   (t = get_timerptr( tmp, TIMER_DO_FUN )) != NULL
-                      &&    t->count >= 1 && t->do_fun == do_cast
-                      &&    tmp->tempnum == sn && tmp->dest_buf
-                      &&   !str_cmp( (const char*)tmp->dest_buf, staticbuf ) )
-                  {
-                    extract_timer( tmp, t );
-                    act( AT_MAGIC, "Channeling your energy into $n, you help direct the force", ch, NULL, tmp, TO_VICT );
-                    act( AT_MAGIC, "$N channels $S energy into you!", ch, NULL, tmp, TO_CHAR );
-                    act( AT_MAGIC, "$N channels $S energy into $n!", ch, NULL, tmp, TO_NOTVICT );
-                    learn_from_success( tmp, sn );
-
-                    tmp->mana -= mana;
-                    tmp->substate = SUB_NONE;
-                    tmp->tempnum = -1;
-                    DISPOSE( tmp->dest_buf );
-                  }
-              dont_wait = TRUE;
-              send_to_char( "You concentrate all the energy into a burst of force!\r\n", ch );
-              vo = locate_targets( ch, arg2, sn, &victim, &obj );
-              if ( vo == &pAbort )
-                return;
-            }
-          else
-            {
-              set_char_color( AT_MAGIC, ch );
-              send_to_char( "There was not enough power for that to succeed...\r\n", ch );
-
-              if (get_trust(ch)  < LEVEL_IMMORTAL)    /* so imms dont lose mana */
-                ch->mana -= mana / 2;
-              learn_from_failure( ch, sn );
-              return;
-            }
-        }
-    }
-
-  if ( str_cmp( skill->name, "ventriloquate" ) )
-    say_spell( ch, sn );
-
-  if ( !dont_wait )
-    WAIT_STATE( ch, skill->beats );
-
-  /*
-   * Getting ready to cast... check for spell components        -Thoric
-   */
-  if ( !process_spell_components( ch, sn ) )
-    {
-
-      if (get_trust(ch)  < LEVEL_IMMORTAL)    /* so imms dont lose mana */
-        ch->mana -= mana / 2;
-      learn_from_failure( ch, sn );
-      return;
-    }
-
-  if ( !IS_NPC(ch) && abs(ch->alignment - skill->alignment) > 1010 )
-    {
-      if ( ch->alignment > skill->alignment  )
-        {
-          send_to_char( "You do not have enough anger in you.\r\n", ch );
-          if (get_trust(ch)  < LEVEL_IMMORTAL)    /* so imms dont lose mana */
-            ch->mana -= mana / 2;
-          return;
-        }
-      if (  ch->alignment < skill->alignment )
-        {
-          send_to_char( "Your anger and hatred prevent you from focusing.\r\n", ch );
-          if (get_trust(ch)  < LEVEL_IMMORTAL)    /* so imms dont lose mana */
-            ch->mana -= mana / 2;
-          return;
-        }
-    }
-  if ( !IS_NPC(ch)
-       &&   (number_percent( ) + skill->difficulty * 5) > ch->pcdata->learned[sn] )
-    {
-      /* Some more interesting loss of concentration messages  -Thoric */
-      switch( number_bits(2) )
-        {
-        case 0: /* too busy */
-          if ( ch->fighting )
-            send_to_char( "This round of battle is too hectic to concentrate properly.\r\n", ch );
-          else
-            send_to_char( "You lost your concentration.\r\n", ch );
-          break;
-        case 1: /* irritation */
-          if ( number_bits(2) == 0 )
-            {
-              switch( number_bits(2) )
-                {
-                case 0: send_to_char( "A tickle in your nose prevents you from keeping your concentration.\r\n", ch ); break;
-                case 1: send_to_char( "An itch on your leg keeps you from properly using the force.\r\n", ch ); break;
-                case 2: send_to_char( "A nagging though prevents you from focusing on the force.\r\n", ch ); break;
-                case 3: send_to_char( "A twitch in your eye disrupts your concentration for a moment.\r\n", ch ); break;
-                }
-            }
-          else
-            send_to_char( "Something distracts you, and you lose your concentration.\r\n", ch );
-          break;
-        case 2: /* not enough time */
-          if ( ch->fighting )
-            send_to_char( "There wasn't enough time this round to complete your concentration.\r\n", ch );
-          else
-            send_to_char( "You lost your concentration.\r\n", ch );
-          break;
-        case 3:
-          send_to_char( "A disturbance in the force muddles your concentration.\r\n", ch );
-          break;
-        }
-
-      if (get_trust(ch)  < LEVEL_IMMORTAL)    /* so imms dont lose mana */
-        ch->mana -= mana / 2;
-      learn_from_failure( ch, sn );
-      return;
-    }
-  else
-    {
-
-      ch->mana -= mana;
-
-      /*
-       * check for immunity to magic if victim is known...
-       * and it is a TAR_CHAR_DEFENSIVE/SELF spell
-       * otherwise spells will have to check themselves
-       */
-      if ( (skill->target == TAR_CHAR_DEFENSIVE
-            ||    skill->target == TAR_CHAR_SELF)
-           &&    victim && IS_SET(victim->immune, RIS_MAGIC) )
-        {
-          immune_casting( skill, ch, victim, NULL );
-          retcode = rSPELL_FAILED;
-        }
-      else
-        {
-          start_timer(&time_used);
-          retcode = (*skill->spell_fun) ( sn, get_level( ch, FORCE_ABILITY ), ch, vo );
-          end_timer(&time_used);
-          update_userec(&time_used, &skill->userec);
-        }
-    }
-
-  if ( retcode == rCHAR_DIED || retcode == rERROR || char_died(ch) )
-    return;
-  if ( retcode != rSPELL_FAILED )
-    {
-      int force_exp;
-
-      force_exp = skill->min_level*skill->min_level*10;
-      force_exp = URANGE( 0 , force_exp, ( exp_level(get_level( ch, FORCE_ABILITY ) + 1 ) - exp_level(get_level(ch, FORCE_ABILITY ) ) )/35 );
-      if( !ch->fighting  )
-        ch_printf( ch, "You gain %d force experience.\r\n" , force_exp );
-      gain_exp(ch, FORCE_ABILITY, force_exp );
-      learn_from_success( ch, sn );
-    }
-  else
-    learn_from_failure( ch, sn );
-
-  /*
-   * Fixed up a weird mess here, and added double safeguards    -Thoric
-   */
-  if ( skill->target == TAR_CHAR_OFFENSIVE
-       &&   victim
-       &&  !char_died(victim)
-       &&        victim != ch )
-    {
-      CHAR_DATA *vch, *vch_next;
-
-      for ( vch = ch->in_room->first_person; vch; vch = vch_next )
-        {
-          vch_next = vch->next_in_room;
-
-          if ( vch == victim )
-            {
-              if ( victim->master != ch
-                   &&  !victim->fighting )
-                retcode = multi_hit( victim, ch, TYPE_UNDEFINED );
-              break;
-            }
-        }
-    }
-
-  return;
-}
-
-
 /*
  * Cast spells at targets using a magical object.
  */
@@ -1427,7 +1026,8 @@ ch_ret obj_cast_spell( int sn, int level, CHAR_DATA *ch, CHAR_DATA *victim, OBJ_
       return rNONE;
     }
 
-  target_name = "";
+  spell_target_name = "";
+
   switch ( skill->target )
     {
     default:
@@ -1437,10 +1037,10 @@ ch_ret obj_cast_spell( int sn, int level, CHAR_DATA *ch, CHAR_DATA *victim, OBJ_
     case TAR_IGNORE:
       vo = NULL;
       if ( victim )
-        target_name = victim->name;
+        spell_target_name = victim->name;
       else
         if ( obj )
-          target_name = obj->name;
+          spell_target_name = obj->name;
       break;
 
     case TAR_CHAR_OFFENSIVE:
@@ -1908,9 +1508,9 @@ ch_ret spell_control_weather( int sn, int level, CHAR_DATA *ch, void *vo )
 {
   SKILLTYPE *skill = get_skilltype(sn);
 
-  if ( !str_cmp( target_name, "better" ) )
+  if ( !str_cmp( spell_target_name, "better" ) )
     weather_info.change += dice( level / 3, 4 );
-  else if ( !str_cmp( target_name, "worse" ) )
+  else if ( !str_cmp( spell_target_name, "worse" ) )
     weather_info.change -= dice( level / 3, 4 );
   else
     {
@@ -2522,13 +2122,13 @@ ch_ret spell_identify( int sn, int level, CHAR_DATA *ch, void *vo )
   SKILLTYPE *sktmp;
   SKILLTYPE *skill = get_skilltype(sn);
 
-  if ( target_name[0] == '\0' )
+  if ( spell_target_name[0] == '\0' )
     {
       send_to_char( "What would you like identified?\r\n", ch );
       return rSPELL_FAILED;
     }
 
-  if ( ( obj = get_obj_carry( ch, target_name ) ) != NULL )
+  if ( ( obj = get_obj_carry( ch, spell_target_name ) ) != NULL )
     {
       set_char_color( AT_LBLUE, ch );
       ch_printf( ch,
@@ -2653,7 +2253,7 @@ ch_ret spell_identify( int sn, int level, CHAR_DATA *ch, void *vo )
       return rNONE;
     }
 
-  else if ( ( victim = get_char_room( ch, target_name ) ) != NULL )
+  else if ( ( victim = get_char_room( ch, spell_target_name ) ) != NULL )
     {
 
       if ( IS_SET( victim->immune, RIS_MAGIC ) )
@@ -2715,7 +2315,7 @@ ch_ret spell_identify( int sn, int level, CHAR_DATA *ch, void *vo )
 
   else
     {
-      ch_printf(ch, "You can't find %s!\r\n", target_name );
+      ch_printf(ch, "You can't find %s!\r\n", spell_target_name );
       return rSPELL_FAILED;
     }
   return rNONE;
@@ -2730,10 +2330,10 @@ ch_ret spell_invis( int sn, int level, CHAR_DATA *ch, void *vo )
 
   /* Modifications on 1/2/96 to work on player/object - Scryn */
 
-  if (target_name[0] == '\0')
+  if (spell_target_name[0] == '\0')
     victim = ch;
   else
-    victim = get_char_room(ch, target_name);
+    victim = get_char_room(ch, spell_target_name);
 
   if( victim )
     {
@@ -2765,7 +2365,7 @@ ch_ret spell_invis( int sn, int level, CHAR_DATA *ch, void *vo )
     {
       OBJ_DATA *obj;
 
-      obj = get_obj_carry( ch, target_name );
+      obj = get_obj_carry( ch, spell_target_name );
 
       if (obj)
         {
@@ -2781,7 +2381,7 @@ ch_ret spell_invis( int sn, int level, CHAR_DATA *ch, void *vo )
           return rNONE;
         }
     }
-  ch_printf(ch, "You can't find %s!\r\n", target_name);
+  ch_printf(ch, "You can't find %s!\r\n", spell_target_name);
   return rSPELL_FAILED;
 }
 
@@ -2866,7 +2466,7 @@ ch_ret spell_locate_object( int sn, int level, CHAR_DATA *ch, void *vo )
   found = FALSE;
   for ( obj = first_object; obj; obj = obj->next )
     {
-      if ( !can_see_obj( ch, obj ) || !nifty_is_name( target_name, obj->name ) )
+      if ( !can_see_obj( ch, obj ) || !nifty_is_name( spell_target_name, obj->name ) )
         continue;
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) && !IS_IMMORTAL(ch) )
         continue;
@@ -3031,7 +2631,7 @@ ch_ret spell_remove_trap( int sn, int level, CHAR_DATA *ch, void *vo )
   int retcode;
   SKILLTYPE *skill = get_skilltype(sn);
 
-  if ( !target_name || target_name[0] == '\0' )
+  if ( !spell_target_name || spell_target_name[0] == '\0' )
     {
       send_to_char( "Remove trap on what?\r\n", ch );
       return rSPELL_FAILED;
@@ -3046,7 +2646,7 @@ ch_ret spell_remove_trap( int sn, int level, CHAR_DATA *ch, void *vo )
     }
 
   for ( obj = ch->in_room->first_content; obj; obj = obj->next_content )
-    if ( can_see_obj( ch, obj ) && nifty_is_name( target_name, obj->name ) )
+    if ( can_see_obj( ch, obj ) && nifty_is_name( spell_target_name, obj->name ) )
       {
         found = TRUE;
         break;
@@ -3125,7 +2725,7 @@ ch_ret spell_sleep( int sn, int level, CHAR_DATA *ch, void *vo )
   CHAR_DATA *victim;
   SKILLTYPE *skill = get_skilltype(sn);
 
-  if ( ( victim = get_char_room( ch, target_name ) ) == NULL )
+  if ( ( victim = get_char_room( ch, spell_target_name ) ) == NULL )
     {
       send_to_char( "They aren't here.\r\n", ch );
       return rSPELL_FAILED;
@@ -3224,10 +2824,10 @@ ch_ret spell_ventriloquate( int sn, int level, CHAR_DATA *ch, void *vo )
   char speaker[MAX_INPUT_LENGTH];
   CHAR_DATA *vch;
 
-  target_name = one_argument( target_name, speaker );
+  spell_target_name = one_argument( spell_target_name, speaker );
 
-  sprintf( buf1, "%s says '%s'.\r\n",              speaker, target_name );
-  sprintf( buf2, "Someone makes %s say '%s'.\r\n", speaker, target_name );
+  sprintf( buf1, "%s says '%s'.\r\n",              speaker, spell_target_name );
+  sprintf( buf2, "Someone makes %s say '%s'.\r\n", speaker, spell_target_name );
   buf1[0] = UPPER(buf1[0]);
 
   for ( vch = ch->in_room->first_person; vch; vch = vch->next_in_room )
@@ -3587,7 +3187,7 @@ ch_ret spell_farsight( int sn, int level, CHAR_DATA *ch, void *vo )
 
   saving = number_percent();
 
-  if ( ( victim = get_char_world( ch, target_name ) ) == NULL
+  if ( ( victim = get_char_world( ch, spell_target_name ) ) == NULL
        ||   victim == ch
        ||   !victim->in_room
        ||   IS_SET(victim->in_room->room_flags, ROOM_PRIVATE)
@@ -3715,13 +3315,13 @@ ch_ret spell_remove_invis( int sn, int level, CHAR_DATA *ch, void *vo )
   OBJ_DATA *obj;
   SKILLTYPE *skill = get_skilltype(sn);
 
-  if ( target_name[0] == '\0' )
+  if ( spell_target_name[0] == '\0' )
     {
       send_to_char( "What should the spell be cast upon?\r\n", ch );
       return rSPELL_FAILED;
     }
 
-  obj = get_obj_carry( ch, target_name );
+  obj = get_obj_carry( ch, spell_target_name );
 
   if ( obj )
     {
@@ -3738,13 +3338,13 @@ ch_ret spell_remove_invis( int sn, int level, CHAR_DATA *ch, void *vo )
     {
       CHAR_DATA *victim;
 
-      victim = get_char_room(ch, target_name);
+      victim = get_char_room(ch, spell_target_name);
 
       if (victim)
         {
           if(!can_see(ch, victim))
             {
-              ch_printf(ch, "You don't see %s!\r\n", target_name);
+              ch_printf(ch, "You don't see %s!\r\n", spell_target_name);
               return rSPELL_FAILED;
             }
 
@@ -3793,7 +3393,7 @@ ch_ret spell_remove_invis( int sn, int level, CHAR_DATA *ch, void *vo )
           return rNONE;
         }
 
-      ch_printf(ch, "You can't find %s!\r\n", target_name);
+      ch_printf(ch, "You can't find %s!\r\n", spell_target_name);
       return rSPELL_FAILED;
     }
 }
@@ -3939,7 +3539,7 @@ ch_ret spell_possess( int sn, int level, CHAR_DATA *ch, void *vo )
       return rSPELL_FAILED;
     }
 
-  if ( (victim = get_char_room( ch, target_name ) ) == NULL)
+  if ( (victim = get_char_room( ch, spell_target_name ) ) == NULL)
     {
       send_to_char("They aren't here!\r\n", ch);
       return rSPELL_FAILED;
@@ -4022,7 +3622,7 @@ ch_ret spell_knock( int sn, int level, CHAR_DATA *ch, void *vo )
    * shouldn't know why it didn't work, and shouldn't work on pickproof
    * exits.  -Thoric
    */
-  if ( !(pexit=find_door(ch, target_name, FALSE))
+  if ( !(pexit=find_door(ch, spell_target_name, FALSE))
        ||   !IS_SET(pexit->exit_info, EX_CLOSED)
        ||   !IS_SET(pexit->exit_info, EX_LOCKED)
        ||    IS_SET(pexit->exit_info, EX_PICKPROOF) )
@@ -4044,7 +3644,7 @@ ch_ret spell_dream( int sn, int level, CHAR_DATA *ch, void *vo )
   CHAR_DATA *victim;
   char arg[MAX_INPUT_LENGTH];
 
-  target_name = one_argument(target_name, arg);
+  spell_target_name = one_argument(spell_target_name, arg);
   set_char_color(AT_MAGIC, ch);
   if ( !(victim = get_char_world(ch, arg)) )
     {
@@ -4062,7 +3662,7 @@ ch_ret spell_dream( int sn, int level, CHAR_DATA *ch, void *vo )
       return rSPELL_FAILED;
     }
 
-  if ( !target_name )
+  if ( !spell_target_name )
     {
       send_to_char("What do you want them to dream about?\r\n", ch );
       return rSPELL_FAILED;
@@ -4070,7 +3670,7 @@ ch_ret spell_dream( int sn, int level, CHAR_DATA *ch, void *vo )
 
   set_char_color(AT_TELL, victim);
   ch_printf(victim, "You have dreams about %s telling you '%s'.\r\n",
-            PERS(ch, victim), target_name);
+            PERS(ch, victim), spell_target_name);
   send_to_char("Ok.\r\n", ch);
   return rNONE;
 }
@@ -4092,7 +3692,7 @@ ch_ret spell_polymorph( int sn, int level, CHAR_DATA *ch, void *vo )
       return rSPELL_FAILED;
     }
 
-  if (!str_cmp (target_name, "wolf"))
+  if (!str_cmp (spell_target_name, "wolf"))
     poly_vnum = MOB_VNUM_POLY_WOLF;
 
   else
@@ -4942,9 +4542,9 @@ ch_ret spell_create_obj( int sn, int level, CHAR_DATA *ch, void *vo )
    */
   if ( vnum == 0 )
     {
-      if ( !str_cmp( target_name, "sword" ) )
+      if ( !str_cmp( spell_target_name, "sword" ) )
         vnum = OBJ_VNUM_SCHOOL_SWORD;
-      if ( !str_cmp( target_name, "shield" ) )
+      if ( !str_cmp( spell_target_name, "shield" ) )
         vnum = OBJ_VNUM_SCHOOL_SHIELD;
     }
 
@@ -5049,11 +4649,11 @@ ch_ret spell_smaug( int sn, int level, CHAR_DATA *ch, void *vo )
       /* affect a distant player */
       if ( SPELL_FLAG(skill, SF_DISTANT)
            &&   SPELL_FLAG(skill, SF_CHARACTER))
-        return spell_affect(sn, level, ch, get_char_world( ch, target_name ));
+        return spell_affect(sn, level, ch, get_char_world( ch, spell_target_name ));
 
       /* affect a player in this room (should have been TAR_CHAR_XXX) */
       if ( SPELL_FLAG(skill, SF_CHARACTER) )
-        return spell_affect(sn, level, ch, get_char_room( ch, target_name ));
+        return spell_affect(sn, level, ch, get_char_room( ch, spell_target_name ));
 
       /* will fail, or be an area/group affect */
       return spell_affect( sn, level, ch, vo );
