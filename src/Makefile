@@ -340,6 +340,32 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o \
 	$(CMDDIR)/yell.o \
 	$(CMDDIR)/zap.o \
 	$(CMDDIR)/zones.o \
+	$(MPDIR)/mpapply.o \
+	$(MPDIR)/mpapplyb.o \
+	$(MPDIR)/mpasound.o \
+	$(MPDIR)/mpat.o \
+	$(MPDIR)/mpclosepassage.o \
+	$(MPDIR)/mpdamage.o \
+	$(MPDIR)/mpdeposit.o \
+	$(MPDIR)/mpdream.o \
+	$(MPDIR)/mpecho.o \
+	$(MPDIR)/mpechoaround.o \
+	$(MPDIR)/mpechoat.o \
+	$(MPDIR)/mpforce.o \
+	$(MPDIR)/mpgain.o \
+	$(MPDIR)/mpgoto.o \
+	$(MPDIR)/mpinvis.o \
+	$(MPDIR)/mpjunk.o \
+	$(MPDIR)/mpkill.o \
+	$(MPDIR)/mpmload.o \
+	$(MPDIR)/mpnothing.o \
+	$(MPDIR)/mpoload.o \
+	$(MPDIR)/mpopenpassage.o \
+	$(MPDIR)/mppurge.o \
+	$(MPDIR)/mprestore.o \
+	$(MPDIR)/mpslay.o \
+	$(MPDIR)/mptransfer.o \
+	$(MPDIR)/mpwithdraw.o \
 
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 

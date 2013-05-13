@@ -1025,7 +1025,7 @@ void do_mp_restore( CHAR_DATA *ch, char *argument )
     victim->max_hit : hp;
 }
 
-void  do_mpgain( CHAR_DATA *ch, char *argument )
+void do_mpgain( CHAR_DATA *ch, char *argument )
 {
   char arg1[ MAX_INPUT_LENGTH ];
   char arg2[ MAX_INPUT_LENGTH ];
