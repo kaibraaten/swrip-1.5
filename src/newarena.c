@@ -253,7 +253,7 @@ void do_chaos(CHAR_DATA *ch, char *argument)
       return;
     }
 
-  if ((lo_lim || hi_lim || game_length) < 0 )
+  if ( lo_lim < 0 || hi_lim < 0 || game_length < 0 )
     {
       send_to_char("I like positive numbers thank you.\r\n", ch);
       return;
@@ -272,9 +272,7 @@ void do_chaos(CHAR_DATA *ch, char *argument)
   bet_pot = 0;
   barena = 1;
   start_arena();
-
 }
-
 
 void start_arena()
 {
@@ -482,7 +480,6 @@ void show_jack_pot()
           buf1, arena_pot);
   sprintf(buf1, "%s%d credits have been bet on this arena.\r\n",buf1, bet_pot);
   to_channel(buf1,CHANNEL_ARENA,"&RArena&W",5);
-
 }
 
 void silent_end()
@@ -556,24 +553,9 @@ int num_in_arena()
             num++;
         }
     }
+
   return num;
 }
-
-/*void sportschan(char *argument)
-  {
-  char buf1[MAX_INPUT_LENGTH];
-  DESCRIPTOR_DATA *i;
-
-  sprintf(buf1, "&R[Arena] &W%s\r\n", argument);
-
-  for (i = first_descriptor; i; i = i->next)
-  {
-  if (!i->connected && i->character)
-  {
-  send_to_char(buf1, i->character);
-  }
-  }
-  }*/
 
 void do_awho(CHAR_DATA *ch, char *argument)
 {
@@ -605,7 +587,6 @@ void do_awho(CHAR_DATA *ch, char *argument)
         sprintf(buf2, "&W%s\r\n", tch->name);
         send_to_char(buf2,ch);
       }
-  return;
 }
 
 void do_ahall(CHAR_DATA *ch, char *argument)
@@ -654,7 +635,6 @@ void do_ahall(CHAR_DATA *ch, char *argument)
       sprintf(buf, format2, fame_node->name, site, fame_node->award);
       send_to_char(buf, ch);
     }
-  return;
 }
 
 void load_hall_of_fame(void)
@@ -694,10 +674,9 @@ void write_fame_list(void)
       bug("Error writing _hall_of_fame_list", 0);
       return;
     }
+
   write_one_fame_node(fl, fame_list);/* recursively write from end to start */
   fclose(fl);
-
-  return;
 }
 
 void write_one_fame_node(FILE * fp, struct hall_of_fame_element * node)
@@ -748,7 +727,7 @@ void do_challenge(CHAR_DATA *ch, char *argument)
 
   if (IS_IMMORTAL(ch) || IS_IMMORTAL(victim))
     {
-      send_to_char("Sorry, Immortal's are not allowed to participate in the arena.\r\n",ch);
+      send_to_char("Sorry, Immortals are not allowed to participate in the arena.\r\n",ch);
       return;
     }
 
@@ -764,13 +743,14 @@ void do_challenge(CHAR_DATA *ch, char *argument)
       return;
     }
 
-  if (victim->top_level<5)
+  if (victim->top_level < 5)
     {
       send_to_char("&WThat character is too young.\r\n",ch);
       return;
     }
 
-  if ((!(ch->top_level-15<victim->top_level))||(!(ch->top_level+15>victim->top_level)))
+  if ( ( !( ch->top_level - 15 < victim->top_level) )
+       || ( !(ch->top_level + 15 > victim->top_level) ) )
     {
       send_to_char("&WThat character is out of your level range.\r\n",ch);
       return;
