@@ -1855,14 +1855,6 @@ Log         0
 End
 
 #COMMAND
-Name        mpadvance~
-Code        do_mpadvance
-Position    0
-Level       0
-Log         1
-End
-
-#COMMAND
 Name        mpapply~
 Code        do_mpapply
 Position    0
