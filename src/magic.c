@@ -28,7 +28,7 @@
 /*
  * Local functions.
  */
-static CHAR_DATA *make_poly_mob( CHAR_DATA *ch, int vnum );
+static CHAR_DATA *make_poly_mob( const CHAR_DATA *ch, int vnum );
 static ch_ret spell_affect( int sn, int level, CHAR_DATA *ch, void *vo );
 static ch_ret spell_affectchar( int sn, int level, CHAR_DATA *ch, void *vo );
 
@@ -42,33 +42,58 @@ char *spell_target_name;
 /*
  * Is immune to a damage type
  */
-bool is_immune( CHAR_DATA *ch, short damtype )
+static bool is_immune( const CHAR_DATA *ch, short damtype )
 {
   switch( damtype )
     {
-    case SD_FIRE:            if (IS_SET(ch->immune, RIS_FIRE))   return TRUE;
-    case SD_COLD:            if (IS_SET(ch->immune, RIS_COLD))   return TRUE;
-    case SD_ELECTRICITY: if (IS_SET(ch->immune, RIS_ELECTRICITY)) return TRUE;
-    case SD_ENERGY:          if (IS_SET(ch->immune, RIS_ENERGY)) return TRUE;
-    case SD_ACID:            if (IS_SET(ch->immune, RIS_ACID))   return TRUE;
-    case SD_POISON:          if (IS_SET(ch->immune, RIS_POISON)) return TRUE;
-      if (ch->race == RACE_DROID) return TRUE;
-    case SD_DRAIN:           if (IS_SET(ch->immune, RIS_DRAIN))  return TRUE;
-      if (ch->race == RACE_DROID) return TRUE;
+    case SD_FIRE:
+      if (IS_SET(ch->immune, RIS_FIRE)) 
+	return TRUE;
 
+    case SD_COLD:
+      if (IS_SET(ch->immune, RIS_COLD))
+	return TRUE;
+
+    case SD_ELECTRICITY:
+      if (IS_SET(ch->immune, RIS_ELECTRICITY))
+	return TRUE;
+
+    case SD_ENERGY:
+      if (IS_SET(ch->immune, RIS_ENERGY))
+	return TRUE;
+
+    case SD_ACID:
+      if (IS_SET(ch->immune, RIS_ACID))
+	return TRUE;
+
+    case SD_POISON:
+      if (IS_SET(ch->immune, RIS_POISON))
+	return TRUE;
+
+      if (ch->race == RACE_DROID)
+	return TRUE;
+
+    case SD_DRAIN:
+      if (IS_SET(ch->immune, RIS_DRAIN))
+	return TRUE;
+
+      if (ch->race == RACE_DROID)
+	return TRUE;
     }
+
   return FALSE;
 }
 
 /*
  * Lookup a skill by name, only stopping at skills the player has.
  */
-int ch_slookup( CHAR_DATA *ch, const char *name )
+int ch_slookup( const CHAR_DATA *ch, const char *name )
 {
   int sn;
 
   if ( IS_NPC(ch) )
     return skill_lookup( name );
+
   for ( sn = 0; sn < top_sn; sn++ )
     {
       if ( !skill_table[sn]->name )
@@ -97,14 +122,6 @@ int herb_lookup( const char *name )
            &&  !str_prefix( name, herb_table[sn]->name ) )
         return sn;
     }
-  return -1;
-}
-
-/*
- * Lookup a personal skill
- */
-int personal_lookup( CHAR_DATA *ch, const char *name )
-{
   return -1;
 }
 
@@ -203,7 +220,7 @@ int bsearch_skill_exact( const char *name, int first, int top )
  * Each different section of the skill table is sorted alphabetically
  * Only match skills player knows                               -Thoric
  */
-int ch_bsearch_skill( CHAR_DATA *ch, const char *name, int first, int top )
+static int ch_bsearch_skill( const CHAR_DATA *ch, const char *name, int first, int top )
 {
   int sn;
 
@@ -226,7 +243,7 @@ int ch_bsearch_skill( CHAR_DATA *ch, const char *name, int first, int top )
 }
 
 
-int find_spell( CHAR_DATA *ch, const char *name, bool know )
+int find_spell( const CHAR_DATA *ch, const char *name, bool know )
 {
   if ( IS_NPC(ch) || !know )
     return bsearch_skill( name, gsn_first_spell, gsn_first_skill-1 );
@@ -234,7 +251,7 @@ int find_spell( CHAR_DATA *ch, const char *name, bool know )
     return ch_bsearch_skill( ch, name, gsn_first_spell, gsn_first_skill-1 );
 }
 
-int find_skill( CHAR_DATA *ch, const char *name, bool know )
+int find_skill( const CHAR_DATA *ch, const char *name, bool know )
 {
   if ( IS_NPC(ch) || !know )
     return bsearch_skill( name, gsn_first_skill, gsn_first_weapon-1 );
@@ -242,7 +259,7 @@ int find_skill( CHAR_DATA *ch, const char *name, bool know )
     return ch_bsearch_skill( ch, name, gsn_first_skill, gsn_first_weapon-1 );
 }
 
-int find_weapon( CHAR_DATA *ch, const char *name, bool know )
+int find_weapon( const CHAR_DATA *ch, const char *name, bool know )
 {
   if ( IS_NPC(ch) || !know )
     return bsearch_skill( name, gsn_first_weapon, gsn_first_tongue-1 );
@@ -250,14 +267,13 @@ int find_weapon( CHAR_DATA *ch, const char *name, bool know )
     return ch_bsearch_skill( ch, name, gsn_first_weapon, gsn_first_tongue-1 );
 }
 
-int find_tongue( CHAR_DATA *ch, const char *name, bool know )
+int find_tongue( const CHAR_DATA *ch, const char *name, bool know )
 {
   if ( IS_NPC(ch) || !know )
     return bsearch_skill( name, gsn_first_tongue, gsn_top_sn-1 );
   else
     return ch_bsearch_skill( ch, name, gsn_first_tongue, gsn_top_sn-1 );
 }
-
 
 /*
  * Lookup a skill by slot number.
@@ -488,7 +504,7 @@ int ris_save( CHAR_DATA *ch, int save_chance, int ris )
  * Used for spell dice parsing, ie: 3d8+L-6
  *
  */
-int rd_parse(CHAR_DATA *ch, int level, char *expr)
+int rd_parse(const CHAR_DATA *ch, int level, char *expr)
 {
   int x, lop = 0, gop = 0, eop = 0;
   char operation;
@@ -585,7 +601,7 @@ int rd_parse(CHAR_DATA *ch, int level, char *expr)
 }
 
 /* wrapper function so as not to destroy expr */
-int dice_parse(CHAR_DATA *ch, int level, char *expr)
+int dice_parse(const CHAR_DATA *ch, int level, char *expr)
 {
   char buf[MAX_INPUT_LENGTH];
 
@@ -597,7 +613,7 @@ int dice_parse(CHAR_DATA *ch, int level, char *expr)
  * Compute a saving throw.
  * Negative apply's make saving throw better.
  */
-bool saves_poison_death( int level, CHAR_DATA *victim )
+bool saves_poison_death( int level, const CHAR_DATA *victim )
 {
   int save;
 
@@ -607,7 +623,7 @@ bool saves_poison_death( int level, CHAR_DATA *victim )
   save = URANGE( 5, save, 95 );
   return chance( victim, save );
 }
-bool saves_wands( int level, CHAR_DATA *victim )
+bool saves_wands( int level, const CHAR_DATA *victim )
 {
   int save;
 
@@ -618,7 +634,7 @@ bool saves_wands( int level, CHAR_DATA *victim )
   save = URANGE( 5, save, 95 );
   return chance( victim, save );
 }
-bool saves_para_petri( int level, CHAR_DATA *victim )
+bool saves_para_petri( int level, const CHAR_DATA *victim )
 {
   int save;
 
@@ -628,7 +644,7 @@ bool saves_para_petri( int level, CHAR_DATA *victim )
   save = URANGE( 5, save, 95 );
   return chance( victim, save );
 }
-bool saves_breath( int level, CHAR_DATA *victim )
+bool saves_breath( int level, const CHAR_DATA *victim )
 {
   int save;
 
@@ -636,7 +652,7 @@ bool saves_breath( int level, CHAR_DATA *victim )
   save = URANGE( 5, save, 95 );
   return chance( victim, save );
 }
-bool saves_spell_staff( int level, CHAR_DATA *victim )
+bool saves_spell_staff( int level, const CHAR_DATA *victim )
 {
   int save;
 
@@ -2797,22 +2813,6 @@ ch_ret spell_sleep( int sn, int level, CHAR_DATA *ch, void *vo )
   return rNONE;
 }
 
-
-
-ch_ret spell_summon( int sn, int level, CHAR_DATA *ch, void *vo )
-{
-  return rNONE;
-}
-
-
-
-ch_ret spell_teleport( int sn, int level, CHAR_DATA *ch, void *vo )
-{
-  return rNONE;
-}
-
-
-
 ch_ret spell_ventriloquate( int sn, int level, CHAR_DATA *ch, void *vo )
 {
   char buf1[MAX_STRING_LENGTH];
@@ -3142,30 +3142,6 @@ ch_ret spell_notfound( int sn, int level, CHAR_DATA *ch, void *vo )
  *        something about saltpeter or brimstone
  */
 
-/* Working on DM's transport eq suggestion - Scryn 8/13 */
-ch_ret spell_transport( int sn, int level, CHAR_DATA *ch, void *vo )
-{
-  return rNONE;
-}
-
-
-/*
- * Syntax portal (mob/char)
- * opens a 2-way EX_PORTAL from caster's room to room inhabited by
- *  mob or character won't mess with existing exits
- *
- * do_mp_open_passage, combined with spell_astral
- */
-ch_ret spell_portal( int sn, int level, CHAR_DATA *ch, void *vo )
-{
-  return rNONE;
-}
-
-ch_ret spell_astral_walk( int sn, int level, CHAR_DATA *ch, void *vo )
-{
-  return rNONE;
-}
-
 ch_ret spell_farsight( int sn, int level, CHAR_DATA *ch, void *vo )
 {
   ROOM_INDEX_DATA *location;
@@ -3278,31 +3254,6 @@ ch_ret spell_recharge( int sn, int level, CHAR_DATA *ch, void *vo )
       send_to_char( "You can't recharge that!\r\n", ch);
       return rSPELL_FAILED;
     }
-}
-
-/*
- * Idea from AD&D 2nd edition player's handbook (c)1989 TSR Hobbies Inc.
- * -Thoric
- */
-ch_ret spell_plant_pass( int sn, int level, CHAR_DATA *ch, void *vo )
-{
-  return rNONE;
-}
-
-/*
- * Vampire version of astral_walk                               -Thoric
- */
-ch_ret spell_mist_walk( int sn, int level, CHAR_DATA *ch, void *vo )
-{
-  return rNONE;
-}
-
-/*
- * Cleric version of astral_walk                                -Thoric
- */
-ch_ret spell_solar_flight( int sn, int level, CHAR_DATA *ch, void *vo )
-{
-  return rNONE;
 }
 
 /* Scryn 2/2/96 */
@@ -3717,7 +3668,7 @@ ch_ret spell_polymorph( int sn, int level, CHAR_DATA *ch, void *vo )
   return rNONE;
 }
 
-CHAR_DATA *make_poly_mob(CHAR_DATA *ch, int vnum)
+static CHAR_DATA *make_poly_mob(const CHAR_DATA *ch, int vnum)
 {
   CHAR_DATA *mob;
   MOB_INDEX_DATA *pMobIndex;
@@ -3841,13 +3792,6 @@ ch_ret spell_scorching_surge( int sn, int level, CHAR_DATA *ch, void *vo )
        ch, NULL, NULL, TO_CHAR );
   return damage( ch, victim, (dam*1.4), sn );
 }
-
-
-ch_ret spell_helical_flow( int sn, int level, CHAR_DATA *ch, void *vo )
-{
-  return rNONE;
-}
-
 
 /*******************************************************
  * Everything after this point is part of SMAUG SPELLS *
@@ -5198,15 +5142,5 @@ ch_ret spell_midas_touch( int sn, int level, CHAR_DATA *ch, void *vo )
   obj_to_char( obj, victim );
 
   send_to_char( "You transmogrify the item to gold!\r\n", ch );
-  return rNONE;
-}
-
-ch_ret spell_suggest( int sn, int level, CHAR_DATA *ch, void *vo )
-{
-  return rNONE;
-}
-
-ch_ret spell_cure_addiction( int sn, int level, CHAR_DATA *ch, void *vo )
-{
   return rNONE;
 }

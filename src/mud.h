@@ -3973,7 +3973,6 @@ DECLARE_SPELL_FUN(      spell_null              );
 DECLARE_SPELL_FUN(      spell_notfound          );
 DECLARE_SPELL_FUN(      spell_acid_blast        );
 DECLARE_SPELL_FUN(      spell_animate_dead      );
-DECLARE_SPELL_FUN(      spell_astral_walk       );
 DECLARE_SPELL_FUN(      spell_blindness         );
 DECLARE_SPELL_FUN(      spell_burning_hands     );
 DECLARE_SPELL_FUN(      spell_call_lightning    );
@@ -4011,9 +4010,7 @@ DECLARE_SPELL_FUN(      spell_know_alignment    );
 DECLARE_SPELL_FUN(      spell_lightning_bolt    );
 DECLARE_SPELL_FUN(      spell_locate_object     );
 DECLARE_SPELL_FUN(      spell_magic_missile     );
-DECLARE_SPELL_FUN(      spell_mist_walk         );
 DECLARE_SPELL_FUN(      spell_pass_door         );
-DECLARE_SPELL_FUN(      spell_plant_pass        );
 DECLARE_SPELL_FUN(      spell_poison            );
 DECLARE_SPELL_FUN(      spell_polymorph         );
 DECLARE_SPELL_FUN(      spell_possess           );
@@ -4024,9 +4021,6 @@ DECLARE_SPELL_FUN(      spell_remove_trap       );
 DECLARE_SPELL_FUN(      spell_shocking_grasp    );
 DECLARE_SPELL_FUN(      spell_sleep             );
 DECLARE_SPELL_FUN(      spell_smaug             );
-DECLARE_SPELL_FUN(      spell_solar_flight      );
-DECLARE_SPELL_FUN(      spell_summon            );
-DECLARE_SPELL_FUN(      spell_teleport          );
 DECLARE_SPELL_FUN(      spell_ventriloquate     );
 DECLARE_SPELL_FUN(      spell_weaken            );
 DECLARE_SPELL_FUN(      spell_word_of_recall    );
@@ -4037,10 +4031,6 @@ DECLARE_SPELL_FUN(      spell_gas_breath        );
 DECLARE_SPELL_FUN(      spell_lightning_breath  );
 DECLARE_SPELL_FUN(      spell_spiral_blast      );
 DECLARE_SPELL_FUN(      spell_scorching_surge   );
-DECLARE_SPELL_FUN(      spell_helical_flow      );
-DECLARE_SPELL_FUN(      spell_transport                 );
-DECLARE_SPELL_FUN(      spell_portal                    );
-
 DECLARE_SPELL_FUN(      spell_ethereal_fist                 );
 DECLARE_SPELL_FUN(      spell_spectral_furor                );
 DECLARE_SPELL_FUN(      spell_hand_of_chaos                 );
@@ -4059,9 +4049,6 @@ DECLARE_SPELL_FUN(      spell_black_hand                    );
 DECLARE_SPELL_FUN(      spell_black_fist                    );
 DECLARE_SPELL_FUN(      spell_black_lightning               );
 DECLARE_SPELL_FUN(      spell_midas_touch                   );
-
-DECLARE_SPELL_FUN(      spell_suggest                       );
-DECLARE_SPELL_FUN(      spell_cure_addiction                );
 
 /*
  * Data files used by the server.
@@ -4680,24 +4667,23 @@ extern "C" {
   void immune_casting( SKILLTYPE *skill, CHAR_DATA *ch, CHAR_DATA *victim, OBJ_DATA *obj );
   void *locate_targets( CHAR_DATA *ch, char *arg, int sn, CHAR_DATA **victim, OBJ_DATA **obj );
   bool  process_spell_components( CHAR_DATA *ch, int sn );
-  int   ch_slookup( CHAR_DATA *ch, const char *name );
-  int   find_spell( CHAR_DATA *ch, const char *name, bool know );
-  int   find_skill( CHAR_DATA *ch, const char *name, bool know );
-  int   find_weapon( CHAR_DATA *ch, const char *name, bool know );
-  int   find_tongue( CHAR_DATA *ch, const char *name, bool know );
+  int   ch_slookup( const CHAR_DATA *ch, const char *name );
+  int   find_spell( const CHAR_DATA *ch, const char *name, bool know );
+  int   find_skill( const CHAR_DATA *ch, const char *name, bool know );
+  int   find_weapon( const CHAR_DATA *ch, const char *name, bool know );
+  int   find_tongue( const CHAR_DATA *ch, const char *name, bool know );
   int   skill_lookup( const char *name );
   int   herb_lookup( const char *name );
-  int   personal_lookup( CHAR_DATA *ch, const char *name );
   int   slot_lookup( int slot );
   int   bsearch_skill( const char *name, int first, int top );
   int   bsearch_skill_exact( const char *name, int first, int top );
-  bool  saves_poison_death( int level, CHAR_DATA *victim ) ;
-  bool  saves_wand( int level, CHAR_DATA *victim );
-  bool  saves_para_petri( int level, CHAR_DATA *victim );
-  bool  saves_breath( int level, CHAR_DATA *victim );
-  bool  saves_spell_staff( int level, CHAR_DATA *victim );
-  ch_ret        obj_cast_spell( int sn, int level, CHAR_DATA *ch, CHAR_DATA *victim, OBJ_DATA *obj );
-  int   dice_parse( CHAR_DATA *ch, int level, char *exp );
+  bool  saves_poison_death( int level, const CHAR_DATA *victim ) ;
+  bool  saves_wand( int level, const CHAR_DATA *victim );
+  bool  saves_para_petri( int level, const CHAR_DATA *victim );
+  bool  saves_breath( int level, const CHAR_DATA *victim );
+  bool  saves_spell_staff( int level, const CHAR_DATA *victim );
+  ch_ret obj_cast_spell( int sn, int level, CHAR_DATA *ch, CHAR_DATA *victim, OBJ_DATA *obj );
+  int   dice_parse( const CHAR_DATA *ch, int level, char *exp );
   SK *  get_skilltype( int sn );
 
   /* save.c */
