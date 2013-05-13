@@ -4001,7 +4001,6 @@ DECLARE_SPELL_FUN(      spell_faerie_fog        );
 DECLARE_SPELL_FUN(      spell_farsight          );
 DECLARE_SPELL_FUN(      spell_fireball          );
 DECLARE_SPELL_FUN(      spell_flamestrike       );
-DECLARE_SPELL_FUN(      spell_gate              );
 DECLARE_SPELL_FUN(      spell_knock             );
 DECLARE_SPELL_FUN(      spell_harm              );
 DECLARE_SPELL_FUN(      spell_identify          );
@@ -4015,7 +4014,6 @@ DECLARE_SPELL_FUN(      spell_poison            );
 DECLARE_SPELL_FUN(      spell_polymorph         );
 DECLARE_SPELL_FUN(      spell_possess           );
 DECLARE_SPELL_FUN(      spell_recharge          );
-DECLARE_SPELL_FUN(      spell_remove_curse      );
 DECLARE_SPELL_FUN(      spell_remove_invis      );
 DECLARE_SPELL_FUN(      spell_remove_trap       );
 DECLARE_SPELL_FUN(      spell_shocking_grasp    );
@@ -4023,7 +4021,6 @@ DECLARE_SPELL_FUN(      spell_sleep             );
 DECLARE_SPELL_FUN(      spell_smaug             );
 DECLARE_SPELL_FUN(      spell_ventriloquate     );
 DECLARE_SPELL_FUN(      spell_weaken            );
-DECLARE_SPELL_FUN(      spell_word_of_recall    );
 DECLARE_SPELL_FUN(      spell_acid_breath       );
 DECLARE_SPELL_FUN(      spell_fire_breath       );
 DECLARE_SPELL_FUN(      spell_frost_breath      );
@@ -4663,7 +4660,6 @@ extern "C" {
   void  update_userec( struct timeval *time_used, struct timerset *userec );
 
   /* magic.c */
-  void say_spell( CHAR_DATA *ch, int sn );
   void immune_casting( SKILLTYPE *skill, CHAR_DATA *ch, CHAR_DATA *victim, OBJ_DATA *obj );
   void *locate_targets( CHAR_DATA *ch, char *arg, int sn, CHAR_DATA **victim, OBJ_DATA **obj );
   bool  process_spell_components( CHAR_DATA *ch, int sn );

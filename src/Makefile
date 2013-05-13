@@ -31,6 +31,7 @@ endif
 
 CMDDIR = commands
 MPDIR = mpcommands
+SPELLDIR = spells
 
 ODIR = obj
 _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o \
@@ -366,6 +367,88 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o \
 	$(MPDIR)/mpslay.o \
 	$(MPDIR)/mptransfer.o \
 	$(MPDIR)/mpwithdraw.o \
+	$(SPELLDIR)/acetumprimus.o \
+	$(SPELLDIR)/acidblast.o \
+	$(SPELLDIR)/acidbreath.o \
+	$(SPELLDIR)/affect.o \
+	$(SPELLDIR)/affectchar.o \
+	$(SPELLDIR)/animatedead.o \
+	$(SPELLDIR)/areaattack.o \
+	$(SPELLDIR)/attack.o \
+	$(SPELLDIR)/blackfist.o \
+	$(SPELLDIR)/blackhand.o \
+	$(SPELLDIR)/blacklightning.o \
+	$(SPELLDIR)/blindness.o \
+	$(SPELLDIR)/burninghands.o \
+	$(SPELLDIR)/calllightning.o \
+	$(SPELLDIR)/causecritical.o \
+	$(SPELLDIR)/causelight..o \
+	$(SPELLDIR)/causeserious.o \
+	$(SPELLDIR)/causticfount.o \
+	$(SPELLDIR)/changesex.o \
+	$(SPELLDIR)/charmperson.o \
+	$(SPELLDIR)/chilltouch.o \
+	$(SPELLDIR)/colourspray.o \
+	$(SPELLDIR)/controlweather.o \
+	$(SPELLDIR)/createfood.o \
+	$(SPELLDIR)/createmob.o \
+	$(SPELLDIR)/createobj.o \
+	$(SPELLDIR)/createwater.o \
+	$(SPELLDIR)/cureblindness.o \
+	$(SPELLDIR)/curepoison.o \
+	$(SPELLDIR)/curse.o \
+	$(SPELLDIR)/detectpoison.o \
+	$(SPELLDIR)/dispelevil.o \
+	$(SPELLDIR)/dispelmagic.o \
+	$(SPELLDIR)/disruption.o \
+	$(SPELLDIR)/dream.o \
+	$(SPELLDIR)/earthquake.o \
+	$(SPELLDIR)/enchantweapon.o \
+	$(SPELLDIR)/energydrain.o \
+	$(SPELLDIR)/etherealfist.o \
+	$(SPELLDIR)/faeriefire.o \
+	$(SPELLDIR)/faeriefog.o \
+	$(SPELLDIR)/farsight.o \
+	$(SPELLDIR)/fireball.o \
+	$(SPELLDIR)/firebreath.o \
+	$(SPELLDIR)/flamestrike.o \
+	$(SPELLDIR)/frostbreath.o \
+	$(SPELLDIR)/galvanicwhip.o \
+	$(SPELLDIR)/gasbreath.o \
+	$(SPELLDIR)/handofchaos.o \
+	$(SPELLDIR)/harm.o \
+	$(SPELLDIR)/identify.o \
+	$(SPELLDIR)/invis.o \
+	$(SPELLDIR)/knock.o \
+	$(SPELLDIR)/knowalignment.o \
+	$(SPELLDIR)/lightningbolt.o \
+	$(SPELLDIR)/lightningbreath.o \
+	$(SPELLDIR)/locateobject.o \
+	$(SPELLDIR)/magicmissile.o \
+	$(SPELLDIR)/magneticthrust.o \
+	$(SPELLDIR)/midastouch.o \
+	$(SPELLDIR)/mindwrack.o \
+	$(SPELLDIR)/mindwrench.o \
+	$(SPELLDIR)/objinv.o \
+	$(SPELLDIR)/passdoor.o \
+	$(SPELLDIR)/poison.o \
+	$(SPELLDIR)/polymorph.o \
+	$(SPELLDIR)/possess.o \
+	$(SPELLDIR)/quantumspike.o \
+	$(SPELLDIR)/recharge.o \
+	$(SPELLDIR)/removeinvis.o \
+	$(SPELLDIR)/removetrap.o \
+	$(SPELLDIR)/revive.o \
+	$(SPELLDIR)/scorchingsurge.o \
+	$(SPELLDIR)/shockinggrasp.o \
+	$(SPELLDIR)/sleep.o \
+	$(SPELLDIR)/smaug.o \
+	$(SPELLDIR)/sonicresonance.o \
+	$(SPELLDIR)/spectralfuror.o \
+	$(SPELLDIR)/spiralblast.o \
+	$(SPELLDIR)/sulfurousspray.o \
+	$(SPELLDIR)/ventriloquate.o \
+	$(SPELLDIR)/weaken.o \
 
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
@@ -392,6 +475,7 @@ $(ODIR)/%.o:	%.c
 -include $(ODIR)/*.d
 -include $(ODIR)/$(CMDDIR)/*.d
 -include $(ODIR)/$(MPDIR)/*.d
+-include $(ODIR)/$(SPELLDIR)/*.d
 
 clean:
-		-rm -f ../bin/$(BINARY) *~ $(ODIR)/*.o $(ODIR)/*.d $(ODIR)/$(CMDDIR)/*.o $(ODIR)/$(CMDDIR)/*.d $(ODIR)/$(MPDIR)/*.o $(ODIR)/$(MPDIR)/*.d ../area/core.*
+		-rm -f ../bin/$(BINARY) *~ $(ODIR)/*.o $(ODIR)/*.d $(ODIR)/$(CMDDIR)/*.o $(ODIR)/$(CMDDIR)/*.d $(ODIR)/$(MPDIR)/*.o $(ODIR)/$(MPDIR)/*.d $(ODIR)/$(SPELLDIR)/*.o $(ODIR)/$(SPELLDIR)/*.d ../area/core.*

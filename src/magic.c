@@ -39,6 +39,19 @@ int pAbort;
  */
 char *spell_target_name;
 
+ch_ret spell_null( int sn, int level, CHAR_DATA *ch, void *vo )
+{
+  send_to_char( "That's not a spell!\r\n", ch );
+  return rNONE;
+}
+
+/* don't remove, may look redundant, but is important */
+ch_ret spell_notfound( int sn, int level, CHAR_DATA *ch, void *vo )
+{
+  send_to_char( "That's not a spell!\r\n", ch );
+  return rNONE;
+}
+
 /*
  * Is immune to a damage type
  */
@@ -442,26 +455,6 @@ void immune_casting( SKILLTYPE *skill, CHAR_DATA *ch,
                 act( chit, "That appears to have no affect.", ch, NULL, NULL, TO_CHAR );
         }
 }
-
-
-/*
- * Utter mystical words for an sn.
- */
-void say_spell( CHAR_DATA *ch, int sn )
-{
-  /*
-    CHAR_DATA *rch;
-
-    for ( rch = ch->in_room->first_person; rch; rch = rch->next_in_room )
-    {
-    if ( rch != ch )
-    act( AT_MAGIC, "$n pauses and concentrates for a moment.",
-    ch, NULL, rch, TO_VICT );
-    }
-  */
-  return;
-}
-
 
 /*
  * Make adjustments to saving throw based in RIS                -Thoric
@@ -2089,13 +2082,6 @@ ch_ret spell_faerie_fog( int sn, int level, CHAR_DATA *ch, void *vo )
   return rNONE;
 }
 
-
-ch_ret spell_gate( int sn, int level, CHAR_DATA *ch, void *vo )
-{
-  return rNONE;
-}
-
-
 ch_ret spell_harm( int sn, int level, CHAR_DATA *ch, void *vo )
 {
   CHAR_DATA *victim = (CHAR_DATA *) vo;
@@ -2629,12 +2615,6 @@ ch_ret spell_poison( int sn, int level, CHAR_DATA *ch, void *vo )
   return rNONE;
 }
 
-
-ch_ret spell_remove_curse( int sn, int level, CHAR_DATA *ch, void *vo )
-{
-  return rNONE;
-}
-
 ch_ret spell_remove_trap( int sn, int level, CHAR_DATA *ch, void *vo )
 {
   OBJ_DATA *obj;
@@ -2866,18 +2846,6 @@ ch_ret spell_weaken( int sn, int level, CHAR_DATA *ch, void *vo )
     send_to_char( "Ok.\r\n", ch );
   return rNONE;
 }
-
-
-
-/*
- * A spell as it should be                              -Thoric
- */
-ch_ret spell_word_of_recall( int sn, int level, CHAR_DATA *ch, void *vo )
-{
-  do_recall( (CHAR_DATA *) vo, "" );
-  return rNONE;
-}
-
 
 /*
  * NPC spells.
@@ -3113,20 +3081,6 @@ ch_ret spell_lightning_breath( int sn, int level, CHAR_DATA *ch, void *vo )
 
   return damage( ch, victim, dam, sn );
 }
-
-ch_ret spell_null( int sn, int level, CHAR_DATA *ch, void *vo )
-{
-  send_to_char( "That's not a spell!\r\n", ch );
-  return rNONE;
-}
-
-/* don't remove, may look redundant, but is important */
-ch_ret spell_notfound( int sn, int level, CHAR_DATA *ch, void *vo )
-{
-  send_to_char( "That's not a spell!\r\n", ch );
-  return rNONE;
-}
-
 
 /*
  *   Haus' Spell Additions
@@ -3800,7 +3754,7 @@ ch_ret spell_scorching_surge( int sn, int level, CHAR_DATA *ch, void *vo )
 /*
  * saving throw check                                           -Thoric
  */
-bool check_save( int sn, int level, CHAR_DATA *ch, CHAR_DATA *victim )
+bool check_save( int sn, int level, const CHAR_DATA *ch, const CHAR_DATA *victim )
 {
   SKILLTYPE *skill = get_skilltype(sn);
   bool saved = FALSE;
