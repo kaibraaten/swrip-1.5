@@ -28,9 +28,6 @@
 extern char             lastplayercmd[MAX_INPUT_LENGTH];
 extern CHAR_DATA *      gch_prev;
 
-/* From Skills.c */
-int ris_save( CHAR_DATA *ch, int chnce, int ris );
-
 /*
  * Local functions.
  */

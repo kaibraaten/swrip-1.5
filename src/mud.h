@@ -3969,6 +3969,8 @@ DECLARE_DO_FUN( do_mpgain       );
  * Spell functions.
  * Defined in magic.c.
  */
+DECLARE_SPELL_FUN( spell_affect );
+DECLARE_SPELL_FUN( spell_affectchar );
 DECLARE_SPELL_FUN(      spell_null              );
 DECLARE_SPELL_FUN(      spell_notfound          );
 DECLARE_SPELL_FUN(      spell_acid_blast        );
@@ -4660,6 +4662,13 @@ extern "C" {
   void  update_userec( struct timeval *time_used, struct timerset *userec );
 
   /* magic.c */
+  int ris_save( const CHAR_DATA *ch, int save_chance, int ris );
+  void successful_casting( SKILLTYPE *skill, CHAR_DATA *ch,
+			   CHAR_DATA *victim, OBJ_DATA *obj );
+  void failed_casting( SKILLTYPE *skill, CHAR_DATA *ch,
+		       CHAR_DATA *victim, OBJ_DATA *obj );
+  bool is_immune( const CHAR_DATA *ch, short damtype );
+  bool check_save( int sn, int level, const CHAR_DATA *ch, const CHAR_DATA *victim );
   void immune_casting( SKILLTYPE *skill, CHAR_DATA *ch, CHAR_DATA *victim, OBJ_DATA *obj );
   void *locate_targets( CHAR_DATA *ch, char *arg, int sn, CHAR_DATA **victim, OBJ_DATA **obj );
   bool  process_spell_components( CHAR_DATA *ch, int sn );

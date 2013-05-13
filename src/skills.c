@@ -29,13 +29,7 @@
 #include "mud.h"
 
 void show_char_to_char( CHAR_DATA *list, CHAR_DATA *ch );
-
-int ris_save( CHAR_DATA *ch, int chance, int ris );
 bool check_illegal_psteal( CHAR_DATA *ch, CHAR_DATA *victim );
-
-/* from magic.c */
-void failed_casting( struct skill_type *skill, CHAR_DATA *ch,
-                     CHAR_DATA *victim, OBJ_DATA *obj );
 
 /*
  * Dummy function

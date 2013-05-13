@@ -25,13 +25,6 @@
 #include <string.h>
 #include "mud.h"
 
-/*
- * Local functions.
- */
-static CHAR_DATA *make_poly_mob( const CHAR_DATA *ch, int vnum );
-static ch_ret spell_affect( int sn, int level, CHAR_DATA *ch, void *vo );
-static ch_ret spell_affectchar( int sn, int level, CHAR_DATA *ch, void *vo );
-
 int pAbort;
 
 /*
@@ -55,7 +48,7 @@ ch_ret spell_notfound( int sn, int level, CHAR_DATA *ch, void *vo )
 /*
  * Is immune to a damage type
  */
-static bool is_immune( const CHAR_DATA *ch, short damtype )
+bool is_immune( const CHAR_DATA *ch, short damtype )
 {
   switch( damtype )
     {
@@ -233,7 +226,7 @@ int bsearch_skill_exact( const char *name, int first, int top )
  * Each different section of the skill table is sorted alphabetically
  * Only match skills player knows                               -Thoric
  */
-static int ch_bsearch_skill( const CHAR_DATA *ch, const char *name, int first, int top )
+int ch_bsearch_skill( const CHAR_DATA *ch, const char *name, int first, int top )
 {
   int sn;
 
@@ -459,7 +452,7 @@ void immune_casting( SKILLTYPE *skill, CHAR_DATA *ch,
 /*
  * Make adjustments to saving throw based in RIS                -Thoric
  */
-int ris_save( CHAR_DATA *ch, int save_chance, int ris )
+int ris_save( const CHAR_DATA *ch, int save_chance, int ris )
 {
   short modifier = 10;
 
@@ -1131,7 +1124,7 @@ ch_ret obj_cast_spell( int sn, int level, CHAR_DATA *ch, CHAR_DATA *victim, OBJ_
   return retcode;
 }
 
-static CHAR_DATA *make_poly_mob(const CHAR_DATA *ch, int vnum)
+CHAR_DATA *make_poly_mob(const CHAR_DATA *ch, int vnum)
 {
   CHAR_DATA *mob;
   MOB_INDEX_DATA *pMobIndex;
@@ -1189,353 +1182,4 @@ bool check_save( int sn, int level, const CHAR_DATA *ch, const CHAR_DATA *victim
         saved = saves_spell_staff(level, victim);       break;
       }
   return saved;
-}
-
-ch_ret spell_revive( int sn, int level, CHAR_DATA *ch, void *vo )
-{
-  CHAR_DATA *victim = (CHAR_DATA *) vo;
-  int dam;
-
-  /* set mentalstate to mentalstate/2 */
-  level = UMAX(0, level);
-  dam           = number_range( 0, 0 );
-  if ( saves_spell_staff( level, victim ) )
-    dam /= 2;
-  act( AT_MAGIC, "$n concentrates intently, and begins looking more centered."
-       , ch, NULL,
-       victim, TO_NOTVICT );
-  return damage( ch, victim, dam, sn );
-}
-
-/*
- * n Acid Spells
- */
-ch_ret spell_sulfurous_spray( int sn, int level, CHAR_DATA *ch, void *vo )
-{
-  CHAR_DATA *victim = (CHAR_DATA *) vo;
-  int dam;
-
-  level       = UMAX(0, level);
-  level       = UMIN(19, level);
-  dam         = 2*level*number_range( 1, 7 )+11;
-
-  send_to_char("You feel the hatred grow within you!\r\n", ch);
-  ch->alignment = ch->alignment - 100;
-  ch->alignment = URANGE( -1000, ch->alignment, 1000 );
-  sith_penalty(ch);
-
-
-  if ( saves_spell_staff( level, victim ) )
-    dam /= 4;
-  if ( IS_AFFECTED(victim, AFF_PROTECT) && IS_EVIL(ch) )
-    dam -= (int) (dam / 4);
-  act( AT_MAGIC, "A stinking spray of sulfurous liquid rains down on $N."
-       , ch, NULL,
-       victim, TO_NOTVICT );
-  return damage( ch, victim, dam, sn );
-}
-
-ch_ret spell_caustic_fount( int sn, int level, CHAR_DATA *ch, void *vo )
-{
-  CHAR_DATA *victim = (CHAR_DATA *) vo;
-  int dam;
-
-  level       = UMAX(0, level);
-  level       = UMIN(42, level);
-  dam         = 2*level*number_range( 1, 6 )-31;
-  dam         = UMAX(0,dam);
-
-  send_to_char("You feel the hatred grow within you!\r\n", ch);
-  ch->alignment = ch->alignment - 100;
-  ch->alignment = URANGE( -1000, ch->alignment, 1000 );
-  sith_penalty(ch);
-
-
-  if ( saves_spell_staff( level, victim ) )
-    dam = dam*3/4;
-  if ( IS_AFFECTED(victim, AFF_PROTECT) && IS_EVIL(ch) )
-    dam -= (int) (dam / 4);
-  act( AT_MAGIC, "A fountain of caustic liquid forms below $N.  The smell of $S degenerating tissues is revolting! "
-       , ch, NULL,
-       victim, TO_NOTVICT );
-  return damage( ch, victim, dam, sn );
-}
-
-ch_ret spell_acetum_primus( int sn, int level, CHAR_DATA *ch, void *vo )
-{
-  CHAR_DATA *victim = (CHAR_DATA *) vo;
-  int dam;
-
-  level       = UMAX(0, level);
-  dam         = 2*level*number_range( 1, 4 )+7;
-
-  if ( saves_spell_staff( level, victim ) )
-    dam = 3*dam/4;
-  act( AT_MAGIC, "A cloak of primal acid enshrouds $N, sparks form as it consumes all it touches. "
-       , ch, NULL,
-       victim, TO_NOTVICT );
-  return damage( ch, victim, dam, sn );
-}
-
-/*
- *  Electrical
- */
-
-ch_ret spell_galvanic_whip( int sn, int level, CHAR_DATA *ch, void *vo )
-{
-  CHAR_DATA *victim = (CHAR_DATA *) vo;
-  int dam;
-
-  level = UMAX(0, level);
-  level = UMIN(10, level);
-  dam           = level*number_range( 1, 6 )+5;
-
-  send_to_char("You feel the hatred grow within you!\r\n", ch);
-  ch->alignment = ch->alignment - 100;
-  ch->alignment = URANGE( -1000, ch->alignment, 1000 );
-  sith_penalty(ch);
-
-
-  if ( saves_spell_staff( level, victim ) )
-    dam /= 2;
-  if ( IS_AFFECTED(victim, AFF_PROTECT) && IS_EVIL(ch) )
-    dam -= (int) (dam / 4);
-  act( AT_MAGIC, "$n conjures a whip of ionized particles, which lashes ferociously at $N."
-       , ch, NULL,
-       victim, TO_NOTVICT );
-  return damage( ch, victim, dam, sn );
-}
-
-ch_ret spell_magnetic_thrust( int sn, int level, CHAR_DATA *ch, void *vo )
-{
-  CHAR_DATA *victim = (CHAR_DATA *) vo;
-  int dam;
-
-  level       = UMAX(0, level);
-  dam         = (level*number_range( 1, 6 )) +16;
-
-  send_to_char("You feel the hatred grow within you!\r\n", ch);
-  ch->alignment = ch->alignment - 100;
-  ch->alignment = URANGE( -1000, ch->alignment, 1000 );
-  sith_penalty(ch);
-
-
-  if ( saves_spell_staff( level, victim ) )
-    dam /= 2;
-  if ( IS_AFFECTED(victim, AFF_PROTECT) && IS_EVIL(ch) )
-    dam -= (int) (dam / 4);
-  act( AT_MAGIC, "An unseen energy moves nearby, causing your hair to stand on end!"
-       , ch, NULL,
-       victim, TO_NOTVICT );
-  return damage( ch, victim, dam, sn );
-}
-
-ch_ret spell_quantum_spike( int sn, int level, CHAR_DATA *ch, void *vo )
-{
-  CHAR_DATA *victim = (CHAR_DATA *) vo;
-  int dam,l;
-
-  level       = UMAX(0, level);
-  l             = UMAX(1,level-90);
-  dam         = l*number_range( 1,40)+145;
-
-  send_to_char("You feel the hatred grow within you!\r\n", ch);
-  ch->alignment = ch->alignment - 100;
-  ch->alignment = URANGE( -1000, ch->alignment, 1000 );
-  sith_penalty(ch);
-
-
-  if ( saves_spell_staff( level, victim ) )
-    dam /= 2;
-  if ( IS_AFFECTED(victim, AFF_PROTECT) && IS_EVIL(ch) )
-    dam -= (int) (dam / 4);
-  act( AT_MAGIC, "$N seems to dissolve into tiny unconnected particles, then is painfully reassembled."
-       , ch, NULL,
-       victim, TO_NOTVICT );
-  return damage( ch, victim, dam, sn );
-}
-
-/*
- * Black-magicish guys
- */
-
-/* L2 Mage Spell */
-ch_ret spell_black_hand( int sn, int level, CHAR_DATA *ch, void *vo )
-{
-  CHAR_DATA *victim = (CHAR_DATA *) vo;
-  int dam;
-
-  level = UMAX(0, level);
-  level = UMIN(5, level);
-  dam           = level*number_range( 1, 6 )+3;
-
-  send_to_char("You feel the hatred grow within you!\r\n", ch);
-  ch->alignment = ch->alignment - 100;
-  ch->alignment = URANGE( -1000, ch->alignment, 1000 );
-  sith_penalty(ch);
-
-
-  if ( saves_poison_death( level, victim ) )
-    dam /= 4;
-  if ( IS_AFFECTED(victim, AFF_PROTECT) && IS_EVIL(ch) )
-    dam -= (int) (dam / 4);
-  act( AT_MAGIC, "$n conjures a mystical hand, which swoops menacingly at $N."
-       , ch, NULL,
-       victim, TO_NOTVICT );
-  return damage( ch, victim, dam, sn );
-}
-
-ch_ret spell_black_fist( int sn, int level, CHAR_DATA *ch, void *vo )
-{
-  CHAR_DATA *victim = (CHAR_DATA *) vo;
-  int dam;
-
-  level       = UMAX(0, level);
-  dam         = level*number_range( 1, 9 )+4;
-
-  send_to_char("You feel the hatred grow within you!\r\n", ch);
-  ch->alignment = ch->alignment - 100;
-  ch->alignment = URANGE( -1000, ch->alignment, 1000 );
-  sith_penalty(ch);
-
-
-  if ( saves_poison_death( level, victim ) )
-    dam /= 4;
-  if ( IS_AFFECTED(victim, AFF_PROTECT) && IS_EVIL(ch) )
-    dam -= (int) (dam / 4);
-  act( AT_MAGIC, "$n forms a fist with the force, which swoops menacingly at $N."
-       , ch, NULL,
-       victim, TO_NOTVICT );
-  return damage( ch, victim, dam, sn );
-}
-
-ch_ret spell_black_lightning( int sn, int level, CHAR_DATA *ch, void *vo )
-{
-  CHAR_DATA *victim = (CHAR_DATA *) vo;
-  int dam;
-
-  dam         = 100;
-  if ( IS_AFFECTED(victim, AFF_PROTECT) && IS_EVIL(ch) )
-    dam -= (int) (dam / 2);
-
-  send_to_char("You feel the hatred grow within you!\r\n", ch);
-  ch->alignment = ch->alignment - 100;
-  ch->alignment = URANGE( -1000, ch->alignment, 1000 );
-  sith_penalty(ch);
-
-  act( AT_BLUE, "Bolts of electricity shoot from the fingers of $n, sending $N into a fit of painful spasms."
-       , ch, NULL, victim, TO_NOTVICT );
-  act( AT_BLUE, "Bolts of electricity shoot from your fingertips, sending $N into a fit of painful spasms."
-       , ch, NULL, victim, TO_CHAR );
-  act( AT_BLUE, "Intense pain spreads through your body as bolts of electricity from $N assault you."
-       , victim, NULL, ch, TO_CHAR );
-
-  if ( saves_poison_death( level, victim ) )
-    return damage( ch, victim, dam, sn );
-  else
-    {
-      damage( ch, victim, dam, sn );
-      if ( char_died(victim) )
-        return rCHAR_DIED;
-      if ( spell_black_lightning( sn, level, ch, vo ) == rCHAR_DIED )
-        return rCHAR_DIED;
-      return rNONE;
-    }
-}
-
-ch_ret spell_midas_touch( int sn, int level, CHAR_DATA *ch, void *vo )
-{
-  CHAR_DATA *victim;
-  int val;
-  OBJ_DATA *obj = (OBJ_DATA *) vo;
-
-  separate_obj(obj);  /* nice, alty :) */
-
-  if ( IS_OBJ_STAT( obj, ITEM_NODROP ) )
-    {
-      send_to_char( "You can't seem to let go of it.\r\n", ch );
-      return rSPELL_FAILED;
-    }
-
-  if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE )
-       &&   get_trust( ch ) < LEVEL_IMMORTAL )
-    {
-      send_to_char( "That item is not for mortal hands to touch!\r\n", ch );
-      return rSPELL_FAILED;   /* Thoric */
-    }
-
-  if ( !CAN_WEAR(obj, ITEM_TAKE)
-       || ( obj->item_type == ITEM_CORPSE_NPC)
-       || ( obj->item_type == ITEM_DROID_CORPSE)
-       || ( obj->item_type == ITEM_CORPSE_PC )
-       )
-    {
-      send_to_char( "Your cannot seem to turn this item to gold!", ch);
-      return rNONE;
-    }
-
-  val = obj->cost/2;
-  val = UMAX(0, val);
-
-  if(  obj->item_type==ITEM_WEAPON ){
-    switch( number_bits(2) )
-      {
-      case 0: victim = get_char_world( ch, "shmalnoth");        break;
-      case 1:
-      case 2:
-      case 3: victim = get_char_world( ch, "shmalnak" ); break;
-      }
-  } else if (  obj->item_type==ITEM_ARMOR ){
-    switch( number_bits(2) )
-      {
-      case 0: victim = get_char_world( ch, "shmalnoth");        break;
-      case 1:
-      case 2:
-      case 3: victim = get_char_world( ch, "crafter" ); break;
-      }
-  } else if (  obj->item_type==ITEM_SCROLL ){
-    victim = get_char_world( ch, "tatorious" );
-  } else if (  obj->item_type==ITEM_STAFF ){
-    victim = get_char_world( ch, "tatorious" );
-  } else if (  obj->item_type==ITEM_WAND ){
-    victim = get_char_world( ch, "tatorious" );
-  } else {
-    victim = NULL;
-  }
-
-  if (  victim == NULL )
-    {
-      ch->gold += val;
-
-      if ( obj_extracted(obj) )
-        return rNONE;
-      if ( cur_obj == obj->serial )
-        global_objcode = rOBJ_SACCED;
-      extract_obj( obj );
-      send_to_char( "O.K.", ch);
-      return rNONE;
-    }
-
-
-  if ( ( victim->carry_weight + get_obj_weight ( obj ) ) > can_carry_w(victim)
-       ||       (IS_NPC(victim) && IS_SET(victim->act, ACT_PROTOTYPE)))
-    {
-      ch->gold += val;
-
-      if ( obj_extracted(obj) )
-        return rNONE;
-      if ( cur_obj == obj->serial )
-        global_objcode = rOBJ_SACCED;
-      extract_obj( obj );
-      send_to_char( "O.K.", ch);
-      return rNONE;
-    }
-
-
-  ch->gold += val;
-  obj_from_char( obj );
-  obj_to_char( obj, victim );
-
-  send_to_char( "You transmogrify the item to gold!\r\n", ch );
-  return rNONE;
 }
