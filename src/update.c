@@ -28,6 +28,7 @@
 #include <time.h>
 #include <math.h>
 #include "mud.h"
+#include "quest.h"
 
 /* from swskills.c */
 void add_reinforcements( CHAR_DATA *ch );

@@ -3811,7 +3811,6 @@ DECLARE_DO_FUN( do_rdelete      );
 DECLARE_DO_FUN( do_reboot       );
 DECLARE_DO_FUN( do_recall       );
 DECLARE_DO_FUN( do_recho        );
-DECLARE_DO_FUN( do_recite       );
 DECLARE_DO_FUN( do_redit        );
 DECLARE_DO_FUN( do_regoto       );
 DECLARE_DO_FUN( do_remove       );
@@ -4340,7 +4339,6 @@ extern "C" {
   SHIP_DATA  * get_ship_here( const char *name , SHIP_DATA *eShip );
   void         showspaceobject( CHAR_DATA *ch , SPACE_DATA *spaceobject );
   void         update_shipmovement( void );
-  void         quest_update( void );
   void         recharge_ships( void );
   void         update_ships( void );
   void update_spaceobjects( void );
@@ -4511,6 +4509,7 @@ extern "C" {
   OD *  create_money( int amount );
 
   /* misc.c */
+  void pullorpush( CHAR_DATA *ch, OBJ_DATA *obj, bool pull );
   void actiondesc( CHAR_DATA *ch, OBJ_DATA *obj, void *vo );
   void jedi_checks( CHAR_DATA *ch );
   void jedi_bonus( CHAR_DATA *ch );
@@ -4764,8 +4763,8 @@ extern "C" {
   const char *get_race( CHAR_DATA *ch );
 
   /* badname functions */
-  bool  check_bad_name( char *name );
-  int   add_bad_name( char *name );
+  bool  check_bad_name( const char *name );
+  int   add_bad_name( const char *name );
 
   /* vendor.c*/
   void fwrite_vendor( FILE *fp, CHAR_DATA *mob );
