@@ -1,1 +1,33 @@
 #include "mud.h"
+
+/*
+ * Withdraw some gold from the current area's economy           -Thoric
+ */
+void do_mp_withdraw( CHAR_DATA *ch, char *argument )
+{
+  char arg[MAX_STRING_LENGTH];
+  int gold;
+
+  if ( !IS_NPC(ch) )
+    {
+      send_to_char("Huh?\r\n", ch);
+      return;
+    }
+
+  one_argument(argument, arg);
+
+  if ( arg[0] == '\0' )
+    {
+      progbug("Mpwithdraw - bad syntax", ch );
+      return;
+    }
+
+  gold = atoi( arg );
+
+  if ( ch->gold < 1000000000 && gold < 1000000000 && ch->in_room
+       &&   economy_has( ch->in_room->area, gold ) )
+    {
+      ch->gold += gold;
+      lower_economy( ch->in_room->area, gold );
+    }
+}

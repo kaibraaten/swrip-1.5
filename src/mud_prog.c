@@ -2999,3 +2999,87 @@ void obj_act_update( void )
     }
   return;
 }
+
+char *mprog_type_to_name( int type )
+{
+  switch ( type )
+    {
+    case IN_FILE_PROG:      return "in_file_prog";
+    case ACT_PROG:          return "act_prog";
+    case SPEECH_PROG:       return "speech_prog";
+    case RAND_PROG:         return "rand_prog";
+    case FIGHT_PROG:        return "fight_prog";
+    case HITPRCNT_PROG:     return "hitprcnt_prog";
+    case DEATH_PROG:        return "death_prog";
+    case ENTRY_PROG:        return "entry_prog";
+    case GREET_PROG:        return "greet_prog";
+    case ALL_GREET_PROG:    return "all_greet_prog";
+    case GIVE_PROG:         return "give_prog";
+    case BRIBE_PROG:        return "bribe_prog";
+    case HOUR_PROG:             return "hour_prog";
+    case TIME_PROG:             return "time_prog";
+    case WEAR_PROG:         return "wear_prog";
+    case REMOVE_PROG:       return "remove_prog";
+    case SAC_PROG :         return "sac_prog";
+    case LOOK_PROG:         return "look_prog";
+    case EXA_PROG:          return "exa_prog";
+    case ZAP_PROG:          return "zap_prog";
+    case GET_PROG:          return "get_prog";
+    case DROP_PROG:         return "drop_prog";
+    case REPAIR_PROG:       return "repair_prog";
+    case DAMAGE_PROG:       return "damage_prog";
+    case PULL_PROG:         return "pull_prog";
+    case PUSH_PROG:         return "push_prog";
+    case SCRIPT_PROG:   return "script_prog";
+    case SLEEP_PROG:        return "sleep_prog";
+    case REST_PROG:         return "rest_prog";
+    case LEAVE_PROG:        return "leave_prog";
+    case USE_PROG:          return "use_prog";
+    default:                return "ERROR_PROG";
+    }
+}
+
+CHAR_DATA *get_char_room_mp( CHAR_DATA *ch, char *argument )
+{
+  char arg[MAX_INPUT_LENGTH];
+  CHAR_DATA *rch;
+  int number, count, vnum;
+
+  number = number_argument( argument, arg );
+  if ( !str_cmp( arg, "self" ) )
+    return ch;
+
+  if ( get_trust(ch) >= LEVEL_SAVIOR && is_number( arg ) )
+    vnum = atoi( arg );
+  else
+    vnum = -1;
+
+  count  = 0;
+
+  for ( rch = ch->in_room->first_person; rch; rch = rch->next_in_room )
+    if ( (nifty_is_name( arg, rch->name )
+          ||  (IS_NPC(rch) && vnum == rch->pIndexData->vnum)) )
+      {
+        if ( number == 0 && !IS_NPC(rch) )
+          return rch;
+        else
+          if ( ++count == number )
+            return rch;
+      }
+
+  if ( vnum != -1 )
+    return NULL;
+  count  = 0;
+  for ( rch = ch->in_room->first_person; rch; rch = rch->next_in_room )
+    {
+      if ( !nifty_is_name_prefix( arg, rch->name ) )
+        continue;
+      if ( number == 0 && !IS_NPC(rch) )
+        return rch;
+      else
+        if ( ++count == number )
+          return rch;
+    }
+
+  return NULL;
+}

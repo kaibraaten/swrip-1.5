@@ -64,7 +64,7 @@ typedef int                             obj_ret;
 #define IMP_ROOM1 109
 #define IMP_ROOM2 122
 
-#define ALLOWED(char, room) (char->top_level == 105?1:          \
+#define ALLOWED(char, room) (char->top_level == MAX_LEVEL?1:          \
                              room->vnum == IMP_ROOM1?0:         \
                              room->vnum == IMP_ROOM2?0:1)
 
@@ -4513,6 +4513,7 @@ extern "C" {
   void sith_penalty( CHAR_DATA *ch );
 
   /* mud_comm.c */
+  CHAR_DATA *get_char_room_mp( CHAR_DATA *ch, char *argument );
   int get_color(const char *argument);
   char *mprog_type_to_name( int type );
 
