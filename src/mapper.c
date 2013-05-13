@@ -1,8 +1,4 @@
-#include <sys/types.h>
-#include <ctype.h>
-#include <stdio.h>
 #include <string.h>
-#include <time.h>
 #include "mud.h"
 
 /* Size of the map and depth of recursion to undertake */
