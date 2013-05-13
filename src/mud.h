@@ -3931,9 +3931,7 @@ DECLARE_DO_FUN( do_mp_close_passage );
 DECLARE_DO_FUN( do_mp_damage );
 DECLARE_DO_FUN( do_mp_restore );
 DECLARE_DO_FUN( do_mp_open_passage );
-DECLARE_DO_FUN( do_mp_practice );
 DECLARE_DO_FUN( do_mp_slay);
-DECLARE_DO_FUN( do_mpadvance    );
 DECLARE_DO_FUN( do_mpasound     );
 DECLARE_DO_FUN( do_mpat         );
 DECLARE_DO_FUN( do_mpdream      );
@@ -3965,7 +3963,6 @@ DECLARE_DO_FUN( do_rpstat       );
 DECLARE_DO_FUN( do_mptransfer   );
 DECLARE_DO_FUN( do_mpapply      );
 DECLARE_DO_FUN( do_mpapplyb     );
-DECLARE_DO_FUN( do_mppkset      );
 DECLARE_DO_FUN( do_mpgain       );
 
 /*

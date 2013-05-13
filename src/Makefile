@@ -30,6 +30,7 @@ LDFLAGS += -ldl -rdynamic
 endif
 
 CMDDIR = commands
+MPDIR = mpcommands
 
 ODIR = obj
 _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o \
@@ -188,6 +189,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o \
 	$(CMDDIR)/mlist.o \
 	$(CMDDIR)/mpedit.o \
 	$(CMDDIR)/mpfind.o \
+	$(CMDDIR)/mpstat.o \
 	$(CMDDIR)/mset.o \
 	$(CMDDIR)/mstat.o \
 	$(CMDDIR)/murder.o \
@@ -216,6 +218,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o \
 	$(CMDDIR)/opedit.o \
 	$(CMDDIR)/open.o \
 	$(CMDDIR)/opfind.o \
+	$(CMDDIR)/opstat.o \
 	$(CMDDIR)/order.o \
 	$(CMDDIR)/oset.o \
 	$(CMDDIR)/ostat.o \
@@ -259,6 +262,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o \
 	$(CMDDIR)/roster.o \
 	$(CMDDIR)/rpedit.o \
 	$(CMDDIR)/rpfind.o \
+	$(CMDDIR)/rpstat.o \
 	$(CMDDIR)/rset.o \
 	$(CMDDIR)/rstat.o \
 	$(CMDDIR)/save.o \
@@ -361,6 +365,7 @@ $(ODIR)/%.o:	%.c
 
 -include $(ODIR)/*.d
 -include $(ODIR)/$(CMDDIR)/*.d
+-include $(ODIR)/$(MPDIR)/*.d
 
 clean:
-		-rm -f ../bin/$(BINARY) *~ $(ODIR)/*.o $(ODIR)/*.d $(ODIR)/$(CMDDIR)/*.o $(ODIR)/$(CMDDIR)/*.d ../area/core.*
+		-rm -f ../bin/$(BINARY) *~ $(ODIR)/*.o $(ODIR)/*.d $(ODIR)/$(CMDDIR)/*.o $(ODIR)/$(CMDDIR)/*.d $(ODIR)/$(MPDIR)/*.o $(ODIR)/$(MPDIR)/*.d ../area/core.*

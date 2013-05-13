@@ -69,133 +69,6 @@ char *mprog_type_to_name( int type )
     }
 }
 
-/* A trivial rehack of do_mstat.  This doesnt show all the data, but just
- * enough to identify the mob and give its basic condition.  It does however,
- * show the MUDprograms which are set.
- */
-void do_mpstat( CHAR_DATA *ch, char *argument )
-{
-  char        arg[MAX_INPUT_LENGTH];
-  MPROG_DATA *mprg;
-  CHAR_DATA  *victim;
-
-  one_argument( argument, arg );
-
-  if ( arg[0] == '\0' )
-    {
-      send_to_char( "MProg stat whom?\r\n", ch );
-      return;
-    }
-
-  if ( ( victim = get_char_world( ch, arg ) ) == NULL )
-    {
-      send_to_char( "They aren't here.\r\n", ch );
-      return;
-    }
-
-  if ( !IS_NPC( victim ) )
-    {
-      send_to_char( "Only Mobiles can have MobPrograms!\r\n", ch);
-      return;
-    }
-
-  if ( !( victim->pIndexData->progtypes ) )
-    {
-      send_to_char( "That Mobile has no Programs set.\r\n", ch);
-      return;
-    }
-
-  ch_printf( ch, "Name: %s.  Vnum: %d.\r\n",
-             victim->name, victim->pIndexData->vnum );
-
-  ch_printf( ch, "Short description: %s.\r\nLong  description: %s",
-             victim->short_descr,
-             victim->long_descr[0] != '\0' ?
-             victim->long_descr : "(none).\r\n" );
-
-  ch_printf( ch, "Hp: %d/%d.  Mana: %d/%d.  Move: %d/%d. \r\n",
-             victim->hit,         victim->max_hit,
-             victim->mana,        victim->max_mana,
-             victim->move,        victim->max_move );
-
-  ch_printf( ch,
-             "Lv: %d.  Align: %d.  AC: %d.  Credits: %d.\r\n",
-             victim->top_level,        victim->alignment,
-             GET_AC( victim ),    victim->gold);
-
-  for ( mprg = victim->pIndexData->mudprogs; mprg; mprg = mprg->next )
-    ch_printf( ch, ">%s %s\r\n%s\r\n",
-               mprog_type_to_name( mprg->type ),
-               mprg->arglist,
-               mprg->comlist );
-  return;
-}
-
-/* Opstat - Scryn 8/12*/
-void do_opstat( CHAR_DATA *ch, char *argument )
-{
-  char        arg[MAX_INPUT_LENGTH];
-  MPROG_DATA *mprg;
-  OBJ_DATA   *obj;
-
-  one_argument( argument, arg );
-
-  if ( arg[0] == '\0' )
-    {
-      send_to_char( "OProg stat what?\r\n", ch );
-      return;
-    }
-
-  if ( ( obj = get_obj_world( ch, arg ) ) == NULL )
-    {
-      send_to_char( "You cannot find that.\r\n", ch );
-      return;
-    }
-
-  if ( !( obj->pIndexData->progtypes ) )
-    {
-      send_to_char( "That object has no programs set.\r\n", ch);
-      return;
-    }
-
-  ch_printf( ch, "Name: %s.  Vnum: %d.\r\n",
-             obj->name, obj->pIndexData->vnum );
-
-  ch_printf( ch, "Short description: %s.\r\n",
-             obj->short_descr );
-
-  for ( mprg = obj->pIndexData->mudprogs; mprg; mprg = mprg->next )
-    ch_printf( ch, ">%s %s\r\n%s\r\n",
-               mprog_type_to_name( mprg->type ),
-               mprg->arglist,
-               mprg->comlist );
-
-  return;
-
-}
-
-/* Rpstat - Scryn 8/12 */
-void do_rpstat( CHAR_DATA *ch, char *argument )
-{
-  MPROG_DATA *mprg;
-
-  if ( !( ch->in_room->progtypes ) )
-    {
-      send_to_char( "This room has no programs set.\r\n", ch);
-      return;
-    }
-
-  ch_printf( ch, "Name: %s.  Vnum: %d.\r\n",
-             ch->in_room->name, ch->in_room->vnum );
-
-  for ( mprg = ch->in_room->mudprogs; mprg; mprg = mprg->next )
-    ch_printf( ch, ">%s %s\r\n%s\r\n",
-               mprog_type_to_name( mprg->type ),
-               mprg->arglist,
-               mprg->comlist );
-  return;
-}
-
 /* Prints the argument to all the rooms around the mobile */
 void do_mpasound( CHAR_DATA *ch, char *argument )
 {
@@ -840,14 +713,6 @@ void do_mpat( CHAR_DATA *ch, char *argument )
   return;
 }
 
-/* allow a mobile to advance a player's level... very dangerous */
-void do_mpadvance( CHAR_DATA *ch, char *argument )
-{
-  return;
-}
-
-
-
 /* lets the mobile transfer people.  the all argument transfers
    everyone in the current room to the specified location */
 
@@ -1017,15 +882,6 @@ void do_mpforce( CHAR_DATA *ch, char *argument )
 /*
  *  Haus' toys follow:
  */
-
-
-/*
- * syntax:  mppractice victim spell_name max%
- *
- */
-void do_mp_practice( CHAR_DATA *ch, char *argument )
-{
-}
 
 /*
  * syntax: mpslay (character)
@@ -1642,16 +1498,6 @@ void do_mp_withdraw( CHAR_DATA *ch, char *argument )
       lower_economy( ch->in_room->area, gold );
     }
 }
-
-
-void do_mppkset( CHAR_DATA *ch, char *argument )
-{
-  send_to_char("mppkset has been zapped into the realm of useless old code.\r\n", ch);
-  return;
-
-}
-
-
 
 /*
  * Inflict damage from a mudprogram
