@@ -256,9 +256,6 @@ void do_cast( CHAR_DATA *ch, char *argument )
         }
     }
 
-  if ( str_cmp( skill->name, "ventriloquate" ) )
-    say_spell( ch, sn );
-
   if ( !dont_wait )
     WAIT_STATE( ch, skill->beats );
 
