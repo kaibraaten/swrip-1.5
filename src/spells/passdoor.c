@@ -1,1 +1,29 @@
 #include "mud.h"
+
+ch_ret spell_pass_door( int sn, int level, CHAR_DATA *ch, void *vo )
+{
+  CHAR_DATA *victim = (CHAR_DATA *) vo;
+  AFFECT_DATA af;
+  SKILLTYPE *skill = get_skilltype(sn);
+
+  if ( IS_SET( victim->immune, RIS_MAGIC ) )
+    {
+      immune_casting( skill, ch, victim, NULL );
+      return rSPELL_FAILED;
+    }
+
+  if ( IS_AFFECTED(victim, AFF_PASS_DOOR) )
+    {
+      failed_casting( skill, ch, victim, NULL );
+      return rSPELL_FAILED;
+    }
+  af.type      = sn;
+  af.duration  = number_fuzzy( level / 4 ) * DUR_CONV;
+  af.location  = APPLY_NONE;
+  af.modifier  = 0;
+  af.bitvector = AFF_PASS_DOOR;
+  affect_to_char( victim, &af );
+  act( AT_MAGIC, "$n turns translucent.", victim, NULL, NULL, TO_ROOM );
+  act( AT_MAGIC, "You turn translucent.", victim, NULL, NULL, TO_CHAR );
+  return rNONE;
+}
