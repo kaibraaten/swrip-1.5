@@ -26,20 +26,16 @@
 #define _BSD_SOURCE
 #endif
 
-#include <sys/types.h>
-#include <sys/time.h>
-#include <ctype.h>
-#include <stdio.h>
 #include <string.h>
-#include <time.h>
+#include <ctype.h>
 #include "mud.h"
 
-bool    check_social( CHAR_DATA *ch, char *command, char *argument );
+bool check_social( CHAR_DATA *ch, char *command, char *argument );
 
 /*
  * Log-all switch.
  */
-bool                            fLogAll         = FALSE;
+bool fLogAll = FALSE;
 
 
 CMDTYPE    *command_hash[126];  /* hash table for cmd_table */

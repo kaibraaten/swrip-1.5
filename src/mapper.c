@@ -33,7 +33,7 @@ char map_chars[] = "|-|-";
 struct map_type map[MAPX + 1][MAPY + 1];
 
 /* Take care of some repetitive code for later */
-void get_exit_dir( int dir, int *x, int *y, int xorig, int yorig )
+static void get_exit_dir( int dir, int *x, int *y, int xorig, int yorig )
 {
   /* Get the next coord based on direction */
   switch( dir )
@@ -83,7 +83,7 @@ void get_exit_dir( int dir, int *x, int *y, int xorig, int yorig )
 }
 
 /* Clear one map coord */
-void clear_coord( int x, int y )
+static void clear_coord( int x, int y )
 {
   map[x][y].mapch = ' ';
   map[x][y].vnum = 0;
@@ -93,7 +93,7 @@ void clear_coord( int x, int y )
 }
 
 /* Clear all exits for one room */
-void clear_room( int x, int y )
+static void clear_room( int x, int y )
 {
   int dir, exitx, exity;
 
@@ -109,8 +109,8 @@ void clear_room( int x, int y )
 }
 
 /* This function is recursive, ie it calls itself */
-void map_exits( CHAR_DATA *ch, ROOM_INDEX_DATA *pRoom,
-                int x, int y, int depth )
+static void map_exits( CHAR_DATA *ch, ROOM_INDEX_DATA *pRoom,
+		       int x, int y, int depth )
 {
   int door;
   int exitx = 0, exity = 0;
@@ -200,183 +200,101 @@ void map_exits( CHAR_DATA *ch, ROOM_INDEX_DATA *pRoom,
     }
 }
 
-/* Reformat room descriptions to exclude undesirable characters */
-#if 0
-void reformat_desc( char *desc )
+/* Display the map to the player */
+static void show_map( CHAR_DATA *ch, char *text )
 {
-  /* Index variables to keep track of array/pointer elements */
-  int i, j;
-  char buf[MAX_STRING_LENGTH], *p;
+  char buf[MAX_STRING_LENGTH * 2];
+  int x, y;
 
-  i = 0;
-  j = 0;
   buf[0] = '\0';
 
-  if ( IS_NULLSTR( desc ) )
-    return;
+  /* Place Marker 2 - referred to later */
 
-  /* Replace all "\n" and "\r" with spaces */
-  for( i = 0; i <= strlen( desc ); i++ )
+  /* Top of map frame */
+  sprintf( buf, "+-----------+ " );
+  /* First line of text */
+  strcat( buf, "\r\n" );
+
+  /* Write out the main map area with text */
+  for( y = 0; y <= MAPY; y++ )
     {
-      if ( ( desc[i] == '\n' ) || ( desc[i] == '\r' ) )
-        desc[m] = ' ';
+      strcat( buf, "|" );
+
+      for( x = 0; x <= MAPX; x++ )
+	{
+	  /* Choose a color based on map contents here */
+
+	  /* Write the map character */
+	  sprintf( buf + strlen( buf ), "%c", map[x][y].mapch );
+	}
+
+      strcat( buf, "| \r\n" );
+      /* Add the text, if necessary */
     }
 
-  /* Remove multiple spaces */
-  for( p = desc; *p != '\0'; p++ )
-    {
-      buf[j] = *p;
-      j++;
+  /* Finish off map area */
+  strcat( buf, "+-----------+ " );
 
-      /* Two or more consecutive spaces? */
-      if ( ( *p == ' ' ) && ( *( p + 1 ) == ' ' ) )
-        {
-          do
-            {
-              p++;
-            } while( *p == ' ' );
-        }
-    }
+  /* Deal with any leftover text */
 
-  buf[j] = '\0';
-
-  /* Copy to desc */
-  sprintf( desc, buf );
+  /* Act can also be used here, as can send_to_char if desired */
+  send_to_pager( buf, ch );
 }
 
-int get_line( char *desc, int max_len )
+/* Clear, generate and display the map */
+void draw_map( CHAR_DATA *ch, char *desc )
 {
-  int i, j;
+  int x, y;
+  static char buf[MAX_STRING_LENGTH];
+  OBJ_DATA *device;
 
-  /* Return if it's short enough for one line */
-  if ( strlen( desc ) <= max_len )
-    return 0;
-
-  /* Calculate end point in string without color */
-  for( i = 0; i <= strlen( desc ); i++ )
+  if ( ( device = get_eq_char( ch, WEAR_HOLD ) ) == NULL )
     {
-      /* Here you need to skip your color sequences */
-      if( (desc[j] == '&' && desc[j+1] != '&') || (desc[j] == '^' && desc[j+1] != '^')
-          j--;
-          else
-            j++;
-
-          if ( j > max_len )
-            break;
-          }
-
-      /* End point is now in i, find the nearest space */
-      for( j = i; j > 0; j-- )
-        {
-          if ( desc[j] == ' ' )
-            break;
-        }
-
-      /* There could be a problem if there are no spaces on the line */
-
-      return j + 1;
+      send_to_char( "You must have a scanner to draw a map of the surrounding area.\r\n", ch );
+      return;
     }
-#endif
-  /* Display the map to the player */
-  void show_map( CHAR_DATA *ch, char *text )
-  {
-    char buf[MAX_STRING_LENGTH * 2];
-    int x, y;
 
-    buf[0] = '\0';
+  if ( device->item_type != ITEM_DEVICE )
+    {
+      send_to_char( "You must have a scanner to draw a map of the surrounding area.\r\n", ch );
+      return;
+    }
 
-    /* Place Marker 2 - referred to later */
+  if (device->value[3] != 52 )
+    {
+      send_to_char( "You must have a scanner to draw a map of the surrounding area.\r\n", ch );
+      return;
+    }
 
-    /* Top of map frame */
-    sprintf( buf, "+-----------+ " );
-    /* First line of text */
-    strcat( buf, "\r\n" );
+  if ( device->value[2] <= 0 )
+    {
+      send_to_char( "Your scanner has no more charge left.", ch);
+      return;
+    }
 
-    /* Write out the main map area with text */
-    for( y = 0; y <= MAPY; y++ )
-      {
-        strcat( buf, "|" );
+  device->value[2]--;
 
-        for( x = 0; x <= MAPX; x++ )
-          {
-            /* Choose a color based on map contents here */
+  /* Clear map */
+  for( y = 0; y <= MAPY; y++ )
+    {
+      for( x = 0; x <= MAPX; x++ )
+	{
+	  clear_coord( x, y );
+	}
+    }
 
-            /* Write the map character */
-            sprintf( buf + strlen( buf ), "%c", map[x][y].mapch );
-          }
+  /* Start with players pos at centre of map */
+  x = MAPX / 2;
+  y = MAPY / 2;
 
-        strcat( buf, "| \r\n" );
-        /* Add the text, if necessary */
-      }
+  map[x][y].vnum = ch->in_room->vnum;
+  map[x][y].depth = 0;
 
-    /* Finish off map area */
-    strcat( buf, "+-----------+ " );
+  /* Generate the map */
+  map_exits( ch, ch->in_room, x, y, 0 );
 
-    /* Deal with any leftover text */
-
-    /* Act can also be used here, as can send_to_char if desired */
-    send_to_pager( buf, ch );
-  }
-
-  /* Clear, generate and display the map */
-  void do_draw( CHAR_DATA *ch, char *desc )
-  {
-    int x, y;
-    static char buf[MAX_STRING_LENGTH];
-    OBJ_DATA *device;
-    /* sprintf( buf, desc ); */
-    /* Remove undesirable characters */
-    /* reformat_desc( buf ); */
-
-    if ( ( device = get_eq_char( ch, WEAR_HOLD ) ) == NULL )
-      {
-        send_to_char( "You must have a scanner to draw a map of the surrounding area.\r\n", ch );
-        return;
-      }
-
-    if ( device->item_type != ITEM_DEVICE )
-      {
-        send_to_char( "You must have a scanner to draw a map of the surrounding area.\r\n", ch );
-        return;
-      }
-
-    if (device->value[3] != 52 )
-      {
-        send_to_char( "You must have a scanner to draw a map of the surrounding area.\r\n", ch );
-        return;
-      }
-
-    if ( device->value[2] <= 0 )
-      {
-        send_to_char( "Your scanner has no more charge left.", ch);
-        return;
-      }
-
-
-    device->value[2]--;
-
-    /* Clear map */
-    for( y = 0; y <= MAPY; y++ )
-      {
-        for( x = 0; x <= MAPX; x++ )
-          {
-            clear_coord( x, y );
-          }
-      }
-
-    /* Start with players pos at centre of map */
-    x = MAPX / 2;
-    y = MAPY / 2;
-
-    map[x][y].vnum = ch->in_room->vnum;
-    map[x][y].depth = 0;
-
-    /* Generate the map */
-    map_exits( ch, ch->in_room, x, y, 0 );
-
-    /* Current position should be a "X" */
-    /* sprintf( buf2, "%c", 'X' ); */
-    map[x][y].mapch = 'X';
-    /* Send the map */
-    show_map( ch, buf );
-  }
+  /* Current position should be a "X" */
+  map[x][y].mapch = 'X';
+  /* Send the map */
+  show_map( ch, buf );
+}

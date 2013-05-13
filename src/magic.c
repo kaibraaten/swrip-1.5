@@ -21,12 +21,8 @@
  *                           Spell handling module                         *
  ****************************************************************************/
 
-#include <sys/types.h>
 #include <ctype.h>
-#include <stdio.h>
 #include <string.h>
-#include <strings.h>
-#include <time.h>
 #include "mud.h"
 
 /*
@@ -504,7 +500,7 @@ int rd_parse(CHAR_DATA *ch, int level, char *expr)
     return 0;
 
   /* get rid of brackets if they surround the entire expresion */
-  if ((*expr == '(') && !index(expr+1,'(') && expr[strlen(expr)-1] == ')')
+  if ((*expr == '(') && !strchr(expr+1,'(') && expr[strlen(expr)-1] == ')')
     {
       expr[strlen(expr)-1] = '\0';
       expr++;

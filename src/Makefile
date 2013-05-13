@@ -106,6 +106,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o \
 	$(CMDDIR)/dnd.o \
 	$(CMDDIR)/down.o \
 	$(CMDDIR)/drag.o \
+	$(CMDDIR)/draw.o \
 	$(CMDDIR)/drop.o \
 	$(CMDDIR)/east.o \
 	$(CMDDIR)/echo.o \
