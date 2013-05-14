@@ -1,5 +1,7 @@
 #include "mud.h"
 
+extern char *spell_target_name;
+
 ch_ret spell_possess( int sn, int level, CHAR_DATA *ch, void *vo )
 {
   CHAR_DATA *victim;

@@ -3971,6 +3971,12 @@ DECLARE_DO_FUN( do_mpgain       );
  */
 DECLARE_SPELL_FUN( spell_affect );
 DECLARE_SPELL_FUN( spell_affectchar );
+DECLARE_SPELL_FUN( spell_area_attack );
+DECLARE_SPELL_FUN( spell_create_obj );
+DECLARE_SPELL_FUN( spell_create_mob );
+DECLARE_SPELL_FUN( spell_attack );
+DECLARE_SPELL_FUN( spell_obj_inv );
+
 DECLARE_SPELL_FUN(      spell_null              );
 DECLARE_SPELL_FUN(      spell_notfound          );
 DECLARE_SPELL_FUN(      spell_acid_blast        );
@@ -4683,7 +4689,7 @@ extern "C" {
   int   bsearch_skill( const char *name, int first, int top );
   int   bsearch_skill_exact( const char *name, int first, int top );
   bool  saves_poison_death( int level, const CHAR_DATA *victim ) ;
-  bool  saves_wand( int level, const CHAR_DATA *victim );
+  bool saves_wands( int level, const CHAR_DATA *victim );
   bool  saves_para_petri( int level, const CHAR_DATA *victim );
   bool  saves_breath( int level, const CHAR_DATA *victim );
   bool  saves_spell_staff( int level, const CHAR_DATA *victim );

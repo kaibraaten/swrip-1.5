@@ -1,4 +1,7 @@
+#include <ctype.h>
 #include "mud.h"
+
+extern char *spell_target_name;
 
 ch_ret spell_ventriloquate( int sn, int level, CHAR_DATA *ch, void *vo )
 {

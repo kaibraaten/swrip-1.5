@@ -1124,33 +1124,6 @@ ch_ret obj_cast_spell( int sn, int level, CHAR_DATA *ch, CHAR_DATA *victim, OBJ_
   return retcode;
 }
 
-CHAR_DATA *make_poly_mob(const CHAR_DATA *ch, int vnum)
-{
-  CHAR_DATA *mob;
-  MOB_INDEX_DATA *pMobIndex;
-
-  if(!ch)
-    {
-      bug("Make_poly_mob: null ch!", 0);
-      return NULL;
-    }
-
-  if(vnum < 10 || vnum > 16)
-    {
-      bug("Make_poly_mob: Vnum not in polymorphing mobs range", 0);
-      return NULL;
-    }
-
-  if ( (pMobIndex = get_mob_index( vnum ) ) == NULL)
-    {
-      bug("Make_poly_mob: Can't find mob %d", vnum);
-      return NULL;
-    }
-  mob = create_mobile(pMobIndex);
-  SET_BIT(mob->act, ACT_POLYMORPHED);
-  return mob;
-}
-
 /*******************************************************
  * Everything after this point is part of SMAUG SPELLS *
  *******************************************************/

@@ -1,5 +1,7 @@
 #include "mud.h"
 
+extern char *spell_target_name;
+
 ch_ret spell_identify( int sn, int level, CHAR_DATA *ch, void *vo )
 {
   /* Modified by Scryn to work on mobs/players/objs */

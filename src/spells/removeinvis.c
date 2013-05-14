@@ -1,5 +1,7 @@
 #include "mud.h"
 
+extern char *spell_target_name;
+
 ch_ret spell_remove_invis( int sn, int level, CHAR_DATA *ch, void *vo )
 {
   OBJ_DATA *obj;

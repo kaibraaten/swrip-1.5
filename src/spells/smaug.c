@@ -1,5 +1,7 @@
 #include "mud.h"
 
+extern char *spell_target_name;
+
 /*
  * Generic handler for new "SMAUG" spells                       -Thoric
  */
