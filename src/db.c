@@ -704,37 +704,37 @@ void boot_db( bool fCopyOver )
 
   /*loads vendors on each reboot -Legonas*/
   log_string ( "Reading in Vendors" );
-  load_vendors ( );
+  load_vendors ();
 
   log_string ( "Reading in Storerooms" );
-  load_storerooms( );
+  load_storerooms();
 
   log_string( "Loading buildlist" );
-  load_buildlist( );
+  load_buildlist();
 
   log_string( "Loading boards" );
-  load_boards( );
+  load_boards();
 
   log_string( "Loading clans" );
-  load_clans( );
+  load_clans();
 
   log_string( "Loading bans" );
-  load_banlist( );
+  load_banlist();
 
   log_string( "Loading corpses" );
-  load_corpses( );
+  load_corpses();
 
   log_string( "Loading spaceobjects" );
   load_spaceobjects();
 
   log_string( "Loading ships" );
-  load_ships( );
+  load_ships();
 
   log_string( "Loading bounties" );
-  load_bounties( );
+  load_bounties();
 
   log_string( "Loading governments" );
-  load_planets( );
+  load_planets();
 
   log_string( "Loading shuttles" );
   load_shuttles();
@@ -743,7 +743,7 @@ void boot_db( bool fCopyOver )
   load_hall_of_fame();
 
   log_string( "Resetting areas" );
-  area_update( );
+  area_update();
 
   MOBtrigger = TRUE;
 

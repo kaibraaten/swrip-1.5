@@ -27,7 +27,7 @@
 #include "mud.h"
 
 #define MAX_NEST        100
-static  OBJ_DATA *      rgObjNest       [MAX_NEST];
+static  OBJ_DATA *rgObjNest[MAX_NEST];
 
 CLAN_DATA * first_clan = NULL;
 CLAN_DATA * last_clan = NULL;
@@ -35,17 +35,16 @@ CLAN_DATA * last_clan = NULL;
 MEMBER_LIST * first_member_list = NULL;
 MEMBER_LIST * last_member_list = NULL;
 
-
 /* local routines */
-void fread_clan( CLAN_DATA *clan, FILE *fp );
-bool load_clan_file( const char *clanfile );
+static void fread_clan( CLAN_DATA *clan, FILE *fp );
+static bool load_clan_file( const char *clanfile );
 
 /*
  * Get pointer to clan structure from clan name.
  */
-CLAN_DATA *get_clan( char *name )
+CLAN_DATA *get_clan( const char *name )
 {
-  CLAN_DATA *clan;
+  CLAN_DATA *clan = NULL;
 
   for ( clan = first_clan; clan; clan = clan->next )
     {
@@ -60,7 +59,7 @@ CLAN_DATA *get_clan( char *name )
 
 void write_clan_list( void )
 {
-  CLAN_DATA *tclan;
+  const CLAN_DATA *tclan = NULL;
   FILE *fpout;
   char filename[256];
 
@@ -78,6 +77,7 @@ void write_clan_list( void )
       fprintf( fpout, "%s\n", tclan->filename );
     }
 
+
   fprintf( fpout, "$\n" );
   fclose( fpout );
 }
@@ -85,7 +85,7 @@ void write_clan_list( void )
 /*
  * Save a clan's data to its data file
  */
-void save_clan( CLAN_DATA *clan )
+void save_clan( const CLAN_DATA *clan )
 {
   FILE *fp;
   char filename[256];
@@ -154,7 +154,7 @@ void save_clan( CLAN_DATA *clan )
 /*
  * Read in actual clan data.
  */
-void fread_clan( CLAN_DATA *clan, FILE *fp )
+static void fread_clan( CLAN_DATA *clan, FILE *fp )
 {
   for ( ; ; )
     {
@@ -277,7 +277,7 @@ void fread_clan( CLAN_DATA *clan, FILE *fp )
  * Load a clan file
  */
 
-bool load_clan_file( const char *clanfile )
+static bool load_clan_file( const char *clanfile )
 {
   char filename[256];
   CLAN_DATA *clan;
@@ -440,7 +440,7 @@ bool load_clan_file( const char *clanfile )
 /*
  * Load in all the clan files.
  */
-void load_clans( )
+void load_clans( void )
 {
   FILE *fpList = NULL;
   char clanlist[256];
@@ -493,12 +493,13 @@ void load_clans( )
   log_string(" Done sorting" );
 }
 
-void show_members( CHAR_DATA *ch, char *argument, char *format )
+void show_members( const CHAR_DATA *ch, const char *argument, const char *format )
 {
-  MEMBER_LIST   *members_list;
-  MEMBER_DATA   *member;
-  CLAN_DATA     *clan;
+  MEMBER_LIST *members_list = NULL;
+  MEMBER_DATA *member = NULL;
+  const CLAN_DATA *clan = NULL;
   int members = 0;
+
   for( members_list = first_member_list; members_list; members_list = members_list->next )
     {
       if( !str_cmp( members_list->name, argument ) )
@@ -531,7 +532,7 @@ void show_members( CHAR_DATA *ch, char *argument, char *format )
           || !str_cmp( format, "alpha" ))
         {
           MS_DATA *insert = NULL;
-          MS_DATA *sort;
+          MS_DATA *sort = NULL;
           MS_DATA *first_member = NULL;
           MS_DATA *last_member = NULL;
 
@@ -576,6 +577,7 @@ void show_members( CHAR_DATA *ch, char *argument, char *format )
                     }
 
                 }
+
               if( insert == NULL )
                 {
                   CREATE( insert, MS_DATA, 1 );
@@ -585,20 +587,21 @@ void show_members( CHAR_DATA *ch, char *argument, char *format )
             }
 
           for( sort = first_member; sort; sort = sort->next )
-            if( str_cmp( sort->member->name, clan->leader )
-                && str_cmp( sort->member->name, clan->number1 )
-                && str_cmp( sort->member->name, clan->number2 ) )
-              {
-                members++;
-                pager_printf( ch, "[%3d] %12s %15s %7d %7d %10s\r\n",
-                              sort->member->level,
-                              capitalize(sort->member->name ),
-                              ability_name[sort->member->mclass],
-                              sort->member->kills,
-                              sort->member->deaths,
-                              sort->member->since );
-              }
-
+	    {
+	      if( str_cmp( sort->member->name, clan->leader )
+		  && str_cmp( sort->member->name, clan->number1 )
+		  && str_cmp( sort->member->name, clan->number2 ) )
+		{
+		  members++;
+		  pager_printf( ch, "[%3d] %12s %15s %7d %7d %10s\r\n",
+				sort->member->level,
+				capitalize(sort->member->name ),
+				ability_name[sort->member->mclass],
+				sort->member->kills,
+				sort->member->deaths,
+				sort->member->since );
+		}
+	    }
         }
 
       for( member = members_list->first_member; member; member = member->next )
@@ -638,11 +641,9 @@ void show_members( CHAR_DATA *ch, char *argument, char *format )
   pager_printf( ch, "Total Members: %d\r\n", members);
   pager_printf( ch,
                 "------------------------------------------------------------\r\n" );
-
-
 }
 
-void remove_member( CHAR_DATA *ch )
+void remove_member( const CHAR_DATA *ch )
 {
   MEMBER_LIST   *members_list;
   MEMBER_DATA   *member;
@@ -668,7 +669,7 @@ void remove_member( CHAR_DATA *ch )
     }
 }
 
-void save_member_list( MEMBER_LIST *members_list )
+void save_member_list( const MEMBER_LIST *members_list )
 {
   MEMBER_DATA   *member;
   FILE          *fp;
@@ -705,7 +706,7 @@ void save_member_list( MEMBER_LIST *members_list )
 
 }
 
-bool load_member_list( char *filename )
+bool load_member_list( const char *filename )
 {
   FILE *fp;
   char buf[MAX_STRING_LENGTH];
@@ -761,7 +762,7 @@ bool load_member_list( char *filename )
 
 }
 
-void update_member( CHAR_DATA *ch )
+void update_member( const CHAR_DATA *ch )
 {
   MEMBER_LIST *members_list;
   MEMBER_DATA *member;

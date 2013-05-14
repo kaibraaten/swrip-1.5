@@ -188,6 +188,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/mailroom.o \
 	$(CMDDIR)/makeboard.o \
 	$(CMDDIR)/makeclan.o \
+	$(CMDDIR)/makeplanet.o \
 	$(CMDDIR)/makewizlist.o \
 	$(CMDDIR)/massign.o \
 	$(CMDDIR)/mcreate.o \
@@ -237,6 +238,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/pardon.o \
 	$(CMDDIR)/password.o \
 	$(CMDDIR)/peace.o \
+	$(CMDDIR)/planets.o \
 	$(CMDDIR)/practice.o \
 	$(CMDDIR)/pull.o \
 	$(CMDDIR)/purge.o \
@@ -283,11 +285,13 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/set_boot_time.o \
 	$(CMDDIR)/setblaster.o \
 	$(CMDDIR)/setclan.o \
+	$(CMDDIR)/setplanet.o \
 	$(CMDDIR)/shiptalk.o \
 	$(CMDDIR)/shout.o \
 	$(CMDDIR)/shove.o \
 	$(CMDDIR)/showclan.o \
 	$(CMDDIR)/showlayers.o \
+	$(CMDDIR)/showplanet.o \
 	$(CMDDIR)/showstatistic.o \
 	$(CMDDIR)/showstatistic_web.o \
 	$(CMDDIR)/shutdown.o \

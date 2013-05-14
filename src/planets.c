@@ -31,11 +31,10 @@ PLANET_DATA * last_planet = NULL;
 GUARD_DATA * first_guard = NULL;
 GUARD_DATA * last_guard = NULL;
 
-void fread_planet( PLANET_DATA *planet, FILE *fp );
-bool load_planet_file( const char *planetfile );
-void write_planet_list( void );
+static void fread_planet( PLANET_DATA *planet, FILE *fp );
+static bool load_planet_file( const char *planetfile );
 
-PLANET_DATA *get_planet( char *name )
+PLANET_DATA *get_planet( const char *name )
 {
   PLANET_DATA *planet;
 
@@ -50,7 +49,7 @@ PLANET_DATA *get_planet( char *name )
   return NULL;
 }
 
-void write_planet_list( )
+void write_planet_list( void )
 {
   PLANET_DATA *tplanet;
   FILE *fpout;
@@ -74,7 +73,7 @@ void write_planet_list( )
   fclose( fpout );
 }
 
-void save_planet( PLANET_DATA *planet )
+void save_planet( const PLANET_DATA *planet )
 {
   FILE *fp;
   char filename[256];
@@ -136,7 +135,7 @@ void save_planet( PLANET_DATA *planet )
   fclose( fp );
 }
 
-void fread_planet( PLANET_DATA *planet, FILE *fp )
+static void fread_planet( PLANET_DATA *planet, FILE *fp )
 {
   for ( ; ; )
     {
@@ -242,7 +241,7 @@ void fread_planet( PLANET_DATA *planet, FILE *fp )
     }
 }
 
-bool load_planet_file( const char *planetfile )
+static bool load_planet_file( const char *planetfile )
 {
   char filename[256];
   PLANET_DATA *planet;
@@ -316,7 +315,7 @@ bool load_planet_file( const char *planetfile )
   return found;
 }
 
-void load_planets( )
+void load_planets( void )
 {
   FILE *fpList;
   char planetlist[256];
@@ -350,229 +349,7 @@ void load_planets( )
   log_string(" Done planets " );
 }
 
-void do_setplanet( CHAR_DATA *ch, char *argument )
-{
-  char arg1[MAX_INPUT_LENGTH];
-  char arg2[MAX_INPUT_LENGTH];
-  PLANET_DATA *planet;
-
-  if ( IS_NPC( ch ) )
-    {
-      send_to_char( "Huh?\r\n", ch );
-      return;
-    }
-
-  argument = one_argument( argument, arg1 );
-  argument = one_argument( argument, arg2 );
-
-  if ( arg1[0] == '\0' )
-    {
-      send_to_char( "Usage: setplanet <planet> <field> [value]\r\n", ch );
-      send_to_char( "\r\nField being one of:\r\n", ch );
-      send_to_char( " base_value flags\r\n", ch );
-      send_to_char( " name filename spaceobject governed_by\r\n", ch );
-      return;
-    }
-
-  planet = get_planet( arg1 );
-
-  if ( !planet )
-    {
-      send_to_char( "No such planet.\r\n", ch );
-      return;
-    }
-
-  if ( !str_cmp( arg2, "name" ) )
-    {
-      STRFREE( planet->name );
-      planet->name = STRALLOC( argument );
-      send_to_char( "Done.\r\n", ch );
-      save_planet( planet );
-      return;
-    }
-
-  if ( !str_cmp( arg2, "governed_by" ) )
-    {
-      CLAN_DATA *clan = get_clan( argument );
-
-      if ( clan )
-        {
-          planet->governed_by = clan;
-          send_to_char( "Done.\r\n", ch );
-          save_planet( planet );
-        }
-      else
-        {
-          send_to_char( "No such clan.\r\n", ch );
-        }
-
-      return;
-    }
-
-  if ( !str_cmp( arg2, "spaceobject" ) )
-    {
-      if ( (planet->spaceobject = spaceobject_from_name(argument)) )
-        {
-          SPACE_DATA *spaceobject = planet->spaceobject;
-
-          if (spaceobject != NULL)
-            {
-              spaceobject->planet = planet;
-              send_to_char( "Done.\r\n", ch );
-	      save_planet(planet);
-            }
-          else
-            {
-              send_to_char( "No such spaceobject.\r\n", ch );
-            }
-        }
-
-      return;
-    }
-
-  if ( !str_cmp( arg2, "filename" ) )
-    {
-      DISPOSE( planet->filename );
-      planet->filename = str_dup( argument );
-      send_to_char( "Done.\r\n", ch );
-      save_planet( planet );
-      write_planet_list( );
-      return;
-    }
-
-  if ( !str_cmp( arg2, "base_value" ) )
-    {
-      planet->base_value = atoi( argument );
-      send_to_char( "Done.\r\n", ch );
-      save_planet( planet );
-      return;
-    }
-
-  if ( !str_cmp( arg2, "flags" ) )
-    {
-      char farg[MAX_INPUT_LENGTH];
-
-      argument = one_argument( argument, farg);
-
-      if ( farg[0] == '\0' )
-        {
-          send_to_char( "Possible flags: nocapture\r\n", ch );
-          return;
-        }
-
-      for ( ; farg[0] != '\0'; argument = one_argument( argument, farg) )
-        {
-          if ( !str_cmp( farg, "nocapture" ) )
-            {
-              TOGGLE_BIT( planet->flags, PLANET_NOCAPTURE );
-	    }
-          else
-            {
-              ch_printf( ch , "No such flag: %s\r\n" , farg );
-            }
-        }
-
-      send_to_char( "Done.\r\n", ch );
-      save_planet( planet );
-      return;
-    }
-
-  do_setplanet( ch, "" );
-}
-
-void do_showplanet( CHAR_DATA *ch, char *argument )
-{
-  PLANET_DATA *planet;
-
-  if ( IS_NPC( ch ) )
-    {
-      send_to_char( "Huh?\r\n", ch );
-      return;
-    }
-
-  if ( argument[0] == '\0' )
-    {
-      send_to_char( "Usage: showplanet <planet>\r\n", ch );
-      return;
-    }
-
-  planet = get_planet( argument );
-
-  if ( !planet )
-    {
-      send_to_char( "No such planet.\r\n", ch );
-      return;
-    }
-
-  ch_printf( ch, "%s\r\nFilename: %s\r\nStarsystem: %s\r\n",
-             planet->name,
-             planet->filename,
-             planet->spaceobject ? planet->spaceobject->name : "None");
-}
-
-void do_makeplanet( CHAR_DATA *ch, char *argument )
-{
-  char filename[256];
-  PLANET_DATA *planet;
-
-  if ( !argument || argument[0] == '\0' )
-    {
-      send_to_char( "Usage: makeplanet <planet name>\r\n", ch );
-      return;
-    }
-
-  sprintf( filename, "%s%s", PLANET_DIR, strlower(argument) );
-
-  CREATE( planet, PLANET_DATA, 1 );
-  LINK( planet, first_planet, last_planet, next, prev );
-  planet->governed_by = NULL;
-  planet->next_in_system = NULL;
-  planet->prev_in_system = NULL;
-  planet->spaceobject = NULL ;
-  planet->first_area = NULL;
-  planet->last_area = NULL;
-  planet->first_guard = NULL;
-  planet->last_guard = NULL;
-  planet->name          = STRALLOC( argument );
-  planet->flags               = 0;
-}
-
-void do_planets( CHAR_DATA *ch, char *argument )
-{
-  PLANET_DATA *planet;
-  int count = 0;
-  AREA_DATA   *area;
-
-  set_pager_color( AT_WHITE, ch );
-  for ( planet = first_planet; planet; planet = planet->next )
-    {
-      pager_printf( ch, "&wPlanet: &G%-15s   &wGoverned By: &G%s %s\r\n",
-                    planet->name ,
-                    planet->governed_by ? planet->governed_by->name : "",
-                    IS_SET(planet->flags, PLANET_NOCAPTURE ) ? "(permanent)" : "" );
-      pager_printf( ch, "&WValue: &O%-10ld&W/&O%-10d   ",
-                    get_taxes(planet) , planet->base_value);
-      pager_printf( ch, "&WPopulation: &O%-5d   &W Pop Support: &R%.1f\r\n",
-                    planet->population , planet->pop_support );
-      if ( IS_IMMORTAL(ch) )
-        {
-          pager_printf( ch, "&WAreas: &G");
-          for ( area = planet->first_area ; area ; area = area->next_on_planet )
-            pager_printf( ch , "%s,  ", area->filename );
-          pager_printf( ch, "\r\n" );
-        }
-
-      count++;
-    }
-
-  if ( !count )
-    {
-      set_char_color( AT_BLOOD, ch);
-      send_to_char( "There are no planets currently formed.\r\n", ch );
-    }
-}
-
-long get_taxes( PLANET_DATA *planet )
+long get_taxes( const PLANET_DATA *planet )
 {
   long gain;
 

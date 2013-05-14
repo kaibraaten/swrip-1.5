@@ -4215,19 +4215,22 @@ extern "C" {
   void operate_on_note( CHAR_DATA *ch, char *arg_passed, bool IS_MAIL );
 
   /* clans.c */
-  void save_member_list( MEMBER_LIST *members_list );
-  void show_members( CHAR_DATA *ch, char *argument, char *format );
+  void save_member_list( const MEMBER_LIST *members_list );
+  void show_members( const CHAR_DATA *ch, const char *argument, const char *format );
   void write_clan_list( void );
-  CLAN_DATA *get_clan( char *name );
-  void  load_clans( void );
-  void  save_clan( CLAN_DATA *clan );
-  PLANET_DATA *get_planet( char *name );
+  CLAN_DATA *get_clan( const char *name );
+  void load_clans( void );
+  void save_clan( const CLAN_DATA *clan );
+  bool load_member_list( const char *filename );
+  void update_member( const CHAR_DATA *ch );
+  void remove_member( const CHAR_DATA *ch );
+
+  /* planets.c */
+  void write_planet_list( void );
+  PLANET_DATA *get_planet( const char *name );
   void  load_planets( void );
-  void  save_planet( PLANET_DATA *planet );
-  long    get_taxes( PLANET_DATA *planet );
-  bool  load_member_list( char *filename );
-  void  update_member( CHAR_DATA *ch );
-  void remove_member( CHAR_DATA *ch );
+  void  save_planet( const PLANET_DATA *planet );
+  long get_taxes( const PLANET_DATA *planet );
 
   /* bounty.c */
   void disintegration( const CHAR_DATA *ch, const CHAR_DATA *victim, long amount );
