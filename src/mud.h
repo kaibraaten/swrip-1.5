@@ -3451,6 +3451,7 @@ DECLARE_DO_FUN( do_makeplanet );
 DECLARE_DO_FUN( do_planets );
 DECLARE_DO_FUN( do_showplanet );
 DECLARE_DO_FUN( do_showstatistic );
+DECLARE_DO_FUN( do_showstatistic_web );
 DECLARE_DO_FUN( do_teach );
 DECLARE_DO_FUN( do_gather_intelligence );
 DECLARE_DO_FUN( do_add_patrol );
@@ -4139,56 +4140,53 @@ extern "C" {
   /* act_comm.c */
   bool check_parse_name( const char *name );
   char *drunk_speech( const char *argument, CHAR_DATA *ch );
-  void talk_channel( CHAR_DATA *ch, char *argument,
+  void talk_channel( CHAR_DATA *ch, const char *argument,
 		     int channel, const char *verb );
-  void sound_to_room( ROOM_INDEX_DATA *room , char *argument );
-  bool  circle_follow( CHAR_DATA *ch, CHAR_DATA *victim );
-  void  add_follower( CHAR_DATA *ch, CHAR_DATA *master );
-  void  stop_follower( CHAR_DATA *ch );
-  void  die_follower( CHAR_DATA *ch );
-  bool  is_same_group( CHAR_DATA *ach, CHAR_DATA *bch );
-  void  to_channel( const char *argument, int channel,
-                    const char *verb, short level );
-  void          talk_auction( char *argument );
-  bool    knows_language( CHAR_DATA *ch, int language,
-                          CHAR_DATA *cch );
-  bool    can_learn_lang( CHAR_DATA *ch, int language );
-  int     countlangs( int languages );
-  char *        obj_short( OBJ_DATA *obj );
+  void sound_to_room( const ROOM_INDEX_DATA *room, const char *argument );
+  bool circle_follow( const CHAR_DATA *ch, const CHAR_DATA *victim );
+  void add_follower( CHAR_DATA *ch, CHAR_DATA *master );
+  void stop_follower( CHAR_DATA *ch );
+  void die_follower( CHAR_DATA *ch );
+  bool is_same_group( const CHAR_DATA *ach, const CHAR_DATA *bch );
+  void to_channel( const char *argument, int channel,
+		   const char *verb, short level );
+  void talk_auction( const char *argument );
+  bool knows_language( const CHAR_DATA *ch, int language, const CHAR_DATA *cch );
+  bool can_learn_lang( const CHAR_DATA *ch, int language );
+  int countlangs( int languages );
 
   /* act_info.c */
-  int get_race_from_name( char *arg );
-  int get_class_from_name( char *arg );
-  HELP_DATA *get_help( CHAR_DATA *ch, char *argument );
-  void show_condition( CHAR_DATA *ch, CHAR_DATA *victim );
-  bool check_blind( CHAR_DATA *ch );
-  char *format_obj_to_char( OBJ_DATA *obj, CHAR_DATA *ch, bool fShort );
-  void show_list_to_char( OBJ_DATA *list, CHAR_DATA *ch,
+  int get_race_from_name( const char *arg );
+  int get_class_from_name( const char *arg );
+  HELP_DATA *get_help( const CHAR_DATA *ch, char *argument );
+  void show_condition( const CHAR_DATA *ch, const CHAR_DATA *victim );
+  bool check_blind( const CHAR_DATA *ch );
+  char *format_obj_to_char( const OBJ_DATA *obj, const CHAR_DATA *ch, bool fShort );
+  void show_list_to_char( const OBJ_DATA *list, CHAR_DATA *ch,
 			  bool fShort, bool fShowNothing );
-  void do_showstatistic_web( CHAR_DATA *ch, char *argument );
 
   /* act_move.c */
-  bool has_key( CHAR_DATA *ch, int key );
+  bool has_key( const CHAR_DATA *ch, int key );
   void set_bexit_flag( EXIT_DATA *pexit, int flag );
   void remove_bexit_flag( EXIT_DATA *pexit, int flag );
   ROOM_INDEX_DATA *generate_exit( ROOM_INDEX_DATA *in_room, EXIT_DATA **pexit );
   void  clear_vrooms( void );
-  ED *  find_door( CHAR_DATA *ch, char *arg, bool quiet );
-  ED *  get_exit( ROOM_INDEX_DATA *room, short dir );
-  ED *  get_exit_to( ROOM_INDEX_DATA *room, short dir, int vnum );
-  ED *  get_exit_num( ROOM_INDEX_DATA *room, short count );
-  ch_ret        move_char( CHAR_DATA *ch, EXIT_DATA *pexit, int fall );
-  void  teleport( CHAR_DATA *ch, short room, int flags );
-  short encumbrance( CHAR_DATA *ch, short move );
-  bool  will_fall( CHAR_DATA *ch, int fall );
-  int     wherehome( CHAR_DATA *ch );
+  EXIT_DATA *find_door( CHAR_DATA *ch, const char *arg, bool quiet );
+  EXIT_DATA *get_exit( const ROOM_INDEX_DATA *room, short dir );
+  EXIT_DATA *get_exit_to( const ROOM_INDEX_DATA *room, short dir, int vnum );
+  EXIT_DATA *get_exit_num( const ROOM_INDEX_DATA *room, short count );
+  ch_ret move_char( CHAR_DATA *ch, EXIT_DATA *pexit, int fall );
+  void teleport( CHAR_DATA *ch, short room, int flags );
+  short encumbrance( const CHAR_DATA *ch, short move );
+  bool will_fall( CHAR_DATA *ch, int fall );
+  int wherehome( const CHAR_DATA *ch );
 
   /* act_obj.c */
   bool remove_obj( CHAR_DATA *ch, int iWear, bool fReplace );
-  obj_ret       damage_obj( OBJ_DATA *obj );
-  short get_obj_resistance( OBJ_DATA *obj );
-  void    save_clan_storeroom( CHAR_DATA *ch, CLAN_DATA *clan );
-  void    obj_fall( OBJ_DATA *obj, bool through );
+  obj_ret damage_obj( OBJ_DATA *obj );
+  short get_obj_resistance( const OBJ_DATA *obj );
+  void save_clan_storeroom( CHAR_DATA *ch, const CLAN_DATA *clan );
+  void obj_fall( OBJ_DATA *obj, bool through );
 
   /* act_wiz.c */
   void save_banlist( void );
@@ -4372,6 +4370,7 @@ extern "C" {
   bool autofly( SHIP_DATA *ship );
 
   /* comm.c */
+  char *obj_short( const OBJ_DATA *obj );
   void close_socket( DESCRIPTOR_DATA *dclose, bool force );
   bool write_to_descriptor( socket_t desc, char *txt, int length );
   void write_to_buffer( DESCRIPTOR_DATA *d, const char *txt, size_t length );
@@ -4537,7 +4536,7 @@ extern "C" {
   void release_supermob( void );
 
   /* player.c */
-  void  set_title( CHAR_DATA *ch, char *title );
+  void  set_title( CHAR_DATA *ch, const char *title );
 
   /* skills.c */
   bool  check_skill( CHAR_DATA *ch, char *command, char *argument );
@@ -4628,7 +4627,7 @@ extern "C" {
   void fix_char( CHAR_DATA *ch );
   void showaffect( const CHAR_DATA *ch, const AFFECT_DATA *paf );
   void set_cur_obj( OBJ_DATA *obj );
-  bool obj_extracted( OBJ_DATA *obj );
+  bool obj_extracted( const OBJ_DATA *obj );
   void queue_extracted_obj( OBJ_DATA *obj );
   void clean_obj_queue( void );
   void set_cur_char( CHAR_DATA *ch );
@@ -4709,8 +4708,8 @@ extern "C" {
   bool  load_char_obj( DESCRIPTOR_DATA *d, char *name, bool preload );
   void  set_alarm ( long seconds );
   void  requip_char( CHAR_DATA *ch );
-  void    fwrite_obj( CHAR_DATA *ch, OBJ_DATA *obj, FILE *fp,
-                      int iNest, short os_type );
+  void fwrite_obj( const CHAR_DATA *ch, const OBJ_DATA *obj, FILE *fp,
+		   int iNest, short os_type );
   void  fread_obj( CHAR_DATA *ch,  FILE *fp, short os_type );
   void  de_equip_char( CHAR_DATA *ch );
   void  re_equip_char( CHAR_DATA *ch );
@@ -4758,7 +4757,7 @@ extern "C" {
   bool is_droid( const CHAR_DATA *ch );
 
   /* newscore.c */
-  const char *get_race( CHAR_DATA *ch );
+  const char *get_race( const CHAR_DATA *ch );
 
   /* badname functions */
   bool  check_bad_name( const char *name );

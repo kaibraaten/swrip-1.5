@@ -1738,7 +1738,7 @@ void pager_printf(const CHAR_DATA *ch, const char *fmt, ...)
 
 
 
-char *obj_short( OBJ_DATA *obj )
+char *obj_short( const OBJ_DATA *obj )
 {
   static char buf[MAX_STRING_LENGTH];
 

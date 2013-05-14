@@ -33,7 +33,7 @@ void send_room_page_to_char(CHAR_DATA * ch, ROOM_INDEX_DATA * idx, char page);
 void send_page_to_char(CHAR_DATA * ch, MOB_INDEX_DATA * idx, char page);
 void send_control_page_to_char(CHAR_DATA * ch, char page);
 
-void sound_to_room( ROOM_INDEX_DATA *room , char *argument )
+void sound_to_room( const ROOM_INDEX_DATA *room, const char *argument )
 {
   CHAR_DATA *vic;
 
@@ -189,7 +189,7 @@ char *drunk_speech( const char *argument, CHAR_DATA *ch )
 /*
  * Generic channel function.
  */
-void talk_channel( CHAR_DATA *ch, char *argument, int channel, const char *verb )
+void talk_channel( CHAR_DATA *ch, const char *argument, int channel, const char *verb )
 {
   char buf[MAX_STRING_LENGTH];
   char buf2[MAX_STRING_LENGTH];
@@ -370,7 +370,7 @@ void talk_channel( CHAR_DATA *ch, char *argument, int channel, const char *verb 
            &&   vch != ch
            &&  !IS_SET(och->deaf, channel) )
         {
-          char *sbuf = argument;
+          const char *sbuf = argument;
 
           if ( channel != CHANNEL_SHOUT && channel != CHANNEL_YELL && channel != CHANNEL_IMMTALK && channel != CHANNEL_OOC
                && channel != CHANNEL_ASK && channel != CHANNEL_NEWBIE && channel != CHANNEL_AVTALK
@@ -528,13 +528,14 @@ void to_channel( const char *argument, int channel, const char *verb, short leve
  * follow in a loop through an exit leading back into the same room
  * (Which exists in many maze areas)                    -Thoric
  */
-bool circle_follow( CHAR_DATA *ch, CHAR_DATA *victim )
+bool circle_follow( const CHAR_DATA *ch, const CHAR_DATA *victim )
 {
-  CHAR_DATA *tmp;
+  const CHAR_DATA *tmp;
 
   for ( tmp = victim; tmp; tmp = tmp->master )
     if ( tmp == ch )
       return TRUE;
+
   return FALSE;
 }
 
@@ -607,10 +608,14 @@ void die_follower( CHAR_DATA *ch )
  * (2) if A ~ B then B ~ A
  * (3) if A ~ B  and B ~ C, then A ~ C
  */
-bool is_same_group( CHAR_DATA *ach, CHAR_DATA *bch )
+bool is_same_group( const CHAR_DATA *ach, const CHAR_DATA *bch )
 {
-  if ( ach->leader ) ach = ach->leader;
-  if ( bch->leader ) bch = bch->leader;
+  if ( ach->leader )
+    ach = ach->leader;
+
+  if ( bch->leader )
+    bch = bch->leader;
+
   return ach == bch;
 }
 
@@ -619,7 +624,7 @@ bool is_same_group( CHAR_DATA *ach, CHAR_DATA *bch )
  * I am not too sure if this method is right..
  */
 
-void talk_auction (char *argument)
+void talk_auction (const char *argument)
 {
   DESCRIPTOR_DATA *d;
   char buf[MAX_STRING_LENGTH];
@@ -640,7 +645,7 @@ void talk_auction (char *argument)
  * Language support functions. -- Altrag
  * 07/01/96
  */
-bool knows_language( CHAR_DATA *ch, int language, CHAR_DATA *cch )
+bool knows_language( const CHAR_DATA *ch, int language, const CHAR_DATA *cch )
 {
   short sn;
 
@@ -685,7 +690,7 @@ bool knows_language( CHAR_DATA *ch, int language, CHAR_DATA *cch )
   return FALSE;
 }
 
-bool can_learn_lang( CHAR_DATA *ch, int language )
+bool can_learn_lang( const CHAR_DATA *ch, int language )
 {
   if ( language & LANG_CLAN )
     return FALSE;

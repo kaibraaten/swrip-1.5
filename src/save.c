@@ -601,7 +601,7 @@ void fwrite_char( CHAR_DATA *ch, FILE *fp )
 /*
  * Write an object and its contents.
  */
-void fwrite_obj( CHAR_DATA *ch, OBJ_DATA *obj, FILE *fp, int iNest,
+void fwrite_obj( const CHAR_DATA *ch, const OBJ_DATA *obj, FILE *fp, int iNest,
                  short os_type )
 {
   EXTRA_DESCR_DATA *ed;

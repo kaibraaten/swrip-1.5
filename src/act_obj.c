@@ -26,7 +26,7 @@
 /*
  * how resistant an object is to damage                         -Thoric
  */
-short get_obj_resistance( OBJ_DATA *obj )
+short get_obj_resistance( const OBJ_DATA *obj )
 {
   short resist;
 
@@ -123,12 +123,12 @@ obj_ret damage_obj( OBJ_DATA *obj )
 /*
  * Save items in a clan storage room                    -Scryn & Thoric
  */
-void save_clan_storeroom( CHAR_DATA *ch, CLAN_DATA *clan )
+void save_clan_storeroom( CHAR_DATA *ch, const CLAN_DATA *clan )
 {
   FILE *fp;
   char filename[256];
   short templvl;
-  OBJ_DATA *contents;
+  const OBJ_DATA *contents;
 
   if ( !clan )
     {

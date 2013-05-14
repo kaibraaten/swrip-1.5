@@ -26,7 +26,7 @@
 #include "mud.h"
 #include "vector3_aux.h"
 
-int get_race_from_name( char *arg )
+int get_race_from_name( const char *arg )
 {
   int iRace;
 
@@ -41,7 +41,7 @@ int get_race_from_name( char *arg )
   return iRace;
 }
 
-int get_class_from_name( char *arg )
+int get_class_from_name( const char *arg )
 {
   int iClass;
 
@@ -56,7 +56,7 @@ int get_class_from_name( char *arg )
   return iClass;
 }
 
-char *format_obj_to_char( OBJ_DATA *obj, CHAR_DATA *ch, bool fShort )
+char *format_obj_to_char( const OBJ_DATA *obj, const CHAR_DATA *ch, bool fShort )
 {
   static char buf[MAX_STRING_LENGTH];
 
@@ -150,13 +150,13 @@ char *halucinated_object( int ms, bool fShort )
  * Show a list to a character.
  * Can coalesce duplicated items.
  */
-void show_list_to_char( OBJ_DATA *list, CHAR_DATA *ch, bool fShort, bool fShowNothing )
+void show_list_to_char( const OBJ_DATA *list, CHAR_DATA *ch, bool fShort, bool fShowNothing )
 {
   char **prgpstrShow;
   int *prgnShow;
   int *pitShow;
   char *pstrShow;
-  OBJ_DATA *obj;
+  const OBJ_DATA *obj;
   int nShow;
   int iShow;
   int count, offcount, tmp, ms, cnt;
@@ -345,7 +345,7 @@ void show_list_to_char( OBJ_DATA *list, CHAR_DATA *ch, bool fShort, bool fShowNo
   DISPOSE( pitShow );
 }
 
-bool check_blind( CHAR_DATA *ch )
+bool check_blind( const CHAR_DATA *ch )
 {
   if ( !IS_NPC(ch) && IS_SET(ch->act, PLR_HOLYLIGHT) )
     return TRUE;
@@ -362,7 +362,7 @@ bool check_blind( CHAR_DATA *ch )
   return TRUE;
 }
 
-void show_condition( CHAR_DATA *ch, CHAR_DATA *victim )
+void show_condition( const CHAR_DATA *ch, const CHAR_DATA *victim )
 {
   char buf[MAX_STRING_LENGTH];
   int percent;
@@ -416,7 +416,7 @@ void show_condition( CHAR_DATA *ch, CHAR_DATA *victim )
  * Moved into a separate function so it can be used for other things
  * ie: online help editing                              -Thoric
  */
-HELP_DATA *get_help( CHAR_DATA *ch, char *argument )
+HELP_DATA *get_help( const CHAR_DATA *ch, char *argument )
 {
   char argall[MAX_INPUT_LENGTH];
   char argone[MAX_INPUT_LENGTH];
@@ -438,11 +438,14 @@ HELP_DATA *get_help( CHAR_DATA *ch, char *argument )
    * Tricky argument handling so 'help a b' doesn't match a.
    */
   argall[0] = '\0';
+
   while ( argument[0] != '\0' )
     {
       argument = one_argument( argument, argone );
+
       if ( argall[0] != '\0' )
         strcat( argall, " " );
+
       strcat( argall, argone );
     }
 

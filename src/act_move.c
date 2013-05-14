@@ -27,7 +27,7 @@
 
 ROOM_INDEX_DATA * vroom_hash [64];
 
-int wherehome( CHAR_DATA *ch)
+int wherehome( const CHAR_DATA *ch)
 {
   if( ch->plr_home )
     return ch->plr_home->vnum;
@@ -198,7 +198,7 @@ void clear_vrooms( )
  * Function to get the equivelant exit of DIR 0-MAXDIR out of linked list.
  * Made to allow old-style diku-merc exit functions to work.    -Thoric
  */
-EXIT_DATA *get_exit( ROOM_INDEX_DATA *room, short dir )
+EXIT_DATA *get_exit( const ROOM_INDEX_DATA *room, short dir )
 {
   EXIT_DATA *xit;
 
@@ -217,7 +217,7 @@ EXIT_DATA *get_exit( ROOM_INDEX_DATA *room, short dir )
 /*
  * Function to get an exit, leading the the specified room
  */
-EXIT_DATA *get_exit_to( ROOM_INDEX_DATA *room, short dir, int vnum )
+EXIT_DATA *get_exit_to( const ROOM_INDEX_DATA *room, short dir, int vnum )
 {
   EXIT_DATA *xit;
 
@@ -236,7 +236,7 @@ EXIT_DATA *get_exit_to( ROOM_INDEX_DATA *room, short dir, int vnum )
 /*
  * Function to get the nth exit of a room                       -Thoric
  */
-EXIT_DATA *get_exit_num( ROOM_INDEX_DATA *room, short count )
+EXIT_DATA *get_exit_num( const ROOM_INDEX_DATA *room, short count )
 {
   EXIT_DATA *xit;
   int cnt;
@@ -257,12 +257,13 @@ EXIT_DATA *get_exit_num( ROOM_INDEX_DATA *room, short count )
 /*
  * Modify movement due to encumbrance                           -Thoric
  */
-short encumbrance( CHAR_DATA *ch, short move )
+short encumbrance( const CHAR_DATA *ch, short move )
 {
   int cur, max;
 
   max = can_carry_w(ch);
   cur = ch->carry_weight;
+
   if ( cur >= max )
     return move * 4;
   else
@@ -1059,7 +1060,7 @@ ch_ret move_char( CHAR_DATA *ch, EXIT_DATA *pexit, int fall )
   return retcode;
 }
 
-EXIT_DATA *find_door( CHAR_DATA *ch, char *arg, bool quiet )
+EXIT_DATA *find_door( CHAR_DATA *ch, const char *arg, bool quiet )
 {
   EXIT_DATA *pexit;
   int door;
@@ -1147,7 +1148,7 @@ void remove_bexit_flag( EXIT_DATA *pexit, int flag )
     REMOVE_BIT( pexit_rev->exit_info, flag );
 }
 
-bool has_key( CHAR_DATA *ch, int key )
+bool has_key( const CHAR_DATA *ch, int key )
 {
   OBJ_DATA *obj;
 

@@ -3015,7 +3015,7 @@ void set_cur_obj( OBJ_DATA *obj )
 /*
  * Check the recently extracted object queue for obj            -Thoric
  */
-bool obj_extracted( OBJ_DATA *obj )
+bool obj_extracted( const OBJ_DATA *obj )
 {
   OBJ_DATA *cod;
 
