@@ -29,6 +29,7 @@
 #include <math.h>
 #include "mud.h"
 #include "quest.h"
+#include "arena.h"
 
 /* from swskills.c */
 void add_reinforcements( CHAR_DATA *ch );
@@ -80,16 +81,6 @@ const char * const d_corpse_descs[] =
     "The shattered remains %s are here.",
     "The shattered remains %s are here."
   };
-
-/*
- * Arena stuff.
- */
-extern void start_arena();
-extern void do_game();
-extern int in_start_arena;
-extern int ppl_in_arena;
-extern int ppl_challenged;
-extern int num_in_arena();
 
 bool is_droid( const CHAR_DATA *ch )
 {

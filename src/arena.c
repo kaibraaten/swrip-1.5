@@ -34,6 +34,7 @@
 #include <string.h>
 #include <time.h>
 #include "mud.h"
+#include "arena.h"
 
 #define PREP_START  42   /* vnum of first prep room */
 #define PREP_END    43   /* vnum of last prep room */
@@ -41,6 +42,7 @@
 #define ARENA_END   41   /* vnum of last real arena room*/
 #define HALL_FAME_FILE  SYSTEM_DIR "halloffame.lst"
 #define ARENA_MAXBET 100
+
 struct hall_of_fame_element
 {
   char name[MAX_INPUT_LENGTH+1];
@@ -49,35 +51,31 @@ struct hall_of_fame_element
   struct  hall_of_fame_element *next;
 };
 
-/*void sportschan(char *)*/
-void start_arena();
-void show_jack_pot();
-void do_game();
-int num_in_arena();
-void find_game_winner();
-void do_end_game();
-void start_game();
-void silent_end();
-void write_fame_list(void);
-void write_one_fame_node(FILE * fp, struct hall_of_fame_element * node);
-void load_hall_of_fame(void);
-void find_bet_winners(CHAR_DATA *winner);
-void reset_bets();
+static void show_jack_pot();
+static void find_game_winner();
+static void do_end_game();
+static void start_game();
+static void silent_end();
+static void write_fame_list(void);
+static void write_one_fame_node(FILE * fp, struct hall_of_fame_element * node);
+static void find_bet_winners(CHAR_DATA *winner);
+static void reset_bets();
 
 struct hall_of_fame_element *fame_list = NULL;
 
 int ppl_challenged = 0;
 int ppl_in_arena = 0;
 int in_start_arena = 0;
-int start_time;
-int game_length;
-int lo_lim;
-int hi_lim;
-int time_to_start;
-int time_left_in_game;
-int arena_pot;
-int bet_pot;
-int barena = 0;
+
+static int start_time = 0;
+static int game_length = 0;
+static int lo_lim = 0;
+static int hi_lim = 0;
+static int time_to_start = 0;
+static int time_left_in_game = 0;
+static int arena_pot = 0;
+static int bet_pot = 0;
+static int barena = 0;
 
 void do_bet(CHAR_DATA *ch, char *argument)
 {
@@ -644,13 +642,12 @@ void load_hall_of_fame(void)
   char name[MAX_INPUT_LENGTH + 1];
   struct hall_of_fame_element *next_node;
 
-  fame_list = 0;
-
   if (!(fl = fopen(HALL_FAME_FILE, "r")))
     {
       perror("Unable to open hall of fame file");
       return;
     }
+
   while (fscanf(fl, "%s %d %d", name, &date, &award) == 3)
     {
       CREATE(next_node, struct hall_of_fame_element, 1);
@@ -662,7 +659,6 @@ void load_hall_of_fame(void)
     }
 
   fclose(fl);
-  return;
 }
 
 void write_fame_list(void)
