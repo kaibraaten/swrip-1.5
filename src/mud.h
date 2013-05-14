@@ -84,7 +84,6 @@ typedef struct  descriptor_data         DESCRIPTOR_DATA;
 typedef struct  exit_data               EXIT_DATA;
 typedef struct  extra_descr_data        EXTRA_DESCR_DATA;
 typedef struct  help_data               HELP_DATA;
-typedef struct  menu_data               MENU_DATA;
 typedef struct  mob_index_data          MOB_INDEX_DATA;
 typedef struct  note_data               NOTE_DATA;
 typedef struct  comment_data            COMMENT_DATA;
@@ -2366,12 +2365,6 @@ struct  char_data
   short         mod_frc;
   short         mental_state;           /* simplified */
   short         emotional_state;        /* simplified */
-  int                   pagelen;                        /* BUILD INTERFACE */
-  short         inter_page;                     /* BUILD INTERFACE */
-  short         inter_type;                     /* BUILD INTERFACE */
-  char                  *inter_editing;                 /* BUILD INTERFACE */
-  int                   inter_editing_vnum;             /* BUILD INTERFACE */
-  short         inter_substate;                 /* BUILD INTERFACE */
   int                   retran;
   int                   regoto;
   short         mobinvis;       /* Mobinvis level SB */
@@ -4118,22 +4111,6 @@ DECLARE_SPELL_FUN(      spell_midas_touch                   );
 extern "C" {
 #endif
 
-#define CD      CHAR_DATA
-#define MID     MOB_INDEX_DATA
-#define OD      OBJ_DATA
-#define OID     OBJ_INDEX_DATA
-#define RID     ROOM_INDEX_DATA
-#define SF      SPEC_FUN
-#define CL      CLAN_DATA
-#define EDD     EXTRA_DESCR_DATA
-#define RD      RESET_DATA
-#define ED      EXIT_DATA
-#define ST      SOCIALTYPE
-#define CO      COUNCIL_DATA
-#define DE      DEITY_DATA
-#define SK      SKILLTYPE
-#define SH      SHIP_DATA
-
   /* copyover.c */
   void copyover_recover( void );
 
@@ -4192,7 +4169,7 @@ extern "C" {
   void save_banlist( void );
   int str_count(const char *psource, const char *ptarget);
   void close_area( AREA_DATA *pArea );
-  RID *find_location( CHAR_DATA *ch, char *arg );
+  ROOM_INDEX_DATA *find_location( CHAR_DATA *ch, char *arg );
   void echo_to_room( short AT_COLOR, ROOM_INDEX_DATA *room,
 		     const char *argument );
   void echo_to_all( short AT_COLOR, const char *argument, short tar );
@@ -4333,10 +4310,6 @@ extern "C" {
   void         update_ships( void );
   void update_spaceobjects( void );
   void update_missiles( void );
-#if 0
-  void         update_bus( void );
-  void         update_traffic( void );
-#endif
   bool         check_pilot( CHAR_DATA *ch , SHIP_DATA *ship );
   bool         is_rental( CHAR_DATA *ch , SHIP_DATA *ship );
   void         echo_to_ship( int color, SHIP_DATA *ship,
@@ -4406,20 +4379,20 @@ extern "C" {
   void  boot_db( bool fCopyover );
   void  area_update( void );
   void  add_char( CHAR_DATA *ch );
-  CD *  create_mobile( MOB_INDEX_DATA *pMobIndex );
-  OD *  create_object( OBJ_INDEX_DATA *pObjIndex, int level );
+  CHAR_DATA *create_mobile( MOB_INDEX_DATA *pMobIndex );
+  OBJ_DATA *create_object( OBJ_INDEX_DATA *pObjIndex, int level );
   void  clear_char( CHAR_DATA *ch );
   void  free_char( CHAR_DATA *ch );
   char *        get_extra_descr( const char *name, EXTRA_DESCR_DATA *ed );
-  MID * get_mob_index( short vnum );
-  OID * get_obj_index( int vnum );
-  RID * get_room_index( int vnum );
+  MOB_INDEX_DATA *get_mob_index( short vnum );
+  OBJ_INDEX_DATA *get_obj_index( int vnum );
+  ROOM_INDEX_DATA *get_room_index( int vnum );
   void  bug( const char *str, ... );
   void  log_string_plus( const char *str, short log_type, short level );
-  RID * make_room( int vnum );
-  OID * make_object( int vnum, int cvnum, char *name );
-  MID * make_mobile( short vnum, short cvnum, char *name );
-  ED  * make_exit( ROOM_INDEX_DATA *pRoomIndex, ROOM_INDEX_DATA *to_room, short door );
+  ROOM_INDEX_DATA *make_room( int vnum );
+  OBJ_INDEX_DATA *make_object( int vnum, int cvnum, char *name );
+  MOB_INDEX_DATA *make_mobile( short vnum, short cvnum, char *name );
+  EXIT_DATA *make_exit( ROOM_INDEX_DATA *pRoomIndex, ROOM_INDEX_DATA *to_room, short door );
   void  add_help( HELP_DATA *pHelp );
   void  fix_area_exits( AREA_DATA *tarea );
   void  load_area_file( AREA_DATA *tarea, char *filename );
@@ -4429,10 +4402,6 @@ extern "C" {
   bool    delete_obj( OBJ_INDEX_DATA *obj );
   bool    delete_mob( MOB_INDEX_DATA *mob );
 
-  /* Functions to add to sorting lists. -- Altrag */
-  /*void        mob_sort        args( ( MOB_INDEX_DATA *pMob ) );
-    void        obj_sort        args( ( OBJ_INDEX_DATA *pObj ) );
-    void        room_sort       args( ( ROOM_INDEX_DATA *pRoom ) );*/
   void  sort_area( AREA_DATA *pArea, bool proto );
 
   /* build.c */
@@ -4450,11 +4419,11 @@ extern "C" {
   void free_reset( AREA_DATA *are, RESET_DATA *res );
   void free_area( AREA_DATA *are );
   void assign_area( CHAR_DATA *ch );
-  EDD *SetRExtra( ROOM_INDEX_DATA *room, char *keywords );
+  EXTRA_DESCR_DATA *SetRExtra( ROOM_INDEX_DATA *room, char *keywords );
   bool DelRExtra( ROOM_INDEX_DATA *room, char *keywords );
-  EDD *SetOExtra( OBJ_DATA *obj, char *keywords );
+  EXTRA_DESCR_DATA *SetOExtra( OBJ_DATA *obj, char *keywords );
   bool DelOExtra( OBJ_DATA *obj, char *keywords );
-  EDD *SetOExtraProto( OBJ_INDEX_DATA *obj, char *keywords );
+  EXTRA_DESCR_DATA *SetOExtraProto( OBJ_INDEX_DATA *obj, char *keywords );
   bool DelOExtraProto( OBJ_INDEX_DATA *obj, char *keywords );
   void fold_area( AREA_DATA *tarea, char *filename, bool install );
 
@@ -4469,7 +4438,7 @@ extern "C" {
   void  set_fighting( CHAR_DATA *ch, CHAR_DATA *victim );
   void  stop_fighting( CHAR_DATA *ch, bool fBoth );
   void  free_fight( CHAR_DATA *ch );
-  CD *  who_fighting( CHAR_DATA *ch );
+  CHAR_DATA *who_fighting( CHAR_DATA *ch );
   void  check_killer( CHAR_DATA *ch, CHAR_DATA *victim );
   void  check_attacker( CHAR_DATA *ch, CHAR_DATA *victim );
   void  death_cry( CHAR_DATA *ch );
@@ -4496,8 +4465,8 @@ extern "C" {
   void  make_bloodstain( CHAR_DATA *ch );
   void  make_scraps( OBJ_DATA *obj );
   void  make_fire( ROOM_INDEX_DATA *in_room, short timer );
-  OD *  make_trap( int v0, int v1, int v2, int v3 );
-  OD *  create_money( int amount );
+  OBJ_DATA *make_trap( int v0, int v1, int v2, int v3 );
+  OBJ_DATA *create_money( int amount );
 
   /* misc.c */
   void pullorpush( CHAR_DATA *ch, OBJ_DATA *obj, bool pull );
@@ -4663,7 +4632,7 @@ extern "C" {
   /* interp.c */
   bool  check_pos( CHAR_DATA *ch, int position );
   void  interpret( CHAR_DATA *ch, char *argument );
-  ST *  find_social( char *command );
+  SOCIALTYPE *find_social( char *command );
   CMDTYPE *find_command( char *command );
   void  hash_commands( void );
   void  send_timer( struct timerset *vtime, CHAR_DATA *ch );
@@ -4696,8 +4665,8 @@ extern "C" {
   bool  saves_breath( int level, const CHAR_DATA *victim );
   bool  saves_spell_staff( int level, const CHAR_DATA *victim );
   ch_ret obj_cast_spell( int sn, int level, CHAR_DATA *ch, CHAR_DATA *victim, OBJ_DATA *obj );
-  int   dice_parse( const CHAR_DATA *ch, int level, char *exp );
-  SK *  get_skilltype( int sn );
+  int dice_parse( const CHAR_DATA *ch, int level, char *exp );
+  SKILLTYPE *get_skilltype( int sn );
 
   /* save.c */
   /* object saving defines for fread/write_obj. -- Altrag */
@@ -4718,10 +4687,10 @@ extern "C" {
   void load_storerooms( void );
 
   /* shops.c */
-  int get_cost_quit( CHAR_DATA *ch )
-    ;
+  int get_cost_quit( CHAR_DATA *ch );
+
   /* special.c */
-  SF *spec_lookup( const char *name );
+  SPEC_FUN *spec_lookup( const char *name );
   const char *lookup_spec( SPEC_FUN *special );
 
   /* tables.c */
@@ -4765,104 +4734,11 @@ extern "C" {
 
   /* vendor.c*/
   void fwrite_vendor( FILE *fp, CHAR_DATA *mob );
-  CHAR_DATA *  fread_vendor( FILE *fp );
+  CHAR_DATA *fread_vendor( FILE *fp );
   void load_vendors( void );
   void save_vendor( CHAR_DATA *ch );
 
-
-#undef  SK
-#undef  CO
-#undef  ST
-#undef  CD
-#undef  MID
-#undef  OD
-#undef  OID
-#undef  RID
-#undef  SF
-#undef  CL
-#undef  EDD
-#undef  RD
-#undef  ED
-
   /*
-   *
-   *  New Build Interface Stuff Follows
-   *
-   */
-
-
-  /*
-   *  Data for a menu page
-   */
-  struct        menu_data
-  {
-    char                *sectionNum;
-    char                *charChoice;
-    int                 x;
-    int                 y;
-    char                *outFormat;
-    void                *data;
-    int                 ptrType;
-    int                 cmdArgs;
-    char                *cmdString;
-  };
-
-  DECLARE_DO_FUN( do_redraw_page  );
-  DECLARE_DO_FUN( do_refresh_page );
-  DECLARE_DO_FUN( do_pagelen    );
-  DECLARE_DO_FUN( do_omenu      );
-  DECLARE_DO_FUN( do_rmenu      );
-  DECLARE_DO_FUN( do_mmenu      );
-  DECLARE_DO_FUN( do_clear      );
-
-  extern                MENU_DATA               room_page_a_data[];
-  extern                MENU_DATA               room_page_b_data[];
-  extern                MENU_DATA               room_page_c_data[];
-  extern                MENU_DATA               room_help_page_data[];
-
-  extern                MENU_DATA               mob_page_a_data[];
-  extern                MENU_DATA               mob_page_b_data[];
-  extern                MENU_DATA               mob_page_c_data[];
-  extern                MENU_DATA               mob_page_d_data[];
-  extern                MENU_DATA               mob_page_e_data[];
-  extern                MENU_DATA               mob_page_f_data[];
-  extern                MENU_DATA               mob_help_page_data[];
-
-  extern                MENU_DATA               obj_page_a_data[];
-  extern                MENU_DATA               obj_page_b_data[];
-  extern                MENU_DATA               obj_page_c_data[];
-  extern                MENU_DATA               obj_page_d_data[];
-  extern                MENU_DATA               obj_page_e_data[];
-  extern                MENU_DATA               obj_help_page_data[];
-
-  extern                MENU_DATA               control_page_a_data[];
-  extern                MENU_DATA               control_help_page_data[];
-
-  extern        const   char    room_page_a[];
-  extern        const   char    room_page_b[];
-  extern        const   char    room_page_c[];
-  extern        const   char    room_help_page[];
-
-  extern        const   char    obj_page_a[];
-  extern        const   char    obj_page_b[];
-  extern        const   char    obj_page_c[];
-  extern        const   char    obj_page_d[];
-  extern        const   char    obj_page_e[];
-  extern        const   char    obj_help_page[];
-
-  extern        const   char    mob_page_a[];
-  extern        const   char    mob_page_b[];
-  extern        const   char    mob_page_c[];
-  extern        const   char    mob_page_d[];
-  extern        const   char    mob_page_e[];
-  extern        const   char    mob_page_f[];
-  extern        const   char    mob_help_page[];
-  extern        const   char *  npc_sex[3];
-  extern        const   char *  ris_strings[];
-
-  extern        const   char    control_page_a[];
-  extern        const   char    control_help_page[];
-
 #define SHORT 1
 #define INT 2
 #define CHAR 3
@@ -4907,7 +4783,7 @@ extern "C" {
 #define SUB_NW    DIR_NORTHWEST
 #define SUB_SE    DIR_SOUTHEAST
 #define SUB_SW    DIR_SOUTHWEST
-
+  */
   /*
    * defines for use with this get_affect function
    */

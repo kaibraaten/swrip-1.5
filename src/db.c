@@ -2565,15 +2565,8 @@ void clear_char( CHAR_DATA *ch )
   ch->mod_cha                   = 0;
   ch->mod_con                   = 0;
   ch->mod_lck                   = 0;
-  ch->pagelen                 = 24;                  /* BUILD INTERFACE */
-  ch->inter_page                = NO_PAGE;           /* BUILD INTERFACE */
-  ch->inter_type                = NO_TYPE;           /* BUILD INTERFACE */
-  ch->inter_editing     = NULL;              /* BUILD INTERFACE */
-  ch->inter_editing_vnum        = -1;                /* BUILD INTERFACE */
-  ch->inter_substate            = SUB_NORTH;         /* BUILD INTERFACE */
   ch->plr_home                = NULL;
   ch->on                        = NULL;
-  return;
 }
 
 
@@ -2611,11 +2604,9 @@ void free_char( CHAR_DATA *ch )
   STRFREE( ch->short_descr      );
   STRFREE( ch->long_descr       );
   STRFREE( ch->description      );
+
   if ( ch->editor )
     stop_editing( ch );
-
-  if ( ch->inter_editing )
-    DISPOSE( ch->inter_editing );
 
   stop_hunting( ch );
   stop_hating ( ch );
