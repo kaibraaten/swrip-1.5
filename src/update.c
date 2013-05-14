@@ -2334,7 +2334,7 @@ void update_handler( void )
       auction_update();
     }
 
-  if(in_start_arena || ppl_challenged)
+  if(arena.in_start_arena || arena.ppl_challenged)
     {
       if( --pulse_start_arena <= 0)
 	{
@@ -2343,7 +2343,7 @@ void update_handler( void )
 	}
     }
 
-  if(ppl_in_arena)
+  if(arena.ppl_in_arena)
     {
       if(( --pulse_arena <= 0) || (num_in_arena()==1))
 	{
