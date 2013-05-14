@@ -1,1 +1,3 @@
 * do_reply does not check for the presence of a comlink.
+* show_members() in clans.c: Sorted member data allocated but never
+  freed, causing memory leak every time the function is called.
