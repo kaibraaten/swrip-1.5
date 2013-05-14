@@ -42,11 +42,13 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	skills.o special.o space.o spaceobjects.o swskills.o \
 	tables.o track.o update.o vector3_aux.o \
 	$(CMDDIR)/aassign.o \
+	$(CMDDIR)/accept.o \
 	$(CMDDIR)/addbounty.o \
 	$(CMDDIR)/addresident.o \
 	$(CMDDIR)/addsalary.o \
 	$(CMDDIR)/advance.o \
 	$(CMDDIR)/afk.o \
+	$(CMDDIR)/ahall.o \
 	$(CMDDIR)/alias.o \
 	$(CMDDIR)/allow.o \
 	$(CMDDIR)/allclantalk.o \
@@ -57,6 +59,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/appoint.o \
 	$(CMDDIR)/aquest.o \
 	$(CMDDIR)/areas.o \
+	$(CMDDIR)/arena.o \
 	$(CMDDIR)/arm.o \
 	$(CMDDIR)/aset.o \
 	$(CMDDIR)/ask.o \
@@ -65,6 +68,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/auction.o \
 	$(CMDDIR)/authorize.o \
 	$(CMDDIR)/avtalk.o \
+	$(CMDDIR)/awho.o \
 	$(CMDDIR)/balzhur.o \
 	$(CMDDIR)/bamfin.o \
 	$(CMDDIR)/bamfout.o \
@@ -75,6 +79,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/beep.o \
 	$(CMDDIR)/bestow.o \
 	$(CMDDIR)/bestowarea.o \
+	$(CMDDIR)/bet.o \
 	$(CMDDIR)/boards.o \
 	$(CMDDIR)/bodybag.o \
 	$(CMDDIR)/bounties.o \
@@ -88,7 +93,9 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/capture.o \
 	$(CMDDIR)/cast.o \
 	$(CMDDIR)/cedit.o \
+	$(CMDDIR)/challenge.o \
 	$(CMDDIR)/channels.o \
+	$(CMDDIR)/chaos.o \
 	$(CMDDIR)/chat.o \
 	$(CMDDIR)/check_vnums.o \
 	$(CMDDIR)/clan_donate.o \
@@ -106,6 +113,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/consider.o \
 	$(CMDDIR)/credits.o \
 	$(CMDDIR)/cset.o \
+	$(CMDDIR)/decline.o \
 	$(CMDDIR)/delay.o \
 	$(CMDDIR)/demote.o \
 	$(CMDDIR)/deny.o \

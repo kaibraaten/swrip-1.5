@@ -26,6 +26,7 @@
 #include <ctype.h>
 #include <stdarg.h>
 #include "mud.h"
+#include "arena.h"
 
 void init_supermob();
 
@@ -737,6 +738,9 @@ void boot_db( bool fCopyOver )
 
   log_string( "Loading shuttles" );
   load_shuttles();
+
+  log_string( "Loading Hall of Fame" );
+  load_hall_of_fame();
 
   log_string( "Resetting areas" );
   area_update( );
