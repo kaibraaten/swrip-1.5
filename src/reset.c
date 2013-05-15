@@ -42,6 +42,7 @@
 #include <string.h>
 #include <time.h>
 #include <ctype.h>
+#include "reset.h"
 #include "mud.h"
 
 /* Externals */
@@ -52,15 +53,7 @@ bool is_room_reset( RESET_DATA *pReset, ROOM_INDEX_DATA *aRoom,
 		    AREA_DATA *pArea );
 void add_obj_reset( AREA_DATA *pArea, char cm, OBJ_DATA *obj, int v2, int v3 );
 void delete_reset( AREA_DATA *pArea, RESET_DATA *pReset );
-void instaroom( AREA_DATA *pArea, ROOM_INDEX_DATA *pRoom, bool dodoors );
-#define RID ROOM_INDEX_DATA
-RID *find_room( CHAR_DATA *ch, char *argument, ROOM_INDEX_DATA *pRoom );
-#undef RID
-void edit_reset( CHAR_DATA *ch, char *argument, AREA_DATA *pArea,
-		 ROOM_INDEX_DATA *aRoom );
-#define RD RESET_DATA
-RD *find_reset( AREA_DATA *pArea, ROOM_INDEX_DATA *pRoom, int num );
-#undef RD
+RESET_DATA *find_reset( AREA_DATA *pArea, ROOM_INDEX_DATA *pRoom, int num );
 void list_resets( CHAR_DATA *ch, AREA_DATA *pArea,
 		  ROOM_INDEX_DATA *pRoom, int start, int end );
 
@@ -959,106 +952,6 @@ void edit_reset( CHAR_DATA *ch, char *argument, AREA_DATA *pArea,
   return;
 }
 
-void do_reset( CHAR_DATA *ch, char *argument )
-{
-  AREA_DATA *pArea = NULL;
-  char arg[MAX_INPUT_LENGTH];
-  char *parg;
-
-  parg = one_argument(argument, arg);
-
-  if ( ch->substate == SUB_REPEATCMD )
-    {
-      pArea = (AREA_DATA*)ch->dest_buf;
-
-      if ( pArea && pArea != ch->pcdata->area && pArea != ch->in_room->area )
-        {
-          AREA_DATA *tmp;
-
-          for ( tmp = first_build; tmp; tmp = tmp->next )
-            if ( tmp == pArea )
-              break;
-          if ( !tmp )
-            for ( tmp = first_area; tmp; tmp = tmp->next )
-              if ( tmp == pArea )
-                break;
-          if ( !tmp )
-            {
-              send_to_char("Your area pointer got lost.  Reset mode off.\r\n", ch);
-              bug("do_reset: %s's dest_buf points to invalid area",
-                  (int)ch->name);
-              ch->substate = SUB_NONE;
-              DISPOSE(ch->dest_buf);
-              return;
-            }
-        }
-      if ( !*arg )
-        {
-          ch_printf(ch, "Editing resets for area: %s\r\n", pArea->name);
-          return;
-        }
-      if ( !str_cmp(arg, "done") || !str_cmp(arg, "off") )
-        {
-          send_to_char( "Reset mode off.\r\n", ch );
-          ch->substate = SUB_NONE;
-          DISPOSE(ch->dest_buf);
-          return;
-        }
-    }
-  if ( !pArea && get_trust(ch) > LEVEL_GOD )
-    {
-      char fname[80];
-
-      sprintf(fname, "%s.are", capitalize(arg));
-
-      for ( pArea = first_build; pArea; pArea = pArea->next )
-        if ( !str_cmp(fname, pArea->filename) )
-          {
-            argument = parg;
-            break;
-          }
-
-      if ( !pArea )
-        pArea = ch->pcdata->area;
-
-      if ( !pArea )
-        pArea = ch->in_room->area;
-    }
-  else
-    pArea = ch->pcdata->area;
-  if ( !pArea )
-    {
-      send_to_char( "You do not have an assigned area.\r\n", ch );
-      return;
-    }
-  edit_reset(ch, argument, pArea, NULL);
-  return;
-}
-
-void do_rreset( CHAR_DATA *ch, char *argument )
-{
-  ROOM_INDEX_DATA *pRoom;
-
-  if ( ch->substate == SUB_REPEATCMD )
-    {
-      pRoom = (ROOM_INDEX_DATA*)ch->dest_buf;
-      if ( !pRoom )
-        {
-          send_to_char( "Your room pointer got lost.  Reset mode off.\r\n", ch);
-          bug("do_rreset: %s's dest_buf points to invalid room", (int)ch->name);
-        }
-      ch->substate = SUB_NONE;
-      DISPOSE(ch->dest_buf);
-      return;
-    }
-  else
-    pRoom = ch->in_room;
-  if ( !can_rmodify(ch, pRoom) )
-    return;
-  edit_reset(ch, argument, pRoom->area, pRoom);
-  return;
-}
-
 void add_obj_reset( AREA_DATA *pArea, char cm, OBJ_DATA *obj, int v2, int v3 )
 {
   OBJ_DATA *inobj;
@@ -1155,75 +1048,6 @@ void wipe_resets( AREA_DATA *pArea, ROOM_INDEX_DATA *pRoom )
       else
         pReset = pReset->next;
     }
-  return;
-}
-
-void do_instaroom( CHAR_DATA *ch, char *argument )
-{
-  AREA_DATA *pArea;
-  ROOM_INDEX_DATA *pRoom;
-  bool dodoors;
-  char arg[MAX_INPUT_LENGTH];
-
-  if ( IS_NPC(ch) || get_trust(ch) < LEVEL_SAVIOR || !ch->pcdata ||
-       !ch->pcdata->area )
-    {
-      send_to_char( "You don't have an assigned area to create resets for.\r\n",
-                    ch );
-      return;
-    }
-  argument = one_argument(argument, arg);
-  if ( !str_cmp(argument, "nodoors") )
-    dodoors = FALSE;
-  else
-    dodoors = TRUE;
-  pArea = ch->pcdata->area;
-  if ( !(pRoom = find_room(ch, arg, NULL)) )
-    {
-      send_to_char( "Room doesn't exist.\r\n", ch );
-      return;
-    }
-  if ( !can_rmodify(ch, pRoom) )
-    return;
-  if ( pRoom->area != pArea && get_trust(ch) < LEVEL_GREATER )
-    {
-      send_to_char( "You cannot reset that room.\r\n", ch );
-      return;
-    }
-  if ( pArea->first_reset )
-    wipe_resets(pArea, pRoom);
-  instaroom(pArea, pRoom, dodoors);
-  send_to_char( "Room resets installed.\r\n", ch );
-}
-
-void do_instazone( CHAR_DATA *ch, char *argument )
-{
-  AREA_DATA *pArea;
-  int vnum;
-  ROOM_INDEX_DATA *pRoom;
-  bool dodoors;
-
-  if ( IS_NPC(ch) || get_trust(ch) < LEVEL_SAVIOR || !ch->pcdata ||
-       !ch->pcdata->area )
-    {
-      send_to_char( "You don't have an assigned area to create resets for.\r\n",
-                    ch );
-      return;
-    }
-  if ( !str_cmp(argument, "nodoors") )
-    dodoors = FALSE;
-  else
-    dodoors = TRUE;
-  pArea = ch->pcdata->area;
-  if ( pArea->first_reset )
-    wipe_resets(pArea, NULL);
-  for ( vnum = pArea->low_r_vnum; vnum <= pArea->hi_r_vnum; vnum++ )
-    {
-      if ( !(pRoom = get_room_index(vnum)) || pRoom->area != pArea )
-        continue;
-      instaroom( pArea, pRoom, dodoors );
-    }
-  send_to_char( "Area resets installed.\r\n", ch );
   return;
 }
 

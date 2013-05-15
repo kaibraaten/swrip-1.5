@@ -178,6 +178,8 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/immtalk.o \
 	$(CMDDIR)/induct.o \
 	$(CMDDIR)/installarea.o \
+	$(CMDDIR)/instaroom.o \
+	$(CMDDIR)/instazone.o \
 	$(CMDDIR)/inventory.o \
 	$(CMDDIR)/invis.o \
 	$(CMDDIR)/invite.o \
@@ -271,6 +273,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/remresident.o \
 	$(CMDDIR)/reply.o \
 	$(CMDDIR)/report.o \
+	$(CMDDIR)/reset.o \
 	$(CMDDIR)/resign.o \
 	$(CMDDIR)/rest.o \
 	$(CMDDIR)/restore.o \
@@ -286,6 +289,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/rpedit.o \
 	$(CMDDIR)/rpfind.o \
 	$(CMDDIR)/rpstat.o \
+	$(CMDDIR)/rreset.o \
 	$(CMDDIR)/rset.o \
 	$(CMDDIR)/rstat.o \
 	$(CMDDIR)/save.o \
