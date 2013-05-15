@@ -186,6 +186,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/junk.o \
 	$(CMDDIR)/kill.o \
 	$(CMDDIR)/languages.o \
+	$(CMDDIR)/last.o \
 	$(CMDDIR)/leave.o \
 	$(CMDDIR)/level.o \
 	$(CMDDIR)/light.o \

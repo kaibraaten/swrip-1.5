@@ -31,16 +31,7 @@
  * pArea->reset_last.  -- Altrag
  */
 
-#if defined(macintosh)
-#include <types.h>
-#else
-#include <sys/types.h>
-#endif
-
-#include <stdlib.h>
-#include <stdio.h>
 #include <string.h>
-#include <time.h>
 #include <ctype.h>
 #include "reset.h"
 #include "mud.h"

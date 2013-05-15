@@ -29,14 +29,8 @@
 #define _POSIX_SOURCE
 #endif
 
-#include <sys/types.h>
-#include <ctype.h>
-#include <stdio.h>
 #include <string.h>
-#include <time.h>
-#include <unistd.h>
-#include <sys/stat.h>
-#include <dirent.h>
+#include <ctype.h>
 #include "mud.h"
 
 /*
@@ -2062,31 +2056,6 @@ void fread_obj( CHAR_DATA *ch, FILE *fp, short os_type )
 void set_alarm( long seconds )
 {
   alarm( seconds );
-}
-
-/*
- * Based on last time modified, show when a player was last on  -Thoric
- */
-void do_last( CHAR_DATA *ch, char *argument )
-{
-  char buf [MAX_STRING_LENGTH];
-  char arg [MAX_INPUT_LENGTH];
-  char name[MAX_INPUT_LENGTH];
-  struct stat fst;
-
-  one_argument( argument, arg );
-  if ( arg[0] == '\0' )
-    {
-      send_to_char( "Usage: last <playername>\r\n", ch );
-      return;
-    }
-  strcpy( name, capitalize(arg) );
-  sprintf( buf, "%s%c/%s", PLAYER_DIR, tolower(arg[0]), name );
-  if ( stat( buf, &fst ) != -1 )
-    sprintf( buf, "%s was last on: %s\r", name, ctime( &fst.st_mtime ) );
-  else
-    sprintf( buf, "%s was not found.\r\n", name );
-  send_to_char( buf, ch );
 }
 
 void write_corpses( CHAR_DATA *ch, char *name )
