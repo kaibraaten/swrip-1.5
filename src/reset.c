@@ -348,8 +348,7 @@ RESET_DATA *find_mreset(CHAR_DATA *ch, AREA_DATA *pArea,
   return reset;
 }
 
-void edit_reset( CHAR_DATA *ch, char *argument, AREA_DATA *pArea,
-                 ROOM_INDEX_DATA *aRoom )
+void edit_reset( CHAR_DATA *ch, char *argument, AREA_DATA *pArea, ROOM_INDEX_DATA *aRoom )
 {
   char arg[MAX_INPUT_LENGTH];
   RESET_DATA *pReset = NULL;
