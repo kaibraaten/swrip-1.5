@@ -42,10 +42,13 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	skills.o special.o space.o spaceobjects.o swskills.o \
 	tables.o track.o update.o vector3_aux.o \
 	$(CMDDIR)/aassign.o \
+	$(CMDDIR)/accelerate.o \
 	$(CMDDIR)/accept.o \
 	$(CMDDIR)/addbounty.o \
+	$(CMDDIR)/addpilot.o \
 	$(CMDDIR)/addresident.o \
 	$(CMDDIR)/addsalary.o \
+	$(CMDDIR)/adjusttractorbeam.o \
 	$(CMDDIR)/advance.o \
 	$(CMDDIR)/affected.o \
 	$(CMDDIR)/afk.o \
@@ -53,6 +56,8 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/alias.o \
 	$(CMDDIR)/allow.o \
 	$(CMDDIR)/allclantalk.o \
+	$(CMDDIR)/allships.o \
+	$(CMDDIR)/allspeeders.o \
 	$(CMDDIR)/ammo.o \
 	$(CMDDIR)/ansi.o \
 	$(CMDDIR)/answer.o \
@@ -68,6 +73,9 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/at.o \
 	$(CMDDIR)/auction.o \
 	$(CMDDIR)/authorize.o \
+	$(CMDDIR)/autopilot.o \
+	$(CMDDIR)/autotrack.o \
+	$(CMDDIR)/autorecharge.o \
 	$(CMDDIR)/avtalk.o \
 	$(CMDDIR)/awho.o \
 	$(CMDDIR)/balzhur.o \
@@ -92,9 +100,13 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/bstat.o \
 	$(CMDDIR)/bug.o \
 	$(CMDDIR)/bury.o \
+	$(CMDDIR)/buyship.o \
+	$(CMDDIR)/calculate.o \
+	$(CMDDIR)/calculatediff.o \
 	$(CMDDIR)/capture.o \
 	$(CMDDIR)/cast.o \
 	$(CMDDIR)/cedit.o \
+	$(CMDDIR)/chaff.o \
 	$(CMDDIR)/challenge.o \
 	$(CMDDIR)/channels.o \
 	$(CMDDIR)/chaos.o \
@@ -102,17 +114,22 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/check_vnums.o \
 	$(CMDDIR)/clan_donate.o \
 	$(CMDDIR)/clan_withdraw.o \
+	$(CMDDIR)/clanbuyship.o \
 	$(CMDDIR)/clanfunds.o \
 	$(CMDDIR)/clans.o \
+	$(CMDDIR)/clansellship.o \
 	$(CMDDIR)/clantalk.o \
 	$(CMDDIR)/climb.o \
 	$(CMDDIR)/clone.o \
 	$(CMDDIR)/close.o \
+	$(CMDDIR)/closebay.o \
+	$(CMDDIR)/closehatch.o \
 	$(CMDDIR)/cmdtable.o \
 	$(CMDDIR)/commands.o \
 	$(CMDDIR)/compare.o \
 	$(CMDDIR)/config.o \
 	$(CMDDIR)/consider.o \
+	$(CMDDIR)/copyship.o \
 	$(CMDDIR)/credits.o \
 	$(CMDDIR)/cset.o \
 	$(CMDDIR)/decline.o \
@@ -126,10 +143,12 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/dismiss.o \
 	$(CMDDIR)/dmsg.o \
 	$(CMDDIR)/dnd.o \
+	$(CMDDIR)/dock.o \
 	$(CMDDIR)/down.o \
 	$(CMDDIR)/drag.o \
 	$(CMDDIR)/draw.o \
 	$(CMDDIR)/drink.o \
+	$(CMDDIR)/drive.o \
 	$(CMDDIR)/drop.o \
 	$(CMDDIR)/east.o \
 	$(CMDDIR)/eat.o \
@@ -143,6 +162,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/examine.o \
 	$(CMDDIR)/exits.o \
 	$(CMDDIR)/fill.o \
+	$(CMDDIR)/fire.o \
 	$(CMDDIR)/fixchar.o \
 	$(CMDDIR)/flee.o \
 	$(CMDDIR)/focusalias.o \
@@ -154,6 +174,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/form_password.o \
 	$(CMDDIR)/fquit.o \
 	$(CMDDIR)/freeze.o \
+	$(CMDDIR)/fuel.o \
 	$(CMDDIR)/get.o \
 	$(CMDDIR)/give.o \
 	$(CMDDIR)/glance.o \
@@ -162,6 +183,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/group.o \
 	$(CMDDIR)/grub.o \
 	$(CMDDIR)/gtell.o \
+	$(CMDDIR)/guard.o \
 	$(CMDDIR)/hail.o \
 	$(CMDDIR)/help.o \
 	$(CMDDIR)/hedit.o \
@@ -170,6 +192,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/holylight.o \
 	$(CMDDIR)/homepage.o \
 	$(CMDDIR)/hset.o \
+	$(CMDDIR)/hyperspace.o \
 	$(CMDDIR)/i103.o \
 	$(CMDDIR)/i104.o \
 	$(CMDDIR)/i105.o \
@@ -177,16 +200,20 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/immortalize.o \
 	$(CMDDIR)/immtalk.o \
 	$(CMDDIR)/induct.o \
+	$(CMDDIR)/info.o \
 	$(CMDDIR)/installarea.o \
 	$(CMDDIR)/instaroom.o \
 	$(CMDDIR)/instazone.o \
 	$(CMDDIR)/inventory.o \
 	$(CMDDIR)/invis.o \
 	$(CMDDIR)/invite.o \
+	$(CMDDIR)/jumpvector.o \
 	$(CMDDIR)/junk.o \
 	$(CMDDIR)/kill.o \
+	$(CMDDIR)/land.o \
 	$(CMDDIR)/languages.o \
 	$(CMDDIR)/last.o \
+	$(CMDDIR)/launch.o \
 	$(CMDDIR)/leave.o \
 	$(CMDDIR)/level.o \
 	$(CMDDIR)/light.o \
@@ -201,6 +228,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/makeboard.o \
 	$(CMDDIR)/makeclan.o \
 	$(CMDDIR)/makeplanet.o \
+	$(CMDDIR)/makeship.o \
 	$(CMDDIR)/makewizlist.o \
 	$(CMDDIR)/massign.o \
 	$(CMDDIR)/mcreate.o \
@@ -240,12 +268,15 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/ooc.o \
 	$(CMDDIR)/opedit.o \
 	$(CMDDIR)/open.o \
+	$(CMDDIR)/openbay.o \
+	$(CMDDIR)/openhatch.o \
 	$(CMDDIR)/opfind.o \
 	$(CMDDIR)/opstat.o \
 	$(CMDDIR)/order.o \
 	$(CMDDIR)/oset.o \
 	$(CMDDIR)/ostat.o \
 	$(CMDDIR)/outcast.o \
+	$(CMDDIR)/override.o \
 	$(CMDDIR)/owhere.o \
 	$(CMDDIR)/pager.o \
 	$(CMDDIR)/pardon.o \
@@ -261,20 +292,28 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/quaff.o \
 	$(CMDDIR)/quest.o \
 	$(CMDDIR)/quit.o \
+	$(CMDDIR)/radar.o \
 	$(CMDDIR)/rank.o \
 	$(CMDDIR)/rassign.o \
 	$(CMDDIR)/rat.o \
 	$(CMDDIR)/rdelete.o \
 	$(CMDDIR)/reboot.o \
+	$(CMDDIR)/recharge.o \
 	$(CMDDIR)/recho.o \
 	$(CMDDIR)/redit.o \
 	$(CMDDIR)/regoto.o \
+	$(CMDDIR)/reload.o \
 	$(CMDDIR)/rembounty.o \
 	$(CMDDIR)/remove.o \
+	$(CMDDIR)/rempilot.o \
 	$(CMDDIR)/remresident.o \
+	$(CMDDIR)/renameship.o \
+	$(CMDDIR)/repairship.o \
 	$(CMDDIR)/reply.o \
 	$(CMDDIR)/report.o \
+	$(CMDDIR)/request.o \
 	$(CMDDIR)/reset.o \
+	$(CMDDIR)/resetship.o \
 	$(CMDDIR)/resign.o \
 	$(CMDDIR)/rest.o \
 	$(CMDDIR)/restore.o \
@@ -293,6 +332,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/rreset.o \
 	$(CMDDIR)/rset.o \
 	$(CMDDIR)/rstat.o \
+	$(CMDDIR)/sabotage.o \
 	$(CMDDIR)/save.o \
 	$(CMDDIR)/savearea.o \
 	$(CMDDIR)/say.o \
@@ -300,16 +340,21 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/score.o \
 	$(CMDDIR)/sedit.o \
 	$(CMDDIR)/sellhome.o \
+	$(CMDDIR)/sellship.o \
 	$(CMDDIR)/set_boot_time.o \
 	$(CMDDIR)/setblaster.o \
 	$(CMDDIR)/setclan.o \
 	$(CMDDIR)/setplanet.o \
+	$(CMDDIR)/setship.o \
+	$(CMDDIR)/ships.o \
 	$(CMDDIR)/shiptalk.o \
+	$(CMDDIR)/shiptrack.o \
 	$(CMDDIR)/shout.o \
 	$(CMDDIR)/shove.o \
 	$(CMDDIR)/showclan.o \
 	$(CMDDIR)/showlayers.o \
 	$(CMDDIR)/showplanet.o \
+	$(CMDDIR)/showship.o \
 	$(CMDDIR)/showstatistic.o \
 	$(CMDDIR)/showstatistic_web.o \
 	$(CMDDIR)/shutdown.o \
@@ -329,23 +374,31 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/southwest.o \
 	$(CMDDIR)/spacetalk.o \
 	$(CMDDIR)/speak.o \
+	$(CMDDIR)/speeders.o \
 	$(CMDDIR)/split.o \
 	$(CMDDIR)/stand.o \
+	$(CMDDIR)/status.o \
 	$(CMDDIR)/suicide.o \
 	$(CMDDIR)/switch.o \
 	$(CMDDIR)/systemtalk.o \
 	$(CMDDIR)/takedrug.o \
 	$(CMDDIR)/tamp.o \
+	$(CMDDIR)/target.o \
 	$(CMDDIR)/teach.o \
 	$(CMDDIR)/tell.o \
 	$(CMDDIR)/time.o \
 	$(CMDDIR)/timecmd.o \
 	$(CMDDIR)/title.o \
 	$(CMDDIR)/toplevel.o \
+	$(CMDDIR)/tractorbeam.o \
 	$(CMDDIR)/train.o \
+	$(CMDDIR)/trajectory.o \
+	$(CMDDIR)/trajectoryactual.o \
 	$(CMDDIR)/transfer.o \
+	$(CMDDIR)/transship.o \
 	$(CMDDIR)/trust.o \
 	$(CMDDIR)/typo.o \
+	$(CMDDIR)/undock.o \
 	$(CMDDIR)/unfoldarea.o \
 	$(CMDDIR)/unfocusalias.o \
 	$(CMDDIR)/unhell.o \
