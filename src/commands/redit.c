@@ -9,7 +9,6 @@ void do_redit( CHAR_DATA *ch, char *argument )
   char buf[MAX_STRING_LENGTH];
   ROOM_INDEX_DATA *location = NULL, *tmp = NULL;
   EXTRA_DESCR_DATA *ed = NULL;
-  char dir = '\0';
   EXIT_DATA *xit = NULL, *texit = NULL;
   int value = 0;
   int edir = 0, ekey = 0, evnum = 0;
@@ -50,6 +49,7 @@ void do_redit( CHAR_DATA *ch, char *argument )
           stop_editing( ch );
           return;
         }
+
       STRFREE( ed->description );
       ed->description = copy_buffer( ch );
       stop_editing( ch );
@@ -61,6 +61,7 @@ void do_redit( CHAR_DATA *ch, char *argument )
 
   smash_tilde( argument );
   argument = one_argument( argument, arg );
+
   if ( ch->substate == SUB_REPEATCMD )
     {
       if ( arg[0] == '\0' )
@@ -68,21 +69,26 @@ void do_redit( CHAR_DATA *ch, char *argument )
           do_rstat( ch, "" );
           return;
         }
+
       if ( !str_cmp( arg, "done" ) || !str_cmp( arg, "off" ) )
         {
           send_to_char( "Redit mode off.\r\n", ch );
+
 	  if ( ch->pcdata && ch->pcdata->subprompt )
             STRFREE( ch->pcdata->subprompt );
+
           ch->substate = SUB_NONE;
           return;
         }
     }
+
   if ( arg[0] == '\0' || !str_cmp( arg, "?" ) )
     {
       if ( ch->substate == SUB_REPEATCMD )
         send_to_char( "Syntax: <field> value\r\n",                      ch );
       else
         send_to_char( "Syntax: redit <field> value\r\n",                ch );
+
       send_to_char( "\r\n",                                             ch );
       send_to_char( "Field being one of:\r\n",                  ch );
       send_to_char( "  name desc ed rmed\r\n",                  ch );
@@ -103,6 +109,7 @@ void do_redit( CHAR_DATA *ch, char *argument )
           send_to_char( "Usage: redit name <Room summary>\r\n", ch );
           return;
         }
+
       STRFREE( location->name );
       location->name = STRALLOC( argument );
       return;
@@ -114,6 +121,7 @@ void do_redit( CHAR_DATA *ch, char *argument )
         ch->tempnum = SUB_REPEATCMD;
       else
         ch->tempnum = SUB_NONE;
+
       ch->substate = SUB_ROOM_DESC;
       ch->dest_buf = location;
       start_editing( ch, location->description );
@@ -128,6 +136,7 @@ void do_redit( CHAR_DATA *ch, char *argument )
           send_to_char( "Usage: redit tunnel <value>\r\n", ch );
           return;
         }
+
       location->tunnel = URANGE( 0, atoi(argument), 1000 );
       send_to_char( "Done.\r\n", ch );
       return;
@@ -141,12 +150,15 @@ void do_redit( CHAR_DATA *ch, char *argument )
           send_to_char( "You must supply keyword(s).\r\n", ch );
           return;
         }
+
       CHECK_SUBRESTRICTED( ch );
       ed = SetRExtra( location, argument );
+
       if ( ch->substate == SUB_REPEATCMD )
         ch->tempnum = SUB_REPEATCMD;
       else
         ch->tempnum = SUB_NONE;
+
       ch->substate = SUB_ROOM_EXTRA;
       ch->dest_buf = ed;
       start_editing( ch, ed->description );
@@ -161,34 +173,38 @@ void do_redit( CHAR_DATA *ch, char *argument )
           send_to_char( "You must supply keyword(s).\r\n", ch );
           return;
         }
+
       if ( DelRExtra( location, argument ) )
         send_to_char( "Deleted.\r\n", ch );
       else
         send_to_char( "Not found.\r\n", ch );
+
       return;
     }
 
   if ( !str_cmp( arg, "rlist" ) )
     {
-      RESET_DATA *pReset;
-      char *bptr;
-      AREA_DATA *tarea;
-      short num;
+      RESET_DATA *pReset = NULL;
+      AREA_DATA *tarea = location->area;
+      short num = 0;
 
-      tarea = location->area;
       if ( !tarea->first_reset )
         {
           send_to_char( "This area has no resets to list.\r\n", ch );
           return;
         }
-      num = 0;
+
       for ( pReset = tarea->first_reset; pReset; pReset = pReset->next )
         {
+	  const char *bptr = NULL;
           num++;
+
           if ( (bptr = sprint_reset( ch, pReset, num, TRUE )) == NULL )
             continue;
+
           send_to_char( bptr, ch );
         }
+
       return;
     }
 
@@ -206,6 +222,7 @@ void do_redit( CHAR_DATA *ch, char *argument )
           send_to_char( "spacecraft, auction, no_drive, can_land, can_fly, hotel\r\n", ch );
           return;
         }
+
       while ( argument[0] != '\0' )
         {
           argument = one_argument( argument, arg2 );
@@ -219,6 +236,7 @@ void do_redit( CHAR_DATA *ch, char *argument )
               TOGGLE_BIT( location->room_flags, 1 << value );
             }
         }
+
       return;
     }
 
@@ -390,135 +408,43 @@ void do_redit( CHAR_DATA *ch, char *argument )
       return;
     }
 
-
-
-  if ( !str_cmp( arg, "ex_flags" ) )
-    {
-      argument = one_argument( argument, arg2 );
-      dir = 'n';
-      edir = 0;
-      value = get_exitflag(arg2);
-
-      if ( value < 0 )
-        {
-          send_to_char("Bad exit flag. \r\n", ch);
-          return;
-        }
-
-      if ( (xit = get_exit(location, edir)) == NULL )
-        {
-          sprintf(buf,"exit %c 1",dir);
-          do_redit(ch,buf);
-          xit = get_exit(location,edir);
-	}
-
-      TOGGLE_BIT( xit->exit_info, value );
-      return;
-    }
-
-
-  if ( !str_cmp( arg, "ex_to_room" ) )
-    {
-      argument = one_argument( argument, arg2 );
-      dir = 'n';
-      edir = 0;
-      evnum = atoi(arg2);
-
-      if ( evnum < 1 || evnum > MAX_VNUM )
-        {
-          send_to_char( "Invalid room number.\r\n", ch );
-          return;
-        }
-
-      if ( (tmp = get_room_index( evnum )) == NULL )
-        {
-          send_to_char( "Non-existant room.\r\n", ch );
-          return;
-        }
-
-      if ( (xit = get_exit(location,edir)) == NULL )
-        {
-          sprintf(buf,"exit %c 1",dir);
-          do_redit(ch,buf);
-          xit = get_exit(location,edir);
-        }
-
-      xit->vnum = evnum;
-      return;
-    }
-
-  if ( !str_cmp( arg, "ex_key" ) )
-    {
-      argument = one_argument( argument, arg2 );
-      dir = 'n';
-      edir = 0;
-
-      if ( (xit = get_exit(location,edir)) == NULL )
-        {
-          sprintf(buf,"exit %c 1",dir);
-          do_redit(ch,buf);
-          xit = get_exit(location,edir);
-        }
-      xit->key = atoi( arg2 );
-      return;
-    }
-
-  if ( !str_cmp( arg, "ex_exdesc" ) )
-    {
-      dir = 'n';
-      edir = 0;
-
-      if ( (xit = get_exit(location, edir)) == NULL )
-        {
-          sprintf(buf,"exit %c 1",dir);
-          do_redit(ch,buf);
-        }
-      sprintf(buf,"exdesc %c %s",dir,argument);
-      do_redit(ch,buf);
-      return;
-    }
-
-  if ( !str_cmp( arg, "ex_keywords" ) )  /* not called yet */
-    {
-      dir = 'n';
-      edir = 0;
-
-      if ( (xit = get_exit(location, edir)) == NULL )
-        {
-          sprintf(buf, "exit %c 1", dir);
-          do_redit(ch,buf);
-          if ( (xit = get_exit(location, edir)) == NULL )
-            return;
-        }
-      sprintf( buf, "%s %s", xit->keyword, argument );
-      STRFREE( xit->keyword );
-      xit->keyword = STRALLOC( buf );
-      return;
-    }
-
   if ( !str_cmp( arg, "exit" ) )
     {
-      bool addexit, numnotdir;
+      bool addexit = FALSE;
+      bool numnotdir = FALSE;
 
       argument = one_argument( argument, arg2 );
       argument = one_argument( argument, arg3 );
+
       if ( arg2[0] == '\0' )
         {
           send_to_char( "Create, change or remove an exit.\r\n", ch );
           send_to_char( "Usage: redit exit <dir> [room] [flags] [key] [keywords]\r\n", ch );
           return;
         }
-      addexit = numnotdir = FALSE;
+
       switch( arg2[0] )
         {
-        default:        edir = get_dir(arg2);                     break;
-        case '+':       edir = get_dir(arg2+1); addexit = TRUE;   break;
-        case '#':       edir = atoi(arg2+1);    numnotdir = TRUE; break;
+        default:
+	  edir = get_dir(arg2);
+	  break;
+
+        case '+':
+	  edir = get_dir(arg2+1);
+	  addexit = TRUE;
+	  break;
+
+        case '#':
+	  edir = atoi(arg2+1);
+	  numnotdir = TRUE;
+	  break;
         }
+
       if ( arg3[0] == '\0' )
         evnum = 0;
       else
         evnum = atoi( arg3 );
+
       if ( numnotdir )
         {
 	  if ( (xit = get_exit_num(location, edir)) != NULL )
@@ -526,6 +452,7 @@ void do_redit( CHAR_DATA *ch, char *argument )
         }
       else
         xit = get_exit(location, edir);
+
       if ( !evnum )
         {
           if ( xit )
@@ -537,7 +464,7 @@ void do_redit( CHAR_DATA *ch, char *argument )
           send_to_char( "No exit in that direction.\r\n", ch );
           return;
         }
-      if ( evnum < 1 || evnum > 32766 )
+      if ( evnum < 1 || evnum > MAX_VNUM )
         {
           send_to_char( "Invalid room number.\r\n", ch );
           return;
