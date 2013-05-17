@@ -3,6 +3,9 @@
 #include "mud.h"
 #include "grub.h"
 
+static struct operand_struct gr_op[MAX_NUM_OPS];
+static struct field_struct gr_fd[GR_NUM_FIELDS];
+
 static char *gr_strc (char c);
 static bool gr_eval_and (GR_STRUCT r, int op_num);
 static bool gr_eval_or (GR_STRUCT r, int op_num);

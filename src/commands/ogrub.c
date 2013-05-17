@@ -3,6 +3,9 @@
 #include "mud.h"
 #include "grub.h"
 
+static struct operand_struct go_op[MAX_NUM_OPS];
+static struct field_struct go_fd[GO_NUM_FIELDS];
+
 static void go_init (void);
 static void display_operand_table (CHAR_DATA *ch, int op_num);
 static bool go_parse_operand (CHAR_DATA *ch, const char *arg, int *op_num, int *sor_ind,

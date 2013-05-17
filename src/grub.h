@@ -32,7 +32,7 @@ struct field_struct         /* field table - info re each field          */
 {
   char nam[MAX_FIELD_LENGTH];
   bool num;             /* is field numeric or char string?          */
-} gr_fd [GR_NUM_FIELDS], go_fd [GO_NUM_FIELDS];
+};
 
 struct operand_struct        /* operand table - info about each operand   */
 {
@@ -42,10 +42,6 @@ struct operand_struct        /* operand table - info about each operand   */
   char            sval [MAX_FIELD_LENGTH];
   bool            num;          /* is field numeric or char string?      */
 };
-
-struct operand_struct gr_op [MAX_NUM_OPS]; /* the above field is stored here as     */
-/* well as in "fields" for readability   */
-struct operand_struct go_op [MAX_NUM_OPS];
 
 enum gr_field_type          /* enumerates the fields in the input record */
   {name, sex, pclass, race, level, room, gold, clan, council,
