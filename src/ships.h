@@ -9,5 +9,6 @@ void resetship( SHIP_DATA *ship );
 void write_ship_list( void );
 void echo_to_docked( int color, SHIP_DATA *ship, const char *argument );
 void sound_to_ship( SHIP_DATA *ship, const char *argument );
+bool candock( SHIP_DATA *ship );
 
 #endif
