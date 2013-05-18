@@ -1,6 +1,8 @@
 #ifndef _SWRIP_QUEST_H_
 #define _SWRIP_QUEST_H_
 
+#include "types.h"
+
 #define QUEST_ITEM1 70
 #define QUEST_ITEM2 71
 #define QUEST_ITEM3 72
@@ -24,9 +26,7 @@
 #define QUEST_OBJQUEST4 78
 #define QUEST_OBJQUEST5 79
 
-struct char_data;
-
-void generate_quest( struct char_data *ch, struct char_data *questman );
+void generate_quest( CHAR_DATA *ch, CHAR_DATA *questman );
 void quest_update( void );
 
 #endif

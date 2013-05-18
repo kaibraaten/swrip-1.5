@@ -26,6 +26,8 @@
 #ifndef _SWRIP_ALIAS_H_
 #define _SWRIP_ALIAS_H_
 
+#include "types.h"
+
 typedef struct alias_type ALIAS_DATA;
 
 struct  alias_type

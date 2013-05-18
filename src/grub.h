@@ -16,7 +16,8 @@
 #ifndef _SWRIP_GRUB_H_
 #define _SWRIP_GRUB_H_
 
-#include "mud.h"
+#include <utility/utility.h>
+#include "constants.h"
 
 #define MAX_DISPLAY_LINES  14000      /* Size of Sort Array             */
 #define MAX_SITE_LENGTH       16
