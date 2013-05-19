@@ -16,17 +16,20 @@ SHUTTLE_DATA * last_shuttle = NULL;
 STOP_DATA *create_stop( void )
 {
   STOP_DATA * stop = NULL;
+
   CREATE( stop, STOP_DATA, 1);
   stop->next = NULL;
   stop->prev = NULL;
   stop->stop_name = NULL;
   stop->room = -1;
+
   return stop;
 }
 
-SHUTTLE_DATA * create_shuttle( )
+SHUTTLE_DATA * create_shuttle( void )
 {
   SHUTTLE_DATA * shuttle = NULL;
+
   CREATE(shuttle, SHUTTLE_DATA, 1);
   shuttle->name                 = NULL;
   shuttle->filename     = NULL;
@@ -44,6 +47,7 @@ SHUTTLE_DATA * create_shuttle( )
   shuttle->takeoff_desc = NULL;
   shuttle->land_desc    = NULL;
   shuttle->approach_desc        = NULL;
+
   return shuttle;
 }
 
@@ -83,7 +87,7 @@ SHUTTLE_DATA * get_shuttle(const char * name)
   return NULL;
 }
 
-void write_shuttle_list( )
+void write_shuttle_list( void )
 {
   SHUTTLE_DATA *shuttle;
   FILE *fpout;
@@ -103,7 +107,7 @@ void write_shuttle_list( )
   fclose( fpout );
 }
 
-bool save_shuttle( SHUTTLE_DATA * shuttle )
+bool save_shuttle( const SHUTTLE_DATA * shuttle )
 {
   FILE *fp;
   char filename[256];
@@ -168,7 +172,7 @@ bool save_shuttle( SHUTTLE_DATA * shuttle )
   return TRUE;
 }
 
-void update_shuttle()
+void update_shuttle( void )
 {
   char buf[MSL];
   SHUTTLE_DATA * shuttle = NULL;
@@ -323,22 +327,23 @@ void update_shuttle()
   return;
 }
 
-void show_shuttles_to_char( SHUTTLE_DATA *shuttle, CHAR_DATA *ch )
+void show_shuttles_to_char( const SHUTTLE_DATA *shuttle, CHAR_DATA *ch )
 {
   while (shuttle)
     {
       set_char_color( AT_SHIP, ch );
       ch_printf( ch , "%-35s", shuttle->name );
+
       /* eww code dupliction */
-      if ( shuttle->next_in_room ) {
-        shuttle = shuttle->next_in_room;
-        ch_printf( ch , "%-35s", shuttle->name );
-      }
+      if ( shuttle->next_in_room )
+	{
+	  shuttle = shuttle->next_in_room;
+	  ch_printf( ch , "%-35s", shuttle->name );
+	}
+
       shuttle = shuttle->next_in_room;
       send_to_char("\r\n&w", ch);
     }
-
-  return;
 }
 
 bool extract_shuttle( SHUTTLE_DATA * shuttle )
@@ -367,11 +372,10 @@ bool insert_shuttle( SHUTTLE_DATA * shuttle, ROOM_INDEX_DATA * room )
   return TRUE;
 }
 
-
 /*
  * Load in all the ship files.
  */
-void load_shuttles( )
+void load_shuttles( void )
 {
   FILE *fpList;
   const char *filename;
@@ -653,11 +657,12 @@ void destroy_shuttle(SHUTTLE_DATA * shuttle)
   return;
 }
 
-SHUTTLE_DATA * shuttle_in_room( ROOM_INDEX_DATA *room, const char *name )
+SHUTTLE_DATA * shuttle_in_room( const ROOM_INDEX_DATA *room, const char *name )
 {
   SHUTTLE_DATA *shuttle;
 
-  if ( !room ) return NULL;
+  if ( !room )
+    return NULL;
 
   for ( shuttle = room->first_shuttle ; shuttle ; shuttle = shuttle->next_in_room )
     if ( !str_cmp( name, shuttle->name ) )

@@ -94,19 +94,19 @@ extern SHUTTLE_DATA     *last_shuttle;
 /* Function prototypes */
 
 void update_shuttle(void);
-SHUTTLE_DATA *get_shuttle( const char * argument );
+SHUTTLE_DATA *get_shuttle( const char *argument );
 void write_shuttle_list( void );
-bool save_shuttle( SHUTTLE_DATA * shuttle );
-SHUTTLE_DATA *make_shuttle( const char * filename, const char * name );
-bool extract_shuttle( SHUTTLE_DATA * shuttle );
-bool insert_shuttle( SHUTTLE_DATA * shuttle, ROOM_INDEX_DATA * room );
+bool save_shuttle( const SHUTTLE_DATA *shuttle );
+SHUTTLE_DATA *make_shuttle( const char *filename, const char *name );
+bool extract_shuttle( SHUTTLE_DATA *shuttle );
+bool insert_shuttle( SHUTTLE_DATA *shuttle, ROOM_INDEX_DATA *room );
 void load_shuttles(void);
-bool load_shuttle_file( const char * shuttlefile );
+bool load_shuttle_file( const char *shuttlefile );
 void fread_shuttle( SHUTTLE_DATA *shuttle, FILE *fp );
 void fread_stop( STOP_DATA * stop, FILE *fp );
 void destroy_shuttle( SHUTTLE_DATA *shuttle );
-void show_shuttles_to_char( SHUTTLE_DATA *shuttle, CHAR_DATA *ch );
-SHUTTLE_DATA *shuttle_in_room( ROOM_INDEX_DATA *room, const char *name );
+void show_shuttles_to_char( const SHUTTLE_DATA *shuttle, CHAR_DATA *ch );
+SHUTTLE_DATA *shuttle_in_room( const ROOM_INDEX_DATA *room, const char *name );
 SHUTTLE_DATA *shuttle_from_entrance( int vnum );
 STOP_DATA *create_stop( void );
 
