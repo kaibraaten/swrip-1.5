@@ -2696,7 +2696,6 @@ extern "C" {
   void         save_spaceobject( SPACE_DATA *spaceobject );
   SPACE_DATA * spaceobject_from_name( const char *name );
   SPACE_DATA * spaceobject_from_vnum( int vnum );
-  void         showspaceobject( CHAR_DATA *ch , SPACE_DATA *spaceobject );
   void update_spaceobjects( void );
   void update_missiles( void );
   void         new_missile( SHIP_DATA *ship, SHIP_DATA *target, CHAR_DATA *ch,

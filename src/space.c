@@ -21,11 +21,6 @@
  *                              Space Module                               *
  ****************************************************************************/
 
-#ifdef __STRICT_ANSI__
-/* To include the prototype for strdup() */
-#define _BSD_SOURCE
-#endif
-
 #include "mud.h"
 #include "vector3_aux.h"
 #include "ships.h"

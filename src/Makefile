@@ -252,6 +252,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/makeship.o \
 	$(CMDDIR)/makeshuttle.o \
 	$(CMDDIR)/makeshop.o \
+	$(CMDDIR)/makespaceobject.o \
 	$(CMDDIR)/makewizlist.o \
 	$(CMDDIR)/massign.o \
 	$(CMDDIR)/mcreate.o \
@@ -387,6 +388,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/setplanet.o \
 	$(CMDDIR)/setship.o \
 	$(CMDDIR)/setshuttle.o \
+	$(CMDDIR)/setspaceobject.o \
 	$(CMDDIR)/ships.o \
 	$(CMDDIR)/shiptalk.o \
 	$(CMDDIR)/shiptrack.o \
@@ -400,6 +402,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/showplanet.o \
 	$(CMDDIR)/showship.o \
 	$(CMDDIR)/showshuttle.o \
+	$(CMDDIR)/showspaceobject.o \
 	$(CMDDIR)/showstatistic.o \
 	$(CMDDIR)/showstatistic_web.o \
 	$(CMDDIR)/shutdown.o \
@@ -420,6 +423,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/south.o \
 	$(CMDDIR)/southeast.o \
 	$(CMDDIR)/southwest.o \
+	$(CMDDIR)/spaceobjects.o \
 	$(CMDDIR)/spacetalk.o \
 	$(CMDDIR)/speak.o \
 	$(CMDDIR)/speeders.o \
