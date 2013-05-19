@@ -53,6 +53,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/affected.o \
 	$(CMDDIR)/afk.o \
 	$(CMDDIR)/ahall.o \
+	$(CMDDIR)/aid.o \
 	$(CMDDIR)/alias.o \
 	$(CMDDIR)/allow.o \
 	$(CMDDIR)/allclantalk.o \
@@ -82,11 +83,14 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/balzhur.o \
 	$(CMDDIR)/bamfin.o \
 	$(CMDDIR)/bamfout.o \
+	$(CMDDIR)/backstab.o \
 	$(CMDDIR)/ban.o \
 	$(CMDDIR)/bank.o \
+	$(CMDDIR)/bash.o \
 	$(CMDDIR)/bashdoor.o \
 	$(CMDDIR)/badname.o \
 	$(CMDDIR)/beep.o \
+	$(CMDDIR)/berserk.o \
 	$(CMDDIR)/bestow.o \
 	$(CMDDIR)/bestowarea.o \
 	$(CMDDIR)/bet.o \
@@ -116,6 +120,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/chaos.o \
 	$(CMDDIR)/chat.o \
 	$(CMDDIR)/check_vnums.o \
+	$(CMDDIR)/circle.o \
 	$(CMDDIR)/clan_donate.o \
 	$(CMDDIR)/clan_withdraw.o \
 	$(CMDDIR)/clanbuyship.o \
@@ -143,9 +148,13 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/deny.o \
 	$(CMDDIR)/description.o \
 	$(CMDDIR)/destroy.o \
+	$(CMDDIR)/detrap.o \
 	$(CMDDIR)/diagnose.o \
+	$(CMDDIR)/dig.o \
+	$(CMDDIR)/disarm.o \
 	$(CMDDIR)/disconnect.o \
 	$(CMDDIR)/dismiss.o \
+	$(CMDDIR)/dismount.o \
 	$(CMDDIR)/dmsg.o \
 	$(CMDDIR)/dnd.o \
 	$(CMDDIR)/dock.o \
@@ -185,6 +194,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/glance.o \
 	$(CMDDIR)/gold.o \
 	$(CMDDIR)/goto.o \
+	$(CMDDIR)/gouge.o \
 	$(CMDDIR)/group.o \
 	$(CMDDIR)/grub.o \
 	$(CMDDIR)/gtell.o \
@@ -193,6 +203,8 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/help.o \
 	$(CMDDIR)/hedit.o \
 	$(CMDDIR)/hell.o \
+	$(CMDDIR)/hide.o \
+	$(CMDDIR)/hitall.o \
 	$(CMDDIR)/hlist.o \
 	$(CMDDIR)/holylight.o \
 	$(CMDDIR)/homepage.o \
@@ -214,6 +226,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/invite.o \
 	$(CMDDIR)/jumpvector.o \
 	$(CMDDIR)/junk.o \
+	$(CMDDIR)/kick.o \
 	$(CMDDIR)/kill.o \
 	$(CMDDIR)/land.o \
 	$(CMDDIR)/languages.o \
@@ -247,6 +260,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/mfind.o \
 	$(CMDDIR)/minvoke.o \
 	$(CMDDIR)/mlist.o \
+	$(CMDDIR)/mount.o \
 	$(CMDDIR)/mpedit.o \
 	$(CMDDIR)/mpfind.o \
 	$(CMDDIR)/mpstat.o \
@@ -292,13 +306,16 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/pardon.o \
 	$(CMDDIR)/password.o \
 	$(CMDDIR)/peace.o \
+	$(CMDDIR)/pick.o \
 	$(CMDDIR)/placevendor.o \
 	$(CMDDIR)/planets.o \
 	$(CMDDIR)/pluogus.o \
+	$(CMDDIR)/poisonweapon.o \
 	$(CMDDIR)/practice.o \
 	$(CMDDIR)/pricevendor.o \
 	$(CMDDIR)/prompt.o \
 	$(CMDDIR)/pull.o \
+	$(CMDDIR)/punch.o \
 	$(CMDDIR)/purge.o \
 	$(CMDDIR)/push.o \
 	$(CMDDIR)/put.o \
@@ -311,6 +328,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/rat.o \
 	$(CMDDIR)/rdelete.o \
 	$(CMDDIR)/reboot.o \
+	$(CMDDIR)/recall.o \
 	$(CMDDIR)/recharge.o \
 	$(CMDDIR)/recho.o \
 	$(CMDDIR)/redit.o \
@@ -329,6 +347,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/reply.o \
 	$(CMDDIR)/report.o \
 	$(CMDDIR)/request.o \
+	$(CMDDIR)/rescue.o \
 	$(CMDDIR)/reset.o \
 	$(CMDDIR)/resetship.o \
 	$(CMDDIR)/resign.o \
@@ -353,8 +372,11 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/save.o \
 	$(CMDDIR)/savearea.o \
 	$(CMDDIR)/say.o \
+	$(CMDDIR)/scan.o \
 	$(CMDDIR)/scatter.o \
 	$(CMDDIR)/score.o \
+	$(CMDDIR)/scribe.o \
+	$(CMDDIR)/search.o \
 	$(CMDDIR)/sedit.o \
 	$(CMDDIR)/sell.o \
 	$(CMDDIR)/sellhome.o \
@@ -383,11 +405,14 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/shutdown.o \
 	$(CMDDIR)/silence.o \
 	$(CMDDIR)/sit.o \
+	$(CMDDIR)/skin.o \
 	$(CMDDIR)/sla.o \
 	$(CMDDIR)/slay.o \
 	$(CMDDIR)/sleep.o \
 	$(CMDDIR)/slist.o \
+	$(CMDDIR)/slookup.o \
 	$(CMDDIR)/smoke.o \
+	$(CMDDIR)/sneak.o \
 	$(CMDDIR)/snoop.o \
 	$(CMDDIR)/sober.o \
 	$(CMDDIR)/socials.o \
@@ -399,8 +424,12 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/speak.o \
 	$(CMDDIR)/speeders.o \
 	$(CMDDIR)/split.o \
+	$(CMDDIR)/sset.o \
 	$(CMDDIR)/stand.o \
 	$(CMDDIR)/status.o \
+	$(CMDDIR)/steal.o \
+	$(CMDDIR)/study.o \
+	$(CMDDIR)/stun.o \
 	$(CMDDIR)/suicide.o \
 	$(CMDDIR)/switch.o \
 	$(CMDDIR)/systemtalk.o \
@@ -433,6 +462,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/value.o \
 	$(CMDDIR)/vassign.o \
 	$(CMDDIR)/viewskills.o \
+	$(CMDDIR)/visible.o \
 	$(CMDDIR)/vnums.o \
 	$(CMDDIR)/vsearch.o \
 	$(CMDDIR)/wake.o \
