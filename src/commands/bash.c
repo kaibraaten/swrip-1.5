@@ -1,1 +1,54 @@
 #include "mud.h"
+
+void do_bash( CHAR_DATA *ch, char *argument )
+{
+  CHAR_DATA *victim;
+  int bash_chance;
+
+  if ( IS_NPC(ch) && IS_AFFECTED( ch, AFF_CHARM ) )
+    {
+      send_to_char( "You can't concentrate enough for that.\r\n", ch );
+      return;
+    }
+
+  if ( !IS_NPC(ch)
+       &&  ch->pcdata->learned[gsn_bash] <= 0  )
+    {
+      send_to_char(
+                   "Your mind races as you realize you have no idea how to do that.\r\n", ch );
+      return;
+    }
+
+  if ( ( victim = who_fighting( ch ) ) == NULL )
+    {
+      send_to_char( "You aren't fighting anyone.\r\n", ch );
+      return;
+    }
+
+  bash_chance = (((get_curr_dex(victim) + get_curr_str(victim))
+		  -   (get_curr_dex(ch)     + get_curr_str(ch))) * 10) + 10;
+  if ( !IS_NPC(ch) && !IS_NPC(victim) )
+    bash_chance += 25;
+
+  if ( victim->fighting && victim->fighting->who != ch )
+    bash_chance += 19;
+
+  WAIT_STATE( ch, skill_table[gsn_bash]->beats );
+
+  if ( IS_NPC(ch)
+       || (number_percent( ) + bash_chance) < ch->pcdata->learned[gsn_bash] )
+    {
+      learn_from_success( ch, gsn_bash );
+      /* do not change anything here!  -Thoric */
+      WAIT_STATE( ch,     2 * PULSE_VIOLENCE );
+      WAIT_STATE( victim, 2 * PULSE_VIOLENCE );
+      victim->position = POS_SITTING;
+      global_retcode = damage( ch, victim, number_range( 1, get_level( ch, COMBAT_ABILITY ) ), gsn_bash );
+    }
+  else
+    {
+      WAIT_STATE( ch,     2 * PULSE_VIOLENCE );
+      learn_from_failure( ch, gsn_bash );
+      global_retcode = damage( ch, victim, 0, gsn_bash );
+    }
+}

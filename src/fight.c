@@ -35,7 +35,6 @@ extern CHAR_DATA *      gch_prev;
 void    dam_message( CHAR_DATA *ch, CHAR_DATA *victim, int dam, int dt );
 void    group_gain( CHAR_DATA *ch, CHAR_DATA *victim );
 int     align_compute( CHAR_DATA *gch, CHAR_DATA *victim );
-ch_ret  one_hit( CHAR_DATA *ch, CHAR_DATA *victim, int dt );
 int     obj_hitroll( OBJ_DATA *obj );
 bool    get_cover( CHAR_DATA *ch );
 bool    dual_flip = FALSE;

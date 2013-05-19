@@ -2785,6 +2785,7 @@ extern "C" {
   void fold_area( AREA_DATA *tarea, char *filename, bool install );
 
   /* fight.c */
+  ch_ret  one_hit( CHAR_DATA *ch, CHAR_DATA *victim, int dt );
   int xp_compute( const CHAR_DATA *gch, const CHAR_DATA *victim );
   int   max_fight( CHAR_DATA *ch );
   void  violence_update( void );

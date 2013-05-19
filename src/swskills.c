@@ -31,7 +31,6 @@
 #include "ships.h"
 
 void    add_reinforcements( CHAR_DATA *ch );
-ch_ret  one_hit( CHAR_DATA *ch, CHAR_DATA *victim, int dt );
 bool    aff_paralysis( CHAR_DATA *ch, CHAR_DATA *victim );
 
 void do_makeblade( CHAR_DATA *ch, char *argument )
