@@ -63,6 +63,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/answer.o \
 	$(CMDDIR)/apply.o \
 	$(CMDDIR)/appoint.o \
+	$(CMDDIR)/appraise.o \
 	$(CMDDIR)/aquest.o \
 	$(CMDDIR)/areas.o \
 	$(CMDDIR)/arena.o \
@@ -93,6 +94,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/boards.o \
 	$(CMDDIR)/bodybag.o \
 	$(CMDDIR)/bounties.o \
+	$(CMDDIR)/buy.o \
 	$(CMDDIR)/buyhome.o \
 	$(CMDDIR)/buzz.o \
 	$(CMDDIR)/brandish.o \
@@ -101,6 +103,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/bug.o \
 	$(CMDDIR)/bury.o \
 	$(CMDDIR)/buyship.o \
+	$(CMDDIR)/buyvendor.o \
 	$(CMDDIR)/calculate.o \
 	$(CMDDIR)/calculatediff.o \
 	$(CMDDIR)/capture.o \
@@ -125,6 +128,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/closebay.o \
 	$(CMDDIR)/closehatch.o \
 	$(CMDDIR)/cmdtable.o \
+	$(CMDDIR)/collectgold.o \
 	$(CMDDIR)/commands.o \
 	$(CMDDIR)/compare.o \
 	$(CMDDIR)/config.o \
@@ -217,6 +221,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/leave.o \
 	$(CMDDIR)/level.o \
 	$(CMDDIR)/light.o \
+	$(CMDDIR)/list.o \
 	$(CMDDIR)/litterbug.o \
 	$(CMDDIR)/loadarea.o \
 	$(CMDDIR)/loadup.o \
@@ -228,7 +233,9 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/makeboard.o \
 	$(CMDDIR)/makeclan.o \
 	$(CMDDIR)/makeplanet.o \
+	$(CMDDIR)/makerepair.o \
 	$(CMDDIR)/makeship.o \
+	$(CMDDIR)/makeshop.o \
 	$(CMDDIR)/makewizlist.o \
 	$(CMDDIR)/massign.o \
 	$(CMDDIR)/mcreate.o \
@@ -282,8 +289,10 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/pardon.o \
 	$(CMDDIR)/password.o \
 	$(CMDDIR)/peace.o \
+	$(CMDDIR)/placevendor.o \
 	$(CMDDIR)/planets.o \
 	$(CMDDIR)/practice.o \
+	$(CMDDIR)/pricevendor.o \
 	$(CMDDIR)/prompt.o \
 	$(CMDDIR)/pull.o \
 	$(CMDDIR)/purge.o \
@@ -308,7 +317,11 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/rempilot.o \
 	$(CMDDIR)/remresident.o \
 	$(CMDDIR)/renameship.o \
+	$(CMDDIR)/repair.o \
+	$(CMDDIR)/repairset.o \
 	$(CMDDIR)/repairship.o \
+	$(CMDDIR)/repairshops.o \
+	$(CMDDIR)/repairstat.o \
 	$(CMDDIR)/reply.o \
 	$(CMDDIR)/report.o \
 	$(CMDDIR)/request.o \
@@ -339,6 +352,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/scatter.o \
 	$(CMDDIR)/score.o \
 	$(CMDDIR)/sedit.o \
+	$(CMDDIR)/sell.o \
 	$(CMDDIR)/sellhome.o \
 	$(CMDDIR)/sellship.o \
 	$(CMDDIR)/set_boot_time.o \
@@ -349,6 +363,9 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/ships.o \
 	$(CMDDIR)/shiptalk.o \
 	$(CMDDIR)/shiptrack.o \
+	$(CMDDIR)/shops.o \
+	$(CMDDIR)/shopset.o \
+	$(CMDDIR)/shopstat.o \
 	$(CMDDIR)/shout.o \
 	$(CMDDIR)/shove.o \
 	$(CMDDIR)/showclan.o \
@@ -407,6 +424,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/up.o \
 	$(CMDDIR)/use.o \
 	$(CMDDIR)/users.o \
+	$(CMDDIR)/value.o \
 	$(CMDDIR)/vassign.o \
 	$(CMDDIR)/viewskills.o \
 	$(CMDDIR)/vnums.o \
