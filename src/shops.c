@@ -29,13 +29,8 @@
 #define _POSIX_SOURCE
 #endif
 
-#include <sys/types.h>
-#include <stdio.h>
-#include <string.h>
-#include <time.h>
 #include <ctype.h>
-#include <stdarg.h>
-#include <sys/stat.h>
+#include <string.h>
 #include "mud.h"
 #include "shops.h"
 

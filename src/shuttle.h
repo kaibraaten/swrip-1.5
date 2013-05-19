@@ -108,6 +108,7 @@ void destroy_shuttle( SHUTTLE_DATA *shuttle );
 void show_shuttles_to_char( SHUTTLE_DATA *shuttle, CHAR_DATA *ch );
 SHUTTLE_DATA *shuttle_in_room( ROOM_INDEX_DATA *room, const char *name );
 SHUTTLE_DATA *shuttle_from_entrance( int vnum );
+STOP_DATA *create_stop( void );
 
 DECLARE_DO_FUN( do_showshuttle          );
 DECLARE_DO_FUN( do_makeshuttle          );

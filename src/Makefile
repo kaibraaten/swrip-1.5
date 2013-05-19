@@ -91,6 +91,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/bestowarea.o \
 	$(CMDDIR)/bet.o \
 	$(CMDDIR)/bio.o \
+	$(CMDDIR)/board.o \
 	$(CMDDIR)/boards.o \
 	$(CMDDIR)/bodybag.o \
 	$(CMDDIR)/bounties.o \
@@ -219,6 +220,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/last.o \
 	$(CMDDIR)/launch.o \
 	$(CMDDIR)/leave.o \
+	$(CMDDIR)/leaveship.o \
 	$(CMDDIR)/level.o \
 	$(CMDDIR)/light.o \
 	$(CMDDIR)/list.o \
@@ -235,6 +237,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/makeplanet.o \
 	$(CMDDIR)/makerepair.o \
 	$(CMDDIR)/makeship.o \
+	$(CMDDIR)/makeshuttle.o \
 	$(CMDDIR)/makeshop.o \
 	$(CMDDIR)/makewizlist.o \
 	$(CMDDIR)/massign.o \
@@ -291,6 +294,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/peace.o \
 	$(CMDDIR)/placevendor.o \
 	$(CMDDIR)/planets.o \
+	$(CMDDIR)/pluogus.o \
 	$(CMDDIR)/practice.o \
 	$(CMDDIR)/pricevendor.o \
 	$(CMDDIR)/prompt.o \
@@ -360,6 +364,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/setclan.o \
 	$(CMDDIR)/setplanet.o \
 	$(CMDDIR)/setship.o \
+	$(CMDDIR)/setshuttle.o \
 	$(CMDDIR)/ships.o \
 	$(CMDDIR)/shiptalk.o \
 	$(CMDDIR)/shiptrack.o \
@@ -372,6 +377,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/showlayers.o \
 	$(CMDDIR)/showplanet.o \
 	$(CMDDIR)/showship.o \
+	$(CMDDIR)/showshuttle.o \
 	$(CMDDIR)/showstatistic.o \
 	$(CMDDIR)/showstatistic_web.o \
 	$(CMDDIR)/shutdown.o \
