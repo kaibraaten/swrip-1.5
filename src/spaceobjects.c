@@ -22,7 +22,6 @@
  ****************************************************************************/
 
 #include <ctype.h>
-#include <string.h>
 #include "mud.h"
 #include "vector3_aux.h"
 
