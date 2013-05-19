@@ -8,6 +8,7 @@
 #include <ctype.h>
 #include "mud.h"
 #include "shuttle.h"
+#include "ships.h"
 
 SHUTTLE_DATA * first_shuttle = NULL;
 SHUTTLE_DATA * last_shuttle = NULL;

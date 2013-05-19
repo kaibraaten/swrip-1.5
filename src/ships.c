@@ -32,15 +32,13 @@ SHIP_DATA *last_ship = NULL;
 
 static int baycount = 0;
 
-void fread_ship( SHIP_DATA *ship, FILE *fp );
-bool load_ship_file( const char *shipfile );
-void approachland( SHIP_DATA *ship, const char *arg );
-void landship( SHIP_DATA *ship, const char *arg );
-void launchship( SHIP_DATA *ship );
-void makedebris( SHIP_DATA *ship );
-bool space_in_range_h( SHIP_DATA *ship, SPACE_DATA *space);
-void echo_to_room_dnr( int ecolor, ROOM_INDEX_DATA *room,
-		       const char *argument );
+static void fread_ship( SHIP_DATA *ship, FILE *fp );
+static bool load_ship_file( const char *shipfile );
+static void approachland( SHIP_DATA *ship, const char *arg );
+static void landship( SHIP_DATA *ship, const char *arg );
+static void launchship( SHIP_DATA *ship );
+static void makedebris( SHIP_DATA *ship );
+static bool space_in_range_h( const SHIP_DATA *ship, const SPACE_DATA *space);
 
 static bool will_collide_with_sun( const SHIP_DATA *ship,
 				   const SPACE_DATA *sun )
@@ -104,7 +102,6 @@ void update_shipmovement( void )
 
   for ( ship = first_ship; ship; ship = ship->next )
     {
-
       if ( !ship->spaceobject )
         continue;
 
@@ -146,7 +143,7 @@ void update_shipmovement( void )
             }
         }
 
-      if ( autofly(ship) )
+      if ( is_autoflying(ship) )
         continue;
 
       for( spaceobj = first_spaceobject; spaceobj; spaceobj = spaceobj->next )
@@ -174,7 +171,6 @@ void update_shipmovement( void )
 
             }
         }
-
     }
 
   target = NULL;
@@ -184,7 +180,8 @@ void update_shipmovement( void )
       if ( ship_is_in_hyperspace( ship ) )
         {
           Vector3 tmp;
-          float dist = 0, origdist = 0;
+          float dist = 0;
+	  float origdist = 0;
 
           ship->hyperdistance -= ship->hyperspeed;
 
@@ -382,7 +379,7 @@ void update_shipmovement( void )
     }
 }
 
-void landship( SHIP_DATA *ship, const char *arg )
+static void landship( SHIP_DATA *ship, const char *arg )
 {
   SHIP_DATA *target;
   char buf[MAX_STRING_LENGTH];
@@ -475,7 +472,7 @@ void landship( SHIP_DATA *ship, const char *arg )
   save_ship(ship);
 }
 
-void approachland( SHIP_DATA *ship, const char *arg)
+static void approachland( SHIP_DATA *ship, const char *arg)
 {
   SPACE_DATA *spaceobj;
   char buf[MAX_STRING_LENGTH];
@@ -520,7 +517,7 @@ void approachland( SHIP_DATA *ship, const char *arg)
   echo_to_nearby_ships( AT_YELLOW, ship, buf , NULL );
 }
 
-void launchship( SHIP_DATA *ship )
+static void launchship( SHIP_DATA *ship )
 {
   char buf[MAX_STRING_LENGTH];
   SHIP_DATA *target;
@@ -615,7 +612,7 @@ void launchship( SHIP_DATA *ship )
   echo_to_room( AT_YELLOW , get_room_index(ship->lastdoc) , buf );
 }
 
-void makedebris( SHIP_DATA *ship )
+static void makedebris( SHIP_DATA *ship )
 {
   SHIP_DATA *debris;
   char buf[MAX_STRING_LENGTH];
@@ -765,7 +762,7 @@ bool check_hostile( SHIP_DATA *ship )
   SHIP_DATA *enemy = NULL;
   char buf[MAX_STRING_LENGTH];
 
-  if ( !autofly(ship) || ship->sclass == SHIP_DEBRIS )
+  if ( !is_autoflying(ship) || ship->sclass == SHIP_DEBRIS )
     return FALSE;
 
   for( target = first_ship; target; target = target->next )
@@ -1174,9 +1171,8 @@ void sound_to_ship( SHIP_DATA *ship, const char *argument )
     }
 }
 
-bool autofly( SHIP_DATA *ship )
+bool is_autoflying( const SHIP_DATA *ship )
 {
-
   if (!ship)
     return FALSE;
 
@@ -1294,7 +1290,7 @@ void recharge_ships()
       if (ship->missilestate == MISSILE_FIRED )
         ship->missilestate = MISSILE_RELOAD;
 
-      if ( autofly(ship) )
+      if ( is_autoflying(ship) )
         {
           if ( ship->spaceobject && ship->sclass != SHIP_DEBRIS )
             {
@@ -1408,7 +1404,7 @@ void recharge_ships()
 
                               ship->statet0++;
 
-                              if ( autofly(target) && !target->target0)
+                              if ( is_autoflying(target) && !target->target0)
                                 {
                                   sprintf( buf , "You are being targetted by %s." , target->name);
                                   echo_to_cockpit( AT_BLOOD , ship , buf );
@@ -1507,7 +1503,7 @@ void update_ships( void )
           ship->energy -= recharge;
         }
 
-      if ( autofly(ship) && ( ship->energy >= ((25+ship->sclass*25)*(2+ship->sclass) ) )
+      if ( is_autoflying(ship) && ( ship->energy >= ((25+ship->sclass*25)*(2+ship->sclass) ) )
            && ((ship->maxshield - ship->shield) >= ( 25+ship->sclass*25 ) ) )
         {
           recharge  = 25+ship->sclass*25;
@@ -1644,7 +1640,7 @@ void update_ships( void )
 
   for ( ship = first_ship; ship; ship = ship->next )
     {
-      if( ship->target0 && autofly(ship) )
+      if( ship->target0 && is_autoflying(ship) )
         if( !ship_in_range( ship->target0, ship ) )
           {
             echo_to_room( AT_BLUE , get_room_index(ship->pilotseat), "Target left, returning to NORMAL condition.\r\n" );
@@ -1692,7 +1688,7 @@ void update_ships( void )
             }
         }
 
-      if ( autofly(ship) && ship->sclass != SHIP_DEBRIS )
+      if ( is_autoflying(ship) && ship->sclass != SHIP_DEBRIS )
         {
           if ( ship->spaceobject )
             {
@@ -1702,7 +1698,7 @@ void update_ships( void )
                   int the_chance = 50;
                   int projectiles = -1;
 
-                  if ( !ship->target0->target0 && autofly(ship->target0))
+                  if ( !ship->target0->target0 && is_autoflying(ship->target0))
                     ship->target0->target0 = ship;
 
                   /* auto assist ships */
@@ -1710,7 +1706,9 @@ void update_ships( void )
                   for ( target = first_ship; target; target = target->next)
                     {
                       if( ship_in_range( ship, target ) )
-                        if ( autofly(target) && target->docked == NULL && target->shipstate != SHIP_DOCKED )
+                        if ( is_autoflying(target)
+			     && target->docked == NULL
+			     && target->shipstate != SHIP_DOCKED )
                           if ( !str_cmp ( target->owner , ship->owner ) && target != ship )
                             if ( target->target0 == NULL && ship->target0 != target )
                               {
@@ -1859,7 +1857,7 @@ void echo_to_cockpit( int color, SHIP_DATA *ship, const char *argument )
     }
 }
 
-bool ship_in_range( SHIP_DATA *ship, SHIP_DATA *target )
+bool ship_in_range( const SHIP_DATA *ship, const SHIP_DATA *target )
 {
   if (target && ship && target != ship )
     {
@@ -1874,25 +1872,25 @@ bool ship_in_range( SHIP_DATA *ship, SHIP_DATA *target )
   return FALSE;
 }
 
-bool missile_in_range( SHIP_DATA *ship, MISSILE_DATA *missile )
+bool missile_in_range( const SHIP_DATA *ship, const MISSILE_DATA *missile )
 {
   return missile && ship && ship->spaceobject
     && missile_distance_to_ship( missile, ship ) < 5000;
 }
 
-bool space_in_range( SHIP_DATA *ship, SPACE_DATA *object )
+bool space_in_range( const SHIP_DATA *ship, const SPACE_DATA *object )
 {
   return object && ship && ship->spaceobject
     && ship_distance_to_spaceobject( ship, object ) < 100000;
 }
 
-bool space_in_range_c( SHIP_DATA *ship, SPACE_DATA *object )
+bool space_in_range_c( const SHIP_DATA *ship, const SPACE_DATA *object )
 {
   return object && ship
     && ship_distance_to_spaceobject( ship, object ) < 10000;
 }
 
-bool space_in_range_h( SHIP_DATA *ship, SPACE_DATA *object )
+static bool space_in_range_h( const SHIP_DATA *ship, const SPACE_DATA *object )
 {
   return object && ship
     && vector_distance( &object->pos, &ship->hyperpos ) < object->gravity * 5;
@@ -1999,7 +1997,7 @@ void write_ship_list( void )
   fclose( fpout );
 }
 
-void save_ship( SHIP_DATA *ship )
+void save_ship( const SHIP_DATA *ship )
 {
   FILE *fp = NULL;
   char filename[256];
@@ -2102,7 +2100,7 @@ void save_ship( SHIP_DATA *ship )
   fclose( fp );
 }
 
-void fread_ship( SHIP_DATA *ship, FILE *fp )
+static void fread_ship( SHIP_DATA *ship, FILE *fp )
 {
   for ( ; ; )
     {
@@ -2359,7 +2357,7 @@ void fread_ship( SHIP_DATA *ship, FILE *fp )
  * Load a ship file
  */
 
-bool load_ship_file( const char *shipfile )
+static bool load_ship_file( const char *shipfile )
 {
   char filename[256];
   SHIP_DATA *ship = NULL;
@@ -3019,7 +3017,7 @@ bool is_rental( CHAR_DATA *ch , SHIP_DATA *ship )
   return FALSE;
 }
 
-bool candock( SHIP_DATA *ship )
+bool candock( const SHIP_DATA *ship )
 {
   int count = 0;
   SHIP_DATA *dship;

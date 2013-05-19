@@ -36,7 +36,7 @@ void do_target(CHAR_DATA *ch, char *argument )
           return;
         }
 
-      if ( autofly(ship) && ( !turret || !check_pilot( ch, ship ) ) )
+      if ( is_autoflying(ship) && ( !turret || !check_pilot( ch, ship ) ) )
         {
           send_to_char("&RYou'll have to turn off the ships autopilot first....\r\n",ch);
           return;
@@ -207,7 +207,7 @@ void do_target(CHAR_DATA *ch, char *argument )
   sound_to_room( ch->in_room , "!!SOUND(targetlock)" );
   learn_from_success( ch, gsn_weaponsystems );
 
-  if ( autofly(target) && !target->target0)
+  if ( is_autoflying(target) && !target->target0)
     {
       sprintf( buf , "You are being targetted by %s." , target->name);
       echo_to_cockpit( AT_BLOOD , ship , buf );

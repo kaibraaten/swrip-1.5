@@ -1,3 +1,4 @@
+#include "ships.h"
 #include "mud.h"
 
 void do_drag( CHAR_DATA *ch, char *argument )

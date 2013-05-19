@@ -27,6 +27,7 @@
 #include <stdarg.h>
 #include "mud.h"
 #include "arena.h"
+#include "ships.h"
 
 void init_supermob();
 

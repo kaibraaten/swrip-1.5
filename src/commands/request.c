@@ -1,6 +1,7 @@
 #include <string.h>
 #include "vector3_aux.h"
 #include "mud.h"
+#include "ships.h"
 
 void do_request(CHAR_DATA *ch, char *argument)
 {
@@ -62,7 +63,7 @@ void do_request(CHAR_DATA *ch, char *argument)
       return;
     }
 
-  if ( !autofly(eShip) )
+  if ( !is_autoflying(eShip) )
     {
       send_to_char("&RThe other ship needs to have its autopilot turned on.\r\n",ch);
       return;

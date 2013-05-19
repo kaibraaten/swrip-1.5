@@ -1,10 +1,10 @@
+#include "ships.h"
 #include "mud.h"
 
 void do_chaff( CHAR_DATA *ch, char *argument )
 {
   int the_chance;
   SHIP_DATA *ship;
-
 
   if (  (ship = ship_from_cockpit(ch->in_room->vnum))  == NULL )
     {
@@ -25,7 +25,7 @@ void do_chaff( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( autofly(ship) )
+  if ( is_autoflying(ship) )
     {
       send_to_char("&RYou'll have to turn the autopilot off first...\r\n",ch);
       return;

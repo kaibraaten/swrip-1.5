@@ -27,6 +27,7 @@
 #include <time.h>
 #include <ctype.h>
 #include "mud.h"
+#include "ships.h"
 
 void show_char_to_char( CHAR_DATA *list, CHAR_DATA *ch );
 bool check_illegal_psteal( CHAR_DATA *ch, CHAR_DATA *victim );

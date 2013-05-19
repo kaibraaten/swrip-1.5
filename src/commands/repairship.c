@@ -1,5 +1,6 @@
 #include <string.h>
 #include "mud.h"
+#include "ships.h"
 
 void do_repairship(CHAR_DATA *ch, char *argument )
 {

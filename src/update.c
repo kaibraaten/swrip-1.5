@@ -30,6 +30,7 @@
 #include "mud.h"
 #include "quest.h"
 #include "arena.h"
+#include "ships.h"
 
 /* from swskills.c */
 void add_reinforcements( CHAR_DATA *ch );
@@ -2462,7 +2463,6 @@ void reboot_check( time_t reset )
   if ( new_boot_time_t <= current_time )
     {
       CHAR_DATA *vch;
-      extern bool mud_down;
 
       if ( auction->item )
         {

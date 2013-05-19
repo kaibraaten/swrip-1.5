@@ -24,6 +24,7 @@
 #include <string.h>
 #include <ctype.h>
 #include "mud.h"
+#include "ships.h"
 
 extern char             lastplayercmd[MAX_INPUT_LENGTH];
 extern CHAR_DATA *      gch_prev;

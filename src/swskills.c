@@ -28,6 +28,7 @@
 #include <string.h>
 #include <time.h>
 #include "mud.h"
+#include "ships.h"
 
 void    add_reinforcements( CHAR_DATA *ch );
 ch_ret  one_hit( CHAR_DATA *ch, CHAR_DATA *victim, int dt );

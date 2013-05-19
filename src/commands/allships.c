@@ -1,4 +1,5 @@
 #include "mud.h"
+#include "ships.h"
 
 void do_allships( CHAR_DATA *ch, char *argument )
 {

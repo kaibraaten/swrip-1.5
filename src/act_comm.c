@@ -24,6 +24,7 @@
 #include <ctype.h>
 #include "mud.h"
 #include "vector3_aux.h"
+#include "ships.h"
 
 /*
  *  Externals

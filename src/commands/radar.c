@@ -1,3 +1,4 @@
+#include "ships.h"
 #include "mud.h"
 #include "vector3_aux.h"
 

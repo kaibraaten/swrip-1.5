@@ -1,7 +1,6 @@
 #include <string.h>
 #include "mud.h"
-
-extern bool mud_down;
+#include "ships.h"
 
 void do_shutdown( CHAR_DATA *ch, char *argument )
 {

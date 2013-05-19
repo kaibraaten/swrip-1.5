@@ -1,6 +1,7 @@
 #include <string.h>
 #include "vector3_aux.h"
 #include "mud.h"
+#include "ships.h"
 
 void do_tractorbeam(CHAR_DATA *ch, char *argument )
 {
@@ -49,7 +50,7 @@ void do_tractorbeam(CHAR_DATA *ch, char *argument )
           return;
         }
 
-      if ( autofly(ship) )
+      if ( is_autoflying(ship) )
         {
           send_to_char("&RYou'll have to turn off the ships autopilot first....\r\n",ch);
           return;
@@ -216,7 +217,7 @@ void do_tractorbeam(CHAR_DATA *ch, char *argument )
   sound_to_room( ch->in_room , "!!SOUND(targetlock)" );
   learn_from_success( ch, gsn_tractorbeams );
 
-  if ( autofly(target) && !target->target0 && str_cmp( target->owner, ship->owner ) )
+  if ( is_autoflying(target) && !target->target0 && str_cmp( target->owner, ship->owner ) )
     {
       sprintf( buf , "You are being targetted by %s." , target->name);
       echo_to_cockpit( AT_BLOOD , ship , buf );

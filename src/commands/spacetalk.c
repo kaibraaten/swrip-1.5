@@ -1,4 +1,5 @@
 #include "mud.h"
+#include "ships.h"
 
 void do_spacetalk( CHAR_DATA *ch, char *argument )
 {

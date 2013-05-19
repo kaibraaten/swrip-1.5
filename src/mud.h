@@ -288,6 +288,7 @@ struct  mob_prog_data
 };
 
 extern bool MOBtrigger;
+extern bool mud_down;
 
 /* race dedicated stuff */
 struct  race_type
@@ -2712,61 +2713,17 @@ extern "C" {
   int get_spelltarget( const char *txt  );
 
   /* space.c */
-  SHIP_DATA  * get_ship( const char *name );
-  void         load_ships( void );
-  void         save_ship( SHIP_DATA *ship );
+  void echo_to_room_dnr( int ecolor, ROOM_INDEX_DATA *room, const char *argument );
   void         load_spaceobjects( void );
   void         save_spaceobject( SPACE_DATA *spaceobject );
   SPACE_DATA * spaceobject_from_name( const char *name );
   SPACE_DATA * spaceobject_from_vnum( int vnum );
-  SHIP_DATA  * ship_from_obj( int vnum );
-  SHIP_DATA  * ship_from_entrance( int vnum );
-  SHIP_DATA  * ship_from_hanger( int vnum );
-  SHIP_DATA  * ship_from_cockpit( int vnum );
-  SHIP_DATA  * ship_from_navseat( int vnum );
-  SHIP_DATA  * ship_from_coseat( int vnum );
-  SHIP_DATA  * ship_from_pilotseat( int vnum );
-  SHIP_DATA  * ship_from_gunseat( int vnum );
-  SHIP_DATA  * ship_from_turret( int vnum );
-  SHIP_DATA  * ship_from_engine( int vnum );
-  SHIP_DATA  * get_ship_here( const char *name , SHIP_DATA *eShip );
   void         showspaceobject( CHAR_DATA *ch , SPACE_DATA *spaceobject );
-  void         update_shipmovement( void );
-  void         recharge_ships( void );
-  void         update_ships( void );
   void update_spaceobjects( void );
   void update_missiles( void );
-  bool         check_pilot( CHAR_DATA *ch , SHIP_DATA *ship );
-  bool         is_rental( CHAR_DATA *ch , SHIP_DATA *ship );
-  void         echo_to_ship( int color, SHIP_DATA *ship,
-			     const char *argument );
-  void         echo_to_cockpit( int color, SHIP_DATA *ship,
-				const char *argument );
-  void         echo_to_nearby_ships( int color, SHIP_DATA *ship,
-			       const char *argument, SHIP_DATA *ignore );
-  bool         extract_ship( SHIP_DATA *ship );
-  bool         ship_to_room( SHIP_DATA *ship, int vnum );
-  long         get_ship_value( SHIP_DATA *ship );
-  bool         rent_ship( CHAR_DATA *ch, SHIP_DATA *ship );
-  void         damage_ship( SHIP_DATA *ship, SHIP_DATA *assaulter,
-                            int min, int max );
-  void         damage_ship_ch( SHIP_DATA *ship, int min, int max, CHAR_DATA *ch);
-  void         destroy_ship( SHIP_DATA *ship , CHAR_DATA *ch );
-  void         ship_to_spaceobject( SHIP_DATA *ship, SPACE_DATA *spaceobject );
-  void         ship_from_spaceobject( SHIP_DATA *ship, SPACE_DATA *spaceobject);
   void         new_missile( SHIP_DATA *ship, SHIP_DATA *target, CHAR_DATA *ch,
                             int missiletype );
   void         extract_missile( MISSILE_DATA *missile );
-  SHIP_DATA * ship_in_room( ROOM_INDEX_DATA *room, const char *name );
-  void         transship( SHIP_DATA *ship , int destination );
-  bool ship_in_range( SHIP_DATA *ship, SHIP_DATA *target );
-  bool ship_in_range_c( SHIP_DATA *ship, SHIP_DATA *target );
-  bool missile_in_range( SHIP_DATA *ship, MISSILE_DATA *missile );
-  bool space_in_range( SHIP_DATA *ship, SPACE_DATA *object );
-  void dockship( CHAR_DATA *ch, SHIP_DATA *ship );
-  bool space_in_range_c( SHIP_DATA *ship, SPACE_DATA *object );
-  bool check_hostile( SHIP_DATA *ship );
-  bool autofly( SHIP_DATA *ship );
 
   /* comm.c */
   char *obj_short( const OBJ_DATA *obj );
@@ -2782,10 +2739,6 @@ extern "C" {
   void pager_printf(const CHAR_DATA *ch, const char *fmt, ...);
   void act( short AType, const char *format, CHAR_DATA *ch,
             const void *arg1, const void *arg2, int type );
-
-  /* ships.c */
-  bool ship_is_in_hyperspace( const SHIP_DATA *ship );
-  bool ship_is_disabled( const SHIP_DATA *ship );
 
   /* reset.c */
   char *sprint_reset( CHAR_DATA *ch, RESET_DATA *pReset, short num, bool rlist );

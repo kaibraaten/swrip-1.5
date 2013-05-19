@@ -1,4 +1,5 @@
 #include "mud.h"
+#include "ships.h"
 
 void do_autotrack( CHAR_DATA *ch, char *argument )
 {
@@ -40,7 +41,7 @@ void do_autotrack( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( autofly(ship)  )
+  if ( is_autoflying(ship)  )
     {
       send_to_char("&RYou'll have to turn off the ships autopilot first....\r\n",ch);
       return;

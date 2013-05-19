@@ -39,7 +39,7 @@ void do_launch( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( autofly(ship) )
+  if ( is_autoflying(ship) )
     {
       send_to_char("&RThe ship is set on autopilot, you'll have to turn it off first.\r\n",ch);
       return;

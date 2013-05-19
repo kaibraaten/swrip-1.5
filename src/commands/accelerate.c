@@ -26,7 +26,7 @@ void do_accelerate( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( autofly(ship) )
+  if ( is_autoflying(ship) )
     {
       send_to_char("&RYou'll have to turn off the ships autopilot first.\r\n",ch);
       return;

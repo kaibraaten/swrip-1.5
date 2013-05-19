@@ -146,7 +146,7 @@ void do_dock(CHAR_DATA *ch, char *argument)
       return;
     }
 
-  if ( autofly(eShip)  )
+  if ( is_autoflying(eShip)  )
     {
       send_to_char("&RThe other ship needs to turn their autopilot off.\r\n",ch);
       return;

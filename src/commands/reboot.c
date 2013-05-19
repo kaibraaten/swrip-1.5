@@ -1,6 +1,5 @@
+#include "ships.h"
 #include "mud.h"
-
-extern bool mud_down;
 
 void do_reboot( CHAR_DATA *ch, char *argument )
 {

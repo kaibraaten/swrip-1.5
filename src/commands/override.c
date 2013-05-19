@@ -1,6 +1,7 @@
 #include <string.h>
 #include "vector3_aux.h"
 #include "mud.h"
+#include "ships.h"
 
 void do_override(CHAR_DATA *ch, char *argument)
 {

@@ -28,6 +28,7 @@
 
 #include "mud.h"
 #include "vector3_aux.h"
+#include "ships.h"
 
 MISSILE_DATA *first_missile = NULL;
 MISSILE_DATA *last_missile = NULL;
@@ -146,7 +147,6 @@ char *  const   station_name [MAX_STATION] =
 bool    land_bus( SHIP_DATA *ship, int destination );
 void    launch_bus( SHIP_DATA *ship );
 #endif
-void    echo_to_room_dnr( int ecolor, ROOM_INDEX_DATA *room, const char *argument );
 
 void echo_to_room_dnr( int ecolor, ROOM_INDEX_DATA *room,
 		       const char *argument )

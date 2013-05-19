@@ -1,5 +1,6 @@
 #include "vector3_aux.h"
 #include "mud.h"
+#include "ships.h"
 
 void do_status(CHAR_DATA *ch, char *argument )
 {

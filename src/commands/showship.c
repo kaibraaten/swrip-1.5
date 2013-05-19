@@ -1,4 +1,5 @@
 #include "mud.h"
+#include "ships.h"
 
 void do_showship( CHAR_DATA *ch, char *argument )
 {
