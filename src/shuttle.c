@@ -43,10 +43,6 @@ SHUTTLE_DATA * create_shuttle( void )
   shuttle->type         = SHUTTLE_TURBOCAR;
   shuttle->delay                = shuttle->current_delay = 2;
   shuttle->start_room   = shuttle->end_room = shuttle->entrance = ROOM_VNUM_LIMBO;
-  /* Not used right now anyways */
-  shuttle->takeoff_desc = NULL;
-  shuttle->land_desc    = NULL;
-  shuttle->approach_desc        = NULL;
 
   return shuttle;
 }
@@ -147,13 +143,6 @@ bool save_shuttle( const SHUTTLE_DATA * shuttle )
   fprintf( fp, "StartRoom    %d\n",     shuttle->start_room);
   fprintf( fp, "EndRoom      %d\n",     shuttle->end_room);
   fprintf( fp, "Entrance      %d\n",    shuttle->entrance);
-  if (shuttle->takeoff_desc)
-    fprintf( fp, "Takeoff      %s~\n",  shuttle->takeoff_desc);
-  if (shuttle->land_desc)
-    fprintf( fp, "Land         %s~\n",  shuttle->land_desc);
-  if (shuttle->approach_desc)
-    fprintf( fp, "Approach     %s~\n",  shuttle->approach_desc);
-
 
   fprintf( fp, "End\n\n");
 
@@ -519,9 +508,6 @@ void fread_shuttle( SHUTTLE_DATA *shuttle, FILE *fp )
           fMatch = TRUE;
           fread_to_eol( fp );
           break;
-        case 'A':
-          KEY( "Approach", shuttle->approach_desc, fread_string_nohash(fp));
-          break;
 
         case 'C':
           KEY( "Current", shuttle->current_number, fread_number(fp));
@@ -552,10 +538,6 @@ void fread_shuttle( SHUTTLE_DATA *shuttle, FILE *fp )
           KEY( "Filename", shuttle->filename, fread_string_nohash(fp));
           break;
 
-        case 'L':
-          KEY( "Land", shuttle->land_desc, fread_string_nohash(fp));
-          break;
-
         case 'N':
           KEY( "Name",  shuttle->name, fread_string(fp));
           break;
@@ -567,7 +549,6 @@ void fread_shuttle( SHUTTLE_DATA *shuttle, FILE *fp )
 
         case 'T':
           KEY( "Type", shuttle->type, (SHUTTLE_CLASS) fread_number(fp));
-          KEY( "Takeoff", shuttle->takeoff_desc, fread_string_nohash(fp));
           break;
         }
 
@@ -642,19 +623,12 @@ void destroy_shuttle(SHUTTLE_DATA * shuttle)
 
   if (shuttle->name)
     STRFREE(shuttle->name);
-  if (shuttle->takeoff_desc)
-    STRFREE(shuttle->takeoff_desc);
+
   if (shuttle->filename)
     STRFREE(shuttle->filename);
-  if (shuttle->approach_desc)
-    STRFREE(shuttle->approach_desc);
-  if (shuttle->land_desc)
-    STRFREE(shuttle->land_desc);
 
   DISPOSE(shuttle);
   write_shuttle_list();
-
-  return;
 }
 
 SHUTTLE_DATA * shuttle_in_room( const ROOM_INDEX_DATA *room, const char *name )

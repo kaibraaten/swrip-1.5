@@ -4,6 +4,7 @@
 #endif
 
 #include "mud.h"
+#include "shuttle.h"
 
 void do_setshuttle(CHAR_DATA * ch, char * argument)
 {

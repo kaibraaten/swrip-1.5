@@ -1,4 +1,5 @@
 #include "mud.h"
+#include "shuttle.h"
 
 void do_showshuttle (CHAR_DATA * ch, char * argument)
 {

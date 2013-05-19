@@ -1,3 +1,4 @@
+#include "shuttle.h"
 #include "ships.h"
 #include "mud.h"
 

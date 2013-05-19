@@ -1,14 +1,10 @@
 #ifndef _SWRIP_SHUTTLE_H_
 #define _SWRIP_SHUTTLE_H_
 
-#define OLC_SHUTTLE
+#include "types.h"
 
 #define SHUTTLE_DIR     "../shuttle/"
 #define SHUTTLE_LIST    "shuttle.lst"
-
-
-typedef struct shuttle_data SHUTTLE_DATA;
-typedef struct stop_data    STOP_DATA;
 
 struct stop_data
 {
@@ -73,10 +69,6 @@ struct shuttle_data
   int           start_room;
   int           end_room;
   int           entrance;
-  /* Descriptions */
-  char *                takeoff_desc;
-  char *                land_desc;
-  char *                approach_desc;
 };
 
 #ifndef MSL

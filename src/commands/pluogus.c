@@ -1,4 +1,5 @@
 #include "mud.h"
+#include "shuttle.h"
 
 static void output_shuttle(CHAR_DATA * ch, SHUTTLE_DATA * shuttle);
 

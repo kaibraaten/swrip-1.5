@@ -162,4 +162,27 @@ typedef struct member_list             MEMBER_LIST; /* List of members in clan *
 struct membersort_data;
 typedef struct membersort_data         MS_DATA;     /* List for sorted roster list */
 
+struct shuttle_data;
+typedef struct shuttle_data SHUTTLE_DATA;
+
+struct stop_data;
+typedef struct stop_data STOP_DATA;
+
+/*
+ * Function types.
+ */
+typedef void    DO_FUN          ( CHAR_DATA *ch, char *argument );
+typedef bool    SPEC_FUN        ( CHAR_DATA *ch );
+typedef ch_ret  SPELL_FUN       ( int sn, int level, CHAR_DATA *ch, void *vo );
+
+#ifdef __cplusplus
+#define DECLARE_DO_FUN( fun )    extern "C" { DO_FUN    fun; } DO_FUN fun##_mangled
+#define DECLARE_SPEC_FUN( fun )  extern "C" { SPEC_FUN  fun; } SPEC_FUN fun##_mangled
+#define DECLARE_SPELL_FUN( fun ) extern "C" { SPELL_FUN fun; } SPELL_FUN fun##_mangled
+#else
+#define DECLARE_DO_FUN( fun )           DO_FUN    fun
+#define DECLARE_SPEC_FUN( fun )         SPEC_FUN  fun
+#define DECLARE_SPELL_FUN( fun )        SPELL_FUN fun
+#endif
+
 #endif

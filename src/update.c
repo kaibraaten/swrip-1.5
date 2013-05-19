@@ -31,6 +31,7 @@
 #include "quest.h"
 #include "arena.h"
 #include "ships.h"
+#include "shuttle.h"
 
 /* from swskills.c */
 void add_reinforcements( CHAR_DATA *ch );

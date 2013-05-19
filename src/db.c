@@ -28,6 +28,7 @@
 #include "mud.h"
 #include "arena.h"
 #include "ships.h"
+#include "shuttle.h"
 
 void init_supermob();
 
