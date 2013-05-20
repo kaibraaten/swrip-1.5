@@ -1,3 +1,11 @@
 * do_reply does not check for the presence of a comlink.
+
 * show_members() in clans.c: Sorted member data allocated but never
   freed, causing memory leak every time the function is called.
+
+* parse_target() in interp.c allocates strings with strdup, but the
+  memory doesn't appear to be freed anywhere. Investigate.
+
+* It would seem to me that the entire quest system is disabled seeing
+  as spec_questmaster() returns FALSE every time. Look into this, and
+  remove the entire quest code if its not actually used.
