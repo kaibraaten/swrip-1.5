@@ -602,6 +602,13 @@ typedef enum
 #define WANTED_WROONA           VIP_WROONA
 #define WANTED_DATHOMIR         VIP_DATHOMIR
 #define WANTED_SULLUST          VIP_SULLUST
+
+#define ROOM_JAIL_MON_CALAMARI_1   21148
+#define ROOM_JAIL_MON_CALAMARI_2   21149
+#define ROOM_JAIL_QUARREN_1     6931
+#define ROOM_JAIL_QUARREN_2     6932
+#define ROOM_JAIL_ADARI        29108
+
 /*
  * Bits for 'affected_by'.
  / * Used in #MOBILES.

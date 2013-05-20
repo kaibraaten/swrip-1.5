@@ -643,6 +643,7 @@ $(ODIR)/%.o:	%.c
 -include $(ODIR)/$(CMDDIR)/*.d
 -include $(ODIR)/$(MPDIR)/*.d
 -include $(ODIR)/$(SPELLDIR)/*.d
+-include $(ODIR)/$(SPECDIR)/*.d
 
 clean:
-		-rm -f ../bin/$(BINARY) *~ $(ODIR)/*.o $(ODIR)/*.d $(ODIR)/$(CMDDIR)/*.o $(ODIR)/$(CMDDIR)/*.d $(ODIR)/$(MPDIR)/*.o $(ODIR)/$(MPDIR)/*.d $(ODIR)/$(SPELLDIR)/*.o $(ODIR)/$(SPELLDIR)/*.d ../area/core.*
+		-rm -f ../bin/$(BINARY) *~ $(ODIR)/*.o $(ODIR)/*.d $(ODIR)/$(CMDDIR)/*.o $(ODIR)/$(CMDDIR)/*.d $(ODIR)/$(MPDIR)/*.o $(ODIR)/$(MPDIR)/*.d $(ODIR)/$(SPELLDIR)/*.o $(ODIR)/$(SPELLDIR)/*.d ../area/core.* $(ODIR)/$(SPECDIR)/*.o $(ODIR)/$(SPECDIR)/*.d
