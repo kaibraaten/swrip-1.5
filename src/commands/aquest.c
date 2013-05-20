@@ -87,8 +87,11 @@ void do_aquest(CHAR_DATA *ch, char *argument)
 
   for ( questman = ch->in_room->first_person; questman != NULL; questman = questman->next_in_room )
     {
-      if (!IS_NPC(questman)) continue;
-      if (questman->spec_fun == spec_lookup( "spec_questmaster" )) break;
+      if (!IS_NPC(questman))
+	continue;
+
+      if (questman->spec_fun == spec_lookup( "spec_questmaster" ))
+	break;
     }
 
   if (questman == NULL || questman->spec_fun != spec_lookup( "spec_questmaster" ))

@@ -32,6 +32,7 @@ endif
 CMDDIR = commands
 MPDIR = mpcommands
 SPELLDIR = spells
+SPECDIR = special
 
 ODIR = obj
 _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
@@ -510,6 +511,29 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(MPDIR)/mpslay.o \
 	$(MPDIR)/mptransfer.o \
 	$(MPDIR)/mpwithdraw.o \
+	$(SPECDIR)/auth.o \
+	$(SPECDIR)/clanguard.o \
+	$(SPECDIR)/customsalcohol.o \
+	$(SPECDIR)/customssmut.o \
+	$(SPECDIR)/customsspice.o \
+	$(SPECDIR)/customsweapons.o \
+	$(SPECDIR)/darkjedi.o \
+	$(SPECDIR)/jedi.o\
+	$(SPECDIR)/jedihealer.o \
+	$(SPECDIR)/fido.o \
+	$(SPECDIR)/guardian.o \
+	$(SPECDIR)/janitor.o \
+	$(SPECDIR)/newbiepilot.o \
+	$(SPECDIR)/poison.o \
+	$(SPECDIR)/police.o \
+	$(SPECDIR)/policeattack.o \
+	$(SPECDIR)/policefine.o \
+	$(SPECDIR)/policejail.o \
+	$(SPECDIR)/policeundercover.o \
+	$(SPECDIR)/questmaster.o \
+	$(SPECDIR)/rebeltrooper.o \
+	$(SPECDIR)/stormtrooper.o \
+	$(SPECDIR)/thief.o \
 	$(SPELLDIR)/acetumprimus.o \
 	$(SPELLDIR)/acidblast.o \
 	$(SPELLDIR)/acidbreath.o \

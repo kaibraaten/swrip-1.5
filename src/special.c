@@ -222,13 +222,6 @@ bool spec_newbie_pilot( CHAR_DATA *ch )
           echo_to_room( AT_ACTION , ch->in_room, buf );
           break;
 
-          /*
-            case RACE_NOGHRI:
-            home = 1001;
-            strcpy ( buf , "After a brief journey you arrive at Honoghr's Nystao Spaceport.\r\n\r\n" );
-            echo_to_room( AT_ACTION , ch->in_room, buf );
-            break;
-          */
         default:
           sprintf ( buf , "Hmm, a %s." , race_table[victim->race].race_name );
           do_look ( ch, victim->name );
@@ -272,48 +265,39 @@ bool spec_jedi( CHAR_DATA *ch )
   switch ( number_bits( 3 ) )
     {
     case 0:
-      /*    act( AT_MAGIC, "$n utters the word 'ciroht'.", ch, NULL, NULL, TO_ROOM ); */
       spell_smaug( skill_lookup( "armor" ), ch->top_level, ch, victim );
       return TRUE;
 
     case 1:
-      /*    act( AT_MAGIC, "$n utters the word 'sunimod'.", ch, NULL, NULL, TO_ROOM );*/
       spell_smaug( skill_lookup( "alertness" ), ch->top_level, ch, victim );
       return TRUE;
 
     case 2:
-      /*    act( AT_MAGIC, "$n utters the word 'suah'.", ch, NULL, NULL, TO_ROOM );*/
       spell_cure_blindness( skill_lookup( "cure blindness" ),
                             ch->top_level, ch, victim );
       return TRUE;
 
     case 3:
-      /*    act( AT_MAGIC, "$n utters the word 'nran'.", ch, NULL, NULL, TO_ROOM );*/
       spell_smaug( skill_lookup( "cure light" ),
                    ch->top_level, ch, victim );
       return TRUE;
 
     case 4:
-      /*    act( AT_MAGIC, "$n utters the word 'nyrcs'.", ch, NULL, NULL, TO_ROOM );*/
       spell_cure_poison( skill_lookup( "cure poison" ),
                          ch->top_level, ch, victim );
       return TRUE;
 
     case 5:
-      /*    act( AT_MAGIC, "$n utters the word 'gartla'.", ch, NULL, NULL, TO_ROOM );*/
       spell_smaug( skill_lookup( "refresh" ), ch->top_level, ch, victim );
       return TRUE;
 
     case 6:
-      /*    act( AT_MAGIC, "$n utters the word 'naimad'.", ch, NULL, NULL, TO_ROOM );*/
       spell_smaug( skill_lookup( "cure serious" ), ch->top_level, ch, victim );
       return TRUE;
 
     case 7:
-      /*    act( AT_MAGIC, "$n utters the word 'gorog'.", ch, NULL, NULL, TO_ROOM );*/
       spell_smaug( skill_lookup( "beauty" ), ch->top_level, ch, victim );
       return TRUE;
-
     }
 
   return FALSE;
@@ -937,34 +921,12 @@ bool spec_police_jail( CHAR_DATA *ch )
                 char_from_room( victim );
                 char_to_room( victim , jail );
               }
+
             return TRUE;
           }
-
     }
 
   return FALSE;
-
-  /*
-    VIP_CORUSCANT           BV00
-    VIP_KASHYYYK            BV01
-    VIP_RYLOTH              BV02
-    VIP_RODIA               BV03
-    VIP_NAL_HUTTA           BV04
-    VIP_MON_CALAMARI        BV05
-    VIP_HONOGHR             BV06
-    VIP_GAMORR              BV07
-    VIP_TATOOINE            BV08
-    VIP_ADARI               BV09
-    VIP_BYSS                BV10
-    VIP_ENDOR               BV11
-    VIP_ROCHE               BV12
-    VIP_AF_EL               BV13
-    VIP_TRANDOSH            BV14
-    VIP_CHAD                BV15
-  */
-
-  jail = get_room_index( ROOM_JAIL_CORUSCANT );
-
 }
 
 bool spec_jedi_healer( CHAR_DATA *ch )
@@ -1073,11 +1035,11 @@ bool spec_dark_jedi( CHAR_DATA *ch )
 
   if ( ( sn = skill_lookup( spell ) ) < 0 )
     return FALSE;
+
   (*skill_table[sn]->spell_fun) ( sn, ch->top_level, ch, victim );
+
   return TRUE;
 }
-
-
 
 bool spec_fido( CHAR_DATA *ch )
 {
@@ -1168,7 +1130,6 @@ bool spec_rebel_trooper( CHAR_DATA *ch )
     }
 
   return FALSE;
-
 }
 
 
@@ -1372,13 +1333,3 @@ bool spec_auth( CHAR_DATA *ch )
   return FALSE;
 
 }
-
-/*
-  bool spec_random_pop( CHAR_DATA *ch )
-  {
-
-  int ran_array[MAX_RAN_POP] = { 309, 205, 10510, 28209, 29087, 26000, 1030, 5555,
-  3026, 6230, 7340, 11215, 21050, 540, 28100, 28612,
-  };
-  }
-*/

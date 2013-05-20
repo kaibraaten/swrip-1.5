@@ -25,7 +25,7 @@
 #include <ctype.h>
 #include "mud.h"
 
-ROOM_INDEX_DATA * vroom_hash [64];
+ROOM_INDEX_DATA *vroom_hash[64];
 
 int wherehome( const CHAR_DATA *ch)
 {
@@ -70,38 +70,7 @@ int wherehome( const CHAR_DATA *ch)
   return ROOM_VNUM_TEMPLE;
 }
 
-char *grab_word( char *argument, char *arg_first )
-{
-  char cEnd;
-  short count;
-
-  count = 0;
-
-  while ( isspace(*argument) )
-    argument++;
-
-  cEnd = ' ';
-  if ( *argument == '\'' || *argument == '"' )
-    cEnd = *argument++;
-
-  while ( *argument != '\0' || ++count >= 255 )
-    {
-      if ( *argument == cEnd )
-        {
-          argument++;
-          break;
-        }
-      *arg_first++ = *argument++;
-    }
-  *arg_first = '\0';
-
-  while ( isspace(*argument) )
-    argument++;
-
-  return argument;
-}
-
-void decorate_room( ROOM_INDEX_DATA *room )
+static void decorate_room( ROOM_INDEX_DATA *room )
 {
   char buf[MAX_STRING_LENGTH];
   char buf2[MAX_STRING_LENGTH];
@@ -159,7 +128,7 @@ void decorate_room( ROOM_INDEX_DATA *room )
 /*
  * Remove any unused virtual rooms                              -Thoric
  */
-void clear_vrooms( )
+void clear_vrooms( void )
 {
   int hash;
   ROOM_INDEX_DATA *room, *room_next, *prev;
@@ -423,8 +392,8 @@ ch_ret move_char( CHAR_DATA *ch, EXIT_DATA *pexit, int fall )
   ROOM_INDEX_DATA *to_room;
   ROOM_INDEX_DATA *from_room;
   char buf[MAX_STRING_LENGTH];
-  char *txt;
-  char *dtxt;
+  const char *txt;
+  const char *dtxt;
   ch_ret retcode;
   short door, distance;
   bool drunk = FALSE;
@@ -579,27 +548,7 @@ ch_ret move_char( CHAR_DATA *ch, EXIT_DATA *pexit, int fall )
 
   if ( !fall && !IS_NPC(ch) )
     {
-      /*int iClass;*/
       int move;
-      /* Pretty sure we don't need to check for guilds anymore now that we have
-         the new dh. -- Narn
-      */
-      /*
-        for ( iClass = 0; iClass < MAX_CLASS; iClass++ )
-        {
-        if ( iClass != ch->class
-        &&   to_room->vnum == class_table[iClass]->guild )
-        {
-        send_to_char( "You aren't allowed in there.\r\n", ch );
-        return rNONE;
-        }
-        }
-      */
-
-      /* Prevent deadlies from entering a nopkill-flagged area from a
-         non-flagged area, but allow them to move around if already
-         inside a nopkill area. - Blodkai
-      */
 
       if ( in_room->sector_type == SECT_AIR
            ||   to_room->sector_type == SECT_AIR
@@ -760,6 +709,7 @@ ch_ret move_char( CHAR_DATA *ch, EXIT_DATA *pexit, int fall )
             move = movement_loss[UMIN(SECT_MAX-1, in_room->sector_type)];
           else
             move = 1;
+
           if ( ch->mount->move < move )
             {
               send_to_char( "Your mount is too exhausted.\r\n", ch );
@@ -768,13 +718,14 @@ ch_ret move_char( CHAR_DATA *ch, EXIT_DATA *pexit, int fall )
         }
       else
         {
-
           hpmove = 500/( ch->hit? ch->hit : 1 );
+
           if ( !IS_AFFECTED(ch, AFF_FLYING)
                &&   !IS_AFFECTED(ch, AFF_FLOATING) )
             move = hpmove*encumbrance( ch, movement_loss[UMIN(SECT_MAX-1, in_room->sector_type)] );
           else
             move = 1;
+
           if ( ch->move < move )
             {
               send_to_char( "You are too exhausted.\r\n", ch );
