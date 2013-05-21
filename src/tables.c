@@ -31,8 +31,8 @@
 int top_sn;
 int top_herb;
 
-SKILLTYPE *             skill_table     [MAX_SKILL];
-SKILLTYPE *             herb_table      [MAX_HERB];
+SKILLTYPE *skill_table[MAX_SKILL];
+SKILLTYPE *herb_table[MAX_HERB];
 
 #ifdef SWRIP_USE_DLSYM
 
