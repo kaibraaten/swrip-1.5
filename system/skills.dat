@@ -1834,19 +1834,6 @@ Minlevel     100
 End
 
 #SKILL
-Name         gemcutting~
-Type         Skill
-Flags        0
-Minpos       5
-Guild        2
-Code         do_gemcutting
-Dammsg       ~
-Wearoff      !done!~
-Teachers     32010 206~
-Minlevel     50
-End
-
-#SKILL
 Name         gouge~
 Type         Skill
 Flags        0
@@ -2184,13 +2171,13 @@ Minlevel     70
 End
 
 #SKILL
-Name         mass_propeganda~
+Name         mass_propaganda~
 Type         Skill
 Flags        0
 Minpos       8
 Rounds       12
 Guild        5
-Code         do_mass_propeganda
+Code         do_mass_propaganda
 Dammsg       ~
 Wearoff      !!~
 Teachers     10104 10504~
@@ -2352,13 +2339,13 @@ Minlevel     35
 End
 
 #SKILL
-Name         propeganda~
+Name         propaganda~
 Type         Skill
 Flags        0
 Minpos       8
 Rounds       4
 Guild        5
-Code         do_propeganda
+Code         do_propaganda
 Dammsg       ~
 Wearoff      !!~
 Teachers     10104~
