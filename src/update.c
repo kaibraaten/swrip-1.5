@@ -33,9 +33,6 @@
 #include "ships.h"
 #include "shuttle.h"
 
-/* from swskills.c */
-void add_reinforcements( CHAR_DATA *ch );
-
 /* mud_prog.c */
 void room_act_update( void );
 void obj_act_update( void );

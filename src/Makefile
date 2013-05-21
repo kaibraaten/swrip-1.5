@@ -46,6 +46,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/accelerate.o \
 	$(CMDDIR)/accept.o \
 	$(CMDDIR)/addbounty.o \
+	$(CMDDIR)/addpatrol.o \
 	$(CMDDIR)/addpilot.o \
 	$(CMDDIR)/addresident.o \
 	$(CMDDIR)/addsalary.o \
@@ -91,15 +92,18 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/bashdoor.o \
 	$(CMDDIR)/badname.o \
 	$(CMDDIR)/beep.o \
+	$(CMDDIR)/beg.o \
 	$(CMDDIR)/berserk.o \
 	$(CMDDIR)/bestow.o \
 	$(CMDDIR)/bestowarea.o \
 	$(CMDDIR)/bet.o \
+	$(CMDDIR)/bind.o \
 	$(CMDDIR)/bio.o \
 	$(CMDDIR)/board.o \
 	$(CMDDIR)/boards.o \
 	$(CMDDIR)/bodybag.o \
 	$(CMDDIR)/bounties.o \
+	$(CMDDIR)/bribe.o \
 	$(CMDDIR)/buy.o \
 	$(CMDDIR)/buyhome.o \
 	$(CMDDIR)/buzz.o \
@@ -143,6 +147,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/copyship.o \
 	$(CMDDIR)/credits.o \
 	$(CMDDIR)/cset.o \
+	$(CMDDIR)/cutdoor.o \
 	$(CMDDIR)/decline.o \
 	$(CMDDIR)/delay.o \
 	$(CMDDIR)/demote.o \
@@ -154,6 +159,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/dig.o \
 	$(CMDDIR)/disarm.o \
 	$(CMDDIR)/disconnect.o \
+	$(CMDDIR)/disguise.o \
 	$(CMDDIR)/dismiss.o \
 	$(CMDDIR)/dismount.o \
 	$(CMDDIR)/dmsg.o \
@@ -168,6 +174,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/east.o \
 	$(CMDDIR)/eat.o \
 	$(CMDDIR)/echo.o \
+	$(CMDDIR)/eliteguard.o \
 	$(CMDDIR)/emote.o \
 	$(CMDDIR)/empower.o \
 	$(CMDDIR)/empty.o \
@@ -178,6 +185,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/exits.o \
 	$(CMDDIR)/fill.o \
 	$(CMDDIR)/fire.o \
+	$(CMDDIR)/firstaid.o \
 	$(CMDDIR)/fixchar.o \
 	$(CMDDIR)/flee.o \
 	$(CMDDIR)/focusalias.o \
@@ -190,6 +198,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/fquit.o \
 	$(CMDDIR)/freeze.o \
 	$(CMDDIR)/fuel.o \
+	$(CMDDIR)/gatherintelligence.o \
 	$(CMDDIR)/get.o \
 	$(CMDDIR)/give.o \
 	$(CMDDIR)/glance.o \
@@ -205,6 +214,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/hedit.o \
 	$(CMDDIR)/hell.o \
 	$(CMDDIR)/hide.o \
+	$(CMDDIR)/hijack.o \
 	$(CMDDIR)/hitall.o \
 	$(CMDDIR)/hlist.o \
 	$(CMDDIR)/holylight.o \
@@ -225,6 +235,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/inventory.o \
 	$(CMDDIR)/invis.o \
 	$(CMDDIR)/invite.o \
+	$(CMDDIR)/jail.o \
 	$(CMDDIR)/jumpvector.o \
 	$(CMDDIR)/junk.o \
 	$(CMDDIR)/kick.o \
@@ -246,19 +257,35 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/look.o \
 	$(CMDDIR)/low_purge.o \
 	$(CMDDIR)/mailroom.o \
+	$(CMDDIR)/makearmor.o \
+	$(CMDDIR)/makeblade.o \
+	$(CMDDIR)/makeblaster.o \
 	$(CMDDIR)/makeboard.o \
+	$(CMDDIR)/makebowcaster.o \
 	$(CMDDIR)/makeclan.o \
+	$(CMDDIR)/makecomlink.o \
+	$(CMDDIR)/makecontainer.o \
+	$(CMDDIR)/makedisguise.o \
+	$(CMDDIR)/makegrenade.o \
+	$(CMDDIR)/makejewelry.o \
+	$(CMDDIR)/makelandmine.o \
+	$(CMDDIR)/makelight.o \
+	$(CMDDIR)/makelightsaber.o \
 	$(CMDDIR)/makeplanet.o \
 	$(CMDDIR)/makerepair.o \
+	$(CMDDIR)/makeshield.o \
 	$(CMDDIR)/makeship.o \
 	$(CMDDIR)/makeshuttle.o \
 	$(CMDDIR)/makeshop.o \
 	$(CMDDIR)/makespaceobject.o \
+	$(CMDDIR)/makespice.o \
 	$(CMDDIR)/makewizlist.o \
 	$(CMDDIR)/massign.o \
+	$(CMDDIR)/masspropaganda.o \
 	$(CMDDIR)/mcreate.o \
 	$(CMDDIR)/members.o \
 	$(CMDDIR)/memory.o \
+	$(CMDDIR)/mine.o \
 	$(CMDDIR)/mfind.o \
 	$(CMDDIR)/minvoke.o \
 	$(CMDDIR)/mlist.o \
@@ -309,13 +336,16 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/password.o \
 	$(CMDDIR)/peace.o \
 	$(CMDDIR)/pick.o \
+	$(CMDDIR)/pickshiplock.o \
 	$(CMDDIR)/placevendor.o \
 	$(CMDDIR)/planets.o \
 	$(CMDDIR)/pluogus.o \
 	$(CMDDIR)/poisonweapon.o \
+	$(CMDDIR)/postguard.o \
 	$(CMDDIR)/practice.o \
 	$(CMDDIR)/pricevendor.o \
 	$(CMDDIR)/prompt.o \
+	$(CMDDIR)/propaganda.o \
 	$(CMDDIR)/pull.o \
 	$(CMDDIR)/punch.o \
 	$(CMDDIR)/purge.o \
@@ -335,6 +365,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/recho.o \
 	$(CMDDIR)/redit.o \
 	$(CMDDIR)/regoto.o \
+	$(CMDDIR)/reinforcements.o \
 	$(CMDDIR)/reload.o \
 	$(CMDDIR)/rembounty.o \
 	$(CMDDIR)/remove.o \
@@ -380,6 +411,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/scribe.o \
 	$(CMDDIR)/search.o \
 	$(CMDDIR)/sedit.o \
+	$(CMDDIR)/seduce.o \
 	$(CMDDIR)/sell.o \
 	$(CMDDIR)/sellhome.o \
 	$(CMDDIR)/sellship.o \
@@ -415,8 +447,10 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/sleep.o \
 	$(CMDDIR)/slist.o \
 	$(CMDDIR)/slookup.o \
+	$(CMDDIR)/smalltalk.o \
 	$(CMDDIR)/smoke.o \
 	$(CMDDIR)/sneak.o \
+	$(CMDDIR)/snipe.o \
 	$(CMDDIR)/snoop.o \
 	$(CMDDIR)/sober.o \
 	$(CMDDIR)/socials.o \
@@ -427,6 +461,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/spaceobjects.o \
 	$(CMDDIR)/spacetalk.o \
 	$(CMDDIR)/speak.o \
+	$(CMDDIR)/specialforces.o \
 	$(CMDDIR)/speeders.o \
 	$(CMDDIR)/split.o \
 	$(CMDDIR)/sset.o \
@@ -443,10 +478,12 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/target.o \
 	$(CMDDIR)/teach.o \
 	$(CMDDIR)/tell.o \
+	$(CMDDIR)/throw.o \
 	$(CMDDIR)/time.o \
 	$(CMDDIR)/timecmd.o \
 	$(CMDDIR)/title.o \
 	$(CMDDIR)/toplevel.o \
+	$(CMDDIR)/torture.o \
 	$(CMDDIR)/tractorbeam.o \
 	$(CMDDIR)/train.o \
 	$(CMDDIR)/trajectory.o \
@@ -459,6 +496,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/unfoldarea.o \
 	$(CMDDIR)/unfocusalias.o \
 	$(CMDDIR)/unhell.o \
+	$(CMDDIR)/unjail.o \
 	$(CMDDIR)/unlock.o \
 	$(CMDDIR)/unsilence.o \
 	$(CMDDIR)/up.o \

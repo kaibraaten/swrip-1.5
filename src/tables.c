@@ -487,7 +487,7 @@ static const DO_FUN_ENTRY command_fun_table[] = {
       if ( !str_cmp( name, "do_makewizlist" ))  return do_makewizlist;
       if ( !str_cmp( name, "do_makeplanet" ))           return do_makeplanet;
       if ( !str_cmp( name, "do_massign" ))              return do_massign;
-      if ( !str_cmp( name, "do_mass_propeganda" ))      return do_mass_propeganda;
+      if ( !str_cmp( name, "do_mass_propaganda" ))      return do_mass_propaganda;
       if ( !str_cmp( name, "do_mcreate" ))              return do_mcreate;
       if ( !str_cmp( name, "do_memory" ))               return do_memory;
       if ( !str_cmp( name, "do_members" ))              return do_members;
@@ -591,7 +591,7 @@ static const DO_FUN_ENTRY command_fun_table[] = {
       if ( !str_cmp( name, "do_practice" ))             return do_practice;
       if ( !str_cmp( name, "do_pricevendor" ))  return do_pricevendor;
       if ( !str_cmp( name, "do_prompt" ))               return do_prompt;
-      if ( !str_cmp( name, "do_propeganda" ))           return do_propeganda;
+      if ( !str_cmp( name, "do_propaganda" ))           return do_propaganda;
       if ( !str_cmp( name, "do_pull" ))         return do_pull;
       if ( !str_cmp( name, "do_punch" ))                return do_punch;
       if ( !str_cmp( name, "do_purge" ))                return do_purge;

@@ -30,7 +30,6 @@
 #include "mud.h"
 #include "ships.h"
 
-void    add_reinforcements( CHAR_DATA *ch );
 bool    aff_paralysis( CHAR_DATA *ch, CHAR_DATA *victim );
 
 void do_makeblade( CHAR_DATA *ch, char *argument )
@@ -2621,17 +2620,6 @@ void do_makecontainer( CHAR_DATA *ch, char *argument )
   learn_from_success( ch, gsn_makecontainer );
 }
 
-void do_makemissile( CHAR_DATA *ch, char *argument )
-{
-  /* don't think we really need this */
-  send_to_char( "&RSorry, this skill isn't finished yet :(\r\n", ch);
-}
-
-void do_gemcutting( CHAR_DATA *ch, char *argument )
-{
-  send_to_char( "&RSorry, this skill isn't finished yet :(\r\n", ch);
-}
-
 void do_reinforcements( CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
@@ -4589,7 +4577,7 @@ void do_smalltalk ( CHAR_DATA *ch , char *argument )
     planet->pop_support = 100;
 }
 
-void do_propeganda ( CHAR_DATA *ch , char *argument )
+void do_propaganda ( CHAR_DATA *ch , char *argument )
 {
   char buf  [MAX_STRING_LENGTH];
   char arg1 [MAX_INPUT_LENGTH];
@@ -4614,7 +4602,7 @@ void do_propeganda ( CHAR_DATA *ch , char *argument )
 
   if ( arg1[0] == '\0' )
     {
-      send_to_char( "Spread propeganda to who?\r\n", ch );
+      send_to_char( "Spread propaganda to who?\r\n", ch );
       return;
     }
 
@@ -4688,9 +4676,9 @@ void do_propeganda ( CHAR_DATA *ch , char *argument )
       act( AT_ACTION, "$n speaks about his organization.\r\n", ch, NULL, victim, TO_VICT    );
       act( AT_ACTION, "$n tells $N about their organization.\r\n",  ch, NULL, victim, TO_NOTVICT );
     }
-  WAIT_STATE( ch, skill_table[gsn_propeganda]->beats );
+  WAIT_STATE( ch, skill_table[gsn_propaganda]->beats );
 
-  if ( victim->top_level - get_curr_cha(ch) > ch->pcdata->learned[gsn_propeganda]  )
+  if ( victim->top_level - get_curr_cha(ch) > ch->pcdata->learned[gsn_propaganda]  )
     {
 
       if ( (ch->pcdata->clan) ? planet->governed_by != clan : TRUE)
@@ -4717,7 +4705,7 @@ void do_propeganda ( CHAR_DATA *ch , char *argument )
   gain_exp(ch, DIPLOMACY_ABILITY, victim->top_level * 100 );
   ch_printf( ch , "You gain %d diplomacy experience.\r\n", victim->top_level*100 );
 
-  learn_from_success( ch, gsn_propeganda );
+  learn_from_success( ch, gsn_propaganda );
 
   if ( planet->pop_support > 100 )
     planet->pop_support = 100;
@@ -4912,7 +4900,7 @@ void do_seduce ( CHAR_DATA *ch , char *argument )
 
 }
 
-void do_mass_propeganda ( CHAR_DATA *ch , char *argument )
+void do_mass_propaganda ( CHAR_DATA *ch , char *argument )
 {
   char buf  [MAX_STRING_LENGTH];
   char arg1 [MAX_INPUT_LENGTH];
@@ -4931,7 +4919,7 @@ void do_mass_propeganda ( CHAR_DATA *ch , char *argument )
 
   if ( arg1[0] == '\0' )
     {
-      send_to_char( "Spread propeganda to who?\r\n", ch );
+      send_to_char( "Spread propaganda to who?\r\n", ch );
       return;
     }
 
@@ -4996,9 +4984,9 @@ void do_mass_propeganda ( CHAR_DATA *ch , char *argument )
   act( AT_ACTION, "$n speaks about his organization.\r\n", ch, NULL, victim, TO_VICT    );
   act( AT_ACTION, "$n tells $N about their organization.\r\n",  ch, NULL, victim, TO_NOTVICT );
 
-  WAIT_STATE( ch, skill_table[gsn_masspropeganda]->beats );
+  WAIT_STATE( ch, skill_table[gsn_masspropaganda]->beats );
 
-  if ( percent - get_curr_cha(ch) + victim->top_level > ch->pcdata->learned[gsn_masspropeganda]  )
+  if ( percent - get_curr_cha(ch) + victim->top_level > ch->pcdata->learned[gsn_masspropaganda]  )
     {
 
       if ( planet->governed_by != clan )
@@ -5025,7 +5013,7 @@ void do_mass_propeganda ( CHAR_DATA *ch , char *argument )
   gain_exp(ch, DIPLOMACY_ABILITY, victim->top_level * 100 );
   ch_printf( ch , "You gain %d diplomacy experience.\r\n", victim->top_level*100 );
 
-  learn_from_success( ch, gsn_masspropeganda );
+  learn_from_success( ch, gsn_masspropaganda );
 
   if ( planet->pop_support > 100 )
     planet->pop_support = 100;

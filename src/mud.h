@@ -1397,10 +1397,10 @@ extern short   gsn_eliteguard;
 extern short   gsn_specialforces;
 extern short   gsn_jail;
 extern short   gsn_smalltalk;
-extern short   gsn_propeganda;
+extern short   gsn_propaganda;
 extern short   gsn_bribe;
 extern short   gsn_seduce;
-extern short   gsn_masspropeganda;
+extern short   gsn_masspropaganda;
 extern short   gsn_gather_intelligence;
 
 extern short   gsn_torture;
@@ -1424,7 +1424,6 @@ extern short   gsn_makelandmine;
 extern short   gsn_makearmor;
 extern short   gsn_makeshield;
 extern short   gsn_makecontainer;
-extern short   gsn_gemcutting;
 extern short   gsn_lightsaber_crafting;
 extern short   gsn_spice_refining;
 extern short   gsn_fake_signal;
@@ -1914,10 +1913,10 @@ DECLARE_DO_FUN( do_jail );
 DECLARE_DO_FUN( do_unjail );
 DECLARE_DO_FUN( do_elite_guard );
 DECLARE_DO_FUN( do_smalltalk );
-DECLARE_DO_FUN( do_propeganda );
+DECLARE_DO_FUN( do_propaganda );
 DECLARE_DO_FUN( do_bribe );
 DECLARE_DO_FUN( do_seduce );
-DECLARE_DO_FUN( do_mass_propeganda );
+DECLARE_DO_FUN( do_mass_propaganda );
 DECLARE_DO_FUN( do_copyship  );
 DECLARE_DO_FUN( do_sound  );
 DECLARE_DO_FUN( do_autopilot  );
@@ -1962,8 +1961,6 @@ DECLARE_DO_FUN( do_makelight );
 DECLARE_DO_FUN( do_makecomlink );
 DECLARE_DO_FUN( do_makeshield );
 DECLARE_DO_FUN( do_makecontainer );
-DECLARE_DO_FUN( do_makemissile );
-DECLARE_DO_FUN( do_gemcutting );
 DECLARE_DO_FUN( do_reinforcements );
 DECLARE_DO_FUN( do_postguard );
 DECLARE_DO_FUN( do_torture );
@@ -3069,6 +3066,9 @@ extern "C" {
   /* track.c */
   void  found_prey( CHAR_DATA *ch, CHAR_DATA *victim );
   void  hunt_victim( CHAR_DATA *ch );
+
+  /* swskills.c */
+  void add_reinforcements( CHAR_DATA *ch );
 
   /* update.c */
   void advance_level( CHAR_DATA *ch , int ability );
