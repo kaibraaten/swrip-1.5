@@ -24,6 +24,7 @@
 #include <ctype.h>
 #include <string.h>
 #include "mud.h"
+#include "character.h"
 
 int pAbort;
 

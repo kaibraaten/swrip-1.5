@@ -33,6 +33,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include "character.h"
 #include "mud.h"
 #include "arena.h"
 

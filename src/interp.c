@@ -28,6 +28,7 @@
 
 #include <string.h>
 #include <ctype.h>
+#include "character.h"
 #include "mud.h"
 
 bool check_social( CHAR_DATA *ch, char *command, char *argument );

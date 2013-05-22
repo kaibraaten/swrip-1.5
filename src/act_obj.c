@@ -21,6 +21,7 @@
  *                         Object manipulation module                      *
  ****************************************************************************/
 
+#include "character.h"
 #include "mud.h"
 
 /*

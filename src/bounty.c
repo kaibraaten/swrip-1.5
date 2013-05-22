@@ -22,6 +22,7 @@
  *                    (  and area capturing as well  )                      *
  ****************************************************************************/
 
+#include "character.h"
 #include "mud.h"
 
 BOUNTY_DATA *first_bounty = NULL;

@@ -3,6 +3,7 @@
 #include <arpa/telnet.h>
 
 #include "mud.h"
+#include "character.h"
 
 static const char echo_off_str    [] = { (const char)IAC, (const char)WILL, TELOPT_ECHO, '\0' };
 static const char echo_on_str     [] = { (const char)IAC, (const char)WONT, TELOPT_ECHO, '\0' };

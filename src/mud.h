@@ -2874,39 +2874,17 @@ extern "C" {
 
   /* handler.c */
   void explode( OBJ_DATA *obj );
-  void set_exp( CHAR_DATA *ch, short ability, long xp );
-  long get_exp( const CHAR_DATA *ch, short ability );
-  int get_exp_worth( const CHAR_DATA *ch );
   int exp_level( short level );
-  short get_level( const CHAR_DATA *ch, short ability );
-  void set_level( CHAR_DATA *ch, short ability, int newlevel );
-  short get_trust( const CHAR_DATA *ch );
-  short get_age( const CHAR_DATA *ch );
-  short get_curr_str( const CHAR_DATA *ch );
-  short get_curr_int( const CHAR_DATA *ch );
-  short get_curr_wis( const CHAR_DATA *ch );
-  short get_curr_dex( const CHAR_DATA *ch );
-  short get_curr_con( const CHAR_DATA *ch );
-  short get_curr_cha( const CHAR_DATA *ch );
-  short get_curr_lck( const CHAR_DATA *ch );
-  short get_curr_frc( const CHAR_DATA *ch );
-  bool can_take_proto( const CHAR_DATA *ch );
-  int can_carry_n( const CHAR_DATA *ch );
-  int can_carry_w( const CHAR_DATA *ch );
   void affect_modify( CHAR_DATA *ch, AFFECT_DATA *paf, bool fAdd );
   void affect_to_char( CHAR_DATA *ch, AFFECT_DATA *paf );
   void affect_remove( CHAR_DATA *ch, AFFECT_DATA *paf );
   void affect_strip( CHAR_DATA *ch, int sn );
-  bool is_affected( const CHAR_DATA *ch, int sn );
   void affect_join( CHAR_DATA *ch, AFFECT_DATA *paf );
   void char_from_room( CHAR_DATA *ch );
   void char_to_room( CHAR_DATA *ch, ROOM_INDEX_DATA *pRoomIndex );
   OBJ_DATA *obj_to_char( OBJ_DATA *obj, CHAR_DATA *ch );
   void obj_from_char( OBJ_DATA *obj );
   int apply_ac( const OBJ_DATA *obj, int iWear );
-  OBJ_DATA *get_eq_char( const CHAR_DATA *ch, int iWear );
-  void equip_char( CHAR_DATA *ch, OBJ_DATA *obj, int iWear );
-  void unequip_char( CHAR_DATA *ch, OBJ_DATA *obj );
   int count_obj_list( const OBJ_INDEX_DATA *obj, const OBJ_DATA *list );
   void obj_from_room( OBJ_DATA *obj );
   OBJ_DATA *obj_to_room( OBJ_DATA *obj, ROOM_INDEX_DATA *pRoomIndex );
@@ -2925,17 +2903,12 @@ extern "C" {
   OBJ_DATA *get_obj_type( const OBJ_INDEX_DATA *pObjIndexData );
   OBJ_DATA *get_obj_list( const CHAR_DATA *ch, const char *argument, OBJ_DATA *list );
   OBJ_DATA *get_obj_list_rev( const CHAR_DATA *ch, const char *argument, OBJ_DATA *list );
-  OBJ_DATA *get_obj_carry( const CHAR_DATA *ch, const char *argument );
-  OBJ_DATA *get_obj_wear( const CHAR_DATA *ch, const char *argument );
   OBJ_DATA *get_obj_here( const CHAR_DATA *ch, const char *argument );
   OBJ_DATA *get_obj_world( const CHAR_DATA *ch, const char *argument );
   int get_obj_number( const OBJ_DATA *obj );
   int get_obj_weight( const OBJ_DATA *obj );
   bool room_is_dark( const ROOM_INDEX_DATA *pRoomIndex );
   bool room_is_private( const CHAR_DATA *ch, const ROOM_INDEX_DATA *pRoomIndex );
-  bool can_see( const CHAR_DATA *ch, const CHAR_DATA *victim );
-  bool can_see_obj( const CHAR_DATA *ch, const OBJ_DATA *obj );
-  bool can_drop_obj( const CHAR_DATA *ch, const OBJ_DATA *obj );
   const char *item_type_name( const OBJ_DATA *obj );
   const char *affect_loc_name( int location );
   const char *affect_bit_name( int vector );
@@ -2946,7 +2919,6 @@ extern "C" {
   bool is_trapped( const OBJ_DATA *obj );
   OBJ_DATA *get_trap( const OBJ_DATA *obj );
   ch_ret spring_trap( CHAR_DATA *ch, OBJ_DATA *obj );
-  void fix_char( CHAR_DATA *ch );
   void showaffect( const CHAR_DATA *ch, const AFFECT_DATA *paf );
   void set_cur_obj( OBJ_DATA *obj );
   bool obj_extracted( const OBJ_DATA *obj );
@@ -2970,17 +2942,11 @@ extern "C" {
   void separate_obj( OBJ_DATA *obj );
   bool empty_obj( OBJ_DATA *obj,OBJ_DATA *destobj,ROOM_INDEX_DATA *destroom );
   OBJ_DATA *find_obj( CHAR_DATA *ch, const char *argument, bool carryonly );
-  bool ms_find_obj( const CHAR_DATA *ch );
-  void worsen_mental_state( CHAR_DATA *ch, int mod );
-  void better_mental_state( CHAR_DATA *ch, int mod );
   void boost_economy( AREA_DATA *tarea, int gold );
   void lower_economy( AREA_DATA *tarea, int gold );
   void economize_mobgold( CHAR_DATA *mob );
   bool economy_has( const AREA_DATA *tarea, int gold );
-  void add_kill( CHAR_DATA *ch, const CHAR_DATA *mob );
-  int times_killed( const CHAR_DATA *ch, const CHAR_DATA *mob );
   int count_users(const OBJ_DATA *obj);
-  bool has_comlink( const CHAR_DATA *ch );
 
   /* interp.c */
   bool  check_pos( CHAR_DATA *ch, int position );

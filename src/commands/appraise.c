@@ -1,6 +1,7 @@
 #include <string.h>
 #include "shops.h"
 #include "mud.h"
+#include "character.h"
 
 static void appraise_all( CHAR_DATA *ch, CHAR_DATA *keeper, char *fixstr );
 

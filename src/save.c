@@ -32,6 +32,7 @@
 #include <string.h>
 #include <ctype.h>
 #include "mud.h"
+#include "character.h"
 
 /*
  * Increment with every major format change.

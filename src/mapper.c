@@ -1,5 +1,6 @@
 #include <string.h>
 #include "mud.h"
+#include "character.h"
 
 /* Size of the map and depth of recursion to undertake */
 #define MAPX     10

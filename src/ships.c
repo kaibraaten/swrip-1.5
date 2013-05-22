@@ -26,6 +26,7 @@
 #include "ships.h"
 #include "mud.h"
 #include "vector3_aux.h"
+#include "character.h"
 
 SHIP_DATA *first_ship = NULL;
 SHIP_DATA *last_ship = NULL;

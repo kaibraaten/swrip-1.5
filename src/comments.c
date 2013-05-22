@@ -53,6 +53,7 @@
 #include <string.h>
 #include <time.h>
 #include "mud.h"
+#include "character.h"
 
 void note_attach(CHAR_DATA *ch);
 

@@ -25,6 +25,7 @@
 #include <string.h>
 #include <time.h>
 #include "mud.h"
+#include "character.h"
 
 #define MAX_NEST        100
 static  OBJ_DATA *rgObjNest[MAX_NEST];

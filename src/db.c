@@ -29,6 +29,7 @@
 #include "arena.h"
 #include "ships.h"
 #include "shuttle.h"
+#include "character.h"
 
 void init_supermob();
 

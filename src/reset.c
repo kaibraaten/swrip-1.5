@@ -35,6 +35,7 @@
 #include <ctype.h>
 #include "reset.h"
 #include "mud.h"
+#include "character.h"
 
 /* Externals */
 RESET_DATA *    parse_reset( AREA_DATA *tarea, char *argument,

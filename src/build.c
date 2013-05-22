@@ -24,6 +24,7 @@
 #include <string.h>
 #include <ctype.h>
 #include "mud.h"
+#include "character.h"
 
 bool can_rmodify( const CHAR_DATA *ch, const ROOM_INDEX_DATA *room )
 {

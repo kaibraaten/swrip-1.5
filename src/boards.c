@@ -24,6 +24,7 @@
 #include <ctype.h>
 #include <time.h>
 #include <string.h>
+#include "character.h"
 #include "mud.h"
 
 /* Defines for voting on notes. -- Narn */

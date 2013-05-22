@@ -32,6 +32,7 @@
 #include "arena.h"
 #include "ships.h"
 #include "shuttle.h"
+#include "character.h"
 
 /* mud_prog.c */
 void room_act_update( void );

@@ -1,4 +1,5 @@
 #include "mud.h"
+#include "character.h"
 
 static bool check_for_immroom( const CHAR_DATA *ch, const ROOM_INDEX_DATA *location);
 

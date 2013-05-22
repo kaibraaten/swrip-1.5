@@ -23,6 +23,7 @@
 
 #include <ctype.h>
 #include <string.h>
+#include "character.h"
 #include "mud.h"
 #include "vector3_aux.h"
 

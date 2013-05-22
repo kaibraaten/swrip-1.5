@@ -23,6 +23,7 @@
 
 #include <string.h>
 #include <ctype.h>
+#include "character.h"
 #include "mud.h"
 
 ROOM_INDEX_DATA *vroom_hash[64];

@@ -31,6 +31,7 @@
 #include <time.h>
 #include <stdarg.h>
 #include "mud.h"
+#include "character.h"
 
 /*
  * Socket and TCP/IP stuff.

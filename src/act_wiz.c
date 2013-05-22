@@ -24,6 +24,7 @@
 #include <ctype.h>
 #include <string.h>
 #include <time.h>
+#include "character.h"
 #include "mud.h"
 
 BAN_DATA *first_ban = NULL;

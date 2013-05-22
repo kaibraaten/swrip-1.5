@@ -22,6 +22,7 @@
  ****************************************************************************/
 
 #include "mud.h"
+#include "character.h"
 
 void add_reinforcements( CHAR_DATA *ch )
 {
