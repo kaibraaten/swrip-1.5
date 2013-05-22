@@ -36,7 +36,7 @@ SPECDIR = special
 
 ODIR = obj
 _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
-	boards.o bounty.o build.o clans.o comm.o comments.o const.o \
+	boards.o bounty.o build.o character.o clans.o comm.o comments.o const.o \
 	copyover.o db.o fight.o grub.o handler.o interp.o magic.o \
 	makeobjs.o mapper.o misc.o mud_prog.o nanny.o \
 	planets.o player.o quest.o reset.o save.o ships.o shops.o shuttle.o \

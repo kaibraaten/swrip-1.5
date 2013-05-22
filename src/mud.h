@@ -2946,7 +2946,6 @@ extern "C" {
   bool is_trapped( const OBJ_DATA *obj );
   OBJ_DATA *get_trap( const OBJ_DATA *obj );
   ch_ret spring_trap( CHAR_DATA *ch, OBJ_DATA *obj );
-  void name_stamp_stats( CHAR_DATA *ch );
   void fix_char( CHAR_DATA *ch );
   void showaffect( const CHAR_DATA *ch, const AFFECT_DATA *paf );
   void set_cur_obj( OBJ_DATA *obj );
@@ -2978,7 +2977,7 @@ extern "C" {
   void lower_economy( AREA_DATA *tarea, int gold );
   void economize_mobgold( CHAR_DATA *mob );
   bool economy_has( const AREA_DATA *tarea, int gold );
-  void add_kill( CHAR_DATA *ch, CHAR_DATA *mob );
+  void add_kill( CHAR_DATA *ch, const CHAR_DATA *mob );
   int times_killed( const CHAR_DATA *ch, const CHAR_DATA *mob );
   int count_users(const OBJ_DATA *obj);
   bool has_comlink( const CHAR_DATA *ch );
