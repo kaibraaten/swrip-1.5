@@ -1,4 +1,5 @@
 #include "mud.h"
+#include "character.h"
 
 /*
  * Show help topics in a level range                            -Thoric

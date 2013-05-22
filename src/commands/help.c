@@ -1,5 +1,6 @@
 #include <ctype.h>
 #include "mud.h"
+#include "character.h"
 
 static short str_similarity( const char *astr, const char *bstr );
 static void similar_help_files(CHAR_DATA *ch, char *argument);

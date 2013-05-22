@@ -1,3 +1,4 @@
+#include "character.h"
 #include "shops.h"
 #include "mud.h"
 

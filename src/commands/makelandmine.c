@@ -1,5 +1,6 @@
 #include <string.h>
 #include "mud.h"
+#include "character.h"
 
 void do_makelandmine( CHAR_DATA *ch, char *argument )
 {

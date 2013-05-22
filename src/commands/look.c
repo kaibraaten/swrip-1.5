@@ -4,6 +4,7 @@
 #include "vector3_aux.h"
 #include "ships.h"
 #include "shuttle.h"
+#include "character.h"
 
 /* Locals */
 void show_char_to_char( CHAR_DATA *list, CHAR_DATA *ch );

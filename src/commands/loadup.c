@@ -1,5 +1,6 @@
 #include <ctype.h>
 #include "mud.h"
+#include "character.h"
 
 void do_loadup( CHAR_DATA *ch, char *argument )
 {

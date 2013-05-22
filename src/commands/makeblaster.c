@@ -1,5 +1,6 @@
 #include <string.h>
 #include "mud.h"
+#include "character.h"
 
 void do_makeblaster( CHAR_DATA *ch, char *argument )
 {

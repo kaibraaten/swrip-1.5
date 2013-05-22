@@ -1,3 +1,4 @@
+#include "character.h"
 #include "reset.h"
 #include "mud.h"
 

@@ -2873,6 +2873,7 @@ extern "C" {
   bool permsneak( CHAR_DATA *ch );
 
   /* handler.c */
+  bool can_take_proto( const CHAR_DATA *ch );
   void explode( OBJ_DATA *obj );
   int exp_level( short level );
   void affect_modify( CHAR_DATA *ch, AFFECT_DATA *paf, bool fAdd );

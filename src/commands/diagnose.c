@@ -3,6 +3,7 @@
 #include <ctype.h>
 #include "mud.h"
 #include "grub.h"
+#include "character.h"
 
 extern OBJ_INDEX_DATA *obj_index_hash[MAX_KEY_HASH];
 extern ROOM_INDEX_DATA *room_index_hash[MAX_KEY_HASH];

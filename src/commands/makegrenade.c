@@ -1,5 +1,6 @@
 #include <string.h>
 #include "mud.h"
+#include "character.h"
 
 void do_makegrenade( CHAR_DATA *ch, char *argument )
 {
@@ -7,9 +8,9 @@ void do_makegrenade( CHAR_DATA *ch, char *argument )
   char buf[MAX_STRING_LENGTH];
   int level, the_chance, weight = 0, strength = 0;
   bool checktool, checkdrink, checkbatt, checkchem, checkcirc;
-  OBJ_DATA *obj;
-  OBJ_INDEX_DATA *pObjIndex;
-  int vnum;
+  OBJ_DATA *obj = NULL;
+  OBJ_INDEX_DATA *pObjIndex = NULL;
+  int vnum = 0;
 
   strcpy( arg , argument );
 

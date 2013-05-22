@@ -1,5 +1,6 @@
 #include "reset.h"
 #include "mud.h"
+#include "character.h"
 
 void do_instaroom( CHAR_DATA *ch, char *argument )
 {

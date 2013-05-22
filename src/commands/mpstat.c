@@ -1,3 +1,4 @@
+#include "character.h"
 #include "mud.h"
 
 /* A trivial rehack of do_mstat.  This doesnt show all the data, but just

@@ -1,6 +1,7 @@
 #include <string.h>
 #include "shops.h"
 #include "mud.h"
+#include "character.h"
 
 void do_buy( CHAR_DATA *ch, char *argument )
 {

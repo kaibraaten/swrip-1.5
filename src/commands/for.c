@@ -37,6 +37,7 @@ target in them. Private rooms are not violated.
 
 #include <string.h>
 #include "mud.h"
+#include "character.h"
 
 extern ROOM_INDEX_DATA *room_index_hash[MAX_KEY_HASH];
 

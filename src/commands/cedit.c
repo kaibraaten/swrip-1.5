@@ -1,4 +1,5 @@
 #include "mud.h"
+#include "character.h"
 
 /*
  * Command editor/displayer/save/delete                         -Thoric

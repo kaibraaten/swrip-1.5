@@ -1,3 +1,4 @@
+#include "character.h"
 #include "mud.h"
 
 void do_junk( CHAR_DATA *ch, char *argument )

@@ -1,3 +1,4 @@
+#include "character.h"
 #include "mud.h"
 
 void do_clan_withdraw( CHAR_DATA *ch, char *argument )

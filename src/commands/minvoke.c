@@ -1,3 +1,4 @@
+#include "character.h"
 #include "mud.h"
 
 extern MOB_INDEX_DATA *mob_index_hash[MAX_KEY_HASH];
