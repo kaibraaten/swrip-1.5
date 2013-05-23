@@ -6,7 +6,7 @@ bool spec_jedi_healer( CHAR_DATA *ch )
   CHAR_DATA *victim;
   CHAR_DATA *v_next;
 
-  if ( !IS_AWAKE(ch) )
+  if ( !is_awake(ch) )
     return FALSE;
 
   for ( victim = ch->in_room->first_person; victim; victim = v_next )

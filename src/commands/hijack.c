@@ -137,7 +137,7 @@ void do_hijack( CHAR_DATA *ch, char *argument )
           if ( !is_npc( victim ) && victim->switched )
             continue;
 
-          if ( !IS_AWAKE(victim) || IS_SET(victim->in_room->room_flags,ROOM_SILENCE) )
+          if ( !is_awake(victim) || IS_SET(victim->in_room->room_flags,ROOM_SILENCE) )
             continue;
 
           ch_printf(victim,"&R[alarm] %s has been hijacked!\r\n",ship->name);

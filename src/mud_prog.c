@@ -2035,7 +2035,7 @@ void mprog_greet_trigger( CHAR_DATA *ch )
       vmob_next = vmob->next_in_room;
       if ( !is_npc( vmob )
            || vmob->fighting
-           || !IS_AWAKE( vmob ) )
+           || !is_awake( vmob ) )
         continue;
 
       /* Don't let a mob trigger itself, nor one instance of a mob

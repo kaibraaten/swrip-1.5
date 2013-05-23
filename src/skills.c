@@ -436,7 +436,7 @@ bool check_parry( CHAR_DATA *ch, CHAR_DATA *victim )
   int chances;
   OBJ_DATA *wield;
 
-  if ( !IS_AWAKE(victim) )
+  if ( !is_awake(victim) )
     return FALSE;
 
   if ( is_npc(victim) && !IS_SET(victim->defenses, DFND_PARRY) )
@@ -486,7 +486,7 @@ bool check_dodge( CHAR_DATA *ch, CHAR_DATA *victim )
 {
   int chances;
 
-  if ( !IS_AWAKE(victim) )
+  if ( !is_awake(victim) )
     return FALSE;
 
   if ( is_npc(victim) && !IS_SET(victim->defenses, DFND_DODGE) )
@@ -519,7 +519,7 @@ bool check_grip( CHAR_DATA *ch, CHAR_DATA *victim )
 {
   int grip_chance;
 
-  if ( !IS_AWAKE(victim) )
+  if ( !is_awake(victim) )
     return FALSE;
 
   if ( is_npc(victim) && !IS_SET(victim->defenses, DFND_GRIP) )

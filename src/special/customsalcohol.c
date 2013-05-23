@@ -10,7 +10,7 @@ bool spec_customs_alcohol( CHAR_DATA *ch )
   int        liquid;
   long       ch_exp;
 
-  if ( !IS_AWAKE(ch) || ch->position == POS_FIGHTING )
+  if ( !is_awake(ch) || ch->position == POS_FIGHTING )
     return FALSE;
 
   for ( victim = ch->in_room->first_person; victim; victim = v_next )

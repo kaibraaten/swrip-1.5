@@ -1,3 +1,4 @@
+#include "character.h"
 #include "mud.h"
 
 bool spec_janitor( CHAR_DATA *ch )
@@ -5,7 +6,7 @@ bool spec_janitor( CHAR_DATA *ch )
   OBJ_DATA *trash;
   OBJ_DATA *trash_next;
 
-  if ( !IS_AWAKE(ch) )
+  if ( !is_awake(ch) )
     return FALSE;
 
   for ( trash = ch->in_room->first_content; trash; trash = trash_next )

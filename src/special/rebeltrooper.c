@@ -6,7 +6,7 @@ bool spec_rebel_trooper( CHAR_DATA *ch )
   CHAR_DATA *victim;
   CHAR_DATA *v_next;
 
-  if ( !IS_AWAKE(ch) || ch->fighting )
+  if ( !is_awake(ch) || ch->fighting )
     return FALSE;
 
   for ( victim = ch->in_room->first_person; victim; victim = v_next )
@@ -18,7 +18,7 @@ bool spec_rebel_trooper( CHAR_DATA *ch )
         continue;
       if ( ( is_npc( victim ) && nifty_is_name( "imperial" , victim->name )
              && victim->fighting && who_fighting( victim ) != ch ) ||
-           ( !is_npc( victim ) && victim->pcdata && victim->pcdata->clan && IS_AWAKE(victim)
+           ( !is_npc( victim ) && victim->pcdata && victim->pcdata->clan && is_awake(victim)
              && nifty_is_name( "empire" , victim->pcdata->clan->name ) ) )
         {
           do_yell( ch, "Long live the Rebel Alliance!" );

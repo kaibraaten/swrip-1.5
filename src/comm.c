@@ -1946,7 +1946,7 @@ void act( short AType, const char *format, CHAR_DATA *ch, const void *arg1, cons
     {
       if (((!to || !to->desc)
            && (  is_npc(to) && !IS_SET(to->pIndexData->progtypes, ACT_PROG) ))
-          ||   !IS_AWAKE(to) )
+          ||   !is_awake(to) )
         continue;
 
 

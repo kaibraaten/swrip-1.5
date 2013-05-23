@@ -38,7 +38,7 @@ void do_pick( CHAR_DATA *ch, char *argument )
   /* look for guards */
   for ( gch = ch->in_room->first_person; gch; gch = gch->next_in_room )
     {
-      if ( is_npc(gch) && IS_AWAKE(gch) && get_level( ch, SMUGGLING_ABILITY ) < gch->top_level )
+      if ( is_npc(gch) && is_awake(gch) && get_level( ch, SMUGGLING_ABILITY ) < gch->top_level )
         {
           act( AT_PLAIN, "$N is standing too close to the lock.",
                ch, NULL, gch, TO_CHAR );
@@ -170,7 +170,7 @@ void do_pick( CHAR_DATA *ch, char *argument )
                             || is_affected_by(victim->switched, AFF_POSSESS) ) )
                 victim = victim->switched;
 
-              if ( !IS_AWAKE(victim) || IS_SET(victim->in_room->room_flags,ROOM_SILENCE) )
+              if ( !is_awake(victim) || IS_SET(victim->in_room->room_flags,ROOM_SILENCE) )
                 continue;
 
               if ( d->connected == CON_EDITING )
@@ -214,7 +214,7 @@ void do_pick( CHAR_DATA *ch, char *argument )
                             || is_affected_by(victim->switched, AFF_POSSESS) ) )
                 victim = victim->switched;
 
-              if ( !IS_AWAKE(victim) || IS_SET(victim->in_room->room_flags,ROOM_SILENCE) )
+              if ( !is_awake(victim) || IS_SET(victim->in_room->room_flags,ROOM_SILENCE) )
                 continue;
 
               if ( d->connected == CON_EDITING )

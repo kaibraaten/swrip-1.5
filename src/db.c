@@ -2167,7 +2167,7 @@ void area_update( void )
           for ( pch = first_char; pch; pch = pch->next )
             {
               if ( !is_npc(pch)
-                   &&   IS_AWAKE(pch)
+                   &&   is_awake(pch)
                    &&   pch->in_room
                    &&   pch->in_room->area == pArea )
                 {

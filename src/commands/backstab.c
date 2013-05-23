@@ -60,7 +60,7 @@ void do_backstab( CHAR_DATA *ch, char *argument )
   /* Can backstab a char even if it's hurt as long as it's sleeping. -Narn */
   /* Or if it can't see you. -Ulysses */
   if ( victim->hit < victim->max_hit
-       && ( IS_AWAKE(victim) && can_see(victim,ch) ) )
+       && ( is_awake(victim) && can_see(victim,ch) ) )
     {
       act( AT_PLAIN, "$N is hurt and suspicious ... you can't sneak up.",
            ch, NULL, victim, TO_CHAR );
@@ -72,7 +72,7 @@ void do_backstab( CHAR_DATA *ch, char *argument )
 
   WAIT_STATE( ch, skill_table[gsn_backstab]->beats );
 
-  if ( !IS_AWAKE(victim)
+  if ( !is_awake(victim)
        ||   is_npc(ch)
        ||   percent < ch->pcdata->learned[gsn_backstab] )
     {

@@ -19,7 +19,7 @@ bool spec_thief( CHAR_DATA *ch )
            ||   !can_see( ch, victim ) )        /* Thx Glop */
         continue;
 
-      if ( IS_AWAKE(victim) && number_range( 0, ch->top_level ) == 0 )
+      if ( is_awake(victim) && number_range( 0, ch->top_level ) == 0 )
         {
           act( AT_ACTION, "You discover $n's hands in your wallet!",
                ch, NULL, victim, TO_VICT );

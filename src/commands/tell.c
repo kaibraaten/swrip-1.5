@@ -113,7 +113,7 @@ void do_tell( CHAR_DATA *ch, char *argument )
       send_to_char( "That player is silenced. They will receive your message but can not respond.\r\n", ch );
     }
 
-  if ( (!is_immortal(ch) && !IS_AWAKE(victim) )
+  if ( (!is_immortal(ch) && !is_awake(victim) )
        || (!is_npc(victim)&&IS_SET(victim->in_room->room_flags, ROOM_SILENCE ) ) )
     {
       act( AT_PLAIN, "$E can't hear you.", ch, 0, victim, TO_CHAR );

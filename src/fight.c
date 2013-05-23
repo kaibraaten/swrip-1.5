@@ -311,7 +311,7 @@ void violence_update( void )
           stop_fighting( ch, TRUE );
         }
       else
-        if ( IS_AWAKE(ch) && ch->in_room == victim->in_room )
+        if ( is_awake(ch) && ch->in_room == victim->in_room )
           retcode = multi_hit( ch, victim, TYPE_UNDEFINED );
         else
           stop_fighting( ch, FALSE );
@@ -350,7 +350,7 @@ void violence_update( void )
         {
           rch_next = rch->next_in_room;
 
-          if ( IS_AWAKE(rch) && !rch->fighting )
+          if ( is_awake(rch) && !rch->fighting )
             {
               /*
                * PC's auto-assist others in their group.
@@ -743,7 +743,7 @@ ch_ret one_hit( CHAR_DATA *ch, CHAR_DATA *victim, int dt )
   if ( ch->race == RACE_DEFEL )
     victim_ac += 2;
 
-  if ( !IS_AWAKE ( victim ) )
+  if ( !is_awake ( victim ) )
     victim_ac += 5;
 
   /* Weapon proficiency bonus */
@@ -791,7 +791,7 @@ ch_ret one_hit( CHAR_DATA *ch, CHAR_DATA *victim, int dt )
     }
 
 
-  if ( !IS_AWAKE(victim) )
+  if ( !is_awake(victim) )
     dam *= 2;
   if ( dt == gsn_backstab )
     dam *= (2 + URANGE( 2, get_level( ch, HUNTING_ABILITY ) - (get_level( victim, COMBAT_ABILITY ) / 4), 30 ) / 8);
@@ -1548,7 +1548,7 @@ ch_ret damage( CHAR_DATA *ch, CHAR_DATA *victim, int dam, int dt )
   /*
    * Sleep spells and extremely wounded folks.
    */
-  if ( !IS_AWAKE(victim)                /* lets make NPC's not slaughter PC's */
+  if ( !is_awake(victim)                /* lets make NPC's not slaughter PC's */
        &&   !is_affected_by( victim, AFF_PARALYSIS ) )
     {
       if ( victim->fighting

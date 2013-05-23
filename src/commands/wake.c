@@ -14,7 +14,7 @@ void do_wake( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( !IS_AWAKE(ch) )
+  if ( !is_awake(ch) )
     {
       send_to_char( "You are asleep yourself!\r\n", ch );
       return;
@@ -26,7 +26,7 @@ void do_wake( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( IS_AWAKE(victim) )
+  if ( is_awake(victim) )
     {
       act( AT_PLAIN, "$N is already awake.", ch, NULL, victim, TO_CHAR );
       return;

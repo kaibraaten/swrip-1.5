@@ -1142,7 +1142,7 @@ void weather_update( void )
         {
           if ( d->connected == CON_PLAYING
                &&   IS_OUTSIDE(d->character)
-               &&   IS_AWAKE(d->character)
+               &&   is_awake(d->character)
                &&   d->character->in_room
                &&   d->character->in_room->sector_type != SECT_UNDERWATER
                &&   d->character->in_room->sector_type != SECT_OCEANFLOOR
@@ -1237,7 +1237,7 @@ void weather_update( void )
         {
           if ( d->connected == CON_PLAYING
                &&   IS_OUTSIDE(d->character)
-               &&   IS_AWAKE(d->character) )
+               &&   is_awake(d->character) )
             act( AT_TEMP, buf, d->character, 0, 0, TO_CHAR );
         }
     }
@@ -2049,7 +2049,7 @@ void aggr_update( void )
       if ( !is_npc(ch)
            ||   ch->fighting
            ||   is_affected_by(ch, AFF_CHARM)
-           ||   !IS_AWAKE(ch)
+           ||   !is_awake(ch)
            ||   ( IS_SET(ch->act, ACT_WIMPY) ) )
         continue;
 
@@ -2099,7 +2099,7 @@ void aggr_update( void )
                    && victim->hit >= victim->max_hit )
                 {
                   WAIT_STATE( ch, skill_table[gsn_backstab]->beats );
-                  if ( !IS_AWAKE(victim)
+                  if ( !is_awake(victim)
                        ||   number_percent( )+5 < ch->top_level )
                     {
                       global_retcode = multi_hit( ch, victim, gsn_backstab );

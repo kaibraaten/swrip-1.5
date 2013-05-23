@@ -1,4 +1,5 @@
 #include "mud.h"
+#include "character.h"
 
 bool spec_guardian( CHAR_DATA *ch )
 {
@@ -9,7 +10,7 @@ bool spec_guardian( CHAR_DATA *ch )
   char *crime;
   int max_evil;
 
-  if ( !IS_AWAKE(ch) || ch->fighting )
+  if ( !is_awake(ch) || ch->fighting )
     return FALSE;
 
   max_evil = 300;

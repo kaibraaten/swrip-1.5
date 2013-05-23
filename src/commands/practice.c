@@ -81,7 +81,7 @@ void do_practice( CHAR_DATA *ch, char *argument )
       int adept;
       bool can_prac = TRUE;
 
-      if ( !IS_AWAKE(ch) )
+      if ( !is_awake(ch) )
         {
           send_to_char( "In your dreams, or what?\r\n", ch );
           return;

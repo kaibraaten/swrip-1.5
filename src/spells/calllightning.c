@@ -55,7 +55,7 @@ ch_ret spell_call_lightning( int sn, int level, CHAR_DATA *ch, void *vo )
       if ( !ch_died
            &&   vch->in_room->area == ch->in_room->area
            &&   IS_OUTSIDE(vch)
-           &&   IS_AWAKE(vch) ) {
+           &&   is_awake(vch) ) {
         set_char_color( AT_MAGIC, vch );
         send_to_char( "Lightning flashes in the sky.\r\n", vch );
       }

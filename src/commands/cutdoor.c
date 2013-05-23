@@ -122,7 +122,7 @@ void do_cutdoor( CHAR_DATA *ch, char *argument )
   if ( !char_died( ch ) )
     for ( gch = ch->in_room->first_person; gch; gch = gch->next_in_room )
       {
-        if ( IS_AWAKE( gch )
+        if ( is_awake( gch )
 	     && !gch->fighting
              && ( is_npc( gch ) && !is_affected_by( gch, AFF_CHARM ) )
              && ( ch->top_level - gch->top_level <= 4 )

@@ -947,3 +947,8 @@ bool is_evil_mob_index_data( const MOB_INDEX_DATA *mob )
 {
   return mob->alignment <= -350;
 }
+
+bool is_awake( const CHAR_DATA *ch )
+{
+  return ch->position > POS_SLEEPING;
+}

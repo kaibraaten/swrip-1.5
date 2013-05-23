@@ -48,7 +48,7 @@ void do_torture( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( !IS_AWAKE(victim) )
+  if ( !is_awake(victim) )
     {
       send_to_char( "You need to wake them first.\r\n", ch );
       return;

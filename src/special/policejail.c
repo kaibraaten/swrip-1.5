@@ -10,7 +10,7 @@ bool spec_police_jail( CHAR_DATA *ch )
   int vip;
   char buf[MAX_STRING_LENGTH];
 
-  if ( !IS_AWAKE(ch) || ch->fighting )
+  if ( !is_awake(ch) || ch->fighting )
     return FALSE;
 
   for ( victim = ch->in_room->first_person; victim; victim = v_next )

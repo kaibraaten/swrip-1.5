@@ -1,3 +1,4 @@
+#include "character.h"
 #include "mud.h"
 
 bool spec_fido( CHAR_DATA *ch )
@@ -7,7 +8,7 @@ bool spec_fido( CHAR_DATA *ch )
   OBJ_DATA *obj;
   OBJ_DATA *obj_next;
 
-  if ( !IS_AWAKE(ch) )
+  if ( !is_awake(ch) )
     return FALSE;
 
   for ( corpse = ch->in_room->first_content; corpse; corpse = c_next )
