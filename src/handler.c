@@ -197,7 +197,7 @@ int exp_level( short level)
  */
 bool can_take_proto( const CHAR_DATA *ch )
 {
-  if ( IS_IMMORTAL(ch) )
+  if ( is_immortal(ch) )
     return TRUE;
   else if ( is_npc(ch) && IS_SET(ch->act, ACT_PROTOTYPE) )
     return TRUE;
@@ -701,7 +701,7 @@ OBJ_DATA *obj_to_char( OBJ_DATA *obj, CHAR_DATA *ch )
 
   if (IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
     {
-      if (!IS_IMMORTAL( ch )
+      if (!is_immortal( ch )
           && (is_npc(ch) && !IS_SET(ch->act, ACT_PROTOTYPE)) )
         return obj_to_room( obj, ch->in_room );
     }
@@ -2440,7 +2440,7 @@ void remove_timer( CHAR_DATA *ch, short type )
 
 bool in_soft_range( const CHAR_DATA *ch, const AREA_DATA *tarea )
 {
-  if ( IS_IMMORTAL(ch) )
+  if ( is_immortal(ch) )
     return TRUE;
   else if ( is_npc(ch) )
     return TRUE;
@@ -2452,7 +2452,7 @@ bool in_soft_range( const CHAR_DATA *ch, const AREA_DATA *tarea )
 
 bool in_hard_range( const CHAR_DATA *ch, const AREA_DATA *tarea )
 {
-  if ( IS_IMMORTAL(ch) )
+  if ( is_immortal(ch) )
     return TRUE;
   else if ( is_npc(ch) )
     return TRUE;

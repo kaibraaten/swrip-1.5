@@ -49,7 +49,7 @@ void do_restore( CHAR_DATA *ch, char *argument )
         {
           vch_next = vch->next;
 
-          if ( !is_npc( vch ) && !IS_IMMORTAL( vch ) )
+          if ( !is_npc( vch ) && !is_immortal( vch ) )
 	    {
               vch->hit = vch->max_hit;
               vch->mana = vch->max_mana;

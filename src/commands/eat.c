@@ -20,7 +20,7 @@ void do_eat( CHAR_DATA *ch, char *argument )
   if ( (obj = find_obj(ch, argument, TRUE)) == NULL )
     return;
 
-  if ( !IS_IMMORTAL(ch) )
+  if ( !is_immortal(ch) )
     {
       if ( obj->item_type != ITEM_FOOD && obj->item_type != ITEM_PILL )
         {

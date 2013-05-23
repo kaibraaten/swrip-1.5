@@ -92,7 +92,7 @@ void do_transfer( CHAR_DATA *ch, char *argument )
   do_look( victim, "auto" );
   send_to_char( "Ok.\r\n", ch );
 
-  if (!IS_IMMORTAL(victim) && !is_npc(victim)
+  if (!is_immortal(victim) && !is_npc(victim)
       && !in_hard_range( victim, location->area ) )
     {
       send_to_char("Warning: the player's level is not within the area's level range.\r\n", ch);

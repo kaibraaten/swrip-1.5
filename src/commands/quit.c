@@ -37,7 +37,7 @@ void do_quit( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( !IS_IMMORTAL(ch) && ch->in_room
+  if ( !is_immortal(ch) && ch->in_room
        && !IS_SET( ch->in_room->room_flags, ROOM_HOTEL )
        && !NOT_AUTHED(ch) )
     {
@@ -47,7 +47,7 @@ void do_quit( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( !IS_IMMORTAL(ch) && ch->in_room
+  if ( !is_immortal(ch) && ch->in_room
        && IS_SET( ch->in_room->room_flags, ROOM_HOTEL )
        && !IS_SET( ch->in_room->room_flags, ROOM_PLR_HOME )
        && !IS_SET( ch->in_room->room_flags, ROOM_SPACECRAFT )

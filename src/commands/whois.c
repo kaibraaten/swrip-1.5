@@ -59,7 +59,7 @@ void do_whois( CHAR_DATA *ch, char *argument)
 
   if ( victim->pcdata->clan && ( ( ch->pcdata->clan
                                    && ch->pcdata->clan == victim->pcdata->clan )
-                                 || IS_IMMORTAL( ch ) ) )
+                                 || is_immortal( ch ) ) )
     {
       if ( victim->pcdata->clan->clan_type == CLAN_CRIME )
         send_to_char( ", and belongs to the crime family ", ch );

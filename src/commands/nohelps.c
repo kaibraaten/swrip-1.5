@@ -10,7 +10,7 @@ void do_nohelps(CHAR_DATA *ch, char *argument)
 
   argument = one_argument( argument, arg );
 
-  if(!IS_IMMORTAL(ch) || is_npc(ch) )
+  if(!is_immortal(ch) || is_npc(ch) )
     {
       send_to_char("Huh?\r\n", ch);
       return;

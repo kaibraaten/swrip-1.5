@@ -32,19 +32,19 @@ void do_beep( CHAR_DATA *ch, char *argument )
 
   if ( ( victim = get_char_world( ch, arg ) ) == NULL
        || ( is_npc(victim) && victim->in_room != ch->in_room )
-       || (!NOT_AUTHED(ch) && NOT_AUTHED(victim) && !IS_IMMORTAL(ch) ) )
+       || (!NOT_AUTHED(ch) && NOT_AUTHED(victim) && !is_immortal(ch) ) )
     {
       send_to_char( "They aren't here.\r\n", ch );
       return;
     }
 
-  if ( IS_IMMORTAL( ch ) )
+  if ( is_immortal( ch ) )
     {
       ch_comlink = TRUE;
       victim_comlink = TRUE;
     }
 
-  if ( IS_IMMORTAL( victim ) )
+  if ( is_immortal( victim ) )
     victim_comlink = TRUE;
 
   ch_comlink = has_comlink( ch );
@@ -66,7 +66,7 @@ void do_beep( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if (NOT_AUTHED(ch) && !NOT_AUTHED(victim) && !IS_IMMORTAL(victim) )
+  if (NOT_AUTHED(ch) && !NOT_AUTHED(victim) && !is_immortal(victim) )
     {
       send_to_char( "They can't hear you because you are not authorized.\r\n", ch);
       return;
@@ -85,7 +85,7 @@ void do_beep( CHAR_DATA *ch, char *argument )
     }
 
   if ( IS_SET( victim->deaf, CHANNEL_TELLS )
-       && ( !IS_IMMORTAL( ch ) || ( get_trust( ch ) < get_trust( victim ) ) ) )
+       && ( !is_immortal( ch ) || ( get_trust( ch ) < get_trust( victim ) ) ) )
     {
       act( AT_PLAIN, "$E has $S tells turned off.", ch, NULL, victim,
            TO_CHAR );
@@ -97,7 +97,7 @@ void do_beep( CHAR_DATA *ch, char *argument )
       send_to_char( "That player is silenced.  They will receive your message but can not respond.\r\n", ch );
     }
 
-  if ( (!IS_IMMORTAL(ch) && !IS_AWAKE(victim) )
+  if ( (!is_immortal(ch) && !IS_AWAKE(victim) )
        || (!is_npc(victim)&&IS_SET(victim->in_room->room_flags, ROOM_SILENCE ) ) )
     {
       act( AT_PLAIN, "$E can't hear you.", ch, 0, victim, TO_CHAR );

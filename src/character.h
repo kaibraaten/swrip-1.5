@@ -168,4 +168,6 @@ int can_carry_n( const CHAR_DATA *ch );
 
 bool is_npc( const CHAR_DATA *ch );
 
+bool is_immortal( const CHAR_DATA *ch );
+
 #endif

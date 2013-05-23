@@ -21,7 +21,7 @@ void do_hell( CHAR_DATA *ch, char *argument )
       send_to_char( "They aren't here.\r\n", ch );
       return;
     }
-  if ( IS_IMMORTAL(victim) )
+  if ( is_immortal(victim) )
     {
       send_to_char( "There is no point in helling an immortal.\r\n", ch );
       return;

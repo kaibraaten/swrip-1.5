@@ -255,7 +255,7 @@ void do_fill( CHAR_DATA *ch, char *argument )
           pd = one_argument( pd, name );
           pd = one_argument( pd, name );
 
-	  if ( str_cmp( name, ch->name ) && !IS_IMMORTAL(ch) )
+	  if ( str_cmp( name, ch->name ) && !is_immortal(ch) )
             {
               bool fGroup;
 

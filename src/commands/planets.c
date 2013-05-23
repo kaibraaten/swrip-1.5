@@ -18,7 +18,7 @@ void do_planets( CHAR_DATA *ch, char *argument )
                     get_taxes(planet) , planet->base_value);
       pager_printf( ch, "&WPopulation: &O%-5d   &W Pop Support: &R%.1f\r\n",
                     planet->population , planet->pop_support );
-      if ( IS_IMMORTAL(ch) )
+      if ( is_immortal(ch) )
         {
           pager_printf( ch, "&WAreas: &G");
           for ( area = planet->first_area ; area ; area = area->next_on_planet )

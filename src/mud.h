@@ -1561,7 +1561,6 @@ extern  short                   gsn_yevethan;
 /*
  * Character macros.
  */
-#define IS_IMMORTAL(ch)         (get_trust((ch)) >= LEVEL_IMMORTAL)
 #define IS_GOD(ch)              (get_trust((ch)) >= LEVEL_GOD)
 #define IS_HERO(ch)             (get_trust((ch)) >= LEVEL_HERO)
 #define HAS_BODYPART(ch, part)  ((ch)->xflags == 0 || IS_SET((ch)->xflags, (part)))
@@ -1623,7 +1622,6 @@ extern  short                   gsn_yevethan;
 
 /* Retired and guest imms. */
 #define IS_RETIRED(ch) (ch->pcdata && IS_SET(ch->pcdata->flags,PCFLAG_RETIRED))
-#define IS_GUEST(ch) (ch->pcdata && IS_SET(ch->pcdata->flags,PCFLAG_GUEST))
 
 /* RIS by gsn lookups. -- Altrag.
    Will need to add some || stuff for spells that need a special GSN. */
@@ -1671,14 +1669,10 @@ extern  short                   gsn_yevethan;
 
 #define PERS(ch, looker)        ( can_see( (looker), (ch) ) ?           \
                                   ( is_npc(ch) ? (ch)->short_descr      \
-                                    : ((get_trust(looker) <= LEVEL_IMMORTAL) ? (DISGUISE(ch) ? ch->pcdata->title : (ch)->name ) : (ch)->name)) : ( IS_IMMORTAL(ch) ? "A Great One" : "someone" ))
+                                    : ((get_trust(looker) <= LEVEL_IMMORTAL) ? (DISGUISE(ch) ? ch->pcdata->title : (ch)->name ) : (ch)->name)) : ( is_immortal(ch) ? "A Great One" : "someone" ))
 
 
 #define log_string( txt )       ( log_string_plus( (txt), LOG_NORMAL, LEVEL_LOG ) )
-
-/*#define GET_BETTED_ON(ch)    (is_npc(ch) ? 0 : ((ch)->pcdata->betted_on))
-  #define GET_BET_AMT(ch) (is_npc(ch) ? 0 : ((ch)->pcdata->bet_amt))*/
-
 
 /*
  * Structure for a command in the command lookup table.

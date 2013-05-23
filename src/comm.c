@@ -2109,14 +2109,14 @@ void display_prompt( DESCRIPTOR_DATA *d )
               break;
 
             case 'm':
-              if ( IS_IMMORTAL(ch) || get_level( ch, FORCE_ABILITY ) > 1 )
+              if ( is_immortal(ch) || get_level( ch, FORCE_ABILITY ) > 1 )
                 the_stat = ch->mana;
               else
                 the_stat = 0;
               break;
 
             case 'M':
-              if ( IS_IMMORTAL(ch) || get_level( ch, FORCE_ABILITY ) > 1 )
+              if ( is_immortal(ch) || get_level( ch, FORCE_ABILITY ) > 1 )
                 the_stat = ch->max_mana;
               else
                 the_stat = 0;
@@ -2152,7 +2152,7 @@ void display_prompt( DESCRIPTOR_DATA *d )
               break;
 
             case 'r':
-              if ( IS_IMMORTAL(och) )
+              if ( is_immortal(och) )
                 the_stat = ch->in_room->vnum;
               break;
 

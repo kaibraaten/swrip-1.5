@@ -953,7 +953,7 @@ ch_ret drive_ship( CHAR_DATA *ch, SHIP_DATA *ship, EXIT_DATA *pexit, int fall )
       return rNONE;
     }
 
-  if ( !IS_IMMORTAL(ch)
+  if ( !is_immortal(ch)
        &&  !is_npc(ch)
        &&  ch->in_room->area != to_room->area )
     {
@@ -3344,7 +3344,7 @@ des...");
           rch = room->first_person;
           while ( rch )
             {
-              if ( IS_IMMORTAL(rch) )
+              if ( is_immortal(rch) )
                 {
                   char_from_room(rch);
                   char_to_room( rch, get_room_index(wherehome(rch)) );

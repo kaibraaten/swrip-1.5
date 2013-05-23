@@ -551,11 +551,11 @@ static void show_char_to_char_0( CHAR_DATA *victim, CHAR_DATA *ch )
   if ( IS_EVIL(victim)
        &&   is_affected_by(ch, AFF_DETECT_EVIL)     ) strcat( buf, "&R(Red Aura)&w "   );
   if ( ( victim->mana > 10 )
-       &&   ( is_affected_by( ch , AFF_DETECT_MAGIC ) || IS_IMMORTAL( ch ) ) )
+       &&   ( is_affected_by( ch , AFF_DETECT_MAGIC ) || is_immortal( ch ) ) )
     strcat( buf, "&B(Blue Aura)&w "  );
   if ( !is_npc(victim) && IS_SET(victim->act, PLR_LITTERBUG  ) )
     strcat( buf, "(LITTERBUG) "  );
-  if ( is_npc(victim) && IS_IMMORTAL(ch)
+  if ( is_npc(victim) && is_immortal(ch)
        && IS_SET(victim->act, ACT_PROTOTYPE) ) strcat( buf, "(PROTO) " );
   if ( victim->desc && victim->desc->connected == CON_EDITING )
     strcat( buf, "(Writing) " );
@@ -714,7 +714,7 @@ static void show_char_to_char_0( CHAR_DATA *victim, CHAR_DATA *ch )
         }
       break;
     case POS_STANDING:
-      if ( IS_IMMORTAL(victim) )
+      if ( is_immortal(victim) )
         strcat( buf, " is here before you." );
       else
         if ( ( victim->in_room->sector_type == SECT_UNDERWATER )

@@ -117,7 +117,7 @@ int max_level( const CHAR_DATA *ch, int ability)
   if ( is_npc(ch) )
     return 100;
 
-  if ( IS_IMMORTAL(ch) || ch->race == RACE_GOD )
+  if ( is_immortal(ch) || ch->race == RACE_GOD )
     return 200;
 
   if ( ability == COMBAT_ABILITY )

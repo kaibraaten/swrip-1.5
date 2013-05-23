@@ -188,7 +188,7 @@ void do_oldscore( CHAR_DATA *ch, char *argument )
           }
     }
 
-  if ( !is_npc( ch ) && IS_IMMORTAL( ch ) )
+  if ( !is_npc( ch ) && is_immortal( ch ) )
     {
       ch_printf( ch, "WizInvis level: %d   WizInvis is %s\r\n",
 		 ch->pcdata->wizinvis,

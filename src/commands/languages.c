@@ -9,7 +9,7 @@ void do_languages( CHAR_DATA *ch, char *argument )
 
   argument = one_argument( argument, arg );
   if ( arg[0] != '\0' && !str_prefix( arg, "learn" ) &&
-       !IS_IMMORTAL(ch) && !is_npc(ch) )
+       !is_immortal(ch) && !is_npc(ch) )
     {
       CHAR_DATA *sch;
       char arg2[MAX_INPUT_LENGTH];

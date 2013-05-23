@@ -466,7 +466,7 @@ void fwrite_char( CHAR_DATA *ch, FILE *fp )
       if ( ch->pcdata->wanted_flags )
         fprintf( fp, "Wanted       %d\n",       ch->pcdata->wanted_flags );
 
-      if ( IS_IMMORTAL( ch ) || ch->pcdata->area )
+      if ( is_immortal( ch ) || ch->pcdata->area )
         {
           fprintf( fp, "WizInvis     %d\n", ch->pcdata->wizinvis );
           if ( ch->pcdata->r_range_lo && ch->pcdata->r_range_hi )
@@ -1593,11 +1593,11 @@ void fread_char( CHAR_DATA *ch, FILE *fp, bool preload )
                   }
               }
 
-              if ( !IS_IMMORTAL( ch ) && !ch->speaking )
+              if ( !is_immortal( ch ) && !ch->speaking )
                 /*      ch->speaking = LANG_COMMON;      */
                 ch->speaking = race_table[ch->race].language;
 
-              if ( IS_IMMORTAL( ch ) )
+              if ( is_immortal( ch ) )
                 {
                   ch->speaks = ~0;
                   if ( ch->speaking == 0 )

@@ -13,7 +13,7 @@ void do_challenge(CHAR_DATA *ch, char *argument)
       return;
     }
 
-  if (IS_IMMORTAL(ch) || IS_IMMORTAL(victim))
+  if (is_immortal(ch) || is_immortal(victim))
     {
       send_to_char("Sorry, Immortals are not allowed to participate in the arena.\r\n",ch);
       return;

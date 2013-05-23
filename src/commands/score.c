@@ -35,7 +35,7 @@ void do_score(CHAR_DATA * ch, char *argument)
             ch->alignment, ch->wimpy  , ctime(&current_time) );
 
   if ( get_level( ch, FORCE_ABILITY ) > 1
-       || IS_IMMORTAL(ch) )
+       || is_immortal(ch) )
     ch_printf(ch, "&cHit Points: &C%d &cof &C%d     &cMove: &C%d &cof &C%d     &cForce: &C%d &cof &C%d\r\n",
               ch->hit, ch->max_hit, ch->move, ch->max_move, ch->mana, ch->max_mana );
   else
@@ -206,7 +206,7 @@ void do_score(CHAR_DATA * ch, char *argument)
                 ch->pcdata->clan->name, ch->pcdata->salary, ch->pcdata->clan->pkills, ch->pcdata->clan->pdeaths) ;
       send_to_char( "\r\n", ch );
     }
-  if (IS_IMMORTAL(ch))
+  if (is_immortal(ch))
     {
       send_to_char( "&C----------------------------------------------------------------------------\r\n", ch);
 

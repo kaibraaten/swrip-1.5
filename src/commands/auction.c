@@ -82,7 +82,7 @@ void do_auction (CHAR_DATA *ch, char *argument)
               show_list_to_char( obj->first_content, ch, TRUE, FALSE );
             }
 
-          if (IS_IMMORTAL(ch))
+          if (is_immortal(ch))
             {
               sprintf(buf, "Seller: %s.  Bidder: %s.  Round: %d.\r\n",
                       auction->seller->name, auction->buyer->name,
@@ -101,7 +101,7 @@ void do_auction (CHAR_DATA *ch, char *argument)
         }
     }
 
-  if ( IS_IMMORTAL(ch) && !str_cmp(arg1,"stop"))
+  if ( is_immortal(ch) && !str_cmp(arg1,"stop"))
     {
       if (auction->item == NULL)
         {

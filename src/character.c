@@ -243,7 +243,7 @@ bool has_comlink( const CHAR_DATA *ch )
 {
   OBJ_DATA *obj = NULL;
 
-  if( IS_IMMORTAL( ch ) )
+  if( is_immortal( ch ) )
     {
       return TRUE;
     }
@@ -680,7 +680,7 @@ bool can_see( const CHAR_DATA *ch, const CHAR_DATA *victim )
        && get_trust( ch ) < victim->mobinvis )
     return FALSE;
 
-  if ( !IS_IMMORTAL(ch) && !is_npc(victim) && !victim->desc
+  if ( !is_immortal(ch) && !is_npc(victim) && !victim->desc
        && get_timer(victim, TIMER_RECENTFIGHT) > 0
        && (!victim->switched || !is_affected_by(victim->switched, AFF_POSSESS)) )
     return FALSE;
@@ -911,4 +911,9 @@ int can_carry_w( const CHAR_DATA *ch )
 bool is_npc( const CHAR_DATA *ch )
 {
   return IS_SET( ch->act, ACT_is_npc ) || !ch->pcdata;
+}
+
+bool is_immortal( const CHAR_DATA *ch )
+{
+  return get_trust( ch ) >= LEVEL_IMMORTAL;
 }

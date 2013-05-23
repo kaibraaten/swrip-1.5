@@ -58,7 +58,7 @@ ch_ret spell_animate_dead( int sn, int level, CHAR_DATA *ch, void *vo )
         ch->mana -= (pMobIndex->level*4);
     }
 
-  if ( IS_IMMORTAL(ch) || ( chance(ch, 75) && pMobIndex->level - ch->top_level < 10 ) )
+  if ( is_immortal(ch) || ( chance(ch, 75) && pMobIndex->level - ch->top_level < 10 ) )
     {
       mob = create_mobile( get_mob_index(MOB_VNUM_ANIMATED_CORPSE) );
       char_to_room( mob, ch->in_room );

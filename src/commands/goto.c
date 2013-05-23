@@ -140,7 +140,7 @@ void do_goto( CHAR_DATA *ch, char *argument )
   for ( fch = in_room->first_person; fch; fch = fch_next )
     {
       fch_next = fch->next_in_room;
-      if ( fch->master == ch && IS_IMMORTAL(fch) )
+      if ( fch->master == ch && is_immortal(fch) )
         {
           act( AT_ACTION, "You follow $N.", fch, NULL, ch, TO_CHAR );
           do_goto( fch, argument );

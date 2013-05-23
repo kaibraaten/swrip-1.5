@@ -63,13 +63,13 @@ char *format_obj_to_char( const OBJ_DATA *obj, const CHAR_DATA *ch, bool fShort 
 
   buf[0] = '\0';
   if ( IS_OBJ_STAT(obj, ITEM_INVIS)     )   strcat( buf, "(Invis) "     );
-  if ( ( is_affected_by(ch, AFF_DETECT_MAGIC) || IS_IMMORTAL(ch) )
+  if ( ( is_affected_by(ch, AFF_DETECT_MAGIC) || is_immortal(ch) )
        && IS_OBJ_STAT(obj, ITEM_MAGIC)  )   strcat( buf, "&B(Blue Aura)&w "   );
   if ( IS_OBJ_STAT(obj, ITEM_GLOW)      )   strcat( buf, "(Glowing) "   );
   if ( IS_OBJ_STAT(obj, ITEM_HUM)       )   strcat( buf, "(Humming) "   );
   if ( IS_OBJ_STAT(obj, ITEM_HIDDEN)      )   strcat( buf, "(Hidden) "    );
   if ( IS_OBJ_STAT(obj, ITEM_BURRIED)     )   strcat( buf, "(Burried) "   );
-  if ( IS_IMMORTAL(ch)
+  if ( is_immortal(ch)
        && IS_OBJ_STAT(obj, ITEM_PROTOTYPE) ) strcat( buf, "(PROTO) "      );
   if ( is_affected_by(ch, AFF_DETECTTRAPS)
        && is_trapped(obj)   )   strcat( buf, "(Trap) "  );

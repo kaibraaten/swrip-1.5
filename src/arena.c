@@ -204,7 +204,7 @@ void find_game_winner()
         continue;
 
       if (i->in_room && IS_SET(i->in_room->room_flags,ROOM_ARENA)
-          && !IS_IMMORTAL(i))
+          && !is_immortal(i))
         {
           char_from_room(i);
           char_to_room(i,get_room_index(i->retran));
@@ -329,7 +329,7 @@ int num_in_arena()
 
       if (i->in_room && IS_SET(i->in_room->room_flags,ROOM_ARENA))
         {
-          if (!IS_IMMORTAL(i)
+          if (!is_immortal(i)
               && i->hit > 1)
             num++;
         }

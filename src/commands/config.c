@@ -112,19 +112,19 @@ void do_config( CHAR_DATA *ch, char *argument )
                      : "[-dontautofuel] You refuel automatically on launch.\r\n"
                      , ch );
 
-      if ( IS_IMMORTAL( ch ) )
+      if ( is_immortal( ch ) )
         send_to_char(  IS_SET(ch->act, PLR_ROOMVNUM)
                        ? "[+VNUM     ] You can see the VNUM of a room.\r\n"
                        : "[-vnum     ] You do not see the VNUM of a room.\r\n"
                        , ch );
 
-      if ( IS_IMMORTAL( ch ) )
+      if ( is_immortal( ch ) )
         send_to_char(  IS_SET(ch->act, PLR_AUTOMAP)    /* maps */
                        ? "[+MAP      ] You can see the MAP of a room.\r\n"
                        : "[-map      ] You do not see the MAP of a room.\r\n"
                        , ch );
 
-      if ( IS_IMMORTAL( ch) )             /* Added 10/16 by Kuran of SWR */
+      if ( is_immortal( ch) )             /* Added 10/16 by Kuran of SWR */
         send_to_char( IS_SET(ch->pcdata->flags, PCFLAG_ROOM)
                       ? "[+ROOMFLAGS] You will see room flags.\r\n"
 		      : "[-roomflags] You will not see room flags.\r\n"
@@ -195,10 +195,10 @@ void do_config( CHAR_DATA *ch, char *argument )
 	bit = PLR_SHOVEDRAG;
       else if ( !str_prefix( arg+1, "dontautofuel") )
 	bit = PLR_DONTAUTOFUEL;
-      else if ( IS_IMMORTAL( ch )
+      else if ( is_immortal( ch )
                 &&   !str_prefix( arg+1, "vnum"     ) )
 	bit = PLR_ROOMVNUM;
-      else if ( IS_IMMORTAL( ch )
+      else if ( is_immortal( ch )
                 &&   !str_prefix( arg+1, "map"      ) )
 	bit = PLR_AUTOMAP;
 
@@ -226,7 +226,7 @@ void do_config( CHAR_DATA *ch, char *argument )
           else if ( !str_prefix( arg+1, "pager"    ) )
 	    bit = PCFLAG_PAGERON;
           else if ( !str_prefix( arg+1, "roomflags")
-                    && (IS_IMMORTAL(ch)))
+                    && (is_immortal(ch)))
 	    bit = PCFLAG_ROOM;
           else
             {

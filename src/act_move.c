@@ -515,7 +515,7 @@ ch_ret move_char( CHAR_DATA *ch, EXIT_DATA *pexit, int fall )
       return rNONE;
     }
 
-  if ( !IS_IMMORTAL(ch)
+  if ( !is_immortal(ch)
        &&  !is_npc(ch)
        &&  ch->in_room->area != to_room->area )
     {
@@ -918,7 +918,7 @@ ch_ret move_char( CHAR_DATA *ch, EXIT_DATA *pexit, int fall )
         }
     }
 
-  if ( !IS_IMMORTAL(ch)
+  if ( !is_immortal(ch)
        &&  !is_npc(ch)
        &&  ch->in_room->area != to_room->area )
     {

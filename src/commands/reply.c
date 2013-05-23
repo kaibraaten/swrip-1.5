@@ -42,13 +42,13 @@ void do_reply( CHAR_DATA *ch, char *argument )
     }
 
   if ( IS_SET( victim->deaf, CHANNEL_TELLS )
-       && ( !IS_IMMORTAL( ch ) || ( get_trust( ch ) < get_trust( victim ) ) ) )
+       && ( !is_immortal( ch ) || ( get_trust( ch ) < get_trust( victim ) ) ) )
     {
       act( AT_PLAIN, "They can't hear you.", ch, NULL, victim, TO_CHAR );
       return;
     }
 
-  if ( ( !IS_IMMORTAL(ch) && !IS_AWAKE(victim) )
+  if ( ( !is_immortal(ch) && !IS_AWAKE(victim) )
        || ( !is_npc(victim) && IS_SET( victim->in_room->room_flags, ROOM_SILENCE ) ) )
     {
       act( AT_PLAIN, "$E can't hear you.", ch, 0, victim, TO_CHAR );
@@ -91,7 +91,7 @@ void do_reply( CHAR_DATA *ch, char *argument )
       append_to_file( LOG_FILE, buf );
     }
 
-  if( !IS_IMMORTAL(ch) && !sameroom )
+  if( !is_immortal(ch) && !sameroom )
     {
       for ( vch = ch->in_room->first_person; vch; vch = vch->next_in_room )
         {
@@ -110,7 +110,7 @@ void do_reply( CHAR_DATA *ch, char *argument )
           act( AT_SAY, "$n says quietly into his comlink '$t'", ch, sbuf, vch, TO_VICT );
         }
 
-      if ( !IS_IMMORTAL(victim) )
+      if ( !is_immortal(victim) )
 	{
 	  act( AT_ACTION, "$n's comlink buzzes with a message.",
 	       victim, NULL, NULL, TO_ROOM);

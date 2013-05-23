@@ -25,7 +25,7 @@ void do_practice( CHAR_DATA *ch, char *argument )
             continue;
 
           if ( str_cmp(skill_table[sn]->name, "reserved") == 0
-               && ( IS_IMMORTAL(ch) ) )
+               && ( is_immortal(ch) ) )
             {
               if ( col % 3 != 0 )
                 send_to_pager( "&r\r\n", ch );

@@ -17,7 +17,7 @@ ch_ret spell_locate_object( int sn, int level, CHAR_DATA *ch, void *vo )
     {
       if ( !can_see_obj( ch, obj ) || !nifty_is_name( spell_target_name, obj->name ) )
         continue;
-      if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) && !IS_IMMORTAL(ch) )
+      if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) && !is_immortal(ch) )
         continue;
 
       found = TRUE;
@@ -36,7 +36,7 @@ ch_ret spell_locate_object( int sn, int level, CHAR_DATA *ch, void *vo )
 
       if ( in_obj->carried_by )
         {
-          if ( IS_IMMORTAL( in_obj->carried_by )
+          if ( is_immortal( in_obj->carried_by )
                && !is_npc( in_obj->carried_by )
                && ( get_trust( ch ) < in_obj->carried_by->pcdata->wizinvis )
 	       && IS_SET( in_obj->carried_by->act, PLR_WIZINVIS ) )

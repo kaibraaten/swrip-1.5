@@ -66,7 +66,7 @@ void do_channels( CHAR_DATA *ch, char *argument )
                         ch );
         }
 
-      if ( IS_IMMORTAL(ch) )
+      if ( is_immortal(ch) )
         {
           send_to_char( !IS_SET(ch->deaf, CHANNEL_IMMTALK)
                         ? " +IMMTALK"
@@ -104,7 +104,7 @@ void do_channels( CHAR_DATA *ch, char *argument )
                     : " -arena",
                     ch );
 
-      if ( IS_IMMORTAL(ch) )
+      if ( is_immortal(ch) )
         {
           send_to_char( !IS_SET(ch->deaf, CHANNEL_MONITOR)
                         ? " +MONITOR"

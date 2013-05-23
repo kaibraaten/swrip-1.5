@@ -168,7 +168,7 @@ ch_ret spell_identify( int sn, int level, CHAR_DATA *ch, void *vo )
                 victim->name, aoran(get_race(victim)));
 
       if ( (chance(ch, 50) && ch->top_level >= victim->top_level + 10 )
-           ||    IS_IMMORTAL(ch) )
+           ||    is_immortal(ch) )
         {
           ch_printf(ch, "%s appears to be affected by: ", victim->name);
 

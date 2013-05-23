@@ -51,7 +51,7 @@ void do_mpforce( CHAR_DATA *ch, char *argument )
 
       if ( !is_npc( victim )
            && ( !victim->desc )
-           && IS_IMMORTAL( victim ) )
+           && is_immortal( victim ) )
         {
           progbug( "Mpforce - Attempting to force link dead immortal", ch );
           return;

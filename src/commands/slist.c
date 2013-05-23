@@ -22,7 +22,7 @@ void do_slist( CHAR_DATA *ch, char *argument )
 
   for ( ability = -1 ; ability < MAX_ABILITY ; ability++ )
     {
-      if ( ability == FORCE_ABILITY && !IS_IMMORTAL(ch) )
+      if ( ability == FORCE_ABILITY && !is_immortal(ch) )
         {
           continue;
         }

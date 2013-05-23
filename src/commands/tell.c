@@ -11,7 +11,7 @@ void do_tell( CHAR_DATA *ch, char *argument )
   CHAR_DATA *vch = NULL;
   bool sameroom = FALSE;
 
-  if ( IS_SET( ch->deaf, CHANNEL_TELLS ) && !IS_IMMORTAL( ch ) )
+  if ( IS_SET( ch->deaf, CHANNEL_TELLS ) && !is_immortal( ch ) )
     {
       act( AT_PLAIN, "You have tells turned off... try chan +tells first",
 	   ch, NULL, NULL, TO_CHAR );
@@ -41,7 +41,7 @@ void do_tell( CHAR_DATA *ch, char *argument )
 
   if ( ( victim = get_char_world( ch, arg ) ) == NULL
        || ( is_npc(victim) && victim->in_room != ch->in_room )
-       || (!NOT_AUTHED(ch) && NOT_AUTHED(victim) && !IS_IMMORTAL(ch) ) )
+       || (!NOT_AUTHED(ch) && NOT_AUTHED(victim) && !is_immortal(ch) ) )
     {
       send_to_char( "They can't hear you.\r\n", ch );
       return;
@@ -59,8 +59,8 @@ void do_tell( CHAR_DATA *ch, char *argument )
     }
   else
     {
-      bool ch_comlink = has_comlink(ch) || IS_IMMORTAL(ch);
-      bool victim_comlink = has_comlink(victim) || IS_IMMORTAL(victim);
+      bool ch_comlink = has_comlink(ch) || is_immortal(ch);
+      bool victim_comlink = has_comlink(victim) || is_immortal(victim);
 
       if ( !ch_comlink )
         {
@@ -75,7 +75,7 @@ void do_tell( CHAR_DATA *ch, char *argument )
         }
     }
 
-  if (NOT_AUTHED(ch) && !NOT_AUTHED(victim) && !IS_IMMORTAL(victim) )
+  if (NOT_AUTHED(ch) && !NOT_AUTHED(victim) && !is_immortal(victim) )
     {
       send_to_char( "They can't hear you because you are not authorized.\r\n", ch);
       return;
@@ -102,7 +102,7 @@ void do_tell( CHAR_DATA *ch, char *argument )
     }
 
   if ( IS_SET( victim->deaf, CHANNEL_TELLS )
-       && ( !IS_IMMORTAL( ch ) || ( get_trust( ch ) < get_trust( victim ) ) ) )
+       && ( !is_immortal( ch ) || ( get_trust( ch ) < get_trust( victim ) ) ) )
     {
       act( AT_PLAIN, "They can't hear you.", ch, NULL, victim, TO_CHAR );
       return;
@@ -113,7 +113,7 @@ void do_tell( CHAR_DATA *ch, char *argument )
       send_to_char( "That player is silenced. They will receive your message but can not respond.\r\n", ch );
     }
 
-  if ( (!IS_IMMORTAL(ch) && !IS_AWAKE(victim) )
+  if ( (!is_immortal(ch) && !IS_AWAKE(victim) )
        || (!is_npc(victim)&&IS_SET(victim->in_room->room_flags, ROOM_SILENCE ) ) )
     {
       act( AT_PLAIN, "$E can't hear you.", ch, 0, victim, TO_CHAR );
@@ -165,7 +165,7 @@ void do_tell( CHAR_DATA *ch, char *argument )
       append_to_file( LOG_FILE, buf );
     }
 
-  if( !IS_IMMORTAL(ch) && !sameroom )
+  if( !is_immortal(ch) && !sameroom )
     {
       for ( vch = ch->in_room->first_person; vch; vch = vch->next_in_room )
         {
@@ -185,7 +185,7 @@ void do_tell( CHAR_DATA *ch, char *argument )
 	       ch, sbuf, vch, TO_VICT );
         }
 
-      if ( !IS_IMMORTAL(victim) )
+      if ( !is_immortal(victim) )
 	{
 	  act( AT_ACTION, "$n's comlink buzzes with a message.",
 	       victim, NULL, NULL, TO_ROOM);

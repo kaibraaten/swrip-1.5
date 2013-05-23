@@ -386,7 +386,7 @@ void talk_channel( CHAR_DATA *ch, const char *argument, int channel, const char 
 		}
             }
 
-          if ( channel == CHANNEL_IMMTALK && !IS_IMMORTAL(och) )
+          if ( channel == CHANNEL_IMMTALK && !is_immortal(och) )
             continue;
           if ( channel == CHANNEL_103 && och->top_level < 103 )
             continue;
@@ -508,7 +508,7 @@ void to_channel( const char *argument, int channel, const char *verb, short leve
 
       if ( !och || !vch )
         continue;
-      if ( ( !IS_IMMORTAL(vch) && channel != CHANNEL_ARENA )
+      if ( ( !is_immortal(vch) && channel != CHANNEL_ARENA )
            || ( vch->top_level < sysdata.build_level && channel == CHANNEL_BUILD )
            || ( vch->top_level < sysdata.log_level
                 && ( channel == CHANNEL_LOG || channel == CHANNEL_COMM) ) )
@@ -651,7 +651,7 @@ bool knows_language( const CHAR_DATA *ch, int language, const CHAR_DATA *cch )
 {
   short sn;
 
-  if ( !is_npc(ch) && IS_IMMORTAL(ch) )
+  if ( !is_npc(ch) && is_immortal(ch) )
     return TRUE;
   if ( is_npc(ch) && !ch->speaks ) /* No langs = knows all for npcs */
     return TRUE;
@@ -696,7 +696,7 @@ bool can_learn_lang( const CHAR_DATA *ch, int language )
 {
   if ( language & LANG_CLAN )
     return FALSE;
-  if ( is_npc(ch) || IS_IMMORTAL(ch) )
+  if ( is_npc(ch) || is_immortal(ch) )
     return FALSE;
   if ( race_table[ch->race].language & language )
     return FALSE;

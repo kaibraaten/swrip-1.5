@@ -945,7 +945,7 @@ void operate_on_note( CHAR_DATA *ch, char *arg_passed, bool IS_MAIL )
         take = 1;
       else if ( !str_cmp( arg, "copy" ) )
         {
-          if ( !IS_IMMORTAL(ch) )
+          if ( !is_immortal(ch) )
             {
               send_to_char( "Huh?  Type 'help note' for usage.\r\n", ch );
               return;
