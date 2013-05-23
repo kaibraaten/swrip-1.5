@@ -106,7 +106,7 @@ void do_mstat( CHAR_DATA *ch, char *argument )
              victim->master      ? victim->master->name   : "(none)",
              victim->leader      ? victim->leader->name   : "(none)" );
   ch_printf( ch, "Questpoints: %d    Current QuestMob: %d    Current QuestObj: %d\r\n",
-             victim->questpoints, victim->questmob, victim->questobj );
+             victim->quest.questpoints, victim->quest.questmob, victim->quest.questobj );
 
   if ( !is_npc(victim) )
     ch_printf( ch,

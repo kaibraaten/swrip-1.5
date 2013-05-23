@@ -562,10 +562,10 @@ void do_mset( CHAR_DATA *ch, char *argument )
       if ( value < 0 || value > 100 )
         {
           send_to_char( "Let's be responible, hmm?", ch );
-          victim->nextquest = 0;
+          victim->quest.nextquest = 0;
           return;
         }
-      victim->nextquest = value;
+      victim->quest.nextquest = value;
       return;
     }
 
@@ -576,10 +576,10 @@ void do_mset( CHAR_DATA *ch, char *argument )
       if ( value < 0 || value > 2000 )
         {
           send_to_char( "Let's be responible, hmm?", ch );
-          victim->questpoints = 0;
+          victim->quest.questpoints = 0;
           return;
         }
-      victim->questpoints = value;
+      victim->quest.questpoints = value;
       return;
     }
 

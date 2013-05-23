@@ -65,7 +65,7 @@ void generate_quest(CHAR_DATA *ch, CHAR_DATA *questman)
       do_say(questman, buf);
       sprintf(buf, "Try again later.");
       do_say(questman, buf);
-      ch->nextquest = 5;
+      ch->quest.nextquest = 5;
       return;
     }
 
@@ -75,7 +75,7 @@ void generate_quest(CHAR_DATA *ch, CHAR_DATA *questman)
       do_say(questman, buf);
       sprintf(buf, "Try again later.");
       do_say(questman, buf);
-      ch->nextquest = 5;
+      ch->quest.nextquest = 5;
       return;
     }
 
@@ -111,7 +111,7 @@ void generate_quest(CHAR_DATA *ch, CHAR_DATA *questman)
       questitem = create_object( get_obj_index(objvnum), ch->top_level );
       obj_to_room(questitem, room);
       questitem->timer = 30;
-      ch->questobj = questitem->pIndexData->vnum;
+      ch->quest.questobj = questitem->pIndexData->vnum;
 
       sprintf(buf, "Vile pilferers have stolen %s from the treasury!",questitem->short_descr);
       do_say(questman, buf);
@@ -160,7 +160,7 @@ void generate_quest(CHAR_DATA *ch, CHAR_DATA *questman)
           sprintf(buf, "That location is in the general area of %s.",room->area->name);
           do_say(questman, buf);
         }
-      ch->questmob = victim->pIndexData->vnum;
+      ch->quest.questmob = victim->pIndexData->vnum;
     }
 }
 
@@ -174,11 +174,11 @@ void quest_update(void)
 
       if (is_npc(ch)) continue;
 
-      if (ch->nextquest > 0)
+      if (ch->quest.nextquest > 0)
         {
-          ch->nextquest--;
+          ch->quest.nextquest--;
 
-          if (ch->nextquest == 0)
+          if (ch->quest.nextquest == 0)
             {
               send_to_char("You may now quest again.\r\n",ch);
               return;
@@ -186,19 +186,19 @@ void quest_update(void)
         }
       else if (IS_SET(ch->act,PLR_QUESTOR))
 	{
-          if (--ch->countdown <= 0)
+          if (--ch->quest.countdown <= 0)
             {
               char buf [MAX_STRING_LENGTH];
 
-              ch->nextquest = 30;
-              sprintf(buf, "You have run out of time for your quest!\r\nYou may quest again in %d minutes.\r\n",ch->nextquest);
+              ch->quest.nextquest = 30;
+              sprintf(buf, "You have run out of time for your quest!\r\nYou may quest again in %d minutes.\r\n",ch->quest.nextquest);
               send_to_char(buf, ch);
               REMOVE_BIT(ch->act, PLR_QUESTOR);
-              ch->questgiver = NULL;
-              ch->countdown = 0;
-              ch->questmob = 0;
+              ch->quest.questgiver = NULL;
+              ch->quest.countdown = 0;
+              ch->quest.questmob = 0;
             }
-          if (ch->countdown > 0 && ch->countdown < 6)
+          if (ch->quest.countdown > 0 && ch->quest.countdown < 6)
             {
               send_to_char("Better hurry, you're almost out of time for your quest!\r\n",ch);
               return;

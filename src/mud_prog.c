@@ -633,15 +633,15 @@ int mprog_do_ifcheck( const char *ifcheck, CHAR_DATA *mob, CHAR_DATA *actor,
         }
       if ( !str_cmp(chck, "questmob") )
         {
-          return ( mprog_veval(chkchar->questmob, opr, atoi(rval), mob ) );
+          return ( mprog_veval(chkchar->quest.questmob, opr, atoi(rval), mob ) );
         }
       if ( !str_cmp(chck, "questobj") )
         {
-          return ( mprog_veval(chkchar->questobj, opr, atoi(rval), mob ) );
+          return ( mprog_veval(chkchar->quest.questobj, opr, atoi(rval), mob ) );
         }
       if ( !str_cmp(chck, "questpoints") )
         {
-          return ( mprog_veval(chkchar->questpoints, opr, atoi(rval), mob ) );
+          return ( mprog_veval(chkchar->quest.questpoints, opr, atoi(rval), mob ) );
         }
       if ( !str_cmp(chck, "ispc") )
         {

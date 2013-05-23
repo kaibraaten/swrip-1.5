@@ -374,8 +374,8 @@ void fwrite_char( CHAR_DATA *ch, FILE *fp )
   fprintf( fp, "Salary_time         %ld\n",     ch->pcdata->salary_date );
   fprintf( fp, "Salary         %d\n",   ch->pcdata->salary              );
   fprintf( fp, "Clones         %d\n",   ch->pcdata->clones              );
-  fprintf( fp, "Questpoints         %d\n",      ch->questpoints         );
-  fprintf( fp, "Nextquest         %d\n",        ch->nextquest           );
+  fprintf( fp, "Questpoints         %d\n",      ch->quest.questpoints         );
+  fprintf( fp, "Nextquest         %d\n",        ch->quest.nextquest           );
   fprintf( fp, "Jailvnum         %d\n", ch->pcdata->jail_vnum   );
   if ( ch->act )
     fprintf( fp, "Act          %d\n", ch->act                   );
@@ -927,8 +927,8 @@ bool load_char_obj( DESCRIPTOR_DATA *d, char *name, bool preload )
       ch->description                   = STRALLOC( "" );
       ch->pcdata->target                = STRALLOC( "" );
       ch->editor                        = NULL;
-      ch->nextquest                             = 0;
-      ch->questpoints                           = 0;
+      ch->quest.nextquest                             = 0;
+      ch->quest.questpoints                           = 0;
       ch->pcdata->clones                        = 0;
       ch->pcdata->jail_vnum                     = 0;
       ch->pcdata->clan_name             = STRALLOC( "" );
@@ -1383,7 +1383,7 @@ void fread_char( CHAR_DATA *ch, FILE *fp, bool preload )
           break;
 
         case 'N':
-          KEY( "Nextquest",     ch->nextquest,  fread_number( fp ) );
+          KEY( "Nextquest",     ch->quest.nextquest,  fread_number( fp ) );
 
           if ( !str_cmp( word, "Name" ) )
             {
@@ -1431,7 +1431,7 @@ void fread_char( CHAR_DATA *ch, FILE *fp, bool preload )
           break;
 
         case 'Q':
-          KEY( "Questpoints",        ch->questpoints,           fread_number( fp ) );
+          KEY( "Questpoints",        ch->quest.questpoints,           fread_number( fp ) );
 
         case 'R':
           KEY( "Race",        ch->race,         fread_number( fp ) );

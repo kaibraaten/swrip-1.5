@@ -74,12 +74,14 @@ struct char_data
   short         trust;
   short         timer;
   short         wait;
+
   short         hit;
   short         max_hit;
   short         mana;
   short         max_mana;
   short         move;
   short         max_move;
+
   short         numattacks;
   int                   gold;
   int           act;
@@ -154,12 +156,17 @@ struct char_data
   GUARD_DATA      *   guard_data;
   ROOM_INDEX_DATA *   buzzed_home;
   ROOM_INDEX_DATA *   buzzed_from_room;
-  short              questmob;
-  short         questobj;
-  short              questpoints;
-  int           nextquest;
-  int                   countdown;
-  CHAR_DATA       *   questgiver;
+
+  struct
+  {
+    short      questmob;
+    short      questobj;
+    short      questpoints;
+    int        nextquest;
+    int        countdown;
+    CHAR_DATA *questgiver;
+  } quest;
+
   CHAR_DATA           *   challenged;
   CHAR_DATA *         betted_on;
   int                 bet_amt;

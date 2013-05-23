@@ -2125,9 +2125,9 @@ void raw_kill( CHAR_DATA *ch, CHAR_DATA *victim )
 
   if ( is_npc(victim) )
     {
-      if ( victim->pIndexData->vnum == ch->questmob )
+      if ( victim->pIndexData->vnum == ch->quest.questmob )
         {
-          ch->questmob = -1;
+          ch->quest.questmob = -1;
           send_to_char("&RYou have completed your quest! Return to your employer now to gain the reward!\r\n",ch);
 
         }
