@@ -1,6 +1,7 @@
 #include <time.h>
 #include "mud.h"
 #include "shops.h"
+#include "character.h"
 
 void do_collectgold (CHAR_DATA *ch, char *argument)
 {

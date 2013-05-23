@@ -1,6 +1,7 @@
 #include <string.h>
 #include "ships.h"
 #include "mud.h"
+#include "character.h"
 
 void do_drive( CHAR_DATA *ch, char *argument )
 {

@@ -1,3 +1,4 @@
+#include "character.h"
 #include "mud.h"
 
 ch_ret spell_hand_of_chaos( int sn, int level, CHAR_DATA *ch, void *vo )

@@ -1,3 +1,4 @@
+#include "character.h"
 #include "mud.h"
 
 extern char *spell_target_name;

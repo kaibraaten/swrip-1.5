@@ -1,5 +1,6 @@
 #include "mud.h"
 #include "ships.h"
+#include "character.h"
 
 void do_renameship( CHAR_DATA *ch, char *argument )
 {

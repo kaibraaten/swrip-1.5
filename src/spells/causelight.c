@@ -1,3 +1,4 @@
+#include "character.h"
 #include "mud.h"
 
 ch_ret spell_cause_light( int sn, int level, CHAR_DATA *ch, void *vo )

@@ -1,3 +1,4 @@
+#include "character.h"
 #include "mud.h"
 
 /*
@@ -5,8 +6,8 @@
  */
 void do_mp_slay( CHAR_DATA *ch, char *argument )
 {
-  if( ch->top_level >= 103 )
-    do_slay( ch, argument );
-
-  return;
+  if( ch->top_level >= LEVEL_GOD )
+    {
+      do_slay( ch, argument );
+    }
 }

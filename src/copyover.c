@@ -32,6 +32,7 @@
 #include <string.h>
 #include <stdarg.h>
 #include "mud.h"
+#include "character.h"
 
 #ifdef _WIN32
 #include <process.h>

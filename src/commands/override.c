@@ -2,10 +2,10 @@
 #include "vector3_aux.h"
 #include "mud.h"
 #include "ships.h"
+#include "character.h"
 
 void do_override(CHAR_DATA *ch, char *argument)
 {
-
   char arg[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
   char buf[MAX_STRING_LENGTH];

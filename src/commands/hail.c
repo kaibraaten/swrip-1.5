@@ -2,6 +2,7 @@
 #include "mud.h"
 #include "vector3_aux.h"
 #include "ships.h"
+#include "character.h"
 
 void do_hail( CHAR_DATA *ch , char *argument )
 {

@@ -1,5 +1,6 @@
 #include "ships.h"
 #include "mud.h"
+#include "character.h"
 
 void do_openhatch(CHAR_DATA *ch, char *argument )
 {

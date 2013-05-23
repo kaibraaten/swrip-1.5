@@ -1,4 +1,5 @@
 #include "mud.h"
+#include "character.h"
 
 ch_ret spell_magic_missile( int sn, int level, CHAR_DATA *ch, void *vo )
 {
@@ -24,9 +25,6 @@ ch_ret spell_magic_missile( int sn, int level, CHAR_DATA *ch, void *vo )
   level = UMIN(level, sizeof(dam_each)/sizeof(dam_each[0]) - 1);
   level = UMAX(0, level);
   dam           = number_range( dam_each[level] / 2, dam_each[level] * 2 );
-  /*  What's this?  You can't save vs. magic missile!           -Thoric
-      if ( saves_spell( level, victim ) )
-      dam /= 2;
-  */
+
   return damage( ch, victim, dam, sn );
 }

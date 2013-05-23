@@ -1,3 +1,4 @@
+#include "character.h"
 #include "vector3_aux.h"
 #include "mud.h"
 #include "ships.h"

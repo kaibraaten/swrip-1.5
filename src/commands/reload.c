@@ -1,6 +1,7 @@
 #include <string.h>
 #include "mud.h"
 #include "ships.h"
+#include "character.h"
 
 void do_reload( CHAR_DATA *ch, char *argument )
 {

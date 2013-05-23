@@ -1,4 +1,5 @@
 #include "mud.h"
+#include "character.h"
 
 /*
  * Force a level one player to quit.             Gorog
