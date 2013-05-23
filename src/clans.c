@@ -790,7 +790,7 @@ void update_member( const CHAR_DATA *ch )
 		      member->deaths = ch->pcdata->clones;
 		    }
 
-		  member->mclass = ch->main_ability;
+		  member->mclass = ch->ability.main;
 		  member->level = ch->top_level;
 		  return;
 		}
@@ -804,7 +804,7 @@ void update_member( const CHAR_DATA *ch )
 	      CREATE( member, MEMBER_DATA, 1 );
 	      member->name = STRALLOC( ch->name );
 	      member->level = ch->top_level;
-	      member->mclass = ch->main_ability;
+	      member->mclass = ch->ability.main;
 	      sprintf( buf, "[%02d|%02d|%04d]", t->tm_mon+1, t->tm_mday, t->tm_year+1900 );
 	      member->since = STRALLOC( buf );
 

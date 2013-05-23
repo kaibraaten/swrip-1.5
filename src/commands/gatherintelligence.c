@@ -113,7 +113,7 @@ void do_gather_intelligence ( CHAR_DATA *ch , char *argument )
 
       if ( the_chance < 50 )
         {
-          switch(victim->main_ability)
+          switch(victim->ability.main)
             {
             case COMBAT_ABILITY:
               sprintf( buf, "%s appears to have centered training on combat.", victim->name );

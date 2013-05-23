@@ -585,7 +585,7 @@ static void nanny_get_new_class( DESCRIPTOR_DATA *d, char *argument )
       if ( toupper(arg[0]) == toupper(ability_name[iClass][0])
 	   && !str_prefix( arg, ability_name[iClass] ) )
 	{
-	  ch->main_ability = iClass;
+	  ch->ability.main = iClass;
 	  break;
 	}
     }
@@ -796,7 +796,7 @@ static void nanny_read_motd( DESCRIPTOR_DATA *d, char *argument )
       ch->stats.perm_lck   += race_table[ch->race].lck_plus;
       ch->stats.perm_frc   += race_table[ch->race].frc_plus;
 
-      if ( ch->main_ability == FORCE_ABILITY )
+      if ( ch->ability.main == FORCE_ABILITY )
 	{
 	  ch->stats.perm_frc = URANGE( 1 , ch->stats.perm_frc , 20 );
 	}
@@ -807,7 +807,7 @@ static void nanny_read_motd( DESCRIPTOR_DATA *d, char *argument )
 
       /* Hunters do not recieve force */
 
-      if ( ch->main_ability == HUNTING_ABILITY )
+      if ( ch->ability.main == HUNTING_ABILITY )
 	{
 	  ch->stats.perm_frc = 0;
 	}

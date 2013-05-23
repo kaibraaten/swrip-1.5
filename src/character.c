@@ -20,7 +20,7 @@ long get_exp( const CHAR_DATA *ch, short ability )
   if ( ability >= MAX_ABILITY || ability < 0 )
     return 0;
 
-  return ch->experience[ability];
+  return ch->ability.experience[ability];
 }
 
 void set_exp( CHAR_DATA *ch, short ability, long xp )
@@ -37,7 +37,7 @@ void set_exp( CHAR_DATA *ch, short ability, long xp )
       return;
     }
 
-  ch->experience[ability] = xp;
+  ch->ability.experience[ability] = xp;
 }
 
 /*
@@ -261,13 +261,13 @@ bool has_comlink( const CHAR_DATA *ch )
 
 short get_level( const CHAR_DATA *ch, short ability )
 {
-  return ch->ability_level[ability];
+  return ch->ability.level[ability];
 }
 
 void set_level( CHAR_DATA *ch, short ability, int newlevel )
 {
   if( newlevel >= 0 && newlevel <= MAX_ABILITY_LEVEL )
-    ch->ability_level[ability] = newlevel;
+    ch->ability.level[ability] = newlevel;
   else
     bug("%s: level out of range: %d", newlevel);
 }

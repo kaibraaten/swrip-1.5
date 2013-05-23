@@ -50,7 +50,7 @@ void do_showstatistic( CHAR_DATA *ch, char *argument )
     raceCh->race = race;
   else
     {
-      raceCh->main_ability = pclass;
+      raceCh->ability.main = pclass;
       raceCh->race = 0;
     }
 
@@ -74,7 +74,7 @@ void do_showstatistic( CHAR_DATA *ch, char *argument )
         {
           if( iC == FORCE_ABILITY )
             continue;
-          raceCh->main_ability = iC;
+          raceCh->ability.main = iC;
 	  sprintf( buf, "\r\n&c%-20s &B| &C", ability_name[iC] );
           for( iC2 = 0; iC2 < MAX_ABILITY; iC2++ )
             {

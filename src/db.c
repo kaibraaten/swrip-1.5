@@ -2236,7 +2236,7 @@ CHAR_DATA *create_mobile( MOB_INDEX_DATA *pMobIndex )
   mob->affected_by              = pMobIndex->affected_by;
   mob->alignment                = pMobIndex->alignment;
   mob->sex                      = pMobIndex->sex;
-  mob->main_ability             = 0;
+  mob->ability.main             = 0;
   mob->mob_clan               = STRALLOC( "" );
   mob->was_sentinel           = NULL;
   mob->plr_home               = NULL;

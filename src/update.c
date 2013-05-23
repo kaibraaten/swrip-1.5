@@ -122,10 +122,10 @@ int max_level( const CHAR_DATA *ch, int ability)
 
   if ( ability == COMBAT_ABILITY )
     {
-      if ( ch->main_ability == COMBAT_ABILITY ) level = 100;
-      if ( ch->main_ability == FORCE_ABILITY ) level = 25;
-      if ( ch->main_ability == HUNTING_ABILITY ) level = 25;
-      if ( ch->main_ability == COMMANDO_ABILITY ) level = 50;
+      if ( ch->ability.main == COMBAT_ABILITY ) level = 100;
+      if ( ch->ability.main == FORCE_ABILITY ) level = 25;
+      if ( ch->ability.main == HUNTING_ABILITY ) level = 25;
+      if ( ch->ability.main == COMMANDO_ABILITY ) level = 50;
       if ( ch->race == RACE_SHISTAVANEN) level += 35;
       if ( ch->race == RACE_WOOKIEE ) level += 31;
       /* if ( ch->race == RACE_NOGHRI ) level += 50; */
@@ -156,12 +156,12 @@ int max_level( const CHAR_DATA *ch, int ability)
 
   if ( ability == PILOTING_ABILITY )
     {
-      if ( ch->main_ability == ability ) level = 100;
-      if ( ch->main_ability == ENGINEERING_ABILITY ) level = 25;
-      if ( ch->main_ability == HUNTING_ABILITY ) level = 25;
-      if ( ch->main_ability == SMUGGLING_ABILITY ) level = 50;
-      if ( ch->main_ability == FORCE_ABILITY ) level = 25;
-      if ( ch->main_ability == COMMANDO_ABILITY ) level = 25;
+      if ( ch->ability.main == ability ) level = 100;
+      if ( ch->ability.main == ENGINEERING_ABILITY ) level = 25;
+      if ( ch->ability.main == HUNTING_ABILITY ) level = 25;
+      if ( ch->ability.main == SMUGGLING_ABILITY ) level = 50;
+      if ( ch->ability.main == FORCE_ABILITY ) level = 25;
+      if ( ch->ability.main == COMMANDO_ABILITY ) level = 25;
       if ( ch->race == RACE_SHISTAVANEN) level += 5;
       if ( ch->race == RACE_HUTT ) level -= 10;
       if ( ch->race == RACE_GAMORREAN ) level -= 10;
@@ -186,8 +186,8 @@ int max_level( const CHAR_DATA *ch, int ability)
 
   if ( ability == ENGINEERING_ABILITY )
     {
-      if ( ch->main_ability == ability ) level = 100;
-      if ( ch->main_ability == PILOTING_ABILITY ) level = 20;
+      if ( ch->ability.main == ability ) level = 100;
+      if ( ch->ability.main == PILOTING_ABILITY ) level = 20;
       if ( ch->race == RACE_SHISTAVANEN) level -= 20;
       if ( ch->race == RACE_WOOKIEE ) level += 10;
       if ( ch->race == RACE_RODIAN ) level -= 10;
@@ -215,7 +215,7 @@ int max_level( const CHAR_DATA *ch, int ability)
 
   if ( ability == HUNTING_ABILITY )
     {
-      if ( ch->main_ability == ability ) level = 100;
+      if ( ch->ability.main == ability ) level = 100;
       if ( ch->race == RACE_SHISTAVANEN) level += 20;
       if ( ch->race == RACE_WOOKIEE ) level += 10;
       if ( ch->race == RACE_RODIAN ) level += 50;
@@ -237,10 +237,10 @@ int max_level( const CHAR_DATA *ch, int ability)
 
   if ( ability == SMUGGLING_ABILITY )
     {
-      if ( ch->main_ability == ability ) level = 100;
-      if ( ch->main_ability == PILOTING_ABILITY ) level = 20;
-      if ( ch->main_ability == ENGINEERING_ABILITY ) level = 25;
-      if ( ch->main_ability == COMMANDO_ABILITY ) level = 50;
+      if ( ch->ability.main == ability ) level = 100;
+      if ( ch->ability.main == PILOTING_ABILITY ) level = 20;
+      if ( ch->ability.main == ENGINEERING_ABILITY ) level = 25;
+      if ( ch->ability.main == COMMANDO_ABILITY ) level = 50;
       if ( ch->race == RACE_SHISTAVANEN) level += 15;
       if ( ch->race == RACE_TOGARIAN ) level += 15;
       if ( ch->race == RACE_COYNITE) level += 15;
@@ -264,9 +264,9 @@ int max_level( const CHAR_DATA *ch, int ability)
 
   if ( ability == LEADERSHIP_ABILITY )
     {
-      if ( ch->main_ability == ability )    level = 100;
-      if ( ch->main_ability == COMBAT_ABILITY ) level = 50;
-      if ( ch->main_ability == DIPLOMACY_ABILITY ) level = 50;
+      if ( ch->ability.main == ability )    level = 100;
+      if ( ch->ability.main == COMBAT_ABILITY ) level = 50;
+      if ( ch->ability.main == DIPLOMACY_ABILITY ) level = 50;
       if ( ch->race == RACE_SHISTAVANEN) level -= 15;
       if ( ch->race == RACE_TWI_LEK ) level -= 25;
       if ( ch->race == RACE_RODIAN ) level -= 20;
@@ -293,9 +293,9 @@ int max_level( const CHAR_DATA *ch, int ability)
 
   if ( ability == DIPLOMACY_ABILITY )
     {
-      if ( ch->main_ability == ability )    level = 100;
-      if ( ch->main_ability == PILOTING_ABILITY ) level = 10;
-      if ( ch->main_ability == LEADERSHIP_ABILITY ) level = 50;
+      if ( ch->ability.main == ability )    level = 100;
+      if ( ch->ability.main == PILOTING_ABILITY ) level = 10;
+      if ( ch->ability.main == LEADERSHIP_ABILITY ) level = 50;
       if ( ch->race == RACE_SHISTAVANEN) level -= 30;
       if ( ch->race == RACE_WOOKIEE ) level -= 50;
       if ( ch->race == RACE_TWI_LEK ) level -= 25;
@@ -332,7 +332,7 @@ int max_level( const CHAR_DATA *ch, int ability)
 
   if ( ability == FORCE_ABILITY )
     {
-      if ( ch->main_ability == ability )
+      if ( ch->ability.main == ability )
         level = 20;
       else
         level = 0;

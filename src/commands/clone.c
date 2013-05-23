@@ -60,7 +60,7 @@ void do_clone( CHAR_DATA *ch, char *argument )
      well as a slight chance of gaining force, also depending on
      the magnitude of the character's force */
 
-  if ( ch->main_ability == FORCE_ABILITY )
+  if ( ch->ability.main == FORCE_ABILITY )
     low_frc = 1;
 
 
@@ -87,7 +87,7 @@ void do_clone( CHAR_DATA *ch, char *argument )
 
   /* Droids and hunters dont get force. DV */
 
-  if (ch->main_ability == HUNTING_ABILITY )
+  if (ch->ability.main == HUNTING_ABILITY )
     ch->stats.perm_frc = low_frc;
 
   if (ch->race == RACE_DROID )

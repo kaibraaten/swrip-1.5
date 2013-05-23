@@ -63,7 +63,14 @@ struct char_data
   short         sex;
   short         race;
   short top_level;
-  short ability_level[MAX_ABILITY];
+
+  struct
+  {
+    short main;
+    short level[MAX_ABILITY];
+    long experience[MAX_ABILITY];
+  } ability;
+
   short         trust;
   short         timer;
   short         wait;
@@ -75,7 +82,6 @@ struct char_data
   short         max_move;
   short         numattacks;
   int                   gold;
-  long          experience[MAX_ABILITY];
   int           act;
   int                   affected_by;
   int                   carry_weight;
@@ -146,7 +152,6 @@ struct char_data
   short              was_stunned;
   char            *   mob_clan;    /* for spec_clan_guard.. set by postguard */
   GUARD_DATA      *   guard_data;
-  short              main_ability;
   ROOM_INDEX_DATA *   buzzed_home;
   ROOM_INDEX_DATA *   buzzed_from_room;
   short              questmob;

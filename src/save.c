@@ -344,7 +344,7 @@ void fwrite_char( CHAR_DATA *ch, FILE *fp )
     fprintf( fp, "Description  %s~\n",  ch->description );
   fprintf( fp, "Sex          %d\n",     ch->sex                 );
   fprintf( fp, "Race         %d\n",     ch->race                );
-  fprintf( fp, "MainAbility  %d\n",     ch->main_ability        );
+  fprintf( fp, "MainAbility  %d\n",     ch->ability.main        );
   fprintf( fp, "Languages    %d %d\n", ch->speaks, ch->speaking );
   fprintf( fp, "Toplevel     %d\n",     ch->top_level           );
   if ( ch->trust )
@@ -1367,7 +1367,7 @@ void fread_char( CHAR_DATA *ch, FILE *fp, bool preload )
           break;
 
         case 'M':
-          KEY( "MainAbility",   ch->main_ability,               fread_number( fp ) );
+          KEY( "MainAbility",   ch->ability.main,               fread_number( fp ) );
           KEY( "MDeaths",       ch->pcdata->mdeaths,    fread_number( fp ) );
           KEY( "Mentalstate", ch->mental_state, fread_number( fp ) );
           KEY( "MGlory",      ch->pcdata->quest_accum,fread_number( fp ) );
