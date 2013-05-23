@@ -60,7 +60,7 @@ bool is_wielding_poisoned( CHAR_DATA *ch )
  */
 bool is_hunting( CHAR_DATA *ch, CHAR_DATA *victim )
 {
-  if ( !ch->hunting || ch->hunting->who != victim )
+  if ( !ch->hhf.hunting || ch->hhf.hunting->who != victim )
     return FALSE;
 
   return TRUE;
@@ -68,7 +68,7 @@ bool is_hunting( CHAR_DATA *ch, CHAR_DATA *victim )
 
 bool is_hating( CHAR_DATA *ch, CHAR_DATA *victim )
 {
-  if ( !ch->hating || ch->hating->who != victim )
+  if ( !ch->hhf.hating || ch->hhf.hating->who != victim )
     return FALSE;
 
   return TRUE;
@@ -76,7 +76,7 @@ bool is_hating( CHAR_DATA *ch, CHAR_DATA *victim )
 
 bool is_fearing( CHAR_DATA *ch, CHAR_DATA *victim )
 {
-  if ( !ch->fearing || ch->fearing->who != victim )
+  if ( !ch->hhf.fearing || ch->hhf.fearing->who != victim )
     return FALSE;
 
   return TRUE;
@@ -84,67 +84,67 @@ bool is_fearing( CHAR_DATA *ch, CHAR_DATA *victim )
 
 void stop_hunting( CHAR_DATA *ch )
 {
-  if ( ch->hunting )
+  if ( ch->hhf.hunting )
     {
-      STRFREE( ch->hunting->name );
-      DISPOSE( ch->hunting );
-      ch->hunting = NULL;
+      STRFREE( ch->hhf.hunting->name );
+      DISPOSE( ch->hhf.hunting );
+      ch->hhf.hunting = NULL;
     }
   return;
 }
 
 void stop_hating( CHAR_DATA *ch )
 {
-  if ( ch->hating )
+  if ( ch->hhf.hating )
     {
-      STRFREE( ch->hating->name );
-      DISPOSE( ch->hating );
-      ch->hating = NULL;
+      STRFREE( ch->hhf.hating->name );
+      DISPOSE( ch->hhf.hating );
+      ch->hhf.hating = NULL;
     }
   return;
 }
 
 void stop_fearing( CHAR_DATA *ch )
 {
-  if ( ch->fearing )
+  if ( ch->hhf.fearing )
     {
-      STRFREE( ch->fearing->name );
-      DISPOSE( ch->fearing );
-      ch->fearing = NULL;
+      STRFREE( ch->hhf.fearing->name );
+      DISPOSE( ch->hhf.fearing );
+      ch->hhf.fearing = NULL;
     }
   return;
 }
 
 void start_hunting( CHAR_DATA *ch, CHAR_DATA *victim )
 {
-  if ( ch->hunting )
+  if ( ch->hhf.hunting )
     stop_hunting( ch );
 
-  CREATE( ch->hunting, HHF_DATA, 1 );
-  ch->hunting->name = QUICKLINK( victim->name );
-  ch->hunting->who  = victim;
+  CREATE( ch->hhf.hunting, HHF_DATA, 1 );
+  ch->hhf.hunting->name = QUICKLINK( victim->name );
+  ch->hhf.hunting->who  = victim;
   return;
 }
 
 void start_hating( CHAR_DATA *ch, CHAR_DATA *victim )
 {
-  if ( ch->hating )
+  if ( ch->hhf.hating )
     stop_hating( ch );
 
-  CREATE( ch->hating, HHF_DATA, 1 );
-  ch->hating->name = QUICKLINK( victim->name );
-  ch->hating->who  = victim;
+  CREATE( ch->hhf.hating, HHF_DATA, 1 );
+  ch->hhf.hating->name = QUICKLINK( victim->name );
+  ch->hhf.hating->who  = victim;
   return;
 }
 
 void start_fearing( CHAR_DATA *ch, CHAR_DATA *victim )
 {
-  if ( ch->fearing )
+  if ( ch->hhf.fearing )
     stop_fearing( ch );
 
-  CREATE( ch->fearing, HHF_DATA, 1 );
-  ch->fearing->name = QUICKLINK( victim->name );
-  ch->fearing->who  = victim;
+  CREATE( ch->hhf.fearing, HHF_DATA, 1 );
+  ch->hhf.fearing->name = QUICKLINK( victim->name );
+  ch->hhf.fearing->who  = victim;
   return;
 }
 
@@ -1242,26 +1242,26 @@ ch_ret damage( CHAR_DATA *ch, CHAR_DATA *victim, int dam, int dt )
     {
       if ( !IS_SET( victim->act, ACT_SENTINEL ) )
         {
-          if ( victim->hunting )
+          if ( victim->hhf.hunting )
             {
-              if ( victim->hunting->who != ch )
+              if ( victim->hhf.hunting->who != ch )
                 {
-                  STRFREE( victim->hunting->name );
-                  victim->hunting->name = QUICKLINK( ch->name );
-                  victim->hunting->who  = ch;
+                  STRFREE( victim->hhf.hunting->name );
+                  victim->hhf.hunting->name = QUICKLINK( ch->name );
+                  victim->hhf.hunting->who  = ch;
                 }
             }
           else
             start_hunting( victim, ch );
         }
 
-      if ( victim->hating )
+      if ( victim->hhf.hating )
         {
-          if ( victim->hating->who != ch )
+          if ( victim->hhf.hating->who != ch )
             {
-              STRFREE( victim->hating->name );
-              victim->hating->name = QUICKLINK( ch->name );
-              victim->hating->who  = ch;
+              STRFREE( victim->hhf.hating->name );
+              victim->hhf.hating->name = QUICKLINK( ch->name );
+              victim->hhf.hating->who  = ch;
             }
         }
       else
@@ -1552,13 +1552,13 @@ ch_ret damage( CHAR_DATA *ch, CHAR_DATA *victim, int dam, int dt )
        &&   !is_affected_by( victim, AFF_PARALYSIS ) )
     {
       if ( victim->fighting
-           &&   victim->fighting->who->hunting
-           &&   victim->fighting->who->hunting->who == victim )
+           &&   victim->fighting->who->hhf.hunting
+           &&   victim->fighting->who->hhf.hunting->who == victim )
         stop_hunting( victim->fighting->who );
 
       if ( victim->fighting
-           &&   victim->fighting->who->hating
-           &&   victim->fighting->who->hating->who == victim )
+           &&   victim->fighting->who->hhf.hating
+           &&   victim->fighting->who->hhf.hating->who == victim )
         stop_hating( victim->fighting->who );
 
       stop_fighting( victim, TRUE );

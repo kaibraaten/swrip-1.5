@@ -2508,9 +2508,9 @@ OBJ_DATA *create_object( OBJ_INDEX_DATA *pObjIndex, int level )
 void clear_char( CHAR_DATA *ch )
 {
   ch->editor                    = NULL;
-  ch->hunting                   = NULL;
-  ch->fearing                   = NULL;
-  ch->hating                    = NULL;
+  ch->hhf.hunting                   = NULL;
+  ch->hhf.fearing                   = NULL;
+  ch->hhf.hating                    = NULL;
   ch->name                      = NULL;
   ch->short_descr               = NULL;
   ch->long_descr                = NULL;

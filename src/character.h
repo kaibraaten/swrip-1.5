@@ -16,9 +16,14 @@ struct char_data
   CHAR_DATA *           reply;
   CHAR_DATA *           switched;
   CHAR_DATA *           mount;
-  HHF_DATA *            hunting;
-  HHF_DATA *            fearing;
-  HHF_DATA *            hating;
+
+  struct
+  {
+    HHF_DATA *            hunting;
+    HHF_DATA *            fearing;
+    HHF_DATA *            hating;
+  } hhf;
+
   SPEC_FUN *            spec_fun;
   SPEC_FUN *            spec_2;
   MPROG_ACT_LIST *      mpact;

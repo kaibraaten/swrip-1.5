@@ -289,12 +289,12 @@ void hunt_victim( CHAR_DATA *ch )
   CHAR_DATA *tmp;
   short ret;
 
-  if (!ch || !ch->hunting || !ch->hunting->who )
+  if (!ch || !ch->hhf.hunting || !ch->hhf.hunting->who )
     return;
 
   /* make sure the char still exists */
   for (found = FALSE, tmp = first_char; tmp && !found; tmp = tmp->next)
-    if (ch->hunting->who == tmp)
+    if (ch->hhf.hunting->who == tmp)
       found = TRUE;
 
   if (!found)
@@ -304,11 +304,11 @@ void hunt_victim( CHAR_DATA *ch )
       return;
     }
 
-  if ( ch->in_room == ch->hunting->who->in_room )
+  if ( ch->in_room == ch->hhf.hunting->who->in_room )
     {
       if ( ch->fighting )
         return;
-      found_prey( ch, ch->hunting->who );
+      found_prey( ch, ch->hhf.hunting->who );
       return;
     }
 
@@ -319,14 +319,14 @@ void hunt_victim( CHAR_DATA *ch )
     wield = get_eq_char( ch, WEAR_WIELD );
     if ( wield != NULL && wield->value[3] == WEAPON_BLASTER  )
       {
-        if ( mob_snipe( ch, ch->hunting->who ) == TRUE )
+        if ( mob_snipe( ch, ch->hhf.hunting->who ) == TRUE )
           return;
       }
     else if ( !IS_SET( ch->act, ACT_DROID ) )
       do_hide ( ch, "" );
   }
 
-  ret = find_first_step(ch->in_room, ch->hunting->who->in_room, 5000);
+  ret = find_first_step(ch->in_room, ch->hhf.hunting->who->in_room, 5000);
   if ( ret == BFS_NO_PATH )
     {
       EXIT_DATA *pexit;
@@ -353,7 +353,7 @@ void hunt_victim( CHAR_DATA *ch )
       move_char( ch, get_exit( ch->in_room, ret), FALSE );
       if ( char_died(ch) )
         return;
-      if ( !ch->hunting )
+      if ( !ch->hhf.hunting )
         {
           if ( !ch->in_room )
             {
@@ -367,8 +367,8 @@ void hunt_victim( CHAR_DATA *ch )
           do_say( ch, "Damn!  Lost my prey!" );
           return;
         }
-      if (ch->in_room == ch->hunting->who->in_room)
-        found_prey( ch, ch->hunting->who );
+      if (ch->in_room == ch->hhf.hunting->who->in_room)
+        found_prey( ch, ch->hhf.hunting->who );
       return;
     }
 }

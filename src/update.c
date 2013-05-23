@@ -820,7 +820,7 @@ void mobile_update( void )
 
       if ( !IS_SET( ch->act, ACT_RUNNING )
            &&   !IS_SET( ch->act, ACT_SENTINEL )
-           &&   !ch->fighting && ch->hunting )
+           &&   !ch->fighting && ch->hhf.hunting )
         {
           if (  ch->top_level < 20 )
             set_wait_state( ch, 6 * PULSE_PER_SECOND );
@@ -837,7 +837,7 @@ void mobile_update( void )
           hunt_victim( ch );
           continue;
         }
-      else if ( !ch->fighting && !ch->hunting
+      else if ( !ch->fighting && !ch->hhf.hunting
                 && !IS_SET( ch->act, ACT_RUNNING)
                 && ch->was_sentinel && ch->position >= POS_STANDING )
         {
@@ -1844,7 +1844,7 @@ void char_check( void )
           if ( IS_SET(ch->act, ACT_RUNNING) )
             {
               if ( !IS_SET( ch->act, ACT_SENTINEL )
-                   &&   !ch->fighting && ch->hunting )
+                   &&   !ch->fighting && ch->hhf.hunting )
                 {
                   set_wait_state( ch, 2 * PULSE_VIOLENCE );
                   hunt_victim( ch );
