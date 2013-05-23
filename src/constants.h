@@ -1591,4 +1591,44 @@ typedef enum
                                                      every half hour - trying to
                                                      determine best reboot time */
 
+#define ERROR_PROG        -1
+#define IN_FILE_PROG       0
+#define ACT_PROG           BV00
+#define SPEECH_PROG        BV01
+#define RAND_PROG          BV02
+#define FIGHT_PROG         BV03
+#define RFIGHT_PROG        BV03
+#define DEATH_PROG         BV04
+#define RDEATH_PROG        BV04
+#define HITPRCNT_PROG      BV05
+#define ENTRY_PROG         BV06
+#define ENTER_PROG         BV06
+#define GREET_PROG         BV07
+#define RGREET_PROG        BV07
+#define OGREET_PROG        BV07
+#define ALL_GREET_PROG     BV08
+#define GIVE_PROG          BV09
+#define BRIBE_PROG         BV10
+#define HOUR_PROG          BV11
+#define TIME_PROG          BV12
+#define WEAR_PROG          BV13
+#define REMOVE_PROG        BV14
+#define SAC_PROG           BV15
+#define LOOK_PROG          BV16
+#define EXA_PROG           BV17
+#define ZAP_PROG           BV18
+#define GET_PROG           BV19
+#define DROP_PROG          BV20
+#define DAMAGE_PROG        BV21
+#define REPAIR_PROG        BV22
+#define RANDIW_PROG        BV23
+#define SPEECHIW_PROG      BV24
+#define PULL_PROG          BV25
+#define PUSH_PROG          BV26
+#define SLEEP_PROG         BV27
+#define REST_PROG          BV28
+#define LEAVE_PROG         BV29
+#define SCRIPT_PROG        BV30
+#define USE_PROG           BV31
+
 #endif
