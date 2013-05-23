@@ -170,4 +170,8 @@ bool is_npc( const CHAR_DATA *ch );
 
 bool is_immortal( const CHAR_DATA *ch );
 
+bool is_god( const CHAR_DATA *ch );
+
+bool is_hero( const CHAR_DATA *ch );
+
 #endif

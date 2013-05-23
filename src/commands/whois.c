@@ -43,7 +43,7 @@ void do_whois( CHAR_DATA *ch, char *argument)
       return;
     }
 
-  if (IS_GOD(ch))
+  if (is_god(ch))
     {
       ch_printf(ch, "%s is a %s %s",
                 victim->name,

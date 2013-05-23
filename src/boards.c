@@ -158,7 +158,7 @@ bool is_note_to( CHAR_DATA *ch, NOTE_DATA *pnote )
   if ( is_name( "all", pnote->to_list ) )
     return TRUE;
 
-  if ( IS_HERO(ch) && is_name( "immortal", pnote->to_list ) )
+  if ( is_hero(ch) && is_name( "immortal", pnote->to_list ) )
     return TRUE;
 
   if ( is_name( ch->name, pnote->to_list ) )

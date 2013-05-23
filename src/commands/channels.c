@@ -58,7 +58,7 @@ void do_channels( CHAR_DATA *ch, char *argument )
                     : " -wartalk",
                     ch );
 
-      if ( IS_HERO(ch) )
+      if ( is_hero(ch) )
         {
           send_to_char( !IS_SET(ch->deaf, CHANNEL_AVTALK)
                         ? " +AVATAR"

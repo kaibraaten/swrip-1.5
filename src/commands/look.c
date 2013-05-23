@@ -804,7 +804,7 @@ static void show_char_to_char_1( CHAR_DATA *victim, CHAR_DATA *ch )
 
   found = FALSE;
 
-  if( ( (obj = get_eq_char( victim, WEAR_OVER ) ) == NULL ) || obj->value[2] == 0 || IS_GOD(ch) )
+  if( ( (obj = get_eq_char( victim, WEAR_OVER ) ) == NULL ) || obj->value[2] == 0 || is_god(ch) )
     {
       for ( iWear = 0; iWear < MAX_WEAR; iWear++ )
         {

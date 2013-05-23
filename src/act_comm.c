@@ -396,7 +396,7 @@ void talk_channel( CHAR_DATA *ch, const char *argument, int channel, const char 
             continue;
           if ( channel == CHANNEL_WARTALK && NOT_AUTHED( och ) )
             continue;
-          if ( channel == CHANNEL_AVTALK && !IS_HERO(och) )
+          if ( channel == CHANNEL_AVTALK && !is_hero(och) )
             continue;
 
           if ( IS_SET( vch->in_room->room_flags, ROOM_SILENCE ) )

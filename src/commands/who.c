@@ -176,7 +176,7 @@ void do_who( CHAR_DATA *ch, char *argument )
                     {
                       for ( iRace = 0; iRace < MAX_RACE; iRace++ )
                         {
-                          if ( IS_GOD(ch) && (!str_cmp( arg, race_table[iRace].race_name ) ) )
+                          if ( is_god(ch) && (!str_cmp( arg, race_table[iRace].race_name ) ) )
                             {
                               rgfRace[iRace] = TRUE;
                               break;
@@ -242,7 +242,7 @@ void do_who( CHAR_DATA *ch, char *argument )
       else
         strcpy( char_name, "") ;
 
-      if ( IS_GOD(ch) )
+      if ( is_god(ch) )
         sprintf( race_text, "(%s) ", race_table[wch->race].race_name);
       else
         strcpy( race_text, "" );
@@ -280,7 +280,7 @@ void do_who( CHAR_DATA *ch, char *argument )
 
       if ( wch->pcdata->clan && ( (!is_npc(ch) &&  ch->pcdata->clan
                                    && ch->pcdata->clan == wch->pcdata->clan )
-                                  || IS_GOD( ch ) ) )
+                                  || is_god( ch ) ) )
         {
           CLAN_DATA *pclan = wch->pcdata->clan;
 

@@ -917,3 +917,13 @@ bool is_immortal( const CHAR_DATA *ch )
 {
   return get_trust( ch ) >= LEVEL_IMMORTAL;
 }
+
+bool is_god( const CHAR_DATA *ch )
+{
+  return get_trust( ch ) >= LEVEL_GOD;
+}
+
+bool is_hero( const CHAR_DATA *ch )
+{
+  return get_trust( ch ) >= LEVEL_HERO;
+}
