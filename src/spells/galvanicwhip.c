@@ -18,7 +18,7 @@ ch_ret spell_galvanic_whip( int sn, int level, CHAR_DATA *ch, void *vo )
 
   if ( saves_spell_staff( level, victim ) )
     dam /= 2;
-  if ( is_affected_by(victim, AFF_PROTECT) && IS_EVIL(ch) )
+  if ( is_affected_by(victim, AFF_PROTECT) && is_evil(ch) )
     dam -= (int) (dam / 4);
   act( AT_MAGIC, "$n conjures a whip of ionized particles, which lashes ferociously at $N."
        , ch, NULL,

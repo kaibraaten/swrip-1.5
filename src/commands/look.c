@@ -548,7 +548,7 @@ static void show_char_to_char_0( CHAR_DATA *victim, CHAR_DATA *ch )
   if ( is_affected_by(victim, AFF_HIDE)        ) strcat( buf, "(Stealth) "       );
   if ( is_affected_by(victim, AFF_PASS_DOOR)   ) strcat( buf, "(Translucent) ");
   if ( is_affected_by(victim, AFF_FAERIE_FIRE) ) strcat( buf, "&P(Pink Aura)&w "  );
-  if ( IS_EVIL(victim)
+  if ( is_evil(victim)
        &&   is_affected_by(ch, AFF_DETECT_EVIL)     ) strcat( buf, "&R(Red Aura)&w "   );
   if ( ( victim->mana > 10 )
        &&   ( is_affected_by( ch , AFF_DETECT_MAGIC ) || is_immortal( ch ) ) )

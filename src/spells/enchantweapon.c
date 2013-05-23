@@ -1,4 +1,5 @@
 #include "mud.h"
+#include "character.h"
 
 ch_ret spell_enchant_weapon( int sn, int level, CHAR_DATA *ch, void *vo )
 {
@@ -28,12 +29,12 @@ ch_ret spell_enchant_weapon( int sn, int level, CHAR_DATA *ch, void *vo )
   paf->bitvector        = 0;
   LINK( paf, obj->first_affect, obj->last_affect, next, prev );
 
-  if ( IS_GOOD(ch) )
+  if ( is_good(ch) )
     {
       SET_BIT(obj->extra_flags, ITEM_ANTI_EVIL);
       act( AT_BLUE, "$p glows blue.", ch, obj, NULL, TO_CHAR );
     }
-  else if ( IS_EVIL(ch) )
+  else if ( is_evil(ch) )
     {
       SET_BIT(obj->extra_flags, ITEM_ANTI_GOOD);
       act( AT_RED, "$p glows red.", ch, obj, NULL, TO_CHAR );

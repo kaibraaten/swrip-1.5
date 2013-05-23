@@ -174,4 +174,12 @@ bool is_god( const CHAR_DATA *ch );
 
 bool is_hero( const CHAR_DATA *ch );
 
+bool is_good( const CHAR_DATA *ch );
+
+bool is_evil( const CHAR_DATA *ch );
+
+bool is_neutral( const CHAR_DATA *ch );
+
+bool is_evil_mob_index_data( const MOB_INDEX_DATA *mob );
+
 #endif

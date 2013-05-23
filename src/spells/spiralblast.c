@@ -44,7 +44,7 @@ ch_ret spell_spiral_blast( int sn, int level, CHAR_DATA *ch, void *vo )
           dam  = number_range( hpch/14+1, hpch/7 );
           if ( saves_breath( level, vch ) )
             dam /= 2;
-          if ( is_affected_by(vch, AFF_PROTECT) && IS_EVIL(ch) )
+          if ( is_affected_by(vch, AFF_PROTECT) && is_evil(ch) )
             dam -= (int) (dam / 4);
 
           if ( damage( ch, vch, dam, sn ) == rCHAR_DIED ||

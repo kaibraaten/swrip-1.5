@@ -568,13 +568,13 @@ bool check_social( CHAR_DATA *ch, char *command, char *argument )
             {
             case 0:
               if ( !IS_SET(ch->in_room->room_flags, ROOM_SAFE )
-                   &&    IS_EVIL(ch) )
+                   &&    is_evil(ch) )
                 {
                   if ( !str_cmp( social->name, "slap" ) || !str_cmp( social->name, "punch" ) )
                     multi_hit( victim, ch, TYPE_UNDEFINED );
                 }
               else
-                if ( IS_NEUTRAL(ch) )
+                if ( is_neutral(ch) )
                   {
                     act( AT_ACTION, "$n slaps $N.",  victim, NULL, ch, TO_NOTVICT );
                     act( AT_ACTION, "You slap $N.",  victim, NULL, ch, TO_CHAR    );

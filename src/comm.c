@@ -2092,9 +2092,9 @@ void display_prompt( DESCRIPTOR_DATA *d )
             case 'a':
               if ( ch->top_level >= 10 )
                 the_stat = ch->alignment;
-              else if ( IS_GOOD(ch) )
+              else if ( is_good(ch) )
                 strcpy(pbuf, "good");
-              else if ( IS_EVIL(ch) )
+              else if ( is_evil(ch) )
                 strcpy(pbuf, "evil");
               else
                 strcpy(pbuf, "neutral");

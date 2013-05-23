@@ -28,7 +28,7 @@ ch_ret spell_lightning_bolt( int sn, int level, CHAR_DATA *ch, void *vo )
   dam           = number_range( dam_each[level] / 2, dam_each[level] * 2 );
   if ( saves_spell_staff( level, victim ) )
     dam /= 2;
-  if ( is_affected_by(victim, AFF_PROTECT) && IS_EVIL(ch) )
+  if ( is_affected_by(victim, AFF_PROTECT) && is_evil(ch) )
     dam -= (int) (dam / 4);
   return damage( ch, victim, dam, sn );
 }

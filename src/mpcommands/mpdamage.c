@@ -145,7 +145,7 @@ static ch_ret simple_damage( CHAR_DATA *ch, CHAR_DATA *victim, int dam, int dt )
       if ( is_affected_by(victim, AFF_SANCTUARY) )
         dam /= 2;
 
-      if ( is_affected_by(victim, AFF_PROTECT) && IS_EVIL(ch) )
+      if ( is_affected_by(victim, AFF_PROTECT) && is_evil(ch) )
         dam -= (int) (dam / 4);
 
       if ( dam < 0 )

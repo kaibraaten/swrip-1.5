@@ -1561,12 +1561,6 @@ extern  short                   gsn_yevethan;
 /*
  * Character macros.
  */
-#define HAS_BODYPART(ch, part)  ((ch)->xflags == 0 || IS_SET((ch)->xflags, (part)))
-
-#define IS_GOOD(ch)             ((ch)->alignment >= 350)
-#define IS_EVIL(ch)             ((ch)->alignment <= -350)
-#define IS_NEUTRAL(ch)          (!IS_GOOD(ch) && !IS_EVIL(ch))
-
 #define IS_AWAKE(ch)            ((ch)->position > POS_SLEEPING)
 #define GET_AC(ch)              ( (ch)->armor + ( IS_AWAKE(ch) ? dex_app[get_curr_dex(ch)].defensive : 0 ) \
                                   - ( (ch)->race == RACE_DEFEL ? get_level( ch, COMBAT_ABILITY ) * 2 + 5 : get_level( ch, COMBAT_ABILITY ) / 2 ) )

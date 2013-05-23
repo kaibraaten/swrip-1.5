@@ -44,7 +44,7 @@ void generate_quest(CHAR_DATA *ch, CHAR_DATA *questman)
           if (((level_diff < -5 && level_diff > -5)
                || (ch->top_level > 30 && ch->top_level < 40 && vsearch->level > 30 && vsearch->level < 54)
                || (ch->top_level > 40 && vsearch->level > 40))
-              && IS_EVIL(vsearch)
+              && is_evil_mob_index_data(vsearch)
               && vsearch->pShop == NULL
               && vsearch->rShop == NULL
               && !IS_SET(vsearch->act,ACT_TRAIN)

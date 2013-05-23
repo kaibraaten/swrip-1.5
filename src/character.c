@@ -329,9 +329,9 @@ void equip_char( CHAR_DATA *ch, OBJ_DATA *obj, int iWear )
     }
 
   separate_obj(obj);    /* just in case */
-  if ( ( IS_OBJ_STAT(obj, ITEM_ANTI_EVIL)    && IS_EVIL(ch)    )
-       ||   ( IS_OBJ_STAT(obj, ITEM_ANTI_GOOD)    && IS_GOOD(ch)    )
-       ||   ( IS_OBJ_STAT(obj, ITEM_ANTI_NEUTRAL) && IS_NEUTRAL(ch) ) )
+  if ( ( IS_OBJ_STAT(obj, ITEM_ANTI_EVIL)    && is_evil(ch)    )
+       ||   ( IS_OBJ_STAT(obj, ITEM_ANTI_GOOD)    && is_good(ch)    )
+       ||   ( IS_OBJ_STAT(obj, ITEM_ANTI_NEUTRAL) && is_neutral(ch) ) )
     {
       /*
        * Thanks to Morgenes for the bug fix here!
@@ -926,4 +926,24 @@ bool is_god( const CHAR_DATA *ch )
 bool is_hero( const CHAR_DATA *ch )
 {
   return get_trust( ch ) >= LEVEL_HERO;
+}
+
+bool is_good( const CHAR_DATA *ch )
+{
+  return ch->alignment >= 350;
+}
+
+bool is_evil( const CHAR_DATA *ch )
+{
+  return ch->alignment <= -350;
+}
+
+bool is_neutral( const CHAR_DATA *ch )
+{
+  return !is_good( ch ) && !is_evil( ch );
+}
+
+bool is_evil_mob_index_data( const MOB_INDEX_DATA *mob )
+{
+  return mob->alignment <= -350;
 }

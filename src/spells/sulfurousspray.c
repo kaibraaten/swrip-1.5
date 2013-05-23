@@ -18,7 +18,7 @@ ch_ret spell_sulfurous_spray( int sn, int level, CHAR_DATA *ch, void *vo )
 
   if ( saves_spell_staff( level, victim ) )
     dam /= 4;
-  if ( is_affected_by(victim, AFF_PROTECT) && IS_EVIL(ch) )
+  if ( is_affected_by(victim, AFF_PROTECT) && is_evil(ch) )
     dam -= (int) (dam / 4);
   act( AT_MAGIC, "A stinking spray of sulfurous liquid rains down on $N.",
        ch, NULL, victim, TO_NOTVICT );

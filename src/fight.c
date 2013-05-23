@@ -1335,7 +1335,7 @@ ch_ret damage( CHAR_DATA *ch, CHAR_DATA *victim, int dam, int dt )
       if ( is_affected_by(victim, AFF_SANCTUARY) )
         dam /= 2;
 
-      if ( is_affected_by(victim, AFF_PROTECT) && IS_EVIL(ch) )
+      if ( is_affected_by(victim, AFF_PROTECT) && is_evil(ch) )
         dam -= (int) (dam / 4);
 
       if ( dam < 0 )
@@ -2393,9 +2393,9 @@ void group_gain( CHAR_DATA *ch, CHAR_DATA *victim )
           if ( obj->wear_loc == WEAR_NONE )
             continue;
 
-          if ( ( IS_OBJ_STAT(obj, ITEM_ANTI_EVIL)    && IS_EVIL(ch)    )
-               ||   ( IS_OBJ_STAT(obj, ITEM_ANTI_GOOD)    && IS_GOOD(ch)    )
-               ||   ( IS_OBJ_STAT(obj, ITEM_ANTI_NEUTRAL) && IS_NEUTRAL(ch) ) )
+          if ( ( IS_OBJ_STAT(obj, ITEM_ANTI_EVIL)    && is_evil(ch)    )
+               ||   ( IS_OBJ_STAT(obj, ITEM_ANTI_GOOD)    && is_good(ch)    )
+               ||   ( IS_OBJ_STAT(obj, ITEM_ANTI_NEUTRAL) && is_neutral(ch) ) )
             {
               act( AT_MAGIC, "You are zapped by $p.", ch, obj, NULL, TO_CHAR );
               act( AT_MAGIC, "$n is zapped by $p.",   ch, obj, NULL, TO_ROOM );

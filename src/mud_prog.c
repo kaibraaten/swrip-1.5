@@ -657,15 +657,15 @@ int mprog_do_ifcheck( const char *ifcheck, CHAR_DATA *mob, CHAR_DATA *actor,
         }
       if ( !str_cmp(chck, "isgood") )
         {
-          return IS_GOOD(chkchar) ? TRUE : FALSE;
+          return is_good(chkchar) ? TRUE : FALSE;
         }
       if ( !str_cmp(chck, "isneutral") )
         {
-          return IS_NEUTRAL(chkchar) ? TRUE : FALSE;
+          return is_neutral(chkchar) ? TRUE : FALSE;
         }
       if ( !str_cmp(chck, "isevil") )
         {
-          return IS_EVIL(chkchar) ? TRUE : FALSE;
+          return is_evil(chkchar) ? TRUE : FALSE;
         }
       if ( !str_cmp(chck, "isfight") )
         {

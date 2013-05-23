@@ -18,7 +18,7 @@ ch_ret spell_black_hand( int sn, int level, CHAR_DATA *ch, void *vo )
 
   if ( saves_poison_death( level, victim ) )
     dam /= 4;
-  if ( is_affected_by(victim, AFF_PROTECT) && IS_EVIL(ch) )
+  if ( is_affected_by(victim, AFF_PROTECT) && is_evil(ch) )
     dam -= (int) (dam / 4);
   act( AT_MAGIC, "$n conjures a mystical hand, which swoops menacingly at $N."
        , ch, NULL,

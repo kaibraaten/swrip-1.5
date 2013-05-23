@@ -29,7 +29,7 @@ ch_ret spell_fireball( int sn, int level, CHAR_DATA *ch, void *vo )
   if ( saves_spell_staff( level, victim ) )
     dam /= 2;
 
-  if ( is_affected_by(victim, AFF_PROTECT) && IS_EVIL(ch) )
+  if ( is_affected_by(victim, AFF_PROTECT) && is_evil(ch) )
     dam -= (int) (dam / 4);
 
   return damage( ch, victim, dam, sn );
