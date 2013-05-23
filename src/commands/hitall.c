@@ -24,7 +24,7 @@ void do_hitall( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  percent = IS_NPC(ch) ? 80 : ch->pcdata->learned[gsn_hitall];
+  percent = is_npc(ch) ? 80 : ch->pcdata->learned[gsn_hitall];
 
   for ( vch = ch->in_room->first_person; vch; vch = vch_next )
     {
@@ -70,7 +70,7 @@ void do_hitall( CHAR_DATA *ch, char *argument )
 
 static bool is_legal_kill(CHAR_DATA *ch, CHAR_DATA *vch)
 {
-  if ( IS_NPC(ch) || IS_NPC(vch) )
+  if ( is_npc(ch) || is_npc(vch) )
     return TRUE;
   if ( is_safe(ch,vch) )
     return FALSE;

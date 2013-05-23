@@ -28,7 +28,7 @@ void do_scan( CHAR_DATA *ch, char *argument )
   act( AT_GREY, "Scanning $t...", ch, get_dir_name(dir), NULL, TO_CHAR );
   act( AT_GREY, "$n scans $t.", ch, get_dir_name(dir), NULL, TO_ROOM );
 
-  if ( IS_NPC( ch )
+  if ( is_npc( ch )
        || ( number_percent() > ch->pcdata->learned[gsn_scan] ) )
     {
       act( AT_GREY, "You stop scanning $t as your vision blurs.", ch,

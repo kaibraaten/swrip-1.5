@@ -1,12 +1,13 @@
 #include <string.h>
 #include "mud.h"
+#include "character.h"
 
 void do_disguise( CHAR_DATA *ch, char *argument )
 {
   int the_chance;
   short gsn;
 
-  if ( IS_NPC(ch) )
+  if ( is_npc(ch) )
     return;
 
   if ( IS_SET( ch->pcdata->flags, PCFLAG_NOTITLE ))

@@ -16,7 +16,7 @@ void do_mp_damage( CHAR_DATA *ch, char *argument )
   if ( is_affected_by( ch, AFF_CHARM ) )
     return;
 
-  if ( !IS_NPC( ch ) || ( ch->desc && get_trust( ch ) < LEVEL_IMMORTAL )  )
+  if ( !is_npc( ch ) || ( ch->desc && get_trust( ch ) < LEVEL_IMMORTAL )  )
     {
       send_to_char( "Huh?\r\n", ch );
       return;
@@ -103,7 +103,7 @@ static ch_ret simple_damage( CHAR_DATA *ch, CHAR_DATA *victim, int dam, int dt )
       return rVICT_DIED;
     }
 
-  npcvict = IS_NPC(victim);
+  npcvict = is_npc(victim);
 
   if ( dam )
     {
@@ -178,7 +178,7 @@ static ch_ret simple_damage( CHAR_DATA *ch, CHAR_DATA *victim, int dam, int dt )
    * Inform the victim of his new state.
    */
   victim->hit -= dam;
-  if ( !IS_NPC(victim)
+  if ( !is_npc(victim)
        &&   get_trust(victim) >= LEVEL_IMMORTAL
        &&   victim->hit < 1 )
     victim->hit = 1;
@@ -239,7 +239,7 @@ static ch_ret simple_damage( CHAR_DATA *ch, CHAR_DATA *victim, int dam, int dt )
         {
           sprintf( log_buf, "%s killed by %s at %d",
                    victim->name,
-                   (IS_NPC(ch) ? ch->short_descr : ch->name),
+                   (is_npc(ch) ? ch->short_descr : ch->name),
 		   victim->in_room->vnum );
           log_string( log_buf );
           to_channel( log_buf, CHANNEL_MONITOR, "Monitor", LEVEL_IMMORTAL );

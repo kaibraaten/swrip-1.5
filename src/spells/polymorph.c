@@ -1,3 +1,4 @@
+#include "character.h"
 #include "mud.h"
 
 static CHAR_DATA *make_poly_mob(const CHAR_DATA *ch, int vnum);
@@ -9,7 +10,7 @@ ch_ret spell_polymorph( int sn, int level, CHAR_DATA *ch, void *vo )
   int poly_vnum;
   CHAR_DATA *poly_mob;
 
-  if (IS_NPC(ch))
+  if (is_npc(ch))
     {
       send_to_char("Mobs can't polymorph!\r\n", ch);
       return rSPELL_FAILED;

@@ -46,7 +46,7 @@ ch_ret spell_animate_dead( int sn, int level, CHAR_DATA *ch, void *vo )
       return rSPELL_FAILED;
     }
 
-  if ( !IS_NPC(ch) )
+  if ( !is_npc(ch) )
     {
       if ( ch->mana - (pMobIndex->level*4) < 0 )
         {

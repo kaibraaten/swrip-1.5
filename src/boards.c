@@ -171,7 +171,7 @@ void note_attach( CHAR_DATA *ch )
 {
   NOTE_DATA *pnote;
 
-  if ( IS_NPC( ch ) )
+  if ( is_npc( ch ) )
     return;
 
   if ( ch->pcdata->pnote )
@@ -301,7 +301,7 @@ void operate_on_note( CHAR_DATA *ch, char *arg_passed, bool IS_MAIL )
   bool mfound = FALSE;
   bool wasfound = FALSE;
 
-  if ( IS_NPC(ch) )
+  if ( is_npc(ch) )
     return;
 
   if ( !ch->desc )

@@ -1,4 +1,5 @@
 #include "mud.h"
+#include "character.h"
 
 void do_empower ( CHAR_DATA *ch , char *argument )
 {
@@ -8,7 +9,7 @@ void do_empower ( CHAR_DATA *ch , char *argument )
   CLAN_DATA *clan;
   char buf[MAX_STRING_LENGTH];
 
-  if ( IS_NPC( ch ) || !ch->pcdata->clan )
+  if ( is_npc( ch ) || !ch->pcdata->clan )
     {
       send_to_char( "Huh?\r\n", ch );
       return;
@@ -41,7 +42,7 @@ void do_empower ( CHAR_DATA *ch , char *argument )
       return;
     }
 
-  if ( IS_NPC(victim) )
+  if ( is_npc(victim) )
     {
       send_to_char( "Not on NPC's.\r\n", ch );
       return;

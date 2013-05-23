@@ -152,7 +152,7 @@ ch_ret spell_identify( int sn, int level, CHAR_DATA *ch, void *vo )
           return rSPELL_FAILED;
         }
 
-      if ( IS_NPC(victim) )
+      if ( is_npc(victim) )
         {
           ch_printf(ch, "%s appears to be between level %d and %d.\r\n",
                     victim->name,

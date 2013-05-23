@@ -1,3 +1,4 @@
+#include "character.h"
 #include "mud.h"
 
 ch_ret spell_faerie_fog( int sn, int level, CHAR_DATA *ch, void *vo )
@@ -9,7 +10,7 @@ ch_ret spell_faerie_fog( int sn, int level, CHAR_DATA *ch, void *vo )
 
   for ( ich = ch->in_room->first_person; ich; ich = ich->next_in_room )
     {
-      if ( !IS_NPC(ich) && IS_SET(ich->act, PLR_WIZINVIS) )
+      if ( !is_npc(ich) && IS_SET(ich->act, PLR_WIZINVIS) )
         continue;
 
       if ( ich == ch || saves_spell_staff( level, ich ) )

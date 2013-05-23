@@ -93,7 +93,7 @@ void do_makejewelry( CHAR_DATA *ch, char *argument )
           return;
         }
 
-      the_chance = IS_NPC(ch) ? ch->top_level
+      the_chance = is_npc(ch) ? ch->top_level
         : (int) (ch->pcdata->learned[gsn_makejewelry]);
       if ( number_percent( ) < the_chance )
         {
@@ -130,7 +130,7 @@ void do_makejewelry( CHAR_DATA *ch, char *argument )
 
   ch->substate = SUB_NONE;
 
-  level = IS_NPC(ch) ? ch->top_level : (int) (ch->pcdata->learned[gsn_makejewelry]);
+  level = is_npc(ch) ? ch->top_level : (int) (ch->pcdata->learned[gsn_makejewelry]);
 
   checkmetal = FALSE;
   checkoven = FALSE;
@@ -160,7 +160,7 @@ void do_makejewelry( CHAR_DATA *ch, char *argument )
         }
     }
 
-  the_chance = IS_NPC(ch) ? ch->top_level
+  the_chance = is_npc(ch) ? ch->top_level
     : (int) (ch->pcdata->learned[gsn_makejewelry]) ;
 
   if ( number_percent( ) > the_chance*2  || ( !checkoven ) || ( !checktool ) || ( !checkmetal ) )

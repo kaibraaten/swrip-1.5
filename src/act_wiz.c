@@ -54,7 +54,7 @@ void echo_to_all( short AT_COLOR, const char *argument, short tar )
       if ( d->connected == CON_PLAYING || d->connected == CON_EDITING )
         {
           /* This one is kinda useless except for switched.. */
-          if ( tar == ECHOTAR_PC && IS_NPC(d->character) )
+          if ( tar == ECHOTAR_PC && is_npc(d->character) )
             continue;
           else if ( tar == ECHOTAR_IMM && !IS_IMMORTAL(d->character) )
             continue;
@@ -197,7 +197,7 @@ void close_area( AREA_DATA *pArea )
 
       if ( ech->fighting )
         stop_fighting( ech, TRUE );
-      if ( IS_NPC(ech) )
+      if ( is_npc(ech) )
         {
           /* if mob is in area, or part of area. */
           if ( URANGE(pArea->low_m_vnum, ech->pIndexData->vnum,
@@ -248,7 +248,7 @@ void close_area( AREA_DATA *pArea )
                   ech_next = ech->next_in_room;
                   if ( ech->fighting )
                     stop_fighting( ech, TRUE );
-                  if ( IS_NPC(ech) )
+                  if ( is_npc(ech) )
                     extract_char( ech, TRUE );
                   else
                     do_recall( ech, "" );

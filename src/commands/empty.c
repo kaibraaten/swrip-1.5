@@ -66,7 +66,7 @@ void do_empty( CHAR_DATA *ch, char *argument )
       if ( arg2[0] == '\0' )
         {
           if ( IS_SET( ch->in_room->room_flags, ROOM_NODROP )
-               || ( !IS_NPC(ch) &&  IS_SET( ch->act, PLR_LITTERBUG ) ) )
+               || ( !is_npc(ch) &&  IS_SET( ch->act, PLR_LITTERBUG ) ) )
             {
               set_char_color( AT_MAGIC, ch );
               send_to_char( "A magical force stops you!\r\n", ch );

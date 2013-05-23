@@ -52,7 +52,7 @@ void do_recall( CHAR_DATA *ch, char *argument )
   if ( ( opponent = who_fighting( ch ) ) != NULL )
     {
 
-      if ( number_bits( 1 ) == 0 || ( !IS_NPC( opponent ) && number_bits( 3 ) > 1 ) )
+      if ( number_bits( 1 ) == 0 || ( !is_npc( opponent ) && number_bits( 3 ) > 1 ) )
         {
           WAIT_STATE( ch, 4 );
           ch_printf( ch, "You failed!\r\n" );

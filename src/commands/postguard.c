@@ -7,7 +7,7 @@ void do_postguard( CHAR_DATA *ch, char *argument )
   char arg[MAX_INPUT_LENGTH];
   int the_chance, credits;
 
-  if ( IS_NPC( ch ) || !ch->pcdata )
+  if ( is_npc( ch ) || !ch->pcdata )
     return;
 
   strcpy( arg, argument );

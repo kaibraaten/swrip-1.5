@@ -1,10 +1,11 @@
+#include "character.h"
 #include "mud.h"
 
 void do_mpapplyb( CHAR_DATA *ch, char *argument )
 {
   CHAR_DATA *victim;
 
-  if ( !IS_NPC( ch ) )
+  if ( !is_npc( ch ) )
     {
       send_to_char( "Huh?\r\n", ch );
       return;

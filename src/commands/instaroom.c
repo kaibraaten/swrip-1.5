@@ -9,7 +9,7 @@ void do_instaroom( CHAR_DATA *ch, char *argument )
   bool dodoors;
   char arg[MAX_INPUT_LENGTH];
 
-  if ( IS_NPC(ch) || get_trust(ch) < LEVEL_SAVIOR || !ch->pcdata ||
+  if ( is_npc(ch) || get_trust(ch) < LEVEL_SAVIOR || !ch->pcdata ||
        !ch->pcdata->area )
     {
       send_to_char( "You don't have an assigned area to create resets for.\r\n",

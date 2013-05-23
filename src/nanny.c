@@ -777,7 +777,7 @@ static void nanny_read_motd( DESCRIPTOR_DATA *d, char *argument )
   add_char( ch );
   d->connected      = CON_PLAYING;
 
-  if ( !IS_NPC(ch) && IS_SET( ch->act , PLR_SOUND ) )
+  if ( !is_npc(ch) && IS_SET( ch->act , PLR_SOUND ) )
     {
       send_to_char( "!!MUSIC(starwars.mid V=100)" , ch );
     }

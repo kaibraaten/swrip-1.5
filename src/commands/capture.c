@@ -1,3 +1,4 @@
+#include "character.h"
 #include "ships.h"
 #include "mud.h"
 
@@ -13,7 +14,7 @@ void do_capture ( CHAR_DATA *ch , char *argument )
   if ( !ch->in_room || !ch->in_room->area)
     return;
 
-  if ( IS_NPC(ch) || !ch->pcdata )
+  if ( is_npc(ch) || !ch->pcdata )
     {
       send_to_char ( "huh?\r\n" , ch );
       return;

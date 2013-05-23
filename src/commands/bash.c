@@ -6,13 +6,13 @@ void do_bash( CHAR_DATA *ch, char *argument )
   CHAR_DATA *victim;
   int bash_chance;
 
-  if ( IS_NPC(ch) && is_affected_by( ch, AFF_CHARM ) )
+  if ( is_npc(ch) && is_affected_by( ch, AFF_CHARM ) )
     {
       send_to_char( "You can't concentrate enough for that.\r\n", ch );
       return;
     }
 
-  if ( !IS_NPC(ch)
+  if ( !is_npc(ch)
        &&  ch->pcdata->learned[gsn_bash] <= 0  )
     {
       send_to_char(
@@ -28,7 +28,7 @@ void do_bash( CHAR_DATA *ch, char *argument )
 
   bash_chance = (((get_curr_dex(victim) + get_curr_str(victim))
 		  -   (get_curr_dex(ch)     + get_curr_str(ch))) * 10) + 10;
-  if ( !IS_NPC(ch) && !IS_NPC(victim) )
+  if ( !is_npc(ch) && !is_npc(victim) )
     bash_chance += 25;
 
   if ( victim->fighting && victim->fighting->who != ch )
@@ -36,7 +36,7 @@ void do_bash( CHAR_DATA *ch, char *argument )
 
   WAIT_STATE( ch, skill_table[gsn_bash]->beats );
 
-  if ( IS_NPC(ch)
+  if ( is_npc(ch)
        || (number_percent( ) + bash_chance) < ch->pcdata->learned[gsn_bash] )
     {
       learn_from_success( ch, gsn_bash );

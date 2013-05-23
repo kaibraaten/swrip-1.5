@@ -24,6 +24,7 @@
 #include <ctype.h>
 #include <string.h>
 #include "mud.h"
+#include "character.h"
 
 const char *get_race( const CHAR_DATA *ch)
 {
@@ -37,7 +38,7 @@ void set_title( CHAR_DATA *ch, const char *title )
 {
   char buf[MAX_STRING_LENGTH];
 
-  if ( IS_NPC(ch) )
+  if ( is_npc(ch) )
     {
       bug( "Set_title: NPC.", 0 );
       return;

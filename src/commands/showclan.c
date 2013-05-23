@@ -1,3 +1,4 @@
+#include "character.h"
 #include "mud.h"
 
 static const char *get_clan_type(const CLAN_DATA *const clan);
@@ -6,7 +7,7 @@ void do_showclan( CHAR_DATA *ch, char *argument )
 {
   CLAN_DATA *clan;
 
-  if ( IS_NPC( ch ) )
+  if ( is_npc( ch ) )
     {
       send_to_char( "Huh?\r\n", ch );
       return;

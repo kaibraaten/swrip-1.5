@@ -1,3 +1,4 @@
+#include "character.h"
 #include "mud.h"
 
 extern char *spell_target_name;
@@ -25,8 +26,8 @@ ch_ret spell_farsight( int sn, int level, CHAR_DATA *ch, void *vo )
        ||   IS_SET(victim->in_room->room_flags, ROOM_PRIVATE)
        ||   IS_SET(victim->in_room->room_flags, ROOM_SOLITARY)
        ||   IS_SET(victim->in_room->room_flags, ROOM_PROTOTYPE)
-       ||       (IS_NPC(victim) && IS_SET(victim->act, ACT_PROTOTYPE))
-       ||  (IS_NPC(victim) && saves_spell_staff( level, victim ))
+       ||       (is_npc(victim) && IS_SET(victim->act, ACT_PROTOTYPE))
+       ||  (is_npc(victim) && saves_spell_staff( level, victim ))
        || saving <= 50 )
     {
       failed_casting( skill, ch, victim, NULL );

@@ -1,6 +1,7 @@
 #include <ctype.h>
 #include <string.h>
 #include "mud.h"
+#include "character.h"
 
 void do_password( CHAR_DATA *ch, char *argument )
 {
@@ -11,7 +12,7 @@ void do_password( CHAR_DATA *ch, char *argument )
   char *p;
   char cEnd;
 
-  if ( IS_NPC(ch) )
+  if ( is_npc(ch) )
     return;
 
   /*

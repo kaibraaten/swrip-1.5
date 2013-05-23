@@ -1,3 +1,4 @@
+#include "character.h"
 #include "mud.h"
 
 void do_setplanet( CHAR_DATA *ch, char *argument )
@@ -6,7 +7,7 @@ void do_setplanet( CHAR_DATA *ch, char *argument )
   char arg2[MAX_INPUT_LENGTH];
   PLANET_DATA *planet;
 
-  if ( IS_NPC( ch ) )
+  if ( is_npc( ch ) )
     {
       send_to_char( "Huh?\r\n", ch );
       return;

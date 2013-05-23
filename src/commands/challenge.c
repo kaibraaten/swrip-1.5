@@ -19,7 +19,7 @@ void do_challenge(CHAR_DATA *ch, char *argument)
       return;
     }
 
-  if (IS_NPC(victim))
+  if (is_npc(victim))
     {
       send_to_char("&WYou cannot challenge mobiles!\r\n",ch);
       return;

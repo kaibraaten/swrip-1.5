@@ -1,3 +1,4 @@
+#include "character.h"
 #include "mud.h"
 
 static CHAR_DATA *get_waiting_desc( const CHAR_DATA *ch, const char *name );

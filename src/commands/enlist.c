@@ -1,10 +1,11 @@
 #include "mud.h"
+#include "character.h"
 
 void do_enlist( CHAR_DATA *ch, char *argument )
 {
   CLAN_DATA *clan;
 
-  if ( IS_NPC(ch) || !ch->pcdata )
+  if ( is_npc(ch) || !ch->pcdata )
     {
       send_to_char( "You can't do that.\r\n", ch );
       return;

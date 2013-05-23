@@ -102,7 +102,7 @@ void do_speak( CHAR_DATA *ch, char *argument )
 	  if ( knows_language( ch, lang_array[langs], ch ) )
 	    {
 	      if ( lang_array[langs] == LANG_CLAN &&
-		   (IS_NPC(ch) || !ch->pcdata->clan) )
+		   (is_npc(ch) || !ch->pcdata->clan) )
 		{
 		  continue;
 		}

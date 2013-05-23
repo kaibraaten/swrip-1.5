@@ -63,7 +63,7 @@ CHAR_DATA *find_keeper_q( CHAR_DATA *ch, bool message )
   for ( keeper = ch->in_room->first_person;
         keeper;
         keeper = keeper->next_in_room )
-    if ( IS_NPC(keeper) && (pShop = keeper->pIndexData->pShop) != NULL )
+    if ( is_npc(keeper) && (pShop = keeper->pIndexData->pShop) != NULL )
       break;
 
   if ( !pShop )
@@ -121,7 +121,7 @@ CHAR_DATA *find_fixer( CHAR_DATA *ch )
   for ( keeper = ch->in_room->first_person;
         keeper;
         keeper = keeper->next_in_room )
-    if ( IS_NPC(keeper) && (rShop = keeper->pIndexData->rShop) != NULL )
+    if ( is_npc(keeper) && (rShop = keeper->pIndexData->rShop) != NULL )
       break;
 
   if ( !rShop )
@@ -169,7 +169,7 @@ int get_cost_quit( CHAR_DATA *ch )
   if( ch->top_level <= 6 )
     return 0;
 
-  gold = ch->gold + (IS_NPC(ch) ? 0 : ch->pcdata->bank) + 1;
+  gold = ch->gold + (is_npc(ch) ? 0 : ch->pcdata->bank) + 1;
 
   if( gold < 5000 )
     return 0;
@@ -188,7 +188,7 @@ int get_cost( CHAR_DATA *ch, CHAR_DATA *keeper, OBJ_DATA *obj, bool fBuy )
   if ( !obj || ( pShop = keeper->pIndexData->pShop ) == NULL )
     return 0;
 
-  if ( ( ch->gold + (IS_NPC(ch) ? 0 : ch->pcdata->bank) ) > (ch->top_level * 1000) )
+  if ( ( ch->gold + (is_npc(ch) ? 0 : ch->pcdata->bank) ) > (ch->top_level * 1000) )
     richcustomer = TRUE;
   else
     richcustomer = FALSE;
@@ -313,7 +313,7 @@ int get_repaircost( CHAR_DATA *keeper, OBJ_DATA *obj )
 /* Write vendor to file */
 void fwrite_vendor( FILE *fp, CHAR_DATA *mob )
 {
-  if ( !IS_NPC( mob ) || !fp )
+  if ( !is_npc( mob ) || !fp )
     return;
   fprintf( fp, "Vnum     %d\n", mob->pIndexData->vnum );
   if (mob->gold > 0)

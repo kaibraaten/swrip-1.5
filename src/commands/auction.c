@@ -11,7 +11,7 @@ void do_auction (CHAR_DATA *ch, char *argument)
 
   argument = one_argument (argument, arg1);
 
-  if (IS_NPC(ch)) /* NPC can be extracted at any time and thus can't auction! */
+  if (is_npc(ch)) /* NPC can be extracted at any time and thus can't auction! */
     return;
 
   if ( !IS_SET( ch->in_room->room_flags , ROOM_HOTEL ) && !IS_SET( ch->in_room->room_flags , ROOM_HOTEL ) )

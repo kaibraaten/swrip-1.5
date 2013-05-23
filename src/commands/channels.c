@@ -9,7 +9,7 @@ void do_channels( CHAR_DATA *ch, char *argument )
 
   if ( arg[0] == '\0' )
     {
-      if ( !IS_NPC(ch) && IS_SET(ch->act, PLR_SILENCE) )
+      if ( !is_npc(ch) && IS_SET(ch->act, PLR_SILENCE) )
         {
           send_to_char( "You are silenced.\r\n", ch );
           return;
@@ -35,7 +35,7 @@ void do_channels( CHAR_DATA *ch, char *argument )
                     : " -ooc",
                     ch );
 
-      if ( !IS_NPC( ch ) && ch->pcdata->clan )
+      if ( !is_npc( ch ) && ch->pcdata->clan )
 	{
           send_to_char( !IS_SET(ch->deaf, CHANNEL_CLAN)
                         ? " +CLAN"

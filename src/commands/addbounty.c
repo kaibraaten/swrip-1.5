@@ -1,3 +1,4 @@
+#include "character.h"
 #include "mud.h"
 
 void do_addbounty( CHAR_DATA *ch, char *argument )
@@ -51,7 +52,7 @@ void do_addbounty( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( IS_NPC(victim) )
+  if ( is_npc(victim) )
     {
       send_to_char( "You can only set bounties on other players .. not mobs!\r\n", ch );
       return;

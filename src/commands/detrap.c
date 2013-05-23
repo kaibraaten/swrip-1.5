@@ -13,13 +13,13 @@ void do_detrap( CHAR_DATA *ch, char *argument )
   switch( ch->substate )
     {
     default:
-      if ( IS_NPC(ch) && is_affected_by( ch, AFF_CHARM ) )
+      if ( is_npc(ch) && is_affected_by( ch, AFF_CHARM ) )
         {
           send_to_char( "You can't concentrate enough for that.\r\n", ch );
           return;
         }
       argument = one_argument( argument, arg );
-      if ( !IS_NPC(ch) && !ch->pcdata->learned[gsn_detrap] )
+      if ( !is_npc(ch) && !ch->pcdata->learned[gsn_detrap] )
         {
           send_to_char("You do not yet know of this skill.\r\n", ch );
           return;
@@ -109,7 +109,7 @@ void do_detrap( CHAR_DATA *ch, char *argument )
 
   separate_obj(obj);
 
-  if ( !IS_NPC(ch) || percent > ch->pcdata->learned[gsn_detrap] )
+  if ( !is_npc(ch) || percent > ch->pcdata->learned[gsn_detrap] )
     {
       send_to_char( "Ooops!\r\n", ch );
       spring_trap( ch, trap );

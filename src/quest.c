@@ -1,5 +1,6 @@
 #include "quest.h"
 #include "mud.h"
+#include "character.h"
 
 static bool qchance( int num );
 
@@ -58,7 +59,7 @@ void generate_quest(CHAR_DATA *ch, CHAR_DATA *questman)
         }
     }
 
-  if ( vsearch == NULL || ( victim = get_char_world( ch, vsearch->player_name ) ) == NULL || !IS_NPC(victim))
+  if ( vsearch == NULL || ( victim = get_char_world( ch, vsearch->player_name ) ) == NULL || !is_npc(victim))
     {
       sprintf(buf, "I'm sorry, but I don't have any quests for you at this time.");
       do_say(questman, buf);
@@ -171,7 +172,7 @@ void quest_update(void)
     {
       ch_next = ch->next;
 
-      if (IS_NPC(ch)) continue;
+      if (is_npc(ch)) continue;
 
       if (ch->nextquest > 0)
         {

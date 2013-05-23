@@ -11,7 +11,7 @@ void do_whois( CHAR_DATA *ch, char *argument)
 
   buf[0] = '\0';
 
-  if(IS_NPC(ch))
+  if(is_npc(ch))
     return;
 
   if(argument[0] == '\0')
@@ -29,7 +29,7 @@ void do_whois( CHAR_DATA *ch, char *argument)
       return;
     }
 
-  if(IS_NPC(victim))
+  if(is_npc(victim))
     {
       send_to_char("That's not a player!\r\n", ch);
       return;

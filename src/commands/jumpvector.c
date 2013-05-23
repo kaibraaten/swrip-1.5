@@ -1,6 +1,7 @@
 #include "vector3_aux.h"
 #include "mud.h"
 #include "ships.h"
+#include "character.h"
 
 static bool ship_was_in_range( SHIP_DATA *ship, SHIP_DATA *target );
 
@@ -53,7 +54,7 @@ void do_jumpvector( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  the_chance = IS_NPC(ch) ? ch->top_level
+  the_chance = is_npc(ch) ? ch->top_level
     : (int)  (ch->pcdata->learned[gsn_jumpvector]) ;
   if ( number_percent( ) > the_chance )
     {

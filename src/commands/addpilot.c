@@ -1,5 +1,6 @@
 #include "mud.h"
 #include "ships.h"
+#include "character.h"
 
 void do_addpilot(CHAR_DATA *ch, char *argument )
 {
@@ -14,7 +15,7 @@ void do_addpilot(CHAR_DATA *ch, char *argument )
 
   the_chance = number_percent( );
 
-  if ( IS_NPC(ch) || the_chance >= ch->pcdata->learned[gsn_slicing] )
+  if ( is_npc(ch) || the_chance >= ch->pcdata->learned[gsn_slicing] )
     {
       if ( !check_pilot( ch , ship ) )
         {

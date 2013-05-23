@@ -1,3 +1,4 @@
+#include "character.h"
 #include "ships.h"
 #include "mud.h"
 
@@ -25,7 +26,7 @@ void do_autorecharge(CHAR_DATA *ch, char *argument )
       return;
     }
 
-  the_chance = IS_NPC(ch) ? ch->top_level
+  the_chance = is_npc(ch) ? ch->top_level
     : (int)  (ch->pcdata->learned[gsn_shipsystems]) ;
   if ( number_percent( ) > the_chance )
     {

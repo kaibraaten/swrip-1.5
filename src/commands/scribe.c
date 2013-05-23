@@ -13,7 +13,7 @@ void do_scribe( CHAR_DATA *ch, char *argument )
   char buf3[MAX_STRING_LENGTH];
   int mana;
 
-  if ( IS_NPC(ch) )
+  if ( is_npc(ch) )
     return;
 
   if ( argument[0] == '\0' || !str_cmp(argument, "") )
@@ -43,10 +43,10 @@ void do_scribe( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  mana = IS_NPC(ch) ? 0 : skill_table[sn]->min_mana;
+  mana = is_npc(ch) ? 0 : skill_table[sn]->min_mana;
   mana *=5;
 
-  if ( !IS_NPC(ch) && ch->mana < mana )
+  if ( !is_npc(ch) && ch->mana < mana )
     {
       send_to_char( "You don't have enough mana.\r\n", ch );
       return;
@@ -79,7 +79,7 @@ void do_scribe( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( !IS_NPC(ch) && number_percent( ) > ch->pcdata->learned[gsn_scribe] )
+  if ( !is_npc(ch) && number_percent( ) > ch->pcdata->learned[gsn_scribe] )
     {
       set_char_color ( AT_MAGIC, ch );
       send_to_char("The magic surges outof control and destroys the scroll!.\r\n", ch);

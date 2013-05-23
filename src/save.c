@@ -174,12 +174,12 @@ void save_char_obj( CHAR_DATA *ch )
       return;
     }
 
-  if ( IS_NPC(ch) || NOT_AUTHED(ch) )
+  if ( is_npc(ch) || NOT_AUTHED(ch) )
     return;
 
   saving_char = ch;
   /* save pc's clan's data while we're at it to keep the data in sync */
-  if ( !IS_NPC(ch) && ch->pcdata->clan )
+  if ( !is_npc(ch) && ch->pcdata->clan )
     save_clan( ch->pcdata->clan );
 
   if ( ch->desc && ch->desc->original )
@@ -274,7 +274,7 @@ void save_clone( CHAR_DATA *ch )
       return;
     }
 
-  if ( IS_NPC(ch) || NOT_AUTHED(ch) )
+  if ( is_npc(ch) || NOT_AUTHED(ch) )
     return;
 
   if ( ch->desc && ch->desc->original )
@@ -332,7 +332,7 @@ void fwrite_char( CHAR_DATA *ch, FILE *fp )
   int sn, track, drug;
   SKILLTYPE *skill;
 
-  fprintf( fp, "#%s\n", IS_NPC(ch) ? "MOB" : "PLAYER"           );
+  fprintf( fp, "#%s\n", is_npc(ch) ? "MOB" : "PLAYER"           );
 
   fprintf( fp, "Version      %d\n",   SAVEVERSION               );
   fprintf( fp, "Name         %s~\n",    ch->name                );
@@ -413,7 +413,7 @@ void fwrite_char( CHAR_DATA *ch, FILE *fp )
   if ( ch->mental_state != -10 )
     fprintf( fp, "Mentalstate  %d\n",   ch->mental_state        );
 
-  if ( IS_NPC(ch) )
+  if ( is_npc(ch) )
     {
       fprintf( fp, "Vnum         %d\n", ch->pIndexData->vnum    );
       fprintf( fp, "Mobinvis     %d\n", ch->mobinvis            );
@@ -970,7 +970,7 @@ bool load_char_obj( DESCRIPTOR_DATA *d, char *name, bool preload )
       if ( !ch->pcdata->authed_by )
         ch->pcdata->authed_by    = STRALLOC( "" );
 
-      if ( !IS_NPC( ch ) && get_trust( ch ) > LEVEL_AVATAR )
+      if ( !is_npc( ch ) && get_trust( ch ) > LEVEL_AVATAR )
         {
           if ( ch->pcdata->wizinvis < 2 )
             ch->pcdata->wizinvis = ch->top_level;
@@ -2066,7 +2066,7 @@ void write_corpses( CHAR_DATA *ch, char *name )
 
   /* Name and ch support so that we dont have to have a char to save their
      corpses.. (ie: decayed corpses while offline) */
-  if ( ch && IS_NPC(ch) )
+  if ( ch && is_npc(ch) )
     {
       bug( "Write_corpses: writing NPC corpse.", 0 );
       return;
@@ -2377,7 +2377,7 @@ void load_vendors( void )
  */
 void fwrite_mobile( FILE *fp, CHAR_DATA *mob )
 {
-  if ( !IS_NPC( mob ) || !fp )
+  if ( !is_npc( mob ) || !fp )
     return;
   fprintf( fp, "#MOBILE\n" );
   fprintf( fp, "Vnum    %d\n", mob->pIndexData->vnum );
@@ -2516,7 +2516,7 @@ void write_char_mobile( CHAR_DATA *ch , char *argument )
   CHAR_DATA *mob;
   char buf[MAX_STRING_LENGTH];
 
-  if ( IS_NPC( ch ) || !ch->pcdata->pet )
+  if ( is_npc( ch ) || !ch->pcdata->pet )
     return;
 
   if ( (fp = fopen( argument, "w")) == NULL )

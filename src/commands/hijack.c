@@ -65,7 +65,7 @@ void do_hijack( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  the_chance = IS_NPC(ch) ? ch->top_level
+  the_chance = is_npc(ch) ? ch->top_level
     : (int)  (ch->pcdata->learned[gsn_hijack]) ;
   if ( number_percent( ) > the_chance )
     {
@@ -75,13 +75,13 @@ void do_hijack( CHAR_DATA *ch, char *argument )
     }
 
   if ( ship->sclass == FIGHTER_SHIP )
-    the_chance = IS_NPC(ch) ? ch->top_level
+    the_chance = is_npc(ch) ? ch->top_level
       : (int)  (ch->pcdata->learned[gsn_starfighters]) ;
   if ( ship->sclass == MIDSIZE_SHIP )
-    the_chance = IS_NPC(ch) ? ch->top_level
+    the_chance = is_npc(ch) ? ch->top_level
       : (int)  (ch->pcdata->learned[gsn_midships]) ;
   if ( ship->sclass == CAPITAL_SHIP )
-    the_chance = IS_NPC(ch) ? ch->top_level
+    the_chance = is_npc(ch) ? ch->top_level
       : (int) (ch->pcdata->learned[gsn_capitalships]);
   if ( number_percent( ) < the_chance )
     {
@@ -115,7 +115,7 @@ void do_hijack( CHAR_DATA *ch, char *argument )
 
         {
           p_prev = p->prev;  /* TRI */
-          if (!IS_NPC(p) && get_trust(p) >= LEVEL_GOD)
+          if (!is_npc(p) && get_trust(p) >= LEVEL_GOD)
             {
               sprintf( buf2, "%s(%s)", ship->name, ship->personalname );
               ch_printf(p, "&R[alarm] %s has been hijacked by %s!\r\n", buf2, ch->name);
@@ -134,7 +134,7 @@ void do_hijack( CHAR_DATA *ch, char *argument )
           if ( !has_comlink( victim ) )
             continue;
 
-          if ( !IS_NPC( victim ) && victim->switched )
+          if ( !is_npc( victim ) && victim->switched )
             continue;
 
           if ( !IS_AWAKE(victim) || IS_SET(victim->in_room->room_flags,ROOM_SILENCE) )

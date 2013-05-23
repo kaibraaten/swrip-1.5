@@ -1,3 +1,4 @@
+#include "character.h"
 #include "mud.h"
 #include "ships.h"
 
@@ -8,7 +9,7 @@ void do_transship(CHAR_DATA *ch, char *argument)
   int arg3, origShipyard;
   SHIP_DATA *ship;
 
-  if ( IS_NPC( ch ) )
+  if ( is_npc( ch ) )
     {
       send_to_char( "Huh?\r\n", ch );
       return;

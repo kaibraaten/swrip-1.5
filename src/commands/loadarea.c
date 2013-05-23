@@ -7,7 +7,7 @@ void do_loadarea( CHAR_DATA *ch, char *argument )
   char   filename[256];
   int           tmp;
 
-  if ( IS_NPC(ch) || get_trust( ch ) < LEVEL_AVATAR || !ch->pcdata
+  if ( is_npc(ch) || get_trust( ch ) < LEVEL_AVATAR || !ch->pcdata
        ||  ( argument[0] == '\0' && !ch->pcdata->area) )
     {
       send_to_char( "You don't have an assigned area to load.\r\n", ch );
@@ -26,7 +26,7 @@ void do_loadarea( CHAR_DATA *ch, char *argument )
             found = TRUE;
             break;
 	  }
-      if ( IS_NPC(ch) || ( get_trust(ch) < LEVEL_GOD
+      if ( is_npc(ch) || ( get_trust(ch) < LEVEL_GOD
                            &&   tarea && !is_name( tarea->filename, ch->pcdata->bestowments ) ) )
         {
           send_to_char( "You can only load areas you have permission for.\r\n", ch );

@@ -24,7 +24,7 @@ void do_restore( CHAR_DATA *ch, char *argument )
 
       if ( get_trust( ch ) < LEVEL_SUB_IMPLEM )
         {
-          if ( IS_NPC( ch ) )
+          if ( is_npc( ch ) )
             {
               send_to_char( "You can't do that.\r\n", ch );
               return;
@@ -49,7 +49,7 @@ void do_restore( CHAR_DATA *ch, char *argument )
         {
           vch_next = vch->next;
 
-          if ( !IS_NPC( vch ) && !IS_IMMORTAL( vch ) )
+          if ( !is_npc( vch ) && !IS_IMMORTAL( vch ) )
 	    {
               vch->hit = vch->max_hit;
               vch->mana = vch->max_mana;
@@ -72,7 +72,7 @@ void do_restore( CHAR_DATA *ch, char *argument )
 
       if ( get_trust( ch ) < LEVEL_LESSER
            &&  victim != ch
-           && !( IS_NPC( victim ) && IS_SET( victim->act, ACT_PROTOTYPE ) ) )
+           && !( is_npc( victim ) && IS_SET( victim->act, ACT_PROTOTYPE ) ) )
         {
           send_to_char( "You can't do that.\r\n", ch );
           return;

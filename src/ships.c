@@ -864,7 +864,7 @@ ch_ret drive_ship( CHAR_DATA *ch, SHIP_DATA *ship, EXIT_DATA *pexit, int fall )
   CHAR_DATA * rch;
   CHAR_DATA * next_rch;
 
-  if ( !IS_NPC( ch ) )
+  if ( !is_npc( ch ) )
     if ( IS_DRUNK( ch, 2 ) && ( ch->position != POS_SHOVE )
          && ( ch->position != POS_DRAG ) )
       drunk = TRUE;
@@ -907,14 +907,14 @@ ch_ret drive_ship( CHAR_DATA *ch, SHIP_DATA *ship, EXIT_DATA *pexit, int fall )
     }
 
   if (  IS_SET(pexit->exit_info, EX_PORTAL)
-        && IS_NPC(ch) )
+        && is_npc(ch) )
     {
       act( AT_PLAIN, "Mobs can't use portals.", ch, NULL, NULL, TO_CHAR );
       return rNONE;
     }
 
   if ( IS_SET(pexit->exit_info, EX_NOMOB)
-       && IS_NPC(ch) )
+       && is_npc(ch) )
     {
       act( AT_PLAIN, "Mobs can't enter there.", ch, NULL, NULL, TO_CHAR );
       return rNONE;
@@ -954,7 +954,7 @@ ch_ret drive_ship( CHAR_DATA *ch, SHIP_DATA *ship, EXIT_DATA *pexit, int fall )
     }
 
   if ( !IS_IMMORTAL(ch)
-       &&  !IS_NPC(ch)
+       &&  !is_npc(ch)
        &&  ch->in_room->area != to_room->area )
     {
       if ( ch->top_level < to_room->area->low_hard_range )
@@ -1070,7 +1070,7 @@ ch_ret drive_ship( CHAR_DATA *ch, SHIP_DATA *ship, EXIT_DATA *pexit, int fall )
               }
       }
 
-  the_chance = IS_NPC(ch) ? ch->top_level
+  the_chance = is_npc(ch) ? ch->top_level
     : (int)  (ch->pcdata->learned[gsn_speeders]) ;
   if ( number_percent( ) > the_chance )
     {
@@ -1166,7 +1166,7 @@ void sound_to_ship( SHIP_DATA *ship, const char *argument )
 
       for ( vic = room->first_person; vic; vic = vic->next_in_room )
         {
-          if ( !IS_NPC(vic) && IS_SET( vic->act, PLR_SOUND ) )
+          if ( !is_npc(vic) && IS_SET( vic->act, PLR_SOUND ) )
             send_to_char( argument, vic );
         }
     }
@@ -3053,7 +3053,7 @@ bool check_pilot( CHAR_DATA *ch , SHIP_DATA *ship )
        || !str_cmp("Trainer", ship->owner) )
     return TRUE;
 
-  if ( !IS_NPC(ch) && ch->pcdata && ch->pcdata->clan )
+  if ( !is_npc(ch) && ch->pcdata && ch->pcdata->clan )
     {
       if ( !str_cmp(ch->pcdata->clan->name,ship->owner) )
         {
@@ -3412,7 +3412,7 @@ bool rent_ship( CHAR_DATA *ch , SHIP_DATA *ship )
 {
   long price = 0;
 
-  if ( IS_NPC ( ch ) )
+  if ( is_npc ( ch ) )
     return FALSE;
 
   price = get_ship_value( ship )/100;

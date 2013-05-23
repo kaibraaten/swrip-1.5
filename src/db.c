@@ -1054,7 +1054,7 @@ void load_mobiles( AREA_DATA *tarea, FILE *fp )
       pMobIndex->long_descr[0]  = UPPER(pMobIndex->long_descr[0]);
       pMobIndex->description[0] = UPPER(pMobIndex->description[0]);
 
-      pMobIndex->act                    = fread_number( fp ) | ACT_IS_NPC;
+      pMobIndex->act                    = fread_number( fp ) | ACT_is_npc;
       pMobIndex->affected_by            = fread_number( fp );
       pMobIndex->pShop          = NULL;
       pMobIndex->rShop          = NULL;
@@ -2166,7 +2166,7 @@ void area_update( void )
             strcpy( buf, "You hear some squeaking sounds...\r\n" );
           for ( pch = first_char; pch; pch = pch->next )
             {
-              if ( !IS_NPC(pch)
+              if ( !is_npc(pch)
                    &&   IS_AWAKE(pch)
                    &&   pch->in_room
                    &&   pch->in_room->area == pArea )
@@ -4001,7 +4001,7 @@ MOB_INDEX_DATA *make_mobile( short vnum, short cvnum, char *name )
       pMobIndex->short_descr[0] = LOWER(pMobIndex->short_descr[0]);
       pMobIndex->long_descr[0]  = UPPER(pMobIndex->long_descr[0]);
       pMobIndex->description[0] = UPPER(pMobIndex->description[0]);
-      pMobIndex->act            = ACT_IS_NPC | ACT_PROTOTYPE;
+      pMobIndex->act            = ACT_is_npc | ACT_PROTOTYPE;
       pMobIndex->affected_by    = 0;
       pMobIndex->pShop          = NULL;
       pMobIndex->rShop          = NULL;
@@ -4797,7 +4797,7 @@ void append_file( CHAR_DATA *ch, const char *file, const char *str )
 {
   FILE *fp;
 
-  if ( IS_NPC(ch) || str[0] == '\0' )
+  if ( is_npc(ch) || str[0] == '\0' )
     return;
 
   if ( ( fp = fopen( file, "a" ) ) == NULL )

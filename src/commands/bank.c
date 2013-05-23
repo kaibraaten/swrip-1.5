@@ -13,7 +13,7 @@ void do_bank( CHAR_DATA *ch, char *argument )
   argument = one_argument( argument , arg2 );
   argument = one_argument( argument , arg3 );
 
-  if ( IS_NPC(ch) || !ch->pcdata )
+  if ( is_npc(ch) || !ch->pcdata )
     return;
 
   if ( NOT_AUTHED(ch) )
@@ -96,7 +96,7 @@ void do_bank( CHAR_DATA *ch, char *argument )
           return;
         }
 
-      if( ( IS_NPC(victim)))
+      if( ( is_npc(victim)))
         {
           send_to_char("No such player online.\r\n", ch);
           return;

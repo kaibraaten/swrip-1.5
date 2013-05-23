@@ -402,7 +402,7 @@ void find_bet_winners(CHAR_DATA *winner)
         if (wch == NULL)
           continue;
 
-        if ((!IS_NPC(wch)) && (GET_BET_AMT(wch) > 0) && (GET_BETTED_ON(wch) == winner))
+        if ((!is_npc(wch)) && (GET_BET_AMT(wch) > 0) && (GET_BETTED_ON(wch) == winner))
           {
             sprintf(buf1, "You have won %d credits on your bet.\r\n",(GET_BET_AMT(wch))*2);
             send_to_char(buf1, wch);
@@ -426,7 +426,7 @@ void reset_bets()
       if (ch == NULL)
         continue;
 
-      if (!IS_NPC(ch))
+      if (!is_npc(ch))
         {
           GET_BETTED_ON(ch) = NULL;
           GET_BET_AMT(ch) = 0;

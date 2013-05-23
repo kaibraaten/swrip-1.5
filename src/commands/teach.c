@@ -7,7 +7,7 @@ void do_teach( CHAR_DATA *ch, char *argument )
   int sn;
   char arg[MAX_INPUT_LENGTH];
 
-  if ( IS_NPC(ch) )
+  if ( is_npc(ch) )
     return;
 
   argument = one_argument(argument, arg);
@@ -34,7 +34,7 @@ void do_teach( CHAR_DATA *ch, char *argument )
           return;
         }
 
-      if (IS_NPC(victim))
+      if (is_npc(victim))
         {
 	  send_to_char( "You can't teach that to them!\r\n", ch );
           return;

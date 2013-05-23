@@ -280,7 +280,7 @@ void do_who( CHAR_DATA *ch, char *argument )
       else if ( wch->pcdata->rank && wch->pcdata->rank[0] != '\0' )
         race = wch->pcdata->rank;
 
-      if ( wch->pcdata->clan && ( (!IS_NPC(ch) &&  ch->pcdata->clan
+      if ( wch->pcdata->clan && ( (!is_npc(ch) &&  ch->pcdata->clan
                                    && ch->pcdata->clan == wch->pcdata->clan )
                                   || IS_GOD( ch ) ) )
         {

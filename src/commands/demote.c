@@ -1,9 +1,10 @@
+#include "character.h"
 #include "mud.h"
 
 void do_demote ( CHAR_DATA *ch , char *argument )
 {
 
-  if ( IS_NPC( ch ) || !ch->pcdata )
+  if ( is_npc( ch ) || !ch->pcdata )
     return;
 
   if ( !ch->pcdata->clan )

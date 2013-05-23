@@ -606,7 +606,7 @@ void do_sset( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( IS_NPC(victim) )
+  if ( is_npc(victim) )
     {
       send_to_char( "Not on NPC's.\r\n", ch );
       return;

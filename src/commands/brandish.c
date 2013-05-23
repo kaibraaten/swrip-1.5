@@ -41,7 +41,7 @@ void do_brandish( CHAR_DATA *ch, char *argument )
       for ( vch = ch->in_room->first_person; vch; vch = vch_next )
 	{
           vch_next      = vch->next_in_room;
-          if ( !IS_NPC( vch ) && IS_SET( vch->act, PLR_WIZINVIS )
+          if ( !is_npc( vch ) && IS_SET( vch->act, PLR_WIZINVIS )
                && vch->pcdata->wizinvis >= LEVEL_IMMORTAL )
             continue;
           else
@@ -57,12 +57,12 @@ void do_brandish( CHAR_DATA *ch, char *argument )
                 break;
 
               case TAR_CHAR_OFFENSIVE:
-                if ( IS_NPC(ch) ? IS_NPC(vch) : !IS_NPC(vch) )
+                if ( is_npc(ch) ? is_npc(vch) : !is_npc(vch) )
                   continue;
                 break;
 
               case TAR_CHAR_DEFENSIVE:
-                if ( IS_NPC(ch) ? !IS_NPC(vch) : IS_NPC(vch) )
+                if ( is_npc(ch) ? !is_npc(vch) : is_npc(vch) )
                   continue;
                 break;
 

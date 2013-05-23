@@ -1,8 +1,9 @@
+#include "character.h"
 #include "mud.h"
 
 void do_roster( CHAR_DATA *ch, char *argument )
 {
-  if( IS_NPC( ch ) || !ch->pcdata->clan
+  if( is_npc( ch ) || !ch->pcdata->clan
       || ( str_cmp(ch->name, ch->pcdata->clan->leader )
            && str_cmp(ch->name, ch->pcdata->clan->number1 )
            && str_cmp(ch->name, ch->pcdata->clan->number2 )

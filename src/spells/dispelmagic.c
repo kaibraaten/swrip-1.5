@@ -1,3 +1,4 @@
+#include "character.h"
 #include "mud.h"
 
 ch_ret spell_dispel_magic( int sn, int level, CHAR_DATA *ch, void *vo )
@@ -30,7 +31,7 @@ ch_ret spell_dispel_magic( int sn, int level, CHAR_DATA *ch, void *vo )
         return rSPELL_FAILED;
       }
 
-  if ( !IS_NPC(victim) )
+  if ( !is_npc(victim) )
     {
       send_to_char( "You can't do that... yet.\r\n", ch );
       return rSPELL_FAILED;

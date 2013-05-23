@@ -6,7 +6,7 @@ void do_kick( CHAR_DATA *ch, char *argument )
   CHAR_DATA *victim;
   char logbuf[MAX_STRING_LENGTH];
 
-  if ( IS_NPC(ch) && is_affected_by( ch, AFF_CHARM ) )
+  if ( is_npc(ch) && is_affected_by( ch, AFF_CHARM ) )
     {
       send_to_char( "You can't concentrate enough for that.\r\n", ch );
       return;
@@ -27,7 +27,7 @@ void do_kick( CHAR_DATA *ch, char *argument )
 
   WAIT_STATE( ch, skill_table[gsn_kick]->beats );
 
-  if ( IS_NPC(ch) || number_percent( ) < ch->pcdata->learned[gsn_kick] )
+  if ( is_npc(ch) || number_percent( ) < ch->pcdata->learned[gsn_kick] )
     {
       learn_from_success( ch, gsn_kick );
       global_retcode = damage( ch, victim, number_range( 1, get_level(ch, COMBAT_ABILITY ) ), gsn_kick );

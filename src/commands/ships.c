@@ -1,6 +1,7 @@
 #include <string.h>
 #include "mud.h"
 #include "ships.h"
+#include "character.h"
 
 void do_ships( CHAR_DATA *ch, char *argument )
 {
@@ -11,7 +12,7 @@ void do_ships( CHAR_DATA *ch, char *argument )
   int count = 0;
   bool owned = FALSE, set = FALSE;
 
-  if ( !IS_NPC(ch) )
+  if ( !is_npc(ch) )
     {
       count = 0;
       send_to_pager( "&YThe following ships you have pilot access to:\r\n", ch );

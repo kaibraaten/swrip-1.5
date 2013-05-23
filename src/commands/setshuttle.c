@@ -5,6 +5,7 @@
 
 #include "mud.h"
 #include "shuttle.h"
+#include "character.h"
 
 void do_setshuttle(CHAR_DATA * ch, char * argument)
 {
@@ -13,7 +14,7 @@ void do_setshuttle(CHAR_DATA * ch, char * argument)
   char arg2[MIL];
   int value;
 
-  if ( IS_NPC( ch ) )
+  if ( is_npc( ch ) )
     {
       send_to_char( "Huh?\r\n", ch );
       return;

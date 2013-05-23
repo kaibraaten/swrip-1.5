@@ -34,11 +34,11 @@ ch_ret spell_area_attack( int sn, int level, CHAR_DATA *ch, void *vo )
     {
       vch_next = vch->next_in_room;
 
-      if ( !IS_NPC( vch ) && IS_SET( vch->act, PLR_WIZINVIS )
+      if ( !is_npc( vch ) && IS_SET( vch->act, PLR_WIZINVIS )
            && vch->pcdata->wizinvis >= LEVEL_IMMORTAL )
         continue;
 
-      if ( vch != ch && ( IS_NPC(ch) ? !IS_NPC(vch) : IS_NPC(vch) ) )
+      if ( vch != ch && ( is_npc(ch) ? !is_npc(vch) : is_npc(vch) ) )
         {
           saved = check_save( sn, level, ch, vch );
           if ( saved && !SPELL_FLAG( skill, SF_SAVE_HALF_DAMAGE ) )

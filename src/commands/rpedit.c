@@ -1,3 +1,4 @@
+#include "character.h"
 #include "mud.h"
 
 void do_rpedit( CHAR_DATA *ch, char *argument )
@@ -8,7 +9,7 @@ void do_rpedit( CHAR_DATA *ch, char *argument )
   MPROG_DATA *mprog, *mprg, *mprg_next;
   int value, mptype, cnt;
 
-  if ( IS_NPC( ch ) )
+  if ( is_npc( ch ) )
     {
       send_to_char( "Mob's can't rpedit\r\n", ch );
       return;

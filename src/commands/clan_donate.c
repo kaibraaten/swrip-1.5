@@ -6,7 +6,7 @@ void do_clan_donate( CHAR_DATA *ch, char *argument )
   CLAN_DATA *clan = NULL;
   long amount = 0;
 
-  if ( IS_NPC( ch ) || !ch->pcdata->clan )
+  if ( is_npc( ch ) || !ch->pcdata->clan )
     {
       send_to_char( "You don't seem to belong to an organization to donate to...\r\n", ch );
       return;

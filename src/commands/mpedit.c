@@ -14,7 +14,7 @@ void do_mpedit( CHAR_DATA *ch, char *argument )
   MPROG_DATA *mprog, *mprg, *mprg_next;
   int value, mptype, cnt;
 
-  if ( IS_NPC( ch ) )
+  if ( is_npc( ch ) )
     {
       send_to_char( "Mob's can't mpedit\r\n", ch );
       return;
@@ -84,7 +84,7 @@ void do_mpedit( CHAR_DATA *ch, char *argument )
         }
     }
 
-  if ( get_trust( ch ) < get_trust( victim ) || !IS_NPC(victim) )
+  if ( get_trust( ch ) < get_trust( victim ) || !is_npc(victim) )
     {
       send_to_char( "You can't do that!\r\n", ch );
       return;

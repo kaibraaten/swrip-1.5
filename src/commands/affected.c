@@ -1,3 +1,4 @@
+#include "character.h"
 #include "mud.h"
 
 void do_affected ( CHAR_DATA *ch, char *argument )
@@ -6,7 +7,7 @@ void do_affected ( CHAR_DATA *ch, char *argument )
   AFFECT_DATA *paf;
   SKILLTYPE *skill;
 
-  if ( IS_NPC(ch) )
+  if ( is_npc(ch) )
     return;
 
   argument = one_argument( argument, arg );

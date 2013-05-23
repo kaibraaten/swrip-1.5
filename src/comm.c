@@ -1368,7 +1368,7 @@ bool check_reconnect( DESCRIPTOR_DATA *d, char *name, bool fConn )
 
   for ( ch = first_char; ch; ch = ch->next )
     {
-      if ( !IS_NPC(ch)
+      if ( !is_npc(ch)
            && ( !fConn || !ch->desc )
            &&    ch->name
            &&   !str_cmp( name, ch->name ) )
@@ -1641,7 +1641,7 @@ void send_to_pager( const char *txt, const CHAR_DATA *ch )
     return;
   d = ch->desc;
   ch = d->original ? d->original : d->character;
-  if ( IS_NPC(ch) || !IS_SET(ch->pcdata->flags, PCFLAG_PAGERON) )
+  if ( is_npc(ch) || !IS_SET(ch->pcdata->flags, PCFLAG_PAGERON) )
     {
       send_to_char(txt, d->character);
       return;
@@ -1677,7 +1677,7 @@ void set_char_color( short AType, CHAR_DATA *ch )
     return;
 
   och = (ch->desc->original ? ch->desc->original : ch);
-  if ( !IS_NPC(och) && IS_SET(och->act, PLR_ANSI) )
+  if ( !is_npc(och) && IS_SET(och->act, PLR_ANSI) )
     {
       if ( AType == 7 )
         strcpy( buf, "\033[m" );
@@ -1698,7 +1698,7 @@ void set_pager_color( short AType, CHAR_DATA *ch )
     return;
 
   och = (ch->desc->original ? ch->desc->original : ch);
-  if ( !IS_NPC(och) && IS_SET(och->act, PLR_ANSI) )
+  if ( !is_npc(och) && IS_SET(och->act, PLR_ANSI) )
     {
       if ( AType == 7 )
         strcpy( buf, "\033[m" );
@@ -1755,7 +1755,7 @@ char *obj_short( const OBJ_DATA *obj )
  * The primary output interface for formatted output.
  */
 /* Major overhaul. -- Alty */
-#define NAME(ch)        (IS_NPC(ch) ? ch->short_descr : ch->name)
+#define NAME(ch)        (is_npc(ch) ? ch->short_descr : ch->name)
 char *act_string(const char *format, CHAR_DATA *to, CHAR_DATA *ch,
                  const void *arg1, const void *arg2)
 {
@@ -1905,7 +1905,7 @@ void act( short AType, const char *format, CHAR_DATA *ch, const void *arg1, cons
   /*
    * ACT_SECRETIVE handling
    */
-  if ( IS_NPC(ch) && IS_SET(ch->act, ACT_SECRETIVE) && type != TO_CHAR )
+  if ( is_npc(ch) && IS_SET(ch->act, ACT_SECRETIVE) && type != TO_CHAR )
     return;
 
   if ( type == TO_VICT )
@@ -1945,7 +1945,7 @@ void act( short AType, const char *format, CHAR_DATA *ch, const void *arg1, cons
           ? NULL : to->next_in_room )
     {
       if (((!to || !to->desc)
-           && (  IS_NPC(to) && !IS_SET(to->pIndexData->progtypes, ACT_PROG) ))
+           && (  is_npc(to) && !IS_SET(to->pIndexData->progtypes, ACT_PROG) ))
           ||   !IS_AWAKE(to) )
         continue;
 
@@ -2009,7 +2009,7 @@ void display_prompt( DESCRIPTOR_DATA *d )
 {
   CHAR_DATA *ch = d->character;
   CHAR_DATA *och = (d->original ? d->original : d->character);
-  bool ansi = (!IS_NPC(och) && IS_SET(och->act, PLR_ANSI));
+  bool ansi = (!is_npc(och) && IS_SET(och->act, PLR_ANSI));
   const char *prompt;
   char buf[MAX_STRING_LENGTH];
   char *pbuf = buf;
@@ -2021,10 +2021,10 @@ void display_prompt( DESCRIPTOR_DATA *d )
       return;
     }
 
-  if ( !IS_NPC(ch) && ch->substate != SUB_NONE && ch->pcdata->subprompt
+  if ( !is_npc(ch) && ch->substate != SUB_NONE && ch->pcdata->subprompt
        &&   ch->pcdata->subprompt[0] != '\0' )
     prompt = ch->pcdata->subprompt;
-  else if ( IS_NPC(ch) || !ch->pcdata->prompt || !*ch->pcdata->prompt )
+  else if ( is_npc(ch) || !ch->pcdata->prompt || !*ch->pcdata->prompt )
     prompt = default_prompt(ch);
   else
     prompt = ch->pcdata->prompt;
@@ -2162,15 +2162,15 @@ void display_prompt( DESCRIPTOR_DATA *d )
               break;
 
             case 'i':
-              if ( (!IS_NPC(ch) && IS_SET(ch->act, PLR_WIZINVIS)) ||
-                   (IS_NPC(ch) && IS_SET(ch->act, ACT_MOBINVIS)) )
-                sprintf(pbuf, "(Invis %d) ", (IS_NPC(ch) ? ch->mobinvis : ch->pcdata->wizinvis));
+              if ( (!is_npc(ch) && IS_SET(ch->act, PLR_WIZINVIS)) ||
+                   (is_npc(ch) && IS_SET(ch->act, ACT_MOBINVIS)) )
+                sprintf(pbuf, "(Invis %d) ", (is_npc(ch) ? ch->mobinvis : ch->pcdata->wizinvis));
               else if ( is_affected_by(ch, AFF_INVISIBLE) )
 		sprintf(pbuf, "(Invis) " );
               break;
 
             case 'I':
-              the_stat = (IS_NPC(ch) ? (IS_SET(ch->act, ACT_MOBINVIS) ? ch->mobinvis : 0)
+              the_stat = (is_npc(ch) ? (IS_SET(ch->act, ACT_MOBINVIS) ? ch->mobinvis : 0)
                       : (IS_SET(ch->act, PLR_WIZINVIS) ? ch->pcdata->wizinvis : 0));
               break;
             }
@@ -2196,7 +2196,7 @@ int make_color_sequence(const char *col, char *buf, DESCRIPTOR_DATA *d)
   bool ansi;
 
   och = (d->original ? d->original : d->character);
-  ansi = (!IS_NPC(och) && IS_SET(och->act, PLR_ANSI));
+  ansi = (!is_npc(och) && IS_SET(och->act, PLR_ANSI));
   col++;
   if ( !*col )
     ln = -1;

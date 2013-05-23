@@ -1,10 +1,11 @@
+#include "character.h"
 #include "mud.h"
 
 void do_mount( CHAR_DATA *ch, char *argument )
 {
   CHAR_DATA *victim;
 
-  if ( !IS_NPC(ch)
+  if ( !is_npc(ch)
        &&   ch->pcdata->learned[gsn_mount] <= 0  )
     {
       send_to_char(
@@ -24,7 +25,7 @@ void do_mount( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( !IS_NPC(victim) || !IS_SET(victim->act, ACT_MOUNTABLE ) )
+  if ( !is_npc(victim) || !IS_SET(victim->act, ACT_MOUNTABLE ) )
     {
       send_to_char( "You can't mount that!\r\n", ch );
       return;
@@ -49,7 +50,7 @@ void do_mount( CHAR_DATA *ch, char *argument )
     }
 
   WAIT_STATE( ch, skill_table[gsn_mount]->beats );
-  if ( IS_NPC(ch) || number_percent( ) < ch->pcdata->learned[gsn_mount] )
+  if ( is_npc(ch) || number_percent( ) < ch->pcdata->learned[gsn_mount] )
     {
       SET_BIT( victim->act, ACT_MOUNTED );
       ch->mount = victim;

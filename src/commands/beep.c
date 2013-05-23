@@ -16,7 +16,7 @@ void do_beep( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if (!IS_NPC(ch)
+  if (!is_npc(ch)
       && ( IS_SET(ch->act, PLR_SILENCE)
            ||   IS_SET(ch->act, PLR_NO_TELL) ) )
     {
@@ -31,7 +31,7 @@ void do_beep( CHAR_DATA *ch, char *argument )
     }
 
   if ( ( victim = get_char_world( ch, arg ) ) == NULL
-       || ( IS_NPC(victim) && victim->in_room != ch->in_room )
+       || ( is_npc(victim) && victim->in_room != ch->in_room )
        || (!NOT_AUTHED(ch) && NOT_AUTHED(victim) && !IS_IMMORTAL(ch) ) )
     {
       send_to_char( "They aren't here.\r\n", ch );
@@ -72,13 +72,13 @@ void do_beep( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( !IS_NPC( victim ) && ( victim->switched )
+  if ( !is_npc( victim ) && ( victim->switched )
        && ( get_trust( ch ) > LEVEL_AVATAR ) )
     {
       send_to_char( "That player is switched.\r\n", ch );
       return;
     }
-  else if ( !IS_NPC( victim ) && ( !victim->desc ) )
+  else if ( !is_npc( victim ) && ( !victim->desc ) )
     {
       send_to_char( "That player is link-dead.\r\n", ch );
       return;
@@ -92,13 +92,13 @@ void do_beep( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( !IS_NPC (victim) && ( IS_SET (victim->act, PLR_SILENCE ) ) )
+  if ( !is_npc (victim) && ( IS_SET (victim->act, PLR_SILENCE ) ) )
     {
       send_to_char( "That player is silenced.  They will receive your message but can not respond.\r\n", ch );
     }
 
   if ( (!IS_IMMORTAL(ch) && !IS_AWAKE(victim) )
-       || (!IS_NPC(victim)&&IS_SET(victim->in_room->room_flags, ROOM_SILENCE ) ) )
+       || (!is_npc(victim)&&IS_SET(victim->in_room->room_flags, ROOM_SILENCE ) ) )
     {
       act( AT_PLAIN, "$E can't hear you.", ch, 0, victim, TO_CHAR );
       return;
@@ -116,7 +116,7 @@ void do_beep( CHAR_DATA *ch, char *argument )
   send_to_char("\a",victim);
 
   if ( knows_language( victim, ch->speaking, ch )
-       ||  (IS_NPC(ch) && !ch->speaking) )
+       ||  (is_npc(ch) && !ch->speaking) )
     act( AT_WHITE, "$n beeps: '$t'", ch, argument, victim, TO_VICT );
   else
     act( AT_WHITE, "$n beeps: '$t'", ch, scramble(argument, ch->speaking), victim, TO_VICT );

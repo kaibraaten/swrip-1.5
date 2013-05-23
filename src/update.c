@@ -114,7 +114,7 @@ int max_level( const CHAR_DATA *ch, int ability)
 {
   int level = 0;
 
-  if ( IS_NPC(ch) )
+  if ( is_npc(ch) )
     return 100;
 
   if ( IS_IMMORTAL(ch) || ch->race == RACE_GOD )
@@ -349,13 +349,13 @@ void advance_level( CHAR_DATA *ch, int ability )
       ch->top_level = URANGE( 1, get_level( ch, ability ), 100 );
     }
 
-  if ( !IS_NPC(ch) )
+  if ( !is_npc(ch) )
     REMOVE_BIT( ch->act, PLR_BOUGHT_PET );
 }
 
 void gain_exp( CHAR_DATA *ch, short ability, long gain )
 {
-  if ( IS_NPC(ch) )
+  if ( is_npc(ch) )
     return;
 
   set_exp( ch, ability, UMAX( 0, get_exp( ch, ability ) + gain ) );
@@ -394,7 +394,7 @@ long lose_exp( CHAR_DATA *ch, short ability, long loss )
   int new_exp = 0;
   int actual_loss = 0;
 
-  if ( IS_NPC(ch) )
+  if ( is_npc(ch) )
     return 0;
 
   current_exp = get_exp( ch, ability );
@@ -413,7 +413,7 @@ int hit_gain( const CHAR_DATA *ch )
 {
   int gain;
 
-  if ( IS_NPC(ch) )
+  if ( is_npc(ch) )
     {
       gain = ch->top_level;
     }
@@ -454,7 +454,7 @@ int mana_gain( const CHAR_DATA *ch )
 {
   int gain;
 
-  if ( IS_NPC(ch) )
+  if ( is_npc(ch) )
     {
       gain = ch->top_level;
     }
@@ -493,7 +493,7 @@ int move_gain( const CHAR_DATA *ch )
 {
   int gain;
 
-  if ( IS_NPC(ch) )
+  if ( is_npc(ch) )
     {
       gain = ch->top_level;
     }
@@ -626,7 +626,7 @@ void gain_condition( CHAR_DATA *ch, int iCond, int value )
   int condition;
   ch_ret retcode;
 
-  if ( value == 0 || IS_NPC(ch) || get_trust(ch) >= LEVEL_IMMORTAL || is_droid(ch) || NOT_AUTHED(ch))
+  if ( value == 0 || is_npc(ch) || get_trust(ch) >= LEVEL_IMMORTAL || is_droid(ch) || NOT_AUTHED(ch))
     return;
 
   condition                         = ch->pcdata->condition[iCond];
@@ -794,7 +794,7 @@ void mobile_update( void )
           do_shout( ch, "Thoric says, 'Prepare for the worst!'" );
         }
 
-      if ( !IS_NPC(ch) )
+      if ( !is_npc(ch) )
         {
           drunk_randoms(ch);
           halucinations(ch);
@@ -813,7 +813,7 @@ void mobile_update( void )
           if(ch->in_room->first_person)
             act(AT_MAGIC, "$n returns to the dust from whence $e came.", ch, NULL, NULL, TO_ROOM);
 
-          if(IS_NPC(ch)) /* Guard against purging switched? */
+          if(is_npc(ch)) /* Guard against purging switched? */
             extract_char(ch, TRUE);
           continue;
         }
@@ -1277,13 +1277,13 @@ void char_update( void )
        *  Do a room_prog rand check right off the bat
        *   if ch disappears (rprog might wax npc's), continue
        */
-      if(!IS_NPC(ch))
+      if(!is_npc(ch))
         rprog_random_trigger( ch );
 
       if( char_died(ch) )
         continue;
 
-      if(IS_NPC(ch))
+      if(is_npc(ch))
         mprog_time_trigger(ch);
 
       if( char_died(ch) )
@@ -1295,13 +1295,13 @@ void char_update( void )
         continue;
 
       /*
-        if(!IS_NPC(ch))
+        if(!is_npc(ch))
         if ( (ch->pcdata->bank * 1.00002) > 1 )
         ch->pcdata->bank *= 1.00002;
         else
         ch->pcdata->bank += 1;
 
-        if (!IS_NPC(ch) && ch->pcdata->salary_date > current_time)
+        if (!is_npc(ch) && ch->pcdata->salary_date > current_time)
         {
         ch->pcdata->bank += ch->pcdata->salary;
         ch->pcdata->clan->funds -= ch->pcdata->salary;
@@ -1314,7 +1314,7 @@ void char_update( void )
       /*
        * See if player should be auto-saved.
        */
-      if ( !IS_NPC(ch)
+      if ( !is_npc(ch)
            &&    !NOT_AUTHED(ch)
            &&    current_time - ch->pcdata->save_time > (sysdata.save_frequency*60) )
         ch_save = ch;
@@ -1345,7 +1345,7 @@ void char_update( void )
         gain_addiction( ch );
 
 
-      if ( !IS_NPC(ch) && ch->top_level < LEVEL_IMMORTAL )
+      if ( !is_npc(ch) && ch->top_level < LEVEL_IMMORTAL )
         {
           OBJ_DATA *obj;
 
@@ -1536,7 +1536,7 @@ void char_update( void )
                 add_reinforcements( ch );
             }
 
-          if ( !IS_NPC (ch) )
+          if ( !is_npc (ch) )
             {
               if ( ++ch->timer > 15 && !ch->desc )
                 {
@@ -1835,7 +1835,7 @@ void char_check( void )
       if ( char_died( ch ) )
         continue;
 
-      if ( IS_NPC( ch ) )
+      if ( is_npc( ch ) )
         {
           if ( cnt != 0 )
             continue;
@@ -1984,7 +1984,7 @@ void aggr_update( void )
    *  GRUNT!  To do
    *
    */
-  if ( IS_NPC( wch ) && wch->mpactnum > 0
+  if ( is_npc( wch ) && wch->mpactnum > 0
        && wch->in_room->area->nplayer > 0 )
     {
       MPROG_ACT_LIST * tmp_act, *tmp2_act;
@@ -2046,7 +2046,7 @@ void aggr_update( void )
     {
       wch_next = ch->next;
 
-      if ( !IS_NPC(ch)
+      if ( !is_npc(ch)
            ||   ch->fighting
            ||   is_affected_by(ch, AFF_CHARM)
            ||   !IS_AWAKE(ch)
@@ -2088,7 +2088,7 @@ void aggr_update( void )
           if ( get_timer(victim, TIMER_RECENTFIGHT) > 0 )
             continue;
 
-          if ( IS_NPC(ch) && IS_SET(ch->attacks, ATCK_BACKSTAB ) )
+          if ( is_npc(ch) && IS_SET(ch->attacks, ATCK_BACKSTAB ) )
             {
               OBJ_DATA *obj;
 
@@ -2136,7 +2136,7 @@ void drunk_randoms( CHAR_DATA *ch )
   if( !ch )
     return;
 
-  if ( IS_NPC( ch ) || !ch->pcdata || ch->pcdata->condition[COND_DRUNK] <= 0 )
+  if ( is_npc( ch ) || !ch->pcdata || ch->pcdata->condition[COND_DRUNK] <= 0 )
     return;
 
   if ( number_percent() < 30 )
@@ -2480,7 +2480,7 @@ void reboot_check( time_t reset )
                   "presence\r\nas life here is reconstructed.", ECHOTAR_ALL);
 
       for ( vch = first_char; vch; vch = vch->next )
-        if ( !IS_NPC(vch) )
+        if ( !is_npc(vch) )
           save_char_obj(vch);
 
       for ( ship = first_ship; ship; ship = ship->next )
@@ -2531,7 +2531,7 @@ void auction_update (void)
         {
           sprintf (buf, "%s sold to %s for %d.",
                    auction->item->short_descr,
-                   IS_NPC(auction->buyer) ? auction->buyer->short_descr : auction->buyer->name,
+                   is_npc(auction->buyer) ? auction->buyer->short_descr : auction->buyer->name,
                    auction->bet);
           talk_auction(buf);
 

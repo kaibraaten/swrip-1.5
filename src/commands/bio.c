@@ -1,8 +1,9 @@
+#include "character.h"
 #include "mud.h"
 
 void do_bio( CHAR_DATA *ch, char *argument )
 {
-  if ( IS_NPC( ch ) )
+  if ( is_npc( ch ) )
     {
       send_to_char( "Mobs can't set bio's!\r\n", ch );
       return;

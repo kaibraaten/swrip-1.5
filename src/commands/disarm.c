@@ -7,13 +7,13 @@ void do_disarm( CHAR_DATA *ch, char *argument )
   OBJ_DATA *obj;
   int percent;
 
-  if ( IS_NPC(ch) && is_affected_by( ch, AFF_CHARM ) )
+  if ( is_npc(ch) && is_affected_by( ch, AFF_CHARM ) )
     {
       send_to_char( "You can't concentrate enough for that.\r\n", ch );
       return;
     }
 
-  if ( !IS_NPC(ch)
+  if ( !is_npc(ch)
        &&   ch->pcdata->learned[gsn_disarm] <= 0  )
     {
       send_to_char( "You don't know how to disarm opponents.\r\n", ch );
@@ -46,7 +46,7 @@ void do_disarm( CHAR_DATA *ch, char *argument )
   if ( !can_see_obj( ch, obj ) )
     percent += 10;
 
-  if ( IS_NPC(ch) || percent < ch->pcdata->learned[gsn_disarm] * 2 / 3 )
+  if ( is_npc(ch) || percent < ch->pcdata->learned[gsn_disarm] * 2 / 3 )
     disarm( ch, victim );
   else
     {

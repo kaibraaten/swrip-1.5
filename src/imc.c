@@ -27,6 +27,7 @@
 #endif
 #include "sha256.h"
 #include "mud.h"
+#include "character.h"
 #include <time.h>
 
 #define IMC_BUFF_SIZE 16384
@@ -1878,7 +1879,7 @@ static void imc_display_channel( IMC_CHANNEL * c, const char *from, char *txt, i
       /*
        * Freaking stupid PC_DATA crap! 
        */
-      if( IS_NPC( ch ) )
+      if( is_npc( ch ) )
          continue;
 
       if( IMCPERM( ch ) < c->level || !imc_hasname( IMC_LISTEN( ch ), c->local_name ) )
@@ -3516,7 +3517,7 @@ bool imc_loadchar( CHAR_DATA * ch, FILE * fp, const char *word )
 {
    bool fMatch = FALSE;
 
-   if( IS_NPC( ch ) )
+   if( is_npc( ch ) )
       return FALSE;
 
    if( IMCPERM( ch ) == IMCPERM_NOTSET )
@@ -3610,7 +3611,7 @@ void imc_savechar( const CHAR_DATA * ch, FILE * fp )
 {
    IMC_IGNORE *temp;
 
-   if( IS_NPC( ch ) )
+   if( is_npc( ch ) )
       return;
 
    fprintf( fp, "IMCPerm      %d\n", IMCPERM( ch ) );
@@ -3642,7 +3643,7 @@ void imc_freechardata( CHAR_DATA * ch )
    IMC_IGNORE *ign, *ign_next;
    int x;
 
-   if( IS_NPC( ch ) )
+   if( is_npc( ch ) )
       return;
 
    if( CH_IMCDATA( ch ) == NULL )
@@ -3672,7 +3673,7 @@ void imc_freechardata( CHAR_DATA * ch )
 
 void imc_initchar( CHAR_DATA * ch )
 {
-   if( IS_NPC( ch ) )
+   if( is_npc( ch ) )
       return;
 
    IMCCREATE( CH_IMCDATA( ch ), IMC_CHARDATA, 1 );
@@ -7781,7 +7782,7 @@ bool imc_command_hook( CHAR_DATA * ch, const char *command, const char *argument
    IMC_CHANNEL *c;
    const char *p;
 
-   if( IS_NPC( ch ) )
+   if( is_npc( ch ) )
       return FALSE;
 
    if( !this_imcmud )

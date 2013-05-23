@@ -16,7 +16,7 @@ bool spec_police_jail( CHAR_DATA *ch )
   for ( victim = ch->in_room->first_person; victim; victim = v_next )
     {
       v_next = victim->next_in_room;
-      if ( IS_NPC(victim) )
+      if ( is_npc(victim) )
         continue;
       if ( !can_see( ch, victim ) )
         continue;

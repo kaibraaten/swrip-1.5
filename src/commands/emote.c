@@ -1,6 +1,7 @@
 #include <string.h>
 #include <ctype.h>
 #include "mud.h"
+#include "character.h"
 
 void do_emote( CHAR_DATA *ch, char *argument )
 {
@@ -8,7 +9,7 @@ void do_emote( CHAR_DATA *ch, char *argument )
   char *plast = NULL;
   int actflags = ch->act;
 
-  if ( !IS_NPC(ch) && IS_SET(ch->act, PLR_NO_EMOTE) )
+  if ( !is_npc(ch) && IS_SET(ch->act, PLR_NO_EMOTE) )
     {
       send_to_char( "You can't show your emotions.\r\n", ch );
       return;
@@ -20,7 +21,7 @@ void do_emote( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( IS_NPC( ch ) )
+  if ( is_npc( ch ) )
     {
       REMOVE_BIT( ch->act, ACT_SECRETIVE );
     }
@@ -47,7 +48,7 @@ void do_emote( CHAR_DATA *ch, char *argument )
 
   if ( IS_SET( ch->in_room->room_flags, ROOM_LOGSPEECH ) )
     {
-      sprintf( buf, "%s %s (emote)", IS_NPC( ch ) ? ch->short_descr : ch->name,
+      sprintf( buf, "%s %s (emote)", is_npc( ch ) ? ch->short_descr : ch->name,
                argument );
       append_to_file( LOG_FILE, buf );
     }

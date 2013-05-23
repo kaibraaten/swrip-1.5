@@ -4,7 +4,7 @@
 
 bool is_wizvis( const CHAR_DATA *ch, const CHAR_DATA *victim )
 {
-  if ( !IS_NPC(victim)
+  if ( !is_npc(victim)
        && IS_SET(victim->act, PLR_WIZINVIS)
        && get_trust( ch ) < victim->pcdata->wizinvis )
     return FALSE;
@@ -78,7 +78,7 @@ short get_trust( const CHAR_DATA *ch )
   if ( ch->trust != 0 )
     return ch->trust;
 
-  if ( IS_NPC(ch) && ch->top_level >= LEVEL_AVATAR )
+  if ( is_npc(ch) && ch->top_level >= LEVEL_AVATAR )
     return LEVEL_AVATAR;
 
   if ( ch->top_level >= LEVEL_NEOPHYTE && IS_RETIRED( ch ) )
@@ -92,7 +92,7 @@ short get_trust( const CHAR_DATA *ch )
  */
 short get_age( const CHAR_DATA *ch )
 {
-  if( IS_NPC(ch) )
+  if( is_npc(ch) )
     return 17;
 
   return 17 + ( ch->pcdata->played + (current_time - ch->pcdata->logon) ) / 1515800;
@@ -165,7 +165,7 @@ short get_curr_frc( const CHAR_DATA *ch )
 {
   short max = 0;
 
-  if (!IS_NPC(ch))
+  if (!is_npc(ch))
     {
       max = 20 + race_table[ch->race].frc_plus;
       max = UMIN(max,25);
@@ -187,10 +187,10 @@ void add_kill( CHAR_DATA *ch, const CHAR_DATA *mob )
   int x;
   short vnum, track;
 
-  if ( IS_NPC(ch) )
+  if ( is_npc(ch) )
     return;
 
-  if ( !IS_NPC(mob) )
+  if ( !is_npc(mob) )
     return;
 
   vnum = mob->pIndexData->vnum;
@@ -222,10 +222,10 @@ int times_killed( const CHAR_DATA *ch, const CHAR_DATA *mob )
   int x;
   short vnum, track;
 
-  if ( IS_NPC(ch) )
+  if ( is_npc(ch) )
     return 0;
 
-  if ( !IS_NPC(mob) )
+  if ( !is_npc(mob) )
     return 0;
 
   vnum = mob->pIndexData->vnum;
@@ -501,7 +501,7 @@ OBJ_DATA *get_obj_wear( const CHAR_DATA *ch, const char *argument )
 bool ms_find_obj( const CHAR_DATA *ch )
 {
   int ms = ch->mental_state;
-  int drunk = IS_NPC(ch) ? 0 : ch->pcdata->condition[COND_DRUNK];
+  int drunk = is_npc(ch) ? 0 : ch->pcdata->condition[COND_DRUNK];
   const char *t = NULL;
 
   /*
@@ -663,7 +663,7 @@ bool can_see( const CHAR_DATA *ch, const CHAR_DATA *victim )
   if ( ch == victim )
     return TRUE;
 
-  if ( !IS_NPC(victim)
+  if ( !is_npc(victim)
        && IS_SET(victim->act, PLR_WIZINVIS)
        && get_trust( ch ) < victim->pcdata->wizinvis )
     return FALSE;
@@ -675,17 +675,17 @@ bool can_see( const CHAR_DATA *ch, const CHAR_DATA *victim )
     return TRUE;
 
   /* SB */
-  if ( IS_NPC(victim)
+  if ( is_npc(victim)
        && IS_SET(victim->act, ACT_MOBINVIS)
        && get_trust( ch ) < victim->mobinvis )
     return FALSE;
 
-  if ( !IS_IMMORTAL(ch) && !IS_NPC(victim) && !victim->desc
+  if ( !IS_IMMORTAL(ch) && !is_npc(victim) && !victim->desc
        && get_timer(victim, TIMER_RECENTFIGHT) > 0
        && (!victim->switched || !is_affected_by(victim->switched, AFF_POSSESS)) )
     return FALSE;
 
-  if ( !IS_NPC(ch) && IS_SET(ch->act, PLR_HOLYLIGHT) )
+  if ( !is_npc(ch) && IS_SET(ch->act, PLR_HOLYLIGHT) )
     return TRUE;
 
   /* The miracle cure for blindness? -- Altrag */
@@ -721,7 +721,7 @@ bool can_see( const CHAR_DATA *ch, const CHAR_DATA *victim )
  */
 bool can_see_obj( const CHAR_DATA *ch, const OBJ_DATA *obj )
 {
-  if ( !IS_NPC(ch) && IS_SET(ch->act, PLR_HOLYLIGHT) )
+  if ( !is_npc(ch) && IS_SET(ch->act, PLR_HOLYLIGHT) )
     return TRUE;
 
   if ( IS_OBJ_STAT( obj, ITEM_BURRIED ) )
@@ -756,10 +756,10 @@ bool can_drop_obj( const CHAR_DATA *ch, const OBJ_DATA *obj )
   if ( !IS_OBJ_STAT(obj, ITEM_NODROP) )
     return TRUE;
 
-  if ( !IS_NPC(ch) && get_trust(ch) >= LEVEL_IMMORTAL )
+  if ( !is_npc(ch) && get_trust(ch) >= LEVEL_IMMORTAL )
     return TRUE;
 
-  if ( IS_NPC(ch) && ch->pIndexData->vnum == 3 )
+  if ( is_npc(ch) && ch->pIndexData->vnum == 3 )
     return TRUE;
 
   return FALSE;
@@ -870,10 +870,10 @@ int can_carry_n( const CHAR_DATA *ch )
 {
   int penalty = 0;
 
-  if ( !IS_NPC(ch) && get_trust(ch) >= LEVEL_IMMORTAL )
+  if ( !is_npc(ch) && get_trust(ch) >= LEVEL_IMMORTAL )
     return get_trust(ch)*200;
 
-  if ( IS_NPC(ch) && IS_SET(ch->act, ACT_PET) )
+  if ( is_npc(ch) && IS_SET(ch->act, ACT_PET) )
     return 0;
 
   if ( get_eq_char(ch, WEAR_WIELD) )
@@ -899,11 +899,16 @@ int can_carry_n( const CHAR_DATA *ch )
  */
 int can_carry_w( const CHAR_DATA *ch )
 {
-  if ( !IS_NPC(ch) && get_trust(ch) >= LEVEL_IMMORTAL )
+  if ( !is_npc(ch) && get_trust(ch) >= LEVEL_IMMORTAL )
     return 1000000;
 
-  if ( IS_NPC(ch) && IS_SET(ch->act, ACT_PET) )
+  if ( is_npc(ch) && IS_SET(ch->act, ACT_PET) )
     return 0;
 
   return str_app[get_curr_str(ch)].carry;
+}
+
+bool is_npc( const CHAR_DATA *ch )
+{
+  return IS_SET( ch->act, ACT_is_npc ) || !ch->pcdata;
 }

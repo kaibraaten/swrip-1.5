@@ -41,7 +41,7 @@ void do_switch( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( !IS_NPC(victim) && get_trust(ch) < LEVEL_GREATER )
+  if ( !is_npc(victim) && get_trust(ch) < LEVEL_GREATER )
     {
       send_to_char( "You cannot switch into a player!\r\n", ch );
       return;

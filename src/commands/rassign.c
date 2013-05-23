@@ -27,7 +27,7 @@ void do_rassign( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( IS_NPC( victim ) || get_trust( victim ) < LEVEL_AVATAR )
+  if ( is_npc( victim ) || get_trust( victim ) < LEVEL_AVATAR )
     {
       send_to_char( "They wouldn't know what to do with a room range.\r\n", ch );
       return;

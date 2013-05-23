@@ -29,7 +29,7 @@ void do_cast( CHAR_DATA *ch, char *argument )
     {
     default:
       /* no ordering charmed mobs to cast spells */
-      if ( IS_NPC(ch) && is_affected_by( ch, AFF_CHARM ) )
+      if ( is_npc(ch) && is_affected_by( ch, AFF_CHARM ) )
         {
           send_to_char( "You can't seem to do that right now...\r\n", ch );
 	  return;
@@ -54,7 +54,7 @@ void do_cast( CHAR_DATA *ch, char *argument )
       if ( get_trust(ch) < LEVEL_GOD )
         {
           if ( ( sn = find_spell( ch, arg1, TRUE ) ) < 0
-               || ( !IS_NPC(ch) &&  ch->pcdata->learned[sn] <= 0  ) )
+               || ( !is_npc(ch) &&  ch->pcdata->learned[sn] <= 0  ) )
             {
               send_to_char( "You can't do that.\r\n", ch );
               return;
@@ -132,7 +132,7 @@ void do_cast( CHAR_DATA *ch, char *argument )
           return;
         }
 
-      mana = IS_NPC(ch) ? 0 : skill->min_mana;
+      mana = is_npc(ch) ? 0 : skill->min_mana;
 
       /*
        * Locate targets.
@@ -149,7 +149,7 @@ void do_cast( CHAR_DATA *ch, char *argument )
         }
 
 
-      if ( !IS_NPC(ch) && ch->mana < mana )
+      if ( !is_npc(ch) && ch->mana < mana )
         {
           send_to_char( "The force is not strong enough within you.\r\n", ch );
           return;
@@ -176,7 +176,7 @@ void do_cast( CHAR_DATA *ch, char *argument )
               bug( "do_cast: SUB_TIMER_DO_ABORT: bad sn %d", sn );
               return;
             }
-          mana = IS_NPC(ch) ? 0 : skill->min_mana;
+          mana = is_npc(ch) ? 0 : skill->min_mana;
 
           if ( get_trust(ch) < LEVEL_IMMORTAL)    /* so imms dont lose mana */
             ch->mana -= mana / 3;
@@ -199,7 +199,7 @@ void do_cast( CHAR_DATA *ch, char *argument )
           bug( "do_cast: ch->dest_buf NULL or bad sn (%d)", sn );
           return;
         }
-      mana = IS_NPC(ch) ? 0 : skill->min_mana;
+      mana = is_npc(ch) ? 0 : skill->min_mana;
       strcpy( staticbuf, (const char*)ch->dest_buf );
       spell_target_name = one_argument(staticbuf, arg2);
       DISPOSE( ch->dest_buf );
@@ -272,7 +272,7 @@ void do_cast( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( !IS_NPC(ch) && abs(ch->alignment - skill->alignment) > 1010 )
+  if ( !is_npc(ch) && abs(ch->alignment - skill->alignment) > 1010 )
     {
       if ( ch->alignment > skill->alignment  )
         {
@@ -289,7 +289,7 @@ void do_cast( CHAR_DATA *ch, char *argument )
           return;
         }
     }
-  if ( !IS_NPC(ch)
+  if ( !is_npc(ch)
        &&   (number_percent( ) + skill->difficulty * 5) > ch->pcdata->learned[sn] )
     {
       /* Some more interesting loss of concentration messages  -Thoric */

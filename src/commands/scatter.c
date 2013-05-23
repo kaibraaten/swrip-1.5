@@ -28,7 +28,7 @@ void do_scatter( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( !IS_NPC(victim) && get_trust( victim ) >= get_trust( ch ) )
+  if ( !is_npc(victim) && get_trust( victim ) >= get_trust( ch ) )
     {
       send_to_char( "You haven't the power to succeed against them.\r\n", ch );
       return;

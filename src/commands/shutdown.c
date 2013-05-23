@@ -1,6 +1,7 @@
 #include <string.h>
 #include "mud.h"
 #include "ships.h"
+#include "character.h"
 
 void do_shutdown( CHAR_DATA *ch, char *argument )
 {
@@ -26,7 +27,7 @@ void do_shutdown( CHAR_DATA *ch, char *argument )
   if ( str_cmp(argument, "nosave") )
     {
       for ( vch = first_char; vch; vch = vch->next )
-        if ( !IS_NPC( vch ) )
+        if ( !is_npc( vch ) )
           save_char_obj( vch );
       for ( ship = first_ship; ship; ship = ship->next )
         save_ship( ship );

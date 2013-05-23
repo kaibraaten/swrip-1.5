@@ -54,7 +54,7 @@ void do_steal( CHAR_DATA *ch, char *argument )
 
   if ( ( IS_SET( victim->immune, RIS_STEAL ) ) ||
        ( victim->position != POS_STUNNED && (victim->position == POS_FIGHTING
-                                             ||   percent > ( IS_NPC(ch) ? 90 : ch->pcdata->learned[gsn_steal] ) ) ) )
+                                             ||   percent > ( is_npc(ch) ? 90 : ch->pcdata->learned[gsn_steal] ) ) ) )
     {
       /*
        * Failure.
@@ -63,31 +63,31 @@ void do_steal( CHAR_DATA *ch, char *argument )
       act( AT_ACTION, "$n tried to steal from you!\r\n", ch, NULL, victim, TO_VICT    );
       act( AT_ACTION, "$n tried to steal from $N.\r\n",  ch, NULL, victim, TO_NOTVICT );
 
-      if (IS_NPC(victim))
+      if (is_npc(victim))
 	{
           sprintf( buf, "%s is a bloody thief!", ch->name );
           do_yell( victim, buf );
         }
 
       learn_from_failure( ch, gsn_steal );
-      if ( !IS_NPC(ch) )
+      if ( !is_npc(ch) )
         {
           if ( legal_loot( ch, victim ) )
             {
-              if ( IS_NPC(victim) )
+              if ( is_npc(victim) )
                 global_retcode = multi_hit( victim, ch, TYPE_UNDEFINED );
             }
           else
             {
               /* log_string( buf ); */
-              if ( IS_NPC( ch ) )
+              if ( is_npc( ch ) )
                 {
                   if ( (mst = ch->master) == NULL )
                     return;
                 }
               else
                 mst = ch;
-              if ( IS_NPC( mst ) )
+              if ( is_npc( mst ) )
                 return;
 
             }
@@ -96,7 +96,7 @@ void do_steal( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( IS_NPC(victim) )
+  if ( is_npc(victim) )
     add_kill( ch, victim );  /* makes it harder to steal from same char */
 
   if ( !str_cmp( arg1, "credits"  )
@@ -116,10 +116,10 @@ void do_steal( CHAR_DATA *ch, char *argument )
       ch->gold     += amount;
       victim->gold -= amount;
       ch_printf( ch, "Aha!  You got %d credits.\r\n", amount );
-      if ( !IS_NPC(victim) || (ch->pcdata->learned[gsn_steal] < 50 ) )
+      if ( !is_npc(victim) || (ch->pcdata->learned[gsn_steal] < 50 ) )
         learn_from_success( ch, gsn_steal );
 
-      if ( IS_NPC( victim ) )
+      if ( is_npc( victim ) )
 	{
 	  xp = UMIN( amount*10 , ( exp_level( get_level(ch, SMUGGLING_ABILITY ) + 1 ) - exp_level( get_level(ch, SMUGGLING_ABILITY))  ) / 35  );
 	  xp = UMIN( xp , xp_compute( ch, victim ) );
@@ -176,9 +176,9 @@ void do_steal( CHAR_DATA *ch, char *argument )
     }
 
   send_to_char( "Ok.\r\n", ch );
-  if ( IS_NPC(victim)  || ch->pcdata->learned[gsn_steal] )
+  if ( is_npc(victim)  || ch->pcdata->learned[gsn_steal] )
     learn_from_success( ch, gsn_steal );
-  if ( IS_NPC( victim ) )
+  if ( is_npc( victim ) )
     {
       xp = UMIN( obj->cost*10 , ( exp_level( get_level(ch, SMUGGLING_ABILITY) + 1) - exp_level( get_level( ch, SMUGGLING_ABILITY) ) ) / 10  );
       xp = UMIN( xp , xp_compute( ch, victim ) );

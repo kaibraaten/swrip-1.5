@@ -87,7 +87,7 @@ void do_makecontainer( CHAR_DATA *ch, char *argument )
           return;
         }
 
-      the_chance = IS_NPC(ch) ? ch->top_level
+      the_chance = is_npc(ch) ? ch->top_level
         : (int) (ch->pcdata->learned[gsn_makecontainer]);
       if ( number_percent( ) < the_chance )
         {
@@ -124,7 +124,7 @@ void do_makecontainer( CHAR_DATA *ch, char *argument )
 
   ch->substate = SUB_NONE;
 
-  level = IS_NPC(ch) ? ch->top_level : (int) (ch->pcdata->learned[gsn_makecontainer]);
+  level = is_npc(ch) ? ch->top_level : (int) (ch->pcdata->learned[gsn_makecontainer]);
 
   checksew = FALSE;
   checkfab = FALSE;
@@ -142,7 +142,7 @@ void do_makecontainer( CHAR_DATA *ch, char *argument )
         }
     }
 
-  the_chance = IS_NPC(ch) ? ch->top_level
+  the_chance = is_npc(ch) ? ch->top_level
     : (int) (ch->pcdata->learned[gsn_makecontainer]) ;
 
   if ( number_percent( ) > the_chance*2  || ( !checkfab ) || ( !checksew ) )

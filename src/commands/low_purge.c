@@ -1,3 +1,4 @@
+#include "character.h"
 #include "mud.h"
 
 void do_low_purge( CHAR_DATA *ch, char *argument )
@@ -31,7 +32,7 @@ void do_low_purge( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( !IS_NPC(victim) )
+  if ( !is_npc(victim) )
     {
       send_to_char( "Not on PC's.\r\n", ch );
       return;

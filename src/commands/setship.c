@@ -1,3 +1,4 @@
+#include "character.h"
 #include "ships.h"
 #include "mud.h"
 
@@ -9,7 +10,7 @@ void do_setship( CHAR_DATA *ch, char *argument )
   int tempnum = 0;
   ROOM_INDEX_DATA *roomindex = NULL;
 
-  if ( IS_NPC( ch ) )
+  if ( is_npc( ch ) )
     {
       send_to_char( "Huh?\r\n", ch );
       return;

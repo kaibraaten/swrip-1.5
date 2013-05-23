@@ -1,3 +1,4 @@
+#include "character.h"
 #include "mud.h"
 #include "ships.h"
 
@@ -5,7 +6,7 @@ void do_showship( CHAR_DATA *ch, char *argument )
 {
   SHIP_DATA *ship = NULL;
 
-  if ( IS_NPC( ch ) )
+  if ( is_npc( ch ) )
     {
       send_to_char( "Huh?\r\n", ch );
       return;

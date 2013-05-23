@@ -28,7 +28,7 @@ ch_ret spell_possess( int sn, int level, CHAR_DATA *ch, void *vo )
       return rSPELL_FAILED;
     }
 
-  if (!IS_NPC(victim))
+  if (!is_npc(victim))
     {
       send_to_char("You can't possess another player!\r\n", ch);
       return rSPELL_FAILED;

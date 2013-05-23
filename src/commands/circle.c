@@ -8,7 +8,7 @@ void do_circle( CHAR_DATA *ch, char *argument )
   OBJ_DATA *obj;
   int percent;
 
-  if ( IS_NPC(ch) && is_affected_by( ch, AFF_CHARM ) )
+  if ( is_npc(ch) && is_affected_by( ch, AFF_CHARM ) )
     {
       send_to_char( "You can't concentrate enough for that.\r\n", ch );
       return;
@@ -73,7 +73,7 @@ void do_circle( CHAR_DATA *ch, char *argument )
     + (get_curr_lck(victim) - 13);
 
   WAIT_STATE( ch, skill_table[gsn_circle]->beats );
-  if ( percent < (IS_NPC(ch) ? (get_level( ch, HUNTING_ABILITY ) * 1.5) : ch->pcdata->learned[gsn_circle]) )
+  if ( percent < (is_npc(ch) ? (get_level( ch, HUNTING_ABILITY ) * 1.5) : ch->pcdata->learned[gsn_circle]) )
     {
       learn_from_success( ch, gsn_circle );
       global_retcode = multi_hit( ch, victim, gsn_circle );

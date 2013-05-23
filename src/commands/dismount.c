@@ -1,3 +1,4 @@
+#include "character.h"
 #include "mud.h"
 
 void do_dismount( CHAR_DATA *ch, char *argument )
@@ -11,7 +12,7 @@ void do_dismount( CHAR_DATA *ch, char *argument )
     }
 
   WAIT_STATE( ch, skill_table[gsn_mount]->beats );
-  if ( IS_NPC(ch) || number_percent( ) < ch->pcdata->learned[gsn_mount] )
+  if ( is_npc(ch) || number_percent( ) < ch->pcdata->learned[gsn_mount] )
     {
       act( AT_SKILL, "You dismount $N.", ch, NULL, victim, TO_CHAR );
       act( AT_SKILL, "$n skillfully dismounts $N.", ch, NULL, victim, TO_NOTVICT );

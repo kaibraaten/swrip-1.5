@@ -49,7 +49,7 @@ void do_look( CHAR_DATA *ch, char *argument )
   if ( !check_blind( ch ) )
     return;
 
-  if ( !IS_NPC(ch)
+  if ( !is_npc(ch)
        &&   !IS_SET(ch->act, PLR_HOLYLIGHT)
        &&   !is_affected_by(ch, AFF_TRUESIGHT)
        &&   room_is_dark( ch->in_room ) )
@@ -98,11 +98,11 @@ void do_look( CHAR_DATA *ch, char *argument )
       set_char_color( AT_RMDESC, ch );
 
       if ( arg1[0] == '\0'
-           || ( !IS_NPC(ch) && !IS_SET(ch->act, PLR_BRIEF) ) )
+           || ( !is_npc(ch) && !IS_SET(ch->act, PLR_BRIEF) ) )
         send_to_char( ch->in_room->description, ch );
 
 
-      if ( !IS_NPC(ch) && IS_SET(ch->act, PLR_AUTOEXIT) )
+      if ( !is_npc(ch) && IS_SET(ch->act, PLR_AUTOEXIT) )
         do_exits( ch, "" );
 
       show_ships_to_char( ch->in_room->first_ship, ch );
@@ -362,7 +362,7 @@ void do_look( CHAR_DATA *ch, char *argument )
               set_char_color( AT_MAGIC, ch );
               send_to_char( "You attempt to scry...\r\n", ch );
 
-              if (!IS_NPC(ch) )
+              if (!is_npc(ch) )
                 {
                   int percent = 99;
 
@@ -523,23 +523,23 @@ static void show_char_to_char_0( CHAR_DATA *victim, CHAR_DATA *ch )
 
   buf[0] = '\0';
 
-  if ( IS_NPC(victim) )
+  if ( is_npc(victim) )
     strcat( buf, " "  );
 
-  if ( !IS_NPC(victim) && !victim->desc )
+  if ( !is_npc(victim) && !victim->desc )
     {
       if ( !victim->switched )          strcat( buf, "(Link Dead) "  );
       else
         if ( !is_affected_by(victim->switched, AFF_POSSESS) )
           strcat( buf, "(Switched) " );
     }
-  if ( !IS_NPC(victim)
+  if ( !is_npc(victim)
        && IS_SET(victim->act, PLR_AFK) )                strcat( buf, "[AFK] ");
 
-  if ( (!IS_NPC(victim) && IS_SET(victim->act, PLR_WIZINVIS))
-       || (IS_NPC(victim) && IS_SET(victim->act, ACT_MOBINVIS)) )
+  if ( (!is_npc(victim) && IS_SET(victim->act, PLR_WIZINVIS))
+       || (is_npc(victim) && IS_SET(victim->act, ACT_MOBINVIS)) )
     {
-      if (!IS_NPC(victim))
+      if (!is_npc(victim))
         sprintf( buf1,"(Invis %d) ", victim->pcdata->wizinvis );
       else sprintf( buf1,"(Mobinvis %d) ", victim->mobinvis);
       strcat( buf, buf1 );
@@ -553,9 +553,9 @@ static void show_char_to_char_0( CHAR_DATA *victim, CHAR_DATA *ch )
   if ( ( victim->mana > 10 )
        &&   ( is_affected_by( ch , AFF_DETECT_MAGIC ) || IS_IMMORTAL( ch ) ) )
     strcat( buf, "&B(Blue Aura)&w "  );
-  if ( !IS_NPC(victim) && IS_SET(victim->act, PLR_LITTERBUG  ) )
+  if ( !is_npc(victim) && IS_SET(victim->act, PLR_LITTERBUG  ) )
     strcat( buf, "(LITTERBUG) "  );
-  if ( IS_NPC(victim) && IS_IMMORTAL(ch)
+  if ( is_npc(victim) && IS_IMMORTAL(ch)
        && IS_SET(victim->act, ACT_PROTOTYPE) ) strcat( buf, "(PROTO) " );
   if ( victim->desc && victim->desc->connected == CON_EDITING )
     strcat( buf, "(Writing) " );
@@ -569,7 +569,7 @@ static void show_char_to_char_0( CHAR_DATA *victim, CHAR_DATA *ch )
       return;
     }
 
-  if ( !IS_NPC(victim) && !IS_SET(ch->act, PLR_BRIEF) )
+  if ( !is_npc(victim) && !IS_SET(ch->act, PLR_BRIEF) )
     strcat( buf, victim->pcdata->title );
   else
     strcat( buf, PERS( victim, ch ) );
@@ -718,14 +718,14 @@ static void show_char_to_char_0( CHAR_DATA *victim, CHAR_DATA *ch )
         strcat( buf, " is here before you." );
       else
         if ( ( victim->in_room->sector_type == SECT_UNDERWATER )
-             && !is_affected_by(victim, AFF_AQUA_BREATH) && !IS_NPC(victim) )
+             && !is_affected_by(victim, AFF_AQUA_BREATH) && !is_npc(victim) )
           strcat( buf, " is drowning here." );
         else
           if ( victim->in_room->sector_type == SECT_UNDERWATER )
             strcat( buf, " is here in the water." );
           else
             if ( ( victim->in_room->sector_type == SECT_OCEANFLOOR )
-                 && !is_affected_by(victim, AFF_AQUA_BREATH) && !IS_NPC(victim) )
+                 && !is_affected_by(victim, AFF_AQUA_BREATH) && !is_npc(victim) )
               strcat( buf, " is drowning here." );
             else
               if ( victim->in_room->sector_type == SECT_OCEANFLOOR )
@@ -810,7 +810,7 @@ static void show_char_to_char_1( CHAR_DATA *victim, CHAR_DATA *ch )
         {
           if ( ( obj = get_eq_char( victim, iWear ) ) != NULL
                &&   can_see_obj( ch, obj ) &&
-               ( ( obj->description && obj->description[0] != '\0' ) || ( IS_SET(ch->act, PLR_HOLYLIGHT) || IS_NPC(ch) ) ) )
+               ( ( obj->description && obj->description[0] != '\0' ) || ( IS_SET(ch->act, PLR_HOLYLIGHT) || is_npc(ch) ) ) )
             {
               if ( !found )
                 {
@@ -831,7 +831,7 @@ static void show_char_to_char_1( CHAR_DATA *victim, CHAR_DATA *ch )
       send_to_char( "\r\n", ch );
     }
 
-  if ( IS_NPC(ch) || victim == ch )
+  if ( is_npc(ch) || victim == ch )
     return;
 
   if ( number_percent( ) < ch->pcdata->learned[gsn_peek] )
@@ -897,9 +897,9 @@ static void show_visible_affects_to_char( CHAR_DATA *victim, CHAR_DATA *ch )
     {
       set_char_color( AT_MAGIC, ch );
       ch_printf( ch, "%s looks ahead free of expression.\r\n",
-                 IS_NPC( victim ) ? capitalize(victim->short_descr) : (victim->name) );
+                 is_npc( victim ) ? capitalize(victim->short_descr) : (victim->name) );
     }
-  if ( !IS_NPC(victim) && !victim->desc
+  if ( !is_npc(victim) && !victim->desc
        &&    victim->switched && is_affected_by(victim->switched, AFF_POSSESS) )
     {
       set_char_color( AT_MAGIC, ch );

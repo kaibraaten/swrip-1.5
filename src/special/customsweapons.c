@@ -16,7 +16,7 @@ bool spec_customs_weapons( CHAR_DATA *ch )
     {
       v_next = victim->next_in_room;
 
-      if ( IS_NPC(victim) || victim->position == POS_FIGHTING )
+      if ( is_npc(victim) || victim->position == POS_FIGHTING )
         continue;
 
       if (  victim->pcdata && victim->pcdata->clan && !str_cmp(victim->pcdata->clan->name , ch->mob_clan) )

@@ -768,7 +768,7 @@ void update_member( const CHAR_DATA *ch )
   MEMBER_LIST *members_list;
   MEMBER_DATA *member;
 
-  if( IS_NPC( ch ) || IS_IMMORTAL(ch) || !ch->pcdata->clan )
+  if( is_npc( ch ) || IS_IMMORTAL(ch) || !ch->pcdata->clan )
     return;
 
   for( members_list = first_member_list; members_list; members_list = members_list->next )

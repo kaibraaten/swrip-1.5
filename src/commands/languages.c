@@ -9,7 +9,7 @@ void do_languages( CHAR_DATA *ch, char *argument )
 
   argument = one_argument( argument, arg );
   if ( arg[0] != '\0' && !str_prefix( arg, "learn" ) &&
-       !IS_IMMORTAL(ch) && !IS_NPC(ch) )
+       !IS_IMMORTAL(ch) && !is_npc(ch) )
     {
       CHAR_DATA *sch;
       char arg2[MAX_INPUT_LENGTH];
@@ -51,7 +51,7 @@ void do_languages( CHAR_DATA *ch, char *argument )
           return;
         }
       for ( sch = ch->in_room->first_person; sch; sch = sch->next )
-        if ( IS_NPC(sch) && IS_SET(sch->act, ACT_SCHOLAR) &&
+        if ( is_npc(sch) && IS_SET(sch->act, ACT_SCHOLAR) &&
              knows_language( sch, ch->speaking, ch ) &&
              knows_language( sch, lang_array[lang], sch ) &&
              (!sch->speaking || knows_language( ch, sch->speaking, sch )) )
@@ -94,7 +94,7 @@ void do_languages( CHAR_DATA *ch, char *argument )
       if ( !(VALID_LANGUAGES & lang_array[lang]) )
         continue;
       if ( ch->speaking & lang_array[lang] ||
-           (IS_NPC(ch) && !ch->speaking) )
+           (is_npc(ch) && !ch->speaking) )
         set_char_color( AT_RED, ch );
       else
         set_char_color( AT_SAY, ch );

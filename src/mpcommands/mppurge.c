@@ -15,7 +15,7 @@ void do_mppurge( CHAR_DATA *ch, char *argument )
   if ( is_affected_by( ch, AFF_CHARM ) )
     return;
 
-  if ( !IS_NPC( ch ) )
+  if ( !is_npc( ch ) )
     {
       send_to_char( "Huh?\r\n", ch );
       return;
@@ -31,7 +31,7 @@ void do_mppurge( CHAR_DATA *ch, char *argument )
       for ( victim = ch->in_room->first_person; victim; victim = vnext )
         {
 	  vnext = victim->next_in_room;
-          if ( IS_NPC( victim ) && victim != ch )
+          if ( is_npc( victim ) && victim != ch )
             extract_char( victim, TRUE );
         }
       while ( ch->in_room->first_content )
@@ -49,7 +49,7 @@ void do_mppurge( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( !IS_NPC( victim ) )
+  if ( !is_npc( victim ) )
     {
       progbug( "Mppurge - Trying to purge a PC", ch );
       return;
@@ -61,7 +61,7 @@ void do_mppurge( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( IS_NPC( victim ) && victim->pIndexData->vnum == 3 )
+  if ( is_npc( victim ) && victim->pIndexData->vnum == 3 )
     {
       progbug( "Mppurge: trying to purge supermob", ch );
       return;

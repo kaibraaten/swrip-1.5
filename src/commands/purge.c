@@ -1,4 +1,5 @@
 #include "mud.h"
+#include "character.h"
 
 void do_purge( CHAR_DATA *ch, char *argument )
 {
@@ -17,7 +18,7 @@ void do_purge( CHAR_DATA *ch, char *argument )
       for ( victim = ch->in_room->first_person; victim; victim = vnext )
         {
           vnext = victim->next_in_room;
-          if ( IS_NPC(victim) && victim != ch && !IS_SET(victim->act, ACT_POLYMORPHED))
+          if ( is_npc(victim) && victim != ch && !IS_SET(victim->act, ACT_POLYMORPHED))
             extract_char( victim, TRUE );
         }
 
@@ -60,7 +61,7 @@ void do_purge( CHAR_DATA *ch, char *argument )
     }
 
 
-  if ( !IS_NPC(victim) )
+  if ( !is_npc(victim) )
     {
       send_to_char( "Not on PC's.\r\n", ch );
       return;

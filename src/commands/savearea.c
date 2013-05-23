@@ -6,7 +6,7 @@ void do_savearea( CHAR_DATA *ch, char *argument )
   AREA_DATA     *tarea;
   char   filename[256];
 
-  if ( IS_NPC(ch) || get_trust( ch ) < LEVEL_AVATAR || !ch->pcdata
+  if ( is_npc(ch) || get_trust( ch ) < LEVEL_AVATAR || !ch->pcdata
        ||  ( argument[0] == '\0' && !ch->pcdata->area) )
     {
       send_to_char( "You don't have an assigned area to save.\r\n", ch );

@@ -1,3 +1,4 @@
+#include "character.h"
 #include "ships.h"
 #include "vector3_aux.h"
 #include "mud.h"
@@ -39,12 +40,12 @@ void do_fire(CHAR_DATA *ch, char *argument )
       return;
     }
 
-  the_chance = IS_NPC(ch) ? ch->top_level
+  the_chance = is_npc(ch) ? ch->top_level
     : (int) ( ch->perm_dex*2 + ch->pcdata->learned[gsn_spacecombat]/3
               + ch->pcdata->learned[gsn_spacecombat2]/3 + ch->pcdata->learned[gsn_spacecombat3]/3 );
   origthe_chance = the_chance;
 
-  if ( ship->sclass > SHIP_PLATFORM && !IS_NPC(ch))
+  if ( ship->sclass > SHIP_PLATFORM && !is_npc(ch))
     ((ch->pcdata->learned[gsn_speeders] == 100) ? (the_chance -= 100 - ch->pcdata->learned[gsn_speedercombat]) : (the_chance = 0) );
 
   if ( ch->in_room->vnum == ship->gunseat && !str_prefix( argument , "lasers"))

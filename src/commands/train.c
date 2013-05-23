@@ -1,5 +1,6 @@
 #include <string.h>
 #include "mud.h"
+#include "character.h"
 
 void do_train( CHAR_DATA *ch, char *argument )
 {
@@ -8,7 +9,7 @@ void do_train( CHAR_DATA *ch, char *argument )
   bool tfound = FALSE;
   bool successful = FALSE;
 
-  if ( IS_NPC(ch) )
+  if ( is_npc(ch) )
     return;
 
   strcpy( arg, argument );
@@ -31,7 +32,7 @@ void do_train( CHAR_DATA *ch, char *argument )
         }
 
       for ( mob = ch->in_room->first_person; mob; mob = mob->next_in_room )
-        if ( IS_NPC(mob) && IS_SET(mob->act, ACT_TRAIN) )
+        if ( is_npc(mob) && IS_SET(mob->act, ACT_TRAIN) )
           {
             tfound = TRUE;
             break;

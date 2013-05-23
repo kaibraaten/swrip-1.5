@@ -37,7 +37,7 @@ void do_bestowarea( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( IS_NPC( victim ) )
+  if ( is_npc( victim ) )
     {
       send_to_char( "You can't give special abilities to a mob!\r\n", ch );
       return;

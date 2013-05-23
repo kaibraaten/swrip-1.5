@@ -17,7 +17,7 @@ void do_reply( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( !IS_NPC(ch) && IS_SET(ch->act, PLR_SILENCE) )
+  if ( !is_npc(ch) && IS_SET(ch->act, PLR_SILENCE) )
     {
       send_to_char( "Your message didn't get through.\r\n", ch );
       return;
@@ -29,13 +29,13 @@ void do_reply( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( !IS_NPC( victim ) && ( victim->switched )
+  if ( !is_npc( victim ) && ( victim->switched )
        && can_see( ch, victim ) && ( get_trust( ch ) > LEVEL_AVATAR ) )
     {
       send_to_char( "That player is switched.\r\n", ch );
       return;
     }
-  else if ( !IS_NPC( victim ) && ( !victim->desc ) )
+  else if ( !is_npc( victim ) && ( !victim->desc ) )
     {
       send_to_char( "That player is link-dead.\r\n", ch );
       return;
@@ -49,13 +49,13 @@ void do_reply( CHAR_DATA *ch, char *argument )
     }
 
   if ( ( !IS_IMMORTAL(ch) && !IS_AWAKE(victim) )
-       || ( !IS_NPC(victim) && IS_SET( victim->in_room->room_flags, ROOM_SILENCE ) ) )
+       || ( !is_npc(victim) && IS_SET( victim->in_room->room_flags, ROOM_SILENCE ) ) )
     {
       act( AT_PLAIN, "$E can't hear you.", ch, 0, victim, TO_CHAR );
       return;
     }
 
-  if ( !IS_NPC (victim) && ( IS_SET (victim->act, PLR_AFK ) ) )
+  if ( !is_npc (victim) && ( IS_SET (victim->act, PLR_AFK ) ) )
     {
       send_to_char( "That player is afk so he may not respond.\r\n", ch );
     }
@@ -70,7 +70,7 @@ void do_reply( CHAR_DATA *ch, char *argument )
   victim->position = POS_STANDING;
 
   if ( knows_language( victim, ch->speaking, ch ) ||
-       (IS_NPC(ch) && !ch->speaking) )
+       (is_npc(ch) && !ch->speaking) )
     {
       act( AT_TELL, "(&CIncoming Message&B) $n: '$t'", ch, argument, victim, TO_VICT );
     }
@@ -85,9 +85,9 @@ void do_reply( CHAR_DATA *ch, char *argument )
   if ( IS_SET( ch->in_room->room_flags, ROOM_LOGSPEECH ) )
     {
       sprintf( buf, "%s: %s (reply to) %s.",
-               IS_NPC( ch ) ? ch->short_descr : ch->name,
+               is_npc( ch ) ? ch->short_descr : ch->name,
                argument,
-               IS_NPC( victim ) ? victim->short_descr : victim->name );
+               is_npc( victim ) ? victim->short_descr : victim->name );
       append_to_file( LOG_FILE, buf );
     }
 
@@ -101,7 +101,7 @@ void do_reply( CHAR_DATA *ch, char *argument )
             continue;
 
           if ( !knows_language(vch, ch->speaking, ch) &&
-               (!IS_NPC(ch) || ch->speaking != 0) )
+               (!is_npc(ch) || ch->speaking != 0) )
             sbuf = scramble(argument, ch->speaking);
 
           sbuf = drunk_speech( sbuf, ch );

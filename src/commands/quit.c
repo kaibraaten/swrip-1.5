@@ -8,13 +8,13 @@ void do_quit( CHAR_DATA *ch, char *argument )
   char qbuf[MAX_INPUT_LENGTH];
   char buf[MAX_INPUT_LENGTH];
 
-  if ( IS_NPC(ch) && IS_SET(ch->act, ACT_POLYMORPHED))
+  if ( is_npc(ch) && IS_SET(ch->act, ACT_POLYMORPHED))
     {
       send_to_char("You can't quit while polymorphed.\r\n", ch);
       return;
     }
 
-  if ( IS_NPC(ch) )
+  if ( is_npc(ch) )
     return;
 
   if ( ch->position == POS_FIGHTING )

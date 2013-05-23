@@ -42,7 +42,7 @@ void do_flee( CHAR_DATA *ch, char *argument )
            ||   !pexit->to_room
            || ( IS_SET(pexit->exit_info, EX_CLOSED)
                 &&   !is_affected_by( ch, AFF_PASS_DOOR ) )
-           || ( IS_NPC(ch)
+           || ( is_npc(ch)
                 &&   IS_SET(pexit->to_room->room_flags, ROOM_NO_MOB) ) )
         continue;
 

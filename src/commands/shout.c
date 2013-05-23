@@ -1,3 +1,4 @@
+#include "character.h"
 #include "mud.h"
 
 void do_shout( CHAR_DATA *ch, char *argument )

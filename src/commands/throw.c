@@ -136,7 +136,7 @@ void do_throw( CHAR_DATA *ch, char *argument )
               return;
             }
 
-          if ( !IS_NPC( victim ) && IS_SET( ch->act, PLR_NICE ) )
+          if ( !is_npc( victim ) && IS_SET( ch->act, PLR_NICE ) )
             {
               send_to_char( "You feel too nice to do that!\r\n", ch );
               return;
@@ -190,7 +190,7 @@ void do_throw( CHAR_DATA *ch, char *argument )
           return;
         }
 
-      if ( !IS_NPC( victim ) && IS_SET( ch->act, PLR_NICE ) )
+      if ( !is_npc( victim ) && IS_SET( ch->act, PLR_NICE ) )
         {
           send_to_char( "You feel too nice to do that!\r\n", ch );
           return;
@@ -233,7 +233,7 @@ void do_throw( CHAR_DATA *ch, char *argument )
     {
 
       WAIT_STATE( ch, skill_table[gsn_throw]->beats );
-      if ( IS_NPC(ch) || number_percent( ) < ch->pcdata->learned[gsn_throw] )
+      if ( is_npc(ch) || number_percent( ) < ch->pcdata->learned[gsn_throw] )
         {
           learn_from_success( ch, gsn_throw );
           global_retcode = damage( ch, victim, number_range( obj->weight*2 , (obj->weight*2 + ch->perm_str) ), TYPE_HIT );
@@ -244,7 +244,7 @@ void do_throw( CHAR_DATA *ch, char *argument )
           global_retcode = damage( ch, victim, 0, TYPE_HIT );
         }
 
-      if ( IS_NPC( victim ) && !char_died ( victim) )
+      if ( is_npc( victim ) && !char_died ( victim) )
         {
           if ( IS_SET( victim->act , ACT_SENTINEL ) )
             {

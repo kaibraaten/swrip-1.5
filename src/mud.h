@@ -1561,7 +1561,6 @@ extern  short                   gsn_yevethan;
 /*
  * Character macros.
  */
-#define IS_NPC(ch)              ((IS_SET((ch)->act, ACT_IS_NPC)) || !((ch)->pcdata))
 #define IS_IMMORTAL(ch)         (get_trust((ch)) >= LEVEL_IMMORTAL)
 #define IS_GOD(ch)              (get_trust((ch)) >= LEVEL_GOD)
 #define IS_HERO(ch)             (get_trust((ch)) >= LEVEL_HERO)
@@ -1592,7 +1591,7 @@ extern  short                   gsn_yevethan;
                                  ( (ch)->pcdata->condition[COND_DRUNK]  \
                                    * 2 / (drunk) ) )
 
-#define IS_CLANNED(ch)          (!IS_NPC((ch))                          \
+#define IS_CLANNED(ch)          (!is_npc((ch))                          \
                                  && (ch)->pcdata->clan                      )
 
 #define WAIT_STATE(ch, npulse)  ((ch)->wait = UMAX((ch)->wait, (npulse)))
@@ -1647,10 +1646,10 @@ extern  short                   gsn_yevethan;
                                   SPELL_DAMAGE(skill_table[(dt)]) == SD_POISON )
 
 
-#define NOT_AUTHED(ch)          (!IS_NPC(ch) && ch->pcdata->auth_state <= 3 \
+#define NOT_AUTHED(ch)          (!is_npc(ch) && ch->pcdata->auth_state <= 3 \
                                  && IS_SET(ch->pcdata->flags, PCFLAG_UNAUTHED) )
 
-#define IS_WAITING_FOR_AUTH(ch) (!IS_NPC(ch) && ch->desc                \
+#define IS_WAITING_FOR_AUTH(ch) (!is_npc(ch) && ch->desc                \
                                  && ch->pcdata->auth_state == 1         \
                                  && IS_SET(ch->pcdata->flags, PCFLAG_UNAUTHED) )
 
@@ -1671,14 +1670,14 @@ extern  short                   gsn_yevethan;
 
 
 #define PERS(ch, looker)        ( can_see( (looker), (ch) ) ?           \
-                                  ( IS_NPC(ch) ? (ch)->short_descr      \
+                                  ( is_npc(ch) ? (ch)->short_descr      \
                                     : ((get_trust(looker) <= LEVEL_IMMORTAL) ? (DISGUISE(ch) ? ch->pcdata->title : (ch)->name ) : (ch)->name)) : ( IS_IMMORTAL(ch) ? "A Great One" : "someone" ))
 
 
 #define log_string( txt )       ( log_string_plus( (txt), LOG_NORMAL, LEVEL_LOG ) )
 
-/*#define GET_BETTED_ON(ch)    (IS_NPC(ch) ? 0 : ((ch)->pcdata->betted_on))
-  #define GET_BET_AMT(ch) (IS_NPC(ch) ? 0 : ((ch)->pcdata->bet_amt))*/
+/*#define GET_BETTED_ON(ch)    (is_npc(ch) ? 0 : ((ch)->pcdata->betted_on))
+  #define GET_BET_AMT(ch) (is_npc(ch) ? 0 : ((ch)->pcdata->bet_amt))*/
 
 
 /*

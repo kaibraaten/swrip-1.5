@@ -28,7 +28,7 @@ void do_gather_intelligence ( CHAR_DATA *ch , char *argument )
       return;
     }
 
-  if(IS_NPC(victim))
+  if(is_npc(victim))
     {
       send_to_char("This person has not made much of a name for himself!\r\n", ch);
       return;
@@ -36,7 +36,7 @@ void do_gather_intelligence ( CHAR_DATA *ch , char *argument )
 
   percent = number_percent( )*2;
 
-  if ( IS_NPC(ch) || percent < ch->pcdata->learned[gsn_gather_intelligence] )
+  if ( is_npc(ch) || percent < ch->pcdata->learned[gsn_gather_intelligence] )
     {
 
       if ( ch == victim )

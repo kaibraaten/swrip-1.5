@@ -11,7 +11,7 @@ void do_slist( CHAR_DATA *ch, char *argument )
   int ability;
   int filter_ability = get_ability(argument);
 
-  if ( IS_NPC(ch) )
+  if ( is_npc(ch) )
     {
       return;
     }

@@ -1,3 +1,4 @@
+#include "character.h"
 #include "shops.h"
 #include "mud.h"
 
@@ -10,7 +11,7 @@ void do_buyvendor (CHAR_DATA *ch, char *argument)
   char strsave[MAX_INPUT_LENGTH];
   struct stat fst;
 
-  if (IS_NPC(ch))
+  if (is_npc(ch))
     return;
 
   if ( !str_cmp( argument, "yes" ) )

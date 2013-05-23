@@ -11,7 +11,7 @@ void do_mlist( CHAR_DATA *ch, char *argument )
   int lrange;
   int trange;
 
-  if ( IS_NPC(ch) || get_trust( ch ) < LEVEL_CREATOR || !ch->pcdata
+  if ( is_npc(ch) || get_trust( ch ) < LEVEL_CREATOR || !ch->pcdata
        ||  ( !ch->pcdata->area && get_trust( ch ) < LEVEL_GREATER ) )
     {
       send_to_char( "You don't have an assigned area.\r\n", ch );

@@ -117,7 +117,7 @@ void init_supermob()
   CREATE( supermob, CHAR_DATA, 1 );
   clear_char( supermob );
 
-  SET_BIT(supermob->act,ACT_IS_NPC);
+  SET_BIT(supermob->act,ACT_is_npc);
   supermob->name                = STRALLOC("supermob");
   supermob->short_descr         = STRALLOC(".");
   supermob->long_descr  = STRALLOC(".");
@@ -355,7 +355,7 @@ int mprog_do_ifcheck( const char *ifcheck, CHAR_DATA *mob, CHAR_DATA *actor,
       lhsvl = 0;
       for ( oMob = mob->in_room->first_person; oMob;
             oMob = oMob->next_in_room )
-        if ( IS_NPC(oMob) && oMob->pIndexData->vnum == vnum )
+        if ( is_npc(oMob) && oMob->pIndexData->vnum == vnum )
           lhsvl++;
       rhsvl = atoi(rval);
       if ( rhsvl < 1 ) rhsvl = 1;
@@ -624,11 +624,11 @@ int mprog_do_ifcheck( const char *ifcheck, CHAR_DATA *mob, CHAR_DATA *actor,
     {
       if ( !str_cmp(chck, "ismobinvis") )
         {
-          return (IS_NPC(chkchar) && IS_SET(chkchar->act, ACT_MOBINVIS));
+          return (is_npc(chkchar) && IS_SET(chkchar->act, ACT_MOBINVIS));
         }
       if ( !str_cmp(chck, "mobinvislevel") )
         {
-          return (IS_NPC(chkchar) ?
+          return (is_npc(chkchar) ?
                   mprog_veval(chkchar->mobinvis, opr, atoi(rval), mob) : FALSE);
         }
       if ( !str_cmp(chck, "questmob") )
@@ -645,11 +645,11 @@ int mprog_do_ifcheck( const char *ifcheck, CHAR_DATA *mob, CHAR_DATA *actor,
         }
       if ( !str_cmp(chck, "ispc") )
         {
-          return IS_NPC(chkchar) ? FALSE : TRUE;
+          return is_npc(chkchar) ? FALSE : TRUE;
         }
       if ( !str_cmp(chck, "isnpc") )
         {
-          return IS_NPC(chkchar) ? TRUE : FALSE;
+          return is_npc(chkchar) ? TRUE : FALSE;
         }
       if ( !str_cmp(chck, "ismounted") )
         {
@@ -723,12 +723,12 @@ int mprog_do_ifcheck( const char *ifcheck, CHAR_DATA *mob, CHAR_DATA *actor,
         }
       if ( !str_cmp(chck, "doingquest") )
         {
-          return IS_NPC(actor) ? FALSE :
+          return is_npc(actor) ? FALSE :
             mprog_veval(chkchar->pcdata->quest_number, opr, atoi(rval), mob);
         }
       if ( !str_cmp(chck, "ishelled") )
         {
-          return IS_NPC(actor) ? FALSE :
+          return is_npc(actor) ? FALSE :
             mprog_veval(chkchar->pcdata->release_date, opr, atoi(rval), mob);
         }
 
@@ -742,7 +742,7 @@ int mprog_do_ifcheck( const char *ifcheck, CHAR_DATA *mob, CHAR_DATA *actor,
         }
       if ( !str_cmp(chck, "race") )
         {
-          if ( IS_NPC(chkchar) )
+          if ( is_npc(chkchar) )
             return mprog_seval((char*)npc_race[chkchar->race], opr, rval, mob);
           return mprog_seval((char *)race_table[chkchar->race].race_name, opr,
                              rval, mob);
@@ -757,20 +757,20 @@ int mprog_do_ifcheck( const char *ifcheck, CHAR_DATA *mob, CHAR_DATA *actor,
         }
       if ( !str_cmp(chck, "clan") )
         {
-          if ( IS_NPC(chkchar) || !chkchar->pcdata->clan )
+          if ( is_npc(chkchar) || !chkchar->pcdata->clan )
             return FALSE;
           return mprog_seval(chkchar->pcdata->clan->name, opr, rval, mob);
         }
       if ( !str_cmp(chck, "class") )
         {
-          if ( IS_NPC(chkchar) )
+          if ( is_npc(chkchar) )
             return FALSE;
           return mprog_seval(npc_race[chkchar->race], opr, rval, mob);
         }
 
       if ( !str_cmp(chck, "clantype") )
         {
-          if ( IS_NPC(chkchar) || !chkchar->pcdata->clan )
+          if ( is_npc(chkchar) || !chkchar->pcdata->clan )
             return FALSE;
           return mprog_veval(chkchar->pcdata->clan->clan_type, opr, atoi(rval),
                              mob);
@@ -892,7 +892,7 @@ int mprog_do_ifcheck( const char *ifcheck, CHAR_DATA *mob, CHAR_DATA *actor,
     {
       if ( chkchar )
         {
-          if ( !IS_NPC(chkchar) )
+          if ( !is_npc(chkchar) )
             return FALSE;
           lhsvl = (chkchar == mob) ? chkchar->gold : chkchar->pIndexData->vnum;
           return mprog_veval(lhsvl, opr, atoi(rval), mob);
@@ -973,7 +973,7 @@ void mprog_translate( char ch, char *t, CHAR_DATA *mob, CHAR_DATA *actor,
     if ( actor && !char_died(actor) )
       {
         one_argument( actor->name, t );
-        if ( !IS_NPC( actor ) )
+        if ( !is_npc( actor ) )
           *t = UPPER( *t );
       }
     else
@@ -984,7 +984,7 @@ void mprog_translate( char ch, char *t, CHAR_DATA *mob, CHAR_DATA *actor,
     if ( actor && !char_died(actor) )
       {
         if ( can_see( mob, actor ) )
-          if ( IS_NPC( actor ) )
+          if ( is_npc( actor ) )
             strcpy( t, actor->short_descr );
           else
             {
@@ -1002,7 +1002,7 @@ void mprog_translate( char ch, char *t, CHAR_DATA *mob, CHAR_DATA *actor,
     if ( vict && !char_died(vict) )
       {
         one_argument( vict->name, t );
-        if ( !IS_NPC( vict ) )
+        if ( !is_npc( vict ) )
           *t = UPPER( *t );
       }
     else
@@ -1014,7 +1014,7 @@ void mprog_translate( char ch, char *t, CHAR_DATA *mob, CHAR_DATA *actor,
     if ( vict && !char_died(vict) )
       {
         if ( can_see( mob, vict ) )
-          if ( IS_NPC( vict ) )
+          if ( is_npc( vict ) )
             strcpy( t, vict->short_descr );
           else
             {
@@ -1033,7 +1033,7 @@ void mprog_translate( char ch, char *t, CHAR_DATA *mob, CHAR_DATA *actor,
     if ( rndm && !char_died(rndm) )
       {
         one_argument( rndm->name, t );
-        if ( !IS_NPC( rndm ) )
+        if ( !is_npc( rndm ) )
           {
             *t = UPPER( *t );
           }
@@ -1046,7 +1046,7 @@ void mprog_translate( char ch, char *t, CHAR_DATA *mob, CHAR_DATA *actor,
     if ( rndm && !char_died(rndm) )
       {
         if ( can_see( mob, rndm ) )
-          if ( IS_NPC( rndm ) )
+          if ( is_npc( rndm ) )
             strcpy(t,rndm->short_descr);
           else
             {
@@ -1327,7 +1327,7 @@ void mprog_driver ( char *com_list, CHAR_DATA *mob, CHAR_DATA *actor,
 
   count = 0;
   for ( vch = mob->in_room->first_person; vch; vch = vch->next_in_room )
-    if ( !IS_NPC( vch ) )
+    if ( !is_npc( vch ) )
       {
         if ( number_range( 0, count ) == 0 )
           rndm = vch;
@@ -1884,12 +1884,12 @@ void mprog_act_trigger( char *buf, CHAR_DATA *mob, CHAR_DATA *ch,
   MPROG_DATA *mprg;
   bool found = FALSE;
 
-  if ( IS_NPC( mob )
+  if ( is_npc( mob )
        &&   IS_SET( mob->pIndexData->progtypes, ACT_PROG ) )
     {
       /* Don't let a mob trigger itself, nor one instance of a mob
          trigger another instance. */
-      if ( IS_NPC( ch ) && ch->pIndexData == mob->pIndexData )
+      if ( is_npc( ch ) && ch->pIndexData == mob->pIndexData )
         return;
 
       /* make sure this is a matching trigger */
@@ -1927,12 +1927,12 @@ void mprog_bribe_trigger( CHAR_DATA *mob, CHAR_DATA *ch, int amount )
   MPROG_DATA *mprg;
   OBJ_DATA   *obj;
 
-  if ( IS_NPC( mob )
+  if ( is_npc( mob )
        && ( mob->pIndexData->progtypes & BRIBE_PROG ) )
     {
       /* Don't let a mob trigger itself, nor one instance of a mob
          trigger another instance. */
-      if ( IS_NPC( ch ) && ch->pIndexData == mob->pIndexData )
+      if ( is_npc( ch ) && ch->pIndexData == mob->pIndexData )
         return;
 
       obj = create_object( get_obj_index( OBJ_VNUM_MONEY_SOME ), 0 );
@@ -1958,7 +1958,7 @@ void mprog_bribe_trigger( CHAR_DATA *mob, CHAR_DATA *ch, int amount )
 
 void mprog_death_trigger( CHAR_DATA *killer, CHAR_DATA *mob )
 {
-  if ( IS_NPC( mob ) && killer != mob
+  if ( is_npc( mob ) && killer != mob
        && ( mob->pIndexData->progtypes & DEATH_PROG ) )
     {
       mprog_percent_check( mob, killer, NULL, NULL, DEATH_PROG );
@@ -1970,7 +1970,7 @@ void mprog_death_trigger( CHAR_DATA *killer, CHAR_DATA *mob )
 void mprog_entry_trigger( CHAR_DATA *mob )
 {
 
-  if ( IS_NPC( mob )
+  if ( is_npc( mob )
        && ( mob->pIndexData->progtypes & ENTRY_PROG ) )
     mprog_percent_check( mob, NULL, NULL, NULL, ENTRY_PROG );
 
@@ -1981,7 +1981,7 @@ void mprog_entry_trigger( CHAR_DATA *mob )
 void mprog_fight_trigger( CHAR_DATA *mob, CHAR_DATA *ch )
 {
 
-  if ( IS_NPC( mob )
+  if ( is_npc( mob )
        && ( mob->pIndexData->progtypes & FIGHT_PROG ) )
     mprog_percent_check( mob, ch, NULL, NULL, FIGHT_PROG );
 
@@ -1995,12 +1995,12 @@ void mprog_give_trigger( CHAR_DATA *mob, CHAR_DATA *ch, OBJ_DATA *obj )
   char        buf[MAX_INPUT_LENGTH];
   MPROG_DATA *mprg;
 
-  if ( IS_NPC( mob )
+  if ( is_npc( mob )
        && ( mob->pIndexData->progtypes & GIVE_PROG ) )
     {
       /* Don't let a mob trigger itself, nor one instance of a mob
          trigger another instance. */
-      if ( IS_NPC( ch ) && ch->pIndexData == mob->pIndexData )
+      if ( is_npc( ch ) && ch->pIndexData == mob->pIndexData )
         return;
 
       for ( mprg = mob->pIndexData->mudprogs; mprg; mprg = mprg->next )
@@ -2033,14 +2033,14 @@ void mprog_greet_trigger( CHAR_DATA *ch )
   for ( vmob = ch->in_room->first_person; vmob; vmob = vmob_next )
     {
       vmob_next = vmob->next_in_room;
-      if ( !IS_NPC( vmob )
+      if ( !is_npc( vmob )
            || vmob->fighting
            || !IS_AWAKE( vmob ) )
         continue;
 
       /* Don't let a mob trigger itself, nor one instance of a mob
          trigger another instance. */
-      if ( IS_NPC( ch ) && ch->pIndexData == vmob->pIndexData )
+      if ( is_npc( ch ) && ch->pIndexData == vmob->pIndexData )
         continue;
 
       if ( vmob->pIndexData->progtypes & GREET_PROG )
@@ -2057,7 +2057,7 @@ void mprog_hitprcnt_trigger( CHAR_DATA *mob, CHAR_DATA *ch)
 
   MPROG_DATA *mprg;
 
-  if ( IS_NPC( mob )
+  if ( is_npc( mob )
        && ( mob->pIndexData->progtypes & HITPRCNT_PROG ) )
     for ( mprg = mob->pIndexData->mudprogs; mprg; mprg = mprg->next )
       if ( ( mprg->type & HITPRCNT_PROG )
@@ -2100,9 +2100,9 @@ void mprog_speech_trigger( char *txt, CHAR_DATA *actor )
 
   for ( vmob = actor->in_room->first_person; vmob; vmob = vmob->next_in_room )
     {
-      if ( IS_NPC( vmob ) && ( vmob->pIndexData->progtypes & SPEECH_PROG ) )
+      if ( is_npc( vmob ) && ( vmob->pIndexData->progtypes & SPEECH_PROG ) )
         {
-          if ( IS_NPC( actor ) && actor->pIndexData == vmob->pIndexData )
+          if ( is_npc( actor ) && actor->pIndexData == vmob->pIndexData )
             continue;
           mprog_wordlist_check( txt, vmob, actor, NULL, NULL, SPEECH_PROG );
         }
@@ -3057,9 +3057,9 @@ CHAR_DATA *get_char_room_mp( CHAR_DATA *ch, char *argument )
 
   for ( rch = ch->in_room->first_person; rch; rch = rch->next_in_room )
     if ( (nifty_is_name( arg, rch->name )
-          ||  (IS_NPC(rch) && vnum == rch->pIndexData->vnum)) )
+          ||  (is_npc(rch) && vnum == rch->pIndexData->vnum)) )
       {
-        if ( number == 0 && !IS_NPC(rch) )
+        if ( number == 0 && !is_npc(rch) )
           return rch;
         else
           if ( ++count == number )
@@ -3073,7 +3073,7 @@ CHAR_DATA *get_char_room_mp( CHAR_DATA *ch, char *argument )
     {
       if ( !nifty_is_name_prefix( arg, rch->name ) )
         continue;
-      if ( number == 0 && !IS_NPC(rch) )
+      if ( number == 0 && !is_npc(rch) )
         return rch;
       else
         if ( ++count == number )

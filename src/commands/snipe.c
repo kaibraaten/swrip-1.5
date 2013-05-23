@@ -37,7 +37,7 @@ void do_snipe( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( !IS_NPC(ch) && ch->pcdata->learned[gsn_snipe]> 100)
+  if ( !is_npc(ch) && ch->pcdata->learned[gsn_snipe]> 100)
     max_dist += (ch->pcdata->learned[gsn_snipe]) / 15;
 
   argument = one_argument( argument, arg );
@@ -82,12 +82,12 @@ void do_snipe( CHAR_DATA *ch, char *argument )
       char_to_room( ch, to_room );
 
 
-      if ( IS_NPC(ch) && ( victim = get_char_room_mp( ch, arg2 ) ) != NULL )
+      if ( is_npc(ch) && ( victim = get_char_room_mp( ch, arg2 ) ) != NULL )
         {
           pfound = TRUE;
           break;
         }
-      else if ( !IS_NPC(ch) && ( victim = get_char_room( ch, arg2 ) ) != NULL )
+      else if ( !is_npc(ch) && ( victim = get_char_room( ch, arg2 ) ) != NULL )
         {
           pfound = TRUE;
           break;
@@ -139,13 +139,13 @@ void do_snipe( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( !IS_NPC( victim ) && IS_SET( ch->act, PLR_NICE ) )
+  if ( !is_npc( victim ) && IS_SET( ch->act, PLR_NICE ) )
     {
       send_to_char( "You feel too nice to do that!\r\n", ch );
       return;
     }
 
-  the_chance = IS_NPC(ch) ? 100
+  the_chance = is_npc(ch) ? 100
     : (int)  (ch->pcdata->learned[gsn_snipe]) ;
 
   switch ( dir )
@@ -205,7 +205,7 @@ void do_snipe( CHAR_DATA *ch, char *argument )
   char_from_room( ch );
   char_to_room( ch, was_in_room );
 
-  if ( IS_NPC(ch) )
+  if ( is_npc(ch) )
     WAIT_STATE( ch, 1 * PULSE_VIOLENCE );
   else
     {
@@ -216,7 +216,7 @@ void do_snipe( CHAR_DATA *ch, char *argument )
       else
         WAIT_STATE( ch, 3 * PULSE_PER_SECOND );
     }
-  if ( IS_NPC( victim ) && !char_died(victim) )
+  if ( is_npc( victim ) && !char_died(victim) )
     {
       if ( IS_SET( victim->act , ACT_SENTINEL ) )
         {

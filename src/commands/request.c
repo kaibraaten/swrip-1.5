@@ -82,7 +82,7 @@ void do_request(CHAR_DATA *ch, char *argument)
       return;
     }
 
-  the_chance = IS_NPC(ch) ? ch->top_level : (int) (ch->pcdata->learned[gsn_fake_signal]);
+  the_chance = is_npc(ch) ? ch->top_level : (int) (ch->pcdata->learned[gsn_fake_signal]);
   if ( (eShip->sclass == SHIP_PLATFORM ? 1 : (number_percent( ) >= the_chance)) && !check_pilot(ch,eShip) )
     {
       send_to_char("&RHey! That's not your ship!",ch);

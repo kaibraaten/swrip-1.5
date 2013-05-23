@@ -99,7 +99,7 @@ void do_makecomlink( CHAR_DATA *ch, char *argument )
           return;
         }
 
-      the_chance = IS_NPC(ch) ? ch->top_level
+      the_chance = is_npc(ch) ? ch->top_level
         : (int) (ch->pcdata->learned[gsn_makecomlink]);
       if ( number_percent( ) < the_chance )
         {
@@ -174,7 +174,7 @@ void do_makecomlink( CHAR_DATA *ch, char *argument )
 	}
     }
 
-  the_chance = IS_NPC(ch) ? ch->top_level
+  the_chance = is_npc(ch) ? ch->top_level
     : (int) (ch->pcdata->learned[gsn_makecomlink]) ;
 
   if ( number_percent( ) > the_chance*2  || ( !checktool ) || ( !checkcirc ) || ( !checkbatt ) || ( !checkgem ) )

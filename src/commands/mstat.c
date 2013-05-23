@@ -30,7 +30,7 @@ void do_mstat( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( ( ( get_trust( ch ) < LEVEL_GOD ) && !IS_NPC(victim) ) || ( ( get_trust( ch ) < get_trust( victim ) ) && !IS_NPC(victim) ) )
+  if ( ( ( get_trust( ch ) < LEVEL_GOD ) && !is_npc(victim) ) || ( ( get_trust( ch ) < get_trust( victim ) ) && !is_npc(victim) ) )
     {
       set_char_color( AT_IMMORT, ch );
       send_to_char( "Their godly glow prevents you from getting a good look.\r\n", ch );
@@ -39,27 +39,27 @@ void do_mstat( CHAR_DATA *ch, char *argument )
 
   ch_printf( ch, "Name: %s     Organization: %s\r\n",
              victim->name,
-             ( IS_NPC( victim ) || !victim->pcdata->clan ) ? "(none)"
+             ( is_npc( victim ) || !victim->pcdata->clan ) ? "(none)"
              : victim->pcdata->clan->name );
 
-  if( get_trust(ch) >= LEVEL_GOD && !IS_NPC(victim) && victim->desc )
+  if( get_trust(ch) >= LEVEL_GOD && !is_npc(victim) && victim->desc )
     ch_printf( ch, "Host: %s   Descriptor: %d   Trust: %d   AuthedBy: %s\r\n",
                victim->desc->host, victim->desc->descriptor,
                victim->trust, victim->pcdata->authed_by[0] != '\0'
                ? victim->pcdata->authed_by : "(unknown)" );
 
-  if ( !IS_NPC(victim) && victim->pcdata->release_date != 0 )
+  if ( !is_npc(victim) && victim->pcdata->release_date != 0 )
     ch_printf(ch, "Helled until %24.24s by %s.\r\n",
               ctime(&victim->pcdata->release_date),
               victim->pcdata->helled_by);
 
   ch_printf( ch, "Vnum: %d   Sex: %s   Room: %d   Count: %d  Killed: %d\r\n",
-             IS_NPC(victim) ? victim->pIndexData->vnum : 0,
+             is_npc(victim) ? victim->pIndexData->vnum : 0,
              victim->sex == SEX_MALE    ? "male"   :
              victim->sex == SEX_FEMALE  ? "female" : "neutral",
              victim->in_room == NULL    ?        0 : victim->in_room->vnum,
-             IS_NPC(victim) ? victim->pIndexData->count : 1,
-             IS_NPC(victim) ? victim->pIndexData->killed
+             is_npc(victim) ? victim->pIndexData->count : 1,
+             is_npc(victim) ? victim->pIndexData->killed
              : victim->pcdata->mdeaths + victim->pcdata->pdeaths
              );
 
@@ -78,7 +78,7 @@ void do_mstat( CHAR_DATA *ch, char *argument )
              victim->mana,        victim->max_mana,
              victim->move,        victim->max_move );
 
-  if ( !IS_NPC( victim ) )
+  if ( !is_npc( victim ) )
     {
       int ability;
 
@@ -108,7 +108,7 @@ void do_mstat( CHAR_DATA *ch, char *argument )
   ch_printf( ch, "Questpoints: %d    Current QuestMob: %d    Current QuestObj: %d\r\n",
              victim->questpoints, victim->questmob, victim->questobj );
 
-  if ( !IS_NPC(victim) )
+  if ( !is_npc(victim) )
     ch_printf( ch,
                "Thirst: %d   Full: %d   Drunk: %d     Glory: %d/%d\r\n",
                victim->pcdata->condition[COND_THIRST],
@@ -136,7 +136,7 @@ void do_mstat( CHAR_DATA *ch, char *argument )
   ch_printf( ch, "Carry figures: items (%d/%d)  weight (%d/%d)   Numattacks: %d\r\n",
              victim->carry_number, can_carry_n(victim), victim->carry_weight, can_carry_w(victim), victim->numattacks );
 
-  if ( IS_NPC( victim ) )
+  if ( is_npc( victim ) )
     {
       ch_printf( ch, "Act flags: %s\r\n", flag_string(victim->act, act_flags) );
       ch_printf( ch, "VIP flags: %s\r\n", flag_string(victim->vip_flags, planet_flags) );
@@ -163,10 +163,10 @@ void do_mstat( CHAR_DATA *ch, char *argument )
   for ( x = 0; lang_array[x] != LANG_UNKNOWN; x++ )
     {
       if ( knows_language( victim, lang_array[x], victim )
-	   || (IS_NPC(victim) && victim->speaks == 0) )
+	   || (is_npc(victim) && victim->speaks == 0) )
 	{
 	  if ( IS_SET(lang_array[x], victim->speaking)
-	       || (IS_NPC(victim) && !victim->speaking) )
+	       || (is_npc(victim) && !victim->speaking) )
 	    {
 	      set_char_color( AT_RED, ch );
 	    }
@@ -176,7 +176,7 @@ void do_mstat( CHAR_DATA *ch, char *argument )
         set_char_color( AT_PLAIN, ch );
       }
     else if ( IS_SET(lang_array[x], victim->speaking)
-	      || (IS_NPC(victim) && !victim->speaking) )
+	      || (is_npc(victim) && !victim->speaking) )
       {
 	set_char_color( AT_PINK, ch );
 	send_to_char( lang_names[x], ch );
@@ -196,7 +196,7 @@ void do_mstat( CHAR_DATA *ch, char *argument )
   ch_printf( ch, "Short description: %s\r\nLong  description: %s",
              victim->short_descr,
              victim->long_descr[0] != '\0' ? victim->long_descr : "(none)\r\n" );
-  if ( IS_NPC(victim) && ( victim->spec_fun || victim->spec_2 ) )
+  if ( is_npc(victim) && ( victim->spec_fun || victim->spec_2 ) )
     {
       ch_printf( ch, "Mobile has spec fun: %s %s\r\n",
 		 lookup_spec( victim->spec_fun ),

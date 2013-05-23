@@ -250,7 +250,7 @@ void do_shove( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( IS_NPC(victim) )
+  if ( is_npc(victim) )
     {
       send_to_char("You can only shove player characters.\r\n", ch);
       return;

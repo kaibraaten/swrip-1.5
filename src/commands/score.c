@@ -10,7 +10,7 @@ void do_score(CHAR_DATA * ch, char *argument)
   AFFECT_DATA    *paf;
   int iLang, drug;
 
-  if (IS_NPC(ch))
+  if (is_npc(ch))
     {
       do_oldscore(ch, argument);
       return;
@@ -25,7 +25,7 @@ void do_score(CHAR_DATA * ch, char *argument)
   send_to_char("&C----------------------------------------------------------------------------\r\n", ch);
 
   ch_printf(ch,   "&cRace: %-17.10s                &cLog In:  &C%s\r",
-            capitalize(get_race(ch)), ( IS_NPC(ch) ? "(null)" : ctime(&(ch->pcdata->logon)) ) );
+            capitalize(get_race(ch)), ( is_npc(ch) ? "(null)" : ctime(&(ch->pcdata->logon)) ) );
 
   ch_printf(ch,   "&cHitroll: &C%-2.2d  &cDamroll: &C%-2.2d   &cArmor: &C%-4d        &cSaved:  &C%s\r",
             GET_HITROLL(ch), GET_DAMROLL(ch), GET_AC(ch),
@@ -113,11 +113,11 @@ void do_score(CHAR_DATA * ch, char *argument)
 
   send_to_char( buf, ch );
 
-  if (!IS_NPC(ch) && ch->pcdata->condition[COND_DRUNK] > 10)
+  if (!is_npc(ch) && ch->pcdata->condition[COND_DRUNK] > 10)
     send_to_char("&CYou are drunk.\r\n", ch);
-  if (!IS_NPC(ch) && ch->pcdata->condition[COND_THIRST] == 0)
+  if (!is_npc(ch) && ch->pcdata->condition[COND_THIRST] == 0)
     send_to_char("&CYou are in danger of dehydrating.\r\n", ch);
-  if (!IS_NPC(ch) && ch->pcdata->condition[COND_FULL] == 0)
+  if (!is_npc(ch) && ch->pcdata->condition[COND_FULL] == 0)
     send_to_char("&CYou are starving to death.\r\n", ch);
   if ( ch->position != POS_SLEEPING )
     switch( ch->mental_state / 10 )
@@ -158,7 +158,7 @@ void do_score(CHAR_DATA * ch, char *argument)
           if ( ch->mental_state <-25 )
             send_to_char( "&CYou are in deep slumber.\r\n", ch );
 
-  if ( !IS_NPC(ch) )
+  if ( !is_npc(ch) )
     {
       if (ch->pcdata->target && ch->pcdata->target[0] != '\0' )
 	{
@@ -181,10 +181,10 @@ void do_score(CHAR_DATA * ch, char *argument)
   send_to_char("\r\n&cLanguages: &c", ch );
   for ( iLang = 0; lang_array[iLang] != LANG_UNKNOWN; iLang++ )
     if ( knows_language( ch, lang_array[iLang], ch )
-         ||  (IS_NPC(ch) && ch->speaks == 0) )
+         ||  (is_npc(ch) && ch->speaks == 0) )
       {
         if ( lang_array[iLang] & ch->speaking
-             ||  (IS_NPC(ch) && !ch->speaking) )
+             ||  (is_npc(ch) && !ch->speaking) )
           set_char_color( AT_RED, ch );
         send_to_char( lang_names[iLang], ch );
         send_to_char( " ", ch );

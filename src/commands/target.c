@@ -2,6 +2,7 @@
 #include "vector3_aux.h"
 #include "ships.h"
 #include "mud.h"
+#include "character.h"
 
 void do_target(CHAR_DATA *ch, char *argument )
 {
@@ -113,7 +114,7 @@ void do_target(CHAR_DATA *ch, char *argument )
             }
         }
 
-      the_chance = IS_NPC(ch) ? ch->top_level
+      the_chance = is_npc(ch) ? ch->top_level
         : (int)  (ch->pcdata->learned[gsn_weaponsystems]) ;
       if ( number_percent( ) < the_chance )
         {

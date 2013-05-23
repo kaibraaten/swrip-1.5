@@ -1,3 +1,4 @@
+#include "character.h"
 #include "shuttle.h"
 #include "ships.h"
 #include "mud.h"
@@ -16,7 +17,7 @@ void do_board( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( IS_SET( ch->act, ACT_MOUNTED ) && IS_NPC(ch))
+  if ( IS_SET( ch->act, ACT_MOUNTED ) && is_npc(ch))
     {
       act( AT_PLAIN, "You can't go in there riding THAT.", ch, NULL, argument, TO_CHAR );
       return;

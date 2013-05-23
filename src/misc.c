@@ -26,6 +26,7 @@
 
 #include <string.h>
 #include "mud.h"
+#include "character.h"
 
 void jedi_bonus( CHAR_DATA *ch )
 {
@@ -345,7 +346,7 @@ void actiondesc( CHAR_DATA *ch, OBJ_DATA *obj, void *vo )
       else if ( *srcptr == '%' && *++srcptr == 's' )
         {
           ichar = "You";
-          iroom = IS_NPC( ch ) ? ch->short_descr : ch->name;
+          iroom = is_npc( ch ) ? ch->short_descr : ch->name;
         }
       else
         {

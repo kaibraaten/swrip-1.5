@@ -9,7 +9,7 @@ void do_ocreate( CHAR_DATA *ch, char *argument )
   OBJ_DATA *obj = NULL;
   int vnum = 0, cvnum = 0;
 
-  if ( IS_NPC(ch) )
+  if ( is_npc(ch) )
     {
       send_to_char( "Mobiles cannot create.\r\n", ch );
       return;
@@ -46,7 +46,7 @@ void do_ocreate( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( IS_NPC( ch ) )
+  if ( is_npc( ch ) )
     return;
 
   if ( get_trust( ch ) <= LEVEL_IMMORTAL )

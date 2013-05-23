@@ -21,7 +21,7 @@ void do_dismiss( CHAR_DATA *ch, char *argument )
     }
 
   if ( is_affected_by( victim, AFF_CHARM )
-       && IS_NPC( victim )
+       && is_npc( victim )
        && victim->master == ch )
     {
       stop_follower( victim );

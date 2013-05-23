@@ -7,7 +7,7 @@ void do_suicide( CHAR_DATA *ch, char *argument )
 
   OBJ_DATA *obj;
 
-  if ( IS_NPC(ch) || !ch->pcdata )
+  if ( is_npc(ch) || !ch->pcdata )
     {
       send_to_char( "Yeah right!\r\n", ch );
       return;

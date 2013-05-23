@@ -16,7 +16,7 @@ void do_hell( CHAR_DATA *ch, char *argument )
       send_to_char( "Hell who, and for how long?\r\n", ch );
       return;
     }
-  if ( !(victim = get_char_world(ch, arg)) || IS_NPC(victim) )
+  if ( !(victim = get_char_world(ch, arg)) || is_npc(victim) )
     {
       send_to_char( "They aren't here.\r\n", ch );
       return;

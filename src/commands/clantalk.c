@@ -1,3 +1,4 @@
+#include "character.h"
 #include "mud.h"
 
 void do_clantalk( CHAR_DATA *ch, char *argument )
@@ -8,7 +9,7 @@ void do_clantalk( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( IS_NPC( ch ) || !ch->pcdata->clan )
+  if ( is_npc( ch ) || !ch->pcdata->clan )
     {
       send_to_char( "Huh?\r\n", ch );
       return;

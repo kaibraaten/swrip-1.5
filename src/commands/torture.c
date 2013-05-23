@@ -8,7 +8,7 @@ void do_torture( CHAR_DATA *ch, char *argument )
   int the_chance, dam;
   bool fail;
 
-  if ( !IS_NPC(ch)
+  if ( !is_npc(ch)
        &&  ch->pcdata->learned[gsn_torture] <= 0  )
     {
       send_to_char(
@@ -16,7 +16,7 @@ void do_torture( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( IS_NPC(ch) && is_affected_by( ch, AFF_CHARM ) )
+  if ( is_npc(ch) && is_affected_by( ch, AFF_CHARM ) )
     {
       send_to_char( "You can't do that right now.\r\n", ch );
       return;
@@ -76,13 +76,13 @@ void do_torture( CHAR_DATA *ch, char *argument )
   else
     fail = saves_para_petri( the_chance, victim );
 
-  if ( !IS_NPC(ch) && !IS_NPC(victim) )
+  if ( !is_npc(ch) && !is_npc(victim) )
     the_chance = sysdata.stun_plr_vs_plr;
   else
     the_chance = sysdata.stun_regular;
 
   if ( !fail
-       && (  IS_NPC(ch)
+       && (  is_npc(ch)
              || (number_percent( ) + the_chance) < ch->pcdata->learned[gsn_torture] ) )
     {
       learn_from_success( ch, gsn_torture );

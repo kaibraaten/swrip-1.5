@@ -11,7 +11,7 @@ void do_mpforce( CHAR_DATA *ch, char *argument )
   if ( is_affected_by( ch, AFF_CHARM ) )
     return;
 
-  if ( !IS_NPC( ch ) || ch->desc )
+  if ( !is_npc( ch ) || ch->desc )
     {
       send_to_char( "Huh?\r\n", ch );
       return;
@@ -49,7 +49,7 @@ void do_mpforce( CHAR_DATA *ch, char *argument )
           return;
         }
 
-      if ( !IS_NPC( victim )
+      if ( !is_npc( victim )
            && ( !victim->desc )
            && IS_IMMORTAL( victim ) )
         {

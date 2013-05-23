@@ -24,6 +24,7 @@
 #include "mud.h"
 #include "vector3_aux.h"
 #include "ships.h"
+#include "character.h"
 
 MISSILE_DATA *first_missile = NULL;
 MISSILE_DATA *last_missile = NULL;
@@ -255,7 +256,7 @@ void update_missiles( void )
 
                   for ( ch = first_char; ch; ch = ch->next )
 		    {
-		      if ( !IS_NPC( ch ) && nifty_is_name( missile->fired_by, ch->name ) )
+		      if ( !is_npc( ch ) && nifty_is_name( missile->fired_by, ch->name ) )
 			{
 			  ch_found = TRUE;
 			  damage_ship_ch( target, 30 + missile->missiletype * missile->missiletype * 30, 50 + missile->missiletype * missile->missiletype * missile->missiletype * 50, ch );

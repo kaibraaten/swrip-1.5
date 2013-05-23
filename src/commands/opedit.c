@@ -11,7 +11,7 @@ void do_opedit( CHAR_DATA *ch, char *argument )
   MPROG_DATA *mprog, *mprg, *mprg_next;
   int value, mptype, cnt;
 
-  if ( IS_NPC( ch ) )
+  if ( is_npc( ch ) )
     {
       send_to_char( "Mob's can't opedit\r\n", ch );
       return;

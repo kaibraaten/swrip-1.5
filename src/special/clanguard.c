@@ -20,7 +20,7 @@ bool spec_clan_guard( CHAR_DATA *ch )
         continue;
       if ( get_timer(victim, TIMER_RECENTFIGHT) > 0 )
         continue;
-      if ( !IS_NPC( victim ) && victim->pcdata && victim->pcdata->clan && clan && IS_AWAKE(victim)
+      if ( !is_npc( victim ) && victim->pcdata && victim->pcdata->clan && clan && IS_AWAKE(victim)
            && (clan != victim->pcdata->clan )
            && ( !victim->pcdata->clan->mainclan || clan != victim->pcdata->clan->mainclan )
            && ( !clan->mainclan || clan->mainclan != victim->pcdata->clan ) )

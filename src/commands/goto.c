@@ -27,7 +27,7 @@ void do_goto( CHAR_DATA *ch, char *argument )
           return;
 	}
 
-      if ( vnum < 1 || IS_NPC(ch) || !ch->pcdata->area )
+      if ( vnum < 1 || is_npc(ch) || !ch->pcdata->area )
         {
           send_to_char( "No such location.\r\n", ch );
           return;

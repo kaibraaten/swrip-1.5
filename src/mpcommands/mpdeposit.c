@@ -1,3 +1,4 @@
+#include "character.h"
 #include "mud.h"
 
 /*
@@ -8,7 +9,7 @@ void do_mp_deposit( CHAR_DATA *ch, char *argument )
   char arg[MAX_STRING_LENGTH];
   int gold;
 
-  if ( !IS_NPC(ch) )
+  if ( !is_npc(ch) )
     {
       send_to_char("Huh?\r\n", ch);
       return;

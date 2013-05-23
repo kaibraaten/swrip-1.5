@@ -37,7 +37,7 @@ ch_ret spell_locate_object( int sn, int level, CHAR_DATA *ch, void *vo )
       if ( in_obj->carried_by )
         {
           if ( IS_IMMORTAL( in_obj->carried_by )
-               && !IS_NPC( in_obj->carried_by )
+               && !is_npc( in_obj->carried_by )
                && ( get_trust( ch ) < in_obj->carried_by->pcdata->wizinvis )
 	       && IS_SET( in_obj->carried_by->act, PLR_WIZINVIS ) )
             continue;

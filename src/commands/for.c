@@ -102,11 +102,11 @@ void do_for(CHAR_DATA *ch, char *argument)
           if (!(p->in_room) || room_is_private(p, p->in_room) || (p == ch))
             continue;
 
-          if (IS_NPC(p) && fMobs)
+          if (is_npc(p) && fMobs)
             found = TRUE;
-          else if (!IS_NPC(p) && get_trust(p) >= LEVEL_IMMORTAL && fGods)
+          else if (!is_npc(p) && get_trust(p) >= LEVEL_IMMORTAL && fGods)
             found = TRUE;
-          else if (!IS_NPC(p) && get_trust(p) < LEVEL_IMMORTAL && fMortals)
+          else if (!is_npc(p) && get_trust(p) < LEVEL_IMMORTAL && fMortals)
             found = TRUE;
 
           /* It looks ugly to me.. but it works :) */
@@ -166,11 +166,11 @@ void do_for(CHAR_DATA *ch, char *argument)
                 if (p == ch) /* do not execute on oneself */
                   continue;
 
-                if (IS_NPC(p) && fMobs)
+                if (is_npc(p) && fMobs)
                   found = TRUE;
-                else if (!IS_NPC(p) && ( get_trust(p) >= LEVEL_IMMORTAL) && fGods)
+                else if (!is_npc(p) && ( get_trust(p) >= LEVEL_IMMORTAL) && fGods)
                   found = TRUE;
-                else if (!IS_NPC(p) && ( get_trust(p) <= LEVEL_IMMORTAL) && fMortals)
+                else if (!is_npc(p) && ( get_trust(p) <= LEVEL_IMMORTAL) && fMortals)
                   found = TRUE;
 	      } /* for everyone inside the room */
 
@@ -203,7 +203,7 @@ static const char * name_expand (CHAR_DATA *ch)
 
   static char outbuf[MAX_INPUT_LENGTH];
 
-  if (!IS_NPC(ch))
+  if (!is_npc(ch))
     return ch->name;
 
   one_argument (ch->name, name); /* copy the first word into name */

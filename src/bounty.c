@@ -166,7 +166,7 @@ void disintegration ( const CHAR_DATA *ch , const CHAR_DATA *victim , long amoun
 	   && ( !str_cmp(ch->pcdata->clan->name, "the hunters guild")
 		|| !str_cmp(ch->pcdata->clan->name, "the assassins guild") ) )
         ch_printf(p, buf);
-      else if (!IS_NPC(p) && get_trust(p) >= LEVEL_IMMORTAL)
+      else if (!is_npc(p) && get_trust(p) >= LEVEL_IMMORTAL)
         ch_printf(p, buf);
 
       if (victim == p)
@@ -190,7 +190,7 @@ void claim_disintegration( CHAR_DATA *ch, const CHAR_DATA *victim )
   long xp = 0;
   char buf[MAX_STRING_LENGTH];
 
-  if ( IS_NPC(victim) )
+  if ( is_npc(victim) )
     return;
 
   bounty = get_disintegration( victim->name );
@@ -213,14 +213,14 @@ void claim_disintegration( CHAR_DATA *ch, const CHAR_DATA *victim )
 
   if (bounty == NULL)
     {
-      if ( IS_SET(victim->act , PLR_KILLER ) && !IS_NPC(ch) )
+      if ( IS_SET(victim->act , PLR_KILLER ) && !is_npc(ch) )
         {
           xp = URANGE(1, xp_compute(ch, victim) , ( exp_level(get_level( ch, HUNTING_ABILITY ) + 1) - exp_level(get_level( ch, HUNTING_ABILITY ) ) ) );
           gain_exp( ch, HUNTING_ABILITY, xp );
           set_char_color( AT_BLOOD, ch );
           ch_printf( ch, "You receive %ld hunting experience for executing a wanted killer.\r\n", xp );
         }
-      else if ( !IS_NPC(ch) )
+      else if ( !is_npc(ch) )
         {
           SET_BIT(ch->act, PLR_KILLER );
           ch_printf( ch, "You are now wanted for the murder of %s.\r\n", victim->name );

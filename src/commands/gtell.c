@@ -1,3 +1,4 @@
+#include "character.h"
 #include "mud.h"
 
 void do_gtell( CHAR_DATA *ch, char *argument )
@@ -28,7 +29,7 @@ void do_gtell( CHAR_DATA *ch, char *argument )
           /* Groups unscrambled regardless of clan language.  Other languages
              still garble though. -- Altrag */
           if ( knows_language( gch, ch->speaking, gch )
-               ||  (IS_NPC(ch) && !ch->speaking) )
+               ||  (is_npc(ch) && !ch->speaking) )
             ch_printf( gch, "%s tells the group '%s'.\r\n", ch->name, argument );
           else
             ch_printf( gch, "%s tells the group '%s'.\r\n", ch->name, scramble(argument, ch->speaking) );

@@ -8,13 +8,13 @@ void do_stun( CHAR_DATA *ch, char *argument )
   int stun_chance;
   bool fail;
 
-  if ( IS_NPC(ch) && is_affected_by( ch, AFF_CHARM ) )
+  if ( is_npc(ch) && is_affected_by( ch, AFF_CHARM ) )
     {
       send_to_char( "You can't concentrate enough for that.\r\n", ch );
       return;
     }
 
-  if ( !IS_NPC(ch)
+  if ( !is_npc(ch)
        &&  ch->pcdata->learned[gsn_stun] <= 0  )
     {
       send_to_char(
@@ -48,13 +48,13 @@ void do_stun( CHAR_DATA *ch, char *argument )
 		  -   (get_curr_dex(ch)     + get_curr_str(ch))) * 10) + 10;
 
   /* harder for player to stun another player */
-  if ( !IS_NPC(ch) && !IS_NPC(victim) )
+  if ( !is_npc(ch) && !is_npc(victim) )
     stun_chance += sysdata.stun_plr_vs_plr;
   else
     stun_chance += sysdata.stun_regular;
 
   if ( !fail
-       && (  IS_NPC(ch)
+       && (  is_npc(ch)
              || (number_percent( ) + stun_chance) < ch->pcdata->learned[gsn_stun] ) )
     {
       learn_from_success( ch, gsn_stun );

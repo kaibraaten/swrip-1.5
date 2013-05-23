@@ -28,7 +28,7 @@ void do_help( CHAR_DATA *ch, char *argument )
       send_to_pager( "\r\n", ch );
     }
 
-  if ( !IS_NPC(ch) && IS_SET( ch->act , PLR_SOUND ) )
+  if ( !is_npc(ch) && IS_SET( ch->act , PLR_SOUND ) )
     send_to_pager( "!!SOUND(help)", ch );
 
   /*

@@ -7,7 +7,7 @@ void do_setclan( CHAR_DATA *ch, char *argument )
   char arg2[MAX_INPUT_LENGTH];
   CLAN_DATA *clan;
 
-  if ( IS_NPC( ch ) )
+  if ( is_npc( ch ) )
     {
       send_to_char( "Huh?\r\n", ch );
       return;

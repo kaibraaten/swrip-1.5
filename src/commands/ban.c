@@ -1,5 +1,6 @@
 #include <time.h>
 #include "mud.h"
+#include "character.h"
 
 void do_ban( CHAR_DATA *ch, char *argument )
 {
@@ -8,7 +9,7 @@ void do_ban( CHAR_DATA *ch, char *argument )
   BAN_DATA *pban;
   int bnum;
 
-  if ( IS_NPC(ch) )
+  if ( is_npc(ch) )
     return;
 
   argument = one_argument( argument, arg );

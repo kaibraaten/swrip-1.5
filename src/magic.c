@@ -98,7 +98,7 @@ int ch_slookup( const CHAR_DATA *ch, const char *name )
 {
   int sn;
 
-  if ( IS_NPC(ch) )
+  if ( is_npc(ch) )
     return skill_lookup( name );
 
   for ( sn = 0; sn < top_sn; sn++ )
@@ -252,7 +252,7 @@ int ch_bsearch_skill( const CHAR_DATA *ch, const char *name, int first, int top 
 
 int find_spell( const CHAR_DATA *ch, const char *name, bool know )
 {
-  if ( IS_NPC(ch) || !know )
+  if ( is_npc(ch) || !know )
     return bsearch_skill( name, gsn_first_spell, gsn_first_skill-1 );
   else
     return ch_bsearch_skill( ch, name, gsn_first_spell, gsn_first_skill-1 );
@@ -260,7 +260,7 @@ int find_spell( const CHAR_DATA *ch, const char *name, bool know )
 
 int find_skill( const CHAR_DATA *ch, const char *name, bool know )
 {
-  if ( IS_NPC(ch) || !know )
+  if ( is_npc(ch) || !know )
     return bsearch_skill( name, gsn_first_skill, gsn_first_weapon-1 );
   else
     return ch_bsearch_skill( ch, name, gsn_first_skill, gsn_first_weapon-1 );
@@ -268,7 +268,7 @@ int find_skill( const CHAR_DATA *ch, const char *name, bool know )
 
 int find_weapon( const CHAR_DATA *ch, const char *name, bool know )
 {
-  if ( IS_NPC(ch) || !know )
+  if ( is_npc(ch) || !know )
     return bsearch_skill( name, gsn_first_weapon, gsn_first_tongue-1 );
   else
     return ch_bsearch_skill( ch, name, gsn_first_weapon, gsn_first_tongue-1 );
@@ -276,7 +276,7 @@ int find_weapon( const CHAR_DATA *ch, const char *name, bool know )
 
 int find_tongue( const CHAR_DATA *ch, const char *name, bool know )
 {
-  if ( IS_NPC(ch) || !know )
+  if ( is_npc(ch) || !know )
     return bsearch_skill( name, gsn_first_tongue, gsn_top_sn-1 );
   else
     return ch_bsearch_skill( ch, name, gsn_first_tongue, gsn_top_sn-1 );
@@ -646,7 +646,7 @@ bool saves_spell_staff( int level, const CHAR_DATA *victim )
   if ( IS_SET( victim->immune, RIS_MAGIC ) )
     return TRUE;
 
-  if ( IS_NPC( victim ) && level > 10 )
+  if ( is_npc( victim ) && level > 10 )
     level -= 5;
   save = 50 + ( victim->top_level - level - victim->saving_spell_staff ) * 2;
   if ( victim->race == RACE_DROID )
@@ -893,9 +893,9 @@ void *locate_targets( CHAR_DATA *ch, char *arg, int sn, CHAR_DATA **victim, OBJ_
           */
         }
 
-      if ( !IS_NPC(ch) )
+      if ( !is_npc(ch) )
         {
-          if ( !IS_NPC(*victim) )
+          if ( !is_npc(*victim) )
             {
               /*  Sheesh! can't do anything
                   send_to_char( "You can't do that on a player.\r\n", ch );
@@ -1047,7 +1047,7 @@ ch_ret obj_cast_spell( int sn, int level, CHAR_DATA *ch, CHAR_DATA *victim, OBJ_
         {
           if ( !victim )
             victim = who_fighting( ch );
-          if ( !victim || !IS_NPC(victim) )
+          if ( !victim || !is_npc(victim) )
             {
               send_to_char( "You can't do that.\r\n", ch );
               return rNONE;
@@ -1138,7 +1138,7 @@ bool check_save( int sn, int level, const CHAR_DATA *ch, const CHAR_DATA *victim
   bool saved = FALSE;
 
   if ( SPELL_FLAG(skill, SF_PKSENSITIVE)
-       &&  !IS_NPC(ch) && !IS_NPC(victim) )
+       &&  !is_npc(ch) && !is_npc(victim) )
     level /= 2;
 
   if ( skill->saves )

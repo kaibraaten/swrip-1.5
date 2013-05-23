@@ -25,7 +25,7 @@ void do_group( CHAR_DATA *ch, char *argument )
                 ch_printf( ch,
                            "[%2d %s] %-16s %4s/%4s hp %4s/%4s mv %5s xp\r\n",
                            gch->top_level,
-                           IS_NPC(gch) ? "Mob" : race_table[gch->race].race_name,
+                           is_npc(gch) ? "Mob" : race_table[gch->race].race_name,
                            capitalize( PERS(gch, ch) ),
 			   "????",
                            "????",
@@ -37,7 +37,7 @@ void do_group( CHAR_DATA *ch, char *argument )
                 ch_printf( ch,
                            "[%2d %s] %-16s %4d/%4d hp %4d/%4d mv\r\n",
                            gch->top_level,
-                           IS_NPC(gch) ? "Mob" : race_table[gch->race].race_name,
+                           is_npc(gch) ? "Mob" : race_table[gch->race].race_name,
                            capitalize( PERS(gch, ch) ),
                            gch->hit,
                            gch->max_hit,
@@ -87,7 +87,7 @@ void do_group( CHAR_DATA *ch, char *argument )
       for ( rch = ch->in_room->first_person; rch; rch = rch->next_in_room )
         {
           if ( ch != rch
-               && !IS_NPC( rch )
+               && !is_npc( rch )
                && rch->master == ch
                && !ch->master
                && !ch->leader

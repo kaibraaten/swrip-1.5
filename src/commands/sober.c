@@ -1,3 +1,4 @@
+#include "character.h"
 #include "mud.h"
 
 /*
@@ -19,7 +20,7 @@ void do_sober( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( IS_NPC( victim ) )
+  if ( is_npc( victim ) )
     {
       send_to_char( "Not on mobs.\r\n", ch );
       return;

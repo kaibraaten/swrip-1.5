@@ -1,3 +1,4 @@
+#include "character.h"
 #include "mud.h"
 
 /* Allow mobiles to go wizinvis with programs -- SB */
@@ -6,7 +7,7 @@ void do_mpinvis( CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
 
-  if ( !IS_NPC(ch))
+  if ( !is_npc(ch))
     {
       send_to_char( "Huh?\r\n", ch);
       return;

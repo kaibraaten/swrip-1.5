@@ -1,3 +1,4 @@
+#include "character.h"
 #include "mud.h"
 
 void do_appoint ( CHAR_DATA *ch , char *argument )
@@ -6,7 +7,7 @@ void do_appoint ( CHAR_DATA *ch , char *argument )
 
   argument = one_argument( argument, arg );
 
-  if ( IS_NPC( ch ) || !ch->pcdata )
+  if ( is_npc( ch ) || !ch->pcdata )
     return;
 
   if ( !ch->pcdata->clan )

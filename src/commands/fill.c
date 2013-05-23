@@ -244,7 +244,7 @@ void do_fill( CHAR_DATA *ch, char *argument )
           send_to_char( "You can't do that... yet.\r\n", ch );
           break;
         case ITEM_CORPSE_PC:
-          if ( IS_NPC(ch) )
+          if ( is_npc(ch) )
             {
               send_to_char( "You can't do that.\r\n", ch );
               return;
@@ -262,7 +262,7 @@ void do_fill( CHAR_DATA *ch, char *argument )
               fGroup = FALSE;
               for ( gch = first_char; gch; gch = gch->next )
                 {
-                  if ( !IS_NPC(gch)
+                  if ( !is_npc(gch)
                        &&   is_same_group( ch, gch )
                        &&   !str_cmp( name, gch->name ) )
                     {

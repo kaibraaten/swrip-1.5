@@ -10,7 +10,7 @@ void do_mass_propaganda ( CHAR_DATA *ch , char *argument )
   CLAN_DATA   *clan;
   int percent = 0;
 
-  if ( IS_NPC(ch) || !ch->pcdata || !ch->pcdata->clan || !ch->in_room->area || !ch->in_room->area->planet )
+  if ( is_npc(ch) || !ch->pcdata || !ch->pcdata->clan || !ch->in_room->area || !ch->in_room->area->planet )
     {
       send_to_char( "What would be the point of that.\r\n", ch );
       return;

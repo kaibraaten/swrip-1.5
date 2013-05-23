@@ -1,3 +1,4 @@
+#include "character.h"
 #include "mud.h"
 
 bool spec_auth( CHAR_DATA *ch )
@@ -13,7 +14,7 @@ bool spec_auth( CHAR_DATA *ch )
     {
       v_next = victim->next_in_room;
 
-      if ( !IS_NPC(victim) && ( pObjIndex = get_obj_index( OBJ_VNUM_SCHOOL_DIPLOMA ) ) != NULL )
+      if ( !is_npc(victim) && ( pObjIndex = get_obj_index( OBJ_VNUM_SCHOOL_DIPLOMA ) ) != NULL )
         {
           hasdiploma = FALSE;
 
@@ -29,7 +30,7 @@ bool spec_auth( CHAR_DATA *ch )
             }
         }
 
-      if ( IS_NPC(victim)
+      if ( is_npc(victim)
            ||   !IS_SET(victim->pcdata->flags, PCFLAG_UNAUTHED) || victim->pcdata->auth_state == 2 )
         continue;
 

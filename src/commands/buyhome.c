@@ -1,3 +1,4 @@
+#include "character.h"
 #include "mud.h"
 
 void do_buyhome( CHAR_DATA *ch, char *argument )
@@ -8,7 +9,7 @@ void do_buyhome( CHAR_DATA *ch, char *argument )
   if ( !ch->in_room )
     return;
 
-  if ( IS_NPC(ch) || !ch->pcdata )
+  if ( is_npc(ch) || !ch->pcdata )
     return;
 
   if ( ch->plr_home != NULL )

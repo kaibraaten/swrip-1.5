@@ -118,7 +118,7 @@ void do_give( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( IS_NPC(victim) && victim->pIndexData && victim->pIndexData->pShop )
+  if ( is_npc(victim) && victim->pIndexData && victim->pIndexData->pShop )
     {
 
       if ( victim->owner && str_cmp( ch->name, victim->owner ) )

@@ -31,7 +31,7 @@ bool can_rmodify( const CHAR_DATA *ch, const ROOM_INDEX_DATA *room )
   short vnum = room->vnum;
   AREA_DATA *pArea;
 
-  if ( IS_NPC( ch ) )
+  if ( is_npc( ch ) )
     return FALSE;
 
   if ( get_trust( ch ) >= sysdata.level_modify_proto )
@@ -55,7 +55,7 @@ bool can_omodify( const CHAR_DATA *ch, const OBJ_DATA *obj )
   short vnum = obj->pIndexData->vnum;
   AREA_DATA *pArea;
 
-  if ( IS_NPC( ch ) )
+  if ( is_npc( ch ) )
     return FALSE;
 
   if ( get_trust( ch ) >= sysdata.level_modify_proto )
@@ -79,7 +79,7 @@ bool can_oedit( const CHAR_DATA *ch, const OBJ_INDEX_DATA *obj )
   short vnum = obj->vnum;
   AREA_DATA *pArea;
 
-  if ( IS_NPC( ch ) )
+  if ( is_npc( ch ) )
     return FALSE;
 
   if ( get_trust( ch ) >= LEVEL_GOD )
@@ -107,7 +107,7 @@ bool can_mmodify( const CHAR_DATA *ch, const CHAR_DATA *mob )
   if ( mob == ch )
     return TRUE;
 
-  if ( !IS_NPC( mob ) )
+  if ( !is_npc( mob ) )
     {
       if ( get_trust( ch ) >= sysdata.level_modify_proto && get_trust(ch) >
            get_trust( mob ) )
@@ -119,7 +119,7 @@ bool can_mmodify( const CHAR_DATA *ch, const CHAR_DATA *mob )
 
   vnum = mob->pIndexData->vnum;
 
-  if ( IS_NPC( ch ) )
+  if ( is_npc( ch ) )
     return FALSE;
   if ( get_trust( ch ) >= sysdata.level_modify_proto )
     return TRUE;
@@ -141,7 +141,7 @@ bool can_medit( const CHAR_DATA *ch, const MOB_INDEX_DATA *mob )
   short vnum = mob->vnum;
   AREA_DATA *pArea;
 
-  if ( IS_NPC( ch ) )
+  if ( is_npc( ch ) )
     return FALSE;
   if ( get_trust( ch ) >= LEVEL_GOD )
     return TRUE;
@@ -671,7 +671,7 @@ void assign_area( CHAR_DATA *ch )
   AREA_DATA *tarea, *tmp;
   bool created = FALSE;
 
-  if ( IS_NPC( ch ) )
+  if ( is_npc( ch ) )
     return;
   if ( get_trust( ch ) >= LEVEL_AVATAR
        &&   ch->pcdata->r_range_lo
@@ -1092,7 +1092,7 @@ void fold_area( AREA_DATA *tarea, char *filename, bool install )
           for ( victim = room->first_person; victim; victim = vnext )
             {
               vnext = victim->next_in_room;
-              if ( IS_NPC(victim) )
+              if ( is_npc(victim) )
                 extract_char( victim, TRUE );
             }
           /* purge room of (prototyped) objects */

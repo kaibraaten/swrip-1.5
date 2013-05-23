@@ -13,7 +13,7 @@ void do_mpat( CHAR_DATA *ch, char *argument )
   if ( is_affected_by( ch, AFF_CHARM ) )
     return;
 
-  if ( !IS_NPC( ch ) )
+  if ( !is_npc( ch ) )
     {
       send_to_char( "Huh?\r\n", ch );
       return;

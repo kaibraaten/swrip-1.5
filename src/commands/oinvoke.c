@@ -71,7 +71,7 @@ void do_oinvoke( CHAR_DATA *ch, char *argument )
     {
       AREA_DATA *pArea;
 
-      if ( IS_NPC(ch) )
+      if ( is_npc(ch) )
         {
           send_to_char( "Huh?\r\n", ch );
           return;

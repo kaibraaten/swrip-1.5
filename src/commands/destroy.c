@@ -1,6 +1,7 @@
 #include <string.h>
 #include <ctype.h>
 #include "mud.h"
+#include "character.h"
 
 void do_destroy( CHAR_DATA *ch, char *argument )
 {
@@ -17,7 +18,7 @@ void do_destroy( CHAR_DATA *ch, char *argument )
     }
 
   for ( victim = first_char; victim; victim = victim->next )
-    if ( !IS_NPC(victim) && !str_cmp(victim->name, arg) )
+    if ( !is_npc(victim) && !str_cmp(victim->name, arg) )
       break;
   if ( !victim )
     {
@@ -25,7 +26,7 @@ void do_destroy( CHAR_DATA *ch, char *argument )
 
       /* Make sure they aren't halfway logged in. */
       for ( d = first_descriptor; d; d = d->next )
-        if ( (victim = d->character) && !IS_NPC(victim) &&
+        if ( (victim = d->character) && !is_npc(victim) &&
 	     !str_cmp(victim->name, arg) )
           break;
       if ( d )

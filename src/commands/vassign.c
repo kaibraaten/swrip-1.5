@@ -27,7 +27,7 @@ void do_vassign( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( IS_NPC( victim ) || get_trust( victim ) < LEVEL_CREATOR )
+  if ( is_npc( victim ) || get_trust( victim ) < LEVEL_CREATOR )
     {
       send_to_char( "They wouldn't know what to do with a vnum range.\r\n", ch );
       return;

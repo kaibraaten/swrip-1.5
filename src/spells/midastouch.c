@@ -76,7 +76,7 @@ ch_ret spell_midas_touch( int sn, int level, CHAR_DATA *ch, void *vo )
 
 
   if ( ( victim->carry_weight + get_obj_weight ( obj ) ) > can_carry_w(victim)
-       ||       (IS_NPC(victim) && IS_SET(victim->act, ACT_PROTOTYPE)))
+       ||       (is_npc(victim) && IS_SET(victim->act, ACT_PROTOTYPE)))
     {
       ch->gold += val;
 

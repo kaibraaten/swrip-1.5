@@ -42,7 +42,7 @@ void sound_to_room( const ROOM_INDEX_DATA *room, const char *argument )
   if ( room == NULL ) return;
 
   for ( vic = room->first_person; vic; vic = vic->next_in_room )
-    if ( !IS_NPC(vic) && IS_SET( vic->act, PLR_SOUND ) )
+    if ( !is_npc(vic) && IS_SET( vic->act, PLR_SOUND ) )
       send_to_char( argument, vic );
 }
 
@@ -55,7 +55,7 @@ char *drunk_speech( const char *argument, CHAR_DATA *ch )
   char *txt;
   char *txt1;
 
-  if ( IS_NPC( ch ) || !ch->pcdata ) return (char *) argument;
+  if ( is_npc( ch ) || !ch->pcdata ) return (char *) argument;
 
   drunk = ch->pcdata->condition[COND_DRUNK];
 
@@ -218,7 +218,7 @@ void talk_channel( CHAR_DATA *ch, const char *argument, int channel, const char 
    *    }
    */
 
-  else if ( IS_NPC( ch ) && ( channel == CHANNEL_CLAN || channel == CHANNEL_ALLCLAN ) )
+  else if ( is_npc( ch ) && ( channel == CHANNEL_CLAN || channel == CHANNEL_ALLCLAN ) )
     {
       send_to_char( "Mobs can't be in clans.\r\n", ch );
       return;
@@ -229,13 +229,13 @@ void talk_channel( CHAR_DATA *ch, const char *argument, int channel, const char 
       clan = ch->pcdata->clan;
     }
 
-  if ( IS_NPC( ch ) && channel == CHANNEL_ORDER )
+  if ( is_npc( ch ) && channel == CHANNEL_ORDER )
     {
       send_to_char( "Mobs can't be in orders.\r\n", ch );
       return;
     }
 
-  if ( IS_NPC( ch ) && channel == CHANNEL_GUILD )
+  if ( is_npc( ch ) && channel == CHANNEL_GUILD )
     {
       send_to_char( "Mobs can't be in guilds.\r\n", ch );
       return;
@@ -247,7 +247,7 @@ void talk_channel( CHAR_DATA *ch, const char *argument, int channel, const char 
       return;
     }
 
-  if ( IS_NPC( ch ) && is_affected_by( ch, AFF_CHARM ) )
+  if ( is_npc( ch ) && is_affected_by( ch, AFF_CHARM ) )
     {
       if ( ch->master )
         send_to_char( "I don't think so...\r\n", ch->master );
@@ -262,7 +262,7 @@ void talk_channel( CHAR_DATA *ch, const char *argument, int channel, const char 
       return;
     }
 
-  if ( !IS_NPC(ch) && IS_SET(ch->act, PLR_SILENCE) )
+  if ( !is_npc(ch) && IS_SET(ch->act, PLR_SILENCE) )
     {
       ch_printf( ch, "You can't %s.\r\n", verb );
       return;
@@ -355,7 +355,7 @@ void talk_channel( CHAR_DATA *ch, const char *argument, int channel, const char 
 
   if ( IS_SET( ch->in_room->room_flags, ROOM_LOGSPEECH ) )
     {
-      sprintf( buf2, "%s: %s (%s)", IS_NPC( ch ) ? ch->short_descr : ch->name,
+      sprintf( buf2, "%s: %s (%s)", is_npc( ch ) ? ch->short_descr : ch->name,
                argument, verb );
       append_to_file( LOG_FILE, buf2 );
     }
@@ -412,7 +412,7 @@ void talk_channel( CHAR_DATA *ch, const char *argument, int channel, const char 
                ||   channel == CHANNEL_GUILD )
             {
 
-              if ( IS_NPC( vch ) )
+              if ( is_npc( vch ) )
                 continue;
 
               if ( !vch->pcdata->clan )
@@ -461,7 +461,7 @@ void talk_channel( CHAR_DATA *ch, const char *argument, int channel, const char 
           if ( channel != CHANNEL_SHOUT && channel != CHANNEL_YELL )
             vch->position       = POS_STANDING;
           if ( !knows_language( vch, ch->speaking, ch ) &&
-               (!IS_NPC(ch) || ch->speaking != 0)   &&
+               (!is_npc(ch) || ch->speaking != 0)   &&
                ( channel != CHANNEL_NEWBIE &&
                  channel != CHANNEL_OOC &&
                  channel != CHANNEL_AUCTION &&
@@ -551,7 +551,7 @@ void add_follower( CHAR_DATA *ch, CHAR_DATA *master )
 
   ch->master        = master;
   ch->leader        = NULL;
-  if ( IS_NPC(ch) && IS_SET(ch->act, ACT_PET) && !IS_NPC(master) )
+  if ( is_npc(ch) && IS_SET(ch->act, ACT_PET) && !is_npc(master) )
     master->pcdata->pet = ch;
 
   if ( can_see( master, ch ) )
@@ -568,7 +568,7 @@ void stop_follower( CHAR_DATA *ch )
       return;
     }
 
-  if ( IS_NPC(ch) && !IS_NPC(ch->master) && ch->master->pcdata->pet == ch )
+  if ( is_npc(ch) && !is_npc(ch->master) && ch->master->pcdata->pet == ch )
     ch->master->pcdata->pet = NULL;
 
   if ( is_affected_by(ch, AFF_CHARM) )
@@ -651,11 +651,11 @@ bool knows_language( const CHAR_DATA *ch, int language, const CHAR_DATA *cch )
 {
   short sn;
 
-  if ( !IS_NPC(ch) && IS_IMMORTAL(ch) )
+  if ( !is_npc(ch) && IS_IMMORTAL(ch) )
     return TRUE;
-  if ( IS_NPC(ch) && !ch->speaks ) /* No langs = knows all for npcs */
+  if ( is_npc(ch) && !ch->speaks ) /* No langs = knows all for npcs */
     return TRUE;
-  if ( IS_NPC(ch) && IS_SET(ch->speaks, (language & ~LANG_CLAN)) )
+  if ( is_npc(ch) && IS_SET(ch->speaks, (language & ~LANG_CLAN)) )
     return TRUE;
   /* everyone does not KNOW common tongue
      if ( IS_SET(language, LANG_COMMON) )
@@ -664,13 +664,13 @@ bool knows_language( const CHAR_DATA *ch, int language, const CHAR_DATA *cch )
   if ( language & LANG_CLAN )
     {
       /* Clan = common for mobs.. snicker.. -- Altrag */
-      if ( IS_NPC(ch) || IS_NPC(cch) )
+      if ( is_npc(ch) || is_npc(cch) )
         return TRUE;
       if ( ch->pcdata->clan == cch->pcdata->clan &&
            ch->pcdata->clan != NULL )
         return TRUE;
     }
-  if ( !IS_NPC( ch ) )
+  if ( !is_npc( ch ) )
     {
       int lang;
 
@@ -696,7 +696,7 @@ bool can_learn_lang( const CHAR_DATA *ch, int language )
 {
   if ( language & LANG_CLAN )
     return FALSE;
-  if ( IS_NPC(ch) || IS_IMMORTAL(ch) )
+  if ( is_npc(ch) || IS_IMMORTAL(ch) )
     return FALSE;
   if ( race_table[ch->race].language & language )
     return FALSE;

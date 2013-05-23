@@ -212,7 +212,7 @@ void found_prey( CHAR_DATA *ch, CHAR_DATA *victim )
       return;
     }
 
-  sprintf( victname, "%s", IS_NPC( victim ) ? victim->short_descr : victim->name );
+  sprintf( victname, "%s", is_npc( victim ) ? victim->short_descr : victim->name );
 
   if ( !can_see(ch, victim) )
     {

@@ -1,10 +1,11 @@
+#include "character.h"
 #include "mud.h"
 
 void do_pager( CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
 
-  if ( IS_NPC(ch) )
+  if ( is_npc(ch) )
     return;
 
   argument = one_argument(argument, arg);

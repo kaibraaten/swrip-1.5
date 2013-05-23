@@ -24,7 +24,7 @@ void do_tell( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if (!IS_NPC(ch)
+  if (!is_npc(ch)
       && ( IS_SET(ch->act, PLR_SILENCE) ||   IS_SET(ch->act, PLR_NO_TELL) ) )
     {
       send_to_char( "You can't do that.\r\n", ch );
@@ -40,7 +40,7 @@ void do_tell( CHAR_DATA *ch, char *argument )
     }
 
   if ( ( victim = get_char_world( ch, arg ) ) == NULL
-       || ( IS_NPC(victim) && victim->in_room != ch->in_room )
+       || ( is_npc(victim) && victim->in_room != ch->in_room )
        || (!NOT_AUTHED(ch) && NOT_AUTHED(victim) && !IS_IMMORTAL(ch) ) )
     {
       send_to_char( "They can't hear you.\r\n", ch );
@@ -81,7 +81,7 @@ void do_tell( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( !IS_NPC( victim ) && ( victim->switched )
+  if ( !is_npc( victim ) && ( victim->switched )
        && ( get_trust( ch ) > LEVEL_AVATAR )
        && !IS_SET(victim->switched->act, ACT_POLYMORPHED)
        && !is_affected_by(victim->switched, AFF_POSSESS) )
@@ -89,13 +89,13 @@ void do_tell( CHAR_DATA *ch, char *argument )
       send_to_char( "That player is switched.\r\n", ch );
       return;
     }
-  else if ( !IS_NPC( victim ) && ( victim->switched )
+  else if ( !is_npc( victim ) && ( victim->switched )
             && (IS_SET(victim->switched->act, ACT_POLYMORPHED)
                 ||  is_affected_by(victim->switched, AFF_POSSESS) ) )
     {
       switched_victim = victim->switched;
     }
-  else if ( !IS_NPC( victim ) && ( !victim->desc ) )
+  else if ( !is_npc( victim ) && ( !victim->desc ) )
     {
       send_to_char( "That player is link-dead.\r\n", ch );
       return;
@@ -108,13 +108,13 @@ void do_tell( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( !IS_NPC (victim) && ( IS_SET (victim->act, PLR_SILENCE ) ) )
+  if ( !is_npc (victim) && ( IS_SET (victim->act, PLR_SILENCE ) ) )
     {
       send_to_char( "That player is silenced. They will receive your message but can not respond.\r\n", ch );
     }
 
   if ( (!IS_IMMORTAL(ch) && !IS_AWAKE(victim) )
-       || (!IS_NPC(victim)&&IS_SET(victim->in_room->room_flags, ROOM_SILENCE ) ) )
+       || (!is_npc(victim)&&IS_SET(victim->in_room->room_flags, ROOM_SILENCE ) ) )
     {
       act( AT_PLAIN, "$E can't hear you.", ch, 0, victim, TO_CHAR );
       return;
@@ -128,7 +128,7 @@ void do_tell( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( !IS_NPC (victim) && ( IS_SET (victim->act, PLR_AFK ) ) )
+  if ( !is_npc (victim) && ( IS_SET (victim->act, PLR_AFK ) ) )
     {
       send_to_char( "That player is afk so he may not respond.\r\n", ch );
     }
@@ -142,7 +142,7 @@ void do_tell( CHAR_DATA *ch, char *argument )
   victim->position = POS_STANDING;
 
   if ( knows_language( victim, ch->speaking, ch )
-       ||  (IS_NPC(ch) && !ch->speaking) )
+       ||  (is_npc(ch) && !ch->speaking) )
     {
       act( AT_TELL, "(&CIncoming Message&B) $n: '$t'",
 	   ch, argument, victim, TO_VICT );
@@ -159,9 +159,9 @@ void do_tell( CHAR_DATA *ch, char *argument )
   if ( IS_SET( ch->in_room->room_flags, ROOM_LOGSPEECH ) )
     {
       sprintf( buf, "%s: %s (tell to) %s.",
-               IS_NPC( ch ) ? ch->short_descr : ch->name,
+               is_npc( ch ) ? ch->short_descr : ch->name,
                argument,
-               IS_NPC( victim ) ? victim->short_descr : victim->name );
+               is_npc( victim ) ? victim->short_descr : victim->name );
       append_to_file( LOG_FILE, buf );
     }
 
@@ -175,7 +175,7 @@ void do_tell( CHAR_DATA *ch, char *argument )
             continue;
 
           if ( !knows_language(vch, ch->speaking, ch) &&
-               (!IS_NPC(ch) || ch->speaking != 0) )
+               (!is_npc(ch) || ch->speaking != 0) )
             sbuf = scramble(argument, ch->speaking);
 
           sbuf = drunk_speech( sbuf, ch );

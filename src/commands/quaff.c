@@ -30,7 +30,7 @@ void do_quaff( CHAR_DATA *ch, char *argument )
   /*
    * Fullness checking                                  -Thoric
    */
-  if ( !IS_NPC(ch)
+  if ( !is_npc(ch)
        && ( ch->pcdata->condition[COND_FULL] >= 48
             ||   ch->pcdata->condition[COND_THIRST] >= 48 ) )
     {

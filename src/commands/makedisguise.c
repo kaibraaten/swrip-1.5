@@ -74,7 +74,7 @@ void do_makedisguise( CHAR_DATA *ch, char *argument )
         }
 
       sprintf( sexrace, "%d", (sex*1000) + race );
-      the_chance = IS_NPC(ch) ? ch->top_level
+      the_chance = is_npc(ch) ? ch->top_level
         : (int) (ch->pcdata->learned[gsn_disguise]);
       if ( number_percent( ) < the_chance )
         {
@@ -112,7 +112,7 @@ void do_makedisguise( CHAR_DATA *ch, char *argument )
   race = atoi(arg1)%1000;
   sex = atoi(arg1)/1000;
 
-  level = IS_NPC(ch) ? ch->top_level : (int) (ch->pcdata->learned[gsn_disguise]);
+  level = is_npc(ch) ? ch->top_level : (int) (ch->pcdata->learned[gsn_disguise]);
   vnum = 10420;
 
   if ( ( pObjIndex = get_obj_index( vnum ) ) == NULL )
@@ -146,7 +146,7 @@ void do_makedisguise( CHAR_DATA *ch, char *argument )
         }
     }
 
-  the_chance = IS_NPC(ch) ? ch->top_level
+  the_chance = is_npc(ch) ? ch->top_level
     : (int) (ch->pcdata->learned[gsn_disguise]) ;
 
   if ( number_percent( ) > the_chance*2  || ( !checkneedle ) || ( !checkfabric ) )

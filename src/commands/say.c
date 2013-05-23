@@ -1,3 +1,4 @@
+#include "character.h"
 #include "mud.h"
 
 void do_say( CHAR_DATA *ch, char *argument )
@@ -18,7 +19,7 @@ void do_say( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( IS_NPC( ch ) )
+  if ( is_npc( ch ) )
     REMOVE_BIT( ch->act, ACT_SECRETIVE );
 
   for ( vch = ch->in_room->first_person; vch; vch = vch->next_in_room )
@@ -29,7 +30,7 @@ void do_say( CHAR_DATA *ch, char *argument )
         continue;
 
       if ( !knows_language(vch, ch->speaking, ch)
-	   && ( !IS_NPC(ch) || ch->speaking != 0 ) )
+	   && ( !is_npc(ch) || ch->speaking != 0 ) )
         sbuf = scramble(argument, ch->speaking);
 
       sbuf = drunk_speech( sbuf, ch );
@@ -44,7 +45,7 @@ void do_say( CHAR_DATA *ch, char *argument )
 
   if ( IS_SET( ch->in_room->room_flags, ROOM_LOGSPEECH ) )
     {
-      sprintf( buf, "%s: %s", IS_NPC( ch ) ? ch->short_descr : ch->name,
+      sprintf( buf, "%s: %s", is_npc( ch ) ? ch->short_descr : ch->name,
                argument );
       append_to_file( LOG_FILE, buf );
     }

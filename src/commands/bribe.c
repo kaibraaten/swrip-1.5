@@ -10,7 +10,7 @@ void do_bribe ( CHAR_DATA *ch , char *argument )
   int percent = 0;
   int amount = 0;
 
-  if ( IS_NPC(ch) || !ch->pcdata || !ch->pcdata->clan || !ch->in_room->area || !ch->in_room->area->planet )
+  if ( is_npc(ch) || !ch->pcdata || !ch->pcdata->clan || !ch->in_room->area || !ch->in_room->area->planet )
     {
       send_to_char( "What would be the point of that.\r\n", ch );
       return;
@@ -100,7 +100,7 @@ void do_bribe ( CHAR_DATA *ch , char *argument )
   act( AT_ACTION, "$n offers you a small bribe.\r\n", ch, NULL, victim, TO_VICT    );
   act( AT_ACTION, "$n gives $N some money.\r\n",  ch, NULL, victim, TO_NOTVICT );
 
-  if ( !IS_NPC( victim ) )
+  if ( !is_npc( victim ) )
     return;
 
   WAIT_STATE( ch, skill_table[gsn_bribe]->beats );

@@ -6,7 +6,7 @@ void do_practice( CHAR_DATA *ch, char *argument )
   char buf[MAX_STRING_LENGTH];
   int sn;
 
-  if ( IS_NPC(ch) )
+  if ( is_npc(ch) )
     return;
 
   if ( argument[0] == '\0' )
@@ -88,7 +88,7 @@ void do_practice( CHAR_DATA *ch, char *argument )
         }
 
       for ( mob = ch->in_room->first_person; mob; mob = mob->next_in_room )
-        if ( IS_NPC(mob) && IS_SET(mob->act, ACT_PRACTICE) )
+        if ( is_npc(mob) && IS_SET(mob->act, ACT_PRACTICE) )
           break;
 
       if ( !mob )
@@ -114,7 +114,7 @@ void do_practice( CHAR_DATA *ch, char *argument )
           return;
         }
 
-      if ( can_prac &&  !IS_NPC(ch)
+      if ( can_prac &&  !is_npc(ch)
            && get_level( ch, skill_table[sn]->guild ) < skill_table[sn]->min_level )
         {
           act( AT_TELL, "$n tells you 'You're not ready to learn that yet...'",

@@ -1,10 +1,11 @@
+#include "character.h"
 #include "mud.h"
 
 void do_showplanet( CHAR_DATA *ch, char *argument )
 {
   PLANET_DATA *planet;
 
-  if ( IS_NPC( ch ) )
+  if ( is_npc( ch ) )
     {
       send_to_char( "Huh?\r\n", ch );
       return;
