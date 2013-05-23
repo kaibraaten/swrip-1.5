@@ -1338,14 +1338,14 @@ void mprog_driver ( char *com_list, CHAR_DATA *mob, CHAR_DATA *actor,
   command_list = tmpcmndlst;
   if ( single_step )
     {
-      if ( mob->mpscriptpos > (int)strlen( tmpcmndlst ) )
-        mob->mpscriptpos = 0;
+      if ( mob->mprog.mpscriptpos > (int)strlen( tmpcmndlst ) )
+        mob->mprog.mpscriptpos = 0;
       else
-        command_list += mob->mpscriptpos;
+        command_list += mob->mprog.mpscriptpos;
       if ( *command_list == '\0' )
         {
           command_list = tmpcmndlst;
-          mob->mpscriptpos = 0;
+          mob->mprog.mpscriptpos = 0;
         }
     }
 
@@ -1382,7 +1382,7 @@ void mprog_driver ( char *com_list, CHAR_DATA *mob, CHAR_DATA *actor,
       /* Script prog support  -Thoric */
       if ( single_step )
         {
-          mob->mpscriptpos = command_list - tmpcmndlst;
+          mob->mprog.mpscriptpos = command_list - tmpcmndlst;
           --prog_nest;
           return;
         }
@@ -1904,17 +1904,17 @@ void mprog_act_trigger( char *buf, CHAR_DATA *mob, CHAR_DATA *ch,
         return;
 
       CREATE( tmp_act, MPROG_ACT_LIST, 1 );
-      if ( mob->mpactnum > 0 )
-        tmp_act->next = mob->mpact;
+      if ( mob->mprog.mpactnum > 0 )
+        tmp_act->next = mob->mprog.mpact;
       else
         tmp_act->next = NULL;
 
-      mob->mpact      = tmp_act;
-      mob->mpact->buf = str_dup( buf );
-      mob->mpact->ch  = ch;
-      mob->mpact->obj = obj;
-      mob->mpact->vo  = vo;
-      mob->mpactnum++;
+      mob->mprog.mpact      = tmp_act;
+      mob->mprog.mpact->buf = str_dup( buf );
+      mob->mprog.mpact->ch  = ch;
+      mob->mprog.mpact->obj = obj;
+      mob->mprog.mpact->vo  = vo;
+      mob->mprog.mpactnum++;
       mob_act_add( mob );
     }
   return;
@@ -2120,7 +2120,7 @@ void mprog_script_trigger( CHAR_DATA *mob )
       if ( ( mprg->type & SCRIPT_PROG ) )
         {
           if ( mprg->arglist[0] == '\0'
-               ||   mob->mpscriptpos != 0
+               ||   mob->mprog.mpscriptpos != 0
                ||   atoi( mprg->arglist ) == time_info.hour )
             mprog_driver( mprg->comlist, mob, NULL, NULL, NULL, TRUE );
         }
@@ -2141,7 +2141,7 @@ void oprog_script_trigger( OBJ_DATA *obj )
             {
               set_supermob( obj );
               mprog_driver( mprg->comlist, supermob, NULL, NULL, NULL, TRUE );
-              obj->mpscriptpos = supermob->mpscriptpos;
+              obj->mpscriptpos = supermob->mprog.mpscriptpos;
               release_supermob();
             }
         }
@@ -2162,7 +2162,7 @@ void rprog_script_trigger( ROOM_INDEX_DATA *room )
             {
               rset_supermob( room );
               mprog_driver( mprg->comlist, supermob, NULL, NULL, NULL, TRUE );
-              room->mpscriptpos = supermob->mpscriptpos;
+              room->mpscriptpos = supermob->mprog.mpscriptpos;
               release_supermob();
             }
         }
@@ -2204,7 +2204,7 @@ void set_supermob( OBJ_DATA *obj)
     STRFREE(supermob->short_descr);
 
   supermob->short_descr = QUICKLINK(obj->short_descr);
-  supermob->mpscriptpos = obj->mpscriptpos;
+  supermob->mprog.mpscriptpos = obj->mpscriptpos;
 
   /* Added by Jenny to allow bug messages to show the vnum
      of the object, and not just supermob's vnum */
@@ -2614,7 +2614,7 @@ void rset_supermob( ROOM_INDEX_DATA *room)
       STRFREE(supermob->name);
       supermob->name        = QUICKLINK(room->name);
 
-      supermob->mpscriptpos = room->mpscriptpos;
+      supermob->mprog.mpscriptpos = room->mpscriptpos;
 
       /* Added by Jenny to allow bug messages to show the vnum
          of the room, and not just supermob's vnum */
@@ -2680,13 +2680,11 @@ void rprog_act_trigger( char *buf, ROOM_INDEX_DATA *room, CHAR_DATA *ch,
       room->mpactnum++;
       room_act_add(room);
     }
-  return;
 }
+
 /*
  *
  */
-
-
 void rprog_leave_trigger( CHAR_DATA *ch )
 {
   if( ch->in_room->progtypes & LEAVE_PROG )

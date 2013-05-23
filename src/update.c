@@ -1984,24 +1984,24 @@ void aggr_update( void )
    *  GRUNT!  To do
    *
    */
-  if ( is_npc( wch ) && wch->mpactnum > 0
+  if ( is_npc( wch ) && wch->mprog.mpactnum > 0
        && wch->in_room->area->nplayer > 0 )
     {
       MPROG_ACT_LIST * tmp_act, *tmp2_act;
-      for ( tmp_act = wch->mpact; tmp_act;
+      for ( tmp_act = wch->mprog.mpact; tmp_act;
             tmp_act = tmp_act->next )
         {
           oprog_wordlist_check( tmp_act->buf,wch, tmp_act->ch,
                                 tmp_act->obj, tmp_act->vo, ACT_PROG );
           DISPOSE( tmp_act->buf );
         }
-      for ( tmp_act = wch->mpact; tmp_act; tmp_act = tmp2_act )
+      for ( tmp_act = wch->mprog.mpact; tmp_act; tmp_act = tmp2_act )
         {
           tmp2_act = tmp_act->next;
           DISPOSE( tmp_act );
         }
-      wch->mpactnum = 0;
-      wch->mpact    = NULL;
+      wch->mprog.mpactnum = 0;
+      wch->mprog.mpact    = NULL;
     }
 #endif
 
@@ -2009,23 +2009,23 @@ void aggr_update( void )
   while ( (apdtmp = mob_act_list) != NULL )
     {
       wch = (CHAR_DATA*)mob_act_list->vo;
-      if ( !char_died(wch) && wch->mpactnum > 0 )
+      if ( !char_died(wch) && wch->mprog.mpactnum > 0 )
         {
           MPROG_ACT_LIST * tmp_act;
 
-          while ( (tmp_act = wch->mpact) != NULL )
+          while ( (tmp_act = wch->mprog.mpact) != NULL )
             {
               if ( tmp_act->obj && obj_extracted(tmp_act->obj) )
                 tmp_act->obj = NULL;
               if ( tmp_act->ch && !char_died(tmp_act->ch) )
                 mprog_wordlist_check( tmp_act->buf, wch, tmp_act->ch,
                                       tmp_act->obj, tmp_act->vo, ACT_PROG );
-              wch->mpact = tmp_act->next;
+              wch->mprog.mpact = tmp_act->next;
               DISPOSE(tmp_act->buf);
               DISPOSE(tmp_act);
             }
-          wch->mpactnum = 0;
-          wch->mpact    = NULL;
+          wch->mprog.mpactnum = 0;
+          wch->mprog.mpact    = NULL;
         }
       mob_act_list = apdtmp->next;
       DISPOSE( apdtmp );

@@ -2225,7 +2225,7 @@ CHAR_DATA *create_mobile( MOB_INDEX_DATA *pMobIndex )
   mob->description              = QUICKLINK( pMobIndex->description );
   mob->spec_fun         = pMobIndex->spec_fun;
   mob->spec_2           = pMobIndex->spec_2;
-  mob->mpscriptpos              = 0;
+  mob->mprog.mpscriptpos              = 0;
   mob->top_level                = number_fuzzy( pMobIndex->level );
   {
     int ability;
@@ -2639,7 +2639,7 @@ void free_char( CHAR_DATA *ch )
       DISPOSE( ch->pcdata );
     }
 
-  for ( mpact = ch->mpact; mpact; mpact = mpact_next )
+  for ( mpact = ch->mprog.mpact; mpact; mpact = mpact_next )
     {
       mpact_next = mpact->next;
       DISPOSE( mpact->buf );

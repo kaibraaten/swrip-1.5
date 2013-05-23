@@ -19,16 +19,21 @@ struct char_data
 
   struct
   {
-    HHF_DATA *            hunting;
-    HHF_DATA *            fearing;
-    HHF_DATA *            hating;
+    HHF_DATA *hunting;
+    HHF_DATA *fearing;
+    HHF_DATA *hating;
   } hhf;
 
   SPEC_FUN *            spec_fun;
   SPEC_FUN *            spec_2;
-  MPROG_ACT_LIST *      mpact;
-  int                   mpactnum;
-  short         mpscriptpos;
+
+  struct
+  {
+    MPROG_ACT_LIST *mpact;
+    int mpactnum;
+    short mpscriptpos;
+  } mprog;
+
   MOB_INDEX_DATA *      pIndexData;
   DESCRIPTOR_DATA *     desc;
   AFFECT_DATA * first_affect;
