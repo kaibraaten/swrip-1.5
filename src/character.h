@@ -190,4 +190,12 @@ int get_hitroll( const CHAR_DATA *ch );
 
 int get_damroll( const CHAR_DATA *ch );
 
+bool is_drunk( const CHAR_DATA *ch );
+
+bool is_retired_immortal( const CHAR_DATA *ch );
+
+bool is_not_authed( const CHAR_DATA *ch );
+
+bool is_waiting_for_auth( const CHAR_DATA *ch );
+
 #endif

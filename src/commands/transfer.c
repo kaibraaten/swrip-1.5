@@ -65,7 +65,7 @@ void do_transfer( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if (NOT_AUTHED(victim))
+  if (is_not_authed(victim))
     {
       send_to_char( "They are not authorized yet!\r\n", ch);
       return;

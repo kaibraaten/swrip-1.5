@@ -9,7 +9,7 @@ void do_name( CHAR_DATA *ch, char *argument )
   CHAR_DATA *tmp;
   char buf[MAX_STRING_LENGTH];
 
-  if ( !NOT_AUTHED(ch) || ch->pcdata->auth_state != 2)
+  if ( !is_not_authed(ch) || ch->pcdata->auth_state != 2)
     {
       send_to_char("Huh?\r\n", ch);
       return;

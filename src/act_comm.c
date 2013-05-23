@@ -394,7 +394,7 @@ void talk_channel( CHAR_DATA *ch, const char *argument, int channel, const char 
             continue;
           if ( channel == CHANNEL_105 && och->top_level < 105 )
             continue;
-          if ( channel == CHANNEL_WARTALK && NOT_AUTHED( och ) )
+          if ( channel == CHANNEL_WARTALK && is_not_authed( och ) )
             continue;
           if ( channel == CHANNEL_AVTALK && !is_hero(och) )
             continue;
@@ -638,7 +638,7 @@ void talk_auction (const char *argument)
     {
       original = d->original ? d->original : d->character; /* if switched */
       if ((d->connected == CON_PLAYING) && !IS_SET(original->deaf,CHANNEL_AUCTION)
-          && !IS_SET(original->in_room->room_flags, ROOM_SILENCE) && !NOT_AUTHED(original))
+          && !IS_SET(original->in_room->room_flags, ROOM_SILENCE) && !is_not_authed(original))
         act( AT_GOSSIP, buf, original, NULL, NULL, TO_CHAR );
     }
 }

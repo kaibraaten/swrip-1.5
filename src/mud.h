@@ -1567,10 +1567,6 @@ extern  short                   gsn_yevethan;
                                                                   (ch)->in_room->room_flags, \
                                                                   ROOM_SPACECRAFT) )
 
-#define IS_DRUNK(ch, drunk)     (number_percent() <                     \
-                                 ( (ch)->pcdata->condition[COND_DRUNK]  \
-                                   * 2 / (drunk) ) )
-
 #define IS_CLANNED(ch)          (!is_npc((ch))                          \
                                  && (ch)->pcdata->clan                      )
 
@@ -1601,9 +1597,6 @@ extern  short                   gsn_yevethan;
 #define SET_SCLA(skill, val)    ( (skill)->flags =  ((skill)->flags & SCLA_MASK) + (((val) & 7) << 6) )
 #define SET_SPOW(skill, val)    ( (skill)->flags =  ((skill)->flags & SPOW_MASK) + (((val) & 3) << 9) )
 
-/* Retired and guest imms. */
-#define IS_RETIRED(ch) (ch->pcdata && IS_SET(ch->pcdata->flags,PCFLAG_RETIRED))
-
 /* RIS by gsn lookups. -- Altrag.
    Will need to add some || stuff for spells that need a special GSN. */
 
@@ -1623,14 +1616,6 @@ extern  short                   gsn_yevethan;
 
 #define IS_POISON(dt)           ( IS_VALID_SN(dt) &&                    \
                                   SPELL_DAMAGE(skill_table[(dt)]) == SD_POISON )
-
-
-#define NOT_AUTHED(ch)          (!is_npc(ch) && ch->pcdata->auth_state <= 3 \
-                                 && IS_SET(ch->pcdata->flags, PCFLAG_UNAUTHED) )
-
-#define IS_WAITING_FOR_AUTH(ch) (!is_npc(ch) && ch->desc                \
-                                 && ch->pcdata->auth_state == 1         \
-                                 && IS_SET(ch->pcdata->flags, PCFLAG_UNAUTHED) )
 
 /*
  * Object macros.

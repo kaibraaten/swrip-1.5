@@ -3,7 +3,7 @@
 
 void do_wartalk( CHAR_DATA *ch, char *argument )
 {
-  if (NOT_AUTHED(ch))
+  if (is_not_authed(ch))
     {
       send_to_char("Huh?\r\n", ch);
       return;

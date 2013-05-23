@@ -360,7 +360,7 @@ void gain_exp( CHAR_DATA *ch, short ability, long gain )
 
   set_exp( ch, ability, UMAX( 0, get_exp( ch, ability ) + gain ) );
 
-  if (NOT_AUTHED(ch) && get_exp( ch, ability ) >= exp_level(get_level(ch, ability ) + 1))
+  if (is_not_authed(ch) && get_exp( ch, ability ) >= exp_level(get_level(ch, ability ) + 1))
     {
       send_to_char("You can not ascend to a higher level until you are authorized.\r\n", ch);
       set_exp( ch, ability, exp_level( get_level(ch, ability) + 1 ) - 1);
@@ -626,7 +626,7 @@ void gain_condition( CHAR_DATA *ch, int iCond, int value )
   int condition;
   ch_ret retcode;
 
-  if ( value == 0 || is_npc(ch) || get_trust(ch) >= LEVEL_IMMORTAL || is_droid(ch) || NOT_AUTHED(ch))
+  if ( value == 0 || is_npc(ch) || get_trust(ch) >= LEVEL_IMMORTAL || is_droid(ch) || is_not_authed(ch))
     return;
 
   condition                         = ch->pcdata->condition[iCond];
@@ -1315,7 +1315,7 @@ void char_update( void )
        * See if player should be auto-saved.
        */
       if ( !is_npc(ch)
-           &&    !NOT_AUTHED(ch)
+           &&    !is_not_authed(ch)
            &&    current_time - ch->pcdata->save_time > (sysdata.save_frequency*60) )
         ch_save = ch;
       else

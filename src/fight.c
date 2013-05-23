@@ -1456,7 +1456,7 @@ ch_ret damage( CHAR_DATA *ch, CHAR_DATA *victim, int dam, int dt )
 
   /* Make sure newbies dont die */
 
-  if (!is_npc(victim) && NOT_AUTHED(victim) && victim->hit < 1)
+  if (!is_npc(victim) && is_not_authed(victim) && victim->hit < 1)
     victim->hit = 1;
 
   if ( dam > 0 && dt > TYPE_HIT

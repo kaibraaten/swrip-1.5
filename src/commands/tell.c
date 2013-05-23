@@ -41,7 +41,7 @@ void do_tell( CHAR_DATA *ch, char *argument )
 
   if ( ( victim = get_char_world( ch, arg ) ) == NULL
        || ( is_npc(victim) && victim->in_room != ch->in_room )
-       || (!NOT_AUTHED(ch) && NOT_AUTHED(victim) && !is_immortal(ch) ) )
+       || (!is_not_authed(ch) && is_not_authed(victim) && !is_immortal(ch) ) )
     {
       send_to_char( "They can't hear you.\r\n", ch );
       return;
@@ -75,7 +75,7 @@ void do_tell( CHAR_DATA *ch, char *argument )
         }
     }
 
-  if (NOT_AUTHED(ch) && !NOT_AUTHED(victim) && !is_immortal(victim) )
+  if (is_not_authed(ch) && !is_not_authed(victim) && !is_immortal(victim) )
     {
       send_to_char( "They can't hear you because you are not authorized.\r\n", ch);
       return;

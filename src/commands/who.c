@@ -273,7 +273,7 @@ void do_who( CHAR_DATA *ch, char *argument )
       else
         strcpy(extra_title, "");
 
-      if ( IS_RETIRED( wch ) )
+      if ( is_retired_immortal( wch ) )
         race = "Retired";
       else if ( wch->pcdata->rank && wch->pcdata->rank[0] != '\0' )
         race = wch->pcdata->rank;

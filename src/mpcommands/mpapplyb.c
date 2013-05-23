@@ -29,7 +29,7 @@ void do_mpapplyb( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if( !NOT_AUTHED(victim) )
+  if( !is_not_authed(victim) )
     return;
 
   if ( get_timer(victim, TIMER_APPLIED) >= 1)

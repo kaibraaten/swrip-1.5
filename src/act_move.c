@@ -402,7 +402,7 @@ ch_ret move_char( CHAR_DATA *ch, EXIT_DATA *pexit, int fall )
   int hpmove;
 
   if ( !is_npc( ch ) )
-    if ( IS_DRUNK( ch, 2 ) && ( ch->position != POS_SHOVE )
+    if ( is_drunk( ch ) && ( ch->position != POS_SHOVE )
          && ( ch->position != POS_DRAG ) )
       drunk = TRUE;
 

@@ -38,7 +38,7 @@ void do_retire( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( IS_RETIRED( victim ) )
+  if ( is_retired_immortal( victim ) )
     {
       REMOVE_BIT( victim->pcdata->flags, PCFLAG_RETIRED );
       ch_printf( ch, "%s returns from retirement.\r\n", victim->name );

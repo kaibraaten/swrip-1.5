@@ -81,7 +81,7 @@ short get_trust( const CHAR_DATA *ch )
   if ( is_npc(ch) && ch->top_level >= LEVEL_AVATAR )
     return LEVEL_AVATAR;
 
-  if ( ch->top_level >= LEVEL_NEOPHYTE && IS_RETIRED( ch ) )
+  if ( ch->top_level >= LEVEL_NEOPHYTE && is_retired_immortal( ch ) )
     return LEVEL_NEOPHYTE;
 
   return ch->top_level;
@@ -979,3 +979,27 @@ int get_damroll( const CHAR_DATA *ch )
   return base_damroll + strength_modifier + mental_state_modifier;
 }
 
+bool is_drunk( const CHAR_DATA *ch )
+{
+  return number_percent() < ch->pcdata->condition[COND_DRUNK];
+}
+
+bool is_retired_immortal( const CHAR_DATA *ch )
+{
+  return !is_npc( ch ) && IS_SET( ch->pcdata->flags, PCFLAG_RETIRED );
+}
+
+bool is_not_authed( const CHAR_DATA *ch )
+{
+  return !is_npc( ch )
+    && ch->pcdata->auth_state <= 3
+    && IS_SET( ch->pcdata->flags, PCFLAG_UNAUTHED);
+}
+
+bool is_waiting_for_auth( const CHAR_DATA *ch )
+{
+  return !is_npc( ch )
+    && ch->desc
+    && ch->pcdata->auth_state == 1
+    && IS_SET(ch->pcdata->flags, PCFLAG_UNAUTHED);
+}

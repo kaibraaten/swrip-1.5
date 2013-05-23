@@ -865,7 +865,7 @@ ch_ret drive_ship( CHAR_DATA *ch, SHIP_DATA *ship, EXIT_DATA *pexit, int fall )
   CHAR_DATA * next_rch;
 
   if ( !is_npc( ch ) )
-    if ( IS_DRUNK( ch, 2 ) && ( ch->position != POS_SHOVE )
+    if ( is_drunk( ch ) && ( ch->position != POS_SHOVE )
          && ( ch->position != POS_DRAG ) )
       drunk = TRUE;
 

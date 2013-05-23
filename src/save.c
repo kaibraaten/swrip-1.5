@@ -174,7 +174,7 @@ void save_char_obj( CHAR_DATA *ch )
       return;
     }
 
-  if ( is_npc(ch) || NOT_AUTHED(ch) )
+  if ( is_npc(ch) || is_not_authed(ch) )
     return;
 
   saving_char = ch;
@@ -274,7 +274,7 @@ void save_clone( CHAR_DATA *ch )
       return;
     }
 
-  if ( is_npc(ch) || NOT_AUTHED(ch) )
+  if ( is_npc(ch) || is_not_authed(ch) )
     return;
 
   if ( ch->desc && ch->desc->original )
