@@ -709,8 +709,9 @@ bool can_learn_lang( const CHAR_DATA *ch, int language )
           {
             int sn;
 
-            if ( !(VALID_LANGUAGES & lang_array[lang]) )
+            if ( !is_valid_language( lang_array[lang] ) )
               return FALSE;
+
             if ( ( sn = skill_lookup( lang_names[lang] ) ) < 0 )
               {
                 bug( "Can_learn_lang: valid language without sn: %d", lang );
@@ -720,8 +721,10 @@ bool can_learn_lang( const CHAR_DATA *ch, int language )
               return FALSE;
           }
     }
-  if ( VALID_LANGUAGES & language )
+
+  if( is_valid_language( language ) )
     return TRUE;
+
   return FALSE;
 }
 

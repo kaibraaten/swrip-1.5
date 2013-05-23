@@ -48,10 +48,6 @@ extern "C" {
 #endif
 
 #include "types.h"
-
-#define ALLOWED(char, room) (char->top_level == MAX_LEVEL?1:          \
-                             room->vnum == IMP_ROOM1?0:         \
-                             room->vnum == IMP_ROOM2?0:1)
 #include "alias.h"
 #include "constants.h"
 
@@ -196,14 +192,6 @@ struct  frc_app_type
 {
   short force;
 };
-
-#define VALID_LANGUAGES    ( LANG_COMMON | LANG_WOOKIEE | LANG_TWI_LEK | LANG_RODIAN \
-                         | LANG_HUTT | LANG_MON_CALAMARI | LANG_NOGHRI | LANG_GAMORREAN \
-                         | LANG_JAWA | LANG_ADARIAN | LANG_EWOK | LANG_VERPINE | LANG_DEFEL \
-                         | LANG_TRANDOSHAN | LANG_CHADRA_FAN | LANG_QUARREN | LANG_SULLUSTAN \
-                         | LANG_BARABEL | LANG_FIRRERREO | LANG_BOTHAN | LANG_TOGORIAN \
-                         | LANG_KUBAZ | LANG_YEVETHAN | LANG_GAND | LANG_DUROS | LANG_COYNITE \
-                         | LANG_GOTAL | LANG_DEVARONIAN | LANG_FALLEEN | LANG_ITHORIAN | LANG_BINARY )
 
 /*
  * Help table types.
@@ -1623,21 +1611,6 @@ extern  short                   gsn_yevethan;
 #define CAN_WEAR(obj, part)     (IS_SET((obj)->wear_flags,  (part)))
 #define IS_OBJ_STAT(obj, stat)  (IS_SET((obj)->extra_flags, (stat)))
 
-
-
-/*
- * Description macros.
- */
-
-#define DISGUISE(ch)            ((!nifty_is_name(ch->name, ch->pcdata->title)) ? \
-                                 1 : 0)
-
-
-#define PERS(ch, looker)        ( can_see( (looker), (ch) ) ?           \
-                                  ( is_npc(ch) ? (ch)->short_descr      \
-                                    : ((get_trust(looker) <= LEVEL_IMMORTAL) ? (DISGUISE(ch) ? ch->pcdata->title : (ch)->name ) : (ch)->name)) : ( is_immortal(ch) ? "A Great One" : "someone" ))
-
-
 #define log_string( txt )       ( log_string_plus( (txt), LOG_NORMAL, LEVEL_LOG ) )
 
 /*
@@ -2781,6 +2754,7 @@ extern "C" {
   OBJ_DATA *create_money( int amount );
 
   /* misc.c */
+  bool is_valid_language( int language );
   void pullorpush( CHAR_DATA *ch, OBJ_DATA *obj, bool pull );
   void actiondesc( CHAR_DATA *ch, OBJ_DATA *obj, void *vo );
   void jedi_checks( CHAR_DATA *ch );

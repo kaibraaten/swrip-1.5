@@ -198,4 +198,6 @@ bool is_not_authed( const CHAR_DATA *ch );
 
 bool is_waiting_for_auth( const CHAR_DATA *ch );
 
+char *PERS( const CHAR_DATA *ch, const CHAR_DATA *looker );
+
 #endif

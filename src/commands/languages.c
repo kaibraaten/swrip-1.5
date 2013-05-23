@@ -33,7 +33,8 @@ void do_languages( CHAR_DATA *ch, char *argument )
           send_to_char( "That is not a language.\r\n", ch );
           return;
         }
-      if ( !(VALID_LANGUAGES & lang_array[lang]) )
+
+      if ( !is_valid_language( lang_array[lang] ) )
         {
           send_to_char( "You may not learn that language.\r\n", ch );
           return;
@@ -91,8 +92,9 @@ void do_languages( CHAR_DATA *ch, char *argument )
     }
   for ( lang = 0; lang_array[lang] != LANG_UNKNOWN; lang++ )
     {
-      if ( !(VALID_LANGUAGES & lang_array[lang]) )
+      if ( !is_valid_language( lang_array[lang] ) )
         continue;
+
       if ( ch->speaking & lang_array[lang] ||
            (is_npc(ch) && !ch->speaking) )
         set_char_color( AT_RED, ch );
