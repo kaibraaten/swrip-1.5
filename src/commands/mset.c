@@ -200,9 +200,9 @@ void do_mset( CHAR_DATA *ch, char *argument )
           ch_printf( ch, "Strength range is %d to %d.\r\n", minattr, maxattr );
           return;
         }
-      victim->perm_str = value;
+      victim->stats.perm_str = value;
       if ( is_npc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
-        victim->pIndexData->perm_str = value;
+        victim->pIndexData->stats.perm_str = value;
       return;
     }
 
@@ -215,9 +215,9 @@ void do_mset( CHAR_DATA *ch, char *argument )
           ch_printf( ch, "Intelligence range is %d to %d.\r\n", minattr, maxattr );
           return;
         }
-      victim->perm_int = value;
+      victim->stats.perm_int = value;
       if ( is_npc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
-        victim->pIndexData->perm_int = value;
+        victim->pIndexData->stats.perm_int = value;
       return;
     }
 
@@ -230,9 +230,9 @@ void do_mset( CHAR_DATA *ch, char *argument )
           ch_printf( ch, "Wisdom range is %d to %d.\r\n", minattr, maxattr );
           return;
         }
-      victim->perm_wis = value;
+      victim->stats.perm_wis = value;
       if ( is_npc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
-        victim->pIndexData->perm_wis = value;
+        victim->pIndexData->stats.perm_wis = value;
       return;
     }
 
@@ -245,9 +245,9 @@ void do_mset( CHAR_DATA *ch, char *argument )
           ch_printf( ch, "Dexterity range is %d to %d.\r\n", minattr, maxattr );
           return;
         }
-      victim->perm_dex = value;
+      victim->stats.perm_dex = value;
       if ( is_npc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
-        victim->pIndexData->perm_dex = value;
+        victim->pIndexData->stats.perm_dex = value;
       return;
     }
 
@@ -260,9 +260,9 @@ void do_mset( CHAR_DATA *ch, char *argument )
           ch_printf( ch, "Constitution range is %d to %d.\r\n", minattr, maxattr );
           return;
         }
-      victim->perm_con = value;
+      victim->stats.perm_con = value;
       if ( is_npc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
-        victim->pIndexData->perm_con = value;
+        victim->pIndexData->stats.perm_con = value;
       return;
     }
 
@@ -275,9 +275,9 @@ void do_mset( CHAR_DATA *ch, char *argument )
           ch_printf( ch, "Charisma range is %d to %d.\r\n", minattr, maxattr );
           return;
         }
-      victim->perm_cha = value;
+      victim->stats.perm_cha = value;
       if ( is_npc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
-        victim->pIndexData->perm_cha = value;
+        victim->pIndexData->stats.perm_cha = value;
       return;
     }
 
@@ -290,9 +290,9 @@ void do_mset( CHAR_DATA *ch, char *argument )
           ch_printf( ch, "Luck range is %d to %d.\r\n", minattr, maxattr );
           return;
         }
-      victim->perm_lck = value;
+      victim->stats.perm_lck = value;
       if ( is_npc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
-        victim->pIndexData->perm_lck = value;
+        victim->pIndexData->stats.perm_lck = value;
       return;
     }
 
@@ -305,9 +305,9 @@ void do_mset( CHAR_DATA *ch, char *argument )
           ch_printf( ch, "Frc range is %d to %d.\r\n", minattr, maxattr );
           return;
         }
-      victim->perm_frc = value;
+      victim->stats.perm_frc = value;
       if ( is_npc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
-        victim->pIndexData->perm_frc = value;
+        victim->pIndexData->stats.perm_frc = value;
       return;
     }
 
@@ -320,9 +320,9 @@ void do_mset( CHAR_DATA *ch, char *argument )
           send_to_char( "Saving throw range vs poison is -30 to 30.\r\n", ch );
           return;
         }
-      victim->saving_poison_death = value;
+      victim->saving.poison_death = value;
       if ( is_npc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
-        victim->pIndexData->saving_poison_death = value;
+        victim->pIndexData->saving.poison_death = value;
       return;
     }
 
@@ -335,9 +335,9 @@ void do_mset( CHAR_DATA *ch, char *argument )
           send_to_char( "Saving throw range vs wands is -30 to 30.\r\n", ch );
           return;
         }
-      victim->saving_wand = value;
+      victim->saving.wand = value;
       if ( is_npc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
-        victim->pIndexData->saving_wand = value;
+        victim->pIndexData->saving.wand = value;
       return;
     }
 
@@ -350,9 +350,9 @@ void do_mset( CHAR_DATA *ch, char *argument )
           send_to_char( "Saving throw range vs para is -30 to 30.\r\n", ch );
           return;
         }
-      victim->saving_para_petri = value;
+      victim->saving.para_petri = value;
       if ( is_npc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
-        victim->pIndexData->saving_para_petri = value;
+        victim->pIndexData->saving.para_petri = value;
       return;
     }
 
@@ -365,9 +365,9 @@ void do_mset( CHAR_DATA *ch, char *argument )
           send_to_char( "Saving throw range vs bad breath is -30 to 30.\r\n", ch );
           return;
         }
-      victim->saving_breath = value;
+      victim->saving.breath = value;
       if ( is_npc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
-        victim->pIndexData->saving_breath = value;
+        victim->pIndexData->saving.breath = value;
       return;
     }
 
@@ -380,9 +380,9 @@ void do_mset( CHAR_DATA *ch, char *argument )
           send_to_char( "Saving throw range vs force powers is -30 to 30.\r\n", ch );
           return;
         }
-      victim->saving_spell_staff = value;
+      victim->saving.spell_staff = value;
       if ( is_npc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
-        victim->pIndexData->saving_spell_staff = value;
+        victim->pIndexData->saving.spell_staff = value;
       return;
     }
 

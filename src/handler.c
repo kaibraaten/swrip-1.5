@@ -250,13 +250,13 @@ void affect_modify( CHAR_DATA *ch, AFFECT_DATA *paf, bool fAdd )
       return;
 
     case APPLY_NONE:                                            break;
-    case APPLY_STR:           ch->mod_str               += mod; break;
-    case APPLY_DEX:           ch->mod_dex               += mod; break;
-    case APPLY_INT:           ch->mod_int               += mod; break;
-    case APPLY_WIS:           ch->mod_wis               += mod; break;
-    case APPLY_CON:           ch->mod_con               += mod; break;
-    case APPLY_CHA:           ch->mod_cha               += mod; break;
-    case APPLY_LCK:           ch->mod_lck               += mod; break;
+    case APPLY_STR:           ch->stats.mod_str               += mod; break;
+    case APPLY_DEX:           ch->stats.mod_dex               += mod; break;
+    case APPLY_INT:           ch->stats.mod_int               += mod; break;
+    case APPLY_WIS:           ch->stats.mod_wis               += mod; break;
+    case APPLY_CON:           ch->stats.mod_con               += mod; break;
+    case APPLY_CHA:           ch->stats.mod_cha               += mod; break;
+    case APPLY_LCK:           ch->stats.mod_lck               += mod; break;
     case APPLY_SEX:
       ch->sex = (ch->sex+mod) % 3;
       if ( ch->sex < 0 )
@@ -275,11 +275,11 @@ void affect_modify( CHAR_DATA *ch, AFFECT_DATA *paf, bool fAdd )
     case APPLY_AC:            ch->armor                 += mod; break;
     case APPLY_HITROLL:       ch->hitroll               += mod; break;
     case APPLY_DAMROLL:       ch->damroll               += mod; break;
-    case APPLY_SAVING_POISON: ch->saving_poison_death   += mod; break;
-    case APPLY_SAVING_ROD:    ch->saving_wand           += mod; break;
-    case APPLY_SAVING_PARA:   ch->saving_para_petri     += mod; break;
-    case APPLY_SAVING_BREATH: ch->saving_breath         += mod; break;
-    case APPLY_SAVING_SPELL:  ch->saving_spell_staff    += mod; break;
+    case APPLY_SAVING_POISON: ch->saving.poison_death   += mod; break;
+    case APPLY_SAVING_ROD:    ch->saving.wand           += mod; break;
+    case APPLY_SAVING_PARA:   ch->saving.para_petri     += mod; break;
+    case APPLY_SAVING_BREATH: ch->saving.breath         += mod; break;
+    case APPLY_SAVING_SPELL:  ch->saving.spell_staff    += mod; break;
     case APPLY_AFFECT:        SET_BIT( ch->affected_by, mod );  break;
     case APPLY_RESISTANT:     SET_BIT( ch->resistant, mod );    break;
     case APPLY_IMMUNE:        SET_BIT( ch->immune, mod );       break;

@@ -128,11 +128,11 @@ void do_mstat( CHAR_DATA *ch, char *argument )
   ch_printf( ch, "MentalState: %d   EmotionalState: %d\r\n",
              victim->mental_state, victim->emotional_state );
   ch_printf( ch, "Saving throws: %d %d %d %d %d.\r\n",
-             victim->saving_poison_death,
-             victim->saving_wand,
-             victim->saving_para_petri,
-             victim->saving_breath,
-             victim->saving_spell_staff  );
+             victim->saving.poison_death,
+             victim->saving.wand,
+             victim->saving.para_petri,
+             victim->saving.breath,
+             victim->saving.spell_staff  );
   ch_printf( ch, "Carry figures: items (%d/%d)  weight (%d/%d)   Numattacks: %d\r\n",
              victim->carry_number, can_carry_n(victim), victim->carry_weight, can_carry_w(victim), victim->numattacks );
 

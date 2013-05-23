@@ -52,7 +52,7 @@ void do_clone( CHAR_DATA *ch, char *argument )
   char_to_room( ch, get_room_index( 10000 ) );
 
   /* random force change on cloning */
-  frc = ch->perm_frc;
+  frc = ch->stats.perm_frc;
   mana = ch->mana;
 
   /* if character has force, there is a chance of losing force
@@ -64,13 +64,13 @@ void do_clone( CHAR_DATA *ch, char *argument )
     low_frc = 1;
 
 
-  if(ch->perm_frc > 0)
+  if(ch->stats.perm_frc > 0)
     {
-      change = number_range(-2, ch->perm_frc);
+      change = number_range(-2, ch->stats.perm_frc);
       change = URANGE( -2 , change , 0 );
-      change2 = number_range( -1000, ch->perm_frc );
+      change2 = number_range( -1000, ch->stats.perm_frc );
       change2 = URANGE(0, change2, 1);
-      ch->perm_frc = URANGE( low_frc, ch->perm_frc + change + change2, 20);
+      ch->stats.perm_frc = URANGE( low_frc, ch->stats.perm_frc + change + change2, 20);
     }
   else
     {
@@ -78,7 +78,7 @@ void do_clone( CHAR_DATA *ch, char *argument )
 
       change = number_range(-500, 2);
       change = URANGE( 0, change, 2);
-      ch->perm_frc = URANGE( low_frc, ch->perm_frc + change, 20);
+      ch->stats.perm_frc = URANGE( low_frc, ch->stats.perm_frc + change, 20);
 
     }
 
@@ -88,14 +88,14 @@ void do_clone( CHAR_DATA *ch, char *argument )
   /* Droids and hunters dont get force. DV */
 
   if (ch->main_ability == HUNTING_ABILITY )
-    ch->perm_frc = low_frc;
+    ch->stats.perm_frc = low_frc;
 
   if (ch->race == RACE_DROID )
-    ch->perm_frc = 0;
+    ch->stats.perm_frc = 0;
 
   if(frc > 0)
     {
-      if(ch->perm_frc > 0)
+      if(ch->stats.perm_frc > 0)
         {
           set_exp( ch, FORCE_ABILITY, 500 );
           set_level( ch, FORCE_ABILITY, 2 );
@@ -107,7 +107,7 @@ void do_clone( CHAR_DATA *ch, char *argument )
       set_level( ch, FORCE_ABILITY, 1 );
     }
 
-  ch->mana = 100 + 100*ch->perm_frc;
+  ch->mana = 100 + 100*ch->stats.perm_frc;
 
   flags   = ch->act;
   REMOVE_BIT( ch->act, PLR_KILLER );
@@ -149,7 +149,7 @@ void do_clone( CHAR_DATA *ch, char *argument )
       skill_level[FORCE_ABILITY] = frc_level;
     }
 
-  ch->mana = 100 + (ch->perm_frc*100);
+  ch->mana = 100 + (ch->stats.perm_frc*100);
 
   if ( ch->pcdata->clan_name && ch->pcdata->clan_name[0] != '\0' )
     {
@@ -167,7 +167,7 @@ void do_clone( CHAR_DATA *ch, char *argument )
     }
   else
     save_clone( ch );
-  ch->perm_frc = frc;
+  ch->stats.perm_frc = frc;
 
   set_level( ch, FORCE_ABILITY, frc_level );
   set_exp( ch, FORCE_ABILITY, frc_experience );

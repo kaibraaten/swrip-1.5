@@ -604,7 +604,7 @@ bool saves_poison_death( int level, const CHAR_DATA *victim )
 {
   int save;
 
-  save = 50 + ( victim->top_level - level - victim->saving_poison_death ) * 2;
+  save = 50 + ( victim->top_level - level - victim->saving.poison_death ) * 2;
   if ( victim->race == RACE_DROID )
     save += 50;
   save = URANGE( 5, save, 95 );
@@ -617,7 +617,7 @@ bool saves_wands( int level, const CHAR_DATA *victim )
   if ( IS_SET( victim->immune, RIS_MAGIC ) )
     return TRUE;
 
-  save = 50 + ( victim->top_level - level - victim->saving_wand ) * 2;
+  save = 50 + ( victim->top_level - level - victim->saving.wand ) * 2;
   save = URANGE( 5, save, 95 );
   return chance( victim, save );
 }
@@ -625,7 +625,7 @@ bool saves_para_petri( int level, const CHAR_DATA *victim )
 {
   int save;
 
-  save = 50 + ( victim->top_level - level - victim->saving_para_petri ) * 2;
+  save = 50 + ( victim->top_level - level - victim->saving.para_petri ) * 2;
   if ( victim->race == RACE_DROID )
     save += 50;
   save = URANGE( 5, save, 95 );
@@ -635,7 +635,7 @@ bool saves_breath( int level, const CHAR_DATA *victim )
 {
   int save;
 
-  save = 50 + ( victim->top_level - level - victim->saving_breath ) * 2;
+  save = 50 + ( victim->top_level - level - victim->saving.breath ) * 2;
   save = URANGE( 5, save, 95 );
   return chance( victim, save );
 }
@@ -648,7 +648,7 @@ bool saves_spell_staff( int level, const CHAR_DATA *victim )
 
   if ( is_npc( victim ) && level > 10 )
     level -= 5;
-  save = 50 + ( victim->top_level - level - victim->saving_spell_staff ) * 2;
+  save = 50 + ( victim->top_level - level - victim->saving.spell_staff ) * 2;
   if ( victim->race == RACE_DROID )
     save += 20;
   save = URANGE( 5, save, 95 );

@@ -38,13 +38,13 @@ void do_showstatistic( CHAR_DATA *ch, char *argument )
   CREATE( pcdata, PC_DATA, 1 );
   raceCh->pcdata = pcdata;
   raceCh->in_room = get_room_index( ROOM_VNUM_LIMBO );
-  raceCh->perm_str = 20;
-  raceCh->perm_int = 20;
-  raceCh->perm_wis = 20;
-  raceCh->perm_dex = 20;
-  raceCh->perm_con = 20;
-  raceCh->perm_cha = 20;
-  raceCh->perm_lck = 3;
+  raceCh->stats.perm_str = 20;
+  raceCh->stats.perm_int = 20;
+  raceCh->stats.perm_wis = 20;
+  raceCh->stats.perm_dex = 20;
+  raceCh->stats.perm_con = 20;
+  raceCh->stats.perm_cha = 20;
+  raceCh->stats.perm_lck = 3;
 
   if( chk_race )
     raceCh->race = race;
@@ -54,20 +54,20 @@ void do_showstatistic( CHAR_DATA *ch, char *argument )
       raceCh->race = 0;
     }
 
-  raceCh->perm_str       += race_table[raceCh->race].str_plus;
-  raceCh->perm_int       += race_table[raceCh->race].int_plus;
-  raceCh->perm_wis       += race_table[raceCh->race].wis_plus;
-  raceCh->perm_dex       += race_table[raceCh->race].dex_plus;
-  raceCh->perm_con       += race_table[raceCh->race].con_plus;
-  raceCh->perm_cha       += race_table[raceCh->race].cha_plus;
+  raceCh->stats.perm_str       += race_table[raceCh->race].str_plus;
+  raceCh->stats.perm_int       += race_table[raceCh->race].int_plus;
+  raceCh->stats.perm_wis       += race_table[raceCh->race].wis_plus;
+  raceCh->stats.perm_dex       += race_table[raceCh->race].dex_plus;
+  raceCh->stats.perm_con       += race_table[raceCh->race].con_plus;
+  raceCh->stats.perm_cha       += race_table[raceCh->race].cha_plus;
 
   if( chk_race )
     {
       sprintf( buf, "&R%s Statistics\r\n", race_table[race].race_name );
       send_to_pager( buf, ch );
       sprintf( buf, "&cStr: &C%d  &cWis: &C%d  &cInt: &C%d  &cDex: &C%d  &cCon: &C%d  &cCha: &C%d\r\n",
-               raceCh->perm_str, raceCh->perm_wis, raceCh->perm_int,
-               raceCh->perm_dex, raceCh->perm_con, raceCh->perm_cha );
+               raceCh->stats.perm_str, raceCh->stats.perm_wis, raceCh->stats.perm_int,
+               raceCh->stats.perm_dex, raceCh->stats.perm_con, raceCh->stats.perm_cha );
       send_to_pager( buf, ch );
 
       for( iC = 0; iC < MAX_ABILITY; iC++ )
@@ -101,12 +101,12 @@ void do_showstatistic( CHAR_DATA *ch, char *argument )
       for( iR = 0; iR < MAX_RACE; iR++ )
         {
           raceCh->race = iR;
-          raceCh->perm_str = 20 + race_table[raceCh->race].str_plus;
-          raceCh->perm_int = 20 + race_table[raceCh->race].int_plus;
-          raceCh->perm_wis = 20 + race_table[raceCh->race].wis_plus;
-          raceCh->perm_dex = 20 + race_table[raceCh->race].dex_plus;
-          raceCh->perm_con = 20 + race_table[raceCh->race].con_plus;
-          raceCh->perm_cha = 20 + race_table[raceCh->race].cha_plus;
+          raceCh->stats.perm_str = 20 + race_table[raceCh->race].str_plus;
+          raceCh->stats.perm_int = 20 + race_table[raceCh->race].int_plus;
+          raceCh->stats.perm_wis = 20 + race_table[raceCh->race].wis_plus;
+          raceCh->stats.perm_dex = 20 + race_table[raceCh->race].dex_plus;
+          raceCh->stats.perm_con = 20 + race_table[raceCh->race].con_plus;
+          raceCh->stats.perm_cha = 20 + race_table[raceCh->race].cha_plus;
           sprintf( buf, "\r\n&c%-20s &B| &C", race_table[iR].race_name );
           for( iC2 = 0; iC2 < FORCE_ABILITY; iC2++ )
             {

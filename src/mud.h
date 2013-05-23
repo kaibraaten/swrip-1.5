@@ -706,19 +706,28 @@ struct  mob_index_data
   short         race;
   short         hitroll;
   short         damroll;
-  short         perm_str;
-  short         perm_int;
-  short         perm_wis;
-  short         perm_dex;
-  short         perm_con;
-  short         perm_cha;
-  short         perm_lck;
-  short         perm_frc;
-  short         saving_poison_death;
-  short         saving_wand;
-  short         saving_para_petri;
-  short         saving_breath;
-  short         saving_spell_staff;
+
+  struct
+  {
+    short perm_str;
+    short perm_int;
+    short perm_wis;
+    short perm_dex;
+    short perm_con;
+    short perm_cha;
+    short perm_lck;
+    short perm_frc;
+  } stats;
+
+  struct
+  {
+    short poison_death;
+    short wand;
+    short para_petri;
+    short breath;
+    short spell_staff;
+  } saving;
+
   int                 vip_flags;
 };
 

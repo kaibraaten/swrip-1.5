@@ -361,7 +361,7 @@ void fwrite_char( CHAR_DATA *ch, FILE *fp )
 
   fprintf( fp, "HpManaMove   %d %d 0 0 %d %d\n",
            ch->hit, ch->max_hit, ch->move, ch->max_move );
-  fprintf( fp, "Force        %d %d %d %d\n", ch->perm_frc, ch->mod_frc, ch->mana, ch->max_mana );
+  fprintf( fp, "Force        %d %d %d %d\n", ch->stats.perm_frc, ch->stats.mod_frc, ch->mana, ch->max_mana );
   fprintf( fp, "Gold         %d\n",     ch->gold                );
   fprintf( fp, "Bank         %ld\n",    ch->pcdata->bank                );
   {
@@ -385,11 +385,11 @@ void fwrite_char( CHAR_DATA *ch, FILE *fp )
            ch->position == POS_FIGHTING ? POS_STANDING : ch->position );
 
   fprintf( fp, "SavingThrows %d %d %d %d %d\n",
-           ch->saving_poison_death,
-           ch->saving_wand,
-           ch->saving_para_petri,
-           ch->saving_breath,
-           ch->saving_spell_staff                       );
+           ch->saving.poison_death,
+           ch->saving.wand,
+           ch->saving.para_petri,
+           ch->saving.breath,
+           ch->saving.spell_staff                       );
   fprintf( fp, "Alignment    %d\n",     ch->alignment           );
   fprintf( fp, "Glory        %d\n",   ch->pcdata->quest_curr  );
   fprintf( fp, "MGlory       %d\n",   ch->pcdata->quest_accum );
@@ -499,22 +499,22 @@ void fwrite_char( CHAR_DATA *ch, FILE *fp )
       if ( ch->pcdata->illegal_pk )
         fprintf( fp, "IllegalPK    %d\n",       ch->pcdata->illegal_pk  );
       fprintf( fp, "AttrPerm     %d %d %d %d %d %d %d\n",
-               ch->perm_str,
-               ch->perm_int,
-               ch->perm_wis,
-               ch->perm_dex,
-               ch->perm_con,
-               ch->perm_cha,
-               ch->perm_lck );
+               ch->stats.perm_str,
+               ch->stats.perm_int,
+               ch->stats.perm_wis,
+               ch->stats.perm_dex,
+               ch->stats.perm_con,
+               ch->stats.perm_cha,
+               ch->stats.perm_lck );
 
       fprintf( fp, "AttrMod      %d %d %d %d %d %d %d\n",
-               ch->mod_str,
-               ch->mod_int,
-               ch->mod_wis,
-               ch->mod_dex,
-               ch->mod_con,
-               ch->mod_cha,
-               ch->mod_lck );
+               ch->stats.mod_str,
+               ch->stats.mod_int,
+               ch->stats.mod_wis,
+               ch->stats.mod_dex,
+               ch->stats.mod_con,
+               ch->stats.mod_cha,
+               ch->stats.mod_lck );
 
       fprintf( fp, "Condition    %d %d %d %d\n",
                ch->pcdata->condition[0],
@@ -797,13 +797,13 @@ bool load_char_obj( DESCRIPTOR_DATA *d, char *name, bool preload )
   ch->act                               = PLR_BLANK
     | PLR_COMBINE
     | PLR_PROMPT;
-  ch->perm_str                  = 10;
-  ch->perm_int                  = 10;
-  ch->perm_wis                  = 10;
-  ch->perm_dex                  = 10;
-  ch->perm_con                  = 10;
-  ch->perm_cha                  = 10;
-  ch->perm_lck                  = 10;
+  ch->stats.perm_str                  = 10;
+  ch->stats.perm_int                  = 10;
+  ch->stats.perm_wis                  = 10;
+  ch->stats.perm_dex                  = 10;
+  ch->stats.perm_con                  = 10;
+  ch->stats.perm_cha                  = 10;
+  ch->stats.perm_lck                  = 10;
   ch->pcdata->condition[COND_THIRST]    = 48;
   ch->pcdata->condition[COND_FULL]      = 48;
   ch->pcdata->condition[COND_BLOODTHIRST] = 10;
@@ -815,11 +815,11 @@ bool load_char_obj( DESCRIPTOR_DATA *d, char *name, bool preload )
   ch->pcdata->release_date              = 0;
   ch->pcdata->helled_by         = NULL;
   ch->pcdata->pet                       = NULL;
-  ch->saving_poison_death               = 0;
-  ch->saving_wand                       = 0;
-  ch->saving_para_petri         = 0;
-  ch->saving_breath                     = 0;
-  ch->saving_spell_staff                = 0;
+  ch->saving.poison_death               = 0;
+  ch->saving.wand                       = 0;
+  ch->saving.para_petri         = 0;
+  ch->saving.breath                     = 0;
+  ch->saving.spell_staff                = 0;
   ch->pcdata->comments                = NULL;    /* comments */
   ch->pcdata->pagerlen          = 24;
   ch->mob_clan                        = STRALLOC( "" );
@@ -1112,15 +1112,15 @@ void fread_char( CHAR_DATA *ch, FILE *fp, bool preload )
               x1=x2=x3=x4=x5=x6=x7=13;
               sscanf( line, "%d %d %d %d %d %d %d",
                       &x1, &x2, &x3, &x4, &x5, &x6, &x7 );
-              ch->mod_str = x1;
-              ch->mod_int = x2;
-              ch->mod_wis = x3;
-              ch->mod_dex = x4;
-              ch->mod_con = x5;
-              ch->mod_cha = x6;
-              ch->mod_lck = x7;
+              ch->stats.mod_str = x1;
+              ch->stats.mod_int = x2;
+              ch->stats.mod_wis = x3;
+              ch->stats.mod_dex = x4;
+              ch->stats.mod_con = x5;
+              ch->stats.mod_cha = x6;
+              ch->stats.mod_lck = x7;
               if (!x7)
-                ch->mod_lck = 0;
+                ch->stats.mod_lck = 0;
               fMatch = TRUE;
               break;
             }
@@ -1150,15 +1150,15 @@ void fread_char( CHAR_DATA *ch, FILE *fp, bool preload )
               x1=x2=x3=x4=x5=x6=x7=0;
               sscanf( line, "%d %d %d %d %d %d %d",
                       &x1, &x2, &x3, &x4, &x5, &x6, &x7 );
-              ch->perm_str = x1;
-              ch->perm_int = x2;
-              ch->perm_wis = x3;
-              ch->perm_dex = x4;
-              ch->perm_con = x5;
-              ch->perm_cha = x6;
-              ch->perm_lck = x7;
+              ch->stats.perm_str = x1;
+              ch->stats.perm_int = x2;
+              ch->stats.perm_wis = x3;
+              ch->stats.perm_dex = x4;
+              ch->stats.perm_con = x5;
+              ch->stats.perm_cha = x6;
+              ch->stats.perm_lck = x7;
               if (!x7 || x7 == 0)
-                ch->perm_lck = 13;
+                ch->stats.perm_lck = 13;
               fMatch = TRUE;
               break;
             }
@@ -1245,8 +1245,8 @@ void fread_char( CHAR_DATA *ch, FILE *fp, bool preload )
               x1=x2=x3=x4=x5=x6=0;
               sscanf( line, "%d %d %d %d",
                       &x1, &x2, &x3, &x4);
-              ch->perm_frc = x1;
-              ch->mod_frc = x2;
+              ch->stats.perm_frc = x1;
+              ch->stats.mod_frc = x2;
               ch->mana = x3;
               ch->max_mana = x4;
               fMatch = TRUE;
@@ -1308,13 +1308,13 @@ void fread_char( CHAR_DATA *ch, FILE *fp, bool preload )
               ch->max_move = x6;
               if ( x4 >= 100 )
                 {
-                  ch->perm_frc = number_range( 1 , 20 );
+                  ch->stats.perm_frc = number_range( 1 , 20 );
                   ch->max_mana = x4;
                   ch->mana     = x4;
                 }
               else if ( x4 >= 10 )
                 {
-                  ch->perm_frc = 1;
+                  ch->stats.perm_frc = 1;
                   ch->max_mana = x4;
                 }
               fMatch = TRUE;
@@ -1463,22 +1463,22 @@ void fread_char( CHAR_DATA *ch, FILE *fp, bool preload )
           KEY( "Susceptible",   ch->susceptible,        fread_number( fp ) );
           if ( !str_cmp( word, "SavingThrow" ) )
             {
-              ch->saving_wand   = fread_number( fp );
-              ch->saving_poison_death = ch->saving_wand;
-              ch->saving_para_petri     = ch->saving_wand;
-              ch->saving_breath         = ch->saving_wand;
-              ch->saving_spell_staff    = ch->saving_wand;
+              ch->saving.wand   = fread_number( fp );
+              ch->saving.poison_death = ch->saving.wand;
+              ch->saving.para_petri     = ch->saving.wand;
+              ch->saving.breath         = ch->saving.wand;
+              ch->saving.spell_staff    = ch->saving.wand;
               fMatch = TRUE;
               break;
             }
 
           if ( !str_cmp( word, "SavingThrows" ) )
             {
-              ch->saving_poison_death = fread_number( fp );
-              ch->saving_wand   = fread_number( fp );
-              ch->saving_para_petri     = fread_number( fp );
-              ch->saving_breath         = fread_number( fp );
-              ch->saving_spell_staff    = fread_number( fp );
+              ch->saving.poison_death = fread_number( fp );
+              ch->saving.wand   = fread_number( fp );
+              ch->saving.para_petri     = fread_number( fp );
+              ch->saving.breath         = fread_number( fp );
+              ch->saving.spell_staff    = fread_number( fp );
               fMatch = TRUE;
               break;
             }

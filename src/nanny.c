@@ -599,23 +599,23 @@ static void nanny_get_new_class( DESCRIPTOR_DATA *d, char *argument )
 
   write_to_buffer( d, "\r\nRolling stats....\r\n", 0 );
 
-  ch->perm_str = number_range(1, 6)+number_range(1, 6)+number_range(1, 6);
-  ch->perm_int = number_range(3, 6)+number_range(1, 6)+number_range(1, 6);
-  ch->perm_wis = number_range(3, 6)+number_range(1, 6)+number_range(1, 6);
-  ch->perm_dex = number_range(3, 6)+number_range(1, 6)+number_range(1, 6);
-  ch->perm_con = number_range(3, 6)+number_range(1, 6)+number_range(1, 6);
-  ch->perm_cha = number_range(3, 6)+number_range(1, 6)+number_range(1, 6);
+  ch->stats.perm_str = number_range(1, 6)+number_range(1, 6)+number_range(1, 6);
+  ch->stats.perm_int = number_range(3, 6)+number_range(1, 6)+number_range(1, 6);
+  ch->stats.perm_wis = number_range(3, 6)+number_range(1, 6)+number_range(1, 6);
+  ch->stats.perm_dex = number_range(3, 6)+number_range(1, 6)+number_range(1, 6);
+  ch->stats.perm_con = number_range(3, 6)+number_range(1, 6)+number_range(1, 6);
+  ch->stats.perm_cha = number_range(3, 6)+number_range(1, 6)+number_range(1, 6);
 
-  ch->perm_str       += race_table[ch->race].str_plus;
-  ch->perm_int       += race_table[ch->race].int_plus;
-  ch->perm_wis       += race_table[ch->race].wis_plus;
-  ch->perm_dex       += race_table[ch->race].dex_plus;
-  ch->perm_con       += race_table[ch->race].con_plus;
-  ch->perm_cha       += race_table[ch->race].cha_plus;
+  ch->stats.perm_str       += race_table[ch->race].str_plus;
+  ch->stats.perm_int       += race_table[ch->race].int_plus;
+  ch->stats.perm_wis       += race_table[ch->race].wis_plus;
+  ch->stats.perm_dex       += race_table[ch->race].dex_plus;
+  ch->stats.perm_con       += race_table[ch->race].con_plus;
+  ch->stats.perm_cha       += race_table[ch->race].cha_plus;
 
   sprintf( buf, "\r\nSTR: %d  INT: %d  WIS: %d  DEX: %d  CON: %d  CHA: %d\r\n",
-	   ch->perm_str, ch->perm_int, ch->perm_wis,
-	   ch->perm_dex, ch->perm_con, ch->perm_cha) ;
+	   ch->stats.perm_str, ch->stats.perm_int, ch->stats.perm_wis,
+	   ch->stats.perm_dex, ch->stats.perm_con, ch->stats.perm_cha) ;
 
   write_to_buffer( d, buf, 0 );
   write_to_buffer( d, "\r\nAre these stats OK, (Y/N)? ", 0 );
@@ -635,23 +635,23 @@ static void nanny_stats_ok( DESCRIPTOR_DATA *d, char *argument )
 
     case 'n':
     case 'N':
-      ch->perm_str = number_range(1, 6)+number_range(1, 6)+number_range(1, 6);
-      ch->perm_int = number_range(3, 6)+number_range(1, 6)+number_range(1, 6);
-      ch->perm_wis = number_range(3, 6)+number_range(1, 6)+number_range(1, 6);
-      ch->perm_dex = number_range(3, 6)+number_range(1, 6)+number_range(1, 6);
-      ch->perm_con = number_range(3, 6)+number_range(1, 6)+number_range(1, 6);
-      ch->perm_cha = number_range(3, 6)+number_range(1, 6)+number_range(1, 6);
+      ch->stats.perm_str = number_range(1, 6)+number_range(1, 6)+number_range(1, 6);
+      ch->stats.perm_int = number_range(3, 6)+number_range(1, 6)+number_range(1, 6);
+      ch->stats.perm_wis = number_range(3, 6)+number_range(1, 6)+number_range(1, 6);
+      ch->stats.perm_dex = number_range(3, 6)+number_range(1, 6)+number_range(1, 6);
+      ch->stats.perm_con = number_range(3, 6)+number_range(1, 6)+number_range(1, 6);
+      ch->stats.perm_cha = number_range(3, 6)+number_range(1, 6)+number_range(1, 6);
 
-      ch->perm_str   += race_table[ch->race].str_plus;
-      ch->perm_int   += race_table[ch->race].int_plus;
-      ch->perm_wis   += race_table[ch->race].wis_plus;
-      ch->perm_dex   += race_table[ch->race].dex_plus;
-      ch->perm_con   += race_table[ch->race].con_plus;
-      ch->perm_cha   += race_table[ch->race].cha_plus;
+      ch->stats.perm_str   += race_table[ch->race].str_plus;
+      ch->stats.perm_int   += race_table[ch->race].int_plus;
+      ch->stats.perm_wis   += race_table[ch->race].wis_plus;
+      ch->stats.perm_dex   += race_table[ch->race].dex_plus;
+      ch->stats.perm_con   += race_table[ch->race].con_plus;
+      ch->stats.perm_cha   += race_table[ch->race].cha_plus;
 
       sprintf( buf, "\r\nSTR: %d  INT: %d  WIS: %d  DEX: %d  CON: %d  CHA: %d\r\n" ,
-	       ch->perm_str, ch->perm_int, ch->perm_wis,
-	       ch->perm_dex, ch->perm_con, ch->perm_cha) ;
+	       ch->stats.perm_str, ch->stats.perm_int, ch->stats.perm_wis,
+	       ch->stats.perm_dex, ch->stats.perm_con, ch->stats.perm_cha) ;
 
       write_to_buffer( d, buf, 0 );
       write_to_buffer( d, "\r\nOK?. ", 0 );
@@ -790,33 +790,33 @@ static void nanny_read_motd( DESCRIPTOR_DATA *d, char *argument )
       ch->pcdata->clan_name = STRALLOC( "" );
       ch->pcdata->clan        = NULL;
 
-      ch->perm_lck = number_range(6, 20);
-      ch->perm_frc = number_range(-800, 20);
+      ch->stats.perm_lck = number_range(6, 20);
+      ch->stats.perm_frc = number_range(-800, 20);
       ch->affected_by         = race_table[ch->race].affected;
-      ch->perm_lck   += race_table[ch->race].lck_plus;
-      ch->perm_frc   += race_table[ch->race].frc_plus;
+      ch->stats.perm_lck   += race_table[ch->race].lck_plus;
+      ch->stats.perm_frc   += race_table[ch->race].frc_plus;
 
       if ( ch->main_ability == FORCE_ABILITY )
 	{
-	  ch->perm_frc = URANGE( 1 , ch->perm_frc , 20 );
+	  ch->stats.perm_frc = URANGE( 1 , ch->stats.perm_frc , 20 );
 	}
       else
 	{
-	  ch->perm_frc = URANGE( 0 , ch->perm_frc , 20 );
+	  ch->stats.perm_frc = URANGE( 0 , ch->stats.perm_frc , 20 );
 	}
 
       /* Hunters do not recieve force */
 
       if ( ch->main_ability == HUNTING_ABILITY )
 	{
-	  ch->perm_frc = 0;
+	  ch->stats.perm_frc = 0;
 	}
 
       /* Droids do not recieve force */
 
       if( is_droid(ch) )
 	{
-	  ch->perm_frc = 0;
+	  ch->stats.perm_frc = 0;
 	}
 
       /* Noghri are auto commando */
@@ -892,9 +892,9 @@ if ( (iLang = skill_lookup( "common" )) < 0 )
       ch->move       = ch->max_move;
       ch->gold     = NEW_CHARACTER_START_CREDITS;
 
-      if ( ch->perm_frc > 0 )
+      if ( ch->stats.perm_frc > 0 )
 	{
-	  ch->max_mana = 100 + 100*ch->perm_frc;
+	  ch->max_mana = 100 + 100*ch->stats.perm_frc;
 	}
       else
 	{

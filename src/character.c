@@ -104,7 +104,7 @@ short get_age( const CHAR_DATA *ch )
 short get_curr_str( const CHAR_DATA *ch )
 {
   short max = 25;
-  return URANGE( 3, ch->perm_str + ch->mod_str, max );
+  return URANGE( 3, ch->stats.perm_str + ch->stats.mod_str, max );
 }
 
 /*
@@ -113,7 +113,7 @@ short get_curr_str( const CHAR_DATA *ch )
 short get_curr_int( const CHAR_DATA *ch )
 {
   short max = 25;
-  return URANGE( 3, ch->perm_int + ch->mod_int, max );
+  return URANGE( 3, ch->stats.perm_int + ch->stats.mod_int, max );
 }
 
 /*
@@ -122,7 +122,7 @@ short get_curr_int( const CHAR_DATA *ch )
 short get_curr_wis( const CHAR_DATA *ch )
 {
   short max = 25;
-  return URANGE( 3, ch->perm_wis + ch->mod_wis, max );
+  return URANGE( 3, ch->stats.perm_wis + ch->stats.mod_wis, max );
 }
 
 /*
@@ -131,7 +131,7 @@ short get_curr_wis( const CHAR_DATA *ch )
 short get_curr_dex( const CHAR_DATA *ch )
 {
   short max = 25;
-  return URANGE( 3, ch->perm_dex + ch->mod_dex, max );
+  return URANGE( 3, ch->stats.perm_dex + ch->stats.mod_dex, max );
 }
 
 /*
@@ -140,7 +140,7 @@ short get_curr_dex( const CHAR_DATA *ch )
 short get_curr_con( const CHAR_DATA *ch )
 {
   short max = 25;
-  return URANGE( 3, ch->perm_con + ch->mod_con, max );
+  return URANGE( 3, ch->stats.perm_con + ch->stats.mod_con, max );
 }
 
 /*
@@ -149,7 +149,7 @@ short get_curr_con( const CHAR_DATA *ch )
 short get_curr_cha( const CHAR_DATA *ch )
 {
   short max = 25;
-  return URANGE( 3, ch->perm_cha + ch->mod_cha, max );
+  return URANGE( 3, ch->stats.perm_cha + ch->stats.mod_cha, max );
 }
 
 /*
@@ -158,7 +158,7 @@ short get_curr_cha( const CHAR_DATA *ch )
 short get_curr_lck( const CHAR_DATA *ch )
 {
   short max = 25;
-  return URANGE( 3, ch->perm_lck + ch->mod_lck, max );
+  return URANGE( 3, ch->stats.perm_lck + ch->stats.mod_lck, max );
 }
 
 short get_curr_frc( const CHAR_DATA *ch )
@@ -175,7 +175,7 @@ short get_curr_frc( const CHAR_DATA *ch )
       max  = 25;
     }
 
-  return URANGE( 0 , ch->perm_frc + ch->mod_frc, max );
+  return URANGE( 0 , ch->stats.perm_frc + ch->stats.mod_frc, max );
 }
 
 /*
@@ -793,21 +793,21 @@ void fix_char( CHAR_DATA *ch )
   ch->mana              = UMAX( 1, ch->mana );
   ch->move              = UMAX( 1, ch->move );
   ch->armor             = 100;
-  ch->mod_str           = 0;
-  ch->mod_dex           = 0;
-  ch->mod_wis           = 0;
-  ch->mod_int           = 0;
-  ch->mod_con           = 0;
-  ch->mod_cha           = 0;
-  ch->mod_lck           = 0;
+  ch->stats.mod_str           = 0;
+  ch->stats.mod_dex           = 0;
+  ch->stats.mod_wis           = 0;
+  ch->stats.mod_int           = 0;
+  ch->stats.mod_con           = 0;
+  ch->stats.mod_cha           = 0;
+  ch->stats.mod_lck           = 0;
   ch->damroll           = 0;
   ch->hitroll           = 0;
   ch->alignment = URANGE( -1000, ch->alignment, 1000 );
-  ch->saving_breath     = 0;
-  ch->saving_wand       = 0;
-  ch->saving_para_petri = 0;
-  ch->saving_spell_staff = 0;
-  ch->saving_poison_death = 0;
+  ch->saving.breath     = 0;
+  ch->saving.wand       = 0;
+  ch->saving.para_petri = 0;
+  ch->saving.spell_staff = 0;
+  ch->saving.poison_death = 0;
 
   ch->carry_weight      = 0;
   ch->carry_number      = 0;

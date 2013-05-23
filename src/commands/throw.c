@@ -236,7 +236,7 @@ void do_throw( CHAR_DATA *ch, char *argument )
       if ( is_npc(ch) || number_percent( ) < ch->pcdata->learned[gsn_throw] )
         {
           learn_from_success( ch, gsn_throw );
-          global_retcode = damage( ch, victim, number_range( obj->weight*2 , (obj->weight*2 + ch->perm_str) ), TYPE_HIT );
+          global_retcode = damage( ch, victim, number_range( obj->weight*2 , (obj->weight*2 + ch->stats.perm_str) ), TYPE_HIT );
         }
       else
         {

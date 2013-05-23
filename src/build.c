@@ -899,10 +899,10 @@ void fold_area( AREA_DATA *tarea, char *filename, bool install )
         continue;
       if ( install )
         REMOVE_BIT( pMobIndex->act, ACT_PROTOTYPE );
-      if ( pMobIndex->perm_str != 13    ||   pMobIndex->perm_int   != 13
-           ||   pMobIndex->perm_wis != 13       ||   pMobIndex->perm_dex   != 13
-           ||   pMobIndex->perm_con != 13       ||   pMobIndex->perm_cha   != 13
-           ||   pMobIndex->perm_lck != 13
+      if ( pMobIndex->stats.perm_str != 13    ||   pMobIndex->stats.perm_int   != 13
+           ||   pMobIndex->stats.perm_wis != 13       ||   pMobIndex->stats.perm_dex   != 13
+           ||   pMobIndex->stats.perm_con != 13       ||   pMobIndex->stats.perm_cha   != 13
+           ||   pMobIndex->stats.perm_lck != 13
            ||   pMobIndex->hitroll  != 0        ||   pMobIndex->damroll    != 0
            ||   pMobIndex->race  != 0
            ||   pMobIndex->attacks       != 0   ||   pMobIndex->defenses   != 0
@@ -940,19 +940,19 @@ void fold_area( AREA_DATA *tarea, char *filename, bool install )
       if ( complexmob )
         {
           fprintf( fpout, "%d %d %d %d %d %d %d\n",
-                   pMobIndex->perm_str,
-                   pMobIndex->perm_int,
-                   pMobIndex->perm_wis,
-                   pMobIndex->perm_dex,
-                   pMobIndex->perm_con,
-                   pMobIndex->perm_cha,
-                   pMobIndex->perm_lck );
+                   pMobIndex->stats.perm_str,
+                   pMobIndex->stats.perm_int,
+                   pMobIndex->stats.perm_wis,
+                   pMobIndex->stats.perm_dex,
+                   pMobIndex->stats.perm_con,
+                   pMobIndex->stats.perm_cha,
+                   pMobIndex->stats.perm_lck );
           fprintf( fpout, "%d %d %d %d %d\n",
-                   pMobIndex->saving_poison_death,
-                   pMobIndex->saving_wand,
-                   pMobIndex->saving_para_petri,
-                   pMobIndex->saving_breath,
-                   pMobIndex->saving_spell_staff );
+                   pMobIndex->saving.poison_death,
+                   pMobIndex->saving.wand,
+                   pMobIndex->saving.para_petri,
+                   pMobIndex->saving.breath,
+                   pMobIndex->saving.spell_staff );
           fprintf( fpout, "%d 0 %d %d %d %d %d\n",
                    pMobIndex->race,
                    pMobIndex->height,

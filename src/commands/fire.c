@@ -41,7 +41,7 @@ void do_fire(CHAR_DATA *ch, char *argument )
     }
 
   the_chance = is_npc(ch) ? ch->top_level
-    : (int) ( ch->perm_dex*2 + ch->pcdata->learned[gsn_spacecombat]/3
+    : (int) ( ch->stats.perm_dex*2 + ch->pcdata->learned[gsn_spacecombat]/3
               + ch->pcdata->learned[gsn_spacecombat2]/3 + ch->pcdata->learned[gsn_spacecombat3]/3 );
   origthe_chance = the_chance;
 

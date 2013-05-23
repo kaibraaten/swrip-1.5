@@ -88,11 +88,16 @@ struct char_data
   int                   defenses;
   int                   speaks;
   int                   speaking;
-  short         saving_poison_death;
-  short         saving_wand;
-  short         saving_para_petri;
-  short         saving_breath;
-  short         saving_spell_staff;
+
+  struct
+  {
+    short poison_death;
+    short wand;
+    short para_petri;
+    short breath;
+    short spell_staff;
+  } saving;
+
   short         alignment;
   short         barenumdie;
   short         baresizedie;
@@ -108,22 +113,28 @@ struct char_data
   short         armor;
   short         wimpy;
   int                   deaf;
-  short         perm_str;
-  short         perm_int;
-  short         perm_wis;
-  short         perm_dex;
-  short         perm_con;
-  short         perm_cha;
-  short         perm_lck;
-  short         perm_frc;
-  short         mod_str;
-  short         mod_int;
-  short         mod_wis;
-  short         mod_dex;
-  short         mod_con;
-  short         mod_cha;
-  short         mod_lck;
-  short         mod_frc;
+
+  struct
+  {
+    short perm_str;
+    short perm_int;
+    short perm_wis;
+    short perm_dex;
+    short perm_con;
+    short perm_cha;
+    short perm_lck;
+    short perm_frc;
+
+    short mod_str;
+    short mod_int;
+    short mod_wis;
+    short mod_dex;
+    short mod_con;
+    short mod_cha;
+    short mod_lck;
+    short mod_frc;
+  } stats;
+
   short         mental_state;           /* simplified */
   short         emotional_state;        /* simplified */
   int                   retran;

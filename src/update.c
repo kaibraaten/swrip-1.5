@@ -151,7 +151,7 @@ int max_level( const CHAR_DATA *ch, int ability)
       if ( ch->race == RACE_ASSASSIN_DROID ) level += 45;
       if ( ch->race == RACE_GLADIATOR_DROID ) level += 60;
       if ( ch->race == RACE_ASTROMECH_DROID ) level -= 110;
-      level += ch->perm_con + ch->perm_dex + ch->perm_str;
+      level += ch->stats.perm_con + ch->stats.perm_dex + ch->stats.perm_str;
     }
 
   if ( ability == PILOTING_ABILITY )
@@ -181,7 +181,7 @@ int max_level( const CHAR_DATA *ch, int ability)
       if ( ch->race == RACE_INTERROGATION_DROID) level -= 120;
       if ( ch->race == RACE_KUBAZ) level -= 10;
       if ( ch->race == RACE_GAND ) level += 30;
-      level += ch->perm_dex*2;
+      level += ch->stats.perm_dex*2;
     }
 
   if ( ability == ENGINEERING_ABILITY )
@@ -210,7 +210,7 @@ int max_level( const CHAR_DATA *ch, int ability)
       if ( ch->race == RACE_INTERROGATION_DROID) level -= 58;
       if ( ch->race == RACE_YEVETHA) level += 30;
       if ( ch->race == RACE_GAND ) level -= 16;
-      level += ch->perm_int * 2;
+      level += ch->stats.perm_int * 2;
     }
 
   if ( ability == HUNTING_ABILITY )
@@ -259,7 +259,7 @@ int max_level( const CHAR_DATA *ch, int ability)
       if ( ch->race == RACE_GLADIATOR_DROID) level -= 25;
       if ( ch->race == RACE_ASTROMECH_DROID ) level -= 25;
       if ( ch->race == RACE_INTERROGATION_DROID) level -= 125;
-      level += ch->perm_lck*2;
+      level += ch->stats.perm_lck*2;
     }
 
   if ( ability == LEADERSHIP_ABILITY )
@@ -288,7 +288,7 @@ int max_level( const CHAR_DATA *ch, int ability)
       if ( ch->race == RACE_SULLUSTAN ) level -= 10;
       if ( ch->race == RACE_DROID) level -= 10;
       if ( ch->race == RACE_INTERROGATION_DROID) level += 140;
-      level += ch->perm_wis + ch->perm_cha + ch->perm_int;
+      level += ch->stats.perm_wis + ch->stats.perm_cha + ch->stats.perm_int;
     }
 
   if ( ability == DIPLOMACY_ABILITY )
@@ -325,7 +325,7 @@ int max_level( const CHAR_DATA *ch, int ability)
       if ( ch->race == RACE_TOGARIAN) level -= 40;
       if ( ch->race == RACE_BOTHAN) level += 35;
       if ( ch->race == RACE_BARABEL) level -= 20;
-      level += ch->perm_cha*3;
+      level += ch->stats.perm_cha*3;
     }
 
   level = URANGE( 1, level, 150 );
@@ -336,7 +336,7 @@ int max_level( const CHAR_DATA *ch, int ability)
         level = 20;
       else
         level = 0;
-      level += ch->perm_frc*5;
+      level += ch->stats.perm_frc*5;
     }
 
   return level;
