@@ -1,4 +1,5 @@
 #include "mud.h"
+#include "character.h"
 
 ch_ret spell_acid_breath( int sn, int level, CHAR_DATA *ch, void *vo )
 {
@@ -57,7 +58,7 @@ ch_ret spell_acid_breath( int sn, int level, CHAR_DATA *ch, void *vo )
   dam  = number_range( hpch/16+1, hpch/8 );
   if ( saves_breath( level, victim ) )
     dam /= 2;
-  if ( IS_AFFECTED(victim, AFF_PROTECT) && IS_EVIL(ch) )
+  if ( is_affected_by(victim, AFF_PROTECT) && IS_EVIL(ch) )
     dam -= (int) (dam / 4);
   return damage( ch, victim, dam, sn );
 }

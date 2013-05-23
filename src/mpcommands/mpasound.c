@@ -1,4 +1,5 @@
 #include "mud.h"
+#include "character.h"
 
 /* Prints the argument to all the rooms around the mobile */
 void do_mpasound( CHAR_DATA *ch, char *argument )
@@ -13,7 +14,7 @@ void do_mpasound( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( IS_AFFECTED( ch, AFF_CHARM ) )
+  if ( is_affected_by( ch, AFF_CHARM ) )
     return;
 
   if ( !IS_NPC( ch ) )

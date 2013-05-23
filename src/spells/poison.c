@@ -1,3 +1,4 @@
+#include "character.h"
 #include "mud.h"
 
 ch_ret spell_poison( int sn, int level, CHAR_DATA *ch, void *vo )
@@ -17,7 +18,7 @@ ch_ret spell_poison( int sn, int level, CHAR_DATA *ch, void *vo )
   if ( poison_chance == 1000 || saves_poison_death( poison_chance, victim ) )
     return rSPELL_FAILED;
 
-  if ( IS_AFFECTED( victim, AFF_POISON ) )
+  if ( is_affected_by( victim, AFF_POISON ) )
     first = FALSE;
 
   af.type      = sn;

@@ -1,4 +1,5 @@
 #include "mud.h"
+#include "character.h"
 
 void do_kill( CHAR_DATA *ch, char *argument )
 {
@@ -35,7 +36,7 @@ void do_kill( CHAR_DATA *ch, char *argument )
   if ( is_safe( ch, victim ) )
     return;
 
-  if ( IS_AFFECTED(ch, AFF_CHARM) && ch->master == victim )
+  if ( is_affected_by(ch, AFF_CHARM) && ch->master == victim )
     {
       act( AT_PLAIN, "$N is your beloved master.", ch, NULL, victim, TO_CHAR );
       return;

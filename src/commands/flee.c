@@ -1,4 +1,5 @@
 #include "mud.h"
+#include "character.h"
 
 void do_flee( CHAR_DATA *ch, char *argument )
 {
@@ -40,7 +41,7 @@ void do_flee( CHAR_DATA *ch, char *argument )
       if ( ( pexit = get_exit(was_in, door) ) == NULL
            ||   !pexit->to_room
            || ( IS_SET(pexit->exit_info, EX_CLOSED)
-                &&   !IS_AFFECTED( ch, AFF_PASS_DOOR ) )
+                &&   !is_affected_by( ch, AFF_PASS_DOOR ) )
            || ( IS_NPC(ch)
                 &&   IS_SET(pexit->to_room->room_flags, ROOM_NO_MOB) ) )
         continue;

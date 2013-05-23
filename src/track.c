@@ -445,7 +445,7 @@ static bool mob_snipe( CHAR_DATA *ch, CHAR_DATA *victim )
       if ( is_safe( ch, victim ) )
         return FALSE;
 
-      if ( IS_AFFECTED(ch, AFF_CHARM) && ch->master == victim )
+      if ( is_affected_by(ch, AFF_CHARM) && ch->master == victim )
         return FALSE;
 
       if ( ch->position == POS_FIGHTING )

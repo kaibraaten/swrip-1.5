@@ -1,3 +1,4 @@
+#include "character.h"
 #include "mud.h"
 
 ch_ret spell_curse( int sn, int level, CHAR_DATA *ch, void *vo )
@@ -12,7 +13,7 @@ ch_ret spell_curse( int sn, int level, CHAR_DATA *ch, void *vo )
       return rSPELL_FAILED;
     }
 
-  if ( IS_AFFECTED(victim, AFF_CURSE) || saves_spell_staff( level, victim ) )
+  if ( is_affected_by(victim, AFF_CURSE) || saves_spell_staff( level, victim ) )
     {
       failed_casting( skill, ch, victim, NULL );
       return rSPELL_FAILED;

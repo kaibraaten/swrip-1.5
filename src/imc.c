@@ -597,7 +597,7 @@ static const char *imcone_argument( const char *argument, char *arg_first )
    if( *argument == '\'' || *argument == '"' )
       cEnd = *argument++;
 
-   while( *argument != '\0' && ++count <= 255 )
+   while( *argument != '\0' && ++count <= UCHAR_MAX )
    {
       if( *argument == cEnd )
       {
@@ -2152,7 +2152,7 @@ static char *break_newlines( char *argument, char *arg_first )
    if( *argument == '\'' || *argument == '"' )
       cEnd = *argument++;
 
-   while( *argument != '\0' && ++count <= 255 )
+   while( *argument != '\0' && ++count <= UCHAR_MAX )
    {
       if( *argument == cEnd )
       {

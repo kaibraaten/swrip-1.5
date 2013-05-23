@@ -2024,11 +2024,10 @@ void display_prompt( DESCRIPTOR_DATA *d )
   if ( !IS_NPC(ch) && ch->substate != SUB_NONE && ch->pcdata->subprompt
        &&   ch->pcdata->subprompt[0] != '\0' )
     prompt = ch->pcdata->subprompt;
+  else if ( IS_NPC(ch) || !ch->pcdata->prompt || !*ch->pcdata->prompt )
+    prompt = default_prompt(ch);
   else
-    if ( IS_NPC(ch) || !ch->pcdata->prompt || !*ch->pcdata->prompt )
-      prompt = default_prompt(ch);
-    else
-      prompt = ch->pcdata->prompt;
+    prompt = ch->pcdata->prompt;
 
   if ( ansi )
     {
@@ -2036,6 +2035,7 @@ void display_prompt( DESCRIPTOR_DATA *d )
       d->prevcolor = 0x07;
       pbuf += 3;
     }
+
   /* Clear out old color stuff */
   /*  make_color_sequence(NULL, NULL, NULL);*/
   for ( ; *prompt; prompt++ )
@@ -2051,19 +2051,24 @@ void display_prompt( DESCRIPTOR_DATA *d )
           *(pbuf++) = *prompt;
           continue;
         }
+
       ++prompt;
+
       if ( !*prompt )
         break;
+
       if ( *prompt == *(prompt-1) )
         {
           *(pbuf++) = *prompt;
           continue;
         }
+
       switch(*(prompt-1))
         {
         default:
           bug( "Display_prompt: bad command char '%c'.", *(prompt-1) );
           break;
+
         case '&':
         case '^':
           the_stat = make_color_sequence(&prompt[-1], pbuf, d);
@@ -2072,15 +2077,18 @@ void display_prompt( DESCRIPTOR_DATA *d )
           else if ( the_stat > 0 )
             pbuf += the_stat;
           break;
+
         case '%':
           *pbuf = '\0';
           the_stat = 0x80000000;
+
           switch(*prompt)
             {
             case '%':
               *pbuf++ = '%';
               *pbuf = '\0';
               break;
+
             case 'a':
               if ( ch->top_level >= 10 )
                 the_stat = ch->alignment;
@@ -2091,24 +2099,29 @@ void display_prompt( DESCRIPTOR_DATA *d )
               else
                 strcpy(pbuf, "neutral");
               break;
+
             case 'h':
               the_stat = ch->hit;
               break;
+
             case 'H':
               the_stat = ch->max_hit;
               break;
+
             case 'm':
               if ( IS_IMMORTAL(ch) || get_level( ch, FORCE_ABILITY ) > 1 )
                 the_stat = ch->mana;
               else
                 the_stat = 0;
               break;
+
             case 'M':
               if ( IS_IMMORTAL(ch) || get_level( ch, FORCE_ABILITY ) > 1 )
                 the_stat = ch->max_mana;
               else
                 the_stat = 0;
               break;
+
             case 'p':
               if ( ch->position == POS_RESTING )
                 strcpy(pbuf, "resting");
@@ -2117,37 +2130,45 @@ void display_prompt( DESCRIPTOR_DATA *d )
               else if ( ch->position == POS_SITTING )
                 strcpy(pbuf, "sitting");
               break;
+
             case 'u':
               the_stat = num_descriptors;
               break;
+
             case 'U':
               the_stat = sysdata.maxplayers;
               break;
+
             case 'v':
               the_stat = ch->move;
               break;
+
             case 'V':
               the_stat = ch->max_move;
               break;
+
             case 'g':
               the_stat = ch->gold;
               break;
+
             case 'r':
               if ( IS_IMMORTAL(och) )
                 the_stat = ch->in_room->vnum;
               break;
+
             case 'R':
               if ( IS_SET(och->act, PLR_ROOMVNUM) )
                 sprintf(pbuf, "<#%d> ", ch->in_room->vnum);
               break;
+
             case 'i':
               if ( (!IS_NPC(ch) && IS_SET(ch->act, PLR_WIZINVIS)) ||
                    (IS_NPC(ch) && IS_SET(ch->act, ACT_MOBINVIS)) )
                 sprintf(pbuf, "(Invis %d) ", (IS_NPC(ch) ? ch->mobinvis : ch->pcdata->wizinvis));
-              else
-                if ( IS_AFFECTED(ch, AFF_INVISIBLE) )
-                  sprintf(pbuf, "(Invis) " );
+              else if ( is_affected_by(ch, AFF_INVISIBLE) )
+		sprintf(pbuf, "(Invis) " );
               break;
+
             case 'I':
               the_stat = (IS_NPC(ch) ? (IS_SET(ch->act, ACT_MOBINVIS) ? ch->mobinvis : 0)
                       : (IS_SET(ch->act, PLR_WIZINVIS) ? ch->pcdata->wizinvis : 0));

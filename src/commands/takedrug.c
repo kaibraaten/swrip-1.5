@@ -93,7 +93,7 @@ void do_takedrug( CHAR_DATA *ch, char *argument )
         case SPICE_GLITTERSTIM:
           sn=skill_lookup("true sight");
 
-          if ( sn < MAX_SKILL && !IS_AFFECTED( ch, AFF_TRUESIGHT ) )
+          if ( sn < MAX_SKILL && !is_affected_by( ch, AFF_TRUESIGHT ) )
             {
               af.type      = sn;
               af.location  = APPLY_AC;
@@ -107,7 +107,7 @@ void do_takedrug( CHAR_DATA *ch, char *argument )
         case SPICE_CARSANUM:
           sn=skill_lookup("heightened awareness");
 
-          if ( sn < MAX_SKILL && !IS_AFFECTED( ch, AFF_SANCTUARY ) )
+          if ( sn < MAX_SKILL && !is_affected_by( ch, AFF_SANCTUARY ) )
             {
               af.type      = sn;
               af.location  = APPLY_NONE;
@@ -121,7 +121,7 @@ void do_takedrug( CHAR_DATA *ch, char *argument )
 	case SPICE_LUMNI:
           sn=skill_lookup("sanctuary");
 
-          if ( sn < MAX_SKILL && !IS_AFFECTED( ch, AFF_SANCTUARY ) )
+          if ( sn < MAX_SKILL && !is_affected_by( ch, AFF_SANCTUARY ) )
             {
               af.type      = sn;
               af.location  = APPLY_NONE;

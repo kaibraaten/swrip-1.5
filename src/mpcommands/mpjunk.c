@@ -11,7 +11,7 @@ void do_mpjunk( CHAR_DATA *ch, char *argument )
   OBJ_DATA *obj;
   OBJ_DATA *obj_next;
 
-  if ( IS_AFFECTED( ch, AFF_CHARM ) )
+  if ( is_affected_by( ch, AFF_CHARM ) )
     return;
 
   if ( !IS_NPC( ch ) )

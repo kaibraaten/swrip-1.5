@@ -88,6 +88,11 @@ void set_level( CHAR_DATA *ch, short ability, int newlevel );
 bool is_affected( const CHAR_DATA *ch, int sn );
 
 /*
+ * Return true if a certain ch->affected_by bit is set.
+ */
+bool is_affected_by( const CHAR_DATA *ch, int affected_by_bit );
+
+/*
  * Find a piece of eq on a character.
  * Will pick the top layer if clothing is layered.              -Thoric
  */

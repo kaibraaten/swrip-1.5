@@ -1,3 +1,4 @@
+#include "character.h"
 #include "mud.h"
 
 void do_murder( CHAR_DATA *ch, char *argument )
@@ -35,7 +36,7 @@ void do_murder( CHAR_DATA *ch, char *argument )
   if ( is_safe( ch, victim ) )
     return;
 
-  if ( IS_AFFECTED(ch, AFF_CHARM) )
+  if ( is_affected_by(ch, AFF_CHARM) )
     {
       if ( ch->master == victim )
         {

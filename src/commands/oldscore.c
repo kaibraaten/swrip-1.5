@@ -6,7 +6,7 @@ void do_oldscore( CHAR_DATA *ch, char *argument )
   AFFECT_DATA *paf;
   SKILLTYPE   *skill;
 
-  if ( IS_AFFECTED(ch, AFF_POSSESS) )
+  if ( is_affected_by(ch, AFF_POSSESS) )
     {
       send_to_char("You can't do that in your current state of mind!\r\n", ch);
       return;

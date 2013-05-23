@@ -1,3 +1,4 @@
+#include "character.h"
 #include "mud.h"
 
 ch_ret spell_faerie_fire( int sn, int level, CHAR_DATA *ch, void *vo )
@@ -12,7 +13,7 @@ ch_ret spell_faerie_fire( int sn, int level, CHAR_DATA *ch, void *vo )
       return rSPELL_FAILED;
     }
 
-  if ( IS_AFFECTED(victim, AFF_FAERIE_FIRE) )
+  if ( is_affected_by(victim, AFF_FAERIE_FIRE) )
     {
       failed_casting( skill, ch, victim, NULL );
       return rSPELL_FAILED;

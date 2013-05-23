@@ -124,7 +124,7 @@ void do_cutdoor( CHAR_DATA *ch, char *argument )
       {
         if ( IS_AWAKE( gch )
 	     && !gch->fighting
-             && ( IS_NPC( gch ) && !IS_AFFECTED( gch, AFF_CHARM ) )
+             && ( IS_NPC( gch ) && !is_affected_by( gch, AFF_CHARM ) )
              && ( ch->top_level - gch->top_level <= 4 )
              && number_bits( 2 ) == 0 )
           multi_hit( gch, ch, TYPE_UNDEFINED );

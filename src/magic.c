@@ -916,7 +916,7 @@ void *locate_targets( CHAR_DATA *ch, char *arg, int sn, CHAR_DATA **victim, OBJ_
 
             }
 
-          if ( IS_AFFECTED(ch, AFF_CHARM) && ch->master == *victim )
+          if ( is_affected_by(ch, AFF_CHARM) && ch->master == *victim )
             {
               send_to_char( "You can't do that on your own follower.\r\n", ch );
               return &pAbort;

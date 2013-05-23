@@ -1,3 +1,4 @@
+#include "character.h"
 #include "mud.h"
 
 ch_ret spell_ethereal_fist( int sn, int level, CHAR_DATA *ch, void *vo )
@@ -22,7 +23,7 @@ ch_ret spell_ethereal_fist( int sn, int level, CHAR_DATA *ch, void *vo )
   act( AT_MAGIC, "A fist of black, otherworldly ether rams into $N, leaving $M looking stunned!"
        , ch, NULL,
        victim, TO_NOTVICT );
-  if ( IS_AFFECTED(victim, AFF_PROTECT) && IS_EVIL(ch) )
+  if ( is_affected_by(victim, AFF_PROTECT) && IS_EVIL(ch) )
     dam -= (int) (dam / 4);
 
   return damage( ch, victim, dam, sn );

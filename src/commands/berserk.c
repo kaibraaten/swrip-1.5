@@ -1,4 +1,5 @@
 #include "mud.h"
+#include "character.h"
 
 void do_berserk( CHAR_DATA *ch, char *argument )
 {
@@ -11,7 +12,7 @@ void do_berserk( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( IS_AFFECTED(ch, AFF_BERSERK) )
+  if ( is_affected_by(ch, AFF_BERSERK) )
     {
       send_to_char( "Your rage is already at its peak!\r\n", ch );
       return;

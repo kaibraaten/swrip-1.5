@@ -44,7 +44,7 @@ ch_ret spell_remove_invis( int sn, int level, CHAR_DATA *ch, void *vo )
           if ( victim->race == RACE_DEFEL )
             return rSPELL_FAILED;
 
-          if(!IS_AFFECTED(victim, AFF_INVISIBLE))
+          if(!is_affected_by(victim, AFF_INVISIBLE))
             {
               send_to_char("They are not invisible!\r\n", ch);
               return rSPELL_FAILED;

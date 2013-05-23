@@ -1,4 +1,5 @@
 #include "mud.h"
+#include "character.h"
 
 /* lets the mobile do a command at another location. Very useful */
 
@@ -9,7 +10,7 @@ void do_mpat( CHAR_DATA *ch, char *argument )
   ROOM_INDEX_DATA *original;
   CHAR_DATA       *wch;
 
-  if ( IS_AFFECTED( ch, AFF_CHARM ) )
+  if ( is_affected_by( ch, AFF_CHARM ) )
     return;
 
   if ( !IS_NPC( ch ) )

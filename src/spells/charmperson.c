@@ -1,3 +1,4 @@
+#include "character.h"
 #include "mud.h"
 
 ch_ret spell_charm_person( int sn, int level, CHAR_DATA *ch, void *vo )
@@ -30,9 +31,9 @@ ch_ret spell_charm_person( int sn, int level, CHAR_DATA *ch, void *vo )
 
   charm_chance = ris_save( victim, level, RIS_CHARM );
 
-  if ( IS_AFFECTED(victim, AFF_CHARM)
+  if ( is_affected_by(victim, AFF_CHARM)
        ||   charm_chance == 1000
-       ||   IS_AFFECTED(ch, AFF_CHARM)
+       ||   is_affected_by(ch, AFF_CHARM)
        ||   level < victim->top_level
        ||        circle_follow( victim, ch )
        ||   saves_spell_staff( charm_chance, victim ) )

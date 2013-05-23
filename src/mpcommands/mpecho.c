@@ -1,3 +1,4 @@
+#include "character.h"
 #include "mud.h"
 
 /* prints message to room at large. */
@@ -8,7 +9,7 @@ void do_mpecho( CHAR_DATA *ch, char *argument )
   short     color;
   int        actflags;
 
-  if ( IS_AFFECTED( ch, AFF_CHARM ) )
+  if ( is_affected_by( ch, AFF_CHARM ) )
     return;
 
   if ( !IS_NPC(ch) )

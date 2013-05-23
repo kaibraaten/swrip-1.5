@@ -1,5 +1,6 @@
 #include <string.h>
 #include "mud.h"
+#include "character.h"
 
 void do_dig( CHAR_DATA *ch, char *argument )
 {
@@ -12,7 +13,7 @@ void do_dig( CHAR_DATA *ch, char *argument )
   switch( ch->substate )
     {
     default:
-      if ( IS_NPC(ch)  && IS_AFFECTED( ch, AFF_CHARM ) )
+      if ( IS_NPC(ch)  && is_affected_by( ch, AFF_CHARM ) )
         {
           send_to_char( "You can't concentrate enough for that.\r\n", ch );
           return;

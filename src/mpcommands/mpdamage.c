@@ -13,7 +13,7 @@ void do_mp_damage( CHAR_DATA *ch, char *argument )
   CHAR_DATA *victim;
   int dam;
 
-  if ( IS_AFFECTED( ch, AFF_CHARM ) )
+  if ( is_affected_by( ch, AFF_CHARM ) )
     return;
 
   if ( !IS_NPC( ch ) || ( ch->desc && get_trust( ch ) < LEVEL_IMMORTAL )  )
@@ -142,10 +142,10 @@ static ch_ret simple_damage( CHAR_DATA *ch, CHAR_DATA *victim, int dam, int dt )
       /*
        * Damage modifiers.
        */
-      if ( IS_AFFECTED(victim, AFF_SANCTUARY) )
+      if ( is_affected_by(victim, AFF_SANCTUARY) )
         dam /= 2;
 
-      if ( IS_AFFECTED(victim, AFF_PROTECT) && IS_EVIL(ch) )
+      if ( is_affected_by(victim, AFF_PROTECT) && IS_EVIL(ch) )
         dam -= (int) (dam / 4);
 
       if ( dam < 0 )
@@ -207,7 +207,7 @@ static ch_ret simple_damage( CHAR_DATA *ch, CHAR_DATA *victim, int dam, int dt )
       break;
 
     case POS_STUNNED:
-      if ( !IS_AFFECTED( victim, AFF_PARALYSIS ) )
+      if ( !is_affected_by( victim, AFF_PARALYSIS ) )
         {
           act( AT_ACTION, "$n is stunned, but will probably recover.",
                victim, NULL, NULL, TO_ROOM );
@@ -275,7 +275,7 @@ static ch_ret simple_damage( CHAR_DATA *ch, CHAR_DATA *victim, int dam, int dt )
     {
       if ( ( IS_SET(victim->act, ACT_WIMPY) && number_bits( 1 ) == 0
              &&   victim->hit < victim->max_hit / 2 )
-           ||   ( IS_AFFECTED(victim, AFF_CHARM) && victim->master
+           ||   ( is_affected_by(victim, AFF_CHARM) && victim->master
                   &&     victim->master->in_room != victim->in_room ) )
         {
           start_fearing( victim, ch );

@@ -1,3 +1,4 @@
+#include "character.h"
 #include "mud.h"
 
 ch_ret spell_blindness( int sn, int level, CHAR_DATA *ch, void *vo )
@@ -19,7 +20,7 @@ ch_ret spell_blindness( int sn, int level, CHAR_DATA *ch, void *vo )
       return rSPELL_FAILED;
     }
 
-  if ( IS_AFFECTED(victim, AFF_BLIND) || saves_spell_staff( tmp, victim ) )
+  if ( is_affected_by(victim, AFF_BLIND) || saves_spell_staff( tmp, victim ) )
     {
       failed_casting( skill, ch, victim, NULL );
       return rSPELL_FAILED;

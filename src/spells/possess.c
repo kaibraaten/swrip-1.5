@@ -52,7 +52,7 @@ ch_ret spell_possess( int sn, int level, CHAR_DATA *ch, void *vo )
       return rSPELL_FAILED;
     }
 
-  if ( IS_AFFECTED(victim, AFF_POSSESS)
+  if ( is_affected_by(victim, AFF_POSSESS)
        ||   level < (victim->top_level + 30)
        ||  victim->desc
        ||  !chance(ch, 25) )

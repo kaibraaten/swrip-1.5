@@ -6,7 +6,7 @@ void do_punch( CHAR_DATA *ch, char *argument )
   CHAR_DATA *victim;
   char arg[MAX_INPUT_LENGTH];
 
-  if ( IS_NPC(ch) && IS_AFFECTED( ch, AFF_CHARM ) )
+  if ( IS_NPC(ch) && is_affected_by( ch, AFF_CHARM ) )
     {
       send_to_char( "You can't concentrate enough for that.\r\n", ch );
       return;
@@ -53,7 +53,7 @@ void do_punch( CHAR_DATA *ch, char *argument )
       if ( is_safe( ch, victim ) )
         return;
 
-      if ( IS_AFFECTED(ch, AFF_CHARM) && ch->master == victim )
+      if ( is_affected_by(ch, AFF_CHARM) && ch->master == victim )
         {
           act( AT_PLAIN, "$N is your beloved master.", ch, NULL, victim, TO_CHAR );
           return;

@@ -1,3 +1,4 @@
+#include "character.h"
 #include "mud.h"
 
 /* lets the mobile load an item or mobile.  All items
@@ -10,7 +11,7 @@ void do_mpmload( CHAR_DATA *ch, char *argument )
   MOB_INDEX_DATA *pMobIndex;
   CHAR_DATA      *victim;
 
-  if ( IS_AFFECTED( ch, AFF_CHARM ) )
+  if ( is_affected_by( ch, AFF_CHARM ) )
     return;
 
   if ( !IS_NPC( ch ) )

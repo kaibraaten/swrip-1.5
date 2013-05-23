@@ -1,4 +1,5 @@
 #include "mud.h"
+#include "character.h"
 
 /*
  * Generic area attack                                          -Thoric
@@ -52,7 +53,7 @@ ch_ret spell_area_attack( int sn, int level, CHAR_DATA *ch, void *vo )
               dam = dice( 1, level );
           if ( saved && SPELL_FLAG( skill, SF_SAVE_HALF_DAMAGE ) )
             dam /= 2;
-          if ( IS_AFFECTED(vch, AFF_PROTECT) && IS_EVIL(ch) )
+          if ( is_affected_by(vch, AFF_PROTECT) && IS_EVIL(ch) )
             dam -= (int) (dam / 4);
 
           retcode = damage( ch, vch, dam, sn );

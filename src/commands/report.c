@@ -1,10 +1,11 @@
+#include "character.h"
 #include "mud.h"
 
 void do_report( CHAR_DATA *ch, char *argument )
 {
   char buf[MAX_INPUT_LENGTH];
 
-  if ( IS_AFFECTED(ch, AFF_POSSESS) )
+  if ( is_affected_by(ch, AFF_POSSESS) )
     {
       send_to_char("You can't do that in your current state of mind!\r\n", ch);
       return;

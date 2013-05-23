@@ -1,5 +1,6 @@
 #include <string.h>
 #include "mud.h"
+#include "character.h"
 
 void do_order( CHAR_DATA *ch, char *argument )
 {
@@ -20,7 +21,7 @@ void do_order( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( IS_AFFECTED( ch, AFF_CHARM ) )
+  if ( is_affected_by( ch, AFF_CHARM ) )
     {
       send_to_char( "You feel like taking, not giving, orders.\r\n", ch );
       return;
@@ -44,7 +45,7 @@ void do_order( CHAR_DATA *ch, char *argument )
           return;
         }
 
-      if ( !IS_AFFECTED(victim, AFF_CHARM) || victim->master != ch )
+      if ( !is_affected_by(victim, AFF_CHARM) || victim->master != ch )
         {
           send_to_char( "Do it yourself!\r\n", ch );
           return;
@@ -61,7 +62,7 @@ void do_order( CHAR_DATA *ch, char *argument )
     {
       och_next = och->next_in_room;
 
-      if ( IS_AFFECTED(och, AFF_CHARM)
+      if ( is_affected_by(och, AFF_CHARM)
            && och->master == ch
            && ( fAll || och == victim ) )
         {

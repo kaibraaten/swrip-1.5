@@ -8,7 +8,7 @@ void do_gouge( CHAR_DATA *ch, char *argument )
   short dam;
   int percent;
 
-  if ( IS_NPC(ch) && IS_AFFECTED( ch, AFF_CHARM ) )
+  if ( IS_NPC(ch) && is_affected_by( ch, AFF_CHARM ) )
     {
       send_to_char( "You can't concentrate enough for that.\r\n", ch );
       return;
@@ -41,7 +41,7 @@ void do_gouge( CHAR_DATA *ch, char *argument )
 
       if ( global_retcode == rNONE )
         {
-          if ( !IS_AFFECTED( victim, AFF_BLIND ) )
+          if ( !is_affected_by( victim, AFF_BLIND ) )
             {
               af.type      = gsn_blindness;
               af.location  = APPLY_HITROLL;

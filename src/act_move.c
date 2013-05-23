@@ -263,8 +263,8 @@ bool will_fall( CHAR_DATA *ch, int fall )
 {
   if ( IS_SET( ch->in_room->room_flags, ROOM_NOFLOOR )
        &&   CAN_GO(ch, DIR_DOWN)
-       && (!IS_AFFECTED( ch, AFF_FLYING )
-           || ( ch->mount && !IS_AFFECTED( ch->mount, AFF_FLYING ) ) ) )
+       && (!is_affected_by( ch, AFF_FLYING )
+           || ( ch->mount && !is_affected_by( ch->mount, AFF_FLYING ) ) ) )
     {
       if ( fall > 80 )
         {
@@ -466,7 +466,7 @@ ch_ret move_char( CHAR_DATA *ch, EXIT_DATA *pexit, int fall )
     }
 
   if ( IS_SET(pexit->exit_info, EX_CLOSED)
-       && (!IS_AFFECTED(ch, AFF_PASS_DOOR)
+       && (!is_affected_by(ch, AFF_PASS_DOOR)
            ||   IS_SET(pexit->exit_info, EX_NOPASSDOOR)) )
     {
       if ( !IS_SET( pexit->exit_info, EX_SECRET )
@@ -501,7 +501,7 @@ ch_ret move_char( CHAR_DATA *ch, EXIT_DATA *pexit, int fall )
       send_to_char( "Alas, you cannot go that way.\r\n", ch );
 
   if ( !fall
-       &&   IS_AFFECTED(ch, AFF_CHARM)
+       &&   is_affected_by(ch, AFF_CHARM)
        &&   ch->master
        &&   in_room == ch->master->in_room )
     {
@@ -555,12 +555,12 @@ ch_ret move_char( CHAR_DATA *ch, EXIT_DATA *pexit, int fall )
            ||   to_room->sector_type == SECT_AIR
            ||   IS_SET( pexit->exit_info, EX_FLY ) )
         {
-          if ( ch->mount && !IS_AFFECTED( ch->mount, AFF_FLYING ) )
+          if ( ch->mount && !is_affected_by( ch->mount, AFF_FLYING ) )
             {
               send_to_char( "Your mount can't fly.\r\n", ch );
               return rNONE;
             }
-          if ( !ch->mount && !IS_AFFECTED(ch, AFF_FLYING) )
+          if ( !ch->mount && !is_affected_by(ch, AFF_FLYING) )
             {
               send_to_char( "You'd need to fly to go there.\r\n", ch );
               return rNONE;
@@ -576,13 +576,13 @@ ch_ret move_char( CHAR_DATA *ch, EXIT_DATA *pexit, int fall )
           found = FALSE;
           if ( ch->mount )
             {
-              if ( IS_AFFECTED( ch->mount, AFF_FLYING )
-                   ||   IS_AFFECTED( ch->mount, AFF_FLOATING ) )
+              if ( is_affected_by( ch->mount, AFF_FLYING )
+                   ||   is_affected_by( ch->mount, AFF_FLOATING ) )
                 found = TRUE;
             }
           else
-            if ( IS_AFFECTED(ch, AFF_FLYING)
-                 ||   IS_AFFECTED(ch, AFF_FLOATING) )
+            if ( is_affected_by(ch, AFF_FLYING)
+                 ||   is_affected_by(ch, AFF_FLOATING) )
               found = TRUE;
 
           /*
@@ -614,10 +614,10 @@ ch_ret move_char( CHAR_DATA *ch, EXIT_DATA *pexit, int fall )
           bool found;
 
           found = FALSE;
-          if ( ch->mount && IS_AFFECTED( ch->mount, AFF_FLYING ) )
+          if ( ch->mount && is_affected_by( ch->mount, AFF_FLYING ) )
             found = TRUE;
           else
-            if ( IS_AFFECTED(ch, AFF_FLYING) )
+            if ( is_affected_by(ch, AFF_FLYING) )
               found = TRUE;
 
           if ( !found && !ch->mount )
@@ -705,8 +705,8 @@ ch_ret move_char( CHAR_DATA *ch, EXIT_DATA *pexit, int fall )
               break;
             }
 
-          if ( !IS_AFFECTED(ch->mount, AFF_FLYING)
-               &&   !IS_AFFECTED(ch->mount, AFF_FLOATING) )
+          if ( !is_affected_by(ch->mount, AFF_FLYING)
+               &&   !is_affected_by(ch->mount, AFF_FLOATING) )
             move = movement_loss[UMIN(SECT_MAX-1, in_room->sector_type)];
           else
             move = 1;
@@ -721,8 +721,8 @@ ch_ret move_char( CHAR_DATA *ch, EXIT_DATA *pexit, int fall )
         {
           hpmove = 500/( ch->hit? ch->hit : 1 );
 
-          if ( !IS_AFFECTED(ch, AFF_FLYING)
-               &&   !IS_AFFECTED(ch, AFF_FLOATING) )
+          if ( !is_affected_by(ch, AFF_FLYING)
+               &&   !is_affected_by(ch, AFF_FLOATING) )
             move = hpmove*encumbrance( ch, movement_loss[UMIN(SECT_MAX-1, in_room->sector_type)] );
           else
             move = 1;
@@ -762,7 +762,7 @@ ch_ret move_char( CHAR_DATA *ch, EXIT_DATA *pexit, int fall )
 
   /* check for traps on exit - later */
 
-  if ( !IS_AFFECTED(ch, AFF_SNEAK)
+  if ( !is_affected_by(ch, AFF_SNEAK)
        && ( IS_NPC(ch) || !IS_SET(ch->act, PLR_WIZINVIS) ) )
     {
       if ( fall )
@@ -772,17 +772,17 @@ ch_ret move_char( CHAR_DATA *ch, EXIT_DATA *pexit, int fall )
           {
             if ( ch->mount )
               {
-                if ( IS_AFFECTED( ch->mount, AFF_FLOATING ) )
+                if ( is_affected_by( ch->mount, AFF_FLOATING ) )
                   txt = "floats";
                 else
-                  if ( IS_AFFECTED( ch->mount, AFF_FLYING ) )
+                  if ( is_affected_by( ch->mount, AFF_FLYING ) )
                     txt = "flys";
                   else
                     txt = "rides";
               }
             else
               {
-                if ( IS_AFFECTED( ch, AFF_FLOATING ) )
+                if ( is_affected_by( ch, AFF_FLOATING ) )
                   {
                     if ( drunk )
                       txt = "floats unsteadily";
@@ -790,7 +790,7 @@ ch_ret move_char( CHAR_DATA *ch, EXIT_DATA *pexit, int fall )
                       txt = "floats";
                   }
                 else
-                  if ( IS_AFFECTED( ch, AFF_FLYING ) )
+                  if ( is_affected_by( ch, AFF_FLYING ) )
                     {
                       if ( drunk )
                         txt = "flys shakily";
@@ -845,7 +845,7 @@ ch_ret move_char( CHAR_DATA *ch, EXIT_DATA *pexit, int fall )
 
 
   char_to_room( ch, to_room );
-  if ( !IS_AFFECTED(ch, AFF_SNEAK)
+  if ( !is_affected_by(ch, AFF_SNEAK)
        && ( IS_NPC(ch) || !IS_SET(ch->act, PLR_WIZINVIS) ) )
     {
       if ( fall )
@@ -853,17 +853,17 @@ ch_ret move_char( CHAR_DATA *ch, EXIT_DATA *pexit, int fall )
       else
         if ( ch->mount )
           {
-            if ( IS_AFFECTED( ch->mount, AFF_FLOATING ) )
+            if ( is_affected_by( ch->mount, AFF_FLOATING ) )
               txt = "floats in";
             else
-              if ( IS_AFFECTED( ch->mount, AFF_FLYING ) )
+              if ( is_affected_by( ch->mount, AFF_FLYING ) )
                 txt = "flys in";
               else
                 txt = "rides in";
           }
         else
           {
-            if ( IS_AFFECTED( ch, AFF_FLOATING ) )
+            if ( is_affected_by( ch, AFF_FLOATING ) )
               {
                 if ( drunk )
                   txt = "floats in unsteadily";
@@ -871,7 +871,7 @@ ch_ret move_char( CHAR_DATA *ch, EXIT_DATA *pexit, int fall )
                   txt = "floats in";
               }
             else
-              if ( IS_AFFECTED( ch, AFF_FLYING ) )
+              if ( is_affected_by( ch, AFF_FLYING ) )
                 {
                   if ( drunk )
                     txt = "flys in shakily";
@@ -995,8 +995,8 @@ ch_ret move_char( CHAR_DATA *ch, EXIT_DATA *pexit, int fall )
   if (!will_fall( ch, fall )
       &&   fall > 0 )
     {
-      if (!IS_AFFECTED( ch, AFF_FLOATING )
-          || ( ch->mount && !IS_AFFECTED( ch->mount, AFF_FLOATING ) ) )
+      if (!is_affected_by( ch, AFF_FLOATING )
+          || ( ch->mount && !is_affected_by( ch->mount, AFF_FLOATING ) ) )
         {
           set_char_color( AT_HURT, ch );
           send_to_char( "OUCH! You hit the ground!\r\n", ch );

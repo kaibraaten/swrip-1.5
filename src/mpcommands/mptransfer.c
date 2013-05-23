@@ -13,7 +13,7 @@ void do_mptransfer( CHAR_DATA *ch, char *argument )
   CHAR_DATA       *victim;
   CHAR_DATA       *nextinroom;
 
-  if ( IS_AFFECTED( ch, AFF_CHARM ) )
+  if ( is_affected_by( ch, AFF_CHARM ) )
     return;
 
   if ( !IS_NPC( ch ) )

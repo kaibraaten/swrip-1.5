@@ -1,4 +1,5 @@
 #include "mud.h"
+#include "character.h"
 
 void do_wake( CHAR_DATA *ch, char *argument )
 {
@@ -31,7 +32,7 @@ void do_wake( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( IS_AFFECTED(victim, AFF_SLEEP) || victim->position < POS_SLEEPING )
+  if ( is_affected_by(victim, AFF_SLEEP) || victim->position < POS_SLEEPING )
     {
       act( AT_PLAIN, "You can't seem to wake $M!",
 	   ch, NULL, victim, TO_CHAR );

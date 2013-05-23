@@ -1,3 +1,4 @@
+#include "character.h"
 #include "mud.h"
 
 ch_ret spell_flamestrike( int sn, int level, CHAR_DATA *ch, void *vo )
@@ -15,7 +16,7 @@ ch_ret spell_flamestrike( int sn, int level, CHAR_DATA *ch, void *vo )
   if ( saves_spell_staff( level, victim ) )
     dam /= 2;
 
-  if ( IS_AFFECTED(victim, AFF_PROTECT) && IS_EVIL(ch) )
+  if ( is_affected_by(victim, AFF_PROTECT) && IS_EVIL(ch) )
     dam -= (int) (dam / 4);
 
   return damage( ch, victim, dam, sn );

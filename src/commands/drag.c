@@ -1,5 +1,6 @@
 #include "ships.h"
 #include "mud.h"
+#include "character.h"
 
 void do_drag( CHAR_DATA *ch, char *argument )
 {
@@ -226,7 +227,7 @@ void do_drag( CHAR_DATA *ch, char *argument )
     }
   else
     if ( IS_SET(pexit->exit_info, EX_CLOSED)
-         && (!IS_AFFECTED(victim, AFF_PASS_DOOR)
+         && (!is_affected_by(victim, AFF_PASS_DOOR)
              ||   IS_SET(pexit->exit_info, EX_NOPASSDOOR)) )
       nogo = TRUE;
   if ( nogo )

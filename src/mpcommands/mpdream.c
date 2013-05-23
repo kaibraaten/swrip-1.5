@@ -11,7 +11,7 @@ void do_mpdream( CHAR_DATA *ch, char *argument )
   char arg1[MAX_STRING_LENGTH];
   CHAR_DATA *vict;
 
-  if ( IS_AFFECTED( ch, AFF_CHARM ) )
+  if ( is_affected_by( ch, AFF_CHARM ) )
     return;
 
   if ( !IS_NPC( ch ) || ( ch->desc && get_trust( ch ) < LEVEL_IMMORTAL )  )

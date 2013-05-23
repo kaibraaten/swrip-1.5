@@ -29,7 +29,7 @@ void do_cast( CHAR_DATA *ch, char *argument )
     {
     default:
       /* no ordering charmed mobs to cast spells */
-      if ( IS_NPC(ch) && IS_AFFECTED( ch, AFF_CHARM ) )
+      if ( IS_NPC(ch) && is_affected_by( ch, AFF_CHARM ) )
         {
           send_to_char( "You can't seem to do that right now...\r\n", ch );
 	  return;

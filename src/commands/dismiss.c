@@ -1,3 +1,4 @@
+#include "character.h"
 #include "mud.h"
 
 void do_dismiss( CHAR_DATA *ch, char *argument )
@@ -19,7 +20,7 @@ void do_dismiss( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( IS_AFFECTED( victim, AFF_CHARM )
+  if ( is_affected_by( victim, AFF_CHARM )
        && IS_NPC( victim )
        && victim->master == ch )
     {

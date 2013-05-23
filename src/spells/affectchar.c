@@ -1,3 +1,4 @@
+#include "character.h"
 #include "mud.h"
 
 ch_ret spell_affectchar( int sn, int level, CHAR_DATA *ch, void *vo )
@@ -19,7 +20,7 @@ ch_ret spell_affectchar( int sn, int level, CHAR_DATA *ch, void *vo )
         victim = (CHAR_DATA *) vo;
       /* Check if char has this bitvector already */
       if ( (af.bitvector=saf->bitvector) != 0
-           &&    IS_AFFECTED( victim, af.bitvector )
+           &&    is_affected_by( victim, af.bitvector )
            &&   !SPELL_FLAG( skill, SF_ACCUMULATIVE ) )
         continue;
       /*

@@ -46,8 +46,8 @@ void do_where( CHAR_DATA *ch, char *argument )
       for ( victim = first_char; victim; victim = victim->next )
         if ( victim->in_room
              &&   victim->in_room->area == ch->in_room->area
-             &&   !IS_AFFECTED(victim, AFF_HIDE)
-             &&   !IS_AFFECTED(victim, AFF_SNEAK)
+             &&   !is_affected_by(victim, AFF_HIDE)
+             &&   !is_affected_by(victim, AFF_SNEAK)
              &&   can_see( ch, victim )
              &&   is_name( arg, victim->name ) )
           {

@@ -1,3 +1,4 @@
+#include "character.h"
 #include "mud.h"
 
 /* prints message only to victim */
@@ -9,7 +10,7 @@ void do_mpechoat( CHAR_DATA *ch, char *argument )
   int        actflags;
   short     color;
 
-  if ( IS_AFFECTED( ch, AFF_CHARM ) )
+  if ( is_affected_by( ch, AFF_CHARM ) )
     return;
 
   if ( !IS_NPC( ch ) )

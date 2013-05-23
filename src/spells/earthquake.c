@@ -1,3 +1,4 @@
+#include "character.h"
 #include "mud.h"
 
 ch_ret spell_earthquake( int sn, int level, CHAR_DATA *ch, void *vo )
@@ -37,7 +38,7 @@ ch_ret spell_earthquake( int sn, int level, CHAR_DATA *ch, void *vo )
                && vch->pcdata->wizinvis >= LEVEL_IMMORTAL )
 	    continue;
 
-          if ( IS_AFFECTED(vch, AFF_FLOATING) || IS_AFFECTED(vch, AFF_FLYING) )
+          if ( is_affected_by(vch, AFF_FLOATING) || is_affected_by(vch, AFF_FLYING) )
             continue;
 
           if  (ch == vch )

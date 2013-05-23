@@ -1,3 +1,4 @@
+#include "character.h"
 #include "mud.h"
 
 static bool aff_paralysis( CHAR_DATA *ch, CHAR_DATA *victim );
@@ -34,7 +35,7 @@ void do_bind ( CHAR_DATA *ch , char *argument )
   if ( is_safe( ch, victim ) )
     return;
 
-  if ( IS_AFFECTED(ch, AFF_CHARM) )
+  if ( is_affected_by(ch, AFF_CHARM) )
     {
       if ( ch->master == victim )
         {
@@ -73,7 +74,7 @@ static bool aff_paralysis( CHAR_DATA *ch, CHAR_DATA *victim )
 {
   AFFECT_DATA af;
 
-  if ( !IS_AFFECTED( victim, AFF_PARALYSIS ) )
+  if ( !is_affected_by( victim, AFF_PARALYSIS ) )
     {
       af.type      = gsn_stun;
       af.location  = APPLY_AC;

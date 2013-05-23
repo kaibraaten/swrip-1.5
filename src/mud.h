@@ -1565,7 +1565,6 @@ extern  short                   gsn_yevethan;
 #define IS_IMMORTAL(ch)         (get_trust((ch)) >= LEVEL_IMMORTAL)
 #define IS_GOD(ch)              (get_trust((ch)) >= LEVEL_GOD)
 #define IS_HERO(ch)             (get_trust((ch)) >= LEVEL_HERO)
-#define IS_AFFECTED(ch, sn)     (IS_SET((ch)->affected_by, (sn)))
 #define HAS_BODYPART(ch, part)  ((ch)->xflags == 0 || IS_SET((ch)->xflags, (part)))
 
 #define IS_GOOD(ch)             ((ch)->alignment >= 350)

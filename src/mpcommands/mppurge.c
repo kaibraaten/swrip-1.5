@@ -1,3 +1,4 @@
+#include "character.h"
 #include "mud.h"
 
 /* lets the mobile purge all objects and other npcs in the room,
@@ -11,7 +12,7 @@ void do_mppurge( CHAR_DATA *ch, char *argument )
   CHAR_DATA *victim;
   OBJ_DATA  *obj;
 
-  if ( IS_AFFECTED( ch, AFF_CHARM ) )
+  if ( is_affected_by( ch, AFF_CHARM ) )
     return;
 
   if ( !IS_NPC( ch ) )

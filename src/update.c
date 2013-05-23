@@ -438,7 +438,7 @@ int hit_gain( const CHAR_DATA *ch )
         gain /= 2;
     }
 
-  if ( IS_AFFECTED(ch, AFF_POISON) )
+  if ( is_affected_by(ch, AFF_POISON) )
     gain /= 4;
 
 
@@ -481,7 +481,7 @@ int mana_gain( const CHAR_DATA *ch )
 
     }
 
-  if ( IS_AFFECTED( ch, AFF_POISON ) )
+  if ( is_affected_by( ch, AFF_POISON ) )
     gain /= 4;
 
   return UMIN(gain, ch->max_mana - ch->mana);
@@ -519,7 +519,7 @@ int move_gain( const CHAR_DATA *ch )
         gain /= 2;
     }
 
-  if ( IS_AFFECTED(ch, AFF_POISON) )
+  if ( is_affected_by(ch, AFF_POISON) )
     gain /= 4;
 
   return UMIN(gain, ch->max_move - ch->move);
@@ -542,7 +542,7 @@ void gain_addiction( CHAR_DATA *ch )
             {
             default:
             case SPICE_GLITTERSTIM:
-              if ( !IS_AFFECTED( ch, AFF_BLIND ) )
+              if ( !is_affected_by( ch, AFF_BLIND ) )
                 {
                   af.type      = gsn_blindness;
                   af.location  = APPLY_AC;
@@ -552,7 +552,7 @@ void gain_addiction( CHAR_DATA *ch )
                   affect_to_char( ch, &af );
                 }
             case SPICE_CARSANUM:
-              if ( !IS_AFFECTED( ch, AFF_WEAKEN ) )
+              if ( !is_affected_by( ch, AFF_WEAKEN ) )
                 {
                   af.type      = -1;
                   af.location  = APPLY_DAMROLL;
@@ -562,7 +562,7 @@ void gain_addiction( CHAR_DATA *ch )
                   affect_to_char( ch, &af );
                 }
             case SPICE_RYLL:
-              if ( !IS_AFFECTED( ch, AFF_WEAKEN ) )
+              if ( !is_affected_by( ch, AFF_WEAKEN ) )
                 {
                   af.type      = -1;
                   af.location  = APPLY_DEX;
@@ -572,7 +572,7 @@ void gain_addiction( CHAR_DATA *ch )
                   affect_to_char( ch, &af );
                 }
             case SPICE_ANDRIS:
-              if ( !IS_AFFECTED( ch, AFF_WEAKEN ) )
+              if ( !is_affected_by( ch, AFF_WEAKEN ) )
                 {
                   af.type      = -1;
                   af.location  = APPLY_CON;
@@ -802,13 +802,13 @@ void mobile_update( void )
         }
 
       if ( !ch->in_room
-           ||   IS_AFFECTED(ch, AFF_CHARM)
-           ||   IS_AFFECTED(ch, AFF_PARALYSIS) )
+           ||   is_affected_by(ch, AFF_CHARM)
+           ||   is_affected_by(ch, AFF_PARALYSIS) )
         continue;
 
       /* Clean up 'animated corpses' that are not charmed' - Scryn */
 
-      if ( ch->pIndexData->vnum == 5 && !IS_AFFECTED(ch, AFF_CHARM) )
+      if ( ch->pIndexData->vnum == 5 && !is_affected_by(ch, AFF_CHARM) )
         {
           if(ch->in_room->first_person)
             act(AT_MAGIC, "$n returns to the dust from whence $e came.", ch, NULL, NULL, TO_ROOM);
@@ -1420,7 +1420,7 @@ void char_update( void )
            *   MUST NOT refer to ch after damage taken,
            *   as it may be lethal damage (on NPC).
            */
-          if ( IS_AFFECTED(ch, AFF_POISON) )
+          if ( is_affected_by(ch, AFF_POISON) )
             {
               act( AT_POISON, "$n shivers and suffers.", ch, NULL, NULL, TO_ROOM );
               act( AT_POISON, "You shiver and suffer.", ch, NULL, NULL, TO_CHAR );
@@ -1900,7 +1900,7 @@ void char_check( void )
           if ( ( ch->in_room && ch->in_room->sector_type == SECT_UNDERWATER )
                || ( ch->in_room && ch->in_room->sector_type == SECT_OCEANFLOOR ) )
             {
-              if ( !IS_AFFECTED( ch, AFF_AQUA_BREATH ) )
+              if ( !is_affected_by( ch, AFF_AQUA_BREATH ) )
                 {
                   if ( get_trust(ch) < LEVEL_IMMORTAL )
                     {
@@ -1925,9 +1925,9 @@ void char_check( void )
                && (( ch->in_room->sector_type == SECT_WATER_NOSWIM )
                    ||  ( ch->in_room->sector_type == SECT_WATER_SWIM ) ) )
             {
-              if ( !IS_AFFECTED( ch, AFF_FLYING )
-                   && !IS_AFFECTED( ch, AFF_FLOATING )
-                   && !IS_AFFECTED( ch, AFF_AQUA_BREATH )
+              if ( !is_affected_by( ch, AFF_FLYING )
+                   && !is_affected_by( ch, AFF_FLOATING )
+                   && !is_affected_by( ch, AFF_AQUA_BREATH )
                    && !ch->mount )
                 {
                   if ( get_trust(ch) < LEVEL_IMMORTAL )
@@ -2048,7 +2048,7 @@ void aggr_update( void )
 
       if ( !IS_NPC(ch)
            ||   ch->fighting
-           ||   IS_AFFECTED(ch, AFF_CHARM)
+           ||   is_affected_by(ch, AFF_CHARM)
            ||   !IS_AWAKE(ch)
            ||   ( IS_SET(ch->act, ACT_WIMPY) ) )
         continue;

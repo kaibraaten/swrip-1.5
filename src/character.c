@@ -53,13 +53,13 @@ int get_exp_worth( const CHAR_DATA *ch )
   xp += ( ch->barenumdie * ch->baresizedie + GET_DAMROLL(ch) ) * 50;
   xp += GET_HITROLL(ch) * ch->top_level * 10;
 
-  if ( IS_AFFECTED(ch, AFF_SANCTUARY) )
+  if ( is_affected_by(ch, AFF_SANCTUARY) )
     xp += xp * 1.5;
 
-  if ( IS_AFFECTED(ch, AFF_FIRESHIELD) )
+  if ( is_affected_by(ch, AFF_FIRESHIELD) )
     xp += xp * 1.2;
 
-  if ( IS_AFFECTED(ch, AFF_SHOCKSHIELD) )
+  if ( is_affected_by(ch, AFF_SHOCKSHIELD) )
     xp += xp * 1.2;
 
   xp = URANGE( MIN_EXP_WORTH, xp, MAX_EXP_WORTH );
@@ -284,6 +284,11 @@ bool is_affected( const CHAR_DATA *ch, int sn )
       return TRUE;
 
   return FALSE;
+}
+
+bool is_affected_by( const CHAR_DATA *ch, int affected_by_bit )
+{
+  return IS_SET( ch->affected_by, affected_by_bit );
 }
 
 /*
@@ -647,8 +652,8 @@ bool can_see( const CHAR_DATA *ch, const CHAR_DATA *victim )
 
   if ( !ch )
     {
-      if ( IS_AFFECTED(victim, AFF_INVISIBLE)
-           || IS_AFFECTED(victim, AFF_HIDE)
+      if ( is_affected_by(victim, AFF_INVISIBLE)
+           || is_affected_by(victim, AFF_HIDE)
            || IS_SET(victim->act, PLR_WIZINVIS) )
         return FALSE;
       else
@@ -677,23 +682,23 @@ bool can_see( const CHAR_DATA *ch, const CHAR_DATA *victim )
 
   if ( !IS_IMMORTAL(ch) && !IS_NPC(victim) && !victim->desc
        && get_timer(victim, TIMER_RECENTFIGHT) > 0
-       && (!victim->switched || !IS_AFFECTED(victim->switched, AFF_POSSESS)) )
+       && (!victim->switched || !is_affected_by(victim->switched, AFF_POSSESS)) )
     return FALSE;
 
   if ( !IS_NPC(ch) && IS_SET(ch->act, PLR_HOLYLIGHT) )
     return TRUE;
 
   /* The miracle cure for blindness? -- Altrag */
-  if ( !IS_AFFECTED(ch, AFF_TRUESIGHT) )
+  if ( !is_affected_by(ch, AFF_TRUESIGHT) )
     {
-      if ( IS_AFFECTED(ch, AFF_BLIND) )
+      if ( is_affected_by(ch, AFF_BLIND) )
         return FALSE;
 
-      if ( room_is_dark( ch->in_room ) && !IS_AFFECTED(ch, AFF_INFRARED) )
+      if ( room_is_dark( ch->in_room ) && !is_affected_by(ch, AFF_INFRARED) )
         return FALSE;
 
-      if ( IS_AFFECTED(victim, AFF_HIDE)
-           && !IS_AFFECTED(ch, AFF_DETECT_HIDDEN)
+      if ( is_affected_by(victim, AFF_HIDE)
+           && !is_affected_by(ch, AFF_DETECT_HIDDEN)
            && !victim->fighting )
         {
           if ( ch->race == RACE_DEFEL && victim->race == RACE_DEFEL )
@@ -703,8 +708,8 @@ bool can_see( const CHAR_DATA *ch, const CHAR_DATA *victim )
         }
 
 
-      if ( IS_AFFECTED(victim, AFF_INVISIBLE)
-           &&  !IS_AFFECTED(ch, AFF_DETECT_INVIS) )
+      if ( is_affected_by(victim, AFF_INVISIBLE)
+           &&  !is_affected_by(ch, AFF_DETECT_INVIS) )
         return FALSE;
     }
 
@@ -722,10 +727,10 @@ bool can_see_obj( const CHAR_DATA *ch, const OBJ_DATA *obj )
   if ( IS_OBJ_STAT( obj, ITEM_BURRIED ) )
     return FALSE;
 
-  if ( IS_AFFECTED( ch, AFF_TRUESIGHT ) )
+  if ( is_affected_by( ch, AFF_TRUESIGHT ) )
     return TRUE;
 
-  if ( IS_AFFECTED( ch, AFF_BLIND ) )
+  if ( is_affected_by( ch, AFF_BLIND ) )
     return FALSE;
 
   if ( IS_OBJ_STAT(obj, ITEM_HIDDEN) )
@@ -734,10 +739,10 @@ bool can_see_obj( const CHAR_DATA *ch, const OBJ_DATA *obj )
   if ( obj->item_type == ITEM_LIGHT && obj->value[2] != 0 )
     return TRUE;
 
-  if ( room_is_dark( ch->in_room ) && !IS_AFFECTED(ch, AFF_INFRARED) )
+  if ( room_is_dark( ch->in_room ) && !is_affected_by(ch, AFF_INFRARED) )
     return FALSE;
 
-  if ( IS_OBJ_STAT(obj, ITEM_INVIS) && !IS_AFFECTED(ch, AFF_DETECT_INVIS) )
+  if ( IS_OBJ_STAT(obj, ITEM_INVIS) && !is_affected_by(ch, AFF_DETECT_INVIS) )
     return FALSE;
 
   return TRUE;

@@ -1,4 +1,5 @@
 #include "mud.h"
+#include "character.h"
 
 void do_sit (CHAR_DATA *ch, char *argument )
 {
@@ -43,7 +44,7 @@ void do_sit (CHAR_DATA *ch, char *argument )
   switch (ch->position)
     {
     case POS_SLEEPING:
-      if (IS_AFFECTED(ch,AFF_SLEEP))
+      if (is_affected_by(ch,AFF_SLEEP))
         {
           send_to_char("You can't wake up!\r\n",ch);
           return;

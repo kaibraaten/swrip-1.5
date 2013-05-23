@@ -1,3 +1,4 @@
+#include "character.h"
 #include "mud.h"
 
 /*
@@ -42,7 +43,7 @@ ch_ret spell_energy_drain( int sn, int level, CHAR_DATA *ch, void *vo )
 
   if ( ch->hit > ch->max_hit )
     ch->hit = ch->max_hit;
-  if ( IS_AFFECTED(victim, AFF_PROTECT) && IS_EVIL(ch) )
+  if ( is_affected_by(victim, AFF_PROTECT) && IS_EVIL(ch) )
     dam -= (int) (dam / 4);
 
   return damage( ch, victim, dam, sn );

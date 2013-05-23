@@ -10,7 +10,7 @@ void do_pick( CHAR_DATA *ch, char *argument )
   EXIT_DATA *pexit;
   SHIP_DATA *ship;
 
-  if ( IS_NPC(ch) && IS_AFFECTED( ch, AFF_CHARM ) )
+  if ( IS_NPC(ch) && is_affected_by( ch, AFF_CHARM ) )
     {
       send_to_char( "You can't concentrate enough for that.\r\n", ch );
       return;
@@ -163,11 +163,11 @@ void do_pick( CHAR_DATA *ch, char *argument )
 
 	      if ( !IS_NPC( victim ) && victim->switched
                    && !IS_SET(victim->switched->act, ACT_POLYMORPHED)
-                   && !IS_AFFECTED(victim->switched, AFF_POSSESS) )
+                   && !is_affected_by(victim->switched, AFF_POSSESS) )
                 continue;
               else if ( !IS_NPC( victim ) && victim->switched
                         && (IS_SET(victim->switched->act, ACT_POLYMORPHED)
-                            || IS_AFFECTED(victim->switched, AFF_POSSESS) ) )
+                            || is_affected_by(victim->switched, AFF_POSSESS) ) )
                 victim = victim->switched;
 
               if ( !IS_AWAKE(victim) || IS_SET(victim->in_room->room_flags,ROOM_SILENCE) )
@@ -207,11 +207,11 @@ void do_pick( CHAR_DATA *ch, char *argument )
 
               if ( !IS_NPC( victim ) && victim->switched
 		   && !IS_SET(victim->switched->act, ACT_POLYMORPHED)
-                   && !IS_AFFECTED(victim->switched, AFF_POSSESS) )
+                   && !is_affected_by(victim->switched, AFF_POSSESS) )
                 continue;
               else if ( !IS_NPC( victim ) && victim->switched
                         && (IS_SET(victim->switched->act, ACT_POLYMORPHED)
-                            || IS_AFFECTED(victim->switched, AFF_POSSESS) ) )
+                            || is_affected_by(victim->switched, AFF_POSSESS) ) )
                 victim = victim->switched;
 
               if ( !IS_AWAKE(victim) || IS_SET(victim->in_room->room_flags,ROOM_SILENCE) )

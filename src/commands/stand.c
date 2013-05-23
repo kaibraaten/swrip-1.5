@@ -1,11 +1,12 @@
 #include "mud.h"
+#include "character.h"
 
 void do_stand( CHAR_DATA *ch, char *argument )
 {
   switch ( ch->position )
     {
     case POS_SLEEPING:
-      if ( IS_AFFECTED(ch, AFF_SLEEP) )
+      if ( is_affected_by(ch, AFF_SLEEP) )
         { send_to_char( "You can't seem to wake up!\r\n", ch ); return; }
 
       send_to_char( "You wake and climb quickly to your feet.\r\n", ch );

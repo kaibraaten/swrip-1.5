@@ -298,7 +298,7 @@ void violence_update( void )
         }
 
       if ( ( victim = who_fighting( ch ) ) == NULL
-           ||   IS_AFFECTED( ch, AFF_PARALYSIS ) )
+           ||   is_affected_by( ch, AFF_PARALYSIS ) )
         continue;
 
       retcode = rNONE;
@@ -355,9 +355,9 @@ void violence_update( void )
               /*
                * PC's auto-assist others in their group.
                */
-              if ( !IS_NPC(ch) || IS_AFFECTED(ch, AFF_CHARM) )
+              if ( !IS_NPC(ch) || is_affected_by(ch, AFF_CHARM) )
                 {
-                  if ( ( !IS_NPC(rch) || IS_AFFECTED(rch, AFF_CHARM) )
+                  if ( ( !IS_NPC(rch) || is_affected_by(rch, AFF_CHARM) )
                        &&   is_same_group(ch, rch) )
                     multi_hit( rch, victim, TYPE_UNDEFINED );
                   continue;
@@ -366,7 +366,7 @@ void violence_update( void )
               /*
                * NPC's assist NPC's of same type or 12.5% chance regardless.
                */
-              if ( IS_NPC(rch) && !IS_AFFECTED(rch, AFF_CHARM)
+              if ( IS_NPC(rch) && !is_affected_by(rch, AFF_CHARM)
                    &&  !IS_SET(rch->act, ACT_NOASSIST) )
                 {
                   if ( char_died(ch) )
@@ -430,7 +430,7 @@ ch_ret multi_hit( CHAR_DATA *ch, CHAR_DATA *victim, int dt )
   /* -- Altrag */
   hit_chance = IS_NPC(ch) ? 100 : (ch->pcdata->learned[gsn_berserk]*5/2);
 
-  if ( IS_AFFECTED(ch, AFF_BERSERK) && number_percent() < hit_chance )
+  if ( is_affected_by(ch, AFF_BERSERK) && number_percent() < hit_chance )
     if ( (retcode = one_hit( ch, victim, dt )) != rNONE ||
          who_fighting( ch ) != victim )
       return retcode;
@@ -527,8 +527,8 @@ ch_ret multi_hit( CHAR_DATA *ch, CHAR_DATA *victim, int dt )
     {
       int move;
 
-      if ( !IS_AFFECTED(ch, AFF_FLYING)
-           &&   !IS_AFFECTED(ch, AFF_FLOATING) )
+      if ( !is_affected_by(ch, AFF_FLYING)
+           &&   !is_affected_by(ch, AFF_FLOATING) )
         move = encumbrance( ch, movement_loss[UMIN(SECT_MAX-1, ch->in_room->sector_type)] );
       else
         move = encumbrance( ch, 1 );
@@ -915,7 +915,7 @@ ch_ret one_hit( CHAR_DATA *ch, CHAR_DATA *victim, int dt )
               act( AT_BLUE, "Blue rings of energy from your blaster strike $N, leaving $M stunned!", ch, NULL, victim, TO_CHAR );
               act( AT_BLUE, "Blue rings of energy from $n's blaster hit $N, leaving $M stunned!", ch, NULL, victim, TO_NOTVICT );
               stop_fighting( victim, TRUE );
-              if ( !IS_AFFECTED( victim, AFF_PARALYSIS ) )
+              if ( !is_affected_by( victim, AFF_PARALYSIS ) )
                 {
                   af.type      = gsn_stun;
                   af.location  = APPLY_AC;
@@ -1084,8 +1084,8 @@ ch_ret one_hit( CHAR_DATA *ch, CHAR_DATA *victim, int dt )
   /*
    * magic shields that retaliate                               -Thoric
    */
-  if ( IS_AFFECTED( victim, AFF_FIRESHIELD )
-       &&  !IS_AFFECTED( ch, AFF_FIRESHIELD ) )
+  if ( is_affected_by( victim, AFF_FIRESHIELD )
+       &&  !is_affected_by( ch, AFF_FIRESHIELD ) )
     retcode = spell_fireball( gsn_fireball, off_shld_lvl(victim, ch), victim, ch );
   if ( retcode != rNONE || char_died(ch) || char_died(victim) )
     return retcode;
@@ -1093,8 +1093,8 @@ ch_ret one_hit( CHAR_DATA *ch, CHAR_DATA *victim, int dt )
   if ( retcode != rNONE || char_died(ch) || char_died(victim) )
     return retcode;
 
-  if ( IS_AFFECTED( victim, AFF_SHOCKSHIELD )
-       &&  !IS_AFFECTED( ch, AFF_SHOCKSHIELD ) )
+  if ( is_affected_by( victim, AFF_SHOCKSHIELD )
+       &&  !is_affected_by( ch, AFF_SHOCKSHIELD ) )
     retcode = spell_lightning_bolt( gsn_lightning_bolt, off_shld_lvl(victim, ch), victim, ch );
   if ( retcode != rNONE || char_died(ch) || char_died(victim) )
     return retcode;
@@ -1296,7 +1296,7 @@ ch_ret damage( CHAR_DATA *ch, CHAR_DATA *victim, int dam, int dt )
            */
           if ( IS_NPC(ch)
                &&   npcvict
-               &&   IS_AFFECTED(victim, AFF_CHARM)
+               &&   is_affected_by(victim, AFF_CHARM)
                &&   victim->master
                &&   victim->master->in_room == ch->in_room
                &&   number_bits( 3 ) == 0 )
@@ -1318,7 +1318,7 @@ ch_ret damage( CHAR_DATA *ch, CHAR_DATA *victim, int dam, int dt )
       /*
        * Inviso attacks ... not.
        */
-      if ( IS_AFFECTED(ch, AFF_INVISIBLE))
+      if ( is_affected_by(ch, AFF_INVISIBLE))
         {
           affect_strip( ch, gsn_invis );
           affect_strip( ch, gsn_mass_invis );
@@ -1327,15 +1327,15 @@ ch_ret damage( CHAR_DATA *ch, CHAR_DATA *victim, int dam, int dt )
         }
 
       /* Take away Hide */
-      if ( IS_AFFECTED(ch, AFF_HIDE) && ch->race != RACE_DEFEL )
+      if ( is_affected_by(ch, AFF_HIDE) && ch->race != RACE_DEFEL )
         REMOVE_BIT(ch->affected_by, AFF_HIDE);
       /*
        * Damage modifiers.
        */
-      if ( IS_AFFECTED(victim, AFF_SANCTUARY) )
+      if ( is_affected_by(victim, AFF_SANCTUARY) )
         dam /= 2;
 
-      if ( IS_AFFECTED(victim, AFF_PROTECT) && IS_EVIL(ch) )
+      if ( is_affected_by(victim, AFF_PROTECT) && IS_EVIL(ch) )
         dam -= (int) (dam / 4);
 
       if ( dam < 0 )
@@ -1460,7 +1460,7 @@ ch_ret damage( CHAR_DATA *ch, CHAR_DATA *victim, int dam, int dt )
     victim->hit = 1;
 
   if ( dam > 0 && dt > TYPE_HIT
-       && !IS_AFFECTED( victim, AFF_POISON )
+       && !is_affected_by( victim, AFF_POISON )
        &&  is_wielding_poisoned( ch )
        && !IS_SET( victim->immune, RIS_POISON )
        && !saves_poison_death( get_level( ch, COMBAT_ABILITY ), victim ) )
@@ -1498,7 +1498,7 @@ ch_ret damage( CHAR_DATA *ch, CHAR_DATA *victim, int dam, int dt )
       break;
 
     case POS_STUNNED:
-      if ( !IS_AFFECTED( victim, AFF_PARALYSIS ) )
+      if ( !is_affected_by( victim, AFF_PARALYSIS ) )
         {
           act( AT_ACTION, "$n is stunned, but will probably recover.",
                victim, NULL, NULL, TO_ROOM );
@@ -1549,7 +1549,7 @@ ch_ret damage( CHAR_DATA *ch, CHAR_DATA *victim, int dam, int dt )
    * Sleep spells and extremely wounded folks.
    */
   if ( !IS_AWAKE(victim)                /* lets make NPC's not slaughter PC's */
-       &&   !IS_AFFECTED( victim, AFF_PARALYSIS ) )
+       &&   !is_affected_by( victim, AFF_PARALYSIS ) )
     {
       if ( victim->fighting
            &&   victim->fighting->who->hunting
@@ -1728,7 +1728,7 @@ ch_ret damage( CHAR_DATA *ch, CHAR_DATA *victim, int dam, int dt )
     {
       if ( ( IS_SET(victim->act, ACT_WIMPY) && number_bits( 1 ) == 0
              &&   victim->hit < victim->max_hit / 2 )
-           ||   ( IS_AFFECTED(victim, AFF_CHARM) && victim->master
+           ||   ( is_affected_by(victim, AFF_CHARM) && victim->master
                   &&     victim->master->in_room != victim->in_room ) )
         {
           start_fearing( victim, ch );
@@ -1887,7 +1887,7 @@ void update_pos( CHAR_DATA *victim )
     {
       if ( victim->position <= POS_STUNNED )
         victim->position = POS_STANDING;
-      if ( IS_AFFECTED( victim, AFF_PARALYSIS ) )
+      if ( is_affected_by( victim, AFF_PARALYSIS ) )
         victim->position = POS_STUNNED;
       return;
     }
@@ -1915,7 +1915,7 @@ void update_pos( CHAR_DATA *victim )
   else                          victim->position = POS_STUNNED;
 
   if ( victim->position > POS_STUNNED
-       &&   IS_AFFECTED( victim, AFF_PARALYSIS ) )
+       &&   is_affected_by( victim, AFF_PARALYSIS ) )
     victim->position = POS_STUNNED;
 
   if ( victim->mount )
@@ -1946,7 +1946,7 @@ void set_fighting( CHAR_DATA *ch, CHAR_DATA *victim )
       return;
     }
 
-  if ( IS_AFFECTED(ch, AFF_SLEEP) )
+  if ( is_affected_by(ch, AFF_SLEEP) )
     affect_strip( ch, gsn_sleep );
 
   /* Limit attackers -Thoric */
@@ -1966,7 +1966,7 @@ void set_fighting( CHAR_DATA *ch, CHAR_DATA *victim )
   ch->fighting = fight;
   ch->position = POS_FIGHTING;
   victim->num_fighting++;
-  if ( victim->switched && IS_AFFECTED(victim->switched, AFF_POSSESS) )
+  if ( victim->switched && is_affected_by(victim->switched, AFF_POSSESS) )
     {
       send_to_char( "You are disturbed!\r\n", victim->switched );
       do_return( victim->switched, "" );
@@ -2006,7 +2006,7 @@ void free_fight( CHAR_DATA *ch )
   else
     ch->position = POS_STANDING;
   /* Berserk wears off after combat. -- Altrag */
-  if ( IS_AFFECTED(ch, AFF_BERSERK) )
+  if ( is_affected_by(ch, AFF_BERSERK) )
     {
       affect_strip(ch, gsn_berserk);
       set_char_color(AT_WEAROFF, ch);
@@ -2668,7 +2668,7 @@ bool get_cover( CHAR_DATA *ch )
       if ( ( pexit = get_exit(was_in, door) ) == NULL
            ||   !pexit->to_room
            || ( IS_SET(pexit->exit_info, EX_CLOSED)
-                &&   !IS_AFFECTED( ch, AFF_PASS_DOOR ) )
+                &&   !is_affected_by( ch, AFF_PASS_DOOR ) )
            || ( IS_NPC(ch)
                 &&   IS_SET(pexit->to_room->room_flags, ROOM_NO_MOB) ) )
         continue;

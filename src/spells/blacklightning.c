@@ -1,3 +1,4 @@
+#include "character.h"
 #include "mud.h"
 
 ch_ret spell_black_lightning( int sn, int level, CHAR_DATA *ch, void *vo )
@@ -6,7 +7,7 @@ ch_ret spell_black_lightning( int sn, int level, CHAR_DATA *ch, void *vo )
   int dam;
 
   dam         = 100;
-  if ( IS_AFFECTED(victim, AFF_PROTECT) && IS_EVIL(ch) )
+  if ( is_affected_by(victim, AFF_PROTECT) && IS_EVIL(ch) )
     dam -= (int) (dam / 2);
 
   send_to_char("You feel the hatred grow within you!\r\n", ch);

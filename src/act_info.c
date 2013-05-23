@@ -63,7 +63,7 @@ char *format_obj_to_char( const OBJ_DATA *obj, const CHAR_DATA *ch, bool fShort 
 
   buf[0] = '\0';
   if ( IS_OBJ_STAT(obj, ITEM_INVIS)     )   strcat( buf, "(Invis) "     );
-  if ( ( IS_AFFECTED(ch, AFF_DETECT_MAGIC) || IS_IMMORTAL(ch) )
+  if ( ( is_affected_by(ch, AFF_DETECT_MAGIC) || IS_IMMORTAL(ch) )
        && IS_OBJ_STAT(obj, ITEM_MAGIC)  )   strcat( buf, "&B(Blue Aura)&w "   );
   if ( IS_OBJ_STAT(obj, ITEM_GLOW)      )   strcat( buf, "(Glowing) "   );
   if ( IS_OBJ_STAT(obj, ITEM_HUM)       )   strcat( buf, "(Humming) "   );
@@ -71,7 +71,7 @@ char *format_obj_to_char( const OBJ_DATA *obj, const CHAR_DATA *ch, bool fShort 
   if ( IS_OBJ_STAT(obj, ITEM_BURRIED)     )   strcat( buf, "(Burried) "   );
   if ( IS_IMMORTAL(ch)
        && IS_OBJ_STAT(obj, ITEM_PROTOTYPE) ) strcat( buf, "(PROTO) "      );
-  if ( IS_AFFECTED(ch, AFF_DETECTTRAPS)
+  if ( is_affected_by(ch, AFF_DETECTTRAPS)
        && is_trapped(obj)   )   strcat( buf, "(Trap) "  );
 
   if ( fShort )
@@ -240,7 +240,7 @@ void show_list_to_char( const OBJ_DATA *list, CHAR_DATA *ch, bool fShort, bool f
       if ( obj->wear_loc == WEAR_NONE
            && can_see_obj( ch, obj )
            && ( ( obj->description && obj->description[0] != '\0' ) || ( IS_SET(ch->act, PLR_HOLYLIGHT) || IS_NPC(ch) ) )
-           && (obj->item_type != ITEM_TRAP || IS_AFFECTED(ch, AFF_DETECTTRAPS) ) )
+           && (obj->item_type != ITEM_TRAP || is_affected_by(ch, AFF_DETECTTRAPS) ) )
         {
           pstrShow = format_obj_to_char( obj, ch, fShort );
           fCombine = FALSE;
@@ -351,10 +351,10 @@ bool check_blind( const CHAR_DATA *ch )
   if ( !IS_NPC(ch) && IS_SET(ch->act, PLR_HOLYLIGHT) )
     return TRUE;
 
-  if ( IS_AFFECTED(ch, AFF_TRUESIGHT) )
+  if ( is_affected_by(ch, AFF_TRUESIGHT) )
     return TRUE;
 
-  if ( IS_AFFECTED(ch, AFF_BLIND) )
+  if ( is_affected_by(ch, AFF_BLIND) )
     {
       send_to_char( "You can't see a thing!\r\n", ch );
       return FALSE;

@@ -21,7 +21,7 @@ void do_group( CHAR_DATA *ch, char *argument )
             {
               set_char_color( AT_DGREEN, ch );
 
-              if (IS_AFFECTED(gch, AFF_POSSESS))
+              if (is_affected_by(gch, AFF_POSSESS))
                 ch_printf( ch,
                            "[%2d %s] %-16s %4s/%4s hp %4s/%4s mv %5s xp\r\n",
                            gch->top_level,

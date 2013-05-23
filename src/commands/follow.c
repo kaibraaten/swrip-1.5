@@ -1,4 +1,5 @@
 #include "mud.h"
+#include "character.h"
 
 void do_follow( CHAR_DATA *ch, char *argument )
 {
@@ -19,7 +20,7 @@ void do_follow( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( IS_AFFECTED(ch, AFF_CHARM) && ch->master )
+  if ( is_affected_by(ch, AFF_CHARM) && ch->master )
     {
       act( AT_PLAIN, "But you'd rather follow $N!", ch, NULL, ch->master, TO_CHAR );
       return;

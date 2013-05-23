@@ -1,6 +1,8 @@
 #ifndef _SWRIP_CONSTANTS_H_
 #define _SWRIP_CONSTANTS_H_
 
+#include <limits.h>
+
 /*
  * String and memory management parameters.
  */
@@ -58,7 +60,7 @@
 #define MIN_NAME_LENGTH             3
 #define MAX_NAME_LENGTH            12
 #define MIN_VNUM                    1
-#define MAX_VNUM                32767
+#define MAX_VNUM                SHRT_MAX
 #define MAX_EXP_WORTH          500000
 #define MIN_EXP_WORTH              25
 
@@ -507,8 +509,6 @@ typedef enum
 #define MOB_VNUM_MERC_ELITE 32
 #define MOB_VNUM_MERC_PATROL 33
 #define MOB_VNUM_MERC_FORCES 34
-
-#define MOB_VNUM_SHIPUPGRADE 40
 
 /*
  * ACT bits for mobs.
@@ -1210,9 +1210,8 @@ typedef enum
 #endif
 
 /*
- * Room flags.           Holy cow!  Talked about stripped away..
- * Used in #ROOMS.       Those merc guys know how to strip code down.
- *                       Lets put it all back... ;)
+ * Room flags.
+ * Used in #ROOMS.
  */
 
 #define ROOM_DARK               BV00

@@ -32,8 +32,6 @@
  *  Full support for nested ifs is in.                                      *
  ****************************************************************************/
 
-#include <sys/types.h>
-#include <stdio.h>
 #include <string.h>
 #include <ctype.h>
 #include "mud.h"
@@ -679,7 +677,7 @@ int mprog_do_ifcheck( const char *ifcheck, CHAR_DATA *mob, CHAR_DATA *actor,
         }
       if ( !str_cmp(chck, "ischarmed") )
         {
-          return IS_AFFECTED(chkchar, AFF_CHARM) ? TRUE : FALSE;
+          return is_affected_by(chkchar, AFF_CHARM) ? TRUE : FALSE;
         }
       if ( !str_cmp(chck, "isfollow") )
         {
@@ -695,7 +693,7 @@ int mprog_do_ifcheck( const char *ifcheck, CHAR_DATA *mob, CHAR_DATA *actor,
               progbug("Unknown affect being checked", mob);
               return BERR;
             }
-          return IS_AFFECTED(chkchar, 1 << value) ? TRUE : FALSE;
+          return is_affected_by(chkchar, 1 << value) ? TRUE : FALSE;
         }
       if ( !str_cmp(chck, "hitprcnt") )
         {
@@ -1282,8 +1280,8 @@ void mprog_driver ( char *com_list, CHAR_DATA *mob, CHAR_DATA *actor,
   bool ifstate[MAX_IFS][ DO_ELSE + 1 ];
   static int prog_nest;
 
-  if IS_AFFECTED( mob, AFF_CHARM )
-                  return;
+  if( is_affected_by( mob, AFF_CHARM ) )
+    return;
 
   /* Next couple of checks stop program looping. -- Altrag */
   if ( mob == actor )

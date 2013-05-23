@@ -1,4 +1,5 @@
 #include "mud.h"
+#include "character.h"
 
 /* lets the mobile goto any location it wishes that is not private */
 
@@ -7,7 +8,7 @@ void do_mpgoto( CHAR_DATA *ch, char *argument )
   char arg[ MAX_INPUT_LENGTH ];
   ROOM_INDEX_DATA *location;
 
-  if ( IS_AFFECTED( ch, AFF_CHARM ) )
+  if ( is_affected_by( ch, AFF_CHARM ) )
     return;
 
   if ( !IS_NPC( ch ) )

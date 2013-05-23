@@ -1,4 +1,5 @@
 #include "mud.h"
+#include "character.h"
 
 ch_ret spell_harm( int sn, int level, CHAR_DATA *ch, void *vo )
 {
@@ -24,7 +25,7 @@ ch_ret spell_harm( int sn, int level, CHAR_DATA *ch, void *vo )
     dam = UMIN( 50, dam / 4 );
   dam = UMIN( 100, dam );
 
-  if ( IS_AFFECTED(victim, AFF_PROTECT) && IS_EVIL(ch) )
+  if ( is_affected_by(victim, AFF_PROTECT) && IS_EVIL(ch) )
     dam -= (int) (dam / 4);
 
   return damage( ch, victim, dam, sn );

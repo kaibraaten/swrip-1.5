@@ -1,3 +1,4 @@
+#include "character.h"
 #include "mud.h"
 
 ch_ret spell_sonic_resonance( int sn, int level, CHAR_DATA *ch, void *vo )
@@ -17,7 +18,7 @@ ch_ret spell_sonic_resonance( int sn, int level, CHAR_DATA *ch, void *vo )
 
   if ( saves_spell_staff( level, victim ) )
     dam = dam*3/4;
-  if ( IS_AFFECTED(victim, AFF_PROTECT) && IS_EVIL(ch) )
+  if ( is_affected_by(victim, AFF_PROTECT) && IS_EVIL(ch) )
     dam -= (int) (dam / 4);
 
   act( AT_MAGIC, "A cylinder of kinetic energy enshrouds $N causing $S to resonate."

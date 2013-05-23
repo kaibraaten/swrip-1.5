@@ -79,7 +79,7 @@ bool check_skill( CHAR_DATA *ch, char *command, char *argument )
     return TRUE;
 
   if ( IS_NPC(ch)
-       &&  (IS_AFFECTED( ch, AFF_CHARM ) || IS_AFFECTED( ch, AFF_POSSESS )) )
+       &&  (is_affected_by( ch, AFF_CHARM ) || is_affected_by( ch, AFF_POSSESS )) )
     {
       send_to_char( "For some reason, you seem unable to perform that...\r\n", ch );
       act( AT_GREY,"$n looks around.", ch, NULL, NULL, TO_ROOM );
@@ -368,13 +368,13 @@ void disarm( CHAR_DATA *ch, CHAR_DATA *victim )
  */
 void trip( CHAR_DATA *ch, CHAR_DATA *victim )
 {
-  if ( IS_AFFECTED( victim, AFF_FLYING )
-       ||   IS_AFFECTED( victim, AFF_FLOATING ) )
+  if ( is_affected_by( victim, AFF_FLYING )
+       ||   is_affected_by( victim, AFF_FLOATING ) )
     return;
   if ( victim->mount )
     {
-      if ( IS_AFFECTED( victim->mount, AFF_FLYING )
-           ||   IS_AFFECTED( victim->mount, AFF_FLOATING ) )
+      if ( is_affected_by( victim->mount, AFF_FLYING )
+           ||   is_affected_by( victim->mount, AFF_FLOATING ) )
         return;
       act( AT_SKILL, "$n trips your mount and you fall off!", ch, NULL, victim, TO_VICT    );
       act( AT_SKILL, "You trip $N's mount and $N falls off!", ch, NULL, victim, TO_CHAR    );

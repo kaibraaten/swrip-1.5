@@ -25,7 +25,7 @@ ch_ret spell_invis( int sn, int level, CHAR_DATA *ch, void *vo )
           return rSPELL_FAILED;
         }
 
-      if ( IS_AFFECTED(victim, AFF_INVISIBLE) )
+      if ( is_affected_by(victim, AFF_INVISIBLE) )
         {
           failed_casting( skill, ch, victim, NULL );
           return rSPELL_FAILED;

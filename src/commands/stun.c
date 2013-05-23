@@ -8,7 +8,7 @@ void do_stun( CHAR_DATA *ch, char *argument )
   int stun_chance;
   bool fail;
 
-  if ( IS_NPC(ch) && IS_AFFECTED( ch, AFF_CHARM ) )
+  if ( IS_NPC(ch) && is_affected_by( ch, AFF_CHARM ) )
     {
       send_to_char( "You can't concentrate enough for that.\r\n", ch );
       return;
@@ -65,7 +65,7 @@ void do_stun( CHAR_DATA *ch, char *argument )
       act( AT_SKILL, "$N smashes into you, leaving you stunned!", victim, NULL, ch, TO_CHAR );
       act( AT_SKILL, "You smash into $N, leaving $M stunned!", ch, NULL, victim, TO_CHAR );
       act( AT_SKILL, "$n smashes into $N, leaving $M stunned!", ch, NULL, victim, TO_NOTVICT );
-      if ( !IS_AFFECTED( victim, AFF_PARALYSIS ) )
+      if ( !is_affected_by( victim, AFF_PARALYSIS ) )
         {
           af.type      = gsn_stun;
           af.location  = APPLY_AC;
