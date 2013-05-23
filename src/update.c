@@ -823,17 +823,17 @@ void mobile_update( void )
            &&   !ch->fighting && ch->hunting )
         {
           if (  ch->top_level < 20 )
-            WAIT_STATE( ch, 6 * PULSE_PER_SECOND );
+            set_wait_state( ch, 6 * PULSE_PER_SECOND );
           else  if (  ch->top_level < 40 )
-            WAIT_STATE( ch, 5 * PULSE_PER_SECOND );
+            set_wait_state( ch, 5 * PULSE_PER_SECOND );
           else if (  ch->top_level < 60 )
-            WAIT_STATE( ch, 4 * PULSE_PER_SECOND );
+            set_wait_state( ch, 4 * PULSE_PER_SECOND );
           else  if (  ch->top_level < 80 )
-            WAIT_STATE( ch, 3 * PULSE_PER_SECOND );
+            set_wait_state( ch, 3 * PULSE_PER_SECOND );
           else  if (  ch->top_level < 100 )
-            WAIT_STATE( ch, 2 * PULSE_PER_SECOND );
+            set_wait_state( ch, 2 * PULSE_PER_SECOND );
           else
-            WAIT_STATE( ch, 1 * PULSE_PER_SECOND );
+            set_wait_state( ch, 1 * PULSE_PER_SECOND );
           hunt_victim( ch );
           continue;
         }
@@ -1846,7 +1846,7 @@ void char_check( void )
               if ( !IS_SET( ch->act, ACT_SENTINEL )
                    &&   !ch->fighting && ch->hunting )
                 {
-                  WAIT_STATE( ch, 2 * PULSE_VIOLENCE );
+                  set_wait_state( ch, 2 * PULSE_VIOLENCE );
                   hunt_victim( ch );
                   continue;
                 }
@@ -2098,7 +2098,7 @@ void aggr_update( void )
                    && !victim->fighting
                    && victim->hit >= victim->max_hit )
                 {
-                  WAIT_STATE( ch, skill_table[gsn_backstab]->beats );
+                  set_wait_state( ch, skill_table[gsn_backstab]->beats );
                   if ( !is_awake(victim)
                        ||   number_percent( )+5 < ch->top_level )
                     {

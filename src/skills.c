@@ -178,7 +178,7 @@ bool check_skill( CHAR_DATA *ch, char *command, char *argument )
         }
 
       /* waitstate */
-      WAIT_STATE( ch, skill_table[sn]->beats );
+      set_wait_state( ch, skill_table[sn]->beats );
       /* check for failure */
       if ( (number_percent( ) + skill_table[sn]->difficulty * 5)
            > (is_npc(ch) ? 75 : ch->pcdata->learned[sn]) )
@@ -381,8 +381,8 @@ void trip( CHAR_DATA *ch, CHAR_DATA *victim )
       act( AT_SKILL, "$n trips $N's mount and $N falls off!", ch, NULL, victim, TO_NOTVICT );
       REMOVE_BIT( victim->mount->act, ACT_MOUNTED );
       victim->mount = NULL;
-      WAIT_STATE( ch,     2 * PULSE_VIOLENCE );
-      WAIT_STATE( victim, 2 * PULSE_VIOLENCE );
+      set_wait_state( ch,     2 * PULSE_VIOLENCE );
+      set_wait_state( victim, 2 * PULSE_VIOLENCE );
       victim->position = POS_RESTING;
       return;
     }
@@ -392,8 +392,8 @@ void trip( CHAR_DATA *ch, CHAR_DATA *victim )
       act( AT_SKILL, "You trip $N and $N goes down!", ch, NULL, victim, TO_CHAR    );
       act( AT_SKILL, "$n trips $N and $N goes down!", ch, NULL, victim, TO_NOTVICT );
 
-      WAIT_STATE( ch,     2 * PULSE_VIOLENCE );
-      WAIT_STATE( victim, 2 * PULSE_VIOLENCE );
+      set_wait_state( ch,     2 * PULSE_VIOLENCE );
+      set_wait_state( victim, 2 * PULSE_VIOLENCE );
       victim->position = POS_RESTING;
     }
 

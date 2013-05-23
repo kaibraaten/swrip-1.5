@@ -41,7 +41,7 @@ void do_bashdoor( CHAR_DATA *ch, char *argument )
           return;
         }
 
-      WAIT_STATE( ch, skill_table[gsn_bashdoor]->beats );
+      set_wait_state( ch, skill_table[gsn_bashdoor]->beats );
 
       if ( IS_SET( pexit->exit_info, EX_SECRET ) )
         keyword = "wall";

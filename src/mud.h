@@ -1555,12 +1555,6 @@ extern  short                   gsn_yevethan;
                                                                   (ch)->in_room->room_flags, \
                                                                   ROOM_SPACECRAFT) )
 
-#define IS_CLANNED(ch)          (!is_npc((ch))                          \
-                                 && (ch)->pcdata->clan                      )
-
-#define WAIT_STATE(ch, npulse)  ((ch)->wait = UMAX((ch)->wait, (npulse)))
-
-
 #define EXIT(ch, door)          ( get_exit( (ch)->in_room, door ) )
 
 #define CAN_GO(ch, door)        (EXIT((ch),(door))                      \

@@ -61,7 +61,7 @@ void do_quaff( CHAR_DATA *ch, char *argument )
           act( AT_ACTION, "You quaff $p.", ch, obj, NULL, TO_CHAR );
         }
 
-      WAIT_STATE( ch, PULSE_PER_SECOND/4 );
+      set_wait_state( ch, PULSE_PER_SECOND/4 );
 
       gain_condition( ch, COND_THIRST, 1 );
       retcode = obj_cast_spell( obj->value[1], obj->value[0], ch, ch, NULL );

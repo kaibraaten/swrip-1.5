@@ -284,7 +284,7 @@ void do_shove( CHAR_DATA *ch, char *argument )
       victim->position = POS_STANDING;
     }
 
-  WAIT_STATE(ch, 12);
+  set_wait_state(ch, 12);
 
   if ( IS_SET(ch->in_room->room_flags, ROOM_SAFE)
        && get_timer(ch, TIMER_SHOVEDRAG) <= 0 )

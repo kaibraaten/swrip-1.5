@@ -86,7 +86,7 @@ void do_mine( CHAR_DATA *ch, char *argument )
   ch->move -= move;
 
   SET_BIT( obj->extra_flags, ITEM_BURRIED );
-  WAIT_STATE( ch, URANGE( 10, move / 2, 100 ) );
+  set_wait_state( ch, URANGE( 10, move / 2, 100 ) );
 
   STRFREE ( obj->armed_by );
   obj->armed_by = STRALLOC ( ch->name );

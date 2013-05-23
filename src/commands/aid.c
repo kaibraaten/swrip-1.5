@@ -56,7 +56,7 @@ void do_aid( CHAR_DATA *ch, char *argument )
   ch->alignment = URANGE( -1000, ch->alignment, 1000 );
 
   percent = number_percent( ) - (get_curr_lck(ch) - 13);
-  WAIT_STATE( ch, skill_table[gsn_aid]->beats );
+  set_wait_state( ch, skill_table[gsn_aid]->beats );
   if ( !is_npc(ch) && percent > ch->pcdata->learned[gsn_aid] )
     {
       send_to_char( "You fail.\r\n", ch );

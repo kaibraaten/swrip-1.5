@@ -10,5 +10,5 @@ void do_shout( CHAR_DATA *ch, char *argument )
     }
 
   talk_channel( ch, drunk_speech( argument, ch ), CHANNEL_SHOUT, "shout" );
-  WAIT_STATE( ch, 12 );
+  set_wait_state( ch, 12 );
 }

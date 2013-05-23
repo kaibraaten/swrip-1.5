@@ -270,7 +270,7 @@ void do_drag( CHAR_DATA *ch, char *argument )
         victim->position = temp;
       /* Move ch to the room too.. they are doing dragging - Scryn */
       move_char( ch, get_exit(ch->in_room,exit_dir), 0);
-      WAIT_STATE(ch, 12);
+      set_wait_state(ch, 12);
       return;
     }
   send_to_char("You cannot do that to someone who is standing.\r\n", ch);

@@ -258,7 +258,7 @@ void do_cast( CHAR_DATA *ch, char *argument )
     }
 
   if ( !dont_wait )
-    WAIT_STATE( ch, skill->beats );
+    set_wait_state( ch, skill->beats );
 
   /*
    * Getting ready to cast... check for spell components        -Thoric

@@ -232,7 +232,7 @@ void do_throw( CHAR_DATA *ch, char *argument )
   else
     {
 
-      WAIT_STATE( ch, skill_table[gsn_throw]->beats );
+      set_wait_state( ch, skill_table[gsn_throw]->beats );
       if ( is_npc(ch) || number_percent( ) < ch->pcdata->learned[gsn_throw] )
         {
           learn_from_success( ch, gsn_throw );

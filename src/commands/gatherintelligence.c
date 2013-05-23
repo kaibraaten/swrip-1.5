@@ -20,7 +20,7 @@ void do_gather_intelligence ( CHAR_DATA *ch , char *argument )
   strcat(buf, "0.");
   strcat(buf, argument);
 
-  WAIT_STATE( ch, skill_table[gsn_gather_intelligence]->beats );
+  set_wait_state( ch, skill_table[gsn_gather_intelligence]->beats );
 
   if( ( ( victim = get_char_world(ch, buf) ) == NULL ))
     {

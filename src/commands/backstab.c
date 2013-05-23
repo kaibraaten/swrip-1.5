@@ -70,7 +70,7 @@ void do_backstab( CHAR_DATA *ch, char *argument )
   percent = number_percent( ) - (get_curr_lck(ch) - 14)
     + (get_curr_lck(victim) - 13);
 
-  WAIT_STATE( ch, skill_table[gsn_backstab]->beats );
+  set_wait_state( ch, skill_table[gsn_backstab]->beats );
 
   if ( !is_awake(victim)
        ||   is_npc(ch)

@@ -21,7 +21,7 @@ void do_track( CHAR_DATA *ch, char *argument )
     return;
   }
 
-  WAIT_STATE( ch, skill_table[gsn_track]->beats );
+  set_wait_state( ch, skill_table[gsn_track]->beats );
 
   if (!(vict = get_char_world(ch, arg))) {
     send_to_char("You can't sense a trail from here.\r\n", ch);

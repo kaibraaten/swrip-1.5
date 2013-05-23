@@ -172,5 +172,5 @@ void do_calculate(CHAR_DATA *ch, char *argument )
 
   learn_from_success( ch, gsn_navigation );
 
-  WAIT_STATE( ch , 2*PULSE_VIOLENCE );
+  set_wait_state( ch , 2*PULSE_VIOLENCE );
 }

@@ -72,7 +72,7 @@ void do_circle( CHAR_DATA *ch, char *argument )
   percent = number_percent( ) - (get_curr_lck(ch) - 16)
     + (get_curr_lck(victim) - 13);
 
-  WAIT_STATE( ch, skill_table[gsn_circle]->beats );
+  set_wait_state( ch, skill_table[gsn_circle]->beats );
   if ( percent < (is_npc(ch) ? (get_level( ch, HUNTING_ABILITY ) * 1.5) : ch->pcdata->learned[gsn_circle]) )
     {
       learn_from_success( ch, gsn_circle );

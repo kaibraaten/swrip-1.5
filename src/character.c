@@ -1004,9 +1004,19 @@ bool is_waiting_for_auth( const CHAR_DATA *ch )
     && IS_SET(ch->pcdata->flags, PCFLAG_UNAUTHED);
 }
 
-#define DISGUISE(ch)            ((!nifty_is_name(ch->name, ch->pcdata->title)) ? 1 : 0)
+#define DISGUISE(ch)            ((!nifty_is_name((ch)->name, (ch)->pcdata->title)) ? 1 : 0)
 
 char *PERS( const CHAR_DATA *ch, const CHAR_DATA *looker )
 {
   return can_see( looker, ch ) ? ( is_npc(ch) ? ch->short_descr : ((get_trust(looker) <= LEVEL_IMMORTAL) ? (DISGUISE(ch) ? ch->pcdata->title : ch->name ) : ch->name)) : ( is_immortal(ch) ? "A Great One" : "someone" );
+}
+
+bool is_clanned( const CHAR_DATA *ch )
+{
+  return !is_npc( ch ) && ch->pcdata->clan;
+}
+
+void set_wait_state( CHAR_DATA *ch, short number_of_pulses )
+{
+  ch->wait = UMAX( ch->wait, number_of_pulses );
 }

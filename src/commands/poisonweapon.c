@@ -83,7 +83,7 @@ void do_poison_weapon( CHAR_DATA *ch, char *argument )
       send_to_char("Your hands aren't steady enough to properly mix the poison.\r\n", ch );
       return;
     }
-  WAIT_STATE( ch, skill_table[gsn_poison_weapon]->beats );
+  set_wait_state( ch, skill_table[gsn_poison_weapon]->beats );
 
   percent = (number_percent( ) - get_curr_lck(ch) - 14);
 

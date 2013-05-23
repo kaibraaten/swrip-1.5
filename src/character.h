@@ -200,4 +200,8 @@ bool is_waiting_for_auth( const CHAR_DATA *ch );
 
 char *PERS( const CHAR_DATA *ch, const CHAR_DATA *looker );
 
+bool is_clanned( const CHAR_DATA *ch );
+
+void set_wait_state( CHAR_DATA *ch, short number_of_pulses );
+
 #endif

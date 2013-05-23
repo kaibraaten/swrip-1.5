@@ -84,5 +84,5 @@ void do_bury( CHAR_DATA *ch, char *argument )
   act( AT_ACTION, "You solemnly bury $p...", ch, obj, NULL, TO_CHAR );
   act( AT_ACTION, "$n solemnly buries $p...", ch, obj, NULL, TO_ROOM );
   SET_BIT( obj->extra_flags, ITEM_BURRIED );
-  WAIT_STATE( ch, URANGE( 10, move / 2, 100 ) );
+  set_wait_state( ch, URANGE( 10, move / 2, 100 ) );
 }

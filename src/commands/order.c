@@ -78,7 +78,7 @@ void do_order( CHAR_DATA *ch, char *argument )
       sprintf( log_buf, "%s: order %s.", ch->name, argbuf );
       log_string_plus( log_buf, LOG_NORMAL, ch->top_level );
       send_to_char( "Ok.\r\n", ch );
-      WAIT_STATE( ch, 12 );
+      set_wait_state( ch, 12 );
     }
   else
     {

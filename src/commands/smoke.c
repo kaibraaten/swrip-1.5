@@ -46,7 +46,7 @@ void do_smoke( CHAR_DATA *ch, char *argument )
           int sn                = pipe_obj->value[2] + TYPE_HERB;
           SKILLTYPE *skill      = get_skilltype( sn );
 
-          WAIT_STATE( ch, skill->beats );
+          set_wait_state( ch, skill->beats );
           if ( skill->spell_fun )
             obj_cast_spell( sn, UMIN(skill->min_level, ch->top_level),
                             ch, ch, NULL );

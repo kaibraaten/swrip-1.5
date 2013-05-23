@@ -25,7 +25,7 @@ void do_kick( CHAR_DATA *ch, char *argument )
     }
 
 
-  WAIT_STATE( ch, skill_table[gsn_kick]->beats );
+  set_wait_state( ch, skill_table[gsn_kick]->beats );
 
   if ( is_npc(ch) || number_percent( ) < ch->pcdata->learned[gsn_kick] )
     {

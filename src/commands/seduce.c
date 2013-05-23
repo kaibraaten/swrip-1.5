@@ -35,7 +35,7 @@ void do_seduce ( CHAR_DATA *ch , char *argument )
     }
 
 
-  WAIT_STATE( ch, skill_table[gsn_seduce]->beats );
+  set_wait_state( ch, skill_table[gsn_seduce]->beats );
 
   if ( victim->top_level - get_curr_cha(ch) > ch->pcdata->learned[gsn_seduce] )
     {

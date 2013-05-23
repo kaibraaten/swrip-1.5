@@ -103,7 +103,7 @@ void do_bribe ( CHAR_DATA *ch , char *argument )
   if ( !is_npc( victim ) )
     return;
 
-  WAIT_STATE( ch, skill_table[gsn_bribe]->beats );
+  set_wait_state( ch, skill_table[gsn_bribe]->beats );
 
   if ( percent - amount + victim->top_level > ch->pcdata->learned[gsn_bribe]  )
     return;

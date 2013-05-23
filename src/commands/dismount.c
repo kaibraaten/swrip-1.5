@@ -11,7 +11,7 @@ void do_dismount( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  WAIT_STATE( ch, skill_table[gsn_mount]->beats );
+  set_wait_state( ch, skill_table[gsn_mount]->beats );
   if ( is_npc(ch) || number_percent( ) < ch->pcdata->learned[gsn_mount] )
     {
       act( AT_SKILL, "You dismount $N.", ch, NULL, victim, TO_CHAR );

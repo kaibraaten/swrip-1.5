@@ -49,7 +49,7 @@ void do_study( CHAR_DATA *ch, char *argument ) /* study by Absalom */
           bug( "Do_study: bad sn %d.", sn );
           return;
         }
-      WAIT_STATE( ch, skill_table[gsn_study]->beats );
+      set_wait_state( ch, skill_table[gsn_study]->beats );
       if ( number_percent() >= 55 + ch->pcdata->learned[gsn_study] * 4/5)
         {
           send_to_char("You cannot glean any knowledge from it.\r\n",ch);

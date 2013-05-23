@@ -59,7 +59,7 @@ void do_detrap( CHAR_DATA *ch, char *argument )
       act( AT_ACTION, "$n carefully attempts to remove a trap from $p...", ch, obj, NULL, TO_ROOM );
       ch->dest_buf = str_dup( obj->name );
       add_timer( ch, TIMER_DO_FUN, 3, do_detrap, 1 );
-      /*            WAIT_STATE( ch, skill_table[gsn_detrap]->beats ); */
+      /*            set_wait_state( ch, skill_table[gsn_detrap]->beats ); */
       return;
     case SUB_PAUSE:
       if ( !ch->dest_buf )

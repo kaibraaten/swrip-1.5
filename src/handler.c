@@ -2485,7 +2485,7 @@ bool chance( const CHAR_DATA *ch, short percent )
      Note that since the neutral clannies can only be off by 1000 points, their
      maximum penalty will only be half that of the other clan types.
 
-     if ( IS_CLANNED( ch ) )
+     if ( is_clanned( ch ) )
      clan_factor = 1 + abs( ch->alignment - ch->pcdata->clan->alignment ) / 1000;
      else
      clan_factor = 1;

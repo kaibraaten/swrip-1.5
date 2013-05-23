@@ -35,7 +35,7 @@ void do_stun( CHAR_DATA *ch, char *argument )
       return;           /* missing return fixed March 11/96 */
     }
 
-  WAIT_STATE( ch, skill_table[gsn_stun]->beats );
+  set_wait_state( ch, skill_table[gsn_stun]->beats );
   fail = FALSE;
   stun_chance = ris_save( victim, get_level( ch, COMBAT_ABILITY ), RIS_PARALYSIS );
 
@@ -60,8 +60,8 @@ void do_stun( CHAR_DATA *ch, char *argument )
       learn_from_success( ch, gsn_stun );
       /*    DO *NOT* CHANGE!    -Thoric    */
       ch->move -= 15;
-      WAIT_STATE( ch,     2 * PULSE_VIOLENCE );
-      WAIT_STATE( victim, PULSE_VIOLENCE );
+      set_wait_state( ch,     2 * PULSE_VIOLENCE );
+      set_wait_state( victim, PULSE_VIOLENCE );
       act( AT_SKILL, "$N smashes into you, leaving you stunned!", victim, NULL, ch, TO_CHAR );
       act( AT_SKILL, "You smash into $N, leaving $M stunned!", ch, NULL, victim, TO_CHAR );
       act( AT_SKILL, "$n smashes into $N, leaving $M stunned!", ch, NULL, victim, TO_NOTVICT );
@@ -78,7 +78,7 @@ void do_stun( CHAR_DATA *ch, char *argument )
     }
   else
     {
-      WAIT_STATE( ch,     2 * PULSE_VIOLENCE );
+      set_wait_state( ch,     2 * PULSE_VIOLENCE );
       ch->move -= 5;
       learn_from_failure( ch, gsn_stun );
       act( AT_SKILL, "$N charges at you screaming, but you dodge out of the way.", victim, NULL, ch, TO_CHAR );

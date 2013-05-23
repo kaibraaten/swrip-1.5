@@ -54,7 +54,7 @@ void do_recall( CHAR_DATA *ch, char *argument )
 
       if ( number_bits( 1 ) == 0 || ( !is_npc( opponent ) && number_bits( 3 ) > 1 ) )
         {
-          WAIT_STATE( ch, 4 );
+          set_wait_state( ch, 4 );
           ch_printf( ch, "You failed!\r\n" );
           return;
         }

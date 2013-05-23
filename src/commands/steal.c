@@ -47,7 +47,7 @@ void do_steal( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  WAIT_STATE( ch, skill_table[gsn_steal]->beats );
+  set_wait_state( ch, skill_table[gsn_steal]->beats );
   percent  = number_percent( ) + ( is_awake(victim) ? 10 : -50 )
     - (get_curr_lck(ch) - 15) + (get_curr_lck(victim) - 13)
     + times_killed( ch, victim )*7;

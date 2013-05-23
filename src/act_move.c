@@ -647,7 +647,7 @@ ch_ret move_char( CHAR_DATA *ch, EXIT_DATA *pexit, int fall )
                         }
                       set_char_color( AT_HURT, ch );
                       send_to_char( "OUCH! You hit the ground!\r\n", ch );
-                      WAIT_STATE( ch, 20 );
+                      set_wait_state( ch, 20 );
                       retcode = damage( ch, ch, (pexit->vdir == DIR_UP ? 10 : 5),
                                         TYPE_UNDEFINED );
                       return retcode;
@@ -655,7 +655,7 @@ ch_ret move_char( CHAR_DATA *ch, EXIT_DATA *pexit, int fall )
                 }
               found = TRUE;
               learn_from_success( ch, gsn_climb );
-              WAIT_STATE( ch, skill_table[gsn_climb]->beats );
+              set_wait_state( ch, skill_table[gsn_climb]->beats );
               txt = "climbs";
             }
 
@@ -734,7 +734,7 @@ ch_ret move_char( CHAR_DATA *ch, EXIT_DATA *pexit, int fall )
             }
         }
 
-      WAIT_STATE( ch, move );
+      set_wait_state( ch, move );
       if ( ch->mount )
         ch->mount->move -= move;
       else
@@ -1000,7 +1000,7 @@ ch_ret move_char( CHAR_DATA *ch, EXIT_DATA *pexit, int fall )
         {
           set_char_color( AT_HURT, ch );
           send_to_char( "OUCH! You hit the ground!\r\n", ch );
-          WAIT_STATE( ch, 20 );
+          set_wait_state( ch, 20 );
           retcode = damage( ch, ch, 50 * fall, TYPE_UNDEFINED );
         }
       else

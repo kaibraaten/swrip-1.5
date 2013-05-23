@@ -38,7 +38,7 @@ void do_disarm( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  WAIT_STATE( ch, skill_table[gsn_disarm]->beats );
+  set_wait_state( ch, skill_table[gsn_disarm]->beats );
   percent = number_percent() + get_level( victim, COMBAT_ABILITY )
     - get_level( ch, COMBAT_ABILITY )
     - (get_curr_lck(ch) - 15) + (get_curr_lck(victim) - 15);
