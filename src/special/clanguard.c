@@ -1,3 +1,4 @@
+#include "character.h"
 #include "mud.h"
 
 bool spec_clan_guard( CHAR_DATA *ch )

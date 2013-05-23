@@ -1,3 +1,4 @@
+#include "character.h"
 #include "mud.h"
 
 void show_char_to_char( CHAR_DATA *list, CHAR_DATA *ch );

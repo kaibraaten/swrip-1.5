@@ -1,5 +1,6 @@
 #include "reset.h"
 #include "mud.h"
+#include "character.h"
 
 void do_reset( CHAR_DATA *ch, char *argument )
 {

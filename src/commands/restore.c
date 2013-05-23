@@ -1,3 +1,4 @@
+#include "character.h"
 #include "mud.h"
 
 #define RESTORE_INTERVAL 21600

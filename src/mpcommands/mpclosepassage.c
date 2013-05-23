@@ -1,4 +1,5 @@
 #include "mud.h"
+#include "character.h"
 
 /*
  * Syntax mp_close_passage x y

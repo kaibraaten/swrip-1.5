@@ -1,3 +1,4 @@
+#include "character.h"
 #include "mud.h"
 
 void do_punch( CHAR_DATA *ch, char *argument )

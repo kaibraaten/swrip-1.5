@@ -1,3 +1,4 @@
+#include "character.h"
 #include "mud.h"
 
 static void wear_obj( CHAR_DATA *ch, OBJ_DATA *obj, bool fReplace, short wear_bit);

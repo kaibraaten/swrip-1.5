@@ -1,3 +1,4 @@
+#include "character.h"
 #include "mud.h"
 
 static ch_ret simple_damage( CHAR_DATA *ch, CHAR_DATA *victim, int dam, int dt );

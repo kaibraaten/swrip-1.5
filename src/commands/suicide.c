@@ -1,4 +1,5 @@
 #include "mud.h"
+#include "character.h"
 
 void do_suicide( CHAR_DATA *ch, char *argument )
 {

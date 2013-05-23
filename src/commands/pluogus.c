@@ -1,3 +1,4 @@
+#include "character.h"
 #include "mud.h"
 #include "shuttle.h"
 

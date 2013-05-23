@@ -1,3 +1,4 @@
+#include "character.h"
 #include "mud.h"
 
 bool spec_jedi_healer( CHAR_DATA *ch )

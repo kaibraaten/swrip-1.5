@@ -1,4 +1,5 @@
 #include "mud.h"
+#include "character.h"
 
 /*
  * Set a skill's attributes or what skills a player has.

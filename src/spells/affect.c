@@ -1,5 +1,6 @@
 #include <string.h>
 #include "mud.h"
+#include "character.h"
 
 /*
  * Generic spell affect                                         -Thoric

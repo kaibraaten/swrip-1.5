@@ -1,3 +1,4 @@
+#include "character.h"
 #include "mud.h"
 
 void do_pull( CHAR_DATA *ch, char *argument )

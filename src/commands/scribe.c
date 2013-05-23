@@ -1,4 +1,5 @@
 #include "mud.h"
+#include "character.h"
 
 /* Re-worked by Sadiq to allow PCs to scribe up to 3 spells on a single *
  * scroll. Second and third spells progressive increase the chance of   *

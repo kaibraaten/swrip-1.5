@@ -1,6 +1,7 @@
 #include <time.h>
 #include "shops.h"
 #include "mud.h"
+#include "character.h"
 
 void do_pricevendor (CHAR_DATA *ch, char *argument)
 {

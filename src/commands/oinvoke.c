@@ -1,3 +1,4 @@
+#include "character.h"
 #include "mud.h"
 
 extern OBJ_INDEX_DATA *obj_index_hash[MAX_KEY_HASH];

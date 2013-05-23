@@ -1,3 +1,4 @@
+#include "character.h"
 #include "mud.h"
 
 /* Allows PCs to learn spells embedded in object. Should prove interesting. - Samson 8-9-98 */

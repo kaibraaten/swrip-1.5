@@ -1,3 +1,4 @@
+#include "character.h"
 #include "mud.h"
 
 bool spec_police_jail( CHAR_DATA *ch )

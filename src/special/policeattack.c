@@ -1,4 +1,5 @@
 #include "mud.h"
+#include "character.h"
 
 bool spec_police_attack( CHAR_DATA *ch )
 {

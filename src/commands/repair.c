@@ -1,5 +1,6 @@
 #include "shops.h"
 #include "mud.h"
+#include "character.h"
 
 static void repair_one_obj( CHAR_DATA *ch, CHAR_DATA *keeper, OBJ_DATA *obj,
 			    char *arg, int maxgold, char *fixstr, char *fixstr2 );

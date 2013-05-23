@@ -1,3 +1,4 @@
+#include "character.h"
 #include "mud.h"
 
 /* lets the mobile force someone to do something.  must be mortal level

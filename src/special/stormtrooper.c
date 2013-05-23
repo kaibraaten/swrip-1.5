@@ -1,3 +1,4 @@
+#include "character.h"
 #include "mud.h"
 
 bool spec_stormtrooper( CHAR_DATA *ch )

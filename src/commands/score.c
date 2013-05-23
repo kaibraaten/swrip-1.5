@@ -1,5 +1,6 @@
 #include <time.h>
 #include "mud.h"
+#include "character.h"
 
 static char *tiny_affect_loc_name(int location);
 

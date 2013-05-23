@@ -1,3 +1,4 @@
+#include "character.h"
 #include "mud.h"
 
 bool spec_police_fine( CHAR_DATA *ch )
