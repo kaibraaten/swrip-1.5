@@ -28,7 +28,7 @@ void do_score(CHAR_DATA * ch, char *argument)
             capitalize(get_race(ch)), ( is_npc(ch) ? "(null)" : ctime(&(ch->pcdata->logon)) ) );
 
   ch_printf(ch,   "&cHitroll: &C%-2.2d  &cDamroll: &C%-2.2d   &cArmor: &C%-4d        &cSaved:  &C%s\r",
-            GET_HITROLL(ch), GET_DAMROLL(ch), GET_AC(ch),
+            get_hitroll(ch), get_damroll(ch), get_armor_class(ch),
             (ch->pcdata && ch->pcdata->save_time) ? ctime(&(ch->pcdata->save_time)) : "no\n" );
 
   ch_printf(ch,   "&cAlign: &C%-5d    &cWimpy: &C%-3d                    &cTime:   &C%s\r",

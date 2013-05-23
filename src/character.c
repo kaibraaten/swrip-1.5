@@ -50,8 +50,8 @@ int get_exp_worth( const CHAR_DATA *ch )
   xp = get_level( ch, COMBAT_ABILITY ) * ch->top_level * 50;
   xp += ch->max_hit * 2;
   xp -= (ch->armor-50) * 2;
-  xp += ( ch->barenumdie * ch->baresizedie + GET_DAMROLL(ch) ) * 50;
-  xp += GET_HITROLL(ch) * ch->top_level * 10;
+  xp += ( ch->barenumdie * ch->baresizedie + get_damroll(ch) ) * 50;
+  xp += get_hitroll(ch) * ch->top_level * 10;
 
   if ( is_affected_by(ch, AFF_SANCTUARY) )
     xp += xp * 1.5;
@@ -952,3 +952,30 @@ bool is_awake( const CHAR_DATA *ch )
 {
   return ch->position > POS_SLEEPING;
 }
+
+int get_armor_class( const CHAR_DATA *ch )
+{
+  int dexterity_modifier = is_awake( ch ) ? dex_app[get_curr_dex(ch)].defensive : 0;
+  int combat_level_modifier = ch->race == RACE_DEFEL ? get_level( ch, COMBAT_ABILITY ) * 2 + 5 : get_level( ch, COMBAT_ABILITY ) / 2;
+
+  return ch->armor + dexterity_modifier - combat_level_modifier;
+}
+
+int get_hitroll( const CHAR_DATA *ch )
+{
+  int base_hitroll = ch->hitroll;
+  int strength_modifier = str_app[get_curr_str( ch )].tohit;
+  int mental_state_modifier = 2 - ( abs( ch->mental_state ) / 10 );
+
+  return base_hitroll + strength_modifier + mental_state_modifier;
+}
+
+int get_damroll( const CHAR_DATA *ch )
+{
+  int base_damroll = ch->damroll;
+  int strength_modifier = str_app[get_curr_str(ch)].todam;
+  int mental_state_modifier = ch->mental_state > 5 && ch->mental_state < 15 ? 1 : 0;
+
+  return base_damroll + strength_modifier + mental_state_modifier;
+}
+

@@ -731,8 +731,8 @@ ch_ret one_hit( CHAR_DATA *ch, CHAR_DATA *victim, int dt )
    */
   thac0_00 = 20;
   thac0_32 = 10;
-  thac0     = interpolate( get_level( ch, COMBAT_ABILITY ), thac0_00, thac0_32 ) - GET_HITROLL(ch);
-  victim_ac = (int) (GET_AC(victim) / 10);
+  thac0     = interpolate( get_level( ch, COMBAT_ABILITY ), thac0_00, thac0_32 ) - get_hitroll(ch);
+  victim_ac = (int) (get_armor_class(victim) / 10);
 
   /* if you can't see what's coming... */
   if ( wield && !can_see_obj( victim, wield) )
@@ -778,7 +778,7 @@ ch_ret one_hit( CHAR_DATA *ch, CHAR_DATA *victim, int dt )
    * Bonuses.
    */
 
-  dam += GET_DAMROLL(ch);
+  dam += get_damroll(ch);
 
   if ( prof_bonus )
     dam *= ( 1 + prof_bonus / 100 );

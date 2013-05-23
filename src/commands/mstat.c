@@ -92,14 +92,14 @@ void do_mstat( CHAR_DATA *ch, char *argument )
   ch_printf( ch,
              "Top Level: %d     Race: %d  Align: %d  AC: %d  Gold: %d\r\n",
              victim->top_level,  victim->race,   victim->alignment,
-             GET_AC(victim),      victim->gold );
+             get_armor_class(victim),      victim->gold );
 
   if (  victim->race  < MAX_NPC_RACE  && victim->race  >= 0 )
     ch_printf( ch, "Race: %s\r\n",
                npc_race[victim->race] );
 
   ch_printf( ch, "Hitroll: %d   Damroll: %d   Position: %d   Wimpy: %d \r\n",
-             GET_HITROLL(victim), GET_DAMROLL(victim),
+             get_hitroll(victim), get_damroll(victim),
              victim->position,    victim->wimpy );
   ch_printf( ch, "Fighting: %s    Master: %s    Leader: %s\r\n",
              victim->fighting ? victim->fighting->who->name : "(none)",

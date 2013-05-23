@@ -135,25 +135,25 @@ void do_oldscore( CHAR_DATA *ch, char *argument )
     }
 
   if ( ch->top_level >= 25 )
-    ch_printf( ch, "AC: %d.  ", GET_AC(ch) );
+    ch_printf( ch, "AC: %d.  ", get_armor_class(ch) );
 
   send_to_char( "You are ", ch );
-  if ( GET_AC(ch) >=  101 ) send_to_char( "WORSE than naked!\r\n", ch );
-  else if ( GET_AC(ch) >=   80 ) send_to_char( "naked.\r\n",            ch );
-  else if ( GET_AC(ch) >=   60 ) send_to_char( "wearing clothes.\r\n",  ch );
-  else if ( GET_AC(ch) >=   40 ) send_to_char( "slightly armored.\r\n", ch );
-  else if ( GET_AC(ch) >=   20 ) send_to_char( "somewhat armored.\r\n", ch );
-  else if ( GET_AC(ch) >=    0 ) send_to_char( "armored.\r\n",          ch );
-  else if ( GET_AC(ch) >= - 20 ) send_to_char( "well armored.\r\n",     ch );
-  else if ( GET_AC(ch) >= - 40 ) send_to_char( "strongly armored.\r\n", ch );
-  else if ( GET_AC(ch) >= - 60 ) send_to_char( "heavily armored.\r\n",  ch );
-  else if ( GET_AC(ch) >= - 80 ) send_to_char( "superbly armored.\r\n", ch );
-  else if ( GET_AC(ch) >= -100 ) send_to_char( "divinely armored.\r\n", ch );
+  if ( get_armor_class(ch) >=  101 ) send_to_char( "WORSE than naked!\r\n", ch );
+  else if ( get_armor_class(ch) >=   80 ) send_to_char( "naked.\r\n",            ch );
+  else if ( get_armor_class(ch) >=   60 ) send_to_char( "wearing clothes.\r\n",  ch );
+  else if ( get_armor_class(ch) >=   40 ) send_to_char( "slightly armored.\r\n", ch );
+  else if ( get_armor_class(ch) >=   20 ) send_to_char( "somewhat armored.\r\n", ch );
+  else if ( get_armor_class(ch) >=    0 ) send_to_char( "armored.\r\n",          ch );
+  else if ( get_armor_class(ch) >= - 20 ) send_to_char( "well armored.\r\n",     ch );
+  else if ( get_armor_class(ch) >= - 40 ) send_to_char( "strongly armored.\r\n", ch );
+  else if ( get_armor_class(ch) >= - 60 ) send_to_char( "heavily armored.\r\n",  ch );
+  else if ( get_armor_class(ch) >= - 80 ) send_to_char( "superbly armored.\r\n", ch );
+  else if ( get_armor_class(ch) >= -100 ) send_to_char( "divinely armored.\r\n", ch );
   else                           send_to_char( "invincible!\r\n",       ch );
 
   if ( ch->top_level >= 15 )
     ch_printf( ch, "Hitroll: %d  Damroll: %d.\r\n",
-               GET_HITROLL(ch), GET_DAMROLL(ch) );
+               get_hitroll(ch), get_damroll(ch) );
 
   if ( ch->top_level >= 10 )
     ch_printf( ch, "Alignment: %d.  ", ch->alignment );

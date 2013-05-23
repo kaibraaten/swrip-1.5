@@ -184,4 +184,10 @@ bool is_evil_mob_index_data( const MOB_INDEX_DATA *mob );
 
 bool is_awake( const CHAR_DATA *ch );
 
+int get_armor_class( const CHAR_DATA *ch );
+
+int get_hitroll( const CHAR_DATA *ch );
+
+int get_damroll( const CHAR_DATA *ch );
+
 #endif

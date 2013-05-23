@@ -1561,16 +1561,6 @@ extern  short                   gsn_yevethan;
 /*
  * Character macros.
  */
-#define GET_AC(ch)              ( (ch)->armor + ( is_awake(ch) ? dex_app[get_curr_dex(ch)].defensive : 0 ) \
-                                  - ( (ch)->race == RACE_DEFEL ? get_level( ch, COMBAT_ABILITY ) * 2 + 5 : get_level( ch, COMBAT_ABILITY ) / 2 ) )
-#define GET_HITROLL(ch)         ((ch)->hitroll                          \
-                                 +str_app[get_curr_str(ch)].tohit       \
-                                 +(2-(abs((ch)->mental_state)/10)))
-#define GET_DAMROLL(ch)         ((ch)->damroll                          \
-                                 +str_app[get_curr_str(ch)].todam       \
-                                 +(((ch)->mental_state > 5              \
-                                    &&(ch)->mental_state < 15) ? 1 : 0) )
-
 #define IS_OUTSIDE(ch)          (!IS_SET(                               \
                                          (ch)->in_room->room_flags,     \
                                          ROOM_INDOORS) && !IS_SET(      \
