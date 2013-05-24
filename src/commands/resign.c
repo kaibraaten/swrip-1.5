@@ -21,7 +21,7 @@ void do_resign( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( ch->name, ch->pcdata->clan->leader ) )
+  if ( !str_cmp( ch->name, ch->pcdata->clan->leadership.leader ) )
     {
       ch_printf( ch, "You can't resign from %s ... you are the leader!\r\n", clan->name );
       return;
@@ -33,16 +33,16 @@ void do_resign( CHAR_DATA *ch, char *argument )
   REMOVE_BIT( ch->speaks, LANG_CLAN );
   --clan->members;
 
-  if ( !str_cmp( ch->name, ch->pcdata->clan->number1 ) )
+  if ( !str_cmp( ch->name, ch->pcdata->clan->leadership.number1 ) )
     {
-      STRFREE( ch->pcdata->clan->number1 );
-      ch->pcdata->clan->number1 = STRALLOC( "" );
+      STRFREE( ch->pcdata->clan->leadership.number1 );
+      ch->pcdata->clan->leadership.number1 = STRALLOC( "" );
     }
 
-  if ( !str_cmp( ch->name, ch->pcdata->clan->number2 ) )
+  if ( !str_cmp( ch->name, ch->pcdata->clan->leadership.number2 ) )
     {
-      STRFREE( ch->pcdata->clan->number2 );
-      ch->pcdata->clan->number2 = STRALLOC( "" );
+      STRFREE( ch->pcdata->clan->leadership.number2 );
+      ch->pcdata->clan->leadership.number2 = STRALLOC( "" );
     }
 
   remove_member( ch );

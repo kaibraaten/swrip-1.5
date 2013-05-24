@@ -33,10 +33,10 @@ void do_showclan( CHAR_DATA *ch, char *argument )
              clan->filename);
   ch_printf( ch, "Description: %s\r\nLeader: %s\r\n",
              clan->description,
-             clan->leader );
+             clan->leadership.leader );
   ch_printf( ch, "Number1: %s\r\nNumber2: %s\r\nPKills: %6d    PDeaths: %6d\r\n",
-             clan->number1,
-             clan->number2,
+             clan->leadership.number1,
+             clan->leadership.number2,
              clan->pkills,
              clan->pdeaths );
   ch_printf( ch, "MKills: %6d    MDeaths: %6d\r\n",

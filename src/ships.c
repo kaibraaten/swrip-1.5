@@ -3057,11 +3057,11 @@ bool check_pilot( CHAR_DATA *ch , SHIP_DATA *ship )
     {
       if ( !str_cmp(ch->pcdata->clan->name,ship->owner) )
         {
-          if ( !str_cmp(ch->pcdata->clan->leader,ch->name) )
+          if ( !str_cmp(ch->pcdata->clan->leadership.leader,ch->name) )
             return TRUE;
-          if ( !str_cmp(ch->pcdata->clan->number1,ch->name) )
+          if ( !str_cmp(ch->pcdata->clan->leadership.number1,ch->name) )
             return TRUE;
-          if ( !str_cmp(ch->pcdata->clan->number2,ch->name) )
+          if ( !str_cmp(ch->pcdata->clan->leadership.number2,ch->name) )
             return TRUE;
           if ( ch->pcdata->bestowments && is_name( "pilot", ch->pcdata->bestowments) )
             return TRUE;
@@ -3069,11 +3069,11 @@ bool check_pilot( CHAR_DATA *ch , SHIP_DATA *ship )
 
       if ( !str_cmp(ch->pcdata->clan->name,ship->pilot) )
         {
-          if ( !str_cmp(ch->pcdata->clan->leader,ch->name) )
+          if ( !str_cmp(ch->pcdata->clan->leadership.leader,ch->name) )
             return TRUE;
-          if ( !str_cmp(ch->pcdata->clan->number1,ch->name) )
+          if ( !str_cmp(ch->pcdata->clan->leadership.number1,ch->name) )
             return TRUE;
-          if ( !str_cmp(ch->pcdata->clan->number2,ch->name) )
+          if ( !str_cmp(ch->pcdata->clan->leadership.number2,ch->name) )
             return TRUE;
           if ( ch->pcdata->bestowments && is_name( "pilot", ch->pcdata->bestowments) )
             return TRUE;
@@ -3081,11 +3081,11 @@ bool check_pilot( CHAR_DATA *ch , SHIP_DATA *ship )
 
       if ( !str_cmp(ch->pcdata->clan->name,ship->copilot) )
         {
-          if ( !str_cmp(ch->pcdata->clan->leader,ch->name) )
+          if ( !str_cmp(ch->pcdata->clan->leadership.leader,ch->name) )
             return TRUE;
-          if ( !str_cmp(ch->pcdata->clan->number1,ch->name) )
+          if ( !str_cmp(ch->pcdata->clan->leadership.number1,ch->name) )
             return TRUE;
-          if ( !str_cmp(ch->pcdata->clan->number2,ch->name) )
+          if ( !str_cmp(ch->pcdata->clan->leadership.number2,ch->name) )
             return TRUE;
           if ( ch->pcdata->bestowments && is_name( "pilot", ch->pcdata->bestowments) )
             return TRUE;

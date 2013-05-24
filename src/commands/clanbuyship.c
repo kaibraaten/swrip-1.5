@@ -25,7 +25,7 @@ void do_clanbuyship(CHAR_DATA *ch, char *argument )
 
   if ( ( ch->pcdata->bestowments
          &&    is_name("clanbuyship", ch->pcdata->bestowments))
-       ||   !str_cmp( ch->name, clan->leader  ))
+       ||   !str_cmp( ch->name, clan->leadership.leader  ))
     ;
   else
     {

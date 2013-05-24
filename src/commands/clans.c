@@ -44,9 +44,9 @@ void do_clans( CHAR_DATA *ch, char *argument )
       ch_printf( ch,"%-3d&W\r\nRevenue: &O%-29ld",support,revenue);
       ch_printf(ch,"&z&WLeader : ");
 
-      if( clan->leader[0] != 0 )
+      if( clan->leadership.leader[0] != 0 )
         {
-          ch_printf(ch,"&O%-20s",clan->leader);
+          ch_printf(ch,"&O%-20s",clan->leadership.leader);
         }
       else
         {
@@ -63,7 +63,7 @@ void do_clans( CHAR_DATA *ch, char *argument )
           for ( subclan = clan->first_subclan ; subclan ; subclan = subclan->next_subclan )
             {
               ch_printf( ch, "  &O%-20s %-10s\r\n",
-                         subclan->name, subclan->leader );
+                         subclan->name, subclan->leadership.leader );
             }
         }
       count++;
@@ -77,7 +77,7 @@ void do_clans( CHAR_DATA *ch, char *argument )
         continue;
 
       ch_printf( ch, "&Y%-24s &O%-10s\r\n",
-                 clan->name, clan->leader );
+                 clan->name, clan->leadership.leader );
       count++;
     }
 

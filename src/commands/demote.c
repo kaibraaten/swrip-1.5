@@ -13,7 +13,7 @@ void do_demote ( CHAR_DATA *ch , char *argument )
       return;
     }
 
-  if (  str_cmp( ch->name, ch->pcdata->clan->leader  )  )
+  if (  str_cmp( ch->name, ch->pcdata->clan->leadership.leader  )  )
     {
       send_to_char( "Only your leader can do that!\r\n", ch );
       return;
@@ -25,19 +25,19 @@ void do_demote ( CHAR_DATA *ch , char *argument )
       return;
     }
 
-  if ( !str_cmp( argument , ch->pcdata->clan->number1 )  )
+  if ( !str_cmp( argument , ch->pcdata->clan->leadership.number1 )  )
     {
       send_to_char( "Player Demoted!", ch );
 
-      STRFREE( ch->pcdata->clan->number1 );
-      ch->pcdata->clan->number1 = STRALLOC( "" );
+      STRFREE( ch->pcdata->clan->leadership.number1 );
+      ch->pcdata->clan->leadership.number1 = STRALLOC( "" );
     }
-  else if ( !str_cmp( argument , ch->pcdata->clan->number2 )  )
+  else if ( !str_cmp( argument , ch->pcdata->clan->leadership.number2 )  )
     {
       send_to_char( "Player Demoted!", ch );
 
-      STRFREE( ch->pcdata->clan->number2 );
-      ch->pcdata->clan->number2 = STRALLOC( "" );
+      STRFREE( ch->pcdata->clan->leadership.number2 );
+      ch->pcdata->clan->leadership.number2 = STRALLOC( "" );
     }
   else
     {

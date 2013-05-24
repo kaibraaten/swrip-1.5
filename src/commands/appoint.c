@@ -16,7 +16,7 @@ void do_appoint ( CHAR_DATA *ch , char *argument )
       return;
     }
 
-  if (  str_cmp( ch->name, ch->pcdata->clan->leader  )  )
+  if (  str_cmp( ch->name, ch->pcdata->clan->leadership.leader  )  )
     {
       send_to_char( "Only your leader can do that!\r\n", ch );
       return;
@@ -30,25 +30,25 @@ void do_appoint ( CHAR_DATA *ch , char *argument )
 
   if ( !str_cmp( argument , "first" )  )
     {
-      if ( ch->pcdata->clan->number1 && str_cmp( ch->pcdata->clan->number1 , "" ) )
+      if ( ch->pcdata->clan->leadership.number1 && str_cmp( ch->pcdata->clan->leadership.number1 , "" ) )
         {
           send_to_char( "You already have someone in that position... demote them first.\r\n", ch);
           return;
         }
 
-      STRFREE( ch->pcdata->clan->number1 );
-      ch->pcdata->clan->number1 = STRALLOC( arg );
+      STRFREE( ch->pcdata->clan->leadership.number1 );
+      ch->pcdata->clan->leadership.number1 = STRALLOC( arg );
     }
   else if ( !str_cmp( argument , "second" )  )
     {
-      if ( ch->pcdata->clan->number2 && str_cmp( ch->pcdata->clan->number2 , "" ))
+      if ( ch->pcdata->clan->leadership.number2 && str_cmp( ch->pcdata->clan->leadership.number2 , "" ))
         {
           send_to_char( "You already have someone in that position... demote them first.\r\n", ch);
           return;
         }
 
-      STRFREE( ch->pcdata->clan->number2 );
-      ch->pcdata->clan->number2 = STRALLOC( arg );
+      STRFREE( ch->pcdata->clan->leadership.number2 );
+      ch->pcdata->clan->leadership.number2 = STRALLOC( arg );
     }
   else
     do_appoint( ch , "" );

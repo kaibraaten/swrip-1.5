@@ -22,8 +22,8 @@ void do_makeclan( CHAR_DATA *ch, char *argument )
   clan->mainclan     = NULL;
   clan->name            = STRALLOC( argument );
   clan->description     = STRALLOC( "" );
-  clan->leader  = STRALLOC( "" );
-  clan->number1 = STRALLOC( "" );
-  clan->number2 = STRALLOC( "" );
+  clan->leadership.leader  = STRALLOC( "" );
+  clan->leadership.number1 = STRALLOC( "" );
+  clan->leadership.number2 = STRALLOC( "" );
   clan->tmpstr  = STRALLOC( "" );
 }

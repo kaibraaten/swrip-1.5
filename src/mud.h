@@ -407,7 +407,7 @@ struct  planet_data
   float            pop_support;
 };
 
-struct  clan_data
+struct clan_data
 {
   CLAN_DATA * next;             /* next clan in list                    */
   CLAN_DATA * prev;             /* previous clan in list                */
@@ -419,9 +419,6 @@ struct  clan_data
   char *        filename;       /* Clan filename                        */
   char *        name;           /* Clan name                            */
   char *        description;    /* A brief description of the clan      */
-  char *        leader;         /* Head clan leader                     */
-  char *        number1;        /* First officer                        */
-  char *        number2;        /* Second officer                       */
   int           pkills;         /* Number of pkills on behalf of clan   */
   int           pdeaths;        /* Number of pkills against clan        */
   int           mkills;         /* Number of mkills on behalf of clan   */
@@ -443,6 +440,13 @@ struct  clan_data
   int enlistroom1;
   int enlistroom2;
   char      * tmpstr;
+
+  struct
+  {
+    char *        leader;         /* Head clan leader                     */
+    char *        number1;        /* First officer                        */
+    char *        number2;        /* Second officer                       */
+  } leadership;
 };
 
 struct ship_data

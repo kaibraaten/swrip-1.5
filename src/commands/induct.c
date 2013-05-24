@@ -17,9 +17,9 @@ void do_induct( CHAR_DATA *ch, char *argument )
 
   if ( (ch->pcdata && ch->pcdata->bestowments
         && is_name("induct", ch->pcdata->bestowments))
-       || !str_cmp( ch->name, clan->leader  )
-       || !str_cmp( ch->name, clan->number1 )
-       || !str_cmp( ch->name, clan->number2 ) )
+       || !str_cmp( ch->name, clan->leadership.leader  )
+       || !str_cmp( ch->name, clan->leadership.number1 )
+       || !str_cmp( ch->name, clan->leadership.number2 ) )
     {
       ;
     }

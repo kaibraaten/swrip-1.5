@@ -17,9 +17,9 @@ void do_outcast( CHAR_DATA *ch, char *argument )
 
   if ( (ch->pcdata && ch->pcdata->bestowments
         && is_name("outcast", ch->pcdata->bestowments))
-       || !str_cmp( ch->name, clan->leader  )
-       || !str_cmp( ch->name, clan->number1 )
-       || !str_cmp( ch->name, clan->number2 ) )
+       || !str_cmp( ch->name, clan->leadership.leader  )
+       || !str_cmp( ch->name, clan->leadership.number1 )
+       || !str_cmp( ch->name, clan->leadership.number2 ) )
     {
       ;
     }
@@ -70,16 +70,16 @@ void do_outcast( CHAR_DATA *ch, char *argument )
   REMOVE_BIT( victim->speaks, LANG_CLAN );
   --clan->members;
 
-  if ( !str_cmp( victim->name, ch->pcdata->clan->number1 ) )
+  if ( !str_cmp( victim->name, ch->pcdata->clan->leadership.number1 ) )
     {
-      STRFREE( ch->pcdata->clan->number1 );
-      ch->pcdata->clan->number1 = STRALLOC( "" );
+      STRFREE( ch->pcdata->clan->leadership.number1 );
+      ch->pcdata->clan->leadership.number1 = STRALLOC( "" );
     }
 
-  if ( !str_cmp( victim->name, ch->pcdata->clan->number2 ) )
+  if ( !str_cmp( victim->name, ch->pcdata->clan->leadership.number2 ) )
     {
-      STRFREE( ch->pcdata->clan->number2 );
-      ch->pcdata->clan->number2 = STRALLOC( "" );
+      STRFREE( ch->pcdata->clan->leadership.number2 );
+      ch->pcdata->clan->leadership.number2 = STRALLOC( "" );
     }
 
   victim->pcdata->clan = NULL;

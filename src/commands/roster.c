@@ -4,9 +4,9 @@
 void do_roster( CHAR_DATA *ch, char *argument )
 {
   if( is_npc( ch ) || !ch->pcdata->clan
-      || ( str_cmp(ch->name, ch->pcdata->clan->leader )
-           && str_cmp(ch->name, ch->pcdata->clan->number1 )
-           && str_cmp(ch->name, ch->pcdata->clan->number2 )
+      || ( str_cmp(ch->name, ch->pcdata->clan->leadership.leader )
+           && str_cmp(ch->name, ch->pcdata->clan->leadership.number1 )
+           && str_cmp(ch->name, ch->pcdata->clan->leadership.number2 )
            && (!ch->pcdata || !ch->pcdata->bestowments
                || !is_name("roster", ch->pcdata->bestowments)) ) )
     {

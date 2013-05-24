@@ -15,7 +15,7 @@ void do_clan_withdraw( CHAR_DATA *ch, char *argument )
 
   if ( (ch->pcdata && ch->pcdata->bestowments
         && is_name("withdraw", ch->pcdata->bestowments))
-       || !str_cmp( ch->name, ch->pcdata->clan->leader  ))
+       || !str_cmp( ch->name, ch->pcdata->clan->leadership.leader  ))
     {
       ;
     }

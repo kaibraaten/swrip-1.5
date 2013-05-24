@@ -59,8 +59,8 @@ void do_setclan( CHAR_DATA *ch, char *argument )
 
   if ( !str_cmp( arg2, "leader" ) )
     {
-      STRFREE( clan->leader );
-      clan->leader = STRALLOC( argument );
+      STRFREE( clan->leadership.leader );
+      clan->leadership.leader = STRALLOC( argument );
       send_to_char( "Done.\r\n", ch );
       save_clan( clan );
       return;
@@ -98,8 +98,8 @@ void do_setclan( CHAR_DATA *ch, char *argument )
 
   if ( !str_cmp( arg2, "number1" ) )
     {
-      STRFREE( clan->number1 );
-      clan->number1 = STRALLOC( argument );
+      STRFREE( clan->leadership.number1 );
+      clan->leadership.number1 = STRALLOC( argument );
       send_to_char( "Done.\r\n", ch );
       save_clan( clan );
       return;
@@ -107,8 +107,8 @@ void do_setclan( CHAR_DATA *ch, char *argument )
 
   if ( !str_cmp( arg2, "number2" ) )
     {
-      STRFREE( clan->number2 );
-      clan->number2 = STRALLOC( argument );
+      STRFREE( clan->leadership.number2 );
+      clan->leadership.number2 = STRALLOC( argument );
       send_to_char( "Done.\r\n", ch );
       save_clan( clan );
       return;

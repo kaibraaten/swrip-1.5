@@ -2176,42 +2176,42 @@ void raw_kill( CHAR_DATA *ch, CHAR_DATA *victim )
 
   if ( victim->pcdata && victim->pcdata->clan )
     {
-      if ( !str_cmp( victim->name, victim->pcdata->clan->leader ) )
+      if ( !str_cmp( victim->name, victim->pcdata->clan->leadership.leader ) )
         {
-          STRFREE( victim->pcdata->clan->leader );
-          if ( victim->pcdata->clan->number1 )
+          STRFREE( victim->pcdata->clan->leadership.leader );
+          if ( victim->pcdata->clan->leadership.number1 )
             {
-              victim->pcdata->clan->leader = STRALLOC( victim->pcdata->clan->number1 );
-              STRFREE( victim->pcdata->clan->number1 );
-              victim->pcdata->clan->number1 = STRALLOC( "" );
+              victim->pcdata->clan->leadership.leader = STRALLOC( victim->pcdata->clan->leadership.number1 );
+              STRFREE( victim->pcdata->clan->leadership.number1 );
+              victim->pcdata->clan->leadership.number1 = STRALLOC( "" );
             }
-          else if ( victim->pcdata->clan->number2 )
+          else if ( victim->pcdata->clan->leadership.number2 )
             {
-              victim->pcdata->clan->leader = STRALLOC( victim->pcdata->clan->number2 );
-              STRFREE( victim->pcdata->clan->number2 );
-              victim->pcdata->clan->number2 = STRALLOC( "" );
-            }
-          else
-            victim->pcdata->clan->leader = STRALLOC( "" );
-        }
-
-      if ( !str_cmp( victim->name, victim->pcdata->clan->number1 ) )
-        {
-          STRFREE( victim->pcdata->clan->number1 );
-          if ( victim->pcdata->clan->number2 )
-            {
-              victim->pcdata->clan->number1 = STRALLOC( victim->pcdata->clan->number2 );
-              STRFREE( victim->pcdata->clan->number2 );
-              victim->pcdata->clan->number2 = STRALLOC( "" );
+              victim->pcdata->clan->leadership.leader = STRALLOC( victim->pcdata->clan->leadership.number2 );
+              STRFREE( victim->pcdata->clan->leadership.number2 );
+              victim->pcdata->clan->leadership.number2 = STRALLOC( "" );
             }
           else
-            victim->pcdata->clan->number1 = STRALLOC( "" );
+            victim->pcdata->clan->leadership.leader = STRALLOC( "" );
         }
 
-      if ( !str_cmp( victim->name, victim->pcdata->clan->number2 ) )
+      if ( !str_cmp( victim->name, victim->pcdata->clan->leadership.number1 ) )
         {
-          STRFREE( victim->pcdata->clan->number2 );
-          victim->pcdata->clan->number1 = STRALLOC( "" );
+          STRFREE( victim->pcdata->clan->leadership.number1 );
+          if ( victim->pcdata->clan->leadership.number2 )
+            {
+              victim->pcdata->clan->leadership.number1 = STRALLOC( victim->pcdata->clan->leadership.number2 );
+              STRFREE( victim->pcdata->clan->leadership.number2 );
+              victim->pcdata->clan->leadership.number2 = STRALLOC( "" );
+            }
+          else
+            victim->pcdata->clan->leadership.number1 = STRALLOC( "" );
+        }
+
+      if ( !str_cmp( victim->name, victim->pcdata->clan->leadership.number2 ) )
+        {
+          STRFREE( victim->pcdata->clan->leadership.number2 );
+          victim->pcdata->clan->leadership.number1 = STRALLOC( "" );
         }
 
       victim->pcdata->clan->members--;

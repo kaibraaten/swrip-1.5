@@ -118,9 +118,9 @@ void save_clan( const CLAN_DATA *clan )
       fprintf( fp, "Name         %s~\n", clan->name              );
       fprintf( fp, "Filename     %s~\n", clan->filename          );
       fprintf( fp, "Description  %s~\n", clan->description       );
-      fprintf( fp, "Leader       %s~\n", clan->leader            );
-      fprintf( fp, "NumberOne    %s~\n", clan->number1           );
-      fprintf( fp, "NumberTwo    %s~\n", clan->number2           );
+      fprintf( fp, "Leader       %s~\n", clan->leadership.leader            );
+      fprintf( fp, "NumberOne    %s~\n", clan->leadership.number1           );
+      fprintf( fp, "NumberTwo    %s~\n", clan->leadership.number2           );
       fprintf( fp, "PKills       %d\n",  clan->pkills            );
       fprintf( fp, "PDeaths      %d\n",  clan->pdeaths           );
       fprintf( fp, "MKills       %d\n",  clan->mkills            );
@@ -188,9 +188,9 @@ static void fread_clan( CLAN_DATA *clan, FILE *fp )
 		  clan->name = STRALLOC( "" );
 		}
 
-              if (!clan->leader)
+              if (!clan->leadership.leader)
 		{
-		  clan->leader = STRALLOC( "" );
+		  clan->leadership.leader = STRALLOC( "" );
 		}
 
               if (!clan->description)
@@ -198,15 +198,15 @@ static void fread_clan( CLAN_DATA *clan, FILE *fp )
 		  clan->description = STRALLOC( "" );
 		}
 
-              if (!clan->number1)
+              if (!clan->leadership.number1)
 		{
-		  clan->number1 = STRALLOC( "" );
+		  clan->leadership.number1 = STRALLOC( "" );
 		}
 
 
-              if (!clan->number2)
+              if (!clan->leadership.number2)
 		{
-		  clan->number2 = STRALLOC( "" );
+		  clan->leadership.number2 = STRALLOC( "" );
 		}
 
               if (!clan->tmpstr)
@@ -233,7 +233,7 @@ static void fread_clan( CLAN_DATA *clan, FILE *fp )
           break;
 
         case 'L':
-          KEY( "Leader", clan->leader, fread_string( fp ) );
+          KEY( "Leader", clan->leadership.leader, fread_string( fp ) );
           break;
 
         case 'M':
@@ -245,8 +245,8 @@ static void fread_clan( CLAN_DATA *clan, FILE *fp )
 
         case 'N':
           KEY( "Name",      clan->name,    fread_string( fp ) );
-          KEY( "NumberOne", clan->number1, fread_string( fp ) );
-          KEY( "NumberTwo", clan->number2, fread_string( fp ) );
+          KEY( "NumberOne", clan->leadership.number1, fread_string( fp ) );
+          KEY( "NumberTwo", clan->leadership.number2, fread_string( fp ) );
           break;
 
         case 'P':
@@ -518,9 +518,9 @@ void show_members( const CHAR_DATA *ch, const char *argument, const char *format
   pager_printf( ch, "\r\nMembers of %s\r\n", clan->name );
   pager_printf( ch,
                 "------------------------------------------------------------\r\n" );
-  pager_printf( ch, "Leader: %s\r\n", clan->leader );
-  pager_printf( ch, "Number1: %s\r\n", clan->number1 );
-  pager_printf( ch, "Number2: %s\r\n", clan->number2 );
+  pager_printf( ch, "Leader: %s\r\n", clan->leadership.leader );
+  pager_printf( ch, "Number1: %s\r\n", clan->leadership.number1 );
+  pager_printf( ch, "Number2: %s\r\n", clan->leadership.number2 );
   pager_printf( ch, "Spacecraft: %d  Vehicles: %d\r\n", clan->spacecraft, clan->vehicles );
   pager_printf( ch,
                 "------------------------------------------------------------\r\n" );
@@ -589,9 +589,9 @@ void show_members( const CHAR_DATA *ch, const char *argument, const char *format
 
           for( sort = first_member; sort; sort = sort->next )
 	    {
-	      if( str_cmp( sort->member->name, clan->leader )
-		  && str_cmp( sort->member->name, clan->number1 )
-		  && str_cmp( sort->member->name, clan->number2 ) )
+	      if( str_cmp( sort->member->name, clan->leadership.leader )
+		  && str_cmp( sort->member->name, clan->leadership.number1 )
+		  && str_cmp( sort->member->name, clan->leadership.number2 ) )
 		{
 		  members++;
 		  pager_printf( ch, "[%3d] %12s %15s %7d %7d %10s\r\n",
@@ -623,8 +623,8 @@ void show_members( const CHAR_DATA *ch, const char *argument, const char *format
     {
 
       for( member = members_list->first_member; member; member = member->next )
-        if( str_cmp( member->name, clan->leader ) && str_cmp( member->name, clan->number1 )
-            && str_cmp( member->name, clan->number2 ) )
+        if( str_cmp( member->name, clan->leadership.leader ) && str_cmp( member->name, clan->leadership.number1 )
+            && str_cmp( member->name, clan->leadership.number2 ) )
           {
             members++;
             pager_printf( ch, "[%3d] %12s %15s %7d %7d %10s\r\n",
