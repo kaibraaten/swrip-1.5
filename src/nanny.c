@@ -606,12 +606,12 @@ static void nanny_get_new_class( DESCRIPTOR_DATA *d, char *argument )
   ch->stats.perm_con = number_range(3, 6)+number_range(1, 6)+number_range(1, 6);
   ch->stats.perm_cha = number_range(3, 6)+number_range(1, 6)+number_range(1, 6);
 
-  ch->stats.perm_str       += race_table[ch->race].str_plus;
-  ch->stats.perm_int       += race_table[ch->race].int_plus;
-  ch->stats.perm_wis       += race_table[ch->race].wis_plus;
-  ch->stats.perm_dex       += race_table[ch->race].dex_plus;
-  ch->stats.perm_con       += race_table[ch->race].con_plus;
-  ch->stats.perm_cha       += race_table[ch->race].cha_plus;
+  ch->stats.perm_str       += race_table[ch->race].stats.mod_str;
+  ch->stats.perm_int       += race_table[ch->race].stats.mod_int;
+  ch->stats.perm_wis       += race_table[ch->race].stats.mod_wis;
+  ch->stats.perm_dex       += race_table[ch->race].stats.mod_dex;
+  ch->stats.perm_con       += race_table[ch->race].stats.mod_con;
+  ch->stats.perm_cha       += race_table[ch->race].stats.mod_cha;
 
   sprintf( buf, "\r\nSTR: %d  INT: %d  WIS: %d  DEX: %d  CON: %d  CHA: %d\r\n",
 	   ch->stats.perm_str, ch->stats.perm_int, ch->stats.perm_wis,
@@ -642,12 +642,12 @@ static void nanny_stats_ok( DESCRIPTOR_DATA *d, char *argument )
       ch->stats.perm_con = number_range(3, 6)+number_range(1, 6)+number_range(1, 6);
       ch->stats.perm_cha = number_range(3, 6)+number_range(1, 6)+number_range(1, 6);
 
-      ch->stats.perm_str   += race_table[ch->race].str_plus;
-      ch->stats.perm_int   += race_table[ch->race].int_plus;
-      ch->stats.perm_wis   += race_table[ch->race].wis_plus;
-      ch->stats.perm_dex   += race_table[ch->race].dex_plus;
-      ch->stats.perm_con   += race_table[ch->race].con_plus;
-      ch->stats.perm_cha   += race_table[ch->race].cha_plus;
+      ch->stats.perm_str   += race_table[ch->race].stats.mod_str;
+      ch->stats.perm_int   += race_table[ch->race].stats.mod_int;
+      ch->stats.perm_wis   += race_table[ch->race].stats.mod_wis;
+      ch->stats.perm_dex   += race_table[ch->race].stats.mod_dex;
+      ch->stats.perm_con   += race_table[ch->race].stats.mod_con;
+      ch->stats.perm_cha   += race_table[ch->race].stats.mod_cha;
 
       sprintf( buf, "\r\nSTR: %d  INT: %d  WIS: %d  DEX: %d  CON: %d  CHA: %d\r\n" ,
 	       ch->stats.perm_str, ch->stats.perm_int, ch->stats.perm_wis,
@@ -793,8 +793,8 @@ static void nanny_read_motd( DESCRIPTOR_DATA *d, char *argument )
       ch->stats.perm_lck = number_range(6, 20);
       ch->stats.perm_frc = number_range(-800, 20);
       ch->affected_by         = race_table[ch->race].affected;
-      ch->stats.perm_lck   += race_table[ch->race].lck_plus;
-      ch->stats.perm_frc   += race_table[ch->race].frc_plus;
+      ch->stats.perm_lck   += race_table[ch->race].stats.mod_lck;
+      ch->stats.perm_frc   += race_table[ch->race].stats.mod_frc;
 
       if ( ch->ability.main == FORCE_ABILITY )
 	{

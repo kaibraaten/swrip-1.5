@@ -167,7 +167,7 @@ short get_curr_frc( const CHAR_DATA *ch )
 
   if (!is_npc(ch))
     {
-      max = 20 + race_table[ch->race].frc_plus;
+      max = 20 + race_table[ch->race].stats.mod_frc;
       max = UMIN(max,25);
     }
   else

@@ -141,7 +141,7 @@ void do_shopset( CHAR_DATA *ch, char *argument )
           send_to_char( "Out of range.\r\n", ch );
           return;
         }
-      shop->open_hour = value;
+      shop->business_hours.open = value;
       send_to_char( "Done.\r\n", ch );
       return;
     }
@@ -153,7 +153,7 @@ void do_shopset( CHAR_DATA *ch, char *argument )
           send_to_char( "Out of range.\r\n", ch );
           return;
         }
-      shop->close_hour = value;
+      shop->business_hours.close = value;
       send_to_char( "Done.\r\n", ch );
       return;
     }

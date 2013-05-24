@@ -38,6 +38,6 @@ void do_shopstat( CHAR_DATA *ch, char *argument )
              shop->profit_buy,
              shop->profit_sell );
   ch_printf( ch, "Hours:   open %2d  close %2d\r\n",
-             shop->open_hour,
-             shop->close_hour );
+             shop->business_hours.open,
+             shop->business_hours.close );
 }

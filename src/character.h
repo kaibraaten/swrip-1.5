@@ -17,22 +17,8 @@ struct char_data
   CHAR_DATA *           switched;
   CHAR_DATA *           mount;
 
-  struct
-  {
-    HHF_DATA *hunting;
-    HHF_DATA *fearing;
-    HHF_DATA *hating;
-  } hhf;
-
   SPEC_FUN *            spec_fun;
   SPEC_FUN *            spec_2;
-
-  struct
-  {
-    MPROG_ACT_LIST *mpact;
-    int mpactnum;
-    short mpscriptpos;
-  } mprog;
 
   MOB_INDEX_DATA *      pIndexData;
   DESCRIPTOR_DATA *     desc;
@@ -64,13 +50,6 @@ struct char_data
   short         race;
   short top_level;
 
-  struct
-  {
-    short main;
-    short level[MAX_ABILITY];
-    long experience[MAX_ABILITY];
-  } ability;
-
   short         trust;
   short         timer;
   short         wait;
@@ -97,15 +76,6 @@ struct char_data
   int                   speaks;
   int                   speaking;
 
-  struct
-  {
-    short poison_death;
-    short wand;
-    short para_petri;
-    short breath;
-    short spell_staff;
-  } saving;
-
   short         alignment;
   short         barenumdie;
   short         baresizedie;
@@ -121,6 +91,58 @@ struct char_data
   short         armor;
   short         wimpy;
   int                   deaf;
+
+  short         mental_state;           /* simplified */
+  short         emotional_state;        /* simplified */
+  int                   retran;
+  int                   regoto;
+  short         mobinvis;       /* Mobinvis level SB */
+  int                 vip_flags;
+  short              backup_wait;       /* reinforcements */
+  int                 backup_mob;     /* reinforcements */
+  short              was_stunned;
+  char            *   mob_clan;    /* for spec_clan_guard.. set by postguard */
+  GUARD_DATA      *   guard_data;
+  ROOM_INDEX_DATA *   buzzed_home;
+  ROOM_INDEX_DATA *   buzzed_from_room;
+  CHAR_DATA           *   challenged;
+  CHAR_DATA *         betted_on;
+  int                 bet_amt;
+  char      *   owner;
+  ROOM_INDEX_DATA *   home;
+  short   cmd_recurse;
+  OBJ_DATA          *   on;
+  CHAR_DATA         *   pet;
+
+  struct
+  {
+    HHF_DATA *hunting;
+    HHF_DATA *fearing;
+    HHF_DATA *hating;
+  } hhf;
+
+  struct
+  {
+    short main;
+    short level[MAX_ABILITY];
+    long experience[MAX_ABILITY];
+  } ability;
+
+  struct
+  {
+    MPROG_ACT_LIST *mpact;
+    int mpactnum;
+    short mpscriptpos;
+  } mprog;
+
+  struct
+  {
+    short poison_death;
+    short wand;
+    short para_petri;
+    short breath;
+    short spell_staff;
+  } saving;
 
   struct
   {
@@ -143,20 +165,6 @@ struct char_data
     short mod_frc;
   } stats;
 
-  short         mental_state;           /* simplified */
-  short         emotional_state;        /* simplified */
-  int                   retran;
-  int                   regoto;
-  short         mobinvis;       /* Mobinvis level SB */
-  int                 vip_flags;
-  short              backup_wait;       /* reinforcements */
-  int                 backup_mob;     /* reinforcements */
-  short              was_stunned;
-  char            *   mob_clan;    /* for spec_clan_guard.. set by postguard */
-  GUARD_DATA      *   guard_data;
-  ROOM_INDEX_DATA *   buzzed_home;
-  ROOM_INDEX_DATA *   buzzed_from_room;
-
   struct
   {
     short      questmob;
@@ -166,15 +174,6 @@ struct char_data
     int        countdown;
     CHAR_DATA *questgiver;
   } quest;
-
-  CHAR_DATA           *   challenged;
-  CHAR_DATA *         betted_on;
-  int                 bet_amt;
-  char      *   owner;
-  ROOM_INDEX_DATA *   home;
-  short   cmd_recurse;
-  OBJ_DATA          *   on;
-  CHAR_DATA         *   pet;
 };
 
 bool is_wizvis( const CHAR_DATA *ch, const CHAR_DATA *victim );

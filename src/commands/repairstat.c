@@ -36,6 +36,6 @@ void do_repairstat( CHAR_DATA *ch, char *argument )
              repair->profit_fix,
              repair->shop_type );
   ch_printf( ch, "Hours:   open %2d  close %2d\r\n",
-             repair->open_hour,
-             repair->close_hour );
+             repair->business_hours.open,
+             repair->business_hours.close );
 }

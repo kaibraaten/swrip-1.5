@@ -14,6 +14,6 @@ void do_repairshops( CHAR_DATA *ch, char *argument )
   for ( repair = first_repair; repair; repair = repair->next )
     ch_printf( ch, "Keeper: %5d Profit: %3d Type: %d Open: %2d Close: %2d Fix: %2d %2d %2d\r\n",
                repair->keeper,       repair->profit_fix, repair->shop_type,
-               repair->open_hour,   repair->close_hour,
+               repair->business_hours.open,   repair->business_hours.close,
                repair->fix_type[0], repair->fix_type[1], repair->fix_type[2] );
 }

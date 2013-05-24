@@ -215,39 +215,47 @@ struct  help_data
   char *        text;
 };
 
-struct  shop_data
+struct shop_data
 {
-  SHOP_DATA *   next;                   /* Next shop in list            */
-  SHOP_DATA * prev;                     /* Previous shop in list        */
-  int           keeper;                 /* Vnum of shop keeper mob      */
-  short buy_type [MAX_TRADE];   /* Item types shop will buy     */
-  short profit_buy;             /* Cost multiplier for buying   */
-  short profit_sell;            /* Cost multiplier for selling  */
-  short open_hour;              /* First opening hour           */
-  short close_hour;             /* First closing hour           */
+  SHOP_DATA *next;                  /* Next shop in list            */
+  SHOP_DATA *prev;                  /* Previous shop in list        */
+  int        keeper;                /* Vnum of shop keeper mob      */
+  short      buy_type[MAX_TRADE];   /* Item types shop will buy     */
+  short      profit_buy;            /* Cost multiplier for buying   */
+  short      profit_sell;           /* Cost multiplier for selling  */
+
+  struct
+  {
+    short open;              /* First opening hour           */
+    short close;             /* First closing hour           */
+  } business_hours;
 };
 
-struct  repairshop_data
+struct repairshop_data
 {
-  REPAIR_DATA * next;                   /* Next shop in list            */
-  REPAIR_DATA * prev;                   /* Previous shop in list        */
-  int             keeper;               /* Vnum of shop keeper mob      */
-  short   fix_type [MAX_FIX];   /* Item types shop will fix     */
-  short   profit_fix;           /* Cost multiplier for fixing   */
-  short   shop_type;            /* Repair shop type             */
-  short   open_hour;            /* First opening hour           */
-  short   close_hour;           /* First closing hour           */
+  REPAIR_DATA *next;                /* Next shop in list            */
+  REPAIR_DATA *prev;                /* Previous shop in list        */
+  int          keeper;              /* Vnum of shop keeper mob      */
+  short        fix_type[MAX_FIX];   /* Item types shop will fix     */
+  short        profit_fix;          /* Cost multiplier for fixing   */
+  short       shop_type;            /* Repair shop type             */
+
+  struct
+  {
+    short open;              /* First opening hour           */
+    short close;             /* First closing hour           */
+  } business_hours;
 };
 
 
 /* Mob program structures */
-struct  act_prog_data
+struct act_prog_data
 {
   struct act_prog_data *next;
   void *vo;
 };
 
-struct  mob_prog_act_list
+struct mob_prog_act_list
 {
   MPROG_ACT_LIST * next;
   char *             buf;
@@ -256,7 +264,7 @@ struct  mob_prog_act_list
   void *             vo;
 };
 
-struct  mob_prog_data
+struct mob_prog_data
 {
   MPROG_DATA * next;
   int            type;
@@ -270,18 +278,23 @@ extern bool MOBtrigger;
 extern bool mud_down;
 
 /* race dedicated stuff */
-struct  race_type
+struct race_type
 {
-  char  race_name       [20];   /* Race name                    */
+  char  race_name[20];   /* Race name                    */
   int           affected;               /* Default affect bitvectors    */
-  short str_plus;               /* Str bonus/penalty            */
-  short dex_plus;               /* Dex      "                   */
-  short wis_plus;               /* Wis      "                   */
-  short int_plus;               /* Int      "                   */
-  short con_plus;               /* Con      "                   */
-  short cha_plus;               /* Cha      "                   */
-  short lck_plus;               /* Lck      "                   */
-  short frc_plus;               /* Frc      "                   */
+
+  struct
+  {
+    short mod_str;               /* Str bonus/penalty            */
+    short mod_dex;               /* Dex      "                   */
+    short mod_wis;               /* Wis      "                   */
+    short mod_int;               /* Int      "                   */
+    short mod_con;               /* Con      "                   */
+    short mod_cha;               /* Cha      "                   */
+    short mod_lck;               /* Lck      "                   */
+    short mod_frc;               /* Frc      "                   */
+  } stats;
+
   short      hit;
   short      mana;
   int      resist;

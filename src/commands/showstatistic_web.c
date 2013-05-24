@@ -55,12 +55,12 @@ void do_showstatistic_web( CHAR_DATA *ch, char *argument )
       raceCh->race = 0;
     }
 
-  raceCh->stats.perm_str       += race_table[raceCh->race].str_plus;
-  raceCh->stats.perm_int       += race_table[raceCh->race].int_plus;
-  raceCh->stats.perm_wis       += race_table[raceCh->race].wis_plus;
-  raceCh->stats.perm_dex       += race_table[raceCh->race].dex_plus;
-  raceCh->stats.perm_con       += race_table[raceCh->race].con_plus;
-  raceCh->stats.perm_cha       += race_table[raceCh->race].cha_plus;
+  raceCh->stats.perm_str       += race_table[raceCh->race].stats.mod_str;
+  raceCh->stats.perm_int       += race_table[raceCh->race].stats.mod_int;
+  raceCh->stats.perm_wis       += race_table[raceCh->race].stats.mod_wis;
+  raceCh->stats.perm_dex       += race_table[raceCh->race].stats.mod_dex;
+  raceCh->stats.perm_con       += race_table[raceCh->race].stats.mod_con;
+  raceCh->stats.perm_cha       += race_table[raceCh->race].stats.mod_cha;
 
   if( chk_race )
     {
@@ -96,12 +96,12 @@ void do_showstatistic_web( CHAR_DATA *ch, char *argument )
       for( iR = 0; iR < MAX_RACE; iR++ )
         {
           raceCh->race = iR;
-          raceCh->stats.perm_str = 20 + race_table[raceCh->race].str_plus;
-          raceCh->stats.perm_int = 20 + race_table[raceCh->race].int_plus;
-          raceCh->stats.perm_wis = 20 + race_table[raceCh->race].wis_plus;
-          raceCh->stats.perm_dex = 20 + race_table[raceCh->race].dex_plus;
-          raceCh->stats.perm_con = 20 + race_table[raceCh->race].con_plus;
-          raceCh->stats.perm_cha = 20 + race_table[raceCh->race].cha_plus;
+          raceCh->stats.perm_str = 20 + race_table[raceCh->race].stats.mod_str;
+          raceCh->stats.perm_int = 20 + race_table[raceCh->race].stats.mod_int;
+          raceCh->stats.perm_wis = 20 + race_table[raceCh->race].stats.mod_wis;
+          raceCh->stats.perm_dex = 20 + race_table[raceCh->race].stats.mod_dex;
+          raceCh->stats.perm_con = 20 + race_table[raceCh->race].stats.mod_con;
+          raceCh->stats.perm_cha = 20 + race_table[raceCh->race].stats.mod_cha;
           fprintf( whoout, "\r\n&c%-20s &B| &C", race_table[iR].race_name );
 
           for( iC2 = 0; iC2 < FORCE_ABILITY; iC2++ )

@@ -78,23 +78,23 @@ CHAR_DATA *find_keeper_q( CHAR_DATA *ch, bool message )
   /*
    * Shop hours.
    */
-  if ( pShop->open_hour > pShop->close_hour )
+  if ( pShop->business_hours.open > pShop->business_hours.close )
     {
-      if( time_info.hour < pShop->open_hour && time_info.hour > pShop->close_hour )
+      if( time_info.hour < pShop->business_hours.open && time_info.hour > pShop->business_hours.close )
         {
           do_say( keeper, "Sorry, come back later." );
           return NULL;
         }
     }
   else
-    if( time_info.hour < pShop->open_hour || time_info.hour > pShop->close_hour )
+    if( time_info.hour < pShop->business_hours.open || time_info.hour > pShop->business_hours.close )
       {
-        if( time_info.hour > pShop->open_hour )
+        if( time_info.hour > pShop->business_hours.open )
           {
             do_say( keeper, "Sorry, come back later." );
             return NULL;
           }
-        if ( time_info.hour > pShop->close_hour )
+        if ( time_info.hour > pShop->business_hours.close )
           {
             do_say( keeper, "Sorry, come back tomorrow." );
             return NULL;
@@ -134,13 +134,13 @@ CHAR_DATA *find_fixer( CHAR_DATA *ch )
   /*
    * Shop hours.
    */
-  if ( time_info.hour < rShop->open_hour )
+  if ( time_info.hour < rShop->business_hours.open )
     {
       do_say( keeper, "Sorry, come back later." );
       return NULL;
     }
 
-  if ( time_info.hour > rShop->close_hour )
+  if ( time_info.hour > rShop->business_hours.close )
     {
       do_say( keeper, "Sorry, come back tomorrow." );
       return NULL;

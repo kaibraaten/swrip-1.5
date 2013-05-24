@@ -112,7 +112,7 @@ void do_repairset( CHAR_DATA *ch, char *argument )
           send_to_char( "Out of range.\r\n", ch );
           return;
         }
-      repair->open_hour = value;
+      repair->business_hours.open = value;
       send_to_char( "Done.\r\n", ch );
       return;
     }
@@ -124,7 +124,7 @@ void do_repairset( CHAR_DATA *ch, char *argument )
           send_to_char( "Out of range.\r\n", ch );
           return;
         }
-      repair->close_hour = value;
+      repair->business_hours.close = value;
       send_to_char( "Done.\r\n", ch );
       return;
     }

@@ -35,8 +35,8 @@ void do_makerepair( CHAR_DATA *ch, char *argument )
   repair->keeper        = vnum;
   repair->profit_fix    = 100;
   repair->shop_type     = SHOP_FIX;
-  repair->open_hour     = 0;
-  repair->close_hour    = 23;
+  repair->business_hours.open     = 0;
+  repair->business_hours.close    = 23;
   mob->rShop            = repair;
   send_to_char( "Done.\r\n", ch );
 }

@@ -35,8 +35,8 @@ void do_makeshop( CHAR_DATA *ch, char *argument )
   shop->keeper  = vnum;
   shop->profit_buy      = 120;
   shop->profit_sell     = 90;
-  shop->open_hour       = 0;
-  shop->close_hour      = 23;
+  shop->business_hours.open       = 0;
+  shop->business_hours.close      = 23;
   mob->pShop            = shop;
   send_to_char( "Done.\r\n", ch );
 }

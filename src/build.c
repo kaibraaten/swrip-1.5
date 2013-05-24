@@ -1192,8 +1192,8 @@ void fold_area( AREA_DATA *tarea, char *filename, bool install )
                pShop->profit_buy,
                pShop->profit_sell );
       fprintf( fpout, "        %2d %2d    ; %s\n",
-               pShop->open_hour,
-               pShop->close_hour,
+               pShop->business_hours.open,
+               pShop->business_hours.close,
                pMobIndex->short_descr );
     }
   fprintf( fpout, "0\n\n\n" );
@@ -1214,8 +1214,8 @@ void fold_area( AREA_DATA *tarea, char *filename, bool install )
                pRepair->profit_fix,
                pRepair->shop_type );
       fprintf( fpout, "        %2d %2d    ; %s\n",
-               pRepair->open_hour,
-               pRepair->close_hour,
+               pRepair->business_hours.open,
+               pRepair->business_hours.close,
                pMobIndex->short_descr );
     }
   fprintf( fpout, "0\n\n\n" );
