@@ -399,8 +399,13 @@ struct imc_remoteinfo
   char *network;
   char *path;
   char *url;
-  char *host;
-  char *port;
+
+  struct
+  {
+    char *host;
+    char *port;
+  } remote;
+
   bool expired;
 };
 
@@ -1002,8 +1007,8 @@ static void imc_delete_reminfo( REMOTEINFO * p )
    IMCSTRFREE( p->network );
    IMCSTRFREE( p->path );
    IMCSTRFREE( p->url );
-   IMCSTRFREE( p->port );
-   IMCSTRFREE( p->host );
+   IMCSTRFREE( p->remote.port );
+   IMCSTRFREE( p->remote.host );
    IMCDISPOSE( p );
 }
 
@@ -2617,14 +2622,14 @@ PFUN( imc_recv_isalive )
 
    if( host[0] != '\0' )
    {
-      IMCSTRFREE( r->host );
-      r->host = IMCSTRALLOC( host );
+      IMCSTRFREE( r->remote.host );
+      r->remote.host = IMCSTRALLOC( host );
    }
 
    if( iport[0] != '\0' )
    {
-      IMCSTRFREE( r->port );
-      r->port = IMCSTRALLOC( iport );
+      IMCSTRFREE( r->remote.port );
+      r->remote.port = IMCSTRALLOC( iport );
    }
 }
 

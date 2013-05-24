@@ -129,7 +129,7 @@ void do_copyover( CHAR_DATA * ch, char *argument )
 #endif
 
       fprintf( fp, "%d %d %s %s\n", cur_desc, 0, /*d->mccp ? 1 : 0,*/
-	       och->name, d->host );
+	       och->name, d->remote.host );
       save_char_obj( och );
       write_to_descriptor( d->descriptor, buf, 0 );
     }
@@ -226,7 +226,7 @@ void copyover_recover( void )
 
     CREATE( d, DESCRIPTOR_DATA, 1 );
     init_descriptor( d, desc ); /* set up various stuff */
-    d->host = STRALLOC( host );
+    d->remote.host = STRALLOC( host );
 
     /* Write something, and check if it goes error-free */
     if( !write_to_descriptor( d->descriptor, "\r\nThe surge of Light passes leaving you unscathed and your world reshaped anew\r\n", 0 ) )

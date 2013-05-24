@@ -31,12 +31,12 @@ void do_users( CHAR_DATA *ch, char *argument )
                        d->descriptor,
                        d->connected,
                        d->idle / 4,
-                       d->port,
+                       d->remote.port,
                        d->original  ? d->original->name  :
                        d->character ? d->character->name : "(none)",
-                       d->hostip );
+                       d->remote.hostip );
 	      if ( ch->top_level >= LEVEL_GOD && ( !d->character || d->character->top_level <= LEVEL_GOD ) )
-                sprintf( buf + strlen( buf ), " (%s)", d->host  );
+                sprintf( buf + strlen( buf ), " (%s)", d->remote.host  );
               strcat(buf, "\r\n");
               send_to_pager( buf, ch );
             }
@@ -45,7 +45,7 @@ void do_users( CHAR_DATA *ch, char *argument )
         {
           if ( (get_trust(ch) >= LEVEL_SUPREME
                 ||   (d->character && can_see( ch, d->character )) )
-               &&   ( !str_prefix( arg, d->host )
+               &&   ( !str_prefix( arg, d->remote.host )
                       ||   ( d->character && !str_prefix( arg, d->character->name ) ) ) )
             {
               count++;
@@ -54,10 +54,10 @@ void do_users( CHAR_DATA *ch, char *argument )
                             d->descriptor,
                             d->connected,
                             d->idle / 4,
-                            d->port,
+                            d->remote.port,
                             d->original  ? d->original->name  :
                             d->character ? d->character->name : "(none)",
-                            d->host
+                            d->remote.host
                             );
               buf[0] = '\0';
 

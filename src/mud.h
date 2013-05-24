@@ -120,9 +120,14 @@ struct  descriptor_data
   DESCRIPTOR_DATA *snoop_by;
   CHAR_DATA *character;
   CHAR_DATA *original;
-  char *host;
-  char *hostip;
-  short port;
+
+  struct
+  {
+    char *host;
+    char *hostip;
+    short port;
+  } remote;
+
   socket_t descriptor;
   short connected;
   short idle;

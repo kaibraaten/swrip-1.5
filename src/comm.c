@@ -663,7 +663,7 @@ void init_descriptor(DESCRIPTOR_DATA *dnew, socket_t desc)
   dnew->idle          = 0;
   dnew->lines         = 0;
   dnew->scrlen        = 24;
-  /*dnew->port          = ntohs( sock.sin_port );*/
+  /*dnew->remote.port          = ntohs( sock.sin_port );*/
   dnew->newstate      = 0;
   dnew->prevcolor     = 0x07;
   dnew->original      = NULL;
@@ -724,7 +724,7 @@ void new_descriptor( socket_t new_desc )
 
   CREATE( dnew, DESCRIPTOR_DATA, 1 );
   init_descriptor(dnew, desc);
-  dnew->port = ntohs( sock.sin_port );
+  dnew->remote.port = ntohs( sock.sin_port );
 
 #if defined(AMIGA) || defined(__MORPHOS__)
   strcpy( buf, Inet_NtoA( *( ( unsigned long * ) &sock.sin_addr ) ) );
@@ -732,10 +732,10 @@ void new_descriptor( socket_t new_desc )
   strcpy( buf, inet_ntoa( sock.sin_addr ) );
 #endif
   sprintf( log_buf, "Sock.sinaddr:  %s, port %hd.",
-           buf, dnew->port );
+           buf, dnew->remote.port );
   log_string_plus( log_buf, LOG_COMM, sysdata.log_level );
 
-  dnew->host = STRALLOC( buf );
+  dnew->remote.host = STRALLOC( buf );
 
   if ( !sysdata.NO_NAME_RESOLVING )
     from = gethostbyaddr( (char *) &sock.sin_addr,
@@ -749,7 +749,7 @@ void new_descriptor( socket_t new_desc )
     {
       if (
           (
-           !str_prefix( pban->name, dnew->host )
+           !str_prefix( pban->name, dnew->remote.host )
            || !str_suffix ( pban->name , hostname )
            )
           &&  pban->level >= LEVEL_SUPREME
@@ -765,8 +765,8 @@ void new_descriptor( socket_t new_desc )
 
   if ( !sysdata.NO_NAME_RESOLVING )
     {
-      STRFREE ( dnew->host);
-      dnew->host = STRALLOC( (char *)( from ? from->h_name : buf) );
+      STRFREE ( dnew->remote.host);
+      dnew->remote.host = STRALLOC( (char *)( from ? from->h_name : buf) );
     }
 
   /*
@@ -817,7 +817,7 @@ void new_descriptor( socket_t new_desc )
 void free_desc( DESCRIPTOR_DATA *d )
 {
   closesocket( d->descriptor );
-  STRFREE( d->host );
+  STRFREE( d->remote.host );
   DISPOSE( d->outbuf );
 
   if ( d->pager.pagebuf )
@@ -868,7 +868,7 @@ void close_socket( DESCRIPTOR_DATA *dclose, bool force )
     {
       DESCRIPTOR_DATA *dp, *dn;
       bug( "Close_socket: %s desc:%p != first_desc:%p and desc->prev = NULL!",
-           ch ? ch->name : d->host, dclose, first_descriptor );
+           ch ? ch->name : d->remote.host, dclose, first_descriptor );
       dp = NULL;
       for ( d = first_descriptor; d; d = dn )
         {
@@ -876,7 +876,7 @@ void close_socket( DESCRIPTOR_DATA *dclose, bool force )
           if ( d == dclose )
             {
               bug( "Close_socket: %s desc:%p found, prev should be:%p, fixing.",
-                   ch ? ch->name : d->host, dclose, dp );
+                   ch ? ch->name : d->remote.host, dclose, dp );
               dclose->prev = dp;
               break;
             }
@@ -885,7 +885,7 @@ void close_socket( DESCRIPTOR_DATA *dclose, bool force )
       if ( !dclose->prev )
         {
           bug( "Close_socket: %s desc:%p could not be found!.",
-               ch ? ch->name : dclose->host, dclose );
+               ch ? ch->name : dclose->remote.host, dclose );
           DoNotUnlink = TRUE;
         }
     }
@@ -893,7 +893,7 @@ void close_socket( DESCRIPTOR_DATA *dclose, bool force )
     {
       DESCRIPTOR_DATA *dp, *dn;
       bug( "Close_socket: %s desc:%p != last_desc:%p and desc->next = NULL!",
-           ch ? ch->name : d->host, dclose, last_descriptor );
+           ch ? ch->name : d->remote.host, dclose, last_descriptor );
       dn = NULL;
       for ( d = last_descriptor; d; d = dp )
         {
@@ -901,7 +901,7 @@ void close_socket( DESCRIPTOR_DATA *dclose, bool force )
           if ( d == dclose )
             {
               bug( "Close_socket: %s desc:%p found, next should be:%p, fixing.",
-                   ch ? ch->name : d->host, dclose, dn );
+                   ch ? ch->name : d->remote.host, dclose, dn );
               dclose->next = dn;
               break;
             }
@@ -910,7 +910,7 @@ void close_socket( DESCRIPTOR_DATA *dclose, bool force )
       if ( !dclose->next )
         {
           bug( "Close_socket: %s desc:%p could not be found!.",
-               ch ? ch->name : dclose->host, dclose );
+               ch ? ch->name : dclose->remote.host, dclose );
           DoNotUnlink = TRUE;
         }
     }
@@ -964,7 +964,7 @@ bool read_from_descriptor( DESCRIPTOR_DATA *d )
 
   if ( iStart >= sizeof(d->inbuf) - 10 )
     {
-      sprintf( log_buf, "%s input overflow!", d->host );
+      sprintf( log_buf, "%s input overflow!", d->remote.host );
       log_string( log_buf );
       write_to_descriptor( d->descriptor,
                            "\r\n*** PUT A LID ON IT!!! ***\r\n", 0 );
@@ -1083,7 +1083,7 @@ void read_from_buffer( DESCRIPTOR_DATA *d )
         {
           if ( ++d->repeat >= 100 )
             {
-              /*                sprintf( log_buf, "%s input spamming!", d->host );
+              /*                sprintf( log_buf, "%s input spamming!", d->remote.host );
                                 log_string( log_buf );
               */
               write_to_descriptor( d->descriptor,
@@ -1400,7 +1400,7 @@ bool check_reconnect( DESCRIPTOR_DATA *d, char *name, bool fConn )
               ch->timer  = 0;
               send_to_char( "Reconnecting.\r\n", ch );
               act( AT_ACTION, "$n has reconnected.", ch, NULL, NULL, TO_ROOM );
-              sprintf( log_buf, "%s@%s reconnected.", ch->name, d->host );
+              sprintf( log_buf, "%s@%s reconnected.", ch->name, d->remote.host );
               log_string_plus( log_buf, LOG_COMM, UMAX( sysdata.log_level, ch->top_level ) );
               /*
                 if ( ch->top_level < LEVEL_SAVIOR )
@@ -1431,7 +1431,7 @@ bool check_multi( DESCRIPTOR_DATA *d , char *name )
            && (  dold->character || dold->original )
            &&   str_cmp( name, dold->original
                          ? dold->original->name : dold->character->name )
-           && !str_cmp(dold->host , d->host ) )
+           && !str_cmp(dold->remote.host , d->remote.host ) )
         {
           /*            const char *ok = "";
                         const char *ok2 = "";
@@ -1443,14 +1443,14 @@ bool check_multi( DESCRIPTOR_DATA *d , char *name )
             return FALSE;
           /*            for ( iloop = 0 ; iloop < 11 ; iloop++ )
                         {
-                        if ( ok[iloop] != d->host[iloop] )
+                        if ( ok[iloop] != d->remote.host[iloop] )
                         break;
                         }
                         if ( iloop >= 10 )
                         return FALSE;
                         for ( iloop = 0 ; iloop < 11 ; iloop++ )
                         {
-                        if ( ok2[iloop] != d->host[iloop] )
+                        if ( ok2[iloop] != d->remote.host[iloop] )
                         break;
                         }
                         if ( iloop >= 10 )
@@ -1511,7 +1511,7 @@ bool check_playing( DESCRIPTOR_DATA *d, char *name, bool kick )
           act( AT_ACTION, "$n has reconnected, kicking off old link.",
                ch, NULL, NULL, TO_ROOM );
           sprintf( log_buf, "%s@%s reconnected, kicking off old link.",
-                   ch->name, d->host );
+                   ch->name, d->remote.host );
           log_string_plus( log_buf, LOG_COMM, UMAX( sysdata.log_level, ch->top_level ) );
           /*
             if ( ch->top_level < LEVEL_SAVIOR )
