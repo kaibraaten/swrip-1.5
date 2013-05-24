@@ -387,14 +387,14 @@ static void landship( SHIP_DATA *ship, const char *arg )
   int destination;
   CHAR_DATA *ch;
 
-  if ( !str_prefix(arg,ship->spaceobject->locationa) )
-    destination = ship->spaceobject->doca;
+  if ( !str_prefix(arg,ship->spaceobject->landing_site.locationa) )
+    destination = ship->spaceobject->landing_site.doca;
 
-  if ( !str_prefix(arg,ship->spaceobject->locationb) )
-    destination = ship->spaceobject->docb;
+  if ( !str_prefix(arg,ship->spaceobject->landing_site.locationb) )
+    destination = ship->spaceobject->landing_site.docb;
 
-  if ( !str_prefix(arg,ship->spaceobject->locationc) )
-    destination = ship->spaceobject->docc;
+  if ( !str_prefix(arg,ship->spaceobject->landing_site.locationc) )
+    destination = ship->spaceobject->landing_site.docc;
 
   target = get_ship_here( arg , ship );
 
@@ -483,9 +483,9 @@ static void approachland( SHIP_DATA *ship, const char *arg)
 
   for( spaceobj = first_spaceobject; spaceobj; spaceobj = spaceobj->next )
     if( space_in_range( ship, spaceobj ) )
-      if ( !str_prefix(arg,spaceobj->locationa) ||
-           !str_prefix(arg,spaceobj->locationb) ||
-           !str_prefix(arg,spaceobj->locationc))
+      if ( !str_prefix(arg,spaceobj->landing_site.locationa) ||
+           !str_prefix(arg,spaceobj->landing_site.locationb) ||
+           !str_prefix(arg,spaceobj->landing_site.locationc))
         {
           found = TRUE;
           break;
@@ -493,12 +493,12 @@ static void approachland( SHIP_DATA *ship, const char *arg)
 
   if( found )
     {
-      if ( !str_prefix(arg, spaceobj->locationa) )
-        strcpy( buf2, spaceobj->locationa);
-      else if ( !str_prefix(arg, spaceobj->locationb) )
-        strcpy( buf2, spaceobj->locationb);
-      else if ( !str_prefix(arg, spaceobj->locationc) )
-        strcpy( buf2, spaceobj->locationc);
+      if ( !str_prefix(arg, spaceobj->landing_site.locationa) )
+        strcpy( buf2, spaceobj->landing_site.locationa);
+      else if ( !str_prefix(arg, spaceobj->landing_site.locationb) )
+        strcpy( buf2, spaceobj->landing_site.locationb);
+      else if ( !str_prefix(arg, spaceobj->landing_site.locationc) )
+        strcpy( buf2, spaceobj->landing_site.locationc);
     }
 
   target = get_ship_here( arg , ship );
@@ -581,9 +581,9 @@ static void launchship( SHIP_DATA *ship )
     ship->head.z = -1;
 
   if (ship->spaceobject &&
-      ( ship->lastdoc == ship->spaceobject->doca  ||
-        ship->lastdoc == ship->spaceobject->docb ||
-        ship->lastdoc == ship->spaceobject->docc ) )
+      ( ship->lastdoc == ship->spaceobject->landing_site.doca  ||
+        ship->lastdoc == ship->spaceobject->landing_site.docb ||
+        ship->lastdoc == ship->spaceobject->landing_site.docc ) )
     {
       vector_copy( &ship->pos, &ship->spaceobject->pos );
     }

@@ -50,10 +50,10 @@ void do_setspaceobject( CHAR_DATA *ch, char *argument )
 
   if ( !str_cmp( arg2, "seca" ) )
     {
-      if ( spaceobject->seca )
-        spaceobject->seca = 0;
+      if ( spaceobject->landing_site.seca )
+        spaceobject->landing_site.seca = 0;
       else
-        spaceobject->seca = 1;
+        spaceobject->landing_site.seca = 1;
 
       send_to_char( "Done.\r\n", ch );
       save_spaceobject( spaceobject );
@@ -62,10 +62,10 @@ void do_setspaceobject( CHAR_DATA *ch, char *argument )
 
   if ( !str_cmp( arg2, "secb" ) )
     {
-      if ( spaceobject->secb )
-        spaceobject->secb = 0;
+      if ( spaceobject->landing_site.secb )
+        spaceobject->landing_site.secb = 0;
       else
-        spaceobject->secb = 1;
+        spaceobject->landing_site.secb = 1;
 
       send_to_char( "Done.\r\n", ch );
       save_spaceobject( spaceobject );
@@ -74,10 +74,10 @@ void do_setspaceobject( CHAR_DATA *ch, char *argument )
 
   if ( !str_cmp( arg2, "secc" ) )
     {
-      if ( spaceobject->secc )
-        spaceobject->secc = 0;
+      if ( spaceobject->landing_site.secc )
+        spaceobject->landing_site.secc = 0;
       else
-        spaceobject->secc = 1;
+        spaceobject->landing_site.secc = 1;
 
       send_to_char( "Done.\r\n", ch );
       save_spaceobject( spaceobject );
@@ -120,7 +120,7 @@ void do_setspaceobject( CHAR_DATA *ch, char *argument )
 
   if ( !str_cmp( arg2, "doca" ) )
     {
-      spaceobject->doca = atoi( argument );
+      spaceobject->landing_site.doca = atoi( argument );
       send_to_char( "Done.\r\n", ch );
       save_spaceobject( spaceobject );
       return;
@@ -128,7 +128,7 @@ void do_setspaceobject( CHAR_DATA *ch, char *argument )
 
   if ( !str_cmp( arg2, "docb" ) )
     {
-      spaceobject->docb = atoi( argument );
+      spaceobject->landing_site.docb = atoi( argument );
       send_to_char( "Done.\r\n", ch );
       save_spaceobject( spaceobject );
       return;
@@ -136,7 +136,7 @@ void do_setspaceobject( CHAR_DATA *ch, char *argument )
 
   if ( !str_cmp( arg2, "docc" ) )
     {
-      spaceobject->docc = atoi( argument );
+      spaceobject->landing_site.docc = atoi( argument );
       send_to_char( "Done.\r\n", ch );
       save_spaceobject( spaceobject );
       return;
@@ -226,24 +226,24 @@ void do_setspaceobject( CHAR_DATA *ch, char *argument )
 
   if ( !str_cmp( arg2, "locationa" ) )
     {
-      STRFREE( spaceobject->locationa );
-      spaceobject->locationa = STRALLOC( argument );
+      STRFREE( spaceobject->landing_site.locationa );
+      spaceobject->landing_site.locationa = STRALLOC( argument );
       send_to_char( "Done.\r\n", ch );
       save_spaceobject( spaceobject );
       return;
     }
   if ( !str_cmp( arg2, "locationb" ) )
     {
-      STRFREE( spaceobject->locationb );
-      spaceobject->locationb = STRALLOC( argument );
+      STRFREE( spaceobject->landing_site.locationb );
+      spaceobject->landing_site.locationb = STRALLOC( argument );
       send_to_char( "Done.\r\n", ch );
       save_spaceobject( spaceobject );
       return;
     }
   if ( !str_cmp( arg2, "locationc" ) )
     {
-      STRFREE( spaceobject->locationc );
-      spaceobject->locationc = STRALLOC( argument );
+      STRFREE( spaceobject->landing_site.locationc );
+      spaceobject->landing_site.locationc = STRALLOC( argument );
       send_to_char( "Done.\r\n", ch );
       save_spaceobject( spaceobject );
       return;

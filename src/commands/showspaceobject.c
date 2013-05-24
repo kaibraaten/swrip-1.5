@@ -11,11 +11,11 @@ static void showspaceobject( CHAR_DATA *ch , SPACE_DATA *spaceobject )
              spaceobject->pos.x, spaceobject->pos.y, spaceobject->pos.z);
   ch_printf( ch, "Gravity:      %d\r\n", spaceobject->gravity);
   ch_printf( ch, "     doca: %5d (%s)\r\n",
-             spaceobject->doca, spaceobject->locationa);
+             spaceobject->landing_site.doca, spaceobject->landing_site.locationa);
   ch_printf( ch, "     docb: %5d (%s)\r\n",
-             spaceobject->docb, spaceobject->locationb);
+             spaceobject->landing_site.docb, spaceobject->landing_site.locationb);
   ch_printf( ch, "     docc: %5d (%s)\r\n",
-             spaceobject->docc, spaceobject->locationc);
+             spaceobject->landing_site.docc, spaceobject->landing_site.locationc);
 }
 
 void do_showspaceobject( CHAR_DATA *ch, char *argument )

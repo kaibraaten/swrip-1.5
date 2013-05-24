@@ -88,9 +88,9 @@ SPACE_DATA *spaceobject_from_vnum( int vnum )
 
   for ( spaceobject = first_spaceobject; spaceobject; spaceobject = spaceobject->next )
     {
-      if ( vnum == spaceobject->doca ||
-	   vnum == spaceobject->docb ||
-	   vnum == spaceobject->docc )
+      if ( vnum == spaceobject->landing_site.doca ||
+	   vnum == spaceobject->landing_site.docb ||
+	   vnum == spaceobject->landing_site.docc )
 	{
 	  return spaceobject;
 	}
@@ -145,15 +145,15 @@ void save_spaceobject( SPACE_DATA *spaceobject )
       fprintf( fp, "Name         %s~\n",   spaceobject->name      );
       fprintf( fp, "Filename     %s~\n",   spaceobject->filename  );
       fprintf( fp, "Type         %d~\n",   spaceobject->type      );
-      fprintf( fp, "Locationa      %s~\n", spaceobject->locationa );
-      fprintf( fp, "Locationb      %s~\n", spaceobject->locationb );
-      fprintf( fp, "Locationc      %s~\n", spaceobject->locationc );
-      fprintf( fp, "Doca          %d\n",   spaceobject->doca      );
-      fprintf( fp, "Docb          %d\n",   spaceobject->docb      );
-      fprintf( fp, "Docc          %d\n",   spaceobject->docc      );
-      fprintf( fp, "Seca          %d\n",   spaceobject->seca      );
-      fprintf( fp, "Secb          %d\n",   spaceobject->secb      );
-      fprintf( fp, "Secc          %d\n",   spaceobject->secc      );
+      fprintf( fp, "Locationa      %s~\n", spaceobject->landing_site.locationa );
+      fprintf( fp, "Locationb      %s~\n", spaceobject->landing_site.locationb );
+      fprintf( fp, "Locationc      %s~\n", spaceobject->landing_site.locationc );
+      fprintf( fp, "Doca          %d\n",   spaceobject->landing_site.doca      );
+      fprintf( fp, "Docb          %d\n",   spaceobject->landing_site.docb      );
+      fprintf( fp, "Docc          %d\n",   spaceobject->landing_site.docc      );
+      fprintf( fp, "Seca          %d\n",   spaceobject->landing_site.seca      );
+      fprintf( fp, "Secb          %d\n",   spaceobject->landing_site.secb      );
+      fprintf( fp, "Secc          %d\n",   spaceobject->landing_site.secc      );
       fprintf( fp, "Gravity     %d\n",     spaceobject->gravity   );
       fprintf( fp, "Xpos          %.0f\n", spaceobject->pos.x     );
       fprintf( fp, "Ypos          %.0f\n", spaceobject->pos.y     );
@@ -188,9 +188,9 @@ void fread_spaceobject( SPACE_DATA *spaceobject, FILE *fp )
           break;
 
         case 'D':
-          KEY( "Doca",  spaceobject->doca,          fread_number( fp ) );
-          KEY( "Docb",  spaceobject->docb,          fread_number( fp ) );
-          KEY( "Docc",  spaceobject->docc,          fread_number( fp ) );
+          KEY( "Doca",  spaceobject->landing_site.doca,          fread_number( fp ) );
+          KEY( "Docb",  spaceobject->landing_site.docb,          fread_number( fp ) );
+          KEY( "Docc",  spaceobject->landing_site.docc,          fread_number( fp ) );
           break;
 
         case 'E':
@@ -198,12 +198,12 @@ void fread_spaceobject( SPACE_DATA *spaceobject, FILE *fp )
             {
               if (!spaceobject->name)
                 spaceobject->name               = STRALLOC( "" );
-              if (!spaceobject->locationa)
-                spaceobject->locationa            = STRALLOC( "" );
-              if (!spaceobject->locationb)
-                spaceobject->locationb            = STRALLOC( "" );
-              if (!spaceobject->locationc)
-                spaceobject->locationc            = STRALLOC( "" );
+              if (!spaceobject->landing_site.locationa)
+                spaceobject->landing_site.locationa            = STRALLOC( "" );
+              if (!spaceobject->landing_site.locationb)
+                spaceobject->landing_site.locationb            = STRALLOC( "" );
+              if (!spaceobject->landing_site.locationc)
+                spaceobject->landing_site.locationc            = STRALLOC( "" );
               return;
             }
           break;
@@ -223,9 +223,9 @@ void fread_spaceobject( SPACE_DATA *spaceobject, FILE *fp )
           break;
 
         case 'L':
-          KEY( "Locationa",     spaceobject->locationa,         fread_string( fp ) );
-          KEY( "Locationb",     spaceobject->locationb,         fread_string( fp ) );
-          KEY( "Locationc",     spaceobject->locationc,         fread_string( fp ) );
+          KEY( "Locationa",     spaceobject->landing_site.locationa,         fread_string( fp ) );
+          KEY( "Locationb",     spaceobject->landing_site.locationb,         fread_string( fp ) );
+          KEY( "Locationc",     spaceobject->landing_site.locationc,         fread_string( fp ) );
           break;
 
         case 'N':
@@ -233,9 +233,9 @@ void fread_spaceobject( SPACE_DATA *spaceobject, FILE *fp )
           break;
 
         case 'S':
-          KEY( "Seca", spaceobject->seca,               fread_number( fp ) );
-          KEY( "Secb", spaceobject->secb,               fread_number( fp ) );
-          KEY( "Secc", spaceobject->secc,               fread_number( fp ) );
+          KEY( "Seca", spaceobject->landing_site.seca,               fread_number( fp ) );
+          KEY( "Secb", spaceobject->landing_site.secb,               fread_number( fp ) );
+          KEY( "Secc", spaceobject->landing_site.secc,               fread_number( fp ) );
           KEY( "SP", spaceobject->speed,                fread_number( fp ) );
 
         case 'T':

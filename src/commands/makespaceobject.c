@@ -20,9 +20,9 @@ void do_makespaceobject( CHAR_DATA *ch, char *argument )
 
   spaceobject->name      = STRALLOC( argument );
 
-  spaceobject->locationa = STRALLOC( "" );
-  spaceobject->locationb = STRALLOC( "" );
-  spaceobject->locationc = STRALLOC( "" );
+  spaceobject->landing_site.locationa = STRALLOC( "" );
+  spaceobject->landing_site.locationb = STRALLOC( "" );
+  spaceobject->landing_site.locationc = STRALLOC( "" );
 
   argument = one_argument( argument, arg );
   sprintf( filename, "%s" , strlower(arg) );

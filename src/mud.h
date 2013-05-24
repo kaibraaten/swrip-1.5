@@ -280,8 +280,8 @@ extern bool mud_down;
 /* race dedicated stuff */
 struct race_type
 {
-  char  race_name[20];   /* Race name                    */
-  int           affected;               /* Default affect bitvectors    */
+  char race_name[20];   /* Race name                    */
+  int  affected;               /* Default affect bitvectors    */
 
   struct
   {
@@ -295,12 +295,12 @@ struct race_type
     short mod_frc;               /* Frc      "                   */
   } stats;
 
-  short      hit;
-  short      mana;
-  int      resist;
-  int      suscept;
-  int           class_restriction;      /* Flags for illegal classes    */
-  int         language;               /* Default racial language      */
+  short hit;
+  short mana;
+  int   resist;
+  int   suscept;
+  int   class_restriction;      /* Flags for illegal classes    */
+  int   language;               /* Default racial language      */
 };
 
 struct membersort_data
@@ -312,14 +312,14 @@ struct membersort_data
 
 struct member_data
 {
-  char          *name;  /* Name of member */
-  char          *since; /* Member since */
+  char         *name;  /* Name of member */
+  char         *since; /* Member since */
   int           mclass; /* class of member */
   int           level;  /* level of member */
   int           deaths; /* Pdeaths for clans, mdeaths for guilds/orders */
   int           kills;  /* Pkills for clans, mkills for guilds/orders */
-  MEMBER_DATA   *next;  /* Next member */
-  MEMBER_DATA   *prev;  /* Prev member */
+  MEMBER_DATA  *next;  /* Next member */
+  MEMBER_DATA  *prev;  /* Prev member */
 };
 
 struct member_list
@@ -338,24 +338,28 @@ struct space_data
   PLANET_DATA * planet;
   char       * filename;
   char       * name;
-  char       * locationa;
-  char       * locationb;
-  char       * locationc;
   int            type;
   Vector3 pos;
   Vector3 head;
   int          speed;
-  int          doca;
-  int          docb;
-  int            docc;
-  bool         seca;
-  bool         secb;
-  bool   secc;
   int          gravity;
   int          low;
   int          high;
   int          crash;
   bool   trainer;
+
+  struct
+  {
+    char *locationa;
+    char *locationb;
+    char *locationc;
+    int   doca;
+    int   docb;
+    int   docc;
+    bool  seca;
+    bool  secb;
+    bool  secc;
+  } landing_site;
 };
 
 struct  bounty_data

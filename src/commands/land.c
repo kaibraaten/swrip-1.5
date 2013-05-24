@@ -106,23 +106,23 @@ void do_land( CHAR_DATA *ch, char *argument )
         {
           if( space_in_range( ship, spaceobj ) )
             {
-              if ( spaceobj->doca && !spaceobj->seca)
+              if ( spaceobj->landing_site.doca && !spaceobj->landing_site.seca)
                 ch_printf(ch, "%s (%s)  %.0f %.0f %.0f\r\n         " ,
-                          spaceobj->locationa,
+                          spaceobj->landing_site.locationa,
                           spaceobj->name,
                           spaceobj->pos.x,
                           spaceobj->pos.y,
                           spaceobj->pos.z );
-              if ( spaceobj->docb && !spaceobj->secb )
+              if ( spaceobj->landing_site.docb && !spaceobj->landing_site.secb )
                 ch_printf(ch, "%s (%s)  %.0f %.0f %.0f\r\n         " ,
-                          spaceobj->locationb,
+                          spaceobj->landing_site.locationb,
                           spaceobj->name,
                           spaceobj->pos.x,
 			  spaceobj->pos.y,
                           spaceobj->pos.z );
-              if ( spaceobj->docc && !spaceobj->secc )
+              if ( spaceobj->landing_site.docc && !spaceobj->landing_site.secc )
                 ch_printf(ch, "%s (%s)  %.0f %.0f %.0f\r\n         " ,
-                          spaceobj->locationc,
+                          spaceobj->landing_site.locationc,
                           spaceobj->name,
                           spaceobj->pos.x,
                           spaceobj->pos.y,
@@ -136,9 +136,9 @@ void do_land( CHAR_DATA *ch, char *argument )
 
   for( spaceobj = first_spaceobject; spaceobj; spaceobj = spaceobj->next )
     if( space_in_range( ship, spaceobj ) )
-      if ( !str_prefix(argument,spaceobj->locationa) ||
-           !str_prefix(argument,spaceobj->locationb) ||
-           !str_prefix(argument,spaceobj->locationc))
+      if ( !str_prefix(argument,spaceobj->landing_site.locationa) ||
+           !str_prefix(argument,spaceobj->landing_site.locationb) ||
+           !str_prefix(argument,spaceobj->landing_site.locationc))
         {
           found = TRUE;
           break;
