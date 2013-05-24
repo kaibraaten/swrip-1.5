@@ -333,20 +333,17 @@ struct member_list
 
 struct space_data
 {
-  SPACE_DATA * next;
-  SPACE_DATA * prev;
-  PLANET_DATA * planet;
-  char       * filename;
-  char       * name;
-  int            type;
-  Vector3 pos;
-  Vector3 head;
+  SPACE_DATA  *next;
+  SPACE_DATA  *prev;
+  PLANET_DATA *planet;
+  char        *filename;
+  char        *name;
+  int          type;
+  Vector3      pos;
+  Vector3      head;
   int          speed;
   int          gravity;
-  int          low;
-  int          high;
-  int          crash;
-  bool   trainer;
+  bool         trainer;
 
   struct
   {
