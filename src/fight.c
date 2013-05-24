@@ -1591,7 +1591,7 @@ ch_ret damage( CHAR_DATA *ch, CHAR_DATA *victim, int dam, int dt )
 
           if ( obj->wear_loc == WEAR_NONE )
             {
-              if ( obj->pIndexData->progtypes & DROP_PROG && obj->count > 1 )
+              if ( obj->pIndexData->mprog.progtypes & DROP_PROG && obj->count > 1 )
                 {
                   ++cnt;
                   separate_obj( obj );

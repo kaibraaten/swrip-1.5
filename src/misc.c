@@ -92,14 +92,14 @@ void pullorpush( CHAR_DATA *ch, OBJ_DATA *obj, bool pull )
         }
       break;
     }
-  if( (pull) && IS_SET(obj->pIndexData->progtypes,PULL_PROG) )
+  if( (pull) && IS_SET(obj->pIndexData->mprog.progtypes,PULL_PROG) )
     {
       if ( !IS_SET(obj->value[0], TRIG_AUTORETURN ) )
         REMOVE_BIT( obj->value[0], TRIG_UP );
       oprog_pull_trigger( ch, obj );
       return;
     }
-  if( (!pull) && IS_SET(obj->pIndexData->progtypes,PUSH_PROG) )
+  if( (!pull) && IS_SET(obj->pIndexData->mprog.progtypes,PUSH_PROG) )
     {
       if ( !IS_SET(obj->value[0], TRIG_AUTORETURN ) )
         SET_BIT( obj->value[0], TRIG_UP );

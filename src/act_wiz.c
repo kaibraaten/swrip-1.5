@@ -270,13 +270,13 @@ void close_area( AREA_DATA *pArea )
               STRFREE( eed->description );
               DISPOSE( eed );
             }
-          for ( mpact = rid->mpact; mpact; mpact = mpact_next )
+          for ( mpact = rid->mprog.mpact; mpact; mpact = mpact_next )
             {
               mpact_next = mpact->next;
               STRFREE( mpact->buf );
               DISPOSE( mpact );
             }
-          for ( mprog = rid->mudprogs; mprog; mprog = mprog_next )
+          for ( mprog = rid->mprog.mudprogs; mprog; mprog = mprog_next )
             {
               mprog_next = mprog->next;
               STRFREE( mprog->arglist );
@@ -321,7 +321,7 @@ void close_area( AREA_DATA *pArea )
               UNLINK( mid->rShop, first_repair, last_repair, next, prev );
               DISPOSE( mid->rShop );
             }
-          for ( mprog = mid->mudprogs; mprog; mprog = mprog_next )
+          for ( mprog = mid->mprog.mudprogs; mprog; mprog = mprog_next )
             {
               mprog_next = mprog->next;
               STRFREE(mprog->arglist);
@@ -369,7 +369,7 @@ void close_area( AREA_DATA *pArea )
               paf_next = paf->next;
               DISPOSE(paf);
             }
-          for ( mprog = oid->mudprogs; mprog; mprog = mprog_next )
+          for ( mprog = oid->mprog.mudprogs; mprog; mprog = mprog_next )
             {
               mprog_next = mprog->next;
               STRFREE(mprog->arglist);

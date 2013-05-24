@@ -67,7 +67,7 @@ void do_rpedit( CHAR_DATA *ch, char *argument )
   if ( !can_rmodify( ch, ch->in_room ) )
     return;
 
-  mprog = ch->in_room->mudprogs;
+  mprog = ch->in_room->mprog.mudprogs;
 
   set_char_color( AT_GREEN, ch );
 
@@ -118,9 +118,9 @@ void do_rpedit( CHAR_DATA *ch, char *argument )
           if ( ++cnt == value )
             {
 	      mpedit( ch, mprg, mptype, argument );
-              ch->in_room->progtypes = 0;
+              ch->in_room->mprog.progtypes = 0;
               for ( mprg = mprog; mprg; mprg = mprg->next )
-                ch->in_room->progtypes |= mprg->type;
+                ch->in_room->mprog.progtypes |= mprg->type;
               return;
             }
         }
@@ -165,8 +165,8 @@ void do_rpedit( CHAR_DATA *ch, char *argument )
 	  num++;
       if ( value == 1 )
         {
-          mprg_next = ch->in_room->mudprogs;
-          ch->in_room->mudprogs = mprg_next->next;
+          mprg_next = ch->in_room->mprog.mudprogs;
+          ch->in_room->mprog.mudprogs = mprg_next->next;
         }
       else
         for ( mprg = mprog; mprg; mprg = mprg_next )
@@ -182,7 +182,7 @@ void do_rpedit( CHAR_DATA *ch, char *argument )
       STRFREE( mprg_next->comlist );
       DISPOSE( mprg_next );
       if ( num <= 1 )
-        REMOVE_BIT( ch->in_room->progtypes, mptype );
+        REMOVE_BIT( ch->in_room->mprog.progtypes, mptype );
       send_to_char( "Program removed.\r\n", ch );
       return;
     }
@@ -209,10 +209,10 @@ void do_rpedit( CHAR_DATA *ch, char *argument )
       if ( value == 1 )
 	{
           CREATE( mprg, MPROG_DATA, 1 );
-          ch->in_room->progtypes |= ( 1 << mptype );
+          ch->in_room->mprog.progtypes |= ( 1 << mptype );
           mpedit( ch, mprg, mptype, argument );
           mprg->next = mprog;
-          ch->in_room->mudprogs = mprg;
+          ch->in_room->mprog.mudprogs = mprg;
           return;
         }
       cnt = 1;
@@ -221,7 +221,7 @@ void do_rpedit( CHAR_DATA *ch, char *argument )
           if ( ++cnt == value && mprg->next )
             {
               CREATE( mprg_next, MPROG_DATA, 1 );
-              ch->in_room->progtypes |= ( 1 << mptype );
+              ch->in_room->mprog.progtypes |= ( 1 << mptype );
               mpedit( ch, mprg_next, mptype, argument );
               mprg_next->next = mprg->next;
               mprg->next        = mprg_next;
@@ -246,8 +246,8 @@ void do_rpedit( CHAR_DATA *ch, char *argument )
       if ( mprog )
         mprog->next             = mprg;
       else
-        ch->in_room->mudprogs   = mprg;
-      ch->in_room->progtypes |= ( 1 << mptype );
+        ch->in_room->mprog.mudprogs   = mprg;
+      ch->in_room->mprog.progtypes |= ( 1 << mptype );
       mpedit( ch, mprg, mptype, argument );
       mprg->next = NULL;
       return;

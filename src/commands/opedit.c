@@ -93,7 +93,7 @@ void do_opedit( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  mprog = obj->pIndexData->mudprogs;
+  mprog = obj->pIndexData->mprog.mudprogs;
 
   set_char_color( AT_GREEN, ch );
 
@@ -144,9 +144,9 @@ void do_opedit( CHAR_DATA *ch, char *argument )
           if ( ++cnt == value )
             {
               mpedit( ch, mprg, mptype, argument );
-              obj->pIndexData->progtypes = 0;
+              obj->pIndexData->mprog.progtypes = 0;
               for ( mprg = mprog; mprg; mprg = mprg->next )
-                obj->pIndexData->progtypes |= mprg->type;
+                obj->pIndexData->mprog.progtypes |= mprg->type;
               return;
             }
         }
@@ -191,8 +191,8 @@ void do_opedit( CHAR_DATA *ch, char *argument )
           num++;
       if ( value == 1 )
         {
-          mprg_next = obj->pIndexData->mudprogs;
-          obj->pIndexData->mudprogs = mprg_next->next;
+          mprg_next = obj->pIndexData->mprog.mudprogs;
+          obj->pIndexData->mprog.mudprogs = mprg_next->next;
         }
       else
         for ( mprg = mprog; mprg; mprg = mprg_next )
@@ -208,7 +208,7 @@ void do_opedit( CHAR_DATA *ch, char *argument )
       STRFREE( mprg_next->comlist );
       DISPOSE( mprg_next );
       if ( num <= 1 )
-        REMOVE_BIT( obj->pIndexData->progtypes, mptype );
+        REMOVE_BIT( obj->pIndexData->mprog.progtypes, mptype );
       send_to_char( "Program removed.\r\n", ch );
       return;
     }
@@ -235,10 +235,10 @@ void do_opedit( CHAR_DATA *ch, char *argument )
       if ( value == 1 )
         {
           CREATE( mprg, MPROG_DATA, 1 );
-          obj->pIndexData->progtypes    |= ( 1 << mptype );
+          obj->pIndexData->mprog.progtypes    |= ( 1 << mptype );
           mpedit( ch, mprg, mptype, argument );
           mprg->next = mprog;
-          obj->pIndexData->mudprogs = mprg;
+          obj->pIndexData->mprog.mudprogs = mprg;
           return;
         }
       cnt = 1;
@@ -247,7 +247,7 @@ void do_opedit( CHAR_DATA *ch, char *argument )
           if ( ++cnt == value && mprg->next )
             {
               CREATE( mprg_next, MPROG_DATA, 1 );
-              obj->pIndexData->progtypes |= ( 1 << mptype );
+              obj->pIndexData->mprog.progtypes |= ( 1 << mptype );
               mpedit( ch, mprg_next, mptype, argument );
               mprg_next->next = mprg->next;
 	      mprg->next        = mprg_next;
@@ -272,8 +272,8 @@ void do_opedit( CHAR_DATA *ch, char *argument )
       if ( mprog )
         mprog->next                      = mprg;
       else
-        obj->pIndexData->mudprogs        = mprg;
-      obj->pIndexData->progtypes        |= ( 1 << mptype );
+        obj->pIndexData->mprog.mudprogs        = mprg;
+      obj->pIndexData->mprog.progtypes        |= ( 1 << mptype );
       mpedit( ch, mprg, mptype, argument );
       mprg->next = NULL;
       return;

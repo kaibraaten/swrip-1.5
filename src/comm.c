@@ -1931,11 +1931,11 @@ void act( short AType, const char *format, CHAR_DATA *ch, const void *arg1, cons
       OBJ_DATA *to_obj;
 
       txt = act_string(format, NULL, ch, arg1, arg2);
-      if ( IS_SET(to->in_room->progtypes, ACT_PROG) )
+      if ( IS_SET(to->in_room->mprog.progtypes, ACT_PROG) )
         rprog_act_trigger(txt, to->in_room, ch, (OBJ_DATA *)arg1, (void *)arg2);
       for ( to_obj = to->in_room->first_content; to_obj;
             to_obj = to_obj->next_content )
-        if ( IS_SET(to_obj->pIndexData->progtypes, ACT_PROG) )
+        if ( IS_SET(to_obj->pIndexData->mprog.progtypes, ACT_PROG) )
           oprog_act_trigger(txt, to_obj, ch, (OBJ_DATA *)arg1, (void *)arg2);
     }
 
@@ -1945,7 +1945,7 @@ void act( short AType, const char *format, CHAR_DATA *ch, const void *arg1, cons
           ? NULL : to->next_in_room )
     {
       if (((!to || !to->desc)
-           && (  is_npc(to) && !IS_SET(to->pIndexData->progtypes, ACT_PROG) ))
+           && (  is_npc(to) && !IS_SET(to->pIndexData->mprog.progtypes, ACT_PROG) ))
           ||   !is_awake(to) )
         continue;
 

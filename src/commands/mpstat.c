@@ -31,7 +31,7 @@ void do_mpstat( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( !( victim->pIndexData->progtypes ) )
+  if ( !( victim->pIndexData->mprog.progtypes ) )
     {
       send_to_char( "That Mobile has no Programs set.\r\n", ch);
       return;
@@ -55,7 +55,7 @@ void do_mpstat( CHAR_DATA *ch, char *argument )
              victim->top_level,        victim->alignment,
              get_armor_class( victim ),    victim->gold);
 
-  for ( mprg = victim->pIndexData->mudprogs; mprg; mprg = mprg->next )
+  for ( mprg = victim->pIndexData->mprog.mudprogs; mprg; mprg = mprg->next )
     ch_printf( ch, ">%s %s\r\n%s\r\n",
                mprog_type_to_name( mprg->type ),
                mprg->arglist,

@@ -55,7 +55,7 @@ void do_mpfind( CHAR_DATA *ch, char *argument )   /* Gorog */
 
   for (i = lo_vnum; i <= hi_vnum; i++)
     {
-      if ( (pMob=get_mob_index(i)) && (pProg=pMob->mudprogs) )
+      if ( (pMob=get_mob_index(i)) && (pProg=pMob->mprog.mudprogs) )
         {
           tot_vnum = 0;
           for ( ; pProg; pProg=pProg->next)

@@ -6,7 +6,7 @@ void do_rpstat( CHAR_DATA *ch, char *argument )
 {
   MPROG_DATA *mprg;
 
-  if ( !( ch->in_room->progtypes ) )
+  if ( !( ch->in_room->mprog.progtypes ) )
     {
       send_to_char( "This room has no programs set.\r\n", ch);
       return;
@@ -15,7 +15,7 @@ void do_rpstat( CHAR_DATA *ch, char *argument )
   ch_printf( ch, "Name: %s.  Vnum: %d.\r\n",
              ch->in_room->name, ch->in_room->vnum );
 
-  for ( mprg = ch->in_room->mudprogs; mprg; mprg = mprg->next )
+  for ( mprg = ch->in_room->mprog.mudprogs; mprg; mprg = mprg->next )
     ch_printf( ch, ">%s %s\r\n%s\r\n",
                mprog_type_to_name( mprg->type ),
                mprg->arglist,

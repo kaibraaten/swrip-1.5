@@ -972,9 +972,9 @@ void fold_area( AREA_DATA *tarea, char *filename, bool install )
           fprintf( fpout, "%d 0 0 0 0 0 0 0\n",
                    pMobIndex->vip_flags );
         }
-      if ( pMobIndex->mudprogs )
+      if ( pMobIndex->mprog.mudprogs )
         {
-          for ( mprog = pMobIndex->mudprogs; mprog; mprog = mprog->next )
+          for ( mprog = pMobIndex->mprog.mudprogs; mprog; mprog = mprog->next )
             fprintf( fpout, "> %s %s~\n%s~\n",
                      mprog_type_to_name( mprog->type ),
                      mprog->arglist, strip_cr(mprog->comlist) );
@@ -1062,9 +1062,9 @@ void fold_area( AREA_DATA *tarea, char *filename, bool install )
                   && IS_VALID_SN(paf->modifier))
                  ? skill_table[paf->modifier]->slot : paf->modifier             );
 
-      if ( pObjIndex->mudprogs )
+      if ( pObjIndex->mprog.mudprogs )
         {
-          for ( mprog = pObjIndex->mudprogs; mprog; mprog = mprog->next )
+          for ( mprog = pObjIndex->mprog.mudprogs; mprog; mprog = mprog->next )
             fprintf( fpout, "> %s %s~\n%s~\n",
                      mprog_type_to_name( mprog->type ),
                      mprog->arglist, strip_cr(mprog->comlist) );
@@ -1135,9 +1135,9 @@ void fold_area( AREA_DATA *tarea, char *filename, bool install )
         fprintf( fpout, "E\n%s~\n%s~\n",
                  ed->keyword, strip_cr( ed->description ));
 
-      if ( room->mudprogs )
+      if ( room->mprog.mudprogs )
         {
-          for ( mprog = room->mudprogs; mprog; mprog = mprog->next )
+          for ( mprog = room->mprog.mudprogs; mprog; mprog = mprog->next )
             fprintf( fpout, "> %s %s~\n%s~\n",
                      mprog_type_to_name( mprog->type ),
                      mprog->arglist, strip_cr(mprog->comlist) );

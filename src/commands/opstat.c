@@ -21,7 +21,7 @@ void do_opstat( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( !( obj->pIndexData->progtypes ) )
+  if ( !( obj->pIndexData->mprog.progtypes ) )
     {
       send_to_char( "That object has no programs set.\r\n", ch);
       return;
@@ -33,7 +33,7 @@ void do_opstat( CHAR_DATA *ch, char *argument )
   ch_printf( ch, "Short description: %s.\r\n",
              obj->short_descr );
 
-  for ( mprg = obj->pIndexData->mudprogs; mprg; mprg = mprg->next )
+  for ( mprg = obj->pIndexData->mprog.mudprogs; mprg; mprg = mprg->next )
     ch_printf( ch, ">%s %s\r\n%s\r\n",
                mprog_type_to_name( mprg->type ),
                mprg->arglist,

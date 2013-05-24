@@ -2138,9 +2138,9 @@ void clean_mob( MOB_INDEX_DATA *mob )
   mob->spec_2   = NULL;
   mob->pShop    = NULL;
   mob->rShop    = NULL;
-  mob->progtypes        = 0;
+  mob->mprog.progtypes        = 0;
 
-  for ( mprog = mob->mudprogs; mprog; mprog = mprog_next )
+  for ( mprog = mob->mprog.mudprogs; mprog; mprog = mprog_next )
     {
       mprog_next = mprog->next;
       STRFREE( mprog->arglist );
@@ -2576,8 +2576,8 @@ OBJ_DATA *group_object( OBJ_DATA *obj1, OBJ_DATA *obj2 )
 
   if ( obj1->pIndexData == obj2->pIndexData
        /*
-         &&     !obj1->pIndexData->mudprogs
-         &&  !obj2->pIndexData->mudprogs
+         &&     !obj1->pIndexData->mprog.mudprogs
+         &&  !obj2->pIndexData->mprog.mudprogs
        */
        &&   QUICKMATCH( obj1->name,     obj2->name )
        &&   QUICKMATCH( obj1->short_descr,      obj2->short_descr )
@@ -2702,7 +2702,7 @@ bool empty_obj( OBJ_DATA *obj, OBJ_DATA *destobj, ROOM_INDEX_DATA *destroom )
       for ( otmp = obj->first_content; otmp; otmp = otmp_next )
         {
           otmp_next = otmp->next_content;
-          if ( ch && (otmp->pIndexData->progtypes & DROP_PROG) && otmp->count > 1 )
+          if ( ch && (otmp->pIndexData->mprog.progtypes & DROP_PROG) && otmp->count > 1 )
             {
               separate_obj( otmp );
               obj_from_obj( otmp );

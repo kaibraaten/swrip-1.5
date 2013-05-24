@@ -3210,7 +3210,7 @@ MPROG_DATA *mprog_file_read( char *f, MPROG_DATA *mprg,
           exit( 1 );
           break;
         default:
-          pMobIndex->progtypes = pMobIndex->progtypes | mprg2->type;
+          pMobIndex->mprog.progtypes = pMobIndex->mprog.progtypes | mprg2->type;
           mprg2->arglist       = fread_string( progfile );
           mprg2->comlist       = fread_string( progfile );
           switch ( letter = fread_letter( progfile ) )
@@ -3271,14 +3271,14 @@ void load_mudprogs( AREA_DATA *tarea, FILE *fp )
         /* Go to the end of the prog command list if other commands
            exist */
 
-        if ( (original = iMob->mudprogs) != NULL )
+        if ( (original = iMob->mprog.mudprogs) != NULL )
           for ( ; original->next; original = original->next );
 
         CREATE( working, MPROG_DATA, 1 );
         if ( original )
           original->next = working;
         else
-          iMob->mudprogs = working;
+          iMob->mprog.mudprogs = working;
         working = mprog_file_read( fread_word( fp ), working, iMob );
         working->next = NULL;
         fread_to_eol( fp );
@@ -3304,7 +3304,7 @@ void mprog_read_programs( FILE *fp, MOB_INDEX_DATA *pMobIndex)
       exit( 1 );
     }
   CREATE( mprg, MPROG_DATA, 1 );
-  pMobIndex->mudprogs = mprg;
+  pMobIndex->mprog.mudprogs = mprg;
 
   while ( !done )
     {
@@ -3336,7 +3336,7 @@ void mprog_read_programs( FILE *fp, MOB_INDEX_DATA *pMobIndex)
             }
           break;
         default:
-          pMobIndex->progtypes = pMobIndex->progtypes | mprg->type;
+          pMobIndex->mprog.progtypes = pMobIndex->mprog.progtypes | mprg->type;
           mprg->arglist        = fread_string( fp );
           fread_to_eol( fp );
           mprg->comlist        = fread_string( fp );
@@ -3425,7 +3425,7 @@ MPROG_DATA *oprog_file_read( char *f, MPROG_DATA *mprg,
           exit( 1 );
           break;
         default:
-          pObjIndex->progtypes = pObjIndex->progtypes | mprg2->type;
+          pObjIndex->mprog.progtypes = pObjIndex->mprog.progtypes | mprg2->type;
           mprg2->arglist       = fread_string( progfile );
           mprg2->comlist       = fread_string( progfile );
           switch ( letter = fread_letter( progfile ) )
@@ -3486,14 +3486,14 @@ void load_objprogs( AREA_DATA *tarea, FILE *fp )
         /* Go to the end of the prog command list if other commands
            exist */
 
-        if ( (original = iObj->mudprogs) != NULL )
+        if ( (original = iObj->mprog.mudprogs) != NULL )
           for ( ; original->next; original = original->next );
 
         CREATE( working, MPROG_DATA, 1 );
         if ( original )
           original->next = working;
         else
-          iObj->mudprogs = working;
+          iObj->mprog.mudprogs = working;
         working = oprog_file_read( fread_word( fp ), working, iObj );
         working->next = NULL;
         fread_to_eol( fp );
@@ -3519,7 +3519,7 @@ void oprog_read_programs( FILE *fp, OBJ_INDEX_DATA *pObjIndex)
       exit( 1 );
     }
   CREATE( mprg, MPROG_DATA, 1 );
-  pObjIndex->mudprogs = mprg;
+  pObjIndex->mprog.mudprogs = mprg;
 
   while ( !done )
     {
@@ -3551,7 +3551,7 @@ void oprog_read_programs( FILE *fp, OBJ_INDEX_DATA *pObjIndex)
             }
           break;
         default:
-          pObjIndex->progtypes = pObjIndex->progtypes | mprg->type;
+          pObjIndex->mprog.progtypes = pObjIndex->mprog.progtypes | mprg->type;
           mprg->arglist        = fread_string( fp );
           fread_to_eol( fp );
           mprg->comlist        = fread_string( fp );
@@ -3637,7 +3637,7 @@ MPROG_DATA *rprog_file_read( char *f, MPROG_DATA *mprg,
           exit( 1 );
           break;
         default:
-          RoomIndex->progtypes = RoomIndex->progtypes | mprg2->type;
+          RoomIndex->mprog.progtypes = RoomIndex->mprog.progtypes | mprg2->type;
           mprg2->arglist       = fread_string( progfile );
           mprg2->comlist       = fread_string( progfile );
           switch ( letter = fread_letter( progfile ) )
@@ -3698,14 +3698,14 @@ void load_roomprogs( AREA_DATA *tarea, FILE *fp )
         /* Go to the end of the prog command list if other commands
            exist */
 
-        if ( (original = iRoom->mudprogs) != NULL )
+        if ( (original = iRoom->mprog.mudprogs) != NULL )
           for ( ; original->next; original = original->next );
 
         CREATE( working, MPROG_DATA, 1 );
         if ( original )
           original->next = working;
         else
-          iRoom->mudprogs = working;
+          iRoom->mprog.mudprogs = working;
         working = rprog_file_read( fread_word( fp ), working, iRoom );
         working->next = NULL;
         fread_to_eol( fp );
@@ -3731,7 +3731,7 @@ void rprog_read_programs( FILE *fp, ROOM_INDEX_DATA *pRoomIndex)
       exit( 1 );
     }
   CREATE( mprg, MPROG_DATA, 1 );
-  pRoomIndex->mudprogs = mprg;
+  pRoomIndex->mprog.mudprogs = mprg;
 
   while ( !done )
     {
@@ -3763,7 +3763,7 @@ void rprog_read_programs( FILE *fp, ROOM_INDEX_DATA *pRoomIndex)
             }
           break;
         default:
-          pRoomIndex->progtypes = pRoomIndex->progtypes | mprg->type;
+          pRoomIndex->mprog.progtypes = pRoomIndex->mprog.progtypes | mprg->type;
           mprg->arglist        = fread_string( fp );
           fread_to_eol( fp );
           mprg->comlist        = fread_string( fp );
@@ -4007,8 +4007,8 @@ MOB_INDEX_DATA *make_mobile( short vnum, short cvnum, char *name )
       pMobIndex->rShop          = NULL;
       pMobIndex->spec_fun               = NULL;
       pMobIndex->spec_2         = NULL;
-      pMobIndex->mudprogs               = NULL;
-      pMobIndex->progtypes              = 0;
+      pMobIndex->mprog.mudprogs               = NULL;
+      pMobIndex->mprog.progtypes              = 0;
       pMobIndex->alignment              = 0;
       pMobIndex->level          = 1;
       pMobIndex->mobthac0               = 0;
@@ -4051,8 +4051,8 @@ MOB_INDEX_DATA *make_mobile( short vnum, short cvnum, char *name )
       pMobIndex->rShop          = NULL;
       pMobIndex->spec_fun               = cMobIndex->spec_fun;
       pMobIndex->spec_2         = cMobIndex->spec_2;
-      pMobIndex->mudprogs               = NULL;
-      pMobIndex->progtypes              = 0;
+      pMobIndex->mprog.mudprogs               = NULL;
+      pMobIndex->mprog.progtypes              = 0;
       pMobIndex->alignment              = cMobIndex->alignment;
       pMobIndex->level          = cMobIndex->level;
       pMobIndex->mobthac0               = cMobIndex->mobthac0;

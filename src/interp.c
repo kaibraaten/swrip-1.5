@@ -562,7 +562,7 @@ bool check_social( CHAR_DATA *ch, char *command, char *argument )
       if ( !is_npc(ch) && is_npc(victim)
            &&   !is_affected_by(victim, AFF_CHARM)
            &&   is_awake(victim)
-           &&   !IS_SET( victim->pIndexData->progtypes, ACT_PROG ) )
+           &&   !IS_SET( victim->pIndexData->mprog.progtypes, ACT_PROG ) )
         {
           switch ( number_bits( 4 ) )
             {

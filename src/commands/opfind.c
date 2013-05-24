@@ -56,7 +56,7 @@ void do_opfind( CHAR_DATA *ch, char *argument )   /* Gorog */
 
   for (i = lo_vnum; i <= hi_vnum; i++)
     {
-      if ( (pObj=get_obj_index(i)) && (pProg=pObj->mudprogs) )
+      if ( (pObj=get_obj_index(i)) && (pProg=pObj->mprog.mudprogs) )
         {
           tot_vnum = 0;
           for ( ; pProg; pProg=pProg->next)

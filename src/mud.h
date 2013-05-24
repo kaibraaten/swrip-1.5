@@ -658,54 +658,59 @@ struct timer_data
  * Prototype for a mob.
  * This is the in-memory version of #MOBILES.
  */
-struct  mob_index_data
+struct mob_index_data
 {
-  MOB_INDEX_DATA *      next;
-  MOB_INDEX_DATA *      next_sort;
-  SPEC_FUN *            spec_fun;
-  SPEC_FUN *          spec_2;
-  SHOP_DATA *           pShop;
-  REPAIR_DATA * rShop;
-  MPROG_DATA *  mudprogs;
-  int                   progtypes;
-  char *                player_name;
-  char *                short_descr;
-  char *                long_descr;
-  char *                description;
-  short         vnum;
-  short         count;
-  short         killed;
-  short         sex;
-  short         level;
-  int                   act;
-  int                   affected_by;
-  short         alignment;
-  short         mobthac0;               /* Unused */
-  short         ac;
-  short         hitnodice;
-  short         hitsizedice;
-  short         hitplus;
-  short         damnodice;
-  short         damsizedice;
-  short         damplus;
-  short         numattacks;
-  int                   gold;
-  int                   exp;
-  int                   xflags;
-  int                   resistant;
-  int                   immune;
-  int                   susceptible;
-  int                   attacks;
-  int                   defenses;
-  int                   speaks;
-  int           speaking;
-  int           position;
-  int           defposition;
-  short         height;
-  short         weight;
-  short         race;
-  short         hitroll;
-  short         damroll;
+  MOB_INDEX_DATA *next;
+  MOB_INDEX_DATA *next_sort;
+  SPEC_FUN       *spec_fun;
+  SPEC_FUN       *spec_2;
+  SHOP_DATA      *pShop;
+  REPAIR_DATA    *rShop;
+  char           *player_name;
+  char           *short_descr;
+  char           *long_descr;
+  char           *description;
+  short           vnum;
+  short           count;
+  short           killed;
+  short           sex;
+  short           level;
+  int             act;
+  int             affected_by;
+  short           alignment;
+  short           mobthac0;               /* Unused */
+  short           ac;
+  short           hitnodice;
+  short           hitsizedice;
+  short           hitplus;
+  short           damnodice;
+  short           damsizedice;
+  short           damplus;
+  short           numattacks;
+  int             gold;
+  int             exp;
+  int             xflags;
+  int             resistant;
+  int             immune;
+  int             susceptible;
+  int             attacks;
+  int             defenses;
+  int             speaks;
+  int             speaking;
+  int             position;
+  int             defposition;
+  short           height;
+  short           weight;
+  short           race;
+  short           hitroll;
+  short           damroll;
+  int             vip_flags;
+
+  struct
+  {
+    MPROG_DATA *mudprogs;
+    int progtypes;
+  } mprog;
 
   struct
   {
@@ -727,8 +732,6 @@ struct  mob_index_data
     short breath;
     short spell_staff;
   } saving;
-
-  int                 vip_flags;
 };
 
 
@@ -777,7 +780,7 @@ struct killed_data
 /*
  * Data which only PC's have.
  */
-struct  pc_data
+struct pc_data
 {
   CLAN_DATA *           clan;
   AREA_DATA *           area;
@@ -873,76 +876,84 @@ struct  extra_descr_data
 /*
  * Prototype for an object.
  */
-struct  obj_index_data
+struct obj_index_data
 {
-  OBJ_INDEX_DATA *      next;
-  OBJ_INDEX_DATA *      next_sort;
-  EXTRA_DESCR_DATA *    first_extradesc;
-  EXTRA_DESCR_DATA *    last_extradesc;
-  AFFECT_DATA * first_affect;
-  AFFECT_DATA * last_affect;
-  MPROG_DATA *  mudprogs;               /* objprogs */
-  int                   progtypes;              /* objprogs */
-  char *                name;
-  char *                short_descr;
-  char *                description;
-  char *                action_desc;
-  int                   vnum;
-  short              level;
-  short         item_type;
-  int                   extra_flags;
-  int                   magic_flags; /*Need more bitvectors for spells - Scryn*/
-  int                   wear_flags;
-  short         count;
-  short         weight;
-  int                   cost;
-  int                   value   [6];
-  int                   serial;
-  short         layers;
-  int                   rent;                   /* Unused */
+  OBJ_INDEX_DATA   *next;
+  OBJ_INDEX_DATA   *next_sort;
+  EXTRA_DESCR_DATA *first_extradesc;
+  EXTRA_DESCR_DATA *last_extradesc;
+  AFFECT_DATA      *first_affect;
+  AFFECT_DATA      *last_affect;
+  char             *name;
+  char             *short_descr;
+  char             *description;
+  char             *action_desc;
+  int               vnum;
+  short             level;
+  short             item_type;
+  int               extra_flags;
+  int               magic_flags; /*Need more bitvectors for spells - Scryn*/
+  int               wear_flags;
+  short             count;
+  short             weight;
+  int               cost;
+  int               value[6];
+  int               serial;
+  short             layers;
+  int               rent;                   /* Unused */
+
+  struct
+  {
+    MPROG_DATA *mudprogs;
+    int progtypes;
+  } mprog;
 };
 
 
 /*
  * One object.
  */
-struct  obj_data
+struct obj_data
 {
-  OBJ_DATA *            next;
-  OBJ_DATA *            prev;
-  OBJ_DATA *            next_content;
-  OBJ_DATA *            prev_content;
-  OBJ_DATA *            first_content;
-  OBJ_DATA *            last_content;
-  OBJ_DATA *            in_obj;
-  CHAR_DATA *           carried_by;
-  EXTRA_DESCR_DATA *    first_extradesc;
-  EXTRA_DESCR_DATA *    last_extradesc;
-  AFFECT_DATA * first_affect;
-  AFFECT_DATA * last_affect;
-  OBJ_INDEX_DATA *      pIndexData;
-  ROOM_INDEX_DATA *     in_room;
-  char *                armed_by;
-  char *                name;
-  char *                short_descr;
-  char *                description;
-  char *                action_desc;
-  short         item_type;
-  short         mpscriptpos;
-  int                   extra_flags;
-  int                   magic_flags; /*Need more bitvectors for spells - Scryn*/
-  int                   wear_flags;
-  int                 blaster_setting;
-  MPROG_ACT_LIST *      mpact;          /* mudprogs */
-  int                   mpactnum;       /* mudprogs */
-  short         wear_loc;
-  short         weight;
-  int                   cost;
-  short         level;
-  short         timer;
-  int                   value   [6];
-  short         count;          /* support for object grouping */
-  int                   serial;         /* serial number               */
+  OBJ_DATA         *next;
+  OBJ_DATA         *prev;
+  OBJ_DATA         *next_content;
+  OBJ_DATA         *prev_content;
+  OBJ_DATA         *first_content;
+  OBJ_DATA         *last_content;
+  OBJ_DATA         *in_obj;
+  CHAR_DATA        *carried_by;
+  EXTRA_DESCR_DATA *first_extradesc;
+  EXTRA_DESCR_DATA *last_extradesc;
+  AFFECT_DATA      *first_affect;
+  AFFECT_DATA      *last_affect;
+  OBJ_INDEX_DATA   *pIndexData;
+  ROOM_INDEX_DATA  *in_room;
+  char             *armed_by;
+  char             *name;
+  char             *short_descr;
+  char             *description;
+  char             *action_desc;
+  short            item_type;
+  int              extra_flags;
+  int              magic_flags; /*Need more bitvectors for spells - Scryn*/
+  int              wear_flags;
+  int              blaster_setting;
+  short            wear_loc;
+  short            weight;
+  int              cost;
+  short            level;
+  short            timer;
+  int              value[6];
+  short            count;          /* support for object grouping */
+  int              serial;         /* serial number               */
+
+  struct
+  {
+    MPROG_ACT_LIST *mpact;
+    int mpactnum;
+    short mpscriptpos;
+  } mprog;
 };
 
 
@@ -1110,35 +1121,39 @@ struct  system_data
  */
 struct room_index_data
 {
-  ROOM_INDEX_DATA *     next;
-  ROOM_INDEX_DATA *     next_sort;
-  CHAR_DATA *           first_person;
-  CHAR_DATA *           last_person;
-  OBJ_DATA *            first_content;
-  OBJ_DATA *            last_content;
-  EXTRA_DESCR_DATA *    first_extradesc;
-  EXTRA_DESCR_DATA *    last_extradesc;
-  AREA_DATA *           area;
-  EXIT_DATA *           first_exit;
-  EXIT_DATA *           last_exit;
-  SHIP_DATA *   first_ship;
-  SHIP_DATA *   last_ship;
-  char *                name;
-  char *                description;
-  int                   vnum;
-  int                   room_flags;
-  MPROG_ACT_LIST *      mpact;               /* mudprogs */
-  int                   mpactnum;            /* mudprogs */
-  MPROG_DATA *  mudprogs;            /* mudprogs */
-  short         mpscriptpos;
-  int                   progtypes;           /* mudprogs */
-  short         light;
-  short         sector_type;
-  int                   tele_vnum;
-  short         tele_delay;
-  short         tunnel;              /* max people that will fit */
-  SHUTTLE_DATA *first_shuttle;
-  SHUTTLE_DATA *last_shuttle;
+  ROOM_INDEX_DATA  *next;
+  ROOM_INDEX_DATA  *next_sort;
+  CHAR_DATA        *first_person;
+  CHAR_DATA        *last_person;
+  OBJ_DATA         *first_content;
+  OBJ_DATA         *last_content;
+  EXTRA_DESCR_DATA *first_extradesc;
+  EXTRA_DESCR_DATA *last_extradesc;
+  AREA_DATA        *area;
+  EXIT_DATA        *first_exit;
+  EXIT_DATA        *last_exit;
+  SHIP_DATA        *first_ship;
+  SHIP_DATA        *last_ship;
+  char             *name;
+  char             *description;
+  int               vnum;
+  int               room_flags;
+  short             light;
+  short             sector_type;
+  int               tele_vnum;
+  short             tele_delay;
+  short             tunnel;              /* max people that will fit */
+  SHUTTLE_DATA     *first_shuttle;
+  SHUTTLE_DATA     *last_shuttle;
+
+  struct
+  {
+    MPROG_ACT_LIST *mpact;
+    int mpactnum;
+    short mpscriptpos;
+    MPROG_DATA *mudprogs;
+    int progtypes;
+  } mprog;
 };
 
 /*

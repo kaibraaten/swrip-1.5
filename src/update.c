@@ -869,7 +869,7 @@ void mobile_update( void )
         }
 
       /* Check for mudprogram script on mob */
-      if ( IS_SET( ch->pIndexData->progtypes, SCRIPT_PROG ) )
+      if ( IS_SET( ch->pIndexData->mprog.progtypes, SCRIPT_PROG ) )
         {
           mprog_script_trigger( ch );
           continue;
