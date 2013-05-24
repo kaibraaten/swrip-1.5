@@ -528,7 +528,7 @@ void game_loop( )
                       if ( d->character )
                         set_cur_char( d->character );
 
-                      if ( d->pagepoint )
+                      if ( d->pager.pagepoint )
                         set_pager_input(d, cmdline);
                       else
                         switch( d->connected )
@@ -569,7 +569,7 @@ void game_loop( )
           if ( ( d->fcommand || d->outtop > 0 )
                &&   FD_ISSET(d->descriptor, &out_set) )
             {
-              if ( d->pagepoint )
+              if ( d->pager.pagepoint )
                 {
                   if ( !pager_output(d) )
                     {
@@ -820,8 +820,8 @@ void free_desc( DESCRIPTOR_DATA *d )
   STRFREE( d->host );
   DISPOSE( d->outbuf );
 
-  if ( d->pagebuf )
-    DISPOSE( d->pagebuf );
+  if ( d->pager.pagebuf )
+    DISPOSE( d->pager.pagebuf );
 
   DISPOSE( d );
   --num_descriptors;
@@ -1278,7 +1278,6 @@ void write_to_buffer( DESCRIPTOR_DATA *d, const char *txt, size_t length )
   strncpy( d->outbuf + d->outtop, txt, length );
   d->outtop += length;
   d->outbuf[d->outtop] = '\0';
-  return;
 }
 
 
@@ -1586,42 +1585,49 @@ void write_to_pager( DESCRIPTOR_DATA *d, const char *txt, size_t length )
 {
   if ( length <= 0 )
     length = strlen(txt);
+
   if ( length == 0 )
     return;
-  if ( !d->pagebuf )
+
+  if ( !d->pager.pagebuf )
     {
-      d->pagesize = MAX_STRING_LENGTH;
-      CREATE( d->pagebuf, char, d->pagesize );
+      d->pager.pagesize = MAX_STRING_LENGTH;
+      CREATE( d->pager.pagebuf, char, d->pager.pagesize );
     }
-  if ( !d->pagepoint )
+
+  if ( !d->pager.pagepoint )
     {
-      d->pagepoint = d->pagebuf;
-      d->pagetop = 0;
-      d->pagecmd = '\0';
+      d->pager.pagepoint = d->pager.pagebuf;
+      d->pager.pagetop = 0;
+      d->pager.pagecmd = '\0';
     }
-  if ( d->pagetop == 0 && !d->fcommand )
+
+  if ( d->pager.pagetop == 0 && !d->fcommand )
     {
-      d->pagebuf[0] = '\n';
-      d->pagebuf[1] = '\r';
-      d->pagetop = 2;
+      d->pager.pagebuf[0] = '\n';
+      d->pager.pagebuf[1] = '\r';
+      d->pager.pagetop = 2;
     }
-  while ( d->pagetop + length >= d->pagesize )
+
+  while ( d->pager.pagetop + length >= d->pager.pagesize )
     {
-      if ( d->pagesize > 32000 )
+      if ( d->pager.pagesize > 32000 )
         {
-          bug( "Pager overflow.  Ignoring.\r\n" );
-          d->pagetop = 0;
-          d->pagepoint = NULL;
-          DISPOSE(d->pagebuf);
-          d->pagesize = MAX_STRING_LENGTH;
+          bug( "Pager overflow. Ignoring.\r\n" );
+          d->pager.pagetop = 0;
+          d->pager.pagepoint = NULL;
+          DISPOSE(d->pager.pagebuf);
+          d->pager.pagesize = MAX_STRING_LENGTH;
           return;
         }
-      d->pagesize *= 2;
-      RECREATE(d->pagebuf, char, d->pagesize);
+
+      d->pager.pagesize *= 2;
+      RECREATE(d->pager.pagebuf, char, d->pager.pagesize);
     }
-  strncpy(d->pagebuf+d->pagetop, txt, length);
-  d->pagetop += length;
-  d->pagebuf[d->pagetop] = '\0';
+
+  strncpy(d->pager.pagebuf + d->pager.pagetop, txt, length);
+  d->pager.pagetop += length;
+  d->pager.pagebuf[d->pager.pagetop] = '\0';
 }
 
 void send_to_pager( const char *txt, const CHAR_DATA *ch )
@@ -1630,41 +1636,53 @@ void send_to_pager( const char *txt, const CHAR_DATA *ch )
   const char *colstr;
   const char *prevstr = txt;
   char colbuf[20];
-  int ln;
 
   if ( !ch )
     {
       bug( "Send_to_pager_color: NULL *ch" );
       return;
     }
+
   if ( !txt || !ch->desc )
     return;
+
   d = ch->desc;
   ch = d->original ? d->original : d->character;
+
   if ( is_npc(ch) || !IS_SET(ch->pcdata->flags, PCFLAG_PAGERON) )
     {
       send_to_char(txt, d->character);
       return;
     }
+
   /* Clear out old color stuff */
   /*  make_color_sequence(NULL, NULL, NULL);*/
   while ( (colstr = strpbrk(prevstr, "&^")) != NULL )
     {
+      int ln = 0;
+
       if ( colstr > prevstr )
         write_to_pager(d, prevstr, (colstr-prevstr));
+
       ln = make_color_sequence(colstr, colbuf, d);
+
       if ( ln < 0 )
         {
           prevstr = colstr+1;
           break;
         }
       else if ( ln > 0 )
-        write_to_pager(d, colbuf, ln);
+	{
+	  write_to_pager(d, colbuf, ln);
+	}
+
       prevstr = colstr+2;
     }
+
   if ( *prevstr )
-    write_to_pager(d, prevstr, 0);
-  return;
+    {
+      write_to_pager(d, prevstr, 0);
+    }
 }
 
 
@@ -1706,7 +1724,7 @@ void set_pager_color( short AType, CHAR_DATA *ch )
         sprintf(buf, "\033[0;%d;%s%dm", (AType & 8) == 8,
                 (AType > 15 ? "5;" : ""), (AType & 7)+30);
       send_to_pager( buf, ch );
-      ch->desc->pagecolor = AType;
+      ch->desc->pager.pagecolor = AType;
     }
   return;
 }
@@ -2291,8 +2309,8 @@ void set_pager_input( DESCRIPTOR_DATA *d, char *argument )
 {
   while ( isspace(*argument) )
     argument++;
-  d->pagecmd = *argument;
-  return;
+
+  d->pager.pagecmd = *argument;
 }
 
 bool pager_output( DESCRIPTOR_DATA *d )
@@ -2303,78 +2321,100 @@ bool pager_output( DESCRIPTOR_DATA *d )
   register int lines;
   bool ret;
 
-  if ( !d || !d->pagepoint || d->pagecmd == -1 )
+  if ( !d || !d->pager.pagepoint || d->pager.pagecmd == -1 )
     return TRUE;
+
   ch = d->original ? d->original : d->character;
   pclines = UMAX(ch->pcdata->pagerlen, 5) - 1;
-  switch(LOWER(d->pagecmd))
+
+  switch(LOWER(d->pager.pagecmd))
     {
     default:
       lines = 0;
       break;
+
     case 'b':
       lines = -1-(pclines*2);
       break;
+
     case 'r':
       lines = -1-pclines;
       break;
+
     case 'q':
-      d->pagetop = 0;
-      d->pagepoint = NULL;
+      d->pager.pagetop = 0;
+      d->pager.pagepoint = NULL;
       flush_buffer(d, TRUE);
-      DISPOSE(d->pagebuf);
-      d->pagesize = MAX_STRING_LENGTH;
+      DISPOSE(d->pager.pagebuf);
+      d->pager.pagesize = MAX_STRING_LENGTH;
       return TRUE;
     }
-  while ( lines < 0 && d->pagepoint >= d->pagebuf )
-    if ( *(--d->pagepoint) == '\n' )
+
+  while ( lines < 0 && d->pager.pagepoint >= d->pager.pagebuf )
+    if ( *(--d->pager.pagepoint) == '\n' )
       ++lines;
-  if ( *d->pagepoint == '\n' && *(++d->pagepoint) == '\r' )
-    ++d->pagepoint;
-  if ( d->pagepoint < d->pagebuf )
-    d->pagepoint = d->pagebuf;
-  for ( lines = 0, last = d->pagepoint; lines < pclines; ++last )
-    if ( !*last )
-      break;
-    else if ( *last == '\n' )
-      ++lines;
+
+  if ( *d->pager.pagepoint == '\n' && *(++d->pager.pagepoint) == '\r' )
+    ++d->pager.pagepoint;
+
+  if ( d->pager.pagepoint < d->pager.pagebuf )
+    d->pager.pagepoint = d->pager.pagebuf;
+
+  for ( lines = 0, last = d->pager.pagepoint; lines < pclines; ++last )
+    {
+      if ( !*last )
+	break;
+      else if ( *last == '\n' )
+	++lines;
+    }
+
   if ( *last == '\r' )
     ++last;
-  if ( last != d->pagepoint )
+
+  if ( last != d->pager.pagepoint )
     {
-      if ( !write_to_descriptor(d->descriptor, d->pagepoint,
-                                (last-d->pagepoint)) )
+      if ( !write_to_descriptor(d->descriptor, d->pager.pagepoint,
+                                (last-d->pager.pagepoint)) )
         return FALSE;
-      d->pagepoint = last;
+
+      d->pager.pagepoint = last;
     }
+
   while ( isspace(*last) )
     ++last;
+
   if ( !*last )
     {
-      d->pagetop = 0;
-      d->pagepoint = NULL;
+      d->pager.pagetop = 0;
+      d->pager.pagepoint = NULL;
       flush_buffer(d, TRUE);
-      DISPOSE(d->pagebuf);
-      d->pagesize = MAX_STRING_LENGTH;
+      DISPOSE(d->pager.pagebuf);
+      d->pager.pagesize = MAX_STRING_LENGTH;
       return TRUE;
     }
-  d->pagecmd = -1;
+
+  d->pager.pagecmd = -1;
+
   if ( IS_SET( ch->act, PLR_ANSI ) )
     if ( write_to_descriptor(d->descriptor, "\033[1;36m", 7) == FALSE )
       return FALSE;
+
   if ( (ret=write_to_descriptor(d->descriptor,
                                 "(C)ontinue, (R)efresh, (B)ack, (Q)uit: [C] ", 0)) == FALSE )
     return FALSE;
+
   if ( IS_SET( ch->act, PLR_ANSI ) )
     {
       char buf[32];
 
-      if ( d->pagecolor == 7 )
+      if ( d->pager.pagecolor == 7 )
         strcpy( buf, "\033[m" );
       else
-        sprintf(buf, "\033[0;%d;%s%dm", (d->pagecolor & 8) == 8,
-                (d->pagecolor > 15 ? "5;" : ""), (d->pagecolor & 7)+30);
+        sprintf(buf, "\033[0;%d;%s%dm", (d->pager.pagecolor & 8) == 8,
+                (d->pager.pagecolor > 15 ? "5;" : ""), (d->pager.pagecolor & 7)+30);
+
       ret = write_to_descriptor( d->descriptor, buf, 0 );
     }
+
   return ret;
 }

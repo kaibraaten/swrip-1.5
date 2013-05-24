@@ -136,12 +136,17 @@ struct  descriptor_data
   char *outbuf;
   unsigned long outsize;
   int outtop;
-  char *pagebuf;
-  unsigned long pagesize;
-  int pagetop;
-  char *pagepoint;
-  signed char pagecmd;
-  char pagecolor;
+
+  struct
+  {
+    char *pagebuf;
+    unsigned long pagesize;
+    int pagetop;
+    char *pagepoint;
+    signed char pagecmd;
+    char pagecolor;
+  } pager;
+
   int newstate;
   unsigned char prevcolor;
 };
