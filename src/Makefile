@@ -41,7 +41,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	makeobjs.o mapper.o misc.o mud_prog.o nanny.o \
 	planets.o player.o quest.o reset.o save.o ships.o shops.o shuttle.o \
 	skills.o special.o space.o spaceobjects.o swskills.o \
-	tables.o track.o update.o vector3_aux.o \
+	tables.o track.o turret.o update.o vector3_aux.o \
 	$(CMDDIR)/aassign.o \
 	$(CMDDIR)/accelerate.o \
 	$(CMDDIR)/accept.o \

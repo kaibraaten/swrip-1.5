@@ -449,13 +449,6 @@ struct clan_data
   } leadership;
 };
 
-struct turret_data
-{
-  int room_vnum;
-  int weapon_state;
-  SHIP_DATA *target;
-};
-
 struct ship_data
 {
   SHIP_DATA * next;
@@ -556,7 +549,7 @@ struct ship_data
   CHAR_DATA *ch;
   SPACE_DATA *inorbitof;
   int count;
-  TURRET_DATA turret[MAX_NUMBER_OF_TURRETS_IN_SHIP];
+  TURRET_DATA *turret[MAX_NUMBER_OF_TURRETS_IN_SHIP];
 };
 
 struct missile_data
