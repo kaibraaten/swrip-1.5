@@ -1,3 +1,4 @@
+#include "turret.h"
 #include "ships.h"
 #include "mud.h"
 #include "character.h"
@@ -104,10 +105,14 @@ void do_launch( CHAR_DATA *ch, char *argument )
 
       if ( !is_rental(ch,ship) )
         {
+	  int turret_num = 0;
+
           if ( ship->sclass == FIGHTER_SHIP )
             price=2000;
+
           if ( ship->sclass == MIDSIZE_SHIP )
             price=5000;
+
           if ( ship->sclass == CAPITAL_SHIP )
             price=50000;
 
@@ -115,14 +120,22 @@ void do_launch( CHAR_DATA *ch, char *argument )
 
           if (ship_is_disabled( ship ) )
             price += 10000;
+
           if ( ship->missilestate == MISSILE_DAMAGED )
 	    price += 5000;
+
           if ( ship->statet0 == LASER_DAMAGED )
             price += 2500;
-          if ( ship->turret[0].weapon_state == LASER_DAMAGED )
-            price += 2500;
-          if ( ship->turret[1].weapon_state == LASER_DAMAGED )
-            price += 2500;
+
+	  for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
+	    {
+	      const TURRET_DATA *turret = ship->turret[turret_num];
+
+	      if ( is_turret_damaged( turret ) )
+		{
+		  price += 2500;
+		}
+	    }
         }
 
       if( IS_SET( ch->act, PLR_DONTAUTOFUEL ) )
@@ -168,8 +181,11 @@ void do_launch( CHAR_DATA *ch, char *argument )
 
       if( !IS_SET( ch->act, PLR_DONTAUTOFUEL ) )
         {
-          if(  ship_from_hanger(ship->in_room->vnum) == NULL || ship->sclass == SHIP_PLATFORM )
+	  int turret_num = 0;
+
+          if( ship_from_hanger(ship->in_room->vnum) == NULL || ship->sclass == SHIP_PLATFORM )
             ship->energy = ship->maxenergy;
+
           ship->shield = 0;
           ship->autorecharge = FALSE;
           ship->autotrack = FALSE;
@@ -178,8 +194,13 @@ void do_launch( CHAR_DATA *ch, char *argument )
 
           ship->missilestate = MISSILE_READY;
           ship->statet0 = LASER_READY;
-          ship->turret[0].weapon_state = LASER_READY;
-          ship->turret[1].weapon_state = LASER_READY;
+
+	  for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
+	    {
+	      TURRET_DATA *turret = ship->turret[turret_num];
+	      set_turret_ready( turret );
+	    }
+
           ship->shipstate = SHIP_LANDED;
         }
 
@@ -192,6 +213,7 @@ void do_launch( CHAR_DATA *ch, char *argument )
           sound_to_room( get_room_index(ship->entrance) , "!!SOUND(door)" );
           sound_to_room( get_room_index(ship->location) , "!!SOUND(door)" );
         }
+
       set_char_color( AT_GREEN, ch );
       send_to_char( "Launch sequence initiated.\r\n", ch);
       act( AT_PLAIN, "$n starts up the ship and begins the launch sequence.", ch,
@@ -202,21 +224,29 @@ void do_launch( CHAR_DATA *ch, char *argument )
       echo_to_docked( AT_YELLOW , ship, "The ship shudders as it lifts off the ground." );
       ship->shipstate = SHIP_LAUNCH;
       ship->currspeed = ship->realspeed;
+
       if ( ship->sclass == FIGHTER_SHIP )
         learn_from_success( ch, gsn_starfighters );
+
       if ( ship->sclass == MIDSIZE_SHIP )
         learn_from_success( ch, gsn_midships );
+
       if ( ship->sclass == CAPITAL_SHIP )
         learn_from_success( ch, gsn_capitalships );
+
       sound_to_ship(ship , "!!SOUND(xwing)" );
       return;
     }
+
   set_char_color( AT_RED, ch );
   send_to_char("You fail to work the controls properly!\r\n",ch);
+
   if ( ship->sclass == FIGHTER_SHIP )
     learn_from_failure( ch, gsn_starfighters );
+
   if ( ship->sclass == MIDSIZE_SHIP )
     learn_from_failure( ch, gsn_midships );
+
   if ( ship->sclass == CAPITAL_SHIP )
     learn_from_failure( ch, gsn_capitalships );
 }

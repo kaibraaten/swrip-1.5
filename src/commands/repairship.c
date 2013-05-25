@@ -2,6 +2,7 @@
 #include "mud.h"
 #include "ships.h"
 #include "character.h"
+#include "turret.h"
 
 void do_repairship(CHAR_DATA *ch, char *argument )
 {
@@ -20,13 +21,16 @@ void do_repairship(CHAR_DATA *ch, char *argument )
           return;
         }
 
-      if ( str_cmp( argument , "hull" ) && str_cmp( argument , "drive" ) &&
-           str_cmp( argument , "launcher" ) && str_cmp( argument , "laser" ) &&
-           str_cmp( argument , "turret 1" ) && str_cmp( argument , "turret 2") &&
-           str_cmp( argument , "docking" ) && str_cmp( argument , "tractor" ) )
+      if ( str_cmp( argument , "hull" )
+	   && str_cmp( argument , "drive" )
+           && str_cmp( argument , "launcher" )
+	   && str_cmp( argument , "laser" )
+           && str_prefix( "turret ", argument )
+           && str_cmp( argument , "docking" )
+	   && str_cmp( argument , "tractor" ) )
         {
           send_to_char("&RYou need to spceify something to repair:\r\n",ch);
-          send_to_char("&rTry: hull, drive, launcher, laser, docking, tractor, turret 1, or turret 2\r\n",ch);
+          ch_printf( ch, "&rTry: hull, drive, launcher, laser, docking, tractor or turret <1 - %d>\r\n", MAX_NUMBER_OF_TURRETS_IN_SHIP);
 	  return;
         }
 
@@ -77,7 +81,7 @@ void do_repairship(CHAR_DATA *ch, char *argument )
                        number_range( (int) ( ch->pcdata->learned[gsn_shipmaintenance] / 2 ) , (int) (ch->pcdata->learned[gsn_shipmaintenance]) ),
                        ( ship->maxhull - ship->hull ) );
       ship->hull += change;
-      ch_printf( ch, "&GRepair complete.. Hull strength inreased by %d points.\r\n", change );
+      ch_printf( ch, "&GRepair complete. Hull strength inreased by %d points.\r\n", change );
     }
 
   if ( !str_cmp(arg,"drive") )
@@ -113,16 +117,31 @@ void do_repairship(CHAR_DATA *ch, char *argument )
       send_to_char("&GMain laser repaired.\r\n", ch);
     }
 
-  if ( !str_cmp(arg,"turret 1") )
+  if( !str_prefix( "turret ", arg ) )
     {
-      ship->turret[0].weapon_state = LASER_READY;
-      send_to_char("&GLaser Turret 1 repaired.\r\n", ch);
-    }
+      char number_string[MAX_INPUT_LENGTH];
+      long turret_number = 0;
+      TURRET_DATA *turret = NULL;
 
-  if ( !str_cmp(arg,"turret 2") )
-    {
-      ship->turret[1].weapon_state = LASER_READY;
-      send_to_char("&Laser Turret 2 repaired.\r\n", ch);
+      argument = one_argument( arg, number_string );
+      turret_number = strtol( number_string, 0, 10 );
+
+      if( turret_number < 1 || turret_number > MAX_NUMBER_OF_TURRETS_IN_SHIP )
+	{
+	  ch_printf( ch, "Turret range is 1 - %d.\r\n", MAX_NUMBER_OF_TURRETS_IN_SHIP );
+	  return;
+	}
+
+      turret = ship->turret[turret_number - 1];
+
+      if( !is_turret_installed( turret ) )
+	{
+	  ch_printf( ch, "This ship doesn't have that many turrets installed.\r\n" );
+	  return;
+	}
+
+      reset_turret( turret );
+      ch_printf( ch, "&GLaser Turret %d repaired.\r\n", turret_number );
     }
 
   act( AT_PLAIN, "$n finishes the repairs.", ch,

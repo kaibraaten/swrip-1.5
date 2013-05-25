@@ -1,10 +1,12 @@
 #include "ships.h"
 #include "mud.h"
+#include "turret.h"
 
 void do_makeship( CHAR_DATA *ch, char *argument )
 {
   SHIP_DATA *ship = NULL;
   char arg[MAX_INPUT_LENGTH];
+  int turret_num = 0;
 
   argument = one_argument( argument, arg );
 
@@ -17,6 +19,11 @@ void do_makeship( CHAR_DATA *ch, char *argument )
   CREATE( ship, SHIP_DATA, 1 );
   LINK( ship, first_ship, last_ship, next, prev );
 
+  for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
+    {
+      ship->turret[turret_num] = create_turret( ship );
+    }
+
   ship->name            = STRALLOC( argument );
   ship->personalname            = STRALLOC( argument );
   ship->description     = STRALLOC( "" );
@@ -25,16 +32,8 @@ void do_makeship( CHAR_DATA *ch, char *argument )
   ship->pilot         = STRALLOC( "" );
   ship->home          = STRALLOC( "" );
   ship->type          = SHIP_CIVILIAN;
-  ship->spaceobject = NULL;
   ship->energy = ship->maxenergy;
   ship->hull = ship->maxhull;
-  ship->in_room=NULL;
-  ship->next_in_room=NULL;
-  ship->prev_in_room=NULL;
-  ship->currjump=NULL;
-  ship->target0=NULL;
-  ship->turret[0].target=NULL;
-  ship->turret[1].target=NULL;
 
   ship->filename = str_dup( arg );
   save_ship( ship );

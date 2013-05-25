@@ -1,3 +1,4 @@
+#include "turret.h"
 #include "character.h"
 #include "ships.h"
 #include "vector3_aux.h"
@@ -9,14 +10,16 @@ void do_fire(CHAR_DATA *ch, char *argument )
   SHIP_DATA *ship;
   SHIP_DATA *target;
   char buf[MAX_STRING_LENGTH];
-  bool turret = FALSE;
+  bool is_turret = FALSE;
+  int turret_num = 0;
+
   if (  (ship = ship_from_turret(ch->in_room->vnum))  == NULL )
     {
       send_to_char("&RYou must be in the gunners chair or turret of a ship to do that!\r\n",ch);
       return;
     }
   if ( ship->gunseat != ch->in_room->vnum )
-    turret = TRUE;
+    is_turret = TRUE;
 
   if ( ship_is_in_hyperspace( ship ) && ship->sclass <= SHIP_PLATFORM )
     {
@@ -34,7 +37,7 @@ void do_fire(CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( is_autoflying(ship) && !turret )
+  if ( is_autoflying(ship) && !is_turret )
     {
       send_to_char("&RYou'll have to turn off the ships autopilot first.\r\n",ch);
       return;
@@ -557,857 +560,117 @@ void do_fire(CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( ch->in_room->vnum == ship->turret[0].room_vnum && !str_prefix( argument , "lasers") )
+
+  for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
     {
-      if (ship->turret[0].weapon_state == LASER_DAMAGED)
-        {
-          send_to_char("&RThe ships turret is damaged.\r\n",ch);
-          return;
-        }
-      if (ship->turret[0].weapon_state > ship->sclass )
-        {
-          send_to_char("&RThe turbolaser is recharging.\r\n",ch);
-          return;
-        }
-      if (ship->turret[0].target == NULL )
-        {
-          send_to_char("&RYou need to choose a target first.\r\n",ch);
-          return;
-        }
-      target = ship->turret[0].target;
-      if (ship->sclass <= SHIP_PLATFORM && !ship_in_range( ship, target) )
-        {
-          send_to_char("&RYour target seems to have left.\r\n",ch);
-          ship->turret[0].target = NULL;
-          return;
-        }
-      if (ship->sclass <= SHIP_PLATFORM)
-        {
-          if( ship_distance_to_ship( ship, target ) > 1000 )
-            {
-              send_to_char("&RThat ship is out of laser range.\r\n",ch);
-              return;
-            }
-        }
+      TURRET_DATA *turret = ship->turret[turret_num];
 
-      ship->turret[0].weapon_state++;
-
-      the_chance += target->sclass - CAPITAL_SHIP+1;
-      the_chance += ship->currspeed - target->currspeed;
-      the_chance += 100 - target->manuever;
-      the_chance -= ship_distance_to_ship( ship, target ) / (10*(target->sclass+1));
-      the_chance -= origthe_chance;
-      the_chance /= 2;
-      the_chance += origthe_chance;
-      the_chance = URANGE( 1 , the_chance , 99 );
-
-      act( AT_PLAIN, "$n presses the fire button.", ch,
-           NULL, argument , TO_ROOM );
-      if ( number_percent( ) > the_chance )
-        {
-          sprintf( buf , "Turbolasers fire from %s at you but miss." , ship->name);
-          echo_to_cockpit( AT_ORANGE , target , buf );
-          sprintf( buf , "Turbolasers fire from the ships turret at %s but miss." , target->name);
-          echo_to_cockpit( AT_ORANGE , ship , buf );
-          sprintf( buf, "%s fires at %s but misses." , ship->name, target->name );
-          if(ship->sclass > SHIP_PLATFORM)
-            echo_to_room(AT_ORANGE, ship->in_room, buf);
-          else
-            echo_to_nearby_ships( AT_ORANGE , ship , buf , target );
-          learn_from_failure( ch, gsn_spacecombat );
-          learn_from_failure( ch, gsn_spacecombat2 );
-          learn_from_failure( ch, gsn_spacecombat3 );
-          return;
-        }
-      sprintf( buf, "Turboasers fire from %s, hitting %s." , ship->name, target->name );
-      if(ship->sclass > SHIP_PLATFORM)
-        echo_to_room(AT_ORANGE, ship->in_room, buf);
-      else
-        echo_to_nearby_ships( AT_ORANGE , ship , buf , target );
-      sprintf( buf , "You are hit by turbolasers from %s!" , ship->name);
-      echo_to_cockpit( AT_BLOOD , target , buf );
-      sprintf( buf , "Turbolasers fire from the turret, hitting %s!." , target->name);
-      echo_to_cockpit( AT_YELLOW , ship , buf );
-      learn_from_success( ch, gsn_spacecombat );
-      learn_from_success( ch, gsn_spacecombat2 );
-      learn_from_success( ch, gsn_spacecombat3 );
-      echo_to_ship( AT_RED , target , "A small explosion vibrates through the ship." );
-
-      if( ship->sclass == SHIP_PLATFORM && target->sclass <= MIDSIZE_SHIP )
-        damage_ship_ch( target, 100, 250, ch);
-      else if ( target->sclass <= MIDSIZE_SHIP )
-        damage_ship_ch( target, 50, 200, ch );
-      else
-        damage_ship_ch( target, 10 , 50, ch );
-
-      if ( is_autoflying(target) && target->target0 != ship && ship->spaceobject)
-        {
-          target->target0 = ship;
-          sprintf( buf , "You are being targetted by %s." , target->name);
-          echo_to_cockpit( AT_BLOOD , ship , buf );
-        }
-
-      return;
-    }
-
-  if ( ch->in_room->vnum == ship->turret[1].room_vnum && !str_prefix( argument , "lasers") )
-    {
-      if (ship->turret[1].weapon_state == LASER_DAMAGED)
-        {
-          send_to_char("&RThe ships turret is damaged.\r\n",ch);
-          return;
-        }
-      if (ship->turret[1].weapon_state > ship->sclass )
-        {
-          send_to_char("&RThe turbolaser is still recharging.\r\n",ch);
-          return;
-        }
-      if (ship->turret[1].target == NULL )
-        {
-          send_to_char("&RYou need to choose a target first.\r\n",ch);
-          return;
-        }
-      target = ship->turret[1].target;
-      if (ship->sclass <= SHIP_PLATFORM && !ship_in_range( ship, target ) )
-        {
-          send_to_char("&RYour target seems to have left.\r\n",ch);
-	  ship->turret[1].target = NULL;
-          return;
-        }
-      if (ship->sclass <= SHIP_PLATFORM)
-        {
-          if( ship_distance_to_ship( ship, target ) > 1000 )
-            {
-              send_to_char("&RThat ship is out of laser range.\r\n",ch);
-              return;
-            }
-        }
-
-      ship->turret[1].weapon_state++;
-      the_chance += target->sclass - CAPITAL_SHIP+1;
-      the_chance += ship->currspeed - target->currspeed;
-      the_chance += 100 - target->manuever;
-      the_chance -= ship_distance_to_ship(ship, target) / (10*(target->sclass+1));
-      the_chance -= origthe_chance;
-      the_chance /= 2;
-      the_chance += origthe_chance;
-      the_chance = URANGE( 1 , the_chance , 99 );
-
-      act( AT_PLAIN, "$n presses the fire button.", ch,
-           NULL, argument , TO_ROOM );
-
-      if ( number_percent( ) > the_chance )
-        {
-          sprintf( buf, "Turbolasers fire from %s barely missing %s." , ship->name, target->name );
-          if(ship->sclass > SHIP_PLATFORM)
-            echo_to_room(AT_ORANGE, ship->in_room, buf);
-          else
-            echo_to_nearby_ships( AT_ORANGE , ship , buf , target );
-          sprintf( buf , "Turbolasers fire from %s at you but miss." , ship->name);
-          echo_to_cockpit( AT_ORANGE , target , buf );
-          sprintf( buf , "Turbolasers fire from the turret missing %s." , target->name);
-          echo_to_cockpit( AT_ORANGE , ship , buf );
-          learn_from_failure( ch, gsn_spacecombat );
-          learn_from_failure( ch, gsn_spacecombat2 );
-          learn_from_failure( ch, gsn_spacecombat3 );
-          return;
-        }
-      sprintf( buf, "Turbolasers fire from %s, hitting %s." , ship->name, target->name );
-      if(ship->sclass > SHIP_PLATFORM)
-        echo_to_room(AT_ORANGE, ship->in_room, buf);
-      else
-	echo_to_nearby_ships( AT_ORANGE , ship , buf , target );
-      sprintf( buf , "You are hit by turbolasers from %s!" , ship->name);
-      echo_to_cockpit( AT_BLOOD , target , buf );
-      sprintf( buf , "turbolasers fire from the turret hitting %s!." , target->name);
-      echo_to_cockpit( AT_YELLOW , ship , buf );
-      learn_from_success( ch, gsn_spacecombat );
-      learn_from_success( ch, gsn_spacecombat2 );
-      learn_from_success( ch, gsn_spacecombat3 );
-      echo_to_ship( AT_RED , target , "A small explosion vibrates through the ship." );
-
-      if( ship->sclass == SHIP_PLATFORM && target->sclass <= MIDSIZE_SHIP )
-        damage_ship_ch( target, 100, 250, ch);
-      else if ( target->sclass <= MIDSIZE_SHIP )
-        damage_ship_ch( target, 50, 200, ch );
-      else
-        damage_ship_ch( target, 10 , 50, ch );
-
-      if ( is_autoflying(target) && target->target0 != ship && ship->spaceobject)
-        {
-          target->target0 = ship;
-          sprintf( buf , "You are being targetted by %s." , target->name);
-          echo_to_cockpit( AT_BLOOD , ship , buf );
-        }
-
-      return;
-    }
-  if ( ch->in_room->vnum == ship->turret[2].room_vnum && !str_prefix( argument , "lasers") )
-    {
-      if (ship->turret[2].weapon_state == LASER_DAMAGED)
-        {
-          send_to_char("&RThe ships turret is damaged.\r\n",ch);
-          return;
-        }
-      if (ship->turret[2].weapon_state > ship->sclass )
-        {
-          send_to_char("&RThe turbolaser is still recharging.\r\n",ch);
-          return;
-        }
-      if (ship->turret[2].target == NULL )
-        {
-          send_to_char("&RYou need to choose a target first.\r\n",ch);
-          return;
-        }
-      target = ship->turret[2].target;
-      if (!ship_in_range( ship, target)  )
+      if ( ch->in_room->vnum == get_turret_room( turret ) && !str_prefix( argument , "lasers") )
 	{
-          send_to_char("&RYour target seems to have left.\r\n",ch);
-          ship->turret[2].target = NULL;
-          return;
-        }
+	  if ( is_turret_damaged( turret ) )
+	    {
+	      send_to_char("&RThe ships turret is damaged.\r\n",ch);
+	      return;
+	    }
 
-      if( ship_distance_to_ship( ship, target ) > 1000 )
-        {
-          send_to_char("&RThat ship is out of laser range.\r\n",ch);
-          return;
-        }
-      ship->turret[2].weapon_state++;
+	  if ( is_turret_recharging( turret ) )
+	    {
+	      send_to_char("&RThe turbolaser is recharging.\r\n",ch);
+	      return;
+	    }
 
-      the_chance += target->sclass - CAPITAL_SHIP+1;
-      the_chance += ship->currspeed - target->currspeed;
-      the_chance += 100 - target->manuever;
-      the_chance -= ship_distance_to_ship(ship, target) / (10*(target->sclass+1));
-      the_chance -= origthe_chance;
-      the_chance /= 2;
-      the_chance += origthe_chance;
-      the_chance = URANGE( 1 , the_chance , 99 );
+	  if ( !turret_has_target( turret ) )
+	    {
+	      send_to_char("&RYou need to choose a target first.\r\n",ch);
+	      return;
+	    }
 
-      act( AT_PLAIN, "$n presses the fire button.", ch,
-           NULL, argument , TO_ROOM );
-      if ( number_percent( ) > the_chance )
-        {
-          sprintf( buf, "Turbolasers fire from %s barely missing %s." , ship->name, target->name );
-          echo_to_nearby_ships( AT_ORANGE , ship , buf , target );
-          sprintf( buf , "Turbolasers fire from %s at you but miss." , ship->name);
-          echo_to_cockpit( AT_ORANGE , target , buf );
-          sprintf( buf , "Turbolasers fire from the turret missing %s." , target->name);
-          echo_to_cockpit( AT_ORANGE , ship , buf );
-          learn_from_failure( ch, gsn_spacecombat );
-          learn_from_failure( ch, gsn_spacecombat2 );
-          learn_from_failure( ch, gsn_spacecombat3 );
-          return;
-        }
-      sprintf( buf, "Turbolasers fire from %s, hitting %s." , ship->name, target->name );
-      echo_to_nearby_ships( AT_ORANGE , ship , buf , target );
-      sprintf( buf , "You are hit by turbolasers from %s!" , ship->name);
-      echo_to_cockpit( AT_BLOOD , target , buf );
-      sprintf( buf , "turbolasers fire from the turret hitting %s!" , target->name);
-      echo_to_cockpit( AT_YELLOW , ship , buf );
-      learn_from_success( ch, gsn_spacecombat );
-      learn_from_success( ch, gsn_spacecombat2 );
-      learn_from_success( ch, gsn_spacecombat3 );
-      echo_to_ship( AT_RED , target , "A small explosion vibrates through the ship." );
+	  target = get_turret_target( turret );
 
-      if( ship->sclass == SHIP_PLATFORM && target->sclass <= MIDSIZE_SHIP )
-        damage_ship_ch( target, 100, 250, ch);
-      else if ( target->sclass <= MIDSIZE_SHIP )
-        damage_ship_ch( target, 50, 200, ch );
-      else
-        damage_ship_ch( target, 10 , 50, ch );
+	  if (ship->sclass <= SHIP_PLATFORM && !ship_in_range( ship, target) )
+	    {
+	      send_to_char("&RYour target seems to have left.\r\n",ch);
+	      clear_turret_target( turret );
+	      return;
+	    }
 
-      if ( is_autoflying(target) && target->target0 != ship )
-        {
-          target->target0 = ship;
-          sprintf( buf , "You are being targetted by %s." , target->name);
-          echo_to_cockpit( AT_BLOOD , ship , buf );
-        }
+	  if (ship->sclass <= SHIP_PLATFORM)
+	    {
+	      if( ship_distance_to_ship( ship, target ) > 1000 )
+		{
+		  send_to_char("&RThat ship is out of laser range.\r\n",ch);
+		  return;
+		}
+	    }
 
-      return;
-    }
-  if ( ch->in_room->vnum == ship->turret[3].room_vnum && !str_prefix( argument , "lasers") )
-    {
-      if (ship->turret[3].weapon_state == LASER_DAMAGED)
-        {
-          send_to_char("&RThe ships turret is damaged.\r\n",ch);
-          return;
-        }
-      if (ship->turret[3].weapon_state > ship->sclass )
-        {
-          send_to_char("&RThe turbolaser is still recharging.\r\n",ch);
-          return;
-        }
-      if (ship->turret[3].target == NULL )
-        {
-          send_to_char("&RYou need to choose a target first.\r\n",ch);
-          return;
-        }
-      target = ship->turret[3].target;
-      if (!ship_in_range( ship, target) )
-        {
-          send_to_char("&RYour target seems to have left.\r\n",ch);
-          ship->turret[3].target = NULL;
-          return;
-        }
+	  /* At this point this function just increases turret's weapon_state,
+	   * but as we refactor further it will handle the actual firing as well.
+	   */
+	  fire_turret( turret );
 
-      if( ship_distance_to_ship( ship, target ) > 1000 )
-	{
-          send_to_char("&RThat ship is out of laser range.\r\n",ch);
-          return;
-        }
-      ship->turret[3].weapon_state++;
+	  the_chance += target->sclass - CAPITAL_SHIP+1;
+	  the_chance += ship->currspeed - target->currspeed;
+	  the_chance += 100 - target->manuever;
+	  the_chance -= ship_distance_to_ship( ship, target ) / (10*(target->sclass+1));
+	  the_chance -= origthe_chance;
+	  the_chance /= 2;
+	  the_chance += origthe_chance;
+	  the_chance = URANGE( 1 , the_chance , 99 );
 
-      the_chance += target->sclass - (CAPITAL_SHIP+1);
-      the_chance += ship->currspeed - target->currspeed;
-      the_chance += 100 - target->manuever;
-      the_chance -= ship_distance_to_ship(ship, target) / (10*(target->sclass+1));
-      the_chance -= origthe_chance;
-      the_chance /= 2;
-      the_chance += origthe_chance;
-      the_chance = URANGE( 1 , the_chance , 99 );
+	  act( AT_PLAIN, "$n presses the fire button.", ch,
+	       NULL, argument , TO_ROOM );
 
-      act( AT_PLAIN, "$n presses the fire button.", ch,
-           NULL, argument , TO_ROOM );
-      if ( number_percent( ) > the_chance )
-        {
-          sprintf( buf, "Turbolasers fire from %s barely missing %s." , ship->name, target->name );
-          echo_to_nearby_ships( AT_ORANGE , ship , buf , target );
-          sprintf( buf , "Turbolasers fire from %s at you but miss." , ship->name);
-          echo_to_cockpit( AT_ORANGE , target , buf );
-          sprintf( buf , "Turbolasers fire from the turret missing %s." , target->name);
-          echo_to_cockpit( AT_ORANGE , ship , buf );
-          learn_from_failure( ch, gsn_spacecombat );
-          learn_from_failure( ch, gsn_spacecombat2 );
-          learn_from_failure( ch, gsn_spacecombat3 );
-          return;
-        }
-      sprintf( buf, "Turbolasers fire from %s, hitting %s." , ship->name, target->name );
-      echo_to_nearby_ships( AT_ORANGE , ship , buf , target );
-      sprintf( buf , "You are hit by turbolasers from %s!" , ship->name);
-      echo_to_cockpit( AT_BLOOD , target , buf );
-      sprintf( buf , "turbolasers fire from the turret hitting %s!." , target->name);
-      echo_to_cockpit( AT_YELLOW , ship , buf );
-      learn_from_success( ch, gsn_spacecombat );
-      learn_from_success( ch, gsn_spacecombat2 );
-      learn_from_success( ch, gsn_spacecombat3 );
-      echo_to_ship( AT_RED , target , "A small explosion vibrates through the ship." );
+	  if ( number_percent() > the_chance )
+	    {
+	      sprintf( buf , "Turbolasers fire from %s at you but miss." , ship->name);
+	      echo_to_cockpit( AT_ORANGE , target , buf );
+	      sprintf( buf , "Turbolasers fire from the ships turret at %s but miss." , target->name);
+	      echo_to_cockpit( AT_ORANGE , ship , buf );
+	      sprintf( buf, "%s fires at %s but misses." , ship->name, target->name );
 
-      if( ship->sclass == SHIP_PLATFORM && target->sclass <= MIDSIZE_SHIP )
-        damage_ship_ch( target, 100, 250, ch);
-      else if ( target->sclass <= MIDSIZE_SHIP )
-        damage_ship_ch( target, 50, 200, ch );
-      else
-        damage_ship_ch( target, 10 , 50, ch );
+	      if(ship->sclass > SHIP_PLATFORM)
+		echo_to_room(AT_ORANGE, ship->in_room, buf);
+	      else
+		echo_to_nearby_ships( AT_ORANGE , ship , buf , target );
 
-      if ( is_autoflying(target) && target->target0 != ship )
-        {
-          target->target0 = ship;
-          sprintf( buf , "You are being targetted by %s." , target->name);
-          echo_to_cockpit( AT_BLOOD , ship , buf );
-        }
+	      learn_from_failure( ch, gsn_spacecombat );
+	      learn_from_failure( ch, gsn_spacecombat2 );
+	      learn_from_failure( ch, gsn_spacecombat3 );
+	      return;
+	    }
 
-      return;
-    }
-  if ( ch->in_room->vnum == ship->turret[4].room_vnum && !str_prefix( argument , "lasers") )
-    {
-      if (ship->turret[4].weapon_state == LASER_DAMAGED)
-        {
-          send_to_char("&RThe ships turret is damaged.\r\n",ch);
-          return;
-        }
-      if (ship->turret[4].weapon_state > ship->sclass )
-        {
-          send_to_char("&RThe turbolaser is still recharging.\r\n",ch);
-          return;
-        }
-      if (ship->turret[4].target == NULL )
-        {
-          send_to_char("&RYou need to choose a target first.\r\n",ch);
-          return;
-        }
-      target = ship->turret[4].target;
-      if (!ship_in_range( ship, target) )
-        {
-          send_to_char("&RYour target seems to have left.\r\n",ch);
-          ship->turret[4].target = NULL;
-          return;
-        }
+	  sprintf( buf, "Turboasers fire from %s, hitting %s." , ship->name, target->name );
 
-      if( ship_distance_to_ship( ship, target ) > 1000 )
-        {
-          send_to_char("&RThat ship is out of laser range.\r\n",ch);
-          return;
-        }
-      ship->turret[4].weapon_state++;
+	  if(ship->sclass > SHIP_PLATFORM)
+	    echo_to_room(AT_ORANGE, ship->in_room, buf);
+	  else
+	    echo_to_nearby_ships( AT_ORANGE, ship, buf, target );
 
-      the_chance += target->sclass - (CAPITAL_SHIP+1);
-      the_chance += ship->currspeed - target->currspeed;
-      the_chance += 100 - target->manuever;
-      the_chance -= ship_distance_to_ship( ship, target ) / (10*(target->sclass+1));
-      the_chance -= origthe_chance;
-      the_chance /= 2;
-      the_chance += origthe_chance;
-      the_chance = URANGE( 1 , the_chance , 99 );
+	  sprintf( buf , "You are hit by turbolasers from %s!" , ship->name);
+	  echo_to_cockpit( AT_BLOOD , target , buf );
+	  sprintf( buf , "Turbolasers fire from the turret, hitting %s!" , target->name);
+	  echo_to_cockpit( AT_YELLOW , ship , buf );
+	  learn_from_success( ch, gsn_spacecombat );
+	  learn_from_success( ch, gsn_spacecombat2 );
+	  learn_from_success( ch, gsn_spacecombat3 );
+	  echo_to_ship( AT_RED , target , "A small explosion vibrates through the ship." );
 
-      act( AT_PLAIN, "$n presses the fire button.", ch,
-           NULL, argument , TO_ROOM );
-      if ( number_percent( ) > the_chance )
-        {
-          sprintf( buf, "Turbolasers fire from %s barely missing %s." , ship->name, target->name );
-          echo_to_nearby_ships( AT_ORANGE , ship , buf , target );
-          sprintf( buf , "Turbolasers fire from %s at you but miss." , ship->name);
-          echo_to_cockpit( AT_ORANGE , target , buf );
-          sprintf( buf , "Turbolasers fire from the turret missing %s." , target->name);
-          echo_to_cockpit( AT_ORANGE , ship , buf );
-          learn_from_failure( ch, gsn_spacecombat );
-          learn_from_failure( ch, gsn_spacecombat2 );
-          learn_from_failure( ch, gsn_spacecombat3 );
-          return;
-        }
-      sprintf( buf, "Turbolasers fire from %s, hitting %s." , ship->name, target->name );
-      echo_to_nearby_ships( AT_ORANGE , ship , buf , target );
-      sprintf( buf , "You are hit by turbolasers from %s!" , ship->name);
-      echo_to_cockpit( AT_BLOOD , target , buf );
-      sprintf( buf , "turbolasers fire from the turret hitting %s!." , target->name);
-      echo_to_cockpit( AT_YELLOW , ship , buf );
-      learn_from_success( ch, gsn_spacecombat );
-      learn_from_success( ch, gsn_spacecombat2 );
-      learn_from_success( ch, gsn_spacecombat3 );
-      echo_to_ship( AT_RED , target , "A small explosion vibrates through the ship." );
+	  if( ship->sclass == SHIP_PLATFORM && target->sclass <= MIDSIZE_SHIP )
+	    damage_ship_ch( target, 100, 250, ch);
+	  else if ( target->sclass <= MIDSIZE_SHIP )
+	    damage_ship_ch( target, 50, 200, ch );
+	  else
+	    damage_ship_ch( target, 10 , 50, ch );
 
-      if( ship->sclass == SHIP_PLATFORM && target->sclass <= MIDSIZE_SHIP )
-        damage_ship_ch( target, 100, 250, ch);
-      else if ( target->sclass <= MIDSIZE_SHIP )
-        damage_ship_ch( target, 50, 200, ch );
-      else
-        damage_ship_ch( target, 10 , 50, ch );
+	  if ( is_autoflying(target) && target->target0 != ship && ship->spaceobject)
+	    {
+	      target->target0 = ship;
+	      sprintf( buf , "You are being targetted by %s.", target->name);
+	      echo_to_cockpit( AT_BLOOD , ship , buf );
+	    }
 
-      if ( is_autoflying(target) && target->target0 != ship )
-        {
-          target->target0 = ship;
-          sprintf( buf , "You are being targetted by %s." , target->name);
-	  echo_to_cockpit( AT_BLOOD , ship , buf );
-        }
-
-      return;
-    }
-  if ( ch->in_room->vnum == ship->turret[5].room_vnum && !str_prefix( argument , "lasers") )
-    {
-      if (ship->turret[5].weapon_state == LASER_DAMAGED)
-        {
-          send_to_char("&RThe ships turret is damaged.\r\n",ch);
-          return;
-        }
-      if (ship->turret[5].weapon_state > ship->sclass )
-        {
-          send_to_char("&RThe turbolaser is still recharging.\r\n",ch);
-          return;
-        }
-      if (ship->turret[5].target == NULL )
-        {
-          send_to_char("&RYou need to choose a target first.\r\n",ch);
-          return;
-        }
-      target = ship->turret[5].target;
-      if (!ship_in_range( ship, target) )
-        {
-          send_to_char("&RYour target seems to have left.\r\n",ch);
-          ship->turret[5].target = NULL;
-          return;
-        }
-
-      if( ship_distance_to_ship( ship, target ) > 1000 )
-        {
-          send_to_char("&RThat ship is out of laser range.\r\n",ch);
-          return;
-        }
-      ship->turret[5].weapon_state++;
-
-      the_chance += target->sclass - (CAPITAL_SHIP+1);
-      the_chance += ship->currspeed - target->currspeed;
-      the_chance += 100 - target->manuever;
-      the_chance -= ship_distance_to_ship( ship, target ) / (10*(target->sclass+1));
-      the_chance -= origthe_chance;
-      the_chance /= 2;
-      the_chance += origthe_chance;
-      the_chance = URANGE( 1 , the_chance , 99 );
-
-      act( AT_PLAIN, "$n presses the fire button.", ch,
-           NULL, argument , TO_ROOM );
-      if ( number_percent( ) > the_chance )
-        {
-          sprintf( buf, "Turbolasers fire from %s barely missing %s." , ship->name, target->name );
-          echo_to_nearby_ships( AT_ORANGE , ship , buf , target );
-          sprintf( buf , "Turbolasers fire from %s at you but miss." , ship->name);
-          echo_to_cockpit( AT_ORANGE , target , buf );
-          sprintf( buf , "Turbolasers fire from the turret missing %s." , target->name);
-          echo_to_cockpit( AT_ORANGE , ship , buf );
-          learn_from_failure( ch, gsn_spacecombat );
-          learn_from_failure( ch, gsn_spacecombat2 );
-          learn_from_failure( ch, gsn_spacecombat3 );
-          return;
-        }
-      sprintf( buf, "Turbolasers fire from %s, hitting %s." , ship->name, target->name );
-      echo_to_nearby_ships( AT_ORANGE , ship , buf , target );
-      sprintf( buf , "You are hit by turbolasers from %s!" , ship->name);
-      echo_to_cockpit( AT_BLOOD , target , buf );
-      sprintf( buf , "turbolasers fire from the turret hitting %s!." , target->name);
-      echo_to_cockpit( AT_YELLOW , ship , buf );
-      learn_from_success( ch, gsn_spacecombat );
-      learn_from_success( ch, gsn_spacecombat2 );
-      learn_from_success( ch, gsn_spacecombat3 );
-      echo_to_ship( AT_RED , target , "A small explosion vibrates through the ship." );
-
-      if( ship->sclass == SHIP_PLATFORM && target->sclass <= MIDSIZE_SHIP )
-        damage_ship_ch( target, 100, 250, ch);
-      else if ( target->sclass <= MIDSIZE_SHIP )
-        damage_ship_ch( target, 50, 200, ch );
-      else
-        damage_ship_ch( target, 10 , 50, ch );
-
-      if ( is_autoflying(target) && target->target0 != ship )
-        {
-          target->target0 = ship;
-          sprintf( buf , "You are being targetted by %s." , target->name);
-          echo_to_cockpit( AT_BLOOD , ship , buf );
-        }
-
-      return;
-    }
-  if ( ch->in_room->vnum == ship->turret[6].room_vnum && !str_prefix( argument , "lasers") )
-    {
-      if (ship->turret[6].weapon_state == LASER_DAMAGED)
-        {
-          send_to_char("&RThe ships turret is damaged.\r\n",ch);
-          return;
-        }
-      if (ship->turret[6].weapon_state > ship->sclass )
-        {
-          send_to_char("&RThe turbolaser is still recharging.\r\n",ch);
-          return;
-        }
-      if (ship->turret[6].target == NULL )
-        {
-          send_to_char("&RYou need to choose a target first.\r\n",ch);
-          return;
-        }
-      target = ship->turret[6].target;
-      if (!ship_in_range( ship, target) )
-        {
-          send_to_char("&RYour target seems to have left.\r\n",ch);
-          ship->turret[6].target = NULL;
-          return;
-        }
-
-      if( ship_distance_to_ship( ship, target ) > 1000 )
-        {
-          send_to_char("&RThat ship is out of laser range.\r\n",ch);
-          return;
-        }
-
-      ship->turret[6].weapon_state++;
-
-      the_chance += target->sclass - (CAPITAL_SHIP+1);
-      the_chance += ship->currspeed - target->currspeed;
-      the_chance += 100 - target->manuever;
-      the_chance -= ship_distance_to_ship( ship, target ) / (10*(target->sclass+1));
-      the_chance -= origthe_chance;
-      the_chance /= 2;
-      the_chance += origthe_chance;
-      the_chance = URANGE( 1 , the_chance , 99 );
-
-      act( AT_PLAIN, "$n presses the fire button.", ch,
-           NULL, argument , TO_ROOM );
-      if ( number_percent( ) > the_chance )
-        {
-          sprintf( buf, "Turbolasers fire from %s barely missing %s." , ship->name, target->name );
-	  echo_to_nearby_ships( AT_ORANGE , ship , buf , target );
-          sprintf( buf , "Turbolasers fire from %s at you but miss." , ship->name);
-          echo_to_cockpit( AT_ORANGE , target , buf );
-          sprintf( buf , "Turbolasers fire from the turret missing %s." , target->name);
-          echo_to_cockpit( AT_ORANGE , ship , buf );
-          learn_from_failure( ch, gsn_spacecombat );
-          learn_from_failure( ch, gsn_spacecombat2 );
-          learn_from_failure( ch, gsn_spacecombat3 );
-          return;
-        }
-      sprintf( buf, "Turbolasers fire from %s, hitting %s." , ship->name, target->name );
-      echo_to_nearby_ships( AT_ORANGE , ship , buf , target );
-      sprintf( buf , "You are hit by turbolasers from %s!" , ship->name);
-      echo_to_cockpit( AT_BLOOD , target , buf );
-      sprintf( buf , "turbolasers fire from the turret hitting %s!." , target->name);
-      echo_to_cockpit( AT_YELLOW , ship , buf );
-      learn_from_success( ch, gsn_spacecombat );
-      learn_from_success( ch, gsn_spacecombat2 );
-      learn_from_success( ch, gsn_spacecombat3 );
-      echo_to_ship( AT_RED , target , "A small explosion vibrates through the ship." );
-
-      if( ship->sclass == SHIP_PLATFORM && target->sclass <= MIDSIZE_SHIP )
-        damage_ship_ch( target, 100, 250, ch);
-      else if ( target->sclass <= MIDSIZE_SHIP )
-        damage_ship_ch( target, 50, 200, ch );
-
-      else
-        damage_ship_ch( target, 10 , 50, ch );
-
-      if ( is_autoflying(target) && target->target0 != ship )
-        {
-          target->target0 = ship;
-          sprintf( buf , "You are being targetted by %s." , target->name);
-          echo_to_cockpit( AT_BLOOD , ship , buf );
-        }
-
-      return;
-    }
-  if ( ch->in_room->vnum == ship->turret[7].room_vnum && !str_prefix( argument , "lasers") )
-    {
-      if (ship->turret[7].weapon_state == LASER_DAMAGED)
-        {
-          send_to_char("&RThe ships turret is damaged.\r\n",ch);
-          return;
-        }
-      if (ship->turret[7].weapon_state > ship->sclass )
-        {
-          send_to_char("&RThe turbolaser is still recharging.\r\n",ch);
-          return;
-        }
-      if (ship->turret[7].target == NULL )
-        {
-          send_to_char("&RYou need to choose a target first.\r\n",ch);
-          return;
-        }
-      target = ship->turret[7].target;
-      if (!ship_in_range( ship, target) )
-        {
-          send_to_char("&RYour target seems to have left.\r\n",ch);
-          ship->turret[7].target = NULL;
-          return;
-        }
-
-      if( ship_distance_to_ship( ship, target ) > 1000 )
-        {
-          send_to_char("&RThat ship is out of laser range.\r\n",ch);
-          return;
-        }
-      ship->turret[7].weapon_state++;
-
-      the_chance += target->sclass - (CAPITAL_SHIP+1);
-      the_chance += ship->currspeed - target->currspeed;
-      the_chance += 100 - target->manuever;
-      the_chance -= ship_distance_to_ship( ship, target ) / (10*(target->sclass+1));
-      the_chance -= origthe_chance;
-      the_chance /= 2;
-      the_chance += origthe_chance;
-      the_chance = URANGE( 1 , the_chance , 99 );
-
-      act( AT_PLAIN, "$n presses the fire button.", ch,
-           NULL, argument , TO_ROOM );
-      if ( number_percent( ) > the_chance )
-        {
-          sprintf( buf, "Turbolasers fire from %s barely missing %s." , ship->name, target->name );
-          echo_to_nearby_ships( AT_ORANGE , ship , buf , target );
-          sprintf( buf , "Turbolasers fire from %s at you but miss." , ship->name);
-          echo_to_cockpit( AT_ORANGE , target , buf );
-          sprintf( buf , "Turbolasers fire from the turret missing %s." , target->name);
-          echo_to_cockpit( AT_ORANGE , ship , buf );
-          learn_from_failure( ch, gsn_spacecombat );
-	  learn_from_failure( ch, gsn_spacecombat2 );
-          learn_from_failure( ch, gsn_spacecombat3 );
-          return;
-        }
-      sprintf( buf, "Turbolasers fire from %s, hitting %s." , ship->name, target->name );
-      echo_to_nearby_ships( AT_ORANGE , ship , buf , target );
-      sprintf( buf , "You are hit by turbolasers from %s!" , ship->name);
-      echo_to_cockpit( AT_BLOOD , target , buf );
-      sprintf( buf , "turbolasers fire from the turret hitting %s!." , target->name);
-      echo_to_cockpit( AT_YELLOW , ship , buf );
-      learn_from_success( ch, gsn_spacecombat );
-      learn_from_success( ch, gsn_spacecombat2 );
-      learn_from_success( ch, gsn_spacecombat3 );
-      echo_to_ship( AT_RED , target , "A small explosion vibrates through the ship." );
-
-      if( ship->sclass == SHIP_PLATFORM && target->sclass <= MIDSIZE_SHIP )
-        damage_ship_ch( target, 100, 250, ch);
-      else if ( target->sclass <= MIDSIZE_SHIP )
-        damage_ship_ch( target, 50, 200, ch );
-      else
-        damage_ship_ch( target, 10 , 50, ch );
-
-      if ( is_autoflying(target) && target->target0 != ship )
-        {
-          target->target0 = ship;
-          sprintf( buf , "You are being targetted by %s." , target->name);
-          echo_to_cockpit( AT_BLOOD , ship , buf );
-        }
-
-      return;
-    }
-  if ( ch->in_room->vnum == ship->turret[8].room_vnum && !str_prefix( argument , "lasers") )
-    {
-      if (ship->turret[8].weapon_state == LASER_DAMAGED)
-        {
-          send_to_char("&RThe ships turret is damaged.\r\n",ch);
-          return;
-        }
-      if (ship->turret[8].weapon_state > ship->sclass )
-        {
-          send_to_char("&RThe turbolaser is still recharging.\r\n",ch);
-          return;
-        }
-      if (ship->turret[8].target == NULL )
-        {
 	  return;
-        }
-      target = ship->turret[8].target;
-      if (!ship_in_range( ship, target) )
-        {
-          send_to_char("&RYour target seems to have left.\r\n",ch);
-          ship->turret[8].target = NULL;
-          return;
-        }
-
-      if( ship_distance_to_ship( ship, target ) > 1000 )
-        {
-          send_to_char("&RThat ship is out of laser range.\r\n",ch);
-          return;
-        }
-      ship->turret[8].weapon_state++;
-
-      the_chance += target->sclass - (CAPITAL_SHIP+1);
-      the_chance += ship->currspeed - target->currspeed;
-      the_chance += 100 - target->manuever;
-      the_chance -= ship_distance_to_ship( ship, target ) / (10*(target->sclass+1));
-      the_chance -= origthe_chance;
-      the_chance /= 2;
-      the_chance += origthe_chance;
-      the_chance = URANGE( 1 , the_chance , 99 );
-
-      act( AT_PLAIN, "$n presses the fire button.", ch,
-           NULL, argument , TO_ROOM );
-      if ( number_percent( ) > the_chance )
-        {
-          sprintf( buf, "Turbolasers fire from %s barely missing %s." , ship->name, target->name );
-          echo_to_nearby_ships( AT_ORANGE , ship , buf , target );
-          sprintf( buf , "Turbolasers fire from %s at you but miss." , ship->name);
-          echo_to_cockpit( AT_ORANGE , target , buf );
-          sprintf( buf , "Turbolasers fire from the turret missing %s." , target->name);
-          echo_to_cockpit( AT_ORANGE , ship , buf );
-          learn_from_failure( ch, gsn_spacecombat );
-          learn_from_failure( ch, gsn_spacecombat2 );
-          learn_from_failure( ch, gsn_spacecombat3 );
-          return;
-        }
-      sprintf( buf, "Turbolasers fire from %s, hitting %s." , ship->name, target->name );
-      echo_to_nearby_ships( AT_ORANGE , ship , buf , target );
-      sprintf( buf , "You are hit by turbolasers from %s!" , ship->name);
-      echo_to_cockpit( AT_BLOOD , target , buf );
-      sprintf( buf , "turbolasers fire from the turret hitting %s!." , target->name);
-      echo_to_cockpit( AT_YELLOW , ship , buf );
-      learn_from_success( ch, gsn_spacecombat );
-      learn_from_success( ch, gsn_spacecombat2 );
-      learn_from_success( ch, gsn_spacecombat3 );
-      echo_to_ship( AT_RED , target , "A small explosion vibrates through the ship." );
-
-      if( ship->sclass == SHIP_PLATFORM && target->sclass <= MIDSIZE_SHIP )
-        damage_ship_ch( target, 100, 250, ch);
-      else if ( target->sclass <= MIDSIZE_SHIP )
-        damage_ship_ch( target, 50, 200, ch );
-      else
-        damage_ship_ch( target, 10 , 50, ch );
-
-      if ( is_autoflying(target) && target->target0 != ship )
-        {
-          target->target0 = ship;
-          sprintf( buf , "You are being targetted by %s." , target->name);
-          echo_to_cockpit( AT_BLOOD , ship , buf );
-        }
-
-      return;
-    }
-  if ( ch->in_room->vnum == ship->turret[9].room_vnum && !str_prefix( argument , "lasers") )
-    {
-      if (ship->turret[9].weapon_state == LASER_DAMAGED)
-        {
-          send_to_char("&RThe ships turret is damaged.\r\n",ch);
-          return;
-        }
-
-      if (ship->turret[9].weapon_state > ship->sclass )
-        {
-          send_to_char("&RThe turbolaser is still recharging.\r\n",ch);
-          return;
-        }
-      if (ship->turret[9].target == NULL )
-        {
-          send_to_char("&RYou need to choose a target first.\r\n",ch);
-          return;
-        }
-      target = ship->turret[9].target;
-
-      if (!ship_in_range( ship, target) )
-        {
-          send_to_char("&RYour target seems to have left.\r\n",ch);
-	  ship->turret[9].target = NULL;
-          return;
-        }
-
-      if( ship_distance_to_ship( ship, target ) > 1000 )
-        {
-          send_to_char("&RThat ship is out of laser range.\r\n",ch);
-          return;
-        }
-
-      ship->turret[9].weapon_state++;
-      the_chance += target->sclass - (CAPITAL_SHIP+1);
-      the_chance += ship->currspeed - target->currspeed;
-      the_chance += 100 - target->manuever;
-      the_chance -= ship_distance_to_ship( ship, target ) / (10*(target->sclass+1));
-      the_chance -= origthe_chance;
-      the_chance /= 2;
-      the_chance += origthe_chance;
-      the_chance = URANGE( 1 , the_chance , 99 );
-
-      act( AT_PLAIN, "$n presses the fire button.", ch,
-           NULL, argument , TO_ROOM );
-      if ( number_percent( ) > the_chance )
-        {
-          sprintf( buf, "Turbolasers fire from %s barely missing %s." , ship->name, target->name );
-          echo_to_nearby_ships( AT_ORANGE , ship , buf , target );
-          sprintf( buf , "Turbolasers fire from %s at you but miss." , ship->name);
-          echo_to_cockpit( AT_ORANGE , target , buf );
-          sprintf( buf , "Turbolasers fire from the turret missing %s." , target->name);
-          echo_to_cockpit( AT_ORANGE , ship , buf );
-          learn_from_failure( ch, gsn_spacecombat );
-          learn_from_failure( ch, gsn_spacecombat2 );
-          learn_from_failure( ch, gsn_spacecombat3 );
-          return;
-        }
-      sprintf( buf, "Turbolasers fire from %s, hitting %s." , ship->name, target->name );
-      echo_to_nearby_ships( AT_ORANGE , ship , buf , target );
-      sprintf( buf , "You are hit by turbolasers from %s!" , ship->name);
-      echo_to_cockpit( AT_BLOOD , target , buf );
-      sprintf( buf , "turbolasers fire from the turret hitting %s!." , target->name);
-      echo_to_cockpit( AT_YELLOW , ship , buf );
-      learn_from_success( ch, gsn_spacecombat );
-      learn_from_success( ch, gsn_spacecombat2 );
-      learn_from_success( ch, gsn_spacecombat3 );
-      echo_to_ship( AT_RED , target , "A small explosion vibrates through the ship." );
-
-      if( ship->sclass == SHIP_PLATFORM && target->sclass <= MIDSIZE_SHIP )
-        damage_ship_ch( target, 100, 250, ch);
-      else if ( target->sclass <= MIDSIZE_SHIP )
-        damage_ship_ch( target, 50, 200, ch );
-      else
-        damage_ship_ch( target, 10 , 50, ch );
-
-      if ( is_autoflying(target) && target->target0 != ship )
-        {
-          target->target0 = ship;
-          sprintf( buf , "You are being targetted by %s." , target->name);
-          echo_to_cockpit( AT_BLOOD , ship , buf );
-        }
-
-      return;
+	}
     }
 
   send_to_char( "&RYou can't fire that!\r\n" , ch);
