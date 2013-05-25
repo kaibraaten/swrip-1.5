@@ -2,6 +2,7 @@
 #define _SWR_UTILITY_H_
 
 #include <stdio.h>
+#include <stdlib.h>
 #include "vector3.h"
 #include "os.h"
 #include "buffer.h"
