@@ -116,8 +116,8 @@ void do_setship( CHAR_DATA *ch, char *argument )
       ship->gunseat = tempnum;
       ship->navseat = tempnum;
       ship->entrance = tempnum;
-      ship->turret1 = 0;
-      ship->turret2 = 0;
+      ship->turret[0].room_vnum = 0;
+      ship->turret[1].room_vnum = 0;
       ship->hanger = 0;
       send_to_char( "You will now need to set the other rooms in the ship.\r\n", ch );
       save_ship( ship );
@@ -182,7 +182,7 @@ void do_setship( CHAR_DATA *ch, char *argument )
           return;
         }
 
-      if ( tempnum == ship->turret1 || tempnum == ship->turret2 || tempnum == ship->hanger )
+      if ( tempnum == ship->turret[0].room_vnum || tempnum == ship->turret[1].room_vnum || tempnum == ship->hanger )
         {
           send_to_char("That room is already being used by another part of the ship\r\n",ch);
           return;
@@ -211,7 +211,7 @@ void do_setship( CHAR_DATA *ch, char *argument )
           return;
         }
 
-      if ( tempnum == ship->turret1 || tempnum == ship->turret2 || tempnum == ship->hanger )
+      if ( tempnum == ship->turret[0].room_vnum || tempnum == ship->turret[1].room_vnum || tempnum == ship->hanger )
         {
           send_to_char("That room is already being used by another part of the ship\r\n",ch);
           return;
@@ -240,7 +240,7 @@ void do_setship( CHAR_DATA *ch, char *argument )
           return;
         }
 
-      if ( tempnum == ship->turret1 || tempnum == ship->turret2 || tempnum == ship->hanger )
+      if ( tempnum == ship->turret[0].room_vnum || tempnum == ship->turret[1].room_vnum || tempnum == ship->hanger )
         {
           send_to_char("That room is already being used by another part of the ship\r\n",ch);
           return;
@@ -269,7 +269,7 @@ void do_setship( CHAR_DATA *ch, char *argument )
           return;
         }
 
-      if ( tempnum == ship->turret1 || tempnum == ship->turret2 || tempnum == ship->hanger )
+      if ( tempnum == ship->turret[0].room_vnum || tempnum == ship->turret[1].room_vnum || tempnum == ship->hanger )
         {
           send_to_char("That room is already being used by another part of the ship\r\n",ch);
           return;
@@ -298,7 +298,7 @@ void do_setship( CHAR_DATA *ch, char *argument )
           return;
 	}
 
-      if ( tempnum == ship->turret1 || tempnum == ship->turret2 || tempnum == ship->hanger )
+      if ( tempnum == ship->turret[0].room_vnum || tempnum == ship->turret[1].room_vnum || tempnum == ship->hanger )
         {
           send_to_char("That room is already being used by another part of the ship\r\n",ch);
           return;
@@ -357,13 +357,13 @@ void do_setship( CHAR_DATA *ch, char *argument )
         }
 
       if ( tempnum == ship->cockpit || tempnum == ship->entrance ||
-           tempnum == ship->turret2 || tempnum == ship->hanger || tempnum == ship->engineroom )
+           tempnum == ship->turret[1].room_vnum || tempnum == ship->hanger || tempnum == ship->engineroom )
         {
           send_to_char("That room is already being used by another part of the ship\r\n",ch);
           return;
         }
 
-      ship->turret1 = tempnum;
+      ship->turret[0].room_vnum = tempnum;
       send_to_char( "Done.\r\n", ch );
       save_ship( ship );
       return;
@@ -393,12 +393,12 @@ void do_setship( CHAR_DATA *ch, char *argument )
         }
 
       if ( tempnum == ship->cockpit || tempnum == ship->entrance ||
-           tempnum == ship->turret1 || tempnum == ship->hanger || tempnum == ship->engineroom )
+           tempnum == ship->turret[0].room_vnum || tempnum == ship->hanger || tempnum == ship->engineroom )
         {
           send_to_char("That room is already being used by another part of the ship\r\n",ch);
           return;
         }
-      ship->turret2 = tempnum;
+      ship->turret[1].room_vnum = tempnum;
       send_to_char( "Done.\r\n", ch );
       save_ship( ship );
       return;
@@ -434,13 +434,13 @@ void do_setship( CHAR_DATA *ch, char *argument )
 	}
 
       if ( tempnum == ship->cockpit || tempnum == ship->entrance ||
-           tempnum == ship->turret1 || tempnum == ship->hanger || tempnum == ship->engineroom )
+           tempnum == ship->turret[0].room_vnum || tempnum == ship->hanger || tempnum == ship->engineroom )
         {
           send_to_char("That room is already being used by another part of the ship\r\n",ch);
           return;
         }
 
-      ship->turret3 = tempnum;
+      ship->turret[2].room_vnum = tempnum;
       send_to_char( "Done.\r\n", ch );
       save_ship( ship );
       return;
@@ -476,13 +476,13 @@ void do_setship( CHAR_DATA *ch, char *argument )
         }
 
       if ( tempnum == ship->cockpit || tempnum == ship->entrance ||
-	   tempnum == ship->turret1 || tempnum == ship->hanger || tempnum == ship->engineroom )
+	   tempnum == ship->turret[0].room_vnum || tempnum == ship->hanger || tempnum == ship->engineroom )
         {
           send_to_char("That room is already being used by another part of the ship\r\n",ch);
           return;
         }
 
-      ship->turret4 = tempnum;
+      ship->turret[3].room_vnum = tempnum;
       send_to_char( "Done.\r\n", ch );
       save_ship( ship );
       return;
@@ -519,13 +519,13 @@ void do_setship( CHAR_DATA *ch, char *argument )
         }
 
       if ( tempnum == ship->cockpit || tempnum == ship->entrance ||
-           tempnum == ship->turret1 || tempnum == ship->hanger || tempnum == ship->engineroom )
+           tempnum == ship->turret[0].room_vnum || tempnum == ship->hanger || tempnum == ship->engineroom )
         {
 	  send_to_char("That room is already being used by another part of the ship\r\n",ch);
           return;
         }
 
-      ship->turret5 = tempnum;
+      ship->turret[4].room_vnum = tempnum;
       send_to_char( "Done.\r\n", ch );
       save_ship( ship );
       return;
@@ -561,13 +561,13 @@ void do_setship( CHAR_DATA *ch, char *argument )
         }
 
       if ( tempnum == ship->cockpit || tempnum == ship->entrance ||
-           tempnum == ship->turret1 || tempnum == ship->hanger || tempnum == ship->engineroom )
+           tempnum == ship->turret[0].room_vnum || tempnum == ship->hanger || tempnum == ship->engineroom )
         {
           send_to_char("That room is already being used by another part of the ship\r\n",ch);
           return;
         }
 
-      ship->turret6 = tempnum;
+      ship->turret[5].room_vnum = tempnum;
       send_to_char( "Done.\r\n", ch );
       save_ship( ship );
       return;
@@ -603,13 +603,13 @@ void do_setship( CHAR_DATA *ch, char *argument )
         }
 
       if ( tempnum == ship->cockpit || tempnum == ship->entrance ||
-           tempnum == ship->turret1 || tempnum == ship->hanger || tempnum == ship->engineroom )
+           tempnum == ship->turret[0].room_vnum || tempnum == ship->hanger || tempnum == ship->engineroom )
         {
           send_to_char("That room is already being used by another part of the ship\r\n",ch);
           return;
         }
 
-      ship->turret7 = tempnum;
+      ship->turret[6].room_vnum = tempnum;
       send_to_char( "Done.\r\n", ch );
       save_ship( ship );
       return;
@@ -645,13 +645,13 @@ void do_setship( CHAR_DATA *ch, char *argument )
         }
 
       if ( tempnum == ship->cockpit || tempnum == ship->entrance ||
-           tempnum == ship->turret1 || tempnum == ship->hanger || tempnum == ship->engineroom )
+           tempnum == ship->turret[0].room_vnum || tempnum == ship->hanger || tempnum == ship->engineroom )
         {
           send_to_char("That room is already being used by another part of the ship\r\n",ch);
           return;
         }
 
-      ship->turret8 = tempnum;
+      ship->turret[7].room_vnum = tempnum;
       send_to_char( "Done.\r\n", ch );
       save_ship( ship );
       return;
@@ -687,12 +687,12 @@ void do_setship( CHAR_DATA *ch, char *argument )
         }
 
       if ( tempnum == ship->cockpit || tempnum == ship->entrance ||
-           tempnum == ship->turret1 || tempnum == ship->hanger || tempnum == ship->engineroom )
+           tempnum == ship->turret[0].room_vnum || tempnum == ship->hanger || tempnum == ship->engineroom )
         {
           send_to_char("That room is already being used by another part of the ship\r\n",ch);
           return;
         }
-      ship->turret9 = tempnum;
+      ship->turret[8].room_vnum = tempnum;
       send_to_char( "Done.\r\n", ch );
       save_ship( ship );
       return;
@@ -728,13 +728,13 @@ void do_setship( CHAR_DATA *ch, char *argument )
         }
 
       if ( tempnum == ship->cockpit || tempnum == ship->entrance ||
-           tempnum == ship->turret1 || tempnum == ship->hanger || tempnum == ship->engineroom )
+           tempnum == ship->turret[0].room_vnum || tempnum == ship->hanger || tempnum == ship->engineroom )
         {
           send_to_char("That room is already being used by another part of the ship\r\n",ch);
           return;
         }
 
-      ship->turret0 = tempnum;
+      ship->turret[9].room_vnum = tempnum;
       send_to_char( "Done.\r\n", ch );
       save_ship( ship );
       return;
@@ -758,7 +758,7 @@ void do_setship( CHAR_DATA *ch, char *argument )
         }
 
       if ( tempnum == ship->cockpit || tempnum == ship->entrance ||
-           tempnum == ship->turret1 || tempnum == ship->turret2 || tempnum == ship->engineroom )
+           tempnum == ship->turret[0].room_vnum || tempnum == ship->turret[1].room_vnum || tempnum == ship->engineroom )
         {
           send_to_char("That room is already being used by another part of the ship\r\n",ch);
           return;
@@ -794,7 +794,7 @@ void do_setship( CHAR_DATA *ch, char *argument )
 	}
 
       if ( tempnum == ship->cockpit || tempnum == ship->entrance ||
-           tempnum == ship->turret1 || tempnum == ship->turret2 || tempnum == ship->hanger )
+           tempnum == ship->turret[0].room_vnum || tempnum == ship->turret[1].room_vnum || tempnum == ship->hanger )
         {
           send_to_char("That room is already being used by another part of the ship\r\n",ch);
           return;

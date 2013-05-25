@@ -477,6 +477,7 @@ typedef enum
 
 #define LASER_DAMAGED    -1
 #define LASER_READY       0
+#define MAX_NUMBER_OF_TURRETS_IN_SHIP 10
 
 #define PLANET_NOCAPTURE  BV00
 

@@ -443,10 +443,17 @@ struct clan_data
 
   struct
   {
-    char *        leader;         /* Head clan leader                     */
-    char *        number1;        /* First officer                        */
-    char *        number2;        /* Second officer                       */
+    char *leader;         /* Head clan leader                     */
+    char *number1;        /* First officer                        */
+    char *number2;        /* Second officer                       */
   } leadership;
+};
+
+struct turret_data
+{
+  int room_vnum;
+  int weapon_state;
+  SHIP_DATA *target;
 };
 
 struct ship_data
@@ -482,18 +489,8 @@ struct ship_data
   short goalspeed;
   short      shipstate;
   short      docking;
-  short      statei0;
-  short      statet0;
-  short      statet1;
-  short      statet2;
-  short      statet3;
-  short      statet4;
-  short      statet5;
-  short      statet6;
-  short      statet7;
-  short      statet8;
-  short      statet9;
-  short      statet10;
+  short      statei0; /* ion state */
+  short      statet0; /* laser state */
   short      statettractor;
   short      statetdocking;
   short      missiletype;
@@ -530,16 +527,6 @@ struct ship_data
   int         hull;
   int         maxhull;
   int         cockpit;
-  int         turret1;
-  int         turret2;
-  int         turret3;
-  int         turret4;
-  int         turret5;
-  int         turret6;
-  int         turret7;
-  int         turret8;
-  int         turret9;
-  int         turret0;
   int         location;
   int         lastdoc;
   int         shipyard;
@@ -553,17 +540,7 @@ struct ship_data
   int         coseat;
   int         gunseat;
   long        collision;
-  SHIP_DATA  *target0;
-  SHIP_DATA  *target1;
-  SHIP_DATA  *target2;
-  SHIP_DATA  *target3;
-  SHIP_DATA  *target4;
-  SHIP_DATA  *target5;
-  SHIP_DATA  *target6;
-  SHIP_DATA  *target7;
-  SHIP_DATA  *target8;
-  SHIP_DATA  *target9;
-  SHIP_DATA  *target10;
+  SHIP_DATA  *target0; /* target of main weapon systems (ie, not turrest) */
   SHIP_DATA  *tractoredby;
   SHIP_DATA  *tractored;
   SPACE_DATA *currjump;
@@ -579,6 +556,7 @@ struct ship_data
   CHAR_DATA *ch;
   SPACE_DATA *inorbitof;
   int count;
+  TURRET_DATA turret[MAX_NUMBER_OF_TURRETS_IN_SHIP];
 };
 
 struct missile_data

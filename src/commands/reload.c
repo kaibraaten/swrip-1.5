@@ -30,9 +30,9 @@ void do_reload( CHAR_DATA *ch, char *argument )
     price += 100;
   if ( ship->statet0 == LASER_DAMAGED )
     price += 50;
-  if ( ship->statet1 == LASER_DAMAGED )
+  if ( ship->turret[0].weapon_state == LASER_DAMAGED )
     price += 50;
-  if ( ship->statet2 == LASER_DAMAGED )
+  if ( ship->turret[1].weapon_state == LASER_DAMAGED )
     price += 50;
 
   if ( ch->pcdata && ch->pcdata->clan && !str_cmp(ch->pcdata->clan->name,ship->owner) )
@@ -68,7 +68,7 @@ void do_reload( CHAR_DATA *ch, char *argument )
 
   ship->missilestate = MISSILE_READY;
   ship->statet0 = LASER_READY;
-  ship->statet1 = LASER_READY;
-  ship->statet2 = LASER_READY;
+  ship->turret[0].weapon_state = LASER_READY;
+  ship->turret[1].weapon_state = LASER_READY;
   ship->shipstate = SHIP_LANDED;
 }

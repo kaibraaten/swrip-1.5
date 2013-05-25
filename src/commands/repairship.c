@@ -115,13 +115,13 @@ void do_repairship(CHAR_DATA *ch, char *argument )
 
   if ( !str_cmp(arg,"turret 1") )
     {
-      ship->statet1 = LASER_READY;
+      ship->turret[0].weapon_state = LASER_READY;
       send_to_char("&GLaser Turret 1 repaired.\r\n", ch);
     }
 
   if ( !str_cmp(arg,"turret 2") )
     {
-      ship->statet2 = LASER_READY;
+      ship->turret[1].weapon_state = LASER_READY;
       send_to_char("&Laser Turret 2 repaired.\r\n", ch);
     }
 

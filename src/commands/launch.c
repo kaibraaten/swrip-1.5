@@ -119,9 +119,9 @@ void do_launch( CHAR_DATA *ch, char *argument )
 	    price += 5000;
           if ( ship->statet0 == LASER_DAMAGED )
             price += 2500;
-          if ( ship->statet1 == LASER_DAMAGED )
+          if ( ship->turret[0].weapon_state == LASER_DAMAGED )
             price += 2500;
-          if ( ship->statet2 == LASER_DAMAGED )
+          if ( ship->turret[1].weapon_state == LASER_DAMAGED )
             price += 2500;
         }
 
@@ -178,8 +178,8 @@ void do_launch( CHAR_DATA *ch, char *argument )
 
           ship->missilestate = MISSILE_READY;
           ship->statet0 = LASER_READY;
-          ship->statet1 = LASER_READY;
-          ship->statet2 = LASER_READY;
+          ship->turret[0].weapon_state = LASER_READY;
+          ship->turret[1].weapon_state = LASER_READY;
           ship->shipstate = SHIP_LANDED;
         }
 

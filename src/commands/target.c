@@ -54,26 +54,26 @@ void do_target(CHAR_DATA *ch, char *argument )
           send_to_char("&GTarget set to none.\r\n",ch);
           if ( ch->in_room->vnum == ship->gunseat )
             ship->target0 = NULL;
-          if ( ch->in_room->vnum == ship->turret1 )
-            ship->target1 = NULL;
-          if ( ch->in_room->vnum == ship->turret2 )
-            ship->target2 = NULL;
-          if ( ch->in_room->vnum == ship->turret3 )
-            ship->target3 = NULL;
-          if ( ch->in_room->vnum == ship->turret4 )
-            ship->target4 = NULL;
-          if ( ch->in_room->vnum == ship->turret5 )
-            ship->target5 = NULL;
-          if ( ch->in_room->vnum == ship->turret6 )
-            ship->target6 = NULL;
-          if ( ch->in_room->vnum == ship->turret7 )
-            ship->target7 = NULL;
-          if ( ch->in_room->vnum == ship->turret8 )
-            ship->target8 = NULL;
-          if ( ch->in_room->vnum == ship->turret9 )
-            ship->target9 = NULL;
-          if ( ch->in_room->vnum == ship->turret0 )
-	    ship->target10 = NULL;
+          if ( ch->in_room->vnum == ship->turret[0].room_vnum )
+            ship->turret[0].target = NULL;
+          if ( ch->in_room->vnum == ship->turret[1].room_vnum )
+            ship->turret[1].target = NULL;
+          if ( ch->in_room->vnum == ship->turret[2].room_vnum )
+            ship->turret[2].target = NULL;
+          if ( ch->in_room->vnum == ship->turret[3].room_vnum )
+            ship->turret[3].target = NULL;
+          if ( ch->in_room->vnum == ship->turret[4].room_vnum )
+            ship->turret[4].target = NULL;
+          if ( ch->in_room->vnum == ship->turret[5].room_vnum )
+            ship->turret[5].target = NULL;
+          if ( ch->in_room->vnum == ship->turret[6].room_vnum )
+            ship->turret[6].target = NULL;
+          if ( ch->in_room->vnum == ship->turret[7].room_vnum )
+            ship->turret[7].target = NULL;
+          if ( ch->in_room->vnum == ship->turret[8].room_vnum )
+            ship->turret[8].target = NULL;
+          if ( ch->in_room->vnum == ship->turret[9].room_vnum )
+	    ship->turret[9].target = NULL;
           return;
         }
       if (ship->sclass > SHIP_PLATFORM)
@@ -165,34 +165,34 @@ void do_target(CHAR_DATA *ch, char *argument )
   if ( ch->in_room->vnum == ship->gunseat )
     ship->target0 = target;
 
-  if ( ch->in_room->vnum == ship->turret1 )
-    ship->target1 = target;
+  if ( ch->in_room->vnum == ship->turret[0].room_vnum )
+    ship->turret[0].target = target;
 
-  if ( ch->in_room->vnum == ship->turret2 )
-    ship->target2 = target;
+  if ( ch->in_room->vnum == ship->turret[1].room_vnum )
+    ship->turret[1].target = target;
 
-  if ( ch->in_room->vnum == ship->turret3 )
-    ship->target3 = target;
+  if ( ch->in_room->vnum == ship->turret[2].room_vnum )
+    ship->turret[2].target = target;
 
-  if ( ch->in_room->vnum == ship->turret4 )
-    ship->target4 = target;
+  if ( ch->in_room->vnum == ship->turret[3].room_vnum )
+    ship->turret[3].target = target;
 
-  if ( ch->in_room->vnum == ship->turret5 )
-    ship->target5 = target;
+  if ( ch->in_room->vnum == ship->turret[4].room_vnum )
+    ship->turret[4].target = target;
 
-  if ( ch->in_room->vnum == ship->turret6 )
-    ship->target6 = target;
+  if ( ch->in_room->vnum == ship->turret[5].room_vnum )
+    ship->turret[5].target = target;
 
-  if ( ch->in_room->vnum == ship->turret7 )
-    ship->target7 = target;
+  if ( ch->in_room->vnum == ship->turret[6].room_vnum )
+    ship->turret[6].target = target;
 
-  if ( ch->in_room->vnum == ship->turret8 )
-    ship->target8 = target;
+  if ( ch->in_room->vnum == ship->turret[7].room_vnum )
+    ship->turret[7].target = target;
 
-  if ( ch->in_room->vnum == ship->turret9 )
-    ship->target9 = target;
+  if ( ch->in_room->vnum == ship->turret[8].room_vnum )
+    ship->turret[8].target = target;
 
-  if ( ch->in_room->vnum == ship->turret0 )
+  if ( ch->in_room->vnum == ship->turret[9].room_vnum )
     ship->target0 = target;
 
   send_to_char( "&GTarget Locked.\r\n", ch);

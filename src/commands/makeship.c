@@ -33,8 +33,8 @@ void do_makeship( CHAR_DATA *ch, char *argument )
   ship->prev_in_room=NULL;
   ship->currjump=NULL;
   ship->target0=NULL;
-  ship->target1=NULL;
-  ship->target2=NULL;
+  ship->turret[0].target=NULL;
+  ship->turret[1].target=NULL;
 
   ship->filename = str_dup( arg );
   save_ship( ship );

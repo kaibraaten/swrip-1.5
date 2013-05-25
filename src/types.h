@@ -105,6 +105,9 @@ typedef struct clan_data               CLAN_DATA;
 struct ship_data;
 typedef struct ship_data               SHIP_DATA;
 
+struct turret_data;
+typedef struct turret_data             TURRET_DATA;
+
 struct missile_data;
 typedef struct missile_data            MISSILE_DATA;
 

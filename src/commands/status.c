@@ -62,36 +62,36 @@ void do_status(CHAR_DATA *ch, char *argument )
              target->maxenergy);
   ch_printf( ch, "&OLaser Condition:&Y %s  &OCurrent Target:&Y %s\r\n",
              target->statet0 == LASER_DAMAGED ? "Damaged" : "Good" , target->target0 ? target->target0->name : "none");
-  if (target->turret1)
+  if (target->turret[0].room_vnum)
     ch_printf( ch, "&OTurret One:  &Y %s  &OCurrent Target:&Y %s\r\n",
-               target->statet1 == LASER_DAMAGED ? "Damaged" : "Good" , target->target1 ? target->target1->name : "none");
-  if (target->turret2)
+               target->turret[0].weapon_state == LASER_DAMAGED ? "Damaged" : "Good" , target->turret[0].target ? target->turret[0].target->name : "none");
+  if (target->turret[1].room_vnum)
     ch_printf( ch, "&OTurret Two:  &Y %s  &OCurrent Target:&Y %s\r\n",
-               target->statet2 == LASER_DAMAGED ? "Damaged" : "Good" , target->target2 ? target->target2->name : "none");
-  if (target->turret3)
+               target->turret[1].weapon_state == LASER_DAMAGED ? "Damaged" : "Good" , target->turret[1].target ? target->turret[1].target->name : "none");
+  if (target->turret[2].room_vnum)
     ch_printf( ch, "&OTurret Three:&Y %s  &OCurrent Target:&Y %s\r\n",
-               target->statet3 == LASER_DAMAGED ? "Damaged" : "Good" , target->target3 ? target->target3->name : "none");
-  if (target->turret4)
+               target->turret[2].weapon_state == LASER_DAMAGED ? "Damaged" : "Good" , target->turret[2].target ? target->turret[2].target->name : "none");
+  if (target->turret[3].room_vnum)
     ch_printf( ch, "&OTurret Four: &Y %s  &OCurrent Target:&Y %s\r\n",
-               target->statet4 == LASER_DAMAGED ? "Damaged" : "Good" , target->target4 ? target->target4->name : "none");
-  if (target->turret5)
+               target->turret[3].weapon_state == LASER_DAMAGED ? "Damaged" : "Good" , target->turret[3].target ? target->turret[3].target->name : "none");
+  if (target->turret[4].room_vnum)
     ch_printf( ch, "&OTurret Five: &Y %s  &OCurrent Target:&Y %s\r\n",
-               target->statet5 == LASER_DAMAGED ? "Damaged" : "Good" , target->target5 ? target->target5->name : "none");
-  if (target->turret6)
+               target->turret[4].weapon_state == LASER_DAMAGED ? "Damaged" : "Good" , target->turret[4].target ? target->turret[4].target->name : "none");
+  if (target->turret[5].room_vnum)
     ch_printf( ch, "&OTurret Six:  &Y %s  &OCurrent Target:&Y %s\r\n",
-               target->statet6 == LASER_DAMAGED ? "Damaged" : "Good" , target->target6 ? target->target6->name : "none");
-  if (target->turret7)
+               target->turret[5].weapon_state == LASER_DAMAGED ? "Damaged" : "Good" , target->turret[5].target ? target->turret[5].target->name : "none");
+  if (target->turret[6].room_vnum)
     ch_printf( ch, "&OTurret Seven:&Y %s  &OCurrent Target:&Y %s\r\n",
-               target->statet7 == LASER_DAMAGED ? "Damaged" : "Good" , target->target7 ? target->target7->name : "none");
-  if (target->turret8)
+               target->turret[6].weapon_state == LASER_DAMAGED ? "Damaged" : "Good" , target->turret[6].target ? target->turret[6].target->name : "none");
+  if (target->turret[7].room_vnum)
     ch_printf( ch, "&OTurret Eight:&Y %s  &OCurrent Target:&Y %s\r\n",
-               target->statet8 == LASER_DAMAGED ? "Damaged" : "Good" , target->target8 ? target->target8->name : "none");
-  if (target->turret9)
+               target->turret[7].weapon_state == LASER_DAMAGED ? "Damaged" : "Good" , target->turret[7].target ? target->turret[7].target->name : "none");
+  if (target->turret[8].room_vnum)
     ch_printf( ch, "&OTurret Nine: &Y %s  &OCurrent Target:&Y %s\r\n",
-               target->statet9 == LASER_DAMAGED ? "Damaged" : "Good" , target->target9 ? target->target9->name : "none");
-  if (target->turret0)
+               target->turret[8].weapon_state == LASER_DAMAGED ? "Damaged" : "Good" , target->turret[8].target ? target->turret[8].target->name : "none");
+  if (target->turret[9].room_vnum)
     ch_printf( ch, "&OTurret Ten:  &Y %s  &OCurrent Target:&Y %s\r\n",
-               target->statet10 == LASER_DAMAGED ? "Damaged" : "Good" , target->target10 ? target->target10->name : "none");
+               target->turret[9].weapon_state == LASER_DAMAGED ? "Damaged" : "Good" , target->turret[9].target ? target->turret[9].target->name : "none");
   ch_printf( ch, "&OSensors:    &Y%d   &OTractor Beam:   &Y%d\r\n", target->sensor, target->tractorbeam);
   ch_printf( ch, "&OAstroArray: &Y%d   &OComm:           &Y%d\r\n", target->astro_array, target->comm);
   ch_printf( ch, "\r\n&OMissiles:&Y %d&O  Torpedos: &Y%d&O\r\nRockets:  &Y%d&O  Chaff:    &Y%d&O  \r\n Condition:&Y %s&w\r\n",

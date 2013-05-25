@@ -463,8 +463,8 @@ static void landship( SHIP_DATA *ship, const char *arg )
 
       ship->missilestate = MISSILE_READY;
       ship->statet0 = LASER_READY;
-      ship->statet1 = LASER_READY;
-      ship->statet2 = LASER_READY;
+      ship->turret[0].weapon_state = LASER_READY;
+      ship->turret[1].weapon_state = LASER_READY;
       ship->shipstate = SHIP_LANDED;
 
       echo_to_cockpit( AT_YELLOW , ship , "Repairing and refueling ship..." );
@@ -656,8 +656,8 @@ static void makedebris( SHIP_DATA *ship )
   debris->prev_in_room=NULL;
   debris->currjump=NULL;
   debris->target0=NULL;
-  debris->target1=NULL;
-  debris->target2=NULL;
+  debris->turret[0].target=NULL;
+  debris->turret[1].target=NULL;
   debris->autopilot = FALSE;
 
   strcpy( buf, "Debris of a " );
@@ -1217,55 +1217,55 @@ void recharge_ships()
           ship->energy -= 10*ship->statei0;
           ship->statei0 = 0;
         }
-      if (ship->statet1 > 0)
+      if (ship->turret[0].weapon_state > 0)
         {
-	  ship->energy -= ship->statet1;
-          ship->statet1 = 0;
+	  ship->energy -= ship->turret[0].weapon_state;
+          ship->turret[0].weapon_state = 0;
         }
-      if (ship->statet2 > 0)
+      if (ship->turret[1].weapon_state > 0)
         {
-          ship->energy -= ship->statet2;
-          ship->statet2 = 0;
+          ship->energy -= ship->turret[1].weapon_state;
+          ship->turret[1].weapon_state = 0;
         }
-      if (ship->statet3 > 0)
+      if (ship->turret[2].weapon_state > 0)
         {
-          ship->energy -= ship->statet3;
-          ship->statet3 = 0;
+          ship->energy -= ship->turret[2].weapon_state;
+          ship->turret[2].weapon_state = 0;
         }
-      if (ship->statet4 > 0)
+      if (ship->turret[3].weapon_state > 0)
         {
-          ship->energy -= ship->statet4;
-          ship->statet4 = 0;
+          ship->energy -= ship->turret[3].weapon_state;
+          ship->turret[3].weapon_state = 0;
         }
-      if (ship->statet5 > 0)
+      if (ship->turret[4].weapon_state > 0)
         {
-          ship->energy -= ship->statet5;
-          ship->statet5 = 0;
+          ship->energy -= ship->turret[4].weapon_state;
+          ship->turret[4].weapon_state = 0;
         }
-      if (ship->statet6 > 0)
+      if (ship->turret[5].weapon_state > 0)
         {
-          ship->energy -= ship->statet6;
-          ship->statet6 = 0;
+          ship->energy -= ship->turret[5].weapon_state;
+          ship->turret[5].weapon_state = 0;
         }
-      if (ship->statet7 > 0)
+      if (ship->turret[6].weapon_state > 0)
         {
-          ship->energy -= ship->statet7;
-          ship->statet7 = 0;
+          ship->energy -= ship->turret[6].weapon_state;
+          ship->turret[6].weapon_state = 0;
         }
-      if (ship->statet8 > 0)
+      if (ship->turret[7].weapon_state > 0)
         {
-          ship->energy -= ship->statet8;
-          ship->statet8 = 0;
+          ship->energy -= ship->turret[7].weapon_state;
+          ship->turret[7].weapon_state = 0;
         }
-      if (ship->statet9 > 0)
+      if (ship->turret[8].weapon_state > 0)
         {
-          ship->energy -= ship->statet9;
-          ship->statet9 = 0;
+          ship->energy -= ship->turret[8].weapon_state;
+          ship->turret[8].weapon_state = 0;
         }
-      if (ship->statet10 > 0)
+      if (ship->turret[9].weapon_state > 0)
         {
-	  ship->energy -= ship->statet10;
-          ship->statet10 = 0;
+	  ship->energy -= ship->turret[9].weapon_state;
+          ship->turret[9].weapon_state = 0;
         }
 
       if( ship->docked && ship->docked->sclass == SHIP_PLATFORM )
@@ -1607,28 +1607,28 @@ void update_ships( void )
             }
         }
 
-      if (ship->target1 && ship->sclass <= SHIP_PLATFORM)
+      if (ship->turret[0].target && ship->sclass <= SHIP_PLATFORM)
         {
-          sprintf( buf, "%s   %.0f %.0f %.0f", ship->target1->name,
-                   ship->target1->pos.x, ship->target1->pos.y,
-                   ship->target1->pos.z );
-          echo_to_room_dnr( AT_BLUE , get_room_index(ship->turret1), "Target: " );
-          echo_to_room( AT_LBLUE , get_room_index(ship->turret1),  buf );
+          sprintf( buf, "%s   %.0f %.0f %.0f", ship->turret[0].target->name,
+                   ship->turret[0].target->pos.x, ship->turret[0].target->pos.y,
+                   ship->turret[0].target->pos.z );
+          echo_to_room_dnr( AT_BLUE , get_room_index(ship->turret[0].room_vnum), "Target: " );
+          echo_to_room( AT_LBLUE , get_room_index(ship->turret[0].room_vnum),  buf );
 
-          if (!ship_in_range( ship, ship->target1 ) )
-            ship->target1 = NULL;
+          if (!ship_in_range( ship, ship->turret[0].target ) )
+            ship->turret[0].target = NULL;
         }
 
-      if (ship->target2 && ship->sclass <= SHIP_PLATFORM)
+      if (ship->turret[1].target && ship->sclass <= SHIP_PLATFORM)
         {
-          sprintf( buf, "%s   %.0f %.0f %.0f", ship->target2->name,
-                   ship->target2->pos.x, ship->target2->pos.y,
-                   ship->target2->pos.z );
-          echo_to_room_dnr( AT_BLUE, get_room_index(ship->turret2), "Target: " );
-          echo_to_room( AT_LBLUE , get_room_index(ship->turret2),  buf );
+          sprintf( buf, "%s   %.0f %.0f %.0f", ship->turret[1].target->name,
+                   ship->turret[1].target->pos.x, ship->turret[1].target->pos.y,
+                   ship->turret[1].target->pos.z );
+          echo_to_room_dnr( AT_BLUE, get_room_index(ship->turret[1].room_vnum), "Target: " );
+          echo_to_room( AT_LBLUE , get_room_index(ship->turret[1].room_vnum),  buf );
 
-          if (!ship_in_range( ship, ship->target2 ) )
-            ship->target2 = NULL;
+          if (!ship_in_range( ship, ship->turret[1].target ) )
+            ship->turret[1].target = NULL;
         }
 
       if (ship->energy < 100 && ship->spaceobject )
@@ -1849,11 +1849,11 @@ void echo_to_cockpit( int color, SHIP_DATA *ship, const char *argument )
       if ( room == ship->cockpit || room == ship->navseat
            || room == ship->pilotseat || room == ship->coseat
            || room == ship->gunseat || room == ship->engineroom
-           || room == ship->turret1 || room == ship->turret2
-           || room == ship->turret3 || room == ship->turret4
-           || room == ship->turret5 || room == ship->turret6
-           || room == ship->turret7 || room == ship->turret8
-           || room == ship->turret9 || room == ship->turret0)
+           || room == ship->turret[0].room_vnum || room == ship->turret[1].room_vnum
+           || room == ship->turret[2].room_vnum || room == ship->turret[3].room_vnum
+           || room == ship->turret[4].room_vnum || room == ship->turret[5].room_vnum
+           || room == ship->turret[6].room_vnum || room == ship->turret[7].room_vnum
+           || room == ship->turret[8].room_vnum || room == ship->turret[9].room_vnum)
         echo_to_room( color , get_room_index(room) , argument );
     }
 }
@@ -1956,10 +1956,10 @@ long int get_ship_value( SHIP_DATA *ship )
   else if (ship->rockets )
     price += 1000 * ship->rockets;
 
-  if (ship->turret1)
+  if (ship->turret[0].room_vnum)
     price += 5000;
 
-  if (ship->turret2)
+  if (ship->turret[1].room_vnum)
     price += 5000;
 
   if (ship->hyperspeed)
@@ -2042,20 +2042,20 @@ void save_ship( const SHIP_DATA *ship )
       fprintf( fp, "Vx           %.0f\n",       ship->pos.x                );
       fprintf( fp, "Vy           %.0f\n",       ship->pos.y                );
       fprintf( fp, "Vz           %.0f\n",       ship->pos.z                );
-      fprintf( fp, "Turret1      %d\n", ship->turret1           );
-      fprintf( fp, "Turret2      %d\n", ship->turret2           );
-      fprintf( fp, "Turret3      %d\n", ship->turret3           );
-      fprintf( fp, "Turret4      %d\n", ship->turret4           );
-      fprintf( fp, "Turret5      %d\n", ship->turret5           );
-      fprintf( fp, "Turret6      %d\n", ship->turret6           );
-      fprintf( fp, "Turret7      %d\n", ship->turret7           );
-      fprintf( fp, "Turret8      %d\n", ship->turret8           );
-      fprintf( fp, "Turret9      %d\n", ship->turret9           );
-      fprintf( fp, "Turret0      %d\n", ship->turret0           );
+      fprintf( fp, "Turret1      %d\n", ship->turret[0].room_vnum           );
+      fprintf( fp, "Turret2      %d\n", ship->turret[1].room_vnum           );
+      fprintf( fp, "Turret3      %d\n", ship->turret[2].room_vnum           );
+      fprintf( fp, "Turret4      %d\n", ship->turret[3].room_vnum           );
+      fprintf( fp, "Turret5      %d\n", ship->turret[4].room_vnum           );
+      fprintf( fp, "Turret6      %d\n", ship->turret[5].room_vnum           );
+      fprintf( fp, "Turret7      %d\n", ship->turret[6].room_vnum           );
+      fprintf( fp, "Turret8      %d\n", ship->turret[7].room_vnum           );
+      fprintf( fp, "Turret9      %d\n", ship->turret[8].room_vnum           );
+      fprintf( fp, "Turret0      %d\n", ship->turret[9].room_vnum           );
       fprintf( fp, "Statet0      %d\n", ship->statet0           );
       fprintf( fp, "Statei0      %d\n", ship->statei0           );
-      fprintf( fp, "Statet1      %d\n", ship->statet1           );
-      fprintf( fp, "Statet2      %d\n", ship->statet2           );
+      fprintf( fp, "Statet1      %d\n", ship->turret[0].weapon_state           );
+      fprintf( fp, "Statet2      %d\n", ship->turret[1].weapon_state           );
       fprintf( fp, "Lasers       %d\n", ship->lasers            );
       fprintf( fp, "Missiles     %d\n", ship->missiles          );
       fprintf( fp, "Maxmissiles  %d\n", ship->maxmissiles       );
@@ -2168,35 +2168,35 @@ static void fread_ship( SHIP_DATA *ship, FILE *fp )
               if (ship->statei0 != LASER_DAMAGED)
                 ship->statei0 = LASER_READY;
 
-              if (ship->statet1 != LASER_DAMAGED)
-                ship->statet1 = LASER_READY;
+              if (ship->turret[0].weapon_state != LASER_DAMAGED)
+                ship->turret[0].weapon_state = LASER_READY;
 
-              if (ship->statet2 != LASER_DAMAGED)
-                ship->statet2 = LASER_READY;
+              if (ship->turret[1].weapon_state != LASER_DAMAGED)
+                ship->turret[1].weapon_state = LASER_READY;
 
-              if (ship->statet3 != LASER_DAMAGED)
-                ship->statet3 = LASER_READY;
+              if (ship->turret[2].weapon_state != LASER_DAMAGED)
+                ship->turret[2].weapon_state = LASER_READY;
 
-              if (ship->statet4 != LASER_DAMAGED)
-                ship->statet4 = LASER_READY;
+              if (ship->turret[3].weapon_state != LASER_DAMAGED)
+                ship->turret[3].weapon_state = LASER_READY;
 
-              if (ship->statet5 != LASER_DAMAGED)
-                ship->statet5 = LASER_READY;
+              if (ship->turret[4].weapon_state != LASER_DAMAGED)
+                ship->turret[4].weapon_state = LASER_READY;
 
-              if (ship->statet6 != LASER_DAMAGED)
-                ship->statet6 = LASER_READY;
+              if (ship->turret[5].weapon_state != LASER_DAMAGED)
+                ship->turret[5].weapon_state = LASER_READY;
 
-              if (ship->statet7 != LASER_DAMAGED)
-                ship->statet7 = LASER_READY;
+              if (ship->turret[6].weapon_state != LASER_DAMAGED)
+                ship->turret[6].weapon_state = LASER_READY;
 
-              if (ship->statet8 != LASER_DAMAGED)
-                ship->statet8 = LASER_READY;
+              if (ship->turret[7].weapon_state != LASER_DAMAGED)
+                ship->turret[7].weapon_state = LASER_READY;
 
-	      if (ship->statet9 != LASER_DAMAGED)
-                ship->statet9 = LASER_READY;
+	      if (ship->turret[8].weapon_state != LASER_DAMAGED)
+                ship->turret[8].weapon_state = LASER_READY;
 
-              if (ship->statet10 != LASER_DAMAGED)
-                ship->statet10 = LASER_READY;
+              if (ship->turret[9].weapon_state != LASER_DAMAGED)
+                ship->turret[9].weapon_state = LASER_READY;
 
               if (ship->missilestate != MISSILE_DAMAGED)
                 ship->missilestate = MISSILE_READY;
@@ -2311,34 +2311,34 @@ static void fread_ship( SHIP_DATA *ship, FILE *fp )
           KEY( "Sensor",      ship->sensor,       fread_number( fp ) );
           KEY( "Shield",      ship->shield,        fread_number( fp ) );
           KEY( "Shipstate",   ship->shipstate,        fread_number( fp ) );
-          KEY( "Statei0",   ship->statet0,        fread_number( fp ) );
+          KEY( "Statei0",   ship->statei0,        fread_number( fp ) );
           KEY( "Statet0",   ship->statet0,        fread_number( fp ) );
-          KEY( "Statet1",   ship->statet1,        fread_number( fp ) );
-          KEY( "Statet2",   ship->statet2,        fread_number( fp ) );
-          KEY( "Statet3",   ship->statet3,        fread_number( fp ) );
-          KEY( "Statet4",   ship->statet4,        fread_number( fp ) );
-          KEY( "Statet5",   ship->statet5,        fread_number( fp ) );
-          KEY( "Statet6",   ship->statet6,        fread_number( fp ) );
-          KEY( "Statet7",   ship->statet7,        fread_number( fp ) );
-          KEY( "Statet8",   ship->statet8,        fread_number( fp ) );
-          KEY( "Statet9",   ship->statet9,        fread_number( fp ) );
-          KEY( "Statet10",   ship->statet10,        fread_number( fp ) );
+          KEY( "Statet1",   ship->turret[0].weapon_state,        fread_number( fp ) );
+          KEY( "Statet2",   ship->turret[1].weapon_state,        fread_number( fp ) );
+          KEY( "Statet3",   ship->turret[2].weapon_state,        fread_number( fp ) );
+          KEY( "Statet4",   ship->turret[3].weapon_state,        fread_number( fp ) );
+          KEY( "Statet5",   ship->turret[4].weapon_state,        fread_number( fp ) );
+          KEY( "Statet6",   ship->turret[5].weapon_state,        fread_number( fp ) );
+          KEY( "Statet7",   ship->turret[6].weapon_state,        fread_number( fp ) );
+          KEY( "Statet8",   ship->turret[7].weapon_state,        fread_number( fp ) );
+          KEY( "Statet9",   ship->turret[8].weapon_state,        fread_number( fp ) );
+          KEY( "Statet10",  ship->turret[9].weapon_state,        fread_number( fp ) );
           break;
 
         case 'T':
           KEY( "Type",  ship->type,     fread_number( fp ) );
 	  KEY( "Tractorbeam", ship->tractorbeam,      fread_number( fp ) );
-          KEY( "Turret1",       ship->turret1,  fread_number( fp ) );
-          KEY( "Turret2",       ship->turret2,  fread_number( fp ) );
-          KEY( "Turret3",  ship->turret3, fread_number( fp ) );
-          KEY( "Turret4",  ship->turret4, fread_number( fp ) );
-          KEY( "Turret5",  ship->turret5, fread_number( fp ) );
-          KEY( "Turret6",  ship->turret6, fread_number( fp ) );
-          KEY( "Turret7",  ship->turret7, fread_number( fp ) );
-          KEY( "Turret8",  ship->turret8, fread_number( fp ) );
-          KEY( "Turret9",  ship->turret9, fread_number( fp ) );
-          KEY( "Turret0",  ship->turret0, fread_number( fp ) );
-          KEY( "Torpedos",      ship->torpedos, fread_number( fp ) );
+          KEY( "Turret1",     ship->turret[0].room_vnum,  fread_number( fp ) );
+          KEY( "Turret2",     ship->turret[1].room_vnum,  fread_number( fp ) );
+          KEY( "Turret3",     ship->turret[2].room_vnum, fread_number( fp ) );
+          KEY( "Turret4",     ship->turret[3].room_vnum, fread_number( fp ) );
+          KEY( "Turret5",     ship->turret[4].room_vnum, fread_number( fp ) );
+          KEY( "Turret6",     ship->turret[5].room_vnum, fread_number( fp ) );
+          KEY( "Turret7",     ship->turret[6].room_vnum, fread_number( fp ) );
+          KEY( "Turret8",     ship->turret[7].room_vnum, fread_number( fp ) );
+          KEY( "Turret9",     ship->turret[8].room_vnum, fread_number( fp ) );
+          KEY( "Turret0",     ship->turret[9].room_vnum, fread_number( fp ) );
+          KEY( "Torpedos",    ship->torpedos, fread_number( fp ) );
           break;
 
         case 'V':
@@ -2459,17 +2459,17 @@ static bool load_ship_file( const char *shipfile )
           ship->hull=ship->maxhull;
           ship->shield=0;
 
-          ship->statet1 = LASER_READY;
-          ship->statet2 = LASER_READY;
+          ship->turret[0].weapon_state = LASER_READY;
+          ship->turret[1].weapon_state = LASER_READY;
           ship->statet0 = LASER_READY;
-          ship->statet3 = LASER_READY;
-          ship->statet4 = LASER_READY;
-          ship->statet5 = LASER_READY;
-          ship->statet6 = LASER_READY;
-          ship->statet7 = LASER_READY;
-          ship->statet8 = LASER_READY;
-          ship->statet9 = LASER_READY;
-          ship->statet10 = LASER_READY;
+          ship->turret[2].weapon_state = LASER_READY;
+          ship->turret[3].weapon_state = LASER_READY;
+          ship->turret[4].weapon_state = LASER_READY;
+          ship->turret[5].weapon_state = LASER_READY;
+          ship->turret[6].weapon_state = LASER_READY;
+          ship->turret[7].weapon_state = LASER_READY;
+          ship->turret[8].weapon_state = LASER_READY;
+          ship->turret[9].weapon_state = LASER_READY;
           ship->missilestate = LASER_READY;
           ship->statettractor = SHIP_READY;
           ship->statetdocking = SHIP_READY;
@@ -2477,16 +2477,16 @@ static bool load_ship_file( const char *shipfile )
 
           ship->currjump=NULL;
           ship->target0=NULL;
-          ship->target1=NULL;
-          ship->target2=NULL;
-          ship->target3=NULL;
-          ship->target4=NULL;
-          ship->target5=NULL;
-          ship->target6=NULL;
-          ship->target7=NULL;
-          ship->target8=NULL;
-          ship->target9=NULL;
-          ship->target10=NULL;
+          ship->turret[0].target=NULL;
+          ship->turret[1].target=NULL;
+          ship->turret[2].target=NULL;
+          ship->turret[3].target=NULL;
+          ship->turret[4].target=NULL;
+          ship->turret[5].target=NULL;
+          ship->turret[6].target=NULL;
+          ship->turret[7].target=NULL;
+          ship->turret[8].target=NULL;
+          ship->turret[9].target=NULL;
 
           ship->hatchopen = FALSE;
 	  ship->bayopen = FALSE;
@@ -2614,31 +2614,31 @@ void resetship( SHIP_DATA *ship )
   ship->hull=ship->maxhull;
   ship->shield=0;
 
-  ship->statet1 = LASER_READY;
-  ship->statet2 = LASER_READY;
+  ship->turret[0].weapon_state = LASER_READY;
+  ship->turret[1].weapon_state = LASER_READY;
   ship->statet0 = LASER_READY;
-  ship->statet3 = LASER_READY;
-  ship->statet4 = LASER_READY;
-  ship->statet5 = LASER_READY;
-  ship->statet6 = LASER_READY;
-  ship->statet7 = LASER_READY;
-  ship->statet8 = LASER_READY;
-  ship->statet9 = LASER_READY;
-  ship->statet10 = LASER_READY;
+  ship->turret[2].weapon_state = LASER_READY;
+  ship->turret[3].weapon_state = LASER_READY;
+  ship->turret[4].weapon_state = LASER_READY;
+  ship->turret[5].weapon_state = LASER_READY;
+  ship->turret[6].weapon_state = LASER_READY;
+  ship->turret[7].weapon_state = LASER_READY;
+  ship->turret[8].weapon_state = LASER_READY;
+  ship->turret[9].weapon_state = LASER_READY;
   ship->missilestate = LASER_READY;
 
   ship->currjump=NULL;
   ship->target0=NULL;
-  ship->target1=NULL;
-  ship->target2=NULL;
-  ship->target3=NULL;
-  ship->target4=NULL;
-  ship->target5=NULL;
-  ship->target6=NULL;
-  ship->target7=NULL;
-  ship->target8=NULL;
-  ship->target9=NULL;
-  ship->target10=NULL;
+  ship->turret[0].target=NULL;
+  ship->turret[1].target=NULL;
+  ship->turret[2].target=NULL;
+  ship->turret[3].target=NULL;
+  ship->turret[4].target=NULL;
+  ship->turret[5].target=NULL;
+  ship->turret[6].target=NULL;
+  ship->turret[7].target=NULL;
+  ship->turret[8].target=NULL;
+  ship->turret[9].target=NULL;
 
   ship->hatchopen = FALSE;
   ship->bayopen = FALSE;
@@ -2851,16 +2851,16 @@ SHIP_DATA *ship_from_cockpit( int vnum )
   for ( ship = first_ship; ship; ship = ship->next )
     {
       if ( vnum == ship->cockpit
-           || vnum == ship->turret1
-           || vnum == ship->turret2
-           || vnum == ship->turret3
-           || vnum == ship->turret4
-           || vnum == ship->turret5
-           || vnum == ship->turret6
-           || vnum == ship->turret7
-           || vnum == ship->turret8
-           || vnum == ship->turret9
-           || vnum == ship->turret0
+           || vnum == ship->turret[0].room_vnum
+           || vnum == ship->turret[1].room_vnum
+           || vnum == ship->turret[2].room_vnum
+           || vnum == ship->turret[3].room_vnum
+           || vnum == ship->turret[4].room_vnum
+           || vnum == ship->turret[5].room_vnum
+           || vnum == ship->turret[6].room_vnum
+           || vnum == ship->turret[7].room_vnum
+           || vnum == ship->turret[8].room_vnum
+           || vnum == ship->turret[9].room_vnum
            || vnum == ship->hanger
            || vnum == ship->pilotseat
            || vnum == ship->coseat
@@ -2947,16 +2947,16 @@ SHIP_DATA *ship_from_turret( int vnum )
   for ( ship = first_ship; ship; ship = ship->next )
     {
       if ( vnum == ship->gunseat
-           || vnum == ship->turret1
-           || vnum == ship->turret2
-           || vnum == ship->turret3
-           || vnum == ship->turret4
-           || vnum == ship->turret5
-           || vnum == ship->turret6
-           || vnum == ship->turret7
-           || vnum == ship->turret8
-           || vnum == ship->turret9
-           || vnum == ship->turret0 )
+           || vnum == ship->turret[0].room_vnum
+           || vnum == ship->turret[1].room_vnum
+           || vnum == ship->turret[2].room_vnum
+           || vnum == ship->turret[3].room_vnum
+           || vnum == ship->turret[4].room_vnum
+           || vnum == ship->turret[5].room_vnum
+           || vnum == ship->turret[6].room_vnum
+           || vnum == ship->turret[7].room_vnum
+           || vnum == ship->turret[8].room_vnum
+           || vnum == ship->turret[9].room_vnum )
         {
           return ship;
         }
@@ -3158,18 +3158,18 @@ void damage_ship_ch( SHIP_DATA *ship , int min , int max , CHAR_DATA *ch )
       if ( number_range(1, 100) <= 2*ionFactor && ship->statet0 != LASER_DAMAGED )
         {
           echo_to_room( AT_BLOOD + AT_BLINK , get_room_index(ship->gunseat) , "Lasers DAMAGED!" );
-          ship->statet1 = LASER_DAMAGED;
+          ship->turret[0].weapon_state = LASER_DAMAGED;
         }
-      if ( number_range(1, 100) <= 5*ionFactor && ship->statet1 != LASER_DAMAGED && ship->turret1 )
+      if ( number_range(1, 100) <= 5*ionFactor && ship->turret[0].weapon_state != LASER_DAMAGED && ship->turret[0].room_vnum )
         {
-          echo_to_room( AT_BLOOD + AT_BLINK , get_room_index(ship->turret1) , "Turret DAMAGED!" );
-          ship->statet1 = LASER_DAMAGED;
+          echo_to_room( AT_BLOOD + AT_BLINK , get_room_index(ship->turret[0].room_vnum) , "Turret DAMAGED!" );
+          ship->turret[0].weapon_state = LASER_DAMAGED;
         }
 
-      if ( number_range(1, 100) <= 5*ionFactor && ship->statet2 != LASER_DAMAGED && ship->turret2 )
+      if ( number_range(1, 100) <= 5*ionFactor && ship->turret[1].weapon_state != LASER_DAMAGED && ship->turret[1].room_vnum )
         {
-          echo_to_room( AT_BLOOD + AT_BLINK , get_room_index(ship->turret2) , "Turret DAMAGED!" );
-          ship->statet2 = LASER_DAMAGED;
+          echo_to_room( AT_BLOOD + AT_BLINK , get_room_index(ship->turret[1].room_vnum) , "Turret DAMAGED!" );
+          ship->turret[1].weapon_state = LASER_DAMAGED;
         }
       if ( number_range(1, 100) <= 5*ionFactor && ship->statettractor != LASER_DAMAGED && ship->tractorbeam )
         {
@@ -3254,18 +3254,18 @@ void damage_ship( SHIP_DATA *ship , SHIP_DATA *assaulter, int min , int max )
       if ( number_range(1, 100) <= 2*ionFactor && ship->statet0 != LASER_DAMAGED )
         {
           echo_to_room( AT_BLOOD + AT_BLINK , get_room_index(ship->gunseat) , "Lasers DAMAGED!" );
-          ship->statet1 = LASER_DAMAGED;
+          ship->turret[0].weapon_state = LASER_DAMAGED;
         }
-      if ( number_range(1, 100) <= 5*ionFactor && ship->statet1 != LASER_DAMAGED && ship->turret1 )
+      if ( number_range(1, 100) <= 5*ionFactor && ship->turret[0].weapon_state != LASER_DAMAGED && ship->turret[0].room_vnum )
         {
-          echo_to_room( AT_BLOOD + AT_BLINK , get_room_index(ship->turret1) , "Turret DAMAGED!" );
-          ship->statet1 = LASER_DAMAGED;
+          echo_to_room( AT_BLOOD + AT_BLINK , get_room_index(ship->turret[0].room_vnum) , "Turret DAMAGED!" );
+          ship->turret[0].weapon_state = LASER_DAMAGED;
         }
 
-      if ( number_range(1, 100) <= 5*ionFactor && ship->statet2 != LASER_DAMAGED && ship->turret2 )
+      if ( number_range(1, 100) <= 5*ionFactor && ship->turret[1].weapon_state != LASER_DAMAGED && ship->turret[1].room_vnum )
         {
-          echo_to_room( AT_BLOOD + AT_BLINK , get_room_index(ship->turret2) , "Turret DAMAGED!" );
-          ship->statet2 = LASER_DAMAGED;
+          echo_to_room( AT_BLOOD + AT_BLINK , get_room_index(ship->turret[1].room_vnum) , "Turret DAMAGED!" );
+          ship->turret[1].weapon_state = LASER_DAMAGED;
         }
       if ( number_range(1, 100) <= 5*ionFactor && ship->statettractor != LASER_DAMAGED && ship->tractorbeam )
         {

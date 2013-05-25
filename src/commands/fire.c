@@ -557,28 +557,28 @@ void do_fire(CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( ch->in_room->vnum == ship->turret1 && !str_prefix( argument , "lasers") )
+  if ( ch->in_room->vnum == ship->turret[0].room_vnum && !str_prefix( argument , "lasers") )
     {
-      if (ship->statet1 == LASER_DAMAGED)
+      if (ship->turret[0].weapon_state == LASER_DAMAGED)
         {
           send_to_char("&RThe ships turret is damaged.\r\n",ch);
           return;
         }
-      if (ship->statet1 > ship->sclass )
+      if (ship->turret[0].weapon_state > ship->sclass )
         {
           send_to_char("&RThe turbolaser is recharging.\r\n",ch);
           return;
         }
-      if (ship->target1 == NULL )
+      if (ship->turret[0].target == NULL )
         {
           send_to_char("&RYou need to choose a target first.\r\n",ch);
           return;
         }
-      target = ship->target1;
+      target = ship->turret[0].target;
       if (ship->sclass <= SHIP_PLATFORM && !ship_in_range( ship, target) )
         {
           send_to_char("&RYour target seems to have left.\r\n",ch);
-          ship->target1 = NULL;
+          ship->turret[0].target = NULL;
           return;
         }
       if (ship->sclass <= SHIP_PLATFORM)
@@ -590,7 +590,7 @@ void do_fire(CHAR_DATA *ch, char *argument )
             }
         }
 
-      ship->statet1++;
+      ship->turret[0].weapon_state++;
 
       the_chance += target->sclass - CAPITAL_SHIP+1;
       the_chance += ship->currspeed - target->currspeed;
@@ -650,28 +650,28 @@ void do_fire(CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( ch->in_room->vnum == ship->turret2 && !str_prefix( argument , "lasers") )
+  if ( ch->in_room->vnum == ship->turret[1].room_vnum && !str_prefix( argument , "lasers") )
     {
-      if (ship->statet2 == LASER_DAMAGED)
+      if (ship->turret[1].weapon_state == LASER_DAMAGED)
         {
           send_to_char("&RThe ships turret is damaged.\r\n",ch);
           return;
         }
-      if (ship->statet2 > ship->sclass )
+      if (ship->turret[1].weapon_state > ship->sclass )
         {
           send_to_char("&RThe turbolaser is still recharging.\r\n",ch);
           return;
         }
-      if (ship->target2 == NULL )
+      if (ship->turret[1].target == NULL )
         {
           send_to_char("&RYou need to choose a target first.\r\n",ch);
           return;
         }
-      target = ship->target2;
+      target = ship->turret[1].target;
       if (ship->sclass <= SHIP_PLATFORM && !ship_in_range( ship, target ) )
         {
           send_to_char("&RYour target seems to have left.\r\n",ch);
-	  ship->target2 = NULL;
+	  ship->turret[1].target = NULL;
           return;
         }
       if (ship->sclass <= SHIP_PLATFORM)
@@ -683,7 +683,7 @@ void do_fire(CHAR_DATA *ch, char *argument )
             }
         }
 
-      ship->statet2++;
+      ship->turret[1].weapon_state++;
       the_chance += target->sclass - CAPITAL_SHIP+1;
       the_chance += ship->currspeed - target->currspeed;
       the_chance += 100 - target->manuever;
@@ -742,28 +742,28 @@ void do_fire(CHAR_DATA *ch, char *argument )
 
       return;
     }
-  if ( ch->in_room->vnum == ship->turret3 && !str_prefix( argument , "lasers") )
+  if ( ch->in_room->vnum == ship->turret[2].room_vnum && !str_prefix( argument , "lasers") )
     {
-      if (ship->statet3 == LASER_DAMAGED)
+      if (ship->turret[2].weapon_state == LASER_DAMAGED)
         {
           send_to_char("&RThe ships turret is damaged.\r\n",ch);
           return;
         }
-      if (ship->statet3 > ship->sclass )
+      if (ship->turret[2].weapon_state > ship->sclass )
         {
           send_to_char("&RThe turbolaser is still recharging.\r\n",ch);
           return;
         }
-      if (ship->target3 == NULL )
+      if (ship->turret[2].target == NULL )
         {
           send_to_char("&RYou need to choose a target first.\r\n",ch);
           return;
         }
-      target = ship->target3;
+      target = ship->turret[2].target;
       if (!ship_in_range( ship, target)  )
 	{
           send_to_char("&RYour target seems to have left.\r\n",ch);
-          ship->target3 = NULL;
+          ship->turret[2].target = NULL;
           return;
         }
 
@@ -772,7 +772,7 @@ void do_fire(CHAR_DATA *ch, char *argument )
           send_to_char("&RThat ship is out of laser range.\r\n",ch);
           return;
         }
-      ship->statet3++;
+      ship->turret[2].weapon_state++;
 
       the_chance += target->sclass - CAPITAL_SHIP+1;
       the_chance += ship->currspeed - target->currspeed;
@@ -825,28 +825,28 @@ void do_fire(CHAR_DATA *ch, char *argument )
 
       return;
     }
-  if ( ch->in_room->vnum == ship->turret4 && !str_prefix( argument , "lasers") )
+  if ( ch->in_room->vnum == ship->turret[3].room_vnum && !str_prefix( argument , "lasers") )
     {
-      if (ship->statet4 == LASER_DAMAGED)
+      if (ship->turret[3].weapon_state == LASER_DAMAGED)
         {
           send_to_char("&RThe ships turret is damaged.\r\n",ch);
           return;
         }
-      if (ship->statet4 > ship->sclass )
+      if (ship->turret[3].weapon_state > ship->sclass )
         {
           send_to_char("&RThe turbolaser is still recharging.\r\n",ch);
           return;
         }
-      if (ship->target4 == NULL )
+      if (ship->turret[3].target == NULL )
         {
           send_to_char("&RYou need to choose a target first.\r\n",ch);
           return;
         }
-      target = ship->target4;
+      target = ship->turret[3].target;
       if (!ship_in_range( ship, target) )
         {
           send_to_char("&RYour target seems to have left.\r\n",ch);
-          ship->target4 = NULL;
+          ship->turret[3].target = NULL;
           return;
         }
 
@@ -855,7 +855,7 @@ void do_fire(CHAR_DATA *ch, char *argument )
           send_to_char("&RThat ship is out of laser range.\r\n",ch);
           return;
         }
-      ship->statet4++;
+      ship->turret[3].weapon_state++;
 
       the_chance += target->sclass - (CAPITAL_SHIP+1);
       the_chance += ship->currspeed - target->currspeed;
@@ -908,28 +908,28 @@ void do_fire(CHAR_DATA *ch, char *argument )
 
       return;
     }
-  if ( ch->in_room->vnum == ship->turret5 && !str_prefix( argument , "lasers") )
+  if ( ch->in_room->vnum == ship->turret[4].room_vnum && !str_prefix( argument , "lasers") )
     {
-      if (ship->statet5 == LASER_DAMAGED)
+      if (ship->turret[4].weapon_state == LASER_DAMAGED)
         {
           send_to_char("&RThe ships turret is damaged.\r\n",ch);
           return;
         }
-      if (ship->statet5 > ship->sclass )
+      if (ship->turret[4].weapon_state > ship->sclass )
         {
           send_to_char("&RThe turbolaser is still recharging.\r\n",ch);
           return;
         }
-      if (ship->target5 == NULL )
+      if (ship->turret[4].target == NULL )
         {
           send_to_char("&RYou need to choose a target first.\r\n",ch);
           return;
         }
-      target = ship->target5;
+      target = ship->turret[4].target;
       if (!ship_in_range( ship, target) )
         {
           send_to_char("&RYour target seems to have left.\r\n",ch);
-          ship->target5 = NULL;
+          ship->turret[4].target = NULL;
           return;
         }
 
@@ -938,7 +938,7 @@ void do_fire(CHAR_DATA *ch, char *argument )
           send_to_char("&RThat ship is out of laser range.\r\n",ch);
           return;
         }
-      ship->statet5++;
+      ship->turret[4].weapon_state++;
 
       the_chance += target->sclass - (CAPITAL_SHIP+1);
       the_chance += ship->currspeed - target->currspeed;
@@ -991,28 +991,28 @@ void do_fire(CHAR_DATA *ch, char *argument )
 
       return;
     }
-  if ( ch->in_room->vnum == ship->turret6 && !str_prefix( argument , "lasers") )
+  if ( ch->in_room->vnum == ship->turret[5].room_vnum && !str_prefix( argument , "lasers") )
     {
-      if (ship->statet6 == LASER_DAMAGED)
+      if (ship->turret[5].weapon_state == LASER_DAMAGED)
         {
           send_to_char("&RThe ships turret is damaged.\r\n",ch);
           return;
         }
-      if (ship->statet6 > ship->sclass )
+      if (ship->turret[5].weapon_state > ship->sclass )
         {
           send_to_char("&RThe turbolaser is still recharging.\r\n",ch);
           return;
         }
-      if (ship->target6 == NULL )
+      if (ship->turret[5].target == NULL )
         {
           send_to_char("&RYou need to choose a target first.\r\n",ch);
           return;
         }
-      target = ship->target6;
+      target = ship->turret[5].target;
       if (!ship_in_range( ship, target) )
         {
           send_to_char("&RYour target seems to have left.\r\n",ch);
-          ship->target6 = NULL;
+          ship->turret[5].target = NULL;
           return;
         }
 
@@ -1021,7 +1021,7 @@ void do_fire(CHAR_DATA *ch, char *argument )
           send_to_char("&RThat ship is out of laser range.\r\n",ch);
           return;
         }
-      ship->statet6++;
+      ship->turret[5].weapon_state++;
 
       the_chance += target->sclass - (CAPITAL_SHIP+1);
       the_chance += ship->currspeed - target->currspeed;
@@ -1074,28 +1074,28 @@ void do_fire(CHAR_DATA *ch, char *argument )
 
       return;
     }
-  if ( ch->in_room->vnum == ship->turret7 && !str_prefix( argument , "lasers") )
+  if ( ch->in_room->vnum == ship->turret[6].room_vnum && !str_prefix( argument , "lasers") )
     {
-      if (ship->statet7 == LASER_DAMAGED)
+      if (ship->turret[6].weapon_state == LASER_DAMAGED)
         {
           send_to_char("&RThe ships turret is damaged.\r\n",ch);
           return;
         }
-      if (ship->statet7 > ship->sclass )
+      if (ship->turret[6].weapon_state > ship->sclass )
         {
           send_to_char("&RThe turbolaser is still recharging.\r\n",ch);
           return;
         }
-      if (ship->target7 == NULL )
+      if (ship->turret[6].target == NULL )
         {
           send_to_char("&RYou need to choose a target first.\r\n",ch);
           return;
         }
-      target = ship->target7;
+      target = ship->turret[6].target;
       if (!ship_in_range( ship, target) )
         {
           send_to_char("&RYour target seems to have left.\r\n",ch);
-          ship->target7 = NULL;
+          ship->turret[6].target = NULL;
           return;
         }
 
@@ -1105,7 +1105,7 @@ void do_fire(CHAR_DATA *ch, char *argument )
           return;
         }
 
-      ship->statet7++;
+      ship->turret[6].weapon_state++;
 
       the_chance += target->sclass - (CAPITAL_SHIP+1);
       the_chance += ship->currspeed - target->currspeed;
@@ -1159,28 +1159,28 @@ void do_fire(CHAR_DATA *ch, char *argument )
 
       return;
     }
-  if ( ch->in_room->vnum == ship->turret8 && !str_prefix( argument , "lasers") )
+  if ( ch->in_room->vnum == ship->turret[7].room_vnum && !str_prefix( argument , "lasers") )
     {
-      if (ship->statet8 == LASER_DAMAGED)
+      if (ship->turret[7].weapon_state == LASER_DAMAGED)
         {
           send_to_char("&RThe ships turret is damaged.\r\n",ch);
           return;
         }
-      if (ship->statet8 > ship->sclass )
+      if (ship->turret[7].weapon_state > ship->sclass )
         {
           send_to_char("&RThe turbolaser is still recharging.\r\n",ch);
           return;
         }
-      if (ship->target8 == NULL )
+      if (ship->turret[7].target == NULL )
         {
           send_to_char("&RYou need to choose a target first.\r\n",ch);
           return;
         }
-      target = ship->target8;
+      target = ship->turret[7].target;
       if (!ship_in_range( ship, target) )
         {
           send_to_char("&RYour target seems to have left.\r\n",ch);
-          ship->target8 = NULL;
+          ship->turret[7].target = NULL;
           return;
         }
 
@@ -1189,7 +1189,7 @@ void do_fire(CHAR_DATA *ch, char *argument )
           send_to_char("&RThat ship is out of laser range.\r\n",ch);
           return;
         }
-      ship->statet8++;
+      ship->turret[7].weapon_state++;
 
       the_chance += target->sclass - (CAPITAL_SHIP+1);
       the_chance += ship->currspeed - target->currspeed;
@@ -1242,27 +1242,27 @@ void do_fire(CHAR_DATA *ch, char *argument )
 
       return;
     }
-  if ( ch->in_room->vnum == ship->turret9 && !str_prefix( argument , "lasers") )
+  if ( ch->in_room->vnum == ship->turret[8].room_vnum && !str_prefix( argument , "lasers") )
     {
-      if (ship->statet9 == LASER_DAMAGED)
+      if (ship->turret[8].weapon_state == LASER_DAMAGED)
         {
           send_to_char("&RThe ships turret is damaged.\r\n",ch);
           return;
         }
-      if (ship->statet9 > ship->sclass )
+      if (ship->turret[8].weapon_state > ship->sclass )
         {
           send_to_char("&RThe turbolaser is still recharging.\r\n",ch);
           return;
         }
-      if (ship->target9 == NULL )
+      if (ship->turret[8].target == NULL )
         {
 	  return;
         }
-      target = ship->target9;
+      target = ship->turret[8].target;
       if (!ship_in_range( ship, target) )
         {
           send_to_char("&RYour target seems to have left.\r\n",ch);
-          ship->target9 = NULL;
+          ship->turret[8].target = NULL;
           return;
         }
 
@@ -1271,7 +1271,7 @@ void do_fire(CHAR_DATA *ch, char *argument )
           send_to_char("&RThat ship is out of laser range.\r\n",ch);
           return;
         }
-      ship->statet9++;
+      ship->turret[8].weapon_state++;
 
       the_chance += target->sclass - (CAPITAL_SHIP+1);
       the_chance += ship->currspeed - target->currspeed;
@@ -1324,28 +1324,30 @@ void do_fire(CHAR_DATA *ch, char *argument )
 
       return;
     }
-  if ( ch->in_room->vnum == ship->turret0 && !str_prefix( argument , "lasers") )
+  if ( ch->in_room->vnum == ship->turret[9].room_vnum && !str_prefix( argument , "lasers") )
     {
-      if (ship->statet10 == LASER_DAMAGED)
+      if (ship->turret[9].weapon_state == LASER_DAMAGED)
         {
           send_to_char("&RThe ships turret is damaged.\r\n",ch);
           return;
         }
-      if (ship->statet10 > ship->sclass )
+
+      if (ship->turret[9].weapon_state > ship->sclass )
         {
           send_to_char("&RThe turbolaser is still recharging.\r\n",ch);
           return;
         }
-      if (ship->target10 == NULL )
+      if (ship->turret[9].target == NULL )
         {
           send_to_char("&RYou need to choose a target first.\r\n",ch);
           return;
         }
-      target = ship->target10;
+      target = ship->turret[9].target;
+
       if (!ship_in_range( ship, target) )
         {
           send_to_char("&RYour target seems to have left.\r\n",ch);
-	  ship->target10 = NULL;
+	  ship->turret[9].target = NULL;
           return;
         }
 
@@ -1355,7 +1357,7 @@ void do_fire(CHAR_DATA *ch, char *argument )
           return;
         }
 
-      ship->statet10++;
+      ship->turret[9].weapon_state++;
       the_chance += target->sclass - (CAPITAL_SHIP+1);
       the_chance += ship->currspeed - target->currspeed;
       the_chance += 100 - target->manuever;
