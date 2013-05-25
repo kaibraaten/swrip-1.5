@@ -1,3 +1,4 @@
+#include "turret.h"
 #include "ships.h"
 #include "mud.h"
 
@@ -7,6 +8,7 @@ void do_copyship( CHAR_DATA *ch, char *argument )
   SHIP_DATA *old = NULL;
   char arg[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
+  int turret_num = 0;
 
   argument = one_argument( argument, arg );
   argument = one_argument( argument, arg2 );
@@ -28,6 +30,11 @@ void do_copyship( CHAR_DATA *ch, char *argument )
   CREATE( ship, SHIP_DATA, 1 );
   LINK( ship, first_ship, last_ship, next, prev );
 
+  for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
+    {
+      ship->turret[turret_num] = create_turret( ship );
+    }
+
   ship->name            = STRALLOC( argument );
   ship->description     = STRALLOC( "" );
   ship->owner   = STRALLOC( "" );
@@ -43,13 +50,6 @@ void do_copyship( CHAR_DATA *ch, char *argument )
   ship->hyperspeed        = old->hyperspeed  ;
   ship->realspeed        = old->realspeed  ;
   ship->manuever        = old->manuever  ;
-  ship->in_room=NULL;
-  ship->next_in_room=NULL;
-  ship->prev_in_room=NULL;
-  ship->currjump=NULL;
-  ship->target0=NULL;
-  ship->turret[0].target=NULL;
-  ship->turret[1].target=NULL;
 
   ship->filename         = str_dup(arg2);
   save_ship( ship );
