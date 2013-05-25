@@ -1089,11 +1089,15 @@ void do_setship( CHAR_DATA *ch, char *argument )
 
 static bool room_is_in_use( const SHIP_DATA *ship, int room_vnum )
 {
-  bool in_use = FALSE;
-
-  if( room_vnum == ship->hanger )
+  if( room_vnum == ship->hanger
+      || room_vnum == ship->entrance
+      || room_vnum == ship->engineroom
+      || room_vnum == ship->navseat
+      || room_vnum == ship->pilotseat
+      || room_vnum == ship->coseat
+      || room_vnum == ship->gunseat )
     {
-      in_use = TRUE;
+      return TRUE;
     }
   else
     {
@@ -1105,11 +1109,10 @@ static bool room_is_in_use( const SHIP_DATA *ship, int room_vnum )
 
 	  if( get_turret_room( turret ) == room_vnum )
 	    {
-	      in_use = TRUE;
-	      break;
+	      return TRUE;
 	    }
 	}
     }
 
-  return in_use;
+  return FALSE;
 }

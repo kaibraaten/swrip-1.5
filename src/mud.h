@@ -523,15 +523,18 @@ struct ship_data
   int         location;
   int         lastdoc;
   int         shipyard;
+
+  int         firstroom;
+  int         lastroom;
+
   int         entrance;
   int         hanger;
   int         engineroom;
-  int         firstroom;
-  int         lastroom;
   int         navseat;
   int         pilotseat;
   int         coseat;
   int         gunseat;
+
   long        collision;
   SHIP_DATA  *target0; /* target of main weapon systems (ie, not turrest) */
   SHIP_DATA  *tractoredby;
