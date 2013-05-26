@@ -919,7 +919,7 @@ static CHAR_DATA *imc_find_user( const char *name )
    for( d = first_descriptor; d; d = d->next )
    {
       if( ( vch = d->character ? d->character : d->original ) != NULL && !strcasecmp( CH_IMCNAME( vch ), name )
-          && d->connected == CON_PLAYING )
+          && d->connection_state == CON_PLAYING )
          return vch;
    }
    return NULL;
@@ -1768,7 +1768,7 @@ PFUN( imc_recv_emote )
 
    for( d = first_descriptor; d; d = d->next )
    {
-      if( d->connected == CON_PLAYING && ( ch = d->original ? d->original : d->character ) != NULL
+      if( d->connection_state == CON_PLAYING && ( ch = d->original ? d->original : d->character ) != NULL
           && IMCPERM( ch ) >= level )
          imc_printf( ch, "~p[~GIMC~p] %s %s\r\n", imcgetname( q->from ), txt );
    }
@@ -1878,7 +1878,7 @@ static void imc_display_channel( IMC_CHANNEL * c, const char *from, char *txt, i
    {
       ch = d->original ? d->original : d->character;
 
-      if( !ch || d->connected != CON_PLAYING )
+      if( !ch || d->connection_state != CON_PLAYING )
          continue;
 
       /*
@@ -2295,7 +2295,7 @@ static char *imc_assemble_who( void )
    {
       person = d->original ? d->original : d->character;
 
-      if( person && d->connected == CON_PLAYING )
+      if( person && d->connection_state == CON_PLAYING )
       {
          if( IMCPERM( person ) <= IMCPERM_NONE || IMCPERM( person ) >= IMCPERM_IMM )
             continue;
@@ -2330,7 +2330,7 @@ static char *imc_assemble_who( void )
    {
       person = d->original ? d->original : d->character;
 
-      if( person && d->connected == CON_PLAYING )
+      if( person && d->connection_state == CON_PLAYING )
       {
          if( IMCPERM( person ) <= IMCPERM_NONE || IMCPERM( person ) < IMCPERM_IMM )
             continue;

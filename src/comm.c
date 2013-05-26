@@ -453,8 +453,8 @@ void game_loop( )
               FD_CLR( d->descriptor, &in_set  );
               FD_CLR( d->descriptor, &out_set );
               if ( d->character
-                   && ( d->connected == CON_PLAYING
-                        ||   d->connected == CON_EDITING ) )
+                   && ( d->connection_state == CON_PLAYING
+                        ||   d->connection_state == CON_EDITING ) )
                 save_char_obj( d->character );
               d->outtop = 0;
               close_socket( d, TRUE );
@@ -476,7 +476,7 @@ void game_loop( )
             else
               if (( d->character ? d->character->top_level <= LEVEL_IMMORTAL : TRUE) &&
                   ( (!d->character && d->idle > 360)              /* 2 mins */
-                    ||   ( d->connected != CON_PLAYING && d->idle > 1200) /* 5 mins */
+                    ||   ( d->connection_state != CON_PLAYING && d->idle > 1200) /* 5 mins */
                     ||     d->idle > 28800 ))                             /* 2 hrs  */
                 {
                   if( d->character ? d->character->top_level <= LEVEL_IMMORTAL : TRUE)
@@ -501,8 +501,8 @@ void game_loop( )
                         {
                           FD_CLR( d->descriptor, &out_set );
                           if ( d->character
-                               && ( d->connected == CON_PLAYING
-                                    ||   d->connected == CON_EDITING ) )
+                               && ( d->connection_state == CON_PLAYING
+                                    ||   d->connection_state == CON_EDITING ) )
                             save_char_obj( d->character );
                           d->outtop     = 0;
                           close_socket( d, FALSE );
@@ -531,7 +531,7 @@ void game_loop( )
                       if ( d->pager.pagepoint )
                         set_pager_input(d, cmdline);
                       else
-                        switch( d->connected )
+                        switch( d->connection_state )
                           {
                           default:
                             nanny( d, cmdline );
@@ -574,8 +574,8 @@ void game_loop( )
                   if ( !pager_output(d) )
                     {
                       if ( d->character
-                           && ( d->connected == CON_PLAYING
-                                ||   d->connected == CON_EDITING ) )
+                           && ( d->connection_state == CON_PLAYING
+                                ||   d->connection_state == CON_EDITING ) )
                         save_char_obj( d->character );
                       d->outtop = 0;
                       close_socket(d, FALSE);
@@ -584,8 +584,8 @@ void game_loop( )
               else if ( !flush_buffer( d, TRUE ) )
                 {
                   if ( d->character
-                       && ( d->connected == CON_PLAYING
-                            ||   d->connected == CON_EDITING ) )
+                       && ( d->connection_state == CON_PLAYING
+                            ||   d->connection_state == CON_EDITING ) )
                     save_char_obj( d->character );
                   d->outtop     = 0;
                   close_socket( d, FALSE );
@@ -658,12 +658,9 @@ void init_descriptor(DESCRIPTOR_DATA *dnew, socket_t desc)
 {
   dnew->next          = NULL;
   dnew->descriptor    = desc;
-  dnew->connected     = CON_GET_NAME;
+  dnew->connection_state     = CON_GET_NAME;
   dnew->outsize       = 2000;
   dnew->idle          = 0;
-  dnew->lines         = 0;
-  dnew->scrlen        = 24;
-  /*dnew->remote.port          = ntohs( sock.sin_port );*/
   dnew->newstate      = 0;
   dnew->prevcolor     = 0x07;
   dnew->original      = NULL;
@@ -923,8 +920,8 @@ void close_socket( DESCRIPTOR_DATA *dclose, bool force )
         if ( ch->top_level < LEVEL_DEMI )
         to_channel( log_buf, CHANNEL_MONITOR, "Monitor", ch->top_level );
       */
-      if ( dclose->connected == CON_PLAYING
-           ||   dclose->connected == CON_EDITING )
+      if ( dclose->connection_state == CON_PLAYING
+           ||   dclose->connection_state == CON_EDITING )
         {
           act( AT_ACTION, "$n has lost $s link.", ch, NULL, NULL, TO_ROOM );
           ch->desc = NULL;
@@ -1160,7 +1157,7 @@ bool flush_buffer( DESCRIPTOR_DATA *d, bool fPrompt )
   /*
    * Bust a prompt.
    */
-  if ( fPrompt && !mud_down && d->connected == CON_PLAYING )
+  if ( fPrompt && !mud_down && d->connection_state == CON_PLAYING )
     {
       ch = d->original ? d->original : d->character;
       if ( IS_SET(ch->act, PLR_BLANK) )
@@ -1375,7 +1372,7 @@ bool check_reconnect( DESCRIPTOR_DATA *d, char *name, bool fConn )
           if ( fConn && ch->switched )
             {
               write_to_buffer( d, "Already playing.\r\nName: ", 0 );
-              d->connected = CON_GET_NAME;
+              d->connection_state = CON_GET_NAME;
               if ( d->character )
                 {
                   /* clear descriptor pointer to get rid of bug message in log */
@@ -1406,7 +1403,7 @@ bool check_reconnect( DESCRIPTOR_DATA *d, char *name, bool fConn )
                 if ( ch->top_level < LEVEL_SAVIOR )
                 to_channel( log_buf, CHANNEL_MONITOR, "Monitor", ch->top_level );
               */
-              d->connected = CON_PLAYING;
+              d->connection_state = CON_PLAYING;
             }
           return TRUE;
         }
@@ -1483,7 +1480,7 @@ bool check_playing( DESCRIPTOR_DATA *d, char *name, bool kick )
            &&   !str_cmp( name, dold->original
                           ? dold->original->name : dold->character->name ) )
         {
-          cstate = dold->connected;
+          cstate = dold->connection_state;
           ch = dold->original ? dold->original : dold->character;
           if ( !ch->name
                || ( cstate != CON_PLAYING && cstate != CON_EDITING ) )
@@ -1517,7 +1514,7 @@ bool check_playing( DESCRIPTOR_DATA *d, char *name, bool kick )
             if ( ch->top_level < LEVEL_SAVIOR )
             to_channel( log_buf, CHANNEL_MONITOR, "Monitor", ch->top_level );
           */
-          d->connected = cstate;
+          d->connection_state = cstate;
           return TRUE;
         }
     }
@@ -1531,7 +1528,7 @@ void stop_idling( CHAR_DATA *ch )
 {
   if ( !ch
        ||   !ch->desc
-       ||    ch->desc->connected != CON_PLAYING
+       ||    ch->desc->connection_state != CON_PLAYING
        ||   !ch->was_in_room
        ||    ch->in_room != get_room_index( ROOM_VNUM_LIMBO ) )
     return;

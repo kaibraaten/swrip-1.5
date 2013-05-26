@@ -100,7 +100,7 @@ void do_copyover( CHAR_DATA * ch, char *argument )
     CHAR_DATA *och = d->original ? d->original : d->character;
     d_next = d->next;		/* We delete from the list , so need to save this */
 
-    if( !d->character || d->connected != CON_PLAYING )	/* drop those logging on */
+    if( !d->character || d->connection_state != CON_PLAYING )	/* drop those logging on */
     {
       write_to_descriptor( d->descriptor, "\r\nSorry, we are rebooting."
 			   " Come back in a few minutes.\r\n", 0 );
@@ -238,7 +238,7 @@ void copyover_recover( void )
     }
 
     LINK( d, first_descriptor, last_descriptor, next, prev );
-    d->connected = CON_COPYOVER_RECOVER; /* negative so close_socket will cut them off */
+    d->connection_state = CON_COPYOVER_RECOVER; /* negative so close_socket will cut them off */
 
     /* Now, find the pfile */
     fOld = load_char_obj( d, name, FALSE );
@@ -269,7 +269,7 @@ void copyover_recover( void )
       /*load_home( d->character );*/
       act( AT_ACTION, "$n materializes!", d->character, NULL, NULL,
 	  TO_ROOM );
-      d->connected = CON_PLAYING;
+      d->connection_state = CON_PLAYING;
     }
   }
 

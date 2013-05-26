@@ -29,7 +29,7 @@ void do_users( CHAR_DATA *ch, char *argument )
               sprintf( buf,
                        " %3d| %2d|%4d|%6d| %s@%s ",
                        d->descriptor,
-                       d->connected,
+                       d->connection_state,
                        d->idle / 4,
                        d->remote.port,
                        d->original  ? d->original->name  :
@@ -52,7 +52,7 @@ void do_users( CHAR_DATA *ch, char *argument )
               pager_printf( ch,
                             " %3d| %2d|%4d|%6d| %-12s@%-16s ",
                             d->descriptor,
-                            d->connected,
+                            d->connection_state,
                             d->idle / 4,
                             d->remote.port,
                             d->original  ? d->original->name  :

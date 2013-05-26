@@ -557,7 +557,7 @@ static void show_char_to_char_0( CHAR_DATA *victim, CHAR_DATA *ch )
     strcat( buf, "(LITTERBUG) "  );
   if ( is_npc(victim) && is_immortal(ch)
        && IS_SET(victim->act, ACT_PROTOTYPE) ) strcat( buf, "(PROTO) " );
-  if ( victim->desc && victim->desc->connected == CON_EDITING )
+  if ( victim->desc && victim->desc->connection_state == CON_EDITING )
     strcat( buf, "(Writing) " );
 
   set_char_color( AT_PERSON, ch );

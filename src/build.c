@@ -215,7 +215,7 @@ void start_editing( CHAR_DATA *ch, char *data )
   edit->size = size;
   edit->on_line = lines;
   ch->editor = edit;
-  ch->desc->connected = CON_EDITING;
+  ch->desc->connection_state = CON_EDITING;
 }
 
 char *copy_buffer( CHAR_DATA *ch )
@@ -265,7 +265,7 @@ void stop_editing( CHAR_DATA *ch )
       bug( "Fatal: stop_editing: no desc", 0 );
       return;
     }
-  ch->desc->connected = CON_PLAYING;
+  ch->desc->connection_state = CON_PLAYING;
 }
 
 /*
@@ -286,10 +286,10 @@ void edit_buffer( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( d->connected != CON_EDITING )
+  if ( d->connection_state != CON_EDITING )
     {
       send_to_char( "You can't do that!\r\n", ch );
-      bug( "Edit_buffer: d->connected != CON_EDITING", 0 );
+      bug( "Edit_buffer: d->connection_state != CON_EDITING", 0 );
       return;
     }
 
@@ -297,7 +297,7 @@ void edit_buffer( CHAR_DATA *ch, char *argument )
     {
       send_to_char( "You can't do that!\r\n", ch );
       bug( "Edit_buffer: illegal ch->substate (%d)", ch->substate );
-      d->connected = CON_PLAYING;
+      d->connection_state = CON_PLAYING;
       return;
     }
 
@@ -305,7 +305,7 @@ void edit_buffer( CHAR_DATA *ch, char *argument )
     {
       send_to_char( "You can't do that!\r\n", ch );
       bug( "Edit_buffer: null editor", 0 );
-      d->connected = CON_PLAYING;
+      d->connection_state = CON_PLAYING;
       return;
     }
 
@@ -578,7 +578,7 @@ void edit_buffer( CHAR_DATA *ch, char *argument )
         }
       if ( !str_cmp( cmd+1, "s" ) )
         {
-          d->connected = CON_PLAYING;
+          d->connection_state = CON_PLAYING;
           if ( !ch->last_cmd )
             return;
           (*ch->last_cmd) ( ch, "" );
@@ -638,7 +638,7 @@ void edit_buffer( CHAR_DATA *ch, char *argument )
 
   if ( save )
     {
-      d->connected = CON_PLAYING;
+      d->connection_state = CON_PLAYING;
       if ( !ch->last_cmd )
         return;
       (*ch->last_cmd) ( ch, "" );

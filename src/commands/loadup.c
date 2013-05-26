@@ -27,7 +27,7 @@ void do_loadup( CHAR_DATA *ch, char *argument )
       CREATE( d, DESCRIPTOR_DATA, 1 );
       d->next = NULL;
       d->prev = NULL;
-      d->connected = CON_GET_NAME;
+      d->connection_state = CON_GET_NAME;
       d->outsize = 2000;
       CREATE( d->outbuf, char, d->outsize );
 

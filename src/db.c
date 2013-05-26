@@ -2927,7 +2927,7 @@ void log_string_plus( const char *str, short log_type, short level )
 	      continue;
 	    }
 
-	  if ( d->connected == CON_PLAYING
+	  if ( d->connection_state == CON_PLAYING
 	       && !IS_SET(och->deaf, CHANNEL_LOG)
 	       && vch->top_level >= level )
 	    {

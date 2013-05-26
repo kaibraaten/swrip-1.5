@@ -368,7 +368,7 @@ void talk_channel( CHAR_DATA *ch, const char *argument, int channel, const char 
       och = d->original ? d->original : d->character;
       vch = d->character;
 
-      if ( d->connected == CON_PLAYING
+      if ( d->connection_state == CON_PLAYING
            &&   vch != ch
            &&  !IS_SET(och->deaf, channel) )
         {
@@ -514,7 +514,7 @@ void to_channel( const char *argument, int channel, const char *verb, short leve
                 && ( channel == CHANNEL_LOG || channel == CHANNEL_COMM) ) )
         continue;
 
-      if ( d->connected == CON_PLAYING
+      if ( d->connection_state == CON_PLAYING
            &&  !IS_SET(och->deaf, channel)
            &&   vch->top_level >= level )
         {
@@ -637,7 +637,7 @@ void talk_auction (const char *argument)
   for (d = first_descriptor; d; d = d->next)
     {
       original = d->original ? d->original : d->character; /* if switched */
-      if ((d->connected == CON_PLAYING) && !IS_SET(original->deaf,CHANNEL_AUCTION)
+      if ((d->connection_state == CON_PLAYING) && !IS_SET(original->deaf,CHANNEL_AUCTION)
           && !IS_SET(original->in_room->room_flags, ROOM_SILENCE) && !is_not_authed(original))
         act( AT_GOSSIP, buf, original, NULL, NULL, TO_CHAR );
     }

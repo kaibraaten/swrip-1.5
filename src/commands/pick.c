@@ -152,7 +152,7 @@ void do_pick( CHAR_DATA *ch, char *argument )
             {
               CHAR_DATA *victim = d->original ? d->original : d->character;
 
-              if ( d->connected != CON_PLAYING )
+              if ( d->connection_state != CON_PLAYING )
                 continue;
 
               if ( !check_pilot(victim,ship) )
@@ -173,7 +173,7 @@ void do_pick( CHAR_DATA *ch, char *argument )
               if ( !is_awake(victim) || IS_SET(victim->in_room->room_flags,ROOM_SILENCE) )
                 continue;
 
-              if ( d->connected == CON_EDITING )
+              if ( d->connection_state == CON_EDITING )
                 continue;
 
               ch_printf(victim,"&R[alarm] Attempt to pick %s.\r\n",ship->name);
@@ -196,7 +196,7 @@ void do_pick( CHAR_DATA *ch, char *argument )
             {
               CHAR_DATA *victim = d->original ? d->original : d->character;
 
-              if ( d->connected != CON_PLAYING )
+              if ( d->connection_state != CON_PLAYING )
                 continue;
 
               if ( !check_pilot(victim,ship) )
@@ -217,7 +217,7 @@ void do_pick( CHAR_DATA *ch, char *argument )
               if ( !is_awake(victim) || IS_SET(victim->in_room->room_flags,ROOM_SILENCE) )
                 continue;
 
-              if ( d->connected == CON_EDITING )
+              if ( d->connection_state == CON_EDITING )
                 continue;
 
               ch_printf(victim,"&R[alarm] %s has been picked!\r\n",ship->name);

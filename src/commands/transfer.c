@@ -22,7 +22,7 @@ void do_transfer( CHAR_DATA *ch, char *argument )
     {
       for ( d = first_descriptor; d; d = d->next )
         {
-          if ( d->connected == CON_PLAYING
+          if ( d->connection_state == CON_PLAYING
                && d->character != ch
                && d->character->in_room
                && d->newstate != 2

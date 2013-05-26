@@ -1059,9 +1059,9 @@ void update_taxes( void )
 
   for ( d = first_descriptor; d; d = d->next )
     {
-      if ( d && d->character && d->character->pcdata && d->connected == CON_PLAYING ) /* Interest */
+      if ( d && d->character && d->character->pcdata && d->connection_state == CON_PLAYING ) /* Interest */
         d->character->pcdata->bank *= 1.0071428571428571;
-      if ( ( d->connected == CON_PLAYING )
+      if ( ( d->connection_state == CON_PLAYING )
            &&   ( d->character->pcdata->salary > 0 )
            &&   ( d->character->pcdata->clan )
            &&   ( d->character->pcdata->clan->funds >= d->character->pcdata->salary ) )
@@ -1140,7 +1140,7 @@ void weather_update( void )
     {
       for ( d = first_descriptor; d; d = d->next )
         {
-          if ( d->connected == CON_PLAYING
+          if ( d->connection_state == CON_PLAYING
                &&   IS_OUTSIDE(d->character)
                &&   is_awake(d->character)
                &&   d->character->in_room
@@ -1235,7 +1235,7 @@ void weather_update( void )
     {
       for ( d = first_descriptor; d; d = d->next )
         {
-          if ( d->connected == CON_PLAYING
+          if ( d->connection_state == CON_PLAYING
                &&   IS_OUTSIDE(d->character)
                &&   is_awake(d->character) )
             act( AT_TEMP, buf, d->character, 0, 0, TO_CHAR );
@@ -2039,7 +2039,7 @@ void aggr_update( void )
   /*    for ( d = first_descriptor; d; d = dnext )
         {
         dnext = d->next;
-        if ( d->connected != CON_PLAYING || (wch=d->character) == NULL )
+        if ( d->connection_state != CON_PLAYING || (wch=d->character) == NULL )
         continue;
   */
   for( ch = first_char; ch; ch = wch_next )

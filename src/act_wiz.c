@@ -51,7 +51,7 @@ void echo_to_all( short AT_COLOR, const char *argument, short tar )
     {
       /* Added showing echoes to players who are editing, so they won't
          miss out on important info like upcoming reboots. --Narn */
-      if ( d->connected == CON_PLAYING || d->connected == CON_EDITING )
+      if ( d->connection_state == CON_PLAYING || d->connection_state == CON_EDITING )
         {
           /* This one is kinda useless except for switched.. */
           if ( tar == ECHOTAR_PC && is_npc(d->character) )

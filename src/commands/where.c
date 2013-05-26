@@ -25,7 +25,7 @@ void do_where( CHAR_DATA *ch, char *argument )
         pager_printf( ch, "Players near you in %s:\r\n", ch->in_room->area->name );
       found = FALSE;
       for ( d = first_descriptor; d; d = d->next )
-        if ( (d->connected == CON_PLAYING || d->connected == CON_EDITING )
+        if ( (d->connection_state == CON_PLAYING || d->connection_state == CON_EDITING )
              && ( victim = d->character ) != NULL
              &&   !is_npc(victim)
              &&   victim->in_room

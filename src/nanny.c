@@ -47,10 +47,10 @@ void nanny( DESCRIPTOR_DATA *d, char *argument )
   while ( isspace(*argument) )
     argument++;
 
-  switch ( d->connected )
+  switch ( d->connection_state )
     {
     default:
-      bug( "Nanny: bad d->connected %d.", d->connected );
+      bug( "Nanny: bad d->connection_state %d.", d->connection_state );
       close_socket( d, TRUE );
       return;
 
@@ -153,7 +153,7 @@ static void nanny_get_name( DESCRIPTOR_DATA *d, char *argument )
  "another one.\r\n\r\nPlease choose a name for your character: ");
 	  write_to_buffer( d, buf, 0 );
 	  d->newstate++;
-	  d->connected = CON_GET_NAME;
+	  d->connection_state = CON_GET_NAME;
 	  return;
 	}
       else
@@ -203,7 +203,7 @@ static void nanny_get_name( DESCRIPTOR_DATA *d, char *argument )
       if (d->newstate != 0)
 	{
 	  write_to_buffer( d, "That name is already taken. Please choose another: ", 0 );
-	  d->connected = CON_GET_NAME;
+	  d->connection_state = CON_GET_NAME;
 	  return;
 	}
 
@@ -239,14 +239,14 @@ static void nanny_get_name( DESCRIPTOR_DATA *d, char *argument )
       if (d->newstate != 0)
 	{
 	  write_to_buffer( d, "That name is already taken. Please choose another: ", 0 );
-	  d->connected = CON_GET_NAME;
+	  d->connection_state = CON_GET_NAME;
 	  return;
 	}
 
       /* Old player */
       write_to_buffer( d, "Password: ", 0 );
       write_to_buffer( d, echo_off_str, 0 );
-      d->connected = CON_GET_OLD_PASSWORD;
+      d->connection_state = CON_GET_OLD_PASSWORD;
       return;
     }
   else
@@ -255,7 +255,7 @@ static void nanny_get_name( DESCRIPTOR_DATA *d, char *argument )
 	write_to_buffer( d, "\r\nThat name is unacceptable, please choose a\
 nother.\r\n", 0);
 	write_to_buffer( d, "Name: ",0);
-	d->connected = CON_GET_NAME;
+	d->connection_state = CON_GET_NAME;
 	return;
       }
 
@@ -263,7 +263,7 @@ nother.\r\n", 0);
  here.\r\n\r\n", 0 );
       sprintf( buf, "Did I get that right, %s (Y/N)? ", argument );
       write_to_buffer( d, buf, 0 );
-      d->connected = CON_CONFIRM_NEW_NAME;
+      d->connection_state = CON_CONFIRM_NEW_NAME;
       return;
     }
 }
@@ -334,7 +334,7 @@ static void nanny_get_old_password( DESCRIPTOR_DATA *d, char *argument )
     }
 
   write_to_buffer( d, "Press enter...\r\n", 0 );
-  d->connected = CON_PRESS_ENTER;
+  d->connection_state = CON_PRESS_ENTER;
 
   if ( ch->pcdata->area )
     {
@@ -354,7 +354,7 @@ static void nanny_confirm_new_name( DESCRIPTOR_DATA *d, char *argument )
 	       "\r\nPick a good password for %s: %s",
 	       ch->name, echo_off_str );
       write_to_buffer( d, buf, 0 );
-      d->connected = CON_GET_NEW_PASSWORD;
+      d->connection_state = CON_GET_NEW_PASSWORD;
       break;
 
     case 'n': case 'N':
@@ -363,7 +363,7 @@ static void nanny_confirm_new_name( DESCRIPTOR_DATA *d, char *argument )
       d->character->desc = NULL;
       free_char( d->character );
       d->character = NULL;
-      d->connected = CON_GET_NAME;
+      d->connection_state = CON_GET_NAME;
       break;
 
     default:
@@ -399,7 +399,7 @@ static void nanny_get_new_password( DESCRIPTOR_DATA *d, char *argument )
   DISPOSE( ch->pcdata->pwd );
   ch->pcdata->pwd   = str_dup( pwdnew );
   write_to_buffer( d, "\r\nPlease retype the password to confirm: ", 0 );
-  d->connected = CON_CONFIRM_NEW_PASSWORD;
+  d->connection_state = CON_CONFIRM_NEW_PASSWORD;
 }
 
 static void nanny_confirm_new_password( DESCRIPTOR_DATA *d, char *argument )
@@ -411,13 +411,13 @@ static void nanny_confirm_new_password( DESCRIPTOR_DATA *d, char *argument )
   if ( str_cmp( encode_string( argument ), ch->pcdata->pwd ) )
     {
       write_to_buffer( d, "Passwords don't match.\r\nRetype password: ", 0 );
-      d->connected = CON_GET_NEW_PASSWORD;
+      d->connection_state = CON_GET_NEW_PASSWORD;
       return;
     }
 
   write_to_buffer( d, echo_on_str, 0 );
   write_to_buffer( d, "\r\nWhat is your sex (M/F/N)? ", 0 );
-  d->connected = CON_GET_NEW_SEX;
+  d->connection_state = CON_GET_NEW_SEX;
 }
 
 static void nanny_get_new_sex( DESCRIPTOR_DATA *d, char *argument )
@@ -482,7 +482,7 @@ static void nanny_get_new_sex( DESCRIPTOR_DATA *d, char *argument )
 
   strcat( buf, ": " );
   write_to_buffer( d, buf, 0 );
-  d->connected = CON_GET_NEW_RACE;
+  d->connection_state = CON_GET_NEW_RACE;
 }
 
 static void nanny_get_new_race( DESCRIPTOR_DATA *d, char *argument )
@@ -562,7 +562,7 @@ static void nanny_get_new_race( DESCRIPTOR_DATA *d, char *argument )
 
   strcat( buf, ": " );
   write_to_buffer( d, buf, 0 );
-  d->connected = CON_GET_NEW_CLASS;
+  d->connection_state = CON_GET_NEW_CLASS;
 }
 
 static void nanny_get_new_class( DESCRIPTOR_DATA *d, char *argument )
@@ -619,7 +619,7 @@ static void nanny_get_new_class( DESCRIPTOR_DATA *d, char *argument )
 
   write_to_buffer( d, buf, 0 );
   write_to_buffer( d, "\r\nAre these stats OK, (Y/N)? ", 0 );
-  d->connected = CON_STATS_OK;
+  d->connection_state = CON_STATS_OK;
 }
 
 static void nanny_stats_ok( DESCRIPTOR_DATA *d, char *argument )
@@ -662,7 +662,7 @@ static void nanny_stats_ok( DESCRIPTOR_DATA *d, char *argument )
     }
 
   write_to_buffer( d, "\r\nWould you like ANSI color support, (Y/N)? ", 0 );
-  d->connected = CON_GET_WANT_RIPANSI;
+  d->connection_state = CON_GET_WANT_RIPANSI;
 }
 
 static void nanny_get_want_ansi( DESCRIPTOR_DATA *d, char *argument )
@@ -686,7 +686,7 @@ static void nanny_get_want_ansi( DESCRIPTOR_DATA *d, char *argument )
     }
 
   write_to_buffer( d, "Does your mud client have the Mud Sound Protocol, (Y/N)? ", 0);
-  d->connected = CON_GET_MSP;
+  d->connection_state = CON_GET_MSP;
 }
 
 static void nanny_get_msp( DESCRIPTOR_DATA *d, char *argument )
@@ -716,7 +716,7 @@ static void nanny_get_msp( DESCRIPTOR_DATA *d, char *argument )
   to_channel( log_buf, CHANNEL_MONITOR, "Monitor", LEVEL_IMMORTAL );
   write_to_buffer( d, "Press [ENTER] ", 0 );
   write_to_buffer( d, "Press enter...\r\n", 0 );
-  d->connected = CON_PRESS_ENTER;
+  d->connection_state = CON_PRESS_ENTER;
 
   for ( ability =0 ; ability < MAX_ABILITY ; ability++ )
     {
@@ -725,7 +725,7 @@ static void nanny_get_msp( DESCRIPTOR_DATA *d, char *argument )
 
   ch->top_level = 0;
   ch->position = POS_STANDING;
-  d->connected = CON_PRESS_ENTER;
+  d->connection_state = CON_PRESS_ENTER;
 }
 
 static void nanny_press_enter( DESCRIPTOR_DATA *d, char *argument )
@@ -765,7 +765,7 @@ static void nanny_press_enter( DESCRIPTOR_DATA *d, char *argument )
     }
 
   send_to_pager( "\r\n&WPress [ENTER] &Y", ch );
-  d->connected = CON_READ_MOTD;
+  d->connection_state = CON_READ_MOTD;
 }
 
 static void nanny_read_motd( DESCRIPTOR_DATA *d, char *argument )
@@ -775,7 +775,7 @@ static void nanny_read_motd( DESCRIPTOR_DATA *d, char *argument )
 
   write_to_buffer( d, "\r\nWelcome to Rise in Power...\r\n\r\n", 0 );
   add_char( ch );
-  d->connected      = CON_PLAYING;
+  d->connection_state      = CON_PLAYING;
 
   if ( !is_npc(ch) && IS_SET( ch->act , PLR_SOUND ) )
     {

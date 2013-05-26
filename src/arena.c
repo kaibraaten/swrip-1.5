@@ -130,7 +130,7 @@ void start_game()
   DESCRIPTOR_DATA *d;
 
   for (d = first_descriptor; d; d = d->next)
-    if (!d->connected)
+    if (!d->connection_state)
       {
         i = d->character;
         if (i == NULL)
@@ -287,7 +287,7 @@ void do_end_game()
   DESCRIPTOR_DATA *d;
 
   for (d = first_descriptor; d; d = d->next)
-    if (!d->connected)
+    if (!d->connection_state)
       {
         i = d->character;
 
@@ -395,7 +395,7 @@ void find_bet_winners(CHAR_DATA *winner)
   char buf1[MAX_INPUT_LENGTH];
 
   for (d = first_descriptor; d; d = d->next)
-    if (!d->connected)
+    if (!d->connection_state)
       {
         wch = d->original ? d->original : d->character;
 

@@ -123,7 +123,7 @@ void do_comment( CHAR_DATA *ch, char *argument )
 
   /* Put in to prevent crashing when someone issues a comment command
      from within the editor. -Narn */
-  if ( ch->desc->connected == CON_EDITING )
+  if ( ch->desc->connection_state == CON_EDITING )
     {
       send_to_char("You can't use the comment command from within the editor.\r\n", ch);
       return;

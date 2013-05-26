@@ -129,10 +129,8 @@ struct descriptor_data
   } remote;
 
   socket_t  descriptor;
-  short     connected;
+  short     connection_state;
   short     idle;
-  short     lines;
-  short     scrlen;
   bool      fcommand;
   char      inbuf[MAX_INBUF_SIZE];
   char      incomm[MAX_INPUT_LENGTH];

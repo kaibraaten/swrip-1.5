@@ -216,7 +216,7 @@ void do_who( CHAR_DATA *ch, char *argument )
       char const *race;
       char force_char = ' ';
 
-      if ( (d->connected != CON_PLAYING && d->connected != CON_EDITING)
+      if ( (d->connection_state != CON_PLAYING && d->connection_state != CON_EDITING)
            || ( !can_see( ch, d->character ) && is_immortal( d->character ) )
            || d->original)
         continue;
