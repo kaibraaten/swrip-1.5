@@ -925,19 +925,19 @@ struct obj_data
   char             *short_descr;
   char             *description;
   char             *action_desc;
-  short            item_type;
-  int              extra_flags;
-  int              magic_flags; /*Need more bitvectors for spells - Scryn*/
-  int              wear_flags;
-  int              blaster_setting;
-  short            wear_loc;
-  short            weight;
-  int              cost;
-  short            level;
-  short            timer;
-  int              value[6];
-  short            count;          /* support for object grouping */
-  int              serial;         /* serial number               */
+  short             item_type;
+  int               extra_flags;
+  int               magic_flags; /*Need more bitvectors for spells - Scryn*/
+  int               wear_flags;
+  int               blaster_setting;
+  short             wear_loc;
+  short             weight;
+  int               cost;
+  short             level;
+  short             timer;
+  int               value[6];
+  short             count;          /* support for object grouping */
+  int               serial;         /* serial number               */
 
   struct
   {
@@ -1152,7 +1152,7 @@ struct teleport_data
   TELEPORT_DATA   *next;
   TELEPORT_DATA   *prev;
   ROOM_INDEX_DATA *room;
-  short           timer;
+  short            timer;
 };
 
 struct timerset
@@ -1205,7 +1205,7 @@ struct skill_type
   char      *components;             /* Spell components, if any     */
   char      *teachers;               /* Skill requires a special teacher */
   char       participants;           /* # of required participants   */
-  struct     timerset        userec; /* Usage record                 */
+  struct timerset userec; /* Usage record                 */
   int        alignment;              /* for jedi powers */
 };
 
@@ -1578,86 +1578,78 @@ extern int cur_qchars;
 extern long long high_galaxy_cash;
 extern long long low_galaxy_cash;
 
-extern          CMDTYPE           *     command_hash    [126];
+extern CMDTYPE              *command_hash[126];
+extern SKILLTYPE            *skill_table[MAX_SKILL];
+extern SOCIALTYPE           *social_index[27];
+extern CHAR_DATA            *cur_char;
+extern ROOM_INDEX_DATA      *cur_room;
+extern bool                  cur_char_died;
+extern ch_ret                global_retcode;
+extern SKILLTYPE            *herb_table[MAX_HERB];
 
-extern          SKILLTYPE         *     skill_table     [MAX_SKILL];
-extern          SOCIALTYPE        *     social_index    [27];
-extern          CHAR_DATA         *     cur_char;
-extern          ROOM_INDEX_DATA   *     cur_room;
-extern          bool                    cur_char_died;
-extern          ch_ret                  global_retcode;
-extern          SKILLTYPE         *     herb_table      [MAX_HERB];
+extern int                   cur_obj;
+extern int                   cur_obj_serial;
+extern bool                  cur_obj_extracted;
+extern obj_ret               global_objcode;
 
-extern          int                     cur_obj;
-extern          int                     cur_obj_serial;
-extern          bool                    cur_obj_extracted;
-extern          obj_ret                 global_objcode;
-
-extern          HELP_DATA         *     first_help;
-extern          HELP_DATA         *     last_help;
-extern          SHOP_DATA         *     first_shop;
-extern          SHOP_DATA         *     last_shop;
-extern          REPAIR_DATA       *     first_repair;
-extern          REPAIR_DATA       *     last_repair;
-
-extern          BAN_DATA          *     first_ban;
-extern          BAN_DATA          *     last_ban;
-extern          CHAR_DATA         *     first_char;
-extern          CHAR_DATA         *     last_char;
-extern          DESCRIPTOR_DATA   *     first_descriptor;
-extern          DESCRIPTOR_DATA   *     last_descriptor;
-extern          BOARD_DATA        *     first_board;
-extern          BOARD_DATA        *     last_board;
-extern          OBJ_DATA          *     first_object;
-extern          OBJ_DATA          *     last_object;
-extern          CLAN_DATA         *     first_clan;
-extern          CLAN_DATA         *     last_clan;
-extern          MEMBER_LIST       *     first_member_list;
-extern          MEMBER_LIST       *     last_member_list;
-extern          GUARD_DATA        *     first_guard;
-extern          GUARD_DATA        *     last_guard;
-extern          SHIP_DATA         *     first_ship;
-extern          SHIP_DATA         *     last_ship;
-extern          MISSILE_DATA      *     first_missile;
-extern          MISSILE_DATA      *     last_missile;
-extern          SPACE_DATA        *     first_spaceobject;
-extern          SPACE_DATA        *     last_spaceobject;
-extern          PLANET_DATA       *     first_planet;
-extern          PLANET_DATA       *     last_planet;
-extern          BOUNTY_DATA       *     first_bounty;
-extern          BOUNTY_DATA       *     last_bounty;
-extern          BOUNTY_DATA       *     first_disintegration;
-extern          BOUNTY_DATA       *     last_disintegration;
-extern          AREA_DATA         *     first_area;
-extern          AREA_DATA         *     last_area;
-extern          AREA_DATA         *     first_build;
-extern          AREA_DATA         *     last_build;
-extern          AREA_DATA         *     first_asort;
-extern          AREA_DATA         *     last_asort;
-extern          AREA_DATA         *     first_bsort;
-extern          AREA_DATA         *     last_bsort;
-/*
-  extern                GOD_DATA          *     first_imm;
-  extern                GOD_DATA          *     last_imm;
-*/
-extern          TELEPORT_DATA     *     first_teleport;
-extern          TELEPORT_DATA     *     last_teleport;
-extern          OBJ_DATA          *     extracted_obj_queue;
-extern          EXTRACT_CHAR_DATA *     extracted_char_queue;
-extern          OBJ_DATA          *     save_equipment[MAX_WEAR][MAX_LAYERS];
-extern          CHAR_DATA         *     quitting_char;
-extern          CHAR_DATA         *     loading_char;
-extern          CHAR_DATA         *     saving_char;
-extern          OBJ_DATA          *     all_obj;
-
-extern          time_t                  current_time;
-extern          bool                    fLogAll;
-extern          char                    log_buf         [];
-extern          TIME_INFO_DATA          time_info;
-extern          WEATHER_DATA            weather_info;
-
-extern          AUCTION_DATA      *     auction;
-extern          struct act_prog_data *  mob_act_list;
+extern HELP_DATA            *first_help;
+extern HELP_DATA            *last_help;
+extern SHOP_DATA            *first_shop;
+extern SHOP_DATA            *last_shop;
+extern REPAIR_DATA          *first_repair;
+extern REPAIR_DATA          *last_repair;
+extern BAN_DATA             *first_ban;
+extern BAN_DATA             *last_ban;
+extern CHAR_DATA            *first_char;
+extern CHAR_DATA            *last_char;
+extern DESCRIPTOR_DATA      *first_descriptor;
+extern DESCRIPTOR_DATA      *last_descriptor;
+extern BOARD_DATA           *first_board;
+extern BOARD_DATA           *last_board;
+extern OBJ_DATA             *first_object;
+extern OBJ_DATA             *last_object;
+extern CLAN_DATA            *first_clan;
+extern CLAN_DATA            *last_clan;
+extern MEMBER_LIST          *first_member_list;
+extern MEMBER_LIST          *last_member_list;
+extern GUARD_DATA           *first_guard;
+extern GUARD_DATA           *last_guard;
+extern SHIP_DATA            *first_ship;
+extern SHIP_DATA            *last_ship;
+extern MISSILE_DATA         *first_missile;
+extern MISSILE_DATA         *last_missile;
+extern SPACE_DATA           *first_spaceobject;
+extern SPACE_DATA           *last_spaceobject;
+extern PLANET_DATA          *first_planet;
+extern PLANET_DATA          *last_planet;
+extern BOUNTY_DATA          *first_bounty;
+extern BOUNTY_DATA          *last_bounty;
+extern BOUNTY_DATA          *first_disintegration;
+extern BOUNTY_DATA          *last_disintegration;
+extern AREA_DATA            *first_area;
+extern AREA_DATA            *last_area;
+extern AREA_DATA            *first_build;
+extern AREA_DATA            *last_build;
+extern AREA_DATA            *first_asort;
+extern AREA_DATA            *last_asort;
+extern AREA_DATA            *first_bsort;
+extern AREA_DATA            *last_bsort;
+extern TELEPORT_DATA        *first_teleport;
+extern TELEPORT_DATA        *last_teleport;
+extern OBJ_DATA             *extracted_obj_queue;
+extern EXTRACT_CHAR_DATA    *extracted_char_queue;
+extern OBJ_DATA             *save_equipment[MAX_WEAR][MAX_LAYERS];
+extern CHAR_DATA            *quitting_char;
+extern CHAR_DATA            *loading_char;
+extern CHAR_DATA            *saving_char;
+extern OBJ_DATA             *all_obj;
+extern time_t                current_time;
+extern bool                  fLogAll;
+extern char                  log_buf         [];
+extern TIME_INFO_DATA        time_info;
+extern WEATHER_DATA          weather_info;
+extern AUCTION_DATA         *auction;
+extern struct act_prog_data *mob_act_list;
 
 /*
  * Command functions.
