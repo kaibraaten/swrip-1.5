@@ -78,7 +78,6 @@ void write_clan_list( void )
       fprintf( fpout, "%s\n", tclan->filename );
     }
 
-
   fprintf( fpout, "$\n" );
   fclose( fpout );
 }

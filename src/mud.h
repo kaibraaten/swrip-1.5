@@ -572,14 +572,6 @@ struct missile_data
   Vector3 head;
 };
 
-
-struct tourney_data
-{
-  int    open;
-  int    low_level;
-  int    hi_level;
-};
-
 /*
  * Data structure for notes.
  */
@@ -622,38 +614,38 @@ struct  board_data
 /*
  * An affect.
  */
-struct  affect_data
+struct affect_data
 {
-  AFFECT_DATA * next;
-  AFFECT_DATA * prev;
-  short         type;
-  short         duration;
-  short         location;
-  int                   modifier;
-  int                   bitvector;
+  AFFECT_DATA *next;
+  AFFECT_DATA *prev;
+  short        type;
+  short        duration;
+  short        location;
+  int          modifier;
+  int          bitvector;
 };
 
 
 /*
  * A SMAUG spell
  */
-struct  smaug_affect
+struct smaug_affect
 {
-  SMAUG_AFF *           next;
-  char *                duration;
-  short         location;
-  char *                modifier;
-  int                   bitvector;
+  SMAUG_AFF *next;
+  char      *duration;
+  short      location;
+  char      *modifier;
+  int        bitvector;
 };
 
 struct timer_data
 {
-  TIMER  *      prev;
-  TIMER  *      next;
-  DO_FUN *      do_fun;
-  int           value;
-  short type;
-  short count;
+  TIMER  *prev;
+  TIMER  *next;
+  DO_FUN *do_fun;
+  int     value;
+  short   type;
+  short   count;
 };
 
 /*
@@ -784,69 +776,68 @@ struct killed_data
  */
 struct pc_data
 {
-  CLAN_DATA *           clan;
-  AREA_DATA *           area;
-  char *                homepage;
-  char *                clan_name;
-  char *                pwd;
-  char *                email;
-  char *                bamfin;
-  char *                bamfout;
-  char *              rank;
-  char *                title;
-  char *                bestowments;    /* Special bestowed commands       */
-  int                 flags;            /* Whether the player is deadly and whatever else we add.      */
-  int                   pkills;         /* Number of pkills on behalf of clan */
-  int                   pdeaths;        /* Number of times pkilled (legally)  */
-  int                   mkills;         /* Number of mobs killed                   */
-  int                   mdeaths;        /* Number of deaths due to mobs       */
-  int                   illegal_pk;     /* Number of illegal pk's committed   */
-  long int            outcast_time;     /* The time at which the char was outcast */
-  long int            restore_time;     /* The last time the char did a restore all */
-  short         r_range_lo;     /* room range */
-  short         r_range_hi;
-  short         m_range_lo;     /* mob range  */
-  short         m_range_hi;
-  short         o_range_lo;     /* obj range  */
-  short         o_range_hi;
-  short         wizinvis;       /* wizinvis level */
-  short         min_snoop;      /* minimum snoop level */
-  short         condition       [MAX_CONDS];
-  short         learned         [MAX_SKILL];
-  KILLED_DATA           killed          [MAX_KILLTRACK];
-  short         quest_number;   /* current *QUEST BEING DONE* DON'T REMOVE! */
-  short         quest_curr;     /* current number of quest points */
-  int                   quest_accum;    /* quest points accumulated in players life */
-  int                   auth_state;
-  time_t                release_date;   /* Auto-helling.. Altrag */
-  int                 jail_vnum;
-  char *                helled_by;
-  char *                bio;            /* Personal Bio */
-  char *                authed_by;      /* what crazy imm authed this name ;) */
-  SKILLTYPE *           special_skills[5]; /* personalized skills/spells */
-  char *                prompt;         /* User config prompts */
-  char *                subprompt;      /* Substate prompt */
-  short         pagerlen;       /* For pager (NOT menus) */
-  bool          openedtourney;
-  short              addiction[10];
-  short              drug_level[10];
-  int                 wanted_flags;
-  long          bank;
-  bool  whoCloak;
-  char *                betted_on;
-  int           bet_amt;
-  int           salary;
-  long int              salary_date;    /* Auto-Salary Darrik Vequir */
-  ALIAS_DATA *  first_alias;
-  ALIAS_DATA *  last_alias;
-  CHAR_DATA  *  pet;
-  char *                target;
-  NOTE_DATA *           pnote;
-  NOTE_DATA *           comments;
-  short         clones;
-  int                   played;
-  time_t                logon;
-  time_t                save_time;
+  CLAN_DATA  *clan;
+  AREA_DATA  *area;
+  char       *homepage;
+  char       *clan_name;
+  char       *pwd;
+  char       *email;
+  char       *bamfin;
+  char       *bamfout;
+  char       *rank;
+  char       *title;
+  char       *bestowments;    /* Special bestowed commands       */
+  int         flags;            /* Whether the player is deadly and whatever else we add.      */
+  int         pkills;         /* Number of pkills on behalf of clan */
+  int         pdeaths;        /* Number of times pkilled (legally)  */
+  int         mkills;         /* Number of mobs killed                   */
+  int         mdeaths;        /* Number of deaths due to mobs       */
+  int         illegal_pk;     /* Number of illegal pk's committed   */
+  long        outcast_time;     /* The time at which the char was outcast */
+  long        restore_time;     /* The last time the char did a restore all */
+  short       r_range_lo;     /* room range */
+  short       r_range_hi;
+  short       m_range_lo;     /* mob range  */
+  short       m_range_hi;
+  short       o_range_lo;     /* obj range  */
+  short       o_range_hi;
+  short       wizinvis;       /* wizinvis level */
+  short       min_snoop;      /* minimum snoop level */
+  short       condition[MAX_CONDS];
+  short       learned[MAX_SKILL];
+  KILLED_DATA killed[MAX_KILLTRACK];
+  short       quest_number;   /* current *QUEST BEING DONE* DON'T REMOVE! */
+  short       quest_curr;     /* current number of quest points */
+  int         quest_accum;    /* quest points accumulated in players life */
+  int         auth_state;
+  time_t      release_date;   /* Auto-helling.. Altrag */
+  int         jail_vnum;
+  char       *helled_by;
+  char       *bio;            /* Personal Bio */
+  char       *authed_by;      /* what crazy imm authed this name ;) */
+  char       *prompt;         /* User config prompts */
+  char       *subprompt;      /* Substate prompt */
+  short       pagerlen;       /* For pager (NOT menus) */
+  bool        openedtourney;
+  short       addiction[10];
+  short       drug_level[10];
+  int         wanted_flags;
+  long        bank;
+  bool        whoCloak;
+  char       *betted_on;
+  int         bet_amt;
+  int         salary;
+  long        salary_date;    /* Auto-Salary Darrik Vequir */
+  ALIAS_DATA *first_alias;
+  ALIAS_DATA *last_alias;
+  CHAR_DATA  *pet;
+  char       *target;
+  NOTE_DATA  *pnote;
+  NOTE_DATA  *comments;
+  short       clones;
+  int         played;
+  time_t      logon;
+  time_t      save_time;
 #ifdef SWRIP_USE_IMC
   IMC_CHARDATA *imcchardata;
 #endif
@@ -1013,48 +1004,46 @@ struct  reset_data
  */
 struct  area_data
 {
-  AREA_DATA *           next;
-  AREA_DATA *           prev;
-  AREA_DATA *           next_sort;
-  AREA_DATA *           prev_sort;
-  RESET_DATA *  first_reset;
-  RESET_DATA *  last_reset;
-  PLANET_DATA *       planet;
-  AREA_DATA *           next_on_planet;
-  AREA_DATA *           prev_on_planet;
-  char *                name;
-  char *                filename;
-  int                 flags;
-  short              status;  /* h, 8/11 */
-  short         age;
-  short         nplayer;
-  short         reset_frequency;
-  int                   low_r_vnum;
-  int                   hi_r_vnum;
-  int                   low_o_vnum;
-  int                   hi_o_vnum;
-  short         low_m_vnum;
-  short         hi_m_vnum;
-  int                   low_soft_range;
-  int                   hi_soft_range;
-  int                   low_hard_range;
-  int                   hi_hard_range;
-  char *                author; /* Scryn */
-  char *              resetmsg; /* Rennard */
-  RESET_DATA *  last_mob_reset;
-  RESET_DATA *  last_obj_reset;
-  short         max_players;
-  int                   mkills;
-  int                   mdeaths;
-  int                   pkills;
-  int                   pdeaths;
-  int                   gold_looted;
-  int                   illegal_pk;
-  int                   high_economy;
-  int                   low_economy;
+  AREA_DATA   *next;
+  AREA_DATA   *prev;
+  AREA_DATA   *next_sort;
+  AREA_DATA   *prev_sort;
+  RESET_DATA  *first_reset;
+  RESET_DATA  *last_reset;
+  PLANET_DATA *planet;
+  AREA_DATA   *next_on_planet;
+  AREA_DATA   *prev_on_planet;
+  char        *name;
+  char        *filename;
+  int          flags;
+  short        status;  /* h, 8/11 */
+  short        age;
+  short        nplayer;
+  short        reset_frequency;
+  int          low_r_vnum;
+  int          hi_r_vnum;
+  int          low_o_vnum;
+  int          hi_o_vnum;
+  short        low_m_vnum;
+  short        hi_m_vnum;
+  int          low_soft_range;
+  int          hi_soft_range;
+  int          low_hard_range;
+  int          hi_hard_range;
+  char        *author; /* Scryn */
+  char        *resetmsg; /* Rennard */
+  RESET_DATA  *last_mob_reset;
+  RESET_DATA  *last_obj_reset;
+  short        max_players;
+  int          mkills;
+  int          mdeaths;
+  int          pkills;
+  int          pdeaths;
+  int          gold_looted;
+  int          illegal_pk;
+  int          high_economy;
+  int          low_economy;
 };
-
-
 
 /*
  * Load in the gods building data. -- Altrag
@@ -1071,7 +1060,6 @@ struct  godlist_data
   short         low_m_vnum;
   short         hi_m_vnum;
 };
-
 
 /*
  * Used to keep track of system settings and statistics         -Thoric
