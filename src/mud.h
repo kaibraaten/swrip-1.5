@@ -58,28 +58,28 @@ struct who_data
 {
   WHO_DATA *prev;
   WHO_DATA *next;
-  char *text;
-  int  type;
+  char     *text;
+  int       type;
 };
 
 /*
  * Site ban structure.
  */
-struct  ban_data
+struct ban_data
 {
-  BAN_DATA *    next;
-  BAN_DATA *    prev;
-  char *        name;
-  int           level;
-  char *        ban_time;
+  BAN_DATA *next;
+  BAN_DATA *prev;
+  char     *name;
+  int       level;
+  char     *ban_time;
 };
 
-struct  time_info_data
+struct time_info_data
 {
-  int           hour;
-  int           day;
-  int           month;
-  int           year;
+  int hour;
+  int day;
+  int month;
+  int year;
 };
 
 struct hour_min_sec
@@ -90,36 +90,36 @@ struct hour_min_sec
   int manual;
 };
 
-struct  weather_data
+struct weather_data
 {
-  int           mmhg;
-  int           change;
-  int           sky;
-  int           sunlight;
+  int mmhg;
+  int change;
+  int sky;
+  int sunlight;
 };
 
 
 /*
  * Structure used to build wizlist
  */
-struct  wizent
+struct wizent
 {
-  WIZENT *              next;
-  WIZENT *              last;
-  char *                name;
-  short         level;
+  WIZENT *next;
+  WIZENT *last;
+  char   *name;
+  short   level;
 };
 
 /*
  * Descriptor (channel) structure.
  */
-struct  descriptor_data
+struct descriptor_data
 {
   DESCRIPTOR_DATA *next;
   DESCRIPTOR_DATA *prev;
   DESCRIPTOR_DATA *snoop_by;
-  CHAR_DATA *character;
-  CHAR_DATA *original;
+  CHAR_DATA       *character;
+  CHAR_DATA       *original;
 
   struct
   {
@@ -128,38 +128,38 @@ struct  descriptor_data
     short port;
   } remote;
 
-  socket_t descriptor;
-  short connected;
-  short idle;
-  short lines;
-  short scrlen;
-  bool fcommand;
-  char inbuf[MAX_INBUF_SIZE];
-  char incomm[MAX_INPUT_LENGTH];
-  char inlast[MAX_INPUT_LENGTH];
-  int  repeat;
-  char *outbuf;
-  unsigned long outsize;
-  int outtop;
+  socket_t  descriptor;
+  short     connected;
+  short     idle;
+  short     lines;
+  short     scrlen;
+  bool      fcommand;
+  char      inbuf[MAX_INBUF_SIZE];
+  char      incomm[MAX_INPUT_LENGTH];
+  char      inlast[MAX_INPUT_LENGTH];
+  int       repeat;
+  char     *outbuf;
+  unsigned  long outsize;
+  int       outtop;
 
   struct
   {
-    char *pagebuf;
-    unsigned long pagesize;
-    int pagetop;
-    char *pagepoint;
-    signed char pagecmd;
-    char pagecolor;
+    char          *pagebuf;
+    unsigned long  pagesize;
+    int            pagetop;
+    char          *pagepoint;
+    signed char    pagecmd;
+    char           pagecolor;
   } pager;
 
-  int newstate;
+  int           newstate;
   unsigned char prevcolor;
 };
 
 /*
  * Attribute bonus structures.
  */
-struct  str_app_type
+struct str_app_type
 {
   short tohit;
   short todam;
@@ -167,38 +167,38 @@ struct  str_app_type
   short wield;
 };
 
-struct  int_app_type
+struct int_app_type
 {
   short learn;
 };
 
-struct  wis_app_type
+struct wis_app_type
 {
   short practice;
 };
 
-struct  dex_app_type
+struct dex_app_type
 {
   short defensive;
 };
 
-struct  con_app_type
+struct con_app_type
 {
   short hitp;
   short shock;
 };
 
-struct  cha_app_type
+struct cha_app_type
 {
   short charm;
 };
 
-struct  lck_app_type
+struct lck_app_type
 {
   short luck;
 };
 
-struct  frc_app_type
+struct frc_app_type
 {
   short force;
 };
@@ -206,13 +206,13 @@ struct  frc_app_type
 /*
  * Help table types.
  */
-struct  help_data
+struct help_data
 {
-  HELP_DATA *   next;
-  HELP_DATA * prev;
-  short level;
-  char *        keyword;
-  char *        text;
+  HELP_DATA *next;
+  HELP_DATA *prev;
+  short      level;
+  char      *keyword;
+  char      *text;
 };
 
 struct shop_data
@@ -252,26 +252,26 @@ struct repairshop_data
 struct act_prog_data
 {
   struct act_prog_data *next;
-  void *vo;
+  void                 *vo;
 };
 
 struct mob_prog_act_list
 {
-  MPROG_ACT_LIST * next;
-  char *             buf;
-  CHAR_DATA *      ch;
-  OBJ_DATA *         obj;
-  void *             vo;
+  MPROG_ACT_LIST *next;
+  char           *buf;
+  CHAR_DATA      *ch;
+  OBJ_DATA       *obj;
+  void           *vo;
 };
 
 struct mob_prog_data
 {
-  MPROG_DATA * next;
-  int            type;
-  bool   triggered;
-  int            resetdelay;
-  char *         arglist;
-  char *         comlist;
+  MPROG_DATA *next;
+  int         type;
+  bool        triggered;
+  int         resetdelay;
+  char       *arglist;
+  char       *comlist;
 };
 
 extern bool MOBtrigger;
@@ -305,8 +305,8 @@ struct race_type
 
 struct membersort_data
 {
-  MS_DATA *next;
-  MS_DATA *prev;
+  MS_DATA     *next;
+  MS_DATA     *prev;
   MEMBER_DATA *member;
 };
 
@@ -359,87 +359,87 @@ struct space_data
   } landing_site;
 };
 
-struct  bounty_data
+struct bounty_data
 {
-  BOUNTY_DATA * next;
-  BOUNTY_DATA * prev;
-  char *          target;
-  long int      amount;
-  char *    poster;
+  BOUNTY_DATA *next;
+  BOUNTY_DATA *prev;
+  char        *target;
+  long         amount;
+  char        *poster;
 };
 
 struct guard_data
 {
-  GUARD_DATA * next;
-  GUARD_DATA * prev;
-  GUARD_DATA * next_on_planet;
-  GUARD_DATA * prev_on_planet;
-  CHAR_DATA  * mob;
-  ROOM_INDEX_DATA * reset_loc;
-  PLANET_DATA * planet;
+  GUARD_DATA      *next;
+  GUARD_DATA      *prev;
+  GUARD_DATA      *next_on_planet;
+  GUARD_DATA      *prev_on_planet;
+  CHAR_DATA       *mob;
+  ROOM_INDEX_DATA *reset_loc;
+  PLANET_DATA     *planet;
 };
 
-struct  storeroom
+struct storeroom
 {
-  STOREROOM    * next;
-  STOREROOM    * prev;
-  int vnum;
+  STOREROOM       *next;
+  STOREROOM       *prev;
+  int              vnum;
   ROOM_INDEX_DATA *room;
 };
 
-struct  planet_data
+struct planet_data
 {
-  PLANET_DATA    * next;
-  PLANET_DATA    * prev;
-  PLANET_DATA    * next_in_system;
-  PLANET_DATA    * prev_in_system;
-  GUARD_DATA     * first_guard;
-  GUARD_DATA     * last_guard;
-  SPACE_DATA     * spaceobject;
-  AREA_DATA      * first_area;
-  AREA_DATA      * last_area;
-  char           * name;
-  char           * filename;
-  long             base_value;
-  CLAN_DATA      * governed_by;
-  int        population;
-  bool       flags;
-  float            pop_support;
+  PLANET_DATA *next;
+  PLANET_DATA *prev;
+  PLANET_DATA *next_in_system;
+  PLANET_DATA *prev_in_system;
+  GUARD_DATA  *first_guard;
+  GUARD_DATA  *last_guard;
+  SPACE_DATA  *spaceobject;
+  AREA_DATA   *first_area;
+  AREA_DATA   *last_area;
+  char        *name;
+  char        *filename;
+  long         base_value;
+  CLAN_DATA   *governed_by;
+  int          population;
+  bool         flags;
+  float        pop_support;
 };
 
 struct clan_data
 {
-  CLAN_DATA * next;             /* next clan in list                    */
-  CLAN_DATA * prev;             /* previous clan in list                */
-  CLAN_DATA * next_subclan;
-  CLAN_DATA * prev_subclan;
-  CLAN_DATA * first_subclan;
-  CLAN_DATA * last_subclan;
-  CLAN_DATA * mainclan;
-  char *        filename;       /* Clan filename                        */
-  char *        name;           /* Clan name                            */
-  char *        description;    /* A brief description of the clan      */
-  int           pkills;         /* Number of pkills on behalf of clan   */
-  int           pdeaths;        /* Number of pkills against clan        */
-  int           mkills;         /* Number of mkills on behalf of clan   */
-  int           mdeaths;        /* Number of clan deaths due to mobs    */
-  short clan_type;      /* See clan type defines                */
-  short members;        /* Number of clan members               */
-  int           board;          /* Vnum of clan board                   */
-  int           storeroom;      /* Vnum of clan's store room            */
-  int           guard1;         /* Vnum of clan guard type 1            */
-  int           guard2;         /* Vnum of clan guard type 2            */
-  int         patrol1;        /* vnum of patrol */
-  int         patrol2;  /* vnum of patrol */
-  int         trooper1; /* vnum of reinforcements */
-  int         trooper2; /* vnum of elite troopers */
-  long int    funds;
-  int         spacecraft;
-  int           vehicles;
-  int         jail;
-  int enlistroom1;
-  int enlistroom2;
-  char      * tmpstr;
+  CLAN_DATA *next;             /* next clan in list                    */
+  CLAN_DATA *prev;             /* previous clan in list                */
+  CLAN_DATA *next_subclan;
+  CLAN_DATA *prev_subclan;
+  CLAN_DATA *first_subclan;
+  CLAN_DATA *last_subclan;
+  CLAN_DATA *mainclan;
+  char      *filename;       /* Clan filename                        */
+  char      *name;           /* Clan name                            */
+  char      *description;    /* A brief description of the clan      */
+  int        pkills;         /* Number of pkills on behalf of clan   */
+  int        pdeaths;        /* Number of pkills against clan        */
+  int        mkills;         /* Number of mkills on behalf of clan   */
+  int        mdeaths;        /* Number of clan deaths due to mobs    */
+  short      clan_type;      /* See clan type defines                */
+  short      members;        /* Number of clan members               */
+  int        board;          /* Vnum of clan board                   */
+  int        storeroom;      /* Vnum of clan's store room            */
+  int        guard1;         /* Vnum of clan guard type 1            */
+  int        guard2;         /* Vnum of clan guard type 2            */
+  int        patrol1;        /* vnum of patrol */
+  int        patrol2;  /* vnum of patrol */
+  int        trooper1; /* vnum of reinforcements */
+  int        trooper2; /* vnum of elite troopers */
+  long       funds;
+  int        spacecraft;
+  int        vehicles;
+  int        jail;
+  int        enlistroom1;
+  int        enlistroom2;
+  char      *tmpstr;
 
   struct
   {
@@ -451,163 +451,163 @@ struct clan_data
 
 struct ship_data
 {
-  SHIP_DATA * next;
-  SHIP_DATA * prev;
-  SHIP_DATA * next_in_spaceobject;
-  SHIP_DATA * prev_in_spaceobject;
-  SHIP_DATA * next_in_room;
-  SHIP_DATA * prev_in_room;
+  SHIP_DATA       *next;
+  SHIP_DATA       *prev;
+  SHIP_DATA       *next_in_spaceobject;
+  SHIP_DATA       *prev_in_spaceobject;
+  SHIP_DATA       *next_in_room;
+  SHIP_DATA       *prev_in_room;
   ROOM_INDEX_DATA *in_room;
-  SPACE_DATA * spaceobject;
-  SPACE_DATA * destin;
-  char *      filename;
-  char *      name;
-  char *      personalname;
-  char *      home;
-  char *      description;
-  char *      owner;
-  char *      pilot;
-  char *      copilot;
-  char *      dest;
-  short      type;
-  short      sclass;
-  short      comm;
-  short      sensor;
-  short      astro_array;
-  short      hyperspeed;
-  int         hyperdistance;
-  int         orighyperdistance;
-  short      realspeed;
-  short currspeed;
-  short goalspeed;
-  short      shipstate;
-  short      docking;
-  short      statei0; /* ion state */
-  short      statet0; /* laser state */
-  short      statettractor;
-  short      statetdocking;
-  short      missiletype;
-  short      missilestate;
-  short      missiles;
-  short      maxmissiles;
-  short      torpedos;
-  short      maxtorpedos;
-  short      rockets;
-  short      maxrockets;
-  short      lasers;
-  short      tractorbeam;
-  short      manuever;
-  short      dockingports;
-  bool        bayopen;
-  bool        hatchopen;
-  bool  autorecharge;
-  bool        autotrack;
-  bool  autospeed;
-  bool  tracking;
-  int           tcount;
-  bool  guard;
-  Vector3 trackvector;          /* tx, ty, tz */
-  Vector3 pos;              /* vx, vy, vz  */
-  Vector3 head;               /* hx, hy, hz */
-  Vector3 jump;      /* jx, jy, jz */
-  Vector3 hyperpos;   /* cx, cy, cz */
-  Vector3 originpos;       /* ox, oy, oz */
-  int           maneuverdeg;
-  int         maxenergy;
-  int         energy;
-  int         shield;
-  int         maxshield;
-  int         hull;
-  int         maxhull;
-  int         cockpit;
-  int         location;
-  int         lastdoc;
-  int         shipyard;
+  SPACE_DATA      *spaceobject;
+  SPACE_DATA      *destin;
+  char            *filename;
+  char            *name;
+  char            *personalname;
+  char            *home;
+  char            *description;
+  char            *owner;
+  char            *pilot;
+  char            *copilot;
+  char            *dest;
+  short            type;
+  short            sclass;
+  short            comm;
+  short            sensor;
+  short            astro_array;
+  short            hyperspeed;
+  int              hyperdistance;
+  int              orighyperdistance;
+  short            realspeed;
+  short            currspeed;
+  short            goalspeed;
+  short            shipstate;
+  short            docking;
+  short            statei0; /* ion state */
+  short            statet0; /* laser state */
+  short            statettractor;
+  short            statetdocking;
+  short            missiletype;
+  short            missilestate;
+  short            missiles;
+  short            maxmissiles;
+  short            torpedos;
+  short            maxtorpedos;
+  short            rockets;
+  short            maxrockets;
+  short            lasers;
+  short            tractorbeam;
+  short            manuever;
+  short            dockingports;
+  bool             bayopen;
+  bool             hatchopen;
+  bool             autorecharge;
+  bool             autotrack;
+  bool             autospeed;
+  bool             tracking;
+  int              tcount;
+  bool             guard;
+  Vector3          trackvector;          /* tx, ty, tz */
+  Vector3          pos;              /* vx, vy, vz  */
+  Vector3          head;               /* hx, hy, hz */
+  Vector3          jump;      /* jx, jy, jz */
+  Vector3          hyperpos;   /* cx, cy, cz */
+  Vector3          originpos;       /* ox, oy, oz */
+  int              maneuverdeg;
+  int              maxenergy;
+  int              energy;
+  int              shield;
+  int              maxshield;
+  int              hull;
+  int              maxhull;
+  int              cockpit;
+  int              location;
+  int              lastdoc;
+  int              shipyard;
 
-  int         firstroom;
-  int         lastroom;
+  int              firstroom;
+  int              lastroom;
 
-  int         entrance;
-  int         hanger;
-  int         engineroom;
-  int         navseat;
-  int         pilotseat;
-  int         coseat;
-  int         gunseat;
+  int              entrance;
+  int              hanger;
+  int              engineroom;
+  int              navseat;
+  int              pilotseat;
+  int              coseat;
+  int              gunseat;
 
-  long        collision;
-  SHIP_DATA  *target0; /* target of main weapon systems (ie, not turrest) */
-  SHIP_DATA  *tractoredby;
-  SHIP_DATA  *tractored;
-  SPACE_DATA *currjump;
-  SPACE_DATA *lastsystem;
-  short      chaff;
-  short      maxchaff;
-  bool        chaff_released;
-  bool        autopilot;
-  bool  opentube;
-  SHIP_DATA  *docked;
-  short      alarm;
-  short ions;
-  CHAR_DATA *ch;
-  SPACE_DATA *inorbitof;
-  int count;
+  long             collision;
+  SHIP_DATA       *target0; /* target of main weapon systems (ie, not turrest) */
+  SHIP_DATA       *tractoredby;
+  SHIP_DATA       *tractored;
+  SPACE_DATA      *currjump;
+  SPACE_DATA      *lastsystem;
+  short            chaff;
+  short            maxchaff;
+  bool             chaff_released;
+  bool             autopilot;
+  bool             opentube;
+  SHIP_DATA       *docked;
+  short            alarm;
+  short            ions;
+  CHAR_DATA       *ch;
+  SPACE_DATA      *inorbitof;
+  int              count;
   TURRET_DATA *turret[MAX_NUMBER_OF_TURRETS_IN_SHIP];
 };
 
 struct missile_data
 {
-  MISSILE_DATA * next;
-  MISSILE_DATA * prev;
-  MISSILE_DATA * next_in_spaceobject;
-  MISSILE_DATA * prev_in_spaceobject;
-  SPACE_DATA * spaceobject;
-  SHIP_DATA * target;
-  SHIP_DATA * fired_from;
-  char      * fired_by;
-  short      missiletype;
-  short      age;
-  int         speed;
-  Vector3 pos;
-  Vector3 head;
+  MISSILE_DATA *next;
+  MISSILE_DATA *prev;
+  MISSILE_DATA *next_in_spaceobject;
+  MISSILE_DATA *prev_in_spaceobject;
+  SPACE_DATA   *spaceobject;
+  SHIP_DATA    *target;
+  SHIP_DATA    *fired_from;
+  char         *fired_by;
+  short         missiletype;
+  short         age;
+  int           speed;
+  Vector3       pos;
+  Vector3       head;
 };
 
 /*
  * Data structure for notes.
  */
-struct  note_data
+struct note_data
 {
-  NOTE_DATA *   next;
-  NOTE_DATA * prev;
-  char *        sender;
-  char *        date;
-  char *        to_list;
-  char *        subject;
-  int         voting;
-  char *        yesvotes;
-  char *        novotes;
-  char *        abstentions;
-  char *        text;
+  NOTE_DATA *next;
+  NOTE_DATA *prev;
+  char      *sender;
+  char      *date;
+  char      *to_list;
+  char      *subject;
+  int        voting;
+  char      *yesvotes;
+  char      *novotes;
+  char      *abstentions;
+  char      *text;
 };
 
-struct  board_data
+struct board_data
 {
-  BOARD_DATA * next;                    /* Next board in list              */
-  BOARD_DATA * prev;                    /* Previous board in list          */
-  NOTE_DATA *  first_note;              /* First note on board             */
-  NOTE_DATA *  last_note;               /* Last note on board              */
-  char *         note_file;             /* Filename to save notes to       */
-  char *         read_group;            /* Can restrict a board to a       */
-  char *         post_group;            /* council, clan, guild etc        */
-  char *         extra_readers;         /* Can give read rights to players */
-  char *       extra_removers;        /* Can give remove rights to players */
-  int            board_obj;             /* Vnum of board object            */
-  short  num_posts;             /* Number of notes on this board   */
-  short  min_read_level;        /* Minimum level to read a note    */
-  short  min_post_level;        /* Minimum level to post a note    */
-  short  min_remove_level;      /* Minimum level to remove a note  */
-  short  max_posts;             /* Maximum amount of notes allowed */
-  int          type;                  /* Normal board or mail board? */
+  BOARD_DATA *next;                    /* Next board in list              */
+  BOARD_DATA *prev;                    /* Previous board in list          */
+  NOTE_DATA  *first_note;              /* First note on board             */
+  NOTE_DATA  *last_note;               /* Last note on board              */
+  char       *note_file;             /* Filename to save notes to       */
+  char       *read_group;            /* Can restrict a board to a       */
+  char       *post_group;            /* council, clan, guild etc        */
+  char       *extra_readers;         /* Can give read rights to players */
+  char       *extra_removers;        /* Can give remove rights to players */
+  int         board_obj;             /* Vnum of board object            */
+  short       num_posts;             /* Number of notes on this board   */
+  short       min_read_level;        /* Minimum level to read a note    */
+  short       min_post_level;        /* Minimum level to post a note    */
+  short       min_remove_level;      /* Minimum level to remove a note  */
+  short       max_posts;             /* Maximum amount of notes allowed */
+  int         type;                  /* Normal board or mail board? */
 };
 
 
@@ -731,40 +731,40 @@ struct mob_index_data
 
 struct hunt_hate_fear
 {
-  char *                name;
-  CHAR_DATA *           who;
+  char      *name;
+  CHAR_DATA *who;
 };
 
 struct fighting_data
 {
-  CHAR_DATA *           who;
-  int                   xp;
-  short         align;
-  short         duration;
-  short         timeskilled;
+  CHAR_DATA *who;
+  int        xp;
+  short      align;
+  short      duration;
+  short      timeskilled;
 };
 
-struct  editor_data
+struct editor_data
 {
-  short         numlines;
-  short         on_line;
-  short         size;
-  char          line[49][81];
+  short numlines;
+  short on_line;
+  short size;
+  char  line[49][81];
 };
 
-struct  extracted_char_data
+struct extracted_char_data
 {
-  EXTRACT_CHAR_DATA *   next;
-  CHAR_DATA *           ch;
-  ROOM_INDEX_DATA *     room;
-  ch_ret                retcode;
-  bool          extract;
+  EXTRACT_CHAR_DATA *next;
+  CHAR_DATA         *ch;
+  ROOM_INDEX_DATA   *room;
+  ch_ret             retcode;
+  bool               extract;
 };
 
 struct killed_data
 {
-  short         vnum;
-  char          count;
+  short vnum;
+  char  count;
 };
 
 #ifdef SWRIP_USE_IMC
@@ -846,7 +846,7 @@ struct pc_data
 /*
  * Liquids.
  */
-struct  liq_type
+struct liq_type
 {
   char *        liq_name;
   char *        liq_color;
@@ -856,12 +856,12 @@ struct  liq_type
 /*
  * Extra description data for a room or object.
  */
-struct  extra_descr_data
+struct extra_descr_data
 {
   EXTRA_DESCR_DATA *next;       /* Next in list                     */
   EXTRA_DESCR_DATA *prev;       /* Previous in list                 */
-  char *keyword;              /* Keyword in look/examine          */
-  char *description;          /* What to see                      */
+  char             *keyword;              /* Keyword in look/examine          */
+  char             *description;          /* What to see                      */
 };
 
 
@@ -944,8 +944,8 @@ struct obj_data
   struct
   {
     MPROG_ACT_LIST *mpact;
-    int mpactnum;
-    short mpscriptpos;
+    int             mpactnum;
+    short           mpscriptpos;
   } mprog;
 };
 
@@ -953,20 +953,20 @@ struct obj_data
 /*
  * Exit data.
  */
-struct  exit_data
+struct exit_data
 {
-  EXIT_DATA *           prev;           /* previous exit in linked list */
-  EXIT_DATA *           next;           /* next exit in linked list     */
-  EXIT_DATA *           rexit;          /* Reverse exit pointer         */
-  ROOM_INDEX_DATA *     to_room;        /* Pointer to destination room  */
-  char *                keyword;        /* Keywords for exit or door    */
-  char *                description;    /* Description of exit          */
-  int                   vnum;           /* Vnum of room exit leads to   */
-  int                   rvnum;          /* Vnum of room in opposite dir */
-  int                   exit_info;      /* door states & other flags    */
-  int                   key;            /* Key vnum                     */
-  short         vdir;           /* Physical "direction"         */
-  short         distance;       /* how far to the next room     */
+  EXIT_DATA       *prev;           /* previous exit in linked list */
+  EXIT_DATA       *next;           /* next exit in linked list     */
+  EXIT_DATA       *rexit;          /* Reverse exit pointer         */
+  ROOM_INDEX_DATA *to_room;        /* Pointer to destination room  */
+  char            *keyword;        /* Keywords for exit or door    */
+  char            *description;    /* Description of exit          */
+  int              vnum;           /* Vnum of room exit leads to   */
+  int              rvnum;          /* Vnum of room in opposite dir */
+  int              exit_info;      /* door states & other flags    */
+  int              key;            /* Key vnum                     */
+  short            vdir;           /* Physical "direction"         */
+  short            distance;       /* how far to the next room     */
 };
 
 /*
@@ -988,21 +988,21 @@ struct  exit_data
 /*
  * Area-reset definition.
  */
-struct  reset_data
+struct reset_data
 {
-  RESET_DATA *  next;
-  RESET_DATA *  prev;
-  char          command;
-  int                   extra;
-  int                   arg1;
-  int                   arg2;
-  int                   arg3;
+  RESET_DATA *next;
+  RESET_DATA *prev;
+  char        command;
+  int         extra;
+  int         arg1;
+  int         arg2;
+  int         arg3;
 };
 
 /*
  * Area definition.
  */
-struct  area_data
+struct area_data
 {
   AREA_DATA   *next;
   AREA_DATA   *prev;
@@ -1048,55 +1048,55 @@ struct  area_data
 /*
  * Load in the gods building data. -- Altrag
  */
-struct  godlist_data
+struct godlist_data
 {
-  GOD_DATA *            next;
-  GOD_DATA *            prev;
-  int                   level;
-  int                   low_r_vnum;
-  int                   hi_r_vnum;
-  int                   low_o_vnum;
-  int                   hi_o_vnum;
-  short         low_m_vnum;
-  short         hi_m_vnum;
+  GOD_DATA *next;
+  GOD_DATA *prev;
+  int       level;
+  int       low_r_vnum;
+  int       hi_r_vnum;
+  int       low_o_vnum;
+  int       hi_o_vnum;
+  short     low_m_vnum;
+  short     hi_m_vnum;
 };
 
 /*
  * Used to keep track of system settings and statistics         -Thoric
  */
-struct  system_data
+struct system_data
 {
-  int           maxplayers;             /* Maximum players this boot   */
-  int           alltimemax;             /* Maximum players ever   */
-  char *        time_of_max;            /* Time of max ever */
-  bool  NO_NAME_RESOLVING;      /* Hostnames are not resolved  */
-  bool          DENY_NEW_PLAYERS;       /* New players cannot connect  */
-  bool  WAIT_FOR_AUTH;          /* New players must be auth'ed */
-  short read_all_mail;          /* Read all player mail(was 54)*/
-  short read_mail_free;         /* Read mail for free (was 51) */
-  short write_mail_free;        /* Write mail for free(was 51) */
-  short take_others_mail;       /* Take others mail (was 54)   */
-  short muse_level;             /* Level of muse channel */
-  short think_level;            /* Level of think channel LEVEL_HIGOD*/
-  short build_level;            /* Level of build channel LEVEL_BUILD*/
-  short log_level;              /* Level of log channel LEVEL LOG*/
-  short level_modify_proto;     /* Level to modify prototype stuff LEVEL_LESSER */
-  short level_override_private; /* override private flag */
-  short level_mset_player;      /* Level to mset a player */
-  short stun_plr_vs_plr;        /* Stun mod player vs. player */
-  short stun_regular;           /* Stun difficult */
-  short dam_plr_vs_plr;         /* Damage mod player vs. player */
-  short dam_plr_vs_mob;         /* Damage mod player vs. mobile */
-  short dam_mob_vs_plr;         /* Damage mod mobile vs. player */
-  short dam_mob_vs_mob;         /* Damage mod mobile vs. mobile */
-  short level_getobjnotake;     /* Get objects without take flag */
-  short      level_forcepc;          /* The level at which you can use force on players. */
-  short max_sn;                 /* Max skills */
-  char       *guild_overseer;         /* Pointer to char containing the name of the */
-  char       *guild_advisor;            /* guild overseer and advisor. */
-  int           save_flags;             /* Toggles for saving conditions */
-  short save_frequency;         /* How old to autosave someone */
-  short port;
+  int    maxplayers;             /* Maximum players this boot   */
+  int    alltimemax;             /* Maximum players ever   */
+  char  *time_of_max;            /* Time of max ever */
+  bool   NO_NAME_RESOLVING;      /* Hostnames are not resolved  */
+  bool   DENY_NEW_PLAYERS;       /* New players cannot connect  */
+  bool   WAIT_FOR_AUTH;          /* New players must be auth'ed */
+  short  read_all_mail;          /* Read all player mail(was 54)*/
+  short  read_mail_free;         /* Read mail for free (was 51) */
+  short  write_mail_free;        /* Write mail for free(was 51) */
+  short  take_others_mail;       /* Take others mail (was 54)   */
+  short  muse_level;             /* Level of muse channel */
+  short  think_level;            /* Level of think channel LEVEL_HIGOD*/
+  short  build_level;            /* Level of build channel LEVEL_BUILD*/
+  short  log_level;              /* Level of log channel LEVEL LOG*/
+  short  level_modify_proto;     /* Level to modify prototype stuff LEVEL_LESSER */
+  short  level_override_private; /* override private flag */
+  short  level_mset_player;      /* Level to mset a player */
+  short  stun_plr_vs_plr;        /* Stun mod player vs. player */
+  short  stun_regular;           /* Stun difficult */
+  short  dam_plr_vs_plr;         /* Damage mod player vs. player */
+  short  dam_plr_vs_mob;         /* Damage mod player vs. mobile */
+  short  dam_mob_vs_plr;         /* Damage mod mobile vs. player */
+  short  dam_mob_vs_mob;         /* Damage mod mobile vs. mobile */
+  short  level_getobjnotake;     /* Get objects without take flag */
+  short  level_forcepc;          /* The level at which you can use force on players. */
+  short  max_sn;                 /* Max skills */
+  char  *guild_overseer;         /* Pointer to char containing the name of the */
+  char  *guild_advisor;            /* guild overseer and advisor. */
+  int    save_flags;             /* Toggles for saving conditions */
+  short  save_frequency;         /* How old to autosave someone */
+  short  port;
 #ifdef _WIN32
   HMODULE dl_handle;
 #else
@@ -1139,27 +1139,27 @@ struct room_index_data
   struct
   {
     MPROG_ACT_LIST *mpact;
-    int mpactnum;
-    short mpscriptpos;
-    MPROG_DATA *mudprogs;
-    int progtypes;
+    int             mpactnum;
+    short           mpscriptpos;
+    MPROG_DATA     *mudprogs;
+    int             progtypes;
   } mprog;
 };
 
 /*
  * Delayed teleport type.
  */
-struct  teleport_data
+struct teleport_data
 {
-  TELEPORT_DATA *       next;
-  TELEPORT_DATA *       prev;
-  ROOM_INDEX_DATA *     room;
-  short         timer;
+  TELEPORT_DATA   *next;
+  TELEPORT_DATA   *prev;
+  ROOM_INDEX_DATA *room;
+  short           timer;
 };
 
 struct timerset
 {
-  int num_uses;
+  int            num_uses;
   struct timeval total_time;
   struct timeval min_time;
   struct timeval max_time;
@@ -1170,230 +1170,218 @@ struct timerset
 /*
  * Skills include spells as a particular case.
  */
-struct  skill_type
+struct skill_type
 {
-  char *        name;                   /* Name of skill                */
-  SPELL_FUN *   spell_fun;              /* Spell pointer (for spells)   */
-  DO_FUN *      skill_fun;              /* Skill pointer (for skills)   */
-  char *fun_name;
-  short target;                 /* Legal targets                */
-  int   minimum_position;       /* Position for caster / user   */
-  short slot;                   /* Slot for #OBJECT loading     */
-  short min_mana;               /* Minimum mana used            */
-  short beats;                  /* Rounds required to use skill */
-  char *        noun_damage;            /* Damage message               */
-  char *        msg_off;                /* Wear off message             */
-  short guild;                  /* Which guild the skill belongs to */
-  short min_level;              /* Minimum level to be able to cast */
-  short type;                   /* Spell/Skill/Weapon/Tongue    */
+  char      *name;                   /* Name of skill                */
+  SPELL_FUN *spell_fun;              /* Spell pointer (for spells)   */
+  DO_FUN    *skill_fun;              /* Skill pointer (for skills)   */
+  char      *fun_name;
+  short      target;                 /* Legal targets                */
+  int        minimum_position;       /* Position for caster / user   */
+  short      slot;                   /* Slot for #OBJECT loading     */
+  short      min_mana;               /* Minimum mana used            */
+  short      beats;                  /* Rounds required to use skill */
+  char      *noun_damage;            /* Damage message               */
+  char      *msg_off;                /* Wear off message             */
+  short      guild;                  /* Which guild the skill belongs to */
+  short      min_level;              /* Minimum level to be able to cast */
+  short      type;                   /* Spell/Skill/Weapon/Tongue    */
   int           flags;                  /* extra stuff                  */
-  char *        hit_char;               /* Success message to caster    */
-  char *        hit_vict;               /* Success message to victim    */
-  char *        hit_room;               /* Success message to room      */
-  char *        miss_char;              /* Failure message to caster    */
-  char *        miss_vict;              /* Failure message to victim    */
-  char *        miss_room;              /* Failure message to room      */
-  char *        die_char;               /* Victim death msg to caster   */
-  char *        die_vict;               /* Victim death msg to victim   */
-  char *        die_room;               /* Victim death msg to room     */
-  char *        imm_char;               /* Victim immune msg to caster  */
-  char *        imm_vict;               /* Victim immune msg to victim  */
-  char *        imm_room;               /* Victim immune msg to room    */
-  char *        dice;                   /* Dice roll                    */
-  int           value;                  /* Misc value                   */
-  char  saves;                  /* What saving spell applies    */
-  char  difficulty;             /* Difficulty of casting/learning */
-  SMAUG_AFF *   affects;                /* Spell affects, if any        */
-  char *        components;             /* Spell components, if any     */
-  char *        teachers;               /* Skill requires a special teacher */
-  char  participants;           /* # of required participants   */
-  struct        timerset        userec; /* Usage record                 */
-  int         alignment;              /* for jedi powers */
+  char      *hit_char;               /* Success message to caster    */
+  char      *hit_vict;               /* Success message to victim    */
+  char      *hit_room;               /* Success message to room      */
+  char      *miss_char;              /* Failure message to caster    */
+  char      *miss_vict;              /* Failure message to victim    */
+  char      *miss_room;              /* Failure message to room      */
+  char      *die_char;               /* Victim death msg to caster   */
+  char      *die_vict;               /* Victim death msg to victim   */
+  char      *die_room;               /* Victim death msg to room     */
+  char      *imm_char;               /* Victim immune msg to caster  */
+  char      *imm_vict;               /* Victim immune msg to victim  */
+  char      *imm_room;               /* Victim immune msg to room    */
+  char      *dice;                   /* Dice roll                    */
+  int        value;                  /* Misc value                   */
+  char       saves;                  /* What saving spell applies    */
+  char       difficulty;             /* Difficulty of casting/learning */
+  SMAUG_AFF *affects;                /* Spell affects, if any        */
+  char      *components;             /* Spell components, if any     */
+  char      *teachers;               /* Skill requires a special teacher */
+  char       participants;           /* # of required participants   */
+  struct     timerset        userec; /* Usage record                 */
+  int        alignment;              /* for jedi powers */
 };
 
 
-struct  auction_data
+struct auction_data
 {
-  OBJ_DATA  * item;   /* a pointer to the item */
-  CHAR_DATA * seller; /* a pointer to the seller - which may NOT quit */
-  CHAR_DATA * buyer;  /* a pointer to the buyer - which may NOT quit */
-  int         bet;    /* last bet - or 0 if noone has bet anything */
+  OBJ_DATA  *item;   /* a pointer to the item */
+  CHAR_DATA *seller; /* a pointer to the seller - which may NOT quit */
+  CHAR_DATA *buyer;  /* a pointer to the buyer - which may NOT quit */
+  int        bet;    /* last bet - or 0 if noone has bet anything */
   short      going;  /* 1,2, sold */
   short      pulse;  /* how many pulses (.25 sec) until another call-out ? */
-  int   starting;
+  int        starting;
 };
 
 
 /*
  * These are skill_lookup return values for common skills and spells.
  */
-extern short   gsn_starfighters;
-extern short   gsn_midships;
-extern short   gsn_capitalships;
-extern short   gsn_weaponsystems;
-extern short   gsn_navigation;
-extern short   gsn_shipsystems;
-extern short   gsn_tractorbeams;
-extern short   gsn_shipmaintenance;
-extern short   gsn_sabotage;
-extern short   gsn_spacecombat;
-extern short   gsn_spacecombat2;
-extern short   gsn_spacecombat3;
-extern short   gsn_shipdocking;
-extern short   gsn_jumpvector;
-extern short   gsn_speeders;
-extern short   gsn_speedercombat;
-
-
-extern short   gsn_reinforcements;
-extern short   gsn_postguard;
-
-extern short   gsn_addpatrol;
-extern short   gsn_eliteguard;
-extern short   gsn_specialforces;
-extern short   gsn_jail;
-extern short   gsn_smalltalk;
-extern short   gsn_propaganda;
-extern short   gsn_bribe;
-extern short   gsn_seduce;
-extern short   gsn_masspropaganda;
-extern short   gsn_gather_intelligence;
-
-extern short   gsn_torture;
-extern short   gsn_snipe;
-extern short   gsn_throw;
-extern short   gsn_disguise;
-extern short   gsn_cloak;
-extern short   gsn_mine;
-extern short   gsn_grenades;
-extern short   gsn_first_aid;
-
-extern short   gsn_beg;
-extern short   gsn_makeblade;
-extern short   gsn_makejewelry;
-extern short   gsn_makeblaster;
-extern short   gsn_makebowcaster;
-extern short   gsn_makelight;
-extern short   gsn_makecomlink;
-extern short   gsn_makegrenade;
-extern short   gsn_makelandmine;
-extern short   gsn_makearmor;
-extern short   gsn_makeshield;
-extern short   gsn_makecontainer;
-extern short   gsn_lightsaber_crafting;
-extern short   gsn_spice_refining;
-extern short   gsn_fake_signal;
-extern short   gsn_slicing;
-
-extern  short   gsn_detrap;
-extern  short   gsn_backstab;
-extern  short  gsn_circle;
-extern  short   gsn_dodge;
-extern  short   gsn_hide;
-extern  short   gsn_peek;
-extern  short   gsn_pick_lock;
-extern  short  gsn_scan;
-extern  short   gsn_skin;
-extern  short   gsn_sneak;
-extern  short   gsn_steal;
-extern  short   gsn_gouge;
-extern  short   gsn_track;
-extern  short   gsn_search;
-extern  short  gsn_dig;
-extern  short   gsn_mount;
-extern  short  gsn_bashdoor;
-extern  short  gsn_cutdoor;
-extern  short   gsn_berserk;
-extern  short   gsn_hitall;
-extern  short   gsn_pickshiplock;
-extern  short   gsn_hijack;
-
-extern  short   gsn_disarm;
-extern  short   gsn_enhanced_damage;
-extern  short   gsn_kick;
-extern  short   gsn_bite;
-extern  short   gsn_claw;
-extern  short   gsn_sting;
-extern  short   gsn_tail;
-extern  short   gsn_parry;
-extern  short   gsn_rescue;
-extern  short   gsn_second_attack;
-extern  short   gsn_third_attack;
-extern  short   gsn_fourth_attack;
-extern  short   gsn_fifth_attack;
-extern  short   gsn_dual_wield;
-
-
-extern  short   gsn_aid;
+extern short gsn_starfighters;
+extern short gsn_midships;
+extern short gsn_capitalships;
+extern short gsn_weaponsystems;
+extern short gsn_navigation;
+extern short gsn_shipsystems;
+extern short gsn_tractorbeams;
+extern short gsn_shipmaintenance;
+extern short gsn_sabotage;
+extern short gsn_spacecombat;
+extern short gsn_spacecombat2;
+extern short gsn_spacecombat3;
+extern short gsn_shipdocking;
+extern short gsn_jumpvector;
+extern short gsn_speeders;
+extern short gsn_speedercombat;
+extern short gsn_reinforcements;
+extern short gsn_postguard;
+extern short gsn_addpatrol;
+extern short gsn_eliteguard;
+extern short gsn_specialforces;
+extern short gsn_jail;
+extern short gsn_smalltalk;
+extern short gsn_propaganda;
+extern short gsn_bribe;
+extern short gsn_seduce;
+extern short gsn_masspropaganda;
+extern short gsn_gather_intelligence;
+extern short gsn_torture;
+extern short gsn_snipe;
+extern short gsn_throw;
+extern short gsn_disguise;
+extern short gsn_cloak;
+extern short gsn_mine;
+extern short gsn_grenades;
+extern short gsn_first_aid;
+extern short gsn_beg;
+extern short gsn_makeblade;
+extern short gsn_makejewelry;
+extern short gsn_makeblaster;
+extern short gsn_makebowcaster;
+extern short gsn_makelight;
+extern short gsn_makecomlink;
+extern short gsn_makegrenade;
+extern short gsn_makelandmine;
+extern short gsn_makearmor;
+extern short gsn_makeshield;
+extern short gsn_makecontainer;
+extern short gsn_lightsaber_crafting;
+extern short gsn_spice_refining;
+extern short gsn_fake_signal;
+extern short gsn_slicing;
+extern short gsn_detrap;
+extern short gsn_backstab;
+extern short gsn_circle;
+extern short gsn_dodge;
+extern short gsn_hide;
+extern short gsn_peek;
+extern short gsn_pick_lock;
+extern short gsn_scan;
+extern short gsn_skin;
+extern short gsn_sneak;
+extern short gsn_steal;
+extern short gsn_gouge;
+extern short gsn_track;
+extern short gsn_search;
+extern short gsn_dig;
+extern short gsn_mount;
+extern short gsn_bashdoor;
+extern short gsn_cutdoor;
+extern short gsn_berserk;
+extern short gsn_hitall;
+extern short gsn_pickshiplock;
+extern short gsn_hijack;
+extern short gsn_disarm;
+extern short gsn_enhanced_damage;
+extern short gsn_kick;
+extern short gsn_bite;
+extern short gsn_claw;
+extern short gsn_sting;
+extern short gsn_tail;
+extern short gsn_parry;
+extern short gsn_rescue;
+extern short gsn_second_attack;
+extern short gsn_third_attack;
+extern short gsn_fourth_attack;
+extern short gsn_fifth_attack;
+extern short gsn_dual_wield;
+extern short gsn_aid;
 
 /* used to do specific lookups */
-extern  short   gsn_first_spell;
-extern  short   gsn_first_skill;
-extern  short   gsn_first_weapon;
-extern  short   gsn_first_tongue;
-extern  short   gsn_top_sn;
+extern short gsn_first_spell;
+extern short gsn_first_skill;
+extern short gsn_first_weapon;
+extern short gsn_first_tongue;
+extern short gsn_top_sn;
 
 /* spells */
-extern  short   gsn_blindness;
-extern  short   gsn_charm_person;
-extern  short  gsn_aqua_breath;
-extern  short   gsn_invis;
-extern  short   gsn_mass_invis;
-extern  short   gsn_poison;
-extern  short   gsn_sleep;
-extern  short  gsn_possess;
-extern  short   gsn_fireball;           /* for fireshield  */
-extern  short   gsn_lightning_bolt;     /* for shockshield */
-extern  short  gsn_scribe;
-extern  short  gsn_study;
+extern short gsn_blindness;
+extern short gsn_charm_person;
+extern short gsn_aqua_breath;
+extern short gsn_invis;
+extern short gsn_mass_invis;
+extern short gsn_poison;
+extern short gsn_sleep;
+extern short gsn_possess;
+extern short gsn_fireball;           /* for fireshield  */
+extern short gsn_lightning_bolt;     /* for shockshield */
+extern short gsn_scribe;
+extern short gsn_study;
 
 /* newer attack skills */
-extern  short   gsn_punch;
-extern  short   gsn_bash;
-extern  short   gsn_stun;
-extern  short  gsn_bind;
-
-extern  short  gsn_poison_weapon;
-extern  short   gsn_climb;
-
-extern  short   gsn_blasters;
-extern  short   gsn_force_pikes;
-extern  short   gsn_bowcasters;
-extern  short   gsn_lightsabers;
-extern  short   gsn_vibro_blades;
-extern  short   gsn_flexible_arms;
-extern  short   gsn_talonous_arms;
-extern  short   gsn_bludgeons;
-
-extern  short  gsn_grip;
+extern short gsn_punch;
+extern short gsn_bash;
+extern short gsn_stun;
+extern short gsn_bind;
+extern short gsn_poison_weapon;
+extern short gsn_climb;
+extern short gsn_blasters;
+extern short gsn_force_pikes;
+extern short gsn_bowcasters;
+extern short gsn_lightsabers;
+extern short gsn_vibro_blades;
+extern short gsn_flexible_arms;
+extern short gsn_talonous_arms;
+extern short gsn_bludgeons;
+extern short gsn_grip;
 
 /* languages */
-extern  short                   gsn_common;
-extern  short                   gsn_wookiee;
-extern  short                   gsn_twilek;
-extern  short                   gsn_rodian;
-extern  short                   gsn_hutt;
-extern  short                   gsn_mon_calamari;
-extern  short                   gsn_noghri;
-extern  short                   gsn_gamorrean;
-extern  short                   gsn_jawa;
-extern  short                  gsn_adarian;
-extern  short                  gsn_ewok;
-extern  short                  gsn_verpine;
-extern  short                  gsn_defel;
-extern  short                  gsn_trandoshan;
-extern  short                  gsn_chadra_fan;
-extern  short                  gsn_quarren;
-extern  short                  gsn_duinduogwuin;
-extern  short                   gsn_barabel;
-extern  short                   gsn_firrerreo;
-extern  short           gsn_bothan;
-extern  short                   gsn_coynite;
-extern  short                   gsn_duros;
-extern  short                   gsn_gand;
-extern  short                   gsn_kubaz;
-extern  short                   gsn_togorian;
-extern  short                   gsn_yevethan;
+extern short gsn_common;
+extern short gsn_wookiee;
+extern short gsn_twilek;
+extern short gsn_rodian;
+extern short gsn_hutt;
+extern short gsn_mon_calamari;
+extern short gsn_noghri;
+extern short gsn_gamorrean;
+extern short gsn_jawa;
+extern short gsn_adarian;
+extern short gsn_ewok;
+extern short gsn_verpine;
+extern short gsn_defel;
+extern short gsn_trandoshan;
+extern short gsn_chadra_fan;
+extern short gsn_quarren;
+extern short gsn_duinduogwuin;
+extern short gsn_barabel;
+extern short gsn_firrerreo;
+extern short gsn_bothan;
+extern short gsn_coynite;
+extern short gsn_duros;
+extern short gsn_gand;
+extern short gsn_kubaz;
+extern short gsn_togorian;
+extern short gsn_yevethan;
 
 #define ASSIGN_GSN(gsn, skill)                                  \
   do                                                            \
@@ -1478,37 +1466,33 @@ extern  short                   gsn_yevethan;
 /*
  * Structure for a command in the command lookup table.
  */
-struct  cmd_type
+struct cmd_type
 {
   CMDTYPE *next;
-  char *name;
-  DO_FUN *do_fun;
-  char *fun_name;
-  int position;
-  short level;
-  int log;
+  char    *name;
+  DO_FUN  *do_fun;
+  char    *fun_name;
+  int      position;
+  short    level;
+  int      log;
   struct timerset userec;
 };
-
-
 
 /*
  * Structure for a social in the socials table.
  */
-struct  social_type
+struct social_type
 {
-  SOCIALTYPE *  next;
-  char *                name;
-  char *                char_no_arg;
-  char *                others_no_arg;
-  char *                char_found;
-  char *                others_found;
-  char *                vict_found;
-  char *                char_auto;
-  char *                others_auto;
+  SOCIALTYPE *next;
+  char       *name;
+  char       *char_no_arg;
+  char       *others_no_arg;
+  char       *char_found;
+  char       *others_found;
+  char       *vict_found;
+  char       *char_auto;
+  char       *others_auto;
 };
-
-
 
 /*
  * Global constants.
@@ -1516,7 +1500,7 @@ struct  social_type
 extern time_t last_restore_all_time;
 extern time_t boot_time;  /* this should be moved down */
 extern HOUR_MIN_SEC * set_boot_time;
-extern struct  tm *new_boot_time;
+extern struct tm *new_boot_time;
 extern time_t new_boot_time_t;
 
 extern const struct str_app_type str_app[];
