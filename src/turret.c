@@ -20,6 +20,18 @@ TURRET_DATA *create_turret( SHIP_DATA *owner )
   return turret;
 }
 
+TURRET_DATA *copy_turret( const TURRET_DATA *old_turret, SHIP_DATA *owner_of_new_turret )
+{
+  TURRET_DATA *new_turret = create_turret( owner_of_new_turret );
+
+  set_turret_room( new_turret, old_turret->room_vnum );
+  new_turret->weapon_state = old_turret->weapon_state;
+  set_turret_target( new_turret, old_turret->target );
+  new_turret->owner = old_turret->owner;
+
+  return new_turret;
+}
+
 bool is_turret_installed( const TURRET_DATA *turret )
 {
   return get_turret_room( turret ) != 0;

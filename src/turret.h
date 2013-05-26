@@ -5,6 +5,7 @@
 
 TURRET_DATA *create_turret( SHIP_DATA *owner );
 void destroy_turret( TURRET_DATA *turret );
+TURRET_DATA *copy_turret( const TURRET_DATA *old_turret, SHIP_DATA *owner_of_new_turret );
 
 bool is_turret_installed( const TURRET_DATA *turret );
 

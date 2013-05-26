@@ -1,10 +1,12 @@
 #include "character.h"
 #include "mud.h"
 #include "ships.h"
+#include "turret.h"
 
 void do_showship( CHAR_DATA *ch, char *argument )
 {
   SHIP_DATA *ship = NULL;
+  size_t turret_num = 0;
 
   if ( is_npc( ch ) )
     {
@@ -74,56 +76,20 @@ void do_showship( CHAR_DATA *ch, char *argument )
              ship->lasers, ship->ions,
              ship->statet0 == LASER_DAMAGED ? "Damaged" : "Good");
 
-  if ( ship->turret[0].room_vnum )
-    ch_printf( ch, "Turret One: %d  Condition: %s\r\n",
-               ship->turret[0].room_vnum,
-               ship->turret[0].weapon_state == LASER_DAMAGED ? "Damaged" : "Good");
+  for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
+    {
+      static const char * const literal_number[MAX_NUMBER_OF_TURRETS_IN_SHIP] =
+	{ "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten" };
+      const TURRET_DATA *turret = ship->turret[turret_num];
 
-  if ( ship->turret[1].room_vnum )
-    ch_printf( ch, "Turret Two: %d  Condition: %s\r\n",
-               ship->turret[1].room_vnum,
-               ship->turret[1].weapon_state == LASER_DAMAGED ? "Damaged" : "Good");
-
-  if ( ship->turret[2].room_vnum )
-    ch_printf( ch, "Turret Three: %d  Condition: %s\r\n",
-               ship->turret[2].room_vnum,
-               ship->turret[2].weapon_state == LASER_DAMAGED ? "Damaged" : "Good");
-
-  if ( ship->turret[3].room_vnum )
-    ch_printf( ch, "Turret Four: %d  Condition: %s\r\n",
-               ship->turret[3].room_vnum,
-
-               ship->turret[3].weapon_state == LASER_DAMAGED ? "Damaged" : "Good");
-
-  if ( ship->turret[4].room_vnum )
-    ch_printf( ch, "Turret Five: %d  Condition: %s\r\n",
-               ship->turret[4].room_vnum,
-               ship->turret[4].weapon_state == LASER_DAMAGED ? "Damaged" : "Good");
-
-  if ( ship->turret[5].room_vnum )
-    ch_printf( ch, "Turret Six: %d  Condition: %s\r\n",
-               ship->turret[5].room_vnum,
-               ship->turret[5].weapon_state == LASER_DAMAGED ? "Damaged" : "Good");
-
-  if ( ship->turret[6].room_vnum )
-    ch_printf( ch, "Turret Seven: %d  Condition: %s\r\n",
-               ship->turret[6].room_vnum,
-               ship->turret[6].weapon_state == LASER_DAMAGED ? "Damaged" : "Good");
-
-  if ( ship->turret[7].room_vnum )
-    ch_printf( ch, "Turret Eight: %d  Condition: %s\r\n",
-               ship->turret[7].room_vnum,
-               ship->turret[7].weapon_state == LASER_DAMAGED ? "Damaged" : "Good");
-
-  if ( ship->turret[8].room_vnum )
-    ch_printf( ch, "Turret Nine: %d  Condition: %s\r\n",
-               ship->turret[8].room_vnum,
-               ship->turret[8].weapon_state == LASER_DAMAGED ? "Damaged" : "Good");
-
-  if ( ship->turret[9].room_vnum )
-    ch_printf( ch, "Turret Ten: %d  Condition: %s\r\n",
-               ship->turret[9].room_vnum,
-               ship->turret[9].weapon_state == LASER_DAMAGED ? "Damaged" : "Good");
+      if ( is_turret_installed( turret ) )
+	{
+	  ch_printf( ch, "Turret %s: %d  Condition: %s\r\n",
+		     literal_number[turret_num],
+		     get_turret_room( turret ),
+		     is_turret_damaged( turret ) ? "Damaged" : "Good");
+	}
+    }
 
   ch_printf( ch, "Missiles: %d  Torpedos: %d  Rockets: %d  Condition: %s\r\n",
              ship->missiles,

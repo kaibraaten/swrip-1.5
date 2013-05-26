@@ -3,6 +3,7 @@
 #include "ships.h"
 #include "mud.h"
 #include "character.h"
+#include "turret.h"
 
 void do_target(CHAR_DATA *ch, char *argument )
 {
@@ -11,7 +12,8 @@ void do_target(CHAR_DATA *ch, char *argument )
   SHIP_DATA *ship;
   SHIP_DATA *target, *dship;
   char buf[MAX_STRING_LENGTH];
-  bool turret = FALSE;
+  bool is_turret = FALSE;
+  size_t turret_num = 0;
 
   strcpy( arg, argument );
 
@@ -23,8 +25,9 @@ void do_target(CHAR_DATA *ch, char *argument )
           send_to_char("&RYou must be in the gunners seat or turret of a ship to do that!\r\n",ch);
           return;
         }
+
       if ( ship->gunseat != ch->in_room->vnum )
-        turret = TRUE;
+        is_turret = TRUE;
 
       if ( ship_is_in_hyperspace( ship ) && ship->sclass <= SHIP_PLATFORM)
         {
@@ -37,7 +40,7 @@ void do_target(CHAR_DATA *ch, char *argument )
           return;
         }
 
-      if ( is_autoflying(ship) && ( !turret || !check_pilot( ch, ship ) ) )
+      if ( is_autoflying(ship) && ( !is_turret || !check_pilot( ch, ship ) ) )
         {
           send_to_char("&RYou'll have to turn off the ships autopilot first....\r\n",ch);
           return;
@@ -52,35 +55,27 @@ void do_target(CHAR_DATA *ch, char *argument )
       if ( !str_cmp( arg, "none") )
         {
           send_to_char("&GTarget set to none.\r\n",ch);
+
           if ( ch->in_room->vnum == ship->gunseat )
             ship->target0 = NULL;
-          if ( ch->in_room->vnum == ship->turret[0].room_vnum )
-            ship->turret[0].target = NULL;
-          if ( ch->in_room->vnum == ship->turret[1].room_vnum )
-            ship->turret[1].target = NULL;
-          if ( ch->in_room->vnum == ship->turret[2].room_vnum )
-            ship->turret[2].target = NULL;
-          if ( ch->in_room->vnum == ship->turret[3].room_vnum )
-            ship->turret[3].target = NULL;
-          if ( ch->in_room->vnum == ship->turret[4].room_vnum )
-            ship->turret[4].target = NULL;
-          if ( ch->in_room->vnum == ship->turret[5].room_vnum )
-            ship->turret[5].target = NULL;
-          if ( ch->in_room->vnum == ship->turret[6].room_vnum )
-            ship->turret[6].target = NULL;
-          if ( ch->in_room->vnum == ship->turret[7].room_vnum )
-            ship->turret[7].target = NULL;
-          if ( ch->in_room->vnum == ship->turret[8].room_vnum )
-            ship->turret[8].target = NULL;
-          if ( ch->in_room->vnum == ship->turret[9].room_vnum )
-	    ship->turret[9].target = NULL;
+
+	  for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
+	    {
+	      TURRET_DATA *turret = ship->turret[turret_num];
+
+	      if( ch->in_room->vnum == get_turret_room( turret ) )
+		{
+		  clear_turret_target( turret );
+		}
+	    }
+
           return;
         }
+
       if (ship->sclass > SHIP_PLATFORM)
         target = ship_in_room( ship->in_room , arg );
       else
         target = get_ship_here( arg, ship );
-
 
       if (  target == NULL )
         {
@@ -165,35 +160,15 @@ void do_target(CHAR_DATA *ch, char *argument )
   if ( ch->in_room->vnum == ship->gunseat )
     ship->target0 = target;
 
-  if ( ch->in_room->vnum == ship->turret[0].room_vnum )
-    ship->turret[0].target = target;
+  for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
+    {
+      TURRET_DATA *turret = ship->turret[turret_num];
 
-  if ( ch->in_room->vnum == ship->turret[1].room_vnum )
-    ship->turret[1].target = target;
-
-  if ( ch->in_room->vnum == ship->turret[2].room_vnum )
-    ship->turret[2].target = target;
-
-  if ( ch->in_room->vnum == ship->turret[3].room_vnum )
-    ship->turret[3].target = target;
-
-  if ( ch->in_room->vnum == ship->turret[4].room_vnum )
-    ship->turret[4].target = target;
-
-  if ( ch->in_room->vnum == ship->turret[5].room_vnum )
-    ship->turret[5].target = target;
-
-  if ( ch->in_room->vnum == ship->turret[6].room_vnum )
-    ship->turret[6].target = target;
-
-  if ( ch->in_room->vnum == ship->turret[7].room_vnum )
-    ship->turret[7].target = target;
-
-  if ( ch->in_room->vnum == ship->turret[8].room_vnum )
-    ship->turret[8].target = target;
-
-  if ( ch->in_room->vnum == ship->turret[9].room_vnum )
-    ship->target0 = target;
+      if( ch->in_room->vnum == get_turret_room( turret ) )
+	{
+	  set_turret_target( turret, target );
+	}
+    }
 
   send_to_char( "&GTarget Locked.\r\n", ch);
   sprintf( buf , "You are being targetted by %s." , ship->name);

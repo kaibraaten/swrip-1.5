@@ -2,12 +2,14 @@
 #include "vector3_aux.h"
 #include "mud.h"
 #include "ships.h"
+#include "turret.h"
 
 void do_status(CHAR_DATA *ch, char *argument )
 {
   int the_chance;
   SHIP_DATA *ship;
   SHIP_DATA *target;
+  size_t turret_num = 0;
 
   if (  (ship = ship_from_cockpit(ch->in_room->vnum))  == NULL )
     {
@@ -62,36 +64,23 @@ void do_status(CHAR_DATA *ch, char *argument )
              target->maxenergy);
   ch_printf( ch, "&OLaser Condition:&Y %s  &OCurrent Target:&Y %s\r\n",
              target->statet0 == LASER_DAMAGED ? "Damaged" : "Good" , target->target0 ? target->target0->name : "none");
-  if (target->turret[0].room_vnum)
-    ch_printf( ch, "&OTurret One:  &Y %s  &OCurrent Target:&Y %s\r\n",
-               target->turret[0].weapon_state == LASER_DAMAGED ? "Damaged" : "Good" , target->turret[0].target ? target->turret[0].target->name : "none");
-  if (target->turret[1].room_vnum)
-    ch_printf( ch, "&OTurret Two:  &Y %s  &OCurrent Target:&Y %s\r\n",
-               target->turret[1].weapon_state == LASER_DAMAGED ? "Damaged" : "Good" , target->turret[1].target ? target->turret[1].target->name : "none");
-  if (target->turret[2].room_vnum)
-    ch_printf( ch, "&OTurret Three:&Y %s  &OCurrent Target:&Y %s\r\n",
-               target->turret[2].weapon_state == LASER_DAMAGED ? "Damaged" : "Good" , target->turret[2].target ? target->turret[2].target->name : "none");
-  if (target->turret[3].room_vnum)
-    ch_printf( ch, "&OTurret Four: &Y %s  &OCurrent Target:&Y %s\r\n",
-               target->turret[3].weapon_state == LASER_DAMAGED ? "Damaged" : "Good" , target->turret[3].target ? target->turret[3].target->name : "none");
-  if (target->turret[4].room_vnum)
-    ch_printf( ch, "&OTurret Five: &Y %s  &OCurrent Target:&Y %s\r\n",
-               target->turret[4].weapon_state == LASER_DAMAGED ? "Damaged" : "Good" , target->turret[4].target ? target->turret[4].target->name : "none");
-  if (target->turret[5].room_vnum)
-    ch_printf( ch, "&OTurret Six:  &Y %s  &OCurrent Target:&Y %s\r\n",
-               target->turret[5].weapon_state == LASER_DAMAGED ? "Damaged" : "Good" , target->turret[5].target ? target->turret[5].target->name : "none");
-  if (target->turret[6].room_vnum)
-    ch_printf( ch, "&OTurret Seven:&Y %s  &OCurrent Target:&Y %s\r\n",
-               target->turret[6].weapon_state == LASER_DAMAGED ? "Damaged" : "Good" , target->turret[6].target ? target->turret[6].target->name : "none");
-  if (target->turret[7].room_vnum)
-    ch_printf( ch, "&OTurret Eight:&Y %s  &OCurrent Target:&Y %s\r\n",
-               target->turret[7].weapon_state == LASER_DAMAGED ? "Damaged" : "Good" , target->turret[7].target ? target->turret[7].target->name : "none");
-  if (target->turret[8].room_vnum)
-    ch_printf( ch, "&OTurret Nine: &Y %s  &OCurrent Target:&Y %s\r\n",
-               target->turret[8].weapon_state == LASER_DAMAGED ? "Damaged" : "Good" , target->turret[8].target ? target->turret[8].target->name : "none");
-  if (target->turret[9].room_vnum)
-    ch_printf( ch, "&OTurret Ten:  &Y %s  &OCurrent Target:&Y %s\r\n",
-               target->turret[9].weapon_state == LASER_DAMAGED ? "Damaged" : "Good" , target->turret[9].target ? target->turret[9].target->name : "none");
+
+  for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
+    {
+      static const char * const literal_number[MAX_NUMBER_OF_TURRETS_IN_SHIP] =
+	{ "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten" };
+      const TURRET_DATA *turret = target->turret[turret_num];
+      const SHIP_DATA *turret_target = turret_has_target( turret ) ? get_turret_target( turret ) : NULL;
+      const char *turret_target_name = turret_target ? turret_target->name : "none";
+      const char *turret_status = is_turret_damaged( turret ) ? "Damaged" : "Good";
+
+      if( is_turret_installed( turret ) )
+	{
+	  ch_printf( ch, "&OTurret %s:  &Y %s  &OCurrent Target:&Y %s\r\n",
+		     literal_number[turret_num], turret_status, turret_target_name );
+	}
+    }
+
   ch_printf( ch, "&OSensors:    &Y%d   &OTractor Beam:   &Y%d\r\n", target->sensor, target->tractorbeam);
   ch_printf( ch, "&OAstroArray: &Y%d   &OComm:           &Y%d\r\n", target->astro_array, target->comm);
   ch_printf( ch, "\r\n&OMissiles:&Y %d&O  Torpedos: &Y%d&O\r\nRockets:  &Y%d&O  Chaff:    &Y%d&O  \r\n Condition:&Y %s&w\r\n",

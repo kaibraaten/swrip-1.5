@@ -668,8 +668,7 @@ static void makedebris( SHIP_DATA *ship )
 
   for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
     {
-      TURRET_DATA *turret = debris->turret[turret_num];
-      reset_turret( turret );
+      debris->turret[turret_num] = copy_turret( ship->turret[turret_num], debris );
     }
 
   debris->autopilot = FALSE;
@@ -2422,13 +2421,13 @@ static bool load_ship_file( const char *shipfile )
 
   if ( !(found) )
     {
-      DISPOSE( ship );
-
       for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
 	{
 	  TURRET_DATA *turret = ship->turret[turret_num];
 	  destroy_turret( turret );
 	}
+
+      DISPOSE( ship );
     }
   else
     {
