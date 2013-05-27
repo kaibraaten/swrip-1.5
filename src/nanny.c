@@ -982,8 +982,8 @@ if ( (iLang = skill_lookup( "common" )) < 0 )
 
       for ( ship = first_ship; ship; ship = ship->next )
 	{
-	  if ( ch->in_room->vnum >= ship->firstroom
-	       && ch->in_room->vnum <= ship->lastroom )
+	  if ( ch->in_room->vnum >= ship->room.first
+	       && ch->in_room->vnum <= ship->room.last )
 	    {
 	      if ( ship->sclass != SHIP_PLATFORM || ship->spaceobject )
 		{

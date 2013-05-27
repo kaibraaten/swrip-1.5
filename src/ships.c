@@ -77,7 +77,7 @@ static void evade_collision_with_sun( SHIP_DATA *ship, const SPACE_DATA *sun )
   ship->head.z = 10 * ship->pos.z;
   ship->energy -= ship->currspeed/10;
   ship->currspeed = ship->realspeed;
-  echo_to_room( AT_RED , get_room_index(ship->pilotseat), "Automatic Override: Evading to avoid collision with sun!\r\n" );
+  echo_to_room( AT_RED , get_room_index(ship->room.pilotseat), "Automatic Override: Evading to avoid collision with sun!\r\n" );
 
   if ( ship->sclass == FIGHTER_SHIP
        || ( ship->sclass == MIDSIZE_SHIP && ship->manuever > 50 ) )
@@ -210,7 +210,7 @@ void update_shipmovement( void )
 		{
 		  int dmg = 0;
 
-		  echo_to_room( AT_YELLOW, get_room_index(ship->pilotseat),
+		  echo_to_room( AT_YELLOW, get_room_index(ship->room.pilotseat),
 				"Hyperjump complete." );
 		  echo_to_ship( AT_YELLOW, ship,
 				"The ship slams to a halt as it comes out of hyperspace." );
@@ -231,7 +231,7 @@ void update_shipmovement( void )
 
           if( target )
             {
-              echo_to_room( AT_YELLOW, get_room_index(ship->pilotseat),
+              echo_to_room( AT_YELLOW, get_room_index(ship->room.pilotseat),
 			    "Hyperjump complete.");
               echo_to_ship( AT_YELLOW, ship, "The ship slams to a halt as it comes out of hyperspace. An artificial gravity well surrounds you!");
 	      sprintf( buf, "%s enters the starsystem at %.0f %.0f %.0f",
@@ -258,7 +258,7 @@ void update_shipmovement( void )
                 }
               else
                 {
-                  echo_to_room( AT_YELLOW, get_room_index(ship->pilotseat), "Hyperjump complete.");
+                  echo_to_room( AT_YELLOW, get_room_index(ship->room.pilotseat), "Hyperjump complete.");
                   echo_to_ship( AT_YELLOW, ship, "The ship lurches slightly as it comes out of hyperspace.");
                   sprintf( buf ,"%s enters the starsystem at %.0f %.0f %.0f",
                            ship->name, ship->pos.x, ship->pos.y, ship->pos.z );
@@ -284,7 +284,7 @@ void update_shipmovement( void )
               else
                 {
 
-                  echo_to_room( AT_YELLOW, get_room_index(ship->pilotseat), "Hyperjump complete.");
+                  echo_to_room( AT_YELLOW, get_room_index(ship->room.pilotseat), "Hyperjump complete.");
                   echo_to_ship( AT_YELLOW, ship, "The ship lurches slightly as it comes out of hyperspace.");
                   sprintf( buf ,"%s enters the starsystem at %.0f %.0f %.0f",
 			   ship->name, ship->pos.x, ship->pos.y, ship->pos.z );
@@ -325,8 +325,8 @@ void update_shipmovement( void )
             {
               ship->count = 0;
               sprintf( buf, "%d", ship->hyperdistance );
-              echo_to_room_dnr( AT_YELLOW , get_room_index(ship->pilotseat), "Remaining jump distance: " );
-              echo_to_room( AT_WHITE , get_room_index(ship->pilotseat), buf );
+              echo_to_room_dnr( AT_YELLOW , get_room_index(ship->room.pilotseat), "Remaining jump distance: " );
+              echo_to_room( AT_WHITE , get_room_index(ship->room.pilotseat), buf );
             }
 
 	    if( ship_is_in_hyperspace( ship ) )
@@ -401,11 +401,11 @@ static void landship( SHIP_DATA *ship, const char *arg )
 
   if ( target != ship && target != NULL && target->bayopen
        && ( ship->sclass != MIDSIZE_SHIP || target->sclass != MIDSIZE_SHIP ) )
-    destination = target->hanger;
+    destination = target->room.hanger;
 
   if ( !ship_to_room( ship , destination ) )
     {
-      echo_to_room( AT_YELLOW , get_room_index(ship->pilotseat), "Could not complete approach. Landing aborted.");
+      echo_to_room( AT_YELLOW , get_room_index(ship->room.pilotseat), "Could not complete approach. Landing aborted.");
       echo_to_ship( AT_YELLOW , ship , "The ship pulls back up out of its landing sequence.");
 
       if ( !ship_is_disabled( ship ))
@@ -414,7 +414,7 @@ static void landship( SHIP_DATA *ship, const char *arg )
       return;
     }
 
-  echo_to_room( AT_YELLOW , get_room_index(ship->pilotseat), "Landing sequence complete.");
+  echo_to_room( AT_YELLOW , get_room_index(ship->room.pilotseat), "Landing sequence complete.");
   echo_to_ship( AT_YELLOW , ship , "You feel a slight thud as the ship sets down on the ground.");
   sprintf( buf ,"%s disapears from your scanner." , ship->name  );
   echo_to_nearby_ships( AT_YELLOW, ship, buf , NULL );
@@ -516,12 +516,12 @@ static void approachland( SHIP_DATA *ship, const char *arg)
 
   if ( !found && !target )
     {
-      echo_to_room( AT_YELLOW , get_room_index(ship->pilotseat), "ERROR");
+      echo_to_room( AT_YELLOW , get_room_index(ship->room.pilotseat), "ERROR");
       return;
     }
 
   sprintf( buf, "Approaching %s.", buf2 );
-  echo_to_room( AT_YELLOW , get_room_index(ship->pilotseat), buf);
+  echo_to_room( AT_YELLOW , get_room_index(ship->room.pilotseat), buf);
   sprintf( buf, "%s begins its approach to %s.", ship->name, buf2 );
   echo_to_nearby_ships( AT_YELLOW, ship, buf , NULL );
 }
@@ -536,7 +536,7 @@ static void launchship( SHIP_DATA *ship )
 
   if ( ship->spaceobject == NULL )
     {
-      echo_to_room( AT_YELLOW , get_room_index(ship->pilotseat) , "Launch path blocked... Launch aborted.");
+      echo_to_room( AT_YELLOW , get_room_index(ship->room.pilotseat) , "Launch path blocked... Launch aborted.");
       echo_to_ship( AT_YELLOW , ship , "The ship slowly sets back back down on the landing pad.");
       sprintf( buf ,  "%s slowly sets back down." ,ship->name );
       echo_to_room( AT_YELLOW , get_room_index(ship->location) , buf );
@@ -599,7 +599,7 @@ static void launchship( SHIP_DATA *ship )
     {
       for ( target = first_ship; target; target = target->next )
         {
-          if (ship->lastdoc == target->hanger)
+          if (ship->lastdoc == target->room.hanger)
             {
               vector_copy( &ship->pos, &target->pos );
             }
@@ -1159,7 +1159,7 @@ void echo_to_ship( int color, SHIP_DATA *ship, const char *argument )
 {
   int room = 0;
 
-  for ( room = ship->firstroom ; room <= ship->lastroom ;room++ )
+  for ( room = ship->room.first ; room <= ship->room.last ;room++ )
     {
       echo_to_room( color , get_room_index(room) , argument );
     }
@@ -1169,7 +1169,7 @@ void sound_to_ship( SHIP_DATA *ship, const char *argument )
 {
   int roomnum = 0;
 
-  for ( roomnum = ship->firstroom ; roomnum <= ship->lastroom ;roomnum++ )
+  for ( roomnum = ship->room.first ; roomnum <= ship->room.last ;roomnum++ )
     {
       ROOM_INDEX_DATA *room = get_room_index( roomnum );
       CHAR_DATA *vic = NULL;
@@ -1251,7 +1251,7 @@ void recharge_ships()
         {
           ship->missilestate = MISSILE_READY;
           if ( ship->missiles > 0 )
-            echo_to_room( AT_YELLOW, get_room_index(ship->gunseat), "Missile launcher reloaded.");
+            echo_to_room( AT_YELLOW, get_room_index(ship->room.gunseat), "Missile launcher reloaded.");
         }
 
       if (ship->missilestate == MISSILE_RELOAD )
@@ -1434,7 +1434,7 @@ void update_ships( void )
 
       if (ship->shipstate == SHIP_BUSY_3)
         {
-          echo_to_room( AT_YELLOW, get_room_index(ship->pilotseat), "Manuever complete.");
+          echo_to_room( AT_YELLOW, get_room_index(ship->room.pilotseat), "Manuever complete.");
           ship->shipstate = SHIP_READY;
         }
 
@@ -1500,23 +1500,23 @@ void update_ships( void )
         {
           sprintf( buf, "%d",
                    ship->currspeed );
-          echo_to_room_dnr( AT_BLUE , get_room_index(ship->pilotseat),  "Speed: " );
-          echo_to_room_dnr( AT_LBLUE , get_room_index(ship->pilotseat),  buf );
+          echo_to_room_dnr( AT_BLUE , get_room_index(ship->room.pilotseat),  "Speed: " );
+          echo_to_room_dnr( AT_LBLUE , get_room_index(ship->room.pilotseat),  buf );
           sprintf( buf, "%.0f %.0f %.0f",
                    ship->pos.x , ship->pos.y, ship->pos.z );
-          echo_to_room_dnr( AT_BLUE , get_room_index(ship->pilotseat),  "  Coords: " );
-          echo_to_room( AT_LBLUE , get_room_index(ship->pilotseat),  buf );
+          echo_to_room_dnr( AT_BLUE , get_room_index(ship->room.pilotseat),  "  Coords: " );
+          echo_to_room( AT_LBLUE , get_room_index(ship->room.pilotseat),  buf );
 
-          if ( ship->pilotseat != ship->coseat )
+          if ( ship->room.pilotseat != ship->room.coseat )
             {
               sprintf( buf, "%d",
                        ship->currspeed );
-              echo_to_room_dnr( AT_BLUE , get_room_index(ship->coseat),  "Speed: " );
-              echo_to_room_dnr( AT_LBLUE , get_room_index(ship->coseat),  buf );
+              echo_to_room_dnr( AT_BLUE , get_room_index(ship->room.coseat),  "Speed: " );
+              echo_to_room_dnr( AT_LBLUE , get_room_index(ship->room.coseat),  buf );
               sprintf( buf, "%.0f %.0f %.0f",
                        ship->pos.x , ship->pos.y, ship->pos.z );
-              echo_to_room_dnr( AT_BLUE , get_room_index(ship->coseat),  "  Coords: " );
-              echo_to_room( AT_LBLUE , get_room_index(ship->coseat),  buf );
+              echo_to_room_dnr( AT_BLUE , get_room_index(ship->room.coseat),  "  Coords: " );
+              echo_to_room( AT_LBLUE , get_room_index(ship->room.coseat),  buf );
 	    }
         }
 
@@ -1531,7 +1531,7 @@ void update_ships( void )
               {
                 sprintf( buf, "Proximity alert: %s  %.0f %.0f %.0f", spaceobj->name,
                          spaceobj->pos.x, spaceobj->pos.y, spaceobj->pos.z);
-                echo_to_room( AT_RED , get_room_index(ship->pilotseat),  buf );
+                echo_to_room( AT_RED , get_room_index(ship->room.pilotseat),  buf );
               }
 
           for ( target = first_ship; target; target = target->next )
@@ -1556,7 +1556,7 @@ void update_ships( void )
                                target->pos.x - ship->pos.x,
                                target->pos.y - ship->pos.y,
                                target->pos.z - ship->pos.z );
-                      echo_to_room( AT_RED, get_room_index(ship->pilotseat),
+                      echo_to_room( AT_RED, get_room_index(ship->room.pilotseat),
                                     buf );
                     }
                 }
@@ -1570,12 +1570,12 @@ void update_ships( void )
           sprintf( buf, "%s   %.0f %.0f %.0f", ship->target0->name,
                    ship->target0->pos.x, ship->target0->pos.y,
                    ship->target0->pos.z );
-          echo_to_room_dnr( AT_BLUE, get_room_index(ship->gunseat),"Target: ");
-          echo_to_room( AT_LBLUE , get_room_index(ship->gunseat),  buf );
+          echo_to_room_dnr( AT_BLUE, get_room_index(ship->room.gunseat),"Target: ");
+          echo_to_room( AT_LBLUE , get_room_index(ship->room.gunseat),  buf );
 
           if (!ship_in_range( ship, ship->target0 ) )
             {
-              echo_to_room( AT_LBLUE , get_room_index(ship->gunseat),  "Your target seems to have left.");
+              echo_to_room( AT_LBLUE , get_room_index(ship->room.gunseat),  "Your target seems to have left.");
               ship->target0 = NULL;
             }
         }
@@ -1615,7 +1615,7 @@ void update_ships( void )
 	{
 	  if( !ship_in_range( ship->target0, ship ) )
 	    {
-	      echo_to_room( AT_BLUE , get_room_index(ship->pilotseat), "Target left, returning to NORMAL condition.\r\n" );
+	      echo_to_room( AT_BLUE , get_room_index(ship->room.pilotseat), "Target left, returning to NORMAL condition.\r\n" );
 	      ship->currspeed = 0;
 	      ship->target0 = NULL;
 	    }
@@ -1635,7 +1635,7 @@ void update_ships( void )
               ship_set_course_to_ship( ship, ship->target0 );
               ship_turn_180( ship );
               ship->energy -= ship->currspeed/10;
-              echo_to_room( AT_RED , get_room_index(ship->pilotseat), "Autotrack: Evading to avoid collision!\r\n" );
+              echo_to_room( AT_RED , get_room_index(ship->room.pilotseat), "Autotrack: Evading to avoid collision!\r\n" );
 
               if ( ship->sclass == FIGHTER_SHIP || ( ship->sclass == MIDSIZE_SHIP && ship->manuever > 50 ) )
                 ship->shipstate = SHIP_BUSY_3;
@@ -1649,7 +1649,7 @@ void update_ships( void )
             {
               ship_set_course_to_ship( ship, ship->target0 );
               ship->energy -= ship->currspeed / 10;
-              echo_to_room( AT_BLUE , get_room_index(ship->pilotseat), "Autotracking target... setting new course.\r\n" );
+              echo_to_room( AT_BLUE , get_room_index(ship->room.pilotseat), "Autotracking target... setting new course.\r\n" );
 
 	      if ( ship->sclass == FIGHTER_SHIP || ( ship->sclass == MIDSIZE_SHIP && ship->manuever > 50 ) )
                 ship->shipstate = SHIP_BUSY_3;
@@ -1815,11 +1815,11 @@ void echo_to_cockpit( int color, SHIP_DATA *ship, const char *argument )
 {
   int room = 0;
 
-  for ( room = ship->firstroom ; room <= ship->lastroom ;room++ )
+  for ( room = ship->room.first; room <= ship->room.last;room++ )
     {
-      if ( room == ship->cockpit || room == ship->navseat
-           || room == ship->pilotseat || room == ship->coseat
-           || room == ship->gunseat || room == ship->engineroom
+      if ( room == ship->room.cockpit || room == ship->room.navseat
+           || room == ship->room.pilotseat || room == ship->room.coseat
+           || room == ship->room.gunseat || room == ship->room.engine
            || room == get_turret_room( ship->turret[0] )
 	   || room == get_turret_room( ship->turret[1] )
 	   || room == get_turret_room( ship->turret[2] )
@@ -1948,7 +1948,7 @@ long int get_ship_value( SHIP_DATA *ship )
   if (ship->hyperspeed)
     price += 1000 + ship->hyperspeed * 10;
 
-  if (ship->hanger)
+  if (ship->room.hanger)
     price += ship->sclass == MIDSIZE_SHIP ? 50000 : 100000;
 
   price *= 1.5;
@@ -2021,7 +2021,7 @@ void save_ship( const SHIP_DATA *ship )
       fprintf( fp, "Class        %d\n", ship->sclass             );
       fprintf( fp, "Tractorbeam  %d\n", ship->tractorbeam       );
       fprintf( fp, "Shipyard     %d\n", ship->shipyard          );
-      fprintf( fp, "Hanger       %d\n", ship->hanger            );
+      fprintf( fp, "Hanger       %d\n", ship->room.hanger            );
       fprintf( fp, "Vx           %.0f\n",       ship->pos.x                );
       fprintf( fp, "Vy           %.0f\n",       ship->pos.y                );
       fprintf( fp, "Vz           %.0f\n",       ship->pos.z                );
@@ -2067,8 +2067,8 @@ void save_ship( const SHIP_DATA *ship )
       fprintf( fp, "Torpedos     %d\n", ship->torpedos          );
       fprintf( fp, "Maxtorpedos  %d\n", ship->maxtorpedos       );
       fprintf( fp, "Lastdoc      %d\n", ship->lastdoc           );
-      fprintf( fp, "Firstroom    %d\n", ship->firstroom         );
-      fprintf( fp, "Lastroom     %d\n", ship->lastroom          );
+      fprintf( fp, "Firstroom    %d\n", ship->room.first        );
+      fprintf( fp, "Lastroom     %d\n", ship->room.last         );
       fprintf( fp, "Shield       %d\n", ship->shield            );
       fprintf( fp, "Maxshield    %d\n", ship->maxshield         );
       fprintf( fp, "Hull         %d\n", ship->hull              );
@@ -2082,13 +2082,13 @@ void save_ship( const SHIP_DATA *ship )
       fprintf( fp, "Astro_array  %d\n", ship->astro_array       );
       fprintf( fp, "Realspeed    %d\n", ship->realspeed         );
       fprintf( fp, "Type         %d\n", ship->type              );
-      fprintf( fp, "Cockpit      %d\n", ship->cockpit           );
-      fprintf( fp, "Coseat       %d\n", ship->coseat            );
-      fprintf( fp, "Pilotseat    %d\n", ship->pilotseat         );
-      fprintf( fp, "Gunseat      %d\n", ship->gunseat           );
-      fprintf( fp, "Navseat      %d\n", ship->navseat           );
-      fprintf( fp, "Engineroom   %d\n",       ship->engineroom        );
-      fprintf( fp, "Entrance     %d\n",       ship->entrance          );
+      fprintf( fp, "Cockpit      %d\n", ship->room.cockpit           );
+      fprintf( fp, "Coseat       %d\n", ship->room.coseat            );
+      fprintf( fp, "Pilotseat    %d\n", ship->room.pilotseat         );
+      fprintf( fp, "Gunseat      %d\n", ship->room.gunseat           );
+      fprintf( fp, "Navseat      %d\n", ship->room.navseat           );
+      fprintf( fp, "Engineroom   %d\n",       ship->room.engine        );
+      fprintf( fp, "Entrance     %d\n",       ship->room.entrance          );
       fprintf( fp, "Shipstate    %d\n", ship->shipstate         );
       fprintf( fp, "Missilestate %d\n", ship->missilestate      );
       fprintf( fp, "Energy       %d\n", ship->energy            );
@@ -2130,8 +2130,8 @@ static void fread_ship( SHIP_DATA *ship, FILE *fp )
           break;
 
         case 'C':
-          KEY( "Cockpit",     ship->cockpit,          fread_number( fp ) );
-          KEY( "Coseat",     ship->coseat,          fread_number( fp ) );
+          KEY( "Cockpit",     ship->room.cockpit,          fread_number( fp ) );
+          KEY( "Coseat",     ship->room.coseat,          fread_number( fp ) );
           KEY( "Class",       ship->sclass,            fread_number( fp ) );
           KEY( "Copilot",     ship->copilot,          fread_string( fp ) );
           KEY( "Comm",        ship->comm,      fread_number( fp ) );
@@ -2144,8 +2144,8 @@ static void fread_ship( SHIP_DATA *ship, FILE *fp )
           break;
 
         case 'E':
-          KEY( "Engineroom",    ship->engineroom,      fread_number( fp ) );
-          KEY( "Entrance",      ship->entrance,         fread_number( fp ) );
+          KEY( "Engineroom",    ship->room.engine,      fread_number( fp ) );
+          KEY( "Entrance",      ship->room.entrance,         fread_number( fp ) );
           KEY( "Energy",      ship->energy,        fread_number( fp ) );
 
           if ( !str_cmp( word, "End" ) )
@@ -2210,17 +2210,17 @@ static void fread_ship( SHIP_DATA *ship, FILE *fp )
               ship->tractored    = NULL;
               ship->tractoredby = NULL;
 
-              if (ship->navseat <= 0)
-                ship->navseat = ship->cockpit;
+              if (ship->room.navseat <= 0)
+                ship->room.navseat = ship->room.cockpit;
 
-              if (ship->gunseat <= 0)
-                ship->gunseat = ship->cockpit;
+              if (ship->room.gunseat <= 0)
+                ship->room.gunseat = ship->room.cockpit;
 
-              if (ship->coseat <= 0)
-                ship->coseat = ship->cockpit;
+              if (ship->room.coseat <= 0)
+                ship->room.coseat = ship->room.cockpit;
 
-              if (ship->pilotseat <= 0)
-                ship->pilotseat = ship->cockpit;
+              if (ship->room.pilotseat <= 0)
+                ship->room.pilotseat = ship->room.cockpit;
 
               if (ship->missiletype == 1)
                 {
@@ -2243,19 +2243,19 @@ static void fread_ship( SHIP_DATA *ship, FILE *fp )
 
         case 'F':
           KEY( "Filename",      ship->filename,         fread_string_nohash( fp ) );
-          KEY( "Firstroom",   ship->firstroom,        fread_number( fp ) );
+          KEY( "Firstroom",   ship->room.first,        fread_number( fp ) );
           break;
 
         case 'G':
           KEY( "Guard",     ship->guard,          fread_number( fp ) );
-          KEY( "Gunseat",     ship->gunseat,          fread_number( fp ) );
+          KEY( "Gunseat",     ship->room.gunseat,          fread_number( fp ) );
           break;
 
         case 'H':
           KEY( "Home" , ship->home, fread_string( fp ) );
           KEY( "Hyperspeed",   ship->hyperspeed,      fread_number( fp ) );
           KEY( "Hull",      ship->hull,        fread_number( fp ) );
-          KEY( "Hanger",  ship->hanger,      fread_number( fp ) );
+          KEY( "Hanger",  ship->room.hanger,      fread_number( fp ) );
           break;
 
         case 'I':
@@ -2266,7 +2266,7 @@ static void fread_ship( SHIP_DATA *ship, FILE *fp )
           KEY( "Laserstr",   ship->lasers,   (short)  ( fread_number( fp )/10 ) );
           KEY( "Lasers",   ship->lasers,      fread_number( fp ) );
           KEY( "Lastdoc",    ship->lastdoc,       fread_number( fp ) );
-          KEY( "Lastroom",   ship->lastroom,        fread_number( fp ) );
+          KEY( "Lastroom",   ship->room.last,        fread_number( fp ) );
           break;
 
         case 'M':
@@ -2285,7 +2285,7 @@ static void fread_ship( SHIP_DATA *ship, FILE *fp )
 
         case 'N':
           KEY( "Name",  ship->name,             fread_string( fp ) );
-          KEY( "Navseat",     ship->navseat,          fread_number( fp ) );
+          KEY( "Navseat",     ship->room.navseat,          fread_number( fp ) );
           break;
 
         case 'O':
@@ -2295,7 +2295,7 @@ static void fread_ship( SHIP_DATA *ship, FILE *fp )
         case 'P':
           KEY( "PersonalName",  ship->personalname,             fread_string( fp ) );
           KEY( "Pilot",            ship->pilot,            fread_string( fp ) );
-          KEY( "Pilotseat",     ship->pilotseat,          fread_number( fp ) );
+          KEY( "Pilotseat",     ship->room.pilotseat,          fread_number( fp ) );
           break;
 
         case 'R':
@@ -2440,7 +2440,7 @@ static bool load_ship_file( const char *shipfile )
 
 #if 0
       for( bus = 0; bus < MAX_BUS; bus++ )
-        if( ship->cockpit == serin[bus].cockpitvnum )
+        if( ship->room.cockpit == serin[bus].cockpitvnum )
           isbus = TRUE;
 #endif
 
@@ -2826,7 +2826,7 @@ SHIP_DATA *ship_from_cockpit( int vnum )
 
   for ( ship = first_ship; ship; ship = ship->next )
     {
-      if ( vnum == ship->cockpit
+      if ( vnum == ship->room.cockpit
 	   || vnum == get_turret_room( ship->turret[0] )
 	   || vnum == get_turret_room( ship->turret[1] )
 	   || vnum == get_turret_room( ship->turret[2] )
@@ -2837,12 +2837,12 @@ SHIP_DATA *ship_from_cockpit( int vnum )
 	   || vnum == get_turret_room( ship->turret[7] )
 	   || vnum == get_turret_room( ship->turret[8] )
 	   || vnum == get_turret_room( ship->turret[9] )
-           || vnum == ship->hanger
-           || vnum == ship->pilotseat
-           || vnum == ship->coseat
-           || vnum == ship->navseat
-           || vnum == ship->gunseat
-           || vnum == ship->engineroom )
+           || vnum == ship->room.hanger
+           || vnum == ship->room.pilotseat
+           || vnum == ship->room.coseat
+           || vnum == ship->room.navseat
+           || vnum == ship->room.gunseat
+           || vnum == ship->room.engine )
         {
           return ship;
         }
@@ -2856,7 +2856,7 @@ SHIP_DATA *ship_from_pilotseat( int vnum )
   SHIP_DATA *ship = NULL;
 
   for ( ship = first_ship; ship; ship = ship->next )
-    if ( vnum == ship->pilotseat )
+    if ( vnum == ship->room.pilotseat )
       return ship;
 
   return NULL;
@@ -2867,7 +2867,7 @@ SHIP_DATA *ship_from_coseat( int vnum )
   SHIP_DATA *ship = NULL;
 
   for ( ship = first_ship; ship; ship = ship->next )
-    if ( vnum == ship->coseat )
+    if ( vnum == ship->room.coseat )
       return ship;
 
   return NULL;
@@ -2878,7 +2878,7 @@ SHIP_DATA *ship_from_navseat( int vnum )
   SHIP_DATA *ship = NULL;
 
   for ( ship = first_ship; ship; ship = ship->next )
-    if ( vnum == ship->navseat )
+    if ( vnum == ship->room.navseat )
       return ship;
 
   return NULL;
@@ -2889,7 +2889,7 @@ SHIP_DATA *ship_from_gunseat( int vnum )
   SHIP_DATA *ship = NULL;
 
   for ( ship = first_ship; ship; ship = ship->next )
-    if ( vnum == ship->gunseat )
+    if ( vnum == ship->room.gunseat )
       return ship;
 
   return NULL;
@@ -2901,14 +2901,14 @@ SHIP_DATA *ship_from_engine( int vnum )
 
   for ( ship = first_ship; ship; ship = ship->next )
     {
-      if (ship->engineroom)
+      if (ship->room.engine)
         {
-          if ( vnum == ship->engineroom )
+          if ( vnum == ship->room.engine )
             return ship;
         }
       else
         {
-          if ( vnum == ship->cockpit )
+          if ( vnum == ship->room.cockpit )
             return ship;
         }
     }
@@ -2922,7 +2922,7 @@ SHIP_DATA *ship_from_turret( int vnum )
 
   for ( ship = first_ship; ship; ship = ship->next )
     {
-      if ( vnum == ship->gunseat
+      if ( vnum == ship->room.gunseat
 	   || vnum == get_turret_room( ship->turret[0] )
            || vnum == get_turret_room( ship->turret[1] )
            || vnum == get_turret_room( ship->turret[2] )
@@ -2946,7 +2946,7 @@ SHIP_DATA *ship_from_entrance( int vnum )
   SHIP_DATA *ship = NULL;
 
   for ( ship = first_ship; ship; ship = ship->next )
-    if ( vnum == ship->entrance )
+    if ( vnum == ship->room.entrance )
       return ship;
 
   return NULL;
@@ -2957,7 +2957,7 @@ SHIP_DATA *ship_from_hanger( int vnum )
   SHIP_DATA *ship = NULL;
 
   for ( ship = first_ship; ship; ship = ship->next )
-    if ( vnum == ship->hanger )
+    if ( vnum == ship->room.hanger )
       return ship;
 
   return NULL;
@@ -3130,13 +3130,13 @@ void damage_ship_ch( SHIP_DATA *ship , int min , int max , CHAR_DATA *ch )
 
       if ( number_range(1, 100) <= 5*ionFactor && ship->missilestate != MISSILE_DAMAGED )
         {
-          echo_to_room( AT_BLOOD + AT_BLINK , get_room_index(ship->gunseat) , "Ships Missile Launcher DAMAGED!" );
+          echo_to_room( AT_BLOOD + AT_BLINK , get_room_index(ship->room.gunseat) , "Ships Missile Launcher DAMAGED!" );
           ship->missilestate = MISSILE_DAMAGED;
         }
 
       if ( number_range(1, 100) <= 2*ionFactor && ship->statet0 != LASER_DAMAGED )
         {
-          echo_to_room( AT_BLOOD + AT_BLINK , get_room_index(ship->gunseat) , "Lasers DAMAGED!" );
+          echo_to_room( AT_BLOOD + AT_BLINK , get_room_index(ship->room.gunseat) , "Lasers DAMAGED!" );
           ship->statet0 = LASER_DAMAGED;
         }
 
@@ -3154,7 +3154,7 @@ void damage_ship_ch( SHIP_DATA *ship , int min , int max , CHAR_DATA *ch )
 
       if ( number_range(1, 100) <= 5*ionFactor && ship->statettractor != LASER_DAMAGED && ship->tractorbeam )
         {
-          echo_to_room( AT_BLOOD + AT_BLINK , get_room_index(ship->pilotseat) , "Tractorbeam DAMAGED!" );
+          echo_to_room( AT_BLOOD + AT_BLINK , get_room_index(ship->room.pilotseat) , "Tractorbeam DAMAGED!" );
           ship->statettractor = LASER_DAMAGED;
         }
 
@@ -3231,13 +3231,13 @@ void damage_ship( SHIP_DATA *ship , SHIP_DATA *assaulter, int min , int max )
 
       if ( number_range(1, 100) <= 5*ionFactor && ship->missilestate != MISSILE_DAMAGED )
         {
-          echo_to_room( AT_BLOOD + AT_BLINK , get_room_index(ship->gunseat) , "Ships Missile Launcher DAMAGED!" );
+          echo_to_room( AT_BLOOD + AT_BLINK , get_room_index(ship->room.gunseat) , "Ships Missile Launcher DAMAGED!" );
           ship->missilestate = MISSILE_DAMAGED;
         }
 
       if ( number_range(1, 100) <= 2*ionFactor && ship->statet0 != LASER_DAMAGED )
         {
-          echo_to_room( AT_BLOOD + AT_BLINK , get_room_index(ship->gunseat) , "Lasers DAMAGED!" );
+          echo_to_room( AT_BLOOD + AT_BLINK , get_room_index(ship->room.gunseat) , "Lasers DAMAGED!" );
           ship->statet0 = LASER_DAMAGED;
         }
 
@@ -3255,7 +3255,7 @@ void damage_ship( SHIP_DATA *ship , SHIP_DATA *assaulter, int min , int max )
 
       if ( number_range(1, 100) <= 5*ionFactor && ship->statettractor != LASER_DAMAGED && ship->tractorbeam )
         {
-          echo_to_room( AT_BLOOD + AT_BLINK , get_room_index(ship->pilotseat) , "Tractorbeam DAMAGED!" );
+          echo_to_room( AT_BLOOD + AT_BLINK , get_room_index(ship->room.pilotseat) , "Tractorbeam DAMAGED!" );
           ship->statettractor = LASER_DAMAGED;
         }
 
@@ -3321,7 +3321,7 @@ void destroy_ship( SHIP_DATA *ship , CHAR_DATA *ch )
 
   makedebris(ship);
 
-  for ( roomnum = ship->firstroom ; roomnum <= ship->lastroom ; roomnum++ )
+  for ( roomnum = ship->room.first; roomnum <= ship->room.last; roomnum++ )
     {
       room = get_room_index(roomnum);
 
@@ -3356,7 +3356,7 @@ void destroy_ship( SHIP_DATA *ship , CHAR_DATA *ch )
 
   for ( lship = first_ship; lship; lship = lship->next )
     {
-      if ( !(ship->hanger) || (lship->location != ship->hanger) )
+      if ( !(ship->room.hanger) || (lship->location != ship->room.hanger) )
         continue;
       if ( lship->docked && lship->docked == ship )
         {

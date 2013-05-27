@@ -18,7 +18,7 @@ void do_fire(CHAR_DATA *ch, char *argument )
       send_to_char("&RYou must be in the gunners chair or turret of a ship to do that!\r\n",ch);
       return;
     }
-  if ( ship->gunseat != ch->in_room->vnum )
+  if ( ship->room.gunseat != ch->in_room->vnum )
     is_turret = TRUE;
 
   if ( ship_is_in_hyperspace( ship ) && ship->sclass <= SHIP_PLATFORM )
@@ -51,7 +51,7 @@ void do_fire(CHAR_DATA *ch, char *argument )
   if ( ship->sclass > SHIP_PLATFORM && !is_npc(ch))
     ((ch->pcdata->learned[gsn_speeders] == 100) ? (the_chance -= 100 - ch->pcdata->learned[gsn_speedercombat]) : (the_chance = 0) );
 
-  if ( ch->in_room->vnum == ship->gunseat && !str_prefix( argument , "lasers"))
+  if ( ch->in_room->vnum == ship->room.gunseat && !str_prefix( argument , "lasers"))
     {
 
       if (ship->statet0 == LASER_DAMAGED)
@@ -161,7 +161,7 @@ void do_fire(CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( ch->in_room->vnum == ship->gunseat && !str_prefix( argument , "ions") )
+  if ( ch->in_room->vnum == ship->room.gunseat && !str_prefix( argument , "ions") )
     {
 
       if (ship->statet0 == LASER_DAMAGED)
@@ -266,7 +266,7 @@ void do_fire(CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( ch->in_room->vnum == ship->gunseat && !str_prefix( argument , "missile") )
+  if ( ch->in_room->vnum == ship->room.gunseat && !str_prefix( argument , "missile") )
     {
       if (ship->missilestate == MISSILE_DAMAGED)
 	{
@@ -363,7 +363,7 @@ void do_fire(CHAR_DATA *ch, char *argument )
 
       return;
     }
-  if ( ch->in_room->vnum == ship->gunseat && !str_prefix( argument , "torpedo") )
+  if ( ch->in_room->vnum == ship->room.gunseat && !str_prefix( argument , "torpedo") )
     {
       if (ship->missilestate == MISSILE_DAMAGED)
         {
@@ -461,7 +461,7 @@ void do_fire(CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( ch->in_room->vnum == ship->gunseat && !str_prefix( argument , "rocket") )
+  if ( ch->in_room->vnum == ship->room.gunseat && !str_prefix( argument , "rocket") )
     {
       if (ship->missilestate == MISSILE_DAMAGED)
         {

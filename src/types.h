@@ -178,6 +178,8 @@ typedef void    DO_FUN          ( CHAR_DATA *ch, char *argument );
 typedef bool    SPEC_FUN        ( CHAR_DATA *ch );
 typedef ch_ret  SPELL_FUN       ( int sn, int level, CHAR_DATA *ch, void *vo );
 
+typedef int vnum_t;
+
 #ifdef __cplusplus
 #define DECLARE_DO_FUN( fun )    extern "C" { DO_FUN    fun; } DO_FUN fun##_mangled
 #define DECLARE_SPEC_FUN( fun )  extern "C" { SPEC_FUN  fun; } SPEC_FUN fun##_mangled

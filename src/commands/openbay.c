@@ -19,7 +19,7 @@ void do_openbay( CHAR_DATA *ch, char *argument )
   else
     ship = ship_from_hanger(ch->in_room->vnum);
 
-  if ( ship->hanger == 0 )
+  if ( ship->room.hanger == 0 )
     {
       send_to_char("&RThis ship has no hanger!\r\n",ch);
       return;

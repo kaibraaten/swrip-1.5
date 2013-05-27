@@ -157,7 +157,7 @@ void do_land( CHAR_DATA *ch, char *argument )
           send_to_char("&RYou can't land your ship inside itself!\r\n",ch);
           return;
         }
-      if ( ! target->hanger )
+      if ( ! target->room.hanger )
         {
           send_to_char("&RThat ship has no hanger for you to land in!\r\n",ch);
           return;

@@ -98,7 +98,7 @@ SPACE_DATA *spaceobject_from_vnum( int vnum )
 
   for ( ship = first_ship; ship; ship = ship->next )
     {
-      if ( vnum == ship->hanger )
+      if ( vnum == ship->room.hanger )
 	{
 	  if( !(ship->bayopen) )
 	    {

@@ -245,7 +245,7 @@ void update_missiles( void )
 		  CHAR_DATA *ch = NULL;
 		  char buf[MAX_STRING_LENGTH];
 
-                  echo_to_room( AT_YELLOW, get_room_index(ship->gunseat),
+                  echo_to_room( AT_YELLOW, get_room_index(ship->room.gunseat),
 				"Your missile hits its target dead on!" );
                   echo_to_cockpit( AT_BLOOD, target,
 				   "The ship is hit by a missile.");
@@ -273,7 +273,7 @@ void update_missiles( void )
                 }
               else
                 {
-                  echo_to_room( AT_YELLOW , get_room_index(ship->gunseat), "Your missile explodes harmlessly in a cloud of chaff!" );
+                  echo_to_room( AT_YELLOW , get_room_index(ship->room.gunseat), "Your missile explodes harmlessly in a cloud of chaff!" );
                   echo_to_cockpit( AT_YELLOW, target, "A missile explodes in your chaff.");
                   extract_missile( missile );
                 }

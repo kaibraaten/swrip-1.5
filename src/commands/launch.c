@@ -209,8 +209,8 @@ void do_launch( CHAR_DATA *ch, char *argument )
           ship->hatchopen = FALSE;
           sprintf( buf , "The hatch on %s closes." , ship->name);
           echo_to_room( AT_YELLOW , get_room_index(ship->location) , buf );
-          echo_to_room( AT_YELLOW , get_room_index(ship->entrance) , "The hatch slides shut." );
-          sound_to_room( get_room_index(ship->entrance) , "!!SOUND(door)" );
+          echo_to_room( AT_YELLOW , get_room_index(ship->room.entrance) , "The hatch slides shut." );
+          sound_to_room( get_room_index(ship->room.entrance) , "!!SOUND(door)" );
           sound_to_room( get_room_index(ship->location) , "!!SOUND(door)" );
         }
 

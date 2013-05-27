@@ -439,7 +439,7 @@ void talk_channel( CHAR_DATA *ch, const char *argument, int channel, const char 
                 continue;
 
               if ( channel == CHANNEL_SHIP )
-                if ( vch->in_room->vnum > ship->lastroom || vch->in_room->vnum < ship->firstroom )
+                if ( vch->in_room->vnum > ship->room.last || vch->in_room->vnum < ship->room.first )
                   continue;
 
               target = ship_from_cockpit( vch->in_room->vnum );

@@ -25,7 +25,7 @@ void do_info(CHAR_DATA *ch, char *argument )
         }
       target = ship;
     }
-  else if ( ship->hanger == ch->in_room->vnum )
+  else if ( ship->room.hanger == ch->in_room->vnum )
     {
       if ( argument[0] == '\0' )
         {

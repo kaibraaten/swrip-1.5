@@ -58,7 +58,7 @@ void do_request(CHAR_DATA *ch, char *argument)
       return;
     }
 
-  if ( eShip->hanger == 0 )
+  if ( eShip->room.hanger == 0 )
     {
       send_to_char("&RThat ship has no hanger!",ch);
       return;

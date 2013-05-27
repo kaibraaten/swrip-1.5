@@ -50,7 +50,7 @@ void do_drive( CHAR_DATA *ch, char *argument )
           return;
         }
 
-      if (!target->hanger)
+      if (!target->room.hanger)
         {
           send_to_char("That ship does not have any room.\r\n", ch);
           return;
@@ -73,7 +73,7 @@ void do_drive( CHAR_DATA *ch, char *argument )
       sprintf( buf, "%s drives into %s.", ship->name, target->name);
       echo_to_room( AT_GREY,  ship->in_room, buf);
 
-      transship(ship, target->hanger);
+      transship(ship, target->room.hanger);
 
       sprintf( buf, "%s drives into the bay", ship->name);
       echo_to_room( AT_GREY, ship->in_room, buf);

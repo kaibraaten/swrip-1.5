@@ -113,14 +113,14 @@ void do_setship( CHAR_DATA *ch, char *argument )
           return;
         }
 
-      ship->firstroom = tempnum;
-      ship->lastroom = tempnum;
-      ship->cockpit = tempnum;
-      ship->coseat = tempnum;
-      ship->pilotseat = tempnum;
-      ship->gunseat = tempnum;
-      ship->navseat = tempnum;
-      ship->entrance = tempnum;
+      ship->room.first = tempnum;
+      ship->room.last = tempnum;
+      ship->room.cockpit = tempnum;
+      ship->room.coseat = tempnum;
+      ship->room.pilotseat = tempnum;
+      ship->room.gunseat = tempnum;
+      ship->room.navseat = tempnum;
+      ship->room.entrance = tempnum;
 
       for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
 	{
@@ -128,7 +128,7 @@ void do_setship( CHAR_DATA *ch, char *argument )
 	  set_turret_room( turret, 0 );
 	}
 
-      ship->hanger = 0;
+      ship->room.hanger = 0;
       send_to_char( "You will now need to set the other rooms in the ship.\r\n", ch );
       save_ship( ship );
       return;
@@ -145,31 +145,31 @@ void do_setship( CHAR_DATA *ch, char *argument )
           return;
         }
 
-      if ( tempnum < ship->firstroom )
+      if ( tempnum < ship->room.first )
         {
           send_to_char("The last room on a ship must be greater than or equal to the first room.\r\n",ch);
           return;
         }
 
-      if ( ship->sclass == FIGHTER_SHIP && (tempnum - ship->firstroom) > 5 )
+      if ( ship->sclass == FIGHTER_SHIP && (tempnum - ship->room.first) > 5 )
         {
           send_to_char("Starfighters may have up to 5 rooms only.\r\n",ch);
           return;
         }
 
-      if ( ship->sclass == MIDSIZE_SHIP && (tempnum - ship->firstroom) > 25 )
+      if ( ship->sclass == MIDSIZE_SHIP && (tempnum - ship->room.first) > 25 )
         {
           send_to_char("Midships may have up to 25 rooms only.\r\n",ch);
           return;
         }
 
-      if ( ship->sclass == CAPITAL_SHIP && (tempnum - ship->firstroom) > 100 )
+      if ( ship->sclass == CAPITAL_SHIP && (tempnum - ship->room.first) > 100 )
         {
           send_to_char("Capital Ships may have up to 100 rooms only.\r\n",ch);
           return;
         }
 
-      ship->lastroom = tempnum;
+      ship->room.last = tempnum;
       send_to_char( "Done.\r\n", ch );
       save_ship( ship );
       return;
@@ -186,7 +186,7 @@ void do_setship( CHAR_DATA *ch, char *argument )
           return;
         }
 
-      if ( tempnum < ship->firstroom || tempnum > ship->lastroom )
+      if ( tempnum < ship->room.first || tempnum > ship->room.last )
         {
           send_to_char("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
@@ -198,7 +198,7 @@ void do_setship( CHAR_DATA *ch, char *argument )
           return;
         }
 
-      ship->cockpit = tempnum;
+      ship->room.cockpit = tempnum;
       send_to_char( "Done.\r\n", ch );
       save_ship( ship );
       return;
@@ -215,7 +215,7 @@ void do_setship( CHAR_DATA *ch, char *argument )
           return;
         }
 
-      if ( tempnum < ship->firstroom || tempnum > ship->lastroom )
+      if ( tempnum < ship->room.first || tempnum > ship->room.last )
 	{
           send_to_char("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
@@ -227,7 +227,7 @@ void do_setship( CHAR_DATA *ch, char *argument )
           return;
         }
 
-      ship->pilotseat = tempnum;
+      ship->room.pilotseat = tempnum;
       send_to_char( "Done.\r\n", ch );
       save_ship( ship );
       return;
@@ -244,7 +244,7 @@ void do_setship( CHAR_DATA *ch, char *argument )
           return;
         }
 
-      if ( tempnum < ship->firstroom || tempnum > ship->lastroom )
+      if ( tempnum < ship->room.first || tempnum > ship->room.last )
         {
           send_to_char("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
@@ -256,7 +256,7 @@ void do_setship( CHAR_DATA *ch, char *argument )
           return;
         }
 
-      ship->coseat = tempnum;
+      ship->room.coseat = tempnum;
       send_to_char( "Done.\r\n", ch );
       save_ship( ship );
       return;
@@ -273,7 +273,7 @@ void do_setship( CHAR_DATA *ch, char *argument )
           return;
         }
 
-      if ( tempnum < ship->firstroom || tempnum > ship->lastroom )
+      if ( tempnum < ship->room.first || tempnum > ship->room.last )
         {
           send_to_char("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
@@ -285,7 +285,7 @@ void do_setship( CHAR_DATA *ch, char *argument )
           return;
         }
 
-      ship->navseat = tempnum;
+      ship->room.navseat = tempnum;
       send_to_char( "Done.\r\n", ch );
       save_ship( ship );
       return;
@@ -302,7 +302,7 @@ void do_setship( CHAR_DATA *ch, char *argument )
           return;
         }
 
-      if ( tempnum < ship->firstroom || tempnum > ship->lastroom )
+      if ( tempnum < ship->room.first || tempnum > ship->room.last )
         {
           send_to_char("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
@@ -314,7 +314,7 @@ void do_setship( CHAR_DATA *ch, char *argument )
           return;
         }
 
-      ship->gunseat = tempnum;
+      ship->room.gunseat = tempnum;
       send_to_char( "Done.\r\n", ch );
       save_ship( ship );
       return;
@@ -331,7 +331,7 @@ void do_setship( CHAR_DATA *ch, char *argument )
           return;
         }
 
-      if ( tempnum < ship->firstroom || tempnum > ship->lastroom )
+      if ( tempnum < ship->room.first || tempnum > ship->room.last )
         {
           send_to_char("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
@@ -343,7 +343,7 @@ void do_setship( CHAR_DATA *ch, char *argument )
           return;
         }
 
-      ship->entrance = tempnum;
+      ship->room.entrance = tempnum;
       send_to_char( "Done.\r\n", ch );
       save_ship( ship );
       return;
@@ -360,7 +360,7 @@ void do_setship( CHAR_DATA *ch, char *argument )
 	  return;
         }
 
-      if ( tempnum < ship->firstroom || tempnum > ship->lastroom )
+      if ( tempnum < ship->room.first || tempnum > ship->room.last )
         {
           send_to_char("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
@@ -395,7 +395,7 @@ void do_setship( CHAR_DATA *ch, char *argument )
           return;
         }
 
-      if ( tempnum < ship->firstroom || tempnum > ship->lastroom )
+      if ( tempnum < ship->room.first || tempnum > ship->room.last )
         {
           send_to_char("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
@@ -430,7 +430,7 @@ void do_setship( CHAR_DATA *ch, char *argument )
           return;
         }
 
-      if ( tempnum < ship->firstroom || tempnum > ship->lastroom )
+      if ( tempnum < ship->room.first || tempnum > ship->room.last )
         {
           send_to_char("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
@@ -471,7 +471,7 @@ void do_setship( CHAR_DATA *ch, char *argument )
           return;
         }
 
-      if ( tempnum < ship->firstroom || tempnum > ship->lastroom )
+      if ( tempnum < ship->room.first || tempnum > ship->room.last )
         {
           send_to_char("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
@@ -513,7 +513,7 @@ void do_setship( CHAR_DATA *ch, char *argument )
           return;
         }
 
-      if ( tempnum < ship->firstroom || tempnum > ship->lastroom )
+      if ( tempnum < ship->room.first || tempnum > ship->room.last )
         {
           send_to_char("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
@@ -554,7 +554,7 @@ void do_setship( CHAR_DATA *ch, char *argument )
           return;
         }
 
-      if ( tempnum < ship->firstroom || tempnum > ship->lastroom )
+      if ( tempnum < ship->room.first || tempnum > ship->room.last )
         {
           send_to_char("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
@@ -595,7 +595,7 @@ void do_setship( CHAR_DATA *ch, char *argument )
           return;
         }
 
-      if ( tempnum < ship->firstroom || tempnum > ship->lastroom )
+      if ( tempnum < ship->room.first || tempnum > ship->room.last )
         {
           send_to_char("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
@@ -636,7 +636,7 @@ void do_setship( CHAR_DATA *ch, char *argument )
           return;
         }
 
-      if ( tempnum < ship->firstroom || tempnum > ship->lastroom )
+      if ( tempnum < ship->room.first || tempnum > ship->room.last )
         {
           send_to_char("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
@@ -677,7 +677,7 @@ void do_setship( CHAR_DATA *ch, char *argument )
           return;
         }
 
-      if ( tempnum < ship->firstroom || tempnum > ship->lastroom )
+      if ( tempnum < ship->room.first || tempnum > ship->room.last )
         {
           send_to_char("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
@@ -718,7 +718,7 @@ void do_setship( CHAR_DATA *ch, char *argument )
           return;
         }
 
-      if ( tempnum < ship->firstroom || tempnum > ship->lastroom )
+      if ( tempnum < ship->room.first || tempnum > ship->room.last )
         {
           send_to_char("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
@@ -759,7 +759,7 @@ void do_setship( CHAR_DATA *ch, char *argument )
           return;
         }
 
-      if (( tempnum < ship->firstroom || tempnum > ship->lastroom ) && (atoi(argument) != 0 ))
+      if (( tempnum < ship->room.first || tempnum > ship->room.last ) && (atoi(argument) != 0 ))
         {
           send_to_char("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
@@ -777,7 +777,7 @@ void do_setship( CHAR_DATA *ch, char *argument )
           return;
         }
 
-      ship->hanger = tempnum;
+      ship->room.hanger = tempnum;
       send_to_char( "Done.\r\n", ch );
       save_ship( ship );
       return;
@@ -794,7 +794,7 @@ void do_setship( CHAR_DATA *ch, char *argument )
           return;
         }
 
-      if ( tempnum < ship->firstroom || tempnum > ship->lastroom )
+      if ( tempnum < ship->room.first || tempnum > ship->room.last )
         {
           send_to_char("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
@@ -806,7 +806,7 @@ void do_setship( CHAR_DATA *ch, char *argument )
           return;
         }
 
-      ship->engineroom = tempnum;
+      ship->room.engine = tempnum;
       send_to_char( "Done.\r\n", ch );
       save_ship( ship );
       return;
@@ -1089,13 +1089,13 @@ void do_setship( CHAR_DATA *ch, char *argument )
 
 static bool room_is_in_use( const SHIP_DATA *ship, int room_vnum )
 {
-  if( room_vnum == ship->hanger
-      || room_vnum == ship->entrance
-      || room_vnum == ship->engineroom
-      || room_vnum == ship->navseat
-      || room_vnum == ship->pilotseat
-      || room_vnum == ship->coseat
-      || room_vnum == ship->gunseat )
+  if( room_vnum == ship->room.hanger
+      || room_vnum == ship->room.entrance
+      || room_vnum == ship->room.engine
+      || room_vnum == ship->room.navseat
+      || room_vnum == ship->room.pilotseat
+      || room_vnum == ship->room.coseat
+      || room_vnum == ship->room.gunseat )
     {
       return TRUE;
     }

@@ -113,7 +113,7 @@ void do_adjusttractorbeam(CHAR_DATA *ch, char *argument )
           return;
         }
 
-      if ( !ship->hanger )
+      if ( !ship->room.hanger )
         {
           send_to_char("&RYou have no hanger!\r\n",ch);
           return;

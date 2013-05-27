@@ -36,7 +36,7 @@ void do_openhatch(CHAR_DATA *ch, char *argument )
               act( AT_PLAIN, "$n opens the hatch.", ch, NULL, argument, TO_ROOM );
               sprintf( buf , "The hatch on %s opens." , ship->name);
               echo_to_room( AT_YELLOW , get_room_index(ship->location) , buf );
-              sound_to_room( get_room_index(ship->entrance) , "!!SOUND(door)" );
+              sound_to_room( get_room_index(ship->room.entrance) , "!!SOUND(door)" );
               sound_to_room( get_room_index(ship->location) , "!!SOUND(door)" );
               return;
             }
@@ -72,8 +72,8 @@ void do_openhatch(CHAR_DATA *ch, char *argument )
       ship->hatchopen = TRUE;
       act( AT_PLAIN, "You open the hatch on $T.", ch, NULL, ship->name, TO_CHAR );
       act( AT_PLAIN, "$n opens the hatch on $T.", ch, NULL, ship->name, TO_ROOM );
-      echo_to_room( AT_YELLOW , get_room_index(ship->entrance) , "The hatch opens from the outside." );
-      sound_to_room( get_room_index(ship->entrance) , "!!SOUND(door)" );
+      echo_to_room( AT_YELLOW , get_room_index(ship->room.entrance) , "The hatch opens from the outside." );
+      sound_to_room( get_room_index(ship->room.entrance) , "!!SOUND(door)" );
       sound_to_room( get_room_index(ship->location) , "!!SOUND(door)" );
       return;
     }

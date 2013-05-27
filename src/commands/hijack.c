@@ -91,7 +91,7 @@ void do_hijack( CHAR_DATA *ch, char *argument )
           ship->hatchopen = FALSE;
           sprintf( buf , "The hatch on %s closes." , ship->name);
           echo_to_room( AT_YELLOW , get_room_index(ship->location) , buf );
-          echo_to_room( AT_YELLOW , get_room_index(ship->entrance) , "The hatch slides shut." );
+          echo_to_room( AT_YELLOW , get_room_index(ship->room.entrance) , "The hatch slides shut." );
         }
       set_char_color( AT_GREEN, ch );
       send_to_char( "Launch sequence initiated.\r\n", ch);

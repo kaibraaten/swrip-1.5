@@ -517,21 +517,24 @@ struct ship_data
   int              maxshield;
   int              hull;
   int              maxhull;
-  int              cockpit;
-  int              location;
-  int              lastdoc;
-  int              shipyard;
 
-  int              firstroom;
-  int              lastroom;
+  vnum_t           location;
+  vnum_t           lastdoc;
+  vnum_t           shipyard;
 
-  int              entrance;
-  int              hanger;
-  int              engineroom;
-  int              navseat;
-  int              pilotseat;
-  int              coseat;
-  int              gunseat;
+  struct
+  {
+    vnum_t first;
+    vnum_t last;
+    vnum_t cockpit;
+    vnum_t entrance;
+    vnum_t hanger;
+    vnum_t engine;
+    vnum_t navseat;
+    vnum_t pilotseat;
+    vnum_t coseat;
+    vnum_t gunseat;
+  } room;
 
   long             collision;
   SHIP_DATA       *target0; /* target of main weapon systems (ie, not turrest) */

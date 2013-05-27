@@ -84,7 +84,7 @@ void do_shove( CHAR_DATA *ch, char *argument )
               return;
             }
 
-	  to_room = get_room_index( ship->entrance );
+	  to_room = get_room_index( ship->room.entrance );
 
           if ( to_room )
             {

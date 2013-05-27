@@ -51,18 +51,18 @@ void do_showship( CHAR_DATA *ch, char *argument )
              ship->owner, ship->pilot,  ship->copilot );
   ch_printf( ch, "Current Jump Destination: %s  Jump Point: %s\r\n", (ship->currjump ? ship->currjump->name : "(null)"), (ship->lastsystem ? ship->lastsystem->name : "(null)" ));
   ch_printf( ch, "Firstroom: %d   Lastroom: %d",
-             ship->firstroom,
-             ship->lastroom);
+             ship->room.first,
+             ship->room.last);
   ch_printf( ch, "Cockpit: %d   Entrance: %d   Hanger: %d   Engineroom: %d\r\n",
-             ship->cockpit,
-             ship->entrance,
-             ship->hanger,
-             ship->engineroom);
+             ship->room.cockpit,
+             ship->room.entrance,
+             ship->room.hanger,
+             ship->room.engine);
   ch_printf( ch, "Pilotseat: %d   Coseat: %d   Navseat: %d  Gunseat: %d\r\n",
-             ship->pilotseat,
-             ship->coseat,
-             ship->navseat,
-             ship->gunseat);
+             ship->room.pilotseat,
+             ship->room.coseat,
+             ship->room.navseat,
+             ship->room.gunseat);
   ch_printf( ch, "Location: %d   Lastdoc: %d   Shipyard: %d\r\n",
              ship->location,
              ship->lastdoc,
