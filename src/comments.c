@@ -52,6 +52,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
+#include "editor.h"
 #include "mud.h"
 #include "character.h"
 

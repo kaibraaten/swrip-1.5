@@ -1,5 +1,6 @@
 #include "character.h"
 #include "mud.h"
+#include "editor.h"
 
 /*
  * Help editor                                                  -Thoric

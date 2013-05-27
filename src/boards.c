@@ -26,6 +26,7 @@
 #include <string.h>
 #include "character.h"
 #include "mud.h"
+#include "editor.h"
 
 /* Defines for voting on notes. -- Narn */
 #define VOTE_NONE 0

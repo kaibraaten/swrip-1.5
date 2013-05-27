@@ -1,5 +1,6 @@
 #include "character.h"
 #include "mud.h"
+#include "editor.h"
 
 /*
  * Mobprogram editing - cumbersome                              -Thoric

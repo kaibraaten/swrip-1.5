@@ -1,6 +1,7 @@
 #include <string.h>
 #include "mud.h"
 #include "character.h"
+#include "editor.h"
 
 void do_oset( CHAR_DATA *ch, char *argument )
 {

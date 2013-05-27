@@ -745,14 +745,6 @@ struct fighting_data
   short      timeskilled;
 };
 
-struct editor_data
-{
-  short numlines;
-  short on_line;
-  short size;
-  char  line[49][81];
-};
-
 struct extracted_char_data
 {
   EXTRACT_CHAR_DATA *next;
@@ -2531,10 +2523,7 @@ extern "C" {
   void mpedit( CHAR_DATA *ch, MPROG_DATA *mprg, int mptype, char *argument );
   void rpedit( CHAR_DATA *ch, MPROG_DATA *mprg, int mptype, char *argument );
   void write_area_list( void );
-  void start_editing( CHAR_DATA *ch, char *data );
-  void stop_editing( CHAR_DATA *ch );
-  void edit_buffer( CHAR_DATA *ch, char *argument );
-  char *copy_buffer( CHAR_DATA *ch );
+
   bool can_rmodify( const CHAR_DATA *ch, const ROOM_INDEX_DATA *room );
   bool can_omodify( const CHAR_DATA *ch, const OBJ_DATA *obj  );
   bool can_mmodify( const CHAR_DATA *ch, const CHAR_DATA *mob );

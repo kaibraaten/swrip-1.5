@@ -1,3 +1,4 @@
+#include "editor.h"
 #include "character.h"
 #include "mud.h"
 

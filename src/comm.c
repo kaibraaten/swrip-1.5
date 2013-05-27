@@ -32,6 +32,7 @@
 #include <stdarg.h>
 #include "mud.h"
 #include "character.h"
+#include "editor.h"
 
 /*
  * Socket and TCP/IP stuff.

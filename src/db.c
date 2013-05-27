@@ -30,6 +30,7 @@
 #include "ships.h"
 #include "shuttle.h"
 #include "character.h"
+#include "editor.h"
 
 void init_supermob();
 
