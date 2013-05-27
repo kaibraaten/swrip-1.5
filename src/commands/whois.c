@@ -131,12 +131,12 @@ void do_whois( CHAR_DATA *ch, char *argument)
           send_to_char(buf2, ch);
         }
 
-      if ( victim->desc && victim->desc->remote.host[0]!='\0' )   /* added by Gorog */
+      if ( victim->desc && victim->desc->remote.hostname[0]!='\0' )   /* added by Gorog */
         {
           sprintf (buf2, "%s's IP info: %s ", victim->name, victim->desc->remote.hostip);
           if (get_trust(ch) > LEVEL_GOD)
             {
-              strcat (buf2, victim->desc->remote.host);
+              strcat (buf2, victim->desc->remote.hostname);
             }
           strcat (buf2, "\r\n");
           send_to_char(buf2, ch);

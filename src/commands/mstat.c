@@ -44,7 +44,7 @@ void do_mstat( CHAR_DATA *ch, char *argument )
 
   if( get_trust(ch) >= LEVEL_GOD && !is_npc(victim) && victim->desc )
     ch_printf( ch, "Host: %s   Descriptor: %d   Trust: %d   AuthedBy: %s\r\n",
-               victim->desc->remote.host, victim->desc->descriptor,
+               victim->desc->remote.hostname, victim->desc->descriptor,
                victim->trust, victim->pcdata->authed_by[0] != '\0'
                ? victim->pcdata->authed_by : "(unknown)" );
 

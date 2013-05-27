@@ -123,7 +123,7 @@ struct descriptor_data
 
   struct
   {
-    char *host;
+    char *hostname;
     char *hostip;
     short port;
   } remote;

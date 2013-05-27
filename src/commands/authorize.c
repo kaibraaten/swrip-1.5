@@ -24,7 +24,7 @@ void do_authorize( CHAR_DATA *ch, char *argument )
         if ( (victim = d->character) != NULL && is_waiting_for_auth(victim) )
           ch_printf( ch, " %s@%s new %s...\r\n",
                      victim->name,
-                     victim->desc->remote.host,
+                     victim->desc->remote.hostname,
                      race_table[victim->race].race_name );
       return;
     }

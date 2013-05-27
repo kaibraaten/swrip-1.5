@@ -173,7 +173,7 @@ static void nanny_get_name( DESCRIPTOR_DATA *d, char *argument )
 
   if ( !d->character )
     {
-      sprintf( log_buf, "Bad player file %s@%s.", argument, d->remote.host );
+      sprintf( log_buf, "Bad player file %s@%s.", argument, d->remote.hostname );
       log_string( log_buf );
       write_to_buffer( d, "Your playerfile is corrupt...Please notify mail@mymud.com\r\n", 0 );
       close_socket( d, FALSE );
@@ -184,8 +184,8 @@ static void nanny_get_name( DESCRIPTOR_DATA *d, char *argument )
 
   for ( pban = first_ban; pban; pban = pban->next )
     {
-      if ( ( !str_prefix( pban->name, d->remote.host )
-	     || !str_suffix( pban->name, d->remote.host ) )
+      if ( ( !str_prefix( pban->name, d->remote.hostname )
+	     || !str_suffix( pban->name, d->remote.hostname ) )
 	   && pban->level >= ch->top_level )
 	{
 	  write_to_buffer( d,
@@ -197,7 +197,7 @@ static void nanny_get_name( DESCRIPTOR_DATA *d, char *argument )
 
   if ( IS_SET(ch->act, PLR_DENY) )
     {
-      sprintf( log_buf, "Denying access to %s@%s.", argument, d->remote.host );
+      sprintf( log_buf, "Denying access to %s@%s.", argument, d->remote.hostname );
       log_string_plus( log_buf, LOG_COMM, sysdata.log_level );
 
       if (d->newstate != 0)
@@ -321,7 +321,7 @@ static void nanny_get_old_password( DESCRIPTOR_DATA *d, char *argument )
   free_char( d->character );
   fOld = load_char_obj( d, buf, FALSE );
   ch = d->character;
-  sprintf( log_buf, "%s@%s has connected.", ch->name, d->remote.host );
+  sprintf( log_buf, "%s@%s has connected.", ch->name, d->remote.hostname );
 
   if ( ch->top_level < LEVEL_DEMI )
     {
@@ -710,7 +710,7 @@ static void nanny_get_msp( DESCRIPTOR_DATA *d, char *argument )
       return;
     }
 
-  sprintf( log_buf, "%s@%s new %s.", ch->name, d->remote.host,
+  sprintf( log_buf, "%s@%s new %s.", ch->name, d->remote.hostname,
 	   race_table[ch->race].race_name);
   log_string_plus( log_buf, LOG_COMM, sysdata.log_level);
   to_channel( log_buf, CHANNEL_MONITOR, "Monitor", LEVEL_IMMORTAL );

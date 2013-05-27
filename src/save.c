@@ -521,8 +521,8 @@ void fwrite_char( CHAR_DATA *ch, FILE *fp )
                ch->pcdata->condition[1],
                ch->pcdata->condition[2],
                ch->pcdata->condition[3] );
-      if ( ch->desc && ch->desc->remote.host )
-        fprintf( fp, "Site         %s\n", ch->desc->remote.host );
+      if ( ch->desc && ch->desc->remote.hostname )
+        fprintf( fp, "Site         %s\n", ch->desc->remote.hostname );
       else
         fprintf( fp, "Site         (Link-Dead)\n" );
 
