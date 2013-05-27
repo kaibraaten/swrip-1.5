@@ -42,7 +42,7 @@ SHUTTLE_DATA * create_shuttle( void )
   shuttle->first_stop   = shuttle->last_stop = NULL;
   shuttle->type         = SHUTTLE_TURBOCAR;
   shuttle->delay                = shuttle->current_delay = 2;
-  shuttle->start_room   = shuttle->end_room = shuttle->entrance = ROOM_VNUM_LIMBO;
+  shuttle->room.first   = shuttle->room.last = shuttle->room.entrance = ROOM_VNUM_LIMBO;
 
   return shuttle;
 }
@@ -144,9 +144,9 @@ bool save_shuttle( const SHUTTLE_DATA * shuttle )
 
   fprintf( fp, "Type         %d\n",     shuttle->type);
   fprintf( fp, "State        %d\n",     shuttle->state);
-  fprintf( fp, "StartRoom    %d\n",     shuttle->start_room);
-  fprintf( fp, "EndRoom      %d\n",     shuttle->end_room);
-  fprintf( fp, "Entrance      %d\n",    shuttle->entrance);
+  fprintf( fp, "StartRoom    %d\n",     shuttle->room.first);
+  fprintf( fp, "EndRoom      %d\n",     shuttle->room.last);
+  fprintf( fp, "Entrance      %d\n",    shuttle->room.entrance);
 
   fprintf( fp, "End\n\n");
 
@@ -221,7 +221,7 @@ void update_shuttle( void )
                           "An electronic voice says, 'Preparing for launch.'\r\n"
                           "It continues, 'Next stop, %s'",
                           shuttle->current->stop_name);
-              for (room = shuttle->start_room; room <= shuttle->end_room; ++room)
+              for (room = shuttle->room.first; room <= shuttle->room.last; ++room)
                 {
                   ROOM_INDEX_DATA * iRoom = get_room_index(room);
                   echo_to_room( AT_CYAN , iRoom , buf );
@@ -250,14 +250,14 @@ void update_shuttle( void )
             }
           else if (shuttle->state == SHUTTLE_STATE_HYPERSPACE_LAUNCH)
             {
-              for (room = shuttle->start_room; room <= shuttle->end_room; ++room)
+              for (room = shuttle->room.first; room <= shuttle->room.last; ++room)
                 echo_to_room( AT_YELLOW , get_room_index(room) , "The ship lurches slightly as it makes the jump to lightspeed.");
               shuttle->state = SHUTTLE_STATE_HYPERSPACE_END;
               shuttle->current_delay *= 2;
             }
           else if (shuttle->state == SHUTTLE_STATE_HYPERSPACE_END)
             {
-              for (room = shuttle->start_room; room <= shuttle->end_room; ++room)
+              for (room = shuttle->room.first; room <= shuttle->room.last; ++room)
                 echo_to_room( AT_YELLOW , get_room_index(room) , "The ship lurches slightly as it comes out of hyperspace.");
               shuttle->state = SHUTTLE_STATE_LANDING;
             }
@@ -280,7 +280,7 @@ void update_shuttle( void )
 
               insert_shuttle(shuttle, get_room_index(shuttle->current->room));
 
-              for (room = shuttle->start_room; room <= shuttle->end_room; ++room)
+              for (room = shuttle->room.first; room <= shuttle->room.last; ++room)
                 {
                   ROOM_INDEX_DATA * iRoom = get_room_index(room);
                   echo_to_room( AT_CYAN , iRoom , buf );
@@ -437,8 +437,8 @@ bool load_shuttle_file( const char * shuttlefile )
           if ( !str_cmp( word, "SHUTTLE") )
             {
               fread_shuttle( shuttle, fp );
-              if (shuttle->entrance == -1)
-                shuttle->entrance = shuttle->start_room;
+              if (shuttle->room.entrance == -1)
+                shuttle->room.entrance = shuttle->room.first;
               shuttle->in_room = NULL;
               continue;
             }
@@ -523,8 +523,8 @@ void fread_shuttle( SHUTTLE_DATA *shuttle, FILE *fp )
           break;
 
         case 'E':
-          KEY( "EndRoom", shuttle->end_room, fread_number(fp));
-          KEY( "Entrance", shuttle->entrance, fread_number(fp));
+          KEY( "EndRoom", shuttle->room.last, fread_number(fp));
+          KEY( "Entrance", shuttle->room.entrance, fread_number(fp));
           if ( !str_cmp( word, "End" ) )
             {
               shuttle->current_delay    = shuttle->delay;
@@ -547,7 +547,7 @@ void fread_shuttle( SHUTTLE_DATA *shuttle, FILE *fp )
           break;
 
         case 'S':
-          KEY( "StartRoom", shuttle->start_room, fread_number(fp));
+          KEY( "StartRoom", shuttle->room.first, fread_number(fp));
           KEY( "State", shuttle->state, fread_number(fp));
           break;
 
@@ -656,7 +656,7 @@ SHUTTLE_DATA *shuttle_from_entrance( int vnum )
   SHUTTLE_DATA *shuttle = NULL;
 
   for ( shuttle = first_shuttle; shuttle; shuttle = shuttle->next )
-    if ( vnum == shuttle->entrance )
+    if ( vnum == shuttle->room.entrance )
       return shuttle;
 
   return NULL;

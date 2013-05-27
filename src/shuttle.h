@@ -66,9 +66,12 @@ struct shuttle_data
   /* Actual time for delay.. */
   int           current_delay;
   /* For echoing any messages */
-  int           start_room;
-  int           end_room;
-  int           entrance;
+  struct
+  {
+    vnum_t first;
+    vnum_t last;
+    vnum_t entrance;
+  } room;
 };
 
 #ifndef MSL

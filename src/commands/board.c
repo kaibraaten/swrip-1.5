@@ -51,7 +51,7 @@ void do_board( CHAR_DATA *ch, char *argument )
   else if ( ( shuttle = shuttle_in_room( ch->in_room , argument ) ) != NULL )
     {
       name = shuttle->name;
-      if ( ( toroom = get_room_index( shuttle->entrance ) ) == NULL )
+      if ( ( toroom = get_room_index( shuttle->room.entrance ) ) == NULL )
         {
           send_to_char("That ship has no entrance!\r\n", ch);
           return;

@@ -34,8 +34,8 @@ void do_showshuttle (CHAR_DATA * ch, char * argument)
   ch_printf(ch, "Filename: %s\t\tDelay: %d\r\n", shuttle->filename, shuttle->delay );
 
   ch_printf(ch, "Start Room: %d\tEnd Room: %d\t\tEntrance: %d\r\n",
-            shuttle->start_room, shuttle->end_room,
-            shuttle->entrance);
+            shuttle->room.first, shuttle->room.last,
+            shuttle->room.entrance);
 
   send_to_char("Stops:\r\n", ch);
   for (stop = shuttle->first_stop; stop; stop = stop->next)

@@ -26,7 +26,7 @@ void do_setshuttle(CHAR_DATA * ch, char * argument)
   if ( arg1[0] == '\0' || arg2[0] == '\0' || argument[0] == '\0')
     {
       send_to_char( "Usage: setshuttle <shuttle name> <field> <value>\r\n", ch);
-      send_to_char( "Fields:\r\n\tstart_room, last_room, entrance, delay\r\n", ch);
+      send_to_char( "Fields:\r\n\tfirstroom, lastroom, entrance, delay\r\n", ch);
       send_to_char( "\tname, filename, type, stop, remove shuttle\r\n", ch);\
       send_to_char("\tsetshuttle <shuttle> stop <add>\r\n",ch);
       send_to_char("\tsetshuttle <shuttle> stop <stop #> name <value>\r\n",ch);
@@ -49,33 +49,33 @@ void do_setshuttle(CHAR_DATA * ch, char * argument)
 
   value = is_number( argument ) ? atoi( argument ) : -1;
 
-  if (!str_cmp(arg2, "start_room"))
+  if (!str_cmp(arg2, "firstroom"))
     {
-      if (value > shuttle->end_room)
+      if (value > shuttle->room.last)
         {
           send_to_char("Uh.. First room should be less than last room.\r\n", ch);
           return;
         }
-      shuttle->start_room = value;
+      shuttle->room.first = value;
     }
-  else if (!str_cmp(arg2, "last_room"))
+  else if (!str_cmp(arg2, "lastroom"))
     {
-      if (value < shuttle->start_room)
+      if (value < shuttle->room.first)
         {
           send_to_char("Uh.. First room should be less than last room.\r\n", ch);
           return;
         }
-      shuttle->end_room = value;
+      shuttle->room.last = value;
     }
   else if (!str_cmp(arg2, "entrance"))
     {
-      if (value > shuttle->end_room
-          || value < shuttle->start_room )
+      if (value > shuttle->room.last
+          || value < shuttle->room.first )
         {
           send_to_char("Not within valid range.\r\n", ch);
           return;
         }
-      shuttle->entrance = value;
+      shuttle->room.entrance = value;
     }
   else if (!str_cmp(arg2, "delay"))
     {
