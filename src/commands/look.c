@@ -13,7 +13,12 @@ static void show_char_to_char_0( CHAR_DATA *victim, CHAR_DATA *ch );
 static void show_char_to_char_1( CHAR_DATA *victim, CHAR_DATA *ch );
 static void show_ships_to_char( SHIP_DATA *ship, CHAR_DATA *ch );
 static void show_visible_affects_to_char( CHAR_DATA *victim, CHAR_DATA *ch );
+static void show_exit_to_char( CHAR_DATA *ch, EXIT_DATA *pexit, short door );
+
 static char *get_sex( CHAR_DATA *ch );
+static void look_under( CHAR_DATA *ch, char *what, bool doexaprog );
+static void look_in( CHAR_DATA *ch, char *what, bool doexaprog );
+static bool requirements_are_met( CHAR_DATA *ch );
 
 void do_look( CHAR_DATA *ch, char *argument )
 {
@@ -31,32 +36,8 @@ void do_look( CHAR_DATA *ch, char *argument )
   int number, cnt;
   SPACE_DATA *spaceobject;
 
-  if ( !ch->desc )
-    return;
-
-  if ( ch->position < POS_SLEEPING )
+  if( !requirements_are_met( ch ) )
     {
-      send_to_char( "You can't see anything but stars!\r\n", ch );
-      return;
-    }
-
-  if ( ch->position == POS_SLEEPING )
-    {
-      send_to_char( "You can't see anything, you're sleeping!\r\n", ch );
-      return;
-    }
-
-  if ( !check_blind( ch ) )
-    return;
-
-  if ( !is_npc(ch)
-       &&   !IS_SET(ch->act, PLR_HOLYLIGHT)
-       &&   !is_affected_by(ch, AFF_TRUESIGHT)
-       &&   room_is_dark( ch->in_room ) )
-    {
-      set_char_color( AT_DGREY, ch );
-      send_to_char( "It is pitch black ... \r\n", ch );
-      show_char_to_char( ch->in_room->first_person, ch );
       return;
     }
 
@@ -190,133 +171,19 @@ void do_look( CHAR_DATA *ch, char *argument )
 
   if ( !str_cmp( arg1, "under" ) )
     {
-      int count;
-
-      if ( arg2[0] == '\0' )
-        {
-          send_to_char( "Look beneath what?\r\n", ch );
-          return;
-        }
-
-      if ( ( obj = get_obj_here( ch, arg2 ) ) == NULL )
-        {
-          send_to_char( "You do not see that here.\r\n", ch );
-          return;
-        }
-      if ( ch->carry_weight + obj->weight > can_carry_w( ch ) )
-        {
-          send_to_char( "It's too heavy for you to look under.\r\n", ch );
-          return;
-        }
-      count = obj->count;
-      obj->count = 1;
-      act( AT_PLAIN, "You lift $p and look beneath it:", ch, obj, NULL, TO_CHAR );
-      act( AT_PLAIN, "$n lifts $p and looks beneath it:", ch, obj, NULL, TO_ROOM );
-      obj->count = count;
-
-      if ( IS_OBJ_STAT( obj, ITEM_COVERING ) )
-        show_list_to_char( obj->first_content, ch, TRUE, TRUE );
-      else
-	send_to_char( "Nothing.\r\n", ch );
-
-      if ( doexaprog )
-        oprog_examine_trigger( ch, obj );
+      look_under( ch, arg2, doexaprog );
       return;
     }
 
   if ( !str_cmp( arg1, "i" ) || !str_cmp( arg1, "in" ) )
     {
-      int count;
-
-      if ( arg2[0] == '\0' )
-        {
-          send_to_char( "Look in what?\r\n", ch );
-          return;
-        }
-
-      if ( ( obj = get_obj_here( ch, arg2 ) ) == NULL )
-        {
-          send_to_char( "You do not see that here.\r\n", ch );
-          return;
-        }
-
-      switch ( obj->item_type )
-        {
-        default:
-          send_to_char( "That is not a container.\r\n", ch );
-          break;
-
-        case ITEM_DRINK_CON:
-          if ( obj->value[1] <= 0 )
-            {
-              send_to_char( "It is empty.\r\n", ch );
-              if ( doexaprog )
-                oprog_examine_trigger( ch, obj );
-              break;
-            }
-
-          ch_printf( ch, "It's %s full of a %s liquid.\r\n",
-                     obj->value[1] <     obj->value[0] / 4
-                     ? "less than" :
-                     obj->value[1] < 3 * obj->value[0] / 4
-                     ? "about"     : "more than",
-                     liq_table[obj->value[2]].liq_color
-                     );
-
-	  if ( doexaprog )
-            oprog_examine_trigger( ch, obj );
-          break;
-
-        case ITEM_PORTAL:
-          for ( pexit = ch->in_room->first_exit; pexit; pexit = pexit->next )
-            {
-              if ( pexit->vdir == DIR_PORTAL
-                   &&   IS_SET(pexit->exit_info, EX_PORTAL) )
-                {
-                  if ( room_is_private( ch, pexit->to_room )
-                       &&   get_trust(ch) < sysdata.level_override_private )
-                    {
-                      set_char_color( AT_WHITE, ch );
-                      send_to_char( "That room is private buster!\r\n", ch );
-                      return;
-                    }
-                  original = ch->in_room;
-                  char_from_room( ch );
-                  char_to_room( ch, pexit->to_room );
-                  do_look( ch, "auto" );
-                  char_from_room( ch );
-                  char_to_room( ch, original );
-                  return;
-                }
-            }
-          send_to_char( "You see a swirling chaos...\r\n", ch );
-          break;
-        case ITEM_CONTAINER:
-        case ITEM_CORPSE_NPC:
-        case ITEM_CORPSE_PC:
-        case ITEM_DROID_CORPSE:
-          if ( IS_SET(obj->value[1], CONT_CLOSED) )
-            {
-              send_to_char( "It is closed.\r\n", ch );
-              break;
-            }
-
-          count = obj->count;
-          obj->count = 1;
-          act( AT_PLAIN, "$p contains:", ch, obj, NULL, TO_CHAR );
-          obj->count = count;
-          show_list_to_char( obj->first_content, ch, TRUE, TRUE );
-
-	  if ( doexaprog )
-            oprog_examine_trigger( ch, obj );
-
-          break;
-        }
-
+      look_in( ch, arg2, doexaprog );
       return;
     }
 
-  if ( (pdesc=get_extra_descr(arg1, ch->in_room->first_extradesc)) != NULL )
+  pdesc = get_extra_descr(arg1, ch->in_room->first_extradesc);
+
+  if ( pdesc )
     {
       send_to_char( "\r\n", ch );
       send_to_char( pdesc, ch );
@@ -324,106 +191,27 @@ void do_look( CHAR_DATA *ch, char *argument )
     }
 
   door = get_dir( arg1 );
+  pexit = find_door( ch, arg1, TRUE );
 
-  if ( ( pexit = find_door( ch, arg1, TRUE ) ) != NULL )
+  if ( pexit )
     {
-      if ( pexit->keyword )
-        {
-          if ( IS_SET(pexit->exit_info, EX_CLOSED)
-               &&  !IS_SET(pexit->exit_info, EX_WINDOW) )
-            {
-              if ( IS_SET(pexit->exit_info, EX_SECRET)
-                   &&   door != -1 )
-                send_to_char( "Nothing special there.\r\n", ch );
-              else
-                act( AT_PLAIN, "The $d is closed.", ch, NULL, pexit->keyword, TO_CHAR );
-              return;
-            }
-          if ( IS_SET( pexit->exit_info, EX_BASHED ) )
-            act(AT_RED, "The $d has been bashed from its hinges!",ch, NULL, pexit->keyword, TO_CHAR);
-        }
-
-      if ( pexit->description && pexit->description[0] != '\0' )
-        send_to_char( pexit->description, ch );
-      else
-        send_to_char( "Nothing special there.\r\n", ch );
-
-      /*
-       * Ability to look into the next room                     -Thoric
-       */
-      if ( pexit->to_room
-	   && ( is_affected_by( ch, AFF_SCRYING )
-                ||   IS_SET( pexit->exit_info, EX_xLOOK )
-                ||   get_trust(ch) >= LEVEL_IMMORTAL ) )
-        {
-          if ( !IS_SET( pexit->exit_info, EX_xLOOK )
-               &&    get_trust( ch ) < LEVEL_IMMORTAL )
-            {
-              set_char_color( AT_MAGIC, ch );
-              send_to_char( "You attempt to scry...\r\n", ch );
-
-              if (!is_npc(ch) )
-                {
-                  int percent = 99;
-
-                  if(  number_percent( ) > percent )
-                    {
-                      send_to_char( "You fail.\r\n", ch );
-                      return;
-                    }
-                }
-            }
-
-          if ( room_is_private( ch, pexit->to_room )
-               &&   get_trust(ch) < sysdata.level_override_private )
-            {
-              set_char_color( AT_WHITE, ch );
-              send_to_char( "That room is private buster!\r\n", ch );
-              return;
-            }
-
-          original = ch->in_room;
-
-          if ( pexit->distance > 1 )
-            {
-              ROOM_INDEX_DATA * to_room;
-
-              if ( (to_room=generate_exit(ch->in_room, &pexit)) != NULL )
-                {
-                  char_from_room( ch );
-                  char_to_room( ch, to_room );
-                }
-              else
-                {
-                  char_from_room( ch );
-                  char_to_room( ch, pexit->to_room );
-		  char_to_room( ch, pexit->to_room );
-                }
-            }
-          else
-            {
-              char_from_room( ch );
-              char_to_room( ch, pexit->to_room );
-            }
-          do_look( ch, "auto" );
-          char_from_room( ch );
-          char_to_room( ch, original );
-        }
+      show_exit_to_char( ch, pexit, door );
       return;
     }
-  else
-    if ( door != -1 )
-      {
-        send_to_char( "Nothing special there.\r\n", ch );
-        return;
-      }
+  else if ( door != DIR_INVALID )
+    {
+      bug("%s:%s:%d: door != DIR_INVALID", __FUNCTION__, __FILE__, __LINE__);
+      send_to_char( "Nothing special there.\r\n", ch );
+      return;
+    }
 
-  if ( ( victim = get_char_room( ch, arg1 ) ) != NULL )
+  victim = get_char_room( ch, arg1 );
+
+  if ( victim )
     {
       show_char_to_char_1( victim, ch );
       return;
     }
-
 
   number = number_argument( arg1, arg );
 
@@ -908,7 +696,7 @@ static void show_visible_affects_to_char( CHAR_DATA *victim, CHAR_DATA *ch )
     }
 }
 
-static char * get_sex( CHAR_DATA *ch )
+static char *get_sex( CHAR_DATA *ch )
 {
   switch( ch->sex )
     {
@@ -920,5 +708,300 @@ static char * get_sex( CHAR_DATA *ch )
 
     default:
       return "undistinguished";
+    }
+}
+
+static void look_under( CHAR_DATA *ch, char *what, bool doexaprog )
+{
+  int count = 0;
+  OBJ_DATA *obj = NULL;
+
+  if ( what[0] == '\0' )
+    {
+      send_to_char( "Look beneath what?\r\n", ch );
+      return;
+    }
+
+  obj = get_obj_here( ch, what );
+
+  if ( !obj )
+    {
+      send_to_char( "You do not see that here.\r\n", ch );
+      return;
+    }
+
+  if ( ch->carry_weight + obj->weight > can_carry_w( ch ) )
+    {
+      send_to_char( "It's too heavy for you to look under.\r\n", ch );
+      return;
+    }
+
+  count = obj->count;
+  obj->count = 1;
+  act( AT_PLAIN, "You lift $p and look beneath it:", ch, obj, NULL, TO_CHAR );
+  act( AT_PLAIN, "$n lifts $p and looks beneath it:", ch, obj, NULL, TO_ROOM );
+  obj->count = count;
+
+  if ( IS_OBJ_STAT( obj, ITEM_COVERING ) )
+    {
+      show_list_to_char( obj->first_content, ch, TRUE, TRUE );
+    }
+  else
+    {
+      send_to_char( "Nothing.\r\n", ch );
+    }
+
+  if ( doexaprog )
+    {
+      oprog_examine_trigger( ch, obj );
+    }
+}
+
+static bool requirements_are_met( CHAR_DATA *ch )
+{
+  if( !ch->desc )
+    {
+      return FALSE;
+    }
+
+  if ( ch->position < POS_SLEEPING )
+    {
+      ch_printf( ch, "You can't see anything but stars!\r\n" );
+
+      return FALSE;
+    }
+
+  if ( ch->position == POS_SLEEPING )
+    {
+      ch_printf( ch, "You can't see anything, you're sleeping!\r\n" );
+
+      return FALSE;
+    }
+
+  if ( !check_blind( ch ) )
+    {
+      return FALSE;
+    }
+
+  if ( !is_npc(ch)
+       && !IS_SET(ch->act, PLR_HOLYLIGHT)
+       && !is_affected_by(ch, AFF_TRUESIGHT)
+       && room_is_dark( ch->in_room ) )
+    {
+      set_char_color( AT_DGREY, ch );
+      send_to_char( "It is pitch black...\r\n", ch );
+      show_char_to_char( ch->in_room->first_person, ch );
+
+      return FALSE;
+    }
+
+  return TRUE;
+}
+
+static void look_in( CHAR_DATA *ch, char *what, bool doexaprog )
+{
+  int count = 0;
+  OBJ_DATA *obj = NULL;
+  EXIT_DATA *pexit = NULL;
+
+  if ( what[0] == '\0' )
+    {
+      send_to_char( "Look in what?\r\n", ch );
+      return;
+    }
+
+  obj = get_obj_here( ch, what );
+
+  if ( !obj )
+    {
+      send_to_char( "You do not see that here.\r\n", ch );
+      return;
+    }
+
+  switch ( obj->item_type )
+    {
+    default:
+      send_to_char( "That is not a container.\r\n", ch );
+      break;
+
+    case ITEM_DRINK_CON:
+      if ( obj->value[1] <= 0 )
+	{
+	  send_to_char( "It is empty.\r\n", ch );
+
+	  if ( doexaprog )
+	    {
+	      oprog_examine_trigger( ch, obj );
+	    }
+
+	  break;
+	}
+
+      ch_printf( ch, "It's %s full of a %s liquid.\r\n",
+                     obj->value[1] <     obj->value[0] / 4
+		 ? "less than" :
+                     obj->value[1] < 3 * obj->value[0] / 4
+		 ? "about"     : "more than",
+                     liq_table[obj->value[2]].liq_color
+		 );
+
+      if ( doexaprog )
+	{
+	  oprog_examine_trigger( ch, obj );
+	}
+      break;
+
+    case ITEM_PORTAL:
+      for ( pexit = ch->in_room->first_exit; pexit; pexit = pexit->next )
+	{
+	  if ( pexit->vdir == DIR_PORTAL
+	       &&   IS_SET(pexit->exit_info, EX_PORTAL) )
+	    {
+	      ROOM_INDEX_DATA *original = NULL;
+
+	      if ( room_is_private( ch, pexit->to_room )
+		   && get_trust(ch) < sysdata.level_override_private )
+		{
+		  set_char_color( AT_WHITE, ch );
+		  send_to_char( "That room is private buster!\r\n", ch );
+		  return;
+		}
+
+	      original = ch->in_room;
+	      char_from_room( ch );
+	      char_to_room( ch, pexit->to_room );
+	      do_look( ch, "auto" );
+	      char_from_room( ch );
+	      char_to_room( ch, original );
+	      return;
+	    }
+	}
+
+      send_to_char( "You see a swirling chaos...\r\n", ch );
+      break;
+
+    case ITEM_CONTAINER:
+    case ITEM_CORPSE_NPC:
+    case ITEM_CORPSE_PC:
+    case ITEM_DROID_CORPSE:
+      if ( IS_SET(obj->value[1], CONT_CLOSED) )
+	{
+	  send_to_char( "It is closed.\r\n", ch );
+	  break;
+	}
+
+      count = obj->count;
+      obj->count = 1;
+      act( AT_PLAIN, "$p contains:", ch, obj, NULL, TO_CHAR );
+      obj->count = count;
+      show_list_to_char( obj->first_content, ch, TRUE, TRUE );
+
+      if ( doexaprog )
+	{
+	  oprog_examine_trigger( ch, obj );
+	}
+
+      break;
+    }
+}
+
+static void show_exit_to_char( CHAR_DATA *ch, EXIT_DATA *pexit, short door )
+{
+  if ( pexit->keyword )
+    {
+      if ( IS_SET(pexit->exit_info, EX_CLOSED)
+	   && !IS_SET(pexit->exit_info, EX_WINDOW) )
+	{
+	  if ( IS_SET(pexit->exit_info, EX_SECRET)
+	       && door != DIR_INVALID )
+	    {
+	      send_to_char( "Nothing special there.\r\n", ch );
+	    }
+	  else
+	    {
+	      act( AT_PLAIN, "The $d is closed.", ch, NULL, pexit->keyword, TO_CHAR );
+	    }
+
+	  return;
+	}
+
+      if ( IS_SET( pexit->exit_info, EX_BASHED ) )
+	{
+	  act(AT_RED, "The $d has been bashed from its hinges!",
+	      ch, NULL, pexit->keyword, TO_CHAR);
+	}
+    }
+
+  if ( pexit->description && pexit->description[0] != '\0' )
+    {
+      send_to_char( pexit->description, ch );
+    }
+  else
+    {
+      send_to_char( "Nothing special there.\r\n", ch );
+    }
+
+  /*
+   * Ability to look into the next room                     -Thoric
+   */
+  if ( pexit->to_room
+       && ( is_affected_by( ch, AFF_SCRYING )
+	    || IS_SET( pexit->exit_info, EX_xLOOK )
+	    || get_trust(ch) >= LEVEL_IMMORTAL ) )
+    {
+      ROOM_INDEX_DATA *original = NULL;
+
+      if ( !IS_SET( pexit->exit_info, EX_xLOOK )
+	   && get_trust( ch ) < LEVEL_IMMORTAL )
+	{
+	  set_char_color( AT_MAGIC, ch );
+	  send_to_char( "You attempt to scry...\r\n", ch );
+
+	  if (!is_npc(ch) )
+	    {
+	      int percent = 99;
+
+	      if( number_percent() > percent )
+		{
+		  send_to_char( "You fail.\r\n", ch );
+		  return;
+		}
+	    }
+	}
+
+      if ( room_is_private( ch, pexit->to_room )
+	   && get_trust(ch) < sysdata.level_override_private )
+	{
+	  set_char_color( AT_WHITE, ch );
+	  send_to_char( "That room is private buster!\r\n", ch );
+	  return;
+	}
+
+      original = ch->in_room;
+
+      if ( pexit->distance > 1 )
+	{
+	  ROOM_INDEX_DATA *to_room = generate_exit( ch->in_room, &pexit );
+
+	  if ( to_room )
+	    {
+	      char_from_room( ch );
+	      char_to_room( ch, to_room );
+	    }
+	  else
+	    {
+	      char_from_room( ch );
+	      char_to_room( ch, pexit->to_room );
+	    }
+	}
+      else
+	{
+	  char_from_room( ch );
+	  char_to_room( ch, pexit->to_room );
+	}
+
+      do_look( ch, "auto" );
+      char_from_room( ch );
+      char_to_room( ch, original );
     }
 }

@@ -21,9 +21,7 @@
  *                           Mud constants module                          *
  ****************************************************************************/
 
-#include <sys/types.h>
-#include <stdio.h>
-#include <time.h>
+#include <string.h>
 #include "mud.h"
 
 static int get_in_array( const char *name, const char * const * array,
@@ -1275,8 +1273,8 @@ int get_rev_dir( int dir )
 
 int get_dir( const char *txt )
 {
-  int edir = 0;
-  char c1, c2;
+  int edir = DIR_INVALID;
+  char c1 = 0, c2 = 0;
 
   if ( !str_cmp( txt, get_dir_name( DIR_NORTHEAST ) ) )
     return DIR_NORTHEAST;
@@ -1293,10 +1291,15 @@ int get_dir( const char *txt )
   if ( !str_cmp( txt, get_dir_name( DIR_SOMEWHERE ) ) )
     return DIR_SOMEWHERE;
 
+  if( strlen( txt ) > 2 )
+    {
+      return DIR_INVALID;
+    }
+
   c1 = txt[0];
 
   if ( c1 == '\0' )
-    return 0;
+    return DIR_INVALID;
 
   c2 = txt[1];
 
