@@ -14,6 +14,7 @@ static void show_char_to_char_1( CHAR_DATA *victim, CHAR_DATA *ch );
 static void show_ships_to_char( SHIP_DATA *ship, CHAR_DATA *ch );
 static void show_visible_affects_to_char( CHAR_DATA *victim, CHAR_DATA *ch );
 static void show_exit_to_char( CHAR_DATA *ch, EXIT_DATA *pexit, short door );
+static void show_no_arg( CHAR_DATA *ch, bool is_auto );
 
 static char *get_sex( CHAR_DATA *ch );
 static void look_under( CHAR_DATA *ch, char *what, bool doexaprog );
@@ -29,12 +30,11 @@ void do_look( CHAR_DATA *ch, char *argument )
   EXIT_DATA *pexit;
   CHAR_DATA *victim;
   OBJ_DATA *obj;
-  ROOM_INDEX_DATA *original;
   char *pdesc;
   bool doexaprog;
   short door;
   int number, cnt;
-  SPACE_DATA *spaceobject;
+  bool is_auto = FALSE;
 
   if( !requirements_are_met( ch ) )
     {
@@ -46,126 +46,11 @@ void do_look( CHAR_DATA *ch, char *argument )
   argument = one_argument( argument, arg3 );
 
   doexaprog = str_cmp( "noprog", arg2 ) && str_cmp( "noprog", arg3 );
+  is_auto = !str_cmp( arg1, "auto" );
 
-  if ( arg1[0] == '\0' || !str_cmp( arg1, "auto" ) )
+  if ( arg1[0] == '\0' || is_auto )
     {
-      SHIP_DATA * ship;
-
-      /* 'look' or 'look auto' */
-      set_char_color( AT_RMNAME, ch);
-      send_to_char( ch->in_room->name, ch);
-      send_to_char(" ", ch);
-
-      if ( ! ch->desc->original )
-        {
-
-          if ((get_trust(ch) >= LEVEL_IMMORTAL) && (IS_SET(ch->pcdata->flags, PCFLAG_ROOM)))
-            {
-              set_char_color(AT_PURPLE, ch);      /* Added 10/17 by Kuran of */
-              send_to_char("{", ch);                     /* SWReality */
-              ch_printf(ch, "%d:", ch->in_room->vnum);
-              ch_printf(ch, "%s", ch->in_room->area->filename);
-	      send_to_char("}", ch);
-              set_char_color(AT_CYAN, ch);
-              send_to_char("[", ch);
-              send_to_char(flag_string(ch->in_room->room_flags, room_flags),
-                           ch);
-              send_to_char("]", ch);
-            }
-
-        }
-
-      send_to_char( "\r\n", ch );
-      set_char_color( AT_RMDESC, ch );
-
-      if ( arg1[0] == '\0'
-           || ( !is_npc(ch) && !IS_SET(ch->act, PLR_BRIEF) ) )
-        send_to_char( ch->in_room->description, ch );
-
-
-      if ( !is_npc(ch) && IS_SET(ch->act, PLR_AUTOEXIT) )
-        do_exits( ch, "" );
-
-      show_ships_to_char( ch->in_room->first_ship, ch );
-      show_shuttles_to_char( ch->in_room->first_shuttle, ch );
-      show_list_to_char( ch->in_room->first_content, ch, FALSE, FALSE );
-      show_char_to_char( ch->in_room->first_person,  ch );
-
-      if ( str_cmp( arg1, "auto" ) )
-        if (   (ship = ship_from_cockpit(ch->in_room->vnum))  != NULL )
-          {
-            set_char_color(  AT_WHITE, ch );
-            ch_printf( ch , "\r\nThrough the transparisteel windows you see:\r\n" );
-
-            if ( ship->location || ship->shipstate == SHIP_LANDED )
-              {
-                ROOM_INDEX_DATA *to_room;
-
-                if ( (to_room = get_room_index( ship->location ) ) != NULL )
-                  {
-                    ch_printf( ch, "\r\n" );
-                    original = ch->in_room;
-                    char_from_room( ch );
-                    char_to_room( ch, to_room );
-                    do_glance( ch, "" );
-                    char_from_room( ch );
-                    char_to_room( ch, original );
-		  }
-                else
-                  ch_printf( ch, "no room?\r\n" );
-              }
-            else if (ship->spaceobject )
-              {
-                SHIP_DATA *target;
-
-                set_char_color(  AT_GREEN, ch );
-                for( spaceobject = first_spaceobject; spaceobject; spaceobject = spaceobject->next )
-                  if ( space_in_range( ship, spaceobject) && spaceobject->name && str_cmp(spaceobject->name,"") )
-                    ch_printf(ch, "%s\r\n" ,
-                              spaceobject->name);
-                for ( target = first_ship; target; target = target->next )
-                  {
-                    if ( target != ship && target->spaceobject )
-                      {
-                        if( ship_distance_to_ship( target, ship ) < 100*(ship->sensor+10)*((target->sclass == SHIP_DEBRIS ? 2 : target->sclass)+1 ) )
-                          {
-                            ch_printf(ch, "%s    %.0f %.0f %.0f\r\n",
-                                      target->name,
-                                      (target->pos.x - ship->pos.x),
-                                      (target->pos.y - ship->pos.y),
-                                      (target->pos.z - ship->pos.z));
-                          }
-                        else if ( ship_distance_to_ship( target, ship ) < 100*(ship->sensor+10)*((target->sclass == SHIP_DEBRIS ? 2 : target->sclass)+3))
-                          {
-                            if ( target->sclass == FIGHTER_SHIP )
-                              ch_printf(ch, "A small metallic mass    %.0f %.0f %.0f\r\n",
-                                        (target->pos.x - ship->pos.x),
-                                        (target->pos.y - ship->pos.y),
-                                        (target->pos.z - ship->pos.z));
-                            if ( target->sclass == MIDSIZE_SHIP )
-                              ch_printf(ch, "A goodsize metallic mass    %.0f %.0f %.0f\r\n",
-                                        (target->pos.x - ship->pos.x),
-                                        (target->pos.y - ship->pos.y),
-                                        (target->pos.z - ship->pos.z));
-                            if ( target->sclass == SHIP_DEBRIS )
-                              ch_printf(ch, "scattered metallic reflections    %.0f %.0f %.0f\r\n",
-                                        (target->pos.x - ship->pos.x),
-                                        (target->pos.y - ship->pos.y),
-                                        (target->pos.z - ship->pos.z));
-                            else if ( target->sclass >= CAPITAL_SHIP )
-			      ch_printf(ch, "A huge metallic mass    %.0f %.0f %.0f\r\n",
-                                        (target->pos.x - ship->pos.x),
-                                        (target->pos.y - ship->pos.y),
-                                        (target->pos.z - ship->pos.z));
-                          }
-
-                      }
-
-                  }
-                ch_printf(ch,"\r\n");
-              }
-          }
-
+      show_no_arg( ch, is_auto );
       return;
     }
 
@@ -1003,5 +888,142 @@ static void show_exit_to_char( CHAR_DATA *ch, EXIT_DATA *pexit, short door )
       do_look( ch, "auto" );
       char_from_room( ch );
       char_to_room( ch, original );
+    }
+}
+
+/* 'look' or 'look auto' */
+static void show_no_arg( CHAR_DATA *ch, bool is_auto )
+{
+  set_char_color( AT_RMNAME, ch);
+  send_to_char( ch->in_room->name, ch);
+  send_to_char(" ", ch);
+
+  if ( !ch->desc->original )
+    {
+      if ((get_trust(ch) >= LEVEL_IMMORTAL) && (IS_SET(ch->pcdata->flags, PCFLAG_ROOM)))
+	{
+	  set_char_color(AT_PURPLE, ch);
+	  ch_printf(ch, "{%d:%s}", ch->in_room->vnum, ch->in_room->area->filename);
+
+	  set_char_color(AT_CYAN, ch);
+	  ch_printf( ch, "[%s]", flag_string(ch->in_room->room_flags, room_flags ) );
+	}
+    }
+
+  send_to_char( "\r\n", ch );
+  set_char_color( AT_RMDESC, ch );
+
+  if ( !is_npc(ch) && !IS_SET(ch->act, PLR_BRIEF ) )
+    {
+      send_to_char( ch->in_room->description, ch );
+    }
+
+  if ( !is_npc(ch) && IS_SET(ch->act, PLR_AUTOEXIT) )
+    {
+      do_exits( ch, "" );
+    }
+
+  show_ships_to_char( ch->in_room->first_ship, ch );
+  show_shuttles_to_char( ch->in_room->first_shuttle, ch );
+  show_list_to_char( ch->in_room->first_content, ch, FALSE, FALSE );
+  show_char_to_char( ch->in_room->first_person,  ch );
+
+  if ( !is_auto )
+    {
+      SHIP_DATA *ship = ship_from_cockpit(ch->in_room->vnum);
+
+      if ( ship )
+	{
+	  set_char_color(  AT_WHITE, ch );
+	  ch_printf( ch , "\r\nThrough the transparisteel windows you see:\r\n" );
+
+	  if ( ship->location || ship->shipstate == SHIP_LANDED )
+	    {
+	      ROOM_INDEX_DATA *to_room = get_room_index( ship->location );
+
+	      if ( to_room )
+		{
+		  ROOM_INDEX_DATA *original = ch->in_room;
+
+		  ch_printf( ch, "\r\n" );
+		  char_from_room( ch );
+		  char_to_room( ch, to_room );
+		  do_glance( ch, "" );
+		  char_from_room( ch );
+		  char_to_room( ch, original );
+		}
+	      else
+		{
+		  ch_printf( ch, "no room?\r\n" );
+		}
+	    }
+	  else if (ship->spaceobject )
+	    {
+	      SHIP_DATA *target = NULL;
+	      SPACE_DATA *spaceobject = NULL;
+
+	      set_char_color(  AT_GREEN, ch );
+
+	      for( spaceobject = first_spaceobject; spaceobject; spaceobject = spaceobject->next )
+		{
+		  if ( space_in_range( ship, spaceobject)
+		       && spaceobject->name
+		       && str_cmp(spaceobject->name,"") )
+		    {
+		      ch_printf(ch, "%s\r\n", spaceobject->name);
+		    }
+		}
+
+	      for ( target = first_ship; target; target = target->next )
+		{
+		  if ( target != ship && target->spaceobject )
+		    {
+		      if( ship_distance_to_ship( target, ship ) < 100 * ( ship->sensor + 10 ) * ( ( target->sclass == SHIP_DEBRIS ? 2 : target->sclass ) + 1 ) )
+			{
+			  ch_printf(ch, "%s    %.0f %.0f %.0f\r\n",
+				    target->name,
+				    (target->pos.x - ship->pos.x),
+				    (target->pos.y - ship->pos.y),
+				    (target->pos.z - ship->pos.z));
+			}
+		      else if ( ship_distance_to_ship( target, ship ) < 100 * ( ship->sensor + 10 ) * ( ( target->sclass == SHIP_DEBRIS ? 2 : target->sclass ) + 3 ) )
+			{
+			  if ( target->sclass == FIGHTER_SHIP )
+			    {
+			      ch_printf(ch, "A small metallic mass    %.0f %.0f %.0f\r\n",
+					(target->pos.x - ship->pos.x),
+					(target->pos.y - ship->pos.y),
+					(target->pos.z - ship->pos.z));
+			    }
+
+			  if ( target->sclass == MIDSIZE_SHIP )
+			    {
+			      ch_printf(ch, "A goodsize metallic mass    %.0f %.0f %.0f\r\n",
+					(target->pos.x - ship->pos.x),
+					(target->pos.y - ship->pos.y),
+					(target->pos.z - ship->pos.z));
+			    }
+
+			  if ( target->sclass == SHIP_DEBRIS )
+			    {
+			      ch_printf(ch, "scattered metallic reflections    %.0f %.0f %.0f\r\n",
+					(target->pos.x - ship->pos.x),
+					(target->pos.y - ship->pos.y),
+					(target->pos.z - ship->pos.z));
+			    }
+			  else if ( target->sclass >= CAPITAL_SHIP )
+			    {
+			      ch_printf(ch, "A huge metallic mass    %.0f %.0f %.0f\r\n",
+					(target->pos.x - ship->pos.x),
+					(target->pos.y - ship->pos.y),
+					(target->pos.z - ship->pos.z));
+			    }
+			}
+		    }
+		}
+
+	      ch_printf(ch,"\r\n");
+	    }
+	}
     }
 }
