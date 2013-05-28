@@ -1822,17 +1822,6 @@ capital system, however, may.
 while that battle lasts.&R&w 
 ~
 
-1 CARGO~
-&cThis is in progress.
- 
-You will be able to transport cargo from planet to planet, buying and 
-selling depending on the planet, at certain prices. The plan is to have 
-clans able to build things using that cargo, to protect their planets. 
- 
-As I said, this is a work in progress, it will be a while before it is 
-completed. 
-~
-
 0 CAST FEEL~
 &CSyntax &W:&Y feel <force power> <target>
 &c
@@ -3668,6 +3657,25 @@ until the economy is replenished (as they all share the same gold pool).
 Use foldarea to make changes to an area's economy with aset permenent.
  
 See ASET, FOLDAREA
+~
+
+1 EDITOR~
+The SMAUG Editor is used when you're writing mail, notes, your bio,
+description or other long bodies of text. The commands in the editor are:
+
+/? [command]     Displays editor help in general, or about a command.
+/l [line range]  Lists the current contents of the note.
+/c               Clears the current contents of the note.
+/d <line>        Delete line.
+/g <line>        Goto line. This is useful for inserting lines,
+                 deleting and fixing lines, etc.
+/i <line>        Insert line. Inserts a new blank line where specified.
+/r <old> <new>   Global replace text.
+/a               Abort editing. No changes you made are kept.
+/! <command>     Execute mud command. '/! smile' sends the smile
+                 command, without exiting the editor.
+/s               Save buffer, and exit the editor.
+/p               Print information about the current editing session.
 ~
 
 1 ELITE_GUARD~
