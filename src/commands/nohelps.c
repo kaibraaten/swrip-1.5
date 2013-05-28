@@ -1,5 +1,6 @@
 #include "mud.h"
 #include "character.h"
+#include "help.h"
 
 void do_nohelps(CHAR_DATA *ch, char *argument)
 {

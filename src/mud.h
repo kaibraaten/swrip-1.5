@@ -201,18 +201,6 @@ struct frc_app_type
   short force;
 };
 
-/*
- * Help table types.
- */
-struct help_data
-{
-  HELP_DATA *next;
-  HELP_DATA *prev;
-  short      level;
-  char      *keyword;
-  char      *text;
-};
-
 struct shop_data
 {
   SHOP_DATA *next;                  /* Next shop in list            */
@@ -1561,7 +1549,6 @@ extern int top_affect;
 extern int top_area;
 extern int top_ed;
 extern int top_exit;
-extern int top_help;
 extern int top_mob_index;
 extern int top_obj_index;
 extern int top_reset;
@@ -1587,8 +1574,6 @@ extern int                   cur_obj_serial;
 extern bool                  cur_obj_extracted;
 extern obj_ret               global_objcode;
 
-extern HELP_DATA            *first_help;
-extern HELP_DATA            *last_help;
 extern SHOP_DATA            *first_shop;
 extern SHOP_DATA            *last_shop;
 extern REPAIR_DATA          *first_repair;
@@ -2299,7 +2284,6 @@ extern "C" {
   /* act_info.c */
   int get_race_from_name( const char *arg );
   int get_class_from_name( const char *arg );
-  HELP_DATA *get_help( const CHAR_DATA *ch, char *argument );
   void show_condition( const CHAR_DATA *ch, const CHAR_DATA *victim );
   bool check_blind( const CHAR_DATA *ch );
   char *format_obj_to_char( const OBJ_DATA *obj, const CHAR_DATA *ch, bool fShort );
@@ -2503,12 +2487,12 @@ extern "C" {
   OBJ_INDEX_DATA *get_obj_index( int vnum );
   ROOM_INDEX_DATA *get_room_index( int vnum );
   void  bug( const char *str, ... );
-  void  log_string_plus( const char *str, short log_type, short level );
+  void log_printf( const char *fmt, ... );
+  void log_string_plus( const char *str, short log_type, short level );
   ROOM_INDEX_DATA *make_room( int vnum );
   OBJ_INDEX_DATA *make_object( int vnum, int cvnum, char *name );
   MOB_INDEX_DATA *make_mobile( short vnum, short cvnum, char *name );
   EXIT_DATA *make_exit( ROOM_INDEX_DATA *pRoomIndex, ROOM_INDEX_DATA *to_room, short door );
-  void  add_help( HELP_DATA *pHelp );
   void  fix_area_exits( AREA_DATA *tarea );
   void  load_area_file( AREA_DATA *tarea, char *filename );
   void  randomize_exits( ROOM_INDEX_DATA *room, short maxdir );

@@ -1,3 +1,4 @@
+#include "help.h"
 #include "mud.h"
 
 void do_memory( CHAR_DATA *ch, char *argument )

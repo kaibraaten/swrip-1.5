@@ -763,9 +763,10 @@ void write_area_list( void )
       bug( "FATAL: cannot open area.lst for writing!\r\n", 0 );
       return;
     }
-  fprintf( fpout, "help.are\n" );
+
   for ( tarea = first_area; tarea; tarea = tarea->next )
     fprintf( fpout, "%s\n", tarea->filename );
+
   fprintf( fpout, "$\n" );
   fclose( fpout );
 }

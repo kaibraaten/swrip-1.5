@@ -31,6 +31,7 @@
 #include "shuttle.h"
 #include "character.h"
 #include "editor.h"
+#include "help.h"
 
 void init_supermob();
 
@@ -42,9 +43,6 @@ WIZENT *first_wiz = NULL;
 WIZENT *last_wiz = NULL;
 
 time_t last_restore_all_time = 0;
-
-HELP_DATA *first_help = NULL;
-HELP_DATA *last_help = NULL;
 
 SHOP_DATA *first_shop = NULL;
 SHOP_DATA *last_shop = NULL;
@@ -60,7 +58,6 @@ EXTRACT_CHAR_DATA *extracted_char_queue = NULL;
 
 CHAR_DATA *first_char = NULL;
 CHAR_DATA *last_char = NULL;
-char *help_greeting = NULL;
 char log_buf[2*MAX_INPUT_LENGTH];
 
 OBJ_DATA *first_object = NULL;
@@ -276,7 +273,6 @@ int top_affect = 0;
 int top_area = 0;
 int top_ed = 0;
 int top_exit = 0;
-int top_help = 0;
 int top_mob_index = 0;
 int top_obj_index = 0;
 int top_reset = 0;
@@ -301,7 +297,6 @@ void load_author( AREA_DATA *tarea, FILE *fp );
 void load_economy( AREA_DATA *tarea, FILE *fp );
 void load_resetmsg( AREA_DATA *tarea, FILE *fp ); /* Rennard */
 void load_flags( AREA_DATA *tarea, FILE *fp );
-void load_helps( AREA_DATA *tarea, FILE *fp );
 void load_mobiles( AREA_DATA *tarea, FILE *fp );
 void load_objects( AREA_DATA *tarea, FILE *fp );
 void load_resets( AREA_DATA *tarea, FILE *fp );
@@ -742,6 +737,9 @@ void boot_db( bool fCopyOver )
   log_string( "Loading Hall of Fame" );
   load_hall_of_fame();
 
+  log_string( "Loading help files" );
+  load_helps();
+
   log_string( "Resetting areas" );
   area_update();
 
@@ -884,78 +882,6 @@ void load_flags( AREA_DATA *tarea, FILE *fp )
     tarea->age = x2;
   return;
 }
-
-/*
- * Adds a help page to the list if it is not a duplicate of an existing page.
- * Page is insert-sorted by keyword.                    -Thoric
- * (The reason for sorting is to keep do_hlist looking nice)
- */
-void add_help( HELP_DATA *pHelp )
-{
-  HELP_DATA *tHelp;
-  int match;
-
-  for ( tHelp = first_help; tHelp; tHelp = tHelp->next )
-    if ( pHelp->level == tHelp->level
-         &&   str_cmp(pHelp->keyword, tHelp->keyword) == 0 )
-      {
-        bug( "add_help: duplicate: %s.  Deleting.", pHelp->keyword );
-        STRFREE( pHelp->text );
-        STRFREE( pHelp->keyword );
-        DISPOSE( pHelp );
-        return;
-      }
-    else
-      if ( (match=str_cmp(pHelp->keyword[0]=='\'' ? pHelp->keyword+1 : pHelp->keyword,
-                         tHelp->keyword[0]=='\'' ? tHelp->keyword+1 : tHelp->keyword)) < 0
-           ||   (match == 0 && pHelp->level > tHelp->level) )
-        {
-          if ( !tHelp->prev )
-            first_help    = pHelp;
-          else
-            tHelp->prev->next = pHelp;
-          pHelp->prev             = tHelp->prev;
-          pHelp->next             = tHelp;
-          tHelp->prev             = pHelp;
-          break;
-        }
-
-  if ( !tHelp )
-    LINK( pHelp, first_help, last_help, next, prev );
-
-  top_help++;
-}
-
-/*
- * Load a help section.
- */
-void load_helps( AREA_DATA *tarea, FILE *fp )
-{
-  HELP_DATA *pHelp;
-
-  for ( ; ; )
-    {
-      CREATE( pHelp, HELP_DATA, 1 );
-      pHelp->level      = fread_number( fp );
-      pHelp->keyword    = fread_string( fp );
-      if ( pHelp->keyword[0] == '$' )
-        break;
-      pHelp->text       = fread_string( fp );
-      if ( pHelp->keyword[0] == '\0' )
-        {
-          STRFREE( pHelp->text );
-          STRFREE( pHelp->keyword );
-          DISPOSE( pHelp );
-          continue;
-        }
-
-      if ( !str_cmp( pHelp->keyword, "greeting" ) )
-        help_greeting = pHelp->text;
-      add_help( pHelp );
-    }
-  return;
-}
-
 
 /*
  * Add a character to the list of all characters                -Thoric
@@ -4255,7 +4181,6 @@ void load_area_file( AREA_DATA *tarea, char *filename )
       else if ( !str_cmp( word, "ECONOMY"  ) ) load_economy (tarea, fpArea);
       else if ( !str_cmp( word, "RESETMSG" ) ) load_resetmsg(tarea, fpArea);
       /* Rennard */
-      else if ( !str_cmp( word, "HELPS"    ) ) load_helps   (tarea, fpArea);
       else if ( !str_cmp( word, "MOBILES"  ) ) load_mobiles (tarea, fpArea);
       else if ( !str_cmp( word, "MUDPROGS" ) ) load_mudprogs(tarea, fpArea);
       else if ( !str_cmp( word, "OBJECTS"  ) ) load_objects (tarea, fpArea);
@@ -4811,4 +4736,16 @@ void append_file( CHAR_DATA *ch, const char *file, const char *str )
 	       ch->in_room ? ch->in_room->vnum : 0, ch->name, str );
       fclose( fp );
     }
+}
+
+/* From Erwin */
+void log_printf( const char *fmt, ... )
+{
+  char buf[MAX_STRING_LENGTH * 2];
+  va_list args;
+  va_start( args, fmt );
+  vsprintf( buf, fmt, args );
+  va_end( args );
+
+  log_string_plus( buf, LOG_NORMAL, LEVEL_LOG );
 }

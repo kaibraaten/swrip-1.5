@@ -1,6 +1,7 @@
 #include "character.h"
 #include "mud.h"
 #include "editor.h"
+#include "help.h"
 
 /*
  * Help editor                                                  -Thoric
@@ -36,11 +37,8 @@ void do_hedit( CHAR_DATA *ch, char *argument )
 
   if ( (pHelp = get_help( ch, argument )) == NULL )     /* new help */
     {
-      int lev = get_trust(ch);
-      CREATE( pHelp, HELP_DATA, 1 );
-      pHelp->keyword = STRALLOC( strupper(argument) );
-      pHelp->text    = STRALLOC( "" );
-      pHelp->level   = lev;
+      int level = get_trust( ch );
+      pHelp = create_help( argument, level );
       add_help( pHelp );
     }
 

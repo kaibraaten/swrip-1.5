@@ -33,6 +33,7 @@
 #include "mud.h"
 #include "character.h"
 #include "editor.h"
+#include "help.h"
 
 /*
  * Socket and TCP/IP stuff.
@@ -787,7 +788,6 @@ void new_descriptor( socket_t new_desc )
    * Send the greeting.
    */
   {
-    extern char * help_greeting;
     if ( help_greeting[0] == '.' )
       write_to_buffer( dnew, help_greeting+1, 0 );
     else
