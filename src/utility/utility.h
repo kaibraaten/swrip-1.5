@@ -5,7 +5,6 @@
 #include <stdlib.h>
 #include "vector3.h"
 #include "os.h"
-#include "buffer.h"
 
 #ifdef __cplusplus
 extern "C" {

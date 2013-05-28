@@ -1,16 +1,16 @@
 ODIR = obj
-_OBJ = bet.o buffer.o file_io.o hashstr.o misc.o os_unix.o sha256.o string_handling.o time_fun.o vector3.o
+_OBJ = bet.o file_io.o hashstr.o misc.o os_unix.o sha256.o string_handling.o time_fun.o vector3.o
 OBJ  = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 #Comment out the next line if your system doesn't have dlsym functionality.
 #USE_DLSYM = -DSWRIP_USE_DLSYM
 
 WFLAGS = -Wall -Wshadow -Wformat-security -Winline -Wpointer-arith -Wcast-align -Wredundant-decls -Werror -Wwrite-strings -Wextra -Wno-char-subscripts
-CFLAGS = -g3 -MMD -pedantic $(GCC_MARCH) $(WFLAGS) -I. $(USE_DLSYM) -ansi
+CFLAGS = -g3 -MMD -pedantic $(GCC_MARCH) $(WFLAGS) -I. $(USE_DLSYM)
 
 #If not Cygwin environment
 ifneq ($(shell echo $$OSTYPE),cygwin)
-CFLAGS += -fPIC
+CFLAGS += -fPIC -ansi
 
 #Comment out next line to link as static library
 LINK_SHARED_LIBRARY = 1
