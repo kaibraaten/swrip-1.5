@@ -10,7 +10,7 @@ IMC = 1
 #Change from 0 to 1 to enable telnet debug logging.
 DEBUG_TELNET = -DSWRIP_DEBUG_TELNET=0
 
-CCFLAGS = -g3 -MMD -I. -Iutility $(WFLAGS) $(USE_DLSYM) $(DEBUG_TELNET) -ansi -pedantic
+CCFLAGS = -g3 -MMD -I. -Iutility $(WFLAGS) $(USE_DLSYM) $(DEBUG_TELNET) -pedantic
 LDFLAGS = -lm -lz -Lutility -lutility -Wl,-rpath,../src/utility
 
 #Uncomment the next line of you're using Solaris and you get linker errors.
@@ -22,6 +22,8 @@ endif
 #Only way I know of to detect Cygwin environment
 ifeq ($(shell echo $$OSTYPE),cygwin)
 LDFLAGS += -export-all-symbols
+else
+CCFLAGS += -ansi
 endif
 
 #On some systems (e.g. FreeBSD) you may need to remove -ldl
