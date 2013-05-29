@@ -221,21 +221,6 @@ int fread_number( FILE *fp )
 }
 
 /*
- * custom str_dup using create                                  -Thoric
- */
-char *str_dup( const char *str )
-{
-  static char *ret = NULL;
-
-  if( !str )
-    return NULL;
-
-  CREATE( ret, char, strlen( str ) + 1 );
-  strcpy( ret, str );
-  return ret;
-}
-
-/*
  * Read a string from file fp
  */
 char *fread_string( FILE *fp )

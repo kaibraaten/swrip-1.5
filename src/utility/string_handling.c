@@ -644,3 +644,18 @@ char *cat_sprintf(char *dest, const char *fmt, ...)
 
   return strcat(dest, buf);
 }
+
+/*
+ * custom str_dup using create                                  -Thoric
+ */
+char *str_dup( const char *str )
+{
+  static char *ret = NULL;
+
+  if( !str )
+    return NULL;
+
+  CREATE( ret, char, strlen( str ) + 1 );
+  strcpy( ret, str );
+  return ret;
+}
