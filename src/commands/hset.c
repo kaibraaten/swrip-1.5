@@ -3,12 +3,13 @@
 
 void do_hset( CHAR_DATA *ch, char *argument )
 {
-  HELP_DATA *pHelp;
+  HELP_DATA *pHelp = NULL;
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
 
   smash_tilde( argument );
   argument = one_argument( argument, arg1 );
+
   if ( arg1[0] == '\0' )
     {
       send_to_char( "Syntax: hset <field> [value] [help page]\r\n",     ch );
@@ -27,9 +28,13 @@ void do_hset( CHAR_DATA *ch, char *argument )
     }
 
   if ( str_cmp( arg1, "remove" ) )
-    argument = one_argument( argument, arg2 );
+    {
+      argument = one_argument( argument, arg2 );
+    }
 
-  if ( (pHelp = get_help( ch, argument )) == NULL )
+  pHelp = get_help( ch, argument );
+
+  if ( !pHelp )
     {
       send_to_char( "Cannot find help on that subject.\r\n", ch );
       return;
