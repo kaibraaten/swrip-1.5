@@ -26,9 +26,9 @@ void do_help( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( pHelp->level >= 0 && str_cmp( argument, "imotd" ) )
+  if ( get_help_level( pHelp ) >= 0 && str_cmp( argument, "imotd" ) )
     {
-      pager_printf( ch, "%s\r\n", pHelp->keyword );
+      pager_printf( ch, "%s\r\n", get_help_keyword( pHelp ) );
     }
 
   if ( !is_npc(ch) && IS_SET( ch->act , PLR_SOUND ) )
@@ -39,13 +39,13 @@ void do_help( CHAR_DATA *ch, char *argument )
   /*
    * Strip leading '.' to allow initial blanks.
    */
-  if ( pHelp->text[0] == '.' )
+  if ( get_help_text( pHelp )[0] == '.' )
     {
-      help_text = pHelp->text + 1;
+      help_text = get_help_text( pHelp ) + 1;
     }
   else
     {
-      help_text = pHelp->text;
+      help_text = get_help_text( pHelp );
     }
 
   pager_printf( ch, help_text );
