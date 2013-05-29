@@ -42,8 +42,8 @@ void do_hset( CHAR_DATA *ch, char *argument )
 
   if ( !str_cmp( arg1, "remove" ) )
     {
-      destroy_help( pHelp );
       unlink_help( pHelp );
+      destroy_help( pHelp );
       send_to_char( "Removed.\r\n", ch );
       return;
     }
