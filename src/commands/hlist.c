@@ -23,9 +23,13 @@ void do_hlist( CHAR_DATA *ch, char *argument )
       min = URANGE( minlimit, atoi(arg), maxlimit );
 
       if ( argument[0] != '\0' )
-        max = URANGE( min, atoi(argument), maxlimit );
+	{
+	  max = URANGE( min, atoi(argument), maxlimit );
+	}
       else
-        max = maxlimit;
+	{
+	  max = maxlimit;
+	}
     }
   else
     {
@@ -46,7 +50,11 @@ void do_hlist( CHAR_DATA *ch, char *argument )
     }
 
   if ( cnt )
-    pager_printf( ch, "\r\n%d pages found.\r\n", cnt );
+    {
+      pager_printf( ch, "\r\n%d pages found.\r\n", cnt );
+    }
   else
-    send_to_char( "None found.\r\n", ch );
+    {
+      send_to_char( "None found.\r\n", ch );
+    }
 }
