@@ -40,7 +40,8 @@ char fread_letter( FILE *fp )
   {
     if ( feof(fp) )
     {
-      bug("fread_letter: EOF encountered on read.\r\n");
+      bug("%s: EOF encountered on read.\r\n", __FUNCTION__);
+
       if ( fBootDb )
 	exit( EXIT_FAILURE );
 
@@ -48,8 +49,7 @@ char fread_letter( FILE *fp )
     }
 
     c = fgetc( fp );
-  }
-  while ( isspace((int) c) );
+  } while ( isspace((int) c) );
 
   return c;
 }
@@ -223,14 +223,11 @@ int fread_number( FILE *fp )
 /*
  * Read a string from file fp
  */
-char *fread_string( FILE *fp )
+char *fread_string( FILE *fp, char *buffer, size_t bufferSize )
 {
-  char buf[MAX_STRING_LENGTH];
-  char *plast = buf;
+  char *plast = buffer;
   char c = 0;
-  int ln = 0;
-
-  buf[0] = '\0';
+  size_t ln = 0;
 
   /*
    * Skip blanks.
@@ -241,42 +238,61 @@ char *fread_string( FILE *fp )
     if ( feof(fp) )
     {
       bug("fread_string: EOF encountered on read.\r\n");
+
       if ( fBootDb )
-	exit( EXIT_FAILURE );
-      return STRALLOC("");
+	{
+	  exit( EXIT_FAILURE );
+	}
+
+      buffer[0] = '\0';
+
+      return buffer;
     }
+
     c = fgetc( fp );
-  }
-  while ( isspace((int)c) );
+  } while ( isspace((int)c) );
 
   if ( ( *plast++ = c ) == '~' )
-    return STRALLOC( "" );
+    {
+      buffer[0] = '\0';
+
+      return buffer;
+    }
 
   for ( ;; )
   {
-    if ( ln >= (MAX_STRING_LENGTH - 1) )
+    if ( ln >= ( bufferSize - 1 ) )
     {
       bug( "fread_string: string too long" );
       *plast = '\0';
-      return STRALLOC( buf );
+
+      return buffer;
     }
+
     switch ( (int)( *plast = fgetc( fp ) ) )
     {
       default:
-	plast++; ln++;
+	plast++;
+	ln++;
 	break;
 
       case EOF:
 	bug( "Fread_string: EOF" );
+
 	if ( fBootDb )
-	  exit( EXIT_FAILURE );
+	  {
+	    exit( EXIT_FAILURE );
+	  }
+
 	*plast = '\0';
-	return STRALLOC(buf);
+	return buffer;
 	break;
 
       case '\n':
-	plast++;  ln++;
-	*plast++ = '\r';  ln++;
+	plast++;
+	ln++;
+	*plast++ = '\r';
+	ln++;
 	break;
 
       case '\r':
@@ -284,76 +300,7 @@ char *fread_string( FILE *fp )
 
       case '~':
 	*plast = '\0';
-	return STRALLOC( buf );
-    }
-  }
-}
-
-/*
- * Read a string from file fp using str_dup (ie: no string hashing)
- */
-char *fread_string_nohash( FILE *fp )
-{
-  char buf[MAX_STRING_LENGTH];
-  char *plast = buf;
-  char c = 0;
-  int ln = 0;
-
-  buf[0] = '\0';
-
-  /*
-   * Skip blanks.
-   * Read first char.
-   */
-  do
-  {
-    if ( feof(fp) )
-    {
-      bug("fread_string_no_hash: EOF encountered on read.\r\n");
-      if ( fBootDb )
-	exit( EXIT_FAILURE );
-      return str_dup("");
-    }
-    c = fgetc( fp );
-  }
-  while ( isspace((int)c) );
-
-  if ( ( *plast++ = c ) == '~' )
-    return str_dup( "" );
-
-  for ( ;; )
-  {
-    if ( ln >= (MAX_STRING_LENGTH - 1) )
-    {
-      bug( "fread_string_no_hash: string too long" );
-      *plast = '\0';
-      return str_dup( buf );
-    }
-    switch ( (int)( *plast = fgetc( fp ) ) )
-    {
-      default:
-	plast++; ln++;
-	break;
-
-      case EOF:
-	bug( "Fread_string_no_hash: EOF" );
-	if ( fBootDb )
-	  exit( EXIT_FAILURE );
-	*plast = '\0';
-	return str_dup(buf);
-	break;
-
-      case '\n':
-	plast++;  ln++;
-	*plast++ = '\r';  ln++;
-	break;
-
-      case '\r':
-	break;
-
-      case '~':
-	*plast = '\0';
-	return str_dup( buf );
+	return buffer;
     }
   }
 }
@@ -549,4 +496,22 @@ void append_to_file( const char *file, const char *str )
     fprintf( fp, "%s\n", str );
     fclose( fp );
   }
+}
+
+char *fread_string_nohash( FILE *fp )
+{
+  char buffer[MAX_STRING_LENGTH];
+
+  fread_string( fp, buffer, MAX_STRING_LENGTH );
+
+  return str_dup( buffer );
+}
+
+char *fread_string_hash( FILE *fp )
+{
+  char buffer[MAX_STRING_LENGTH];
+
+  fread_string( fp, buffer, MAX_STRING_LENGTH );
+
+  return STRALLOC( buffer );
 }

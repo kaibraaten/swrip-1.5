@@ -207,20 +207,24 @@ char *strupper( const char *str );
 const char *aoran( const char *str );
 char *strip_cr( const char *str  );
 char *str_dup( const char *str );
-char fread_letter( FILE *fp );
-float fread_float( FILE *fp );
-int fread_number( FILE *fp );
-char *fread_string( FILE *fp );
-char *fread_string_nohash( FILE *fp );
-void fread_to_eol( FILE *fp );
-char *fread_word( FILE *fp );
-char *fread_line( FILE *fp );
 void smash_tilde( char *str );
 void hide_tilde( char *str );
 char *show_tilde( const char *str );
 void replace_char( char*, char, char );
 void smush_tilde( char* );
 char *encode_string( const char* );
+
+/* file_io.c */
+char fread_letter( FILE *fp );
+float fread_float( FILE *fp );
+int fread_number( FILE *fp );
+char *fread_string( FILE *fp, char *buffer, size_t bufferSize );
+char *fread_string_hash( FILE *fp );
+char *fread_string_nohash( FILE *fp );
+void fread_to_eol( FILE *fp );
+char *fread_word( FILE *fp );
+char *fread_line( FILE *fp );
+void append_to_file( const char *file, const char *str );
 
 /* hashstr.c */
 char *str_alloc( const char *str );
@@ -254,7 +258,6 @@ void start_timer(struct timeval *start_time);
 time_t end_timer(struct timeval *start_time);
 
 char *flag_string( int bitvector, const char * const flagarray[] );
-void append_to_file( const char *file, const char *str );
 
 #ifdef __cplusplus
 }
