@@ -5,13 +5,10 @@
 #include "mud.h"
 
 CerisList *HelpFiles = NULL;
-int top_help = 0;
 char *help_greeting = NULL;
 
 struct help_data
 {
-  HELP_DATA *next;
-  HELP_DATA *prev;
   short      level;
   char      *keyword;
   char      *text;
@@ -125,14 +122,12 @@ void add_help( HELP_DATA *pHelp )
     {
       List_AddTail( HelpFiles, pHelp );
       List_Sort( HelpFiles, CompareHelpFiles );
-      top_help++;
     }
 }
 
 void unlink_help( HELP_DATA *help )
 {
   List_Remove( HelpFiles, help );
-  top_help--;
 }
 
 /*
