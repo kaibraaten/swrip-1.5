@@ -258,14 +258,14 @@ static int CompareHelpFiles( const void *oneVoid, const void *anotherVoid )
   const HELP_DATA *one = (const HELP_DATA*) oneVoid;
   const HELP_DATA *another = (const HELP_DATA*) anotherVoid;
   const char *oneKeyword = one->keyword;
-  const char *anotherKeyword = anotherKeyword;
+  const char *anotherKeyword = another->keyword;
 
-  if( oneKeyword[0] == '\'' )
+  if( oneKeyword[0] == '\'' || oneKeyword[0] == '\"' )
     {
       ++oneKeyword;
     }
 
-  if( anotherKeyword[0] == '\'' )
+  if( anotherKeyword[0] == '\'' || anotherKeyword[0] == '\"' )
     {
       ++anotherKeyword;
     }
