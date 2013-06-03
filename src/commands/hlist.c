@@ -14,7 +14,7 @@ void do_hlist( CHAR_DATA *ch, char *argument )
   int minlimit = maxlimit >= LEVEL_GREATER ? -1 : 0;
   int cnt = 0;
   char arg[MAX_INPUT_LENGTH];
-  CerisListIterator *iter = NULL;
+  CerisMapIterator *iter = NULL;
 
   argument = one_argument( argument, arg );
 
@@ -40,11 +40,11 @@ void do_hlist( CHAR_DATA *ch, char *argument )
   set_pager_color( AT_GREEN, ch );
   pager_printf( ch, "Help Topics in level range %d to %d:\r\n\r\n", min, max );
 
-  iter = CreateListIterator( HelpFiles, ForwardsIterator );
+  iter = CreateMapIterator( HelpFiles );
 
-  for ( cnt = 0 ; !ListIterator_IsDone( iter ); ListIterator_Next( iter ) )
+  for ( cnt = 0 ; !MapIterator_IsDone( iter ); MapIterator_Next( iter ) )
     {
-      HELP_DATA *help = (HELP_DATA*) ListIterator_GetData( iter );
+      HELP_DATA *help = (HELP_DATA*) MapIterator_GetKey( iter );
       int level = get_help_level( help );
 
       if ( level >= min && level <= max )
@@ -54,7 +54,7 @@ void do_hlist( CHAR_DATA *ch, char *argument )
 	}
     }
 
-  DestroyListIterator( iter );
+  DestroyMapIterator( iter );
 
   if ( cnt )
     {

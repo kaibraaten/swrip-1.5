@@ -26,7 +26,7 @@
 
 static int get_in_array( const char *name, const char * const * array,
                          size_t sz,
-                         bool (*compare_string)( const char*, const char* ) )
+                         int (*compare_string)( const char*, const char* ) )
 {
   size_t x = 0;
 

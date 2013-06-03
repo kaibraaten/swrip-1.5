@@ -74,15 +74,15 @@ static void similar_help_files(CHAR_DATA *ch, char *argument)
 {
   short level = 0;
   bool single = FALSE;
-  CerisListIterator *iter = NULL;
+  CerisMapIterator *iter = NULL;
 
   pager_printf( ch, "&C&BSimilar Help Files:\r\n" );
 
-  iter = CreateListIterator( HelpFiles, ForwardsIterator );
+  iter = CreateMapIterator( HelpFiles );
 
-  for ( ; !ListIterator_IsDone( iter ); ListIterator_Next( iter ) )
+  for ( ; !MapIterator_IsDone( iter ); MapIterator_Next( iter ) )
     {
-      HELP_DATA *pHelp = (HELP_DATA*) ListIterator_GetData( iter );
+      HELP_DATA *pHelp = (HELP_DATA*) MapIterator_GetKey( iter );
       char buf[MAX_STRING_LENGTH];
       char *extension = get_help_keyword( pHelp );
 
@@ -107,7 +107,7 @@ static void similar_help_files(CHAR_DATA *ch, char *argument)
         }
     }
 
-  DestroyListIterator( iter );
+  DestroyMapIterator( iter );
 
   if (level == 0)
     {
@@ -115,11 +115,11 @@ static void similar_help_files(CHAR_DATA *ch, char *argument)
       return;
     }
 
-  iter = CreateListIterator( HelpFiles, ForwardsIterator );
+  iter = CreateMapIterator( HelpFiles );
 
-  for ( ; !ListIterator_IsDone( iter ); ListIterator_Next( iter ) )
+  for ( ; !MapIterator_IsDone( iter ); MapIterator_Next( iter ) )
     {
-      HELP_DATA *pHelp = (HELP_DATA*) ListIterator_GetData( iter );
+      HELP_DATA *pHelp = (HELP_DATA*) MapIterator_GetKey( iter );
       char buf[MAX_STRING_LENGTH];
       char *extension = get_help_keyword( pHelp );
 
@@ -134,7 +134,7 @@ static void similar_help_files(CHAR_DATA *ch, char *argument)
                 {
                   pager_printf( ch, "&C&GOpening only similar helpfile.&C\r\n" );
                   do_help( ch, buf);
-		  DestroyListIterator( iter );
+		  DestroyMapIterator( iter );
                   return;
                 }
 
@@ -144,5 +144,5 @@ static void similar_help_files(CHAR_DATA *ch, char *argument)
         }
     }
 
-  DestroyListIterator( iter );
+  DestroyMapIterator( iter );
 }

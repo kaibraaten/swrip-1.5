@@ -7,7 +7,7 @@
 
 #define HELP_FILE SYSTEM_DIR "help.dat"
 
-extern CerisList *HelpFiles;
+extern CerisMap *HelpFiles;
 extern char *help_greeting;
 
 HELP_DATA *get_help( const CHAR_DATA *ch, char *argument );

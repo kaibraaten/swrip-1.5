@@ -1,10 +1,11 @@
+#include <strings.h>
 #include <string.h>
 #include <ctype.h>
 #include "help.h"
 #include "character.h"
 #include "mud.h"
 
-CerisList *HelpFiles = NULL;
+CerisMap *HelpFiles = NULL;
 char *help_greeting = NULL;
 
 struct help_data
@@ -23,7 +24,7 @@ HELP_DATA *get_help( const CHAR_DATA *ch, char *argument )
   char argone[MAX_INPUT_LENGTH];
   char argnew[MAX_INPUT_LENGTH];
   int lev = 0;
-  CerisListIterator *helpIterator = NULL;
+  CerisMapIterator *helpIterator = NULL;
   HELP_DATA *result = NULL;
 
   if ( argument[0] == '\0' )
@@ -58,11 +59,11 @@ HELP_DATA *get_help( const CHAR_DATA *ch, char *argument )
       strcat( argall, argone );
     }
 
-  helpIterator = CreateListIterator( HelpFiles, ForwardsIterator );
+  helpIterator = CreateMapIterator( HelpFiles );
 
-  for ( ; !ListIterator_IsDone( helpIterator ); ListIterator_Next( helpIterator ) )
+  for ( ; !MapIterator_IsDone( helpIterator ); MapIterator_Next( helpIterator ) )
     {
-      HELP_DATA *pHelp = (HELP_DATA*) ListIterator_GetData( helpIterator );
+      HELP_DATA *pHelp = (HELP_DATA*) MapIterator_GetKey( helpIterator );
 
       if ( get_help_level( pHelp ) > get_trust( ch ) )
 	{
@@ -81,29 +82,9 @@ HELP_DATA *get_help( const CHAR_DATA *ch, char *argument )
 	}
     }
 
-  DestroyListIterator( helpIterator );
+  DestroyMapIterator( helpIterator );
 
   return result;
-}
-
-static bool ExistsInList( CerisList *list, const void *data, int (*compare)(const void*, const void* ) )
-{
-  bool exists = FALSE;
-
-  CerisListIterator *iter = CreateListIterator( list, ForwardsIterator );
-
-  for( ; !ListIterator_IsDone( iter ); ListIterator_Next( iter ) )
-    {
-      if( compare( ListIterator_GetData( iter ), data ) == 0 )
-	{
-	  exists = TRUE;
-	  break;
-	}
-    }
-
-  DestroyListIterator( iter );
-
-  return exists;
 }
 
 /*
@@ -113,21 +94,20 @@ static bool ExistsInList( CerisList *list, const void *data, int (*compare)(cons
  */
 void add_help( HELP_DATA *pHelp )
 {
-  if( ExistsInList( HelpFiles, pHelp, CompareHelpFiles ) )
+  if( Map_Get( HelpFiles, pHelp ) )
     {
       bug( "add_help: duplicate: %s. Deleting.", get_help_keyword( pHelp ) );
       destroy_help( pHelp );
     }
   else
     {
-      List_AddTail( HelpFiles, pHelp );
-      List_Sort( HelpFiles, CompareHelpFiles );
+      Map_Set( HelpFiles, pHelp, pHelp );
     }
 }
 
 void unlink_help( HELP_DATA *help )
 {
-  List_Remove( HelpFiles, help );
+  Map_Remove( HelpFiles, help );
 }
 
 /*
@@ -137,7 +117,7 @@ void load_helps( void )
 {
   FILE *fp = NULL;
 
-  HelpFiles = CreateList();
+  HelpFiles = CreateMap( CompareHelpFiles );
 
   if( !( fp = fopen( HELP_FILE, "r" ) ) )
     {
@@ -181,7 +161,7 @@ void load_helps( void )
 void save_helps( void )
 {
   FILE *filehandle = NULL;
-  CerisListIterator *iter = NULL;
+  CerisMapIterator *iter = NULL;
 
   rename( HELP_FILE, HELP_FILE ".bak" );
 
@@ -194,11 +174,11 @@ void save_helps( void )
 
   fprintf( filehandle, "#HELPS\n\n" );
 
-  iter = CreateListIterator( HelpFiles, ForwardsIterator );
+  iter = CreateMapIterator( HelpFiles );
 
-  for( ; !ListIterator_IsDone( iter ); ListIterator_Next( iter ) )
+  for( ; !MapIterator_IsDone( iter ); MapIterator_Next( iter ) )
     {
-      HELP_DATA *pHelp = (HELP_DATA*) ListIterator_GetData( iter );
+      HELP_DATA *pHelp = (HELP_DATA*) MapIterator_GetKey( iter );
 
       fprintf( filehandle, "%d %s~\n%s~\n\n",
 	       get_help_level( pHelp ),
@@ -206,7 +186,7 @@ void save_helps( void )
 	       help_fix( get_help_text( pHelp ) ) );
     }
 
-  DestroyListIterator( iter );
+  DestroyMapIterator( iter );
   fprintf( filehandle, "0 $~\n\n\n#$\n" );
   fclose( filehandle );
 }
