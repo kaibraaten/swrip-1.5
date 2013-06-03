@@ -9,6 +9,7 @@
 void do_hedit( CHAR_DATA *ch, char *argument )
 {
   HELP_DATA *pHelp = NULL;
+  char *kludge = NULL;
 
   if ( !ch->desc )
     {
@@ -31,8 +32,9 @@ void do_hedit( CHAR_DATA *ch, char *argument )
           return;
         }
 
-      STRFREE( pHelp->text );
-      pHelp->text = copy_buffer( ch );
+      kludge = copy_buffer( ch );
+      set_help_text( pHelp, kludge );
+      STRFREE( kludge );
       stop_editing( ch );
       return;
     }
@@ -48,5 +50,5 @@ void do_hedit( CHAR_DATA *ch, char *argument )
 
   ch->substate = SUB_HELP_EDIT;
   ch->dest_buf = pHelp;
-  start_editing( ch, pHelp->text );
+  start_editing( ch, get_help_text( pHelp ) );
 }

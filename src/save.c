@@ -1162,21 +1162,21 @@ void fread_char( CHAR_DATA *ch, FILE *fp, bool preload )
               fMatch = TRUE;
               break;
             }
-          KEY( "AuthedBy",      ch->pcdata->authed_by,  fread_string( fp ) );
+          KEY( "AuthedBy",      ch->pcdata->authed_by,  fread_string_hash( fp ) );
           break;
 
         case 'B':
           KEY( "Bamfin",        ch->pcdata->bamfin,     fread_string_nohash( fp ) );
           KEY( "Bamfout",       ch->pcdata->bamfout,    fread_string_nohash( fp ) );
           KEY( "Bestowments", ch->pcdata->bestowments, fread_string_nohash( fp ) );
-          KEY( "Bio",           ch->pcdata->bio,        fread_string( fp ) );
+          KEY( "Bio",           ch->pcdata->bio,        fread_string_hash( fp ) );
           KEY( "Bank",  ch->pcdata->bank,       fread_number( fp ) );
           break;
 
         case 'C':
           if ( !str_cmp( word, "Clan" ) )
             {
-              ch->pcdata->clan_name = fread_string( fp );
+              ch->pcdata->clan_name = fread_string_hash( fp );
 
               if ( !preload
                    &&   ch->pcdata->clan_name[0] != '\0'
@@ -1214,7 +1214,7 @@ void fread_char( CHAR_DATA *ch, FILE *fp, bool preload )
         case 'D':
           KEY( "Damroll",       ch->damroll,            fread_number( fp ) );
           KEY( "Deaf",  ch->deaf,               fread_number( fp ) );
-          KEY( "Description",   ch->description,        fread_string( fp ) );
+          KEY( "Description",   ch->description,        fread_string_hash( fp ) );
           if ( !str_cmp( word, "Druglevel"  ) )
             {
               line = fread_line( fp );
@@ -1260,7 +1260,7 @@ void fread_char( CHAR_DATA *ch, FILE *fp, bool preload )
           /* temporary measure */
           if ( !str_cmp( word, "Guild" ) )
             {
-              ch->pcdata->clan_name = fread_string( fp );
+              ch->pcdata->clan_name = fread_string_hash( fp );
 
               if ( !preload
                    &&   ch->pcdata->clan_name[0] != '\0'
@@ -1281,7 +1281,7 @@ void fread_char( CHAR_DATA *ch, FILE *fp, bool preload )
           if ( !str_cmp(word, "Helled") )
             {
               ch->pcdata->release_date = fread_number(fp);
-              ch->pcdata->helled_by = fread_string(fp);
+              ch->pcdata->helled_by = fread_string_hash(fp);
               if ( ch->pcdata->release_date < current_time )
                 {
                   STRFREE(ch->pcdata->helled_by);
@@ -1357,7 +1357,7 @@ void fread_char( CHAR_DATA *ch, FILE *fp, bool preload )
               fMatch = TRUE;
               break;
             }
-          KEY( "LongDescr",     ch->long_descr,         fread_string( fp ) );
+          KEY( "LongDescr",     ch->long_descr,         fread_string_hash( fp ) );
           if ( !str_cmp( word, "Languages" ) )
             {
               ch->speaks = fread_number( fp );
@@ -1413,7 +1413,7 @@ void fread_char( CHAR_DATA *ch, FILE *fp, bool preload )
           KEY( "PKills",        ch->pcdata->pkills,     fread_number( fp ) );
           KEY( "Played",        ch->pcdata->played,     fread_number( fp ) );
           KEY( "Position",      ch->position,           fread_number( fp ) );
-          KEY( "Prompt",        ch->pcdata->prompt,     fread_string( fp ) );
+          KEY( "Prompt",        ch->pcdata->prompt,     fread_string_hash( fp ) );
           if (!str_cmp ( word, "PTimer" ) )
             {
               add_timer( ch , TIMER_PKILLED, fread_number(fp), NULL, 0 );
@@ -1459,7 +1459,7 @@ void fread_char( CHAR_DATA *ch, FILE *fp, bool preload )
           KEY( "Salary",      ch->pcdata->salary,               fread_number( fp ) );
           KEY( "Salary_time",ch->pcdata->salary_date, fread_number( fp ) );
           KEY( "Sex",           ch->sex,                fread_number( fp ) );
-          KEY( "ShortDescr",    ch->short_descr,        fread_string( fp ) );
+          KEY( "ShortDescr",    ch->short_descr,        fread_string_hash( fp ) );
           KEY( "Susceptible",   ch->susceptible,        fread_number( fp ) );
           if ( !str_cmp( word, "SavingThrow" ) )
             {
@@ -1637,7 +1637,7 @@ void fread_char( CHAR_DATA *ch, FILE *fp, bool preload )
 
         case 'T':
 
-          KEY( "Targ",  ch->pcdata->target,     fread_string( fp ) );
+          KEY( "Targ",  ch->pcdata->target,     fread_string_hash( fp ) );
           KEY( "Toplevel",      ch->top_level,          fread_number( fp ) );
           if ( !str_cmp( word, "Tongue" ) )
             {
@@ -1667,7 +1667,7 @@ void fread_char( CHAR_DATA *ch, FILE *fp, bool preload )
 
           if ( !str_cmp( word, "Title" ) )
             {
-              ch->pcdata->title = fread_string( fp );
+              ch->pcdata->title = fread_string_hash( fp );
               if ( isalpha(ch->pcdata->title[0])
                    ||   isdigit(ch->pcdata->title[0]) )
                 {
@@ -1796,7 +1796,7 @@ void fread_obj( CHAR_DATA *ch, FILE *fp, short os_type )
               fMatch                            = TRUE;
               break;
             }
-          KEY( "Actiondesc",    obj->action_desc,       fread_string( fp ) );
+          KEY( "Actiondesc",    obj->action_desc,       fread_string_hash( fp ) );
           break;
 
         case 'C':
@@ -1805,7 +1805,7 @@ void fread_obj( CHAR_DATA *ch, FILE *fp, short os_type )
           break;
 
         case 'D':
-          KEY( "Description",   obj->description,       fread_string( fp ) );
+          KEY( "Description",   obj->description,       fread_string_hash( fp ) );
           break;
 
         case 'E':
@@ -1816,8 +1816,8 @@ void fread_obj( CHAR_DATA *ch, FILE *fp, short os_type )
               EXTRA_DESCR_DATA *ed;
 
               CREATE( ed, EXTRA_DESCR_DATA, 1 );
-              ed->keyword               = fread_string( fp );
-              ed->description           = fread_string( fp );
+              ed->keyword               = fread_string_hash( fp );
+              ed->description           = fread_string_hash( fp );
               LINK(ed, obj->first_extradesc, obj->last_extradesc, next, prev );
               fMatch                            = TRUE;
             }
@@ -1924,7 +1924,7 @@ void fread_obj( CHAR_DATA *ch, FILE *fp, short os_type )
           break;
 
         case 'N':
-          KEY( "Name",  obj->name,              fread_string( fp ) );
+          KEY( "Name",  obj->name,              fread_string_hash( fp ) );
 
           if ( !str_cmp( word, "Nest" ) )
             {
@@ -1943,7 +1943,7 @@ void fread_obj( CHAR_DATA *ch, FILE *fp, short os_type )
           KEY( "Room", room, get_room_index(fread_number(fp)) );
 
         case 'S':
-          KEY( "ShortDescr",    obj->short_descr,       fread_string( fp ) );
+          KEY( "ShortDescr",    obj->short_descr,       fread_string_hash( fp ) );
 
           if ( !str_cmp( word, "Spell" ) )
             {
@@ -2465,7 +2465,7 @@ CHAR_DATA *  fread_mobile( FILE *fp )
       if ( !str_cmp( word, "#OBJECT" ) )
         fread_obj ( mob, fp, OS_CARRY );
     case 'D':
-      KEY( "Description", mob->description, fread_string(fp));
+      KEY( "Description", mob->description, fread_string_hash(fp));
       break;
     case 'E':
       if ( !str_cmp( word, "EndMobile" ) )
@@ -2482,10 +2482,10 @@ CHAR_DATA *  fread_mobile( FILE *fp )
     case 'F':
       KEY( "Flags", mob->act, fread_number( fp ));
     case 'L':
-      KEY( "Long", mob->long_descr, fread_string(fp ) );
+      KEY( "Long", mob->long_descr, fread_string_hash(fp ) );
       break;
     case 'N':
-      KEY( "Name", mob->name, fread_string( fp ) );
+      KEY( "Name", mob->name, fread_string_hash( fp ) );
       break;
     case 'P':
       KEY( "Position", mob->position, fread_number( fp ) );
@@ -2494,7 +2494,7 @@ CHAR_DATA *  fread_mobile( FILE *fp )
       KEY( "Room",  inroom, fread_number(fp));
       break;
     case 'S':
-      KEY( "Short", mob->short_descr, fread_string(fp));
+      KEY( "Short", mob->short_descr, fread_string_hash(fp));
       break;
     }
     if ( !fMatch )

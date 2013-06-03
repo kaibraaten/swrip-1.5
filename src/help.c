@@ -4,20 +4,30 @@
 #include "character.h"
 #include "mud.h"
 
-HELP_DATA *first_help = NULL;
-HELP_DATA *last_help = NULL;
+CerisList *HelpFiles = NULL;
 int top_help = 0;
 char *help_greeting = NULL;
 
+struct help_data
+{
+  HELP_DATA *next;
+  HELP_DATA *prev;
+  short      level;
+  char      *keyword;
+  char      *text;
+};
+
 static char *help_fix( char *text );
+static int CompareHelpFiles( const void *one, const void *another );
 
 HELP_DATA *get_help( const CHAR_DATA *ch, char *argument )
 {
   char argall[MAX_INPUT_LENGTH];
   char argone[MAX_INPUT_LENGTH];
   char argnew[MAX_INPUT_LENGTH];
-  HELP_DATA *pHelp = NULL;
   int lev = 0;
+  CerisListIterator *helpIterator = NULL;
+  HELP_DATA *result = NULL;
 
   if ( argument[0] == '\0' )
     {
@@ -51,8 +61,12 @@ HELP_DATA *get_help( const CHAR_DATA *ch, char *argument )
       strcat( argall, argone );
     }
 
-  for ( pHelp = first_help; pHelp; pHelp = pHelp->next )
+  helpIterator = CreateListIterator( HelpFiles, ForwardsIterator );
+
+  for ( ; !ListIterator_IsDone( helpIterator ); ListIterator_Next( helpIterator ) )
     {
+      HELP_DATA *pHelp = (HELP_DATA*) ListIterator_GetData( helpIterator );
+
       if ( get_help_level( pHelp ) > get_trust( ch ) )
 	{
 	  continue;
@@ -65,11 +79,34 @@ HELP_DATA *get_help( const CHAR_DATA *ch, char *argument )
 
       if ( is_name( argall, get_help_keyword( pHelp ) ) )
 	{
-	  return pHelp;
+	  result = pHelp;
+	  break;
 	}
     }
 
-  return NULL;
+  DestroyListIterator( helpIterator );
+
+  return result;
+}
+
+static bool ExistsInList( CerisList *list, const void *data, int (*compare)(const void*, const void* ) )
+{
+  bool exists = FALSE;
+
+  CerisListIterator *iter = CreateListIterator( list, ForwardsIterator );
+
+  for( ; !ListIterator_IsDone( iter ); ListIterator_Next( iter ) )
+    {
+      if( compare( ListIterator_GetData( iter ), data ) == 0 )
+	{
+	  exists = TRUE;
+	  break;
+	}
+    }
+
+  DestroyListIterator( iter );
+
+  return exists;
 }
 
 /*
@@ -79,45 +116,22 @@ HELP_DATA *get_help( const CHAR_DATA *ch, char *argument )
  */
 void add_help( HELP_DATA *pHelp )
 {
-  HELP_DATA *tHelp = NULL;
-  int match = 0;
-
-  for ( tHelp = first_help; tHelp; tHelp = tHelp->next )
+  if( ExistsInList( HelpFiles, pHelp, CompareHelpFiles ) )
     {
-      if ( pHelp->level == tHelp->level
-	   &&   str_cmp(pHelp->keyword, tHelp->keyword) == 0 )
-	{
-	  bug( "add_help: duplicate: %s. Deleting.", pHelp->keyword );
-	  destroy_help( pHelp );
-	  return;
-	}
-      else if ( (match=str_cmp(pHelp->keyword[0]=='\'' ? pHelp->keyword+1 : pHelp->keyword,
-			       tHelp->keyword[0]=='\'' ? tHelp->keyword+1 : tHelp->keyword)) < 0
-		|| (match == 0 && pHelp->level > tHelp->level) )
-	{
-	  if ( !tHelp->prev )
-	    first_help    = pHelp;
-	  else
-	    tHelp->prev->next = pHelp;
-
-	  pHelp->prev             = tHelp->prev;
-	  pHelp->next             = tHelp;
-	  tHelp->prev             = pHelp;
-	  break;
-	}
+      bug( "add_help: duplicate: %s. Deleting.", get_help_keyword( pHelp ) );
+      destroy_help( pHelp );
     }
-
-  if ( !tHelp )
+  else
     {
-      LINK( pHelp, first_help, last_help, next, prev );
+      List_AddTail( HelpFiles, pHelp );
+      List_Sort( HelpFiles, CompareHelpFiles );
+      top_help++;
     }
-
-  top_help++;
 }
 
 void unlink_help( HELP_DATA *help )
 {
-  UNLINK( help, first_help, last_help, next, prev );
+  List_Remove( HelpFiles, help );
   top_help--;
 }
 
@@ -128,6 +142,8 @@ void load_helps( void )
 {
   FILE *fp = NULL;
 
+  HelpFiles = CreateList();
+
   if( !( fp = fopen( HELP_FILE, "r" ) ) )
     {
       log_printf( "Unable to open %s", HELP_FILE );
@@ -136,23 +152,27 @@ void load_helps( void )
 
   for ( ; ; )
     {
+      char keyword[MAX_STRING_LENGTH];
+      char helptext[MAX_STRING_LENGTH];
       short level = fread_number( fp );
-      char *keyword = fread_string( fp );
-      HELP_DATA *pHelp = create_help( keyword, level );
+      HELP_DATA *pHelp = NULL;
+
+      fread_string( fp, keyword, MAX_STRING_LENGTH );
 
       if ( keyword[0] == '$' )
 	{
-	  destroy_help( pHelp );
 	  break;
 	}
-
-      pHelp->text = fread_string( fp );
-
-      if ( pHelp->keyword[0] == '\0' )
-	{
-	  destroy_help( pHelp );
+      else if ( keyword[0] == '\0' )
+        {
           continue;
         }
+
+      pHelp = create_help( keyword, level );
+
+      fread_string( fp, helptext, MAX_STRING_LENGTH );
+
+      set_help_text( pHelp, helptext );
 
       if ( !str_cmp( get_help_keyword( pHelp ), "greeting" ) )
 	{
@@ -166,7 +186,7 @@ void load_helps( void )
 void save_helps( void )
 {
   FILE *filehandle = NULL;
-  HELP_DATA *pHelp = NULL;
+  CerisListIterator *iter = NULL;
 
   rename( HELP_FILE, HELP_FILE ".bak" );
 
@@ -179,14 +199,19 @@ void save_helps( void )
 
   fprintf( filehandle, "#HELPS\n\n" );
 
-  for ( pHelp = first_help; pHelp; pHelp = pHelp->next )
+  iter = CreateListIterator( HelpFiles, ForwardsIterator );
+
+  for( ; !ListIterator_IsDone( iter ); ListIterator_Next( iter ) )
     {
+      HELP_DATA *pHelp = (HELP_DATA*) ListIterator_GetData( iter );
+
       fprintf( filehandle, "%d %s~\n%s~\n\n",
 	       get_help_level( pHelp ),
 	       get_help_keyword( pHelp ),
 	       help_fix( get_help_text( pHelp ) ) );
     }
 
+  DestroyListIterator( iter );
   fprintf( filehandle, "0 $~\n\n\n#$\n" );
   fclose( filehandle );
 }
@@ -226,6 +251,44 @@ static char *help_fix( char *text )
     fixed[0] = '.';
 
   return fixed;
+}
+
+static int CompareHelpFiles( const void *oneVoid, const void *anotherVoid )
+{
+  const HELP_DATA *one = (const HELP_DATA*) oneVoid;
+  const HELP_DATA *another = (const HELP_DATA*) anotherVoid;
+  const char *oneKeyword = one->keyword;
+  const char *anotherKeyword = anotherKeyword;
+
+  if( oneKeyword[0] == '\'' )
+    {
+      ++oneKeyword;
+    }
+
+  if( anotherKeyword[0] == '\'' )
+    {
+      ++anotherKeyword;
+    }
+
+  if( str_cmp( oneKeyword, anotherKeyword ) == 0 )
+    {
+      if( one->level == another->level )
+	{
+	  return 0;
+	}
+      else if( one->level < another->level )
+	{
+	  return -1;
+	}
+      else
+	{
+	  return 1;
+	}
+    }  
+  else
+    {
+      return str_cmp( oneKeyword, anotherKeyword );
+    }
 }
 
 short get_help_level( const HELP_DATA *help )
@@ -275,4 +338,3 @@ void set_help_text( HELP_DATA *help, char *text )
 
   help->text = STRALLOC( text );
 }
-

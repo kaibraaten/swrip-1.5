@@ -223,13 +223,13 @@ void fread_spaceobject( SPACE_DATA *spaceobject, FILE *fp )
           break;
 
         case 'L':
-          KEY( "Locationa",     spaceobject->landing_site.locationa,         fread_string( fp ) );
-          KEY( "Locationb",     spaceobject->landing_site.locationb,         fread_string( fp ) );
-          KEY( "Locationc",     spaceobject->landing_site.locationc,         fread_string( fp ) );
+          KEY( "Locationa",     spaceobject->landing_site.locationa,         fread_string_hash( fp ) );
+          KEY( "Locationb",     spaceobject->landing_site.locationb,         fread_string_hash( fp ) );
+          KEY( "Locationc",     spaceobject->landing_site.locationc,         fread_string_hash( fp ) );
           break;
 
         case 'N':
-          KEY( "Name",  spaceobject->name,              fread_string( fp ) );
+          KEY( "Name",  spaceobject->name,              fread_string_hash( fp ) );
           break;
 
         case 'S':

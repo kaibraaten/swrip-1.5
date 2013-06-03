@@ -528,23 +528,23 @@ void fread_comment( CHAR_DATA *ch, FILE *fp )
 
       if ( str_cmp( fread_word( fp ), "sender" ) )
         break;
-      pnote->sender     = fread_string( fp );
+      pnote->sender     = fread_string_hash( fp );
 
       if ( str_cmp( fread_word( fp ), "date" ) )
         break;
-      pnote->date       = fread_string( fp );
+      pnote->date       = fread_string_hash( fp );
 
       if ( str_cmp( fread_word( fp ), "to" ) )
         break;
-      pnote->to_list    = fread_string( fp );
+      pnote->to_list    = fread_string_hash( fp );
 
       if ( str_cmp( fread_word( fp ), "subject" ) )
         break;
-      pnote->subject    = fread_string( fp );
+      pnote->subject    = fread_string_hash( fp );
 
       if ( str_cmp( fread_word( fp ), "text" ) )
         break;
-      pnote->text       = fread_string( fp );
+      pnote->text       = fread_string_hash( fp );
 
       pnote->next               = ch->pcdata->comments;
       pnote->prev               = NULL;

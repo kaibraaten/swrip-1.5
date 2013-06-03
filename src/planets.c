@@ -154,7 +154,7 @@ static void fread_planet( PLANET_DATA *planet, FILE *fp )
             {
               char aName[MAX_STRING_LENGTH];
               AREA_DATA *pArea;
-              char *tmp = fread_string(fp);
+              char *tmp = fread_string_hash(fp);
 
               sprintf (aName, "%s", tmp);
               STRFREE(tmp);
@@ -197,13 +197,13 @@ static void fread_planet( PLANET_DATA *planet, FILE *fp )
         case 'G':
           if ( !str_cmp( word, "GovernedBy" ) )
             {
-              planet->governed_by = get_clan ( fread_string(fp) );
+              planet->governed_by = get_clan ( fread_string_hash(fp) );
               fMatch = TRUE;
             }
           break;
 
         case 'N':
-          KEY( "Name",  planet->name, fread_string( fp ) );
+          KEY( "Name",  planet->name, fread_string_hash( fp ) );
           break;
 
         case 'P':
@@ -213,7 +213,7 @@ static void fread_planet( PLANET_DATA *planet, FILE *fp )
         case 'S':
           if ( !str_cmp( word, "spaceobject" ) )
             {
-              char *tmp = fread_string(fp);
+              char *tmp = fread_string_hash(fp);
 
               planet->spaceobject = spaceobject_from_name( tmp );
               STRFREE(tmp);

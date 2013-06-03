@@ -212,9 +212,9 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/gtell.o \
 	$(CMDDIR)/guard.o \
 	$(CMDDIR)/hail.o \
-	$(CMDDIR)/help.o \
 	$(CMDDIR)/hedit.o \
 	$(CMDDIR)/hell.o \
+	$(CMDDIR)/help.o \
 	$(CMDDIR)/hide.o \
 	$(CMDDIR)/hijack.o \
 	$(CMDDIR)/hitall.o \

@@ -2133,13 +2133,13 @@ static void fread_ship( SHIP_DATA *ship, FILE *fp )
           KEY( "Cockpit",     ship->room.cockpit,          fread_number( fp ) );
           KEY( "Coseat",     ship->room.coseat,          fread_number( fp ) );
           KEY( "Class",       ship->sclass,            fread_number( fp ) );
-          KEY( "Copilot",     ship->copilot,          fread_string( fp ) );
+          KEY( "Copilot",     ship->copilot,          fread_string_hash( fp ) );
           KEY( "Comm",        ship->comm,      fread_number( fp ) );
           KEY( "Chaff",       ship->chaff,      fread_number( fp ) );
           break;
 
         case 'D':
-          KEY( "Description",   ship->description,      fread_string( fp ) );
+          KEY( "Description",   ship->description,      fread_string_hash( fp ) );
           KEY( "DockingPorts",    ship->dockingports,      fread_number( fp ) );
           break;
 
@@ -2252,7 +2252,7 @@ static void fread_ship( SHIP_DATA *ship, FILE *fp )
           break;
 
         case 'H':
-          KEY( "Home" , ship->home, fread_string( fp ) );
+          KEY( "Home" , ship->home, fread_string_hash( fp ) );
           KEY( "Hyperspeed",   ship->hyperspeed,      fread_number( fp ) );
           KEY( "Hull",      ship->hull,        fread_number( fp ) );
           KEY( "Hanger",  ship->room.hanger,      fread_number( fp ) );
@@ -2284,17 +2284,17 @@ static void fread_ship( SHIP_DATA *ship, FILE *fp )
           break;
 
         case 'N':
-          KEY( "Name",  ship->name,             fread_string( fp ) );
+          KEY( "Name",  ship->name,             fread_string_hash( fp ) );
           KEY( "Navseat",     ship->room.navseat,          fread_number( fp ) );
           break;
 
         case 'O':
-          KEY( "Owner",            ship->owner,            fread_string( fp ) );
+          KEY( "Owner",            ship->owner,            fread_string_hash( fp ) );
           break;
 
         case 'P':
-          KEY( "PersonalName",  ship->personalname,             fread_string( fp ) );
-          KEY( "Pilot",            ship->pilot,            fread_string( fp ) );
+          KEY( "PersonalName",  ship->personalname,             fread_string_hash( fp ) );
+          KEY( "Pilot",            ship->pilot,            fread_string_hash( fp ) );
           KEY( "Pilotseat",     ship->room.pilotseat,          fread_number( fp ) );
           break;
 

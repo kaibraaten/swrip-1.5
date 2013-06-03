@@ -50,15 +50,14 @@ void do_hset( CHAR_DATA *ch, char *argument )
 
   if ( !str_cmp( arg1, "level" ) )
     {
-      pHelp->level = atoi( arg2 );
+      set_help_level( pHelp, atoi( arg2 ) );
       send_to_char( "Done.\r\n", ch );
       return;
     }
 
   if ( !str_cmp( arg1, "keyword" ) )
     {
-      STRFREE( pHelp->keyword );
-      pHelp->keyword = STRALLOC( strupper(arg2) );
+      set_help_keyword( pHelp, strupper(arg2) );
       send_to_char( "Done.\r\n", ch );
       return;
     }

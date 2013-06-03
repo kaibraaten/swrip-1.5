@@ -543,7 +543,7 @@ void fread_shuttle( SHUTTLE_DATA *shuttle, FILE *fp )
           break;
 
         case 'N':
-          KEY( "Name",  shuttle->name, fread_string(fp));
+          KEY( "Name",  shuttle->name, fread_string_hash(fp));
           break;
 
         case 'S':

@@ -390,7 +390,7 @@ CHAR_DATA *  fread_vendor( FILE *fp )
         }
       break;
     case 'D':
-      KEY( "Description", mob->description, fread_string(fp));
+      KEY( "Description", mob->description, fread_string_hash(fp));
       break;
     case 'E':
 
@@ -444,13 +444,13 @@ CHAR_DATA *  fread_vendor( FILE *fp )
     case 'N':
       break;
     case 'O':
-      KEY ("Owner", mob->owner, fread_string (fp) );
+      KEY ("Owner", mob->owner, fread_string_hash (fp) );
       break;
     case 'P':
       KEY( "Position", mob->position, fread_number( fp ) );
       break;
     case 'S':
-      KEY( "Short", mob->short_descr, fread_string(fp));
+      KEY( "Short", mob->short_descr, fread_string_hash(fp));
       break;
     }
     if ( !fMatch )

@@ -72,18 +72,21 @@ static short str_similarity( const char *astr, const char *bstr )
 
 static void similar_help_files(CHAR_DATA *ch, char *argument)
 {
-  HELP_DATA *pHelp = NULL;
   short level = 0;
   bool single = FALSE;
+  CerisListIterator *iter = NULL;
 
   pager_printf( ch, "&C&BSimilar Help Files:\r\n" );
 
-  for ( pHelp = first_help; pHelp; pHelp=pHelp->next)
-    {
-      char buf[MAX_STRING_LENGTH];
-      char *extension = pHelp->keyword;
+  iter = CreateListIterator( HelpFiles, ForwardsIterator );
 
-      if (pHelp->level > get_trust(ch))
+  for ( ; !ListIterator_IsDone( iter ); ListIterator_Next( iter ) )
+    {
+      HELP_DATA *pHelp = (HELP_DATA*) ListIterator_GetData( iter );
+      char buf[MAX_STRING_LENGTH];
+      char *extension = get_help_keyword( pHelp );
+
+      if (get_help_level( pHelp ) > get_trust(ch))
 	{
 	  continue;
 	}
@@ -104,34 +107,42 @@ static void similar_help_files(CHAR_DATA *ch, char *argument)
         }
     }
 
+  DestroyListIterator( iter );
+
   if (level == 0)
     {
       pager_printf( ch, "&C&GNo similar help files.\r\n" );
       return;
     }
 
-  for ( pHelp = first_help; pHelp; pHelp=pHelp->next)
+  iter = CreateListIterator( HelpFiles, ForwardsIterator );
+
+  for ( ; !ListIterator_IsDone( iter ); ListIterator_Next( iter ) )
     {
+      HELP_DATA *pHelp = (HELP_DATA*) ListIterator_GetData( iter );
       char buf[MAX_STRING_LENGTH];
-      char *extension = pHelp->keyword;
+      char *extension = get_help_keyword( pHelp );
 
       while ( extension[0] != '\0' )
         {
           extension=one_argument(extension, buf);
 
           if ( str_similarity(argument, buf) >= level
-               && pHelp->level <= get_trust(ch))
+               && get_help_level( pHelp ) <= get_trust(ch))
             {
               if (single)
                 {
                   pager_printf( ch, "&C&GOpening only similar helpfile.&C\r\n" );
                   do_help( ch, buf);
+		  DestroyListIterator( iter );
                   return;
                 }
 
-              pager_printf(ch, "&C&G   %s\r\n", pHelp->keyword);
+              pager_printf(ch, "&C&G   %s\r\n", get_help_keyword( pHelp ) );
               break;
             }
         }
     }
+
+  DestroyListIterator( iter );
 }

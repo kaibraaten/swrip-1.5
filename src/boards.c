@@ -1178,19 +1178,19 @@ NOTE_DATA *read_note( char *notefile, FILE *fp )
 
       if ( str_cmp( fread_word( fp ), "sender" ) )
         break;
-      pnote->sender     = fread_string( fp );
+      pnote->sender     = fread_string_hash( fp );
 
       if ( str_cmp( fread_word( fp ), "date" ) )
         break;
-      pnote->date       = fread_string( fp );
+      pnote->date       = fread_string_hash( fp );
 
       if ( str_cmp( fread_word( fp ), "to" ) )
         break;
-      pnote->to_list    = fread_string( fp );
+      pnote->to_list    = fread_string_hash( fp );
 
       if ( str_cmp( fread_word( fp ), "subject" ) )
         break;
-      pnote->subject    = fread_string( fp );
+      pnote->subject    = fread_string_hash( fp );
 
       word = fread_word( fp );
       if ( !str_cmp( word, "voting" ) )
@@ -1214,7 +1214,7 @@ NOTE_DATA *read_note( char *notefile, FILE *fp )
 
       if ( str_cmp( word, "text" ) )
         break;
-      pnote->text       = fread_string( fp );
+      pnote->text       = fread_string_hash( fp );
 
       if ( !pnote->yesvotes )    pnote->yesvotes        = str_dup( "" );
       if ( !pnote->novotes )     pnote->novotes = str_dup( "" );

@@ -173,7 +173,7 @@ static void fread_clan( CLAN_DATA *clan, FILE *fp )
           break;
 
         case 'D':
-          KEY( "Description", clan->description, fread_string( fp ) );
+          KEY( "Description", clan->description, fread_string_hash( fp ) );
           break;
 
         case 'E':
@@ -232,20 +232,20 @@ static void fread_clan( CLAN_DATA *clan, FILE *fp )
           break;
 
         case 'L':
-          KEY( "Leader", clan->leadership.leader, fread_string( fp ) );
+          KEY( "Leader", clan->leadership.leader, fread_string_hash( fp ) );
           break;
 
         case 'M':
           KEY( "MDeaths",  clan->mdeaths, fread_number( fp ) );
           KEY( "Members",  clan->members, fread_number( fp ) );
           KEY( "MKills",   clan->mkills,  fread_number( fp ) );
-          KEY( "MainClan", clan->tmpstr,  fread_string( fp ) );
+          KEY( "MainClan", clan->tmpstr,  fread_string_hash( fp ) );
           break;
 
         case 'N':
-          KEY( "Name",      clan->name,    fread_string( fp ) );
-          KEY( "NumberOne", clan->leadership.number1, fread_string( fp ) );
-          KEY( "NumberTwo", clan->leadership.number2, fread_string( fp ) );
+          KEY( "Name",      clan->name,    fread_string_hash( fp ) );
+          KEY( "NumberOne", clan->leadership.number1, fread_string_hash( fp ) );
+          KEY( "NumberTwo", clan->leadership.number2, fread_string_hash( fp ) );
           break;
 
         case 'P':
@@ -729,7 +729,7 @@ bool load_member_list( const char *filename )
 
       if( !str_cmp( word, "Name" ) )
         {
-          members_list->name = fread_string( fp );
+          members_list->name = fread_string_hash( fp );
           continue;
         }
       else

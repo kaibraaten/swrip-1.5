@@ -806,7 +806,7 @@ void load_author( AREA_DATA *tarea, FILE *fp )
 
   if ( tarea->author )
     STRFREE( tarea->author );
-  tarea->author   = fread_string( fp );
+  tarea->author   = fread_string_hash( fp );
   return;
 }
 
@@ -973,10 +973,10 @@ void load_mobiles( AREA_DATA *tarea, FILE *fp )
           if ( vnum > tarea->hi_m_vnum )
             tarea->hi_m_vnum    = vnum;
         }
-      pMobIndex->player_name            = fread_string( fp );
-      pMobIndex->short_descr            = fread_string( fp );
-      pMobIndex->long_descr             = fread_string( fp );
-      pMobIndex->description            = fread_string( fp );
+      pMobIndex->player_name            = fread_string_hash( fp );
+      pMobIndex->short_descr            = fread_string_hash( fp );
+      pMobIndex->long_descr             = fread_string_hash( fp );
+      pMobIndex->description            = fread_string_hash( fp );
 
       pMobIndex->long_descr[0]  = UPPER(pMobIndex->long_descr[0]);
       pMobIndex->description[0] = UPPER(pMobIndex->description[0]);
@@ -1190,10 +1190,10 @@ void load_objects( AREA_DATA *tarea, FILE *fp )
           if ( vnum > tarea->hi_o_vnum )
             tarea->hi_o_vnum            = vnum;
         }
-      pObjIndex->name                   = fread_string( fp );
-      pObjIndex->short_descr            = fread_string( fp );
-      pObjIndex->description            = fread_string( fp );
-      pObjIndex->action_desc            = fread_string( fp );
+      pObjIndex->name                   = fread_string_hash( fp );
+      pObjIndex->short_descr            = fread_string_hash( fp );
+      pObjIndex->description            = fread_string_hash( fp );
+      pObjIndex->action_desc            = fread_string_hash( fp );
 
       /* Commented out by Narn, Apr/96 to allow item short descs like
          Bonecrusher and Oblivion */
@@ -1254,8 +1254,8 @@ void load_objects( AREA_DATA *tarea, FILE *fp )
               EXTRA_DESCR_DATA *ed;
 
               CREATE( ed, EXTRA_DESCR_DATA, 1 );
-              ed->keyword               = fread_string( fp );
-              ed->description           = fread_string( fp );
+              ed->keyword               = fread_string_hash( fp );
+              ed->description           = fread_string_hash( fp );
               LINK( ed, pObjIndex->first_extradesc, pObjIndex->last_extradesc,
                     next, prev );
               top_ed++;
@@ -1588,8 +1588,8 @@ void load_rooms( AREA_DATA *tarea, FILE *fp )
           if ( vnum > tarea->hi_r_vnum )
             tarea->hi_r_vnum            = vnum;
         }
-      pRoomIndex->name          = fread_string( fp );
-      pRoomIndex->description           = fread_string( fp );
+      pRoomIndex->name          = fread_string_hash( fp );
+      pRoomIndex->description           = fread_string_hash( fp );
 
       /* Area number                      fread_number( fp ); */
       ln = fread_line( fp );
@@ -1636,8 +1636,8 @@ void load_rooms( AREA_DATA *tarea, FILE *fp )
               else
                 {
                   pexit = make_exit( pRoomIndex, NULL, door );
-                  pexit->description    = fread_string( fp );
-                  pexit->keyword        = fread_string( fp );
+                  pexit->description    = fread_string_hash( fp );
+                  pexit->keyword        = fread_string_hash( fp );
                   pexit->exit_info      = 0;
                   ln = fread_line( fp );
                   x1=x2=x3=x4=0;
@@ -1663,8 +1663,8 @@ void load_rooms( AREA_DATA *tarea, FILE *fp )
               EXTRA_DESCR_DATA *ed;
 
               CREATE( ed, EXTRA_DESCR_DATA, 1 );
-              ed->keyword               = fread_string( fp );
-              ed->description           = fread_string( fp );
+              ed->keyword               = fread_string_hash( fp );
+              ed->description           = fread_string_hash( fp );
               LINK( ed, pRoomIndex->first_extradesc, pRoomIndex->last_extradesc,
                     next, prev );
               top_ed++;
@@ -3138,8 +3138,8 @@ MPROG_DATA *mprog_file_read( char *f, MPROG_DATA *mprg,
           break;
         default:
           pMobIndex->mprog.progtypes = pMobIndex->mprog.progtypes | mprg2->type;
-          mprg2->arglist       = fread_string( progfile );
-          mprg2->comlist       = fread_string( progfile );
+          mprg2->arglist       = fread_string_hash( progfile );
+          mprg2->comlist       = fread_string_hash( progfile );
           switch ( letter = fread_letter( progfile ) )
             {
             case '>':
@@ -3243,7 +3243,7 @@ void mprog_read_programs( FILE *fp, MOB_INDEX_DATA *pMobIndex)
           exit( 1 );
           break;
         case IN_FILE_PROG:
-          mprg = mprog_file_read( fread_string( fp ), mprg,pMobIndex );
+          mprg = mprog_file_read( fread_string_hash( fp ), mprg,pMobIndex );
           fread_to_eol( fp );
           switch ( letter = fread_letter( fp ) )
             {
@@ -3264,9 +3264,9 @@ void mprog_read_programs( FILE *fp, MOB_INDEX_DATA *pMobIndex)
           break;
         default:
           pMobIndex->mprog.progtypes = pMobIndex->mprog.progtypes | mprg->type;
-          mprg->arglist        = fread_string( fp );
+          mprg->arglist        = fread_string_hash( fp );
           fread_to_eol( fp );
-          mprg->comlist        = fread_string( fp );
+          mprg->comlist        = fread_string_hash( fp );
           fread_to_eol( fp );
           switch ( letter = fread_letter( fp ) )
             {
@@ -3353,8 +3353,8 @@ MPROG_DATA *oprog_file_read( char *f, MPROG_DATA *mprg,
           break;
         default:
           pObjIndex->mprog.progtypes = pObjIndex->mprog.progtypes | mprg2->type;
-          mprg2->arglist       = fread_string( progfile );
-          mprg2->comlist       = fread_string( progfile );
+          mprg2->arglist       = fread_string_hash( progfile );
+          mprg2->comlist       = fread_string_hash( progfile );
           switch ( letter = fread_letter( progfile ) )
             {
             case '>':
@@ -3458,7 +3458,7 @@ void oprog_read_programs( FILE *fp, OBJ_INDEX_DATA *pObjIndex)
           exit( 1 );
           break;
         case IN_FILE_PROG:
-          mprg = oprog_file_read( fread_string( fp ), mprg,pObjIndex );
+          mprg = oprog_file_read( fread_string_hash( fp ), mprg,pObjIndex );
           fread_to_eol( fp );
           switch ( letter = fread_letter( fp ) )
             {
@@ -3479,9 +3479,9 @@ void oprog_read_programs( FILE *fp, OBJ_INDEX_DATA *pObjIndex)
           break;
         default:
           pObjIndex->mprog.progtypes = pObjIndex->mprog.progtypes | mprg->type;
-          mprg->arglist        = fread_string( fp );
+          mprg->arglist        = fread_string_hash( fp );
           fread_to_eol( fp );
-          mprg->comlist        = fread_string( fp );
+          mprg->comlist        = fread_string_hash( fp );
           fread_to_eol( fp );
           switch ( letter = fread_letter( fp ) )
             {
@@ -3565,8 +3565,8 @@ MPROG_DATA *rprog_file_read( char *f, MPROG_DATA *mprg,
           break;
         default:
           RoomIndex->mprog.progtypes = RoomIndex->mprog.progtypes | mprg2->type;
-          mprg2->arglist       = fread_string( progfile );
-          mprg2->comlist       = fread_string( progfile );
+          mprg2->arglist       = fread_string_hash( progfile );
+          mprg2->comlist       = fread_string_hash( progfile );
           switch ( letter = fread_letter( progfile ) )
             {
             case '>':
@@ -3670,7 +3670,7 @@ void rprog_read_programs( FILE *fp, ROOM_INDEX_DATA *pRoomIndex)
           exit( 1 );
           break;
         case IN_FILE_PROG:
-          mprg = rprog_file_read( fread_string( fp ), mprg,pRoomIndex );
+          mprg = rprog_file_read( fread_string_hash( fp ), mprg,pRoomIndex );
           fread_to_eol( fp );
           switch ( letter = fread_letter( fp ) )
             {
@@ -3691,9 +3691,9 @@ void rprog_read_programs( FILE *fp, ROOM_INDEX_DATA *pRoomIndex)
           break;
         default:
           pRoomIndex->mprog.progtypes = pRoomIndex->mprog.progtypes | mprg->type;
-          mprg->arglist        = fread_string( fp );
+          mprg->arglist        = fread_string_hash( fp );
           fread_to_eol( fp );
-          mprg->comlist        = fread_string( fp );
+          mprg->comlist        = fread_string_hash( fp );
           fread_to_eol( fp );
           switch ( letter = fread_letter( fp ) )
             {
@@ -4556,8 +4556,8 @@ void fread_sysdata( SYSTEM_DATA *sys, FILE *fp )
           break;
 
         case 'G':
-          KEY( "Guildoverseer",  sys->guild_overseer,  fread_string( fp ) );
-          KEY( "Guildadvisor",   sys->guild_advisor,   fread_string( fp ) );
+          KEY( "Guildoverseer",  sys->guild_overseer,  fread_string_hash( fp ) );
+          KEY( "Guildadvisor",   sys->guild_advisor,   fread_string_hash( fp ) );
           break;
 
         case 'H':
