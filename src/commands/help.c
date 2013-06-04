@@ -8,7 +8,7 @@ static void similar_help_files(CHAR_DATA *ch, char *argument);
 
 void do_help( CHAR_DATA *ch, char *argument )
 {
-  HELP_DATA *pHelp = NULL;
+  HelpFile *pHelp = NULL;
   const char *help_text = NULL;
 
   if ( !argument || argument[0] == '\0')
@@ -82,7 +82,7 @@ static void similar_help_files(CHAR_DATA *ch, char *argument)
 
   for ( ; !MapIterator_IsDone( iter ); MapIterator_Next( iter ) )
     {
-      HELP_DATA *pHelp = (HELP_DATA*) MapIterator_GetKey( iter );
+      HelpFile *pHelp = (HelpFile*) MapIterator_GetKey( iter );
       char buf[MAX_STRING_LENGTH];
       char *extension = GetHelpKeyword( pHelp );
 
@@ -119,7 +119,7 @@ static void similar_help_files(CHAR_DATA *ch, char *argument)
 
   for ( ; !MapIterator_IsDone( iter ); MapIterator_Next( iter ) )
     {
-      HELP_DATA *pHelp = (HELP_DATA*) MapIterator_GetKey( iter );
+      HelpFile *pHelp = (HelpFile*) MapIterator_GetKey( iter );
       char buf[MAX_STRING_LENGTH];
       char *extension = GetHelpKeyword( pHelp );
 

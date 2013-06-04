@@ -17,7 +17,7 @@ typedef struct fighting_data           FIGHT_DATA;
 typedef struct descriptor_data         DESCRIPTOR_DATA;
 typedef struct exit_data               EXIT_DATA;
 typedef struct extra_descr_data        EXTRA_DESCR_DATA;
-typedef struct help_data               HELP_DATA;
+typedef struct HelpFile                HelpFile;
 typedef struct mob_index_data          MOB_INDEX_DATA;
 typedef struct note_data               NOTE_DATA;
 typedef struct comment_data            COMMENT_DATA;
@@ -59,8 +59,8 @@ typedef struct wizent                  WIZENT;
 typedef struct member_data             MEMBER_DATA; /* Individual member data */
 typedef struct member_list             MEMBER_LIST; /* List of members in clan */
 typedef struct membersort_data         MS_DATA;     /* List for sorted roster list */
-typedef struct shuttle_data SHUTTLE_DATA;
-typedef struct stop_data STOP_DATA;
+typedef struct shuttle_data            SHUTTLE_DATA;
+typedef struct stop_data               STOP_DATA;
 
 /*
  * Function types.

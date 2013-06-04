@@ -10,21 +10,21 @@
 extern CerisMap *HelpFiles;
 extern char *help_greeting;
 
-HELP_DATA *GetHelp( const CHAR_DATA *ch, char *argument );
-void AddHelp( HELP_DATA *pHelp );
-void UnlinkHelp( HELP_DATA *pHelp );
+HelpFile *GetHelp( const CHAR_DATA *ch, char *argument );
+void AddHelp( HelpFile *pHelp );
+void UnlinkHelp( HelpFile *pHelp );
 void LoadHelps( void );
 void SaveHelps( void );
-HELP_DATA *CreateHelp( char *keyword, short level );
-void DestroyHelp( HELP_DATA *help );
+HelpFile *CreateHelp( char *keyword, short level );
+void DestroyHelp( HelpFile *help );
 
-short GetHelpLevel( const HELP_DATA *help );
-void SetHelpLevel( HELP_DATA *help, short level );
+short GetHelpLevel( const HelpFile *help );
+void SetHelpLevel( HelpFile *help, short level );
 
-char *GetHelpKeyword( const HELP_DATA *help );
-void SetHelpKeyword( HELP_DATA *help, char *keyword );
+char *GetHelpKeyword( const HelpFile *help );
+void SetHelpKeyword( HelpFile *help, char *keyword );
 
-char *GetHelpText( const HELP_DATA *help );
-void SetHelpText( HELP_DATA *help, char *text );
+char *GetHelpText( const HelpFile *help );
+void SetHelpText( HelpFile *help, char *text );
 
 #endif

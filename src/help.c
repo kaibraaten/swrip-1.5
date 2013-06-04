@@ -8,7 +8,7 @@
 CerisMap *HelpFiles = NULL;
 char *help_greeting = NULL;
 
-struct help_data
+struct HelpFile
 {
   short      level;
   char      *keyword;
@@ -18,14 +18,14 @@ struct help_data
 static char *help_fix( char *text );
 static int CompareHelpFiles( const void *one, const void *another );
 
-HELP_DATA *GetHelp( const CHAR_DATA *ch, char *argument )
+HelpFile *GetHelp( const CHAR_DATA *ch, char *argument )
 {
   char argall[MAX_INPUT_LENGTH];
   char argone[MAX_INPUT_LENGTH];
   char argnew[MAX_INPUT_LENGTH];
   int lev = 0;
   CerisMapIterator *helpIterator = NULL;
-  HELP_DATA *result = NULL;
+  HelpFile *result = NULL;
 
   if ( argument[0] == '\0' )
     {
@@ -63,7 +63,7 @@ HELP_DATA *GetHelp( const CHAR_DATA *ch, char *argument )
 
   for ( ; !MapIterator_IsDone( helpIterator ); MapIterator_Next( helpIterator ) )
     {
-      HELP_DATA *pHelp = (HELP_DATA*) MapIterator_GetKey( helpIterator );
+      HelpFile *pHelp = (HelpFile*) MapIterator_GetKey( helpIterator );
 
       if ( GetHelpLevel( pHelp ) > get_trust( ch ) )
 	{
@@ -92,7 +92,7 @@ HELP_DATA *GetHelp( const CHAR_DATA *ch, char *argument )
  * Page is insert-sorted by keyword.                    -Thoric
  * (The reason for sorting is to keep do_hlist looking nice)
  */
-void AddHelp( HELP_DATA *pHelp )
+void AddHelp( HelpFile *pHelp )
 {
   if( Map_Get( HelpFiles, pHelp ) )
     {
@@ -105,7 +105,7 @@ void AddHelp( HELP_DATA *pHelp )
     }
 }
 
-void UnlinkHelp( HELP_DATA *help )
+void UnlinkHelp( HelpFile *help )
 {
   Map_Remove( HelpFiles, help );
 }
@@ -130,7 +130,7 @@ void LoadHelps( void )
       char keyword[MAX_STRING_LENGTH];
       char helptext[MAX_STRING_LENGTH];
       short level = fread_number( fp );
-      HELP_DATA *pHelp = NULL;
+      HelpFile *pHelp = NULL;
 
       fread_string( fp, keyword, MAX_STRING_LENGTH );
 
@@ -161,7 +161,7 @@ void LoadHelps( void )
 static void WriteHelpfile( const void *key, void *value, void *userData )
 {
   FILE *filehandle = (FILE*) userData;
-  const HELP_DATA *pHelp = (const HELP_DATA*) key;
+  const HelpFile *pHelp = (const HelpFile*) key;
 
   fprintf( filehandle, "%d %s~\n%s~\n\n",
 	   GetHelpLevel( pHelp ),
@@ -188,11 +188,11 @@ void SaveHelps( void )
   fclose( filehandle );
 }
 
-HELP_DATA *CreateHelp( char *keyword, short level )
+HelpFile *CreateHelp( char *keyword, short level )
 {
-  HELP_DATA *help = NULL;
+  HelpFile *help = NULL;
   
-  CREATE( help, HELP_DATA, 1 );
+  CREATE( help, HelpFile, 1 );
   SetHelpKeyword( help, keyword );
   SetHelpText( help, "" );
   SetHelpLevel( help, level );
@@ -200,7 +200,7 @@ HELP_DATA *CreateHelp( char *keyword, short level )
   return help;
 }
 
-void DestroyHelp( HELP_DATA *help )
+void DestroyHelp( HelpFile *help )
 {
   STRFREE( help->keyword );
   STRFREE( help->text );
@@ -227,8 +227,8 @@ static char *help_fix( char *text )
 
 static int CompareHelpFiles( const void *oneVoid, const void *anotherVoid )
 {
-  const HELP_DATA *one = (const HELP_DATA*) oneVoid;
-  const HELP_DATA *another = (const HELP_DATA*) anotherVoid;
+  const HelpFile *one = (const HelpFile*) oneVoid;
+  const HelpFile *another = (const HelpFile*) anotherVoid;
   const char *oneKeyword = one->keyword;
   const char *anotherKeyword = another->keyword;
 
@@ -263,12 +263,12 @@ static int CompareHelpFiles( const void *oneVoid, const void *anotherVoid )
     }
 }
 
-short GetHelpLevel( const HELP_DATA *help )
+short GetHelpLevel( const HelpFile *help )
 {
   return help->level;
 }
 
-void SetHelpLevel( HELP_DATA *help, short level )
+void SetHelpLevel( HelpFile *help, short level )
 {
   if( level >= -1 && level <= MAX_LEVEL )
     {
@@ -281,12 +281,12 @@ void SetHelpLevel( HELP_DATA *help, short level )
     }
 }
 
-char *GetHelpKeyword( const HELP_DATA *help )
+char *GetHelpKeyword( const HelpFile *help )
 {
   return help->keyword;
 }
 
-void SetHelpKeyword( HELP_DATA *help, char *keyword )
+void SetHelpKeyword( HelpFile *help, char *keyword )
 {
   if( help->keyword )
     {
@@ -296,12 +296,12 @@ void SetHelpKeyword( HELP_DATA *help, char *keyword )
   help->keyword = STRALLOC( strupper( keyword ) );
 }
 
-char *GetHelpText( const HELP_DATA *help )
+char *GetHelpText( const HelpFile *help )
 {
   return help->text;
 }
 
-void SetHelpText( HELP_DATA *help, char *text )
+void SetHelpText( HelpFile *help, char *text )
 {
   if( help->text )
     {

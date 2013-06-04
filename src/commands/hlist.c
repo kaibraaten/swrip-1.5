@@ -44,7 +44,7 @@ void do_hlist( CHAR_DATA *ch, char *argument )
 
   for ( cnt = 0 ; !MapIterator_IsDone( iter ); MapIterator_Next( iter ) )
     {
-      HELP_DATA *help = (HELP_DATA*) MapIterator_GetKey( iter );
+      HelpFile *help = (HelpFile*) MapIterator_GetKey( iter );
       int level = GetHelpLevel( help );
 
       if ( level >= min && level <= max )
