@@ -129,7 +129,6 @@ int max_level( const Character *ch, int ability)
       if ( ch->ability.main == COMMANDO_ABILITY ) level = 50;
       if ( ch->race == RACE_SHISTAVANEN) level += 35;
       if ( ch->race == RACE_WOOKIEE ) level += 31;
-      /* if ( ch->race == RACE_NOGHRI ) level += 50; */
       if ( ch->race == RACE_GAMORREAN ) level += 30;
       if ( ch->race == RACE_DEFEL ) level += 25;
       if ( ch->race == RACE_TRANDOSHAN ) level += 20;
@@ -337,6 +336,7 @@ int max_level( const Character *ch, int ability)
         level = 20;
       else
         level = 0;
+
       level += ch->stats.perm_frc*5;
     }
 
@@ -442,14 +442,11 @@ int hit_gain( const Character *ch )
   if ( is_affected_by(ch, AFF_POISON) )
     gain /= 4;
 
-
   if ( ch->race == RACE_TRANDOSHAN )
     gain *= 2 ;
 
   return UMIN(gain, ch->max_hit - ch->hit);
 }
-
-
 
 int mana_gain( const Character *ch )
 {
@@ -493,8 +490,6 @@ int mana_gain( const Character *ch )
 
   return UMIN(gain, ch->max_mana - ch->mana);
 }
-
-
 
 int move_gain( const Character *ch )
 {
@@ -774,17 +769,16 @@ void mobile_update( void )
   Character *ch;
   EXIT_DATA *pexit;
   int door;
-  ch_ret     retcode;
-
-  retcode = rNONE;
+  ch_ret retcode = rNONE;
 
   /* Examine all mobs. */
   for ( ch = last_char; ch; ch = gch_prev )
     {
       set_cur_char( ch );
+
       if ( ch == first_char && ch->prev )
         {
-          bug( "mobile_update: first_char->prev != NULL... fixed", 0 );
+          bug( "%s: first_char->prev != NULL... fixed", __FUNCTION__ );
           ch->prev = NULL;
         }
 
@@ -792,9 +786,8 @@ void mobile_update( void )
 
       if ( gch_prev && gch_prev->next != ch )
         {
-          sprintf( buf, "FATAL: Mobile_update: %s->prev->next doesn't point to ch.",
-                   ch->name );
-          bug( buf, 0 );
+          bug( "FATAL: %s: %s->prev->next doesn't point to ch.",
+	       __FUNCTION__, ch->name );
           bug( "Short-cutting here", 0 );
           gch_prev = NULL;
           ch->prev = NULL;
@@ -809,8 +802,8 @@ void mobile_update( void )
         }
 
       if ( !ch->in_room
-           ||   is_affected_by(ch, AFF_CHARM)
-           ||   is_affected_by(ch, AFF_PARALYSIS) )
+           || is_affected_by(ch, AFF_CHARM)
+           || is_affected_by(ch, AFF_PARALYSIS) )
         continue;
 
       /* Clean up 'animated corpses' that are not charmed' - Scryn */
@@ -822,12 +815,13 @@ void mobile_update( void )
 
           if(is_npc(ch)) /* Guard against purging switched? */
             extract_char(ch, TRUE);
+
           continue;
         }
 
       if ( !IS_SET( ch->act, ACT_RUNNING )
-           &&   !IS_SET( ch->act, ACT_SENTINEL )
-           &&   !ch->fighting && ch->hhf.hunting )
+           && !IS_SET( ch->act, ACT_SENTINEL )
+           && !ch->fighting && ch->hhf.hunting )
         {
           if (  ch->top_level < 20 )
             set_wait_state( ch, 6 * PULSE_PER_SECOND );
@@ -841,6 +835,7 @@ void mobile_update( void )
             set_wait_state( ch, 2 * PULSE_PER_SECOND );
           else
             set_wait_state( ch, 1 * PULSE_PER_SECOND );
+
           hunt_victim( ch );
           continue;
         }
@@ -857,20 +852,20 @@ void mobile_update( void )
         }
 
       /* Examine call for special procedure */
-      if ( !IS_SET( ch->act, ACT_RUNNING )
-           &&    ch->spec_fun )
+      if ( !IS_SET( ch->act, ACT_RUNNING ) && ch->spec_fun )
         {
           if ( (*ch->spec_fun) ( ch ) )
             continue;
+
           if ( char_died(ch) )
             continue;
         }
 
-      if ( !IS_SET( ch->act, ACT_RUNNING )
-           &&    ch->spec_2 )
+      if ( !IS_SET( ch->act, ACT_RUNNING ) && ch->spec_2 )
         {
           if ( (*ch->spec_2) ( ch ) )
             continue;
+
           if ( char_died(ch) )
             continue;
         }
@@ -884,7 +879,7 @@ void mobile_update( void )
 
       if ( ch != cur_char )
         {
-          bug( "Mobile_update: ch != cur_char after spec_fun", 0 );
+          bug( "%s: ch != cur_char after spec_fun", __FUNCTION__ );
           continue;
         }
 
@@ -892,16 +887,16 @@ void mobile_update( void )
       if ( ch->position != POS_STANDING )
         continue;
 
-
       if ( IS_SET(ch->act, ACT_MOUNTED ) )
         {
           if ( IS_SET(ch->act, ACT_AGGRESSIVE) )
             do_emote( ch, "snarls and growls." );
+
           continue;
         }
 
       if ( IS_SET(ch->in_room->room_flags, ROOM_SAFE )
-           &&   IS_SET(ch->act, ACT_AGGRESSIVE) )
+           && IS_SET(ch->act, ACT_AGGRESSIVE) )
         do_emote( ch, "glares around and snarls." );
 
 
@@ -909,8 +904,10 @@ void mobile_update( void )
       if ( ch->in_room->area->nplayer > 0 )
         {
           mprog_random_trigger( ch );
+
           if ( char_died(ch) )
             continue;
+
           if ( ch->position < POS_STANDING )
             continue;
         }
@@ -922,6 +919,7 @@ void mobile_update( void )
         continue;
 
       rprog_hour_trigger(ch);
+
       if ( char_died(ch) )
         continue;
 
@@ -930,15 +928,13 @@ void mobile_update( void )
 
       /* Scavenge */
       if ( IS_SET(ch->act, ACT_SCAVENGER)
-           &&   ch->in_room->first_content
-           &&   number_bits( 2 ) == 0 )
+           && ch->in_room->first_content
+           && number_bits( 2 ) == 0 )
         {
-          OBJ_DATA *obj;
-          OBJ_DATA *obj_best;
-          int max;
+          OBJ_DATA *obj = NULL;
+          OBJ_DATA *obj_best = NULL;
+          int max = 1;
 
-          max         = 1;
-          obj_best    = NULL;
           for ( obj = ch->in_room->first_content; obj; obj = obj->next_content )
             {
               if ( CAN_WEAR(obj, ITEM_TAKE) && obj->cost > max
@@ -976,8 +972,9 @@ void mobile_update( void )
              continue - Kahn */
           if ( char_died(ch) )
             continue;
+
           if ( retcode != rNONE || IS_SET(ch->act, ACT_SENTINEL)
-               ||    ch->position < POS_STANDING )
+               || ch->position < POS_STANDING )
             continue;
         }
 
@@ -989,13 +986,10 @@ void mobile_update( void )
            &&   !IS_SET(pexit->exit_info, EX_CLOSED)
            &&   !IS_SET(pexit->to_room->room_flags, ROOM_NO_MOB) )
         {
-          Character *rch;
-          bool found;
+          Character *rch = NULL;
+          bool found = FALSE;
 
-          found = FALSE;
-          for ( rch  = ch->in_room->first_person;
-                rch;
-                rch  = rch->next_in_room )
+          for ( rch  = ch->in_room->first_person; rch; rch = rch->next_in_room )
             {
               if ( is_fearing(ch, rch) )
                 {
@@ -1023,8 +1017,6 @@ void mobile_update( void )
             retcode = move_char( ch, pexit, 0 );
         }
     }
-
-  return;
 }
 
 static void CollectTaxes( void *element, void *userData )
@@ -1072,6 +1064,7 @@ void update_taxes( void )
     {
       if ( d && d->character && d->character->pcdata && d->connection_state == CON_PLAYING ) /* Interest */
         d->character->pcdata->bank *= 1.0071428571428571;
+
       if ( ( d->connection_state == CON_PLAYING )
            &&   ( d->character->pcdata->salary > 0 )
            &&   ( is_clanned( d->character ) )
@@ -1081,9 +1074,7 @@ void update_taxes( void )
           d->character->pcdata->clan->funds -= d->character->pcdata->salary;
         }
     }
-
 }
-
 
 /*
  * Update the weather.
@@ -1135,7 +1126,7 @@ void weather_update( void )
       break;
     }
 
-  if ( time_info.day   >= 30 )
+  if ( time_info.day >= 30 )
     {
       time_info.day = 0;
       time_info.month++;
@@ -1152,14 +1143,17 @@ void weather_update( void )
       for ( d = first_descriptor; d; d = d->next )
         {
           if ( d->connection_state == CON_PLAYING
-               &&   IS_OUTSIDE(d->character)
-               &&   is_awake(d->character)
-               &&   d->character->in_room
-               &&   d->character->in_room->sector_type != SECT_UNDERWATER
-               &&   d->character->in_room->sector_type != SECT_OCEANFLOOR
-               &&   d->character->in_room->sector_type != SECT_UNDERGROUND )
-            act( AT_TEMP, buf, d->character, 0, 0, TO_CHAR );
+               && IS_OUTSIDE(d->character)
+               && is_awake(d->character)
+               && d->character->in_room
+               && d->character->in_room->sector_type != SECT_UNDERWATER
+               && d->character->in_room->sector_type != SECT_OCEANFLOOR
+               && d->character->in_room->sector_type != SECT_UNDERGROUND )
+	    {
+	      act( AT_TEMP, buf, d->character, 0, 0, TO_CHAR );
+	    }
         }
+
       buf[0] = '\0';
     }
   /*
@@ -1179,6 +1173,7 @@ void weather_update( void )
   weather_info.mmhg  = UMIN(weather_info.mmhg, 1040);
 
   AT_TEMP = AT_GREY;
+
   switch ( weather_info.sky )
     {
     default:
