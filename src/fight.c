@@ -1645,9 +1645,10 @@ ch_ret damage( CHAR_DATA *ch, CHAR_DATA *victim, int dam, int dt )
 
       check_killer( ch, victim );
 
-      if ( !is_npc( ch ) && ch->pcdata->clan )
+      if ( is_clanned( ch ) )
         update_member( ch );
-      if ( !is_npc( victim ) && victim->pcdata->clan )
+
+      if ( is_clanned( victim ) )
         update_member( victim );
 
       if ( victim->in_room != ch->in_room || !is_npc(victim) || !IS_SET( victim->act, ACT_NOKILL )  )
@@ -1846,8 +1847,10 @@ void check_killer( CHAR_DATA *ch, CHAR_DATA *victim )
                   ch_printf( ch, "&YYou are now wanted on %s.&w\r\n", planet_flags[x] , victim->short_descr );
                 }
             }
-          if ( ch->pcdata->clan )
+
+          if ( is_clanned( ch ) )
             ch->pcdata->clan->mkills++;
+
           ch->pcdata->mkills++;
           ch->in_room->area->mkills++;
         }
@@ -1856,13 +1859,15 @@ void check_killer( CHAR_DATA *ch, CHAR_DATA *victim )
 
   if ( !is_npc(ch) && !is_npc(victim) )
     {
-      if ( ch->pcdata->clan ) ch->pcdata->clan->pkills++;
+      if ( is_clanned( ch ) )
+	ch->pcdata->clan->pkills++;
+
       ch->pcdata->pkills++;
       update_pos(victim);
-      if ( victim->pcdata->clan )
+
+      if ( is_clanned( victim ) )
         victim->pcdata->clan->pdeaths++;
     }
-
 
   if ( is_npc(ch) )
     if ( !is_npc(victim) )
@@ -2071,9 +2076,8 @@ void raw_kill( CHAR_DATA *ch, CHAR_DATA *victim )
 
   strcpy( arg , victim->name );
 
-  if ( !is_npc( victim ) && victim->pcdata->clan )
+  if ( is_clanned( victim ) )
     remove_member( victim );
-
 
   stop_fighting( victim, TRUE );
 
@@ -2175,7 +2179,7 @@ void raw_kill( CHAR_DATA *ch, CHAR_DATA *victim )
       fold_area( room->area, room->area->filename, FALSE );
     }
 
-  if ( victim->pcdata && victim->pcdata->clan )
+  if ( is_clanned( victim ) )
     {
       if ( !str_cmp( victim->name, victim->pcdata->clan->leadership.leader ) )
         {
@@ -2271,55 +2275,7 @@ void raw_kill( CHAR_DATA *ch, CHAR_DATA *victim )
   sprintf( buf, "%s%c/%s.home", PLAYER_DIR, tolower(arg[0]),
            capitalize( arg ) );
   remove( buf );
-
-  return;
-
-
-  /* original player kill started here
-
-     extract_char( victim, FALSE );
-     if ( !victim )
-     {
-     bug( "oops! raw_kill: extract_char destroyed pc char", 0 );
-     return;
-     }
-     while ( victim->first_affect )
-     affect_remove( victim, victim->first_affect );
-     victim->affected_by        = race_table[victim->race].affected;
-     victim->resistant   = 0;
-     victim->susceptible = 0;
-     victim->immune      = 0;
-     victim->carry_weight= 0;
-     victim->armor      = 100;
-     victim->stats.mod_str    = 0;
-     victim->stats.mod_dex    = 0;
-     victim->stats.mod_wis    = 0;
-     victim->stats.mod_int    = 0;
-     victim->stats.mod_con    = 0;
-     victim->stats.mod_cha    = 0;
-     victim->stats.mod_lck    = 0;
-     victim->damroll    = 0;
-     victim->hitroll    = 0;
-     victim->mental_state = -10;
-     victim->alignment  = URANGE( -1000, victim->alignment, 1000 );
-     victim->saving.spell_staff = 0;
-     victim->position   = POS_RESTING;
-     victim->hit                = UMAX( 1, victim->hit  );
-     victim->mana       = UMAX( 1, victim->mana );
-     victim->move       = UMAX( 1, victim->move );
-
-     victim->pcdata->condition[COND_FULL]   = 12;
-     victim->pcdata->condition[COND_THIRST] = 12;
-
-     if ( IS_SET( sysdata.save_flags, SV_DEATH ) )
-     save_char_obj( victim );
-     return;
-
-  */
-
 }
-
-
 
 void group_gain( CHAR_DATA *ch, CHAR_DATA *victim )
 {
@@ -2364,7 +2320,7 @@ void group_gain( CHAR_DATA *ch, CHAR_DATA *victim )
 
       gch->alignment = align_compute( gch, victim );
 
-      if ( !is_npc(gch) && is_npc(victim) && gch->pcdata && gch->pcdata->clan
+      if ( !is_npc(gch) && is_npc(victim) && is_clanned( gch )
            && !str_cmp ( gch->pcdata->clan->name , victim->mob_clan ) )
         {
           xp = 0;

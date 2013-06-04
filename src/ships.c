@@ -3030,7 +3030,7 @@ bool check_pilot( CHAR_DATA *ch , SHIP_DATA *ship )
        || !str_cmp("Trainer", ship->owner) )
     return TRUE;
 
-  if ( !is_npc(ch) && ch->pcdata && ch->pcdata->clan )
+  if ( is_clanned( ch ) )
     {
       if ( !str_cmp(ch->pcdata->clan->name,ship->owner) )
         {

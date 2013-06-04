@@ -416,7 +416,7 @@ void talk_channel( CHAR_DATA *ch, const char *argument, int channel, const char 
               if ( is_npc( vch ) )
                 continue;
 
-              if ( !vch->pcdata->clan )
+              if ( !is_clanned( vch ) )
                 continue;
 
               if ( channel != CHANNEL_ALLCLAN && vch->pcdata->clan != clan /*&& vch->pcdata->clan->mainclan != clan*/ )
@@ -654,23 +654,23 @@ bool knows_language( const CHAR_DATA *ch, int language, const CHAR_DATA *cch )
 
   if ( !is_npc(ch) && is_immortal(ch) )
     return TRUE;
+
   if ( is_npc(ch) && !ch->speaks ) /* No langs = knows all for npcs */
     return TRUE;
+
   if ( is_npc(ch) && IS_SET(ch->speaks, (language & ~LANG_CLAN)) )
     return TRUE;
-  /* everyone does not KNOW common tongue
-     if ( IS_SET(language, LANG_COMMON) )
-     return TRUE;
-  */
+
   if ( language & LANG_CLAN )
     {
       /* Clan = common for mobs.. snicker.. -- Altrag */
       if ( is_npc(ch) || is_npc(cch) )
         return TRUE;
-      if ( ch->pcdata->clan == cch->pcdata->clan &&
-           ch->pcdata->clan != NULL )
+
+      if ( is_clanned( ch ) && ch->pcdata->clan == cch->pcdata->clan )
         return TRUE;
     }
+
   if ( !is_npc( ch ) )
     {
       int lang;
@@ -690,6 +690,7 @@ bool knows_language( const CHAR_DATA *ch, int language, const CHAR_DATA *cch )
               }
           }
     }
+
   return FALSE;
 }
 
@@ -697,10 +698,13 @@ bool can_learn_lang( const CHAR_DATA *ch, int language )
 {
   if ( language & LANG_CLAN )
     return FALSE;
+
   if ( is_npc(ch) || is_immortal(ch) )
     return FALSE;
+
   if ( race_table[ch->race].language & language )
     return FALSE;
+
   if ( ch->speaks & language )
     {
       int lang;

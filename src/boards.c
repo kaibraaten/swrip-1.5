@@ -66,10 +66,10 @@ bool can_read( CHAR_DATA *ch, BOARD_DATA *board )
      readers have been set up. */
   if ( board->read_group[0] != '\0' )
     {
-      if ( ch->pcdata->clan && !str_cmp( ch->pcdata->clan->name, board->read_group ) )
+      if ( is_clanned( ch ) && !str_cmp( ch->pcdata->clan->name, board->read_group ) )
         return TRUE;
 
-      if ( ch->pcdata->clan && ch->pcdata->clan->mainclan && !str_cmp( ch->pcdata->clan->mainclan->name, board->read_group ) )
+      if ( is_clanned( ch ) && ch->pcdata->clan->mainclan && !str_cmp( ch->pcdata->clan->mainclan->name, board->read_group ) )
         return TRUE;
 
     }
@@ -92,10 +92,10 @@ bool can_post( CHAR_DATA *ch, BOARD_DATA *board )
   /* Your trust wasn't high enough, so check if a post_group has been set up. */
   if ( board->post_group[0] != '\0' )
     {
-      if ( ch->pcdata->clan && !str_cmp( ch->pcdata->clan->name, board->post_group ) )
+      if ( is_clanned( ch ) && !str_cmp( ch->pcdata->clan->name, board->post_group ) )
         return TRUE;
 
-      if ( ch->pcdata->clan && ch->pcdata->clan->mainclan && !str_cmp( ch->pcdata->clan->mainclan->name, board->post_group ) )
+      if ( is_clanned( ch ) && ch->pcdata->clan->mainclan && !str_cmp( ch->pcdata->clan->mainclan->name, board->post_group ) )
         return TRUE;
     }
 

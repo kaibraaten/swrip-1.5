@@ -180,7 +180,7 @@ void save_char_obj( CHAR_DATA *ch )
 
   saving_char = ch;
   /* save pc's clan's data while we're at it to keep the data in sync */
-  if ( !is_npc(ch) && ch->pcdata->clan )
+  if ( is_clanned( ch ) )
     save_clan( ch->pcdata->clan );
 
   if ( ch->desc && ch->desc->original )

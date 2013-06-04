@@ -163,7 +163,7 @@ void disintegration ( const CHAR_DATA *ch , const CHAR_DATA *victim , long amoun
     {
       p_prev = p->prev;
 
-      if ( ch->pcdata && ch->pcdata->clan
+      if ( is_clanned( ch )
 	   && ( !str_cmp(ch->pcdata->clan->name, "the hunters guild")
 		|| !str_cmp(ch->pcdata->clan->name, "the assassins guild") ) )
         ch_printf(p, buf);
@@ -204,7 +204,7 @@ void claim_disintegration( CHAR_DATA *ch, const CHAR_DATA *victim )
     }
 
   if (bounty &&
-      (!ch->pcdata || !ch->pcdata->clan
+      (!is_clanned( ch )
        || ( str_cmp(ch->pcdata->clan->name, "the hunters guild")
 	    || str_cmp(ch->pcdata->clan->name, "the assassins guild") ) ) )
     {

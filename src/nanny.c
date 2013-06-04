@@ -819,21 +819,6 @@ static void nanny_read_motd( DESCRIPTOR_DATA *d, char *argument )
 	  ch->stats.perm_frc = 0;
 	}
 
-      /* Noghri are auto commando */
-      /*
-            if (ch->race == RACE_NOGHRI )
-            {
-            ch->pcdata->clan = get_clan( "The Death Commandos");
-            ch->pcdata->clan_name = QUICKLINK( ch->pcdata->clan->name );
-            }
-      */
-      /* took out automaticly knowing common
-if ( (iLang = skill_lookup( "common" )) < 0 )
-             bug( "Nanny: cannot find common language." );
-             else
-             ch->pcdata->learned[iLang] = 100;
-      */
-
       for ( iLang = 0; lang_array[iLang] != LANG_UNKNOWN; iLang++ )
 	{
 	  if ( lang_array[iLang] == race_table[ch->race].language )

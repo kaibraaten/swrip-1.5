@@ -758,8 +758,9 @@ int mprog_do_ifcheck( const char *ifcheck, CHAR_DATA *mob, CHAR_DATA *actor,
         }
       if ( !str_cmp(chck, "clan") )
         {
-          if ( is_npc(chkchar) || !chkchar->pcdata->clan )
+          if ( is_npc(chkchar) || !is_clanned( chkchar ) )
             return FALSE;
+
           return mprog_seval(chkchar->pcdata->clan->name, opr, rval, mob);
         }
       if ( !str_cmp(chck, "class") )
@@ -771,10 +772,10 @@ int mprog_do_ifcheck( const char *ifcheck, CHAR_DATA *mob, CHAR_DATA *actor,
 
       if ( !str_cmp(chck, "clantype") )
         {
-          if ( is_npc(chkchar) || !chkchar->pcdata->clan )
+          if ( is_npc(chkchar) || !is_clanned( chkchar ) )
             return FALSE;
-          return mprog_veval(chkchar->pcdata->clan->clan_type, opr, atoi(rval),
-                             mob);
+
+          return mprog_veval(chkchar->pcdata->clan->clan_type, opr, atoi(rval), mob);
         }
       if ( !str_cmp(chck, "str") )
         {

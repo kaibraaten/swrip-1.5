@@ -1068,7 +1068,7 @@ void update_taxes( void )
         d->character->pcdata->bank *= 1.0071428571428571;
       if ( ( d->connection_state == CON_PLAYING )
            &&   ( d->character->pcdata->salary > 0 )
-           &&   ( d->character->pcdata->clan )
+           &&   ( is_clanned( d->character ) )
            &&   ( d->character->pcdata->clan->funds >= d->character->pcdata->salary ) )
         {
           d->character->pcdata->bank += d->character->pcdata->salary;
@@ -1298,23 +1298,6 @@ void char_update( void )
 
       if( char_died(ch) )
         continue;
-
-      /*
-        if(!is_npc(ch))
-        if ( (ch->pcdata->bank * 1.00002) > 1 )
-        ch->pcdata->bank *= 1.00002;
-        else
-        ch->pcdata->bank += 1;
-
-        if (!is_npc(ch) && ch->pcdata->salary_date > current_time)
-        {
-        ch->pcdata->bank += ch->pcdata->salary;
-        ch->pcdata->clan->funds -= ch->pcdata->salary;
-        tms = localtime(&current_time);
-        tms->tm_mday += 1;
-        ch->pcdata->salary_date = mktime(tms);
-        }
-      */
 
       /*
        * See if player should be auto-saved.

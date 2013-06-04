@@ -103,7 +103,8 @@ void add_reinforcements( CHAR_DATA *ch )
 
       mob = create_mobile( pMobIndex );
       char_to_room( mob, ch->in_room );
-      if ( ch->pcdata && ch->pcdata->clan )
+
+      if ( is_clanned( ch ) )
         {
           char tmpbuf[MAX_STRING_LENGTH];
 
@@ -137,7 +138,8 @@ void add_reinforcements( CHAR_DATA *ch )
 
       if ( mob->mob_clan )
         STRFREE ( mob->mob_clan );
-      if ( ch->pcdata && ch->pcdata->clan )
+
+      if ( is_clanned( ch ) )
         mob->mob_clan = STRALLOC( ch->pcdata->clan->name );
     }
 }
