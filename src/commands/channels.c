@@ -35,7 +35,7 @@ void do_channels( CHAR_DATA *ch, char *argument )
                     : " -ooc",
                     ch );
 
-      if ( !is_npc( ch ) && ch->pcdata->clan )
+      if ( !is_npc( ch ) && is_clanned( ch ) )
 	{
           send_to_char( !IS_SET(ch->deaf, CHANNEL_CLAN)
                         ? " +CLAN"

@@ -35,9 +35,9 @@ void do_buyship(CHAR_DATA *ch, char *argument )
 
   if ( ship->type == SHIP_IMPERIAL )
     {
-      if ( !ch->pcdata->clan || str_cmp( ch->pcdata->clan->name , "the empire" ) )
+      if ( !is_clanned( ch ) || str_cmp( ch->pcdata->clan->name , "the empire" ) )
         {
-          if ( !ch->pcdata->clan || !ch->pcdata->clan->mainclan || str_cmp( ch->pcdata->clan->mainclan->name , "The Empire" ) )
+          if ( !is_clanned( ch ) || !ch->pcdata->clan->mainclan || str_cmp( ch->pcdata->clan->mainclan->name , "The Empire" ) )
             {
               send_to_char( "&RThat ship may only be purchaced by the Empire!\r\n" ,ch );
               return;
@@ -46,9 +46,9 @@ void do_buyship(CHAR_DATA *ch, char *argument )
     }
   else if ( ship->type == SHIP_REBEL )
     {
-      if ( !ch->pcdata->clan || (str_cmp( ch->pcdata->clan->name , "the rebel alliance" ) && str_cmp( ch->pcdata->clan->name , "The New Republic")))
+      if ( !is_clanned( ch ) || (str_cmp( ch->pcdata->clan->name , "the rebel alliance" ) && str_cmp( ch->pcdata->clan->name , "The New Republic")))
         {
-          if ( !ch->pcdata->clan ||  !ch->pcdata->clan->mainclan || str_cmp( ch->pcdata->clan->mainclan->name , "The Rebel Alliance" ) )
+          if ( !is_clanned( ch ) ||  !ch->pcdata->clan->mainclan || str_cmp( ch->pcdata->clan->mainclan->name , "The Rebel Alliance" ) )
             {
               send_to_char( "&RThat ship may only be purchaced by The Rebel Alliance!\r\n" ,ch );
               return;

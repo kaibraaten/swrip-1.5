@@ -81,14 +81,14 @@ void do_propaganda ( CHAR_DATA *ch , char *argument )
       return;
     }
 
-  if ( !ch->pcdata->clan )
+  if ( !is_clanned( ch ) )
     {
       sprintf( buf, "You speak to them about the evils of %s" , planet->governed_by ? planet->governed_by->name : "their current leaders" );
       ch_printf( ch, buf );
       act( AT_ACTION, "$n speaks about the planets organization.\r\n", ch, NULL, victim, TO_VICT    );
       act( AT_ACTION, "$n tells $N about the evils of their organization.\r\n",  ch, NULL, victim, TO_NOTVICT );
     }
-  if ( ch->pcdata->clan )
+  else
     {
       if ( ( clan = ch->pcdata->clan->mainclan ) == NULL )
         clan = ch->pcdata->clan;
@@ -96,7 +96,7 @@ void do_propaganda ( CHAR_DATA *ch , char *argument )
       planet = ch->in_room->area->planet;
 
       sprintf( buf, ", and the evils of %s" , planet->governed_by ? planet->governed_by->name : "their current leaders" );
-      ch_printf( ch, "You speak to them about the benifits of the %s%s.\r\n", ch->pcdata->clan->name,
+      ch_printf( ch, "You speak to them about the benefits of the %s%s.\r\n", ch->pcdata->clan->name,
                  planet->governed_by == clan ? "" : buf );
       act( AT_ACTION, "$n speaks about his organization.\r\n", ch, NULL, victim, TO_VICT    );
       act( AT_ACTION, "$n tells $N about their organization.\r\n",  ch, NULL, victim, TO_NOTVICT );
@@ -106,7 +106,7 @@ void do_propaganda ( CHAR_DATA *ch , char *argument )
   if ( victim->top_level - get_curr_cha(ch) > ch->pcdata->learned[gsn_propaganda]  )
     {
 
-      if ( (ch->pcdata->clan) ? planet->governed_by != clan : TRUE)
+      if ( is_clanned( ch ) ? planet->governed_by != clan : TRUE)
         {
           sprintf( buf, "%s is a traitor!" , ch->name);
           do_yell( victim, buf );

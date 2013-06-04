@@ -163,7 +163,7 @@ void do_who( CHAR_DATA *ch, char *argument )
                   if ( (pClan = get_clan (arg)) && (fClanMatch != TRUE))
                     {
                       if ((ch->top_level >= LEVEL_IMMORTAL)
-			  || (ch->pcdata && ch->pcdata->clan
+			  || (is_clanned( ch )
 			      && !str_cmp(ch->pcdata->clan->name,pClan->name)))
                         {
                           fClanMatch = TRUE;
@@ -280,7 +280,7 @@ void do_who( CHAR_DATA *ch, char *argument )
       else if ( wch->pcdata->rank && wch->pcdata->rank[0] != '\0' )
         race = wch->pcdata->rank;
 
-      if ( wch->pcdata->clan && ( (!is_npc(ch) &&  ch->pcdata->clan
+      if ( is_clanned( wch ) && ( (!is_npc(ch) && is_clanned( ch )
                                    && ch->pcdata->clan == wch->pcdata->clan )
                                   || is_god( ch ) ) )
         {

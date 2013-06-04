@@ -22,7 +22,7 @@ void do_add_patrol ( CHAR_DATA *ch , char *argument )
           return;
         }
 
-      if ( !ch->pcdata->clan )
+      if ( !is_clanned( ch ) )
         {
           send_to_char( "&RYou need to be a member of an organization before you can call for a guard.\r\n", ch );
           return;

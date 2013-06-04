@@ -4,8 +4,7 @@
 
 void do_demote ( CHAR_DATA *ch , char *argument )
 {
-
-  if ( is_npc( ch ) || !ch->pcdata )
+  if ( is_npc( ch ) )
     return;
 
   if ( !is_clanned( ch ) )

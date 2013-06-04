@@ -10,7 +10,7 @@ void do_addsalary ( CHAR_DATA *ch , char *argument )
   CLAN_DATA *clan;
   int salary;
 
-  if ( is_npc( ch ) || !ch->pcdata->clan )
+  if ( is_npc( ch ) || !is_clanned( ch ) )
     {
       send_to_char( "Huh?\r\n", ch );
       return;
@@ -18,8 +18,8 @@ void do_addsalary ( CHAR_DATA *ch , char *argument )
 
   clan = ch->pcdata->clan;
 
-  if ( (ch->pcdata && ch->pcdata->bestowments
-        &&    is_name("salary", ch->pcdata->bestowments))
+  if ( (ch->pcdata->bestowments
+        && is_name("salary", ch->pcdata->bestowments))
        || !str_cmp( ch->name, clan->leadership.leader  ) )
     ;
   else

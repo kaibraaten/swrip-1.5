@@ -11,7 +11,7 @@ void do_appoint ( CHAR_DATA *ch , char *argument )
   if ( is_npc( ch ) || !ch->pcdata )
     return;
 
-  if ( !ch->pcdata->clan )
+  if ( !is_clanned( ch ) )
     {
       send_to_char( "Huh?\r\n", ch );
       return;
