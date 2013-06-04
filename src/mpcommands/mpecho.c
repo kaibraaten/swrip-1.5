@@ -3,7 +3,7 @@
 
 /* prints message to room at large. */
 
-void do_mpecho( CHAR_DATA *ch, char *argument )
+void do_mpecho( Character *ch, char *argument )
 {
   char       arg1 [MAX_INPUT_LENGTH];
   short     color;

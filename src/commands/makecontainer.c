@@ -2,7 +2,7 @@
 #include "mud.h"
 #include "character.h"
 
-void do_makecontainer( CHAR_DATA *ch, char *argument )
+void do_makecontainer( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];

@@ -2,11 +2,11 @@
 #include "mud.h"
 #include "character.h"
 
-void do_placevendor (CHAR_DATA *ch, char *argument)
+void do_placevendor (Character *ch, char *argument)
 {
   char strsave[MAX_INPUT_LENGTH];
   struct stat fst;
-  CHAR_DATA *vendor;
+  Character *vendor;
   MOB_INDEX_DATA *temp;
   OBJ_DATA *obj;
   char vnum1[MAX_INPUT_LENGTH];

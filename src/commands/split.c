@@ -4,11 +4,11 @@
 /*
  * 'Split' originally by Gnort, God of Chaos.
  */
-void do_split( CHAR_DATA *ch, char *argument )
+void do_split( Character *ch, char *argument )
 {
   char buf[MAX_STRING_LENGTH];
   char arg[MAX_INPUT_LENGTH];
-  CHAR_DATA *gch = NULL;
+  Character *gch = NULL;
   int members = 0;
   int amount = 0;
   int share = 0;

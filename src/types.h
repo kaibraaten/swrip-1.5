@@ -10,8 +10,8 @@ typedef struct affect_data             AFFECT_DATA;
 typedef struct area_data               AREA_DATA;
 typedef struct auction_data            AUCTION_DATA;
 typedef struct ban_data                BAN_DATA;
-typedef struct extracted_char_data     EXTRACT_CHAR_DATA;
-typedef struct char_data               CHAR_DATA;
+typedef struct ExtractedCharacter      ExtractedCharacter;
+typedef struct Character               Character;
 typedef struct hunt_hate_fear          HHF_DATA;
 typedef struct fighting_data           FIGHT_DATA;
 typedef struct descriptor_data         DESCRIPTOR_DATA;
@@ -65,9 +65,9 @@ typedef struct stop_data               STOP_DATA;
 /*
  * Function types.
  */
-typedef void    DO_FUN          ( CHAR_DATA *ch, char *argument );
-typedef bool    SPEC_FUN        ( CHAR_DATA *ch );
-typedef ch_ret  SPELL_FUN       ( int sn, int level, CHAR_DATA *ch, void *vo );
+typedef void    DO_FUN          ( Character *ch, char *argument );
+typedef bool    SPEC_FUN        ( Character *ch );
+typedef ch_ret  SPELL_FUN       ( int sn, int level, Character *ch, void *vo );
 
 typedef int vnum_t;
 

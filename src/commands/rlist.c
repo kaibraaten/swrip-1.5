@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_rlist( CHAR_DATA *ch, char *argument )
+void do_rlist( Character *ch, char *argument )
 {
   ROOM_INDEX_DATA       *room;
   int                    vnum;

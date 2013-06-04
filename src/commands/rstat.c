@@ -1,13 +1,13 @@
 #include "character.h"
 #include "mud.h"
 
-void do_rstat( CHAR_DATA *ch, char *argument )
+void do_rstat( Character *ch, char *argument )
 {
   char buf[MAX_STRING_LENGTH];
   char arg[MAX_INPUT_LENGTH];
   ROOM_INDEX_DATA *location = NULL;
   OBJ_DATA *obj = NULL;
-  CHAR_DATA *rch = NULL;
+  Character *rch = NULL;
   EXIT_DATA *pexit = NULL;
   int cnt = 0;
   static const char * const dir_text[] = { "n", "e", "s", "w", "u", "d", "ne", "nw", "se", "sw", "?" };

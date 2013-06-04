@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_throw( CHAR_DATA *ch, char *argument )
+void do_throw( Character *ch, char *argument )
 {
   OBJ_DATA        * obj;
   OBJ_DATA        * tmpobj;
@@ -12,7 +12,7 @@ void do_throw( CHAR_DATA *ch, char *argument )
   EXIT_DATA       * pexit;
   ROOM_INDEX_DATA * was_in_room;
   ROOM_INDEX_DATA * to_room;
-  CHAR_DATA       * victim;
+  Character       * victim;
   char              buf[MAX_STRING_LENGTH];
 
   argument = one_argument( argument, arg );

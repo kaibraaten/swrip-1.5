@@ -1,9 +1,9 @@
 #include "character.h"
 #include "mud.h"
 
-ch_ret spell_midas_touch( int sn, int level, CHAR_DATA *ch, void *vo )
+ch_ret spell_midas_touch( int sn, int level, Character *ch, void *vo )
 {
-  CHAR_DATA *victim;
+  Character *victim;
   int val;
   OBJ_DATA *obj = (OBJ_DATA *) vo;
 

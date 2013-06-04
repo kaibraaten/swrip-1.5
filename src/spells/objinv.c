@@ -4,7 +4,7 @@
 /*
  * Generic inventory object spell                               -Thoric
  */
-ch_ret spell_obj_inv( int sn, int level, CHAR_DATA *ch, void *vo )
+ch_ret spell_obj_inv( int sn, int level, Character *ch, void *vo )
 {
   OBJ_DATA *obj = (OBJ_DATA *) vo;
   SKILLTYPE *skill = get_skilltype(sn);

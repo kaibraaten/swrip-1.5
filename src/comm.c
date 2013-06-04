@@ -88,7 +88,7 @@ int main( int argc, char **argv );
 void nanny( DESCRIPTOR_DATA *d, char *argument );
 bool flush_buffer( DESCRIPTOR_DATA *d, bool fPrompt );
 void read_from_buffer( DESCRIPTOR_DATA *d );
-void stop_idling( CHAR_DATA *ch );
+void stop_idling( Character *ch );
 void free_desc( DESCRIPTOR_DATA *d );
 void display_prompt( DESCRIPTOR_DATA *d );
 int make_color_sequence( const char *col, char *buf, DESCRIPTOR_DATA *d );
@@ -827,7 +827,7 @@ void free_desc( DESCRIPTOR_DATA *d )
 
 void close_socket( DESCRIPTOR_DATA *dclose, bool force )
 {
-  CHAR_DATA *ch;
+  Character *ch;
   DESCRIPTOR_DATA *d;
   bool DoNotUnlink = FALSE;
 
@@ -1113,7 +1113,7 @@ void read_from_buffer( DESCRIPTOR_DATA *d )
 bool flush_buffer( DESCRIPTOR_DATA *d, bool fPrompt )
 {
   char buf[MAX_INPUT_LENGTH];
-  CHAR_DATA *ch;
+  Character *ch;
 
   ch = d->original ? d->original : d->character;
   if( ch && ch->fighting && ch->fighting->who )
@@ -1358,7 +1358,7 @@ bool check_parse_name( const char *name )
  */
 bool check_reconnect( DESCRIPTOR_DATA *d, char *name, bool fConn )
 {
-  CHAR_DATA *ch;
+  Character *ch;
 
   for ( ch = first_char; ch; ch = ch->next )
     {
@@ -1445,7 +1445,7 @@ bool check_multi( DESCRIPTOR_DATA *d , char *name )
 
 bool check_playing( DESCRIPTOR_DATA *d, char *name, bool kick )
 {
-  CHAR_DATA *ch;
+  Character *ch;
 
   DESCRIPTOR_DATA *dold;
   int   cstate;
@@ -1498,7 +1498,7 @@ bool check_playing( DESCRIPTOR_DATA *d, char *name, bool kick )
 
 
 
-void stop_idling( CHAR_DATA *ch )
+void stop_idling( Character *ch )
 {
   if ( !ch
        ||   !ch->desc
@@ -1515,7 +1515,7 @@ void stop_idling( CHAR_DATA *ch )
   return;
 }
 
-void send_to_char( const char *txt, const CHAR_DATA *ch )
+void send_to_char( const char *txt, const Character *ch )
 {
   DESCRIPTOR_DATA *d;
   const char *colstr;
@@ -1601,7 +1601,7 @@ void write_to_pager( DESCRIPTOR_DATA *d, const char *txt, size_t length )
   d->pager.pagebuf[d->pager.pagetop] = '\0';
 }
 
-void send_to_pager( const char *txt, const CHAR_DATA *ch )
+void send_to_pager( const char *txt, const Character *ch )
 {
   DESCRIPTOR_DATA *d;
   const char *colstr;
@@ -1657,10 +1657,10 @@ void send_to_pager( const char *txt, const CHAR_DATA *ch )
 }
 
 
-void set_char_color( short AType, CHAR_DATA *ch )
+void set_char_color( short AType, Character *ch )
 {
   char buf[16];
-  CHAR_DATA *och;
+  Character *och;
 
   if ( !ch || !ch->desc )
     return;
@@ -1678,10 +1678,10 @@ void set_char_color( short AType, CHAR_DATA *ch )
   return;
 }
 
-void set_pager_color( short AType, CHAR_DATA *ch )
+void set_pager_color( short AType, Character *ch )
 {
   char buf[16];
-  CHAR_DATA *och;
+  Character *och;
 
   if ( !ch || !ch->desc )
     return;
@@ -1702,7 +1702,7 @@ void set_pager_color( short AType, CHAR_DATA *ch )
 
 
 /* source: EOD, by John Booth <???> */
-void ch_printf(const CHAR_DATA *ch, const char *fmt, ...)
+void ch_printf(const Character *ch, const char *fmt, ...)
 {
   char buf[MAX_STRING_LENGTH*2];        /* better safe than sorry */
   va_list args;
@@ -1714,7 +1714,7 @@ void ch_printf(const CHAR_DATA *ch, const char *fmt, ...)
   send_to_char(buf, ch);
 }
 
-void pager_printf(const CHAR_DATA *ch, const char *fmt, ...)
+void pager_printf(const Character *ch, const char *fmt, ...)
 {
   char buf[MAX_STRING_LENGTH*2];
   va_list args;
@@ -1745,7 +1745,7 @@ char *obj_short( const OBJ_DATA *obj )
  */
 /* Major overhaul. -- Alty */
 #define NAME(ch)        (is_npc(ch) ? ch->short_descr : ch->name)
-char *act_string(const char *format, CHAR_DATA *to, CHAR_DATA *ch,
+char *act_string(const char *format, Character *to, Character *ch,
                  const void *arg1, const void *arg2)
 {
   static char * const he_she  [] = { "it",  "he",  "she" };
@@ -1756,7 +1756,7 @@ char *act_string(const char *format, CHAR_DATA *to, CHAR_DATA *ch,
   char *point = buf;
   const char *str = format;
   const char *i;
-  CHAR_DATA *vch = (CHAR_DATA *) arg2;
+  Character *vch = (Character *) arg2;
   OBJ_DATA *obj1 = (OBJ_DATA  *) arg1;
   OBJ_DATA *obj2 = (OBJ_DATA  *) arg2;
 
@@ -1866,11 +1866,11 @@ char *act_string(const char *format, CHAR_DATA *to, CHAR_DATA *ch,
 }
 #undef NAME
 
-void act( short AType, const char *format, CHAR_DATA *ch, const void *arg1, const void *arg2, int type )
+void act( short AType, const char *format, Character *ch, const void *arg1, const void *arg2, int type )
 {
   char *txt;
-  CHAR_DATA *to;
-  CHAR_DATA *vch = (CHAR_DATA *)arg2;
+  Character *to;
+  Character *vch = (Character *)arg2;
 
   /*
    * Discard null and zero-length messages.
@@ -1970,7 +1970,7 @@ void act( short AType, const char *format, CHAR_DATA *ch, const void *arg1, cons
   return;
 }
 
-char *default_prompt( CHAR_DATA *ch )
+char *default_prompt( Character *ch )
 {
   static char buf[MAX_STRING_LENGTH];
   strcpy( buf,"" );
@@ -1996,8 +1996,8 @@ int getcolor(char clr)
 
 void display_prompt( DESCRIPTOR_DATA *d )
 {
-  CHAR_DATA *ch = d->character;
-  CHAR_DATA *och = (d->original ? d->original : d->character);
+  Character *ch = d->character;
+  Character *och = (d->original ? d->original : d->character);
   bool ansi = (!is_npc(och) && IS_SET(och->act, PLR_ANSI));
   const char *prompt;
   char buf[MAX_STRING_LENGTH];
@@ -2181,7 +2181,7 @@ int make_color_sequence(const char *col, char *buf, DESCRIPTOR_DATA *d)
   int ln;
   const char *ctype = col;
   unsigned char cl;
-  CHAR_DATA *och;
+  Character *och;
   bool ansi;
 
   och = (d->original ? d->original : d->character);
@@ -2287,7 +2287,7 @@ void set_pager_input( DESCRIPTOR_DATA *d, char *argument )
 bool pager_output( DESCRIPTOR_DATA *d )
 {
   register char *last;
-  CHAR_DATA *ch;
+  Character *ch;
   int pclines;
   register int lines;
   bool ret;

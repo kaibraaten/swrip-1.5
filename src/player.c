@@ -26,7 +26,7 @@
 #include "mud.h"
 #include "character.h"
 
-const char *get_race( const CHAR_DATA *ch)
+const char *get_race( const Character *ch)
 {
   if ( ch->race < MAX_NPC_RACE && ch->race >= 0)
     return ( npc_race[ch->race] );
@@ -34,7 +34,7 @@ const char *get_race( const CHAR_DATA *ch)
   return "Unknown";
 }
 
-void set_title( CHAR_DATA *ch, const char *title )
+void set_title( Character *ch, const char *title )
 {
   char buf[MAX_STRING_LENGTH];
 

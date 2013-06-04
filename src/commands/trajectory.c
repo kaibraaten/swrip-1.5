@@ -3,7 +3,7 @@
 #include "vector3_aux.h"
 #include "mud.h"
 
-void do_trajectory( CHAR_DATA *ch, char *argument )
+void do_trajectory( Character *ch, char *argument )
 {
   char  buf[MAX_STRING_LENGTH];
   char  arg2[MAX_INPUT_LENGTH];

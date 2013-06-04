@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_hide( CHAR_DATA *ch, char *argument )
+void do_hide( Character *ch, char *argument )
 {
   if ( is_npc(ch) && is_affected_by( ch, AFF_CHARM ) )
     {

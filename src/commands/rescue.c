@@ -1,11 +1,11 @@
 #include "mud.h"
 #include "character.h"
 
-void do_rescue( CHAR_DATA *ch, char *argument )
+void do_rescue( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  CHAR_DATA *victim;
-  CHAR_DATA *fch;
+  Character *victim;
+  Character *fch;
   int percent;
 
   if ( is_npc(ch) && is_affected_by( ch, AFF_CHARM ) )

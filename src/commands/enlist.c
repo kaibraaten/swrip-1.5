@@ -4,7 +4,7 @@
 
 static Clan *GetRecruitingClan( const ROOM_INDEX_DATA *enlistRoom );
 
-void do_enlist( CHAR_DATA *ch, char *argument )
+void do_enlist( Character *ch, char *argument )
 {
   Clan *clan;
 

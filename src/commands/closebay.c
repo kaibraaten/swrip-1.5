@@ -2,7 +2,7 @@
 #include "ships.h"
 #include "mud.h"
 
-void do_closebay( CHAR_DATA *ch, char *argument )
+void do_closebay( Character *ch, char *argument )
 {
   SHIP_DATA *ship;
   char buf[MAX_STRING_LENGTH];

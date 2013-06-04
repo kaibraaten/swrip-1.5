@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_skin( CHAR_DATA *ch, char *argument)
+void do_skin( Character *ch, char *argument)
 {
   OBJ_DATA *korps;
   OBJ_DATA *corpse;

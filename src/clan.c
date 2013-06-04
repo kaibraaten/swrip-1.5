@@ -500,7 +500,7 @@ void LoadClans( void )
   log_string(" Done sorting" );
 }
 
-void ShowMembers( const CHAR_DATA *ch, const char *argument, const char *format )
+void ShowMembers( const Character *ch, const char *argument, const char *format )
 {
   MEMBER_LIST *members_list = NULL;
   MEMBER_DATA *member = NULL;
@@ -650,7 +650,7 @@ void ShowMembers( const CHAR_DATA *ch, const char *argument, const char *format 
                 "------------------------------------------------------------\r\n" );
 }
 
-void RemoveMember( const CHAR_DATA *ch )
+void RemoveMember( const Character *ch )
 {
   MEMBER_LIST   *members_list;
   MEMBER_DATA   *member;
@@ -769,7 +769,7 @@ bool LoadMemberList( const char *filename )
 
 }
 
-void UpdateMember( const CHAR_DATA *ch )
+void UpdateMember( const Character *ch )
 {
   MEMBER_LIST *members_list;
   MEMBER_DATA *member;

@@ -1,6 +1,6 @@
 #include "mud.h"
 
-void do_boards( CHAR_DATA *ch, char *argument )
+void do_boards( Character *ch, char *argument )
 {
   BOARD_DATA *board = NULL;
 

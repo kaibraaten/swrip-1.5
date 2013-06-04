@@ -28,7 +28,7 @@
 #include "mud.h"
 #include "character.h"
 
-void jedi_bonus( CHAR_DATA *ch )
+void jedi_bonus( Character *ch )
 {
   if ( number_range( 1 , 100 ) == 1 )
     {
@@ -38,7 +38,7 @@ void jedi_bonus( CHAR_DATA *ch )
     }
 }
 
-void sith_penalty( CHAR_DATA *ch )
+void sith_penalty( Character *ch )
 {
   if ( number_range( 1 , 100 ) == 1 )
     {
@@ -53,10 +53,10 @@ void sith_penalty( CHAR_DATA *ch )
 /*
  * Function to handle the state changing of a triggerobject (lever)  -Thoric
  */
-void pullorpush( CHAR_DATA *ch, OBJ_DATA *obj, bool pull )
+void pullorpush( Character *ch, OBJ_DATA *obj, bool pull )
 {
   char buf[MAX_STRING_LENGTH];
-  CHAR_DATA             *rch;
+  Character             *rch;
   bool           isup;
   ROOM_INDEX_DATA       *room,  *to_room = NULL;
   EXIT_DATA             *pexit, *pexit_rev;
@@ -299,7 +299,7 @@ void pullorpush( CHAR_DATA *ch, OBJ_DATA *obj, bool pull )
     }
 }
 
-void actiondesc( CHAR_DATA *ch, OBJ_DATA *obj, void *vo )
+void actiondesc( Character *ch, OBJ_DATA *obj, void *vo )
 {
   char charbuf[MAX_STRING_LENGTH];
   char roombuf[MAX_STRING_LENGTH];

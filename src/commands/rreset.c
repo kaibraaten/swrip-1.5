@@ -2,7 +2,7 @@
 #include "mud.h"
 #include "character.h"
 
-void do_rreset( CHAR_DATA *ch, char *argument )
+void do_rreset( Character *ch, char *argument )
 {
   ROOM_INDEX_DATA *pRoom;
 

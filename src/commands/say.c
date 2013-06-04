@@ -1,10 +1,10 @@
 #include "character.h"
 #include "mud.h"
 
-void do_say( CHAR_DATA *ch, char *argument )
+void do_say( Character *ch, char *argument )
 {
   char buf[MAX_STRING_LENGTH];
-  CHAR_DATA *vch = NULL;
+  Character *vch = NULL;
   int actflags = ch->act;
 
   if ( argument[0] == '\0' )

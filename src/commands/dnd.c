@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_dnd( CHAR_DATA *ch, char *argument )
+void do_dnd( Character *ch, char *argument )
 {
   if ( !is_npc(ch) && ch->pcdata )
     {

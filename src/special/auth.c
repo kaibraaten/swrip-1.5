@@ -1,10 +1,10 @@
 #include "character.h"
 #include "mud.h"
 
-bool spec_auth( CHAR_DATA *ch )
+bool spec_auth( Character *ch )
 {
-  CHAR_DATA *victim;
-  CHAR_DATA *v_next;
+  Character *victim;
+  Character *v_next;
   char buf[MAX_STRING_LENGTH];
   OBJ_INDEX_DATA *pObjIndex;
   OBJ_DATA *obj;

@@ -13,7 +13,7 @@ extern bool fBootDb;
  *
  * NOTE: Use of this command is not recommended.                -Thoric
  */
-void do_unfoldarea( CHAR_DATA *ch, char *argument )
+void do_unfoldarea( Character *ch, char *argument )
 {
 
   if ( !argument || argument[0] == '\0' )

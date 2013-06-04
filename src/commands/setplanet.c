@@ -2,7 +2,7 @@
 #include "mud.h"
 #include "clan.h"
 
-void do_setplanet( CHAR_DATA *ch, char *argument )
+void do_setplanet( Character *ch, char *argument )
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];

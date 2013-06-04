@@ -1,7 +1,7 @@
 #include "mud.h"
 #include "character.h"
 
-void do_remove( CHAR_DATA *ch, char *argument )
+void do_remove( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   OBJ_DATA *obj = NULL, *obj_next = NULL;

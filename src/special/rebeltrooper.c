@@ -2,10 +2,10 @@
 #include "mud.h"
 #include "clan.h"
 
-bool spec_rebel_trooper( CHAR_DATA *ch )
+bool spec_rebel_trooper( Character *ch )
 {
-  CHAR_DATA *victim;
-  CHAR_DATA *v_next;
+  Character *victim;
+  Character *v_next;
 
   if ( !is_awake(ch) || ch->fighting )
     return FALSE;

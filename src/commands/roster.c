@@ -2,7 +2,7 @@
 #include "mud.h"
 #include "clan.h"
 
-void do_roster( CHAR_DATA *ch, char *argument )
+void do_roster( Character *ch, char *argument )
 {
   if( is_npc( ch ) || !is_clanned( ch )
       || ( str_cmp(ch->name, ch->pcdata->clan->leadership.leader )

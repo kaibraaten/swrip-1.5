@@ -6,10 +6,10 @@
    itself, but this had best be the last command in the MUDprogram
    otherwise ugly stuff will happen */
 
-void do_mppurge( CHAR_DATA *ch, char *argument )
+void do_mppurge( Character *ch, char *argument )
 {
   char       arg[ MAX_INPUT_LENGTH ];
-  CHAR_DATA *victim;
+  Character *victim;
   OBJ_DATA  *obj;
 
   if ( is_affected_by( ch, AFF_CHARM ) )
@@ -26,7 +26,7 @@ void do_mppurge( CHAR_DATA *ch, char *argument )
   if ( arg[0] == '\0' )
     {
       /* 'purge' */
-      CHAR_DATA *vnext;
+      Character *vnext;
 
       for ( victim = ch->in_room->first_person; victim; victim = vnext )
         {

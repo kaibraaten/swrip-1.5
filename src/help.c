@@ -18,7 +18,7 @@ struct HelpFile
 static char *help_fix( char *text );
 static int CompareHelpFiles( const void *one, const void *another );
 
-HelpFile *GetHelp( const CHAR_DATA *ch, char *argument )
+HelpFile *GetHelp( const Character *ch, char *argument )
 {
   char argall[MAX_INPUT_LENGTH];
   char argone[MAX_INPUT_LENGTH];

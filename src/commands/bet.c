@@ -2,7 +2,7 @@
 #include "mud.h"
 #include "arena.h"
 
-void do_bet(CHAR_DATA *ch, char *argument)
+void do_bet(Character *ch, char *argument)
 {
   char arg[MAX_INPUT_LENGTH];
   char buf[MAX_INPUT_LENGTH];

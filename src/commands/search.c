@@ -2,7 +2,7 @@
 #include "mud.h"
 #include "character.h"
 
-void do_search( CHAR_DATA *ch, char *argument )
+void do_search( Character *ch, char *argument )
 {
   char arg  [MAX_INPUT_LENGTH];
   OBJ_DATA *obj;

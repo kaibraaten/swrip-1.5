@@ -10,7 +10,7 @@
 extern CerisMap *HelpFiles;
 extern char *help_greeting;
 
-HelpFile *GetHelp( const CHAR_DATA *ch, char *argument );
+HelpFile *GetHelp( const Character *ch, char *argument );
 void AddHelp( HelpFile *pHelp );
 void UnlinkHelp( HelpFile *pHelp );
 void LoadHelps( void );

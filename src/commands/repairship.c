@@ -4,7 +4,7 @@
 #include "character.h"
 #include "turret.h"
 
-void do_repairship(CHAR_DATA *ch, char *argument )
+void do_repairship(Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   int the_chance, change;

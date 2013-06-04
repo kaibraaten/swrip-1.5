@@ -2,7 +2,7 @@
 #include "mud.h"
 #include "character.h"
 
-void do_prompt( CHAR_DATA *ch, char *argument )
+void do_prompt( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
 

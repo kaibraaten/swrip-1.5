@@ -4,7 +4,7 @@
 
 static void trunc1(char *s, size_t len);
 
-void do_owhere( CHAR_DATA *ch, char *argument )
+void do_owhere( Character *ch, char *argument )
 {
   char buf[MAX_STRING_LENGTH], field[MAX_INPUT_LENGTH];
   char arg[MAX_INPUT_LENGTH];

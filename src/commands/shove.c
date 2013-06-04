@@ -2,13 +2,13 @@
 #include "ships.h"
 #include "mud.h"
 
-void do_shove( CHAR_DATA *ch, char *argument )
+void do_shove( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
   int exit_dir = 0;
   EXIT_DATA *pexit = NULL;
-  CHAR_DATA *victim = NULL;
+  Character *victim = NULL;
   bool nogo = FALSE;
   int shove_chance = 0;
 
@@ -96,7 +96,7 @@ void do_shove( CHAR_DATA *ch, char *argument )
 
               if ( to_room->tunnel > 0 )
                 {
-                  CHAR_DATA *ctmp;
+                  Character *ctmp;
                   int count = 0;
 
                   for ( ctmp = to_room->first_person; ctmp; ctmp = ctmp->next_in_room )
@@ -188,7 +188,7 @@ void do_shove( CHAR_DATA *ch, char *argument )
 
               if ( to_room->tunnel > 0 )
                 {
-                  CHAR_DATA *ctmp;
+                  Character *ctmp;
                   int count = 0;
 
                   for ( ctmp = to_room->first_person; ctmp; ctmp = ctmp->next_in_room )

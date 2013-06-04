@@ -67,7 +67,7 @@ void echo_to_all( short AT_COLOR, const char *argument, short tar )
 
 void echo_to_room( short AT_COLOR, ROOM_INDEX_DATA *room, const char *argument )
 {
-  CHAR_DATA *vic;
+  Character *vic;
 
   if ( room == NULL )
     return;
@@ -81,9 +81,9 @@ void echo_to_room( short AT_COLOR, ROOM_INDEX_DATA *room, const char *argument )
     }
 }
 
-ROOM_INDEX_DATA *find_location( CHAR_DATA *ch, char *arg )
+ROOM_INDEX_DATA *find_location( Character *ch, char *arg )
 {
-  CHAR_DATA *victim;
+  Character *victim;
   OBJ_DATA *obj;
 
   if ( is_number(arg) )
@@ -168,8 +168,8 @@ void save_banlist( void )
  */
 void close_area( AREA_DATA *pArea )
 {
-  CHAR_DATA *ech;
-  CHAR_DATA *ech_next;
+  Character *ech;
+  Character *ech_next;
   OBJ_DATA *eobj;
   OBJ_DATA *eobj_next;
   int icnt;

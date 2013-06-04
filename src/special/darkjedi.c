@@ -1,10 +1,10 @@
 #include "character.h"
 #include "mud.h"
 
-bool spec_dark_jedi( CHAR_DATA *ch )
+bool spec_dark_jedi( Character *ch )
 {
-  CHAR_DATA *victim;
-  CHAR_DATA *v_next;
+  Character *victim;
+  Character *v_next;
   char *spell;
   int sn;
 

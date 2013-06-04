@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_snipe( CHAR_DATA *ch, char *argument )
+void do_snipe( Character *ch, char *argument )
 {
   OBJ_DATA        * wield;
   char              arg[MAX_INPUT_LENGTH];
@@ -11,7 +11,7 @@ void do_snipe( CHAR_DATA *ch, char *argument )
   EXIT_DATA       * pexit;
   ROOM_INDEX_DATA * was_in_room;
   ROOM_INDEX_DATA * to_room;
-  CHAR_DATA       * victim = NULL;
+  Character       * victim = NULL;
   int               the_chance;
   char              buf[MAX_STRING_LENGTH];
   bool              pfound = FALSE;

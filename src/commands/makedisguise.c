@@ -2,7 +2,7 @@
 #include "mud.h"
 #include "character.h"
 
-void do_makedisguise( CHAR_DATA *ch, char *argument )
+void do_makedisguise( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   char arg1[MAX_INPUT_LENGTH];

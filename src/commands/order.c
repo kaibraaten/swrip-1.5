@@ -2,13 +2,13 @@
 #include "mud.h"
 #include "character.h"
 
-void do_order( CHAR_DATA *ch, char *argument )
+void do_order( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   char argbuf[MAX_INPUT_LENGTH];
-  CHAR_DATA *victim = NULL;
-  CHAR_DATA *och = NULL;
-  CHAR_DATA *och_next = NULL;
+  Character *victim = NULL;
+  Character *och = NULL;
+  Character *och_next = NULL;
   bool found = FALSE;
   bool fAll = FALSE;
 

@@ -1,10 +1,10 @@
 #include "mud.h"
 #include "character.h"
 
-bool spec_police_attack( CHAR_DATA *ch )
+bool spec_police_attack( Character *ch )
 {
-  CHAR_DATA *victim;
-  CHAR_DATA *v_next;
+  Character *victim;
+  Character *v_next;
   int vip;
   char buf[MAX_STRING_LENGTH];
 

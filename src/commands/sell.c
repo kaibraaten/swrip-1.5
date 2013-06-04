@@ -2,11 +2,11 @@
 #include "shops.h"
 #include "mud.h"
 
-void do_sell( CHAR_DATA *ch, char *argument )
+void do_sell( Character *ch, char *argument )
 {
   char buf[MAX_STRING_LENGTH];
   char arg[MAX_INPUT_LENGTH];
-  CHAR_DATA *keeper;
+  Character *keeper;
   OBJ_DATA *obj;
   int cost;
   bool spice = FALSE;

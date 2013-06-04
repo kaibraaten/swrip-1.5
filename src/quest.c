@@ -4,9 +4,9 @@
 
 static bool qchance( int num );
 
-void generate_quest(CHAR_DATA *ch, CHAR_DATA *questman)
+void generate_quest(Character *ch, Character *questman)
 {
-  CHAR_DATA *victim;
+  Character *victim;
   MOB_INDEX_DATA *vsearch;
   ROOM_INDEX_DATA *room;
   OBJ_DATA *questitem;
@@ -166,7 +166,7 @@ void generate_quest(CHAR_DATA *ch, CHAR_DATA *questman)
 
 void quest_update(void)
 {
-  CHAR_DATA *ch, *ch_next;
+  Character *ch, *ch_next;
 
   for ( ch = first_char; ch != NULL; ch = ch_next )
     {

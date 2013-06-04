@@ -2,12 +2,12 @@
 #include "shops.h"
 #include "mud.h"
 
-void do_list( CHAR_DATA *ch, char *argument )
+void do_list( Character *ch, char *argument )
 {
   if ( IS_SET(ch->in_room->room_flags, ROOM_PET_SHOP) )
     {
       ROOM_INDEX_DATA *pRoomIndexNext;
-      CHAR_DATA *pet;
+      Character *pet;
       bool found;
 
       pRoomIndexNext = get_room_index( ch->in_room->vnum + 1 );
@@ -41,7 +41,7 @@ void do_list( CHAR_DATA *ch, char *argument )
   else
     {
       char arg[MAX_INPUT_LENGTH];
-      CHAR_DATA *keeper;
+      Character *keeper;
       OBJ_DATA *obj;
       int cost;
       int oref = 0;

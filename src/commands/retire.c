@@ -1,10 +1,10 @@
 #include "character.h"
 #include "mud.h"
 
-void do_retire( CHAR_DATA *ch, char *argument )
+void do_retire( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  CHAR_DATA *victim = NULL;
+  Character *victim = NULL;
 
   one_argument( argument, arg );
 

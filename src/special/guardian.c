@@ -1,12 +1,12 @@
 #include "mud.h"
 #include "character.h"
 
-bool spec_guardian( CHAR_DATA *ch )
+bool spec_guardian( Character *ch )
 {
   char buf[MAX_STRING_LENGTH];
-  CHAR_DATA *victim;
-  CHAR_DATA *v_next;
-  CHAR_DATA *ech;
+  Character *victim;
+  Character *v_next;
+  Character *ech;
   char *crime;
   int max_evil;
 

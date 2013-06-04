@@ -2,10 +2,10 @@
 #include "shops.h"
 #include "mud.h"
 
-void do_value( CHAR_DATA *ch, char *argument )
+void do_value( Character *ch, char *argument )
 {
   char buf[MAX_STRING_LENGTH];
-  CHAR_DATA *keeper;
+  Character *keeper;
   OBJ_DATA *obj;
   int cost;
 

@@ -6,9 +6,9 @@
  * Saw no need for level restrictions on this.
  * Written by Narn, Apr/96
  */
-void do_sober( CHAR_DATA *ch, char *argument )
+void do_sober( Character *ch, char *argument )
 {
-  CHAR_DATA *victim;
+  Character *victim;
   char arg1 [MAX_INPUT_LENGTH];
 
   smash_tilde( argument );

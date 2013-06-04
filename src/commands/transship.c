@@ -2,7 +2,7 @@
 #include "mud.h"
 #include "ships.h"
 
-void do_transship(CHAR_DATA *ch, char *argument)
+void do_transship(Character *ch, char *argument)
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];

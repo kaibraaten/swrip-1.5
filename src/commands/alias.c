@@ -4,7 +4,7 @@
 
 static void SendAliasToPager( void *element, void *userData );
 
-void do_alias( CHAR_DATA *ch, char *argument )
+void do_alias( Character *ch, char *argument )
 {
   Alias *pal = NULL;
   char arg[MAX_INPUT_LENGTH];
@@ -62,7 +62,7 @@ void do_alias( CHAR_DATA *ch, char *argument )
 
 static void SendAliasToPager( void *element, void *userData )
 {
-  CHAR_DATA *ch = (CHAR_DATA*) userData;
+  Character *ch = (Character*) userData;
   Alias *alias = (Alias*) element;
 
   pager_printf( ch, "%-20s %s\r\n", GetAliasName( alias ), GetAliasValue( alias ) );

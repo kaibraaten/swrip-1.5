@@ -4,12 +4,12 @@
 
 extern char *spell_target_name;
 
-ch_ret spell_ventriloquate( int sn, int level, CHAR_DATA *ch, void *vo )
+ch_ret spell_ventriloquate( int sn, int level, Character *ch, void *vo )
 {
   char buf1[MAX_STRING_LENGTH];
   char buf2[MAX_STRING_LENGTH];
   char speaker[MAX_INPUT_LENGTH];
-  CHAR_DATA *vch;
+  Character *vch;
 
   spell_target_name = one_argument( spell_target_name, speaker );
 

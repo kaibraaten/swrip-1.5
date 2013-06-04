@@ -3,9 +3,9 @@
 
 extern char *spell_target_name;
 
-ch_ret spell_dream( int sn, int level, CHAR_DATA *ch, void *vo )
+ch_ret spell_dream( int sn, int level, Character *ch, void *vo )
 {
-  CHAR_DATA *victim;
+  Character *victim;
   char arg[MAX_INPUT_LENGTH];
 
   spell_target_name = one_argument(spell_target_name, arg);

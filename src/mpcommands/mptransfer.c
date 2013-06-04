@@ -4,14 +4,14 @@
 /* lets the mobile transfer people.  the all argument transfers
    everyone in the current room to the specified location */
 
-void do_mptransfer( CHAR_DATA *ch, char *argument )
+void do_mptransfer( Character *ch, char *argument )
 {
   char             arg1[ MAX_INPUT_LENGTH ];
   char             arg2[ MAX_INPUT_LENGTH ];
   char buf[MAX_STRING_LENGTH];
   ROOM_INDEX_DATA *location;
-  CHAR_DATA       *victim;
-  CHAR_DATA       *nextinroom;
+  Character       *victim;
+  Character       *nextinroom;
 
   if ( is_affected_by( ch, AFF_CHARM ) )
     return;

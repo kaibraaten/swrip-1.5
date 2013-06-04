@@ -2,7 +2,7 @@
 
 static void write_spaceobject_list( void );
 
-void do_makespaceobject( CHAR_DATA *ch, char *argument )
+void do_makespaceobject( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   char filename[256];

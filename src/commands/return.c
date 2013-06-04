@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_return( CHAR_DATA *ch, char *argument )
+void do_return( Character *ch, char *argument )
 {
   if ( !ch->desc )
     return;

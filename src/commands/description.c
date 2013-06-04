@@ -2,7 +2,7 @@
 #include "mud.h"
 #include "editor.h"
 
-void do_description( CHAR_DATA *ch, char *argument )
+void do_description( Character *ch, char *argument )
 {
   if ( is_npc( ch ) )
     {

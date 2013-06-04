@@ -50,7 +50,7 @@ static void start_game();
 static void silent_end();
 static void write_fame_list(void);
 static void write_one_fame_node(FILE * fp, struct hall_of_fame_element * node);
-static void find_bet_winners(CHAR_DATA *winner);
+static void find_bet_winners(Character *winner);
 static void reset_bets();
 
 struct hall_of_fame_element *fame_list = NULL;
@@ -126,7 +126,7 @@ void start_arena()
 
 void start_game()
 {
-  CHAR_DATA *i;
+  Character *i;
   DESCRIPTOR_DATA *d;
 
   for (d = first_descriptor; d; d = d->next)
@@ -192,7 +192,7 @@ void find_game_winner()
 {
   char buf[MAX_INPUT_LENGTH];
   char buf2[MAX_INPUT_LENGTH];
-  CHAR_DATA *i;
+  Character *i;
   DESCRIPTOR_DATA *d;
   struct hall_of_fame_element *fame_node;
 
@@ -283,7 +283,7 @@ void silent_end()
 void do_end_game()
 {
   char buf[MAX_INPUT_LENGTH];
-  CHAR_DATA *i;
+  Character *i;
   DESCRIPTOR_DATA *d;
 
   for (d = first_descriptor; d; d = d->next)
@@ -317,7 +317,7 @@ void do_end_game()
 
 int num_in_arena()
 {
-  CHAR_DATA *i;
+  Character *i;
   DESCRIPTOR_DATA *d;
   int num = 0;
 
@@ -387,10 +387,10 @@ void write_one_fame_node(FILE * fp, struct hall_of_fame_element * node)
     }
 }
 
-void find_bet_winners(CHAR_DATA *winner)
+void find_bet_winners(Character *winner)
 {
   DESCRIPTOR_DATA *d;
-  CHAR_DATA *wch;
+  Character *wch;
 
   char buf1[MAX_INPUT_LENGTH];
 
@@ -419,7 +419,7 @@ void find_bet_winners(CHAR_DATA *winner)
  */
 void reset_bets()
 {
-  CHAR_DATA *ch;
+  Character *ch;
 
   for (ch = first_char; ch; ch = ch->next )
     {

@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_enter( CHAR_DATA *ch, char *argument )
+void do_enter( Character *ch, char *argument )
 {
   EXIT_DATA *pexit = NULL;
 

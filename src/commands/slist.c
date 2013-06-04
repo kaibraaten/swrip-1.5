@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_slist( CHAR_DATA *ch, char *argument )
+void do_slist( Character *ch, char *argument )
 {
   int sn, i;
   char skn[MAX_INPUT_LENGTH];

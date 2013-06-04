@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_commands( CHAR_DATA *ch, char *argument )
+void do_commands( Character *ch, char *argument )
 {
   int col;
   bool found;

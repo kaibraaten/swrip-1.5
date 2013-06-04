@@ -1,10 +1,10 @@
 #include "mud.h"
 #include "character.h"
 
-void do_zap( CHAR_DATA *ch, char *argument )
+void do_zap( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  CHAR_DATA *victim;
+  Character *victim;
   OBJ_DATA *wand;
   OBJ_DATA *obj;
   ch_ret retcode;

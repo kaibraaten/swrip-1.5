@@ -3,10 +3,10 @@
 
 /* lets the mobile kill any player or mobile without murder*/
 
-void do_mpkill( CHAR_DATA *ch, char *argument )
+void do_mpkill( Character *ch, char *argument )
 {
   char      arg[ MAX_INPUT_LENGTH ];
-  CHAR_DATA *victim;
+  Character *victim;
 
   if (!ch )
     {

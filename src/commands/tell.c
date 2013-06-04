@@ -1,14 +1,14 @@
 #include "character.h"
 #include "mud.h"
 
-void do_tell( CHAR_DATA *ch, char *argument )
+void do_tell( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   char buf[MAX_INPUT_LENGTH];
-  CHAR_DATA *victim = NULL;
+  Character *victim = NULL;
   int position = POS_STANDING;
-  CHAR_DATA *switched_victim = NULL;
-  CHAR_DATA *vch = NULL;
+  Character *switched_victim = NULL;
+  Character *vch = NULL;
   bool sameroom = FALSE;
 
   if ( IS_SET( ch->deaf, CHANNEL_TELLS ) && !is_immortal( ch ) )

@@ -1,14 +1,14 @@
 #include "character.h"
 #include "mud.h"
 
-static CHAR_DATA *make_poly_mob(const CHAR_DATA *ch, int vnum);
+static Character *make_poly_mob(const Character *ch, int vnum);
 
 extern char *spell_target_name;
 
-ch_ret spell_polymorph( int sn, int level, CHAR_DATA *ch, void *vo )
+ch_ret spell_polymorph( int sn, int level, Character *ch, void *vo )
 {
   int poly_vnum;
-  CHAR_DATA *poly_mob;
+  Character *poly_mob;
 
   if (is_npc(ch))
     {
@@ -51,9 +51,9 @@ ch_ret spell_polymorph( int sn, int level, CHAR_DATA *ch, void *vo )
   return rNONE;
 }
 
-static CHAR_DATA *make_poly_mob(const CHAR_DATA *ch, int vnum)
+static Character *make_poly_mob(const Character *ch, int vnum)
 {
-  CHAR_DATA *mob;
+  Character *mob;
   MOB_INDEX_DATA *pMobIndex;
 
   if(!ch)

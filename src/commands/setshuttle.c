@@ -7,7 +7,7 @@
 #include "shuttle.h"
 #include "character.h"
 
-void do_setshuttle(CHAR_DATA * ch, char * argument)
+void do_setshuttle(Character * ch, char * argument)
 {
   SHUTTLE_DATA * shuttle;
   char arg1[MIL];

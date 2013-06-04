@@ -3,9 +3,9 @@
 
 extern char *spell_target_name;
 
-ch_ret spell_possess( int sn, int level, CHAR_DATA *ch, void *vo )
+ch_ret spell_possess( int sn, int level, Character *ch, void *vo )
 {
-  CHAR_DATA *victim;
+  Character *victim;
   char buf[MAX_STRING_LENGTH];
   AFFECT_DATA af;
   SKILLTYPE *skill = get_skilltype(sn);

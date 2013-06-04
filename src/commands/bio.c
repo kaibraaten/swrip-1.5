@@ -2,7 +2,7 @@
 #include "mud.h"
 #include "editor.h"
 
-void do_bio( CHAR_DATA *ch, char *argument )
+void do_bio( Character *ch, char *argument )
 {
   if ( is_npc( ch ) )
     {

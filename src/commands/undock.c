@@ -3,7 +3,7 @@
 #include "ships.h"
 #include "character.h"
 
-void do_undock(CHAR_DATA *ch, char *argument)
+void do_undock(Character *ch, char *argument)
 {
   char arg[MAX_INPUT_LENGTH];
 

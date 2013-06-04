@@ -4,7 +4,7 @@
 /* Re-worked by Sadiq to allow PCs to scribe up to 3 spells on a single *
  * scroll. Second and third spells progressive increase the chance of   *
  * destroying the scroll.  --Sadiq                                      */
-void do_scribe( CHAR_DATA *ch, char *argument )
+void do_scribe( Character *ch, char *argument )
 {
   OBJ_DATA *scroll;
   int sn;

@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_spaceobjects( CHAR_DATA *ch, char *argument )
+void do_spaceobjects( Character *ch, char *argument )
 {
   SPACE_DATA *spaceobject;
   int count = 0;

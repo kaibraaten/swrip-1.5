@@ -2,7 +2,7 @@
 #include "character.h"
 #include "help.h"
 
-void do_nohelps(CHAR_DATA *ch, char *argument)
+void do_nohelps(Character *ch, char *argument)
 {
   CMDTYPE *command;
   AREA_DATA *tArea;

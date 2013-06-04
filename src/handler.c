@@ -26,10 +26,10 @@
 #include "mud.h"
 #include "track.h"
 
-extern CHAR_DATA *gch_prev;
+extern Character *gch_prev;
 extern OBJ_DATA *gobj_prev;
 
-CHAR_DATA *cur_char = NULL;
+Character *cur_char = NULL;
 ROOM_INDEX_DATA *cur_room = NULL;
 bool cur_char_died = FALSE;
 ch_ret global_retcode = rNONE;
@@ -41,8 +41,8 @@ obj_ret global_objcode = rNONE;
 
 OBJ_DATA *group_object( OBJ_DATA *obj1, OBJ_DATA *obj2 );
 
-static void room_explode( OBJ_DATA *obj , CHAR_DATA *xch, ROOM_INDEX_DATA *room );
-static void room_explode_1( OBJ_DATA *obj , CHAR_DATA *xch, ROOM_INDEX_DATA *room , int blast );
+static void room_explode( OBJ_DATA *obj , Character *xch, ROOM_INDEX_DATA *room );
+static void room_explode_1( OBJ_DATA *obj , Character *xch, ROOM_INDEX_DATA *room , int blast );
 static void room_explode_2( ROOM_INDEX_DATA *room , int blast );
 
 void explode( OBJ_DATA *obj )
@@ -50,7 +50,7 @@ void explode( OBJ_DATA *obj )
   if ( obj->armed_by )
     {
       ROOM_INDEX_DATA *room;
-      CHAR_DATA *xch;
+      Character *xch;
       bool held = FALSE;
       OBJ_DATA *objcont;
       objcont = obj;
@@ -84,17 +84,17 @@ void explode( OBJ_DATA *obj )
   make_scraps(obj);
 }
 
-void room_explode( OBJ_DATA *obj, CHAR_DATA *xch, ROOM_INDEX_DATA *room )
+void room_explode( OBJ_DATA *obj, Character *xch, ROOM_INDEX_DATA *room )
 {
   int blast = (int) (obj->value[1] / 500) ;
   room_explode_1( obj , xch, room , blast );
   room_explode_2( room , blast );
 }
 
-void room_explode_1( OBJ_DATA *obj, CHAR_DATA *xch, ROOM_INDEX_DATA *room, int blast )
+void room_explode_1( OBJ_DATA *obj, Character *xch, ROOM_INDEX_DATA *room, int blast )
 {
-  CHAR_DATA *rch;
-  CHAR_DATA *rnext;
+  Character *rch;
+  Character *rnext;
   OBJ_DATA  *robj;
   OBJ_DATA  *robj_next;
   int dam;
@@ -195,7 +195,7 @@ int exp_level( short level)
 /*
  * See if a player/mob can take a piece of prototype eq         -Thoric
  */
-bool can_take_proto( const CHAR_DATA *ch )
+bool can_take_proto( const Character *ch )
 {
   if ( is_immortal(ch) )
     return TRUE;
@@ -208,7 +208,7 @@ bool can_take_proto( const CHAR_DATA *ch )
 /*
  * Apply or remove an affect to a character.
  */
-void affect_modify( CHAR_DATA *ch, AFFECT_DATA *paf, bool fAdd )
+void affect_modify( Character *ch, AFFECT_DATA *paf, bool fAdd )
 {
   OBJ_DATA *wield;
   int mod;
@@ -487,7 +487,7 @@ void affect_modify( CHAR_DATA *ch, AFFECT_DATA *paf, bool fAdd )
 /*
  * Give an affect to a char.
  */
-void affect_to_char( CHAR_DATA *ch, AFFECT_DATA *paf )
+void affect_to_char( Character *ch, AFFECT_DATA *paf )
 {
   AFFECT_DATA *paf_new;
 
@@ -519,7 +519,7 @@ void affect_to_char( CHAR_DATA *ch, AFFECT_DATA *paf )
 /*
  * Remove an affect from a char.
  */
-void affect_remove( CHAR_DATA *ch, AFFECT_DATA *paf )
+void affect_remove( Character *ch, AFFECT_DATA *paf )
 {
   if ( !ch->first_affect )
     {
@@ -537,7 +537,7 @@ void affect_remove( CHAR_DATA *ch, AFFECT_DATA *paf )
 /*
  * Strip all affects of a given sn.
  */
-void affect_strip( CHAR_DATA *ch, int sn )
+void affect_strip( Character *ch, int sn )
 {
   AFFECT_DATA *paf;
   AFFECT_DATA *paf_next;
@@ -557,7 +557,7 @@ void affect_strip( CHAR_DATA *ch, int sn )
  * Limitations put in place by Thoric, they may be high... but at least
  * they're there :)
  */
-void affect_join( CHAR_DATA *ch, AFFECT_DATA *paf )
+void affect_join( Character *ch, AFFECT_DATA *paf )
 {
   AFFECT_DATA *paf_old;
 
@@ -581,7 +581,7 @@ void affect_join( CHAR_DATA *ch, AFFECT_DATA *paf )
 /*
  * Move a char out of a room.
  */
-void char_from_room( CHAR_DATA *ch )
+void char_from_room( Character *ch )
 {
   OBJ_DATA *obj;
 
@@ -623,7 +623,7 @@ void char_from_room( CHAR_DATA *ch )
 /*
  * Move a char into a room.
  */
-void char_to_room( CHAR_DATA *ch, ROOM_INDEX_DATA *pRoomIndex )
+void char_to_room( Character *ch, ROOM_INDEX_DATA *pRoomIndex )
 {
   OBJ_DATA *obj;
 
@@ -686,7 +686,7 @@ void char_to_room( CHAR_DATA *ch, ROOM_INDEX_DATA *pRoomIndex )
 /*
  * Give an obj to a char.
  */
-OBJ_DATA *obj_to_char( OBJ_DATA *obj, CHAR_DATA *ch )
+OBJ_DATA *obj_to_char( OBJ_DATA *obj, Character *ch )
 {
   OBJ_DATA *otmp;
   OBJ_DATA *oret = obj;
@@ -751,7 +751,7 @@ OBJ_DATA *obj_to_char( OBJ_DATA *obj, CHAR_DATA *ch )
  */
 void obj_from_char( OBJ_DATA *obj )
 {
-  CHAR_DATA *ch;
+  Character *ch;
 
   if ( ( ch = obj->carried_by ) == NULL )
     {
@@ -780,7 +780,7 @@ void obj_from_char( OBJ_DATA *obj )
 
 int count_users(const OBJ_DATA *obj)
 {
-  const CHAR_DATA *fch = NULL;
+  const Character *fch = NULL;
   int count = 0;
 
   if (obj->in_room == NULL)
@@ -844,7 +844,7 @@ int count_obj_list( const OBJ_INDEX_DATA *pObjIndex, const OBJ_DATA *list )
 /*
  * Move an obj out of a room.
  */
-void write_corpses( CHAR_DATA *ch, char *name );
+void write_corpses( Character *ch, char *name );
 
 int falling = 0;
 
@@ -1061,9 +1061,9 @@ void extract_obj( OBJ_DATA *obj )
 /*
  * Extract a char from the world.
  */
-void extract_char( CHAR_DATA *ch, bool fPull )
+void extract_char( Character *ch, bool fPull )
 {
-  CHAR_DATA *wch;
+  Character *wch;
   OBJ_DATA *obj;
   char buf[MAX_STRING_LENGTH];
   ROOM_INDEX_DATA *location;
@@ -1196,16 +1196,16 @@ void extract_char( CHAR_DATA *ch, bool fPull )
 /*
  * Find a char in the room.
  */
-CHAR_DATA *get_char_room( const CHAR_DATA *ch, const char *argument )
+Character *get_char_room( const Character *ch, const char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  CHAR_DATA *rch;
+  Character *rch;
   int number, count, vnum;
 
   number = number_argument( argument, arg );
 
   if ( !str_cmp( arg, "self" ) )
-    return (CHAR_DATA*)ch;
+    return (Character*)ch;
 
   if ( get_trust(ch) >= LEVEL_SAVIOR && is_number( arg ) )
     vnum = atoi( arg );
@@ -1255,17 +1255,17 @@ CHAR_DATA *get_char_room( const CHAR_DATA *ch, const char *argument )
 /*
  * Find a char in the world.
  */
-CHAR_DATA *get_char_world( const CHAR_DATA *ch, const char *argument )
+Character *get_char_world( const Character *ch, const char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  CHAR_DATA *wch;
+  Character *wch;
   int number, count, vnum;
 
   number = number_argument( argument, arg );
   count  = 0;
 
   if ( !str_cmp( arg, "self" ) )
-    return (CHAR_DATA*)ch;
+    return (Character*)ch;
 
   /*
    * Allow reference by vnum for saints+                        -Thoric
@@ -1363,7 +1363,7 @@ OBJ_DATA *get_obj_type( const OBJ_INDEX_DATA *pObjIndex )
 /*
  * Find an obj in a list.
  */
-OBJ_DATA *get_obj_list( const CHAR_DATA *ch, const char *argument, OBJ_DATA *list )
+OBJ_DATA *get_obj_list( const Character *ch, const char *argument, OBJ_DATA *list )
 {
   char arg[MAX_INPUT_LENGTH];
   OBJ_DATA *obj = NULL;
@@ -1392,7 +1392,7 @@ OBJ_DATA *get_obj_list( const CHAR_DATA *ch, const char *argument, OBJ_DATA *lis
 /*
  * Find an obj in a list...going the other way                  -Thoric
  */
-OBJ_DATA *get_obj_list_rev( const CHAR_DATA *ch, const char *argument, OBJ_DATA *list )
+OBJ_DATA *get_obj_list_rev( const Character *ch, const char *argument, OBJ_DATA *list )
 {
   char arg[MAX_INPUT_LENGTH];
   OBJ_DATA *obj;
@@ -1422,7 +1422,7 @@ OBJ_DATA *get_obj_list_rev( const CHAR_DATA *ch, const char *argument, OBJ_DATA 
 /*
  * Find an obj in the room or in inventory.
  */
-OBJ_DATA *get_obj_here( const CHAR_DATA *ch, const char *argument )
+OBJ_DATA *get_obj_here( const Character *ch, const char *argument )
 {
   OBJ_DATA *obj;
 
@@ -1445,7 +1445,7 @@ OBJ_DATA *get_obj_here( const CHAR_DATA *ch, const char *argument )
 /*
  * Find an obj in the world.
  */
-OBJ_DATA *get_obj_world( const CHAR_DATA *ch, const char *argument )
+OBJ_DATA *get_obj_world( const Character *ch, const char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   OBJ_DATA *obj;
@@ -1495,7 +1495,7 @@ OBJ_DATA *get_obj_world( const CHAR_DATA *ch, const char *argument )
  * Generic get obj function that supports optional containers.  -Thoric
  * currently only used for "eat" and "quaff".
  */
-OBJ_DATA *find_obj( CHAR_DATA *ch, const char *orig_argument, bool carryonly )
+OBJ_DATA *find_obj( Character *ch, const char *orig_argument, bool carryonly )
 {
   char argument_buffer[MAX_INPUT_LENGTH];
   char *argument = argument_buffer;
@@ -1616,9 +1616,9 @@ bool room_is_dark( const ROOM_INDEX_DATA *pRoomIndex )
 /*
  * True if room is private.
  */
-bool room_is_private( const CHAR_DATA *ch, const ROOM_INDEX_DATA *pRoomIndex )
+bool room_is_private( const Character *ch, const ROOM_INDEX_DATA *pRoomIndex )
 {
-  CHAR_DATA *rch;
+  Character *rch;
   int count;
 
   if ( !ch )
@@ -1844,7 +1844,7 @@ const char *magic_bit_name( int magic_flags )
 /*
  * Set off a trap (obj) upon character (ch)                     -Thoric
  */
-ch_ret spring_trap( CHAR_DATA *ch, OBJ_DATA *obj )
+ch_ret spring_trap( Character *ch, OBJ_DATA *obj )
 {
   int dam;
   int typ;
@@ -1939,7 +1939,7 @@ ch_ret spring_trap( CHAR_DATA *ch, OBJ_DATA *obj )
 /*
  * Check an object for a trap                                   -Thoric
  */
-ch_ret check_for_trap( CHAR_DATA *ch, const OBJ_DATA *obj, int flag )
+ch_ret check_for_trap( Character *ch, const OBJ_DATA *obj, int flag )
 {
   OBJ_DATA *check;
   ch_ret retcode = rNONE;
@@ -1963,7 +1963,7 @@ ch_ret check_for_trap( CHAR_DATA *ch, const OBJ_DATA *obj, int flag )
 /*
  * Check the room for a trap                                    -Thoric
  */
-ch_ret check_room_for_traps( CHAR_DATA *ch, int flag )
+ch_ret check_room_for_traps( Character *ch, int flag )
 {
   OBJ_DATA *check;
   ch_ret retcode = rNONE;
@@ -2180,7 +2180,7 @@ void clean_resets( AREA_DATA *tarea )
 /*
  * Show an affect verbosely to a character                      -Thoric
  */
-void showaffect( const CHAR_DATA *ch, const AFFECT_DATA *paf )
+void showaffect( const Character *ch, const AFFECT_DATA *paf )
 {
   char buf[MAX_STRING_LENGTH];
   int x;
@@ -2298,7 +2298,7 @@ void clean_obj_queue()
 /*
  * Set the current global character to ch                       -Thoric
  */
-void set_cur_char( CHAR_DATA *ch )
+void set_cur_char( Character *ch )
 {
   cur_char         = ch;
   cur_char_died  = FALSE;
@@ -2309,9 +2309,9 @@ void set_cur_char( CHAR_DATA *ch )
 /*
  * Check to see if ch died recently                             -Thoric
  */
-bool char_died( const CHAR_DATA *ch )
+bool char_died( const Character *ch )
 {
-  EXTRACT_CHAR_DATA *ccd;
+  ExtractedCharacter *ccd;
 
   if ( ch == cur_char && cur_char_died )
     return TRUE;
@@ -2326,16 +2326,16 @@ bool char_died( const CHAR_DATA *ch )
 /*
  * Add ch to the queue of recently extracted characters         -Thoric
  */
-void queue_extracted_char( CHAR_DATA *ch, bool extract )
+void queue_extracted_char( Character *ch, bool extract )
 {
-  EXTRACT_CHAR_DATA *ccd;
+  ExtractedCharacter *ccd;
 
   if ( !ch )
     {
       bug( "queue_extracted char: ch = NULL", 0 );
       return;
     }
-  CREATE( ccd, EXTRACT_CHAR_DATA, 1 );
+  CREATE( ccd, ExtractedCharacter, 1 );
   ccd->ch                       = ch;
   ccd->room                     = ch->in_room;
   ccd->extract          = extract;
@@ -2353,7 +2353,7 @@ void queue_extracted_char( CHAR_DATA *ch, bool extract )
  */
 void clean_char_queue()
 {
-  EXTRACT_CHAR_DATA *ccd;
+  ExtractedCharacter *ccd;
 
   for ( ccd = extracted_char_queue; ccd; ccd = extracted_char_queue )
     {
@@ -2369,7 +2369,7 @@ void clean_char_queue()
  * Add a timer to ch                                            -Thoric
  * Support for "call back" time delayed commands
  */
-void add_timer( CHAR_DATA *ch, short type, short count, DO_FUN *fun, int value )
+void add_timer( Character *ch, short type, short count, DO_FUN *fun, int value )
 {
   TIMER *timer;
 
@@ -2392,7 +2392,7 @@ void add_timer( CHAR_DATA *ch, short type, short count, DO_FUN *fun, int value )
     }
 }
 
-TIMER *get_timerptr( const CHAR_DATA *ch, short type )
+TIMER *get_timerptr( const Character *ch, short type )
 {
   TIMER *timer;
 
@@ -2403,7 +2403,7 @@ TIMER *get_timerptr( const CHAR_DATA *ch, short type )
   return NULL;
 }
 
-short get_timer( const CHAR_DATA *ch, short type )
+short get_timer( const Character *ch, short type )
 {
   TIMER *timer;
 
@@ -2413,7 +2413,7 @@ short get_timer( const CHAR_DATA *ch, short type )
     return 0;
 }
 
-void extract_timer( CHAR_DATA *ch, TIMER *timer )
+void extract_timer( Character *ch, TIMER *timer )
 {
   if ( !timer )
     {
@@ -2426,7 +2426,7 @@ void extract_timer( CHAR_DATA *ch, TIMER *timer )
   return;
 }
 
-void remove_timer( CHAR_DATA *ch, short type )
+void remove_timer( Character *ch, short type )
 {
   TIMER *timer;
 
@@ -2438,7 +2438,7 @@ void remove_timer( CHAR_DATA *ch, short type )
     extract_timer( ch, timer );
 }
 
-bool in_soft_range( const CHAR_DATA *ch, const AREA_DATA *tarea )
+bool in_soft_range( const Character *ch, const AREA_DATA *tarea )
 {
   if ( is_immortal(ch) )
     return TRUE;
@@ -2450,7 +2450,7 @@ bool in_soft_range( const CHAR_DATA *ch, const AREA_DATA *tarea )
     return FALSE;
 }
 
-bool in_hard_range( const CHAR_DATA *ch, const AREA_DATA *tarea )
+bool in_hard_range( const Character *ch, const AREA_DATA *tarea )
 {
   if ( is_immortal(ch) )
     return TRUE;
@@ -2465,7 +2465,7 @@ bool in_hard_range( const CHAR_DATA *ch, const AREA_DATA *tarea )
 /*
  * Scryn, standard luck check 2/2/96
  */
-bool chance( const CHAR_DATA *ch, short percent )
+bool chance( const Character *ch, short percent )
 {
   short ms;
 
@@ -2505,7 +2505,7 @@ bool chance( const CHAR_DATA *ch, short percent )
     return FALSE;
 }
 
-bool chance_attrib( const CHAR_DATA *ch, short percent, short attrib )
+bool chance_attrib( const Character *ch, short percent, short attrib )
 {
   if (!ch)
     {
@@ -2674,7 +2674,7 @@ void separate_obj( OBJ_DATA *obj )
 bool empty_obj( OBJ_DATA *obj, OBJ_DATA *destobj, ROOM_INDEX_DATA *destroom )
 {
   OBJ_DATA *otmp, *otmp_next;
-  CHAR_DATA *ch = obj->carried_by;
+  Character *ch = obj->carried_by;
   bool movedsome = FALSE;
 
   if ( !obj )
@@ -2793,7 +2793,7 @@ bool economy_has( const AREA_DATA *tarea, int gold )
  * Makes sure mob doesn't get more than 10% of that area's gold,
  * and reduces area economy by the amount of gold given to the mob
  */
-void economize_mobgold( CHAR_DATA *mob )
+void economize_mobgold( Character *mob )
 {
   int gold;
   AREA_DATA *tarea;

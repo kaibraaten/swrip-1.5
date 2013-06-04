@@ -2,7 +2,7 @@
 #include "mud.h"
 #include "clan.h"
 
-void do_clan_withdraw( CHAR_DATA *ch, char *argument )
+void do_clan_withdraw( Character *ch, char *argument )
 {
   Clan *clan = NULL;
   long amount = 0;

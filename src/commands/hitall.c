@@ -1,12 +1,12 @@
 #include "mud.h"
 #include "character.h"
 
-static bool is_legal_kill(CHAR_DATA *ch, CHAR_DATA *vch);
+static bool is_legal_kill(Character *ch, Character *vch);
 
-void do_hitall( CHAR_DATA *ch, char *argument )
+void do_hitall( Character *ch, char *argument )
 {
-  CHAR_DATA *vch;
-  CHAR_DATA *vch_next;
+  Character *vch;
+  Character *vch_next;
   short nvict = 0;
   short nhit = 0;
   short percent;
@@ -68,7 +68,7 @@ void do_hitall( CHAR_DATA *ch, char *argument )
     learn_from_failure(ch, gsn_hitall);
 }
 
-static bool is_legal_kill(CHAR_DATA *ch, CHAR_DATA *vch)
+static bool is_legal_kill(Character *ch, Character *vch)
 {
   if ( is_npc(ch) || is_npc(vch) )
     return TRUE;

@@ -31,7 +31,7 @@
 #include "character.h"
 #include "mud.h"
 
-bool check_social( CHAR_DATA *ch, char *command, char *argument );
+bool check_social( Character *ch, char *command, char *argument );
 
 /*
  * Log-all switch.
@@ -45,7 +45,7 @@ SOCIALTYPE *social_index[27];   /* hash table for socials   */
 /*
  * Character not in position for command?
  */
-bool check_pos( CHAR_DATA *ch, int position )
+bool check_pos( Character *ch, int position )
 {
   if ( ch->position < position )
     {
@@ -95,7 +95,7 @@ extern char lastplayercmd[MAX_INPUT_LENGTH*2];
 
 char multicommand[MAX_INPUT_LENGTH];
 
-char  * parse_target( CHAR_DATA *ch, char *oldstring )
+char  * parse_target( Character *ch, char *oldstring )
 {
   const         char    *str;
   int           count = 0;
@@ -172,7 +172,7 @@ char *get_multi_command( DESCRIPTOR_DATA *d, char *argument )
 }
 
 
-void interpret( CHAR_DATA *ch, char *argument )
+void interpret( Character *ch, char *argument )
 {
   char command[MAX_INPUT_LENGTH];
   char logline[MAX_INPUT_LENGTH];
@@ -495,10 +495,10 @@ SOCIALTYPE *find_social( char *command )
   return NULL;
 }
 
-bool check_social( CHAR_DATA *ch, char *command, char *argument )
+bool check_social( Character *ch, char *command, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  CHAR_DATA *victim;
+  Character *victim;
   SOCIALTYPE *social;
 
   if ( (social=find_social(command)) == NULL )
@@ -610,7 +610,7 @@ bool check_social( CHAR_DATA *ch, char *command, char *argument )
   return TRUE;
 }
 
-void send_timer(struct timerset *vtime, CHAR_DATA *ch)
+void send_timer(struct timerset *vtime, Character *ch)
 {
   struct timeval ntime;
   int carry;

@@ -1,6 +1,6 @@
 #include "mud.h"
 
-void do_allow( CHAR_DATA *ch, char *argument )
+void do_allow( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   BAN_DATA *pban;

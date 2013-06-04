@@ -2,7 +2,7 @@
 #include "mud.h"
 #include "character.h"
 
-void do_reset( CHAR_DATA *ch, char *argument )
+void do_reset( Character *ch, char *argument )
 {
   AREA_DATA *pArea = NULL;
   char arg[MAX_INPUT_LENGTH];

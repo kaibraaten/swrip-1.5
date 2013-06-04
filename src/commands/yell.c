@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_yell( CHAR_DATA *ch, char *argument )
+void do_yell( Character *ch, char *argument )
 {
   if (is_not_authed(ch))
     {

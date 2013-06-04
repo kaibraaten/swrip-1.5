@@ -1,12 +1,12 @@
 #include "mud.h"
 #include "character.h"
 
-void do_reply( CHAR_DATA *ch, char *argument )
+void do_reply( Character *ch, char *argument )
 {
   char buf[MAX_STRING_LENGTH];
-  CHAR_DATA *victim = NULL;
+  Character *victim = NULL;
   int position = POS_STANDING;
-  CHAR_DATA *vch = NULL;
+  Character *vch = NULL;
   bool sameroom = FALSE;
 
   REMOVE_BIT( ch->deaf, CHANNEL_TELLS );

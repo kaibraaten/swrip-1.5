@@ -1,11 +1,11 @@
 #include "character.h"
 #include "mud.h"
 
-void do_bestow( CHAR_DATA *ch, char *argument )
+void do_bestow( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   char buf[MAX_STRING_LENGTH];
-  CHAR_DATA *victim;
+  Character *victim;
 
   argument = one_argument( argument, arg );
 

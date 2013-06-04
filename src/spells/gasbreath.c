@@ -1,10 +1,10 @@
 #include "character.h"
 #include "mud.h"
 
-ch_ret spell_gas_breath( int sn, int level, CHAR_DATA *ch, void *vo )
+ch_ret spell_gas_breath( int sn, int level, Character *ch, void *vo )
 {
-  CHAR_DATA *vch;
-  CHAR_DATA *vch_next;
+  Character *vch;
+  Character *vch_next;
   int dam;
   int hpch;
   bool ch_died;

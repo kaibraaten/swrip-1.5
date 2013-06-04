@@ -33,13 +33,13 @@ typedef struct Alias Alias;
 
 DECLARE_DO_FUN( do_alias );
 
-void FreeAliases( CHAR_DATA *ch );
-bool CheckAlias( CHAR_DATA *ch, char *command, char *argument );
-Alias *FindAlias( const CHAR_DATA *ch, const char *argument );
-CerisList *GetAliases( const CHAR_DATA *ch );
-void AddAlias( CHAR_DATA *ch, Alias *alias );
-void RemoveAlias( CHAR_DATA *ch, Alias *alias );
-void AllocateAliasList( CHAR_DATA *ch );
+void FreeAliases( Character *ch );
+bool CheckAlias( Character *ch, char *command, char *argument );
+Alias *FindAlias( const Character *ch, const char *argument );
+CerisList *GetAliases( const Character *ch );
+void AddAlias( Character *ch, Alias *alias );
+void RemoveAlias( Character *ch, Alias *alias );
+void AllocateAliasList( Character *ch );
 const char *GetAliasName( const Alias *alias );
 const char *GetAliasValue( const Alias *alias );
 void SetAliasValue( Alias *alias, const char *value );

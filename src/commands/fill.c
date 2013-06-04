@@ -5,7 +5,7 @@
  * Fill a container
  * Many enhancements added by Thoric (ie: filling non-drink containers)
  */
-void do_fill( CHAR_DATA *ch, char *argument )
+void do_fill( Character *ch, char *argument )
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
@@ -211,7 +211,7 @@ void do_fill( CHAR_DATA *ch, char *argument )
     {
       OBJ_DATA *otmp, *otmp_next;
       char name[MAX_INPUT_LENGTH];
-      CHAR_DATA *gch;
+      Character *gch;
       char *pd;
       bool found = FALSE;
 

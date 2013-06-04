@@ -3,7 +3,7 @@
 #include "character.h"
 #include "clan.h"
 
-void do_special_forces ( CHAR_DATA *ch , char *argument )
+void do_special_forces ( Character *ch , char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   int the_chance, credits;

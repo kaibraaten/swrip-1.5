@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_light( CHAR_DATA *ch, char *argument )
+void do_light( Character *ch, char *argument )
 {
   OBJ_DATA *pipe_obj;
   char arg[MAX_INPUT_LENGTH];

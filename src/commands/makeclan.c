@@ -1,7 +1,7 @@
 #include "mud.h"
 #include "clan.h"
 
-void do_makeclan( CHAR_DATA *ch, char *argument )
+void do_makeclan( Character *ch, char *argument )
 {
   /*char filename[256];*/
   Clan *clan;

@@ -1,6 +1,6 @@
 #include "mud.h"
 
-void do_makerepair( CHAR_DATA *ch, char *argument )
+void do_makerepair( Character *ch, char *argument )
 {
   REPAIR_DATA *repair;
   short vnum;

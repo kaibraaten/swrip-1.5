@@ -1,9 +1,9 @@
 #include "character.h"
 #include "mud.h"
 
-void do_beep( CHAR_DATA *ch, char *argument )
+void do_beep( Character *ch, char *argument )
 {
-  CHAR_DATA *victim = NULL;
+  Character *victim = NULL;
   char arg[MAX_STRING_LENGTH];
   bool ch_comlink = FALSE, victim_comlink = FALSE;
 

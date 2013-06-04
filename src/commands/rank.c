@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_rank( CHAR_DATA *ch, char *argument )
+void do_rank( Character *ch, char *argument )
 {
   if ( is_npc(ch) )
     return;

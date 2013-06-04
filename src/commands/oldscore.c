@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_oldscore( CHAR_DATA *ch, char *argument )
+void do_oldscore( Character *ch, char *argument )
 {
   AFFECT_DATA *paf;
   SKILLTYPE   *skill;

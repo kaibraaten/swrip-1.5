@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_affected ( CHAR_DATA *ch, char *argument )
+void do_affected ( Character *ch, char *argument )
 {
   char arg [MAX_INPUT_LENGTH];
   AFFECT_DATA *paf;

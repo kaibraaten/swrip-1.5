@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_i103( CHAR_DATA *ch, char *argument )
+void do_i103( Character *ch, char *argument )
 {
   if (is_not_authed(ch))
     {

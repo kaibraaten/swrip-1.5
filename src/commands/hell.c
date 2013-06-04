@@ -2,9 +2,9 @@
 #include "mud.h"
 #include "character.h"
 
-void do_hell( CHAR_DATA *ch, char *argument )
+void do_hell( Character *ch, char *argument )
 {
-  CHAR_DATA *victim;
+  Character *victim;
   char arg[MAX_INPUT_LENGTH];
   short hell_time;
   bool h_d = FALSE;

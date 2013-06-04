@@ -2,7 +2,7 @@
 #include "mud.h"
 #include "arena.h"
 
-void do_arena(CHAR_DATA *ch, char *argument)
+void do_arena(Character *ch, char *argument)
 {
   char buf[MAX_INPUT_LENGTH];
 

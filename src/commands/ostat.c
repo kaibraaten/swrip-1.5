@@ -2,7 +2,7 @@
 #include "mud.h"
 #include "character.h"
 
-void do_ostat( CHAR_DATA *ch, char *argument )
+void do_ostat( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   AFFECT_DATA *paf = NULL;

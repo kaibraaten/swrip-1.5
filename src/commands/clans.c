@@ -5,7 +5,7 @@ static void ShowSubClanToCharacter( void *element, void *userData );
 static void ShowMainClanToCharacter( void *element, void *userData );
 static void ShowAutonomousGroupToCharacter( void *element, void*userData );
 
-void do_clans( CHAR_DATA *ch, char *argument )
+void do_clans( Character *ch, char *argument )
 {
   if ( List_Count( ClanList ) == 0 )
     {
@@ -28,7 +28,7 @@ void do_clans( CHAR_DATA *ch, char *argument )
 static void ShowMainClanToCharacter( void *element, void *userData )
 {
   Clan *clan = (Clan*) element;
-  CHAR_DATA *ch = (CHAR_DATA*) userData;
+  Character *ch = (Character*) userData;
   int pCount = 0;
   int support = 0;
   long revenue = 0;
@@ -91,7 +91,7 @@ static void ShowMainClanToCharacter( void *element, void *userData )
 static void ShowAutonomousGroupToCharacter( void *element, void *userData )
 {
   Clan *clan = (Clan*) element;
-  CHAR_DATA *ch = (CHAR_DATA*) userData;
+  Character *ch = (Character*) userData;
 
   if ( clan->clan_type != CLAN_CRIME && clan->clan_type != CLAN_GUILD )
     return;
@@ -103,7 +103,7 @@ static void ShowAutonomousGroupToCharacter( void *element, void *userData )
 static void ShowSubClanToCharacter( void *element, void *userData )
 {
   Clan *subclan = (Clan*) element;
-  CHAR_DATA *ch = (CHAR_DATA*) userData;
+  Character *ch = (Character*) userData;
 
   ch_printf( ch, "  &O%-20s %-10s\r\n",
 	     subclan->name, subclan->leadership.leader );

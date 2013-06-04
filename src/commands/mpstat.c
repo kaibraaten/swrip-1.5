@@ -5,11 +5,11 @@
  * enough to identify the mob and give its basic condition.  It does however,
  * show the MUDprograms which are set.
  */
-void do_mpstat( CHAR_DATA *ch, char *argument )
+void do_mpstat( Character *ch, char *argument )
 {
   char        arg[MAX_INPUT_LENGTH];
   MPROG_DATA *mprg;
-  CHAR_DATA  *victim;
+  Character  *victim;
 
   one_argument( argument, arg );
 

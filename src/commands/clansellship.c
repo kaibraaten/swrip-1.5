@@ -3,7 +3,7 @@
 #include "mud.h"
 #include "clan.h"
 
-void do_clansellship(CHAR_DATA *ch, char *argument )
+void do_clansellship(Character *ch, char *argument )
 {
   long         price;
   SHIP_DATA   *ship;

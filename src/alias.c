@@ -35,7 +35,7 @@ struct Alias
   char *Value;
 };
 
-Alias *FindAlias( const CHAR_DATA *ch, const char *original_argument )
+Alias *FindAlias( const Character *ch, const char *original_argument )
 {
   Alias *alias = NULL;
   char alias_name[MAX_INPUT_LENGTH];
@@ -73,7 +73,7 @@ static void FreeAlias( void *element, void *userData )
   DestroyAlias( alias );
 }
 
-void FreeAliases( CHAR_DATA *ch )
+void FreeAliases( Character *ch )
 {
   CerisList *aliasList = GetAliases( ch );
 
@@ -84,12 +84,12 @@ void FreeAliases( CHAR_DATA *ch )
   DestroyList( aliasList );
 }
 
-CerisList *GetAliases( const CHAR_DATA *ch )
+CerisList *GetAliases( const Character *ch )
 {
   return ch->pcdata->Aliases;
 }
 
-bool CheckAlias( CHAR_DATA *ch, char *command, char *argument )
+bool CheckAlias( Character *ch, char *command, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   Alias *alias;
@@ -163,19 +163,19 @@ void DestroyAlias( Alias *alias )
   DISPOSE( alias );
 }
 
-void AddAlias( CHAR_DATA *ch, Alias *alias )
+void AddAlias( Character *ch, Alias *alias )
 {
   CerisList *aliasList = GetAliases( ch );
   List_AddTail( aliasList, alias );
 }
 
-void RemoveAlias( CHAR_DATA *ch, Alias *alias )
+void RemoveAlias( Character *ch, Alias *alias )
 {
   CerisList *aliasList = GetAliases( ch );
   List_Remove( aliasList, alias );
 }
 
-void AllocateAliasList( CHAR_DATA *ch )
+void AllocateAliasList( Character *ch )
 {
   ch->pcdata->Aliases = CreateList();
 }

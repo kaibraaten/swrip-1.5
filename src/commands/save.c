@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_save( CHAR_DATA *ch, char *argument )
+void do_save( Character *ch, char *argument )
 {
   if ( is_npc(ch) && IS_SET(ch->act, ACT_POLYMORPHED))
     {

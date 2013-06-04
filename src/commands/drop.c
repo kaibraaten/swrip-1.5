@@ -4,7 +4,7 @@
 
 static void SaveClanStoreroom( void *element, void *userData );
 
-void do_drop( CHAR_DATA *ch, char *argument )
+void do_drop( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   OBJ_DATA *obj;
@@ -208,7 +208,7 @@ void do_drop( CHAR_DATA *ch, char *argument )
 static void SaveClanStoreroom( void *element, void *userData )
 {
   Clan *clan = (Clan*) element;
-  CHAR_DATA *ch = (CHAR_DATA*) userData;
+  Character *ch = (Character*) userData;
 
   if ( clan->storeroom == ch->in_room->vnum )
     {

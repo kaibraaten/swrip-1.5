@@ -3,11 +3,11 @@
 
 extern MOB_INDEX_DATA *mob_index_hash[MAX_KEY_HASH];
 
-void do_minvoke( CHAR_DATA *ch, char *argument )
+void do_minvoke( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   MOB_INDEX_DATA *pMobIndex;
-  CHAR_DATA *victim;
+  Character *victim;
   short vnum;
 
   one_argument( argument, arg );

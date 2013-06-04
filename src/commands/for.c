@@ -41,15 +41,15 @@ target in them. Private rooms are not violated.
 
 extern ROOM_INDEX_DATA *room_index_hash[MAX_KEY_HASH];
 
-static const char * name_expand (CHAR_DATA *ch);
+static const char * name_expand (Character *ch);
 
-void do_for(CHAR_DATA *ch, char *argument)
+void do_for(Character *ch, char *argument)
 {
   char range[MAX_INPUT_LENGTH];
   char buf[MAX_STRING_LENGTH];
   bool fGods = FALSE, fMortals = FALSE, fMobs = FALSE, fEverywhere = FALSE, found;
   ROOM_INDEX_DATA *room, *old_room;
-  CHAR_DATA *p, *p_prev;  /* p_next to p_prev -- TRI */
+  Character *p, *p_prev;  /* p_next to p_prev -- TRI */
   int i;
 
   argument = one_argument (argument, range);
@@ -195,10 +195,10 @@ void do_for(CHAR_DATA *ch, char *argument)
 /* Expand the name of a character into a string that identifies THAT
    character within a room. E.g. the second 'guard' -> 2. guard
 */
-static const char * name_expand (CHAR_DATA *ch)
+static const char * name_expand (Character *ch)
 {
   int count = 1;
-  CHAR_DATA *rch;
+  Character *rch;
   char name[MAX_INPUT_LENGTH]; /*  HOPEFULLY no mob has a name longer than THAT */
 
   static char outbuf[MAX_INPUT_LENGTH];

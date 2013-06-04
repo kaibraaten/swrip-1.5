@@ -2,7 +2,7 @@
 #include "ships.h"
 #include "mud.h"
 
-void do_accelerate( CHAR_DATA *ch, char *argument )
+void do_accelerate( Character *ch, char *argument )
 {
   int the_chance;
   int change;

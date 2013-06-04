@@ -65,7 +65,7 @@ void make_scraps( OBJ_DATA *obj )
 {
   char buf[MAX_STRING_LENGTH];
   OBJ_DATA  *scraps, *tmpobj;
-  CHAR_DATA *ch = NULL;
+  Character *ch = NULL;
 
   separate_obj( obj );
   scraps        = create_object( get_obj_index( OBJ_VNUM_SCRAPS ), 0 );
@@ -137,7 +137,7 @@ void make_scraps( OBJ_DATA *obj )
 /*
  * Make a corpse out of a character.
  */
-void make_corpse( CHAR_DATA *ch, CHAR_DATA *killer )
+void make_corpse( Character *ch, Character *killer )
 {
   char buf[MAX_STRING_LENGTH];
   OBJ_DATA *corpse;
@@ -215,7 +215,7 @@ void make_corpse( CHAR_DATA *ch, CHAR_DATA *killer )
 
 
 
-void make_blood( CHAR_DATA *ch )
+void make_blood( Character *ch )
 {
   OBJ_DATA *obj;
 
@@ -226,7 +226,7 @@ void make_blood( CHAR_DATA *ch )
 }
 
 
-void make_bloodstain( CHAR_DATA *ch )
+void make_bloodstain( Character *ch )
 {
   OBJ_DATA *obj;
 

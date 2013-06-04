@@ -4,7 +4,7 @@
 
 static const char *get_clan_type(const Clan *const clan);
 
-void do_showclan( CHAR_DATA *ch, char *argument )
+void do_showclan( Character *ch, char *argument )
 {
   Clan *clan;
 

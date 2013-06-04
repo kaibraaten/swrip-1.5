@@ -1,9 +1,9 @@
 #include "character.h"
 #include "mud.h"
 
-ch_ret spell_change_sex( int sn, int level, CHAR_DATA *ch, void *vo )
+ch_ret spell_change_sex( int sn, int level, Character *ch, void *vo )
 {
-  CHAR_DATA *victim = (CHAR_DATA *) vo;
+  Character *victim = (Character *) vo;
   AFFECT_DATA af;
   SKILLTYPE *skill = get_skilltype(sn);
 

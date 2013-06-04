@@ -4,7 +4,7 @@
 #include "ships.h"
 #include "character.h"
 
-void do_tractorbeam(CHAR_DATA *ch, char *argument )
+void do_tractorbeam(Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   int the_chance;

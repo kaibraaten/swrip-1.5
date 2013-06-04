@@ -49,14 +49,14 @@ float cost_equation( OBJ_DATA *obj )
 /*
  * Shopping commands.
  */
-CHAR_DATA *find_keeper( CHAR_DATA *ch )
+Character *find_keeper( Character *ch )
 {
   return find_keeper_q( ch, TRUE );
 }
 
-CHAR_DATA *find_keeper_q( CHAR_DATA *ch, bool message )
+Character *find_keeper_q( Character *ch, bool message )
 {
-  CHAR_DATA *keeper;
+  Character *keeper;
   SHOP_DATA *pShop;
 
   pShop = NULL;
@@ -112,9 +112,9 @@ CHAR_DATA *find_keeper_q( CHAR_DATA *ch, bool message )
 /*
  * repair commands.
  */
-CHAR_DATA *find_fixer( CHAR_DATA *ch )
+Character *find_fixer( Character *ch )
 {
-  CHAR_DATA *keeper;
+  Character *keeper;
   REPAIR_DATA *rShop;
 
   rShop = NULL;
@@ -156,7 +156,7 @@ CHAR_DATA *find_fixer( CHAR_DATA *ch )
   return keeper;
 }
 
-int get_cost_quit( CHAR_DATA *ch )
+int get_cost_quit( Character *ch )
 {
 
   long cost = 1000;
@@ -178,7 +178,7 @@ int get_cost_quit( CHAR_DATA *ch )
   return (int) cost;
 }
 
-int get_cost( CHAR_DATA *ch, CHAR_DATA *keeper, OBJ_DATA *obj, bool fBuy )
+int get_cost( Character *ch, Character *keeper, OBJ_DATA *obj, bool fBuy )
 {
   SHOP_DATA *pShop;
   int cost;
@@ -255,7 +255,7 @@ int get_cost( CHAR_DATA *ch, CHAR_DATA *keeper, OBJ_DATA *obj, bool fBuy )
   return cost;
 }
 
-int get_repaircost( CHAR_DATA *keeper, OBJ_DATA *obj )
+int get_repaircost( Character *keeper, OBJ_DATA *obj )
 {
   REPAIR_DATA *rShop;
   int cost;
@@ -311,7 +311,7 @@ int get_repaircost( CHAR_DATA *keeper, OBJ_DATA *obj )
 }
 
 /* Write vendor to file */
-void fwrite_vendor( FILE *fp, CHAR_DATA *mob )
+void fwrite_vendor( FILE *fp, Character *mob )
 {
   if ( !is_npc( mob ) || !fp )
     return;
@@ -333,15 +333,15 @@ void fwrite_vendor( FILE *fp, CHAR_DATA *mob )
 
 
 /* read vendor from file */
-CHAR_DATA *  fread_vendor( FILE *fp )
+Character *  fread_vendor( FILE *fp )
 {
-  CHAR_DATA *mob = NULL;
+  Character *mob = NULL;
   const char *word;
   bool fMatch;
   int inroom = 0;
   ROOM_INDEX_DATA *pRoomIndex = NULL;
-  CHAR_DATA *victim;
-  CHAR_DATA *vnext;
+  Character *victim;
+  Character *vnext;
   char buf [MAX_INPUT_LENGTH];
   char vnum1 [MAX_INPUT_LENGTH];
   word   = feof( fp ) ? "END" : fread_word( fp );
@@ -465,7 +465,7 @@ CHAR_DATA *  fread_vendor( FILE *fp )
 
 
 
-void save_vendor( CHAR_DATA *ch )
+void save_vendor( Character *ch )
 {
   char strsave[MAX_INPUT_LENGTH];
   FILE *fp;

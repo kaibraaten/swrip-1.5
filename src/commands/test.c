@@ -1,6 +1,6 @@
 #include "mud.h"
 
-void do_test( CHAR_DATA *ch, char *argument )
+void do_test( Character *ch, char *argument )
 {
   const char *keyword = "\"ACUTE SENSE\"";
 

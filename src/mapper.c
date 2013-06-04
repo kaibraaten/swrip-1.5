@@ -106,7 +106,7 @@ static void clear_room( int x, int y )
 }
 
 /* This function is recursive, ie it calls itself */
-static void map_exits( CHAR_DATA *ch, ROOM_INDEX_DATA *pRoom,
+static void map_exits( Character *ch, ROOM_INDEX_DATA *pRoom,
 		       int x, int y, int depth )
 {
   int door;
@@ -198,7 +198,7 @@ static void map_exits( CHAR_DATA *ch, ROOM_INDEX_DATA *pRoom,
 }
 
 /* Display the map to the player */
-static void show_map( CHAR_DATA *ch, char *text )
+static void show_map( Character *ch, char *text )
 {
   char buf[MAX_STRING_LENGTH * 2];
   int x, y;
@@ -239,7 +239,7 @@ static void show_map( CHAR_DATA *ch, char *text )
 }
 
 /* Clear, generate and display the map */
-void draw_map( CHAR_DATA *ch, char *desc )
+void draw_map( Character *ch, char *desc )
 {
   int x, y;
   static char buf[MAX_STRING_LENGTH];

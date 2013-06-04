@@ -4,7 +4,7 @@
 #include "vector3_aux.h"
 #include "mud.h"
 
-void do_fire(CHAR_DATA *ch, char *argument )
+void do_fire(Character *ch, char *argument )
 {
   int the_chance, origthe_chance;
   SHIP_DATA *ship;

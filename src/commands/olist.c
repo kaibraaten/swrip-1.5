@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_olist( CHAR_DATA *ch, char *argument )
+void do_olist( Character *ch, char *argument )
 {
   OBJ_INDEX_DATA        *obj;
   int                    vnum;

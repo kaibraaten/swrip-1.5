@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_takedrug( CHAR_DATA *ch, char *argument )
+void do_takedrug( Character *ch, char *argument )
 {
   OBJ_DATA *obj;
   AFFECT_DATA af;

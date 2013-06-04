@@ -2,7 +2,7 @@
 #include "mud.h"
 #include "clan.h"
 
-void do_clanfunds( CHAR_DATA *ch, char *argument )
+void do_clanfunds( Character *ch, char *argument )
 {
   Clan *clan;
 

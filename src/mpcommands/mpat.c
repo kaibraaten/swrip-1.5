@@ -3,12 +3,12 @@
 
 /* lets the mobile do a command at another location. Very useful */
 
-void do_mpat( CHAR_DATA *ch, char *argument )
+void do_mpat( Character *ch, char *argument )
 {
   char             arg[ MAX_INPUT_LENGTH ];
   ROOM_INDEX_DATA *location;
   ROOM_INDEX_DATA *original;
-  CHAR_DATA       *wch;
+  Character       *wch;
 
   if ( is_affected_by( ch, AFF_CHARM ) )
     return;

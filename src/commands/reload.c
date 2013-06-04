@@ -5,7 +5,7 @@
 #include "turret.h"
 #include "clan.h"
 
-void do_reload( CHAR_DATA *ch, char *argument )
+void do_reload( Character *ch, char *argument )
 {
   /* Reload code added by Darrik Vequir */
   char arg[MAX_INPUT_LENGTH];

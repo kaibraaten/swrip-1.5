@@ -3,9 +3,9 @@
 #include "character.h"
 #include "clan.h"
 
-void do_jail ( CHAR_DATA *ch , char *argument )
+void do_jail ( Character *ch , char *argument )
 {
-  CHAR_DATA *victim =NULL;
+  Character *victim =NULL;
   Clan   *clan =NULL;
   ROOM_INDEX_DATA *jail =NULL;
   char arg[MAX_INPUT_LENGTH];

@@ -4,9 +4,9 @@
 /*
  * Generic area attack                                          -Thoric
  */
-ch_ret spell_area_attack( int sn, int level, CHAR_DATA *ch, void *vo )
+ch_ret spell_area_attack( int sn, int level, Character *ch, void *vo )
 {
-  CHAR_DATA *vch, *vch_next;
+  Character *vch, *vch_next;
   SKILLTYPE *skill = get_skilltype(sn);
   bool saved;
   bool affects;

@@ -1,10 +1,10 @@
 #include "character.h"
 #include "mud.h"
 
-void do_recall( CHAR_DATA *ch, char *argument )
+void do_recall( Character *ch, char *argument )
 {
   ROOM_INDEX_DATA *location;
-  CHAR_DATA *opponent;
+  Character *opponent;
 
   location = NULL;
 

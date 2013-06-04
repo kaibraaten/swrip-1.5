@@ -1,9 +1,9 @@
 #include "character.h"
 #include "mud.h"
 
-void do_stun( CHAR_DATA *ch, char *argument )
+void do_stun( Character *ch, char *argument )
 {
-  CHAR_DATA *victim;
+  Character *victim;
   AFFECT_DATA af;
   int stun_chance;
   bool fail;

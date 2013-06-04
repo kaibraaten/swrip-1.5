@@ -2,7 +2,7 @@
 #include "mud.h"
 #include "clan.h"
 
-void do_planets( CHAR_DATA *ch, char *argument )
+void do_planets( Character *ch, char *argument )
 {
   PLANET_DATA *planet;
   int count = 0;

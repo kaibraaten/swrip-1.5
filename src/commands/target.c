@@ -5,7 +5,7 @@
 #include "character.h"
 #include "turret.h"
 
-void do_target(CHAR_DATA *ch, char *argument )
+void do_target(Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   int the_chance;

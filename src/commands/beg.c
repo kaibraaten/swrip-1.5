@@ -1,11 +1,11 @@
 #include "character.h"
 #include "mud.h"
 
-void do_beg( CHAR_DATA *ch, char *argument )
+void do_beg( Character *ch, char *argument )
 {
   char buf  [MAX_STRING_LENGTH];
   char arg1 [MAX_INPUT_LENGTH];
-  CHAR_DATA *victim;
+  Character *victim;
   int percent, xp;
   int amount;
 

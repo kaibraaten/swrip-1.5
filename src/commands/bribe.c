@@ -2,10 +2,10 @@
 #include "mud.h"
 #include "clan.h"
 
-void do_bribe ( CHAR_DATA *ch , char *argument )
+void do_bribe ( Character *ch , char *argument )
 {
   char arg1 [MAX_INPUT_LENGTH];
-  CHAR_DATA *victim;
+  Character *victim;
   PLANET_DATA *planet;
   Clan   *clan;
   int percent = 0;

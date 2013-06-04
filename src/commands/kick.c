@@ -1,9 +1,9 @@
 #include "character.h"
 #include "mud.h"
 
-void do_kick( CHAR_DATA *ch, char *argument )
+void do_kick( Character *ch, char *argument )
 {
-  CHAR_DATA *victim;
+  Character *victim;
   char logbuf[MAX_STRING_LENGTH];
 
   if ( is_npc(ch) && is_affected_by( ch, AFF_CHARM ) )

@@ -4,7 +4,7 @@
 #include "ships.h"
 #include "character.h"
 
-void do_request(CHAR_DATA *ch, char *argument)
+void do_request(Character *ch, char *argument)
 {
   char arg[MAX_INPUT_LENGTH];
   char buf[MAX_STRING_LENGTH];

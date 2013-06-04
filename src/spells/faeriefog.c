@@ -1,9 +1,9 @@
 #include "character.h"
 #include "mud.h"
 
-ch_ret spell_faerie_fog( int sn, int level, CHAR_DATA *ch, void *vo )
+ch_ret spell_faerie_fog( int sn, int level, Character *ch, void *vo )
 {
-  CHAR_DATA *ich;
+  Character *ich;
 
   act( AT_MAGIC, "$n conjures a cloud of purple smoke.", ch, NULL, NULL, TO_ROOM );
   act( AT_MAGIC, "You conjure a cloud of purple smoke.", ch, NULL, NULL, TO_CHAR );

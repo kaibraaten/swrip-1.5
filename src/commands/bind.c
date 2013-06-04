@@ -1,11 +1,11 @@
 #include "character.h"
 #include "mud.h"
 
-static bool aff_paralysis( CHAR_DATA *ch, CHAR_DATA *victim );
+static bool aff_paralysis( Character *ch, Character *victim );
 
-void do_bind ( CHAR_DATA *ch , char *argument )
+void do_bind ( Character *ch , char *argument )
 {
-  CHAR_DATA *victim;
+  Character *victim;
   char logbuf[MAX_STRING_LENGTH];
 
   if ( argument[0] == '\0' )
@@ -70,7 +70,7 @@ void do_bind ( CHAR_DATA *ch , char *argument )
   learn_from_success( ch, gsn_bind );
 }
 
-static bool aff_paralysis( CHAR_DATA *ch, CHAR_DATA *victim )
+static bool aff_paralysis( Character *ch, Character *victim )
 {
   AFFECT_DATA af;
 

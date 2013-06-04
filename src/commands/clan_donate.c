@@ -2,7 +2,7 @@
 #include "mud.h"
 #include "clan.h"
 
-void do_clan_donate( CHAR_DATA *ch, char *argument )
+void do_clan_donate( Character *ch, char *argument )
 {
   Clan *clan = NULL;
   long amount = 0;

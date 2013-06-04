@@ -5,11 +5,11 @@
    are loaded into inventory.  you can specify a level with
    the load object portion as well. */
 
-void do_mpmload( CHAR_DATA *ch, char *argument )
+void do_mpmload( Character *ch, char *argument )
 {
   char            arg[ MAX_INPUT_LENGTH ];
   MOB_INDEX_DATA *pMobIndex;
-  CHAR_DATA      *victim;
+  Character      *victim;
 
   if ( is_affected_by( ch, AFF_CHARM ) )
     return;

@@ -1,6 +1,6 @@
 #include "mud.h"
 
-void do_shopstat( CHAR_DATA *ch, char *argument )
+void do_shopstat( Character *ch, char *argument )
 {
   SHOP_DATA *shop;
   MOB_INDEX_DATA *mob;

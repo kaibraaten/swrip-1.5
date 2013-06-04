@@ -1,9 +1,9 @@
 #include "character.h"
 #include "mud.h"
 
-void do_delay( CHAR_DATA *ch, char *argument )
+void do_delay( Character *ch, char *argument )
 {
-  CHAR_DATA *victim = NULL;
+  Character *victim = NULL;
   char arg[MAX_INPUT_LENGTH];
   int delay = 0;
 

@@ -77,10 +77,10 @@ struct member_list
   MEMBER_LIST   *prev;          /* Prev clan */
 };
 
-void ShowMembers( const CHAR_DATA *ch, const char *argument, const char *format );
-void RemoveMember( const CHAR_DATA *ch );
+void ShowMembers( const Character *ch, const char *argument, const char *format );
+void RemoveMember( const Character *ch );
 void SaveMemberList( const MEMBER_LIST *members_list );
 bool LoadMemberList( const char *filename );
-void UpdateMember( const CHAR_DATA *ch );
+void UpdateMember( const Character *ch );
 
 #endif /* include guard */

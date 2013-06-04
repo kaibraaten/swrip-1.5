@@ -1,16 +1,16 @@
 #include "character.h"
 #include "mud.h"
 
-void do_group( CHAR_DATA *ch, char *argument )
+void do_group( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  CHAR_DATA *victim = NULL;
+  Character *victim = NULL;
 
   one_argument( argument, arg );
 
   if ( arg[0] == '\0' )
     {
-      CHAR_DATA *gch = NULL;
+      Character *gch = NULL;
 
       set_char_color( AT_GREEN, ch );
       ch_printf( ch, "%s's group:\r\n", PERS(ch, ch) );
@@ -50,7 +50,7 @@ void do_group( CHAR_DATA *ch, char *argument )
 
   if ( !str_cmp( arg, "disband" ))
     {
-      CHAR_DATA *gch = NULL;
+      Character *gch = NULL;
       int count = 0;
 
       if ( ch->leader || ch->master )
@@ -81,7 +81,7 @@ void do_group( CHAR_DATA *ch, char *argument )
 
   if ( !str_cmp( arg, "all" ) )
     {
-      CHAR_DATA *rch = NULL;
+      Character *rch = NULL;
       int count = 0;
 
       for ( rch = ch->in_room->first_person; rch; rch = rch->next_in_room )

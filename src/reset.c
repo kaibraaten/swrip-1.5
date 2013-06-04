@@ -39,14 +39,14 @@
 
 /* Externals */
 RESET_DATA *    parse_reset( AREA_DATA *tarea, char *argument,
-			     CHAR_DATA *ch );
+			     Character *ch );
 
 bool is_room_reset( RESET_DATA *pReset, ROOM_INDEX_DATA *aRoom,
 		    AREA_DATA *pArea );
 void add_obj_reset( AREA_DATA *pArea, char cm, OBJ_DATA *obj, int v2, int v3 );
 void delete_reset( AREA_DATA *pArea, RESET_DATA *pReset );
 RESET_DATA *find_reset( AREA_DATA *pArea, ROOM_INDEX_DATA *pRoom, int num );
-void list_resets( CHAR_DATA *ch, AREA_DATA *pArea,
+void list_resets( Character *ch, AREA_DATA *pArea,
 		  ROOM_INDEX_DATA *pRoom, int start, int end );
 
 
@@ -140,7 +140,7 @@ bool is_room_reset( RESET_DATA *pReset, ROOM_INDEX_DATA *aRoom,
   return FALSE;
 }
 
-ROOM_INDEX_DATA *find_room( CHAR_DATA *ch, char *argument,
+ROOM_INDEX_DATA *find_room( Character *ch, char *argument,
                             ROOM_INDEX_DATA *pRoom )
 {
   char arg[MAX_INPUT_LENGTH];
@@ -232,7 +232,7 @@ void delete_reset( AREA_DATA *pArea, RESET_DATA *pReset )
 }
 #undef DEL_RESET
 
-RESET_DATA *find_oreset(CHAR_DATA *ch, AREA_DATA *pArea,
+RESET_DATA *find_oreset(Character *ch, AREA_DATA *pArea,
                         ROOM_INDEX_DATA *pRoom, char *name)
 {
   RESET_DATA *reset;
@@ -286,7 +286,7 @@ RESET_DATA *find_oreset(CHAR_DATA *ch, AREA_DATA *pArea,
   return reset;
 }
 
-RESET_DATA *find_mreset(CHAR_DATA *ch, AREA_DATA *pArea,
+RESET_DATA *find_mreset(Character *ch, AREA_DATA *pArea,
                         ROOM_INDEX_DATA *pRoom, char *name)
 {
   RESET_DATA *reset;
@@ -340,7 +340,7 @@ RESET_DATA *find_mreset(CHAR_DATA *ch, AREA_DATA *pArea,
   return reset;
 }
 
-void edit_reset( CHAR_DATA *ch, char *argument, AREA_DATA *pArea, ROOM_INDEX_DATA *aRoom )
+void edit_reset( Character *ch, char *argument, AREA_DATA *pArea, ROOM_INDEX_DATA *aRoom )
 {
   char arg[MAX_INPUT_LENGTH];
   RESET_DATA *pReset = NULL;
@@ -975,7 +975,7 @@ void add_obj_reset( AREA_DATA *pArea, char cm, OBJ_DATA *obj, int v2, int v3 )
 
 void instaroom( AREA_DATA *pArea, ROOM_INDEX_DATA *pRoom, bool dodoors )
 {
-  CHAR_DATA *rch;
+  Character *rch;
   OBJ_DATA *obj;
 
   for ( rch = pRoom->first_person; rch; rch = rch->next_in_room )
@@ -1070,7 +1070,7 @@ void reset_area( AREA_DATA *pArea )
 {
   RESET_DATA *pReset;
   RESET_DATA *next_reset;
-  CHAR_DATA *mob;
+  Character *mob;
   OBJ_DATA *obj;
   OBJ_DATA *lastobj;
   ROOM_INDEX_DATA *pRoomIndex;
@@ -1490,7 +1490,7 @@ void reset_area( AREA_DATA *pArea )
   return;
 }
 
-void list_resets( CHAR_DATA *ch, AREA_DATA *pArea, ROOM_INDEX_DATA *pRoom,
+void list_resets( Character *ch, AREA_DATA *pArea, ROOM_INDEX_DATA *pRoom,
                   int start, int end )
 {
   RESET_DATA *pReset;
@@ -2032,7 +2032,7 @@ RESET_DATA *place_reset( AREA_DATA *tarea, char letter, int extra, int arg1, int
   return pReset;
 }
 
-char *sprint_reset( CHAR_DATA *ch, RESET_DATA *pReset, short num, bool rlist )
+char *sprint_reset( Character *ch, RESET_DATA *pReset, short num, bool rlist )
 {
   static char buf[MAX_STRING_LENGTH];
   char mobname[MAX_STRING_LENGTH];

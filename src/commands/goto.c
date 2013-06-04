@@ -1,12 +1,12 @@
 #include "character.h"
 #include "mud.h"
 
-void do_goto( CHAR_DATA *ch, char *argument )
+void do_goto( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   ROOM_INDEX_DATA *location;
-  CHAR_DATA *fch;
-  CHAR_DATA *fch_next;
+  Character *fch;
+  Character *fch_next;
   ROOM_INDEX_DATA *in_room;
   AREA_DATA *pArea;
   short vnum;

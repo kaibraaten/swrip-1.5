@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_teach( CHAR_DATA *ch, char *argument )
+void do_teach( Character *ch, char *argument )
 {
   char buf[MAX_STRING_LENGTH];
   int sn;
@@ -19,7 +19,7 @@ void do_teach( CHAR_DATA *ch, char *argument )
     }
   else
     {
-      CHAR_DATA *victim;
+      Character *victim;
       int adept;
 
       if ( !is_awake(ch) )

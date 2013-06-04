@@ -1,7 +1,7 @@
 #include "mud.h"
 #include "character.h"
 
-void do_open( CHAR_DATA *ch, char *argument )
+void do_open( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   OBJ_DATA *obj = NULL;
@@ -49,7 +49,7 @@ void do_open( CHAR_DATA *ch, char *argument )
           if ( (pexit_rev = pexit->rexit) != NULL
                && pexit_rev->to_room == ch->in_room )
             {
-              CHAR_DATA *rch = NULL;
+              Character *rch = NULL;
 
               for ( rch = pexit->to_room->first_person; rch; rch = rch->next_in_room )
 		{

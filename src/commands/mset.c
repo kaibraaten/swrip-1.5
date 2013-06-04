@@ -4,7 +4,7 @@
 #include "editor.h"
 #include "clan.h"
 
-void do_mset( CHAR_DATA *ch, char *argument )
+void do_mset( Character *ch, char *argument )
 {
   char arg1 [MAX_INPUT_LENGTH];
   char arg2 [MAX_INPUT_LENGTH];
@@ -13,7 +13,7 @@ void do_mset( CHAR_DATA *ch, char *argument )
   char outbuf[MAX_STRING_LENGTH];
   int  num,size,plus;
   char char1,char2;
-  CHAR_DATA *victim;
+  Character *victim;
   int value;
   int minattr, maxattr;
   bool lockvictim;
@@ -44,7 +44,7 @@ void do_mset( CHAR_DATA *ch, char *argument )
           return;
         }
 
-      victim = (CHAR_DATA*)ch->dest_buf;
+      victim = (Character*)ch->dest_buf;
 
       if ( char_died(victim) )
         {
@@ -70,7 +70,7 @@ void do_mset( CHAR_DATA *ch, char *argument )
 
   if ( ch->substate == SUB_REPEATCMD )
     {
-      victim = (CHAR_DATA*)ch->dest_buf;
+      victim = (Character*)ch->dest_buf;
 
       if ( char_died(victim) )
 	{

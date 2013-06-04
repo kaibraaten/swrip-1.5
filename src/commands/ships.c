@@ -3,7 +3,7 @@
 #include "ships.h"
 #include "character.h"
 
-void do_ships( CHAR_DATA *ch, char *argument )
+void do_ships( Character *ch, char *argument )
 {
   SHIP_DATA *ship = NULL;
   char buf[MAX_STRING_LENGTH];

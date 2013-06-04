@@ -1,7 +1,7 @@
 #include "mud.h"
 #include "clan.h"
 
-void do_members( CHAR_DATA *ch, char *argument )
+void do_members( Character *ch, char *argument )
 {
   char arg1[MAX_STRING_LENGTH];
   argument = one_argument( argument, arg1 );

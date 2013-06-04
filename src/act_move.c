@@ -28,7 +28,7 @@
 
 ROOM_INDEX_DATA *vroom_hash[64];
 
-int wherehome( const CHAR_DATA *ch)
+int wherehome( const Character *ch)
 {
   if( ch->plr_home )
     return ch->plr_home->vnum;
@@ -227,7 +227,7 @@ EXIT_DATA *get_exit_num( const ROOM_INDEX_DATA *room, short count )
 /*
  * Modify movement due to encumbrance                           -Thoric
  */
-short encumbrance( const CHAR_DATA *ch, short move )
+short encumbrance( const Character *ch, short move )
 {
   int cur, max;
 
@@ -259,7 +259,7 @@ short encumbrance( const CHAR_DATA *ch, short move )
 /*
  * Check to see if a character can fall down, checks for looping   -Thoric
  */
-bool will_fall( CHAR_DATA *ch, int fall )
+bool will_fall( Character *ch, int fall )
 {
   if ( IS_SET( ch->in_room->room_flags, ROOM_NOFLOOR )
        &&   CAN_GO(ch, DIR_DOWN)
@@ -387,7 +387,7 @@ ROOM_INDEX_DATA *generate_exit( ROOM_INDEX_DATA *in_room, EXIT_DATA **pexit )
   return room;
 }
 
-ch_ret move_char( CHAR_DATA *ch, EXIT_DATA *pexit, int fall )
+ch_ret move_char( Character *ch, EXIT_DATA *pexit, int fall )
 {
   ROOM_INDEX_DATA *in_room;
   ROOM_INDEX_DATA *to_room;
@@ -746,7 +746,7 @@ ch_ret move_char( CHAR_DATA *ch, EXIT_DATA *pexit, int fall )
    */
   if ( to_room->tunnel > 0 )
     {
-      CHAR_DATA *ctmp;
+      Character *ctmp;
       int count = ch->mount ? 1 : 0;
 
       for ( ctmp = to_room->first_person; ctmp; ctmp = ctmp->next_in_room )
@@ -947,8 +947,8 @@ ch_ret move_char( CHAR_DATA *ch, EXIT_DATA *pexit, int fall )
   */
   if ( !fall )
     {
-      CHAR_DATA *fch;
-      CHAR_DATA *nextinroom;
+      Character *fch;
+      Character *nextinroom;
       int chars = 0, count = 0;
 
       for ( fch = from_room->first_person; fch; fch = fch->next_in_room )
@@ -1012,7 +1012,7 @@ ch_ret move_char( CHAR_DATA *ch, EXIT_DATA *pexit, int fall )
   return retcode;
 }
 
-EXIT_DATA *find_door( CHAR_DATA *ch, const char *arg, bool quiet )
+EXIT_DATA *find_door( Character *ch, const char *arg, bool quiet )
 {
   EXIT_DATA *pexit;
   int door;
@@ -1100,7 +1100,7 @@ void remove_bexit_flag( EXIT_DATA *pexit, int flag )
     REMOVE_BIT( pexit_rev->exit_info, flag );
 }
 
-bool has_key( const CHAR_DATA *ch, int key )
+bool has_key( const Character *ch, int key )
 {
   OBJ_DATA *obj;
 
@@ -1114,7 +1114,7 @@ bool has_key( const CHAR_DATA *ch, int key )
 /*
  * teleport a character to another room
  */
-void teleportch( CHAR_DATA *ch, ROOM_INDEX_DATA *room, bool show )
+void teleportch( Character *ch, ROOM_INDEX_DATA *room, bool show )
 {
   if ( room_is_private( ch, room ) )
     return;
@@ -1126,9 +1126,9 @@ void teleportch( CHAR_DATA *ch, ROOM_INDEX_DATA *room, bool show )
     do_look( ch, "auto" );
 }
 
-void teleport( CHAR_DATA *ch, short room, int flags )
+void teleport( Character *ch, short room, int flags )
 {
-  CHAR_DATA *nch, *nch_next;
+  Character *nch, *nch_next;
   ROOM_INDEX_DATA *pRoomIndex;
   bool show;
 

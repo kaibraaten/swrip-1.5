@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_restrict( CHAR_DATA *ch, char *argument )
+void do_restrict( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];

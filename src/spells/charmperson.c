@@ -1,9 +1,9 @@
 #include "character.h"
 #include "mud.h"
 
-ch_ret spell_charm_person( int sn, int level, CHAR_DATA *ch, void *vo )
+ch_ret spell_charm_person( int sn, int level, Character *ch, void *vo )
 {
-  CHAR_DATA *victim = (CHAR_DATA *) vo;
+  Character *victim = (Character *) vo;
   AFFECT_DATA af;
   int charm_chance;
   char buf[MAX_STRING_LENGTH];

@@ -2,9 +2,9 @@
 #include "mud.h"
 #include "character.h"
 
-static void set_target( CHAR_DATA *ch, const char *target );
+static void set_target( Character *ch, const char *target );
 
-void do_focusalias( CHAR_DATA *ch, char *argument)
+void do_focusalias( Character *ch, char *argument)
 {
   char arg[MAX_INPUT_LENGTH], buf[MAX_STRING_LENGTH];
 
@@ -40,7 +40,7 @@ void do_focusalias( CHAR_DATA *ch, char *argument)
     }
 }
 
-static void set_target( CHAR_DATA *ch, const char *target )
+static void set_target( Character *ch, const char *target )
 {
   char buf[MAX_STRING_LENGTH];
 

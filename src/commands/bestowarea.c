@@ -5,11 +5,11 @@
 static void remove_area_names (char *inp, char *out);
 static void extract_area_names (char *inp, char *out);
 
-void do_bestowarea( CHAR_DATA *ch, char *argument )
+void do_bestowarea( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   char buf[MAX_STRING_LENGTH];
-  CHAR_DATA *victim;
+  Character *victim;
   int  arg_len;
 
   argument = one_argument( argument, arg );

@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_avtalk( CHAR_DATA *ch, char *argument )
+void do_avtalk( Character *ch, char *argument )
 {
   if (is_not_authed(ch))
     {

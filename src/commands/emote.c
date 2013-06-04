@@ -3,7 +3,7 @@
 #include "mud.h"
 #include "character.h"
 
-void do_emote( CHAR_DATA *ch, char *argument )
+void do_emote( Character *ch, char *argument )
 {
   char buf[MAX_STRING_LENGTH];
   char *plast = NULL;

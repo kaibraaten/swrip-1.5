@@ -5,13 +5,13 @@
 /*
  * Mobprogram editing - cumbersome                              -Thoric
  */
-void do_mpedit( CHAR_DATA *ch, char *argument )
+void do_mpedit( Character *ch, char *argument )
 {
   char arg1 [MAX_INPUT_LENGTH];
   char arg2 [MAX_INPUT_LENGTH];
   char arg3 [MAX_INPUT_LENGTH];
   char arg4 [MAX_INPUT_LENGTH];
-  CHAR_DATA  *victim;
+  Character  *victim;
   MPROG_DATA *mprog, *mprg, *mprg_next;
   int value, mptype, cnt;
 

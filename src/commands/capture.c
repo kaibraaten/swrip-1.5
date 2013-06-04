@@ -3,7 +3,7 @@
 #include "mud.h"
 #include "clan.h"
 
-void do_capture ( CHAR_DATA *ch , char *argument )
+void do_capture ( Character *ch , char *argument )
 {
   Clan *clan;
   PLANET_DATA *planet;

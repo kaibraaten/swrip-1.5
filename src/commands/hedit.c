@@ -6,7 +6,7 @@
 /*
  * Help editor                                                  -Thoric
  */
-void do_hedit( CHAR_DATA *ch, char *argument )
+void do_hedit( Character *ch, char *argument )
 {
   HelpFile *pHelp = NULL;
   char *kludge = NULL;

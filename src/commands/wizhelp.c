@@ -1,7 +1,7 @@
 #include "mud.h"
 #include "character.h"
 
-void do_wizhelp( CHAR_DATA *ch, char *argument )
+void do_wizhelp( Character *ch, char *argument )
 {
   const int number_of_columns = 6;
   int col = 0;

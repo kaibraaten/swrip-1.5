@@ -8,7 +8,7 @@
  *
  *  won't mess with existing exits
  */
-void do_mp_open_passage( CHAR_DATA *ch, char *argument )
+void do_mp_open_passage( Character *ch, char *argument )
 {
   char arg1[ MAX_INPUT_LENGTH ];
   char arg2[ MAX_INPUT_LENGTH ];

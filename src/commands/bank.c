@@ -1,13 +1,13 @@
 #include "mud.h"
 #include "character.h"
 
-void do_bank( CHAR_DATA *ch, char *argument )
+void do_bank( Character *ch, char *argument )
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
   char arg3[MAX_INPUT_LENGTH];
   long amount = 0;
-  CHAR_DATA *victim;
+  Character *victim;
 
   argument = one_argument( argument , arg1 );
   argument = one_argument( argument , arg2 );

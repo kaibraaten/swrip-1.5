@@ -20,7 +20,7 @@ bool check_multi( DESCRIPTOR_DATA *d, char *name );
 /*
  * boards.c
  */
-void mail_count( CHAR_DATA *ch );
+void mail_count( Character *ch );
 
 /*
  * Local functions
@@ -113,7 +113,7 @@ static void nanny_get_name( DESCRIPTOR_DATA *d, char *argument )
   char buf[MAX_STRING_LENGTH];
   bool fOld = FALSE, chk = FALSE;
   BAN_DATA *pban = NULL;
-  CHAR_DATA *ch = d->character;
+  Character *ch = d->character;
 
   if ( argument[0] == '\0' )
     {
@@ -270,7 +270,7 @@ nother.\r\n", 0);
 
 static void nanny_get_old_password( DESCRIPTOR_DATA *d, char *argument )
 {
-  CHAR_DATA *ch = d->character;
+  Character *ch = d->character;
   bool fOld = FALSE, chk = FALSE;
   char buf[MAX_STRING_LENGTH];
 
@@ -345,7 +345,7 @@ static void nanny_get_old_password( DESCRIPTOR_DATA *d, char *argument )
 static void nanny_confirm_new_name( DESCRIPTOR_DATA *d, char *argument )
 {
   char buf[MAX_STRING_LENGTH];
-  CHAR_DATA *ch = d->character;
+  Character *ch = d->character;
 
   switch ( *argument )
     {
@@ -375,7 +375,7 @@ static void nanny_confirm_new_name( DESCRIPTOR_DATA *d, char *argument )
 static void nanny_get_new_password( DESCRIPTOR_DATA *d, char *argument )
 {
   char *pwdnew = NULL, *p = NULL;
-  CHAR_DATA *ch = d->character;
+  Character *ch = d->character;
 
   write_to_buffer( d, "\r\n", 2 );
 
@@ -404,7 +404,7 @@ static void nanny_get_new_password( DESCRIPTOR_DATA *d, char *argument )
 
 static void nanny_confirm_new_password( DESCRIPTOR_DATA *d, char *argument )
 {
-  CHAR_DATA *ch = d->character;
+  Character *ch = d->character;
 
   write_to_buffer( d, "\r\n", 2 );
 
@@ -422,7 +422,7 @@ static void nanny_confirm_new_password( DESCRIPTOR_DATA *d, char *argument )
 
 static void nanny_get_new_sex( DESCRIPTOR_DATA *d, char *argument )
 {
-  CHAR_DATA *ch = d->character;
+  Character *ch = d->character;
   char buf[MAX_STRING_LENGTH];
   char buf2[MAX_STRING_LENGTH];
   int halfmax = 0, iRace = 0;
@@ -490,7 +490,7 @@ static void nanny_get_new_race( DESCRIPTOR_DATA *d, char *argument )
   char arg[MAX_STRING_LENGTH];
   char buf[MAX_STRING_LENGTH];
   char buf2[MAX_STRING_LENGTH];
-  CHAR_DATA *ch = d->character;
+  Character *ch = d->character;
   int iRace = 0, iClass = 0, halfmax = 0;
 
   argument = one_argument(argument, arg);
@@ -568,7 +568,7 @@ static void nanny_get_new_race( DESCRIPTOR_DATA *d, char *argument )
 static void nanny_get_new_class( DESCRIPTOR_DATA *d, char *argument )
 {
   char arg[MAX_STRING_LENGTH], buf[MAX_STRING_LENGTH];
-  CHAR_DATA *ch = d->character;
+  Character *ch = d->character;
   int iClass = 0;
 
   argument = one_argument(argument, arg);
@@ -624,7 +624,7 @@ static void nanny_get_new_class( DESCRIPTOR_DATA *d, char *argument )
 
 static void nanny_stats_ok( DESCRIPTOR_DATA *d, char *argument )
 {
-  CHAR_DATA *ch = d->character;
+  Character *ch = d->character;
   char buf[MAX_STRING_LENGTH];
 
   switch ( argument[0] )
@@ -667,7 +667,7 @@ static void nanny_stats_ok( DESCRIPTOR_DATA *d, char *argument )
 
 static void nanny_get_want_ansi( DESCRIPTOR_DATA *d, char *argument )
 {
-  CHAR_DATA *ch = d->character;
+  Character *ch = d->character;
 
   switch ( argument[0] )
     {
@@ -692,7 +692,7 @@ static void nanny_get_want_ansi( DESCRIPTOR_DATA *d, char *argument )
 static void nanny_get_msp( DESCRIPTOR_DATA *d, char *argument )
 {
   int ability = 0;
-  CHAR_DATA *ch = d->character;
+  Character *ch = d->character;
 
   switch ( argument[0] )
     {
@@ -730,7 +730,7 @@ static void nanny_get_msp( DESCRIPTOR_DATA *d, char *argument )
 
 static void nanny_press_enter( DESCRIPTOR_DATA *d, char *argument )
 {
-  CHAR_DATA *ch = d->character;
+  Character *ch = d->character;
 
   if ( IS_SET(ch->act, PLR_ANSI) )
     {
@@ -770,7 +770,7 @@ static void nanny_press_enter( DESCRIPTOR_DATA *d, char *argument )
 
 static void nanny_read_motd( DESCRIPTOR_DATA *d, char *argument )
 {
-  CHAR_DATA *ch = d->character;
+  Character *ch = d->character;
   char buf[MAX_STRING_LENGTH];
 
   write_to_buffer( d, "\r\nWelcome to Rise in Power...\r\n\r\n", 0 );

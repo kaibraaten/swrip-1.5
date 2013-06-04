@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_buyhome( CHAR_DATA *ch, char *argument )
+void do_buyhome( Character *ch, char *argument )
 {
   ROOM_INDEX_DATA *room;
   AREA_DATA *pArea;

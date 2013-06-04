@@ -1,7 +1,7 @@
 #include "mud.h"
 #include "character.h"
 
-void do_flee( CHAR_DATA *ch, char *argument )
+void do_flee( Character *ch, char *argument )
 {
   ROOM_INDEX_DATA *was_in;
   ROOM_INDEX_DATA *now_in;

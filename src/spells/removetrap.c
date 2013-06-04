@@ -3,7 +3,7 @@
 
 extern char *spell_target_name;
 
-ch_ret spell_remove_trap( int sn, int level, CHAR_DATA *ch, void *vo )
+ch_ret spell_remove_trap( int sn, int level, Character *ch, void *vo )
 {
   OBJ_DATA *obj;
   OBJ_DATA *trap;

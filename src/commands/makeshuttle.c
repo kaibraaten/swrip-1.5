@@ -1,7 +1,7 @@
 #include "mud.h"
 #include "shuttle.h"
 
-void do_makeshuttle (CHAR_DATA * ch, char * argument)
+void do_makeshuttle (Character * ch, char * argument)
 {
   SHUTTLE_DATA * shuttle;
   char arg[MAX_INPUT_LENGTH];

@@ -2,9 +2,9 @@
 #include "track.h"
 #include "mud.h"
 
-void do_track( CHAR_DATA *ch, char *argument )
+void do_track( Character *ch, char *argument )
 {
-  CHAR_DATA *vict;
+  Character *vict;
   char arg[MAX_INPUT_LENGTH];
   char buf[MAX_STRING_LENGTH];
   int dir, maxdist;

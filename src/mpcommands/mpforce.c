@@ -4,7 +4,7 @@
 /* lets the mobile force someone to do something.  must be mortal level
    and the all argument only affects those in the room with the mobile */
 
-void do_mpforce( CHAR_DATA *ch, char *argument )
+void do_mpforce( Character *ch, char *argument )
 {
   char arg[ MAX_INPUT_LENGTH ];
 
@@ -27,7 +27,7 @@ void do_mpforce( CHAR_DATA *ch, char *argument )
 
   if ( !str_cmp( arg, "all" ) )
     {
-      CHAR_DATA *vch;
+      Character *vch;
 
       for ( vch = ch->in_room->first_person; vch; vch = vch->next_in_room )
         if ( get_trust( vch ) < get_trust( ch ) && can_see( ch, vch ) )
@@ -35,7 +35,7 @@ void do_mpforce( CHAR_DATA *ch, char *argument )
     }
   else
     {
-      CHAR_DATA *victim;
+      Character *victim;
 
       if ( ( victim = get_char_room_mp( ch, arg ) ) == NULL )
         {

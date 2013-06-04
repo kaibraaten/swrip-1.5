@@ -1,7 +1,7 @@
 #include "mud.h"
 #include "character.h"
 
-void do_berserk( CHAR_DATA *ch, char *argument )
+void do_berserk( Character *ch, char *argument )
 {
   short percent;
   AFFECT_DATA af;

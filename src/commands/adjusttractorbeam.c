@@ -4,7 +4,7 @@
 #include "ships.h"
 #include "character.h"
 
-void do_adjusttractorbeam(CHAR_DATA *ch, char *argument )
+void do_adjusttractorbeam(Character *ch, char *argument )
 {
   char buf[MAX_INPUT_LENGTH];
   char arg[MAX_INPUT_LENGTH];

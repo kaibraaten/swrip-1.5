@@ -3,7 +3,7 @@
 #include "ships.h"
 #include "turret.h"
 
-void do_showship( CHAR_DATA *ch, char *argument )
+void do_showship( Character *ch, char *argument )
 {
   SHIP_DATA *ship = NULL;
   size_t turret_num = 0;

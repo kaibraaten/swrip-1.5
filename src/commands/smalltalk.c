@@ -2,11 +2,11 @@
 #include "mud.h"
 #include "clan.h"
 
-void do_smalltalk ( CHAR_DATA *ch , char *argument )
+void do_smalltalk ( Character *ch , char *argument )
 {
   char buf  [MAX_STRING_LENGTH];
   char arg1 [MAX_INPUT_LENGTH];
-  CHAR_DATA *victim = NULL;
+  Character *victim = NULL;
   PLANET_DATA *planet = NULL;
   Clan   *clan = NULL;
   int percent = 0;

@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_chat( CHAR_DATA *ch, char *argument )
+void do_chat( Character *ch, char *argument )
 {
   if ( ch->gold < 1 )
     {

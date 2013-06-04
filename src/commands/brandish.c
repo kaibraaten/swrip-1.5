@@ -1,10 +1,10 @@
 #include "mud.h"
 #include "character.h"
 
-void do_brandish( CHAR_DATA *ch, char *argument )
+void do_brandish( Character *ch, char *argument )
 {
-  CHAR_DATA *vch = NULL;
-  CHAR_DATA *vch_next = NULL;
+  Character *vch = NULL;
+  Character *vch_next = NULL;
   OBJ_DATA *staff = NULL;
   ch_ret retcode = rNONE;
   int sn = 0;

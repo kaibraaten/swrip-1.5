@@ -1,6 +1,6 @@
 #include "mud.h"
 
-void do_bodybag( CHAR_DATA *ch, char *argument )
+void do_bodybag( Character *ch, char *argument )
 {
   char buf2[MAX_STRING_LENGTH];
   char buf3[MAX_STRING_LENGTH];

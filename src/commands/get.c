@@ -2,10 +2,10 @@
 #include "mud.h"
 #include "clan.h"
 
-static void get_obj( CHAR_DATA *ch, OBJ_DATA *obj, OBJ_DATA *container );
+static void get_obj( Character *ch, OBJ_DATA *obj, OBJ_DATA *container );
 static void SaveClanStoreroom( void *element, void *userData );
 
-void do_get( CHAR_DATA *ch, char *argument )
+void do_get( Character *ch, char *argument )
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
@@ -15,7 +15,7 @@ void do_get( CHAR_DATA *ch, char *argument )
   short number = 0;
   bool found = FALSE;
   bool foundowner = FALSE;
-  CHAR_DATA *p = NULL, *p_prev = NULL;
+  Character *p = NULL, *p_prev = NULL;
 
   argument = one_argument( argument, arg1 );
 
@@ -342,7 +342,7 @@ void do_get( CHAR_DATA *ch, char *argument )
     }
 }
 
-static void get_obj( CHAR_DATA *ch, OBJ_DATA *obj, OBJ_DATA *container )
+static void get_obj( Character *ch, OBJ_DATA *obj, OBJ_DATA *container )
 {
   int weight;
 
@@ -427,7 +427,7 @@ static void get_obj( CHAR_DATA *ch, OBJ_DATA *obj, OBJ_DATA *container )
 static void SaveClanStoreroom( void *element, void *userData )
 {
   Clan *clan = (Clan*) element;
-  CHAR_DATA *ch = (CHAR_DATA*) userData;
+  Character *ch = (Character*) userData;
 
   if ( clan->storeroom == ch->in_room->vnum )
     {

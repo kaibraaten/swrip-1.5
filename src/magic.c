@@ -33,14 +33,14 @@ int pAbort;
  */
 char *spell_target_name;
 
-ch_ret spell_null( int sn, int level, CHAR_DATA *ch, void *vo )
+ch_ret spell_null( int sn, int level, Character *ch, void *vo )
 {
   send_to_char( "That's not a spell!\r\n", ch );
   return rNONE;
 }
 
 /* don't remove, may look redundant, but is important */
-ch_ret spell_notfound( int sn, int level, CHAR_DATA *ch, void *vo )
+ch_ret spell_notfound( int sn, int level, Character *ch, void *vo )
 {
   send_to_char( "That's not a spell!\r\n", ch );
   return rNONE;
@@ -49,7 +49,7 @@ ch_ret spell_notfound( int sn, int level, CHAR_DATA *ch, void *vo )
 /*
  * Is immune to a damage type
  */
-bool is_immune( const CHAR_DATA *ch, short damtype )
+bool is_immune( const Character *ch, short damtype )
 {
   switch( damtype )
     {
@@ -94,7 +94,7 @@ bool is_immune( const CHAR_DATA *ch, short damtype )
 /*
  * Lookup a skill by name, only stopping at skills the player has.
  */
-int ch_slookup( const CHAR_DATA *ch, const char *name )
+int ch_slookup( const Character *ch, const char *name )
 {
   int sn;
 
@@ -227,7 +227,7 @@ int bsearch_skill_exact( const char *name, int first, int top )
  * Each different section of the skill table is sorted alphabetically
  * Only match skills player knows                               -Thoric
  */
-int ch_bsearch_skill( const CHAR_DATA *ch, const char *name, int first, int top )
+int ch_bsearch_skill( const Character *ch, const char *name, int first, int top )
 {
   int sn;
 
@@ -250,7 +250,7 @@ int ch_bsearch_skill( const CHAR_DATA *ch, const char *name, int first, int top 
 }
 
 
-int find_spell( const CHAR_DATA *ch, const char *name, bool know )
+int find_spell( const Character *ch, const char *name, bool know )
 {
   if ( is_npc(ch) || !know )
     return bsearch_skill( name, gsn_first_spell, gsn_first_skill-1 );
@@ -258,7 +258,7 @@ int find_spell( const CHAR_DATA *ch, const char *name, bool know )
     return ch_bsearch_skill( ch, name, gsn_first_spell, gsn_first_skill-1 );
 }
 
-int find_skill( const CHAR_DATA *ch, const char *name, bool know )
+int find_skill( const Character *ch, const char *name, bool know )
 {
   if ( is_npc(ch) || !know )
     return bsearch_skill( name, gsn_first_skill, gsn_first_weapon-1 );
@@ -266,7 +266,7 @@ int find_skill( const CHAR_DATA *ch, const char *name, bool know )
     return ch_bsearch_skill( ch, name, gsn_first_skill, gsn_first_weapon-1 );
 }
 
-int find_weapon( const CHAR_DATA *ch, const char *name, bool know )
+int find_weapon( const Character *ch, const char *name, bool know )
 {
   if ( is_npc(ch) || !know )
     return bsearch_skill( name, gsn_first_weapon, gsn_first_tongue-1 );
@@ -274,7 +274,7 @@ int find_weapon( const CHAR_DATA *ch, const char *name, bool know )
     return ch_bsearch_skill( ch, name, gsn_first_weapon, gsn_first_tongue-1 );
 }
 
-int find_tongue( const CHAR_DATA *ch, const char *name, bool know )
+int find_tongue( const Character *ch, const char *name, bool know )
 {
   if ( is_npc(ch) || !know )
     return bsearch_skill( name, gsn_first_tongue, gsn_top_sn-1 );
@@ -310,8 +310,8 @@ int slot_lookup( int slot )
 /*
  * Fancy message handling for a successful casting              -Thoric
  */
-void successful_casting( SKILLTYPE *skill, CHAR_DATA *ch,
-                         CHAR_DATA *victim, OBJ_DATA *obj )
+void successful_casting( SKILLTYPE *skill, Character *ch,
+                         Character *victim, OBJ_DATA *obj )
 {
   short chitroom = (skill->type == SKILL_SPELL ? AT_MAGIC : AT_ACTION);
   short chit        = (skill->type == SKILL_SPELL ? AT_MAGIC : AT_HIT);
@@ -348,8 +348,8 @@ void successful_casting( SKILLTYPE *skill, CHAR_DATA *ch,
 /*
  * Fancy message handling for a failed casting                  -Thoric
  */
-void failed_casting( SKILLTYPE *skill, CHAR_DATA *ch,
-                     CHAR_DATA *victim, OBJ_DATA *obj )
+void failed_casting( SKILLTYPE *skill, Character *ch,
+                     Character *victim, OBJ_DATA *obj )
 {
   short chitroom = (skill->type == SKILL_SPELL ? AT_MAGIC : AT_ACTION);
   short chit        = (skill->type == SKILL_SPELL ? AT_MAGIC : AT_HIT);
@@ -392,8 +392,8 @@ void failed_casting( SKILLTYPE *skill, CHAR_DATA *ch,
 /*
  * Fancy message handling for being immune to something         -Thoric
  */
-void immune_casting( SKILLTYPE *skill, CHAR_DATA *ch,
-                     CHAR_DATA *victim, OBJ_DATA *obj )
+void immune_casting( SKILLTYPE *skill, Character *ch,
+                     Character *victim, OBJ_DATA *obj )
 {
   short chitroom = (skill->type == SKILL_SPELL ? AT_MAGIC : AT_ACTION);
   short chit        = (skill->type == SKILL_SPELL ? AT_MAGIC : AT_HIT);
@@ -453,7 +453,7 @@ void immune_casting( SKILLTYPE *skill, CHAR_DATA *ch,
 /*
  * Make adjustments to saving throw based in RIS                -Thoric
  */
-int ris_save( const CHAR_DATA *ch, int save_chance, int ris )
+int ris_save( const Character *ch, int save_chance, int ris )
 {
   short modifier = 10;
 
@@ -491,7 +491,7 @@ int ris_save( const CHAR_DATA *ch, int save_chance, int ris )
  * Used for spell dice parsing, ie: 3d8+L-6
  *
  */
-int rd_parse(const CHAR_DATA *ch, int level, char *expr)
+int rd_parse(const Character *ch, int level, char *expr)
 {
   int x, lop = 0, gop = 0, eop = 0;
   char operation;
@@ -588,7 +588,7 @@ int rd_parse(const CHAR_DATA *ch, int level, char *expr)
 }
 
 /* wrapper function so as not to destroy expr */
-int dice_parse(const CHAR_DATA *ch, int level, char *expr)
+int dice_parse(const Character *ch, int level, char *expr)
 {
   char buf[MAX_INPUT_LENGTH];
 
@@ -600,7 +600,7 @@ int dice_parse(const CHAR_DATA *ch, int level, char *expr)
  * Compute a saving throw.
  * Negative apply's make saving throw better.
  */
-bool saves_poison_death( int level, const CHAR_DATA *victim )
+bool saves_poison_death( int level, const Character *victim )
 {
   int save;
 
@@ -610,7 +610,7 @@ bool saves_poison_death( int level, const CHAR_DATA *victim )
   save = URANGE( 5, save, 95 );
   return chance( victim, save );
 }
-bool saves_wands( int level, const CHAR_DATA *victim )
+bool saves_wands( int level, const Character *victim )
 {
   int save;
 
@@ -621,7 +621,7 @@ bool saves_wands( int level, const CHAR_DATA *victim )
   save = URANGE( 5, save, 95 );
   return chance( victim, save );
 }
-bool saves_para_petri( int level, const CHAR_DATA *victim )
+bool saves_para_petri( int level, const Character *victim )
 {
   int save;
 
@@ -631,7 +631,7 @@ bool saves_para_petri( int level, const CHAR_DATA *victim )
   save = URANGE( 5, save, 95 );
   return chance( victim, save );
 }
-bool saves_breath( int level, const CHAR_DATA *victim )
+bool saves_breath( int level, const Character *victim )
 {
   int save;
 
@@ -639,7 +639,7 @@ bool saves_breath( int level, const CHAR_DATA *victim )
   save = URANGE( 5, save, 95 );
   return chance( victim, save );
 }
-bool saves_spell_staff( int level, const CHAR_DATA *victim )
+bool saves_spell_staff( int level, const Character *victim )
 {
   int save;
 
@@ -675,7 +675,7 @@ bool saves_spell_staff( int level, const CHAR_DATA *victim )
  * ^ decrease component's value[4], and extract if it reaches 0
  * & decrease component's value[5], and extract if it reaches 0
  */
-bool process_spell_components( CHAR_DATA *ch, int sn )
+bool process_spell_components( Character *ch, int sn )
 {
   SKILLTYPE *skill      = get_skilltype(sn);
   char *comp            = skill->components;
@@ -846,7 +846,7 @@ bool process_spell_components( CHAR_DATA *ch, int sn )
 /*
  * Locate targets.
  */
-void *locate_targets( CHAR_DATA *ch, char *arg, int sn, CHAR_DATA **victim, OBJ_DATA **obj )
+void *locate_targets( Character *ch, char *arg, int sn, Character **victim, OBJ_DATA **obj )
 {
   SKILLTYPE *skill = get_skilltype( sn );
   void *vo      = NULL;
@@ -973,7 +973,7 @@ void *locate_targets( CHAR_DATA *ch, char *arg, int sn, CHAR_DATA **victim, OBJ_
 /*
  * Cast spells at targets using a magical object.
  */
-ch_ret obj_cast_spell( int sn, int level, CHAR_DATA *ch, CHAR_DATA *victim, OBJ_DATA *obj )
+ch_ret obj_cast_spell( int sn, int level, Character *ch, Character *victim, OBJ_DATA *obj )
 {
   void *vo;
   ch_ret retcode = rNONE;
@@ -1108,8 +1108,8 @@ ch_ret obj_cast_spell( int sn, int level, CHAR_DATA *ch, CHAR_DATA *victim, OBJ_
        &&   victim != ch
        &&  !char_died(victim) )
     {
-      CHAR_DATA *vch;
-      CHAR_DATA *vch_next;
+      Character *vch;
+      Character *vch_next;
 
       for ( vch = ch->in_room->first_person; vch; vch = vch_next )
         {
@@ -1132,7 +1132,7 @@ ch_ret obj_cast_spell( int sn, int level, CHAR_DATA *ch, CHAR_DATA *victim, OBJ_
 /*
  * saving throw check                                           -Thoric
  */
-bool check_save( int sn, int level, const CHAR_DATA *ch, const CHAR_DATA *victim )
+bool check_save( int sn, int level, const Character *ch, const Character *victim )
 {
   SKILLTYPE *skill = get_skilltype(sn);
   bool saved = FALSE;

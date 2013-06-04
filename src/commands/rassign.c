@@ -1,13 +1,13 @@
 #include "character.h"
 #include "mud.h"
 
-void do_rassign( CHAR_DATA *ch, char *argument )
+void do_rassign( Character *ch, char *argument )
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
   char arg3[MAX_INPUT_LENGTH];
   short  r_lo, r_hi;
-  CHAR_DATA *victim;
+  Character *victim;
 
   argument = one_argument( argument, arg1 );
   argument = one_argument( argument, arg2 );

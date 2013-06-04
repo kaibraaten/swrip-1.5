@@ -1,10 +1,10 @@
 #include "character.h"
 #include "mud.h"
 
-void do_first_aid( CHAR_DATA *ch, char *argument )
+void do_first_aid( Character *ch, char *argument )
 {
   OBJ_DATA   *medpac;
-  CHAR_DATA  *victim;
+  Character  *victim;
   int         heal;
   char        buf[MAX_STRING_LENGTH];
 

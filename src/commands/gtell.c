@@ -1,9 +1,9 @@
 #include "character.h"
 #include "mud.h"
 
-void do_gtell( CHAR_DATA *ch, char *argument )
+void do_gtell( Character *ch, char *argument )
 {
-  CHAR_DATA *gch;
+  Character *gch;
 
   if ( argument[0] == '\0' )
     {

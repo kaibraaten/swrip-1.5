@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_level( CHAR_DATA *ch, char *argument )
+void do_level( Character *ch, char *argument )
 {
   int ability;
 

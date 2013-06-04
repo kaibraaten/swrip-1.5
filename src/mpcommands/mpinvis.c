@@ -3,7 +3,7 @@
 
 /* Allow mobiles to go wizinvis with programs -- SB */
 
-void do_mpinvis( CHAR_DATA *ch, char *argument )
+void do_mpinvis( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
 

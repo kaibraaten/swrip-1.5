@@ -2,11 +2,11 @@
 #include "character.h"
 #include "clan.h"
 
-void do_empower ( CHAR_DATA *ch , char *argument )
+void do_empower ( Character *ch , char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
-  CHAR_DATA *victim;
+  Character *victim;
   Clan *clan;
   char buf[MAX_STRING_LENGTH];
 

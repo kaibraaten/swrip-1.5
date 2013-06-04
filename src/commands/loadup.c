@@ -2,7 +2,7 @@
 #include "mud.h"
 #include "character.h"
 
-void do_loadup( CHAR_DATA *ch, char *argument )
+void do_loadup( Character *ch, char *argument )
 {
   char fname[1024];
   char name[256];
