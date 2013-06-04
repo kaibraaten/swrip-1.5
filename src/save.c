@@ -1624,7 +1624,7 @@ void fread_char( Character *ch, FILE *fp, bool preload )
                   ch->hit = URANGE( 1 , ch->hit + hitgain , ch->max_hit );
                   ch->move = URANGE( 1 , ch->move + hitgain , ch->max_move );
 
-                  if ( get_level( ch, FORCE_ABILITY ) > 1 )
+                  if ( IsForcer( ch ) )
                     ch->mana = URANGE( 0 , ch->mana + hitgain , ch->max_mana );
 
                   better_mental_state( ch , hitgain );

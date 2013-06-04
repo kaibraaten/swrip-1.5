@@ -1975,7 +1975,7 @@ char *default_prompt( Character *ch )
   static char buf[MAX_STRING_LENGTH];
   strcpy( buf,"" );
 
-  if (get_level(ch, FORCE_ABILITY ) > 1 || get_trust(ch) >= LEVEL_IMMORTAL )
+  if( IsForcer( ch ) || get_trust(ch) >= LEVEL_IMMORTAL )
     strcat(buf, "&pForce:&P%m/&p%M  &pAlign:&P%a\r\n");
 
   strcat(buf, "&BHealth:&C%h&B/%H  &BMovement:&C%v&B/%V");
@@ -2098,14 +2098,14 @@ void display_prompt( DESCRIPTOR_DATA *d )
               break;
 
             case 'm':
-              if ( is_immortal(ch) || get_level( ch, FORCE_ABILITY ) > 1 )
+              if ( is_immortal(ch) || IsForcer( ch ) )
                 the_stat = ch->mana;
               else
                 the_stat = 0;
               break;
 
             case 'M':
-              if ( is_immortal(ch) || get_level( ch, FORCE_ABILITY ) > 1 )
+              if ( is_immortal(ch) || IsForcer( ch ) )
                 the_stat = ch->max_mana;
               else
                 the_stat = 0;

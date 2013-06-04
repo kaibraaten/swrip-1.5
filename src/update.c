@@ -461,17 +461,23 @@ int mana_gain( const Character *ch )
     }
   else
     {
-      if ( get_level(ch, FORCE_ABILITY ) <= 1 )
+      if ( !IsForcer( ch ) )
         return (0 - ch->mana);
 
       gain = UMIN( 5, get_level( ch, FORCE_ABILITY ) / 2 );
 
       if ( ch->position < POS_SLEEPING )
         return 0;
+
       switch ( ch->position )
         {
-        case POS_SLEEPING: gain += get_curr_int(ch) * 3;        break;
-        case POS_RESTING:  gain += get_curr_int(ch) * 1.5;      break;
+        case POS_SLEEPING:
+	  gain += get_curr_int(ch) * 3;
+	  break;
+
+        case POS_RESTING:
+	  gain += get_curr_int(ch) * 1.5;
+	  break;
         }
 
       if ( ch->pcdata->condition[COND_FULL]   == 0 )

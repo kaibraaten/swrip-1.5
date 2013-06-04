@@ -1020,3 +1020,8 @@ void set_wait_state( Character *ch, short number_of_pulses )
 {
   ch->wait = UMAX( ch->wait, number_of_pulses );
 }
+
+bool IsForcer( const Character *ch )
+{
+  return get_level(ch, FORCE_ABILITY ) > 1 ? TRUE : FALSE;
+}

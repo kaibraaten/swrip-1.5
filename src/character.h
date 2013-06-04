@@ -377,4 +377,6 @@ bool is_clanned( const Character *ch );
 
 void set_wait_state( Character *ch, short number_of_pulses );
 
+bool IsForcer( const Character *ch );
+
 #endif

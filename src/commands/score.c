@@ -35,8 +35,7 @@ void do_score(Character * ch, char *argument)
   ch_printf(ch,   "&cAlign: &C%-5d    &cWimpy: &C%-3d                    &cTime:   &C%s\r",
             ch->alignment, ch->wimpy  , ctime(&current_time) );
 
-  if ( get_level( ch, FORCE_ABILITY ) > 1
-       || is_immortal(ch) )
+  if ( IsForcer( ch ) || is_immortal(ch) )
     ch_printf(ch, "&cHit Points: &C%d &cof &C%d     &cMove: &C%d &cof &C%d     &cForce: &C%d &cof &C%d\r\n",
               ch->hit, ch->max_hit, ch->move, ch->max_move, ch->mana, ch->max_mana );
   else
@@ -53,7 +52,7 @@ void do_score(Character * ch, char *argument)
     int ability;
 
     for ( ability = 0 ; ability < MAX_RL_ABILITY ; ability++ )
-      if ( ability != FORCE_ABILITY || get_level( ch, FORCE_ABILITY ) > 1 )
+      if ( ability != FORCE_ABILITY || IsForcer( ch ) )
         ch_printf( ch, "&c%-15s   &CLevel: %-3d   Max: %-3d   Exp: %-10ld   Next: %-10ld\r\n",
                    ability_name[ability], get_level( ch, ability ), max_level(ch, ability),
                    get_exp( ch, ability ),
