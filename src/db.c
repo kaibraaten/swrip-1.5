@@ -4423,10 +4423,11 @@ void sort_area( AREA_DATA *pArea, bool proto )
 void show_vnums( CHAR_DATA *ch, int low, int high, bool proto, bool shownl,
                  const char *loadst, const char *notloadst )
 {
-  AREA_DATA *pArea, *first_sort;
-  int count, loaded;
+  AREA_DATA *pArea = NULL;
+  AREA_DATA *first_sort = NULL;
+  int count = 0;
+  int loaded = 0;
 
-  count = 0;    loaded = 0;
   set_pager_color( AT_PLAIN, ch );
 
   if ( proto )
@@ -4448,7 +4449,7 @@ void show_vnums( CHAR_DATA *ch, int low, int high, bool proto, bool shownl,
       if ( IS_SET(pArea->status, AREA_LOADED) )
         loaded++;
       else if ( !shownl )
-          continue;
+	continue;
 
       pager_printf(ch, "%-15s| Rooms: %5d - %-5d"
                    " Objs: %5d - %-5d Mobs: %5d - %-5d%s\r\n",

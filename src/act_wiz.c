@@ -133,7 +133,7 @@ static const char *str_str( const char *astr, const char *bstr )
 int str_count(const char *psource, const char *ptarget)
 {
   const char *ptemp = psource;
-  int count=0;
+  int count = 0;
 
   while ( (ptemp = str_str(ptemp, ptarget)) )
     {
