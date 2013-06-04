@@ -17,7 +17,7 @@ void do_help( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  pHelp = get_help( ch, argument );
+  pHelp = GetHelp( ch, argument );
 
   if ( !pHelp )
     {
@@ -26,9 +26,9 @@ void do_help( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( get_help_level( pHelp ) >= 0 && str_cmp( argument, "imotd" ) )
+  if ( GetHelpLevel( pHelp ) >= 0 && str_cmp( argument, "imotd" ) )
     {
-      pager_printf( ch, "%s\r\n", get_help_keyword( pHelp ) );
+      pager_printf( ch, "%s\r\n", GetHelpKeyword( pHelp ) );
     }
 
   if ( !is_npc(ch) && IS_SET( ch->act , PLR_SOUND ) )
@@ -39,13 +39,13 @@ void do_help( CHAR_DATA *ch, char *argument )
   /*
    * Strip leading '.' to allow initial blanks.
    */
-  if ( get_help_text( pHelp )[0] == '.' )
+  if ( GetHelpText( pHelp )[0] == '.' )
     {
-      help_text = get_help_text( pHelp ) + 1;
+      help_text = GetHelpText( pHelp ) + 1;
     }
   else
     {
-      help_text = get_help_text( pHelp );
+      help_text = GetHelpText( pHelp );
     }
 
   pager_printf( ch, help_text );
@@ -84,9 +84,9 @@ static void similar_help_files(CHAR_DATA *ch, char *argument)
     {
       HELP_DATA *pHelp = (HELP_DATA*) MapIterator_GetKey( iter );
       char buf[MAX_STRING_LENGTH];
-      char *extension = get_help_keyword( pHelp );
+      char *extension = GetHelpKeyword( pHelp );
 
-      if (get_help_level( pHelp ) > get_trust(ch))
+      if (GetHelpLevel( pHelp ) > get_trust(ch))
 	{
 	  continue;
 	}
@@ -121,14 +121,14 @@ static void similar_help_files(CHAR_DATA *ch, char *argument)
     {
       HELP_DATA *pHelp = (HELP_DATA*) MapIterator_GetKey( iter );
       char buf[MAX_STRING_LENGTH];
-      char *extension = get_help_keyword( pHelp );
+      char *extension = GetHelpKeyword( pHelp );
 
       while ( extension[0] != '\0' )
         {
           extension=one_argument(extension, buf);
 
           if ( str_similarity(argument, buf) >= level
-               && get_help_level( pHelp ) <= get_trust(ch))
+               && GetHelpLevel( pHelp ) <= get_trust(ch))
             {
               if (single)
                 {
@@ -138,7 +138,7 @@ static void similar_help_files(CHAR_DATA *ch, char *argument)
                   return;
                 }
 
-              pager_printf(ch, "&C&G   %s\r\n", get_help_keyword( pHelp ) );
+              pager_printf(ch, "&C&G   %s\r\n", GetHelpKeyword( pHelp ) );
               break;
             }
         }

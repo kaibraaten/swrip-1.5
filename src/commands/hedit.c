@@ -33,22 +33,22 @@ void do_hedit( CHAR_DATA *ch, char *argument )
         }
 
       kludge = copy_buffer( ch );
-      set_help_text( pHelp, kludge );
+      SetHelpText( pHelp, kludge );
       STRFREE( kludge );
       stop_editing( ch );
       return;
     }
 
-  pHelp = get_help( ch, argument );
+  pHelp = GetHelp( ch, argument );
 
   if ( !pHelp ) /* new help */
     {
       int level = get_trust( ch );
-      pHelp = create_help( argument, level );
-      add_help( pHelp );
+      pHelp = CreateHelp( argument, level );
+      AddHelp( pHelp );
     }
 
   ch->substate = SUB_HELP_EDIT;
   ch->dest_buf = pHelp;
-  start_editing( ch, get_help_text( pHelp ) );
+  start_editing( ch, GetHelpText( pHelp ) );
 }

@@ -4154,7 +4154,7 @@ static void imc_readhelp( IMC_HELP_DATA * help, FILE * fp )
    }
 }
 
-static void imc_load_helps( void )
+static void imc_LoadHelps( void )
 {
    FILE *fp;
    IMC_HELP_DATA *help;
@@ -5204,7 +5204,7 @@ void imc_startup( bool force, socket_t desc, bool connected )
     * Help information should persist even when the network is not connected... 
     */
    if( first_imc_help == NULL )
-      imc_load_helps(  );
+      imc_LoadHelps(  );
 
    /*
     * ... as should the color table. 

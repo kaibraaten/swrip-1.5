@@ -36,7 +36,7 @@ void do_nohelps(CHAR_DATA *ch, char *argument)
         {
           for( command = command_hash[hash]; command; command = command->next )
             {
-              if(!get_help(ch, command->name) )
+              if(!GetHelp(ch, command->name) )
 		{
                   ch_printf(ch, "&W%-15s", command->name);
 
@@ -58,7 +58,7 @@ void do_nohelps(CHAR_DATA *ch, char *argument)
 
       for ( sn = 0; sn < top_sn && skill_table[sn] && skill_table[sn]->name; sn++ )
         {
-          if(!get_help(ch, skill_table[sn]->name))
+          if(!GetHelp(ch, skill_table[sn]->name))
             {
               ch_printf(ch, "&W%-20s", skill_table[sn]->name);
 
@@ -79,7 +79,7 @@ void do_nohelps(CHAR_DATA *ch, char *argument)
 
       for (tArea = first_area; tArea;tArea = tArea->next)
         {
-          if(!get_help(ch, tArea->name) )
+          if(!GetHelp(ch, tArea->name) )
             {
               ch_printf(ch, "&W%-35s", tArea->name);
               if ( ++col % 2 == 0 )

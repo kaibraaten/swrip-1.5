@@ -10,21 +10,21 @@
 extern CerisMap *HelpFiles;
 extern char *help_greeting;
 
-HELP_DATA *get_help( const CHAR_DATA *ch, char *argument );
-void add_help( HELP_DATA *pHelp );
-void unlink_help( HELP_DATA *pHelp );
-void load_helps( void );
-void save_helps( void );
-HELP_DATA *create_help( char *keyword, short level );
-void destroy_help( HELP_DATA *help );
+HELP_DATA *GetHelp( const CHAR_DATA *ch, char *argument );
+void AddHelp( HELP_DATA *pHelp );
+void UnlinkHelp( HELP_DATA *pHelp );
+void LoadHelps( void );
+void SaveHelps( void );
+HELP_DATA *CreateHelp( char *keyword, short level );
+void DestroyHelp( HELP_DATA *help );
 
-short get_help_level( const HELP_DATA *help );
-void set_help_level( HELP_DATA *help, short level );
+short GetHelpLevel( const HELP_DATA *help );
+void SetHelpLevel( HELP_DATA *help, short level );
 
-char *get_help_keyword( const HELP_DATA *help );
-void set_help_keyword( HELP_DATA *help, char *keyword );
+char *GetHelpKeyword( const HELP_DATA *help );
+void SetHelpKeyword( HELP_DATA *help, char *keyword );
 
-char *get_help_text( const HELP_DATA *help );
-void set_help_text( HELP_DATA *help, char *text );
+char *GetHelpText( const HELP_DATA *help );
+void SetHelpText( HELP_DATA *help, char *text );
 
 #endif

@@ -18,7 +18,7 @@ struct help_data
 static char *help_fix( char *text );
 static int CompareHelpFiles( const void *one, const void *another );
 
-HELP_DATA *get_help( const CHAR_DATA *ch, char *argument )
+HELP_DATA *GetHelp( const CHAR_DATA *ch, char *argument )
 {
   char argall[MAX_INPUT_LENGTH];
   char argone[MAX_INPUT_LENGTH];
@@ -65,17 +65,17 @@ HELP_DATA *get_help( const CHAR_DATA *ch, char *argument )
     {
       HELP_DATA *pHelp = (HELP_DATA*) MapIterator_GetKey( helpIterator );
 
-      if ( get_help_level( pHelp ) > get_trust( ch ) )
+      if ( GetHelpLevel( pHelp ) > get_trust( ch ) )
 	{
 	  continue;
 	}
 
-      if ( lev != -2 && get_help_level( pHelp ) != lev )
+      if ( lev != -2 && GetHelpLevel( pHelp ) != lev )
 	{
 	  continue;
 	}
 
-      if ( is_name( argall, get_help_keyword( pHelp ) ) )
+      if ( is_name( argall, GetHelpKeyword( pHelp ) ) )
 	{
 	  result = pHelp;
 	  break;
@@ -92,12 +92,12 @@ HELP_DATA *get_help( const CHAR_DATA *ch, char *argument )
  * Page is insert-sorted by keyword.                    -Thoric
  * (The reason for sorting is to keep do_hlist looking nice)
  */
-void add_help( HELP_DATA *pHelp )
+void AddHelp( HELP_DATA *pHelp )
 {
   if( Map_Get( HelpFiles, pHelp ) )
     {
-      bug( "add_help: duplicate: %s. Deleting.", get_help_keyword( pHelp ) );
-      destroy_help( pHelp );
+      bug( "add_help: duplicate: %s. Deleting.", GetHelpKeyword( pHelp ) );
+      DestroyHelp( pHelp );
     }
   else
     {
@@ -105,7 +105,7 @@ void add_help( HELP_DATA *pHelp )
     }
 }
 
-void unlink_help( HELP_DATA *help )
+void UnlinkHelp( HELP_DATA *help )
 {
   Map_Remove( HelpFiles, help );
 }
@@ -113,7 +113,7 @@ void unlink_help( HELP_DATA *help )
 /*
  * Load a help section.
  */
-void load_helps( void )
+void LoadHelps( void )
 {
   FILE *fp = NULL;
 
@@ -143,18 +143,18 @@ void load_helps( void )
           continue;
         }
 
-      pHelp = create_help( keyword, level );
+      pHelp = CreateHelp( keyword, level );
 
       fread_string( fp, helptext, MAX_STRING_LENGTH );
 
-      set_help_text( pHelp, helptext );
+      SetHelpText( pHelp, helptext );
 
-      if ( !str_cmp( get_help_keyword( pHelp ), "greeting" ) )
+      if ( !str_cmp( GetHelpKeyword( pHelp ), "greeting" ) )
 	{
-	  help_greeting = get_help_text( pHelp );
+	  help_greeting = GetHelpText( pHelp );
 	}
 
-      add_help( pHelp );
+      AddHelp( pHelp );
     }
 }
 
@@ -164,12 +164,12 @@ static void WriteHelpfile( const void *key, void *value, void *userData )
   const HELP_DATA *pHelp = (const HELP_DATA*) key;
 
   fprintf( filehandle, "%d %s~\n%s~\n\n",
-	   get_help_level( pHelp ),
-	   get_help_keyword( pHelp ),
-	   help_fix( get_help_text( pHelp ) ) );
+	   GetHelpLevel( pHelp ),
+	   GetHelpKeyword( pHelp ),
+	   help_fix( GetHelpText( pHelp ) ) );
 }
 
-void save_helps( void )
+void SaveHelps( void )
 {
   FILE *filehandle = NULL;
 
@@ -188,19 +188,19 @@ void save_helps( void )
   fclose( filehandle );
 }
 
-HELP_DATA *create_help( char *keyword, short level )
+HELP_DATA *CreateHelp( char *keyword, short level )
 {
   HELP_DATA *help = NULL;
   
   CREATE( help, HELP_DATA, 1 );
-  set_help_keyword( help, keyword );
-  set_help_text( help, "" );
-  set_help_level( help, level );
+  SetHelpKeyword( help, keyword );
+  SetHelpText( help, "" );
+  SetHelpLevel( help, level );
 
   return help;
 }
 
-void destroy_help( HELP_DATA *help )
+void DestroyHelp( HELP_DATA *help )
 {
   STRFREE( help->keyword );
   STRFREE( help->text );
@@ -263,12 +263,12 @@ static int CompareHelpFiles( const void *oneVoid, const void *anotherVoid )
     }
 }
 
-short get_help_level( const HELP_DATA *help )
+short GetHelpLevel( const HELP_DATA *help )
 {
   return help->level;
 }
 
-void set_help_level( HELP_DATA *help, short level )
+void SetHelpLevel( HELP_DATA *help, short level )
 {
   if( level >= -1 && level <= MAX_LEVEL )
     {
@@ -281,12 +281,12 @@ void set_help_level( HELP_DATA *help, short level )
     }
 }
 
-char *get_help_keyword( const HELP_DATA *help )
+char *GetHelpKeyword( const HELP_DATA *help )
 {
   return help->keyword;
 }
 
-void set_help_keyword( HELP_DATA *help, char *keyword )
+void SetHelpKeyword( HELP_DATA *help, char *keyword )
 {
   if( help->keyword )
     {
@@ -296,12 +296,12 @@ void set_help_keyword( HELP_DATA *help, char *keyword )
   help->keyword = STRALLOC( strupper( keyword ) );
 }
 
-char *get_help_text( const HELP_DATA *help )
+char *GetHelpText( const HELP_DATA *help )
 {
   return help->text;
 }
 
-void set_help_text( HELP_DATA *help, char *text )
+void SetHelpText( HELP_DATA *help, char *text )
 {
   if( help->text )
     {

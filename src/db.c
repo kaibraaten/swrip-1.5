@@ -738,7 +738,7 @@ void boot_db( bool fCopyOver )
   load_hall_of_fame();
 
   log_string( "Loading help files" );
-  load_helps();
+  LoadHelps();
 
   log_string( "Resetting areas" );
   area_update();

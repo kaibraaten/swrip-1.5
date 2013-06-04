@@ -45,11 +45,11 @@ void do_hlist( CHAR_DATA *ch, char *argument )
   for ( cnt = 0 ; !MapIterator_IsDone( iter ); MapIterator_Next( iter ) )
     {
       HELP_DATA *help = (HELP_DATA*) MapIterator_GetKey( iter );
-      int level = get_help_level( help );
+      int level = GetHelpLevel( help );
 
       if ( level >= min && level <= max )
 	{
-	  pager_printf( ch, "  %3d %s\r\n", level, get_help_keyword( help ) );
+	  pager_printf( ch, "  %3d %s\r\n", level, GetHelpKeyword( help ) );
 	  ++cnt;
 	}
     }
