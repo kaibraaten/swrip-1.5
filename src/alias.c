@@ -29,15 +29,15 @@
 #include "mud.h"
 #include "character.h"
 
-struct alias_type
+struct Alias
 {
   char *Name;
   char *Value;
 };
 
-ALIAS_DATA *FindAlias( const CHAR_DATA *ch, const char *original_argument )
+Alias *FindAlias( const CHAR_DATA *ch, const char *original_argument )
 {
-  ALIAS_DATA *alias = NULL;
+  Alias *alias = NULL;
   char alias_name[MAX_INPUT_LENGTH];
   char argument[MAX_INPUT_LENGTH];
   CerisListIterator *iter = NULL;
@@ -52,7 +52,7 @@ ALIAS_DATA *FindAlias( const CHAR_DATA *ch, const char *original_argument )
 
   for ( ; !ListIterator_IsDone( iter ); ListIterator_Next( iter ) )
     {
-      ALIAS_DATA *current = (ALIAS_DATA*) ListIterator_GetData( iter );
+      Alias *current = (Alias*) ListIterator_GetData( iter );
 
       if ( !str_prefix(alias_name, current->Name) )
 	{
@@ -68,7 +68,7 @@ ALIAS_DATA *FindAlias( const CHAR_DATA *ch, const char *original_argument )
 
 static void FreeAlias( void *element, void *userData )
 {
-  ALIAS_DATA *alias = (ALIAS_DATA*) element;
+  Alias *alias = (Alias*) element;
 
   DestroyAlias( alias );
 }
@@ -86,7 +86,7 @@ void FreeAliases( CHAR_DATA *ch )
 bool CheckAlias( CHAR_DATA *ch, char *command, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  ALIAS_DATA *alias;
+  Alias *alias;
   bool nullarg = TRUE;
 
   if ( argument && *argument!='\0' )
@@ -123,34 +123,34 @@ bool CheckAlias( CHAR_DATA *ch, char *command, char *argument )
   return TRUE;
 }
 
-const char *GetAliasName( const ALIAS_DATA *alias )
+const char *GetAliasName( const Alias *alias )
 {
   return alias->Name;
 }
 
-const char *GetAliasValue( const ALIAS_DATA *alias )
+const char *GetAliasValue( const Alias *alias )
 {
   return alias->Value;
 }
 
-void SetAliasValue( ALIAS_DATA *alias, const char *value )
+void SetAliasValue( Alias *alias, const char *value )
 {
   STRFREE( alias->Value );
   alias->Value = STRALLOC( value );
 }
 
-ALIAS_DATA *CreateAlias( const char *name, const char *value )
+Alias *CreateAlias( const char *name, const char *value )
 {
-  ALIAS_DATA *alias = NULL;
+  Alias *alias = NULL;
 
-  CREATE( alias, ALIAS_DATA, 1 );
+  CREATE( alias, Alias, 1 );
   alias->Name = STRALLOC( name );
   alias->Value = STRALLOC( value );
 
   return alias;
 }
 
-void DestroyAlias( ALIAS_DATA *alias )
+void DestroyAlias( Alias *alias )
 {
   STRFREE( alias->Name );
   STRFREE( alias->Value );

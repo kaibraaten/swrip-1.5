@@ -323,7 +323,7 @@ void save_clone( CHAR_DATA *ch )
 static void WriteAlias( void *element, void *userData )
 {
   FILE *filehandle = (FILE*) userData;
-  ALIAS_DATA *alias = (ALIAS_DATA*) element;
+  Alias *alias = (Alias*) element;
   const char *name = GetAliasName( alias );
   const char *value = GetAliasValue( alias );
 
@@ -1132,7 +1132,7 @@ void fread_char( CHAR_DATA *ch, FILE *fp, bool preload )
 
           if ( !str_cmp( word, "Alias" ) )
             {
-              ALIAS_DATA *alias;
+              Alias *alias;
 	      char nameBuffer[MAX_STRING_LENGTH];
 	      char valueBuffer[MAX_STRING_LENGTH];
 	      char *name;

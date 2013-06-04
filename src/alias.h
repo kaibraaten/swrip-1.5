@@ -28,17 +28,17 @@
 
 #include "types.h"
 
-typedef struct alias_type ALIAS_DATA;
+typedef struct Alias Alias;
 
 DECLARE_DO_FUN( do_alias );
 
 void FreeAliases( CHAR_DATA *ch );
 bool CheckAlias( CHAR_DATA *ch, char *command, char *argument );
-ALIAS_DATA *FindAlias( const CHAR_DATA *ch, const char *argument );
-const char *GetAliasName( const ALIAS_DATA *alias );
-const char *GetAliasValue( const ALIAS_DATA *alias );
-void SetAliasValue( ALIAS_DATA *alias, const char *value );
-ALIAS_DATA *CreateAlias( const char *name, const char *value );
-void DestroyAlias( ALIAS_DATA *alias );
+Alias *FindAlias( const CHAR_DATA *ch, const char *argument );
+const char *GetAliasName( const Alias *alias );
+const char *GetAliasValue( const Alias *alias );
+void SetAliasValue( Alias *alias, const char *value );
+Alias *CreateAlias( const char *name, const char *value );
+void DestroyAlias( Alias *alias );
 
 #endif
