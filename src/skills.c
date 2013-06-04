@@ -255,7 +255,7 @@ void learn_from_success( Character *ch, int sn )
   if ( is_npc(ch) || ch->pcdata->learned[sn] <= 0 )
     return;
 
-  if ( sn == skill_lookup( "meditate" ) && get_level( ch, FORCE_ABILITY ) < 2 )
+  if ( sn == skill_lookup( "meditate" ) && !IsForcer( ch ) )
     if ( ch->pcdata->learned[sn] < 50 )
       gain_exp( ch, FORCE_ABILITY, 25 );
 

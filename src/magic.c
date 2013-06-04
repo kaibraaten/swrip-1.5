@@ -155,6 +155,7 @@ int skill_lookup( const char *name )
               }
             return -1;
           }
+
   return sn;
 }
 

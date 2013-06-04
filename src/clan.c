@@ -465,7 +465,6 @@ void LoadClans( void )
   FILE *fpList = NULL;
   char clanlist[256];
 
-  log_string( "Loading clans..." );
   sprintf( clanlist, "%s%s", CLAN_DIR, CLAN_LIST );
 
   if ( ( fpList = fopen( clanlist, "r" ) ) == NULL )
@@ -493,7 +492,8 @@ void LoadClans( void )
     }
 
   fclose( fpList );
-  log_string( " Done clans\r\nSorting clans...." );
+  log_string( " Done clans" );
+  log_string( " Sorting clans...." );
 
   List_ForEach( ClanList, AttachToMainClan, NULL );
 
