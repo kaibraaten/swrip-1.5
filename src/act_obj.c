@@ -23,6 +23,7 @@
 
 #include "character.h"
 #include "mud.h"
+#include "clan.h"
 
 /*
  * how resistant an object is to damage                         -Thoric

@@ -36,6 +36,7 @@
 #include <ctype.h>
 #include "mud.h"
 #include "character.h"
+#include "clan.h"
 
 /* Defines by Narn for new mudprog parsing, used as
    return values from mprog_do_command. */

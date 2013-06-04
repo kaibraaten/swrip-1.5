@@ -33,6 +33,7 @@
 #include <ctype.h>
 #include "mud.h"
 #include "character.h"
+#include "clan.h"
 
 /*
  * Increment with every major format change.

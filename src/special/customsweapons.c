@@ -1,5 +1,6 @@
 #include "character.h"
 #include "mud.h"
+#include "clan.h"
 
 bool spec_customs_weapons( CHAR_DATA *ch )
 {
@@ -19,7 +20,7 @@ bool spec_customs_weapons( CHAR_DATA *ch )
       if ( is_npc(victim) || victim->position == POS_FIGHTING )
         continue;
 
-      if (  victim->pcdata && victim->pcdata->clan && !str_cmp(victim->pcdata->clan->name , ch->mob_clan) )
+      if ( is_clanned( victim ) && !str_cmp(victim->pcdata->clan->name , ch->mob_clan) )
         continue;
 
       for ( obj = victim->last_carrying; obj; obj = obj->prev_content )

@@ -1,6 +1,7 @@
 #include <string.h>
 #include "mud.h"
 #include "character.h"
+#include "clan.h"
 
 /*
  * New do_who with WHO REQUEST, clan, race and homepage support.  -Thoric
@@ -156,8 +157,9 @@ void do_who( CHAR_DATA *ch, char *argument )
                 fShowHomepage = TRUE;
               else               /* SB who clan (order), guild */
                 {
-                  if (!str_cmp( arg, "clan" ) && ch->pcdata && ch->pcdata->clan)
+                  if (!str_cmp( arg, "clan" ) && ch->pcdata && is_clanned( ch ) )
                     strcpy(arg, ch->pcdata->clan->name);
+
                   if ( (pClan = get_clan (arg)) && (fClanMatch != TRUE))
                     {
                       if ((ch->top_level >= LEVEL_IMMORTAL)

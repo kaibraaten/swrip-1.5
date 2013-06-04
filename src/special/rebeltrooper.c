@@ -1,5 +1,6 @@
 #include "character.h"
 #include "mud.h"
+#include "clan.h"
 
 bool spec_rebel_trooper( CHAR_DATA *ch )
 {
@@ -18,7 +19,7 @@ bool spec_rebel_trooper( CHAR_DATA *ch )
         continue;
       if ( ( is_npc( victim ) && nifty_is_name( "imperial" , victim->name )
              && victim->fighting && who_fighting( victim ) != ch ) ||
-           ( !is_npc( victim ) && victim->pcdata && victim->pcdata->clan && is_awake(victim)
+           ( !is_npc( victim ) && is_clanned( victim ) && is_awake(victim)
              && nifty_is_name( "empire" , victim->pcdata->clan->name ) ) )
         {
           do_yell( ch, "Long live the Rebel Alliance!" );

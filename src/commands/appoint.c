@@ -1,5 +1,6 @@
 #include "character.h"
 #include "mud.h"
+#include "clan.h"
 
 void do_appoint ( CHAR_DATA *ch , char *argument )
 {
@@ -16,7 +17,7 @@ void do_appoint ( CHAR_DATA *ch , char *argument )
       return;
     }
 
-  if (  str_cmp( ch->name, ch->pcdata->clan->leadership.leader  )  )
+  if ( str_cmp( ch->name, ch->pcdata->clan->leadership.leader ) )
     {
       send_to_char( "Only your leader can do that!\r\n", ch );
       return;

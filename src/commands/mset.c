@@ -2,6 +2,7 @@
 #include "mud.h"
 #include "character.h"
 #include "editor.h"
+#include "clan.h"
 
 void do_mset( CHAR_DATA *ch, char *argument )
 {

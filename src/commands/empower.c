@@ -1,5 +1,6 @@
 #include "mud.h"
 #include "character.h"
+#include "clan.h"
 
 void do_empower ( CHAR_DATA *ch , char *argument )
 {
@@ -9,7 +10,7 @@ void do_empower ( CHAR_DATA *ch , char *argument )
   CLAN_DATA *clan;
   char buf[MAX_STRING_LENGTH];
 
-  if ( is_npc( ch ) || !ch->pcdata->clan )
+  if ( is_npc( ch ) || !is_clanned( ch ) )
     {
       send_to_char( "Huh?\r\n", ch );
       return;

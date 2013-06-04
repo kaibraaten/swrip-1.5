@@ -1,5 +1,6 @@
 #include "character.h"
 #include "mud.h"
+#include "clan.h"
 
 bool spec_clan_guard( CHAR_DATA *ch )
 {
@@ -16,11 +17,14 @@ bool spec_clan_guard( CHAR_DATA *ch )
   for ( victim = ch->in_room->first_person; victim; victim = v_next )
     {
       v_next = victim->next_in_room;
+
       if ( !can_see( ch, victim ) )
         continue;
+
       if ( get_timer(victim, TIMER_RECENTFIGHT) > 0 )
         continue;
-      if ( !is_npc( victim ) && victim->pcdata && victim->pcdata->clan && clan && is_awake(victim)
+
+      if ( !is_npc( victim ) && victim->pcdata && is_clanned( victim ) && clan && is_awake(victim)
            && (clan != victim->pcdata->clan )
            && ( !victim->pcdata->clan->mainclan || clan != victim->pcdata->clan->mainclan )
            && ( !clan->mainclan || clan->mainclan != victim->pcdata->clan ) )

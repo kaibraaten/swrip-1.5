@@ -1,6 +1,7 @@
 #include "character.h"
 #include "ships.h"
 #include "mud.h"
+#include "clan.h"
 
 void do_speeders( CHAR_DATA *ch, char *argument )
 {
@@ -18,7 +19,7 @@ void do_speeders( CHAR_DATA *ch, char *argument )
         {
           if ( str_cmp(ship->owner, ch->name) )
             {
-              if ( !ch->pcdata || !ch->pcdata->clan || str_cmp(ship->owner,ch->pcdata->clan->name) || ship->sclass <= SHIP_PLATFORM )
+              if ( !is_clanned( ch ) || str_cmp(ship->owner,ch->pcdata->clan->name) || ship->sclass <= SHIP_PLATFORM )
                 continue;
             }
 

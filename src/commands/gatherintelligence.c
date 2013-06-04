@@ -1,6 +1,7 @@
 #include <string.h>
 #include "mud.h"
 #include "character.h"
+#include "clan.h"
 
 void do_gather_intelligence ( CHAR_DATA *ch , char *argument )
 {
@@ -67,7 +68,7 @@ void do_gather_intelligence ( CHAR_DATA *ch , char *argument )
         }
       if ( the_chance < 30 )
         {
-          if ( victim->pcdata->clan )
+          if ( is_clanned( victim ) )
             {
               sprintf( buf, "%s seems to be involved with %s.", victim->name, victim->pcdata->clan->name );
               send_to_char( buf, ch );

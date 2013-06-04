@@ -1,5 +1,6 @@
 #include "character.h"
 #include "mud.h"
+#include "clan.h"
 
 void do_propaganda ( CHAR_DATA *ch , char *argument )
 {
@@ -9,7 +10,7 @@ void do_propaganda ( CHAR_DATA *ch , char *argument )
   PLANET_DATA *planet;
   CLAN_DATA   *clan;
 
-  if ( is_npc(ch) || !ch->pcdata || !ch->in_room->area || !ch->in_room->area->planet || !ch->pcdata->clan)
+  if ( is_npc(ch) || !is_clanned( ch ) || !ch->in_room->area->planet )
     {
       send_to_char( "What would be the point of that.\r\n", ch );
       return;

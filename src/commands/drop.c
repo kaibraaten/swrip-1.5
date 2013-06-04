@@ -1,5 +1,8 @@
 #include "character.h"
 #include "mud.h"
+#include "clan.h"
+
+static void SaveClanStoreroom( void *element, void *userData );
 
 void do_drop( CHAR_DATA *ch, char *argument )
 {
@@ -7,7 +10,6 @@ void do_drop( CHAR_DATA *ch, char *argument )
   OBJ_DATA *obj;
   OBJ_DATA *obj_next;
   bool found;
-  CLAN_DATA *clan;
   int number;
 
   argument = one_argument( argument, arg );
@@ -119,9 +121,9 @@ void do_drop( CHAR_DATA *ch, char *argument )
 
       /* Clan storeroom saving */
       if ( IS_SET(ch->in_room->room_flags, ROOM_CLANSTOREROOM) )
-        for ( clan = first_clan; clan; clan = clan->next )
-          if ( clan->storeroom == ch->in_room->vnum )
-            save_clan_storeroom(ch, clan);
+	{
+	  List_ForEach( ClanList, SaveClanStoreroom, ch );
+	}
     }
   else
     {
@@ -181,9 +183,7 @@ void do_drop( CHAR_DATA *ch, char *argument )
         }
 
       if ( IS_SET(ch->in_room->room_flags, ROOM_CLANSTOREROOM) )
-        for ( clan = first_clan; clan; clan = clan->next )
-          if ( clan->storeroom == ch->in_room->vnum )
-            save_clan_storeroom(ch, clan);
+	List_ForEach( ClanList, SaveClanStoreroom, ch );
 
       if ( !found )
         {
@@ -203,4 +203,15 @@ void do_drop( CHAR_DATA *ch, char *argument )
       if ( IS_SET( ch->in_room->room_flags, ROOM_CLANSTOREROOM ) )
         save_storeroom( ch->in_room );
     } /* duping protector */
+}
+
+static void SaveClanStoreroom( void *element, void *userData )
+{
+  CLAN_DATA *clan = (CLAN_DATA*) element;
+  CHAR_DATA *ch = (CHAR_DATA*) userData;
+
+  if ( clan->storeroom == ch->in_room->vnum )
+    {
+      save_clan_storeroom(ch, clan);
+    }
 }

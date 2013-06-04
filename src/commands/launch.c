@@ -2,6 +2,7 @@
 #include "ships.h"
 #include "mud.h"
 #include "character.h"
+#include "clan.h"
 
 void do_launch( CHAR_DATA *ch, char *argument )
 {
@@ -149,18 +150,21 @@ void do_launch( CHAR_DATA *ch, char *argument )
           price = 100;
         }
 
-      if ( ch->pcdata && ch->pcdata->clan && !str_cmp(ch->pcdata->clan->name,ship->owner) )
+      if ( ch->pcdata && is_clanned( ch ) && !str_cmp(ch->pcdata->clan->name, ship->owner) )
         {
           if ( ch->pcdata->clan->funds < price )
             {
-              ch_printf(ch, "&R%s doesn't have enough funds to prepare this ship for launch.\r\n", ch->pcdata->clan->name );
+              ch_printf(ch, "&R%s doesn't have enough funds to prepare this ship for launch.\r\n",
+			ch->pcdata->clan->name );
               return;
             }
 
           ch->pcdata->clan->funds -= price;
           room = get_room_index( ship->location );
+
           if( room != NULL && room->area )
             boost_economy( room->area, price );
+
           ch_printf(ch, "&GIt costs %s %ld credits to ready this ship for launch.\r\n", ch->pcdata->clan->name, price );
         }
       else if ( str_cmp( ship->owner , "Public" ) )

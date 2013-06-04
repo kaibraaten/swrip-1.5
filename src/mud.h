@@ -394,48 +394,6 @@ struct planet_data
   float        pop_support;
 };
 
-struct clan_data
-{
-  CLAN_DATA *next;             /* next clan in list                    */
-  CLAN_DATA *prev;             /* previous clan in list                */
-  CLAN_DATA *next_subclan;
-  CLAN_DATA *prev_subclan;
-  CLAN_DATA *first_subclan;
-  CLAN_DATA *last_subclan;
-  CLAN_DATA *mainclan;
-  char      *filename;       /* Clan filename                        */
-  char      *name;           /* Clan name                            */
-  char      *description;    /* A brief description of the clan      */
-  int        pkills;         /* Number of pkills on behalf of clan   */
-  int        pdeaths;        /* Number of pkills against clan        */
-  int        mkills;         /* Number of mkills on behalf of clan   */
-  int        mdeaths;        /* Number of clan deaths due to mobs    */
-  short      clan_type;      /* See clan type defines                */
-  short      members;        /* Number of clan members               */
-  int        board;          /* Vnum of clan board                   */
-  int        storeroom;      /* Vnum of clan's store room            */
-  int        guard1;         /* Vnum of clan guard type 1            */
-  int        guard2;         /* Vnum of clan guard type 2            */
-  int        patrol1;        /* vnum of patrol */
-  int        patrol2;  /* vnum of patrol */
-  int        trooper1; /* vnum of reinforcements */
-  int        trooper2; /* vnum of elite troopers */
-  long       funds;
-  int        spacecraft;
-  int        vehicles;
-  int        jail;
-  int        enlistroom1;
-  int        enlistroom2;
-  char      *tmpstr;
-
-  struct
-  {
-    char *leader;         /* Head clan leader                     */
-    char *number1;        /* First officer                        */
-    char *number2;        /* Second officer                       */
-  } leadership;
-};
-
 struct ship_data
 {
   SHIP_DATA       *next;
@@ -1588,8 +1546,6 @@ extern BOARD_DATA           *first_board;
 extern BOARD_DATA           *last_board;
 extern OBJ_DATA             *first_object;
 extern OBJ_DATA             *last_object;
-extern CLAN_DATA            *first_clan;
-extern CLAN_DATA            *last_clan;
 extern MEMBER_LIST          *first_member_list;
 extern MEMBER_LIST          *last_member_list;
 extern GUARD_DATA           *first_guard;
@@ -2339,17 +2295,6 @@ extern "C" {
   void free_note( NOTE_DATA *pnote );
   void write_boards_txt( void );
   void operate_on_note( CHAR_DATA *ch, char *arg_passed, bool IS_MAIL );
-
-  /* clans.c */
-  void save_member_list( const MEMBER_LIST *members_list );
-  void show_members( const CHAR_DATA *ch, const char *argument, const char *format );
-  void write_clan_list( void );
-  CLAN_DATA *get_clan( const char *name );
-  void load_clans( void );
-  void save_clan( const CLAN_DATA *clan );
-  bool load_member_list( const char *filename );
-  void update_member( const CHAR_DATA *ch );
-  void remove_member( const CHAR_DATA *ch );
 
   /* planets.c */
   void write_planet_list( void );

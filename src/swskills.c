@@ -23,6 +23,7 @@
 
 #include "mud.h"
 #include "character.h"
+#include "clan.h"
 
 void add_reinforcements( CHAR_DATA *ch )
 {

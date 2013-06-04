@@ -1,5 +1,6 @@
 #include "character.h"
 #include "mud.h"
+#include "clan.h"
 
 void do_demote ( CHAR_DATA *ch , char *argument )
 {
@@ -7,7 +8,7 @@ void do_demote ( CHAR_DATA *ch , char *argument )
   if ( is_npc( ch ) || !ch->pcdata )
     return;
 
-  if ( !ch->pcdata->clan )
+  if ( !is_clanned( ch ) )
     {
       send_to_char( "Huh?\r\n", ch );
       return;

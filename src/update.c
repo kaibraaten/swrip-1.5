@@ -33,6 +33,7 @@
 #include "ships.h"
 #include "shuttle.h"
 #include "character.h"
+#include "clan.h"
 
 /* mud_prog.c */
 void room_act_update( void );
@@ -1020,6 +1021,15 @@ void mobile_update( void )
   return;
 }
 
+static void CollectTaxes( void *element, void *userData )
+{
+  CLAN_DATA *clan = (CLAN_DATA*) element;
+  long amount = (long) userData;
+
+  clan->funds += amount;
+  save_clan( clan );
+}
+
 void update_taxes( void )
 {
   PLANET_DATA *planet;
@@ -1029,30 +1039,25 @@ void update_taxes( void )
   for ( planet = first_planet; planet; planet = planet->next )
     {
       clan = planet->governed_by;
+
       if ( clan )
         {
-          int sCount = 0;
-          CLAN_DATA * subclan = NULL;
-
-          if ( clan->first_subclan )
+          if ( has_subclans( clan ) )
             {
-              for ( subclan = clan->first_subclan ; subclan ; subclan = subclan->next_subclan )
-                sCount++;
+	      int numberOfSubClans = List_Count( clan->SubClans );
+	      long amount = get_taxes( planet ) / 1440 / numberOfSubClans;
 
-              for ( subclan = clan->first_subclan ; subclan ; subclan = subclan->next_subclan )
-                {
-                  subclan->funds += get_taxes(planet)/1440/sCount;
-                  save_clan (subclan);
-                }
+	      List_ForEach( clan->SubClans, CollectTaxes, (void*) amount );
 
-              clan->funds += get_taxes(planet)/1440;
-              save_clan (clan);
+	      amount = get_taxes( planet ) / 1440;
+	      CollectTaxes( clan, (void*) amount );
             }
           else
             {
-              clan->funds += get_taxes(planet)/720;
-              save_clan( clan );
+	      long amount = get_taxes( planet ) / 720;
+	      CollectTaxes( clan, (void*) amount );
             }
+
           save_planet( planet );
         }
     }

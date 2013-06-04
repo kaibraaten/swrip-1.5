@@ -28,6 +28,7 @@
 #include "vector3_aux.h"
 #include "character.h"
 #include "turret.h"
+#include "clan.h"
 
 SHIP_DATA *first_ship = NULL;
 SHIP_DATA *last_ship = NULL;

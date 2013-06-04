@@ -1,7 +1,9 @@
 #include "character.h"
 #include "mud.h"
+#include "clan.h"
 
 static void get_obj( CHAR_DATA *ch, OBJ_DATA *obj, OBJ_DATA *container );
+static void SaveClanStoreroom( void *element, void *userData );
 
 void do_get( CHAR_DATA *ch, char *argument )
 {
@@ -342,7 +344,6 @@ void do_get( CHAR_DATA *ch, char *argument )
 
 static void get_obj( CHAR_DATA *ch, OBJ_DATA *obj, OBJ_DATA *container )
 {
-  CLAN_DATA *clan;
   int weight;
 
   if ( !CAN_WEAR(obj, ITEM_TAKE)
@@ -398,9 +399,9 @@ static void get_obj( CHAR_DATA *ch, OBJ_DATA *obj, OBJ_DATA *container )
   /* Clan storeroom checks */
   if ( IS_SET(ch->in_room->room_flags, ROOM_CLANSTOREROOM)
        && (!container || container->carried_by == NULL) )
-    for ( clan = first_clan; clan; clan = clan->next )
-      if ( clan->storeroom == ch->in_room->vnum )
-        save_clan_storeroom(ch, clan);
+    {
+      List_ForEach( ClanList, SaveClanStoreroom, ch );
+    }
 
   if ( obj->item_type != ITEM_CONTAINER )
     check_for_trap( ch, obj, TRAP_GET );
@@ -421,4 +422,15 @@ static void get_obj( CHAR_DATA *ch, OBJ_DATA *obj, OBJ_DATA *container )
     return;
 
   oprog_get_trigger(ch, obj);
+}
+
+static void SaveClanStoreroom( void *element, void *userData )
+{
+  CLAN_DATA *clan = (CLAN_DATA*) element;
+  CHAR_DATA *ch = (CHAR_DATA*) userData;
+
+  if ( clan->storeroom == ch->in_room->vnum )
+    {
+      save_clan_storeroom(ch, clan);
+    }
 }

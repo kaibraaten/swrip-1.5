@@ -1,5 +1,8 @@
 #include "character.h"
 #include "mud.h"
+#include "clan.h"
+
+static void SaveClanStoreroom( void *element, void *userData );
 
 void do_put( CHAR_DATA *ch, char *argument )
 {
@@ -8,7 +11,6 @@ void do_put( CHAR_DATA *ch, char *argument )
   OBJ_DATA *container;
   OBJ_DATA *obj;
   OBJ_DATA *obj_next;
-  CLAN_DATA *clan;
   short count;
   int           number;
   bool  save_char = FALSE;
@@ -145,9 +147,9 @@ void do_put( CHAR_DATA *ch, char *argument )
       /* Clan storeroom check */
       if ( IS_SET(ch->in_room->room_flags, ROOM_CLANSTOREROOM)
            &&   container->carried_by == NULL)
-        for ( clan = first_clan; clan; clan = clan->next )
-          if ( clan->storeroom == ch->in_room->vnum )
-            save_clan_storeroom(ch, clan);
+	{
+	  List_ForEach( ClanList, SaveClanStoreroom, ch );
+	}
     }
   else
     {
@@ -221,8 +223,19 @@ void do_put( CHAR_DATA *ch, char *argument )
       /* Clan storeroom check */
       if ( IS_SET(ch->in_room->room_flags, ROOM_CLANSTOREROOM)
            && container->carried_by == NULL )
-	for ( clan = first_clan; clan; clan = clan->next )
-          if ( clan->storeroom == ch->in_room->vnum )
-            save_clan_storeroom(ch, clan);
+	{
+	  List_ForEach( ClanList, SaveClanStoreroom, ch );
+	}
+    }
+}
+
+static void SaveClanStoreroom( void *element, void *userData )
+{
+  CLAN_DATA *clan = (CLAN_DATA*) element;
+  CHAR_DATA *ch = (CHAR_DATA*) userData;
+
+  if ( clan->storeroom == ch->in_room->vnum )
+    {
+      save_clan_storeroom(ch, clan);
     }
 }

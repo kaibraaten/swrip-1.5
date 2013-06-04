@@ -1,13 +1,14 @@
 #include <string.h>
 #include "mud.h"
 #include "character.h"
+#include "clan.h"
 
 void do_reinforcements( CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   int the_chance, credits;
 
-  if ( is_npc( ch ) || !ch->pcdata )
+  if ( is_npc( ch ) )
     return;
 
   strcpy( arg, argument );
@@ -21,7 +22,7 @@ void do_reinforcements( CHAR_DATA *ch, char *argument )
           return;
         }
 
-      if ( !ch->pcdata->clan )
+      if ( !is_clanned( ch ) )
         {
           send_to_char( "&RYou need to be a member of an organization before you can call for reinforcements.\r\n", ch );
           return;

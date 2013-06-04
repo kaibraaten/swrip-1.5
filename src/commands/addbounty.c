@@ -1,5 +1,6 @@
 #include "character.h"
 #include "mud.h"
+#include "clan.h"
 
 void do_addbounty( CHAR_DATA *ch, char *argument )
 {

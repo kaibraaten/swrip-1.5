@@ -1,6 +1,7 @@
 #include <time.h>
 #include "mud.h"
 #include "character.h"
+#include "clan.h"
 
 static char *tiny_affect_loc_name(int location);
 
@@ -199,13 +200,14 @@ void do_score(CHAR_DATA * ch, char *argument)
     ch_printf( ch, "&cYou are bestowed with the command(s): &C%s.\r\n",
                ch->pcdata->bestowments );
 
-  if ( ch->pcdata->clan )
+  if ( is_clanned( ch ) )
     {
       send_to_char( "&C----------------------------------------------------------------------------\r\n", ch);
       ch_printf(ch, "&cORGANIZATION: &C%-35s &cSALARY: &C%-10d    &cPkills/Deaths: &C%3.3d&c/&C%3.3d",
                 ch->pcdata->clan->name, ch->pcdata->salary, ch->pcdata->clan->pkills, ch->pcdata->clan->pdeaths) ;
       send_to_char( "\r\n", ch );
     }
+
   if (is_immortal(ch))
     {
       send_to_char( "&C----------------------------------------------------------------------------\r\n", ch);

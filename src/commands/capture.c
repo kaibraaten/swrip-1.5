@@ -1,6 +1,7 @@
 #include "character.h"
 #include "ships.h"
 #include "mud.h"
+#include "clan.h"
 
 void do_capture ( CHAR_DATA *ch , char *argument )
 {
@@ -20,7 +21,7 @@ void do_capture ( CHAR_DATA *ch , char *argument )
       return;
     }
 
-  if ( !ch->pcdata->clan )
+  if ( !is_clanned( ch ) )
     {
       send_to_char ( "You need to be a member of an organization to do that!\r\n" , ch );
       return;

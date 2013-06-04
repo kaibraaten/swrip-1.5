@@ -1,11 +1,12 @@
 #include "character.h"
 #include "mud.h"
+#include "clan.h"
 
 void do_clanfunds( CHAR_DATA *ch, char *argument )
 {
   CLAN_DATA *clan;
 
-  if ( is_npc( ch ) || !ch->pcdata->clan )
+  if ( is_npc( ch ) || !is_clanned( ch ) )
     {
       send_to_char("You don't seem to belong to an organization.\r\n",ch);
       return;

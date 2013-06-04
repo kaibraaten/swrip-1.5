@@ -2,6 +2,7 @@
 #include <time.h>
 #include "mud.h"
 #include "character.h"
+#include "clan.h"
 
 void do_mstat( CHAR_DATA *ch, char *argument )
 {

@@ -26,9 +26,10 @@
 #include "mud.h"
 #include "ships.h"
 #include "character.h"
+#include "clan.h"
 
-extern char             lastplayercmd[MAX_INPUT_LENGTH];
-extern CHAR_DATA *      gch_prev;
+extern char lastplayercmd[MAX_INPUT_LENGTH];
+extern CHAR_DATA *gch_prev;
 
 /*
  * Local functions.

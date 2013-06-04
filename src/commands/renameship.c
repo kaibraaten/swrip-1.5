@@ -1,23 +1,28 @@
 #include "mud.h"
 #include "ships.h"
 #include "character.h"
+#include "clan.h"
 
 void do_renameship( CHAR_DATA *ch, char *argument )
 {
   SHIP_DATA *ship;
   CLAN_DATA *clan;
+
   if ( (ship = ship_from_cockpit( ch->in_room->vnum ) ) == NULL)
     {
       send_to_char( "You must be in the cockpit of a ship to do that!\r\n", ch);
       return;
     }
 
-  if( ( (clan = get_clan(ship->owner)) == NULL ) || str_cmp( clan->leadership.leader, ch->name ) )
-    if( str_cmp( ship->owner, ch->name ) )
-      {
-        send_to_char( "&RImperial Database: &WYou do not own this ship.\r\n", ch);
-        return;
-      }
+  if( ( (clan = get_clan(ship->owner)) == NULL )
+      || str_cmp( clan->leadership.leader, ch->name ) )
+    {
+      if( str_cmp( ship->owner, ch->name ) )
+	{
+	  send_to_char( "&RImperial Database: &WYou do not own this ship.\r\n", ch);
+	  return;
+	}
+    }
 
   if( get_ship( argument ) != NULL )
     {
@@ -34,7 +39,7 @@ void do_renameship( CHAR_DATA *ch, char *argument )
 
   ch->gold -= 50000;
   STRFREE( ship->personalname );
-  ship->personalname            = STRALLOC( argument );
+  ship->personalname = STRALLOC( argument );
   save_ship( ship );
   send_to_char( "&RImperial Database: &WTransaction Complete. Name changed.", ch );
 }

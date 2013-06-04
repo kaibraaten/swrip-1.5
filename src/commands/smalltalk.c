@@ -1,5 +1,6 @@
 #include "character.h"
 #include "mud.h"
+#include "clan.h"
 
 void do_smalltalk ( CHAR_DATA *ch , char *argument )
 {
@@ -10,9 +11,10 @@ void do_smalltalk ( CHAR_DATA *ch , char *argument )
   CLAN_DATA   *clan = NULL;
   int percent = 0;
 
-  if ( is_npc(ch) || !ch->pcdata )
+  if ( is_npc(ch) )
     {
       send_to_char( "What would be the point of that.\r\n", ch );
+      return;
     }
 
   argument = one_argument( argument, arg1 );
@@ -104,7 +106,7 @@ void do_smalltalk ( CHAR_DATA *ch , char *argument )
   act( AT_ACTION, "$n smiles at you and says, 'hello'.\r\n", ch, NULL, victim, TO_VICT    );
   act( AT_ACTION, "$n chats briefly with $N.\r\n",  ch, NULL, victim, TO_NOTVICT );
 
-  if ( is_npc(ch) || !ch->pcdata || !ch->pcdata->clan || !ch->in_room->area || !ch->in_room->area->planet )
+  if ( !is_clanned( ch ) || !ch->in_room->area->planet )
     return;
 
   if ( ( clan = ch->pcdata->clan->mainclan ) == NULL )

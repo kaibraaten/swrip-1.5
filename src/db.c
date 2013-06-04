@@ -32,6 +32,7 @@
 #include "character.h"
 #include "editor.h"
 #include "help.h"
+#include "clan.h"
 
 void init_supermob();
 

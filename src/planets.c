@@ -24,6 +24,7 @@
 #include <ctype.h>
 #include <string.h>
 #include "mud.h"
+#include "clan.h"
 
 PLANET_DATA * first_planet = NULL;
 PLANET_DATA * last_planet = NULL;

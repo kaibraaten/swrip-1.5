@@ -24,6 +24,7 @@
 
 #include "character.h"
 #include "mud.h"
+#include "clan.h"
 
 BOUNTY_DATA *first_bounty = NULL;
 BOUNTY_DATA *last_bounty = NULL;

@@ -2,6 +2,7 @@
 #include <time.h>
 #include "mud.h"
 #include "character.h"
+#include "clan.h"
 
 void do_whois( CHAR_DATA *ch, char *argument)
 {
@@ -57,9 +58,9 @@ void do_whois( CHAR_DATA *ch, char *argument)
     ch_printf(ch, "%s.\r\n",
               victim->name );
 
-  if ( victim->pcdata->clan && ( ( ch->pcdata->clan
-                                   && ch->pcdata->clan == victim->pcdata->clan )
-                                 || is_immortal( ch ) ) )
+  if ( is_clanned( victim )
+       && ( ( is_clanned( ch ) && ch->pcdata->clan == victim->pcdata->clan )
+	    || is_immortal( ch ) ) )
     {
       if ( victim->pcdata->clan->clan_type == CLAN_CRIME )
         send_to_char( ", and belongs to the crime family ", ch );
@@ -67,8 +68,10 @@ void do_whois( CHAR_DATA *ch, char *argument)
         send_to_char( ", and belongs to the guild ", ch );
       else
         send_to_char( ", and belongs to organization ", ch );
+
       send_to_char( victim->pcdata->clan->name, ch );
     }
+
   send_to_char( ".\r\n", ch );
 
   if(victim->pcdata->homepage && victim->pcdata->homepage[0] != '\0')

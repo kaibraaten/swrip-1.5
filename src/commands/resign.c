@@ -1,5 +1,6 @@
 #include "character.h"
 #include "mud.h"
+#include "clan.h"
 
 void do_resign( CHAR_DATA *ch, char *argument )
 {
@@ -7,19 +8,19 @@ void do_resign( CHAR_DATA *ch, char *argument )
   long xp_to_lose = 0;
   long xp_actually_lost = 0;
 
-  if ( is_npc(ch) || !ch->pcdata )
+  if ( is_npc(ch) )
     {
       send_to_char( "You can't do that.\r\n", ch );
       return;
     }
 
-  clan =  ch->pcdata->clan;
-
-  if ( clan == NULL )
+  if( !is_clanned( ch ) )
     {
       send_to_char( "You have to join an organization before you can quit it.\r\n", ch );
       return;
     }
+
+  clan = ch->pcdata->clan;
 
   if ( !str_cmp( ch->name, ch->pcdata->clan->leadership.leader ) )
     {

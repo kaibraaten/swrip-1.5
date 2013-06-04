@@ -22,6 +22,7 @@
  ****************************************************************************/
 
 #include <ctype.h>
+#include "clan.h"
 #include "character.h"
 #include "mud.h"
 #include "vector3_aux.h"

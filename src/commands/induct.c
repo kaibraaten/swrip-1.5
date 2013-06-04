@@ -1,5 +1,6 @@
 #include "character.h"
 #include "mud.h"
+#include "clan.h"
 
 void do_induct( CHAR_DATA *ch, char *argument )
 {
@@ -7,7 +8,7 @@ void do_induct( CHAR_DATA *ch, char *argument )
   CHAR_DATA *victim;
   CLAN_DATA *clan;
 
-  if ( is_npc( ch ) || !ch->pcdata->clan )
+  if ( is_npc( ch ) || !is_clanned( ch ) )
     {
       send_to_char( "Huh?\r\n", ch );
       return;
@@ -49,7 +50,7 @@ void do_induct( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if ( victim->pcdata->clan )
+  if ( is_clanned( victim ) )
     {
       if ( victim->pcdata->clan->clan_type == CLAN_CRIME )
         {

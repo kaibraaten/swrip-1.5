@@ -1,5 +1,6 @@
 #include "character.h"
 #include "mud.h"
+#include "clan.h"
 
 static const char *get_clan_type(const CLAN_DATA *const clan);
 

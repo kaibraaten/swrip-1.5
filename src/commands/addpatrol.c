@@ -1,6 +1,7 @@
 #include <string.h>
 #include "mud.h"
 #include "character.h"
+#include "clan.h"
 
 void do_add_patrol ( CHAR_DATA *ch , char *argument )
 {

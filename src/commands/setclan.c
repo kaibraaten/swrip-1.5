@@ -1,5 +1,6 @@
 #include "character.h"
 #include "mud.h"
+#include "clan.h"
 
 void do_setclan( CHAR_DATA *ch, char *argument )
 {
@@ -82,7 +83,7 @@ void do_setclan( CHAR_DATA *ch, char *argument )
           return;
         }
 
-      if ( subclan->first_subclan )
+      if ( List_Count( subclan->SubClans ) > 0 )
         {
           send_to_char( "Subclan has subclans of its own that need removing first.\r\n", ch );
           return;
@@ -90,7 +91,7 @@ void do_setclan( CHAR_DATA *ch, char *argument )
 
       subclan->clan_type = CLAN_SUBCLAN;
       subclan->mainclan = clan;
-      LINK(subclan, clan->first_subclan, clan->last_subclan, next_subclan, prev_subclan );
+      List_AddTail( clan->SubClans, subclan );
       save_clan( clan );
       save_clan( subclan );
       return;
@@ -211,8 +212,7 @@ void do_setclan( CHAR_DATA *ch, char *argument )
     {
       if ( clan->mainclan )
         {
-          UNLINK ( clan, clan->mainclan->first_subclan, clan->mainclan->last_subclan,
-                   next_subclan, prev_subclan );
+	  List_Remove( clan->mainclan->SubClans, clan );
           clan->mainclan = NULL;
         }
 
@@ -245,7 +245,11 @@ void do_setclan( CHAR_DATA *ch, char *argument )
 
   if ( !str_cmp( arg2, "filename" ) )
     {
-      DISPOSE( clan->filename );
+      if( clan->filename )
+	{
+	  DISPOSE( clan->filename );
+	}
+
       clan->filename = str_dup( argument );
       send_to_char( "Done.\r\n", ch );
       save_clan( clan );
