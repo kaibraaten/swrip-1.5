@@ -876,7 +876,7 @@ void do_mset( CHAR_DATA *ch, char *argument )
           send_to_char( "Removed from clan.\r\nPlease make sure you adjust that clan's members accordingly.\r\nAlso be sure to remove any bestowments they have been given.\r\n", ch );
           return;
         }
-      clan = get_clan( arg3 );
+      clan = GetClan( arg3 );
 
       if ( !clan )
         {

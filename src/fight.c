@@ -1646,10 +1646,10 @@ ch_ret damage( CHAR_DATA *ch, CHAR_DATA *victim, int dam, int dt )
       check_killer( ch, victim );
 
       if ( is_clanned( ch ) )
-        update_member( ch );
+        UpdateMember( ch );
 
       if ( is_clanned( victim ) )
-        update_member( victim );
+        UpdateMember( victim );
 
       if ( victim->in_room != ch->in_room || !is_npc(victim) || !IS_SET( victim->act, ACT_NOKILL )  )
         loot = legal_loot( ch, victim );
@@ -2077,7 +2077,7 @@ void raw_kill( CHAR_DATA *ch, CHAR_DATA *victim )
   strcpy( arg , victim->name );
 
   if ( is_clanned( victim ) )
-    remove_member( victim );
+    RemoveMember( victim );
 
   stop_fighting( victim, TRUE );
 

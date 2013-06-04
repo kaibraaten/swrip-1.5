@@ -198,7 +198,7 @@ static void fread_planet( PLANET_DATA *planet, FILE *fp )
         case 'G':
           if ( !str_cmp( word, "GovernedBy" ) )
             {
-              planet->governed_by = get_clan ( fread_string_hash(fp) );
+              planet->governed_by = GetClan( fread_string_hash(fp) );
               fMatch = TRUE;
             }
           break;

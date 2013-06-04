@@ -15,5 +15,5 @@ void do_roster( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  show_members( ch, ch->pcdata->clan->name, argument );
+  ShowMembers( ch, ch->pcdata->clan->name, argument );
 }

@@ -1027,7 +1027,7 @@ static void CollectTaxes( void *element, void *userData )
   long amount = (long) userData;
 
   clan->funds += amount;
-  save_clan( clan );
+  SaveClan( clan );
 }
 
 void update_taxes( void )
@@ -1042,7 +1042,7 @@ void update_taxes( void )
 
       if ( clan )
         {
-          if ( has_subclans( clan ) )
+          if ( HasSubClans( clan ) )
             {
 	      int numberOfSubClans = List_Count( clan->SubClans );
 	      long amount = get_taxes( planet ) / 1440 / numberOfSubClans;

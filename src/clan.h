@@ -43,11 +43,11 @@ struct Clan
   } leadership;
 };
 
-Clan *get_clan( const char *name );
-void write_clan_list( void );
-void save_clan( const Clan *clan );
-void load_clans( void );
-bool has_subclans( const Clan *clan );
+Clan *GetClan( const char *name );
+void WriteClanList( void );
+void SaveClan( const Clan *clan );
+void LoadClans( void );
+bool HasSubClans( const Clan *clan );
 
 struct membersort_data
 {
@@ -77,10 +77,10 @@ struct member_list
   MEMBER_LIST   *prev;          /* Prev clan */
 };
 
-void show_members( const CHAR_DATA *ch, const char *argument, const char *format );
-void remove_member( const CHAR_DATA *ch );
-void save_member_list( const MEMBER_LIST *members_list );
-bool load_member_list( const char *filename );
-void update_member( const CHAR_DATA *ch );
+void ShowMembers( const CHAR_DATA *ch, const char *argument, const char *format );
+void RemoveMember( const CHAR_DATA *ch );
+void SaveMemberList( const MEMBER_LIST *members_list );
+bool LoadMemberList( const char *filename );
+void UpdateMember( const CHAR_DATA *ch );
 
 #endif /* include guard */

@@ -50,7 +50,7 @@ void do_setship( CHAR_DATA *ch, char *argument )
     {
       Clan *clan = NULL;
 
-      if ( ship->type != MOB_SHIP && (clan = get_clan( ship->owner )) != NULL )
+      if ( ship->type != MOB_SHIP && (clan = GetClan( ship->owner )) != NULL )
         {
           if ( ship->sclass <= SHIP_PLATFORM )
             clan->spacecraft--;
@@ -63,7 +63,7 @@ void do_setship( CHAR_DATA *ch, char *argument )
       send_to_char( "Done.\r\n", ch );
       save_ship( ship );
 
-      if ( ship->type != MOB_SHIP && (clan = get_clan( ship->owner )) != NULL )
+      if ( ship->type != MOB_SHIP && (clan = GetClan( ship->owner )) != NULL )
         {
           if ( ship->sclass <= SHIP_PLATFORM )
             clan->spacecraft++;

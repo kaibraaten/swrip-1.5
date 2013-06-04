@@ -18,11 +18,11 @@ void do_members( CHAR_DATA *ch, char *argument )
         {
           MEMBER_LIST *members_list;
           for( members_list = first_member_list; members_list; members_list = members_list->next )
-            show_members( ch, members_list->name, NULL );
+            ShowMembers( ch, members_list->name, NULL );
           return;
         }
 
-      show_members( ch, argument, NULL );
+      ShowMembers( ch, argument, NULL );
       return;
     }
 
@@ -33,7 +33,7 @@ void do_members( CHAR_DATA *ch, char *argument )
       CREATE( members_list, MEMBER_LIST, 1 );
       members_list->name = STRALLOC( argument );
       LINK( members_list, first_member_list, last_member_list, next, prev );
-      save_member_list( members_list );
+      SaveMemberList( members_list );
       ch_printf( ch, "Member lists \"%s\" created.\r\n", argument );
       return;
     }

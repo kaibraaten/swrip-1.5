@@ -20,7 +20,7 @@ void do_showclan( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  clan = get_clan( argument );
+  clan = GetClan( argument );
 
   if ( !clan )
     {

@@ -181,7 +181,7 @@ void save_char_obj( CHAR_DATA *ch )
   saving_char = ch;
   /* save pc's clan's data while we're at it to keep the data in sync */
   if ( is_clanned( ch ) )
-    save_clan( ch->pcdata->clan );
+    SaveClan( ch->pcdata->clan );
 
   if ( ch->desc && ch->desc->original )
     ch = ch->desc->original;
@@ -1191,17 +1191,17 @@ void fread_char( CHAR_DATA *ch, FILE *fp, bool preload )
 
               if ( !preload
                    &&   ch->pcdata->clan_name[0] != '\0'
-                   && ( ch->pcdata->clan = get_clan( ch->pcdata->clan_name )) == NULL )
+                   && ( ch->pcdata->clan = GetClan( ch->pcdata->clan_name )) == NULL )
                 {
                   sprintf( buf, "Warning: the organization %s no longer exists, and therefore you no longer\r\nbelong to that organization.\r\n",
                            ch->pcdata->clan_name );
                   send_to_char( buf, ch );
                   STRFREE( ch->pcdata->clan_name );
-                  remove_member(ch);
+                  RemoveMember(ch);
                   ch->pcdata->clan_name = STRALLOC( "" );
                 }
               else
-                update_member(ch);
+                UpdateMember(ch);
               fMatch = TRUE;
               break;
             }
@@ -1275,7 +1275,7 @@ void fread_char( CHAR_DATA *ch, FILE *fp, bool preload )
 
               if ( !preload
                    &&   ch->pcdata->clan_name[0] != '\0'
-                   && ( ch->pcdata->clan = get_clan( ch->pcdata->clan_name )) == NULL )
+                   && ( ch->pcdata->clan = GetClan( ch->pcdata->clan_name )) == NULL )
                 {
                   sprintf( buf, "Warning: the organization %s no longer exists, and therefore you no longer\r\nbelong to that organization.\r\n",
                            ch->pcdata->clan_name );

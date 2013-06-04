@@ -712,7 +712,7 @@ void boot_db( bool fCopyOver )
   load_boards();
 
   log_string( "Loading clans" );
-  load_clans();
+  LoadClans();
 
   log_string( "Loading bans" );
   load_banlist();

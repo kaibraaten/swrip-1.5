@@ -44,8 +44,8 @@ void do_enlist( CHAR_DATA *ch, char *argument )
       ch->pcdata->clan_name = QUICKLINK( clan->name );
       ch->pcdata->clan = clan;
       ch_printf( ch, "Welcome to %s.\r\n", clan->name );
-      update_member( ch );
-      save_clan ( clan );
+      UpdateMember( ch );
+      SaveClan( clan );
       return;
     }
 

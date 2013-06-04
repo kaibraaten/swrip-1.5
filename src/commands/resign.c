@@ -46,7 +46,7 @@ void do_resign( CHAR_DATA *ch, char *argument )
       ch->pcdata->clan->leadership.number2 = STRALLOC( "" );
     }
 
-  remove_member( ch );
+  RemoveMember( ch );
   ch->pcdata->clan = NULL;
   STRFREE(ch->pcdata->clan_name);
   ch->pcdata->clan_name = STRALLOC( "" );

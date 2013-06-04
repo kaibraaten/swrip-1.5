@@ -12,7 +12,7 @@ bool spec_clan_guard( CHAR_DATA *ch )
   if ( !is_awake(ch) || ch->fighting )
     return FALSE;
 
-  clan = get_clan(ch->name);
+  clan = GetClan(ch->name);
 
   for ( victim = ch->in_room->first_person; victim; victim = v_next )
     {

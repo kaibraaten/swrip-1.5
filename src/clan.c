@@ -43,7 +43,7 @@ static bool load_clan_file( const char *clanfile );
 /*
  * Get pointer to clan structure from clan name.
  */
-Clan *get_clan( const char *name )
+Clan *GetClan( const char *name )
 {
   CerisListIterator *iter = CreateListIterator( ClanList, ForwardsIterator );
 
@@ -68,7 +68,7 @@ static void WriteClanNameToFile( void *element, void *userData )
   fprintf( filehandle, "%s\n", clan->filename );
 }
 
-void write_clan_list( void )
+void WriteClanList( void )
 {
   FILE *fpout;
   char filename[256];
@@ -91,7 +91,7 @@ void write_clan_list( void )
 /*
  * Save a clan's data to its data file
  */
-void save_clan( const Clan *clan )
+void SaveClan( const Clan *clan )
 {
   FILE *fp;
   char filename[256];
@@ -344,7 +344,7 @@ static bool load_clan_file( const char *clanfile )
 
       List_AddTail( ClanList, clan );
 
-      if( !load_member_list( clan->filename ) )
+      if( !LoadMemberList( clan->filename ) )
         {
           MEMBER_LIST *members_list = NULL;
 
@@ -352,7 +352,7 @@ static bool load_clan_file( const char *clanfile )
           CREATE( members_list, MEMBER_LIST, 1 );
           members_list->name = STRALLOC( clan->name );
           LINK( members_list, first_member_list, last_member_list, next, prev );
-          save_member_list( members_list );
+          SaveMemberList( members_list );
         }
 
       if ( clan->storeroom == 0
@@ -447,7 +447,7 @@ static void AttachToMainClan( void *element, void *userData )
   if ( !clan->tmpstr || clan->tmpstr[0] == '\0' )
     return;
 
-  mainclan = get_clan ( clan->tmpstr );
+  mainclan = GetClan( clan->tmpstr );
 
   if ( !mainclan )
     return;
@@ -460,7 +460,7 @@ static void AttachToMainClan( void *element, void *userData )
 /*
  * Load in all the clan files.
  */
-void load_clans( void )
+void LoadClans( void )
 {
   FILE *fpList = NULL;
   char clanlist[256];
@@ -500,7 +500,7 @@ void load_clans( void )
   log_string(" Done sorting" );
 }
 
-void show_members( const CHAR_DATA *ch, const char *argument, const char *format )
+void ShowMembers( const CHAR_DATA *ch, const char *argument, const char *format )
 {
   MEMBER_LIST *members_list = NULL;
   MEMBER_DATA *member = NULL;
@@ -516,7 +516,7 @@ void show_members( const CHAR_DATA *ch, const char *argument, const char *format
   if( !members_list )
     return;
 
-  clan = get_clan( argument );
+  clan = GetClan( argument );
 
   if ( !clan  )
     return;
@@ -650,7 +650,7 @@ void show_members( const CHAR_DATA *ch, const char *argument, const char *format
                 "------------------------------------------------------------\r\n" );
 }
 
-void remove_member( const CHAR_DATA *ch )
+void RemoveMember( const CHAR_DATA *ch )
 {
   MEMBER_LIST   *members_list;
   MEMBER_DATA   *member;
@@ -669,14 +669,14 @@ void remove_member( const CHAR_DATA *ch )
                 STRFREE( member->name );
                 STRFREE( member->since );
                 DISPOSE( member );
-                save_member_list( members_list );
+                SaveMemberList( members_list );
                 break;
               }
           }
     }
 }
 
-void save_member_list( const MEMBER_LIST *members_list )
+void SaveMemberList( const MEMBER_LIST *members_list )
 {
   MEMBER_DATA   *member;
   FILE          *fp;
@@ -689,7 +689,7 @@ void save_member_list( const MEMBER_LIST *members_list )
       return;
     }
 
-  if( ( clan = get_clan( members_list->name )) == NULL )
+  if( ( clan = GetClan( members_list->name )) == NULL )
     {
       bug( "save_member_list: no such clan: %s", members_list->name );
       return;
@@ -713,7 +713,7 @@ void save_member_list( const MEMBER_LIST *members_list )
 
 }
 
-bool load_member_list( const char *filename )
+bool LoadMemberList( const char *filename )
 {
   FILE *fp;
   char buf[MAX_STRING_LENGTH];
@@ -769,7 +769,7 @@ bool load_member_list( const char *filename )
 
 }
 
-void update_member( const CHAR_DATA *ch )
+void UpdateMember( const CHAR_DATA *ch )
 {
   MEMBER_LIST *members_list;
   MEMBER_DATA *member;
@@ -826,13 +826,13 @@ void update_member( const CHAR_DATA *ch )
 		}
 
 	      LINK( member, members_list->first_member, members_list->last_member, next, prev );
-	      save_member_list( members_list );
+	      SaveMemberList( members_list );
 	    }
 	}
     }
 }
 
-bool has_subclans( const Clan *clan )
+bool HasSubClans( const Clan *clan )
 {
   return List_Count( clan->SubClans ) > 0;
 }

@@ -14,7 +14,7 @@ void do_renameship( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  if( ( (clan = get_clan(ship->owner)) == NULL )
+  if( ( (clan = GetClan(ship->owner)) == NULL )
       || str_cmp( clan->leadership.leader, ch->name ) )
     {
       if( str_cmp( ship->owner, ch->name ) )

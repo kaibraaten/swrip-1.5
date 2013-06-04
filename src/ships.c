@@ -2529,7 +2529,7 @@ static bool load_ship_file( const char *shipfile )
           ship->shield = ship->maxshield;
         }
 
-      if ( ship->type != MOB_SHIP && (clan = get_clan( ship->owner )) != NULL )
+      if ( ship->type != MOB_SHIP && (clan = GetClan( ship->owner )) != NULL )
         {
           if ( ship->sclass <= SHIP_PLATFORM )
             clan->spacecraft++;
@@ -2630,7 +2630,7 @@ void resetship( SHIP_DATA *ship )
     {
       Clan *clan = NULL;
 
-      if ( ship->type != MOB_SHIP && (clan = get_clan( ship->owner )) != NULL )
+      if ( ship->type != MOB_SHIP && (clan = GetClan( ship->owner )) != NULL )
         {
           if ( ship->sclass <= SHIP_PLATFORM )
             clan->spacecraft--;

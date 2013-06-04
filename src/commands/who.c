@@ -160,7 +160,7 @@ void do_who( CHAR_DATA *ch, char *argument )
                   if (!str_cmp( arg, "clan" ) && ch->pcdata && is_clanned( ch ) )
                     strcpy(arg, ch->pcdata->clan->name);
 
-                  if ( (pClan = get_clan (arg)) && (fClanMatch != TRUE))
+                  if ( (pClan = GetClan(arg)) && (fClanMatch != TRUE))
                     {
                       if ((ch->top_level >= LEVEL_IMMORTAL)
 			  || (is_clanned( ch )

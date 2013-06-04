@@ -84,7 +84,7 @@ void do_outcast( CHAR_DATA *ch, char *argument )
     }
 
   victim->pcdata->clan = NULL;
-  remove_member( victim );
+  RemoveMember( victim );
   STRFREE(victim->pcdata->clan_name);
   victim->pcdata->clan_name = STRALLOC( "" );
   act( AT_MAGIC, "You outcast $N from $t", ch, clan->name, victim, TO_CHAR );

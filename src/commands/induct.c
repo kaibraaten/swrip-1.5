@@ -98,7 +98,7 @@ void do_induct( CHAR_DATA *ch, char *argument )
   victim->pcdata->clan = clan;
   STRFREE(victim->pcdata->clan_name);
   victim->pcdata->clan_name = QUICKLINK( clan->name );
-  update_member( victim );
+  UpdateMember( victim );
   act( AT_MAGIC, "You induct $N into $t", ch, clan->name, victim, TO_CHAR );
   act( AT_MAGIC, "$n inducts $N into $t", ch, clan->name, victim, TO_NOTVICT );
   act( AT_MAGIC, "$n inducts you into $t", ch, clan->name, victim, TO_VICT );
