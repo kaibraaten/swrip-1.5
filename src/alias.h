@@ -30,18 +30,15 @@
 
 typedef struct alias_type ALIAS_DATA;
 
-struct  alias_type
-{
-  ALIAS_DATA *next;
-  ALIAS_DATA *prev;
-  char *name;
-  char *cmd;
-};
-
 DECLARE_DO_FUN( do_alias );
 
-void free_aliases( CHAR_DATA *ch );
-bool check_alias( CHAR_DATA *ch, char *command, char *argument );
-ALIAS_DATA *find_alias( const CHAR_DATA *ch, const char *argument );
+void FreeAliases( CHAR_DATA *ch );
+bool CheckAlias( CHAR_DATA *ch, char *command, char *argument );
+ALIAS_DATA *FindAlias( const CHAR_DATA *ch, const char *argument );
+const char *GetAliasName( const ALIAS_DATA *alias );
+const char *GetAliasValue( const ALIAS_DATA *alias );
+void SetAliasValue( ALIAS_DATA *alias, const char *value );
+ALIAS_DATA *CreateAlias( const char *name, const char *value );
+void DestroyAlias( ALIAS_DATA *alias );
 
 #endif

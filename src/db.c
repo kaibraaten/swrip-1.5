@@ -2557,9 +2557,11 @@ void free_char( CHAR_DATA *ch )
       DISPOSE( ch->pcdata->homepage     );  /* no hash */
       STRFREE( ch->pcdata->authed_by    );
       STRFREE( ch->pcdata->prompt       );
+
       if ( ch->pcdata->subprompt )
         STRFREE( ch->pcdata->subprompt );
-      free_aliases( ch );
+
+      FreeAliases( ch );
 #ifdef SWRIP_USE_IMC
       imc_freechardata( ch );
 #endif

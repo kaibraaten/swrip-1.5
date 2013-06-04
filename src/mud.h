@@ -25,6 +25,7 @@
 #define _SWRIP_MUD_H_
 
 #include <utility.h>
+#include <eris/ceris.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>
@@ -809,8 +810,7 @@ struct pc_data
   int         bet_amt;
   int         salary;
   long        salary_date;    /* Auto-Salary Darrik Vequir */
-  ALIAS_DATA *first_alias;
-  ALIAS_DATA *last_alias;
+  CerisList  *Aliases;
   CHAR_DATA  *pet;
   char       *target;
   NOTE_DATA  *pnote;

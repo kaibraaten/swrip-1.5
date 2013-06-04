@@ -25,47 +25,65 @@
 ******************************************************/
 
 #include <string.h>
+#include <eris/ceris.h>
 #include "mud.h"
 #include "character.h"
 
-ALIAS_DATA *find_alias( const CHAR_DATA *ch, const char *original_argument )
+struct alias_type
 {
-  ALIAS_DATA *pal;
+  char *Name;
+  char *Value;
+};
+
+ALIAS_DATA *FindAlias( const CHAR_DATA *ch, const char *original_argument )
+{
+  ALIAS_DATA *alias = NULL;
   char alias_name[MAX_INPUT_LENGTH];
   char argument[MAX_INPUT_LENGTH];
+  CerisListIterator *iter = NULL;
 
   if (!ch || !ch->pcdata)
-    return(NULL);
+    return NULL;
 
   strcpy(argument, original_argument);
   one_argument(argument, alias_name);
 
-  for (pal=ch->pcdata->first_alias;pal;pal=pal->next)
-    if ( !str_prefix(alias_name, pal->name) )
-      return(pal);
+  iter = CreateListIterator( ch->pcdata->Aliases, ForwardsIterator );
 
-  return(NULL);
+  for ( ; !ListIterator_IsDone( iter ); ListIterator_Next( iter ) )
+    {
+      ALIAS_DATA *current = (ALIAS_DATA*) ListIterator_GetData( iter );
+
+      if ( !str_prefix(alias_name, current->Name) )
+	{
+	  alias = current;
+	  break;
+	}
+    }
+
+  DestroyListIterator( iter );
+
+  return alias;
 }
 
-void free_aliases( CHAR_DATA *ch )
+static void FreeAlias( void *element, void *userData )
 {
-  ALIAS_DATA *pal, *next_pal;
+  ALIAS_DATA *alias = (ALIAS_DATA*) element;
 
-  if (!ch || !ch->pcdata)
+  DestroyAlias( alias );
+}
+
+void FreeAliases( CHAR_DATA *ch )
+{
+  if (!ch || !ch->pcdata || !ch->pcdata->Aliases)
     return;
 
-  for (pal=ch->pcdata->first_alias;pal;pal=next_pal)
-    {
-      next_pal=pal->next;
-      if (pal->name)
-        DISPOSE(pal->name);
-      if (pal->cmd)
-        DISPOSE(pal->cmd);
-      DISPOSE( pal );
-    }
+  List_ForEach( ch->pcdata->Aliases, FreeAlias, NULL );
+  DestroyList( ch->pcdata->Aliases );
+  ch->pcdata->Aliases = NULL;
 }
 
-bool check_alias( CHAR_DATA *ch, char *command, char *argument )
+bool CheckAlias( CHAR_DATA *ch, char *command, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   ALIAS_DATA *alias;
@@ -74,21 +92,24 @@ bool check_alias( CHAR_DATA *ch, char *command, char *argument )
   if ( argument && *argument!='\0' )
     nullarg = FALSE;
 
-  if ( (alias=find_alias(ch,command)) == NULL )
+  alias = FindAlias( ch, command );
+
+  if ( alias == NULL )
     return FALSE;
 
-  if (!alias->cmd || !*alias->cmd)
+  if (!*alias->Value)
     return FALSE;
 
-  sprintf(arg, "%s", alias->cmd);
+  sprintf(arg, "%s", alias->Value);
 
-  if (ch->cmd_recurse==-1 || ++ch->cmd_recurse>50)
+  if (ch->cmd_recurse == -1 || ++ch->cmd_recurse > 50)
     {
       if (ch->cmd_recurse!=-1)
         {
           send_to_char("Unable to further process command, recurses too much.\r\n", ch);
           ch->cmd_recurse=-1;
         }
+
       return FALSE;
     }
 
@@ -100,4 +121,38 @@ bool check_alias( CHAR_DATA *ch, char *command, char *argument )
 
   interpret(ch, arg);
   return TRUE;
+}
+
+const char *GetAliasName( const ALIAS_DATA *alias )
+{
+  return alias->Name;
+}
+
+const char *GetAliasValue( const ALIAS_DATA *alias )
+{
+  return alias->Value;
+}
+
+void SetAliasValue( ALIAS_DATA *alias, const char *value )
+{
+  STRFREE( alias->Value );
+  alias->Value = STRALLOC( value );
+}
+
+ALIAS_DATA *CreateAlias( const char *name, const char *value )
+{
+  ALIAS_DATA *alias = NULL;
+
+  CREATE( alias, ALIAS_DATA, 1 );
+  alias->Name = STRALLOC( name );
+  alias->Value = STRALLOC( value );
+
+  return alias;
+}
+
+void DestroyAlias( ALIAS_DATA *alias )
+{
+  STRFREE( alias->Name );
+  STRFREE( alias->Value );
+  DISPOSE( alias );
 }

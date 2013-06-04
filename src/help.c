@@ -158,10 +158,20 @@ void load_helps( void )
     }
 }
 
+static void WriteHelpfile( const void *key, void *value, void *userData )
+{
+  FILE *filehandle = (FILE*) userData;
+  const HELP_DATA *pHelp = (const HELP_DATA*) key;
+
+  fprintf( filehandle, "%d %s~\n%s~\n\n",
+	   get_help_level( pHelp ),
+	   get_help_keyword( pHelp ),
+	   help_fix( get_help_text( pHelp ) ) );
+}
+
 void save_helps( void )
 {
   FILE *filehandle = NULL;
-  CerisMapIterator *iter = NULL;
 
   rename( HELP_FILE, HELP_FILE ".bak" );
 
@@ -172,21 +182,8 @@ void save_helps( void )
       return;
     }
 
-  fprintf( filehandle, "#HELPS\n\n" );
+  Map_ForEach( HelpFiles, WriteHelpfile, filehandle );
 
-  iter = CreateMapIterator( HelpFiles );
-
-  for( ; !MapIterator_IsDone( iter ); MapIterator_Next( iter ) )
-    {
-      HELP_DATA *pHelp = (HELP_DATA*) MapIterator_GetKey( iter );
-
-      fprintf( filehandle, "%d %s~\n%s~\n\n",
-	       get_help_level( pHelp ),
-	       get_help_keyword( pHelp ),
-	       help_fix( get_help_text( pHelp ) ) );
-    }
-
-  DestroyMapIterator( iter );
   fprintf( filehandle, "0 $~\n\n\n#$\n" );
   fclose( filehandle );
 }

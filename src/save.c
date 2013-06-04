@@ -320,7 +320,20 @@ void save_clone( CHAR_DATA *ch )
   return;
 }
 
+static void WriteAlias( void *element, void *userData )
+{
+  FILE *filehandle = (FILE*) userData;
+  ALIAS_DATA *alias = (ALIAS_DATA*) element;
+  const char *name = GetAliasName( alias );
+  const char *value = GetAliasValue( alias );
 
+  if ( !*name || !*value )
+    {
+      return;
+    }
+
+  fprintf( filehandle, "Alias        %s~ %s~\n", name, value );
+}
 
 /*
  * Write the char.
@@ -328,7 +341,6 @@ void save_clone( CHAR_DATA *ch )
 void fwrite_char( CHAR_DATA *ch, FILE *fp )
 {
   AFFECT_DATA *paf;
-  ALIAS_DATA *pal;
   int sn, track, drug;
   SKILLTYPE *skill;
 
@@ -446,15 +458,9 @@ void fwrite_char( CHAR_DATA *ch, FILE *fp )
         fprintf( fp, "Prompt       %s~\n",      ch->pcdata->prompt      );
       if ( ch->pcdata->pagerlen != 24 )
         fprintf( fp, "Pagerlen     %d\n",       ch->pcdata->pagerlen    );
-      for ( pal = ch->pcdata->first_alias; pal; pal = pal->next )
-        {
-          if ( !pal->name || !pal->cmd || !*pal->name || !*pal->cmd )
-            continue;
-          fprintf( fp, "Alias        %s~ %s~\n",
-                   pal->name,
-                   pal->cmd
-                   );
-        }
+
+      List_ForEach( ch->pcdata->Aliases, WriteAlias, fp );
+
       fprintf( fp, "Addiction   ");
       for ( drug = 0 ; drug <=9 ; drug++ )
         fprintf( fp, " %d",     ch->pcdata->addiction[drug] );
@@ -825,6 +831,7 @@ bool load_char_obj( DESCRIPTOR_DATA *d, char *name, bool preload )
   ch->mob_clan                        = STRALLOC( "" );
   ch->was_sentinel                    = NULL;
   ch->plr_home                        = NULL;
+  ch->pcdata->Aliases = CreateList();
 
 #ifdef SWRIP_USE_IMC
   imc_initchar( ch );
@@ -952,8 +959,6 @@ bool load_char_obj( DESCRIPTOR_DATA *d, char *name, bool preload )
       ch->pcdata->o_range_hi            = 0;
       ch->pcdata->wizinvis              = 0;
       ch->pcdata->wanted_flags        = 0;
-      ch->pcdata->first_alias           = NULL;
-      ch->pcdata->last_alias            = NULL;
       ch->on                            = NULL;
     }
   else
@@ -1127,7 +1132,11 @@ void fread_char( CHAR_DATA *ch, FILE *fp, bool preload )
 
           if ( !str_cmp( word, "Alias" ) )
             {
-              ALIAS_DATA *pal;
+              ALIAS_DATA *alias;
+	      char nameBuffer[MAX_STRING_LENGTH];
+	      char valueBuffer[MAX_STRING_LENGTH];
+	      char *name;
+	      char *value;
 
               if ( preload )
                 {
@@ -1135,11 +1144,12 @@ void fread_char( CHAR_DATA *ch, FILE *fp, bool preload )
                   fread_to_eol( fp );
                   break;
                 }
-              CREATE( pal, ALIAS_DATA, 1 );
 
-              pal->name = fread_string_nohash( fp );
-              pal->cmd  = fread_string_nohash( fp );
-              LINK(pal, ch->pcdata->first_alias, ch->pcdata->last_alias, next, prev );
+	      name = fread_string( fp, nameBuffer, sizeof( nameBuffer ) );
+	      value = fread_string( fp, valueBuffer, sizeof( valueBuffer ) );
+              alias = CreateAlias( name, value );
+	      List_AddTail( ch->pcdata->Aliases, alias );
+
               fMatch = TRUE;
               break;
             }

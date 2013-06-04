@@ -2,6 +2,8 @@
 #include "mud.h"
 #include "alias.h"
 
+static void SendAliasToPager( void *element, void *userData );
+
 void do_alias( CHAR_DATA *ch, char *argument )
 {
   ALIAS_DATA *pal = NULL;
@@ -14,47 +16,54 @@ void do_alias( CHAR_DATA *ch, char *argument )
 
   if ( !*arg )
     {
-      if (!ch->pcdata->first_alias)
+      if ( List_Count( ch->pcdata->Aliases ) == 0 )
         {
           send_to_char("You have no aliases defined!\r\n", ch);
           return;
         }
+
       pager_printf( ch, "%-20s What it does\r\n", "Alias" );
-      for (pal=ch->pcdata->first_alias;pal;pal=pal->next)
-        pager_printf( ch, "%-20s %s\r\n",
-                      pal->name, pal->cmd );
+      List_ForEach( ch->pcdata->Aliases, SendAliasToPager, ch );
       return;
     }
 
   if ( !*argument)
     {
-      if ( (pal = find_alias(ch, arg)) != NULL )
+      ALIAS_DATA *alias = FindAlias( ch, arg );
+
+      if ( alias != NULL )
         {
-          DISPOSE(pal->name);
-          DISPOSE(pal->cmd);
-          UNLINK(pal, ch->pcdata->first_alias, ch->pcdata->last_alias, next, prev);
-          DISPOSE(pal);
+	  List_Remove( ch->pcdata->Aliases, alias );
+	  DestroyAlias( alias );
           send_to_char("Deleted Alias.\r\n", ch);
         }
       else
-        send_to_char("That alias does not exist.\r\n", ch);
+	{
+	  send_to_char("That alias does not exist.\r\n", ch);
+	}
+
       return;
     }
 
-  if ( (pal=find_alias(ch, arg)) == NULL )
+  pal = FindAlias( ch, arg );
+
+  if ( pal == NULL )
     {
-      CREATE(pal, ALIAS_DATA, 1);
-      pal->name = str_dup(arg);
-      pal->cmd  = str_dup(argument);
-      LINK(pal, ch->pcdata->first_alias, ch->pcdata->last_alias, next, prev);
+      pal = CreateAlias( arg, argument );
+      List_AddTail( ch->pcdata->Aliases, pal );
       send_to_char("Created Alias.\r\n", ch);
     }
   else
     {
-      if (pal->cmd)
-        DISPOSE(pal->cmd);
-
-      pal->cmd  = str_dup(argument);
+      SetAliasValue( pal, argument );
       send_to_char("Modified Alias.\r\n", ch);
     }
+}
+
+static void SendAliasToPager( void *element, void *userData )
+{
+  CHAR_DATA *ch = (CHAR_DATA*) userData;
+  ALIAS_DATA *alias = (ALIAS_DATA*) element;
+
+  pager_printf( ch, "%-20s %s\r\n", GetAliasName( alias ), GetAliasValue( alias ) );
 }
