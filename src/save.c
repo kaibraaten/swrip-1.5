@@ -459,7 +459,7 @@ void fwrite_char( CHAR_DATA *ch, FILE *fp )
       if ( ch->pcdata->pagerlen != 24 )
         fprintf( fp, "Pagerlen     %d\n",       ch->pcdata->pagerlen    );
 
-      List_ForEach( ch->pcdata->Aliases, WriteAlias, fp );
+      List_ForEach( GetAliases( ch ), WriteAlias, fp );
 
       fprintf( fp, "Addiction   ");
       for ( drug = 0 ; drug <=9 ; drug++ )
@@ -831,7 +831,7 @@ bool load_char_obj( DESCRIPTOR_DATA *d, char *name, bool preload )
   ch->mob_clan                        = STRALLOC( "" );
   ch->was_sentinel                    = NULL;
   ch->plr_home                        = NULL;
-  ch->pcdata->Aliases = CreateList();
+  AllocateAliasList( ch );
 
 #ifdef SWRIP_USE_IMC
   imc_initchar( ch );
@@ -1148,7 +1148,7 @@ void fread_char( CHAR_DATA *ch, FILE *fp, bool preload )
 	      name = fread_string( fp, nameBuffer, sizeof( nameBuffer ) );
 	      value = fread_string( fp, valueBuffer, sizeof( valueBuffer ) );
               alias = CreateAlias( name, value );
-	      List_AddTail( ch->pcdata->Aliases, alias );
+	      AddAlias( ch, alias );
 
               fMatch = TRUE;
               break;

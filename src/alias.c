@@ -48,7 +48,7 @@ Alias *FindAlias( const CHAR_DATA *ch, const char *original_argument )
   strcpy(argument, original_argument);
   one_argument(argument, alias_name);
 
-  iter = CreateListIterator( ch->pcdata->Aliases, ForwardsIterator );
+  iter = CreateListIterator( GetAliases( ch ), ForwardsIterator );
 
   for ( ; !ListIterator_IsDone( iter ); ListIterator_Next( iter ) )
     {
@@ -75,12 +75,18 @@ static void FreeAlias( void *element, void *userData )
 
 void FreeAliases( CHAR_DATA *ch )
 {
-  if (!ch || !ch->pcdata || !ch->pcdata->Aliases)
+  CerisList *aliasList = GetAliases( ch );
+
+  if (!ch || !ch->pcdata || !aliasList )
     return;
 
-  List_ForEach( ch->pcdata->Aliases, FreeAlias, NULL );
-  DestroyList( ch->pcdata->Aliases );
-  ch->pcdata->Aliases = NULL;
+  List_ForEach( aliasList, FreeAlias, NULL );
+  DestroyList( aliasList );
+}
+
+CerisList *GetAliases( const CHAR_DATA *ch )
+{
+  return ch->pcdata->Aliases;
 }
 
 bool CheckAlias( CHAR_DATA *ch, char *command, char *argument )
@@ -155,4 +161,21 @@ void DestroyAlias( Alias *alias )
   STRFREE( alias->Name );
   STRFREE( alias->Value );
   DISPOSE( alias );
+}
+
+void AddAlias( CHAR_DATA *ch, Alias *alias )
+{
+  CerisList *aliasList = GetAliases( ch );
+  List_AddTail( aliasList, alias );
+}
+
+void RemoveAlias( CHAR_DATA *ch, Alias *alias )
+{
+  CerisList *aliasList = GetAliases( ch );
+  List_Remove( aliasList, alias );
+}
+
+void AllocateAliasList( CHAR_DATA *ch )
+{
+  ch->pcdata->Aliases = CreateList();
 }

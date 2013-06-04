@@ -16,14 +16,14 @@ void do_alias( CHAR_DATA *ch, char *argument )
 
   if ( !*arg )
     {
-      if ( List_Count( ch->pcdata->Aliases ) == 0 )
+      if ( List_Count( GetAliases( ch ) ) == 0 )
         {
           send_to_char("You have no aliases defined!\r\n", ch);
           return;
         }
 
       pager_printf( ch, "%-20s What it does\r\n", "Alias" );
-      List_ForEach( ch->pcdata->Aliases, SendAliasToPager, ch );
+      List_ForEach( GetAliases( ch ), SendAliasToPager, ch );
       return;
     }
 
@@ -33,7 +33,7 @@ void do_alias( CHAR_DATA *ch, char *argument )
 
       if ( alias != NULL )
         {
-	  List_Remove( ch->pcdata->Aliases, alias );
+	  RemoveAlias( ch, alias );
 	  DestroyAlias( alias );
           send_to_char("Deleted Alias.\r\n", ch);
         }
@@ -50,7 +50,7 @@ void do_alias( CHAR_DATA *ch, char *argument )
   if ( pal == NULL )
     {
       pal = CreateAlias( arg, argument );
-      List_AddTail( ch->pcdata->Aliases, pal );
+      AddAlias( ch, pal );
       send_to_char("Created Alias.\r\n", ch);
     }
   else
