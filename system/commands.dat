@@ -3567,6 +3567,14 @@ Log         0
 End
 
 #COMMAND
+Name        test~
+Code        do_test
+Position    0
+Level       105
+Log         0
+End
+
+#COMMAND
 Name        up~
 Code        do_up
 Position    8
