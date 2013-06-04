@@ -6,7 +6,7 @@ void do_outcast( CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   CHAR_DATA *victim;
-  CLAN_DATA *clan;
+  Clan *clan;
 
   if ( is_npc( ch ) || !is_clanned( ch ) )
     {

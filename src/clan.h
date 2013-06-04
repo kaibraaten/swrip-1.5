@@ -6,10 +6,10 @@
 
 extern CerisList *ClanList;
 
-struct clan_data
+struct Clan
 {
   CerisList *SubClans;
-  CLAN_DATA *mainclan;
+  Clan *mainclan;
   char      *filename;       /* Clan filename                        */
   char      *name;           /* Clan name                            */
   char      *description;    /* A brief description of the clan      */
@@ -43,16 +43,44 @@ struct clan_data
   } leadership;
 };
 
-CLAN_DATA *get_clan( const char *name );
+Clan *get_clan( const char *name );
 void write_clan_list( void );
-void save_clan( const CLAN_DATA *clan );
+void save_clan( const Clan *clan );
 void load_clans( void );
+bool has_subclans( const Clan *clan );
+
+struct membersort_data
+{
+  MS_DATA     *next;
+  MS_DATA     *prev;
+  MEMBER_DATA *member;
+};
+
+struct member_data
+{
+  char         *name;  /* Name of member */
+  char         *since; /* Member since */
+  int           mclass; /* class of member */
+  int           level;  /* level of member */
+  int           deaths; /* Pdeaths for clans, mdeaths for guilds/orders */
+  int           kills;  /* Pkills for clans, mkills for guilds/orders */
+  MEMBER_DATA  *next;  /* Next member */
+  MEMBER_DATA  *prev;  /* Prev member */
+};
+
+struct member_list
+{
+  char          *name;          /* Clan name */
+  MEMBER_DATA   *first_member;  /* First Member */
+  MEMBER_DATA   *last_member;   /* Last Member */
+  MEMBER_LIST   *next;          /* Next clan */
+  MEMBER_LIST   *prev;          /* Prev clan */
+};
+
 void show_members( const CHAR_DATA *ch, const char *argument, const char *format );
 void remove_member( const CHAR_DATA *ch );
 void save_member_list( const MEMBER_LIST *members_list );
 bool load_member_list( const char *filename );
 void update_member( const CHAR_DATA *ch );
-
-bool has_subclans( const CLAN_DATA *clan );
 
 #endif /* include guard */

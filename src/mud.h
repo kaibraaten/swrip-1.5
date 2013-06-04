@@ -290,34 +290,6 @@ struct race_type
   int   language;               /* Default racial language      */
 };
 
-struct membersort_data
-{
-  MS_DATA     *next;
-  MS_DATA     *prev;
-  MEMBER_DATA *member;
-};
-
-struct member_data
-{
-  char         *name;  /* Name of member */
-  char         *since; /* Member since */
-  int           mclass; /* class of member */
-  int           level;  /* level of member */
-  int           deaths; /* Pdeaths for clans, mdeaths for guilds/orders */
-  int           kills;  /* Pkills for clans, mkills for guilds/orders */
-  MEMBER_DATA  *next;  /* Next member */
-  MEMBER_DATA  *prev;  /* Prev member */
-};
-
-struct member_list
-{
-  char          *name;          /* Clan name */
-  MEMBER_DATA   *first_member;  /* First Member */
-  MEMBER_DATA   *last_member;   /* Last Member */
-  MEMBER_LIST   *next;          /* Next clan */
-  MEMBER_LIST   *prev;          /* Prev clan */
-};
-
 struct space_data
 {
   SPACE_DATA  *next;
@@ -388,7 +360,7 @@ struct planet_data
   char        *name;
   char        *filename;
   long         base_value;
-  CLAN_DATA   *governed_by;
+  Clan   *governed_by;
   int          population;
   bool         flags;
   float        pop_support;
@@ -716,7 +688,7 @@ struct killed_data
  */
 struct pc_data
 {
-  CLAN_DATA  *clan;
+  Clan  *clan;
   AREA_DATA  *area;
   char       *homepage;
   char       *clan_name;
@@ -2269,7 +2241,7 @@ extern "C" {
   bool remove_obj( CHAR_DATA *ch, int iWear, bool fReplace );
   obj_ret damage_obj( OBJ_DATA *obj );
   short get_obj_resistance( const OBJ_DATA *obj );
-  void save_clan_storeroom( CHAR_DATA *ch, const CLAN_DATA *clan );
+  void save_clan_storeroom( CHAR_DATA *ch, const Clan *clan );
   void obj_fall( OBJ_DATA *obj, bool through );
 
   /* act_wiz.c */

@@ -48,7 +48,7 @@ void do_setship( CHAR_DATA *ch, char *argument )
 
   if ( !str_cmp( arg2, "owner" ) )
     {
-      CLAN_DATA *clan = NULL;
+      Clan *clan = NULL;
 
       if ( ship->type != MOB_SHIP && (clan = get_clan( ship->owner )) != NULL )
         {

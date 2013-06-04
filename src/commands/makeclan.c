@@ -4,7 +4,7 @@
 void do_makeclan( CHAR_DATA *ch, char *argument )
 {
   /*char filename[256];*/
-  CLAN_DATA *clan;
+  Clan *clan;
 
   if ( !argument || argument[0] == '\0' )
     {
@@ -14,7 +14,7 @@ void do_makeclan( CHAR_DATA *ch, char *argument )
 
   /*sprintf( filename, "%s%s", CLAN_DIR, strlower(argument) );*/
 
-  CREATE( clan, CLAN_DATA, 1 );
+  CREATE( clan, Clan, 1 );
   List_AddTail( ClanList, clan );
   clan->SubClans = CreateList();
   clan->name            = STRALLOC( argument );

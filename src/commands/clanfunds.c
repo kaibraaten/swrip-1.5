@@ -4,7 +4,7 @@
 
 void do_clanfunds( CHAR_DATA *ch, char *argument )
 {
-  CLAN_DATA *clan;
+  Clan *clan;
 
   if ( is_npc( ch ) || !is_clanned( ch ) )
     {

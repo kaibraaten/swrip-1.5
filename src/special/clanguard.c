@@ -6,7 +6,7 @@ bool spec_clan_guard( CHAR_DATA *ch )
 {
   CHAR_DATA *victim;
   CHAR_DATA *v_next;
-  CLAN_DATA *clan;
+  Clan *clan;
   bool found = FALSE;
 
   if ( !is_awake(ch) || ch->fighting )

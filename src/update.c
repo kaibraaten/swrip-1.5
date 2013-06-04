@@ -1023,7 +1023,7 @@ void mobile_update( void )
 
 static void CollectTaxes( void *element, void *userData )
 {
-  CLAN_DATA *clan = (CLAN_DATA*) element;
+  Clan *clan = (Clan*) element;
   long amount = (long) userData;
 
   clan->funds += amount;
@@ -1033,7 +1033,7 @@ static void CollectTaxes( void *element, void *userData )
 void update_taxes( void )
 {
   PLANET_DATA *planet;
-  CLAN_DATA *clan;
+  Clan *clan;
   DESCRIPTOR_DATA *d;
 
   for ( planet = first_planet; planet; planet = planet->next )

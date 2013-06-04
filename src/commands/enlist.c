@@ -2,11 +2,11 @@
 #include "character.h"
 #include "clan.h"
 
-static CLAN_DATA *GetRecruitingClan( const ROOM_INDEX_DATA *enlistRoom );
+static Clan *GetRecruitingClan( const ROOM_INDEX_DATA *enlistRoom );
 
 void do_enlist( CHAR_DATA *ch, char *argument )
 {
-  CLAN_DATA *clan;
+  Clan *clan;
 
   if ( is_npc(ch) || !ch->pcdata )
     {
@@ -52,14 +52,14 @@ void do_enlist( CHAR_DATA *ch, char *argument )
   send_to_char( "They don't seem to be recruiting right now.\r\n", ch );
 }
 
-static CLAN_DATA *GetRecruitingClan( const ROOM_INDEX_DATA *enlistRoom )
+static Clan *GetRecruitingClan( const ROOM_INDEX_DATA *enlistRoom )
 {
   CerisListIterator *iter = CreateListIterator( ClanList, ForwardsIterator );
-  CLAN_DATA *clan = NULL;
+  Clan *clan = NULL;
 
   for( ; !ListIterator_IsDone( iter ); ListIterator_Next( iter ) )
     {
-      CLAN_DATA *current = (CLAN_DATA*) ListIterator_GetData( iter );
+      Clan *current = (Clan*) ListIterator_GetData( iter );
 
       if( ( enlistRoom->vnum == current->enlistroom1
 	    || enlistRoom->vnum == current->enlistroom2 ) )

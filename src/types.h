@@ -37,7 +37,7 @@ typedef struct planet_data             PLANET_DATA;
 typedef struct storeroom               STOREROOM;
 typedef struct guard_data              GUARD_DATA;
 typedef struct space_data              SPACE_DATA;
-typedef struct clan_data               CLAN_DATA;
+typedef struct Clan                    Clan;
 typedef struct ship_data               SHIP_DATA;
 typedef struct turret_data             TURRET_DATA;
 typedef struct missile_data            MISSILE_DATA;

@@ -6,7 +6,7 @@ void do_setclan( CHAR_DATA *ch, char *argument )
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
-  CLAN_DATA *clan;
+  Clan *clan;
 
   if ( is_npc( ch ) )
     {
@@ -69,7 +69,7 @@ void do_setclan( CHAR_DATA *ch, char *argument )
 
   if ( !str_cmp( arg2, "subclan" ) )
     {
-      CLAN_DATA *subclan = get_clan( argument );
+      Clan *subclan = get_clan( argument );
 
       if ( !subclan )
         {

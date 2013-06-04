@@ -27,7 +27,7 @@ void do_clans( CHAR_DATA *ch, char *argument )
 
 static void ShowMainClanToCharacter( void *element, void *userData )
 {
-  CLAN_DATA *clan = (CLAN_DATA*) element;
+  Clan *clan = (Clan*) element;
   CHAR_DATA *ch = (CHAR_DATA*) userData;
   int pCount = 0;
   int support = 0;
@@ -90,7 +90,7 @@ static void ShowMainClanToCharacter( void *element, void *userData )
 
 static void ShowAutonomousGroupToCharacter( void *element, void *userData )
 {
-  CLAN_DATA *clan = (CLAN_DATA*) element;
+  Clan *clan = (Clan*) element;
   CHAR_DATA *ch = (CHAR_DATA*) userData;
 
   if ( clan->clan_type != CLAN_CRIME && clan->clan_type != CLAN_GUILD )
@@ -102,7 +102,7 @@ static void ShowAutonomousGroupToCharacter( void *element, void *userData )
 
 static void ShowSubClanToCharacter( void *element, void *userData )
 {
-  CLAN_DATA *subclan = (CLAN_DATA*) element;
+  Clan *subclan = (Clan*) element;
   CHAR_DATA *ch = (CHAR_DATA*) userData;
 
   ch_printf( ch, "  &O%-20s %-10s\r\n",

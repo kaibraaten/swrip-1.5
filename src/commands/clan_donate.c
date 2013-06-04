@@ -4,7 +4,7 @@
 
 void do_clan_donate( CHAR_DATA *ch, char *argument )
 {
-  CLAN_DATA *clan = NULL;
+  Clan *clan = NULL;
   long amount = 0;
 
   if ( is_npc( ch ) || !is_clanned( ch ) )

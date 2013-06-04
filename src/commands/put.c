@@ -231,7 +231,7 @@ void do_put( CHAR_DATA *ch, char *argument )
 
 static void SaveClanStoreroom( void *element, void *userData )
 {
-  CLAN_DATA *clan = (CLAN_DATA*) element;
+  Clan *clan = (Clan*) element;
   CHAR_DATA *ch = (CHAR_DATA*) userData;
 
   if ( clan->storeroom == ch->in_room->vnum )

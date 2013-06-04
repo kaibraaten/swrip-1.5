@@ -2369,7 +2369,7 @@ static bool load_ship_file( const char *shipfile )
 #endif
 
   ROOM_INDEX_DATA *pRoomIndex = NULL;
-  CLAN_DATA *clan = NULL;
+  Clan *clan = NULL;
 
   CREATE( ship, SHIP_DATA, 1 );
 
@@ -2628,7 +2628,7 @@ void resetship( SHIP_DATA *ship )
 #ifndef NODEATHSHIP
   if ( str_cmp("Trainer", ship->owner) && str_cmp("Public",ship->owner) && ship->type != MOB_SHIP )
     {
-      CLAN_DATA *clan = NULL;
+      Clan *clan = NULL;
 
       if ( ship->type != MOB_SHIP && (clan = get_clan( ship->owner )) != NULL )
         {

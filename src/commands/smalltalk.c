@@ -8,7 +8,7 @@ void do_smalltalk ( CHAR_DATA *ch , char *argument )
   char arg1 [MAX_INPUT_LENGTH];
   CHAR_DATA *victim = NULL;
   PLANET_DATA *planet = NULL;
-  CLAN_DATA   *clan = NULL;
+  Clan   *clan = NULL;
   int percent = 0;
 
   if ( is_npc(ch) )

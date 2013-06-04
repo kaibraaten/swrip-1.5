@@ -426,7 +426,7 @@ static void get_obj( CHAR_DATA *ch, OBJ_DATA *obj, OBJ_DATA *container )
 
 static void SaveClanStoreroom( void *element, void *userData )
 {
-  CLAN_DATA *clan = (CLAN_DATA*) element;
+  Clan *clan = (Clan*) element;
   CHAR_DATA *ch = (CHAR_DATA*) userData;
 
   if ( clan->storeroom == ch->in_room->vnum )

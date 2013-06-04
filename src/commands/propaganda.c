@@ -8,7 +8,7 @@ void do_propaganda ( CHAR_DATA *ch , char *argument )
   char arg1 [MAX_INPUT_LENGTH];
   CHAR_DATA *victim;
   PLANET_DATA *planet;
-  CLAN_DATA   *clan;
+  Clan   *clan;
 
   if ( is_npc(ch) || !is_clanned( ch ) || !ch->in_room->area->planet )
     {

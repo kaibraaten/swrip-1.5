@@ -7,7 +7,7 @@ void do_addsalary ( CHAR_DATA *ch , char *argument )
   char arg[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
   CHAR_DATA *victim;
-  CLAN_DATA *clan;
+  Clan *clan;
   int salary;
 
   if ( is_npc( ch ) || !is_clanned( ch ) )
