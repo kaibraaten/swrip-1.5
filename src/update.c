@@ -1177,7 +1177,7 @@ void weather_update( void )
   switch ( weather_info.sky )
     {
     default:
-      bug( "Weather_update: bad sky %d.", weather_info.sky );
+      bug( "%s: bad sky %d.", __FUNCTION__, weather_info.sky );
       weather_info.sky = SKY_CLOUDLESS;
       break;
 
@@ -1247,8 +1247,6 @@ void weather_update( void )
             act( AT_TEMP, buf, d->character, 0, 0, TO_CHAR );
         }
     }
-
-  return;
 }
 
 
@@ -1259,23 +1257,24 @@ void weather_update( void )
  */
 void char_update( void )
 {
-  Character *ch;
-  Character *ch_save;
+  Character *ch = NULL;
+  Character *ch_save = NULL;
   short save_count = 0;
 
-  ch_save       = NULL;
   for ( ch = last_char; ch; ch = gch_prev )
     {
       if ( ch == first_char && ch->prev )
         {
-          bug( "char_update: first_char->prev != NULL... fixed", 0 );
+          bug( "%s: first_char->prev != NULL... fixed", __FUNCTION__ );
           ch->prev = NULL;
         }
+
       gch_prev = ch->prev;
       set_cur_char( ch );
+
       if ( gch_prev && gch_prev->next != ch )
         {
-          bug( "char_update: ch->prev->next != ch", 0 );
+          bug( "%s: ch->prev->next != ch", __FUNCTION__ );
           return;
         }
 
@@ -1304,8 +1303,8 @@ void char_update( void )
        * See if player should be auto-saved.
        */
       if ( !is_npc(ch)
-           &&    !is_not_authed(ch)
-           &&    current_time - ch->pcdata->save_time > (sysdata.save_frequency*60) )
+           && !is_not_authed(ch)
+           && current_time - ch->pcdata->save_time > (sysdata.save_frequency*60) )
         ch_save = ch;
       else
         ch_save = NULL;
@@ -1339,54 +1338,86 @@ void char_update( void )
           OBJ_DATA *obj;
 
           if ( ( obj = get_eq_char( ch, WEAR_LIGHT ) ) != NULL
-               &&   obj->item_type == ITEM_LIGHT
-               &&   obj->value[2] > 0 )
+               && obj->item_type == ITEM_LIGHT
+               && obj->value[2] > 0 )
             {
               if ( --obj->value[2] == 0 && ch->in_room )
                 {
                   ch->in_room->light -= obj->count;
                   act( AT_ACTION, "$p goes out.", ch, obj, NULL, TO_ROOM );
                   act( AT_ACTION, "$p goes out.", ch, obj, NULL, TO_CHAR );
+
                   if ( obj->serial == cur_obj )
                     global_objcode = rOBJ_EXPIRED;
+
                   extract_obj( obj );
                 }
             }
 
           if ( ch->pcdata->condition[COND_DRUNK] > 8 )
             worsen_mental_state( ch, ch->pcdata->condition[COND_DRUNK]/8 );
+
           if ( ch->pcdata->condition[COND_FULL] > 1 )
             {
               switch( ch->position )
                 {
-                case POS_SLEEPING:  better_mental_state( ch, 4 );       break;
-                case POS_RESTING:   better_mental_state( ch, 3 );       break;
+                case POS_SLEEPING:
+		  better_mental_state( ch, 4 );
+		  break;
+
+                case POS_RESTING:
+		  better_mental_state( ch, 3 );
+		  break;
+
                 case POS_SITTING:
-                case POS_MOUNTED:   better_mental_state( ch, 2 );       break;
-                case POS_STANDING:  better_mental_state( ch, 1 );       break;
+                case POS_MOUNTED:
+		  better_mental_state( ch, 2 );
+		  break;
+
+                case POS_STANDING:
+		  better_mental_state( ch, 1 );
+		  break;
+
                 case POS_FIGHTING:
                   if ( number_bits(2) == 0 )
                     better_mental_state( ch, 1 );
+
                   break;
                 }
             }
+
           if ( ch->pcdata->condition[COND_THIRST] > 1 )
             {
               switch( ch->position )
                 {
-                case POS_SLEEPING:  better_mental_state( ch, 5 );       break;
-                case POS_RESTING:   better_mental_state( ch, 3 );       break;
+                case POS_SLEEPING:
+		  better_mental_state( ch, 5 );
+		  break;
+
+                case POS_RESTING:
+		  better_mental_state( ch, 3 );
+		  break;
+
                 case POS_SITTING:
-                case POS_MOUNTED:   better_mental_state( ch, 2 );       break;
-                case POS_STANDING:  better_mental_state( ch, 1 );       break;
+                case POS_MOUNTED:
+		  better_mental_state( ch, 2 );
+		  break;
+
+                case POS_STANDING:
+		  better_mental_state( ch, 1 );
+		  break;
+
                 case POS_FIGHTING:
                   if ( number_bits(2) == 0 )
                     better_mental_state( ch, 1 );
+
                   break;
                 }
             }
+
           gain_condition( ch, COND_DRUNK,  -1 );
           gain_condition( ch, COND_FULL,   -1 );
+
           if ( ch->in_room )
             switch( ch->in_room->sector_type )
               {
