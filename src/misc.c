@@ -50,18 +50,43 @@ void sith_penalty( Character *ch )
     }
 }
 
+static void SendRumblingSoundToCharacter( void *element, void *userData )
+{
+  Character *rch = (Character*)  element;
+
+  send_to_char( "You hear a loud rumbling sound.\r\n", rch );
+  send_to_char( "Something seems different...\r\n", rch );
+}
+
+static void ShowOpenDoorMessageToCharacter( void *element, void *userData )
+{
+  Character *rch = (Character*) element;
+  const char *keyword = (const char*) userData;
+
+  act( AT_ACTION, "The $d opens.", rch, NULL, keyword, TO_CHAR );
+}
+
+static void ShowCloseDoorMessageToCharacter( void *element, void *userData )
+{
+  Character *rch = (Character*) element;
+  const char *keyword = (const char*) userData;
+
+  act( AT_ACTION, "The $d closes.", rch, NULL, keyword, TO_CHAR );
+}
+
 /*
  * Function to handle the state changing of a triggerobject (lever)  -Thoric
  */
 void pullorpush( Character *ch, OBJ_DATA *obj, bool pull )
 {
   char buf[MAX_STRING_LENGTH];
-  Character             *rch;
-  bool           isup;
-  ROOM_INDEX_DATA       *room,  *to_room = NULL;
-  EXIT_DATA             *pexit, *pexit_rev;
-  int                    edir;
-  char          *txt;
+  bool isup = FALSE;
+  ROOM_INDEX_DATA *room = NULL;
+  ROOM_INDEX_DATA *to_room = NULL;
+  EXIT_DATA *pexit = NULL;
+  EXIT_DATA *pexit_rev = NULL;
+  int edir = DIR_INVALID;
+  const char *txt = NULL;
 
   if ( IS_SET( obj->value[0], TRIG_UP ) )
     isup = TRUE;
@@ -162,11 +187,8 @@ void pullorpush( Character *ch, OBJ_DATA *obj, bool pull )
         maxd = 5;
 
       randomize_exits( room, maxd );
-      for ( rch = room->first_person; rch; rch = rch->next_in_room )
-        {
-          send_to_char( "You hear a loud rumbling sound.\r\n", rch );
-          send_to_char( "Something seems different...\r\n", rch );
-        }
+
+      List_ForEach( room->People, SendRumblingSoundToCharacter, NULL );
     }
   if ( IS_SET( obj->value[0], TRIG_DOOR ) )
     {
@@ -268,31 +290,32 @@ void pullorpush( Character *ch, OBJ_DATA *obj, bool pull )
            &&   IS_SET( pexit->exit_info, EX_CLOSED) )
         {
           REMOVE_BIT(pexit->exit_info, EX_CLOSED);
-          for ( rch = room->first_person; rch; rch = rch->next_in_room )
-            act( AT_ACTION, "The $d opens.", rch, NULL, pexit->keyword, TO_CHAR );
+	  List_ForEach( room->People, ShowOpenDoorMessageToCharacter, pexit->keyword );
+
           if ( ( pexit_rev = pexit->rexit ) != NULL
                &&   pexit_rev->to_room == ch->in_room )
             {
               REMOVE_BIT( pexit_rev->exit_info, EX_CLOSED );
-              for ( rch = to_room->first_person; rch; rch = rch->next_in_room )
-                act( AT_ACTION, "The $d opens.", rch, NULL, pexit_rev->keyword, TO_CHAR );
+	      List_ForEach( to_room->People, ShowOpenDoorMessageToCharacter, pexit_rev->keyword );
             }
+
           check_room_for_traps( ch, trap_door[edir]);
           return;
         }
+
       if ( IS_SET( obj->value[0], TRIG_CLOSE   )
            &&  !IS_SET( pexit->exit_info, EX_CLOSED) )
         {
           SET_BIT(pexit->exit_info, EX_CLOSED);
-          for ( rch = room->first_person; rch; rch = rch->next_in_room )
-            act( AT_ACTION, "The $d closes.", rch, NULL, pexit->keyword, TO_CHAR );
+	  List_ForEach( room->People, ShowCloseDoorMessageToCharacter, pexit->keyword );
+
           if ( ( pexit_rev = pexit->rexit ) != NULL
                &&   pexit_rev->to_room == ch->in_room )
             {
               SET_BIT( pexit_rev->exit_info, EX_CLOSED );
-              for ( rch = to_room->first_person; rch; rch = rch->next_in_room )
-                act( AT_ACTION, "The $d closes.", rch, NULL, pexit_rev->keyword, TO_CHAR );
+	      List_ForEach( to_room->People, ShowCloseDoorMessageToCharacter, pexit_rev->keyword );
             }
+
           check_room_for_traps( ch, trap_door[edir]);
           return;
         }

@@ -1478,11 +1478,13 @@ Character *get_char_room( const Character *ch, const char *argument )
 Character *get_char_world( const Character *ch, const char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  Character *wch;
-  int number, count, vnum;
+  int number = 0;
+  int count  = 0;
+  vnum_t vnum = 0;
+  CerisListIterator *peopleIterator = NULL;
+  Character *wch = NULL;
 
   number = number_argument( argument, arg );
-  count  = 0;
 
   if ( !str_cmp( arg, "self" ) )
     return (Character*)ch;
@@ -1491,27 +1493,38 @@ Character *get_char_world( const Character *ch, const char *argument )
    * Allow reference by vnum for saints+                        -Thoric
    */
   if ( get_trust(ch) >= LEVEL_SAVIOR && is_number( arg ) )
-    vnum = atoi( arg );
+    {
+      vnum = atoi( arg );
+    }
   else
-    vnum = -1;
+    {
+      vnum = -1;
+    }
+
+  peopleIterator = CreateListIterator( ch->in_room->People, ForwardsIterator );
 
   /* check the room for an exact match */
-  for ( wch = ch->in_room->first_person; wch; wch = wch->next_in_room )
+  for( ; !ListIterator_IsDone( peopleIterator ); ListIterator_Next( peopleIterator ) )
     {
-      if( (nifty_is_name( arg, wch->name )
-	   || (is_npc(wch) && vnum == wch->pIndexData->vnum)) && is_wizvis(ch,wch))
+      Character *person = (Character*) ListIterator_GetData( peopleIterator );
+
+      if( (nifty_is_name( arg, person->name )
+	   || (is_npc(person) && vnum == person->pIndexData->vnum)) && is_wizvis(ch,person))
 	{
-	  if ( number == 0 && !is_npc(wch) )
+	  if ( number == 0 && !is_npc(person) )
 	    {
-	      return wch;
+	      DestroyListIterator( peopleIterator );
+	      return person;
 	    }
 	  else if ( ++count == number )
 	    {
-	      return wch;
+	      DestroyListIterator( peopleIterator );
+	      return person;
 	    }
 	}
     }
 
+  DestroyListIterator( peopleIterator );
   count = 0;
 
   /* check the world for an exact match */
@@ -1541,23 +1554,30 @@ Character *get_char_world( const Character *ch, const char *argument )
    * Added by Narn, Sept/96
    */
   count  = 0;
+  peopleIterator = CreateListIterator( ch->in_room->People, ForwardsIterator );
 
-  for ( wch = ch->in_room->first_person; wch; wch = wch->next_in_room )
+  for( ; !ListIterator_IsDone( peopleIterator ); ListIterator_Next( peopleIterator ) )
     {
-      if ( !nifty_is_name_prefix( arg, wch->name ) )
+      Character *person = (Character*) ListIterator_GetData( peopleIterator );
+
+      if ( !nifty_is_name_prefix( arg, person->name ) )
 	{
 	  continue;
 	}
 
-      if ( number == 0 && !is_npc(wch) && is_wizvis(ch,wch))
+      if ( number == 0 && !is_npc(person) && is_wizvis(ch,person))
 	{
-	  return wch;
+	  DestroyListIterator( peopleIterator );
+	  return person;
 	}
-      else if ( ++count == number  && is_wizvis(ch, wch) )
+      else if ( ++count == number  && is_wizvis(ch, person) )
 	{
-          return wch;
+	  DestroyListIterator( peopleIterator );
+          return person;
 	}
     }
+
+  DestroyListIterator( peopleIterator );
 
   /*
    * If we didn't find a prefix match in the room, run through the full list

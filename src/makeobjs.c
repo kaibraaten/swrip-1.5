@@ -102,7 +102,9 @@ void make_scraps( OBJ_DATA *obj )
   else
     if ( obj->in_room )
       {
-        if ( (ch = obj->in_room->first_person ) != NULL )
+	ch = GetFirstPersonInRoom( obj->in_room );
+
+        if ( ch != NULL )
           {
             act( AT_OBJECT, "$p is reduced to little more than scraps.",
                  ch, obj, NULL, TO_ROOM );

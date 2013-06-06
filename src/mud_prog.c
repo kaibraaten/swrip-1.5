@@ -345,23 +345,37 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
     }
   if ( !str_cmp(chck, "mobinroom") )
     {
-      int vnum = atoi(cvar);
-      Character *oMob;
+      vnum_t vnum = atoi(cvar);
+      CerisListIterator *iter = NULL;
 
       if ( vnum < MIN_VNUM || vnum > MAX_VNUM )
         {
           progbug( "Bad vnum to 'mobinroom'", mob );
           return BERR;
         }
+
       lhsvl = 0;
-      for ( oMob = mob->in_room->first_person; oMob;
-            oMob = oMob->next_in_room )
-        if ( is_npc(oMob) && oMob->pIndexData->vnum == vnum )
-          lhsvl++;
+      iter = CreateListIterator( mob->in_room->People, ForwardsIterator );
+
+      for( ; !ListIterator_IsDone( iter ); ListIterator_Next( iter ) )
+	{
+	  Character *oMob = (Character*) ListIterator_GetData( iter );
+
+	  if ( is_npc(oMob) && oMob->pIndexData->vnum == vnum )
+	    {
+	      lhsvl++;
+	    }
+	}
+
+      DestroyListIterator( iter );
       rhsvl = atoi(rval);
-      if ( rhsvl < 1 ) rhsvl = 1;
+
+      if ( rhsvl < 1 )
+	rhsvl = 1;
+
       if ( !*opr )
         strcpy( opr, "==" );
+
       return mprog_veval(lhsvl, opr, rhsvl, mob);
     }
   if ( !str_cmp(chck, "timeskilled") )
@@ -1275,11 +1289,11 @@ void mprog_driver ( char *com_list, Character *mob, Character *actor,
   char *command_list;
   char *cmnd;
   Character *rndm  = NULL;
-  Character *vch   = NULL;
   int count        = 0;
   int ignorelevel  = 0;
   int iflevel, result;
   bool ifstate[MAX_IFS][ DO_ELSE + 1 ];
+  CerisListIterator *peopleInRoomIterator = NULL;
   static int prog_nest;
 
   if( is_affected_by( mob, AFF_CHARM ) )
@@ -1328,16 +1342,28 @@ void mprog_driver ( char *com_list, Character *mob, Character *actor,
    */
 
   count = 0;
-  for ( vch = mob->in_room->first_person; vch; vch = vch->next_in_room )
-    if ( !is_npc( vch ) )
-      {
-        if ( number_range( 0, count ) == 0 )
-          rndm = vch;
-        count++;
-      }
+  peopleInRoomIterator = CreateListIterator( mob->in_room->People, ForwardsIterator );
+
+  for( ; !ListIterator_IsDone( peopleInRoomIterator ); ListIterator_Next( peopleInRoomIterator ) )
+    {
+      Character *vch = (Character*) ListIterator_GetData( peopleInRoomIterator );
+
+      if ( !is_npc( vch ) )
+	{
+	  if ( number_range( 0, count ) == 0 )
+	    {
+	      rndm = vch;
+	    }
+
+	  count++;
+	}
+    }
+
+  DestroyListIterator( peopleInRoomIterator );
 
   strcpy( tmpcmndlst, com_list );
   command_list = tmpcmndlst;
+
   if ( single_step )
     {
       if ( mob->mprog.mpscriptpos > (int)strlen( tmpcmndlst ) )
@@ -1993,8 +2019,7 @@ void mprog_fight_trigger( Character *mob, Character *ch )
 
 void mprog_give_trigger( Character *mob, Character *ch, OBJ_DATA *obj )
 {
-
-  char        buf[MAX_INPUT_LENGTH];
+  char buf[MAX_INPUT_LENGTH];
   MPROG_DATA *mprg;
 
   if ( is_npc( mob )
@@ -2019,44 +2044,44 @@ void mprog_give_trigger( Character *mob, Character *ch, OBJ_DATA *obj )
             }
         }
     }
-  return;
+}
+
+static void TriggerOnGreet( void *element, void *userData )
+{
+  Character *vmob = (Character*) element;
+  Character *ch = (Character*) userData;
+
+  if ( !is_npc( vmob ) || vmob->fighting || !is_awake( vmob ) )
+    {
+      return;
+    }
+
+  /* Don't let a mob trigger itself, nor one instance of a mob
+     trigger another instance. */
+  if ( is_npc( ch ) && ch->pIndexData == vmob->pIndexData )
+    {
+      return;
+    }
+
+  if ( vmob->pIndexData->mprog.progtypes & GREET_PROG )
+    {
+      mprog_percent_check( vmob, ch, NULL, NULL, GREET_PROG );
+    }
+  else if ( vmob->pIndexData->mprog.progtypes & ALL_GREET_PROG )
+    {
+      mprog_percent_check(vmob,ch,NULL,NULL,ALL_GREET_PROG);
+    }
 }
 
 void mprog_greet_trigger( Character *ch )
 {
-  Character *vmob, *vmob_next;
-
-#ifdef DEBUG
-  char buf[MAX_STRING_LENGTH];
-  sprintf( buf, "mprog_greet_trigger -> %s", ch->name );
-  log_string( buf );
-#endif
-
-  for ( vmob = ch->in_room->first_person; vmob; vmob = vmob_next )
-    {
-      vmob_next = vmob->next_in_room;
-      if ( !is_npc( vmob )
-           || vmob->fighting
-           || !is_awake( vmob ) )
-        continue;
-
-      /* Don't let a mob trigger itself, nor one instance of a mob
-         trigger another instance. */
-      if ( is_npc( ch ) && ch->pIndexData == vmob->pIndexData )
-        continue;
-
-      if ( vmob->pIndexData->mprog.progtypes & GREET_PROG )
-        mprog_percent_check( vmob, ch, NULL, NULL, GREET_PROG );
-      else if ( vmob->pIndexData->mprog.progtypes & ALL_GREET_PROG )
-        mprog_percent_check(vmob,ch,NULL,NULL,ALL_GREET_PROG);
-    }
-  return;
-
+  CerisList *peopleInRoom = List_Copy( ch->in_room->People );
+  List_ForEach( peopleInRoom, TriggerOnGreet, ch );
+  DestroyList( peopleInRoom );
 }
 
 void mprog_hitprcnt_trigger( Character *mob, Character *ch)
 {
-
   MPROG_DATA *mprg;
 
   if ( is_npc( mob )
@@ -2068,9 +2093,6 @@ void mprog_hitprcnt_trigger( Character *mob, Character *ch)
           mprog_driver( mprg->comlist, mob, ch, NULL, NULL, FALSE );
           break;
         }
-
-  return;
-
 }
 
 void mprog_random_trigger( Character *mob )
@@ -2095,22 +2117,40 @@ void mprog_hour_trigger( Character *mob )
   return;
 }
 
+typedef struct SpeechTriggerData
+{
+  Character *Actor;
+  char *Text;
+} SpeechTriggerData;
+
+static void TriggerOnSpeech( void *element, void *userData )
+{
+  Character *vmob = (Character*) element;
+  SpeechTriggerData *args = (SpeechTriggerData*) userData;
+  Character *actor = args->Actor;
+  char *txt = args->Text;
+
+  if ( is_npc( vmob ) && ( vmob->pIndexData->mprog.progtypes & SPEECH_PROG ) )
+    {
+      if ( is_npc( actor ) && actor->pIndexData == vmob->pIndexData )
+	{
+	  return;
+	}
+
+      mprog_wordlist_check( txt, vmob, actor, NULL, NULL, SPEECH_PROG );
+    }
+}
+
 void mprog_speech_trigger( char *txt, Character *actor )
 {
+  CerisList *peopleInRoom = List_Copy( actor->in_room->People );
+  SpeechTriggerData args;
 
-  Character *vmob;
+  args.Actor = actor;
+  args.Text = txt;
 
-  for ( vmob = actor->in_room->first_person; vmob; vmob = vmob->next_in_room )
-    {
-      if ( is_npc( vmob ) && ( vmob->pIndexData->mprog.progtypes & SPEECH_PROG ) )
-        {
-          if ( is_npc( actor ) && actor->pIndexData == vmob->pIndexData )
-            continue;
-          mprog_wordlist_check( txt, vmob, actor, NULL, NULL, SPEECH_PROG );
-        }
-    }
-  return;
-
+  List_ForEach( peopleInRoom, TriggerOnSpeech, &args );
+  DestroyList( peopleInRoom );
 }
 
 void mprog_script_trigger( Character *mob )
@@ -3056,15 +3096,20 @@ Character *get_char_room_mp( Character *ch, char *argument )
   count  = 0;
 
   for ( rch = ch->in_room->first_person; rch; rch = rch->next_in_room )
-    if ( (nifty_is_name( arg, rch->name )
-          ||  (is_npc(rch) && vnum == rch->pIndexData->vnum)) )
-      {
-        if ( number == 0 && !is_npc(rch) )
-          return rch;
-        else
-          if ( ++count == number )
-            return rch;
-      }
+    {
+      if ( (nifty_is_name( arg, rch->name )
+	    || (is_npc(rch) && vnum == rch->pIndexData->vnum)) )
+	{
+	  if ( number == 0 && !is_npc(rch) )
+	    {
+	      return rch;
+	    }
+	  else if ( ++count == number )
+	    {
+	      return rch;
+	    }
+	}
+    }
 
   if ( vnum != -1 )
     return NULL;

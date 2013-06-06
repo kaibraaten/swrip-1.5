@@ -1109,18 +1109,22 @@ ch_ret obj_cast_spell( int sn, int level, Character *ch, Character *victim, OBJ_
        &&   victim != ch
        &&  !char_died(victim) )
     {
-      Character *vch;
-      Character *vch_next;
+      CerisList *peopleInRoom = List_Copy( ch->in_room->People );
+      CerisListIterator *iter = CreateListIterator( peopleInRoom, ForwardsIterator );
 
-      for ( vch = ch->in_room->first_person; vch; vch = vch_next )
+      for( ; !ListIterator_IsDone( iter ); ListIterator_Next( iter ) )
         {
-          vch_next = vch->next_in_room;
+	  const Character *vch = (Character*) ListIterator_GetData( iter );
+
           if ( victim == vch && !victim->fighting && victim->master != ch )
             {
               retcode = multi_hit( victim, ch, TYPE_UNDEFINED );
               break;
             }
         }
+
+      DestroyListIterator( iter );
+      DestroyList( peopleInRoom );
     }
 
   return retcode;
