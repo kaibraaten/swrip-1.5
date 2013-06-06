@@ -1745,8 +1745,8 @@ char *obj_short( const OBJ_DATA *obj )
  */
 /* Major overhaul. -- Alty */
 #define NAME(ch)        (is_npc(ch) ? ch->short_descr : ch->name)
-char *act_string(const char *format, Character *to, Character *ch,
-                 const void *arg1, const void *arg2)
+static char *act_string(const char *format, const Character *to, const Character *ch,
+			const void *arg1, const void *arg2)
 {
   static char * const he_she  [] = { "it",  "he",  "she" };
   static char * const him_her [] = { "it",  "him", "her" };
@@ -1767,7 +1767,9 @@ char *act_string(const char *format, Character *to, Character *ch,
           *point++ = *str++;
           continue;
         }
+
       ++str;
+
       if ( !arg2 && *str >= 'A' && *str <= 'Z' )
         {
           bug( "Act: missing arg2 for code %c:", *str );
@@ -1778,76 +1780,120 @@ char *act_string(const char *format, Character *to, Character *ch,
         {
           switch ( *str )
             {
-            default:  bug( "Act: bad code %c.", *str );
-              i = " <@@@> ";                                            break;
-            case 't': i = (char *) arg1;                                        break;
-            case 'T': i = (char *) arg2;                                        break;
-            case 'n': i = (to ? PERS( ch, to) : NAME( ch));                     break;
-            case 'N': i = (to ? PERS(vch, to) : NAME(vch));                     break;
-            case 'e': if (ch->sex > 2 || ch->sex < 0)
+            default:
+	      bug( "Act: bad code %c.", *str );
+              i = " <@@@> ";
+	      break;
+
+            case 't':
+	      i = (char *) arg1;
+	      break;
+
+            case 'T':
+	      i = (char *) arg2;
+	      break;
+
+            case 'n':
+	      i = (to ? PERS( ch, to) : NAME( ch));
+	      break;
+
+            case 'N':
+	      i = (to ? PERS(vch, to) : NAME(vch));
+	      break;
+
+            case 'e':
+	      if (ch->sex > 2 || ch->sex < 0)
                 {
-                  bug("act_string: player %s has sex set at %d!", ch->name,
-                      ch->sex);
+                  bug("act_string: player %s has sex set at %d!", ch->name, ch->sex);
                   i = "it";
                 }
               else
-                i = he_she [URANGE(0,  ch->sex, 2)];
+		{
+		  i = he_she [URANGE(0,  ch->sex, 2)];
+		}
               break;
-            case 'E': if (vch->sex > 2 || vch->sex < 0)
+
+            case 'E':
+	      if (vch->sex > 2 || vch->sex < 0)
                 {
-                  bug("act_string: player %s has sex set at %d!", vch->name,
-                      vch->sex);
+                  bug("act_string: player %s has sex set at %d!", vch->name, vch->sex);
                   i = "it";
                 }
               else
-                i = he_she [URANGE(0, vch->sex, 2)];
+		{
+		  i = he_she [URANGE(0, vch->sex, 2)];
+		}
               break;
-            case 'm': if (ch->sex > 2 || ch->sex < 0)
+
+            case 'm':
+	      if (ch->sex > 2 || ch->sex < 0)
                 {
-                  bug("act_string: player %s has sex set at %d!", ch->name,
-                      ch->sex);
+                  bug("act_string: player %s has sex set at %d!", ch->name, ch->sex);
                   i = "it";
                 }
               else
-                i = him_her[URANGE(0,  ch->sex, 2)];
+		{
+		  i = him_her[URANGE(0,  ch->sex, 2)];
+		}
               break;
-            case 'M': if (vch->sex > 2 || vch->sex < 0)
+
+            case 'M':
+	      if (vch->sex > 2 || vch->sex < 0)
                 {
-                  bug("act_string: player %s has sex set at %d!", vch->name,
-                      vch->sex);
+                  bug("act_string: player %s has sex set at %d!", vch->name, vch->sex);
                   i = "it";
                 }
               else
-                i = him_her[URANGE(0, vch->sex, 2)];
+		{
+		  i = him_her[URANGE(0, vch->sex, 2)];
+		}
               break;
-            case 's': if (ch->sex > 2 || ch->sex < 0)
+
+            case 's':
+	      if (ch->sex > 2 || ch->sex < 0)
                 {
-                  bug("act_string: player %s has sex set at %d!", ch->name,
-                      ch->sex);
+                  bug("act_string: player %s has sex set at %d!", ch->name, ch->sex);
                   i = "its";
                 }
               else
-                i = his_her[URANGE(0,  ch->sex, 2)];
+		{
+		  i = his_her[URANGE(0,  ch->sex, 2)];
+		}
               break;
-            case 'S': if (vch->sex > 2 || vch->sex < 0)
+
+            case 'S':
+	      if (vch->sex > 2 || vch->sex < 0)
                 {
-                  bug("act_string: player %s has sex set at %d!", vch->name,
-                      vch->sex);
+                  bug("act_string: player %s has sex set at %d!", vch->name, vch->sex);
                   i = "its";
                 }
               else
-                i = his_her[URANGE(0, vch->sex, 2)];
+		{
+		  i = his_her[URANGE(0, vch->sex, 2)];
+		}
               break;
-            case 'q': i = (to == ch) ? "" : "s";                                break;
-            case 'Q': i = (to == ch) ? "your" :
-              his_her[URANGE(0,  ch->sex, 2)];                  break;
-            case 'p': i = (!to || can_see_obj(to, obj1)
-                           ? obj_short(obj1) : "something");                    break;
-            case 'P': i = (!to || can_see_obj(to, obj2)
-                           ? obj_short(obj2) : "something");                    break;
+
+            case 'q':
+	      i = (to == ch) ? "" : "s";
+	      break;
+
+            case 'Q':
+	      i = (to == ch) ? "your" : his_her[URANGE(0,  ch->sex, 2)];
+	      break;
+
+            case 'p':
+	      i = (!to || can_see_obj(to, obj1) ? obj_short(obj1) : "something");
+	      break;
+
+            case 'P':
+	      i = (!to || can_see_obj(to, obj2) ? obj_short(obj2) : "something");
+	      break;
+
             case 'd':
               if ( !arg2 || ((char *) arg2)[0] == '\0' )
-                i = "door";
+		{
+		  i = "door";
+		}
               else
                 {
                   one_argument((char *) arg2, fname);
@@ -1856,27 +1902,35 @@ char *act_string(const char *format, Character *to, Character *ch,
               break;
             }
         }
+
       ++str;
+
       while ( (*point = *i) != '\0' )
-        ++point, ++i;
+	{
+	  ++point;
+	  ++i;
+	}
     }
+
   strcpy(point, "\r\n");
   buf[0] = UPPER(buf[0]);
+
   return buf;
 }
 #undef NAME
 
 void act( short AType, const char *format, Character *ch, const void *arg1, const void *arg2, int type )
 {
-  char *txt;
-  Character *to;
+  Character *to = NULL;
   Character *vch = (Character *)arg2;
 
   /*
    * Discard null and zero-length messages.
    */
   if ( !format || format[0] == '\0' )
-    return;
+    {
+      return;
+    }
 
   if ( !ch )
     {
@@ -1885,17 +1939,32 @@ void act( short AType, const char *format, Character *ch, const void *arg1, cons
     }
 
   if ( !ch->in_room )
-    to = NULL;
+    {
+      to = NULL;
+    }
   else if ( type == TO_CHAR )
-    to = ch;
+    {
+      to = ch;
+    }
   else
-    to = ch->in_room->first_person;
+    {
+      CerisListIterator *iter = CreateListIterator( ch->in_room->People, ForwardsIterator );
+
+      if( !ListIterator_IsDone( iter ) )
+	{
+	  to = (Character*) ListIterator_GetData( iter );
+	}
+
+      DestroyListIterator( iter );
+    }
 
   /*
    * ACT_SECRETIVE handling
    */
   if ( is_npc(ch) && IS_SET(ch->act, ACT_SECRETIVE) && type != TO_CHAR )
-    return;
+    {
+      return;
+    }
 
   if ( type == TO_VICT )
     {
@@ -1905,77 +1974,121 @@ void act( short AType, const char *format, Character *ch, const void *arg1, cons
           bug( "%s (%s)", ch->name, format );
           return;
         }
+
       if ( !vch->in_room )
         {
           bug( "Act: vch in NULL room!" );
           bug( "%s -> %s (%s)", ch->name, vch->name, format );
           return;
         }
+
       to = vch;
-      /*        to = vch->in_room->first_person;*/
     }
 
   if ( MOBtrigger && type != TO_CHAR && type != TO_VICT && to )
     {
-      OBJ_DATA *to_obj;
+      OBJ_DATA *to_obj = NULL;
+      char *txt = act_string(format, NULL, ch, arg1, arg2);
 
-      txt = act_string(format, NULL, ch, arg1, arg2);
       if ( IS_SET(to->in_room->mprog.progtypes, ACT_PROG) )
-        rprog_act_trigger(txt, to->in_room, ch, (OBJ_DATA *)arg1, (void *)arg2);
+	{
+	  rprog_act_trigger(txt, to->in_room, ch, (OBJ_DATA *)arg1, (void *)arg2);
+	}
+
       for ( to_obj = to->in_room->first_content; to_obj;
             to_obj = to_obj->next_content )
-        if ( IS_SET(to_obj->pIndexData->mprog.progtypes, ACT_PROG) )
-          oprog_act_trigger(txt, to_obj, ch, (OBJ_DATA *)arg1, (void *)arg2);
+	{
+	  if ( IS_SET(to_obj->pIndexData->mprog.progtypes, ACT_PROG) )
+	    {
+	      oprog_act_trigger(txt, to_obj, ch, (OBJ_DATA *)arg1, (void *)arg2);
+	    }
+	}
     }
 
   /* Anyone feel like telling me the point of looping through the whole
      room when we're only sending to one char anyways..? -- Alty */
-  for ( ; to; to = (type == TO_CHAR || type == TO_VICT)
-          ? NULL : to->next_in_room )
+
+  if( to )
     {
-      if (((!to || !to->desc)
-           && (  is_npc(to) && !IS_SET(to->pIndexData->mprog.progtypes, ACT_PROG) ))
-          ||   !is_awake(to) )
-        continue;
+      CerisListIterator *peopleInRoomIterator = CreateListIterator(to->in_room->People, ForwardsIterator);
 
+      for ( ; !ListIterator_IsDone( peopleInRoomIterator );
+	    ListIterator_Next( peopleInRoomIterator ), to = (type == TO_CHAR || type == TO_VICT) ? NULL : ListIterator_GetData( peopleInRoomIterator ) )
+	{
+	  char *txt = NULL;
 
-      if(!can_see(to, ch) && type != TO_VICT )
-        continue;
+	  if( !to )
+	    {
+	      continue;
+	    }
 
-      if ( type == TO_CHAR && to != ch )
-        continue;
-      if ( type == TO_VICT && ( to != vch || to == ch ) )
-        continue;
-      if ( type == TO_ROOM && to == ch )
-        continue;
-      if ( type == TO_NOTVICT && (to == ch || to == vch) )
-        continue;
+	  if( (!to || !to->desc )
+	      && is_npc(to)
+	      && !IS_SET(to->pIndexData->mprog.progtypes, ACT_PROG ) )
+	    {
+	      continue;
+	    }
 
-      if(!can_see(to, ch) && type != TO_VICT )
-        continue;
+	  if( !is_awake(to) )
+	    {
+	      continue;
+	    }
 
-      txt = act_string(format, to, ch, arg1, arg2);
-      if (to && to->desc)
-        {
-          set_char_color(AType, to);
-          send_to_char( txt, to );
-        }
-      if (MOBtrigger)
-        {
-          /* Note: use original string, not string with ANSI. -- Alty */
-          mprog_act_trigger( txt, to, ch, (OBJ_DATA *)arg1, (void *)arg2 );
-        }
+	  if( !can_see(to, ch) && type != TO_VICT )
+	    {
+	      continue;
+	    }
+
+	  if ( type == TO_CHAR && to != ch )
+	    {
+	      continue;
+	    }
+
+	  if ( type == TO_VICT && ( to != vch || to == ch ) )
+	    {
+	      continue;
+	    }
+
+	  if ( type == TO_ROOM && to == ch )
+	    {
+	      continue;
+	    }
+
+	  if ( type == TO_NOTVICT && (to == ch || to == vch) )
+	    {
+	      continue;
+	    }
+
+	  if(!can_see(to, ch) && type != TO_VICT )
+	    {
+	      continue;
+	    }
+
+	  txt = act_string(format, to, ch, arg1, arg2);
+
+	  if ( to->desc )
+	    {
+	      set_char_color(AType, to);
+	      send_to_char( txt, to );
+	    }
+
+	  if (MOBtrigger)
+	    {
+	      /* Note: use original string, not string with ANSI. -- Alty */
+	      mprog_act_trigger( txt, to, ch, (OBJ_DATA *)arg1, (void *)arg2 );
+	    }
+	}
     }
+
   MOBtrigger = TRUE;
-  return;
 }
 
-char *default_prompt( Character *ch )
+static char *default_prompt( const Character *ch )
 {
   static char buf[MAX_STRING_LENGTH];
   strcpy( buf,"" );
 
-  if( IsForcer( ch ) || get_trust(ch) >= LEVEL_IMMORTAL )
+  if( IsForcer( ch ) || is_immortal( ch ) )
     strcat(buf, "&pForce:&P%m/&p%M  &pAlign:&P%a\r\n");
 
   strcat(buf, "&BHealth:&C%h&B/%H  &BMovement:&C%v&B/%V");

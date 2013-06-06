@@ -136,28 +136,38 @@ void clear_vrooms( void )
 
   for ( hash = 0; hash < 64; hash++ )
     {
+      int peopleInRoom = List_Count( vroom_hash[hash]->People );
+
       while ( vroom_hash[hash]
-              &&     !vroom_hash[hash]->first_person
-              &&     !vroom_hash[hash]->first_content )
+              && peopleInRoom == 0
+              && !vroom_hash[hash]->first_content )
         {
           room = vroom_hash[hash];
           vroom_hash[hash] = room->next;
           clean_room( room );
+	  DestroyList( room->People );
           DISPOSE( room );
           --top_vroom;
         }
+
       prev = NULL;
+
       for ( room = vroom_hash[hash]; room; room = room_next )
         {
+	  peopleInRoom = List_Count( room->People );
           room_next = room->next;
-          if ( !room->first_person && !room->first_content )
+
+          if ( peopleInRoom == 0 && !room->first_content )
             {
               if ( prev )
                 prev->next = room_next;
+
               clean_room( room );
+	      DestroyList( room->People );
               DISPOSE( room );
               --top_vroom;
             }
+
           if ( room )
             prev = room;
         }
@@ -352,6 +362,7 @@ ROOM_INDEX_DATA *generate_exit( ROOM_INDEX_DATA *in_room, EXIT_DATA **pexit )
       room->next          = vroom_hash[hash];
       vroom_hash[hash]  = room;
       ++top_vroom;
+      room->People = CreateList();
     }
 
   if ( !found || (xit=get_exit(room, vdir))==NULL )
@@ -389,22 +400,24 @@ ROOM_INDEX_DATA *generate_exit( ROOM_INDEX_DATA *in_room, EXIT_DATA **pexit )
 
 ch_ret move_char( Character *ch, EXIT_DATA *pexit, int fall )
 {
-  ROOM_INDEX_DATA *in_room;
-  ROOM_INDEX_DATA *to_room;
-  ROOM_INDEX_DATA *from_room;
+  ROOM_INDEX_DATA *in_room = NULL;
+  ROOM_INDEX_DATA *to_room = NULL;
+  ROOM_INDEX_DATA *from_room = NULL;
   char buf[MAX_STRING_LENGTH];
-  const char *txt;
-  const char *dtxt;
-  ch_ret retcode;
-  short door, distance;
+  const char *txt = NULL;
+  const char *dtxt = NULL;
+  ch_ret retcode = rNONE;
+  short door = DIR_INVALID;
+  short distance = 0;
   bool drunk = FALSE;
   bool brief = FALSE;
-  int hpmove;
+  int hpmove = 0;
 
-  if ( !is_npc( ch ) )
-    if ( is_drunk( ch ) && ( ch->position != POS_SHOVE )
+  if ( !is_npc( ch ) && is_drunk( ch ) && ( ch->position != POS_SHOVE )
          && ( ch->position != POS_DRAG ) )
+    {
       drunk = TRUE;
+    }
 
   if ( drunk && !fall )
     {
@@ -420,20 +433,26 @@ ch_ret move_char( Character *ch, EXIT_DATA *pexit, int fall )
     }
 #endif
 
-  retcode = rNONE;
-  txt = NULL;
-
   if ( is_npc(ch) && IS_SET( ch->act, ACT_MOUNTED ) )
-    return retcode;
+    {
+      return retcode;
+    }
 
   in_room = ch->in_room;
   from_room = in_room;
-  if ( !pexit || (to_room = pexit->to_room) == NULL )
+  to_room = pexit ? pexit->to_room : NULL;
+
+  if ( !pexit || !to_room )
     {
       if ( drunk )
-        send_to_char( "You hit a wall in your drunken state.\r\n", ch );
+	{
+	  send_to_char( "You hit a wall in your drunken state.\r\n", ch );
+	}
       else
-        send_to_char( "Alas, you cannot go that way.\r\n", ch );
+	{
+	  send_to_char( "Alas, you cannot go that way.\r\n", ch );
+	}
+
       return rNONE;
     }
 
@@ -445,14 +464,13 @@ ch_ret move_char( Character *ch, EXIT_DATA *pexit, int fall )
    * unless it's a door with a window in it             -Thoric
    */
   if ( IS_SET( pexit->exit_info, EX_WINDOW )
-       &&  !IS_SET( pexit->exit_info, EX_ISDOOR ) )
+       && !IS_SET( pexit->exit_info, EX_ISDOOR ) )
     {
       send_to_char( "Alas, you cannot go that way.\r\n", ch );
       return rNONE;
     }
 
-  if (  IS_SET(pexit->exit_info, EX_PORTAL)
-        && is_npc(ch) )
+  if ( IS_SET(pexit->exit_info, EX_PORTAL) && is_npc(ch) )
     {
       act( AT_PLAIN, "Mobs can't use portals.", ch, NULL, NULL, TO_CHAR );
       return rNONE;
@@ -466,11 +484,11 @@ ch_ret move_char( Character *ch, EXIT_DATA *pexit, int fall )
     }
 
   if ( IS_SET(pexit->exit_info, EX_CLOSED)
-       && (!is_affected_by(ch, AFF_PASS_DOOR)
-           ||   IS_SET(pexit->exit_info, EX_NOPASSDOOR)) )
+       && ( !is_affected_by(ch, AFF_PASS_DOOR)
+           || IS_SET(pexit->exit_info, EX_NOPASSDOOR) ) )
     {
       if ( !IS_SET( pexit->exit_info, EX_SECRET )
-           &&   !IS_SET( pexit->exit_info, EX_DIG ) )
+           && !IS_SET( pexit->exit_info, EX_DIG ) )
         {
           if ( drunk )
             {
@@ -480,14 +498,20 @@ ch_ret move_char( Character *ch, EXIT_DATA *pexit, int fall )
                    NULL, pexit->keyword, TO_CHAR );
             }
           else
-            act( AT_PLAIN, "The $d is closed.", ch, NULL, pexit->keyword, TO_CHAR );
+	    {
+	      act( AT_PLAIN, "The $d is closed.", ch, NULL, pexit->keyword, TO_CHAR );
+	    }
         }
       else
         {
           if ( drunk )
-            send_to_char( "You hit a wall in your drunken state.\r\n", ch );
+	    {
+	      send_to_char( "You hit a wall in your drunken state.\r\n", ch );
+	    }
           else
-            send_to_char( "Alas, you cannot go that way.\r\n", ch );
+	    {
+	      send_to_char( "Alas, you cannot go that way.\r\n", ch );
+	    }
         }
 
       return rNONE;
@@ -497,15 +521,19 @@ ch_ret move_char( Character *ch, EXIT_DATA *pexit, int fall )
    * Crazy virtual room idea, created upon demand.              -Thoric
    */
   if ( distance > 1 )
-    if ( (to_room=generate_exit(in_room, &pexit)) == NULL )
-      send_to_char( "Alas, you cannot go that way.\r\n", ch );
+    {
+      if ( (to_room=generate_exit(in_room, &pexit)) == NULL )
+	{
+	  send_to_char( "Alas, you cannot go that way.\r\n", ch );
+	}
+    }
 
   if ( !fall
-       &&   is_affected_by(ch, AFF_CHARM)
-       &&   ch->master
-       &&   in_room == ch->master->in_room )
+       && is_affected_by(ch, AFF_CHARM)
+       && ch->master
+       && in_room == ch->master->in_room )
     {
-      send_to_char( "What?  And leave your beloved master?\r\n", ch );
+      send_to_char( "What? And leave your beloved master?\r\n", ch );
       return rNONE;
     }
 
@@ -516,44 +544,47 @@ ch_ret move_char( Character *ch, EXIT_DATA *pexit, int fall )
     }
 
   if ( !is_immortal(ch)
-       &&  !is_npc(ch)
-       &&  ch->in_room->area != to_room->area )
+       && !is_npc(ch)
+       && ch->in_room->area != to_room->area )
     {
       if ( ch->top_level < to_room->area->low_hard_range )
         {
           set_char_color( AT_TELL, ch );
+
           switch( to_room->area->low_hard_range - ch->top_level )
             {
             case 1:
               send_to_char( "A voice in your mind says, 'You are nearly ready to go that way...'", ch );
               break;
+
             case 2:
               send_to_char( "A voice in your mind says, 'Soon you shall be ready to travel down this path... soon.'", ch );
               break;
+
             case 3:
               send_to_char( "A voice in your mind says, 'You are not ready to go down that path... yet.'.\r\n", ch);
               break;
+
             default:
               send_to_char( "A voice in your mind says, 'You are not ready to go down that path.'.\r\n", ch);
             }
           return rNONE;
         }
-      else
-        if ( ch->top_level > to_room->area->hi_hard_range )
-          {
-            set_char_color( AT_TELL, ch );
-            send_to_char( "A voice in your mind says, 'There is nothing more for you down that path.'", ch );
-            return rNONE;
-          }
+      else if ( ch->top_level > to_room->area->hi_hard_range )
+	{
+	  set_char_color( AT_TELL, ch );
+	  send_to_char( "A voice in your mind says, 'There is nothing more for you down that path.'", ch );
+	  return rNONE;
+	}
     }
 
   if ( !fall && !is_npc(ch) )
     {
-      int move;
+      int move = 0;
 
       if ( in_room->sector_type == SECT_AIR
-           ||   to_room->sector_type == SECT_AIR
-           ||   IS_SET( pexit->exit_info, EX_FLY ) )
+           || to_room->sector_type == SECT_AIR
+           || IS_SET( pexit->exit_info, EX_FLY ) )
         {
           if ( ch->mount && !is_affected_by( ch->mount, AFF_FLYING ) )
             {
@@ -570,37 +601,47 @@ ch_ret move_char( Character *ch, EXIT_DATA *pexit, int fall )
       if ( in_room->sector_type == SECT_WATER_NOSWIM
            ||   to_room->sector_type == SECT_WATER_NOSWIM )
         {
-          OBJ_DATA *obj;
-          bool found;
+          OBJ_DATA *obj = NULL;
+          bool found = FALSE;
 
-          found = FALSE;
           if ( ch->mount )
             {
               if ( is_affected_by( ch->mount, AFF_FLYING )
-                   ||   is_affected_by( ch->mount, AFF_FLOATING ) )
-                found = TRUE;
+                   || is_affected_by( ch->mount, AFF_FLOATING ) )
+		{
+		  found = TRUE;
+		}
             }
-          else
-            if ( is_affected_by(ch, AFF_FLYING)
-                 ||   is_affected_by(ch, AFF_FLOATING) )
+          else if ( is_affected_by(ch, AFF_FLYING)
+		    || is_affected_by(ch, AFF_FLOATING) )
+	    {
               found = TRUE;
+	    }
 
           /*
            * Look for a boat.
            */
           if ( !found )
-            for ( obj = ch->first_carrying; obj; obj = obj->next_content )
-              {
-                if ( obj->item_type == ITEM_BOAT )
-                  {
-                    found = TRUE;
-                    if ( drunk )
-                      txt = "paddles unevenly";
-                    else
-                      txt = "paddles";
-                    break;
-                  }
-              }
+	    {
+	      for ( obj = ch->first_carrying; obj; obj = obj->next_content )
+		{
+		  if ( obj->item_type == ITEM_BOAT )
+		    {
+		      found = TRUE;
+
+		      if ( drunk )
+			{
+			  txt = "paddles unevenly";
+			}
+		      else
+			{
+			  txt = "paddles";
+			}
+
+		      break;
+		    }
+		}
+	    }
 
           if ( !found )
             {
@@ -611,23 +652,25 @@ ch_ret move_char( Character *ch, EXIT_DATA *pexit, int fall )
 
       if ( IS_SET( pexit->exit_info, EX_CLIMB ) )
         {
-          bool found;
+          bool found = FALSE;
 
-          found = FALSE;
           if ( ch->mount && is_affected_by( ch->mount, AFF_FLYING ) )
-            found = TRUE;
-          else
-            if ( is_affected_by(ch, AFF_FLYING) )
-              found = TRUE;
+	    {
+	      found = TRUE;
+	    }
+          else if ( is_affected_by(ch, AFF_FLYING) )
+	    {
+	      found = TRUE;
+	    }
 
           if ( !found && !ch->mount )
             {
-
               if ( ( !is_npc(ch) && number_percent( ) > ch->pcdata->learned[gsn_climb] )
-                   ||      drunk || ch->mental_state < -90 )
+                   || drunk || ch->mental_state < -90 )
                 {
-                  OBJ_DATA *obj;
+                  OBJ_DATA *obj = NULL;
                   bool ch_rope = FALSE;
+
                   for ( obj = ch->last_carrying; obj; obj = obj->prev_content )
                     {
                       if (obj->item_type == ITEM_ROPE)
@@ -636,15 +679,18 @@ ch_ret move_char( Character *ch, EXIT_DATA *pexit, int fall )
                           break;
                         }
                     }
+
                   if( !ch_rope )
                     {
                       send_to_char( "You start to climb... but lose your grip and fall!\r\n", ch);
                       learn_from_failure( ch, gsn_climb );
+
                       if ( pexit->vdir == DIR_DOWN )
                         {
                           retcode = move_char( ch, pexit, 1 );
                           return retcode;
                         }
+
                       set_char_color( AT_HURT, ch );
                       send_to_char( "OUCH! You hit the ground!\r\n", ch );
                       set_wait_state( ch, 20 );
@@ -653,6 +699,7 @@ ch_ret move_char( Character *ch, EXIT_DATA *pexit, int fall )
                       return retcode;
                     }
                 }
+
               found = TRUE;
               learn_from_success( ch, gsn_climb );
               set_wait_state( ch, skill_table[gsn_climb]->beats );
@@ -707,9 +754,13 @@ ch_ret move_char( Character *ch, EXIT_DATA *pexit, int fall )
 
           if ( !is_affected_by(ch->mount, AFF_FLYING)
                &&   !is_affected_by(ch->mount, AFF_FLOATING) )
-            move = movement_loss[UMIN(SECT_MAX-1, in_room->sector_type)];
+	    {
+	      move = movement_loss[UMIN(SECT_MAX-1, in_room->sector_type)];
+	    }
           else
-            move = 1;
+	    {
+	      move = 1;
+	    }
 
           if ( ch->mount->move < move )
             {
@@ -722,10 +773,14 @@ ch_ret move_char( Character *ch, EXIT_DATA *pexit, int fall )
           hpmove = 500/( ch->hit? ch->hit : 1 );
 
           if ( !is_affected_by(ch, AFF_FLYING)
-               &&   !is_affected_by(ch, AFF_FLOATING) )
-            move = hpmove*encumbrance( ch, movement_loss[UMIN(SECT_MAX-1, in_room->sector_type)] );
+               && !is_affected_by(ch, AFF_FLOATING) )
+	    {
+	      move = hpmove * encumbrance( ch, movement_loss[UMIN(SECT_MAX-1, in_room->sector_type)] );
+	    }
           else
-            move = 1;
+	    {
+	      move = 1;
+	    }
 
           if ( ch->move < move )
             {
@@ -735,10 +790,15 @@ ch_ret move_char( Character *ch, EXIT_DATA *pexit, int fall )
         }
 
       set_wait_state( ch, move );
+
       if ( ch->mount )
-        ch->mount->move -= move;
+	{
+	  ch->mount->move -= move;
+	}
       else
-        ch->move -= move;
+	{
+	  ch->move -= move;
+	}
     }
 
   /*
@@ -746,18 +806,28 @@ ch_ret move_char( Character *ch, EXIT_DATA *pexit, int fall )
    */
   if ( to_room->tunnel > 0 )
     {
-      Character *ctmp;
       int count = ch->mount ? 1 : 0;
+      CerisListIterator *iter = CreateListIterator( to_room->People, ForwardsIterator );
 
-      for ( ctmp = to_room->first_person; ctmp; ctmp = ctmp->next_in_room )
-        if ( ++count >= to_room->tunnel )
-          {
-            if ( ch->mount && count == to_room->tunnel )
-              send_to_char( "There is no room for both you and your mount in there.\r\n", ch );
-            else
-              send_to_char( "There is no room for you in there.\r\n", ch );
-            return rNONE;
-          }
+      for( ; !ListIterator_IsDone( iter ); ListIterator_Next( iter ) )
+	{
+	  if ( ++count >= to_room->tunnel )
+	    {
+	      if ( ch->mount && count == to_room->tunnel )
+		{
+		  send_to_char( "There is no room for both you and your mount in there.\r\n", ch );
+		}
+	      else
+		{
+		  send_to_char( "There is no room for you in there.\r\n", ch );
+		}
+
+	      DestroyListIterator( iter );
+	      return rNONE;
+	    }
+	}
+
+      DestroyListIterator( iter );
     }
 
   /* check for traps on exit - later */
@@ -766,52 +836,76 @@ ch_ret move_char( Character *ch, EXIT_DATA *pexit, int fall )
        && ( is_npc(ch) || !IS_SET(ch->act, PLR_WIZINVIS) ) )
     {
       if ( fall )
-        txt = "falls";
+	{
+	  txt = "falls";
+	}
       else
         if ( !txt )
           {
             if ( ch->mount )
               {
                 if ( is_affected_by( ch->mount, AFF_FLOATING ) )
-                  txt = "floats";
-                else
-                  if ( is_affected_by( ch->mount, AFF_FLYING ) )
+		  {
+		    txt = "floats";
+		  }
+                else if ( is_affected_by( ch->mount, AFF_FLYING ) )
+		  {
                     txt = "flys";
-                  else
+		  }
+		else
+		  {
                     txt = "rides";
+		  }
               }
             else
               {
                 if ( is_affected_by( ch, AFF_FLOATING ) )
                   {
                     if ( drunk )
-                      txt = "floats unsteadily";
+		      {
+			txt = "floats unsteadily";
+		      }
                     else
-                      txt = "floats";
+		      {
+			txt = "floats";
+		      }
                   }
                 else
                   if ( is_affected_by( ch, AFF_FLYING ) )
                     {
                       if ( drunk )
-                        txt = "flys shakily";
+			{
+			  txt = "flys shakily";
+			}
                       else
-                        txt = "flys";
+			{
+			  txt = "flys";
+			}
                     }
                   else
                     if ( ch->position == POS_SHOVE )
-                      txt = "is shoved";
+		      {
+			txt = "is shoved";
+		      }
                     else
                       if ( ch->position == POS_DRAG )
-                        txt = "is dragged";
+			{
+			  txt = "is dragged";
+			}
                       else
                         {
                           if ( drunk )
-                            txt = "stumbles drunkenly";
+			    {
+			      txt = "stumbles drunkenly";
+			    }
                           else
-                            txt = "leaves";
+			    {
+			      txt = "leaves";
+			    }
                         }
               }
           }
+
       if ( ch->mount )
         {
           sprintf( buf, "$n %s %s upon $N.", txt, get_dir_name(door) );
@@ -827,15 +921,21 @@ ch_ret move_char( Character *ch, EXIT_DATA *pexit, int fall )
   rprog_leave_trigger( ch );
 
   if( char_died(ch) )
-    return global_retcode;
+    {
+      return global_retcode;
+    }
 
   char_from_room( ch );
 
   if ( ch->mount )
     {
       rprog_leave_trigger( ch->mount );
+
       if( char_died(ch) )
-        return global_retcode;
+	{
+	  return global_retcode;
+	}
+
       if( ch->mount )
         {
           char_from_room( ch->mount );
@@ -843,13 +943,15 @@ ch_ret move_char( Character *ch, EXIT_DATA *pexit, int fall )
         }
     }
 
-
   char_to_room( ch, to_room );
+
   if ( !is_affected_by(ch, AFF_SNEAK)
        && ( is_npc(ch) || !IS_SET(ch->act, PLR_WIZINVIS) ) )
     {
       if ( fall )
-        txt = "falls";
+	{
+	  txt = "falls";
+	}
       else
         if ( ch->mount )
           {
@@ -892,20 +994,54 @@ ch_ret move_char( Character *ch, EXIT_DATA *pexit, int fall )
                         txt = "arrives";
                     }
           }
+
       switch( door )
         {
-        default: dtxt = "somewhere";    break;
-        case 0:  dtxt = "the south";    break;
-        case 1:  dtxt = "the west";     break;
-        case 2:  dtxt = "the north";    break;
-        case 3:  dtxt = "the east";     break;
-        case 4:  dtxt = "below";                break;
-        case 5:  dtxt = "above";                break;
-        case 6:  dtxt = "the south-west";       break;
-        case 7:  dtxt = "the south-east";       break;
-        case 8:  dtxt = "the north-west";       break;
-        case 9:  dtxt = "the north-east";       break;
+        default:
+	  dtxt = "somewhere";
+	  break;
+
+        case DIR_NORTH:
+	  dtxt = "the south";
+	  break;
+
+        case DIR_EAST:
+	  dtxt = "the west";
+	  break;
+
+        case DIR_SOUTH:
+	  dtxt = "the north";
+	  break;
+
+        case DIR_WEST:
+	  dtxt = "the east";
+	  break;
+	  
+        case DIR_UP:
+	  dtxt = "below";
+	  break;
+
+        case DIR_DOWN:
+	  dtxt = "above";
+	  break;
+
+        case DIR_NORTHEAST:
+	  dtxt = "the south-west";
+	  break;
+
+        case DIR_NORTHWEST:
+	  dtxt = "the south-east";
+	  break;
+
+        case DIR_SOUTHEAST:
+	  dtxt = "the north-west";
+	  break;
+
+        case DIR_SOUTHWEST:
+	  dtxt = "the north-east";
+	  break;
         }
+
       if ( ch->mount )
         {
           sprintf( buf, "$n %s from %s upon $N.", txt, dtxt );
@@ -927,18 +1063,19 @@ ch_ret move_char( Character *ch, EXIT_DATA *pexit, int fall )
           set_char_color( AT_MAGIC, ch );
           send_to_char("You feel uncomfortable being in this strange land...\r\n", ch);
         }
-      else
-        if ( ch->top_level > to_room->area->hi_soft_range )
-          {
-            set_char_color( AT_MAGIC, ch );
-            send_to_char("You feel there is not much to gain visiting this place...\r\n", ch);
-          }
+      else if ( ch->top_level > to_room->area->hi_soft_range )
+	{
+	  set_char_color( AT_MAGIC, ch );
+	  send_to_char("You feel there is not much to gain visiting this place...\r\n", ch);
+	}
     }
 
   do_look( ch, "auto" );
-  if ( brief )
-    SET_BIT( ch->act, PLR_BRIEF );
 
+  if ( brief )
+    {
+      SET_BIT( ch->act, PLR_BRIEF );
+    }
 
   /* BIG ugly looping problem here when the character is mptransed back
      to the starting room.  To avoid this, check how many chars are in
@@ -947,53 +1084,74 @@ ch_ret move_char( Character *ch, EXIT_DATA *pexit, int fall )
   */
   if ( !fall )
     {
-      Character *fch;
-      Character *nextinroom;
-      int chars = 0, count = 0;
+      int count = 0;
+      int chars = List_Count( from_room->People );
+      CerisList *peopleInOriginRoom = List_Copy( from_room->People );
+      CerisListIterator *iter = CreateListIterator( peopleInOriginRoom, ForwardsIterator );
 
-      for ( fch = from_room->first_person; fch; fch = fch->next_in_room )
-        chars++;
-
-      for ( fch = from_room->first_person; fch && ( count < chars ); fch = nextinroom )
+      for( ; !ListIterator_IsDone( iter ) && count < chars; ListIterator_Next( iter ) )
         {
-          nextinroom = fch->next_in_room;
+	  Character *follower = (Character*) ListIterator_GetData( iter );
           count++;
-          if ( fch != ch                /* loop room bug fix here by Thoric */
-               && fch->master == ch
-               && fch->position == POS_STANDING )
+
+          if ( follower != ch                /* loop room bug fix here by Thoric */
+               && follower->master == ch
+               && follower->position == POS_STANDING )
             {
-              act( AT_ACTION, "You follow $N.", fch, NULL, ch, TO_CHAR );
-              move_char( fch, pexit, 0 );
+              act( AT_ACTION, "You follow $N.", follower, NULL, ch, TO_CHAR );
+              move_char( follower, pexit, 0 );
             }
         }
+
+      DestroyListIterator( iter );
+      DestroyList( peopleInOriginRoom );
     }
 
   if ( ch->in_room->first_content )
-    retcode = check_room_for_traps( ch, TRAP_ENTER_ROOM );
+    {
+      retcode = check_room_for_traps( ch, TRAP_ENTER_ROOM );
+    }
+
   if ( retcode != rNONE )
-    return retcode;
+    {
+      return retcode;
+    }
 
   if ( char_died(ch) )
-    return retcode;
+    {
+      return retcode;
+    }
 
   mprog_entry_trigger( ch );
+
   if ( char_died(ch) )
-    return retcode;
+    {
+      return retcode;
+    }
 
   rprog_enter_trigger( ch );
+
   if ( char_died(ch) )
-    return retcode;
+    {
+      return retcode;
+    }
 
   mprog_greet_trigger( ch );
+
   if ( char_died(ch) )
-    return retcode;
+    {
+      return retcode;
+    }
 
   oprog_greet_trigger( ch );
+
   if ( char_died(ch) )
-    return retcode;
+    {
+      return retcode;
+    }
 
   if (!will_fall( ch, fall )
-      &&   fall > 0 )
+      && fall > 0 )
     {
       if (!is_affected_by( ch, AFF_FLOATING )
           || ( ch->mount && !is_affected_by( ch->mount, AFF_FLOATING ) ) )
@@ -1009,6 +1167,7 @@ ch_ret move_char( Character *ch, EXIT_DATA *pexit, int fall )
           send_to_char( "You lightly float down to the ground.\r\n", ch );
         }
     }
+
   return retcode;
 }
 
@@ -1117,22 +1276,26 @@ bool has_key( const Character *ch, int key )
 void teleportch( Character *ch, ROOM_INDEX_DATA *room, bool show )
 {
   if ( room_is_private( ch, room ) )
-    return;
+    {
+      return;
+    }
+
   act( AT_ACTION, "$n disappears suddenly!", ch, NULL, NULL, TO_ROOM );
   char_from_room( ch );
   char_to_room( ch, room );
   act( AT_ACTION, "$n arrives suddenly!", ch, NULL, NULL, TO_ROOM );
+
   if ( show )
-    do_look( ch, "auto" );
+    {
+      do_look( ch, "auto" );
+    }
 }
 
 void teleport( Character *ch, short room, int flags )
 {
-  Character *nch, *nch_next;
-  ROOM_INDEX_DATA *pRoomIndex;
-  bool show;
+  bool show = FALSE;
+  ROOM_INDEX_DATA *pRoomIndex = get_room_index( room );
 
-  pRoomIndex = get_room_index( room );
   if ( !pRoomIndex )
     {
       bug( "teleport: bad room vnum %d", room );
@@ -1140,17 +1303,31 @@ void teleport( Character *ch, short room, int flags )
     }
 
   if ( IS_SET( flags, TELE_SHOWDESC ) )
-    show = TRUE;
+    {
+      show = TRUE;
+    }
   else
-    show = FALSE;
+    {
+      show = FALSE;
+    }
+
   if ( !IS_SET( flags, TELE_TRANSALL ) )
     {
       teleportch( ch, pRoomIndex, show );
       return;
     }
-  for ( nch = ch->in_room->first_person; nch; nch = nch_next )
+  else
     {
-      nch_next = nch->next_in_room;
-      teleportch( nch, pRoomIndex, show );
+      CerisList *peopleInOriginRoom = List_Copy( ch->in_room->People );
+      CerisListIterator *personIterator = CreateListIterator( peopleInOriginRoom, ForwardsIterator );
+
+      for( ; !ListIterator_IsDone( personIterator ); ListIterator_Next( personIterator ) )
+	{
+	  Character *follower = (Character*) ListIterator_GetData( personIterator );
+	  teleportch( follower, pRoomIndex, show );
+	}
+
+      DestroyListIterator( personIterator );
+      DestroyList( peopleInOriginRoom );
     }
 }

@@ -1024,8 +1024,7 @@ struct room_index_data
 {
   ROOM_INDEX_DATA  *next;
   ROOM_INDEX_DATA  *next_sort;
-  Character        *first_person;
-  Character        *last_person;
+  CerisList        *People;
   OBJ_DATA         *first_content;
   OBJ_DATA         *last_content;
   EXTRA_DESCR_DATA *first_extradesc;
@@ -2486,6 +2485,7 @@ extern "C" {
   OBJ_DATA *create_money( int amount );
 
   /* misc.c */
+  Character *GetFirstPersonInRoom( const ROOM_INDEX_DATA *room );
   bool is_valid_language( int language );
   void pullorpush( Character *ch, OBJ_DATA *obj, bool pull );
   void actiondesc( Character *ch, OBJ_DATA *obj, void *vo );

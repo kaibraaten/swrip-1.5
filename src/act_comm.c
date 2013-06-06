@@ -36,15 +36,23 @@ void send_room_page_to_char(Character * ch, ROOM_INDEX_DATA * idx, char page);
 void send_page_to_char(Character * ch, MOB_INDEX_DATA * idx, char page);
 void send_control_page_to_char(Character * ch, char page);
 
+static void SendSoundToPlayerCharacter( void *element, void *userData )
+{
+  Character *victim = (Character*) element;
+  const char *message = (const char*) userData;
+
+  if( !is_npc( victim ) && IS_SET( victim->act, PLR_SOUND ) )
+    {
+      ch_printf( victim, message );
+    }
+}
+
 void sound_to_room( const ROOM_INDEX_DATA *room, const char *argument )
 {
-  Character *vic;
+  if ( room == NULL )
+    return;
 
-  if ( room == NULL ) return;
-
-  for ( vic = room->first_person; vic; vic = vic->next_in_room )
-    if ( !is_npc(vic) && IS_SET( vic->act, PLR_SOUND ) )
-      send_to_char( argument, vic );
+  List_ForEach( room->People, SendSoundToPlayerCharacter, (void*) argument );
 }
 
 char *drunk_speech( const char *argument, Character *ch )

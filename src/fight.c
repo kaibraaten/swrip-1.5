@@ -166,38 +166,21 @@ int max_fight( Character *ch )
 void violence_update( void )
 {
   char buf[MAX_STRING_LENGTH];
-  Character *ch;
-  Character *lst_ch;
-  Character *victim;
-  Character *rch, *rch_next;
-  AFFECT_DATA *paf, *paf_next;
-  TIMER *timer, *timer_next;
-  ch_ret     retcode;
-  SKILLTYPE     *skill;
+  Character *ch = NULL;
+  Character *lst_ch = NULL;
+  Character *victim = NULL;
+  AFFECT_DATA *paf, *paf_next = NULL;
+  TIMER *timer = NULL;
+  TIMER *timer_next = NULL;
+  ch_ret retcode = rNONE;
+  SKILLTYPE *skill = NULL;
 
-  lst_ch = NULL;
   for ( ch = last_char; ch; lst_ch = ch, ch = gch_prev )
     {
+      CerisList *peopleInRoom = NULL;
+      CerisListIterator *peopleIterator = NULL;
       set_cur_char( ch );
-
-      if ( ch == first_char && ch->prev )
-        {
-          bug( "ERROR: first_char->prev != NULL, fixing...", 0 );
-          ch->prev = NULL;
-        }
-
       gch_prev  = ch->prev;
-
-      if ( gch_prev && gch_prev->next != ch )
-        {
-          sprintf( buf, "FATAL: violence_update: %s->prev->next doesn't point to ch.",
-                   ch->name );
-          bug( buf, 0 );
-          bug( "Short-cutting here", 0 );
-          ch->prev = NULL;
-          gch_prev = NULL;
-          do_shout( ch, "Thoric says, 'Prepare for the worst!'" );
-        }
 
       /*
        * See if we got a pointer to someone who recently died...
@@ -207,39 +190,25 @@ void violence_update( void )
        * and should not already be in another fight already
        */
       if ( char_died(ch) )
-        continue;
+	{
+	  continue;
+	}
 
       /*
-       * See if we got a pointer to some bad looking data...
-       */
-      if ( !ch->in_room || !ch->name )
-        {
-          log_string( "violence_update: bad ch record!  (Shortcutting.)" );
-          sprintf( buf, "ch: %d  ch->in_room: %d  ch->prev: %d  ch->next: %d",
-                   (int) ch, (int) ch->in_room, (int) ch->prev, (int) ch->next );
-          log_string( buf );
-          log_string( lastplayercmd );
-          if ( lst_ch )
-            sprintf( buf, "lst_ch: %d  lst_ch->prev: %d  lst_ch->next: %d",
-                     (int) lst_ch, (int) lst_ch->prev, (int) lst_ch->next );
-          else
-            strcpy( buf, "lst_ch: NULL" );
-          log_string( buf );
-          gch_prev = NULL;
-          continue;
-        }
-
-      /*
-       * Experience gained during battle deceases as battle drags on
+       * Experience gained during battle decreases as battle drags on
        */
       if ( ch->fighting )
-        if ( (++ch->fighting->duration % 24) == 0 )
-          ch->fighting->xp = ((ch->fighting->xp * 9) / 10);
-
+	{
+	  if ( (++ch->fighting->duration % 24) == 0 )
+	    {
+	      ch->fighting->xp = ((ch->fighting->xp * 9) / 10);
+	    }
+	}
 
       for ( timer = ch->first_timer; timer; timer = timer_next )
         {
           timer_next = timer->next;
+
           if ( --timer->count <= 0 )
             {
               if ( timer->type == TIMER_DO_FUN )
@@ -249,8 +218,12 @@ void violence_update( void )
                   tempsub = ch->substate;
                   ch->substate = timer->value;
                   (timer->do_fun)( ch, "" );
+
                   if ( char_died(ch) )
-                    break;
+		    {
+		      break;
+		    }
+
                   ch->substate = tempsub;
                 }
               extract_timer( ch, timer );
@@ -258,7 +231,9 @@ void violence_update( void )
         }
 
       if ( char_died(ch) )
-        continue;
+	{
+	  continue;
+	}
 
       /*
        * We need spells that have shorter durations than an hour.
@@ -266,41 +241,46 @@ void violence_update( void )
        */
       for ( paf = ch->first_affect; paf; paf = paf_next )
         {
-          paf_next      = paf->next;
+          paf_next = paf->next;
+
           if ( paf->duration > 0 )
-            paf->duration--;
-          else
-            if ( paf->duration < 0 )
-              ;
-            else
-              {
-                if ( !paf_next
-                     ||    paf_next->type != paf->type
-                     ||    paf_next->duration > 0 )
-                  {
-                    skill = get_skilltype(paf->type);
-                    if ( paf->type > 0 && skill && skill->msg_off )
-                      {
-                        set_char_color( AT_WEAROFF, ch );
-                        send_to_char( skill->msg_off, ch );
-                        send_to_char( "\r\n", ch );
-                      }
-                  }
-                if (paf->type == gsn_possess)
-                  {
-                    ch->desc->character       = ch->desc->original;
-                    ch->desc->original        = NULL;
-                    ch->desc->character->desc = ch->desc;
-                    ch->desc->character->switched = NULL;
-                    ch->desc                  = NULL;
-                  }
-                affect_remove( ch, paf );
-              }
+	    {
+	      paf->duration--;
+	    }
+          else if ( paf->duration == 0 )
+	    {
+	      if ( !paf_next
+		   || paf_next->type != paf->type
+		   || paf_next->duration > 0 )
+		{
+		  skill = get_skilltype(paf->type);
+
+		  if ( paf->type > 0 && skill && skill->msg_off )
+		    {
+		      set_char_color( AT_WEAROFF, ch );
+		      send_to_char( skill->msg_off, ch );
+		      send_to_char( "\r\n", ch );
+		    }
+		}
+
+	      if (paf->type == gsn_possess)
+		{
+		  ch->desc->character       = ch->desc->original;
+		  ch->desc->original        = NULL;
+		  ch->desc->character->desc = ch->desc;
+		  ch->desc->character->switched = NULL;
+		  ch->desc                  = NULL;
+		}
+
+	      affect_remove( ch, paf );
+	    }
         }
 
       if ( ( victim = who_fighting( ch ) ) == NULL
-           ||   is_affected_by( ch, AFF_PARALYSIS ) )
-        continue;
+           || is_affected_by( ch, AFF_PARALYSIS ) )
+	{
+	  continue;
+	}
 
       retcode = rNONE;
 
@@ -311,18 +291,25 @@ void violence_update( void )
           log_string( buf );
           stop_fighting( ch, TRUE );
         }
+      else if ( is_awake(ch) && ch->in_room == victim->in_room )
+	{
+	  retcode = multi_hit( ch, victim, TYPE_UNDEFINED );
+	}
       else
-        if ( is_awake(ch) && ch->in_room == victim->in_room )
-          retcode = multi_hit( ch, victim, TYPE_UNDEFINED );
-        else
-          stop_fighting( ch, FALSE );
+	{
+	  stop_fighting( ch, FALSE );
+	}
 
       if ( char_died(ch) )
-        continue;
+	{
+	  continue;
+	}
 
       if ( retcode == rCHAR_DIED
            || ( victim = who_fighting( ch ) ) == NULL )
-        continue;
+	{
+	  continue;
+	}
 
       if( is_npc(ch) )
         {
@@ -330,26 +317,39 @@ void violence_update( void )
           do_wear( ch, "all" );
         }
 
-
       /*
        *  Mob triggers
        */
       rprog_rfight_trigger( ch );
+
       if ( char_died(ch) )
-        continue;
+	{
+	  continue;
+	}
+
       mprog_hitprcnt_trigger( ch, victim );
+
       if ( char_died(ch) )
-        continue;
+	{
+	  continue;
+	}
+
       mprog_fight_trigger( ch, victim );
+
       if ( char_died(ch) )
-        continue;
+	{
+	  continue;
+	}
 
       /*
        * Fun for the whole family!
        */
-      for ( rch = ch->in_room->first_person; rch; rch = rch_next )
+      peopleInRoom = List_Copy( ch->in_room->People );
+      peopleIterator = CreateListIterator( peopleInRoom, ForwardsIterator );
+
+      for( ; !ListIterator_IsDone( peopleIterator ); ListIterator_Next( peopleIterator ) )
         {
-          rch_next = rch->next_in_room;
+	  Character *rch = (Character*) ListIterator_GetData(peopleIterator);
 
           if ( is_awake(rch) && !rch->fighting )
             {
@@ -359,8 +359,11 @@ void violence_update( void )
               if ( !is_npc(ch) || is_affected_by(ch, AFF_CHARM) )
                 {
                   if ( ( !is_npc(rch) || is_affected_by(rch, AFF_CHARM) )
-                       &&   is_same_group(ch, rch) )
-                    multi_hit( rch, victim, TYPE_UNDEFINED );
+                       && is_same_group(ch, rch) )
+		    {
+		      multi_hit( rch, victim, TYPE_UNDEFINED );
+		    }
+
                   continue;
                 }
 
@@ -368,38 +371,47 @@ void violence_update( void )
                * NPC's assist NPC's of same type or 12.5% chance regardless.
                */
               if ( is_npc(rch) && !is_affected_by(rch, AFF_CHARM)
-                   &&  !IS_SET(rch->act, ACT_NOASSIST) )
+                   && !IS_SET(rch->act, ACT_NOASSIST) )
                 {
                   if ( char_died(ch) )
-                    break;
-                  if ( rch->pIndexData == ch->pIndexData
-                       ||   number_bits( 3 ) == 0 )
-                    {
-                      Character *vch;
-                      Character *target;
-                      int number;
+		    {
+		      break;
+		    }
 
-                      target = NULL;
-                      number = 0;                       for ( vch = ch->in_room->first_person; vch; vch = vch->next )
-                                                          {
-                                                            if ( can_see( rch, vch )
-                                                                 &&   is_same_group( vch, victim )
-                                                                 &&   number_range( 0, number ) == 0 )
-                                                              {
-                                                                target = vch;
-                                                                number++;
-                                                              }
-                                                          }
+                  if ( rch->pIndexData == ch->pIndexData
+                       || number_bits( 3 ) == 0 )
+                    {
+                      Character *target = NULL;
+                      int number = 0;
+		      CerisListIterator *iter = CreateListIterator(ch->in_room->People, ForwardsIterator );
+
+		      for( ; !ListIterator_IsDone( iter ); ListIterator_Next( iter ) )
+			{
+			  Character *vch = (Character*) ListIterator_GetData( iter );
+
+			  if ( can_see( rch, vch )
+			       && is_same_group( vch, victim )
+			       && number_range( 0, number ) == 0 )
+			    {
+			      target = vch;
+			      number++;
+			    }
+			}
+
+		      DestroyListIterator( iter );
 
                       if ( target )
-                        multi_hit( rch, target, TYPE_UNDEFINED );
+			{
+			  multi_hit( rch, target, TYPE_UNDEFINED );
+			}
                     }
                 }
             }
         }
-    }
 
-  return;
+      DestroyListIterator( peopleIterator );
+      DestroyList( peopleInRoom );
+    }
 }
 
 
@@ -2280,11 +2292,10 @@ void raw_kill( Character *ch, Character *victim )
 void group_gain( Character *ch, Character *victim )
 {
   char buf[MAX_STRING_LENGTH];
-  Character *gch;
-  Character *lch;
-  int xp;
-  int members;
-
+  Character *lch = NULL;
+  int xp = 0;
+  int members = 0;
+  CerisListIterator *inRoomIterator = NULL;
   /*
    * Monsters don't get kill xp's or alignment changes.
    * Dying of mortal wounds or poison doesn't give xp to anyone!
@@ -2292,13 +2303,19 @@ void group_gain( Character *ch, Character *victim )
   if ( is_npc(ch) || victim == ch )
     return;
 
-  members = 0;
+  inRoomIterator = CreateListIterator( ch->in_room->People, ForwardsIterator );
 
-  for ( gch = ch->in_room->first_person; gch; gch = gch->next_in_room )
+  for( ; !ListIterator_IsDone( inRoomIterator ); ListIterator_Next( inRoomIterator ) )
     {
+      Character *gch = (Character*) ListIterator_GetData( inRoomIterator );
+
       if ( is_same_group( gch, ch ) )
-        members++;
+	{
+	  members++;
+	}
     }
+
+  DestroyListIterator( inRoomIterator );
 
   if ( members == 0 )
     {
@@ -2308,8 +2325,11 @@ void group_gain( Character *ch, Character *victim )
 
   lch = ch->leader ? ch->leader : ch;
 
-  for ( gch = ch->in_room->first_person; gch; gch = gch->next_in_room )
+  inRoomIterator = CreateListIterator( ch->in_room->People, ForwardsIterator );
+
+  for( ; !ListIterator_IsDone( inRoomIterator ); ListIterator_Next( inRoomIterator ) )
     {
+      Character *gch = (Character*) ListIterator_GetData( inRoomIterator );
       OBJ_DATA *obj;
       OBJ_DATA *obj_next;
 
@@ -2347,6 +2367,7 @@ void group_gain( Character *ch, Character *victim )
       for ( obj = ch->first_carrying; obj; obj = obj_next )
         {
           obj_next = obj->next_content;
+
           if ( obj->wear_loc == WEAR_NONE )
             continue;
 
@@ -2360,13 +2381,17 @@ void group_gain( Character *ch, Character *victim )
               obj_from_char( obj );
               obj = obj_to_room( obj, ch->in_room );
               oprog_zap_trigger(ch, obj);  /* mudprogs */
+
               if ( char_died(ch) )
-                return;
+		{
+		  DestroyListIterator( inRoomIterator );
+		  return;
+		}
             }
         }
     }
 
-  return;
+  DestroyListIterator( inRoomIterator );
 }
 
 

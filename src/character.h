@@ -8,8 +8,6 @@ struct Character
 {
   Character *           next;
   Character *           prev;
-  Character *           next_in_room;
-  Character *           prev_in_room;
   Character *           master;
   Character *           leader;
   FIGHT_DATA *  fighting;

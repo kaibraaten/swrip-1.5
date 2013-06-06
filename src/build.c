@@ -353,6 +353,14 @@ bool DelOExtraProto( OBJ_INDEX_DATA *obj, char *keywords )
   return TRUE;
 }
 
+static void ExtractCharacterIfNpc( void *element, void *userData )
+{
+  Character *victim = (Character*) element;
+
+  if ( is_npc(victim) )
+    extract_char( victim, TRUE );
+}
+
 void fold_area( AREA_DATA *tarea, char *filename, bool install )
 {
   RESET_DATA            *treset;
@@ -595,18 +603,15 @@ void fold_area( AREA_DATA *tarea, char *filename, bool install )
         continue;
       if ( install )
         {
-          Character *victim, *vnext;
           OBJ_DATA  *obj, *obj_next;
+	  CerisList *originalPeopleInRoom = List_Copy( room->People );
 
-          /* remove prototype flag from room */
-          REMOVE_BIT( room->room_flags, ROOM_PROTOTYPE );
-          /* purge room of (prototyped) mobiles */
-          for ( victim = room->first_person; victim; victim = vnext )
-            {
-              vnext = victim->next_in_room;
-              if ( is_npc(victim) )
-                extract_char( victim, TRUE );
-            }
+	  REMOVE_BIT( room->room_flags, ROOM_PROTOTYPE );
+
+	  /* purge room of (prototyped) mobiles */
+	  List_ForEach( originalPeopleInRoom, ExtractCharacterIfNpc, NULL );
+	  DestroyList( originalPeopleInRoom );
+
           /* purge room of (prototyped) objects */
           for ( obj = room->first_content; obj; obj = obj_next )
             {

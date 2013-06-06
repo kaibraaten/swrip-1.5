@@ -65,20 +65,32 @@ void echo_to_all( short AT_COLOR, const char *argument, short tar )
     }
 }
 
+typedef struct MessageBundle
+{
+  short Color;
+  const char *Message;
+} MessageBundle;
+
+static void SendToCharacterInRoom( void *element, void *userData )
+{
+  MessageBundle *args = (MessageBundle*) userData;
+  Character *recipient = (Character*) element;
+
+  set_char_color( args->Color, recipient );
+  ch_printf( recipient, "%s\r\n", args->Message );
+}
+
 void echo_to_room( short AT_COLOR, ROOM_INDEX_DATA *room, const char *argument )
 {
-  Character *vic;
+  MessageBundle args;
 
   if ( room == NULL )
     return;
 
+  args.Color = AT_COLOR;
+  args.Message = argument;
 
-  for ( vic = room->first_person; vic; vic = vic->next_in_room )
-    {
-      set_char_color( AT_COLOR, vic );
-      send_to_char( argument, vic );
-      send_to_char( "\r\n",   vic );
-    }
+  List_ForEach( room->People, SendToCharacterInRoom, &args );
 }
 
 ROOM_INDEX_DATA *find_location( Character *ch, char *arg )
@@ -236,24 +248,42 @@ void close_area( AREA_DATA *pArea )
                   DISPOSE( exit_iter );
                 }
             }
+
           if ( rid->area != pArea )
             continue;
+
           STRFREE(rid->name);
           STRFREE(rid->description);
-          if ( rid->first_person )
+
+          if ( List_Count( rid->People ) > 0 )
             {
+	      CerisList *originalPeopleInRoom = List_Copy( rid->People );
+	      CerisListIterator *iter = CreateListIterator( originalPeopleInRoom, ForwardsIterator );
               bug( "close_area: room with people #%d", rid->vnum );
-              for ( ech = rid->first_person; ech; ech = ech_next )
+
+	      for( ; !ListIterator_IsDone( iter ); ListIterator_Next( iter ) )
                 {
-                  ech_next = ech->next_in_room;
-                  if ( ech->fighting )
-                    stop_fighting( ech, TRUE );
-                  if ( is_npc(ech) )
-                    extract_char( ech, TRUE );
+		  Character *currentPerson = (Character*) ListIterator_GetData( iter );
+
+                  if ( currentPerson->fighting )
+		    {
+		      stop_fighting( currentPerson, TRUE );
+		    }
+
+                  if ( is_npc( currentPerson ) )
+		    {
+		      extract_char( currentPerson, TRUE );
+		    }
                   else
-                    do_recall( ech, "" );
+		    {
+		      do_recall( currentPerson, "" );
+		    }
                 }
+
+	      DestroyListIterator( iter );
+	      DestroyList( originalPeopleInRoom );
             }
+
           if ( rid->first_content )
             {
               bug( "close_area: room with contents #%d", rid->vnum );

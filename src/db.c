@@ -1548,8 +1548,7 @@ void load_rooms( AREA_DATA *tarea, FILE *fp )
         {
           oldroom = FALSE;
           CREATE( pRoomIndex, ROOM_INDEX_DATA, 1 );
-          pRoomIndex->first_person      = NULL;
-          pRoomIndex->last_person       = NULL;
+	  pRoomIndex->People = CreateList();
           pRoomIndex->first_content     = NULL;
           pRoomIndex->last_content      = NULL;
         }
@@ -2425,8 +2424,6 @@ void clear_char( Character *ch )
   ch->prev                      = NULL;
   ch->first_carrying            = NULL;
   ch->last_carrying             = NULL;
-  ch->next_in_room              = NULL;
-  ch->prev_in_room              = NULL;
   ch->fighting          = NULL;
   ch->switched          = NULL;
   ch->first_affect              = NULL;
@@ -3765,8 +3762,6 @@ ROOM_INDEX_DATA *make_room( int vnum )
   int   iHash;
 
   CREATE( pRoomIndex, ROOM_INDEX_DATA, 1 );
-  pRoomIndex->first_person      = NULL;
-  pRoomIndex->last_person               = NULL;
   pRoomIndex->first_content     = NULL;
   pRoomIndex->last_content      = NULL;
   pRoomIndex->first_extradesc   = NULL;
@@ -3782,7 +3777,7 @@ ROOM_INDEX_DATA *make_room( int vnum )
   pRoomIndex->light             = 0;
   pRoomIndex->first_exit                = NULL;
   pRoomIndex->last_exit         = NULL;
-
+  pRoomIndex->People = CreateList();
   iHash                 = vnum % MAX_KEY_HASH;
   pRoomIndex->next      = room_index_hash[iHash];
   room_index_hash[iHash]        = pRoomIndex;

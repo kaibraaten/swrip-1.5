@@ -1,13 +1,27 @@
 #include <string.h>
 #include "mud.h"
 
+static void AccumulateSomething( void *element, void *userData )
+{
+  int *sum = (int*) userData;
+
+  *sum += 1;
+}
+
 void do_test( Character *ch, char *argument )
 {
-  if( strlen( argument ) == 0 )
+  CerisList *list = CreateList();
+  int sum = 0;
+  int i = 0;
+
+  for( i = 0; i < 100; ++i )
     {
-      ch_printf( ch, "Yo, I need an argument, dig?" );
-      return;
+      List_AddTail( list, NULL );
     }
 
-  ch_printf( ch, "skill_lookup(\"%s\") == %d\r\n", argument, skill_lookup(argument) );
+  List_ForEach( list, AccumulateSomething, &sum );
+
+  ch_printf( ch, "sum == %d\r\n", sum );
+
+  DestroyList( list );
 }

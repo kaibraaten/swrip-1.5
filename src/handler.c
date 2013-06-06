@@ -49,88 +49,117 @@ void explode( OBJ_DATA *obj )
 {
   if ( obj->armed_by )
     {
-      ROOM_INDEX_DATA *room;
-      Character *xch;
-      bool held = FALSE;
-      OBJ_DATA *objcont;
-      objcont = obj;
+      Character *xch = NULL;
+      OBJ_DATA *objcont = obj;
 
       while ( objcont->in_obj && !obj->carried_by )
-        objcont = objcont->in_obj;
+	{
+	  objcont = objcont->in_obj;
+	}
 
       for ( xch = first_char; xch; xch = xch->next )
-        if ( !is_npc( xch ) && nifty_is_name( obj->armed_by, xch->name ) )
-          {
-            if ( objcont->carried_by )
-              {
-                act( AT_WHITE, "$p EXPLODES in $n's hands!", objcont->carried_by, obj, NULL, TO_ROOM );
-                act( AT_WHITE, "$p EXPLODES in your hands!", objcont->carried_by, obj, NULL, TO_CHAR );
-                room = xch->in_room;
-                held = TRUE;
-              }
-            else if ( objcont->in_room )
-              room = objcont->in_room;
-            else
-              room = NULL;
+	{
+	  if ( !is_npc( xch ) && nifty_is_name( obj->armed_by, xch->name ) )
+	    {
+	      ROOM_INDEX_DATA *room = NULL;
+	      bool held = FALSE;
 
-            if ( room )
-              {
-                if ( !held && room->first_person )
-                  act( AT_WHITE, "$p EXPLODES!", room->first_person , obj, NULL, TO_ROOM );
-                room_explode( obj , xch, room );
-              }
-          }
+	      if ( objcont->carried_by )
+		{
+		  act( AT_WHITE, "$p EXPLODES in $n's hands!", objcont->carried_by, obj, NULL, TO_ROOM );
+		  act( AT_WHITE, "$p EXPLODES in your hands!", objcont->carried_by, obj, NULL, TO_CHAR );
+		  room = xch->in_room;
+		  held = TRUE;
+		}
+	      else if ( objcont->in_room )
+		{
+		  room = objcont->in_room;
+		}
+	      else
+		{
+		  room = NULL;
+		}
+
+	      if ( room )
+		{
+		  if ( !held && List_Count( room->People ) > 0 )
+		    {
+		      CerisListIterator *iter = CreateListIterator(room->People, ForwardsIterator);
+		      Character *firstInRoom = ListIterator_GetData( iter );
+
+		      act( AT_WHITE, "$p EXPLODES!", firstInRoom, obj, NULL, TO_ROOM );
+		      DestroyListIterator( iter );
+		    }
+
+		  room_explode( obj , xch, room );
+		}
+	    }
+	}
     }
+
   make_scraps(obj);
 }
 
-static void room_explode( OBJ_DATA *obj, Character *xch, ROOM_INDEX_DATA *room )
+static void room_explode( OBJ_DATA *explosive, Character *xch, ROOM_INDEX_DATA *room )
 {
-  int blast = (int) (obj->value[1] / 500) ;
-  room_explode_1( obj , xch, room , blast );
-  room_explode_2( room , blast );
+  int blast = (int) (explosive->value[1] / 500) ;
+  room_explode_1( explosive, xch, room, blast );
+  room_explode_2( room, blast );
 }
 
-static void room_explode_1( OBJ_DATA *obj, Character *xch, ROOM_INDEX_DATA *room, int blast )
+static void room_explode_1( OBJ_DATA *explosive, Character *xch, ROOM_INDEX_DATA *room, int blast )
 {
-  Character *rch;
-  Character *rnext;
   OBJ_DATA  *robj;
   OBJ_DATA  *robj_next;
-  int dam;
+  Character *firstPersonInRoom = GetFirstPersonInRoom( room );
+  CerisList *unmodifiedListOfPeople = List_Copy( room->People );
+  CerisListIterator *peopleIterator = CreateListIterator( unmodifiedListOfPeople, ForwardsIterator );
 
   if ( IS_SET( room->room_flags, BFS_MARK ) )
     return;
 
   SET_BIT( room->room_flags , BFS_MARK );
 
-  for ( rch = room->first_person ; rch ;  rch = rnext )
+  for( ; !ListIterator_IsDone( peopleIterator ); ListIterator_Next( peopleIterator ) )
     {
-      rnext = rch->next_in_room;
-      act( AT_WHITE, "The shockwave from a massive explosion rips through your body!", room->first_person , obj, NULL, TO_ROOM );
-      dam = number_range ( obj->value[0] , obj->value[1] );
-      damage( rch, rch , dam, TYPE_UNDEFINED );
-      if ( !char_died(rch) )
+      Character *victim = (Character*) ListIterator_GetData( peopleIterator );
+      int dam = number_range( explosive->value[0], explosive->value[1] );
+
+      act( AT_WHITE, "The shockwave from a massive explosion rips through your body!",
+	   firstPersonInRoom, explosive, NULL, TO_ROOM );
+      damage( victim, victim , dam, TYPE_UNDEFINED );
+
+      if ( !char_died( victim ) )
         {
-          if ( is_npc( rch ) )
+          if ( is_npc( victim ) )
             {
-              if ( IS_SET( rch->act , ACT_SENTINEL ) )
+              if ( IS_SET( victim->act , ACT_SENTINEL ) )
                 {
-                  rch->was_sentinel = rch->in_room;
-                  REMOVE_BIT( rch->act, ACT_SENTINEL );
+                  victim->was_sentinel = victim->in_room;
+                  REMOVE_BIT( victim->act, ACT_SENTINEL );
                 }
-              start_hating( rch , xch );
-              start_hunting( rch , xch );
+
+              start_hating( victim, xch );
+              start_hunting( victim, xch );
             }
         }
     }
 
+  DestroyListIterator( peopleIterator );
+  DestroyList( unmodifiedListOfPeople );
+
   for ( robj = room->first_content; robj; robj = robj_next )
     {
       robj_next = robj->next_content;
-      if ( robj != obj && robj->item_type != ITEM_SPACECRAFT && robj->item_type != ITEM_SCRAPS
-           && robj->item_type != ITEM_CORPSE_NPC && robj->item_type != ITEM_CORPSE_PC && robj->item_type != ITEM_DROID_CORPSE)
-        make_scraps( robj );
+
+      if ( robj != explosive && robj->item_type != ITEM_SPACECRAFT
+	   && robj->item_type != ITEM_SCRAPS
+           && robj->item_type != ITEM_CORPSE_NPC
+	   && robj->item_type != ITEM_CORPSE_PC
+	   && robj->item_type != ITEM_DROID_CORPSE)
+	{
+	  make_scraps( robj );
+	}
     }
 
   /* other rooms */
@@ -139,21 +168,19 @@ static void room_explode_1( OBJ_DATA *obj, Character *xch, ROOM_INDEX_DATA *room
 
     for ( pexit = room->first_exit; pexit; pexit = pexit->next )
       {
-        if ( pexit->to_room
-             &&   pexit->to_room != room )
+        if ( pexit->to_room && pexit->to_room != room )
           {
             if ( blast > 0 )
               {
                 int roomblast;
                 roomblast = blast - 1;
-                room_explode_1( obj , xch, pexit->to_room , roomblast );
+                room_explode_1( explosive, xch, pexit->to_room, roomblast );
               }
             else
               echo_to_room( AT_WHITE, pexit->to_room , "You hear a loud EXPLOSION not to far from here." );
           }
       }
   }
-
 }
 
 static void room_explode_2( ROOM_INDEX_DATA *room , int blast )
@@ -745,27 +772,27 @@ void char_from_room( Character *ch )
     }
 
   if ( !is_npc(ch) )
-    --ch->in_room->area->nplayer;
+    {
+      --ch->in_room->area->nplayer;
+    }
 
   if ( ( obj = get_eq_char( ch, WEAR_LIGHT ) ) != NULL
-       &&   obj->item_type == ITEM_LIGHT
-       &&   obj->value[2] != 0
-       &&   ch->in_room->light > 0 )
-    --ch->in_room->light;
+       && obj->item_type == ITEM_LIGHT
+       && obj->value[2] != 0
+       && ch->in_room->light > 0 )
+    {
+      --ch->in_room->light;
+    }
 
-  UNLINK( ch, ch->in_room->first_person, ch->in_room->last_person,
-          next_in_room, prev_in_room );
+  List_Remove( ch->in_room->People, ch );
   ch->in_room      = NULL;
-  ch->next_in_room = NULL;
-  ch->prev_in_room = NULL;
 
   if ( !is_npc(ch)
-       &&   get_timer( ch, TIMER_SHOVEDRAG ) > 0 )
-    remove_timer( ch, TIMER_SHOVEDRAG );
-
-  return;
+       && get_timer( ch, TIMER_SHOVEDRAG ) > 0 )
+    {
+      remove_timer( ch, TIMER_SHOVEDRAG );
+    }
 }
-
 
 /*
  * Move a char into a room.
@@ -792,8 +819,7 @@ void char_to_room( Character *ch, ROOM_INDEX_DATA *pRoomIndex )
     }
 
   ch->in_room           = pRoomIndex;
-  LINK( ch, pRoomIndex->first_person, pRoomIndex->last_person,
-        next_in_room, prev_in_room );
+  List_AddTail( pRoomIndex->People, ch );
 
   if ( !is_npc(ch) )
     if ( ++ch->in_room->area->nplayer > ch->in_room->area->max_players )
@@ -927,15 +953,25 @@ void obj_from_char( OBJ_DATA *obj )
 
 int count_users(const OBJ_DATA *obj)
 {
-  const Character *fch = NULL;
   int count = 0;
+  CerisListIterator *iter = NULL;
 
   if (obj->in_room == NULL)
     return 0;
 
-  for (fch = obj->in_room->first_person; fch != NULL; fch = fch->next_in_room)
-    if (fch->on == obj)
-      count++;
+  iter = CreateListIterator( obj->in_room->People, ForwardsIterator );
+
+  for( ; !ListIterator_IsDone( iter ); ListIterator_Next( iter ) )
+    {
+      const Character *fch = (Character*) ListIterator_GetData( iter );
+
+      if(fch->on == obj)
+	{
+	  count++;
+	}
+    }
+
+  DestroyListIterator( iter );
 
   return count;
 }
@@ -1346,55 +1382,92 @@ void extract_char( Character *ch, bool fPull )
 Character *get_char_room( const Character *ch, const char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  Character *rch;
-  int number, count, vnum;
+  int number = 0;
+  int count = 0;
+  vnum_t vnum = 0;
+  CerisListIterator *peopleInRoomIterator = NULL;
 
   number = number_argument( argument, arg );
 
   if ( !str_cmp( arg, "self" ) )
-    return (Character*)ch;
+    {
+      return (Character*)ch;
+    }
 
   if ( get_trust(ch) >= LEVEL_SAVIOR && is_number( arg ) )
-    vnum = atoi( arg );
+    {
+      vnum = atoi( arg );
+    }
   else
-    vnum = -1;
+    {
+      vnum = -1;
+    }
 
-  count  = 0;
+  peopleInRoomIterator = CreateListIterator( ch->in_room->People, ForwardsIterator );
 
-  for ( rch = ch->in_room->first_person; rch; rch = rch->next_in_room )
-    if ( can_see( ch, rch )
-         &&  (( (nifty_is_name( arg, rch->name ) || (!is_npc(rch) && nifty_is_name( arg, rch->pcdata->title )))
-                ||  (is_npc(rch) && vnum == rch->pIndexData->vnum))) )
-      {
-        if ( number == 0 && !is_npc(rch) )
-          return rch;
-        else
-          if ( ++count == number )
-            return rch;
-      }
+  for( ; !ListIterator_IsDone( peopleInRoomIterator ); ListIterator_Next( peopleInRoomIterator ) )
+    {
+      Character *rch = (Character*) ListIterator_GetData( peopleInRoomIterator );
+
+      if ( can_see( ch, rch )
+	   && ( ( ( nifty_is_name( arg, rch->name )
+		    || (!is_npc(rch) && nifty_is_name( arg, rch->pcdata->title )))
+		  || (is_npc(rch) && vnum == rch->pIndexData->vnum))) )
+	{
+	  if ( number == 0 && !is_npc(rch) )
+	    {
+	      DestroyListIterator( peopleInRoomIterator );
+	      return rch;
+	    }
+	  else if ( ++count == number )
+	    {
+	      DestroyListIterator( peopleInRoomIterator );
+	      return rch;
+	    }
+	}
+    }
+
+  DestroyListIterator( peopleInRoomIterator );
 
   if ( vnum != -1 )
-    return NULL;
+    {
+      return NULL;
+    }
 
   /* If we didn't find an exact match, run through the list of characters
      again looking for prefix matching, ie gu == guard.
      Added by Narn, Sept/96
   */
-  count  = 0;
-  for ( rch = ch->in_room->first_person; rch; rch = rch->next_in_room )
+  count = 0;
+
+  peopleInRoomIterator = CreateListIterator( ch->in_room->People, ForwardsIterator );
+
+  for( ; !ListIterator_IsDone( peopleInRoomIterator ); ListIterator_Next( peopleInRoomIterator ) )
     {
+      Character *rch = (Character*) ListIterator_GetData( peopleInRoomIterator );
+
       if ( !can_see( ch, rch ) ||
            (!nifty_is_name_prefix( arg, rch->name ) &&
             (is_npc(rch) || (!is_npc(rch) && !nifty_is_name_prefix( arg, rch->pcdata->title )))
             )
            )
-        continue;
+	{
+	  continue;
+	}
+
       if ( number == 0 && !is_npc(rch) )
-        return rch;
-      else
-        if ( ++count == number )
+	{
+	  DestroyListIterator( peopleInRoomIterator );
+	  return rch;
+	}
+      else if ( ++count == number )
+	{
+	  DestroyListIterator( peopleInRoomIterator );
           return rch;
+	}
     }
+
+  DestroyListIterator( peopleInRoomIterator );
 
   return NULL;
 }
@@ -1424,29 +1497,39 @@ Character *get_char_world( const Character *ch, const char *argument )
 
   /* check the room for an exact match */
   for ( wch = ch->in_room->first_person; wch; wch = wch->next_in_room )
-    if ( (nifty_is_name( arg, wch->name )
-          ||  (is_npc(wch) && vnum == wch->pIndexData->vnum)) && is_wizvis(ch,wch))
-      {
-        if ( number == 0 && !is_npc(wch) )
-          return wch;
-        else
-          if ( ++count == number )
-            return wch;
-      }
+    {
+      if( (nifty_is_name( arg, wch->name )
+	   || (is_npc(wch) && vnum == wch->pIndexData->vnum)) && is_wizvis(ch,wch))
+	{
+	  if ( number == 0 && !is_npc(wch) )
+	    {
+	      return wch;
+	    }
+	  else if ( ++count == number )
+	    {
+	      return wch;
+	    }
+	}
+    }
 
   count = 0;
 
   /* check the world for an exact match */
   for ( wch = first_char; wch; wch = wch->next )
-    if ( (nifty_is_name( arg, wch->name )
-          ||  (is_npc(wch) && vnum == wch->pIndexData->vnum)) && is_wizvis(ch,wch) )
-      {
-        if ( number == 0 && !is_npc(wch) )
-          return wch;
-        else
-          if ( ++count == number  )
-            return wch;
-      }
+    {
+      if( (nifty_is_name( arg, wch->name )
+	   || (is_npc(wch) && vnum == wch->pIndexData->vnum)) && is_wizvis(ch,wch) )
+	{
+	  if ( number == 0 && !is_npc(wch) )
+	    {
+	      return wch;
+	    }
+	  else if ( ++count == number  )
+	    {
+	      return wch;
+	    }
+	}
+    }
 
   /* bail out if looking for a vnum match */
   if ( vnum != -1 )
@@ -1458,15 +1541,22 @@ Character *get_char_world( const Character *ch, const char *argument )
    * Added by Narn, Sept/96
    */
   count  = 0;
+
   for ( wch = ch->in_room->first_person; wch; wch = wch->next_in_room )
     {
       if ( !nifty_is_name_prefix( arg, wch->name ) )
-        continue;
+	{
+	  continue;
+	}
+
       if ( number == 0 && !is_npc(wch) && is_wizvis(ch,wch))
-        return wch;
-      else
-        if ( ++count == number  && is_wizvis(ch, wch) )
+	{
+	  return wch;
+	}
+      else if ( ++count == number  && is_wizvis(ch, wch) )
+	{
           return wch;
+	}
     }
 
   /*
@@ -1475,15 +1565,22 @@ Character *get_char_world( const Character *ch, const char *argument )
    * Added by Narn, Sept/96
    */
   count  = 0;
+
   for ( wch = first_char; wch; wch = wch->next )
     {
       if ( !nifty_is_name_prefix( arg, wch->name ) )
-        continue;
+	{
+	  continue;
+	}
+
       if ( number == 0 && !is_npc(wch) && is_wizvis(ch, wch) )
-        return wch;
-      else
-        if ( ++count == number  && is_wizvis(ch, wch) )
+	{
+	  return wch;
+	}
+      else if ( ++count == number  && is_wizvis(ch, wch) )
+	{
           return wch;
+	}
     }
 
   return NULL;
@@ -1765,8 +1862,7 @@ bool room_is_dark( const ROOM_INDEX_DATA *pRoomIndex )
  */
 bool room_is_private( const Character *ch, const ROOM_INDEX_DATA *pRoomIndex )
 {
-  Character *rch;
-  int count;
+  int count = 0;
 
   if ( !ch )
     {
@@ -1783,10 +1879,7 @@ bool room_is_private( const Character *ch, const ROOM_INDEX_DATA *pRoomIndex )
   if ( IS_SET(pRoomIndex->room_flags, ROOM_PLR_HOME) && ch->plr_home != pRoomIndex)
     return TRUE;
 
-  count = 0;
-
-  for ( rch = pRoomIndex->first_person; rch; rch = rch->next_in_room )
-    count++;
+  count = List_Count( pRoomIndex->People );
 
   if ( IS_SET(pRoomIndex->room_flags, ROOM_PRIVATE)  && count >= 2 )
     return TRUE;
