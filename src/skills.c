@@ -218,12 +218,12 @@ bool check_skill( Character *ch, char *command, char *argument )
            &&   victim != ch
            &&  !char_died(victim) )
         {
-          Character *vch;
-          Character *vch_next;
+	  CerisListIterator *iter = CreateListIterator( ch->in_room->People, ForwardsIterator );
 
-          for ( vch = ch->in_room->first_person; vch; vch = vch_next )
+	  for( ; !ListIterator_IsDone( iter ); ListIterator_Next( iter ) )
             {
-              vch_next = vch->next_in_room;
+	      Character *vch = (Character*) ListIterator_GetData( iter );
+
               if ( victim == vch && !victim->fighting && victim->master != ch )
                 {
                   retcode = multi_hit( victim, ch, TYPE_UNDEFINED );

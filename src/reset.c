@@ -975,29 +975,46 @@ void add_obj_reset( AREA_DATA *pArea, char cm, OBJ_DATA *obj, int v2, int v3 )
 
 void instaroom( AREA_DATA *pArea, ROOM_INDEX_DATA *pRoom, bool dodoors )
 {
-  Character *rch;
-  OBJ_DATA *obj;
+  OBJ_DATA *obj = NULL;
+  CerisListIterator *peopleInRoomIterator = CreateListIterator( pRoom->People, ForwardsIterator );
 
-  for ( rch = pRoom->first_person; rch; rch = rch->next_in_room )
+  for( ; !ListIterator_IsDone( peopleInRoomIterator ); ListIterator_Next( peopleInRoomIterator ) )
     {
+      Character *rch = (Character*) ListIterator_GetData( peopleInRoomIterator );
+
       if ( !is_npc(rch) )
-        continue;
+	{
+	  continue;
+	}
+
       add_reset( pArea, 'M', 1, rch->pIndexData->vnum, rch->pIndexData->count,
                  pRoom->vnum );
+
       for ( obj = rch->first_carrying; obj; obj = obj->next_content )
         {
           if ( obj->wear_loc == WEAR_NONE )
-            add_obj_reset( pArea, 'G', obj, 1, 0 );
+	    {
+	      add_obj_reset( pArea, 'G', obj, 1, 0 );
+	    }
           else
-            add_obj_reset( pArea, 'E', obj, 1, obj->wear_loc );
+	    {
+	      add_obj_reset( pArea, 'E', obj, 1, obj->wear_loc );
+	    }
         }
     }
+
+  DestroyListIterator( peopleInRoomIterator );
+
   for ( obj = pRoom->first_content; obj; obj = obj->next_content )
     {
       if ( obj->item_type == ITEM_SPACECRAFT )
-        continue;
+	{
+	  continue;
+	}
+
       add_obj_reset( pArea, 'O', obj, 1, pRoom->vnum );
     }
+
   if ( dodoors )
     {
       EXIT_DATA *pexit;
@@ -1007,18 +1024,24 @@ void instaroom( AREA_DATA *pArea, ROOM_INDEX_DATA *pRoom, bool dodoors )
           int state = 0;
 
           if ( !IS_SET( pexit->exit_info, EX_ISDOOR ) )
-            continue;
+	    {
+	      continue;
+	    }
+
           if ( IS_SET( pexit->exit_info, EX_CLOSED ) )
             {
               if ( IS_SET( pexit->exit_info, EX_LOCKED ) )
-                state = 2;
+		{
+		  state = 2;
+		}
               else
-                state = 1;
+		{
+		  state = 1;
+		}
             }
           add_reset( pArea, 'D', 0, pRoom->vnum, pexit->vdir, state );
         }
     }
-  return;
 }
 
 void wipe_resets( AREA_DATA *pArea, ROOM_INDEX_DATA *pRoom )

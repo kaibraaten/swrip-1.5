@@ -144,19 +144,33 @@ bool    land_bus( SHIP_DATA *ship, int destination );
 void    launch_bus( SHIP_DATA *ship );
 #endif
 
+typedef struct MessageBundle
+{
+  short Color;
+  const char *Message;
+} MessageBundle;
+
+static void SendToCharacterInRoom( void *element, void *userData )
+{
+  MessageBundle *args = (MessageBundle*) userData;
+  Character *recipient = (Character*) element;
+
+  set_char_color( args->Color, recipient );
+  ch_printf( recipient, "%s\r\n", args->Message );
+}
+
 void echo_to_room_dnr( int ecolor, ROOM_INDEX_DATA *room,
 		       const char *argument )
 {
-  Character *vic = NULL;
+  MessageBundle args;
 
   if ( room == NULL )
     return;
 
-  for ( vic = room->first_person; vic; vic = vic->next_in_room )
-    {
-      set_char_color( ecolor, vic );
-      send_to_char( argument, vic );
-    }
+  args.Color = ecolor;
+  args.Message = argument;
+
+  List_ForEach( room->People, SendToCharacterInRoom, &args );
 }
 
 void new_missile( SHIP_DATA *ship , SHIP_DATA *target , Character *ch , int missiletype )

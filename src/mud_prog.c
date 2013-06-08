@@ -3081,10 +3081,13 @@ char *mprog_type_to_name( int type )
 Character *get_char_room_mp( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  Character *rch;
-  int number, count, vnum;
+  int number = 0;
+  int count = 0;
+  vnum_t vnum = 0;
+  CerisListIterator *iter = NULL;
 
   number = number_argument( argument, arg );
+
   if ( !str_cmp( arg, "self" ) )
     return ch;
 
@@ -3093,37 +3096,58 @@ Character *get_char_room_mp( Character *ch, char *argument )
   else
     vnum = -1;
 
-  count  = 0;
+  iter = CreateListIterator( ch->in_room->People, ForwardsIterator );
 
-  for ( rch = ch->in_room->first_person; rch; rch = rch->next_in_room )
+  for( ; !ListIterator_IsDone( iter ); ListIterator_Next( iter ) )
     {
-      if ( (nifty_is_name( arg, rch->name )
-	    || (is_npc(rch) && vnum == rch->pIndexData->vnum)) )
+      Character *person = (Character*) ListIterator_GetData( iter );
+
+      if ( (nifty_is_name( arg, person->name )
+	    || (is_npc(person) && vnum == person->pIndexData->vnum)) )
 	{
-	  if ( number == 0 && !is_npc(rch) )
+	  if ( number == 0 && !is_npc(person) )
 	    {
-	      return rch;
+	      DestroyListIterator( iter );
+	      return person;
 	    }
 	  else if ( ++count == number )
 	    {
-	      return rch;
+	      DestroyListIterator( iter );
+	      return person;
 	    }
 	}
     }
 
+  DestroyListIterator( iter );
+
   if ( vnum != -1 )
     return NULL;
-  count  = 0;
-  for ( rch = ch->in_room->first_person; rch; rch = rch->next_in_room )
+
+  count = 0;
+  iter = CreateListIterator( ch->in_room->People, ForwardsIterator );
+
+  for( ; !ListIterator_IsDone( iter ); ListIterator_Next( iter ) )
     {
-      if ( !nifty_is_name_prefix( arg, rch->name ) )
-        continue;
-      if ( number == 0 && !is_npc(rch) )
-        return rch;
-      else
-        if ( ++count == number )
-          return rch;
+      Character *person = (Character*) ListIterator_GetData( iter );
+
+      if ( !nifty_is_name_prefix( arg, person->name ) )
+	{
+	  continue;
+	}
+
+      if ( number == 0 && !is_npc(person) )
+	{
+	  DestroyListIterator( iter );
+	  return person;
+	}
+      else if ( ++count == number )
+	{
+	  DestroyListIterator( iter );
+          return person;
+	}
     }
+
+  DestroyListIterator( iter );
 
   return NULL;
 }

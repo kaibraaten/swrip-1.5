@@ -27,6 +27,7 @@
 #include "mud.h"
 #include "vector3_aux.h"
 #include "ships.h"
+#include "algocallbacks.h"
 
 /*
  *  Externals
@@ -35,17 +36,6 @@ void send_obj_page_to_char(Character * ch, OBJ_INDEX_DATA * idx, char page);
 void send_room_page_to_char(Character * ch, ROOM_INDEX_DATA * idx, char page);
 void send_page_to_char(Character * ch, MOB_INDEX_DATA * idx, char page);
 void send_control_page_to_char(Character * ch, char page);
-
-static void SendSoundToPlayerCharacter( void *element, void *userData )
-{
-  Character *victim = (Character*) element;
-  const char *message = (const char*) userData;
-
-  if( !is_npc( victim ) && IS_SET( victim->act, PLR_SOUND ) )
-    {
-      ch_printf( victim, message );
-    }
-}
 
 void sound_to_room( const ROOM_INDEX_DATA *room, const char *argument )
 {

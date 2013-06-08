@@ -37,7 +37,7 @@ SPELLDIR = spells
 SPECDIR = special
 
 ODIR = obj
-_OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
+_OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o algocallbacks.o alias.o arena.o \
 	boards.o bounty.o build.o character.o clan.o comm.o comments.o const.o \
 	copyover.o db.o editor.o fight.o grub.o handler.o help.o interp.o magic.o \
 	makeobjs.o mapper.o misc.o mud_prog.o nanny.o \

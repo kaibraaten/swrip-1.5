@@ -56,24 +56,32 @@ Character *find_keeper( Character *ch )
 
 Character *find_keeper_q( Character *ch, bool message )
 {
-  Character *keeper;
-  SHOP_DATA *pShop;
+  Character *keeper = NULL;
+  SHOP_DATA *pShop = NULL;
+  CerisListIterator *peopleInRoomIterator = CreateListIterator( ch->in_room->People, ForwardsIterator );
 
-  pShop = NULL;
-  for ( keeper = ch->in_room->first_person;
-        keeper;
-        keeper = keeper->next_in_room )
-    if ( is_npc(keeper) && (pShop = keeper->pIndexData->pShop) != NULL )
-      break;
-
-  if ( !pShop )
-
+  for( ; !ListIterator_IsDone( peopleInRoomIterator ); ListIterator_Next( peopleInRoomIterator ) )
     {
-      if ( message )
-        send_to_char( "You can't do that here.\r\n", ch );
-      return NULL;
+      Character *current = (Character*) ListIterator_GetData( peopleInRoomIterator );
+
+      if ( is_npc(keeper) && (pShop = keeper->pIndexData->pShop) != NULL )
+	{
+	  keeper = current;
+	  break;
+	}
     }
 
+  DestroyListIterator( peopleInRoomIterator );
+
+  if ( !pShop )
+    {
+      if ( message )
+	{
+	  send_to_char( "You can't do that here.\r\n", ch );
+	}
+
+      return NULL;
+    }
 
   /*
    * Shop hours.
@@ -114,15 +122,22 @@ Character *find_keeper_q( Character *ch, bool message )
  */
 Character *find_fixer( Character *ch )
 {
-  Character *keeper;
-  REPAIR_DATA *rShop;
+  Character *keeper = NULL;
+  REPAIR_DATA *rShop = NULL;
+  CerisListIterator *peopleInRoomIterator = CreateListIterator( ch->in_room->People, ForwardsIterator );
 
-  rShop = NULL;
-  for ( keeper = ch->in_room->first_person;
-        keeper;
-        keeper = keeper->next_in_room )
-    if ( is_npc(keeper) && (rShop = keeper->pIndexData->rShop) != NULL )
-      break;
+  for( ; !ListIterator_IsDone( peopleInRoomIterator ); ListIterator_Next( peopleInRoomIterator ) )
+    {
+      Character *current = (Character*) ListIterator_GetData( peopleInRoomIterator );
+
+      if ( is_npc(keeper) && (rShop = keeper->pIndexData->rShop) != NULL )
+        {
+          keeper = current;
+          break;
+        }
+    }
+
+  DestroyListIterator( peopleInRoomIterator );
 
   if ( !rShop )
     {
@@ -340,8 +355,6 @@ Character *  fread_vendor( FILE *fp )
   bool fMatch;
   int inroom = 0;
   ROOM_INDEX_DATA *pRoomIndex = NULL;
-  Character *victim;
-  Character *vnext;
   char buf [MAX_INPUT_LENGTH];
   char vnum1 [MAX_INPUT_LENGTH];
   word   = feof( fp ) ? "END" : fread_word( fp );
@@ -396,10 +409,16 @@ Character *  fread_vendor( FILE *fp )
 
       if ( !str_cmp( word, "END" ) )
         {
+	  CerisListIterator *peopleInRoomIterator = NULL;
+
           if ( inroom == 0 )
-            inroom = ROOM_VNUM_VENSTOR;
+	    {
+	      inroom = ROOM_VNUM_VENSTOR;
+	    }
+
           mob->home = get_room_index(inroom);
           pRoomIndex = get_room_index( inroom );
+
           if ( !pRoomIndex )
             {
               pRoomIndex = get_room_index( ROOM_VNUM_VENSTOR );
@@ -407,18 +426,22 @@ Character *  fread_vendor( FILE *fp )
             }
 
           mob->in_room = pRoomIndex;
+	  peopleInRoomIterator = CreateListIterator( mob->in_room->People, ForwardsIterator );
+
           /* the following code is to make sure no more then one player owned vendor
              is in the room - meckteck */
-          for ( victim = mob->in_room->first_person; victim; victim = vnext )
+	  for( ; !ListIterator_IsDone( peopleInRoomIterator ); ListIterator_Next( peopleInRoomIterator ) )
             {
-              vnext = victim->next_in_room;
+	      Character *victim = (Character*) ListIterator_GetData( peopleInRoomIterator );
+
               if (victim->home != NULL)
                 {
                   extract_char( victim, TRUE);
                   break;
                 }
-
             }
+
+	  DestroyListIterator( peopleInRoomIterator );
 
           char_to_room(mob, pRoomIndex);
           sprintf(vnum1,"%d", mob->pIndexData->vnum);
@@ -427,6 +450,7 @@ Character *  fread_vendor( FILE *fp )
           mob->long_descr =  STRALLOC( buf );
           mob->hit = 10000;
           mob->max_hit = 10000;
+
           return mob;
         }
       break;

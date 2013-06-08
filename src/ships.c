@@ -29,6 +29,7 @@
 #include "character.h"
 #include "turret.h"
 #include "clan.h"
+#include "algocallbacks.h"
 
 SHIP_DATA *first_ship = NULL;
 SHIP_DATA *last_ship = NULL;
@@ -864,19 +865,29 @@ bool check_hostile( SHIP_DATA *ship )
   return FALSE;
 }
 
+static void ShowRemoteRoomToCharacter( void *element, void *userData )
+{
+  Character *rch = (Character*) element;
+  ROOM_INDEX_DATA *to_room = (ROOM_INDEX_DATA*) userData;
+  ROOM_INDEX_DATA *original = rch->in_room;
+
+  char_from_room( rch );
+  char_to_room( rch, to_room );
+  do_look( rch, "auto" );
+  char_from_room( rch );
+  char_to_room( rch, original );
+}
+
 ch_ret drive_ship( Character *ch, SHIP_DATA *ship, EXIT_DATA *pexit, int fall )
 {
   ROOM_INDEX_DATA *in_room;
   ROOM_INDEX_DATA *to_room;
-  ROOM_INDEX_DATA *original;
   char buf[MAX_STRING_LENGTH];
   char *txt;
   char *dtxt;
   ch_ret retcode;
   short door, the_chance;
   bool drunk = FALSE;
-  Character * rch;
-  Character * next_rch;
 
   if ( !is_npc( ch ) )
     if ( is_drunk( ch ) && ( ch->position != POS_SHOVE )
@@ -1054,15 +1065,13 @@ ch_ret drive_ship( Character *ch, SHIP_DATA *ship, EXIT_DATA *pexit, int fall )
 
   if ( to_room->tunnel > 0 )
     {
-      Character *ctmp;
-      int count = 0;
+      int count = List_Count( to_room->People );
 
-      for ( ctmp = to_room->first_person; ctmp; ctmp = ctmp->next_in_room )
-        if ( ++count >= to_room->tunnel )
-          {
-            send_to_char( "There is no room for you in there.\r\n", ch );
-            return rNONE;
-          }
+      if ( count >= to_room->tunnel )
+	{
+	  send_to_char( "There is no room for you in there.\r\n", ch );
+	  return rNONE;
+	}
     }
 
   if ( fall )
@@ -1141,16 +1150,7 @@ ch_ret drive_ship( Character *ch, SHIP_DATA *ship, EXIT_DATA *pexit, int fall )
   sprintf( buf, "%s %s from %s.", ship->name, txt, dtxt );
   echo_to_room( AT_ACTION , get_room_index(ship->location) , buf );
 
-  for ( rch = ch->in_room->last_person ; rch ; rch = next_rch )
-    {
-      next_rch = rch->prev_in_room;
-      original = rch->in_room;
-      char_from_room( rch );
-      char_to_room( rch, to_room );
-      do_look( rch, "auto" );
-      char_from_room( rch );
-      char_to_room( rch, original );
-    }
+  List_ForEach( ch->in_room->People, ShowRemoteRoomToCharacter, to_room );
 
   learn_from_success( ch, gsn_speeders );
   return retcode;
@@ -1173,16 +1173,11 @@ void sound_to_ship( SHIP_DATA *ship, const char *argument )
   for ( roomnum = ship->room.first ; roomnum <= ship->room.last ;roomnum++ )
     {
       ROOM_INDEX_DATA *room = get_room_index( roomnum );
-      Character *vic = NULL;
 
       if ( room == NULL )
         continue;
 
-      for ( vic = room->first_person; vic; vic = vic->next_in_room )
-        {
-          if ( !is_npc(vic) && IS_SET( vic->act, PLR_SOUND ) )
-            send_to_char( argument, vic );
-        }
+      List_ForEach( room->People, SendSoundToPlayerCharacter, (char*) argument );
     }
 }
 
@@ -3328,7 +3323,8 @@ void destroy_ship( SHIP_DATA *ship , Character *ch )
 
       if (room != NULL)
         {
-          rch = room->first_person;
+          rch = GetFirstPersonInRoom( room );
+
           while ( rch )
             {
               if ( is_immortal(rch) )
@@ -3343,7 +3339,8 @@ void destroy_ship( SHIP_DATA *ship , Character *ch )
                   else
                     raw_kill( rch , rch );
                 }
-              rch = room->first_person;
+
+              rch = GetFirstPersonInRoom( room );
             }
 
           for ( robj = room->first_content ; robj ; robj = robj->next_content )
