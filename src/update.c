@@ -810,7 +810,7 @@ void mobile_update( void )
 
       if ( ch->pIndexData->vnum == 5 && !is_affected_by(ch, AFF_CHARM) )
         {
-          if(ch->in_room->first_person)
+          if( List_Count( ch->in_room->People ) > 0 )
             act(AT_MAGIC, "$n returns to the dust from whence $e came.", ch, NULL, NULL, TO_ROOM);
 
           if(is_npc(ch)) /* Guard against purging switched? */
@@ -986,11 +986,13 @@ void mobile_update( void )
            &&   !IS_SET(pexit->exit_info, EX_CLOSED)
            &&   !IS_SET(pexit->to_room->room_flags, ROOM_NO_MOB) )
         {
-          Character *rch = NULL;
+	  CerisListIterator *iter = CreateListIterator( ch->in_room->People, ForwardsIterator );
           bool found = FALSE;
 
-          for ( rch  = ch->in_room->first_person; rch; rch = rch->next_in_room )
+	  for( ; !ListIterator_IsDone( iter ); ListIterator_Next( iter ) )
             {
+	      Character *rch = (Character*) ListIterator_GetData( iter );
+
               if ( is_fearing(ch, rch) )
                 {
                   switch( number_bits(2) )
@@ -1013,8 +1015,13 @@ void mobile_update( void )
                   break;
                 }
             }
+
+	  DestroyListIterator( iter );
+
           if ( found )
-            retcode = move_char( ch, pexit, 0 );
+	    {
+	      retcode = move_char( ch, pexit, 0 );
+	    }
         }
     }
 }
@@ -1734,8 +1741,9 @@ void obj_update( void )
                 continue;
               new_room = xit->to_room;
 
+	      rch = GetFirstPersonInRoom( obj->in_room );
 
-              if (( rch = obj->in_room->first_person ) != NULL )
+              if ( rch != NULL )
                 {
                   act( AT_ACTION, "$p falls away.", rch, obj, NULL, TO_ROOM );
                   act( AT_ACTION, "$p falls away.", rch, obj, NULL, TO_CHAR );
@@ -1744,7 +1752,9 @@ void obj_update( void )
               obj_from_room(obj);
               obj_to_room(obj, new_room);
 
-              if (( rch = obj->in_room->first_person) != NULL )
+	      rch = GetFirstPersonInRoom( obj->in_room );
+
+              if ( rch != NULL )
                 {
                   act( AT_ACTION, "$p floats by.", rch, obj, NULL, TO_ROOM );
                   act( AT_ACTION, "$p floats by.", rch, obj, NULL, TO_CHAR );
@@ -1818,8 +1828,8 @@ void obj_update( void )
           act( AT_TEMP, message, obj->carried_by, obj, NULL, TO_CHAR );
         }
       else if ( obj->in_room
-                &&      ( rch = obj->in_room->first_person ) != NULL
-                &&      !IS_OBJ_STAT( obj, ITEM_BURRIED ) )
+                && ( rch = GetFirstPersonInRoom( obj->in_room ) ) != NULL
+                && !IS_OBJ_STAT( obj, ITEM_BURRIED ) )
         {
           act( AT_TEMP, message, rch, obj, NULL, TO_ROOM );
           act( AT_TEMP, message, rch, obj, NULL, TO_CHAR );
@@ -1827,6 +1837,7 @@ void obj_update( void )
 
       if ( obj->serial == cur_obj )
         global_objcode = rOBJ_EXPIRED;
+
       extract_obj( obj );
     }
   return;
@@ -1990,45 +2001,16 @@ void char_check( void )
  */
 void aggr_update( void )
 {
-  /*    DESCRIPTOR_DATA *d, *dnext; */
-  Character *wch;
-
   Character *ch;
-  Character *ch_next;
   Character *victim;
   Character *wch_next;
   struct act_prog_data *apdtmp;
 
-#ifdef UNDEFD
-  /*
-   *  GRUNT!  To do
-   *
-   */
-  if ( is_npc( wch ) && wch->mprog.mpactnum > 0
-       && wch->in_room->area->nplayer > 0 )
-    {
-      MPROG_ACT_LIST * tmp_act, *tmp2_act;
-      for ( tmp_act = wch->mprog.mpact; tmp_act;
-            tmp_act = tmp_act->next )
-        {
-          oprog_wordlist_check( tmp_act->buf,wch, tmp_act->ch,
-                                tmp_act->obj, tmp_act->vo, ACT_PROG );
-          DISPOSE( tmp_act->buf );
-        }
-      for ( tmp_act = wch->mprog.mpact; tmp_act; tmp_act = tmp2_act )
-        {
-          tmp2_act = tmp_act->next;
-          DISPOSE( tmp_act );
-        }
-      wch->mprog.mpactnum = 0;
-      wch->mprog.mpact    = NULL;
-    }
-#endif
-
   /* check mobprog act queue */
   while ( (apdtmp = mob_act_list) != NULL )
     {
-      wch = (Character*)mob_act_list->vo;
+      Character *wch = (Character*)mob_act_list->vo;
+
       if ( !char_died(wch) && wch->mprog.mpactnum > 0 )
         {
           MPROG_ACT_LIST * tmp_act;
@@ -2051,37 +2033,28 @@ void aggr_update( void )
       DISPOSE( apdtmp );
     }
 
-
-  /*
-   * Just check descriptors here for victims to aggressive mobs
-   * We can check for linkdead victims to mobile_update -Thoric
-   */
-  /*    for ( d = first_descriptor; d; d = dnext )
-        {
-        dnext = d->next;
-        if ( d->connection_state != CON_PLAYING || (wch=d->character) == NULL )
-        continue;
-  */
   for( ch = first_char; ch; ch = wch_next )
     {
+      CerisListIterator *peopleInRoomIterator = NULL;
       wch_next = ch->next;
 
       if ( !is_npc(ch)
-           ||   ch->fighting
-           ||   is_affected_by(ch, AFF_CHARM)
-           ||   !is_awake(ch)
-           ||   ( IS_SET(ch->act, ACT_WIMPY) ) )
+           || ch->fighting
+           || is_affected_by(ch, AFF_CHARM)
+           || !is_awake(ch)
+           || ( IS_SET(ch->act, ACT_WIMPY) ) )
         continue;
 
       if ( !IS_SET(ch->act, ACT_AGGRESSIVE)
-           ||    IS_SET(ch->act, ACT_MOUNTED)
-           ||    IS_SET(ch->in_room->room_flags, ROOM_SAFE ) )
+           || IS_SET(ch->act, ACT_MOUNTED)
+           || IS_SET(ch->in_room->room_flags, ROOM_SAFE ) )
         continue;
 
-      for ( wch = ch->in_room->first_person; wch; wch = ch_next )
-        {
-          ch_next       = wch->next_in_room;
+      peopleInRoomIterator = CreateListIterator( ch->in_room->People, ForwardsIterator );
 
+      for( ; !ListIterator_IsDone( peopleInRoomIterator ); ListIterator_Next(peopleInRoomIterator))
+        {
+	  Character *wch = (Character*) ListIterator_GetData( peopleInRoomIterator );
 
           if ( is_hating( ch, wch ) )
             {
@@ -2090,18 +2063,19 @@ void aggr_update( void )
             }
 
           if ( char_died(wch)
-               ||   wch->top_level >= LEVEL_IMMORTAL
-               ||  !wch->in_room
-               ||   !can_see( ch, wch ) )
+               || wch->top_level >= LEVEL_IMMORTAL
+               || !wch->in_room
+               || !can_see( ch, wch ) )
             continue;
 
           if ( IS_SET(wch->act, ACT_AGGRESSIVE) )
             continue;
+
           victim = wch;
 
           if ( !victim )
             {
-              bug( "Aggr_update: null victim." );
+              bug( "%s: null victim.", __FUNCTION__ );
               continue;
             }
 
@@ -2119,8 +2093,9 @@ void aggr_update( void )
                    && victim->hit >= victim->max_hit )
                 {
                   set_wait_state( ch, skill_table[gsn_backstab]->beats );
+
                   if ( !is_awake(victim)
-                       ||   number_percent( )+5 < ch->top_level )
+                       || number_percent( )+5 < ch->top_level )
                     {
                       global_retcode = multi_hit( ch, victim, gsn_backstab );
                       continue;
@@ -2134,9 +2109,9 @@ void aggr_update( void )
             }
           global_retcode = multi_hit( ch, victim, TYPE_UNDEFINED );
         }
-    }
 
-  return;
+      DestroyListIterator( peopleInRoomIterator );
+    }
 }
 
 /* From interp.c */
@@ -2149,9 +2124,8 @@ bool check_social( Character *ch, char *command, char *argument );
 void drunk_randoms( Character *ch )
 {
   Character *rvch = NULL;
-  Character *vch;
-  short drunk;
-  short position;
+  short drunk = 0;
+  short position = 0;
 
   if( !ch )
     return;
@@ -2167,36 +2141,42 @@ void drunk_randoms( Character *ch )
   ch->position = POS_STANDING;
 
   if ( number_percent() < (2*drunk / 20) )
-    check_social( ch, "burp", "" );
-  else
-    if ( number_percent() < (2*drunk / 20) )
+    {
+      check_social( ch, "burp", "" );
+    }
+  else if ( number_percent() < (2*drunk / 20) )
+    {
       check_social( ch, "hiccup", "" );
-    else
-      if ( number_percent() < (2*drunk / 20) )
-        check_social( ch, "drool", "" );
-      else
-        if ( number_percent() < (2*drunk / 20) )
-          check_social( ch, "fart", "" );
-        else
-          if ( drunk > (10+(get_curr_con(ch)/5))
-               &&   number_percent() < ( 2 * drunk / 18 ) )
-            {
-	      char name[MAX_STRING_LENGTH];
+    }
+  else if ( number_percent() < (2*drunk / 20) )
+    {
+      check_social( ch, "drool", "" );
+    }
+  else if ( number_percent() < (2*drunk / 20) )
+    {
+      check_social( ch, "fart", "" );
+    }
+  else if ( drunk > ( 10 + ( get_curr_con( ch ) / 5 ) )
+	    && number_percent() < ( 2 * drunk / 18 ) )
+    {
+      CerisListIterator *iter = CreateListIterator( ch->in_room->People, ForwardsIterator );
+      char name[MAX_STRING_LENGTH];
 
-              for ( vch = ch->in_room->first_person; vch; vch = vch->next_in_room )
-		{
-		  if ( number_percent() < 10 )
-		    {
-		      rvch = vch;
-		    }
-		}
+      for( ; !ListIterator_IsDone( iter ); ListIterator_Next( iter ) )
+	{
+	  Character *vch = (Character*) ListIterator_GetData( iter );
 
-	      strcpy(name, rvch ? rvch->name : "");
-              check_social( ch, "puke", name);
-            }
+	  if ( number_percent() < 10 )
+	    {
+	      rvch = vch;
+	    }
+	}
+
+      strcpy(name, rvch ? rvch->name : "");
+      check_social( ch, "puke", name);
+    }
 
   ch->position = position;
-  return;
 }
 
 void halucinations( Character *ch )
@@ -2246,9 +2226,11 @@ void tele_update( void )
       tele_next = tele->next;
       if ( --tele->timer <= 0 )
         {
-          if ( tele->room->first_person )
+	  Character *firstPersonInRoom = GetFirstPersonInRoom( tele->room );
+
+          if ( firstPersonInRoom )
             {
-              teleport( tele->room->first_person, tele->room->tele_vnum,
+              teleport( firstPersonInRoom, tele->room->tele_vnum,
                         TELE_TRANSALL );
             }
           UNLINK( tele, first_teleport, last_teleport, next, prev );
@@ -2436,7 +2418,7 @@ void remove_portal( OBJ_DATA *portal )
 
   extract_exit( fromRoom, pexit );
 
-  if ( toRoom && (ch = toRoom->first_person) != NULL )
+  if ( toRoom && (ch = GetFirstPersonInRoom( toRoom ) ) != NULL )
     act( AT_PLAIN, "A magical portal above winks from existence.", ch, NULL, NULL, TO_ROOM );
 }
 
