@@ -271,7 +271,7 @@ nother.\r\n", 0);
 static void nanny_get_old_password( DESCRIPTOR_DATA *d, char *argument )
 {
   Character *ch = d->character;
-  bool fOld = FALSE, chk = FALSE;
+  bool chk = FALSE;
   char buf[MAX_STRING_LENGTH];
 
   write_to_buffer( d, "\r\n", 2 );
@@ -319,7 +319,7 @@ static void nanny_get_old_password( DESCRIPTOR_DATA *d, char *argument )
   sprintf( buf, "%s", ch->name );
   d->character->desc = NULL;
   free_char( d->character );
-  fOld = load_char_obj( d, buf, FALSE );
+  load_char_obj( d, buf, FALSE );
   ch = d->character;
   sprintf( log_buf, "%s@%s has connected.", ch->name, d->remote.hostname );
 

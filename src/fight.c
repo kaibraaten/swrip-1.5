@@ -167,7 +167,6 @@ void violence_update( void )
 {
   char buf[MAX_STRING_LENGTH];
   Character *ch = NULL;
-  Character *lst_ch = NULL;
   Character *victim = NULL;
   AFFECT_DATA *paf, *paf_next = NULL;
   TIMER *timer = NULL;
@@ -175,7 +174,7 @@ void violence_update( void )
   ch_ret retcode = rNONE;
   SKILLTYPE *skill = NULL;
 
-  for ( ch = last_char; ch; lst_ch = ch, ch = gch_prev )
+  for ( ch = last_char; ch; ch = gch_prev )
     {
       CerisList *peopleInRoom = NULL;
       CerisListIterator *peopleIterator = NULL;
