@@ -1,9 +1,32 @@
 #include "character.h"
 #include "mud.h"
 
+static void ShowCrashOpenMessage( void *element, void *userData )
+{
+  Character *ch = (Character*) element;
+  const char *keyword = (char*) userData;
+
+  act(AT_SKILL, "The $d crashes open!", ch, NULL, keyword, TO_CHAR );
+}
+
+static void AttackBasher( void *element, void *userData )
+{
+  Character *attacker = (Character*) element;
+  Character *basher = (Character*) userData;
+
+  if ( is_awake( attacker )
+       && !attacker->fighting
+       && is_npc( attacker )
+       && !is_affected_by( attacker, AFF_CHARM )
+       && ( basher->top_level - attacker->top_level <= 4 )
+       && number_bits( 2 ) == 0 )
+    {
+      multi_hit( attacker, basher, TYPE_UNDEFINED );
+    }
+}
+
 void do_bashdoor( Character *ch, char *argument )
 {
-  Character *gch = NULL;
   EXIT_DATA *pexit = NULL;
   char arg[MAX_INPUT_LENGTH];
 
@@ -37,7 +60,7 @@ void do_bashdoor( Character *ch, char *argument )
 
       if ( !IS_SET( pexit->exit_info, EX_CLOSED ) )
         {
-          send_to_char( "Calm down.  It is already open.\r\n", ch );
+          send_to_char( "Calm down. It is already open.\r\n", ch );
           return;
         }
 
@@ -73,20 +96,13 @@ void do_bashdoor( Character *ch, char *argument )
                &&   (pexit_rev = pexit->rexit) != NULL
                &&    pexit_rev->to_room == ch->in_room )
             {
-              Character *rch = NULL;
-
               REMOVE_BIT( pexit_rev->exit_info, EX_CLOSED );
 
               if ( IS_SET( pexit_rev->exit_info, EX_LOCKED ) )
                 REMOVE_BIT( pexit_rev->exit_info, EX_LOCKED );
 
               SET_BIT( pexit_rev->exit_info, EX_BASHED );
-
-              for ( rch = to_room->first_person; rch; rch = rch->next_in_room )
-                {
-                  act(AT_SKILL, "The $d crashes open!",
-                      rch, NULL, pexit_rev->keyword, TO_CHAR );
-		}
+	      List_ForEach( to_room->People, ShowCrashOpenMessage, pexit_rev->keyword );
             }
 
           damage( ch, ch, ( ch->max_hit / 20 ), gsn_bashdoor );
@@ -113,16 +129,6 @@ void do_bashdoor( Character *ch, char *argument )
 
   if ( !char_died( ch ) )
     {
-      for ( gch = ch->in_room->first_person; gch; gch = gch->next_in_room )
-	{
-	  if ( is_awake( gch )
-	       && !gch->fighting
-	       && ( is_npc( gch ) && !is_affected_by( gch, AFF_CHARM ) )
-	       && ( ch->top_level - gch->top_level <= 4 )
-	       && number_bits( 2 ) == 0 )
-	    {
-	      multi_hit( gch, ch, TYPE_UNDEFINED );
-	    }
-	}
+      List_ForEach( ch->in_room->People, AttackBasher, ch );
     }
 }

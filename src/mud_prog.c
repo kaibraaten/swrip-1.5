@@ -1420,17 +1420,11 @@ void mprog_driver ( char *com_list, Character *mob, Character *actor,
       switch ( result )
         {
         case COMMANDOK:
-#ifdef DEBUG
-          log_string( "COMMANDOK" );
-#endif
           /* Ok, this one's a no-brainer. */
           continue;
           break;
 
         case IFTRUE:
-#ifdef DEBUG
-          log_string( "IFTRUE" );
-#endif
           /* An if was evaluated and found true.  Note that we are in an
              if section and that we want to execute it. */
           iflevel++;
@@ -1446,9 +1440,6 @@ void mprog_driver ( char *com_list, Character *mob, Character *actor,
           break;
 
         case IFFALSE:
-#ifdef DEBUG
-          log_string( "IFFALSE" );
-#endif
           /* An if was evaluated and found false.  Note that we are in an
              if section and that we don't want to execute it unless we find
              an or that evaluates to true. */
@@ -1464,9 +1455,6 @@ void mprog_driver ( char *com_list, Character *mob, Character *actor,
           break;
 
         case ORTRUE:
-#ifdef DEBUG
-          log_string( "ORTRUE" );
-#endif
           /* An or was evaluated and found true.  We should already be in an
              if section, so note that we want to execute it. */
           if ( !ifstate[iflevel][IN_IF] )
@@ -1479,9 +1467,6 @@ void mprog_driver ( char *com_list, Character *mob, Character *actor,
           break;
 
         case ORFALSE:
-#ifdef DEBUG
-          log_string( "ORFALSE" );
-#endif
           /* An or was evaluated and found false.  We should already be in an
              if section, and we don't need to do much.  If the if was true or
              there were/will be other ors that evaluate(d) to true, they'll set
@@ -1496,9 +1481,6 @@ void mprog_driver ( char *com_list, Character *mob, Character *actor,
           break;
 
         case FOUNDELSE:
-#ifdef DEBUG
-          log_string( "FOUNDELSE" );
-#endif
           /* Found an else.  Make sure we're in an if section, bug out if not.
              If this else is not one that we wish to ignore, note that we're now
              in an else section, and look at whether or not we executed the if
@@ -1528,9 +1510,6 @@ void mprog_driver ( char *com_list, Character *mob, Character *actor,
           break;
 
         case FOUNDENDIF:
-#ifdef DEBUG
-          log_string( "FOUNDENDIF" );
-#endif
           /* Hmm, let's see... FOUNDENDIF must mean that we found an endif.
              So let's make sure we were expecting one, return if not.  If this
              endif matches the if or else that we're executing, note that we are
@@ -1558,9 +1537,6 @@ void mprog_driver ( char *com_list, Character *mob, Character *actor,
           break;
 
         case IFIGNORED:
-#ifdef DEBUG
-          log_string( "IFIGNORED" );
-#endif
           if ( !( ifstate[iflevel][IN_IF] || ifstate[iflevel][IN_ELSE] ) )
             {
               progbug( "Parse error, ignoring if while not in if or else", mob );
@@ -1571,9 +1547,6 @@ void mprog_driver ( char *com_list, Character *mob, Character *actor,
           break;
 
         case ORIGNORED:
-#ifdef DEBUG
-          log_string( "ORIGNORED" );
-#endif
           if ( !( ifstate[iflevel][IN_IF] || ifstate[iflevel][IN_ELSE] ) )
             {
               progbug( "Unmatched or", mob );
@@ -1590,16 +1563,13 @@ void mprog_driver ( char *com_list, Character *mob, Character *actor,
           break;
 
         case BERR:
-#ifdef DEBUG
-          log_string( "BERR" );
-#endif
           --prog_nest;
           return;
           break;
         }
     }
+
   --prog_nest;
-  return;
 }
 
 /* This function replaces mprog_process_cmnd.  It is called from

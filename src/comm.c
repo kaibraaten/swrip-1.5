@@ -118,13 +118,6 @@ int main( int argc, char **argv )
   socket_t imcsocket = INVALID_SOCKET;
 #endif
 
-  /*
-   * Memory debugging if needed.
-   */
-#if defined(MALLOC_DEBUG)
-  malloc_debug( 2 );
-#endif
-
   num_descriptors               = 0;
   first_descriptor              = NULL;
   last_descriptor               = NULL;

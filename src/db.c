@@ -2880,10 +2880,6 @@ void add_to_wizlist( char *name, int level )
 {
   WIZENT *wiz, *tmp;
 
-#ifdef DEBUG
-  log_string( "Adding to wizlist..." );
-#endif
-
   CREATE( wiz, WIZENT, 1 );
   wiz->name     = str_dup( name );
   wiz->level    = level;

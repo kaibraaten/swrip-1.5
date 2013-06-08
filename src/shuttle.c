@@ -178,9 +178,7 @@ void update_shuttle( void )
         /* bug("Shuttle '%s' no current", shuttle->name); */
         continue;
       }
-#ifdef DEBUG
-      bug("Shuttle '%s' delay: %d", shuttle->name, shuttle->current_delay);
-#endif
+
       if (--shuttle->current_delay <= 0)
         {
           int room = 0;
@@ -200,9 +198,7 @@ void update_shuttle( void )
                   shuttle->current = shuttle->current->next;
                   shuttle->current_number++;
                 }
-#ifdef DEBUG
-              bug("Shuttle '%s' Taking Off.", shuttle->name);
-#endif
+
               /*
                * An electronic voice says, 'Preparing for launch.'
                * It continues, 'Next stop, Gamorr'

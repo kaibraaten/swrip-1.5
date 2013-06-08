@@ -900,14 +900,6 @@ ch_ret drive_ship( Character *ch, SHIP_DATA *ship, EXIT_DATA *pexit, int fall )
       pexit = get_exit( get_room_index(ship->location), door );
     }
 
-#ifdef DEBUG
-  if ( pexit )
-    {
-      sprintf( buf, "drive_ship: %s to door %d", ch->name, pexit->vdir );
-      log_string( buf );
-    }
-#endif
-
   retcode = rNONE;
   txt = NULL;
 

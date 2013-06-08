@@ -425,14 +425,6 @@ ch_ret move_char( Character *ch, EXIT_DATA *pexit, int fall )
       pexit = get_exit( ch->in_room, door );
     }
 
-#ifdef DEBUG
-  if ( pexit )
-    {
-      sprintf( buf, "move_char: %s to door %d", ch->name, pexit->vdir );
-      log_string( buf );
-    }
-#endif
-
   if ( is_npc(ch) && IS_SET( ch->act, ACT_MOUNTED ) )
     {
       return retcode;

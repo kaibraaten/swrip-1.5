@@ -2,6 +2,32 @@
 #include "quest.h"
 #include "mud.h"
 
+static Character *GetQuestmaster( const ROOM_INDEX_DATA *room )
+{
+  CerisListIterator *iter = CreateListIterator( room->People, ForwardsIterator );
+  Character *questmaster = NULL;
+
+  for( ; !ListIterator_IsDone( iter ); ListIterator_Next( iter ) )
+    {
+      Character *current = (Character*) ListIterator_GetData( iter );
+
+      if( !is_npc( current ) )
+	{
+	  continue;
+	}
+
+      if( current->spec_fun == spec_lookup( "spec_questmaster" ) )
+	{
+	  questmaster = current;
+	  break;
+	}
+    }
+
+  DestroyListIterator( iter );
+
+  return questmaster;
+}
+
 void do_aquest(Character *ch, char *argument)
 {
   Character *questman;
@@ -86,14 +112,7 @@ void do_aquest(Character *ch, char *argument)
      procedure must be defined in special.c. You could instead use an
      ACT_QUESTMASTER flag instead of a special procedure. */
 
-  for ( questman = ch->in_room->first_person; questman != NULL; questman = questman->next_in_room )
-    {
-      if (!is_npc(questman))
-	continue;
-
-      if (questman->spec_fun == spec_lookup( "spec_questmaster" ))
-	break;
-    }
+  questman = GetQuestmaster( ch->in_room );
 
   if (questman == NULL || questman->spec_fun != spec_lookup( "spec_questmaster" ))
     {

@@ -70,16 +70,12 @@ void do_board( Character *ch, char *argument )
 
   if ( toroom->tunnel > 0 )
     {
-      Character *ctmp;
-      int count = 0;
+      int count = List_Count( toroom->People );
 
-      for ( ctmp = toroom->first_person; ctmp; ctmp = ctmp->next_in_room )
-        {
-          if ( ++count >= toroom->tunnel )
-            {
-              send_to_char( "There is no room for you in there.\r\n", ch );
-              return;
-            }
+      if ( count >= toroom->tunnel )
+	{
+	  send_to_char( "There is no room for you in there.\r\n", ch );
+	  return;
         }
     }
 
