@@ -5,6 +5,17 @@
 extern char *spell_target_name;
 extern int pAbort;
 
+static bool IsSpellParticipant( void *element, void *userData );
+static void ContributeToSpell( void *element, void *userData );
+
+typedef struct SpellParticipantData
+{
+  Character *Caster;
+  int SkillNumber;
+  char *Buffer;
+  int ManaCost;
+} SpellParticipantData;
+
 /*
  * Cast a spell.  Multi-caster and component support by Thoric
  */
@@ -238,51 +249,18 @@ void do_cast( Character *ch, char *argument )
       if ( skill->participants > 1 )
         {
           int cnt = 1;
-          Character *tmp = NULL;
+	  SpellParticipantData participantData;
 
-          for ( tmp = ch->in_room->first_person; tmp; tmp = tmp->next_in_room )
-	    {
-	      TIMER *timer = get_timerptr( tmp, TIMER_DO_FUN );
+	  participantData.Caster = ch;
+	  participantData.SkillNumber = sn;
+	  participantData.Buffer = staticbuf;
+	  participantData.ManaCost = mana;
 
-	      if (  tmp != ch
-		    && timer != NULL
-		    && timer->count >= 1
-		    && timer->do_fun == do_cast
-		    && tmp->tempnum == sn
-		    && tmp->dest_buf
-		    && !str_cmp( (const char*)tmp->dest_buf, staticbuf ) )
-		{
-		  ++cnt;
-		}
-	    }
+	  cnt += List_CountIf( ch->in_room->People, IsSpellParticipant, &participantData );
 
           if ( cnt >= skill->participants )
             {
-              for ( tmp = ch->in_room->first_person; tmp; tmp = tmp->next_in_room )
-		{
-		  TIMER *timer = get_timerptr( tmp, TIMER_DO_FUN );
-
-		  if( tmp != ch
-                      && timer != NULL
-                      && timer->count >= 1
-		      && timer->do_fun == do_cast
-                      && tmp->tempnum == sn
-		      && tmp->dest_buf
-                      && !str_cmp( (const char*)tmp->dest_buf, staticbuf ) )
-		    {
-		      extract_timer( tmp, timer );
-		      act( AT_MAGIC, "Channeling your energy into $n, you help direct the force.",
-			   ch, NULL, tmp, TO_VICT );
-		      act( AT_MAGIC, "$N channels $S energy into you!", ch, NULL, tmp, TO_CHAR );
-		      act( AT_MAGIC, "$N channels $S energy into $n!", ch, NULL, tmp, TO_NOTVICT );
-		      learn_from_success( tmp, sn );
-
-		      tmp->mana -= mana;
-		      tmp->substate = SUB_NONE;
-		      tmp->tempnum = -1;
-		      DISPOSE( tmp->dest_buf );
-		    }
-		}
+	      List_ForEach( ch->in_room->People, ContributeToSpell, &participantData );
 
               dont_wait = TRUE;
               send_to_char( "You concentrate all the energy into a burst of force!\r\n", ch );
@@ -298,8 +276,10 @@ void do_cast( Character *ch, char *argument )
               set_char_color( AT_MAGIC, ch );
               send_to_char( "There was not enough power for that to succeed...\r\n", ch );
 
-              if (get_trust(ch)  < LEVEL_IMMORTAL)    /* so imms dont lose mana */
-                ch->mana -= mana / 2;
+              if( !is_immortal( ch ) ) /* so imms dont lose mana */
+		{
+		  ch->mana -= mana / 2;
+		}
 
               learn_from_failure( ch, sn );
               return;
@@ -345,7 +325,7 @@ void do_cast( Character *ch, char *argument )
         {
           send_to_char( "Your anger and hatred prevent you from focusing.\r\n", ch );
 
-          if (is_immortal( ch ) )    /* so imms dont lose mana */
+          if (!is_immortal( ch ) )    /* so imms dont lose mana */
 	    {
 	      ch->mana -= mana / 2;
 	    }
@@ -490,5 +470,54 @@ void do_cast( Character *ch, char *argument )
        && !victim->fighting )
     {
       retcode = multi_hit( victim, ch, TYPE_UNDEFINED );
+    }
+}
+
+static bool IsSpellParticipant( void *element, void *userData )
+{
+  const Character *participant = (Character*) element;
+  const SpellParticipantData *args = (SpellParticipantData*) userData;
+  const TIMER *timer = get_timerptr( participant, TIMER_DO_FUN );
+
+  if( participant != args->Caster
+      && timer != NULL
+      && timer->count >= 1
+      && timer->do_fun == do_cast
+      && participant->tempnum == args->SkillNumber
+      && participant->dest_buf
+      && !str_cmp( (const char*)participant->dest_buf, args->Buffer ) )
+    {
+      return TRUE;
+    }
+
+  return FALSE;
+}
+
+static void ContributeToSpell( void *element, void *userData )
+{
+  Character *participant = (Character*) element;
+  const SpellParticipantData *args = (SpellParticipantData*) userData;
+  TIMER *timer = get_timerptr( participant, TIMER_DO_FUN );
+  int mana = args->ManaCost;
+
+  if( participant != args->Caster
+      && timer != NULL
+      && timer->count >= 1
+      && timer->do_fun == do_cast
+      && participant->tempnum == args->SkillNumber
+      && participant->dest_buf
+      && !str_cmp( (const char*)participant->dest_buf, args->Buffer ) )
+    {
+      extract_timer( participant, timer );
+      act( AT_MAGIC, "Channeling your energy into $n, you help direct the force.",
+	   args->Caster, NULL, participant, TO_VICT );
+      act( AT_MAGIC, "$N channels $S energy into you!", args->Caster, NULL, participant, TO_CHAR );
+      act( AT_MAGIC, "$N channels $S energy into $n!", args->Caster, NULL, participant, TO_NOTVICT );
+      learn_from_success( participant, args->SkillNumber );
+
+      participant->mana -= mana;
+      participant->substate = SUB_NONE;
+      participant->tempnum = -1;
+      DISPOSE( participant->dest_buf );
     }
 }
