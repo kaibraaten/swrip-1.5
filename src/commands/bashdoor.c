@@ -1,5 +1,6 @@
 #include "character.h"
 #include "mud.h"
+#include "algocallbacks.h"
 
 static void ShowCrashOpenMessage( void *element, void *userData )
 {
@@ -7,22 +8,6 @@ static void ShowCrashOpenMessage( void *element, void *userData )
   const char *keyword = (char*) userData;
 
   act(AT_SKILL, "The $d crashes open!", ch, NULL, keyword, TO_CHAR );
-}
-
-static void AttackBasher( void *element, void *userData )
-{
-  Character *attacker = (Character*) element;
-  Character *basher = (Character*) userData;
-
-  if ( is_awake( attacker )
-       && !attacker->fighting
-       && is_npc( attacker )
-       && !is_affected_by( attacker, AFF_CHARM )
-       && ( basher->top_level - attacker->top_level <= 4 )
-       && number_bits( 2 ) == 0 )
-    {
-      multi_hit( attacker, basher, TYPE_UNDEFINED );
-    }
 }
 
 void do_bashdoor( Character *ch, char *argument )

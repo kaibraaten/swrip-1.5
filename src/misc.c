@@ -27,6 +27,7 @@
 #include <string.h>
 #include "mud.h"
 #include "character.h"
+#include "algocallbacks.h"
 
 void jedi_bonus( Character *ch )
 {
@@ -56,22 +57,6 @@ static void SendRumblingSoundToCharacter( void *element, void *userData )
 
   send_to_char( "You hear a loud rumbling sound.\r\n", rch );
   send_to_char( "Something seems different...\r\n", rch );
-}
-
-static void ShowOpenDoorMessageToCharacter( void *element, void *userData )
-{
-  Character *rch = (Character*) element;
-  const char *keyword = (const char*) userData;
-
-  act( AT_ACTION, "The $d opens.", rch, NULL, keyword, TO_CHAR );
-}
-
-static void ShowCloseDoorMessageToCharacter( void *element, void *userData )
-{
-  Character *rch = (Character*) element;
-  const char *keyword = (const char*) userData;
-
-  act( AT_ACTION, "The $d closes.", rch, NULL, keyword, TO_CHAR );
 }
 
 /*

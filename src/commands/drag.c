@@ -98,16 +98,15 @@ void do_drag( Character *ch, char *argument )
 
               if ( to_room->tunnel > 0 )
                 {
-                  Character *ctmp;
-                  int count = 0;
+                  int numberOfPeopleInRoom = List_Count( to_room->People );
 
-                  for ( ctmp = to_room->first_person; ctmp; ctmp = ctmp->next_in_room )
-                    if ( count+2 >= to_room->tunnel )
-                      {
-                        send_to_char( "There is no room for you both in there.\r\n", ch );
-                        return;
-                      }
+		  if ( numberOfPeopleInRoom + 2 > to_room->tunnel )
+		    {
+		      send_to_char( "There is no room for you both in there.\r\n", ch );
+		      return;
+		    }
                 }
+
               if ( ship->shipstate == SHIP_LAUNCH || ship->shipstate == SHIP_LAUNCH_2 )
                 {
                   send_to_char("&rThat ship has already started launching!\r\n",ch);
@@ -177,19 +176,17 @@ void do_drag( Character *ch, char *argument )
 
           if ( ( to_room = get_room_index( ship->location ) ) != NULL )
             {
-
-              if ( to_room->tunnel > 0 )
+	      if ( to_room->tunnel > 0 )
                 {
-                  Character *ctmp;
-                  int count = 0;
+                  int numberOfPeopleInRoom = List_Count( to_room->People );
 
-                  for ( ctmp = to_room->first_person; ctmp; ctmp = ctmp->next_in_room )
-                    if ( count+2 >= to_room->tunnel )
-                      {
-                        send_to_char( "There is no room for you both in there.\r\n", ch );
-                        return;
-                      }
+                  if ( numberOfPeopleInRoom + 2 > to_room->tunnel )
+                    {
+                      send_to_char( "There is no room for you both in there.\r\n", ch );
+                      return;
+                    }
                 }
+
               if ( ship->shipstate == SHIP_LAUNCH || ship->shipstate == SHIP_LAUNCH_2 )
                 {
                   send_to_char("&rThat ship has already started launching!\r\n",ch);

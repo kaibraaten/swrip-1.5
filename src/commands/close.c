@@ -1,5 +1,6 @@
 #include "character.h"
 #include "mud.h"
+#include "algocallbacks.h"
 
 void do_close( Character *ch, char *argument )
 {
@@ -40,16 +41,9 @@ void do_close( Character *ch, char *argument )
       if ( ( pexit_rev = pexit->rexit ) != NULL
            && pexit_rev->to_room == ch->in_room )
         {
-          Character *rch = NULL;
-
           SET_BIT( pexit_rev->exit_info, EX_CLOSED );
-
-          for ( rch = pexit->to_room->first_person; rch; rch = rch->next_in_room )
-	    {
-	      act( AT_ACTION, "The $d closes.",
-		   rch, NULL, pexit_rev->keyword, TO_CHAR );
-	    }
-        }
+	  List_ForEach( pexit->to_room->People, ShowCloseDoorMessageToCharacter, pexit_rev->keyword );
+	}
 
       set_bexit_flag( pexit, EX_CLOSED );
 

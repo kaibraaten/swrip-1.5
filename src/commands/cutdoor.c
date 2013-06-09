@@ -1,13 +1,17 @@
 #include "character.h"
 #include "mud.h"
+#include "algocallbacks.h"
+
+#define AttackCutter AttackBasher
+
+static void ShowFallsOpenMessageToCharacter( void *element, void *userData );
 
 void do_cutdoor( Character *ch, char *argument )
 {
-  Character *gch;
-  EXIT_DATA *pexit;
-  char       arg [ MAX_INPUT_LENGTH ];
-  OBJ_DATA *wield;
-  int whichweap;
+  EXIT_DATA *pexit = NULL;
+  char arg [ MAX_INPUT_LENGTH ];
+  OBJ_DATA *wield = NULL;
+  int whichweap = 0;
   int SABER = 1;
   int PIKE = 0;
 
@@ -84,21 +88,17 @@ void do_cutdoor( Character *ch, char *argument )
                &&   (pexit_rev = pexit->rexit) != NULL
                &&    pexit_rev->to_room == ch->in_room )
             {
-              Character *rch;
-
               REMOVE_BIT( pexit_rev->exit_info, EX_CLOSED );
+
               if ( IS_SET( pexit_rev->exit_info, EX_LOCKED ) )
                 REMOVE_BIT( pexit_rev->exit_info, EX_LOCKED );
+
               SET_BIT( pexit_rev->exit_info, EX_BASHED );
 
-              for ( rch = to_room->first_person; rch; rch = rch->next_in_room )
-                {
-                  act(AT_SKILL, "The $d falls open!",
-                      rch, NULL, pexit_rev->keyword, TO_CHAR );
-                }
+	      List_ForEach( to_room->People, ShowFallsOpenMessageToCharacter, pexit_rev->keyword );
             }
-          damage( ch, ch, ( ch->max_hit / 20 ), gsn_cutdoor );
 
+          damage( ch, ch, ( ch->max_hit / 20 ), gsn_cutdoor );
         }
       else
         {
@@ -119,14 +119,17 @@ void do_cutdoor( Character *ch, char *argument )
       damage( ch, ch, ( ch->max_hit / 20 ) + 10, gsn_cutdoor );
       learn_from_failure(ch, gsn_cutdoor);
     }
+
   if ( !char_died( ch ) )
-    for ( gch = ch->in_room->first_person; gch; gch = gch->next_in_room )
-      {
-        if ( is_awake( gch )
-	     && !gch->fighting
-             && ( is_npc( gch ) && !is_affected_by( gch, AFF_CHARM ) )
-             && ( ch->top_level - gch->top_level <= 4 )
-             && number_bits( 2 ) == 0 )
-          multi_hit( gch, ch, TYPE_UNDEFINED );
-      }
+    {
+      List_ForEach( ch->in_room->People, AttackCutter, ch );
+    }
+}
+
+static void ShowFallsOpenMessageToCharacter( void *element, void *userData )
+{
+  Character *rch = (Character*) element;
+  const char *keyword = (const char*) userData;
+
+  act( AT_ACTION, "The $d falls open.", rch, NULL, keyword, TO_CHAR );
 }

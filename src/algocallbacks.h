@@ -15,4 +15,22 @@
  */
 void SendSoundToPlayerCharacter( void *element, void *userData );
 
+/*
+ * Sends "The $d opens." to a character via the act() function.
+ */
+void ShowOpenDoorMessageToCharacter( void *element, void *userData );
+
+/*
+ * Sends "The $d closes." to a character via the act() function.
+ */
+void ShowCloseDoorMessageToCharacter( void *element, void *userData );
+
+/*
+ * Attack someone who bashed or cut open a door.
+ *
+ * void *element : The potential attacker.
+ * void *userData : The person who bashed or cut open.
+ */
+void AttackBasher( void *element, void *userData );
+
 #endif
