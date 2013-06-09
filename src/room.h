@@ -4,5 +4,6 @@
 #include "types.h"
 
 int NumberOfPeopleInRoom( const ROOM_INDEX_DATA *room );
+Character *GetFirstPersonInRoom( const ROOM_INDEX_DATA *room );
 
 #endif

@@ -512,17 +512,3 @@ bool is_valid_language( int language )
 {
   return VALID_LANGUAGES & language;
 }
-
-Character *GetFirstPersonInRoom( const ROOM_INDEX_DATA *room )
-{
-  Character *person = NULL;
-  CerisListIterator *iter = CreateListIterator( room->People, ForwardsIterator );
-
-  if( !ListIterator_IsDone( iter ) )
-    {
-      person = (Character*) ListIterator_GetData( iter );
-    }
-
-  DestroyListIterator( iter );
-  return person;
-}

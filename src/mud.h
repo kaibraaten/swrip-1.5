@@ -2485,7 +2485,6 @@ extern "C" {
   OBJ_DATA *create_money( int amount );
 
   /* misc.c */
-  Character *GetFirstPersonInRoom( const ROOM_INDEX_DATA *room );
   bool is_valid_language( int language );
   void pullorpush( Character *ch, OBJ_DATA *obj, bool pull );
   void actiondesc( Character *ch, OBJ_DATA *obj, void *vo );

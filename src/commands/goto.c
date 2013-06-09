@@ -4,14 +4,15 @@
 void do_goto( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  ROOM_INDEX_DATA *location;
-  Character *fch;
-  Character *fch_next;
-  ROOM_INDEX_DATA *in_room;
-  AREA_DATA *pArea;
-  short vnum;
+  ROOM_INDEX_DATA *location = NULL;
+  ROOM_INDEX_DATA *in_room = NULL;
+  AREA_DATA *pArea = NULL;
+  vnum_t vnum = 0;
+  CerisList *peopleInRoom = NULL;
+  CerisListIterator *peopleInRoomIterator = NULL;
 
   one_argument( argument, arg );
+
   if ( arg[0] == '\0' )
     {
       send_to_char( "Goto where?\r\n", ch );
@@ -130,16 +131,18 @@ void do_goto( Character *ch, char *argument )
         act( AT_IMMORT, "$n $T", ch, NULL, "enters in a swirl of the Force.",  TO_ROOM );
     }
 
-
-
   do_look( ch, "auto" );
 
   if ( ch->in_room == in_room )
     return;
 
-  for ( fch = in_room->first_person; fch; fch = fch_next )
+  peopleInRoom = List_Copy( in_room->People );
+  peopleInRoomIterator = CreateListIterator( peopleInRoom, ForwardsIterator );
+
+  for( ; !ListIterator_IsDone( peopleInRoomIterator ); ListIterator_Next( peopleInRoomIterator ) )
     {
-      fch_next = fch->next_in_room;
+      Character *fch = (Character*) ListIterator_GetData( peopleInRoomIterator );
+
       if ( fch->master == ch && is_immortal(fch) )
         {
           act( AT_ACTION, "You follow $N.", fch, NULL, ch, TO_CHAR );
