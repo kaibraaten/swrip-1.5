@@ -1,6 +1,7 @@
 #include "ships.h"
 #include "mud.h"
 #include "character.h"
+#include "room.h"
 
 void do_drag( Character *ch, char *argument )
 {
@@ -98,7 +99,7 @@ void do_drag( Character *ch, char *argument )
 
               if ( to_room->tunnel > 0 )
                 {
-                  int numberOfPeopleInRoom = List_Count( to_room->People );
+                  int numberOfPeopleInRoom = NumberOfPeopleInRoom( to_room );
 
 		  if ( numberOfPeopleInRoom + 2 > to_room->tunnel )
 		    {
@@ -178,7 +179,7 @@ void do_drag( Character *ch, char *argument )
             {
 	      if ( to_room->tunnel > 0 )
                 {
-                  int numberOfPeopleInRoom = List_Count( to_room->People );
+                  int numberOfPeopleInRoom = NumberOfPeopleInRoom( to_room );
 
                   if ( numberOfPeopleInRoom + 2 > to_room->tunnel )
                     {

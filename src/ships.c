@@ -30,6 +30,7 @@
 #include "turret.h"
 #include "clan.h"
 #include "algocallbacks.h"
+#include "room.h"
 
 SHIP_DATA *first_ship = NULL;
 SHIP_DATA *last_ship = NULL;
@@ -1057,7 +1058,7 @@ ch_ret drive_ship( Character *ch, SHIP_DATA *ship, EXIT_DATA *pexit, int fall )
 
   if ( to_room->tunnel > 0 )
     {
-      int count = List_Count( to_room->People );
+      int count = NumberOfPeopleInRoom( to_room );
 
       if ( count >= to_room->tunnel )
 	{

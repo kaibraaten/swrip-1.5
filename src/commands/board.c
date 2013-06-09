@@ -2,6 +2,7 @@
 #include "shuttle.h"
 #include "ships.h"
 #include "mud.h"
+#include "room.h"
 
 void do_board( Character *ch, char *argument )
 {
@@ -70,7 +71,7 @@ void do_board( Character *ch, char *argument )
 
   if ( toroom->tunnel > 0 )
     {
-      int count = List_Count( toroom->People );
+      int count = NumberOfPeopleInRoom( toroom );
 
       if ( count >= toroom->tunnel )
 	{

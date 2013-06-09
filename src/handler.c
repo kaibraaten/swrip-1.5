@@ -25,6 +25,7 @@
 #include "character.h"
 #include "mud.h"
 #include "track.h"
+#include "room.h"
 
 extern Character *gch_prev;
 extern OBJ_DATA *gobj_prev;
@@ -82,7 +83,7 @@ void explode( OBJ_DATA *obj )
 
 	      if ( room )
 		{
-		  if ( !held && List_Count( room->People ) > 0 )
+		  if ( !held && NumberOfPeopleInRoom( room ) > 0 )
 		    {
 		      CerisListIterator *iter = CreateListIterator(room->People, ForwardsIterator);
 		      Character *firstInRoom = ListIterator_GetData( iter );
@@ -1899,7 +1900,7 @@ bool room_is_private( const Character *ch, const ROOM_INDEX_DATA *pRoomIndex )
   if ( IS_SET(pRoomIndex->room_flags, ROOM_PLR_HOME) && ch->plr_home != pRoomIndex)
     return TRUE;
 
-  count = List_Count( pRoomIndex->People );
+  count = NumberOfPeopleInRoom( pRoomIndex );
 
   if ( IS_SET(pRoomIndex->room_flags, ROOM_PRIVATE)  && count >= 2 )
     return TRUE;

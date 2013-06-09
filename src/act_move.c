@@ -23,6 +23,7 @@
 
 #include <string.h>
 #include <ctype.h>
+#include "room.h"
 #include "character.h"
 #include "mud.h"
 
@@ -136,7 +137,7 @@ void clear_vrooms( void )
 
   for ( hash = 0; hash < 64; hash++ )
     {
-      int peopleInRoom = List_Count( vroom_hash[hash]->People );
+      int peopleInRoom = NumberOfPeopleInRoom( vroom_hash[hash] );
 
       while ( vroom_hash[hash]
               && peopleInRoom == 0
@@ -154,7 +155,7 @@ void clear_vrooms( void )
 
       for ( room = vroom_hash[hash]; room; room = room_next )
         {
-	  peopleInRoom = List_Count( room->People );
+	  peopleInRoom = NumberOfPeopleInRoom( room );
           room_next = room->next;
 
           if ( peopleInRoom == 0 && !room->first_content )
@@ -1077,7 +1078,7 @@ ch_ret move_char( Character *ch, EXIT_DATA *pexit, int fall )
   if ( !fall )
     {
       int count = 0;
-      int chars = List_Count( from_room->People );
+      int chars = NumberOfPeopleInRoom( from_room );
       CerisList *peopleInOriginRoom = List_Copy( from_room->People );
       CerisListIterator *iter = CreateListIterator( peopleInOriginRoom, ForwardsIterator );
 

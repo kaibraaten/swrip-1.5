@@ -24,6 +24,7 @@
 #include "character.h"
 #include "mud.h"
 #include "clan.h"
+#include "room.h"
 
 /*
  * how resistant an object is to damage                         -Thoric
@@ -233,7 +234,7 @@ void obj_fall( OBJ_DATA *obj, bool through )
           return;
         }
 
-      if( List_Count( obj->in_room->People ) > 0 )
+      if( NumberOfPeopleInRoom( obj->in_room ) > 0 )
         {
 	  CerisListIterator *iter = CreateListIterator( obj->in_room->People, ForwardsIterator );
 	  firstPersonInRoom = (Character*) ListIterator_GetData( iter );
@@ -266,7 +267,7 @@ void obj_fall( OBJ_DATA *obj, bool through )
 	  int dam = fall_count*obj->weight/2;
 
           /* Damage players */
-          if ( List_Count( obj->in_room->People ) > 0 && number_percent() > 15 )
+          if ( NumberOfPeopleInRoom( obj->in_room ) > 0 && number_percent() > 15 )
             {
               Character *vch = NULL;
               int chcnt = 0;

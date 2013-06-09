@@ -24,6 +24,7 @@
 #include <ctype.h>
 #include <string.h>
 #include <time.h>
+#include "room.h"
 #include "character.h"
 #include "mud.h"
 
@@ -255,7 +256,7 @@ void close_area( AREA_DATA *pArea )
           STRFREE(rid->name);
           STRFREE(rid->description);
 
-          if ( List_Count( rid->People ) > 0 )
+          if ( NumberOfPeopleInRoom( rid ) > 0 )
             {
 	      CerisList *originalPeopleInRoom = List_Copy( rid->People );
 	      CerisListIterator *iter = CreateListIterator( originalPeopleInRoom, ForwardsIterator );

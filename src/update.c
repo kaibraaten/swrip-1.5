@@ -34,6 +34,7 @@
 #include "shuttle.h"
 #include "character.h"
 #include "clan.h"
+#include "room.h"
 
 /* mud_prog.c */
 void room_act_update( void );
@@ -810,7 +811,7 @@ void mobile_update( void )
 
       if ( ch->pIndexData->vnum == 5 && !is_affected_by(ch, AFF_CHARM) )
         {
-          if( List_Count( ch->in_room->People ) > 0 )
+          if( NumberOfPeopleInRoom( ch->in_room ) > 0 )
             act(AT_MAGIC, "$n returns to the dust from whence $e came.", ch, NULL, NULL, TO_ROOM);
 
           if(is_npc(ch)) /* Guard against purging switched? */
