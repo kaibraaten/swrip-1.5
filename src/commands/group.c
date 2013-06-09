@@ -1,6 +1,9 @@
 #include "character.h"
 #include "mud.h"
 
+static void AddFollowerToGroup( void *element, void *userData );
+static bool IsFollowerOf( void *element, void *userData );
+
 void do_group( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
@@ -81,23 +84,10 @@ void do_group( Character *ch, char *argument )
 
   if ( !str_cmp( arg, "all" ) )
     {
-      Character *rch = NULL;
       int count = 0;
 
-      for ( rch = ch->in_room->first_person; rch; rch = rch->next_in_room )
-        {
-          if ( ch != rch
-               && !is_npc( rch )
-               && rch->master == ch
-               && !ch->master
-               && !ch->leader
-               && !is_same_group( rch, ch )
-               )
-            {
-              rch->leader = ch;
-              count++;
-            }
-        }
+      List_ForEach( ch->in_room->People, AddFollowerToGroup, ch );
+      count = List_CountIf( ch->in_room->People, IsFollowerOf, ch );
 
       if ( count == 0 )
 	{
@@ -146,4 +136,38 @@ void do_group( Character *ch, char *argument )
   act( AT_ACTION, "$N joins $n's group.", ch, NULL, victim, TO_NOTVICT );
   act( AT_ACTION, "You join $n's group.", ch, NULL, victim, TO_VICT );
   act( AT_ACTION, "$N joins your group.", ch, NULL, victim, TO_CHAR );
+}
+
+static void AddFollowerToGroup( void *element, void *userData )
+{
+  Character *follower = (Character*) element;
+  Character *leader = (Character*) userData;
+
+  if ( leader != follower
+       && !is_npc( follower )
+       && follower->master == leader
+       && !leader->master
+       && !leader->leader
+       && !is_same_group( follower, leader ) )
+    {
+      follower->leader = leader;
+    }
+}
+
+static bool IsFollowerOf( void *element, void *userData )
+{
+  Character *follower = (Character*) element;
+  Character *leader = (Character*) userData;
+
+  if( leader != follower
+      && !is_npc( follower )
+      && follower->leader == leader
+      && is_same_group( follower, leader ) )
+    {
+      return TRUE;
+    }
+  else
+    {
+      return FALSE;
+    }
 }
