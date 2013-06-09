@@ -6,19 +6,19 @@ void do_list( Character *ch, char *argument )
 {
   if ( IS_SET(ch->in_room->room_flags, ROOM_PET_SHOP) )
     {
-      ROOM_INDEX_DATA *pRoomIndexNext;
-      Character *pet;
-      bool found;
+      Character *pet = NULL;
+      bool found = FALSE;
+      ROOM_INDEX_DATA *pRoomIndexNext = get_room_index( ch->in_room->vnum + 1 );
+      CerisListIterator *iter = NULL;
+      CerisList *petsInRoom = NULL;
 
-      pRoomIndexNext = get_room_index( ch->in_room->vnum + 1 );
       if ( !pRoomIndexNext )
         {
-          bug( "Do_list: bad pet shop at vnum %d.", ch->in_room->vnum );
+          bug( "%s: bad pet shop at vnum %d.", __FUNCTION__, ch->in_room->vnum );
           send_to_char( "You can't do that here.\r\n", ch );
           return;
         }
 
-      found = FALSE;
       for ( pet = pRoomIndexNext->first_person; pet; pet = pet->next_in_room )
         {
           if ( IS_SET(pet->act, ACT_PET) && is_npc(pet) )
@@ -28,47 +28,59 @@ void do_list( Character *ch, char *argument )
                   found = TRUE;
                   send_to_char( "Pets for sale:\r\n", ch );
                 }
+
 	      ch_printf( ch, "[%2d] %8d - %s\r\n",
                          pet->top_level,
                          10 * pet->top_level * pet->top_level,
                          pet->short_descr );
             }
         }
+
       if ( !found )
-        send_to_char( "Sorry, we're out of pets right now.\r\n", ch );
+	{
+	  send_to_char( "Sorry, we're out of pets right now.\r\n", ch );
+	}
+
       return;
     }
   else
     {
       char arg[MAX_INPUT_LENGTH];
-      Character *keeper;
-      OBJ_DATA *obj;
-      int cost;
+      Character *keeper = find_keeper( ch );
+      OBJ_DATA *obj = NULL;
+      int cost = 0;
       int oref = 0;
-      bool found;
+      bool found = FALSE;
 
       one_argument( argument, arg );
 
-      if ( ( keeper = find_keeper( ch ) ) == NULL )
-        return;
+      if ( !keeper )
+	{
+	  return;
+	}
 
-      found = FALSE;
       for ( obj = keeper->last_carrying; obj; obj = obj->prev_content )
         {
           if ( obj->wear_loc == WEAR_NONE
-               &&   can_see_obj( ch, obj ) )
+               && can_see_obj( ch, obj ) )
             {
               oref++;
-              if ( ( cost = get_cost( ch, keeper, obj, TRUE ) ) > 0
+	      cost = get_cost( ch, keeper, obj, TRUE );
+
+              if ( cost > 0
                    && ( arg[0] == '\0' || nifty_is_name( arg, obj->name ) ) )
                 {
                   if (keeper->home != NULL)
-                    cost = obj->cost;
+		    {
+		      cost = obj->cost;
+		    }
+
                   if ( !found )
                     {
                       found = TRUE;
                       send_to_char( "[Price] {ref} Item\r\n", ch );
                     }
+
                   ch_printf( ch, "[%5d] {%3d} %s%s.\r\n",
                              cost, oref, capitalize( obj->short_descr ),
                              IS_SET(obj->extra_flags, ITEM_HUTT_SIZE) ? " (hutt size)" :
@@ -83,10 +95,15 @@ void do_list( Character *ch, char *argument )
       if ( !found )
         {
           if ( arg[0] == '\0' )
-            send_to_char( "You can't buy anything here.\r\n", ch );
+	    {
+	      send_to_char( "You can't buy anything here.\r\n", ch );
+	    }
           else
-            send_to_char( "You can't buy that here.\r\n", ch );
+	    {
+	      send_to_char( "You can't buy that here.\r\n", ch );
+	    }
         }
+
       return;
     }
 }

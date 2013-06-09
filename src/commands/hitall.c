@@ -1,16 +1,16 @@
 #include "mud.h"
 #include "character.h"
+#include "room.h"
 
 static bool is_legal_kill(Character *ch, Character *vch);
 
 void do_hitall( Character *ch, char *argument )
 {
-  Character *vch = NULL;
-  Character *vch_next = NULL;
   short nvict = 0;
   short nhit = 0;
-  short percent;
-  char logbuf[MAX_STRING_LENGTH];
+  short percent = 0;
+  CerisList *peopleInRoom = NULL;
+  CerisListIterator *peopleInRoomIterator = NULL;
 
   if ( IS_SET(ch->in_room->room_flags, ROOM_SAFE) )
     {
@@ -18,7 +18,7 @@ void do_hitall( Character *ch, char *argument )
       return;
     }
 
-  if ( !ch->in_room->first_person )
+  if( NumberOfPeopleInRoom( ch->in_room ) == 0 )
     {
       send_to_char( "There's no one here!\r\n", ch );
       return;
@@ -26,21 +26,28 @@ void do_hitall( Character *ch, char *argument )
 
   percent = is_npc(ch) ? 80 : ch->pcdata->learned[gsn_hitall];
 
-  for ( vch = ch->in_room->first_person; vch; vch = vch_next )
+  peopleInRoom = List_Copy( ch->in_room->People );
+  peopleInRoomIterator = CreateListIterator( peopleInRoom, ForwardsIterator );
+
+  for( ; !ListIterator_IsDone( peopleInRoomIterator ); ListIterator_Next( peopleInRoomIterator ) )
     {
-      vch_next = vch->next_in_room;
+      Character *vch = (Character*) ListIterator_GetData( peopleInRoomIterator );
 
       if ( is_same_group(ch, vch) || !is_legal_kill(ch, vch) ||
            !can_see(ch, vch) || is_safe(ch, vch) )
-        continue;
+	{
+	  continue;
+	}
 
       if ( ++nvict > get_level( ch, COMBAT_ABILITY ) / 5 )
-        break;
+	{
+	  break;
+	}
 
       if ( IS_SET(vch->act, PLR_AFK))
         {
-          sprintf( logbuf , "%s just attacked %s with HITALL with an afk flag on!." , ch->name, vch->name );
-          log_string( logbuf );
+          log_printf( "%s just attacked %s with HITALL with an afk flag on!.",
+		      ch->name, vch->name );
         }
 
       if ( chance(ch, percent) )
@@ -55,11 +62,16 @@ void do_hitall( Character *ch, char *argument )
 
       /* Fireshield, etc. could kill ch too.. :>.. -- Altrag */
       if ( global_retcode == rCHAR_DIED || global_retcode == rBOTH_DIED
-           ||   char_died(ch) )
+           || char_died(ch) )
 	{
+	  DestroyListIterator( peopleInRoomIterator );
+	  DestroyList( peopleInRoom );
 	  return;
 	}
     }
+
+  DestroyListIterator( peopleInRoomIterator );
+  DestroyList( peopleInRoom );
 
   if ( !nvict )
     {
@@ -82,10 +94,14 @@ void do_hitall( Character *ch, char *argument )
 static bool is_legal_kill(Character *ch, Character *vch)
 {
   if ( is_npc(ch) || is_npc(vch) )
-    return TRUE;
+    {
+      return TRUE;
+    }
 
   if ( is_safe(ch,vch) )
-    return FALSE;
+    {
+      return FALSE;
+    }
 
   return TRUE;
 }

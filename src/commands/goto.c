@@ -96,7 +96,6 @@ void do_goto( Character *ch, char *argument )
           send_to_char( "Builders can only use goto from a hotel or in their zone.\r\n", ch );
           return;
         }
-
     }
 
   in_room = ch->in_room;
@@ -149,4 +148,7 @@ void do_goto( Character *ch, char *argument )
           do_goto( fch, argument );
         }
     }
+
+  DestroyListIterator( peopleInRoomIterator );
+  DestroyList( peopleInRoom );
 }
