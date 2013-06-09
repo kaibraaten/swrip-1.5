@@ -211,38 +211,50 @@ void do_cast( Character *ch, char *argument )
           TIMER *t;
 
           for ( tmp = ch->in_room->first_person; tmp; tmp = tmp->next_in_room )
-            if (  tmp != ch
-		  &&   (t = get_timerptr( tmp, TIMER_DO_FUN )) != NULL
-                  &&    t->count >= 1 && t->do_fun == do_cast
-                  &&    tmp->tempnum == sn && tmp->dest_buf
-                  &&   !str_cmp( (const char*)tmp->dest_buf, staticbuf ) )
-              ++cnt;
+	    {
+	      if (  tmp != ch
+		    && (t = get_timerptr( tmp, TIMER_DO_FUN )) != NULL
+		    && t->count >= 1 && t->do_fun == do_cast
+		    && tmp->tempnum == sn && tmp->dest_buf
+		    && !str_cmp( (const char*)tmp->dest_buf, staticbuf ) )
+		{
+		  ++cnt;
+		}
+	    }
+
           if ( cnt >= skill->participants )
             {
               for ( tmp = ch->in_room->first_person; tmp; tmp = tmp->next_in_room )
-                if (  tmp != ch
-                      &&   (t = get_timerptr( tmp, TIMER_DO_FUN )) != NULL
-                      &&    t->count >= 1 && t->do_fun == do_cast
-                      &&    tmp->tempnum == sn && tmp->dest_buf
-                      &&   !str_cmp( (const char*)tmp->dest_buf, staticbuf ) )
-                  {
-                    extract_timer( tmp, t );
-                    act( AT_MAGIC, "Channeling your energy into $n, you help direct the force",
-			 ch, NULL, tmp, TO_VICT );
-                    act( AT_MAGIC, "$N channels $S energy into you!", ch, NULL, tmp, TO_CHAR );
-                    act( AT_MAGIC, "$N channels $S energy into $n!", ch, NULL, tmp, TO_NOTVICT );
-                    learn_from_success( tmp, sn );
+		{
+		  if( tmp != ch
+                      && (t = get_timerptr( tmp, TIMER_DO_FUN )) != NULL
+                      && t->count >= 1
+		      && t->do_fun == do_cast
+                      && tmp->tempnum == sn && tmp->dest_buf
+                      && !str_cmp( (const char*)tmp->dest_buf, staticbuf ) )
+		    {
+		      extract_timer( tmp, t );
+		      act( AT_MAGIC, "Channeling your energy into $n, you help direct the force.",
+			   ch, NULL, tmp, TO_VICT );
+		      act( AT_MAGIC, "$N channels $S energy into you!", ch, NULL, tmp, TO_CHAR );
+		      act( AT_MAGIC, "$N channels $S energy into $n!", ch, NULL, tmp, TO_NOTVICT );
+		      learn_from_success( tmp, sn );
 
-                    tmp->mana -= mana;
-                    tmp->substate = SUB_NONE;
-                    tmp->tempnum = -1;
-                    DISPOSE( tmp->dest_buf );
-                  }
+		      tmp->mana -= mana;
+		      tmp->substate = SUB_NONE;
+		      tmp->tempnum = -1;
+		      DISPOSE( tmp->dest_buf );
+		    }
+		}
+
               dont_wait = TRUE;
               send_to_char( "You concentrate all the energy into a burst of force!\r\n", ch );
               vo = locate_targets( ch, arg2, sn, &victim, &obj );
+
               if ( vo == &pAbort )
-                return;
+		{
+		  return;
+		}
             }
           else
             {
@@ -251,6 +263,7 @@ void do_cast( Character *ch, char *argument )
 
               if (get_trust(ch)  < LEVEL_IMMORTAL)    /* so imms dont lose mana */
                 ch->mana -= mana / 2;
+
               learn_from_failure( ch, sn );
               return;
             }
