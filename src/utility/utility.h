@@ -18,30 +18,29 @@ extern "C" {
 #define MAX_INPUT_LENGTH         1024  /* arg */
 #define MAX_INBUF_SIZE           1024
 
-/*
- * Short scalar types.
- * Diavolo reports AIX compiler has bugs with short types.
- */
 #ifndef __cplusplus
-#if     !defined(FALSE)
-#define FALSE    0
-#endif
-
-#if     !defined(TRUE)
-#define TRUE     1
-#endif
-
-typedef unsigned char                   bool;
-
-#else
-#if !defined(__STORMGCC__) && !defined(__MORPHOS__)
-#define TRUE true
-#define FALSE false
-#endif /* StormC4 */
+#  if __STDC_VERSION__ >= 199901L
+#    include <stdbool.h>
+#    define FALSE false
+#    define TRUE true
+#  else
+#    define bool unsigned char
+#    ifndef FALSE
+#      define FALSE 0
+#    endif
+#    ifndef TRUE
+#      define TRUE 1
+#    endif
+#  endif
+#else /* __cplusplus */
+#  if !defined(__STORMGCC__) && !defined(__MORPHOS__)
+#    define TRUE true
+#    define FALSE false
+#  endif /* StormC4 */
 #endif /* __cplusplus */
 
-#if     !defined(BERR)
-#define BERR     255
+#if !defined(BERR)
+#  define BERR 255
 #endif
 
 /*
