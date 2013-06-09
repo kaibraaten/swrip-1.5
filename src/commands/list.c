@@ -2,41 +2,52 @@
 #include "shops.h"
 #include "mud.h"
 
+static bool IsPet( void *element, void *userData )
+{
+  const Character *pet = (Character*) element;
+
+  return IS_SET( pet->act, ACT_PET ) && is_npc( pet );
+}
+
+static void ShowPetForSale( void *element, void *userData )
+{
+  if( IsPet( element, userData ) )
+    {
+      Character *pet = (Character*) element;
+      Character *buyer = (Character*) userData;
+
+      ch_printf( buyer, "[%2d] %8d - %s\r\n",
+		 pet->top_level,
+		 10 * pet->top_level * pet->top_level,
+		 pet->short_descr );
+    }
+}
+
 void do_list( Character *ch, char *argument )
 {
   if ( IS_SET(ch->in_room->room_flags, ROOM_PET_SHOP) )
     {
-      Character *pet = NULL;
-      bool found = FALSE;
-      ROOM_INDEX_DATA *pRoomIndexNext = get_room_index( ch->in_room->vnum + 1 );
-      CerisListIterator *iter = NULL;
-      CerisList *petsInRoom = NULL;
+      ROOM_INDEX_DATA *petRoom = get_room_index( ch->in_room->vnum + 1 );
+      int numberOfPetsInShop = 0;
 
-      if ( !pRoomIndexNext )
+      if ( !petRoom )
         {
           bug( "%s: bad pet shop at vnum %d.", __FUNCTION__, ch->in_room->vnum );
           send_to_char( "You can't do that here.\r\n", ch );
           return;
         }
 
-      for ( pet = pRoomIndexNext->first_person; pet; pet = pet->next_in_room )
-        {
-          if ( IS_SET(pet->act, ACT_PET) && is_npc(pet) )
-            {
-              if ( !found )
-                {
-                  found = TRUE;
-                  send_to_char( "Pets for sale:\r\n", ch );
-                }
+      numberOfPetsInShop = List_CountIf( petRoom->People, IsPet, NULL );
 
-	      ch_printf( ch, "[%2d] %8d - %s\r\n",
-                         pet->top_level,
-                         10 * pet->top_level * pet->top_level,
-                         pet->short_descr );
-            }
-        }
+      if( numberOfPetsInShop > 0 )
+	{
+	  CerisList *listOfPets = List_CopyIf( petRoom->People, IsPet, NULL );
+	  ch_printf( ch, "Pets for sale:\r\n" );
 
-      if ( !found )
+	  List_ForEach( listOfPets, ShowPetForSale, ch );
+	  DestroyList( listOfPets );
+	}
+      else
 	{
 	  send_to_char( "Sorry, we're out of pets right now.\r\n", ch );
 	}
