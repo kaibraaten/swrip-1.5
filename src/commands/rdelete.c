@@ -1,5 +1,6 @@
 #include "character.h"
 #include "mud.h"
+#include "room.h"
 
 void do_rdelete( Character *ch, char *argument )
 {
@@ -31,7 +32,7 @@ void do_rdelete( Character *ch, char *argument )
     }
 
   /* We could go to the trouble of clearing out the room, but why? */
-  if ( location->first_person || location->first_content )
+  if ( NumberOfPeopleInRoom( location ) > 0 || location->first_content )
     {
       send_to_char( "The room must be empty first.\r\n", ch );
       return;

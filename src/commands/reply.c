@@ -98,11 +98,15 @@ void do_reply( Character *ch, char *argument )
           const char *sbuf = argument;
 
           if ( vch == ch )
-            continue;
+	    {
+	      continue;
+	    }
 
-          if ( !knows_language(vch, ch->speaking, ch) &&
-               (!is_npc(ch) || ch->speaking != 0) )
-            sbuf = scramble(argument, ch->speaking);
+          if ( !knows_language( vch, ch->speaking, ch )
+	       && ( !is_npc( ch ) || ch->speaking != 0 ) )
+	    {
+	      sbuf = scramble( argument, ch->speaking );
+	    }
 
           sbuf = drunk_speech( sbuf, ch );
 
