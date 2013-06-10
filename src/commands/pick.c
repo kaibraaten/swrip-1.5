@@ -229,25 +229,18 @@ void do_pick( Character *ch, char *argument )
   ch_printf( ch, "You see no %s here.\r\n", arg );
 }
 
+static bool MobIsAlert( void *element, void *userData )
+{
+  const Character *mob = (Character*) element;
+  const Character *offender = (Character*) userData;
+
+  return mob != offender
+    && is_npc( mob )
+    && is_awake( mob )
+    && mob->top_level > get_level( offender, SMUGGLING_ABILITY );
+}
+
 static Character *GetAlertMobInRoom( const Character *offender )
 {
-  Character *alertMob = NULL;
-  CerisListIterator *iter = CreateListIterator( offender->in_room->People, ForwardsIterator );
-
-  for( ; !ListIterator_IsDone( iter ); ListIterator_Next( iter ) )
-    {
-      Character *gch = (Character*) ListIterator_GetData( iter );
-
-      if ( gch != offender && is_npc(gch)
-	   && is_awake(gch)
-	   && get_level( offender, SMUGGLING_ABILITY ) < gch->top_level )
-        {
-	  alertMob = gch;
-	  break;
-        }
-    }
-
-  DestroyListIterator( iter );
-
-  return alertMob;
+  return (Character*) List_FindIf( offender->in_room->People, MobIsAlert, (void*) offender );
 }

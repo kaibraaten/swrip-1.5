@@ -1,6 +1,8 @@
 #include "character.h"
 #include "mud.h"
 
+static bool MobIsTeacher( void *element, void *userData );
+
 void do_practice( Character *ch, char *argument )
 {
   char buf[MAX_STRING_LENGTH];
@@ -77,8 +79,8 @@ void do_practice( Character *ch, char *argument )
     }
   else
     {
-      Character *mob;
-      int adept;
+      Character *mob = NULL;
+      const int adept = 20;
       bool can_prac = TRUE;
 
       if ( !is_awake(ch) )
@@ -87,9 +89,7 @@ void do_practice( Character *ch, char *argument )
           return;
         }
 
-      for ( mob = ch->in_room->first_person; mob; mob = mob->next_in_room )
-        if ( is_npc(mob) && IS_SET(mob->act, ACT_PRACTICE) )
-          break;
+      mob = (Character*) List_FindIf( ch->in_room->People, MobIsTeacher, NULL );
 
       if ( !mob )
         {
@@ -148,8 +148,6 @@ void do_practice( Character *ch, char *argument )
           return;
         }
 
-      adept = 20;
-
       if ( ch->gold < skill_table[sn]->min_level*10 )
         {
           sprintf ( buf , "$n tells you, 'I charge %d credits to teach that. You don't have enough.'" , skill_table[sn]->min_level * 10 );
@@ -183,4 +181,11 @@ void do_practice( Character *ch, char *argument )
             }
         }
     }
+}
+
+static bool MobIsTeacher( void *element, void *userData )
+{
+  const Character *mob = (Character*) element;
+
+  return is_npc(mob) && IS_SET(mob->act, ACT_PRACTICE);
 }
