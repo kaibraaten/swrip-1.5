@@ -23,17 +23,18 @@ static bool requirements_are_met( Character *ch );
 
 void do_look( Character *ch, char *argument )
 {
-  char arg  [MAX_INPUT_LENGTH];
-  char arg1 [MAX_INPUT_LENGTH];
-  char arg2 [MAX_INPUT_LENGTH];
-  char arg3 [MAX_INPUT_LENGTH];
-  EXIT_DATA *pexit;
-  Character *victim;
-  OBJ_DATA *obj;
-  char *pdesc;
-  bool doexaprog;
-  short door;
-  int number, cnt;
+  char arg[MAX_INPUT_LENGTH];
+  char arg1[MAX_INPUT_LENGTH];
+  char arg2[MAX_INPUT_LENGTH];
+  char arg3[MAX_INPUT_LENGTH];
+  EXIT_DATA *pexit = NULL;
+  Character *victim = NULL;
+  OBJ_DATA *obj = NULL;
+  char *pdesc = NULL;
+  bool doexaprog = FALSE;
+  short door = DIR_INVALID;
+  int number = 0;
+  int cnt = 0;
   bool is_auto = FALSE;
 
   if( !requirements_are_met( ch ) )
@@ -107,33 +108,65 @@ void do_look( Character *ch, char *argument )
           if ( (pdesc=get_extra_descr(arg, obj->first_extradesc)) != NULL )
             {
               if ( (cnt += obj->count) < number )
-                continue;
+		{
+		  continue;
+		}
+
               send_to_char( pdesc, ch );
-              if ( doexaprog ) oprog_examine_trigger( ch, obj );
+
+              if ( doexaprog )
+		{
+		  oprog_examine_trigger( ch, obj );
+		}
+
               return;
             }
 
           if ( (pdesc=get_extra_descr(arg, obj->pIndexData->first_extradesc)) != NULL )
             {
               if ( (cnt += obj->count) < number )
-		continue;
+		{
+		  continue;
+		}
+
               send_to_char( pdesc, ch );
-              if ( doexaprog ) oprog_examine_trigger( ch, obj );
+
+              if ( doexaprog )
+		{
+		  oprog_examine_trigger( ch, obj );
+		}
+
               return;
             }
 
           if ( nifty_is_name_prefix( arg, obj->name ) )
             {
               if ( (cnt += obj->count) < number )
-                continue;
+		{
+		  continue;
+		}
+
               pdesc = get_extra_descr( obj->name, obj->pIndexData->first_extradesc );
+
               if ( !pdesc )
-                pdesc = get_extra_descr( obj->name, obj->first_extradesc );
+		{
+		  pdesc = get_extra_descr( obj->name, obj->first_extradesc );
+		}
+
               if ( !pdesc )
-                send_to_char( "You see nothing special.\r\n", ch );
+		{
+		  send_to_char( "You see nothing special.\r\n", ch );
+		}
               else
-                send_to_char( pdesc, ch );
-              if ( doexaprog ) oprog_examine_trigger( ch, obj );
+		{
+		  send_to_char( pdesc, ch );
+		}
+
+              if ( doexaprog )
+		{
+		  oprog_examine_trigger( ch, obj );
+		}
+
               return;
             }
         }
@@ -143,27 +176,40 @@ void do_look( Character *ch, char *argument )
     {
       if ( can_see_obj( ch, obj ) )
         {
-          if ( (pdesc=get_extra_descr(arg, obj->first_extradesc)) != NULL )
+	  pdesc = get_extra_descr(arg, obj->first_extradesc);
+
+          if( pdesc )
             {
               if ( (cnt += obj->count) < number )
-                continue;
+		{
+		  continue;
+		}
 
               send_to_char( pdesc, ch );
 
               if ( doexaprog )
-		oprog_examine_trigger( ch, obj );
+		{
+		  oprog_examine_trigger( ch, obj );
+		}
 
               return;
             }
 
-          if ( (pdesc=get_extra_descr(arg, obj->pIndexData->first_extradesc)) != NULL )
+	  pdesc = get_extra_descr(arg, obj->pIndexData->first_extradesc);
+
+          if ( pdesc )
             {
               if ( (cnt += obj->count) < number )
-                continue;
+		{
+		  continue;
+		}
+
               send_to_char( pdesc, ch );
 
               if ( doexaprog )
-		oprog_examine_trigger( ch, obj );
+		{
+		  oprog_examine_trigger( ch, obj );
+		}
 
               return;
             }
@@ -171,15 +217,31 @@ void do_look( Character *ch, char *argument )
           if ( nifty_is_name_prefix( arg, obj->name ) )
 	    {
               if ( (cnt += obj->count) < number )
-                continue;
+		{
+		  continue;
+		}
+
               pdesc = get_extra_descr( obj->name, obj->pIndexData->first_extradesc );
+
               if ( !pdesc )
-                pdesc = get_extra_descr( obj->name, obj->first_extradesc );
+		{
+		  pdesc = get_extra_descr( obj->name, obj->first_extradesc );
+		}
+
               if ( !pdesc )
-                send_to_char( "You see nothing special.\r\n", ch );
+		{
+		  send_to_char( "You see nothing special.\r\n", ch );
+		}
               else
-                send_to_char( pdesc, ch );
-              if ( doexaprog ) oprog_examine_trigger( ch, obj );
+		{
+		  send_to_char( pdesc, ch );
+		}
+
+              if ( doexaprog )
+		{
+		  oprog_examine_trigger( ch, obj );
+		}
+
               return;
             }
         }
@@ -197,43 +259,91 @@ static void show_char_to_char_0( Character *victim, Character *ch )
   buf[0] = '\0';
 
   if ( is_npc(victim) )
-    strcat( buf, " "  );
+    {
+      strcat( buf, " "  );
+    }
 
   if ( !is_npc(victim) && !victim->desc )
     {
-      if ( !victim->switched )          strcat( buf, "(Link Dead) "  );
-      else
-        if ( !is_affected_by(victim->switched, AFF_POSSESS) )
-          strcat( buf, "(Switched) " );
+      if ( !victim->switched )
+	{
+	  strcat( buf, "(Link Dead) "  );
+	}
+      else if ( !is_affected_by(victim->switched, AFF_POSSESS) )
+	{
+	  strcat( buf, "(Switched) " );
+	}
     }
-  if ( !is_npc(victim)
-       && IS_SET(victim->act, PLR_AFK) )                strcat( buf, "[AFK] ");
+
+  if ( !is_npc(victim) && IS_SET(victim->act, PLR_AFK) )
+    {
+      strcat( buf, "[AFK] ");
+    }
 
   if ( (!is_npc(victim) && IS_SET(victim->act, PLR_WIZINVIS))
        || (is_npc(victim) && IS_SET(victim->act, ACT_MOBINVIS)) )
     {
       if (!is_npc(victim))
-        sprintf( buf1,"(Invis %d) ", victim->pcdata->wizinvis );
-      else sprintf( buf1,"(Mobinvis %d) ", victim->mobinvis);
+	{
+	  sprintf( buf1,"(Invis %d) ", victim->pcdata->wizinvis );
+	}
+      else
+	{
+	  sprintf( buf1,"(Mobinvis %d) ", victim->mobinvis);
+	}
+
       strcat( buf, buf1 );
     }
-  if ( is_affected_by(victim, AFF_INVISIBLE)   ) strcat( buf, "(Invis) "      );
-  if ( is_affected_by(victim, AFF_HIDE)        ) strcat( buf, "(Stealth) "       );
-  if ( is_affected_by(victim, AFF_PASS_DOOR)   ) strcat( buf, "(Translucent) ");
-  if ( is_affected_by(victim, AFF_FAERIE_FIRE) ) strcat( buf, "&P(Pink Aura)&w "  );
-  if ( is_evil(victim)
-       &&   is_affected_by(ch, AFF_DETECT_EVIL)     ) strcat( buf, "&R(Red Aura)&w "   );
+
+  if ( is_affected_by(victim, AFF_INVISIBLE) )
+    {
+      strcat( buf, "(Invis) " );
+    }
+
+  if ( is_affected_by(victim, AFF_HIDE) )
+    {
+      strcat( buf, "(Stealth) " );
+    }
+
+  if ( is_affected_by(victim, AFF_PASS_DOOR) )
+    {
+      strcat( buf, "(Translucent) " );
+    }
+
+  if ( is_affected_by(victim, AFF_FAERIE_FIRE) )
+    {
+      strcat( buf, "&P(Pink Aura)&w " );
+    }
+
+  if ( is_evil(victim) && is_affected_by(ch, AFF_DETECT_EVIL) )
+    {
+      strcat( buf, "&R(Red Aura)&w " );
+    }
+
   if ( ( victim->mana > 10 )
-       &&   ( is_affected_by( ch , AFF_DETECT_MAGIC ) || is_immortal( ch ) ) )
-    strcat( buf, "&B(Blue Aura)&w "  );
-  if ( !is_npc(victim) && IS_SET(victim->act, PLR_LITTERBUG  ) )
-    strcat( buf, "(LITTERBUG) "  );
+       && ( is_affected_by( ch , AFF_DETECT_MAGIC ) || is_immortal( ch ) ) )
+    {
+      strcat( buf, "&B(Blue Aura)&w " );
+    }
+
+  if ( !is_npc(victim) && IS_SET(victim->act, PLR_LITTERBUG ) )
+    {
+      strcat( buf, "(LITTERBUG) " );
+    }
+
   if ( is_npc(victim) && is_immortal(ch)
-       && IS_SET(victim->act, ACT_PROTOTYPE) ) strcat( buf, "(PROTO) " );
+       && IS_SET(victim->act, ACT_PROTOTYPE) )
+    {
+      strcat( buf, "(PROTO) " );
+    }
+
   if ( victim->desc && victim->desc->connection_state == CON_EDITING )
-    strcat( buf, "(Writing) " );
+    {
+      strcat( buf, "(Writing) " );
+    }
 
   set_char_color( AT_PERSON, ch );
+
   if ( victim->position == victim->defposition && victim->long_descr[0] != '\0' )
     {
       strcat( buf, victim->long_descr );
@@ -243,46 +353,71 @@ static void show_char_to_char_0( Character *victim, Character *ch )
     }
 
   if ( !is_npc(victim) && !IS_SET(ch->act, PLR_BRIEF) )
-    strcat( buf, victim->pcdata->title );
+    {
+      strcat( buf, victim->pcdata->title );
+    }
   else
-    strcat( buf, PERS( victim, ch ) );
+    {
+      strcat( buf, PERS( victim, ch ) );
+    }
 
   switch ( victim->position )
     {
-    case POS_DEAD:     strcat( buf, " is DEAD!!" );                     break;
-    case POS_MORTAL:   strcat( buf, " is mortally wounded." );          break;
-    case POS_INCAP:    strcat( buf, " is incapacitated." );             break;
-    case POS_STUNNED:  strcat( buf, " is lying here stunned." );        break;
+    case POS_DEAD:
+      strcat( buf, " is DEAD!!" );
+      break;
+
+    case POS_MORTAL:
+      strcat( buf, " is mortally wounded." );
+      break;
+
+    case POS_INCAP:
+      strcat( buf, " is incapacitated." );
+      break;
+
+    case POS_STUNNED:
+      strcat( buf, " is lying here stunned." );
+      break;
+
     case POS_SLEEPING:
       if (victim->on != NULL)
         {
           if (victim->on->value[2] == SLEEP_AT)
             {
-              sprintf(message," is sleeping at %s",
-                      victim->on->short_descr);
+              sprintf(message," is sleeping at %s", victim->on->short_descr);
+
               if( ((ch->position < POS_FIGHTING) && (ch->position > POS_STUNNED))
                   && ch->on && (ch->on == victim->on ) )
-                strcat(message, " with you");
+		{
+		  strcat(message, " with you");
+		}
+
               strcat(message, ".");
               strcat(buf,message);
             }
           else if (victim->on->value[2] == SLEEP_ON)
             {
-              sprintf(message," is sleeping on %s",
-                      victim->on->short_descr);
+              sprintf(message," is sleeping on %s", victim->on->short_descr);
+
               if( ((ch->position < POS_FIGHTING) && (ch->position > POS_STUNNED))
 		  && ch->on && (ch->on == victim->on ) )
-                strcat(message, " with you");
+		{
+		  strcat(message, " with you");
+		}
+
               strcat(message, ".");
               strcat(buf,message);
             }
           else
             {
-              sprintf(message, " is sleeping in %s",
-                      victim->on->short_descr);
+              sprintf(message, " is sleeping in %s", victim->on->short_descr);
+
               if( ((ch->position < POS_FIGHTING) && (ch->position > POS_STUNNED))
                   && ch->on && (ch->on == victim->on ) )
-                strcat(message, " with you");
+		{
+		  strcat(message, " with you");
+		}
+
               strcat(message, ".");
               strcat(buf,message);
             }
@@ -290,42 +425,56 @@ static void show_char_to_char_0( Character *victim, Character *ch )
       else
         {
           if (ch->position == POS_SITTING
-              ||  ch->position == POS_RESTING )
-            strcat( buf, " is sleeping nearby." );
+              || ch->position == POS_RESTING )
+	    {
+	      strcat( buf, " is sleeping nearby." );
+	    }
           else
-            strcat( buf, " is deep in slumber here." );
+	    {
+	      strcat( buf, " is deep in slumber here." );
+	    }
         }
       break;
+
     case POS_RESTING:
       if (victim->on != NULL)
         {
           if (victim->on->value[2] == REST_AT)
             {
-              sprintf(message," is resting at %s",
-                      victim->on->short_descr);
+              sprintf(message," is resting at %s", victim->on->short_descr);
+
               if( ((ch->position < POS_FIGHTING) && (ch->position > POS_STUNNED))
                   && ch->on && (ch->on == victim->on ) )
-                strcat(message, " with you");
+		{
+		  strcat(message, " with you");
+		}
+
               strcat(message, ".");
               strcat(buf,message);
             }
           else if (victim->on->value[2] == REST_ON)
             {
-              sprintf(message," is resting on %s",
-                      victim->on->short_descr);
+              sprintf(message," is resting on %s", victim->on->short_descr);
+
               if( ((ch->position < POS_FIGHTING) && (ch->position > POS_STUNNED))
                   && ch->on && (ch->on == victim->on ) )
-                strcat(message, " with you");
+		{
+		  strcat(message, " with you");
+		}
+
 	      strcat(message, ".");
               strcat(buf,message);
             }
           else
             {
-              sprintf(message, " is resting in %s",
-                      victim->on->short_descr);
+              sprintf(message, " is resting in %s", victim->on->short_descr);
+
               if( ((ch->position < POS_FIGHTING) && (ch->position > POS_STUNNED))
                   && ch->on && (ch->on == victim->on ) )
-                strcat(message, " with you");
+		{
+		  strcat(message, " with you");
+		}
+
               strcat(message, ".");
               strcat(buf,message);
             }
@@ -333,12 +482,17 @@ static void show_char_to_char_0( Character *victim, Character *ch )
       else
         {
           if (ch->position == POS_RESTING)
-            strcat ( buf, " is sprawled out alongside you." );
-          else
-            if (ch->position == POS_MOUNTED)
-              strcat ( buf, " is sprawled out at the foot of your mount." );
-            else
-              strcat (buf, " is sprawled out here." );
+	    {
+	      strcat ( buf, " is sprawled out alongside you." );
+	    }
+          else if (ch->position == POS_MOUNTED)
+	    {
+	      strcat ( buf, " is sprawled out at the foot of your mount." );
+	    }
+	  else
+	    {
+	      strcat (buf, " is sprawled out here." );
+	    }
         }
       break;
     case POS_SITTING:
@@ -346,31 +500,39 @@ static void show_char_to_char_0( Character *victim, Character *ch )
         {
           if (victim->on->value[2] == SIT_AT)
             {
-              sprintf(message," is sitting at %s",
-                      victim->on->short_descr);
-              if( (ch->position == POS_SITTING)
-                  && ch->on && (ch->on == victim->on ) )
-                strcat(message, " with you");
+              sprintf(message," is sitting at %s", victim->on->short_descr);
+
+              if( (ch->position == POS_SITTING) && ch->on && (ch->on == victim->on ) )
+		{
+		  strcat(message, " with you");
+		}
+
               strcat(message, ".");
               strcat(buf,message);
             }
           else if (victim->on->value[2] == SIT_ON)
             {
-              sprintf(message," is sitting on %s",
-                      victim->on->short_descr);
+              sprintf(message," is sitting on %s", victim->on->short_descr);
+
               if( (ch->position == POS_SITTING)
                   && ch->on && (ch->on == victim->on ) )
-                strcat(message, " with you");
+		{
+		  strcat(message, " with you");
+		}
+
 	      strcat(message, ".");
               strcat(buf,message);
             }
           else
             {
-              sprintf(message, " is sitting in %s",
-                      victim->on->short_descr);
+              sprintf(message, " is sitting in %s", victim->on->short_descr);
+
               if( (ch->position == POS_SITTING)
                   && ch->on && (ch->on == victim->on ) )
-                strcat(message, " with you");
+		{
+		  strcat(message, " with you");
+		}
+
               strcat(message, ".");
               strcat(buf,message);
             }
@@ -378,14 +540,20 @@ static void show_char_to_char_0( Character *victim, Character *ch )
       else
         {
           if (ch->position == POS_SITTING)
-            strcat( buf, " sits here with you." );
-          else
-            if (ch->position == POS_RESTING)
-              strcat( buf, " sits nearby as you lie around." );
-            else
-              strcat( buf, " sits upright here." );
+	    {
+	      strcat( buf, " sits here with you." );
+	    }
+          else if (ch->position == POS_RESTING)
+	    {
+	      strcat( buf, " sits nearby as you lie around." );
+	    }
+	  else
+	    {
+	      strcat( buf, " sits upright here." );
+	    }
         }
       break;
+
     case POS_STANDING:
       if ( is_immortal(victim) )
         strcat( buf, " is here before you." );

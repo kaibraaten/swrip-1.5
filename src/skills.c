@@ -30,8 +30,6 @@
 #include "ships.h"
 #include "character.h"
 
-void show_char_to_char( Character *list, Character *ch );
-
 /*
  * Dummy function
  */
