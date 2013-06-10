@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void show_char_to_char( Character *list, Character *ch );
+void ShowPeopleInRoomToCharacter( const ROOM_INDEX_DATA *room, Character *ch );
 
 void do_scan( Character *ch, char *argument )
 {
@@ -80,7 +80,7 @@ void do_scan( Character *ch, char *argument )
       send_to_char( ch->in_room->name, ch );
       send_to_char( "\r\n", ch );
       show_list_to_char( ch->in_room->first_content, ch, FALSE, FALSE );
-      show_char_to_char( ch->in_room->first_person, ch );
+      ShowPeopleInRoomToCharacter( ch->in_room, ch );
 
       switch( ch->in_room->sector_type )
         {

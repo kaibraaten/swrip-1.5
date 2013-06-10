@@ -7,7 +7,7 @@
 #include "character.h"
 
 /* Locals */
-void show_char_to_char( Character *list, Character *ch );
+void ShowPeopleInRoomToCharacter( const ROOM_INDEX_DATA *room, Character *ch );
 
 static void show_char_to_char_0( Character *victim, Character *ch );
 static void show_char_to_char_1( Character *victim, Character *ch );
@@ -20,6 +20,8 @@ static char *get_sex( Character *ch );
 static void look_under( Character *ch, char *what, bool doexaprog );
 static void look_in( Character *ch, char *what, bool doexaprog );
 static bool requirements_are_met( Character *ch );
+
+static void ShowOnePersonInRoomToCharacter( void *element, void *userData );
 
 void do_look( Character *ch, char *argument )
 {
@@ -703,30 +705,35 @@ static void show_ships_to_char( SHIP_DATA *ship, Character *ch )
     }
 }
 
-void show_char_to_char( Character *list, Character *ch )
+void ShowPeopleInRoomToCharacter( const ROOM_INDEX_DATA *room, Character *ch )
 {
-  Character *rch;
+  List_ForEach( room->People, ShowOnePersonInRoomToCharacter, ch );
+}
 
-  for ( rch = list; rch; rch = rch->next_in_room )
+static void ShowOnePersonInRoomToCharacter( void *element, void *userData )
+{
+  Character *characterToShow = (Character*) element;
+  Character *looker = (Character*) userData;
+
+  if ( characterToShow == looker )
     {
-      if ( rch == ch )
-        continue;
+      return;
+    }
 
-      if ( can_see( ch, rch ) )
-        {
-          show_char_to_char_0( rch, ch );
-        }
-      else if ( rch->race == RACE_DEFEL )
-        {
-          set_char_color( AT_BLOOD, ch );
-          send_to_char( "You see a pair of red eyes staring back at you.\r\n", ch );
-        }
-      else if ( room_is_dark( ch->in_room )
-                &&        is_affected_by(rch, AFF_INFRARED ) )
-        {
-          set_char_color( AT_BLOOD, ch );
-          send_to_char( "The red form of a living creature is here.\r\n", ch );
-        }
+  if ( can_see( looker, characterToShow ) )
+    {
+      show_char_to_char_0( characterToShow, looker );
+    }
+  else if ( characterToShow->race == RACE_DEFEL )
+    {
+      set_char_color( AT_BLOOD, looker );
+      ch_printf( looker, "You see a pair of red eyes staring back at you.\r\n" );
+    }
+  else if ( room_is_dark( looker->in_room )
+	    && is_affected_by( characterToShow, AFF_INFRARED ) )
+    {
+      set_char_color( AT_BLOOD, looker );
+      ch_printf( looker, "The red form of a living creature is here.\r\n" );
     }
 }
 
@@ -843,7 +850,7 @@ static bool requirements_are_met( Character *ch )
     {
       set_char_color( AT_DGREY, ch );
       send_to_char( "It is pitch black...\r\n", ch );
-      show_char_to_char( ch->in_room->first_person, ch );
+      ShowPeopleInRoomToCharacter( ch->in_room, ch );
 
       return FALSE;
     }
@@ -1094,7 +1101,7 @@ static void show_no_arg( Character *ch, bool is_auto )
   show_ships_to_char( ch->in_room->first_ship, ch );
   show_shuttles_to_char( ch->in_room->first_shuttle, ch );
   show_list_to_char( ch->in_room->first_content, ch, FALSE, FALSE );
-  show_char_to_char( ch->in_room->first_person,  ch );
+  ShowPeopleInRoomToCharacter( ch->in_room,  ch );
 
   if ( !is_auto )
     {
