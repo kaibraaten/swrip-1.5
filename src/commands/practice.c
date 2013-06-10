@@ -97,7 +97,6 @@ void do_practice( Character *ch, char *argument )
           return;
         }
 
-
       sn = skill_lookup( argument );
 
       if ( sn == -1 )
