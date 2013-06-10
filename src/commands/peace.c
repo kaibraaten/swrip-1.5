@@ -1,24 +1,26 @@
 #include "mud.h"
 #include "character.h"
 
+static void PacifyPerson( void *element, void *userData );
+
 void do_peace( Character *ch, char *argument )
 {
-  Character *rch;
-
   act( AT_IMMORT, "$n booms, 'PEACE!'", ch, NULL, NULL, TO_ROOM );
-  for ( rch = ch->in_room->first_person; rch; rch = rch->next_in_room )
-    {
-      if ( rch->fighting )
-        {
-          stop_fighting( rch, TRUE );
-          do_sit( rch, "" );
-        }
+  List_ForEach( ch->in_room->People, PacifyPerson, NULL );
+  ch_printf( ch, "Ok.\r\n" );
+}
 
-      /* Added by Narn, Nov 28/95 */
-      stop_hating( rch );
-      stop_hunting( rch );
-      stop_fearing( rch );
+static void PacifyPerson( void *element, void *userData )
+{
+  Character *person = (Character*) element;
+
+  if ( person->fighting )
+    {
+      stop_fighting( person, TRUE );
+      do_sit( person, "" );
     }
 
-  send_to_char( "Ok.\r\n", ch );
+  stop_hating( person );
+  stop_hunting( person );
+  stop_fearing( person );
 }

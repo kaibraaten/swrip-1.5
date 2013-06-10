@@ -2,10 +2,12 @@
 #include "mud.h"
 #include "character.h"
 
+static Character *GetAlertMobInRoom( const Character *offender );
+
 void do_pick( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  Character *gch;
+  Character *alertMob = NULL;
   OBJ_DATA *obj;
   EXIT_DATA *pexit;
   SHIP_DATA *ship;
@@ -36,16 +38,14 @@ void do_pick( Character *ch, char *argument )
   set_wait_state( ch, skill_table[gsn_pick_lock]->beats );
 
   /* look for guards */
-  for ( gch = ch->in_room->first_person; gch; gch = gch->next_in_room )
-    {
-      if ( is_npc(gch) && is_awake(gch) && get_level( ch, SMUGGLING_ABILITY ) < gch->top_level )
-        {
-          act( AT_PLAIN, "$N is standing too close to the lock.",
-               ch, NULL, gch, TO_CHAR );
-          return;
-        }
-    }
+  alertMob = GetAlertMobInRoom( ch );
 
+  if( alertMob )
+    {
+      act( AT_PLAIN, "$N is standing too close to the lock.",
+	   ch, NULL, alertMob, TO_CHAR );
+      return;
+    }
 
   if ( ( pexit = find_door( ch, arg, TRUE ) ) != NULL )
     {
@@ -227,4 +227,27 @@ void do_pick( Character *ch, char *argument )
     }
 
   ch_printf( ch, "You see no %s here.\r\n", arg );
+}
+
+static Character *GetAlertMobInRoom( const Character *offender )
+{
+  Character *alertMob = NULL;
+  CerisListIterator *iter = CreateListIterator( offender->in_room->People, ForwardsIterator );
+
+  for( ; !ListIterator_IsDone( iter ); ListIterator_Next( iter ) )
+    {
+      Character *gch = (Character*) ListIterator_GetData( iter );
+
+      if ( gch != offender && is_npc(gch)
+	   && is_awake(gch)
+	   && get_level( offender, SMUGGLING_ABILITY ) < gch->top_level )
+        {
+	  alertMob = gch;
+	  break;
+        }
+    }
+
+  DestroyListIterator( iter );
+
+  return alertMob;
 }
