@@ -2318,7 +2318,7 @@ void group_gain( Character *ch, Character *victim )
 
   if ( members == 0 )
     {
-      bug( "Group_gain: members.", members );
+      bug( "%s: %d members.", __FUNCTION__, members );
       members = 1;
     }
 

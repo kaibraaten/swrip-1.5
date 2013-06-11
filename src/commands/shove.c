@@ -1,6 +1,7 @@
 #include "character.h"
 #include "ships.h"
 #include "mud.h"
+#include "room.h"
 
 void do_shove( Character *ch, char *argument )
 {
@@ -96,17 +97,13 @@ void do_shove( Character *ch, char *argument )
 
               if ( to_room->tunnel > 0 )
                 {
-                  Character *ctmp;
-                  int count = 0;
+		  int numberOfPeopleInRoom = NumberOfPeopleInRoom( to_room );
 
-                  for ( ctmp = to_room->first_person; ctmp; ctmp = ctmp->next_in_room )
-		    {
-		      if ( count+2 >= to_room->tunnel )
-			{
-			  send_to_char( "There is no room for you both in there.\r\n", ch );
-			  return;
-			}
-		    }
+                  if ( numberOfPeopleInRoom + 2 > to_room->tunnel )
+                    {
+                      send_to_char( "There is no room for you both in there.\r\n", ch );
+                      return;
+                    }
                 }
 
               if ( ship->shipstate == SHIP_LAUNCH
@@ -188,15 +185,13 @@ void do_shove( Character *ch, char *argument )
 
               if ( to_room->tunnel > 0 )
                 {
-                  Character *ctmp;
-                  int count = 0;
+		  int numberOfPeopleInRoom = NumberOfPeopleInRoom( to_room );
 
-                  for ( ctmp = to_room->first_person; ctmp; ctmp = ctmp->next_in_room )
-                    if ( count+2 >= to_room->tunnel )
-                      {
-                        send_to_char( "There is no room for you both in there.\r\n", ch );
-                        return;
-                      }
+                  if ( numberOfPeopleInRoom + 2 > to_room->tunnel )
+                    {
+                      send_to_char( "There is no room for you both in there.\r\n", ch );
+                      return;
+                    }
                 }
 
               if ( ship->shipstate == SHIP_LAUNCH || ship->shipstate == SHIP_LAUNCH_2 )

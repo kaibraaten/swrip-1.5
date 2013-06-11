@@ -2485,6 +2485,9 @@ extern "C" {
   OBJ_DATA *create_money( int amount );
 
   /* misc.c */
+  void SpamTellToBystanders( Character *speaker, const char *message,
+			     void (*ShowMessageToBystander)( Character*, Character*, const char*));
+  int CountGroupMembersInRoom( const Character *ch );
   bool is_valid_language( int language );
   void pullorpush( Character *ch, OBJ_DATA *obj, bool pull );
   void actiondesc( Character *ch, OBJ_DATA *obj, void *vo );

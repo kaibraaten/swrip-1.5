@@ -512,3 +512,61 @@ bool is_valid_language( int language )
 {
   return VALID_LANGUAGES & language;
 }
+
+typedef struct TellData
+{
+  Character *Speaker;
+  const char *Text;
+  void (*ShowMessageToBystander)( Character *speaker, Character *listener, const char *message );
+} TellData;
+
+static void SpamTell( void *element, void *userData )
+{
+  Character *listener = (Character*) element;
+  TellData *data = (TellData*) userData;
+  const char *sbuf = data->Text;
+  int language = data->Speaker->speaking;
+
+  if ( listener == data->Speaker )
+    {
+      return;
+    }
+
+  if ( !knows_language( listener, language, data->Speaker )
+       && ( !IsNpc( data->Speaker ) || language != 0 ) )
+    {
+      sbuf = scramble( data->Text, language );
+    }
+
+  sbuf = drunk_speech( sbuf, data->Speaker );
+
+  MOBtrigger = FALSE;
+  data->ShowMessageToBystander( data->Speaker, listener, sbuf );
+}
+
+void SpamTellToBystanders( Character *speaker, const char *message,
+                           void (*ShowMessageToBystander)( Character*, Character*, const char* ) )
+{
+  TellData data;
+
+  data.Speaker = speaker;
+  data.Text = message;
+  data.ShowMessageToBystander = ShowMessageToBystander;
+
+  List_ForEach( speaker->in_room->People, SpamTell, &data );
+}
+
+static bool IsSameGroupCallback( void *element, void *userData )
+{
+  Character *gch = (Character*) element;
+  Character *ch = (Character*) userData;
+
+  return is_same_group( gch, ch );
+}
+
+int CountGroupMembersInRoom( const Character *ch )
+{
+  int members = List_CountIf( ch->in_room->People, IsSameGroupCallback, (void*) ch );
+
+  return members;
+}

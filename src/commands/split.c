@@ -8,7 +8,7 @@ void do_split( Character *ch, char *argument )
 {
   char buf[MAX_STRING_LENGTH];
   char arg[MAX_INPUT_LENGTH];
-  Character *gch = NULL;
+  CerisListIterator *groupIterator = NULL;
   int members = 0;
   int amount = 0;
   int share = 0;
@@ -42,14 +42,7 @@ void do_split( Character *ch, char *argument )
       return;
     }
 
-  for ( gch = ch->in_room->first_person; gch; gch = gch->next_in_room )
-    {
-      if ( is_same_group( gch, ch ) )
-	{
-	  members++;
-	}
-    }
-
+  members = CountGroupMembersInRoom( ch );
 
   if (( IS_SET(ch->act, PLR_AUTOGOLD)) && (members < 2))
     {
@@ -75,19 +68,23 @@ void do_split( Character *ch, char *argument )
   ch->gold += share + extra;
 
   set_char_color( AT_GOLD, ch );
-  ch_printf( ch,
-             "You split %d credits. Your share is %d credits.\r\n",
+  ch_printf( ch, "You split %d credits. Your share is %d credits.\r\n",
              amount, share + extra );
 
-  sprintf( buf, "$n splits %d credits. Your share is %d credits.",
-           amount, share );
+  sprintf( buf, "$n splits %d credits. Your share is %d credits.", amount, share );
 
-  for ( gch = ch->in_room->first_person; gch; gch = gch->next_in_room )
+  groupIterator = CreateListIterator( ch->in_room->People, ForwardsIterator );
+
+  for( ; !ListIterator_IsDone( groupIterator ); ListIterator_Next( groupIterator ) )
     {
-      if ( gch != ch && is_same_group( gch, ch ) )
+      Character *groupMember = (Character*) ListIterator_GetData( groupIterator );
+
+      if ( groupMember != ch && is_same_group( groupMember, ch ) )
         {
-          act( AT_GOLD, buf, ch, NULL, gch, TO_VICT );
-          gch->gold += share;
+          act( AT_GOLD, buf, ch, NULL, groupMember, TO_VICT );
+          groupMember->gold += share;
         }
     }
+
+  DestroyListIterator( groupIterator );
 }

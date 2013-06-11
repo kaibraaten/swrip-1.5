@@ -1,13 +1,10 @@
 #include "mud.h"
 #include "character.h"
 
-static void SpamComlinkUsage( void *element, void *userData );
-
-typedef struct ComlinkUseData
+static void SaysIntoComlink( Character *speaker, Character *listener, const char *message )
 {
-  Character *Speaker;
-  char *Text;
-} ComlinkUseData;
+  act( AT_SAY, "$n says quietly into his comlink '$t'", speaker, message, listener, TO_VICT );
+}
 
 void do_reply( Character *ch, char *argument )
 {
@@ -100,12 +97,7 @@ void do_reply( Character *ch, char *argument )
 
   if( !IsImmortal(ch) && !sameroom )
     {
-      ComlinkUseData data;
-
-      data.Speaker = ch;
-      data.Text = argument;
-
-      List_ForEach( ch->in_room->People, SpamComlinkUsage, &data );
+      SpamTellToBystanders( ch, argument, SaysIntoComlink );
 
       if ( !IsImmortal(victim) )
 	{
@@ -113,28 +105,4 @@ void do_reply( Character *ch, char *argument )
 	       victim, NULL, NULL, TO_ROOM);
 	}
     }
-}
-
-static void SpamComlinkUsage( void *element, void *userData )
-{
-  Character *listener = (Character*) element;
-  ComlinkUseData *data = (ComlinkUseData*) userData;
-  const char *sbuf = data->Text;
-  int language = data->Speaker->speaking;
-
-  if ( listener == data->Speaker )
-    {
-      return;
-    }
-
-  if ( !knows_language( listener, language, data->Speaker )
-       && ( !IsNpc( data->Speaker ) || language != 0 ) )
-    {
-      sbuf = scramble( data->Text, language );
-    }
-
-  sbuf = drunk_speech( sbuf, data->Speaker );
-
-  MOBtrigger = FALSE;
-  act( AT_SAY, "$n says quietly into his comlink '$t'", data->Speaker, sbuf, listener, TO_VICT );
 }
