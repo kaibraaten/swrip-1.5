@@ -40,7 +40,7 @@ void do_train( Character *ch, char *argument )
 	    }
 	}
 
-      if ( (!mob) || (!tfound) )
+      if ( !mob || !tfound )
         {
           send_to_char( "You can't do that here.\r\n", ch );
           return;
@@ -115,7 +115,7 @@ void do_train( Character *ch, char *argument )
                    mob, NULL, ch, TO_VICT );
               return;
             }
-          send_to_char("&GYou begin lessons in maners and ettiquite.\r\n", ch);
+          send_to_char("&GYou begin lessons in manners and etiquette.\r\n", ch);
         }
       add_timer ( ch , TIMER_DO_FUN , 10 , do_train , 1 );
       ch->dest_buf = str_dup(arg);
@@ -211,8 +211,7 @@ verse.\r\n", ch);
 	  send_to_char("&RYou finish your self improvement session feeling a little depressed.\r\n", ch);
           return;
         }
-      send_to_char("&GYou spend some time focusing on how to improve your personality and feel \r\nmuch better about yourself and the ways others see y\
-ou.\r\n", ch);
+      send_to_char("&GYou spend some time focusing on how to improve your personality and feel \r\nmuch better about yourself and the ways others see you.\r\n", ch);
       ch->stats.perm_cha++;
       return;
     }
