@@ -116,10 +116,10 @@ int max_level( const Character *ch, int ability)
 {
   int level = 0;
 
-  if ( is_npc(ch) )
+  if ( IsNpc(ch) )
     return 100;
 
-  if ( is_immortal(ch) || ch->race == RACE_GOD )
+  if ( IsImmortal(ch) || ch->race == RACE_GOD )
     return 200;
 
   if ( ability == COMBAT_ABILITY )
@@ -351,13 +351,13 @@ void advance_level( Character *ch, int ability )
       ch->top_level = URANGE( 1, get_level( ch, ability ), 100 );
     }
 
-  if ( !is_npc(ch) )
+  if ( !IsNpc(ch) )
     REMOVE_BIT( ch->act, PLR_BOUGHT_PET );
 }
 
 void gain_exp( Character *ch, short ability, long gain )
 {
-  if ( is_npc(ch) )
+  if ( IsNpc(ch) )
     return;
 
   set_exp( ch, ability, UMAX( 0, get_exp( ch, ability ) + gain ) );
@@ -396,7 +396,7 @@ long lose_exp( Character *ch, short ability, long loss )
   int new_exp = 0;
   int actual_loss = 0;
 
-  if ( is_npc(ch) )
+  if ( IsNpc(ch) )
     return 0;
 
   current_exp = get_exp( ch, ability );
@@ -415,7 +415,7 @@ int hit_gain( const Character *ch )
 {
   int gain;
 
-  if ( is_npc(ch) )
+  if ( IsNpc(ch) )
     {
       gain = ch->top_level;
     }
@@ -453,7 +453,7 @@ int mana_gain( const Character *ch )
 {
   int gain;
 
-  if ( is_npc(ch) )
+  if ( IsNpc(ch) )
     {
       gain = ch->top_level;
     }
@@ -496,7 +496,7 @@ int move_gain( const Character *ch )
 {
   int gain;
 
-  if ( is_npc(ch) )
+  if ( IsNpc(ch) )
     {
       gain = ch->top_level;
     }
@@ -629,7 +629,7 @@ void gain_condition( Character *ch, int iCond, int value )
   int condition;
   ch_ret retcode;
 
-  if ( value == 0 || is_npc(ch) || get_trust(ch) >= LEVEL_IMMORTAL || is_droid(ch) || is_not_authed(ch))
+  if ( value == 0 || IsNpc(ch) || get_trust(ch) >= LEVEL_IMMORTAL || is_droid(ch) || is_not_authed(ch))
     return;
 
   condition                         = ch->pcdata->condition[iCond];
@@ -795,7 +795,7 @@ void mobile_update( void )
           do_shout( ch, "Thoric says, 'Prepare for the worst!'" );
         }
 
-      if ( !is_npc(ch) )
+      if ( !IsNpc(ch) )
         {
           drunk_randoms(ch);
           halucinations(ch);
@@ -814,7 +814,7 @@ void mobile_update( void )
           if( NumberOfPeopleInRoom( ch->in_room ) > 0 )
             act(AT_MAGIC, "$n returns to the dust from whence $e came.", ch, NULL, NULL, TO_ROOM);
 
-          if(is_npc(ch)) /* Guard against purging switched? */
+          if(IsNpc(ch)) /* Guard against purging switched? */
             extract_char(ch, TRUE);
 
           continue;
@@ -1290,13 +1290,13 @@ void char_update( void )
        *  Do a room_prog rand check right off the bat
        *   if ch disappears (rprog might wax npc's), continue
        */
-      if(!is_npc(ch))
+      if(!IsNpc(ch))
         rprog_random_trigger( ch );
 
       if( char_died(ch) )
         continue;
 
-      if(is_npc(ch))
+      if(IsNpc(ch))
         mprog_time_trigger(ch);
 
       if( char_died(ch) )
@@ -1310,7 +1310,7 @@ void char_update( void )
       /*
        * See if player should be auto-saved.
        */
-      if ( !is_npc(ch)
+      if ( !IsNpc(ch)
            && !is_not_authed(ch)
            && current_time - ch->pcdata->save_time > (sysdata.save_frequency*60) )
         ch_save = ch;
@@ -1341,7 +1341,7 @@ void char_update( void )
         gain_addiction( ch );
 
 
-      if ( !is_npc(ch) && ch->top_level < LEVEL_IMMORTAL )
+      if ( !IsNpc(ch) && ch->top_level < LEVEL_IMMORTAL )
         {
           OBJ_DATA *obj;
 
@@ -1564,7 +1564,7 @@ void char_update( void )
                 add_reinforcements( ch );
             }
 
-          if ( !is_npc (ch) )
+          if ( !IsNpc (ch) )
             {
               if ( ++ch->timer > 15 && !ch->desc )
                 {
@@ -1867,7 +1867,7 @@ void char_check( void )
       if ( char_died( ch ) )
         continue;
 
-      if ( is_npc( ch ) )
+      if ( IsNpc( ch ) )
         {
           if ( cnt != 0 )
             continue;
@@ -2039,7 +2039,7 @@ void aggr_update( void )
       CerisListIterator *peopleInRoomIterator = NULL;
       wch_next = ch->next;
 
-      if ( !is_npc(ch)
+      if ( !IsNpc(ch)
            || ch->fighting
            || is_affected_by(ch, AFF_CHARM)
            || !is_awake(ch)
@@ -2083,7 +2083,7 @@ void aggr_update( void )
           if ( get_timer(victim, TIMER_RECENTFIGHT) > 0 )
             continue;
 
-          if ( is_npc(ch) && IS_SET(ch->attacks, ATCK_BACKSTAB ) )
+          if ( IsNpc(ch) && IS_SET(ch->attacks, ATCK_BACKSTAB ) )
             {
               OBJ_DATA *obj;
 
@@ -2131,7 +2131,7 @@ void drunk_randoms( Character *ch )
   if( !ch )
     return;
 
-  if ( is_npc( ch ) || !ch->pcdata || ch->pcdata->condition[COND_DRUNK] <= 0 )
+  if ( IsNpc( ch ) || !ch->pcdata || ch->pcdata->condition[COND_DRUNK] <= 0 )
     return;
 
   if ( number_percent() < 30 )
@@ -2483,7 +2483,7 @@ void reboot_check( time_t reset )
                   "presence\r\nas life here is reconstructed.", ECHOTAR_ALL);
 
       for ( vch = first_char; vch; vch = vch->next )
-        if ( !is_npc(vch) )
+        if ( !IsNpc(vch) )
           save_char_obj(vch);
 
       for ( ship = first_ship; ship; ship = ship->next )
@@ -2534,7 +2534,7 @@ void auction_update (void)
         {
           sprintf (buf, "%s sold to %s for %d.",
                    auction->item->short_descr,
-                   is_npc(auction->buyer) ? auction->buyer->short_descr : auction->buyer->name,
+                   IsNpc(auction->buyer) ? auction->buyer->short_descr : auction->buyer->name,
                    auction->bet);
           talk_auction(buf);
 

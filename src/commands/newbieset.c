@@ -23,7 +23,7 @@ void do_newbieset( Character *ch, char *argument )
       return;
     }
 
-  if ( is_npc(victim) )
+  if ( IsNpc(victim) )
     {
       send_to_char( "Not on NPC's.\r\n", ch );
       return;

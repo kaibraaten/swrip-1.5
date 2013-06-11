@@ -54,7 +54,7 @@ void do_bind ( Character *ch , char *argument )
 
   set_wait_state( ch, 1 * PULSE_VIOLENCE );
 
-  if ( is_npc(victim) || number_percent( ) > ch->pcdata->learned[gsn_bind] )
+  if ( IsNpc(victim) || number_percent( ) > ch->pcdata->learned[gsn_bind] )
     {
       send_to_char( "You fail.\r\n", ch );
       return;
@@ -84,7 +84,7 @@ static bool aff_paralysis( Character *ch, Character *victim )
       affect_to_char( victim, &af );
       update_pos( victim );
 
-      if ( is_npc(victim) )
+      if ( IsNpc(victim) )
         {
           start_hating( victim, ch );
           start_hunting( victim, ch );

@@ -26,8 +26,8 @@ ch_ret spell_farsight( int sn, int level, Character *ch, void *vo )
        ||   IS_SET(victim->in_room->room_flags, ROOM_PRIVATE)
        ||   IS_SET(victim->in_room->room_flags, ROOM_SOLITARY)
        ||   IS_SET(victim->in_room->room_flags, ROOM_PROTOTYPE)
-       ||       (is_npc(victim) && IS_SET(victim->act, ACT_PROTOTYPE))
-       ||  (is_npc(victim) && saves_spell_staff( level, victim ))
+       ||       (IsNpc(victim) && IS_SET(victim->act, ACT_PROTOTYPE))
+       ||  (IsNpc(victim) && saves_spell_staff( level, victim ))
        || saving <= 50 )
     {
       failed_casting( skill, ch, victim, NULL );

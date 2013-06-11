@@ -4,7 +4,7 @@
 
 void do_demote ( Character *ch , char *argument )
 {
-  if ( is_npc( ch ) )
+  if ( IsNpc( ch ) )
     return;
 
   if ( !is_clanned( ch ) )

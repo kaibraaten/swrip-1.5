@@ -5,7 +5,7 @@ void do_mpapply( Character *ch, char *argument )
 {
   Character *victim;
 
-  if ( !is_npc( ch ) )
+  if ( !IsNpc( ch ) )
     {
       send_to_char( "Huh?\r\n", ch );
       return;

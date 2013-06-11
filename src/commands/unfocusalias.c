@@ -3,7 +3,7 @@
 
 void do_unfocusalias(Character *ch, char *argument)
 {
-  if ( is_npc(ch) )
+  if ( IsNpc(ch) )
     {
       send_to_char("Only players can have alias focuses!\r\n", ch);
       return;

@@ -63,13 +63,13 @@ char *format_obj_to_char( const OBJ_DATA *obj, const Character *ch, bool fShort 
 
   buf[0] = '\0';
   if ( IS_OBJ_STAT(obj, ITEM_INVIS)     )   strcat( buf, "(Invis) "     );
-  if ( ( is_affected_by(ch, AFF_DETECT_MAGIC) || is_immortal(ch) )
+  if ( ( is_affected_by(ch, AFF_DETECT_MAGIC) || IsImmortal(ch) )
        && IS_OBJ_STAT(obj, ITEM_MAGIC)  )   strcat( buf, "&B(Blue Aura)&w "   );
   if ( IS_OBJ_STAT(obj, ITEM_GLOW)      )   strcat( buf, "(Glowing) "   );
   if ( IS_OBJ_STAT(obj, ITEM_HUM)       )   strcat( buf, "(Humming) "   );
   if ( IS_OBJ_STAT(obj, ITEM_HIDDEN)      )   strcat( buf, "(Hidden) "    );
   if ( IS_OBJ_STAT(obj, ITEM_BURRIED)     )   strcat( buf, "(Burried) "   );
-  if ( is_immortal(ch)
+  if ( IsImmortal(ch)
        && IS_OBJ_STAT(obj, ITEM_PROTOTYPE) ) strcat( buf, "(PROTO) "      );
   if ( is_affected_by(ch, AFF_DETECTTRAPS)
        && is_trapped(obj)   )   strcat( buf, "(Trap) "  );
@@ -173,7 +173,7 @@ void show_list_to_char( const OBJ_DATA *list, Character *ch, bool fShort, bool f
     {
       if ( fShowNothing )
         {
-          if ( is_npc(ch) || IS_SET(ch->act, PLR_COMBINE) )
+          if ( IsNpc(ch) || IS_SET(ch->act, PLR_COMBINE) )
             send_to_char( "     ", ch );
           send_to_char( "Nothing.\r\n", ch );
         }
@@ -187,7 +187,7 @@ void show_list_to_char( const OBJ_DATA *list, Character *ch, bool fShort, bool f
     count++;
 
   ms  = (ch->mental_state ? ch->mental_state : 1)
-    * (is_npc(ch) ? 1 : (ch->pcdata->condition[COND_DRUNK] ? (ch->pcdata->condition[COND_DRUNK]/12) : 1));
+    * (IsNpc(ch) ? 1 : (ch->pcdata->condition[COND_DRUNK] ? (ch->pcdata->condition[COND_DRUNK]/12) : 1));
 
   /*
    * If not mentally stable...
@@ -208,7 +208,7 @@ void show_list_to_char( const OBJ_DATA *list, Character *ch, bool fShort, bool f
     {
       if ( fShowNothing )
         {
-          if ( is_npc(ch) || IS_SET(ch->act, PLR_COMBINE) )
+          if ( IsNpc(ch) || IS_SET(ch->act, PLR_COMBINE) )
             send_to_char( "     ", ch );
           send_to_char( "Nothing.\r\n", ch );
         }
@@ -239,13 +239,13 @@ void show_list_to_char( const OBJ_DATA *list, Character *ch, bool fShort, bool f
         }
       if ( obj->wear_loc == WEAR_NONE
            && can_see_obj( ch, obj )
-           && ( ( obj->description && obj->description[0] != '\0' ) || ( IS_SET(ch->act, PLR_HOLYLIGHT) || is_npc(ch) ) )
+           && ( ( obj->description && obj->description[0] != '\0' ) || ( IS_SET(ch->act, PLR_HOLYLIGHT) || IsNpc(ch) ) )
            && (obj->item_type != ITEM_TRAP || is_affected_by(ch, AFF_DETECTTRAPS) ) )
         {
           pstrShow = format_obj_to_char( obj, ch, fShort );
           fCombine = FALSE;
 
-          if ( is_npc(ch) || IS_SET(ch->act, PLR_COMBINE) )
+          if ( IsNpc(ch) || IS_SET(ch->act, PLR_COMBINE) )
             {
               /*
                * Look for duplicates, case sensitive.
@@ -321,7 +321,7 @@ void show_list_to_char( const OBJ_DATA *list, Character *ch, bool fShort, bool f
       if ( fShowNothing )
         send_to_char( "     ", ch );
       send_to_char( prgpstrShow[iShow], ch );
-      /*        if ( is_npc(ch) || IS_SET(ch->act, PLR_COMBINE) ) */
+      /*        if ( IsNpc(ch) || IS_SET(ch->act, PLR_COMBINE) ) */
       {
         if ( prgnShow[iShow] != 1 )
           ch_printf( ch, " (%d)", prgnShow[iShow] );
@@ -333,7 +333,7 @@ void show_list_to_char( const OBJ_DATA *list, Character *ch, bool fShort, bool f
 
   if ( fShowNothing && nShow == 0 )
     {
-      if ( is_npc(ch) || IS_SET(ch->act, PLR_COMBINE) )
+      if ( IsNpc(ch) || IS_SET(ch->act, PLR_COMBINE) )
         send_to_char( "     ", ch );
       send_to_char( "Nothing.\r\n", ch );
     }
@@ -348,7 +348,7 @@ void show_list_to_char( const OBJ_DATA *list, Character *ch, bool fShort, bool f
 
 bool check_blind( const Character *ch )
 {
-  if ( !is_npc(ch) && IS_SET(ch->act, PLR_HOLYLIGHT) )
+  if ( !IsNpc(ch) && IS_SET(ch->act, PLR_HOLYLIGHT) )
     return TRUE;
 
   if ( is_affected_by(ch, AFF_TRUESIGHT) )
@@ -376,7 +376,7 @@ void show_condition( const Character *ch, const Character *victim )
 
   strcpy( buf, PERS(victim, ch) );
 
-  if ( (is_npc ( victim ) && IS_SET( victim->act , ACT_DROID ) ) ||
+  if ( (IsNpc ( victim ) && IS_SET( victim->act , ACT_DROID ) ) ||
        ( victim->race == RACE_DROID ) )
     {
 

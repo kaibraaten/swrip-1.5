@@ -16,7 +16,7 @@ void do_beep( Character *ch, char *argument )
       return;
     }
 
-  if (!is_npc(ch)
+  if (!IsNpc(ch)
       && ( IS_SET(ch->act, PLR_SILENCE)
            ||   IS_SET(ch->act, PLR_NO_TELL) ) )
     {
@@ -31,20 +31,20 @@ void do_beep( Character *ch, char *argument )
     }
 
   if ( ( victim = get_char_world( ch, arg ) ) == NULL
-       || ( is_npc(victim) && victim->in_room != ch->in_room )
-       || (!is_not_authed(ch) && is_not_authed(victim) && !is_immortal(ch) ) )
+       || ( IsNpc(victim) && victim->in_room != ch->in_room )
+       || (!is_not_authed(ch) && is_not_authed(victim) && !IsImmortal(ch) ) )
     {
       send_to_char( "They aren't here.\r\n", ch );
       return;
     }
 
-  if ( is_immortal( ch ) )
+  if ( IsImmortal( ch ) )
     {
       ch_comlink = TRUE;
       victim_comlink = TRUE;
     }
 
-  if ( is_immortal( victim ) )
+  if ( IsImmortal( victim ) )
     victim_comlink = TRUE;
 
   ch_comlink = has_comlink( ch );
@@ -66,39 +66,39 @@ void do_beep( Character *ch, char *argument )
       return;
     }
 
-  if (is_not_authed(ch) && !is_not_authed(victim) && !is_immortal(victim) )
+  if (is_not_authed(ch) && !is_not_authed(victim) && !IsImmortal(victim) )
     {
       send_to_char( "They can't hear you because you are not authorized.\r\n", ch);
       return;
     }
 
-  if ( !is_npc( victim ) && ( victim->switched )
+  if ( !IsNpc( victim ) && ( victim->switched )
        && ( get_trust( ch ) > LEVEL_AVATAR ) )
     {
       send_to_char( "That player is switched.\r\n", ch );
       return;
     }
-  else if ( !is_npc( victim ) && ( !victim->desc ) )
+  else if ( !IsNpc( victim ) && ( !victim->desc ) )
     {
       send_to_char( "That player is link-dead.\r\n", ch );
       return;
     }
 
   if ( IS_SET( victim->deaf, CHANNEL_TELLS )
-       && ( !is_immortal( ch ) || ( get_trust( ch ) < get_trust( victim ) ) ) )
+       && ( !IsImmortal( ch ) || ( get_trust( ch ) < get_trust( victim ) ) ) )
     {
       act( AT_PLAIN, "$E has $S tells turned off.", ch, NULL, victim,
            TO_CHAR );
       return;
     }
 
-  if ( !is_npc (victim) && ( IS_SET (victim->act, PLR_SILENCE ) ) )
+  if ( !IsNpc (victim) && ( IS_SET (victim->act, PLR_SILENCE ) ) )
     {
       send_to_char( "That player is silenced.  They will receive your message but can not respond.\r\n", ch );
     }
 
-  if ( (!is_immortal(ch) && !is_awake(victim) )
-       || (!is_npc(victim)&&IS_SET(victim->in_room->room_flags, ROOM_SILENCE ) ) )
+  if ( (!IsImmortal(ch) && !is_awake(victim) )
+       || (!IsNpc(victim)&&IS_SET(victim->in_room->room_flags, ROOM_SILENCE ) ) )
     {
       act( AT_PLAIN, "$E can't hear you.", ch, 0, victim, TO_CHAR );
       return;
@@ -116,7 +116,7 @@ void do_beep( Character *ch, char *argument )
   send_to_char("\a",victim);
 
   if ( knows_language( victim, ch->speaking, ch )
-       ||  (is_npc(ch) && !ch->speaking) )
+       ||  (IsNpc(ch) && !ch->speaking) )
     act( AT_WHITE, "$n beeps: '$t'", ch, argument, victim, TO_VICT );
   else
     act( AT_WHITE, "$n beeps: '$t'", ch, scramble(argument, ch->speaking), victim, TO_VICT );

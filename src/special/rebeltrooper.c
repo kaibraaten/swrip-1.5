@@ -17,9 +17,9 @@ bool spec_rebel_trooper( Character *ch )
         continue;
       if ( get_timer(victim, TIMER_RECENTFIGHT) > 0 )
         continue;
-      if ( ( is_npc( victim ) && nifty_is_name( "imperial" , victim->name )
+      if ( ( IsNpc( victim ) && nifty_is_name( "imperial" , victim->name )
              && victim->fighting && who_fighting( victim ) != ch ) ||
-           ( !is_npc( victim ) && is_clanned( victim ) && is_awake(victim)
+           ( !IsNpc( victim ) && is_clanned( victim ) && is_awake(victim)
              && nifty_is_name( "empire" , victim->pcdata->clan->name ) ) )
         {
           do_yell( ch, "Long live the Rebel Alliance!" );

@@ -8,7 +8,7 @@ void do_add_patrol ( Character *ch , char *argument )
   char arg[MAX_INPUT_LENGTH];
   int the_chance, credits;
 
-  if ( is_npc( ch ) || !ch->pcdata )
+  if ( IsNpc( ch ) || !ch->pcdata )
     return;
 
   strcpy( arg, argument );

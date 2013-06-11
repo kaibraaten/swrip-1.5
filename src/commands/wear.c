@@ -122,7 +122,7 @@ void wear_obj( Character *ch, OBJ_DATA *obj, bool fReplace, short wear_bit )
     check_size = FALSE;
   else if ( ch->race == RACE_DEFEL )
     check_size = TRUE;
-  else if ( !is_npc(ch) )
+  else if ( !IsNpc(ch) )
     switch (ch->race)
       {
       default:
@@ -772,7 +772,7 @@ static bool can_layer( const Character *ch, const OBJ_DATA *obj, short wear_loc 
  */
 static bool could_dual( const Character *ch )
 {
-  if ( is_npc(ch) )
+  if ( IsNpc(ch) )
     return TRUE;
 
   if ( ch->pcdata->learned[gsn_dual_wield] )

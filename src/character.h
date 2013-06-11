@@ -337,9 +337,9 @@ int can_carry_w( const Character *ch );
  */
 int can_carry_n( const Character *ch );
 
-bool is_npc( const Character *ch );
+bool IsNpc( const Character *ch );
 
-bool is_immortal( const Character *ch );
+bool IsImmortal( const Character *ch );
 
 bool is_god( const Character *ch );
 

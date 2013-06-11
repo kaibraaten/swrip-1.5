@@ -7,7 +7,7 @@ void do_clan_withdraw( Character *ch, char *argument )
   Clan *clan = NULL;
   long amount = 0;
 
-  if ( is_npc( ch ) || !is_clanned( ch ) )
+  if ( IsNpc( ch ) || !is_clanned( ch ) )
     {
       send_to_char( "You don't seem to belong to an organization to withdraw funds from...\r\n",
 		    ch );

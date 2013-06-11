@@ -16,12 +16,12 @@ void do_hell( Character *ch, char *argument )
       send_to_char( "Hell who, and for how long?\r\n", ch );
       return;
     }
-  if ( !(victim = get_char_world(ch, arg)) || is_npc(victim) )
+  if ( !(victim = get_char_world(ch, arg)) || IsNpc(victim) )
     {
       send_to_char( "They aren't here.\r\n", ch );
       return;
     }
-  if ( is_immortal(victim) )
+  if ( IsImmortal(victim) )
     {
       send_to_char( "There is no point in helling an immortal.\r\n", ch );
       return;

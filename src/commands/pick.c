@@ -12,7 +12,7 @@ void do_pick( Character *ch, char *argument )
   EXIT_DATA *pexit;
   SHIP_DATA *ship;
 
-  if ( is_npc(ch) && is_affected_by( ch, AFF_CHARM ) )
+  if ( IsNpc(ch) && is_affected_by( ch, AFF_CHARM ) )
     {
       send_to_char( "You can't concentrate enough for that.\r\n", ch );
       return;
@@ -67,7 +67,7 @@ void do_pick( Character *ch, char *argument )
           return;
         }
 
-      if ( !is_npc(ch) && number_percent( ) > ch->pcdata->learned[gsn_pick_lock] )
+      if ( !IsNpc(ch) && number_percent( ) > ch->pcdata->learned[gsn_pick_lock] )
         {
           send_to_char( "You failed.\r\n", ch);
           learn_from_failure( ch, gsn_pick_lock );
@@ -106,7 +106,7 @@ void do_pick( Character *ch, char *argument )
           return;
         }
 
-      if ( !is_npc(ch) && number_percent( ) > ch->pcdata->learned[gsn_pick_lock] )
+      if ( !IsNpc(ch) && number_percent( ) > ch->pcdata->learned[gsn_pick_lock] )
         {
           send_to_char( "You failed.\r\n", ch);
           learn_from_failure( ch, gsn_pick_lock );
@@ -140,7 +140,7 @@ void do_pick( Character *ch, char *argument )
 
       set_wait_state( ch, skill_table[gsn_pickshiplock]->beats );
 
-      if ( is_npc(ch) || !ch->pcdata || number_percent( ) > ch->pcdata->learned[gsn_pickshiplock] )
+      if ( IsNpc(ch) || !ch->pcdata || number_percent( ) > ch->pcdata->learned[gsn_pickshiplock] )
         {
           send_to_char( "You failed.\r\n", ch);
           learn_from_failure( ch, gsn_pickshiplock );
@@ -161,11 +161,11 @@ void do_pick( Character *ch, char *argument )
               if ( !has_comlink( victim ) )
                 continue;
 
-	      if ( !is_npc( victim ) && victim->switched
+	      if ( !IsNpc( victim ) && victim->switched
                    && !IS_SET(victim->switched->act, ACT_POLYMORPHED)
                    && !is_affected_by(victim->switched, AFF_POSSESS) )
                 continue;
-              else if ( !is_npc( victim ) && victim->switched
+              else if ( !IsNpc( victim ) && victim->switched
                         && (IS_SET(victim->switched->act, ACT_POLYMORPHED)
                             || is_affected_by(victim->switched, AFF_POSSESS) ) )
                 victim = victim->switched;
@@ -205,11 +205,11 @@ void do_pick( Character *ch, char *argument )
               if ( !has_comlink( victim ) )
                 continue;
 
-              if ( !is_npc( victim ) && victim->switched
+              if ( !IsNpc( victim ) && victim->switched
 		   && !IS_SET(victim->switched->act, ACT_POLYMORPHED)
                    && !is_affected_by(victim->switched, AFF_POSSESS) )
                 continue;
-              else if ( !is_npc( victim ) && victim->switched
+              else if ( !IsNpc( victim ) && victim->switched
                         && (IS_SET(victim->switched->act, ACT_POLYMORPHED)
                             || is_affected_by(victim->switched, AFF_POSSESS) ) )
                 victim = victim->switched;
@@ -235,7 +235,7 @@ static bool MobIsAlert( void *element, void *userData )
   const Character *offender = (Character*) userData;
 
   return mob != offender
-    && is_npc( mob )
+    && IsNpc( mob )
     && is_awake( mob )
     && mob->top_level > get_level( offender, SMUGGLING_ABILITY );
 }

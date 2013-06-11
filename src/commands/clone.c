@@ -17,7 +17,7 @@ void do_clone( Character *ch, char *argument )
   short frc, change, change2, frc_level, low_frc = 0, mana;
   ROOM_INDEX_DATA *home;
 
-  if ( is_npc(ch) )
+  if ( IsNpc(ch) )
     {
       ch_printf( ch, "Yeah right!\r\n" );
       return;

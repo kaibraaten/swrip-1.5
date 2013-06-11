@@ -26,7 +26,7 @@ void do_cutdoor( Character *ch, char *argument )
     whichweap = SABER;
   else
     whichweap = PIKE;
-  if ( !is_npc( ch )
+  if ( !IsNpc( ch )
        && ( (whichweap ? ch->pcdata->learned[gsn_lightsabers] <= 0 : ch->pcdata->learned[gsn_force_pikes] <= 0) || ch->pcdata->learned[gsn_cutdoor] <= 0 ))
     {
       send_to_char( "You can not use it well enough to cut a door open.\r\n", ch );
@@ -66,7 +66,7 @@ void do_cutdoor( Character *ch, char *argument )
         keyword = "wall";
       else
         keyword = pexit->keyword;
-      if ( !is_npc(ch) )
+      if ( !IsNpc(ch) )
         the_chance = ch->pcdata->learned[gsn_cutdoor] / 2;
       else
         the_chance = 90;

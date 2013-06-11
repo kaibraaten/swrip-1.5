@@ -51,7 +51,7 @@ void do_murder( Character *ch, char *argument )
       return;
     }
 
-  if ( !is_npc( victim ) && IS_SET( ch->act, PLR_NICE ) )
+  if ( !IsNpc( victim ) && IS_SET( ch->act, PLR_NICE ) )
     {
       send_to_char( "You feel too nice to do that!\r\n", ch );
       return;

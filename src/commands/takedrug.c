@@ -58,7 +58,7 @@ void do_takedrug( Character *ch, char *argument )
           act( AT_ACTION, "You take $p.", ch, obj, NULL, TO_CHAR );
         }
 
-      if ( is_npc(ch) )
+      if ( IsNpc(ch) )
         {
           extract_obj( obj );
           return;

@@ -7,7 +7,7 @@ void SendSoundToPlayerCharacter( void *element, void *userData )
   Character *victim = (Character*) element;
   const char *message = (const char*) userData;
 
-  if( !is_npc( victim ) && IS_SET( victim->act, PLR_SOUND ) )
+  if( !IsNpc( victim ) && IS_SET( victim->act, PLR_SOUND ) )
     {
       ch_printf( victim, message );
     }
@@ -36,7 +36,7 @@ void AttackBasher( void *element, void *userData )
 
   if ( is_awake( attacker )
        && !attacker->fighting
-       && is_npc( attacker )
+       && IsNpc( attacker )
        && !is_affected_by( attacker, AFF_CHARM )
        && ( basher->top_level - attacker->top_level <= 4 )
        && number_bits( 2 ) == 0 )

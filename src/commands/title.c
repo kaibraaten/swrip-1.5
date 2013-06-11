@@ -4,7 +4,7 @@
 
 void do_title( Character *ch, char *argument )
 {
-  if ( is_npc(ch) )
+  if ( IsNpc(ch) )
     return;
 
   if ( IS_SET( ch->pcdata->flags, PCFLAG_NOTITLE ))

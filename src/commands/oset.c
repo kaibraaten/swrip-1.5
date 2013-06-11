@@ -17,7 +17,7 @@ void do_oset( Character *ch, char *argument )
 
   int value, tmp;
 
-  if ( is_npc( ch ) )
+  if ( IsNpc( ch ) )
     {
       send_to_char( "Mob's can't oset\r\n", ch );
       return;

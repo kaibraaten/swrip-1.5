@@ -8,7 +8,7 @@ void do_backstab( Character *ch, char *argument )
   OBJ_DATA *obj;
   int percent;
 
-  if ( is_npc(ch) && is_affected_by( ch, AFF_CHARM ) )
+  if ( IsNpc(ch) && is_affected_by( ch, AFF_CHARM ) )
     {
       send_to_char( "You can't do that right now.\r\n", ch );
       return;
@@ -73,7 +73,7 @@ void do_backstab( Character *ch, char *argument )
   set_wait_state( ch, skill_table[gsn_backstab]->beats );
 
   if ( !is_awake(victim)
-       ||   is_npc(ch)
+       ||   IsNpc(ch)
        ||   percent < ch->pcdata->learned[gsn_backstab] )
     {
       learn_from_success( ch, gsn_backstab );

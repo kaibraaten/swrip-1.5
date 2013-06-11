@@ -11,7 +11,7 @@ void do_smalltalk ( Character *ch , char *argument )
   Clan   *clan = NULL;
   int percent = 0;
 
-  if ( is_npc(ch) )
+  if ( IsNpc(ch) )
     {
       send_to_char( "What would be the point of that.\r\n", ch );
       return;
@@ -63,7 +63,7 @@ void do_smalltalk ( Character *ch , char *argument )
     }
 
 
-  if ( !is_npc(victim) || victim->vip_flags == 0 )
+  if ( !IsNpc(victim) || victim->vip_flags == 0 )
     {
       send_to_char( "Diplomacy would be wasted on them.\r\n" , ch );
       return;

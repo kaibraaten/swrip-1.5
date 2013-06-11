@@ -60,7 +60,7 @@ void note_attach(Character *ch);
 
 void comment_remove( Character *ch, Character *victim, NOTE_DATA *pnote )
 {
-  if ( is_npc( victim ) )
+  if ( IsNpc( victim ) )
     {
       bug( "comment remove: NPC", 0 );
       return;
@@ -110,7 +110,7 @@ void do_comment( Character *ch, char *argument )
   int vnum;
   int anum;
 
-  if ( is_npc(ch) )
+  if ( IsNpc(ch) )
     {
       send_to_char("Mobs can't use the comment command.\r\n", ch);
       return;
@@ -165,7 +165,7 @@ void do_comment( Character *ch, char *argument )
           return;
         }
 
-      if ( is_npc(victim) )
+      if ( IsNpc(victim) )
         {
           send_to_char("No comments about mobs\r\n", ch);
           return;
@@ -184,7 +184,7 @@ void do_comment( Character *ch, char *argument )
           return;
         }
 
-      if ( is_npc(victim) )
+      if ( IsNpc(victim) )
         {
           send_to_char("No comments about mobs\r\n", ch);
           return;
@@ -231,7 +231,7 @@ void do_comment( Character *ch, char *argument )
           return;
         }
 
-      if ( is_npc(victim) )
+      if ( IsNpc(victim) )
         {
           send_to_char("No comments about mobs\r\n", ch);
           return;
@@ -372,7 +372,7 @@ void do_comment( Character *ch, char *argument )
           return;
         }
 
-      if ( is_npc(victim) )
+      if ( IsNpc(victim) )
         {
           send_to_char("No comments about mobs\r\n", ch);
           return;
@@ -438,7 +438,7 @@ void do_comment( Character *ch, char *argument )
           return;
         }
 
-      if ( is_npc(victim) )
+      if ( IsNpc(victim) )
         {
           send_to_char("No comments about mobs\r\n", ch);
           return;
@@ -505,7 +505,7 @@ void fread_comment( Character *ch, FILE *fp )
 {
   NOTE_DATA *pnote;
 
-  if( is_npc( ch ) )
+  if( IsNpc( ch ) )
     return;
 
   for ( ; ; )

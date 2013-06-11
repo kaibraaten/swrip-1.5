@@ -61,7 +61,7 @@ void generate_quest(Character *ch, Character *questman)
 
   if ( vsearch == NULL
        || ( victim = get_char_world( ch, vsearch->player_name ) ) == NULL
-       || !is_npc(victim))
+       || !IsNpc(victim))
     {
       sprintf(buf, "I'm sorry, but I don't have any quests for you at this time.");
       do_say(questman, buf);
@@ -175,7 +175,7 @@ void quest_update( void )
     {
       ch_next = ch->next;
 
-      if (is_npc(ch))
+      if (IsNpc(ch))
 	{
 	  continue;
 	}

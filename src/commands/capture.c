@@ -15,7 +15,7 @@ void do_capture ( Character *ch , char *argument )
   if ( !ch->in_room || !ch->in_room->area)
     return;
 
-  if ( is_npc(ch) || !ch->pcdata )
+  if ( IsNpc(ch) || !ch->pcdata )
     {
       send_to_char ( "huh?\r\n" , ch );
       return;

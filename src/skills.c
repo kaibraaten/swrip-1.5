@@ -62,7 +62,7 @@ bool check_skill( Character *ch, char *command, char *argument )
       if ( LOWER(command[0]) == LOWER(skill_table[sn]->name[0])
            &&  !str_prefix(command, skill_table[sn]->name)
            &&  (skill_table[sn]->skill_fun || skill_table[sn]->spell_fun != spell_null)
-           &&  (is_npc(ch)
+           &&  (IsNpc(ch)
                 ||  ( ch->pcdata->learned[sn] > 0 )) )
         break;
       if (first >= top)
@@ -76,7 +76,7 @@ bool check_skill( Character *ch, char *command, char *argument )
   if ( !check_pos( ch, skill_table[sn]->minimum_position ) )
     return TRUE;
 
-  if ( is_npc(ch)
+  if ( IsNpc(ch)
        &&  (is_affected_by( ch, AFF_CHARM ) || is_affected_by( ch, AFF_POSSESS )) )
     {
       send_to_char( "For some reason, you seem unable to perform that...\r\n", ch );
@@ -87,9 +87,9 @@ bool check_skill( Character *ch, char *command, char *argument )
   /* check if mana is required */
   if ( skill_table[sn]->min_mana )
     {
-      mana = is_npc(ch) ? 0 : skill_table[sn]->min_mana;
+      mana = IsNpc(ch) ? 0 : skill_table[sn]->min_mana;
 
-      if ( !is_npc(ch) && ch->mana < mana )
+      if ( !IsNpc(ch) && ch->mana < mana )
         {
           send_to_char( "You need to rest before using the Force any more.\r\n", ch );
           return TRUE;
@@ -179,7 +179,7 @@ bool check_skill( Character *ch, char *command, char *argument )
       set_wait_state( ch, skill_table[sn]->beats );
       /* check for failure */
       if ( (number_percent( ) + skill_table[sn]->difficulty * 5)
-           > (is_npc(ch) ? 75 : ch->pcdata->learned[sn]) )
+           > (IsNpc(ch) ? 75 : ch->pcdata->learned[sn]) )
         {
           failed_casting( skill_table[sn], ch, (Character*)vo, obj );
           learn_from_failure( ch, sn );
@@ -250,7 +250,7 @@ void learn_from_success( Character *ch, int sn )
 {
   int adept, gain, sklvl, learn, percent, learn_chance;
 
-  if ( is_npc(ch) || ch->pcdata->learned[sn] <= 0 )
+  if ( IsNpc(ch) || ch->pcdata->learned[sn] <= 0 )
     return;
 
   if ( sn == skill_lookup( "meditate" ) && !IsForcer( ch ) )
@@ -333,7 +333,7 @@ void disarm( Character *ch, Character *victim )
       return;
     }
 
-  if ( is_npc( ch ) && !can_see_obj( ch, obj ) && number_bits( 1 ) == 0)
+  if ( IsNpc( ch ) && !can_see_obj( ch, obj ) && number_bits( 1 ) == 0)
     {
       learn_from_failure( ch, gsn_disarm );
       return;
@@ -437,10 +437,10 @@ bool check_parry( Character *ch, Character *victim )
   if ( !is_awake(victim) )
     return FALSE;
 
-  if ( is_npc(victim) && !IS_SET(victim->defenses, DFND_PARRY) )
+  if ( IsNpc(victim) && !IS_SET(victim->defenses, DFND_PARRY) )
     return FALSE;
 
-  if ( is_npc(victim) )
+  if ( IsNpc(victim) )
     {
       chances = UMIN( 60, get_level( victim, COMBAT_ABILITY ) );
     }
@@ -463,11 +463,11 @@ bool check_parry( Character *ch, Character *victim )
       learn_from_failure( victim, gsn_parry );
       return FALSE;
     }
-  if ( !is_npc(victim)
+  if ( !IsNpc(victim)
        && !IS_SET( victim->pcdata->flags, PCFLAG_GAG) ) /*SB*/
     act( AT_SKILL, "You parry $n's attack.",  ch, NULL, victim, TO_VICT    );
 
-  if ( !is_npc(ch)
+  if ( !IsNpc(ch)
        && !IS_SET( ch->pcdata->flags, PCFLAG_GAG) )  /* SB */
     act( AT_SKILL, "$N parries your attack.", ch, NULL, victim, TO_CHAR    );
 
@@ -487,10 +487,10 @@ bool check_dodge( Character *ch, Character *victim )
   if ( !is_awake(victim) )
     return FALSE;
 
-  if ( is_npc(victim) && !IS_SET(victim->defenses, DFND_DODGE) )
+  if ( IsNpc(victim) && !IS_SET(victim->defenses, DFND_DODGE) )
     return FALSE;
 
-  if ( is_npc(victim) )
+  if ( IsNpc(victim) )
     chances  = UMIN( 60, victim->top_level );
   else
     chances  = (int) (victim->pcdata->learned[gsn_dodge] / 2);
@@ -503,10 +503,10 @@ bool check_dodge( Character *ch, Character *victim )
       return FALSE;
     }
 
-  if ( !is_npc(victim) && !IS_SET( victim->pcdata->flags, PCFLAG_GAG) )
+  if ( !IsNpc(victim) && !IS_SET( victim->pcdata->flags, PCFLAG_GAG) )
     act( AT_SKILL, "You dodge $n's attack.", ch, NULL, victim, TO_VICT    );
 
-  if ( !is_npc(ch) && !IS_SET( ch->pcdata->flags, PCFLAG_GAG) )
+  if ( !IsNpc(ch) && !IS_SET( ch->pcdata->flags, PCFLAG_GAG) )
     act( AT_SKILL, "$N dodges your attack.", ch, NULL, victim, TO_CHAR    );
 
   learn_from_success( victim, gsn_dodge );
@@ -520,10 +520,10 @@ bool check_grip( Character *ch, Character *victim )
   if ( !is_awake(victim) )
     return FALSE;
 
-  if ( is_npc(victim) && !IS_SET(victim->defenses, DFND_GRIP) )
+  if ( IsNpc(victim) && !IS_SET(victim->defenses, DFND_GRIP) )
     return FALSE;
 
-  if ( is_npc(victim) )
+  if ( IsNpc(victim) )
     grip_chance  = UMIN( 60, 2 * victim->top_level );
   else
     grip_chance  = (int) (victim->pcdata->learned[gsn_grip] / 2);

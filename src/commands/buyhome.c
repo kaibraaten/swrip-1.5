@@ -9,7 +9,7 @@ void do_buyhome( Character *ch, char *argument )
   if ( !ch->in_room )
     return;
 
-  if ( is_npc(ch) || !ch->pcdata )
+  if ( IsNpc(ch) || !ch->pcdata )
     return;
 
   if ( ch->plr_home != NULL )

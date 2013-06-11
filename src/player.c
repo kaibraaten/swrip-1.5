@@ -38,7 +38,7 @@ void set_title( Character *ch, const char *title )
 {
   char buf[MAX_STRING_LENGTH];
 
-  if ( is_npc(ch) )
+  if ( IsNpc(ch) )
     {
       bug( "Set_title: NPC.", 0 );
       return;

@@ -9,7 +9,7 @@ void do_mcreate( Character *ch, char *argument )
   Character *mob = NULL;
   int vnum = 0, cvnum = 0;
 
-  if ( is_npc(ch) )
+  if ( IsNpc(ch) )
     {
       send_to_char( "Mobiles cannot create.\r\n", ch );
       return;
@@ -46,7 +46,7 @@ void do_mcreate( Character *ch, char *argument )
       return;
     }
 
-  if ( is_npc( ch ) )
+  if ( IsNpc( ch ) )
     return;
 
   if ( get_trust( ch ) <= LEVEL_IMMORTAL )

@@ -48,7 +48,7 @@ void do_minvoke( Character *ch, char *argument )
     {
       AREA_DATA *pArea;
 
-      if ( is_npc(ch) )
+      if ( IsNpc(ch) )
         {
           send_to_char( "Huh?\r\n", ch );
           return;

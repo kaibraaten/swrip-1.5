@@ -28,7 +28,7 @@ void do_goto( Character *ch, char *argument )
           return;
 	}
 
-      if ( vnum < 1 || is_npc(ch) || !ch->pcdata->area )
+      if ( vnum < 1 || IsNpc(ch) || !ch->pcdata->area )
         {
           send_to_char( "No such location.\r\n", ch );
           return;
@@ -142,7 +142,7 @@ void do_goto( Character *ch, char *argument )
     {
       Character *fch = (Character*) ListIterator_GetData( peopleInRoomIterator );
 
-      if ( fch->master == ch && is_immortal(fch) )
+      if ( fch->master == ch && IsImmortal(fch) )
         {
           act( AT_ACTION, "You follow $N.", fch, NULL, ch, TO_CHAR );
           do_goto( fch, argument );

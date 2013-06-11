@@ -8,7 +8,7 @@ void do_resign( Character *ch, char *argument )
   long xp_to_lose = 0;
   long xp_actually_lost = 0;
 
-  if ( is_npc(ch) )
+  if ( IsNpc(ch) )
     {
       send_to_char( "You can't do that.\r\n", ch );
       return;

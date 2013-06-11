@@ -31,7 +31,7 @@ void do_reboot( Character *ch, char *argument )
   /* Save all characters before booting. */
   if ( str_cmp(argument, "nosave") )
     for ( vch = first_char; vch; vch = vch->next )
-      if ( !is_npc( vch ) )
+      if ( !IsNpc( vch ) )
         save_char_obj( vch );
 
   for ( ship = first_ship; ship; ship = ship->next )

@@ -7,7 +7,7 @@ void do_affected ( Character *ch, char *argument )
   AFFECT_DATA *paf;
   SKILLTYPE *skill;
 
-  if ( is_npc(ch) )
+  if ( IsNpc(ch) )
     return;
 
   argument = one_argument( argument, arg );

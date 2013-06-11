@@ -6,7 +6,7 @@ void do_clanfunds( Character *ch, char *argument )
 {
   Clan *clan;
 
-  if ( is_npc( ch ) || !is_clanned( ch ) )
+  if ( IsNpc( ch ) || !is_clanned( ch ) )
     {
       send_to_char("You don't seem to belong to an organization.\r\n",ch);
       return;

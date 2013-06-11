@@ -7,7 +7,7 @@ void do_disguise( Character *ch, char *argument )
   int the_chance;
   short gsn;
 
-  if ( is_npc(ch) )
+  if ( IsNpc(ch) )
     return;
 
   if ( IS_SET( ch->pcdata->flags, PCFLAG_NOTITLE ))

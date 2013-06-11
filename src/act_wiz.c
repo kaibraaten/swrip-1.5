@@ -55,9 +55,9 @@ void echo_to_all( short AT_COLOR, const char *argument, short tar )
       if ( d->connection_state == CON_PLAYING || d->connection_state == CON_EDITING )
         {
           /* This one is kinda useless except for switched.. */
-          if ( tar == ECHOTAR_PC && is_npc(d->character) )
+          if ( tar == ECHOTAR_PC && IsNpc(d->character) )
             continue;
-          else if ( tar == ECHOTAR_IMM && !is_immortal(d->character) )
+          else if ( tar == ECHOTAR_IMM && !IsImmortal(d->character) )
             continue;
           set_char_color( AT_COLOR, d->character );
           send_to_char( argument, d->character );
@@ -210,7 +210,7 @@ void close_area( AREA_DATA *pArea )
 
       if ( ech->fighting )
         stop_fighting( ech, TRUE );
-      if ( is_npc(ech) )
+      if ( IsNpc(ech) )
         {
           /* if mob is in area, or part of area. */
           if ( URANGE(pArea->low_m_vnum, ech->pIndexData->vnum,
@@ -271,7 +271,7 @@ void close_area( AREA_DATA *pArea )
 		      stop_fighting( currentPerson, TRUE );
 		    }
 
-                  if ( is_npc( currentPerson ) )
+                  if ( IsNpc( currentPerson ) )
 		    {
 		      extract_char( currentPerson, TRUE );
 		    }

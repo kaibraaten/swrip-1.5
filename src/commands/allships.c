@@ -30,7 +30,7 @@ void do_allships( Character *ch, char *argument )
 
   send_to_pager( "\r\n&WShip                               Owner\r\n", ch );
 
-  if ( is_immortal( ch ) && !unowned && !checkowner && type < 0)
+  if ( IsImmortal( ch ) && !unowned && !checkowner && type < 0)
     for ( ship = first_ship; ship; ship = ship->next )
       if (ship->type == MOB_SHIP && ship->sclass != SHIP_DEBRIS )
         {

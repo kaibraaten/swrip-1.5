@@ -21,11 +21,11 @@ ch_ret spell_gas_breath( int sn, int level, Character *ch, void *vo )
   for ( vch = ch->in_room->first_person; vch; vch = vch_next )
     {
       vch_next = vch->next_in_room;
-      if ( !is_npc( vch ) && IS_SET( vch->act, PLR_WIZINVIS )
+      if ( !IsNpc( vch ) && IS_SET( vch->act, PLR_WIZINVIS )
            && vch->pcdata->wizinvis >= LEVEL_IMMORTAL )
         continue;
 
-      if ( is_npc(ch) ? !is_npc(vch) : is_npc(vch) )
+      if ( IsNpc(ch) ? !IsNpc(vch) : IsNpc(vch) )
         {
           hpch = UMAX( 10, ch->hit );
           dam  = number_range( hpch/16+1, hpch/8 );

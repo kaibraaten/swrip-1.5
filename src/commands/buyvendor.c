@@ -11,7 +11,7 @@ void do_buyvendor (Character *ch, char *argument)
   char strsave[MAX_INPUT_LENGTH];
   struct stat fst;
 
-  if (is_npc(ch))
+  if (IsNpc(ch))
     return;
 
   if ( !str_cmp( argument, "yes" ) )

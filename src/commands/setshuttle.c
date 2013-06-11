@@ -14,7 +14,7 @@ void do_setshuttle(Character * ch, char * argument)
   char arg2[MIL];
   int value;
 
-  if ( is_npc( ch ) )
+  if ( IsNpc( ch ) )
     {
       send_to_char( "Huh?\r\n", ch );
       return;

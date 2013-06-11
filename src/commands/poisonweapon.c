@@ -9,7 +9,7 @@ void do_poison_weapon( Character *ch, char *argument )
   char      arg [ MAX_INPUT_LENGTH ];
   int       percent;
 
-  if ( !is_npc( ch )
+  if ( !IsNpc( ch )
        &&  ch->pcdata->learned[gsn_poison_weapon] <= 0  )
     {
       send_to_char( "What do you think you are, a thief?\r\n", ch );
@@ -77,7 +77,7 @@ void do_poison_weapon( Character *ch, char *argument )
       return;
     }
   /* And does the thief have steady enough hands? */
-  if ( !is_npc( ch )
+  if ( !IsNpc( ch )
        &&  ( ch->pcdata->condition[COND_DRUNK] > 0 ) )
     {
       send_to_char("Your hands aren't steady enough to properly mix the poison.\r\n", ch );
@@ -90,7 +90,7 @@ void do_poison_weapon( Character *ch, char *argument )
   /* Check the skill percentage */
   separate_obj( pobj );
   separate_obj( wobj );
-  if ( !is_npc( ch )
+  if ( !IsNpc( ch )
        && percent > ch->pcdata->learned[gsn_poison_weapon] )
     {
       set_char_color( AT_RED, ch );

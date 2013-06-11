@@ -64,7 +64,7 @@ Character *find_keeper_q( Character *ch, bool message )
     {
       Character *current = (Character*) ListIterator_GetData( peopleInRoomIterator );
 
-      if ( is_npc(keeper) && (pShop = keeper->pIndexData->pShop) != NULL )
+      if ( IsNpc(keeper) && (pShop = keeper->pIndexData->pShop) != NULL )
 	{
 	  keeper = current;
 	  break;
@@ -130,7 +130,7 @@ Character *find_fixer( Character *ch )
     {
       Character *current = (Character*) ListIterator_GetData( peopleInRoomIterator );
 
-      if ( is_npc(keeper) && (rShop = keeper->pIndexData->rShop) != NULL )
+      if ( IsNpc(keeper) && (rShop = keeper->pIndexData->rShop) != NULL )
         {
           keeper = current;
           break;
@@ -184,7 +184,7 @@ int get_cost_quit( Character *ch )
   if( ch->top_level <= 6 )
     return 0;
 
-  gold = ch->gold + (is_npc(ch) ? 0 : ch->pcdata->bank) + 1;
+  gold = ch->gold + (IsNpc(ch) ? 0 : ch->pcdata->bank) + 1;
 
   if( gold < 5000 )
     return 0;
@@ -203,7 +203,7 @@ int get_cost( Character *ch, Character *keeper, OBJ_DATA *obj, bool fBuy )
   if ( !obj || ( pShop = keeper->pIndexData->pShop ) == NULL )
     return 0;
 
-  if ( ( ch->gold + (is_npc(ch) ? 0 : ch->pcdata->bank) ) > (ch->top_level * 1000) )
+  if ( ( ch->gold + (IsNpc(ch) ? 0 : ch->pcdata->bank) ) > (ch->top_level * 1000) )
     richcustomer = TRUE;
   else
     richcustomer = FALSE;
@@ -328,7 +328,7 @@ int get_repaircost( Character *keeper, OBJ_DATA *obj )
 /* Write vendor to file */
 void fwrite_vendor( FILE *fp, Character *mob )
 {
-  if ( !is_npc( mob ) || !fp )
+  if ( !IsNpc( mob ) || !fp )
     return;
   fprintf( fp, "Vnum     %d\n", mob->pIndexData->vnum );
   if (mob->gold > 0)

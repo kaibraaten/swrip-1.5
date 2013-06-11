@@ -10,7 +10,7 @@ void do_propaganda ( Character *ch , char *argument )
   PLANET_DATA *planet;
   Clan   *clan;
 
-  if ( is_npc(ch) || !is_clanned( ch ) || !ch->in_room->area->planet )
+  if ( IsNpc(ch) || !is_clanned( ch ) || !ch->in_room->area->planet )
     {
       send_to_char( "What would be the point of that.\r\n", ch );
       return;

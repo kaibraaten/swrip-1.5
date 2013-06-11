@@ -28,7 +28,7 @@ void do_slay( Character *ch, char *argument )
       return;
     }
 
-  if ( !is_npc(victim)
+  if ( !IsNpc(victim)
        && ( get_trust( victim ) == 103 || get_trust( ch ) < 103) )
     {
       send_to_char( "You failed.\r\n", ch );

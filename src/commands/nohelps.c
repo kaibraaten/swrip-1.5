@@ -11,7 +11,7 @@ void do_nohelps(Character *ch, char *argument)
 
   argument = one_argument( argument, arg );
 
-  if(!is_immortal(ch) || is_npc(ch) )
+  if(!IsImmortal(ch) || IsNpc(ch) )
     {
       send_to_char("Huh?\r\n", ch);
       return;

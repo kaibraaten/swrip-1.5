@@ -61,7 +61,7 @@ ch_ret spell_remove_invis( int sn, int level, Character *ch, void *vo )
               immune_casting( skill, ch, victim, NULL );
               return rSPELL_FAILED;
             }
-          if( !is_npc(victim) )
+          if( !IsNpc(victim) )
             {
               if( chance(ch, 50) && get_level( ch, FORCE_ABILITY ) < victim->top_level )
                 {

@@ -15,7 +15,7 @@ void do_jail ( Character *ch , char *argument )
 
   argument = one_argument(argument, arg);
 
-  if ( is_npc (ch) ) return;
+  if ( IsNpc (ch) ) return;
 
   if ( !ch->pcdata || ( clan = ch->pcdata->clan ) == NULL )
     {
@@ -65,7 +65,7 @@ void do_jail ( Character *ch , char *argument )
       return;
     }
 
-  if ( is_npc(victim) )
+  if ( IsNpc(victim) )
     {
       send_to_char( "That would be a waste of time.\r\n", ch );
       return;

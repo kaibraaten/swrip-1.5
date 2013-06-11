@@ -32,7 +32,7 @@ bool can_rmodify( const Character *ch, const ROOM_INDEX_DATA *room )
   short vnum = room->vnum;
   AREA_DATA *pArea;
 
-  if ( is_npc( ch ) )
+  if ( IsNpc( ch ) )
     return FALSE;
 
   if ( get_trust( ch ) >= sysdata.level_modify_proto )
@@ -56,7 +56,7 @@ bool can_omodify( const Character *ch, const OBJ_DATA *obj )
   short vnum = obj->pIndexData->vnum;
   AREA_DATA *pArea;
 
-  if ( is_npc( ch ) )
+  if ( IsNpc( ch ) )
     return FALSE;
 
   if ( get_trust( ch ) >= sysdata.level_modify_proto )
@@ -80,7 +80,7 @@ bool can_oedit( const Character *ch, const OBJ_INDEX_DATA *obj )
   short vnum = obj->vnum;
   AREA_DATA *pArea;
 
-  if ( is_npc( ch ) )
+  if ( IsNpc( ch ) )
     return FALSE;
 
   if ( get_trust( ch ) >= LEVEL_GOD )
@@ -108,7 +108,7 @@ bool can_mmodify( const Character *ch, const Character *mob )
   if ( mob == ch )
     return TRUE;
 
-  if ( !is_npc( mob ) )
+  if ( !IsNpc( mob ) )
     {
       if ( get_trust( ch ) >= sysdata.level_modify_proto && get_trust(ch) >
            get_trust( mob ) )
@@ -120,7 +120,7 @@ bool can_mmodify( const Character *ch, const Character *mob )
 
   vnum = mob->pIndexData->vnum;
 
-  if ( is_npc( ch ) )
+  if ( IsNpc( ch ) )
     return FALSE;
   if ( get_trust( ch ) >= sysdata.level_modify_proto )
     return TRUE;
@@ -142,7 +142,7 @@ bool can_medit( const Character *ch, const MOB_INDEX_DATA *mob )
   short vnum = mob->vnum;
   AREA_DATA *pArea;
 
-  if ( is_npc( ch ) )
+  if ( IsNpc( ch ) )
     return FALSE;
   if ( get_trust( ch ) >= LEVEL_GOD )
     return TRUE;
@@ -183,7 +183,7 @@ void assign_area( Character *ch )
   AREA_DATA *tarea, *tmp;
   bool created = FALSE;
 
-  if ( is_npc( ch ) )
+  if ( IsNpc( ch ) )
     return;
   if ( get_trust( ch ) >= LEVEL_AVATAR
        &&   ch->pcdata->r_range_lo
@@ -357,7 +357,7 @@ static void ExtractCharacterIfNpc( void *element, void *userData )
 {
   Character *victim = (Character*) element;
 
-  if ( is_npc(victim) )
+  if ( IsNpc(victim) )
     extract_char( victim, TRUE );
 }
 

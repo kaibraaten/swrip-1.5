@@ -8,7 +8,7 @@ void do_practice( Character *ch, char *argument )
   char buf[MAX_STRING_LENGTH];
   int sn;
 
-  if ( is_npc(ch) )
+  if ( IsNpc(ch) )
     return;
 
   if ( argument[0] == '\0' )
@@ -27,7 +27,7 @@ void do_practice( Character *ch, char *argument )
             continue;
 
           if ( str_cmp(skill_table[sn]->name, "reserved") == 0
-               && ( is_immortal(ch) ) )
+               && ( IsImmortal(ch) ) )
             {
               if ( col % 3 != 0 )
                 send_to_pager( "&r\r\n", ch );
@@ -113,7 +113,7 @@ void do_practice( Character *ch, char *argument )
           return;
         }
 
-      if ( can_prac &&  !is_npc(ch)
+      if ( can_prac &&  !IsNpc(ch)
            && get_level( ch, skill_table[sn]->guild ) < skill_table[sn]->min_level )
         {
           act( AT_TELL, "$n tells you 'You're not ready to learn that yet...'",
@@ -187,5 +187,5 @@ static bool MobIsTeacher( void *element, void *userData )
 {
   const Character *mob = (Character*) element;
 
-  return is_npc(mob) && IS_SET(mob->act, ACT_PRACTICE);
+  return IsNpc(mob) && IS_SET(mob->act, ACT_PRACTICE);
 }

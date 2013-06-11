@@ -13,8 +13,8 @@ void do_languages( Character *ch, char *argument )
 
   if ( arg[0] != '\0'
        && !str_prefix( arg, "learn" )
-       && !is_immortal(ch)
-       && !is_npc(ch) )
+       && !IsImmortal(ch)
+       && !IsNpc(ch) )
     {
       Character *sch = NULL;
       char arg2[MAX_INPUT_LENGTH];
@@ -127,7 +127,7 @@ void do_languages( Character *ch, char *argument )
 	}
 
       if ( ch->speaking & lang_array[lang]
-	   || (is_npc(ch) && !ch->speaking) )
+	   || (IsNpc(ch) && !ch->speaking) )
 	{
 	  set_char_color( AT_RED, ch );
 	}
@@ -164,7 +164,7 @@ static Character *GetLanguageTeacherInRoom( Character *ch, int lang )
     {
       Character *sch = (Character*) ListIterator_GetData( iter );
 
-      if ( is_npc(sch) && IS_SET(sch->act, ACT_SCHOLAR)
+      if ( IsNpc(sch) && IS_SET(sch->act, ACT_SCHOLAR)
            && knows_language( sch, ch->speaking, ch )
            && knows_language( sch, lang_array[lang], sch )
            && (!sch->speaking || knows_language( ch, sch->speaking, sch ) ) )

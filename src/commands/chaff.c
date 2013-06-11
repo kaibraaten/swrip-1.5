@@ -47,7 +47,7 @@ void do_chaff( Character *ch, char *argument )
       send_to_char("&RYou don't have any chaff to release!\r\n",ch);
       return;
     }
-  the_chance = is_npc(ch) ? ch->top_level
+  the_chance = IsNpc(ch) ? ch->top_level
     : (int)  (ch->pcdata->learned[gsn_weaponsystems]) ;
   if ( number_percent( ) > the_chance )
     {

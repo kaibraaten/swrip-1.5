@@ -225,7 +225,7 @@ static void nanny_get_name( DESCRIPTOR_DATA *d, char *argument )
     }
   else
     {
-      if ( wizlock && !is_immortal(ch) )
+      if ( wizlock && !IsImmortal(ch) )
 	{
 	  write_to_buffer( d, "The game is wizlocked. Only immortals can connect now.\r\n", 0 );
 	  write_to_buffer( d, "Please try back later.\r\n", 0 );
@@ -741,7 +741,7 @@ static void nanny_press_enter( DESCRIPTOR_DATA *d, char *argument )
       send_to_pager( "\014", ch );
     }
 
-  if ( is_immortal(ch) )
+  if ( IsImmortal(ch) )
     {
       send_to_pager( "&WImmortal Message of the Day&w\r\n", ch );
       do_help( ch, "imotd" );
@@ -777,7 +777,7 @@ static void nanny_read_motd( DESCRIPTOR_DATA *d, char *argument )
   add_char( ch );
   d->connection_state      = CON_PLAYING;
 
-  if ( !is_npc(ch) && IS_SET( ch->act , PLR_SOUND ) )
+  if ( !IsNpc(ch) && IS_SET( ch->act , PLR_SOUND ) )
     {
       send_to_char( "!!MUSIC(starwars.mid V=100)" , ch );
     }
@@ -942,7 +942,7 @@ static void nanny_read_motd( DESCRIPTOR_DATA *d, char *argument )
       /* Display_prompt interprets blank as default */
       ch->pcdata->prompt = STRALLOC("");
     }
-  else if ( !is_immortal(ch) && ch->pcdata->release_date > current_time )
+  else if ( !IsImmortal(ch) && ch->pcdata->release_date > current_time )
     {
       if ( ch->pcdata->jail_vnum )
 	{
@@ -953,13 +953,13 @@ static void nanny_read_motd( DESCRIPTOR_DATA *d, char *argument )
 	  char_to_room( ch, get_room_index(6) );
 	}
     }
-  else if ( ch->in_room && !is_immortal( ch )
+  else if ( ch->in_room && !IsImmortal( ch )
 	    && !IS_SET( ch->in_room->room_flags, ROOM_SPACECRAFT )
 	    && ch->in_room != get_room_index(6) )
     {
       char_to_room( ch, ch->in_room );
     }
-  else if ( ch->in_room && !is_immortal( ch )
+  else if ( ch->in_room && !IsImmortal( ch )
 	    && IS_SET( ch->in_room->room_flags, ROOM_SPACECRAFT )
 	    && ch->in_room != get_room_index(6) )
     {

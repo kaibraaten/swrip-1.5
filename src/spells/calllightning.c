@@ -41,11 +41,11 @@ ch_ret spell_call_lightning( int sn, int level, Character *ch, void *vo )
         continue;
       if ( vch->in_room == ch->in_room )
 	{
-          if ( !is_npc( vch ) && IS_SET( vch->act, PLR_WIZINVIS )
+          if ( !IsNpc( vch ) && IS_SET( vch->act, PLR_WIZINVIS )
                &&    vch->pcdata->wizinvis >= LEVEL_IMMORTAL )
             continue;
 
-          if ( vch != ch && ( is_npc(ch) ? !is_npc(vch) : is_npc(vch) ) )
+          if ( vch != ch && ( IsNpc(ch) ? !IsNpc(vch) : IsNpc(vch) ) )
             retcode = damage( ch, vch, saves_spell_staff( level, vch ) ? dam/2 : dam, sn );
           if ( retcode == rCHAR_DIED || char_died(ch) )
             ch_died = TRUE;

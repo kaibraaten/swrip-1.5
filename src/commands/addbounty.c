@@ -53,7 +53,7 @@ void do_addbounty( Character *ch, char *argument )
       return;
     }
 
-  if ( is_npc(victim) )
+  if ( IsNpc(victim) )
     {
       send_to_char( "You can only set bounties on other players .. not mobs!\r\n", ch );
       return;

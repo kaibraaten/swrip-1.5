@@ -10,7 +10,7 @@ void do_clanbuyship(Character *ch, char *argument )
   Clan   *clan;
   Clan   *mainclan;
 
-  if ( is_npc(ch) || !ch->pcdata )
+  if ( IsNpc(ch) || !ch->pcdata )
     {
       send_to_char( "&ROnly players can do that!\r\n" ,ch );
       return;

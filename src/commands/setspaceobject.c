@@ -8,7 +8,7 @@ void do_setspaceobject( Character *ch, char *argument )
   char arg2[MAX_INPUT_LENGTH];
   SPACE_DATA *spaceobject;
 
-  if ( is_npc( ch ) )
+  if ( IsNpc( ch ) )
     {
       send_to_char( "Huh?\r\n", ch );
       return;

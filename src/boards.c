@@ -173,7 +173,7 @@ void note_attach( Character *ch )
 {
   NOTE_DATA *pnote;
 
-  if ( is_npc( ch ) )
+  if ( IsNpc( ch ) )
     return;
 
   if ( ch->pcdata->pnote )
@@ -303,7 +303,7 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
   bool mfound = FALSE;
   bool wasfound = FALSE;
 
-  if ( is_npc(ch) )
+  if ( IsNpc(ch) )
     return;
 
   if ( !ch->desc )
@@ -947,7 +947,7 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
         take = 1;
       else if ( !str_cmp( arg, "copy" ) )
         {
-          if ( !is_immortal(ch) )
+          if ( !IsImmortal(ch) )
             {
               send_to_char( "Huh?  Type 'help note' for usage.\r\n", ch );
               return;

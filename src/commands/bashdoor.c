@@ -15,7 +15,7 @@ void do_bashdoor( Character *ch, char *argument )
   EXIT_DATA *pexit = NULL;
   char arg[MAX_INPUT_LENGTH];
 
-  if ( !is_npc( ch )
+  if ( !IsNpc( ch )
        &&  ch->pcdata->learned[gsn_bashdoor] <= 0  )
     {
       send_to_char( "You're not enough of a warrior to bash doors!\r\n", ch );
@@ -56,7 +56,7 @@ void do_bashdoor( Character *ch, char *argument )
       else
         keyword = pexit->keyword;
 
-      if ( !is_npc(ch) )
+      if ( !IsNpc(ch) )
         bash_chance = ch->pcdata->learned[gsn_bashdoor] / 2;
       else
         bash_chance = 90;

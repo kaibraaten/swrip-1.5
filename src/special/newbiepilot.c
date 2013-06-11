@@ -15,7 +15,7 @@ bool spec_newbie_pilot( Character *ch )
     {
       v_next = victim->next_in_room;
 
-      if ( is_npc(victim) || victim->position == POS_FIGHTING )
+      if ( IsNpc(victim) || victim->position == POS_FIGHTING )
         continue;
 
       for ( obj = victim->last_carrying; obj; obj = obj->prev_content )

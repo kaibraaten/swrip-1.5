@@ -11,7 +11,7 @@ void do_slist( Character *ch, char *argument )
   int ability;
   int filter_ability = get_ability(argument);
 
-  if ( is_npc(ch) )
+  if ( IsNpc(ch) )
     {
       return;
     }
@@ -22,7 +22,7 @@ void do_slist( Character *ch, char *argument )
 
   for ( ability = -1 ; ability < MAX_ABILITY ; ability++ )
     {
-      if ( ability == FORCE_ABILITY && !is_immortal(ch) )
+      if ( ability == FORCE_ABILITY && !IsImmortal(ch) )
         {
           continue;
         }

@@ -18,7 +18,7 @@ void do_mwhere( Character *ch, char *argument )
   found = FALSE;
   for ( victim = first_char; victim; victim = victim->next )
     {
-      if ( is_npc(victim)
+      if ( IsNpc(victim)
            &&   victim->in_room
            &&   nifty_is_name( arg, victim->name ) )
         {

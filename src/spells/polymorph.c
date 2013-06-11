@@ -10,7 +10,7 @@ ch_ret spell_polymorph( int sn, int level, Character *ch, void *vo )
   int poly_vnum;
   Character *poly_mob;
 
-  if (is_npc(ch))
+  if (IsNpc(ch))
     {
       send_to_char("Mobs can't polymorph!\r\n", ch);
       return rSPELL_FAILED;

@@ -18,7 +18,7 @@ void do_placevendor (Character *ch, char *argument)
       return;
     }
 
-  if ( is_npc(ch) )
+  if ( IsNpc(ch) )
     return;
 
 

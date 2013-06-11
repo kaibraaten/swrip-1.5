@@ -75,7 +75,7 @@ void do_makeblade( Character *ch, char *argument )
           return;
         }
 
-      the_chance = is_npc(ch) ? ch->top_level
+      the_chance = IsNpc(ch) ? ch->top_level
         : (int) (ch->pcdata->learned[gsn_makeblade]);
 
       if ( number_percent( ) < the_chance )
@@ -107,7 +107,7 @@ void do_makeblade( Character *ch, char *argument )
 
   ch->substate = SUB_NONE;
 
-  level = is_npc(ch) ? ch->top_level : (int) (ch->pcdata->learned[gsn_makeblade]);
+  level = IsNpc(ch) ? ch->top_level : (int) (ch->pcdata->learned[gsn_makeblade]);
   vnum = 10422;
 
   if ( ( pObjIndex = get_obj_index( vnum ) ) == NULL )
@@ -153,7 +153,7 @@ void do_makeblade( Character *ch, char *argument )
         }
     }
 
-  the_chance = is_npc(ch) ? ch->top_level
+  the_chance = IsNpc(ch) ? ch->top_level
     : (int) (ch->pcdata->learned[gsn_makeblade]) ;
 
   if ( number_percent( ) > the_chance*2  || ( !checktool ) || ( !checkdura ) || ( !checkbatt ) || ( !checkoven ) )

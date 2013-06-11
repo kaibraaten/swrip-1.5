@@ -270,7 +270,7 @@ void update_missiles( void )
 
                   for ( ch = first_char; ch; ch = ch->next )
 		    {
-		      if ( !is_npc( ch ) && nifty_is_name( missile->fired_by, ch->name ) )
+		      if ( !IsNpc( ch ) && nifty_is_name( missile->fired_by, ch->name ) )
 			{
 			  ch_found = TRUE;
 			  damage_ship_ch( target, 30 + missile->missiletype * missile->missiletype * 30, 50 + missile->missiletype * missile->missiletype * missile->missiletype * 50, ch );

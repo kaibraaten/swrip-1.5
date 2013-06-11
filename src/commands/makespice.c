@@ -41,7 +41,7 @@ void do_makespice( Character *ch, char *argument )
           return;
         }
 
-      the_chance = is_npc(ch) ? ch->top_level
+      the_chance = IsNpc(ch) ? ch->top_level
         : (int) (ch->pcdata->learned[gsn_spice_refining]);
       if ( number_percent( ) < the_chance )
         {
@@ -83,7 +83,7 @@ void do_makespice( Character *ch, char *argument )
       return;
     }
 
-  obj->value[1] = URANGE (10, obj->value[1], ( is_npc(ch) ? ch->top_level
+  obj->value[1] = URANGE (10, obj->value[1], ( IsNpc(ch) ? ch->top_level
                                                : (int) (ch->pcdata->learned[gsn_spice_refining]) ) +10);
   strcpy( buf, obj->name );
   STRFREE( obj->name );

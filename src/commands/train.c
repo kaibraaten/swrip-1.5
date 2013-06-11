@@ -9,7 +9,7 @@ void do_train( Character *ch, char *argument )
   bool tfound = FALSE;
   bool successful = FALSE;
 
-  if ( is_npc(ch) )
+  if ( IsNpc(ch) )
     return;
 
   strcpy( arg, argument );
@@ -32,7 +32,7 @@ void do_train( Character *ch, char *argument )
         }
 
       for ( mob = ch->in_room->first_person; mob; mob = mob->next_in_room )
-        if ( is_npc(mob) && IS_SET(mob->act, ACT_TRAIN) )
+        if ( IsNpc(mob) && IS_SET(mob->act, ACT_TRAIN) )
           {
             tfound = TRUE;
             break;

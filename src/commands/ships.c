@@ -12,7 +12,7 @@ void do_ships( Character *ch, char *argument )
   int count = 0;
   bool owned = FALSE, set = FALSE;
 
-  if ( !is_npc(ch) )
+  if ( !IsNpc(ch) )
     {
       count = 0;
       send_to_pager( "&YThe following ships you have pilot access to:\r\n", ch );

@@ -9,7 +9,7 @@ void do_emote( Character *ch, char *argument )
   char *plast = NULL;
   int actflags = ch->act;
 
-  if ( !is_npc(ch) && IS_SET(ch->act, PLR_NO_EMOTE) )
+  if ( !IsNpc(ch) && IS_SET(ch->act, PLR_NO_EMOTE) )
     {
       send_to_char( "You can't show your emotions.\r\n", ch );
       return;
@@ -21,7 +21,7 @@ void do_emote( Character *ch, char *argument )
       return;
     }
 
-  if ( is_npc( ch ) )
+  if ( IsNpc( ch ) )
     {
       REMOVE_BIT( ch->act, ACT_SECRETIVE );
     }
@@ -48,7 +48,7 @@ void do_emote( Character *ch, char *argument )
 
   if ( IS_SET( ch->in_room->room_flags, ROOM_LOGSPEECH ) )
     {
-      sprintf( buf, "%s %s (emote)", is_npc( ch ) ? ch->short_descr : ch->name,
+      sprintf( buf, "%s %s (emote)", IsNpc( ch ) ? ch->short_descr : ch->name,
                argument );
       append_to_file( LOG_FILE, buf );
     }

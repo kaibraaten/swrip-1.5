@@ -118,7 +118,7 @@ void init_supermob()
   CREATE( supermob, Character, 1 );
   clear_char( supermob );
 
-  SET_BIT(supermob->act,ACT_is_npc);
+  SET_BIT(supermob->act,ACT_IsNpc);
   supermob->name                = STRALLOC("supermob");
   supermob->short_descr         = STRALLOC(".");
   supermob->long_descr  = STRALLOC(".");
@@ -361,7 +361,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
 	{
 	  Character *oMob = (Character*) ListIterator_GetData( iter );
 
-	  if ( is_npc(oMob) && oMob->pIndexData->vnum == vnum )
+	  if ( IsNpc(oMob) && oMob->pIndexData->vnum == vnum )
 	    {
 	      lhsvl++;
 	    }
@@ -639,11 +639,11 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
     {
       if ( !str_cmp(chck, "ismobinvis") )
         {
-          return (is_npc(chkchar) && IS_SET(chkchar->act, ACT_MOBINVIS));
+          return (IsNpc(chkchar) && IS_SET(chkchar->act, ACT_MOBINVIS));
         }
       if ( !str_cmp(chck, "mobinvislevel") )
         {
-          return (is_npc(chkchar) ?
+          return (IsNpc(chkchar) ?
                   mprog_veval(chkchar->mobinvis, opr, atoi(rval), mob) : FALSE);
         }
       if ( !str_cmp(chck, "questmob") )
@@ -660,11 +660,11 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
         }
       if ( !str_cmp(chck, "ispc") )
         {
-          return is_npc(chkchar) ? FALSE : TRUE;
+          return IsNpc(chkchar) ? FALSE : TRUE;
         }
       if ( !str_cmp(chck, "isnpc") )
         {
-          return is_npc(chkchar) ? TRUE : FALSE;
+          return IsNpc(chkchar) ? TRUE : FALSE;
         }
       if ( !str_cmp(chck, "ismounted") )
         {
@@ -738,12 +738,12 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
         }
       if ( !str_cmp(chck, "doingquest") )
         {
-          return is_npc(actor) ? FALSE :
+          return IsNpc(actor) ? FALSE :
             mprog_veval(chkchar->pcdata->quest_number, opr, atoi(rval), mob);
         }
       if ( !str_cmp(chck, "ishelled") )
         {
-          return is_npc(actor) ? FALSE :
+          return IsNpc(actor) ? FALSE :
             mprog_veval(chkchar->pcdata->release_date, opr, atoi(rval), mob);
         }
 
@@ -757,7 +757,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
         }
       if ( !str_cmp(chck, "race") )
         {
-          if ( is_npc(chkchar) )
+          if ( IsNpc(chkchar) )
             return mprog_seval((char*)npc_race[chkchar->race], opr, rval, mob);
           return mprog_seval((char *)race_table[chkchar->race].race_name, opr,
                              rval, mob);
@@ -772,21 +772,21 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
         }
       if ( !str_cmp(chck, "clan") )
         {
-          if ( is_npc(chkchar) || !is_clanned( chkchar ) )
+          if ( IsNpc(chkchar) || !is_clanned( chkchar ) )
             return FALSE;
 
           return mprog_seval(chkchar->pcdata->clan->name, opr, rval, mob);
         }
       if ( !str_cmp(chck, "class") )
         {
-          if ( is_npc(chkchar) )
+          if ( IsNpc(chkchar) )
             return FALSE;
           return mprog_seval(npc_race[chkchar->race], opr, rval, mob);
         }
 
       if ( !str_cmp(chck, "clantype") )
         {
-          if ( is_npc(chkchar) || !is_clanned( chkchar ) )
+          if ( IsNpc(chkchar) || !is_clanned( chkchar ) )
             return FALSE;
 
           return mprog_veval(chkchar->pcdata->clan->clan_type, opr, atoi(rval), mob);
@@ -908,7 +908,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
     {
       if ( chkchar )
         {
-          if ( !is_npc(chkchar) )
+          if ( !IsNpc(chkchar) )
             return FALSE;
           lhsvl = (chkchar == mob) ? chkchar->gold : chkchar->pIndexData->vnum;
           return mprog_veval(lhsvl, opr, atoi(rval), mob);
@@ -989,7 +989,7 @@ void mprog_translate( char ch, char *t, Character *mob, Character *actor,
     if ( actor && !char_died(actor) )
       {
         one_argument( actor->name, t );
-        if ( !is_npc( actor ) )
+        if ( !IsNpc( actor ) )
           *t = UPPER( *t );
       }
     else
@@ -1000,7 +1000,7 @@ void mprog_translate( char ch, char *t, Character *mob, Character *actor,
     if ( actor && !char_died(actor) )
       {
         if ( can_see( mob, actor ) )
-          if ( is_npc( actor ) )
+          if ( IsNpc( actor ) )
             strcpy( t, actor->short_descr );
           else
             {
@@ -1018,7 +1018,7 @@ void mprog_translate( char ch, char *t, Character *mob, Character *actor,
     if ( vict && !char_died(vict) )
       {
         one_argument( vict->name, t );
-        if ( !is_npc( vict ) )
+        if ( !IsNpc( vict ) )
           *t = UPPER( *t );
       }
     else
@@ -1030,7 +1030,7 @@ void mprog_translate( char ch, char *t, Character *mob, Character *actor,
     if ( vict && !char_died(vict) )
       {
         if ( can_see( mob, vict ) )
-          if ( is_npc( vict ) )
+          if ( IsNpc( vict ) )
             strcpy( t, vict->short_descr );
           else
             {
@@ -1049,7 +1049,7 @@ void mprog_translate( char ch, char *t, Character *mob, Character *actor,
     if ( rndm && !char_died(rndm) )
       {
         one_argument( rndm->name, t );
-        if ( !is_npc( rndm ) )
+        if ( !IsNpc( rndm ) )
           {
             *t = UPPER( *t );
           }
@@ -1062,7 +1062,7 @@ void mprog_translate( char ch, char *t, Character *mob, Character *actor,
     if ( rndm && !char_died(rndm) )
       {
         if ( can_see( mob, rndm ) )
-          if ( is_npc( rndm ) )
+          if ( IsNpc( rndm ) )
             strcpy(t,rndm->short_descr);
           else
             {
@@ -1348,7 +1348,7 @@ void mprog_driver ( char *com_list, Character *mob, Character *actor,
     {
       Character *vch = (Character*) ListIterator_GetData( peopleInRoomIterator );
 
-      if ( !is_npc( vch ) )
+      if ( !IsNpc( vch ) )
 	{
 	  if ( number_range( 0, count ) == 0 )
 	    {
@@ -1882,12 +1882,12 @@ void mprog_act_trigger( char *buf, Character *mob, Character *ch,
   MPROG_DATA *mprg;
   bool found = FALSE;
 
-  if ( is_npc( mob )
+  if ( IsNpc( mob )
        &&   IS_SET( mob->pIndexData->mprog.progtypes, ACT_PROG ) )
     {
       /* Don't let a mob trigger itself, nor one instance of a mob
          trigger another instance. */
-      if ( is_npc( ch ) && ch->pIndexData == mob->pIndexData )
+      if ( IsNpc( ch ) && ch->pIndexData == mob->pIndexData )
         return;
 
       /* make sure this is a matching trigger */
@@ -1925,12 +1925,12 @@ void mprog_bribe_trigger( Character *mob, Character *ch, int amount )
   MPROG_DATA *mprg;
   OBJ_DATA   *obj;
 
-  if ( is_npc( mob )
+  if ( IsNpc( mob )
        && ( mob->pIndexData->mprog.progtypes & BRIBE_PROG ) )
     {
       /* Don't let a mob trigger itself, nor one instance of a mob
          trigger another instance. */
-      if ( is_npc( ch ) && ch->pIndexData == mob->pIndexData )
+      if ( IsNpc( ch ) && ch->pIndexData == mob->pIndexData )
         return;
 
       obj = create_object( get_obj_index( OBJ_VNUM_MONEY_SOME ), 0 );
@@ -1956,7 +1956,7 @@ void mprog_bribe_trigger( Character *mob, Character *ch, int amount )
 
 void mprog_death_trigger( Character *killer, Character *mob )
 {
-  if ( is_npc( mob ) && killer != mob
+  if ( IsNpc( mob ) && killer != mob
        && ( mob->pIndexData->mprog.progtypes & DEATH_PROG ) )
     {
       mprog_percent_check( mob, killer, NULL, NULL, DEATH_PROG );
@@ -1968,7 +1968,7 @@ void mprog_death_trigger( Character *killer, Character *mob )
 void mprog_entry_trigger( Character *mob )
 {
 
-  if ( is_npc( mob )
+  if ( IsNpc( mob )
        && ( mob->pIndexData->mprog.progtypes & ENTRY_PROG ) )
     mprog_percent_check( mob, NULL, NULL, NULL, ENTRY_PROG );
 
@@ -1979,7 +1979,7 @@ void mprog_entry_trigger( Character *mob )
 void mprog_fight_trigger( Character *mob, Character *ch )
 {
 
-  if ( is_npc( mob )
+  if ( IsNpc( mob )
        && ( mob->pIndexData->mprog.progtypes & FIGHT_PROG ) )
     mprog_percent_check( mob, ch, NULL, NULL, FIGHT_PROG );
 
@@ -1992,12 +1992,12 @@ void mprog_give_trigger( Character *mob, Character *ch, OBJ_DATA *obj )
   char buf[MAX_INPUT_LENGTH];
   MPROG_DATA *mprg;
 
-  if ( is_npc( mob )
+  if ( IsNpc( mob )
        && ( mob->pIndexData->mprog.progtypes & GIVE_PROG ) )
     {
       /* Don't let a mob trigger itself, nor one instance of a mob
          trigger another instance. */
-      if ( is_npc( ch ) && ch->pIndexData == mob->pIndexData )
+      if ( IsNpc( ch ) && ch->pIndexData == mob->pIndexData )
         return;
 
       for ( mprg = mob->pIndexData->mprog.mudprogs; mprg; mprg = mprg->next )
@@ -2021,14 +2021,14 @@ static void TriggerOnGreet( void *element, void *userData )
   Character *vmob = (Character*) element;
   Character *ch = (Character*) userData;
 
-  if ( !is_npc( vmob ) || vmob->fighting || !is_awake( vmob ) )
+  if ( !IsNpc( vmob ) || vmob->fighting || !is_awake( vmob ) )
     {
       return;
     }
 
   /* Don't let a mob trigger itself, nor one instance of a mob
      trigger another instance. */
-  if ( is_npc( ch ) && ch->pIndexData == vmob->pIndexData )
+  if ( IsNpc( ch ) && ch->pIndexData == vmob->pIndexData )
     {
       return;
     }
@@ -2054,7 +2054,7 @@ void mprog_hitprcnt_trigger( Character *mob, Character *ch)
 {
   MPROG_DATA *mprg;
 
-  if ( is_npc( mob )
+  if ( IsNpc( mob )
        && ( mob->pIndexData->mprog.progtypes & HITPRCNT_PROG ) )
     for ( mprg = mob->pIndexData->mprog.mudprogs; mprg; mprg = mprg->next )
       if ( ( mprg->type & HITPRCNT_PROG )
@@ -2100,9 +2100,9 @@ static void TriggerOnSpeech( void *element, void *userData )
   Character *actor = args->Actor;
   char *txt = args->Text;
 
-  if ( is_npc( vmob ) && ( vmob->pIndexData->mprog.progtypes & SPEECH_PROG ) )
+  if ( IsNpc( vmob ) && ( vmob->pIndexData->mprog.progtypes & SPEECH_PROG ) )
     {
-      if ( is_npc( actor ) && actor->pIndexData == vmob->pIndexData )
+      if ( IsNpc( actor ) && actor->pIndexData == vmob->pIndexData )
 	{
 	  return;
 	}
@@ -3073,9 +3073,9 @@ Character *get_char_room_mp( Character *ch, char *argument )
       Character *person = (Character*) ListIterator_GetData( iter );
 
       if ( (nifty_is_name( arg, person->name )
-	    || (is_npc(person) && vnum == person->pIndexData->vnum)) )
+	    || (IsNpc(person) && vnum == person->pIndexData->vnum)) )
 	{
-	  if ( number == 0 && !is_npc(person) )
+	  if ( number == 0 && !IsNpc(person) )
 	    {
 	      DestroyListIterator( iter );
 	      return person;
@@ -3105,7 +3105,7 @@ Character *get_char_room_mp( Character *ch, char *argument )
 	  continue;
 	}
 
-      if ( number == 0 && !is_npc(person) )
+      if ( number == 0 && !IsNpc(person) )
 	{
 	  DestroyListIterator( iter );
 	  return person;

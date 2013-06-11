@@ -8,7 +8,7 @@ void do_reinforcements( Character *ch, char *argument )
   char arg[MAX_INPUT_LENGTH];
   int the_chance, credits;
 
-  if ( is_npc( ch ) )
+  if ( IsNpc( ch ) )
     return;
 
   strcpy( arg, argument );

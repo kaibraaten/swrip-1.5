@@ -18,7 +18,7 @@ void do_berserk( Character *ch, char *argument )
       return;
     }
 
-  percent = is_npc(ch) ? 80 : ch->pcdata->learned[gsn_berserk];
+  percent = IsNpc(ch) ? 80 : ch->pcdata->learned[gsn_berserk];
   set_wait_state(ch, skill_table[gsn_berserk]->beats);
   if ( !chance(ch, percent) )
     {

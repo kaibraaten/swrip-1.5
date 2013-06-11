@@ -255,7 +255,7 @@ void interpret( Character *ch, char *argument )
       /*
        * Implement freeze command.
        */
-      if ( !is_npc(ch) && IS_SET(ch->act, PLR_FREEZE) )
+      if ( !IsNpc(ch) && IS_SET(ch->act, PLR_FREEZE) )
         {
           send_to_char( "You're totally frozen!\r\n", ch );
           return;
@@ -272,7 +272,7 @@ void interpret( Character *ch, char *argument )
         argument = get_multi_command( ch->desc, argument );
 
 
-      if ( !is_npc(ch) && ch->pcdata && ch->pcdata->target )
+      if ( !IsNpc(ch) && ch->pcdata && ch->pcdata->target )
         if ( ch->pcdata->target[0] != '\0' )
           if( index(argument, '$'))
             argument = parse_target(ch, argument);
@@ -297,7 +297,7 @@ void interpret( Character *ch, char *argument )
       for ( cmd = command_hash[LOWER(command[0])%126]; cmd; cmd = cmd->next )
         if ( !str_prefix( command, cmd->name )
              &&   (cmd->level <= trust
-                   ||  (!is_npc(ch) && ch->pcdata->bestowments && ch->pcdata->bestowments[0] != '\0'
+                   ||  (!IsNpc(ch) && ch->pcdata->bestowments && ch->pcdata->bestowments[0] != '\0'
                         &&    is_name( cmd->name, ch->pcdata->bestowments )
                         &&    cmd->level <= (trust+5)) ) )
           {
@@ -325,7 +325,7 @@ void interpret( Character *ch, char *argument )
 
   loglvl = found ? cmd->log : LOG_NORMAL;
 
-  if ( ( !is_npc(ch) && IS_SET(ch->act, PLR_LOG) )
+  if ( ( !IsNpc(ch) && IS_SET(ch->act, PLR_LOG) )
        ||   fLogAll
        ||        loglvl == LOG_BUILD
        ||   loglvl == LOG_HIGH
@@ -344,7 +344,7 @@ void interpret( Character *ch, char *argument )
        * file only, and not spam the log channel to death       -Thoric
        */
       if ( fLogAll && loglvl == LOG_NORMAL
-           &&  (is_npc(ch) || !IS_SET(ch->act, PLR_LOG)) )
+           &&  (IsNpc(ch) || !IS_SET(ch->act, PLR_LOG)) )
         loglvl = LOG_ALL;
 
       /* This is handled in get_trust already */
@@ -504,7 +504,7 @@ bool check_social( Character *ch, char *command, char *argument )
   if ( (social=find_social(command)) == NULL )
     return FALSE;
 
-  if ( !is_npc(ch) && IS_SET(ch->act, PLR_NO_EMOTE) )
+  if ( !IsNpc(ch) && IS_SET(ch->act, PLR_NO_EMOTE) )
     {
       send_to_char( "You are anti-social!\r\n", ch );
       return TRUE;
@@ -559,7 +559,7 @@ bool check_social( Character *ch, char *command, char *argument )
       act( AT_SOCIAL, social->char_found,    ch, NULL, victim, TO_CHAR    );
       act( AT_SOCIAL, social->vict_found,    ch, NULL, victim, TO_VICT    );
 
-      if ( !is_npc(ch) && is_npc(victim)
+      if ( !IsNpc(ch) && IsNpc(victim)
            &&   !is_affected_by(victim, AFF_CHARM)
            &&   is_awake(victim)
            &&   !IS_SET( victim->pIndexData->mprog.progtypes, ACT_PROG ) )

@@ -22,7 +22,7 @@ ch_ret spell_charm_person( int sn, int level, Character *ch, void *vo )
       return rSPELL_FAILED;
     }
 
-  if ( (!is_npc( victim ) && !is_npc( ch )) || ch->race == RACE_DROID )
+  if ( (!IsNpc( victim ) && !IsNpc( ch )) || ch->race == RACE_DROID )
     {
       send_to_char( "I don't think so...\r\n", ch );
       send_to_char( "You feel as if someone tried to enter your mind but failed..\r\n", victim );

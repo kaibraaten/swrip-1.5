@@ -118,7 +118,7 @@ void do_makelightsaber( Character *ch, char *argument )
           return;
         }
 
-      the_chance = is_npc(ch) ? ch->top_level
+      the_chance = IsNpc(ch) ? ch->top_level
         : (int) (ch->pcdata->learned[gsn_lightsaber_crafting]);
       if ( number_percent( ) < the_chance )
         {
@@ -149,7 +149,7 @@ void do_makelightsaber( Character *ch, char *argument )
 
   ch->substate = SUB_NONE;
 
-  level = is_npc(ch) ? ch->top_level : (int) (ch->pcdata->learned[gsn_lightsaber_crafting]);
+  level = IsNpc(ch) ? ch->top_level : (int) (ch->pcdata->learned[gsn_lightsaber_crafting]);
   vnum = 10421;
 
   if ( ( pObjIndex = get_obj_index( vnum ) ) == NULL )
@@ -239,7 +239,7 @@ void do_makelightsaber( Character *ch, char *argument )
         }
     }
 
-  the_chance = is_npc(ch) ? ch->top_level
+  the_chance = IsNpc(ch) ? ch->top_level
     : (int) (ch->pcdata->learned[gsn_lightsaber_crafting]) ;
 
   if ( number_percent( ) > the_chance*2  || ( !checktool ) || ( !checkdura ) || ( !checkbatt ) || ( !checkoven )

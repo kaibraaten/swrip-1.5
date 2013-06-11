@@ -47,7 +47,7 @@ void do_brandish( Character *ch, char *argument )
 	{
 	  Character *vch = (Character*) ListIterator_GetData( iter );
 
-          if ( !is_npc( vch ) && IS_SET( vch->act, PLR_WIZINVIS )
+          if ( !IsNpc( vch ) && IS_SET( vch->act, PLR_WIZINVIS )
                && vch->pcdata->wizinvis >= LEVEL_IMMORTAL )
 	    {
 	      continue;
@@ -66,12 +66,12 @@ void do_brandish( Character *ch, char *argument )
 		  break;
 
 		case TAR_CHAR_OFFENSIVE:
-		  if ( is_npc(ch) ? is_npc(vch) : !is_npc(vch) )
+		  if ( IsNpc(ch) ? IsNpc(vch) : !IsNpc(vch) )
 		    continue;
 		  break;
 
 		case TAR_CHAR_DEFENSIVE:
-		  if ( is_npc(ch) ? !is_npc(vch) : is_npc(vch) )
+		  if ( IsNpc(ch) ? !IsNpc(vch) : IsNpc(vch) )
 		    continue;
 		  break;
 

@@ -148,7 +148,7 @@ void make_corpse( Character *ch, Character *killer )
   OBJ_DATA *obj_next;
   char *name;
 
-  if ( is_npc(ch) )
+  if ( IsNpc(ch) )
     {
       name              = ch->short_descr;
       if ( IS_SET ( ch->act , ACT_DROID ) )

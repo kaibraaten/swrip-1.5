@@ -11,7 +11,7 @@ void do_mpgoto( Character *ch, char *argument )
   if ( is_affected_by( ch, AFF_CHARM ) )
     return;
 
-  if ( !is_npc( ch ) )
+  if ( !IsNpc( ch ) )
     {
       send_to_char( "Huh?\r\n", ch );
       return;

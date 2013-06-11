@@ -23,13 +23,13 @@ void do_delay( Character *ch, char *argument )
       return;
     }
 
-  if ( is_npc( victim ) )
+  if ( IsNpc( victim ) )
     {
       send_to_char( "Mobiles are unaffected by lag.\r\n", ch );
       return;
     }
 
-  if ( !is_npc(victim) && get_trust( victim ) >= get_trust( ch ) )
+  if ( !IsNpc(victim) && get_trust( victim ) >= get_trust( ch ) )
     {
       send_to_char( "You haven't the power to succeed against them.\r\n", ch );
       return;

@@ -515,7 +515,7 @@ typedef enum
  * ACT bits for mobs.
  * Used in #MOBILES.
  */
-#define ACT_is_npc               BV00           /* Auto set for mobs    */
+#define ACT_IsNpc               BV00           /* Auto set for mobs    */
 #define ACT_SENTINEL             BV01           /* Stays in one room    */
 #define ACT_SCAVENGER            BV02           /* Picks up objects     */
 #define ACT_AGGRESSIVE           BV05           /* Attacks PC's         */
@@ -1370,7 +1370,7 @@ typedef enum
 /*
  * ACT bits for players.
  */
-#define PLR_is_npc                    BV00      /* Don't EVER set.      */
+#define PLR_IsNpc                    BV00      /* Don't EVER set.      */
 #define PLR_BOUGHT_PET                BV01
 #define PLR_SHOVEDRAG                 BV02
 #define PLR_AUTOEXIT                  BV03

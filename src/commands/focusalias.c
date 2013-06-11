@@ -11,7 +11,7 @@ void do_focusalias( Character *ch, char *argument)
   smash_tilde(argument);
   one_argument( argument, arg );
 
-  if ( is_npc(ch) )
+  if ( IsNpc(ch) )
     {
       send_to_char("Alias focuses are for players!\r\n", ch);
       return;

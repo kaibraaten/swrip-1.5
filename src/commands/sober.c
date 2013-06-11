@@ -20,7 +20,7 @@ void do_sober( Character *ch, char *argument )
       return;
     }
 
-  if ( is_npc( victim ) )
+  if ( IsNpc( victim ) )
     {
       send_to_char( "Not on mobs.\r\n", ch );
       return;

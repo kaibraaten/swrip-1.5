@@ -24,7 +24,7 @@ bool spec_clan_guard( Character *ch )
       if ( get_timer(victim, TIMER_RECENTFIGHT) > 0 )
         continue;
 
-      if ( !is_npc( victim ) && victim->pcdata && is_clanned( victim ) && clan && is_awake(victim)
+      if ( !IsNpc( victim ) && victim->pcdata && is_clanned( victim ) && clan && is_awake(victim)
            && (clan != victim->pcdata->clan )
            && ( !victim->pcdata->clan->mainclan || clan != victim->pcdata->clan->mainclan )
            && ( !clan->mainclan || clan->mainclan != victim->pcdata->clan ) )

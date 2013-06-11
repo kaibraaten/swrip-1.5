@@ -354,7 +354,7 @@ void actiondesc( Character *ch, OBJ_DATA *obj, void *vo )
       else if ( *srcptr == '%' && *++srcptr == 's' )
         {
           ichar = "You";
-          iroom = is_npc( ch ) ? ch->short_descr : ch->name;
+          iroom = IsNpc( ch ) ? ch->short_descr : ch->name;
         }
       else
         {

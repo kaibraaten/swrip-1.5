@@ -20,7 +20,7 @@ void do_kill( Character *ch, char *argument )
       return;
     }
 
-  if ( !is_npc(victim) )
+  if ( !IsNpc(victim) )
     {
       send_to_char( "You must MURDER a player.\r\n", ch );
       return;

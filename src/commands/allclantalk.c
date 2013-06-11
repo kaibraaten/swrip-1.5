@@ -9,7 +9,7 @@ void do_allclantalk( Character *ch, char *argument )
       return;
     }
 
-  if ( is_npc( ch ) || !is_clanned( ch ) )
+  if ( IsNpc( ch ) || !is_clanned( ch ) )
     {
       send_to_char( "Huh?\r\n", ch );
       return;

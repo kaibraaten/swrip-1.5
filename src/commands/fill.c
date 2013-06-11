@@ -244,7 +244,7 @@ void do_fill( Character *ch, char *argument )
           send_to_char( "You can't do that... yet.\r\n", ch );
           break;
         case ITEM_CORPSE_PC:
-          if ( is_npc(ch) )
+          if ( IsNpc(ch) )
             {
               send_to_char( "You can't do that.\r\n", ch );
               return;
@@ -255,14 +255,14 @@ void do_fill( Character *ch, char *argument )
           pd = one_argument( pd, name );
           pd = one_argument( pd, name );
 
-	  if ( str_cmp( name, ch->name ) && !is_immortal(ch) )
+	  if ( str_cmp( name, ch->name ) && !IsImmortal(ch) )
             {
               bool fGroup;
 
               fGroup = FALSE;
               for ( gch = first_char; gch; gch = gch->next )
                 {
-                  if ( !is_npc(gch)
+                  if ( !IsNpc(gch)
                        &&   is_same_group( ch, gch )
                        &&   !str_cmp( name, gch->name ) )
                     {

@@ -5,7 +5,7 @@ void do_arm( Character *ch, char *argument )
 {
   OBJ_DATA *obj;
 
-  if ( is_npc(ch) || !ch->pcdata )
+  if ( IsNpc(ch) || !ch->pcdata )
     {
       ch_printf( ch, "Mob's cant do that!\r\n" );
       return;

@@ -12,7 +12,7 @@ void do_password( Character *ch, char *argument )
   char *p;
   char cEnd;
 
-  if ( is_npc(ch) )
+  if ( IsNpc(ch) )
     return;
 
   /*

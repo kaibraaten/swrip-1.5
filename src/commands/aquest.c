@@ -11,7 +11,7 @@ static Character *GetQuestmaster( const ROOM_INDEX_DATA *room )
     {
       Character *current = (Character*) ListIterator_GetData( iter );
 
-      if( !is_npc( current ) )
+      if( !IsNpc( current ) )
 	{
 	  continue;
 	}

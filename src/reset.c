@@ -982,7 +982,7 @@ void instaroom( AREA_DATA *pArea, ROOM_INDEX_DATA *pRoom, bool dodoors )
     {
       Character *rch = (Character*) ListIterator_GetData( peopleInRoomIterator );
 
-      if ( !is_npc(rch) )
+      if ( !IsNpc(rch) )
 	{
 	  continue;
 	}
@@ -1317,7 +1317,7 @@ void reset_area( AREA_DATA *pArea )
                     }
                   if ( pArea->nplayer > 0 ||
                        !(to_obj = get_obj_type(pObjToIndex)) ||
-                       (to_obj->carried_by && !is_npc(to_obj->carried_by)) ||
+                       (to_obj->carried_by && !IsNpc(to_obj->carried_by)) ||
                        is_trapped(to_obj) )
                     break;
                 }

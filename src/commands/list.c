@@ -6,7 +6,7 @@ static bool IsPet( void *element, void *userData )
 {
   const Character *pet = (Character*) element;
 
-  return IS_SET( pet->act, ACT_PET ) && is_npc( pet );
+  return IS_SET( pet->act, ACT_PET ) && IsNpc( pet );
 }
 
 static void ShowPetForSale( void *element, void *userData )

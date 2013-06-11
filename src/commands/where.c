@@ -27,7 +27,7 @@ void do_where( Character *ch, char *argument )
       for ( d = first_descriptor; d; d = d->next )
         if ( (d->connection_state == CON_PLAYING || d->connection_state == CON_EDITING )
              && ( victim = d->character ) != NULL
-             &&   !is_npc(victim)
+             &&   !IsNpc(victim)
              &&   victim->in_room
              &&   (victim->in_room->area == ch->in_room->area || get_trust(ch) >= LEVEL_IMMORTAL )
              &&   can_see( ch, victim ) )

@@ -10,7 +10,7 @@ ch_ret spell_faerie_fog( int sn, int level, Character *ch, void *vo )
 
   for ( ich = ch->in_room->first_person; ich; ich = ich->next_in_room )
     {
-      if ( !is_npc(ich) && IS_SET(ich->act, PLR_WIZINVIS) )
+      if ( !IsNpc(ich) && IS_SET(ich->act, PLR_WIZINVIS) )
         continue;
 
       if ( ich == ch || saves_spell_staff( level, ich ) )

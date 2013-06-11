@@ -14,7 +14,7 @@ void do_olist( Character *ch, char *argument )
   /*
    * Greater+ can list out of assigned range - Tri (mlist/rlist as well)
    */
-  if ( is_npc(ch) || get_trust( ch ) < LEVEL_CREATOR || !ch->pcdata
+  if ( IsNpc(ch) || get_trust( ch ) < LEVEL_CREATOR || !ch->pcdata
        || ( !ch->pcdata->area && get_trust( ch ) < LEVEL_GREATER ) )
     {
       send_to_char( "You don't have an assigned area.\r\n", ch );

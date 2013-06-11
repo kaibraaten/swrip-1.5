@@ -24,7 +24,7 @@ void do_hitall( Character *ch, char *argument )
       return;
     }
 
-  percent = is_npc(ch) ? 80 : ch->pcdata->learned[gsn_hitall];
+  percent = IsNpc(ch) ? 80 : ch->pcdata->learned[gsn_hitall];
 
   peopleInRoom = List_Copy( ch->in_room->People );
   peopleInRoomIterator = CreateListIterator( peopleInRoom, ForwardsIterator );
@@ -93,7 +93,7 @@ void do_hitall( Character *ch, char *argument )
 
 static bool is_legal_kill(Character *ch, Character *vch)
 {
-  if ( is_npc(ch) || is_npc(vch) )
+  if ( IsNpc(ch) || IsNpc(vch) )
     {
       return TRUE;
     }

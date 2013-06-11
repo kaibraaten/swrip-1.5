@@ -12,7 +12,7 @@ void do_whois( Character *ch, char *argument)
 
   buf[0] = '\0';
 
-  if(is_npc(ch))
+  if(IsNpc(ch))
     return;
 
   if(argument[0] == '\0')
@@ -30,7 +30,7 @@ void do_whois( Character *ch, char *argument)
       return;
     }
 
-  if(is_npc(victim))
+  if(IsNpc(victim))
     {
       send_to_char("That's not a player!\r\n", ch);
       return;
@@ -60,7 +60,7 @@ void do_whois( Character *ch, char *argument)
 
   if ( is_clanned( victim )
        && ( ( is_clanned( ch ) && ch->pcdata->clan == victim->pcdata->clan )
-	    || is_immortal( ch ) ) )
+	    || IsImmortal( ch ) ) )
     {
       if ( victim->pcdata->clan->clan_type == CLAN_CRIME )
         send_to_char( ", and belongs to the crime family ", ch );

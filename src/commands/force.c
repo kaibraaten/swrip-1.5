@@ -30,7 +30,7 @@ void do_force( Character *ch, char *argument )
         {
           vch_next = vch->next;
 
-          if ( !is_npc(vch) && get_trust( vch ) < get_trust( ch ) )
+          if ( !IsNpc(vch) && get_trust( vch ) < get_trust( ch ) )
             {
               act( AT_IMMORT, "$n forces you to '$t'.", ch, argument, vch, TO_VICT );
               interpret( vch, argument );
@@ -54,7 +54,7 @@ void do_force( Character *ch, char *argument )
         }
 
       if ( ( get_trust( victim ) >= get_trust( ch ) )
-           || ( mobsonly && !is_npc( victim ) ) )
+           || ( mobsonly && !IsNpc( victim ) ) )
         {
           send_to_char( "Do it yourself!\r\n", ch );
           return;

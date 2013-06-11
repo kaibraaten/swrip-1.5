@@ -15,7 +15,7 @@ void do_search( Character *ch, char *argument )
   switch( ch->substate )
     {
     default:
-      if ( is_npc(ch) && is_affected_by( ch, AFF_CHARM ) )
+      if ( IsNpc(ch) && is_affected_by( ch, AFF_CHARM ) )
         {
           send_to_char( "You can't concentrate enough for that.\r\n", ch );
           return;
@@ -92,7 +92,7 @@ void do_search( Character *ch, char *argument )
 
   found = FALSE;
 
-  if ( (!startobj && door == -1) || is_npc(ch) )
+  if ( (!startobj && door == -1) || IsNpc(ch) )
     {
       send_to_char( "You find nothing.\r\n", ch );
       learn_from_failure( ch, gsn_search );
@@ -108,7 +108,7 @@ void do_search( Character *ch, char *argument )
       if ( (pexit = get_exit( ch->in_room, door )) != NULL
            &&   IS_SET( pexit->exit_info, EX_SECRET )
            &&   IS_SET( pexit->exit_info, EX_xSEARCHABLE )
-           &&   percent < (is_npc(ch) ? 80 : ch->pcdata->learned[gsn_search]) )
+           &&   percent < (IsNpc(ch) ? 80 : ch->pcdata->learned[gsn_search]) )
         {
           act( AT_SKILL, "Your search reveals the $d!", ch, NULL, pexit->keyword, TO_CHAR );
           act( AT_SKILL, "$n finds the $d!", ch, NULL, pexit->keyword, TO_ROOM );

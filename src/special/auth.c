@@ -14,7 +14,7 @@ bool spec_auth( Character *ch )
     {
       v_next = victim->next_in_room;
 
-      if ( !is_npc(victim) && ( pObjIndex = get_obj_index( OBJ_VNUM_SCHOOL_DIPLOMA ) ) != NULL )
+      if ( !IsNpc(victim) && ( pObjIndex = get_obj_index( OBJ_VNUM_SCHOOL_DIPLOMA ) ) != NULL )
         {
           hasdiploma = FALSE;
 
@@ -30,7 +30,7 @@ bool spec_auth( Character *ch )
             }
         }
 
-      if ( is_npc(victim)
+      if ( IsNpc(victim)
            ||   !IS_SET(victim->pcdata->flags, PCFLAG_UNAUTHED) || victim->pcdata->auth_state == 2 )
         continue;
 

@@ -9,7 +9,7 @@ ch_ret spell_blindness( int sn, int level, Character *ch, void *vo )
   SKILLTYPE *skill = get_skilltype(sn);
 
   if ( SPELL_FLAG(skill, SF_PKSENSITIVE)
-       &&  !is_npc(ch) && !is_npc(victim) )
+       &&  !IsNpc(ch) && !IsNpc(victim) )
     tmp = level;
   else
     tmp = level;

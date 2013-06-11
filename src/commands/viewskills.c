@@ -23,7 +23,7 @@ void do_viewskills( Character *ch, char *argument )
 
   col = 0;
 
-  if ( !is_npc( victim ) )
+  if ( !IsNpc( victim ) )
     {
       set_char_color( AT_MAGIC, ch );
       for ( sn = 0; sn < top_sn && skill_table[sn] && skill_table[sn]->name; sn++ )

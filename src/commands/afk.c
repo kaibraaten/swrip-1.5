@@ -3,7 +3,7 @@
 
 void do_afk( Character *ch, char *argument )
 {
-  if ( is_npc(ch) )
+  if ( IsNpc(ch) )
     return;
 
   if(IS_SET(ch->act, PLR_AFK))

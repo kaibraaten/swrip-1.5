@@ -79,7 +79,7 @@ void do_makelight( Character *ch, char *argument )
           return;
         }
 
-      the_chance = is_npc(ch) ? ch->top_level
+      the_chance = IsNpc(ch) ? ch->top_level
         : (int) (ch->pcdata->learned[gsn_makelight]);
 
       if ( number_percent( ) < the_chance )
@@ -111,7 +111,7 @@ void do_makelight( Character *ch, char *argument )
 
   ch->substate = SUB_NONE;
 
-  level = is_npc(ch) ? ch->top_level : (int) (ch->pcdata->learned[gsn_makelight]);
+  level = IsNpc(ch) ? ch->top_level : (int) (ch->pcdata->learned[gsn_makelight]);
   vnum = 10428;
 
   if ( ( pObjIndex = get_obj_index( vnum ) ) == NULL )
@@ -161,7 +161,7 @@ void do_makelight( Character *ch, char *argument )
         }
     }
 
-  the_chance = is_npc(ch) ? ch->top_level
+  the_chance = IsNpc(ch) ? ch->top_level
     : (int) (ch->pcdata->learned[gsn_makelight]) ;
 
   if ( number_percent( ) > the_chance*2  || ( !checktool ) || ( !checklens ) || ( !checkbatt ) || ( !checkchem ) || ( !checkcirc) )

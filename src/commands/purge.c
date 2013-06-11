@@ -47,7 +47,7 @@ void do_purge( Character *ch, char *argument )
     }
 
 
-  if ( !is_npc(victim) )
+  if ( !IsNpc(victim) )
     {
       send_to_char( "Not on PC's.\r\n", ch );
       return;
@@ -74,7 +74,7 @@ static void ExtractMobileIfNotPolymorphed( void *element, void *userData )
   Character *victim = (Character*) element;
   const Character *purger = userData;
 
-  if ( is_npc(victim) && victim != purger && !IS_SET(victim->act, ACT_POLYMORPHED))
+  if ( IsNpc(victim) && victim != purger && !IS_SET(victim->act, ACT_POLYMORPHED))
     {
       extract_char( victim, TRUE );
     }

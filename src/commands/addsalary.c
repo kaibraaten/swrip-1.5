@@ -10,7 +10,7 @@ void do_addsalary ( Character *ch , char *argument )
   Clan *clan;
   int salary;
 
-  if ( is_npc( ch ) || !is_clanned( ch ) )
+  if ( IsNpc( ch ) || !is_clanned( ch ) )
     {
       send_to_char( "Huh?\r\n", ch );
       return;
@@ -45,7 +45,7 @@ void do_addsalary ( Character *ch , char *argument )
       return;
     }
 
-  if ( is_npc(victim) )
+  if ( IsNpc(victim) )
     {
       send_to_char( "Not on NPC's.\r\n", ch );
       return;

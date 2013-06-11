@@ -25,7 +25,7 @@ void do_mpstat( Character *ch, char *argument )
       return;
     }
 
-  if ( !is_npc( victim ) )
+  if ( !IsNpc( victim ) )
     {
       send_to_char( "Only Mobiles can have MobPrograms!\r\n", ch);
       return;

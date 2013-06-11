@@ -15,7 +15,7 @@ void do_addpilot(Character *ch, char *argument )
 
   the_chance = number_percent( );
 
-  if ( is_npc(ch) || the_chance >= ch->pcdata->learned[gsn_slicing] )
+  if ( IsNpc(ch) || the_chance >= ch->pcdata->learned[gsn_slicing] )
     {
       if ( !check_pilot( ch , ship ) )
         {

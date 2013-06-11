@@ -204,7 +204,7 @@ void find_game_winner()
         continue;
 
       if (i->in_room && IS_SET(i->in_room->room_flags,ROOM_ARENA)
-          && !is_immortal(i))
+          && !IsImmortal(i))
         {
           char_from_room(i);
           char_to_room(i,get_room_index(i->retran));
@@ -329,7 +329,7 @@ int num_in_arena()
 
       if (i->in_room && IS_SET(i->in_room->room_flags,ROOM_ARENA))
         {
-          if (!is_immortal(i)
+          if (!IsImmortal(i)
               && i->hit > 1)
             num++;
         }
@@ -402,7 +402,7 @@ void find_bet_winners(Character *winner)
         if (wch == NULL)
           continue;
 
-        if ((!is_npc(wch)) && (GET_BET_AMT(wch) > 0) && (GET_BETTED_ON(wch) == winner))
+        if ((!IsNpc(wch)) && (GET_BET_AMT(wch) > 0) && (GET_BETTED_ON(wch) == winner))
           {
             sprintf(buf1, "You have won %d credits on your bet.\r\n",(GET_BET_AMT(wch))*2);
             send_to_char(buf1, wch);
@@ -426,7 +426,7 @@ void reset_bets()
       if (ch == NULL)
         continue;
 
-      if (!is_npc(ch))
+      if (!IsNpc(ch))
         {
           GET_BETTED_ON(ch) = NULL;
           GET_BET_AMT(ch) = 0;

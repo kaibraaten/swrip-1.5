@@ -5,7 +5,7 @@ void do_revert(Character *ch, char *argument)
 {
   Character *mob;
 
-  if ( !is_npc(ch) || !IS_SET(ch->act, ACT_POLYMORPHED) )
+  if ( !IsNpc(ch) || !IS_SET(ch->act, ACT_POLYMORPHED) )
     {
       send_to_char("You are not polymorphed.\r\n", ch);
       return;

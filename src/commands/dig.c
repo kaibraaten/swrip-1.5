@@ -13,7 +13,7 @@ void do_dig( Character *ch, char *argument )
   switch( ch->substate )
     {
     default:
-      if ( is_npc(ch)  && is_affected_by( ch, AFF_CHARM ) )
+      if ( IsNpc(ch)  && is_affected_by( ch, AFF_CHARM ) )
         {
           send_to_char( "You can't concentrate enough for that.\r\n", ch );
           return;
@@ -107,7 +107,7 @@ void do_dig( Character *ch, char *argument )
         {
           /* 4 times harder to dig open a passage without a shovel */
           if ( (number_percent() * (shovel ? 1 : 4)) <
-               (is_npc(ch) ? 80 : ch->pcdata->learned[gsn_dig]) )
+               (IsNpc(ch) ? 80 : ch->pcdata->learned[gsn_dig]) )
             {
               REMOVE_BIT( pexit->exit_info, EX_CLOSED );
               send_to_char( "You dig open a passageway!\r\n", ch );
@@ -130,7 +130,7 @@ void do_dig( Character *ch, char *argument )
       /* twice as hard to find something without a shovel */
       if ( IS_OBJ_STAT( obj, ITEM_BURRIED )
            &&  (number_percent() * (shovel ? 1 : 2)) <
-           (is_npc(ch) ? 80 : ch->pcdata->learned[gsn_dig]) )
+           (IsNpc(ch) ? 80 : ch->pcdata->learned[gsn_dig]) )
         {
           found = TRUE;
           break;

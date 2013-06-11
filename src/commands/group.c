@@ -28,7 +28,7 @@ void do_group( Character *ch, char *argument )
                 ch_printf( ch,
                            "[%2d %s] %-16s %4s/%4s hp %4s/%4s mv %5s xp\r\n",
                            gch->top_level,
-                           is_npc(gch) ? "Mob" : race_table[gch->race].race_name,
+                           IsNpc(gch) ? "Mob" : race_table[gch->race].race_name,
                            capitalize( PERS(gch, ch) ),
 			   "????",
                            "????",
@@ -40,7 +40,7 @@ void do_group( Character *ch, char *argument )
                 ch_printf( ch,
                            "[%2d %s] %-16s %4d/%4d hp %4d/%4d mv\r\n",
                            gch->top_level,
-                           is_npc(gch) ? "Mob" : race_table[gch->race].race_name,
+                           IsNpc(gch) ? "Mob" : race_table[gch->race].race_name,
                            capitalize( PERS(gch, ch) ),
                            gch->hit,
                            gch->max_hit,
@@ -144,7 +144,7 @@ static void AddFollowerToGroup( void *element, void *userData )
   Character *leader = (Character*) userData;
 
   if ( leader != follower
-       && !is_npc( follower )
+       && !IsNpc( follower )
        && follower->master == leader
        && !leader->master
        && !leader->leader
@@ -160,7 +160,7 @@ static bool IsFollowerOf( void *element, void *userData )
   Character *leader = (Character*) userData;
 
   if( leader != follower
-      && !is_npc( follower )
+      && !IsNpc( follower )
       && follower->leader == leader
       && is_same_group( follower, leader ) )
     {

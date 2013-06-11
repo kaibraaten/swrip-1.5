@@ -4,7 +4,7 @@
 
 void do_bio( Character *ch, char *argument )
 {
-  if ( is_npc( ch ) )
+  if ( IsNpc( ch ) )
     {
       send_to_char( "Mobs can't set bio's!\r\n", ch );
       return;

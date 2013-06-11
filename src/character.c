@@ -4,7 +4,7 @@
 
 bool is_wizvis( const Character *ch, const Character *victim )
 {
-  if ( !is_npc(victim)
+  if ( !IsNpc(victim)
        && IS_SET(victim->act, PLR_WIZINVIS)
        && get_trust( ch ) < victim->pcdata->wizinvis )
     return FALSE;
@@ -78,7 +78,7 @@ short get_trust( const Character *ch )
   if ( ch->trust != 0 )
     return ch->trust;
 
-  if ( is_npc(ch) && ch->top_level >= LEVEL_AVATAR )
+  if ( IsNpc(ch) && ch->top_level >= LEVEL_AVATAR )
     return LEVEL_AVATAR;
 
   if ( ch->top_level >= LEVEL_NEOPHYTE && is_retired_immortal( ch ) )
@@ -92,7 +92,7 @@ short get_trust( const Character *ch )
  */
 short get_age( const Character *ch )
 {
-  if( is_npc(ch) )
+  if( IsNpc(ch) )
     return 17;
 
   return 17 + ( ch->pcdata->played + (current_time - ch->pcdata->logon) ) / 1515800;
@@ -165,7 +165,7 @@ short get_curr_frc( const Character *ch )
 {
   short max = 0;
 
-  if (!is_npc(ch))
+  if (!IsNpc(ch))
     {
       max = 20 + race_table[ch->race].stats.mod_frc;
       max = UMIN(max,25);
@@ -187,10 +187,10 @@ void add_kill( Character *ch, const Character *mob )
   int x;
   short vnum, track;
 
-  if ( is_npc(ch) )
+  if ( IsNpc(ch) )
     return;
 
-  if ( !is_npc(mob) )
+  if ( !IsNpc(mob) )
     return;
 
   vnum = mob->pIndexData->vnum;
@@ -222,10 +222,10 @@ int times_killed( const Character *ch, const Character *mob )
   int x;
   short vnum, track;
 
-  if ( is_npc(ch) )
+  if ( IsNpc(ch) )
     return 0;
 
-  if ( !is_npc(mob) )
+  if ( !IsNpc(mob) )
     return 0;
 
   vnum = mob->pIndexData->vnum;
@@ -243,7 +243,7 @@ bool has_comlink( const Character *ch )
 {
   OBJ_DATA *obj = NULL;
 
-  if( is_immortal( ch ) )
+  if( IsImmortal( ch ) )
     {
       return TRUE;
     }
@@ -501,7 +501,7 @@ OBJ_DATA *get_obj_wear( const Character *ch, const char *argument )
 bool ms_find_obj( const Character *ch )
 {
   int ms = ch->mental_state;
-  int drunk = is_npc(ch) ? 0 : ch->pcdata->condition[COND_DRUNK];
+  int drunk = IsNpc(ch) ? 0 : ch->pcdata->condition[COND_DRUNK];
   const char *t = NULL;
 
   /*
@@ -663,7 +663,7 @@ bool can_see( const Character *ch, const Character *victim )
   if ( ch == victim )
     return TRUE;
 
-  if ( !is_npc(victim)
+  if ( !IsNpc(victim)
        && IS_SET(victim->act, PLR_WIZINVIS)
        && get_trust( ch ) < victim->pcdata->wizinvis )
     return FALSE;
@@ -675,17 +675,17 @@ bool can_see( const Character *ch, const Character *victim )
     return TRUE;
 
   /* SB */
-  if ( is_npc(victim)
+  if ( IsNpc(victim)
        && IS_SET(victim->act, ACT_MOBINVIS)
        && get_trust( ch ) < victim->mobinvis )
     return FALSE;
 
-  if ( !is_immortal(ch) && !is_npc(victim) && !victim->desc
+  if ( !IsImmortal(ch) && !IsNpc(victim) && !victim->desc
        && get_timer(victim, TIMER_RECENTFIGHT) > 0
        && (!victim->switched || !is_affected_by(victim->switched, AFF_POSSESS)) )
     return FALSE;
 
-  if ( !is_npc(ch) && IS_SET(ch->act, PLR_HOLYLIGHT) )
+  if ( !IsNpc(ch) && IS_SET(ch->act, PLR_HOLYLIGHT) )
     return TRUE;
 
   /* The miracle cure for blindness? -- Altrag */
@@ -721,7 +721,7 @@ bool can_see( const Character *ch, const Character *victim )
  */
 bool can_see_obj( const Character *ch, const OBJ_DATA *obj )
 {
-  if ( !is_npc(ch) && IS_SET(ch->act, PLR_HOLYLIGHT) )
+  if ( !IsNpc(ch) && IS_SET(ch->act, PLR_HOLYLIGHT) )
     return TRUE;
 
   if ( IS_OBJ_STAT( obj, ITEM_BURRIED ) )
@@ -756,10 +756,10 @@ bool can_drop_obj( const Character *ch, const OBJ_DATA *obj )
   if ( !IS_OBJ_STAT(obj, ITEM_NODROP) )
     return TRUE;
 
-  if ( !is_npc(ch) && get_trust(ch) >= LEVEL_IMMORTAL )
+  if ( !IsNpc(ch) && get_trust(ch) >= LEVEL_IMMORTAL )
     return TRUE;
 
-  if ( is_npc(ch) && ch->pIndexData->vnum == 3 )
+  if ( IsNpc(ch) && ch->pIndexData->vnum == 3 )
     return TRUE;
 
   return FALSE;
@@ -870,10 +870,10 @@ int can_carry_n( const Character *ch )
 {
   int penalty = 0;
 
-  if ( !is_npc(ch) && get_trust(ch) >= LEVEL_IMMORTAL )
+  if ( !IsNpc(ch) && get_trust(ch) >= LEVEL_IMMORTAL )
     return get_trust(ch)*200;
 
-  if ( is_npc(ch) && IS_SET(ch->act, ACT_PET) )
+  if ( IsNpc(ch) && IS_SET(ch->act, ACT_PET) )
     return 0;
 
   if ( get_eq_char(ch, WEAR_WIELD) )
@@ -899,21 +899,21 @@ int can_carry_n( const Character *ch )
  */
 int can_carry_w( const Character *ch )
 {
-  if ( !is_npc(ch) && get_trust(ch) >= LEVEL_IMMORTAL )
+  if ( !IsNpc(ch) && get_trust(ch) >= LEVEL_IMMORTAL )
     return 1000000;
 
-  if ( is_npc(ch) && IS_SET(ch->act, ACT_PET) )
+  if ( IsNpc(ch) && IS_SET(ch->act, ACT_PET) )
     return 0;
 
   return str_app[get_curr_str(ch)].carry;
 }
 
-bool is_npc( const Character *ch )
+bool IsNpc( const Character *ch )
 {
-  return IS_SET( ch->act, ACT_is_npc ) || !ch->pcdata;
+  return IS_SET( ch->act, ACT_IsNpc ) || !ch->pcdata;
 }
 
-bool is_immortal( const Character *ch )
+bool IsImmortal( const Character *ch )
 {
   return get_trust( ch ) >= LEVEL_IMMORTAL;
 }
@@ -986,19 +986,19 @@ bool is_drunk( const Character *ch )
 
 bool is_retired_immortal( const Character *ch )
 {
-  return !is_npc( ch ) && IS_SET( ch->pcdata->flags, PCFLAG_RETIRED );
+  return !IsNpc( ch ) && IS_SET( ch->pcdata->flags, PCFLAG_RETIRED );
 }
 
 bool is_not_authed( const Character *ch )
 {
-  return !is_npc( ch )
+  return !IsNpc( ch )
     && ch->pcdata->auth_state <= 3
     && IS_SET( ch->pcdata->flags, PCFLAG_UNAUTHED);
 }
 
 bool is_waiting_for_auth( const Character *ch )
 {
-  return !is_npc( ch )
+  return !IsNpc( ch )
     && ch->desc
     && ch->pcdata->auth_state == 1
     && IS_SET(ch->pcdata->flags, PCFLAG_UNAUTHED);
@@ -1008,12 +1008,12 @@ bool is_waiting_for_auth( const Character *ch )
 
 char *PERS( const Character *ch, const Character *looker )
 {
-  return can_see( looker, ch ) ? ( is_npc(ch) ? ch->short_descr : ((get_trust(looker) <= LEVEL_IMMORTAL) ? (DISGUISE(ch) ? ch->pcdata->title : ch->name ) : ch->name)) : ( is_immortal(ch) ? "A Great One" : "someone" );
+  return can_see( looker, ch ) ? ( IsNpc(ch) ? ch->short_descr : ((get_trust(looker) <= LEVEL_IMMORTAL) ? (DISGUISE(ch) ? ch->pcdata->title : ch->name ) : ch->name)) : ( IsImmortal(ch) ? "A Great One" : "someone" );
 }
 
 bool is_clanned( const Character *ch )
 {
-  return !is_npc( ch ) && ch->pcdata->clan;
+  return !IsNpc( ch ) && ch->pcdata->clan;
 }
 
 void set_wait_state( Character *ch, short number_of_pulses )

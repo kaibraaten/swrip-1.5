@@ -1884,7 +1884,7 @@ static void imc_display_channel( IMC_CHANNEL * c, const char *from, char *txt, i
       /*
        * Freaking stupid PC_DATA crap! 
        */
-      if( is_npc( ch ) )
+      if( IsNpc( ch ) )
          continue;
 
       if( IMCPERM( ch ) < c->level || !imc_hasname( IMC_LISTEN( ch ), c->local_name ) )
@@ -3522,7 +3522,7 @@ bool imc_loadchar( Character * ch, FILE * fp, const char *word )
 {
    bool fMatch = FALSE;
 
-   if( is_npc( ch ) )
+   if( IsNpc( ch ) )
       return FALSE;
 
    if( IMCPERM( ch ) == IMCPERM_NOTSET )
@@ -3616,7 +3616,7 @@ void imc_savechar( const Character * ch, FILE * fp )
 {
    IMC_IGNORE *temp;
 
-   if( is_npc( ch ) )
+   if( IsNpc( ch ) )
       return;
 
    fprintf( fp, "IMCPerm      %d\n", IMCPERM( ch ) );
@@ -3648,7 +3648,7 @@ void imc_freechardata( Character * ch )
    IMC_IGNORE *ign, *ign_next;
    int x;
 
-   if( is_npc( ch ) )
+   if( IsNpc( ch ) )
       return;
 
    if( CH_IMCDATA( ch ) == NULL )
@@ -3678,7 +3678,7 @@ void imc_freechardata( Character * ch )
 
 void imc_initchar( Character * ch )
 {
-   if( is_npc( ch ) )
+   if( IsNpc( ch ) )
       return;
 
    IMCCREATE( CH_IMCDATA( ch ), IMC_CHARDATA, 1 );
@@ -7787,7 +7787,7 @@ bool imc_command_hook( Character * ch, const char *command, const char *argument
    IMC_CHANNEL *c;
    const char *p;
 
-   if( is_npc( ch ) )
+   if( IsNpc( ch ) )
       return FALSE;
 
    if( !this_imcmud )

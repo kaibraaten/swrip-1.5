@@ -11,7 +11,7 @@ void do_auction (Character *ch, char *argument)
 
   argument = one_argument (argument, arg1);
 
-  if (is_npc(ch)) /* NPC can be extracted at any time and thus can't auction! */
+  if (IsNpc(ch)) /* NPC can be extracted at any time and thus can't auction! */
     return;
 
   if ( !IS_SET( ch->in_room->room_flags , ROOM_HOTEL ) && !IS_SET( ch->in_room->room_flags , ROOM_HOTEL ) )
@@ -82,7 +82,7 @@ void do_auction (Character *ch, char *argument)
               show_list_to_char( obj->first_content, ch, TRUE, FALSE );
             }
 
-          if (is_immortal(ch))
+          if (IsImmortal(ch))
             {
               sprintf(buf, "Seller: %s.  Bidder: %s.  Round: %d.\r\n",
                       auction->seller->name, auction->buyer->name,
@@ -101,7 +101,7 @@ void do_auction (Character *ch, char *argument)
         }
     }
 
-  if ( is_immortal(ch) && !str_cmp(arg1,"stop"))
+  if ( IsImmortal(ch) && !str_cmp(arg1,"stop"))
     {
       if (auction->item == NULL)
         {
