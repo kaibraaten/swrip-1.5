@@ -3,7 +3,6 @@
 
 void do_rstat( Character *ch, char *argument )
 {
-  char buf[MAX_STRING_LENGTH];
   char arg[MAX_INPUT_LENGTH];
   ROOM_INDEX_DATA *location = NULL;
   OBJ_DATA *obj = NULL;
@@ -120,6 +119,8 @@ void do_rstat( Character *ch, char *argument )
     {
       if ( can_see( ch, rch ) )
         {
+	  char buf[MAX_STRING_LENGTH];
+
           send_to_char( " ", ch );
           one_argument( rch->name, buf );
 	  send_to_char( buf, ch );
@@ -130,10 +131,13 @@ void do_rstat( Character *ch, char *argument )
 
   for ( obj = location->first_content; obj; obj = obj->next_content )
     {
+      char buf[MAX_STRING_LENGTH];
+
       send_to_char( " ", ch );
       one_argument( obj->name, buf );
       send_to_char( buf, ch );
     }
+
   send_to_char( ".\r\n", ch );
 
   if ( location->first_exit )
