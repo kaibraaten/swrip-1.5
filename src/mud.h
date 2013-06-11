@@ -2488,6 +2488,7 @@ extern "C" {
   void SpamTellToBystanders( Character *speaker, const char *message,
 			     void (*ShowMessageToBystander)( Character*, Character*, const char*));
   int CountGroupMembersInRoom( const Character *ch );
+  void SaysIntoComlink( Character *speaker, Character *listener, const char *message );
   bool is_valid_language( int language );
   void pullorpush( Character *ch, OBJ_DATA *obj, bool pull );
   void actiondesc( Character *ch, OBJ_DATA *obj, void *vo );

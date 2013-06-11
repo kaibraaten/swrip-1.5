@@ -570,3 +570,8 @@ int CountGroupMembersInRoom( const Character *ch )
 
   return members;
 }
+
+void SaysIntoComlink( Character *speaker, Character *listener, const char *message )
+{
+  act( AT_SAY, "$n says quietly into $s comlink '$t'", speaker, message, listener, TO_VICT );
+}

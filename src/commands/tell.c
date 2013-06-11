@@ -8,7 +8,6 @@ void do_tell( Character *ch, char *argument )
   Character *victim = NULL;
   int position = POS_STANDING;
   Character *switched_victim = NULL;
-  Character *vch = NULL;
   bool sameroom = FALSE;
 
   if ( IS_SET( ch->deaf, CHANNEL_TELLS ) && !IsImmortal( ch ) )
@@ -167,23 +166,7 @@ void do_tell( Character *ch, char *argument )
 
   if( !IsImmortal(ch) && !sameroom )
     {
-      for ( vch = ch->in_room->first_person; vch; vch = vch->next_in_room )
-        {
-          const char *sbuf = argument;
-
-          if ( vch == ch )
-            continue;
-
-          if ( !knows_language(vch, ch->speaking, ch) &&
-               (!IsNpc(ch) || ch->speaking != 0) )
-            sbuf = scramble(argument, ch->speaking);
-
-          sbuf = drunk_speech( sbuf, ch );
-
-          MOBtrigger = FALSE;
-          act( AT_SAY, "$n says quietly into $s comlink '$t'",
-	       ch, sbuf, vch, TO_VICT );
-        }
+      SpamTellToBystanders( ch, argument, SaysIntoComlink );
 
       if ( !IsImmortal(victim) )
 	{

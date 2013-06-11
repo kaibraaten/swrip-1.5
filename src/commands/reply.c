@@ -1,11 +1,6 @@
 #include "mud.h"
 #include "character.h"
 
-static void SaysIntoComlink( Character *speaker, Character *listener, const char *message )
-{
-  act( AT_SAY, "$n says quietly into his comlink '$t'", speaker, message, listener, TO_VICT );
-}
-
 void do_reply( Character *ch, char *argument )
 {
   char buf[MAX_STRING_LENGTH];
