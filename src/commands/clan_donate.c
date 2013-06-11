@@ -13,7 +13,7 @@ void do_clan_donate( Character *ch, char *argument )
       return;
     }
 
-  if ( !has_comlink( ch ) )
+  if ( !HasComlink( ch ) )
     {
       if (!ch->in_room || !IS_SET(ch->in_room->room_flags, ROOM_BANK) )
         {

@@ -86,7 +86,7 @@ static void similar_help_files(Character *ch, char *argument)
       char buf[MAX_STRING_LENGTH];
       char *extension = GetHelpKeyword( pHelp );
 
-      if (GetHelpLevel( pHelp ) > get_trust(ch))
+      if (GetHelpLevel( pHelp ) > GetTrustedLevel(ch))
 	{
 	  continue;
 	}
@@ -128,7 +128,7 @@ static void similar_help_files(Character *ch, char *argument)
           extension=one_argument(extension, buf);
 
           if ( str_similarity(argument, buf) >= level
-               && GetHelpLevel( pHelp ) <= get_trust(ch))
+               && GetHelpLevel( pHelp ) <= GetTrustedLevel(ch))
             {
               if (single)
                 {

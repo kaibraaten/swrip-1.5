@@ -60,7 +60,7 @@ void do_cast( Character *ch, char *argument )
           return;
         }
 
-      if ( get_trust(ch) < LEVEL_GOD )
+      if ( GetTrustedLevel(ch) < LEVEL_GOD )
         {
           if ( ( sn = find_spell( ch, arg1, TRUE ) ) < 0
                || ( !IsNpc(ch) &&  ch->pcdata->learned[sn] <= 0  ) )
@@ -424,7 +424,7 @@ void do_cast( Character *ch, char *argument )
         }
       else
         {
-	  short forceLevel = get_level( ch, FORCE_ABILITY );
+	  short forceLevel = GetLevel( ch, FORCE_ABILITY );
 
           start_timer(&time_used);
           retcode = skill->spell_fun( sn, forceLevel, ch, vo );
@@ -443,7 +443,7 @@ void do_cast( Character *ch, char *argument )
       int force_exp = 0;
 
       force_exp = skill->min_level*skill->min_level*10;
-      force_exp = URANGE( 0 , force_exp, ( exp_level(get_level( ch, FORCE_ABILITY ) + 1 ) - exp_level(get_level(ch, FORCE_ABILITY ) ) )/35 );
+      force_exp = URANGE( 0 , force_exp, ( exp_level(GetLevel( ch, FORCE_ABILITY ) + 1 ) - exp_level(GetLevel(ch, FORCE_ABILITY ) ) )/35 );
 
       if( !ch->fighting  )
 	{

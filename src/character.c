@@ -2,11 +2,11 @@
 #include "character.h"
 #include "mud.h"
 
-bool is_wizvis( const Character *ch, const Character *victim )
+bool IsWizvis( const Character *ch, const Character *victim )
 {
   if ( !IsNpc(victim)
        && IS_SET(victim->act, PLR_WIZINVIS)
-       && get_trust( ch ) < victim->pcdata->wizinvis )
+       && GetTrustedLevel( ch ) < victim->pcdata->wizinvis )
     return FALSE;
 
   return TRUE;
@@ -15,7 +15,7 @@ bool is_wizvis( const Character *ch, const Character *victim )
 /*
  * Return how much exp a char has for a specified ability.
  */
-long get_exp( const Character *ch, short ability )
+long GetExperience( const Character *ch, short ability )
 {
   if ( ability >= MAX_ABILITY || ability < 0 )
     return 0;
@@ -23,7 +23,7 @@ long get_exp( const Character *ch, short ability )
   return ch->ability.experience[ability];
 }
 
-void set_exp( Character *ch, short ability, long xp )
+void SetExperience( Character *ch, short ability, long xp )
 {
   if ( ability >= MAX_ABILITY || ability < 0 )
     {
@@ -43,11 +43,11 @@ void set_exp( Character *ch, short ability, long xp )
 /*
  * Calculate roughly how much experience a character is worth
  */
-int get_exp_worth( const Character *ch )
+int GetExperienceWorth( const Character *ch )
 {
   int xp = 0;
 
-  xp = get_level( ch, COMBAT_ABILITY ) * ch->top_level * 50;
+  xp = GetLevel( ch, COMBAT_ABILITY ) * ch->top_level * 50;
   xp += ch->max_hit * 2;
   xp -= (ch->armor-50) * 2;
   xp += ( ch->barenumdie * ch->baresizedie + get_damroll(ch) ) * 50;
@@ -70,7 +70,7 @@ int get_exp_worth( const Character *ch )
 /*
  * Retrieve a character's trusted level for permission checking.
  */
-short get_trust( const Character *ch )
+short GetTrustedLevel( const Character *ch )
 {
   if ( !ch )
     return 0;
@@ -90,7 +90,7 @@ short get_trust( const Character *ch )
 /*
  * Retrieve a character's age.
  */
-short get_age( const Character *ch )
+short GetAge( const Character *ch )
 {
   if( IsNpc(ch) )
     return 17;
@@ -101,7 +101,7 @@ short get_age( const Character *ch )
 /*
  * Retrieve character's current strength.
  */
-short get_curr_str( const Character *ch )
+short GetCurrentStr( const Character *ch )
 {
   short max = 25;
   return URANGE( 3, ch->stats.perm_str + ch->stats.mod_str, max );
@@ -110,7 +110,7 @@ short get_curr_str( const Character *ch )
 /*
  * Retrieve character's current intelligence.
  */
-short get_curr_int( const Character *ch )
+short GetCurrentInt( const Character *ch )
 {
   short max = 25;
   return URANGE( 3, ch->stats.perm_int + ch->stats.mod_int, max );
@@ -119,7 +119,7 @@ short get_curr_int( const Character *ch )
 /*
  * Retrieve character's current wisdom.
  */
-short get_curr_wis( const Character *ch )
+short GetCurrentWis( const Character *ch )
 {
   short max = 25;
   return URANGE( 3, ch->stats.perm_wis + ch->stats.mod_wis, max );
@@ -128,7 +128,7 @@ short get_curr_wis( const Character *ch )
 /*
  * Retrieve character's current dexterity.
  */
-short get_curr_dex( const Character *ch )
+short GetCurrentDex( const Character *ch )
 {
   short max = 25;
   return URANGE( 3, ch->stats.perm_dex + ch->stats.mod_dex, max );
@@ -137,7 +137,7 @@ short get_curr_dex( const Character *ch )
 /*
  * Retrieve character's current constitution.
  */
-short get_curr_con( const Character *ch )
+short GetCurrentCon( const Character *ch )
 {
   short max = 25;
   return URANGE( 3, ch->stats.perm_con + ch->stats.mod_con, max );
@@ -146,7 +146,7 @@ short get_curr_con( const Character *ch )
 /*
  * Retrieve character's current charisma.
  */
-short get_curr_cha( const Character *ch )
+short GetCurrentCha( const Character *ch )
 {
   short max = 25;
   return URANGE( 3, ch->stats.perm_cha + ch->stats.mod_cha, max );
@@ -155,13 +155,13 @@ short get_curr_cha( const Character *ch )
 /*
  * Retrieve character's current luck.
  */
-short get_curr_lck( const Character *ch )
+short GetCurrentLck( const Character *ch )
 {
   short max = 25;
   return URANGE( 3, ch->stats.perm_lck + ch->stats.mod_lck, max );
 }
 
-short get_curr_frc( const Character *ch )
+short GetCurrentFrc( const Character *ch )
 {
   short max = 0;
 
@@ -182,7 +182,7 @@ short get_curr_frc( const Character *ch )
  * Add another notch on that there belt... ;)
  * Keep track of the last so many kills by vnum                 -Thoric
  */
-void add_kill( Character *ch, const Character *mob )
+void AddKill( Character *ch, const Character *mob )
 {
   int x;
   short vnum, track;
@@ -194,7 +194,7 @@ void add_kill( Character *ch, const Character *mob )
     return;
 
   vnum = mob->pIndexData->vnum;
-  track = URANGE( 2, ((get_level( ch, COMBAT_ABILITY ) + 3) * MAX_KILLTRACK)/LEVEL_AVATAR, MAX_KILLTRACK );
+  track = URANGE( 2, ((GetLevel( ch, COMBAT_ABILITY ) + 3) * MAX_KILLTRACK)/LEVEL_AVATAR, MAX_KILLTRACK );
   for ( x = 0; x < track; x++ )
     if ( ch->pcdata->killed[x].vnum == vnum )
       {
@@ -217,7 +217,7 @@ void add_kill( Character *ch, const Character *mob )
  * Return how many times this player has killed this mob        -Thoric
  * Only keeps track of so many (MAX_KILLTRACK), and keeps track by vnum
  */
-int times_killed( const Character *ch, const Character *mob )
+int TimesKilled( const Character *ch, const Character *mob )
 {
   int x;
   short vnum, track;
@@ -229,7 +229,7 @@ int times_killed( const Character *ch, const Character *mob )
     return 0;
 
   vnum = mob->pIndexData->vnum;
-  track = URANGE( 2, ((get_level( ch, COMBAT_ABILITY ) + 3) * MAX_KILLTRACK)/LEVEL_AVATAR, MAX_KILLTRACK );
+  track = URANGE( 2, ((GetLevel( ch, COMBAT_ABILITY ) + 3) * MAX_KILLTRACK)/LEVEL_AVATAR, MAX_KILLTRACK );
   for ( x = 0; x < track; x++ )
     if ( ch->pcdata->killed[x].vnum == vnum )
       return ch->pcdata->killed[x].count;
@@ -239,7 +239,7 @@ int times_killed( const Character *ch, const Character *mob )
   return 0;
 }
 
-bool has_comlink( const Character *ch )
+bool HasComlink( const Character *ch )
 {
   OBJ_DATA *obj = NULL;
 
@@ -259,12 +259,12 @@ bool has_comlink( const Character *ch )
   return FALSE;
 }
 
-short get_level( const Character *ch, short ability )
+short GetLevel( const Character *ch, short ability )
 {
   return ch->ability.level[ability];
 }
 
-void set_level( Character *ch, short ability, int newlevel )
+void SetLevel( Character *ch, short ability, int newlevel )
 {
   if( newlevel >= 0 && newlevel <= MAX_ABILITY_LEVEL )
     ch->ability.level[ability] = newlevel;
@@ -415,7 +415,7 @@ OBJ_DATA *get_obj_carry( const Character *ch, const char *argument )
   int number, count, vnum;
 
   number = number_argument( argument, arg );
-  if ( get_trust(ch) >= LEVEL_SAVIOR && is_number( arg ) )
+  if ( GetTrustedLevel(ch) >= LEVEL_SAVIOR && is_number( arg ) )
     vnum = atoi( arg );
   else
     vnum = -1;
@@ -462,7 +462,7 @@ OBJ_DATA *get_obj_wear( const Character *ch, const char *argument )
 
   number = number_argument( argument, arg );
 
-  if ( get_trust(ch) >= LEVEL_SAVIOR && is_number( arg ) )
+  if ( GetTrustedLevel(ch) >= LEVEL_SAVIOR && is_number( arg ) )
     vnum = atoi( arg );
   else
     vnum = -1;
@@ -665,7 +665,7 @@ bool can_see( const Character *ch, const Character *victim )
 
   if ( !IsNpc(victim)
        && IS_SET(victim->act, PLR_WIZINVIS)
-       && get_trust( ch ) < victim->pcdata->wizinvis )
+       && GetTrustedLevel( ch ) < victim->pcdata->wizinvis )
     return FALSE;
 
   if ( victim->position == POS_FIGHTING || victim->position < POS_SLEEPING )
@@ -677,7 +677,7 @@ bool can_see( const Character *ch, const Character *victim )
   /* SB */
   if ( IsNpc(victim)
        && IS_SET(victim->act, ACT_MOBINVIS)
-       && get_trust( ch ) < victim->mobinvis )
+       && GetTrustedLevel( ch ) < victim->mobinvis )
     return FALSE;
 
   if ( !IsImmortal(ch) && !IsNpc(victim) && !victim->desc
@@ -756,7 +756,7 @@ bool can_drop_obj( const Character *ch, const OBJ_DATA *obj )
   if ( !IS_OBJ_STAT(obj, ITEM_NODROP) )
     return TRUE;
 
-  if ( !IsNpc(ch) && get_trust(ch) >= LEVEL_IMMORTAL )
+  if ( !IsNpc(ch) && GetTrustedLevel(ch) >= LEVEL_IMMORTAL )
     return TRUE;
 
   if ( IsNpc(ch) && ch->pIndexData->vnum == 3 )
@@ -827,7 +827,7 @@ void fix_char( Character *ch )
 void better_mental_state( Character *ch, int mod )
 {
   int c = URANGE( 0, abs(mod), 20 );
-  int con = get_curr_con(ch);
+  int con = GetCurrentCon(ch);
 
   c += number_percent() < con ? 1 : 0;
 
@@ -844,7 +844,7 @@ void better_mental_state( Character *ch, int mod )
 void worsen_mental_state( Character *ch, int mod )
 {
   int c   = URANGE( 0, abs(mod), 20 );
-  int con = get_curr_con(ch);
+  int con = GetCurrentCon(ch);
 
   c -= number_percent() < con ? 1 : 0;
 
@@ -870,8 +870,8 @@ int can_carry_n( const Character *ch )
 {
   int penalty = 0;
 
-  if ( !IsNpc(ch) && get_trust(ch) >= LEVEL_IMMORTAL )
-    return get_trust(ch)*200;
+  if ( !IsNpc(ch) && GetTrustedLevel(ch) >= LEVEL_IMMORTAL )
+    return GetTrustedLevel(ch)*200;
 
   if ( IsNpc(ch) && IS_SET(ch->act, ACT_PET) )
     return 0;
@@ -891,7 +891,7 @@ int can_carry_n( const Character *ch )
   if ( get_eq_char(ch, WEAR_SHIELD) )
     ++penalty;
 
-  return URANGE(5, (ch->top_level+15)/5 + get_curr_dex(ch)-13 - penalty, 20);
+  return URANGE(5, (ch->top_level+15)/5 + GetCurrentDex(ch)-13 - penalty, 20);
 }
 
 /*
@@ -899,13 +899,13 @@ int can_carry_n( const Character *ch )
  */
 int can_carry_w( const Character *ch )
 {
-  if ( !IsNpc(ch) && get_trust(ch) >= LEVEL_IMMORTAL )
+  if ( !IsNpc(ch) && GetTrustedLevel(ch) >= LEVEL_IMMORTAL )
     return 1000000;
 
   if ( IsNpc(ch) && IS_SET(ch->act, ACT_PET) )
     return 0;
 
-  return str_app[get_curr_str(ch)].carry;
+  return str_app[GetCurrentStr(ch)].carry;
 }
 
 bool IsNpc( const Character *ch )
@@ -915,17 +915,17 @@ bool IsNpc( const Character *ch )
 
 bool IsImmortal( const Character *ch )
 {
-  return get_trust( ch ) >= LEVEL_IMMORTAL;
+  return GetTrustedLevel( ch ) >= LEVEL_IMMORTAL;
 }
 
 bool is_god( const Character *ch )
 {
-  return get_trust( ch ) >= LEVEL_GOD;
+  return GetTrustedLevel( ch ) >= LEVEL_GOD;
 }
 
 bool is_hero( const Character *ch )
 {
-  return get_trust( ch ) >= LEVEL_HERO;
+  return GetTrustedLevel( ch ) >= LEVEL_HERO;
 }
 
 bool is_good( const Character *ch )
@@ -955,8 +955,8 @@ bool is_awake( const Character *ch )
 
 int get_armor_class( const Character *ch )
 {
-  int dexterity_modifier = is_awake( ch ) ? dex_app[get_curr_dex(ch)].defensive : 0;
-  int combat_level_modifier = ch->race == RACE_DEFEL ? get_level( ch, COMBAT_ABILITY ) * 2 + 5 : get_level( ch, COMBAT_ABILITY ) / 2;
+  int dexterity_modifier = is_awake( ch ) ? dex_app[GetCurrentDex(ch)].defensive : 0;
+  int combat_level_modifier = ch->race == RACE_DEFEL ? GetLevel( ch, COMBAT_ABILITY ) * 2 + 5 : GetLevel( ch, COMBAT_ABILITY ) / 2;
 
   return ch->armor + dexterity_modifier - combat_level_modifier;
 }
@@ -964,7 +964,7 @@ int get_armor_class( const Character *ch )
 int get_hitroll( const Character *ch )
 {
   int base_hitroll = ch->hitroll;
-  int strength_modifier = str_app[get_curr_str( ch )].tohit;
+  int strength_modifier = str_app[GetCurrentStr( ch )].tohit;
   int mental_state_modifier = 2 - ( abs( ch->mental_state ) / 10 );
 
   return base_hitroll + strength_modifier + mental_state_modifier;
@@ -973,7 +973,7 @@ int get_hitroll( const Character *ch )
 int get_damroll( const Character *ch )
 {
   int base_damroll = ch->damroll;
-  int strength_modifier = str_app[get_curr_str(ch)].todam;
+  int strength_modifier = str_app[GetCurrentStr(ch)].todam;
   int mental_state_modifier = ch->mental_state > 5 && ch->mental_state < 15 ? 1 : 0;
 
   return base_damroll + strength_modifier + mental_state_modifier;
@@ -1008,7 +1008,7 @@ bool is_waiting_for_auth( const Character *ch )
 
 char *PERS( const Character *ch, const Character *looker )
 {
-  return can_see( looker, ch ) ? ( IsNpc(ch) ? ch->short_descr : ((get_trust(looker) <= LEVEL_IMMORTAL) ? (DISGUISE(ch) ? ch->pcdata->title : ch->name ) : ch->name)) : ( IsImmortal(ch) ? "A Great One" : "someone" );
+  return can_see( looker, ch ) ? ( IsNpc(ch) ? ch->short_descr : ((GetTrustedLevel(looker) <= LEVEL_IMMORTAL) ? (DISGUISE(ch) ? ch->pcdata->title : ch->name ) : ch->name)) : ( IsImmortal(ch) ? "A Great One" : "someone" );
 }
 
 bool is_clanned( const Character *ch )
@@ -1023,5 +1023,5 @@ void set_wait_state( Character *ch, short number_of_pulses )
 
 bool IsForcer( const Character *ch )
 {
-  return get_level(ch, FORCE_ABILITY ) > 1 ? TRUE : FALSE;
+  return GetLevel(ch, FORCE_ABILITY ) > 1 ? TRUE : FALSE;
 }

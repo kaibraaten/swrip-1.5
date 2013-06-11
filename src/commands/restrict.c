@@ -21,18 +21,18 @@ void do_restrict( Character *ch, char *argument )
   argument = one_argument ( argument, arg2 );
 
   if ( arg2[0] == '\0' )
-    level = get_trust( ch );
+    level = GetTrustedLevel( ch );
   else
     level = atoi( arg2 );
 
-  level = UMAX( UMIN( get_trust( ch ), level ), 0 );
+  level = UMAX( UMIN( GetTrustedLevel( ch ), level ), 0 );
 
   hash = arg[0] % 126;
 
   for ( cmd = command_hash[hash]; cmd; cmd = cmd->next )
     {
       if ( !str_prefix( arg, cmd->name )
-           &&    cmd->level <= get_trust( ch ) )
+           &&    cmd->level <= GetTrustedLevel( ch ) )
         {
           found = TRUE;
           break;

@@ -73,7 +73,7 @@ void do_cutdoor( Character *ch, char *argument )
 
       if ( !IS_SET( pexit->exit_info, EX_BASHPROOF )
            &&   ch->move >= 15
-           &&   number_percent( ) < ( the_chance + 4 * ( get_curr_str( ch ) - 19 ) ) )
+           &&   number_percent( ) < ( the_chance + 4 * ( GetCurrentStr( ch ) - 19 ) ) )
         {
           REMOVE_BIT( pexit->exit_info, EX_CLOSED );
           if ( IS_SET( pexit->exit_info, EX_LOCKED ) )

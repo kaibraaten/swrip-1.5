@@ -120,7 +120,7 @@ void do_bribe ( Character *ch , char *argument )
       planet->pop_support += URANGE( 0.1 , amount/1000 , 2 );
       send_to_char( "Popular support for your organization increases slightly.\r\n", ch );
 
-      amount = UMIN( amount ,( exp_level(get_level( ch, DIPLOMACY_ABILITY ) + 1) - exp_level(get_level( ch, DIPLOMACY_ABILITY ) ) ) );
+      amount = UMIN( amount ,( exp_level(GetLevel( ch, DIPLOMACY_ABILITY ) + 1) - exp_level(GetLevel( ch, DIPLOMACY_ABILITY ) ) ) );
 
       gain_exp( ch, DIPLOMACY_ABILITY, amount );
       ch_printf( ch, "You gain %d diplomacy experience.\r\n", amount );

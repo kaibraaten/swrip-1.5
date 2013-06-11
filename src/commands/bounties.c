@@ -7,7 +7,7 @@ void do_bounties( Character *ch, char *argument )
   BOUNTY_DATA *bounty = NULL;
   int count = 0;
 
-  if ( ( get_trust(ch) < LEVEL_IMMORTAL)
+  if ( ( GetTrustedLevel(ch) < LEVEL_IMMORTAL)
        && (!ch->pcdata || !ch->pcdata->clan
            || ( str_cmp(ch->pcdata->clan->name, "the hunters guild")
                 && str_cmp(ch->pcdata->clan->name, "the assassins guild") ) ))

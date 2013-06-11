@@ -518,14 +518,14 @@ int rd_parse(const Character *ch, int level, char *expr)
     case 'H': case 'h': return ch->hit;
     case 'M': case 'm': return ch->mana;
     case 'V': case 'v': return ch->move;
-    case 'S': case 's': return get_curr_str(ch);
-    case 'I': case 'i': return get_curr_int(ch);
-    case 'W': case 'w': return get_curr_wis(ch);
-    case 'X': case 'x': return get_curr_dex(ch);
-    case 'C': case 'c': return get_curr_con(ch);
-    case 'A': case 'a': return get_curr_cha(ch);
-    case 'U': case 'u': return get_curr_lck(ch);
-    case 'Y': case 'y': return get_age(ch);
+    case 'S': case 's': return GetCurrentStr(ch);
+    case 'I': case 'i': return GetCurrentInt(ch);
+    case 'W': case 'w': return GetCurrentWis(ch);
+    case 'X': case 'x': return GetCurrentDex(ch);
+    case 'C': case 'c': return GetCurrentCon(ch);
+    case 'A': case 'a': return GetCurrentCha(ch);
+    case 'U': case 'u': return GetCurrentLck(ch);
+    case 'Y': case 'y': return GetAge(ch);
     }
 
   for (x = 0; x < len; ++x)

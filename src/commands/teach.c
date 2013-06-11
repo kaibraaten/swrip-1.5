@@ -56,7 +56,7 @@ void do_teach( Character *ch, char *argument )
           return;
         }
 
-      if ( get_level( victim, skill_table[sn]->guild ) < skill_table[sn]->min_level )
+      if ( GetLevel( victim, skill_table[sn]->guild ) < skill_table[sn]->min_level )
         {
           act( AT_TELL, "$n isn't ready to learn that yet.",
                victim, NULL, ch, TO_VICT );
@@ -84,7 +84,7 @@ void do_teach( Character *ch, char *argument )
 	}
       else
         {
-          victim->pcdata->learned[sn] += int_app[get_curr_int(ch)].learn;
+          victim->pcdata->learned[sn] += int_app[GetCurrentInt(ch)].learn;
           sprintf( buf, "You teach %s $T.", victim->name );
           act( AT_ACTION, buf,
                ch, NULL, skill_table[sn]->name, TO_CHAR );

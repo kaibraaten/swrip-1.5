@@ -29,13 +29,13 @@ void do_trust( Character *ch, char *argument )
       return;
     }
 
-  if ( level > get_trust( ch ) )
+  if ( level > GetTrustedLevel( ch ) )
     {
       send_to_char( "Limited to your own trust.\r\n", ch );
       return;
     }
 
-  if ( ch->top_level < LEVEL_SUPREME && get_trust( victim ) >= get_trust( ch ) )
+  if ( ch->top_level < LEVEL_SUPREME && GetTrustedLevel( victim ) >= GetTrustedLevel( ch ) )
     {
       send_to_char( "You can't do that.\r\n", ch );
       return;

@@ -59,8 +59,8 @@ void do_tell( Character *ch, char *argument )
     }
   else
     {
-      bool ch_comlink = has_comlink(ch) || IsImmortal(ch);
-      bool victim_comlink = has_comlink(victim) || IsImmortal(victim);
+      bool ch_comlink = HasComlink(ch) || IsImmortal(ch);
+      bool victim_comlink = HasComlink(victim) || IsImmortal(victim);
 
       if ( !ch_comlink )
         {
@@ -82,7 +82,7 @@ void do_tell( Character *ch, char *argument )
     }
 
   if ( !IsNpc( victim ) && ( victim->switched )
-       && ( get_trust( ch ) > LEVEL_AVATAR )
+       && ( GetTrustedLevel( ch ) > LEVEL_AVATAR )
        && !IS_SET(victim->switched->act, ACT_POLYMORPHED)
        && !is_affected_by(victim->switched, AFF_POSSESS) )
     {
@@ -102,7 +102,7 @@ void do_tell( Character *ch, char *argument )
     }
 
   if ( IS_SET( victim->deaf, CHANNEL_TELLS )
-       && ( !IsImmortal( ch ) || ( get_trust( ch ) < get_trust( victim ) ) ) )
+       && ( !IsImmortal( ch ) || ( GetTrustedLevel( ch ) < GetTrustedLevel( victim ) ) ) )
     {
       act( AT_PLAIN, "They can't hear you.", ch, NULL, victim, TO_CHAR );
       return;
@@ -122,7 +122,7 @@ void do_tell( Character *ch, char *argument )
 
   if ( victim->desc
        &&   victim->desc->connection_state == CON_EDITING
-       &&   get_trust(ch) < LEVEL_GOD )
+       &&   GetTrustedLevel(ch) < LEVEL_GOD )
     {
       act( AT_PLAIN, "$E is currently in a writing buffer.  Please try again in a few minutes.", ch, 0, victim, TO_CHAR );
       return;

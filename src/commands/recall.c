@@ -10,7 +10,7 @@ void do_recall( Character *ch, char *argument )
 
   location = get_room_index( wherehome(ch) );
 
-  if ( get_trust( ch ) < LEVEL_IMMORTAL )
+  if ( GetTrustedLevel( ch ) < LEVEL_IMMORTAL )
     {
       AREA_DATA * pArea;
 

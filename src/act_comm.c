@@ -203,7 +203,7 @@ void talk_channel( Character *ch, const char *argument, int channel, const char 
        && channel != CHANNEL_SHIP && channel != CHANNEL_SYSTEM && channel != CHANNEL_SPACE
        && channel != CHANNEL_103 && channel != CHANNEL_104 && channel != CHANNEL_105  )
     {
-      if ( !has_comlink( ch ) )
+      if ( !HasComlink( ch ) )
         {
           send_to_char( "You need a comlink to do that!\r\n", ch);
           return;
@@ -379,7 +379,7 @@ void talk_channel( Character *ch, const char *argument, int channel, const char 
                && channel != CHANNEL_103 && channel != CHANNEL_104 && channel != CHANNEL_105
                )
             {
-	      if( !has_comlink( ch ) )
+	      if( !HasComlink( ch ) )
 		{
 		  continue;
 		}

@@ -17,7 +17,7 @@ void do_channels( Character *ch, char *argument )
 
       send_to_char( "Channels:", ch );
 
-      if ( get_trust( ch ) > 2 && !is_not_authed( ch ) )
+      if ( GetTrustedLevel( ch ) > 2 && !is_not_authed( ch ) )
         {
           send_to_char( !IS_SET(ch->deaf, CHANNEL_AUCTION)
                         ? " +AUCTION"
@@ -117,7 +117,7 @@ void do_channels( Character *ch, char *argument )
                     : " -newbie",
                     ch );
 
-      if ( get_trust(ch) >= sysdata.log_level )
+      if ( GetTrustedLevel(ch) >= sysdata.log_level )
         {
           send_to_char( !IS_SET(ch->deaf, CHANNEL_LOG)
                         ? " +LOG"

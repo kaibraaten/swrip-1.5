@@ -483,7 +483,7 @@ void affect_modify( Character *ch, AFFECT_DATA *paf, bool fAdd )
            &&  (skill=skill_table[mod]) != NULL
            &&   skill->type == SKILL_SPELL )
 	{
-	  if ( (retcode=(*skill->spell_fun) ( mod, get_level( ch, FORCE_ABILITY ), ch, ch )) == rCHAR_DIED || char_died(ch) )
+	  if ( (retcode=(*skill->spell_fun) ( mod, GetLevel( ch, FORCE_ABILITY ), ch, ch )) == rCHAR_DIED || char_died(ch) )
 	    {
 	      return;
 	    }
@@ -643,7 +643,7 @@ void affect_modify( Character *ch, AFFECT_DATA *paf, bool fAdd )
   if ( !IsNpc( ch )
        &&   saving_char != ch
        && ( wield = get_eq_char( ch, WEAR_WIELD ) ) != NULL
-       &&   get_obj_weight(wield) > str_app[get_curr_str(ch)].wield )
+       &&   get_obj_weight(wield) > str_app[GetCurrentStr(ch)].wield )
     {
       static int depth = 0;
 
@@ -1395,7 +1395,7 @@ Character *get_char_room( const Character *ch, const char *argument )
       return (Character*)ch;
     }
 
-  if ( get_trust(ch) >= LEVEL_SAVIOR && is_number( arg ) )
+  if ( GetTrustedLevel(ch) >= LEVEL_SAVIOR && is_number( arg ) )
     {
       vnum = atoi( arg );
     }
@@ -1493,7 +1493,7 @@ Character *get_char_world( const Character *ch, const char *argument )
   /*
    * Allow reference by vnum for saints+                        -Thoric
    */
-  if ( get_trust(ch) >= LEVEL_SAVIOR && is_number( arg ) )
+  if ( GetTrustedLevel(ch) >= LEVEL_SAVIOR && is_number( arg ) )
     {
       vnum = atoi( arg );
     }
@@ -1510,7 +1510,7 @@ Character *get_char_world( const Character *ch, const char *argument )
       Character *person = (Character*) ListIterator_GetData( peopleIterator );
 
       if( (nifty_is_name( arg, person->name )
-	   || (IsNpc(person) && vnum == person->pIndexData->vnum)) && is_wizvis(ch,person))
+	   || (IsNpc(person) && vnum == person->pIndexData->vnum)) && IsWizvis(ch,person))
 	{
 	  if ( number == 0 && !IsNpc(person) )
 	    {
@@ -1532,7 +1532,7 @@ Character *get_char_world( const Character *ch, const char *argument )
   for ( wch = first_char; wch; wch = wch->next )
     {
       if( (nifty_is_name( arg, wch->name )
-	   || (IsNpc(wch) && vnum == wch->pIndexData->vnum)) && is_wizvis(ch,wch) )
+	   || (IsNpc(wch) && vnum == wch->pIndexData->vnum)) && IsWizvis(ch,wch) )
 	{
 	  if ( number == 0 && !IsNpc(wch) )
 	    {
@@ -1566,12 +1566,12 @@ Character *get_char_world( const Character *ch, const char *argument )
 	  continue;
 	}
 
-      if ( number == 0 && !IsNpc(person) && is_wizvis(ch,person))
+      if ( number == 0 && !IsNpc(person) && IsWizvis(ch,person))
 	{
 	  DestroyListIterator( peopleIterator );
 	  return person;
 	}
-      else if ( ++count == number  && is_wizvis(ch, person) )
+      else if ( ++count == number  && IsWizvis(ch, person) )
 	{
 	  DestroyListIterator( peopleIterator );
           return person;
@@ -1594,11 +1594,11 @@ Character *get_char_world( const Character *ch, const char *argument )
 	  continue;
 	}
 
-      if ( number == 0 && !IsNpc(wch) && is_wizvis(ch, wch) )
+      if ( number == 0 && !IsNpc(wch) && IsWizvis(ch, wch) )
 	{
 	  return wch;
 	}
-      else if ( ++count == number  && is_wizvis(ch, wch) )
+      else if ( ++count == number  && IsWizvis(ch, wch) )
 	{
           return wch;
 	}
@@ -1727,7 +1727,7 @@ OBJ_DATA *get_obj_world( const Character *ch, const char *argument )
   /*
    * Allow reference by vnum for saints+                        -Thoric
    */
-  if ( get_trust(ch) >= LEVEL_SAVIOR && is_number( arg ) )
+  if ( GetTrustedLevel(ch) >= LEVEL_SAVIOR && is_number( arg ) )
     vnum = atoi( arg );
   else
     vnum = -1;
@@ -2760,7 +2760,7 @@ bool chance( const Character *ch, short percent )
 
   ms = 10 - abs(ch->mental_state);
 
-  if ( (number_percent() - get_curr_lck(ch) + 13 - ms) <= percent )
+  if ( (number_percent() - GetCurrentLck(ch) + 13 - ms) <= percent )
     return TRUE;
   else
     return FALSE;
@@ -2774,7 +2774,7 @@ bool chance_attrib( const Character *ch, short percent, short attrib )
       return FALSE;
     }
 
-  if (number_percent() - get_curr_lck(ch) + 13 - attrib + 13 <= percent )
+  if (number_percent() - GetCurrentLck(ch) + 13 - attrib + 13 <= percent )
     return TRUE;
   else
     return FALSE;

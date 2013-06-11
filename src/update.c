@@ -346,9 +346,9 @@ int max_level( const Character *ch, int ability)
 
 void advance_level( Character *ch, int ability )
 {
-  if ( ch->top_level < get_level( ch, ability ) && ch->top_level < 100 )
+  if ( ch->top_level < GetLevel( ch, ability ) && ch->top_level < 100 )
     {
-      ch->top_level = URANGE( 1, get_level( ch, ability ), 100 );
+      ch->top_level = URANGE( 1, GetLevel( ch, ability ), 100 );
     }
 
   if ( !IsNpc(ch) )
@@ -360,32 +360,32 @@ void gain_exp( Character *ch, short ability, long gain )
   if ( IsNpc(ch) )
     return;
 
-  set_exp( ch, ability, UMAX( 0, get_exp( ch, ability ) + gain ) );
+  SetExperience( ch, ability, UMAX( 0, GetExperience( ch, ability ) + gain ) );
 
-  if (is_not_authed(ch) && get_exp( ch, ability ) >= exp_level(get_level(ch, ability ) + 1))
+  if (is_not_authed(ch) && GetExperience( ch, ability ) >= exp_level(GetLevel(ch, ability ) + 1))
     {
       send_to_char("You can not ascend to a higher level until you are authorized.\r\n", ch);
-      set_exp( ch, ability, exp_level( get_level(ch, ability) + 1 ) - 1);
+      SetExperience( ch, ability, exp_level( GetLevel(ch, ability) + 1 ) - 1);
       return;
     }
 
-  while ( get_exp( ch, ability ) >= exp_level( get_level( ch, ability ) + 1))
+  while ( GetExperience( ch, ability ) >= exp_level( GetLevel( ch, ability ) + 1))
     {
-      short current_level = get_level( ch, ability );
+      short current_level = GetLevel( ch, ability );
       short new_level = 0;
 
       if ( current_level >= max_level( ch, ability ) )
         {
-          set_exp( ch, ability, exp_level( get_level( ch, ability ) + 1 ) - 1);
+          SetExperience( ch, ability, exp_level( GetLevel( ch, ability ) + 1 ) - 1);
           return;
         }
 
       set_char_color( AT_WHITE + AT_BLINK, ch );
       new_level = current_level + 1;
-      set_level( ch, ability, new_level );
+      SetLevel( ch, ability, new_level );
 
       ch_printf( ch, "You have now obtained %s level %d!\r\n",
-		 ability_name[ability], get_level( ch, ability ) );
+		 ability_name[ability], GetLevel( ch, ability ) );
       advance_level( ch , ability);
     }
 }
@@ -399,11 +399,11 @@ long lose_exp( Character *ch, short ability, long loss )
   if ( IsNpc(ch) )
     return 0;
 
-  current_exp = get_exp( ch, ability );
+  current_exp = GetExperience( ch, ability );
   actual_loss = UMAX( loss, 0 );
   new_exp = current_exp - actual_loss;
 
-  set_exp( ch, ability, new_exp );
+  SetExperience( ch, ability, new_exp );
 
   return actual_loss;
 }
@@ -428,9 +428,9 @@ int hit_gain( const Character *ch )
         case POS_DEAD:     return 0;
         case POS_MORTAL:   return -25;
         case POS_INCAP:    return -20;
-        case POS_STUNNED:  return get_curr_con(ch) * 2 ;
-        case POS_SLEEPING: gain += get_curr_con(ch) * 1.5;      break;
-        case POS_RESTING:  gain += get_curr_con(ch);            break;
+        case POS_STUNNED:  return GetCurrentCon(ch) * 2 ;
+        case POS_SLEEPING: gain += GetCurrentCon(ch) * 1.5;      break;
+        case POS_RESTING:  gain += GetCurrentCon(ch);            break;
         }
 
       if ( ch->pcdata->condition[COND_FULL]   == 0 )
@@ -462,7 +462,7 @@ int mana_gain( const Character *ch )
       if ( !IsForcer( ch ) )
         return (0 - ch->mana);
 
-      gain = UMIN( 5, get_level( ch, FORCE_ABILITY ) / 2 );
+      gain = UMIN( 5, GetLevel( ch, FORCE_ABILITY ) / 2 );
 
       if ( ch->position < POS_SLEEPING )
         return 0;
@@ -470,11 +470,11 @@ int mana_gain( const Character *ch )
       switch ( ch->position )
         {
         case POS_SLEEPING:
-	  gain += get_curr_int(ch) * 3;
+	  gain += GetCurrentInt(ch) * 3;
 	  break;
 
         case POS_RESTING:
-	  gain += get_curr_int(ch) * 1.5;
+	  gain += GetCurrentInt(ch) * 1.5;
 	  break;
         }
 
@@ -510,8 +510,8 @@ int move_gain( const Character *ch )
         case POS_MORTAL:   return -1;
         case POS_INCAP:    return -1;
         case POS_STUNNED:  return 1;
-        case POS_SLEEPING: gain += get_curr_dex(ch) * 2;        break;
-        case POS_RESTING:  gain += get_curr_dex(ch);            break;
+        case POS_SLEEPING: gain += GetCurrentDex(ch) * 2;        break;
+        case POS_RESTING:  gain += GetCurrentDex(ch);            break;
         }
 
 
@@ -629,7 +629,7 @@ void gain_condition( Character *ch, int iCond, int value )
   int condition;
   ch_ret retcode;
 
-  if ( value == 0 || IsNpc(ch) || get_trust(ch) >= LEVEL_IMMORTAL || is_droid(ch) || is_not_authed(ch))
+  if ( value == 0 || IsNpc(ch) || GetTrustedLevel(ch) >= LEVEL_IMMORTAL || is_droid(ch) || is_not_authed(ch))
     return;
 
   condition                         = ch->pcdata->condition[iCond];
@@ -1327,7 +1327,7 @@ void char_update( void )
           if ( ch->hit  < ch->max_hit )
             ch->hit  += hit_gain(ch);
 
-          if ( ch->mana < ch->max_mana || get_level( ch, FORCE_ABILITY ) == 1 )
+          if ( ch->mana < ch->max_mana || GetLevel( ch, FORCE_ABILITY ) == 1 )
             ch->mana += mana_gain(ch);
 
           if ( ch->move < ch->max_move )
@@ -1934,7 +1934,7 @@ void char_check( void )
             {
               if ( !is_affected_by( ch, AFF_AQUA_BREATH ) )
                 {
-                  if ( get_trust(ch) < LEVEL_IMMORTAL )
+                  if ( GetTrustedLevel(ch) < LEVEL_IMMORTAL )
                     {
                       int dam;
 
@@ -1962,7 +1962,7 @@ void char_check( void )
                    && !is_affected_by( ch, AFF_AQUA_BREATH )
                    && !ch->mount )
                 {
-                  if ( get_trust(ch) < LEVEL_IMMORTAL )
+                  if ( GetTrustedLevel(ch) < LEVEL_IMMORTAL )
                     {
                       int dam;
 
@@ -2157,7 +2157,7 @@ void drunk_randoms( Character *ch )
     {
       check_social( ch, "fart", "" );
     }
-  else if ( drunk > ( 10 + ( get_curr_con( ch ) / 5 ) )
+  else if ( drunk > ( 10 + ( GetCurrentCon( ch ) / 5 ) )
 	    && number_percent() < ( 2 * drunk / 18 ) )
     {
       CerisListIterator *iter = CreateListIterator( ch->in_room->People, ForwardsIterator );

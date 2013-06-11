@@ -262,14 +262,14 @@ void learn_from_success( Character *ch, int sn )
   if (skill_table[sn]->guild < 0 || skill_table[sn]->guild >= MAX_ABILITY )
     return;
 
-  adept = ( get_level(ch, skill_table[sn]->guild ) - skill_table[sn]->min_level )* 5 + 50;
+  adept = ( GetLevel(ch, skill_table[sn]->guild ) - skill_table[sn]->min_level )* 5 + 50;
   adept = UMIN(adept, 100);
 
   if ( ch->pcdata->learned[sn] >= adept )
     return;
 
-  if ( sklvl == 0 || sklvl > get_level( ch, skill_table[sn]->guild ) )
-    sklvl = get_level( ch, skill_table[sn]->guild );
+  if ( sklvl == 0 || sklvl > GetLevel( ch, skill_table[sn]->guild ) )
+    sklvl = GetLevel( ch, skill_table[sn]->guild );
 
   if ( ch->pcdata->learned[sn] < 100 )
     {
@@ -442,7 +442,7 @@ bool check_parry( Character *ch, Character *victim )
 
   if ( IsNpc(victim) )
     {
-      chances = UMIN( 60, get_level( victim, COMBAT_ABILITY ) );
+      chances = UMIN( 60, GetLevel( victim, COMBAT_ABILITY ) );
     }
   else
     {
@@ -495,7 +495,7 @@ bool check_dodge( Character *ch, Character *victim )
   else
     chances  = (int) (victim->pcdata->learned[gsn_dodge] / 2);
 
-  chances += 5*(get_curr_dex(victim) - 20);
+  chances += 5*(GetCurrentDex(victim) - 20);
 
   if ( number_range( 1, 100 ) > chances )
     {
@@ -529,7 +529,7 @@ bool check_grip( Character *ch, Character *victim )
     grip_chance  = (int) (victim->pcdata->learned[gsn_grip] / 2);
 
   /* Consider luck as a factor */
-  grip_chance += (2 * (get_curr_lck(victim) - 13 ) );
+  grip_chance += (2 * (GetCurrentLck(victim) - 13 ) );
 
   if ( number_percent( ) >= grip_chance + victim->top_level - ch->top_level )
     {

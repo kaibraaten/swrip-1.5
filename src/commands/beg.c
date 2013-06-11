@@ -80,7 +80,7 @@ void do_beg( Character *ch, char *argument )
     }
 
   set_wait_state( ch, skill_table[gsn_beg]->beats );
-  percent  = number_percent( ) + get_level( ch, SMUGGLING_ABILITY ) + victim->top_level;
+  percent  = number_percent( ) + GetLevel( ch, SMUGGLING_ABILITY ) + victim->top_level;
 
   if ( percent > ch->pcdata->learned[gsn_beg]  )
     {
@@ -120,7 +120,7 @@ void do_beg( Character *ch, char *argument )
   victim->gold -= amount;
   ch_printf( ch, "%s gives you %d credits.\r\n", victim->short_descr , amount );
   learn_from_success( ch, gsn_beg );
-  xp = UMIN( amount*10 , ( exp_level( get_level( ch, SMUGGLING_ABILITY ) + 1) - exp_level( get_level( ch, SMUGGLING_ABILITY ) )  )  );
+  xp = UMIN( amount*10 , ( exp_level( GetLevel( ch, SMUGGLING_ABILITY ) + 1) - exp_level( GetLevel( ch, SMUGGLING_ABILITY ) )  )  );
   xp = UMIN( xp , xp_compute( ch, victim ) );
   gain_exp( ch, SMUGGLING_ABILITY, xp );
   ch_printf( ch, "&WYou gain %ld smuggling experience points!\r\n", xp );

@@ -67,8 +67,8 @@ void do_backstab( Character *ch, char *argument )
       return;
     }
 
-  percent = number_percent( ) - (get_curr_lck(ch) - 14)
-    + (get_curr_lck(victim) - 13);
+  percent = number_percent( ) - (GetCurrentLck(ch) - 14)
+    + (GetCurrentLck(victim) - 13);
 
   set_wait_state( ch, skill_table[gsn_backstab]->beats );
 

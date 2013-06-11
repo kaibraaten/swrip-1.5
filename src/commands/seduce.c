@@ -37,7 +37,7 @@ void do_seduce ( Character *ch , char *argument )
 
   set_wait_state( ch, skill_table[gsn_seduce]->beats );
 
-  if ( victim->top_level - get_curr_cha(ch) > ch->pcdata->learned[gsn_seduce] )
+  if ( victim->top_level - GetCurrentCha(ch) > ch->pcdata->learned[gsn_seduce] )
     {
       send_to_char("You failed.\r\n", ch);
       sprintf(buf, "%s failed to seduce you.", ch->name);

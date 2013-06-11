@@ -14,7 +14,7 @@ void do_bestowarea( Character *ch, char *argument )
 
   argument = one_argument( argument, arg );
 
-  if ( get_trust (ch) < LEVEL_SUB_IMPLEM )
+  if ( GetTrustedLevel(ch) < LEVEL_SUB_IMPLEM )
     {
       send_to_char( "Sorry...\r\n", ch );
       return;
@@ -43,7 +43,7 @@ void do_bestowarea( Character *ch, char *argument )
       return;
     }
 
-  if ( get_trust(victim) < LEVEL_IMMORTAL )
+  if ( GetTrustedLevel(victim) < LEVEL_IMMORTAL )
     {
       send_to_char( "They aren't an immortal.\r\n", ch );
       return;

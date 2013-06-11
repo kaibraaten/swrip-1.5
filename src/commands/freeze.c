@@ -26,7 +26,7 @@ void do_freeze( Character *ch, char *argument )
       return;
     }
 
-  if ( get_trust( victim ) >= get_trust( ch ) )
+  if ( GetTrustedLevel( victim ) >= GetTrustedLevel( ch ) )
     {
       send_to_char( "You failed.\r\n", ch );
       return;

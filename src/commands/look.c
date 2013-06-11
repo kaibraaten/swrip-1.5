@@ -920,7 +920,7 @@ static void look_in( Character *ch, char *what, bool doexaprog )
 	      ROOM_INDEX_DATA *original = NULL;
 
 	      if ( room_is_private( ch, pexit->to_room )
-		   && get_trust(ch) < sysdata.level_override_private )
+		   && GetTrustedLevel(ch) < sysdata.level_override_private )
 		{
 		  set_char_color( AT_WHITE, ch );
 		  send_to_char( "That room is private buster!\r\n", ch );
@@ -1007,12 +1007,12 @@ static void show_exit_to_char( Character *ch, EXIT_DATA *pexit, short door )
   if ( pexit->to_room
        && ( is_affected_by( ch, AFF_SCRYING )
 	    || IS_SET( pexit->exit_info, EX_xLOOK )
-	    || get_trust(ch) >= LEVEL_IMMORTAL ) )
+	    || GetTrustedLevel(ch) >= LEVEL_IMMORTAL ) )
     {
       ROOM_INDEX_DATA *original = NULL;
 
       if ( !IS_SET( pexit->exit_info, EX_xLOOK )
-	   && get_trust( ch ) < LEVEL_IMMORTAL )
+	   && GetTrustedLevel( ch ) < LEVEL_IMMORTAL )
 	{
 	  set_char_color( AT_MAGIC, ch );
 	  send_to_char( "You attempt to scry...\r\n", ch );
@@ -1030,7 +1030,7 @@ static void show_exit_to_char( Character *ch, EXIT_DATA *pexit, short door )
 	}
 
       if ( room_is_private( ch, pexit->to_room )
-	   && get_trust(ch) < sysdata.level_override_private )
+	   && GetTrustedLevel(ch) < sysdata.level_override_private )
 	{
 	  set_char_color( AT_WHITE, ch );
 	  send_to_char( "That room is private buster!\r\n", ch );
@@ -1075,7 +1075,7 @@ static void show_no_arg( Character *ch, bool is_auto )
 
   if ( !ch->desc->original )
     {
-      if ((get_trust(ch) >= LEVEL_IMMORTAL) && (IS_SET(ch->pcdata->flags, PCFLAG_ROOM)))
+      if ((GetTrustedLevel(ch) >= LEVEL_IMMORTAL) && (IS_SET(ch->pcdata->flags, PCFLAG_ROOM)))
 	{
 	  set_char_color(AT_PURPLE, ch);
 	  ch_printf(ch, "{%d:%s}", ch->in_room->vnum, ch->in_room->area->filename);

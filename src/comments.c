@@ -190,7 +190,7 @@ void do_comment( Character *ch, char *argument )
           return;
         }
 
-      if ( get_trust(victim) >= get_trust( ch ) )
+      if ( GetTrustedLevel(victim) >= GetTrustedLevel( ch ) )
         {
           send_to_char( "You're not of the right caliber to do this...\r\n", ch );
           return;
@@ -237,7 +237,7 @@ void do_comment( Character *ch, char *argument )
           return;
         }
 
-      if ( get_trust(victim) >= get_trust( ch ) )
+      if ( GetTrustedLevel(victim) >= GetTrustedLevel( ch ) )
         {
           send_to_char( "You're not of the right caliber to do this...\r\n", ch );
           return;
@@ -378,7 +378,7 @@ void do_comment( Character *ch, char *argument )
           return;
         }
 
-      if (  get_trust(victim) > get_trust( ch ) )
+      if (  GetTrustedLevel(victim) > GetTrustedLevel( ch ) )
         {
           send_to_char( "You're not of the right caliber to do this...\r\n", ch );
           return;
@@ -444,8 +444,8 @@ void do_comment( Character *ch, char *argument )
           return;
         }
 
-      if (  (get_trust(victim) >= get_trust( ch ) )
-            || ( get_trust( ch ) < 58                ) )   /* switch to some LEVEL_ thingie */
+      if (  (GetTrustedLevel(victim) >= GetTrustedLevel( ch ) )
+            || ( GetTrustedLevel( ch ) < 58                ) )   /* switch to some LEVEL_ thingie */
         {
           send_to_char( "You're not of the right caliber to do this...\r\n", ch );
           return;
@@ -463,7 +463,7 @@ void do_comment( Character *ch, char *argument )
       for ( pnote = victim->pcdata->comments; pnote; pnote = pnote->next )
         {
           vnum++;
-          if ( ( 58 <= get_trust( ch ) )    /* switch to some LEVEL_ thingie */
+          if ( ( 58 <= GetTrustedLevel( ch ) )    /* switch to some LEVEL_ thingie */
                &&   ( vnum == anum ) )
             {
               comment_remove( ch, victim, pnote );

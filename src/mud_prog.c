@@ -688,7 +688,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
         }
       if ( !str_cmp(chck, "isimmort") )
         {
-          return (get_trust(chkchar) >= LEVEL_IMMORTAL);
+          return (GetTrustedLevel(chkchar) >= LEVEL_IMMORTAL);
         }
       if ( !str_cmp(chck, "ischarmed") )
         {
@@ -749,7 +749,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
 
       if ( !str_cmp(chck, "level") )
         {
-          return mprog_veval(get_trust(chkchar), opr, atoi(rval), mob);
+          return mprog_veval(GetTrustedLevel(chkchar), opr, atoi(rval), mob);
         }
       if ( !str_cmp(chck, "goldamt") )
         {
@@ -793,31 +793,31 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
         }
       if ( !str_cmp(chck, "str") )
         {
-          return mprog_veval(get_curr_str(chkchar), opr, atoi(rval), mob);
+          return mprog_veval(GetCurrentStr(chkchar), opr, atoi(rval), mob);
         }
       if ( !str_cmp(chck, "wis") )
         {
-          return mprog_veval(get_curr_wis(chkchar), opr, atoi(rval), mob);
+          return mprog_veval(GetCurrentWis(chkchar), opr, atoi(rval), mob);
         }
       if ( !str_cmp(chck, "int") )
         {
-          return mprog_veval(get_curr_int(chkchar), opr, atoi(rval), mob);
+          return mprog_veval(GetCurrentInt(chkchar), opr, atoi(rval), mob);
         }
       if ( !str_cmp(chck, "dex") )
         {
-          return mprog_veval(get_curr_dex(chkchar), opr, atoi(rval), mob);
+          return mprog_veval(GetCurrentDex(chkchar), opr, atoi(rval), mob);
         }
       if ( !str_cmp(chck, "con") )
         {
-          return mprog_veval(get_curr_con(chkchar), opr, atoi(rval), mob);
+          return mprog_veval(GetCurrentCon(chkchar), opr, atoi(rval), mob);
         }
       if ( !str_cmp(chck, "cha") )
         {
-          return mprog_veval(get_curr_cha(chkchar), opr, atoi(rval), mob);
+          return mprog_veval(GetCurrentCha(chkchar), opr, atoi(rval), mob);
         }
       if ( !str_cmp(chck, "lck") )
         {
-          return mprog_veval(get_curr_lck(chkchar), opr, atoi(rval), mob);
+          return mprog_veval(GetCurrentLck(chkchar), opr, atoi(rval), mob);
         }
       if (!str_cmp(chck, "iscarrying"))
         {
@@ -3061,7 +3061,7 @@ Character *get_char_room_mp( Character *ch, char *argument )
   if ( !str_cmp( arg, "self" ) )
     return ch;
 
-  if ( get_trust(ch) >= LEVEL_SAVIOR && is_number( arg ) )
+  if ( GetTrustedLevel(ch) >= LEVEL_SAVIOR && is_number( arg ) )
     vnum = atoi( arg );
   else
     vnum = -1;

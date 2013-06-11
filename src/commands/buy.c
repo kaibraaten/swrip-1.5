@@ -189,7 +189,7 @@ void do_buy( Character *ch, char *argument )
         }
 
       if ( IS_SET(obj->extra_flags, ITEM_PROTOTYPE)
-           && get_trust( ch ) < LEVEL_IMMORTAL )
+           && GetTrustedLevel( ch ) < LEVEL_IMMORTAL )
         {
           act( AT_TELL, "$n tells you 'This is a only a prototype!  I can't sell you that...'",
                keeper, NULL, ch, TO_VICT );

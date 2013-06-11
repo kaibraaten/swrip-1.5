@@ -26,7 +26,7 @@ void do_disconnect( Character *ch, char *argument )
       return;
     }
 
-  if ( get_trust(ch) <= get_trust( victim ) )
+  if ( GetTrustedLevel(ch) <= GetTrustedLevel( victim ) )
     {
       send_to_char( "They might not like that...\r\n", ch );
       return;

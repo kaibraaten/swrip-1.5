@@ -30,7 +30,7 @@ void do_reply( Character *ch, char *argument )
     }
 
   if ( !IsNpc( victim ) && ( victim->switched )
-       && can_see( ch, victim ) && ( get_trust( ch ) > LEVEL_AVATAR ) )
+       && can_see( ch, victim ) && ( GetTrustedLevel( ch ) > LEVEL_AVATAR ) )
     {
       send_to_char( "That player is switched.\r\n", ch );
       return;
@@ -42,7 +42,7 @@ void do_reply( Character *ch, char *argument )
     }
 
   if ( IS_SET( victim->deaf, CHANNEL_TELLS )
-       && ( !IsImmortal( ch ) || ( get_trust( ch ) < get_trust( victim ) ) ) )
+       && ( !IsImmortal( ch ) || ( GetTrustedLevel( ch ) < GetTrustedLevel( victim ) ) ) )
     {
       act( AT_PLAIN, "They can't hear you.", ch, NULL, victim, TO_CHAR );
       return;

@@ -68,7 +68,7 @@ void do_opedit( Character *ch, char *argument )
       return;
     }
 
-  if ( get_trust( ch ) < LEVEL_GOD )
+  if ( GetTrustedLevel( ch ) < LEVEL_GOD )
     {
       if ( ( obj = get_obj_carry( ch, arg1 ) ) == NULL )
 	{

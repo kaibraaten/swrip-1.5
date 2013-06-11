@@ -35,7 +35,7 @@ bool can_rmodify( const Character *ch, const ROOM_INDEX_DATA *room )
   if ( IsNpc( ch ) )
     return FALSE;
 
-  if ( get_trust( ch ) >= sysdata.level_modify_proto )
+  if ( GetTrustedLevel( ch ) >= sysdata.level_modify_proto )
     return TRUE;
 
   if ( !ch->pcdata || !(pArea=ch->pcdata->area) )
@@ -59,7 +59,7 @@ bool can_omodify( const Character *ch, const OBJ_DATA *obj )
   if ( IsNpc( ch ) )
     return FALSE;
 
-  if ( get_trust( ch ) >= sysdata.level_modify_proto )
+  if ( GetTrustedLevel( ch ) >= sysdata.level_modify_proto )
     return TRUE;
 
   if ( !ch->pcdata || !(pArea=ch->pcdata->area) )
@@ -83,7 +83,7 @@ bool can_oedit( const Character *ch, const OBJ_INDEX_DATA *obj )
   if ( IsNpc( ch ) )
     return FALSE;
 
-  if ( get_trust( ch ) >= LEVEL_GOD )
+  if ( GetTrustedLevel( ch ) >= LEVEL_GOD )
     return TRUE;
 
   if ( !ch->pcdata || !(pArea=ch->pcdata->area) )
@@ -110,8 +110,8 @@ bool can_mmodify( const Character *ch, const Character *mob )
 
   if ( !IsNpc( mob ) )
     {
-      if ( get_trust( ch ) >= sysdata.level_modify_proto && get_trust(ch) >
-           get_trust( mob ) )
+      if ( GetTrustedLevel( ch ) >= sysdata.level_modify_proto && GetTrustedLevel(ch) >
+           GetTrustedLevel( mob ) )
         return TRUE;
       else
         send_to_char( "You can't do that.\r\n", ch );
@@ -122,7 +122,7 @@ bool can_mmodify( const Character *ch, const Character *mob )
 
   if ( IsNpc( ch ) )
     return FALSE;
-  if ( get_trust( ch ) >= sysdata.level_modify_proto )
+  if ( GetTrustedLevel( ch ) >= sysdata.level_modify_proto )
     return TRUE;
   if ( !ch->pcdata || !(pArea=ch->pcdata->area) )
     {
@@ -144,7 +144,7 @@ bool can_medit( const Character *ch, const MOB_INDEX_DATA *mob )
 
   if ( IsNpc( ch ) )
     return FALSE;
-  if ( get_trust( ch ) >= LEVEL_GOD )
+  if ( GetTrustedLevel( ch ) >= LEVEL_GOD )
     return TRUE;
   if ( !ch->pcdata || !(pArea=ch->pcdata->area) )
     {
@@ -185,7 +185,7 @@ void assign_area( Character *ch )
 
   if ( IsNpc( ch ) )
     return;
-  if ( get_trust( ch ) >= LEVEL_AVATAR
+  if ( GetTrustedLevel( ch ) >= LEVEL_AVATAR
        &&   ch->pcdata->r_range_lo
        &&   ch->pcdata->r_range_hi )
     {

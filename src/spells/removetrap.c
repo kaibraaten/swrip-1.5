@@ -45,7 +45,7 @@ ch_ret spell_remove_trap( int sn, int level, Character *ch, void *vo )
     }
 
 
-  if ( chance(ch, 70 + get_curr_wis(ch)) )
+  if ( chance(ch, 70 + GetCurrentWis(ch)) )
     {
       send_to_char( "Ooops!\r\n", ch );
       retcode = spring_trap(ch, trap);

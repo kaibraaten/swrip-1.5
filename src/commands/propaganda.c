@@ -103,7 +103,7 @@ void do_propaganda ( Character *ch , char *argument )
     }
   set_wait_state( ch, skill_table[gsn_propaganda]->beats );
 
-  if ( victim->top_level - get_curr_cha(ch) > ch->pcdata->learned[gsn_propaganda]  )
+  if ( victim->top_level - GetCurrentCha(ch) > ch->pcdata->learned[gsn_propaganda]  )
     {
 
       if ( is_clanned( ch ) ? planet->governed_by != clan : TRUE)

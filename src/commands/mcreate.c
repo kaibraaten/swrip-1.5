@@ -49,7 +49,7 @@ void do_mcreate( Character *ch, char *argument )
   if ( IsNpc( ch ) )
     return;
 
-  if ( get_trust( ch ) <= LEVEL_IMMORTAL )
+  if ( GetTrustedLevel( ch ) <= LEVEL_IMMORTAL )
     {
       AREA_DATA *pArea;
 

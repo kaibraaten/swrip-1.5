@@ -23,7 +23,7 @@ void do_oinvoke( Character *ch, char *argument )
 
   if ( arg2[0] == '\0' )
     {
-      level = get_trust( ch );
+      level = GetTrustedLevel( ch );
     }
   else
     {
@@ -34,7 +34,7 @@ void do_oinvoke( Character *ch, char *argument )
         }
       level = atoi( arg2 );
 
-      if ( level < 0 || level > get_trust( ch ) )
+      if ( level < 0 || level > GetTrustedLevel( ch ) )
 	{
           send_to_char( "Limited to your trust level.\r\n", ch );
           return;
@@ -67,7 +67,7 @@ void do_oinvoke( Character *ch, char *argument )
   else
     vnum = atoi( arg1 );
 
-  if ( get_trust(ch) < LEVEL_DEMI )
+  if ( GetTrustedLevel(ch) < LEVEL_DEMI )
     {
       AREA_DATA *pArea;
 

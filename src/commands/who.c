@@ -329,7 +329,7 @@ void do_who( Character *ch, char *argument )
       cur_who->text = str_dup( buf );
       if ( IsImmortal( wch ) )
         cur_who->type = WT_IMM;
-      else if ( get_trust( wch ) <= 5 )
+      else if ( GetTrustedLevel( wch ) <= 5 )
         cur_who->type = WT_NEWBIE;
       else
         cur_who->type = WT_MORTAL;

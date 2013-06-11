@@ -23,7 +23,7 @@ void do_sneak( Character *ch, char *argument )
   if ( IsNpc(ch) || number_percent( ) < ch->pcdata->learned[gsn_sneak] )
     {
       af.type      = gsn_sneak;
-      af.duration  = get_level( ch, SMUGGLING_ABILITY ) * DUR_CONV;
+      af.duration  = GetLevel( ch, SMUGGLING_ABILITY ) * DUR_CONV;
       af.location  = APPLY_NONE;
       af.modifier  = 0;
       af.bitvector = AFF_SNEAK;

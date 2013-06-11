@@ -88,7 +88,7 @@ void do_mass_propaganda ( Character *ch , char *argument )
 
   set_wait_state( ch, skill_table[gsn_masspropaganda]->beats );
 
-  if ( percent - get_curr_cha(ch) + victim->top_level > ch->pcdata->learned[gsn_masspropaganda]  )
+  if ( percent - GetCurrentCha(ch) + victim->top_level > ch->pcdata->learned[gsn_masspropaganda]  )
     {
 
       if ( planet->governed_by != clan )

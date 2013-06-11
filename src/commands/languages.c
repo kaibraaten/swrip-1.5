@@ -85,7 +85,7 @@ void do_languages( Character *ch, char *argument )
 
       ch->gold -= 25;
       /* Max 12% (5 + 4 + 3) at 24+ int and 21+ wis. -- Altrag */
-      prct = 5 + (get_curr_int(ch) / 6) + (get_curr_wis(ch) / 7);
+      prct = 5 + (GetCurrentInt(ch) / 6) + (GetCurrentWis(ch) / 7);
       ch->pcdata->learned[sn] += prct;
       ch->pcdata->learned[sn] = UMIN(ch->pcdata->learned[sn], 99);
       SET_BIT( ch->speaks, lang_array[lang] );

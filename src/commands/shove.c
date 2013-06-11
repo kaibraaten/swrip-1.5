@@ -265,7 +265,7 @@ void do_shove( Character *ch, char *argument )
     }
 
   shove_chance = 50;
-  shove_chance += ((get_curr_str(ch) - 15) * 3);
+  shove_chance += ((GetCurrentStr(ch) - 15) * 3);
   shove_chance += (ch->top_level - victim->top_level);
 
   if (shove_chance < number_percent( ))

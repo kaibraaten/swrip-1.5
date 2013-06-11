@@ -55,7 +55,7 @@ void do_aid( Character *ch, char *argument )
   ch->alignment = ch->alignment + 20;
   ch->alignment = URANGE( -1000, ch->alignment, 1000 );
 
-  percent = number_percent( ) - (get_curr_lck(ch) - 13);
+  percent = number_percent( ) - (GetCurrentLck(ch) - 13);
   set_wait_state( ch, skill_table[gsn_aid]->beats );
   if ( !IsNpc(ch) && percent > ch->pcdata->learned[gsn_aid] )
     {

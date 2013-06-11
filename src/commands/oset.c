@@ -174,7 +174,7 @@ void do_oset( Character *ch, char *argument )
       return;
     }
 
-  if ( !obj && get_trust(ch) <= LEVEL_IMMORTAL )
+  if ( !obj && GetTrustedLevel(ch) <= LEVEL_IMMORTAL )
     {
       if ( ( obj = get_obj_here( ch, arg1 ) ) == NULL )
         {

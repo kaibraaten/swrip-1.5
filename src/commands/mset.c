@@ -145,7 +145,7 @@ void do_mset( Character *ch, char *argument )
       return;
     }
 
-  if ( !victim && get_trust( ch ) <= LEVEL_IMMORTAL )
+  if ( !victim && GetTrustedLevel( ch ) <= LEVEL_IMMORTAL )
     {
       if ( ( victim = get_char_room( ch, arg1 ) ) == NULL )
         {
@@ -162,13 +162,13 @@ void do_mset( Character *ch, char *argument )
             return;
           }
       }
-  if ( get_trust(ch) < sysdata.level_mset_player && (victim != ch) && !IsNpc( victim ) )
+  if ( GetTrustedLevel(ch) < sysdata.level_mset_player && (victim != ch) && !IsNpc( victim ) )
     {
       send_to_char( "You can't do that!\r\n", ch );
       DISPOSE(ch->dest_buf);
       return;
     }
-  if ( get_trust( ch ) < get_trust( victim ) && !IsNpc( victim ) )
+  if ( GetTrustedLevel( ch ) < GetTrustedLevel( victim ) && !IsNpc( victim ) )
     {
       send_to_char( "You can't do that!\r\n", ch );
       DISPOSE(ch->dest_buf);
@@ -461,7 +461,7 @@ void do_mset( Character *ch, char *argument )
 
         for ( ability = 0 ; ability < MAX_ABILITY ; ability++ )
 	  {
-	    set_level( victim, ability, value );
+	    SetLevel( victim, ability, value );
 	  }
       }
 
@@ -631,7 +631,7 @@ void do_mset( Character *ch, char *argument )
       char *pwdnew;
       char *p;
 
-      if ( get_trust( ch ) < LEVEL_SUB_IMPLEM )
+      if ( GetTrustedLevel( ch ) < LEVEL_SUB_IMPLEM )
         {
           send_to_char( "You can't do that.\r\n", ch );
           return;
@@ -818,7 +818,7 @@ void do_mset( Character *ch, char *argument )
     {
       if ( !can_mmodify( ch, victim ) )
         return;
-      if ( !IsNpc(victim) && get_trust( ch ) < LEVEL_SUPREME )
+      if ( !IsNpc(victim) && GetTrustedLevel( ch ) < LEVEL_SUPREME )
         {
           send_to_char( "Not on PC's.\r\n", ch );
           return;
@@ -836,7 +836,7 @@ void do_mset( Character *ch, char *argument )
 
   if ( !str_cmp( arg2, "minsnoop" ) )
     {
-      if ( get_trust( ch ) < LEVEL_SUB_IMPLEM )
+      if ( GetTrustedLevel( ch ) < LEVEL_SUB_IMPLEM )
         {
           send_to_char( "You can't do that.\r\n", ch );
           return;
@@ -857,7 +857,7 @@ void do_mset( Character *ch, char *argument )
     {
       Clan *clan;
 
-      if ( get_trust( ch ) < LEVEL_GREATER )
+      if ( GetTrustedLevel( ch ) < LEVEL_GREATER )
         {
           send_to_char( "You can't do that.\r\n", ch );
           return;
@@ -1039,7 +1039,7 @@ void do_mset( Character *ch, char *argument )
   if ( !str_cmp( arg2, "flags" ) )
     {
       bool pcflag;
-      if ( !IsNpc( victim ) && get_trust( ch ) < LEVEL_GREATER )
+      if ( !IsNpc( victim ) && GetTrustedLevel( ch ) < LEVEL_GREATER )
         {
           send_to_char( "You can only modify a mobile's flags.\r\n", ch );
           return;
@@ -1101,7 +1101,7 @@ void do_mset( Character *ch, char *argument )
           return;
         }
 
-      if ( get_trust( ch ) < LEVEL_GREATER )
+      if ( GetTrustedLevel( ch ) < LEVEL_GREATER )
         {
           send_to_char( "You are not a high enough level to do that.\r\n", ch );
           return;
@@ -1160,7 +1160,7 @@ void do_mset( Character *ch, char *argument )
 
   if ( !str_cmp( arg2, "affected" ) )
     {
-      if ( !IsNpc( victim ) && get_trust( ch ) < LEVEL_LESSER )
+      if ( !IsNpc( victim ) && GetTrustedLevel( ch ) < LEVEL_LESSER )
         {
           send_to_char( "You can only modify a mobile's flags.\r\n", ch );
           return;
@@ -1192,7 +1192,7 @@ void do_mset( Character *ch, char *argument )
    */
   if ( !str_cmp( arg2, "r" ) )
     {
-      if ( !IsNpc( victim ) && get_trust( ch ) < LEVEL_LESSER )
+      if ( !IsNpc( victim ) && GetTrustedLevel( ch ) < LEVEL_LESSER )
         {
           send_to_char( "You can only modify a mobile's ris.\r\n", ch );
           return;
@@ -1206,7 +1206,7 @@ void do_mset( Character *ch, char *argument )
     }
   if ( !str_cmp( arg2, "i" ) )
     {
-      if ( !IsNpc( victim ) && get_trust( ch ) < LEVEL_LESSER )
+      if ( !IsNpc( victim ) && GetTrustedLevel( ch ) < LEVEL_LESSER )
         {
           send_to_char( "You can only modify a mobile's ris.\r\n", ch );
           return;
@@ -1221,7 +1221,7 @@ void do_mset( Character *ch, char *argument )
     }
   if ( !str_cmp( arg2, "s" ) )
     {
-      if ( !IsNpc( victim ) && get_trust( ch ) < LEVEL_LESSER )
+      if ( !IsNpc( victim ) && GetTrustedLevel( ch ) < LEVEL_LESSER )
         {
           send_to_char( "You can only modify a mobile's ris.\r\n", ch );
           return;
@@ -1235,7 +1235,7 @@ void do_mset( Character *ch, char *argument )
     }
   if ( !str_cmp( arg2, "ri" ) )
     {
-      if ( !IsNpc( victim ) && get_trust( ch ) < LEVEL_LESSER )
+      if ( !IsNpc( victim ) && GetTrustedLevel( ch ) < LEVEL_LESSER )
         {
           send_to_char( "You can only modify a mobile's ris.\r\n", ch );
           return;
@@ -1252,7 +1252,7 @@ void do_mset( Character *ch, char *argument )
 
   if ( !str_cmp( arg2, "rs" ) )
     {
-      if ( !IsNpc( victim ) && get_trust( ch ) < LEVEL_LESSER )
+      if ( !IsNpc( victim ) && GetTrustedLevel( ch ) < LEVEL_LESSER )
         {
           send_to_char( "You can only modify a mobile's ris.\r\n", ch );
           return;
@@ -1268,7 +1268,7 @@ void do_mset( Character *ch, char *argument )
     }
   if ( !str_cmp( arg2, "is" ) )
     {
-      if ( !IsNpc( victim ) && get_trust( ch ) < LEVEL_LESSER )
+      if ( !IsNpc( victim ) && GetTrustedLevel( ch ) < LEVEL_LESSER )
         {
           send_to_char( "You can only modify a mobile's ris.\r\n", ch );
           return;
@@ -1284,7 +1284,7 @@ void do_mset( Character *ch, char *argument )
     }
   if ( !str_cmp( arg2, "ris" ) )
     {
-      if ( !IsNpc( victim ) && get_trust( ch ) < LEVEL_LESSER )
+      if ( !IsNpc( victim ) && GetTrustedLevel( ch ) < LEVEL_LESSER )
         {
           send_to_char( "You can only modify a mobile's ris.\r\n", ch );
           return;
@@ -1303,7 +1303,7 @@ void do_mset( Character *ch, char *argument )
 
   if ( !str_cmp( arg2, "resistant" ) )
     {
-      if ( !IsNpc( victim ) && get_trust( ch ) < LEVEL_LESSER )
+      if ( !IsNpc( victim ) && GetTrustedLevel( ch ) < LEVEL_LESSER )
         {
           send_to_char( "You can only modify a mobile's resistancies.\r\n", ch );
           return;
@@ -1331,7 +1331,7 @@ void do_mset( Character *ch, char *argument )
 
   if ( !str_cmp( arg2, "immune" ) )
     {
-      if ( !IsNpc( victim ) && get_trust( ch ) < LEVEL_LESSER )
+      if ( !IsNpc( victim ) && GetTrustedLevel( ch ) < LEVEL_LESSER )
         {
           send_to_char( "You can only modify a mobile's immunities.\r\n", ch );
           return;
@@ -1360,7 +1360,7 @@ void do_mset( Character *ch, char *argument )
 
   if ( !str_cmp( arg2, "susceptible" ) )
     {
-      if ( !IsNpc( victim ) && get_trust( ch ) < LEVEL_LESSER )
+      if ( !IsNpc( victim ) && GetTrustedLevel( ch ) < LEVEL_LESSER )
         {
           send_to_char( "You can only modify a mobile's susceptibilities.\r\n", ch );
           return;
@@ -1389,7 +1389,7 @@ void do_mset( Character *ch, char *argument )
 
   if ( !str_cmp( arg2, "part" ) )
     {
-      if ( !IsNpc( victim ) && get_trust( ch ) < LEVEL_LESSER )
+      if ( !IsNpc( victim ) && GetTrustedLevel( ch ) < LEVEL_LESSER )
         {
           send_to_char( "You can only modify a mobile's parts.\r\n", ch );
           return;

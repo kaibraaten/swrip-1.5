@@ -16,7 +16,7 @@ void do_mp_damage( Character *ch, char *argument )
   if ( is_affected_by( ch, AFF_CHARM ) )
     return;
 
-  if ( !IsNpc( ch ) || ( ch->desc && get_trust( ch ) < LEVEL_IMMORTAL )  )
+  if ( !IsNpc( ch ) || ( ch->desc && GetTrustedLevel( ch ) < LEVEL_IMMORTAL )  )
     {
       send_to_char( "Huh?\r\n", ch );
       return;
@@ -179,13 +179,13 @@ static ch_ret simple_damage( Character *ch, Character *victim, int dam, int dt )
    */
   victim->hit -= dam;
   if ( !IsNpc(victim)
-       &&   get_trust(victim) >= LEVEL_IMMORTAL
+       &&   GetTrustedLevel(victim) >= LEVEL_IMMORTAL
        &&   victim->hit < 1 )
     victim->hit = 1;
 
   if ( !npcvict
-       &&   get_trust(victim) >= LEVEL_IMMORTAL
-       &&        get_trust(ch)     >= LEVEL_IMMORTAL
+       &&   GetTrustedLevel(victim) >= LEVEL_IMMORTAL
+       &&        GetTrustedLevel(ch)     >= LEVEL_IMMORTAL
        &&   victim->hit < 1 )
     victim->hit = 1;
   update_pos( victim );

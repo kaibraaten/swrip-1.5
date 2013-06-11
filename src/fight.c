@@ -449,7 +449,7 @@ ch_ret multi_hit( Character *ch, Character *victim, int dt )
 
   if ( get_eq_char( ch, WEAR_DUAL_WIELD ) )
     {
-      dual_bonus = IsNpc(ch) ? (get_level( ch, COMBAT_ABILITY ) / 10) : (ch->pcdata->learned[gsn_dual_wield] / 10);
+      dual_bonus = IsNpc(ch) ? (GetLevel( ch, COMBAT_ABILITY ) / 10) : (ch->pcdata->learned[gsn_dual_wield] / 10);
       hit_chance = IsNpc(ch) ? ch->top_level : ch->pcdata->learned[gsn_dual_wield];
       if ( number_percent( ) < hit_chance )
         {
@@ -580,7 +580,7 @@ int weapon_prof_bonus_check( Character *ch, OBJ_DATA *wield, int *gsn_ptr )
 
     }
   if ( IsNpc(ch) && wield )
-    bonus = get_trust(ch);
+    bonus = GetTrustedLevel(ch);
   return bonus;
 }
 
@@ -611,8 +611,8 @@ short off_shld_lvl( Character *ch, Character *victim )
 
   if ( !IsNpc(ch) )            /* players get much less effect */
     {
-      lvl = UMAX( 1, (get_level( ch, FORCE_ABILITY ) ) );
-      if ( number_percent() + (get_level( victim, COMBAT_ABILITY ) - lvl) < 35 )
+      lvl = UMAX( 1, (GetLevel( ch, FORCE_ABILITY ) ) );
+      if ( number_percent() + (GetLevel( victim, COMBAT_ABILITY ) - lvl) < 35 )
         return lvl;
       else
         return 0;
@@ -620,7 +620,7 @@ short off_shld_lvl( Character *ch, Character *victim )
   else
     {
       lvl = ch->top_level;
-      if ( number_percent() + (get_level( victim, COMBAT_ABILITY ) - lvl) < 70 )
+      if ( number_percent() + (GetLevel( victim, COMBAT_ABILITY ) - lvl) < 70 )
         return lvl;
       else
         return 0;
@@ -743,7 +743,7 @@ ch_ret one_hit( Character *ch, Character *victim, int dt )
    */
   thac0_00 = 20;
   thac0_32 = 10;
-  thac0     = interpolate( get_level( ch, COMBAT_ABILITY ), thac0_00, thac0_32 ) - get_hitroll(ch);
+  thac0     = interpolate( GetLevel( ch, COMBAT_ABILITY ), thac0_00, thac0_32 ) - get_hitroll(ch);
   victim_ac = (int) (get_armor_class(victim) / 10);
 
   /* if you can't see what's coming... */
@@ -806,10 +806,10 @@ ch_ret one_hit( Character *ch, Character *victim, int dt )
   if ( !is_awake(victim) )
     dam *= 2;
   if ( dt == gsn_backstab )
-    dam *= (2 + URANGE( 2, get_level( ch, HUNTING_ABILITY ) - (get_level( victim, COMBAT_ABILITY ) / 4), 30 ) / 8);
+    dam *= (2 + URANGE( 2, GetLevel( ch, HUNTING_ABILITY ) - (GetLevel( victim, COMBAT_ABILITY ) / 4), 30 ) / 8);
 
   if ( dt == gsn_circle )
-    dam *= (2 + URANGE( 2, get_level( ch, HUNTING_ABILITY ) - (get_level( victim, COMBAT_ABILITY ) / 2), 30 ) / 40);
+    dam *= (2 + URANGE( 2, GetLevel( ch, HUNTING_ABILITY ) - (GetLevel( victim, COMBAT_ABILITY ) / 2), 30 ) / 40);
 
   plusris = 0;
 
@@ -901,7 +901,7 @@ ch_ret one_hit( Character *ch, Character *victim, int dt )
           dam /= 10;
           wield->value[4] -= 3;
           fail = FALSE;
-          hit_chance = ris_save( victim, get_level( ch, COMBAT_ABILITY ), RIS_PARALYSIS );
+          hit_chance = ris_save( victim, GetLevel( ch, COMBAT_ABILITY ), RIS_PARALYSIS );
           if ( hit_chance == 1000 )
             fail = TRUE;
           else
@@ -911,7 +911,7 @@ ch_ret one_hit( Character *ch, Character *victim, int dt )
               fail = TRUE;
               victim->was_stunned--;
             }
-          hit_chance = 100 - get_curr_con(victim) - get_level( victim, COMBAT_ABILITY ) / 2;
+          hit_chance = 100 - GetCurrentCon(victim) - GetLevel( victim, COMBAT_ABILITY ) / 2;
           /* harder for player to stun another player */
           if ( !IsNpc(ch) && !IsNpc(victim) )
             hit_chance -= sysdata.stun_plr_vs_plr;
@@ -1360,12 +1360,12 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
         {
           if ( IsNpc(ch)
                &&   IS_SET( ch->attacks, DFND_DISARM )
-               &&   number_percent( ) < get_level( ch, COMBAT_ABILITY ) / 2 )
+               &&   number_percent( ) < GetLevel( ch, COMBAT_ABILITY ) / 2 )
             disarm( ch, victim );
 
           if ( IsNpc(ch)
                &&   IS_SET( ch->attacks, ATCK_TRIP )
-               &&   number_percent( ) < get_level( ch, COMBAT_ABILITY ) )
+               &&   number_percent( ) < GetLevel( ch, COMBAT_ABILITY ) )
             trip( ch, victim );
 
           if ( check_parry( ch, victim ) )
@@ -1475,7 +1475,7 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
        && !is_affected_by( victim, AFF_POISON )
        &&  is_wielding_poisoned( ch )
        && !IS_SET( victim->immune, RIS_POISON )
-       && !saves_poison_death( get_level( ch, COMBAT_ABILITY ), victim ) )
+       && !saves_poison_death( GetLevel( ch, COMBAT_ABILITY ), victim ) )
     {
       AFFECT_DATA af;
 
@@ -1489,8 +1489,8 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
     }
 
   if ( !npcvict
-       &&   get_trust(victim) >= LEVEL_IMMORTAL
-       &&        get_trust(ch)     >= LEVEL_IMMORTAL
+       &&   GetTrustedLevel(victim) >= LEVEL_IMMORTAL
+       &&        GetTrustedLevel(ch)     >= LEVEL_IMMORTAL
        &&   victim->hit < 1 )
     victim->hit = 1;
   update_pos( victim );
@@ -1624,7 +1624,7 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
 
       if ( IsNpc( ch ) && !IsNpc( victim ) )
         {
-          long xp_to_lose = UMAX( ( get_exp( victim, COMBAT_ABILITY ) - exp_level( get_level( ch, COMBAT_ABILITY ) ) ), 0 );
+          long xp_to_lose = UMAX( ( GetExperience( victim, COMBAT_ABILITY ) - exp_level( GetLevel( ch, COMBAT_ABILITY ) ) ), 0 );
 	  long xp_actually_lost = lose_exp( victim, COMBAT_ABILITY, xp_to_lose );
 
           ch_printf( victim, "You lose %ld experience.\r\n", xp_actually_lost );
@@ -1652,7 +1652,7 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
         }
       else
         if ( !IsNpc(ch) )              /* keep track of mob vnum killed */
-          add_kill( ch, victim );
+          AddKill( ch, victim );
 
       check_killer( ch, victim );
 
@@ -1778,7 +1778,7 @@ bool is_safe( Character *ch, Character *victim )
       return TRUE;
     }
 
-  if ( get_trust(ch) > LEVEL_HERO )
+  if ( GetTrustedLevel(ch) > LEVEL_HERO )
     return FALSE;
 
   if ( IsNpc(ch) || IsNpc(victim) )
@@ -1978,7 +1978,7 @@ void set_fighting( Character *ch, Character *victim )
   fight->xp      = (int) xp_compute( ch, victim );
   fight->align = align_compute( ch, victim );
   if ( !IsNpc(ch) && IsNpc(victim) )
-    fight->timeskilled = times_killed(ch, victim);
+    fight->timeskilled = TimesKilled(ch, victim);
   ch->num_fighting = 1;
   ch->fighting = fight;
   ch->position = POS_FIGHTING;
@@ -2356,7 +2356,7 @@ void group_gain( Character *ch, Character *victim )
 
       if ( lch == gch && members > 1 )
         {
-          xp = URANGE( members, xp*members, (exp_level( get_level( gch, LEADERSHIP_ABILITY ) + 1) - exp_level(get_level( gch, LEADERSHIP_ABILITY ) ) / 10) );
+          xp = URANGE( members, xp*members, (exp_level( GetLevel( gch, LEADERSHIP_ABILITY ) + 1) - exp_level(GetLevel( gch, LEADERSHIP_ABILITY ) ) / 10) );
           sprintf( buf, "You get %d leadership experience for leading your group to victory.\r\n", xp );
           send_to_char( buf, gch );
           gain_exp( gch, LEADERSHIP_ABILITY, xp );
@@ -2429,8 +2429,8 @@ int align_compute( Character *gch, Character *victim )
 int xp_compute( const Character *gch, const Character *victim )
 {
   int align;
-  int xp = (get_exp_worth( victim )
-	    *  URANGE( 1, (get_level( victim, COMBAT_ABILITY ) - get_level( gch, COMBAT_ABILITY ) ) + 10, 20 )) / 10;
+  int xp = (GetExperienceWorth( victim )
+	    *  URANGE( 1, (GetLevel( victim, COMBAT_ABILITY ) - GetLevel( gch, COMBAT_ABILITY ) ) + 10, 20 )) / 10;
   align = gch->alignment - victim->alignment;
 
   /* bonus for attacking opposite alignment */
@@ -2446,7 +2446,7 @@ int xp_compute( const Character *gch, const Character *victim )
   /* reduce exp for killing the same mob repeatedly             -Thoric */
   if ( !IsNpc( gch ) && IsNpc( victim ) )
     {
-      int times = times_killed( gch, victim );
+      int times = TimesKilled( gch, victim );
 
       if ( times >= 5 )
         xp = 0;
@@ -2457,7 +2457,7 @@ int xp_compute( const Character *gch, const Character *victim )
 
   /* new xp cap for swreality */
 
-  return URANGE(1, xp, ( exp_level( get_level( gch, COMBAT_ABILITY ) + 1 ) - exp_level( get_level( gch, COMBAT_ABILITY ) ) ) );
+  return URANGE(1, xp, ( exp_level( GetLevel( gch, COMBAT_ABILITY ) + 1 ) - exp_level( GetLevel( gch, COMBAT_ABILITY ) ) ) );
 }
 
 /*
@@ -2604,7 +2604,7 @@ void dam_message( Character *ch, Character *victim, int dam, int dt )
         sprintf( buf3, "$n's %s %s you%c", attack, vp, punct );
       }
 
-  if ( get_level( ch, COMBAT_ABILITY ) >= 50 )
+  if ( GetLevel( ch, COMBAT_ABILITY ) >= 50 )
     sprintf( buf2, "%s You do %d points of damage.", buf2, dam);
 
   act( AT_ACTION, buf1, ch, NULL, victim, TO_NOTVICT );

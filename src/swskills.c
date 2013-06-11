@@ -65,10 +65,10 @@ void add_reinforcements( Character *ch )
           mob[mob_cnt] = create_mobile( pMobIndex );
           char_to_room( mob[mob_cnt], ch->in_room );
           act( AT_IMMORT, "$N has arrived.", ch, NULL, mob[mob_cnt], TO_ROOM );
-          mob[mob_cnt]->top_level = multiplier / 1.4 * get_level( ch, LEADERSHIP_ABILITY ) / 3;
+          mob[mob_cnt]->top_level = multiplier / 1.4 * GetLevel( ch, LEADERSHIP_ABILITY ) / 3;
 
           for ( ability = 0 ; ability < MAX_ABILITY ; ability++ )
-            set_level( mob[mob_cnt], ability, mob[mob_cnt]->top_level );
+            SetLevel( mob[mob_cnt], ability, mob[mob_cnt]->top_level );
 
           mob[mob_cnt]->hit = mob[mob_cnt]->top_level*15;
           mob[mob_cnt]->max_hit = mob[mob_cnt]->hit;
@@ -116,10 +116,10 @@ void add_reinforcements( Character *ch )
         }
       act( AT_IMMORT, "$N has arrived.", ch, NULL, mob, TO_ROOM );
       send_to_char( "Your guard has arrived.\r\n", ch );
-      mob->top_level = multiplier * get_level( ch, LEADERSHIP_ABILITY ) / 2;
+      mob->top_level = multiplier * GetLevel( ch, LEADERSHIP_ABILITY ) / 2;
 
       for ( ability = 0 ; ability < MAX_ABILITY ; ability++ )
-        set_level( mob, ability, mob->top_level );
+        SetLevel( mob, ability, mob->top_level );
 
       mob->hit = mob->top_level*10;
       mob->max_hit = mob->hit;

@@ -49,8 +49,8 @@ void do_steal( Character *ch, char *argument )
 
   set_wait_state( ch, skill_table[gsn_steal]->beats );
   percent  = number_percent( ) + ( is_awake(victim) ? 10 : -50 )
-    - (get_curr_lck(ch) - 15) + (get_curr_lck(victim) - 13)
-    + times_killed( ch, victim )*7;
+    - (GetCurrentLck(ch) - 15) + (GetCurrentLck(victim) - 13)
+    + TimesKilled( ch, victim )*7;
 
   if ( ( IS_SET( victim->immune, RIS_STEAL ) ) ||
        ( victim->position != POS_STUNNED && (victim->position == POS_FIGHTING
@@ -97,7 +97,7 @@ void do_steal( Character *ch, char *argument )
     }
 
   if ( IsNpc(victim) )
-    add_kill( ch, victim );  /* makes it harder to steal from same char */
+    AddKill( ch, victim );  /* makes it harder to steal from same char */
 
   if ( !str_cmp( arg1, "credits"  )
        ||   !str_cmp( arg1, "credit" )
@@ -121,7 +121,7 @@ void do_steal( Character *ch, char *argument )
 
       if ( IsNpc( victim ) )
 	{
-	  xp = UMIN( amount*10 , ( exp_level( get_level(ch, SMUGGLING_ABILITY ) + 1 ) - exp_level( get_level(ch, SMUGGLING_ABILITY))  ) / 35  );
+	  xp = UMIN( amount*10 , ( exp_level( GetLevel(ch, SMUGGLING_ABILITY ) + 1 ) - exp_level( GetLevel(ch, SMUGGLING_ABILITY))  ) / 35  );
 	  xp = UMIN( xp , xp_compute( ch, victim ) );
 	  gain_exp( ch, SMUGGLING_ABILITY, xp );
 	  ch_printf( ch, "&WYou gain %ld smuggling experience!\r\n", xp );
@@ -180,7 +180,7 @@ void do_steal( Character *ch, char *argument )
     learn_from_success( ch, gsn_steal );
   if ( IsNpc( victim ) )
     {
-      xp = UMIN( obj->cost*10 , ( exp_level( get_level(ch, SMUGGLING_ABILITY) + 1) - exp_level( get_level( ch, SMUGGLING_ABILITY) ) ) / 10  );
+      xp = UMIN( obj->cost*10 , ( exp_level( GetLevel(ch, SMUGGLING_ABILITY) + 1) - exp_level( GetLevel( ch, SMUGGLING_ABILITY) ) ) / 10  );
       xp = UMIN( xp , xp_compute( ch, victim ) );
       gain_exp( ch, SMUGGLING_ABILITY, xp );
       ch_printf( ch, "&WYou gain %ld smuggling experience!\r\n", xp );

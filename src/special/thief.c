@@ -14,7 +14,7 @@ bool spec_thief( Character *ch )
     {
       v_next = victim->next_in_room;
 
-      if ( get_trust(victim) >= LEVEL_IMMORTAL
+      if ( GetTrustedLevel(victim) >= LEVEL_IMMORTAL
            ||   number_bits( 2 ) != 0
            ||   !can_see( ch, victim ) )        /* Thx Glop */
         continue;

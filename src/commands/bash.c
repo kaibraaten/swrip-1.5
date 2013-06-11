@@ -26,8 +26,8 @@ void do_bash( Character *ch, char *argument )
       return;
     }
 
-  bash_chance = (((get_curr_dex(victim) + get_curr_str(victim))
-		  -   (get_curr_dex(ch)     + get_curr_str(ch))) * 10) + 10;
+  bash_chance = (((GetCurrentDex(victim) + GetCurrentStr(victim))
+		  -   (GetCurrentDex(ch)     + GetCurrentStr(ch))) * 10) + 10;
   if ( !IsNpc(ch) && !IsNpc(victim) )
     bash_chance += 25;
 
@@ -44,7 +44,7 @@ void do_bash( Character *ch, char *argument )
       set_wait_state( ch,     2 * PULSE_VIOLENCE );
       set_wait_state( victim, 2 * PULSE_VIOLENCE );
       victim->position = POS_SITTING;
-      global_retcode = damage( ch, victim, number_range( 1, get_level( ch, COMBAT_ABILITY ) ), gsn_bash );
+      global_retcode = damage( ch, victim, number_range( 1, GetLevel( ch, COMBAT_ABILITY ) ), gsn_bash );
     }
   else
     {

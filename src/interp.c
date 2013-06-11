@@ -293,7 +293,7 @@ void interpret( Character *ch, char *argument )
        * Check for council powers and/or bestowments
        */
 
-      trust = get_trust( ch );
+      trust = GetTrustedLevel( ch );
       for ( cmd = command_hash[LOWER(command[0])%126]; cmd; cmd = cmd->next )
         if ( !str_prefix( command, cmd->name )
              &&   (cmd->level <= trust
@@ -460,7 +460,7 @@ void interpret( Character *ch, char *argument )
               cmd->name, (cmd->log == LOG_NEVER ? "XXX" : argument),
               ch->in_room ? ch->in_room->vnum : 0,
               (int) (time_used.tv_sec),(int) (time_used.tv_usec) );
-      log_string_plus(log_buf, LOG_NORMAL, get_trust(ch));
+      log_string_plus(log_buf, LOG_NORMAL, GetTrustedLevel(ch));
     }
 }
 

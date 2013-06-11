@@ -14,7 +14,7 @@ void do_rstat( Character *ch, char *argument )
 
   one_argument( argument, arg );
 
-  if ( get_trust( ch ) < LEVEL_IMMORTAL )
+  if ( GetTrustedLevel( ch ) < LEVEL_IMMORTAL )
     {
       AREA_DATA * pArea = NULL;
 
@@ -68,7 +68,7 @@ void do_rstat( Character *ch, char *argument )
 
   if ( ch->in_room != location && room_is_private( ch, location ) )
     {
-      if ( get_trust( ch ) < LEVEL_GREATER )
+      if ( GetTrustedLevel( ch ) < LEVEL_GREATER )
         {
           send_to_char( "That room is private right now.\r\n", ch );
           return;

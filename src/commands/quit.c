@@ -104,7 +104,7 @@ void do_quit( Character *ch, char *argument )
     }
 
   saving_char = NULL;
-  level = get_trust(ch);
+  level = GetTrustedLevel(ch);
   extract_char( ch, TRUE );
 
   for ( x = 0; x < MAX_WEAR; x++ )

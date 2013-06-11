@@ -47,7 +47,7 @@ void do_beep( Character *ch, char *argument )
   if ( IsImmortal( victim ) )
     victim_comlink = TRUE;
 
-  ch_comlink = has_comlink( ch );
+  ch_comlink = HasComlink( ch );
 
   if ( !ch_comlink )
     {
@@ -57,7 +57,7 @@ void do_beep( Character *ch, char *argument )
 
   if( !victim_comlink )
     {
-      victim_comlink = has_comlink( ch );
+      victim_comlink = HasComlink( ch );
     }
 
   if ( !victim_comlink )
@@ -73,7 +73,7 @@ void do_beep( Character *ch, char *argument )
     }
 
   if ( !IsNpc( victim ) && ( victim->switched )
-       && ( get_trust( ch ) > LEVEL_AVATAR ) )
+       && ( GetTrustedLevel( ch ) > LEVEL_AVATAR ) )
     {
       send_to_char( "That player is switched.\r\n", ch );
       return;
@@ -85,7 +85,7 @@ void do_beep( Character *ch, char *argument )
     }
 
   if ( IS_SET( victim->deaf, CHANNEL_TELLS )
-       && ( !IsImmortal( ch ) || ( get_trust( ch ) < get_trust( victim ) ) ) )
+       && ( !IsImmortal( ch ) || ( GetTrustedLevel( ch ) < GetTrustedLevel( victim ) ) ) )
     {
       act( AT_PLAIN, "$E has $S tells turned off.", ch, NULL, victim,
            TO_CHAR );
@@ -106,7 +106,7 @@ void do_beep( Character *ch, char *argument )
 
   if ( victim->desc
        &&   victim->desc->connection_state == CON_EDITING
-       &&   get_trust(ch) < LEVEL_GOD )
+       &&   GetTrustedLevel(ch) < LEVEL_GOD )
     {
       act( AT_PLAIN, "$E is currently in a writing buffer. Please try again in a few minutes.", ch, 0, victim, TO_CHAR );
       return;

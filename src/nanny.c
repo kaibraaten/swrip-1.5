@@ -720,7 +720,7 @@ static void nanny_get_msp( DESCRIPTOR_DATA *d, char *argument )
 
   for ( ability =0 ; ability < MAX_ABILITY ; ability++ )
     {
-      set_level( ch, ability, 0 );
+      SetLevel( ch, ability, 0 );
     }
 
   ch->top_level = 0;
@@ -865,8 +865,8 @@ static void nanny_read_motd( DESCRIPTOR_DATA *d, char *argument )
 
 	for ( ability =0 ; ability < MAX_ABILITY ; ability++ )
 	  {
-	    set_level( ch, ability, 1 );
-	    set_exp( ch, ability, 0 );
+	    SetLevel( ch, ability, 1 );
+	    SetExperience( ch, ability, 0 );
 	  }
       }
 

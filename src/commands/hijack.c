@@ -35,7 +35,7 @@ void do_hijack( Character *ch, char *argument )
       return;
     }
 
-  if ( ship->type == MOB_SHIP && get_trust(ch) < 102 )
+  if ( ship->type == MOB_SHIP && GetTrustedLevel(ch) < 102 )
     {
       send_to_char("&RThis ship isn't pilotable by mortals at this point in time...\r\n",ch);
       return;
@@ -115,7 +115,7 @@ void do_hijack( Character *ch, char *argument )
 
         {
           p_prev = p->prev;  /* TRI */
-          if (!IsNpc(p) && get_trust(p) >= LEVEL_GOD)
+          if (!IsNpc(p) && GetTrustedLevel(p) >= LEVEL_GOD)
             {
               sprintf( buf2, "%s(%s)", ship->name, ship->personalname );
               ch_printf(p, "&R[alarm] %s has been hijacked by %s!\r\n", buf2, ch->name);
@@ -131,7 +131,7 @@ void do_hijack( Character *ch, char *argument )
           if ( !check_pilot(victim,ship) )
             continue;
 
-          if ( !has_comlink( victim ) )
+          if ( !HasComlink( victim ) )
             continue;
 
           if ( !IsNpc( victim ) && victim->switched )

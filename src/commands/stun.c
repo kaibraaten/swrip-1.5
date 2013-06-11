@@ -37,15 +37,15 @@ void do_stun( Character *ch, char *argument )
 
   set_wait_state( ch, skill_table[gsn_stun]->beats );
   fail = FALSE;
-  stun_chance = ris_save( victim, get_level( ch, COMBAT_ABILITY ), RIS_PARALYSIS );
+  stun_chance = ris_save( victim, GetLevel( ch, COMBAT_ABILITY ), RIS_PARALYSIS );
 
   if ( stun_chance == 1000 )
     fail = TRUE;
   else
     fail = saves_para_petri( stun_chance, victim );
 
-  stun_chance = (((get_curr_dex(victim) + get_curr_str(victim))
-		  -   (get_curr_dex(ch)     + get_curr_str(ch))) * 10) + 10;
+  stun_chance = (((GetCurrentDex(victim) + GetCurrentStr(victim))
+		  -   (GetCurrentDex(ch)     + GetCurrentStr(ch))) * 10) + 10;
 
   /* harder for player to stun another player */
   if ( !IsNpc(ch) && !IsNpc(victim) )

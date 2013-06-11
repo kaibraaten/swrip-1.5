@@ -60,8 +60,8 @@ void do_rescue( Character *ch, char *argument )
   ch->alignment = ch->alignment + 5;
   ch->alignment = URANGE( -1000, ch->alignment, 1000 );
 
-  percent = number_percent( ) - (get_curr_lck(ch) - 14)
-    - (get_curr_lck(victim) - 16);
+  percent = number_percent( ) - (GetCurrentLck(ch) - 14)
+    - (GetCurrentLck(victim) - 16);
 
   set_wait_state( ch, skill_table[gsn_rescue]->beats );
   if ( !IsNpc(ch) && percent > ch->pcdata->learned[gsn_rescue] )

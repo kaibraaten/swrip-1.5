@@ -209,7 +209,7 @@ void save_char_obj( Character *ch )
    * Also save the player flags so we the wizlist builder can see
    * who is a guest and who is retired.
    */
-  if ( get_trust(ch) > LEVEL_HERO )
+  if ( GetTrustedLevel(ch) > LEVEL_HERO )
     {
       sprintf( strback, "%s%s", GOD_DIR, capitalize( ch->name ) );
 
@@ -381,7 +381,7 @@ void fwrite_char( Character *ch, FILE *fp )
     int ability;
     for ( ability = 0 ; ability < MAX_ABILITY ; ability++ )
       fprintf( fp, "Ability        %d %d %ld\n",
-               ability, get_level( ch, ability ), get_exp( ch, ability ) );
+               ability, GetLevel( ch, ability ), GetExperience( ch, ability ) );
   }
   fprintf( fp, "Clones         %d\n",   ch->pcdata->clones              );
   fprintf( fp, "Salary_time         %ld\n",     ch->pcdata->salary_date );
@@ -976,7 +976,7 @@ bool load_char_obj( DESCRIPTOR_DATA *d, char *name, bool preload )
       if ( !ch->pcdata->authed_by )
         ch->pcdata->authed_by    = STRALLOC( "" );
 
-      if ( !IsNpc( ch ) && get_trust( ch ) > LEVEL_AVATAR )
+      if ( !IsNpc( ch ) && GetTrustedLevel( ch ) > LEVEL_AVATAR )
         {
           if ( ch->pcdata->wizinvis < 2 )
             ch->pcdata->wizinvis = ch->top_level;
@@ -1066,8 +1066,8 @@ void fread_char( Character *ch, FILE *fp, bool preload )
                       &x0, &x1, &x2 );
               if ( x0 >= 0 && x0 < MAX_ABILITY )
                 {
-                  set_level( ch, x0, x1 );
-                  set_exp( ch, x0, x2 );
+                  SetLevel( ch, x0, x1 );
+                  SetExperience( ch, x0, x2 );
                 }
               fMatch = TRUE;
               break;
@@ -1599,8 +1599,8 @@ void fread_char( Character *ch, FILE *fp, bool preload )
                 int ability;
                 for ( ability = 0 ; ability < MAX_ABILITY ; ability++ )
                   {
-                    if ( get_level( ch, ability ) == 0 )
-                      set_level( ch, ability, 1 );
+                    if ( GetLevel( ch, ability ) == 0 )
+                      SetLevel( ch, ability, 1 );
                   }
               }
 
@@ -1638,7 +1638,7 @@ void fread_char( Character *ch, FILE *fp, bool preload )
                     continue;
 
                   if ( ch->pcdata->learned[sn] > 0
-		       && get_level( ch, skill_table[sn]->guild ) < skill_table[sn]->min_level )
+		       && GetLevel( ch, skill_table[sn]->guild ) < skill_table[sn]->min_level )
                     ch->pcdata->learned[sn] = 0;
                 }
               return;

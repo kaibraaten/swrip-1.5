@@ -663,7 +663,7 @@ static bool go_read_names( Character *ch, OBJ_DATA *po, GO_STRUCT *r, bool np_sw
 
   if ( po->carried_by )                  /* it's being carried by a char */
     {
-      if ( get_trust(ch) < po->carried_by->top_level ) return FALSE;
+      if ( GetTrustedLevel(ch) < po->carried_by->top_level ) return FALSE;
       if ( nm_sw &&  IsNpc(po->carried_by) ) return FALSE;
       if ( np_sw && !IsNpc(po->carried_by) ) return FALSE;
       r->s[CNAME] = po->carried_by->name;
@@ -673,7 +673,7 @@ static bool go_read_names( Character *ch, OBJ_DATA *po, GO_STRUCT *r, bool np_sw
       pt = po;
       while( pt->in_obj )
         pt=pt->in_obj;
-      if ( pt->carried_by && get_trust(ch) < pt->carried_by->top_level )
+      if ( pt->carried_by && GetTrustedLevel(ch) < pt->carried_by->top_level )
         return FALSE;
       if ( pt->carried_by && nm_sw &&  IsNpc(pt->carried_by) )
         return FALSE;

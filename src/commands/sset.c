@@ -21,14 +21,14 @@ void do_sset( Character *ch, char *argument )
     {
       send_to_char( "Syntax: sset <victim> <skill> <value>\r\n",        ch );
       send_to_char( "or:     sset <victim> all     <value>\r\n",        ch );
-      if ( get_trust(ch) > LEVEL_SUB_IMPLEM )
+      if ( GetTrustedLevel(ch) > LEVEL_SUB_IMPLEM )
         {
           send_to_char( "or:     sset save skill table\r\n",            ch );
           send_to_char( "or:     sset save herb table\r\n",             ch );
           send_to_char( "or:     sset create skill 'new skill'\r\n",    ch );
           send_to_char( "or:     sset create herb 'new herb'\r\n",      ch );
         }
-      if ( get_trust(ch) > LEVEL_GREATER )
+      if ( GetTrustedLevel(ch) > LEVEL_GREATER )
 	{
           send_to_char( "or:     sset <sn>     <field> <value>\r\n",    ch );
           send_to_char( "\r\nField being one of:\r\n",                  ch );
@@ -43,7 +43,7 @@ void do_sset( Character *ch, char *argument )
       return;
     }
 
-  if ( get_trust(ch) > LEVEL_SUB_IMPLEM
+  if ( GetTrustedLevel(ch) > LEVEL_SUB_IMPLEM
        &&  !str_cmp( arg1, "save" )
        &&       !str_cmp( argument, "table" ) )
     {
@@ -60,7 +60,7 @@ void do_sset( Character *ch, char *argument )
           return;
         }
     }
-  if ( get_trust(ch) > LEVEL_SUB_IMPLEM
+  if ( GetTrustedLevel(ch) > LEVEL_SUB_IMPLEM
        &&  !str_cmp( arg1, "create" )
        && (!str_cmp( arg2, "skill" ) || !str_cmp( arg2, "herb" )) )
     {
@@ -118,7 +118,7 @@ void do_sset( Character *ch, char *argument )
     sn = atoi( arg1+1 );
   else
     sn = atoi( arg1 );
-  if ( get_trust(ch) > LEVEL_GREATER
+  if ( GetTrustedLevel(ch) > LEVEL_GREATER
        && ((arg1[0] == 'h' && is_number(arg1+1) && (sn=atoi(arg1+1))>=0)
            ||  (is_number(arg1) && (sn=atoi(arg1)) >= 0)) )
     {
@@ -612,7 +612,7 @@ void do_sset( Character *ch, char *argument )
       return;
     }
 
-  if ( get_trust(ch) < sysdata.level_mset_player && victim != ch)
+  if ( GetTrustedLevel(ch) < sysdata.level_mset_player && victim != ch)
     {
       send_to_char( "You can't do that.\r\n", ch );
       return;
@@ -650,7 +650,7 @@ void do_sset( Character *ch, char *argument )
           if (skill_table[sn]->guild < 0 || skill_table[sn]->guild >= MAX_ABILITY )
             continue;
           if ( skill_table[sn]->name
-               && ( get_level( victim, skill_table[sn]->guild ) >= skill_table[sn]->min_level
+               && ( GetLevel( victim, skill_table[sn]->guild ) >= skill_table[sn]->min_level
                     || value == 0 ) )
             victim->pcdata->learned[sn] = value;
         }

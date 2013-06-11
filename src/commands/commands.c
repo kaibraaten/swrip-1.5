@@ -15,7 +15,7 @@ void do_commands( Character *ch, char *argument )
       for ( hash = 0; hash < 126; hash++ )
         for ( command = command_hash[hash]; command; command = command->next )
           if ( command->level <  LEVEL_HERO
-               &&   command->level <= get_trust( ch )
+               &&   command->level <= GetTrustedLevel( ch )
                &&  (command->name[0] != 'm'
                     &&   command->name[1] != 'p') )
             {
@@ -32,7 +32,7 @@ void do_commands( Character *ch, char *argument )
       for ( hash = 0; hash < 126; hash++ )
         for ( command = command_hash[hash]; command; command = command->next )
           if ( command->level <  LEVEL_HERO
-               &&   command->level <= get_trust( ch )
+               &&   command->level <= GetTrustedLevel( ch )
                &&  !str_prefix(argument, command->name)
                &&  (command->name[0] != 'm'
                     &&   command->name[1] != 'p') )

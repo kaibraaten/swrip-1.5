@@ -312,7 +312,7 @@ void do_makelightsaber( Character *ch, char *argument )
   {
     long xpgain;
 
-    xpgain = UMIN( obj->cost*50 , exp_level(get_level(ch, FORCE_ABILITY ) + 1) );
+    xpgain = UMIN( obj->cost*50 , exp_level(GetLevel(ch, FORCE_ABILITY ) + 1) );
     gain_exp(ch, FORCE_ABILITY, xpgain );
     ch_printf( ch , "You gain %d force experience.", xpgain );
   }

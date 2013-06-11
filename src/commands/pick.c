@@ -158,7 +158,7 @@ void do_pick( Character *ch, char *argument )
               if ( !check_pilot(victim,ship) )
                 continue;
 
-              if ( !has_comlink( victim ) )
+              if ( !HasComlink( victim ) )
                 continue;
 
 	      if ( !IsNpc( victim ) && victim->switched
@@ -202,7 +202,7 @@ void do_pick( Character *ch, char *argument )
               if ( !check_pilot(victim,ship) )
                 continue;
 
-              if ( !has_comlink( victim ) )
+              if ( !HasComlink( victim ) )
                 continue;
 
               if ( !IsNpc( victim ) && victim->switched
@@ -237,7 +237,7 @@ static bool MobIsAlert( void *element, void *userData )
   return mob != offender
     && IsNpc( mob )
     && is_awake( mob )
-    && mob->top_level > get_level( offender, SMUGGLING_ABILITY );
+    && mob->top_level > GetLevel( offender, SMUGGLING_ABILITY );
 }
 
 static Character *GetAlertMobInRoom( const Character *offender )

@@ -34,7 +34,7 @@ int wherehome( const Character *ch)
   if( ch->plr_home )
     return ch->plr_home->vnum;
 
-  if( get_trust(ch) >= LEVEL_IMMORTAL )
+  if( GetTrustedLevel(ch) >= LEVEL_IMMORTAL )
     return ROOM_START_IMMORTAL;
   if( ch->race  == RACE_HUMAN)
     return ROOM_START_HUMAN;

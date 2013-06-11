@@ -13,7 +13,7 @@ void do_mpgain( Character *ch, char *argument )
   if ( is_affected_by( ch, AFF_CHARM ) )
     return;
 
-  if ( !IsNpc( ch ) || ( ch->desc && get_trust( ch ) < LEVEL_IMMORTAL )  )
+  if ( !IsNpc( ch ) || ( ch->desc && GetTrustedLevel( ch ) < LEVEL_IMMORTAL )  )
     {
       send_to_char( "Huh?\r\n", ch );
       return;
@@ -67,7 +67,7 @@ void do_mpgain( Character *ch, char *argument )
       return;
     }
 
-  xp =  URANGE(1, xp, ( exp_level( get_level( victim, ability ) + 1 ) - exp_level( get_level( victim, ability ) ) ) );
+  xp =  URANGE(1, xp, ( exp_level( GetLevel( victim, ability ) + 1 ) - exp_level( GetLevel( victim, ability ) ) ) );
 
   ch_printf( victim, "You gain %ld %s experience.\r\n", xp, ability_name[ability]  );
   gain_exp( victim, ability, xp );

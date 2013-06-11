@@ -31,7 +31,7 @@ void do_mstat( Character *ch, char *argument )
       return;
     }
 
-  if ( ( ( get_trust( ch ) < LEVEL_GOD ) && !IsNpc(victim) ) || ( ( get_trust( ch ) < get_trust( victim ) ) && !IsNpc(victim) ) )
+  if ( ( ( GetTrustedLevel( ch ) < LEVEL_GOD ) && !IsNpc(victim) ) || ( ( GetTrustedLevel( ch ) < GetTrustedLevel( victim ) ) && !IsNpc(victim) ) )
     {
       set_char_color( AT_IMMORT, ch );
       send_to_char( "Their godly glow prevents you from getting a good look.\r\n", ch );
@@ -43,7 +43,7 @@ void do_mstat( Character *ch, char *argument )
              ( IsNpc( victim ) || !victim->pcdata->clan ) ? "(none)"
              : victim->pcdata->clan->name );
 
-  if( get_trust(ch) >= LEVEL_GOD && !IsNpc(victim) && victim->desc )
+  if( GetTrustedLevel(ch) >= LEVEL_GOD && !IsNpc(victim) && victim->desc )
     ch_printf( ch, "Host: %s   Descriptor: %d   Trust: %d   AuthedBy: %s\r\n",
                victim->desc->remote.hostname, victim->desc->descriptor,
                victim->trust, victim->pcdata->authed_by[0] != '\0'
@@ -65,14 +65,14 @@ void do_mstat( Character *ch, char *argument )
              );
 
   ch_printf( ch, "Str: %d  Int: %d  Wis: %d  Dex: %d  Con: %d  Cha: %d  Lck: %d  Frc: %d\r\n",
-             get_curr_str(victim),
-             get_curr_int(victim),
-             get_curr_wis(victim),
-             get_curr_dex(victim),
-             get_curr_con(victim),
-             get_curr_cha(victim),
-             get_curr_lck(victim),
-             get_curr_frc(victim) );
+             GetCurrentStr(victim),
+             GetCurrentInt(victim),
+             GetCurrentWis(victim),
+             GetCurrentDex(victim),
+             GetCurrentCon(victim),
+             GetCurrentCha(victim),
+             GetCurrentLck(victim),
+             GetCurrentFrc(victim) );
 
   ch_printf( ch, "Hps: %d/%d  Force: %d/%d   Move: %d/%d\r\n",
              victim->hit,         victim->max_hit,
@@ -85,9 +85,9 @@ void do_mstat( Character *ch, char *argument )
 
       for ( ability = 0 ; ability < MAX_ABILITY ; ability++ )
         ch_printf( ch, "%-15s   Level: %-3d   Max: %-3d   Exp: %-10ld   Next: %-10ld\r\n",
-                   ability_name[ability], get_level( victim, ability ), max_level(victim, ability),
-		   get_exp( victim, ability ),
-		   exp_level( get_level( victim, ability ) + 1 ) );
+                   ability_name[ability], GetLevel( victim, ability ), max_level(victim, ability),
+		   GetExperience( victim, ability ),
+		   exp_level( GetLevel( victim, ability ) + 1 ) );
     }
 
   ch_printf( ch,
@@ -145,7 +145,7 @@ void do_mstat( Character *ch, char *argument )
   else
     {
       ch_printf( ch, "Years: %d   Seconds Played: %d   Timer: %d   Act: %d\r\n",
-                 get_age( victim ), (int) victim->pcdata->played, victim->timer, victim->act );
+                 GetAge( victim ), (int) victim->pcdata->played, victim->timer, victim->act );
 
       ch_printf( ch, "Player flags: %s\r\n",
                  flag_string(victim->act, plr_flags) );

@@ -49,7 +49,7 @@ void do_ocreate( Character *ch, char *argument )
   if ( IsNpc( ch ) )
     return;
 
-  if ( get_trust( ch ) <= LEVEL_IMMORTAL )
+  if ( GetTrustedLevel( ch ) <= LEVEL_IMMORTAL )
     {
       AREA_DATA *pArea;
 
@@ -79,7 +79,7 @@ void do_ocreate( Character *ch, char *argument )
       return;
     }
 
-  obj = create_object( pObjIndex, get_trust(ch) );
+  obj = create_object( pObjIndex, GetTrustedLevel(ch) );
   obj_to_char( obj, ch );
   act( AT_IMMORT, "$n makes some ancient arcane gestures, and opens $s hands to reveal $p!",
        ch, obj, NULL, TO_ROOM );

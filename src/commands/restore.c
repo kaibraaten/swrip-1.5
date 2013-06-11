@@ -22,7 +22,7 @@ void do_restore( Character *ch, char *argument )
       if ( !ch->pcdata )
         return;
 
-      if ( get_trust( ch ) < LEVEL_SUB_IMPLEM )
+      if ( GetTrustedLevel( ch ) < LEVEL_SUB_IMPLEM )
         {
           if ( IsNpc( ch ) )
             {
@@ -70,7 +70,7 @@ void do_restore( Character *ch, char *argument )
           return;
         }
 
-      if ( get_trust( ch ) < LEVEL_LESSER
+      if ( GetTrustedLevel( ch ) < LEVEL_LESSER
            &&  victim != ch
            && !( IsNpc( victim ) && IS_SET( victim->act, ACT_PROTOTYPE ) ) )
         {

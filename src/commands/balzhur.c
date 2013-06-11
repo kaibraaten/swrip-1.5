@@ -30,7 +30,7 @@ void do_balzhur( Character *ch, char *argument )
       return;
     }
 
-  if ( get_trust( victim ) >= get_trust( ch ) )
+  if ( GetTrustedLevel( victim ) >= GetTrustedLevel( ch ) )
     {
       send_to_char( "I wouldn't even think of that if I were you...\r\n", ch );
       return;
@@ -50,8 +50,8 @@ void do_balzhur( Character *ch, char *argument )
 
     for ( ability = 0 ; ability < MAX_ABILITY ; ability++ )
       {
-        set_exp( victim, ability, 1 );
-        set_level( victim, ability, 1 );
+        SetExperience( victim, ability, 1 );
+        SetLevel( victim, ability, 1 );
       }
   }
   victim->max_hit  = 500;

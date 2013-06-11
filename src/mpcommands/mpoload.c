@@ -29,7 +29,7 @@ void do_mpoload( Character *ch, char *argument )
     }
 
   if ( arg2[0] == '\0' )
-    level = get_trust( ch );
+    level = GetTrustedLevel( ch );
   else
     {
       /*
@@ -41,7 +41,7 @@ void do_mpoload( Character *ch, char *argument )
           return;
         }
       level = atoi( arg2 );
-      if ( level < 0 || level > get_trust( ch ) )
+      if ( level < 0 || level > GetTrustedLevel( ch ) )
         {
           progbug( "Mpoload - Bad level", ch );
           return;

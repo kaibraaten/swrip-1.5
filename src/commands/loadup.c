@@ -106,7 +106,7 @@ void do_loadup( Character *ch, char *argument )
         }
 
 
-      if ( get_trust(d->character) >= get_trust( ch ) )
+      if ( GetTrustedLevel(d->character) >= GetTrustedLevel( ch ) )
         {
           do_say( d->character, "Do *NOT* disturb me again!" );
           send_to_char( "I think you'd better leave that player alone!\r\n", ch );

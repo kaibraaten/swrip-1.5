@@ -51,7 +51,7 @@ void do_advance( Character *ch, char *argument )
     }
 
   /* You can demote yourself but not someone else at your own trust. -- Narn */
-  if ( get_trust( ch ) <= get_trust( victim ) && ch != victim )
+  if ( GetTrustedLevel( ch ) <= GetTrustedLevel( victim ) && ch != victim )
     {
       send_to_char( "You can't do that.\r\n", ch );
       return;
@@ -70,13 +70,13 @@ void do_advance( Character *ch, char *argument )
    *   Currently, an imp can lower another imp.
    *   -- Swiftest
    */
-  if ( level <= get_level( victim, ability ) )
+  if ( level <= GetLevel( victim, ability ) )
     {
       send_to_char( "Lowering a player's level!\r\n", ch );
       set_char_color( AT_IMMORT, victim );
       send_to_char( "Cursed and forsaken! The gods have lowered your level.\r\n", victim );
-      set_exp( victim, ability, 0 );
-      set_level( victim, ability, 1 );
+      SetExperience( victim, ability, 0 );
+      SetLevel( victim, ability, 1 );
 
       if ( ability == COMBAT_ABILITY )
         victim->max_hit = 500;
@@ -90,9 +90,9 @@ void do_advance( Character *ch, char *argument )
       send_to_char( "The gods feel fit to raise your level!\r\n", victim );
     }
 
-  for ( iLevel = get_level( victim, ability ) ; iLevel < level; iLevel++ )
+  for ( iLevel = GetLevel( victim, ability ) ; iLevel < level; iLevel++ )
     {
-      set_exp( victim, ability, exp_level(iLevel+1) );
+      SetExperience( victim, ability, exp_level(iLevel+1) );
       gain_exp( victim, ability, 0 );
     }
 }

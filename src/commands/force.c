@@ -13,7 +13,7 @@ void do_force( Character *ch, char *argument )
       return;
     }
 
-  mobsonly = get_trust( ch ) < sysdata.level_forcepc;
+  mobsonly = GetTrustedLevel( ch ) < sysdata.level_forcepc;
 
   if ( !str_cmp( arg, "all" ) )
     {
@@ -30,7 +30,7 @@ void do_force( Character *ch, char *argument )
         {
           vch_next = vch->next;
 
-          if ( !IsNpc(vch) && get_trust( vch ) < get_trust( ch ) )
+          if ( !IsNpc(vch) && GetTrustedLevel( vch ) < GetTrustedLevel( ch ) )
             {
               act( AT_IMMORT, "$n forces you to '$t'.", ch, argument, vch, TO_VICT );
               interpret( vch, argument );
@@ -53,7 +53,7 @@ void do_force( Character *ch, char *argument )
           return;
         }
 
-      if ( ( get_trust( victim ) >= get_trust( ch ) )
+      if ( ( GetTrustedLevel( victim ) >= GetTrustedLevel( ch ) )
            || ( mobsonly && !IsNpc( victim ) ) )
         {
           send_to_char( "Do it yourself!\r\n", ch );

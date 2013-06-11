@@ -188,7 +188,7 @@ void do_makedisguise( Character *ch, char *argument )
   {
     long xpgain;
 
-    xpgain = UMIN( obj->cost*50 ,( exp_level(get_level( ch, ENGINEERING_ABILITY ) + 1) - exp_level(get_level( ch, ENGINEERING_ABILITY ) ) ) );
+    xpgain = UMIN( obj->cost*50 ,( exp_level(GetLevel( ch, ENGINEERING_ABILITY ) + 1) - exp_level(GetLevel( ch, ENGINEERING_ABILITY ) ) ) );
     gain_exp(ch, ENGINEERING_ABILITY, xpgain );
     ch_printf( ch , "You gain %d engineering experience.", xpgain );
   }

@@ -20,7 +20,7 @@ void do_title( Character *ch, char *argument )
       return;
     }
 
-  if ((get_trust(ch) <= LEVEL_IMMORTAL) && (!nifty_is_name(ch->name, argument)))
+  if ((GetTrustedLevel(ch) <= LEVEL_IMMORTAL) && (!nifty_is_name(ch->name, argument)))
     {
       send_to_char("You must include your name somewhere in your title!", ch);
       return;

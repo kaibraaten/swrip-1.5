@@ -69,11 +69,11 @@ void do_circle( Character *ch, char *argument )
       return;
     }
 
-  percent = number_percent( ) - (get_curr_lck(ch) - 16)
-    + (get_curr_lck(victim) - 13);
+  percent = number_percent( ) - (GetCurrentLck(ch) - 16)
+    + (GetCurrentLck(victim) - 13);
 
   set_wait_state( ch, skill_table[gsn_circle]->beats );
-  if ( percent < (IsNpc(ch) ? (get_level( ch, HUNTING_ABILITY ) * 1.5) : ch->pcdata->learned[gsn_circle]) )
+  if ( percent < (IsNpc(ch) ? (GetLevel( ch, HUNTING_ABILITY ) * 1.5) : ch->pcdata->learned[gsn_circle]) )
     {
       learn_from_success( ch, gsn_circle );
       global_retcode = multi_hit( ch, victim, gsn_circle );

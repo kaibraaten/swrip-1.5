@@ -32,11 +32,11 @@ void do_gouge( Character *ch, char *argument )
       return;
     }
 
-  percent = number_percent( ) - (get_curr_lck(ch) - 13);
+  percent = number_percent( ) - (GetCurrentLck(ch) - 13);
 
   if ( IsNpc(ch) || percent < ch->pcdata->learned[gsn_gouge] )
     {
-      dam = number_range( 1, get_level( ch, COMBAT_ABILITY ) );
+      dam = number_range( 1, GetLevel( ch, COMBAT_ABILITY ) );
       global_retcode = damage( ch, victim, dam, gsn_gouge );
 
       if ( global_retcode == rNONE )
@@ -46,7 +46,7 @@ void do_gouge( Character *ch, char *argument )
               af.type      = gsn_blindness;
               af.location  = APPLY_HITROLL;
               af.modifier  = -6;
-              af.duration  = 3 + (get_level(ch, COMBAT_ABILITY ) / 20);
+              af.duration  = 3 + (GetLevel(ch, COMBAT_ABILITY ) / 20);
               af.bitvector = AFF_BLIND;
               affect_to_char( victim, &af );
               act( AT_SKILL, "You can't see a thing!", victim, NULL, NULL, TO_CHAR );

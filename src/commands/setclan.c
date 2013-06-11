@@ -26,7 +26,7 @@ void do_setclan( Character *ch, char *argument )
       send_to_char( " funds trooper1 trooper2 jail", ch );
       send_to_char( " guard1 guard2 patrol1 patrol2\r\n", ch );
 
-      if ( get_trust( ch ) >= LEVEL_SUB_IMPLEM )
+      if ( GetTrustedLevel( ch ) >= LEVEL_SUB_IMPLEM )
         {
           send_to_char( " name filename desc\r\n", ch );
         }
@@ -202,7 +202,7 @@ void do_setclan( Character *ch, char *argument )
       return;
     }
 
-  if ( get_trust( ch ) < LEVEL_SUB_IMPLEM )
+  if ( GetTrustedLevel( ch ) < LEVEL_SUB_IMPLEM )
     {
       do_setclan( ch, "" );
       return;

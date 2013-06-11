@@ -68,7 +68,7 @@ void do_scan( Character *ch, char *argument )
         to_room = pexit->to_room;
 
       if ( room_is_private( ch, to_room )
-           && get_trust(ch) < LEVEL_GREATER )
+           && GetTrustedLevel(ch) < LEVEL_GREATER )
         {
           act( AT_GREY, "Your view $t is blocked by a private room.", ch,
                get_dir_name(dir), NULL, TO_CHAR );

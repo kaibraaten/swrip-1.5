@@ -29,7 +29,7 @@ void do_delay( Character *ch, char *argument )
       return;
     }
 
-  if ( !IsNpc(victim) && get_trust( victim ) >= get_trust( ch ) )
+  if ( !IsNpc(victim) && GetTrustedLevel( victim ) >= GetTrustedLevel( ch ) )
     {
       send_to_char( "You haven't the power to succeed against them.\r\n", ch );
       return;

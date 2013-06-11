@@ -8,7 +8,7 @@ void do_pluogus( Character *ch, char *argument )
 {
   SHUTTLE_DATA * shuttle = NULL;
 
-  if ( !has_comlink( ch ) )
+  if ( !HasComlink( ch ) )
     {
       send_to_char( "You need a comlink to do that!\r\n", ch);
       return;

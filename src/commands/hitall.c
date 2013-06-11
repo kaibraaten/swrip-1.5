@@ -39,7 +39,7 @@ void do_hitall( Character *ch, char *argument )
 	  continue;
 	}
 
-      if ( ++nvict > get_level( ch, COMBAT_ABILITY ) / 5 )
+      if ( ++nvict > GetLevel( ch, COMBAT_ABILITY ) / 5 )
 	{
 	  break;
 	}

@@ -82,8 +82,8 @@ void do_clone( Character *ch, char *argument )
 
     }
 
-  frc_level = get_level( ch, FORCE_ABILITY );
-  frc_experience = get_exp( ch, FORCE_ABILITY );
+  frc_level = GetLevel( ch, FORCE_ABILITY );
+  frc_experience = GetExperience( ch, FORCE_ABILITY );
 
   /* Droids and hunters dont get force. DV */
 
@@ -97,14 +97,14 @@ void do_clone( Character *ch, char *argument )
     {
       if(ch->stats.perm_frc > 0)
         {
-          set_exp( ch, FORCE_ABILITY, 500 );
-          set_level( ch, FORCE_ABILITY, 2 );
+          SetExperience( ch, FORCE_ABILITY, 500 );
+          SetLevel( ch, FORCE_ABILITY, 2 );
         }
     }
   else
     {
-      set_exp( ch, FORCE_ABILITY, 0 );
-      set_level( ch, FORCE_ABILITY, 1 );
+      SetExperience( ch, FORCE_ABILITY, 0 );
+      SetLevel( ch, FORCE_ABILITY, 1 );
     }
 
   ch->mana = 100 + 100*ch->stats.perm_frc;
@@ -139,10 +139,10 @@ void do_clone( Character *ch, char *argument )
 
       for(ability = 0; ability < MAX_ABILITY; ability++)
         {
-          experience[ability] = get_exp( ch, ability );
-          skill_level[ability] = get_level( ch, ability );
-          set_exp( ch, ability, 0 );
-          set_level( ch, ability, 1 );
+          experience[ability] = GetExperience( ch, ability );
+          skill_level[ability] = GetLevel( ch, ability );
+          SetExperience( ch, ability, 0 );
+          SetLevel( ch, ability, 1 );
         }
 
       experience[FORCE_ABILITY] = frc_experience;
@@ -169,16 +169,16 @@ void do_clone( Character *ch, char *argument )
     save_clone( ch );
   ch->stats.perm_frc = frc;
 
-  set_level( ch, FORCE_ABILITY, frc_level );
-  set_exp( ch, FORCE_ABILITY, frc_experience );
+  SetLevel( ch, FORCE_ABILITY, frc_level );
+  SetExperience( ch, FORCE_ABILITY, frc_experience );
   ch->mana = mana;
 
   if( ch->pcdata->clones == 2 )
     {
       for(ability = 0; ability < MAX_ABILITY; ability++)
         {
-          set_exp( ch, ability, experience[ability] );
-          set_level( ch, ability, skill_level[ability] );
+          SetExperience( ch, ability, experience[ability] );
+          SetLevel( ch, ability, skill_level[ability] );
         }
     }
 

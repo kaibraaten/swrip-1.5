@@ -67,7 +67,7 @@ ch_ret spell_possess( int sn, int level, Character *ch, void *vo )
   sith_penalty( ch );
 
   af.type      = sn;
-  af.duration  = 20 + (get_level( ch, FORCE_ABILITY ) - victim->top_level) / 2;
+  af.duration  = 20 + (GetLevel( ch, FORCE_ABILITY ) - victim->top_level) / 2;
   af.location  = 0;
   af.modifier  = 0;
   af.bitvector = AFF_POSSESS;

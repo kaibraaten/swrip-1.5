@@ -20,8 +20,8 @@ void do_score(Character * ch, char *argument)
 
   ch_printf(ch, "\r\n&CScore for %s.\r\n", ch->pcdata->title);
   set_char_color(AT_SCORE, ch);
-  if ( get_trust( ch ) != ch->top_level )
-    ch_printf( ch, "&cYou are trusted at level &C%d.\r\n", get_trust( ch ) );
+  if ( GetTrustedLevel( ch ) != ch->top_level )
+    ch_printf( ch, "&cYou are trusted at level &C%d.\r\n", GetTrustedLevel( ch ) );
 
   send_to_char("&C----------------------------------------------------------------------------\r\n", ch);
 
@@ -43,7 +43,7 @@ void do_score(Character * ch, char *argument)
               ch->hit, ch->max_hit, ch->move, ch->max_move);
 
   ch_printf(ch, "&cStr: &C%2d  &cDex: &C%2d  &cCon: &C%2d  &cInt: &C%2d  &cWis: &C%2d  &cCha: &C%2d  &cLck: &C??  &cFrc: &C??\r\n",
-            get_curr_str(ch), get_curr_dex(ch),get_curr_con(ch),get_curr_int(ch),get_curr_wis(ch),get_curr_cha(ch));
+            GetCurrentStr(ch), GetCurrentDex(ch),GetCurrentCon(ch),GetCurrentInt(ch),GetCurrentWis(ch),GetCurrentCha(ch));
 
 
   send_to_char("&C----------------------------------------------------------------------------\r\n", ch);
@@ -54,12 +54,12 @@ void do_score(Character * ch, char *argument)
     for ( ability = 0 ; ability < MAX_RL_ABILITY ; ability++ )
       if ( ability != FORCE_ABILITY || IsForcer( ch ) )
         ch_printf( ch, "&c%-15s   &CLevel: %-3d   Max: %-3d   Exp: %-10ld   Next: %-10ld\r\n",
-                   ability_name[ability], get_level( ch, ability ), max_level(ch, ability),
-                   get_exp( ch, ability ),
-                   exp_level( get_level( ch, ability ) + 1 ) );
+                   ability_name[ability], GetLevel( ch, ability ), max_level(ch, ability),
+                   GetExperience( ch, ability ),
+                   exp_level( GetLevel( ch, ability ) + 1 ) );
       else
         ch_printf( ch, "&c%-15s   &CLevel: %-3d   Max: ???   Exp: ???          Next: ???\r\n",
-                   ability_name[ability], get_level( ch, ability ), get_exp( ch, ability ) );
+                   ability_name[ability], GetLevel( ch, ability ), GetExperience( ch, ability ) );
   }
 
   send_to_char("&C----------------------------------------------------------------------------\r\n", ch);

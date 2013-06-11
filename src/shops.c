@@ -212,7 +212,7 @@ int get_cost( Character *ch, Character *keeper, OBJ_DATA *obj, bool fBuy )
     {
       cost = (int) (obj->cost * (80 + UMIN(ch->top_level, LEVEL_AVATAR))) / 100;
 
-      profitmod = 13 - get_curr_cha(ch) + (richcustomer ? 15 : 0)
+      profitmod = 13 - GetCurrentCha(ch) + (richcustomer ? 15 : 0)
         + ((URANGE(5,ch->top_level,LEVEL_AVATAR)-20)/2);
       cost = (int) (obj->cost
                     * UMAX( (pShop->profit_sell+1), pShop->profit_buy+profitmod ) )
@@ -223,7 +223,7 @@ int get_cost( Character *ch, Character *keeper, OBJ_DATA *obj, bool fBuy )
       OBJ_DATA *obj2;
       int itype;
 
-      profitmod = get_curr_cha(ch) - 13 - (richcustomer ? 15 : 0);
+      profitmod = GetCurrentCha(ch) - 13 - (richcustomer ? 15 : 0);
       cost = 0;
       for ( itype = 0; itype < MAX_TRADE; itype++ )
         {

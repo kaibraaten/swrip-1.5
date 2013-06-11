@@ -19,9 +19,9 @@ void do_oldscore( Character *ch, char *argument )
              IsNpc(ch) ? "" : ch->pcdata->title,
              ch->top_level );
 
-  if ( get_trust( ch ) != ch->top_level )
+  if ( GetTrustedLevel( ch ) != ch->top_level )
     ch_printf( ch, "You are trusted at level %d.\r\n",
-               get_trust( ch ) );
+               GetTrustedLevel( ch ) );
 
   if ( IS_SET(ch->act, ACT_MOBINVIS) )
     ch_printf( ch, "You are mobinvis at level %d.\r\n",
@@ -40,12 +40,12 @@ void do_oldscore( Character *ch, char *argument )
 
   ch_printf( ch,
              "Str: %d  Int: %d  Wis: %d  Dex: %d  Con: %d  Cha: %d  Lck: ??  Frc: ??\r\n",
-             get_curr_str(ch),
-             get_curr_int(ch),
-             get_curr_wis(ch),
-             get_curr_dex(ch),
-             get_curr_con(ch),
-             get_curr_cha(ch) );
+             GetCurrentStr(ch),
+             GetCurrentInt(ch),
+             GetCurrentWis(ch),
+             GetCurrentDex(ch),
+             GetCurrentCon(ch),
+             GetCurrentCha(ch) );
 
   ch_printf( ch,
              "You have have %d credits.\r\n" , ch->gold );

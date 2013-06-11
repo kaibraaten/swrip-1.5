@@ -65,7 +65,7 @@ HelpFile *GetHelp( const Character *ch, char *argument )
     {
       HelpFile *pHelp = (HelpFile*) MapIterator_GetKey( helpIterator );
 
-      if ( GetHelpLevel( pHelp ) > get_trust( ch ) )
+      if ( GetHelpLevel( pHelp ) > GetTrustedLevel( ch ) )
 	{
 	  continue;
 	}

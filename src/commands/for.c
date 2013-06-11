@@ -106,9 +106,9 @@ void do_for(Character *ch, char *argument)
 
           if (IsNpc(p) && fMobs)
             found = TRUE;
-          else if (!IsNpc(p) && get_trust(p) >= LEVEL_IMMORTAL && fGods)
+          else if (!IsNpc(p) && GetTrustedLevel(p) >= LEVEL_IMMORTAL && fGods)
             found = TRUE;
-          else if (!IsNpc(p) && get_trust(p) < LEVEL_IMMORTAL && fMortals)
+          else if (!IsNpc(p) && GetTrustedLevel(p) < LEVEL_IMMORTAL && fMortals)
             found = TRUE;
 
           /* It looks ugly to me.. but it works :) */
@@ -176,9 +176,9 @@ void do_for(Character *ch, char *argument)
 
                 if (IsNpc(p) && fMobs)
                   found = TRUE;
-                else if (!IsNpc(p) && ( get_trust(p) >= LEVEL_IMMORTAL) && fGods)
+                else if (!IsNpc(p) && ( GetTrustedLevel(p) >= LEVEL_IMMORTAL) && fGods)
                   found = TRUE;
-                else if (!IsNpc(p) && ( get_trust(p) <= LEVEL_IMMORTAL) && fMortals)
+                else if (!IsNpc(p) && ( GetTrustedLevel(p) <= LEVEL_IMMORTAL) && fMortals)
                   found = TRUE;
 	      } /* for everyone inside the room */
 

@@ -104,8 +104,8 @@ void do_detrap( Character *ch, char *argument )
       return;
     }
 
-  percent  = number_percent() - ( get_level( ch, SMUGGLING_ABILITY ) / 20 )
-    - (get_curr_lck(ch) - 16);
+  percent  = number_percent() - ( GetLevel( ch, SMUGGLING_ABILITY ) / 20 )
+    - (GetCurrentLck(ch) - 16);
 
   separate_obj(obj);
 

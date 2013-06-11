@@ -33,7 +33,7 @@ void do_goto( Character *ch, char *argument )
           send_to_char( "No such location.\r\n", ch );
           return;
         }
-      if ( get_trust( ch ) < sysdata.level_modify_proto &&
+      if ( GetTrustedLevel( ch ) < sysdata.level_modify_proto &&
            !( ch->pcdata->bestowments && is_name( "intergoto", ch->pcdata->bestowments) ))
 
         {
@@ -62,7 +62,7 @@ void do_goto( Character *ch, char *argument )
 
   if ( room_is_private(ch, location ) )
     {
-      if ( get_trust( ch ) < sysdata.level_override_private
+      if ( GetTrustedLevel( ch ) < sysdata.level_override_private
 	   || ( ch->top_level == 105 ? 0 : ( location->vnum == IMP_ROOM1 ? 1 : ( location->vnum == IMP_ROOM2 ? 1 : 0 ) ) ) )
         {
           send_to_char( "That room is private right now.\r\n", ch );
@@ -72,7 +72,7 @@ void do_goto( Character *ch, char *argument )
 	send_to_char( "Overriding private flag!\r\n", ch );
     }
 
-  if ( get_trust( ch ) < LEVEL_GOD &&
+  if ( GetTrustedLevel( ch ) < LEVEL_GOD &&
        !( ch->pcdata->bestowments && is_name( "intergoto", ch->pcdata->bestowments) ))
     {
       vnum = atoi( arg );

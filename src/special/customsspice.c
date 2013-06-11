@@ -35,14 +35,14 @@ bool spec_customs_spice( Character *ch )
                   act( AT_ACTION, "$n takes $p from you.",   ch, obj, victim, TO_VICT    );
                   obj = obj_to_char( obj, ch );
                   SET_BIT( obj->extra_flags , ITEM_CONTRABAND);
-                  ch_exp = UMIN( obj->cost*10 , ( exp_level( get_level( victim, SMUGGLING_ABILITY ) + 1) - exp_level( get_level( victim, SMUGGLING_ABILITY ) ) ) );
+                  ch_exp = UMIN( obj->cost*10 , ( exp_level( GetLevel( victim, SMUGGLING_ABILITY ) + 1) - exp_level( GetLevel( victim, SMUGGLING_ABILITY ) ) ) );
                   ch_printf( victim, "You lose %ld experience. \r\n" , ch_exp );
                   gain_exp( victim, SMUGGLING_ABILITY, 0 - ch_exp );
                   return TRUE;
                 }
               else if ( can_see( ch, victim ) && !IS_SET( obj->extra_flags , ITEM_CONTRABAND)  )
                 {
-                  ch_exp = UMIN( obj->cost*10 , ( exp_level( get_level( victim, SMUGGLING_ABILITY ) + 1) - exp_level( get_level( victim, SMUGGLING_ABILITY ) ) ) );
+                  ch_exp = UMIN( obj->cost*10 , ( exp_level( GetLevel( victim, SMUGGLING_ABILITY ) + 1) - exp_level( GetLevel( victim, SMUGGLING_ABILITY ) ) ) );
                   ch_printf( victim, "You receive %ld experience for smuggling %s. \r\n", ch_exp, obj->short_descr);
                   gain_exp( victim, SMUGGLING_ABILITY, ch_exp );
 
@@ -53,7 +53,7 @@ bool spec_customs_spice( Character *ch )
                 }
               else if ( !IS_SET( obj->extra_flags , ITEM_CONTRABAND)  )
                 {
-                  ch_exp = UMIN( obj->cost*10 , ( exp_level( get_level( victim, SMUGGLING_ABILITY ) + 1) - exp_level( get_level( victim, SMUGGLING_ABILITY ) ) ) );
+                  ch_exp = UMIN( obj->cost*10 , ( exp_level( GetLevel( victim, SMUGGLING_ABILITY ) + 1) - exp_level( GetLevel( victim, SMUGGLING_ABILITY ) ) ) );
                   ch_printf( victim, "You receive %ld experience for smuggling %s. \r\n" , ch_exp , obj->short_descr);
                   gain_exp( victim, SMUGGLING_ABILITY, ch_exp );
 
@@ -69,7 +69,7 @@ bool spec_customs_spice( Character *ch )
                   if (content->pIndexData->item_type == ITEM_SPICE
                       && !IS_SET( content->extra_flags , ITEM_CONTRABAND ) )
 		    {
-                      ch_exp = UMIN( content->cost*10 , ( exp_level( get_level( victim, SMUGGLING_ABILITY ) + 1) - exp_level( get_level( victim, SMUGGLING_ABILITY ) ) ) );
+                      ch_exp = UMIN( content->cost*10 , ( exp_level( GetLevel( victim, SMUGGLING_ABILITY ) + 1) - exp_level( GetLevel( victim, SMUGGLING_ABILITY ) ) ) );
                       ch_printf( victim, "You receive %ld experience for smuggling %s.\r\n " , ch_exp , content->short_descr);
                       gain_exp( victim, SMUGGLING_ABILITY, ch_exp );
                       SET_BIT( content->extra_flags , ITEM_CONTRABAND);

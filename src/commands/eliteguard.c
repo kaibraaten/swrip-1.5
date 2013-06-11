@@ -28,7 +28,7 @@ void do_elite_guard ( Character *ch , char *argument )
           return;
         }
 
-      if ( ch->gold < get_level(ch, LEADERSHIP_ABILITY) * 200 )
+      if ( ch->gold < GetLevel(ch, LEADERSHIP_ABILITY) * 200 )
         {
           ch_printf( ch, "&RYou dont have enough credits.\r\n", ch );
           return;
@@ -66,7 +66,7 @@ void do_elite_guard ( Character *ch , char *argument )
 
   send_to_char( "&GYour guard is on the way.\r\n", ch);
 
-  credits = get_level(ch, LEADERSHIP_ABILITY) * 200;
+  credits = GetLevel(ch, LEADERSHIP_ABILITY) * 200;
   ch_printf( ch, "It cost you %d credits.\r\n", credits);
   ch->gold -= UMIN( credits , ch->gold );
 

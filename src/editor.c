@@ -856,7 +856,7 @@ static void editor_abort( Character *ch, EDITOR_DATA *edd, char *argument )
 
 static void editor_escaped_cmd( Character *ch, EDITOR_DATA *edd, char *argument )
 {
-  if ( get_trust(ch) > LEVEL_IMMORTAL )
+  if ( GetTrustedLevel(ch) > LEVEL_IMMORTAL )
     {
       DO_FUN *last_cmd;
       int substate = ch->substate;
