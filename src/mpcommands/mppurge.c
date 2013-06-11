@@ -31,9 +31,11 @@ void do_mppurge( Character *ch, char *argument )
       for ( victim = ch->in_room->first_person; victim; victim = vnext )
         {
 	  vnext = victim->next_in_room;
+
           if ( IsNpc( victim ) && victim != ch )
             extract_char( victim, TRUE );
         }
+
       while ( ch->in_room->first_content )
         extract_obj( ch->in_room->first_content );
 

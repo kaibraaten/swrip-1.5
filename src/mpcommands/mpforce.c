@@ -1,9 +1,11 @@
 #include "character.h"
 #include "mud.h"
 
+static void ForceVictim( void *element, void *userData );
+static bool CanBeForced( void *element, void *userData );
+
 /* lets the mobile force someone to do something.  must be mortal level
    and the all argument only affects those in the room with the mobile */
-
 void do_mpforce( Character *ch, char *argument )
 {
   char arg[ MAX_INPUT_LENGTH ];
@@ -27,11 +29,11 @@ void do_mpforce( Character *ch, char *argument )
 
   if ( !str_cmp( arg, "all" ) )
     {
-      Character *vch;
+      CerisList *victims = List_CopyIf( ch->in_room->People, CanBeForced, ch );
 
-      for ( vch = ch->in_room->first_person; vch; vch = vch->next_in_room )
-        if ( GetTrustedLevel( vch ) < GetTrustedLevel( ch ) && can_see( ch, vch ) )
-          interpret( vch, argument );
+      List_ForEach( victims, ForceVictim, argument );
+
+      DestroyList( victims );
     }
   else
     {
@@ -59,5 +61,28 @@ void do_mpforce( Character *ch, char *argument )
 
 
       interpret( victim, argument );
+    }
+}
+
+static void ForceVictim( void *element, void *userData )
+{
+  Character *victim = (Character*) element;
+  char *argument = (char*) userData;
+
+  interpret( victim, argument );
+}
+
+static bool CanBeForced( void *element, void *userData )
+{
+  Character *victim = (Character*) element;
+  Character *ch = (Character*) userData;
+
+  if ( GetTrustedLevel( victim ) < GetTrustedLevel( ch ) && can_see( ch, victim ) )
+    {
+      return TRUE;
+    }
+  else
+    {
+      return FALSE;
     }
 }
