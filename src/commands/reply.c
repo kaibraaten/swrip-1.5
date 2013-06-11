@@ -1,12 +1,19 @@
 #include "mud.h"
 #include "character.h"
 
+static void SpamComlinkUsage( void *element, void *userData );
+
+typedef struct ComlinkUseData
+{
+  Character *Speaker;
+  char *Text;
+} ComlinkUseData;
+
 void do_reply( Character *ch, char *argument )
 {
   char buf[MAX_STRING_LENGTH];
   Character *victim = NULL;
   int position = POS_STANDING;
-  Character *vch = NULL;
   bool sameroom = FALSE;
 
   REMOVE_BIT( ch->deaf, CHANNEL_TELLS );
@@ -93,26 +100,12 @@ void do_reply( Character *ch, char *argument )
 
   if( !IsImmortal(ch) && !sameroom )
     {
-      for ( vch = ch->in_room->first_person; vch; vch = vch->next_in_room )
-        {
-          const char *sbuf = argument;
+      ComlinkUseData data;
 
-          if ( vch == ch )
-	    {
-	      continue;
-	    }
+      data.Speaker = ch;
+      data.Text = argument;
 
-          if ( !knows_language( vch, ch->speaking, ch )
-	       && ( !IsNpc( ch ) || ch->speaking != 0 ) )
-	    {
-	      sbuf = scramble( argument, ch->speaking );
-	    }
-
-          sbuf = drunk_speech( sbuf, ch );
-
-          MOBtrigger = FALSE;
-          act( AT_SAY, "$n says quietly into his comlink '$t'", ch, sbuf, vch, TO_VICT );
-        }
+      List_ForEach( ch->in_room->People, SpamComlinkUsage, &data );
 
       if ( !IsImmortal(victim) )
 	{
@@ -120,4 +113,28 @@ void do_reply( Character *ch, char *argument )
 	       victim, NULL, NULL, TO_ROOM);
 	}
     }
+}
+
+static void SpamComlinkUsage( void *element, void *userData )
+{
+  Character *listener = (Character*) element;
+  ComlinkUseData *data = (ComlinkUseData*) userData;
+  const char *sbuf = data->Text;
+  int language = data->Speaker->speaking;
+
+  if ( listener == data->Speaker )
+    {
+      return;
+    }
+
+  if ( !knows_language( listener, language, data->Speaker )
+       && ( !IsNpc( data->Speaker ) || language != 0 ) )
+    {
+      sbuf = scramble( data->Text, language );
+    }
+
+  sbuf = drunk_speech( sbuf, data->Speaker );
+
+  MOBtrigger = FALSE;
+  act( AT_SAY, "$n says quietly into his comlink '$t'", data->Speaker, sbuf, listener, TO_VICT );
 }
