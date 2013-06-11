@@ -1,15 +1,148 @@
 #include "character.h"
 #include "mud.h"
 
+static const char * const dir_text[] = { "n", "e", "s", "w", "u", "d", "ne", "nw", "se", "sw", "?" };
+
+static void ShowRoomName( const Character *ch, const ROOM_INDEX_DATA *location )
+{
+  ch_printf( ch, "Name: %s\r\n", location->name );
+}
+
+static void ShowAreaInformation( const Character *ch, const ROOM_INDEX_DATA *location )
+{
+  ch_printf( ch, "Area: %s  Filename: %s\r\n",
+             location->area ? location->area->name : "None????",
+             location->area ? location->area->filename : "None????" );
+}
+
+static void ShowMiscInformation( const Character *ch, const ROOM_INDEX_DATA *location )
+{
+  ch_printf( ch,
+             "Vnum: %d.  Sector: %d.  Light: %d.  TeleDelay: %d.  TeleVnum: %d  Tunnel: %d.\r\n",
+             location->vnum,
+             location->sector_type,
+             location->light,
+             location->tele_delay,
+             location->tele_vnum,
+             location->tunnel );
+}
+
+static void ListBriefViewOfExitsInRoom( const Character *ch, const ROOM_INDEX_DATA *location )
+{
+  int cnt = 0;
+  EXIT_DATA *pexit = NULL;
+
+  if ( location->first_exit )
+    send_to_char( "------------------- EXITS -------------------\r\n", ch );
+
+  for ( cnt = 0, pexit = location->first_exit; pexit; pexit = pexit->next )
+    ch_printf( ch,
+               "%2d) %-2s to %-5d.  Key: %d  Flags: %d  Keywords: %s.\r\n",
+               ++cnt,
+               dir_text[pexit->vdir],
+               pexit->to_room ? pexit->to_room->vnum : 0,
+               pexit->key,
+               pexit->exit_info,
+               pexit->keyword[0] != '\0' ? pexit->keyword : "(none)" );
+}
+
+static void ListFullViewOfExitsInRoom( const Character *ch, const ROOM_INDEX_DATA *location )
+{
+  int cnt = 0;
+  EXIT_DATA *pexit = NULL;
+
+  ch_printf( ch, "Exits for room '%s' vnum %d\r\n",
+	     location->name,
+	     location->vnum );
+
+  for ( cnt = 0, pexit = location->first_exit; pexit; pexit = pexit->next )
+    ch_printf( ch, "%2d) %2s to %-5d.  Key: %d  Flags: %d  Keywords: '%s'.\r\nDescription: %sExit links back to vnum: %d  Exit's RoomVnum: %d  Distance: %d\r\n",
+	       ++cnt,
+	       dir_text[pexit->vdir],
+	       pexit->to_room ? pexit->to_room->vnum : 0,
+	       pexit->key,
+	       pexit->exit_info,
+	       pexit->keyword,
+	       pexit->description[0] != '\0'
+	       ? pexit->description : "(none).\r\n",
+	       pexit->rexit ? pexit->rexit->vnum : 0,
+	       pexit->rvnum,
+	       pexit->distance );
+}
+
+static void ShowRoomFlags( const Character *ch, const ROOM_INDEX_DATA *location )
+{
+  ch_printf( ch, "Room flags: %s\r\n",
+             flag_string(location->room_flags, room_flags) );
+}
+
+static void ShowRoomDescription( const Character *ch, const ROOM_INDEX_DATA *location )
+{
+  ch_printf( ch, "Description:\r\n%s", location->description );
+}
+
+static void ListObjectsInRoom( const Character *ch, const ROOM_INDEX_DATA *location )
+{
+  OBJ_DATA *obj = NULL;
+
+  send_to_char( ".\r\nObjects:   ", ch );
+
+  for ( obj = location->first_content; obj; obj = obj->next_content )
+    {
+      char buf[MAX_STRING_LENGTH];
+
+      send_to_char( " ", ch );
+      one_argument( obj->name, buf );
+      send_to_char( buf, ch );
+    }
+
+  send_to_char( ".\r\n", ch );
+}
+
+static void ListExtraDescriptionsInRoom( const Character *ch, const ROOM_INDEX_DATA *location )
+{
+  if ( location->first_extradesc )
+    {
+      EXTRA_DESCR_DATA *ed = NULL;
+
+      send_to_char( "Extra description keywords: '", ch );
+
+      for ( ed = location->first_extradesc; ed; ed = ed->next )
+        {
+          send_to_char( ed->keyword, ch );
+
+          if ( ed->next )
+            send_to_char( " ", ch );
+        }
+
+      send_to_char( "'.\r\n", ch );
+    }
+}
+
+static void ShowFirstPartOfName( void *element, void *userData )
+{
+  Character *characterToShow = (Character*) element;
+  Character *looker = (Character*) userData;
+
+  if ( can_see( looker, characterToShow ) )
+    {
+      char buf[MAX_STRING_LENGTH];
+
+      one_argument( characterToShow->name, buf );
+      ch_printf( looker, " %s", buf );
+    }
+}
+
+static void ListCharactersInRoom( Character *ch, const ROOM_INDEX_DATA *location )
+{
+  ch_printf( ch, "Characters:" );
+  List_ForEach( location->People, ShowFirstPartOfName, ch );
+}
+
 void do_rstat( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   ROOM_INDEX_DATA *location = NULL;
-  OBJ_DATA *obj = NULL;
-  Character *rch = NULL;
-  EXIT_DATA *pexit = NULL;
-  int cnt = 0;
-  static const char * const dir_text[] = { "n", "e", "s", "w", "u", "d", "ne", "nw", "se", "sw", "?" };
 
   one_argument( argument, arg );
 
@@ -34,26 +167,7 @@ void do_rstat( Character *ch, char *argument )
   if ( !str_cmp( arg, "exits" ) )
     {
       location = ch->in_room;
-
-      ch_printf( ch, "Exits for room '%s.' vnum %d\r\n",
-                 location->name,
-                 location->vnum );
-
-      for ( cnt = 0, pexit = location->first_exit; pexit; pexit = pexit->next )
-        ch_printf( ch,
-                   "%2d) %2s to %-5d.  Key: %d  Flags: %d  Keywords: '%s'.\r\nDescription: %sExit links back to vnum: %d  Exit's RoomVnum\
-: %d  Distance: %d\r\n",
-                   ++cnt,
-                   dir_text[pexit->vdir],
-                   pexit->to_room ? pexit->to_room->vnum : 0,
-                   pexit->key,
-                   pexit->exit_info,
-                   pexit->keyword,
-                   pexit->description[0] != '\0'
-                   ? pexit->description : "(none).\r\n",
-                   pexit->rexit ? pexit->rexit->vnum : 0,
-                   pexit->rvnum,
-                   pexit->distance );
+      ListFullViewOfExitsInRoom( ch, location );
       return;
     }
 
@@ -78,78 +192,13 @@ void do_rstat( Character *ch, char *argument )
         }
     }
 
-  ch_printf( ch, "Name: %s.\r\nArea: %s  Filename: %s.\r\n",
-             location->name,
-             location->area ? location->area->name : "None????",
-             location->area ? location->area->filename : "None????" );
-
-  ch_printf( ch,
-             "Vnum: %d.  Sector: %d.  Light: %d.  TeleDelay: %d.  TeleVnum: %d  Tunnel: %d.\r\n",
-             location->vnum,
-             location->sector_type,
-             location->light,
-             location->tele_delay,
-             location->tele_vnum,
-             location->tunnel );
-
-  ch_printf( ch, "Room flags: %s\r\n",
-             flag_string(location->room_flags, room_flags) );
-  ch_printf( ch, "Description:\r\n%s", location->description );
-
-  if ( location->first_extradesc )
-    {
-      EXTRA_DESCR_DATA *ed = NULL;
-
-      send_to_char( "Extra description keywords: '", ch );
-
-      for ( ed = location->first_extradesc; ed; ed = ed->next )
-        {
-          send_to_char( ed->keyword, ch );
-
-          if ( ed->next )
-            send_to_char( " ", ch );
-        }
-
-      send_to_char( "'.\r\n", ch );
-    }
-
-  send_to_char( "Characters:", ch );
-
-  for ( rch = location->first_person; rch; rch = rch->next_in_room )
-    {
-      if ( can_see( ch, rch ) )
-        {
-	  char buf[MAX_STRING_LENGTH];
-
-          send_to_char( " ", ch );
-          one_argument( rch->name, buf );
-	  send_to_char( buf, ch );
-        }
-    }
-
-  send_to_char( ".\r\nObjects:   ", ch );
-
-  for ( obj = location->first_content; obj; obj = obj->next_content )
-    {
-      char buf[MAX_STRING_LENGTH];
-
-      send_to_char( " ", ch );
-      one_argument( obj->name, buf );
-      send_to_char( buf, ch );
-    }
-
-  send_to_char( ".\r\n", ch );
-
-  if ( location->first_exit )
-    send_to_char( "------------------- EXITS -------------------\r\n", ch );
-
-  for ( cnt = 0, pexit = location->first_exit; pexit; pexit = pexit->next )
-    ch_printf( ch,
-               "%2d) %-2s to %-5d.  Key: %d  Flags: %d  Keywords: %s.\r\n",
-               ++cnt,
-               dir_text[pexit->vdir],
-               pexit->to_room ? pexit->to_room->vnum : 0,
-               pexit->key,
-               pexit->exit_info,
-               pexit->keyword[0] != '\0' ? pexit->keyword : "(none)" );
+  ShowRoomName( ch, location );
+  ShowAreaInformation( ch, location );
+  ShowMiscInformation( ch, location );
+  ShowRoomFlags( ch, location );
+  ShowRoomDescription( ch, location );
+  ListExtraDescriptionsInRoom( ch, location );
+  ListCharactersInRoom( ch, location );
+  ListObjectsInRoom( ch, location );
+  ListBriefViewOfExitsInRoom( ch, location );
 }
