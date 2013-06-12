@@ -1,20 +1,27 @@
 #include "character.h"
 #include "mud.h"
 
+static bool IsPotentialVictim( void *element, void *userData )
+{
+  Character *victim = (Character*) element;
+  Character *jedi = (Character*) userData;
+
+  return victim != jedi && can_see( jedi, victim ) && number_bits( 1 ) == 0;
+}
+
+static Character *GetVictim( Character *jedi )
+{
+  return (Character*) List_FindIf( jedi->in_room->People, IsPotentialVictim, jedi );
+}
+
 bool spec_jedi_healer( Character *ch )
 {
   Character *victim;
-  Character *v_next;
 
   if ( !is_awake(ch) )
     return FALSE;
 
-  for ( victim = ch->in_room->first_person; victim; victim = v_next )
-    {
-      v_next = victim->next_in_room;
-      if ( victim != ch && can_see( ch, victim ) && number_bits( 1 ) == 0 )
-        break;
-    }
+  victim = GetVictim( ch );
 
   if ( !victim )
     return FALSE;
