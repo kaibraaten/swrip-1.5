@@ -1,6 +1,24 @@
 #include "character.h"
 #include "mud.h"
 
+static bool IsMobAndNotSelf( void *element, void *userData )
+{
+  Character *victim = (Character*) element;
+  Character *self = (Character*) userData;
+
+  return victim != self && IsNpc( victim );
+}
+
+static void ExtractMob( void *element, void *userData )
+{
+  Character *victim = (Character*) element;
+
+  if( IsNpc( victim ) )
+    {
+      extract_char( victim, TRUE );
+    }
+}
+
 /* lets the mobile purge all objects and other npcs in the room,
    or purge a specified object or mob in the room.  It can purge
    itself, but this had best be the last command in the MUDprogram
@@ -25,16 +43,9 @@ void do_mppurge( Character *ch, char *argument )
 
   if ( arg[0] == '\0' )
     {
-      /* 'purge' */
-      Character *vnext;
-
-      for ( victim = ch->in_room->first_person; victim; victim = vnext )
-        {
-	  vnext = victim->next_in_room;
-
-          if ( IsNpc( victim ) && victim != ch )
-            extract_char( victim, TRUE );
-        }
+      CerisList *mobsInRoom = List_CopyIf( ch->in_room->People, IsMobAndNotSelf, ch );
+      List_ForEach( mobsInRoom, ExtractMob, NULL );
+      DestroyList( mobsInRoom );
 
       while ( ch->in_room->first_content )
         extract_obj( ch->in_room->first_content );

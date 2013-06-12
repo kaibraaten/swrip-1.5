@@ -219,8 +219,9 @@ void AddKill( Character *ch, const Character *mob )
  */
 int TimesKilled( const Character *ch, const Character *mob )
 {
-  int x;
-  short vnum, track;
+  int x = 0;
+  vnum_t vnum = 0;
+  short track = 0;
 
   if ( IsNpc(ch) )
     return 0;
@@ -239,21 +240,41 @@ int TimesKilled( const Character *ch, const Character *mob )
   return 0;
 }
 
+bool HasObjectOfType( const Character *ch, short itemtype )
+{
+  const OBJ_DATA *obj = NULL;
+
+  for( obj = ch->last_carrying; obj; obj = obj->prev_content )
+    {
+      if( obj->pIndexData->item_type == itemtype)
+        {
+          return TRUE;
+        }
+    }
+
+  return FALSE;
+}
+
 bool HasComlink( const Character *ch )
 {
-  OBJ_DATA *obj = NULL;
-
   if( IsImmortal( ch ) )
     {
       return TRUE;
     }
 
-  for( obj = ch->last_carrying; obj; obj = obj->prev_content )
+  return HasObjectOfType( ch, ITEM_COMLINK );
+}
+
+bool HasDiploma( const Character *ch )
+{
+  OBJ_DATA *obj = NULL;
+
+  for ( obj = ch->last_carrying; obj; obj = obj->prev_content )
     {
-      if( obj->pIndexData->item_type == ITEM_COMLINK )
-        {
-          return TRUE;
-        }
+      if (obj->pIndexData == get_obj_index( OBJ_VNUM_SCHOOL_DIPLOMA ) )
+	{
+	  return TRUE;
+	}
     }
 
   return FALSE;

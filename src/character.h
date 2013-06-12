@@ -247,7 +247,11 @@ void AddKill( Character *ch, const Character *mob );
  */
 int TimesKilled( const Character *ch, const Character *mob );
 
+bool HasObjectOfType( const Character *ch, short itemtype );
+
 bool HasComlink( const Character *ch );
+
+bool HasDiploma( const Character *ch );
 
 short GetLevel( const Character *ch, short ability );
 
