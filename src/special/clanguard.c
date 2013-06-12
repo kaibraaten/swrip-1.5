@@ -4,19 +4,22 @@
 
 bool spec_clan_guard( Character *ch )
 {
-  Character *victim;
-  Character *v_next;
-  Clan *clan;
-  bool found = FALSE;
+  Clan *clan = NULL;
+  bool result = FALSE;
+  CerisList *peopleInRoom = NULL;
+  CerisListIterator *peopleIterator = NULL;
 
   if ( !is_awake(ch) || ch->fighting )
     return FALSE;
 
   clan = GetClan(ch->name);
 
-  for ( victim = ch->in_room->first_person; victim; victim = v_next )
+  peopleInRoom = List_Copy( ch->in_room->People );
+  peopleIterator = CreateListIterator( peopleInRoom, ForwardsIterator );
+
+  for( ; !ListIterator_IsDone( peopleIterator ); ListIterator_Next( peopleIterator ) )
     {
-      v_next = victim->next_in_room;
+      Character *victim = (Character*) ListIterator_GetData( peopleIterator );
 
       if ( !can_see( ch, victim ) )
         continue;
@@ -24,19 +27,23 @@ bool spec_clan_guard( Character *ch )
       if ( get_timer(victim, TIMER_RECENTFIGHT) > 0 )
         continue;
 
-      if ( !IsNpc( victim ) && victim->pcdata && is_clanned( victim ) && clan && is_awake(victim)
-           && (clan != victim->pcdata->clan )
+      if ( !IsNpc( victim )
+	   && is_clanned( victim )
+	   && clan
+	   && is_awake(victim)
+           && clan != victim->pcdata->clan
            && ( !victim->pcdata->clan->mainclan || clan != victim->pcdata->clan->mainclan )
            && ( !clan->mainclan || clan->mainclan != victim->pcdata->clan ) )
         {
-          if(found)
-            continue;
-
           do_yell( ch, "Hey you're not allowed in here!" );
           multi_hit( ch, victim, TYPE_UNDEFINED );
-          return TRUE;
+	  result = TRUE;
+	  break;
         }
     }
 
-  return FALSE;
+  DestroyListIterator( peopleIterator );
+  DestroyList( peopleInRoom );
+
+  return result;
 }
