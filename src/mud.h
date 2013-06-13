@@ -2454,7 +2454,7 @@ extern "C" {
   void  set_fighting( Character *ch, Character *victim );
   void  stop_fighting( Character *ch, bool fBoth );
   void  free_fight( Character *ch );
-  Character *who_fighting( Character *ch );
+  Character *who_fighting( const Character *ch );
   void  check_killer( Character *ch, Character *victim );
   void  check_attacker( Character *ch, Character *victim );
   void  death_cry( Character *ch );

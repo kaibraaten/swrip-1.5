@@ -2,34 +2,68 @@
 #include "mud.h"
 #include "clan.h"
 
-bool spec_stormtrooper( Character *ch )
+static bool IsRebel( void *element, void *userData )
 {
-  Character *victim;
-  Character *v_next;
+  const Character *rebel = (Character*) element;
+  const Character *stormtrooper = (Character*) userData;
 
-  if ( !is_awake(ch) || ch->fighting )
+  if( !can_see( stormtrooper, rebel ) )
+    {
+      return FALSE;
+    }
+
+  if( get_timer( rebel, TIMER_RECENTFIGHT ) > 0 )
+    {
+      return FALSE;
+    }
+
+  if( IsNpc( rebel ) && nifty_is_name( "rebel", rebel->name )
+      && rebel->fighting && who_fighting( rebel ) != stormtrooper )
+    {
+      return TRUE;
+    }
+
+  if( !IsNpc( rebel ) && is_clanned( rebel ) && is_awake( rebel )
+      && nifty_is_name( "rebel", rebel->pcdata->clan->name ) )
+    {
+      return TRUE;
+    }
+
+  return FALSE;
+}
+
+static Character *GetRebelInRoom( Character *stormtrooper )
+{
+  CerisList *rebels = List_CopyIf( stormtrooper->in_room->People, IsRebel, stormtrooper );
+  Character *rebel = NULL;
+
+  if( List_Count( rebels ) > 0 )
+    {
+      CerisListIterator *iter = CreateListIterator( rebels, ForwardsIterator );
+
+      rebel = (Character*) ListIterator_GetData( iter );
+
+      DestroyListIterator( iter );
+    }
+
+  DestroyList( rebels );
+  return rebel;
+}
+
+bool spec_stormtrooper( Character *stormtrooper )
+{
+  Character *rebel = NULL;
+
+  if ( !is_awake(stormtrooper) || stormtrooper->fighting )
     return FALSE;
 
-  for ( victim = ch->in_room->first_person; victim; victim = v_next )
+  rebel = GetRebelInRoom( stormtrooper );
+
+  if( rebel )
     {
-      v_next = victim->next_in_room;
-
-      if ( !can_see( ch, victim ) )
-        continue;
-
-      if ( get_timer(victim, TIMER_RECENTFIGHT) > 0 )
-        continue;
-
-      if ( ( IsNpc( victim ) && nifty_is_name( "rebel" , victim->name )
-             && victim->fighting && who_fighting( victim ) != ch ) ||
-           ( !IsNpc( victim ) && is_clanned( victim ) && is_awake(victim)
-             && nifty_is_name( "rebel" , victim->pcdata->clan->name ) ) )
-        {
-          do_yell( ch, "Die Rebel Scum!" );
-          multi_hit( ch, victim, TYPE_UNDEFINED );
-          return TRUE;
-        }
-
+      do_yell( stormtrooper, "Die Rebel Scum!" );
+      multi_hit( stormtrooper, rebel, TYPE_UNDEFINED );
+      return TRUE;
     }
 
   return FALSE;

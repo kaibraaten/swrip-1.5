@@ -1582,8 +1582,6 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
       OBJ_DATA *obj_next;
       int cnt=0;
 
-      /* REMOVE_BIT( victim->act, PLR_ATTACKER ); Removed to add PLR_DONTAUTOFUEL */
-
       stop_fighting( victim, TRUE );
 
       if ( ( obj = get_eq_char( victim, WEAR_DUAL_WIELD ) ) != NULL )
@@ -1992,7 +1990,7 @@ void set_fighting( Character *ch, Character *victim )
 }
 
 
-Character *who_fighting( Character *ch )
+Character *who_fighting( const Character *ch )
 {
   if ( !ch )
     {
