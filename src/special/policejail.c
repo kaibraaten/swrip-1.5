@@ -1,64 +1,101 @@
 #include "character.h"
 #include "mud.h"
 
-bool spec_police_jail( Character *ch )
+typedef struct ArrestData
 {
+  Character *PoliceOfficer;
+  bool MadeArrest;
+} ArrestData;
 
-  ROOM_INDEX_DATA *jail = NULL;
-  Character *victim;
-  Character *v_next;
-  int vip;
-  char buf[MAX_STRING_LENGTH];
+static bool IsVisiblePlayer( void *element, void *userData );
+static void AttemptArrest( void *element, void *userData );
 
-  if ( !is_awake(ch) || ch->fighting )
+bool spec_police_jail( Character *cop )
+{
+  CerisList *playersInRoom = NULL;
+  ArrestData data;
+
+  if ( !is_awake(cop) || cop->fighting )
     return FALSE;
 
-  for ( victim = ch->in_room->first_person; victim; victim = v_next )
+  data.PoliceOfficer = cop;
+  data.MadeArrest = FALSE;
+  playersInRoom = List_CopyIf( cop->in_room->People, IsVisiblePlayer, cop );
+
+  List_ForEach( playersInRoom, AttemptArrest, &data );
+
+  DestroyList( playersInRoom );
+  return data.MadeArrest;
+}
+
+static bool IsVisiblePlayer( void *element, void *userData )
+{
+  const Character *victim = (Character*) element;
+  const Character *cop = (Character*) userData;
+
+  return !IsNpc( victim ) && can_see( cop, victim ) && number_bits( 1 ) == 0;
+}
+
+static void AttemptArrest( void *element, void *userData )
+{
+  Character *criminal = (Character*) element;
+  ArrestData *data = (ArrestData*) userData;
+  Character *cop = data->PoliceOfficer;
+  int vip = 0;
+
+  if( data->MadeArrest )
     {
-      v_next = victim->next_in_room;
-      if ( IsNpc(victim) )
-        continue;
-      if ( !can_see( ch, victim ) )
-        continue;
-      if ( number_bits ( 1 ) == 0 )
-        continue;
-      for ( vip = 0 ; vip <= 31 ; vip++ )
-        if ( IS_SET ( ch->vip_flags , 1 << vip ) &&  IS_SET( victim->pcdata->wanted_flags , 1 << vip) )
-          {
-            sprintf( buf , "Hey you're wanted on %s!", planet_flags[vip] );
-            do_say( ch , buf );
-
-            if( 1 << vip == VIP_ADARI )
-              jail = get_room_index( ROOM_JAIL_ADARI );
-	    else if( 1 << vip == VIP_MON_CALAMARI )
-              switch ( number_range(1,4) )
-                {
-                case 1:
-                  jail = get_room_index( ROOM_JAIL_MON_CALAMARI_1 );
-                  break;
-                case 2:
-                  jail = get_room_index( ROOM_JAIL_MON_CALAMARI_2 );
-                  break;
-                case 3:
-                  jail = get_room_index( ROOM_JAIL_QUARREN_1 );
-                  break;
-                case 4:
-                  jail = get_room_index( ROOM_JAIL_QUARREN_2 );
-                  break;
-                }
-
-            if ( jail )
-              {
-                REMOVE_BIT( victim->pcdata->wanted_flags , 1 << vip );
-                act( AT_ACTION, "$n ushers $N off to jail.", ch, NULL, victim, TO_NOTVICT );
-                act( AT_ACTION, "$n escorts you to jail.",   ch, NULL, victim, TO_VICT    );
-                char_from_room( victim );
-                char_to_room( victim , jail );
-              }
-
-            return TRUE;
-          }
+      return;
     }
 
-  return FALSE;
+  for ( vip = 0 ; vip <= 31 ; vip++ )
+    {
+      if ( IS_SET( cop->vip_flags , 1 << vip )
+	   && IS_SET( criminal->pcdata->wanted_flags , 1 << vip) )
+	{
+	  char buf[MAX_STRING_LENGTH];
+	  ROOM_INDEX_DATA *jail = NULL;
+
+	  sprintf( buf, "Hey you're wanted on %s!", planet_flags[vip] );
+	  do_say( cop , buf );
+
+	  if( 1 << vip == VIP_ADARI )
+	    {
+	      jail = get_room_index( ROOM_JAIL_ADARI );
+	    }
+	  else if( 1 << vip == VIP_MON_CALAMARI )
+	    {
+	      switch ( number_range(1,4) )
+		{
+		case 1:
+		  jail = get_room_index( ROOM_JAIL_MON_CALAMARI_1 );
+		  break;
+
+		case 2:
+		  jail = get_room_index( ROOM_JAIL_MON_CALAMARI_2 );
+		  break;
+
+		case 3:
+		  jail = get_room_index( ROOM_JAIL_QUARREN_1 );
+		  break;
+
+		case 4:
+		  jail = get_room_index( ROOM_JAIL_QUARREN_2 );
+		  break;
+		}
+	    }
+
+	  if ( jail )
+	    {
+	      REMOVE_BIT( criminal->pcdata->wanted_flags , 1 << vip );
+	      act( AT_ACTION, "$n ushers $N off to jail.", cop, NULL, criminal, TO_NOTVICT );
+	      act( AT_ACTION, "$n escorts you to jail.",   cop, NULL, criminal, TO_VICT    );
+	      char_from_room( criminal );
+	      char_to_room( criminal , jail );
+	    }
+
+	  data->MadeArrest = TRUE;
+	  return;
+	}
+    }
 }
