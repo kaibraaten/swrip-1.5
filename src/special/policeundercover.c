@@ -1,35 +1,62 @@
 #include "character.h"
 #include "mud.h"
 
-bool spec_police_undercover( Character *ch )
+typedef struct PoliceData
 {
-  Character *victim;
-  Character *v_next;
-  int vip;
-  char buf[MAX_STRING_LENGTH];
+  Character *PoliceOfficer;
+  bool FoundCriminal;
+} PoliceData;
 
-  if ( !is_awake(ch) || ch->fighting )
-    return FALSE;
+static bool IsVisiblePlayer( void *element, void *userData )
+{
+  const Character *victim = (Character*) element;
+  const Character *cop = (Character*) userData;
 
-  for ( victim = ch->in_room->first_person; victim; victim = v_next )
+  return !IsNpc( victim ) && can_see( cop, victim ) && number_bits( 1 ) == 0;
+}
+
+static void AttackCriminal( void *element, void *userData )
+{
+  Character *criminal = (Character*) element;
+  PoliceData *data = (PoliceData*) userData;
+  Character *cop = data->PoliceOfficer;
+  int vip = 0;
+
+  if( data->FoundCriminal )
     {
-      v_next = victim->next_in_room;
-      if ( IsNpc(victim) )
-        continue;
-      if ( !can_see( ch, victim ) )
-        continue;
-      if ( number_bits ( 1 ) == 0 )
-        continue;
-      for ( vip = 0 ; vip < 32 ; vip++ )
-        if ( IS_SET ( ch->vip_flags , 1 << vip ) &&  IS_SET( victim->pcdata->wanted_flags , 1 << vip) )
-          {
-            sprintf( buf , "Got you!" );
-            do_say( ch , buf );
-            REMOVE_BIT( victim->pcdata->wanted_flags , 1 << vip );
-            multi_hit( ch, victim, TYPE_UNDEFINED );
-            return TRUE;
-          }
+      return;
     }
 
-  return FALSE;
+  for ( vip = 0 ; vip < 32 ; vip++ )
+    {
+      if ( IS_SET( cop->vip_flags, 1 << vip )
+	   && IS_SET( criminal->pcdata->wanted_flags, 1 << vip) )
+	{
+	  do_say( cop , "Got you!" );
+	  REMOVE_BIT( criminal->pcdata->wanted_flags, 1 << vip );
+	  multi_hit( cop, criminal, TYPE_UNDEFINED );
+	  data->FoundCriminal = TRUE;
+	  return;
+	}
+    }
+}
+
+bool spec_police_undercover( Character *cop )
+{
+  CerisList *playersInRoom = NULL;
+  PoliceData data;
+
+  if ( !is_awake(cop) || cop->fighting )
+    {
+      return FALSE;
+    }
+
+  data.PoliceOfficer = cop;
+  data.FoundCriminal = FALSE;
+  playersInRoom = List_CopyIf( cop->in_room->People, IsVisiblePlayer, cop );
+
+  List_ForEach( playersInRoom, AttackCriminal, &data );
+
+  DestroyList( playersInRoom );
+  return data.FoundCriminal;
 }
