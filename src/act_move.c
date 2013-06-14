@@ -137,7 +137,12 @@ void clear_vrooms( void )
 
   for ( hash = 0; hash < 64; hash++ )
     {
-      int peopleInRoom = NumberOfPeopleInRoom( vroom_hash[hash] );
+      int peopleInRoom = 0;
+
+      if( vroom_hash[hash] )
+	{
+	  NumberOfPeopleInRoom( vroom_hash[hash] );
+	}
 
       while ( vroom_hash[hash]
               && peopleInRoom == 0
@@ -518,6 +523,7 @@ ch_ret move_char( Character *ch, EXIT_DATA *pexit, int fall )
       if ( (to_room=generate_exit(in_room, &pexit)) == NULL )
 	{
 	  send_to_char( "Alas, you cannot go that way.\r\n", ch );
+	  return rNONE;
 	}
     }
 
