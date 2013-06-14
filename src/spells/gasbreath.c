@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-int CalculateDamage( const Character *caster, Character *victim, int level )
+static int CalculateDamage( const Character *caster, const Character *victim, int level )
 {
   int hpch = UMAX( 10, caster->hit );
   int dam = number_range( hpch/16+1, hpch/8 );
@@ -65,6 +65,9 @@ ch_ret spell_gas_breath( int sn, int level, Character *caster, void *vo )
 	    }
         }
     }
+
+  DestroyListIterator( peopleIterator );
+  DestroyList( peopleInRoom );
 
   if ( ch_died )
     {
