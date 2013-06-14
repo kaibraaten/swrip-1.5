@@ -46,7 +46,7 @@ void do_flee( Character *ch, char *argument )
                 &&   IS_SET(pexit->to_room->room_flags, ROOM_NO_MOB) ) )
         continue;
 
-      if ( !permsneak(ch) )
+      if ( !HasPermanentSneak(ch) )
         {
           affect_strip ( ch, gsn_sneak );
           REMOVE_BIT   ( ch->affected_by, AFF_SNEAK );

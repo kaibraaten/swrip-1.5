@@ -398,32 +398,36 @@ void trip( Character *ch, Character *victim )
   return;
 }
 
-bool permsneak( Character *ch )
+bool HasPermanentHide( const Character *ch )
+{
+  return ch->race == RACE_DEFEL;
+}
+
+bool HasPermanentSneak( const Character *ch )
 {
   switch(ch->race)
     {
     case RACE_SHISTAVANEN:
       return TRUE;
-      break;
+
     case RACE_DEFEL:
       return TRUE;
-      break;
+
     case RACE_BOTHAN:
       return TRUE;
-      break;
+
     case RACE_TOGARIAN:
       return TRUE;
-      break;
+
     case RACE_DUG:
       return TRUE;
-      break;
+
     case RACE_COYNITE:
       return TRUE;
-      break;
+
     default:
       return FALSE;
     }
-  return FALSE;
 }
 
 /*

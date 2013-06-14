@@ -7,6 +7,21 @@ typedef struct CastingInfo
   int CastingLevel;
 } CastingInfo;
 
+static bool IsEligibleVictim( const Character *victim, const Character *caster, int level )
+{
+  if ( !IsNpc(victim) && IS_SET(victim->act, PLR_WIZINVIS) )
+    {
+      return FALSE;
+    }
+
+  if ( victim == caster || saves_spell_staff( level, victim ) )
+    {
+      return FALSE;
+    }
+
+  return TRUE;
+}
+
 static void MakeVisible( void *element, void *userData )
 {
   Character *victim = (Character*) element;
@@ -14,12 +29,7 @@ static void MakeVisible( void *element, void *userData )
   const Character *caster = castingInfo->Caster;
   int level = castingInfo->CastingLevel;
 
-  if ( !IsNpc(victim) && IS_SET(victim->act, PLR_WIZINVIS) )
-    {
-      return;
-    }
-
-  if ( victim == caster || saves_spell_staff( level, victim ) )
+  if( !IsEligibleVictim( victim, caster, level ) )
     {
       return;
     }
@@ -28,14 +38,14 @@ static void MakeVisible( void *element, void *userData )
   affect_strip( victim, gsn_mass_invis );
   affect_strip( victim, gsn_sneak );
 
-  if ( victim->race != RACE_DEFEL )
+  if( !HasPermanentHide( victim ) )
     {
       REMOVE_BIT( victim->affected_by, AFF_HIDE );
     }
 
   REMOVE_BIT( victim->affected_by, AFF_INVISIBLE );
 
-  if ( !permsneak(victim) )
+  if ( !HasPermanentSneak(victim) )
     {
       REMOVE_BIT( victim->affected_by, AFF_SNEAK );
     }

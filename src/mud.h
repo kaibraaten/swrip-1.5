@@ -2529,15 +2529,16 @@ extern "C" {
   void  set_title( Character *ch, const char *title );
 
   /* skills.c */
-  bool  check_skill( Character *ch, char *command, char *argument );
-  void  learn_from_success( Character *ch, int sn );
-  void  learn_from_failure( Character *ch, int sn );
-  bool  check_parry( Character *ch, Character *victim );
-  bool  check_dodge( Character *ch, Character *victim );
-  bool  check_grip( Character *ch, Character *victim );
-  void  disarm( Character *ch, Character *victim );
-  void  trip( Character *ch, Character *victim );
-  bool permsneak( Character *ch );
+  bool check_skill( Character *ch, char *command, char *argument );
+  void learn_from_success( Character *ch, int sn );
+  void learn_from_failure( Character *ch, int sn );
+  bool check_parry( Character *ch, Character *victim );
+  bool check_dodge( Character *ch, Character *victim );
+  bool check_grip( Character *ch, Character *victim );
+  void disarm( Character *ch, Character *victim );
+  void trip( Character *ch, Character *victim );
+  bool HasPermanentSneak( const Character *ch );
+  bool HasPermanentHide( const Character *ch );
 
   /* handler.c */
   bool can_take_proto( const Character *ch );
