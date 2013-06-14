@@ -3,6 +3,16 @@
 #include "character.h"
 #include "room.h"
 
+static bool IsGroupSpell( const SKILLTYPE *spell )
+{
+  return SPELL_FLAG( spell, SF_GROUPSPELL ) ? TRUE : FALSE;
+}
+
+static bool IsAreaSpell( const SKILLTYPE *spell )
+{
+  return SPELL_FLAG( spell, SF_AREA ) ? TRUE : FALSE;
+}
+
 /*
  * Generic spell affect                                         -Thoric
  */
@@ -17,6 +27,8 @@ ch_ret spell_affect( int sn, int level, Character *ch, void *vo )
   bool hitroom = FALSE;
   bool hitvict = FALSE;
   ch_ret retcode = rNONE;
+  CerisList *peopleInRoom = NULL;
+  CerisListIterator *peopleInRoomIterator = NULL;
 
   if ( !skill->affects )
     {
@@ -24,23 +36,8 @@ ch_ret spell_affect( int sn, int level, Character *ch, void *vo )
       return rNONE;
     }
 
-  if ( SPELL_FLAG(skill, SF_GROUPSPELL) )
-    {
-      groupsp = TRUE;
-    }
-  else
-    {
-      groupsp = FALSE;
-    }
-
-  if ( SPELL_FLAG(skill, SF_AREA ) )
-    {
-      areasp = TRUE;
-    }
-  else
-    {
-      areasp = FALSE;
-    }
+  groupsp = IsGroupSpell( skill );
+  areasp = IsAreaSpell( skill );
 
   if ( !groupsp && !areasp )
     {
@@ -116,10 +113,12 @@ ch_ret spell_affect( int sn, int level, Character *ch, void *vo )
       if ( victim )
 	{
 	  victim = GetFirstPersonInRoom( victim->in_room );
+	  peopleInRoom = victim->in_room->People;
 	}
       else
 	{
 	  victim = GetFirstPersonInRoom( ch->in_room );
+	  peopleInRoom = ch->in_room->People;
 	}
     }
 
@@ -130,8 +129,12 @@ ch_ret spell_affect( int sn, int level, Character *ch, void *vo )
       return rSPELL_FAILED;
     }
 
-  for ( ; victim; victim = victim->next_in_room )
+  peopleInRoomIterator = CreateListIterator( peopleInRoom, ForwardsIterator );
+
+  for( ; !ListIterator_IsDone( peopleInRoomIterator ); ListIterator_Next( peopleInRoomIterator ) )
     {
+      victim = (Character*) ListIterator_GetData( peopleInRoomIterator );
+
       if ( groupsp || areasp )
         {
           if ((groupsp && !is_same_group( victim, ch ))
@@ -182,6 +185,7 @@ ch_ret spell_affect( int sn, int level, Character *ch, void *vo )
           if ( retcode == rSPELL_FAILED )
             {
               failed_casting( skill, ch, victim, NULL );
+	      DestroyListIterator( peopleInRoomIterator );
               return rSPELL_FAILED;
             }
 
@@ -198,5 +202,6 @@ ch_ret spell_affect( int sn, int level, Character *ch, void *vo )
         }
     }
 
+  DestroyListIterator( peopleInRoomIterator );
   return rNONE;
 }
