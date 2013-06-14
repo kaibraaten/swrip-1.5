@@ -1,15 +1,31 @@
 #include "mud.h"
 #include "character.h"
 
+static bool CanBeAttacked( void *element, void *userData )
+{
+  const Character *victim = (Character*) element;
+
+  if ( !IsNpc( victim ) && IS_SET( victim->act, PLR_WIZINVIS )
+       && victim->pcdata->wizinvis >= LEVEL_IMMORTAL )
+    {
+      return FALSE;
+    }
+  else
+    {
+      return TRUE;
+    }
+}
+
 /*
  * Generic area attack                                          -Thoric
  */
 ch_ret spell_area_attack( int sn, int level, Character *caster, void *vo )
 {
-  Character *vch, *vch_next;
   SKILLTYPE *skill = get_skilltype(sn);
   bool affects = FALSE;
   ch_ret retcode = rNONE;
+  CerisList *peopleInRoom = NULL;
+  CerisListIterator *peopleIterator = NULL;
 
   send_to_char("You feel the hatred grow within you!\r\n", caster);
   caster->alignment -= 100;
@@ -34,9 +50,12 @@ ch_ret spell_area_attack( int sn, int level, Character *caster, void *vo )
       act( AT_MAGIC, skill->hit_room, caster, NULL, NULL, TO_ROOM );
     }
 
-  for ( vch = caster->in_room->first_person; vch; vch = vch_next )
+  peopleInRoom = List_CopyIf( caster->in_room->People, CanBeAttacked, NULL );
+  peopleIterator = CreateListIterator( peopleInRoom, ForwardsIterator );
+
+  for( ; !ListIterator_IsDone( peopleIterator ); ListIterator_Next( peopleIterator ) )
     {
-      vch_next = vch->next_in_room;
+      Character *vch = (Character*) ListIterator_GetData( peopleIterator );
 
       if ( !IsNpc( vch ) && IS_SET( vch->act, PLR_WIZINVIS )
            && vch->pcdata->wizinvis >= LEVEL_IMMORTAL )
@@ -86,6 +105,9 @@ ch_ret spell_area_attack( int sn, int level, Character *caster, void *vo )
           break;
 	}
     }
+
+  DestroyListIterator( peopleIterator );
+  DestroyList( peopleInRoom );
 
   return retcode;
 }
