@@ -38,7 +38,7 @@
 #ifndef __sun__
 #include <sys/cdefs.h>
 #endif /* !__sun__ */
-#if defined(__FreeBSD__)
+#if defined(__FreeBSD__) || defined(__NetBSD__)
 #include <sys/endian.h>
 #elif defined(AMIGA) || defined(__MORPHOS__)
 /* do nothing; just to prevent endian.h from being included */
@@ -49,6 +49,8 @@
 #endif /* __FreeBSD__ */
 #endif /* !_WIN32 */
 #include "sha256.h"
+
+#if !defined(__FreeBSD__) && !defined(__NetBSD__)
 
 #if __FreeBSD_version < 500111
 
@@ -71,6 +73,7 @@ be32enc(void *pp, int u)
   p[3] = u & 0xff;
 }
 
+#endif
 #endif
 
 #if BYTE_ORDER == BIG_ENDIAN
