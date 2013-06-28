@@ -492,7 +492,7 @@ Character *  fread_vendor( FILE *fp )
 void save_vendor( Character *ch )
 {
   char strsave[MAX_INPUT_LENGTH];
-  FILE *fp;
+  FILE *fp = NULL;
 
   if ( !ch )
     {
@@ -501,8 +501,6 @@ void save_vendor( Character *ch )
     }
 
   de_equip_char( ch );
-
-
   sprintf( strsave, "%s%s",VENDOR_DIR, capitalize( ch->owner ) );
 
   if ( ( fp = fopen( strsave, "w" ) ) == NULL )
@@ -514,16 +512,19 @@ void save_vendor( Character *ch )
     {
       bool ferr;
 
-      fchmod(fileno(fp), S_IRUSR|S_IWUSR | S_IRGRP|S_IWGRP | S_IROTH|S_IWOTH);
+      /*fchmod(fileno(fp), S_IRUSR|S_IWUSR | S_IRGRP|S_IWGRP | S_IROTH|S_IWOTH);*/
       fprintf( fp, "#VENDOR\n"          );
       fwrite_vendor( fp, ch );
 
       if ( ch->first_carrying )
-        fwrite_obj( ch, ch->last_carrying, fp, 0, OS_CARRY );
+	{
+	  fwrite_obj( ch, ch->last_carrying, fp, 0, OS_CARRY );
+	}
 
       fprintf(fp, "#END\n" );
       ferr = ferror(fp);
       fclose( fp );
+
       if (ferr)
         {
           perror(strsave);
@@ -532,5 +533,4 @@ void save_vendor( Character *ch )
     }
 
   re_equip_char( ch );
-  return;
 }

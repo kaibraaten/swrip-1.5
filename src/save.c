@@ -2291,8 +2291,7 @@ void load_storerooms( void )
 void save_storeroom( ROOM_INDEX_DATA *room )
 {
   char strsave[MAX_INPUT_LENGTH];
-  FILE *fp;
-  OBJ_DATA *contents;
+  FILE *fp = NULL;
 
   if ( !room )
     {
@@ -2311,17 +2310,17 @@ void save_storeroom( ROOM_INDEX_DATA *room )
     }
   else
     {
-      fchmod(fileno(fp), S_IRUSR|S_IWUSR | S_IRGRP|S_IWGRP | S_IROTH|S_IWOTH);
+      /*fchmod(fileno(fp), S_IRUSR|S_IWUSR | S_IRGRP|S_IWGRP | S_IROTH|S_IWOTH);*/
+      OBJ_DATA *contents = room->last_content;
 
-      contents = room->last_content;
       if (contents)
-        fwrite_obj(NULL, contents, fp, 0, OS_CARRY );
+	{
+	  fwrite_obj(NULL, contents, fp, 0, OS_CARRY );
+	}
+
       fprintf( fp, "#END\n" );
       fclose( fp );
-
     }
-
-  return;
 }
 
 
