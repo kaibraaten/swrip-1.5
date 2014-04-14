@@ -28,7 +28,7 @@ void do_reset( Character *ch, char *argument )
           if ( !tmp )
             {
               send_to_char("Your area pointer got lost. Reset mode off.\r\n", ch);
-              bug("do_reset: %s's dest_buf points to invalid area", (int)ch->name);
+              bug("do_reset: %s's dest_buf points to invalid area", ch->name);
               ch->substate = SUB_NONE;
               DISPOSE(ch->dest_buf);
               return;
