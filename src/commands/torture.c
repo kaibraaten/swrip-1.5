@@ -1,14 +1,14 @@
 #include "mud.h"
 #include "character.h"
 
-void do_torture( Character *ch, char *argument )
+void do_torture( CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  Character *victim;
+  CHAR_DATA *victim;
   int the_chance, dam;
   bool fail;
 
-  if ( !IsNpc(ch)
+  if ( !is_npc(ch)
        &&  ch->pcdata->learned[gsn_torture] <= 0  )
     {
       send_to_char(
@@ -16,7 +16,7 @@ void do_torture( Character *ch, char *argument )
       return;
     }
 
-  if ( IsNpc(ch) && is_affected_by( ch, AFF_CHARM ) )
+  if ( is_npc(ch) && is_affected_by( ch, AFF_CHARM ) )
     {
       send_to_char( "You can't do that right now.\r\n", ch );
       return;
@@ -69,20 +69,20 @@ void do_torture( Character *ch, char *argument )
   set_wait_state( ch, skill_table[gsn_torture]->beats );
 
   fail = FALSE;
-  the_chance = ris_save( victim, GetLevel( ch, LEADERSHIP_ABILITY ) / 10, RIS_PARALYSIS );
+  the_chance = ris_save( victim, get_level( ch, LEADERSHIP_ABILITY ) / 10, RIS_PARALYSIS );
 
   if ( the_chance == 1000 )
     fail = TRUE;
   else
     fail = saves_para_petri( the_chance, victim );
 
-  if ( !IsNpc(ch) && !IsNpc(victim) )
+  if ( !is_npc(ch) && !is_npc(victim) )
     the_chance = sysdata.stun_plr_vs_plr;
   else
     the_chance = sysdata.stun_regular;
 
   if ( !fail
-       && (  IsNpc(ch)
+       && (  is_npc(ch)
              || (number_percent( ) + the_chance) < ch->pcdata->learned[gsn_torture] ) )
     {
       learn_from_success( ch, gsn_torture );
@@ -92,7 +92,7 @@ void do_torture( Character *ch, char *argument )
       act( AT_SKILL, "You torture $N, leaving $M screaming in pain.", ch, NULL, victim, TO_CHAR );
       act( AT_SKILL, "$n tortures $N, leaving $M screaming in agony!", ch, NULL, victim, TO_NOTVICT );
 
-      dam = dice( GetLevel( ch, LEADERSHIP_ABILITY ) / 80 , 4 );
+      dam = dice( get_level( ch, LEADERSHIP_ABILITY ) / 80 , 4 );
       dam = URANGE( 0, victim->max_hit-10, dam );
       victim->hit -= dam;
       victim->max_hit -= dam;

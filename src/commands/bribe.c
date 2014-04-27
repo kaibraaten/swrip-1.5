@@ -1,17 +1,16 @@
 #include "character.h"
 #include "mud.h"
-#include "clan.h"
 
-void do_bribe ( Character *ch , char *argument )
+void do_bribe ( CHAR_DATA *ch , char *argument )
 {
   char arg1 [MAX_INPUT_LENGTH];
-  Character *victim;
+  CHAR_DATA *victim;
   PLANET_DATA *planet;
-  Clan   *clan;
+  CLAN_DATA   *clan;
   int percent = 0;
   int amount = 0;
 
-  if ( IsNpc(ch) || !is_clanned( ch ) || !ch->in_room->area->planet )
+  if ( is_npc(ch) || !ch->pcdata || !ch->pcdata->clan || !ch->in_room->area || !ch->in_room->area->planet )
     {
       send_to_char( "What would be the point of that.\r\n", ch );
       return;
@@ -101,7 +100,7 @@ void do_bribe ( Character *ch , char *argument )
   act( AT_ACTION, "$n offers you a small bribe.\r\n", ch, NULL, victim, TO_VICT    );
   act( AT_ACTION, "$n gives $N some money.\r\n",  ch, NULL, victim, TO_NOTVICT );
 
-  if ( !IsNpc( victim ) )
+  if ( !is_npc( victim ) )
     return;
 
   set_wait_state( ch, skill_table[gsn_bribe]->beats );
@@ -120,7 +119,7 @@ void do_bribe ( Character *ch , char *argument )
       planet->pop_support += URANGE( 0.1 , amount/1000 , 2 );
       send_to_char( "Popular support for your organization increases slightly.\r\n", ch );
 
-      amount = UMIN( amount ,( exp_level(GetLevel( ch, DIPLOMACY_ABILITY ) + 1) - exp_level(GetLevel( ch, DIPLOMACY_ABILITY ) ) ) );
+      amount = UMIN( amount ,( exp_level(get_level( ch, DIPLOMACY_ABILITY ) + 1) - exp_level(get_level( ch, DIPLOMACY_ABILITY ) ) ) );
 
       gain_exp( ch, DIPLOMACY_ABILITY, amount );
       ch_printf( ch, "You gain %d diplomacy experience.\r\n", amount );

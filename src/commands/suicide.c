@@ -1,13 +1,13 @@
 #include "mud.h"
 #include "character.h"
 
-void do_suicide( Character *ch, char *argument )
+void do_suicide( CHAR_DATA *ch, char *argument )
 {
   char  logbuf[MAX_STRING_LENGTH];
 
   OBJ_DATA *obj;
 
-  if ( IsNpc(ch) || !ch->pcdata )
+  if ( is_npc(ch) || !ch->pcdata )
     {
       send_to_char( "Yeah right!\r\n", ch );
       return;

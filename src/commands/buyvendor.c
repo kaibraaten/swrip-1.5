@@ -2,16 +2,16 @@
 #include "shops.h"
 #include "mud.h"
 
-void do_buyvendor (Character *ch, char *argument)
+void do_buyvendor (CHAR_DATA *ch, char *argument)
 {
-  Character *keeper;
+  CHAR_DATA *keeper;
   OBJ_DATA *deed;
   char buf[MAX_STRING_LENGTH];
   char buf1[MAX_STRING_LENGTH];
   char strsave[MAX_INPUT_LENGTH];
   struct stat fst;
 
-  if (IsNpc(ch))
+  if (is_npc(ch))
     return;
 
   if ( !str_cmp( argument, "yes" ) )

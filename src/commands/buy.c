@@ -3,7 +3,7 @@
 #include "mud.h"
 #include "character.h"
 
-void do_buy( Character *ch, char *argument )
+void do_buy( CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   int maxgold;
@@ -19,11 +19,11 @@ void do_buy( Character *ch, char *argument )
   if ( IS_SET(ch->in_room->room_flags, ROOM_PET_SHOP) )
     {
       char buf[MAX_STRING_LENGTH];
-      Character *pet;
+      CHAR_DATA *pet;
       ROOM_INDEX_DATA *pRoomIndexNext;
       ROOM_INDEX_DATA *in_room;
 
-      if ( IsNpc(ch) )
+      if ( is_npc(ch) )
         return;
 
       pRoomIndexNext = get_room_index( ch->in_room->vnum + 1 );
@@ -40,7 +40,7 @@ void do_buy( Character *ch, char *argument )
       pet         = get_char_room( ch, arg );
       ch->in_room = in_room;
 
-      if ( pet == NULL || !IsNpc( pet ) || !IS_SET(pet->act, ACT_PET) )
+      if ( pet == NULL || !is_npc( pet ) || !IS_SET(pet->act, ACT_PET) )
         {
           send_to_char( "Sorry, you can't buy that here.\r\n", ch );
           return;
@@ -97,7 +97,7 @@ void do_buy( Character *ch, char *argument )
     }
   else
     {
-      Character *keeper;
+      CHAR_DATA *keeper;
       OBJ_DATA *obj;
       int cost;
       int noi = 1;              /* Number of items */
@@ -189,7 +189,7 @@ void do_buy( Character *ch, char *argument )
         }
 
       if ( IS_SET(obj->extra_flags, ITEM_PROTOTYPE)
-           && GetTrustedLevel( ch ) < LEVEL_IMMORTAL )
+           && get_trust( ch ) < LEVEL_IMMORTAL )
         {
           act( AT_TELL, "$n tells you 'This is a only a prototype!  I can't sell you that...'",
                keeper, NULL, ch, TO_VICT );

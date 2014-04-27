@@ -8,26 +8,26 @@ static struct operand_struct go_op[MAX_NUM_OPS];
 static struct field_struct go_fd[GO_NUM_FIELDS];
 
 static void go_init (void);
-static void display_operand_table (Character *ch, int op_num);
-static bool go_parse_operand (Character *ch, const char *arg, int *op_num, int *sor_ind,
+static void display_operand_table (CHAR_DATA *ch, int op_num);
+static bool go_parse_operand (CHAR_DATA *ch, const char *arg, int *op_num, int *sor_ind,
 			      bool *sor_dir, bool *or_sw, bool *np_sw, bool *nm_sw, bool *ng_sw,
 			      bool *do_sw, bool *d2_sw);
 static int go_fnam_to_num( const char *arg );
-static bool go_parse_operator (Character *ch, const char *pch, int *op_num);
+static bool go_parse_operator (CHAR_DATA *ch, const char *pch, int *op_num);
 static int owear_to_num (const char *arg);
-static bool go_read( Character *ch, int dis_num, int op_num, int sor_ind,
+static bool go_read( CHAR_DATA *ch, int dis_num, int op_num, int sor_ind,
                      bool sor_dir, bool or_sw, bool np_sw, bool nm_sw, bool ng_sw,
                      bool d2_sw );
 static short go_wear_ext (long arg);
-static void go_sort( const Character *ch, GO_STRUCT **p,
+static void go_sort( const CHAR_DATA *ch, GO_STRUCT **p,
                      int ind, int left, int right, bool n_s, bool sor_dir );
 static void go_accum_aff (GO_STRUCT *r, int loc, int mod);
-static bool go_eval_and (Character *ch, GO_STRUCT *r, int op_num);
-static bool go_eval_or (Character *ch, GO_STRUCT *r, int op_num);
-static void go_display( Character *ch, int dis_num, int tot_match, bool d2_sw, GO_STRUCT **p);
+static bool go_eval_and (CHAR_DATA *ch, GO_STRUCT *r, int op_num);
+static bool go_eval_or (CHAR_DATA *ch, GO_STRUCT *r, int op_num);
+static void go_display( CHAR_DATA *ch, int dis_num, int tot_match, bool d2_sw, GO_STRUCT **p);
 static const char *go_otype_to_disp (int arg);
 static const char *owear_to_disp (short arg);
-static bool go_read_names( Character *ch, OBJ_DATA *po, GO_STRUCT *r, bool np_sw,
+static bool go_read_names( CHAR_DATA *ch, OBJ_DATA *po, GO_STRUCT *r, bool np_sw,
                            bool nm_sw, bool ng_sw );
 
 /*
@@ -57,7 +57,7 @@ static bool go_read_names( Character *ch, OBJ_DATA *po, GO_STRUCT *r, bool np_sw
   free(p); free(a);
 */
 
-void do_ogrub (Character *ch, char *argument)
+void do_ogrub (CHAR_DATA *ch, char *argument)
 {
   enum {OCOUNT, OVNUM, OTYPE, OLEVEL, OWEAR, OAVG, OHR, ODR, OHP, OMP, OAC,
         OSTR, ODEX, OCON, OWIS, OINT, OLUCK,
@@ -158,7 +158,7 @@ static void go_init (void)
   strcpy(go_fd[23].nam, "name" );
 }
 
-static void display_operand_table (Character *ch, int op_num)
+static void display_operand_table (CHAR_DATA *ch, int op_num)
 {
   int cou;
   char opn[7][3] = {"eq", "ne", "su", "ge", "gt", "le", "lt"};
@@ -178,7 +178,7 @@ static void display_operand_table (Character *ch, int op_num)
 /*
  * Store operand's field name in the operand table.
  */
-static bool go_parse_operand (Character *ch, const char *arg, int *op_num, int *sor_ind,
+static bool go_parse_operand (CHAR_DATA *ch, const char *arg, int *op_num, int *sor_ind,
 			      bool *sor_dir, bool *or_sw, bool *np_sw, bool *nm_sw, bool *ng_sw,
 			      bool *do_sw, bool *d2_sw)
 {
@@ -237,7 +237,7 @@ static int go_fnam_to_num( const char *arg )
 /*
  *  Store operand's operator and value in operand table.
  */
-static bool go_parse_operator (Character *ch, const char *pch, int *op_num)
+static bool go_parse_operator (CHAR_DATA *ch, const char *pch, int *op_num)
 {
   enum op_type {EQ, NE, SU, GE, GT, LE, LT};
   enum {OCOUNT, OVNUM, OTYPE, OLEVEL, OWEAR, OAVG, OHR, ODR, OHP, OMP, OAC,
@@ -313,7 +313,7 @@ static int owear_to_num (const char *arg)
   return 0;
 }
 
-static bool go_read( Character *ch, int dis_num, int op_num, int sor_ind,
+static bool go_read( CHAR_DATA *ch, int dis_num, int op_num, int sor_ind,
                      bool sor_dir, bool or_sw, bool np_sw, bool nm_sw, bool ng_sw,
                      bool d2_sw )
 {
@@ -403,7 +403,7 @@ static short go_wear_ext (long arg)    /* extract bit set in arg ignoring pos 1 
  * 5th parm is n_s - number/string - TRUE is number - FALSE is string
  * 6th parm is direction - TRUE is ascending - FALSE is descending
  */
-static void go_sort( const Character *ch, GO_STRUCT **p,
+static void go_sort( const CHAR_DATA *ch, GO_STRUCT **p,
                      int ind, int left, int right, bool n_s, bool sor_dir )
 {
   GO_STRUCT *swap;
@@ -480,7 +480,7 @@ static void go_accum_aff (GO_STRUCT *r, int loc, int mod)
 /*
  * Evaluate one input record to see if it matches all search criteria
  */
-static bool go_eval_and (Character *ch, GO_STRUCT *r, int op_num)
+static bool go_eval_and (CHAR_DATA *ch, GO_STRUCT *r, int op_num)
 {
   enum {OCOUNT, OVNUM, OTYPE, OLEVEL, OWEAR, OAVG, OHR, ODR, OHP, OMP, OAC,
         OSTR, ODEX, OCON, OWIS, OINT, OLUCK,
@@ -511,7 +511,7 @@ static bool go_eval_and (Character *ch, GO_STRUCT *r, int op_num)
 /*
  * Evaluate one input record to see if it matches any search criteria
  */
-static bool go_eval_or (Character *ch, GO_STRUCT *r, int op_num)
+static bool go_eval_or (CHAR_DATA *ch, GO_STRUCT *r, int op_num)
 {
   enum {OCOUNT, OVNUM, OTYPE, OLEVEL, OWEAR, OAVG, OHR, ODR, OHP, OMP, OAC,
         OSTR, ODEX, OCON, OWIS, OINT, OLUCK,
@@ -537,7 +537,7 @@ static bool go_eval_or (Character *ch, GO_STRUCT *r, int op_num)
   return FALSE;
 }
 
-static void go_display( Character *ch, int dis_num, int tot_match, bool d2_sw,
+static void go_display( CHAR_DATA *ch, int dis_num, int tot_match, bool d2_sw,
                         GO_STRUCT **p)
 {
   enum {OCOUNT, OVNUM, OTYPE, OLEVEL, OWEAR, OAVG, OHR, ODR, OHP, OMP, OAC,
@@ -651,7 +651,7 @@ static const char *owear_to_disp (short arg)
  * it could be on the ground ... but ... growl ... it could also be
  * in a container carried by someone - or in a container on the ground.
  */
-static bool go_read_names( Character *ch, OBJ_DATA *po, GO_STRUCT *r, bool np_sw,
+static bool go_read_names( CHAR_DATA *ch, OBJ_DATA *po, GO_STRUCT *r, bool np_sw,
                            bool nm_sw, bool ng_sw )
 {
   enum {CNAME, ONAME};
@@ -663,9 +663,9 @@ static bool go_read_names( Character *ch, OBJ_DATA *po, GO_STRUCT *r, bool np_sw
 
   if ( po->carried_by )                  /* it's being carried by a char */
     {
-      if ( GetTrustedLevel(ch) < po->carried_by->top_level ) return FALSE;
-      if ( nm_sw &&  IsNpc(po->carried_by) ) return FALSE;
-      if ( np_sw && !IsNpc(po->carried_by) ) return FALSE;
+      if ( get_trust(ch) < po->carried_by->top_level ) return FALSE;
+      if ( nm_sw &&  is_npc(po->carried_by) ) return FALSE;
+      if ( np_sw && !is_npc(po->carried_by) ) return FALSE;
       r->s[CNAME] = po->carried_by->name;
     }
   else if ( po->in_obj )                 /* it's in a container          */
@@ -673,11 +673,11 @@ static bool go_read_names( Character *ch, OBJ_DATA *po, GO_STRUCT *r, bool np_sw
       pt = po;
       while( pt->in_obj )
         pt=pt->in_obj;
-      if ( pt->carried_by && GetTrustedLevel(ch) < pt->carried_by->top_level )
+      if ( pt->carried_by && get_trust(ch) < pt->carried_by->top_level )
         return FALSE;
-      if ( pt->carried_by && nm_sw &&  IsNpc(pt->carried_by) )
+      if ( pt->carried_by && nm_sw &&  is_npc(pt->carried_by) )
         return FALSE;
-      if ( pt->carried_by && np_sw && !IsNpc(pt->carried_by) )
+      if ( pt->carried_by && np_sw && !is_npc(pt->carried_by) )
         return FALSE;
       if ( pt->carried_by ) r->s[CNAME] = pt->carried_by->name;
       else

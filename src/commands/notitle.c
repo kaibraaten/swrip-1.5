@@ -1,11 +1,11 @@
 #include "mud.h"
 #include "character.h"
 
-void do_notitle( Character *ch, char *argument )
+void do_notitle( CHAR_DATA *ch, char *argument )
 {
   char buf[MAX_STRING_LENGTH];
   char arg[MAX_INPUT_LENGTH];
-  Character *victim;
+  CHAR_DATA *victim;
 
   one_argument( argument, arg );
 
@@ -21,13 +21,13 @@ void do_notitle( Character *ch, char *argument )
       return;
     }
 
-  if ( IsNpc(victim) )
+  if ( is_npc(victim) )
     {
       send_to_char( "Not on NPC's.\r\n", ch );
       return;
     }
 
-  if ( GetTrustedLevel( victim ) >= GetTrustedLevel( ch ) )
+  if ( get_trust( victim ) >= get_trust( ch ) )
     {
       send_to_char( "You failed.\r\n", ch );
       return;

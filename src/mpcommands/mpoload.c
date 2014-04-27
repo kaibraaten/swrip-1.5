@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_mpoload( Character *ch, char *argument )
+void do_mpoload( CHAR_DATA *ch, char *argument )
 {
   char arg1[ MAX_INPUT_LENGTH ];
   char arg2[ MAX_INPUT_LENGTH ];
@@ -13,7 +13,7 @@ void do_mpoload( Character *ch, char *argument )
   if ( is_affected_by( ch, AFF_CHARM ) )
     return;
 
-  if ( !IsNpc( ch ) )
+  if ( !is_npc( ch ) )
     {
       send_to_char( "Huh?\r\n", ch );
       return;
@@ -29,7 +29,7 @@ void do_mpoload( Character *ch, char *argument )
     }
 
   if ( arg2[0] == '\0' )
-    level = GetTrustedLevel( ch );
+    level = get_trust( ch );
   else
     {
       /*
@@ -41,7 +41,7 @@ void do_mpoload( Character *ch, char *argument )
           return;
         }
       level = atoi( arg2 );
-      if ( level < 0 || level > GetTrustedLevel( ch ) )
+      if ( level < 0 || level > get_trust( ch ) )
         {
           progbug( "Mpoload - Bad level", ch );
           return;

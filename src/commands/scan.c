@@ -1,9 +1,9 @@
 #include "character.h"
 #include "mud.h"
 
-void ShowPeopleInRoomToCharacter( const ROOM_INDEX_DATA *room, Character *ch );
+void show_char_to_char( CHAR_DATA *list, CHAR_DATA *ch );
 
-void do_scan( Character *ch, char *argument )
+void do_scan( CHAR_DATA *ch, char *argument )
 {
   ROOM_INDEX_DATA *was_in_room;
   ROOM_INDEX_DATA *to_room;
@@ -28,7 +28,7 @@ void do_scan( Character *ch, char *argument )
   act( AT_GREY, "Scanning $t...", ch, get_dir_name(dir), NULL, TO_CHAR );
   act( AT_GREY, "$n scans $t.", ch, get_dir_name(dir), NULL, TO_ROOM );
 
-  if ( IsNpc( ch )
+  if ( is_npc( ch )
        || ( number_percent() > ch->pcdata->learned[gsn_scan] ) )
     {
       act( AT_GREY, "You stop scanning $t as your vision blurs.", ch,
@@ -68,7 +68,7 @@ void do_scan( Character *ch, char *argument )
         to_room = pexit->to_room;
 
       if ( room_is_private( ch, to_room )
-           && GetTrustedLevel(ch) < LEVEL_GREATER )
+           && get_trust(ch) < LEVEL_GREATER )
         {
           act( AT_GREY, "Your view $t is blocked by a private room.", ch,
                get_dir_name(dir), NULL, TO_CHAR );
@@ -80,7 +80,7 @@ void do_scan( Character *ch, char *argument )
       send_to_char( ch->in_room->name, ch );
       send_to_char( "\r\n", ch );
       show_list_to_char( ch->in_room->first_content, ch, FALSE, FALSE );
-      ShowPeopleInRoomToCharacter( ch->in_room, ch );
+      show_char_to_char( ch->in_room->first_person, ch );
 
       switch( ch->in_room->sector_type )
         {

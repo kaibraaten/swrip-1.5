@@ -1,10 +1,10 @@
 #include "character.h"
 #include "mud.h"
 
-void do_low_purge( Character *ch, char *argument )
+void do_low_purge( CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  Character *victim;
+  CHAR_DATA *victim;
   OBJ_DATA *obj;
 
   one_argument( argument, arg );
@@ -32,7 +32,7 @@ void do_low_purge( Character *ch, char *argument )
       return;
     }
 
-  if ( !IsNpc(victim) )
+  if ( !is_npc(victim) )
     {
       send_to_char( "Not on PC's.\r\n", ch );
       return;

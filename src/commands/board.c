@@ -2,9 +2,8 @@
 #include "shuttle.h"
 #include "ships.h"
 #include "mud.h"
-#include "room.h"
 
-void do_board( Character *ch, char *argument )
+void do_board( CHAR_DATA *ch, char *argument )
 {
   ROOM_INDEX_DATA *fromroom;
   ROOM_INDEX_DATA *toroom;
@@ -18,7 +17,7 @@ void do_board( Character *ch, char *argument )
       return;
     }
 
-  if ( IS_SET( ch->act, ACT_MOUNTED ) && IsNpc(ch))
+  if ( IS_SET( ch->act, ACT_MOUNTED ) && is_npc(ch))
     {
       act( AT_PLAIN, "You can't go in there riding THAT.", ch, NULL, argument, TO_CHAR );
       return;
@@ -71,12 +70,16 @@ void do_board( Character *ch, char *argument )
 
   if ( toroom->tunnel > 0 )
     {
-      int count = NumberOfPeopleInRoom( toroom );
+      CHAR_DATA *ctmp;
+      int count = 0;
 
-      if ( count >= toroom->tunnel )
-	{
-	  send_to_char( "There is no room for you in there.\r\n", ch );
-	  return;
+      for ( ctmp = toroom->first_person; ctmp; ctmp = ctmp->next_in_room )
+        {
+          if ( ++count >= toroom->tunnel )
+            {
+              send_to_char( "There is no room for you in there.\r\n", ch );
+              return;
+            }
         }
     }
 

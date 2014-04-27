@@ -1,10 +1,10 @@
 #include "character.h"
 #include "mud.h"
 
-void do_switch( Character *ch, char *argument )
+void do_switch( CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  Character *victim;
+  CHAR_DATA *victim;
 
   one_argument( argument, arg );
 
@@ -41,7 +41,7 @@ void do_switch( Character *ch, char *argument )
       return;
     }
 
-  if ( !IsNpc(victim) && GetTrustedLevel(ch) < LEVEL_GREATER )
+  if ( !is_npc(victim) && get_trust(ch) < LEVEL_GREATER )
     {
       send_to_char( "You cannot switch into a player!\r\n", ch );
       return;

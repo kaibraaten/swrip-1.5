@@ -1,17 +1,16 @@
 #include <time.h>
 #include "mud.h"
 #include "character.h"
-#include "clan.h"
 
 static char *tiny_affect_loc_name(int location);
 
-void do_score(Character * ch, char *argument)
+void do_score(CHAR_DATA * ch, char *argument)
 {
   char            buf[MAX_STRING_LENGTH];
   AFFECT_DATA    *paf;
   int iLang, drug;
 
-  if (IsNpc(ch))
+  if (is_npc(ch))
     {
       do_oldscore(ch, argument);
       return;
@@ -20,13 +19,13 @@ void do_score(Character * ch, char *argument)
 
   ch_printf(ch, "\r\n&CScore for %s.\r\n", ch->pcdata->title);
   set_char_color(AT_SCORE, ch);
-  if ( GetTrustedLevel( ch ) != ch->top_level )
-    ch_printf( ch, "&cYou are trusted at level &C%d.\r\n", GetTrustedLevel( ch ) );
+  if ( get_trust( ch ) != ch->top_level )
+    ch_printf( ch, "&cYou are trusted at level &C%d.\r\n", get_trust( ch ) );
 
   send_to_char("&C----------------------------------------------------------------------------\r\n", ch);
 
   ch_printf(ch,   "&cRace: %-17.10s                &cLog In:  &C%s\r",
-            capitalize(get_race(ch)), ( IsNpc(ch) ? "(null)" : ctime(&(ch->pcdata->logon)) ) );
+            capitalize(get_race(ch)), ( is_npc(ch) ? "(null)" : ctime(&(ch->pcdata->logon)) ) );
 
   ch_printf(ch,   "&cHitroll: &C%-2.2d  &cDamroll: &C%-2.2d   &cArmor: &C%-4d        &cSaved:  &C%s\r",
             get_hitroll(ch), get_damroll(ch), get_armor_class(ch),
@@ -35,7 +34,8 @@ void do_score(Character * ch, char *argument)
   ch_printf(ch,   "&cAlign: &C%-5d    &cWimpy: &C%-3d                    &cTime:   &C%s\r",
             ch->alignment, ch->wimpy  , ctime(&current_time) );
 
-  if ( IsForcer( ch ) || IsImmortal(ch) )
+  if ( get_level( ch, FORCE_ABILITY ) > 1
+       || is_immortal(ch) )
     ch_printf(ch, "&cHit Points: &C%d &cof &C%d     &cMove: &C%d &cof &C%d     &cForce: &C%d &cof &C%d\r\n",
               ch->hit, ch->max_hit, ch->move, ch->max_move, ch->mana, ch->max_mana );
   else
@@ -43,7 +43,7 @@ void do_score(Character * ch, char *argument)
               ch->hit, ch->max_hit, ch->move, ch->max_move);
 
   ch_printf(ch, "&cStr: &C%2d  &cDex: &C%2d  &cCon: &C%2d  &cInt: &C%2d  &cWis: &C%2d  &cCha: &C%2d  &cLck: &C??  &cFrc: &C??\r\n",
-            GetCurrentStr(ch), GetCurrentDex(ch),GetCurrentCon(ch),GetCurrentInt(ch),GetCurrentWis(ch),GetCurrentCha(ch));
+            get_curr_str(ch), get_curr_dex(ch),get_curr_con(ch),get_curr_int(ch),get_curr_wis(ch),get_curr_cha(ch));
 
 
   send_to_char("&C----------------------------------------------------------------------------\r\n", ch);
@@ -52,14 +52,14 @@ void do_score(Character * ch, char *argument)
     int ability;
 
     for ( ability = 0 ; ability < MAX_RL_ABILITY ; ability++ )
-      if ( ability != FORCE_ABILITY || IsForcer( ch ) )
+      if ( ability != FORCE_ABILITY || get_level( ch, FORCE_ABILITY ) > 1 )
         ch_printf( ch, "&c%-15s   &CLevel: %-3d   Max: %-3d   Exp: %-10ld   Next: %-10ld\r\n",
-                   ability_name[ability], GetLevel( ch, ability ), max_level(ch, ability),
-                   GetExperience( ch, ability ),
-                   exp_level( GetLevel( ch, ability ) + 1 ) );
+                   ability_name[ability], get_level( ch, ability ), max_level(ch, ability),
+                   get_exp( ch, ability ),
+                   exp_level( get_level( ch, ability ) + 1 ) );
       else
         ch_printf( ch, "&c%-15s   &CLevel: %-3d   Max: ???   Exp: ???          Next: ???\r\n",
-                   ability_name[ability], GetLevel( ch, ability ), GetExperience( ch, ability ) );
+                   ability_name[ability], get_level( ch, ability ), get_exp( ch, ability ) );
   }
 
   send_to_char("&C----------------------------------------------------------------------------\r\n", ch);
@@ -113,11 +113,11 @@ void do_score(Character * ch, char *argument)
 
   send_to_char( buf, ch );
 
-  if (!IsNpc(ch) && ch->pcdata->condition[COND_DRUNK] > 10)
+  if (!is_npc(ch) && ch->pcdata->condition[COND_DRUNK] > 10)
     send_to_char("&CYou are drunk.\r\n", ch);
-  if (!IsNpc(ch) && ch->pcdata->condition[COND_THIRST] == 0)
+  if (!is_npc(ch) && ch->pcdata->condition[COND_THIRST] == 0)
     send_to_char("&CYou are in danger of dehydrating.\r\n", ch);
-  if (!IsNpc(ch) && ch->pcdata->condition[COND_FULL] == 0)
+  if (!is_npc(ch) && ch->pcdata->condition[COND_FULL] == 0)
     send_to_char("&CYou are starving to death.\r\n", ch);
   if ( ch->position != POS_SLEEPING )
     switch( ch->mental_state / 10 )
@@ -158,7 +158,7 @@ void do_score(Character * ch, char *argument)
           if ( ch->mental_state <-25 )
             send_to_char( "&CYou are in deep slumber.\r\n", ch );
 
-  if ( !IsNpc(ch) )
+  if ( !is_npc(ch) )
     {
       if (ch->pcdata->target && ch->pcdata->target[0] != '\0' )
 	{
@@ -181,10 +181,10 @@ void do_score(Character * ch, char *argument)
   send_to_char("\r\n&cLanguages: &c", ch );
   for ( iLang = 0; lang_array[iLang] != LANG_UNKNOWN; iLang++ )
     if ( knows_language( ch, lang_array[iLang], ch )
-         ||  (IsNpc(ch) && ch->speaks == 0) )
+         ||  (is_npc(ch) && ch->speaks == 0) )
       {
         if ( lang_array[iLang] & ch->speaking
-             ||  (IsNpc(ch) && !ch->speaking) )
+             ||  (is_npc(ch) && !ch->speaking) )
           set_char_color( AT_RED, ch );
         send_to_char( lang_names[iLang], ch );
         send_to_char( " ", ch );
@@ -199,15 +199,14 @@ void do_score(Character * ch, char *argument)
     ch_printf( ch, "&cYou are bestowed with the command(s): &C%s.\r\n",
                ch->pcdata->bestowments );
 
-  if ( is_clanned( ch ) )
+  if ( ch->pcdata->clan )
     {
       send_to_char( "&C----------------------------------------------------------------------------\r\n", ch);
       ch_printf(ch, "&cORGANIZATION: &C%-35s &cSALARY: &C%-10d    &cPkills/Deaths: &C%3.3d&c/&C%3.3d",
                 ch->pcdata->clan->name, ch->pcdata->salary, ch->pcdata->clan->pkills, ch->pcdata->clan->pdeaths) ;
       send_to_char( "\r\n", ch );
     }
-
-  if (IsImmortal(ch))
+  if (is_immortal(ch))
     {
       send_to_char( "&C----------------------------------------------------------------------------\r\n", ch);
 

@@ -2,9 +2,9 @@
 #include "mud.h"
 #include "editor.h"
 
-void do_description( Character *ch, char *argument )
+void do_description( CHAR_DATA *ch, char *argument )
 {
-  if ( IsNpc( ch ) )
+  if ( is_npc( ch ) )
     {
       send_to_char( "Monsters are too dumb to do that!\r\n", ch );
       return;

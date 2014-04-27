@@ -2,11 +2,11 @@
 #include "shops.h"
 #include "mud.h"
 
-void do_sell( Character *ch, char *argument )
+void do_sell( CHAR_DATA *ch, char *argument )
 {
   char buf[MAX_STRING_LENGTH];
   char arg[MAX_INPUT_LENGTH];
-  Character *keeper;
+  CHAR_DATA *keeper;
   OBJ_DATA *obj;
   int cost;
   bool spice = FALSE;
@@ -80,7 +80,7 @@ void do_sell( Character *ch, char *argument )
     {
       long ch_exp;
 
-      ch_exp = UMIN( obj->cost*10 , ( exp_level( GetLevel( ch, SMUGGLING_ABILITY ) + 1) - exp_level( GetLevel( ch, SMUGGLING_ABILITY ) )  ) / 10  );
+      ch_exp = UMIN( obj->cost*10 , ( exp_level( get_level( ch, SMUGGLING_ABILITY ) + 1) - exp_level( get_level( ch, SMUGGLING_ABILITY ) )  ) / 10  );
       ch_printf( ch, "You receive %ld smuggling experience for unloading your contraband.\r\n " , ch_exp );
       gain_exp( ch, SMUGGLING_ABILITY, ch_exp );
 

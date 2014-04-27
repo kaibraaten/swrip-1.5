@@ -1,14 +1,13 @@
 #include "character.h"
 #include "mud.h"
-#include "clan.h"
 
-void do_setplanet( Character *ch, char *argument )
+void do_setplanet( CHAR_DATA *ch, char *argument )
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
   PLANET_DATA *planet;
 
-  if ( IsNpc( ch ) )
+  if ( is_npc( ch ) )
     {
       send_to_char( "Huh?\r\n", ch );
       return;
@@ -45,7 +44,7 @@ void do_setplanet( Character *ch, char *argument )
 
   if ( !str_cmp( arg2, "governed_by" ) )
     {
-      Clan *clan = GetClan( argument );
+      CLAN_DATA *clan = get_clan( argument );
 
       if ( clan )
         {

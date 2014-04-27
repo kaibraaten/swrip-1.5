@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_allclantalk( Character *ch, char *argument )
+void do_allclantalk( CHAR_DATA *ch, char *argument )
 {
   if (is_not_authed(ch))
     {
@@ -9,7 +9,7 @@ void do_allclantalk( Character *ch, char *argument )
       return;
     }
 
-  if ( IsNpc( ch ) || !is_clanned( ch ) )
+  if ( is_npc( ch ) || !ch->pcdata->clan )
     {
       send_to_char( "Huh?\r\n", ch );
       return;

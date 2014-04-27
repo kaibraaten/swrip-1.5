@@ -3,7 +3,7 @@
 #include "vector3_aux.h"
 #include "mud.h"
 
-void do_calculate_diff(Character *ch, char *argument )
+void do_calculate_diff(CHAR_DATA *ch, char *argument )
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
@@ -68,7 +68,7 @@ void do_calculate_diff(Character *ch, char *argument )
       send_to_char("&WFormat: Calculate <spaceobject> <entry x> <entry y> <entry z>\r\n&wPossible destinations:\r\n",ch);
       return;
     }
-  the_chance = IsNpc(ch) ? ch->top_level
+  the_chance = is_npc(ch) ? ch->top_level
     : (int)  (ch->pcdata->learned[gsn_navigation]) ;
   if ( number_percent( ) > the_chance )
     {

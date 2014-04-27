@@ -1,9 +1,9 @@
 #include "character.h"
 #include "mud.h"
 
-void do_dismount( Character *ch, char *argument )
+void do_dismount( CHAR_DATA *ch, char *argument )
 {
-  Character *victim;
+  CHAR_DATA *victim;
 
   if ( (victim = ch->mount) == NULL )
     {
@@ -12,7 +12,7 @@ void do_dismount( Character *ch, char *argument )
     }
 
   set_wait_state( ch, skill_table[gsn_mount]->beats );
-  if ( IsNpc(ch) || number_percent( ) < ch->pcdata->learned[gsn_mount] )
+  if ( is_npc(ch) || number_percent( ) < ch->pcdata->learned[gsn_mount] )
     {
       act( AT_SKILL, "You dismount $N.", ch, NULL, victim, TO_CHAR );
       act( AT_SKILL, "$n skillfully dismounts $N.", ch, NULL, victim, TO_NOTVICT );

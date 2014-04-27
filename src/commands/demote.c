@@ -1,13 +1,13 @@
 #include "character.h"
 #include "mud.h"
-#include "clan.h"
 
-void do_demote ( Character *ch , char *argument )
+void do_demote ( CHAR_DATA *ch , char *argument )
 {
-  if ( IsNpc( ch ) )
+
+  if ( is_npc( ch ) || !ch->pcdata )
     return;
 
-  if ( !is_clanned( ch ) )
+  if ( !ch->pcdata->clan )
     {
       send_to_char( "Huh?\r\n", ch );
       return;
@@ -45,5 +45,5 @@ void do_demote ( Character *ch , char *argument )
       return;
     }
 
-  SaveClan( ch->pcdata->clan );
+  save_clan ( ch->pcdata->clan );
 }

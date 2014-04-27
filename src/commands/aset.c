@@ -1,6 +1,6 @@
 #include "mud.h"
 
-void do_aset( Character *ch, char *argument )
+void do_aset( CHAR_DATA *ch, char *argument )
 {
   AREA_DATA *tarea;
   char arg1[MAX_INPUT_LENGTH];

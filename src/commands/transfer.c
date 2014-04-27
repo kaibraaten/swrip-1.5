@@ -1,13 +1,13 @@
 #include "mud.h"
 #include "character.h"
 
-void do_transfer( Character *ch, char *argument )
+void do_transfer( CHAR_DATA *ch, char *argument )
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
   ROOM_INDEX_DATA *location;
   DESCRIPTOR_DATA *d;
-  Character *victim;
+  CHAR_DATA *victim;
 
   argument = one_argument( argument, arg1 );
   argument = one_argument( argument, arg2 );
@@ -92,7 +92,7 @@ void do_transfer( Character *ch, char *argument )
   do_look( victim, "auto" );
   send_to_char( "Ok.\r\n", ch );
 
-  if (!IsImmortal(victim) && !IsNpc(victim)
+  if (!is_immortal(victim) && !is_npc(victim)
       && !in_hard_range( victim, location->area ) )
     {
       send_to_char("Warning: the player's level is not within the area's level range.\r\n", ch);

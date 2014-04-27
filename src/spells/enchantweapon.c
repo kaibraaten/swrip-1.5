@@ -1,7 +1,7 @@
 #include "mud.h"
 #include "character.h"
 
-ch_ret spell_enchant_weapon( int sn, int level, Character *ch, void *vo )
+ch_ret spell_enchant_weapon( int sn, int level, CHAR_DATA *ch, void *vo )
 {
   OBJ_DATA *obj = (OBJ_DATA *) vo;
   AFFECT_DATA *paf;

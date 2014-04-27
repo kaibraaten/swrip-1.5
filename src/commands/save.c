@@ -1,15 +1,15 @@
 #include "character.h"
 #include "mud.h"
 
-void do_save( Character *ch, char *argument )
+void do_save( CHAR_DATA *ch, char *argument )
 {
-  if ( IsNpc(ch) && IS_SET(ch->act, ACT_POLYMORPHED))
+  if ( is_npc(ch) && IS_SET(ch->act, ACT_POLYMORPHED))
     {
       send_to_char("You can't save while polymorphed.\r\n", ch);
       return;
     }
 
-  if ( IsNpc(ch) )
+  if ( is_npc(ch) )
     return;
 
   if ( !IS_SET( ch->affected_by, race_table[ch->race].affected ) )

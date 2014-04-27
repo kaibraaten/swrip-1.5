@@ -1,12 +1,12 @@
 #include "mud.h"
 #include "character.h"
 
-void do_aassign( Character *ch, char *argument )
+void do_aassign( CHAR_DATA *ch, char *argument )
 {
   char buf[MAX_STRING_LENGTH];
   AREA_DATA *tarea, *tmp;
 
-  if ( IsNpc( ch ) )
+  if ( is_npc( ch ) )
     return;
 
   if ( argument[0] == '\0' )
@@ -32,9 +32,9 @@ void do_aassign( Character *ch, char *argument )
   sprintf( buf, "%s", argument );
   tarea = NULL;
 
-  if ( GetTrustedLevel(ch) >= LEVEL_GREATER
+  if ( get_trust(ch) >= LEVEL_GREATER
        ||  (is_name( buf, ch->pcdata->bestowments )
-            &&   GetTrustedLevel(ch) >= sysdata.level_modify_proto) )
+            &&   get_trust(ch) >= sysdata.level_modify_proto) )
     for ( tmp = first_area; tmp; tmp = tmp->next )
       if ( !str_cmp( buf, tmp->filename ) )
         {
@@ -46,8 +46,8 @@ void do_aassign( Character *ch, char *argument )
     for ( tmp = first_build; tmp; tmp = tmp->next )
       if ( !str_cmp( buf, tmp->filename ) )
         {
-          /*            if ( GetTrustedLevel(ch) >= sysdata.level_modify_proto  */
-          if ( GetTrustedLevel(ch) >= LEVEL_GREATER
+          /*            if ( get_trust(ch) >= sysdata.level_modify_proto  */
+          if ( get_trust(ch) >= LEVEL_GREATER
                ||   is_name( tmp->filename, ch->pcdata->bestowments ) )
             {
               tarea = tmp;
@@ -62,7 +62,7 @@ void do_aassign( Character *ch, char *argument )
 
   if ( !tarea )
     {
-      if ( GetTrustedLevel(ch) >= sysdata.level_modify_proto )
+      if ( get_trust(ch) >= sysdata.level_modify_proto )
         send_to_char( "No such area.  Use 'zones'.\r\n", ch );
       else
         send_to_char( "No such area.  Use 'newzones'.\r\n", ch );

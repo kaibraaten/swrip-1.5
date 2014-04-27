@@ -2,7 +2,7 @@
 #include "ships.h"
 #include "mud.h"
 
-void do_accelerate( Character *ch, char *argument )
+void do_accelerate( CHAR_DATA *ch, char *argument )
 {
   int the_chance;
   int change;
@@ -77,15 +77,15 @@ void do_accelerate( Character *ch, char *argument )
     }
 
   if ( ship->sclass == FIGHTER_SHIP )
-    the_chance = IsNpc(ch) ? ch->top_level
+    the_chance = is_npc(ch) ? ch->top_level
       : (int)  (ch->pcdata->learned[gsn_starfighters]) ;
   if ( ship->sclass == MIDSIZE_SHIP )
-    the_chance = IsNpc(ch) ? ch->top_level
+    the_chance = is_npc(ch) ? ch->top_level
       : (int)  (ch->pcdata->learned[gsn_midships]) ;
   /* changed mobs so they can not fly capital ships. Forcers could possess mobs
      and fly them - Darrik Vequir */
   if ( ship->sclass == CAPITAL_SHIP )
-    the_chance = IsNpc(ch) ? 0
+    the_chance = is_npc(ch) ? 0
       : (int) (ch->pcdata->learned[gsn_capitalships]);
   if ( number_percent( ) >= the_chance )
     {

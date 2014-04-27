@@ -2,17 +2,15 @@
 #include "mud.h"
 #include "character.h"
 
-static bool IsUnderlingOf( void *element, void *userData );
-
-void do_order( Character *ch, char *argument )
+void do_order( CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   char argbuf[MAX_INPUT_LENGTH];
-  Character *victim = NULL;
+  CHAR_DATA *victim = NULL;
+  CHAR_DATA *och = NULL;
+  CHAR_DATA *och_next = NULL;
   bool found = FALSE;
   bool fAll = FALSE;
-  CerisList *underlings = NULL;
-  CerisListIterator *underlingIterator = NULL;
 
   strcpy( argbuf, argument );
   argument = one_argument( argument, arg );
@@ -60,14 +58,13 @@ void do_order( Character *ch, char *argument )
       return;
     }
 
-  underlings = List_CopyIf( ch->in_room->People, IsUnderlingOf, ch );
-  underlingIterator = CreateListIterator( underlings, ForwardsIterator );
-
-  for( ; !ListIterator_IsDone( underlingIterator ); ListIterator_Next( underlingIterator ) )
+  for ( och = ch->in_room->first_person; och; och = och_next )
     {
-      Character *och = (Character*) ListIterator_GetData( underlingIterator );
+      och_next = och->next_in_room;
 
-      if ( fAll || och == victim )
+      if ( is_affected_by(och, AFF_CHARM)
+           && och->master == ch
+           && ( fAll || och == victim ) )
         {
           found = TRUE;
           act( AT_ACTION, "$n orders you to '$t'.",
@@ -75,9 +72,6 @@ void do_order( Character *ch, char *argument )
 	  interpret( och, argument );
         }
     }
-
-  DestroyListIterator( underlingIterator );
-  DestroyList( underlings );
 
   if ( found )
     {
@@ -90,12 +84,4 @@ void do_order( Character *ch, char *argument )
     {
       send_to_char( "You have no followers here.\r\n", ch );
     }
-}
-
-static bool IsUnderlingOf( void *element, void *userData )
-{
-  const Character *underling = (Character*) element;
-  const Character *master = (Character*) userData;
-
-  return is_affected_by( underling, AFF_CHARM ) && underling->master == master;
 }

@@ -1,10 +1,10 @@
 #include "character.h"
 #include "mud.h"
 
-void do_consider( Character *ch, char *argument )
+void do_consider( CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  Character *victim;
+  CHAR_DATA *victim;
   char *msg;
   int diff;
 

@@ -1,9 +1,9 @@
 #include "character.h"
 #include "mud.h"
 
-void do_delay( Character *ch, char *argument )
+void do_delay( CHAR_DATA *ch, char *argument )
 {
-  Character *victim = NULL;
+  CHAR_DATA *victim = NULL;
   char arg[MAX_INPUT_LENGTH];
   int delay = 0;
 
@@ -23,13 +23,13 @@ void do_delay( Character *ch, char *argument )
       return;
     }
 
-  if ( IsNpc( victim ) )
+  if ( is_npc( victim ) )
     {
       send_to_char( "Mobiles are unaffected by lag.\r\n", ch );
       return;
     }
 
-  if ( !IsNpc(victim) && GetTrustedLevel( victim ) >= GetTrustedLevel( ch ) )
+  if ( !is_npc(victim) && get_trust( victim ) >= get_trust( ch ) )
     {
       send_to_char( "You haven't the power to succeed against them.\r\n", ch );
       return;

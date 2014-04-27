@@ -1,14 +1,13 @@
 #include "character.h"
 #include "mud.h"
-#include "clan.h"
 
-static const char *get_clan_type(const Clan *const clan);
+static const char *get_clan_type(const CLAN_DATA *const clan);
 
-void do_showclan( Character *ch, char *argument )
+void do_showclan( CHAR_DATA *ch, char *argument )
 {
-  Clan *clan;
+  CLAN_DATA *clan;
 
-  if ( IsNpc( ch ) )
+  if ( is_npc( ch ) )
     {
       send_to_char( "Huh?\r\n", ch );
       return;
@@ -20,7 +19,7 @@ void do_showclan( Character *ch, char *argument )
       return;
     }
 
-  clan = GetClan( argument );
+  clan = get_clan( argument );
 
   if ( !clan )
     {
@@ -64,7 +63,7 @@ void do_showclan( Character *ch, char *argument )
              clan->enlistroom1, clan->enlistroom2 );
 }
 
-static const char *get_clan_type(const Clan *const clan)
+static const char *get_clan_type(const CLAN_DATA *const clan)
 {
   return clan->clan_type == CLAN_CRIME ? "Crime Family" :
     clan->clan_type == CLAN_GUILD ? "Guild" : "Organization";

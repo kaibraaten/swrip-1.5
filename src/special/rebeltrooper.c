@@ -1,69 +1,31 @@
 #include "character.h"
 #include "mud.h"
-#include "clan.h"
 
-static bool IsImperial( void *element, void *userData )
+bool spec_rebel_trooper( CHAR_DATA *ch )
 {
-  const Character *imperial = (Character*) element;
-  const Character *rebel = (Character*) userData;
+  CHAR_DATA *victim;
+  CHAR_DATA *v_next;
 
-  if( !can_see( rebel, imperial ) )
-    {
-      return FALSE;
-    }
-
-  if( get_timer( imperial, TIMER_RECENTFIGHT ) > 0 )
-    {
-      return FALSE;
-    }
-
-  if( IsNpc( imperial ) && nifty_is_name( "imperial", imperial->name )
-      && imperial->fighting && who_fighting( imperial ) != rebel )
-    {
-      return TRUE;
-    }
-
-  if( !IsNpc( imperial ) && is_clanned( imperial ) && is_awake( imperial )
-      && nifty_is_name( "empire", imperial->pcdata->clan->name ) )
-    {
-      return TRUE;
-    }
-
-  return FALSE;
-}
-
-static Character *GetImperialInRoom( Character *rebel )
-{
-  CerisList *imperials = List_CopyIf( rebel->in_room->People, IsImperial, rebel );
-  Character *imperial = NULL;
-
-  if( List_Count( imperials ) > 0 )
-    {
-      CerisListIterator *iter = CreateListIterator( imperials, ForwardsIterator );
-
-      imperial = (Character*) ListIterator_GetData( iter );
-
-      DestroyListIterator( iter );
-    }
-
-  DestroyList( imperials );
-  return imperial;
-}
-
-bool spec_rebel_trooper( Character *rebel )
-{
-  Character *imperial = NULL;
-
-  if ( !is_awake(rebel) || rebel->fighting )
+  if ( !is_awake(ch) || ch->fighting )
     return FALSE;
 
-  imperial = GetImperialInRoom( rebel );
-
-  if( imperial )
+  for ( victim = ch->in_room->first_person; victim; victim = v_next )
     {
-      do_yell( rebel, "Long live the Rebel Alliance!" );
-      multi_hit( rebel, imperial, TYPE_UNDEFINED );
-      return TRUE;
+      v_next = victim->next_in_room;
+      if ( !can_see( ch, victim ) )
+        continue;
+      if ( get_timer(victim, TIMER_RECENTFIGHT) > 0 )
+        continue;
+      if ( ( is_npc( victim ) && nifty_is_name( "imperial" , victim->name )
+             && victim->fighting && who_fighting( victim ) != ch ) ||
+           ( !is_npc( victim ) && victim->pcdata && victim->pcdata->clan && is_awake(victim)
+             && nifty_is_name( "empire" , victim->pcdata->clan->name ) ) )
+        {
+          do_yell( ch, "Long live the Rebel Alliance!" );
+          multi_hit( ch, victim, TYPE_UNDEFINED );
+          return TRUE;
+        }
+
     }
 
   return FALSE;

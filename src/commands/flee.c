@@ -1,7 +1,7 @@
 #include "mud.h"
 #include "character.h"
 
-void do_flee( Character *ch, char *argument )
+void do_flee( CHAR_DATA *ch, char *argument )
 {
   ROOM_INDEX_DATA *was_in;
   ROOM_INDEX_DATA *now_in;
@@ -42,11 +42,11 @@ void do_flee( Character *ch, char *argument )
            ||   !pexit->to_room
            || ( IS_SET(pexit->exit_info, EX_CLOSED)
                 &&   !is_affected_by( ch, AFF_PASS_DOOR ) )
-           || ( IsNpc(ch)
+           || ( is_npc(ch)
                 &&   IS_SET(pexit->to_room->room_flags, ROOM_NO_MOB) ) )
         continue;
 
-      if ( !HasPermanentSneak(ch) )
+      if ( !permsneak(ch) )
         {
           affect_strip ( ch, gsn_sneak );
           REMOVE_BIT   ( ch->affected_by, AFF_SNEAK );

@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_vsearch( Character *ch, char *argument )
+void do_vsearch( CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   bool found = FALSE;

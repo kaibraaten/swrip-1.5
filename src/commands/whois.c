@@ -2,17 +2,16 @@
 #include <time.h>
 #include "mud.h"
 #include "character.h"
-#include "clan.h"
 
-void do_whois( Character *ch, char *argument)
+void do_whois( CHAR_DATA *ch, char *argument)
 {
-  Character *victim;
+  CHAR_DATA *victim;
   char buf[MAX_STRING_LENGTH];
   char buf2[MAX_STRING_LENGTH];
 
   buf[0] = '\0';
 
-  if(IsNpc(ch))
+  if(is_npc(ch))
     return;
 
   if(argument[0] == '\0')
@@ -30,7 +29,7 @@ void do_whois( Character *ch, char *argument)
       return;
     }
 
-  if(IsNpc(victim))
+  if(is_npc(victim))
     {
       send_to_char("That's not a player!\r\n", ch);
       return;
@@ -58,9 +57,9 @@ void do_whois( Character *ch, char *argument)
     ch_printf(ch, "%s.\r\n",
               victim->name );
 
-  if ( is_clanned( victim )
-       && ( ( is_clanned( ch ) && ch->pcdata->clan == victim->pcdata->clan )
-	    || IsImmortal( ch ) ) )
+  if ( victim->pcdata->clan && ( ( ch->pcdata->clan
+                                   && ch->pcdata->clan == victim->pcdata->clan )
+                                 || is_immortal( ch ) ) )
     {
       if ( victim->pcdata->clan->clan_type == CLAN_CRIME )
         send_to_char( ", and belongs to the crime family ", ch );
@@ -68,10 +67,8 @@ void do_whois( Character *ch, char *argument)
         send_to_char( ", and belongs to the guild ", ch );
       else
         send_to_char( ", and belongs to organization ", ch );
-
       send_to_char( victim->pcdata->clan->name, ch );
     }
-
   send_to_char( ".\r\n", ch );
 
   if(victim->pcdata->homepage && victim->pcdata->homepage[0] != '\0')
@@ -84,7 +81,7 @@ void do_whois( Character *ch, char *argument)
               victim->name,
               victim->pcdata->bio);
 
-  if( GetTrustedLevel( ch ) >= LEVEL_GOD )
+  if( get_trust( ch ) >= LEVEL_GOD )
     {
       send_to_char("----------------------------------------------------\r\n", ch);
 
@@ -114,7 +111,7 @@ void do_whois( Character *ch, char *argument)
                   victim->pcdata->helled_by,
                   ctime(&victim->pcdata->release_date));
 
-      if(GetTrustedLevel(victim) < GetTrustedLevel(ch))
+      if(get_trust(victim) < get_trust(ch))
         {
           sprintf(buf2, "list %s", buf);
           do_comment(ch, buf2);
@@ -137,7 +134,7 @@ void do_whois( Character *ch, char *argument)
       if ( victim->desc && victim->desc->remote.hostname[0]!='\0' )   /* added by Gorog */
         {
           sprintf (buf2, "%s's IP info: %s ", victim->name, victim->desc->remote.hostip);
-          if (GetTrustedLevel(ch) > LEVEL_GOD)
+          if (get_trust(ch) > LEVEL_GOD)
             {
               strcat (buf2, victim->desc->remote.hostname);
             }
@@ -145,7 +142,7 @@ void do_whois( Character *ch, char *argument)
           send_to_char(buf2, ch);
         }
 
-      if (GetTrustedLevel(ch) >= LEVEL_GOD && GetTrustedLevel(ch) >= GetTrustedLevel( victim ) && victim->pcdata )
+      if (get_trust(ch) >= LEVEL_GOD && get_trust(ch) >= get_trust( victim ) && victim->pcdata )
         {
           sprintf (buf2, "Email: %s\r\n" , victim->pcdata->email );
           send_to_char(buf2, ch);

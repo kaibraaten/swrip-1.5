@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_rest( Character *ch, char *argument )
+void do_rest( CHAR_DATA *ch, char *argument )
 {
   OBJ_DATA *obj = NULL;
 

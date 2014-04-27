@@ -2,13 +2,13 @@
 #include "mud.h"
 #include "shuttle.h"
 
-static void output_shuttle(Character * ch, SHUTTLE_DATA * shuttle);
+static void output_shuttle(CHAR_DATA * ch, SHUTTLE_DATA * shuttle);
 
-void do_pluogus( Character *ch, char *argument )
+void do_pluogus( CHAR_DATA *ch, char *argument )
 {
   SHUTTLE_DATA * shuttle = NULL;
 
-  if ( !HasComlink( ch ) )
+  if ( !has_comlink( ch ) )
     {
       send_to_char( "You need a comlink to do that!\r\n", ch);
       return;
@@ -27,7 +27,7 @@ void do_pluogus( Character *ch, char *argument )
     }
 }
 
-static void output_shuttle(Character * ch, SHUTTLE_DATA * shuttle)
+static void output_shuttle(CHAR_DATA * ch, SHUTTLE_DATA * shuttle)
 {
   STOP_DATA * stop = NULL;
   int itt = 0;

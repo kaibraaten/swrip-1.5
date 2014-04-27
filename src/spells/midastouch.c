@@ -1,9 +1,9 @@
 #include "character.h"
 #include "mud.h"
 
-ch_ret spell_midas_touch( int sn, int level, Character *ch, void *vo )
+ch_ret spell_midas_touch( int sn, int level, CHAR_DATA *ch, void *vo )
 {
-  Character *victim;
+  CHAR_DATA *victim;
   int val;
   OBJ_DATA *obj = (OBJ_DATA *) vo;
 
@@ -16,7 +16,7 @@ ch_ret spell_midas_touch( int sn, int level, Character *ch, void *vo )
     }
 
   if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE )
-       &&   GetTrustedLevel( ch ) < LEVEL_IMMORTAL )
+       &&   get_trust( ch ) < LEVEL_IMMORTAL )
     {
       send_to_char( "That item is not for mortal hands to touch!\r\n", ch );
       return rSPELL_FAILED;   /* Thoric */
@@ -76,7 +76,7 @@ ch_ret spell_midas_touch( int sn, int level, Character *ch, void *vo )
 
 
   if ( ( victim->carry_weight + get_obj_weight ( obj ) ) > can_carry_w(victim)
-       ||       (IsNpc(victim) && IS_SET(victim->act, ACT_PROTOTYPE)))
+       ||       (is_npc(victim) && IS_SET(victim->act, ACT_PROTOTYPE)))
     {
       ch->gold += val;
 

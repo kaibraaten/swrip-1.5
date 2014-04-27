@@ -1,15 +1,13 @@
 #include "character.h"
 #include "mud.h"
-#include "clan.h"
 
-static void SaveClanStoreroom( void *element, void *userData );
-
-void do_drop( Character *ch, char *argument )
+void do_drop( CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   OBJ_DATA *obj;
   OBJ_DATA *obj_next;
   bool found;
+  CLAN_DATA *clan;
   int number;
 
   argument = one_argument( argument, arg );
@@ -36,7 +34,7 @@ void do_drop( Character *ch, char *argument )
     return;
 
   if ( IS_SET( ch->in_room->room_flags, ROOM_NODROP )
-       ||   ( !IsNpc(ch) && IS_SET( ch->act, PLR_LITTERBUG )) )
+       ||   ( !is_npc(ch) && IS_SET( ch->act, PLR_LITTERBUG )) )
     {
       set_char_color( AT_MAGIC, ch );
       send_to_char( "A magical force stops you!\r\n", ch );
@@ -121,9 +119,9 @@ void do_drop( Character *ch, char *argument )
 
       /* Clan storeroom saving */
       if ( IS_SET(ch->in_room->room_flags, ROOM_CLANSTOREROOM) )
-	{
-	  List_ForEach( ClanList, SaveClanStoreroom, ch );
-	}
+        for ( clan = first_clan; clan; clan = clan->next )
+          if ( clan->storeroom == ch->in_room->vnum )
+            save_clan_storeroom(ch, clan);
     }
   else
     {
@@ -183,7 +181,9 @@ void do_drop( Character *ch, char *argument )
         }
 
       if ( IS_SET(ch->in_room->room_flags, ROOM_CLANSTOREROOM) )
-	List_ForEach( ClanList, SaveClanStoreroom, ch );
+        for ( clan = first_clan; clan; clan = clan->next )
+          if ( clan->storeroom == ch->in_room->vnum )
+            save_clan_storeroom(ch, clan);
 
       if ( !found )
         {
@@ -203,15 +203,4 @@ void do_drop( Character *ch, char *argument )
       if ( IS_SET( ch->in_room->room_flags, ROOM_CLANSTOREROOM ) )
         save_storeroom( ch->in_room );
     } /* duping protector */
-}
-
-static void SaveClanStoreroom( void *element, void *userData )
-{
-  Clan *clan = (Clan*) element;
-  Character *ch = (Character*) userData;
-
-  if ( clan->storeroom == ch->in_room->vnum )
-    {
-      save_clan_storeroom(ch, clan);
-    }
 }

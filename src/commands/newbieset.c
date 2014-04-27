@@ -1,12 +1,12 @@
 #include "character.h"
 #include "mud.h"
 
-void do_newbieset( Character *ch, char *argument )
+void do_newbieset( CHAR_DATA *ch, char *argument )
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
   OBJ_DATA *obj;
-  Character *victim;
+  CHAR_DATA *victim;
 
   argument = one_argument( argument, arg1 );
   argument = one_argument (argument, arg2);
@@ -23,7 +23,7 @@ void do_newbieset( Character *ch, char *argument )
       return;
     }
 
-  if ( IsNpc(victim) )
+  if ( is_npc(victim) )
     {
       send_to_char( "Not on NPC's.\r\n", ch );
       return;

@@ -1,10 +1,10 @@
 #include "character.h"
 #include "mud.h"
 
-void do_dismiss( Character *ch, char *argument )
+void do_dismiss( CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  Character *victim = NULL;
+  CHAR_DATA *victim = NULL;
 
   one_argument( argument, arg );
 
@@ -21,7 +21,7 @@ void do_dismiss( Character *ch, char *argument )
     }
 
   if ( is_affected_by( victim, AFF_CHARM )
-       && IsNpc( victim )
+       && is_npc( victim )
        && victim->master == ch )
     {
       stop_follower( victim );

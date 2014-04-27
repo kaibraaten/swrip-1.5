@@ -1,6 +1,6 @@
 #include "mud.h"
 
-void do_makeplanet( Character *ch, char *argument )
+void do_makeplanet( CHAR_DATA *ch, char *argument )
 {
   char filename[256];
   PLANET_DATA *planet;

@@ -24,7 +24,6 @@
 #include <ctype.h>
 #include <string.h>
 #include <time.h>
-#include "room.h"
 #include "character.h"
 #include "mud.h"
 
@@ -55,9 +54,9 @@ void echo_to_all( short AT_COLOR, const char *argument, short tar )
       if ( d->connection_state == CON_PLAYING || d->connection_state == CON_EDITING )
         {
           /* This one is kinda useless except for switched.. */
-          if ( tar == ECHOTAR_PC && IsNpc(d->character) )
+          if ( tar == ECHOTAR_PC && is_npc(d->character) )
             continue;
-          else if ( tar == ECHOTAR_IMM && !IsImmortal(d->character) )
+          else if ( tar == ECHOTAR_IMM && !is_immortal(d->character) )
             continue;
           set_char_color( AT_COLOR, d->character );
           send_to_char( argument, d->character );
@@ -66,37 +65,25 @@ void echo_to_all( short AT_COLOR, const char *argument, short tar )
     }
 }
 
-typedef struct MessageBundle
-{
-  short Color;
-  const char *Message;
-} MessageBundle;
-
-static void SendToCharacterInRoom( void *element, void *userData )
-{
-  MessageBundle *args = (MessageBundle*) userData;
-  Character *recipient = (Character*) element;
-
-  set_char_color( args->Color, recipient );
-  ch_printf( recipient, "%s\r\n", args->Message );
-}
-
 void echo_to_room( short AT_COLOR, ROOM_INDEX_DATA *room, const char *argument )
 {
-  MessageBundle args;
+  CHAR_DATA *vic;
 
   if ( room == NULL )
     return;
 
-  args.Color = AT_COLOR;
-  args.Message = argument;
 
-  List_ForEach( room->People, SendToCharacterInRoom, &args );
+  for ( vic = room->first_person; vic; vic = vic->next_in_room )
+    {
+      set_char_color( AT_COLOR, vic );
+      send_to_char( argument, vic );
+      send_to_char( "\r\n",   vic );
+    }
 }
 
-ROOM_INDEX_DATA *find_location( Character *ch, char *arg )
+ROOM_INDEX_DATA *find_location( CHAR_DATA *ch, char *arg )
 {
-  Character *victim;
+  CHAR_DATA *victim;
   OBJ_DATA *obj;
 
   if ( is_number(arg) )
@@ -146,7 +133,7 @@ static const char *str_str( const char *astr, const char *bstr )
 int str_count(const char *psource, const char *ptarget)
 {
   const char *ptemp = psource;
-  int count = 0;
+  int count=0;
 
   while ( (ptemp = str_str(ptemp, ptarget)) )
     {
@@ -181,8 +168,8 @@ void save_banlist( void )
  */
 void close_area( AREA_DATA *pArea )
 {
-  Character *ech;
-  Character *ech_next;
+  CHAR_DATA *ech;
+  CHAR_DATA *ech_next;
   OBJ_DATA *eobj;
   OBJ_DATA *eobj_next;
   int icnt;
@@ -210,7 +197,7 @@ void close_area( AREA_DATA *pArea )
 
       if ( ech->fighting )
         stop_fighting( ech, TRUE );
-      if ( IsNpc(ech) )
+      if ( is_npc(ech) )
         {
           /* if mob is in area, or part of area. */
           if ( URANGE(pArea->low_m_vnum, ech->pIndexData->vnum,
@@ -249,42 +236,24 @@ void close_area( AREA_DATA *pArea )
                   DISPOSE( exit_iter );
                 }
             }
-
           if ( rid->area != pArea )
             continue;
-
           STRFREE(rid->name);
           STRFREE(rid->description);
-
-          if ( NumberOfPeopleInRoom( rid ) > 0 )
+          if ( rid->first_person )
             {
-	      CerisList *originalPeopleInRoom = List_Copy( rid->People );
-	      CerisListIterator *iter = CreateListIterator( originalPeopleInRoom, ForwardsIterator );
               bug( "close_area: room with people #%d", rid->vnum );
-
-	      for( ; !ListIterator_IsDone( iter ); ListIterator_Next( iter ) )
+              for ( ech = rid->first_person; ech; ech = ech_next )
                 {
-		  Character *currentPerson = (Character*) ListIterator_GetData( iter );
-
-                  if ( currentPerson->fighting )
-		    {
-		      stop_fighting( currentPerson, TRUE );
-		    }
-
-                  if ( IsNpc( currentPerson ) )
-		    {
-		      extract_char( currentPerson, TRUE );
-		    }
+                  ech_next = ech->next_in_room;
+                  if ( ech->fighting )
+                    stop_fighting( ech, TRUE );
+                  if ( is_npc(ech) )
+                    extract_char( ech, TRUE );
                   else
-		    {
-		      do_recall( currentPerson, "" );
-		    }
+                    do_recall( ech, "" );
                 }
-
-	      DestroyListIterator( iter );
-	      DestroyList( originalPeopleInRoom );
             }
-
           if ( rid->first_content )
             {
               bug( "close_area: room with contents #%d", rid->vnum );

@@ -1,83 +1,45 @@
 #include "character.h"
 #include "mud.h"
 
-static bool IsPotentialVictim( void *element, void *userData )
+bool spec_thief( CHAR_DATA *ch )
 {
-  const Character *victim = (Character*) element;
-  const Character *thief = (Character*) userData;
+  CHAR_DATA *victim;
+  CHAR_DATA *v_next;
+  int gold, maxgold;
 
-  if ( IsImmortal( victim )
-       || number_bits( 2 ) != 0
-       || !can_see( thief, victim ) )
+  if ( ch->position != POS_STANDING )
+    return FALSE;
+
+  for ( victim = ch->in_room->first_person; victim; victim = v_next )
     {
-      return FALSE;
-    }
+      v_next = victim->next_in_room;
 
-  return TRUE;
-}
+      if ( get_trust(victim) >= LEVEL_IMMORTAL
+           ||   number_bits( 2 ) != 0
+           ||   !can_see( ch, victim ) )        /* Thx Glop */
+        continue;
 
-static Character *GetVictimInRoom( Character *thief )
-{
-  CerisList *potentialVictims = List_CopyIf( thief->in_room->People, IsPotentialVictim, thief );
-  Character *victim = NULL;
-
-  if( List_Count( potentialVictims ) > 0 )
-    {
-      CerisListIterator *iter = CreateListIterator( potentialVictims, ForwardsIterator );
-      victim = (Character*) ListIterator_GetData( iter );
-      DestroyListIterator( iter );
-    }
-
-  DestroyList( potentialVictims );
-
-  return victim;
-}
-
-static void StealMoney( Character *thief, Character *victim )
-{
-  int maxgold = 1000;
-  int gold = victim->gold * number_range( 1, URANGE(2, thief->top_level/4, 10) ) / 100;
-  thief->gold += 9 * gold / 10;
-  victim->gold -= gold;
-
-  if ( thief->gold > maxgold )
-    {
-      boost_economy( thief->in_room->area, thief->gold - maxgold/2 );
-      thief->gold = maxgold/2;
-    }
-}
-
-static void GetDiscovered( Character *thief, Character *victim )
-{
-  act( AT_ACTION, "You discover $n's hands in your wallet!",
-       thief, NULL, victim, TO_VICT );
-  act( AT_ACTION, "$N discovers $n's hands in $S wallet!",
-       thief, NULL, victim, TO_NOTVICT );
-}
-
-bool spec_thief( Character *thief )
-{
-  Character *victim = NULL;
- 
-  if ( thief->position != POS_STANDING )
-    {
-      return FALSE;
-    }
-
-  victim = GetVictimInRoom( thief );
-
-  if( victim )
-    {
-      if ( is_awake(victim) && number_range( 0, thief->top_level ) == 0 )
+      if ( is_awake(victim) && number_range( 0, ch->top_level ) == 0 )
         {
-	  GetDiscovered( thief, victim );
+          act( AT_ACTION, "You discover $n's hands in your wallet!",
+               ch, NULL, victim, TO_VICT );
+          act( AT_ACTION, "$N discovers $n's hands in $S wallet!",
+               ch, NULL, victim, TO_NOTVICT );
+          return TRUE;
         }
       else
         {
-	  StealMoney( thief, victim );
+          maxgold = 1000;
+	  gold = victim->gold * number_range( 1, URANGE(2, ch->top_level/4, 10) ) / 100;
+	  ch->gold     += 9 * gold / 10;
+	  victim->gold -= gold;
+	  if ( ch->gold > maxgold )
+	    {
+	      boost_economy( ch->in_room->area, ch->gold - maxgold/2 );
+	      ch->gold = maxgold/2;
+	    }
+	  return TRUE;
         }
-
-      return TRUE;
     }
 
   return FALSE;

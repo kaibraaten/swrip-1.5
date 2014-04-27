@@ -3,7 +3,7 @@
 #include "character.h"
 #include "editor.h"
 
-void do_redit( Character *ch, char *argument )
+void do_redit( CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
@@ -231,7 +231,7 @@ void do_redit( Character *ch, char *argument )
           value = get_roomflag( arg2 );
           if ( value < 0 || value > 31 )
             ch_printf( ch, "Unknown flag: %s\r\n", arg2 );
-          else if ( 1 << value == ROOM_PLR_HOME && GetTrustedLevel(ch) < LEVEL_SUPREME )
+          else if ( 1 << value == ROOM_PLR_HOME && get_trust(ch) < LEVEL_SUPREME )
             send_to_char( "If you want to build a player home use the 'empty_home' flag instead.\r\n", ch );
           else
             {
@@ -476,7 +476,7 @@ void do_redit( Character *ch, char *argument )
           send_to_char( "Non-existant room.\r\n", ch );
           return;
         }
-      if ( GetTrustedLevel(ch) <= LEVEL_IMMORTAL && tmp->area != location->area )
+      if ( get_trust(ch) <= LEVEL_IMMORTAL && tmp->area != location->area )
         {
           send_to_char( "You can't make an exit to that room.\r\n", ch );
           return;

@@ -1,6 +1,6 @@
 #include "mud.h"
 
-ch_ret spell_create_water( int sn, int level, Character *ch, void *vo )
+ch_ret spell_create_water( int sn, int level, CHAR_DATA *ch, void *vo )
 {
   OBJ_DATA *obj = (OBJ_DATA *) vo;
   int water;

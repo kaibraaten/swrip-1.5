@@ -1,19 +1,19 @@
 #include "character.h"
 #include "mud.h"
 
-void do_mpgain( Character *ch, char *argument )
+void do_mpgain( CHAR_DATA *ch, char *argument )
 {
   char arg1[ MAX_INPUT_LENGTH ];
   char arg2[ MAX_INPUT_LENGTH ];
   char arg3[ MAX_INPUT_LENGTH ];
-  Character *victim;
+  CHAR_DATA *victim;
   long xp;
   int  ability;
 
   if ( is_affected_by( ch, AFF_CHARM ) )
     return;
 
-  if ( !IsNpc( ch ) || ( ch->desc && GetTrustedLevel( ch ) < LEVEL_IMMORTAL )  )
+  if ( !is_npc( ch ) || ( ch->desc && get_trust( ch ) < LEVEL_IMMORTAL )  )
     {
       send_to_char( "Huh?\r\n", ch );
       return;
@@ -67,7 +67,7 @@ void do_mpgain( Character *ch, char *argument )
       return;
     }
 
-  xp =  URANGE(1, xp, ( exp_level( GetLevel( victim, ability ) + 1 ) - exp_level( GetLevel( victim, ability ) ) ) );
+  xp =  URANGE(1, xp, ( exp_level( get_level( victim, ability ) + 1 ) - exp_level( get_level( victim, ability ) ) ) );
 
   ch_printf( victim, "You gain %ld %s experience.\r\n", xp, ability_name[ability]  );
   gain_exp( victim, ability, xp );

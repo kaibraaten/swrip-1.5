@@ -4,7 +4,7 @@
 #include "vector3_aux.h"
 #include "mud.h"
 
-void do_fire(Character *ch, char *argument )
+void do_fire(CHAR_DATA *ch, char *argument )
 {
   int the_chance, origthe_chance;
   SHIP_DATA *ship;
@@ -43,12 +43,12 @@ void do_fire(Character *ch, char *argument )
       return;
     }
 
-  the_chance = IsNpc(ch) ? ch->top_level
+  the_chance = is_npc(ch) ? ch->top_level
     : (int) ( ch->stats.perm_dex*2 + ch->pcdata->learned[gsn_spacecombat]/3
               + ch->pcdata->learned[gsn_spacecombat2]/3 + ch->pcdata->learned[gsn_spacecombat3]/3 );
   origthe_chance = the_chance;
 
-  if ( ship->sclass > SHIP_PLATFORM && !IsNpc(ch))
+  if ( ship->sclass > SHIP_PLATFORM && !is_npc(ch))
     ((ch->pcdata->learned[gsn_speeders] == 100) ? (the_chance -= 100 - ch->pcdata->learned[gsn_speedercombat]) : (the_chance = 0) );
 
   if ( ch->in_room->vnum == ship->room.gunseat && !str_prefix( argument , "lasers"))

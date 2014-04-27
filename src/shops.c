@@ -49,39 +49,31 @@ float cost_equation( OBJ_DATA *obj )
 /*
  * Shopping commands.
  */
-Character *find_keeper( Character *ch )
+CHAR_DATA *find_keeper( CHAR_DATA *ch )
 {
   return find_keeper_q( ch, TRUE );
 }
 
-Character *find_keeper_q( Character *ch, bool message )
+CHAR_DATA *find_keeper_q( CHAR_DATA *ch, bool message )
 {
-  Character *keeper = NULL;
-  SHOP_DATA *pShop = NULL;
-  CerisListIterator *peopleInRoomIterator = CreateListIterator( ch->in_room->People, ForwardsIterator );
+  CHAR_DATA *keeper;
+  SHOP_DATA *pShop;
 
-  for( ; !ListIterator_IsDone( peopleInRoomIterator ); ListIterator_Next( peopleInRoomIterator ) )
-    {
-      Character *current = (Character*) ListIterator_GetData( peopleInRoomIterator );
-
-      if ( IsNpc(keeper) && (pShop = keeper->pIndexData->pShop) != NULL )
-	{
-	  keeper = current;
-	  break;
-	}
-    }
-
-  DestroyListIterator( peopleInRoomIterator );
+  pShop = NULL;
+  for ( keeper = ch->in_room->first_person;
+        keeper;
+        keeper = keeper->next_in_room )
+    if ( is_npc(keeper) && (pShop = keeper->pIndexData->pShop) != NULL )
+      break;
 
   if ( !pShop )
+
     {
       if ( message )
-	{
-	  send_to_char( "You can't do that here.\r\n", ch );
-	}
-
+        send_to_char( "You can't do that here.\r\n", ch );
       return NULL;
     }
+
 
   /*
    * Shop hours.
@@ -120,24 +112,17 @@ Character *find_keeper_q( Character *ch, bool message )
 /*
  * repair commands.
  */
-Character *find_fixer( Character *ch )
+CHAR_DATA *find_fixer( CHAR_DATA *ch )
 {
-  Character *keeper = NULL;
-  REPAIR_DATA *rShop = NULL;
-  CerisListIterator *peopleInRoomIterator = CreateListIterator( ch->in_room->People, ForwardsIterator );
+  CHAR_DATA *keeper;
+  REPAIR_DATA *rShop;
 
-  for( ; !ListIterator_IsDone( peopleInRoomIterator ); ListIterator_Next( peopleInRoomIterator ) )
-    {
-      Character *current = (Character*) ListIterator_GetData( peopleInRoomIterator );
-
-      if ( IsNpc(keeper) && (rShop = keeper->pIndexData->rShop) != NULL )
-        {
-          keeper = current;
-          break;
-        }
-    }
-
-  DestroyListIterator( peopleInRoomIterator );
+  rShop = NULL;
+  for ( keeper = ch->in_room->first_person;
+        keeper;
+        keeper = keeper->next_in_room )
+    if ( is_npc(keeper) && (rShop = keeper->pIndexData->rShop) != NULL )
+      break;
 
   if ( !rShop )
     {
@@ -171,7 +156,7 @@ Character *find_fixer( Character *ch )
   return keeper;
 }
 
-int get_cost_quit( Character *ch )
+int get_cost_quit( CHAR_DATA *ch )
 {
 
   long cost = 1000;
@@ -184,7 +169,7 @@ int get_cost_quit( Character *ch )
   if( ch->top_level <= 6 )
     return 0;
 
-  gold = ch->gold + (IsNpc(ch) ? 0 : ch->pcdata->bank) + 1;
+  gold = ch->gold + (is_npc(ch) ? 0 : ch->pcdata->bank) + 1;
 
   if( gold < 5000 )
     return 0;
@@ -193,7 +178,7 @@ int get_cost_quit( Character *ch )
   return (int) cost;
 }
 
-int get_cost( Character *ch, Character *keeper, OBJ_DATA *obj, bool fBuy )
+int get_cost( CHAR_DATA *ch, CHAR_DATA *keeper, OBJ_DATA *obj, bool fBuy )
 {
   SHOP_DATA *pShop;
   int cost;
@@ -203,7 +188,7 @@ int get_cost( Character *ch, Character *keeper, OBJ_DATA *obj, bool fBuy )
   if ( !obj || ( pShop = keeper->pIndexData->pShop ) == NULL )
     return 0;
 
-  if ( ( ch->gold + (IsNpc(ch) ? 0 : ch->pcdata->bank) ) > (ch->top_level * 1000) )
+  if ( ( ch->gold + (is_npc(ch) ? 0 : ch->pcdata->bank) ) > (ch->top_level * 1000) )
     richcustomer = TRUE;
   else
     richcustomer = FALSE;
@@ -212,7 +197,7 @@ int get_cost( Character *ch, Character *keeper, OBJ_DATA *obj, bool fBuy )
     {
       cost = (int) (obj->cost * (80 + UMIN(ch->top_level, LEVEL_AVATAR))) / 100;
 
-      profitmod = 13 - GetCurrentCha(ch) + (richcustomer ? 15 : 0)
+      profitmod = 13 - get_curr_cha(ch) + (richcustomer ? 15 : 0)
         + ((URANGE(5,ch->top_level,LEVEL_AVATAR)-20)/2);
       cost = (int) (obj->cost
                     * UMAX( (pShop->profit_sell+1), pShop->profit_buy+profitmod ) )
@@ -223,7 +208,7 @@ int get_cost( Character *ch, Character *keeper, OBJ_DATA *obj, bool fBuy )
       OBJ_DATA *obj2;
       int itype;
 
-      profitmod = GetCurrentCha(ch) - 13 - (richcustomer ? 15 : 0);
+      profitmod = get_curr_cha(ch) - 13 - (richcustomer ? 15 : 0);
       cost = 0;
       for ( itype = 0; itype < MAX_TRADE; itype++ )
         {
@@ -270,7 +255,7 @@ int get_cost( Character *ch, Character *keeper, OBJ_DATA *obj, bool fBuy )
   return cost;
 }
 
-int get_repaircost( Character *keeper, OBJ_DATA *obj )
+int get_repaircost( CHAR_DATA *keeper, OBJ_DATA *obj )
 {
   REPAIR_DATA *rShop;
   int cost;
@@ -326,9 +311,9 @@ int get_repaircost( Character *keeper, OBJ_DATA *obj )
 }
 
 /* Write vendor to file */
-void fwrite_vendor( FILE *fp, Character *mob )
+void fwrite_vendor( FILE *fp, CHAR_DATA *mob )
 {
-  if ( !IsNpc( mob ) || !fp )
+  if ( !is_npc( mob ) || !fp )
     return;
   fprintf( fp, "Vnum     %d\n", mob->pIndexData->vnum );
   if (mob->gold > 0)
@@ -348,13 +333,15 @@ void fwrite_vendor( FILE *fp, Character *mob )
 
 
 /* read vendor from file */
-Character *  fread_vendor( FILE *fp )
+CHAR_DATA *  fread_vendor( FILE *fp )
 {
-  Character *mob = NULL;
+  CHAR_DATA *mob = NULL;
   const char *word;
   bool fMatch;
   int inroom = 0;
   ROOM_INDEX_DATA *pRoomIndex = NULL;
+  CHAR_DATA *victim;
+  CHAR_DATA *vnext;
   char buf [MAX_INPUT_LENGTH];
   char vnum1 [MAX_INPUT_LENGTH];
   word   = feof( fp ) ? "END" : fread_word( fp );
@@ -403,22 +390,16 @@ Character *  fread_vendor( FILE *fp )
         }
       break;
     case 'D':
-      KEY( "Description", mob->description, fread_string_hash(fp));
+      KEY( "Description", mob->description, fread_string(fp));
       break;
     case 'E':
 
       if ( !str_cmp( word, "END" ) )
         {
-	  CerisListIterator *peopleInRoomIterator = NULL;
-
           if ( inroom == 0 )
-	    {
-	      inroom = ROOM_VNUM_VENSTOR;
-	    }
-
+            inroom = ROOM_VNUM_VENSTOR;
           mob->home = get_room_index(inroom);
           pRoomIndex = get_room_index( inroom );
-
           if ( !pRoomIndex )
             {
               pRoomIndex = get_room_index( ROOM_VNUM_VENSTOR );
@@ -426,22 +407,18 @@ Character *  fread_vendor( FILE *fp )
             }
 
           mob->in_room = pRoomIndex;
-	  peopleInRoomIterator = CreateListIterator( mob->in_room->People, ForwardsIterator );
-
           /* the following code is to make sure no more then one player owned vendor
              is in the room - meckteck */
-	  for( ; !ListIterator_IsDone( peopleInRoomIterator ); ListIterator_Next( peopleInRoomIterator ) )
+          for ( victim = mob->in_room->first_person; victim; victim = vnext )
             {
-	      Character *victim = (Character*) ListIterator_GetData( peopleInRoomIterator );
-
+              vnext = victim->next_in_room;
               if (victim->home != NULL)
                 {
                   extract_char( victim, TRUE);
                   break;
                 }
-            }
 
-	  DestroyListIterator( peopleInRoomIterator );
+            }
 
           char_to_room(mob, pRoomIndex);
           sprintf(vnum1,"%d", mob->pIndexData->vnum);
@@ -450,7 +427,6 @@ Character *  fread_vendor( FILE *fp )
           mob->long_descr =  STRALLOC( buf );
           mob->hit = 10000;
           mob->max_hit = 10000;
-
           return mob;
         }
       break;
@@ -468,13 +444,13 @@ Character *  fread_vendor( FILE *fp )
     case 'N':
       break;
     case 'O':
-      KEY ("Owner", mob->owner, fread_string_hash (fp) );
+      KEY ("Owner", mob->owner, fread_string (fp) );
       break;
     case 'P':
       KEY( "Position", mob->position, fread_number( fp ) );
       break;
     case 'S':
-      KEY( "Short", mob->short_descr, fread_string_hash(fp));
+      KEY( "Short", mob->short_descr, fread_string(fp));
       break;
     }
     if ( !fMatch )
@@ -489,10 +465,10 @@ Character *  fread_vendor( FILE *fp )
 
 
 
-void save_vendor( Character *ch )
+void save_vendor( CHAR_DATA *ch )
 {
   char strsave[MAX_INPUT_LENGTH];
-  FILE *fp = NULL;
+  FILE *fp;
 
   if ( !ch )
     {
@@ -501,6 +477,8 @@ void save_vendor( Character *ch )
     }
 
   de_equip_char( ch );
+
+
   sprintf( strsave, "%s%s",VENDOR_DIR, capitalize( ch->owner ) );
 
   if ( ( fp = fopen( strsave, "w" ) ) == NULL )
@@ -512,19 +490,16 @@ void save_vendor( Character *ch )
     {
       bool ferr;
 
-      /*fchmod(fileno(fp), S_IRUSR|S_IWUSR | S_IRGRP|S_IWGRP | S_IROTH|S_IWOTH);*/
+      fchmod(fileno(fp), S_IRUSR|S_IWUSR | S_IRGRP|S_IWGRP | S_IROTH|S_IWOTH);
       fprintf( fp, "#VENDOR\n"          );
       fwrite_vendor( fp, ch );
 
       if ( ch->first_carrying )
-	{
-	  fwrite_obj( ch, ch->last_carrying, fp, 0, OS_CARRY );
-	}
+        fwrite_obj( ch, ch->last_carrying, fp, 0, OS_CARRY );
 
       fprintf(fp, "#END\n" );
       ferr = ferror(fp);
       fclose( fp );
-
       if (ferr)
         {
           perror(strsave);
@@ -533,4 +508,5 @@ void save_vendor( Character *ch )
     }
 
   re_equip_char( ch );
+  return;
 }

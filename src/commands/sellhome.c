@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_sellhome (Character *ch, char *argument)
+void do_sellhome (CHAR_DATA *ch, char *argument)
 {
   /* Added by Ulysses, Dec '99/Jan '00 */
 

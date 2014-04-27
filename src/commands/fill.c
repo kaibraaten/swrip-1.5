@@ -5,7 +5,7 @@
  * Fill a container
  * Many enhancements added by Thoric (ie: filling non-drink containers)
  */
-void do_fill( Character *ch, char *argument )
+void do_fill( CHAR_DATA *ch, char *argument )
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
@@ -211,7 +211,7 @@ void do_fill( Character *ch, char *argument )
     {
       OBJ_DATA *otmp, *otmp_next;
       char name[MAX_INPUT_LENGTH];
-      Character *gch;
+      CHAR_DATA *gch;
       char *pd;
       bool found = FALSE;
 
@@ -244,7 +244,7 @@ void do_fill( Character *ch, char *argument )
           send_to_char( "You can't do that... yet.\r\n", ch );
           break;
         case ITEM_CORPSE_PC:
-          if ( IsNpc(ch) )
+          if ( is_npc(ch) )
             {
               send_to_char( "You can't do that.\r\n", ch );
               return;
@@ -255,14 +255,14 @@ void do_fill( Character *ch, char *argument )
           pd = one_argument( pd, name );
           pd = one_argument( pd, name );
 
-	  if ( str_cmp( name, ch->name ) && !IsImmortal(ch) )
+	  if ( str_cmp( name, ch->name ) && !is_immortal(ch) )
             {
               bool fGroup;
 
               fGroup = FALSE;
               for ( gch = first_char; gch; gch = gch->next )
                 {
-                  if ( !IsNpc(gch)
+                  if ( !is_npc(gch)
                        &&   is_same_group( ch, gch )
                        &&   !str_cmp( name, gch->name ) )
                     {

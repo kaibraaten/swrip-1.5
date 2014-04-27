@@ -6,7 +6,7 @@ extern char *spell_target_name;
 /*
  * Generic object creating spell                                -Thoric
  */
-ch_ret spell_create_obj( int sn, int level, Character *ch, void *vo )
+ch_ret spell_create_obj( int sn, int level, CHAR_DATA *ch, void *vo )
 {
   SKILLTYPE *skill = get_skilltype(sn);
   int lvl;

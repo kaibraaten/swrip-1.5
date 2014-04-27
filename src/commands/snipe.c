@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_snipe( Character *ch, char *argument )
+void do_snipe( CHAR_DATA *ch, char *argument )
 {
   OBJ_DATA        * wield;
   char              arg[MAX_INPUT_LENGTH];
@@ -11,7 +11,7 @@ void do_snipe( Character *ch, char *argument )
   EXIT_DATA       * pexit;
   ROOM_INDEX_DATA * was_in_room;
   ROOM_INDEX_DATA * to_room;
-  Character       * victim = NULL;
+  CHAR_DATA       * victim = NULL;
   int               the_chance;
   char              buf[MAX_STRING_LENGTH];
   bool              pfound = FALSE;
@@ -37,7 +37,7 @@ void do_snipe( Character *ch, char *argument )
       return;
     }
 
-  if ( !IsNpc(ch) && ch->pcdata->learned[gsn_snipe]> 100)
+  if ( !is_npc(ch) && ch->pcdata->learned[gsn_snipe]> 100)
     max_dist += (ch->pcdata->learned[gsn_snipe]) / 15;
 
   argument = one_argument( argument, arg );
@@ -82,12 +82,12 @@ void do_snipe( Character *ch, char *argument )
       char_to_room( ch, to_room );
 
 
-      if ( IsNpc(ch) && ( victim = get_char_room_mp( ch, arg2 ) ) != NULL )
+      if ( is_npc(ch) && ( victim = get_char_room_mp( ch, arg2 ) ) != NULL )
         {
           pfound = TRUE;
           break;
         }
-      else if ( !IsNpc(ch) && ( victim = get_char_room( ch, arg2 ) ) != NULL )
+      else if ( !is_npc(ch) && ( victim = get_char_room( ch, arg2 ) ) != NULL )
         {
           pfound = TRUE;
           break;
@@ -139,13 +139,13 @@ void do_snipe( Character *ch, char *argument )
       return;
     }
 
-  if ( !IsNpc( victim ) && IS_SET( ch->act, PLR_NICE ) )
+  if ( !is_npc( victim ) && IS_SET( ch->act, PLR_NICE ) )
     {
       send_to_char( "You feel too nice to do that!\r\n", ch );
       return;
     }
 
-  the_chance = IsNpc(ch) ? 100
+  the_chance = is_npc(ch) ? 100
     : (int)  (ch->pcdata->learned[gsn_snipe]) ;
 
   switch ( dir )
@@ -205,7 +205,7 @@ void do_snipe( Character *ch, char *argument )
   char_from_room( ch );
   char_to_room( ch, was_in_room );
 
-  if ( IsNpc(ch) )
+  if ( is_npc(ch) )
     set_wait_state( ch, 1 * PULSE_VIOLENCE );
   else
     {
@@ -216,7 +216,7 @@ void do_snipe( Character *ch, char *argument )
       else
         set_wait_state( ch, 3 * PULSE_PER_SECOND );
     }
-  if ( IsNpc( victim ) && !char_died(victim) )
+  if ( is_npc( victim ) && !char_died(victim) )
     {
       if ( IS_SET( victim->act , ACT_SENTINEL ) )
         {

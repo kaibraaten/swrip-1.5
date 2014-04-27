@@ -4,9 +4,9 @@
 /*
  * Force a level one player to quit.             Gorog
  */
-void do_fquit( Character *ch, char *argument )
+void do_fquit( CHAR_DATA *ch, char *argument )
 {
-  Character *victim;
+  CHAR_DATA *victim;
   char arg1[MAX_INPUT_LENGTH];
   argument = one_argument( argument, arg1 );
 

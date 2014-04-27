@@ -1,13 +1,13 @@
 #include "character.h"
 #include "mud.h"
 
-void do_oassign( Character *ch, char *argument )
+void do_oassign( CHAR_DATA *ch, char *argument )
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
   char arg3[MAX_INPUT_LENGTH];
   short  o_lo, o_hi;
-  Character *victim;
+  CHAR_DATA *victim;
 
   argument = one_argument( argument, arg1 );
   argument = one_argument( argument, arg2 );
@@ -24,7 +24,7 @@ void do_oassign( Character *ch, char *argument )
       send_to_char( "They don't seem to be around.\r\n", ch );
       return;
     }
-  if ( IsNpc( victim ) || GetTrustedLevel( victim ) < LEVEL_SAVIOR )
+  if ( is_npc( victim ) || get_trust( victim ) < LEVEL_SAVIOR )
     {
       send_to_char( "They wouldn't know what to do with an object range.\r\n", ch );
       return;

@@ -1,7 +1,7 @@
 #include "mud.h"
 #include "character.h"
 
-void do_wizhelp( Character *ch, char *argument )
+void do_wizhelp( CHAR_DATA *ch, char *argument )
 {
   const int number_of_columns = 6;
   int col = 0;
@@ -15,7 +15,7 @@ void do_wizhelp( Character *ch, char *argument )
 
       for ( cmd = command_hash[hash]; cmd; cmd = cmd->next )
 	{
-	  if ( cmd->level >= LEVEL_HERO && cmd->level <= GetTrustedLevel( ch ) )
+	  if ( cmd->level >= LEVEL_HERO && cmd->level <= get_trust( ch ) )
 	    {
 	      pager_printf( ch, "%-12s", cmd->name );
 

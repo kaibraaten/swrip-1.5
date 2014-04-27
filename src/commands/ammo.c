@@ -1,7 +1,7 @@
 #include "mud.h"
 #include "character.h"
 
-void do_ammo( Character *ch, char *argument )
+void do_ammo( CHAR_DATA *ch, char *argument )
 {
   OBJ_DATA *wield;
   OBJ_DATA *obj;

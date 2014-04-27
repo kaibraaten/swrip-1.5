@@ -1,13 +1,13 @@
 #include "character.h"
 #include "mud.h"
 
-void do_teach( Character *ch, char *argument )
+void do_teach( CHAR_DATA *ch, char *argument )
 {
   char buf[MAX_STRING_LENGTH];
   int sn;
   char arg[MAX_INPUT_LENGTH];
 
-  if ( IsNpc(ch) )
+  if ( is_npc(ch) )
     return;
 
   argument = one_argument(argument, arg);
@@ -19,7 +19,7 @@ void do_teach( Character *ch, char *argument )
     }
   else
     {
-      Character *victim;
+      CHAR_DATA *victim;
       int adept;
 
       if ( !is_awake(ch) )
@@ -34,7 +34,7 @@ void do_teach( Character *ch, char *argument )
           return;
         }
 
-      if (IsNpc(victim))
+      if (is_npc(victim))
         {
 	  send_to_char( "You can't teach that to them!\r\n", ch );
           return;
@@ -56,7 +56,7 @@ void do_teach( Character *ch, char *argument )
           return;
         }
 
-      if ( GetLevel( victim, skill_table[sn]->guild ) < skill_table[sn]->min_level )
+      if ( get_level( victim, skill_table[sn]->guild ) < skill_table[sn]->min_level )
         {
           act( AT_TELL, "$n isn't ready to learn that yet.",
                victim, NULL, ch, TO_VICT );
@@ -84,7 +84,7 @@ void do_teach( Character *ch, char *argument )
 	}
       else
         {
-          victim->pcdata->learned[sn] += int_app[GetCurrentInt(ch)].learn;
+          victim->pcdata->learned[sn] += int_app[get_curr_int(ch)].learn;
           sprintf( buf, "You teach %s $T.", victim->name );
           act( AT_ACTION, buf,
                ch, NULL, skill_table[sn]->name, TO_CHAR );

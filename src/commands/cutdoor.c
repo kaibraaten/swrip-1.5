@@ -1,17 +1,13 @@
 #include "character.h"
 #include "mud.h"
-#include "algocallbacks.h"
 
-#define AttackCutter AttackBasher
-
-static void ShowFallsOpenMessageToCharacter( void *element, void *userData );
-
-void do_cutdoor( Character *ch, char *argument )
+void do_cutdoor( CHAR_DATA *ch, char *argument )
 {
-  EXIT_DATA *pexit = NULL;
-  char arg [ MAX_INPUT_LENGTH ];
-  OBJ_DATA *wield = NULL;
-  int whichweap = 0;
+  CHAR_DATA *gch;
+  EXIT_DATA *pexit;
+  char       arg [ MAX_INPUT_LENGTH ];
+  OBJ_DATA *wield;
+  int whichweap;
   int SABER = 1;
   int PIKE = 0;
 
@@ -26,7 +22,7 @@ void do_cutdoor( Character *ch, char *argument )
     whichweap = SABER;
   else
     whichweap = PIKE;
-  if ( !IsNpc( ch )
+  if ( !is_npc( ch )
        && ( (whichweap ? ch->pcdata->learned[gsn_lightsabers] <= 0 : ch->pcdata->learned[gsn_force_pikes] <= 0) || ch->pcdata->learned[gsn_cutdoor] <= 0 ))
     {
       send_to_char( "You can not use it well enough to cut a door open.\r\n", ch );
@@ -66,14 +62,14 @@ void do_cutdoor( Character *ch, char *argument )
         keyword = "wall";
       else
         keyword = pexit->keyword;
-      if ( !IsNpc(ch) )
+      if ( !is_npc(ch) )
         the_chance = ch->pcdata->learned[gsn_cutdoor] / 2;
       else
         the_chance = 90;
 
       if ( !IS_SET( pexit->exit_info, EX_BASHPROOF )
            &&   ch->move >= 15
-           &&   number_percent( ) < ( the_chance + 4 * ( GetCurrentStr( ch ) - 19 ) ) )
+           &&   number_percent( ) < ( the_chance + 4 * ( get_curr_str( ch ) - 19 ) ) )
         {
           REMOVE_BIT( pexit->exit_info, EX_CLOSED );
           if ( IS_SET( pexit->exit_info, EX_LOCKED ) )
@@ -88,17 +84,21 @@ void do_cutdoor( Character *ch, char *argument )
                &&   (pexit_rev = pexit->rexit) != NULL
                &&    pexit_rev->to_room == ch->in_room )
             {
-              REMOVE_BIT( pexit_rev->exit_info, EX_CLOSED );
+              CHAR_DATA *rch;
 
+              REMOVE_BIT( pexit_rev->exit_info, EX_CLOSED );
               if ( IS_SET( pexit_rev->exit_info, EX_LOCKED ) )
                 REMOVE_BIT( pexit_rev->exit_info, EX_LOCKED );
-
               SET_BIT( pexit_rev->exit_info, EX_BASHED );
 
-	      List_ForEach( to_room->People, ShowFallsOpenMessageToCharacter, pexit_rev->keyword );
+              for ( rch = to_room->first_person; rch; rch = rch->next_in_room )
+                {
+                  act(AT_SKILL, "The $d falls open!",
+                      rch, NULL, pexit_rev->keyword, TO_CHAR );
+                }
             }
-
           damage( ch, ch, ( ch->max_hit / 20 ), gsn_cutdoor );
+
         }
       else
         {
@@ -119,17 +119,14 @@ void do_cutdoor( Character *ch, char *argument )
       damage( ch, ch, ( ch->max_hit / 20 ) + 10, gsn_cutdoor );
       learn_from_failure(ch, gsn_cutdoor);
     }
-
   if ( !char_died( ch ) )
-    {
-      List_ForEach( ch->in_room->People, AttackCutter, ch );
-    }
-}
-
-static void ShowFallsOpenMessageToCharacter( void *element, void *userData )
-{
-  Character *rch = (Character*) element;
-  const char *keyword = (const char*) userData;
-
-  act( AT_ACTION, "The $d falls open.", rch, NULL, keyword, TO_CHAR );
+    for ( gch = ch->in_room->first_person; gch; gch = gch->next_in_room )
+      {
+        if ( is_awake( gch )
+	     && !gch->fighting
+             && ( is_npc( gch ) && !is_affected_by( gch, AFF_CHARM ) )
+             && ( ch->top_level - gch->top_level <= 4 )
+             && number_bits( 2 ) == 0 )
+          multi_hit( gch, ch, TYPE_UNDEFINED );
+      }
 }

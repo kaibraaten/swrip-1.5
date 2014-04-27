@@ -4,7 +4,7 @@
 #include "ships.h"
 #include "character.h"
 
-void do_tractorbeam(Character *ch, char *argument )
+void do_tractorbeam(CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   int the_chance;
@@ -131,7 +131,7 @@ void do_tractorbeam(Character *ch, char *argument )
             }
         }
 
-      the_chance = IsNpc(ch) ? ch->top_level
+      the_chance = is_npc(ch) ? ch->top_level
         : (int)  (ch->pcdata->learned[gsn_tractorbeams]) ;
 
       if ( number_percent( ) < the_chance )
@@ -177,7 +177,7 @@ void do_tractorbeam(Character *ch, char *argument )
       return;
     }
 
-  the_chance = IsNpc(ch) ? ch->top_level
+  the_chance = is_npc(ch) ? ch->top_level
     : (int)  (ch->pcdata->learned[gsn_tractorbeams]) ;
 
   the_chance += target->sclass - ship->sclass;

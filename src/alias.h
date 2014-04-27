@@ -26,24 +26,22 @@
 #ifndef _SWRIP_ALIAS_H_
 #define _SWRIP_ALIAS_H_
 
-#include <eris/ceris.h>
 #include "types.h"
 
-typedef struct Alias Alias;
+typedef struct alias_type ALIAS_DATA;
+
+struct  alias_type
+{
+  ALIAS_DATA *next;
+  ALIAS_DATA *prev;
+  char *name;
+  char *cmd;
+};
 
 DECLARE_DO_FUN( do_alias );
 
-void FreeAliases( Character *ch );
-bool CheckAlias( Character *ch, char *command, char *argument );
-Alias *FindAlias( const Character *ch, const char *argument );
-CerisList *GetAliases( const Character *ch );
-void AddAlias( Character *ch, Alias *alias );
-void RemoveAlias( Character *ch, Alias *alias );
-void AllocateAliasList( Character *ch );
-const char *GetAliasName( const Alias *alias );
-const char *GetAliasValue( const Alias *alias );
-void SetAliasValue( Alias *alias, const char *value );
-Alias *CreateAlias( const char *name, const char *value );
-void DestroyAlias( Alias *alias );
+void free_aliases( CHAR_DATA *ch );
+bool check_alias( CHAR_DATA *ch, char *command, char *argument );
+ALIAS_DATA *find_alias( const CHAR_DATA *ch, const char *argument );
 
 #endif

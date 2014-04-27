@@ -3,13 +3,13 @@
 
 extern char *spell_target_name;
 
-ch_ret spell_sleep( int sn, int level, Character *ch, void *vo )
+ch_ret spell_sleep( int sn, int level, CHAR_DATA *ch, void *vo )
 {
   AFFECT_DATA af;
   int retcode;
   int sleep_chance;
   int tmp;
-  Character *victim;
+  CHAR_DATA *victim;
   SKILLTYPE *skill = get_skilltype(sn);
 
   if ( ( victim = get_char_room( ch, spell_target_name ) ) == NULL )
@@ -18,7 +18,7 @@ ch_ret spell_sleep( int sn, int level, Character *ch, void *vo )
       return rSPELL_FAILED;
     }
 
-  if ( !IsNpc(victim) && victim->fighting )
+  if ( !is_npc(victim) && victim->fighting )
     {
       send_to_char( "You cannot sleep a fighting player.\r\n", ch );
       return rSPELL_FAILED;
@@ -34,7 +34,7 @@ ch_ret spell_sleep( int sn, int level, Character *ch, void *vo )
     }
 
   if ( SPELL_FLAG(skill, SF_PKSENSITIVE)
-       &&  !IsNpc(ch) && !IsNpc(victim) )
+       &&  !is_npc(ch) && !is_npc(victim) )
     tmp = level;
   else
     tmp = level;
@@ -63,7 +63,7 @@ ch_ret spell_sleep( int sn, int level, Character *ch, void *vo )
   affect_join( victim, &af );
 
   /* Added by Narn at the request of Dominus. */
-  if ( !IsNpc( victim ) )
+  if ( !is_npc( victim ) )
     {
       sprintf( log_buf, "%s has cast sleep on %s.", ch->name, victim->name );
       log_string_plus( log_buf, LOG_NORMAL, ch->top_level );
@@ -82,8 +82,8 @@ ch_ret spell_sleep( int sn, int level, Character *ch, void *vo )
       act( AT_MAGIC, "$n shutsdown.", victim, NULL, NULL, TO_ROOM );
       victim->position = POS_SLEEPING;
     }
-  if ( IsNpc( victim ) )
-    if ( IsNpc( victim ) )
+  if ( is_npc( victim ) )
+    if ( is_npc( victim ) )
       start_hating( victim, ch );
 
   return rNONE;

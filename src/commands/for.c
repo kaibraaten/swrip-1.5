@@ -38,20 +38,18 @@ target in them. Private rooms are not violated.
 #include <string.h>
 #include "mud.h"
 #include "character.h"
-#include "room.h"
 
 extern ROOM_INDEX_DATA *room_index_hash[MAX_KEY_HASH];
 
-static const char *name_expand( Character *ch );
-static bool CharacterHasName( void *element, void *userData );
+static const char * name_expand (CHAR_DATA *ch);
 
-void do_for(Character *ch, char *argument)
+void do_for(CHAR_DATA *ch, char *argument)
 {
   char range[MAX_INPUT_LENGTH];
   char buf[MAX_STRING_LENGTH];
   bool fGods = FALSE, fMortals = FALSE, fMobs = FALSE, fEverywhere = FALSE, found;
   ROOM_INDEX_DATA *room, *old_room;
-  Character *p, *p_prev;  /* p_next to p_prev -- TRI */
+  CHAR_DATA *p, *p_prev;  /* p_next to p_prev -- TRI */
   int i;
 
   argument = one_argument (argument, range);
@@ -104,11 +102,11 @@ void do_for(Character *ch, char *argument)
           if (!(p->in_room) || room_is_private(p, p->in_room) || (p == ch))
             continue;
 
-          if (IsNpc(p) && fMobs)
+          if (is_npc(p) && fMobs)
             found = TRUE;
-          else if (!IsNpc(p) && GetTrustedLevel(p) >= LEVEL_IMMORTAL && fGods)
+          else if (!is_npc(p) && get_trust(p) >= LEVEL_IMMORTAL && fGods)
             found = TRUE;
-          else if (!IsNpc(p) && GetTrustedLevel(p) < LEVEL_IMMORTAL && fMortals)
+          else if (!is_npc(p) && get_trust(p) < LEVEL_IMMORTAL && fMortals)
             found = TRUE;
 
           /* It looks ugly to me.. but it works :) */
@@ -150,39 +148,31 @@ void do_for(Character *ch, char *argument)
       for (i = 0; i < MAX_KEY_HASH; i++) /* run through all the buckets */
         for (room = room_index_hash[i] ; room ; room = room->next)
           {
-	    CerisListIterator *peopleInRoomIterator = NULL;
             found = FALSE;
 
             /* Anyone in here at all? */
             if (fEverywhere) /* Everywhere executes always */
-	      {
-		found = TRUE;
-	      }
-            else if( NumberOfPeopleInRoom( room ) == 0 )
-	      {
-		continue;
-	      }
-
-	    peopleInRoomIterator = CreateListIterator( room->People, ForwardsIterator );
+              found = TRUE;
+            else if (!room->first_person) /* Skip it if room is empty */
+              continue;
+            /* ->people changed to first_person -- TRI */
 
             /* Check if there is anyone here of the requried type */
             /* Stop as soon as a match is found or there are no more ppl in room */
-	    for( ; !ListIterator_IsDone( peopleInRoomIterator ); ListIterator_Next( peopleInRoomIterator ) );
+            /* ->people to ->first_person -- TRI */
+            for (p = room->first_person; p && !found; p = p->next_in_room)
               {
-		p = (Character*) ListIterator_GetData( peopleInRoomIterator );
 
                 if (p == ch) /* do not execute on oneself */
                   continue;
 
-                if (IsNpc(p) && fMobs)
+                if (is_npc(p) && fMobs)
                   found = TRUE;
-                else if (!IsNpc(p) && ( GetTrustedLevel(p) >= LEVEL_IMMORTAL) && fGods)
+                else if (!is_npc(p) && ( get_trust(p) >= LEVEL_IMMORTAL) && fGods)
                   found = TRUE;
-                else if (!IsNpc(p) && ( GetTrustedLevel(p) <= LEVEL_IMMORTAL) && fMortals)
+                else if (!is_npc(p) && ( get_trust(p) <= LEVEL_IMMORTAL) && fMortals)
                   found = TRUE;
 	      } /* for everyone inside the room */
-
-	    DestroyListIterator( peopleInRoomIterator );
 
             if (found && !room_is_private(p, room)) /* Any of the required type here AND room not private? */
               {
@@ -205,13 +195,15 @@ void do_for(Character *ch, char *argument)
 /* Expand the name of a character into a string that identifies THAT
    character within a room. E.g. the second 'guard' -> 2. guard
 */
-static const char *name_expand( Character *ch )
+static const char * name_expand (CHAR_DATA *ch)
 {
   int count = 1;
+  CHAR_DATA *rch;
   char name[MAX_INPUT_LENGTH]; /*  HOPEFULLY no mob has a name longer than THAT */
+
   static char outbuf[MAX_INPUT_LENGTH];
 
-  if (!IsNpc(ch))
+  if (!is_npc(ch))
     return ch->name;
 
   one_argument (ch->name, name); /* copy the first word into name */
@@ -222,16 +214,12 @@ static const char *name_expand( Character *ch )
       return outbuf;
     }
 
-  count += List_CountIf( ch->in_room->People, CharacterHasName, name );
+  /* ->people changed to ->first_person -- TRI */
+  for (rch = ch->in_room->first_person; rch && (rch != ch);rch =
+         rch->next_in_room)
+    if (is_name (name, rch->name))
+      count++;
 
   sprintf (outbuf, "%d.%s", count, name);
   return outbuf;
-}
-
-static bool CharacterHasName( void *element, void *userData )
-{
-  const Character *ch = (Character*) element;
-  const char *name = (char*) userData;
-
-  return is_name( name, ch->name );
 }

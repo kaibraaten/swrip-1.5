@@ -1,11 +1,11 @@
 #include "character.h"
 #include "mud.h"
 
-void do_sneak( Character *ch, char *argument )
+void do_sneak( CHAR_DATA *ch, char *argument )
 {
   AFFECT_DATA af;
 
-  if ( IsNpc(ch) && is_affected_by( ch, AFF_CHARM ) )
+  if ( is_npc(ch) && is_affected_by( ch, AFF_CHARM ) )
     {
       send_to_char( "You can't concentrate enough for that.\r\n", ch );
       return;
@@ -20,10 +20,10 @@ void do_sneak( Character *ch, char *argument )
   send_to_char( "You attempt to move silently.\r\n", ch );
   affect_strip( ch, gsn_sneak );
 
-  if ( IsNpc(ch) || number_percent( ) < ch->pcdata->learned[gsn_sneak] )
+  if ( is_npc(ch) || number_percent( ) < ch->pcdata->learned[gsn_sneak] )
     {
       af.type      = gsn_sneak;
-      af.duration  = GetLevel( ch, SMUGGLING_ABILITY ) * DUR_CONV;
+      af.duration  = get_level( ch, SMUGGLING_ABILITY ) * DUR_CONV;
       af.location  = APPLY_NONE;
       af.modifier  = 0;
       af.bitvector = AFF_SNEAK;

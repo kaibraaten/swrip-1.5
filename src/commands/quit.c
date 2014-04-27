@@ -1,20 +1,20 @@
 #include "character.h"
 #include "mud.h"
 
-void do_quit( Character *ch, char *argument )
+void do_quit( CHAR_DATA *ch, char *argument )
 {
   int x = 0, y = 0, cost = 0;
   int level = 0;
   char qbuf[MAX_INPUT_LENGTH];
   char buf[MAX_INPUT_LENGTH];
 
-  if ( IsNpc(ch) && IS_SET(ch->act, ACT_POLYMORPHED))
+  if ( is_npc(ch) && IS_SET(ch->act, ACT_POLYMORPHED))
     {
       send_to_char("You can't quit while polymorphed.\r\n", ch);
       return;
     }
 
-  if ( IsNpc(ch) )
+  if ( is_npc(ch) )
     return;
 
   if ( ch->position == POS_FIGHTING )
@@ -37,7 +37,7 @@ void do_quit( Character *ch, char *argument )
       return;
     }
 
-  if ( !IsImmortal(ch) && ch->in_room
+  if ( !is_immortal(ch) && ch->in_room
        && !IS_SET( ch->in_room->room_flags, ROOM_HOTEL )
        && !is_not_authed(ch) )
     {
@@ -47,7 +47,7 @@ void do_quit( Character *ch, char *argument )
       return;
     }
 
-  if ( !IsImmortal(ch) && ch->in_room
+  if ( !is_immortal(ch) && ch->in_room
        && IS_SET( ch->in_room->room_flags, ROOM_HOTEL )
        && !IS_SET( ch->in_room->room_flags, ROOM_PLR_HOME )
        && !IS_SET( ch->in_room->room_flags, ROOM_SPACECRAFT )
@@ -104,7 +104,7 @@ void do_quit( Character *ch, char *argument )
     }
 
   saving_char = NULL;
-  level = GetTrustedLevel(ch);
+  level = get_trust(ch);
   extract_char( ch, TRUE );
 
   for ( x = 0; x < MAX_WEAR; x++ )

@@ -3,7 +3,7 @@
 
 extern char *spell_target_name;
 
-ch_ret spell_knock( int sn, int level, Character *ch, void *vo )
+ch_ret spell_knock( int sn, int level, CHAR_DATA *ch, void *vo )
 {
   EXIT_DATA *pexit;
   SKILLTYPE *skill = get_skilltype(sn);

@@ -2,11 +2,11 @@
 #include "mud.h"
 #include "character.h"
 
-void do_homepage( Character *ch, char *argument )
+void do_homepage( CHAR_DATA *ch, char *argument )
 {
   char buf[MAX_STRING_LENGTH];
 
-  if ( IsNpc(ch) )
+  if ( is_npc(ch) )
     return;
 
   if ( argument[0] == '\0' )

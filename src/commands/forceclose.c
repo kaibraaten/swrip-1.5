@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_forceclose( Character *ch, char *argument )
+void do_forceclose( CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   DESCRIPTOR_DATA *d;
@@ -21,7 +21,7 @@ void do_forceclose( Character *ch, char *argument )
     {
       if ( d->descriptor == desc )
         {
-          if ( d->character && GetTrustedLevel(d->character) >= GetTrustedLevel(ch) )
+          if ( d->character && get_trust(d->character) >= get_trust(ch) )
             {
               send_to_char( "They might not like that...\r\n", ch );
               return;

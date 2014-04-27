@@ -1,14 +1,14 @@
 #include "mud.h"
 #include "character.h"
 
-void do_backstab( Character *ch, char *argument )
+void do_backstab( CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  Character *victim;
+  CHAR_DATA *victim;
   OBJ_DATA *obj;
   int percent;
 
-  if ( IsNpc(ch) && is_affected_by( ch, AFF_CHARM ) )
+  if ( is_npc(ch) && is_affected_by( ch, AFF_CHARM ) )
     {
       send_to_char( "You can't do that right now.\r\n", ch );
       return;
@@ -67,13 +67,13 @@ void do_backstab( Character *ch, char *argument )
       return;
     }
 
-  percent = number_percent( ) - (GetCurrentLck(ch) - 14)
-    + (GetCurrentLck(victim) - 13);
+  percent = number_percent( ) - (get_curr_lck(ch) - 14)
+    + (get_curr_lck(victim) - 13);
 
   set_wait_state( ch, skill_table[gsn_backstab]->beats );
 
   if ( !is_awake(victim)
-       ||   IsNpc(ch)
+       ||   is_npc(ch)
        ||   percent < ch->pcdata->learned[gsn_backstab] )
     {
       learn_from_success( ch, gsn_backstab );

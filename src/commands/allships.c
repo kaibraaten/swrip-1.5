@@ -2,7 +2,7 @@
 #include "ships.h"
 #include "character.h"
 
-void do_allships( Character *ch, char *argument )
+void do_allships( CHAR_DATA *ch, char *argument )
 {
   SHIP_DATA *ship;
   char buf[MAX_STRING_LENGTH];
@@ -30,7 +30,7 @@ void do_allships( Character *ch, char *argument )
 
   send_to_pager( "\r\n&WShip                               Owner\r\n", ch );
 
-  if ( IsImmortal( ch ) && !unowned && !checkowner && type < 0)
+  if ( is_immortal( ch ) && !unowned && !checkowner && type < 0)
     for ( ship = first_ship; ship; ship = ship->next )
       if (ship->type == MOB_SHIP && ship->sclass != SHIP_DEBRIS )
         {

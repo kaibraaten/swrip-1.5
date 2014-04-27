@@ -1,14 +1,12 @@
 #include "character.h"
 #include "mud.h"
 
-static bool MobIsTeacher( void *element, void *userData );
-
-void do_practice( Character *ch, char *argument )
+void do_practice( CHAR_DATA *ch, char *argument )
 {
   char buf[MAX_STRING_LENGTH];
   int sn;
 
-  if ( IsNpc(ch) )
+  if ( is_npc(ch) )
     return;
 
   if ( argument[0] == '\0' )
@@ -27,7 +25,7 @@ void do_practice( Character *ch, char *argument )
             continue;
 
           if ( str_cmp(skill_table[sn]->name, "reserved") == 0
-               && ( IsImmortal(ch) ) )
+               && ( is_immortal(ch) ) )
             {
               if ( col % 3 != 0 )
                 send_to_pager( "&r\r\n", ch );
@@ -54,7 +52,7 @@ void do_practice( Character *ch, char *argument )
             continue;
 
           if ( ch->pcdata->learned[sn] <= 0
-	       && GetLevel( ch, skill_table[sn]->guild ) < skill_table[sn]->min_level )
+	       && get_level( ch, skill_table[sn]->guild ) < skill_table[sn]->min_level )
             continue;
 
           if ( ch->pcdata->learned[sn] == 0
@@ -79,8 +77,8 @@ void do_practice( Character *ch, char *argument )
     }
   else
     {
-      Character *mob = NULL;
-      const int adept = 20;
+      CHAR_DATA *mob;
+      int adept;
       bool can_prac = TRUE;
 
       if ( !is_awake(ch) )
@@ -89,13 +87,16 @@ void do_practice( Character *ch, char *argument )
           return;
         }
 
-      mob = (Character*) List_FindIf( ch->in_room->People, MobIsTeacher, NULL );
+      for ( mob = ch->in_room->first_person; mob; mob = mob->next_in_room )
+        if ( is_npc(mob) && IS_SET(mob->act, ACT_PRACTICE) )
+          break;
 
       if ( !mob )
         {
           send_to_char( "You can't do that here.\r\n", ch );
           return;
         }
+
 
       sn = skill_lookup( argument );
 
@@ -113,8 +114,8 @@ void do_practice( Character *ch, char *argument )
           return;
         }
 
-      if ( can_prac &&  !IsNpc(ch)
-           && GetLevel( ch, skill_table[sn]->guild ) < skill_table[sn]->min_level )
+      if ( can_prac &&  !is_npc(ch)
+           && get_level( ch, skill_table[sn]->guild ) < skill_table[sn]->min_level )
         {
           act( AT_TELL, "$n tells you 'You're not ready to learn that yet...'",
                mob, NULL, ch, TO_VICT );
@@ -148,6 +149,8 @@ void do_practice( Character *ch, char *argument )
           return;
         }
 
+      adept = 20;
+
       if ( ch->gold < skill_table[sn]->min_level*10 )
         {
           sprintf ( buf , "$n tells you, 'I charge %d credits to teach that. You don't have enough.'" , skill_table[sn]->min_level * 10 );
@@ -167,7 +170,7 @@ void do_practice( Character *ch, char *argument )
       else
         {
           ch->gold -= skill_table[sn]->min_level*10;
-          ch->pcdata->learned[sn] += int_app[GetCurrentInt(ch)].learn;
+          ch->pcdata->learned[sn] += int_app[get_curr_int(ch)].learn;
           act( AT_ACTION, "You practice $T.",
                ch, NULL, skill_table[sn]->name, TO_CHAR );
           act( AT_ACTION, "$n practices $T.",
@@ -181,11 +184,4 @@ void do_practice( Character *ch, char *argument )
             }
         }
     }
-}
-
-static bool MobIsTeacher( void *element, void *userData )
-{
-  const Character *mob = (Character*) element;
-
-  return IsNpc(mob) && IS_SET(mob->act, ACT_PRACTICE);
 }

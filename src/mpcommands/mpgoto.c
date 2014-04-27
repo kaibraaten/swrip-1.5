@@ -3,7 +3,7 @@
 
 /* lets the mobile goto any location it wishes that is not private */
 
-void do_mpgoto( Character *ch, char *argument )
+void do_mpgoto( CHAR_DATA *ch, char *argument )
 {
   char arg[ MAX_INPUT_LENGTH ];
   ROOM_INDEX_DATA *location;
@@ -11,7 +11,7 @@ void do_mpgoto( Character *ch, char *argument )
   if ( is_affected_by( ch, AFF_CHARM ) )
     return;
 
-  if ( !IsNpc( ch ) )
+  if ( !is_npc( ch ) )
     {
       send_to_char( "Huh?\r\n", ch );
       return;

@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_slist( Character *ch, char *argument )
+void do_slist( CHAR_DATA *ch, char *argument )
 {
   int sn, i;
   char skn[MAX_INPUT_LENGTH];
@@ -11,7 +11,7 @@ void do_slist( Character *ch, char *argument )
   int ability;
   int filter_ability = get_ability(argument);
 
-  if ( IsNpc(ch) )
+  if ( is_npc(ch) )
     {
       return;
     }
@@ -22,7 +22,7 @@ void do_slist( Character *ch, char *argument )
 
   for ( ability = -1 ; ability < MAX_ABILITY ; ability++ )
     {
-      if ( ability == FORCE_ABILITY && !IsImmortal(ch) )
+      if ( ability == FORCE_ABILITY && !is_immortal(ch) )
         {
           continue;
         }

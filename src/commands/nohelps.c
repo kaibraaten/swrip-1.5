@@ -2,7 +2,7 @@
 #include "character.h"
 #include "help.h"
 
-void do_nohelps(Character *ch, char *argument)
+void do_nohelps(CHAR_DATA *ch, char *argument)
 {
   CMDTYPE *command;
   AREA_DATA *tArea;
@@ -11,7 +11,7 @@ void do_nohelps(Character *ch, char *argument)
 
   argument = one_argument( argument, arg );
 
-  if(!IsImmortal(ch) || IsNpc(ch) )
+  if(!is_immortal(ch) || is_npc(ch) )
     {
       send_to_char("Huh?\r\n", ch);
       return;
@@ -36,7 +36,7 @@ void do_nohelps(Character *ch, char *argument)
         {
           for( command = command_hash[hash]; command; command = command->next )
             {
-              if(!GetHelp(ch, command->name) )
+              if(!get_help(ch, command->name) )
 		{
                   ch_printf(ch, "&W%-15s", command->name);
 
@@ -58,7 +58,7 @@ void do_nohelps(Character *ch, char *argument)
 
       for ( sn = 0; sn < top_sn && skill_table[sn] && skill_table[sn]->name; sn++ )
         {
-          if(!GetHelp(ch, skill_table[sn]->name))
+          if(!get_help(ch, skill_table[sn]->name))
             {
               ch_printf(ch, "&W%-20s", skill_table[sn]->name);
 
@@ -79,7 +79,7 @@ void do_nohelps(Character *ch, char *argument)
 
       for (tArea = first_area; tArea;tArea = tArea->next)
         {
-          if(!GetHelp(ch, tArea->name) )
+          if(!get_help(ch, tArea->name) )
             {
               ch_printf(ch, "&W%-35s", tArea->name);
               if ( ++col % 2 == 0 )

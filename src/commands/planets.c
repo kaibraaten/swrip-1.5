@@ -1,8 +1,7 @@
 #include "character.h"
 #include "mud.h"
-#include "clan.h"
 
-void do_planets( Character *ch, char *argument )
+void do_planets( CHAR_DATA *ch, char *argument )
 {
   PLANET_DATA *planet;
   int count = 0;
@@ -19,7 +18,7 @@ void do_planets( Character *ch, char *argument )
                     get_taxes(planet) , planet->base_value);
       pager_printf( ch, "&WPopulation: &O%-5d   &W Pop Support: &R%.1f\r\n",
                     planet->population , planet->pop_support );
-      if ( IsImmortal(ch) )
+      if ( is_immortal(ch) )
         {
           pager_printf( ch, "&WAreas: &G");
           for ( area = planet->first_area ; area ; area = area->next_on_planet )

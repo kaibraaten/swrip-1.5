@@ -5,16 +5,16 @@
 static void remove_area_names (char *inp, char *out);
 static void extract_area_names (char *inp, char *out);
 
-void do_bestowarea( Character *ch, char *argument )
+void do_bestowarea( CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   char buf[MAX_STRING_LENGTH];
-  Character *victim;
+  CHAR_DATA *victim;
   int  arg_len;
 
   argument = one_argument( argument, arg );
 
-  if ( GetTrustedLevel(ch) < LEVEL_SUB_IMPLEM )
+  if ( get_trust (ch) < LEVEL_SUB_IMPLEM )
     {
       send_to_char( "Sorry...\r\n", ch );
       return;
@@ -37,13 +37,13 @@ void do_bestowarea( Character *ch, char *argument )
       return;
     }
 
-  if ( IsNpc( victim ) )
+  if ( is_npc( victim ) )
     {
       send_to_char( "You can't give special abilities to a mob!\r\n", ch );
       return;
     }
 
-  if ( GetTrustedLevel(victim) < LEVEL_IMMORTAL )
+  if ( get_trust(victim) < LEVEL_IMMORTAL )
     {
       send_to_char( "They aren't an immortal.\r\n", ch );
       return;

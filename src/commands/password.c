@@ -3,7 +3,7 @@
 #include "mud.h"
 #include "character.h"
 
-void do_password( Character *ch, char *argument )
+void do_password( CHAR_DATA *ch, char *argument )
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
@@ -12,7 +12,7 @@ void do_password( Character *ch, char *argument )
   char *p;
   char cEnd;
 
-  if ( IsNpc(ch) )
+  if ( is_npc(ch) )
     return;
 
   /*

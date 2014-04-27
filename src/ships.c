@@ -28,9 +28,6 @@
 #include "vector3_aux.h"
 #include "character.h"
 #include "turret.h"
-#include "clan.h"
-#include "algocallbacks.h"
-#include "room.h"
 
 SHIP_DATA *first_ship = NULL;
 SHIP_DATA *last_ship = NULL;
@@ -389,7 +386,7 @@ static void landship( SHIP_DATA *ship, const char *arg )
   SHIP_DATA *target;
   char buf[MAX_STRING_LENGTH];
   int destination;
-  Character *ch;
+  CHAR_DATA *ch;
 
   if ( !str_prefix(arg,ship->spaceobject->landing_site.locationa) )
     destination = ship->spaceobject->landing_site.doca;
@@ -427,7 +424,7 @@ static void landship( SHIP_DATA *ship, const char *arg )
       int xp;
 
       ch = ship->ch;
-      xp =  (exp_level( GetLevel(ch, PILOTING_ABILITY ) + 1) - exp_level( GetLevel(ch, PILOTING_ABILITY)));
+      xp =  (exp_level( get_level(ch, PILOTING_ABILITY ) + 1) - exp_level( get_level(ch, PILOTING_ABILITY)));
       xp = UMIN( get_ship_value( ship ) , xp );
       gain_exp( ch, PILOTING_ABILITY, xp );
       ch_printf( ch, "&WYou gain %ld points of flight experience!\r\n",
@@ -687,7 +684,7 @@ static void makedebris( SHIP_DATA *ship )
   vector_copy( &debris->head, &ship->head );
 }
 
-void dockship( Character *ch, SHIP_DATA *ship )
+void dockship( CHAR_DATA *ch, SHIP_DATA *ship )
 {
 
   if ( ship->statetdocking == SHIP_DISABLED )
@@ -866,31 +863,21 @@ bool check_hostile( SHIP_DATA *ship )
   return FALSE;
 }
 
-static void ShowRemoteRoomToCharacter( void *element, void *userData )
-{
-  Character *rch = (Character*) element;
-  ROOM_INDEX_DATA *to_room = (ROOM_INDEX_DATA*) userData;
-  ROOM_INDEX_DATA *original = rch->in_room;
-
-  char_from_room( rch );
-  char_to_room( rch, to_room );
-  do_look( rch, "auto" );
-  char_from_room( rch );
-  char_to_room( rch, original );
-}
-
-ch_ret drive_ship( Character *ch, SHIP_DATA *ship, EXIT_DATA *pexit, int fall )
+ch_ret drive_ship( CHAR_DATA *ch, SHIP_DATA *ship, EXIT_DATA *pexit, int fall )
 {
   ROOM_INDEX_DATA *in_room;
   ROOM_INDEX_DATA *to_room;
+  ROOM_INDEX_DATA *original;
   char buf[MAX_STRING_LENGTH];
   char *txt;
   char *dtxt;
   ch_ret retcode;
   short door, the_chance;
   bool drunk = FALSE;
+  CHAR_DATA * rch;
+  CHAR_DATA * next_rch;
 
-  if ( !IsNpc( ch ) )
+  if ( !is_npc( ch ) )
     if ( is_drunk( ch ) && ( ch->position != POS_SHOVE )
          && ( ch->position != POS_DRAG ) )
       drunk = TRUE;
@@ -900,6 +887,14 @@ ch_ret drive_ship( Character *ch, SHIP_DATA *ship, EXIT_DATA *pexit, int fall )
       door = number_door();
       pexit = get_exit( get_room_index(ship->location), door );
     }
+
+#ifdef DEBUG
+  if ( pexit )
+    {
+      sprintf( buf, "drive_ship: %s to door %d", ch->name, pexit->vdir );
+      log_string( buf );
+    }
+#endif
 
   retcode = rNONE;
   txt = NULL;
@@ -925,14 +920,14 @@ ch_ret drive_ship( Character *ch, SHIP_DATA *ship, EXIT_DATA *pexit, int fall )
     }
 
   if (  IS_SET(pexit->exit_info, EX_PORTAL)
-        && IsNpc(ch) )
+        && is_npc(ch) )
     {
       act( AT_PLAIN, "Mobs can't use portals.", ch, NULL, NULL, TO_CHAR );
       return rNONE;
     }
 
   if ( IS_SET(pexit->exit_info, EX_NOMOB)
-       && IsNpc(ch) )
+       && is_npc(ch) )
     {
       act( AT_PLAIN, "Mobs can't enter there.", ch, NULL, NULL, TO_CHAR );
       return rNONE;
@@ -971,8 +966,8 @@ ch_ret drive_ship( Character *ch, SHIP_DATA *ship, EXIT_DATA *pexit, int fall )
       return rNONE;
     }
 
-  if ( !IsImmortal(ch)
-       &&  !IsNpc(ch)
+  if ( !is_immortal(ch)
+       &&  !is_npc(ch)
        &&  ch->in_room->area != to_room->area )
     {
       if ( ch->top_level < to_room->area->low_hard_range )
@@ -1058,13 +1053,15 @@ ch_ret drive_ship( Character *ch, SHIP_DATA *ship, EXIT_DATA *pexit, int fall )
 
   if ( to_room->tunnel > 0 )
     {
-      int count = NumberOfPeopleInRoom( to_room );
+      CHAR_DATA *ctmp;
+      int count = 0;
 
-      if ( count >= to_room->tunnel )
-	{
-	  send_to_char( "There is no room for you in there.\r\n", ch );
-	  return rNONE;
-	}
+      for ( ctmp = to_room->first_person; ctmp; ctmp = ctmp->next_in_room )
+        if ( ++count >= to_room->tunnel )
+          {
+            send_to_char( "There is no room for you in there.\r\n", ch );
+            return rNONE;
+          }
     }
 
   if ( fall )
@@ -1086,7 +1083,7 @@ ch_ret drive_ship( Character *ch, SHIP_DATA *ship, EXIT_DATA *pexit, int fall )
               }
       }
 
-  the_chance = IsNpc(ch) ? ch->top_level
+  the_chance = is_npc(ch) ? ch->top_level
     : (int)  (ch->pcdata->learned[gsn_speeders]) ;
   if ( number_percent( ) > the_chance )
     {
@@ -1143,7 +1140,16 @@ ch_ret drive_ship( Character *ch, SHIP_DATA *ship, EXIT_DATA *pexit, int fall )
   sprintf( buf, "%s %s from %s.", ship->name, txt, dtxt );
   echo_to_room( AT_ACTION , get_room_index(ship->location) , buf );
 
-  List_ForEach( ch->in_room->People, ShowRemoteRoomToCharacter, to_room );
+  for ( rch = ch->in_room->last_person ; rch ; rch = next_rch )
+    {
+      next_rch = rch->prev_in_room;
+      original = rch->in_room;
+      char_from_room( rch );
+      char_to_room( rch, to_room );
+      do_look( rch, "auto" );
+      char_from_room( rch );
+      char_to_room( rch, original );
+    }
 
   learn_from_success( ch, gsn_speeders );
   return retcode;
@@ -1166,11 +1172,16 @@ void sound_to_ship( SHIP_DATA *ship, const char *argument )
   for ( roomnum = ship->room.first ; roomnum <= ship->room.last ;roomnum++ )
     {
       ROOM_INDEX_DATA *room = get_room_index( roomnum );
+      CHAR_DATA *vic = NULL;
 
       if ( room == NULL )
         continue;
 
-      List_ForEach( room->People, SendSoundToPlayerCharacter, (char*) argument );
+      for ( vic = room->first_person; vic; vic = vic->next_in_room )
+        {
+          if ( !is_npc(vic) && IS_SET( vic->act, PLR_SOUND ) )
+            send_to_char( argument, vic );
+        }
     }
 }
 
@@ -2122,13 +2133,13 @@ static void fread_ship( SHIP_DATA *ship, FILE *fp )
           KEY( "Cockpit",     ship->room.cockpit,          fread_number( fp ) );
           KEY( "Coseat",     ship->room.coseat,          fread_number( fp ) );
           KEY( "Class",       ship->sclass,            fread_number( fp ) );
-          KEY( "Copilot",     ship->copilot,          fread_string_hash( fp ) );
+          KEY( "Copilot",     ship->copilot,          fread_string( fp ) );
           KEY( "Comm",        ship->comm,      fread_number( fp ) );
           KEY( "Chaff",       ship->chaff,      fread_number( fp ) );
           break;
 
         case 'D':
-          KEY( "Description",   ship->description,      fread_string_hash( fp ) );
+          KEY( "Description",   ship->description,      fread_string( fp ) );
           KEY( "DockingPorts",    ship->dockingports,      fread_number( fp ) );
           break;
 
@@ -2241,7 +2252,7 @@ static void fread_ship( SHIP_DATA *ship, FILE *fp )
           break;
 
         case 'H':
-          KEY( "Home" , ship->home, fread_string_hash( fp ) );
+          KEY( "Home" , ship->home, fread_string( fp ) );
           KEY( "Hyperspeed",   ship->hyperspeed,      fread_number( fp ) );
           KEY( "Hull",      ship->hull,        fread_number( fp ) );
           KEY( "Hanger",  ship->room.hanger,      fread_number( fp ) );
@@ -2273,17 +2284,17 @@ static void fread_ship( SHIP_DATA *ship, FILE *fp )
           break;
 
         case 'N':
-          KEY( "Name",  ship->name,             fread_string_hash( fp ) );
+          KEY( "Name",  ship->name,             fread_string( fp ) );
           KEY( "Navseat",     ship->room.navseat,          fread_number( fp ) );
           break;
 
         case 'O':
-          KEY( "Owner",            ship->owner,            fread_string_hash( fp ) );
+          KEY( "Owner",            ship->owner,            fread_string( fp ) );
           break;
 
         case 'P':
-          KEY( "PersonalName",  ship->personalname,             fread_string_hash( fp ) );
-          KEY( "Pilot",            ship->pilot,            fread_string_hash( fp ) );
+          KEY( "PersonalName",  ship->personalname,             fread_string( fp ) );
+          KEY( "Pilot",            ship->pilot,            fread_string( fp ) );
           KEY( "Pilotseat",     ship->room.pilotseat,          fread_number( fp ) );
           break;
 
@@ -2357,7 +2368,7 @@ static bool load_ship_file( const char *shipfile )
 #endif
 
   ROOM_INDEX_DATA *pRoomIndex = NULL;
-  Clan *clan = NULL;
+  CLAN_DATA *clan = NULL;
 
   CREATE( ship, SHIP_DATA, 1 );
 
@@ -2517,7 +2528,7 @@ static bool load_ship_file( const char *shipfile )
           ship->shield = ship->maxshield;
         }
 
-      if ( ship->type != MOB_SHIP && (clan = GetClan( ship->owner )) != NULL )
+      if ( ship->type != MOB_SHIP && (clan = get_clan( ship->owner )) != NULL )
         {
           if ( ship->sclass <= SHIP_PLATFORM )
             clan->spacecraft++;
@@ -2616,9 +2627,9 @@ void resetship( SHIP_DATA *ship )
 #ifndef NODEATHSHIP
   if ( str_cmp("Trainer", ship->owner) && str_cmp("Public",ship->owner) && ship->type != MOB_SHIP )
     {
-      Clan *clan = NULL;
+      CLAN_DATA *clan = NULL;
 
-      if ( ship->type != MOB_SHIP && (clan = GetClan( ship->owner )) != NULL )
+      if ( ship->type != MOB_SHIP && (clan = get_clan( ship->owner )) != NULL )
         {
           if ( ship->sclass <= SHIP_PLATFORM )
             clan->spacecraft--;
@@ -2971,7 +2982,7 @@ void ship_from_spaceobject( SHIP_DATA *ship , SPACE_DATA *spaceobject )
   ship->spaceobject = NULL;
 }
 
-bool is_rental( Character *ch , SHIP_DATA *ship )
+bool is_rental( CHAR_DATA *ch , SHIP_DATA *ship )
 {
   if ( !str_cmp("Public",ship->owner) )
     return TRUE;
@@ -3011,14 +3022,14 @@ bool candock( const SHIP_DATA *ship )
   return TRUE;
 }
 
-bool check_pilot( Character *ch , SHIP_DATA *ship )
+bool check_pilot( CHAR_DATA *ch , SHIP_DATA *ship )
 {
   if ( !str_cmp(ch->name,ship->owner) || !str_cmp(ch->name,ship->pilot)
        || !str_cmp(ch->name,ship->copilot) || !str_cmp("Public",ship->owner)
        || !str_cmp("Trainer", ship->owner) )
     return TRUE;
 
-  if ( is_clanned( ch ) )
+  if ( !is_npc(ch) && ch->pcdata && ch->pcdata->clan )
     {
       if ( !str_cmp(ch->pcdata->clan->name,ship->owner) )
         {
@@ -3074,7 +3085,7 @@ bool extract_ship( SHIP_DATA *ship )
   return TRUE;
 }
 
-void damage_ship_ch( SHIP_DATA *ship , int min , int max , Character *ch )
+void damage_ship_ch( SHIP_DATA *ship , int min , int max , CHAR_DATA *ch )
 {
   short ionFactor = 1;
   int dmg , shield_dmg;
@@ -3094,7 +3105,7 @@ void damage_ship_ch( SHIP_DATA *ship , int min , int max , Character *ch )
   if ( ions == TRUE )
     ionFactor = 2;
 
-  xp = ( exp_level( GetLevel(ch, PILOTING_ABILITY ) + 1) - exp_level( GetLevel( ch, PILOTING_ABILITY ) ) ) / 25;
+  xp = ( exp_level( get_level(ch, PILOTING_ABILITY ) + 1) - exp_level( get_level( ch, PILOTING_ABILITY ) ) ) / 25;
   xp = UMIN( get_ship_value( ship ) /100 , xp ) ;
   gain_exp( ch, PILOTING_ABILITY, xp );
 
@@ -3160,7 +3171,7 @@ void damage_ship_ch( SHIP_DATA *ship , int min , int max , Character *ch )
       sprintf( logbuf , "%s was just destroyed by %s." , buf, ch->name );
       log_string( logbuf );
 
-      xp =  ( exp_level( GetLevel( ch, PILOTING_ABILITY ) + 1) - exp_level( GetLevel( ch, PILOTING_ABILITY ) ) );
+      xp =  ( exp_level( get_level( ch, PILOTING_ABILITY ) + 1) - exp_level( get_level( ch, PILOTING_ABILITY ) ) );
       xp = UMIN( get_ship_value( ship ) , xp );
       gain_exp( ch, PILOTING_ABILITY, xp);
       ch_printf( ch, "&WYou gain %ld piloting experience!\r\n", xp );
@@ -3269,7 +3280,7 @@ void damage_ship( SHIP_DATA *ship , SHIP_DATA *assaulter, int min , int max )
     echo_to_cockpit( AT_BLOOD+ AT_BLINK , ship , "WARNING! Ship hull severely damaged!" );
 }
 
-void destroy_ship( SHIP_DATA *ship , Character *ch )
+void destroy_ship( SHIP_DATA *ship , CHAR_DATA *ch )
 {
   char buf[MAX_STRING_LENGTH];
   char buf2[MAX_STRING_LENGTH];
@@ -3277,7 +3288,7 @@ void destroy_ship( SHIP_DATA *ship , Character *ch )
   int  roomnum;
   ROOM_INDEX_DATA *room;
   OBJ_DATA *robj;
-  Character *rch;
+  CHAR_DATA *rch;
   SHIP_DATA *lship;
 
   if (!ship)
@@ -3316,11 +3327,10 @@ void destroy_ship( SHIP_DATA *ship , Character *ch )
 
       if (room != NULL)
         {
-          rch = GetFirstPersonInRoom( room );
-
+          rch = room->first_person;
           while ( rch )
             {
-              if ( IsImmortal(rch) )
+              if ( is_immortal(rch) )
                 {
                   char_from_room(rch);
                   char_to_room( rch, get_room_index(wherehome(rch)) );
@@ -3332,8 +3342,7 @@ void destroy_ship( SHIP_DATA *ship , Character *ch )
                   else
                     raw_kill( rch , rch );
                 }
-
-              rch = GetFirstPersonInRoom( room );
+              rch = room->first_person;
             }
 
           for ( robj = room->first_content ; robj ; robj = robj->next_content )
@@ -3385,11 +3394,11 @@ bool ship_to_room(SHIP_DATA *ship , int vnum )
   return TRUE;
 }
 
-bool rent_ship( Character *ch , SHIP_DATA *ship )
+bool rent_ship( CHAR_DATA *ch , SHIP_DATA *ship )
 {
   long price = 0;
 
-  if ( IsNpc ( ch ) )
+  if ( is_npc ( ch ) )
     return FALSE;
 
   price = get_ship_value( ship )/100;

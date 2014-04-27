@@ -3,7 +3,7 @@
 #include "mud.h"
 #include "arena.h"
 
-void do_ahall(Character *ch, char *argument)
+void do_ahall(CHAR_DATA *ch, char *argument)
 {
   char site[MAX_INPUT_LENGTH], format[MAX_INPUT_LENGTH], *timestr;
   char format2[MAX_INPUT_LENGTH];

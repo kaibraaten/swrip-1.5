@@ -1,9 +1,9 @@
 #include "character.h"
 #include "mud.h"
 
-void do_holylight( Character *ch, char *argument )
+void do_holylight( CHAR_DATA *ch, char *argument )
 {
-  if ( IsNpc(ch) )
+  if ( is_npc(ch) )
     return;
 
   if ( IS_SET(ch->act, PLR_HOLYLIGHT) )

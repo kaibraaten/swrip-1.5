@@ -3,17 +3,17 @@
 
 /* prints message only to victim */
 
-void do_mpechoat( Character *ch, char *argument )
+void do_mpechoat( CHAR_DATA *ch, char *argument )
 {
   char       arg[ MAX_INPUT_LENGTH ];
-  Character *victim;
+  CHAR_DATA *victim;
   int        actflags;
   short     color;
 
   if ( is_affected_by( ch, AFF_CHARM ) )
     return;
 
-  if ( !IsNpc( ch ) )
+  if ( !is_npc( ch ) )
     {
       send_to_char( "Huh?\r\n", ch );
       return;

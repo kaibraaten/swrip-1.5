@@ -1,12 +1,12 @@
 #include "character.h"
 #include "mud.h"
 
-void do_savearea( Character *ch, char *argument )
+void do_savearea( CHAR_DATA *ch, char *argument )
 {
   AREA_DATA     *tarea;
   char   filename[256];
 
-  if ( IsNpc(ch) || GetTrustedLevel( ch ) < LEVEL_AVATAR || !ch->pcdata
+  if ( is_npc(ch) || get_trust( ch ) < LEVEL_AVATAR || !ch->pcdata
        ||  ( argument[0] == '\0' && !ch->pcdata->area) )
     {
       send_to_char( "You don't have an assigned area to save.\r\n", ch );
@@ -19,7 +19,7 @@ void do_savearea( Character *ch, char *argument )
     {
       bool found;
 
-      if ( GetTrustedLevel( ch ) < LEVEL_GOD )
+      if ( get_trust( ch ) < LEVEL_GOD )
         {
           send_to_char( "You can only save your own area.\r\n", ch );
           return;

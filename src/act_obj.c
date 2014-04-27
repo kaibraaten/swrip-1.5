@@ -23,8 +23,6 @@
 
 #include "character.h"
 #include "mud.h"
-#include "clan.h"
-#include "room.h"
 
 /*
  * how resistant an object is to damage                         -Thoric
@@ -63,45 +61,29 @@ short get_obj_resistance( const OBJ_DATA *obj )
  */
 obj_ret damage_obj( OBJ_DATA *obj )
 {
-  Character *ch = obj->carried_by;
-  obj_ret objcode = rNONE;
+  CHAR_DATA *ch;
+  obj_ret objcode;
+
+  ch = obj->carried_by;
+  objcode = rNONE;
 
   if (ch && ch->in_room && IS_SET(ch->in_room->room_flags,ROOM_ARENA))
-    {
-      return objcode;
-    }
+    return objcode;
 
   separate_obj( obj );
-
   if ( ch )
-    {
-      act( AT_OBJECT, "($p gets damaged)", ch, obj, NULL, TO_CHAR );
-    }
+    act( AT_OBJECT, "($p gets damaged)", ch, obj, NULL, TO_CHAR );
   else
-    {
-      CerisListIterator *iter = CreateListIterator( obj->in_room->People, ForwardsIterator );
-      
-      if( !ListIterator_IsDone( iter ) )
-	{
-	  ch = (Character*) ListIterator_GetData( iter );
-	}
-
-      DestroyListIterator( iter );
-
-      if ( obj->in_room && ch )
-	{
-	  act( AT_OBJECT, "($p gets damaged)", ch, obj, NULL, TO_ROOM );
-	  act( AT_OBJECT, "($p gets damaged)", ch, obj, NULL, TO_CHAR );
-	  ch = NULL;
-	}
-    }
+    if ( obj->in_room && ( ch = obj->in_room->first_person ) != NULL )
+      {
+        act( AT_OBJECT, "($p gets damaged)", ch, obj, NULL, TO_ROOM );
+        act( AT_OBJECT, "($p gets damaged)", ch, obj, NULL, TO_CHAR );
+        ch = NULL;
+      }
 
   oprog_damage_trigger(ch, obj);
-
   if ( obj_extracted(obj) )
-    {
-      return global_objcode;
-    }
+    return global_objcode;
 
   switch( obj->item_type )
     {
@@ -109,7 +91,6 @@ obj_ret damage_obj( OBJ_DATA *obj )
       make_scraps( obj );
       objcode = rOBJ_SCRAPPED;
       break;
-
     case ITEM_CONTAINER:
       if (--obj->value[3] <= 0)
         {
@@ -117,24 +98,18 @@ obj_ret damage_obj( OBJ_DATA *obj )
           objcode = rOBJ_SCRAPPED;
         }
       break;
-
     case ITEM_ARMOR:
       if ( ch && obj->value[0] >= 1 )
-	{
-	  ch->armor += apply_ac( obj, obj->wear_loc );
-	}
-
+        ch->armor += apply_ac( obj, obj->wear_loc );
       if (--obj->value[0] <= 0)
         {
           make_scraps( obj );
           objcode = rOBJ_SCRAPPED;
         }
-      else if ( ch && obj->value[0] >= 1 )
-	{
+      else
+        if ( ch && obj->value[0] >= 1 )
           ch->armor -= apply_ac( obj, obj->wear_loc );
-	}
       break;
-
     case ITEM_WEAPON:
       if (--obj->value[0] <= 0)
         {
@@ -143,14 +118,13 @@ obj_ret damage_obj( OBJ_DATA *obj )
         }
       break;
     }
-
   return objcode;
 }
 
 /*
  * Save items in a clan storage room                    -Scryn & Thoric
  */
-void save_clan_storeroom( Character *ch, const Clan *clan )
+void save_clan_storeroom( CHAR_DATA *ch, const CLAN_DATA *clan )
 {
   FILE *fp;
   char filename[256];
@@ -215,7 +189,6 @@ void obj_fall( OBJ_DATA *obj, bool through )
        &&   CAN_GO( obj, DIR_DOWN )
        &&   !IS_OBJ_STAT( obj, ITEM_MAGIC ) )
     {
-      Character *firstPersonInRoom = NULL;
 
       pexit = get_exit( obj->in_room, DIR_DOWN );
       to_room = pexit->to_room;
@@ -234,56 +207,41 @@ void obj_fall( OBJ_DATA *obj, bool through )
           return;
         }
 
-      if( NumberOfPeopleInRoom( obj->in_room ) > 0 )
+      if (obj->in_room->first_person)
         {
-	  CerisListIterator *iter = CreateListIterator( obj->in_room->People, ForwardsIterator );
-	  firstPersonInRoom = (Character*) ListIterator_GetData( iter );
-	  DestroyListIterator( iter );
-	}
-
-      if( firstPersonInRoom )
-	{
           act( AT_PLAIN, "$p falls far below...",
-               firstPersonInRoom, obj, NULL, TO_ROOM );
+               obj->in_room->first_person, obj, NULL, TO_ROOM );
           act( AT_PLAIN, "$p falls far below...",
-               firstPersonInRoom, obj, NULL, TO_CHAR );
+               obj->in_room->first_person, obj, NULL, TO_CHAR );
         }
-
       obj_from_room( obj );
       is_falling = TRUE;
       obj = obj_to_room( obj, to_room );
       is_falling = FALSE;
 
-      if (firstPersonInRoom)
+      if (obj->in_room->first_person)
         {
           act( AT_PLAIN, "$p falls from above...",
-               firstPersonInRoom, obj, NULL, TO_ROOM );
+               obj->in_room->first_person, obj, NULL, TO_ROOM );
           act( AT_PLAIN, "$p falls from above...",
-               firstPersonInRoom, obj, NULL, TO_CHAR );
+               obj->in_room->first_person, obj, NULL, TO_CHAR );
         }
 
       if (!IS_SET( obj->in_room->room_flags, ROOM_NOFLOOR ) && through )
         {
-	  int dam = fall_count*obj->weight/2;
-
+          /*            int dam = (int)9.81*sqrt(fall_count*2/9.81)*obj->weight/2;
+           */           int dam = fall_count*obj->weight/2;
           /* Damage players */
-          if ( NumberOfPeopleInRoom( obj->in_room ) > 0 && number_percent() > 15 )
+          if ( obj->in_room->first_person && number_percent() > 15 )
             {
-              Character *vch = NULL;
+              CHAR_DATA *rch;
+              CHAR_DATA *vch = NULL;
               int chcnt = 0;
-	      CerisListIterator *iter = CreateListIterator( obj->in_room->People, ForwardsIterator );
 
-	      for( ; !ListIterator_IsDone( iter ); ListIterator_Next( iter ), chcnt++ )
-		{
-		  Character *current = (Character*) ListIterator_GetData( iter );
-
-		  if ( number_range( 0, chcnt ) == 0 )
-		    {
-		      vch = current;
-		    }
-		}
-
-	      DestroyListIterator( iter );
+              for ( rch = obj->in_room->first_person; rch;
+                    rch = rch->next_in_room, chcnt++ )
+                if ( number_range( 0, chcnt ) == 0 )
+                  vch = rch;
               act( AT_WHITE, "$p falls on $n!", vch, obj, NULL, TO_ROOM );
               act( AT_WHITE, "$p falls on you!", vch, obj, NULL, TO_CHAR );
               damage( vch, vch, dam*vch->top_level, TYPE_UNDEFINED );
@@ -295,32 +253,28 @@ void obj_fall( OBJ_DATA *obj, bool through )
             case ITEM_ARMOR:
               if ( (obj->value[0] - dam) <= 0 )
                 {
-                  if (firstPersonInRoom)
+                  if (obj->in_room->first_person)
                     {
                       act( AT_PLAIN, "$p is destroyed by the fall!",
-                           firstPersonInRoom, obj, NULL, TO_ROOM );
+                           obj->in_room->first_person, obj, NULL, TO_ROOM );
                       act( AT_PLAIN, "$p is destroyed by the fall!",
-                           firstPersonInRoom, obj, NULL, TO_CHAR );
+                           obj->in_room->first_person, obj, NULL, TO_CHAR );
                     }
-
                   make_scraps(obj);
                 }
               else
-		{
-		  obj->value[0] -= dam;
-		}
+                obj->value[0] -= dam;
               break;
             default:
               if ( (dam*15) > get_obj_resistance(obj) )
                 {
-                  if (firstPersonInRoom)
+                  if (obj->in_room->first_person)
                     {
                       act( AT_PLAIN, "$p is destroyed by the fall!",
-                           firstPersonInRoom, obj, NULL, TO_ROOM );
+                           obj->in_room->first_person, obj, NULL, TO_ROOM );
                       act( AT_PLAIN, "$p is destroyed by the fall!",
-                           firstPersonInRoom, obj, NULL, TO_CHAR );
+                           obj->in_room->first_person, obj, NULL, TO_CHAR );
                     }
-
                   make_scraps(obj);
                 }
               break;
@@ -331,7 +285,7 @@ void obj_fall( OBJ_DATA *obj, bool through )
   return;
 }
 
-bool remove_obj( Character *ch, int iWear, bool fReplace )
+bool remove_obj( CHAR_DATA *ch, int iWear, bool fReplace )
 {
   OBJ_DATA *obj, *tmpobj;
 

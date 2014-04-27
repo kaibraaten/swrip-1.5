@@ -24,7 +24,6 @@
 #include <ctype.h>
 #include <string.h>
 #include "mud.h"
-#include "clan.h"
 
 PLANET_DATA * first_planet = NULL;
 PLANET_DATA * last_planet = NULL;
@@ -155,7 +154,7 @@ static void fread_planet( PLANET_DATA *planet, FILE *fp )
             {
               char aName[MAX_STRING_LENGTH];
               AREA_DATA *pArea;
-              char *tmp = fread_string_hash(fp);
+              char *tmp = fread_string(fp);
 
               sprintf (aName, "%s", tmp);
               STRFREE(tmp);
@@ -198,23 +197,23 @@ static void fread_planet( PLANET_DATA *planet, FILE *fp )
         case 'G':
           if ( !str_cmp( word, "GovernedBy" ) )
             {
-              planet->governed_by = GetClan( fread_string_hash(fp) );
+              planet->governed_by = get_clan ( fread_string(fp) );
               fMatch = TRUE;
             }
           break;
 
         case 'N':
-          KEY( "Name",  planet->name, fread_string_hash( fp ) );
+          KEY( "Name",  planet->name, fread_string( fp ) );
           break;
 
         case 'P':
-          KEY( "PopSupport", planet->pop_support, fread_float( fp ) );
+          KEY( "PopSupport", planet->pop_support, fread_number( fp ) );
           break;
 
         case 'S':
           if ( !str_cmp( word, "spaceobject" ) )
             {
-              char *tmp = fread_string_hash(fp);
+              char *tmp = fread_string(fp);
 
               planet->spaceobject = spaceobject_from_name( tmp );
               STRFREE(tmp);

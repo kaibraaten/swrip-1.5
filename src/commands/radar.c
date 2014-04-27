@@ -3,7 +3,7 @@
 #include "mud.h"
 #include "vector3_aux.h"
 
-void do_radar( Character *ch, char *argument )
+void do_radar( CHAR_DATA *ch, char *argument )
 {
   SHIP_DATA *target;
   int the_chance;
@@ -42,7 +42,7 @@ void do_radar( Character *ch, char *argument )
       return;
     }
 
-  the_chance = IsNpc(ch) ? ch->top_level
+  the_chance = is_npc(ch) ? ch->top_level
     : (int)  (ch->pcdata->learned[gsn_navigation]) ;
   if ( number_percent( ) > the_chance )
     {

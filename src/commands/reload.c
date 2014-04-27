@@ -3,9 +3,8 @@
 #include "ships.h"
 #include "character.h"
 #include "turret.h"
-#include "clan.h"
 
-void do_reload( Character *ch, char *argument )
+void do_reload( CHAR_DATA *ch, char *argument )
 {
   /* Reload code added by Darrik Vequir */
   char arg[MAX_INPUT_LENGTH];
@@ -46,7 +45,7 @@ void do_reload( Character *ch, char *argument )
 	}
     }
 
-  if ( ch->pcdata && is_clanned( ch ) && !str_cmp(ch->pcdata->clan->name,ship->owner) )
+  if ( ch->pcdata && ch->pcdata->clan && !str_cmp(ch->pcdata->clan->name,ship->owner) )
     {
       if ( ch->pcdata->clan->funds < price )
         {

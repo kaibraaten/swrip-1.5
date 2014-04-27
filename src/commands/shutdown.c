@@ -3,10 +3,10 @@
 #include "ships.h"
 #include "character.h"
 
-void do_shutdown( Character *ch, char *argument )
+void do_shutdown( CHAR_DATA *ch, char *argument )
 {
   char buf[MAX_STRING_LENGTH];
-  Character *vch;
+  CHAR_DATA *vch;
   SHIP_DATA *ship;
 
   if ( str_cmp( argument, "mud now" ) && str_cmp(argument, "nosave") )
@@ -27,7 +27,7 @@ void do_shutdown( Character *ch, char *argument )
   if ( str_cmp(argument, "nosave") )
     {
       for ( vch = first_char; vch; vch = vch->next )
-        if ( !IsNpc( vch ) )
+        if ( !is_npc( vch ) )
           save_char_obj( vch );
       for ( ship = first_ship; ship; ship = ship->next )
         save_ship( ship );

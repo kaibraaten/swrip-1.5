@@ -2,10 +2,10 @@
 #include "mud.h"
 #include "character.h"
 
-void do_showstatistic_web( Character *ch, char *argument )
+void do_showstatistic_web( CHAR_DATA *ch, char *argument )
 {
   PC_DATA *pcdata;
-  Character *raceCh;
+  CHAR_DATA *raceCh;
   int race, pclass, iR, iC, iC2;
   bool chk_race = FALSE;
   FILE *whoout;
@@ -33,7 +33,7 @@ void do_showstatistic_web( Character *ch, char *argument )
       return;
     }
 
-  CREATE( raceCh, Character, 1 );
+  CREATE( raceCh, CHAR_DATA, 1 );
   raceCh->top_level = 1;
   raceCh->trust = 0;
   CREATE( pcdata, PC_DATA, 1 );

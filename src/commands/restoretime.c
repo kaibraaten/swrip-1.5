@@ -1,7 +1,7 @@
 #include "mud.h"
 #include "character.h"
 
-void do_restoretime( Character *ch, char *argument )
+void do_restoretime( CHAR_DATA *ch, char *argument )
 {
   long int time_passed;
   int hour, minute;

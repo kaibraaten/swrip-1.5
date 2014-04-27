@@ -9,10 +9,10 @@ static struct field_struct gr_fd[GR_NUM_FIELDS];
 static char *gr_strc (char c);
 static bool gr_eval_and (GR_STRUCT r, int op_num);
 static bool gr_eval_or (GR_STRUCT r, int op_num);
-static bool gr_parse_operator (Character *ch, const char *pch, int *op_num);
+static bool gr_parse_operator (CHAR_DATA *ch, const char *pch, int *op_num);
 static void gr_init (void);
-static bool gr_parse_operand (Character *ch, const char *arg, bool *or_sw, int *op_num);
-static void gr_read( Character *ch, int op_num, bool or_sw, int dis_num);
+static bool gr_parse_operand (CHAR_DATA *ch, const char *arg, bool *or_sw, int *op_num);
+static void gr_read( CHAR_DATA *ch, int op_num, bool or_sw, int dis_num);
 
 /*
  * GRUB (Gorog's Revenge on Unruly Bastards)
@@ -30,7 +30,7 @@ static void gr_read( Character *ch, int op_num, bool or_sw, int dis_num);
  * It then compares the appropriate values from the input record to
  * each operand in the operand table.
  */
-void do_grub (Character *ch, char *argument)
+void do_grub (CHAR_DATA *ch, char *argument)
 {
   char arg1[MAX_STRING_LENGTH];
   bool or_sw = FALSE;                       /* or search criteria           */
@@ -218,7 +218,7 @@ static void gr_init (void)
 /*
  *  Store operand's operator and value in operand table.
  */
-static bool gr_parse_operator (Character *ch, const char *pch, int *op_num)
+static bool gr_parse_operator (CHAR_DATA *ch, const char *pch, int *op_num)
 {
   enum op_type {EQ, NE, SU, GE, GT, LE, LT};
   int  cou;
@@ -262,7 +262,7 @@ static bool gr_parse_operator (Character *ch, const char *pch, int *op_num)
 /*
  * Store operand's field name in the operand table.
  */
-static bool gr_parse_operand (Character *ch, const char *arg, bool *or_sw, int *op_num)
+static bool gr_parse_operand (CHAR_DATA *ch, const char *arg, bool *or_sw, int *op_num)
 {
   int cou;
 
@@ -285,7 +285,7 @@ static bool gr_parse_operand (Character *ch, const char *arg, bool *or_sw, int *
 /*
  * Read the input file to select records matching the search criteria
  */
-static void gr_read( Character *ch, int op_num, bool or_sw, int dis_num)
+static void gr_read( CHAR_DATA *ch, int op_num, bool or_sw, int dis_num)
 {
   FILE *fp;
   bool res;                                 /* result of a boolean exp   */

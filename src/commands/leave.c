@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_leave( Character *ch, char *argument )
+void do_leave( CHAR_DATA *ch, char *argument )
 {
   EXIT_DATA *pexit = NULL;
 

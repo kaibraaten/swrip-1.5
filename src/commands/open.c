@@ -1,8 +1,7 @@
 #include "mud.h"
 #include "character.h"
-#include "algocallbacks.h"
 
-void do_open( Character *ch, char *argument )
+void do_open( CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   OBJ_DATA *obj = NULL;
@@ -50,7 +49,14 @@ void do_open( Character *ch, char *argument )
           if ( (pexit_rev = pexit->rexit) != NULL
                && pexit_rev->to_room == ch->in_room )
             {
-	      List_ForEach( pexit->to_room->People, ShowOpenDoorMessageToCharacter, pexit_rev->keyword );
+              CHAR_DATA *rch = NULL;
+
+              for ( rch = pexit->to_room->first_person; rch; rch = rch->next_in_room )
+		{
+		  act( AT_ACTION, "The $d opens.",
+		       rch, NULL, pexit_rev->keyword, TO_CHAR );
+		}
+
               sound_to_room( pexit->to_room , "!!SOUND(door)" );
             }
 

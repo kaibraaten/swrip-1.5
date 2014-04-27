@@ -3,7 +3,7 @@
 #include "mud.h"
 #include "character.h"
 
-void do_drive( Character *ch, char *argument )
+void do_drive( CHAR_DATA *ch, char *argument )
 {
   int dir;
   SHIP_DATA *ship, *target;

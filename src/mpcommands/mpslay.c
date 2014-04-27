@@ -4,7 +4,7 @@
 /*
  * syntax: mpslay (character)
  */
-void do_mp_slay( Character *ch, char *argument )
+void do_mp_slay( CHAR_DATA *ch, char *argument )
 {
   if( ch->top_level >= LEVEL_GOD )
     {

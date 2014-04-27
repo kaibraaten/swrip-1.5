@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_immtalk( Character *ch, char *argument )
+void do_immtalk( CHAR_DATA *ch, char *argument )
 {
   if (is_not_authed(ch))
     {

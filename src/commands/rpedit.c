@@ -2,7 +2,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_rpedit( Character *ch, char *argument )
+void do_rpedit( CHAR_DATA *ch, char *argument )
 {
   char arg1 [MAX_INPUT_LENGTH];
   char arg2 [MAX_INPUT_LENGTH];
@@ -10,7 +10,7 @@ void do_rpedit( Character *ch, char *argument )
   MPROG_DATA *mprog, *mprg, *mprg_next;
   int value, mptype, cnt;
 
-  if ( IsNpc( ch ) )
+  if ( is_npc( ch ) )
     {
       send_to_char( "Mob's can't rpedit\r\n", ch );
       return;

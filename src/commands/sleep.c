@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_sleep( Character *ch, char *argument )
+void do_sleep( CHAR_DATA *ch, char *argument )
 {
   OBJ_DATA *obj = NULL;
 

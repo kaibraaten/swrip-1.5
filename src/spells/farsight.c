@@ -3,11 +3,11 @@
 
 extern char *spell_target_name;
 
-ch_ret spell_farsight( int sn, int level, Character *ch, void *vo )
+ch_ret spell_farsight( int sn, int level, CHAR_DATA *ch, void *vo )
 {
   ROOM_INDEX_DATA *location;
   ROOM_INDEX_DATA *original;
-  Character *victim;
+  CHAR_DATA *victim;
   SKILLTYPE *skill = get_skilltype(sn);
   int saving;
 
@@ -26,8 +26,8 @@ ch_ret spell_farsight( int sn, int level, Character *ch, void *vo )
        ||   IS_SET(victim->in_room->room_flags, ROOM_PRIVATE)
        ||   IS_SET(victim->in_room->room_flags, ROOM_SOLITARY)
        ||   IS_SET(victim->in_room->room_flags, ROOM_PROTOTYPE)
-       ||       (IsNpc(victim) && IS_SET(victim->act, ACT_PROTOTYPE))
-       ||  (IsNpc(victim) && saves_spell_staff( level, victim ))
+       ||       (is_npc(victim) && IS_SET(victim->act, ACT_PROTOTYPE))
+       ||  (is_npc(victim) && saves_spell_staff( level, victim ))
        || saving <= 50 )
     {
       failed_casting( skill, ch, victim, NULL );

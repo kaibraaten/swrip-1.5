@@ -1,6 +1,6 @@
 #include "mud.h"
 
-void do_socials( Character *ch, char *argument )
+void do_socials( CHAR_DATA *ch, char *argument )
 {
   int iHash;
   int col = 0;

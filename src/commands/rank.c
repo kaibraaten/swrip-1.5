@@ -1,9 +1,9 @@
 #include "character.h"
 #include "mud.h"
 
-void do_rank( Character *ch, char *argument )
+void do_rank( CHAR_DATA *ch, char *argument )
 {
-  if ( IsNpc(ch) )
+  if ( is_npc(ch) )
     return;
 
   if ( !argument || argument[0] == '\0' )

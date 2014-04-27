@@ -2,14 +2,14 @@
 #include "mud.h"
 #include "ships.h"
 
-void do_transship(Character *ch, char *argument)
+void do_transship(CHAR_DATA *ch, char *argument)
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
   int arg3, origShipyard;
   SHIP_DATA *ship;
 
-  if ( IsNpc( ch ) )
+  if ( is_npc( ch ) )
     {
       send_to_char( "Huh?\r\n", ch );
       return;

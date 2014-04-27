@@ -1,11 +1,11 @@
 #include "mud.h"
 
-static void rpfind_help (Character *ch);
+static void rpfind_help (CHAR_DATA *ch);
 
 /*
  * Search rooms for room progs containing a specified text string.
  */
-void do_rpfind( Character *ch, char *argument )   /* Gorog */
+void do_rpfind( CHAR_DATA *ch, char *argument )   /* Gorog */
 {
   ROOM_INDEX_DATA *   pRoom;
   MPROG_DATA      *   pProg;
@@ -79,7 +79,7 @@ void do_rpfind( Character *ch, char *argument )   /* Gorog */
 /*
  * Displays the help screen for the "rpfind" command
  */
-static void rpfind_help (Character *ch)
+static void rpfind_help (CHAR_DATA *ch)
 {
   send_to_char( "Syntax:\r\n", ch);
   send_to_char( "rpfind n lo_vnum hi_vnum text \r\n"

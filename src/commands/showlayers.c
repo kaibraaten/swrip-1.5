@@ -10,7 +10,7 @@ extern OBJ_INDEX_DATA *obj_index_hash[MAX_KEY_HASH];
  * doesn't list 1,000 lines for each shroud - just one line for the shroud.
  */
 
-void do_showlayers( Character *ch, char *argument )
+void do_showlayers( CHAR_DATA *ch, char *argument )
 {
   OBJ_INDEX_DATA *pObj;
   char arg1[MAX_STRING_LENGTH];

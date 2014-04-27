@@ -1,11 +1,11 @@
 #include "character.h"
 #include "mud.h"
 
-void do_seduce ( Character *ch , char *argument )
+void do_seduce ( CHAR_DATA *ch , char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   char buf[MAX_INPUT_LENGTH];
-  Character *victim;
+  CHAR_DATA *victim;
 
   one_argument( argument, arg );
 
@@ -37,7 +37,7 @@ void do_seduce ( Character *ch , char *argument )
 
   set_wait_state( ch, skill_table[gsn_seduce]->beats );
 
-  if ( victim->top_level - GetCurrentCha(ch) > ch->pcdata->learned[gsn_seduce] )
+  if ( victim->top_level - get_curr_cha(ch) > ch->pcdata->learned[gsn_seduce] )
     {
       send_to_char("You failed.\r\n", ch);
       sprintf(buf, "%s failed to seduce you.", ch->name);

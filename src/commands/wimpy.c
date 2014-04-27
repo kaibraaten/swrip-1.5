@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_wimpy( Character *ch, char *argument )
+void do_wimpy( CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   int wimpy;

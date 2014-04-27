@@ -2,10 +2,10 @@
 #include "mud.h"
 #include "character.h"
 
-void do_reboot( Character *ch, char *argument )
+void do_reboot( CHAR_DATA *ch, char *argument )
 {
   char buf[MAX_STRING_LENGTH];
-  Character *vch;
+  CHAR_DATA *vch;
   SHIP_DATA *ship;
 
   if ( str_cmp( argument, "mud now" )
@@ -31,7 +31,7 @@ void do_reboot( Character *ch, char *argument )
   /* Save all characters before booting. */
   if ( str_cmp(argument, "nosave") )
     for ( vch = first_char; vch; vch = vch->next )
-      if ( !IsNpc( vch ) )
+      if ( !is_npc( vch ) )
         save_char_obj( vch );
 
   for ( ship = first_ship; ship; ship = ship->next )

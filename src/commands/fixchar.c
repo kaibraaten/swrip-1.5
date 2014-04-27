@@ -1,10 +1,10 @@
 #include "character.h"
 #include "mud.h"
 
-void do_fixchar( Character *ch, char *argument )
+void do_fixchar( CHAR_DATA *ch, char *argument )
 {
   char name[MAX_STRING_LENGTH];
-  Character *victim;
+  CHAR_DATA *victim;
 
   one_argument( argument, name );
   if ( name[0] == '\0' )

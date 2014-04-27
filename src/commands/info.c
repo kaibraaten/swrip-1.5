@@ -3,7 +3,7 @@
 #include "mud.h"
 #include "ships.h"
 
-void do_info(Character *ch, char *argument )
+void do_info(CHAR_DATA *ch, char *argument )
 {
   SHIP_DATA *ship;
   SHIP_DATA *target;

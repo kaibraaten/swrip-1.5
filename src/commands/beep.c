@@ -1,9 +1,9 @@
 #include "character.h"
 #include "mud.h"
 
-void do_beep( Character *ch, char *argument )
+void do_beep( CHAR_DATA *ch, char *argument )
 {
-  Character *victim = NULL;
+  CHAR_DATA *victim = NULL;
   char arg[MAX_STRING_LENGTH];
   bool ch_comlink = FALSE, victim_comlink = FALSE;
 
@@ -16,7 +16,7 @@ void do_beep( Character *ch, char *argument )
       return;
     }
 
-  if (!IsNpc(ch)
+  if (!is_npc(ch)
       && ( IS_SET(ch->act, PLR_SILENCE)
            ||   IS_SET(ch->act, PLR_NO_TELL) ) )
     {
@@ -31,23 +31,23 @@ void do_beep( Character *ch, char *argument )
     }
 
   if ( ( victim = get_char_world( ch, arg ) ) == NULL
-       || ( IsNpc(victim) && victim->in_room != ch->in_room )
-       || (!is_not_authed(ch) && is_not_authed(victim) && !IsImmortal(ch) ) )
+       || ( is_npc(victim) && victim->in_room != ch->in_room )
+       || (!is_not_authed(ch) && is_not_authed(victim) && !is_immortal(ch) ) )
     {
       send_to_char( "They aren't here.\r\n", ch );
       return;
     }
 
-  if ( IsImmortal( ch ) )
+  if ( is_immortal( ch ) )
     {
       ch_comlink = TRUE;
       victim_comlink = TRUE;
     }
 
-  if ( IsImmortal( victim ) )
+  if ( is_immortal( victim ) )
     victim_comlink = TRUE;
 
-  ch_comlink = HasComlink( ch );
+  ch_comlink = has_comlink( ch );
 
   if ( !ch_comlink )
     {
@@ -57,7 +57,7 @@ void do_beep( Character *ch, char *argument )
 
   if( !victim_comlink )
     {
-      victim_comlink = HasComlink( ch );
+      victim_comlink = has_comlink( ch );
     }
 
   if ( !victim_comlink )
@@ -66,39 +66,39 @@ void do_beep( Character *ch, char *argument )
       return;
     }
 
-  if (is_not_authed(ch) && !is_not_authed(victim) && !IsImmortal(victim) )
+  if (is_not_authed(ch) && !is_not_authed(victim) && !is_immortal(victim) )
     {
       send_to_char( "They can't hear you because you are not authorized.\r\n", ch);
       return;
     }
 
-  if ( !IsNpc( victim ) && ( victim->switched )
-       && ( GetTrustedLevel( ch ) > LEVEL_AVATAR ) )
+  if ( !is_npc( victim ) && ( victim->switched )
+       && ( get_trust( ch ) > LEVEL_AVATAR ) )
     {
       send_to_char( "That player is switched.\r\n", ch );
       return;
     }
-  else if ( !IsNpc( victim ) && ( !victim->desc ) )
+  else if ( !is_npc( victim ) && ( !victim->desc ) )
     {
       send_to_char( "That player is link-dead.\r\n", ch );
       return;
     }
 
   if ( IS_SET( victim->deaf, CHANNEL_TELLS )
-       && ( !IsImmortal( ch ) || ( GetTrustedLevel( ch ) < GetTrustedLevel( victim ) ) ) )
+       && ( !is_immortal( ch ) || ( get_trust( ch ) < get_trust( victim ) ) ) )
     {
       act( AT_PLAIN, "$E has $S tells turned off.", ch, NULL, victim,
            TO_CHAR );
       return;
     }
 
-  if ( !IsNpc (victim) && ( IS_SET (victim->act, PLR_SILENCE ) ) )
+  if ( !is_npc (victim) && ( IS_SET (victim->act, PLR_SILENCE ) ) )
     {
       send_to_char( "That player is silenced.  They will receive your message but can not respond.\r\n", ch );
     }
 
-  if ( (!IsImmortal(ch) && !is_awake(victim) )
-       || (!IsNpc(victim)&&IS_SET(victim->in_room->room_flags, ROOM_SILENCE ) ) )
+  if ( (!is_immortal(ch) && !is_awake(victim) )
+       || (!is_npc(victim)&&IS_SET(victim->in_room->room_flags, ROOM_SILENCE ) ) )
     {
       act( AT_PLAIN, "$E can't hear you.", ch, 0, victim, TO_CHAR );
       return;
@@ -106,7 +106,7 @@ void do_beep( Character *ch, char *argument )
 
   if ( victim->desc
        &&   victim->desc->connection_state == CON_EDITING
-       &&   GetTrustedLevel(ch) < LEVEL_GOD )
+       &&   get_trust(ch) < LEVEL_GOD )
     {
       act( AT_PLAIN, "$E is currently in a writing buffer. Please try again in a few minutes.", ch, 0, victim, TO_CHAR );
       return;
@@ -116,7 +116,7 @@ void do_beep( Character *ch, char *argument )
   send_to_char("\a",victim);
 
   if ( knows_language( victim, ch->speaking, ch )
-       ||  (IsNpc(ch) && !ch->speaking) )
+       ||  (is_npc(ch) && !ch->speaking) )
     act( AT_WHITE, "$n beeps: '$t'", ch, argument, victim, TO_VICT );
   else
     act( AT_WHITE, "$n beeps: '$t'", ch, scramble(argument, ch->speaking), victim, TO_VICT );

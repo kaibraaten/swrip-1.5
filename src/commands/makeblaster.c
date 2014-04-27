@@ -2,7 +2,7 @@
 #include "mud.h"
 #include "character.h"
 
-void do_makeblaster( Character *ch, char *argument )
+void do_makeblaster( CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   char buf[MAX_STRING_LENGTH];
@@ -90,7 +90,7 @@ void do_makeblaster( Character *ch, char *argument )
           return;
         }
 
-      the_chance = IsNpc(ch) ? ch->top_level
+      the_chance = is_npc(ch) ? ch->top_level
         : (int) (ch->pcdata->learned[gsn_makeblaster]);
       if ( number_percent( ) < the_chance )
         {
@@ -121,7 +121,7 @@ void do_makeblaster( Character *ch, char *argument )
 
   ch->substate = SUB_NONE;
 
-  level = IsNpc(ch) ? ch->top_level : (int) (ch->pcdata->learned[gsn_makeblaster]);
+  level = is_npc(ch) ? ch->top_level : (int) (ch->pcdata->learned[gsn_makeblaster]);
   vnum = 10420;
 
   if ( ( pObjIndex = get_obj_index( vnum ) ) == NULL )
@@ -201,7 +201,7 @@ void do_makeblaster( Character *ch, char *argument )
         }
     }
 
-  the_chance = IsNpc(ch) ? ch->top_level
+  the_chance = is_npc(ch) ? ch->top_level
     : (int) (ch->pcdata->learned[gsn_makeblaster]) ;
 
   if ( number_percent( ) > the_chance*2  || ( !checktool ) || ( !checkdura ) || ( !checkbatt ) || ( !checkoven )  || ( !checkcond ) || ( !checkcirc) )
@@ -280,7 +280,7 @@ void do_makeblaster( Character *ch, char *argument )
   {
     long xpgain;
 
-    xpgain = UMIN( obj->cost*50 ,( exp_level(GetLevel(ch, ENGINEERING_ABILITY ) + 1) - exp_level(GetLevel( ch, ENGINEERING_ABILITY ) ) ) );
+    xpgain = UMIN( obj->cost*50 ,( exp_level(get_level(ch, ENGINEERING_ABILITY ) + 1) - exp_level(get_level( ch, ENGINEERING_ABILITY ) ) ) );
     gain_exp(ch, ENGINEERING_ABILITY, xpgain );
     ch_printf( ch , "You gain %d engineering experience.", xpgain );
   }

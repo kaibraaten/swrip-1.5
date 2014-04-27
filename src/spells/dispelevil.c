@@ -1,13 +1,13 @@
 #include "character.h"
 #include "mud.h"
 
-ch_ret spell_dispel_evil( int sn, int level, Character *ch, void *vo )
+ch_ret spell_dispel_evil( int sn, int level, CHAR_DATA *ch, void *vo )
 {
-  Character *victim = (Character *) vo;
+  CHAR_DATA *victim = (CHAR_DATA *) vo;
   int dam;
   SKILLTYPE *skill = get_skilltype(sn);
 
-  if ( !IsNpc(ch) && is_evil(ch) )
+  if ( !is_npc(ch) && is_evil(ch) )
     victim = ch;
 
   if ( is_good(victim) )

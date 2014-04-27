@@ -4,12 +4,12 @@
 /*
  * Withdraw some gold from the current area's economy           -Thoric
  */
-void do_mp_withdraw( Character *ch, char *argument )
+void do_mp_withdraw( CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_STRING_LENGTH];
   int gold;
 
-  if ( !IsNpc(ch) )
+  if ( !is_npc(ch) )
     {
       send_to_char("Huh?\r\n", ch);
       return;

@@ -1,19 +1,16 @@
 #include "character.h"
 #include "mud.h"
 
-static void AddFollowerToGroup( void *element, void *userData );
-static bool IsFollowerOf( void *element, void *userData );
-
-void do_group( Character *ch, char *argument )
+void do_group( CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  Character *victim = NULL;
+  CHAR_DATA *victim = NULL;
 
   one_argument( argument, arg );
 
   if ( arg[0] == '\0' )
     {
-      Character *gch = NULL;
+      CHAR_DATA *gch = NULL;
 
       set_char_color( AT_GREEN, ch );
       ch_printf( ch, "%s's group:\r\n", PERS(ch, ch) );
@@ -28,7 +25,7 @@ void do_group( Character *ch, char *argument )
                 ch_printf( ch,
                            "[%2d %s] %-16s %4s/%4s hp %4s/%4s mv %5s xp\r\n",
                            gch->top_level,
-                           IsNpc(gch) ? "Mob" : race_table[gch->race].race_name,
+                           is_npc(gch) ? "Mob" : race_table[gch->race].race_name,
                            capitalize( PERS(gch, ch) ),
 			   "????",
                            "????",
@@ -40,7 +37,7 @@ void do_group( Character *ch, char *argument )
                 ch_printf( ch,
                            "[%2d %s] %-16s %4d/%4d hp %4d/%4d mv\r\n",
                            gch->top_level,
-                           IsNpc(gch) ? "Mob" : race_table[gch->race].race_name,
+                           is_npc(gch) ? "Mob" : race_table[gch->race].race_name,
                            capitalize( PERS(gch, ch) ),
                            gch->hit,
                            gch->max_hit,
@@ -53,7 +50,7 @@ void do_group( Character *ch, char *argument )
 
   if ( !str_cmp( arg, "disband" ))
     {
-      Character *gch = NULL;
+      CHAR_DATA *gch = NULL;
       int count = 0;
 
       if ( ch->leader || ch->master )
@@ -84,10 +81,23 @@ void do_group( Character *ch, char *argument )
 
   if ( !str_cmp( arg, "all" ) )
     {
+      CHAR_DATA *rch = NULL;
       int count = 0;
 
-      List_ForEach( ch->in_room->People, AddFollowerToGroup, ch );
-      count = List_CountIf( ch->in_room->People, IsFollowerOf, ch );
+      for ( rch = ch->in_room->first_person; rch; rch = rch->next_in_room )
+        {
+          if ( ch != rch
+               && !is_npc( rch )
+               && rch->master == ch
+               && !ch->master
+               && !ch->leader
+               && !is_same_group( rch, ch )
+               )
+            {
+              rch->leader = ch;
+              count++;
+            }
+        }
 
       if ( count == 0 )
 	{
@@ -136,38 +146,4 @@ void do_group( Character *ch, char *argument )
   act( AT_ACTION, "$N joins $n's group.", ch, NULL, victim, TO_NOTVICT );
   act( AT_ACTION, "You join $n's group.", ch, NULL, victim, TO_VICT );
   act( AT_ACTION, "$N joins your group.", ch, NULL, victim, TO_CHAR );
-}
-
-static void AddFollowerToGroup( void *element, void *userData )
-{
-  Character *follower = (Character*) element;
-  Character *leader = (Character*) userData;
-
-  if ( leader != follower
-       && !IsNpc( follower )
-       && follower->master == leader
-       && !leader->master
-       && !leader->leader
-       && !is_same_group( follower, leader ) )
-    {
-      follower->leader = leader;
-    }
-}
-
-static bool IsFollowerOf( void *element, void *userData )
-{
-  Character *follower = (Character*) element;
-  Character *leader = (Character*) userData;
-
-  if( leader != follower
-      && !IsNpc( follower )
-      && follower->leader == leader
-      && is_same_group( follower, leader ) )
-    {
-      return TRUE;
-    }
-  else
-    {
-      return FALSE;
-    }
 }

@@ -2,9 +2,9 @@
 #include "arena.h"
 #include "character.h"
 
-void do_challenge(Character *ch, char *argument)
+void do_challenge(CHAR_DATA *ch, char *argument)
 {
-  Character *victim;
+  CHAR_DATA *victim;
   char buf[MAX_INPUT_LENGTH];
 
   if ( ( victim = get_char_world( ch, argument ) ) == NULL)
@@ -13,13 +13,13 @@ void do_challenge(Character *ch, char *argument)
       return;
     }
 
-  if (IsImmortal(ch) || IsImmortal(victim))
+  if (is_immortal(ch) || is_immortal(victim))
     {
       send_to_char("Sorry, Immortals are not allowed to participate in the arena.\r\n",ch);
       return;
     }
 
-  if (IsNpc(victim))
+  if (is_npc(victim))
     {
       send_to_char("&WYou cannot challenge mobiles!\r\n",ch);
       return;

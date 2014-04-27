@@ -1,10 +1,10 @@
 #include "character.h"
 #include "mud.h"
 
-ch_ret spell_call_lightning( int sn, int level, Character *ch, void *vo )
+ch_ret spell_call_lightning( int sn, int level, CHAR_DATA *ch, void *vo )
 {
-  Character *vch;
-  Character *vch_next;
+  CHAR_DATA *vch;
+  CHAR_DATA *vch_next;
   int dam;
   bool ch_died;
   ch_ret retcode;
@@ -41,11 +41,11 @@ ch_ret spell_call_lightning( int sn, int level, Character *ch, void *vo )
         continue;
       if ( vch->in_room == ch->in_room )
 	{
-          if ( !IsNpc( vch ) && IS_SET( vch->act, PLR_WIZINVIS )
+          if ( !is_npc( vch ) && IS_SET( vch->act, PLR_WIZINVIS )
                &&    vch->pcdata->wizinvis >= LEVEL_IMMORTAL )
             continue;
 
-          if ( vch != ch && ( IsNpc(ch) ? !IsNpc(vch) : IsNpc(vch) ) )
+          if ( vch != ch && ( is_npc(ch) ? !is_npc(vch) : is_npc(vch) ) )
             retcode = damage( ch, vch, saves_spell_staff( level, vch ) ? dam/2 : dam, sn );
           if ( retcode == rCHAR_DIED || char_died(ch) )
             ch_died = TRUE;

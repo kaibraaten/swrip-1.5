@@ -30,10 +30,12 @@
 #include "ships.h"
 #include "character.h"
 
+void show_char_to_char( CHAR_DATA *list, CHAR_DATA *ch );
+
 /*
  * Dummy function
  */
-void skill_notfound( Character *ch, char *argument )
+void skill_notfound( CHAR_DATA *ch, char *argument )
 {
   send_to_char( "Huh?\r\n", ch );
   return;
@@ -46,7 +48,7 @@ extern char *spell_target_name;       /* from magic.c */
  * Each different section of the skill table is sorted alphabetically
  * Only match skills player knows                               -Thoric
  */
-bool check_skill( Character *ch, char *command, char *argument )
+bool check_skill( CHAR_DATA *ch, char *command, char *argument )
 {
   int sn;
   int first = gsn_first_skill;
@@ -62,7 +64,7 @@ bool check_skill( Character *ch, char *command, char *argument )
       if ( LOWER(command[0]) == LOWER(skill_table[sn]->name[0])
            &&  !str_prefix(command, skill_table[sn]->name)
            &&  (skill_table[sn]->skill_fun || skill_table[sn]->spell_fun != spell_null)
-           &&  (IsNpc(ch)
+           &&  (is_npc(ch)
                 ||  ( ch->pcdata->learned[sn] > 0 )) )
         break;
       if (first >= top)
@@ -76,7 +78,7 @@ bool check_skill( Character *ch, char *command, char *argument )
   if ( !check_pos( ch, skill_table[sn]->minimum_position ) )
     return TRUE;
 
-  if ( IsNpc(ch)
+  if ( is_npc(ch)
        &&  (is_affected_by( ch, AFF_CHARM ) || is_affected_by( ch, AFF_POSSESS )) )
     {
       send_to_char( "For some reason, you seem unable to perform that...\r\n", ch );
@@ -87,9 +89,9 @@ bool check_skill( Character *ch, char *command, char *argument )
   /* check if mana is required */
   if ( skill_table[sn]->min_mana )
     {
-      mana = IsNpc(ch) ? 0 : skill_table[sn]->min_mana;
+      mana = is_npc(ch) ? 0 : skill_table[sn]->min_mana;
 
-      if ( !IsNpc(ch) && ch->mana < mana )
+      if ( !is_npc(ch) && ch->mana < mana )
         {
           send_to_char( "You need to rest before using the Force any more.\r\n", ch );
           return TRUE;
@@ -107,7 +109,7 @@ bool check_skill( Character *ch, char *command, char *argument )
     {
       ch_ret retcode = rNONE;
       void *vo = NULL;
-      Character *victim = NULL;
+      CHAR_DATA *victim = NULL;
       OBJ_DATA *obj = NULL;
 
       spell_target_name = "";
@@ -179,9 +181,9 @@ bool check_skill( Character *ch, char *command, char *argument )
       set_wait_state( ch, skill_table[sn]->beats );
       /* check for failure */
       if ( (number_percent( ) + skill_table[sn]->difficulty * 5)
-           > (IsNpc(ch) ? 75 : ch->pcdata->learned[sn]) )
+           > (is_npc(ch) ? 75 : ch->pcdata->learned[sn]) )
         {
-          failed_casting( skill_table[sn], ch, (Character*)vo, obj );
+          failed_casting( skill_table[sn], ch, (CHAR_DATA*)vo, obj );
           learn_from_failure( ch, sn );
           if ( mana )
             {
@@ -216,12 +218,12 @@ bool check_skill( Character *ch, char *command, char *argument )
            &&   victim != ch
            &&  !char_died(victim) )
         {
-	  CerisListIterator *iter = CreateListIterator( ch->in_room->People, ForwardsIterator );
+          CHAR_DATA *vch;
+          CHAR_DATA *vch_next;
 
-	  for( ; !ListIterator_IsDone( iter ); ListIterator_Next( iter ) )
+          for ( vch = ch->in_room->first_person; vch; vch = vch_next )
             {
-	      Character *vch = (Character*) ListIterator_GetData( iter );
-
+              vch_next = vch->next_in_room;
               if ( victim == vch && !victim->fighting && victim->master != ch )
                 {
                   retcode = multi_hit( victim, ch, TYPE_UNDEFINED );
@@ -246,14 +248,14 @@ bool check_skill( Character *ch, char *command, char *argument )
   return TRUE;
 }
 
-void learn_from_success( Character *ch, int sn )
+void learn_from_success( CHAR_DATA *ch, int sn )
 {
   int adept, gain, sklvl, learn, percent, learn_chance;
 
-  if ( IsNpc(ch) || ch->pcdata->learned[sn] <= 0 )
+  if ( is_npc(ch) || ch->pcdata->learned[sn] <= 0 )
     return;
 
-  if ( sn == skill_lookup( "meditate" ) && !IsForcer( ch ) )
+  if ( sn == skill_lookup( "meditate" ) && get_level( ch, FORCE_ABILITY ) < 2 )
     if ( ch->pcdata->learned[sn] < 50 )
       gain_exp( ch, FORCE_ABILITY, 25 );
 
@@ -262,14 +264,14 @@ void learn_from_success( Character *ch, int sn )
   if (skill_table[sn]->guild < 0 || skill_table[sn]->guild >= MAX_ABILITY )
     return;
 
-  adept = ( GetLevel(ch, skill_table[sn]->guild ) - skill_table[sn]->min_level )* 5 + 50;
+  adept = ( get_level(ch, skill_table[sn]->guild ) - skill_table[sn]->min_level )* 5 + 50;
   adept = UMIN(adept, 100);
 
   if ( ch->pcdata->learned[sn] >= adept )
     return;
 
-  if ( sklvl == 0 || sklvl > GetLevel( ch, skill_table[sn]->guild ) )
-    sklvl = GetLevel( ch, skill_table[sn]->guild );
+  if ( sklvl == 0 || sklvl > get_level( ch, skill_table[sn]->guild ) )
+    sklvl = get_level( ch, skill_table[sn]->guild );
 
   if ( ch->pcdata->learned[sn] < 100 )
     {
@@ -306,7 +308,7 @@ void learn_from_success( Character *ch, int sn )
 }
 
 
-void learn_from_failure( Character *ch, int sn )
+void learn_from_failure( CHAR_DATA *ch, int sn )
 {
 
 }
@@ -316,7 +318,7 @@ void learn_from_failure( Character *ch, int sn )
  * Caller must check for successful attack.
  * Check for loyalty flag (weapon disarms to inventory) for pkillers -Blodkai
  */
-void disarm( Character *ch, Character *victim )
+void disarm( CHAR_DATA *ch, CHAR_DATA *victim )
 {
   OBJ_DATA *obj, *tmpobj;
 
@@ -333,7 +335,7 @@ void disarm( Character *ch, Character *victim )
       return;
     }
 
-  if ( IsNpc( ch ) && !can_see_obj( ch, obj ) && number_bits( 1 ) == 0)
+  if ( is_npc( ch ) && !can_see_obj( ch, obj ) && number_bits( 1 ) == 0)
     {
       learn_from_failure( ch, gsn_disarm );
       return;
@@ -364,7 +366,7 @@ void disarm( Character *ch, Character *victim )
  * Trip a creature.
  * Caller must check for successful attack.
  */
-void trip( Character *ch, Character *victim )
+void trip( CHAR_DATA *ch, CHAR_DATA *victim )
 {
   if ( is_affected_by( victim, AFF_FLYING )
        ||   is_affected_by( victim, AFF_FLOATING ) )
@@ -398,42 +400,38 @@ void trip( Character *ch, Character *victim )
   return;
 }
 
-bool HasPermanentHide( const Character *ch )
-{
-  return ch->race == RACE_DEFEL;
-}
-
-bool HasPermanentSneak( const Character *ch )
+bool permsneak( CHAR_DATA *ch )
 {
   switch(ch->race)
     {
     case RACE_SHISTAVANEN:
       return TRUE;
-
+      break;
     case RACE_DEFEL:
       return TRUE;
-
+      break;
     case RACE_BOTHAN:
       return TRUE;
-
+      break;
     case RACE_TOGARIAN:
       return TRUE;
-
+      break;
     case RACE_DUG:
       return TRUE;
-
+      break;
     case RACE_COYNITE:
       return TRUE;
-
+      break;
     default:
       return FALSE;
     }
+  return FALSE;
 }
 
 /*
  * Check for parry.
  */
-bool check_parry( Character *ch, Character *victim )
+bool check_parry( CHAR_DATA *ch, CHAR_DATA *victim )
 {
   int chances;
   OBJ_DATA *wield;
@@ -441,12 +439,12 @@ bool check_parry( Character *ch, Character *victim )
   if ( !is_awake(victim) )
     return FALSE;
 
-  if ( IsNpc(victim) && !IS_SET(victim->defenses, DFND_PARRY) )
+  if ( is_npc(victim) && !IS_SET(victim->defenses, DFND_PARRY) )
     return FALSE;
 
-  if ( IsNpc(victim) )
+  if ( is_npc(victim) )
     {
-      chances = UMIN( 60, GetLevel( victim, COMBAT_ABILITY ) );
+      chances = UMIN( 60, get_level( victim, COMBAT_ABILITY ) );
     }
   else
     {
@@ -467,11 +465,11 @@ bool check_parry( Character *ch, Character *victim )
       learn_from_failure( victim, gsn_parry );
       return FALSE;
     }
-  if ( !IsNpc(victim)
+  if ( !is_npc(victim)
        && !IS_SET( victim->pcdata->flags, PCFLAG_GAG) ) /*SB*/
     act( AT_SKILL, "You parry $n's attack.",  ch, NULL, victim, TO_VICT    );
 
-  if ( !IsNpc(ch)
+  if ( !is_npc(ch)
        && !IS_SET( ch->pcdata->flags, PCFLAG_GAG) )  /* SB */
     act( AT_SKILL, "$N parries your attack.", ch, NULL, victim, TO_CHAR    );
 
@@ -484,22 +482,22 @@ bool check_parry( Character *ch, Character *victim )
 /*
  * Check for dodge.
  */
-bool check_dodge( Character *ch, Character *victim )
+bool check_dodge( CHAR_DATA *ch, CHAR_DATA *victim )
 {
   int chances;
 
   if ( !is_awake(victim) )
     return FALSE;
 
-  if ( IsNpc(victim) && !IS_SET(victim->defenses, DFND_DODGE) )
+  if ( is_npc(victim) && !IS_SET(victim->defenses, DFND_DODGE) )
     return FALSE;
 
-  if ( IsNpc(victim) )
+  if ( is_npc(victim) )
     chances  = UMIN( 60, victim->top_level );
   else
     chances  = (int) (victim->pcdata->learned[gsn_dodge] / 2);
 
-  chances += 5*(GetCurrentDex(victim) - 20);
+  chances += 5*(get_curr_dex(victim) - 20);
 
   if ( number_range( 1, 100 ) > chances )
     {
@@ -507,33 +505,33 @@ bool check_dodge( Character *ch, Character *victim )
       return FALSE;
     }
 
-  if ( !IsNpc(victim) && !IS_SET( victim->pcdata->flags, PCFLAG_GAG) )
+  if ( !is_npc(victim) && !IS_SET( victim->pcdata->flags, PCFLAG_GAG) )
     act( AT_SKILL, "You dodge $n's attack.", ch, NULL, victim, TO_VICT    );
 
-  if ( !IsNpc(ch) && !IS_SET( ch->pcdata->flags, PCFLAG_GAG) )
+  if ( !is_npc(ch) && !IS_SET( ch->pcdata->flags, PCFLAG_GAG) )
     act( AT_SKILL, "$N dodges your attack.", ch, NULL, victim, TO_CHAR    );
 
   learn_from_success( victim, gsn_dodge );
   return TRUE;
 }
 
-bool check_grip( Character *ch, Character *victim )
+bool check_grip( CHAR_DATA *ch, CHAR_DATA *victim )
 {
   int grip_chance;
 
   if ( !is_awake(victim) )
     return FALSE;
 
-  if ( IsNpc(victim) && !IS_SET(victim->defenses, DFND_GRIP) )
+  if ( is_npc(victim) && !IS_SET(victim->defenses, DFND_GRIP) )
     return FALSE;
 
-  if ( IsNpc(victim) )
+  if ( is_npc(victim) )
     grip_chance  = UMIN( 60, 2 * victim->top_level );
   else
     grip_chance  = (int) (victim->pcdata->learned[gsn_grip] / 2);
 
   /* Consider luck as a factor */
-  grip_chance += (2 * (GetCurrentLck(victim) - 13 ) );
+  grip_chance += (2 * (get_curr_lck(victim) - 13 ) );
 
   if ( number_percent( ) >= grip_chance + victim->top_level - ch->top_level )
     {

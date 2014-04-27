@@ -1,11 +1,11 @@
 #include "mud.h"
 
-void do_timecmd( Character *ch, char *argument )
+void do_timecmd( CHAR_DATA *ch, char *argument )
 {
   struct timeval start_time;
   struct timeval etime;
   static bool timing;
-  extern Character *timechar;
+  extern CHAR_DATA *timechar;
   char arg[MAX_INPUT_LENGTH];
 
   send_to_char("Timing\r\n",ch);

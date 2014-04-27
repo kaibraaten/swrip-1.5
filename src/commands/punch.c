@@ -1,18 +1,18 @@
 #include "character.h"
 #include "mud.h"
 
-void do_punch( Character *ch, char *argument )
+void do_punch( CHAR_DATA *ch, char *argument )
 {
-  Character *victim;
+  CHAR_DATA *victim;
   char arg[MAX_INPUT_LENGTH];
 
-  if ( IsNpc(ch) && is_affected_by( ch, AFF_CHARM ) )
+  if ( is_npc(ch) && is_affected_by( ch, AFF_CHARM ) )
     {
       send_to_char( "You can't concentrate enough for that.\r\n", ch );
       return;
     }
 
-  if ( !IsNpc(ch)
+  if ( !is_npc(ch)
        &&   ch->pcdata->learned[gsn_punch] <= 0 )
     {
       send_to_char(
@@ -37,7 +37,7 @@ void do_punch( Character *ch, char *argument )
           return;
         }
 
-      if ( !IsNpc(victim) )
+      if ( !is_npc(victim) )
         {
           send_to_char( "You must MURDER a player.\r\n", ch );
           return;
@@ -65,10 +65,10 @@ void do_punch( Character *ch, char *argument )
 
   set_wait_state( ch, skill_table[gsn_punch]->beats );
 
-  if ( IsNpc(ch) || number_percent( ) < ch->pcdata->learned[gsn_punch] )
+  if ( is_npc(ch) || number_percent( ) < ch->pcdata->learned[gsn_punch] )
     {
       learn_from_success( ch, gsn_punch );
-      global_retcode = damage( ch, victim, number_range( 1, GetLevel(ch, COMBAT_ABILITY ) ), gsn_punch );
+      global_retcode = damage( ch, victim, number_range( 1, get_level(ch, COMBAT_ABILITY ) ), gsn_punch );
     }
   else
     {

@@ -18,29 +18,30 @@ extern "C" {
 #define MAX_INPUT_LENGTH         1024  /* arg */
 #define MAX_INBUF_SIZE           1024
 
+/*
+ * Short scalar types.
+ * Diavolo reports AIX compiler has bugs with short types.
+ */
 #ifndef __cplusplus
-#  if __STDC_VERSION__ >= 199901L
-#    include <stdbool.h>
-#    define FALSE false
-#    define TRUE true
-#  else
-#    define bool unsigned char
-#    ifndef FALSE
-#      define FALSE 0
-#    endif
-#    ifndef TRUE
-#      define TRUE 1
-#    endif
-#  endif
-#else /* __cplusplus */
-#  if !defined(__STORMGCC__) && !defined(__MORPHOS__)
-#    define TRUE true
-#    define FALSE false
-#  endif /* StormC4 */
+#if     !defined(FALSE)
+#define FALSE    0
+#endif
+
+#if     !defined(TRUE)
+#define TRUE     1
+#endif
+
+typedef unsigned char                   bool;
+
+#else
+#if !defined(__STORMGCC__) && !defined(__MORPHOS__)
+#define TRUE true
+#define FALSE false
+#endif /* StormC4 */
 #endif /* __cplusplus */
 
-#if !defined(BERR)
-#  define BERR 255
+#if     !defined(BERR)
+#define BERR     255
 #endif
 
 /*
@@ -192,38 +193,34 @@ bool is_number( const char *arg );
 int number_argument( const char *argument, char *arg );
 char *one_argument( char *argument, char *arg_first );
 char *one_argument2( char *argument, char *arg_first );
-int is_name( const char *str, const char *namelist );
-int is_name_prefix( const char *str, const char *namelist );
-int nifty_is_name( const char *str, const char *namelist );
-int nifty_is_name_prefix( const char *str, const char *namelist );
-int str_cmp( const char *astr, const char *bstr );
-int str_prefix( const char *astr, const char *bstr );
-int str_infix( const char *astr, const char *bstr );
-int str_suffix( const char *astr, const char *bstr );
+bool is_name( const char *str, const char *namelist );
+bool is_name_prefix( const char *str, const char *namelist );
+bool nifty_is_name( const char *str, const char *namelist );
+bool nifty_is_name_prefix( const char *str, const char *namelist );
+bool str_cmp( const char *astr, const char *bstr );
+bool str_prefix( const char *astr, const char *bstr );
+bool str_infix( const char *astr, const char *bstr );
+bool str_suffix( const char *astr, const char *bstr );
 char *capitalize( const char *str );
 char *strlower( const char *str );
 char *strupper( const char *str );
 const char *aoran( const char *str );
 char *strip_cr( const char *str  );
 char *str_dup( const char *str );
+char fread_letter( FILE *fp );
+float fread_float( FILE *fp );
+int fread_number( FILE *fp );
+char *fread_string( FILE *fp );
+char *fread_string_nohash( FILE *fp );
+void fread_to_eol( FILE *fp );
+char *fread_word( FILE *fp );
+char *fread_line( FILE *fp );
 void smash_tilde( char *str );
 void hide_tilde( char *str );
 char *show_tilde( const char *str );
 void replace_char( char*, char, char );
 void smush_tilde( char* );
 char *encode_string( const char* );
-
-/* file_io.c */
-char fread_letter( FILE *fp );
-float fread_float( FILE *fp );
-int fread_number( FILE *fp );
-char *fread_string( FILE *fp, char *buffer, size_t bufferSize );
-char *fread_string_hash( FILE *fp );
-char *fread_string_nohash( FILE *fp );
-void fread_to_eol( FILE *fp );
-char *fread_word( FILE *fp );
-char *fread_line( FILE *fp );
-void append_to_file( const char *file, const char *str );
 
 /* hashstr.c */
 char *str_alloc( const char *str );
@@ -257,6 +254,7 @@ void start_timer(struct timeval *start_time);
 time_t end_timer(struct timeval *start_time);
 
 char *flag_string( int bitvector, const char * const flagarray[] );
+void append_to_file( const char *file, const char *str );
 
 #ifdef __cplusplus
 }

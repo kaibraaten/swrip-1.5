@@ -1,17 +1,16 @@
 #include "character.h"
 #include "mud.h"
-#include "clan.h"
 
-void do_mass_propaganda ( Character *ch , char *argument )
+void do_mass_propaganda ( CHAR_DATA *ch , char *argument )
 {
   char buf  [MAX_STRING_LENGTH];
   char arg1 [MAX_INPUT_LENGTH];
-  Character *victim;
+  CHAR_DATA *victim;
   PLANET_DATA *planet;
-  Clan   *clan;
+  CLAN_DATA   *clan;
   int percent = 0;
 
-  if ( IsNpc(ch) || !is_clanned( ch ) || !ch->in_room->area->planet )
+  if ( is_npc(ch) || !ch->pcdata || !ch->pcdata->clan || !ch->in_room->area || !ch->in_room->area->planet )
     {
       send_to_char( "What would be the point of that.\r\n", ch );
       return;
@@ -88,7 +87,7 @@ void do_mass_propaganda ( Character *ch , char *argument )
 
   set_wait_state( ch, skill_table[gsn_masspropaganda]->beats );
 
-  if ( percent - GetCurrentCha(ch) + victim->top_level > ch->pcdata->learned[gsn_masspropaganda]  )
+  if ( percent - get_curr_cha(ch) + victim->top_level > ch->pcdata->learned[gsn_masspropaganda]  )
     {
 
       if ( planet->governed_by != clan )

@@ -1,11 +1,11 @@
 #include "mud.h"
 #include "character.h"
 
-void do_arm( Character *ch, char *argument )
+void do_arm( CHAR_DATA *ch, char *argument )
 {
   OBJ_DATA *obj;
 
-  if ( IsNpc(ch) || !ch->pcdata )
+  if ( is_npc(ch) || !ch->pcdata )
     {
       ch_printf( ch, "Mob's cant do that!\r\n" );
       return;

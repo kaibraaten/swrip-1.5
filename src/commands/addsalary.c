@@ -1,16 +1,15 @@
 #include "character.h"
 #include "mud.h"
-#include "clan.h"
 
-void do_addsalary ( Character *ch , char *argument )
+void do_addsalary ( CHAR_DATA *ch , char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
-  Character *victim;
-  Clan *clan;
+  CHAR_DATA *victim;
+  CLAN_DATA *clan;
   int salary;
 
-  if ( IsNpc( ch ) || !is_clanned( ch ) )
+  if ( is_npc( ch ) || !ch->pcdata->clan )
     {
       send_to_char( "Huh?\r\n", ch );
       return;
@@ -18,8 +17,8 @@ void do_addsalary ( Character *ch , char *argument )
 
   clan = ch->pcdata->clan;
 
-  if ( (ch->pcdata->bestowments
-        && is_name("salary", ch->pcdata->bestowments))
+  if ( (ch->pcdata && ch->pcdata->bestowments
+        &&    is_name("salary", ch->pcdata->bestowments))
        || !str_cmp( ch->name, clan->leadership.leader  ) )
     ;
   else
@@ -45,7 +44,7 @@ void do_addsalary ( Character *ch , char *argument )
       return;
     }
 
-  if ( IsNpc(victim) )
+  if ( is_npc(victim) )
     {
       send_to_char( "Not on NPC's.\r\n", ch );
       return;

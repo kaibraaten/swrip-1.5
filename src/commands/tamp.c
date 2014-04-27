@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_tamp( Character *ch, char *argument )
+void do_tamp( CHAR_DATA *ch, char *argument )
 {
   OBJ_DATA *pipe_obj;
   char arg[MAX_INPUT_LENGTH];

@@ -7,14 +7,14 @@
 #include "shuttle.h"
 #include "character.h"
 
-void do_setshuttle(Character * ch, char * argument)
+void do_setshuttle(CHAR_DATA * ch, char * argument)
 {
   SHUTTLE_DATA * shuttle;
   char arg1[MIL];
   char arg2[MIL];
   int value;
 
-  if ( IsNpc( ch ) )
+  if ( is_npc( ch ) )
     {
       send_to_char( "Huh?\r\n", ch );
       return;

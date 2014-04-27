@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_push( Character *ch, char *argument )
+void do_push( CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   OBJ_DATA *obj;

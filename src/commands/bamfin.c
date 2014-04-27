@@ -1,9 +1,9 @@
 #include "character.h"
 #include "mud.h"
 
-void do_bamfin( Character *ch, char *argument )
+void do_bamfin( CHAR_DATA *ch, char *argument )
 {
-  if ( !IsNpc(ch) )
+  if ( !is_npc(ch) )
     {
       smash_tilde( argument );
       DISPOSE( ch->pcdata->bamfin );

@@ -2,7 +2,7 @@
 #include "mud.h"
 #include "character.h"
 
-void do_exits( Character *ch, char *argument )
+void do_exits( CHAR_DATA *ch, char *argument )
 {
   char buf[MAX_STRING_LENGTH];
   EXIT_DATA *pexit;

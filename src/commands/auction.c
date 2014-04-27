@@ -2,7 +2,7 @@
 #include "mud.h"
 #include "character.h"
 
-void do_auction (Character *ch, char *argument)
+void do_auction (CHAR_DATA *ch, char *argument)
 {
   OBJ_DATA *obj;
   char arg1[MAX_INPUT_LENGTH];
@@ -11,7 +11,7 @@ void do_auction (Character *ch, char *argument)
 
   argument = one_argument (argument, arg1);
 
-  if (IsNpc(ch)) /* NPC can be extracted at any time and thus can't auction! */
+  if (is_npc(ch)) /* NPC can be extracted at any time and thus can't auction! */
     return;
 
   if ( !IS_SET( ch->in_room->room_flags , ROOM_HOTEL ) && !IS_SET( ch->in_room->room_flags , ROOM_HOTEL ) )
@@ -82,7 +82,7 @@ void do_auction (Character *ch, char *argument)
               show_list_to_char( obj->first_content, ch, TRUE, FALSE );
             }
 
-          if (IsImmortal(ch))
+          if (is_immortal(ch))
             {
               sprintf(buf, "Seller: %s.  Bidder: %s.  Round: %d.\r\n",
                       auction->seller->name, auction->buyer->name,
@@ -101,7 +101,7 @@ void do_auction (Character *ch, char *argument)
         }
     }
 
-  if ( IsImmortal(ch) && !str_cmp(arg1,"stop"))
+  if ( is_immortal(ch) && !str_cmp(arg1,"stop"))
     {
       if (auction->item == NULL)
         {

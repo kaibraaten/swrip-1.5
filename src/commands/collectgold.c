@@ -3,10 +3,10 @@
 #include "shops.h"
 #include "character.h"
 
-void do_collectgold (Character *ch, char *argument)
+void do_collectgold (CHAR_DATA *ch, char *argument)
 {
-  Character *vendor;
-  Character *ch1;
+  CHAR_DATA *vendor;
+  CHAR_DATA *ch1;
   long gold;
   char buf [MAX_INPUT_LENGTH];
   char logbuf [MAX_INPUT_LENGTH];

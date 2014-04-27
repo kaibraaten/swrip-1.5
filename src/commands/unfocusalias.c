@@ -1,9 +1,9 @@
 #include "character.h"
 #include "mud.h"
 
-void do_unfocusalias(Character *ch, char *argument)
+void do_unfocusalias(CHAR_DATA *ch, char *argument)
 {
-  if ( IsNpc(ch) )
+  if ( is_npc(ch) )
     {
       send_to_char("Only players can have alias focuses!\r\n", ch);
       return;

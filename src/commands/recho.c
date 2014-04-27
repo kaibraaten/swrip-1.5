@@ -1,7 +1,7 @@
 #include "mud.h"
 #include "character.h"
 
-void do_recho( Character *ch, char *argument )
+void do_recho( CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   short color;

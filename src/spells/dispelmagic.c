@@ -1,9 +1,9 @@
 #include "character.h"
 #include "mud.h"
 
-ch_ret spell_dispel_magic( int sn, int level, Character *ch, void *vo )
+ch_ret spell_dispel_magic( int sn, int level, CHAR_DATA *ch, void *vo )
 {
-  Character *victim = (Character *) vo;
+  CHAR_DATA *victim = (CHAR_DATA *) vo;
   int affected_by, cnt;
   SKILLTYPE *skill = get_skilltype(sn);
 
@@ -31,7 +31,7 @@ ch_ret spell_dispel_magic( int sn, int level, Character *ch, void *vo )
         return rSPELL_FAILED;
       }
 
-  if ( !IsNpc(victim) )
+  if ( !is_npc(victim) )
     {
       send_to_char( "You can't do that... yet.\r\n", ch );
       return rSPELL_FAILED;

@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_oldscore( Character *ch, char *argument )
+void do_oldscore( CHAR_DATA *ch, char *argument )
 {
   AFFECT_DATA *paf;
   SKILLTYPE   *skill;
@@ -16,12 +16,12 @@ void do_oldscore( Character *ch, char *argument )
   ch_printf( ch,
              "You are %s%s, level %d.\r\n",
              ch->name,
-             IsNpc(ch) ? "" : ch->pcdata->title,
+             is_npc(ch) ? "" : ch->pcdata->title,
              ch->top_level );
 
-  if ( GetTrustedLevel( ch ) != ch->top_level )
+  if ( get_trust( ch ) != ch->top_level )
     ch_printf( ch, "You are trusted at level %d.\r\n",
-               GetTrustedLevel( ch ) );
+               get_trust( ch ) );
 
   if ( IS_SET(ch->act, ACT_MOBINVIS) )
     ch_printf( ch, "You are mobinvis at level %d.\r\n",
@@ -40,34 +40,34 @@ void do_oldscore( Character *ch, char *argument )
 
   ch_printf( ch,
              "Str: %d  Int: %d  Wis: %d  Dex: %d  Con: %d  Cha: %d  Lck: ??  Frc: ??\r\n",
-             GetCurrentStr(ch),
-             GetCurrentInt(ch),
-             GetCurrentWis(ch),
-             GetCurrentDex(ch),
-             GetCurrentCon(ch),
-             GetCurrentCha(ch) );
+             get_curr_str(ch),
+             get_curr_int(ch),
+             get_curr_wis(ch),
+             get_curr_dex(ch),
+             get_curr_con(ch),
+             get_curr_cha(ch) );
 
   ch_printf( ch,
              "You have have %d credits.\r\n" , ch->gold );
 
-  if ( !IsNpc(ch) )
+  if ( !is_npc(ch) )
     ch_printf( ch,
                "You have achieved %d glory during your life, and currently have %d.\r\n",
                ch->pcdata->quest_accum, ch->pcdata->quest_curr );
 
   ch_printf( ch, "Autoexit: %s   Autoloot: %s   Autosac: %s   Autocred: %s\r\n",
-             (!IsNpc(ch) && IS_SET(ch->act, PLR_AUTOEXIT)) ? "yes" : "no",
-             (!IsNpc(ch) && IS_SET(ch->act, PLR_AUTOLOOT)) ? "yes" : "no",
-             (!IsNpc(ch) && IS_SET(ch->act, PLR_AUTOSAC) ) ? "yes" : "no",
-             (!IsNpc(ch) && IS_SET(ch->act, PLR_AUTOGOLD)) ? "yes" : "no" );
+             (!is_npc(ch) && IS_SET(ch->act, PLR_AUTOEXIT)) ? "yes" : "no",
+             (!is_npc(ch) && IS_SET(ch->act, PLR_AUTOLOOT)) ? "yes" : "no",
+             (!is_npc(ch) && IS_SET(ch->act, PLR_AUTOSAC) ) ? "yes" : "no",
+             (!is_npc(ch) && IS_SET(ch->act, PLR_AUTOGOLD)) ? "yes" : "no" );
 
   ch_printf( ch, "Wimpy set to %d hit points.\r\n", ch->wimpy );
 
-  if ( !IsNpc(ch) && ch->pcdata->condition[COND_DRUNK]   > 10 )
+  if ( !is_npc(ch) && ch->pcdata->condition[COND_DRUNK]   > 10 )
     send_to_char( "You are drunk.\r\n",   ch );
-  if ( !IsNpc(ch) && ch->pcdata->condition[COND_THIRST] ==  0 )
+  if ( !is_npc(ch) && ch->pcdata->condition[COND_THIRST] ==  0 )
     send_to_char( "You are thirsty.\r\n", ch );
-  if ( !IsNpc(ch) && ch->pcdata->condition[COND_FULL]   ==  0 )
+  if ( !is_npc(ch) && ch->pcdata->condition[COND_FULL]   ==  0 )
     send_to_char( "You are hungry.\r\n",  ch );
 
   switch( ch->mental_state / 10 )
@@ -188,7 +188,7 @@ void do_oldscore( Character *ch, char *argument )
           }
     }
 
-  if ( !IsNpc( ch ) && IsImmortal( ch ) )
+  if ( !is_npc( ch ) && is_immortal( ch ) )
     {
       ch_printf( ch, "WizInvis level: %d   WizInvis is %s\r\n",
 		 ch->pcdata->wizinvis,

@@ -4,7 +4,7 @@
 #include "ships.h"
 #include "character.h"
 
-void do_hail( Character *ch , char *argument )
+void do_hail( CHAR_DATA *ch , char *argument )
 {
   int vnum;
   long gold = 1;

@@ -1,15 +1,15 @@
 #include "character.h"
 #include "mud.h"
 
-void do_mcreate( Character *ch, char *argument )
+void do_mcreate( CHAR_DATA *ch, char *argument )
 {
   char arg [MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
   MOB_INDEX_DATA *pMobIndex = NULL;
-  Character *mob = NULL;
+  CHAR_DATA *mob = NULL;
   int vnum = 0, cvnum = 0;
 
-  if ( IsNpc(ch) )
+  if ( is_npc(ch) )
     {
       send_to_char( "Mobiles cannot create.\r\n", ch );
       return;
@@ -46,10 +46,10 @@ void do_mcreate( Character *ch, char *argument )
       return;
     }
 
-  if ( IsNpc( ch ) )
+  if ( is_npc( ch ) )
     return;
 
-  if ( GetTrustedLevel( ch ) <= LEVEL_IMMORTAL )
+  if ( get_trust( ch ) <= LEVEL_IMMORTAL )
     {
       AREA_DATA *pArea;
 

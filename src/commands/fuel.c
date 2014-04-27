@@ -2,7 +2,7 @@
 #include "ships.h"
 #include "mud.h"
 
-void do_fuel(Character *ch, char *argument )
+void do_fuel(CHAR_DATA *ch, char *argument )
 {
   SHIP_DATA *ship, *eShip;
   int amount = 0;

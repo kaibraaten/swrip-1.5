@@ -1,11 +1,10 @@
 #include "character.h"
 #include "ships.h"
 #include "mud.h"
-#include "clan.h"
 
-void do_capture ( Character *ch , char *argument )
+void do_capture ( CHAR_DATA *ch , char *argument )
 {
-  Clan *clan;
+  CLAN_DATA *clan;
   PLANET_DATA *planet;
   PLANET_DATA *cPlanet;
   float support = 0.0;
@@ -15,13 +14,13 @@ void do_capture ( Character *ch , char *argument )
   if ( !ch->in_room || !ch->in_room->area)
     return;
 
-  if ( IsNpc(ch) || !ch->pcdata )
+  if ( is_npc(ch) || !ch->pcdata )
     {
       send_to_char ( "huh?\r\n" , ch );
       return;
     }
 
-  if ( !is_clanned( ch ) )
+  if ( !ch->pcdata->clan )
     {
       send_to_char ( "You need to be a member of an organization to do that!\r\n" , ch );
       return;
@@ -59,7 +58,7 @@ void do_capture ( Character *ch , char *argument )
   if ( planet->spaceobject )
     {
       SHIP_DATA *ship;
-      Clan *sClan;
+      CLAN_DATA *sClan;
 
       for ( ship = first_ship ; ship ; ship = ship->next )
         {
@@ -72,7 +71,7 @@ void do_capture ( Character *ch , char *argument )
           if( !space_in_range_c( ship, planet->spaceobject ) )
             continue;
 
-	  sClan = GetClan(ship->owner);
+	  sClan = get_clan(ship->owner);
 
           if ( !sClan )
             continue;

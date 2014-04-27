@@ -1,19 +1,19 @@
 #include "mud.h"
 #include "character.h"
 
-void do_disarm( Character *ch, char *argument )
+void do_disarm( CHAR_DATA *ch, char *argument )
 {
-  Character *victim;
+  CHAR_DATA *victim;
   OBJ_DATA *obj;
   int percent;
 
-  if ( IsNpc(ch) && is_affected_by( ch, AFF_CHARM ) )
+  if ( is_npc(ch) && is_affected_by( ch, AFF_CHARM ) )
     {
       send_to_char( "You can't concentrate enough for that.\r\n", ch );
       return;
     }
 
-  if ( !IsNpc(ch)
+  if ( !is_npc(ch)
        &&   ch->pcdata->learned[gsn_disarm] <= 0  )
     {
       send_to_char( "You don't know how to disarm opponents.\r\n", ch );
@@ -39,14 +39,14 @@ void do_disarm( Character *ch, char *argument )
     }
 
   set_wait_state( ch, skill_table[gsn_disarm]->beats );
-  percent = number_percent() + GetLevel( victim, COMBAT_ABILITY )
-    - GetLevel( ch, COMBAT_ABILITY )
-    - (GetCurrentLck(ch) - 15) + (GetCurrentLck(victim) - 15);
+  percent = number_percent() + get_level( victim, COMBAT_ABILITY )
+    - get_level( ch, COMBAT_ABILITY )
+    - (get_curr_lck(ch) - 15) + (get_curr_lck(victim) - 15);
 
   if ( !can_see_obj( ch, obj ) )
     percent += 10;
 
-  if ( IsNpc(ch) || percent < ch->pcdata->learned[gsn_disarm] * 2 / 3 )
+  if ( is_npc(ch) || percent < ch->pcdata->learned[gsn_disarm] * 2 / 3 )
     disarm( ch, victim );
   else
     {

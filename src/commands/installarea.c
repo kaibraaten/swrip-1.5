@@ -5,7 +5,7 @@
  * A complicated to use command as it currently exists.         -Thoric
  * Once area->author and area->name are cleaned up... it will be easier
  */
-void do_installarea( Character *ch, char *argument )
+void do_installarea( CHAR_DATA *ch, char *argument )
 {
   AREA_DATA     *tarea;
   char  arg[MAX_INPUT_LENGTH];

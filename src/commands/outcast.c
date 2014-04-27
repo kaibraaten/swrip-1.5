@@ -1,14 +1,13 @@
 #include "character.h"
 #include "mud.h"
-#include "clan.h"
 
-void do_outcast( Character *ch, char *argument )
+void do_outcast( CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  Character *victim;
-  Clan *clan;
+  CHAR_DATA *victim;
+  CLAN_DATA *clan;
 
-  if ( IsNpc( ch ) || !is_clanned( ch ) )
+  if ( is_npc( ch ) || !ch->pcdata->clan )
     {
       send_to_char( "Huh?\r\n", ch );
       return;
@@ -44,7 +43,7 @@ void do_outcast( Character *ch, char *argument )
       return;
     }
 
-  if ( IsNpc(victim) )
+  if ( is_npc(victim) )
     {
       send_to_char( "Not on NPC's.\r\n", ch );
       return;
@@ -84,7 +83,7 @@ void do_outcast( Character *ch, char *argument )
     }
 
   victim->pcdata->clan = NULL;
-  RemoveMember( victim );
+  remove_member( victim );
   STRFREE(victim->pcdata->clan_name);
   victim->pcdata->clan_name = STRALLOC( "" );
   act( AT_MAGIC, "You outcast $N from $t", ch, clan->name, victim, TO_CHAR );

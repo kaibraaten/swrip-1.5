@@ -23,9 +23,8 @@
 
 #include "mud.h"
 #include "character.h"
-#include "clan.h"
 
-void add_reinforcements( Character *ch )
+void add_reinforcements( CHAR_DATA *ch )
 {
   MOB_INDEX_DATA  * pMobIndex;
   OBJ_DATA        * blaster;
@@ -49,7 +48,7 @@ void add_reinforcements( Character *ch )
     {
 
 
-      Character * mob[3];
+      CHAR_DATA * mob[3];
       int         mob_cnt;
 
       if ( ch->backup_mob == MOB_VNUM_IMP_FORCES ||
@@ -65,10 +64,10 @@ void add_reinforcements( Character *ch )
           mob[mob_cnt] = create_mobile( pMobIndex );
           char_to_room( mob[mob_cnt], ch->in_room );
           act( AT_IMMORT, "$N has arrived.", ch, NULL, mob[mob_cnt], TO_ROOM );
-          mob[mob_cnt]->top_level = multiplier / 1.4 * GetLevel( ch, LEADERSHIP_ABILITY ) / 3;
+          mob[mob_cnt]->top_level = multiplier / 1.4 * get_level( ch, LEADERSHIP_ABILITY ) / 3;
 
           for ( ability = 0 ; ability < MAX_ABILITY ; ability++ )
-            SetLevel( mob[mob_cnt], ability, mob[mob_cnt]->top_level );
+            set_level( mob[mob_cnt], ability, mob[mob_cnt]->top_level );
 
           mob[mob_cnt]->hit = mob[mob_cnt]->top_level*15;
           mob[mob_cnt]->max_hit = mob[mob_cnt]->hit;
@@ -93,7 +92,7 @@ void add_reinforcements( Character *ch )
     }
   else
     {
-      Character *mob;
+      CHAR_DATA *mob;
       int ability;
 
       if ( ch->backup_mob == MOB_VNUM_IMP_ELITE ||
@@ -103,8 +102,7 @@ void add_reinforcements( Character *ch )
 
       mob = create_mobile( pMobIndex );
       char_to_room( mob, ch->in_room );
-
-      if ( is_clanned( ch ) )
+      if ( ch->pcdata && ch->pcdata->clan )
         {
           char tmpbuf[MAX_STRING_LENGTH];
 
@@ -116,10 +114,10 @@ void add_reinforcements( Character *ch )
         }
       act( AT_IMMORT, "$N has arrived.", ch, NULL, mob, TO_ROOM );
       send_to_char( "Your guard has arrived.\r\n", ch );
-      mob->top_level = multiplier * GetLevel( ch, LEADERSHIP_ABILITY ) / 2;
+      mob->top_level = multiplier * get_level( ch, LEADERSHIP_ABILITY ) / 2;
 
       for ( ability = 0 ; ability < MAX_ABILITY ; ability++ )
-        SetLevel( mob, ability, mob->top_level );
+        set_level( mob, ability, mob->top_level );
 
       mob->hit = mob->top_level*10;
       mob->max_hit = mob->hit;
@@ -138,8 +136,7 @@ void add_reinforcements( Character *ch )
 
       if ( mob->mob_clan )
         STRFREE ( mob->mob_clan );
-
-      if ( is_clanned( ch ) )
+      if ( ch->pcdata && ch->pcdata->clan )
         mob->mob_clan = STRALLOC( ch->pcdata->clan->name );
     }
 }

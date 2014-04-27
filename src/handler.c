@@ -25,12 +25,11 @@
 #include "character.h"
 #include "mud.h"
 #include "track.h"
-#include "room.h"
 
-extern Character *gch_prev;
+extern CHAR_DATA *gch_prev;
 extern OBJ_DATA *gobj_prev;
 
-Character *cur_char = NULL;
+CHAR_DATA *cur_char = NULL;
 ROOM_INDEX_DATA *cur_room = NULL;
 bool cur_char_died = FALSE;
 ch_ret global_retcode = rNONE;
@@ -42,125 +41,96 @@ obj_ret global_objcode = rNONE;
 
 OBJ_DATA *group_object( OBJ_DATA *obj1, OBJ_DATA *obj2 );
 
-static void room_explode( OBJ_DATA *obj , Character *xch, ROOM_INDEX_DATA *room );
-static void room_explode_1( OBJ_DATA *obj , Character *xch, ROOM_INDEX_DATA *room , int blast );
+static void room_explode( OBJ_DATA *obj , CHAR_DATA *xch, ROOM_INDEX_DATA *room );
+static void room_explode_1( OBJ_DATA *obj , CHAR_DATA *xch, ROOM_INDEX_DATA *room , int blast );
 static void room_explode_2( ROOM_INDEX_DATA *room , int blast );
 
 void explode( OBJ_DATA *obj )
 {
   if ( obj->armed_by )
     {
-      Character *xch = NULL;
-      OBJ_DATA *objcont = obj;
+      ROOM_INDEX_DATA *room;
+      CHAR_DATA *xch;
+      bool held = FALSE;
+      OBJ_DATA *objcont;
+      objcont = obj;
 
       while ( objcont->in_obj && !obj->carried_by )
-	{
-	  objcont = objcont->in_obj;
-	}
+        objcont = objcont->in_obj;
 
       for ( xch = first_char; xch; xch = xch->next )
-	{
-	  if ( !IsNpc( xch ) && nifty_is_name( obj->armed_by, xch->name ) )
-	    {
-	      ROOM_INDEX_DATA *room = NULL;
-	      bool held = FALSE;
+        if ( !is_npc( xch ) && nifty_is_name( obj->armed_by, xch->name ) )
+          {
+            if ( objcont->carried_by )
+              {
+                act( AT_WHITE, "$p EXPLODES in $n's hands!", objcont->carried_by, obj, NULL, TO_ROOM );
+                act( AT_WHITE, "$p EXPLODES in your hands!", objcont->carried_by, obj, NULL, TO_CHAR );
+                room = xch->in_room;
+                held = TRUE;
+              }
+            else if ( objcont->in_room )
+              room = objcont->in_room;
+            else
+              room = NULL;
 
-	      if ( objcont->carried_by )
-		{
-		  act( AT_WHITE, "$p EXPLODES in $n's hands!", objcont->carried_by, obj, NULL, TO_ROOM );
-		  act( AT_WHITE, "$p EXPLODES in your hands!", objcont->carried_by, obj, NULL, TO_CHAR );
-		  room = xch->in_room;
-		  held = TRUE;
-		}
-	      else if ( objcont->in_room )
-		{
-		  room = objcont->in_room;
-		}
-	      else
-		{
-		  room = NULL;
-		}
-
-	      if ( room )
-		{
-		  if ( !held && NumberOfPeopleInRoom( room ) > 0 )
-		    {
-		      CerisListIterator *iter = CreateListIterator(room->People, ForwardsIterator);
-		      Character *firstInRoom = ListIterator_GetData( iter );
-
-		      act( AT_WHITE, "$p EXPLODES!", firstInRoom, obj, NULL, TO_ROOM );
-		      DestroyListIterator( iter );
-		    }
-
-		  room_explode( obj , xch, room );
-		}
-	    }
-	}
+            if ( room )
+              {
+                if ( !held && room->first_person )
+                  act( AT_WHITE, "$p EXPLODES!", room->first_person , obj, NULL, TO_ROOM );
+                room_explode( obj , xch, room );
+              }
+          }
     }
-
   make_scraps(obj);
 }
 
-static void room_explode( OBJ_DATA *explosive, Character *xch, ROOM_INDEX_DATA *room )
+void room_explode( OBJ_DATA *obj, CHAR_DATA *xch, ROOM_INDEX_DATA *room )
 {
-  int blast = (int) (explosive->value[1] / 500) ;
-  room_explode_1( explosive, xch, room, blast );
-  room_explode_2( room, blast );
+  int blast = (int) (obj->value[1] / 500) ;
+  room_explode_1( obj , xch, room , blast );
+  room_explode_2( room , blast );
 }
 
-static void room_explode_1( OBJ_DATA *explosive, Character *xch, ROOM_INDEX_DATA *room, int blast )
+void room_explode_1( OBJ_DATA *obj, CHAR_DATA *xch, ROOM_INDEX_DATA *room, int blast )
 {
+  CHAR_DATA *rch;
+  CHAR_DATA *rnext;
   OBJ_DATA  *robj;
   OBJ_DATA  *robj_next;
-  Character *firstPersonInRoom = GetFirstPersonInRoom( room );
-  CerisList *unmodifiedListOfPeople = List_Copy( room->People );
-  CerisListIterator *peopleIterator = CreateListIterator( unmodifiedListOfPeople, ForwardsIterator );
+  int dam;
 
   if ( IS_SET( room->room_flags, BFS_MARK ) )
     return;
 
   SET_BIT( room->room_flags , BFS_MARK );
 
-  for( ; !ListIterator_IsDone( peopleIterator ); ListIterator_Next( peopleIterator ) )
+  for ( rch = room->first_person ; rch ;  rch = rnext )
     {
-      Character *victim = (Character*) ListIterator_GetData( peopleIterator );
-      int dam = number_range( explosive->value[0], explosive->value[1] );
-
-      act( AT_WHITE, "The shockwave from a massive explosion rips through your body!",
-	   firstPersonInRoom, explosive, NULL, TO_ROOM );
-      damage( victim, victim , dam, TYPE_UNDEFINED );
-
-      if ( !char_died( victim ) )
+      rnext = rch->next_in_room;
+      act( AT_WHITE, "The shockwave from a massive explosion rips through your body!", room->first_person , obj, NULL, TO_ROOM );
+      dam = number_range ( obj->value[0] , obj->value[1] );
+      damage( rch, rch , dam, TYPE_UNDEFINED );
+      if ( !char_died(rch) )
         {
-          if ( IsNpc( victim ) )
+          if ( is_npc( rch ) )
             {
-              if ( IS_SET( victim->act , ACT_SENTINEL ) )
+              if ( IS_SET( rch->act , ACT_SENTINEL ) )
                 {
-                  victim->was_sentinel = victim->in_room;
-                  REMOVE_BIT( victim->act, ACT_SENTINEL );
+                  rch->was_sentinel = rch->in_room;
+                  REMOVE_BIT( rch->act, ACT_SENTINEL );
                 }
-
-              start_hating( victim, xch );
-              start_hunting( victim, xch );
+              start_hating( rch , xch );
+              start_hunting( rch , xch );
             }
         }
     }
 
-  DestroyListIterator( peopleIterator );
-  DestroyList( unmodifiedListOfPeople );
-
   for ( robj = room->first_content; robj; robj = robj_next )
     {
       robj_next = robj->next_content;
-
-      if ( robj != explosive && robj->item_type != ITEM_SPACECRAFT
-	   && robj->item_type != ITEM_SCRAPS
-           && robj->item_type != ITEM_CORPSE_NPC
-	   && robj->item_type != ITEM_CORPSE_PC
-	   && robj->item_type != ITEM_DROID_CORPSE)
-	{
-	  make_scraps( robj );
-	}
+      if ( robj != obj && robj->item_type != ITEM_SPACECRAFT && robj->item_type != ITEM_SCRAPS
+           && robj->item_type != ITEM_CORPSE_NPC && robj->item_type != ITEM_CORPSE_PC && robj->item_type != ITEM_DROID_CORPSE)
+        make_scraps( robj );
     }
 
   /* other rooms */
@@ -169,22 +139,24 @@ static void room_explode_1( OBJ_DATA *explosive, Character *xch, ROOM_INDEX_DATA
 
     for ( pexit = room->first_exit; pexit; pexit = pexit->next )
       {
-        if ( pexit->to_room && pexit->to_room != room )
+        if ( pexit->to_room
+             &&   pexit->to_room != room )
           {
             if ( blast > 0 )
               {
                 int roomblast;
                 roomblast = blast - 1;
-                room_explode_1( explosive, xch, pexit->to_room, roomblast );
+                room_explode_1( obj , xch, pexit->to_room , roomblast );
               }
             else
               echo_to_room( AT_WHITE, pexit->to_room , "You hear a loud EXPLOSION not to far from here." );
           }
       }
   }
+
 }
 
-static void room_explode_2( ROOM_INDEX_DATA *room , int blast )
+void room_explode_2( ROOM_INDEX_DATA *room , int blast )
 {
 
   if ( !IS_SET( room->room_flags, BFS_MARK ) )
@@ -223,11 +195,11 @@ int exp_level( short level)
 /*
  * See if a player/mob can take a piece of prototype eq         -Thoric
  */
-bool can_take_proto( const Character *ch )
+bool can_take_proto( const CHAR_DATA *ch )
 {
-  if ( IsImmortal(ch) )
+  if ( is_immortal(ch) )
     return TRUE;
-  else if ( IsNpc(ch) && IS_SET(ch->act, ACT_PROTOTYPE) )
+  else if ( is_npc(ch) && IS_SET(ch->act, ACT_PROTOTYPE) )
     return TRUE;
   else
     return FALSE;
@@ -236,7 +208,7 @@ bool can_take_proto( const Character *ch )
 /*
  * Apply or remove an affect to a character.
  */
-void affect_modify( Character *ch, AFFECT_DATA *paf, bool fAdd )
+void affect_modify( CHAR_DATA *ch, AFFECT_DATA *paf, bool fAdd )
 {
   OBJ_DATA *wield;
   int mod;
@@ -259,34 +231,15 @@ void affect_modify( Character *ch, AFFECT_DATA *paf, bool fAdd )
        */
       if ( (paf->location % REVERSE_APPLY) == APPLY_REMOVESPELL )
         return;
-
       switch( paf->location % REVERSE_APPLY )
         {
-        case APPLY_AFFECT:
-	  REMOVE_BIT( ch->affected_by, mod );
-	  return;
-
-        case APPLY_RESISTANT:
-	  REMOVE_BIT( ch->resistant, mod );
-	  return;
-
-        case APPLY_IMMUNE:
-	  REMOVE_BIT( ch->immune, mod );
-	  return;
-
-        case APPLY_SUSCEPTIBLE:
-	  REMOVE_BIT( ch->susceptible, mod );
-	  return;
-
-        case APPLY_WEARSPELL:
-	  /* affect only on wear */
-	  return;
-
-        case APPLY_REMOVE:
-          SET_BIT( ch->affected_by, mod );
-	  return;
+        case APPLY_AFFECT:        REMOVE_BIT( ch->affected_by, mod );   return;
+        case APPLY_RESISTANT:     REMOVE_BIT( ch->resistant, mod );     return;
+        case APPLY_IMMUNE:        REMOVE_BIT( ch->immune, mod );        return;
+        case APPLY_SUSCEPTIBLE:   REMOVE_BIT( ch->susceptible, mod );   return;
+        case APPLY_WEARSPELL:       /* affect only on wear */           return;
+        case APPLY_REMOVE:          SET_BIT( ch->affected_by, mod );    return;
         }
-
       mod = 0 - mod;
     }
 
@@ -296,341 +249,209 @@ void affect_modify( Character *ch, AFFECT_DATA *paf, bool fAdd )
       bug( "Affect_modify: unknown location %d.", paf->location );
       return;
 
-    case APPLY_NONE:
-      break;
-
-    case APPLY_STR:
-      ch->stats.mod_str += mod;
-      break;
-
-    case APPLY_DEX:
-      ch->stats.mod_dex += mod;
-      break;
-
-    case APPLY_INT:
-      ch->stats.mod_int += mod;
-      break;
-
-    case APPLY_WIS:
-      ch->stats.mod_wis += mod;
-      break;
-
-    case APPLY_CON:
-      ch->stats.mod_con += mod;
-      break;
-
-    case APPLY_CHA:
-      ch->stats.mod_cha += mod;
-      break;
-
-    case APPLY_LCK:
-      ch->stats.mod_lck += mod;
-      break;
-
+    case APPLY_NONE:                                            break;
+    case APPLY_STR:           ch->stats.mod_str               += mod; break;
+    case APPLY_DEX:           ch->stats.mod_dex               += mod; break;
+    case APPLY_INT:           ch->stats.mod_int               += mod; break;
+    case APPLY_WIS:           ch->stats.mod_wis               += mod; break;
+    case APPLY_CON:           ch->stats.mod_con               += mod; break;
+    case APPLY_CHA:           ch->stats.mod_cha               += mod; break;
+    case APPLY_LCK:           ch->stats.mod_lck               += mod; break;
     case APPLY_SEX:
       ch->sex = (ch->sex+mod) % 3;
-
       if ( ch->sex < 0 )
-	{
-	  ch->sex += 2;
-	}
-
+        ch->sex += 2;
       ch->sex = URANGE( 0, ch->sex, 2 );
       break;
-
-    case APPLY_LEVEL:
-      break;
-
-    case APPLY_AGE:
-      break;
-
-    case APPLY_HEIGHT:
-      ch->height += mod;
-      break;
-
-    case APPLY_WEIGHT:
-      ch->weight += mod;
-      break;
-
-    case APPLY_MANA:
-      ch->max_mana += mod;
-      break;
-
-    case APPLY_HIT:
-      ch->max_hit += mod;
-      break;
-
-    case APPLY_MOVE:
-      ch->max_move += mod;
-      break;
-
-    case APPLY_GOLD:
-      break;
-
-    case APPLY_EXP:
-      break;
-
-    case APPLY_AC:
-      ch->armor += mod;
-      break;
-
-    case APPLY_HITROLL:
-      ch->hitroll += mod;
-      break;
-
-    case APPLY_DAMROLL:
-      ch->damroll += mod;
-      break;
-
-    case APPLY_SAVING_POISON:
-      ch->saving.poison_death += mod;
-      break;
-
-    case APPLY_SAVING_ROD:
-      ch->saving.wand += mod;
-      break;
-
-    case APPLY_SAVING_PARA:
-      ch->saving.para_petri += mod;
-      break;
-
-    case APPLY_SAVING_BREATH:
-      ch->saving.breath += mod;
-      break;
-
-    case APPLY_SAVING_SPELL:
-      ch->saving.spell_staff += mod;
-      break;
-
-    case APPLY_AFFECT:
-      SET_BIT( ch->affected_by, mod );
-      break;
-
-    case APPLY_RESISTANT:
-      SET_BIT( ch->resistant, mod );
-      break;
-
-    case APPLY_IMMUNE:
-      SET_BIT( ch->immune, mod );
-      break;
-
-    case APPLY_SUSCEPTIBLE:
-      SET_BIT( ch->susceptible, mod );
-      break;
-
-    case APPLY_WEAPONSPELL:
-      /* see fight.c */
-      break;
-
-    case APPLY_REMOVE:
-      REMOVE_BIT(ch->affected_by, mod);
-      break;
+    case APPLY_LEVEL:                                           break;
+    case APPLY_AGE:                                             break;
+    case APPLY_HEIGHT:        ch->height                += mod; break;
+    case APPLY_WEIGHT:        ch->weight                += mod; break;
+    case APPLY_MANA:          ch->max_mana              += mod; break;
+    case APPLY_HIT:           ch->max_hit               += mod; break;
+    case APPLY_MOVE:          ch->max_move              += mod; break;
+    case APPLY_GOLD:                                            break;
+    case APPLY_EXP:                                             break;
+    case APPLY_AC:            ch->armor                 += mod; break;
+    case APPLY_HITROLL:       ch->hitroll               += mod; break;
+    case APPLY_DAMROLL:       ch->damroll               += mod; break;
+    case APPLY_SAVING_POISON: ch->saving.poison_death   += mod; break;
+    case APPLY_SAVING_ROD:    ch->saving.wand           += mod; break;
+    case APPLY_SAVING_PARA:   ch->saving.para_petri     += mod; break;
+    case APPLY_SAVING_BREATH: ch->saving.breath         += mod; break;
+    case APPLY_SAVING_SPELL:  ch->saving.spell_staff    += mod; break;
+    case APPLY_AFFECT:        SET_BIT( ch->affected_by, mod );  break;
+    case APPLY_RESISTANT:     SET_BIT( ch->resistant, mod );    break;
+    case APPLY_IMMUNE:        SET_BIT( ch->immune, mod );       break;
+    case APPLY_SUSCEPTIBLE:   SET_BIT( ch->susceptible, mod );  break;
+    case APPLY_WEAPONSPELL:     /* see fight.c */               break;
+    case APPLY_REMOVE:        REMOVE_BIT(ch->affected_by, mod); break;
 
     case APPLY_FULL:
-      if ( !IsNpc(ch) )
-	{
-	  ch->pcdata->condition[COND_FULL] = URANGE( 0, ch->pcdata->condition[COND_FULL] + mod, 48 );
-	}
+      if ( !is_npc(ch) )
+        ch->pcdata->condition[COND_FULL] =
+          URANGE( 0, ch->pcdata->condition[COND_FULL] + mod, 48 );
       break;
 
     case APPLY_THIRST:
-      if ( !IsNpc(ch) )
-	{
-	  ch->pcdata->condition[COND_THIRST] = URANGE( 0, ch->pcdata->condition[COND_THIRST] + mod, 48 );
-	}
+      if ( !is_npc(ch) )
+        ch->pcdata->condition[COND_THIRST] =
+          URANGE( 0, ch->pcdata->condition[COND_THIRST] + mod, 48 );
       break;
 
     case APPLY_DRUNK:
-      if ( !IsNpc(ch) )
-	{
-	  ch->pcdata->condition[COND_DRUNK] = URANGE( 0, ch->pcdata->condition[COND_DRUNK] + mod, 48 );
-	}
+      if ( !is_npc(ch) )
+        ch->pcdata->condition[COND_DRUNK] =
+          URANGE( 0, ch->pcdata->condition[COND_DRUNK] + mod, 48 );
       break;
 
     case APPLY_MENTALSTATE:
-      ch->mental_state = URANGE(-100, ch->mental_state + mod, 100);
+      ch->mental_state  = URANGE(-100, ch->mental_state + mod, 100);
       break;
-
     case APPLY_EMOTION:
-      ch->emotional_state = URANGE(-100, ch->emotional_state + mod, 100);
+      ch->emotional_state       = URANGE(-100, ch->emotional_state + mod, 100);
       break;
 
     case APPLY_STRIPSN:
       if ( IS_VALID_SN(mod) )
-	{
-	  affect_strip( ch, mod );
-	}
+        affect_strip( ch, mod );
       else
-	{
-	  bug( "affect_modify: APPLY_STRIPSN invalid sn %d", mod );
-	}
+        bug( "affect_modify: APPLY_STRIPSN invalid sn %d", mod );
       break;
 
       /* spell cast upon wear/removal of an object      -Thoric */
     case APPLY_WEARSPELL:
     case APPLY_REMOVESPELL:
       if ( IS_SET(ch->in_room->room_flags, ROOM_NO_MAGIC)
-           || IS_SET(ch->immune, RIS_MAGIC)
-           || saving_char == ch               /* so save/quit doesn't trigger */
-           || loading_char == ch )    /* so loading doesn't trigger */
-	{
-	  return;
-	}
+           ||   IS_SET(ch->immune, RIS_MAGIC)
+           ||   saving_char == ch               /* so save/quit doesn't trigger */
+           ||   loading_char == ch )    /* so loading doesn't trigger */
+        return;
 
       mod = abs(mod);
-
       if ( IS_VALID_SN(mod)
            &&  (skill=skill_table[mod]) != NULL
            &&   skill->type == SKILL_SPELL )
-	{
-	  if ( (retcode=(*skill->spell_fun) ( mod, GetLevel( ch, FORCE_ABILITY ), ch, ch )) == rCHAR_DIED || char_died(ch) )
-	    {
-	      return;
-	    }
-	}
+        if ( (retcode=(*skill->spell_fun) ( mod, get_level( ch, FORCE_ABILITY ), ch, ch )) == rCHAR_DIED || char_died(ch) )
+          return;
       break;
+
 
       /* skill apply types      -Thoric */
 
-    case APPLY_PALM:
-      /* not implemented yet */
-      break;
-
+    case APPLY_PALM:    /* not implemented yet */               break;
     case APPLY_TRACK:
-      if ( !IsNpc(ch) && ch->pcdata->learned[gsn_track]> 0 )
-	{
-	  ch->pcdata->learned[gsn_track] = ( ch->pcdata->learned[gsn_track] >= 100 ? 100 : URANGE( 1, ch->pcdata->learned[gsn_track] + mod, 100 ) );
-	}
+      if ( !is_npc(ch) && ch->pcdata->learned[gsn_track]> 0 )
+        ch->pcdata->learned[gsn_track] =
+          ( ch->pcdata->learned[gsn_track] >= 100 ? 100 : URANGE( 1, ch->pcdata->learned[gsn_track] + mod, 100 ) );
       break;
-
     case APPLY_HIDE:
-      if ( !IsNpc(ch) && ch->pcdata->learned[gsn_hide]> 0)
+      if ( !is_npc(ch) && ch->pcdata->learned[gsn_hide]> 0)
         ch->pcdata->learned[gsn_hide] =
           ( ch->pcdata->learned[gsn_hide] >= 100 ? 100 : URANGE( 1, ch->pcdata->learned[gsn_hide] + mod, 100 ) );
       break;
-
     case APPLY_STEAL:
-      if ( !IsNpc(ch) && ch->pcdata->learned[gsn_steal] > 0)
+      if ( !is_npc(ch) && ch->pcdata->learned[gsn_steal] > 0)
         ch->pcdata->learned[gsn_steal] =
           ( ch->pcdata->learned[gsn_steal] >= 100 ? 100 : URANGE( 1, ch->pcdata->learned[gsn_steal] + mod, 100 ) );
       break;
-
     case APPLY_SNEAK:
-      if ( !IsNpc(ch) && ch->pcdata->learned[gsn_sneak]> 0)
+      if ( !is_npc(ch) && ch->pcdata->learned[gsn_sneak]> 0)
         ch->pcdata->learned[gsn_sneak] =
           ( ch->pcdata->learned[gsn_sneak] >= 100 ? 100 : URANGE( 1, ch->pcdata->learned[gsn_sneak] + mod, 100 ) );
       break;
-
     case APPLY_PICK:
-      if ( !IsNpc(ch) && ch->pcdata->learned[gsn_pick_lock]> 0)
+      if ( !is_npc(ch) && ch->pcdata->learned[gsn_pick_lock]> 0)
         ch->pcdata->learned[gsn_pick_lock] =
           ( ch->pcdata->learned[gsn_pick_lock] >= 100 ? 100 : URANGE( 1, ch->pcdata->learned[gsn_pick_lock] + mod, 100 ) );
       break;
-
     case APPLY_BACKSTAB:
-      if ( !IsNpc(ch) && ch->pcdata->learned[gsn_backstab]> 0)
+      if ( !is_npc(ch) && ch->pcdata->learned[gsn_backstab]> 0)
         ch->pcdata->learned[gsn_backstab] =
           ( ch->pcdata->learned[gsn_backstab] >= 100 ? 100 : URANGE( 1, ch->pcdata->learned[gsn_backstab] + mod, 100 ) );
       break;
-
     case APPLY_DETRAP:
-      if ( !IsNpc(ch) && ch->pcdata->learned[gsn_detrap]> 0)
+      if ( !is_npc(ch) && ch->pcdata->learned[gsn_detrap]> 0)
         ch->pcdata->learned[gsn_detrap] =
           ( ch->pcdata->learned[gsn_detrap] >= 100 ? 100 : URANGE( 1, ch->pcdata->learned[gsn_detrap] + mod, 100 ) );
       break;
-
     case APPLY_DODGE:
-      if ( !IsNpc(ch) && ch->pcdata->learned[gsn_dodge]> 0)
+      if ( !is_npc(ch) && ch->pcdata->learned[gsn_dodge]> 0)
         ch->pcdata->learned[gsn_dodge] =
           ( ch->pcdata->learned[gsn_dodge] >= 100 ? 100 : URANGE( 1, ch->pcdata->learned[gsn_dodge] + mod, 100 ) );
       break;
-
     case APPLY_PEEK:
-      if ( !IsNpc(ch) && ch->pcdata->learned[gsn_peek]> 0)
+      if ( !is_npc(ch) && ch->pcdata->learned[gsn_peek]> 0)
         ch->pcdata->learned[gsn_peek] =
           ( ch->pcdata->learned[gsn_peek] >= 100 ? 100 : URANGE( 1, ch->pcdata->learned[gsn_peek] + mod, 100 ) );
       break;
-
     case APPLY_SCAN:
-      if ( !IsNpc(ch) && ch->pcdata->learned[gsn_scan]> 0)
+      if ( !is_npc(ch) && ch->pcdata->learned[gsn_scan]> 0)
         ch->pcdata->learned[gsn_scan] =
           ( ch->pcdata->learned[gsn_scan] >= 100 ? 100 : URANGE( 1, ch->pcdata->learned[gsn_scan] + mod, 100 ) );
       break;
-
     case APPLY_GOUGE:
-      if ( !IsNpc(ch) && ch->pcdata->learned[gsn_gouge]> 0)
+      if ( !is_npc(ch) && ch->pcdata->learned[gsn_gouge]> 0)
         ch->pcdata->learned[gsn_gouge] =
           ( ch->pcdata->learned[gsn_gouge] >= 100 ? 100 : URANGE( 1, ch->pcdata->learned[gsn_gouge] + mod, 100 ) );
       break;
-
     case APPLY_SEARCH:
-      if ( !IsNpc(ch) && ch->pcdata->learned[gsn_search]> 0)
+      if ( !is_npc(ch) && ch->pcdata->learned[gsn_search]> 0)
         ch->pcdata->learned[gsn_search] =
           ( ch->pcdata->learned[gsn_search] >= 100 ? 100 : URANGE( 1, ch->pcdata->learned[gsn_search] + mod, 100 ) );
       break;
-
     case APPLY_DIG:
-      if ( !IsNpc(ch) && ch->pcdata->learned[gsn_dig]> 0)
+      if ( !is_npc(ch) && ch->pcdata->learned[gsn_dig]> 0)
         ch->pcdata->learned[gsn_dig] =
           ( ch->pcdata->learned[gsn_dig] >= 100 ? 100 : URANGE( 1, ch->pcdata->learned[gsn_dig] + mod, 100 ) );
       break;
-
     case APPLY_MOUNT:
-      if ( !IsNpc(ch) && ch->pcdata->learned[gsn_mount]> 0 )
+      if ( !is_npc(ch) && ch->pcdata->learned[gsn_mount]> 0 )
         ch->pcdata->learned[gsn_mount] =
           ( ch->pcdata->learned[gsn_mount] >= 100 ? 100 : URANGE( 1, ch->pcdata->learned[gsn_mount] + mod, 100 ) );
       break;
-
     case APPLY_DISARM:
-      if ( !IsNpc(ch) && ch->pcdata->learned[gsn_disarm]> 0 )
+      if ( !is_npc(ch) && ch->pcdata->learned[gsn_disarm]> 0 )
         ch->pcdata->learned[gsn_disarm] =
           ( ch->pcdata->learned[gsn_disarm] >= 100 ? 100 : URANGE( 1, ch->pcdata->learned[gsn_disarm] + mod, 100 ) );
       break;
-
     case APPLY_KICK:
-      if ( !IsNpc(ch) && ch->pcdata->learned[gsn_kick]> 0)
+      if ( !is_npc(ch) && ch->pcdata->learned[gsn_kick]> 0)
         ch->pcdata->learned[gsn_kick] =
           ( ch->pcdata->learned[gsn_kick] >= 100 ? 100 : URANGE( 1, ch->pcdata->learned[gsn_kick] + mod, 100 ) );
       break;
-
     case APPLY_PARRY:
-      if ( !IsNpc(ch) && ch->pcdata->learned[gsn_parry]> 0)
+      if ( !is_npc(ch) && ch->pcdata->learned[gsn_parry]> 0)
         ch->pcdata->learned[gsn_parry] =
           ( ch->pcdata->learned[gsn_parry] >= 100 ? 100 : URANGE( 1, ch->pcdata->learned[gsn_parry] + mod, 100 ) );
       break;
-
     case APPLY_BASH:
-      if ( !IsNpc(ch) && ch->pcdata->learned[gsn_bash]> 0)
+      if ( !is_npc(ch) && ch->pcdata->learned[gsn_bash]> 0)
         ch->pcdata->learned[gsn_bash] =
           ( ch->pcdata->learned[gsn_bash] >= 100 ? 100 : URANGE( 1, ch->pcdata->learned[gsn_bash] + mod, 100 ) );
       break;
-
     case APPLY_STUN:
-      if ( !IsNpc(ch) && ch->pcdata->learned[gsn_stun]> 0)
+      if ( !is_npc(ch) && ch->pcdata->learned[gsn_stun]> 0)
         ch->pcdata->learned[gsn_stun] =
           ( ch->pcdata->learned[gsn_stun] >= 100 ? 100 : URANGE( 1, ch->pcdata->learned[gsn_stun] + mod, 100 ) );
       break;
-
     case APPLY_PUNCH:
-      if ( !IsNpc(ch) && ch->pcdata->learned[gsn_punch]> 0)
+      if ( !is_npc(ch) && ch->pcdata->learned[gsn_punch]> 0)
         ch->pcdata->learned[gsn_punch] =
           ( ch->pcdata->learned[gsn_punch] >= 100 ? 100 : URANGE( 1, ch->pcdata->learned[gsn_punch] + mod, 100 ) );
       break;
-
     case APPLY_CLIMB:
-      if ( !IsNpc(ch) && ch->pcdata->learned[gsn_climb]> 0)
+      if ( !is_npc(ch) && ch->pcdata->learned[gsn_climb]> 0)
         ch->pcdata->learned[gsn_climb] =
           ( ch->pcdata->learned[gsn_climb] >= 100 ? 100 : URANGE( 1, ch->pcdata->learned[gsn_climb] + mod, 100 ) );
       break;
-
     case APPLY_GRIP:
-      if ( !IsNpc(ch) && ch->pcdata->learned[gsn_grip]> 0)
+      if ( !is_npc(ch) && ch->pcdata->learned[gsn_grip]> 0)
         ch->pcdata->learned[gsn_grip] =
           ( ch->pcdata->learned[gsn_grip] >= 100 ? 100 : URANGE( 1, ch->pcdata->learned[gsn_grip] + mod, 100 ) );
       break;
-
     case APPLY_SNIPE:
-      if ( !IsNpc(ch) && ch->pcdata->learned[gsn_snipe]> 0)
+      if ( !is_npc(ch) && ch->pcdata->learned[gsn_snipe]> 0)
         ch->pcdata->learned[gsn_snipe] =
           ( ch->pcdata->learned[gsn_snipe] >= 100 ? 100 : URANGE( 1, ch->pcdata->learned[gsn_snipe] + mod, 100 ) );
       break;
@@ -640,12 +461,12 @@ void affect_modify( Character *ch, AFFECT_DATA *paf, bool fAdd )
    * Check for weapon wielding.
    * Guard against recursion (for weapons with affects).
    */
-  if ( !IsNpc( ch )
+  if ( !is_npc( ch )
        &&   saving_char != ch
        && ( wield = get_eq_char( ch, WEAR_WIELD ) ) != NULL
-       &&   get_obj_weight(wield) > str_app[GetCurrentStr(ch)].wield )
+       &&   get_obj_weight(wield) > str_app[get_curr_str(ch)].wield )
     {
-      static int depth = 0;
+      static int depth;
 
       if ( depth == 0 )
         {
@@ -657,12 +478,16 @@ void affect_modify( Character *ch, AFFECT_DATA *paf, bool fAdd )
           depth--;
         }
     }
+
+  return;
 }
+
+
 
 /*
  * Give an affect to a char.
  */
-void affect_to_char( Character *ch, AFFECT_DATA *paf )
+void affect_to_char( CHAR_DATA *ch, AFFECT_DATA *paf )
 {
   AFFECT_DATA *paf_new;
 
@@ -694,7 +519,7 @@ void affect_to_char( Character *ch, AFFECT_DATA *paf )
 /*
  * Remove an affect from a char.
  */
-void affect_remove( Character *ch, AFFECT_DATA *paf )
+void affect_remove( CHAR_DATA *ch, AFFECT_DATA *paf )
 {
   if ( !ch->first_affect )
     {
@@ -712,7 +537,7 @@ void affect_remove( Character *ch, AFFECT_DATA *paf )
 /*
  * Strip all affects of a given sn.
  */
-void affect_strip( Character *ch, int sn )
+void affect_strip( CHAR_DATA *ch, int sn )
 {
   AFFECT_DATA *paf;
   AFFECT_DATA *paf_next;
@@ -732,7 +557,7 @@ void affect_strip( Character *ch, int sn )
  * Limitations put in place by Thoric, they may be high... but at least
  * they're there :)
  */
-void affect_join( Character *ch, AFFECT_DATA *paf )
+void affect_join( CHAR_DATA *ch, AFFECT_DATA *paf )
 {
   AFFECT_DATA *paf_old;
 
@@ -756,7 +581,7 @@ void affect_join( Character *ch, AFFECT_DATA *paf )
 /*
  * Move a char out of a room.
  */
-void char_from_room( Character *ch )
+void char_from_room( CHAR_DATA *ch )
 {
   OBJ_DATA *obj;
 
@@ -772,33 +597,33 @@ void char_from_room( Character *ch )
       return;
     }
 
-  if ( !IsNpc(ch) )
-    {
-      --ch->in_room->area->nplayer;
-    }
+  if ( !is_npc(ch) )
+    --ch->in_room->area->nplayer;
 
   if ( ( obj = get_eq_char( ch, WEAR_LIGHT ) ) != NULL
-       && obj->item_type == ITEM_LIGHT
-       && obj->value[2] != 0
-       && ch->in_room->light > 0 )
-    {
-      --ch->in_room->light;
-    }
+       &&   obj->item_type == ITEM_LIGHT
+       &&   obj->value[2] != 0
+       &&   ch->in_room->light > 0 )
+    --ch->in_room->light;
 
-  List_Remove( ch->in_room->People, ch );
+  UNLINK( ch, ch->in_room->first_person, ch->in_room->last_person,
+          next_in_room, prev_in_room );
   ch->in_room      = NULL;
+  ch->next_in_room = NULL;
+  ch->prev_in_room = NULL;
 
-  if ( !IsNpc(ch)
-       && get_timer( ch, TIMER_SHOVEDRAG ) > 0 )
-    {
-      remove_timer( ch, TIMER_SHOVEDRAG );
-    }
+  if ( !is_npc(ch)
+       &&   get_timer( ch, TIMER_SHOVEDRAG ) > 0 )
+    remove_timer( ch, TIMER_SHOVEDRAG );
+
+  return;
 }
+
 
 /*
  * Move a char into a room.
  */
-void char_to_room( Character *ch, ROOM_INDEX_DATA *pRoomIndex )
+void char_to_room( CHAR_DATA *ch, ROOM_INDEX_DATA *pRoomIndex )
 {
   OBJ_DATA *obj;
 
@@ -820,9 +645,10 @@ void char_to_room( Character *ch, ROOM_INDEX_DATA *pRoomIndex )
     }
 
   ch->in_room           = pRoomIndex;
-  List_AddTail( pRoomIndex->People, ch );
+  LINK( ch, pRoomIndex->first_person, pRoomIndex->last_person,
+        next_in_room, prev_in_room );
 
-  if ( !IsNpc(ch) )
+  if ( !is_npc(ch) )
     if ( ++ch->in_room->area->nplayer > ch->in_room->area->max_players )
       ch->in_room->area->max_players = ch->in_room->area->nplayer;
 
@@ -831,7 +657,7 @@ void char_to_room( Character *ch, ROOM_INDEX_DATA *pRoomIndex )
        &&   obj->value[2] != 0 )
     ++ch->in_room->light;
 
-  if ( !IsNpc(ch)
+  if ( !is_npc(ch)
        &&    IS_SET(ch->in_room->room_flags, ROOM_SAFE)
        &&    get_timer(ch, TIMER_SHOVEDRAG) <= 0 )
     add_timer( ch, TIMER_SHOVEDRAG, 10, NULL, 0 );  /*-30 Seconds-*/
@@ -860,7 +686,7 @@ void char_to_room( Character *ch, ROOM_INDEX_DATA *pRoomIndex )
 /*
  * Give an obj to a char.
  */
-OBJ_DATA *obj_to_char( OBJ_DATA *obj, Character *ch )
+OBJ_DATA *obj_to_char( OBJ_DATA *obj, CHAR_DATA *ch )
 {
   OBJ_DATA *otmp;
   OBJ_DATA *oret = obj;
@@ -875,8 +701,8 @@ OBJ_DATA *obj_to_char( OBJ_DATA *obj, Character *ch )
 
   if (IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
     {
-      if (!IsImmortal( ch )
-          && (IsNpc(ch) && !IS_SET(ch->act, ACT_PROTOTYPE)) )
+      if (!is_immortal( ch )
+          && (is_npc(ch) && !IS_SET(ch->act, ACT_PROTOTYPE)) )
         return obj_to_room( obj, ch->in_room );
     }
 
@@ -925,7 +751,7 @@ OBJ_DATA *obj_to_char( OBJ_DATA *obj, Character *ch )
  */
 void obj_from_char( OBJ_DATA *obj )
 {
-  Character *ch;
+  CHAR_DATA *ch;
 
   if ( ( ch = obj->carried_by ) == NULL )
     {
@@ -954,25 +780,15 @@ void obj_from_char( OBJ_DATA *obj )
 
 int count_users(const OBJ_DATA *obj)
 {
+  const CHAR_DATA *fch = NULL;
   int count = 0;
-  CerisListIterator *iter = NULL;
 
   if (obj->in_room == NULL)
     return 0;
 
-  iter = CreateListIterator( obj->in_room->People, ForwardsIterator );
-
-  for( ; !ListIterator_IsDone( iter ); ListIterator_Next( iter ) )
-    {
-      const Character *fch = (Character*) ListIterator_GetData( iter );
-
-      if(fch->on == obj)
-	{
-	  count++;
-	}
-    }
-
-  DestroyListIterator( iter );
+  for (fch = obj->in_room->first_person; fch != NULL; fch = fch->next_in_room)
+    if (fch->on == obj)
+      count++;
 
   return count;
 }
@@ -1028,7 +844,7 @@ int count_obj_list( const OBJ_INDEX_DATA *pObjIndex, const OBJ_DATA *list )
 /*
  * Move an obj out of a room.
  */
-void write_corpses( Character *ch, char *name );
+void write_corpses( CHAR_DATA *ch, char *name );
 
 int falling = 0;
 
@@ -1245,9 +1061,9 @@ void extract_obj( OBJ_DATA *obj )
 /*
  * Extract a char from the world.
  */
-void extract_char( Character *ch, bool fPull )
+void extract_char( CHAR_DATA *ch, bool fPull )
 {
-  Character *wch;
+  CHAR_DATA *wch;
   OBJ_DATA *obj;
   char buf[MAX_STRING_LENGTH];
   ROOM_INDEX_DATA *location;
@@ -1304,7 +1120,7 @@ void extract_char( Character *ch, bool fPull )
       ch->position = POS_STANDING;
     }
 
-  if ( IsNpc(ch) && IS_SET( ch->act, ACT_MOUNTED ) )
+  if ( is_npc(ch) && IS_SET( ch->act, ACT_MOUNTED ) )
     for ( wch = first_char; wch; wch = wch->next )
       {
         if ( wch->mount == ch )
@@ -1344,7 +1160,7 @@ void extract_char( Character *ch, bool fPull )
       return;
     }
 
-  if ( IsNpc(ch) )
+  if ( is_npc(ch) )
     {
       --ch->pIndexData->count;
       --nummobsloaded;
@@ -1380,95 +1196,58 @@ void extract_char( Character *ch, bool fPull )
 /*
  * Find a char in the room.
  */
-Character *get_char_room( const Character *ch, const char *argument )
+CHAR_DATA *get_char_room( const CHAR_DATA *ch, const char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  int number = 0;
-  int count = 0;
-  vnum_t vnum = 0;
-  CerisListIterator *peopleInRoomIterator = NULL;
+  CHAR_DATA *rch;
+  int number, count, vnum;
 
   number = number_argument( argument, arg );
 
   if ( !str_cmp( arg, "self" ) )
-    {
-      return (Character*)ch;
-    }
+    return (CHAR_DATA*)ch;
 
-  if ( GetTrustedLevel(ch) >= LEVEL_SAVIOR && is_number( arg ) )
-    {
-      vnum = atoi( arg );
-    }
+  if ( get_trust(ch) >= LEVEL_SAVIOR && is_number( arg ) )
+    vnum = atoi( arg );
   else
-    {
-      vnum = -1;
-    }
+    vnum = -1;
 
-  peopleInRoomIterator = CreateListIterator( ch->in_room->People, ForwardsIterator );
+  count  = 0;
 
-  for( ; !ListIterator_IsDone( peopleInRoomIterator ); ListIterator_Next( peopleInRoomIterator ) )
-    {
-      Character *rch = (Character*) ListIterator_GetData( peopleInRoomIterator );
-
-      if ( can_see( ch, rch )
-	   && ( ( ( nifty_is_name( arg, rch->name )
-		    || (!IsNpc(rch) && nifty_is_name( arg, rch->pcdata->title )))
-		  || (IsNpc(rch) && vnum == rch->pIndexData->vnum))) )
-	{
-	  if ( number == 0 && !IsNpc(rch) )
-	    {
-	      DestroyListIterator( peopleInRoomIterator );
-	      return rch;
-	    }
-	  else if ( ++count == number )
-	    {
-	      DestroyListIterator( peopleInRoomIterator );
-	      return rch;
-	    }
-	}
-    }
-
-  DestroyListIterator( peopleInRoomIterator );
+  for ( rch = ch->in_room->first_person; rch; rch = rch->next_in_room )
+    if ( can_see( ch, rch )
+         &&  (( (nifty_is_name( arg, rch->name ) || (!is_npc(rch) && nifty_is_name( arg, rch->pcdata->title )))
+                ||  (is_npc(rch) && vnum == rch->pIndexData->vnum))) )
+      {
+        if ( number == 0 && !is_npc(rch) )
+          return rch;
+        else
+          if ( ++count == number )
+            return rch;
+      }
 
   if ( vnum != -1 )
-    {
-      return NULL;
-    }
+    return NULL;
 
   /* If we didn't find an exact match, run through the list of characters
      again looking for prefix matching, ie gu == guard.
      Added by Narn, Sept/96
   */
-  count = 0;
-
-  peopleInRoomIterator = CreateListIterator( ch->in_room->People, ForwardsIterator );
-
-  for( ; !ListIterator_IsDone( peopleInRoomIterator ); ListIterator_Next( peopleInRoomIterator ) )
+  count  = 0;
+  for ( rch = ch->in_room->first_person; rch; rch = rch->next_in_room )
     {
-      Character *rch = (Character*) ListIterator_GetData( peopleInRoomIterator );
-
       if ( !can_see( ch, rch ) ||
            (!nifty_is_name_prefix( arg, rch->name ) &&
-            (IsNpc(rch) || (!IsNpc(rch) && !nifty_is_name_prefix( arg, rch->pcdata->title )))
+            (is_npc(rch) || (!is_npc(rch) && !nifty_is_name_prefix( arg, rch->pcdata->title )))
             )
            )
-	{
-	  continue;
-	}
-
-      if ( number == 0 && !IsNpc(rch) )
-	{
-	  DestroyListIterator( peopleInRoomIterator );
-	  return rch;
-	}
-      else if ( ++count == number )
-	{
-	  DestroyListIterator( peopleInRoomIterator );
+        continue;
+      if ( number == 0 && !is_npc(rch) )
+        return rch;
+      else
+        if ( ++count == number )
           return rch;
-	}
     }
-
-  DestroyListIterator( peopleInRoomIterator );
 
   return NULL;
 }
@@ -1476,74 +1255,51 @@ Character *get_char_room( const Character *ch, const char *argument )
 /*
  * Find a char in the world.
  */
-Character *get_char_world( const Character *ch, const char *argument )
+CHAR_DATA *get_char_world( const CHAR_DATA *ch, const char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  int number = 0;
-  int count  = 0;
-  vnum_t vnum = 0;
-  CerisListIterator *peopleIterator = NULL;
-  Character *wch = NULL;
+  CHAR_DATA *wch;
+  int number, count, vnum;
 
   number = number_argument( argument, arg );
+  count  = 0;
 
   if ( !str_cmp( arg, "self" ) )
-    return (Character*)ch;
+    return (CHAR_DATA*)ch;
 
   /*
    * Allow reference by vnum for saints+                        -Thoric
    */
-  if ( GetTrustedLevel(ch) >= LEVEL_SAVIOR && is_number( arg ) )
-    {
-      vnum = atoi( arg );
-    }
+  if ( get_trust(ch) >= LEVEL_SAVIOR && is_number( arg ) )
+    vnum = atoi( arg );
   else
-    {
-      vnum = -1;
-    }
-
-  peopleIterator = CreateListIterator( ch->in_room->People, ForwardsIterator );
+    vnum = -1;
 
   /* check the room for an exact match */
-  for( ; !ListIterator_IsDone( peopleIterator ); ListIterator_Next( peopleIterator ) )
-    {
-      Character *person = (Character*) ListIterator_GetData( peopleIterator );
+  for ( wch = ch->in_room->first_person; wch; wch = wch->next_in_room )
+    if ( (nifty_is_name( arg, wch->name )
+          ||  (is_npc(wch) && vnum == wch->pIndexData->vnum)) && is_wizvis(ch,wch))
+      {
+        if ( number == 0 && !is_npc(wch) )
+          return wch;
+        else
+          if ( ++count == number )
+            return wch;
+      }
 
-      if( (nifty_is_name( arg, person->name )
-	   || (IsNpc(person) && vnum == person->pIndexData->vnum)) && IsWizvis(ch,person))
-	{
-	  if ( number == 0 && !IsNpc(person) )
-	    {
-	      DestroyListIterator( peopleIterator );
-	      return person;
-	    }
-	  else if ( ++count == number )
-	    {
-	      DestroyListIterator( peopleIterator );
-	      return person;
-	    }
-	}
-    }
-
-  DestroyListIterator( peopleIterator );
   count = 0;
 
   /* check the world for an exact match */
   for ( wch = first_char; wch; wch = wch->next )
-    {
-      if( (nifty_is_name( arg, wch->name )
-	   || (IsNpc(wch) && vnum == wch->pIndexData->vnum)) && IsWizvis(ch,wch) )
-	{
-	  if ( number == 0 && !IsNpc(wch) )
-	    {
-	      return wch;
-	    }
-	  else if ( ++count == number  )
-	    {
-	      return wch;
-	    }
-	}
-    }
+    if ( (nifty_is_name( arg, wch->name )
+          ||  (is_npc(wch) && vnum == wch->pIndexData->vnum)) && is_wizvis(ch,wch) )
+      {
+        if ( number == 0 && !is_npc(wch) )
+          return wch;
+        else
+          if ( ++count == number  )
+            return wch;
+      }
 
   /* bail out if looking for a vnum match */
   if ( vnum != -1 )
@@ -1555,30 +1311,16 @@ Character *get_char_world( const Character *ch, const char *argument )
    * Added by Narn, Sept/96
    */
   count  = 0;
-  peopleIterator = CreateListIterator( ch->in_room->People, ForwardsIterator );
-
-  for( ; !ListIterator_IsDone( peopleIterator ); ListIterator_Next( peopleIterator ) )
+  for ( wch = ch->in_room->first_person; wch; wch = wch->next_in_room )
     {
-      Character *person = (Character*) ListIterator_GetData( peopleIterator );
-
-      if ( !nifty_is_name_prefix( arg, person->name ) )
-	{
-	  continue;
-	}
-
-      if ( number == 0 && !IsNpc(person) && IsWizvis(ch,person))
-	{
-	  DestroyListIterator( peopleIterator );
-	  return person;
-	}
-      else if ( ++count == number  && IsWizvis(ch, person) )
-	{
-	  DestroyListIterator( peopleIterator );
-          return person;
-	}
+      if ( !nifty_is_name_prefix( arg, wch->name ) )
+        continue;
+      if ( number == 0 && !is_npc(wch) && is_wizvis(ch,wch))
+        return wch;
+      else
+        if ( ++count == number  && is_wizvis(ch, wch) )
+          return wch;
     }
-
-  DestroyListIterator( peopleIterator );
 
   /*
    * If we didn't find a prefix match in the room, run through the full list
@@ -1586,22 +1328,15 @@ Character *get_char_world( const Character *ch, const char *argument )
    * Added by Narn, Sept/96
    */
   count  = 0;
-
   for ( wch = first_char; wch; wch = wch->next )
     {
       if ( !nifty_is_name_prefix( arg, wch->name ) )
-	{
-	  continue;
-	}
-
-      if ( number == 0 && !IsNpc(wch) && IsWizvis(ch, wch) )
-	{
-	  return wch;
-	}
-      else if ( ++count == number  && IsWizvis(ch, wch) )
-	{
+        continue;
+      if ( number == 0 && !is_npc(wch) && is_wizvis(ch, wch) )
+        return wch;
+      else
+        if ( ++count == number  && is_wizvis(ch, wch) )
           return wch;
-	}
     }
 
   return NULL;
@@ -1628,7 +1363,7 @@ OBJ_DATA *get_obj_type( const OBJ_INDEX_DATA *pObjIndex )
 /*
  * Find an obj in a list.
  */
-OBJ_DATA *get_obj_list( const Character *ch, const char *argument, OBJ_DATA *list )
+OBJ_DATA *get_obj_list( const CHAR_DATA *ch, const char *argument, OBJ_DATA *list )
 {
   char arg[MAX_INPUT_LENGTH];
   OBJ_DATA *obj = NULL;
@@ -1657,7 +1392,7 @@ OBJ_DATA *get_obj_list( const Character *ch, const char *argument, OBJ_DATA *lis
 /*
  * Find an obj in a list...going the other way                  -Thoric
  */
-OBJ_DATA *get_obj_list_rev( const Character *ch, const char *argument, OBJ_DATA *list )
+OBJ_DATA *get_obj_list_rev( const CHAR_DATA *ch, const char *argument, OBJ_DATA *list )
 {
   char arg[MAX_INPUT_LENGTH];
   OBJ_DATA *obj;
@@ -1687,7 +1422,7 @@ OBJ_DATA *get_obj_list_rev( const Character *ch, const char *argument, OBJ_DATA 
 /*
  * Find an obj in the room or in inventory.
  */
-OBJ_DATA *get_obj_here( const Character *ch, const char *argument )
+OBJ_DATA *get_obj_here( const CHAR_DATA *ch, const char *argument )
 {
   OBJ_DATA *obj;
 
@@ -1710,7 +1445,7 @@ OBJ_DATA *get_obj_here( const Character *ch, const char *argument )
 /*
  * Find an obj in the world.
  */
-OBJ_DATA *get_obj_world( const Character *ch, const char *argument )
+OBJ_DATA *get_obj_world( const CHAR_DATA *ch, const char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   OBJ_DATA *obj;
@@ -1727,7 +1462,7 @@ OBJ_DATA *get_obj_world( const Character *ch, const char *argument )
   /*
    * Allow reference by vnum for saints+                        -Thoric
    */
-  if ( GetTrustedLevel(ch) >= LEVEL_SAVIOR && is_number( arg ) )
+  if ( get_trust(ch) >= LEVEL_SAVIOR && is_number( arg ) )
     vnum = atoi( arg );
   else
     vnum = -1;
@@ -1760,7 +1495,7 @@ OBJ_DATA *get_obj_world( const Character *ch, const char *argument )
  * Generic get obj function that supports optional containers.  -Thoric
  * currently only used for "eat" and "quaff".
  */
-OBJ_DATA *find_obj( Character *ch, const char *orig_argument, bool carryonly )
+OBJ_DATA *find_obj( CHAR_DATA *ch, const char *orig_argument, bool carryonly )
 {
   char argument_buffer[MAX_INPUT_LENGTH];
   char *argument = argument_buffer;
@@ -1881,9 +1616,10 @@ bool room_is_dark( const ROOM_INDEX_DATA *pRoomIndex )
 /*
  * True if room is private.
  */
-bool room_is_private( const Character *ch, const ROOM_INDEX_DATA *pRoomIndex )
+bool room_is_private( const CHAR_DATA *ch, const ROOM_INDEX_DATA *pRoomIndex )
 {
-  int count = 0;
+  CHAR_DATA *rch;
+  int count;
 
   if ( !ch )
     {
@@ -1900,7 +1636,10 @@ bool room_is_private( const Character *ch, const ROOM_INDEX_DATA *pRoomIndex )
   if ( IS_SET(pRoomIndex->room_flags, ROOM_PLR_HOME) && ch->plr_home != pRoomIndex)
     return TRUE;
 
-  count = NumberOfPeopleInRoom( pRoomIndex );
+  count = 0;
+
+  for ( rch = pRoomIndex->first_person; rch; rch = rch->next_in_room )
+    count++;
 
   if ( IS_SET(pRoomIndex->room_flags, ROOM_PRIVATE)  && count >= 2 )
     return TRUE;
@@ -2105,7 +1844,7 @@ const char *magic_bit_name( int magic_flags )
 /*
  * Set off a trap (obj) upon character (ch)                     -Thoric
  */
-ch_ret spring_trap( Character *ch, OBJ_DATA *obj )
+ch_ret spring_trap( CHAR_DATA *ch, OBJ_DATA *obj )
 {
   int dam;
   int typ;
@@ -2200,7 +1939,7 @@ ch_ret spring_trap( Character *ch, OBJ_DATA *obj )
 /*
  * Check an object for a trap                                   -Thoric
  */
-ch_ret check_for_trap( Character *ch, const OBJ_DATA *obj, int flag )
+ch_ret check_for_trap( CHAR_DATA *ch, const OBJ_DATA *obj, int flag )
 {
   OBJ_DATA *check;
   ch_ret retcode = rNONE;
@@ -2224,7 +1963,7 @@ ch_ret check_for_trap( Character *ch, const OBJ_DATA *obj, int flag )
 /*
  * Check the room for a trap                                    -Thoric
  */
-ch_ret check_room_for_traps( Character *ch, int flag )
+ch_ret check_room_for_traps( CHAR_DATA *ch, int flag )
 {
   OBJ_DATA *check;
   ch_ret retcode = rNONE;
@@ -2441,7 +2180,7 @@ void clean_resets( AREA_DATA *tarea )
 /*
  * Show an affect verbosely to a character                      -Thoric
  */
-void showaffect( const Character *ch, const AFFECT_DATA *paf )
+void showaffect( const CHAR_DATA *ch, const AFFECT_DATA *paf )
 {
   char buf[MAX_STRING_LENGTH];
   int x;
@@ -2559,7 +2298,7 @@ void clean_obj_queue()
 /*
  * Set the current global character to ch                       -Thoric
  */
-void set_cur_char( Character *ch )
+void set_cur_char( CHAR_DATA *ch )
 {
   cur_char         = ch;
   cur_char_died  = FALSE;
@@ -2570,9 +2309,9 @@ void set_cur_char( Character *ch )
 /*
  * Check to see if ch died recently                             -Thoric
  */
-bool char_died( const Character *ch )
+bool char_died( const CHAR_DATA *ch )
 {
-  ExtractedCharacter *ccd;
+  EXTRACT_CHAR_DATA *ccd;
 
   if ( ch == cur_char && cur_char_died )
     return TRUE;
@@ -2587,16 +2326,16 @@ bool char_died( const Character *ch )
 /*
  * Add ch to the queue of recently extracted characters         -Thoric
  */
-void queue_extracted_char( Character *ch, bool extract )
+void queue_extracted_char( CHAR_DATA *ch, bool extract )
 {
-  ExtractedCharacter *ccd;
+  EXTRACT_CHAR_DATA *ccd;
 
   if ( !ch )
     {
       bug( "queue_extracted char: ch = NULL", 0 );
       return;
     }
-  CREATE( ccd, ExtractedCharacter, 1 );
+  CREATE( ccd, EXTRACT_CHAR_DATA, 1 );
   ccd->ch                       = ch;
   ccd->room                     = ch->in_room;
   ccd->extract          = extract;
@@ -2614,7 +2353,7 @@ void queue_extracted_char( Character *ch, bool extract )
  */
 void clean_char_queue()
 {
-  ExtractedCharacter *ccd;
+  EXTRACT_CHAR_DATA *ccd;
 
   for ( ccd = extracted_char_queue; ccd; ccd = extracted_char_queue )
     {
@@ -2630,7 +2369,7 @@ void clean_char_queue()
  * Add a timer to ch                                            -Thoric
  * Support for "call back" time delayed commands
  */
-void add_timer( Character *ch, short type, short count, DO_FUN *fun, int value )
+void add_timer( CHAR_DATA *ch, short type, short count, DO_FUN *fun, int value )
 {
   TIMER *timer;
 
@@ -2653,7 +2392,7 @@ void add_timer( Character *ch, short type, short count, DO_FUN *fun, int value )
     }
 }
 
-TIMER *get_timerptr( const Character *ch, short type )
+TIMER *get_timerptr( const CHAR_DATA *ch, short type )
 {
   TIMER *timer;
 
@@ -2664,7 +2403,7 @@ TIMER *get_timerptr( const Character *ch, short type )
   return NULL;
 }
 
-short get_timer( const Character *ch, short type )
+short get_timer( const CHAR_DATA *ch, short type )
 {
   TIMER *timer;
 
@@ -2674,7 +2413,7 @@ short get_timer( const Character *ch, short type )
     return 0;
 }
 
-void extract_timer( Character *ch, TIMER *timer )
+void extract_timer( CHAR_DATA *ch, TIMER *timer )
 {
   if ( !timer )
     {
@@ -2687,7 +2426,7 @@ void extract_timer( Character *ch, TIMER *timer )
   return;
 }
 
-void remove_timer( Character *ch, short type )
+void remove_timer( CHAR_DATA *ch, short type )
 {
   TIMER *timer;
 
@@ -2699,11 +2438,11 @@ void remove_timer( Character *ch, short type )
     extract_timer( ch, timer );
 }
 
-bool in_soft_range( const Character *ch, const AREA_DATA *tarea )
+bool in_soft_range( const CHAR_DATA *ch, const AREA_DATA *tarea )
 {
-  if ( IsImmortal(ch) )
+  if ( is_immortal(ch) )
     return TRUE;
-  else if ( IsNpc(ch) )
+  else if ( is_npc(ch) )
     return TRUE;
   else if ( ch->top_level >= tarea->low_soft_range || ch->top_level <= tarea->hi_soft_range )
     return TRUE;
@@ -2711,11 +2450,11 @@ bool in_soft_range( const Character *ch, const AREA_DATA *tarea )
     return FALSE;
 }
 
-bool in_hard_range( const Character *ch, const AREA_DATA *tarea )
+bool in_hard_range( const CHAR_DATA *ch, const AREA_DATA *tarea )
 {
-  if ( IsImmortal(ch) )
+  if ( is_immortal(ch) )
     return TRUE;
-  else if ( IsNpc(ch) )
+  else if ( is_npc(ch) )
     return TRUE;
   else if ( ch->top_level >= tarea->low_hard_range && ch->top_level <= tarea->hi_hard_range )
     return TRUE;
@@ -2726,7 +2465,7 @@ bool in_hard_range( const Character *ch, const AREA_DATA *tarea )
 /*
  * Scryn, standard luck check 2/2/96
  */
-bool chance( const Character *ch, short percent )
+bool chance( const CHAR_DATA *ch, short percent )
 {
   short ms;
 
@@ -2760,13 +2499,13 @@ bool chance( const Character *ch, short percent )
 
   ms = 10 - abs(ch->mental_state);
 
-  if ( (number_percent() - GetCurrentLck(ch) + 13 - ms) <= percent )
+  if ( (number_percent() - get_curr_lck(ch) + 13 - ms) <= percent )
     return TRUE;
   else
     return FALSE;
 }
 
-bool chance_attrib( const Character *ch, short percent, short attrib )
+bool chance_attrib( const CHAR_DATA *ch, short percent, short attrib )
 {
   if (!ch)
     {
@@ -2774,7 +2513,7 @@ bool chance_attrib( const Character *ch, short percent, short attrib )
       return FALSE;
     }
 
-  if (number_percent() - GetCurrentLck(ch) + 13 - attrib + 13 <= percent )
+  if (number_percent() - get_curr_lck(ch) + 13 - attrib + 13 <= percent )
     return TRUE;
   else
     return FALSE;
@@ -2935,7 +2674,7 @@ void separate_obj( OBJ_DATA *obj )
 bool empty_obj( OBJ_DATA *obj, OBJ_DATA *destobj, ROOM_INDEX_DATA *destroom )
 {
   OBJ_DATA *otmp, *otmp_next;
-  Character *ch = obj->carried_by;
+  CHAR_DATA *ch = obj->carried_by;
   bool movedsome = FALSE;
 
   if ( !obj )
@@ -3054,7 +2793,7 @@ bool economy_has( const AREA_DATA *tarea, int gold )
  * Makes sure mob doesn't get more than 10% of that area's gold,
  * and reduces area economy by the amount of gold given to the mob
  */
-void economize_mobgold( Character *mob )
+void economize_mobgold( CHAR_DATA *mob )
 {
   int gold;
   AREA_DATA *tarea;

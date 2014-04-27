@@ -1,80 +1,45 @@
 #include "character.h"
 #include "mud.h"
 
-static int CalculateDamage( const Character *caster, const Character *victim, int level )
+ch_ret spell_gas_breath( int sn, int level, CHAR_DATA *ch, void *vo )
 {
-  int hpch = UMAX( 10, caster->hit );
-  int dam = number_range( hpch/16+1, hpch/8 );
+  CHAR_DATA *vch;
+  CHAR_DATA *vch_next;
+  int dam;
+  int hpch;
+  bool ch_died;
 
-  if ( saves_breath( level, victim ) )
+  ch_died = FALSE;
+
+  if ( IS_SET( ch->in_room->room_flags, ROOM_SAFE ) )
     {
-      dam /= 2;
-    }
-
-  if ( is_affected_by(victim, AFF_PROTECT) && is_evil(caster) )
-    {
-      dam -= (int) (dam / 4);
-    }
-
-  return dam;
-}
-
-
-static bool IsEligibleVictim( void *element, void *userData )
-{
-  const Character *victim = (Character*) element;
-
-  if ( !IsNpc( victim ) && IS_SET( victim->act, PLR_WIZINVIS )
-       && victim->pcdata->wizinvis >= LEVEL_IMMORTAL )
-    {
-      return FALSE;
-    }
-  else
-    {
-      return TRUE;
-    }
-}
-
-ch_ret spell_gas_breath( int sn, int level, Character *caster, void *vo )
-{
-  bool ch_died = FALSE;
-  CerisList *peopleInRoom = NULL;
-  CerisListIterator *peopleIterator = NULL;
-
-  if ( IS_SET( caster->in_room->room_flags, ROOM_SAFE ) )
-    {
-      set_char_color( AT_MAGIC, caster );
-      send_to_char( "You fail to breathe.\r\n", caster );
+      set_char_color( AT_MAGIC, ch );
+      send_to_char( "You fail to breathe.\r\n", ch );
       return rNONE;
     }
 
-  peopleInRoom = List_CopyIf( caster->in_room->People, IsEligibleVictim, NULL );
-  peopleIterator = CreateListIterator( peopleInRoom, ForwardsIterator );
-
-  for( ; !ListIterator_IsDone( peopleIterator ); ListIterator_Next( peopleIterator ) )
+  for ( vch = ch->in_room->first_person; vch; vch = vch_next )
     {
-      Character *victim = (Character*) ListIterator_GetData( peopleIterator );
+      vch_next = vch->next_in_room;
+      if ( !is_npc( vch ) && IS_SET( vch->act, PLR_WIZINVIS )
+           && vch->pcdata->wizinvis >= LEVEL_IMMORTAL )
+        continue;
 
-      if ( IsNpc(caster) ? !IsNpc(victim) : IsNpc(victim) )
+      if ( is_npc(ch) ? !is_npc(vch) : is_npc(vch) )
         {
-          int dam = CalculateDamage( caster, victim, level );
-
-          if ( damage( caster, victim, dam, sn ) == rCHAR_DIED || char_died(caster) )
-	    {
-	      ch_died = TRUE;
-	    }
+          hpch = UMAX( 10, ch->hit );
+          dam  = number_range( hpch/16+1, hpch/8 );
+          if ( saves_breath( level, vch ) )
+            dam /= 2;
+          if ( is_affected_by(vch, AFF_PROTECT) && is_evil(ch) )
+            dam -= (int) (dam / 4);
+          if ( damage( ch, vch, dam, sn ) == rCHAR_DIED || char_died(ch) )
+            ch_died = TRUE;
         }
     }
 
-  DestroyListIterator( peopleIterator );
-  DestroyList( peopleInRoom );
-
   if ( ch_died )
-    {
-      return rCHAR_DIED;
-    }
+    return rCHAR_DIED;
   else
-    {
-      return rNONE;
-    }
+    return rNONE;
 }

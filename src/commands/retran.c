@@ -1,10 +1,10 @@
 #include "mud.h"
 #include "character.h"
 
-void do_retran( Character *ch, char *argument )
+void do_retran( CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  Character *victim;
+  CHAR_DATA *victim;
   char buf[MAX_STRING_LENGTH];
 
   argument = one_argument( argument, arg );

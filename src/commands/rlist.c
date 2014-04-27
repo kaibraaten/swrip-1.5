@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_rlist( Character *ch, char *argument )
+void do_rlist( CHAR_DATA *ch, char *argument )
 {
   ROOM_INDEX_DATA       *room;
   int                    vnum;
@@ -11,8 +11,8 @@ void do_rlist( Character *ch, char *argument )
   int lrange;
   int trange;
 
-  if ( IsNpc(ch) || GetTrustedLevel( ch ) < LEVEL_AVATAR || !ch->pcdata
-       || ( !ch->pcdata->area && GetTrustedLevel( ch ) < LEVEL_GREATER ) )
+  if ( is_npc(ch) || get_trust( ch ) < LEVEL_AVATAR || !ch->pcdata
+       || ( !ch->pcdata->area && get_trust( ch ) < LEVEL_GREATER ) )
     {
       send_to_char( "You don't have an assigned area.\r\n", ch );
       return;
@@ -34,7 +34,7 @@ void do_rlist( Character *ch, char *argument )
         trange = atoi(arg2);
 
       if ( ( lrange < tarea->low_r_vnum || trange > tarea->hi_r_vnum )
-           && GetTrustedLevel( ch ) < LEVEL_GREATER )
+           && get_trust( ch ) < LEVEL_GREATER )
         {
           send_to_char("That is out of your vnum range.\r\n", ch);
           return;

@@ -3,9 +3,9 @@
 
 extern char *spell_target_name;
 
-ch_ret spell_possess( int sn, int level, Character *ch, void *vo )
+ch_ret spell_possess( int sn, int level, CHAR_DATA *ch, void *vo )
 {
-  Character *victim;
+  CHAR_DATA *victim;
   char buf[MAX_STRING_LENGTH];
   AFFECT_DATA af;
   SKILLTYPE *skill = get_skilltype(sn);
@@ -28,7 +28,7 @@ ch_ret spell_possess( int sn, int level, Character *ch, void *vo )
       return rSPELL_FAILED;
     }
 
-  if (!IsNpc(victim))
+  if (!is_npc(victim))
     {
       send_to_char("You can't possess another player!\r\n", ch);
       return rSPELL_FAILED;
@@ -67,7 +67,7 @@ ch_ret spell_possess( int sn, int level, Character *ch, void *vo )
   sith_penalty( ch );
 
   af.type      = sn;
-  af.duration  = 20 + (GetLevel( ch, FORCE_ABILITY ) - victim->top_level) / 2;
+  af.duration  = 20 + (get_level( ch, FORCE_ABILITY ) - victim->top_level) / 2;
   af.location  = 0;
   af.modifier  = 0;
   af.bitvector = AFF_POSSESS;

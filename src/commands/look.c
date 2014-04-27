@@ -7,36 +7,33 @@
 #include "character.h"
 
 /* Locals */
-void ShowPeopleInRoomToCharacter( const ROOM_INDEX_DATA *room, Character *ch );
+void show_char_to_char( CHAR_DATA *list, CHAR_DATA *ch );
 
-static void show_char_to_char_0( Character *victim, Character *ch );
-static void show_char_to_char_1( Character *victim, Character *ch );
-static void show_ships_to_char( SHIP_DATA *ship, Character *ch );
-static void show_visible_affects_to_char( Character *victim, Character *ch );
-static void show_exit_to_char( Character *ch, EXIT_DATA *pexit, short door );
-static void show_no_arg( Character *ch, bool is_auto );
+static void show_char_to_char_0( CHAR_DATA *victim, CHAR_DATA *ch );
+static void show_char_to_char_1( CHAR_DATA *victim, CHAR_DATA *ch );
+static void show_ships_to_char( SHIP_DATA *ship, CHAR_DATA *ch );
+static void show_visible_affects_to_char( CHAR_DATA *victim, CHAR_DATA *ch );
+static void show_exit_to_char( CHAR_DATA *ch, EXIT_DATA *pexit, short door );
+static void show_no_arg( CHAR_DATA *ch, bool is_auto );
 
-static char *get_sex( Character *ch );
-static void look_under( Character *ch, char *what, bool doexaprog );
-static void look_in( Character *ch, char *what, bool doexaprog );
-static bool requirements_are_met( Character *ch );
+static char *get_sex( CHAR_DATA *ch );
+static void look_under( CHAR_DATA *ch, char *what, bool doexaprog );
+static void look_in( CHAR_DATA *ch, char *what, bool doexaprog );
+static bool requirements_are_met( CHAR_DATA *ch );
 
-static void ShowOnePersonInRoomToCharacter( void *element, void *userData );
-
-void do_look( Character *ch, char *argument )
+void do_look( CHAR_DATA *ch, char *argument )
 {
-  char arg[MAX_INPUT_LENGTH];
-  char arg1[MAX_INPUT_LENGTH];
-  char arg2[MAX_INPUT_LENGTH];
-  char arg3[MAX_INPUT_LENGTH];
-  EXIT_DATA *pexit = NULL;
-  Character *victim = NULL;
-  OBJ_DATA *obj = NULL;
-  char *pdesc = NULL;
-  bool doexaprog = FALSE;
-  short door = DIR_INVALID;
-  int number = 0;
-  int cnt = 0;
+  char arg  [MAX_INPUT_LENGTH];
+  char arg1 [MAX_INPUT_LENGTH];
+  char arg2 [MAX_INPUT_LENGTH];
+  char arg3 [MAX_INPUT_LENGTH];
+  EXIT_DATA *pexit;
+  CHAR_DATA *victim;
+  OBJ_DATA *obj;
+  char *pdesc;
+  bool doexaprog;
+  short door;
+  int number, cnt;
   bool is_auto = FALSE;
 
   if( !requirements_are_met( ch ) )
@@ -110,65 +107,33 @@ void do_look( Character *ch, char *argument )
           if ( (pdesc=get_extra_descr(arg, obj->first_extradesc)) != NULL )
             {
               if ( (cnt += obj->count) < number )
-		{
-		  continue;
-		}
-
+                continue;
               send_to_char( pdesc, ch );
-
-              if ( doexaprog )
-		{
-		  oprog_examine_trigger( ch, obj );
-		}
-
+              if ( doexaprog ) oprog_examine_trigger( ch, obj );
               return;
             }
 
           if ( (pdesc=get_extra_descr(arg, obj->pIndexData->first_extradesc)) != NULL )
             {
               if ( (cnt += obj->count) < number )
-		{
-		  continue;
-		}
-
+		continue;
               send_to_char( pdesc, ch );
-
-              if ( doexaprog )
-		{
-		  oprog_examine_trigger( ch, obj );
-		}
-
+              if ( doexaprog ) oprog_examine_trigger( ch, obj );
               return;
             }
 
           if ( nifty_is_name_prefix( arg, obj->name ) )
             {
               if ( (cnt += obj->count) < number )
-		{
-		  continue;
-		}
-
+                continue;
               pdesc = get_extra_descr( obj->name, obj->pIndexData->first_extradesc );
-
               if ( !pdesc )
-		{
-		  pdesc = get_extra_descr( obj->name, obj->first_extradesc );
-		}
-
+                pdesc = get_extra_descr( obj->name, obj->first_extradesc );
               if ( !pdesc )
-		{
-		  send_to_char( "You see nothing special.\r\n", ch );
-		}
+                send_to_char( "You see nothing special.\r\n", ch );
               else
-		{
-		  send_to_char( pdesc, ch );
-		}
-
-              if ( doexaprog )
-		{
-		  oprog_examine_trigger( ch, obj );
-		}
-
+                send_to_char( pdesc, ch );
+              if ( doexaprog ) oprog_examine_trigger( ch, obj );
               return;
             }
         }
@@ -178,40 +143,27 @@ void do_look( Character *ch, char *argument )
     {
       if ( can_see_obj( ch, obj ) )
         {
-	  pdesc = get_extra_descr(arg, obj->first_extradesc);
-
-          if( pdesc )
+          if ( (pdesc=get_extra_descr(arg, obj->first_extradesc)) != NULL )
             {
               if ( (cnt += obj->count) < number )
-		{
-		  continue;
-		}
+                continue;
 
               send_to_char( pdesc, ch );
 
               if ( doexaprog )
-		{
-		  oprog_examine_trigger( ch, obj );
-		}
+		oprog_examine_trigger( ch, obj );
 
               return;
             }
 
-	  pdesc = get_extra_descr(arg, obj->pIndexData->first_extradesc);
-
-          if ( pdesc )
+          if ( (pdesc=get_extra_descr(arg, obj->pIndexData->first_extradesc)) != NULL )
             {
               if ( (cnt += obj->count) < number )
-		{
-		  continue;
-		}
-
+                continue;
               send_to_char( pdesc, ch );
 
               if ( doexaprog )
-		{
-		  oprog_examine_trigger( ch, obj );
-		}
+		oprog_examine_trigger( ch, obj );
 
               return;
             }
@@ -219,31 +171,15 @@ void do_look( Character *ch, char *argument )
           if ( nifty_is_name_prefix( arg, obj->name ) )
 	    {
               if ( (cnt += obj->count) < number )
-		{
-		  continue;
-		}
-
+                continue;
               pdesc = get_extra_descr( obj->name, obj->pIndexData->first_extradesc );
-
               if ( !pdesc )
-		{
-		  pdesc = get_extra_descr( obj->name, obj->first_extradesc );
-		}
-
+                pdesc = get_extra_descr( obj->name, obj->first_extradesc );
               if ( !pdesc )
-		{
-		  send_to_char( "You see nothing special.\r\n", ch );
-		}
+                send_to_char( "You see nothing special.\r\n", ch );
               else
-		{
-		  send_to_char( pdesc, ch );
-		}
-
-              if ( doexaprog )
-		{
-		  oprog_examine_trigger( ch, obj );
-		}
-
+                send_to_char( pdesc, ch );
+              if ( doexaprog ) oprog_examine_trigger( ch, obj );
               return;
             }
         }
@@ -252,7 +188,7 @@ void do_look( Character *ch, char *argument )
   send_to_char( "You do not see that here.\r\n", ch );
 }
 
-static void show_char_to_char_0( Character *victim, Character *ch )
+static void show_char_to_char_0( CHAR_DATA *victim, CHAR_DATA *ch )
 {
   char buf[MAX_STRING_LENGTH];
   char buf1[MAX_STRING_LENGTH];
@@ -260,92 +196,44 @@ static void show_char_to_char_0( Character *victim, Character *ch )
 
   buf[0] = '\0';
 
-  if ( IsNpc(victim) )
-    {
-      strcat( buf, " "  );
-    }
+  if ( is_npc(victim) )
+    strcat( buf, " "  );
 
-  if ( !IsNpc(victim) && !victim->desc )
+  if ( !is_npc(victim) && !victim->desc )
     {
-      if ( !victim->switched )
-	{
-	  strcat( buf, "(Link Dead) "  );
-	}
-      else if ( !is_affected_by(victim->switched, AFF_POSSESS) )
-	{
-	  strcat( buf, "(Switched) " );
-	}
-    }
-
-  if ( !IsNpc(victim) && IS_SET(victim->act, PLR_AFK) )
-    {
-      strcat( buf, "[AFK] ");
-    }
-
-  if ( (!IsNpc(victim) && IS_SET(victim->act, PLR_WIZINVIS))
-       || (IsNpc(victim) && IS_SET(victim->act, ACT_MOBINVIS)) )
-    {
-      if (!IsNpc(victim))
-	{
-	  sprintf( buf1,"(Invis %d) ", victim->pcdata->wizinvis );
-	}
+      if ( !victim->switched )          strcat( buf, "(Link Dead) "  );
       else
-	{
-	  sprintf( buf1,"(Mobinvis %d) ", victim->mobinvis);
-	}
+        if ( !is_affected_by(victim->switched, AFF_POSSESS) )
+          strcat( buf, "(Switched) " );
+    }
+  if ( !is_npc(victim)
+       && IS_SET(victim->act, PLR_AFK) )                strcat( buf, "[AFK] ");
 
+  if ( (!is_npc(victim) && IS_SET(victim->act, PLR_WIZINVIS))
+       || (is_npc(victim) && IS_SET(victim->act, ACT_MOBINVIS)) )
+    {
+      if (!is_npc(victim))
+        sprintf( buf1,"(Invis %d) ", victim->pcdata->wizinvis );
+      else sprintf( buf1,"(Mobinvis %d) ", victim->mobinvis);
       strcat( buf, buf1 );
     }
-
-  if ( is_affected_by(victim, AFF_INVISIBLE) )
-    {
-      strcat( buf, "(Invis) " );
-    }
-
-  if ( is_affected_by(victim, AFF_HIDE) )
-    {
-      strcat( buf, "(Stealth) " );
-    }
-
-  if ( is_affected_by(victim, AFF_PASS_DOOR) )
-    {
-      strcat( buf, "(Translucent) " );
-    }
-
-  if ( is_affected_by(victim, AFF_FAERIE_FIRE) )
-    {
-      strcat( buf, "&P(Pink Aura)&w " );
-    }
-
-  if ( is_evil(victim) && is_affected_by(ch, AFF_DETECT_EVIL) )
-    {
-      strcat( buf, "&R(Red Aura)&w " );
-    }
-
+  if ( is_affected_by(victim, AFF_INVISIBLE)   ) strcat( buf, "(Invis) "      );
+  if ( is_affected_by(victim, AFF_HIDE)        ) strcat( buf, "(Stealth) "       );
+  if ( is_affected_by(victim, AFF_PASS_DOOR)   ) strcat( buf, "(Translucent) ");
+  if ( is_affected_by(victim, AFF_FAERIE_FIRE) ) strcat( buf, "&P(Pink Aura)&w "  );
+  if ( is_evil(victim)
+       &&   is_affected_by(ch, AFF_DETECT_EVIL)     ) strcat( buf, "&R(Red Aura)&w "   );
   if ( ( victim->mana > 10 )
-       && ( is_affected_by( ch , AFF_DETECT_MAGIC ) || IsImmortal( ch ) ) )
-    {
-      strcat( buf, "&B(Blue Aura)&w " );
-    }
-
-  if ( !IsNpc(victim) && IS_SET(victim->act, PLR_LITTERBUG ) )
-    {
-      strcat( buf, "(LITTERBUG) " );
-    }
-
-  if ( IsNpc(victim) && IsImmortal(ch)
-       && IS_SET(victim->act, ACT_PROTOTYPE) )
-    {
-      strcat( buf, "(PROTO) " );
-    }
-
+       &&   ( is_affected_by( ch , AFF_DETECT_MAGIC ) || is_immortal( ch ) ) )
+    strcat( buf, "&B(Blue Aura)&w "  );
+  if ( !is_npc(victim) && IS_SET(victim->act, PLR_LITTERBUG  ) )
+    strcat( buf, "(LITTERBUG) "  );
+  if ( is_npc(victim) && is_immortal(ch)
+       && IS_SET(victim->act, ACT_PROTOTYPE) ) strcat( buf, "(PROTO) " );
   if ( victim->desc && victim->desc->connection_state == CON_EDITING )
-    {
-      strcat( buf, "(Writing) " );
-    }
+    strcat( buf, "(Writing) " );
 
   set_char_color( AT_PERSON, ch );
-
   if ( victim->position == victim->defposition && victim->long_descr[0] != '\0' )
     {
       strcat( buf, victim->long_descr );
@@ -354,72 +242,47 @@ static void show_char_to_char_0( Character *victim, Character *ch )
       return;
     }
 
-  if ( !IsNpc(victim) && !IS_SET(ch->act, PLR_BRIEF) )
-    {
-      strcat( buf, victim->pcdata->title );
-    }
+  if ( !is_npc(victim) && !IS_SET(ch->act, PLR_BRIEF) )
+    strcat( buf, victim->pcdata->title );
   else
-    {
-      strcat( buf, PERS( victim, ch ) );
-    }
+    strcat( buf, PERS( victim, ch ) );
 
   switch ( victim->position )
     {
-    case POS_DEAD:
-      strcat( buf, " is DEAD!!" );
-      break;
-
-    case POS_MORTAL:
-      strcat( buf, " is mortally wounded." );
-      break;
-
-    case POS_INCAP:
-      strcat( buf, " is incapacitated." );
-      break;
-
-    case POS_STUNNED:
-      strcat( buf, " is lying here stunned." );
-      break;
-
+    case POS_DEAD:     strcat( buf, " is DEAD!!" );                     break;
+    case POS_MORTAL:   strcat( buf, " is mortally wounded." );          break;
+    case POS_INCAP:    strcat( buf, " is incapacitated." );             break;
+    case POS_STUNNED:  strcat( buf, " is lying here stunned." );        break;
     case POS_SLEEPING:
       if (victim->on != NULL)
         {
           if (victim->on->value[2] == SLEEP_AT)
             {
-              sprintf(message," is sleeping at %s", victim->on->short_descr);
-
+              sprintf(message," is sleeping at %s",
+                      victim->on->short_descr);
               if( ((ch->position < POS_FIGHTING) && (ch->position > POS_STUNNED))
                   && ch->on && (ch->on == victim->on ) )
-		{
-		  strcat(message, " with you");
-		}
-
+                strcat(message, " with you");
               strcat(message, ".");
               strcat(buf,message);
             }
           else if (victim->on->value[2] == SLEEP_ON)
             {
-              sprintf(message," is sleeping on %s", victim->on->short_descr);
-
+              sprintf(message," is sleeping on %s",
+                      victim->on->short_descr);
               if( ((ch->position < POS_FIGHTING) && (ch->position > POS_STUNNED))
 		  && ch->on && (ch->on == victim->on ) )
-		{
-		  strcat(message, " with you");
-		}
-
+                strcat(message, " with you");
               strcat(message, ".");
               strcat(buf,message);
             }
           else
             {
-              sprintf(message, " is sleeping in %s", victim->on->short_descr);
-
+              sprintf(message, " is sleeping in %s",
+                      victim->on->short_descr);
               if( ((ch->position < POS_FIGHTING) && (ch->position > POS_STUNNED))
                   && ch->on && (ch->on == victim->on ) )
-		{
-		  strcat(message, " with you");
-		}
-
+                strcat(message, " with you");
               strcat(message, ".");
               strcat(buf,message);
             }
@@ -427,56 +290,42 @@ static void show_char_to_char_0( Character *victim, Character *ch )
       else
         {
           if (ch->position == POS_SITTING
-              || ch->position == POS_RESTING )
-	    {
-	      strcat( buf, " is sleeping nearby." );
-	    }
+              ||  ch->position == POS_RESTING )
+            strcat( buf, " is sleeping nearby." );
           else
-	    {
-	      strcat( buf, " is deep in slumber here." );
-	    }
+            strcat( buf, " is deep in slumber here." );
         }
       break;
-
     case POS_RESTING:
       if (victim->on != NULL)
         {
           if (victim->on->value[2] == REST_AT)
             {
-              sprintf(message," is resting at %s", victim->on->short_descr);
-
+              sprintf(message," is resting at %s",
+                      victim->on->short_descr);
               if( ((ch->position < POS_FIGHTING) && (ch->position > POS_STUNNED))
                   && ch->on && (ch->on == victim->on ) )
-		{
-		  strcat(message, " with you");
-		}
-
+                strcat(message, " with you");
               strcat(message, ".");
               strcat(buf,message);
             }
           else if (victim->on->value[2] == REST_ON)
             {
-              sprintf(message," is resting on %s", victim->on->short_descr);
-
+              sprintf(message," is resting on %s",
+                      victim->on->short_descr);
               if( ((ch->position < POS_FIGHTING) && (ch->position > POS_STUNNED))
                   && ch->on && (ch->on == victim->on ) )
-		{
-		  strcat(message, " with you");
-		}
-
+                strcat(message, " with you");
 	      strcat(message, ".");
               strcat(buf,message);
             }
           else
             {
-              sprintf(message, " is resting in %s", victim->on->short_descr);
-
+              sprintf(message, " is resting in %s",
+                      victim->on->short_descr);
               if( ((ch->position < POS_FIGHTING) && (ch->position > POS_STUNNED))
                   && ch->on && (ch->on == victim->on ) )
-		{
-		  strcat(message, " with you");
-		}
-
+                strcat(message, " with you");
               strcat(message, ".");
               strcat(buf,message);
             }
@@ -484,17 +333,12 @@ static void show_char_to_char_0( Character *victim, Character *ch )
       else
         {
           if (ch->position == POS_RESTING)
-	    {
-	      strcat ( buf, " is sprawled out alongside you." );
-	    }
-          else if (ch->position == POS_MOUNTED)
-	    {
-	      strcat ( buf, " is sprawled out at the foot of your mount." );
-	    }
-	  else
-	    {
-	      strcat (buf, " is sprawled out here." );
-	    }
+            strcat ( buf, " is sprawled out alongside you." );
+          else
+            if (ch->position == POS_MOUNTED)
+              strcat ( buf, " is sprawled out at the foot of your mount." );
+            else
+              strcat (buf, " is sprawled out here." );
         }
       break;
     case POS_SITTING:
@@ -502,39 +346,31 @@ static void show_char_to_char_0( Character *victim, Character *ch )
         {
           if (victim->on->value[2] == SIT_AT)
             {
-              sprintf(message," is sitting at %s", victim->on->short_descr);
-
-              if( (ch->position == POS_SITTING) && ch->on && (ch->on == victim->on ) )
-		{
-		  strcat(message, " with you");
-		}
-
+              sprintf(message," is sitting at %s",
+                      victim->on->short_descr);
+              if( (ch->position == POS_SITTING)
+                  && ch->on && (ch->on == victim->on ) )
+                strcat(message, " with you");
               strcat(message, ".");
               strcat(buf,message);
             }
           else if (victim->on->value[2] == SIT_ON)
             {
-              sprintf(message," is sitting on %s", victim->on->short_descr);
-
+              sprintf(message," is sitting on %s",
+                      victim->on->short_descr);
               if( (ch->position == POS_SITTING)
                   && ch->on && (ch->on == victim->on ) )
-		{
-		  strcat(message, " with you");
-		}
-
+                strcat(message, " with you");
 	      strcat(message, ".");
               strcat(buf,message);
             }
           else
             {
-              sprintf(message, " is sitting in %s", victim->on->short_descr);
-
+              sprintf(message, " is sitting in %s",
+                      victim->on->short_descr);
               if( (ch->position == POS_SITTING)
                   && ch->on && (ch->on == victim->on ) )
-		{
-		  strcat(message, " with you");
-		}
-
+                strcat(message, " with you");
               strcat(message, ".");
               strcat(buf,message);
             }
@@ -542,33 +378,27 @@ static void show_char_to_char_0( Character *victim, Character *ch )
       else
         {
           if (ch->position == POS_SITTING)
-	    {
-	      strcat( buf, " sits here with you." );
-	    }
-          else if (ch->position == POS_RESTING)
-	    {
-	      strcat( buf, " sits nearby as you lie around." );
-	    }
-	  else
-	    {
-	      strcat( buf, " sits upright here." );
-	    }
+            strcat( buf, " sits here with you." );
+          else
+            if (ch->position == POS_RESTING)
+              strcat( buf, " sits nearby as you lie around." );
+            else
+              strcat( buf, " sits upright here." );
         }
       break;
-
     case POS_STANDING:
-      if ( IsImmortal(victim) )
+      if ( is_immortal(victim) )
         strcat( buf, " is here before you." );
       else
         if ( ( victim->in_room->sector_type == SECT_UNDERWATER )
-             && !is_affected_by(victim, AFF_AQUA_BREATH) && !IsNpc(victim) )
+             && !is_affected_by(victim, AFF_AQUA_BREATH) && !is_npc(victim) )
           strcat( buf, " is drowning here." );
         else
           if ( victim->in_room->sector_type == SECT_UNDERWATER )
             strcat( buf, " is here in the water." );
           else
             if ( ( victim->in_room->sector_type == SECT_OCEANFLOOR )
-                 && !is_affected_by(victim, AFF_AQUA_BREATH) && !IsNpc(victim) )
+                 && !is_affected_by(victim, AFF_AQUA_BREATH) && !is_npc(victim) )
               strcat( buf, " is drowning here." );
             else
               if ( victim->in_room->sector_type == SECT_OCEANFLOOR )
@@ -620,7 +450,7 @@ static void show_char_to_char_0( Character *victim, Character *ch )
   show_visible_affects_to_char( victim, ch );
 }
 
-static void show_char_to_char_1( Character *victim, Character *ch )
+static void show_char_to_char_1( CHAR_DATA *victim, CHAR_DATA *ch )
 {
   OBJ_DATA *obj;
   int iWear;
@@ -653,7 +483,7 @@ static void show_char_to_char_1( Character *victim, Character *ch )
         {
           if ( ( obj = get_eq_char( victim, iWear ) ) != NULL
                &&   can_see_obj( ch, obj ) &&
-               ( ( obj->description && obj->description[0] != '\0' ) || ( IS_SET(ch->act, PLR_HOLYLIGHT) || IsNpc(ch) ) ) )
+               ( ( obj->description && obj->description[0] != '\0' ) || ( IS_SET(ch->act, PLR_HOLYLIGHT) || is_npc(ch) ) ) )
             {
               if ( !found )
                 {
@@ -674,7 +504,7 @@ static void show_char_to_char_1( Character *victim, Character *ch )
       send_to_char( "\r\n", ch );
     }
 
-  if ( IsNpc(ch) || victim == ch )
+  if ( is_npc(ch) || victim == ch )
     return;
 
   if ( number_percent( ) < ch->pcdata->learned[gsn_peek] )
@@ -688,7 +518,7 @@ static void show_char_to_char_1( Character *victim, Character *ch )
       learn_from_failure( ch, gsn_peek );
 }
 
-static void show_ships_to_char( SHIP_DATA *ship, Character *ch )
+static void show_ships_to_char( SHIP_DATA *ship, CHAR_DATA *ch )
 {
   SHIP_DATA *rship;
   SHIP_DATA *nship=NULL;
@@ -705,39 +535,34 @@ static void show_ships_to_char( SHIP_DATA *ship, Character *ch )
     }
 }
 
-void ShowPeopleInRoomToCharacter( const ROOM_INDEX_DATA *room, Character *ch )
+void show_char_to_char( CHAR_DATA *list, CHAR_DATA *ch )
 {
-  List_ForEach( room->People, ShowOnePersonInRoomToCharacter, ch );
-}
+  CHAR_DATA *rch;
 
-static void ShowOnePersonInRoomToCharacter( void *element, void *userData )
-{
-  Character *characterToShow = (Character*) element;
-  Character *looker = (Character*) userData;
+  for ( rch = list; rch; rch = rch->next_in_room )
+    {
+      if ( rch == ch )
+        continue;
 
-  if ( characterToShow == looker )
-    {
-      return;
-    }
-
-  if ( can_see( looker, characterToShow ) )
-    {
-      show_char_to_char_0( characterToShow, looker );
-    }
-  else if ( characterToShow->race == RACE_DEFEL )
-    {
-      set_char_color( AT_BLOOD, looker );
-      ch_printf( looker, "You see a pair of red eyes staring back at you.\r\n" );
-    }
-  else if ( room_is_dark( looker->in_room )
-	    && is_affected_by( characterToShow, AFF_INFRARED ) )
-    {
-      set_char_color( AT_BLOOD, looker );
-      ch_printf( looker, "The red form of a living creature is here.\r\n" );
+      if ( can_see( ch, rch ) )
+        {
+          show_char_to_char_0( rch, ch );
+        }
+      else if ( rch->race == RACE_DEFEL )
+        {
+          set_char_color( AT_BLOOD, ch );
+          send_to_char( "You see a pair of red eyes staring back at you.\r\n", ch );
+        }
+      else if ( room_is_dark( ch->in_room )
+                &&        is_affected_by(rch, AFF_INFRARED ) )
+        {
+          set_char_color( AT_BLOOD, ch );
+          send_to_char( "The red form of a living creature is here.\r\n", ch );
+        }
     }
 }
 
-static void show_visible_affects_to_char( Character *victim, Character *ch )
+static void show_visible_affects_to_char( CHAR_DATA *victim, CHAR_DATA *ch )
 {
   char buf[MAX_STRING_LENGTH];
 
@@ -745,9 +570,9 @@ static void show_visible_affects_to_char( Character *victim, Character *ch )
     {
       set_char_color( AT_MAGIC, ch );
       ch_printf( ch, "%s looks ahead free of expression.\r\n",
-                 IsNpc( victim ) ? capitalize(victim->short_descr) : (victim->name) );
+                 is_npc( victim ) ? capitalize(victim->short_descr) : (victim->name) );
     }
-  if ( !IsNpc(victim) && !victim->desc
+  if ( !is_npc(victim) && !victim->desc
        &&    victim->switched && is_affected_by(victim->switched, AFF_POSSESS) )
     {
       set_char_color( AT_MAGIC, ch );
@@ -756,7 +581,7 @@ static void show_visible_affects_to_char( Character *victim, Character *ch )
     }
 }
 
-static char *get_sex( Character *ch )
+static char *get_sex( CHAR_DATA *ch )
 {
   switch( ch->sex )
     {
@@ -771,7 +596,7 @@ static char *get_sex( Character *ch )
     }
 }
 
-static void look_under( Character *ch, char *what, bool doexaprog )
+static void look_under( CHAR_DATA *ch, char *what, bool doexaprog )
 {
   int count = 0;
   OBJ_DATA *obj = NULL;
@@ -817,7 +642,7 @@ static void look_under( Character *ch, char *what, bool doexaprog )
     }
 }
 
-static bool requirements_are_met( Character *ch )
+static bool requirements_are_met( CHAR_DATA *ch )
 {
   if( !ch->desc )
     {
@@ -843,14 +668,14 @@ static bool requirements_are_met( Character *ch )
       return FALSE;
     }
 
-  if ( !IsNpc(ch)
+  if ( !is_npc(ch)
        && !IS_SET(ch->act, PLR_HOLYLIGHT)
        && !is_affected_by(ch, AFF_TRUESIGHT)
        && room_is_dark( ch->in_room ) )
     {
       set_char_color( AT_DGREY, ch );
       send_to_char( "It is pitch black...\r\n", ch );
-      ShowPeopleInRoomToCharacter( ch->in_room, ch );
+      show_char_to_char( ch->in_room->first_person, ch );
 
       return FALSE;
     }
@@ -858,7 +683,7 @@ static bool requirements_are_met( Character *ch )
   return TRUE;
 }
 
-static void look_in( Character *ch, char *what, bool doexaprog )
+static void look_in( CHAR_DATA *ch, char *what, bool doexaprog )
 {
   int count = 0;
   OBJ_DATA *obj = NULL;
@@ -920,7 +745,7 @@ static void look_in( Character *ch, char *what, bool doexaprog )
 	      ROOM_INDEX_DATA *original = NULL;
 
 	      if ( room_is_private( ch, pexit->to_room )
-		   && GetTrustedLevel(ch) < sysdata.level_override_private )
+		   && get_trust(ch) < sysdata.level_override_private )
 		{
 		  set_char_color( AT_WHITE, ch );
 		  send_to_char( "That room is private buster!\r\n", ch );
@@ -965,7 +790,7 @@ static void look_in( Character *ch, char *what, bool doexaprog )
     }
 }
 
-static void show_exit_to_char( Character *ch, EXIT_DATA *pexit, short door )
+static void show_exit_to_char( CHAR_DATA *ch, EXIT_DATA *pexit, short door )
 {
   if ( pexit->keyword )
     {
@@ -1007,17 +832,17 @@ static void show_exit_to_char( Character *ch, EXIT_DATA *pexit, short door )
   if ( pexit->to_room
        && ( is_affected_by( ch, AFF_SCRYING )
 	    || IS_SET( pexit->exit_info, EX_xLOOK )
-	    || GetTrustedLevel(ch) >= LEVEL_IMMORTAL ) )
+	    || get_trust(ch) >= LEVEL_IMMORTAL ) )
     {
       ROOM_INDEX_DATA *original = NULL;
 
       if ( !IS_SET( pexit->exit_info, EX_xLOOK )
-	   && GetTrustedLevel( ch ) < LEVEL_IMMORTAL )
+	   && get_trust( ch ) < LEVEL_IMMORTAL )
 	{
 	  set_char_color( AT_MAGIC, ch );
 	  send_to_char( "You attempt to scry...\r\n", ch );
 
-	  if (!IsNpc(ch) )
+	  if (!is_npc(ch) )
 	    {
 	      int percent = 99;
 
@@ -1030,7 +855,7 @@ static void show_exit_to_char( Character *ch, EXIT_DATA *pexit, short door )
 	}
 
       if ( room_is_private( ch, pexit->to_room )
-	   && GetTrustedLevel(ch) < sysdata.level_override_private )
+	   && get_trust(ch) < sysdata.level_override_private )
 	{
 	  set_char_color( AT_WHITE, ch );
 	  send_to_char( "That room is private buster!\r\n", ch );
@@ -1067,7 +892,7 @@ static void show_exit_to_char( Character *ch, EXIT_DATA *pexit, short door )
 }
 
 /* 'look' or 'look auto' */
-static void show_no_arg( Character *ch, bool is_auto )
+static void show_no_arg( CHAR_DATA *ch, bool is_auto )
 {
   set_char_color( AT_RMNAME, ch);
   send_to_char( ch->in_room->name, ch);
@@ -1075,7 +900,7 @@ static void show_no_arg( Character *ch, bool is_auto )
 
   if ( !ch->desc->original )
     {
-      if ((GetTrustedLevel(ch) >= LEVEL_IMMORTAL) && (IS_SET(ch->pcdata->flags, PCFLAG_ROOM)))
+      if ((get_trust(ch) >= LEVEL_IMMORTAL) && (IS_SET(ch->pcdata->flags, PCFLAG_ROOM)))
 	{
 	  set_char_color(AT_PURPLE, ch);
 	  ch_printf(ch, "{%d:%s}", ch->in_room->vnum, ch->in_room->area->filename);
@@ -1088,12 +913,12 @@ static void show_no_arg( Character *ch, bool is_auto )
   send_to_char( "\r\n", ch );
   set_char_color( AT_RMDESC, ch );
 
-  if ( !IsNpc(ch) && !IS_SET(ch->act, PLR_BRIEF ) )
+  if ( !is_npc(ch) && !IS_SET(ch->act, PLR_BRIEF ) )
     {
       send_to_char( ch->in_room->description, ch );
     }
 
-  if ( !IsNpc(ch) && IS_SET(ch->act, PLR_AUTOEXIT) )
+  if ( !is_npc(ch) && IS_SET(ch->act, PLR_AUTOEXIT) )
     {
       do_exits( ch, "" );
     }
@@ -1101,7 +926,7 @@ static void show_no_arg( Character *ch, bool is_auto )
   show_ships_to_char( ch->in_room->first_ship, ch );
   show_shuttles_to_char( ch->in_room->first_shuttle, ch );
   show_list_to_char( ch->in_room->first_content, ch, FALSE, FALSE );
-  ShowPeopleInRoomToCharacter( ch->in_room,  ch );
+  show_char_to_char( ch->in_room->first_person,  ch );
 
   if ( !is_auto )
     {

@@ -1,7 +1,7 @@
 #include "mud.h"
 #include "shuttle.h"
 
-void do_showshuttle (Character * ch, char * argument)
+void do_showshuttle (CHAR_DATA * ch, char * argument)
 {
   STOP_DATA * stop = NULL;
   int count = 0;

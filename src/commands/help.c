@@ -4,11 +4,11 @@
 #include "character.h"
 
 static short str_similarity( const char *astr, const char *bstr );
-static void similar_help_files(Character *ch, char *argument);
+static void similar_help_files(CHAR_DATA *ch, char *argument);
 
-void do_help( Character *ch, char *argument )
+void do_help( CHAR_DATA *ch, char *argument )
 {
-  HelpFile *pHelp = NULL;
+  HELP_DATA *pHelp = NULL;
   const char *help_text = NULL;
 
   if ( !argument || argument[0] == '\0')
@@ -17,7 +17,7 @@ void do_help( Character *ch, char *argument )
       return;
     }
 
-  pHelp = GetHelp( ch, argument );
+  pHelp = get_help( ch, argument );
 
   if ( !pHelp )
     {
@@ -26,12 +26,12 @@ void do_help( Character *ch, char *argument )
       return;
     }
 
-  if ( GetHelpLevel( pHelp ) >= 0 && str_cmp( argument, "imotd" ) )
+  if ( get_help_level( pHelp ) >= 0 && str_cmp( argument, "imotd" ) )
     {
-      pager_printf( ch, "%s\r\n", GetHelpKeyword( pHelp ) );
+      pager_printf( ch, "%s\r\n", get_help_keyword( pHelp ) );
     }
 
-  if ( !IsNpc(ch) && IS_SET( ch->act , PLR_SOUND ) )
+  if ( !is_npc(ch) && IS_SET( ch->act , PLR_SOUND ) )
     {
       pager_printf( ch, "!!SOUND(help)" );
     }
@@ -39,13 +39,13 @@ void do_help( Character *ch, char *argument )
   /*
    * Strip leading '.' to allow initial blanks.
    */
-  if ( GetHelpText( pHelp )[0] == '.' )
+  if ( get_help_text( pHelp )[0] == '.' )
     {
-      help_text = GetHelpText( pHelp ) + 1;
+      help_text = get_help_text( pHelp ) + 1;
     }
   else
     {
-      help_text = GetHelpText( pHelp );
+      help_text = get_help_text( pHelp );
     }
 
   pager_printf( ch, help_text );
@@ -70,23 +70,20 @@ static short str_similarity( const char *astr, const char *bstr )
   return matches;
 }
 
-static void similar_help_files(Character *ch, char *argument)
+static void similar_help_files(CHAR_DATA *ch, char *argument)
 {
+  HELP_DATA *pHelp = NULL;
   short level = 0;
   bool single = FALSE;
-  CerisMapIterator *iter = NULL;
 
   pager_printf( ch, "&C&BSimilar Help Files:\r\n" );
 
-  iter = CreateMapIterator( HelpFiles );
-
-  for ( ; !MapIterator_IsDone( iter ); MapIterator_Next( iter ) )
+  for ( pHelp = first_help; pHelp; pHelp=pHelp->next)
     {
-      HelpFile *pHelp = (HelpFile*) MapIterator_GetKey( iter );
       char buf[MAX_STRING_LENGTH];
-      char *extension = GetHelpKeyword( pHelp );
+      char *extension = pHelp->keyword;
 
-      if (GetHelpLevel( pHelp ) > GetTrustedLevel(ch))
+      if (pHelp->level > get_trust(ch))
 	{
 	  continue;
 	}
@@ -107,42 +104,34 @@ static void similar_help_files(Character *ch, char *argument)
         }
     }
 
-  DestroyMapIterator( iter );
-
   if (level == 0)
     {
       pager_printf( ch, "&C&GNo similar help files.\r\n" );
       return;
     }
 
-  iter = CreateMapIterator( HelpFiles );
-
-  for ( ; !MapIterator_IsDone( iter ); MapIterator_Next( iter ) )
+  for ( pHelp = first_help; pHelp; pHelp=pHelp->next)
     {
-      HelpFile *pHelp = (HelpFile*) MapIterator_GetKey( iter );
       char buf[MAX_STRING_LENGTH];
-      char *extension = GetHelpKeyword( pHelp );
+      char *extension = pHelp->keyword;
 
       while ( extension[0] != '\0' )
         {
           extension=one_argument(extension, buf);
 
           if ( str_similarity(argument, buf) >= level
-               && GetHelpLevel( pHelp ) <= GetTrustedLevel(ch))
+               && pHelp->level <= get_trust(ch))
             {
               if (single)
                 {
                   pager_printf( ch, "&C&GOpening only similar helpfile.&C\r\n" );
                   do_help( ch, buf);
-		  DestroyMapIterator( iter );
                   return;
                 }
 
-              pager_printf(ch, "&C&G   %s\r\n", GetHelpKeyword( pHelp ) );
+              pager_printf(ch, "&C&G   %s\r\n", pHelp->keyword);
               break;
             }
         }
     }
-
-  DestroyMapIterator( iter );
 }

@@ -1,23 +1,22 @@
 #include "character.h"
 #include "mud.h"
-#include "clan.h"
 
-void do_appoint ( Character *ch , char *argument )
+void do_appoint ( CHAR_DATA *ch , char *argument )
 {
   char arg[MAX_STRING_LENGTH];
 
   argument = one_argument( argument, arg );
 
-  if ( IsNpc( ch ) || !ch->pcdata )
+  if ( is_npc( ch ) || !ch->pcdata )
     return;
 
-  if ( !is_clanned( ch ) )
+  if ( !ch->pcdata->clan )
     {
       send_to_char( "Huh?\r\n", ch );
       return;
     }
 
-  if ( str_cmp( ch->name, ch->pcdata->clan->leadership.leader ) )
+  if (  str_cmp( ch->name, ch->pcdata->clan->leadership.leader  )  )
     {
       send_to_char( "Only your leader can do that!\r\n", ch );
       return;
@@ -54,5 +53,5 @@ void do_appoint ( Character *ch , char *argument )
   else
     do_appoint( ch , "" );
 
-  SaveClan ( ch->pcdata->clan );
+  save_clan ( ch->pcdata->clan );
 }

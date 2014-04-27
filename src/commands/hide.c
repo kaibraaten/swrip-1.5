@@ -1,9 +1,9 @@
 #include "character.h"
 #include "mud.h"
 
-void do_hide( Character *ch, char *argument )
+void do_hide( CHAR_DATA *ch, char *argument )
 {
-  if ( IsNpc(ch) && is_affected_by( ch, AFF_CHARM ) )
+  if ( is_npc(ch) && is_affected_by( ch, AFF_CHARM ) )
     {
       send_to_char( "You can't concentrate enough for that.\r\n", ch );
       return;
@@ -20,7 +20,7 @@ void do_hide( Character *ch, char *argument )
   if ( is_affected_by(ch, AFF_HIDE) )
     REMOVE_BIT(ch->affected_by, AFF_HIDE);
 
-  if ( IsNpc(ch) || number_percent( ) < ch->pcdata->learned[gsn_hide] )
+  if ( is_npc(ch) || number_percent( ) < ch->pcdata->learned[gsn_hide] )
     {
       SET_BIT(ch->affected_by, AFF_HIDE);
       learn_from_success( ch, gsn_hide );

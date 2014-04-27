@@ -3,7 +3,7 @@
 
 #define RESTORE_INTERVAL 21600
 
-void do_restore( Character *ch, char *argument )
+void do_restore( CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
 
@@ -16,15 +16,15 @@ void do_restore( Character *ch, char *argument )
 
   if ( !str_cmp( arg, "all" ) )
     {
-      Character *vch;
-      Character *vch_next;
+      CHAR_DATA *vch;
+      CHAR_DATA *vch_next;
 
       if ( !ch->pcdata )
         return;
 
-      if ( GetTrustedLevel( ch ) < LEVEL_SUB_IMPLEM )
+      if ( get_trust( ch ) < LEVEL_SUB_IMPLEM )
         {
-          if ( IsNpc( ch ) )
+          if ( is_npc( ch ) )
             {
               send_to_char( "You can't do that.\r\n", ch );
               return;
@@ -49,7 +49,7 @@ void do_restore( Character *ch, char *argument )
         {
           vch_next = vch->next;
 
-          if ( !IsNpc( vch ) && !IsImmortal( vch ) )
+          if ( !is_npc( vch ) && !is_immortal( vch ) )
 	    {
               vch->hit = vch->max_hit;
               vch->mana = vch->max_mana;
@@ -62,7 +62,7 @@ void do_restore( Character *ch, char *argument )
     }
   else
     {
-      Character *victim;
+      CHAR_DATA *victim;
 
       if ( ( victim = get_char_world( ch, arg ) ) == NULL )
         {
@@ -70,9 +70,9 @@ void do_restore( Character *ch, char *argument )
           return;
         }
 
-      if ( GetTrustedLevel( ch ) < LEVEL_LESSER
+      if ( get_trust( ch ) < LEVEL_LESSER
            &&  victim != ch
-           && !( IsNpc( victim ) && IS_SET( victim->act, ACT_PROTOTYPE ) ) )
+           && !( is_npc( victim ) && IS_SET( victim->act, ACT_PROTOTYPE ) ) )
         {
           send_to_char( "You can't do that.\r\n", ch );
           return;

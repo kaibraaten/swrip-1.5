@@ -2,7 +2,7 @@
 #include "arena.h"
 #include "character.h"
 
-void do_decline(Character *ch, char *argument)
+void do_decline(CHAR_DATA *ch, char *argument)
 {
   char buf[MAX_INPUT_LENGTH];
 

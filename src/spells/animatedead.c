@@ -1,9 +1,9 @@
 #include "character.h"
 #include "mud.h"
 
-ch_ret spell_animate_dead( int sn, int level, Character *ch, void *vo )
+ch_ret spell_animate_dead( int sn, int level, CHAR_DATA *ch, void *vo )
 {
-  Character *mob;
+  CHAR_DATA *mob;
   OBJ_DATA  *corpse;
   OBJ_DATA  *corpse_next;
   OBJ_DATA  *obj;
@@ -46,7 +46,7 @@ ch_ret spell_animate_dead( int sn, int level, Character *ch, void *vo )
       return rSPELL_FAILED;
     }
 
-  if ( !IsNpc(ch) )
+  if ( !is_npc(ch) )
     {
       if ( ch->mana - (pMobIndex->level*4) < 0 )
         {
@@ -58,7 +58,7 @@ ch_ret spell_animate_dead( int sn, int level, Character *ch, void *vo )
         ch->mana -= (pMobIndex->level*4);
     }
 
-  if ( IsImmortal(ch) || ( chance(ch, 75) && pMobIndex->level - ch->top_level < 10 ) )
+  if ( is_immortal(ch) || ( chance(ch, 75) && pMobIndex->level - ch->top_level < 10 ) )
     {
       mob = create_mobile( get_mob_index(MOB_VNUM_ANIMATED_CORPSE) );
       char_to_room( mob, ch->in_room );

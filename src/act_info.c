@@ -57,19 +57,19 @@ int get_class_from_name( const char *arg )
   return iClass;
 }
 
-char *format_obj_to_char( const OBJ_DATA *obj, const Character *ch, bool fShort )
+char *format_obj_to_char( const OBJ_DATA *obj, const CHAR_DATA *ch, bool fShort )
 {
   static char buf[MAX_STRING_LENGTH];
 
   buf[0] = '\0';
   if ( IS_OBJ_STAT(obj, ITEM_INVIS)     )   strcat( buf, "(Invis) "     );
-  if ( ( is_affected_by(ch, AFF_DETECT_MAGIC) || IsImmortal(ch) )
+  if ( ( is_affected_by(ch, AFF_DETECT_MAGIC) || is_immortal(ch) )
        && IS_OBJ_STAT(obj, ITEM_MAGIC)  )   strcat( buf, "&B(Blue Aura)&w "   );
   if ( IS_OBJ_STAT(obj, ITEM_GLOW)      )   strcat( buf, "(Glowing) "   );
   if ( IS_OBJ_STAT(obj, ITEM_HUM)       )   strcat( buf, "(Humming) "   );
   if ( IS_OBJ_STAT(obj, ITEM_HIDDEN)      )   strcat( buf, "(Hidden) "    );
   if ( IS_OBJ_STAT(obj, ITEM_BURRIED)     )   strcat( buf, "(Burried) "   );
-  if ( IsImmortal(ch)
+  if ( is_immortal(ch)
        && IS_OBJ_STAT(obj, ITEM_PROTOTYPE) ) strcat( buf, "(PROTO) "      );
   if ( is_affected_by(ch, AFF_DETECTTRAPS)
        && is_trapped(obj)   )   strcat( buf, "(Trap) "  );
@@ -151,7 +151,7 @@ char *halucinated_object( int ms, bool fShort )
  * Show a list to a character.
  * Can coalesce duplicated items.
  */
-void show_list_to_char( const OBJ_DATA *list, Character *ch, bool fShort, bool fShowNothing )
+void show_list_to_char( const OBJ_DATA *list, CHAR_DATA *ch, bool fShort, bool fShowNothing )
 {
   char **prgpstrShow;
   int *prgnShow;
@@ -173,7 +173,7 @@ void show_list_to_char( const OBJ_DATA *list, Character *ch, bool fShort, bool f
     {
       if ( fShowNothing )
         {
-          if ( IsNpc(ch) || IS_SET(ch->act, PLR_COMBINE) )
+          if ( is_npc(ch) || IS_SET(ch->act, PLR_COMBINE) )
             send_to_char( "     ", ch );
           send_to_char( "Nothing.\r\n", ch );
         }
@@ -187,7 +187,7 @@ void show_list_to_char( const OBJ_DATA *list, Character *ch, bool fShort, bool f
     count++;
 
   ms  = (ch->mental_state ? ch->mental_state : 1)
-    * (IsNpc(ch) ? 1 : (ch->pcdata->condition[COND_DRUNK] ? (ch->pcdata->condition[COND_DRUNK]/12) : 1));
+    * (is_npc(ch) ? 1 : (ch->pcdata->condition[COND_DRUNK] ? (ch->pcdata->condition[COND_DRUNK]/12) : 1));
 
   /*
    * If not mentally stable...
@@ -208,7 +208,7 @@ void show_list_to_char( const OBJ_DATA *list, Character *ch, bool fShort, bool f
     {
       if ( fShowNothing )
         {
-          if ( IsNpc(ch) || IS_SET(ch->act, PLR_COMBINE) )
+          if ( is_npc(ch) || IS_SET(ch->act, PLR_COMBINE) )
             send_to_char( "     ", ch );
           send_to_char( "Nothing.\r\n", ch );
         }
@@ -239,13 +239,13 @@ void show_list_to_char( const OBJ_DATA *list, Character *ch, bool fShort, bool f
         }
       if ( obj->wear_loc == WEAR_NONE
            && can_see_obj( ch, obj )
-           && ( ( obj->description && obj->description[0] != '\0' ) || ( IS_SET(ch->act, PLR_HOLYLIGHT) || IsNpc(ch) ) )
+           && ( ( obj->description && obj->description[0] != '\0' ) || ( IS_SET(ch->act, PLR_HOLYLIGHT) || is_npc(ch) ) )
            && (obj->item_type != ITEM_TRAP || is_affected_by(ch, AFF_DETECTTRAPS) ) )
         {
           pstrShow = format_obj_to_char( obj, ch, fShort );
           fCombine = FALSE;
 
-          if ( IsNpc(ch) || IS_SET(ch->act, PLR_COMBINE) )
+          if ( is_npc(ch) || IS_SET(ch->act, PLR_COMBINE) )
             {
               /*
                * Look for duplicates, case sensitive.
@@ -321,7 +321,7 @@ void show_list_to_char( const OBJ_DATA *list, Character *ch, bool fShort, bool f
       if ( fShowNothing )
         send_to_char( "     ", ch );
       send_to_char( prgpstrShow[iShow], ch );
-      /*        if ( IsNpc(ch) || IS_SET(ch->act, PLR_COMBINE) ) */
+      /*        if ( is_npc(ch) || IS_SET(ch->act, PLR_COMBINE) ) */
       {
         if ( prgnShow[iShow] != 1 )
           ch_printf( ch, " (%d)", prgnShow[iShow] );
@@ -333,7 +333,7 @@ void show_list_to_char( const OBJ_DATA *list, Character *ch, bool fShort, bool f
 
   if ( fShowNothing && nShow == 0 )
     {
-      if ( IsNpc(ch) || IS_SET(ch->act, PLR_COMBINE) )
+      if ( is_npc(ch) || IS_SET(ch->act, PLR_COMBINE) )
         send_to_char( "     ", ch );
       send_to_char( "Nothing.\r\n", ch );
     }
@@ -346,9 +346,9 @@ void show_list_to_char( const OBJ_DATA *list, Character *ch, bool fShort, bool f
   DISPOSE( pitShow );
 }
 
-bool check_blind( const Character *ch )
+bool check_blind( const CHAR_DATA *ch )
 {
-  if ( !IsNpc(ch) && IS_SET(ch->act, PLR_HOLYLIGHT) )
+  if ( !is_npc(ch) && IS_SET(ch->act, PLR_HOLYLIGHT) )
     return TRUE;
 
   if ( is_affected_by(ch, AFF_TRUESIGHT) )
@@ -363,7 +363,7 @@ bool check_blind( const Character *ch )
   return TRUE;
 }
 
-void show_condition( const Character *ch, const Character *victim )
+void show_condition( const CHAR_DATA *ch, const CHAR_DATA *victim )
 {
   char buf[MAX_STRING_LENGTH];
   int percent;
@@ -376,7 +376,7 @@ void show_condition( const Character *ch, const Character *victim )
 
   strcpy( buf, PERS(victim, ch) );
 
-  if ( (IsNpc ( victim ) && IS_SET( victim->act , ACT_DROID ) ) ||
+  if ( (is_npc ( victim ) && IS_SET( victim->act , ACT_DROID ) ) ||
        ( victim->race == RACE_DROID ) )
     {
 

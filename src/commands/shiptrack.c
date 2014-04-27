@@ -2,7 +2,7 @@
 #include "mud.h"
 #include "character.h"
 
-void do_shiptrack( Character *ch, char *argument)
+void do_shiptrack( CHAR_DATA *ch, char *argument)
 {
   SHIP_DATA *ship;
   SPACE_DATA *spaceobject;

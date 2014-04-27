@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_wartalk( Character *ch, char *argument )
+void do_wartalk( CHAR_DATA *ch, char *argument )
 {
   if (is_not_authed(ch))
     {

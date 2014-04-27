@@ -1,12 +1,12 @@
 #include "character.h"
 #include "mud.h"
 
-ch_ret spell_affectchar( int sn, int level, Character *ch, void *vo )
+ch_ret spell_affectchar( int sn, int level, CHAR_DATA *ch, void *vo )
 {
   AFFECT_DATA af;
   SMAUG_AFF *saf;
   SKILLTYPE *skill = get_skilltype(sn);
-  Character *victim = (Character *) vo;
+  CHAR_DATA *victim = (CHAR_DATA *) vo;
   int aff_chance;
   ch_ret retcode = rNONE;
 
@@ -17,7 +17,7 @@ ch_ret spell_affectchar( int sn, int level, Character *ch, void *vo )
       if ( saf->location >= REVERSE_APPLY )
         victim = ch;
       else
-        victim = (Character *) vo;
+        victim = (CHAR_DATA *) vo;
       /* Check if char has this bitvector already */
       if ( (af.bitvector=saf->bitvector) != 0
            &&    is_affected_by( victim, af.bitvector )

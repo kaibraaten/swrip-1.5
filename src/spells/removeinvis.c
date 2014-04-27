@@ -3,7 +3,7 @@
 
 extern char *spell_target_name;
 
-ch_ret spell_remove_invis( int sn, int level, Character *ch, void *vo )
+ch_ret spell_remove_invis( int sn, int level, CHAR_DATA *ch, void *vo )
 {
   OBJ_DATA *obj;
   SKILLTYPE *skill = get_skilltype(sn);
@@ -29,7 +29,7 @@ ch_ret spell_remove_invis( int sn, int level, Character *ch, void *vo )
     }
   else
     {
-      Character *victim;
+      CHAR_DATA *victim;
 
       victim = get_char_room(ch, spell_target_name);
 
@@ -61,9 +61,9 @@ ch_ret spell_remove_invis( int sn, int level, Character *ch, void *vo )
               immune_casting( skill, ch, victim, NULL );
               return rSPELL_FAILED;
             }
-          if( !IsNpc(victim) )
+          if( !is_npc(victim) )
             {
-              if( chance(ch, 50) && GetLevel( ch, FORCE_ABILITY ) < victim->top_level )
+              if( chance(ch, 50) && get_level( ch, FORCE_ABILITY ) < victim->top_level )
                 {
                   failed_casting( skill, ch, victim, NULL );
                   return rSPELL_FAILED;
@@ -72,7 +72,7 @@ ch_ret spell_remove_invis( int sn, int level, Character *ch, void *vo )
             }
           else
             {
-              if( chance(ch, 50) && GetLevel( ch, FORCE_ABILITY ) + 15 < victim->top_level )
+              if( chance(ch, 50) && get_level( ch, FORCE_ABILITY ) + 15 < victim->top_level )
                 {
                   failed_casting( skill, ch, victim, NULL );
                   return rSPELL_FAILED;

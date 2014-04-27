@@ -2,7 +2,7 @@
 #include "mud.h"
 #include "character.h"
 
-void do_equipment( Character *ch, char *argument )
+void do_equipment( CHAR_DATA *ch, char *argument )
 {
   OBJ_DATA *obj;
   int iWear, dam;

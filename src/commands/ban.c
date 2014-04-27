@@ -2,14 +2,14 @@
 #include "mud.h"
 #include "character.h"
 
-void do_ban( Character *ch, char *argument )
+void do_ban( CHAR_DATA *ch, char *argument )
 {
   char buf[MAX_STRING_LENGTH];
   char arg[MAX_INPUT_LENGTH];
   BAN_DATA *pban;
   int bnum;
 
-  if ( IsNpc(ch) )
+  if ( is_npc(ch) )
     return;
 
   argument = one_argument( argument, arg );

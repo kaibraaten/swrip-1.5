@@ -2,7 +2,7 @@
 #include "character.h"
 
 /* Prints the argument to all the rooms around the mobile */
-void do_mpasound( Character *ch, char *argument )
+void do_mpasound( CHAR_DATA *ch, char *argument )
 {
   ROOM_INDEX_DATA *was_in_room;
   EXIT_DATA       *pexit;
@@ -17,7 +17,7 @@ void do_mpasound( Character *ch, char *argument )
   if ( is_affected_by( ch, AFF_CHARM ) )
     return;
 
-  if ( !IsNpc( ch ) )
+  if ( !is_npc( ch ) )
     {
       send_to_char( "Huh?\r\n", ch );
       return;

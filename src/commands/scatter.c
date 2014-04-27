@@ -1,9 +1,9 @@
 #include "character.h"
 #include "mud.h"
 
-void do_scatter( Character *ch, char *argument )
+void do_scatter( CHAR_DATA *ch, char *argument )
 {
-  Character *victim;
+  CHAR_DATA *victim;
   char arg[MAX_INPUT_LENGTH];
   ROOM_INDEX_DATA *pRoomIndex;
 
@@ -28,7 +28,7 @@ void do_scatter( Character *ch, char *argument )
       return;
     }
 
-  if ( !IsNpc(victim) && GetTrustedLevel( victim ) >= GetTrustedLevel( ch ) )
+  if ( !is_npc(victim) && get_trust( victim ) >= get_trust( ch ) )
     {
       send_to_char( "You haven't the power to succeed against them.\r\n", ch );
       return;

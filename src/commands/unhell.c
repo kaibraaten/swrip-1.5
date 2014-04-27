@@ -1,9 +1,9 @@
 #include "character.h"
 #include "mud.h"
 
-void do_unhell( Character *ch, char *argument )
+void do_unhell( CHAR_DATA *ch, char *argument )
 {
-  Character *victim;
+  CHAR_DATA *victim;
   char arg[MAX_INPUT_LENGTH];
   ROOM_INDEX_DATA *location;
 
@@ -17,7 +17,7 @@ void do_unhell( Character *ch, char *argument )
   ch->in_room = get_room_index(6);
   victim = get_char_room(ch, arg);
   ch->in_room = location;            /* The case of unhell self, etc. */
-  if ( !victim || IsNpc(victim) || victim->in_room->vnum != 6 )
+  if ( !victim || is_npc(victim) || victim->in_room->vnum != 6 )
     {
       send_to_char( "No one like that is in hell.\r\n", ch );
       return;

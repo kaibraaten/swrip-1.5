@@ -2,13 +2,13 @@
 #include "mud.h"
 #include "character.h"
 
-void do_hijack( Character *ch, char *argument )
+void do_hijack( CHAR_DATA *ch, char *argument )
 {
   int the_chance;
   SHIP_DATA *ship;
   char buf[MAX_STRING_LENGTH];
   char buf2[MAX_STRING_LENGTH];
-  Character *p, *p_prev, *victim;
+  CHAR_DATA *p, *p_prev, *victim;
 
 
   if ( (ship = ship_from_cockpit(ch->in_room->vnum)) == NULL )
@@ -35,7 +35,7 @@ void do_hijack( Character *ch, char *argument )
       return;
     }
 
-  if ( ship->type == MOB_SHIP && GetTrustedLevel(ch) < 102 )
+  if ( ship->type == MOB_SHIP && get_trust(ch) < 102 )
     {
       send_to_char("&RThis ship isn't pilotable by mortals at this point in time...\r\n",ch);
       return;
@@ -65,7 +65,7 @@ void do_hijack( Character *ch, char *argument )
       return;
     }
 
-  the_chance = IsNpc(ch) ? ch->top_level
+  the_chance = is_npc(ch) ? ch->top_level
     : (int)  (ch->pcdata->learned[gsn_hijack]) ;
   if ( number_percent( ) > the_chance )
     {
@@ -75,13 +75,13 @@ void do_hijack( Character *ch, char *argument )
     }
 
   if ( ship->sclass == FIGHTER_SHIP )
-    the_chance = IsNpc(ch) ? ch->top_level
+    the_chance = is_npc(ch) ? ch->top_level
       : (int)  (ch->pcdata->learned[gsn_starfighters]) ;
   if ( ship->sclass == MIDSIZE_SHIP )
-    the_chance = IsNpc(ch) ? ch->top_level
+    the_chance = is_npc(ch) ? ch->top_level
       : (int)  (ch->pcdata->learned[gsn_midships]) ;
   if ( ship->sclass == CAPITAL_SHIP )
-    the_chance = IsNpc(ch) ? ch->top_level
+    the_chance = is_npc(ch) ? ch->top_level
       : (int) (ch->pcdata->learned[gsn_capitalships]);
   if ( number_percent( ) < the_chance )
     {
@@ -115,7 +115,7 @@ void do_hijack( Character *ch, char *argument )
 
         {
           p_prev = p->prev;  /* TRI */
-          if (!IsNpc(p) && GetTrustedLevel(p) >= LEVEL_GOD)
+          if (!is_npc(p) && get_trust(p) >= LEVEL_GOD)
             {
               sprintf( buf2, "%s(%s)", ship->name, ship->personalname );
               ch_printf(p, "&R[alarm] %s has been hijacked by %s!\r\n", buf2, ch->name);
@@ -131,10 +131,10 @@ void do_hijack( Character *ch, char *argument )
           if ( !check_pilot(victim,ship) )
             continue;
 
-          if ( !HasComlink( victim ) )
+          if ( !has_comlink( victim ) )
             continue;
 
-          if ( !IsNpc( victim ) && victim->switched )
+          if ( !is_npc( victim ) && victim->switched )
             continue;
 
           if ( !is_awake(victim) || IS_SET(victim->in_room->room_flags,ROOM_SILENCE) )

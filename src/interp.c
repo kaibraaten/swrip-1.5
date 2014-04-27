@@ -31,7 +31,7 @@
 #include "character.h"
 #include "mud.h"
 
-bool check_social( Character *ch, char *command, char *argument );
+bool check_social( CHAR_DATA *ch, char *command, char *argument );
 
 /*
  * Log-all switch.
@@ -45,7 +45,7 @@ SOCIALTYPE *social_index[27];   /* hash table for socials   */
 /*
  * Character not in position for command?
  */
-bool check_pos( Character *ch, int position )
+bool check_pos( CHAR_DATA *ch, int position )
 {
   if ( ch->position < position )
     {
@@ -95,7 +95,7 @@ extern char lastplayercmd[MAX_INPUT_LENGTH*2];
 
 char multicommand[MAX_INPUT_LENGTH];
 
-char  * parse_target( Character *ch, char *oldstring )
+char  * parse_target( CHAR_DATA *ch, char *oldstring )
 {
   const         char    *str;
   int           count = 0;
@@ -172,7 +172,7 @@ char *get_multi_command( DESCRIPTOR_DATA *d, char *argument )
 }
 
 
-void interpret( Character *ch, char *argument )
+void interpret( CHAR_DATA *ch, char *argument )
 {
   char command[MAX_INPUT_LENGTH];
   char logline[MAX_INPUT_LENGTH];
@@ -255,7 +255,7 @@ void interpret( Character *ch, char *argument )
       /*
        * Implement freeze command.
        */
-      if ( !IsNpc(ch) && IS_SET(ch->act, PLR_FREEZE) )
+      if ( !is_npc(ch) && IS_SET(ch->act, PLR_FREEZE) )
         {
           send_to_char( "You're totally frozen!\r\n", ch );
           return;
@@ -272,7 +272,7 @@ void interpret( Character *ch, char *argument )
         argument = get_multi_command( ch->desc, argument );
 
 
-      if ( !IsNpc(ch) && ch->pcdata && ch->pcdata->target )
+      if ( !is_npc(ch) && ch->pcdata && ch->pcdata->target )
         if ( ch->pcdata->target[0] != '\0' )
           if( index(argument, '$'))
             argument = parse_target(ch, argument);
@@ -293,11 +293,11 @@ void interpret( Character *ch, char *argument )
        * Check for council powers and/or bestowments
        */
 
-      trust = GetTrustedLevel( ch );
+      trust = get_trust( ch );
       for ( cmd = command_hash[LOWER(command[0])%126]; cmd; cmd = cmd->next )
         if ( !str_prefix( command, cmd->name )
              &&   (cmd->level <= trust
-                   ||  (!IsNpc(ch) && ch->pcdata->bestowments && ch->pcdata->bestowments[0] != '\0'
+                   ||  (!is_npc(ch) && ch->pcdata->bestowments && ch->pcdata->bestowments[0] != '\0'
                         &&    is_name( cmd->name, ch->pcdata->bestowments )
                         &&    cmd->level <= (trust+5)) ) )
           {
@@ -325,7 +325,7 @@ void interpret( Character *ch, char *argument )
 
   loglvl = found ? cmd->log : LOG_NORMAL;
 
-  if ( ( !IsNpc(ch) && IS_SET(ch->act, PLR_LOG) )
+  if ( ( !is_npc(ch) && IS_SET(ch->act, PLR_LOG) )
        ||   fLogAll
        ||        loglvl == LOG_BUILD
        ||   loglvl == LOG_HIGH
@@ -344,7 +344,7 @@ void interpret( Character *ch, char *argument )
        * file only, and not spam the log channel to death       -Thoric
        */
       if ( fLogAll && loglvl == LOG_NORMAL
-           &&  (IsNpc(ch) || !IS_SET(ch->act, PLR_LOG)) )
+           &&  (is_npc(ch) || !IS_SET(ch->act, PLR_LOG)) )
         loglvl = LOG_ALL;
 
       /* This is handled in get_trust already */
@@ -393,7 +393,7 @@ void interpret( Character *ch, char *argument )
   if ( !found )
     {
       if ( !check_skill( ch, command, argument )
-           &&   !CheckAlias( ch, command, argument )
+           &&   !check_alias( ch, command, argument )
            &&   !check_social( ch, command, argument )
 #ifdef SWRIP_USE_IMC
 	   && !imc_command_hook( ch, command, argument )
@@ -460,7 +460,7 @@ void interpret( Character *ch, char *argument )
               cmd->name, (cmd->log == LOG_NEVER ? "XXX" : argument),
               ch->in_room ? ch->in_room->vnum : 0,
               (int) (time_used.tv_sec),(int) (time_used.tv_usec) );
-      log_string_plus(log_buf, LOG_NORMAL, GetTrustedLevel(ch));
+      log_string_plus(log_buf, LOG_NORMAL, get_trust(ch));
     }
 }
 
@@ -495,16 +495,16 @@ SOCIALTYPE *find_social( char *command )
   return NULL;
 }
 
-bool check_social( Character *ch, char *command, char *argument )
+bool check_social( CHAR_DATA *ch, char *command, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  Character *victim;
+  CHAR_DATA *victim;
   SOCIALTYPE *social;
 
   if ( (social=find_social(command)) == NULL )
     return FALSE;
 
-  if ( !IsNpc(ch) && IS_SET(ch->act, PLR_NO_EMOTE) )
+  if ( !is_npc(ch) && IS_SET(ch->act, PLR_NO_EMOTE) )
     {
       send_to_char( "You are anti-social!\r\n", ch );
       return TRUE;
@@ -559,7 +559,7 @@ bool check_social( Character *ch, char *command, char *argument )
       act( AT_SOCIAL, social->char_found,    ch, NULL, victim, TO_CHAR    );
       act( AT_SOCIAL, social->vict_found,    ch, NULL, victim, TO_VICT    );
 
-      if ( !IsNpc(ch) && IsNpc(victim)
+      if ( !is_npc(ch) && is_npc(victim)
            &&   !is_affected_by(victim, AFF_CHARM)
            &&   is_awake(victim)
            &&   !IS_SET( victim->pIndexData->mprog.progtypes, ACT_PROG ) )
@@ -610,7 +610,7 @@ bool check_social( Character *ch, char *command, char *argument )
   return TRUE;
 }
 
-void send_timer(struct timerset *vtime, Character *ch)
+void send_timer(struct timerset *vtime, CHAR_DATA *ch)
 {
   struct timeval ntime;
   int carry;

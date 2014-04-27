@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_restrict( Character *ch, char *argument )
+void do_restrict( CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
@@ -21,18 +21,18 @@ void do_restrict( Character *ch, char *argument )
   argument = one_argument ( argument, arg2 );
 
   if ( arg2[0] == '\0' )
-    level = GetTrustedLevel( ch );
+    level = get_trust( ch );
   else
     level = atoi( arg2 );
 
-  level = UMAX( UMIN( GetTrustedLevel( ch ), level ), 0 );
+  level = UMAX( UMIN( get_trust( ch ), level ), 0 );
 
   hash = arg[0] % 126;
 
   for ( cmd = command_hash[hash]; cmd; cmd = cmd->next )
     {
       if ( !str_prefix( arg, cmd->name )
-           &&    cmd->level <= GetTrustedLevel( ch ) )
+           &&    cmd->level <= get_trust( ch ) )
         {
           found = TRUE;
           break;

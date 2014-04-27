@@ -1,39 +1,21 @@
 #include "character.h"
 #include "mud.h"
 
-static bool IsMobAndNotSelf( void *element, void *userData )
-{
-  Character *victim = (Character*) element;
-  Character *self = (Character*) userData;
-
-  return victim != self && IsNpc( victim );
-}
-
-static void ExtractMob( void *element, void *userData )
-{
-  Character *victim = (Character*) element;
-
-  if( IsNpc( victim ) )
-    {
-      extract_char( victim, TRUE );
-    }
-}
-
 /* lets the mobile purge all objects and other npcs in the room,
    or purge a specified object or mob in the room.  It can purge
    itself, but this had best be the last command in the MUDprogram
    otherwise ugly stuff will happen */
 
-void do_mppurge( Character *ch, char *argument )
+void do_mppurge( CHAR_DATA *ch, char *argument )
 {
   char       arg[ MAX_INPUT_LENGTH ];
-  Character *victim;
+  CHAR_DATA *victim;
   OBJ_DATA  *obj;
 
   if ( is_affected_by( ch, AFF_CHARM ) )
     return;
 
-  if ( !IsNpc( ch ) )
+  if ( !is_npc( ch ) )
     {
       send_to_char( "Huh?\r\n", ch );
       return;
@@ -43,10 +25,15 @@ void do_mppurge( Character *ch, char *argument )
 
   if ( arg[0] == '\0' )
     {
-      CerisList *mobsInRoom = List_CopyIf( ch->in_room->People, IsMobAndNotSelf, ch );
-      List_ForEach( mobsInRoom, ExtractMob, NULL );
-      DestroyList( mobsInRoom );
+      /* 'purge' */
+      CHAR_DATA *vnext;
 
+      for ( victim = ch->in_room->first_person; victim; victim = vnext )
+        {
+	  vnext = victim->next_in_room;
+          if ( is_npc( victim ) && victim != ch )
+            extract_char( victim, TRUE );
+        }
       while ( ch->in_room->first_content )
         extract_obj( ch->in_room->first_content );
 
@@ -62,7 +49,7 @@ void do_mppurge( Character *ch, char *argument )
       return;
     }
 
-  if ( !IsNpc( victim ) )
+  if ( !is_npc( victim ) )
     {
       progbug( "Mppurge - Trying to purge a PC", ch );
       return;
@@ -74,7 +61,7 @@ void do_mppurge( Character *ch, char *argument )
       return;
     }
 
-  if ( IsNpc( victim ) && victim->pIndexData->vnum == 3 )
+  if ( is_npc( victim ) && victim->pIndexData->vnum == 3 )
     {
       progbug( "Mppurge: trying to purge supermob", ch );
       return;

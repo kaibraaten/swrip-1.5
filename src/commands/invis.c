@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_invis( Character *ch, char *argument )
+void do_invis( CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   short level = 0;
@@ -21,13 +21,13 @@ void do_invis( Character *ch, char *argument )
           return;
         }
 
-      if (!IsNpc(ch))
+      if (!is_npc(ch))
         {
           ch->pcdata->wizinvis = level;
           ch_printf( ch, "Wizinvis level set to %d.\r\n", level );
         }
 
-      if (IsNpc(ch))
+      if (is_npc(ch))
         {
           ch->mobinvis = level;
           ch_printf( ch, "Mobinvis level set to %d.\r\n", level );
@@ -35,13 +35,13 @@ void do_invis( Character *ch, char *argument )
       return;
     }
 
-  if (!IsNpc(ch))
+  if (!is_npc(ch))
     {
       if ( ch->pcdata->wizinvis < 2 )
         ch->pcdata->wizinvis = ch->top_level;
     }
 
-  if (IsNpc(ch))
+  if (is_npc(ch))
     {
       if ( ch->mobinvis < 2 )
         ch->mobinvis = ch->top_level;

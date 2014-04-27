@@ -1,14 +1,13 @@
 #include <string.h>
 #include "mud.h"
 #include "character.h"
-#include "clan.h"
 
-void do_special_forces ( Character *ch , char *argument )
+void do_special_forces ( CHAR_DATA *ch , char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   int the_chance, credits;
 
-  if ( IsNpc( ch ) )
+  if ( is_npc( ch ) || !ch->pcdata )
     return;
 
   strcpy( arg, argument );
@@ -22,13 +21,13 @@ void do_special_forces ( Character *ch , char *argument )
           return;
         }
 
-      if ( !is_clanned( ch ) )
+      if ( !ch->pcdata->clan )
         {
           send_to_char( "&RYou need to be a member of an organization before you can call for reinforcements.\r\n", ch );
           return;
         }
 
-      if ( ch->gold < GetLevel( ch, LEADERSHIP_ABILITY ) * 350 )
+      if ( ch->gold < get_level( ch, LEADERSHIP_ABILITY ) * 350 )
         {
           ch_printf( ch, "&RYou dont have enough credits to send for reinforcements.\r\n" );
           return;
@@ -66,7 +65,7 @@ void do_special_forces ( Character *ch , char *argument )
   ch->substate = SUB_NONE;
 
   send_to_char( "&GYour reinforcements are on the way.\r\n", ch);
-  credits = GetLevel( ch, LEADERSHIP_ABILITY ) * 350;
+  credits = get_level( ch, LEADERSHIP_ABILITY ) * 350;
   ch_printf( ch, "It cost you %d credits.\r\n", credits);
   ch->gold -= UMIN( credits , ch->gold );
 

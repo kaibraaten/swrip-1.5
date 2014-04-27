@@ -1,11 +1,11 @@
 #include "character.h"
 #include "mud.h"
 
-void do_snoop( Character *ch, char *argument )
+void do_snoop( CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   DESCRIPTOR_DATA *d;
-  Character *victim;
+  CHAR_DATA *victim;
 
   one_argument( argument, arg );
 
@@ -46,8 +46,8 @@ void do_snoop( Character *ch, char *argument )
    * Minimum snoop level... a secret mset value
    * makes the snooper think that the victim is already being snooped
    */
-  if ( GetTrustedLevel( victim ) >= GetTrustedLevel( ch )
-       ||  (victim->pcdata && victim->pcdata->min_snoop > GetTrustedLevel( ch )) )
+  if ( get_trust( victim ) >= get_trust( ch )
+       ||  (victim->pcdata && victim->pcdata->min_snoop > get_trust( ch )) )
     {
       send_to_char( "Busy already.\r\n", ch );
       return;
@@ -64,7 +64,7 @@ void do_snoop( Character *ch, char *argument )
     }
 
   /*  Snoop notification for higher imms, if desired, uncomment this
-      if ( GetTrustedLevel(victim) > LEVEL_GOD && GetTrustedLevel(ch) < LEVEL_SUPREME )
+      if ( get_trust(victim) > LEVEL_GOD && get_trust(ch) < LEVEL_SUPREME )
       write_to_descriptor( victim->desc->descriptor, "\r\nYou feel like someone is watching your every move...\r\n", 0 );
   */
   victim->desc->snoop_by = ch->desc;

@@ -1,14 +1,14 @@
 #include "help.h"
 #include "mud.h"
 
-void do_memory( Character *ch, char *argument )
+void do_memory( CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
 
   argument = one_argument( argument, arg );
   ch_printf( ch, "Affects %5d    Areas   %5d\r\n",  top_affect, top_area   );
   ch_printf( ch, "ExtDes  %5d    Exits   %5d\r\n", top_ed,       top_exit   );
-  ch_printf( ch, "Helps   %5d    Resets  %5d\r\n", Map_Count(HelpFiles),   top_reset  );
+  ch_printf( ch, "Helps   %5d    Resets  %5d\r\n", top_help,   top_reset  );
   ch_printf( ch, "IdxMobs %5d    Mobs    %5d\r\n", top_mob_index, nummobsloaded );
   ch_printf( ch, "IdxObjs %5d    Objs    %5d (%d)\r\n", top_obj_index, numobjsloaded, physicalobjects );
   ch_printf( ch, "Rooms   %5d    VRooms  %5d\r\n", top_room,   top_vroom   );

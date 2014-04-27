@@ -4,17 +4,17 @@
 /*
  * syntax: mprestore (character) (#hps)                Gorog
  */
-void do_mp_restore( Character *ch, char *argument )
+void do_mp_restore( CHAR_DATA *ch, char *argument )
 {
   char arg1[ MAX_INPUT_LENGTH ];
   char arg2[ MAX_INPUT_LENGTH ];
-  Character *victim;
+  CHAR_DATA *victim;
   int hp;
 
   if ( is_affected_by( ch, AFF_CHARM ) )
     return;
 
-  if ( !IsNpc( ch ) || ( ch->desc && GetTrustedLevel( ch ) < LEVEL_IMMORTAL )  )
+  if ( !is_npc( ch ) || ( ch->desc && get_trust( ch ) < LEVEL_IMMORTAL )  )
     {
       send_to_char( "Huh?\r\n", ch );
       return;

@@ -2,14 +2,14 @@
 #include "reset.h"
 #include "mud.h"
 
-void do_instazone( Character *ch, char *argument )
+void do_instazone( CHAR_DATA *ch, char *argument )
 {
   AREA_DATA *pArea;
   int vnum;
   ROOM_INDEX_DATA *pRoom;
   bool dodoors;
 
-  if ( IsNpc(ch) || GetTrustedLevel(ch) < LEVEL_SAVIOR || !ch->pcdata ||
+  if ( is_npc(ch) || get_trust(ch) < LEVEL_SAVIOR || !ch->pcdata ||
        !ch->pcdata->area )
     {
       send_to_char( "You don't have an assigned area to create resets for.\r\n",

@@ -1,7 +1,7 @@
 #include "mud.h"
 
 /* Opstat - Scryn 8/12*/
-void do_opstat( Character *ch, char *argument )
+void do_opstat( CHAR_DATA *ch, char *argument )
 {
   char        arg[MAX_INPUT_LENGTH];
   MPROG_DATA *mprg;

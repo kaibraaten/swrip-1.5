@@ -1,14 +1,14 @@
 #include "character.h"
 #include "mud.h"
 
-void do_speak( Character *ch, char *argument )
+void do_speak( CHAR_DATA *ch, char *argument )
 {
   int langs = 0;
   char arg[MAX_INPUT_LENGTH];
 
   argument = one_argument(argument, arg );
 
-  if ( !str_cmp( arg, "all" ) && IsImmortal( ch ) )
+  if ( !str_cmp( arg, "all" ) && is_immortal( ch ) )
     {
       set_char_color( AT_SAY, ch );
       ch->speaking = ~LANG_CLAN;
@@ -102,7 +102,7 @@ void do_speak( Character *ch, char *argument )
 	  if ( knows_language( ch, lang_array[langs], ch ) )
 	    {
 	      if ( lang_array[langs] == LANG_CLAN &&
-		   (IsNpc(ch) || !ch->pcdata->clan) )
+		   (is_npc(ch) || !ch->pcdata->clan) )
 		{
 		  continue;
 		}

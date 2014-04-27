@@ -27,9 +27,8 @@
 #include <string.h>
 #include "mud.h"
 #include "character.h"
-#include "algocallbacks.h"
 
-void jedi_bonus( Character *ch )
+void jedi_bonus( CHAR_DATA *ch )
 {
   if ( number_range( 1 , 100 ) == 1 )
     {
@@ -39,7 +38,7 @@ void jedi_bonus( Character *ch )
     }
 }
 
-void sith_penalty( Character *ch )
+void sith_penalty( CHAR_DATA *ch )
 {
   if ( number_range( 1 , 100 ) == 1 )
     {
@@ -51,27 +50,18 @@ void sith_penalty( Character *ch )
     }
 }
 
-static void SendRumblingSoundToCharacter( void *element, void *userData )
-{
-  Character *rch = (Character*)  element;
-
-  send_to_char( "You hear a loud rumbling sound.\r\n", rch );
-  send_to_char( "Something seems different...\r\n", rch );
-}
-
 /*
  * Function to handle the state changing of a triggerobject (lever)  -Thoric
  */
-void pullorpush( Character *ch, OBJ_DATA *obj, bool pull )
+void pullorpush( CHAR_DATA *ch, OBJ_DATA *obj, bool pull )
 {
   char buf[MAX_STRING_LENGTH];
-  bool isup = FALSE;
-  ROOM_INDEX_DATA *room = NULL;
-  ROOM_INDEX_DATA *to_room = NULL;
-  EXIT_DATA *pexit = NULL;
-  EXIT_DATA *pexit_rev = NULL;
-  int edir = DIR_INVALID;
-  const char *txt = NULL;
+  CHAR_DATA             *rch;
+  bool           isup;
+  ROOM_INDEX_DATA       *room,  *to_room = NULL;
+  EXIT_DATA             *pexit, *pexit_rev;
+  int                    edir;
+  char          *txt;
 
   if ( IS_SET( obj->value[0], TRIG_UP ) )
     isup = TRUE;
@@ -172,8 +162,11 @@ void pullorpush( Character *ch, OBJ_DATA *obj, bool pull )
         maxd = 5;
 
       randomize_exits( room, maxd );
-
-      List_ForEach( room->People, SendRumblingSoundToCharacter, NULL );
+      for ( rch = room->first_person; rch; rch = rch->next_in_room )
+        {
+          send_to_char( "You hear a loud rumbling sound.\r\n", rch );
+          send_to_char( "Something seems different...\r\n", rch );
+        }
     }
   if ( IS_SET( obj->value[0], TRIG_DOOR ) )
     {
@@ -275,39 +268,38 @@ void pullorpush( Character *ch, OBJ_DATA *obj, bool pull )
            &&   IS_SET( pexit->exit_info, EX_CLOSED) )
         {
           REMOVE_BIT(pexit->exit_info, EX_CLOSED);
-	  List_ForEach( room->People, ShowOpenDoorMessageToCharacter, pexit->keyword );
-
+          for ( rch = room->first_person; rch; rch = rch->next_in_room )
+            act( AT_ACTION, "The $d opens.", rch, NULL, pexit->keyword, TO_CHAR );
           if ( ( pexit_rev = pexit->rexit ) != NULL
                &&   pexit_rev->to_room == ch->in_room )
             {
               REMOVE_BIT( pexit_rev->exit_info, EX_CLOSED );
-	      List_ForEach( to_room->People, ShowOpenDoorMessageToCharacter, pexit_rev->keyword );
+              for ( rch = to_room->first_person; rch; rch = rch->next_in_room )
+                act( AT_ACTION, "The $d opens.", rch, NULL, pexit_rev->keyword, TO_CHAR );
             }
-
           check_room_for_traps( ch, trap_door[edir]);
           return;
         }
-
       if ( IS_SET( obj->value[0], TRIG_CLOSE   )
            &&  !IS_SET( pexit->exit_info, EX_CLOSED) )
         {
           SET_BIT(pexit->exit_info, EX_CLOSED);
-	  List_ForEach( room->People, ShowCloseDoorMessageToCharacter, pexit->keyword );
-
+          for ( rch = room->first_person; rch; rch = rch->next_in_room )
+            act( AT_ACTION, "The $d closes.", rch, NULL, pexit->keyword, TO_CHAR );
           if ( ( pexit_rev = pexit->rexit ) != NULL
                &&   pexit_rev->to_room == ch->in_room )
             {
               SET_BIT( pexit_rev->exit_info, EX_CLOSED );
-	      List_ForEach( to_room->People, ShowCloseDoorMessageToCharacter, pexit_rev->keyword );
+              for ( rch = to_room->first_person; rch; rch = rch->next_in_room )
+                act( AT_ACTION, "The $d closes.", rch, NULL, pexit_rev->keyword, TO_CHAR );
             }
-
           check_room_for_traps( ch, trap_door[edir]);
           return;
         }
     }
 }
 
-void actiondesc( Character *ch, OBJ_DATA *obj, void *vo )
+void actiondesc( CHAR_DATA *ch, OBJ_DATA *obj, void *vo )
 {
   char charbuf[MAX_STRING_LENGTH];
   char roombuf[MAX_STRING_LENGTH];
@@ -354,7 +346,7 @@ void actiondesc( Character *ch, OBJ_DATA *obj, void *vo )
       else if ( *srcptr == '%' && *++srcptr == 's' )
         {
           ichar = "You";
-          iroom = IsNpc( ch ) ? ch->short_descr : ch->name;
+          iroom = is_npc( ch ) ? ch->short_descr : ch->name;
         }
       else
         {
@@ -511,67 +503,4 @@ int get_color(const char *origarg)    /* get color code from command string */
 bool is_valid_language( int language )
 {
   return VALID_LANGUAGES & language;
-}
-
-typedef struct TellData
-{
-  Character *Speaker;
-  const char *Text;
-  void (*ShowMessageToBystander)( Character *speaker, Character *listener, const char *message );
-} TellData;
-
-static void SpamTell( void *element, void *userData )
-{
-  Character *listener = (Character*) element;
-  TellData *data = (TellData*) userData;
-  const char *sbuf = data->Text;
-  int language = data->Speaker->speaking;
-
-  if ( listener == data->Speaker )
-    {
-      return;
-    }
-
-  if ( !knows_language( listener, language, data->Speaker )
-       && ( !IsNpc( data->Speaker ) || language != 0 ) )
-    {
-      sbuf = scramble( data->Text, language );
-    }
-
-  sbuf = drunk_speech( sbuf, data->Speaker );
-
-  MOBtrigger = FALSE;
-  data->ShowMessageToBystander( data->Speaker, listener, sbuf );
-}
-
-void SpamTellToBystanders( Character *speaker, const char *message,
-                           void (*ShowMessageToBystander)( Character*, Character*, const char* ) )
-{
-  TellData data;
-
-  data.Speaker = speaker;
-  data.Text = message;
-  data.ShowMessageToBystander = ShowMessageToBystander;
-
-  List_ForEach( speaker->in_room->People, SpamTell, &data );
-}
-
-static bool IsSameGroupCallback( void *element, void *userData )
-{
-  Character *gch = (Character*) element;
-  Character *ch = (Character*) userData;
-
-  return is_same_group( gch, ch );
-}
-
-int CountGroupMembersInRoom( const Character *ch )
-{
-  int members = List_CountIf( ch->in_room->People, IsSameGroupCallback, (void*) ch );
-
-  return members;
-}
-
-void SaysIntoComlink( Character *speaker, Character *listener, const char *message )
-{
-  act( AT_SAY, "$n says quietly into $s comlink '$t'", speaker, message, listener, TO_VICT );
 }

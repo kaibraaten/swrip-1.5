@@ -2,7 +2,7 @@
 #include "mud.h"
 #include "character.h"
 
-void do_openhatch(Character *ch, char *argument )
+void do_openhatch(CHAR_DATA *ch, char *argument )
 {
   SHIP_DATA *ship;
   char buf[MAX_STRING_LENGTH];

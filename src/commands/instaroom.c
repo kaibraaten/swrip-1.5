@@ -2,14 +2,14 @@
 #include "mud.h"
 #include "character.h"
 
-void do_instaroom( Character *ch, char *argument )
+void do_instaroom( CHAR_DATA *ch, char *argument )
 {
   AREA_DATA *pArea;
   ROOM_INDEX_DATA *pRoom;
   bool dodoors;
   char arg[MAX_INPUT_LENGTH];
 
-  if ( IsNpc(ch) || GetTrustedLevel(ch) < LEVEL_SAVIOR || !ch->pcdata ||
+  if ( is_npc(ch) || get_trust(ch) < LEVEL_SAVIOR || !ch->pcdata ||
        !ch->pcdata->area )
     {
       send_to_char( "You don't have an assigned area to create resets for.\r\n",
@@ -29,7 +29,7 @@ void do_instaroom( Character *ch, char *argument )
     }
   if ( !can_rmodify(ch, pRoom) )
     return;
-  if ( pRoom->area != pArea && GetTrustedLevel(ch) < LEVEL_GREATER )
+  if ( pRoom->area != pArea && get_trust(ch) < LEVEL_GREATER )
     {
       send_to_char( "You cannot reset that room.\r\n", ch );
       return;

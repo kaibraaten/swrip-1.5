@@ -5,10 +5,10 @@
 
 #define VENDOR_FEE  .05 /*fee vendor charges, taken out of all gode with teh GETGOLD command*/
 
-Character *find_fixer( Character *ch );
-int get_repaircost( Character *keeper, OBJ_DATA *obj );
-Character *find_keeper( Character *ch );
-Character *find_keeper_q( Character *ch, bool message );
-int get_cost( Character *ch, Character *keeper, OBJ_DATA *obj, bool fBuy );
+CHAR_DATA *find_fixer( CHAR_DATA *ch );
+int get_repaircost( CHAR_DATA *keeper, OBJ_DATA *obj );
+CHAR_DATA *find_keeper( CHAR_DATA *ch );
+CHAR_DATA *find_keeper_q( CHAR_DATA *ch, bool message );
+int get_cost( CHAR_DATA *ch, CHAR_DATA *keeper, OBJ_DATA *obj, bool fBuy );
 
 #endif

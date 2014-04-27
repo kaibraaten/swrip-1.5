@@ -1,7 +1,7 @@
 #include "mud.h"
 #include "character.h"
 
-void do_eat( Character *ch, char *argument )
+void do_eat( CHAR_DATA *ch, char *argument )
 {
   OBJ_DATA *obj;
   ch_ret retcode;
@@ -13,14 +13,14 @@ void do_eat( Character *ch, char *argument )
       return;
     }
 
-  if ( IsNpc(ch) || ch->pcdata->condition[COND_FULL] > 5 )
+  if ( is_npc(ch) || ch->pcdata->condition[COND_FULL] > 5 )
     if ( ms_find_obj(ch) )
       return;
 
   if ( (obj = find_obj(ch, argument, TRUE)) == NULL )
     return;
 
-  if ( !IsImmortal(ch) )
+  if ( !is_immortal(ch) )
     {
       if ( obj->item_type != ITEM_FOOD && obj->item_type != ITEM_PILL )
         {
@@ -29,7 +29,7 @@ void do_eat( Character *ch, char *argument )
           return;
         }
 
-      if ( !IsNpc(ch) && ch->pcdata->condition[COND_FULL] > 40 )
+      if ( !is_npc(ch) && ch->pcdata->condition[COND_FULL] > 40 )
         {
           send_to_char( "You are too full to eat more.\r\n", ch );
           return;
@@ -66,7 +66,7 @@ void do_eat( Character *ch, char *argument )
       else
         foodcond = 10;
 
-      if ( !IsNpc(ch) )
+      if ( !is_npc(ch) )
         {
           int condition = ch->pcdata->condition[COND_FULL];
 
@@ -109,7 +109,7 @@ void do_eat( Character *ch, char *argument )
 
     case ITEM_PILL:
       /* allow pills to fill you, if so desired */
-      if ( !IsNpc(ch) && obj->value[4] )
+      if ( !is_npc(ch) && obj->value[4] )
         {
           int condition;
 

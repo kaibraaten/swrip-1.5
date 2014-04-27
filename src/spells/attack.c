@@ -4,9 +4,9 @@
 /*
  * Generic offensive spell damage attack                        -Thoric
  */
-ch_ret spell_attack( int sn, int level, Character *ch, void *vo )
+ch_ret spell_attack( int sn, int level, CHAR_DATA *ch, void *vo )
 {
-  Character *victim = (Character *) vo;
+  CHAR_DATA *victim = (CHAR_DATA *) vo;
   SKILLTYPE *skill = get_skilltype(sn);
   bool saved = check_save( sn, level, ch, victim );
   int dam;

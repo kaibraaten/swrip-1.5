@@ -1,19 +1,19 @@
 #include "mud.h"
 #include "character.h"
 
-void do_bank( Character *ch, char *argument )
+void do_bank( CHAR_DATA *ch, char *argument )
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
   char arg3[MAX_INPUT_LENGTH];
   long amount = 0;
-  Character *victim;
+  CHAR_DATA *victim;
 
   argument = one_argument( argument , arg1 );
   argument = one_argument( argument , arg2 );
   argument = one_argument( argument , arg3 );
 
-  if ( IsNpc(ch) || !ch->pcdata )
+  if ( is_npc(ch) || !ch->pcdata )
     return;
 
   if ( is_not_authed(ch) )
@@ -22,7 +22,7 @@ void do_bank( Character *ch, char *argument )
       return;
     }
 
-  if ( !HasComlink( ch ) )
+  if ( !has_comlink( ch ) )
     {
       if (!ch->in_room || !IS_SET(ch->in_room->room_flags, ROOM_BANK) )
 	{
@@ -96,7 +96,7 @@ void do_bank( Character *ch, char *argument )
           return;
         }
 
-      if( ( IsNpc(victim)))
+      if( ( is_npc(victim)))
         {
           send_to_char("No such player online.\r\n", ch);
           return;

@@ -1,7 +1,7 @@
 #include "mud.h"
 #include "character.h"
 
-void do_berserk( Character *ch, char *argument )
+void do_berserk( CHAR_DATA *ch, char *argument )
 {
   short percent;
   AFFECT_DATA af;
@@ -18,7 +18,7 @@ void do_berserk( Character *ch, char *argument )
       return;
     }
 
-  percent = IsNpc(ch) ? 80 : ch->pcdata->learned[gsn_berserk];
+  percent = is_npc(ch) ? 80 : ch->pcdata->learned[gsn_berserk];
   set_wait_state(ch, skill_table[gsn_berserk]->beats);
   if ( !chance(ch, percent) )
     {

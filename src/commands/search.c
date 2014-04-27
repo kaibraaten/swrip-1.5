@@ -2,7 +2,7 @@
 #include "mud.h"
 #include "character.h"
 
-void do_search( Character *ch, char *argument )
+void do_search( CHAR_DATA *ch, char *argument )
 {
   char arg  [MAX_INPUT_LENGTH];
   OBJ_DATA *obj;
@@ -15,7 +15,7 @@ void do_search( Character *ch, char *argument )
   switch( ch->substate )
     {
     default:
-      if ( IsNpc(ch) && is_affected_by( ch, AFF_CHARM ) )
+      if ( is_npc(ch) && is_affected_by( ch, AFF_CHARM ) )
         {
           send_to_char( "You can't concentrate enough for that.\r\n", ch );
           return;
@@ -92,7 +92,7 @@ void do_search( Character *ch, char *argument )
 
   found = FALSE;
 
-  if ( (!startobj && door == -1) || IsNpc(ch) )
+  if ( (!startobj && door == -1) || is_npc(ch) )
     {
       send_to_char( "You find nothing.\r\n", ch );
       learn_from_failure( ch, gsn_search );
@@ -108,7 +108,7 @@ void do_search( Character *ch, char *argument )
       if ( (pexit = get_exit( ch->in_room, door )) != NULL
            &&   IS_SET( pexit->exit_info, EX_SECRET )
            &&   IS_SET( pexit->exit_info, EX_xSEARCHABLE )
-           &&   percent < (IsNpc(ch) ? 80 : ch->pcdata->learned[gsn_search]) )
+           &&   percent < (is_npc(ch) ? 80 : ch->pcdata->learned[gsn_search]) )
         {
           act( AT_SKILL, "Your search reveals the $d!", ch, NULL, pexit->keyword, TO_CHAR );
           act( AT_SKILL, "$n finds the $d!", ch, NULL, pexit->keyword, TO_ROOM );

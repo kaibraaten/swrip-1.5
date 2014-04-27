@@ -31,7 +31,7 @@
 
 #define TRACK_THROUGH_DOORS
 
-static bool mob_snipe( Character *ch , Character *victim);
+static bool mob_snipe( CHAR_DATA *ch , CHAR_DATA *victim);
 
 /* You can define or not define TRACK_THOUGH_DOORS, above, depending on
    whether or not you want track to find paths which lead through closed
@@ -189,7 +189,7 @@ int find_first_step(ROOM_INDEX_DATA *src, ROOM_INDEX_DATA *target, int maxdist )
   return BFS_NO_PATH;
 }
 
-void found_prey( Character *ch, Character *victim )
+void found_prey( CHAR_DATA *ch, CHAR_DATA *victim )
 {
   char buf[MAX_STRING_LENGTH];
   char victname[MAX_STRING_LENGTH];
@@ -212,7 +212,7 @@ void found_prey( Character *ch, Character *victim )
       return;
     }
 
-  sprintf( victname, "%s", IsNpc( victim ) ? victim->short_descr : victim->name );
+  sprintf( victname, "%s", is_npc( victim ) ? victim->short_descr : victim->name );
 
   if ( !can_see(ch, victim) )
     {
@@ -283,10 +283,10 @@ void found_prey( Character *ch, Character *victim )
   return;
 }
 
-void hunt_victim( Character *ch )
+void hunt_victim( CHAR_DATA *ch )
 {
   bool found;
-  Character *tmp;
+  CHAR_DATA *tmp;
   short ret;
 
   if (!ch || !ch->hhf.hunting || !ch->hhf.hunting->who )
@@ -373,7 +373,7 @@ void hunt_victim( Character *ch )
     }
 }
 
-static bool mob_snipe( Character *ch, Character *victim )
+static bool mob_snipe( CHAR_DATA *ch, CHAR_DATA *victim )
 {
   short            dir, dist;
   short            max_dist = 3;

@@ -27,15 +27,15 @@
 #include "character.h"
 #include "editor.h"
 
-bool can_rmodify( const Character *ch, const ROOM_INDEX_DATA *room )
+bool can_rmodify( const CHAR_DATA *ch, const ROOM_INDEX_DATA *room )
 {
   short vnum = room->vnum;
   AREA_DATA *pArea;
 
-  if ( IsNpc( ch ) )
+  if ( is_npc( ch ) )
     return FALSE;
 
-  if ( GetTrustedLevel( ch ) >= sysdata.level_modify_proto )
+  if ( get_trust( ch ) >= sysdata.level_modify_proto )
     return TRUE;
 
   if ( !ch->pcdata || !(pArea=ch->pcdata->area) )
@@ -51,15 +51,15 @@ bool can_rmodify( const Character *ch, const ROOM_INDEX_DATA *room )
   return FALSE;
 }
 
-bool can_omodify( const Character *ch, const OBJ_DATA *obj )
+bool can_omodify( const CHAR_DATA *ch, const OBJ_DATA *obj )
 {
   short vnum = obj->pIndexData->vnum;
   AREA_DATA *pArea;
 
-  if ( IsNpc( ch ) )
+  if ( is_npc( ch ) )
     return FALSE;
 
-  if ( GetTrustedLevel( ch ) >= sysdata.level_modify_proto )
+  if ( get_trust( ch ) >= sysdata.level_modify_proto )
     return TRUE;
 
   if ( !ch->pcdata || !(pArea=ch->pcdata->area) )
@@ -75,15 +75,15 @@ bool can_omodify( const Character *ch, const OBJ_DATA *obj )
   return FALSE;
 }
 
-bool can_oedit( const Character *ch, const OBJ_INDEX_DATA *obj )
+bool can_oedit( const CHAR_DATA *ch, const OBJ_INDEX_DATA *obj )
 {
   short vnum = obj->vnum;
   AREA_DATA *pArea;
 
-  if ( IsNpc( ch ) )
+  if ( is_npc( ch ) )
     return FALSE;
 
-  if ( GetTrustedLevel( ch ) >= LEVEL_GOD )
+  if ( get_trust( ch ) >= LEVEL_GOD )
     return TRUE;
 
   if ( !ch->pcdata || !(pArea=ch->pcdata->area) )
@@ -100,7 +100,7 @@ bool can_oedit( const Character *ch, const OBJ_INDEX_DATA *obj )
   return FALSE;
 }
 
-bool can_mmodify( const Character *ch, const Character *mob )
+bool can_mmodify( const CHAR_DATA *ch, const CHAR_DATA *mob )
 {
   short vnum;
   AREA_DATA *pArea;
@@ -108,10 +108,10 @@ bool can_mmodify( const Character *ch, const Character *mob )
   if ( mob == ch )
     return TRUE;
 
-  if ( !IsNpc( mob ) )
+  if ( !is_npc( mob ) )
     {
-      if ( GetTrustedLevel( ch ) >= sysdata.level_modify_proto && GetTrustedLevel(ch) >
-           GetTrustedLevel( mob ) )
+      if ( get_trust( ch ) >= sysdata.level_modify_proto && get_trust(ch) >
+           get_trust( mob ) )
         return TRUE;
       else
         send_to_char( "You can't do that.\r\n", ch );
@@ -120,9 +120,9 @@ bool can_mmodify( const Character *ch, const Character *mob )
 
   vnum = mob->pIndexData->vnum;
 
-  if ( IsNpc( ch ) )
+  if ( is_npc( ch ) )
     return FALSE;
-  if ( GetTrustedLevel( ch ) >= sysdata.level_modify_proto )
+  if ( get_trust( ch ) >= sysdata.level_modify_proto )
     return TRUE;
   if ( !ch->pcdata || !(pArea=ch->pcdata->area) )
     {
@@ -137,14 +137,14 @@ bool can_mmodify( const Character *ch, const Character *mob )
   return FALSE;
 }
 
-bool can_medit( const Character *ch, const MOB_INDEX_DATA *mob )
+bool can_medit( const CHAR_DATA *ch, const MOB_INDEX_DATA *mob )
 {
   short vnum = mob->vnum;
   AREA_DATA *pArea;
 
-  if ( IsNpc( ch ) )
+  if ( is_npc( ch ) )
     return FALSE;
-  if ( GetTrustedLevel( ch ) >= LEVEL_GOD )
+  if ( get_trust( ch ) >= LEVEL_GOD )
     return TRUE;
   if ( !ch->pcdata || !(pArea=ch->pcdata->area) )
     {
@@ -175,7 +175,7 @@ void free_area( AREA_DATA *are )
   are = NULL;
 }
 
-void assign_area( Character *ch )
+void assign_area( CHAR_DATA *ch )
 {
   char buf[MAX_STRING_LENGTH];
   char buf2[MAX_STRING_LENGTH];
@@ -183,9 +183,9 @@ void assign_area( Character *ch )
   AREA_DATA *tarea, *tmp;
   bool created = FALSE;
 
-  if ( IsNpc( ch ) )
+  if ( is_npc( ch ) )
     return;
-  if ( GetTrustedLevel( ch ) >= LEVEL_AVATAR
+  if ( get_trust( ch ) >= LEVEL_AVATAR
        &&   ch->pcdata->r_range_lo
        &&   ch->pcdata->r_range_hi )
     {
@@ -351,14 +351,6 @@ bool DelOExtraProto( OBJ_INDEX_DATA *obj, char *keywords )
   DISPOSE( rmed );
   top_ed--;
   return TRUE;
-}
-
-static void ExtractCharacterIfNpc( void *element, void *userData )
-{
-  Character *victim = (Character*) element;
-
-  if ( IsNpc(victim) )
-    extract_char( victim, TRUE );
 }
 
 void fold_area( AREA_DATA *tarea, char *filename, bool install )
@@ -603,15 +595,18 @@ void fold_area( AREA_DATA *tarea, char *filename, bool install )
         continue;
       if ( install )
         {
+          CHAR_DATA *victim, *vnext;
           OBJ_DATA  *obj, *obj_next;
-	  CerisList *originalPeopleInRoom = List_Copy( room->People );
 
-	  REMOVE_BIT( room->room_flags, ROOM_PROTOTYPE );
-
-	  /* purge room of (prototyped) mobiles */
-	  List_ForEach( originalPeopleInRoom, ExtractCharacterIfNpc, NULL );
-	  DestroyList( originalPeopleInRoom );
-
+          /* remove prototype flag from room */
+          REMOVE_BIT( room->room_flags, ROOM_PROTOTYPE );
+          /* purge room of (prototyped) mobiles */
+          for ( victim = room->first_person; victim; victim = vnext )
+            {
+              vnext = victim->next_in_room;
+              if ( is_npc(victim) )
+                extract_char( victim, TRUE );
+            }
           /* purge room of (prototyped) objects */
           for ( obj = room->first_content; obj; obj = obj_next )
             {
@@ -795,7 +790,7 @@ void add_reset_nested( AREA_DATA *tarea, OBJ_DATA *obj )
 /*
  * Parse a reset command string into a reset_data structure
  */
-RESET_DATA *parse_reset( AREA_DATA *tarea, char *argument, Character *ch )
+RESET_DATA *parse_reset( AREA_DATA *tarea, char *argument, CHAR_DATA *ch )
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
@@ -1039,7 +1034,7 @@ RESET_DATA *parse_reset( AREA_DATA *tarea, char *argument, Character *ch )
     return make_reset( letter, extra, val1, val3, val2 );
 }
 
-void mpedit( Character *ch, MPROG_DATA *mprg, int mptype, char *argument )
+void mpedit( CHAR_DATA *ch, MPROG_DATA *mprg, int mptype, char *argument )
 {
   if ( mptype != -1 )
     {
@@ -1058,7 +1053,7 @@ void mpedit( Character *ch, MPROG_DATA *mprg, int mptype, char *argument )
 /*
  * RoomProg Support
  */
-void rpedit( Character *ch, MPROG_DATA *mprg, int mptype, char *argument )
+void rpedit( CHAR_DATA *ch, MPROG_DATA *mprg, int mptype, char *argument )
 {
   if ( mptype != -1 )
     {

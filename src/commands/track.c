@@ -2,14 +2,14 @@
 #include "track.h"
 #include "mud.h"
 
-void do_track( Character *ch, char *argument )
+void do_track( CHAR_DATA *ch, char *argument )
 {
-  Character *vict;
+  CHAR_DATA *vict;
   char arg[MAX_INPUT_LENGTH];
   char buf[MAX_STRING_LENGTH];
   int dir, maxdist;
 
-  if ( !IsNpc(ch) && !ch->pcdata->learned[gsn_track] )
+  if ( !is_npc(ch) && !ch->pcdata->learned[gsn_track] )
     {
       send_to_char("You do not know of this skill yet.\r\n", ch );
       return;
@@ -30,7 +30,7 @@ void do_track( Character *ch, char *argument )
 
   maxdist = 100 + ch->top_level * 30;
 
-  if ( !IsNpc(ch) )
+  if ( !is_npc(ch) )
     maxdist = (maxdist * ch->pcdata->learned[gsn_track]) / 100;
 
   dir = find_first_step(ch->in_room, vict->in_room, maxdist);

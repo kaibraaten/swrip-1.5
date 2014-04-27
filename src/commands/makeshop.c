@@ -1,6 +1,6 @@
 #include "mud.h"
 
-void do_makeshop( Character *ch, char *argument )
+void do_makeshop( CHAR_DATA *ch, char *argument )
 {
   SHOP_DATA *shop;
   short vnum;

@@ -1,6 +1,6 @@
 #include "mud.h"
 
-void do_wizlock( Character *ch, char *argument )
+void do_wizlock( CHAR_DATA *ch, char *argument )
 {
   extern bool wizlock;
   wizlock = !wizlock;

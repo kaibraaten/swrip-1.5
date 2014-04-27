@@ -3,7 +3,7 @@
 #include "character.h"
 #include "editor.h"
 
-void do_oset( Character *ch, char *argument )
+void do_oset( CHAR_DATA *ch, char *argument )
 {
   char arg1 [MAX_INPUT_LENGTH];
   char arg2 [MAX_INPUT_LENGTH];
@@ -17,7 +17,7 @@ void do_oset( Character *ch, char *argument )
 
   int value, tmp;
 
-  if ( IsNpc( ch ) )
+  if ( is_npc( ch ) )
     {
       send_to_char( "Mob's can't oset\r\n", ch );
       return;
@@ -174,7 +174,7 @@ void do_oset( Character *ch, char *argument )
       return;
     }
 
-  if ( !obj && GetTrustedLevel(ch) <= LEVEL_IMMORTAL )
+  if ( !obj && get_trust(ch) <= LEVEL_IMMORTAL )
     {
       if ( ( obj = get_obj_here( ch, arg1 ) ) == NULL )
         {

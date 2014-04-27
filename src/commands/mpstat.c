@@ -5,11 +5,11 @@
  * enough to identify the mob and give its basic condition.  It does however,
  * show the MUDprograms which are set.
  */
-void do_mpstat( Character *ch, char *argument )
+void do_mpstat( CHAR_DATA *ch, char *argument )
 {
   char        arg[MAX_INPUT_LENGTH];
   MPROG_DATA *mprg;
-  Character  *victim;
+  CHAR_DATA  *victim;
 
   one_argument( argument, arg );
 
@@ -25,7 +25,7 @@ void do_mpstat( Character *ch, char *argument )
       return;
     }
 
-  if ( !IsNpc( victim ) )
+  if ( !is_npc( victim ) )
     {
       send_to_char( "Only Mobiles can have MobPrograms!\r\n", ch);
       return;

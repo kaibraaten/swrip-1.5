@@ -4,7 +4,7 @@
 /*
  * Social editor/displayer/save/delete                          -Thoric
  */
-void do_sedit( Character *ch, char *argument )
+void do_sedit( CHAR_DATA *ch, char *argument )
 {
   SOCIALTYPE *social;
   char arg1[MAX_INPUT_LENGTH];
@@ -20,16 +20,16 @@ void do_sedit( Character *ch, char *argument )
     {
       send_to_char( "Syntax: sedit <social> [field]\r\n", ch );
       send_to_char( "Syntax: sedit <social> create\r\n", ch );
-      if ( GetTrustedLevel(ch) > LEVEL_GOD )
+      if ( get_trust(ch) > LEVEL_GOD )
         send_to_char( "Syntax: sedit <social> delete\r\n", ch );
-      if ( GetTrustedLevel(ch) > LEVEL_LESSER )
+      if ( get_trust(ch) > LEVEL_LESSER )
         send_to_char( "Syntax: sedit <save>\r\n", ch );
       send_to_char( "\r\nField being one of:\r\n", ch );
       send_to_char( "  cnoarg onoarg cfound ofound vfound cauto oauto\r\n", ch );
       return;
     }
 
-  if ( GetTrustedLevel(ch) > LEVEL_LESSER && !str_cmp( arg1, "save" ) )
+  if ( get_trust(ch) > LEVEL_LESSER && !str_cmp( arg1, "save" ) )
     {
       save_socials();
       send_to_char( "Saved.\r\n", ch );
@@ -75,7 +75,7 @@ void do_sedit( Character *ch, char *argument )
       return;
     }
 
-  if ( GetTrustedLevel(ch) > LEVEL_GOD && !str_cmp( arg2, "delete" ) )
+  if ( get_trust(ch) > LEVEL_GOD && !str_cmp( arg2, "delete" ) )
     {
       unlink_social( social );
       free_social( social );
@@ -157,7 +157,7 @@ void do_sedit( Character *ch, char *argument )
       return;
     }
 
-  if ( GetTrustedLevel(ch) > LEVEL_GREATER && !str_cmp( arg2, "name" ) )
+  if ( get_trust(ch) > LEVEL_GREATER && !str_cmp( arg2, "name" ) )
     {
       bool relocate;
 

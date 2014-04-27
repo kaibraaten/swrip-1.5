@@ -20,7 +20,7 @@ bool check_multi( DESCRIPTOR_DATA *d, char *name );
 /*
  * boards.c
  */
-void mail_count( Character *ch );
+void mail_count( CHAR_DATA *ch );
 
 /*
  * Local functions
@@ -113,7 +113,7 @@ static void nanny_get_name( DESCRIPTOR_DATA *d, char *argument )
   char buf[MAX_STRING_LENGTH];
   bool fOld = FALSE, chk = FALSE;
   BAN_DATA *pban = NULL;
-  Character *ch = d->character;
+  CHAR_DATA *ch = d->character;
 
   if ( argument[0] == '\0' )
     {
@@ -225,7 +225,7 @@ static void nanny_get_name( DESCRIPTOR_DATA *d, char *argument )
     }
   else
     {
-      if ( wizlock && !IsImmortal(ch) )
+      if ( wizlock && !is_immortal(ch) )
 	{
 	  write_to_buffer( d, "The game is wizlocked. Only immortals can connect now.\r\n", 0 );
 	  write_to_buffer( d, "Please try back later.\r\n", 0 );
@@ -270,8 +270,8 @@ nother.\r\n", 0);
 
 static void nanny_get_old_password( DESCRIPTOR_DATA *d, char *argument )
 {
-  Character *ch = d->character;
-  bool chk = FALSE;
+  CHAR_DATA *ch = d->character;
+  bool fOld = FALSE, chk = FALSE;
   char buf[MAX_STRING_LENGTH];
 
   write_to_buffer( d, "\r\n", 2 );
@@ -319,7 +319,7 @@ static void nanny_get_old_password( DESCRIPTOR_DATA *d, char *argument )
   sprintf( buf, "%s", ch->name );
   d->character->desc = NULL;
   free_char( d->character );
-  load_char_obj( d, buf, FALSE );
+  fOld = load_char_obj( d, buf, FALSE );
   ch = d->character;
   sprintf( log_buf, "%s@%s has connected.", ch->name, d->remote.hostname );
 
@@ -345,7 +345,7 @@ static void nanny_get_old_password( DESCRIPTOR_DATA *d, char *argument )
 static void nanny_confirm_new_name( DESCRIPTOR_DATA *d, char *argument )
 {
   char buf[MAX_STRING_LENGTH];
-  Character *ch = d->character;
+  CHAR_DATA *ch = d->character;
 
   switch ( *argument )
     {
@@ -375,7 +375,7 @@ static void nanny_confirm_new_name( DESCRIPTOR_DATA *d, char *argument )
 static void nanny_get_new_password( DESCRIPTOR_DATA *d, char *argument )
 {
   char *pwdnew = NULL, *p = NULL;
-  Character *ch = d->character;
+  CHAR_DATA *ch = d->character;
 
   write_to_buffer( d, "\r\n", 2 );
 
@@ -404,7 +404,7 @@ static void nanny_get_new_password( DESCRIPTOR_DATA *d, char *argument )
 
 static void nanny_confirm_new_password( DESCRIPTOR_DATA *d, char *argument )
 {
-  Character *ch = d->character;
+  CHAR_DATA *ch = d->character;
 
   write_to_buffer( d, "\r\n", 2 );
 
@@ -422,7 +422,7 @@ static void nanny_confirm_new_password( DESCRIPTOR_DATA *d, char *argument )
 
 static void nanny_get_new_sex( DESCRIPTOR_DATA *d, char *argument )
 {
-  Character *ch = d->character;
+  CHAR_DATA *ch = d->character;
   char buf[MAX_STRING_LENGTH];
   char buf2[MAX_STRING_LENGTH];
   int halfmax = 0, iRace = 0;
@@ -490,7 +490,7 @@ static void nanny_get_new_race( DESCRIPTOR_DATA *d, char *argument )
   char arg[MAX_STRING_LENGTH];
   char buf[MAX_STRING_LENGTH];
   char buf2[MAX_STRING_LENGTH];
-  Character *ch = d->character;
+  CHAR_DATA *ch = d->character;
   int iRace = 0, iClass = 0, halfmax = 0;
 
   argument = one_argument(argument, arg);
@@ -568,7 +568,7 @@ static void nanny_get_new_race( DESCRIPTOR_DATA *d, char *argument )
 static void nanny_get_new_class( DESCRIPTOR_DATA *d, char *argument )
 {
   char arg[MAX_STRING_LENGTH], buf[MAX_STRING_LENGTH];
-  Character *ch = d->character;
+  CHAR_DATA *ch = d->character;
   int iClass = 0;
 
   argument = one_argument(argument, arg);
@@ -624,7 +624,7 @@ static void nanny_get_new_class( DESCRIPTOR_DATA *d, char *argument )
 
 static void nanny_stats_ok( DESCRIPTOR_DATA *d, char *argument )
 {
-  Character *ch = d->character;
+  CHAR_DATA *ch = d->character;
   char buf[MAX_STRING_LENGTH];
 
   switch ( argument[0] )
@@ -667,7 +667,7 @@ static void nanny_stats_ok( DESCRIPTOR_DATA *d, char *argument )
 
 static void nanny_get_want_ansi( DESCRIPTOR_DATA *d, char *argument )
 {
-  Character *ch = d->character;
+  CHAR_DATA *ch = d->character;
 
   switch ( argument[0] )
     {
@@ -692,7 +692,7 @@ static void nanny_get_want_ansi( DESCRIPTOR_DATA *d, char *argument )
 static void nanny_get_msp( DESCRIPTOR_DATA *d, char *argument )
 {
   int ability = 0;
-  Character *ch = d->character;
+  CHAR_DATA *ch = d->character;
 
   switch ( argument[0] )
     {
@@ -720,7 +720,7 @@ static void nanny_get_msp( DESCRIPTOR_DATA *d, char *argument )
 
   for ( ability =0 ; ability < MAX_ABILITY ; ability++ )
     {
-      SetLevel( ch, ability, 0 );
+      set_level( ch, ability, 0 );
     }
 
   ch->top_level = 0;
@@ -730,7 +730,7 @@ static void nanny_get_msp( DESCRIPTOR_DATA *d, char *argument )
 
 static void nanny_press_enter( DESCRIPTOR_DATA *d, char *argument )
 {
-  Character *ch = d->character;
+  CHAR_DATA *ch = d->character;
 
   if ( IS_SET(ch->act, PLR_ANSI) )
     {
@@ -741,7 +741,7 @@ static void nanny_press_enter( DESCRIPTOR_DATA *d, char *argument )
       send_to_pager( "\014", ch );
     }
 
-  if ( IsImmortal(ch) )
+  if ( is_immortal(ch) )
     {
       send_to_pager( "&WImmortal Message of the Day&w\r\n", ch );
       do_help( ch, "imotd" );
@@ -770,14 +770,14 @@ static void nanny_press_enter( DESCRIPTOR_DATA *d, char *argument )
 
 static void nanny_read_motd( DESCRIPTOR_DATA *d, char *argument )
 {
-  Character *ch = d->character;
+  CHAR_DATA *ch = d->character;
   char buf[MAX_STRING_LENGTH];
 
   write_to_buffer( d, "\r\nWelcome to Rise in Power...\r\n\r\n", 0 );
   add_char( ch );
   d->connection_state      = CON_PLAYING;
 
-  if ( !IsNpc(ch) && IS_SET( ch->act , PLR_SOUND ) )
+  if ( !is_npc(ch) && IS_SET( ch->act , PLR_SOUND ) )
     {
       send_to_char( "!!MUSIC(starwars.mid V=100)" , ch );
     }
@@ -818,6 +818,21 @@ static void nanny_read_motd( DESCRIPTOR_DATA *d, char *argument )
 	{
 	  ch->stats.perm_frc = 0;
 	}
+
+      /* Noghri are auto commando */
+      /*
+            if (ch->race == RACE_NOGHRI )
+            {
+            ch->pcdata->clan = get_clan( "The Death Commandos");
+            ch->pcdata->clan_name = QUICKLINK( ch->pcdata->clan->name );
+            }
+      */
+      /* took out automaticly knowing common
+if ( (iLang = skill_lookup( "common" )) < 0 )
+             bug( "Nanny: cannot find common language." );
+             else
+             ch->pcdata->learned[iLang] = 100;
+      */
 
       for ( iLang = 0; lang_array[iLang] != LANG_UNKNOWN; iLang++ )
 	{
@@ -865,8 +880,8 @@ static void nanny_read_motd( DESCRIPTOR_DATA *d, char *argument )
 
 	for ( ability =0 ; ability < MAX_ABILITY ; ability++ )
 	  {
-	    SetLevel( ch, ability, 1 );
-	    SetExperience( ch, ability, 0 );
+	    set_level( ch, ability, 1 );
+	    set_exp( ch, ability, 0 );
 	  }
       }
 
@@ -942,7 +957,7 @@ static void nanny_read_motd( DESCRIPTOR_DATA *d, char *argument )
       /* Display_prompt interprets blank as default */
       ch->pcdata->prompt = STRALLOC("");
     }
-  else if ( !IsImmortal(ch) && ch->pcdata->release_date > current_time )
+  else if ( !is_immortal(ch) && ch->pcdata->release_date > current_time )
     {
       if ( ch->pcdata->jail_vnum )
 	{
@@ -953,13 +968,13 @@ static void nanny_read_motd( DESCRIPTOR_DATA *d, char *argument )
 	  char_to_room( ch, get_room_index(6) );
 	}
     }
-  else if ( ch->in_room && !IsImmortal( ch )
+  else if ( ch->in_room && !is_immortal( ch )
 	    && !IS_SET( ch->in_room->room_flags, ROOM_SPACECRAFT )
 	    && ch->in_room != get_room_index(6) )
     {
       char_to_room( ch, ch->in_room );
     }
-  else if ( ch->in_room && !IsImmortal( ch )
+  else if ( ch->in_room && !is_immortal( ch )
 	    && IS_SET( ch->in_room->room_flags, ROOM_SPACECRAFT )
 	    && ch->in_room != get_room_index(6) )
     {

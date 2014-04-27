@@ -1,11 +1,11 @@
 #include "character.h"
 #include "mud.h"
 
-void do_bestow( Character *ch, char *argument )
+void do_bestow( CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   char buf[MAX_STRING_LENGTH];
-  Character *victim;
+  CHAR_DATA *victim;
 
   argument = one_argument( argument, arg );
 
@@ -21,13 +21,13 @@ void do_bestow( Character *ch, char *argument )
       return;
     }
 
-  if ( IsNpc( victim ) )
+  if ( is_npc( victim ) )
     {
       send_to_char( "You can't give special abilities to a mob!\r\n", ch );
       return;
     }
 
-  if ( GetTrustedLevel( victim ) > GetTrustedLevel( ch ) )
+  if ( get_trust( victim ) > get_trust( ch ) )
     {
       send_to_char( "You aren't powerful enough...\r\n", ch );
       return;

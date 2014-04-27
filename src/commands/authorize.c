@@ -1,14 +1,14 @@
 #include "character.h"
 #include "mud.h"
 
-static Character *get_waiting_desc( const Character *ch, const char *name );
+static CHAR_DATA *get_waiting_desc( const CHAR_DATA *ch, const char *name );
 
-void do_authorize( Character *ch, char *argument )
+void do_authorize( CHAR_DATA *ch, char *argument )
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
   char buf[MAX_STRING_LENGTH];
-  Character *victim;
+  CHAR_DATA *victim;
   DESCRIPTOR_DATA *d;
 
   argument = one_argument( argument, arg1 );
@@ -86,10 +86,10 @@ void do_authorize( Character *ch, char *argument )
 /*
  * Check if the name prefix uniquely identifies a char descriptor
  */
-static Character *get_waiting_desc( const Character *ch, const char *name )
+static CHAR_DATA *get_waiting_desc( const CHAR_DATA *ch, const char *name )
 {
   DESCRIPTOR_DATA *d;
-  Character       *ret_char;
+  CHAR_DATA       *ret_char;
   static unsigned int number_of_hits;
 
   number_of_hits = 0;

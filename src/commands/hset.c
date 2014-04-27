@@ -1,9 +1,9 @@
 #include "mud.h"
 #include "help.h"
 
-void do_hset( Character *ch, char *argument )
+void do_hset( CHAR_DATA *ch, char *argument )
 {
-  HelpFile *pHelp = NULL;
+  HELP_DATA *pHelp = NULL;
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
 
@@ -22,7 +22,7 @@ void do_hset( Character *ch, char *argument )
   if ( !str_cmp( arg1, "save" ) )
     {
       log_string_plus( "Saving help files.", LOG_NORMAL, LEVEL_GREATER );
-      SaveHelps();
+      save_helps();
       send_to_char( "Saved.\r\n", ch );
       return;
     }
@@ -32,7 +32,7 @@ void do_hset( Character *ch, char *argument )
       argument = one_argument( argument, arg2 );
     }
 
-  pHelp = GetHelp( ch, argument );
+  pHelp = get_help( ch, argument );
 
   if ( !pHelp )
     {
@@ -42,22 +42,23 @@ void do_hset( Character *ch, char *argument )
 
   if ( !str_cmp( arg1, "remove" ) )
     {
-      UnlinkHelp( pHelp );
-      DestroyHelp( pHelp );
+      unlink_help( pHelp );
+      destroy_help( pHelp );
       send_to_char( "Removed.\r\n", ch );
       return;
     }
 
   if ( !str_cmp( arg1, "level" ) )
     {
-      SetHelpLevel( pHelp, atoi( arg2 ) );
+      pHelp->level = atoi( arg2 );
       send_to_char( "Done.\r\n", ch );
       return;
     }
 
   if ( !str_cmp( arg1, "keyword" ) )
     {
-      SetHelpKeyword( pHelp, strupper(arg2) );
+      STRFREE( pHelp->keyword );
+      pHelp->keyword = STRALLOC( strupper(arg2) );
       send_to_char( "Done.\r\n", ch );
       return;
     }

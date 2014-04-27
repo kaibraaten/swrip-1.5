@@ -1,14 +1,13 @@
 #include "character.h"
 #include "mud.h"
-#include "clan.h"
 
-void do_induct( Character *ch, char *argument )
+void do_induct( CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  Character *victim;
-  Clan *clan;
+  CHAR_DATA *victim;
+  CLAN_DATA *clan;
 
-  if ( IsNpc( ch ) || !is_clanned( ch ) )
+  if ( is_npc( ch ) || !ch->pcdata->clan )
     {
       send_to_char( "Huh?\r\n", ch );
       return;
@@ -44,13 +43,13 @@ void do_induct( Character *ch, char *argument )
       return;
     }
 
-  if ( IsNpc(victim) )
+  if ( is_npc(victim) )
     {
       send_to_char( "Not on NPCs.\r\n", ch );
       return;
     }
 
-  if ( is_clanned( victim ) )
+  if ( victim->pcdata->clan )
     {
       if ( victim->pcdata->clan->clan_type == CLAN_CRIME )
         {
@@ -98,7 +97,7 @@ void do_induct( Character *ch, char *argument )
   victim->pcdata->clan = clan;
   STRFREE(victim->pcdata->clan_name);
   victim->pcdata->clan_name = QUICKLINK( clan->name );
-  UpdateMember( victim );
+  update_member( victim );
   act( AT_MAGIC, "You induct $N into $t", ch, clan->name, victim, TO_CHAR );
   act( AT_MAGIC, "$n inducts $N into $t", ch, clan->name, victim, TO_NOTVICT );
   act( AT_MAGIC, "$n inducts you into $t", ch, clan->name, victim, TO_VICT );

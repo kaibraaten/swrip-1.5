@@ -2,11 +2,10 @@
 #include "ships.h"
 #include "mud.h"
 #include "turret.h"
-#include "clan.h"
 
 static bool room_is_in_use( const SHIP_DATA *ship, int room_vnum );
 
-void do_setship( Character *ch, char *argument )
+void do_setship( CHAR_DATA *ch, char *argument )
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
@@ -14,7 +13,7 @@ void do_setship( Character *ch, char *argument )
   int tempnum = 0;
   ROOM_INDEX_DATA *roomindex = NULL;
 
-  if ( IsNpc( ch ) )
+  if ( is_npc( ch ) )
     {
       send_to_char( "Huh?\r\n", ch );
       return;
@@ -48,9 +47,9 @@ void do_setship( Character *ch, char *argument )
 
   if ( !str_cmp( arg2, "owner" ) )
     {
-      Clan *clan = NULL;
+      CLAN_DATA *clan = NULL;
 
-      if ( ship->type != MOB_SHIP && (clan = GetClan( ship->owner )) != NULL )
+      if ( ship->type != MOB_SHIP && (clan = get_clan( ship->owner )) != NULL )
         {
           if ( ship->sclass <= SHIP_PLATFORM )
             clan->spacecraft--;
@@ -63,7 +62,7 @@ void do_setship( Character *ch, char *argument )
       send_to_char( "Done.\r\n", ch );
       save_ship( ship );
 
-      if ( ship->type != MOB_SHIP && (clan = GetClan( ship->owner )) != NULL )
+      if ( ship->type != MOB_SHIP && (clan = get_clan( ship->owner )) != NULL )
         {
           if ( ship->sclass <= SHIP_PLATFORM )
             clan->spacecraft++;

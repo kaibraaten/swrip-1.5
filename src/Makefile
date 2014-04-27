@@ -11,7 +11,7 @@ IMC = 1
 DEBUG_TELNET = -DSWRIP_DEBUG_TELNET=0
 
 CCFLAGS = -g3 -MMD -I. -Iutility $(WFLAGS) $(USE_DLSYM) $(DEBUG_TELNET) -pedantic
-LDFLAGS = -lm -lz -Lutility -lutility -Wl,-rpath,../src/utility -Leris -lceris -Wl,-rpath,../src/eris
+LDFLAGS = -lm -lz -Lutility -lutility -Wl,-rpath,../src/utility
 
 #Uncomment the next line of you're using Solaris and you get linker errors.
 #SOLARIS = 1
@@ -37,11 +37,11 @@ SPELLDIR = spells
 SPECDIR = special
 
 ODIR = obj
-_OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o algocallbacks.o alias.o arena.o \
-	boards.o bounty.o build.o character.o clan.o comm.o comments.o const.o \
+_OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
+	boards.o bounty.o build.o character.o clans.o comm.o comments.o const.o \
 	copyover.o db.o editor.o fight.o grub.o handler.o help.o interp.o magic.o \
 	makeobjs.o mapper.o misc.o mud_prog.o nanny.o \
-	planets.o player.o quest.o reset.o room.o save.o ships.o shops.o shuttle.o \
+	planets.o player.o quest.o reset.o save.o ships.o shops.o shuttle.o \
 	skills.o special.o space.o spaceobjects.o swskills.o \
 	tables.o track.o turret.o update.o vector3_aux.o \
 	$(CMDDIR)/aassign.o \
@@ -212,9 +212,9 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o algocallbacks.o ali
 	$(CMDDIR)/gtell.o \
 	$(CMDDIR)/guard.o \
 	$(CMDDIR)/hail.o \
+	$(CMDDIR)/help.o \
 	$(CMDDIR)/hedit.o \
 	$(CMDDIR)/hell.o \
-	$(CMDDIR)/help.o \
 	$(CMDDIR)/hide.o \
 	$(CMDDIR)/hijack.o \
 	$(CMDDIR)/hitall.o \
@@ -480,7 +480,6 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o algocallbacks.o ali
 	$(CMDDIR)/target.o \
 	$(CMDDIR)/teach.o \
 	$(CMDDIR)/tell.o \
-	$(CMDDIR)/test.o \
 	$(CMDDIR)/throw.o \
 	$(CMDDIR)/time.o \
 	$(CMDDIR)/timecmd.o \
@@ -670,7 +669,6 @@ all:		libs $(BINARY)
 
 libs:
 		$(MAKE) -C utility
-		$(MAKE) -C eris
 
 $(BINARY):	$(OBJ)
 		@echo "Linking" $(BINARY)

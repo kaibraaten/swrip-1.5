@@ -1,11 +1,11 @@
 #include "character.h"
 #include "mud.h"
 
-void do_disconnect( Character *ch, char *argument )
+void do_disconnect( CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   DESCRIPTOR_DATA *d;
-  Character *victim;
+  CHAR_DATA *victim;
 
   one_argument( argument, arg );
   if ( arg[0] == '\0' )
@@ -26,7 +26,7 @@ void do_disconnect( Character *ch, char *argument )
       return;
     }
 
-  if ( GetTrustedLevel(ch) <= GetTrustedLevel( victim ) )
+  if ( get_trust(ch) <= get_trust( victim ) )
     {
       send_to_char( "They might not like that...\r\n", ch );
       return;

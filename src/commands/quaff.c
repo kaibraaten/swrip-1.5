@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_quaff( Character *ch, char *argument )
+void do_quaff( CHAR_DATA *ch, char *argument )
 {
   OBJ_DATA *obj;
   ch_ret retcode;
@@ -30,7 +30,7 @@ void do_quaff( Character *ch, char *argument )
   /*
    * Fullness checking                                  -Thoric
    */
-  if ( !IsNpc(ch)
+  if ( !is_npc(ch)
        && ( ch->pcdata->condition[COND_FULL] >= 48
             ||   ch->pcdata->condition[COND_THIRST] >= 48 ) )
     {
@@ -48,7 +48,7 @@ void do_quaff( Character *ch, char *argument )
   /*
    * If fighting, chance of dropping potion                     -Thoric
    */
-  if ( ch->fighting && number_percent( ) > (GetCurrentDex(ch) * 2 + 48) )
+  if ( ch->fighting && number_percent( ) > (get_curr_dex(ch) * 2 + 48) )
     {
       act( AT_MAGIC, "$n accidentally drops $p and it smashes into a thousand fragments.", ch, obj, NULL, TO_ROOM );
       act( AT_MAGIC, "Oops... $p gets knocked from your hands and smashes into pieces!", ch, obj, NULL ,TO_CHAR );

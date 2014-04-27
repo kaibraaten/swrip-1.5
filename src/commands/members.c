@@ -1,7 +1,6 @@
 #include "mud.h"
-#include "clan.h"
 
-void do_members( Character *ch, char *argument )
+void do_members( CHAR_DATA *ch, char *argument )
 {
   char arg1[MAX_STRING_LENGTH];
   argument = one_argument( argument, arg1 );
@@ -18,11 +17,11 @@ void do_members( Character *ch, char *argument )
         {
           MEMBER_LIST *members_list;
           for( members_list = first_member_list; members_list; members_list = members_list->next )
-            ShowMembers( ch, members_list->name, NULL );
+            show_members( ch, members_list->name, NULL );
           return;
         }
 
-      ShowMembers( ch, argument, NULL );
+      show_members( ch, argument, NULL );
       return;
     }
 
@@ -33,7 +32,7 @@ void do_members( Character *ch, char *argument )
       CREATE( members_list, MEMBER_LIST, 1 );
       members_list->name = STRALLOC( argument );
       LINK( members_list, first_member_list, last_member_list, next, prev );
-      SaveMemberList( members_list );
+      save_member_list( members_list );
       ch_printf( ch, "Member lists \"%s\" created.\r\n", argument );
       return;
     }

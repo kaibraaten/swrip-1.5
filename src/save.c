@@ -33,7 +33,6 @@
 #include <ctype.h>
 #include "mud.h"
 #include "character.h"
-#include "clan.h"
 
 /*
  * Increment with every major format change.
@@ -44,15 +43,15 @@
  * Array to keep track of equipment temporarily.                -Thoric
  */
 OBJ_DATA *save_equipment[MAX_WEAR][8];
-Character *quitting_char, *loading_char, *saving_char;
+CHAR_DATA *quitting_char, *loading_char, *saving_char;
 
 int file_ver;
 
 /*
  * Externals
  */
-void fwrite_comments( Character *ch, FILE *fp );
-void fread_comment( Character *ch, FILE *fp );
+void fwrite_comments( CHAR_DATA *ch, FILE *fp );
+void fread_comment( CHAR_DATA *ch, FILE *fp );
 
 extern FILE *fpArea;
 extern char strArea[MAX_INPUT_LENGTH];
@@ -66,16 +65,16 @@ static  OBJ_DATA *      rgObjNest       [MAX_NEST];
 /*
  * Local functions.
  */
-void    fwrite_char( Character *ch, FILE *fp );
-void    fread_char( Character *ch, FILE *fp, bool preload );
-void    write_corpses( Character *ch, char *name );
-Character *  fread_mobile( FILE *fp );
-void write_char_mobile( Character *ch , char *argument );
+void    fwrite_char( CHAR_DATA *ch, FILE *fp );
+void    fread_char( CHAR_DATA *ch, FILE *fp, bool preload );
+void    write_corpses( CHAR_DATA *ch, char *name );
+CHAR_DATA *  fread_mobile( FILE *fp );
+void write_char_mobile( CHAR_DATA *ch , char *argument );
 void read_char_mobile( char *argument );
-void fwrite_mobile( FILE *fp, Character *mob );
+void fwrite_mobile( FILE *fp, CHAR_DATA *mob );
 
 
-void save_home( Character *ch )
+void save_home( CHAR_DATA *ch )
 {
   if ( ch->plr_home )
     {
@@ -108,7 +107,7 @@ void save_home( Character *ch )
  * Un-equip character before saving to ensure proper    -Thoric
  * stats are saved in case of changes to or removal of EQ
  */
-void de_equip_char( Character *ch )
+void de_equip_char( CHAR_DATA *ch )
 {
   char buf[MAX_STRING_LENGTH];
   OBJ_DATA *obj;
@@ -141,7 +140,7 @@ void de_equip_char( Character *ch )
 /*
  * Re-equip character                                   -Thoric
  */
-void re_equip_char( Character *ch )
+void re_equip_char( CHAR_DATA *ch )
 {
   int x,y;
 
@@ -163,7 +162,7 @@ void re_equip_char( Character *ch )
  * Would be cool to save NPC's too for quest purposes,
  *   some of the infrastructure is provided.
  */
-void save_char_obj( Character *ch )
+void save_char_obj( CHAR_DATA *ch )
 {
   char strsave[MAX_INPUT_LENGTH];
   char strback[MAX_INPUT_LENGTH];
@@ -175,13 +174,13 @@ void save_char_obj( Character *ch )
       return;
     }
 
-  if ( IsNpc(ch) || is_not_authed(ch) )
+  if ( is_npc(ch) || is_not_authed(ch) )
     return;
 
   saving_char = ch;
   /* save pc's clan's data while we're at it to keep the data in sync */
-  if ( is_clanned( ch ) )
-    SaveClan( ch->pcdata->clan );
+  if ( !is_npc(ch) && ch->pcdata->clan )
+    save_clan( ch->pcdata->clan );
 
   if ( ch->desc && ch->desc->original )
     ch = ch->desc->original;
@@ -209,7 +208,7 @@ void save_char_obj( Character *ch )
    * Also save the player flags so we the wizlist builder can see
    * who is a guest and who is retired.
    */
-  if ( GetTrustedLevel(ch) > LEVEL_HERO )
+  if ( get_trust(ch) > LEVEL_HERO )
     {
       sprintf( strback, "%s%s", GOD_DIR, capitalize( ch->name ) );
 
@@ -263,7 +262,7 @@ void save_char_obj( Character *ch )
   return;
 }
 
-void save_clone( Character *ch )
+void save_clone( CHAR_DATA *ch )
 {
   char strsave[MAX_INPUT_LENGTH];
   char strback[MAX_INPUT_LENGTH];
@@ -275,7 +274,7 @@ void save_clone( Character *ch )
       return;
     }
 
-  if ( IsNpc(ch) || is_not_authed(ch) )
+  if ( is_npc(ch) || is_not_authed(ch) )
     return;
 
   if ( ch->desc && ch->desc->original )
@@ -321,31 +320,19 @@ void save_clone( Character *ch )
   return;
 }
 
-static void WriteAlias( void *element, void *userData )
-{
-  FILE *filehandle = (FILE*) userData;
-  Alias *alias = (Alias*) element;
-  const char *name = GetAliasName( alias );
-  const char *value = GetAliasValue( alias );
 
-  if ( !*name || !*value )
-    {
-      return;
-    }
-
-  fprintf( filehandle, "Alias        %s~ %s~\n", name, value );
-}
 
 /*
  * Write the char.
  */
-void fwrite_char( Character *ch, FILE *fp )
+void fwrite_char( CHAR_DATA *ch, FILE *fp )
 {
   AFFECT_DATA *paf;
+  ALIAS_DATA *pal;
   int sn, track, drug;
   SKILLTYPE *skill;
 
-  fprintf( fp, "#%s\n", IsNpc(ch) ? "MOB" : "PLAYER"           );
+  fprintf( fp, "#%s\n", is_npc(ch) ? "MOB" : "PLAYER"           );
 
   fprintf( fp, "Version      %d\n",   SAVEVERSION               );
   fprintf( fp, "Name         %s~\n",    ch->name                );
@@ -381,7 +368,7 @@ void fwrite_char( Character *ch, FILE *fp )
     int ability;
     for ( ability = 0 ; ability < MAX_ABILITY ; ability++ )
       fprintf( fp, "Ability        %d %d %ld\n",
-               ability, GetLevel( ch, ability ), GetExperience( ch, ability ) );
+               ability, get_level( ch, ability ), get_exp( ch, ability ) );
   }
   fprintf( fp, "Clones         %d\n",   ch->pcdata->clones              );
   fprintf( fp, "Salary_time         %ld\n",     ch->pcdata->salary_date );
@@ -426,7 +413,7 @@ void fwrite_char( Character *ch, FILE *fp )
   if ( ch->mental_state != -10 )
     fprintf( fp, "Mentalstate  %d\n",   ch->mental_state        );
 
-  if ( IsNpc(ch) )
+  if ( is_npc(ch) )
     {
       fprintf( fp, "Vnum         %d\n", ch->pIndexData->vnum    );
       fprintf( fp, "Mobinvis     %d\n", ch->mobinvis            );
@@ -459,9 +446,15 @@ void fwrite_char( Character *ch, FILE *fp )
         fprintf( fp, "Prompt       %s~\n",      ch->pcdata->prompt      );
       if ( ch->pcdata->pagerlen != 24 )
         fprintf( fp, "Pagerlen     %d\n",       ch->pcdata->pagerlen    );
-
-      List_ForEach( GetAliases( ch ), WriteAlias, fp );
-
+      for ( pal = ch->pcdata->first_alias; pal; pal = pal->next )
+        {
+          if ( !pal->name || !pal->cmd || !*pal->name || !*pal->cmd )
+            continue;
+          fprintf( fp, "Alias        %s~ %s~\n",
+                   pal->name,
+                   pal->cmd
+                   );
+        }
       fprintf( fp, "Addiction   ");
       for ( drug = 0 ; drug <=9 ; drug++ )
         fprintf( fp, " %d",     ch->pcdata->addiction[drug] );
@@ -473,7 +466,7 @@ void fwrite_char( Character *ch, FILE *fp )
       if ( ch->pcdata->wanted_flags )
         fprintf( fp, "Wanted       %d\n",       ch->pcdata->wanted_flags );
 
-      if ( IsImmortal( ch ) || ch->pcdata->area )
+      if ( is_immortal( ch ) || ch->pcdata->area )
         {
           fprintf( fp, "WizInvis     %d\n", ch->pcdata->wizinvis );
           if ( ch->pcdata->r_range_lo && ch->pcdata->r_range_hi )
@@ -603,7 +596,7 @@ void fwrite_char( Character *ch, FILE *fp )
 /*
  * Write an object and its contents.
  */
-void fwrite_obj( const Character *ch, const OBJ_DATA *obj, FILE *fp, int iNest,
+void fwrite_obj( const CHAR_DATA *ch, const OBJ_DATA *obj, FILE *fp, int iNest,
                  short os_type )
 {
   EXTRA_DESCR_DATA *ed;
@@ -782,14 +775,14 @@ void fwrite_obj( const Character *ch, const OBJ_DATA *obj, FILE *fp, int iNest,
 bool load_char_obj( DESCRIPTOR_DATA *d, char *name, bool preload )
 {
   char strsave[MAX_INPUT_LENGTH];
-  Character *ch;
+  CHAR_DATA *ch;
   FILE *fp;
   bool found;
   struct stat fst;
   int i, x;
   char buf[MAX_INPUT_LENGTH];
 
-  CREATE( ch, Character, 1 );
+  CREATE( ch, CHAR_DATA, 1 );
   for ( x = 0; x < MAX_WEAR; x++ )
     for ( i = 0; i < MAX_LAYERS; i++ )
       save_equipment[x][i] = NULL;
@@ -832,7 +825,6 @@ bool load_char_obj( DESCRIPTOR_DATA *d, char *name, bool preload )
   ch->mob_clan                        = STRALLOC( "" );
   ch->was_sentinel                    = NULL;
   ch->plr_home                        = NULL;
-  AllocateAliasList( ch );
 
 #ifdef SWRIP_USE_IMC
   imc_initchar( ch );
@@ -906,7 +898,7 @@ bool load_char_obj( DESCRIPTOR_DATA *d, char *name, bool preload )
               else
                 if ( !str_cmp( word, "MOBILE") )
                   {
-                    Character *mob;
+                    CHAR_DATA *mob;
                     mob = fread_mobile( fp );
                     ch->pcdata->pet = mob;
                     mob->master = ch;
@@ -960,6 +952,8 @@ bool load_char_obj( DESCRIPTOR_DATA *d, char *name, bool preload )
       ch->pcdata->o_range_hi            = 0;
       ch->pcdata->wizinvis              = 0;
       ch->pcdata->wanted_flags        = 0;
+      ch->pcdata->first_alias           = NULL;
+      ch->pcdata->last_alias            = NULL;
       ch->on                            = NULL;
     }
   else
@@ -976,7 +970,7 @@ bool load_char_obj( DESCRIPTOR_DATA *d, char *name, bool preload )
       if ( !ch->pcdata->authed_by )
         ch->pcdata->authed_by    = STRALLOC( "" );
 
-      if ( !IsNpc( ch ) && GetTrustedLevel( ch ) > LEVEL_AVATAR )
+      if ( !is_npc( ch ) && get_trust( ch ) > LEVEL_AVATAR )
         {
           if ( ch->pcdata->wizinvis < 2 )
             ch->pcdata->wizinvis = ch->top_level;
@@ -1006,7 +1000,7 @@ bool load_char_obj( DESCRIPTOR_DATA *d, char *name, bool preload )
 /*
  * Read in a char.
  */
-void fread_char( Character *ch, FILE *fp, bool preload )
+void fread_char( CHAR_DATA *ch, FILE *fp, bool preload )
 {
   char buf[MAX_STRING_LENGTH];
   char *line;
@@ -1066,8 +1060,8 @@ void fread_char( Character *ch, FILE *fp, bool preload )
                       &x0, &x1, &x2 );
               if ( x0 >= 0 && x0 < MAX_ABILITY )
                 {
-                  SetLevel( ch, x0, x1 );
-                  SetExperience( ch, x0, x2 );
+                  set_level( ch, x0, x1 );
+                  set_exp( ch, x0, x2 );
                 }
               fMatch = TRUE;
               break;
@@ -1133,11 +1127,7 @@ void fread_char( Character *ch, FILE *fp, bool preload )
 
           if ( !str_cmp( word, "Alias" ) )
             {
-              Alias *alias;
-	      char nameBuffer[MAX_STRING_LENGTH];
-	      char valueBuffer[MAX_STRING_LENGTH];
-	      char *name;
-	      char *value;
+              ALIAS_DATA *pal;
 
               if ( preload )
                 {
@@ -1145,12 +1135,11 @@ void fread_char( Character *ch, FILE *fp, bool preload )
                   fread_to_eol( fp );
                   break;
                 }
+              CREATE( pal, ALIAS_DATA, 1 );
 
-	      name = fread_string( fp, nameBuffer, sizeof( nameBuffer ) );
-	      value = fread_string( fp, valueBuffer, sizeof( valueBuffer ) );
-              alias = CreateAlias( name, value );
-	      AddAlias( ch, alias );
-
+              pal->name = fread_string_nohash( fp );
+              pal->cmd  = fread_string_nohash( fp );
+              LINK(pal, ch->pcdata->first_alias, ch->pcdata->last_alias, next, prev );
               fMatch = TRUE;
               break;
             }
@@ -1173,35 +1162,35 @@ void fread_char( Character *ch, FILE *fp, bool preload )
               fMatch = TRUE;
               break;
             }
-          KEY( "AuthedBy",      ch->pcdata->authed_by,  fread_string_hash( fp ) );
+          KEY( "AuthedBy",      ch->pcdata->authed_by,  fread_string( fp ) );
           break;
 
         case 'B':
           KEY( "Bamfin",        ch->pcdata->bamfin,     fread_string_nohash( fp ) );
           KEY( "Bamfout",       ch->pcdata->bamfout,    fread_string_nohash( fp ) );
           KEY( "Bestowments", ch->pcdata->bestowments, fread_string_nohash( fp ) );
-          KEY( "Bio",           ch->pcdata->bio,        fread_string_hash( fp ) );
+          KEY( "Bio",           ch->pcdata->bio,        fread_string( fp ) );
           KEY( "Bank",  ch->pcdata->bank,       fread_number( fp ) );
           break;
 
         case 'C':
           if ( !str_cmp( word, "Clan" ) )
             {
-              ch->pcdata->clan_name = fread_string_hash( fp );
+              ch->pcdata->clan_name = fread_string( fp );
 
               if ( !preload
                    &&   ch->pcdata->clan_name[0] != '\0'
-                   && ( ch->pcdata->clan = GetClan( ch->pcdata->clan_name )) == NULL )
+                   && ( ch->pcdata->clan = get_clan( ch->pcdata->clan_name )) == NULL )
                 {
                   sprintf( buf, "Warning: the organization %s no longer exists, and therefore you no longer\r\nbelong to that organization.\r\n",
                            ch->pcdata->clan_name );
                   send_to_char( buf, ch );
                   STRFREE( ch->pcdata->clan_name );
-                  RemoveMember(ch);
+                  remove_member(ch);
                   ch->pcdata->clan_name = STRALLOC( "" );
                 }
               else
-                UpdateMember(ch);
+                update_member(ch);
               fMatch = TRUE;
               break;
             }
@@ -1225,7 +1214,7 @@ void fread_char( Character *ch, FILE *fp, bool preload )
         case 'D':
           KEY( "Damroll",       ch->damroll,            fread_number( fp ) );
           KEY( "Deaf",  ch->deaf,               fread_number( fp ) );
-          KEY( "Description",   ch->description,        fread_string_hash( fp ) );
+          KEY( "Description",   ch->description,        fread_string( fp ) );
           if ( !str_cmp( word, "Druglevel"  ) )
             {
               line = fread_line( fp );
@@ -1271,11 +1260,11 @@ void fread_char( Character *ch, FILE *fp, bool preload )
           /* temporary measure */
           if ( !str_cmp( word, "Guild" ) )
             {
-              ch->pcdata->clan_name = fread_string_hash( fp );
+              ch->pcdata->clan_name = fread_string( fp );
 
               if ( !preload
                    &&   ch->pcdata->clan_name[0] != '\0'
-                   && ( ch->pcdata->clan = GetClan( ch->pcdata->clan_name )) == NULL )
+                   && ( ch->pcdata->clan = get_clan( ch->pcdata->clan_name )) == NULL )
                 {
                   sprintf( buf, "Warning: the organization %s no longer exists, and therefore you no longer\r\nbelong to that organization.\r\n",
                            ch->pcdata->clan_name );
@@ -1292,7 +1281,7 @@ void fread_char( Character *ch, FILE *fp, bool preload )
           if ( !str_cmp(word, "Helled") )
             {
               ch->pcdata->release_date = fread_number(fp);
-              ch->pcdata->helled_by = fread_string_hash(fp);
+              ch->pcdata->helled_by = fread_string(fp);
               if ( ch->pcdata->release_date < current_time )
                 {
                   STRFREE(ch->pcdata->helled_by);
@@ -1368,7 +1357,7 @@ void fread_char( Character *ch, FILE *fp, bool preload )
               fMatch = TRUE;
               break;
             }
-          KEY( "LongDescr",     ch->long_descr,         fread_string_hash( fp ) );
+          KEY( "LongDescr",     ch->long_descr,         fread_string( fp ) );
           if ( !str_cmp( word, "Languages" ) )
             {
               ch->speaks = fread_number( fp );
@@ -1424,7 +1413,7 @@ void fread_char( Character *ch, FILE *fp, bool preload )
           KEY( "PKills",        ch->pcdata->pkills,     fread_number( fp ) );
           KEY( "Played",        ch->pcdata->played,     fread_number( fp ) );
           KEY( "Position",      ch->position,           fread_number( fp ) );
-          KEY( "Prompt",        ch->pcdata->prompt,     fread_string_hash( fp ) );
+          KEY( "Prompt",        ch->pcdata->prompt,     fread_string( fp ) );
           if (!str_cmp ( word, "PTimer" ) )
             {
               add_timer( ch , TIMER_PKILLED, fread_number(fp), NULL, 0 );
@@ -1470,7 +1459,7 @@ void fread_char( Character *ch, FILE *fp, bool preload )
           KEY( "Salary",      ch->pcdata->salary,               fread_number( fp ) );
           KEY( "Salary_time",ch->pcdata->salary_date, fread_number( fp ) );
           KEY( "Sex",           ch->sex,                fread_number( fp ) );
-          KEY( "ShortDescr",    ch->short_descr,        fread_string_hash( fp ) );
+          KEY( "ShortDescr",    ch->short_descr,        fread_string( fp ) );
           KEY( "Susceptible",   ch->susceptible,        fread_number( fp ) );
           if ( !str_cmp( word, "SavingThrow" ) )
             {
@@ -1599,16 +1588,16 @@ void fread_char( Character *ch, FILE *fp, bool preload )
                 int ability;
                 for ( ability = 0 ; ability < MAX_ABILITY ; ability++ )
                   {
-                    if ( GetLevel( ch, ability ) == 0 )
-                      SetLevel( ch, ability, 1 );
+                    if ( get_level( ch, ability ) == 0 )
+                      set_level( ch, ability, 1 );
                   }
               }
 
-              if ( !IsImmortal( ch ) && !ch->speaking )
+              if ( !is_immortal( ch ) && !ch->speaking )
                 /*      ch->speaking = LANG_COMMON;      */
                 ch->speaking = race_table[ch->race].language;
 
-              if ( IsImmortal( ch ) )
+              if ( is_immortal( ch ) )
                 {
                   ch->speaks = ~0;
                   if ( ch->speaking == 0 )
@@ -1624,7 +1613,7 @@ void fread_char( Character *ch, FILE *fp, bool preload )
                   ch->hit = URANGE( 1 , ch->hit + hitgain , ch->max_hit );
                   ch->move = URANGE( 1 , ch->move + hitgain , ch->max_move );
 
-                  if ( IsForcer( ch ) )
+                  if ( get_level( ch, FORCE_ABILITY ) > 1 )
                     ch->mana = URANGE( 0 , ch->mana + hitgain , ch->max_mana );
 
                   better_mental_state( ch , hitgain );
@@ -1638,7 +1627,7 @@ void fread_char( Character *ch, FILE *fp, bool preload )
                     continue;
 
                   if ( ch->pcdata->learned[sn] > 0
-		       && GetLevel( ch, skill_table[sn]->guild ) < skill_table[sn]->min_level )
+		       && get_level( ch, skill_table[sn]->guild ) < skill_table[sn]->min_level )
                     ch->pcdata->learned[sn] = 0;
                 }
               return;
@@ -1648,7 +1637,7 @@ void fread_char( Character *ch, FILE *fp, bool preload )
 
         case 'T':
 
-          KEY( "Targ",  ch->pcdata->target,     fread_string_hash( fp ) );
+          KEY( "Targ",  ch->pcdata->target,     fread_string( fp ) );
           KEY( "Toplevel",      ch->top_level,          fread_number( fp ) );
           if ( !str_cmp( word, "Tongue" ) )
             {
@@ -1678,7 +1667,7 @@ void fread_char( Character *ch, FILE *fp, bool preload )
 
           if ( !str_cmp( word, "Title" ) )
             {
-              ch->pcdata->title = fread_string_hash( fp );
+              ch->pcdata->title = fread_string( fp );
               if ( isalpha(ch->pcdata->title[0])
                    ||   isdigit(ch->pcdata->title[0]) )
                 {
@@ -1741,7 +1730,7 @@ void fread_char( Character *ch, FILE *fp, bool preload )
 }
 
 
-void fread_obj( Character *ch, FILE *fp, short os_type )
+void fread_obj( CHAR_DATA *ch, FILE *fp, short os_type )
 {
   OBJ_DATA *obj;
   const char *word;
@@ -1807,7 +1796,7 @@ void fread_obj( Character *ch, FILE *fp, short os_type )
               fMatch                            = TRUE;
               break;
             }
-          KEY( "Actiondesc",    obj->action_desc,       fread_string_hash( fp ) );
+          KEY( "Actiondesc",    obj->action_desc,       fread_string( fp ) );
           break;
 
         case 'C':
@@ -1816,7 +1805,7 @@ void fread_obj( Character *ch, FILE *fp, short os_type )
           break;
 
         case 'D':
-          KEY( "Description",   obj->description,       fread_string_hash( fp ) );
+          KEY( "Description",   obj->description,       fread_string( fp ) );
           break;
 
         case 'E':
@@ -1827,8 +1816,8 @@ void fread_obj( Character *ch, FILE *fp, short os_type )
               EXTRA_DESCR_DATA *ed;
 
               CREATE( ed, EXTRA_DESCR_DATA, 1 );
-              ed->keyword               = fread_string_hash( fp );
-              ed->description           = fread_string_hash( fp );
+              ed->keyword               = fread_string( fp );
+              ed->description           = fread_string( fp );
               LINK(ed, obj->first_extradesc, obj->last_extradesc, next, prev );
               fMatch                            = TRUE;
             }
@@ -1935,7 +1924,7 @@ void fread_obj( Character *ch, FILE *fp, short os_type )
           break;
 
         case 'N':
-          KEY( "Name",  obj->name,              fread_string_hash( fp ) );
+          KEY( "Name",  obj->name,              fread_string( fp ) );
 
           if ( !str_cmp( word, "Nest" ) )
             {
@@ -1954,7 +1943,7 @@ void fread_obj( Character *ch, FILE *fp, short os_type )
           KEY( "Room", room, get_room_index(fread_number(fp)) );
 
         case 'S':
-          KEY( "ShortDescr",    obj->short_descr,       fread_string_hash( fp ) );
+          KEY( "ShortDescr",    obj->short_descr,       fread_string( fp ) );
 
           if ( !str_cmp( word, "Spell" ) )
             {
@@ -2070,14 +2059,14 @@ void set_alarm( long seconds )
   alarm( seconds );
 }
 
-void write_corpses( Character *ch, char *name )
+void write_corpses( CHAR_DATA *ch, char *name )
 {
   OBJ_DATA *corpse;
   FILE *fp = NULL;
 
   /* Name and ch support so that we dont have to have a char to save their
      corpses.. (ie: decayed corpses while offline) */
-  if ( ch && IsNpc(ch) )
+  if ( ch && is_npc(ch) )
     {
       bug( "Write_corpses: writing NPC corpse.", 0 );
       return;
@@ -2291,7 +2280,8 @@ void load_storerooms( void )
 void save_storeroom( ROOM_INDEX_DATA *room )
 {
   char strsave[MAX_INPUT_LENGTH];
-  FILE *fp = NULL;
+  FILE *fp;
+  OBJ_DATA *contents;
 
   if ( !room )
     {
@@ -2310,24 +2300,24 @@ void save_storeroom( ROOM_INDEX_DATA *room )
     }
   else
     {
-      /*fchmod(fileno(fp), S_IRUSR|S_IWUSR | S_IRGRP|S_IWGRP | S_IROTH|S_IWOTH);*/
-      OBJ_DATA *contents = room->last_content;
+      fchmod(fileno(fp), S_IRUSR|S_IWUSR | S_IRGRP|S_IWGRP | S_IROTH|S_IWOTH);
 
+      contents = room->last_content;
       if (contents)
-	{
-	  fwrite_obj(NULL, contents, fp, 0, OS_CARRY );
-	}
-
+        fwrite_obj(NULL, contents, fp, 0, OS_CARRY );
       fprintf( fp, "#END\n" );
       fclose( fp );
+
     }
+
+  return;
 }
 
 
 void load_vendors( void )
 {
   DIR *dp;
-  Character *mob;
+  CHAR_DATA *mob;
   struct dirent *de;
 
   if ( !(dp = opendir(VENDOR_DIR)) )
@@ -2385,9 +2375,9 @@ void load_vendors( void )
 /*
  * This will write one mobile structure pointed to be fp --Shaddai
  */
-void fwrite_mobile( FILE *fp, Character *mob )
+void fwrite_mobile( FILE *fp, CHAR_DATA *mob )
 {
-  if ( !IsNpc( mob ) || !fp )
+  if ( !is_npc( mob ) || !fp )
     return;
   fprintf( fp, "#MOBILE\n" );
   fprintf( fp, "Vnum    %d\n", mob->pIndexData->vnum );
@@ -2420,9 +2410,9 @@ void fwrite_mobile( FILE *fp, Character *mob )
 /*
  * This will read one mobile structure pointer to by fp --Shaddai
  */
-Character *  fread_mobile( FILE *fp )
+CHAR_DATA *  fread_mobile( FILE *fp )
 {
-  Character *mob = NULL;
+  CHAR_DATA *mob = NULL;
   const char *word;
   bool fMatch;
   int inroom = 0;
@@ -2475,7 +2465,7 @@ Character *  fread_mobile( FILE *fp )
       if ( !str_cmp( word, "#OBJECT" ) )
         fread_obj ( mob, fp, OS_CARRY );
     case 'D':
-      KEY( "Description", mob->description, fread_string_hash(fp));
+      KEY( "Description", mob->description, fread_string(fp));
       break;
     case 'E':
       if ( !str_cmp( word, "EndMobile" ) )
@@ -2492,10 +2482,10 @@ Character *  fread_mobile( FILE *fp )
     case 'F':
       KEY( "Flags", mob->act, fread_number( fp ));
     case 'L':
-      KEY( "Long", mob->long_descr, fread_string_hash(fp ) );
+      KEY( "Long", mob->long_descr, fread_string(fp ) );
       break;
     case 'N':
-      KEY( "Name", mob->name, fread_string_hash( fp ) );
+      KEY( "Name", mob->name, fread_string( fp ) );
       break;
     case 'P':
       KEY( "Position", mob->position, fread_number( fp ) );
@@ -2504,7 +2494,7 @@ Character *  fread_mobile( FILE *fp )
       KEY( "Room",  inroom, fread_number(fp));
       break;
     case 'S':
-      KEY( "Short", mob->short_descr, fread_string_hash(fp));
+      KEY( "Short", mob->short_descr, fread_string(fp));
       break;
     }
     if ( !fMatch )
@@ -2520,13 +2510,13 @@ Character *  fread_mobile( FILE *fp )
 /*
  * This will write in the saved mobile for a char --Shaddai
  */
-void write_char_mobile( Character *ch , char *argument )
+void write_char_mobile( CHAR_DATA *ch , char *argument )
 {
   FILE *fp;
-  Character *mob;
+  CHAR_DATA *mob;
   char buf[MAX_STRING_LENGTH];
 
-  if ( IsNpc( ch ) || !ch->pcdata->pet )
+  if ( is_npc( ch ) || !ch->pcdata->pet )
     return;
 
   if ( (fp = fopen( argument, "w")) == NULL )

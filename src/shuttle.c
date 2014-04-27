@@ -178,7 +178,9 @@ void update_shuttle( void )
         /* bug("Shuttle '%s' no current", shuttle->name); */
         continue;
       }
-
+#ifdef DEBUG
+      bug("Shuttle '%s' delay: %d", shuttle->name, shuttle->current_delay);
+#endif
       if (--shuttle->current_delay <= 0)
         {
           int room = 0;
@@ -198,7 +200,9 @@ void update_shuttle( void )
                   shuttle->current = shuttle->current->next;
                   shuttle->current_number++;
                 }
-
+#ifdef DEBUG
+              bug("Shuttle '%s' Taking Off.", shuttle->name);
+#endif
               /*
                * An electronic voice says, 'Preparing for launch.'
                * It continues, 'Next stop, Gamorr'
@@ -316,7 +320,7 @@ void update_shuttle( void )
   return;
 }
 
-void show_shuttles_to_char( const SHUTTLE_DATA *shuttle, Character *ch )
+void show_shuttles_to_char( const SHUTTLE_DATA *shuttle, CHAR_DATA *ch )
 {
   while (shuttle)
     {
@@ -539,7 +543,7 @@ void fread_shuttle( SHUTTLE_DATA *shuttle, FILE *fp )
           break;
 
         case 'N':
-          KEY( "Name",  shuttle->name, fread_string_hash(fp));
+          KEY( "Name",  shuttle->name, fread_string(fp));
           break;
 
         case 'S':

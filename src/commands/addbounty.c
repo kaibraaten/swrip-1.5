@@ -1,12 +1,11 @@
 #include "character.h"
 #include "mud.h"
-#include "clan.h"
 
-void do_addbounty( Character *ch, char *argument )
+void do_addbounty( CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_STRING_LENGTH];
   long amount = 0;
-  Character *victim = NULL;
+  CHAR_DATA *victim = NULL;
 
   if ( !argument || argument[0] == '\0' )
     {
@@ -53,7 +52,7 @@ void do_addbounty( Character *ch, char *argument )
       return;
     }
 
-  if ( IsNpc(victim) )
+  if ( is_npc(victim) )
     {
       send_to_char( "You can only set bounties on other players .. not mobs!\r\n", ch );
       return;

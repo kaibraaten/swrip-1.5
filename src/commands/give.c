@@ -2,12 +2,12 @@
 #include "mud.h"
 #include "character.h"
 
-void do_give( Character *ch, char *argument )
+void do_give( CHAR_DATA *ch, char *argument )
 {
   char arg1 [MAX_INPUT_LENGTH];
   char arg2 [MAX_INPUT_LENGTH];
   char buf  [MAX_INPUT_LENGTH];
-  Character *victim;
+  CHAR_DATA *victim;
   OBJ_DATA  *obj;
 
   argument = one_argument( argument, arg1 );
@@ -118,7 +118,7 @@ void do_give( Character *ch, char *argument )
       return;
     }
 
-  if ( IsNpc(victim) && victim->pIndexData && victim->pIndexData->pShop )
+  if ( is_npc(victim) && victim->pIndexData && victim->pIndexData->pShop )
     {
 
       if ( victim->owner && str_cmp( ch->name, victim->owner ) )

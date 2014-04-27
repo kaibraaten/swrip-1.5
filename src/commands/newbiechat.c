@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_newbiechat( Character *ch, char *argument )
+void do_newbiechat( CHAR_DATA *ch, char *argument )
 {
   if ( ch->top_level > 5 )
     {

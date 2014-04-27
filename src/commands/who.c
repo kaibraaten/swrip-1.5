@@ -1,7 +1,6 @@
 #include <string.h>
 #include "mud.h"
 #include "character.h"
-#include "clan.h"
 
 /*
  * New do_who with WHO REQUEST, clan, race and homepage support.  -Thoric
@@ -22,7 +21,7 @@
  * Races will no longer show up for mortals - DV Oct/00
 
  */
-void do_who( Character *ch, char *argument )
+void do_who( CHAR_DATA *ch, char *argument )
 {
   char buf[MAX_STRING_LENGTH];
   char clan_name[MAX_INPUT_LENGTH];
@@ -42,7 +41,7 @@ void do_who( Character *ch, char *argument )
   bool fShowHomepage;
   bool fClanMatch;
   bool NullCh = FALSE;
-  Clan *pClan;
+  CLAN_DATA *pClan;
   FILE *whoout;
   PC_DATA *pcdata;
   WHO_DATA *cur_who = NULL;
@@ -69,7 +68,7 @@ void do_who( Character *ch, char *argument )
   if ( !ch )
     {
       NullCh = TRUE;
-      CREATE( ch, Character, 1 );
+      CREATE( ch, CHAR_DATA, 1 );
       ch->top_level = 1;
       ch->trust = 0;
       CREATE( pcdata, PC_DATA, 1 );
@@ -157,13 +156,12 @@ void do_who( Character *ch, char *argument )
                 fShowHomepage = TRUE;
               else               /* SB who clan (order), guild */
                 {
-                  if (!str_cmp( arg, "clan" ) && ch->pcdata && is_clanned( ch ) )
+                  if (!str_cmp( arg, "clan" ) && ch->pcdata && ch->pcdata->clan)
                     strcpy(arg, ch->pcdata->clan->name);
-
-                  if ( (pClan = GetClan(arg)) && (fClanMatch != TRUE))
+                  if ( (pClan = get_clan (arg)) && (fClanMatch != TRUE))
                     {
                       if ((ch->top_level >= LEVEL_IMMORTAL)
-			  || (is_clanned( ch )
+			  || (ch->pcdata && ch->pcdata->clan
 			      && !str_cmp(ch->pcdata->clan->name,pClan->name)))
                         {
                           fClanMatch = TRUE;
@@ -214,12 +212,12 @@ void do_who( Character *ch, char *argument )
   /* start from last to first to get it in the proper order */
   for ( d = last_descriptor; d; d = d->prev )
     {
-      Character *wch;
+      CHAR_DATA *wch;
       char const *race;
       char force_char = ' ';
 
       if ( (d->connection_state != CON_PLAYING && d->connection_state != CON_EDITING)
-           || ( !can_see( ch, d->character ) && IsImmortal( d->character ) )
+           || ( !can_see( ch, d->character ) && is_immortal( d->character ) )
            || d->original)
         continue;
       wch   = d->original ? d->original : d->character;
@@ -251,9 +249,9 @@ void do_who( Character *ch, char *argument )
 
       race = race_text;
 
-      if (wch->stats.perm_frc > 0 && (ch->top_level >= LEVEL_GOD) && !IsImmortal(wch))
+      if (wch->stats.perm_frc > 0 && (ch->top_level >= LEVEL_GOD) && !is_immortal(wch))
         {
-          if( IsForcer( wch ) )
+          if(get_level( wch, FORCE_ABILITY ) > 1)
             force_char = '*';
           else
             force_char = '+';
@@ -280,11 +278,11 @@ void do_who( Character *ch, char *argument )
       else if ( wch->pcdata->rank && wch->pcdata->rank[0] != '\0' )
         race = wch->pcdata->rank;
 
-      if ( is_clanned( wch ) && ( (!IsNpc(ch) && is_clanned( ch )
+      if ( wch->pcdata->clan && ( (!is_npc(ch) &&  ch->pcdata->clan
                                    && ch->pcdata->clan == wch->pcdata->clan )
                                   || is_god( ch ) ) )
         {
-          Clan *pclan = wch->pcdata->clan;
+          CLAN_DATA *pclan = wch->pcdata->clan;
 
           strcpy( clan_name, " (" );
 
@@ -327,9 +325,9 @@ void do_who( Character *ch, char *argument )
       /* First make the structure. */
       CREATE( cur_who, WHO_DATA, 1 );
       cur_who->text = str_dup( buf );
-      if ( IsImmortal( wch ) )
+      if ( is_immortal( wch ) )
         cur_who->type = WT_IMM;
-      else if ( GetTrustedLevel( wch ) <= 5 )
+      else if ( get_trust( wch ) <= 5 )
         cur_who->type = WT_NEWBIE;
       else
         cur_who->type = WT_MORTAL;

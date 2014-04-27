@@ -1,15 +1,15 @@
 #include "character.h"
 #include "mud.h"
 
-ch_ret spell_blindness( int sn, int level, Character *ch, void *vo )
+ch_ret spell_blindness( int sn, int level, CHAR_DATA *ch, void *vo )
 {
-  Character *victim = (Character *) vo;
+  CHAR_DATA *victim = (CHAR_DATA *) vo;
   AFFECT_DATA af;
   int tmp;
   SKILLTYPE *skill = get_skilltype(sn);
 
   if ( SPELL_FLAG(skill, SF_PKSENSITIVE)
-       &&  !IsNpc(ch) && !IsNpc(victim) )
+       &&  !is_npc(ch) && !is_npc(victim) )
     tmp = level;
   else
     tmp = level;

@@ -2,16 +2,16 @@
 #include "mud.h"
 #include "character.h"
 
-static void set_target( Character *ch, const char *target );
+static void set_target( CHAR_DATA *ch, const char *target );
 
-void do_focusalias( Character *ch, char *argument)
+void do_focusalias( CHAR_DATA *ch, char *argument)
 {
   char arg[MAX_INPUT_LENGTH], buf[MAX_STRING_LENGTH];
 
   smash_tilde(argument);
   one_argument( argument, arg );
 
-  if ( IsNpc(ch) )
+  if ( is_npc(ch) )
     {
       send_to_char("Alias focuses are for players!\r\n", ch);
       return;
@@ -40,7 +40,7 @@ void do_focusalias( Character *ch, char *argument)
     }
 }
 
-static void set_target( Character *ch, const char *target )
+static void set_target( CHAR_DATA *ch, const char *target )
 {
   char buf[MAX_STRING_LENGTH];
 

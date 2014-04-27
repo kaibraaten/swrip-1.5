@@ -4,9 +4,9 @@
 extern ROOM_INDEX_DATA *room_index_hash[MAX_KEY_HASH];
 
 static int rgrub_int_comp(const void *i, const void *j);
-static void rgrub_help (Character *ch);
+static void rgrub_help (CHAR_DATA *ch);
 
-void do_rgrub (Character *ch, char *argument)
+void do_rgrub (CHAR_DATA *ch, char *argument)
 {
   char arg1[MAX_STRING_LENGTH];
   char arg2[MAX_STRING_LENGTH];
@@ -73,7 +73,7 @@ static int rgrub_int_comp(const void *i, const void *j)
 /*
  * Displays the help screen for the "rgrub" command
  */
-static void rgrub_help (Character *ch)
+static void rgrub_help (CHAR_DATA *ch)
 {
   send_to_char( "Syntax:\r\n", ch);
   send_to_char( "rgrub st n lo hi - sector type search.\r\n"

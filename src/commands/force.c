@@ -1,7 +1,7 @@
 #include "mud.h"
 #include "character.h"
 
-void do_force( Character *ch, char *argument )
+void do_force( CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   bool mobsonly;
@@ -13,12 +13,12 @@ void do_force( Character *ch, char *argument )
       return;
     }
 
-  mobsonly = GetTrustedLevel( ch ) < sysdata.level_forcepc;
+  mobsonly = get_trust( ch ) < sysdata.level_forcepc;
 
   if ( !str_cmp( arg, "all" ) )
     {
-      Character *vch;
-      Character *vch_next;
+      CHAR_DATA *vch;
+      CHAR_DATA *vch_next;
 
       if ( mobsonly )
         {
@@ -30,7 +30,7 @@ void do_force( Character *ch, char *argument )
         {
           vch_next = vch->next;
 
-          if ( !IsNpc(vch) && GetTrustedLevel( vch ) < GetTrustedLevel( ch ) )
+          if ( !is_npc(vch) && get_trust( vch ) < get_trust( ch ) )
             {
               act( AT_IMMORT, "$n forces you to '$t'.", ch, argument, vch, TO_VICT );
               interpret( vch, argument );
@@ -39,7 +39,7 @@ void do_force( Character *ch, char *argument )
     }
   else
     {
-      Character *victim;
+      CHAR_DATA *victim;
 
       if ( ( victim = get_char_world( ch, arg ) ) == NULL )
         {
@@ -53,8 +53,8 @@ void do_force( Character *ch, char *argument )
           return;
         }
 
-      if ( ( GetTrustedLevel( victim ) >= GetTrustedLevel( ch ) )
-           || ( mobsonly && !IsNpc( victim ) ) )
+      if ( ( get_trust( victim ) >= get_trust( ch ) )
+           || ( mobsonly && !is_npc( victim ) ) )
         {
           send_to_char( "Do it yourself!\r\n", ch );
           return;

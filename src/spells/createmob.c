@@ -4,12 +4,12 @@
 /*
  * Generic mob creating spell                                   -Thoric
  */
-ch_ret spell_create_mob( int sn, int level, Character *ch, void *vo )
+ch_ret spell_create_mob( int sn, int level, CHAR_DATA *ch, void *vo )
 {
   SKILLTYPE *skill = get_skilltype(sn);
   int lvl;
   int vnum = skill->value;
-  Character *mob;
+  CHAR_DATA *mob;
   MOB_INDEX_DATA *mi;
   AFFECT_DATA af;
 

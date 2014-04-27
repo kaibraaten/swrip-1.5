@@ -3,7 +3,7 @@
 #include "ships.h"
 #include "character.h"
 
-void do_leaveship( Character *ch, char *argument )
+void do_leaveship( CHAR_DATA *ch, char *argument )
 {
   ROOM_INDEX_DATA *fromroom = NULL;
   ROOM_INDEX_DATA *toroom = NULL;

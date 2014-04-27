@@ -56,11 +56,11 @@
 #include "mud.h"
 #include "character.h"
 
-void note_attach(Character *ch);
+void note_attach(CHAR_DATA *ch);
 
-void comment_remove( Character *ch, Character *victim, NOTE_DATA *pnote )
+void comment_remove( CHAR_DATA *ch, CHAR_DATA *victim, NOTE_DATA *pnote )
 {
-  if ( IsNpc( victim ) )
+  if ( is_npc( victim ) )
     {
       bug( "comment remove: NPC", 0 );
       return;
@@ -100,17 +100,17 @@ void comment_remove( Character *ch, Character *victim, NOTE_DATA *pnote )
   return;
 }
 
-void do_comment( Character *ch, char *argument )
+void do_comment( CHAR_DATA *ch, char *argument )
 {
   char buf[MAX_STRING_LENGTH];
   char arg[MAX_INPUT_LENGTH];
   char arg1[MAX_INPUT_LENGTH];
   NOTE_DATA  *pnote;
-  Character  *victim;
+  CHAR_DATA  *victim;
   int vnum;
   int anum;
 
-  if ( IsNpc(ch) )
+  if ( is_npc(ch) )
     {
       send_to_char("Mobs can't use the comment command.\r\n", ch);
       return;
@@ -165,7 +165,7 @@ void do_comment( Character *ch, char *argument )
           return;
         }
 
-      if ( IsNpc(victim) )
+      if ( is_npc(victim) )
         {
           send_to_char("No comments about mobs\r\n", ch);
           return;
@@ -184,13 +184,13 @@ void do_comment( Character *ch, char *argument )
           return;
         }
 
-      if ( IsNpc(victim) )
+      if ( is_npc(victim) )
         {
           send_to_char("No comments about mobs\r\n", ch);
           return;
         }
 
-      if ( GetTrustedLevel(victim) >= GetTrustedLevel( ch ) )
+      if ( get_trust(victim) >= get_trust( ch ) )
         {
           send_to_char( "You're not of the right caliber to do this...\r\n", ch );
           return;
@@ -231,13 +231,13 @@ void do_comment( Character *ch, char *argument )
           return;
         }
 
-      if ( IsNpc(victim) )
+      if ( is_npc(victim) )
         {
           send_to_char("No comments about mobs\r\n", ch);
           return;
         }
 
-      if ( GetTrustedLevel(victim) >= GetTrustedLevel( ch ) )
+      if ( get_trust(victim) >= get_trust( ch ) )
         {
           send_to_char( "You're not of the right caliber to do this...\r\n", ch );
           return;
@@ -372,13 +372,13 @@ void do_comment( Character *ch, char *argument )
           return;
         }
 
-      if ( IsNpc(victim) )
+      if ( is_npc(victim) )
         {
           send_to_char("No comments about mobs\r\n", ch);
           return;
         }
 
-      if (  GetTrustedLevel(victim) > GetTrustedLevel( ch ) )
+      if (  get_trust(victim) > get_trust( ch ) )
         {
           send_to_char( "You're not of the right caliber to do this...\r\n", ch );
           return;
@@ -438,14 +438,14 @@ void do_comment( Character *ch, char *argument )
           return;
         }
 
-      if ( IsNpc(victim) )
+      if ( is_npc(victim) )
         {
           send_to_char("No comments about mobs\r\n", ch);
           return;
         }
 
-      if (  (GetTrustedLevel(victim) >= GetTrustedLevel( ch ) )
-            || ( GetTrustedLevel( ch ) < 58                ) )   /* switch to some LEVEL_ thingie */
+      if (  (get_trust(victim) >= get_trust( ch ) )
+            || ( get_trust( ch ) < 58                ) )   /* switch to some LEVEL_ thingie */
         {
           send_to_char( "You're not of the right caliber to do this...\r\n", ch );
           return;
@@ -463,7 +463,7 @@ void do_comment( Character *ch, char *argument )
       for ( pnote = victim->pcdata->comments; pnote; pnote = pnote->next )
         {
           vnum++;
-          if ( ( 58 <= GetTrustedLevel( ch ) )    /* switch to some LEVEL_ thingie */
+          if ( ( 58 <= get_trust( ch ) )    /* switch to some LEVEL_ thingie */
                &&   ( vnum == anum ) )
             {
               comment_remove( ch, victim, pnote );
@@ -482,7 +482,7 @@ void do_comment( Character *ch, char *argument )
 }
 
 
-void fwrite_comments( Character *ch, FILE *fp )
+void fwrite_comments( CHAR_DATA *ch, FILE *fp )
 {
   NOTE_DATA *pnote;
 
@@ -501,11 +501,11 @@ void fwrite_comments( Character *ch, FILE *fp )
   return;
 }
 
-void fread_comment( Character *ch, FILE *fp )
+void fread_comment( CHAR_DATA *ch, FILE *fp )
 {
   NOTE_DATA *pnote;
 
-  if( IsNpc( ch ) )
+  if( is_npc( ch ) )
     return;
 
   for ( ; ; )
@@ -528,23 +528,23 @@ void fread_comment( Character *ch, FILE *fp )
 
       if ( str_cmp( fread_word( fp ), "sender" ) )
         break;
-      pnote->sender     = fread_string_hash( fp );
+      pnote->sender     = fread_string( fp );
 
       if ( str_cmp( fread_word( fp ), "date" ) )
         break;
-      pnote->date       = fread_string_hash( fp );
+      pnote->date       = fread_string( fp );
 
       if ( str_cmp( fread_word( fp ), "to" ) )
         break;
-      pnote->to_list    = fread_string_hash( fp );
+      pnote->to_list    = fread_string( fp );
 
       if ( str_cmp( fread_word( fp ), "subject" ) )
         break;
-      pnote->subject    = fread_string_hash( fp );
+      pnote->subject    = fread_string( fp );
 
       if ( str_cmp( fread_word( fp ), "text" ) )
         break;
-      pnote->text       = fread_string_hash( fp );
+      pnote->text       = fread_string( fp );
 
       pnote->next               = ch->pcdata->comments;
       pnote->prev               = NULL;

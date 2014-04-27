@@ -2,7 +2,7 @@
 #include "ships.h"
 #include "mud.h"
 
-void do_closehatch(Character *ch, char *argument )
+void do_closehatch(CHAR_DATA *ch, char *argument )
 {
   SHIP_DATA *ship;
   char buf[MAX_STRING_LENGTH];

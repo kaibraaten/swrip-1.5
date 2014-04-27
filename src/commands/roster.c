@@ -1,10 +1,9 @@
 #include "character.h"
 #include "mud.h"
-#include "clan.h"
 
-void do_roster( Character *ch, char *argument )
+void do_roster( CHAR_DATA *ch, char *argument )
 {
-  if( IsNpc( ch ) || !is_clanned( ch )
+  if( is_npc( ch ) || !ch->pcdata->clan
       || ( str_cmp(ch->name, ch->pcdata->clan->leadership.leader )
            && str_cmp(ch->name, ch->pcdata->clan->leadership.number1 )
            && str_cmp(ch->name, ch->pcdata->clan->leadership.number2 )
@@ -15,5 +14,5 @@ void do_roster( Character *ch, char *argument )
       return;
     }
 
-  ShowMembers( ch, ch->pcdata->clan->name, argument );
+  show_members( ch, ch->pcdata->clan->name, argument );
 }

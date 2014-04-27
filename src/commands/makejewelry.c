@@ -2,7 +2,7 @@
 #include "mud.h"
 #include "character.h"
 
-void do_makejewelry( Character *ch, char *argument )
+void do_makejewelry( CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
@@ -93,7 +93,7 @@ void do_makejewelry( Character *ch, char *argument )
           return;
         }
 
-      the_chance = IsNpc(ch) ? ch->top_level
+      the_chance = is_npc(ch) ? ch->top_level
         : (int) (ch->pcdata->learned[gsn_makejewelry]);
       if ( number_percent( ) < the_chance )
         {
@@ -130,7 +130,7 @@ void do_makejewelry( Character *ch, char *argument )
 
   ch->substate = SUB_NONE;
 
-  level = IsNpc(ch) ? ch->top_level : (int) (ch->pcdata->learned[gsn_makejewelry]);
+  level = is_npc(ch) ? ch->top_level : (int) (ch->pcdata->learned[gsn_makejewelry]);
 
   checkmetal = FALSE;
   checkoven = FALSE;
@@ -160,7 +160,7 @@ void do_makejewelry( Character *ch, char *argument )
         }
     }
 
-  the_chance = IsNpc(ch) ? ch->top_level
+  the_chance = is_npc(ch) ? ch->top_level
     : (int) (ch->pcdata->learned[gsn_makejewelry]) ;
 
   if ( number_percent( ) > the_chance*2  || ( !checkoven ) || ( !checktool ) || ( !checkmetal ) )
@@ -204,7 +204,7 @@ void do_makejewelry( Character *ch, char *argument )
   {
     long xpgain;
 
-    xpgain = UMIN( obj->cost*100 ,( exp_level(GetLevel( ch, ENGINEERING_ABILITY ) + 1 ) - exp_level(GetLevel(ch, ENGINEERING_ABILITY ) ) ) );
+    xpgain = UMIN( obj->cost*100 ,( exp_level(get_level( ch, ENGINEERING_ABILITY ) + 1 ) - exp_level(get_level(ch, ENGINEERING_ABILITY ) ) ) );
     gain_exp(ch, ENGINEERING_ABILITY, xpgain );
     ch_printf( ch , "You gain %d engineering experience.", xpgain );
   }

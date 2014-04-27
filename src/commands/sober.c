@@ -6,9 +6,9 @@
  * Saw no need for level restrictions on this.
  * Written by Narn, Apr/96
  */
-void do_sober( Character *ch, char *argument )
+void do_sober( CHAR_DATA *ch, char *argument )
 {
-  Character *victim;
+  CHAR_DATA *victim;
   char arg1 [MAX_INPUT_LENGTH];
 
   smash_tilde( argument );
@@ -20,7 +20,7 @@ void do_sober( Character *ch, char *argument )
       return;
     }
 
-  if ( IsNpc( victim ) )
+  if ( is_npc( victim ) )
     {
       send_to_char( "Not on mobs.\r\n", ch );
       return;

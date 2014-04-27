@@ -1,9 +1,9 @@
 #include "character.h"
 #include "mud.h"
 
-void do_bamfout( Character *ch, char *argument )
+void do_bamfout( CHAR_DATA *ch, char *argument )
 {
-  if ( !IsNpc(ch) )
+  if ( !is_npc(ch) )
     {
       smash_tilde( argument );
       DISPOSE( ch->pcdata->bamfout );

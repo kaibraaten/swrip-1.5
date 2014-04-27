@@ -2,7 +2,7 @@
 #include "mud.h"
 #include "editor.h"
 
-void do_opedit( Character *ch, char *argument )
+void do_opedit( CHAR_DATA *ch, char *argument )
 {
   char arg1 [MAX_INPUT_LENGTH];
   char arg2 [MAX_INPUT_LENGTH];
@@ -12,7 +12,7 @@ void do_opedit( Character *ch, char *argument )
   MPROG_DATA *mprog, *mprg, *mprg_next;
   int value, mptype, cnt;
 
-  if ( IsNpc( ch ) )
+  if ( is_npc( ch ) )
     {
       send_to_char( "Mob's can't opedit\r\n", ch );
       return;
@@ -68,7 +68,7 @@ void do_opedit( Character *ch, char *argument )
       return;
     }
 
-  if ( GetTrustedLevel( ch ) < LEVEL_GOD )
+  if ( get_trust( ch ) < LEVEL_GOD )
     {
       if ( ( obj = get_obj_carry( ch, arg1 ) ) == NULL )
 	{

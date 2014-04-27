@@ -10,17 +10,17 @@ extern ROOM_INDEX_DATA *room_index_hash[MAX_KEY_HASH];
 extern MOB_INDEX_DATA *mob_index_hash[MAX_KEY_HASH];
 
 static int diag_int_comp(const void *i, const void *j);
-static void diagnose_help (Character *ch);
-static void diag_ins (OBJ_INDEX_DATA *p, int siz, OBJ_INDEX_DATA **f, Character *ch);
+static void diagnose_help (CHAR_DATA *ch);
+static void diag_ins (OBJ_INDEX_DATA *p, int siz, OBJ_INDEX_DATA **f, CHAR_DATA *ch);
 static void zero_sort( int *vnums, int *count, int left, int right );
-static void diag_visit_obj( Character *ch, OBJ_DATA *obj );
+static void diag_visit_obj( CHAR_DATA *ch, OBJ_DATA *obj );
 
 /*
  * The "diagnose" command is designed to be expandable and take different
  * parameters to handle different diagnostic routines.
  */
 
-void do_diagnose( Character *ch, char *argument )
+void do_diagnose( CHAR_DATA *ch, char *argument )
 {
 #define   DIAG_MAX_SIZE  1000
   OBJ_INDEX_DATA *pObj;
@@ -117,12 +117,12 @@ void do_diagnose( Character *ch, char *argument )
 
   if (!str_cmp(arg1, "mm")) {
     DESCRIPTOR_DATA *d;
-    Character *victim;
+    CHAR_DATA *victim;
 
     if ( !*arg2 )
       return;
 
-    if ( GetTrustedLevel(ch) < LEVEL_SUB_IMPLEM )
+    if ( get_trust(ch) < LEVEL_SUB_IMPLEM )
       return;
 
     if ( ( victim = get_char_world( ch, arg2 ) ) == NULL )
@@ -152,7 +152,7 @@ void do_diagnose( Character *ch, char *argument )
         return;
       }
 
-    if ( GetTrustedLevel( victim ) >= GetTrustedLevel( ch ) )
+    if ( get_trust( victim ) >= get_trust( ch ) )
       {
         send_to_char( "Busy.\r\n", ch );
         return;
@@ -297,7 +297,7 @@ static int diag_int_comp(const void *i, const void *j)
 /*
  * Displays the help screen for the "diagnose" command
  */
-static void diagnose_help (Character *ch)
+static void diagnose_help (CHAR_DATA *ch)
 {
   send_to_char( "Syntax:\r\n", ch);
   send_to_char( "diagnose of n  -  object frequency top n objects\r\n", ch );
@@ -320,7 +320,7 @@ static void diagnose_help (Character *ch)
  * frequency table which contains the "top n" frequently occurring objects.
  */
 
-static void diag_ins (OBJ_INDEX_DATA *p, int siz, OBJ_INDEX_DATA **f, Character *ch)
+static void diag_ins (OBJ_INDEX_DATA *p, int siz, OBJ_INDEX_DATA **f, CHAR_DATA *ch)
 {
   int  cou =  0;                             /* temporary counter */
   int  ins = -1;                             /* insert pos in dynamic f array */
@@ -359,7 +359,7 @@ static void zero_sort( int *vnums, int *count, int left, int right )
   if (i < right) zero_sort (vnums, count, i, right);
 }
 
-static void diag_visit_obj( Character *ch, OBJ_DATA *obj )
+static void diag_visit_obj( CHAR_DATA *ch, OBJ_DATA *obj )
 {
   pager_printf(ch, "***obj=%s\r\n", obj->name );
 

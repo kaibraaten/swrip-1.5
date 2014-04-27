@@ -1,9 +1,9 @@
 #include "character.h"
 #include "mud.h"
 
-ch_ret spell_ethereal_fist( int sn, int level, Character *ch, void *vo )
+ch_ret spell_ethereal_fist( int sn, int level, CHAR_DATA *ch, void *vo )
 {
-  Character *victim = (Character *) vo;
+  CHAR_DATA *victim = (CHAR_DATA *) vo;
   int dam;
 
   level       = UMAX(0, level);

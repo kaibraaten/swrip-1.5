@@ -2,15 +2,14 @@
 #include "mud.h"
 #include "character.h"
 
-static bool MobIsTrainer( void *element, void *userData );
-
-void do_train( Character *ch, char *argument )
+void do_train( CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  Character *mob;
+  CHAR_DATA *mob;
+  bool tfound = FALSE;
   bool successful = FALSE;
 
-  if ( IsNpc(ch) )
+  if ( is_npc(ch) )
     return;
 
   strcpy( arg, argument );
@@ -32,9 +31,14 @@ void do_train( Character *ch, char *argument )
           return;
         }
 
-      mob = (Character*) List_FindIf( ch->in_room->People, MobIsTrainer, NULL );
+      for ( mob = ch->in_room->first_person; mob; mob = mob->next_in_room )
+        if ( is_npc(mob) && IS_SET(mob->act, ACT_TRAIN) )
+          {
+            tfound = TRUE;
+            break;
+          }
 
-      if ( !mob )
+      if ( (!mob) || (!tfound) )
         {
           send_to_char( "You can't do that here.\r\n", ch );
           return;
@@ -65,7 +69,7 @@ void do_train( Character *ch, char *argument )
         {
           if( mob->stats.perm_dex <= ch->stats.perm_dex || ch->stats.perm_dex >= 20 + race_table[ch->race].stats.mod_dex || ch->stats.perm_dex >= 25 )
             {
-              act( AT_TELL, "$n tells you 'I cannot help you... you are already more dexterous than I.'",
+              act( AT_TELL, "$n tells you 'I cannot help you... you are already more dextrous than I.'",
                    mob, NULL, ch, TO_VICT );
 	      return;
             }
@@ -109,7 +113,7 @@ void do_train( Character *ch, char *argument )
                    mob, NULL, ch, TO_VICT );
               return;
             }
-          send_to_char("&GYou begin lessons in manners and etiquette.\r\n", ch);
+          send_to_char("&GYou begin lessons in maners and ettiquite.\r\n", ch);
         }
       add_timer ( ch , TIMER_DO_FUN , 10 , do_train , 1 );
       ch->dest_buf = str_dup(arg);
@@ -205,15 +209,10 @@ verse.\r\n", ch);
 	  send_to_char("&RYou finish your self improvement session feeling a little depressed.\r\n", ch);
           return;
         }
-      send_to_char("&GYou spend some time focusing on how to improve your personality and feel \r\nmuch better about yourself and the ways others see you.\r\n", ch);
+      send_to_char("&GYou spend some time focusing on how to improve your personality and feel \r\nmuch better about yourself and the ways others see y\
+ou.\r\n", ch);
       ch->stats.perm_cha++;
       return;
     }
 }
 
-static bool MobIsTrainer( void *element, void *userData )
-{
-  const Character *mob = (Character*) element;
-
-  return IsNpc( mob ) && IS_SET( mob->act, ACT_TRAIN );
-}

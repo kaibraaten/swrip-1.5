@@ -2,7 +2,7 @@
 #include "mud.h"
 #include "arena.h"
 
-void do_bet(Character *ch, char *argument)
+void do_bet(CHAR_DATA *ch, char *argument)
 {
   char arg[MAX_INPUT_LENGTH];
   char buf[MAX_INPUT_LENGTH];
@@ -12,7 +12,7 @@ void do_bet(Character *ch, char *argument)
   argument = one_argument(argument,arg);
   one_argument(argument,buf1);
 
-  if (IsNpc(ch))
+  if (is_npc(ch))
     {
       send_to_char("Mobs cant bet on the arena.\r\n",ch);
       return;

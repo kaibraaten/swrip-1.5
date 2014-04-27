@@ -2,11 +2,11 @@
 #include "mud.h"
 #include "character.h"
 
-void do_name( Character *ch, char *argument )
+void do_name( CHAR_DATA *ch, char *argument )
 {
   char fname[1024];
   struct stat fst;
-  Character *tmp;
+  CHAR_DATA *tmp;
   char buf[MAX_STRING_LENGTH];
 
   if ( !is_not_authed(ch) || ch->pcdata->auth_state != 2)

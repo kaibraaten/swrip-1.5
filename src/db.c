@@ -32,7 +32,6 @@
 #include "character.h"
 #include "editor.h"
 #include "help.h"
-#include "clan.h"
 
 void init_supermob();
 
@@ -55,10 +54,10 @@ TELEPORT_DATA *first_teleport = NULL;
 TELEPORT_DATA *last_teleport = NULL;
 
 OBJ_DATA *extracted_obj_queue = NULL;
-ExtractedCharacter *extracted_char_queue = NULL;
+EXTRACT_CHAR_DATA *extracted_char_queue = NULL;
 
-Character *first_char = NULL;
-Character *last_char = NULL;
+CHAR_DATA *first_char = NULL;
+CHAR_DATA *last_char = NULL;
 char log_buf[2*MAX_INPUT_LENGTH];
 
 OBJ_DATA *first_object = NULL;
@@ -147,6 +146,7 @@ short gsn_vibro_blades;
 short gsn_flexible_arms;
 short gsn_talonous_arms;
 short gsn_bludgeons;
+short gsn_shieldwork;
 
 /* thief */
 short gsn_detrap;
@@ -182,27 +182,38 @@ short gsn_grip;
 short gsn_berserk;
 short gsn_hitall;
 
+/* vampire */
+short gsn_feed;
+
 /* other   */
 short gsn_aid;
 short gsn_track;
 short gsn_search;
 short gsn_dig;
 short gsn_mount;
+short gsn_bite;
+short gsn_claw;
+short gsn_sting;
+short gsn_tail;
 short gsn_scribe;
 short gsn_study;
+short gsn_brew;
 short gsn_climb;
 short gsn_scan;
+short gsn_slice;
 
 /* spells */
 short gsn_aqua_breath;
 short gsn_blindness;
 short gsn_charm_person;
+short gsn_curse;
 short gsn_invis;
 short gsn_mass_invis;
 short gsn_poison;
 short gsn_sleep;
 short gsn_possess;
 short gsn_fireball;
+short gsn_chill_touch;
 short gsn_lightning_bolt;
 
 /* languages */
@@ -549,6 +560,7 @@ void boot_db( bool fCopyOver )
     ASSIGN_GSN( gsn_flexible_arms,      "flexible arms" );
     ASSIGN_GSN( gsn_talonous_arms,      "talonous arms" );
     ASSIGN_GSN( gsn_bludgeons,  "bludgeons" );
+    ASSIGN_GSN( gsn_shieldwork, "shieldwork" );
     ASSIGN_GSN( gsn_detrap,             "detrap" );
     ASSIGN_GSN( gsn_backstab,   "backstab" );
     ASSIGN_GSN( gsn_circle,             "circle" );
@@ -579,20 +591,29 @@ void boot_db( bool fCopyOver )
     ASSIGN_GSN( gsn_grip,               "grip" );
     ASSIGN_GSN( gsn_berserk,    "berserk" );
     ASSIGN_GSN( gsn_hitall,             "hitall" );
+    ASSIGN_GSN( gsn_feed,               "feed" );
     ASSIGN_GSN( gsn_aid,                "aid" );
     ASSIGN_GSN( gsn_track,              "track" );
     ASSIGN_GSN( gsn_search,             "search" );
     ASSIGN_GSN( gsn_dig,                "dig" );
     ASSIGN_GSN( gsn_mount,              "mount" );
+    ASSIGN_GSN( gsn_bite,               "bite" );
+    ASSIGN_GSN( gsn_claw,               "claw" );
+    ASSIGN_GSN( gsn_sting,              "sting" );
+    ASSIGN_GSN( gsn_tail,               "tail" );
     ASSIGN_GSN( gsn_scribe,             "scribe" );
     ASSIGN_GSN( gsn_study,              "study" );
+    ASSIGN_GSN( gsn_brew,               "brew" );
     ASSIGN_GSN( gsn_climb,              "climb" );
     ASSIGN_GSN( gsn_scan,               "scan" );
+    ASSIGN_GSN( gsn_slice,              "slice" );
     ASSIGN_GSN( gsn_fireball,   "fireball" );
+    ASSIGN_GSN( gsn_chill_touch,        "chill touch" );
     ASSIGN_GSN( gsn_lightning_bolt,     "force bolt" );
     ASSIGN_GSN( gsn_aqua_breath,        "aqua breath" );
     ASSIGN_GSN( gsn_blindness,  "blindness" );
     ASSIGN_GSN( gsn_charm_person,       "affect mind" );
+    ASSIGN_GSN( gsn_curse,              "curse" );
     ASSIGN_GSN( gsn_invis,              "mask" );
     ASSIGN_GSN( gsn_mass_invis, "group masking" );
     ASSIGN_GSN( gsn_poison,             "poison" );
@@ -690,7 +711,7 @@ void boot_db( bool fCopyOver )
   load_boards();
 
   log_string( "Loading clans" );
-  LoadClans();
+  load_clans();
 
   log_string( "Loading bans" );
   load_banlist();
@@ -717,7 +738,7 @@ void boot_db( bool fCopyOver )
   load_hall_of_fame();
 
   log_string( "Loading help files" );
-  LoadHelps();
+  load_helps();
 
   log_string( "Resetting areas" );
   area_update();
@@ -785,7 +806,7 @@ void load_author( AREA_DATA *tarea, FILE *fp )
 
   if ( tarea->author )
     STRFREE( tarea->author );
-  tarea->author   = fread_string_hash( fp );
+  tarea->author   = fread_string( fp );
   return;
 }
 
@@ -865,7 +886,7 @@ void load_flags( AREA_DATA *tarea, FILE *fp )
 /*
  * Add a character to the list of all characters                -Thoric
  */
-void add_char( Character *ch )
+void add_char( CHAR_DATA *ch )
 {
   LINK( ch, first_char, last_char, next, prev );
 }
@@ -952,15 +973,15 @@ void load_mobiles( AREA_DATA *tarea, FILE *fp )
           if ( vnum > tarea->hi_m_vnum )
             tarea->hi_m_vnum    = vnum;
         }
-      pMobIndex->player_name            = fread_string_hash( fp );
-      pMobIndex->short_descr            = fread_string_hash( fp );
-      pMobIndex->long_descr             = fread_string_hash( fp );
-      pMobIndex->description            = fread_string_hash( fp );
+      pMobIndex->player_name            = fread_string( fp );
+      pMobIndex->short_descr            = fread_string( fp );
+      pMobIndex->long_descr             = fread_string( fp );
+      pMobIndex->description            = fread_string( fp );
 
       pMobIndex->long_descr[0]  = UPPER(pMobIndex->long_descr[0]);
       pMobIndex->description[0] = UPPER(pMobIndex->description[0]);
 
-      pMobIndex->act                    = fread_number( fp ) | ACT_IsNpc;
+      pMobIndex->act                    = fread_number( fp ) | ACT_is_npc;
       pMobIndex->affected_by            = fread_number( fp );
       pMobIndex->pShop          = NULL;
       pMobIndex->rShop          = NULL;
@@ -1169,10 +1190,10 @@ void load_objects( AREA_DATA *tarea, FILE *fp )
           if ( vnum > tarea->hi_o_vnum )
             tarea->hi_o_vnum            = vnum;
         }
-      pObjIndex->name                   = fread_string_hash( fp );
-      pObjIndex->short_descr            = fread_string_hash( fp );
-      pObjIndex->description            = fread_string_hash( fp );
-      pObjIndex->action_desc            = fread_string_hash( fp );
+      pObjIndex->name                   = fread_string( fp );
+      pObjIndex->short_descr            = fread_string( fp );
+      pObjIndex->description            = fread_string( fp );
+      pObjIndex->action_desc            = fread_string( fp );
 
       /* Commented out by Narn, Apr/96 to allow item short descs like
          Bonecrusher and Oblivion */
@@ -1233,8 +1254,8 @@ void load_objects( AREA_DATA *tarea, FILE *fp )
               EXTRA_DESCR_DATA *ed;
 
               CREATE( ed, EXTRA_DESCR_DATA, 1 );
-              ed->keyword               = fread_string_hash( fp );
-              ed->description           = fread_string_hash( fp );
+              ed->keyword               = fread_string( fp );
+              ed->description           = fread_string( fp );
               LINK( ed, pObjIndex->first_extradesc, pObjIndex->last_extradesc,
                     next, prev );
               top_ed++;
@@ -1548,7 +1569,8 @@ void load_rooms( AREA_DATA *tarea, FILE *fp )
         {
           oldroom = FALSE;
           CREATE( pRoomIndex, ROOM_INDEX_DATA, 1 );
-	  pRoomIndex->People = CreateList();
+          pRoomIndex->first_person      = NULL;
+          pRoomIndex->last_person       = NULL;
           pRoomIndex->first_content     = NULL;
           pRoomIndex->last_content      = NULL;
         }
@@ -1566,8 +1588,8 @@ void load_rooms( AREA_DATA *tarea, FILE *fp )
           if ( vnum > tarea->hi_r_vnum )
             tarea->hi_r_vnum            = vnum;
         }
-      pRoomIndex->name          = fread_string_hash( fp );
-      pRoomIndex->description           = fread_string_hash( fp );
+      pRoomIndex->name          = fread_string( fp );
+      pRoomIndex->description           = fread_string( fp );
 
       /* Area number                      fread_number( fp ); */
       ln = fread_line( fp );
@@ -1614,8 +1636,8 @@ void load_rooms( AREA_DATA *tarea, FILE *fp )
               else
                 {
                   pexit = make_exit( pRoomIndex, NULL, door );
-                  pexit->description    = fread_string_hash( fp );
-                  pexit->keyword        = fread_string_hash( fp );
+                  pexit->description    = fread_string( fp );
+                  pexit->keyword        = fread_string( fp );
                   pexit->exit_info      = 0;
                   ln = fread_line( fp );
                   x1=x2=x3=x4=0;
@@ -1641,8 +1663,8 @@ void load_rooms( AREA_DATA *tarea, FILE *fp )
               EXTRA_DESCR_DATA *ed;
 
               CREATE( ed, EXTRA_DESCR_DATA, 1 );
-              ed->keyword               = fread_string_hash( fp );
-              ed->description           = fread_string_hash( fp );
+              ed->keyword               = fread_string( fp );
+              ed->description           = fread_string( fp );
               LINK( ed, pRoomIndex->first_extradesc, pRoomIndex->last_extradesc,
                     next, prev );
               top_ed++;
@@ -2050,7 +2072,7 @@ void area_update( void )
 
   for ( pArea = first_area; pArea; pArea = pArea->next )
     {
-      Character *pch;
+      CHAR_DATA *pch;
       int reset_age = pArea->reset_frequency ? pArea->reset_frequency : 15;
 
       if ( (reset_age == -1 && pArea->age == -1)
@@ -2071,7 +2093,7 @@ void area_update( void )
             strcpy( buf, "You hear some squeaking sounds...\r\n" );
           for ( pch = first_char; pch; pch = pch->next )
             {
-              if ( !IsNpc(pch)
+              if ( !is_npc(pch)
                    &&   is_awake(pch)
                    &&   pch->in_room
                    &&   pch->in_room->area == pArea )
@@ -2109,9 +2131,9 @@ void area_update( void )
 /*
  * Create an instance of a mobile.
  */
-Character *create_mobile( MOB_INDEX_DATA *pMobIndex )
+CHAR_DATA *create_mobile( MOB_INDEX_DATA *pMobIndex )
 {
-  Character *mob;
+  CHAR_DATA *mob;
 
   if ( !pMobIndex )
     {
@@ -2119,7 +2141,7 @@ Character *create_mobile( MOB_INDEX_DATA *pMobIndex )
       exit( 1 );
     }
 
-  CREATE( mob, Character, 1 );
+  CREATE( mob, CHAR_DATA, 1 );
   clear_char( mob );
   mob->pIndexData               = pMobIndex;
 
@@ -2135,7 +2157,7 @@ Character *create_mobile( MOB_INDEX_DATA *pMobIndex )
   {
     int ability;
     for ( ability = 0 ; ability < MAX_ABILITY ; ability++ )
-      SetLevel( mob, ability, mob->top_level );
+      set_level( mob, ability, mob->top_level );
   }
   mob->act                      = pMobIndex->act;
   mob->affected_by              = pMobIndex->affected_by;
@@ -2410,7 +2432,7 @@ OBJ_DATA *create_object( OBJ_INDEX_DATA *pObjIndex, int level )
 /*
  * Clear a new character.
  */
-void clear_char( Character *ch )
+void clear_char( CHAR_DATA *ch )
 {
   ch->editor                    = NULL;
   ch->hhf.hunting                   = NULL;
@@ -2424,6 +2446,8 @@ void clear_char( Character *ch )
   ch->prev                      = NULL;
   ch->first_carrying            = NULL;
   ch->last_carrying             = NULL;
+  ch->next_in_room              = NULL;
+  ch->prev_in_room              = NULL;
   ch->fighting          = NULL;
   ch->switched          = NULL;
   ch->first_affect              = NULL;
@@ -2476,7 +2500,7 @@ void clear_char( Character *ch )
 /*
  * Free a character.
  */
-void free_char( Character *ch )
+void free_char( CHAR_DATA *ch )
 {
   OBJ_DATA *obj;
   AFFECT_DATA *paf;
@@ -2533,11 +2557,9 @@ void free_char( Character *ch )
       DISPOSE( ch->pcdata->homepage     );  /* no hash */
       STRFREE( ch->pcdata->authed_by    );
       STRFREE( ch->pcdata->prompt       );
-
       if ( ch->pcdata->subprompt )
         STRFREE( ch->pcdata->subprompt );
-
-      FreeAliases( ch );
+      free_aliases( ch );
 #ifdef SWRIP_USE_IMC
       imc_freechardata( ch );
 #endif
@@ -2739,7 +2761,7 @@ void boot_log( const char *str, ... )
 /*
  * Dump a text file to a player, a line at a time               -Thoric
  */
-void show_file( Character *ch, const char *filename )
+void show_file( CHAR_DATA *ch, const char *filename )
 {
   FILE *fp;
   char buf[MAX_STRING_LENGTH];
@@ -2818,8 +2840,8 @@ void log_string_plus( const char *str, short log_type, short level )
     {
       for ( d = first_descriptor; d; d = d->next )
 	{
-	  Character *och = d->original ? d->original : d->character;
-	  Character *vch = d->character;
+	  CHAR_DATA *och = d->original ? d->original : d->character;
+	  CHAR_DATA *vch = d->character;
 
 	  if ( !och || !vch )
 	    {
@@ -2879,6 +2901,10 @@ void towizfile( const char *line )
 void add_to_wizlist( char *name, int level )
 {
   WIZENT *wiz, *tmp;
+
+#ifdef DEBUG
+  log_string( "Adding to wizlist..." );
+#endif
 
   CREATE( wiz, WIZENT, 1 );
   wiz->name     = str_dup( name );
@@ -3112,8 +3138,8 @@ MPROG_DATA *mprog_file_read( char *f, MPROG_DATA *mprg,
           break;
         default:
           pMobIndex->mprog.progtypes = pMobIndex->mprog.progtypes | mprg2->type;
-          mprg2->arglist       = fread_string_hash( progfile );
-          mprg2->comlist       = fread_string_hash( progfile );
+          mprg2->arglist       = fread_string( progfile );
+          mprg2->comlist       = fread_string( progfile );
           switch ( letter = fread_letter( progfile ) )
             {
             case '>':
@@ -3217,7 +3243,7 @@ void mprog_read_programs( FILE *fp, MOB_INDEX_DATA *pMobIndex)
           exit( 1 );
           break;
         case IN_FILE_PROG:
-          mprg = mprog_file_read( fread_string_hash( fp ), mprg,pMobIndex );
+          mprg = mprog_file_read( fread_string( fp ), mprg,pMobIndex );
           fread_to_eol( fp );
           switch ( letter = fread_letter( fp ) )
             {
@@ -3238,9 +3264,9 @@ void mprog_read_programs( FILE *fp, MOB_INDEX_DATA *pMobIndex)
           break;
         default:
           pMobIndex->mprog.progtypes = pMobIndex->mprog.progtypes | mprg->type;
-          mprg->arglist        = fread_string_hash( fp );
+          mprg->arglist        = fread_string( fp );
           fread_to_eol( fp );
-          mprg->comlist        = fread_string_hash( fp );
+          mprg->comlist        = fread_string( fp );
           fread_to_eol( fp );
           switch ( letter = fread_letter( fp ) )
             {
@@ -3327,8 +3353,8 @@ MPROG_DATA *oprog_file_read( char *f, MPROG_DATA *mprg,
           break;
         default:
           pObjIndex->mprog.progtypes = pObjIndex->mprog.progtypes | mprg2->type;
-          mprg2->arglist       = fread_string_hash( progfile );
-          mprg2->comlist       = fread_string_hash( progfile );
+          mprg2->arglist       = fread_string( progfile );
+          mprg2->comlist       = fread_string( progfile );
           switch ( letter = fread_letter( progfile ) )
             {
             case '>':
@@ -3432,7 +3458,7 @@ void oprog_read_programs( FILE *fp, OBJ_INDEX_DATA *pObjIndex)
           exit( 1 );
           break;
         case IN_FILE_PROG:
-          mprg = oprog_file_read( fread_string_hash( fp ), mprg,pObjIndex );
+          mprg = oprog_file_read( fread_string( fp ), mprg,pObjIndex );
           fread_to_eol( fp );
           switch ( letter = fread_letter( fp ) )
             {
@@ -3453,9 +3479,9 @@ void oprog_read_programs( FILE *fp, OBJ_INDEX_DATA *pObjIndex)
           break;
         default:
           pObjIndex->mprog.progtypes = pObjIndex->mprog.progtypes | mprg->type;
-          mprg->arglist        = fread_string_hash( fp );
+          mprg->arglist        = fread_string( fp );
           fread_to_eol( fp );
-          mprg->comlist        = fread_string_hash( fp );
+          mprg->comlist        = fread_string( fp );
           fread_to_eol( fp );
           switch ( letter = fread_letter( fp ) )
             {
@@ -3539,8 +3565,8 @@ MPROG_DATA *rprog_file_read( char *f, MPROG_DATA *mprg,
           break;
         default:
           RoomIndex->mprog.progtypes = RoomIndex->mprog.progtypes | mprg2->type;
-          mprg2->arglist       = fread_string_hash( progfile );
-          mprg2->comlist       = fread_string_hash( progfile );
+          mprg2->arglist       = fread_string( progfile );
+          mprg2->comlist       = fread_string( progfile );
           switch ( letter = fread_letter( progfile ) )
             {
             case '>':
@@ -3644,7 +3670,7 @@ void rprog_read_programs( FILE *fp, ROOM_INDEX_DATA *pRoomIndex)
           exit( 1 );
           break;
         case IN_FILE_PROG:
-          mprg = rprog_file_read( fread_string_hash( fp ), mprg,pRoomIndex );
+          mprg = rprog_file_read( fread_string( fp ), mprg,pRoomIndex );
           fread_to_eol( fp );
           switch ( letter = fread_letter( fp ) )
             {
@@ -3665,9 +3691,9 @@ void rprog_read_programs( FILE *fp, ROOM_INDEX_DATA *pRoomIndex)
           break;
         default:
           pRoomIndex->mprog.progtypes = pRoomIndex->mprog.progtypes | mprg->type;
-          mprg->arglist        = fread_string_hash( fp );
+          mprg->arglist        = fread_string( fp );
           fread_to_eol( fp );
-          mprg->comlist        = fread_string_hash( fp );
+          mprg->comlist        = fread_string( fp );
           fread_to_eol( fp );
           switch ( letter = fread_letter( fp ) )
             {
@@ -3758,6 +3784,8 @@ ROOM_INDEX_DATA *make_room( int vnum )
   int   iHash;
 
   CREATE( pRoomIndex, ROOM_INDEX_DATA, 1 );
+  pRoomIndex->first_person      = NULL;
+  pRoomIndex->last_person               = NULL;
   pRoomIndex->first_content     = NULL;
   pRoomIndex->last_content      = NULL;
   pRoomIndex->first_extradesc   = NULL;
@@ -3773,7 +3801,7 @@ ROOM_INDEX_DATA *make_room( int vnum )
   pRoomIndex->light             = 0;
   pRoomIndex->first_exit                = NULL;
   pRoomIndex->last_exit         = NULL;
-  pRoomIndex->People = CreateList();
+
   iHash                 = vnum % MAX_KEY_HASH;
   pRoomIndex->next      = room_index_hash[iHash];
   room_index_hash[iHash]        = pRoomIndex;
@@ -3900,7 +3928,7 @@ MOB_INDEX_DATA *make_mobile( short vnum, short cvnum, char *name )
       pMobIndex->short_descr[0] = LOWER(pMobIndex->short_descr[0]);
       pMobIndex->long_descr[0]  = UPPER(pMobIndex->long_descr[0]);
       pMobIndex->description[0] = UPPER(pMobIndex->description[0]);
-      pMobIndex->act            = ACT_IsNpc | ACT_PROTOTYPE;
+      pMobIndex->act            = ACT_is_npc | ACT_PROTOTYPE;
       pMobIndex->affected_by    = 0;
       pMobIndex->pShop          = NULL;
       pMobIndex->rShop          = NULL;
@@ -4392,14 +4420,13 @@ void sort_area( AREA_DATA *pArea, bool proto )
  * Display vnums currently assigned to areas            -Altrag & Thoric
  * Sorted, and flagged if loaded.
  */
-void show_vnums( Character *ch, int low, int high, bool proto, bool shownl,
+void show_vnums( CHAR_DATA *ch, int low, int high, bool proto, bool shownl,
                  const char *loadst, const char *notloadst )
 {
-  AREA_DATA *pArea = NULL;
-  AREA_DATA *first_sort = NULL;
-  int count = 0;
-  int loaded = 0;
+  AREA_DATA *pArea, *first_sort;
+  int count, loaded;
 
+  count = 0;    loaded = 0;
   set_pager_color( AT_PLAIN, ch );
 
   if ( proto )
@@ -4421,7 +4448,7 @@ void show_vnums( Character *ch, int low, int high, bool proto, bool shownl,
       if ( IS_SET(pArea->status, AREA_LOADED) )
         loaded++;
       else if ( !shownl )
-	continue;
+          continue;
 
       pager_printf(ch, "%-15s| Rooms: %5d - %-5d"
                    " Objs: %5d - %-5d Mobs: %5d - %-5d%s\r\n",
@@ -4529,8 +4556,8 @@ void fread_sysdata( SYSTEM_DATA *sys, FILE *fp )
           break;
 
         case 'G':
-          KEY( "Guildoverseer",  sys->guild_overseer,  fread_string_hash( fp ) );
-          KEY( "Guildadvisor",   sys->guild_advisor,   fread_string_hash( fp ) );
+          KEY( "Guildoverseer",  sys->guild_overseer,  fread_string( fp ) );
+          KEY( "Guildadvisor",   sys->guild_advisor,   fread_string( fp ) );
           break;
 
         case 'H':
@@ -4692,11 +4719,11 @@ void load_banlist( void )
 /*
  * Append a string to a file.
  */
-void append_file( Character *ch, const char *file, const char *str )
+void append_file( CHAR_DATA *ch, const char *file, const char *str )
 {
   FILE *fp;
 
-  if ( IsNpc(ch) || str[0] == '\0' )
+  if ( is_npc(ch) || str[0] == '\0' )
     return;
 
   if ( ( fp = fopen( file, "a" ) ) == NULL )

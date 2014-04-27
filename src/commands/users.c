@@ -2,7 +2,7 @@
 #include "mud.h"
 #include "character.h"
 
-void do_users( Character *ch, char *argument )
+void do_users( CHAR_DATA *ch, char *argument )
 {
   char buf[MAX_STRING_LENGTH];
   DESCRIPTOR_DATA *d;
@@ -22,7 +22,7 @@ void do_users( Character *ch, char *argument )
     {
       if (arg[0] == '\0')
         {
-          if (  GetTrustedLevel(ch) >= LEVEL_SUPREME
+          if (  get_trust(ch) >= LEVEL_SUPREME
                 ||   (d->character && can_see( ch, d->character )) )
             {
               count++;
@@ -43,7 +43,7 @@ void do_users( Character *ch, char *argument )
         }
       else
         {
-          if ( (GetTrustedLevel(ch) >= LEVEL_SUPREME
+          if ( (get_trust(ch) >= LEVEL_SUPREME
                 ||   (d->character && can_see( ch, d->character )) )
                &&   ( !str_prefix( arg, d->remote.hostname )
                       ||   ( d->character && !str_prefix( arg, d->character->name ) ) ) )

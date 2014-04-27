@@ -1,12 +1,11 @@
 #include <time.h>
 #include "mud.h"
 #include "character.h"
-#include "clan.h"
 
-void do_jail ( Character *ch , char *argument )
+void do_jail ( CHAR_DATA *ch , char *argument )
 {
-  Character *victim =NULL;
-  Clan   *clan =NULL;
+  CHAR_DATA *victim =NULL;
+  CLAN_DATA   *clan =NULL;
   ROOM_INDEX_DATA *jail =NULL;
   char arg[MAX_INPUT_LENGTH];
   short jail_time;
@@ -15,7 +14,7 @@ void do_jail ( Character *ch , char *argument )
 
   argument = one_argument(argument, arg);
 
-  if ( IsNpc (ch) ) return;
+  if ( is_npc (ch) ) return;
 
   if ( !ch->pcdata || ( clan = ch->pcdata->clan ) == NULL )
     {
@@ -65,7 +64,7 @@ void do_jail ( Character *ch , char *argument )
       return;
     }
 
-  if ( IsNpc(victim) )
+  if ( is_npc(victim) )
     {
       send_to_char( "That would be a waste of time.\r\n", ch );
       return;

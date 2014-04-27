@@ -3,11 +3,11 @@
 
 extern char *spell_target_name;
 
-ch_ret spell_identify( int sn, int level, Character *ch, void *vo )
+ch_ret spell_identify( int sn, int level, CHAR_DATA *ch, void *vo )
 {
   /* Modified by Scryn to work on mobs/players/objs */
   OBJ_DATA *obj;
-  Character *victim;
+  CHAR_DATA *victim;
   AFFECT_DATA *paf;
   SKILLTYPE *sktmp;
   SKILLTYPE *skill = get_skilltype(sn);
@@ -152,7 +152,7 @@ ch_ret spell_identify( int sn, int level, Character *ch, void *vo )
           return rSPELL_FAILED;
         }
 
-      if ( IsNpc(victim) )
+      if ( is_npc(victim) )
         {
           ch_printf(ch, "%s appears to be between level %d and %d.\r\n",
                     victim->name,
@@ -168,7 +168,7 @@ ch_ret spell_identify( int sn, int level, Character *ch, void *vo )
                 victim->name, aoran(get_race(victim)));
 
       if ( (chance(ch, 50) && ch->top_level >= victim->top_level + 10 )
-           ||    IsImmortal(ch) )
+           ||    is_immortal(ch) )
         {
           ch_printf(ch, "%s appears to be affected by: ", victim->name);
 

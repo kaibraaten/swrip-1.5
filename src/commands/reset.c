@@ -2,7 +2,7 @@
 #include "mud.h"
 #include "character.h"
 
-void do_reset( Character *ch, char *argument )
+void do_reset( CHAR_DATA *ch, char *argument )
 {
   AREA_DATA *pArea = NULL;
   char arg[MAX_INPUT_LENGTH];
@@ -28,7 +28,7 @@ void do_reset( Character *ch, char *argument )
           if ( !tmp )
             {
               send_to_char("Your area pointer got lost. Reset mode off.\r\n", ch);
-              bug("do_reset: %s's dest_buf points to invalid area", ch->name);
+              bug("do_reset: %s's dest_buf points to invalid area", (int)ch->name);
               ch->substate = SUB_NONE;
               DISPOSE(ch->dest_buf);
               return;
@@ -49,7 +49,7 @@ void do_reset( Character *ch, char *argument )
           return;
         }
     }
-  if ( !pArea && GetTrustedLevel(ch) > LEVEL_GOD )
+  if ( !pArea && get_trust(ch) > LEVEL_GOD )
     {
       char fname[80];
 

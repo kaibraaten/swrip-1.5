@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_report( Character *ch, char *argument )
+void do_report( CHAR_DATA *ch, char *argument )
 {
   char buf[MAX_INPUT_LENGTH];
 

@@ -1,15 +1,15 @@
 #include "character.h"
 #include "mud.h"
 
-void do_beg( Character *ch, char *argument )
+void do_beg( CHAR_DATA *ch, char *argument )
 {
   char buf  [MAX_STRING_LENGTH];
   char arg1 [MAX_INPUT_LENGTH];
-  Character *victim;
+  CHAR_DATA *victim;
   int percent, xp;
   int amount;
 
-  if ( IsNpc (ch) ) return;
+  if ( is_npc (ch) ) return;
 
   argument = one_argument( argument, arg1 );
 
@@ -71,7 +71,7 @@ void do_beg( Character *ch, char *argument )
       return;
     }
 
-  if ( !IsNpc( victim ) )
+  if ( !is_npc( victim ) )
     {
       send_to_char( "You beg them for money.\r\n", ch );
       act( AT_ACTION, "$n begs you to give $s some change.\r\n", ch, NULL, victim, TO_VICT    );
@@ -80,7 +80,7 @@ void do_beg( Character *ch, char *argument )
     }
 
   set_wait_state( ch, skill_table[gsn_beg]->beats );
-  percent  = number_percent( ) + GetLevel( ch, SMUGGLING_ABILITY ) + victim->top_level;
+  percent  = number_percent( ) + get_level( ch, SMUGGLING_ABILITY ) + victim->top_level;
 
   if ( percent > ch->pcdata->learned[gsn_beg]  )
     {
@@ -120,7 +120,7 @@ void do_beg( Character *ch, char *argument )
   victim->gold -= amount;
   ch_printf( ch, "%s gives you %d credits.\r\n", victim->short_descr , amount );
   learn_from_success( ch, gsn_beg );
-  xp = UMIN( amount*10 , ( exp_level( GetLevel( ch, SMUGGLING_ABILITY ) + 1) - exp_level( GetLevel( ch, SMUGGLING_ABILITY ) )  )  );
+  xp = UMIN( amount*10 , ( exp_level( get_level( ch, SMUGGLING_ABILITY ) + 1) - exp_level( get_level( ch, SMUGGLING_ABILITY ) )  )  );
   xp = UMIN( xp , xp_compute( ch, victim ) );
   gain_exp( ch, SMUGGLING_ABILITY, xp );
   ch_printf( ch, "&WYou gain %ld smuggling experience points!\r\n", xp );

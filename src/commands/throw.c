@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_throw( Character *ch, char *argument )
+void do_throw( CHAR_DATA *ch, char *argument )
 {
   OBJ_DATA        * obj;
   OBJ_DATA        * tmpobj;
@@ -12,7 +12,7 @@ void do_throw( Character *ch, char *argument )
   EXIT_DATA       * pexit;
   ROOM_INDEX_DATA * was_in_room;
   ROOM_INDEX_DATA * to_room;
-  Character       * victim;
+  CHAR_DATA       * victim;
   char              buf[MAX_STRING_LENGTH];
 
   argument = one_argument( argument, arg );
@@ -136,7 +136,7 @@ void do_throw( Character *ch, char *argument )
               return;
             }
 
-          if ( !IsNpc( victim ) && IS_SET( ch->act, PLR_NICE ) )
+          if ( !is_npc( victim ) && IS_SET( ch->act, PLR_NICE ) )
             {
               send_to_char( "You feel too nice to do that!\r\n", ch );
               return;
@@ -190,7 +190,7 @@ void do_throw( Character *ch, char *argument )
           return;
         }
 
-      if ( !IsNpc( victim ) && IS_SET( ch->act, PLR_NICE ) )
+      if ( !is_npc( victim ) && IS_SET( ch->act, PLR_NICE ) )
         {
           send_to_char( "You feel too nice to do that!\r\n", ch );
           return;
@@ -233,7 +233,7 @@ void do_throw( Character *ch, char *argument )
     {
 
       set_wait_state( ch, skill_table[gsn_throw]->beats );
-      if ( IsNpc(ch) || number_percent( ) < ch->pcdata->learned[gsn_throw] )
+      if ( is_npc(ch) || number_percent( ) < ch->pcdata->learned[gsn_throw] )
         {
           learn_from_success( ch, gsn_throw );
           global_retcode = damage( ch, victim, number_range( obj->weight*2 , (obj->weight*2 + ch->stats.perm_str) ), TYPE_HIT );
@@ -244,7 +244,7 @@ void do_throw( Character *ch, char *argument )
           global_retcode = damage( ch, victim, 0, TYPE_HIT );
         }
 
-      if ( IsNpc( victim ) && !char_died ( victim) )
+      if ( is_npc( victim ) && !char_died ( victim) )
         {
           if ( IS_SET( victim->act , ACT_SENTINEL ) )
             {

@@ -8,14 +8,12 @@
 #include <stdlib.h>
 #include <stdarg.h>
 
-#include <strings.h>
-
 #include "utility.h"
 #include "sha256.h"
 
 #define HIDDEN_TILDE    '*'
 
-typedef int (*STRING_COMPARATOR)( const char*, const char* );
+typedef bool (*STRING_COMPARATOR)( const char*, const char* );
 typedef char* (*STRING_TOKENIZER)( char*, char* );
 
 #ifdef __cplusplus
@@ -26,17 +24,17 @@ extern "C" {
 }
 #endif
 
-static int is_name2( const char*, const char* );
-static int is_name2_prefix( const char*, const char* );
-static int is_name_internal( const char*, const char*, STRING_COMPARATOR, STRING_TOKENIZER );
-static int nifty_is_name_internal( const char*, const char*,
-				   STRING_COMPARATOR, STRING_TOKENIZER );
+static bool is_name2( const char*, const char* );
+static bool is_name2_prefix( const char*, const char* );
+static bool is_name_internal( const char*, const char*, STRING_COMPARATOR, STRING_TOKENIZER );
+static bool nifty_is_name_internal( const char*, const char*,
+                                    STRING_COMPARATOR, STRING_TOKENIZER );
 /*
  * See if a string is one of the names of an object.
  */
-static int is_name_internal( const char *str, const char *namelist,
-			     STRING_COMPARATOR compare_string,
-			     STRING_TOKENIZER tokenize_string )
+static bool is_name_internal( const char *str, const char *namelist,
+                              STRING_COMPARATOR compare_string,
+                              STRING_TOKENIZER tokenize_string )
 {
   char name[MAX_INPUT_LENGTH];
   char tmp_buf[MAX_INPUT_LENGTH];
@@ -49,22 +47,22 @@ static int is_name_internal( const char *str, const char *namelist,
 
       if ( name[0] == '\0' )
         {
-          return 0;
+          return FALSE;
         }
 
       if ( !compare_string( str, name ) )
         {
-          return 1;
+          return TRUE;
         }
     }
 }
 
-int is_name( const char *str, const char *namelist )
+bool is_name( const char *str, const char *namelist )
 {
   return is_name_internal( str, namelist, str_cmp, one_argument );
 }
 
-int is_name_prefix( const char *str, const char *namelist )
+bool is_name_prefix( const char *str, const char *namelist )
 {
   return is_name_internal( str, namelist, str_prefix, one_argument );
 }
@@ -73,12 +71,12 @@ int is_name_prefix( const char *str, const char *namelist )
  * See if a string is one of the names of an object.            -Thoric
  * Treats a dash as a word delimiter as well as a space
  */
-int is_name2( const char *str, const char *namelist )
+bool is_name2( const char *str, const char *namelist )
 {
   return is_name_internal( str, namelist, str_cmp, one_argument2 );
 }
 
-int is_name2_prefix( const char *str, const char *namelist )
+bool is_name2_prefix( const char *str, const char *namelist )
 {
   return is_name_internal( str, namelist, str_prefix, one_argument2 );
 }
@@ -86,9 +84,9 @@ int is_name2_prefix( const char *str, const char *namelist )
 /*                                                              -Thoric
  * Checks if str is a name in namelist supporting multiple keywords
  */
-static int nifty_is_name_internal( const char *str, const char *namelist,
-				   STRING_COMPARATOR compare_string,
-				   STRING_TOKENIZER tokenize_string )
+static bool nifty_is_name_internal( const char *str, const char *namelist,
+                                    STRING_COMPARATOR compare_string,
+                                    STRING_TOKENIZER tokenize_string )
 {
   char name[MAX_INPUT_LENGTH];
   char tmp_str_buf[MAX_INPUT_LENGTH];
@@ -97,7 +95,7 @@ static int nifty_is_name_internal( const char *str, const char *namelist,
   char *tmp_namelist = tmp_namelist_buf;
 
   if( !str || str[0] == '\0' )
-    return 0;
+    return FALSE;
 
   snprintf( tmp_str_buf, MAX_INPUT_LENGTH, "%s", str );
   snprintf( tmp_namelist_buf, MAX_INPUT_LENGTH, "%s", namelist );
@@ -107,19 +105,19 @@ static int nifty_is_name_internal( const char *str, const char *namelist,
       tmp_str = tokenize_string( tmp_str, name );
 
       if ( name[0] == '\0' )
-        return 1;
+        return TRUE;
 
       if ( !compare_string( name, tmp_namelist ) )
-        return 0;
+        return FALSE;
     }
 }
 
-int nifty_is_name( const char *str, const char *namelist )
+bool nifty_is_name( const char *str, const char *namelist )
 {
   return nifty_is_name_internal( str, namelist, is_name2, one_argument2 );
 }
 
-int nifty_is_name_prefix( const char *str, const char *namelist )
+bool nifty_is_name_prefix( const char *str, const char *namelist )
 {
   return nifty_is_name_internal( str, namelist, is_name2_prefix, one_argument2 );
 }
@@ -164,10 +162,8 @@ char *show_tilde( const char *str )
  * Return TRUE if different
  *   (compatibility with historical functions).
  */
-int str_cmp( const char *astr, const char *bstr )
+bool str_cmp( const char *astr, const char *bstr )
 {
-  return strcasecmp(astr, bstr);
-  /*
   if ( !astr )
     {
       bug( "Str_cmp: null astr." );
@@ -191,7 +187,6 @@ int str_cmp( const char *astr, const char *bstr )
     }
 
   return FALSE;
-  */
 }
 
 /*
@@ -199,27 +194,27 @@ int str_cmp( const char *astr, const char *bstr )
  * Return TRUE if astr not a prefix of bstr
  *   (compatibility with historical functions).
  */
-int str_prefix( const char *astr, const char *bstr )
+bool str_prefix( const char *astr, const char *bstr )
 {
   if ( !astr )
     {
       bug( "Strn_cmp: null astr." );
-      return 1;
+      return TRUE;
     }
 
   if ( !bstr )
     {
       bug( "Strn_cmp: null bstr." );
-      return 1;
+      return TRUE;
     }
 
   for ( ; *astr; astr++, bstr++ )
     {
       if ( LOWER(*astr) != LOWER(*bstr) )
-        return 1;
+        return TRUE;
     }
 
-  return 0;
+  return FALSE;
 }
 
 /*
@@ -227,7 +222,7 @@ int str_prefix( const char *astr, const char *bstr )
  * Returns TRUE is astr not part of bstr.
  *   (compatibility with historical functions).
  */
-int str_infix( const char *astr, const char *bstr )
+bool str_infix( const char *astr, const char *bstr )
 {
   int sstr1 = strlen(astr);
   int sstr2 = strlen(bstr);
@@ -235,13 +230,13 @@ int str_infix( const char *astr, const char *bstr )
   char c0 = 0;
 
   if ( ( c0 = LOWER(astr[0]) ) == '\0' )
-    return 0;
+    return FALSE;
 
   for ( ichar = 0; ichar <= sstr2 - sstr1; ichar++ )
     if ( c0 == LOWER(bstr[ichar]) && !str_prefix( astr, bstr + ichar ) )
-      return 0;
+      return FALSE;
 
-  return 1;
+  return TRUE;
 }
 
 /*
@@ -249,15 +244,15 @@ int str_infix( const char *astr, const char *bstr )
  * Return TRUE if astr not a suffix of bstr
  *   (compatibility with historical functions).
  */
-int str_suffix( const char *astr, const char *bstr )
+bool str_suffix( const char *astr, const char *bstr )
 {
   int sstr1 = strlen(astr);
   int sstr2 = strlen(bstr);
 
   if ( sstr1 <= sstr2 && !str_cmp( astr, bstr + sstr2 - sstr1 ) )
-    return 0;
+    return FALSE;
   else
-    return 1;
+    return TRUE;
 }
 
 /*

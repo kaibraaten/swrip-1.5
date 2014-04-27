@@ -2,7 +2,7 @@
 #include "mud.h"
 #include "character.h"
 
-void do_makedisguise( Character *ch, char *argument )
+void do_makedisguise( CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   char arg1[MAX_INPUT_LENGTH];
@@ -74,7 +74,7 @@ void do_makedisguise( Character *ch, char *argument )
         }
 
       sprintf( sexrace, "%d", (sex*1000) + race );
-      the_chance = IsNpc(ch) ? ch->top_level
+      the_chance = is_npc(ch) ? ch->top_level
         : (int) (ch->pcdata->learned[gsn_disguise]);
       if ( number_percent( ) < the_chance )
         {
@@ -112,7 +112,7 @@ void do_makedisguise( Character *ch, char *argument )
   race = atoi(arg1)%1000;
   sex = atoi(arg1)/1000;
 
-  level = IsNpc(ch) ? ch->top_level : (int) (ch->pcdata->learned[gsn_disguise]);
+  level = is_npc(ch) ? ch->top_level : (int) (ch->pcdata->learned[gsn_disguise]);
   vnum = 10420;
 
   if ( ( pObjIndex = get_obj_index( vnum ) ) == NULL )
@@ -146,7 +146,7 @@ void do_makedisguise( Character *ch, char *argument )
         }
     }
 
-  the_chance = IsNpc(ch) ? ch->top_level
+  the_chance = is_npc(ch) ? ch->top_level
     : (int) (ch->pcdata->learned[gsn_disguise]) ;
 
   if ( number_percent( ) > the_chance*2  || ( !checkneedle ) || ( !checkfabric ) )
@@ -188,7 +188,7 @@ void do_makedisguise( Character *ch, char *argument )
   {
     long xpgain;
 
-    xpgain = UMIN( obj->cost*50 ,( exp_level(GetLevel( ch, ENGINEERING_ABILITY ) + 1) - exp_level(GetLevel( ch, ENGINEERING_ABILITY ) ) ) );
+    xpgain = UMIN( obj->cost*50 ,( exp_level(get_level( ch, ENGINEERING_ABILITY ) + 1) - exp_level(get_level( ch, ENGINEERING_ABILITY ) ) ) );
     gain_exp(ch, ENGINEERING_ABILITY, xpgain );
     ch_printf( ch , "You gain %d engineering experience.", xpgain );
   }

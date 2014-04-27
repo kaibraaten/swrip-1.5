@@ -2,9 +2,9 @@
 #include "mud.h"
 #include "arena.h"
 
-void do_awho(Character *ch, char *argument)
+void do_awho(CHAR_DATA *ch, char *argument)
 {
-  Character *tch;
+  CHAR_DATA *tch;
   char buf[MAX_INPUT_LENGTH];
   char buf2[MAX_INPUT_LENGTH];
   int num=num_in_arena();

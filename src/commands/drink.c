@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_drink( Character *ch, char *argument )
+void do_drink( CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   OBJ_DATA *obj;
@@ -38,7 +38,7 @@ void do_drink( Character *ch, char *argument )
   if ( obj->count > 1 && obj->item_type != ITEM_FOUNTAIN )
     separate_obj(obj);
 
-  if ( !IsNpc(ch) && ch->pcdata->condition[COND_DRUNK] > 40 )
+  if ( !is_npc(ch) && ch->pcdata->condition[COND_DRUNK] > 40 )
     {
       send_to_char( "You fail to reach your mouth.  *Hic*\r\n", ch );
       return;
@@ -73,7 +73,7 @@ void do_drink( Character *ch, char *argument )
 	  send_to_char( "You take a long thirst quenching drink.\r\n", ch );
         }
 
-      if ( !IsNpc(ch) )
+      if ( !is_npc(ch) )
         ch->pcdata->condition[COND_THIRST] = 40;
       break;
 
@@ -109,7 +109,7 @@ void do_drink( Character *ch, char *argument )
       gain_condition( ch, COND_THIRST,
                       amount * liq_table[liquid].liq_affect[COND_THIRST ] );
 
-      if ( !IsNpc(ch) )
+      if ( !is_npc(ch) )
         {
           if ( ch->pcdata->condition[COND_DRUNK]  > 24 )
             send_to_char( "You feel quite sloshed.\r\n", ch );

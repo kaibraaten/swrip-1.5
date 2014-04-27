@@ -3,11 +3,11 @@
 
 extern MOB_INDEX_DATA *mob_index_hash[MAX_KEY_HASH];
 
-void do_minvoke( Character *ch, char *argument )
+void do_minvoke( CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   MOB_INDEX_DATA *pMobIndex;
-  Character *victim;
+  CHAR_DATA *victim;
   short vnum;
 
   one_argument( argument, arg );
@@ -44,11 +44,11 @@ void do_minvoke( Character *ch, char *argument )
   else
     vnum = atoi( arg );
 
-  if ( GetTrustedLevel(ch) < LEVEL_DEMI )
+  if ( get_trust(ch) < LEVEL_DEMI )
     {
       AREA_DATA *pArea;
 
-      if ( IsNpc(ch) )
+      if ( is_npc(ch) )
         {
           send_to_char( "Huh?\r\n", ch );
           return;

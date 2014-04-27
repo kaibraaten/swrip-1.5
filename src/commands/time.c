@@ -15,7 +15,7 @@ char * const month_name[] =
     "The Fall of the Machine", "The Search for Rebellion", "The Rise of a Jedi"
   };
 
-void do_time( Character *ch, char *argument )
+void do_time( CHAR_DATA *ch, char *argument )
 {
   extern char str_boot_time[];
   extern char reboot_time[];

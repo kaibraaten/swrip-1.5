@@ -5,7 +5,7 @@
 
 static bool ship_was_in_range( SHIP_DATA *ship, SHIP_DATA *target );
 
-void do_jumpvector( Character *ch, char *argument )
+void do_jumpvector( CHAR_DATA *ch, char *argument )
 {
   int the_chance, num;
   float randnum;
@@ -54,7 +54,7 @@ void do_jumpvector( Character *ch, char *argument )
       return;
     }
 
-  the_chance = IsNpc(ch) ? ch->top_level
+  the_chance = is_npc(ch) ? ch->top_level
     : (int)  (ch->pcdata->learned[gsn_jumpvector]) ;
   if ( number_percent( ) > the_chance )
     {

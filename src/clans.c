@@ -26,31 +26,29 @@
 #include <time.h>
 #include "mud.h"
 #include "character.h"
-#include "clan.h"
 
 #define MAX_NEST        100
 static  OBJ_DATA *rgObjNest[MAX_NEST];
 
-CerisList *ClanList = NULL;
+CLAN_DATA * first_clan = NULL;
+CLAN_DATA * last_clan = NULL;
 
 MEMBER_LIST * first_member_list = NULL;
 MEMBER_LIST * last_member_list = NULL;
 
 /* local routines */
-static void fread_clan( Clan *clan, FILE *fp );
+static void fread_clan( CLAN_DATA *clan, FILE *fp );
 static bool load_clan_file( const char *clanfile );
 
 /*
  * Get pointer to clan structure from clan name.
  */
-Clan *GetClan( const char *name )
+CLAN_DATA *get_clan( const char *name )
 {
-  CerisListIterator *iter = CreateListIterator( ClanList, ForwardsIterator );
+  CLAN_DATA *clan = NULL;
 
-  for ( ; !ListIterator_IsDone( iter ); ListIterator_Next( iter ) )
+  for ( clan = first_clan; clan; clan = clan->next )
     {
-      Clan *clan = (Clan*) ListIterator_GetData( iter );
-
       if ( !str_cmp( name, clan->name ) )
 	{
 	  return clan;
@@ -60,16 +58,9 @@ Clan *GetClan( const char *name )
   return NULL;
 }
 
-static void WriteClanNameToFile( void *element, void *userData )
+void write_clan_list( void )
 {
-  Clan *clan = (Clan*) element;
-  FILE *filehandle = (FILE*) userData;
-
-  fprintf( filehandle, "%s\n", clan->filename );
-}
-
-void WriteClanList( void )
-{
+  const CLAN_DATA *tclan = NULL;
   FILE *fpout;
   char filename[256];
 
@@ -82,7 +73,10 @@ void WriteClanList( void )
       return;
     }
 
-  List_ForEach( ClanList, WriteClanNameToFile, fpout );
+  for ( tclan = first_clan; tclan; tclan = tclan->next )
+    {
+      fprintf( fpout, "%s\n", tclan->filename );
+    }
 
   fprintf( fpout, "$\n" );
   fclose( fpout );
@@ -91,7 +85,7 @@ void WriteClanList( void )
 /*
  * Save a clan's data to its data file
  */
-void SaveClan( const Clan *clan )
+void save_clan( const CLAN_DATA *clan )
 {
   FILE *fp;
   char filename[256];
@@ -160,7 +154,7 @@ void SaveClan( const Clan *clan )
 /*
  * Read in actual clan data.
  */
-static void fread_clan( Clan *clan, FILE *fp )
+static void fread_clan( CLAN_DATA *clan, FILE *fp )
 {
   for ( ; ; )
     {
@@ -179,7 +173,7 @@ static void fread_clan( Clan *clan, FILE *fp )
           break;
 
         case 'D':
-          KEY( "Description", clan->description, fread_string_hash( fp ) );
+          KEY( "Description", clan->description, fread_string( fp ) );
           break;
 
         case 'E':
@@ -238,20 +232,20 @@ static void fread_clan( Clan *clan, FILE *fp )
           break;
 
         case 'L':
-          KEY( "Leader", clan->leadership.leader, fread_string_hash( fp ) );
+          KEY( "Leader", clan->leadership.leader, fread_string( fp ) );
           break;
 
         case 'M':
           KEY( "MDeaths",  clan->mdeaths, fread_number( fp ) );
           KEY( "Members",  clan->members, fread_number( fp ) );
           KEY( "MKills",   clan->mkills,  fread_number( fp ) );
-          KEY( "MainClan", clan->tmpstr,  fread_string_hash( fp ) );
+          KEY( "MainClan", clan->tmpstr,  fread_string( fp ) );
           break;
 
         case 'N':
-          KEY( "Name",      clan->name,    fread_string_hash( fp ) );
-          KEY( "NumberOne", clan->leadership.number1, fread_string_hash( fp ) );
-          KEY( "NumberTwo", clan->leadership.number2, fread_string_hash( fp ) );
+          KEY( "Name",      clan->name,    fread_string( fp ) );
+          KEY( "NumberOne", clan->leadership.number1, fread_string( fp ) );
+          KEY( "NumberTwo", clan->leadership.number2, fread_string( fp ) );
           break;
 
         case 'P':
@@ -286,12 +280,16 @@ static void fread_clan( Clan *clan, FILE *fp )
 static bool load_clan_file( const char *clanfile )
 {
   char filename[256];
-  Clan *clan;
+  CLAN_DATA *clan;
   FILE *fp;
   bool found = FALSE;
 
-  CREATE( clan, Clan, 1 );
-  clan->SubClans = CreateList();
+  CREATE( clan, CLAN_DATA, 1 );
+  clan->next_subclan = NULL;
+  clan->prev_subclan = NULL;
+  clan->last_subclan = NULL;
+  clan->first_subclan = NULL;
+  clan->mainclan     = NULL;
 
   sprintf( filename, "%s%s", CLAN_DIR, clanfile );
 
@@ -342,9 +340,9 @@ static bool load_clan_file( const char *clanfile )
     {
       ROOM_INDEX_DATA *storeroom = NULL;
 
-      List_AddTail( ClanList, clan );
+      LINK( clan, first_clan, last_clan, next, prev );
 
-      if( !LoadMemberList( clan->filename ) )
+      if( !load_member_list( clan->filename ) )
         {
           MEMBER_LIST *members_list = NULL;
 
@@ -352,7 +350,7 @@ static bool load_clan_file( const char *clanfile )
           CREATE( members_list, MEMBER_LIST, 1 );
           members_list->name = STRALLOC( clan->name );
           LINK( members_list, first_member_list, last_member_list, next, prev );
-          SaveMemberList( members_list );
+          save_member_list( members_list );
         }
 
       if ( clan->storeroom == 0
@@ -439,32 +437,16 @@ static bool load_clan_file( const char *clanfile )
   return found;
 }
 
-static void AttachToMainClan( void *element, void *userData )
-{
-  Clan *clan = (Clan*) element;
-  Clan *mainclan = NULL;
-
-  if ( !clan->tmpstr || clan->tmpstr[0] == '\0' )
-    return;
-
-  mainclan = GetClan( clan->tmpstr );
-
-  if ( !mainclan )
-    return;
-
-  
-  List_AddTail( mainclan->SubClans, clan );
-  clan->mainclan = mainclan;
-}
-
 /*
  * Load in all the clan files.
  */
-void LoadClans( void )
+void load_clans( void )
 {
   FILE *fpList = NULL;
   char clanlist[256];
+  CLAN_DATA *clan = NULL;
 
+  log_string( "Loading clans..." );
   sprintf( clanlist, "%s%s", CLAN_DIR, CLAN_LIST );
 
   if ( ( fpList = fopen( clanlist, "r" ) ) == NULL )
@@ -472,8 +454,6 @@ void LoadClans( void )
       perror( clanlist );
       exit( 1 );
     }
-
-  ClanList = CreateList();
 
   for ( ; ; )
     {
@@ -492,19 +472,32 @@ void LoadClans( void )
     }
 
   fclose( fpList );
-  log_string( " Done clans" );
-  log_string( " Sorting clans...." );
+  log_string( " Done clans\r\nSorting clans...." );
 
-  List_ForEach( ClanList, AttachToMainClan, NULL );
+  for ( clan=first_clan; clan; clan = clan->next )
+    {
+      CLAN_DATA *bosclan = NULL;
+
+      if ( !clan->tmpstr || clan->tmpstr[0] == '\0' )
+        continue;
+
+      bosclan = get_clan ( clan->tmpstr );
+
+      if ( !bosclan )
+        continue;
+
+      LINK( clan , bosclan->first_subclan , bosclan->last_subclan , next_subclan, prev_subclan );
+      clan->mainclan = bosclan;
+    }
 
   log_string(" Done sorting" );
 }
 
-void ShowMembers( const Character *ch, const char *argument, const char *format )
+void show_members( const CHAR_DATA *ch, const char *argument, const char *format )
 {
   MEMBER_LIST *members_list = NULL;
   MEMBER_DATA *member = NULL;
-  const Clan *clan = NULL;
+  const CLAN_DATA *clan = NULL;
   int members = 0;
 
   for( members_list = first_member_list; members_list; members_list = members_list->next )
@@ -516,7 +509,7 @@ void ShowMembers( const Character *ch, const char *argument, const char *format 
   if( !members_list )
     return;
 
-  clan = GetClan( argument );
+  clan = get_clan( argument );
 
   if ( !clan  )
     return;
@@ -650,7 +643,7 @@ void ShowMembers( const Character *ch, const char *argument, const char *format 
                 "------------------------------------------------------------\r\n" );
 }
 
-void RemoveMember( const Character *ch )
+void remove_member( const CHAR_DATA *ch )
 {
   MEMBER_LIST   *members_list;
   MEMBER_DATA   *member;
@@ -669,18 +662,18 @@ void RemoveMember( const Character *ch )
                 STRFREE( member->name );
                 STRFREE( member->since );
                 DISPOSE( member );
-                SaveMemberList( members_list );
+                save_member_list( members_list );
                 break;
               }
           }
     }
 }
 
-void SaveMemberList( const MEMBER_LIST *members_list )
+void save_member_list( const MEMBER_LIST *members_list )
 {
   MEMBER_DATA   *member;
   FILE          *fp;
-  Clan    *clan;
+  CLAN_DATA    *clan;
   char         buf[MAX_STRING_LENGTH];
 
   if( !members_list )
@@ -689,7 +682,7 @@ void SaveMemberList( const MEMBER_LIST *members_list )
       return;
     }
 
-  if( ( clan = GetClan( members_list->name )) == NULL )
+  if( ( clan = get_clan( members_list->name )) == NULL )
     {
       bug( "save_member_list: no such clan: %s", members_list->name );
       return;
@@ -713,7 +706,7 @@ void SaveMemberList( const MEMBER_LIST *members_list )
 
 }
 
-bool LoadMemberList( const char *filename )
+bool load_member_list( const char *filename )
 {
   FILE *fp;
   char buf[MAX_STRING_LENGTH];
@@ -736,7 +729,7 @@ bool LoadMemberList( const char *filename )
 
       if( !str_cmp( word, "Name" ) )
         {
-          members_list->name = fread_string_hash( fp );
+          members_list->name = fread_string( fp );
           continue;
         }
       else
@@ -769,12 +762,12 @@ bool LoadMemberList( const char *filename )
 
 }
 
-void UpdateMember( const Character *ch )
+void update_member( const CHAR_DATA *ch )
 {
   MEMBER_LIST *members_list;
   MEMBER_DATA *member;
 
-  if( IsNpc( ch ) || IsImmortal(ch) || !is_clanned( ch ) )
+  if( is_npc( ch ) || is_immortal(ch) || !ch->pcdata->clan )
     return;
 
   for( members_list = first_member_list; members_list; members_list = members_list->next )
@@ -826,13 +819,8 @@ void UpdateMember( const Character *ch )
 		}
 
 	      LINK( member, members_list->first_member, members_list->last_member, next, prev );
-	      SaveMemberList( members_list );
+	      save_member_list( members_list );
 	    }
 	}
     }
-}
-
-bool HasSubClans( const Clan *clan )
-{
-  return List_Count( clan->SubClans ) > 0;
 }

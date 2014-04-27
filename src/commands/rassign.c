@@ -1,13 +1,13 @@
 #include "character.h"
 #include "mud.h"
 
-void do_rassign( Character *ch, char *argument )
+void do_rassign( CHAR_DATA *ch, char *argument )
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
   char arg3[MAX_INPUT_LENGTH];
   short  r_lo, r_hi;
-  Character *victim;
+  CHAR_DATA *victim;
 
   argument = one_argument( argument, arg1 );
   argument = one_argument( argument, arg2 );
@@ -27,7 +27,7 @@ void do_rassign( Character *ch, char *argument )
       return;
     }
 
-  if ( IsNpc( victim ) || GetTrustedLevel( victim ) < LEVEL_AVATAR )
+  if ( is_npc( victim ) || get_trust( victim ) < LEVEL_AVATAR )
     {
       send_to_char( "They wouldn't know what to do with a room range.\r\n", ch );
       return;

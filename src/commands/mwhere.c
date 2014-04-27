@@ -1,10 +1,10 @@
 #include "character.h"
 #include "mud.h"
 
-void do_mwhere( Character *ch, char *argument )
+void do_mwhere( CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  Character *victim;
+  CHAR_DATA *victim;
   bool found;
 
   one_argument( argument, arg );
@@ -18,7 +18,7 @@ void do_mwhere( Character *ch, char *argument )
   found = FALSE;
   for ( victim = first_char; victim; victim = victim->next )
     {
-      if ( IsNpc(victim)
+      if ( is_npc(victim)
            &&   victim->in_room
            &&   nifty_is_name( arg, victim->name ) )
         {

@@ -8,7 +8,7 @@
  *
  * the exit must have EX_PASSAGE set
  */
-void do_mp_close_passage( Character *ch, char *argument )
+void do_mp_close_passage( CHAR_DATA *ch, char *argument )
 {
   char arg1[ MAX_INPUT_LENGTH ];
   char arg2[ MAX_INPUT_LENGTH ];
@@ -20,7 +20,7 @@ void do_mp_close_passage( Character *ch, char *argument )
   if ( is_affected_by( ch, AFF_CHARM ) )
     return;
 
-  if ( !IsNpc( ch ) || ( ch->desc && GetTrustedLevel( ch ) < LEVEL_IMMORTAL )  )
+  if ( !is_npc( ch ) || ( ch->desc && get_trust( ch ) < LEVEL_IMMORTAL )  )
     {
       send_to_char( "Huh?\r\n", ch );
       return;

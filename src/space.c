@@ -144,36 +144,22 @@ bool    land_bus( SHIP_DATA *ship, int destination );
 void    launch_bus( SHIP_DATA *ship );
 #endif
 
-typedef struct MessageBundle
-{
-  short Color;
-  const char *Message;
-} MessageBundle;
-
-static void SendToCharacterInRoom( void *element, void *userData )
-{
-  MessageBundle *args = (MessageBundle*) userData;
-  Character *recipient = (Character*) element;
-
-  set_char_color( args->Color, recipient );
-  ch_printf( recipient, "%s\r\n", args->Message );
-}
-
 void echo_to_room_dnr( int ecolor, ROOM_INDEX_DATA *room,
 		       const char *argument )
 {
-  MessageBundle args;
+  CHAR_DATA *vic = NULL;
 
   if ( room == NULL )
     return;
 
-  args.Color = ecolor;
-  args.Message = argument;
-
-  List_ForEach( room->People, SendToCharacterInRoom, &args );
+  for ( vic = room->first_person; vic; vic = vic->next_in_room )
+    {
+      set_char_color( ecolor, vic );
+      send_to_char( argument, vic );
+    }
 }
 
-void new_missile( SHIP_DATA *ship , SHIP_DATA *target , Character *ch , int missiletype )
+void new_missile( SHIP_DATA *ship , SHIP_DATA *target , CHAR_DATA *ch , int missiletype )
 {
   SPACE_DATA *spaceobject;
   MISSILE_DATA *missile;
@@ -256,7 +242,7 @@ void update_missiles( void )
               if ( target->chaff_released <= 0)
                 {
 		  bool ch_found = FALSE;
-		  Character *ch = NULL;
+		  CHAR_DATA *ch = NULL;
 		  char buf[MAX_STRING_LENGTH];
 
                   echo_to_room( AT_YELLOW, get_room_index(ship->room.gunseat),
@@ -270,7 +256,7 @@ void update_missiles( void )
 
                   for ( ch = first_char; ch; ch = ch->next )
 		    {
-		      if ( !IsNpc( ch ) && nifty_is_name( missile->fired_by, ch->name ) )
+		      if ( !is_npc( ch ) && nifty_is_name( missile->fired_by, ch->name ) )
 			{
 			  ch_found = TRUE;
 			  damage_ship_ch( target, 30 + missile->missiletype * missile->missiletype * 30, 50 + missile->missiletype * missile->missiletype * missile->missiletype * 50, ch );

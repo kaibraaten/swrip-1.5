@@ -2,9 +2,9 @@
 #include "mud.h"
 #include "editor.h"
 
-void do_bio( Character *ch, char *argument )
+void do_bio( CHAR_DATA *ch, char *argument )
 {
-  if ( IsNpc( ch ) )
+  if ( is_npc( ch ) )
     {
       send_to_char( "Mobs can't set bio's!\r\n", ch );
       return;

@@ -1,9 +1,9 @@
 #include "character.h"
 #include "mud.h"
 
-void do_dnd( Character *ch, char *argument )
+void do_dnd( CHAR_DATA *ch, char *argument )
 {
-  if ( !IsNpc(ch) && ch->pcdata )
+  if ( !is_npc(ch) && ch->pcdata )
     {
       if ( IS_SET(ch->pcdata->flags, PCFLAG_DND) )
 	{

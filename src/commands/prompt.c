@@ -2,11 +2,11 @@
 #include "mud.h"
 #include "character.h"
 
-void do_prompt( Character *ch, char *argument )
+void do_prompt( CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
 
-  if ( IsNpc(ch) )
+  if ( is_npc(ch) )
     {
       send_to_char( "NPC's can't change their prompt..\r\n", ch );
       return;

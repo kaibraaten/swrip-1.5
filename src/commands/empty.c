@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_empty( Character *ch, char *argument )
+void do_empty( CHAR_DATA *ch, char *argument )
 {
   OBJ_DATA *obj;
   char arg1[MAX_INPUT_LENGTH];
@@ -66,7 +66,7 @@ void do_empty( Character *ch, char *argument )
       if ( arg2[0] == '\0' )
         {
           if ( IS_SET( ch->in_room->room_flags, ROOM_NODROP )
-               || ( !IsNpc(ch) &&  IS_SET( ch->act, PLR_LITTERBUG ) ) )
+               || ( !is_npc(ch) &&  IS_SET( ch->act, PLR_LITTERBUG ) ) )
             {
               set_char_color( AT_MAGIC, ch );
               send_to_char( "A magical force stops you!\r\n", ch );

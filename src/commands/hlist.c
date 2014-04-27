@@ -6,15 +6,15 @@
  * Show help topics in a level range                            -Thoric
  * Idea suggested by Gorog
  */
-void do_hlist( Character *ch, char *argument )
+void do_hlist( CHAR_DATA *ch, char *argument )
 {
   int min = 0;
   int max = 0;
-  int maxlimit = GetTrustedLevel(ch);
+  int maxlimit = get_trust(ch);
   int minlimit = maxlimit >= LEVEL_GREATER ? -1 : 0;
   int cnt = 0;
   char arg[MAX_INPUT_LENGTH];
-  CerisMapIterator *iter = NULL;
+  HELP_DATA *help = NULL;
 
   argument = one_argument( argument, arg );
 
@@ -40,21 +40,14 @@ void do_hlist( Character *ch, char *argument )
   set_pager_color( AT_GREEN, ch );
   pager_printf( ch, "Help Topics in level range %d to %d:\r\n\r\n", min, max );
 
-  iter = CreateMapIterator( HelpFiles );
-
-  for ( cnt = 0 ; !MapIterator_IsDone( iter ); MapIterator_Next( iter ) )
+  for ( cnt = 0, help = first_help; help; help = help->next )
     {
-      HelpFile *help = (HelpFile*) MapIterator_GetKey( iter );
-      int level = GetHelpLevel( help );
-
-      if ( level >= min && level <= max )
+      if ( help->level >= min && help->level <= max )
 	{
-	  pager_printf( ch, "  %3d %s\r\n", level, GetHelpKeyword( help ) );
+	  pager_printf( ch, "  %3d %s\r\n", help->level, help->keyword );
 	  ++cnt;
 	}
     }
-
-  DestroyMapIterator( iter );
 
   if ( cnt )
     {

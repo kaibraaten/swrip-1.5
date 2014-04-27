@@ -4,7 +4,7 @@
 #include "character.h"
 #include "turret.h"
 
-void do_repairship(Character *ch, char *argument )
+void do_repairship(CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   int the_chance, change;
@@ -34,7 +34,7 @@ void do_repairship(Character *ch, char *argument )
 	  return;
         }
 
-      the_chance = IsNpc(ch) ? ch->top_level
+      the_chance = is_npc(ch) ? ch->top_level
         : (int) (ch->pcdata->learned[gsn_shipmaintenance]);
       if ( number_percent( ) < the_chance )
         {

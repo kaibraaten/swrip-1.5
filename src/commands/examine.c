@@ -1,7 +1,7 @@
 #include <string.h>
 #include "mud.h"
 
-void do_examine( Character *ch, char *argument )
+void do_examine( CHAR_DATA *ch, char *argument )
 {
   char buf[MAX_STRING_LENGTH];
   char arg[MAX_INPUT_LENGTH];

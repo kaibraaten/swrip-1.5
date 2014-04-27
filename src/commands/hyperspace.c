@@ -3,7 +3,7 @@
 #include "mud.h"
 #include "character.h"
 
-void do_hyperspace(Character *ch, char *argument )
+void do_hyperspace(CHAR_DATA *ch, char *argument )
 {
   int the_chance;
   Vector3 tmp;
@@ -185,17 +185,17 @@ void do_hyperspace(Character *ch, char *argument )
     }
 
   if ( ship->sclass == FIGHTER_SHIP )
-    the_chance = IsNpc(ch) ? ch->top_level
+    the_chance = is_npc(ch) ? ch->top_level
       : (int)  (ch->pcdata->learned[gsn_starfighters]) ;
 
   if ( ship->sclass == MIDSIZE_SHIP )
-    the_chance = IsNpc(ch) ? ch->top_level
+    the_chance = is_npc(ch) ? ch->top_level
       : (int)  (ch->pcdata->learned[gsn_midships]) ;
 
   /* changed mobs so they can not fly capital ships. Forcers could possess mobs
      and fly them - Darrik Vequir */
   if ( ship->sclass == CAPITAL_SHIP )
-    the_chance = IsNpc(ch) ? 0
+    the_chance = is_npc(ch) ? 0
       : (int) (ch->pcdata->learned[gsn_capitalships]);
 
   if ( number_percent( ) > the_chance )

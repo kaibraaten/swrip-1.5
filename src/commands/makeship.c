@@ -2,7 +2,7 @@
 #include "mud.h"
 #include "turret.h"
 
-void do_makeship( Character *ch, char *argument )
+void do_makeship( CHAR_DATA *ch, char *argument )
 {
   SHIP_DATA *ship = NULL;
   char arg[MAX_INPUT_LENGTH];

@@ -1,10 +1,10 @@
 #include "character.h"
 #include "mud.h"
 
-void do_murder( Character *ch, char *argument )
+void do_murder( CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  Character *victim;
+  CHAR_DATA *victim;
   char  logbuf[MAX_STRING_LENGTH];
 
   one_argument( argument, arg );
@@ -51,7 +51,7 @@ void do_murder( Character *ch, char *argument )
       return;
     }
 
-  if ( !IsNpc( victim ) && IS_SET( ch->act, PLR_NICE ) )
+  if ( !is_npc( victim ) && IS_SET( ch->act, PLR_NICE ) )
     {
       send_to_char( "You feel too nice to do that!\r\n", ch );
       return;

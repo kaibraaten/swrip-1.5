@@ -1,9 +1,9 @@
 #include "mud.h"
 #include "character.h"
 
-ch_ret spell_sulfurous_spray( int sn, int level, Character *ch, void *vo )
+ch_ret spell_sulfurous_spray( int sn, int level, CHAR_DATA *ch, void *vo )
 {
-  Character *victim = (Character *) vo;
+  CHAR_DATA *victim = (CHAR_DATA *) vo;
   int dam;
 
   level       = UMAX(0, level);

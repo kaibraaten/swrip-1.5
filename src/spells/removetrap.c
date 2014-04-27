@@ -3,7 +3,7 @@
 
 extern char *spell_target_name;
 
-ch_ret spell_remove_trap( int sn, int level, Character *ch, void *vo )
+ch_ret spell_remove_trap( int sn, int level, CHAR_DATA *ch, void *vo )
 {
   OBJ_DATA *obj;
   OBJ_DATA *trap;
@@ -45,7 +45,7 @@ ch_ret spell_remove_trap( int sn, int level, Character *ch, void *vo )
     }
 
 
-  if ( chance(ch, 70 + GetCurrentWis(ch)) )
+  if ( chance(ch, 70 + get_curr_wis(ch)) )
     {
       send_to_char( "Ooops!\r\n", ch );
       retcode = spring_trap(ch, trap);

@@ -2,7 +2,7 @@
 #include "mud.h"
 
 /* Allows PCs to learn spells embedded in object. Should prove interesting. - Samson 8-9-98 */
-void do_study( Character *ch, char *argument ) /* study by Absalom */
+void do_study( CHAR_DATA *ch, char *argument ) /* study by Absalom */
 {
   char arg[MAX_INPUT_LENGTH];
   OBJ_DATA *obj;

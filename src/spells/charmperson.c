@@ -1,9 +1,9 @@
 #include "character.h"
 #include "mud.h"
 
-ch_ret spell_charm_person( int sn, int level, Character *ch, void *vo )
+ch_ret spell_charm_person( int sn, int level, CHAR_DATA *ch, void *vo )
 {
-  Character *victim = (Character *) vo;
+  CHAR_DATA *victim = (CHAR_DATA *) vo;
   AFFECT_DATA af;
   int charm_chance;
   char buf[MAX_STRING_LENGTH];
@@ -22,7 +22,7 @@ ch_ret spell_charm_person( int sn, int level, Character *ch, void *vo )
       return rSPELL_FAILED;
     }
 
-  if ( (!IsNpc( victim ) && !IsNpc( ch )) || ch->race == RACE_DROID )
+  if ( (!is_npc( victim ) && !is_npc( ch )) || ch->race == RACE_DROID )
     {
       send_to_char( "I don't think so...\r\n", ch );
       send_to_char( "You feel as if someone tried to enter your mind but failed..\r\n", victim );

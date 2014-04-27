@@ -223,13 +223,13 @@ void fread_spaceobject( SPACE_DATA *spaceobject, FILE *fp )
           break;
 
         case 'L':
-          KEY( "Locationa",     spaceobject->landing_site.locationa,         fread_string_hash( fp ) );
-          KEY( "Locationb",     spaceobject->landing_site.locationb,         fread_string_hash( fp ) );
-          KEY( "Locationc",     spaceobject->landing_site.locationc,         fread_string_hash( fp ) );
+          KEY( "Locationa",     spaceobject->landing_site.locationa,         fread_string( fp ) );
+          KEY( "Locationb",     spaceobject->landing_site.locationb,         fread_string( fp ) );
+          KEY( "Locationc",     spaceobject->landing_site.locationc,         fread_string( fp ) );
           break;
 
         case 'N':
-          KEY( "Name",  spaceobject->name,              fread_string_hash( fp ) );
+          KEY( "Name",  spaceobject->name,              fread_string( fp ) );
           break;
 
         case 'S':
@@ -329,6 +329,7 @@ void load_spaceobjects( void )
   FILE *fpList = NULL;
   char spaceobjectlist[256];
 
+  log_string( "Loading spaceobjects..." );
   sprintf( spaceobjectlist, "%s%s", SPACE_DIR, SPACE_LIST );
 
   if ( ( fpList = fopen( spaceobjectlist, "r" ) ) == NULL )

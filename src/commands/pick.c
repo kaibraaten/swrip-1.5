@@ -2,17 +2,15 @@
 #include "mud.h"
 #include "character.h"
 
-static Character *GetAlertMobInRoom( const Character *offender );
-
-void do_pick( Character *ch, char *argument )
+void do_pick( CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  Character *alertMob = NULL;
+  CHAR_DATA *gch;
   OBJ_DATA *obj;
   EXIT_DATA *pexit;
   SHIP_DATA *ship;
 
-  if ( IsNpc(ch) && is_affected_by( ch, AFF_CHARM ) )
+  if ( is_npc(ch) && is_affected_by( ch, AFF_CHARM ) )
     {
       send_to_char( "You can't concentrate enough for that.\r\n", ch );
       return;
@@ -38,14 +36,16 @@ void do_pick( Character *ch, char *argument )
   set_wait_state( ch, skill_table[gsn_pick_lock]->beats );
 
   /* look for guards */
-  alertMob = GetAlertMobInRoom( ch );
-
-  if( alertMob )
+  for ( gch = ch->in_room->first_person; gch; gch = gch->next_in_room )
     {
-      act( AT_PLAIN, "$N is standing too close to the lock.",
-	   ch, NULL, alertMob, TO_CHAR );
-      return;
+      if ( is_npc(gch) && is_awake(gch) && get_level( ch, SMUGGLING_ABILITY ) < gch->top_level )
+        {
+          act( AT_PLAIN, "$N is standing too close to the lock.",
+               ch, NULL, gch, TO_CHAR );
+          return;
+        }
     }
+
 
   if ( ( pexit = find_door( ch, arg, TRUE ) ) != NULL )
     {
@@ -67,7 +67,7 @@ void do_pick( Character *ch, char *argument )
           return;
         }
 
-      if ( !IsNpc(ch) && number_percent( ) > ch->pcdata->learned[gsn_pick_lock] )
+      if ( !is_npc(ch) && number_percent( ) > ch->pcdata->learned[gsn_pick_lock] )
         {
           send_to_char( "You failed.\r\n", ch);
           learn_from_failure( ch, gsn_pick_lock );
@@ -106,7 +106,7 @@ void do_pick( Character *ch, char *argument )
           return;
         }
 
-      if ( !IsNpc(ch) && number_percent( ) > ch->pcdata->learned[gsn_pick_lock] )
+      if ( !is_npc(ch) && number_percent( ) > ch->pcdata->learned[gsn_pick_lock] )
         {
           send_to_char( "You failed.\r\n", ch);
           learn_from_failure( ch, gsn_pick_lock );
@@ -140,7 +140,7 @@ void do_pick( Character *ch, char *argument )
 
       set_wait_state( ch, skill_table[gsn_pickshiplock]->beats );
 
-      if ( IsNpc(ch) || !ch->pcdata || number_percent( ) > ch->pcdata->learned[gsn_pickshiplock] )
+      if ( is_npc(ch) || !ch->pcdata || number_percent( ) > ch->pcdata->learned[gsn_pickshiplock] )
         {
           send_to_char( "You failed.\r\n", ch);
           learn_from_failure( ch, gsn_pickshiplock );
@@ -150,7 +150,7 @@ void do_pick( Character *ch, char *argument )
             return;
           for ( d = first_descriptor; d; d = d->next )
             {
-              Character *victim = d->original ? d->original : d->character;
+              CHAR_DATA *victim = d->original ? d->original : d->character;
 
               if ( d->connection_state != CON_PLAYING )
                 continue;
@@ -158,14 +158,14 @@ void do_pick( Character *ch, char *argument )
               if ( !check_pilot(victim,ship) )
                 continue;
 
-              if ( !HasComlink( victim ) )
+              if ( !has_comlink( victim ) )
                 continue;
 
-	      if ( !IsNpc( victim ) && victim->switched
+	      if ( !is_npc( victim ) && victim->switched
                    && !IS_SET(victim->switched->act, ACT_POLYMORPHED)
                    && !is_affected_by(victim->switched, AFF_POSSESS) )
                 continue;
-              else if ( !IsNpc( victim ) && victim->switched
+              else if ( !is_npc( victim ) && victim->switched
                         && (IS_SET(victim->switched->act, ACT_POLYMORPHED)
                             || is_affected_by(victim->switched, AFF_POSSESS) ) )
                 victim = victim->switched;
@@ -194,7 +194,7 @@ void do_pick( Character *ch, char *argument )
             return;
           for ( d = first_descriptor; d; d = d->next )
             {
-              Character *victim = d->original ? d->original : d->character;
+              CHAR_DATA *victim = d->original ? d->original : d->character;
 
               if ( d->connection_state != CON_PLAYING )
                 continue;
@@ -202,14 +202,14 @@ void do_pick( Character *ch, char *argument )
               if ( !check_pilot(victim,ship) )
                 continue;
 
-              if ( !HasComlink( victim ) )
+              if ( !has_comlink( victim ) )
                 continue;
 
-              if ( !IsNpc( victim ) && victim->switched
+              if ( !is_npc( victim ) && victim->switched
 		   && !IS_SET(victim->switched->act, ACT_POLYMORPHED)
                    && !is_affected_by(victim->switched, AFF_POSSESS) )
                 continue;
-              else if ( !IsNpc( victim ) && victim->switched
+              else if ( !is_npc( victim ) && victim->switched
                         && (IS_SET(victim->switched->act, ACT_POLYMORPHED)
                             || is_affected_by(victim->switched, AFF_POSSESS) ) )
                 victim = victim->switched;
@@ -227,20 +227,4 @@ void do_pick( Character *ch, char *argument )
     }
 
   ch_printf( ch, "You see no %s here.\r\n", arg );
-}
-
-static bool MobIsAlert( void *element, void *userData )
-{
-  const Character *mob = (Character*) element;
-  const Character *offender = (Character*) userData;
-
-  return mob != offender
-    && IsNpc( mob )
-    && is_awake( mob )
-    && mob->top_level > GetLevel( offender, SMUGGLING_ABILITY );
-}
-
-static Character *GetAlertMobInRoom( const Character *offender )
-{
-  return (Character*) List_FindIf( offender->in_room->People, MobIsAlert, (void*) offender );
 }

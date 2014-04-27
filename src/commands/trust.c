@@ -1,11 +1,11 @@
 #include "mud.h"
 #include "character.h"
 
-void do_trust( Character *ch, char *argument )
+void do_trust( CHAR_DATA *ch, char *argument )
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
-  Character *victim;
+  CHAR_DATA *victim;
   int level;
 
   argument = one_argument( argument, arg1 );
@@ -29,13 +29,13 @@ void do_trust( Character *ch, char *argument )
       return;
     }
 
-  if ( level > GetTrustedLevel( ch ) )
+  if ( level > get_trust( ch ) )
     {
       send_to_char( "Limited to your own trust.\r\n", ch );
       return;
     }
 
-  if ( ch->top_level < LEVEL_SUPREME && GetTrustedLevel( victim ) >= GetTrustedLevel( ch ) )
+  if ( ch->top_level < LEVEL_SUPREME && get_trust( victim ) >= get_trust( ch ) )
     {
       send_to_char( "You can't do that.\r\n", ch );
       return;

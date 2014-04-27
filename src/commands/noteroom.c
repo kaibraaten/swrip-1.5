@@ -2,7 +2,7 @@
 #include "mud.h"
 #include "character.h"
 
-void do_noteroom( Character *ch, char *argument )
+void do_noteroom( CHAR_DATA *ch, char *argument )
 {
   BOARD_DATA *board;
   char arg[MAX_STRING_LENGTH];

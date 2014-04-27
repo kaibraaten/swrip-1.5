@@ -1,12 +1,12 @@
 #include "character.h"
 #include "mud.h"
 
-void do_steal( Character *ch, char *argument )
+void do_steal( CHAR_DATA *ch, char *argument )
 {
   char buf  [MAX_STRING_LENGTH];
   char arg1 [MAX_INPUT_LENGTH];
   char arg2 [MAX_INPUT_LENGTH];
-  Character *victim, *mst;
+  CHAR_DATA *victim, *mst;
   OBJ_DATA *obj , *obj_next;
   int percent, xp;
 
@@ -49,12 +49,12 @@ void do_steal( Character *ch, char *argument )
 
   set_wait_state( ch, skill_table[gsn_steal]->beats );
   percent  = number_percent( ) + ( is_awake(victim) ? 10 : -50 )
-    - (GetCurrentLck(ch) - 15) + (GetCurrentLck(victim) - 13)
-    + TimesKilled( ch, victim )*7;
+    - (get_curr_lck(ch) - 15) + (get_curr_lck(victim) - 13)
+    + times_killed( ch, victim )*7;
 
   if ( ( IS_SET( victim->immune, RIS_STEAL ) ) ||
        ( victim->position != POS_STUNNED && (victim->position == POS_FIGHTING
-                                             ||   percent > ( IsNpc(ch) ? 90 : ch->pcdata->learned[gsn_steal] ) ) ) )
+                                             ||   percent > ( is_npc(ch) ? 90 : ch->pcdata->learned[gsn_steal] ) ) ) )
     {
       /*
        * Failure.
@@ -63,31 +63,31 @@ void do_steal( Character *ch, char *argument )
       act( AT_ACTION, "$n tried to steal from you!\r\n", ch, NULL, victim, TO_VICT    );
       act( AT_ACTION, "$n tried to steal from $N.\r\n",  ch, NULL, victim, TO_NOTVICT );
 
-      if (IsNpc(victim))
+      if (is_npc(victim))
 	{
           sprintf( buf, "%s is a bloody thief!", ch->name );
           do_yell( victim, buf );
         }
 
       learn_from_failure( ch, gsn_steal );
-      if ( !IsNpc(ch) )
+      if ( !is_npc(ch) )
         {
           if ( legal_loot( ch, victim ) )
             {
-              if ( IsNpc(victim) )
+              if ( is_npc(victim) )
                 global_retcode = multi_hit( victim, ch, TYPE_UNDEFINED );
             }
           else
             {
               /* log_string( buf ); */
-              if ( IsNpc( ch ) )
+              if ( is_npc( ch ) )
                 {
                   if ( (mst = ch->master) == NULL )
                     return;
                 }
               else
                 mst = ch;
-              if ( IsNpc( mst ) )
+              if ( is_npc( mst ) )
                 return;
 
             }
@@ -96,8 +96,8 @@ void do_steal( Character *ch, char *argument )
       return;
     }
 
-  if ( IsNpc(victim) )
-    AddKill( ch, victim );  /* makes it harder to steal from same char */
+  if ( is_npc(victim) )
+    add_kill( ch, victim );  /* makes it harder to steal from same char */
 
   if ( !str_cmp( arg1, "credits"  )
        ||   !str_cmp( arg1, "credit" )
@@ -116,12 +116,12 @@ void do_steal( Character *ch, char *argument )
       ch->gold     += amount;
       victim->gold -= amount;
       ch_printf( ch, "Aha!  You got %d credits.\r\n", amount );
-      if ( !IsNpc(victim) || (ch->pcdata->learned[gsn_steal] < 50 ) )
+      if ( !is_npc(victim) || (ch->pcdata->learned[gsn_steal] < 50 ) )
         learn_from_success( ch, gsn_steal );
 
-      if ( IsNpc( victim ) )
+      if ( is_npc( victim ) )
 	{
-	  xp = UMIN( amount*10 , ( exp_level( GetLevel(ch, SMUGGLING_ABILITY ) + 1 ) - exp_level( GetLevel(ch, SMUGGLING_ABILITY))  ) / 35  );
+	  xp = UMIN( amount*10 , ( exp_level( get_level(ch, SMUGGLING_ABILITY ) + 1 ) - exp_level( get_level(ch, SMUGGLING_ABILITY))  ) / 35  );
 	  xp = UMIN( xp , xp_compute( ch, victim ) );
 	  gain_exp( ch, SMUGGLING_ABILITY, xp );
 	  ch_printf( ch, "&WYou gain %ld smuggling experience!\r\n", xp );
@@ -176,11 +176,11 @@ void do_steal( Character *ch, char *argument )
     }
 
   send_to_char( "Ok.\r\n", ch );
-  if ( IsNpc(victim)  || ch->pcdata->learned[gsn_steal] )
+  if ( is_npc(victim)  || ch->pcdata->learned[gsn_steal] )
     learn_from_success( ch, gsn_steal );
-  if ( IsNpc( victim ) )
+  if ( is_npc( victim ) )
     {
-      xp = UMIN( obj->cost*10 , ( exp_level( GetLevel(ch, SMUGGLING_ABILITY) + 1) - exp_level( GetLevel( ch, SMUGGLING_ABILITY) ) ) / 10  );
+      xp = UMIN( obj->cost*10 , ( exp_level( get_level(ch, SMUGGLING_ABILITY) + 1) - exp_level( get_level( ch, SMUGGLING_ABILITY) ) ) / 10  );
       xp = UMIN( xp , xp_compute( ch, victim ) );
       gain_exp( ch, SMUGGLING_ABILITY, xp );
       ch_printf( ch, "&WYou gain %ld smuggling experience!\r\n", xp );

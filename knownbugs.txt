@@ -9,3 +9,6 @@
 * It would seem to me that the entire quest system is disabled seeing
   as spec_questmaster() returns FALSE every time. Look into this, and
   remove the entire quest code if its not actually used.
+
+* LOOK <mobile> does not work at present. Neither does LOOK SELF. In fact, only
+  directions seem to work.

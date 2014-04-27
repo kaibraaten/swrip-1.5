@@ -3,7 +3,7 @@
 
 extern OBJ_INDEX_DATA *obj_index_hash[MAX_KEY_HASH];
 
-void do_oinvoke( Character *ch, char *argument )
+void do_oinvoke( CHAR_DATA *ch, char *argument )
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
@@ -23,7 +23,7 @@ void do_oinvoke( Character *ch, char *argument )
 
   if ( arg2[0] == '\0' )
     {
-      level = GetTrustedLevel( ch );
+      level = get_trust( ch );
     }
   else
     {
@@ -34,7 +34,7 @@ void do_oinvoke( Character *ch, char *argument )
         }
       level = atoi( arg2 );
 
-      if ( level < 0 || level > GetTrustedLevel( ch ) )
+      if ( level < 0 || level > get_trust( ch ) )
 	{
           send_to_char( "Limited to your trust level.\r\n", ch );
           return;
@@ -67,11 +67,11 @@ void do_oinvoke( Character *ch, char *argument )
   else
     vnum = atoi( arg1 );
 
-  if ( GetTrustedLevel(ch) < LEVEL_DEMI )
+  if ( get_trust(ch) < LEVEL_DEMI )
     {
       AREA_DATA *pArea;
 
-      if ( IsNpc(ch) )
+      if ( is_npc(ch) )
         {
           send_to_char( "Huh?\r\n", ch );
           return;

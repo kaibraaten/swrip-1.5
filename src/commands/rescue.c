@@ -1,14 +1,14 @@
 #include "mud.h"
 #include "character.h"
 
-void do_rescue( Character *ch, char *argument )
+void do_rescue( CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  Character *victim;
-  Character *fch;
+  CHAR_DATA *victim;
+  CHAR_DATA *fch;
   int percent;
 
-  if ( IsNpc(ch) && is_affected_by( ch, AFF_CHARM ) )
+  if ( is_npc(ch) && is_affected_by( ch, AFF_CHARM ) )
     {
       send_to_char( "You can't concentrate enough for that.\r\n", ch );
       return;
@@ -39,7 +39,7 @@ void do_rescue( Character *ch, char *argument )
       return;
     }
 
-  if ( !IsNpc(ch) && IsNpc(victim) )
+  if ( !is_npc(ch) && is_npc(victim) )
     {
       send_to_char( "Doesn't need your help!\r\n", ch );
       return;
@@ -60,11 +60,11 @@ void do_rescue( Character *ch, char *argument )
   ch->alignment = ch->alignment + 5;
   ch->alignment = URANGE( -1000, ch->alignment, 1000 );
 
-  percent = number_percent( ) - (GetCurrentLck(ch) - 14)
-    - (GetCurrentLck(victim) - 16);
+  percent = number_percent( ) - (get_curr_lck(ch) - 14)
+    - (get_curr_lck(victim) - 16);
 
   set_wait_state( ch, skill_table[gsn_rescue]->beats );
-  if ( !IsNpc(ch) && percent > ch->pcdata->learned[gsn_rescue] )
+  if ( !is_npc(ch) && percent > ch->pcdata->learned[gsn_rescue] )
     {
       send_to_char( "You fail the rescue.\r\n", ch );
       act( AT_SKILL, "$n tries to rescue you!", ch, NULL, victim, TO_VICT   );

@@ -1,13 +1,13 @@
 #include "mud.h"
 #include "character.h"
 
-void do_aid( Character *ch, char *argument )
+void do_aid( CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  Character *victim;
+  CHAR_DATA *victim;
   int percent;
 
-  if ( IsNpc(ch) && is_affected_by( ch, AFF_CHARM ) )
+  if ( is_npc(ch) && is_affected_by( ch, AFF_CHARM ) )
     {
       send_to_char( "You can't concentrate enough for that.\r\n", ch );
       return;
@@ -55,9 +55,9 @@ void do_aid( Character *ch, char *argument )
   ch->alignment = ch->alignment + 20;
   ch->alignment = URANGE( -1000, ch->alignment, 1000 );
 
-  percent = number_percent( ) - (GetCurrentLck(ch) - 13);
+  percent = number_percent( ) - (get_curr_lck(ch) - 13);
   set_wait_state( ch, skill_table[gsn_aid]->beats );
-  if ( !IsNpc(ch) && percent > ch->pcdata->learned[gsn_aid] )
+  if ( !is_npc(ch) && percent > ch->pcdata->learned[gsn_aid] )
     {
       send_to_char( "You fail.\r\n", ch );
       learn_from_failure( ch, gsn_aid );

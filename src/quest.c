@@ -4,9 +4,9 @@
 
 static bool qchance( int num );
 
-void generate_quest(Character *ch, Character *questman)
+void generate_quest(CHAR_DATA *ch, CHAR_DATA *questman)
 {
-  Character *victim;
+  CHAR_DATA *victim;
   MOB_INDEX_DATA *vsearch;
   ROOM_INDEX_DATA *room;
   OBJ_DATA *questitem;
@@ -34,34 +34,32 @@ void generate_quest(Character *ch, Character *questman)
              levels, so you will want to tweak these greater or
              less than statements for yourself. - Vassago */
 
+
+          /*
+            if( (room = find_location( ch, vsearch->player_name )) != NULL
+            && room->area && IS_SET( room->area->flags, AFLAG_NOQUEST ) )
+            noquest = TRUE;
+	  */
+
           if (((level_diff < -5 && level_diff > -5)
-               || (ch->top_level > 30
-		   && ch->top_level < 40
-		   && vsearch->level > 30
-		   && vsearch->level < 54)
-               || (ch->top_level > 40
-		   && vsearch->level > 40))
+               || (ch->top_level > 30 && ch->top_level < 40 && vsearch->level > 30 && vsearch->level < 54)
+               || (ch->top_level > 40 && vsearch->level > 40))
               && is_evil_mob_index_data(vsearch)
               && vsearch->pShop == NULL
               && vsearch->rShop == NULL
               && !IS_SET(vsearch->act,ACT_TRAIN)
               && !IS_SET(vsearch->act,ACT_PRACTICE)
               && !IS_SET(vsearch->act,ACT_IMMORTAL)
-              && qchance(35)
-	      && !noquest )
-	    {
-	      break;
-	    }
-          else
-	    {
-	      vsearch = NULL;
-	    }
+              && qchance(35) && !noquest )
+
+            break;
+
+
+          else vsearch = NULL;
         }
     }
 
-  if ( vsearch == NULL
-       || ( victim = get_char_world( ch, vsearch->player_name ) ) == NULL
-       || !IsNpc(victim))
+  if ( vsearch == NULL || ( victim = get_char_world( ch, vsearch->player_name ) ) == NULL || !is_npc(victim))
     {
       sprintf(buf, "I'm sorry, but I don't have any quests for you at this time.");
       do_say(questman, buf);
@@ -162,23 +160,19 @@ void generate_quest(Character *ch, Character *questman)
           sprintf(buf, "That location is in the general area of %s.",room->area->name);
           do_say(questman, buf);
         }
-
       ch->quest.questmob = victim->pIndexData->vnum;
     }
 }
 
-void quest_update( void )
+void quest_update(void)
 {
-  Character *ch, *ch_next;
+  CHAR_DATA *ch, *ch_next;
 
   for ( ch = first_char; ch != NULL; ch = ch_next )
     {
       ch_next = ch->next;
 
-      if (IsNpc(ch))
-	{
-	  continue;
-	}
+      if (is_npc(ch)) continue;
 
       if (ch->quest.nextquest > 0)
         {
@@ -186,7 +180,7 @@ void quest_update( void )
 
           if (ch->quest.nextquest == 0)
             {
-              ch_printf( ch, "You may now quest again.\r\n" );
+              send_to_char("You may now quest again.\r\n",ch);
               return;
             }
         }
@@ -194,17 +188,19 @@ void quest_update( void )
 	{
           if (--ch->quest.countdown <= 0)
             {
+              char buf [MAX_STRING_LENGTH];
+
               ch->quest.nextquest = 30;
-              ch_printf( ch, "You have run out of time for your quest!\r\nYou may quest again in %d minutes.\r\n", ch->quest.nextquest);
+              sprintf(buf, "You have run out of time for your quest!\r\nYou may quest again in %d minutes.\r\n",ch->quest.nextquest);
+              send_to_char(buf, ch);
               REMOVE_BIT(ch->act, PLR_QUESTOR);
               ch->quest.questgiver = NULL;
               ch->quest.countdown = 0;
               ch->quest.questmob = 0;
             }
-
           if (ch->quest.countdown > 0 && ch->quest.countdown < 6)
             {
-              ch_printf( ch, "Better hurry, you're almost out of time for your quest!\r\n" );
+              send_to_char("Better hurry, you're almost out of time for your quest!\r\n",ch);
               return;
             }
         }

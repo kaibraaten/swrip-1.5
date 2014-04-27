@@ -1,22 +1,22 @@
 #include "character.h"
 #include "mud.h"
 
-static ch_ret simple_damage( Character *ch, Character *victim, int dam, int dt );
+static ch_ret simple_damage( CHAR_DATA *ch, CHAR_DATA *victim, int dam, int dt );
 
 /*
  * syntax: mpdamage (character) (#hps)
  */
-void do_mp_damage( Character *ch, char *argument )
+void do_mp_damage( CHAR_DATA *ch, char *argument )
 {
   char arg1[ MAX_INPUT_LENGTH ];
   char arg2[ MAX_INPUT_LENGTH ];
-  Character *victim;
+  CHAR_DATA *victim;
   int dam;
 
   if ( is_affected_by( ch, AFF_CHARM ) )
     return;
 
-  if ( !IsNpc( ch ) || ( ch->desc && GetTrustedLevel( ch ) < LEVEL_IMMORTAL )  )
+  if ( !is_npc( ch ) || ( ch->desc && get_trust( ch ) < LEVEL_IMMORTAL )  )
     {
       send_to_char( "Huh?\r\n", ch );
       return;
@@ -81,7 +81,7 @@ void do_mp_damage( Character *ch, char *argument )
  *
  *  note: should be careful about using victim afterwards
  */
-static ch_ret simple_damage( Character *ch, Character *victim, int dam, int dt )
+static ch_ret simple_damage( CHAR_DATA *ch, CHAR_DATA *victim, int dam, int dt )
 {
   short dameq;
   bool npcvict;
@@ -103,7 +103,7 @@ static ch_ret simple_damage( Character *ch, Character *victim, int dam, int dt )
       return rVICT_DIED;
     }
 
-  npcvict = IsNpc(victim);
+  npcvict = is_npc(victim);
 
   if ( dam )
     {
@@ -178,14 +178,14 @@ static ch_ret simple_damage( Character *ch, Character *victim, int dam, int dt )
    * Inform the victim of his new state.
    */
   victim->hit -= dam;
-  if ( !IsNpc(victim)
-       &&   GetTrustedLevel(victim) >= LEVEL_IMMORTAL
+  if ( !is_npc(victim)
+       &&   get_trust(victim) >= LEVEL_IMMORTAL
        &&   victim->hit < 1 )
     victim->hit = 1;
 
   if ( !npcvict
-       &&   GetTrustedLevel(victim) >= LEVEL_IMMORTAL
-       &&        GetTrustedLevel(ch)     >= LEVEL_IMMORTAL
+       &&   get_trust(victim) >= LEVEL_IMMORTAL
+       &&        get_trust(ch)     >= LEVEL_IMMORTAL
        &&   victim->hit < 1 )
     victim->hit = 1;
   update_pos( victim );
@@ -239,7 +239,7 @@ static ch_ret simple_damage( Character *ch, Character *victim, int dam, int dt )
         {
           sprintf( log_buf, "%s killed by %s at %d",
                    victim->name,
-                   (IsNpc(ch) ? ch->short_descr : ch->name),
+                   (is_npc(ch) ? ch->short_descr : ch->name),
 		   victim->in_room->vnum );
           log_string( log_buf );
           to_channel( log_buf, CHANNEL_MONITOR, "Monitor", LEVEL_IMMORTAL );

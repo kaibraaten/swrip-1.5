@@ -1,9 +1,9 @@
 #include "character.h"
 #include "mud.h"
 
-void do_unjail ( Character *ch , char *argument )
+void do_unjail ( CHAR_DATA *ch , char *argument )
 {
-  Character *victim =NULL;
+  CHAR_DATA *victim =NULL;
   char arg[MAX_INPUT_LENGTH];
 
   argument = one_argument(argument, arg);
@@ -20,7 +20,7 @@ void do_unjail ( Character *ch , char *argument )
       return;
     }
 
-  if ( IsNpc(victim) )
+  if ( is_npc(victim) )
     {
       send_to_char( "That would be a waste of time.\r\n", ch );
       return;

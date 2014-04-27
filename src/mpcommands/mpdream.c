@@ -6,15 +6,15 @@
  *    with room sleep_progs
  *
  */
-void do_mpdream( Character *ch, char *argument )
+void do_mpdream( CHAR_DATA *ch, char *argument )
 {
   char arg1[MAX_STRING_LENGTH];
-  Character *vict;
+  CHAR_DATA *vict;
 
   if ( is_affected_by( ch, AFF_CHARM ) )
     return;
 
-  if ( !IsNpc( ch ) || ( ch->desc && GetTrustedLevel( ch ) < LEVEL_IMMORTAL )  )
+  if ( !is_npc( ch ) || ( ch->desc && get_trust( ch ) < LEVEL_IMMORTAL )  )
     {
       send_to_char( "Huh?\r\n", ch );
       return;

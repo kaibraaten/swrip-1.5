@@ -4,7 +4,7 @@
 #include "mud.h"
 #include "character.h"
 
-void do_land( Character *ch, char *argument )
+void do_land( CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   int the_chance;
@@ -191,10 +191,10 @@ void do_land( Character *ch, char *argument )
     }
 
   if ( ship->sclass == FIGHTER_SHIP )
-    the_chance = IsNpc(ch) ? ch->top_level
+    the_chance = is_npc(ch) ? ch->top_level
       : (int)  (ch->pcdata->learned[gsn_starfighters]) ;
   if ( ship->sclass == MIDSIZE_SHIP )
-    the_chance = IsNpc(ch) ? ch->top_level
+    the_chance = is_npc(ch) ? ch->top_level
       : (int)  (ch->pcdata->learned[gsn_midships]) ;
   if ( number_percent( ) < the_chance )
     {

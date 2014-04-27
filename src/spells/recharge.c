@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-ch_ret spell_recharge( int sn, int level, Character *ch, void *vo )
+ch_ret spell_recharge( int sn, int level, CHAR_DATA *ch, void *vo )
 {
   OBJ_DATA *obj = (OBJ_DATA *) vo;
 
@@ -48,7 +48,7 @@ ch_ret spell_recharge( int sn, int level, Character *ch, void *vo )
               return rSPELL_FAILED;
             }
           else
-            if ( chance(ch, 50 - (GetLevel( ch, FORCE_ABILITY ) ) ) )
+            if ( chance(ch, 50 - (get_level( ch, FORCE_ABILITY ) ) ) )
               {
                 send_to_char("Nothing happens.\r\n", ch);
                 return rSPELL_FAILED;

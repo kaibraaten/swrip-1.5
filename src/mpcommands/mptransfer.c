@@ -4,23 +4,23 @@
 /* lets the mobile transfer people.  the all argument transfers
    everyone in the current room to the specified location */
 
-void do_mptransfer( Character *ch, char *argument )
+void do_mptransfer( CHAR_DATA *ch, char *argument )
 {
-  char arg1[ MAX_INPUT_LENGTH ];
-  char arg2[ MAX_INPUT_LENGTH ];
+  char             arg1[ MAX_INPUT_LENGTH ];
+  char             arg2[ MAX_INPUT_LENGTH ];
   char buf[MAX_STRING_LENGTH];
-  ROOM_INDEX_DATA *location = NULL;
-  Character *victim = NULL;
+  ROOM_INDEX_DATA *location;
+  CHAR_DATA       *victim;
+  CHAR_DATA       *nextinroom;
 
   if ( is_affected_by( ch, AFF_CHARM ) )
     return;
 
-  if ( !IsNpc( ch ) )
+  if ( !is_npc( ch ) )
     {
       send_to_char( "Huh?\r\n", ch );
       return;
     }
-
   argument = one_argument( argument, arg1 );
   argument = one_argument( argument, arg2 );
 
@@ -33,24 +33,17 @@ void do_mptransfer( Character *ch, char *argument )
   /* Put in the variable nextinroom to make this work right. -Narn */
   if ( !str_cmp( arg1, "all" ) )
     {
-      CerisList *peopleInRoom = List_Copy( ch->in_room->People );
-      CerisListIterator *iter = CreateListIterator( peopleInRoom, ForwardsIterator );
-
-      for( ; !ListIterator_IsDone( iter ); ListIterator_Next( iter ) )
+      for ( victim = ch->in_room->first_person; victim; victim = nextinroom )
         {
-	  victim = (Character*) ListIterator_GetData( iter );
-
+          nextinroom = victim->next_in_room;
           if ( victim != ch
-               && !is_not_authed(victim)
-               && can_see( ch, victim ) )
+               &&   !is_not_authed(victim)
+               &&   can_see( ch, victim ) )
             {
               sprintf( buf, "%s %s", victim->name, arg2 );
               do_mptransfer( ch, buf );
             }
         }
-
-      DestroyListIterator( iter );
-      DestroyList( peopleInRoom );
       return;
     }
 

@@ -1,26 +1,40 @@
 #include "mud.h"
 #include "character.h"
 
-static void PurgeMobilesInRoom( Character *purger, ROOM_INDEX_DATA *room );
-static void PurgeObjectsInRoom( ROOM_INDEX_DATA *room );
-
-void do_purge( Character *ch, char *argument )
+void do_purge( CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  Character *victim = NULL;
-  OBJ_DATA *obj = NULL;
+  CHAR_DATA *victim;
+  OBJ_DATA *obj;
 
   one_argument( argument, arg );
 
   if ( arg[0] == '\0' )
     {
-      PurgeMobilesInRoom( ch, ch->in_room );
-      PurgeObjectsInRoom( ch->in_room );
+      /* 'purge' */
+      CHAR_DATA *vnext;
+      OBJ_DATA  *obj_next;
+
+      for ( victim = ch->in_room->first_person; victim; victim = vnext )
+        {
+          vnext = victim->next_in_room;
+          if ( is_npc(victim) && victim != ch && !IS_SET(victim->act, ACT_POLYMORPHED))
+            extract_char( victim, TRUE );
+        }
+
+      for ( obj = ch->in_room->first_content; obj; obj = obj_next )
+        {
+          obj_next = obj->next_content;
+          if ( obj->item_type == ITEM_SPACECRAFT )
+            continue;
+          extract_obj( obj );
+        }
 
       act( AT_IMMORT, "$n purges the room!", ch, NULL, NULL, TO_ROOM);
       send_to_char( "Ok.\r\n", ch );
       return;
     }
+  victim = NULL; obj = NULL;
 
   /* fixed to get things in room first -- i.e., purge portal (obj),
    * no more purging mobs with that keyword in another room first
@@ -47,7 +61,7 @@ void do_purge( Character *ch, char *argument )
     }
 
 
-  if ( !IsNpc(victim) )
+  if ( !is_npc(victim) )
     {
       send_to_char( "Not on PC's.\r\n", ch );
       return;
@@ -67,40 +81,4 @@ void do_purge( Character *ch, char *argument )
 
   act( AT_IMMORT, "$n purges $N.", ch, NULL, victim, TO_NOTVICT );
   extract_char( victim, TRUE );
-}
-
-static void ExtractMobileIfNotPolymorphed( void *element, void *userData )
-{
-  Character *victim = (Character*) element;
-  const Character *purger = userData;
-
-  if ( IsNpc(victim) && victim != purger && !IS_SET(victim->act, ACT_POLYMORPHED))
-    {
-      extract_char( victim, TRUE );
-    }
-}
-
-static void PurgeMobilesInRoom( Character *purger, ROOM_INDEX_DATA *room )
-{
-  CerisList *charactersInRoom = List_Copy( room->People );
-
-  List_ForEach( charactersInRoom, ExtractMobileIfNotPolymorphed, purger );
-
-  DestroyList( charactersInRoom );
-}
-
-static void PurgeObjectsInRoom( ROOM_INDEX_DATA *room )
-{
-  OBJ_DATA *obj = NULL;
-  OBJ_DATA *obj_next = NULL;
-
-  for ( obj = room->first_content; obj; obj = obj_next )
-    {
-      obj_next = obj->next_content;
-
-      if ( obj->item_type == ITEM_SPACECRAFT )
-        continue;
-
-      extract_obj( obj );
-    }
 }

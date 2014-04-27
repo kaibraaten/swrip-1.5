@@ -1,11 +1,11 @@
 #include "character.h"
 #include "mud.h"
 
-void do_pardon( Character *ch, char *argument )
+void do_pardon( CHAR_DATA *ch, char *argument )
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
-  Character *victim;
+  CHAR_DATA *victim;
 
   argument = one_argument( argument, arg1 );
   argument = one_argument( argument, arg2 );
@@ -22,7 +22,7 @@ void do_pardon( Character *ch, char *argument )
       return;
     }
 
-  if ( IsNpc(victim) )
+  if ( is_npc(victim) )
     {
       send_to_char( "Not on NPC's.\r\n", ch );
       return;

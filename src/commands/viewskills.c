@@ -1,11 +1,11 @@
 #include "character.h"
 #include "mud.h"
 
-void do_viewskills( Character *ch, char *argument )
+void do_viewskills( CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   char buf[MAX_STRING_LENGTH];
-  Character *victim;
+  CHAR_DATA *victim;
   int sn;
   int col;
 
@@ -23,7 +23,7 @@ void do_viewskills( Character *ch, char *argument )
 
   col = 0;
 
-  if ( !IsNpc( victim ) )
+  if ( !is_npc( victim ) )
     {
       set_char_color( AT_MAGIC, ch );
       for ( sn = 0; sn < top_sn && skill_table[sn] && skill_table[sn]->name; sn++ )

@@ -3,9 +3,9 @@
 #include "mud.h"
 #include "character.h"
 
-void do_destroy( Character *ch, char *argument )
+void do_destroy( CHAR_DATA *ch, char *argument )
 {
-  Character *victim;
+  CHAR_DATA *victim;
   char buf[MAX_STRING_LENGTH];
   char buf2[MAX_STRING_LENGTH];
   char arg[MAX_INPUT_LENGTH];
@@ -18,7 +18,7 @@ void do_destroy( Character *ch, char *argument )
     }
 
   for ( victim = first_char; victim; victim = victim->next )
-    if ( !IsNpc(victim) && !str_cmp(victim->name, arg) )
+    if ( !is_npc(victim) && !str_cmp(victim->name, arg) )
       break;
   if ( !victim )
     {
@@ -26,7 +26,7 @@ void do_destroy( Character *ch, char *argument )
 
       /* Make sure they aren't halfway logged in. */
       for ( d = first_descriptor; d; d = d->next )
-        if ( (victim = d->character) && !IsNpc(victim) &&
+        if ( (victim = d->character) && !is_npc(victim) &&
 	     !str_cmp(victim->name, arg) )
           break;
       if ( d )

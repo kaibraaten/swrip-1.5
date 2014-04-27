@@ -1,11 +1,11 @@
 #include "character.h"
 #include "mud.h"
 
-static bool aff_paralysis( Character *ch, Character *victim );
+static bool aff_paralysis( CHAR_DATA *ch, CHAR_DATA *victim );
 
-void do_bind ( Character *ch , char *argument )
+void do_bind ( CHAR_DATA *ch , char *argument )
 {
-  Character *victim;
+  CHAR_DATA *victim;
   char logbuf[MAX_STRING_LENGTH];
 
   if ( argument[0] == '\0' )
@@ -54,7 +54,7 @@ void do_bind ( Character *ch , char *argument )
 
   set_wait_state( ch, 1 * PULSE_VIOLENCE );
 
-  if ( IsNpc(victim) || number_percent( ) > ch->pcdata->learned[gsn_bind] )
+  if ( is_npc(victim) || number_percent( ) > ch->pcdata->learned[gsn_bind] )
     {
       send_to_char( "You fail.\r\n", ch );
       return;
@@ -70,7 +70,7 @@ void do_bind ( Character *ch , char *argument )
   learn_from_success( ch, gsn_bind );
 }
 
-static bool aff_paralysis( Character *ch, Character *victim )
+static bool aff_paralysis( CHAR_DATA *ch, CHAR_DATA *victim )
 {
   AFFECT_DATA af;
 
@@ -84,7 +84,7 @@ static bool aff_paralysis( Character *ch, Character *victim )
       affect_to_char( victim, &af );
       update_pos( victim );
 
-      if ( IsNpc(victim) )
+      if ( is_npc(victim) )
         {
           start_hating( victim, ch );
           start_hunting( victim, ch );

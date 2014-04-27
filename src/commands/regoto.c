@@ -1,7 +1,7 @@
 #include "mud.h"
 #include "character.h"
 
-void do_regoto( Character *ch, char *argument )
+void do_regoto( CHAR_DATA *ch, char *argument )
 {
   char buf[MAX_STRING_LENGTH];
 

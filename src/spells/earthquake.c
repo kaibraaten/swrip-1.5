@@ -1,10 +1,10 @@
 #include "character.h"
 #include "mud.h"
 
-ch_ret spell_earthquake( int sn, int level, Character *ch, void *vo )
+ch_ret spell_earthquake( int sn, int level, CHAR_DATA *ch, void *vo )
 {
-  Character *vch;
-  Character *vch_next;
+  CHAR_DATA *vch;
+  CHAR_DATA *vch_next;
   bool ch_died;
   ch_ret retcode;
   SKILLTYPE *skill = get_skilltype(sn);
@@ -34,7 +34,7 @@ ch_ret spell_earthquake( int sn, int level, Character *ch, void *vo )
         continue;
       if ( vch->in_room == ch->in_room )
         {
-          if ( !IsNpc( vch ) && IS_SET( vch->act, PLR_WIZINVIS )
+          if ( !is_npc( vch ) && IS_SET( vch->act, PLR_WIZINVIS )
                && vch->pcdata->wizinvis >= LEVEL_IMMORTAL )
 	    continue;
 

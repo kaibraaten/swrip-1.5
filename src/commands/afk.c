@@ -1,9 +1,9 @@
 #include "character.h"
 #include "mud.h"
 
-void do_afk( Character *ch, char *argument )
+void do_afk( CHAR_DATA *ch, char *argument )
 {
-  if ( IsNpc(ch) )
+  if ( is_npc(ch) )
     return;
 
   if(IS_SET(ch->act, PLR_AFK))

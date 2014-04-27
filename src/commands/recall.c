@@ -1,16 +1,16 @@
 #include "character.h"
 #include "mud.h"
 
-void do_recall( Character *ch, char *argument )
+void do_recall( CHAR_DATA *ch, char *argument )
 {
   ROOM_INDEX_DATA *location;
-  Character *opponent;
+  CHAR_DATA *opponent;
 
   location = NULL;
 
   location = get_room_index( wherehome(ch) );
 
-  if ( GetTrustedLevel( ch ) < LEVEL_IMMORTAL )
+  if ( get_trust( ch ) < LEVEL_IMMORTAL )
     {
       AREA_DATA * pArea;
 
@@ -52,7 +52,7 @@ void do_recall( Character *ch, char *argument )
   if ( ( opponent = who_fighting( ch ) ) != NULL )
     {
 
-      if ( number_bits( 1 ) == 0 || ( !IsNpc( opponent ) && number_bits( 3 ) > 1 ) )
+      if ( number_bits( 1 ) == 0 || ( !is_npc( opponent ) && number_bits( 3 ) > 1 ) )
         {
           set_wait_state( ch, 4 );
           ch_printf( ch, "You failed!\r\n" );

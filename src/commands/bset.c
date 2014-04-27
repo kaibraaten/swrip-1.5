@@ -1,6 +1,6 @@
 #include "mud.h"
 
-void do_bset( Character *ch, char *argument )
+void do_bset( CHAR_DATA *ch, char *argument )
 {
   BOARD_DATA *board = NULL;
   bool found = FALSE;

@@ -1,15 +1,14 @@
 #include "character.h"
 #include "ships.h"
 #include "mud.h"
-#include "clan.h"
 
-void do_speeders( Character *ch, char *argument )
+void do_speeders( CHAR_DATA *ch, char *argument )
 {
   SHIP_DATA *ship;
   int count;
   char buf[MAX_STRING_LENGTH];
 
-  if ( !IsNpc(ch) )
+  if ( !is_npc(ch) )
     {
       count = 0;
       send_to_pager( "&YThe following are owned by you or by your organization:\r\n", ch );
@@ -19,7 +18,7 @@ void do_speeders( Character *ch, char *argument )
         {
           if ( str_cmp(ship->owner, ch->name) )
             {
-              if ( !is_clanned( ch ) || str_cmp(ship->owner,ch->pcdata->clan->name) || ship->sclass <= SHIP_PLATFORM )
+              if ( !ch->pcdata || !ch->pcdata->clan || str_cmp(ship->owner,ch->pcdata->clan->name) || ship->sclass <= SHIP_PLATFORM )
                 continue;
             }
 

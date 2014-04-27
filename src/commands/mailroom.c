@@ -2,7 +2,7 @@
 #include "mud.h"
 #include "character.h"
 
-void do_mailroom(Character *ch, char *argument)
+void do_mailroom(CHAR_DATA *ch, char *argument)
 {
   BOARD_DATA *board;
   char arg[MAX_STRING_LENGTH];

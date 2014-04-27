@@ -1,8 +1,7 @@
 #include "character.h"
 #include "mud.h"
-#include "room.h"
 
-void do_rdelete( Character *ch, char *argument )
+void do_rdelete( CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   ROOM_INDEX_DATA *location;
@@ -23,7 +22,7 @@ void do_rdelete( Character *ch, char *argument )
     }
 
   /* Does the player have the right to delete this room? */
-  if ( GetTrustedLevel( ch ) < sysdata.level_modify_proto
+  if ( get_trust( ch ) < sysdata.level_modify_proto
        && ( location->vnum < ch->pcdata->r_range_lo
 	    || location->vnum > ch->pcdata->r_range_hi ) )
     {
@@ -32,7 +31,7 @@ void do_rdelete( Character *ch, char *argument )
     }
 
   /* We could go to the trouble of clearing out the room, but why? */
-  if ( NumberOfPeopleInRoom( location ) > 0 || location->first_content )
+  if ( location->first_person || location->first_content )
     {
       send_to_char( "The room must be empty first.\r\n", ch );
       return;

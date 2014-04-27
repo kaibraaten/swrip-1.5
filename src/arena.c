@@ -50,7 +50,7 @@ static void start_game();
 static void silent_end();
 static void write_fame_list(void);
 static void write_one_fame_node(FILE * fp, struct hall_of_fame_element * node);
-static void find_bet_winners(Character *winner);
+static void find_bet_winners(CHAR_DATA *winner);
 static void reset_bets();
 
 struct hall_of_fame_element *fame_list = NULL;
@@ -126,7 +126,7 @@ void start_arena()
 
 void start_game()
 {
-  Character *i;
+  CHAR_DATA *i;
   DESCRIPTOR_DATA *d;
 
   for (d = first_descriptor; d; d = d->next)
@@ -192,7 +192,7 @@ void find_game_winner()
 {
   char buf[MAX_INPUT_LENGTH];
   char buf2[MAX_INPUT_LENGTH];
-  Character *i;
+  CHAR_DATA *i;
   DESCRIPTOR_DATA *d;
   struct hall_of_fame_element *fame_node;
 
@@ -204,7 +204,7 @@ void find_game_winner()
         continue;
 
       if (i->in_room && IS_SET(i->in_room->room_flags,ROOM_ARENA)
-          && !IsImmortal(i))
+          && !is_immortal(i))
         {
           char_from_room(i);
           char_to_room(i,get_room_index(i->retran));
@@ -283,7 +283,7 @@ void silent_end()
 void do_end_game()
 {
   char buf[MAX_INPUT_LENGTH];
-  Character *i;
+  CHAR_DATA *i;
   DESCRIPTOR_DATA *d;
 
   for (d = first_descriptor; d; d = d->next)
@@ -317,7 +317,7 @@ void do_end_game()
 
 int num_in_arena()
 {
-  Character *i;
+  CHAR_DATA *i;
   DESCRIPTOR_DATA *d;
   int num = 0;
 
@@ -329,7 +329,7 @@ int num_in_arena()
 
       if (i->in_room && IS_SET(i->in_room->room_flags,ROOM_ARENA))
         {
-          if (!IsImmortal(i)
+          if (!is_immortal(i)
               && i->hit > 1)
             num++;
         }
@@ -387,10 +387,10 @@ void write_one_fame_node(FILE * fp, struct hall_of_fame_element * node)
     }
 }
 
-void find_bet_winners(Character *winner)
+void find_bet_winners(CHAR_DATA *winner)
 {
   DESCRIPTOR_DATA *d;
-  Character *wch;
+  CHAR_DATA *wch;
 
   char buf1[MAX_INPUT_LENGTH];
 
@@ -402,7 +402,7 @@ void find_bet_winners(Character *winner)
         if (wch == NULL)
           continue;
 
-        if ((!IsNpc(wch)) && (GET_BET_AMT(wch) > 0) && (GET_BETTED_ON(wch) == winner))
+        if ((!is_npc(wch)) && (GET_BET_AMT(wch) > 0) && (GET_BETTED_ON(wch) == winner))
           {
             sprintf(buf1, "You have won %d credits on your bet.\r\n",(GET_BET_AMT(wch))*2);
             send_to_char(buf1, wch);
@@ -419,14 +419,14 @@ void find_bet_winners(Character *winner)
  */
 void reset_bets()
 {
-  Character *ch;
+  CHAR_DATA *ch;
 
   for (ch = first_char; ch; ch = ch->next )
     {
       if (ch == NULL)
         continue;
 
-      if (!IsNpc(ch))
+      if (!is_npc(ch))
         {
           GET_BETTED_ON(ch) = NULL;
           GET_BET_AMT(ch) = 0;

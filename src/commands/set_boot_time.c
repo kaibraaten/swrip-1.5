@@ -4,7 +4,7 @@
 extern char reboot_time[];
 extern struct tm new_boot_struct;
 
-void do_set_boot_time( Character *ch, char *argument)
+void do_set_boot_time( CHAR_DATA *ch, char *argument)
 {
   char arg[MAX_INPUT_LENGTH];
   char arg1[MAX_INPUT_LENGTH];

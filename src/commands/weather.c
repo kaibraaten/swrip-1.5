@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_weather( Character *ch, char *argument )
+void do_weather( CHAR_DATA *ch, char *argument )
 {
   static char * const sky_look[4] =
     {

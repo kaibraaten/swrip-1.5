@@ -1,11 +1,9 @@
 #include "character.h"
 #include "mud.h"
-#include "clan.h"
 
-static void get_obj( Character *ch, OBJ_DATA *obj, OBJ_DATA *container );
-static void SaveClanStoreroom( void *element, void *userData );
+static void get_obj( CHAR_DATA *ch, OBJ_DATA *obj, OBJ_DATA *container );
 
-void do_get( Character *ch, char *argument )
+void do_get( CHAR_DATA *ch, char *argument )
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
@@ -15,7 +13,7 @@ void do_get( Character *ch, char *argument )
   short number = 0;
   bool found = FALSE;
   bool foundowner = FALSE;
-  Character *p = NULL, *p_prev = NULL;
+  CHAR_DATA *p = NULL, *p_prev = NULL;
 
   argument = one_argument( argument, arg1 );
 
@@ -63,7 +61,7 @@ void do_get( Character *ch, char *argument )
     }
 
   if ( ch->in_room && IS_SET(ch->in_room->room_flags, ROOM_PLR_HOME)
-       && GetTrustedLevel(ch) < LEVEL_SUB_IMPLEM )
+       && get_trust(ch) < LEVEL_SUB_IMPLEM )
     {
       if ( !ch->plr_home || ch->plr_home->vnum != ch->in_room->vnum )
         {
@@ -342,8 +340,9 @@ void do_get( Character *ch, char *argument )
     }
 }
 
-static void get_obj( Character *ch, OBJ_DATA *obj, OBJ_DATA *container )
+static void get_obj( CHAR_DATA *ch, OBJ_DATA *obj, OBJ_DATA *container )
 {
+  CLAN_DATA *clan;
   int weight;
 
   if ( !CAN_WEAR(obj, ITEM_TAKE)
@@ -399,9 +398,9 @@ static void get_obj( Character *ch, OBJ_DATA *obj, OBJ_DATA *container )
   /* Clan storeroom checks */
   if ( IS_SET(ch->in_room->room_flags, ROOM_CLANSTOREROOM)
        && (!container || container->carried_by == NULL) )
-    {
-      List_ForEach( ClanList, SaveClanStoreroom, ch );
-    }
+    for ( clan = first_clan; clan; clan = clan->next )
+      if ( clan->storeroom == ch->in_room->vnum )
+        save_clan_storeroom(ch, clan);
 
   if ( obj->item_type != ITEM_CONTAINER )
     check_for_trap( ch, obj, TRAP_GET );
@@ -422,15 +421,4 @@ static void get_obj( Character *ch, OBJ_DATA *obj, OBJ_DATA *container )
     return;
 
   oprog_get_trigger(ch, obj);
-}
-
-static void SaveClanStoreroom( void *element, void *userData )
-{
-  Clan *clan = (Clan*) element;
-  Character *ch = (Character*) userData;
-
-  if ( clan->storeroom == ch->in_room->vnum )
-    {
-      save_clan_storeroom(ch, clan);
-    }
 }

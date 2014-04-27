@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_answer( Character *ch, char *argument )
+void do_answer( CHAR_DATA *ch, char *argument )
 {
   if (is_not_authed(ch))
     {

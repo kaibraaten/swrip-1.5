@@ -2,11 +2,11 @@
 #include "mud.h"
 #include "arena.h"
 
-void do_arena(Character *ch, char *argument)
+void do_arena(CHAR_DATA *ch, char *argument)
 {
   char buf[MAX_INPUT_LENGTH];
 
-  if (IsNpc(ch))
+  if (is_npc(ch))
     {
       send_to_char("Mobs cant play in the arena.\r\n",ch);
       return;

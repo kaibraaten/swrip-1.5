@@ -1,14 +1,13 @@
 #include "ships.h"
 #include "mud.h"
 #include "character.h"
-#include "room.h"
 
-void do_drag( Character *ch, char *argument )
+void do_drag( CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
   int exit_dir;
-  Character *victim;
+  CHAR_DATA *victim;
   EXIT_DATA *pexit;
   ROOM_INDEX_DATA *to_room;
   bool nogo;
@@ -37,7 +36,7 @@ void do_drag( Character *ch, char *argument )
       return;
     }
 
-  if ( IsNpc(victim) )
+  if ( is_npc(victim) )
     {
       send_to_char("You can only drag player characters.\r\n", ch);
       return;
@@ -99,15 +98,16 @@ void do_drag( Character *ch, char *argument )
 
               if ( to_room->tunnel > 0 )
                 {
-                  int numberOfPeopleInRoom = NumberOfPeopleInRoom( to_room );
+                  CHAR_DATA *ctmp;
+                  int count = 0;
 
-		  if ( numberOfPeopleInRoom + 2 > to_room->tunnel )
-		    {
-		      send_to_char( "There is no room for you both in there.\r\n", ch );
-		      return;
-		    }
+                  for ( ctmp = to_room->first_person; ctmp; ctmp = ctmp->next_in_room )
+                    if ( count+2 >= to_room->tunnel )
+                      {
+                        send_to_char( "There is no room for you both in there.\r\n", ch );
+                        return;
+                      }
                 }
-
               if ( ship->shipstate == SHIP_LAUNCH || ship->shipstate == SHIP_LAUNCH_2 )
                 {
                   send_to_char("&rThat ship has already started launching!\r\n",ch);
@@ -177,17 +177,19 @@ void do_drag( Character *ch, char *argument )
 
           if ( ( to_room = get_room_index( ship->location ) ) != NULL )
             {
-	      if ( to_room->tunnel > 0 )
+
+              if ( to_room->tunnel > 0 )
                 {
-                  int numberOfPeopleInRoom = NumberOfPeopleInRoom( to_room );
+                  CHAR_DATA *ctmp;
+                  int count = 0;
 
-                  if ( numberOfPeopleInRoom + 2 > to_room->tunnel )
-                    {
-                      send_to_char( "There is no room for you both in there.\r\n", ch );
-                      return;
-                    }
+                  for ( ctmp = to_room->first_person; ctmp; ctmp = ctmp->next_in_room )
+                    if ( count+2 >= to_room->tunnel )
+                      {
+                        send_to_char( "There is no room for you both in there.\r\n", ch );
+                        return;
+                      }
                 }
-
               if ( ship->shipstate == SHIP_LAUNCH || ship->shipstate == SHIP_LAUNCH_2 )
                 {
                   send_to_char("&rThat ship has already started launching!\r\n",ch);

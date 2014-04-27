@@ -1,12 +1,12 @@
 #include "character.h"
 #include "mud.h"
 
-static void wear_obj( Character *ch, OBJ_DATA *obj, bool fReplace, short wear_bit);
-static bool can_layer( const Character *ch, const OBJ_DATA *obj, short wear_loc );
-static bool can_dual( const Character *ch );
-static bool could_dual( const Character *ch );
+static void wear_obj( CHAR_DATA *ch, OBJ_DATA *obj, bool fReplace, short wear_bit);
+static bool can_layer( const CHAR_DATA *ch, const OBJ_DATA *obj, short wear_loc );
+static bool can_dual( const CHAR_DATA *ch );
+static bool could_dual( const CHAR_DATA *ch );
 
-void do_wear( Character *ch, char *argument )
+void do_wear( CHAR_DATA *ch, char *argument )
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
@@ -69,7 +69,7 @@ void do_wear( Character *ch, char *argument )
  * Big repetitive code, ick.
  * Restructured a bit to allow for specifying body location     -Thoric
  */
-void wear_obj( Character *ch, OBJ_DATA *obj, bool fReplace, short wear_bit )
+void wear_obj( CHAR_DATA *ch, OBJ_DATA *obj, bool fReplace, short wear_bit )
 {
   char buf[MAX_STRING_LENGTH];
   OBJ_DATA *tmpobj;
@@ -122,7 +122,7 @@ void wear_obj( Character *ch, OBJ_DATA *obj, bool fReplace, short wear_bit )
     check_size = FALSE;
   else if ( ch->race == RACE_DEFEL )
     check_size = TRUE;
-  else if ( !IsNpc(ch) )
+  else if ( !is_npc(ch) )
     switch (ch->race)
       {
       default:
@@ -637,7 +637,7 @@ void wear_obj( Character *ch, OBJ_DATA *obj, bool fReplace, short wear_bit )
         {
           if ( can_dual(ch) )
             {
-              if ( get_obj_weight( obj ) + get_obj_weight( tmpobj ) > str_app[GetCurrentStr(ch)].wield )
+              if ( get_obj_weight( obj ) + get_obj_weight( tmpobj ) > str_app[get_curr_str(ch)].wield )
                 {
                   send_to_char( "It is too heavy for you to wield.\r\n", ch );
                   return;
@@ -658,7 +658,7 @@ void wear_obj( Character *ch, OBJ_DATA *obj, bool fReplace, short wear_bit )
           return;
         }
 
-      if ( get_obj_weight( obj ) > str_app[GetCurrentStr(ch)].wield )
+      if ( get_obj_weight( obj ) > str_app[get_curr_str(ch)].wield )
         {
           send_to_char( "It is too heavy for you to wield.\r\n", ch );
           return;
@@ -745,7 +745,7 @@ void wear_obj( Character *ch, OBJ_DATA *obj, bool fReplace, short wear_bit )
  * Check to see if there is room to wear another object on this location
  * (Layered clothing support)
  */
-static bool can_layer( const Character *ch, const OBJ_DATA *obj, short wear_loc )
+static bool can_layer( const CHAR_DATA *ch, const OBJ_DATA *obj, short wear_loc )
 {
   OBJ_DATA *otmp;
   short bitlayers = 0;
@@ -770,9 +770,9 @@ static bool can_layer( const Character *ch, const OBJ_DATA *obj, short wear_loc 
 /*
  * See if char could be capable of dual-wielding                -Thoric
  */
-static bool could_dual( const Character *ch )
+static bool could_dual( const CHAR_DATA *ch )
 {
-  if ( IsNpc(ch) )
+  if ( is_npc(ch) )
     return TRUE;
 
   if ( ch->pcdata->learned[gsn_dual_wield] )
@@ -784,7 +784,7 @@ static bool could_dual( const Character *ch )
 /*
  * See if char can dual wield at this time                      -Thoric
  */
-static bool can_dual( const Character *ch )
+static bool can_dual( const CHAR_DATA *ch )
 {
   if ( !could_dual(ch) )
     return FALSE;

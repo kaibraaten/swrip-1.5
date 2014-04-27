@@ -3,7 +3,7 @@
 
 /* prints message to room at large. */
 
-void do_mpecho( Character *ch, char *argument )
+void do_mpecho( CHAR_DATA *ch, char *argument )
 {
   char       arg1 [MAX_INPUT_LENGTH];
   short     color;
@@ -12,7 +12,7 @@ void do_mpecho( Character *ch, char *argument )
   if ( is_affected_by( ch, AFF_CHARM ) )
     return;
 
-  if ( !IsNpc(ch) )
+  if ( !is_npc(ch) )
     {
       send_to_char( "Huh?\r\n", ch );
       return;

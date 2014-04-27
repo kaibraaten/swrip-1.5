@@ -1,10 +1,10 @@
 #include "mud.h"
 #include "character.h"
 
-void do_follow( Character *ch, char *argument )
+void do_follow( CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  Character *victim;
+  CHAR_DATA *victim;
 
   one_argument( argument, arg );
 

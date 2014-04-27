@@ -1,14 +1,10 @@
 #include "character.h"
 #include "mud.h"
 
-static void Says( Character *speaker, Character *listener, const char *message )
-{
-  act( AT_SAY, "$n says '$t'", speaker, message, listener, TO_VICT );
-}
-
-void do_say( Character *ch, char *argument )
+void do_say( CHAR_DATA *ch, char *argument )
 {
   char buf[MAX_STRING_LENGTH];
+  CHAR_DATA *vch = NULL;
   int actflags = ch->act;
 
   if ( argument[0] == '\0' )
@@ -23,10 +19,25 @@ void do_say( Character *ch, char *argument )
       return;
     }
 
-  if ( IsNpc( ch ) )
+  if ( is_npc( ch ) )
     REMOVE_BIT( ch->act, ACT_SECRETIVE );
 
-  SpamTellToBystanders( ch, argument, Says );
+  for ( vch = ch->in_room->first_person; vch; vch = vch->next_in_room )
+    {
+      const char *sbuf = argument;
+
+      if ( vch == ch )
+        continue;
+
+      if ( !knows_language(vch, ch->speaking, ch)
+	   && ( !is_npc(ch) || ch->speaking != 0 ) )
+        sbuf = scramble(argument, ch->speaking);
+
+      sbuf = drunk_speech( sbuf, ch );
+
+      MOBtrigger = FALSE;
+      act( AT_SAY, "$n says '$t'", ch, sbuf, vch, TO_VICT );
+    }
 
   ch->act = actflags;
   MOBtrigger = FALSE;
@@ -34,7 +45,7 @@ void do_say( Character *ch, char *argument )
 
   if ( IS_SET( ch->in_room->room_flags, ROOM_LOGSPEECH ) )
     {
-      sprintf( buf, "%s: %s", IsNpc( ch ) ? ch->short_descr : ch->name,
+      sprintf( buf, "%s: %s", is_npc( ch ) ? ch->short_descr : ch->name,
                argument );
       append_to_file( LOG_FILE, buf );
     }

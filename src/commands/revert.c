@@ -1,11 +1,11 @@
 #include "character.h"
 #include "mud.h"
 
-void do_revert(Character *ch, char *argument)
+void do_revert(CHAR_DATA *ch, char *argument)
 {
-  Character *mob;
+  CHAR_DATA *mob;
 
-  if ( !IsNpc(ch) || !IS_SET(ch->act, ACT_POLYMORPHED) )
+  if ( !is_npc(ch) || !IS_SET(ch->act, ACT_POLYMORPHED) )
     {
       send_to_char("You are not polymorphed.\r\n", ch);
       return;

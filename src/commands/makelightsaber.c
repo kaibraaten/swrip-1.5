@@ -2,7 +2,7 @@
 #include "mud.h"
 #include "character.h"
 
-void do_makelightsaber( Character *ch, char *argument )
+void do_makelightsaber( CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   char buf[MAX_STRING_LENGTH];
@@ -118,7 +118,7 @@ void do_makelightsaber( Character *ch, char *argument )
           return;
         }
 
-      the_chance = IsNpc(ch) ? ch->top_level
+      the_chance = is_npc(ch) ? ch->top_level
         : (int) (ch->pcdata->learned[gsn_lightsaber_crafting]);
       if ( number_percent( ) < the_chance )
         {
@@ -149,7 +149,7 @@ void do_makelightsaber( Character *ch, char *argument )
 
   ch->substate = SUB_NONE;
 
-  level = IsNpc(ch) ? ch->top_level : (int) (ch->pcdata->learned[gsn_lightsaber_crafting]);
+  level = is_npc(ch) ? ch->top_level : (int) (ch->pcdata->learned[gsn_lightsaber_crafting]);
   vnum = 10421;
 
   if ( ( pObjIndex = get_obj_index( vnum ) ) == NULL )
@@ -239,7 +239,7 @@ void do_makelightsaber( Character *ch, char *argument )
         }
     }
 
-  the_chance = IsNpc(ch) ? ch->top_level
+  the_chance = is_npc(ch) ? ch->top_level
     : (int) (ch->pcdata->learned[gsn_lightsaber_crafting]) ;
 
   if ( number_percent( ) > the_chance*2  || ( !checktool ) || ( !checkdura ) || ( !checkbatt ) || ( !checkoven )
@@ -312,7 +312,7 @@ void do_makelightsaber( Character *ch, char *argument )
   {
     long xpgain;
 
-    xpgain = UMIN( obj->cost*50 , exp_level(GetLevel(ch, FORCE_ABILITY ) + 1) );
+    xpgain = UMIN( obj->cost*50 , exp_level(get_level(ch, FORCE_ABILITY ) + 1) );
     gain_exp(ch, FORCE_ABILITY, xpgain );
     ch_printf( ch , "You gain %d force experience.", xpgain );
   }

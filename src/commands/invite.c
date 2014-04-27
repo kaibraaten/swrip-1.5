@@ -1,10 +1,10 @@
 #include "character.h"
 #include "mud.h"
 
-void do_invite(Character *ch, char *argument)
+void do_invite(CHAR_DATA *ch, char *argument)
 {
   ROOM_INDEX_DATA *home;
-  Character *victim;
+  CHAR_DATA *victim;
 
   home = ch->in_room;
 

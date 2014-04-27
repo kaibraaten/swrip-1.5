@@ -2,7 +2,7 @@
 #include "ships.h"
 #include "mud.h"
 
-void do_chaff( Character *ch, char *argument )
+void do_chaff( CHAR_DATA *ch, char *argument )
 {
   int the_chance;
   SHIP_DATA *ship;
@@ -47,7 +47,7 @@ void do_chaff( Character *ch, char *argument )
       send_to_char("&RYou don't have any chaff to release!\r\n",ch);
       return;
     }
-  the_chance = IsNpc(ch) ? ch->top_level
+  the_chance = is_npc(ch) ? ch->top_level
     : (int)  (ch->pcdata->learned[gsn_weaponsystems]) ;
   if ( number_percent( ) > the_chance )
     {

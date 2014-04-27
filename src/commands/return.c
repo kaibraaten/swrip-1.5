@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_return( Character *ch, char *argument )
+void do_return( CHAR_DATA *ch, char *argument )
 {
   if ( !ch->desc )
     return;
@@ -19,7 +19,7 @@ void do_return( Character *ch, char *argument )
     }
 
   send_to_char( "You return to your original body.\r\n", ch );
-  if ( IsNpc( ch ) && is_affected_by( ch, AFF_POSSESS ) )
+  if ( is_npc( ch ) && is_affected_by( ch, AFF_POSSESS ) )
     {
       affect_strip( ch, gsn_possess );
       REMOVE_BIT( ch->affected_by, AFF_POSSESS );

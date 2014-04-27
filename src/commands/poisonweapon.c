@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_poison_weapon( Character *ch, char *argument )
+void do_poison_weapon( CHAR_DATA *ch, char *argument )
 {
   OBJ_DATA *obj;
   OBJ_DATA *pobj;
@@ -9,7 +9,7 @@ void do_poison_weapon( Character *ch, char *argument )
   char      arg [ MAX_INPUT_LENGTH ];
   int       percent;
 
-  if ( !IsNpc( ch )
+  if ( !is_npc( ch )
        &&  ch->pcdata->learned[gsn_poison_weapon] <= 0  )
     {
       send_to_char( "What do you think you are, a thief?\r\n", ch );
@@ -77,7 +77,7 @@ void do_poison_weapon( Character *ch, char *argument )
       return;
     }
   /* And does the thief have steady enough hands? */
-  if ( !IsNpc( ch )
+  if ( !is_npc( ch )
        &&  ( ch->pcdata->condition[COND_DRUNK] > 0 ) )
     {
       send_to_char("Your hands aren't steady enough to properly mix the poison.\r\n", ch );
@@ -85,18 +85,18 @@ void do_poison_weapon( Character *ch, char *argument )
     }
   set_wait_state( ch, skill_table[gsn_poison_weapon]->beats );
 
-  percent = (number_percent( ) - GetCurrentLck(ch) - 14);
+  percent = (number_percent( ) - get_curr_lck(ch) - 14);
 
   /* Check the skill percentage */
   separate_obj( pobj );
   separate_obj( wobj );
-  if ( !IsNpc( ch )
+  if ( !is_npc( ch )
        && percent > ch->pcdata->learned[gsn_poison_weapon] )
     {
       set_char_color( AT_RED, ch );
       send_to_char( "You failed and spill some on yourself.  Ouch!\r\n", ch );
       set_char_color( AT_GREY, ch );
-      damage( ch, ch, GetLevel( ch, HUNTING_ABILITY ), gsn_poison_weapon );
+      damage( ch, ch, get_level( ch, HUNTING_ABILITY ), gsn_poison_weapon );
       act(AT_RED, "$n spills the poison all over!", ch, NULL, NULL, TO_ROOM );
       extract_obj( pobj );
       extract_obj( wobj );
@@ -110,9 +110,9 @@ void do_poison_weapon( Character *ch, char *argument )
   act(AT_GREEN, "You pour the poison over $p, which glistens wickedly!",ch, obj, NULL, TO_CHAR  );
   act(AT_GREEN, "$n pours the poison over $p, which glistens wickedly!",ch, obj, NULL, TO_ROOM  );
   SET_BIT( obj->extra_flags, ITEM_POISONED );
-  obj->cost *= GetLevel( ch, HUNTING_ABILITY ) / 2;
+  obj->cost *= get_level( ch, HUNTING_ABILITY ) / 2;
   /* Set an object timer.  Don't want proliferation of poisoned weapons */
-  obj->timer = 10 + GetLevel( ch, HUNTING_ABILITY );
+  obj->timer = 10 + get_level( ch, HUNTING_ABILITY );
 
   if ( IS_OBJ_STAT( obj, ITEM_BLESS ) )
     if ( IS_OBJ_STAT( obj, ITEM_BLESS ) )

@@ -24,14 +24,13 @@
 
 #include "character.h"
 #include "mud.h"
-#include "clan.h"
 
 BOUNTY_DATA *first_bounty = NULL;
 BOUNTY_DATA *last_bounty = NULL;
 BOUNTY_DATA *first_disintegration = NULL;
 BOUNTY_DATA *last_disintegration = NULL;
 
-void nodisintegration( Character *ch , Character *victim , long amount );
+void nodisintegration( CHAR_DATA *ch , CHAR_DATA *victim , long amount );
 
 void save_disintegrations()
 {
@@ -60,7 +59,7 @@ void save_disintegrations()
   fclose( fpout );
 }
 
-bool is_disintegration( const Character *victim )
+bool is_disintegration( const CHAR_DATA *victim )
 {
   BOUNTY_DATA *bounty = NULL;
 
@@ -125,13 +124,13 @@ void load_bounties( void )
   log_string(" Done bounties " );
 }
 
-void disintegration ( const Character *ch , const Character *victim , long amount )
+void disintegration ( const CHAR_DATA *ch , const CHAR_DATA *victim , long amount )
 {
   BOUNTY_DATA *bounty = NULL;
   bool found = FALSE;
   char buf[MAX_STRING_LENGTH];
-  Character *p = NULL;
-  Character *p_prev = NULL;
+  CHAR_DATA *p = NULL;
+  CHAR_DATA *p_prev = NULL;
 
   for ( bounty = first_disintegration; bounty; bounty = bounty->next )
     {
@@ -163,11 +162,11 @@ void disintegration ( const Character *ch , const Character *victim , long amoun
     {
       p_prev = p->prev;
 
-      if ( is_clanned( ch )
+      if ( ch->pcdata && ch->pcdata->clan
 	   && ( !str_cmp(ch->pcdata->clan->name, "the hunters guild")
 		|| !str_cmp(ch->pcdata->clan->name, "the assassins guild") ) )
         ch_printf(p, buf);
-      else if (!IsNpc(p) && GetTrustedLevel(p) >= LEVEL_IMMORTAL)
+      else if (!is_npc(p) && get_trust(p) >= LEVEL_IMMORTAL)
         ch_printf(p, buf);
 
       if (victim == p)
@@ -185,13 +184,13 @@ void remove_disintegration( BOUNTY_DATA *bounty )
   save_disintegrations();
 }
 
-void claim_disintegration( Character *ch, const Character *victim )
+void claim_disintegration( CHAR_DATA *ch, const CHAR_DATA *victim )
 {
   BOUNTY_DATA *bounty = NULL;
   long xp = 0;
   char buf[MAX_STRING_LENGTH];
 
-  if ( IsNpc(victim) )
+  if ( is_npc(victim) )
     return;
 
   bounty = get_disintegration( victim->name );
@@ -204,7 +203,7 @@ void claim_disintegration( Character *ch, const Character *victim )
     }
 
   if (bounty &&
-      (!is_clanned( ch )
+      (!ch->pcdata || !ch->pcdata->clan
        || ( str_cmp(ch->pcdata->clan->name, "the hunters guild")
 	    || str_cmp(ch->pcdata->clan->name, "the assassins guild") ) ) )
     {
@@ -214,14 +213,14 @@ void claim_disintegration( Character *ch, const Character *victim )
 
   if (bounty == NULL)
     {
-      if ( IS_SET(victim->act , PLR_KILLER ) && !IsNpc(ch) )
+      if ( IS_SET(victim->act , PLR_KILLER ) && !is_npc(ch) )
         {
-          xp = URANGE(1, xp_compute(ch, victim) , ( exp_level(GetLevel( ch, HUNTING_ABILITY ) + 1) - exp_level(GetLevel( ch, HUNTING_ABILITY ) ) ) );
+          xp = URANGE(1, xp_compute(ch, victim) , ( exp_level(get_level( ch, HUNTING_ABILITY ) + 1) - exp_level(get_level( ch, HUNTING_ABILITY ) ) ) );
           gain_exp( ch, HUNTING_ABILITY, xp );
           set_char_color( AT_BLOOD, ch );
           ch_printf( ch, "You receive %ld hunting experience for executing a wanted killer.\r\n", xp );
         }
-      else if ( !IsNpc(ch) )
+      else if ( !is_npc(ch) )
         {
           SET_BIT(ch->act, PLR_KILLER );
           ch_printf( ch, "You are now wanted for the murder of %s.\r\n", victim->name );
@@ -232,7 +231,7 @@ void claim_disintegration( Character *ch, const Character *victim )
 
   ch->gold += bounty->amount;
 
-  xp = URANGE(1, bounty->amount + xp_compute(ch, victim) , ( exp_level(GetLevel( ch, HUNTING_ABILITY ) + 1) - exp_level(GetLevel( ch, HUNTING_ABILITY ) ) ) );
+  xp = URANGE(1, bounty->amount + xp_compute(ch, victim) , ( exp_level(get_level( ch, HUNTING_ABILITY ) + 1) - exp_level(get_level( ch, HUNTING_ABILITY ) ) ) );
   gain_exp( ch, HUNTING_ABILITY, xp );
 
   set_char_color( AT_BLOOD, ch );

@@ -2,7 +2,7 @@
 
 extern MOB_INDEX_DATA *mob_index_hash[MAX_KEY_HASH];
 
-void do_mfind( Character *ch, char *argument )
+void do_mfind( CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   MOB_INDEX_DATA *pMobIndex;

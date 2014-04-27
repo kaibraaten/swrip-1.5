@@ -1,22 +1,20 @@
 #include "character.h"
 #include "ships.h"
 #include "mud.h"
-#include "clan.h"
 
-void do_clanbuyship(Character *ch, char *argument )
+void do_clanbuyship(CHAR_DATA *ch, char *argument )
 {
   long         price;
   SHIP_DATA   *ship;
-  Clan   *clan;
-  Clan   *mainclan;
+  CLAN_DATA   *clan;
+  CLAN_DATA   *mainclan;
 
-  if ( IsNpc(ch) || !ch->pcdata )
+  if ( is_npc(ch) || !ch->pcdata )
     {
       send_to_char( "&ROnly players can do that!\r\n" ,ch );
       return;
     }
-
-  if ( !is_clanned( ch ) )
+  if ( !ch->pcdata->clan )
     {
       send_to_char( "&RYou aren't a member of any organizations!\r\n" ,ch );
       return;

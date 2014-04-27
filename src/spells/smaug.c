@@ -6,7 +6,7 @@ extern char *spell_target_name;
 /*
  * Generic handler for new "SMAUG" spells                       -Thoric
  */
-ch_ret spell_smaug( int sn, int level, Character *ch, void *vo )
+ch_ret spell_smaug( int sn, int level, CHAR_DATA *ch, void *vo )
 {
   struct skill_type *skill = get_skilltype(sn);
 
@@ -58,7 +58,7 @@ ch_ret spell_smaug( int sn, int level, Character *ch, void *vo )
     case TAR_CHAR_SELF:
       if ( vo && SPELL_ACTION(skill) == SA_DESTROY )
         {
-          Character *victim = (Character *) vo;
+          CHAR_DATA *victim = (CHAR_DATA *) vo;
 
           /* cure poison */
           if ( SPELL_DAMAGE(skill) == SD_POISON )

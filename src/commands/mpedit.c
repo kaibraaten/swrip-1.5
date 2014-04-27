@@ -5,17 +5,17 @@
 /*
  * Mobprogram editing - cumbersome                              -Thoric
  */
-void do_mpedit( Character *ch, char *argument )
+void do_mpedit( CHAR_DATA *ch, char *argument )
 {
   char arg1 [MAX_INPUT_LENGTH];
   char arg2 [MAX_INPUT_LENGTH];
   char arg3 [MAX_INPUT_LENGTH];
   char arg4 [MAX_INPUT_LENGTH];
-  Character  *victim;
+  CHAR_DATA  *victim;
   MPROG_DATA *mprog, *mprg, *mprg_next;
   int value, mptype, cnt;
 
-  if ( IsNpc( ch ) )
+  if ( is_npc( ch ) )
     {
       send_to_char( "Mob's can't mpedit\r\n", ch );
       return;
@@ -68,7 +68,7 @@ void do_mpedit( Character *ch, char *argument )
       return;
     }
 
-  if ( GetTrustedLevel( ch ) < LEVEL_GOD )
+  if ( get_trust( ch ) < LEVEL_GOD )
     {
       if ( ( victim = get_char_room( ch, arg1 ) ) == NULL )
         {
@@ -85,7 +85,7 @@ void do_mpedit( Character *ch, char *argument )
         }
     }
 
-  if ( GetTrustedLevel( ch ) < GetTrustedLevel( victim ) || !IsNpc(victim) )
+  if ( get_trust( ch ) < get_trust( victim ) || !is_npc(victim) )
     {
       send_to_char( "You can't do that!\r\n", ch );
       return;

@@ -27,7 +27,6 @@
 #include <time.h>
 #include "mud.h"
 #include "character.h"
-#include "room.h"
 
 /*
  * Make a fire.
@@ -66,7 +65,7 @@ void make_scraps( OBJ_DATA *obj )
 {
   char buf[MAX_STRING_LENGTH];
   OBJ_DATA  *scraps, *tmpobj;
-  Character *ch = NULL;
+  CHAR_DATA *ch = NULL;
 
   separate_obj( obj );
   scraps        = create_object( get_obj_index( OBJ_VNUM_SCRAPS ), 0 );
@@ -103,9 +102,7 @@ void make_scraps( OBJ_DATA *obj )
   else
     if ( obj->in_room )
       {
-	ch = GetFirstPersonInRoom( obj->in_room );
-
-        if ( ch != NULL )
+        if ( (ch = obj->in_room->first_person ) != NULL )
           {
             act( AT_OBJECT, "$p is reduced to little more than scraps.",
                  ch, obj, NULL, TO_ROOM );
@@ -140,7 +137,7 @@ void make_scraps( OBJ_DATA *obj )
 /*
  * Make a corpse out of a character.
  */
-void make_corpse( Character *ch, Character *killer )
+void make_corpse( CHAR_DATA *ch, CHAR_DATA *killer )
 {
   char buf[MAX_STRING_LENGTH];
   OBJ_DATA *corpse;
@@ -148,7 +145,7 @@ void make_corpse( Character *ch, Character *killer )
   OBJ_DATA *obj_next;
   char *name;
 
-  if ( IsNpc(ch) )
+  if ( is_npc(ch) )
     {
       name              = ch->short_descr;
       if ( IS_SET ( ch->act , ACT_DROID ) )
@@ -218,7 +215,7 @@ void make_corpse( Character *ch, Character *killer )
 
 
 
-void make_blood( Character *ch )
+void make_blood( CHAR_DATA *ch )
 {
   OBJ_DATA *obj;
 
@@ -229,7 +226,7 @@ void make_blood( Character *ch )
 }
 
 
-void make_bloodstain( Character *ch )
+void make_bloodstain( CHAR_DATA *ch )
 {
   OBJ_DATA *obj;
 

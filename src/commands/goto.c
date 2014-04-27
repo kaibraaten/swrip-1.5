@@ -1,18 +1,17 @@
 #include "character.h"
 #include "mud.h"
 
-void do_goto( Character *ch, char *argument )
+void do_goto( CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  ROOM_INDEX_DATA *location = NULL;
-  ROOM_INDEX_DATA *in_room = NULL;
-  AREA_DATA *pArea = NULL;
-  vnum_t vnum = 0;
-  CerisList *peopleInRoom = NULL;
-  CerisListIterator *peopleInRoomIterator = NULL;
+  ROOM_INDEX_DATA *location;
+  CHAR_DATA *fch;
+  CHAR_DATA *fch_next;
+  ROOM_INDEX_DATA *in_room;
+  AREA_DATA *pArea;
+  short vnum;
 
   one_argument( argument, arg );
-
   if ( arg[0] == '\0' )
     {
       send_to_char( "Goto where?\r\n", ch );
@@ -28,12 +27,12 @@ void do_goto( Character *ch, char *argument )
           return;
 	}
 
-      if ( vnum < 1 || IsNpc(ch) || !ch->pcdata->area )
+      if ( vnum < 1 || is_npc(ch) || !ch->pcdata->area )
         {
           send_to_char( "No such location.\r\n", ch );
           return;
         }
-      if ( GetTrustedLevel( ch ) < sysdata.level_modify_proto &&
+      if ( get_trust( ch ) < sysdata.level_modify_proto &&
            !( ch->pcdata->bestowments && is_name( "intergoto", ch->pcdata->bestowments) ))
 
         {
@@ -62,7 +61,7 @@ void do_goto( Character *ch, char *argument )
 
   if ( room_is_private(ch, location ) )
     {
-      if ( GetTrustedLevel( ch ) < sysdata.level_override_private
+      if ( get_trust( ch ) < sysdata.level_override_private
 	   || ( ch->top_level == 105 ? 0 : ( location->vnum == IMP_ROOM1 ? 1 : ( location->vnum == IMP_ROOM2 ? 1 : 0 ) ) ) )
         {
           send_to_char( "That room is private right now.\r\n", ch );
@@ -72,7 +71,7 @@ void do_goto( Character *ch, char *argument )
 	send_to_char( "Overriding private flag!\r\n", ch );
     }
 
-  if ( GetTrustedLevel( ch ) < LEVEL_GOD &&
+  if ( get_trust( ch ) < LEVEL_GOD &&
        !( ch->pcdata->bestowments && is_name( "intergoto", ch->pcdata->bestowments) ))
     {
       vnum = atoi( arg );
@@ -96,6 +95,7 @@ void do_goto( Character *ch, char *argument )
           send_to_char( "Builders can only use goto from a hotel or in their zone.\r\n", ch );
           return;
         }
+
     }
 
   in_room = ch->in_room;
@@ -130,25 +130,20 @@ void do_goto( Character *ch, char *argument )
         act( AT_IMMORT, "$n $T", ch, NULL, "enters in a swirl of the Force.",  TO_ROOM );
     }
 
+
+
   do_look( ch, "auto" );
 
   if ( ch->in_room == in_room )
     return;
 
-  peopleInRoom = List_Copy( in_room->People );
-  peopleInRoomIterator = CreateListIterator( peopleInRoom, ForwardsIterator );
-
-  for( ; !ListIterator_IsDone( peopleInRoomIterator ); ListIterator_Next( peopleInRoomIterator ) )
+  for ( fch = in_room->first_person; fch; fch = fch_next )
     {
-      Character *fch = (Character*) ListIterator_GetData( peopleInRoomIterator );
-
-      if ( fch->master == ch && IsImmortal(fch) )
+      fch_next = fch->next_in_room;
+      if ( fch->master == ch && is_immortal(fch) )
         {
           act( AT_ACTION, "You follow $N.", fch, NULL, ch, TO_CHAR );
           do_goto( fch, argument );
         }
     }
-
-  DestroyListIterator( peopleInRoomIterator );
-  DestroyList( peopleInRoom );
 }

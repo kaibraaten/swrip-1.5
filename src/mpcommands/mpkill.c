@@ -3,10 +3,10 @@
 
 /* lets the mobile kill any player or mobile without murder*/
 
-void do_mpkill( Character *ch, char *argument )
+void do_mpkill( CHAR_DATA *ch, char *argument )
 {
   char      arg[ MAX_INPUT_LENGTH ];
-  Character *victim;
+  CHAR_DATA *victim;
 
   if (!ch )
     {
@@ -17,7 +17,7 @@ void do_mpkill( Character *ch, char *argument )
   if ( is_affected_by( ch, AFF_CHARM ) )
     return;
 
-  if ( !IsNpc( ch ) )
+  if ( !is_npc( ch ) )
     {
       send_to_char( "Huh?\r\n", ch );
       return;

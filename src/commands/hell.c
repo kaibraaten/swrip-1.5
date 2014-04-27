@@ -2,9 +2,9 @@
 #include "mud.h"
 #include "character.h"
 
-void do_hell( Character *ch, char *argument )
+void do_hell( CHAR_DATA *ch, char *argument )
 {
-  Character *victim;
+  CHAR_DATA *victim;
   char arg[MAX_INPUT_LENGTH];
   short hell_time;
   bool h_d = FALSE;
@@ -16,12 +16,12 @@ void do_hell( Character *ch, char *argument )
       send_to_char( "Hell who, and for how long?\r\n", ch );
       return;
     }
-  if ( !(victim = get_char_world(ch, arg)) || IsNpc(victim) )
+  if ( !(victim = get_char_world(ch, arg)) || is_npc(victim) )
     {
       send_to_char( "They aren't here.\r\n", ch );
       return;
     }
-  if ( IsImmortal(victim) )
+  if ( is_immortal(victim) )
     {
       send_to_char( "There is no point in helling an immortal.\r\n", ch );
       return;

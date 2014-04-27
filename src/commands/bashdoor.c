@@ -1,21 +1,13 @@
 #include "character.h"
 #include "mud.h"
-#include "algocallbacks.h"
 
-static void ShowCrashOpenMessage( void *element, void *userData )
+void do_bashdoor( CHAR_DATA *ch, char *argument )
 {
-  Character *ch = (Character*) element;
-  const char *keyword = (char*) userData;
-
-  act(AT_SKILL, "The $d crashes open!", ch, NULL, keyword, TO_CHAR );
-}
-
-void do_bashdoor( Character *ch, char *argument )
-{
+  CHAR_DATA *gch = NULL;
   EXIT_DATA *pexit = NULL;
   char arg[MAX_INPUT_LENGTH];
 
-  if ( !IsNpc( ch )
+  if ( !is_npc( ch )
        &&  ch->pcdata->learned[gsn_bashdoor] <= 0  )
     {
       send_to_char( "You're not enough of a warrior to bash doors!\r\n", ch );
@@ -45,7 +37,7 @@ void do_bashdoor( Character *ch, char *argument )
 
       if ( !IS_SET( pexit->exit_info, EX_CLOSED ) )
         {
-          send_to_char( "Calm down. It is already open.\r\n", ch );
+          send_to_char( "Calm down.  It is already open.\r\n", ch );
           return;
         }
 
@@ -56,14 +48,14 @@ void do_bashdoor( Character *ch, char *argument )
       else
         keyword = pexit->keyword;
 
-      if ( !IsNpc(ch) )
+      if ( !is_npc(ch) )
         bash_chance = ch->pcdata->learned[gsn_bashdoor] / 2;
       else
         bash_chance = 90;
 
       if ( !IS_SET( pexit->exit_info, EX_BASHPROOF )
            && ch->move >= 15
-           && number_percent() < ( bash_chance + 4 * ( GetCurrentStr( ch ) - 19 ) ) )
+           && number_percent() < ( bash_chance + 4 * ( get_curr_str( ch ) - 19 ) ) )
         {
           REMOVE_BIT( pexit->exit_info, EX_CLOSED );
 
@@ -81,13 +73,20 @@ void do_bashdoor( Character *ch, char *argument )
                &&   (pexit_rev = pexit->rexit) != NULL
                &&    pexit_rev->to_room == ch->in_room )
             {
+              CHAR_DATA *rch = NULL;
+
               REMOVE_BIT( pexit_rev->exit_info, EX_CLOSED );
 
               if ( IS_SET( pexit_rev->exit_info, EX_LOCKED ) )
                 REMOVE_BIT( pexit_rev->exit_info, EX_LOCKED );
 
               SET_BIT( pexit_rev->exit_info, EX_BASHED );
-	      List_ForEach( to_room->People, ShowCrashOpenMessage, pexit_rev->keyword );
+
+              for ( rch = to_room->first_person; rch; rch = rch->next_in_room )
+                {
+                  act(AT_SKILL, "The $d crashes open!",
+                      rch, NULL, pexit_rev->keyword, TO_CHAR );
+		}
             }
 
           damage( ch, ch, ( ch->max_hit / 20 ), gsn_bashdoor );
@@ -114,6 +113,16 @@ void do_bashdoor( Character *ch, char *argument )
 
   if ( !char_died( ch ) )
     {
-      List_ForEach( ch->in_room->People, AttackBasher, ch );
+      for ( gch = ch->in_room->first_person; gch; gch = gch->next_in_room )
+	{
+	  if ( is_awake( gch )
+	       && !gch->fighting
+	       && ( is_npc( gch ) && !is_affected_by( gch, AFF_CHARM ) )
+	       && ( ch->top_level - gch->top_level <= 4 )
+	       && number_bits( 2 ) == 0 )
+	    {
+	      multi_hit( gch, ch, TYPE_UNDEFINED );
+	    }
+	}
     }
 }

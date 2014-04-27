@@ -1,6 +1,6 @@
 #include "mud.h"
 
-void do_cset( Character *ch, char *argument )
+void do_cset( CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_STRING_LENGTH];
   short level;

@@ -1,9 +1,9 @@
 #include "character.h"
 #include "mud.h"
 
-bool spec_poison( Character *ch )
+bool spec_poison( CHAR_DATA *ch )
 {
-  Character *victim;
+  CHAR_DATA *victim;
 
   if ( ch->position != POS_FIGHTING
        || ( victim = who_fighting( ch ) ) == NULL

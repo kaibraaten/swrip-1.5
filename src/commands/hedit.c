@@ -6,10 +6,9 @@
 /*
  * Help editor                                                  -Thoric
  */
-void do_hedit( Character *ch, char *argument )
+void do_hedit( CHAR_DATA *ch, char *argument )
 {
-  HelpFile *pHelp = NULL;
-  char *kludge = NULL;
+  HELP_DATA *pHelp = NULL;
 
   if ( !ch->desc )
     {
@@ -23,7 +22,7 @@ void do_hedit( Character *ch, char *argument )
       break;
 
     case SUB_HELP_EDIT:
-      pHelp = (HelpFile*) ch->dest_buf;
+      pHelp = (HELP_DATA*) ch->dest_buf;
 
       if ( !pHelp )
         {
@@ -32,23 +31,22 @@ void do_hedit( Character *ch, char *argument )
           return;
         }
 
-      kludge = copy_buffer( ch );
-      SetHelpText( pHelp, kludge );
-      STRFREE( kludge );
+      STRFREE( pHelp->text );
+      pHelp->text = copy_buffer( ch );
       stop_editing( ch );
       return;
     }
 
-  pHelp = GetHelp( ch, argument );
+  pHelp = get_help( ch, argument );
 
   if ( !pHelp ) /* new help */
     {
-      int level = GetTrustedLevel( ch );
-      pHelp = CreateHelp( argument, level );
-      AddHelp( pHelp );
+      int level = get_trust( ch );
+      pHelp = create_help( argument, level );
+      add_help( pHelp );
     }
 
   ch->substate = SUB_HELP_EDIT;
   ch->dest_buf = pHelp;
-  start_editing( ch, GetHelpText( pHelp ) );
+  start_editing( ch, pHelp->text );
 }

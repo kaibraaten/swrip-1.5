@@ -1,6 +1,6 @@
 #include "mud.h"
 
-void do_badname(Character *ch, char *arguments)
+void do_badname(CHAR_DATA *ch, char *arguments)
 {
   int return_code = 0;
 

@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-bool spec_janitor( Character *ch )
+bool spec_janitor( CHAR_DATA *ch )
 {
   OBJ_DATA *trash;
   OBJ_DATA *trash_next;

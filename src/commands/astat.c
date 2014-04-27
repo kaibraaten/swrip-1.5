@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_astat( Character *ch, char *argument )
+void do_astat( CHAR_DATA *ch, char *argument )
 {
   AREA_DATA *tarea = NULL;
   bool proto = FALSE;

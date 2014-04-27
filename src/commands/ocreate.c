@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_ocreate( Character *ch, char *argument )
+void do_ocreate( CHAR_DATA *ch, char *argument )
 {
   char arg [MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
@@ -9,7 +9,7 @@ void do_ocreate( Character *ch, char *argument )
   OBJ_DATA *obj = NULL;
   int vnum = 0, cvnum = 0;
 
-  if ( IsNpc(ch) )
+  if ( is_npc(ch) )
     {
       send_to_char( "Mobiles cannot create.\r\n", ch );
       return;
@@ -46,10 +46,10 @@ void do_ocreate( Character *ch, char *argument )
       return;
     }
 
-  if ( IsNpc( ch ) )
+  if ( is_npc( ch ) )
     return;
 
-  if ( GetTrustedLevel( ch ) <= LEVEL_IMMORTAL )
+  if ( get_trust( ch ) <= LEVEL_IMMORTAL )
     {
       AREA_DATA *pArea;
 
@@ -79,7 +79,7 @@ void do_ocreate( Character *ch, char *argument )
       return;
     }
 
-  obj = create_object( pObjIndex, GetTrustedLevel(ch) );
+  obj = create_object( pObjIndex, get_trust(ch) );
   obj_to_char( obj, ch );
   act( AT_IMMORT, "$n makes some ancient arcane gestures, and opens $s hands to reveal $p!",
        ch, obj, NULL, TO_ROOM );

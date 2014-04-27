@@ -2,7 +2,7 @@
 #include "mud.h"
 #include "arena.h"
 
-void do_accept(Character *ch, char *argument)
+void do_accept(CHAR_DATA *ch, char *argument)
 {
   char buf[MAX_INPUT_LENGTH];
 
@@ -19,7 +19,7 @@ void do_accept(Character *ch, char *argument)
     }
   else
     {
-      Character *dch;
+      CHAR_DATA *dch;
       dch = ch->challenged;
 
       if (!dch || !(dch->in_room) || !(dch->name) || (ch->name[0] == '\0'))

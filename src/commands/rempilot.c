@@ -2,7 +2,7 @@
 #include "mud.h"
 #include "ships.h"
 
-void do_rempilot(Character *ch, char *argument )
+void do_rempilot(CHAR_DATA *ch, char *argument )
 {
   int the_chance;
   SHIP_DATA *ship;
@@ -19,7 +19,7 @@ void do_rempilot(Character *ch, char *argument )
       return;
     }
   the_chance = number_percent( );
-  if ( IsNpc(ch) || the_chance >= ch->pcdata->learned[gsn_slicing] )
+  if ( is_npc(ch) || the_chance >= ch->pcdata->learned[gsn_slicing] )
     {
       if ( !check_pilot( ch , ship ) )
         {

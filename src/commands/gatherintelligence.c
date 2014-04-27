@@ -1,11 +1,10 @@
 #include <string.h>
 #include "mud.h"
 #include "character.h"
-#include "clan.h"
 
-void do_gather_intelligence ( Character *ch , char *argument )
+void do_gather_intelligence ( CHAR_DATA *ch , char *argument )
 {
-  Character *victim;
+  CHAR_DATA *victim;
   char buf[MAX_STRING_LENGTH];
   int percent, the_chance;
   PLANET_DATA *planet;
@@ -29,7 +28,7 @@ void do_gather_intelligence ( Character *ch , char *argument )
       return;
     }
 
-  if(IsNpc(victim))
+  if(is_npc(victim))
     {
       send_to_char("This person has not made much of a name for himself!\r\n", ch);
       return;
@@ -37,7 +36,7 @@ void do_gather_intelligence ( Character *ch , char *argument )
 
   percent = number_percent( )*2;
 
-  if ( IsNpc(ch) || percent < ch->pcdata->learned[gsn_gather_intelligence] )
+  if ( is_npc(ch) || percent < ch->pcdata->learned[gsn_gather_intelligence] )
     {
 
       if ( ch == victim )
@@ -68,7 +67,7 @@ void do_gather_intelligence ( Character *ch , char *argument )
         }
       if ( the_chance < 30 )
         {
-          if ( is_clanned( victim ) )
+          if ( victim->pcdata->clan )
             {
               sprintf( buf, "%s seems to be involved with %s.", victim->name, victim->pcdata->clan->name );
               send_to_char( buf, ch );
@@ -160,7 +159,7 @@ void do_gather_intelligence ( Character *ch , char *argument )
 
       if ( the_chance < 55 )
         {
-          if ( IsForcer( victim ) )
+          if ( get_level( victim, FORCE_ABILITY ) > 1 )
             {
               if ( victim->mana > 1000 )
                 sprintf( buf, "%s appears to have centered his attention on studying the force, and is rumored to excel at its use.", victim->name );

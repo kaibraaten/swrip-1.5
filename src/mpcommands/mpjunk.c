@@ -5,7 +5,7 @@
    it can also destroy a worn object and it can destroy
    items using all.xxxxx or just plain all of them */
 
-void do_mpjunk( Character *ch, char *argument )
+void do_mpjunk( CHAR_DATA *ch, char *argument )
 {
   char      arg[ MAX_INPUT_LENGTH ];
   OBJ_DATA *obj;
@@ -14,7 +14,7 @@ void do_mpjunk( Character *ch, char *argument )
   if ( is_affected_by( ch, AFF_CHARM ) )
     return;
 
-  if ( !IsNpc( ch ) )
+  if ( !is_npc( ch ) )
     {
       send_to_char( "Huh?\r\n", ch );
       return;

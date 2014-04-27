@@ -2,12 +2,12 @@
 #include "mud.h"
 #include "character.h"
 
-void do_disguise( Character *ch, char *argument )
+void do_disguise( CHAR_DATA *ch, char *argument )
 {
   int the_chance;
   short gsn;
 
-  if ( IsNpc(ch) )
+  if ( is_npc(ch) )
     return;
 
   if ( IS_SET( ch->pcdata->flags, PCFLAG_NOTITLE ))
