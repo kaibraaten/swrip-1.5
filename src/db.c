@@ -2803,7 +2803,6 @@ void log_string_plus( const char *str, short log_type, short level )
 {
   char *strtime = ctime( &current_time );
   int offset = 0;
-  DESCRIPTOR_DATA *d = NULL;
   bool lognone = FALSE;
   char buf[MAX_STRING_LENGTH];
 
@@ -2842,6 +2841,8 @@ void log_string_plus( const char *str, short log_type, short level )
 
   if (lognone)
     {
+      DESCRIPTOR_DATA *d = NULL;
+
       for ( d = first_descriptor; d; d = d->next )
 	{
 	  CHAR_DATA *och = d->original ? d->original : d->character;
