@@ -33,7 +33,7 @@ void set_exp( CHAR_DATA *ch, short ability, long xp )
 
   if( xp < 0 )
     {
-      bug( "%s: negative value %d invalid", xp );
+      bug( "%s: negative value %d invalid", __FUNCTION__, xp );
       return;
     }
 
@@ -269,7 +269,7 @@ void set_level( CHAR_DATA *ch, short ability, int newlevel )
   if( newlevel >= 0 && newlevel <= MAX_ABILITY_LEVEL )
     ch->ability.level[ability] = newlevel;
   else
-    bug("%s: level out of range: %d", newlevel);
+    bug("%s: level out of range: %d", __FUNCTION__, newlevel);
 }
 
 /*

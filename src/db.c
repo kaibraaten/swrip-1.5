@@ -2682,13 +2682,13 @@ ROOM_INDEX_DATA *get_room_index( int vnum )
 void bug( const char *str, ... )
 {
   char buf[MAX_STRING_LENGTH];
-  FILE *fp;
+  FILE *fp = NULL;
   struct stat fst;
 
   if ( fpArea != NULL )
     {
-      int iLine;
-      int iChar;
+      int iLine = 0;
+      int iChar = 0;
 
       if ( fpArea == stdin )
         {
@@ -2698,11 +2698,13 @@ void bug( const char *str, ... )
         {
           iChar = ftell( fpArea );
           fseek( fpArea, 0, 0 );
+
           for ( iLine = 0; ftell( fpArea ) < iChar; iLine++ )
             {
               while ( getc( fpArea ) != '\n' )
                 ;
             }
+
           fseek( fpArea, iChar, 0 );
         }
 
@@ -2720,6 +2722,7 @@ void bug( const char *str, ... )
     }
 
   strcpy( buf, "[*****] BUG: " );
+
   {
     va_list param;
 
@@ -2727,6 +2730,7 @@ void bug( const char *str, ... )
     vsprintf( buf + strlen(buf), str, param );
     va_end(param);
   }
+
   log_string( buf );
 
   if ( ( fp = fopen( BUG_FILE, "a" ) ) != NULL )
