@@ -1634,7 +1634,6 @@ extern struct act_prog_data *mob_act_list;
 /*
  * Command functions.
  */
-DECLARE_DO_FUN( do_test );
 DECLARE_DO_FUN( do_copyover );
 DECLARE_DO_FUN( do_nohelps      );
 DECLARE_DO_FUN( do_skin         );

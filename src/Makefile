@@ -480,7 +480,6 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/target.o \
 	$(CMDDIR)/teach.o \
 	$(CMDDIR)/tell.o \
-	$(CMDDIR)/test.o \
 	$(CMDDIR)/throw.o \
 	$(CMDDIR)/time.o \
 	$(CMDDIR)/timecmd.o \
