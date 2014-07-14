@@ -146,7 +146,6 @@ short gsn_vibro_blades;
 short gsn_flexible_arms;
 short gsn_talonous_arms;
 short gsn_bludgeons;
-short gsn_shieldwork;
 
 /* thief */
 short gsn_detrap;
@@ -182,38 +181,27 @@ short gsn_grip;
 short gsn_berserk;
 short gsn_hitall;
 
-/* vampire */
-short gsn_feed;
-
 /* other   */
 short gsn_aid;
 short gsn_track;
 short gsn_search;
 short gsn_dig;
 short gsn_mount;
-short gsn_bite;
-short gsn_claw;
-short gsn_sting;
-short gsn_tail;
 short gsn_scribe;
 short gsn_study;
-short gsn_brew;
 short gsn_climb;
 short gsn_scan;
-short gsn_slice;
 
 /* spells */
 short gsn_aqua_breath;
 short gsn_blindness;
 short gsn_charm_person;
-short gsn_curse;
 short gsn_invis;
 short gsn_mass_invis;
 short gsn_poison;
 short gsn_sleep;
 short gsn_possess;
 short gsn_fireball;
-short gsn_chill_touch;
 short gsn_lightning_bolt;
 
 /* languages */
@@ -560,7 +548,6 @@ void boot_db( bool fCopyOver )
     ASSIGN_GSN( gsn_flexible_arms,      "flexible arms" );
     ASSIGN_GSN( gsn_talonous_arms,      "talonous arms" );
     ASSIGN_GSN( gsn_bludgeons,  "bludgeons" );
-    ASSIGN_GSN( gsn_shieldwork, "shieldwork" );
     ASSIGN_GSN( gsn_detrap,             "detrap" );
     ASSIGN_GSN( gsn_backstab,   "backstab" );
     ASSIGN_GSN( gsn_circle,             "circle" );
@@ -591,29 +578,20 @@ void boot_db( bool fCopyOver )
     ASSIGN_GSN( gsn_grip,               "grip" );
     ASSIGN_GSN( gsn_berserk,    "berserk" );
     ASSIGN_GSN( gsn_hitall,             "hitall" );
-    ASSIGN_GSN( gsn_feed,               "feed" );
     ASSIGN_GSN( gsn_aid,                "aid" );
     ASSIGN_GSN( gsn_track,              "track" );
     ASSIGN_GSN( gsn_search,             "search" );
     ASSIGN_GSN( gsn_dig,                "dig" );
     ASSIGN_GSN( gsn_mount,              "mount" );
-    ASSIGN_GSN( gsn_bite,               "bite" );
-    ASSIGN_GSN( gsn_claw,               "claw" );
-    ASSIGN_GSN( gsn_sting,              "sting" );
-    ASSIGN_GSN( gsn_tail,               "tail" );
     ASSIGN_GSN( gsn_scribe,             "scribe" );
     ASSIGN_GSN( gsn_study,              "study" );
-    ASSIGN_GSN( gsn_brew,               "brew" );
     ASSIGN_GSN( gsn_climb,              "climb" );
     ASSIGN_GSN( gsn_scan,               "scan" );
-    ASSIGN_GSN( gsn_slice,              "slice" );
     ASSIGN_GSN( gsn_fireball,   "fireball" );
-    ASSIGN_GSN( gsn_chill_touch,        "chill touch" );
     ASSIGN_GSN( gsn_lightning_bolt,     "force bolt" );
     ASSIGN_GSN( gsn_aqua_breath,        "aqua breath" );
     ASSIGN_GSN( gsn_blindness,  "blindness" );
     ASSIGN_GSN( gsn_charm_person,       "affect mind" );
-    ASSIGN_GSN( gsn_curse,              "curse" );
     ASSIGN_GSN( gsn_invis,              "mask" );
     ASSIGN_GSN( gsn_mass_invis, "group masking" );
     ASSIGN_GSN( gsn_poison,             "poison" );
