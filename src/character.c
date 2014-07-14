@@ -266,10 +266,16 @@ short get_level( const CHAR_DATA *ch, short ability )
 
 void set_level( CHAR_DATA *ch, short ability, int newlevel )
 {
-  if( newlevel >= 0 && newlevel <= MAX_ABILITY_LEVEL )
-    ch->ability.level[ability] = newlevel;
+  int maxlevel = is_immortal( ch ) ? 200 : MAX_ABILITY_LEVEL;
+
+  if( newlevel >= 0 && newlevel <= maxlevel )
+    {
+      ch->ability.level[ability] = newlevel;
+    }
   else
-    bug("%s: level out of range: %d", __FUNCTION__, newlevel);
+    {
+      bug("%s: level out of range: %d", __FUNCTION__, newlevel);
+    }
 }
 
 /*
