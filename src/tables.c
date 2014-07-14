@@ -24,6 +24,7 @@
 #include <time.h>
 #include <stdio.h>
 #include <string.h>
+#include <strings.h>
 #include <ctype.h>
 #include "mud.h"
 
@@ -836,7 +837,7 @@ int skill_comp( SKILLTYPE **sk1, SKILLTYPE **sk2 )
     return -1;
   if ( skill1->type > skill2->type )
     return 1;
-  return str_cmp( skill1->name, skill2->name );
+  return strcasecmp( skill1->name, skill2->name );
 }
 
 /*

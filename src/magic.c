@@ -23,6 +23,7 @@
 
 #include <ctype.h>
 #include <string.h>
+#include <strings.h>
 #include "mud.h"
 #include "character.h"
 
@@ -190,7 +191,7 @@ int bsearch_skill( const char *name, int first, int top )
         return sn;
       if (first >= top)
         return -1;
-      if (str_cmp(name, skill_table[sn]->name) < 1)
+      if (strcasecmp(name, skill_table[sn]->name) < 1)
         top = sn - 1;
       else
         first = sn + 1;
@@ -214,7 +215,7 @@ int bsearch_skill_exact( const char *name, int first, int top )
         return sn;
       if (first >= top)
         return -1;
-      if (str_cmp(name, skill_table[sn]->name) < 1)
+      if (strcasecmp(name, skill_table[sn]->name) < 1)
         top = sn - 1;
       else
         first = sn + 1;
@@ -241,7 +242,7 @@ int ch_bsearch_skill( const CHAR_DATA *ch, const char *name, int first, int top 
         return sn;
       if (first >= top)
         return -1;
-      if (str_cmp( name, skill_table[sn]->name) < 1)
+      if (strcasecmp( name, skill_table[sn]->name) < 1)
         top = sn - 1;
       else
         first = sn + 1;
