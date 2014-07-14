@@ -11,7 +11,7 @@ void do_makeblade( CHAR_DATA *ch, char *argument )
   bool checktool, checkdura, checkbatt, checkoven, checkstaff;
   OBJ_DATA *obj;
   OBJ_INDEX_DATA *pObjIndex;
-  int vnum;
+  vnum_t vnum;
   AFFECT_DATA *paf;
   AFFECT_DATA *paf2;
 
@@ -108,7 +108,7 @@ void do_makeblade( CHAR_DATA *ch, char *argument )
   ch->substate = SUB_NONE;
 
   level = is_npc(ch) ? ch->top_level : (int) (ch->pcdata->learned[gsn_makeblade]);
-  vnum = 10422;
+  vnum = OBJ_VNUM_CRAFTING_BLADE;
 
   if ( ( pObjIndex = get_obj_index( vnum ) ) == NULL )
     {

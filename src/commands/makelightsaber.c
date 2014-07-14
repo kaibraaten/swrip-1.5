@@ -11,7 +11,8 @@ void do_makelightsaber( CHAR_DATA *ch, char *argument )
     checkoven, checkcond, checkcirc, checklens, checkgems, checkmirr;
   OBJ_DATA *obj;
   OBJ_INDEX_DATA *pObjIndex;
-  int vnum, level, gems, charge, gemtype;
+  vnum_t vnum;
+  int level, gems, charge, gemtype;
   AFFECT_DATA *paf;
   AFFECT_DATA *paf2;
 
@@ -150,7 +151,7 @@ void do_makelightsaber( CHAR_DATA *ch, char *argument )
   ch->substate = SUB_NONE;
 
   level = is_npc(ch) ? ch->top_level : (int) (ch->pcdata->learned[gsn_lightsaber_crafting]);
-  vnum = 10421;
+  vnum = OBJ_VNUM_CRAFTING_LIGHTSABER;
 
   if ( ( pObjIndex = get_obj_index( vnum ) ) == NULL )
     {

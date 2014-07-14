@@ -10,7 +10,8 @@ void do_makeshield( CHAR_DATA *ch, char *argument )
   bool checktool, checkbatt, checkcond, checkcirc, checkgems;
   OBJ_DATA *obj;
   OBJ_INDEX_DATA *pObjIndex;
-  int vnum, level, charge, gemtype = 0;
+  vnum_t vnum;
+  int level, charge, gemtype = 0;
 
   strcpy( arg, argument );
 
@@ -111,7 +112,7 @@ void do_makeshield( CHAR_DATA *ch, char *argument )
   ch->substate = SUB_NONE;
 
   level = is_npc(ch) ? ch->top_level : (int) (ch->pcdata->learned[gsn_makeshield]);
-  vnum = 10429;
+  vnum = OBJ_VNUM_CRAFTING_SHIELD;
 
   if ( ( pObjIndex = get_obj_index( vnum ) ) == NULL )
     {

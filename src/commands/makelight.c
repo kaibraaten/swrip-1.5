@@ -10,7 +10,7 @@ void do_makelight( CHAR_DATA *ch, char *argument )
   bool checktool, checkbatt, checkchem, checkcirc, checklens;
   OBJ_DATA *obj;
   OBJ_INDEX_DATA *pObjIndex;
-  int vnum;
+  vnum_t vnum;
 
   strcpy( arg , argument );
 
@@ -112,7 +112,7 @@ void do_makelight( CHAR_DATA *ch, char *argument )
   ch->substate = SUB_NONE;
 
   level = is_npc(ch) ? ch->top_level : (int) (ch->pcdata->learned[gsn_makelight]);
-  vnum = 10428;
+  vnum = OBJ_VNUM_CRAFTING_GLOWROD;
 
   if ( ( pObjIndex = get_obj_index( vnum ) ) == NULL )
     {
@@ -166,7 +166,7 @@ void do_makelight( CHAR_DATA *ch, char *argument )
 
   if ( number_percent( ) > the_chance*2  || ( !checktool ) || ( !checklens ) || ( !checkbatt ) || ( !checkchem ) || ( !checkcirc) )
     {
-      send_to_char( "&RJust as you are about to finish your work,\r\nyour newly created light explodes in your hands...doh!\r\n", ch);
+      send_to_char( "&RJust as you are about to finish your work,\r\nyour newly created glowrod explodes in your hands...doh!\r\n", ch);
       learn_from_failure( ch, gsn_makelight );
       return;
     }
@@ -179,7 +179,7 @@ void do_makelight( CHAR_DATA *ch, char *argument )
   obj->weight = 3;
   STRFREE( obj->name );
   strcpy( buf , arg );
-  strcat( buf , " light");
+  strcat( buf , " glowrod");
   obj->name = STRALLOC( buf );
   strcpy( buf, arg );
   STRFREE( obj->short_descr );
@@ -192,8 +192,8 @@ void do_makelight( CHAR_DATA *ch, char *argument )
 
   obj = obj_to_char( obj, ch );
 
-  send_to_char( "&GYou finish your work and hold up your newly created light.&w\r\n", ch);
-  act( AT_PLAIN, "$n finishes making $s new light.", ch,
+  send_to_char( "&GYou finish your work and hold up your newly created glowrod.&w\r\n", ch);
+  act( AT_PLAIN, "$n finishes making $s new glowrod.", ch,
        NULL, argument , TO_ROOM );
 
   {

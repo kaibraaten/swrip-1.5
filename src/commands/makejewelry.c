@@ -177,10 +177,12 @@ void do_makejewelry( CHAR_DATA *ch, char *argument )
   obj->item_type = ITEM_ARMOR;
   SET_BIT( obj->wear_flags, ITEM_TAKE );
   value = get_wearflag( arg );
+
   if ( value < 0 || value > 31 )
     SET_BIT( obj->wear_flags, ITEM_WEAR_NECK );
   else
     SET_BIT( obj->wear_flags, 1 << value );
+
   obj->level = level;
   STRFREE( obj->name );
   strcpy( buf, arg2 );

@@ -13,7 +13,8 @@ void do_makedisguise( CHAR_DATA *ch, char *argument )
   bool checkneedle, checkfabric, checkhair;
   OBJ_DATA *obj;
   OBJ_INDEX_DATA *pObjIndex;
-  int vnum, sex, race;
+  vnum_t vnum;
+  int sex, race;
 
   strcpy( arg, argument );
 
@@ -113,7 +114,7 @@ void do_makedisguise( CHAR_DATA *ch, char *argument )
   sex = atoi(arg1)/1000;
 
   level = is_npc(ch) ? ch->top_level : (int) (ch->pcdata->learned[gsn_disguise]);
-  vnum = 10420;
+  vnum = OBJ_VNUM_CRAFTING_DISGUISE;
 
   if ( ( pObjIndex = get_obj_index( vnum ) ) == NULL )
     {

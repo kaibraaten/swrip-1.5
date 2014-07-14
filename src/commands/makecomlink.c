@@ -12,7 +12,7 @@ void do_makecomlink( CHAR_DATA *ch, char *argument )
   OBJ_DATA *obj;
   int value;
   OBJ_INDEX_DATA *pObjIndex;
-  int vnum;
+  vnum_t vnum;
 
   argument = one_argument( argument, arg );
   strcpy ( arg2, argument);
@@ -134,7 +134,7 @@ void do_makecomlink( CHAR_DATA *ch, char *argument )
 
   ch->substate = SUB_NONE;
 
-  vnum = 10430;
+  vnum = OBJ_VNUM_CRAFTING_COMLINK;
 
   if ( ( pObjIndex = get_obj_index( vnum ) ) == NULL )
     {

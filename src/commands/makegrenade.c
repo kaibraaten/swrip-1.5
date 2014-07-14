@@ -111,7 +111,7 @@ void do_makegrenade( CHAR_DATA *ch, char *argument )
   ch->substate = SUB_NONE;
 
   level = is_npc(ch) ? ch->top_level : (int) (ch->pcdata->learned[gsn_makegrenade]);
-  vnum = 10425;
+  vnum = OBJ_VNUM_CRAFTING_GRENADE;
 
   if ( ( pObjIndex = get_obj_index( vnum ) ) == NULL )
     {

@@ -10,7 +10,8 @@ void do_makebowcaster( CHAR_DATA *ch, char *argument )
   bool checktool, checkoven, checkdura, checkbow, checktinder, checkoil, checkammo;
   OBJ_DATA *obj;
   OBJ_INDEX_DATA *pObjIndex;
-  int vnum, power, scope, ammo;
+  int vnum;
+  int power, scope, ammo;
   AFFECT_DATA *paf;
   AFFECT_DATA *paf2;
 
@@ -128,7 +129,7 @@ void do_makebowcaster( CHAR_DATA *ch, char *argument )
   ch->substate = SUB_NONE;
 
   level = is_npc(ch) ? ch->top_level : (int) (ch->pcdata->learned[gsn_makebowcaster]);
-  vnum = 10431;
+  vnum = OBJ_VNUM_CRAFTING_BOWCASTER;
 
   if ( ( pObjIndex = get_obj_index( vnum ) ) == NULL )
     {
