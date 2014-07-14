@@ -126,7 +126,7 @@ short gsn_spice_refining;
 short gsn_makeblade;
 short gsn_makeblaster;
 short gsn_makebowcaster;
-short gsn_makelight;
+short gsn_makeglowrod;
 short gsn_makecomlink;
 short gsn_makegrenade;
 short gsn_makelandmine;
@@ -519,7 +519,7 @@ void boot_db( bool fCopyOver )
     ASSIGN_GSN( gsn_makeblade  , "makeblade" );
     ASSIGN_GSN( gsn_makeblaster  , "makeblaster" );
     ASSIGN_GSN( gsn_makebowcaster  , "makebowcaster" );
-    ASSIGN_GSN( gsn_makelight   , "makeflashlight" );
+    ASSIGN_GSN( gsn_makeglowrod   , "makeglowrod" );
     ASSIGN_GSN( gsn_makecomlink   , "makecomlink" );
     ASSIGN_GSN( gsn_makegrenade   , "makegrenade" );
     ASSIGN_GSN( gsn_makelandmine  , "makelandmine" );

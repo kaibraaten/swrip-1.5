@@ -268,10 +268,10 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/makecomlink.o \
 	$(CMDDIR)/makecontainer.o \
 	$(CMDDIR)/makedisguise.o \
+	$(CMDDIR)/makeglowrod.o \
 	$(CMDDIR)/makegrenade.o \
 	$(CMDDIR)/makejewelry.o \
 	$(CMDDIR)/makelandmine.o \
-	$(CMDDIR)/makelight.o \
 	$(CMDDIR)/makelightsaber.o \
 	$(CMDDIR)/makeplanet.o \
 	$(CMDDIR)/makerepair.o \

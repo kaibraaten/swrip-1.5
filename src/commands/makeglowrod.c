@@ -2,7 +2,7 @@
 #include "mud.h"
 #include "character.h"
 
-void do_makelight( CHAR_DATA *ch, char *argument )
+void do_makeglowrod( CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   char buf[MAX_STRING_LENGTH];
@@ -80,19 +80,19 @@ void do_makelight( CHAR_DATA *ch, char *argument )
         }
 
       the_chance = is_npc(ch) ? ch->top_level
-        : (int) (ch->pcdata->learned[gsn_makelight]);
+        : (int) (ch->pcdata->learned[gsn_makeglowrod]);
 
       if ( number_percent( ) < the_chance )
         {
           send_to_char( "&GYou begin the long process of making a light.\r\n", ch);
           act( AT_PLAIN, "$n takes $s tools and begins to work on something.", ch,
                NULL, argument , TO_ROOM );
-          add_timer ( ch , TIMER_DO_FUN , 10 , do_makelight , 1 );
+          add_timer ( ch , TIMER_DO_FUN , 10 , do_makeglowrod , 1 );
           ch->dest_buf   = str_dup(arg);
           return;
         }
       send_to_char("&RYou can't figure out how to fit the parts together.\r\n",ch);
-      learn_from_failure( ch, gsn_makelight );
+      learn_from_failure( ch, gsn_makeglowrod );
       return;
 
     case SUB_PAUSE:
@@ -111,7 +111,7 @@ void do_makelight( CHAR_DATA *ch, char *argument )
 
   ch->substate = SUB_NONE;
 
-  level = is_npc(ch) ? ch->top_level : (int) (ch->pcdata->learned[gsn_makelight]);
+  level = is_npc(ch) ? ch->top_level : (int) (ch->pcdata->learned[gsn_makeglowrod]);
   vnum = OBJ_VNUM_CRAFTING_GLOWROD;
 
   if ( ( pObjIndex = get_obj_index( vnum ) ) == NULL )
@@ -162,12 +162,12 @@ void do_makelight( CHAR_DATA *ch, char *argument )
     }
 
   the_chance = is_npc(ch) ? ch->top_level
-    : (int) (ch->pcdata->learned[gsn_makelight]) ;
+    : (int) (ch->pcdata->learned[gsn_makeglowrod]) ;
 
   if ( number_percent( ) > the_chance*2  || ( !checktool ) || ( !checklens ) || ( !checkbatt ) || ( !checkchem ) || ( !checkcirc) )
     {
       send_to_char( "&RJust as you are about to finish your work,\r\nyour newly created glowrod explodes in your hands...doh!\r\n", ch);
-      learn_from_failure( ch, gsn_makelight );
+      learn_from_failure( ch, gsn_makeglowrod );
       return;
     }
 
@@ -203,5 +203,5 @@ void do_makelight( CHAR_DATA *ch, char *argument )
     gain_exp(ch, ENGINEERING_ABILITY, xpgain );
     ch_printf( ch , "You gain %d engineering experience.", xpgain );
   }
-  learn_from_success( ch, gsn_makelight );
+  learn_from_success( ch, gsn_makeglowrod );
 }
