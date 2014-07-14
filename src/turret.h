@@ -25,8 +25,8 @@ void set_turret_target( TURRET_DATA *turret, SHIP_DATA *target );
 SHIP_DATA *get_turret_target( const TURRET_DATA *turret );
 bool turret_has_target( const TURRET_DATA *turret );
 
-void set_turret_room( TURRET_DATA *turret, int room_vnum );
-int get_turret_room( const TURRET_DATA *turret );
+void set_turret_room( TURRET_DATA *turret, vnum_t room_vnum );
+vnum_t get_turret_room( const TURRET_DATA *turret );
 
 int get_energy_draw( const TURRET_DATA *turret );
 

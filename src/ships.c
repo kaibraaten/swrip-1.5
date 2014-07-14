@@ -2820,7 +2820,7 @@ SHIP_DATA *get_ship_here( const char *name , SHIP_DATA *eShip)
 /*
  * Get pointer to ship structure from cockpit, turret, or entrance ramp vnum.
  */
-SHIP_DATA *ship_from_cockpit( int vnum )
+SHIP_DATA *ship_from_cockpit( vnum_t vnum )
 {
   SHIP_DATA *ship = NULL;
 
@@ -2851,7 +2851,7 @@ SHIP_DATA *ship_from_cockpit( int vnum )
   return NULL;
 }
 
-SHIP_DATA *ship_from_pilotseat( int vnum )
+SHIP_DATA *ship_from_pilotseat( vnum_t vnum )
 {
   SHIP_DATA *ship = NULL;
 
@@ -2862,7 +2862,7 @@ SHIP_DATA *ship_from_pilotseat( int vnum )
   return NULL;
 }
 
-SHIP_DATA *ship_from_coseat( int vnum )
+SHIP_DATA *ship_from_coseat( vnum_t vnum )
 {
   SHIP_DATA *ship = NULL;
 
@@ -2873,7 +2873,7 @@ SHIP_DATA *ship_from_coseat( int vnum )
   return NULL;
 }
 
-SHIP_DATA *ship_from_navseat( int vnum )
+SHIP_DATA *ship_from_navseat( vnum_t vnum )
 {
   SHIP_DATA *ship = NULL;
 
@@ -2884,7 +2884,7 @@ SHIP_DATA *ship_from_navseat( int vnum )
   return NULL;
 }
 
-SHIP_DATA *ship_from_gunseat( int vnum )
+SHIP_DATA *ship_from_gunseat( vnum_t vnum )
 {
   SHIP_DATA *ship = NULL;
 
@@ -2895,7 +2895,7 @@ SHIP_DATA *ship_from_gunseat( int vnum )
   return NULL;
 }
 
-SHIP_DATA *ship_from_engine( int vnum )
+SHIP_DATA *ship_from_engine( vnum_t vnum )
 {
   SHIP_DATA *ship = NULL;
 
@@ -2916,7 +2916,7 @@ SHIP_DATA *ship_from_engine( int vnum )
   return NULL;
 }
 
-SHIP_DATA *ship_from_turret( int vnum )
+SHIP_DATA *ship_from_turret( vnum_t vnum )
 {
   SHIP_DATA *ship = NULL;
 
@@ -2941,7 +2941,7 @@ SHIP_DATA *ship_from_turret( int vnum )
   return NULL;
 }
 
-SHIP_DATA *ship_from_entrance( int vnum )
+SHIP_DATA *ship_from_entrance( vnum_t vnum )
 {
   SHIP_DATA *ship = NULL;
 
@@ -2952,7 +2952,7 @@ SHIP_DATA *ship_from_entrance( int vnum )
   return NULL;
 }
 
-SHIP_DATA *ship_from_hanger( int vnum )
+SHIP_DATA *ship_from_hanger( vnum_t vnum )
 {
   SHIP_DATA *ship = NULL;
 
@@ -3383,12 +3383,13 @@ void destroy_ship( SHIP_DATA *ship , CHAR_DATA *ch )
   resetship(ship);
 }
 
-bool ship_to_room(SHIP_DATA *ship , int vnum )
+bool ship_to_room(SHIP_DATA *ship, vnum_t vnum )
 {
-  ROOM_INDEX_DATA *shipto;
+  ROOM_INDEX_DATA *shipto = NULL;
 
-  if ( (shipto=get_room_index(vnum)) == NULL )
+  if ( (shipto = get_room_index(vnum)) == NULL )
     return FALSE;
+
   LINK( ship, shipto->first_ship, shipto->last_ship, next_in_room, prev_in_room );
   ship->in_room = shipto;
   return TRUE;

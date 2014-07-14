@@ -83,7 +83,7 @@ void generate_quest(CHAR_DATA *ch, CHAR_DATA *questman)
 
   if (qchance(40))
     {
-      int objvnum = 0;
+      vnum_t objvnum = 0;
 
       switch(number_range(0,4))
         {

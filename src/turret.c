@@ -4,7 +4,7 @@
 
 struct turret_data
 {
-  int room_vnum;
+  vnum_t room_vnum;
   int weapon_state;
   SHIP_DATA *target;
   SHIP_DATA *owner;
@@ -104,12 +104,12 @@ bool turret_has_target( const TURRET_DATA *turret )
   return get_turret_target( turret ) != NULL;
 }
 
-void set_turret_room( TURRET_DATA *turret, int room_vnum )
+void set_turret_room( TURRET_DATA *turret, vnum_t room_vnum )
 {
   turret->room_vnum = room_vnum;
 }
 
-int get_turret_room( const TURRET_DATA *turret )
+vnum_t get_turret_room( const TURRET_DATA *turret )
 {
   return turret->room_vnum;
 }

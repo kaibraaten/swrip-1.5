@@ -2607,7 +2607,7 @@ char *get_extra_descr( const char *name, EXTRA_DESCR_DATA *ed )
  * Translates mob virtual number to its mob index struct.
  * Hash table lookup.
  */
-MOB_INDEX_DATA *get_mob_index( short vnum )
+MOB_INDEX_DATA *get_mob_index( vnum_t vnum )
 {
   MOB_INDEX_DATA *pMobIndex;
 
@@ -2632,7 +2632,7 @@ MOB_INDEX_DATA *get_mob_index( short vnum )
  * Translates obj virtual number to its obj index struct.
  * Hash table lookup.
  */
-OBJ_INDEX_DATA *get_obj_index( int vnum )
+OBJ_INDEX_DATA *get_obj_index( vnum_t vnum )
 {
   OBJ_INDEX_DATA *pObjIndex;
 
@@ -2651,13 +2651,11 @@ OBJ_INDEX_DATA *get_obj_index( int vnum )
   return NULL;
 }
 
-
-
 /*
  * Translates room virtual number to its room index struct.
  * Hash table lookup.
  */
-ROOM_INDEX_DATA *get_room_index( int vnum )
+ROOM_INDEX_DATA *get_room_index( vnum_t vnum )
 {
   ROOM_INDEX_DATA *pRoomIndex;
 
@@ -3783,7 +3781,7 @@ bool delete_mob( MOB_INDEX_DATA *mob )
 /*
  * Creat a new room (for online building)                       -Thoric
  */
-ROOM_INDEX_DATA *make_room( int vnum )
+ROOM_INDEX_DATA *make_room( vnum_t vnum )
 {
   ROOM_INDEX_DATA *pRoomIndex;
   int   iHash;
@@ -3819,7 +3817,7 @@ ROOM_INDEX_DATA *make_room( int vnum )
  * Create a new INDEX object (for online building)              -Thoric
  * Option to clone an existing index object.
  */
-OBJ_INDEX_DATA *make_object( int vnum, int cvnum, char *name )
+OBJ_INDEX_DATA *make_object( vnum_t vnum, vnum_t cvnum, char *name )
 {
   OBJ_INDEX_DATA *pObjIndex, *cObjIndex;
   char buf[MAX_STRING_LENGTH];
@@ -3908,7 +3906,7 @@ OBJ_INDEX_DATA *make_object( int vnum, int cvnum, char *name )
  * Create a new INDEX mobile (for online building)              -Thoric
  * Option to clone an existing index mobile.
  */
-MOB_INDEX_DATA *make_mobile( short vnum, short cvnum, char *name )
+MOB_INDEX_DATA *make_mobile( vnum_t vnum, vnum_t cvnum, char *name )
 {
   MOB_INDEX_DATA *pMobIndex, *cMobIndex;
   char buf[MAX_STRING_LENGTH];
@@ -4425,7 +4423,7 @@ void sort_area( AREA_DATA *pArea, bool proto )
  * Display vnums currently assigned to areas            -Altrag & Thoric
  * Sorted, and flagged if loaded.
  */
-void show_vnums( CHAR_DATA *ch, int low, int high, bool proto, bool shownl,
+void show_vnums( CHAR_DATA *ch, vnum_t low, vnum_t high, bool proto, bool shownl,
                  const char *loadst, const char *notloadst )
 {
   AREA_DATA *pArea, *first_sort;

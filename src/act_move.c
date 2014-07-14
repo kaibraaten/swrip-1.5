@@ -187,7 +187,7 @@ EXIT_DATA *get_exit( const ROOM_INDEX_DATA *room, short dir )
 /*
  * Function to get an exit, leading the the specified room
  */
-EXIT_DATA *get_exit_to( const ROOM_INDEX_DATA *room, short dir, int vnum )
+EXIT_DATA *get_exit_to( const ROOM_INDEX_DATA *room, short dir, vnum_t vnum )
 {
   EXIT_DATA *xit;
 

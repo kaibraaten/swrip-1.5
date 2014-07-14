@@ -205,7 +205,7 @@ struct shop_data
 {
   SHOP_DATA *next;                  /* Next shop in list            */
   SHOP_DATA *prev;                  /* Previous shop in list        */
-  int        keeper;                /* Vnum of shop keeper mob      */
+  vnum_t     keeper;                /* Vnum of shop keeper mob      */
   short      buy_type[MAX_TRADE];   /* Item types shop will buy     */
   short      profit_buy;            /* Cost multiplier for buying   */
   short      profit_sell;           /* Cost multiplier for selling  */
@@ -221,7 +221,7 @@ struct repairshop_data
 {
   REPAIR_DATA *next;                /* Next shop in list            */
   REPAIR_DATA *prev;                /* Previous shop in list        */
-  int          keeper;              /* Vnum of shop keeper mob      */
+  vnum_t       keeper;              /* Vnum of shop keeper mob      */
   short        fix_type[MAX_FIX];   /* Item types shop will fix     */
   short        profit_fix;          /* Cost multiplier for fixing   */
   short       shop_type;            /* Repair shop type             */
@@ -369,7 +369,7 @@ struct storeroom
 {
   STOREROOM       *next;
   STOREROOM       *prev;
-  int              vnum;
+  vnum_t           vnum;
   ROOM_INDEX_DATA *room;
 };
 
@@ -411,14 +411,14 @@ struct clan_data
   int        mdeaths;        /* Number of clan deaths due to mobs    */
   short      clan_type;      /* See clan type defines                */
   short      members;        /* Number of clan members               */
-  int        board;          /* Vnum of clan board                   */
-  int        storeroom;      /* Vnum of clan's store room            */
-  int        guard1;         /* Vnum of clan guard type 1            */
-  int        guard2;         /* Vnum of clan guard type 2            */
-  int        patrol1;        /* vnum of patrol */
-  int        patrol2;  /* vnum of patrol */
-  int        trooper1; /* vnum of reinforcements */
-  int        trooper2; /* vnum of elite troopers */
+  vnum_t     board;          /* Vnum of clan board                   */
+  vnum_t     storeroom;      /* Vnum of clan's store room            */
+  vnum_t     guard1;         /* Vnum of clan guard type 1            */
+  vnum_t     guard2;         /* Vnum of clan guard type 2            */
+  vnum_t     patrol1;        /* vnum of patrol */
+  vnum_t     patrol2;  /* vnum of patrol */
+  vnum_t     trooper1; /* vnum of reinforcements */
+  vnum_t     trooper2; /* vnum of elite troopers */
   long       funds;
   int        spacecraft;
   int        vehicles;
@@ -590,7 +590,7 @@ struct board_data
   char       *post_group;            /* council, clan, guild etc        */
   char       *extra_readers;         /* Can give read rights to players */
   char       *extra_removers;        /* Can give remove rights to players */
-  int         board_obj;             /* Vnum of board object            */
+  vnum_t      board_obj;             /* Vnum of board object            */
   short       num_posts;             /* Number of notes on this board   */
   short       min_read_level;        /* Minimum level to read a note    */
   short       min_post_level;        /* Minimum level to post a note    */
@@ -653,7 +653,7 @@ struct mob_index_data
   char           *short_descr;
   char           *long_descr;
   char           *description;
-  short           vnum;
+  vnum_t          vnum;
   short           count;
   short           killed;
   short           sex;
@@ -744,7 +744,7 @@ struct extracted_char_data
 
 struct killed_data
 {
-  short vnum;
+  vnum_t vnum;
   char  count;
 };
 
@@ -776,12 +776,12 @@ struct pc_data
   int         illegal_pk;     /* Number of illegal pk's committed   */
   long        outcast_time;     /* The time at which the char was outcast */
   long        restore_time;     /* The last time the char did a restore all */
-  short       r_range_lo;     /* room range */
-  short       r_range_hi;
-  short       m_range_lo;     /* mob range  */
-  short       m_range_hi;
-  short       o_range_lo;     /* obj range  */
-  short       o_range_hi;
+  vnum_t      r_range_lo;     /* room range */
+  vnum_t      r_range_hi;
+  vnum_t      m_range_lo;     /* mob range  */
+  vnum_t      m_range_hi;
+  vnum_t      o_range_lo;     /* obj range  */
+  vnum_t      o_range_hi;
   short       wizinvis;       /* wizinvis level */
   short       min_snoop;      /* minimum snoop level */
   short       condition[MAX_CONDS];
@@ -792,7 +792,7 @@ struct pc_data
   int         quest_accum;    /* quest points accumulated in players life */
   int         auth_state;
   time_t      release_date;   /* Auto-helling.. Altrag */
-  int         jail_vnum;
+  vnum_t      jail_vnum;
   char       *helled_by;
   char       *bio;            /* Personal Bio */
   char       *authed_by;      /* what crazy imm authed this name ;) */
@@ -862,7 +862,7 @@ struct obj_index_data
   char             *short_descr;
   char             *description;
   char             *action_desc;
-  int               vnum;
+  vnum_t            vnum;
   short             level;
   short             item_type;
   int               extra_flags;
@@ -942,10 +942,10 @@ struct exit_data
   ROOM_INDEX_DATA *to_room;        /* Pointer to destination room  */
   char            *keyword;        /* Keywords for exit or door    */
   char            *description;    /* Description of exit          */
-  int              vnum;           /* Vnum of room exit leads to   */
-  int              rvnum;          /* Vnum of room in opposite dir */
+  vnum_t           vnum;           /* Vnum of room exit leads to   */
+  vnum_t           rvnum;          /* Vnum of room in opposite dir */
   int              exit_info;      /* door states & other flags    */
-  int              key;            /* Key vnum                     */
+  vnum_t           key;            /* Key vnum                     */
   short            vdir;           /* Physical "direction"         */
   short            distance;       /* how far to the next room     */
 };
@@ -1001,12 +1001,12 @@ struct area_data
   short        age;
   short        nplayer;
   short        reset_frequency;
-  int          low_r_vnum;
-  int          hi_r_vnum;
-  int          low_o_vnum;
-  int          hi_o_vnum;
-  short        low_m_vnum;
-  short        hi_m_vnum;
+  vnum_t       low_r_vnum;
+  vnum_t       hi_r_vnum;
+  vnum_t       low_o_vnum;
+  vnum_t       hi_o_vnum;
+  vnum_t       low_m_vnum;
+  vnum_t       hi_m_vnum;
   int          low_soft_range;
   int          hi_soft_range;
   int          low_hard_range;
@@ -1034,12 +1034,12 @@ struct godlist_data
   GOD_DATA *next;
   GOD_DATA *prev;
   int       level;
-  int       low_r_vnum;
-  int       hi_r_vnum;
-  int       low_o_vnum;
-  int       hi_o_vnum;
-  short     low_m_vnum;
-  short     hi_m_vnum;
+  vnum_t    low_r_vnum;
+  vnum_t    hi_r_vnum;
+  vnum_t    low_o_vnum;
+  vnum_t    hi_o_vnum;
+  vnum_t    low_m_vnum;
+  vnum_t    hi_m_vnum;
 };
 
 /*
@@ -1107,11 +1107,11 @@ struct room_index_data
   SHIP_DATA        *last_ship;
   char             *name;
   char             *description;
-  int               vnum;
+  vnum_t            vnum;
   int               room_flags;
   short             light;
   short             sector_type;
-  int               tele_vnum;
+  vnum_t            tele_vnum;
   short             tele_delay;
   short             tunnel;              /* max people that will fit */
   SHUTTLE_DATA     *first_shuttle;
@@ -2297,7 +2297,7 @@ extern "C" {
   void  clear_vrooms( void );
   EXIT_DATA *find_door( CHAR_DATA *ch, const char *arg, bool quiet );
   EXIT_DATA *get_exit( const ROOM_INDEX_DATA *room, short dir );
-  EXIT_DATA *get_exit_to( const ROOM_INDEX_DATA *room, short dir, int vnum );
+  EXIT_DATA *get_exit_to( const ROOM_INDEX_DATA *room, short dir, vnum_t vnum );
   EXIT_DATA *get_exit_num( const ROOM_INDEX_DATA *room, short count );
   ch_ret move_char( CHAR_DATA *ch, EXIT_DATA *pexit, int fall );
   void teleport( CHAR_DATA *ch, short room, int flags );
@@ -2437,7 +2437,7 @@ extern "C" {
   void         load_spaceobjects( void );
   void         save_spaceobject( SPACE_DATA *spaceobject );
   SPACE_DATA * spaceobject_from_name( const char *name );
-  SPACE_DATA * spaceobject_from_vnum( int vnum );
+  SPACE_DATA * spaceobject_from_vnum( vnum_t vnum );
   void update_spaceobjects( void );
   void update_missiles( void );
   void         new_missile( SHIP_DATA *ship, SHIP_DATA *target, CHAR_DATA *ch,
@@ -2469,7 +2469,7 @@ extern "C" {
   void  reset_area( AREA_DATA * pArea );
 
   /* db.c */
-  void show_vnums( CHAR_DATA *ch, int low, int high, bool proto, bool shownl,
+  void show_vnums( CHAR_DATA *ch, vnum_t low, vnum_t high, bool proto, bool shownl,
 		   const char *loadst, const char *notloadst );
   void save_sysdata( SYSTEM_DATA sys );
   void append_file( CHAR_DATA *ch, const char *file, const char *str );
@@ -2482,15 +2482,15 @@ extern "C" {
   void  clear_char( CHAR_DATA *ch );
   void  free_char( CHAR_DATA *ch );
   char *        get_extra_descr( const char *name, EXTRA_DESCR_DATA *ed );
-  MOB_INDEX_DATA *get_mob_index( short vnum );
-  OBJ_INDEX_DATA *get_obj_index( int vnum );
-  ROOM_INDEX_DATA *get_room_index( int vnum );
+  MOB_INDEX_DATA *get_mob_index( vnum_t vnum );
+  OBJ_INDEX_DATA *get_obj_index( vnum_t vnum );
+  ROOM_INDEX_DATA *get_room_index( vnum_t vnum );
   void  bug( const char *str, ... );
   void log_printf( const char *fmt, ... );
   void log_string_plus( const char *str, short log_type, short level );
-  ROOM_INDEX_DATA *make_room( int vnum );
-  OBJ_INDEX_DATA *make_object( int vnum, int cvnum, char *name );
-  MOB_INDEX_DATA *make_mobile( short vnum, short cvnum, char *name );
+  ROOM_INDEX_DATA *make_room( vnum_t vnum );
+  OBJ_INDEX_DATA *make_object( vnum_t vnum, vnum_t cvnum, char *name );
+  MOB_INDEX_DATA *make_mobile( vnum_t vnum, vnum_t cvnum, char *name );
   EXIT_DATA *make_exit( ROOM_INDEX_DATA *pRoomIndex, ROOM_INDEX_DATA *to_room, short door );
   void  fix_area_exits( AREA_DATA *tarea );
   void  load_area_file( AREA_DATA *tarea, char *filename );

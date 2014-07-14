@@ -158,10 +158,9 @@ CHAR_DATA *find_fixer( CHAR_DATA *ch )
 
 int get_cost_quit( CHAR_DATA *ch )
 {
-
   long cost = 1000;
   int golddem = 100000;
-  long gold;
+  long gold = 0;
 
   if( !ch )
     return 0;
@@ -180,10 +179,10 @@ int get_cost_quit( CHAR_DATA *ch )
 
 int get_cost( CHAR_DATA *ch, CHAR_DATA *keeper, OBJ_DATA *obj, bool fBuy )
 {
-  SHOP_DATA *pShop;
-  int cost;
-  bool richcustomer;
-  int profitmod;
+  SHOP_DATA *pShop = NULL;
+  int cost = 0;
+  bool richcustomer = FALSE;
+  int profitmod = 0;
 
   if ( !obj || ( pShop = keeper->pIndexData->pShop ) == NULL )
     return 0;
@@ -338,19 +337,20 @@ CHAR_DATA *  fread_vendor( FILE *fp )
   CHAR_DATA *mob = NULL;
   const char *word;
   bool fMatch;
-  int inroom = 0;
+  vnum_t inroom = 0;
   ROOM_INDEX_DATA *pRoomIndex = NULL;
   CHAR_DATA *victim;
   CHAR_DATA *vnext;
   char buf [MAX_INPUT_LENGTH];
   char vnum1 [MAX_INPUT_LENGTH];
   word   = feof( fp ) ? "END" : fread_word( fp );
+
   if ( !str_cmp(word, "Vnum") )
     {
-      int vnum;
+      vnum_t vnum = fread_number( fp );
 
-      vnum = fread_number( fp );
-      mob = create_mobile(  get_mob_index(vnum));
+      mob = create_mobile( get_mob_index(vnum));
+
       if ( !mob )
         {
           for ( ; ; )
@@ -359,6 +359,7 @@ CHAR_DATA *  fread_vendor( FILE *fp )
               if ( !str_cmp( word, "END" ) )
                 break;
             }
+
           bug("Fread_mobile: No index data for vnum %d", vnum );
           return NULL;
         }
@@ -371,10 +372,12 @@ CHAR_DATA *  fread_vendor( FILE *fp )
           if ( !str_cmp( word, "END" ) )
             break;
         }
+
       extract_char(mob, TRUE);
       bug("Fread_vendor: Vnum not found", 0 );
       return NULL;
     }
+
   for ( ; ;) {
     word   = feof( fp ) ? "END" : fread_word( fp );
     fMatch = FALSE;
@@ -398,8 +401,10 @@ CHAR_DATA *  fread_vendor( FILE *fp )
         {
           if ( inroom == 0 )
             inroom = ROOM_VNUM_VENSTOR;
+
           mob->home = get_room_index(inroom);
           pRoomIndex = get_room_index( inroom );
+
           if ( !pRoomIndex )
             {
               pRoomIndex = get_room_index( ROOM_VNUM_VENSTOR );

@@ -33,9 +33,9 @@ struct hall_of_fame_element
 extern ARENA_DATA arena;
 extern struct hall_of_fame_element *fame_list;
 
-void start_arena();
+void start_arena(void);
 void load_hall_of_fame(void);
-void do_game();
-int num_in_arena();
+void do_game(void);
+int num_in_arena(void);
 
 #endif

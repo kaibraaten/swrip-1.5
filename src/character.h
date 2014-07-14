@@ -94,8 +94,8 @@ struct char_data
 
   short         mental_state;           /* simplified */
   short         emotional_state;        /* simplified */
-  int                   retran;
-  int                   regoto;
+  vnum_t                retran;
+  vnum_t                regoto;
   short         mobinvis;       /* Mobinvis level SB */
   int                 vip_flags;
   short              backup_wait;       /* reinforcements */

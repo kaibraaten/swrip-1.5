@@ -11,7 +11,7 @@ struct stop_data
   STOP_DATA     *prev; /* Previous Stop */
   STOP_DATA     *next; /* Next Stop */
   char*         stop_name; /* Name of the Stop, ie 'Coruscant' or 'Monument Plaza' */
-  int           room;
+  vnum_t        room;
 };
 
 
@@ -102,7 +102,7 @@ void fread_stop( STOP_DATA * stop, FILE *fp );
 void destroy_shuttle( SHUTTLE_DATA *shuttle );
 void show_shuttles_to_char( const SHUTTLE_DATA *shuttle, CHAR_DATA *ch );
 SHUTTLE_DATA *shuttle_in_room( const ROOM_INDEX_DATA *room, const char *name );
-SHUTTLE_DATA *shuttle_from_entrance( int vnum );
+SHUTTLE_DATA *shuttle_from_entrance( vnum_t vnum );
 STOP_DATA *create_stop( void );
 
 DECLARE_DO_FUN( do_showshuttle          );

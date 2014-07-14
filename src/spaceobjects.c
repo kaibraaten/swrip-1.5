@@ -81,7 +81,7 @@ SPACE_DATA *spaceobject_from_name( const char *name )
 /*
  * Get pointer to space structure from the dock vnun.
  */
-SPACE_DATA *spaceobject_from_vnum( int vnum )
+SPACE_DATA *spaceobject_from_vnum( vnum_t vnum )
 {
   SPACE_DATA *spaceobject = NULL;
   SHIP_DATA *ship = NULL;

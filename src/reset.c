@@ -349,7 +349,7 @@ void edit_reset( CHAR_DATA *ch, char *argument, AREA_DATA *pArea, ROOM_INDEX_DAT
   ROOM_INDEX_DATA *pRoom;
   OBJ_INDEX_DATA *pObj;
   int num = 0;
-  int vnum;
+  vnum_t vnum;
   char *origarg = argument;
 
   argument = one_argument(argument, arg);
@@ -2041,7 +2041,7 @@ char *sprint_reset( CHAR_DATA *ch, RESET_DATA *pReset, short num, bool rlist )
   static ROOM_INDEX_DATA *room;
   static OBJ_INDEX_DATA *obj, *obj2;
   static MOB_INDEX_DATA *mob;
-  int rvnum;
+  vnum_t rvnum;
 
   if ( ch->in_room )
     rvnum = ch->in_room->vnum;

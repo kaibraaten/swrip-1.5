@@ -43,19 +43,19 @@ ARENA_DATA arena;
 #define ARENA_END   41   /* vnum of last real arena room*/
 #define HALL_FAME_FILE  SYSTEM_DIR "halloffame.lst"
 
-static void show_jack_pot();
-static void find_game_winner();
-static void do_end_game();
-static void start_game();
-static void silent_end();
+static void show_jack_pot(void);
+static void find_game_winner(void);
+static void do_end_game(void);
+static void start_game(void);
+static void silent_end(void);
 static void write_fame_list(void);
 static void write_one_fame_node(FILE * fp, struct hall_of_fame_element * node);
 static void find_bet_winners(CHAR_DATA *winner);
-static void reset_bets();
+static void reset_bets(void);
 
 struct hall_of_fame_element *fame_list = NULL;
 
-void start_arena()
+void start_arena(void)
 {
   char buf1[MAX_INPUT_LENGTH];
   char buf2[MAX_INPUT_LENGTH];
@@ -124,7 +124,7 @@ void start_arena()
       }
 }
 
-void start_game()
+void start_game(void)
 {
   CHAR_DATA *i;
   DESCRIPTOR_DATA *d;
@@ -147,7 +147,7 @@ void start_game()
   do_game();
 }
 
-void do_game()
+void do_game(void)
 {
   char buf[MAX_INPUT_LENGTH];
 
@@ -188,7 +188,7 @@ void do_game()
   arena.time_left_in_game--;
 }
 
-void find_game_winner()
+void find_game_winner(void)
 {
   char buf[MAX_INPUT_LENGTH];
   char buf2[MAX_INPUT_LENGTH];
@@ -252,7 +252,7 @@ void find_game_winner()
     }
 }
 
-void show_jack_pot()
+void show_jack_pot(void)
 {
   char buf1[MAX_INPUT_LENGTH];
 
@@ -263,7 +263,7 @@ void show_jack_pot()
   to_channel(buf1,CHANNEL_ARENA,"&RArena&W",5);
 }
 
-void silent_end()
+void silent_end(void)
 {
   char buf[MAX_INPUT_LENGTH];
   arena.ppl_in_arena = 0;
@@ -280,7 +280,7 @@ void silent_end()
   reset_bets();
 }
 
-void do_end_game()
+void do_end_game(void)
 {
   char buf[MAX_INPUT_LENGTH];
   CHAR_DATA *i;
@@ -315,7 +315,7 @@ void do_end_game()
   reset_bets();
 }
 
-int num_in_arena()
+int num_in_arena(void)
 {
   CHAR_DATA *i;
   DESCRIPTOR_DATA *d;
@@ -417,7 +417,7 @@ void find_bet_winners(CHAR_DATA *winner)
  * Reset bets for those that did not win.
  * Added by Ulysses, rewritten by Darrik Vequir.
  */
-void reset_bets()
+void reset_bets(void)
 {
   CHAR_DATA *ch;
 

@@ -183,7 +183,7 @@ void update_shuttle( void )
 #endif
       if (--shuttle->current_delay <= 0)
         {
-          int room = 0;
+          vnum_t room = 0;
 
           shuttle->current_delay = shuttle->delay;
           /* Probably some intermediate Stages in the middle ? */
@@ -651,7 +651,7 @@ SHUTTLE_DATA * shuttle_in_room( const ROOM_INDEX_DATA *room, const char *name )
   return NULL;
 }
 
-SHUTTLE_DATA *shuttle_from_entrance( int vnum )
+SHUTTLE_DATA *shuttle_from_entrance( vnum_t vnum )
 {
   SHUTTLE_DATA *shuttle = NULL;
 
