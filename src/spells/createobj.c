@@ -26,6 +26,7 @@ ch_ret spell_create_obj( int sn, int level, CHAR_DATA *ch, void *vo )
   /*
    * Add predetermined objects here
    */
+  /*
   if ( vnum == 0 )
     {
       if ( !str_cmp( spell_target_name, "sword" ) )
@@ -33,6 +34,7 @@ ch_ret spell_create_obj( int sn, int level, CHAR_DATA *ch, void *vo )
       if ( !str_cmp( spell_target_name, "shield" ) )
         vnum = OBJ_VNUM_SCHOOL_SHIELD;
     }
+  */
 
   if ( (oi=get_obj_index(vnum)) == NULL
        ||   (obj=create_object(oi, lvl)) == NULL )

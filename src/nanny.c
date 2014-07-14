@@ -913,21 +913,11 @@ if ( (iLang = skill_lookup( "common" )) < 0 )
 
       /* New players don't have to earn some eq */
 
-      obj = create_object( get_obj_index(OBJ_VNUM_SCHOOL_BANNER), 0 );
+      obj = create_object( get_obj_index(OBJ_VNUM_SCHOOL_GLOWROD), 0 );
       obj_to_char( obj, ch );
       equip_char( ch, obj, WEAR_LIGHT );
 
-      /* armor they do though
-             obj = create_object( get_obj_index(OBJ_VNUM_SCHOOL_VEST), 0 );
-             obj_to_char( obj, ch );
-             equip_char( ch, obj, WEAR_BODY );
-
-             obj = create_object( get_obj_index(OBJ_VNUM_SCHOOL_SHIELD), 0 );
-             obj_to_char( obj, ch );
-             equip_char( ch, obj, WEAR_SHIELD );
-      */
-
-      obj = create_object( get_obj_index(OBJ_VNUM_SCHOOL_DAGGER), 0 );
+      obj = create_object( get_obj_index(OBJ_VNUM_SCHOOL_BLADE), 0 );
       obj_to_char( obj, ch );
       equip_char( ch, obj, WEAR_WIELD );
 
