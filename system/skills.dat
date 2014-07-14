@@ -2106,12 +2106,12 @@ Minlevel     1
 End
 
 #SKILL
-Name         makeflashlight~
+Name         makeglowrod~
 Type         Skill
 Flags        0
 Minpos       5
 Guild        2
-Code         do_makelight
+Code         do_makeglowrod
 Dammsg       ~
 Wearoff      !done!~
 Teachers     32010 206~
