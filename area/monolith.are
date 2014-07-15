@@ -1,0 +1,178 @@
+#AREA   Dark Asteroid~
+
+
+
+#AUTHOR Exar~
+
+#RANGES
+40 100 0 65
+$
+
+#RESETMSG ~
+
+#FLAGS
+1 180
+
+#ECONOMY 0 9000000
+
+#MOBILES
+#8900
+exarstuff~
+a newly created exarstuff~
+Some god abandoned a newly created exarstuff here.
+~
+~
+1073741825 0 0 Z
+1 0 0 0d0+0 0d0+0
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#8999
+exarstuff~
+a newly created exarstuff~
+Some god abandoned a newly created exarstuff here.
+~
+~
+1073741825 0 0 Z
+1 0 0 0d0+0 0d0+0
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#0
+
+
+#OBJECTS
+#8900
+exarstuff~
+a exarstuff~
+A exarstuff is here.~
+~
+13 1073741824 0
+0 0 0 0
+1 0 0
+#8999
+exarstuff~
+a exarstuff~
+A exarstuff is here.~
+~
+13 1073741824 0
+0 0 0 0
+1 0 0
+#0
+
+
+#ROOMS
+#8900
+Primary Docking Bay~
+Debris and wreckage cover the inside of this docking bay, to the point of
+making it difficult to move around.  Obviously the bay has been in a state
+of disuse for some time, possibly since the addition of this base to the
+asteroid.  You can only see one exit, a ladder leading down into the main
+portion of the asteroid.
+~
+0 25 0
+D5
+~
+~
+0 0 8901
+E
+junk garbage~
+All manner of things litter the floor, including hydrospanners and other useful equipment, but there is also a lot of melted equipment too far damaged for you to make out.~
+> rand_prog 1~
+mpecho Some equipment clatters loudly in the northern corner of the bay.~
+|
+S
+#8901
+A Descending Shaft~
+The ladder quickly enters a narrow shaft surrounded by the asteroid's rock
+itself, creating a very claustrophobic feel.  Only one person can fit
+through at a time, making you a blockage in this passageway.  The only
+available directions are up and down. 
+~
+0 9 0 0 0 1
+D4
+~
+~
+0 0 8900
+D5
+~
+~
+0 0 8902
+> rand_prog 15~
+mpecho Light flickers briefly below you and then disappears so quickly you aren't sure it was ever there.~
+|
+S
+#8902
+An Intersection~
+Here, at the bottom of the Docking Bay ladder, there is a four way intersection of passages.  Each seems to have been burned from the rock.  There are some strange symbols carved into the floor here, unlike any you have ever seen before.~
+0 73 0
+D4
+~
+~
+0 0 8901
+> all_greet_prog 50~
+mpechoat Something on the floor glitters.
+~
+|
+S
+#8903
+A Slippery Passage~
+~
+0 13 0 0 0 2
+S
+#8904
+A Freezing Passage~
+~
+0 13 0
+> rand_prog 25~
+mpecho An icy wind blows out of nowhere and into your face.
+~
+|
+S
+#8905
+A Windy Passage~
+~
+0 4 0
+S
+#8906
+A Watery Passage~
+~
+0 4 0
+S
+#8999
+Floating in a void~
+~
+0 1073741828 1
+S
+#0
+
+
+#RESETS
+M 1 8999 1 8999
+M 1 8900 1 8999
+O 1 8900 1 8999
+O 1 8999 1 8999
+S
+
+
+#SHOPS
+0
+
+
+#REPAIRS
+0
+
+
+#SPECIALS
+S
+
+
+#$

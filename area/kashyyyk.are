@@ -1,0 +1,1065 @@
+#AREA   kashyyyk~
+
+
+
+#AUTHOR Thrawn~
+
+#RANGES
+2 103 2 103
+$
+
+#RESETMSG The wind blows throw the leaves of the Worshyr trees.~
+
+#FLAGS
+0 20
+
+#ECONOMY 0 125020985
+
+#MOBILES
+#28600
+Wookiee shop owner~
+a wookiee shop owner~
+A rather large wookiee is behind the counter here.
+~
+~
+3 0 0 Z
+40 0 20 8d10+400 5d4+2
+200 0
+8 8 1
+18 13 13 13 13 13 13
+0 0 0 0 0
+1 0 0 0 2 3 0
+8 8 0 0 0 0 0 0
+2 0 0 0 0 0 0 0
+#28601
+wookiee female~
+a female wookiee ~
+A female wookiee is walking around.
+~
+~
+1 0 0 Z
+10 0 67 2d10+120 1d4+2
+20 0
+8 8 0
+19 13 13 13 13 13 13
+0 0 0 0 0
+1 0 0 0 2 2 0
+0 2 0 0 0 0 0 0
+2 0 0 0 0 0 0 0
+#28602
+A Wookiee Teacher~
+A Wookiee Teacher~
+A teacher stands here trying to make the rowdy children learn something.
+~
+~
+1025 0 0 Z
+50 0 0 0d0+0 0d0+0
+0 0
+8 8 2
+19 21 21 13 13 13 13
+0 0 0 0 0
+1 0 0 0 3 2 0
+0 0 0 0 0 0 0 0
+2 0 0 0 0 0 0 0
+> all_greet_prog 100~
+if race($n) == wookiee
+say Hello $n, Are you ready for your lessons?
+else
+say I'm sorry $n I only teach my people
+endif
+~
+|
+#28603
+wookiee male~
+a wookiee male~
+A wookiee male is looking around here.
+~
+~
+1 0 0 Z
+10 0 67 2d10+120 1d4+2
+20 0
+8 8 0
+19 13 13 13 13 13 13
+0 0 0 0 0
+1 0 0 0 2 2 0
+0 0 0 0 0 0 0 0
+2 0 0 0 0 0 0 0
+#28604
+wookiee child~
+a wookiee child~
+A wookiee child is playing around here.
+~
+~
+129 0 0 Z
+1 0 0 1d1+30 1d3+3
+0 0
+8 8 1
+13 13 13 13 13 13 13
+0 0 0 0 0
+1 0 0 0 3 2 1
+0 0 0 0 0 0 0 0
+2 0 0 0 0 0 0 0
+#28605
+Ralra~
+Ralra~
+The wookiee Ralra is here.
+~
+~
+3 0 0 Z
+90 0 -125 18d10+900 11d4+0
+450 0
+8 8 1
+21 13 13 13 13 13 13
+0 0 0 0 0
+1 0 0 0 3 1 0
+18 17 0 0 0 0 0 0
+2 0 0 0 0 0 0 0
+> death_prog 100~
+mpecho Ralra clasps his chest as he falls to the ground.
+mpecho As he hits the ground something rolls out from his open hand
+mpoload 28604
+~
+|
+#28606
+Rwookrrorro~
+Rwookrrorro~
+The wookiee Rwookrrorro is sitting here.
+~
+~
+3 0 0 Z
+90 0 -76 18d10+900 11d4+0
+420 0
+8 8 1
+21 13 13 13 13 13 13
+0 0 0 0 0
+1 0 0 0 2 2 0
+0 0 0 0 0 0 0 0
+2 0 0 0 0 0 0 0
+#28607
+Chenlembec~
+Chenlembec~
+Chenlembec is standing here.
+~
+~
+3 0 0 Z
+90 0 -76 18d10+900 11d4+0
+420 0
+8 8 1
+21 13 13 13 13 13 13
+0 0 0 0 0
+1 0 0 0 2 2 0
+18 17 0 0 0 0 0 0
+2 0 0 0 0 0 0 0
+#28608
+female wookiee shop owner~
+a female wookiee~
+A wookiee female minds the shop.
+~
+~
+3 0 0 Z
+40 0 20 8d10+400 5d4+0
+200 0
+8 8 1
+18 13 13 13 13 13 13
+0 0 0 0 0
+1 0 0 0 3 2 0
+4 4 0 0 0 0 0 0
+2 0 0 0 0 0 0 0
+#0
+
+
+#OBJECTS
+#28600
+bowcaster~
+a bowcaster~
+A crossbow type weapon has been carelessly left here.~
+~
+5 524288 8193
+12 6 7 9 110 110
+10 4100 340
+A
+18 1
+A
+19 1
+> wear_prog 100~
+if race($n) != wookiee
+mpechoat $n Only wookiees can handle bowcasters.
+mpechoaround $n $n tries to figure out what to do with a bowcaster.
+mpforce $n remove bowcaster
+endif
+~
+|
+#28601
+quarrel~
+a quarrel~
+A bowcaster quarrel is here.~
+~
+86 8192 16385
+100 500 0 0 100 100
+1 50 10
+#28602
+bandolier~
+a wookiee bandolier~
+A wookiee bandolier has been dropped here.~
+~
+15 524288 1025 32
+10 0 0 0
+1 0 0
+A
+18 1
+A
+17 -3
+#28603
+dual double barreled bowcaster~
+double barreled bowcaster~
+A large and wierd looking bowcaster is lying here.~
+~
+5 524288 8193
+12 6 8 9
+10 5000 410
+A
+18 1
+A
+19 1
+> wear_prog 100~
+if race($n) != wookiee
+mpechoat $n Only wookiees can handle this bowcaster!
+mpechoaround $n $n tries to figure out what to do with a bowcster.
+mpforce $n remove bowcaster
+endif
+~
+|
+#28604
+worshyr seed~
+a worshyr tree seed~
+The seed to a worshyr tree is lying here.~
+~
+84 0 0
+0 0 0 0
+1 0 0
+#28605
+smoked gundar meat~
+smoked gundar~
+A piece of smoked gundar meat is attracting flies ~
+~
+19 0 1
+15 0 0 0
+1 20 2
+#0
+
+
+#ROOMS
+#28600
+Northern Nursery Ring~
+You are in the northernmost side of Rwookrrorro's nursery ring.  This is
+where  all young Wookiees start thier lives.  Baby Wookiee's are being
+nursed here and slightly larger Wookiee children are sleeping here. You
+also here soothing music being played over an intercom. 
+~
+0 1028 1
+D2
+~
+~
+0 -1 28601
+> rand_prog 100~
+mpechoat $n The music sooths you into a slight slumber.
+mpforce $n sleep
+mpdream $n You dream of little sheap hoping fences, awwwwwww!
+feel cure critic $n
+~
+|
+S
+#28601
+Central Nursery Ring~
+You are standing in the central nursery ring.  This is where Wookiee
+toddlers are allowed to stumble around.  The floors and walls are padded
+to prevent injury.  Elderly Wookiee ladies are here to comfort the
+toddlers and urge them into walking upright.  All around the room are
+branches which have been bolted into the floor to allow young Wookiees to
+test their climbing ability.  Younger Wookiees rest to the North and Older
+ones perfect their climbing to the South.
+~
+0 4 1
+D0
+~
+~
+0 -1 28600
+D2
+~
+~
+0 -1 28602
+D3
+~
+~
+0 -1 28608
+S
+#28602
+Southern Nursery Ring~
+You are standing in the southernmost nursery ring where Wookiee children
+are perfecting their climbing skills.  All around you, small Wookiees are
+climbing the branches which this room has been built around.  They dangle
+from often frightening heights, trusting their instructors to catch them
+should they fall. You can Climb up with the Wookiee children, you can go
+north the the toddler's area, or you can go South to a lift which will
+take you to Rwookrrorro's lower  levels.
+~
+0 0 1
+D0
+~
+~
+0 -1 28601
+D2
+~
+~
+0 -1 28604
+D4
+~
+~
+65536 -1 28603
+S
+#28603
+Upper level of the Nursery Climbing Area~
+You are holding tightly to a high branch above the nursery ring's climbing
+practice area.  All around you Wookiee children hang from branches, well
+most of them hang, a few have already fallen and had to be caught by the
+strong Wookiees standing below.  You just hope you have the strength to
+keep yourself  up.  The only exit is down, to the lower practice area.
+~
+0 0 1
+D5
+~
+~
+65664 -1 28602
+S
+#28604
+Litfcar~
+You are in a liftcar at the top level of Rwookrrorro.  This level is
+dedicated to the nursery rings where young Wookiees are nursed and live
+until they can  climb and walk well enough to get around the city
+themselves.  You can exit to  the nursery rings to the north or you can
+ride the lift down.
+~
+0 4 1
+D0
+~
+~
+0 -1 28602
+D5
+~
+~
+0 -1 28605
+S
+#28605
+Liftcar~
+You are in a liftcar at the middle level of Rwookrrorro.  This level is
+primarily residential.  As you look out of the lift you can see many doors
+carved into the main city's wroshyr tree to the west.  You can go North to
+the residential area or ride the liftcar up or down.
+~
+0 0 1
+D0
+~
+~
+0 -1 28610
+D4
+~
+~
+0 -1 28604
+D5
+~
+~
+0 -1 28606
+S
+#28606
+Liftcar~
+You are in a liftcar at the lowest level of the city of Rwookrrorro.  This
+level has a large commercial area as well as a residential area and access
+to the landing pad.  You can exit the liftcar to the east or you can ride
+the liftcar up or down. 
+~
+0 0 1
+D1
+~
+~
+0 -1 28611
+D4
+~
+~
+0 -1 28605
+D5
+~
+~
+0 -1 28607
+S
+#28607
+Liftcar~
+You are in a liftcar below the lowest level of Rwookrrorro.  From here you
+have an amazing view, well two amazing views really.  One below you, into
+the deep green forrests of Kashyyyk. Above you is another amazing sight,
+the underside of the great Wookiee city Rwookrrorro.  The branches of the
+worshyr trees support the city kilometers off the ground.  They form
+spiderweb like patterns  because of their unique bonding properties, when
+two branches meet, they bond and send out more branches in new directions.
+ You can only ride the liftcar up.
+~
+0 0 1
+D1
+~
+~
+0 -1 28638
+D4
+~
+~
+0 -1 28606
+S
+#28608
+The "Corner"~
+You are standing in the naughty children's corner.  Have you been
+naughty?? Bad little Wookiee children stand here facing the wall.
+As you stare at the wall you notice that the corner didn't actually 
+settle down all the bad little children, one scratched something into the
+wall with his claw: it says,"There once was a man from Corellia." The rest
+is too scuffed up to read.  From here you can go east to the Middle Nursery
+ring or south to the classroom.
+~
+0 0 1
+D1
+~
+~
+0 -1 28601
+D2
+~
+~
+0 -1 28609
+S
+#28609
+The Classroom~
+You stand in the middle of a room filled with chairs.  One wall is
+almost entirely covered by an electronic chalkboard.  This is where
+the young Wookiees are taught to read and write.  Some children run
+around the room playing tag.  A teacher stands at the front of the room
+trying to settle down the children.
+~
+0 1024 1
+D0
+~
+~
+0 -1 28608
+S
+#28610
+Residential Area~
+The residential area is, obviously, loaded with houses of the wookiee
+people they are made from the natural material that surrounds the entire
+wookie world whish is wood, and some houses have plasteel windows.
+Wookiees pass you by, not to surprisingly this place is fairly crowded
+with wookiees and the wookiee children running about  seem to be playing a
+game of hide and seak with each other.
+~
+0 0 1
+D1
+~
+~
+0 -1 28619
+D2
+~
+~
+0 -1 28605
+S
+#28611
+Commercial Area~
+This place is crawling with wookiees as well as some other forms of beings,
+they seem to be to busy to even notice you getting off the lift car even
+though your pack to the gills with illegal weapons. The wookiee are far to
+interested with thier lives to have to pay any attention to you and your
+petty adventure through their home world. A word of advice, don't get them
+angry. 
+~
+0 0 1
+D1
+~
+~
+0 -1 28612
+D2
+~
+~
+0 -1 28618
+D3
+~
+~
+0 -1 28606
+S
+#28612
+Commercial Area~
+This place is crawling with wookiees as well as some other forms of beings,
+they seem to be to busy to even notice you getting off the lift car even
+though your pack to the gills with illegal weapons. The wookiee are far to
+interested with thier lives to have to pay any attention to you and your
+petty adventure through their home world. A word of advice, don't get them
+angry. 
+~
+0 0 1
+D2
+~
+~
+0 -1 28613
+D3
+~
+~
+0 -1 28611
+S
+#28613
+Landing Pad~
+The landing pad is not to crowded, but it does have the odd technician
+working on ships that are in dire need of repair or tune ups. The place
+has the smell of the forest lingering in it as well as the smell of
+polished metal, coolant, and wet wookiee,  nothing entirely pleasant but
+livable. The walls that partially surround  the pad have the tools that
+the techs use for the repairs as well as some pictures of female wookiees
+in compromising positions. The only way out is back the way you came.
+~
+0 0 1
+D0
+~
+~
+0 -1 28612
+S
+#28614
+Commercial Area~
+This place seems to be crawling with wookiees as well as some other forms
+of beings, they seem to be to busy to even notice you enter the area even
+though you area loaded to the  gills with some of the more sofisticated
+weapons they have seen, besides their bowcasters. The wookiees are far to
+interested with their own lives to have to pay attention to you and your
+petty adventure through their home world. A word of advice, don't get them
+angery. The place is starting to get the smell of some freshly cooked food
+comeing from the south of here.
+~
+0 0 1
+D0
+~
+~
+0 -1 28616
+D2
+~
+~
+0 -1 28615
+S
+#28615
+Delicious Foods and Drinks~
+The shop has a very pleasent odur to it. With the carcuses of freshly
+skined animals packed on ice under the glass counter and some dried foods
+lining the walls you start to hear your stomach rumble with hunger. The
+wookiee behind the glass counter is very large andfor all you know he
+could be packing heat just in case someone like you decided to come in
+here and "borrow" some of her goods.
+~
+0 8 1
+D0
+~
+~
+0 -1 28614
+S
+#28616
+Commercial Area~
+This place is crawling with wookiees as well as some other forms of beings,
+they seem to be to busy to even notice you getting off the lift car even
+though your pack to the gills with illegal weapons. The wookiee are far to
+interested with thier lives to have to pay any attention to you and your
+petty adventure through their home world. A word of advice, don't get them
+angry.
+~
+0 0 1
+D0
+~
+~
+0 -1 28618
+D2
+~
+~
+0 -1 28614
+D3
+~
+~
+0 -1 28617
+S
+#28617
+The Cocked Bowcaster~
+You stand in the cocked bowcaster, where bowcasters are the specialty and
+they don't come cheap. the walls are lined with many of the wookiee's
+preferd weapon and there are different colours as well as different shapes
+to them as well. The ones that really catch you eyes are the double
+barreled ones they look powerful as well as expensive. The owner has one
+straped onto his waist and has his hand resting  easily on the hair
+trigger. 
+~
+0 1032 1
+D1
+~
+~
+0 -1 28616
+S
+#28618
+Commercial Area~
+This place is crawling with wookiees as well as some other forms of beings,
+they seem to be to busy to even notice you getting off the lift car even
+though your pack to the gills with illegal weapons. The wookiee are far to
+interested with thier lives to have to pay any attention to you and your
+petty adventure through their home world. A word of advice, don't get them
+angry. 
+~
+0 0 1
+D0
+~
+~
+0 -1 28611
+D2
+~
+~
+0 -1 28616
+S
+#28619
+Residential Area~
+The residential area is, obviously, loaded with houses of the wookiee
+people they are made from the natural material that surrounds the entire
+wookie world whish is wood, and some houses have plasteel windows.
+Wookiees pass you by, not to surprisingly this place is fairly crowded
+with wookiees and the wookiee children running about  seem to be playing a
+game of hide and seak with each other. 
+~
+0 0 1
+D0
+~
+~
+0 -1 28625
+D1
+~
+~
+0 -1 28620
+D2
+~
+~
+0 -1 28626
+D3
+~
+~
+0 -1 28610
+D4
+~
+~
+0 -1 28627
+S
+#28620
+Residential Area~
+The residential area is, obviously, loaded with houses of the wookiee
+people they are made from the natural material that surrounds the entire
+wookie world whish is wood, and some houses have plasteel windows.
+Wookiees pass you by, not to surprisingly this place is fairly crowded
+with wookiees and the wookiee children running about  seem to be playing a
+game of hide and seak with each other. 
+~
+0 0 1
+D0
+~
+~
+0 -1 28622
+D1
+~
+~
+0 -1 28624
+D2
+~
+~
+0 -1 28621
+D3
+~
+~
+0 -1 28619
+D4
+~
+~
+0 -1 28623
+D9
+~
+~
+0 -1 28635
+S
+#28621
+Worshyr Guests Trees House~
+This place has the smell of wookiees in as well as tons of wookiee fur has
+been shed over the funiture, which looks like it can fit a giant due to
+the size of them The place is well lit and has the cool breeze from teh
+open windows blowing through. There are stairs to this house which lead
+up.
+~
+0 8389640 1
+D0
+~
+~
+0 -1 28620
+D4
+~
+~
+0 -1 28628
+S
+#28622
+Worshyr Tree House~
+This place has the smell of wookiees in as well as tons of wookiee fur has
+been shed over the funiture, which looks like it can fit a giant due to
+the size of them The place is well lit and has the cool breeze from teh
+open windows blowing through. There are stairs to this house which lead
+up.
+~
+0 8388616 1
+D2
+~
+~
+0 -1 28620
+D4
+~
+~
+0 -1 28629
+S
+#28623
+Worshyr Tree House~
+This place has the smell of wookiees in as well as tons of wookiee fur has
+been shed over the funiture, which looks like it can fit a giant due to
+the size of them The place is well lit and has the cool breeze from teh
+open windows blowing through. There are stairs to this house which lead
+up.
+~
+0 8388616 1
+D4
+~
+~
+0 -1 28630
+D5
+~
+~
+0 -1 28620
+S
+#28624
+Worshyr Tree House~
+This place has the smell of wookiees in as well as tons of wookiee fur has
+been shed over the funiture, which looks like it can fit a giant due to
+the size of them The place is well lit and has the cool breeze from teh
+open windows blowing through. There are stairs to this house which lead
+up.
+~
+0 8388616 1
+D3
+~
+~
+0 -1 28620
+D4
+~
+~
+0 -1 28631
+S
+#28625
+Worshyr Tree House~
+This place has the smell of wookiees in as well as tons of wookiee fur has
+been shed over the funiture, which looks like it can fit a giant due to
+the size of them The place is well lit and has the cool breeze from teh
+open windows blowing through. There are stairs to this house which lead
+up.
+~
+0 8388616 1
+D2
+~
+~
+0 -1 28619
+D4
+~
+~
+0 -1 28632
+S
+#28626
+Worshyr Tree House~
+This place has the smell of wookiees in as well as tons of wookiee fur has
+been shed over the funiture, which looks like it can fit a giant due to
+the size of them The place is well lit and has the cool breeze from teh
+open windows blowing through. There are stairs to this house which lead
+up.
+~
+0 8388616 1
+D0
+~
+~
+0 -1 28619
+D4
+~
+~
+0 -1 28633
+S
+#28627
+Worshyr Tree House~
+This place has the smell of wookiees in as well as tons of wookiee fur has
+been shed over the funiture, which looks like it can fit a giant due to
+the size of them The place is well lit and has the cool breeze from teh
+open windows blowing through. There are stairs to this house which lead
+up.
+~
+0 8388616 1
+D4
+~
+~
+0 -1 28634
+D5
+~
+~
+0 -1 28619
+S
+#28628
+Guests room~
+The room, like downstairs is very well lit from the outside lights. The
+branches from the trees leave haunting shadows on the walls as well as tap
+on the window once in awhile. The room has a large bed that can fit at
+least 6 human sized people comfortabley and probably two wookiees
+comfortably. The bed like the funiture downstairs is covered with shed fur
+but other then that it is made and looks inviting. Other then the bedroom
+funiture the room is empty. 
+~
+0 8389640 1
+D5
+~
+~
+0 -1 28621
+S
+#28629
+Upstairs Room~
+The room, like downstairs is very well lit from the outside lights. The
+branches from the trees leave haunting shadows on the walls as well as tap
+on the window once in awhile. The room has a large bed that can fit at
+least 6 human sized people comfortabley and probably two wookiees
+comfortably. The bed like the funiture downstairs is covered with shed fur
+but other then that it is made and looks inviting. Other then the bedroom
+funiture the room is empty.
+~
+0 8388616 1
+D5
+~
+~
+0 -1 28622
+S
+#28630
+Upstairs Room~
+The room, like downstairs is very well lit from the outside lights. The
+branches from the trees leave haunting shadows on the walls as well as tap
+on the window once in awhile. The room has a large bed that can fit at
+least 6 human sized people comfortabley and probably two wookiees
+comfortably. The bed like the funiture downstairs is covered with shed fur
+but other then that it is made and looks inviting. Other then the bedroom
+funiture the room is empty.
+~
+0 8388616 1
+D5
+~
+~
+0 -1 28623
+S
+#28631
+Upstairs Room~
+The room, like downstairs is very well lit from the outside lights. The
+branches from the trees leave haunting shadows on the walls as well as tap
+on the window once in awhile. The room has a large bed that can fit at
+least 6 human sized people comfortabley and probably two wookiees
+comfortably. The bed like the funiture downstairs is covered with shed fur
+but other then that it is made and looks inviting. Other then the bedroom
+funiture the room is empty. 
+~
+0 8388616 1
+D5
+~
+~
+0 -1 28624
+S
+#28632
+Upstairs Room~
+The room, like downstairs is very well lit from the outside lights. The
+branches from the trees leave haunting shadows on the walls as well as tap
+on the window once in awhile. The room has a large bed that can fit at
+least 6 human sized people comfortabley and probably two wookiees
+comfortably. The bed like the funiture downstairs is covered with shed fur
+but other then that it is made and looks inviting. Other then the bedroom
+funiture the room is empty. 
+~
+0 8388616 1
+D5
+~
+~
+0 -1 28625
+S
+#28633
+Upstairs Room~
+The room, like downstairs is very well lit from the outside lights. The
+branches from the trees leave haunting shadows on the walls as well as tap
+on the window once in awhile. The room has a large bed that can fit at
+least 6 human sized people comfortabley and probably two wookiees
+comfortably. The bed like the funiture downstairs is covered with shed fur
+but other then that it is made and looks inviting. Other then the bedroom
+funiture the room is empty.
+~
+0 8388616 1
+D5
+~
+~
+0 -1 28626
+S
+#28634
+Upstairs Room~
+The room, like downstairs is very well lit from the outside lights. The
+branches from the trees leave haunting shadows on the walls as well as tap
+on the window once in awhile. The room has a large bed that can fit at
+least 6 human sized people comfortabley and probably two wookiees
+comfortably. The bed like the funiture downstairs is covered with shed fur
+but other then that it is made and looks inviting. Other then the bedroom
+funiture the room is empty. 
+~
+0 8388616 1
+D5
+~
+~
+0 -1 28627
+S
+#28635
+Worshyr Tree House~
+This place has the smell of wookiees in as well as tons of wookiee fur has
+been shed over the funiture, which looks like it can fit a giant due to
+the size of them The place is well lit and has the cool breeze from teh
+open windows blowing through. There are stairs to this house which lead
+up.
+~
+0 8388616 1
+D4
+~
+~
+0 -1 28636
+D6
+~
+~
+0 -1 28620
+S
+#28636
+Upstairs Room~
+This place has the smell of wookiees in as well as tons of wookiee fur has
+been shed over the funiture, which looks like it can fit a giant due to
+the size of them The place is well lit and has the cool breeze from teh
+open windows blowing through. There are stairs to this house which lead
+up.
+~
+0 8388616 1
+D5
+~
+~
+0 -1 28635
+S
+#28637
+Prison Net~
+You have been placed into a Kashyyk Prison Net. The rope is created from a
+a laser and blaster proof twine. Unfortunetly there seems to be no way
+down from these traps. As you glance across the horizon you notice that
+Kashyyyk is an incredibly attractive planet. To bad (unless you find
+someone to let you down) you will spend the rest of your life here.
+~
+0 1073741824 1
+D5
+~
+~
+2099200 -1 28638
+S
+#28638
+Tree Branch Covering~
+You are standing on tree branches that have grown years and years toghther
+to create a rather strong branch floor. As you look up you can see a small
+rope prison left here apparently by the ruling force here.
+~
+0 1073741824 1
+D3
+~
+~
+0 -1 28607
+S
+#28643
+Floating in a void~
+~
+0 4 1
+S
+#0
+
+
+#RESETS
+M 1 28601 13 28601
+M 1 28604 6 28602
+M 1 28604 6 28602
+M 1 28604 6 28602
+M 1 28604 6 28602
+M 1 28604 6 28602
+M 1 28604 6 28602
+M 1 28602 1 28609
+M 1 28601 13 28610
+M 1 28603 12 28610
+M 1 28601 13 28610
+M 1 28603 12 28610
+M 1 28601 13 28610
+M 1 28603 12 28610
+M 1 28601 13 28610
+M 1 28603 12 28610
+M 1 28601 13 28610
+M 1 28603 12 28610
+M 1 28601 13 28610
+M 1 28603 12 28610
+M 1 28601 13 28611
+M 1 28603 12 28611
+M 1 28601 13 28611
+M 1 28603 12 28611
+M 1 28601 13 28611
+M 1 28603 12 28611
+M 1 28601 13 28611
+M 1 28603 12 28611
+M 1 28601 13 28611
+M 1 28603 12 28611
+M 1 28601 13 28611
+M 1 28603 12 28611
+M 1 28608 1 28615
+G 1 305 1
+G 1 32261 1
+G 1 31522 1
+G 1 10314 1
+G 1 28605 1
+M 1 28600 1 28617
+G 1 28603 1
+G 1 28600 1
+G 1 28602 1
+G 1 28601 1
+M 1 28606 1 28629
+E 1 28602 1 12
+E 1 10424 1 17
+G 1 28602 1
+P 0 28601 1 0
+E 1 28600 1 16
+M 1 28607 1 28634
+E 1 28602 1 12
+P 0 28601 1 0
+E 1 28600 1 16
+E 1 32229 1 19
+M 1 28605 1 28636
+E 1 10424 1 17
+M 1 28603 12 28638
+S
+
+
+#SHOPS
+ 28600    0  0  0  0  0   120  90         0 23    ; a wookiee shop owner
+ 28608   19  0  0  0  0   120  90         0 23    ; a female wookiee
+0
+
+
+#REPAIRS
+0
+
+
+#SPECIALS
+S
+
+
+#$

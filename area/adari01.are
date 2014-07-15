@@ -1,0 +1,2247 @@
+#AREA   Adari - Baituh City~
+
+
+
+#AUTHOR Merth~
+
+#RANGES
+10 30 0 103
+$
+
+#FLAGS
+0
+
+#ECONOMY 0 5000206
+
+#MOBILES
+#29060
+officer customs smotsuk~
+Smotsuk~
+Smotsuk, a customs officer is here.
+~
+He is a big burly Adarian.  His only intention is to keep weapons
+from being imported or exported from Adari.
+~
+67 0 350 Z
+40 0 0 4d40+0 4d20+0
+0 0
+8 8 1
+13 13 13 13 13 13 13
+0 0 0 0 0
+9 0 0 0 524289 524288 0
+8 8 0 0 0 0 0 0
+512 0 0 0 0 0 0 0
+> time_prog 12~
+mpecho A deputy leaves in a rush.
+mpgoto 29030
+drop all
+mpgoto 29065
+mpecho A deputy has arrived.
+~
+|
+#29061
+shop keeper shopkeeper baszturd~
+Baszturd~
+A shop keeper works here.
+~
+He is an elderly Adarian shop keeper. 
+~
+16777283 0 -400 Z
+20 0 0 2d20+0 2d10+0
+0 0
+8 8 1
+13 13 13 13 13 13 13
+0 0 0 0 0
+9 0 0 0 524288 524288 0
+4 4 0 0 0 0 0 0
+512 0 0 0 0 0 0 0
+#29062
+scholar old saavy professor sumaretie~
+Professor Sumaretie~
+A saavy, old scholar studies here.
+~
+This old Adarian may not know a great deal about fighting, but he
+knows many languages and other academic fields.  He might be able to
+help you learn another language. 
+~
+34603075 0 450 Z
+20 0 60 2d20+0 2d10+0
+0 0
+8 8 1
+13 18 18 13 13 18 13
+0 0 0 0 0
+9 0 0 0 1589830 1589831 0
+4 4 0 0 0 0 0 0
+512 0 0 0 0 0 0 0
+#29063
+droid innkeeper keeper r2 unit~
+An Innkeeper Droid~
+An Innkeeper Droid idles here.
+~
+A red astromech R2 unit idles here waiting to help you.  If you would
+like  to rent a room for the evening, give 50 credits to this R2
+unit. 
+~
+83886147 0 -400 Z
+30 0 0 3d30+0 3d15+0
+0 0
+8 8 0
+13 13 13 13 13 13 13
+0 0 0 0 0
+9 0 0 0 1 524288 0
+6 6 0 0 0 0 0 0
+512 0 0 0 0 0 0 0
+> all_greet_prog 75~
+mpecho A little red R2 Unit whistles happily towards you.
+~
+> bribe_prog 18~
+mpgoto 29110
+mptransfer $n
+mpechoat $n The R2 Unit escorts you to a room.
+east
+~
+|
+#29064
+bartender hutt puttzu~
+Puttzu~
+A Hutt Bartender works here.
+~
+~
+33554435 0 -500 Z
+50 0 0 5d50+0 5d25+0
+0 0
+8 8 1
+13 13 13 13 13 13 13
+0 0 0 0 0
+4 0 0 0 524305 524288 0
+10 10 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#29065
+droid astromech bouncer~
+An Astromech Droid~
+An Astromech Droid acts as a bouncer here.
+~
+This Astromech Droid is acting as a bouncer to the bar south of here.
+Only 'adults' can enter.  If you would like to enter the bar, tell
+the droid 'hutts rule!'. 
+~
+67108931 0 -500 Z
+65 0 0 7d65+0 6d37+0
+0 0
+8 8 0
+13 13 13 13 13 13 13
+0 0 0 0 0
+9 0 0 0 524289 1 0
+13 13 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+> speech_prog p hutts rule!~
+mpgoto puttzu
+mptransfer $n
+mpechoat $n The Droid ushers you into the bar.
+mpecho $n is ushered into the bar.
+mpgoto 29081
+~
+|
+#29066
+bailjfk boxjfk~
+a bail box~
+A Bail Box has been installed in the wall here.
+~
+~
+1 0 0 Z
+50 0 -100 0d0+0 0d0+0
+0 0
+8 8 0
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 0
+10 10 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+> bribe_prog 30~
+mpechoaround $n $n exits the jail.
+mpgoto 29103
+mptransfer $n
+mpechoat $n The doors opens and you are released.
+mpechoaround $n $n exits the jail.
+mpgoto 29108
+~
+|
+#29067
+deputy snopaew~
+Deputy Snopaew~
+A deputy partols the area.
+~
+Deputy Snopaew is a tall and gangly looking Adarian.  It is his job to
+keep weapons out of the city.
+~
+33554497 0 300 Z
+30 0 0 3d30+0 3d15+0
+0 0
+8 8 1
+13 13 13 13 13 13 13
+0 0 0 0 0
+9 0 0 0 524288 524288 0
+6 6 0 0 0 0 0 0
+512 0 0 0 0 0 0 0
+> entry_prog 50~
+mpecho Deputy Snopaew surveys the area.
+~
+> all_greet_prog 75~
+glare $n
+~
+|
+#29068
+deputy young~
+a young deputy~
+A deputy patrols the area.
+~
+A young Adarian deputy.  You can see it is his dream to enforce
+laws.  He is a decent and moral being.
+~
+65 0 300 Z
+15 0 0 2d15+0 1d8+0
+15 0
+8 8 1
+13 13 13 13 13 13 13
+0 0 0 0 0
+9 0 0 0 524288 524288 0
+3 3 0 0 0 0 0 0
+512 0 0 0 0 0 0 0
+#29069
+adarian townie~
+a Townie~
+An Adarian Townie wanders about here.
+~
+Not the brightest nor most beautiful Adarian.  This is one of the
+citizens of the town.  She lives day to day.
+~
+16777281 0 -100 Z
+15 0 75 1d10+0 1d5+0
+0 0
+8 8 2
+13 13 13 13 13 13 13
+0 0 0 0 0
+9 0 0 0 524288 524288 0
+2 2 0 0 0 0 0 0
+512 0 0 0 0 0 0 0
+#29070
+draagax crazed omnivore~
+a Draagax~
+A crazed omnivore sniffs about.
+~
+Ears similar to a rabbit, eyes of a fly, teeth of a lion, body of an
+ape. This can be a very frightening beast to stumble upon.
+~
+33816645 0 -100 Z
+22 0 65 2d22+0 2d12+0
+0 0
+8 8 0
+13 5 13 18 13 13 18
+0 0 0 0 0
+9 0 0 0 524288 524288 0
+4 4 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+> all_greet_prog 75~
+if ispc($n) 
+if level($n) >= 15 
+mpkill $n 
+endif 
+else 
+mpecho A Draagax snorts loudly.
+endif
+~
+|
+#0
+
+
+#OBJECTS
+#29060
+sign welcome~
+a sign~
+A Large sign has been posted here.~
+~
+13 0 0
+0 0 0 0
+5000 1 0
+E
+sign welcome~
+-  Welcome to Baituh City  -
+Please follow our laws:
+1. No Weapons Permitted
+2. No Drugs Permitted
+3. No "Adult Entertainment"
+~
+#29061
+bail box~
+a Bail Box~
+A Bail Box has been built into the wall.~
+~
+15 1 0
+500 0 0 0
+5000 0 0
+E
+bail box~
+To be released from jail you must apologize for your crimes.  Hint,
+say 'sorry' to be released. 
+~
+E
+bail box~
+~
+> speech_prog sorry~
+mpgoto 29103
+mptransfer $n
+mpechoat $n The doors opens and you are released.
+mpecho $n exits the jail.
+mpgoto 29108
+~
+> bribe_prog 30~
+mpgoto 29103
+mptransfer $n
+mpechoat $n The doors opens and you are released.
+mpecho $n exits the jail.
+mpgoto 29108
+~
+|
+#29065
+playhutt trashy magazine~
+a copy of PlayHutt magazine~
+A copy of PlayHutt magazine has been left here.~
+~
+79 16 16385
+0 0 0 0
+2 50 5
+E
+playhutt trashy magazine~
+Be careful! You might go blind looking at such filth!
+~
+#0
+
+
+#ROOMS
+#29060
+Floating in a void~
+~
+0 4 1
+S
+#29061
+Baituh City Road~
+This is the northern most entrance and exit of Baituh City.  Jagged
+rocks prevent your travel in most directions.  The air is thick and
+full of dirt and soil.  You can continue to either the north or the
+south from here.
+~
+0 8324 1
+D0
+~
+~
+0 -1 29112
+D2
+~
+~
+0 -1 29062
+S
+#29062
+Baituh City Road~
+Baituh City is known all over Adari for its city design.  Baituh
+City is completely unique in its city structure.  When the city was
+founded, they did not have proper equipment to remove some of the
+thicker rock.  As a result, Large pieces of mountain and volcano
+still stand in the center of each city block.  You can continue
+north, east or west from here.
+~
+0 8192 1
+D0
+~
+~
+0 -1 29061
+D1
+~
+~
+0 -1 29064
+D3
+~
+~
+0 -1 29063
+S
+#29063
+Baituh City Road~
+The path is fairly wide here.  The black soil is soft and moist
+beneath you.  Baituh City seems pretty desolate and devoid of
+intelligent life.  This once thriving city fell on hard times shortly
+after the fall of the Empire. It has been a struggle to keep most
+cities on this planet alive.  You can continue east or south from
+here.
+~
+0 8192 1
+D1
+~
+~
+0 -1 29062
+D2
+~
+~
+0 -1 29066
+S
+#29064
+Baituh City Road~
+The path is fairly wide here.  The black soil is soft and moist
+beneath you.  Baituh City seems pretty desolate and devoid of
+intelligent life.  This once thriving city fell on hard times shortly
+after the fall of the Empire. It has been a struggle to keep most
+cities on this planet alive.  You can continue west or south from
+here.
+~
+0 8192 1
+D2
+~
+~
+0 -1 29067
+D3
+~
+~
+0 -1 29062
+S
+#29065
+Baituh City Landing Strip~
+This barren little area is used for private space vessels to come
+and go.  This is not a nice or well kept facility, but it does serve
+a very useful purpose for the cities inhabitants.  This is not a bus
+stop. Commercial transportation does not and cannot dock here.  You
+can continue east from here.
+~
+0 262164 1
+D1
+~
+~
+0 -1 29066
+S
+#29066
+Baituh City Road~
+The path is very wide here.  It would be possible for small vehicles
+to easily pass one another here.  Baituh City is now largely
+inhabited by vermin and rodents.  The intelligent beings who reside
+here are scoundrels and thugs primarily.  You can continue north,
+south, or west from here.
+~
+0 8192 1
+D0
+~
+~
+0 -1 29063
+D2
+~
+~
+0 -1 29069
+D3
+~
+~
+0 -1 29065
+S
+#29067
+Baituh City Road~
+The path is very wide here.  It would be possible for small vehicles
+to easily pass one another here.  Baituh City is now largely
+inhabited by vermin and rodents.  The intelligent beings who reside
+here are scoundrels and thugs primarily.  You can continue north,
+south, or east from here.
+~
+0 8192 1
+D0
+~
+~
+0 -1 29064
+D1
+~
+~
+0 -1 29068
+D2
+~
+~
+0 -1 29071
+S
+#29068
+Baituh City Cafeteria~
+You are just inside a cave.  The room is very well lit and well
+kept. Whoever runs the shop is very clean and meticulous.  The floor
+is made up of smoothed marble like rock and has very little dirt on
+it. You can exit to the west.
+~
+0 9224 1
+D3
+~
+~
+0 -1 29067
+S
+#29069
+Baituh City Road~
+There is thick volcanic ash beneath you.  It black and grainy.  The
+ash seems to stick to everything and gets onto all of your clothes. 
+Be careful not to breathe in too much of this ash saturated  air. 
+You can continue north or east from here.
+~
+0 8192 1
+D0
+~
+~
+0 -1 29066
+D1
+~
+~
+0 -1 29070
+S
+#29070
+Baituh City Road~
+Baituh City is known all over Adari for its city design.  Baituh
+City is completely unique in its city structure.  When the city was
+founded, they did not have proper equipment to remove some of the
+thicker rock.  As a result, Large pieces of mountain and volcano
+still stand in the center of each city block.  You can continue
+south, east or west from here.
+~
+0 8192 1
+D1
+~
+~
+0 -1 29071
+D2
+~
+~
+0 -1 29072
+D3
+~
+~
+0 -1 29069
+S
+#29071
+Baituh City Road~
+There is thick volcanic ash beneath you.  It black and grainy.  The
+ash seems to stick to everything and gets onto all of your clothes. 
+Be careful not to breathe in too much of this ash saturated  air. 
+You can continue north or west from here.
+~
+0 8192 1
+D0
+~
+~
+0 -1 29067
+D3
+~
+~
+0 -1 29070
+S
+#29072
+Baituh City Road~
+This road is covered in thick black volcanic ash.  The ash is heavy
+and very clingy.  Ash floats through the air and attaches its self to
+your clothing and other belonings. You can continue north or south
+from here.
+~
+0 8192 1
+D0
+~
+~
+0 -1 29070
+D2
+~
+~
+0 -1 29073
+S
+#29073
+Baituh City Road~
+This is the main intersection for Baituh City.  There are city
+blocks in all directions from here.  Each direction leads to
+something completely different than the other three.  Feel free to
+look around.
+~
+0 8192 1
+D0
+~
+~
+0 -1 29072
+D1
+~
+~
+0 -1 29086
+D2
+~
+~
+0 -1 29098
+D3
+~
+~
+0 -1 29074
+S
+#29074
+Baituh City Road~
+This road is covered in thick black volcanic ash.  The ash is heavy
+and very clingy.  Ash floats through the air and attaches its self to
+your clothing and other belonings. You can continue east or west from
+here.
+~
+0 8192 1
+D1
+~
+~
+0 -1 29073
+D3
+~
+~
+0 -1 29075
+S
+#29075
+Baituh City Road~
+The path is very wide here.  It would be possible for small vehicles
+to easily pass one another here.  Baituh City is now largely
+inhabited by vermin and rodents.  The intelligent beings who reside
+here are scoundrels and thugs primarily.  You can continue north,
+south, or east from here.
+~
+0 8192 1
+D0
+~
+~
+0 -1 29076
+D1
+~
+~
+0 -1 29074
+D2
+~
+~
+0 -1 29082
+S
+#29076
+Baituh City Road~
+The path is fairly wide here.  The black soil is soft and moist
+beneath you.  Baituh City seems pretty desolate and devoid of
+intelligent life.  This once thriving city fell on hard times shortly
+after the fall of the Empire. It has been a struggle to keep most
+cities on this planet alive.  You can continue west or south from
+here.
+~
+0 8192 1
+D2
+~
+~
+0 -1 29075
+D3
+~
+~
+0 -1 29077
+S
+#29077
+Baituh City Road~
+Baituh City is known all over Adari for its city design.  Baituh
+City is completely unique in its city structure.  When the city was
+founded, they did not have proper equipment to remove some of the
+thicker rock.  As a result, Large pieces of mountain and volcano
+still stand in the center of each city block.  You can continue
+north, east or west from here.
+~
+0 8320 1
+D0
+~
+~
+0 -1 29083
+D1
+~
+~
+0 -1 29076
+D3
+~
+~
+0 -1 29078
+S
+#29078
+Baituh City Road~
+The path is fairly wide here.  The black soil is soft and moist
+beneath you.  Baituh City seems pretty desolate and devoid of
+intelligent life.  This once thriving city fell on hard times shortly
+after the fall of the Empire. It has been a struggle to keep most
+cities on this planet alive.  You can continue east or south from
+here.
+~
+0 8192 1
+D1
+~
+~
+0 -1 29077
+D2
+~
+~
+0 -1 29079
+S
+#29079
+Baituh City Road~
+The path is very wide here.  It would be possible for small vehicles
+to easily pass one another here.  Baituh City is now largely
+inhabited by vermin and rodents.  The intelligent beings who reside
+here are scoundrels and thugs primarily.  You can continue north,
+south, or west from here.
+~
+0 8192 1
+D0
+~
+~
+0 -1 29078
+D2
+~
+~
+0 -1 29080
+D3
+~
+~
+0 -1 29084
+S
+#29080
+Baituh City Road~
+There is thick volcanic ash beneath you.  It black and grainy.  The
+ash seems to stick to everything and gets onto all of your clothes. 
+Be careful not to breathe in too much of this ash saturated  air. 
+You can continue north or east from here.
+~
+0 8192 1
+D0
+~
+~
+0 -1 29079
+D1
+~
+~
+0 -1 29081
+S
+#29081
+Baituh City Road~
+Baituh City is known all over Adari for its city design.  Baituh City
+is completely unique in its city structure.  When the city was
+founded, they did not have proper equipment to remove some of the
+thicker rock.  As a result, Large pieces of mountain and volcano
+still stand in the center of each city block.  You can continue
+south, east or west from here. To the south is a 'bar'.
+~
+0 8192 1
+D1
+~
+~
+0 -1 29082
+D2
+~
+~
+7 -1 29085
+D3
+~
+~
+0 -1 29080
+S
+#29082
+Baituh City Road~
+There is thick volcanic ash beneath you.  It black and grainy.  The
+ash seems to stick to everything and gets onto all of your clothes. 
+Be careful not to breathe in too much of this ash saturated  air. 
+You can continue north or west from here.
+~
+0 8192 1
+D0
+~
+~
+0 -1 29075
+D3
+~
+~
+0 -1 29081
+S
+#29083
+Baituh City Academia~
+At one time Baituh City produced the best and brightest Adarians in
+their state of the art academy.  Since the planet and town have hit
+hard times, things have changed.  Now students must travel to Alfuh
+to work on their fighting skills. Most of the faculty from the old
+school have also left.  This lone room now acts as a tutoring
+facility for the one remaining faculty member.
+~
+0 8 1
+D2
+~
+~
+0 -1 29077
+S
+#29084
+Baituh City Inn~
+Welcome to the Baituh City Inn.  Those who need to rest and such
+can do so here.  But, you have to purchase a room of course.  This is
+not the largest hotel on the planet by any means.  But if you need to
+rest, this place is as good as any other.  You can exit to the east.
+~
+0 42112 1
+D1
+~
+~
+0 -1 29079
+D3
+~
+~
+8388615 -1 29110
+S
+#29085
+Baituh City Bar~
+This dank fouls smelling hole in the ground is one of the few
+businesses able to survive these times of hardship.  It is a bar. 
+Beings come here to forget about how miserable their lives are.  Feel
+free to join them.  But watch your step.  You can exit to the north.
+~
+0 8200 1
+D0
+~
+~
+1 -1 29081
+S
+#29086
+Baituh City Road~
+This road is covered in thick black volcanic ash.  The ash is heavy
+and very clingy.  Ash floats through the air and attaches its self to
+your clothing and other belonings. You can continue east or west from
+here.
+~
+0 8192 1
+D1
+~
+~
+0 -1 29087
+D3
+~
+~
+0 -1 29073
+S
+#29087
+Baituh City Road~
+The path is very wide here.  It would be possible for small vehicles
+to easily pass one another here.  Baituh City is now largely
+inhabited by vermin and rodents.  The intelligent beings who reside
+here are scoundrels and thugs primarily.  You can continue north,
+south, or west from here.
+~
+0 8192 1
+D0
+~
+~
+0 -1 29088
+D2
+~
+~
+0 -1 29094
+D3
+~
+~
+0 -1 29086
+S
+#29088
+Baituh City Road~
+The path is fairly wide here.  The black soil is soft and moist
+beneath you.  Baituh City seems pretty desolate and devoid of
+intelligent life.  This once thriving city fell on hard times shortly
+after the fall of the Empire. It has been a struggle to keep most
+cities on this planet alive.  You can continue east or south from
+here.
+~
+0 8192 1
+D1
+~
+~
+0 -1 29089
+D2
+~
+~
+0 -1 29087
+S
+#29089
+Baituh City Road~
+Baituh City is known all over Adari for its city design.  Baituh
+City is completely unique in its city structure.  When the city was
+founded, they did not have proper equipment to remove some of the
+thicker rock.  As a result, Large pieces of mountain and volcano
+still stand in the center of each city block.  You can continue
+north, east or west from here.
+~
+0 8192 1
+D0
+~
+~
+0 -1 29095
+D1
+~
+~
+0 -1 29090
+D3
+~
+~
+0 -1 29088
+S
+#29090
+Baituh City Road~
+The path is fairly wide here.  The black soil is soft and moist
+beneath you.  Baituh City seems pretty desolate and devoid of
+intelligent life.  This once thriving city fell on hard times shortly
+after the fall of the Empire. It has been a struggle to keep most
+cities on this planet alive.  You can continue west or south from
+here.
+~
+0 8192 1
+D2
+~
+~
+0 -1 29091
+D3
+~
+~
+0 -1 29089
+S
+#29091
+Baituh City Road~
+The path is very wide here.  It would be possible for small vehicles
+to easily pass one another here.  Baituh City is now largely
+inhabited by vermin and rodents.  The intelligent beings who reside
+here are scoundrels and thugs primarily.  You can continue north,
+south, or east from here.
+~
+0 8192 1
+D0
+~
+~
+0 -1 29090
+D1
+~
+~
+0 -1 29096
+D2
+~
+~
+0 -1 29092
+S
+#29092
+Baituh City Road~
+There is thick volcanic ash beneath you.  It black and grainy.  The
+ash seems to stick to everything and gets onto all of your clothes. 
+Be careful not to breathe in too much of this ash saturated  air. 
+You can continue north or west from here.
+~
+0 8192 1
+D0
+~
+~
+0 -1 29091
+D3
+~
+~
+0 -1 29093
+S
+#29093
+Baituh City Road~
+Baituh City is known all over Adari for its city design.  Baituh
+City is completely unique in its city structure.  When the city was
+founded, they did not have proper equipment to remove some of the
+thicker rock.  As a result, Large pieces of mountain and volcano
+still stand in the center of each city block.  You can continue
+south, east or west from here.
+~
+0 8192 1
+D1
+~
+~
+0 -1 29092
+D2
+~
+~
+0 -1 29097
+D3
+~
+~
+0 -1 29094
+S
+#29094
+Baituh City Road~
+There is thick volcanic ash beneath you.  It black and grainy.  The
+ash seems to stick to everything and gets onto all of your clothes. 
+Be careful not to breathe in too much of this ash saturated  air. 
+You can continue north or east from here.
+~
+0 8192 1
+D0
+~
+~
+0 -1 29087
+D1
+~
+~
+0 -1 29093
+S
+#29095
+Baituh City Governmental Offices~
+This is not quite as elegant as one would expect of a government.
+ It would seem the government has been struggling a lot too during
+this time of hardship for the planet.  The room is well lit.  The
+walls are covered in dirt and filth, the floor is even worse.  You
+can escape to the south.
+~
+0 8200 1
+D2
+~
+~
+0 -1 29089
+S
+#29096
+Baituh City Post Office~
+Baituh City is still capable of communicating with other cities and
+planets. This was once a thriving postal service serving Baituh City
+and its the suburbs. Today, no one oversees the post office.  It is
+all done electronically.  You can exit to the west.
+~
+0 8192 1
+D3
+~
+~
+0 -1 29091
+S
+#29097
+Lava Resevoir~
+It is extremely warm here.  There is a large pool of lava
+directly south of here.  To continue south would almost certainly be
+instant death.  It would be best to get as far away from here as
+possible.  This is not a safe area.  Go north if you cherish life.
+~
+0 9216 1
+D0
+~
+~
+0 -1 29093
+D2
+If you go south, you will surely die!
+~
+~
+0 -1 29111
+S
+#29098
+Baituh City Road~
+This road is covered in thick black volcanic ash.  The ash is heavy
+and very clingy.  Ash floats through the air and attaches its self to
+your clothing and other belonings. You can continue north or south
+from here.
+~
+0 8192 1
+D0
+~
+~
+0 -1 29073
+D2
+~
+~
+0 -1 29099
+S
+#29099
+Baituh City Road~
+Baituh City is known all over Adari for its city design.  Baituh
+City is completely unique in its city structure.  When the city was
+founded, they did not have proper equipment to remove some of the
+thicker rock.  As a result, Large pieces of mountain and volcano
+still stand in the center of each city block.  You can continue
+north, east or west from here.
+~
+0 8192 1
+D0
+~
+~
+0 -1 29098
+D1
+~
+~
+0 -1 29101
+D3
+~
+~
+0 -1 29100
+S
+#29100
+Baituh City Road~
+The path is fairly wide here.  The black soil is soft and moist
+beneath you.  Baituh City seems pretty desolate and devoid of
+intelligent life.  This once thriving city fell on hard times shortly
+after the fall of the Empire. It has been a struggle to keep most
+cities on this planet alive.  You can continue east or south from
+here.
+~
+0 8192 1
+D1
+~
+~
+0 -1 29099
+D2
+~
+~
+0 -1 29102
+S
+#29101
+Baituh City Road~
+The path is fairly wide here.  The black soil is soft and moist
+beneath you.  Baituh City seems pretty desolate and devoid of
+intelligent life.  This once thriving city fell on hard times shortly
+after the fall of the Empire. It has been a struggle to keep most
+cities on this planet alive.  You can continue west or south from
+here.
+~
+0 8192 1
+D2
+~
+~
+0 -1 29103
+D3
+~
+~
+0 -1 29099
+S
+#29102
+Baituh City Road~
+The path is very wide here.  It would be possible for small vehicles
+to easily pass one another here.  Baituh City is now largely
+inhabited by vermin and rodents.  The intelligent beings who reside
+here are scoundrels and thugs primarily.  You can continue north,
+south, or west from here.
+~
+0 8192 1
+D0
+~
+~
+0 -1 29100
+D2
+~
+~
+0 -1 29104
+D3
+~
+~
+0 -1 29107
+S
+#29103
+Baituh City Road~
+The path is very wide here.  It would be possible for small vehicles
+to easily pass one another here.  Baituh City is now largely
+inhabited by vermin and rodents.  The intelligent beings who reside
+here are scoundrels and thugs primarily.  You can continue north,
+south, or east from here.
+~
+0 8192 1
+D0
+~
+~
+0 -1 29101
+D1
+~
+~
+75498503 -1 29108
+D2
+~
+~
+0 -1 29106
+S
+#29104
+Baituh City Road~
+There is thick volcanic ash beneath you.  It black and grainy.  The
+ash seems to stick to everything and gets onto all of your clothes. 
+Be careful not to breathe in too much of this ash saturated  air. 
+You can continue north or east from here.
+~
+0 8192 1
+D0
+~
+~
+0 -1 29102
+D1
+~
+~
+0 -1 29105
+S
+#29105
+Baituh City Road~
+Baituh City is known all over Adari for its city design.  Baituh
+City is completely unique in its city structure.  When the city was
+founded, they did not have proper equipment to remove some of the
+thicker rock.  As a result, Large pieces of mountain and volcano
+still stand in the center of each city block.  You can continue
+south, east or west from here.
+~
+0 8192 1
+D1
+~
+~
+0 -1 29106
+D2
+~
+~
+0 -1 29109
+D3
+~
+~
+0 -1 29104
+S
+#29106
+Baituh City Road~
+There is thick volcanic ash beneath you.  It black and grainy.  The
+ash seems to stick to everything and gets onto all of your clothes. 
+Be careful not to breathe in too much of this ash saturated  air. 
+You can continue north or west from here.
+~
+0 8192 1
+D0
+~
+~
+0 -1 29103
+D3
+~
+~
+0 -1 29105
+S
+#29107
+Baituh City Police Station~
+This is the Baituh City Police Station.  A large marble desk sits in
+the corner of the room.  The floor is covered in dirt and volcanic
+ash. Several communication terminals have been built into the walls
+around you.
+~
+0 0 1
+D1
+~
+~
+0 -1 29102
+S
+#29108
+Baituh City Jail~
+This is a dank foul smelling armpit of a cell.  To be locked in this
+room means you must have broken the law.  Thick rocks make up the
+walls and ceiling. 
+~
+0 41032 1
+D3
+~
+~
+75498503 -1 29103
+E
+bail box~
+This is a bail box.  To bereleased from jail, you must give 30 credits
+worth of bail to the box.  You will promptly be freed if you pay the
+30credit fine. 
+~
+S
+#29109
+Baituh City Road~
+This road is very wide and seems to be in fairly decent condition. 
+However, a large rock-like boulder blocks you from continuing any
+further south. 
+~
+0 8192 1
+D0
+~
+~
+0 -1 29105
+S
+#29110
+Baituh City Hotel~
+This is where you can safely sleep and exit the game.  When you
+reenter the game, this is the room you will start in.  Be sure to
+thank the hotel staff for putting up with you.  Enjoy your stay.  You
+can exit to the east. 
+~
+0 8396800 1
+D1
+~
+~
+0 -1 29084
+S
+#29111
+Lava Lake~
+It is unbelievably hot here.  You are in a lake of lava.  To be
+here is  almost certainly suicide.  If you can still escape to the
+north, do so! 
+~
+0 73734 1
+D0
+~
+~
+0 -1 29097
+S
+#29112
+Enclosed Dirt Path~
+The road is covered in thick ash.  You are surrounded by mountains
+and jagged rocks.  It is difficult to know exactly where you are.  It
+would be pretty easy to get lost out here.  To the south is Baituh
+City.
+~
+0 335872 1
+D1
+~
+~
+0 -1 29158
+D2
+~
+~
+0 -1 29061
+D3
+~
+~
+2048 -1 29113
+S
+#29113
+Enclosed Dirt Path~
+It would be pretty easy to get lost out here on this ash  covered
+pathway.  You are surrounded by mountains  and jagged rocks.  It is
+difficult to know exactly where you are.   
+~
+0 335872 1
+D1
+~
+~
+0 -1 29112
+D3
+~
+~
+0 -1 29114
+S
+#29114
+Enclosed Dirt Path~
+The road is covered in thick ash.  You are surrounded by mountains
+and jagged rocks.  It is difficult to know exactly where you are.  It
+would be pretty easy to get lost out here.
+~
+0 335872 1
+D0
+~
+~
+0 -1 29115
+D1
+~
+~
+0 -1 29113
+S
+#29115
+Enclosed Dirt Path~
+The road is covered in thick ash.  You are surrounded by mountains
+and jagged rocks.  It is difficult to know exactly where you are.  It
+would be pretty easy to get lost out here.
+~
+0 335872 1
+D0
+~
+~
+0 -1 29116
+D2
+~
+~
+0 -1 29114
+S
+#29116
+Enclosed Dirt Path~
+It would be pretty easy to get lost out here on this ash  covered
+pathway.  You are surrounded by mountains  and jagged rocks.  It is
+difficult to know exactly where you are.   
+~
+0 335872 1
+D0
+~
+~
+0 -1 29117
+D2
+~
+~
+0 -1 29115
+S
+#29117
+Enclosed Dirt Path~
+The road is covered in thick ash.  You are surrounded by mountains
+and jagged rocks.  It is difficult to know exactly where you are.  It
+would be pretty easy to get lost out here.
+~
+0 335872 1
+D0
+~
+~
+0 -1 29118
+D2
+~
+~
+0 -1 29116
+S
+#29118
+Enclosed Dirt Path~
+The road is covered in thick ash.  You are surrounded by mountains
+and jagged rocks.  It is difficult to know exactly where you are.  It
+would be pretty easy to get lost out here.
+~
+0 335872 1
+D0
+~
+~
+0 -1 29119
+D2
+~
+~
+0 -1 29117
+S
+#29119
+Enclosed Dirt Path~
+It would be pretty easy to get lost out here on this ash  covered
+pathway.  You are surrounded by mountains  and jagged rocks.  It is
+difficult to know exactly where you are.   
+~
+0 335872 1
+D0
+~
+~
+0 -1 29120
+D2
+~
+~
+0 -1 29118
+S
+#29120
+Enclosed Dirt Path~
+It would be pretty easy to get lost out here on this ash  covered
+pathway.  You are surrounded by mountains  and jagged rocks.  It is
+difficult to know exactly where you are.   
+~
+0 335872 1
+D1
+~
+~
+0 -1 29121
+D2
+~
+~
+0 -1 29119
+S
+#29121
+Enclosed Dirt Path~
+The road is covered in thick ash.  You are surrounded by mountains
+and jagged rocks.  It is difficult to know exactly where you are.  It
+would be pretty easy to get lost out here.
+~
+0 335872 1
+D1
+~
+~
+0 -1 29122
+D3
+~
+~
+0 -1 29120
+S
+#29122
+Enclosed Dirt Path~
+It would be pretty easy to get lost out here on this ash  covered
+pathway.  You are surrounded by mountains  and jagged rocks.  It is
+difficult to know exactly where you are.   
+~
+0 335872 1
+D1
+~
+~
+0 -1 29123
+D3
+~
+~
+0 -1 29121
+S
+#29123
+Enclosed Dirt Path~
+It would be pretty easy to get lost out here on this ash  covered
+pathway.  You are surrounded by mountains  and jagged rocks.  It is
+difficult to know exactly where you are.   
+~
+0 335872 1
+D0
+~
+~
+0 -1 29124
+D1
+~
+~
+0 -1 29125
+D3
+~
+~
+2048 -1 29122
+S
+#29124
+Outskirts of Alfuh City~
+It would be pretty easy to get lost out here on this ash  covered
+pathway.  You are surrounded by mountains  and jagged rocks.  It is
+difficult to know exactly where you are.   
+~
+0 335876 1
+D0
+~
+~
+0 -1 29049
+D2
+~
+~
+0 -1 29123
+S
+#29125
+Enclosed Dirt Path~
+The road is covered in thick ash.  You are surrounded by mountains
+and jagged rocks.  It is difficult to know exactly where you are.  It
+would be pretty easy to get lost out here. 
+~
+0 335872 1
+D1
+~
+~
+0 -1 29126
+D3
+~
+~
+0 -1 29123
+S
+#29126
+Enclosed Dirt Path~
+It would be pretty easy to get lost out here on this ash  covered
+pathway.  You are surrounded by mountains  and jagged rocks.  It is
+difficult to know exactly where you are.   
+~
+0 335872 1
+D1
+~
+~
+0 -1 29127
+D3
+~
+~
+0 -1 29125
+S
+#29127
+Enclosed Dirt Path~
+The road is covered in thick ash.  You are surrounded by mountains
+and jagged rocks.  It is difficult to know exactly where you are.  It
+would be pretty easy to get lost out here.
+~
+0 335872 1
+D1
+~
+~
+0 -1 29130
+D2
+~
+~
+0 -1 29128
+D3
+~
+~
+0 -1 29126
+S
+#29128
+Enclosed Dirt Path~
+It would be pretty easy to get lost out here on this ash  covered
+pathway.  You are surrounded by mountains  and jagged rocks.  It is
+difficult to know exactly where you are.   
+~
+0 335872 1
+D0
+~
+~
+0 -1 29127
+D3
+~
+~
+0 -1 29129
+S
+#29129
+Enclosed Dirt Path~
+The road is covered in thick ash.  You are surrounded by mountains
+and jagged rocks.  It is difficult to know exactly where you are.  It
+would be pretty easy to get lost out here.
+~
+0 335872 1
+D1
+~
+~
+0 -1 29128
+D3
+~
+~
+0 -1 29130
+S
+#29130
+Enclosed Dirt Path~
+It would be pretty easy to get lost out here on this ash  covered
+pathway.  You are surrounded by mountains  and jagged rocks.  It is
+difficult to know exactly where you are.   
+~
+0 335872 1
+D1
+~
+~
+0 -1 29129
+D3
+~
+~
+0 -1 29131
+S
+#29131
+Enclosed Dirt Path~
+The road is covered in thick ash.  You are surrounded by mountains
+and jagged rocks.  It is difficult to know exactly where you are.  It
+would be pretty easy to get lost out here.
+~
+0 335872 1
+D1
+~
+~
+0 -1 29130
+D2
+~
+~
+0 -1 29132
+D3
+~
+~
+0 -1 29138
+S
+#29132
+Enclosed Dirt Path~
+It would be pretty easy to get lost out here on this ash  covered
+pathway.  You are surrounded by mountains  and jagged rocks.  It is
+difficult to know exactly where you are.   
+~
+0 335872 1
+D0
+~
+~
+0 -1 29131
+D1
+~
+~
+0 -1 29133
+D2
+~
+~
+0 -1 29128
+S
+#29133
+Enclosed Dirt Path~
+The road is covered in thick ash.  You are surrounded by mountains
+and jagged rocks.  It is difficult to know exactly where you are.  It
+would be pretty easy to get lost out here.
+~
+0 335872 1
+D1
+~
+~
+0 -1 29134
+D3
+~
+~
+0 -1 29132
+S
+#29134
+Enclosed Dirt Path~
+It would be pretty easy to get lost out here on this ash  covered
+pathway.  You are surrounded by mountains  and jagged rocks.  It is
+difficult to know exactly where you are.   
+~
+0 335872 1
+D0
+~
+~
+0 -1 29140
+D1
+~
+~
+0 -1 29135
+D2
+~
+~
+0 -1 29128
+D3
+~
+~
+0 -1 29133
+S
+#29135
+Enclosed Dirt Path~
+The road is covered in thick ash.  You are surrounded by mountains
+and jagged rocks.  It is difficult to know exactly where you are.  It
+would be pretty easy to get lost out here.
+~
+0 335872 1
+D1
+~
+~
+0 -1 29136
+D3
+~
+~
+0 -1 29134
+S
+#29136
+Enclosed Dirt Path~
+It would be pretty easy to get lost out here on this ash  covered
+pathway.  You are surrounded by mountains  and jagged rocks.  It is
+difficult to know exactly where you are.   
+~
+0 335872 1
+D0
+~
+~
+0 -1 29143
+D1
+~
+~
+0 -1 29131
+D2
+~
+~
+0 -1 29137
+D3
+~
+~
+0 -1 29135
+S
+#29137
+Enclosed Dirt Path~
+The road is covered in thick ash.  You are surrounded by mountains
+and jagged rocks.  It is difficult to know exactly where you are.  It
+would be pretty easy to get lost out here.
+~
+0 335872 1
+D0
+~
+~
+0 -1 29136
+D2
+~
+~
+0 -1 29132
+D3
+~
+~
+0 -1 29138
+S
+#29138
+Enclosed Dirt Path~
+It would be pretty easy to get lost out here on this ash  covered
+pathway.  You are surrounded by mountains  and jagged rocks.  It is
+difficult to know exactly where you are.   
+~
+0 335872 1
+D1
+~
+~
+0 -1 29137
+D3
+~
+~
+0 -1 29139
+S
+#29139
+Enclosed Dirt Path~
+The road is covered in thick ash.  You are surrounded by mountains
+and jagged rocks.  It is difficult to know exactly where you are.  It
+would be pretty easy to get lost out here.
+~
+0 335872 1
+D1
+~
+~
+0 -1 29138
+D3
+~
+~
+0 -1 29140
+S
+#29140
+Enclosed Dirt Path~
+It would be pretty easy to get lost out here on this ash  covered
+pathway.  You are surrounded by mountains  and jagged rocks.  It is
+difficult to know exactly where you are.   
+~
+0 335872 1
+D1
+~
+~
+0 -1 29139
+D2
+~
+~
+0 -1 29136
+D3
+~
+~
+0 -1 29141
+S
+#29141
+Enclosed Dirt Path~
+The road is covered in thick ash.  You are surrounded by mountains
+and jagged rocks.  It is difficult to know exactly where you are.  It
+would be pretty easy to get lost out here.
+~
+0 335872 1
+D1
+~
+~
+0 -1 29140
+D3
+~
+~
+0 -1 29142
+S
+#29142
+Enclosed Dirt Path~
+It would be pretty easy to get lost out here on this ash  covered
+pathway.  You are surrounded by mountains  and jagged rocks.  It is
+difficult to know exactly where you are.   
+~
+0 335872 1
+D1
+~
+~
+0 -1 29141
+D2
+~
+~
+0 -1 29143
+D3
+~
+~
+0 -1 29136
+S
+#29143
+Enclosed Dirt Path~
+The road is covered in thick ash.  You are surrounded by mountains
+and jagged rocks.  It is difficult to know exactly where you are.  It
+would be pretty easy to get lost out here.
+~
+0 335872 1
+D0
+~
+~
+0 -1 29142
+D1
+~
+~
+0 -1 29139
+D2
+~
+~
+0 -1 29144
+S
+#29144
+Enclosed Dirt Path~
+It would be pretty easy to get lost out here on this ash  covered
+pathway.  You are surrounded by mountains  and jagged rocks.  It is
+difficult to know exactly where you are.   
+~
+0 335872 1
+D0
+~
+~
+0 -1 29143
+D1
+~
+~
+0 -1 29145
+S
+#29145
+Enclosed Dirt Path~
+The road is covered in thick ash.  You are surrounded by mountains
+and jagged rocks.  It is difficult to know exactly where you are.  It
+would be pretty easy to get lost out here.
+~
+0 335872 1
+D0
+~
+~
+0 -1 29146
+D3
+~
+~
+0 -1 29144
+S
+#29146
+Enclosed Dirt Path~
+It would be pretty easy to get lost out here on this ash  covered
+pathway.  You are surrounded by mountains  and jagged rocks.  It is
+difficult to know exactly where you are.   
+~
+0 335872 1
+D1
+~
+~
+0 -1 29147
+D2
+~
+~
+0 -1 29145
+S
+#29147
+Enclosed Dirt Path~
+The road is covered in thick ash.  You are surrounded by mountains
+and jagged rocks.  It is difficult to know exactly where you are.  It
+would be pretty easy to get lost out here.
+~
+0 335872 1
+D1
+~
+~
+0 -1 29148
+D3
+~
+~
+0 -1 29146
+S
+#29148
+Enclosed Dirt Path~
+It would be pretty easy to get lost out here on this ash  covered
+pathway.  You are surrounded by mountains  and jagged rocks.  It is
+difficult to know exactly where you are.   
+~
+0 335872 1
+D0
+~
+~
+0 -1 29151
+D1
+~
+~
+0 -1 29149
+D3
+~
+~
+0 -1 29147
+S
+#29149
+Enclosed Dirt Path~
+The road is covered in thick ash.  You are surrounded by mountains
+and jagged rocks.  It is difficult to know exactly where you are.  It
+would be pretty easy to get lost out here.
+~
+0 335872 1
+D1
+~
+~
+0 -1 29139
+D2
+~
+~
+0 -1 29150
+D3
+~
+~
+0 -1 29148
+S
+#29150
+Enclosed Dirt Path~
+It would be pretty easy to get lost out here on this ash  covered
+pathway.  You are surrounded by mountains  and jagged rocks.  It is
+difficult to know exactly where you are.   
+~
+0 335872 1
+D0
+~
+~
+0 -1 29149
+D1
+~
+~
+0 -1 29151
+S
+#29151
+Enclosed Dirt Path~
+The road is covered in thick ash.  You are surrounded by mountains
+and jagged rocks.  It is difficult to know exactly where you are.  It
+would be pretty easy to get lost out here.
+~
+0 335872 1
+D2
+~
+~
+0 -1 29152
+D3
+~
+~
+0 -1 29150
+S
+#29152
+Enclosed Dirt Path~
+It would be pretty easy to get lost out here on this ash  covered
+pathway.  You are surrounded by mountains  and jagged rocks.  It is
+difficult to know exactly where you are.   
+~
+0 335872 1
+D0
+~
+~
+0 -1 29151
+D1
+~
+~
+0 -1 29147
+D3
+~
+~
+0 -1 29153
+S
+#29153
+Enclosed Dirt Path~
+The road is covered in thick ash.  You are surrounded by mountains
+and jagged rocks.  It is difficult to know exactly where you are.  It
+would be pretty easy to get lost out here.
+~
+0 335872 1
+D1
+~
+~
+0 -1 29152
+D3
+~
+~
+0 -1 29154
+S
+#29154
+Enclosed Dirt Path~
+It would be pretty easy to get lost out here on this ash  covered
+pathway.  You are surrounded by mountains  and jagged rocks.  It is
+difficult to know exactly where you are.   
+~
+0 335872 1
+D0
+~
+~
+0 -1 29155
+D1
+~
+~
+0 -1 29153
+S
+#29155
+Enclosed Dirt Path~
+The road is covered in thick ash.  You are surrounded by mountains
+and jagged rocks.  It is difficult to know exactly where you are.  It
+would be pretty easy to get lost out here.
+~
+0 335872 1
+D2
+~
+~
+0 -1 29154
+D3
+~
+~
+0 -1 29156
+S
+#29156
+Enclosed Dirt Path~
+It would be pretty easy to get lost out here on this ash  covered
+pathway.  You are surrounded by mountains  and jagged rocks.  It is
+difficult to know exactly where you are.   
+~
+0 335872 1
+D1
+~
+~
+0 -1 29155
+D2
+~
+~
+0 -1 29157
+S
+#29157
+Enclosed Dirt Path~
+The road is covered in thick ash.  You are surrounded by mountains
+and jagged rocks.  It is difficult to know exactly where you are.  It
+would be pretty easy to get lost out here.
+~
+0 335872 1
+D0
+~
+~
+0 -1 29156
+D1
+~
+~
+0 -1 29147
+D3
+~
+~
+0 -1 29158
+S
+#29158
+Enclosed Dirt Path~
+It would be pretty easy to get lost out here on this ash  covered
+pathway.  You are surrounded by mountains  and jagged rocks.  It is
+difficult to know exactly where you are.   
+~
+0 335872 1
+D1
+~
+~
+0 -1 29157
+D3
+~
+~
+0 -1 29112
+S
+#0
+
+
+#RESETS
+M 1 29061 1 29068
+G 1 29002 1
+G 1 10313 1
+G 1 10314 1
+G 1 10317 1
+M 1 29062 1 29083
+M 1 29063 1 29084
+D 0 29084 3 2
+M 1 29065 1 29081
+D 0 29081 2 2
+M 1 29066 1 29108
+D 0 29108 3 2
+O 1 38 1 29096
+M 1 29067 1 29066
+E 1 29009 1 16
+E 1 29006 1 5
+E 1 29007 1 7
+E 1 29008 1 8
+M 1 29068 1 29069
+E 1 29006 1 5
+E 1 29007 1 7
+E 1 29008 1 8
+E 1 29009 1 16
+M 1 29068 2 29078
+E 1 29007 1 7
+E 1 29008 1 8
+E 1 29006 1 5
+E 1 29009 1 16
+M 1 29068 3 29090
+E 1 29006 1 5
+E 1 29007 1 7
+E 1 29008 1 8
+E 1 29009 1 16
+M 1 29068 4 29100
+E 1 29006 1 5
+E 1 29007 1 7
+E 1 29008 1 8
+E 1 29009 1 16
+M 1 29068 5 29106
+E 1 29006 1 5
+E 1 29007 1 7
+E 1 29008 1 8
+E 1 29009 1 16
+M 1 29068 6 29107
+E 1 29006 1 5
+E 1 29007 1 7
+E 1 29008 1 8
+E 1 29009 1 16
+M 1 29060 1 29065
+E 1 29008 1 8
+E 1 29007 1 7
+E 1 29009 1 16
+E 1 29006 1 5
+O 1 29060 1 29065
+M 1 29069 1 29062
+E 1 29004 1 12
+M 1 29069 2 29071
+E 1 29004 1 12
+M 1 29069 3 29080
+E 1 29004 1 12
+M 1 29069 4 29073
+E 1 29004 1 12
+M 1 29069 5 29092
+E 1 29004 1 12
+M 1 29069 6 29104
+E 1 29004 1 12
+M 1 29070 1 29127
+M 1 29070 2 29129
+M 1 29070 3 29131
+M 1 29070 4 29133
+M 1 29070 5 29135
+M 1 29070 6 29137
+M 1 29070 7 29139
+M 1 29070 8 29141
+M 1 29070 9 29143
+M 1 29070 10 29145
+M 1 29070 11 29147
+M 1 29070 12 29149
+M 1 29070 13 29151
+M 1 29070 14 29153
+M 1 29070 15 29155
+M 1 29070 16 29157
+M 1 29070 17 29115
+M 1 29070 18 29119
+D 0 29027 3 2
+M 1 29068 7 29027
+E 1 29008 1 8
+E 1 29007 1 7
+E 1 29006 1 5
+E 1 29009 1 16
+D 0 29027 3 2
+M 1 29068 8 29015
+E 1 29008 1 8
+E 1 29007 1 7
+E 1 29006 1 5
+E 1 29009 1 16
+M 1 29069 7 29015
+E 1 29004 1 12
+M 1 29007 9 29021
+M 1 29069 8 29021
+E 1 29004 1 12
+M 1 29069 9 29033
+E 1 29004 1 12
+M 1 29069 10 29037
+E 1 29004 1 12
+M 1 29069 11 29042
+E 1 29004 1 12
+M 1 29069 12 29041
+E 1 29004 1 12
+M 1 29069 13 29050
+E 1 29004 1 12
+M 1 29007 10 29064
+M 1 29007 11 29088
+M 1 29007 12 29082
+M 1 29007 13 29101
+M 1 29064 1 29085
+G 1 21009 1
+G 1 21008 1
+G 1 21010 1
+G 1 32230 1
+G 1 10487 1
+G 1 29065 1
+M 1 7316 1 29085
+E 1 28200 1 16
+E 1 32217 1 6
+E 1 32215 1 5
+E 1 32216 1 7
+E 1 32204 1 13
+E 1 32205 1 8
+D 0 29085 0 0
+S
+
+
+#SHOPS
+ 29061    0  0  0  0  0   120  90         0 23    ; Baszturd
+ 29064    0  0  0  0  0   120  90         0 23    ; Puttzu
+0
+
+
+#REPAIRS
+0
+
+
+#SPECIALS
+M  29060 spec_customs_spice
+M  29060 spec_police_jail
+M  29067 spec_customs_weapons
+M  29067 spec_police_jail
+M  29068 spec_customs_alcohol
+M  29068 spec_police_attack
+S
+
+
+#$

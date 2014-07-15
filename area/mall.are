@@ -13,7 +13,7 @@ $
 #FLAGS
 0
 
-#ECONOMY 0 3426628
+#ECONOMY 0 465118
 
 #MOBILES
 #7300
@@ -25,14 +25,14 @@ Hello sir/madam may i take your order
 would you like our Mexi-fries with that
 would you like the universe sized
 ~
-33554435 0 0 Z
+3 0 0 Z
 1 0 0 0d0+0 0d0+0
 0 0
 8 8 0
 10 10 10 10 10 10 10
 0 0 0 0 0
 0 0 0 0 1 1 0
-0 0 0 0 1050624 0 0 0
+0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0
 #7301
 Sexy Hutt~
@@ -42,14 +42,14 @@ A hutt in a flimsy pink neglige.
 Dressed in nothing but a skimpy pink outfit your simply amased how any one
 but durga could find this even remotly sexy. but to each his own they say.
 ~
-1107296259 0 0 Z
+1073741827 0 0 Z
 1 0 0 0d0+0 0d0+0
 10000 0
 8 8 0
 10 10 10 10 10 10 10
 0 0 0 0 0
 0 0 0 0 1 1 0
-0 0 0 0 1050624 0 0 0
+0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0
 > give_prog babydoll~
 say oooo my favotite nighty, thanx you.
@@ -75,14 +75,14 @@ looks as if he hasn't showerd in days.  But seen as how his shop sells
 all kinds of weapons it's always busy. You notice every so oftem the clerk
 will let someone into the backroom with a big grin.
 ~
-33554435 0 0 Z
+3 0 0 Z
 1 0 0 0d0+0 0d0+0
 0 0
 8 8 0
 10 10 10 10 10 10 10
 0 0 0 0 0
 0 0 0 0 1 1 0
-0 0 0 0 1050624 0 0 0
+0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0
 > rand_prog 2 ~
 say Got some better stuff in the back room 
@@ -108,7 +108,7 @@ This has got to be the Biggest gamorrean ever, he is simply giant.  Muscles
 bulk where the shouldn't even exist. He snarls at you and adjusts the
 settings on his blaster. 
 ~
-1073778691 4194344 0 Z
+1073778691 40 0 Z
 102 0 -155 50d20+3000 10d4+150
 0 0
 8 8 0
@@ -127,6 +127,11 @@ say hope ya brought enough credits to get passed me
 > speech_prog shop~
 say Ya the Contraband shop in back here.
 ~
+> bribe_prog 100000~
+mpechoat $n The gamorrean takes your credits and lets you passed.
+mpechoaround $n $n is allowed passed the bouncer.
+mptransfer $n 7348
+~
 > speech_prog credit~
 say Ya not cheap you know 500k to get in to see the shops
 evil
@@ -144,12 +149,6 @@ cackle
 say bring it on little one.
 muh
 ~
-> bribe_prog 5000~
-mpechoat $n The gamorrean takes your credits and lets you passed.
-mpechoaround $n $n is allowed passed the bouncer.
-mptransfer $n 7348
- 
-~
 |
 #7304
 Weapons dealer~
@@ -160,14 +159,14 @@ So ya made it passed the guard aye, well i git some stuff fer ya to see II
 carry only the finest in weapons , if i dont have it let me know waht yer
 looking for and i'll find it  
 ~
-33554433 0 0 Z
+1 0 0 Z
 1 0 0 0d0+0 0d0+0
 0 0
 8 8 0
 10 10 10 10 10 10 10
 0 0 0 0 0
 0 0 0 0 1 1 0
-0 0 0 0 1050624 0 0 0
+0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0
 #7305
 Armor dealer~
@@ -178,14 +177,14 @@ Heh , looking for good armor eh , well i'm your man , nothing but the
 finest in illegal armor here,   most of it's been modified to look like
 everyday clothes , but it'll still turn even the stongest blaster.
 ~
-33554433 0 0 Z
+1 0 0 Z
 1 0 0 0d0+0 0d0+0
 0 0
 8 8 0
 10 10 10 10 10 10 10
 0 0 0 0 0
 0 0 0 0 1 1 0
-0 0 0 0 1050624 0 0 0
+0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0
 #7306
 Bored Security Guard~
@@ -193,7 +192,7 @@ a bored security guard~
 A guard in a dumb uniform is here collecting parking fees.
 ~
 ~
-3 32 0 Z
+3 40 0 Z
 99 0 -147 19d10+4000 9d4+2
 0 0
 8 8 0
@@ -220,14 +219,14 @@ Crazy Mike is here to take your cash
 Dressed in what is possibly the ugliest suit you have ever seen this human
 is trying to seel you any ship on his lot as your dream ship.
 ~
-1107298307 0 0 Z
-100 0 -150 20d10+1000 10d4+2
+1073743875 0 0 Z
+1 0 0 0d0+0 0d0+0
 0 0
 8 8 0
 10 10 10 10 10 10 10
 0 0 0 0 0
 0 0 0 0 1 1 0
-20 20 0 0 0 0 16 2
+0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0
 #7308
 child pickpocket~
@@ -252,14 +251,14 @@ Hardware Salseman~
 A chubby salesman stands here
 ~
 ~
-33554435 0 0 Z
+3 0 0 Z
 1 0 0 0d0+0 0d0+0
 0 0
 8 8 0
 10 10 10 10 10 10 10
 0 0 0 0 0
 0 0 0 0 1 1 0
-0 0 0 0 1050624 0 0 0
+0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0
 #7310
 jedi salesman~
@@ -269,14 +268,14 @@ A small man is here selling some equipment.
 An oldwer faile jedi is here selling off his slightly used equipment at
 very resonable rates.
 ~
-1107297283 0 0 Z
+1073741827 0 0 Z
 1 0 0 0d0+0 0d0+0
 0 0
 8 8 0
 10 10 10 10 10 10 10
 0 0 0 0 0
 0 0 0 0 1 1 0
-0 0 0 0 1050624 0 0 0
+0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0
 > speech_prog corusca~
 frown
@@ -296,16 +295,14 @@ nod $n
 ' i think i lost it on the MC-90 on my trip here
 smile
 ~
-> act_prog gives~
-if ovnuminv(7311)
-smile $n
+> give_prog coin~
+smile $n 
 ' My fathers Coin .
 thank $n
 ' sorry but due to inflation i must now charge for the gem
 ' i'll give yoiu a good deal though.
 mpoload 7310
 mppurge coin
-endif
 ~
 |
 #7311
@@ -622,8 +619,8 @@ A very rare crystal lies here.~
 5 0 0 0
 1 100000 100000
 #7311
-A Rare Coin~
-a Rare Coin~
+coin~
+a Race Coin~
 A lost coin from ages ago is here.~
 ~
 8 8192 16385
@@ -684,15 +681,11 @@ shapes around. All races are represented here and as such it is a weapon
 free zone, &C Please Stow all weapons safely &g before continuing into the
 mall
 ~
-0 60 0
+0 52 1
 D0
 ~
 ~
 0 -1 7301
-D10
-~
-~
-133120 -1 7350
 S
 #7301
 Toll Booth~
@@ -700,7 +693,7 @@ Parking is not free at the mall. A bored security guard is here collecting
 5 credits for parking from everone , wether you were flying or not. After
 all the Spaceport must make some money.
 ~
-0 4 1
+0 0 1
 D2
 ~
 ~
@@ -887,7 +880,7 @@ The ground floor of the mall is crowded, very crowded.  Members of each
 race shuffle, push, budge and weave their way through the crowds looking
 for that special shop that hold all they need.
 ~
-0 264 1
+0 8 1
 D0
 ~
 ~
@@ -934,7 +927,7 @@ known throughout the galaxy for it's high quality clothing and its ability
 to fit that fine clothing to almost any species. So stop here and get
 something sexy for someone special
 ~
-0 12 1
+0 1036 1
 D3
 ~
 ~
@@ -945,7 +938,7 @@ Cheap Weapons~
 Welcome to Cheap weapons , Almost every cheap blaster you can imagine is
 for sale here problem is 90% of them also don't work and fail regularly
 ~
-0 12 1
+0 1036 1
 D3
 ~
 ~
@@ -981,7 +974,7 @@ S
 #7319
 Hardware Store~
 ~
-0 12 1
+0 1036 1
 D3
 ~
 ~
@@ -1356,7 +1349,7 @@ S
 #7343
 Contraband Armor~
 ~
-0 8 1
+0 1032 1
 D3
 ~
 ~
@@ -1451,10 +1444,6 @@ S
 MALL COMMAND ROOM~
 ~
 0 1073741828 1
-D2
-~
-~
-0 -1 7300
 S
 #7351
 Jedi Clothing~
@@ -1462,7 +1451,7 @@ This is a small dark backroom behind the infamous pleasure clothing. A
 small man stands here selling some unique equipment that only thoose that
 are force capable may use.
 ~
-0 1073741824 1
+0 1073742848 1
 D4
 ~
 ~
@@ -1494,34 +1483,11 @@ D3
 ~
 0 -1 7352
 S
-#7388
-Complaint Office~
-The office is stark, bearing only the bare necessities. Installed against
-the far wall, you can see the complaint terminal. Use this board to post
-complaints about roleplay conditions, problems you have with immortals, or
-anything else you feel the need to vent on. Please post responsibly.
-~
-0 1073741828 1
-D1
-~
-~
-0 -1 7397
-> act_prog p uploads a message.~
-mpat 112 mpecho Someone just posted a complaint. 
-mpat 122 mpecho Someone just posted a complaint. 
-~
-|
-S
 #7389
-An Empty Apartment~
-Close the door when you leave The room is suprisingly bare save for a bed
-and the few cabinets that stand in the corner. As you stare around you
-notice that the walls are of a greyish metal while the floor is a red
-carpeted fluff that you can seem to feel getting inbetween your toes  even
-though your boots are still apparently on your feet... What a strange
-place.
+&R Bleeds Office &W~
+Close the door when you leave
 ~
-0 1142947840 1
+0 1082130432 1
 D0
 ~
 ~
@@ -1671,10 +1637,6 @@ D2
 ~
 ~
 0 -1 7398
-D3
-~
-~
-0 -1 7388
 E
 small~
 &C  ALL WEAPONS MUST BE STOWD SAFELY WHILE IN THE BUILDING 
@@ -1726,6 +1688,11 @@ G 1 55 3
 G 1 52 3
 G 1 51 3
 G 1 50 3
+M 0 7304 1 7344
+G 1 6607 1
+G 1 7304 1
+G 1 7305 1
+G 1 54 3
 M 0 7305 1 7343
 G 1 7306 1
 M 1 7303 1 7349
@@ -1744,7 +1711,15 @@ E 1 60 1 16
 M 1 7308 1 7304
 M 1 7308 2 7325
 M 1 7308 3 7333
+M 1 7309 1 7319
+G 1 32280 1
+G 1 32210 1
+G 1 32281 1
+M 1 7310 1 7351
+G 1 7308 1
+G 1 7307 1
 M 0 7311 1 7312
+O 0 7303 1 7300
 O 0 100 1 7399
 D 0 7389 0 1
 D 0 7390 2 1
@@ -1757,24 +1732,6 @@ O 1 7315 1 7353
 M 1 7312 1 7352
 G 1 7315 1
 D 0 7352 1 1
-M 1 7309 1 7319
-G 1 32280 1
-G 1 32210 1
-G 1 32281 1
-M 1 204 48 7300
-M 1 204 48 7300
-O 1 7303 1 7300
-O 1 21203 1 7311
-M 1 7310 1 7351
-G 1 7308 1
-G 1 7307 1
-O 1 1454 1 7388
-M 1 7304 1 7344
-G 1 6607 1
-G 1 7304 1
-G 1 7305 1
-G 1 54 1
-G 1 6401 1
 S
 
 
