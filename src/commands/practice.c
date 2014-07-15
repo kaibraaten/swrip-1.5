@@ -135,16 +135,17 @@ void do_practice( CHAR_DATA *ch, char *argument )
       if ( skill_table[sn]->teachers && skill_table[sn]->teachers[0] != '\0' )
         {
           sprintf( buf, "%d", mob->pIndexData->vnum );
+
           if ( !is_name( buf, skill_table[sn]->teachers ) )
             {
-              act( AT_TELL, "$n tells you, 'I know not know how to teach that.'",
+              act( AT_TELL, "$n tells you, 'I do not know how to teach that.'",
                    mob, NULL, ch, TO_VICT );
               return;
             }
         }
       else
         {
-          act( AT_TELL, "$n tells you, 'I know not know how to teach that.'",
+          act( AT_TELL, "$n tells you, 'I do not know how to teach that.'",
                mob, NULL, ch, TO_VICT );
           return;
         }

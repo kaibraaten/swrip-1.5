@@ -16,7 +16,7 @@ ch_ret spell_cure_poison( int sn, int level, CHAR_DATA *ch, void *vo )
     {
       if ( ch != victim )
         {
-          send_to_char("The nobel Jedi use their powers to help others!\r\n", ch);
+          send_to_char("The noble Jedi use their powers to help others!\r\n", ch);
           ch->alignment = ch->alignment +25 ;
           ch->alignment = URANGE( -1000, ch->alignment, 1000 );
           jedi_bonus(ch);

@@ -33,7 +33,7 @@
 #include "editor.h"
 #include "help.h"
 
-void init_supermob();
+void init_supermob(void);
 
 /*
  * Globals.
@@ -4432,8 +4432,8 @@ void show_vnums( CHAR_DATA *ch, vnum_t low, vnum_t high, bool proto, bool shownl
       else if ( !shownl )
           continue;
 
-      pager_printf(ch, "%-15s| Rooms: %5d - %-5d"
-                   " Objs: %5d - %-5d Mobs: %5d - %-5d%s\r\n",
+      pager_printf(ch, "%-22s| Rooms: %10d - %-10d"
+                   " Objs: %10d - %-10d Mobs: %10d - %-10d%s\r\n",
                    (pArea->filename ? pArea->filename : "(invalid)"),
                    pArea->low_r_vnum, pArea->hi_r_vnum,
                    pArea->low_o_vnum, pArea->hi_o_vnum,

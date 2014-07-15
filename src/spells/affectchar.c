@@ -97,7 +97,7 @@ ch_ret spell_affectchar( int sn, int level, CHAR_DATA *ch, void *vo )
             case APPLY_HIT:
               if ( ch != victim && victim->hit < victim->max_hit && af.modifier > 0 && victim->race != RACE_DROID)
                 {
-                  send_to_char("The nobel Jedi use their powers to help others!\r\n", ch);
+                  send_to_char("The noble Jedi use their powers to help others!\r\n", ch);
                   ch->alignment = ch->alignment +20 ;
                   ch->alignment = URANGE( -1000, ch->alignment, 1000 );
                   jedi_bonus(ch);
@@ -116,7 +116,7 @@ ch_ret spell_affectchar( int sn, int level, CHAR_DATA *ch, void *vo )
                 }
               if ( ch != victim && victim->race != RACE_DROID)
                 {
-                  send_to_char("The nobel Jedi use their powers to help others!\r\n", ch);
+                  send_to_char("The noble Jedi use their powers to help others!\r\n", ch);
                   ch->alignment = ch->alignment +25 ;
                   ch->alignment = URANGE( -1000, ch->alignment, 1000 );
 		  jedi_bonus(ch);
