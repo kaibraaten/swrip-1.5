@@ -290,7 +290,7 @@ void learn_from_success( CHAR_DATA *ch, int sn )
         {
           gain = 50 * sklvl;
           set_char_color( AT_WHITE, ch );
-          ch_printf( ch, "You are now an adept of %s!  You gain %d bonus experience!\r\n",
+          ch_printf( ch, "You are now an adept of %s! You gain %d bonus experience!\r\n",
                      skill_table[sn]->name, gain );
         }
       else
