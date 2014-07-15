@@ -1078,6 +1078,7 @@ struct system_data
   int    save_flags;             /* Toggles for saving conditions */
   short  save_frequency;         /* How old to autosave someone */
   short  port;
+  bool disable_hunger;
 #ifdef _WIN32
   HMODULE dl_handle;
 #else

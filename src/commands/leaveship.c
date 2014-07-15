@@ -26,7 +26,9 @@ void do_leaveship( CHAR_DATA *ch, char *argument )
           return;
         }
 
-      if ( ship->shipstate != SHIP_DOCKED && !ship_is_disabled( ship ) )
+      if ( ship->shipstate != SHIP_LANDED
+	   && ship->shipstate != SHIP_DOCKED
+	   && !ship_is_disabled( ship ) )
         {
           send_to_char("&rPlease wait till the ship is properly docked.\r\n",ch);
           return;

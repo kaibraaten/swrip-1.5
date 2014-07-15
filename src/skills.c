@@ -24,6 +24,7 @@
 #include <sys/types.h>
 #include <stdio.h>
 #include <string.h>
+#include <strings.h>
 #include <time.h>
 #include <ctype.h>
 #include "mud.h"
@@ -69,7 +70,8 @@ bool check_skill( CHAR_DATA *ch, char *command, char *argument )
         break;
       if (first >= top)
         return FALSE;
-      if (str_cmp( command, skill_table[sn]->name) < 1)
+
+      if (strcasecmp( command, skill_table[sn]->name) < 1)
         top = sn - 1;
       else
         first = sn + 1;

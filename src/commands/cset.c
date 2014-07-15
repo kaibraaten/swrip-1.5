@@ -31,6 +31,7 @@ void do_cset( CHAR_DATA *ch, char *argument )
       ch_printf(ch, "  Get object without take flag: %d.  ", sysdata.level_getobjnotake);
       ch_printf(ch, "Autosave frequency (minutes): %d.\r\n", sysdata.save_frequency );
       ch_printf(ch, "  Save flags: %s\r\n", flag_string( sysdata.save_flags, save_flag ) );
+      ch_printf(ch, "Hunger and thirst: %s\r\n", sysdata.disable_hunger ? "Disabled" : "Enabled" );
       return;
     }
 
@@ -45,6 +46,14 @@ void do_cset( CHAR_DATA *ch, char *argument )
   if (!str_cmp(arg, "save"))
     {
       save_sysdata(sysdata);
+      return;
+    }
+
+  if( !str_cmp( arg, "disable_hunger" ) )
+    {
+      sysdata.disable_hunger = sysdata.disable_hunger ? FALSE : TRUE;
+      ch_printf( ch, "Hunger and thirst now %s\r\n",
+		 sysdata.disable_hunger ? "DISABLED" : "ENABLED" );
       return;
     }
 
@@ -69,6 +78,7 @@ void do_cset( CHAR_DATA *ch, char *argument )
       send_to_char("Ok.\r\n", ch);
       return;
     }
+
   if (!str_prefix( arg, "guild_advisor" ) )
     {
       STRFREE( sysdata.guild_advisor );
@@ -154,18 +164,21 @@ void do_cset( CHAR_DATA *ch, char *argument )
       send_to_char("Ok.\r\n", ch);
       return;
     }
+
   if (!str_cmp(arg, "write_free"))
     {
       sysdata.write_mail_free = level;
       send_to_char("Ok.\r\n", ch);
       return;
     }
+
   if (!str_cmp(arg, "take_all"))
     {
       sysdata.take_others_mail = level;
       send_to_char("Ok.\r\n", ch);
       return;
     }
+
   if (!str_cmp(arg, "muse"))
     {
       sysdata.muse_level = level;
@@ -179,36 +192,42 @@ void do_cset( CHAR_DATA *ch, char *argument )
       send_to_char("Ok.\r\n", ch);
       return;
     }
+
   if (!str_cmp(arg, "log"))
     {
       sysdata.log_level = level;
       send_to_char("Ok.\r\n", ch);
       return;
     }
+
   if (!str_cmp(arg, "build"))
     {
       sysdata.build_level = level;
       send_to_char("Ok.\r\n", ch);
       return;
     }
+
   if (!str_cmp(arg, "proto_modify"))
     {
       sysdata.level_modify_proto = level;
       send_to_char("Ok.\r\n", ch);
       return;
     }
+
   if (!str_cmp(arg, "override_private"))
     {
       sysdata.level_override_private = level;
       send_to_char("Ok.\r\n", ch);
       return;
     }
+
   if (!str_cmp(arg, "forcepc"))
     {
       sysdata.level_forcepc = level;
       send_to_char("Ok.\r\n", ch);
       return;
     }
+
   if (!str_cmp(arg, "mset_player"))
     {
       sysdata.level_mset_player = level;

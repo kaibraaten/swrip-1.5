@@ -629,6 +629,12 @@ void gain_condition( CHAR_DATA *ch, int iCond, int value )
   if ( value == 0 || is_npc(ch) || get_trust(ch) >= LEVEL_IMMORTAL || is_droid(ch) || is_not_authed(ch))
     return;
 
+  if( ( iCond == COND_THIRST || iCond == COND_FULL )
+      && sysdata.disable_hunger )
+    {
+      return;
+    }
+
   condition                         = ch->pcdata->condition[iCond];
   ch->pcdata->condition[iCond]    = URANGE( 0, condition + value, 48 );
 

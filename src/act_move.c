@@ -31,44 +31,17 @@ ROOM_INDEX_DATA *vroom_hash[64];
 int wherehome( const CHAR_DATA *ch)
 {
   if( ch->plr_home )
-    return ch->plr_home->vnum;
-
-  if( get_trust(ch) >= LEVEL_IMMORTAL )
-    return ROOM_START_IMMORTAL;
-  if( ch->race  == RACE_HUMAN)
-    return ROOM_START_HUMAN;
-  if( ch->race  == RACE_WOOKIEE)
-    return ROOM_START_WOOKIEE;
-  if( ch->race  == RACE_RODIAN)
-    return ROOM_START_RODIAN;
-  if( ch->race  == RACE_MON_CALAMARI)
-    return ROOM_START_MON_CALAMARIAN;
-  if( ch->race  == RACE_TWI_LEK)
-    return ROOM_START_TWILEK;
-  if( ch->race  == RACE_HUTT)
-    return ROOM_START_HUTT;
-  if( ch->race  == RACE_GAMORREAN)
-    return ROOM_START_GAMORREAN;
-  if( ch->race  == RACE_JAWA)
-    return ROOM_START_JAWA;
-  if( ch->race  == RACE_ADARIAN)
-    return ROOM_START_ADARIAN;
-  if( ch->race  == RACE_EWOK)
-    return ROOM_START_EWOK;
-  if( ch->race  == RACE_VERPINE)
-    return ROOM_START_VERPINE;
-  if( ch->race  == RACE_DEFEL)
-    return ROOM_START_DEFEL;
-  if( ch->race  == RACE_TRANDOSHAN)
-    return ROOM_START_TRANDOSHAN;
-  if( ch->race  == RACE_CHADRA_FAN)
-    return ROOM_START_CHADRA_FAN;
-  if( ch->race  == RACE_QUARREN)
-    return ROOM_START_QUARREN;
-  if( ch->race  == RACE_SULLUSTAN)
-    return ROOM_START_SULLUSTAN;
-
-  return ROOM_VNUM_TEMPLE;
+    {
+      return ch->plr_home->vnum;
+    }
+  else if( get_trust(ch) >= LEVEL_IMMORTAL )
+    {
+      return ROOM_START_IMMORTAL;
+    }
+  else
+    {
+      return ROOM_START_PLAYER;
+    }
 }
 
 static void decorate_room( ROOM_INDEX_DATA *room )

@@ -370,13 +370,14 @@ void boot_db( bool fCopyOver )
   sysdata.dam_mob_vs_mob                = 100;
   sysdata.level_getobjnotake            = LEVEL_GREATER;
   sysdata.save_frequency                = 20;   /* minutes */
+  sysdata.disable_hunger                = FALSE;
   sysdata.save_flags                    = SV_DEATH | SV_PASSCHG | SV_AUTO
     | SV_PUT | SV_DROP | SV_GIVE
     | SV_AUCTION | SV_ZAPDROP | SV_IDLE;
 
   if ( !load_systemdata(&sysdata) )
     {
-      log_string( "Not found.  Creating new configuration." );
+      log_string( "Not found. Creating new configuration." );
       sysdata.alltimemax = 0;
     }
 
@@ -4463,19 +4464,19 @@ void save_sysdata( SYSTEM_DATA sys )
       fprintf( fp, "#SYSTEM\n" );
       fprintf( fp, "Highplayers    %d\n", sys.alltimemax                );
       fprintf( fp, "Highplayertime %s~\n", sys.time_of_max              );
-      fprintf( fp, "Nameresolving  %d\n", sys.NO_NAME_RESOLVING );
+      fprintf( fp, "Nameresolving  %d\n", sys.NO_NAME_RESOLVING         );
       fprintf( fp, "Waitforauth    %d\n", sys.WAIT_FOR_AUTH             );
       fprintf( fp, "Readallmail    %d\n", sys.read_all_mail             );
       fprintf( fp, "Readmailfree   %d\n", sys.read_mail_free            );
       fprintf( fp, "Writemailfree  %d\n", sys.write_mail_free           );
-      fprintf( fp, "Takeothersmail %d\n", sys.take_others_mail  );
+      fprintf( fp, "Takeothersmail %d\n", sys.take_others_mail          );
       fprintf( fp, "Muse           %d\n", sys.muse_level                );
       fprintf( fp, "Think          %d\n", sys.think_level               );
       fprintf( fp, "Build          %d\n", sys.build_level               );
-      fprintf( fp, "Log            %d\n", sys.log_level         );
+      fprintf( fp, "Log            %d\n", sys.log_level                 );
       fprintf( fp, "Protoflag      %d\n", sys.level_modify_proto        );
       fprintf( fp, "Overridepriv   %d\n", sys.level_override_private    );
-      fprintf( fp, "Msetplayer     %d\n", sys.level_mset_player );
+      fprintf( fp, "Msetplayer     %d\n", sys.level_mset_player         );
       fprintf( fp, "Stunplrvsplr   %d\n", sys.stun_plr_vs_plr           );
       fprintf( fp, "Stunregular    %d\n", sys.stun_regular              );
       fprintf( fp, "Damplrvsplr    %d\n", sys.dam_plr_vs_plr            );
@@ -4487,6 +4488,7 @@ void save_sysdata( SYSTEM_DATA sys )
       fprintf( fp, "Guildadvisor   %s~\n", sys.guild_advisor            );
       fprintf( fp, "Saveflags      %d\n", sys.save_flags                );
       fprintf( fp, "Savefreq       %d\n", sys.save_frequency            );
+      fprintf( fp, "DisableHunger  %d\n", sys.disable_hunger            );
       fprintf( fp, "End\n\n"                                            );
       fprintf( fp, "#END\n"                                             );
     }
@@ -4521,6 +4523,7 @@ void fread_sysdata( SYSTEM_DATA *sys, FILE *fp )
           KEY( "Damplrvsmob",      sys->dam_plr_vs_mob,   fread_number( fp ) );
           KEY( "Dammobvsplr",      sys->dam_mob_vs_plr,   fread_number( fp ) );
           KEY( "Dammobvsmob",      sys->dam_mob_vs_mob,   fread_number( fp ) );
+	  KEY( "DisableHunger",    sys->disable_hunger,   fread_number( fp ) );
           break;
 
         case 'E':
@@ -4653,11 +4656,14 @@ bool load_systemdata( SYSTEM_DATA *sys )
       fclose( fp );
     }
 
-  if ( !sysdata.guild_overseer ) sysdata.guild_overseer = str_dup( "" );
-  if ( !sysdata.guild_advisor  ) sysdata.guild_advisor  = str_dup( "" );
+  if ( !sysdata.guild_overseer )
+    sysdata.guild_overseer = str_dup( "" );
+
+  if ( !sysdata.guild_advisor  )
+    sysdata.guild_advisor  = str_dup( "" );
+
   return found;
 }
-
 
 void load_banlist( void )
 {

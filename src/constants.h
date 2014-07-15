@@ -1185,26 +1185,9 @@ typedef enum
 #define ROOM_VNUM_ALTAR           32144
 #define ROOM_VNUM_SCHOOL          10300
 #define ROOM_AUTH_START           10300
-#define ROOM_START_HUMAN            211
-#define ROOM_START_WOOKIEE        28600
-#define ROOM_START_TWILEK         32148
-#define ROOM_START_RODIAN         32148
-#define ROOM_START_HUTT           32148
-#define ROOM_START_MON_CALAMARIAN 21069
-#define ROOM_START_NOGHRI          1015
-#define ROOM_START_GAMORREAN      28100
-#define ROOM_START_JAWA           31819
-#define ROOM_START_ADARIAN        29000
-#define ROOM_START_EWOK           32148
-#define ROOM_START_VERPINE        32148
-#define ROOM_START_DEFEL          32148
-#define ROOM_START_TRANDOSHAN     32148
-#define ROOM_START_CHADRA_FAN     32148
-#define ROOM_START_SULLUSTAN      32148
-#define ROOM_START_QUARREN        21069
+#define ROOM_START_PLAYER           201
 #define ROOM_START_IMMORTAL         100
 #define ROOM_LIMBO_SHIPYARD          45
-#define ROOM_DEFAULT_CRASH        28025
 
 #define ROOM_PLUOGUS_QUIT         32148
 
