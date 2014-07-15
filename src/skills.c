@@ -31,8 +31,6 @@
 #include "ships.h"
 #include "character.h"
 
-void show_char_to_char( CHAR_DATA *list, CHAR_DATA *ch );
-
 /*
  * Dummy function
  */
