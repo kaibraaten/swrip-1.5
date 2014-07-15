@@ -10,6 +10,8 @@ static int comparator( const void*, const void* );
 static AREA_DATA *get_area( vnum_t vnum );
 static void command_teachers( CHAR_DATA *ch );
 static void command_noteacher( CHAR_DATA *ch );
+static void add_area_to_list( AREA_DATA **arealist, AREA_DATA *area );
+static bool is_in_arealist( AREA_DATA **arealist, AREA_DATA *area );
 
 #define MAX_TEACHER 10000
 
@@ -53,15 +55,18 @@ static void command_noteacher( CHAR_DATA *ch )
     }
 }
 
+#define MAX_AREA_LIST_SIZE 100
+
 static void command_teachers( CHAR_DATA *ch )
 {
   int sn = 0;
   int i = 0;
   int teachers[MAX_TEACHER];
   size_t list_size = 0;
-  const AREA_DATA *area = NULL;
+  AREA_DATA *arealist[MAX_AREA_LIST_SIZE];
 
   memset( teachers, 0, sizeof( teachers ) );
+  memset( arealist, 0, sizeof( arealist ) );
 
   for( sn = 0; sn < top_sn; sn++ )
     {
@@ -80,6 +85,7 @@ static void command_teachers( CHAR_DATA *ch )
   for( i = 0; i < MAX_TEACHER; i++ )
     {
       vnum_t vnum = teachers[i];
+      AREA_DATA *area = NULL;
 
       if( vnum == 0 )
 	{
@@ -90,13 +96,57 @@ static void command_teachers( CHAR_DATA *ch )
 
       if( area )
 	{
-	  ch_printf( ch, "&w%s\r\n", area->filename );
-	}
-      else
-	{
-	  ch_printf( ch, "&r%d doesn't exist&w\r\n", vnum );
+	  add_area_to_list( arealist, area );
 	}
     }
+
+  for( i = 0; i < MAX_AREA_LIST_SIZE; ++i )
+    {
+      AREA_DATA *area = arealist[i];
+
+      if( !area )
+	{
+	  break;
+	}
+
+      ch_printf( ch, "%s\r\n", area->filename );
+    }
+}
+
+static void add_area_to_list( AREA_DATA **arealist, AREA_DATA *area )
+{
+  int i = 0;
+
+  if( is_in_arealist( arealist, area ) )
+    {
+      return;
+    }
+
+  for( i = 0; i < MAX_AREA_LIST_SIZE; ++i )
+    {
+      if( arealist[i] == NULL )
+	{
+	  arealist[i] = area;
+	  return;
+	}
+    }
+}
+
+static bool is_in_arealist( AREA_DATA **arealist, AREA_DATA *area )
+{
+  bool found = FALSE;
+  int i = 0;
+
+  for( i = 0; i < MAX_AREA_LIST_SIZE; ++i )
+    {
+      if( arealist[i] == area )
+	{
+	  found = TRUE;
+	  break;
+	}
+    }
+
+  return found;
 }
 
 static int comparator( const void *a, const void *b )
