@@ -1397,7 +1397,7 @@ Wearoff      &cYour mind is no longer focused enough to see those hidden from yo
 Hitchar      You focus your senses to find those that would hide from you.~
 Hitvict      &cYou focus your senses to find those that would hide from you.&R&W~
 Misschar     &RYou fail to focus your senses.&R&W~
-Teachers     32050 3006~
+Teachers     32050~
 Affect       'l*5' 26 'detect hidden' 32
 Minlevel     50
 End
@@ -1430,7 +1430,7 @@ Guild        6
 Code         do_add_patrol
 Dammsg       ~
 Wearoff      !!~
-Teachers     32011 10104 10504~
+Teachers     32011 10504~
 Minlevel     50
 End
 
@@ -1444,7 +1444,7 @@ Guild        5
 Code         do_aid
 Dammsg       ~
 Wearoff      !Aid!~
-Teachers     10340 32006 10104~
+Teachers     10340 32006~
 Minlevel     1
 End
 
@@ -1459,7 +1459,7 @@ Guild        3
 Code         spell_charm_person
 Dammsg       ~
 Misschar     &RYou fumble with the binds.&R&W~
-Teachers     32050 3006~
+Teachers     32050~
 Minlevel     35
 End
 
@@ -1544,7 +1544,7 @@ Guild        5
 Code         do_bribe
 Dammsg       ~
 Wearoff      !!~
-Teachers     10104~
+Teachers     ~
 Minlevel     25
 End
 
@@ -1586,7 +1586,7 @@ Guild        4
 Code         do_climb
 Dammsg       climb~
 Wearoff      !climb!~
-Teachers     32009 410 1983~
+Teachers     32009 410~
 Minlevel     7
 End
 
@@ -1634,7 +1634,7 @@ Rounds       20
 Guild        4
 Code         do_dig
 Dammsg       ~
-Teachers     6805 6819 206 1983~
+Teachers     6805 6819 206~
 Minlevel     2
 End
 
@@ -1662,7 +1662,7 @@ Guild        4
 Code         do_disguise
 Dammsg       ~
 Wearoff      !disguise!~
-Teachers     32009 1983~
+Teachers     32009~
 Minlevel     70
 End
 
@@ -1690,7 +1690,7 @@ Guild        6
 Code         spell_charm_person
 Dammsg       ~
 Misschar     &BYou fail.&R&W~
-Teachers     32011 10104 10504~
+Teachers     32011 10504~
 Minlevel     75
 End
 
@@ -1731,7 +1731,7 @@ Guild        6
 Code         do_elite_guard
 Dammsg       ~
 Wearoff      !!~
-Teachers     32011 10104 10504~
+Teachers     32011 10504~
 Minlevel     85
 End
 
@@ -1782,7 +1782,7 @@ Guild        5
 Code         do_first_aid
 Dammsg       ~
 Wearoff      !First Aid!~
-Teachers     32006 10104~
+Teachers     32006~
 Minlevel     1
 End
 
@@ -1829,7 +1829,7 @@ Code         do_gather_intelligence
 Dammsg       ~
 Wearoff      !!~
 Difficulty   4
-Teachers     32011 10104 10504~
+Teachers     32011 10504~
 Minlevel     100
 End
 
@@ -1953,7 +1953,7 @@ Guild        6
 Code         do_jail
 Dammsg       ~
 Wearoff      !!~
-Teachers     408 32011 10104 10504~
+Teachers     408 32011 10504~
 Minlevel     25
 End
 
@@ -2180,7 +2180,7 @@ Guild        5
 Code         do_mass_propaganda
 Dammsg       ~
 Wearoff      !!~
-Teachers     10104 10504~
+Teachers     10504~
 Minlevel     80
 End
 
@@ -2334,7 +2334,7 @@ Guild        6
 Code         do_postguard
 Dammsg       ~
 Wearoff      !post guard!~
-Teachers     32011 10104 10504~
+Teachers     32011 10504~
 Minlevel     35
 End
 
@@ -2348,7 +2348,7 @@ Guild        5
 Code         do_propaganda
 Dammsg       ~
 Wearoff      !!~
-Teachers     10104~
+Teachers     ~
 Minlevel     50
 End
 
@@ -2377,7 +2377,7 @@ Guild        6
 Code         do_reinforcements
 Dammsg       ~
 Wearoff      !reinforcements!~
-Teachers     32011 10104 10504~
+Teachers     32011 10504~
 Minlevel     60
 End
 
@@ -2443,7 +2443,7 @@ Guild        4
 Code         do_search
 Dammsg       ~
 Wearoff      !Search!~
-Teachers     32009 410 1983~
+Teachers     32009 410~
 Minlevel     3
 End
 
@@ -2470,7 +2470,7 @@ Guild        5
 Code         do_seduce
 Dammsg       ~
 Wearoff      !!~
-Teachers     10104 10504~
+Teachers     10504~
 Minlevel     65
 End
 
@@ -2488,7 +2488,7 @@ Wearoff      &cYour focus to see the unseen relaxes.&R&w~
 Hitchar      You focus your senses in an effort to detect the unseen.~
 Hitvict      &cYou focus your senses in an effort to detect the unseen.&R&W~
 Misschar     &RYou fail to focus your mind.&R&W~
-Teachers     32050 3006~
+Teachers     32050~
 Affect       'l*5' 26 'detect invis' 8
 Minlevel     60
 End
@@ -2565,7 +2565,7 @@ Guild        5
 Code         do_smalltalk
 Dammsg       ~
 Wearoff      !!~
-Teachers     10104~
+Teachers     ~
 Minlevel     10
 End
 
@@ -2581,7 +2581,7 @@ Code         spell_smaug
 Dammsg       ~
 Hitvict      You attempt to move silently.~
 Misschar     You attempt to move silently.~
-Teachers     32009 410 1983~
+Teachers     32009 410~
 Affect       'l*23' 26 'sneak' 32768
 Minlevel     5
 End
@@ -2649,7 +2649,7 @@ Guild        6
 Code         do_special_forces
 Dammsg       ~
 Wearoff      !!~
-Teachers     32011 10104 10504~
+Teachers     32011 10504~
 Minlevel     95
 End
 
@@ -2714,7 +2714,7 @@ Dammsg       ~
 Wearoff      You are no longer hidden.~
 Hitvict      You attempt to hide.~
 Misschar     You attempt to hide.~
-Teachers     32009 410 1983~
+Teachers     32009 410~
 Affect       'l*23' 26 'hide' 0
 Minlevel     50
 End
@@ -2728,7 +2728,7 @@ Rounds       12
 Guild        5
 Code         do_study
 Dammsg       ~
-Teachers     10340 32006 10104~
+Teachers     10340 32006~
 Minlevel     0
 End
 
@@ -2783,7 +2783,7 @@ Guild        6
 Code         do_torture
 Dammsg       ~
 Wearoff      !torture!~
-Teachers     32029 10104 10504~
+Teachers     32029 10504~
 Minlevel     85
 End
 
@@ -2797,7 +2797,7 @@ Guild        3
 Code         do_track
 Dammsg       ~
 Wearoff      !Track!~
-Teachers     32050 3006~
+Teachers     32050~
 Minlevel     3
 End
 
