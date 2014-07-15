@@ -4,8 +4,8 @@ Filename     adari~
 BaseValue    0
 Flags        0
 PopSupport   0.000000
-Area         adari_alfuh.are~
-Area         adari_baituh.are~
+Area         adari.are~
+Area         adari01.are~
 End
 
 #END
