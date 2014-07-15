@@ -10,7 +10,6 @@ Class        0
 Tractorbeam  0
 Shipyard     203
 Hanger       0
-Cargohold       0
 Vx           160
 Vy           160
 Vz           -160
@@ -28,6 +27,14 @@ Statet0      0
 Statei0      0
 Statet1      0
 Statet2      0
+Statet3      0
+Statet4      0
+Statet5      0
+Statet6      0
+Statet7      0
+Statet8      0
+Statet9      0
+Statet0      0
 Lasers       0
 Missiles     0
 Maxmissiles  0
@@ -63,20 +70,7 @@ Missilestate 0
 Energy       2000
 Manuever     35
 Alarm        0
-UpgradeBlock 0
 Ions         0
-Maxcargo     0
-Cargo0         0
-Cargo1         0
-Cargo2         0
-Cargo3         0
-Cargo4         0
-Cargo5         0
-Cargo6         0
-Cargo7         0
-Cargo8         0
-Cargo9         0
-CaughtSmug     0
 Dockingports   0
 Guard   0
 Home         Asteroid 1234~
