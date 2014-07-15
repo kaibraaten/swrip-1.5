@@ -5,8 +5,9 @@ BaseValue    0
 Flags        0
 PopSupport   0.000000
 spaceobject   Byss~
-Area         byss_thronecity.are~
 Area         byss_city.are~
+Area         byss_jail.are~
+Area         throne_city.are~
 End
 
 #END
