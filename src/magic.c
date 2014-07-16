@@ -887,22 +887,13 @@ void *locate_targets( CHAR_DATA *ch, char *arg, int sn, CHAR_DATA **victim, OBJ_
 
       if ( ch == *victim )
         {
-          send_to_char( "Cast this on yourself?  Okay...\r\n", ch );
-          /*
-            send_to_char( "You can't do that to yourself.\r\n", ch );
-            return &pAbort;
-          */
+          send_to_char( "Cast this on yourself? Okay...\r\n", ch );
         }
 
       if ( !is_npc(ch) )
         {
           if ( !is_npc(*victim) )
             {
-              /*  Sheesh! can't do anything
-                  send_to_char( "You can't do that on a player.\r\n", ch );
-                  return &pAbort;
-              */
-
               if ( get_timer( ch, TIMER_PKILLED ) > 0 )
                 {
                   send_to_char( "You have been killed in the last 5 minutes.\r\n", ch);
