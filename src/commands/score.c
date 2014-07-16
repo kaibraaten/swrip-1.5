@@ -66,14 +66,15 @@ void do_score(CHAR_DATA * ch, char *argument)
 	      }
 
 	    ch_printf( ch, "&c%-15s   &CLevel: %-3d   Max: %-3s   Exp: %-10ld   Next: %-10ld\r\n",
-		       ability_name[ability], get_level( ch, ability ), maxbuf,
+		       capitalize(ability_name[ability]),
+		       get_level( ch, ability ), maxbuf,
 		       get_exp( ch, ability ),
 		       exp_level( get_level( ch, ability ) + 1 ) );
 	  }
 	else
 	  {
 	    ch_printf( ch, "&c%-15s   &CLevel: %-3d   Max: ???   Exp: ???          Next: ???\r\n",
-		       ability_name[ability], get_level( ch, ability ), get_exp( ch, ability ) );
+		       capitalize(ability_name[ability]), get_level( ch, ability ), get_exp( ch, ability ) );
 	  }
       }
   }
