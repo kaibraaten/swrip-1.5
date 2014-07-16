@@ -196,8 +196,10 @@ static void show_char_to_char_0( CHAR_DATA *victim, CHAR_DATA *ch )
 
   buf[0] = '\0';
 
+  /*
   if ( is_npc(victim) )
     strcat( buf, " "  );
+  */
 
   if ( !is_npc(victim) && !victim->desc )
     {
