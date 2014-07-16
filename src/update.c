@@ -349,6 +349,11 @@ void advance_level( CHAR_DATA *ch, int ability )
       ch->top_level = URANGE( 1, get_level( ch, ability ), 100 );
     }
 
+  if( is_jedi( ch ) )
+    {
+      ch->max_mana += 20;
+    }
+
   if ( !is_npc(ch) )
     REMOVE_BIT( ch->act, PLR_BOUGHT_PET );
 }

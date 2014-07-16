@@ -894,7 +894,7 @@ if ( (iLang = skill_lookup( "common" )) < 0 )
 
       if ( ch->stats.perm_frc > 0 )
 	{
-	  ch->max_mana = 100 + 100*ch->stats.perm_frc;
+	  ch->max_mana = 200;
 	}
       else
 	{
