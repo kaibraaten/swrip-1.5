@@ -23,6 +23,7 @@
 
 #include <ctype.h>
 #include <string.h>
+#include <utility.h>
 #include "mud.h"
 #include "character.h"
 
@@ -37,6 +38,7 @@ const char *get_race( const CHAR_DATA *ch)
 void set_title( CHAR_DATA *ch, const char *title )
 {
   char buf[MAX_STRING_LENGTH];
+  char *bufptr = buf;
 
   if ( is_npc(ch) )
     {
@@ -44,13 +46,9 @@ void set_title( CHAR_DATA *ch, const char *title )
       return;
     }
 
-  if ( isalpha(title[0]) || isdigit(title[0]) )
-    {
-      buf[0] = ' ';
-      strcpy( buf+1, title );
-    }
-  else
-    strcpy( buf, title );
+  strcpy(bufptr, title);
+
+  bufptr = trim_string(buf, ' ');
 
   STRFREE( ch->pcdata->title );
   ch->pcdata->title = STRALLOC( buf );

@@ -221,6 +221,9 @@ char *show_tilde( const char *str );
 void replace_char( char*, char, char );
 void smush_tilde( char* );
 char *encode_string( const char* );
+char *trim_start( char *string, char junk );
+char *trim_end( char *string, char junk );
+char *trim_string( char *string, char junk );
 
 /* hashstr.c */
 char *str_alloc( const char *str );

@@ -25,14 +25,14 @@ void do_title( CHAR_DATA *ch, char *argument )
       send_to_char("You must include your name somewhere in your title!", ch);
       return;
     }
-  if (strlen(argument) >40)
+
+  if (strlen(argument) > 40)
     {
       send_to_char("40 characters is maximum allowed for titles now.\r\n", ch);
       return;
     }
-  smash_tilde( argument );
-  strcat(argument, " &R&W^x");
 
+  smash_tilde( argument );
   set_title( ch, argument );
   send_to_char( "Ok.\r\n", ch );
 }

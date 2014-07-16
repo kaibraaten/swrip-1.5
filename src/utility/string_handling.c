@@ -659,3 +659,32 @@ char *str_dup( const char *str )
   strcpy( ret, str );
   return ret;
 }
+
+char *trim_start( char *string, char junk )
+{
+  while( *string == junk )
+    ++string;
+
+  return string;
+}
+
+char *trim_end( char *string, char junk )
+{
+  size_t pos = strlen( string ) - 1;
+
+  while( string[pos] == junk )
+    {
+      string[pos] = '\0';
+      --pos;
+    }
+
+  return string;
+}
+
+char *trim_string( char *string, char junk )
+{
+  string = trim_start( string, junk );
+  string = trim_end( string, junk );
+
+  return string;
+}
