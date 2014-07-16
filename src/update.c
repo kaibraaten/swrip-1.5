@@ -349,7 +349,7 @@ void advance_level( CHAR_DATA *ch, int ability )
       ch->top_level = URANGE( 1, get_level( ch, ability ), 100 );
     }
 
-  if( is_jedi( ch ) )
+  if( is_jedi( ch ) && ability == FORCE_ABILITY )
     {
       ch->max_mana += 20;
     }
