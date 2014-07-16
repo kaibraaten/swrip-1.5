@@ -377,4 +377,6 @@ bool is_clanned( const CHAR_DATA *ch );
 
 void set_wait_state( CHAR_DATA *ch, short number_of_pulses );
 
+bool is_jedi( const CHAR_DATA *ch );
+
 #endif

@@ -460,7 +460,7 @@ int mana_gain( const CHAR_DATA *ch )
     }
   else
     {
-      if ( get_level(ch, FORCE_ABILITY ) <= 1 )
+      if ( !is_jedi( ch ) )
         return (0 - ch->mana);
 
       gain = UMIN( 5, get_level( ch, FORCE_ABILITY ) / 2 );
@@ -1337,7 +1337,7 @@ void char_update( void )
           if ( ch->hit  < ch->max_hit )
             ch->hit  += hit_gain(ch);
 
-          if ( ch->mana < ch->max_mana || get_level( ch, FORCE_ABILITY ) == 1 )
+          if ( ch->mana < ch->max_mana && is_jedi( ch ) )
             ch->mana += mana_gain(ch);
 
           if ( ch->move < ch->max_move )

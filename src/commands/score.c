@@ -34,8 +34,7 @@ void do_score(CHAR_DATA * ch, char *argument)
   ch_printf(ch,   "&cAlign: &C%-5d    &cWimpy: &C%-3d                    &cTime:   &C%s\r",
             ch->alignment, ch->wimpy  , ctime(&current_time) );
 
-  if ( get_level( ch, FORCE_ABILITY ) > 1
-       || is_immortal(ch) )
+  if ( is_jedi( ch ) || is_immortal(ch) )
     ch_printf(ch, "&cHit Points: &C%d &cof &C%d     &cMove: &C%d &cof &C%d     &cForce: &C%d &cof &C%d\r\n",
               ch->hit, ch->max_hit, ch->move, ch->max_move, ch->mana, ch->max_mana );
   else
@@ -52,14 +51,31 @@ void do_score(CHAR_DATA * ch, char *argument)
     int ability;
 
     for ( ability = 0 ; ability < MAX_RL_ABILITY ; ability++ )
-      if ( ability != FORCE_ABILITY || get_level( ch, FORCE_ABILITY ) > 1 )
-        ch_printf( ch, "&c%-15s   &CLevel: %-3d   Max: %-3d   Exp: %-10ld   Next: %-10ld\r\n",
-                   ability_name[ability], get_level( ch, ability ), max_level(ch, ability),
-                   get_exp( ch, ability ),
-                   exp_level( get_level( ch, ability ) + 1 ) );
-      else
-        ch_printf( ch, "&c%-15s   &CLevel: %-3d   Max: ???   Exp: ???          Next: ???\r\n",
-                   ability_name[ability], get_level( ch, ability ), get_exp( ch, ability ) );
+      {
+	if ( ability != FORCE_ABILITY || is_jedi(ch) )
+	  {
+	    char maxbuf[MAX_STRING_LENGTH];
+
+	    if(ability == FORCE_ABILITY)
+	      {
+		sprintf(maxbuf, "%s", "???");
+	      }
+	    else
+	      {
+		sprintf(maxbuf, "%d", max_level(ch, ability));
+	      }
+
+	    ch_printf( ch, "&c%-15s   &CLevel: %-3d   Max: %-3s   Exp: %-10ld   Next: %-10ld\r\n",
+		       ability_name[ability], get_level( ch, ability ), maxbuf,
+		       get_exp( ch, ability ),
+		       exp_level( get_level( ch, ability ) + 1 ) );
+	  }
+	else
+	  {
+	    ch_printf( ch, "&c%-15s   &CLevel: %-3d   Max: ???   Exp: ???          Next: ???\r\n",
+		       ability_name[ability], get_level( ch, ability ), get_exp( ch, ability ) );
+	  }
+      }
   }
 
   send_to_char("&C----------------------------------------------------------------------------\r\n", ch);

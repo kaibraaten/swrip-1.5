@@ -251,7 +251,7 @@ void do_who( CHAR_DATA *ch, char *argument )
 
       if (wch->stats.perm_frc > 0 && (ch->top_level >= LEVEL_GOD) && !is_immortal(wch))
         {
-          if(get_level( wch, FORCE_ABILITY ) > 1)
+          if(is_jedi( wch ))
             force_char = '*';
           else
             force_char = '+';

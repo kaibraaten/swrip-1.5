@@ -159,7 +159,7 @@ void do_gather_intelligence ( CHAR_DATA *ch , char *argument )
 
       if ( the_chance < 55 )
         {
-          if ( get_level( victim, FORCE_ABILITY ) > 1 )
+          if ( is_jedi( victim ) )
             {
               if ( victim->mana > 1000 )
                 sprintf( buf, "%s appears to have centered his attention on studying the force, and is rumored to excel at its use.", victim->name );

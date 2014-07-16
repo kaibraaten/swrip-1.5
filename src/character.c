@@ -1026,3 +1026,8 @@ void set_wait_state( CHAR_DATA *ch, short number_of_pulses )
 {
   ch->wait = UMAX( ch->wait, number_of_pulses );
 }
+
+bool is_jedi( const CHAR_DATA *ch )
+{
+  return get_level( ch, FORCE_ABILITY ) > 1;
+}
