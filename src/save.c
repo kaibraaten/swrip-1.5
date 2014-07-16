@@ -1668,14 +1668,18 @@ void fread_char( CHAR_DATA *ch, FILE *fp, bool preload )
           if ( !str_cmp( word, "Title" ) )
             {
               ch->pcdata->title = fread_string( fp );
+
               if ( isalpha(ch->pcdata->title[0])
-                   ||   isdigit(ch->pcdata->title[0]) )
+                   || isdigit(ch->pcdata->title[0]) )
                 {
-                  sprintf( buf, " %s", ch->pcdata->title );
+                  sprintf( buf, "%s", ch->pcdata->title );
+
                   if ( ch->pcdata->title )
                     STRFREE( ch->pcdata->title );
+
                   ch->pcdata->title = STRALLOC( buf );
                 }
+
               fMatch = TRUE;
               break;
             }
