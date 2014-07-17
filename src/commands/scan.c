@@ -20,7 +20,7 @@ void do_scan( CHAR_DATA *ch, char *argument )
 
   if ( ( dir = get_dir( argument ) ) == -1 )
     {
-      send_to_char( "Scan in WHAT direction?\r\n", ch );
+      ch_printf( ch, "Scan in WHAT direction?\r\n" );
       return;
     }
 
