@@ -1384,7 +1384,7 @@ Minlevel     3
 End
 
 #SKILL
-Name         acute_awarness~
+Name         acute_awareness~
 Type         Skill
 Flags        0
 Target       3
