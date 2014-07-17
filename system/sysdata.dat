@@ -25,6 +25,7 @@ Guildoverseer  Darrik~
 Guildadvisor   Laagos~
 Saveflags      4045
 Savefreq       20
+DisableHunger  1
 End
 
 #END

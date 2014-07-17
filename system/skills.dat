@@ -59,7 +59,7 @@ Guild        7
 Code         spell_charm_person
 Dammsg       ~
 Wearoff      You feel more self-confident.~
-Teachers     605~
+Teachers     50~
 Minlevel     28
 End
 
@@ -190,7 +190,7 @@ Minlevel     20
 End
 
 #SKILL
-Name         create fire~
+Name         absorb energy~
 Type         Spell
 Flags        512
 Target       3
@@ -326,7 +326,7 @@ Dammsg       ~
 Wearoff      You stop focusing on the Dark Side.~
 Hitvict      Traces of red outline all those who abuse the Force.~
 Hitroom      A tint of red appears in $N's eyes, mirroring his own vision.~
-Teachers     60 7310~
+Teachers     50~
 Affect       'l*24' 26 'detect evil' 4
 Alignment   1001
 Minlevel     5
@@ -347,7 +347,7 @@ Dammsg       ~
 Wearoff      The blue outlines disappear from your vision.~
 Hitvict      Traces of blue outline objects touched by the Force.~
 Hitroom      A tint of blue in $N's eyes mirrors $S own perception.~
-Teachers     60 605 6112 7310~
+Teachers     50~
 Affect       'l*24' 26 'detect magic' 16
 Minlevel     5
 End
@@ -752,7 +752,7 @@ Wearoff      You no longer see in the dark.~
 Hitchar      $N's eyes dart about as they grow accustomed to Force sight.~
 Hitvict      Heat appears red through your eyes.~
 Hitroom      $N's eyes dart about as they grow accustomed to Force sight.~
-Teachers     60 605 6112 7310~
+Teachers     50~
 Affect       'l*24' 26 'infravision' 512
 Minlevel     4
 End
@@ -954,7 +954,7 @@ Hitchar      Shards of iridescent light collide to form a dazzling ball...~
 Hitroom      Shards of iridescent light collide to form a dazzling ball...~
 Dice         0~
 Value        21
-Teachers     605 60 6112 7310~
+Teachers     50~
 Minlevel     4
 End
 
@@ -1544,7 +1544,6 @@ Guild        5
 Code         do_bribe
 Dammsg       ~
 Wearoff      !!~
-Teachers     ~
 Minlevel     25
 End
 
@@ -1608,6 +1607,7 @@ Flags        0
 Guild        7
 Code         spell_null
 Dammsg       ~
+Teachers     50~
 Minlevel     20
 End
 
@@ -1782,7 +1782,7 @@ Guild        5
 Code         do_first_aid
 Dammsg       ~
 Wearoff      !First Aid!~
-Teachers     32006~
+Teachers     10340 32006~
 Minlevel     1
 End
 
@@ -2196,7 +2196,7 @@ Code         spell_smaug
 Dammsg       ~
 Hitvict      You meditate peacefully, tuning yourself to the Force.~
 Missvict     You spend several minutes in deep concentration, but fail to find the Force.~
-Teachers     3198~
+Teachers     50 3199~
 Affect       '' 12 'l' 0
 Minlevel     1
 End
@@ -2348,7 +2348,6 @@ Guild        5
 Code         do_propaganda
 Dammsg       ~
 Wearoff      !!~
-Teachers     ~
 Minlevel     50
 End
 
@@ -2565,7 +2564,6 @@ Guild        5
 Code         do_smalltalk
 Dammsg       ~
 Wearoff      !!~
-Teachers     ~
 Minlevel     10
 End
 
