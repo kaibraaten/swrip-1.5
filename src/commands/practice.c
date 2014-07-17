@@ -11,21 +11,31 @@ void do_practice( CHAR_DATA *ch, char *argument )
 
   if ( argument[0] == '\0' )
     {
-      int       col;
-      short     lasttype, cnt;
+      int col = 0;
+      short lasttype = SKILL_SPELL, cnt = 0;
 
-      col = cnt = 0;    lasttype = SKILL_SPELL;
       set_pager_color( AT_MAGIC, ch );
+
       for ( sn = 0; sn < top_sn; sn++ )
         {
-          if ( !skill_table[sn]->name )
+	  SKILLTYPE *skill = skill_table[sn];
+
+          if ( !skill->name )
             break;
 
-          if ( skill_table[sn]->guild < 0 || skill_table[sn]->guild >= MAX_ABILITY )
+          if ( skill->guild < 0 || skill->guild >= MAX_ABILITY )
             continue;
 
-          if ( str_cmp(skill_table[sn]->name, "reserved") == 0
-               && ( is_immortal(ch) ) )
+	  if( ( skill->type == SKILL_UNKNOWN
+	      || skill->type == SKILL_HERB
+	      || skill->type == SKILL_TONGUE )
+	      && !is_immortal( ch ) )
+	    {
+	      lasttype = skill->type;
+	      continue;
+	    }
+
+          if ( !str_cmp(skill_table[sn]->name, "reserved") && is_immortal(ch) )
             {
               if ( col % 3 != 0 )
                 send_to_pager( "&r\r\n", ch );
@@ -34,18 +44,18 @@ void do_practice( CHAR_DATA *ch, char *argument )
                             "&R--------------------------------[Spells]---------------------------------\r\n&r", ch);
               col = 0;
             }
+
           if ( skill_table[sn]->type != lasttype )
             {
-              if ( !cnt )
-                send_to_pager( "&r                                (none)\r\n&w", ch );
-              else
-                if ( col % 3 != 0 )
-                  send_to_pager( "\r\n&r", ch );
+              if ( col % 3 != 0 )
+		send_to_pager( "\r\n&r", ch );
+
               pager_printf( ch,
                             "&R--------------------------------%ss---------------------------------\r\n&r",
                             skill_tname[skill_table[sn]->type]);
               col = cnt = 0;
             }
+
           lasttype = skill_table[sn]->type;
 
           if ( skill_table[sn]->guild < 0 || skill_table[sn]->guild >= MAX_ABILITY )
@@ -63,11 +73,13 @@ void do_practice( CHAR_DATA *ch, char *argument )
           if ( ch->pcdata->learned[sn] >= 100 )
             {
               pager_printf( ch, "&R%18s %3d%%  &r",
-                            skill_table[sn]->name, ch->pcdata->learned[sn] );
+                            capitalize(skill_table[sn]->name),
+			    ch->pcdata->learned[sn] );
             }
           else
             pager_printf( ch, "&r%18s %3d%%  ",
-                          skill_table[sn]->name, ch->pcdata->learned[sn] );
+                          capitalize(skill_table[sn]->name),
+			  ch->pcdata->learned[sn] );
           if ( ++col % 3 == 0 )
             send_to_pager( "\r\n&r", ch );
         }

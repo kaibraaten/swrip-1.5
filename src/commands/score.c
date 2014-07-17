@@ -260,7 +260,8 @@ void do_score(CHAR_DATA * ch, char *argument)
             continue;
           if (ch->top_level < 20)
             {
-              ch_printf(ch, "&c[&C%-34.34s&c]    ", sktmp->name);
+              ch_printf(ch, "&c[&C%-34.34s&c]    ", capitalize(sktmp->name));
+
               if (i == 0)
                 i = 2;
               if ((++i % 3) == 0)
@@ -270,17 +271,17 @@ void do_score(CHAR_DATA * ch, char *argument)
             {
               if (paf->modifier == 0)
                 ch_printf(ch, "&c[&C%-24.24s&c;&C%5d rds&c]    ",
-                          sktmp->name,
+                          capitalize(sktmp->name),
                           paf->duration);
               else
                 if (paf->modifier > 999)
 		  ch_printf(ch, "&c[&C%-15.15s&c; &C%7.7s;%5d rds&c]    ",
-                            sktmp->name,
+                            capitalize(sktmp->name),
                             tiny_affect_loc_name(paf->location),
                             paf->duration);
                 else
                   ch_printf(ch, "&c[&C%-11.11s&c;&C%+-3.3d %7.7s&c;&C%5d rds&c]    ",
-                            sktmp->name,
+                            capitalize(sktmp->name),
                             paf->modifier,
                             tiny_affect_loc_name(paf->location),
                             paf->duration);
