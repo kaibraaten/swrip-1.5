@@ -1234,7 +1234,7 @@ int get_spaceobj_type_from_name( const char *type )
 
 const char * const skill_tname[] =
   {
-    "unknown", "Spell", "Skill", "Weapon", "Tongue", "Herb"
+    "unknown", "Force Power", "Skill", "Weapon", "Tongue", "Herb"
   };
 
 const char * const dir_name[] =
