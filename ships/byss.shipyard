@@ -10,9 +10,9 @@ Class        3
 Tractorbeam  0
 Shipyard     32050
 Hanger       32050
-Vx           246
-Vy           -4261
-Vz           -2356
+Vx           -2267
+Vy           -4774
+Vz           -2623
 Turret1      32071
 Turret2      32071
 Turret3      32071
@@ -75,3 +75,5 @@ Dockingports   0
 Guard   0
 Home         Kuat~
 End
+
+#END

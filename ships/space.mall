@@ -10,9 +10,9 @@ Class        2
 Tractorbeam  0
 Shipyard     45
 Hanger       7300
-Vx           -3311
-Vy           3704
-Vz           824
+Vx           -4317
+Vy           -3460
+Vz           4353
 Turret1      0
 Turret2      0
 Turret3      0
@@ -75,3 +75,5 @@ Dockingports   0
 Guard   0
 Home         corperate~
 End
+
+#END
