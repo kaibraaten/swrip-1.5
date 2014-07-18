@@ -207,7 +207,7 @@ static void fread_planet( PLANET_DATA *planet, FILE *fp )
           break;
 
         case 'P':
-          KEY( "PopSupport", planet->pop_support, fread_number( fp ) );
+          KEY( "PopSupport", planet->pop_support, fread_float( fp ) );
           break;
 
         case 'S':
