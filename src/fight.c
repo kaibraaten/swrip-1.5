@@ -1519,7 +1519,7 @@ ch_ret damage( CHAR_DATA *ch, CHAR_DATA *victim, int dam, int dt )
             act( AT_DEAD, skill->die_room, ch, NULL, victim, TO_NOTVICT );
         }
       if ( is_npc(victim) && IS_SET( victim->act, ACT_NOKILL )  )
-        act( AT_YELLOW, "$n flees for $s life ... barely escaping certain death!", victim, 0, 0, TO_ROOM );
+        act( AT_YELLOW, "$n flees for $s life... barely escaping certain death!", victim, 0, 0, TO_ROOM );
       else if ( (is_npc(victim) && IS_SET( victim->act, ACT_DROID ) ) || (!is_npc(victim) && victim->race == RACE_DROID ) )
         act( AT_DEAD, "$n EXPLODES into many small pieces!", victim, 0, 0, TO_ROOM );
       else
