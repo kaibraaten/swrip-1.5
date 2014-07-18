@@ -2099,6 +2099,7 @@ void save_ship( const SHIP_DATA *ship )
       fprintf( fp, "Guard   %d\n",                   ship->guard        );
       fprintf( fp, "Home         %s~\n",      ship->home              );
       fprintf( fp, "End\n"                                              );
+      fprintf( fp, "\n#END\n" );
     }
 
   fclose( fp );
