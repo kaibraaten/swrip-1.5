@@ -13,7 +13,7 @@ $
 #FLAGS
 3 3
 
-#ECONOMY 0 496064150
+#ECONOMY 0 496063430
 
 #MOBILES
 #10340
@@ -809,40 +809,40 @@ An ammunition cell was carelessly left here.~
 1 10 10
 #10489
 lens~
-a newly created lens~
-Some god dropped a newly created lens here.~
+a small lens~
+A small lens is lying here.~
 ~
 62 0 1
 0 0 0 0
 1 0 0
 #10490
-test toolkit~
-a newly created test toolkit~
-Some god dropped a newly created test toolkit here.~
+toolkit~
+a toolkit~
+A toolkit is lying here.~
 ~
 66 0 1
 0 0 0 0
 1 0 0
 #10491
-test durastuff~
-a newly created test durastuff~
-Some god dropped a newly created test durastuff here.~
+durastaff~
+a durastaff~
+A durastaff is lying here.~
 ~
 64 0 1
 0 0 0 0
 1 0 0
 #10492
-test battery~
-a newly created test battery~
-Some god dropped a newly created test battery here.~
+battery~
+a battery~
+A battery is lying here.~
 ~
 65 0 1
 0 0 0 0
 1 0 0
 #10493
-oven~
-a newly created oven~
-Some god dropped a newly created oven here.~
+portable oven~
+a portable oven~
+A portable oven is here.~
 ~
 68 0 1
 0 0 0 0
@@ -856,17 +856,17 @@ A scrap of some material lies here.~
 0 0 0 0
 1 50 5
 #10495
-gem~
-a newly created gem~
-Some god dropped a newly created gem here.~
+non-adegan crystal~
+a non-adegan crystal~
+A non-adegan crystal is lying here.~
 ~
 63 0 1
 0 0 0 0
 1 0 0
 #10496
 mirror~
-a newly created mirror~
-Some god dropped a newly created mirror here.~
+a tiny, round mirror~
+A tiny, round mirror is lying here.~
 ~
 69 0 1
 0 0 0 0
@@ -881,8 +881,8 @@ A circuit board was dropped here.~
 1 120 12
 #10498
 superconductor~
-a newly created superconductor~
-Some god dropped a newly created superconductor here.~
+a superconductor~
+A superconductor is lying here.~
 ~
 71 0 1
 0 0 0 0

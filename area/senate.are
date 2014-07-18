@@ -73,7 +73,7 @@ A guard checks for weapons.
 > all_greet_prog 100~
 say Please empty all bags...
 mpforce $n get all bag
-say .... and backpacks.
+say ... and backpacks.
 mpforce $n get all back
 mpforce $n sit
 ~

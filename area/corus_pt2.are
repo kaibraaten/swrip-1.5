@@ -1,4 +1,4 @@
-#AREA   Coruscant - More of Government City~
+#AREA   Coruscant - More of New Republic City~
 
 
 
@@ -730,8 +730,8 @@ D0
 0 -1 10204
 S
 #10211
-An Appartment Building~
-The appartment building lobby is small and smells of tabacc and booze. The
+An Apartment Building~
+The apartment building lobby is small and smells of tabacc and booze. The
 paint on the walls is slowly peeling off and the floor is stained. A
 tenent "list" on the wall shows who lives here.
 ~
@@ -758,7 +758,7 @@ l li lis list~
 S
 #10212
 A Hallway~
-This rundown appartment building is dirty and is filled with a foul stench.
+This rundown apartment building is dirty and is filled with a foul stench.
 The walls are covered in grafitti. You can think of many nicer places to
 live.
 ~
@@ -778,7 +778,7 @@ D8
 S
 #10213
 A Hallway~
-This rundown appartment building is dirty and is filled with a foul stench.
+This rundown apartment building is dirty and is filled with a foul stench.
 The walls are covered in grafitti. You can think of many nicer places to
 live. 
 ~
@@ -798,7 +798,7 @@ D3
 S
 #10214
 A Hallway~
-This rundown appartment building is dirty and is filled with a foul stench.
+This rundown apartment building is dirty and is filled with a foul stench.
 The walls are covered in grafitti. You can think of many nicer places to
 live. 
 ~
@@ -814,7 +814,7 @@ D3
 S
 #10215
 A Hallway~
-This rundown appartment building is dirty and is filled with a foul stench.
+This rundown apartment building is dirty and is filled with a foul stench.
 The walls are covered in grafitti. You can think of many nicer places to
 live.
 ~
@@ -830,7 +830,7 @@ D2
 S
 #10216
 A Hallway~
-This rundown appartment building is dirty and is filled with a foul stench.
+This rundown apartment building is dirty and is filled with a foul stench.
 The walls are covered in grafitti. You can think of many nicer places to
 live. 
 ~
@@ -841,8 +841,8 @@ D2
 0 -1 10213
 S
 #10217
-A Small Appartment~
-This small messy appartment smells strongly of spice. It is cluttered with
+A Small Apartment~
+This small messy apartment smells strongly of spice. It is cluttered with
 boxes and empty cartons. A large stack of unwashed dishes sits by the
 sink.
 ~
@@ -853,8 +853,8 @@ D0
 0 -1 10215
 S
 #10218
-An Appartment~
-This small appartment is realatively well kept in contrast with the rest of
+An Apartment~
+This small apartment is realatively well kept in contrast with the rest of
 the building. There is a faint smell of incense.
 ~
 0 1073741824 1

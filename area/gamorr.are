@@ -13,7 +13,7 @@ $
 #FLAGS
 0
 
-#ECONOMY 0 100041529
+#ECONOMY 0 100028649
 
 #MOBILES
 #28000
@@ -307,9 +307,9 @@ drop all
 ~
 |
 #28016
-shamon gamorran healer~
-A gamorrean shamon ~
-A gamorrean shamon is sitting here.
+shaman gamorrean healer~
+a gamorrean shaman~
+A gamorrean shaman is sitting here.
 ~
 This old human man seems to be content just gazing at the stars. He is
 dressed in a long hooded cloak and old brown boots. from the scars on
@@ -927,7 +927,7 @@ Some god dropped a newly created chair here.~
 
 #ROOMS
 #28000
-Mountain Path.~
+Mountain Path~
 You walk along a mountain pass there are steep ledges all around you. The path 
 you are on seems sturdy though if not carefull you could get harmed. There are 
 some large boulders around the path that could start a cool rock slide at
@@ -945,7 +945,7 @@ D2
 0 -1 28199
 S
 #28001
-Mountain Path.~
+Mountain Path~
 You have finaly reached the center of the chaos, everyone is holding
 spears and wielding axes and looking down what looks to be an
 abandoned mine, the source of the growling and the squeals of an
@@ -968,7 +968,7 @@ D5
 0 -1 28004
 S
 #28002
-Steep Trail.~
+Steep Trail~
 You Stand in front of a rather large cave that the Alpha female has
 designated as her own, It is really big, it reminds you of a black
 hole. When the wind blows past the opening it makes a rather eriy
@@ -988,7 +988,7 @@ D5
 0 -1 28001
 S
 #28003
-Alpha-Cave.~
+Alpha-Cave~
 This is the cave of the mountain clans matron. It seems to be a little
 messed up, there is what looks like would be the nest of a gurda on
 the floor, could it be the she owns the gurda?, it would make sense
@@ -1005,7 +1005,7 @@ D5
 0 -1 28002
 S
 #28004
-Mine Shaft.~
+Mine Shaft~
 There is a very weak wooden ledge here, it doesn't look as if it is
 able to support the weight of anything your size. The boards start to
 groan under your feet and you start to here them snap and crack,
@@ -1023,7 +1023,7 @@ D5
 65536 -1 28005
 S
 #28005
-Mine Shaft.~
+Mine Shaft~
 There is a very weak wooden ledge here, it doesn't look as if it is
 able to support the weight of anything your size. The boards start to
 groan under your feet and you start to here them snap and crack,
@@ -1045,7 +1045,7 @@ D5
 65536 -1 28006
 S
 #28006
-Mine Shaft.~
+Mine Shaft~
 There is a very weak wooden ledge here, it doesn't look as if it is
 able to support the weight of anything your size. The boards start to
 groan under your feet and you start to here them snap and crack,
@@ -1553,7 +1553,7 @@ D0
 0 -1 28028
 S
 #28031
-Mine Tunnel.~
+Mine Tunnel~
 The tunnel end abruptly, and the stench from the gurda has filled the
 tunnel with a mind numbing sickening smell that makes you wanna blow
 chunks everywhere, to think that the gamorreans wear the gurdas skin as a
@@ -3170,7 +3170,7 @@ D5
 0 -1 28187
 S
 #28189
-Cliff ledge.~
+Cliff Ledge~
 You can see for miles when you look over the ledge. In the distance
 you can see lush rain forests, further south you see a vast desert as
 well as the Huntbird in the village below While you were admiring the
@@ -3194,7 +3194,7 @@ D5
 0 -1 28188
 S
 #28190
-Weak cliff lip.~
+Weak Cliff Lip~
 While admiring the view, you completly forgot to check the stablity of
 the cliff. You feel a slight rumble, and the lip of the cliff gives
 way to ou weight you fall for hundreds of feet clipping your head off
@@ -3212,7 +3212,7 @@ D3
 0 -1 28189
 S
 #28191
-cliff ledge~
+Cliff Ledge~
 You can see alomost the whole planet from here, it looks great. You
 have a cool breeze blowing past you face making you feel refreshed
 after that long climb you can here what sounds like gamorreans
@@ -3230,7 +3230,7 @@ D3
 0 -1 28192
 S
 #28192
-cliff ledge~
+Cliff Ledge~
 You can see alomost the whole planet from here, it looks great. You
 have a cool breeze blowing past you face making you feel refreshed
 after that long climb you can here what sounds like gamorreans
@@ -3248,7 +3248,7 @@ D1
 0 -1 28191
 S
 #28193
-Mountain Pathway.~
+Mountain Pathway~
 Now you can see where all the noise was comeing from. The mountain
 clan seems to be in a bit of a tizzy, something seems to have come
 into their area, and they don't seem to be happy about it, some even
@@ -3266,7 +3266,7 @@ D2
 0 -1 28192
 S
 #28194
-Entrance to The mountain Clan.~
+Entrance to the Mountain Clan~
 You are standing in the entrance and no gamorrean seems to have
 noticed you, They are far to busy trying to rid themselve of this
 small problem that it has left them open to unwanted visitors. From
@@ -3286,7 +3286,7 @@ D3
 0 -1 28193
 S
 #28195
-Path in The Clan Village.~
+Path in the Clan Village~
 The village is in chaos, there seems to be only one gamorrean with his
 thoughts straight and the is the shammon to the south. The groweling
 is still very  loud and promenent as still very viscious. Hear the
@@ -3310,7 +3310,7 @@ D4
 0 -1 28196
 S
 #28196
-Small Cave entrance.~
+Small Cave Entrance~
 This is the home to the Gamorreans only known shammon, he has his
 place in good order for a Gamorrean, and the smell isn't as bad as
 you had the pleaseue of smelling in the main village. The Shammon has
@@ -3326,7 +3326,7 @@ D5
 0 -1 28195
 S
 #28197
-Large Cave Entrance.~
+Large Cave Entrance~
 ~
 0 0 1
 D4
@@ -3335,7 +3335,7 @@ D4
 0 -1 28198
 S
 #28198
-Mountain path.~
+Mountain Path~
 The chaos and the groweling is getting worse as time goes on, you see
 of blood comeing from the cave and going north and you also see a
 babies little booty in the trail, seems like the panic has its
@@ -3359,7 +3359,7 @@ D5
 0 -1 28197
 S
 #28199
-Mountain Path.~
+Mountain Path~
 You walk along a mountain pass there are steep ledges all around you.
 The path you are on seems sturdy though if not carefull you could get
 harmed. There are some large boulders around the path that could

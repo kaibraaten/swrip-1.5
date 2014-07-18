@@ -1,4 +1,4 @@
-#AREA   Coruscant - Menari Spaceport~
+#AREA   Coruscant - Manarai Spaceport~
 
 
 
@@ -295,7 +295,7 @@ S
 #200
 A Small Shuttle~
 You stand inside a small shuttlecraft that flies between Coruscant's
-Menari Spaceport and An Orbitting Shipyard. There are several plastic
+Manarai Spaceport and An Orbitting Shipyard. There are several plastic
 covered seats along the walls but passengers are mostly expected to
 stand for the brief journey.
 Type LEAVE to exit after the ship lands.
@@ -305,11 +305,11 @@ S
 #201
 Serin Pluogus Tourbus Platform~
 This platform is reserved for the publicly funded tour shuttle, the
-Serin Pluogus. The rest of the Menari spaceport is to the west and
+Serin Pluogus. The rest of the Manarai spaceport is to the west and
 north of here.  Around the rest of the platform you can view the
 southern reaches of Imperial  City ( a rather inapropriate name as
 Coruscant has been the governing seat  of the New Republic for over
-20 years ). To the south tower the Menari Mountains.
+20 years ). To the south tower the Manarai Mountains.
 When the pluogus lands type BOARD PLUOGUS to enter.
 ~
 0 4 1
@@ -320,12 +320,12 @@ D1
 S
 #202
 Shuttle Platform~
-This platform is reserved for shuttles flying between Menari spaceport
-and orbitting space stations. The rest of the Menari spaceport is to
+This platform is reserved for shuttles flying between Manarai spaceport
+and orbitting space stations. The rest of the Manarai spaceport is to
 the south-east and  north of here.  Around the rest of the platform
-you can view the southern reaches of Imperial  City ( a rather
-inapropriate name as Coruscant has been the governing seat  of the
-New Republic for over 20 years ). To the south tower the Menari
+you can view the southern reaches of Imperial  City (a rather
+inapropriate name as Coruscant has been the governing seat of the
+New Republic for over 20 years). To the south tower the Manarai
 Mountains.
  
 Wait here for the shipyard ferry. When it lands BOARD FERRY.
@@ -339,11 +339,11 @@ D3
 S
 #203
 Main Platform~
-This is the main platform in the Menari Spaceport. All kinds of ships
+This is the main platform in the Manarai Spaceport. All kinds of ships
 are docked here. There are even a few that can be rented. The rest of
 the spaceport is to the north. Around it is the southern end of
-Imperial City ( or Government City ) which covers a good portion of
-the planet. To the south is a beautiful view of the Menari Mountain
+Imperial City ( or New Republic City ) which covers a good portion of
+the planet. To the south is a beautiful view of the Manarai Mountain
 Range. 
 ~
 0 20 1
@@ -355,7 +355,7 @@ S
 #204
 Platform Area~
 From the platform area of the spaceport you have an excellent view of
-the Menari Mountains to the south. This large mountain range marks
+the Manarai Mountains to the south. This large mountain range marks
 the southern limit of Government city. The air is cool here and
 tastes cleaner than that  of the rest of the planet. It would be
 quite peaceful here watching spaceships take off against the
@@ -452,7 +452,7 @@ D3
 S
 #209
 Spaceport Lobby~
-The Menari Spaceport lobby is a large open room with a transparisteel
+The Manarai Spaceport lobby is a large open room with a transparisteel
 ceiling. The floor is a polished white with a black fractal pattern.
 There is a ticket booth in one corner of the room. An escalater in
 the opposite corner leads down.
@@ -481,7 +481,7 @@ D5
 S
 #210
 Spaceport Entrance~
-The entranceway of the Menari Mountains Spaceport is a large wide
+The entranceway of the Manarai Mountains Spaceport is a large wide
 staicase  leading from the walkway outside down to the spaceport
 lobby. A large set of double doors opens and closes automaticly as
 people approach.
@@ -498,7 +498,7 @@ D2
 S
 #211
 Spaceport Hotel~
-The Menari Spaceport Hotel is attached directly to the lobby of
+The Manarai Spaceport Hotel is attached directly to the lobby of
 spaceport allowing travelers to find quick lodgings after a long
 journey. The rooms here are well kept although a bit pricy. It would
 be a good safe place to rest for a while.
@@ -526,8 +526,8 @@ D3
 S
 #213
 Transit Station~
-The Menari Spaceport Transit Station is one of many interconnected
-turbocar stations running through Government City. Its probably the
+The Manarai Spaceport Transit Station is one of many interconnected
+turbocar stations running through New Republic City. Its probably the
 easiest fasted and cheapest way to get around the enormous city and
 thus is a favoured means  of transportation.
 ~
@@ -555,7 +555,7 @@ D3
 0 -1 213
 S
 #215
-Menari Spaceport Station~
+Manarai Spaceport Station~
 This long narrow room is devided down the middle by a wide turbocar
 track. The turbocars move at extremely high speeds and as they
 aproach a gust of wind tugs at you threatening to knock you off

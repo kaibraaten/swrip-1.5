@@ -13,7 +13,7 @@ $
 #FLAGS
 0
 
-#ECONOMY 0 465118
+#ECONOMY 0 463660
 
 #MOBILES
 #7300
@@ -247,7 +247,7 @@ mother or so it seems.
 0 0 0 0 0 0 0 0
 #7309
 Hardware Salesman~
-Hardware Salseman~
+Hardware Salesman~
 A chubby salesman stands here
 ~
 ~
@@ -726,7 +726,7 @@ D3
 0 -1 7301
 S
 #7303
-Enterance to the Mall~
+Entrance to the Mall~
 The mall is simply huge, races of all kinds wander around window shopping
 and trying there best to look interested , after all the did pay to get in
 here. Most stores in the mall are one of a kind so if that certain thing
@@ -1741,7 +1741,7 @@ S
  7302    0  0  0  0  0   120  90         0 23    ; Slimy Clerk
  7304    0  0  0  0  0   120  90         0 23    ; Weapons dealer
  7305    0  0  0  0  0   120  90         0 23    ; Armor Dealer
- 7309    0  0  0  0  0   120  90         0 23    ; Hardware Salseman
+ 7309    0  0  0  0  0   120  90         0 23    ; Hardware Salesman
  7310    0  0  0  0  0   120  90         0 23    ; A small man
 0
 

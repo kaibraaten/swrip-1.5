@@ -13,7 +13,7 @@ $
 #FLAGS
 2
 
-#ECONOMY 0 42215975
+#ECONOMY 0 42175825
 
 #MOBILES
 #1
@@ -578,9 +578,9 @@ mpat 5991 autopilot
 ~
 |
 #50
-Master Yoda~
-Jedi Master Yoda~
-Master Yoda is here to train you in the ways of the force.
+Jedi Master Luke Skywalker~
+Jedi Master Skywalker~
+Jedi Master Luke Skywalker is here to train you in the ways of the Force.
 ~
 ~
 1124074499 40 1000 Z
@@ -655,7 +655,7 @@ Some god abandoned a newly created Last Mobile here.
 8 8 0
 10 10 10 10 10 10 10
 0 0 0 0 0
-0 0 0 0 0 0 0
+0 0 0 0 1 1 0
 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0
 #0
@@ -1179,7 +1179,7 @@ quest weapon double bladed lightsaber saber~
 The hilt of a lightsaber lies on the ground.~
 ~
 5 257 8193
-1000 53 3 1 5000 5000
+1000 53 3 3 5000 5000
 8 0 0
 A
 19 5
@@ -1905,7 +1905,7 @@ S
 #99
 Last Room~
 ~
-0 1073741824 1
+0 1073741828 1
 S
 #0
 
