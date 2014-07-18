@@ -1,18 +1,18 @@
 #SHIP
-Name         Imperial Shipyard~
-PersonalName         Imperial Shipyard~
-Filename     imperialyard.ship~
+Name         Coruscant Shipyard~
+PersonalName         Coruscant Shipyard~
+Filename     coruscant.shipyard~
 Description  ~
-Owner        The Empire~
-Pilot        sdf~
-Copilot      Nikolai~
+Owner        The New Republic~
+Pilot        ~
+Copilot      ~
 Class        3
 Tractorbeam  255
 Shipyard     45
 Hanger       32000
-Vx           1510
-Vy           1557
-Vz           1496
+Vx           2000
+Vy           2000
+Vz           -2000
 Turret1      0
 Turret2      0
 Turret3      0

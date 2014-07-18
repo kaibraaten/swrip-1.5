@@ -1,18 +1,18 @@
 #SHIP
-Name         Kuat Shipyard~
-PersonalName         Kuat Shipyard~
-Filename     kuatyard.ship~
+Name         Byss Shipyard~
+PersonalName         Byss Shipyard~
+Filename     byss.shipyard~
 Description  ~
-Owner        Darrik~
+Owner        The Empire~
 Pilot        ~
 Copilot      ~
 Class        3
 Tractorbeam  0
 Shipyard     32050
 Hanger       32050
-Vx           497014
-Vy           -506421
-Vz           56905
+Vx           246
+Vy           -4261
+Vz           -2356
 Turret1      32071
 Turret2      32071
 Turret3      32071
