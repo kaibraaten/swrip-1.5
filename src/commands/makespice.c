@@ -2,36 +2,37 @@
 #include "mud.h"
 #include "character.h"
 
-static void makespice_begin( CHAR_DATA *ch, char *argument );
-static void makespice_end( CHAR_DATA *ch );
-static void makespice_abort( CHAR_DATA *ch );
+static void on_start( CHAR_DATA *ch, char *argument );
+static void on_finished( CHAR_DATA *ch );
+static void on_abort( CHAR_DATA *ch );
 
 void do_makespice( CHAR_DATA *ch, char *argument )
 {
   switch( ch->substate )
     {
     default:
-      makespice_begin( ch, argument );
+      on_start( ch, argument );
       break;
 
     case SUB_PAUSE:
-      makespice_end( ch );
+      ch->substate = SUB_NONE;
+      on_finished( ch );
       break;
 
     case SUB_TIMER_DO_ABORT:
-      makespice_abort( ch );
+      ch->substate = SUB_NONE;
+      on_abort( ch );
       break;
     }
 }
 
-void makespice_abort( CHAR_DATA *ch )
+static void on_abort( CHAR_DATA *ch )
 {
   DISPOSE( ch->dest_buf );
-  ch->substate = SUB_NONE;
   send_to_char("&RYou are distracted and are unable to finish your work.\r\n&w", ch);
 }
 
-void makespice_begin( CHAR_DATA *ch, char *argument )
+static void on_start( CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   int the_chance = 0;
@@ -84,7 +85,7 @@ void makespice_begin( CHAR_DATA *ch, char *argument )
     }
 }
 
-void makespice_end( CHAR_DATA *ch )
+static void on_finished( CHAR_DATA *ch )
 {
   char arg[MAX_INPUT_LENGTH];
   char buf[MAX_STRING_LENGTH];
@@ -96,8 +97,6 @@ void makespice_end( CHAR_DATA *ch )
 
   strcpy(arg, (const char*)ch->dest_buf);
   DISPOSE( ch->dest_buf);
-
-  ch->substate = SUB_NONE;
 
   if ( ( obj = get_obj_carry( ch, arg ) ) == NULL )
     {

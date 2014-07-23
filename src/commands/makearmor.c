@@ -2,19 +2,46 @@
 #include "mud.h"
 #include "character.h"
 
+static void on_start( CHAR_DATA *ch, char *argument );
+static void on_finished( CHAR_DATA *ch );
+static void on_abort( CHAR_DATA *ch );
+
 void do_makearmor( CHAR_DATA *ch, char *argument )
+{
+  switch( ch->substate )
+    {
+    default:
+      on_start( ch, argument );
+      break;
+
+    case SUB_PAUSE:
+      ch->substate = SUB_NONE;
+      on_finished( ch );
+      break;
+
+    case SUB_TIMER_DO_ABORT:
+      ch->substate = SUB_NONE;
+      on_abort( ch );
+      break;
+    }
+}
+
+static void on_start( CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
-  char buf[MAX_STRING_LENGTH];
-  int level, the_chance;
-  bool checksew, checkfab;
-  OBJ_DATA *obj;
-  OBJ_DATA *material = NULL;
-  int value;
+  int the_chance = 0;
+  bool checksew = FALSE, checkfab = FALSE;
+  OBJ_DATA *obj = NULL;
 
   argument = one_argument( argument, arg );
   strcpy ( arg2, argument);
+
+  if ( arg2[0] == '\0' )
+    {
+      send_to_char( "&RUsage: Makearmor <wearloc> <name>\r\n&w", ch);
+      return;
+    }
 
   if ( !str_cmp( arg, "eyes" )
        || !str_cmp( arg, "ears" )
@@ -27,12 +54,14 @@ void do_makearmor( CHAR_DATA *ch, char *argument )
       send_to_char( "&RTry MAKEJEWELRY.\r\n&w", ch);
       return;
     }
+
   if ( !str_cmp( arg, "shield" ) )
     {
       send_to_char( "&RYou cannot make clothing worn as a shield.\r\n&w", ch);
       send_to_char( "&RTry MAKESHIELD.\r\n&w", ch);
       return;
     }
+
   if ( !str_cmp( arg, "wield" ) )
     {
       send_to_char( "&RAre you going to fight with your clothing?\r\n&w", ch);
@@ -40,86 +69,80 @@ void do_makearmor( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  switch( ch->substate )
+  if ( !IS_SET( ch->in_room->room_flags, ROOM_FACTORY ) )
     {
-    default:
-
-      if ( arg2[0] == '\0' )
-        {
-          send_to_char( "&RUsage: Makearmor <wearloc> <name>\r\n&w", ch);
-          return;
-        }
-
-      checksew = FALSE;
-      checkfab = FALSE;
-
-      if ( !IS_SET( ch->in_room->room_flags, ROOM_FACTORY ) )
-        {
-          send_to_char( "&RYou need to be in a factory or workshop to do that.\r\n", ch);
-          return;
-        }
-
-      for ( obj = ch->last_carrying; obj; obj = obj->prev_content )
-	{
-          if (obj->item_type == ITEM_FABRIC)
-            checkfab = TRUE;
-          if (obj->item_type == ITEM_THREAD)
-            checksew = TRUE;
-        }
-
-      if ( !checkfab )
-        {
-          send_to_char( "&RYou need some sort of fabric or material.\r\n", ch);
-          return;
-        }
-
-      if ( !checksew )
-        {
-          send_to_char( "&RYou need a needle and some thread.\r\n", ch);
-          return;
-        }
-
-      the_chance = is_npc(ch) ? ch->top_level
-        : (int) (ch->pcdata->learned[gsn_makearmor]);
-      if ( number_percent( ) < the_chance )
-        {
-          send_to_char( "&GYou begin the long process of creating some armor.\r\n", ch);
-          act( AT_PLAIN, "$n takes $s sewing kit and some material and begins to work.", ch,
-               NULL, argument , TO_ROOM );
-          add_timer ( ch , TIMER_DO_FUN , 15 , do_makearmor , 1 );
-          ch->dest_buf = str_dup(arg);
-          ch->dest_buf_2 = str_dup(arg2);
-          return;
-        }
-      send_to_char("&RYou can't figure out what to do.\r\n",ch);
-      learn_from_failure( ch, gsn_makearmor );
-      return;
-
-    case SUB_PAUSE:
-      if ( !ch->dest_buf )
-        return;
-      if ( !ch->dest_buf_2 )
-        return;
-      strcpy(arg, (const char*)ch->dest_buf);
-      DISPOSE( ch->dest_buf);
-      strcpy(arg2, (const char*)ch->dest_buf_2);
-      DISPOSE( ch->dest_buf_2);
-      break;
-
-    case SUB_TIMER_DO_ABORT:
-      DISPOSE( ch->dest_buf );
-      DISPOSE( ch->dest_buf_2 );
-      ch->substate = SUB_NONE;
-      send_to_char("&RYou are interupted and fail to finish your work.\r\n", ch);
+      send_to_char( "&RYou need to be in a factory or workshop to do that.\r\n", ch);
       return;
     }
 
-  ch->substate = SUB_NONE;
+  for ( obj = ch->last_carrying; obj; obj = obj->prev_content )
+    {
+      if (obj->item_type == ITEM_FABRIC)
+	checkfab = TRUE;
+
+      if (obj->item_type == ITEM_THREAD)
+	checksew = TRUE;
+    }
+
+  if ( !checkfab )
+    {
+      send_to_char( "&RYou need some sort of fabric or material.\r\n", ch);
+      return;
+    }
+
+  if ( !checksew )
+    {
+      send_to_char( "&RYou need a needle and some thread.\r\n", ch);
+      return;
+    }
+
+  the_chance = is_npc(ch) ? ch->top_level
+    : (int) (ch->pcdata->learned[gsn_makearmor]);
+
+  if ( number_percent( ) < the_chance )
+    {
+      send_to_char( "&GYou begin the long process of creating some armor.\r\n", ch);
+      act( AT_PLAIN, "$n takes $s sewing kit and some material and begins to work.", ch,
+	   NULL, argument , TO_ROOM );
+      add_timer ( ch , TIMER_DO_FUN , 15 , do_makearmor , 1 );
+      ch->dest_buf = str_dup(arg);
+      ch->dest_buf_2 = str_dup(arg2);
+    }
+  else
+    {
+      send_to_char("&RYou can't figure out what to do.\r\n",ch);
+      learn_from_failure( ch, gsn_makearmor );
+    }
+}
+
+static void on_finished( CHAR_DATA *ch )
+{
+  char arg[MAX_INPUT_LENGTH];
+  char arg2[MAX_INPUT_LENGTH];
+  char buf[MAX_STRING_LENGTH];
+  int level = 0, the_chance = 0;
+  bool checksew = FALSE, checkfab = FALSE;
+  OBJ_DATA *obj = NULL;
+  OBJ_DATA *material = NULL;
+  int value = 0;
+  long xpgain = 0;
+
+  if ( !ch->dest_buf )
+    {
+      return;
+    }
+
+  if ( !ch->dest_buf_2 )
+    {
+      return;
+    }
+
+  strcpy(arg, (const char*)ch->dest_buf);
+  DISPOSE( ch->dest_buf);
+  strcpy(arg2, (const char*)ch->dest_buf_2);
+  DISPOSE( ch->dest_buf_2);
 
   level = is_npc(ch) ? ch->top_level : (int) (ch->pcdata->learned[gsn_makearmor]);
-
-  checksew = FALSE;
-  checkfab = FALSE;
 
   for ( obj = ch->last_carrying; obj; obj = obj->prev_content )
     {
@@ -174,14 +197,18 @@ void do_makearmor( CHAR_DATA *ch, char *argument )
 
   send_to_char( "&GYou finish your work and hold up your newly created garment.&w\r\n", ch);
   act( AT_PLAIN, "$n finishes sewing some new armor.", ch,
-       NULL, argument , TO_ROOM );
+       NULL, NULL , TO_ROOM );
 
-  {
-    long xpgain;
+  xpgain = UMIN( obj->cost*100 ,( exp_level(get_level( ch, ENGINEERING_ABILITY ) + 1) - exp_level(get_level( ch, ENGINEERING_ABILITY ) ) ) );
+  gain_exp(ch, ENGINEERING_ABILITY, xpgain );
+  ch_printf( ch , "You gain %d engineering experience.", xpgain );
 
-    xpgain = UMIN( obj->cost*100 ,( exp_level(get_level( ch, ENGINEERING_ABILITY ) + 1) - exp_level(get_level( ch, ENGINEERING_ABILITY ) ) ) );
-    gain_exp(ch, ENGINEERING_ABILITY, xpgain );
-    ch_printf( ch , "You gain %d engineering experience.", xpgain );
-  }
   learn_from_success( ch, gsn_makearmor );
+}
+
+static void on_abort( CHAR_DATA *ch )
+{
+  DISPOSE( ch->dest_buf );
+  DISPOSE( ch->dest_buf_2 );
+  send_to_char("&RYou are interupted and fail to finish your work.\r\n", ch);
 }
