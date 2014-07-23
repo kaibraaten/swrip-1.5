@@ -34,7 +34,7 @@ typedef unsigned char bool;
 #endif
 
 #if     !defined(TRUE)
-#define TRUE     false
+#define TRUE     true
 #endif
 
 #else /* C++ */
