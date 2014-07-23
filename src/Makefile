@@ -11,7 +11,7 @@ IMC = 1
 DEBUG_TELNET = -DSWRIP_DEBUG_TELNET=0
 
 CCFLAGS = -g3 -MMD -I. -Iutility $(WFLAGS) $(USE_DLSYM) $(DEBUG_TELNET) -pedantic
-LDFLAGS = -lm -lz -Lutility -lutility -Wl,-rpath,../src/utility
+LDFLAGS = -lm -lz -Lutility -lutility -Wl,-rpath,./src/utility
 
 #Uncomment the next line of you're using Solaris and you get linker errors.
 #SOLARIS = 1
