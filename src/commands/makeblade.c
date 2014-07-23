@@ -120,7 +120,7 @@ static void on_finished( CHAR_DATA *ch )
   bool checkstaff = FALSE;
   OBJ_DATA *obj = NULL;
   OBJ_INDEX_DATA *pObjIndex = NULL;
-  vnum_t vnum = 0;
+  vnum_t vnum = INVALID_VNUM;
   AFFECT_DATA *paf = NULL;
   AFFECT_DATA *paf2 = NULL;
 
