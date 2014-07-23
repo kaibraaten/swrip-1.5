@@ -57,7 +57,7 @@ static const char *get_next_filename( CONST_STRPTR directory )
   BPTR sourcelock = NULL;
   struct ExAllControl *excontrol = NULL;
   struct ExAllData buffer, *ead = NULL;
-  BOOL exmore = TRUE;
+  BOOL exmore = true;
 
   *filename = '\0';
   memset( &buffer, 0, sizeof( buffer ) );

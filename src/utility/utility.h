@@ -23,17 +23,21 @@ extern "C" {
  * Diavolo reports AIX compiler has bugs with short types.
  */
 #ifndef __cplusplus
+#if __STDC_VERSION__ < 199901L
+typedef unsigned char bool;
+#define true 1
+#define false 0
+#endif
+
 #if     !defined(FALSE)
-#define FALSE    0
+#define FALSE    false
 #endif
 
 #if     !defined(TRUE)
-#define TRUE     1
+#define TRUE     false
 #endif
 
-typedef unsigned char                   bool;
-
-#else
+#else /* C++ */
 #if !defined(__STORMGCC__) && !defined(__MORPHOS__)
 #define TRUE true
 #define FALSE false
@@ -135,7 +139,7 @@ do                                                              \
   if ( !str_cmp( (word), (literal) ) )					\
     {                                       \
       (field) = (value);		    \
-      fMatch = TRUE;			    \
+      fMatch = true;			    \
       break;				    \
     }
 

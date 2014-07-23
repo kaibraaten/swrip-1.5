@@ -60,7 +60,7 @@ char fread_letter( FILE *fp )
 float fread_float( FILE *fp )
 {
   float number = 0.0;
-  bool sign = FALSE, decimal = FALSE;
+  bool sign = false, decimal = false;
   char c = '\0';
   double place = 0.0;
 
@@ -84,7 +84,7 @@ float fread_float( FILE *fp )
     c = fgetc( fp );
   else if( c == '-' )
   {
-    sign = TRUE;
+    sign = true;
     c = fgetc( fp );
   }
 
@@ -103,7 +103,7 @@ float fread_float( FILE *fp )
     {
       if( c == '.' )
       {
-	decimal = TRUE;
+	decimal = true;
 	c = fgetc( fp );
       }
 
@@ -154,7 +154,7 @@ float fread_float( FILE *fp )
 int fread_number( FILE *fp )
 {
   int number = 0;
-  bool sign = FALSE;
+  bool sign = false;
   char c = 0;
 
   do
@@ -176,7 +176,7 @@ int fread_number( FILE *fp )
   }
   else if ( c == '-' )
   {
-    sign = TRUE;
+    sign = true;
     c = fgetc( fp );
   }
 

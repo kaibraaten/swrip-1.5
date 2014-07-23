@@ -47,12 +47,12 @@ static bool is_name_internal( const char *str, const char *namelist,
 
       if ( name[0] == '\0' )
         {
-          return FALSE;
+          return false;
         }
 
       if ( !compare_string( str, name ) )
         {
-          return TRUE;
+          return true;
         }
     }
 }
@@ -95,7 +95,7 @@ static bool nifty_is_name_internal( const char *str, const char *namelist,
   char *tmp_namelist = tmp_namelist_buf;
 
   if( !str || str[0] == '\0' )
-    return FALSE;
+    return false;
 
   snprintf( tmp_str_buf, MAX_INPUT_LENGTH, "%s", str );
   snprintf( tmp_namelist_buf, MAX_INPUT_LENGTH, "%s", namelist );
@@ -105,10 +105,10 @@ static bool nifty_is_name_internal( const char *str, const char *namelist,
       tmp_str = tokenize_string( tmp_str, name );
 
       if ( name[0] == '\0' )
-        return TRUE;
+        return true;
 
       if ( !compare_string( name, tmp_namelist ) )
-        return FALSE;
+        return false;
     }
 }
 
@@ -159,7 +159,7 @@ char *show_tilde( const char *str )
 
 /*
  * Compare strings, case insensitive.
- * Return TRUE if different
+ * Return true if different
  *   (compatibility with historical functions).
  */
 bool str_cmp( const char *astr, const char *bstr )
@@ -169,7 +169,7 @@ bool str_cmp( const char *astr, const char *bstr )
       bug( "Str_cmp: null astr." );
       if ( bstr )
         fprintf( stdout, "str_cmp: astr: (null)  bstr: %s\n", bstr );
-      return TRUE;
+      return true;
     }
 
   if ( !bstr )
@@ -177,21 +177,21 @@ bool str_cmp( const char *astr, const char *bstr )
       bug( "Str_cmp: null bstr." );
       if ( astr )
         fprintf( stdout, "str_cmp: astr: %s  bstr: (null)\n", astr );
-      return TRUE;
+      return true;
     }
 
   for ( ; *astr || *bstr; astr++, bstr++ )
     {
       if ( LOWER(*astr) != LOWER(*bstr) )
-        return TRUE;
+        return true;
     }
 
-  return FALSE;
+  return false;
 }
 
 /*
  * Compare strings, case insensitive, for prefix matching.
- * Return TRUE if astr not a prefix of bstr
+ * Return true if astr not a prefix of bstr
  *   (compatibility with historical functions).
  */
 bool str_prefix( const char *astr, const char *bstr )
@@ -199,27 +199,27 @@ bool str_prefix( const char *astr, const char *bstr )
   if ( !astr )
     {
       bug( "Strn_cmp: null astr." );
-      return TRUE;
+      return true;
     }
 
   if ( !bstr )
     {
       bug( "Strn_cmp: null bstr." );
-      return TRUE;
+      return true;
     }
 
   for ( ; *astr; astr++, bstr++ )
     {
       if ( LOWER(*astr) != LOWER(*bstr) )
-        return TRUE;
+        return true;
     }
 
-  return FALSE;
+  return false;
 }
 
 /*
  * Compare strings, case insensitive, for match anywhere.
- * Returns TRUE is astr not part of bstr.
+ * Returns true is astr not part of bstr.
  *   (compatibility with historical functions).
  */
 bool str_infix( const char *astr, const char *bstr )
@@ -230,18 +230,18 @@ bool str_infix( const char *astr, const char *bstr )
   char c0 = 0;
 
   if ( ( c0 = LOWER(astr[0]) ) == '\0' )
-    return FALSE;
+    return false;
 
   for ( ichar = 0; ichar <= sstr2 - sstr1; ichar++ )
     if ( c0 == LOWER(bstr[ichar]) && !str_prefix( astr, bstr + ichar ) )
-      return FALSE;
+      return false;
 
-  return TRUE;
+  return true;
 }
 
 /*
  * Compare strings, case insensitive, for suffix matching.
- * Return TRUE if astr not a suffix of bstr
+ * Return true if astr not a suffix of bstr
  *   (compatibility with historical functions).
  */
 bool str_suffix( const char *astr, const char *bstr )
@@ -250,9 +250,9 @@ bool str_suffix( const char *astr, const char *bstr )
   int sstr2 = strlen(bstr);
 
   if ( sstr1 <= sstr2 && !str_cmp( astr, bstr + sstr2 - sstr1 ) )
-    return FALSE;
+    return false;
   else
-    return TRUE;
+    return true;
 }
 
 /*
@@ -264,7 +264,7 @@ char *capitalize( const char *str )
   static char buf[MAX_STRING_LENGTH];
   char *dest = buf;
   enum { Normal, Color } state = Normal;
-  bool bFirst = TRUE;
+  bool bFirst = true;
   char c = 0;
 
   while( (c = *str++) )
@@ -278,7 +278,7 @@ char *capitalize( const char *str )
           else if( isalpha( (int) c ) )
             {
               c = bFirst ? toupper( (int) c )  : tolower( (int) c );
-              bFirst = FALSE;
+              bFirst = false;
             }
         }
       else
@@ -325,7 +325,7 @@ char *strupper( const char *str )
 }
 
 /*
- * Returns TRUE or FALSE if a letter is a vowel                 -Thoric
+ * Returns true or false if a letter is a vowel                 -Thoric
  */
 #if defined(AMIGA) || defined(__MORPHOS__)
 static bool isavowel( unsigned letter )
@@ -336,9 +336,9 @@ static bool isavowel( unsigned letter )
   char c = tolower( (int)letter );
 
   if ( c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u' )
-    return TRUE;
+    return true;
   else
-    return FALSE;
+    return false;
 }
 
 /*
@@ -384,15 +384,15 @@ void replace_char( char *buf, char replace, char with )
 bool is_number( const char *arg )
 {
   if ( *arg == '\0' )
-    return FALSE;
+    return false;
 
   for ( ; *arg != '\0'; arg++ )
     {
       if ( !isdigit((int) *arg) )
-        return FALSE;
+        return false;
     }
 
-  return TRUE;
+  return true;
 }
 
 /*
