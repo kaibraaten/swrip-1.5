@@ -30,12 +30,12 @@ static void on_start( CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   int the_chance = 0;
-  bool checktool = FALSE;
-  bool checkoven = FALSE;
-  bool checkdura = FALSE;
-  bool checkbow = FALSE;
-  bool checktinder = FALSE;
-  bool checkoil = FALSE;
+  bool checktool = false;
+  bool checkoven = false;
+  bool checkdura = false;
+  bool checkbow = false;
+  bool checktinder = false;
+  bool checkoil = false;
   OBJ_DATA *obj = NULL;
 
   strcpy( arg , argument );
@@ -61,17 +61,17 @@ static void on_start( CHAR_DATA *ch, char *argument )
   for ( obj = ch->last_carrying; obj; obj = obj->prev_content )
     {
       if (obj->item_type == ITEM_TOOLKIT)
-	checktool = TRUE;
+	checktool = true;
       if (obj->item_type == ITEM_DURAPLAST)
-	checkdura = TRUE;
+	checkdura = true;
       if (obj->item_type == ITEM_CROSSBOW)
-	checkbow = TRUE;
+	checkbow = true;
       if (obj->item_type == ITEM_OVEN)
-	checkoven = TRUE;
+	checkoven = true;
       if (obj->item_type == ITEM_TINDER)
-	checktinder = TRUE;
+	checktinder = true;
       if (obj->item_type == ITEM_OIL)
-	checkoil = TRUE;
+	checkoil = true;
     }
 
   if ( !checktool )
@@ -136,13 +136,13 @@ static void on_finished( CHAR_DATA *ch )
   long xpgain = 0;
   int level = 0;
   int the_chance = 0;
-  bool checktool = FALSE;
-  bool checkoven = FALSE;
-  bool checkdura = FALSE;
-  bool checkbow = FALSE;
-  bool checktinder = FALSE;
-  bool checkoil = FALSE;
-  bool checkammo = FALSE;
+  bool checktool = false;
+  bool checkoven = false;
+  bool checkdura = false;
+  bool checkbow = false;
+  bool checktinder = false;
+  bool checkoil = false;
+  bool checkammo = false;
   OBJ_DATA *obj = NULL;
   OBJ_INDEX_DATA *pObjIndex = NULL;
   int vnum = INVALID_VNUM;
@@ -170,30 +170,30 @@ static void on_finished( CHAR_DATA *ch )
   for ( obj = ch->last_carrying; obj; obj = obj->prev_content )
     {
       if (obj->item_type == ITEM_TOOLKIT)
-        checktool = TRUE;
+        checktool = true;
       if (obj->item_type == ITEM_OVEN)
-        checkoven = TRUE;
-      if (obj->item_type == ITEM_DURAPLAST && checkdura == FALSE)
+        checkoven = true;
+      if (obj->item_type == ITEM_DURAPLAST && checkdura == false)
         {
-          checkdura = TRUE;
+          checkdura = true;
           separate_obj( obj );
           obj_from_char( obj );
           extract_obj( obj );
         }
-      if (obj->item_type == ITEM_BOLT && checkammo == FALSE)
+      if (obj->item_type == ITEM_BOLT && checkammo == false)
         {
           ammo = obj->value[0];
-          checkammo = TRUE;
+          checkammo = true;
           separate_obj( obj );
           obj_from_char( obj );
           extract_obj( obj );
         }
-      if (obj->item_type == ITEM_OIL && checkoil == FALSE)
+      if (obj->item_type == ITEM_OIL && checkoil == false)
         {
 	  separate_obj( obj );
           obj_from_char( obj );
           extract_obj( obj );
-          checkoil = TRUE;
+          checkoil = true;
         }
       if (obj->item_type == ITEM_LENS && scope < 2)
         {
@@ -208,14 +208,14 @@ static void on_finished( CHAR_DATA *ch )
           separate_obj( obj );
           obj_from_char( obj );
           extract_obj( obj );
-          checktinder = TRUE;
+          checktinder = true;
         }
-      if (obj->item_type == ITEM_CROSSBOW && checkbow == FALSE)
+      if (obj->item_type == ITEM_CROSSBOW && checkbow == false)
         {
           separate_obj( obj );
           obj_from_char( obj );
           extract_obj( obj );
-          checkbow = TRUE;
+          checkbow = true;
         }
     }
 

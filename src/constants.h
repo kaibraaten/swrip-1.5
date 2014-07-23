@@ -2,6 +2,7 @@
 #define _SWRIP_CONSTANTS_H_
 
 #include <limits.h>
+#include "types.h"
 
 /*
  * String and memory management parameters.
@@ -1624,5 +1625,7 @@ typedef enum
 #define LEAVE_PROG         BV29
 #define SCRIPT_PROG        BV30
 #define USE_PROG           BV31
+
+static const vnum_t INVALID_VNUM = 0;
 
 #endif

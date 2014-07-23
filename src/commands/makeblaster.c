@@ -30,12 +30,12 @@ void on_start( CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   int the_chance = 0;
-  bool checktool = FALSE;
-  bool checkdura = FALSE;
-  bool checkbatt = FALSE;
-  bool checkoven = FALSE;
-  bool checkcond = FALSE;
-  bool checkcirc = FALSE;
+  bool checktool = false;
+  bool checkdura = false;
+  bool checkbatt = false;
+  bool checkoven = false;
+  bool checkcond = false;
+  bool checkcirc = false;
   OBJ_DATA *obj = NULL;
 
   strcpy( arg , argument );
@@ -55,17 +55,17 @@ void on_start( CHAR_DATA *ch, char *argument )
   for ( obj = ch->last_carrying; obj; obj = obj->prev_content )
     {
       if (obj->item_type == ITEM_TOOLKIT)
-	checktool = TRUE;
+	checktool = true;
       if (obj->item_type == ITEM_DURAPLAST)
-	checkdura = TRUE;
+	checkdura = true;
       if (obj->item_type == ITEM_BATTERY)
-	checkbatt = TRUE;
+	checkbatt = true;
       if (obj->item_type == ITEM_OVEN)
-	checkoven = TRUE;
+	checkoven = true;
       if (obj->item_type == ITEM_CIRCUIT)
-	checkcirc = TRUE;
+	checkcirc = true;
       if (obj->item_type == ITEM_SUPERCONDUCTOR)
-	checkcond = TRUE;
+	checkcond = true;
     }
 
   if ( !checktool )
@@ -126,14 +126,14 @@ static void on_finished( CHAR_DATA *ch )
   char arg[MAX_INPUT_LENGTH];
   char buf[MAX_STRING_LENGTH];
   int level = 0, the_chance = 0;
-  bool checktool = FALSE;
-  bool checkdura = FALSE;
-  bool checkbatt = FALSE;
-  bool checkoven = FALSE;
-  bool checkcond = FALSE;
-  bool checkcirc = FALSE;
-  bool checkammo = FALSE;
-  bool checkscope = FALSE;
+  bool checktool = false;
+  bool checkdura = false;
+  bool checkbatt = false;
+  bool checkoven = false;
+  bool checkcond = false;
+  bool checkcirc = false;
+  bool checkammo = false;
+  bool checkscope = false;
   OBJ_DATA *obj = NULL;
   OBJ_INDEX_DATA *pObjIndex = NULL;
   vnum_t vnum = INVALID_VNUM;
@@ -159,30 +159,30 @@ static void on_finished( CHAR_DATA *ch )
   for ( obj = ch->last_carrying; obj; obj = obj->prev_content )
     {
       if (obj->item_type == ITEM_TOOLKIT)
-        checktool = TRUE;
+        checktool = true;
       if (obj->item_type == ITEM_OVEN)
-        checkoven = TRUE;
-      if (obj->item_type == ITEM_DURAPLAST && checkdura == FALSE)
+        checkoven = true;
+      if (obj->item_type == ITEM_DURAPLAST && checkdura == false)
         {
-	  checkdura = TRUE;
+	  checkdura = true;
           separate_obj( obj );
           obj_from_char( obj );
           extract_obj( obj );
         }
-      if (obj->item_type == ITEM_AMMO && checkammo == FALSE)
+      if (obj->item_type == ITEM_AMMO && checkammo == false)
         {
           ammo = obj->value[0];
-          checkammo = TRUE;
+          checkammo = true;
           separate_obj( obj );
           obj_from_char( obj );
           extract_obj( obj );
         }
-      if (obj->item_type == ITEM_BATTERY && checkbatt == FALSE)
+      if (obj->item_type == ITEM_BATTERY && checkbatt == false)
         {
           separate_obj( obj );
           obj_from_char( obj );
           extract_obj( obj );
-          checkbatt = TRUE;
+          checkbatt = true;
         }
       if (obj->item_type == ITEM_LENS && scope == 0)
         {
@@ -197,21 +197,21 @@ static void on_finished( CHAR_DATA *ch )
           separate_obj( obj );
           obj_from_char( obj );
           extract_obj( obj );
-          checkcond = TRUE;
+          checkcond = true;
         }
-      if (obj->item_type == ITEM_CIRCUIT && checkcirc == FALSE)
+      if (obj->item_type == ITEM_CIRCUIT && checkcirc == false)
         {
           separate_obj( obj );
           obj_from_char( obj );
           extract_obj( obj );
-          checkcirc = TRUE;
+          checkcirc = true;
         }
-      if (obj->item_type == ITEM_SCOPE && checkscope == FALSE)
+      if (obj->item_type == ITEM_SCOPE && checkscope == false)
         {
           separate_obj( obj );
 	  obj_from_char( obj );
           extract_obj( obj );
-          checkscope = TRUE;
+          checkscope = true;
         }
     }
 
@@ -265,7 +265,7 @@ static void on_finished( CHAR_DATA *ch )
   paf2->next               = NULL;
   LINK( paf2, obj->first_affect, obj->last_affect, next, prev );
   ++top_affect;
-  if ( checkscope == TRUE )
+  if ( checkscope == true )
     {
       CREATE( paf2, AFFECT_DATA, 1 );
       paf2->type               = -1;

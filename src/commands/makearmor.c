@@ -31,7 +31,7 @@ static void on_start( CHAR_DATA *ch, char *argument )
   char arg[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
   int the_chance = 0;
-  bool checksew = FALSE, checkfab = FALSE;
+  bool checksew = false, checkfab = false;
   OBJ_DATA *obj = NULL;
 
   argument = one_argument( argument, arg );
@@ -78,10 +78,10 @@ static void on_start( CHAR_DATA *ch, char *argument )
   for ( obj = ch->last_carrying; obj; obj = obj->prev_content )
     {
       if (obj->item_type == ITEM_FABRIC)
-	checkfab = TRUE;
+	checkfab = true;
 
       if (obj->item_type == ITEM_THREAD)
-	checksew = TRUE;
+	checksew = true;
     }
 
   if ( !checkfab )
@@ -121,7 +121,7 @@ static void on_finished( CHAR_DATA *ch )
   char arg2[MAX_INPUT_LENGTH];
   char buf[MAX_STRING_LENGTH];
   int level = 0, the_chance = 0;
-  bool checksew = FALSE, checkfab = FALSE;
+  bool checksew = false, checkfab = false;
   OBJ_DATA *obj = NULL;
   OBJ_DATA *material = NULL;
   int value = 0;
@@ -147,10 +147,10 @@ static void on_finished( CHAR_DATA *ch )
   for ( obj = ch->last_carrying; obj; obj = obj->prev_content )
     {
       if (obj->item_type == ITEM_THREAD)
-        checksew = TRUE;
-      if (obj->item_type == ITEM_FABRIC && checkfab == FALSE)
+        checksew = true;
+      if (obj->item_type == ITEM_FABRIC && checkfab == false)
         {
-          checkfab = TRUE;
+          checkfab = true;
           separate_obj( obj );
           obj_from_char( obj );
           material = obj;

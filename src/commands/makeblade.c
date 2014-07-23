@@ -30,10 +30,10 @@ static void on_start( CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   int the_chance = 0;
-  bool checktool = FALSE;
-  bool checkdura = FALSE;
-  bool checkbatt = FALSE;
-  bool checkoven = FALSE;
+  bool checktool = false;
+  bool checkdura = false;
+  bool checkbatt = false;
+  bool checkoven = false;
   OBJ_DATA *obj = NULL;
 
   strcpy( arg , argument );
@@ -53,16 +53,16 @@ static void on_start( CHAR_DATA *ch, char *argument )
   for ( obj = ch->last_carrying; obj; obj = obj->prev_content )
     {
       if (obj->item_type == ITEM_TOOLKIT)
-	checktool = TRUE;
+	checktool = true;
 
       if (obj->item_type == ITEM_DURASTEEL )
-	checkdura = TRUE;
+	checkdura = true;
 
       if (obj->item_type == ITEM_BATTERY)
-	checkbatt = TRUE;
+	checkbatt = true;
 
       if (obj->item_type == ITEM_OVEN)
-	checkoven = TRUE;
+	checkoven = true;
     }
 
   if ( !checktool )
@@ -113,11 +113,11 @@ static void on_finished( CHAR_DATA *ch )
   char buf[MAX_STRING_LENGTH];
   int level = 0, the_chance = 0;
   int charge = 0;
-  bool checktool = FALSE;
-  bool checkdura = FALSE;
-  bool checkbatt = FALSE;
-  bool checkoven = FALSE;
-  bool checkstaff = FALSE;
+  bool checktool = false;
+  bool checkdura = false;
+  bool checkbatt = false;
+  bool checkoven = false;
+  bool checkstaff = false;
   OBJ_DATA *obj = NULL;
   OBJ_INDEX_DATA *pObjIndex = NULL;
   vnum_t vnum = INVALID_VNUM;
@@ -142,31 +142,31 @@ static void on_finished( CHAR_DATA *ch )
   for ( obj = ch->last_carrying; obj; obj = obj->prev_content )
     {
       if (obj->item_type == ITEM_TOOLKIT)
-        checktool = TRUE;
+        checktool = true;
       if (obj->item_type == ITEM_OVEN)
-	checkoven = TRUE;
-      if (obj->item_type == ITEM_DURASTEEL  && checkdura == FALSE)
+	checkoven = true;
+      if (obj->item_type == ITEM_DURASTEEL  && checkdura == false)
         {
-          checkdura = TRUE;
+          checkdura = true;
           separate_obj( obj );
           obj_from_char( obj );
           extract_obj( obj );
         }
-      if (obj->item_type == ITEM_STAFF && checkstaff == FALSE)
+      if (obj->item_type == ITEM_STAFF && checkstaff == false)
         {
-          checkstaff = TRUE;
+          checkstaff = true;
           separate_obj( obj );
           obj_from_char( obj );
           extract_obj( obj );
         }
 
-      if (obj->item_type == ITEM_BATTERY && checkbatt == FALSE )
+      if (obj->item_type == ITEM_BATTERY && checkbatt == false )
         {
           charge = UMAX( 5, obj->value[0] );
           separate_obj( obj );
           obj_from_char( obj );
           extract_obj( obj );
-          checkbatt = TRUE;
+          checkbatt = true;
         }
     }
 
