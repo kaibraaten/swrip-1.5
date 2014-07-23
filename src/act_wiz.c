@@ -149,7 +149,7 @@ void save_banlist( void )
   BAN_DATA *pban;
   FILE *fp;
 
-  if ( !(fp = fopen( SYSTEM_DIR BAN_LIST, "w" )) )
+  if ( !(fp = fopen( BAN_LIST, "w" )) )
     {
       bug( "Save_banlist: Cannot open " BAN_LIST, 0 );
       perror(BAN_LIST);

@@ -170,7 +170,7 @@ void do_copyover( CHAR_DATA * ch, char *argument )
 #ifdef _WIN32
   sprintf(filename, "\"%s\"", sysdata.exe_filename);
 #else
-  sprintf(filename, "%s", "../bin/swrip");
+  sprintf(filename, "%s", "./swrip");
 #define _execl execl
 #endif
   _execl( filename, filename,

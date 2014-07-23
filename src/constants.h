@@ -1538,23 +1538,24 @@ typedef enum
  * All files are read in completely at bootup.
  * Most output files (bug, idea, typo, shutdown) are append-only.
  */
-#define PLAYER_DIR      "../player/"    /* Player files                 */
-#define BACKUP_DIR      "../backup/"    /* Backup Player files          */
-#define GOD_DIR         "../gods/"      /* God Info Dir                 */
-#define BOARD_DIR       "../boards/"    /* Board data dir               */
-#define CLAN_DIR        "../clans/"     /* Clan data dir                */
-#define SHIP_DIR        "../ships/"
-#define SPACE_DIR       "../space/"
-#define PLANET_DIR      "../planets/"
-#define GUARD_DIR       "../planets/"
-#define BUILD_DIR       "../building/"  /* Online building save dir     */
-#define SYSTEM_DIR      "../system/"    /* Main system files            */
-#define VENDOR_DIR      "../vendor/"
-#define STOREROOM_DIR   "../storeroom/"
-#define PROG_DIR        "mudprogs/"     /* MUDProg files                */
-#define CORPSE_DIR      "../corpses/"   /* Corpses                      */
+#define AREA_DIR        "./area/"
+#define PLAYER_DIR      "./player/"    /* Player files                 */
+#define BACKUP_DIR      "./backup/"    /* Backup Player files          */
+#define GOD_DIR         "./gods/"      /* God Info Dir                 */
+#define BOARD_DIR       "./boards/"    /* Board data dir               */
+#define CLAN_DIR        "./clans/"     /* Clan data dir                */
+#define SHIP_DIR        "./ships/"
+#define SPACE_DIR       "./space/"
+#define PLANET_DIR      "./planets/"
+#define GUARD_DIR       "./planets/"
+#define BUILD_DIR       "./building/"  /* Online building save dir     */
+#define SYSTEM_DIR      "./system/"    /* Main system files            */
+#define VENDOR_DIR      "./vendor/"
+#define STOREROOM_DIR   "./storeroom/"
+#define PROG_DIR        "./doc/mudprogs/"     /* MUDProg files                */
+#define CORPSE_DIR      "./corpses/"   /* Corpses                      */
 #define AREA_LIST       "area.lst"      /* List of areas                */
-#define BAN_LIST        "ban.lst"       /* List of bans                 */
+#define BAN_LIST        SYSTEM_DIR "ban.lst"       /* List of bans                 */
 #define CLAN_LIST       "clan.lst"      /* List of clans                */
 #define SHIP_LIST       "ship.lst"
 #define PLANET_LIST      "planet.lst"

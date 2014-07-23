@@ -4,15 +4,15 @@ PersonalName         Byss Shipyard~
 Filename     byss.shipyard~
 Description  ~
 Owner        The Empire~
-Pilot        ~
+Pilot        Kai~
 Copilot      ~
 Class        3
 Tractorbeam  0
 Shipyard     32050
 Hanger       32050
-Vx           -2267
-Vy           -4774
-Vz           -2623
+Vx           263
+Vy           -4747
+Vz           -2755
 Turret1      32071
 Turret2      32071
 Turret3      32071

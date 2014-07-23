@@ -370,14 +370,18 @@ void fold_area( AREA_DATA *tarea, char *filename, bool install )
   int                    vnum;
   int                    val0, val1, val2, val3, val4, val5;
   bool           complexmob;
+  char backup[MAX_STRING_LENGTH];
 
   sprintf( buf, "Saving %s...", tarea->filename );
   log_string_plus( buf, LOG_NORMAL, LEVEL_GREATER );
 
-  sprintf( buf, "%s.bak", filename );
-  rename( filename, buf );
+  /*sprintf( buf, "%s.bak", filename );
+    rename( filename, buf );*/
+  sprintf( buf, "%s%s", AREA_DIR, filename );
+  sprintf( backup, "%s%s.bak", AREA_DIR, filename );
+  rename( buf, backup );
 
-  if ( ( fpout = fopen( filename, "w" ) ) == NULL )
+  if ( ( fpout = fopen( buf, "w" ) ) == NULL )
     {
       bug( "fold_area: fopen", 0 );
       perror( filename );
@@ -757,7 +761,7 @@ void write_area_list( void )
   AREA_DATA *tarea;
   FILE *fpout;
 
-  fpout = fopen( AREA_LIST, "w" );
+  fpout = fopen( AREA_DIR AREA_LIST, "w" );
   if ( !fpout )
     {
       bug( "FATAL: cannot open area.lst for writing!\r\n", 0 );

@@ -635,7 +635,7 @@ void boot_db( bool fCopyOver )
 
     log_string("Reading in area files...");
 
-    if ( ( fpList = fopen( AREA_LIST, "r" ) ) == NULL )
+    if ( ( fpList = fopen( AREA_DIR AREA_LIST, "r" ) ) == NULL )
       {
         shutdown_mud( "Unable to open area list" );
         exit( 1 );
@@ -649,7 +649,6 @@ void boot_db( bool fCopyOver )
           break;
 
         load_area_file( last_area, strArea );
-
       }
 
     fclose( fpList );
@@ -4114,16 +4113,20 @@ void load_area_file( AREA_DATA *tarea, char *filename )
         is printed when an error occurs during loading the area..
         (bug uses fpArea)
         --TRI  */
+  char buf[MAX_STRING_LENGTH];
 
   if ( fBootDb )
     tarea = last_area;
+
   if ( !fBootDb && !tarea )
     {
       bug( "Load_area: null area!" );
       return;
     }
 
-  if ( ( fpArea = fopen( filename, "r" ) ) == NULL )
+  sprintf( buf, "%s%s", AREA_DIR, filename );
+
+  if ( ( fpArea = fopen( buf, "r" ) ) == NULL )
     {
       bug( "load_area: error loading file (can't open)" );
       bug( filename );
@@ -4672,7 +4675,7 @@ void load_banlist( void )
   int number;
   char letter;
 
-  if ( !(fp = fopen( SYSTEM_DIR BAN_LIST, "r" )) )
+  if ( !(fp = fopen( BAN_LIST, "r" )) )
     return;
 
   for ( ; ; )

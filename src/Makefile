@@ -674,7 +674,7 @@ libs:
 $(BINARY):	$(OBJ)
 		@echo "Linking" $(BINARY)
 		@$(CC) -o $@ $^ $(LDFLAGS)
-		@mv $(BINARY) ../bin
+		@mv $(BINARY) ..
 		@echo "Done."
 
 $(ODIR)/%.o:	%.c
@@ -688,4 +688,4 @@ $(ODIR)/%.o:	%.c
 -include $(ODIR)/$(SPECDIR)/*.d
 
 clean:
-		-rm -f ../bin/$(BINARY) *~ $(ODIR)/*.o $(ODIR)/*.d $(ODIR)/$(CMDDIR)/*.o $(ODIR)/$(CMDDIR)/*.d $(ODIR)/$(MPDIR)/*.o $(ODIR)/$(MPDIR)/*.d $(ODIR)/$(SPELLDIR)/*.o $(ODIR)/$(SPELLDIR)/*.d ../area/core.* $(ODIR)/$(SPECDIR)/*.o $(ODIR)/$(SPECDIR)/*.d
+		-rm -f ../$(BINARY) *~ $(ODIR)/*.o $(ODIR)/*.d $(ODIR)/$(CMDDIR)/*.o $(ODIR)/$(CMDDIR)/*.d $(ODIR)/$(MPDIR)/*.o $(ODIR)/$(MPDIR)/*.d $(ODIR)/$(SPELLDIR)/*.o $(ODIR)/$(SPELLDIR)/*.d ../area/core.* $(ODIR)/$(SPECDIR)/*.o $(ODIR)/$(SPECDIR)/*.d
