@@ -13,7 +13,7 @@ $
 #FLAGS
 2
 
-#ECONOMY 0 30567103
+#ECONOMY 0 30557103
 
 #MOBILES
 #0
@@ -253,10 +253,6 @@ D4
 ~
 ~
 1 -1 110
-D7
-~
-~
-0 -1 1
 D8
 ~
 ~
@@ -267,7 +263,7 @@ glimmer teleport teleporter silphion~
 657408 -1 108
 S
 #107
-&W&w&rsrorriM fO dnaL s'&RnaipsaC&W&w~
+Empty Office~
 This is a very cozy home, with a nice snug window looking out onto
 Fornax. Above the wall is a nice prized trophy, the stuffed head of
 Czethros.  Below that is a fireplace, which has a fire lit. There are
@@ -275,11 +271,7 @@ several items here, including a chest full of personal belonging and a
 very large bed, that is inviting.  If you had not known this was real you
 would believe it a hologram generated room, perhaps it is.    
 ~
-0 42991624 1
-D0
-~
-~
-0 -1 1
+0 44040200 1
 D3
 ~
 door~
@@ -295,7 +287,7 @@ composing one entire wall, flickers with information of the universe you
 just left.  Opposite of it, with an input/output deck raised beside it, a
 simple cot was provided for the watcher. Welcome to the universe.
 ~
-0 76546056 1
+0 75497480 1
 D5
 ~
 ~
@@ -350,7 +342,7 @@ D5
 0 -1 106
 S
 #111
-An Imperial God's room-to-be~
+Empty Office~
 You stop short, just inside the room, and look around in astonishment.
 The walls and domed ceiling are covered with flat paintings and
 planics, a few of them vaguely human-looking but most of distinct
@@ -362,16 +354,16 @@ can see, also seems to be devoted to pictures of artwork. And in the
 center of the double circle is a duplicate of an Admirals chair that
 would normaly be found on the ships bridge
 ~
-0 9437192 1
+0 10485768 1
 D1
 ~
 ~
 0 -1 106
 S
 #112
-Sonja's Chamber~
+Empty Office~
 ~
-0 76546048 1
+0 77594624 1
 D7
 ~
 ~
@@ -460,9 +452,9 @@ D5
 0 -1 120
 S
 #119
-Entrance to Darrik's Quarters~
+Empty Office~
 ~
-0 512 1
+0 2097160 1
 D0
 ~
 ~

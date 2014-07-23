@@ -13,7 +13,7 @@ $
 #FLAGS
 2
 
-#ECONOMY 0 42175825
+#ECONOMY 0 42155750
 
 #MOBILES
 #1
@@ -1373,24 +1373,9 @@ Some god dropped a newly created final object here.~
 
 #ROOMS
 #1
-&CCorrans Insane Apartment&g~
-This is Corran Horns Apartment. As you look around you see a few
-items scattered in a corner. The bed in the corner is made with 
-military preciceness, all the corners straight and tucked in as 
-tight as can be. There is a small desk with a DataTerminal in the 
-corner displaying the Rogue Squadron crest, and a Holo-projector.
-In the closet you see Civilian clothing and a few pressed
-uniforms neatly hung in a row.
+First Room~
 ~
-0 76546060 1
-D1
-~
-~
-0 -1 100
-D4
-~
-~
-0 -1 107
+0 8388620 1
 > speech_prog test~
 say triggered by (name):	$n
 say triggered by (name&title): 	$N
