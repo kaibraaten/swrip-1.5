@@ -208,7 +208,7 @@ bool can_take_proto( const Character *ch )
 /*
  * Apply or remove an affect to a character.
  */
-void affect_modify( Character *ch, AFFECT_DATA *paf, bool fAdd )
+void affect_modify( Character *ch, Affect *paf, bool fAdd )
 {
   OBJ_DATA *wield;
   int mod;
@@ -487,9 +487,9 @@ void affect_modify( Character *ch, AFFECT_DATA *paf, bool fAdd )
 /*
  * Give an affect to a char.
  */
-void affect_to_char( Character *ch, AFFECT_DATA *paf )
+void affect_to_char( Character *ch, Affect *paf )
 {
-  AFFECT_DATA *paf_new;
+  Affect *paf_new;
 
   if ( !ch )
     {
@@ -503,7 +503,7 @@ void affect_to_char( Character *ch, AFFECT_DATA *paf )
       return;
     }
 
-  CREATE( paf_new, AFFECT_DATA, 1 );
+  CREATE( paf_new, Affect, 1 );
   LINK( paf_new, ch->first_affect, ch->last_affect, next, prev );
   paf_new->type = paf->type;
   paf_new->duration     = paf->duration;
@@ -519,7 +519,7 @@ void affect_to_char( Character *ch, AFFECT_DATA *paf )
 /*
  * Remove an affect from a char.
  */
-void affect_remove( Character *ch, AFFECT_DATA *paf )
+void affect_remove( Character *ch, Affect *paf )
 {
   if ( !ch->first_affect )
     {
@@ -539,8 +539,8 @@ void affect_remove( Character *ch, AFFECT_DATA *paf )
  */
 void affect_strip( Character *ch, int sn )
 {
-  AFFECT_DATA *paf;
-  AFFECT_DATA *paf_next;
+  Affect *paf;
+  Affect *paf_next;
 
   for ( paf = ch->first_affect; paf; paf = paf_next )
     {
@@ -557,9 +557,9 @@ void affect_strip( Character *ch, int sn )
  * Limitations put in place by Thoric, they may be high... but at least
  * they're there :)
  */
-void affect_join( Character *ch, AFFECT_DATA *paf )
+void affect_join( Character *ch, Affect *paf )
 {
-  AFFECT_DATA *paf_old;
+  Affect *paf_old;
 
   for ( paf_old = ch->first_affect; paf_old; paf_old = paf_old->next )
     if ( paf_old->type == paf->type )
@@ -1012,8 +1012,8 @@ void extract_obj( OBJ_DATA *obj )
     extract_obj( obj_content );
 
   {
-    AFFECT_DATA *paf;
-    AFFECT_DATA *paf_next;
+    Affect *paf;
+    Affect *paf_next;
 
     for ( paf = obj->first_affect; paf; paf = paf_next )
       {
@@ -2084,8 +2084,8 @@ void clean_room( ROOM_INDEX_DATA *room )
  */
 void clean_obj( OBJ_INDEX_DATA *obj )
 {
-  AFFECT_DATA *paf;
-  AFFECT_DATA *paf_next;
+  Affect *paf;
+  Affect *paf_next;
   EXTRA_DESCR_DATA *ed;
   EXTRA_DESCR_DATA *ed_next;
 
@@ -2180,7 +2180,7 @@ void clean_resets( AREA_DATA *tarea )
 /*
  * Show an affect verbosely to a character                      -Thoric
  */
-void showaffect( const Character *ch, const AFFECT_DATA *paf )
+void showaffect( const Character *ch, const Affect *paf )
 {
   char buf[MAX_STRING_LENGTH];
   int x;

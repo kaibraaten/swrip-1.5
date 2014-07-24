@@ -11,7 +11,7 @@ ch_ret spell_create_mob( int sn, int level, Character *ch, void *vo )
   int vnum = skill->value;
   Character *mob;
   MOB_INDEX_DATA *mi;
-  AFFECT_DATA af;
+  Affect af;
 
   /* set maximum mob level */
   switch( SPELL_POWER(skill) )

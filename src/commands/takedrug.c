@@ -4,7 +4,7 @@
 void do_takedrug( Character *ch, char *argument )
 {
   OBJ_DATA *obj;
-  AFFECT_DATA af;
+  Affect af;
   int drug;
   int sn;
 

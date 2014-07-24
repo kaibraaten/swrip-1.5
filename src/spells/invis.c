@@ -17,7 +17,7 @@ ch_ret spell_invis( int sn, int level, Character *ch, void *vo )
 
   if( victim )
     {
-      AFFECT_DATA af;
+      Affect af;
 
       if ( IS_SET( victim->immune, RIS_MAGIC ) )
         {

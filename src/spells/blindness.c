@@ -4,7 +4,7 @@
 ch_ret spell_blindness( int sn, int level, Character *ch, void *vo )
 {
   Character *victim = (Character *) vo;
-  AFFECT_DATA af;
+  Affect af;
   int tmp;
   SKILLTYPE *skill = get_skilltype(sn);
 

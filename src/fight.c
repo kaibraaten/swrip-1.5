@@ -169,7 +169,7 @@ void violence_update( void )
   Character *lst_ch;
   Character *victim;
   Character *rch, *rch_next;
-  AFFECT_DATA *paf, *paf_next;
+  Affect *paf, *paf_next;
   TIMER *timer, *timer_next;
   ch_ret     retcode;
   SKILLTYPE     *skill;
@@ -579,7 +579,7 @@ int weapon_prof_bonus_check( Character *ch, OBJ_DATA *wield, int *gsn_ptr )
 int obj_hitroll( OBJ_DATA *obj )
 {
   int tohit = 0;
-  AFFECT_DATA *paf;
+  Affect *paf;
 
   for ( paf = obj->pIndexData->first_affect; paf; paf = paf->next )
     if ( paf->location == APPLY_HITROLL )
@@ -634,7 +634,7 @@ ch_ret one_hit( Character *ch, Character *victim, int dt )
   ch_ret retcode;
   int hit_chance;
   bool fail;
-  AFFECT_DATA af;
+  Affect af;
 
 
   /*
@@ -1063,7 +1063,7 @@ ch_ret one_hit( Character *ch, Character *victim, int dt )
        &&  !IS_SET(victim->immune, RIS_MAGIC)
        &&  !IS_SET(victim->in_room->room_flags, ROOM_NO_MAGIC) )
     {
-      AFFECT_DATA *aff;
+      Affect *aff;
 
       for ( aff = wield->pIndexData->first_affect; aff; aff = aff->next )
         if ( aff->location == APPLY_WEAPONSPELL
@@ -1465,7 +1465,7 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
        && !IS_SET( victim->immune, RIS_POISON )
        && !saves_poison_death( get_level( ch, COMBAT_ABILITY ), victim ) )
     {
-      AFFECT_DATA af;
+      Affect af;
 
       af.type      = gsn_poison;
       af.duration  = 20;

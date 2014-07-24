@@ -82,7 +82,7 @@ void do_eat( Character *ch, char *argument )
             ||   (foodcond < 4 && number_range( 0, foodcond + 1 ) == 0) )
         {
           /* The food was poisoned! */
-          AFFECT_DATA af;
+          Affect af;
 
           if ( obj->value[3] != 0 )
             {

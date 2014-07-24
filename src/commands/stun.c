@@ -4,7 +4,7 @@
 void do_stun( Character *ch, char *argument )
 {
   Character *victim;
-  AFFECT_DATA af;
+  Affect af;
   int stun_chance;
   bool fail;
 

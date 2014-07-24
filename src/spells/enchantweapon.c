@@ -4,7 +4,7 @@
 ch_ret spell_enchant_weapon( int sn, int level, Character *ch, void *vo )
 {
   OBJ_DATA *obj = (OBJ_DATA *) vo;
-  AFFECT_DATA *paf;
+  Affect *paf;
 
   if ( obj->item_type != ITEM_WEAPON
        ||   IS_OBJ_STAT(obj, ITEM_MAGIC)
@@ -13,7 +13,7 @@ ch_ret spell_enchant_weapon( int sn, int level, Character *ch, void *vo )
 
   /* Bug fix here. -- Alty */
   separate_obj(obj);
-  CREATE( paf, AFFECT_DATA, 1 );
+  CREATE( paf, Affect, 1 );
   paf->type             = -1;
   paf->duration = -1;
   paf->location = APPLY_HITROLL;
@@ -21,7 +21,7 @@ ch_ret spell_enchant_weapon( int sn, int level, Character *ch, void *vo )
   paf->bitvector        = 0;
   LINK( paf, obj->first_affect, obj->last_affect, next, prev );
 
-  CREATE( paf, AFFECT_DATA, 1 );
+  CREATE( paf, Affect, 1 );
   paf->type             = -1;
   paf->duration = -1;
   paf->location = APPLY_DAMROLL;

@@ -22,8 +22,8 @@ struct Character
 
   MOB_INDEX_DATA *      pIndexData;
   DESCRIPTOR_DATA *     desc;
-  AFFECT_DATA * first_affect;
-  AFFECT_DATA * last_affect;
+  Affect * first_affect;
+  Affect * last_affect;
   OBJ_DATA *            first_carrying;
   OBJ_DATA *            last_carrying;
   ROOM_INDEX_DATA *     in_room;

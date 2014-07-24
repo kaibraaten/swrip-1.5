@@ -1208,9 +1208,9 @@ void load_objects( AREA_DATA *tarea, FILE *fp )
 
           if ( letter == 'A' )
             {
-              AFFECT_DATA *paf;
+              Affect *paf;
 
-              CREATE( paf, AFFECT_DATA, 1 );
+              CREATE( paf, Affect, 1 );
               paf->type         = -1;
               paf->duration             = -1;
               paf->location             = fread_number( fp );
@@ -2481,7 +2481,7 @@ void clear_char( Character *ch )
 void free_char( Character *ch )
 {
   OBJ_DATA *obj;
-  AFFECT_DATA *paf;
+  Affect *paf;
   TIMER *timer;
   MPROG_ACT_LIST *mpact, *mpact_next;
   NOTE_DATA *comments, *comments_next;
@@ -3834,7 +3834,7 @@ OBJ_INDEX_DATA *make_object( vnum_t vnum, vnum_t cvnum, char *name )
   else
     {
       EXTRA_DESCR_DATA *ed,  *ced;
-      AFFECT_DATA          *paf, *cpaf;
+      Affect          *paf, *cpaf;
 
       pObjIndex->short_descr    = QUICKLINK( cObjIndex->short_descr );
       pObjIndex->description    = QUICKLINK( cObjIndex->description );
@@ -3860,7 +3860,7 @@ OBJ_INDEX_DATA *make_object( vnum_t vnum, vnum_t cvnum, char *name )
         }
       for ( cpaf = cObjIndex->first_affect; cpaf; cpaf = cpaf->next )
         {
-          CREATE( paf, AFFECT_DATA, 1 );
+          CREATE( paf, Affect, 1 );
           paf->type             = cpaf->type;
           paf->duration         = cpaf->duration;
           paf->location         = cpaf->location;

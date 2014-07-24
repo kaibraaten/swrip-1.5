@@ -4,7 +4,7 @@
 void do_affected ( Character *ch, char *argument )
 {
   char arg [MAX_INPUT_LENGTH];
-  AFFECT_DATA *paf;
+  Affect *paf;
   SKILLTYPE *skill;
 
   if ( is_npc(ch) )

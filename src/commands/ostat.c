@@ -5,7 +5,7 @@
 void do_ostat( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  AFFECT_DATA *paf = NULL;
+  Affect *paf = NULL;
   OBJ_DATA *obj = NULL;
   const char *pdesc = NULL;
 

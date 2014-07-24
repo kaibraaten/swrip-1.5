@@ -4,7 +4,7 @@
 ch_ret spell_poison( int sn, int level, Character *ch, void *vo )
 {
   Character *victim = (Character *) vo;
-  AFFECT_DATA af;
+  Affect af;
   int poison_chance;
   bool first = TRUE;
 

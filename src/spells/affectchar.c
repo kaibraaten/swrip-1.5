@@ -3,7 +3,7 @@
 
 ch_ret spell_affectchar( int sn, int level, Character *ch, void *vo )
 {
-  AFFECT_DATA af;
+  Affect af;
   SMAUG_AFF *saf;
   SKILLTYPE *skill = get_skilltype(sn);
   Character *victim = (Character *) vo;

@@ -3,7 +3,7 @@
 
 void do_sneak( Character *ch, char *argument )
 {
-  AFFECT_DATA af;
+  Affect af;
 
   if ( is_npc(ch) && is_affected_by( ch, AFF_CHARM ) )
     {

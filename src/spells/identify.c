@@ -8,7 +8,7 @@ ch_ret spell_identify( int sn, int level, Character *ch, void *vo )
   /* Modified by Scryn to work on mobs/players/objs */
   OBJ_DATA *obj;
   Character *victim;
-  AFFECT_DATA *paf;
+  Affect *paf;
   SKILLTYPE *sktmp;
   SKILLTYPE *skill = get_skilltype(sn);
 

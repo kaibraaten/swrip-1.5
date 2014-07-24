@@ -508,7 +508,7 @@ void do_oset( Character *ch, char *argument )
 
   if ( !str_cmp( arg2, "affect" ) )
     {
-      AFFECT_DATA *paf;
+      Affect *paf;
       short loc;
       int bitv;
 
@@ -562,7 +562,7 @@ void do_oset( Character *ch, char *argument )
           argument = one_argument( argument, arg3 );
           value = atoi( arg3 );
         }
-      CREATE( paf, AFFECT_DATA, 1 );
+      CREATE( paf, Affect, 1 );
       paf->type         = -1;
       paf->duration             = -1;
       paf->location             = loc;
@@ -581,7 +581,7 @@ void do_oset( Character *ch, char *argument )
 
   if ( !str_cmp( arg2, "rmaffect" ) )
     {
-      AFFECT_DATA *paf;
+      Affect *paf;
       short loc, count;
 
       if ( !argument || argument[0] == '\0' )

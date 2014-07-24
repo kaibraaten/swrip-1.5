@@ -4,7 +4,7 @@
 ch_ret spell_weaken( int sn, int level, Character *ch, void *vo )
 {
   Character *victim = (Character *) vo;
-  AFFECT_DATA af;
+  Affect af;
   SKILLTYPE *skill = get_skilltype(sn);
 
   if ( IS_SET( victim->immune, RIS_MAGIC ) )

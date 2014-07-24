@@ -603,10 +603,10 @@ struct board_data
 /*
  * An affect.
  */
-struct affect_data
+struct Affect
 {
-  AFFECT_DATA *next;
-  AFFECT_DATA *prev;
+  Affect *next;
+  Affect *prev;
   short        type;
   short        duration;
   short        location;
@@ -856,8 +856,8 @@ struct obj_index_data
   OBJ_INDEX_DATA   *next_sort;
   EXTRA_DESCR_DATA *first_extradesc;
   EXTRA_DESCR_DATA *last_extradesc;
-  AFFECT_DATA      *first_affect;
-  AFFECT_DATA      *last_affect;
+  Affect      *first_affect;
+  Affect      *last_affect;
   char             *name;
   char             *short_descr;
   char             *description;
@@ -899,8 +899,8 @@ struct obj_data
   Character        *carried_by;
   EXTRA_DESCR_DATA *first_extradesc;
   EXTRA_DESCR_DATA *last_extradesc;
-  AFFECT_DATA      *first_affect;
-  AFFECT_DATA      *last_affect;
+  Affect      *first_affect;
+  Affect      *last_affect;
   OBJ_INDEX_DATA   *pIndexData;
   ROOM_INDEX_DATA  *in_room;
   char             *armed_by;
@@ -2617,11 +2617,11 @@ extern "C" {
   bool can_take_proto( const Character *ch );
   void explode( OBJ_DATA *obj );
   int exp_level( short level );
-  void affect_modify( Character *ch, AFFECT_DATA *paf, bool fAdd );
-  void affect_to_char( Character *ch, AFFECT_DATA *paf );
-  void affect_remove( Character *ch, AFFECT_DATA *paf );
+  void affect_modify( Character *ch, Affect *paf, bool fAdd );
+  void affect_to_char( Character *ch, Affect *paf );
+  void affect_remove( Character *ch, Affect *paf );
   void affect_strip( Character *ch, int sn );
-  void affect_join( Character *ch, AFFECT_DATA *paf );
+  void affect_join( Character *ch, Affect *paf );
   void char_from_room( Character *ch );
   void char_to_room( Character *ch, ROOM_INDEX_DATA *pRoomIndex );
   OBJ_DATA *obj_to_char( OBJ_DATA *obj, Character *ch );
@@ -2661,7 +2661,7 @@ extern "C" {
   bool is_trapped( const OBJ_DATA *obj );
   OBJ_DATA *get_trap( const OBJ_DATA *obj );
   ch_ret spring_trap( Character *ch, OBJ_DATA *obj );
-  void showaffect( const Character *ch, const AFFECT_DATA *paf );
+  void showaffect( const Character *ch, const Affect *paf );
   void set_cur_obj( OBJ_DATA *obj );
   bool obj_extracted( const OBJ_DATA *obj );
   void queue_extracted_obj( OBJ_DATA *obj );

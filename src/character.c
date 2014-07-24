@@ -283,7 +283,7 @@ void set_level( Character *ch, short ability, int newlevel )
  */
 bool is_affected( const Character *ch, int sn )
 {
-  AFFECT_DATA *paf = NULL;
+  Affect *paf = NULL;
 
   for ( paf = ch->first_affect; paf; paf = paf->next )
     if ( paf->type == sn )
@@ -324,7 +324,7 @@ OBJ_DATA *get_eq_char( const Character *ch, int iWear )
  */
 void equip_char( Character *ch, OBJ_DATA *obj, int iWear )
 {
-  AFFECT_DATA *paf;
+  Affect *paf;
   OBJ_DATA      *otmp;
 
   if ( (otmp=get_eq_char( ch, iWear )) != NULL
@@ -380,7 +380,7 @@ void equip_char( Character *ch, OBJ_DATA *obj, int iWear )
  */
 void unequip_char( Character *ch, OBJ_DATA *obj )
 {
-  AFFECT_DATA *paf;
+  Affect *paf;
 
   if ( obj->wear_loc == WEAR_NONE )
     {
@@ -776,7 +776,7 @@ bool can_drop_obj( const Character *ch, const OBJ_DATA *obj )
  */
 void fix_char( Character *ch )
 {
-  AFFECT_DATA *aff;
+  Affect *aff;
   OBJ_DATA *carry[MAX_LEVEL*200];
   OBJ_DATA *obj;
   int x, ncarry;

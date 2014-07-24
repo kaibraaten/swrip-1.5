@@ -32,7 +32,7 @@ void do_auction (Character *ch, char *argument)
     {
       if (auction->item != NULL)
         {
-          AFFECT_DATA *paf;
+          Affect *paf;
           obj = auction->item;
 
           /* show item data here */

@@ -136,7 +136,7 @@ void do_drink( Character *ch, char *argument )
       if ( obj->value[3] )
         {
           /* The drink was poisoned! */
-          AFFECT_DATA af;
+          Affect af;
 
           act( AT_POISON, "$n sputters and gags.", ch, NULL, NULL, TO_ROOM );
           act( AT_POISON, "You sputter and gag.", ch, NULL, NULL, TO_CHAR );

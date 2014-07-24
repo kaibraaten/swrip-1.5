@@ -15,7 +15,7 @@ ch_ret spell_chill_touch( int sn, int level, Character *ch, void *vo )
       27, 28, 28, 29, 29, 30, 30, 31, 31, 32,
       32, 33, 34, 34, 35, 35, 36, 37, 37, 38
     };
-  AFFECT_DATA af;
+  Affect af;
   int dam;
 
   send_to_char("You feel the hatred grow within you!\r\n", ch);

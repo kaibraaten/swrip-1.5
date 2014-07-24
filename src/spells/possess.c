@@ -7,7 +7,7 @@ ch_ret spell_possess( int sn, int level, Character *ch, void *vo )
 {
   Character *victim;
   char buf[MAX_STRING_LENGTH];
-  AFFECT_DATA af;
+  Affect af;
   SKILLTYPE *skill = get_skilltype(sn);
 
   if (ch->desc->original)

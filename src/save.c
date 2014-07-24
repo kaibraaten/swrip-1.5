@@ -327,7 +327,7 @@ void save_clone( Character *ch )
  */
 void fwrite_char( Character *ch, FILE *fp )
 {
-  AFFECT_DATA *paf;
+  Affect *paf;
   ALIAS_DATA *pal;
   int sn, track, drug;
   SKILLTYPE *skill;
@@ -600,7 +600,7 @@ void fwrite_obj( const Character *ch, const OBJ_DATA *obj, FILE *fp, int iNest,
                  short os_type )
 {
   EXTRA_DESCR_DATA *ed;
-  AFFECT_DATA *paf;
+  Affect *paf;
   short wear, wear_loc, x;
 
   if ( iNest >= MAX_NEST )
@@ -1070,7 +1070,7 @@ void fread_char( Character *ch, FILE *fp, bool preload )
 
           if ( !str_cmp( word, "Affect" ) || !str_cmp( word, "AffectData" ) )
             {
-              AFFECT_DATA *paf;
+              Affect *paf;
 
               if ( preload )
                 {
@@ -1078,7 +1078,7 @@ void fread_char( Character *ch, FILE *fp, bool preload )
                   fread_to_eol( fp );
                   break;
                 }
-              CREATE( paf, AFFECT_DATA, 1 );
+              CREATE( paf, Affect, 1 );
               if ( !str_cmp( word, "Affect" ) )
                 {
                   paf->type     = fread_number( fp );
@@ -1768,10 +1768,10 @@ void fread_obj( Character *ch, FILE *fp, short os_type )
         case 'A':
           if ( !str_cmp( word, "Affect" ) || !str_cmp( word, "AffectData" ) )
             {
-              AFFECT_DATA *paf;
+              Affect *paf;
               int pafmod;
 
-              CREATE( paf, AFFECT_DATA, 1 );
+              CREATE( paf, Affect, 1 );
               if ( !str_cmp( word, "Affect" ) )
                 {
                   paf->type     = fread_number( fp );
@@ -2029,7 +2029,7 @@ void fread_obj( Character *ch, FILE *fp, short os_type )
       if ( !fMatch )
         {
           EXTRA_DESCR_DATA *ed;
-          AFFECT_DATA *paf;
+          Affect *paf;
 
           bug( "Fread_obj: no match.", 0 );
           bug( word, 0 );

@@ -7,7 +7,7 @@ static char *tiny_affect_loc_name(int location);
 void do_score(Character * ch, char *argument)
 {
   char            buf[MAX_STRING_LENGTH];
-  AFFECT_DATA    *paf;
+  Affect    *paf;
   int iLang, drug;
 
   if (is_npc(ch))

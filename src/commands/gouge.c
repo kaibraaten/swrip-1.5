@@ -4,7 +4,7 @@
 void do_gouge( Character *ch, char *argument )
 {
   Character *victim;
-  AFFECT_DATA af;
+  Affect af;
   short dam;
   int percent;
 

@@ -3,7 +3,7 @@
 
 void do_oldscore( Character *ch, char *argument )
 {
-  AFFECT_DATA *paf;
+  Affect *paf;
   SKILLTYPE   *skill;
 
   if ( is_affected_by(ch, AFF_POSSESS) )

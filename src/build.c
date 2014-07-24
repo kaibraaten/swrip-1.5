@@ -362,7 +362,7 @@ void fold_area( AREA_DATA *tarea, char *filename, bool install )
   MPROG_DATA            *mprog;
   EXIT_DATA             *xit;
   EXTRA_DESCR_DATA      *ed;
-  AFFECT_DATA           *paf;
+  Affect           *paf;
   SHOP_DATA             *pShop;
   REPAIR_DATA           *pRepair;
   char           buf[MAX_STRING_LENGTH];

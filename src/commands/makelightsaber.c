@@ -170,8 +170,8 @@ static void OnFinished( Character *ch )
   int gems = 0;
   int charge = 0;
   int gemtype = 0;
-  AFFECT_DATA *paf = NULL;
-  AFFECT_DATA *paf2 = NULL;
+  Affect *paf = NULL;
+  Affect *paf2 = NULL;
   long xpgain = 0;
 
   if ( !ch->dest_buf )
@@ -312,7 +312,7 @@ static void OnFinished( Character *ch )
   strcpy( buf, arg );
   strcat( buf, " ignites with a hum and a soft glow." );
   obj->action_desc = STRALLOC( buf );
-  CREATE( paf, AFFECT_DATA, 1 );
+  CREATE( paf, Affect, 1 );
   paf->type               = -1;
   paf->duration           = -1;
   paf->location           = get_affecttype( "hitroll" );
@@ -321,7 +321,7 @@ static void OnFinished( Character *ch )
   paf->next               = NULL;
   LINK( paf, obj->first_affect, obj->last_affect, next, prev );
   ++top_affect;
-  CREATE( paf2, AFFECT_DATA, 1 );
+  CREATE( paf2, Affect, 1 );
   paf2->type               = -1;
   paf2->duration           = -1;
   paf2->location           = get_affecttype( "parry" );

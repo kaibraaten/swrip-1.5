@@ -72,7 +72,7 @@ void do_bind ( Character *ch , char *argument )
 
 static bool aff_paralysis( Character *ch, Character *victim )
 {
-  AFFECT_DATA af;
+  Affect af;
 
   if ( !is_affected_by( victim, AFF_PARALYSIS ) )
     {

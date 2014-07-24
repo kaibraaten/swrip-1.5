@@ -322,7 +322,7 @@ static bool go_read( Character *ch, int dis_num, int op_num, int sor_ind,
         OSAV0, OSAV1, OSAV2, OSAV3, OSAV4};
   OBJ_INDEX_DATA  *px;
   OBJ_DATA        *po;
-  AFFECT_DATA     *pa;
+  Affect     *pa;
   GO_STRUCT         r;                 /* input (physical record)         */
   GO_STRUCT     a[MAX_DISPLAY_LINES];  /* array of records                */
   GO_STRUCT    *p[MAX_DISPLAY_LINES];  /* array of pointers to records    */

@@ -6,8 +6,8 @@
 typedef int ch_ret;
 typedef int obj_ret;
 
-struct affect_data;
-typedef struct affect_data             AFFECT_DATA;
+struct Affect;
+typedef struct Affect             Affect;
 
 struct area_data;
 typedef struct area_data               AREA_DATA;

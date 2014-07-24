@@ -533,7 +533,7 @@ int move_gain( const Character *ch )
 void gain_addiction( Character *ch )
 {
   short drug;
-  AFFECT_DATA af;
+  Affect af;
 
   for ( drug=0 ; drug <= 9 ; drug ++ )
     {

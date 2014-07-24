@@ -10,7 +10,7 @@ ch_ret spell_animate_dead( int sn, int level, Character *ch, void *vo )
   OBJ_DATA  *obj_next;
   bool      found;
   MOB_INDEX_DATA *pMobIndex;
-  AFFECT_DATA af;
+  Affect af;
   char       buf[MAX_STRING_LENGTH];
   SKILLTYPE *skill = get_skilltype(sn);
 

@@ -6,7 +6,7 @@
 void do_mstat( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  AFFECT_DATA *paf = NULL;
+  Affect *paf = NULL;
   Character *victim = NULL;
   SKILLTYPE *skill = NULL;
   int x = 0;

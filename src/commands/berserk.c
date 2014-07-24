@@ -4,7 +4,7 @@
 void do_berserk( Character *ch, char *argument )
 {
   short percent;
-  AFFECT_DATA af;
+  Affect af;
 
   if ( !ch->fighting )
     {

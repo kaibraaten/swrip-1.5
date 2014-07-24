@@ -149,8 +149,8 @@ static void OnFinished( Character *ch )
   int power = 0;
   int scope = 0;
   int ammo = 0;
-  AFFECT_DATA *paf = NULL;
-  AFFECT_DATA *paf2 = NULL;
+  Affect *paf = NULL;
+  Affect *paf2 = NULL;
 
   if ( !ch->dest_buf )
     return;
@@ -248,7 +248,7 @@ static void OnFinished( Character *ch )
   STRFREE( obj->description );
   strcat( buf, " was carefully placed here." );
   obj->description = STRALLOC( buf );
-  CREATE( paf, AFFECT_DATA, 1 );
+  CREATE( paf, Affect, 1 );
   paf->type               = -1;
   paf->duration           = -1;
   paf->location           = get_affecttype( "hitroll" );
@@ -257,7 +257,7 @@ static void OnFinished( Character *ch )
   paf->next               = NULL;
   LINK( paf, obj->first_affect, obj->last_affect, next, prev );
   ++top_affect;
-  CREATE( paf2, AFFECT_DATA, 1 );
+  CREATE( paf2, Affect, 1 );
   paf2->type               = -1;
   paf2->duration           = -1;
   paf2->location           = get_affecttype( "damroll" );

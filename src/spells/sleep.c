@@ -5,7 +5,7 @@ extern char *spell_target_name;
 
 ch_ret spell_sleep( int sn, int level, Character *ch, void *vo )
 {
-  AFFECT_DATA af;
+  Affect af;
   int retcode;
   int sleep_chance;
   int tmp;

@@ -188,8 +188,8 @@ void close_area( AREA_DATA *pArea )
   MPROG_ACT_LIST *mpact_next;
   MPROG_DATA *mprog;
   MPROG_DATA *mprog_next;
-  AFFECT_DATA *paf;
-  AFFECT_DATA *paf_next;
+  Affect *paf;
+  Affect *paf_next;
 
   for ( ech = first_char; ech; ech = ech_next )
     {
