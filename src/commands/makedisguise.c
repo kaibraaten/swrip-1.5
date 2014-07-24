@@ -26,7 +26,7 @@ void do_makedisguise( CHAR_DATA *ch, char *argument )
     }
 }
 
-void on_start( CHAR_DATA *ch, char *argument )
+static void on_start( CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   char arg1[MAX_INPUT_LENGTH];
