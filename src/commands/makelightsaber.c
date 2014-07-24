@@ -2,153 +2,183 @@
 #include "mud.h"
 #include "character.h"
 
+static void OnStart( CHAR_DATA *ch, char *argument );
+static void OnFinished( CHAR_DATA *ch );
+static void OnAbort( CHAR_DATA *ch );
+
 void do_makelightsaber( CHAR_DATA *ch, char *argument )
 {
-  char arg[MAX_INPUT_LENGTH];
-  char buf[MAX_STRING_LENGTH];
-  int the_chance;
-  bool checktool, checkdura, checkbatt,
-    checkoven, checkcond, checkcirc, checklens, checkgems, checkmirr;
-  OBJ_DATA *obj;
-  OBJ_INDEX_DATA *pObjIndex;
-  vnum_t vnum;
-  int level, gems, charge, gemtype;
-  AFFECT_DATA *paf;
-  AFFECT_DATA *paf2;
-
-  strcpy( arg, argument );
-
   switch( ch->substate )
     {
     default:
-      if ( arg[0] == '\0' )
-        {
-          send_to_char( "&RUsage: Makelightsaber <name>\r\n&w", ch);
-          return;
-        }
-
-      checktool = FALSE;
-      checkdura = FALSE;
-      checkbatt = FALSE;
-      checkoven = FALSE;
-      checkcond = FALSE;
-      checkcirc = FALSE;
-      checklens = FALSE;
-      checkgems = FALSE;
-      checkmirr = FALSE;
-
-      if ( !IS_SET( ch->in_room->room_flags, ROOM_SAFE ) || !IS_SET( ch->in_room->room_flags, ROOM_SILENCE ))
-        {
-          send_to_char( "&RYou need to be in a quiet peaceful place to craft a lightsaber.\r\n", ch);
-          return;
-        }
-
-      for ( obj = ch->last_carrying; obj; obj = obj->prev_content )
-        {
-          if (obj->item_type == ITEM_TOOLKIT)
-            checktool = TRUE;
-          if (obj->item_type == ITEM_LENS)
-            checklens = TRUE;
-          if (obj->item_type == ITEM_CRYSTAL)
-            checkgems = TRUE;
-          if (obj->item_type == ITEM_MIRROR)
-            checkmirr = TRUE;
-          if (obj->item_type == ITEM_DURAPLAST || obj->item_type == ITEM_DURASTEEL )
-            checkdura = TRUE;
-          if (obj->item_type == ITEM_BATTERY)
-            checkbatt = TRUE;
-          if (obj->item_type == ITEM_OVEN)
-            checkoven = TRUE;
-          if (obj->item_type == ITEM_CIRCUIT)
-            checkcirc = TRUE;
-	  if (obj->item_type == ITEM_SUPERCONDUCTOR)
-            checkcond = TRUE;
-        }
-
-      if ( !checktool )
-        {
-          send_to_char( "&RYou need toolkit to make a lightsaber.\r\n", ch);
-          return;
-        }
-
-      if ( !checkdura )
-        {
-          send_to_char( "&RYou need something to make it out of.\r\n", ch);
-          return;
-        }
-
-      if ( !checkbatt )
-        {
-          send_to_char( "&RYou need a power source for your lightsaber.\r\n", ch);
-          return;
-        }
-
-      if ( !checkoven )
-        {
-          send_to_char( "&RYou need a small furnace to heat and shape the components.\r\n", ch);
-          return;
-        }
-
-      if ( !checkcirc )
-        {
-          send_to_char( "&RYou need a small circuit board.\r\n", ch);
-          return;
-        }
-
-      if ( !checkcond )
-        {
-          send_to_char( "&RYou still need a small superconductor for your lightsaber.\r\n", ch);
-          return;
-        }
-
-      if ( !checklens )
-        {
-          send_to_char( "&RYou still need a lens to focus the beam.\r\n", ch);
-          return;
-        }
-
-      if ( !checkgems )
-        {
-          send_to_char( "&RLightsabers require 1 to 3 gems to work properly.\r\n", ch);
-          return;
-        }
-
-      if ( !checkmirr )
-        {
-          send_to_char( "&RYou need a high intesity reflective cup to create a lightsaber.\r\n", ch);
-          return;
-        }
-
-      the_chance = is_npc(ch) ? ch->top_level
-        : (int) (ch->pcdata->learned[gsn_lightsaber_crafting]);
-      if ( number_percent( ) < the_chance )
-        {
-          send_to_char( "&GYou begin the long process of crafting a lightsaber.\r\n", ch);
-          act( AT_PLAIN, "$n takes $s tools and a small oven and begins to work on something.", ch,
-               NULL, argument , TO_ROOM );
-          add_timer ( ch , TIMER_DO_FUN , 25 , do_makelightsaber , 1 );
-          ch->dest_buf = str_dup(arg);
-          return;
-        }
-      send_to_char("&RYou can't figure out how to fit the parts together.\r\n",ch);
-      learn_from_failure( ch, gsn_lightsaber_crafting );
-      return;
+      OnStart( ch, argument );
+      break;
 
     case SUB_PAUSE:
-      if ( !ch->dest_buf )
-        return;
-      strcpy(arg, (const char*)ch->dest_buf);
-      DISPOSE( ch->dest_buf);
+      ch->substate = SUB_NONE;
+      OnFinished( ch );
       break;
 
     case SUB_TIMER_DO_ABORT:
-      DISPOSE( ch->dest_buf );
       ch->substate = SUB_NONE;
-      send_to_char("&RYou are interupted and fail to finish your work.\r\n", ch);
+      OnAbort( ch );
+      break;
+    }
+}
+
+static void OnStart( CHAR_DATA *ch, char *argument )
+{
+  char arg[MAX_INPUT_LENGTH];
+  int the_chance = 0;
+  bool checktool = false;
+  bool checkdura = false;
+  bool checkbatt = false;
+  bool checkoven = false;
+  bool checkcond = false;
+  bool checkcirc = false;
+  bool checklens = false;
+  bool checkgems = false;
+  bool checkmirr = false;
+  OBJ_DATA *obj = NULL;
+
+  strcpy( arg, argument );
+
+  if ( arg[0] == '\0' )
+    {
+      send_to_char( "&RUsage: Makelightsaber <name>\r\n&w", ch);
       return;
     }
 
-  ch->substate = SUB_NONE;
+  if ( !IS_SET( ch->in_room->room_flags, ROOM_SAFE ) || !IS_SET( ch->in_room->room_flags, ROOM_SILENCE ))
+    {
+      send_to_char( "&RYou need to be in a quiet peaceful place to craft a lightsaber.\r\n", ch);
+      return;
+    }
+
+  for ( obj = ch->last_carrying; obj; obj = obj->prev_content )
+    {
+      if (obj->item_type == ITEM_TOOLKIT)
+	checktool = true;
+      if (obj->item_type == ITEM_LENS)
+	checklens = true;
+      if (obj->item_type == ITEM_CRYSTAL)
+	checkgems = true;
+      if (obj->item_type == ITEM_MIRROR)
+	checkmirr = true;
+      if (obj->item_type == ITEM_DURAPLAST || obj->item_type == ITEM_DURASTEEL )
+	checkdura = true;
+      if (obj->item_type == ITEM_BATTERY)
+	checkbatt = true;
+      if (obj->item_type == ITEM_OVEN)
+	checkoven = true;
+      if (obj->item_type == ITEM_CIRCUIT)
+	checkcirc = true;
+      if (obj->item_type == ITEM_SUPERCONDUCTOR)
+	checkcond = true;
+    }
+
+  if ( !checktool )
+    {
+      send_to_char( "&RYou need toolkit to make a lightsaber.\r\n", ch);
+      return;
+    }
+
+  if ( !checkdura )
+    {
+      send_to_char( "&RYou need something to make it out of.\r\n", ch);
+      return;
+    }
+
+  if ( !checkbatt )
+    {
+      send_to_char( "&RYou need a power source for your lightsaber.\r\n", ch);
+      return;
+    }
+
+  if ( !checkoven )
+    {
+      send_to_char( "&RYou need a small furnace to heat and shape the components.\r\n", ch);
+      return;
+    }
+
+  if ( !checkcirc )
+    {
+      send_to_char( "&RYou need a small circuit board.\r\n", ch);
+      return;
+    }
+
+  if ( !checkcond )
+    {
+      send_to_char( "&RYou still need a small superconductor for your lightsaber.\r\n", ch);
+      return;
+    }
+
+  if ( !checklens )
+    {
+      send_to_char( "&RYou still need a lens to focus the beam.\r\n", ch);
+      return;
+    }
+
+  if ( !checkgems )
+    {
+      send_to_char( "&RLightsabers require 1 to 3 gems to work properly.\r\n", ch);
+      return;
+    }
+
+  if ( !checkmirr )
+    {
+      send_to_char( "&RYou need a high intesity reflective cup to create a lightsaber.\r\n", ch);
+      return;
+    }
+
+  the_chance = is_npc(ch) ? ch->top_level
+    : (int) (ch->pcdata->learned[gsn_lightsaber_crafting]);
+
+  if ( number_percent( ) < the_chance )
+    {
+      send_to_char( "&GYou begin the long process of crafting a lightsaber.\r\n", ch);
+      act( AT_PLAIN, "$n takes $s tools and a small oven and begins to work on something.", ch,
+	   NULL, argument , TO_ROOM );
+      add_timer ( ch , TIMER_DO_FUN , 25 , do_makelightsaber , 1 );
+      ch->dest_buf = str_dup(arg);
+    }
+  else
+    {
+      send_to_char("&RYou can't figure out how to fit the parts together.\r\n",ch);
+      learn_from_failure( ch, gsn_lightsaber_crafting );
+    }
+}
+
+static void OnFinished( CHAR_DATA *ch )
+{
+  char arg[MAX_INPUT_LENGTH];
+  char buf[MAX_STRING_LENGTH];
+  int the_chance = 0;
+  bool checktool = false;
+  bool checkdura = false;
+  bool checkbatt = false;
+  bool checkoven = false;
+  bool checkcond = false;
+  bool checkcirc = false;
+  bool checklens = false;
+  bool checkgems = false;
+  bool checkmirr = false;
+  OBJ_DATA *obj = NULL;
+  OBJ_INDEX_DATA *pObjIndex = NULL;
+  vnum_t vnum = INVALID_VNUM;
+  int level = 0;
+  int gems = 0;
+  int charge = 0;
+  int gemtype = 0;
+  AFFECT_DATA *paf = NULL;
+  AFFECT_DATA *paf2 = NULL;
+  long xpgain = 0;
+
+  if ( !ch->dest_buf )
+    return;
+
+  strcpy(arg, (const char*)ch->dest_buf);
+  DISPOSE( ch->dest_buf);
 
   level = is_npc(ch) ? ch->top_level : (int) (ch->pcdata->learned[gsn_lightsaber_crafting]);
   vnum = OBJ_VNUM_CRAFTING_LIGHTSABER;
@@ -159,75 +189,71 @@ void do_makelightsaber( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  checktool = FALSE;
-  checkdura = FALSE;
-  checkbatt = FALSE;
-  checkoven = FALSE;
-  checkcond = FALSE;
-  checkcirc = FALSE;
-  checklens = FALSE;
-  checkgems = FALSE;
-  checkmirr = FALSE;
-  gems = 0;
-  charge = 0;
-  gemtype =0;
-
   for ( obj = ch->last_carrying; obj; obj = obj->prev_content )
     {
       if (obj->item_type == ITEM_TOOLKIT)
-        checktool = TRUE;
+        checktool = true;
+
       if (obj->item_type == ITEM_OVEN)
-        checkoven = TRUE;
-      if ( (obj->item_type == ITEM_DURAPLAST || obj->item_type == ITEM_DURASTEEL) && checkdura == FALSE)
+        checkoven = true;
+
+      if ( (obj->item_type == ITEM_DURAPLAST || obj->item_type == ITEM_DURASTEEL) && checkdura == false)
         {
-          checkdura = TRUE;
+          checkdura = true;
           separate_obj( obj );
           obj_from_char( obj );
           extract_obj( obj );
         }
-      if (obj->item_type == ITEM_DURASTEEL && checkdura == FALSE)
+
+      if (obj->item_type == ITEM_DURASTEEL && checkdura == false)
         {
-          checkdura = TRUE;
+          checkdura = true;
           separate_obj( obj );
           obj_from_char( obj );
           extract_obj( obj );
         }
-      if (obj->item_type == ITEM_BATTERY && checkbatt == FALSE)
+
+      if (obj->item_type == ITEM_BATTERY && checkbatt == false)
         {
           charge = UMIN(obj->value[1], 10);
           separate_obj( obj );
 	  obj_from_char( obj );
           extract_obj( obj );
-          checkbatt = TRUE;
+          checkbatt = true;
         }
-      if (obj->item_type == ITEM_SUPERCONDUCTOR && checkcond == FALSE)
+
+      if (obj->item_type == ITEM_SUPERCONDUCTOR && checkcond == false)
         {
           separate_obj( obj );
           obj_from_char( obj );
           extract_obj( obj );
-          checkcond = TRUE;
+          checkcond = true;
         }
-      if (obj->item_type == ITEM_CIRCUIT && checkcirc == FALSE)
+
+      if (obj->item_type == ITEM_CIRCUIT && checkcirc == false)
         {
           separate_obj( obj );
           obj_from_char( obj );
           extract_obj( obj );
-          checkcirc = TRUE;
+          checkcirc = true;
         }
-      if (obj->item_type == ITEM_LENS && checklens == FALSE)
+
+      if (obj->item_type == ITEM_LENS && checklens == false)
         {
           separate_obj( obj );
           obj_from_char( obj );
           extract_obj( obj );
-          checklens = TRUE;
+          checklens = true;
         }
-      if (obj->item_type == ITEM_MIRROR && checkmirr == FALSE)
+
+      if (obj->item_type == ITEM_MIRROR && checkmirr == false)
         {
           separate_obj( obj );
           obj_from_char( obj );
           extract_obj( obj );
-          checkmirr = TRUE;
+          checkmirr = true;
         }
+
       if (obj->item_type == ITEM_CRYSTAL && gems < 3)
         {
           gems++;
@@ -236,15 +262,23 @@ void do_makelightsaber( CHAR_DATA *ch, char *argument )
           separate_obj( obj );
           obj_from_char( obj );
           extract_obj( obj );
-          checkgems = TRUE;
+          checkgems = true;
         }
     }
 
   the_chance = is_npc(ch) ? ch->top_level
     : (int) (ch->pcdata->learned[gsn_lightsaber_crafting]) ;
 
-  if ( number_percent( ) > the_chance*2  || ( !checktool ) || ( !checkdura ) || ( !checkbatt ) || ( !checkoven )
-       || ( !checkmirr ) || ( !checklens ) || ( !checkgems ) || ( !checkcond ) || ( !checkcirc) )
+  if ( number_percent() > the_chance*2
+       || !checktool
+       || !checkdura
+       || !checkbatt
+       || !checkoven
+       || !checkmirr
+       || !checklens
+       || !checkgems
+       || !checkcond
+       || !checkcirc )
 
     {
       send_to_char( "&RYou hold up your new lightsaber and press the switch hoping for the best.\r\n", ch);
@@ -308,14 +342,17 @@ void do_makelightsaber( CHAR_DATA *ch, char *argument )
 
   send_to_char( "&GYou finish your work and hold up your newly created lightsaber.&w\r\n", ch);
   act( AT_PLAIN, "$n finishes making $s new lightsaber.", ch,
-       NULL, argument , TO_ROOM );
+       NULL, NULL, TO_ROOM );
 
-  {
-    long xpgain;
+  xpgain = UMIN( obj->cost*50 , exp_level(get_level(ch, FORCE_ABILITY ) + 1) );
+  gain_exp(ch, FORCE_ABILITY, xpgain );
+  ch_printf( ch , "You gain %d force experience.", xpgain );
 
-    xpgain = UMIN( obj->cost*50 , exp_level(get_level(ch, FORCE_ABILITY ) + 1) );
-    gain_exp(ch, FORCE_ABILITY, xpgain );
-    ch_printf( ch , "You gain %d force experience.", xpgain );
-  }
   learn_from_success( ch, gsn_lightsaber_crafting );
+}
+
+static void OnAbort( CHAR_DATA *ch )
+{
+  DISPOSE( ch->dest_buf );
+  send_to_char("&RYou are interupted and fail to finish your work.\r\n", ch);
 }
