@@ -8,7 +8,7 @@
  *
  * the exit must have EX_PASSAGE set
  */
-void do_mp_close_passage( CHAR_DATA *ch, char *argument )
+void do_mp_close_passage( Character *ch, char *argument )
 {
   char arg1[ MAX_INPUT_LENGTH ];
   char arg2[ MAX_INPUT_LENGTH ];

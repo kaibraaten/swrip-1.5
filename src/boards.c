@@ -36,11 +36,11 @@
 BOARD_DATA *first_board = NULL;
 BOARD_DATA *last_board = NULL;
 
-bool is_note_to( CHAR_DATA *ch, NOTE_DATA *pnote );
-void note_attach( CHAR_DATA *ch );
-void note_remove( CHAR_DATA *ch, BOARD_DATA *board, NOTE_DATA *pnote );
+bool is_note_to( Character *ch, NOTE_DATA *pnote );
+void note_attach( Character *ch );
+void note_remove( Character *ch, BOARD_DATA *board, NOTE_DATA *pnote );
 
-bool can_remove( CHAR_DATA *ch, BOARD_DATA *board )
+bool can_remove( Character *ch, BOARD_DATA *board )
 {
   /* If your trust is high enough, you can remove it. */
   if ( get_trust( ch ) >= board->min_remove_level )
@@ -55,7 +55,7 @@ bool can_remove( CHAR_DATA *ch, BOARD_DATA *board )
   return FALSE;
 }
 
-bool can_read( CHAR_DATA *ch, BOARD_DATA *board )
+bool can_read( Character *ch, BOARD_DATA *board )
 {
   /* If your trust is high enough, you can read it. */
   if ( get_trust( ch ) >= board->min_read_level )
@@ -82,7 +82,7 @@ bool can_read( CHAR_DATA *ch, BOARD_DATA *board )
   return FALSE;
 }
 
-bool can_post( CHAR_DATA *ch, BOARD_DATA *board )
+bool can_post( Character *ch, BOARD_DATA *board )
 {
   /* If your trust is high enough, you can post. */
   if ( get_trust( ch ) >= board->min_post_level )
@@ -151,7 +151,7 @@ BOARD_DATA *get_board( OBJ_DATA *obj )
   return NULL;
 }
 
-bool is_note_to( CHAR_DATA *ch, NOTE_DATA *pnote )
+bool is_note_to( Character *ch, NOTE_DATA *pnote )
 {
   if ( !str_cmp( ch->name, pnote->sender ) )
     return TRUE;
@@ -168,7 +168,7 @@ bool is_note_to( CHAR_DATA *ch, NOTE_DATA *pnote )
   return FALSE;
 }
 
-void note_attach( CHAR_DATA *ch )
+void note_attach( Character *ch )
 {
   NOTE_DATA *pnote;
 
@@ -247,7 +247,7 @@ void free_note( NOTE_DATA *pnote )
   DISPOSE( pnote );
 }
 
-void note_remove( CHAR_DATA *ch, BOARD_DATA *board, NOTE_DATA *pnote )
+void note_remove( Character *ch, BOARD_DATA *board, NOTE_DATA *pnote )
 {
   if ( !board )
     {
@@ -272,7 +272,7 @@ void note_remove( CHAR_DATA *ch, BOARD_DATA *board, NOTE_DATA *pnote )
 }
 
 
-OBJ_DATA *find_quill( CHAR_DATA *ch )
+OBJ_DATA *find_quill( Character *ch )
 {
   OBJ_DATA *quill = FALSE;
 
@@ -284,7 +284,7 @@ OBJ_DATA *find_quill( CHAR_DATA *ch )
   return quill;
 }
 
-void operate_on_note( CHAR_DATA *ch, char *arg_passed, bool IS_MAIL )
+void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
 {
   char buf[MAX_STRING_LENGTH];
   char arg[MAX_INPUT_LENGTH];
@@ -1261,7 +1261,7 @@ void load_boards( void )
     }
 }
 
-void mail_count(CHAR_DATA *ch)
+void mail_count(Character *ch)
 {
   BOARD_DATA *board;
   NOTE_DATA *note;
@@ -1277,7 +1277,7 @@ void mail_count(CHAR_DATA *ch)
     ch_printf(ch, "You have %d mail messages waiting.\r\n", cnt);
 }
 
-BOARD_DATA *find_board( CHAR_DATA *ch )
+BOARD_DATA *find_board( Character *ch )
 {
   OBJ_DATA *obj;
   BOARD_DATA  *board;

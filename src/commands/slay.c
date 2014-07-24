@@ -1,9 +1,9 @@
 #include "character.h"
 #include "mud.h"
 
-void do_slay( CHAR_DATA *ch, char *argument )
+void do_slay( Character *ch, char *argument )
 {
-  CHAR_DATA *victim;
+  Character *victim;
   char arg[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
 

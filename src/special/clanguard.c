@@ -1,10 +1,10 @@
 #include "character.h"
 #include "mud.h"
 
-bool spec_clan_guard( CHAR_DATA *ch )
+bool spec_clan_guard( Character *ch )
 {
-  CHAR_DATA *victim;
-  CHAR_DATA *v_next;
+  Character *victim;
+  Character *v_next;
   CLAN_DATA *clan;
   bool found = FALSE;
 

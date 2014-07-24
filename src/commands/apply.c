@@ -4,7 +4,7 @@
 /*
  * Apply a salve/ointment                                       -Thoric
  */
-void do_apply( CHAR_DATA *ch, char *argument )
+void do_apply( Character *ch, char *argument )
 {
   OBJ_DATA *obj;
   ch_ret retcode;

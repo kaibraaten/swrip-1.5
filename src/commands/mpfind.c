@@ -1,11 +1,11 @@
 #include "mud.h"
 
-static void mpfind_help (CHAR_DATA *ch);
+static void mpfind_help (Character *ch);
 
 /*
  * Search mobs for mob progs containing a specified text string.
  */
-void do_mpfind( CHAR_DATA *ch, char *argument )   /* Gorog */
+void do_mpfind( Character *ch, char *argument )   /* Gorog */
 {
   MOB_INDEX_DATA  *   pMob;
   MPROG_DATA      *   pProg;
@@ -71,7 +71,7 @@ void do_mpfind( CHAR_DATA *ch, char *argument )   /* Gorog */
 /*
  * Displays the help screen for the "mpfind" command
  */
-static void mpfind_help (CHAR_DATA *ch)
+static void mpfind_help (Character *ch)
 {
   send_to_char( "Syntax:\r\n", ch);
   send_to_char( "mpfind n lo_vnum hi_vnum text \r\n"

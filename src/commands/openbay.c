@@ -2,7 +2,7 @@
 #include "ships.h"
 #include "character.h"
 
-void do_openbay( CHAR_DATA *ch, char *argument )
+void do_openbay( Character *ch, char *argument )
 {
   SHIP_DATA *ship;
   char buf[MAX_STRING_LENGTH];

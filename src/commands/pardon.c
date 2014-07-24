@@ -1,11 +1,11 @@
 #include "character.h"
 #include "mud.h"
 
-void do_pardon( CHAR_DATA *ch, char *argument )
+void do_pardon( Character *ch, char *argument )
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
-  CHAR_DATA *victim;
+  Character *victim;
 
   argument = one_argument( argument, arg1 );
   argument = one_argument( argument, arg2 );

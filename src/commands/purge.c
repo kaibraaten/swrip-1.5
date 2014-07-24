@@ -1,10 +1,10 @@
 #include "mud.h"
 #include "character.h"
 
-void do_purge( CHAR_DATA *ch, char *argument )
+void do_purge( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  CHAR_DATA *victim;
+  Character *victim;
   OBJ_DATA *obj;
 
   one_argument( argument, arg );
@@ -12,7 +12,7 @@ void do_purge( CHAR_DATA *ch, char *argument )
   if ( arg[0] == '\0' )
     {
       /* 'purge' */
-      CHAR_DATA *vnext;
+      Character *vnext;
       OBJ_DATA  *obj_next;
 
       for ( victim = ch->in_room->first_person; victim; victim = vnext )

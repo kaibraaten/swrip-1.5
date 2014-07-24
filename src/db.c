@@ -54,10 +54,10 @@ TELEPORT_DATA *first_teleport = NULL;
 TELEPORT_DATA *last_teleport = NULL;
 
 OBJ_DATA *extracted_obj_queue = NULL;
-EXTRACT_CHAR_DATA *extracted_char_queue = NULL;
+EXTRACT_Character *extracted_char_queue = NULL;
 
-CHAR_DATA *first_char = NULL;
-CHAR_DATA *last_char = NULL;
+Character *first_char = NULL;
+Character *last_char = NULL;
 char log_buf[2*MAX_INPUT_LENGTH];
 
 OBJ_DATA *first_object = NULL;
@@ -864,7 +864,7 @@ void load_flags( AREA_DATA *tarea, FILE *fp )
 /*
  * Add a character to the list of all characters                -Thoric
  */
-void add_char( CHAR_DATA *ch )
+void add_char( Character *ch )
 {
   LINK( ch, first_char, last_char, next, prev );
 }
@@ -2050,7 +2050,7 @@ void area_update( void )
 
   for ( pArea = first_area; pArea; pArea = pArea->next )
     {
-      CHAR_DATA *pch;
+      Character *pch;
       int reset_age = pArea->reset_frequency ? pArea->reset_frequency : 15;
 
       if ( (reset_age == -1 && pArea->age == -1)
@@ -2109,9 +2109,9 @@ void area_update( void )
 /*
  * Create an instance of a mobile.
  */
-CHAR_DATA *create_mobile( MOB_INDEX_DATA *pMobIndex )
+Character *create_mobile( MOB_INDEX_DATA *pMobIndex )
 {
-  CHAR_DATA *mob;
+  Character *mob;
 
   if ( !pMobIndex )
     {
@@ -2119,7 +2119,7 @@ CHAR_DATA *create_mobile( MOB_INDEX_DATA *pMobIndex )
       exit( 1 );
     }
 
-  CREATE( mob, CHAR_DATA, 1 );
+  CREATE( mob, Character, 1 );
   clear_char( mob );
   mob->pIndexData               = pMobIndex;
 
@@ -2410,7 +2410,7 @@ OBJ_DATA *create_object( OBJ_INDEX_DATA *pObjIndex, int level )
 /*
  * Clear a new character.
  */
-void clear_char( CHAR_DATA *ch )
+void clear_char( Character *ch )
 {
   ch->editor                    = NULL;
   ch->hhf.hunting                   = NULL;
@@ -2478,7 +2478,7 @@ void clear_char( CHAR_DATA *ch )
 /*
  * Free a character.
  */
-void free_char( CHAR_DATA *ch )
+void free_char( Character *ch )
 {
   OBJ_DATA *obj;
   AFFECT_DATA *paf;
@@ -2741,7 +2741,7 @@ void boot_log( const char *str, ... )
 /*
  * Dump a text file to a player, a line at a time               -Thoric
  */
-void show_file( CHAR_DATA *ch, const char *filename )
+void show_file( Character *ch, const char *filename )
 {
   FILE *fp;
   char buf[MAX_STRING_LENGTH];
@@ -2821,8 +2821,8 @@ void log_string_plus( const char *str, short log_type, short level )
 
       for ( d = first_descriptor; d; d = d->next )
 	{
-	  CHAR_DATA *och = d->original ? d->original : d->character;
-	  CHAR_DATA *vch = d->character;
+	  Character *och = d->original ? d->original : d->character;
+	  Character *vch = d->character;
 
 	  if ( !och || !vch )
 	    {
@@ -4405,7 +4405,7 @@ void sort_area( AREA_DATA *pArea, bool proto )
  * Display vnums currently assigned to areas            -Altrag & Thoric
  * Sorted, and flagged if loaded.
  */
-void show_vnums( CHAR_DATA *ch, vnum_t low, vnum_t high, bool proto, bool shownl,
+void show_vnums( Character *ch, vnum_t low, vnum_t high, bool proto, bool shownl,
                  const char *loadst, const char *notloadst )
 {
   AREA_DATA *pArea, *first_sort;
@@ -4709,7 +4709,7 @@ void load_banlist( void )
 /*
  * Append a string to a file.
  */
-void append_file( CHAR_DATA *ch, const char *file, const char *str )
+void append_file( Character *ch, const char *file, const char *str )
 {
   FILE *fp;
 

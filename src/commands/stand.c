@@ -1,7 +1,7 @@
 #include "mud.h"
 #include "character.h"
 
-void do_stand( CHAR_DATA *ch, char *argument )
+void do_stand( Character *ch, char *argument )
 {
   switch ( ch->position )
     {

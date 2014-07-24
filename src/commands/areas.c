@@ -1,6 +1,6 @@
 #include "mud.h"
 
-void do_areas( CHAR_DATA *ch, char *argument )
+void do_areas( Character *ch, char *argument )
 {
   AREA_DATA *pArea;
 

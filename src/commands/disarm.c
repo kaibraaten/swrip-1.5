@@ -1,9 +1,9 @@
 #include "mud.h"
 #include "character.h"
 
-void do_disarm( CHAR_DATA *ch, char *argument )
+void do_disarm( Character *ch, char *argument )
 {
-  CHAR_DATA *victim;
+  Character *victim;
   OBJ_DATA *obj;
   int percent;
 

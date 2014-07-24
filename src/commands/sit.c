@@ -1,7 +1,7 @@
 #include "mud.h"
 #include "character.h"
 
-void do_sit (CHAR_DATA *ch, char *argument )
+void do_sit (Character *ch, char *argument )
 {
   OBJ_DATA *obj = NULL;
 

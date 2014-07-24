@@ -2,11 +2,11 @@
 #include "mud.h"
 #include "character.h"
 
-bool spec_newbie_pilot( CHAR_DATA *ch )
+bool spec_newbie_pilot( Character *ch )
 {
   int           home = 32149;
-  CHAR_DATA   * victim;
-  CHAR_DATA   * v_next;
+  Character   * victim;
+  Character   * v_next;
   OBJ_DATA    * obj;
   char          buf[MAX_STRING_LENGTH];
   bool          diploma = FALSE;

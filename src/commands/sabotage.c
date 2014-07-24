@@ -3,7 +3,7 @@
 #include "ships.h"
 #include "character.h"
 
-void do_sabotage(CHAR_DATA *ch, char *argument )
+void do_sabotage(Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   char buf[MAX_INPUT_LENGTH];

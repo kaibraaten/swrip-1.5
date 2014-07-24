@@ -5,11 +5,11 @@
  * Set a skill's attributes or what skills a player has.
  * High god command, with support for creating skills/spells/herbs/etc
  */
-void do_sset( CHAR_DATA *ch, char *argument )
+void do_sset( Character *ch, char *argument )
 {
   char arg1 [MAX_INPUT_LENGTH];
   char arg2 [MAX_INPUT_LENGTH];
-  CHAR_DATA *victim;
+  Character *victim;
   int value;
   int sn;
   bool fAll;

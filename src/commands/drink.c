@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_drink( CHAR_DATA *ch, char *argument )
+void do_drink( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   OBJ_DATA *obj;

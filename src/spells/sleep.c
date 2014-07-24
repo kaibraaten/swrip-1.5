@@ -3,13 +3,13 @@
 
 extern char *spell_target_name;
 
-ch_ret spell_sleep( int sn, int level, CHAR_DATA *ch, void *vo )
+ch_ret spell_sleep( int sn, int level, Character *ch, void *vo )
 {
   AFFECT_DATA af;
   int retcode;
   int sleep_chance;
   int tmp;
-  CHAR_DATA *victim;
+  Character *victim;
   SKILLTYPE *skill = get_skilltype(sn);
 
   if ( ( victim = get_char_room( ch, spell_target_name ) ) == NULL )

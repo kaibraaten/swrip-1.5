@@ -1,7 +1,7 @@
 #include "mud.h"
 #include "arena.h"
 
-void do_chaos(CHAR_DATA *ch, char *argument)
+void do_chaos(Character *ch, char *argument)
 {
   char lolimit[MAX_INPUT_LENGTH];
   char hilimit[MAX_INPUT_LENGTH], start_delay[MAX_INPUT_LENGTH];

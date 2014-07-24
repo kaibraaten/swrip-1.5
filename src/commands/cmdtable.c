@@ -1,6 +1,6 @@
 #include "mud.h"
 
-void do_cmdtable( CHAR_DATA *ch, char *argument )
+void do_cmdtable( Character *ch, char *argument )
 {
   int hash, cnt;
   CMDTYPE *cmd;

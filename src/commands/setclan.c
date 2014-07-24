@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_setclan( CHAR_DATA *ch, char *argument )
+void do_setclan( Character *ch, char *argument )
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];

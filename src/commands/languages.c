@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_languages( CHAR_DATA *ch, char *argument )
+void do_languages( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   int lang;
@@ -11,7 +11,7 @@ void do_languages( CHAR_DATA *ch, char *argument )
   if ( arg[0] != '\0' && !str_prefix( arg, "learn" ) &&
        !is_immortal(ch) && !is_npc(ch) )
     {
-      CHAR_DATA *sch;
+      Character *sch;
       char arg2[MAX_INPUT_LENGTH];
       int prct;
 

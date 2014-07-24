@@ -1,7 +1,7 @@
 #include "mud.h"
 #include "character.h"
 
-void do_eat( CHAR_DATA *ch, char *argument )
+void do_eat( Character *ch, char *argument )
 {
   OBJ_DATA *obj;
   ch_ret retcode;

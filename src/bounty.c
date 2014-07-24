@@ -30,7 +30,7 @@ BOUNTY_DATA *last_bounty = NULL;
 BOUNTY_DATA *first_disintegration = NULL;
 BOUNTY_DATA *last_disintegration = NULL;
 
-void nodisintegration( CHAR_DATA *ch , CHAR_DATA *victim , long amount );
+void nodisintegration( Character *ch , Character *victim , long amount );
 
 void save_disintegrations()
 {
@@ -59,7 +59,7 @@ void save_disintegrations()
   fclose( fpout );
 }
 
-bool is_disintegration( const CHAR_DATA *victim )
+bool is_disintegration( const Character *victim )
 {
   BOUNTY_DATA *bounty = NULL;
 
@@ -124,13 +124,13 @@ void load_bounties( void )
   log_string(" Done bounties " );
 }
 
-void disintegration ( const CHAR_DATA *ch , const CHAR_DATA *victim , long amount )
+void disintegration ( const Character *ch , const Character *victim , long amount )
 {
   BOUNTY_DATA *bounty = NULL;
   bool found = FALSE;
   char buf[MAX_STRING_LENGTH];
-  CHAR_DATA *p = NULL;
-  CHAR_DATA *p_prev = NULL;
+  Character *p = NULL;
+  Character *p_prev = NULL;
 
   for ( bounty = first_disintegration; bounty; bounty = bounty->next )
     {
@@ -184,7 +184,7 @@ void remove_disintegration( BOUNTY_DATA *bounty )
   save_disintegrations();
 }
 
-void claim_disintegration( CHAR_DATA *ch, const CHAR_DATA *victim )
+void claim_disintegration( Character *ch, const Character *victim )
 {
   BOUNTY_DATA *bounty = NULL;
   long xp = 0;

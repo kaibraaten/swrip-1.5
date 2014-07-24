@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_showplanet( CHAR_DATA *ch, char *argument )
+void do_showplanet( Character *ch, char *argument )
 {
   PLANET_DATA *planet;
 

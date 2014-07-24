@@ -1,6 +1,6 @@
 #include "mud.h"
 
-void do_clans( CHAR_DATA *ch, char *argument )
+void do_clans( Character *ch, char *argument )
 {
   CLAN_DATA *clan = NULL;
   int count = 0;

@@ -6,7 +6,7 @@
  * Show help topics in a level range                            -Thoric
  * Idea suggested by Gorog
  */
-void do_hlist( CHAR_DATA *ch, char *argument )
+void do_hlist( Character *ch, char *argument )
 {
   int min = 0;
   int max = 0;

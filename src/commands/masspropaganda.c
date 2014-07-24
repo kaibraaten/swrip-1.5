@@ -1,11 +1,11 @@
 #include "character.h"
 #include "mud.h"
 
-void do_mass_propaganda ( CHAR_DATA *ch , char *argument )
+void do_mass_propaganda ( Character *ch , char *argument )
 {
   char buf  [MAX_STRING_LENGTH];
   char arg1 [MAX_INPUT_LENGTH];
-  CHAR_DATA *victim;
+  Character *victim;
   PLANET_DATA *planet;
   CLAN_DATA   *clan;
   int percent = 0;

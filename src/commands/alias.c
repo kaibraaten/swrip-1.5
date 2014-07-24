@@ -2,7 +2,7 @@
 #include "mud.h"
 #include "alias.h"
 
-void do_alias( CHAR_DATA *ch, char *argument )
+void do_alias( Character *ch, char *argument )
 {
   ALIAS_DATA *pal = NULL;
   char arg[MAX_INPUT_LENGTH];

@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_demote ( CHAR_DATA *ch , char *argument )
+void do_demote ( Character *ch , char *argument )
 {
 
   if ( is_npc( ch ) || !ch->pcdata )

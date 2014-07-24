@@ -7,28 +7,28 @@
 #include "character.h"
 
 /* Locals */
-void show_char_to_char( CHAR_DATA *list, CHAR_DATA *ch );
+void show_char_to_char( Character *list, Character *ch );
 
-static void show_char_to_char_0( CHAR_DATA *victim, CHAR_DATA *ch );
-static void show_char_to_char_1( CHAR_DATA *victim, CHAR_DATA *ch );
-static void show_ships_to_char( SHIP_DATA *ship, CHAR_DATA *ch );
-static void show_visible_affects_to_char( CHAR_DATA *victim, CHAR_DATA *ch );
-static void show_exit_to_char( CHAR_DATA *ch, EXIT_DATA *pexit, short door );
-static void show_no_arg( CHAR_DATA *ch, bool is_auto );
+static void show_char_to_char_0( Character *victim, Character *ch );
+static void show_char_to_char_1( Character *victim, Character *ch );
+static void show_ships_to_char( SHIP_DATA *ship, Character *ch );
+static void show_visible_affects_to_char( Character *victim, Character *ch );
+static void show_exit_to_char( Character *ch, EXIT_DATA *pexit, short door );
+static void show_no_arg( Character *ch, bool is_auto );
 
-static char *get_sex( CHAR_DATA *ch );
-static void look_under( CHAR_DATA *ch, char *what, bool doexaprog );
-static void look_in( CHAR_DATA *ch, char *what, bool doexaprog );
-static bool requirements_are_met( CHAR_DATA *ch );
+static char *get_sex( Character *ch );
+static void look_under( Character *ch, char *what, bool doexaprog );
+static void look_in( Character *ch, char *what, bool doexaprog );
+static bool requirements_are_met( Character *ch );
 
-void do_look( CHAR_DATA *ch, char *argument )
+void do_look( Character *ch, char *argument )
 {
   char arg  [MAX_INPUT_LENGTH];
   char arg1 [MAX_INPUT_LENGTH];
   char arg2 [MAX_INPUT_LENGTH];
   char arg3 [MAX_INPUT_LENGTH];
   EXIT_DATA *pexit;
-  CHAR_DATA *victim;
+  Character *victim;
   OBJ_DATA *obj;
   char *pdesc;
   bool doexaprog;
@@ -188,7 +188,7 @@ void do_look( CHAR_DATA *ch, char *argument )
   send_to_char( "You do not see that here.\r\n", ch );
 }
 
-static void show_char_to_char_0( CHAR_DATA *victim, CHAR_DATA *ch )
+static void show_char_to_char_0( Character *victim, Character *ch )
 {
   char buf[MAX_STRING_LENGTH];
   char buf1[MAX_STRING_LENGTH];
@@ -452,7 +452,7 @@ static void show_char_to_char_0( CHAR_DATA *victim, CHAR_DATA *ch )
   show_visible_affects_to_char( victim, ch );
 }
 
-static void show_char_to_char_1( CHAR_DATA *victim, CHAR_DATA *ch )
+static void show_char_to_char_1( Character *victim, Character *ch )
 {
   OBJ_DATA *obj;
   int iWear;
@@ -520,7 +520,7 @@ static void show_char_to_char_1( CHAR_DATA *victim, CHAR_DATA *ch )
       learn_from_failure( ch, gsn_peek );
 }
 
-static void show_ships_to_char( SHIP_DATA *ship, CHAR_DATA *ch )
+static void show_ships_to_char( SHIP_DATA *ship, Character *ch )
 {
   SHIP_DATA *rship;
   SHIP_DATA *nship=NULL;
@@ -537,9 +537,9 @@ static void show_ships_to_char( SHIP_DATA *ship, CHAR_DATA *ch )
     }
 }
 
-void show_char_to_char( CHAR_DATA *list, CHAR_DATA *ch )
+void show_char_to_char( Character *list, Character *ch )
 {
-  CHAR_DATA *rch;
+  Character *rch;
 
   for ( rch = list; rch; rch = rch->next_in_room )
     {
@@ -564,7 +564,7 @@ void show_char_to_char( CHAR_DATA *list, CHAR_DATA *ch )
     }
 }
 
-static void show_visible_affects_to_char( CHAR_DATA *victim, CHAR_DATA *ch )
+static void show_visible_affects_to_char( Character *victim, Character *ch )
 {
   char buf[MAX_STRING_LENGTH];
 
@@ -583,7 +583,7 @@ static void show_visible_affects_to_char( CHAR_DATA *victim, CHAR_DATA *ch )
     }
 }
 
-static char *get_sex( CHAR_DATA *ch )
+static char *get_sex( Character *ch )
 {
   switch( ch->sex )
     {
@@ -598,7 +598,7 @@ static char *get_sex( CHAR_DATA *ch )
     }
 }
 
-static void look_under( CHAR_DATA *ch, char *what, bool doexaprog )
+static void look_under( Character *ch, char *what, bool doexaprog )
 {
   int count = 0;
   OBJ_DATA *obj = NULL;
@@ -644,7 +644,7 @@ static void look_under( CHAR_DATA *ch, char *what, bool doexaprog )
     }
 }
 
-static bool requirements_are_met( CHAR_DATA *ch )
+static bool requirements_are_met( Character *ch )
 {
   if( !ch->desc )
     {
@@ -685,7 +685,7 @@ static bool requirements_are_met( CHAR_DATA *ch )
   return TRUE;
 }
 
-static void look_in( CHAR_DATA *ch, char *what, bool doexaprog )
+static void look_in( Character *ch, char *what, bool doexaprog )
 {
   int count = 0;
   OBJ_DATA *obj = NULL;
@@ -792,7 +792,7 @@ static void look_in( CHAR_DATA *ch, char *what, bool doexaprog )
     }
 }
 
-static void show_exit_to_char( CHAR_DATA *ch, EXIT_DATA *pexit, short door )
+static void show_exit_to_char( Character *ch, EXIT_DATA *pexit, short door )
 {
   if ( pexit->keyword )
     {
@@ -894,7 +894,7 @@ static void show_exit_to_char( CHAR_DATA *ch, EXIT_DATA *pexit, short door )
 }
 
 /* 'look' or 'look auto' */
-static void show_no_arg( CHAR_DATA *ch, bool is_auto )
+static void show_no_arg( Character *ch, bool is_auto )
 {
   set_char_color( AT_RMNAME, ch);
   send_to_char( ch->in_room->name, ch);

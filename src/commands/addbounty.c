@@ -1,11 +1,11 @@
 #include "character.h"
 #include "mud.h"
 
-void do_addbounty( CHAR_DATA *ch, char *argument )
+void do_addbounty( Character *ch, char *argument )
 {
   char arg[MAX_STRING_LENGTH];
   long amount = 0;
-  CHAR_DATA *victim = NULL;
+  Character *victim = NULL;
 
   if ( !argument || argument[0] == '\0' )
     {

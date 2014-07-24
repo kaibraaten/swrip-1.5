@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_afk( CHAR_DATA *ch, char *argument )
+void do_afk( Character *ch, char *argument )
 {
   if ( is_npc(ch) )
     return;

@@ -82,24 +82,24 @@ static EDITOR_DATA *clone_editdata( EDITOR_DATA *edd );
 static EDITOR_DATA *str_to_editdata( char *str, short max_size );
 static char *editdata_to_str( EDITOR_DATA *edd );
 
-static void start_editing_nolimit( CHAR_DATA *ch, char *old_text, short max_total );
+static void start_editing_nolimit( Character *ch, char *old_text, short max_total );
 
 /* misc functions */
 static char *finer_one_argument( char *argument, char *arg_first );
 static char *text_replace( char *src, char *word_src, char *word_dst, short *pnew_size, short *prepl_count );
 
 /* editor sub functions */
-static void editor_print_info( CHAR_DATA *ch, EDITOR_DATA *edd, char *argument );
-static void editor_help( CHAR_DATA *ch, EDITOR_DATA *edd, char *argument );
-static void editor_clear_buf( CHAR_DATA *ch, EDITOR_DATA *edd, char *argument );
-static void editor_search_and_replace( CHAR_DATA *ch, EDITOR_DATA *edd, char *argument );
-static void editor_insert_line( CHAR_DATA *ch, EDITOR_DATA *edd, char *argument );
-static void editor_delete_line( CHAR_DATA *ch, EDITOR_DATA *edd, char *argument );
-static void editor_goto_line( CHAR_DATA *ch, EDITOR_DATA *edd, char *argument );
-static void editor_list( CHAR_DATA *ch, EDITOR_DATA *edd, char *argument );
-static void editor_abort( CHAR_DATA *ch, EDITOR_DATA *edd, char *argument );
-static void editor_escaped_cmd( CHAR_DATA *ch, EDITOR_DATA *edd, char *argument );
-static void editor_save( CHAR_DATA *ch, EDITOR_DATA *edd, char *argument );
+static void editor_print_info( Character *ch, EDITOR_DATA *edd, char *argument );
+static void editor_help( Character *ch, EDITOR_DATA *edd, char *argument );
+static void editor_clear_buf( Character *ch, EDITOR_DATA *edd, char *argument );
+static void editor_search_and_replace( Character *ch, EDITOR_DATA *edd, char *argument );
+static void editor_insert_line( Character *ch, EDITOR_DATA *edd, char *argument );
+static void editor_delete_line( Character *ch, EDITOR_DATA *edd, char *argument );
+static void editor_goto_line( Character *ch, EDITOR_DATA *edd, char *argument );
+static void editor_list( Character *ch, EDITOR_DATA *edd, char *argument );
+static void editor_abort( Character *ch, EDITOR_DATA *edd, char *argument );
+static void editor_escaped_cmd( Character *ch, EDITOR_DATA *edd, char *argument );
+static void editor_save( Character *ch, EDITOR_DATA *edd, char *argument );
 
 /****************************************************************************
  * Edit_data manipulation functions
@@ -274,12 +274,12 @@ static char *editdata_to_str( EDITOR_DATA *edd )
  * Main editor functions
  */
 
-void start_editing( CHAR_DATA *ch, char *data )
+void start_editing( Character *ch, char *data )
 {
   start_editing_nolimit( ch, data, MAX_STRING_LENGTH );
 }
 
-void set_editor_desc( CHAR_DATA *ch, const char *desc_fmt, ... )
+void set_editor_desc( Character *ch, const char *desc_fmt, ... )
 {
   char buf[ MAX_STRING_LENGTH * 2 ]; /* umpf.. */
   va_list args;
@@ -297,7 +297,7 @@ void set_editor_desc( CHAR_DATA *ch, const char *desc_fmt, ... )
   ch->editor->desc = STRALLOC( buf );
 }
 
-static void start_editing_nolimit( CHAR_DATA *ch, char *old_text, short max_total )
+static void start_editing_nolimit( Character *ch, char *old_text, short max_total )
 {
   if ( !ch->desc )
     {
@@ -320,7 +320,7 @@ static void start_editing_nolimit( CHAR_DATA *ch, char *old_text, short max_tota
   send_to_char( "> ", ch );
 }
 
-char *copy_buffer( CHAR_DATA *ch )
+char *copy_buffer( Character *ch )
 {
   char *buf;
 
@@ -340,7 +340,7 @@ char *copy_buffer( CHAR_DATA *ch )
   return buf;
 }
 
-void stop_editing( CHAR_DATA *ch )
+void stop_editing( Character *ch )
 {
   set_char_color( AT_PLAIN, ch );
   discard_editdata( ch->editor );
@@ -357,7 +357,7 @@ void stop_editing( CHAR_DATA *ch )
   ch->desc->connection_state = CON_PLAYING;
 }
 
-void edit_buffer( CHAR_DATA *ch, char *argument )
+void edit_buffer( Character *ch, char *argument )
 {
   DESCRIPTOR_DATA *d;
   EDITOR_DATA *edd;
@@ -514,7 +514,7 @@ void edit_buffer( CHAR_DATA *ch, char *argument )
     }
 }
 
-static void editor_print_info( CHAR_DATA *ch, EDITOR_DATA *edd, char *argument )
+static void editor_print_info( Character *ch, EDITOR_DATA *edd, char *argument )
 {
   short i;
   EDITOR_LINE *eline;
@@ -538,7 +538,7 @@ static void editor_print_info( CHAR_DATA *ch, EDITOR_DATA *edd, char *argument )
              TOTAL_BUFFER_SIZE(edd), edd->max_size );
 }
 
-static void editor_help( CHAR_DATA *ch, EDITOR_DATA *edd, char *argument )
+static void editor_help( Character *ch, EDITOR_DATA *edd, char *argument )
 {
   short i;
   static const char *arg[] = {"", "l", "c", "d", "g", "i", "r", "a", "p", "!", "s", NULL};
@@ -600,7 +600,7 @@ static void editor_help( CHAR_DATA *ch, EDITOR_DATA *edd, char *argument )
     send_to_char( editor_help_text[i], ch );
 }
 
-static void editor_clear_buf( CHAR_DATA *ch, EDITOR_DATA *edd, char *argument )
+static void editor_clear_buf( Character *ch, EDITOR_DATA *edd, char *argument )
 {
   char *desc;
   short max_size;
@@ -613,7 +613,7 @@ static void editor_clear_buf( CHAR_DATA *ch, EDITOR_DATA *edd, char *argument )
 }
 
 
-static void editor_search_and_replace( CHAR_DATA *ch, EDITOR_DATA *edd, char *argument )
+static void editor_search_and_replace( Character *ch, EDITOR_DATA *edd, char *argument )
 {
   char word_src[ MAX_INPUT_LENGTH];
   char word_dst[ MAX_INPUT_LENGTH];
@@ -677,7 +677,7 @@ static void editor_search_and_replace( CHAR_DATA *ch, EDITOR_DATA *edd, char *ar
 
 }
 
-static void editor_insert_line( CHAR_DATA *ch, EDITOR_DATA *edd, char *argument )
+static void editor_insert_line( Character *ch, EDITOR_DATA *edd, char *argument )
 {
   short lineindex, num;
   EDITOR_LINE *eline, *newline;
@@ -719,7 +719,7 @@ static void editor_insert_line( CHAR_DATA *ch, EDITOR_DATA *edd, char *argument 
   ch_printf( ch, "Inserted line at %d.\r\n", lineindex );
 }
 
-static void editor_delete_line( CHAR_DATA *ch, EDITOR_DATA *edd, char *argument )
+static void editor_delete_line( Character *ch, EDITOR_DATA *edd, char *argument )
 {
   short lineindex, num;
   EDITOR_LINE *prev_line, *del_line;
@@ -786,7 +786,7 @@ static void editor_delete_line( CHAR_DATA *ch, EDITOR_DATA *edd, char *argument 
   ch_printf( ch, "Deleted line %d.\r\n", lineindex);
 }
 
-static void editor_goto_line( CHAR_DATA *ch, EDITOR_DATA *edd, char *argument )
+static void editor_goto_line( Character *ch, EDITOR_DATA *edd, char *argument )
 {
   short lineindex, num;
 
@@ -814,7 +814,7 @@ static void editor_goto_line( CHAR_DATA *ch, EDITOR_DATA *edd, char *argument )
   ch_printf( ch, "On line %d.\r\n", lineindex);
 }
 
-static void editor_list( CHAR_DATA *ch, EDITOR_DATA *edd, char *argument )
+static void editor_list( Character *ch, EDITOR_DATA *edd, char *argument )
 {
   EDITOR_LINE *eline;
   short line_num;
@@ -848,13 +848,13 @@ static void editor_list( CHAR_DATA *ch, EDITOR_DATA *edd, char *argument )
   send_to_pager( "------------------\r\n", ch );
 }
 
-static void editor_abort( CHAR_DATA *ch, EDITOR_DATA *edd, char *argument )
+static void editor_abort( Character *ch, EDITOR_DATA *edd, char *argument )
 {
   send_to_char( "\r\nAborting... ", ch );
   stop_editing( ch );
 }
 
-static void editor_escaped_cmd( CHAR_DATA *ch, EDITOR_DATA *edd, char *argument )
+static void editor_escaped_cmd( Character *ch, EDITOR_DATA *edd, char *argument )
 {
   if ( get_trust(ch) > LEVEL_IMMORTAL )
     {
@@ -873,7 +873,7 @@ static void editor_escaped_cmd( CHAR_DATA *ch, EDITOR_DATA *edd, char *argument 
     send_to_char( "You can't use '/!'.\r\n", ch );
 }
 
-static void editor_save( CHAR_DATA *ch, EDITOR_DATA *edd, char *argument )
+static void editor_save( Character *ch, EDITOR_DATA *edd, char *argument )
 {
   DESCRIPTOR_DATA *d;
 

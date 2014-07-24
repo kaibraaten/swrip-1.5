@@ -28,22 +28,22 @@
 #include "character.h"
 
 extern char             lastplayercmd[MAX_INPUT_LENGTH];
-extern CHAR_DATA *      gch_prev;
+extern Character *      gch_prev;
 
 /*
  * Local functions.
  */
-void    dam_message( CHAR_DATA *ch, CHAR_DATA *victim, int dam, int dt );
-void    group_gain( CHAR_DATA *ch, CHAR_DATA *victim );
-int     align_compute( CHAR_DATA *gch, CHAR_DATA *victim );
+void    dam_message( Character *ch, Character *victim, int dam, int dt );
+void    group_gain( Character *ch, Character *victim );
+int     align_compute( Character *gch, Character *victim );
 int     obj_hitroll( OBJ_DATA *obj );
-bool    get_cover( CHAR_DATA *ch );
+bool    get_cover( Character *ch );
 bool    dual_flip = FALSE;
 
 /*
  * Check to see if weapon is poisoned.
  */
-bool is_wielding_poisoned( CHAR_DATA *ch )
+bool is_wielding_poisoned( Character *ch )
 {
   OBJ_DATA *obj;
 
@@ -58,7 +58,7 @@ bool is_wielding_poisoned( CHAR_DATA *ch )
 /*
  * hunting, hating and fearing code                             -Thoric
  */
-bool is_hunting( CHAR_DATA *ch, CHAR_DATA *victim )
+bool is_hunting( Character *ch, Character *victim )
 {
   if ( !ch->hhf.hunting || ch->hhf.hunting->who != victim )
     return FALSE;
@@ -66,7 +66,7 @@ bool is_hunting( CHAR_DATA *ch, CHAR_DATA *victim )
   return TRUE;
 }
 
-bool is_hating( CHAR_DATA *ch, CHAR_DATA *victim )
+bool is_hating( Character *ch, Character *victim )
 {
   if ( !ch->hhf.hating || ch->hhf.hating->who != victim )
     return FALSE;
@@ -74,7 +74,7 @@ bool is_hating( CHAR_DATA *ch, CHAR_DATA *victim )
   return TRUE;
 }
 
-bool is_fearing( CHAR_DATA *ch, CHAR_DATA *victim )
+bool is_fearing( Character *ch, Character *victim )
 {
   if ( !ch->hhf.fearing || ch->hhf.fearing->who != victim )
     return FALSE;
@@ -82,7 +82,7 @@ bool is_fearing( CHAR_DATA *ch, CHAR_DATA *victim )
   return TRUE;
 }
 
-void stop_hunting( CHAR_DATA *ch )
+void stop_hunting( Character *ch )
 {
   if ( ch->hhf.hunting )
     {
@@ -93,7 +93,7 @@ void stop_hunting( CHAR_DATA *ch )
   return;
 }
 
-void stop_hating( CHAR_DATA *ch )
+void stop_hating( Character *ch )
 {
   if ( ch->hhf.hating )
     {
@@ -104,7 +104,7 @@ void stop_hating( CHAR_DATA *ch )
   return;
 }
 
-void stop_fearing( CHAR_DATA *ch )
+void stop_fearing( Character *ch )
 {
   if ( ch->hhf.fearing )
     {
@@ -115,7 +115,7 @@ void stop_fearing( CHAR_DATA *ch )
   return;
 }
 
-void start_hunting( CHAR_DATA *ch, CHAR_DATA *victim )
+void start_hunting( Character *ch, Character *victim )
 {
   if ( ch->hhf.hunting )
     stop_hunting( ch );
@@ -126,7 +126,7 @@ void start_hunting( CHAR_DATA *ch, CHAR_DATA *victim )
   return;
 }
 
-void start_hating( CHAR_DATA *ch, CHAR_DATA *victim )
+void start_hating( Character *ch, Character *victim )
 {
   if ( ch->hhf.hating )
     stop_hating( ch );
@@ -137,7 +137,7 @@ void start_hating( CHAR_DATA *ch, CHAR_DATA *victim )
   return;
 }
 
-void start_fearing( CHAR_DATA *ch, CHAR_DATA *victim )
+void start_fearing( Character *ch, Character *victim )
 {
   if ( ch->hhf.fearing )
     stop_fearing( ch );
@@ -149,7 +149,7 @@ void start_fearing( CHAR_DATA *ch, CHAR_DATA *victim )
 }
 
 
-int max_fight( CHAR_DATA *ch )
+int max_fight( Character *ch )
 {
   return 8;
 }
@@ -165,10 +165,10 @@ int max_fight( CHAR_DATA *ch )
 void violence_update( void )
 {
   char buf[MAX_STRING_LENGTH];
-  CHAR_DATA *ch;
-  CHAR_DATA *lst_ch;
-  CHAR_DATA *victim;
-  CHAR_DATA *rch, *rch_next;
+  Character *ch;
+  Character *lst_ch;
+  Character *victim;
+  Character *rch, *rch_next;
   AFFECT_DATA *paf, *paf_next;
   TIMER *timer, *timer_next;
   ch_ret     retcode;
@@ -374,8 +374,8 @@ void violence_update( void )
                   if ( rch->pIndexData == ch->pIndexData
                        ||   number_bits( 3 ) == 0 )
                     {
-                      CHAR_DATA *vch;
-                      CHAR_DATA *target;
+                      Character *vch;
+                      Character *target;
                       int number;
 
                       target = NULL;
@@ -406,7 +406,7 @@ void violence_update( void )
 /*
  * Do one group of attacks.
  */
-ch_ret multi_hit( CHAR_DATA *ch, CHAR_DATA *victim, int dt )
+ch_ret multi_hit( Character *ch, Character *victim, int dt )
 {
   int     hit_chance;
   int       dual_bonus;
@@ -543,7 +543,7 @@ ch_ret multi_hit( CHAR_DATA *ch, CHAR_DATA *victim, int dt )
 /*
  * Weapon types, haus
  */
-int weapon_prof_bonus_check( CHAR_DATA *ch, OBJ_DATA *wield, int *gsn_ptr )
+int weapon_prof_bonus_check( Character *ch, OBJ_DATA *wield, int *gsn_ptr )
 {
   int bonus;
 
@@ -593,7 +593,7 @@ int obj_hitroll( OBJ_DATA *obj )
 /*
  * Offensive shield level modifier
  */
-short off_shld_lvl( CHAR_DATA *ch, CHAR_DATA *victim )
+short off_shld_lvl( Character *ch, Character *victim )
 {
   short lvl;
 
@@ -618,7 +618,7 @@ short off_shld_lvl( CHAR_DATA *ch, CHAR_DATA *victim )
 /*
  * Hit one guy once.
  */
-ch_ret one_hit( CHAR_DATA *ch, CHAR_DATA *victim, int dt )
+ch_ret one_hit( Character *ch, Character *victim, int dt )
 {
   OBJ_DATA *wield;
   int victim_ac;
@@ -1119,7 +1119,7 @@ ch_ret one_hit( CHAR_DATA *ch, CHAR_DATA *victim, int dt )
  * Calculate damage based on resistances, immunities and suceptibilities
  *                                      -Thoric
  */
-short ris_damage( CHAR_DATA *ch, short dam, int ris )
+short ris_damage( Character *ch, short dam, int ris )
 {
   short modifier;
 
@@ -1141,7 +1141,7 @@ short ris_damage( CHAR_DATA *ch, short dam, int ris )
 /*
  * Inflict damage from a hit.
  */
-ch_ret damage( CHAR_DATA *ch, CHAR_DATA *victim, int dam, int dt )
+ch_ret damage( Character *ch, Character *victim, int dam, int dt )
 {
   char buf1[MAX_STRING_LENGTH];
   short dameq;
@@ -1749,7 +1749,7 @@ ch_ret damage( CHAR_DATA *ch, CHAR_DATA *victim, int dam, int dt )
   return rNONE;
 }
 
-bool is_safe( CHAR_DATA *ch, CHAR_DATA *victim )
+bool is_safe( Character *ch, Character *victim )
 {
   if ( !victim )
     return FALSE;
@@ -1780,7 +1780,7 @@ bool is_safe( CHAR_DATA *ch, CHAR_DATA *victim )
    cuts out imms and safe rooms as well
    for info only */
 
-bool is_safe_nm( CHAR_DATA *ch, CHAR_DATA *victim )
+bool is_safe_nm( Character *ch, Character *victim )
 {
   return FALSE;
 }
@@ -1789,7 +1789,7 @@ bool is_safe_nm( CHAR_DATA *ch, CHAR_DATA *victim )
 /*
  * just verify that a corpse looting is legal
  */
-bool legal_loot( CHAR_DATA *ch, CHAR_DATA *victim )
+bool legal_loot( Character *ch, Character *victim )
 {
   /* pc's can now loot .. why not .. death is pretty final */
   if ( !is_npc(ch) )
@@ -1806,7 +1806,7 @@ bool legal_loot( CHAR_DATA *ch, CHAR_DATA *victim )
   murder a no pk person. --- edited again for planetary wanted flags -- well will be soon :p
 */
 
-void check_killer( CHAR_DATA *ch, CHAR_DATA *victim )
+void check_killer( Character *ch, Character *victim )
 {
 
   int x;
@@ -1875,7 +1875,7 @@ void check_killer( CHAR_DATA *ch, CHAR_DATA *victim )
 /*
  * Set position of a victim.
  */
-void update_pos( CHAR_DATA *victim )
+void update_pos( Character *victim )
 {
   if ( !victim )
     {
@@ -1932,7 +1932,7 @@ void update_pos( CHAR_DATA *victim )
 /*
  * Start fights.
  */
-void set_fighting( CHAR_DATA *ch, CHAR_DATA *victim )
+void set_fighting( Character *ch, Character *victim )
 {
   FIGHT_DATA *fight;
 
@@ -1975,7 +1975,7 @@ void set_fighting( CHAR_DATA *ch, CHAR_DATA *victim )
 }
 
 
-CHAR_DATA *who_fighting( CHAR_DATA *ch )
+Character *who_fighting( Character *ch )
 {
   if ( !ch )
     {
@@ -1987,7 +1987,7 @@ CHAR_DATA *who_fighting( CHAR_DATA *ch )
   return ch->fighting->who;
 }
 
-void free_fight( CHAR_DATA *ch )
+void free_fight( Character *ch )
 {
   if ( !ch )
     {
@@ -2020,9 +2020,9 @@ void free_fight( CHAR_DATA *ch )
 /*
  * Stop fights.
  */
-void stop_fighting( CHAR_DATA *ch, bool fBoth )
+void stop_fighting( Character *ch, bool fBoth )
 {
-  CHAR_DATA *fch;
+  Character *fch;
 
   free_fight( ch );
   update_pos( ch );
@@ -2043,7 +2043,7 @@ void stop_fighting( CHAR_DATA *ch, bool fBoth )
 
 
 
-void death_cry( CHAR_DATA *ch )
+void death_cry( Character *ch )
 {
 
   return;
@@ -2051,10 +2051,10 @@ void death_cry( CHAR_DATA *ch )
 
 
 
-void raw_kill( CHAR_DATA *ch, CHAR_DATA *victim )
+void raw_kill( Character *ch, Character *victim )
 {
 
-  CHAR_DATA *victmp;
+  Character *victmp;
 
   char buf[MAX_STRING_LENGTH];
   char buf2[MAX_STRING_LENGTH];
@@ -2320,11 +2320,11 @@ void raw_kill( CHAR_DATA *ch, CHAR_DATA *victim )
 
 
 
-void group_gain( CHAR_DATA *ch, CHAR_DATA *victim )
+void group_gain( Character *ch, Character *victim )
 {
   char buf[MAX_STRING_LENGTH];
-  CHAR_DATA *gch;
-  CHAR_DATA *lch;
+  Character *gch;
+  Character *lch;
   int xp;
   int members;
 
@@ -2413,7 +2413,7 @@ void group_gain( CHAR_DATA *ch, CHAR_DATA *victim )
 }
 
 
-int align_compute( CHAR_DATA *gch, CHAR_DATA *victim )
+int align_compute( Character *gch, Character *victim )
 {
 
   /* never cared much for this system
@@ -2445,7 +2445,7 @@ int align_compute( CHAR_DATA *gch, CHAR_DATA *victim )
  * Calculate how much XP gch should gain for killing victim
  * Lots of redesigning for new exp system by Thoric
  */
-int xp_compute( const CHAR_DATA *gch, const CHAR_DATA *victim )
+int xp_compute( const Character *gch, const Character *victim )
 {
   int align;
   int xp = (get_exp_worth( victim )
@@ -2482,7 +2482,7 @@ int xp_compute( const CHAR_DATA *gch, const CHAR_DATA *victim )
 /*
  * Revamped by Thoric to be more realistic
  */
-void dam_message( CHAR_DATA *ch, CHAR_DATA *victim, int dam, int dt )
+void dam_message( Character *ch, Character *victim, int dam, int dt )
 {
   char buf1[256], buf2[256], buf3[256];
   const char *vs;
@@ -2635,7 +2635,7 @@ void dam_message( CHAR_DATA *ch, CHAR_DATA *victim, int dam, int dt )
     act( AT_HITME, buf3, ch, NULL, victim, TO_VICT );
 }
 
-bool in_arena( CHAR_DATA *ch )
+bool in_arena( Character *ch )
 {
   if ( !str_cmp( ch->in_room->area->filename, "arena.are" ) )
     return TRUE;
@@ -2646,7 +2646,7 @@ bool in_arena( CHAR_DATA *ch )
   return TRUE;
 }
 
-bool get_cover( CHAR_DATA *ch )
+bool get_cover( Character *ch )
 {
   ROOM_INDEX_DATA *was_in;
   ROOM_INDEX_DATA *now_in;

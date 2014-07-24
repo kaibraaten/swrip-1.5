@@ -2,7 +2,7 @@
 #include "mud.h"
 #include "ships.h"
 
-void do_recharge(CHAR_DATA *ch, char *argument )
+void do_recharge(Character *ch, char *argument )
 {
   int recharge;
   int the_chance;

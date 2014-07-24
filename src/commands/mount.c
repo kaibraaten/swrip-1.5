@@ -1,9 +1,9 @@
 #include "character.h"
 #include "mud.h"
 
-void do_mount( CHAR_DATA *ch, char *argument )
+void do_mount( Character *ch, char *argument )
 {
-  CHAR_DATA *victim;
+  Character *victim;
 
   if ( !is_npc(ch)
        &&   ch->pcdata->learned[gsn_mount] <= 0  )

@@ -19,10 +19,10 @@ struct ban_data;
 typedef struct ban_data                BAN_DATA;
 
 struct extracted_char_data;
-typedef struct extracted_char_data     EXTRACT_CHAR_DATA;
+typedef struct extracted_char_data     EXTRACT_Character;
 
-struct char_data;
-typedef struct char_data               CHAR_DATA;
+struct Character;
+typedef struct Character               Character;
 
 struct hunt_hate_fear;
 typedef struct hunt_hate_fear          HHF_DATA;
@@ -174,9 +174,9 @@ typedef struct stop_data STOP_DATA;
 /*
  * Function types.
  */
-typedef void    DO_FUN          ( CHAR_DATA *ch, char *argument );
-typedef bool    SPEC_FUN        ( CHAR_DATA *ch );
-typedef ch_ret  SPELL_FUN       ( int sn, int level, CHAR_DATA *ch, void *vo );
+typedef void    DO_FUN          ( Character *ch, char *argument );
+typedef bool    SPEC_FUN        ( Character *ch );
+typedef ch_ret  SPELL_FUN       ( int sn, int level, Character *ch, void *vo );
 
 typedef int vnum_t;
 

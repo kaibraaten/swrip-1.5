@@ -2,13 +2,13 @@
 #include "mud.h"
 #include "character.h"
 
-void do_hijack( CHAR_DATA *ch, char *argument )
+void do_hijack( Character *ch, char *argument )
 {
   int the_chance;
   SHIP_DATA *ship;
   char buf[MAX_STRING_LENGTH];
   char buf2[MAX_STRING_LENGTH];
-  CHAR_DATA *p, *p_prev, *victim;
+  Character *p, *p_prev, *victim;
 
 
   if ( (ship = ship_from_cockpit(ch->in_room->vnum)) == NULL )

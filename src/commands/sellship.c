@@ -2,7 +2,7 @@
 #include "ships.h"
 #include "character.h"
 
-void do_sellship(CHAR_DATA *ch, char *argument )
+void do_sellship(Character *ch, char *argument )
 {
   long         price;
   SHIP_DATA   *ship;

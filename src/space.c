@@ -147,7 +147,7 @@ void    launch_bus( SHIP_DATA *ship );
 void echo_to_room_dnr( int ecolor, ROOM_INDEX_DATA *room,
 		       const char *argument )
 {
-  CHAR_DATA *vic = NULL;
+  Character *vic = NULL;
 
   if ( room == NULL )
     return;
@@ -159,7 +159,7 @@ void echo_to_room_dnr( int ecolor, ROOM_INDEX_DATA *room,
     }
 }
 
-void new_missile( SHIP_DATA *ship , SHIP_DATA *target , CHAR_DATA *ch , int missiletype )
+void new_missile( SHIP_DATA *ship , SHIP_DATA *target , Character *ch , int missiletype )
 {
   SPACE_DATA *spaceobject;
   MISSILE_DATA *missile;
@@ -242,7 +242,7 @@ void update_missiles( void )
               if ( target->chaff_released <= 0)
                 {
 		  bool ch_found = FALSE;
-		  CHAR_DATA *ch = NULL;
+		  Character *ch = NULL;
 		  char buf[MAX_STRING_LENGTH];
 
                   echo_to_room( AT_YELLOW, get_room_index(ship->room.gunseat),

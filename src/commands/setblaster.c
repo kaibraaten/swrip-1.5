@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_setblaster( CHAR_DATA *ch, char *argument )
+void do_setblaster( Character *ch, char *argument )
 {
   OBJ_DATA *wield;
   OBJ_DATA *wield2;

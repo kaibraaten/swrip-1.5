@@ -1,9 +1,9 @@
 #include "character.h"
 #include "mud.h"
 
-void do_bashdoor( CHAR_DATA *ch, char *argument )
+void do_bashdoor( Character *ch, char *argument )
 {
-  CHAR_DATA *gch = NULL;
+  Character *gch = NULL;
   EXIT_DATA *pexit = NULL;
   char arg[MAX_INPUT_LENGTH];
 
@@ -73,7 +73,7 @@ void do_bashdoor( CHAR_DATA *ch, char *argument )
                &&   (pexit_rev = pexit->rexit) != NULL
                &&    pexit_rev->to_room == ch->in_room )
             {
-              CHAR_DATA *rch = NULL;
+              Character *rch = NULL;
 
               REMOVE_BIT( pexit_rev->exit_info, EX_CLOSED );
 

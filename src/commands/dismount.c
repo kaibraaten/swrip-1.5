@@ -1,9 +1,9 @@
 #include "character.h"
 #include "mud.h"
 
-void do_dismount( CHAR_DATA *ch, char *argument )
+void do_dismount( Character *ch, char *argument )
 {
-  CHAR_DATA *victim;
+  Character *victim;
 
   if ( (victim = ch->mount) == NULL )
     {

@@ -1,11 +1,11 @@
 #include "character.h"
 #include "mud.h"
 
-void do_use( CHAR_DATA *ch, char *argument )
+void do_use( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   char argd[MAX_INPUT_LENGTH];
-  CHAR_DATA *victim;
+  Character *victim;
   OBJ_DATA *device;
   OBJ_DATA *obj;
   ch_ret retcode;

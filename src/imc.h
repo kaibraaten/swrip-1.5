@@ -16,15 +16,15 @@ typedef struct imcchar_data IMC_CHARDATA; /* Player flags */
 
 extern SITEINFO *this_imcmud;
 
-bool imc_command_hook( CHAR_DATA * ch, const char *command,
+bool imc_command_hook( Character * ch, const char *command,
 		       const char *argument );
 void imc_hotboot( void );
 void imc_startup( bool force, socket_t desc, bool connected );
 void imc_shutdown( bool reconnect );
-void imc_initchar( CHAR_DATA * ch );
-bool imc_loadchar( CHAR_DATA * ch, FILE * fp, const char *word );
-void imc_savechar( const CHAR_DATA * ch, FILE * fp );
-void imc_freechardata( CHAR_DATA * ch );
+void imc_initchar( Character * ch );
+bool imc_loadchar( Character * ch, FILE * fp, const char *word );
+void imc_savechar( const Character * ch, FILE * fp );
+void imc_freechardata( Character * ch );
 void imc_loop( void );
 socket_t imc_getsocket( SITEINFO* );
 

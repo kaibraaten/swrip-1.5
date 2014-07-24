@@ -1,6 +1,6 @@
 #include "mud.h"
 
-void do_repairstat( CHAR_DATA *ch, char *argument )
+void do_repairstat( Character *ch, char *argument )
 {
   REPAIR_DATA *repair;
   MOB_INDEX_DATA *mob;

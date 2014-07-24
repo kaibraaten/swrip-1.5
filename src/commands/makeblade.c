@@ -2,11 +2,11 @@
 #include "mud.h"
 #include "character.h"
 
-static void OnStart( CHAR_DATA *ch, char *argument );
-static void OnFinished( CHAR_DATA *ch );
-static void OnAbort( CHAR_DATA *ch );
+static void OnStart( Character *ch, char *argument );
+static void OnFinished( Character *ch );
+static void OnAbort( Character *ch );
 
-void do_makeblade( CHAR_DATA *ch, char *argument )
+void do_makeblade( Character *ch, char *argument )
 {
   switch( ch->substate )
     {
@@ -26,7 +26,7 @@ void do_makeblade( CHAR_DATA *ch, char *argument )
     }
 }
 
-static void OnStart( CHAR_DATA *ch, char *argument )
+static void OnStart( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   int the_chance = 0;
@@ -106,7 +106,7 @@ static void OnStart( CHAR_DATA *ch, char *argument )
   learn_from_failure( ch, gsn_makeblade );
 }
 
-static void OnFinished( CHAR_DATA *ch )
+static void OnFinished( Character *ch )
 {
   long xpgain = 0;
   char arg[MAX_INPUT_LENGTH];
@@ -250,7 +250,7 @@ static void OnFinished( CHAR_DATA *ch )
   learn_from_success( ch, gsn_makeblade );
 }
 
-static void OnAbort( CHAR_DATA *ch )
+static void OnAbort( Character *ch )
 {
   DISPOSE( ch->dest_buf );
   send_to_char("&RYou are interupted and fail to finish your work.\r\n", ch);

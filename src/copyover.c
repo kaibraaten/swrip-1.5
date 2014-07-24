@@ -50,7 +50,7 @@ void free_desc( DESCRIPTOR_DATA * d );
 /*  Warm reboot stuff, gotta make sure to thank Erwin for this :) */
 extern socket_t control;		/* Controlling descriptor       */
 
-void do_copyover( CHAR_DATA * ch, char *argument )
+void do_copyover( Character * ch, char *argument )
 {
   DESCRIPTOR_DATA *d, *d_next;
   char buf[100];
@@ -97,7 +97,7 @@ void do_copyover( CHAR_DATA * ch, char *argument )
   /* For each playing descriptor, save its state */
   for( d = first_descriptor; d; d = d_next )
   {
-    CHAR_DATA *och = d->original ? d->original : d->character;
+    Character *och = d->original ? d->original : d->character;
     d_next = d->next;		/* We delete from the list , so need to save this */
 
     if( !d->character || d->connection_state != CON_PLAYING )	/* drop those logging on */

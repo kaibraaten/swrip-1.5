@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_poison_weapon( CHAR_DATA *ch, char *argument )
+void do_poison_weapon( Character *ch, char *argument )
 {
   OBJ_DATA *obj;
   OBJ_DATA *pobj;

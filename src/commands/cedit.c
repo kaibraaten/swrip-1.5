@@ -4,7 +4,7 @@
 /*
  * Command editor/displayer/save/delete                         -Thoric
  */
-void do_cedit( CHAR_DATA *ch, char *argument )
+void do_cedit( Character *ch, char *argument )
 {
   CMDTYPE *command;
   char arg1[MAX_INPUT_LENGTH];

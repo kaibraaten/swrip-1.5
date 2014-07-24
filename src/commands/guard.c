@@ -2,7 +2,7 @@
 #include "mud.h"
 #include "ships.h"
 
-void do_guard( CHAR_DATA *ch, char *argument )
+void do_guard( Character *ch, char *argument )
 {
   int the_chance;
   SHIP_DATA *ship;

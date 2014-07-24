@@ -6,10 +6,10 @@
  *    with room sleep_progs
  *
  */
-void do_mpdream( CHAR_DATA *ch, char *argument )
+void do_mpdream( Character *ch, char *argument )
 {
   char arg1[MAX_STRING_LENGTH];
-  CHAR_DATA *vict;
+  Character *vict;
 
   if ( is_affected_by( ch, AFF_CHARM ) )
     return;

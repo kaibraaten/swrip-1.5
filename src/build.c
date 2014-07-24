@@ -27,7 +27,7 @@
 #include "character.h"
 #include "editor.h"
 
-bool can_rmodify( const CHAR_DATA *ch, const ROOM_INDEX_DATA *room )
+bool can_rmodify( const Character *ch, const ROOM_INDEX_DATA *room )
 {
   short vnum = room->vnum;
   AREA_DATA *pArea;
@@ -51,7 +51,7 @@ bool can_rmodify( const CHAR_DATA *ch, const ROOM_INDEX_DATA *room )
   return FALSE;
 }
 
-bool can_omodify( const CHAR_DATA *ch, const OBJ_DATA *obj )
+bool can_omodify( const Character *ch, const OBJ_DATA *obj )
 {
   short vnum = obj->pIndexData->vnum;
   AREA_DATA *pArea;
@@ -75,7 +75,7 @@ bool can_omodify( const CHAR_DATA *ch, const OBJ_DATA *obj )
   return FALSE;
 }
 
-bool can_oedit( const CHAR_DATA *ch, const OBJ_INDEX_DATA *obj )
+bool can_oedit( const Character *ch, const OBJ_INDEX_DATA *obj )
 {
   short vnum = obj->vnum;
   AREA_DATA *pArea;
@@ -100,7 +100,7 @@ bool can_oedit( const CHAR_DATA *ch, const OBJ_INDEX_DATA *obj )
   return FALSE;
 }
 
-bool can_mmodify( const CHAR_DATA *ch, const CHAR_DATA *mob )
+bool can_mmodify( const Character *ch, const Character *mob )
 {
   short vnum;
   AREA_DATA *pArea;
@@ -137,7 +137,7 @@ bool can_mmodify( const CHAR_DATA *ch, const CHAR_DATA *mob )
   return FALSE;
 }
 
-bool can_medit( const CHAR_DATA *ch, const MOB_INDEX_DATA *mob )
+bool can_medit( const Character *ch, const MOB_INDEX_DATA *mob )
 {
   short vnum = mob->vnum;
   AREA_DATA *pArea;
@@ -175,7 +175,7 @@ void free_area( AREA_DATA *are )
   are = NULL;
 }
 
-void assign_area( CHAR_DATA *ch )
+void assign_area( Character *ch )
 {
   char buf[MAX_STRING_LENGTH];
   char buf2[MAX_STRING_LENGTH];
@@ -599,7 +599,7 @@ void fold_area( AREA_DATA *tarea, char *filename, bool install )
         continue;
       if ( install )
         {
-          CHAR_DATA *victim, *vnext;
+          Character *victim, *vnext;
           OBJ_DATA  *obj, *obj_next;
 
           /* remove prototype flag from room */
@@ -794,7 +794,7 @@ void add_reset_nested( AREA_DATA *tarea, OBJ_DATA *obj )
 /*
  * Parse a reset command string into a reset_data structure
  */
-RESET_DATA *parse_reset( AREA_DATA *tarea, char *argument, CHAR_DATA *ch )
+RESET_DATA *parse_reset( AREA_DATA *tarea, char *argument, Character *ch )
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
@@ -1038,7 +1038,7 @@ RESET_DATA *parse_reset( AREA_DATA *tarea, char *argument, CHAR_DATA *ch )
     return make_reset( letter, extra, val1, val3, val2 );
 }
 
-void mpedit( CHAR_DATA *ch, MPROG_DATA *mprg, int mptype, char *argument )
+void mpedit( Character *ch, MPROG_DATA *mprg, int mptype, char *argument )
 {
   if ( mptype != -1 )
     {
@@ -1057,7 +1057,7 @@ void mpedit( CHAR_DATA *ch, MPROG_DATA *mprg, int mptype, char *argument )
 /*
  * RoomProg Support
  */
-void rpedit( CHAR_DATA *ch, MPROG_DATA *mprg, int mptype, char *argument )
+void rpedit( Character *ch, MPROG_DATA *mprg, int mptype, char *argument )
 {
   if ( mptype != -1 )
     {

@@ -5,11 +5,11 @@
 /*
  * Generic spell affect                                         -Thoric
  */
-ch_ret spell_affect( int sn, int level, CHAR_DATA *ch, void *vo )
+ch_ret spell_affect( int sn, int level, Character *ch, void *vo )
 {
   SMAUG_AFF *saf;
   SKILLTYPE *skill = get_skilltype(sn);
-  CHAR_DATA *victim = (CHAR_DATA *) vo;
+  Character *victim = (Character *) vo;
   bool groupsp;
   bool areasp;
   bool hitchar, hitroom, hitvict = FALSE;

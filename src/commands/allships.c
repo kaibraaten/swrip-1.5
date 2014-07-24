@@ -2,7 +2,7 @@
 #include "ships.h"
 #include "character.h"
 
-void do_allships( CHAR_DATA *ch, char *argument )
+void do_allships( Character *ch, char *argument )
 {
   SHIP_DATA *ship;
   char buf[MAX_STRING_LENGTH];

@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_bounties( CHAR_DATA *ch, char *argument )
+void do_bounties( Character *ch, char *argument )
 {
   BOUNTY_DATA *bounty = NULL;
   int count = 0;

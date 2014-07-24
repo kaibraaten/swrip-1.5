@@ -1,10 +1,10 @@
 #include "mud.h"
 #include "character.h"
 
-void do_aid( CHAR_DATA *ch, char *argument )
+void do_aid( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  CHAR_DATA *victim;
+  Character *victim;
   int percent;
 
   if ( is_npc(ch) && is_affected_by( ch, AFF_CHARM ) )

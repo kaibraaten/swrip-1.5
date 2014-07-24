@@ -3,10 +3,10 @@
 #include "mud.h"
 #include "character.h"
 
-void do_pricevendor (CHAR_DATA *ch, char *argument)
+void do_pricevendor (Character *ch, char *argument)
 {
-  CHAR_DATA *vendor;
-  CHAR_DATA *ch1;
+  Character *vendor;
+  Character *ch1;
   char arg1 [MAX_INPUT_LENGTH];
   char arg2 [MAX_INPUT_LENGTH];
   char logbuf[MAX_INPUT_LENGTH];

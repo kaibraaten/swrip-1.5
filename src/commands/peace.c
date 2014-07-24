@@ -1,9 +1,9 @@
 #include "mud.h"
 #include "character.h"
 
-void do_peace( CHAR_DATA *ch, char *argument )
+void do_peace( Character *ch, char *argument )
 {
-  CHAR_DATA *rch;
+  Character *rch;
 
   act( AT_IMMORT, "$n booms, 'PEACE!'", ch, NULL, NULL, TO_ROOM );
   for ( rch = ch->in_room->first_person; rch; rch = rch->next_in_room )

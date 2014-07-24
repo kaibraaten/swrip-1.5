@@ -2,7 +2,7 @@
 #include "ships.h"
 #include "mud.h"
 
-void do_chaff( CHAR_DATA *ch, char *argument )
+void do_chaff( Character *ch, char *argument )
 {
   int the_chance;
   SHIP_DATA *ship;

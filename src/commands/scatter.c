@@ -1,9 +1,9 @@
 #include "character.h"
 #include "mud.h"
 
-void do_scatter( CHAR_DATA *ch, char *argument )
+void do_scatter( Character *ch, char *argument )
 {
-  CHAR_DATA *victim;
+  Character *victim;
   char arg[MAX_INPUT_LENGTH];
   ROOM_INDEX_DATA *pRoomIndex;
 

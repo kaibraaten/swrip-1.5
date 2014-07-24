@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_holylight( CHAR_DATA *ch, char *argument )
+void do_holylight( Character *ch, char *argument )
 {
   if ( is_npc(ch) )
     return;

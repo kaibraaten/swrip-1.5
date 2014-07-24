@@ -3,7 +3,7 @@
 #include "ships.h"
 #include "mud.h"
 
-void do_board( CHAR_DATA *ch, char *argument )
+void do_board( Character *ch, char *argument )
 {
   ROOM_INDEX_DATA *fromroom;
   ROOM_INDEX_DATA *toroom;
@@ -70,7 +70,7 @@ void do_board( CHAR_DATA *ch, char *argument )
 
   if ( toroom->tunnel > 0 )
     {
-      CHAR_DATA *ctmp;
+      Character *ctmp;
       int count = 0;
 
       for ( ctmp = toroom->first_person; ctmp; ctmp = ctmp->next_in_room )

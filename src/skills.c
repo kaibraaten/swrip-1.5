@@ -34,7 +34,7 @@
 /*
  * Dummy function
  */
-void skill_notfound( CHAR_DATA *ch, char *argument )
+void skill_notfound( Character *ch, char *argument )
 {
   send_to_char( "Huh?\r\n", ch );
   return;
@@ -47,7 +47,7 @@ extern char *spell_target_name;       /* from magic.c */
  * Each different section of the skill table is sorted alphabetically
  * Only match skills player knows                               -Thoric
  */
-bool check_skill( CHAR_DATA *ch, char *command, char *argument )
+bool check_skill( Character *ch, char *command, char *argument )
 {
   int sn;
   int first = gsn_first_skill;
@@ -109,7 +109,7 @@ bool check_skill( CHAR_DATA *ch, char *command, char *argument )
     {
       ch_ret retcode = rNONE;
       void *vo = NULL;
-      CHAR_DATA *victim = NULL;
+      Character *victim = NULL;
       OBJ_DATA *obj = NULL;
 
       spell_target_name = "";
@@ -183,7 +183,7 @@ bool check_skill( CHAR_DATA *ch, char *command, char *argument )
       if ( (number_percent( ) + skill_table[sn]->difficulty * 5)
            > (is_npc(ch) ? 75 : ch->pcdata->learned[sn]) )
         {
-          failed_casting( skill_table[sn], ch, (CHAR_DATA*)vo, obj );
+          failed_casting( skill_table[sn], ch, (Character*)vo, obj );
           learn_from_failure( ch, sn );
           if ( mana )
             {
@@ -218,8 +218,8 @@ bool check_skill( CHAR_DATA *ch, char *command, char *argument )
            &&   victim != ch
            &&  !char_died(victim) )
         {
-          CHAR_DATA *vch;
-          CHAR_DATA *vch_next;
+          Character *vch;
+          Character *vch_next;
 
           for ( vch = ch->in_room->first_person; vch; vch = vch_next )
             {
@@ -248,7 +248,7 @@ bool check_skill( CHAR_DATA *ch, char *command, char *argument )
   return TRUE;
 }
 
-void learn_from_success( CHAR_DATA *ch, int sn )
+void learn_from_success( Character *ch, int sn )
 {
   int adept, gain, sklvl, learn, percent, learn_chance;
 
@@ -308,7 +308,7 @@ void learn_from_success( CHAR_DATA *ch, int sn )
 }
 
 
-void learn_from_failure( CHAR_DATA *ch, int sn )
+void learn_from_failure( Character *ch, int sn )
 {
 
 }
@@ -318,7 +318,7 @@ void learn_from_failure( CHAR_DATA *ch, int sn )
  * Caller must check for successful attack.
  * Check for loyalty flag (weapon disarms to inventory) for pkillers -Blodkai
  */
-void disarm( CHAR_DATA *ch, CHAR_DATA *victim )
+void disarm( Character *ch, Character *victim )
 {
   OBJ_DATA *obj, *tmpobj;
 
@@ -366,7 +366,7 @@ void disarm( CHAR_DATA *ch, CHAR_DATA *victim )
  * Trip a creature.
  * Caller must check for successful attack.
  */
-void trip( CHAR_DATA *ch, CHAR_DATA *victim )
+void trip( Character *ch, Character *victim )
 {
   if ( is_affected_by( victim, AFF_FLYING )
        ||   is_affected_by( victim, AFF_FLOATING ) )
@@ -400,7 +400,7 @@ void trip( CHAR_DATA *ch, CHAR_DATA *victim )
   return;
 }
 
-bool permsneak( CHAR_DATA *ch )
+bool permsneak( Character *ch )
 {
   switch(ch->race)
     {
@@ -431,7 +431,7 @@ bool permsneak( CHAR_DATA *ch )
 /*
  * Check for parry.
  */
-bool check_parry( CHAR_DATA *ch, CHAR_DATA *victim )
+bool check_parry( Character *ch, Character *victim )
 {
   int chances;
   OBJ_DATA *wield;
@@ -482,7 +482,7 @@ bool check_parry( CHAR_DATA *ch, CHAR_DATA *victim )
 /*
  * Check for dodge.
  */
-bool check_dodge( CHAR_DATA *ch, CHAR_DATA *victim )
+bool check_dodge( Character *ch, Character *victim )
 {
   int chances;
 
@@ -515,7 +515,7 @@ bool check_dodge( CHAR_DATA *ch, CHAR_DATA *victim )
   return TRUE;
 }
 
-bool check_grip( CHAR_DATA *ch, CHAR_DATA *victim )
+bool check_grip( Character *ch, Character *victim )
 {
   int grip_chance;
 

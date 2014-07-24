@@ -8,12 +8,12 @@ extern int pAbort;
 /*
  * Cast a spell.  Multi-caster and component support by Thoric
  */
-void do_cast( CHAR_DATA *ch, char *argument )
+void do_cast( Character *ch, char *argument )
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
   static char staticbuf[MAX_INPUT_LENGTH];
-  CHAR_DATA *victim;
+  Character *victim;
   OBJ_DATA *obj;
   void *vo;
   int mana;
@@ -207,7 +207,7 @@ void do_cast( CHAR_DATA *ch, char *argument )
       if ( skill->participants > 1 )
         {
           int cnt = 1;
-          CHAR_DATA *tmp;
+          Character *tmp;
           TIMER *t;
 
           for ( tmp = ch->in_room->first_person; tmp; tmp = tmp->next_in_room )
@@ -381,7 +381,7 @@ void do_cast( CHAR_DATA *ch, char *argument )
        &&  !char_died(victim)
        &&        victim != ch )
     {
-      CHAR_DATA *vch, *vch_next;
+      Character *vch, *vch_next;
 
       for ( vch = ch->in_room->first_person; vch; vch = vch_next )
         {

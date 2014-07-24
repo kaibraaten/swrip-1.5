@@ -2,7 +2,7 @@
 #include "ships.h"
 #include "mud.h"
 
-void do_speeders( CHAR_DATA *ch, char *argument )
+void do_speeders( Character *ch, char *argument )
 {
   SHIP_DATA *ship;
   int count;

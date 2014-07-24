@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_quaff( CHAR_DATA *ch, char *argument )
+void do_quaff( Character *ch, char *argument )
 {
   OBJ_DATA *obj;
   ch_ret retcode;

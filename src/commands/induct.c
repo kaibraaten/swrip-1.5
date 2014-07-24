@@ -1,10 +1,10 @@
 #include "character.h"
 #include "mud.h"
 
-void do_induct( CHAR_DATA *ch, char *argument )
+void do_induct( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  CHAR_DATA *victim;
+  Character *victim;
   CLAN_DATA *clan;
 
   if ( is_npc( ch ) || !ch->pcdata->clan )

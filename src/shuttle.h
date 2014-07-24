@@ -100,7 +100,7 @@ bool load_shuttle_file( const char *shuttlefile );
 void fread_shuttle( SHUTTLE_DATA *shuttle, FILE *fp );
 void fread_stop( STOP_DATA * stop, FILE *fp );
 void destroy_shuttle( SHUTTLE_DATA *shuttle );
-void show_shuttles_to_char( const SHUTTLE_DATA *shuttle, CHAR_DATA *ch );
+void show_shuttles_to_char( const SHUTTLE_DATA *shuttle, Character *ch );
 SHUTTLE_DATA *shuttle_in_room( const ROOM_INDEX_DATA *room, const char *name );
 SHUTTLE_DATA *shuttle_from_entrance( vnum_t vnum );
 STOP_DATA *create_stop( void );

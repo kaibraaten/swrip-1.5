@@ -2,9 +2,9 @@
 #include "quest.h"
 #include "mud.h"
 
-void do_aquest(CHAR_DATA *ch, char *argument)
+void do_aquest(Character *ch, char *argument)
 {
-  CHAR_DATA *questman;
+  Character *questman;
   OBJ_DATA *obj=NULL, *obj_next;
   OBJ_INDEX_DATA *obj1, *obj2, *obj3, *obj4, *obj5;
   OBJ_INDEX_DATA *questinfoobj;

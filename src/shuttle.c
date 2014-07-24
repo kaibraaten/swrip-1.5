@@ -320,7 +320,7 @@ void update_shuttle( void )
   return;
 }
 
-void show_shuttles_to_char( const SHUTTLE_DATA *shuttle, CHAR_DATA *ch )
+void show_shuttles_to_char( const SHUTTLE_DATA *shuttle, Character *ch )
 {
   while (shuttle)
     {

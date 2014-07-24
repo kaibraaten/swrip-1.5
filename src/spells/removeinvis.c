@@ -3,7 +3,7 @@
 
 extern char *spell_target_name;
 
-ch_ret spell_remove_invis( int sn, int level, CHAR_DATA *ch, void *vo )
+ch_ret spell_remove_invis( int sn, int level, Character *ch, void *vo )
 {
   OBJ_DATA *obj;
   SKILLTYPE *skill = get_skilltype(sn);
@@ -29,7 +29,7 @@ ch_ret spell_remove_invis( int sn, int level, CHAR_DATA *ch, void *vo )
     }
   else
     {
-      CHAR_DATA *victim;
+      Character *victim;
 
       victim = get_char_room(ch, spell_target_name);
 

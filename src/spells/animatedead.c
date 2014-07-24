@@ -1,9 +1,9 @@
 #include "character.h"
 #include "mud.h"
 
-ch_ret spell_animate_dead( int sn, int level, CHAR_DATA *ch, void *vo )
+ch_ret spell_animate_dead( int sn, int level, Character *ch, void *vo )
 {
-  CHAR_DATA *mob;
+  Character *mob;
   OBJ_DATA  *corpse;
   OBJ_DATA  *corpse_next;
   OBJ_DATA  *obj;

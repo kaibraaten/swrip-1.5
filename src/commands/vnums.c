@@ -3,7 +3,7 @@
 /*
  * Shows prototype vnums ranges, and if loaded
  */
-void do_vnums( CHAR_DATA *ch, char *argument )
+void do_vnums( Character *ch, char *argument )
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];

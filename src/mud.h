@@ -118,8 +118,8 @@ struct descriptor_data
   DESCRIPTOR_DATA *next;
   DESCRIPTOR_DATA *prev;
   DESCRIPTOR_DATA *snoop_by;
-  CHAR_DATA       *character;
-  CHAR_DATA       *original;
+  Character       *character;
+  Character       *original;
 
   struct
   {
@@ -245,7 +245,7 @@ struct mob_prog_act_list
 {
   MPROG_ACT_LIST *next;
   char           *buf;
-  CHAR_DATA      *ch;
+  Character      *ch;
   OBJ_DATA       *obj;
   void           *vo;
 };
@@ -360,7 +360,7 @@ struct guard_data
   GUARD_DATA      *prev;
   GUARD_DATA      *next_on_planet;
   GUARD_DATA      *prev_on_planet;
-  CHAR_DATA       *mob;
+  Character       *mob;
   ROOM_INDEX_DATA *reset_loc;
   PLANET_DATA     *planet;
 };
@@ -538,7 +538,7 @@ struct ship_data
   SHIP_DATA       *docked;
   short            alarm;
   short            ions;
-  CHAR_DATA       *ch;
+  Character       *ch;
   SPACE_DATA      *inorbitof;
   int              count;
   TURRET_DATA *turret[MAX_NUMBER_OF_TURRETS_IN_SHIP];
@@ -721,12 +721,12 @@ struct mob_index_data
 struct hunt_hate_fear
 {
   char      *name;
-  CHAR_DATA *who;
+  Character *who;
 };
 
 struct fighting_data
 {
-  CHAR_DATA *who;
+  Character *who;
   int        xp;
   short      align;
   short      duration;
@@ -735,8 +735,8 @@ struct fighting_data
 
 struct extracted_char_data
 {
-  EXTRACT_CHAR_DATA *next;
-  CHAR_DATA         *ch;
+  EXTRACT_Character *next;
+  Character         *ch;
   ROOM_INDEX_DATA   *room;
   ch_ret             retcode;
   bool               extract;
@@ -811,7 +811,7 @@ struct pc_data
   long        salary_date;    /* Auto-Salary Darrik Vequir */
   ALIAS_DATA *first_alias;
   ALIAS_DATA *last_alias;
-  CHAR_DATA  *pet;
+  Character  *pet;
   char       *target;
   NOTE_DATA  *pnote;
   NOTE_DATA  *comments;
@@ -896,7 +896,7 @@ struct obj_data
   OBJ_DATA         *first_content;
   OBJ_DATA         *last_content;
   OBJ_DATA         *in_obj;
-  CHAR_DATA        *carried_by;
+  Character        *carried_by;
   EXTRA_DESCR_DATA *first_extradesc;
   EXTRA_DESCR_DATA *last_extradesc;
   AFFECT_DATA      *first_affect;
@@ -1095,8 +1095,8 @@ struct room_index_data
 {
   ROOM_INDEX_DATA  *next;
   ROOM_INDEX_DATA  *next_sort;
-  CHAR_DATA        *first_person;
-  CHAR_DATA        *last_person;
+  Character        *first_person;
+  Character        *last_person;
   OBJ_DATA         *first_content;
   OBJ_DATA         *last_content;
   EXTRA_DESCR_DATA *first_extradesc;
@@ -1197,8 +1197,8 @@ struct skill_type
 struct auction_data
 {
   OBJ_DATA  *item;   /* a pointer to the item */
-  CHAR_DATA *seller; /* a pointer to the seller - which may NOT quit */
-  CHAR_DATA *buyer;  /* a pointer to the buyer - which may NOT quit */
+  Character *seller; /* a pointer to the seller - which may NOT quit */
+  Character *buyer;  /* a pointer to the buyer - which may NOT quit */
   int        bet;    /* last bet - or 0 if noone has bet anything */
   short      going;  /* 1,2, sold */
   short      pulse;  /* how many pulses (.25 sec) until another call-out ? */
@@ -1560,7 +1560,7 @@ extern long long low_galaxy_cash;
 extern CMDTYPE              *command_hash[126];
 extern SKILLTYPE            *skill_table[MAX_SKILL];
 extern SOCIALTYPE           *social_index[27];
-extern CHAR_DATA            *cur_char;
+extern Character            *cur_char;
 extern ROOM_INDEX_DATA      *cur_room;
 extern bool                  cur_char_died;
 extern ch_ret                global_retcode;
@@ -1577,8 +1577,8 @@ extern REPAIR_DATA          *first_repair;
 extern REPAIR_DATA          *last_repair;
 extern BAN_DATA             *first_ban;
 extern BAN_DATA             *last_ban;
-extern CHAR_DATA            *first_char;
-extern CHAR_DATA            *last_char;
+extern Character            *first_char;
+extern Character            *last_char;
 extern DESCRIPTOR_DATA      *first_descriptor;
 extern DESCRIPTOR_DATA      *last_descriptor;
 extern BOARD_DATA           *first_board;
@@ -1614,11 +1614,11 @@ extern AREA_DATA            *last_bsort;
 extern TELEPORT_DATA        *first_teleport;
 extern TELEPORT_DATA        *last_teleport;
 extern OBJ_DATA             *extracted_obj_queue;
-extern EXTRACT_CHAR_DATA    *extracted_char_queue;
+extern EXTRACT_Character    *extracted_char_queue;
 extern OBJ_DATA             *save_equipment[MAX_WEAR][MAX_LAYERS];
-extern CHAR_DATA            *quitting_char;
-extern CHAR_DATA            *loading_char;
-extern CHAR_DATA            *saving_char;
+extern Character            *quitting_char;
+extern Character            *loading_char;
+extern Character            *saving_char;
 extern OBJ_DATA             *all_obj;
 extern time_t                current_time;
 extern bool                  fLogAll;
@@ -2262,59 +2262,59 @@ extern "C" {
 
   /* act_comm.c */
   bool check_parse_name( const char *name );
-  char *drunk_speech( const char *argument, CHAR_DATA *ch );
-  void talk_channel( CHAR_DATA *ch, const char *argument,
+  char *drunk_speech( const char *argument, Character *ch );
+  void talk_channel( Character *ch, const char *argument,
 		     int channel, const char *verb );
   void sound_to_room( const ROOM_INDEX_DATA *room, const char *argument );
-  bool circle_follow( const CHAR_DATA *ch, const CHAR_DATA *victim );
-  void add_follower( CHAR_DATA *ch, CHAR_DATA *master );
-  void stop_follower( CHAR_DATA *ch );
-  void die_follower( CHAR_DATA *ch );
-  bool is_same_group( const CHAR_DATA *ach, const CHAR_DATA *bch );
+  bool circle_follow( const Character *ch, const Character *victim );
+  void add_follower( Character *ch, Character *master );
+  void stop_follower( Character *ch );
+  void die_follower( Character *ch );
+  bool is_same_group( const Character *ach, const Character *bch );
   void to_channel( const char *argument, int channel,
 		   const char *verb, short level );
   void talk_auction( const char *argument );
-  bool knows_language( const CHAR_DATA *ch, int language, const CHAR_DATA *cch );
-  bool can_learn_lang( const CHAR_DATA *ch, int language );
+  bool knows_language( const Character *ch, int language, const Character *cch );
+  bool can_learn_lang( const Character *ch, int language );
   int countlangs( int languages );
 
   /* act_info.c */
   int get_race_from_name( const char *arg );
   int get_class_from_name( const char *arg );
-  void show_condition( const CHAR_DATA *ch, const CHAR_DATA *victim );
-  bool check_blind( const CHAR_DATA *ch );
-  char *format_obj_to_char( const OBJ_DATA *obj, const CHAR_DATA *ch, bool fShort );
-  void show_list_to_char( const OBJ_DATA *list, CHAR_DATA *ch,
+  void show_condition( const Character *ch, const Character *victim );
+  bool check_blind( const Character *ch );
+  char *format_obj_to_char( const OBJ_DATA *obj, const Character *ch, bool fShort );
+  void show_list_to_char( const OBJ_DATA *list, Character *ch,
 			  bool fShort, bool fShowNothing );
 
   /* act_move.c */
-  bool has_key( const CHAR_DATA *ch, int key );
+  bool has_key( const Character *ch, int key );
   void set_bexit_flag( EXIT_DATA *pexit, int flag );
   void remove_bexit_flag( EXIT_DATA *pexit, int flag );
   ROOM_INDEX_DATA *generate_exit( ROOM_INDEX_DATA *in_room, EXIT_DATA **pexit );
   void  clear_vrooms( void );
-  EXIT_DATA *find_door( CHAR_DATA *ch, const char *arg, bool quiet );
+  EXIT_DATA *find_door( Character *ch, const char *arg, bool quiet );
   EXIT_DATA *get_exit( const ROOM_INDEX_DATA *room, short dir );
   EXIT_DATA *get_exit_to( const ROOM_INDEX_DATA *room, short dir, vnum_t vnum );
   EXIT_DATA *get_exit_num( const ROOM_INDEX_DATA *room, short count );
-  ch_ret move_char( CHAR_DATA *ch, EXIT_DATA *pexit, int fall );
-  void teleport( CHAR_DATA *ch, short room, int flags );
-  short encumbrance( const CHAR_DATA *ch, short move );
-  bool will_fall( CHAR_DATA *ch, int fall );
-  int wherehome( const CHAR_DATA *ch );
+  ch_ret move_char( Character *ch, EXIT_DATA *pexit, int fall );
+  void teleport( Character *ch, short room, int flags );
+  short encumbrance( const Character *ch, short move );
+  bool will_fall( Character *ch, int fall );
+  int wherehome( const Character *ch );
 
   /* act_obj.c */
-  bool remove_obj( CHAR_DATA *ch, int iWear, bool fReplace );
+  bool remove_obj( Character *ch, int iWear, bool fReplace );
   obj_ret damage_obj( OBJ_DATA *obj );
   short get_obj_resistance( const OBJ_DATA *obj );
-  void save_clan_storeroom( CHAR_DATA *ch, const CLAN_DATA *clan );
+  void save_clan_storeroom( Character *ch, const CLAN_DATA *clan );
   void obj_fall( OBJ_DATA *obj, bool through );
 
   /* act_wiz.c */
   void save_banlist( void );
   int str_count(const char *psource, const char *ptarget);
   void close_area( AREA_DATA *pArea );
-  ROOM_INDEX_DATA *find_location( CHAR_DATA *ch, char *arg );
+  ROOM_INDEX_DATA *find_location( Character *ch, char *arg );
   void echo_to_room( short AT_COLOR, ROOM_INDEX_DATA *room,
 		     const char *argument );
   void echo_to_all( short AT_COLOR, const char *argument, short tar );
@@ -2329,21 +2329,21 @@ extern "C" {
   /* boards.c */
   void load_boards( void );
   BOARD_DATA *get_board( OBJ_DATA *obj );
-  BOARD_DATA *find_board( CHAR_DATA *ch );
+  BOARD_DATA *find_board( Character *ch );
   void free_note( NOTE_DATA *pnote );
   void write_boards_txt( void );
-  void operate_on_note( CHAR_DATA *ch, char *arg_passed, bool IS_MAIL );
+  void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL );
 
   /* clans.c */
   void save_member_list( const MEMBER_LIST *members_list );
-  void show_members( const CHAR_DATA *ch, const char *argument, const char *format );
+  void show_members( const Character *ch, const char *argument, const char *format );
   void write_clan_list( void );
   CLAN_DATA *get_clan( const char *name );
   void load_clans( void );
   void save_clan( const CLAN_DATA *clan );
   bool load_member_list( const char *filename );
-  void update_member( const CHAR_DATA *ch );
-  void remove_member( const CHAR_DATA *ch );
+  void update_member( const Character *ch );
+  void remove_member( const Character *ch );
 
   /* planets.c */
   void write_planet_list( void );
@@ -2353,14 +2353,14 @@ extern "C" {
   long get_taxes( const PLANET_DATA *planet );
 
   /* bounty.c */
-  void disintegration( const CHAR_DATA *ch, const CHAR_DATA *victim, long amount );
+  void disintegration( const Character *ch, const Character *victim, long amount );
   BOUNTY_DATA *get_disintegration( const char *target );
   void load_bounties( void );
   void save_bounties( void );
   void save_disintegrations( void );
   void remove_disintegration( BOUNTY_DATA *bounty );
-  void claim_disintegration( CHAR_DATA *ch , const CHAR_DATA *victim );
-  bool is_disintegration( const CHAR_DATA *victim );
+  void claim_disintegration( Character *ch , const Character *victim );
+  bool is_disintegration( const Character *victim );
 
   /* const.c */
   int get_saveflag(const char*);
@@ -2438,7 +2438,7 @@ extern "C" {
   SPACE_DATA * spaceobject_from_vnum( vnum_t vnum );
   void update_spaceobjects( void );
   void update_missiles( void );
-  void         new_missile( SHIP_DATA *ship, SHIP_DATA *target, CHAR_DATA *ch,
+  void         new_missile( SHIP_DATA *ship, SHIP_DATA *target, Character *ch,
                             int missiletype );
   void         extract_missile( MISSILE_DATA *missile );
 
@@ -2448,17 +2448,17 @@ extern "C" {
   bool write_to_descriptor( socket_t desc, char *txt, int length );
   void write_to_buffer( DESCRIPTOR_DATA *d, const char *txt, size_t length );
   void write_to_pager( DESCRIPTOR_DATA *d, const char *txt, size_t length );
-  void send_to_char( const char *txt, const CHAR_DATA *ch );
-  void send_to_pager( const char *txt, const CHAR_DATA *ch );
-  void set_char_color( short AType, CHAR_DATA *ch );
-  void set_pager_color( short AType, CHAR_DATA *ch );
-  void ch_printf( const CHAR_DATA *ch, const char *fmt, ... );
-  void pager_printf(const CHAR_DATA *ch, const char *fmt, ...);
-  void act( short AType, const char *format, CHAR_DATA *ch,
+  void send_to_char( const char *txt, const Character *ch );
+  void send_to_pager( const char *txt, const Character *ch );
+  void set_char_color( short AType, Character *ch );
+  void set_pager_color( short AType, Character *ch );
+  void ch_printf( const Character *ch, const char *fmt, ... );
+  void pager_printf(const Character *ch, const char *fmt, ...);
+  void act( short AType, const char *format, Character *ch,
             const void *arg1, const void *arg2, int type );
 
   /* reset.c */
-  char *sprint_reset( CHAR_DATA *ch, RESET_DATA *pReset, short num, bool rlist );
+  char *sprint_reset( Character *ch, RESET_DATA *pReset, short num, bool rlist );
   RESET_DATA *make_reset( char letter, int extra, int arg1, int arg2, int arg3 );
   RESET_DATA *add_reset( AREA_DATA *tarea, char letter, int extra,
 			 int arg1, int arg2, int arg3 );
@@ -2467,18 +2467,18 @@ extern "C" {
   void  reset_area( AREA_DATA * pArea );
 
   /* db.c */
-  void show_vnums( CHAR_DATA *ch, vnum_t low, vnum_t high, bool proto, bool shownl,
+  void show_vnums( Character *ch, vnum_t low, vnum_t high, bool proto, bool shownl,
 		   const char *loadst, const char *notloadst );
   void save_sysdata( SYSTEM_DATA sys );
-  void append_file( CHAR_DATA *ch, const char *file, const char *str );
-  void  show_file( CHAR_DATA *ch, const char *filename );
+  void append_file( Character *ch, const char *file, const char *str );
+  void  show_file( Character *ch, const char *filename );
   void  boot_db( bool fCopyover );
   void  area_update( void );
-  void  add_char( CHAR_DATA *ch );
-  CHAR_DATA *create_mobile( MOB_INDEX_DATA *pMobIndex );
+  void  add_char( Character *ch );
+  Character *create_mobile( MOB_INDEX_DATA *pMobIndex );
   OBJ_DATA *create_object( OBJ_INDEX_DATA *pObjIndex, int level );
-  void  clear_char( CHAR_DATA *ch );
-  void  free_char( CHAR_DATA *ch );
+  void  clear_char( Character *ch );
+  void  free_char( Character *ch );
   char *        get_extra_descr( const char *name, EXTRA_DESCR_DATA *ed );
   MOB_INDEX_DATA *get_mob_index( vnum_t vnum );
   OBJ_INDEX_DATA *get_obj_index( vnum_t vnum );
@@ -2501,17 +2501,17 @@ extern "C" {
   void  sort_area( AREA_DATA *pArea, bool proto );
 
   /* build.c */
-  void mpedit( CHAR_DATA *ch, MPROG_DATA *mprg, int mptype, char *argument );
-  void rpedit( CHAR_DATA *ch, MPROG_DATA *mprg, int mptype, char *argument );
+  void mpedit( Character *ch, MPROG_DATA *mprg, int mptype, char *argument );
+  void rpedit( Character *ch, MPROG_DATA *mprg, int mptype, char *argument );
   void write_area_list( void );
 
-  bool can_rmodify( const CHAR_DATA *ch, const ROOM_INDEX_DATA *room );
-  bool can_omodify( const CHAR_DATA *ch, const OBJ_DATA *obj  );
-  bool can_mmodify( const CHAR_DATA *ch, const CHAR_DATA *mob );
-  bool can_medit( const CHAR_DATA *ch, const MOB_INDEX_DATA *mob );
+  bool can_rmodify( const Character *ch, const ROOM_INDEX_DATA *room );
+  bool can_omodify( const Character *ch, const OBJ_DATA *obj  );
+  bool can_mmodify( const Character *ch, const Character *mob );
+  bool can_medit( const Character *ch, const MOB_INDEX_DATA *mob );
   void free_reset( AREA_DATA *are, RESET_DATA *res );
   void free_area( AREA_DATA *are );
-  void assign_area( CHAR_DATA *ch );
+  void assign_area( Character *ch );
   EXTRA_DESCR_DATA *SetRExtra( ROOM_INDEX_DATA *room, char *keywords );
   bool DelRExtra( ROOM_INDEX_DATA *room, char *keywords );
   EXTRA_DESCR_DATA *SetOExtra( OBJ_DATA *obj, char *keywords );
@@ -2521,42 +2521,42 @@ extern "C" {
   void fold_area( AREA_DATA *tarea, char *filename, bool install );
 
   /* fight.c */
-  ch_ret  one_hit( CHAR_DATA *ch, CHAR_DATA *victim, int dt );
-  int xp_compute( const CHAR_DATA *gch, const CHAR_DATA *victim );
-  int   max_fight( CHAR_DATA *ch );
+  ch_ret  one_hit( Character *ch, Character *victim, int dt );
+  int xp_compute( const Character *gch, const Character *victim );
+  int   max_fight( Character *ch );
   void  violence_update( void );
-  ch_ret        multi_hit( CHAR_DATA *ch, CHAR_DATA *victim, int dt );
-  short ris_damage( CHAR_DATA *ch, short dam, int ris );
-  ch_ret        damage( CHAR_DATA *ch, CHAR_DATA *victim, int dam, int dt );
-  void  update_pos( CHAR_DATA *victim );
-  void  set_fighting( CHAR_DATA *ch, CHAR_DATA *victim );
-  void  stop_fighting( CHAR_DATA *ch, bool fBoth );
-  void  free_fight( CHAR_DATA *ch );
-  CHAR_DATA *who_fighting( CHAR_DATA *ch );
-  void  check_killer( CHAR_DATA *ch, CHAR_DATA *victim );
-  void  check_attacker( CHAR_DATA *ch, CHAR_DATA *victim );
-  void  death_cry( CHAR_DATA *ch );
-  void  stop_hunting( CHAR_DATA *ch );
-  void  stop_hating( CHAR_DATA *ch );
-  void  stop_fearing( CHAR_DATA *ch );
-  void  start_hunting( CHAR_DATA *ch, CHAR_DATA *victim );
-  void  start_hating( CHAR_DATA *ch, CHAR_DATA *victim );
-  void  start_fearing( CHAR_DATA *ch, CHAR_DATA *victim );
-  bool  is_hunting( CHAR_DATA *ch, CHAR_DATA *victim );
-  bool  is_hating( CHAR_DATA *ch, CHAR_DATA *victim );
-  bool  is_fearing( CHAR_DATA *ch, CHAR_DATA *victim );
-  bool  is_safe( CHAR_DATA *ch, CHAR_DATA *victim );
-  bool  is_safe_nm( CHAR_DATA *ch, CHAR_DATA *victim );
-  bool  legal_loot( CHAR_DATA *ch, CHAR_DATA *victim );
-  bool    check_illegal_pk( CHAR_DATA *ch, CHAR_DATA *victim );
-  void    raw_kill( CHAR_DATA *ch, CHAR_DATA *victim );
-  bool  in_arena( CHAR_DATA *ch );
+  ch_ret        multi_hit( Character *ch, Character *victim, int dt );
+  short ris_damage( Character *ch, short dam, int ris );
+  ch_ret        damage( Character *ch, Character *victim, int dam, int dt );
+  void  update_pos( Character *victim );
+  void  set_fighting( Character *ch, Character *victim );
+  void  stop_fighting( Character *ch, bool fBoth );
+  void  free_fight( Character *ch );
+  Character *who_fighting( Character *ch );
+  void  check_killer( Character *ch, Character *victim );
+  void  check_attacker( Character *ch, Character *victim );
+  void  death_cry( Character *ch );
+  void  stop_hunting( Character *ch );
+  void  stop_hating( Character *ch );
+  void  stop_fearing( Character *ch );
+  void  start_hunting( Character *ch, Character *victim );
+  void  start_hating( Character *ch, Character *victim );
+  void  start_fearing( Character *ch, Character *victim );
+  bool  is_hunting( Character *ch, Character *victim );
+  bool  is_hating( Character *ch, Character *victim );
+  bool  is_fearing( Character *ch, Character *victim );
+  bool  is_safe( Character *ch, Character *victim );
+  bool  is_safe_nm( Character *ch, Character *victim );
+  bool  legal_loot( Character *ch, Character *victim );
+  bool    check_illegal_pk( Character *ch, Character *victim );
+  void    raw_kill( Character *ch, Character *victim );
+  bool  in_arena( Character *ch );
 
 
   /* makeobjs.c */
-  void  make_corpse( CHAR_DATA *ch, CHAR_DATA *killer );
-  void  make_blood( CHAR_DATA *ch );
-  void  make_bloodstain( CHAR_DATA *ch );
+  void  make_corpse( Character *ch, Character *killer );
+  void  make_blood( Character *ch );
+  void  make_bloodstain( Character *ch );
   void  make_scraps( OBJ_DATA *obj );
   void  make_fire( ROOM_INDEX_DATA *in_room, short timer );
   OBJ_DATA *make_trap( int v0, int v1, int v2, int v3 );
@@ -2564,67 +2564,67 @@ extern "C" {
 
   /* misc.c */
   bool is_valid_language( int language );
-  void pullorpush( CHAR_DATA *ch, OBJ_DATA *obj, bool pull );
-  void actiondesc( CHAR_DATA *ch, OBJ_DATA *obj, void *vo );
-  void jedi_checks( CHAR_DATA *ch );
-  void jedi_bonus( CHAR_DATA *ch );
-  void sith_penalty( CHAR_DATA *ch );
+  void pullorpush( Character *ch, OBJ_DATA *obj, bool pull );
+  void actiondesc( Character *ch, OBJ_DATA *obj, void *vo );
+  void jedi_checks( Character *ch );
+  void jedi_bonus( Character *ch );
+  void sith_penalty( Character *ch );
 
   /* mud_comm.c */
-  CHAR_DATA *get_char_room_mp( CHAR_DATA *ch, char *argument );
+  Character *get_char_room_mp( Character *ch, char *argument );
   int get_color(const char *argument);
   char *mprog_type_to_name( int type );
 
   /* mud_prog.c */
-  void mprog_wordlist_check( char * arg, CHAR_DATA *mob,
-			     CHAR_DATA* actor, OBJ_DATA* object,
+  void mprog_wordlist_check( char * arg, Character *mob,
+			     Character* actor, OBJ_DATA* object,
 			     void* vo, int type );
-  void mprog_percent_check( CHAR_DATA *mob, CHAR_DATA* actor,
+  void mprog_percent_check( Character *mob, Character* actor,
 			    OBJ_DATA* object, void* vo, int type );
-  void mprog_act_trigger( char* buf, CHAR_DATA* mob,
-			  CHAR_DATA* ch, OBJ_DATA* obj, void* vo );
-  void mprog_bribe_trigger( CHAR_DATA* mob, CHAR_DATA* ch, int amount );
-  void mprog_entry_trigger( CHAR_DATA* mob );
-  void mprog_give_trigger( CHAR_DATA* mob, CHAR_DATA* ch, OBJ_DATA* obj );
-  void mprog_greet_trigger( CHAR_DATA* mob );
-  void mprog_fight_trigger( CHAR_DATA* mob, CHAR_DATA* ch );
-  void mprog_hitprcnt_trigger( CHAR_DATA* mob, CHAR_DATA* ch );
-  void mprog_death_trigger( CHAR_DATA *killer, CHAR_DATA* mob );
-  void mprog_random_trigger( CHAR_DATA* mob );
-  void mprog_speech_trigger( char* txt, CHAR_DATA* mob );
-  void mprog_script_trigger( CHAR_DATA *mob );
-  void mprog_hour_trigger( CHAR_DATA *mob );
-  void mprog_time_trigger( CHAR_DATA *mob );
-  void progbug( char *str, CHAR_DATA *mob );
+  void mprog_act_trigger( char* buf, Character* mob,
+			  Character* ch, OBJ_DATA* obj, void* vo );
+  void mprog_bribe_trigger( Character* mob, Character* ch, int amount );
+  void mprog_entry_trigger( Character* mob );
+  void mprog_give_trigger( Character* mob, Character* ch, OBJ_DATA* obj );
+  void mprog_greet_trigger( Character* mob );
+  void mprog_fight_trigger( Character* mob, Character* ch );
+  void mprog_hitprcnt_trigger( Character* mob, Character* ch );
+  void mprog_death_trigger( Character *killer, Character* mob );
+  void mprog_random_trigger( Character* mob );
+  void mprog_speech_trigger( char* txt, Character* mob );
+  void mprog_script_trigger( Character *mob );
+  void mprog_hour_trigger( Character *mob );
+  void mprog_time_trigger( Character *mob );
+  void progbug( char *str, Character *mob );
   void rset_supermob( ROOM_INDEX_DATA *room );
   void release_supermob( void );
 
   /* player.c */
-  void  set_title( CHAR_DATA *ch, const char *title );
+  void  set_title( Character *ch, const char *title );
 
   /* skills.c */
-  bool  check_skill( CHAR_DATA *ch, char *command, char *argument );
-  void  learn_from_success( CHAR_DATA *ch, int sn );
-  void  learn_from_failure( CHAR_DATA *ch, int sn );
-  bool  check_parry( CHAR_DATA *ch, CHAR_DATA *victim );
-  bool  check_dodge( CHAR_DATA *ch, CHAR_DATA *victim );
-  bool  check_grip( CHAR_DATA *ch, CHAR_DATA *victim );
-  void  disarm( CHAR_DATA *ch, CHAR_DATA *victim );
-  void  trip( CHAR_DATA *ch, CHAR_DATA *victim );
-  bool permsneak( CHAR_DATA *ch );
+  bool  check_skill( Character *ch, char *command, char *argument );
+  void  learn_from_success( Character *ch, int sn );
+  void  learn_from_failure( Character *ch, int sn );
+  bool  check_parry( Character *ch, Character *victim );
+  bool  check_dodge( Character *ch, Character *victim );
+  bool  check_grip( Character *ch, Character *victim );
+  void  disarm( Character *ch, Character *victim );
+  void  trip( Character *ch, Character *victim );
+  bool permsneak( Character *ch );
 
   /* handler.c */
-  bool can_take_proto( const CHAR_DATA *ch );
+  bool can_take_proto( const Character *ch );
   void explode( OBJ_DATA *obj );
   int exp_level( short level );
-  void affect_modify( CHAR_DATA *ch, AFFECT_DATA *paf, bool fAdd );
-  void affect_to_char( CHAR_DATA *ch, AFFECT_DATA *paf );
-  void affect_remove( CHAR_DATA *ch, AFFECT_DATA *paf );
-  void affect_strip( CHAR_DATA *ch, int sn );
-  void affect_join( CHAR_DATA *ch, AFFECT_DATA *paf );
-  void char_from_room( CHAR_DATA *ch );
-  void char_to_room( CHAR_DATA *ch, ROOM_INDEX_DATA *pRoomIndex );
-  OBJ_DATA *obj_to_char( OBJ_DATA *obj, CHAR_DATA *ch );
+  void affect_modify( Character *ch, AFFECT_DATA *paf, bool fAdd );
+  void affect_to_char( Character *ch, AFFECT_DATA *paf );
+  void affect_remove( Character *ch, AFFECT_DATA *paf );
+  void affect_strip( Character *ch, int sn );
+  void affect_join( Character *ch, AFFECT_DATA *paf );
+  void char_from_room( Character *ch );
+  void char_to_room( Character *ch, ROOM_INDEX_DATA *pRoomIndex );
+  OBJ_DATA *obj_to_char( OBJ_DATA *obj, Character *ch );
   void obj_from_char( OBJ_DATA *obj );
   int apply_ac( const OBJ_DATA *obj, int iWear );
   int count_obj_list( const OBJ_INDEX_DATA *obj, const OBJ_DATA *list );
@@ -2639,116 +2639,116 @@ extern "C" {
   void clean_obj( OBJ_INDEX_DATA *obj );
   void clean_mob( MOB_INDEX_DATA *mob );
   void clean_resets( AREA_DATA *tarea );
-  void extract_char( CHAR_DATA *ch, bool fPull );
-  CHAR_DATA *get_char_room( const CHAR_DATA *ch, const char *argument );
-  CHAR_DATA *get_char_world( const CHAR_DATA *ch, const char *argument );
+  void extract_char( Character *ch, bool fPull );
+  Character *get_char_room( const Character *ch, const char *argument );
+  Character *get_char_world( const Character *ch, const char *argument );
   OBJ_DATA *get_obj_type( const OBJ_INDEX_DATA *pObjIndexData );
-  OBJ_DATA *get_obj_list( const CHAR_DATA *ch, const char *argument, OBJ_DATA *list );
-  OBJ_DATA *get_obj_list_rev( const CHAR_DATA *ch, const char *argument, OBJ_DATA *list );
-  OBJ_DATA *get_obj_here( const CHAR_DATA *ch, const char *argument );
-  OBJ_DATA *get_obj_world( const CHAR_DATA *ch, const char *argument );
+  OBJ_DATA *get_obj_list( const Character *ch, const char *argument, OBJ_DATA *list );
+  OBJ_DATA *get_obj_list_rev( const Character *ch, const char *argument, OBJ_DATA *list );
+  OBJ_DATA *get_obj_here( const Character *ch, const char *argument );
+  OBJ_DATA *get_obj_world( const Character *ch, const char *argument );
   int get_obj_number( const OBJ_DATA *obj );
   int get_obj_weight( const OBJ_DATA *obj );
   bool room_is_dark( const ROOM_INDEX_DATA *pRoomIndex );
-  bool room_is_private( const CHAR_DATA *ch, const ROOM_INDEX_DATA *pRoomIndex );
+  bool room_is_private( const Character *ch, const ROOM_INDEX_DATA *pRoomIndex );
   const char *item_type_name( const OBJ_DATA *obj );
   const char *affect_loc_name( int location );
   const char *affect_bit_name( int vector );
   const char *extra_bit_name( int extra_flags );
   const char *magic_bit_name( int magic_flags );
-  ch_ret check_for_trap( CHAR_DATA *ch, const OBJ_DATA *obj, int flag );
-  ch_ret check_room_for_traps( CHAR_DATA *ch, int flag );
+  ch_ret check_for_trap( Character *ch, const OBJ_DATA *obj, int flag );
+  ch_ret check_room_for_traps( Character *ch, int flag );
   bool is_trapped( const OBJ_DATA *obj );
   OBJ_DATA *get_trap( const OBJ_DATA *obj );
-  ch_ret spring_trap( CHAR_DATA *ch, OBJ_DATA *obj );
-  void showaffect( const CHAR_DATA *ch, const AFFECT_DATA *paf );
+  ch_ret spring_trap( Character *ch, OBJ_DATA *obj );
+  void showaffect( const Character *ch, const AFFECT_DATA *paf );
   void set_cur_obj( OBJ_DATA *obj );
   bool obj_extracted( const OBJ_DATA *obj );
   void queue_extracted_obj( OBJ_DATA *obj );
   void clean_obj_queue( void );
-  void set_cur_char( CHAR_DATA *ch );
-  bool char_died( const CHAR_DATA *ch );
-  void queue_extracted_char( CHAR_DATA *ch, bool extract );
+  void set_cur_char( Character *ch );
+  bool char_died( const Character *ch );
+  void queue_extracted_char( Character *ch, bool extract );
   void clean_char_queue( void );
-  void add_timer( CHAR_DATA *ch, short type, short count, DO_FUN *fun, int value );
-  TIMER * get_timerptr( const CHAR_DATA *ch, short type );
-  short get_timer( const CHAR_DATA *ch, short type );
-  void extract_timer( CHAR_DATA *ch, TIMER *timer );
-  void remove_timer( CHAR_DATA *ch, short type );
-  bool in_soft_range( const CHAR_DATA *ch, const AREA_DATA *tarea );
-  bool in_hard_range( const CHAR_DATA *ch, const AREA_DATA *tarea );
-  bool chance( const CHAR_DATA *ch, short percent );
-  bool chance_attrib( const CHAR_DATA *ch, short percent, short attrib );
+  void add_timer( Character *ch, short type, short count, DO_FUN *fun, int value );
+  TIMER * get_timerptr( const Character *ch, short type );
+  short get_timer( const Character *ch, short type );
+  void extract_timer( Character *ch, TIMER *timer );
+  void remove_timer( Character *ch, short type );
+  bool in_soft_range( const Character *ch, const AREA_DATA *tarea );
+  bool in_hard_range( const Character *ch, const AREA_DATA *tarea );
+  bool chance( const Character *ch, short percent );
+  bool chance_attrib( const Character *ch, short percent, short attrib );
   OBJ_DATA *clone_object( const OBJ_DATA *obj );
   void split_obj( OBJ_DATA *obj, int num );
   void separate_obj( OBJ_DATA *obj );
   bool empty_obj( OBJ_DATA *obj,OBJ_DATA *destobj,ROOM_INDEX_DATA *destroom );
-  OBJ_DATA *find_obj( CHAR_DATA *ch, const char *argument, bool carryonly );
+  OBJ_DATA *find_obj( Character *ch, const char *argument, bool carryonly );
   void boost_economy( AREA_DATA *tarea, int gold );
   void lower_economy( AREA_DATA *tarea, int gold );
-  void economize_mobgold( CHAR_DATA *mob );
+  void economize_mobgold( Character *mob );
   bool economy_has( const AREA_DATA *tarea, int gold );
   int count_users(const OBJ_DATA *obj);
 
   /* interp.c */
-  bool  check_pos( CHAR_DATA *ch, int position );
-  void  interpret( CHAR_DATA *ch, char *argument );
+  bool  check_pos( Character *ch, int position );
+  void  interpret( Character *ch, char *argument );
   SOCIALTYPE *find_social( char *command );
   CMDTYPE *find_command( char *command );
   void  hash_commands( void );
-  void  send_timer( struct timerset *vtime, CHAR_DATA *ch );
+  void  send_timer( struct timerset *vtime, Character *ch );
   void  update_userec( struct timeval *time_used, struct timerset *userec );
 
   /* magic.c */
-  int ris_save( const CHAR_DATA *ch, int save_chance, int ris );
-  void successful_casting( SKILLTYPE *skill, CHAR_DATA *ch,
-			   CHAR_DATA *victim, OBJ_DATA *obj );
-  void failed_casting( SKILLTYPE *skill, CHAR_DATA *ch,
-		       CHAR_DATA *victim, OBJ_DATA *obj );
-  bool is_immune( const CHAR_DATA *ch, short damtype );
-  bool check_save( int sn, int level, const CHAR_DATA *ch, const CHAR_DATA *victim );
-  void immune_casting( SKILLTYPE *skill, CHAR_DATA *ch, CHAR_DATA *victim, OBJ_DATA *obj );
-  void *locate_targets( CHAR_DATA *ch, char *arg, int sn, CHAR_DATA **victim, OBJ_DATA **obj );
-  bool  process_spell_components( CHAR_DATA *ch, int sn );
-  int   ch_slookup( const CHAR_DATA *ch, const char *name );
-  int   find_spell( const CHAR_DATA *ch, const char *name, bool know );
-  int   find_skill( const CHAR_DATA *ch, const char *name, bool know );
-  int   find_weapon( const CHAR_DATA *ch, const char *name, bool know );
-  int   find_tongue( const CHAR_DATA *ch, const char *name, bool know );
+  int ris_save( const Character *ch, int save_chance, int ris );
+  void successful_casting( SKILLTYPE *skill, Character *ch,
+			   Character *victim, OBJ_DATA *obj );
+  void failed_casting( SKILLTYPE *skill, Character *ch,
+		       Character *victim, OBJ_DATA *obj );
+  bool is_immune( const Character *ch, short damtype );
+  bool check_save( int sn, int level, const Character *ch, const Character *victim );
+  void immune_casting( SKILLTYPE *skill, Character *ch, Character *victim, OBJ_DATA *obj );
+  void *locate_targets( Character *ch, char *arg, int sn, Character **victim, OBJ_DATA **obj );
+  bool  process_spell_components( Character *ch, int sn );
+  int   ch_slookup( const Character *ch, const char *name );
+  int   find_spell( const Character *ch, const char *name, bool know );
+  int   find_skill( const Character *ch, const char *name, bool know );
+  int   find_weapon( const Character *ch, const char *name, bool know );
+  int   find_tongue( const Character *ch, const char *name, bool know );
   int   skill_lookup( const char *name );
   int   herb_lookup( const char *name );
   int   slot_lookup( int slot );
   int   bsearch_skill( const char *name, int first, int top );
   int   bsearch_skill_exact( const char *name, int first, int top );
-  bool  saves_poison_death( int level, const CHAR_DATA *victim ) ;
-  bool saves_wands( int level, const CHAR_DATA *victim );
-  bool  saves_para_petri( int level, const CHAR_DATA *victim );
-  bool  saves_breath( int level, const CHAR_DATA *victim );
-  bool  saves_spell_staff( int level, const CHAR_DATA *victim );
-  ch_ret obj_cast_spell( int sn, int level, CHAR_DATA *ch, CHAR_DATA *victim, OBJ_DATA *obj );
-  int dice_parse( const CHAR_DATA *ch, int level, char *exp );
+  bool  saves_poison_death( int level, const Character *victim ) ;
+  bool saves_wands( int level, const Character *victim );
+  bool  saves_para_petri( int level, const Character *victim );
+  bool  saves_breath( int level, const Character *victim );
+  bool  saves_spell_staff( int level, const Character *victim );
+  ch_ret obj_cast_spell( int sn, int level, Character *ch, Character *victim, OBJ_DATA *obj );
+  int dice_parse( const Character *ch, int level, char *exp );
   SKILLTYPE *get_skilltype( int sn );
 
   /* save.c */
   /* object saving defines for fread/write_obj. -- Altrag */
 #define OS_CARRY        0
 #define OS_CORPSE       1
-  void  save_char_obj( CHAR_DATA *ch );
-  void  save_clone( CHAR_DATA *ch );
+  void  save_char_obj( Character *ch );
+  void  save_clone( Character *ch );
   bool  load_char_obj( DESCRIPTOR_DATA *d, char *name, bool preload );
   void  set_alarm ( long seconds );
-  void  requip_char( CHAR_DATA *ch );
-  void fwrite_obj( const CHAR_DATA *ch, const OBJ_DATA *obj, FILE *fp,
+  void  requip_char( Character *ch );
+  void fwrite_obj( const Character *ch, const OBJ_DATA *obj, FILE *fp,
 		   int iNest, short os_type );
-  void  fread_obj( CHAR_DATA *ch,  FILE *fp, short os_type );
-  void  de_equip_char( CHAR_DATA *ch );
-  void  re_equip_char( CHAR_DATA *ch );
-  void  save_home( CHAR_DATA *ch );
+  void  fread_obj( Character *ch,  FILE *fp, short os_type );
+  void  de_equip_char( Character *ch );
+  void  re_equip_char( Character *ch );
+  void  save_home( Character *ch );
   void save_storeroom( ROOM_INDEX_DATA *room );
   void load_storerooms( void );
 
   /* shops.c */
-  int get_cost_quit( CHAR_DATA *ch );
+  int get_cost_quit( Character *ch );
 
   /* special.c */
   SPEC_FUN *spec_lookup( const char *name );
@@ -2771,36 +2771,36 @@ extern "C" {
   void  save_herb_table( void );
 
   /* track.c */
-  void  found_prey( CHAR_DATA *ch, CHAR_DATA *victim );
-  void  hunt_victim( CHAR_DATA *ch );
+  void  found_prey( Character *ch, Character *victim );
+  void  hunt_victim( Character *ch );
 
   /* swskills.c */
-  void add_reinforcements( CHAR_DATA *ch );
+  void add_reinforcements( Character *ch );
 
   /* update.c */
-  void advance_level( CHAR_DATA *ch , int ability );
-  void gain_exp( CHAR_DATA *ch, short ability, long gain );
-  long lose_exp( CHAR_DATA *ch, short ability, long loss );
-  void gain_condition( CHAR_DATA *ch, int iCond, int value );
+  void advance_level( Character *ch , int ability );
+  void gain_exp( Character *ch, short ability, long gain );
+  long lose_exp( Character *ch, short ability, long loss );
+  void gain_condition( Character *ch, int iCond, int value );
   void update_handler( void );
   void reboot_check( time_t reset );
   void auction_update( void );
   void remove_portal( OBJ_DATA *portal );
-  int max_level( const CHAR_DATA *ch, int ability );
-  bool is_droid( const CHAR_DATA *ch );
+  int max_level( const Character *ch, int ability );
+  bool is_droid( const Character *ch );
 
   /* newscore.c */
-  const char *get_race( const CHAR_DATA *ch );
+  const char *get_race( const Character *ch );
 
   /* badname functions */
   bool  check_bad_name( const char *name );
   int   add_bad_name( const char *name );
 
   /* vendor.c*/
-  void fwrite_vendor( FILE *fp, CHAR_DATA *mob );
-  CHAR_DATA *fread_vendor( FILE *fp );
+  void fwrite_vendor( FILE *fp, Character *mob );
+  Character *fread_vendor( FILE *fp );
   void load_vendors( void );
-  void save_vendor( CHAR_DATA *ch );
+  void save_vendor( Character *ch );
 
   /*
 #define SHORT 1
@@ -2870,46 +2870,46 @@ extern "C" {
   /*
    * mudprograms stuff
    */
-  extern        CHAR_DATA *supermob;
+  extern        Character *supermob;
 
-  void oprog_speech_trigger( char *txt, CHAR_DATA *ch );
+  void oprog_speech_trigger( char *txt, Character *ch );
   void oprog_random_trigger( OBJ_DATA *obj );
-  void oprog_wear_trigger( CHAR_DATA *ch, OBJ_DATA *obj );
-  bool oprog_use_trigger( CHAR_DATA *ch, OBJ_DATA *obj,
-                          CHAR_DATA *vict, OBJ_DATA *targ, void *vo );
-  void oprog_remove_trigger( CHAR_DATA *ch, OBJ_DATA *obj );
-  void oprog_examine_trigger( CHAR_DATA *ch, OBJ_DATA *obj );
-  void oprog_sac_trigger( CHAR_DATA *ch, OBJ_DATA *obj );
-  void oprog_damage_trigger( CHAR_DATA *ch, OBJ_DATA *obj );
-  void oprog_repair_trigger( CHAR_DATA *ch, OBJ_DATA *obj );
-  void oprog_drop_trigger( CHAR_DATA *ch, OBJ_DATA *obj );
-  void oprog_zap_trigger( CHAR_DATA *ch, OBJ_DATA *obj );
-  void oprog_greet_trigger( CHAR_DATA *ch );
-  void oprog_get_trigger( CHAR_DATA *ch, OBJ_DATA *obj );
+  void oprog_wear_trigger( Character *ch, OBJ_DATA *obj );
+  bool oprog_use_trigger( Character *ch, OBJ_DATA *obj,
+                          Character *vict, OBJ_DATA *targ, void *vo );
+  void oprog_remove_trigger( Character *ch, OBJ_DATA *obj );
+  void oprog_examine_trigger( Character *ch, OBJ_DATA *obj );
+  void oprog_sac_trigger( Character *ch, OBJ_DATA *obj );
+  void oprog_damage_trigger( Character *ch, OBJ_DATA *obj );
+  void oprog_repair_trigger( Character *ch, OBJ_DATA *obj );
+  void oprog_drop_trigger( Character *ch, OBJ_DATA *obj );
+  void oprog_zap_trigger( Character *ch, OBJ_DATA *obj );
+  void oprog_greet_trigger( Character *ch );
+  void oprog_get_trigger( Character *ch, OBJ_DATA *obj );
   char *oprog_type_to_name( int type );
-  void oprog_pull_trigger( CHAR_DATA *ch, OBJ_DATA *obj );
-  void oprog_push_trigger( CHAR_DATA *ch, OBJ_DATA *obj );
+  void oprog_pull_trigger( Character *ch, OBJ_DATA *obj );
+  void oprog_push_trigger( Character *ch, OBJ_DATA *obj );
 
-  void rprog_leave_trigger( CHAR_DATA *ch );
-  void rprog_enter_trigger( CHAR_DATA *ch );
-  void rprog_sleep_trigger( CHAR_DATA *ch );
-  void rprog_rest_trigger( CHAR_DATA *ch );
-  void rprog_rfight_trigger( CHAR_DATA *ch );
-  void rprog_death_trigger( CHAR_DATA *killer, CHAR_DATA *ch );
-  void rprog_speech_trigger( char *txt, CHAR_DATA *ch );
-  void rprog_random_trigger( CHAR_DATA *ch );
-  void rprog_time_trigger( CHAR_DATA *ch );
-  void rprog_hour_trigger( CHAR_DATA *ch );
+  void rprog_leave_trigger( Character *ch );
+  void rprog_enter_trigger( Character *ch );
+  void rprog_sleep_trigger( Character *ch );
+  void rprog_rest_trigger( Character *ch );
+  void rprog_rfight_trigger( Character *ch );
+  void rprog_death_trigger( Character *killer, Character *ch );
+  void rprog_speech_trigger( char *txt, Character *ch );
+  void rprog_random_trigger( Character *ch );
+  void rprog_time_trigger( Character *ch );
+  void rprog_hour_trigger( Character *ch );
   char *rprog_type_to_name(int type );
 
 #define OPROG_ACT_TRIGGER
 #ifdef OPROG_ACT_TRIGGER
-  void oprog_act_trigger( char *buf, OBJ_DATA *mobj, CHAR_DATA *ch,
+  void oprog_act_trigger( char *buf, OBJ_DATA *mobj, Character *ch,
                           OBJ_DATA *obj, void *vo );
 #endif
 #define RPROG_ACT_TRIGGER
 #ifdef RPROG_ACT_TRIGGER
-  void rprog_act_trigger( char *buf, ROOM_INDEX_DATA *room, CHAR_DATA *ch,
+  void rprog_act_trigger( char *buf, ROOM_INDEX_DATA *room, Character *ch,
                           OBJ_DATA *obj, void *vo );
 #endif
 

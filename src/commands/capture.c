@@ -2,7 +2,7 @@
 #include "ships.h"
 #include "mud.h"
 
-void do_capture ( CHAR_DATA *ch , char *argument )
+void do_capture ( Character *ch , char *argument )
 {
   CLAN_DATA *clan;
   PLANET_DATA *planet;

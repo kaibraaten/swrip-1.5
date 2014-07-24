@@ -6,10 +6,10 @@
    same you would see if you enter the room and have config +brief.
    -- Narn, winter '96
 */
-void do_glance( CHAR_DATA *ch, char *argument )
+void do_glance( Character *ch, char *argument )
 {
   char arg1 [MAX_INPUT_LENGTH];
-  CHAR_DATA *victim;
+  Character *victim;
   int save_act;
 
   if ( !ch->desc )

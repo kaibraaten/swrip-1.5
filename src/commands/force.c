@@ -1,7 +1,7 @@
 #include "mud.h"
 #include "character.h"
 
-void do_force( CHAR_DATA *ch, char *argument )
+void do_force( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   bool mobsonly;
@@ -17,8 +17,8 @@ void do_force( CHAR_DATA *ch, char *argument )
 
   if ( !str_cmp( arg, "all" ) )
     {
-      CHAR_DATA *vch;
-      CHAR_DATA *vch_next;
+      Character *vch;
+      Character *vch_next;
 
       if ( mobsonly )
         {
@@ -39,7 +39,7 @@ void do_force( CHAR_DATA *ch, char *argument )
     }
   else
     {
-      CHAR_DATA *victim;
+      Character *victim;
 
       if ( ( victim = get_char_world( ch, arg ) ) == NULL )
         {

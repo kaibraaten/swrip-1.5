@@ -11,7 +11,7 @@ char *help_greeting = NULL;
 
 static char *help_fix( char *text );
 
-HELP_DATA *get_help( const CHAR_DATA *ch, char *argument )
+HELP_DATA *get_help( const Character *ch, char *argument )
 {
   char argall[MAX_INPUT_LENGTH];
   char argone[MAX_INPUT_LENGTH];

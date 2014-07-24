@@ -3,7 +3,7 @@
 
 /* lets the mobile goto any location it wishes that is not private */
 
-void do_mpgoto( CHAR_DATA *ch, char *argument )
+void do_mpgoto( Character *ch, char *argument )
 {
   char arg[ MAX_INPUT_LENGTH ];
   ROOM_INDEX_DATA *location;

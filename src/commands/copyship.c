@@ -2,7 +2,7 @@
 #include "ships.h"
 #include "mud.h"
 
-void do_copyship( CHAR_DATA *ch, char *argument )
+void do_copyship( Character *ch, char *argument )
 {
   SHIP_DATA *ship = NULL;
   SHIP_DATA *old = NULL;

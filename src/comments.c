@@ -56,9 +56,9 @@
 #include "mud.h"
 #include "character.h"
 
-void note_attach(CHAR_DATA *ch);
+void note_attach(Character *ch);
 
-void comment_remove( CHAR_DATA *ch, CHAR_DATA *victim, NOTE_DATA *pnote )
+void comment_remove( Character *ch, Character *victim, NOTE_DATA *pnote )
 {
   if ( is_npc( victim ) )
     {
@@ -100,13 +100,13 @@ void comment_remove( CHAR_DATA *ch, CHAR_DATA *victim, NOTE_DATA *pnote )
   return;
 }
 
-void do_comment( CHAR_DATA *ch, char *argument )
+void do_comment( Character *ch, char *argument )
 {
   char buf[MAX_STRING_LENGTH];
   char arg[MAX_INPUT_LENGTH];
   char arg1[MAX_INPUT_LENGTH];
   NOTE_DATA  *pnote;
-  CHAR_DATA  *victim;
+  Character  *victim;
   int vnum;
   int anum;
 
@@ -482,7 +482,7 @@ void do_comment( CHAR_DATA *ch, char *argument )
 }
 
 
-void fwrite_comments( CHAR_DATA *ch, FILE *fp )
+void fwrite_comments( Character *ch, FILE *fp )
 {
   NOTE_DATA *pnote;
 
@@ -501,7 +501,7 @@ void fwrite_comments( CHAR_DATA *ch, FILE *fp )
   return;
 }
 
-void fread_comment( CHAR_DATA *ch, FILE *fp )
+void fread_comment( Character *ch, FILE *fp )
 {
   NOTE_DATA *pnote;
 

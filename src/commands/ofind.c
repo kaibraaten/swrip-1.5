@@ -2,7 +2,7 @@
 
 extern OBJ_INDEX_DATA *obj_index_hash[MAX_KEY_HASH];
 
-void do_ofind( CHAR_DATA *ch, char *argument )
+void do_ofind( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   OBJ_INDEX_DATA *pObjIndex;

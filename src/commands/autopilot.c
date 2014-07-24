@@ -2,7 +2,7 @@
 #include "mud.h"
 #include "ships.h"
 
-void do_autopilot(CHAR_DATA *ch, char *argument )
+void do_autopilot(Character *ch, char *argument )
 {
   SHIP_DATA *ship;
 

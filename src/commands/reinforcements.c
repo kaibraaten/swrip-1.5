@@ -2,7 +2,7 @@
 #include "mud.h"
 #include "character.h"
 
-void do_reinforcements( CHAR_DATA *ch, char *argument )
+void do_reinforcements( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   int the_chance, credits;

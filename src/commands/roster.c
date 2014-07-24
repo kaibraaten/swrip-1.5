@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_roster( CHAR_DATA *ch, char *argument )
+void do_roster( Character *ch, char *argument )
 {
   if( is_npc( ch ) || !ch->pcdata->clan
       || ( str_cmp(ch->name, ch->pcdata->clan->leadership.leader )

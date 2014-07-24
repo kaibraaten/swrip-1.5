@@ -21,7 +21,7 @@
  * Races will no longer show up for mortals - DV Oct/00
 
  */
-void do_who( CHAR_DATA *ch, char *argument )
+void do_who( Character *ch, char *argument )
 {
   char buf[MAX_STRING_LENGTH];
   char clan_name[MAX_INPUT_LENGTH];
@@ -68,7 +68,7 @@ void do_who( CHAR_DATA *ch, char *argument )
   if ( !ch )
     {
       NullCh = TRUE;
-      CREATE( ch, CHAR_DATA, 1 );
+      CREATE( ch, Character, 1 );
       ch->top_level = 1;
       ch->trust = 0;
       CREATE( pcdata, PC_DATA, 1 );
@@ -212,7 +212,7 @@ void do_who( CHAR_DATA *ch, char *argument )
   /* start from last to first to get it in the proper order */
   for ( d = last_descriptor; d; d = d->prev )
     {
-      CHAR_DATA *wch;
+      Character *wch;
       char const *race;
       char force_char = ' ';
 

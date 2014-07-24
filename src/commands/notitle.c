@@ -1,11 +1,11 @@
 #include "mud.h"
 #include "character.h"
 
-void do_notitle( CHAR_DATA *ch, char *argument )
+void do_notitle( Character *ch, char *argument )
 {
   char buf[MAX_STRING_LENGTH];
   char arg[MAX_INPUT_LENGTH];
-  CHAR_DATA *victim;
+  Character *victim;
 
   one_argument( argument, arg );
 

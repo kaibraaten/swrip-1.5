@@ -26,7 +26,7 @@
 #define QUEST_OBJQUEST4 78
 #define QUEST_OBJQUEST5 79
 
-void generate_quest( CHAR_DATA *ch, CHAR_DATA *questman );
+void generate_quest( Character *ch, Character *questman );
 void quest_update( void );
 
 #endif

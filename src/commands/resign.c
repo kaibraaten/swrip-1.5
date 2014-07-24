@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_resign( CHAR_DATA *ch, char *argument )
+void do_resign( Character *ch, char *argument )
 {
   CLAN_DATA *clan = NULL;
   long xp_to_lose = 0;

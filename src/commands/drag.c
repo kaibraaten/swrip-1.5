@@ -2,12 +2,12 @@
 #include "mud.h"
 #include "character.h"
 
-void do_drag( CHAR_DATA *ch, char *argument )
+void do_drag( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
   int exit_dir;
-  CHAR_DATA *victim;
+  Character *victim;
   EXIT_DATA *pexit;
   ROOM_INDEX_DATA *to_room;
   bool nogo;
@@ -98,7 +98,7 @@ void do_drag( CHAR_DATA *ch, char *argument )
 
               if ( to_room->tunnel > 0 )
                 {
-                  CHAR_DATA *ctmp;
+                  Character *ctmp;
                   int count = 0;
 
                   for ( ctmp = to_room->first_person; ctmp; ctmp = ctmp->next_in_room )
@@ -180,7 +180,7 @@ void do_drag( CHAR_DATA *ch, char *argument )
 
               if ( to_room->tunnel > 0 )
                 {
-                  CHAR_DATA *ctmp;
+                  Character *ctmp;
                   int count = 0;
 
                   for ( ctmp = to_room->first_person; ctmp; ctmp = ctmp->next_in_room )

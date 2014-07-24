@@ -3,11 +3,11 @@
 #include "mud.h"
 #include "character.h"
 
-void do_mstat( CHAR_DATA *ch, char *argument )
+void do_mstat( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   AFFECT_DATA *paf = NULL;
-  CHAR_DATA *victim = NULL;
+  Character *victim = NULL;
   SKILLTYPE *skill = NULL;
   int x = 0;
 

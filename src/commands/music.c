@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_music( CHAR_DATA *ch, char *argument )
+void do_music( Character *ch, char *argument )
 {
   if (is_not_authed(ch))
     {

@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_sneak( CHAR_DATA *ch, char *argument )
+void do_sneak( Character *ch, char *argument )
 {
   AFFECT_DATA af;
 

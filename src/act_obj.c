@@ -61,7 +61,7 @@ short get_obj_resistance( const OBJ_DATA *obj )
  */
 obj_ret damage_obj( OBJ_DATA *obj )
 {
-  CHAR_DATA *ch;
+  Character *ch;
   obj_ret objcode;
 
   ch = obj->carried_by;
@@ -124,7 +124,7 @@ obj_ret damage_obj( OBJ_DATA *obj )
 /*
  * Save items in a clan storage room                    -Scryn & Thoric
  */
-void save_clan_storeroom( CHAR_DATA *ch, const CLAN_DATA *clan )
+void save_clan_storeroom( Character *ch, const CLAN_DATA *clan )
 {
   FILE *fp;
   char filename[256];
@@ -234,8 +234,8 @@ void obj_fall( OBJ_DATA *obj, bool through )
           /* Damage players */
           if ( obj->in_room->first_person && number_percent() > 15 )
             {
-              CHAR_DATA *rch;
-              CHAR_DATA *vch = NULL;
+              Character *rch;
+              Character *vch = NULL;
               int chcnt = 0;
 
               for ( rch = obj->in_room->first_person; rch;
@@ -285,7 +285,7 @@ void obj_fall( OBJ_DATA *obj, bool through )
   return;
 }
 
-bool remove_obj( CHAR_DATA *ch, int iWear, bool fReplace )
+bool remove_obj( Character *ch, int iWear, bool fReplace )
 {
   OBJ_DATA *obj, *tmpobj;
 

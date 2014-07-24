@@ -2,7 +2,7 @@
 #include "mud.h"
 #include "ships.h"
 
-void do_autotrack( CHAR_DATA *ch, char *argument )
+void do_autotrack( Character *ch, char *argument )
 {
   SHIP_DATA *ship;
   int the_chance;

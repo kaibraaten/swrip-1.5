@@ -1,14 +1,14 @@
 #include "mud.h"
 #include "character.h"
 
-static bool check_for_immroom( const CHAR_DATA *ch, const ROOM_INDEX_DATA *location);
+static bool check_for_immroom( const Character *ch, const ROOM_INDEX_DATA *location);
 
-void do_at( CHAR_DATA *ch, char *argument )
+void do_at( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   ROOM_INDEX_DATA *location = NULL;
   ROOM_INDEX_DATA *original = NULL;
-  CHAR_DATA *wch = NULL;
+  Character *wch = NULL;
 
   argument = one_argument( argument, arg );
 
@@ -64,7 +64,7 @@ void do_at( CHAR_DATA *ch, char *argument )
     }
 }
 
-static bool check_for_immroom( const CHAR_DATA *ch,
+static bool check_for_immroom( const Character *ch,
 			       const ROOM_INDEX_DATA *location)
 {
   if (ch->top_level == 105 ? 0: (location->vnum == IMP_ROOM1?1:(location->vnum == IMP_ROOM2?1:0)))

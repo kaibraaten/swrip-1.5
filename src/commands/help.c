@@ -4,9 +4,9 @@
 #include "character.h"
 
 static short str_similarity( const char *astr, const char *bstr );
-static void similar_help_files(CHAR_DATA *ch, char *argument);
+static void similar_help_files(Character *ch, char *argument);
 
-void do_help( CHAR_DATA *ch, char *argument )
+void do_help( Character *ch, char *argument )
 {
   HELP_DATA *pHelp = NULL;
   const char *help_text = NULL;
@@ -70,7 +70,7 @@ static short str_similarity( const char *astr, const char *bstr )
   return matches;
 }
 
-static void similar_help_files(CHAR_DATA *ch, char *argument)
+static void similar_help_files(Character *ch, char *argument)
 {
   HELP_DATA *pHelp = NULL;
   short level = 0;

@@ -1,9 +1,9 @@
 #include "character.h"
 #include "mud.h"
 
-void do_revert(CHAR_DATA *ch, char *argument)
+void do_revert(Character *ch, char *argument)
 {
-  CHAR_DATA *mob;
+  Character *mob;
 
   if ( !is_npc(ch) || !IS_SET(ch->act, ACT_POLYMORPHED) )
     {

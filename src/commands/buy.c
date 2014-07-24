@@ -3,7 +3,7 @@
 #include "mud.h"
 #include "character.h"
 
-void do_buy( CHAR_DATA *ch, char *argument )
+void do_buy( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   int maxgold;
@@ -19,7 +19,7 @@ void do_buy( CHAR_DATA *ch, char *argument )
   if ( IS_SET(ch->in_room->room_flags, ROOM_PET_SHOP) )
     {
       char buf[MAX_STRING_LENGTH];
-      CHAR_DATA *pet;
+      Character *pet;
       ROOM_INDEX_DATA *pRoomIndexNext;
       ROOM_INDEX_DATA *in_room;
 
@@ -97,7 +97,7 @@ void do_buy( CHAR_DATA *ch, char *argument )
     }
   else
     {
-      CHAR_DATA *keeper;
+      Character *keeper;
       OBJ_DATA *obj;
       int cost;
       int noi = 1;              /* Number of items */

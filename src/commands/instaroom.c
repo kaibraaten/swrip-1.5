@@ -2,7 +2,7 @@
 #include "mud.h"
 #include "character.h"
 
-void do_instaroom( CHAR_DATA *ch, char *argument )
+void do_instaroom( Character *ch, char *argument )
 {
   AREA_DATA *pArea;
   ROOM_INDEX_DATA *pRoom;

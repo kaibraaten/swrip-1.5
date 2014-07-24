@@ -386,7 +386,7 @@ static void landship( SHIP_DATA *ship, const char *arg )
   SHIP_DATA *target;
   char buf[MAX_STRING_LENGTH];
   int destination;
-  CHAR_DATA *ch;
+  Character *ch;
 
   if ( !str_prefix(arg,ship->spaceobject->landing_site.locationa) )
     destination = ship->spaceobject->landing_site.doca;
@@ -684,7 +684,7 @@ static void makedebris( SHIP_DATA *ship )
   vector_copy( &debris->head, &ship->head );
 }
 
-void dockship( CHAR_DATA *ch, SHIP_DATA *ship )
+void dockship( Character *ch, SHIP_DATA *ship )
 {
 
   if ( ship->statetdocking == SHIP_DISABLED )
@@ -863,7 +863,7 @@ bool check_hostile( SHIP_DATA *ship )
   return FALSE;
 }
 
-ch_ret drive_ship( CHAR_DATA *ch, SHIP_DATA *ship, EXIT_DATA *pexit, int fall )
+ch_ret drive_ship( Character *ch, SHIP_DATA *ship, EXIT_DATA *pexit, int fall )
 {
   ROOM_INDEX_DATA *in_room;
   ROOM_INDEX_DATA *to_room;
@@ -874,8 +874,8 @@ ch_ret drive_ship( CHAR_DATA *ch, SHIP_DATA *ship, EXIT_DATA *pexit, int fall )
   ch_ret retcode;
   short door, the_chance;
   bool drunk = FALSE;
-  CHAR_DATA * rch;
-  CHAR_DATA * next_rch;
+  Character * rch;
+  Character * next_rch;
 
   if ( !is_npc( ch ) )
     if ( is_drunk( ch ) && ( ch->position != POS_SHOVE )
@@ -1053,7 +1053,7 @@ ch_ret drive_ship( CHAR_DATA *ch, SHIP_DATA *ship, EXIT_DATA *pexit, int fall )
 
   if ( to_room->tunnel > 0 )
     {
-      CHAR_DATA *ctmp;
+      Character *ctmp;
       int count = 0;
 
       for ( ctmp = to_room->first_person; ctmp; ctmp = ctmp->next_in_room )
@@ -1172,7 +1172,7 @@ void sound_to_ship( SHIP_DATA *ship, const char *argument )
   for ( roomnum = ship->room.first ; roomnum <= ship->room.last ;roomnum++ )
     {
       ROOM_INDEX_DATA *room = get_room_index( roomnum );
-      CHAR_DATA *vic = NULL;
+      Character *vic = NULL;
 
       if ( room == NULL )
         continue;
@@ -2983,7 +2983,7 @@ void ship_from_spaceobject( SHIP_DATA *ship , SPACE_DATA *spaceobject )
   ship->spaceobject = NULL;
 }
 
-bool is_rental( CHAR_DATA *ch , SHIP_DATA *ship )
+bool is_rental( Character *ch , SHIP_DATA *ship )
 {
   if ( !str_cmp("Public",ship->owner) )
     return TRUE;
@@ -3023,7 +3023,7 @@ bool candock( const SHIP_DATA *ship )
   return TRUE;
 }
 
-bool check_pilot( CHAR_DATA *ch , SHIP_DATA *ship )
+bool check_pilot( Character *ch , SHIP_DATA *ship )
 {
   if ( !str_cmp(ch->name,ship->owner) || !str_cmp(ch->name,ship->pilot)
        || !str_cmp(ch->name,ship->copilot) || !str_cmp("Public",ship->owner)
@@ -3086,7 +3086,7 @@ bool extract_ship( SHIP_DATA *ship )
   return TRUE;
 }
 
-void damage_ship_ch( SHIP_DATA *ship , int min , int max , CHAR_DATA *ch )
+void damage_ship_ch( SHIP_DATA *ship , int min , int max , Character *ch )
 {
   short ionFactor = 1;
   int dmg , shield_dmg;
@@ -3281,7 +3281,7 @@ void damage_ship( SHIP_DATA *ship , SHIP_DATA *assaulter, int min , int max )
     echo_to_cockpit( AT_BLOOD+ AT_BLINK , ship , "WARNING! Ship hull severely damaged!" );
 }
 
-void destroy_ship( SHIP_DATA *ship , CHAR_DATA *ch )
+void destroy_ship( SHIP_DATA *ship , Character *ch )
 {
   char buf[MAX_STRING_LENGTH];
   char buf2[MAX_STRING_LENGTH];
@@ -3289,7 +3289,7 @@ void destroy_ship( SHIP_DATA *ship , CHAR_DATA *ch )
   int  roomnum;
   ROOM_INDEX_DATA *room;
   OBJ_DATA *robj;
-  CHAR_DATA *rch;
+  Character *rch;
   SHIP_DATA *lship;
 
   if (!ship)
@@ -3396,7 +3396,7 @@ bool ship_to_room(SHIP_DATA *ship, vnum_t vnum )
   return TRUE;
 }
 
-bool rent_ship( CHAR_DATA *ch , SHIP_DATA *ship )
+bool rent_ship( Character *ch , SHIP_DATA *ship )
 {
   long price = 0;
 

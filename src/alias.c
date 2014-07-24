@@ -28,7 +28,7 @@
 #include "mud.h"
 #include "character.h"
 
-ALIAS_DATA *find_alias( const CHAR_DATA *ch, const char *original_argument )
+ALIAS_DATA *find_alias( const Character *ch, const char *original_argument )
 {
   ALIAS_DATA *pal;
   char alias_name[MAX_INPUT_LENGTH];
@@ -47,7 +47,7 @@ ALIAS_DATA *find_alias( const CHAR_DATA *ch, const char *original_argument )
   return(NULL);
 }
 
-void free_aliases( CHAR_DATA *ch )
+void free_aliases( Character *ch )
 {
   ALIAS_DATA *pal, *next_pal;
 
@@ -65,7 +65,7 @@ void free_aliases( CHAR_DATA *ch )
     }
 }
 
-bool check_alias( CHAR_DATA *ch, char *command, char *argument )
+bool check_alias( Character *ch, char *command, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   ALIAS_DATA *alias;

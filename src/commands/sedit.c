@@ -4,7 +4,7 @@
 /*
  * Social editor/displayer/save/delete                          -Thoric
  */
-void do_sedit( CHAR_DATA *ch, char *argument )
+void do_sedit( Character *ch, char *argument )
 {
   SOCIALTYPE *social;
   char arg1[MAX_INPUT_LENGTH];

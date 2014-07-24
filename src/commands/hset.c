@@ -1,7 +1,7 @@
 #include "mud.h"
 #include "help.h"
 
-void do_hset( CHAR_DATA *ch, char *argument )
+void do_hset( Character *ch, char *argument )
 {
   HELP_DATA *pHelp = NULL;
   char arg1[MAX_INPUT_LENGTH];

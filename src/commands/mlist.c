@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_mlist( CHAR_DATA *ch, char *argument )
+void do_mlist( Character *ch, char *argument )
 {
   MOB_INDEX_DATA        *mob;
   int                    vnum;

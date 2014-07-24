@@ -1,9 +1,9 @@
 #include "character.h"
 #include "mud.h"
 
-void do_cutdoor( CHAR_DATA *ch, char *argument )
+void do_cutdoor( Character *ch, char *argument )
 {
-  CHAR_DATA *gch;
+  Character *gch;
   EXIT_DATA *pexit;
   char       arg [ MAX_INPUT_LENGTH ];
   OBJ_DATA *wield;
@@ -84,7 +84,7 @@ void do_cutdoor( CHAR_DATA *ch, char *argument )
                &&   (pexit_rev = pexit->rexit) != NULL
                &&    pexit_rev->to_room == ch->in_room )
             {
-              CHAR_DATA *rch;
+              Character *rch;
 
               REMOVE_BIT( pexit_rev->exit_info, EX_CLOSED );
               if ( IS_SET( pexit_rev->exit_info, EX_LOCKED ) )

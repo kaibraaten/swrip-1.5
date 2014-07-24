@@ -3,7 +3,7 @@
 
 static const char *get_clan_type(const CLAN_DATA *const clan);
 
-void do_showclan( CHAR_DATA *ch, char *argument )
+void do_showclan( Character *ch, char *argument )
 {
   CLAN_DATA *clan;
 

@@ -1,9 +1,9 @@
 #include "character.h"
 #include "mud.h"
 
-void do_punch( CHAR_DATA *ch, char *argument )
+void do_punch( Character *ch, char *argument )
 {
-  CHAR_DATA *victim;
+  Character *victim;
   char arg[MAX_INPUT_LENGTH];
 
   if ( is_npc(ch) && is_affected_by( ch, AFF_CHARM ) )

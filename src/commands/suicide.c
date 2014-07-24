@@ -1,7 +1,7 @@
 #include "mud.h"
 #include "character.h"
 
-void do_suicide( CHAR_DATA *ch, char *argument )
+void do_suicide( Character *ch, char *argument )
 {
   char  logbuf[MAX_STRING_LENGTH];
 

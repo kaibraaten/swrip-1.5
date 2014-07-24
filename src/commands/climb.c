@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_climb( CHAR_DATA *ch, char *argument )
+void do_climb( Character *ch, char *argument )
 {
   EXIT_DATA *pexit = NULL;
 

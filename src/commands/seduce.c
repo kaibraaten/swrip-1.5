@@ -1,11 +1,11 @@
 #include "character.h"
 #include "mud.h"
 
-void do_seduce ( CHAR_DATA *ch , char *argument )
+void do_seduce ( Character *ch , char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   char buf[MAX_INPUT_LENGTH];
-  CHAR_DATA *victim;
+  Character *victim;
 
   one_argument( argument, arg );
 

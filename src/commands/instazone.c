@@ -2,7 +2,7 @@
 #include "reset.h"
 #include "mud.h"
 
-void do_instazone( CHAR_DATA *ch, char *argument )
+void do_instazone( Character *ch, char *argument )
 {
   AREA_DATA *pArea;
   int vnum;

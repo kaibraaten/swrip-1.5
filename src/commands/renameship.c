@@ -2,7 +2,7 @@
 #include "ships.h"
 #include "character.h"
 
-void do_renameship( CHAR_DATA *ch, char *argument )
+void do_renameship( Character *ch, char *argument )
 {
   SHIP_DATA *ship;
   CLAN_DATA *clan;

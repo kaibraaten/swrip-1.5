@@ -4,7 +4,7 @@
 /*
  * Obsolete Merc room editing routine
  */
-void do_rset( CHAR_DATA *ch, char *argument )
+void do_rset( Character *ch, char *argument )
 {
   char arg1 [MAX_INPUT_LENGTH];
   char arg2 [MAX_INPUT_LENGTH];

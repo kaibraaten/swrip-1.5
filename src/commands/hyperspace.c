@@ -3,7 +3,7 @@
 #include "mud.h"
 #include "character.h"
 
-void do_hyperspace(CHAR_DATA *ch, char *argument )
+void do_hyperspace(Character *ch, char *argument )
 {
   int the_chance;
   Vector3 tmp;

@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_practice( CHAR_DATA *ch, char *argument )
+void do_practice( Character *ch, char *argument )
 {
   char buf[MAX_STRING_LENGTH];
   int sn;
@@ -89,7 +89,7 @@ void do_practice( CHAR_DATA *ch, char *argument )
     }
   else
     {
-      CHAR_DATA *mob;
+      Character *mob;
       int adept;
       bool can_prac = TRUE;
 

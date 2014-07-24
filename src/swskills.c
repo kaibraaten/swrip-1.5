@@ -24,7 +24,7 @@
 #include "mud.h"
 #include "character.h"
 
-void add_reinforcements( CHAR_DATA *ch )
+void add_reinforcements( Character *ch )
 {
   MOB_INDEX_DATA  * pMobIndex;
   OBJ_DATA        * blaster;
@@ -48,7 +48,7 @@ void add_reinforcements( CHAR_DATA *ch )
     {
 
 
-      CHAR_DATA * mob[3];
+      Character * mob[3];
       int         mob_cnt;
 
       if ( ch->backup_mob == MOB_VNUM_IMP_FORCES ||
@@ -92,7 +92,7 @@ void add_reinforcements( CHAR_DATA *ch )
     }
   else
     {
-      CHAR_DATA *mob;
+      Character *mob;
       int ability;
 
       if ( ch->backup_mob == MOB_VNUM_IMP_ELITE ||

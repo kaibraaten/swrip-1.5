@@ -1,11 +1,11 @@
 #include "character.h"
 #include "mud.h"
 
-void do_disconnect( CHAR_DATA *ch, char *argument )
+void do_disconnect( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   DESCRIPTOR_DATA *d;
-  CHAR_DATA *victim;
+  Character *victim;
 
   one_argument( argument, arg );
   if ( arg[0] == '\0' )

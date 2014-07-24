@@ -2,10 +2,10 @@
 #include "mud.h"
 #include "character.h"
 
-void do_reboot( CHAR_DATA *ch, char *argument )
+void do_reboot( Character *ch, char *argument )
 {
   char buf[MAX_STRING_LENGTH];
-  CHAR_DATA *vch;
+  Character *vch;
   SHIP_DATA *ship;
 
   if ( str_cmp( argument, "mud now" )

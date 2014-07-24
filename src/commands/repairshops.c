@@ -1,6 +1,6 @@
 #include "mud.h"
 
-void do_repairshops( CHAR_DATA *ch, char *argument )
+void do_repairshops( Character *ch, char *argument )
 {
   REPAIR_DATA *repair;
 

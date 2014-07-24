@@ -3,13 +3,13 @@
 #include "mud.h"
 #include "character.h"
 
-static void appraise_all( CHAR_DATA *ch, CHAR_DATA *keeper, char *fixstr );
+static void appraise_all( Character *ch, Character *keeper, char *fixstr );
 
-void do_appraise( CHAR_DATA *ch, char *argument )
+void do_appraise( Character *ch, char *argument )
 {
   char buf[MAX_STRING_LENGTH];
   char arg[MAX_INPUT_LENGTH];
-  CHAR_DATA *keeper;
+  Character *keeper;
   OBJ_DATA *obj;
   int cost;
   char *fixstr;
@@ -74,7 +74,7 @@ void do_appraise( CHAR_DATA *ch, char *argument )
          NULL, keeper, TO_CHAR );
 }
 
-static void appraise_all( CHAR_DATA *ch, CHAR_DATA *keeper, char *fixstr )
+static void appraise_all( Character *ch, Character *keeper, char *fixstr )
 {
   OBJ_DATA *obj;
   char buf[MAX_STRING_LENGTH], *pbuf=buf;

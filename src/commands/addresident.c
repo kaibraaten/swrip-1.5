@@ -1,10 +1,10 @@
 #include "character.h"
 #include "mud.h"
 
-void do_addresident(CHAR_DATA *ch, char *argument)
+void do_addresident(Character *ch, char *argument)
 {
   ROOM_INDEX_DATA *home;
-  CHAR_DATA *victim;
+  Character *victim;
 
   home = ch->in_room;
 

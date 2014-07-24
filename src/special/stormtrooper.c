@@ -1,10 +1,10 @@
 #include "character.h"
 #include "mud.h"
 
-bool spec_stormtrooper( CHAR_DATA *ch )
+bool spec_stormtrooper( Character *ch )
 {
-  CHAR_DATA *victim;
-  CHAR_DATA *v_next;
+  Character *victim;
+  Character *v_next;
 
   if ( !is_awake(ch) || ch->fighting )
     return FALSE;

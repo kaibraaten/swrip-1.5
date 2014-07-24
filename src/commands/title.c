@@ -2,7 +2,7 @@
 #include "mud.h"
 #include "character.h"
 
-void do_title( CHAR_DATA *ch, char *argument )
+void do_title( Character *ch, char *argument )
 {
   if ( is_npc(ch) )
     return;

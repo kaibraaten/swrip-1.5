@@ -1,11 +1,11 @@
 #include "character.h"
 #include "mud.h"
 
-void do_addsalary ( CHAR_DATA *ch , char *argument )
+void do_addsalary ( Character *ch , char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
-  CHAR_DATA *victim;
+  Character *victim;
   CLAN_DATA *clan;
   int salary;
 

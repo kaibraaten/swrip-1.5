@@ -2,7 +2,7 @@
 #include "character.h"
 #include "mud.h"
 
-bool is_wizvis( const CHAR_DATA *ch, const CHAR_DATA *victim )
+bool is_wizvis( const Character *ch, const Character *victim )
 {
   if ( !is_npc(victim)
        && IS_SET(victim->act, PLR_WIZINVIS)
@@ -15,7 +15,7 @@ bool is_wizvis( const CHAR_DATA *ch, const CHAR_DATA *victim )
 /*
  * Return how much exp a char has for a specified ability.
  */
-long get_exp( const CHAR_DATA *ch, short ability )
+long get_exp( const Character *ch, short ability )
 {
   if ( ability >= MAX_ABILITY || ability < 0 )
     return 0;
@@ -23,7 +23,7 @@ long get_exp( const CHAR_DATA *ch, short ability )
   return ch->ability.experience[ability];
 }
 
-void set_exp( CHAR_DATA *ch, short ability, long xp )
+void set_exp( Character *ch, short ability, long xp )
 {
   if ( ability >= MAX_ABILITY || ability < 0 )
     {
@@ -43,7 +43,7 @@ void set_exp( CHAR_DATA *ch, short ability, long xp )
 /*
  * Calculate roughly how much experience a character is worth
  */
-int get_exp_worth( const CHAR_DATA *ch )
+int get_exp_worth( const Character *ch )
 {
   int xp = 0;
 
@@ -70,7 +70,7 @@ int get_exp_worth( const CHAR_DATA *ch )
 /*
  * Retrieve a character's trusted level for permission checking.
  */
-short get_trust( const CHAR_DATA *ch )
+short get_trust( const Character *ch )
 {
   if ( !ch )
     return 0;
@@ -90,7 +90,7 @@ short get_trust( const CHAR_DATA *ch )
 /*
  * Retrieve a character's age.
  */
-short get_age( const CHAR_DATA *ch )
+short get_age( const Character *ch )
 {
   if( is_npc(ch) )
     return 17;
@@ -101,7 +101,7 @@ short get_age( const CHAR_DATA *ch )
 /*
  * Retrieve character's current strength.
  */
-short get_curr_str( const CHAR_DATA *ch )
+short get_curr_str( const Character *ch )
 {
   short max = 25;
   return URANGE( 3, ch->stats.perm_str + ch->stats.mod_str, max );
@@ -110,7 +110,7 @@ short get_curr_str( const CHAR_DATA *ch )
 /*
  * Retrieve character's current intelligence.
  */
-short get_curr_int( const CHAR_DATA *ch )
+short get_curr_int( const Character *ch )
 {
   short max = 25;
   return URANGE( 3, ch->stats.perm_int + ch->stats.mod_int, max );
@@ -119,7 +119,7 @@ short get_curr_int( const CHAR_DATA *ch )
 /*
  * Retrieve character's current wisdom.
  */
-short get_curr_wis( const CHAR_DATA *ch )
+short get_curr_wis( const Character *ch )
 {
   short max = 25;
   return URANGE( 3, ch->stats.perm_wis + ch->stats.mod_wis, max );
@@ -128,7 +128,7 @@ short get_curr_wis( const CHAR_DATA *ch )
 /*
  * Retrieve character's current dexterity.
  */
-short get_curr_dex( const CHAR_DATA *ch )
+short get_curr_dex( const Character *ch )
 {
   short max = 25;
   return URANGE( 3, ch->stats.perm_dex + ch->stats.mod_dex, max );
@@ -137,7 +137,7 @@ short get_curr_dex( const CHAR_DATA *ch )
 /*
  * Retrieve character's current constitution.
  */
-short get_curr_con( const CHAR_DATA *ch )
+short get_curr_con( const Character *ch )
 {
   short max = 25;
   return URANGE( 3, ch->stats.perm_con + ch->stats.mod_con, max );
@@ -146,7 +146,7 @@ short get_curr_con( const CHAR_DATA *ch )
 /*
  * Retrieve character's current charisma.
  */
-short get_curr_cha( const CHAR_DATA *ch )
+short get_curr_cha( const Character *ch )
 {
   short max = 25;
   return URANGE( 3, ch->stats.perm_cha + ch->stats.mod_cha, max );
@@ -155,13 +155,13 @@ short get_curr_cha( const CHAR_DATA *ch )
 /*
  * Retrieve character's current luck.
  */
-short get_curr_lck( const CHAR_DATA *ch )
+short get_curr_lck( const Character *ch )
 {
   short max = 25;
   return URANGE( 3, ch->stats.perm_lck + ch->stats.mod_lck, max );
 }
 
-short get_curr_frc( const CHAR_DATA *ch )
+short get_curr_frc( const Character *ch )
 {
   short max = 0;
 
@@ -182,7 +182,7 @@ short get_curr_frc( const CHAR_DATA *ch )
  * Add another notch on that there belt... ;)
  * Keep track of the last so many kills by vnum                 -Thoric
  */
-void add_kill( CHAR_DATA *ch, const CHAR_DATA *mob )
+void add_kill( Character *ch, const Character *mob )
 {
   int x;
   short vnum, track;
@@ -217,7 +217,7 @@ void add_kill( CHAR_DATA *ch, const CHAR_DATA *mob )
  * Return how many times this player has killed this mob        -Thoric
  * Only keeps track of so many (MAX_KILLTRACK), and keeps track by vnum
  */
-int times_killed( const CHAR_DATA *ch, const CHAR_DATA *mob )
+int times_killed( const Character *ch, const Character *mob )
 {
   int x;
   short vnum, track;
@@ -239,7 +239,7 @@ int times_killed( const CHAR_DATA *ch, const CHAR_DATA *mob )
   return 0;
 }
 
-bool has_comlink( const CHAR_DATA *ch )
+bool has_comlink( const Character *ch )
 {
   OBJ_DATA *obj = NULL;
 
@@ -259,12 +259,12 @@ bool has_comlink( const CHAR_DATA *ch )
   return FALSE;
 }
 
-short get_level( const CHAR_DATA *ch, short ability )
+short get_level( const Character *ch, short ability )
 {
   return ch->ability.level[ability];
 }
 
-void set_level( CHAR_DATA *ch, short ability, int newlevel )
+void set_level( Character *ch, short ability, int newlevel )
 {
   int maxlevel = is_immortal( ch ) ? 200 : MAX_ABILITY_LEVEL;
 
@@ -281,7 +281,7 @@ void set_level( CHAR_DATA *ch, short ability, int newlevel )
 /*
  * Return true if a char is affected by a spell.
  */
-bool is_affected( const CHAR_DATA *ch, int sn )
+bool is_affected( const Character *ch, int sn )
 {
   AFFECT_DATA *paf = NULL;
 
@@ -292,7 +292,7 @@ bool is_affected( const CHAR_DATA *ch, int sn )
   return FALSE;
 }
 
-bool is_affected_by( const CHAR_DATA *ch, int affected_by_bit )
+bool is_affected_by( const Character *ch, int affected_by_bit )
 {
   return IS_SET( ch->affected_by, affected_by_bit );
 }
@@ -301,7 +301,7 @@ bool is_affected_by( const CHAR_DATA *ch, int affected_by_bit )
  * Find a piece of eq on a character.
  * Will pick the top layer if clothing is layered.              -Thoric
  */
-OBJ_DATA *get_eq_char( const CHAR_DATA *ch, int iWear )
+OBJ_DATA *get_eq_char( const Character *ch, int iWear )
 {
   OBJ_DATA *obj, *maxobj = NULL;
 
@@ -322,7 +322,7 @@ OBJ_DATA *get_eq_char( const CHAR_DATA *ch, int iWear )
 /*
  * Equip a char with an obj.
  */
-void equip_char( CHAR_DATA *ch, OBJ_DATA *obj, int iWear )
+void equip_char( Character *ch, OBJ_DATA *obj, int iWear )
 {
   AFFECT_DATA *paf;
   OBJ_DATA      *otmp;
@@ -378,7 +378,7 @@ void equip_char( CHAR_DATA *ch, OBJ_DATA *obj, int iWear )
 /*
  * Unequip a char with an obj.
  */
-void unequip_char( CHAR_DATA *ch, OBJ_DATA *obj )
+void unequip_char( Character *ch, OBJ_DATA *obj )
 {
   AFFECT_DATA *paf;
 
@@ -414,7 +414,7 @@ void unequip_char( CHAR_DATA *ch, OBJ_DATA *obj )
 /*
  * Find an obj in player's inventory.
  */
-OBJ_DATA *get_obj_carry( const CHAR_DATA *ch, const char *argument )
+OBJ_DATA *get_obj_carry( const Character *ch, const char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   OBJ_DATA *obj;
@@ -455,7 +455,7 @@ OBJ_DATA *get_obj_carry( const CHAR_DATA *ch, const char *argument )
 /*
  * Find an obj in player's equipment.
  */
-OBJ_DATA *get_obj_wear( const CHAR_DATA *ch, const char *argument )
+OBJ_DATA *get_obj_wear( const Character *ch, const char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   OBJ_DATA *obj;
@@ -504,7 +504,7 @@ OBJ_DATA *get_obj_wear( const CHAR_DATA *ch, const char *argument )
  * Used by get/drop/put/quaff/recite/etc
  * Increasingly freaky based on mental state and drunkeness
  */
-bool ms_find_obj( const CHAR_DATA *ch )
+bool ms_find_obj( const Character *ch )
 {
   int ms = ch->mental_state;
   int drunk = is_npc(ch) ? 0 : ch->pcdata->condition[COND_DRUNK];
@@ -648,7 +648,7 @@ bool ms_find_obj( const CHAR_DATA *ch )
 /*
  * True if char can see victim.
  */
-bool can_see( const CHAR_DATA *ch, const CHAR_DATA *victim )
+bool can_see( const Character *ch, const Character *victim )
 {
   if (!victim)
     return FALSE;
@@ -725,7 +725,7 @@ bool can_see( const CHAR_DATA *ch, const CHAR_DATA *victim )
 /*
  * True if char can see obj.
  */
-bool can_see_obj( const CHAR_DATA *ch, const OBJ_DATA *obj )
+bool can_see_obj( const Character *ch, const OBJ_DATA *obj )
 {
   if ( !is_npc(ch) && IS_SET(ch->act, PLR_HOLYLIGHT) )
     return TRUE;
@@ -757,7 +757,7 @@ bool can_see_obj( const CHAR_DATA *ch, const OBJ_DATA *obj )
 /*
  * True if char can drop obj.
  */
-bool can_drop_obj( const CHAR_DATA *ch, const OBJ_DATA *obj )
+bool can_drop_obj( const Character *ch, const OBJ_DATA *obj )
 {
   if ( !IS_OBJ_STAT(obj, ITEM_NODROP) )
     return TRUE;
@@ -774,7 +774,7 @@ bool can_drop_obj( const CHAR_DATA *ch, const OBJ_DATA *obj )
 /*
  * "Fix" a character's stats                                    -Thoric
  */
-void fix_char( CHAR_DATA *ch )
+void fix_char( Character *ch )
 {
   AFFECT_DATA *aff;
   OBJ_DATA *carry[MAX_LEVEL*200];
@@ -830,7 +830,7 @@ void fix_char( CHAR_DATA *ch )
 /*
  * Improve mental state                                         -Thoric
  */
-void better_mental_state( CHAR_DATA *ch, int mod )
+void better_mental_state( Character *ch, int mod )
 {
   int c = URANGE( 0, abs(mod), 20 );
   int con = get_curr_con(ch);
@@ -847,7 +847,7 @@ void better_mental_state( CHAR_DATA *ch, int mod )
 /*
  * Deteriorate mental state                                     -Thoric
  */
-void worsen_mental_state( CHAR_DATA *ch, int mod )
+void worsen_mental_state( Character *ch, int mod )
 {
   int c   = URANGE( 0, abs(mod), 20 );
   int con = get_curr_con(ch);
@@ -872,7 +872,7 @@ void worsen_mental_state( CHAR_DATA *ch, int mod )
  * Retrieve a character's carry capacity.
  * Vastly reduced (finally) due to containers           -Thoric
  */
-int can_carry_n( const CHAR_DATA *ch )
+int can_carry_n( const Character *ch )
 {
   int penalty = 0;
 
@@ -903,7 +903,7 @@ int can_carry_n( const CHAR_DATA *ch )
 /*
  * Retrieve a character's carry capacity.
  */
-int can_carry_w( const CHAR_DATA *ch )
+int can_carry_w( const Character *ch )
 {
   if ( !is_npc(ch) && get_trust(ch) >= LEVEL_IMMORTAL )
     return 1000000;
@@ -914,37 +914,37 @@ int can_carry_w( const CHAR_DATA *ch )
   return str_app[get_curr_str(ch)].carry;
 }
 
-bool is_npc( const CHAR_DATA *ch )
+bool is_npc( const Character *ch )
 {
   return IS_SET( ch->act, ACT_is_npc ) || !ch->pcdata;
 }
 
-bool is_immortal( const CHAR_DATA *ch )
+bool is_immortal( const Character *ch )
 {
   return get_trust( ch ) >= LEVEL_IMMORTAL;
 }
 
-bool is_god( const CHAR_DATA *ch )
+bool is_god( const Character *ch )
 {
   return get_trust( ch ) >= LEVEL_GOD;
 }
 
-bool is_hero( const CHAR_DATA *ch )
+bool is_hero( const Character *ch )
 {
   return get_trust( ch ) >= LEVEL_HERO;
 }
 
-bool is_good( const CHAR_DATA *ch )
+bool is_good( const Character *ch )
 {
   return ch->alignment >= 350;
 }
 
-bool is_evil( const CHAR_DATA *ch )
+bool is_evil( const Character *ch )
 {
   return ch->alignment <= -350;
 }
 
-bool is_neutral( const CHAR_DATA *ch )
+bool is_neutral( const Character *ch )
 {
   return !is_good( ch ) && !is_evil( ch );
 }
@@ -954,12 +954,12 @@ bool is_evil_mob_index_data( const MOB_INDEX_DATA *mob )
   return mob->alignment <= -350;
 }
 
-bool is_awake( const CHAR_DATA *ch )
+bool is_awake( const Character *ch )
 {
   return ch->position > POS_SLEEPING;
 }
 
-int get_armor_class( const CHAR_DATA *ch )
+int get_armor_class( const Character *ch )
 {
   int dexterity_modifier = is_awake( ch ) ? dex_app[get_curr_dex(ch)].defensive : 0;
   int combat_level_modifier = ch->race == RACE_DEFEL ? get_level( ch, COMBAT_ABILITY ) * 2 + 5 : get_level( ch, COMBAT_ABILITY ) / 2;
@@ -967,7 +967,7 @@ int get_armor_class( const CHAR_DATA *ch )
   return ch->armor + dexterity_modifier - combat_level_modifier;
 }
 
-int get_hitroll( const CHAR_DATA *ch )
+int get_hitroll( const Character *ch )
 {
   int base_hitroll = ch->hitroll;
   int strength_modifier = str_app[get_curr_str( ch )].tohit;
@@ -976,7 +976,7 @@ int get_hitroll( const CHAR_DATA *ch )
   return base_hitroll + strength_modifier + mental_state_modifier;
 }
 
-int get_damroll( const CHAR_DATA *ch )
+int get_damroll( const Character *ch )
 {
   int base_damroll = ch->damroll;
   int strength_modifier = str_app[get_curr_str(ch)].todam;
@@ -985,24 +985,24 @@ int get_damroll( const CHAR_DATA *ch )
   return base_damroll + strength_modifier + mental_state_modifier;
 }
 
-bool is_drunk( const CHAR_DATA *ch )
+bool is_drunk( const Character *ch )
 {
   return number_percent() < ch->pcdata->condition[COND_DRUNK];
 }
 
-bool is_retired_immortal( const CHAR_DATA *ch )
+bool is_retired_immortal( const Character *ch )
 {
   return !is_npc( ch ) && IS_SET( ch->pcdata->flags, PCFLAG_RETIRED );
 }
 
-bool is_not_authed( const CHAR_DATA *ch )
+bool is_not_authed( const Character *ch )
 {
   return !is_npc( ch )
     && ch->pcdata->auth_state <= 3
     && IS_SET( ch->pcdata->flags, PCFLAG_UNAUTHED);
 }
 
-bool is_waiting_for_auth( const CHAR_DATA *ch )
+bool is_waiting_for_auth( const Character *ch )
 {
   return !is_npc( ch )
     && ch->desc
@@ -1012,22 +1012,22 @@ bool is_waiting_for_auth( const CHAR_DATA *ch )
 
 #define DISGUISE(ch)            ((!nifty_is_name((ch)->name, (ch)->pcdata->title)) ? 1 : 0)
 
-char *PERS( const CHAR_DATA *ch, const CHAR_DATA *looker )
+char *PERS( const Character *ch, const Character *looker )
 {
   return can_see( looker, ch ) ? ( is_npc(ch) ? ch->short_descr : ((get_trust(looker) <= LEVEL_IMMORTAL) ? (DISGUISE(ch) ? ch->pcdata->title : ch->name ) : ch->name)) : ( is_immortal(ch) ? "A Great One" : "someone" );
 }
 
-bool is_clanned( const CHAR_DATA *ch )
+bool is_clanned( const Character *ch )
 {
   return !is_npc( ch ) && ch->pcdata->clan;
 }
 
-void set_wait_state( CHAR_DATA *ch, short number_of_pulses )
+void set_wait_state( Character *ch, short number_of_pulses )
 {
   ch->wait = UMAX( ch->wait, number_of_pulses );
 }
 
-bool is_jedi( const CHAR_DATA *ch )
+bool is_jedi( const Character *ch )
 {
   return get_level( ch, FORCE_ABILITY ) > 1;
 }

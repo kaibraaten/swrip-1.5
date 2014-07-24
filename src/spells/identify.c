@@ -3,11 +3,11 @@
 
 extern char *spell_target_name;
 
-ch_ret spell_identify( int sn, int level, CHAR_DATA *ch, void *vo )
+ch_ret spell_identify( int sn, int level, Character *ch, void *vo )
 {
   /* Modified by Scryn to work on mobs/players/objs */
   OBJ_DATA *obj;
-  CHAR_DATA *victim;
+  Character *victim;
   AFFECT_DATA *paf;
   SKILLTYPE *sktmp;
   SKILLTYPE *skill = get_skilltype(sn);

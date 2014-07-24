@@ -4,7 +4,7 @@
 #include "ships.h"
 #include "turret.h"
 
-void do_status(CHAR_DATA *ch, char *argument )
+void do_status(Character *ch, char *argument )
 {
   int the_chance;
   SHIP_DATA *ship;

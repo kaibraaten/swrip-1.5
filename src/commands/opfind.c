@@ -1,11 +1,11 @@
 #include "mud.h"
 
-static void opfind_help (CHAR_DATA *ch);
+static void opfind_help (Character *ch);
 
 /*
  * Search objects for obj progs containing a specified text string.
  */
-void do_opfind( CHAR_DATA *ch, char *argument )   /* Gorog */
+void do_opfind( Character *ch, char *argument )   /* Gorog */
 {
   OBJ_INDEX_DATA  *   pObj;
   MPROG_DATA      *   pProg;
@@ -72,7 +72,7 @@ void do_opfind( CHAR_DATA *ch, char *argument )   /* Gorog */
 /*
  * Displays the help screen for the "opfind" command
  */
-static void opfind_help (CHAR_DATA *ch)
+static void opfind_help (Character *ch)
 {
   send_to_char( "Syntax:\r\n", ch);
   send_to_char( "opfind n lo_vnum hi_vnum text \r\n"

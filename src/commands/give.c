@@ -2,12 +2,12 @@
 #include "mud.h"
 #include "character.h"
 
-void do_give( CHAR_DATA *ch, char *argument )
+void do_give( Character *ch, char *argument )
 {
   char arg1 [MAX_INPUT_LENGTH];
   char arg2 [MAX_INPUT_LENGTH];
   char buf  [MAX_INPUT_LENGTH];
-  CHAR_DATA *victim;
+  Character *victim;
   OBJ_DATA  *obj;
 
   argument = one_argument( argument, arg1 );

@@ -4,7 +4,7 @@
 #include "mud.h"
 #include "character.h"
 
-void do_dock(CHAR_DATA *ch, char *argument)
+void do_dock(Character *ch, char *argument)
 {
   char arg[MAX_INPUT_LENGTH];
 

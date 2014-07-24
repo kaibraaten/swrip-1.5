@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_loadarea( CHAR_DATA *ch, char *argument )
+void do_loadarea( Character *ch, char *argument )
 {
   AREA_DATA     *tarea;
   char   filename[256];

@@ -57,7 +57,7 @@ int get_class_from_name( const char *arg )
   return iClass;
 }
 
-char *format_obj_to_char( const OBJ_DATA *obj, const CHAR_DATA *ch, bool fShort )
+char *format_obj_to_char( const OBJ_DATA *obj, const Character *ch, bool fShort )
 {
   static char buf[MAX_STRING_LENGTH];
 
@@ -151,7 +151,7 @@ char *halucinated_object( int ms, bool fShort )
  * Show a list to a character.
  * Can coalesce duplicated items.
  */
-void show_list_to_char( const OBJ_DATA *list, CHAR_DATA *ch, bool fShort, bool fShowNothing )
+void show_list_to_char( const OBJ_DATA *list, Character *ch, bool fShort, bool fShowNothing )
 {
   char **prgpstrShow;
   int *prgnShow;
@@ -346,7 +346,7 @@ void show_list_to_char( const OBJ_DATA *list, CHAR_DATA *ch, bool fShort, bool f
   DISPOSE( pitShow );
 }
 
-bool check_blind( const CHAR_DATA *ch )
+bool check_blind( const Character *ch )
 {
   if ( !is_npc(ch) && IS_SET(ch->act, PLR_HOLYLIGHT) )
     return TRUE;
@@ -363,7 +363,7 @@ bool check_blind( const CHAR_DATA *ch )
   return TRUE;
 }
 
-void show_condition( const CHAR_DATA *ch, const CHAR_DATA *victim )
+void show_condition( const Character *ch, const Character *victim )
 {
   char buf[MAX_STRING_LENGTH];
   int percent;

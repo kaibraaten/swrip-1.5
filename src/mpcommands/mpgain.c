@@ -1,12 +1,12 @@
 #include "character.h"
 #include "mud.h"
 
-void do_mpgain( CHAR_DATA *ch, char *argument )
+void do_mpgain( Character *ch, char *argument )
 {
   char arg1[ MAX_INPUT_LENGTH ];
   char arg2[ MAX_INPUT_LENGTH ];
   char arg3[ MAX_INPUT_LENGTH ];
-  CHAR_DATA *victim;
+  Character *victim;
   long xp;
   int  ability;
 

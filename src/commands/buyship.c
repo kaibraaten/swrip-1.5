@@ -2,7 +2,7 @@
 #include "ships.h"
 #include "mud.h"
 
-void do_buyship(CHAR_DATA *ch, char *argument )
+void do_buyship(Character *ch, char *argument )
 {
   long         price;
   SHIP_DATA   *ship;

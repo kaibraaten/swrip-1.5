@@ -1,9 +1,9 @@
 #include "mud.h"
 #include "character.h"
 
-ch_ret spell_scorching_surge( int sn, int level, CHAR_DATA *ch, void *vo )
+ch_ret spell_scorching_surge( int sn, int level, Character *ch, void *vo )
 {
-  CHAR_DATA *victim = (CHAR_DATA *) vo;
+  Character *victim = (Character *) vo;
   static const short dam_each[] =
     {
       1,

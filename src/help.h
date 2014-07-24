@@ -20,7 +20,7 @@ extern HELP_DATA *first_help;
 extern HELP_DATA *last_help;
 extern char *help_greeting;
 
-HELP_DATA *get_help( const CHAR_DATA *ch, char *argument );
+HELP_DATA *get_help( const Character *ch, char *argument );
 void add_help( HELP_DATA *pHelp );
 void unlink_help( HELP_DATA *pHelp );
 void load_helps( void );

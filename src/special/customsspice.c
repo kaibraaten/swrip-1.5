@@ -1,10 +1,10 @@
 #include "character.h"
 #include "mud.h"
 
-bool spec_customs_spice( CHAR_DATA *ch )
+bool spec_customs_spice( Character *ch )
 {
-  CHAR_DATA *victim;
-  CHAR_DATA *v_next;
+  Character *victim;
+  Character *v_next;
   OBJ_DATA  *obj;
   char       buf[MAX_STRING_LENGTH];
   long       ch_exp;

@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_clan_withdraw( CHAR_DATA *ch, char *argument )
+void do_clan_withdraw( Character *ch, char *argument )
 {
   CLAN_DATA *clan = NULL;
   long amount = 0;

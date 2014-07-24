@@ -1,7 +1,7 @@
 #include "mud.h"
 #include "character.h"
 
-void do_enlist( CHAR_DATA *ch, char *argument )
+void do_enlist( Character *ch, char *argument )
 {
   CLAN_DATA *clan;
 

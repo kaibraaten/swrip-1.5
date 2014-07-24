@@ -2,10 +2,10 @@
 #include "mud.h"
 #include "character.h"
 
-void do_showstatistic( CHAR_DATA *ch, char *argument )
+void do_showstatistic( Character *ch, char *argument )
 {
   PC_DATA *pcdata;
-  CHAR_DATA *raceCh;
+  Character *raceCh;
   int race, pclass, iR, iC, iC2;
   bool chk_race = FALSE;
   char buf[MAX_INPUT_LENGTH];
@@ -32,7 +32,7 @@ void do_showstatistic( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  CREATE( raceCh, CHAR_DATA, 1 );
+  CREATE( raceCh, Character, 1 );
   raceCh->top_level = 1;
   raceCh->trust = 0;
   CREATE( pcdata, PC_DATA, 1 );

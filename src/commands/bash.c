@@ -1,9 +1,9 @@
 #include "character.h"
 #include "mud.h"
 
-void do_bash( CHAR_DATA *ch, char *argument )
+void do_bash( Character *ch, char *argument )
 {
-  CHAR_DATA *victim;
+  Character *victim;
   int bash_chance;
 
   if ( is_npc(ch) && is_affected_by( ch, AFF_CHARM ) )

@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_buzz (CHAR_DATA *ch, char *arg)
+void do_buzz (Character *ch, char *arg)
 {
   short exit_dir;
   ROOM_INDEX_DATA *home;

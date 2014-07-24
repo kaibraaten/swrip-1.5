@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_clanfunds( CHAR_DATA *ch, char *argument )
+void do_clanfunds( Character *ch, char *argument )
 {
   CLAN_DATA *clan;
 

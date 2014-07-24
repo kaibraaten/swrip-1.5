@@ -2,7 +2,7 @@
 #include "mud.h"
 #include "character.h"
 
-void do_users( CHAR_DATA *ch, char *argument )
+void do_users( Character *ch, char *argument )
 {
   char buf[MAX_STRING_LENGTH];
   DESCRIPTOR_DATA *d;

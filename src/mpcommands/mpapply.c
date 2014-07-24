@@ -1,9 +1,9 @@
 #include "character.h"
 #include "mud.h"
 
-void do_mpapply( CHAR_DATA *ch, char *argument )
+void do_mpapply( Character *ch, char *argument )
 {
-  CHAR_DATA *victim;
+  Character *victim;
 
   if ( !is_npc( ch ) )
     {

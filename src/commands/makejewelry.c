@@ -2,11 +2,11 @@
 #include "mud.h"
 #include "character.h"
 
-static void OnStart( CHAR_DATA *ch, char *argument );
-static void OnFinished( CHAR_DATA *ch );
-static void OnAbort( CHAR_DATA *ch );
+static void OnStart( Character *ch, char *argument );
+static void OnFinished( Character *ch );
+static void OnAbort( Character *ch );
 
-void do_makejewelry( CHAR_DATA *ch, char *argument )
+void do_makejewelry( Character *ch, char *argument )
 {
   switch( ch->substate )
     {
@@ -26,7 +26,7 @@ void do_makejewelry( CHAR_DATA *ch, char *argument )
     }
 }
 
-static void OnStart( CHAR_DATA *ch, char *argument )
+static void OnStart( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
@@ -126,7 +126,7 @@ static void OnStart( CHAR_DATA *ch, char *argument )
 	}
 }
 
-static void OnFinished( CHAR_DATA *ch )
+static void OnFinished( Character *ch )
 {
   char arg[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
@@ -230,7 +230,7 @@ static void OnFinished( CHAR_DATA *ch )
   learn_from_success( ch, gsn_makejewelry );
 }
 
-static void OnAbort( CHAR_DATA *ch )
+static void OnAbort( Character *ch )
 {
   DISPOSE( ch->dest_buf );
   DISPOSE( ch->dest_buf_2 );

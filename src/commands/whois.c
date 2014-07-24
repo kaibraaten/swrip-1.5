@@ -3,9 +3,9 @@
 #include "mud.h"
 #include "character.h"
 
-void do_whois( CHAR_DATA *ch, char *argument)
+void do_whois( Character *ch, char *argument)
 {
-  CHAR_DATA *victim;
+  Character *victim;
   char buf[MAX_STRING_LENGTH];
   char buf2[MAX_STRING_LENGTH];
 

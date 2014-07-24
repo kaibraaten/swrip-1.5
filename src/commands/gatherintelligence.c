@@ -2,9 +2,9 @@
 #include "mud.h"
 #include "character.h"
 
-void do_gather_intelligence ( CHAR_DATA *ch , char *argument )
+void do_gather_intelligence ( Character *ch , char *argument )
 {
-  CHAR_DATA *victim;
+  Character *victim;
   char buf[MAX_STRING_LENGTH];
   int percent, the_chance;
   PLANET_DATA *planet;

@@ -2,9 +2,9 @@
 #include "shops.h"
 #include "mud.h"
 
-void do_buyvendor (CHAR_DATA *ch, char *argument)
+void do_buyvendor (Character *ch, char *argument)
 {
-  CHAR_DATA *keeper;
+  Character *keeper;
   OBJ_DATA *deed;
   char buf[MAX_STRING_LENGTH];
   char buf1[MAX_STRING_LENGTH];

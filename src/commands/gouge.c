@@ -1,9 +1,9 @@
 #include "character.h"
 #include "mud.h"
 
-void do_gouge( CHAR_DATA *ch, char *argument )
+void do_gouge( Character *ch, char *argument )
 {
-  CHAR_DATA *victim;
+  Character *victim;
   AFFECT_DATA af;
   short dam;
   int percent;

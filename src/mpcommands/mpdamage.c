@@ -1,16 +1,16 @@
 #include "character.h"
 #include "mud.h"
 
-static ch_ret simple_damage( CHAR_DATA *ch, CHAR_DATA *victim, int dam, int dt );
+static ch_ret simple_damage( Character *ch, Character *victim, int dam, int dt );
 
 /*
  * syntax: mpdamage (character) (#hps)
  */
-void do_mp_damage( CHAR_DATA *ch, char *argument )
+void do_mp_damage( Character *ch, char *argument )
 {
   char arg1[ MAX_INPUT_LENGTH ];
   char arg2[ MAX_INPUT_LENGTH ];
-  CHAR_DATA *victim;
+  Character *victim;
   int dam;
 
   if ( is_affected_by( ch, AFF_CHARM ) )
@@ -81,7 +81,7 @@ void do_mp_damage( CHAR_DATA *ch, char *argument )
  *
  *  note: should be careful about using victim afterwards
  */
-static ch_ret simple_damage( CHAR_DATA *ch, CHAR_DATA *victim, int dam, int dt )
+static ch_ret simple_damage( Character *ch, Character *victim, int dam, int dt )
 {
   short dameq;
   bool npcvict;

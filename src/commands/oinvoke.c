@@ -3,7 +3,7 @@
 
 extern OBJ_INDEX_DATA *obj_index_hash[MAX_KEY_HASH];
 
-void do_oinvoke( CHAR_DATA *ch, char *argument )
+void do_oinvoke( Character *ch, char *argument )
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];

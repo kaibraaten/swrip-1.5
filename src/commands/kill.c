@@ -1,10 +1,10 @@
 #include "mud.h"
 #include "character.h"
 
-void do_kill( CHAR_DATA *ch, char *argument )
+void do_kill( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  CHAR_DATA *victim;
+  Character *victim;
 
   one_argument( argument, arg );
 

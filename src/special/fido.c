@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-bool spec_fido( CHAR_DATA *ch )
+bool spec_fido( Character *ch )
 {
   OBJ_DATA *corpse;
   OBJ_DATA *c_next;

@@ -2,7 +2,7 @@
 #include "ships.h"
 #include "character.h"
 
-void do_addpilot(CHAR_DATA *ch, char *argument )
+void do_addpilot(Character *ch, char *argument )
 {
   SHIP_DATA *ship;
   int the_chance;

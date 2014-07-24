@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_smoke( CHAR_DATA *ch, char *argument )
+void do_smoke( Character *ch, char *argument )
 {
   OBJ_DATA *pipe_obj;
   char arg[MAX_INPUT_LENGTH];

@@ -2,10 +2,10 @@
 #include "mud.h"
 #include "character.h"
 
-void do_pick( CHAR_DATA *ch, char *argument )
+void do_pick( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  CHAR_DATA *gch;
+  Character *gch;
   OBJ_DATA *obj;
   EXIT_DATA *pexit;
   SHIP_DATA *ship;
@@ -150,7 +150,7 @@ void do_pick( CHAR_DATA *ch, char *argument )
             return;
           for ( d = first_descriptor; d; d = d->next )
             {
-              CHAR_DATA *victim = d->original ? d->original : d->character;
+              Character *victim = d->original ? d->original : d->character;
 
               if ( d->connection_state != CON_PLAYING )
                 continue;
@@ -194,7 +194,7 @@ void do_pick( CHAR_DATA *ch, char *argument )
             return;
           for ( d = first_descriptor; d; d = d->next )
             {
-              CHAR_DATA *victim = d->original ? d->original : d->character;
+              Character *victim = d->original ? d->original : d->character;
 
               if ( d->connection_state != CON_PLAYING )
                 continue;

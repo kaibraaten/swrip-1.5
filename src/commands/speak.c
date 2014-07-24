@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_speak( CHAR_DATA *ch, char *argument )
+void do_speak( Character *ch, char *argument )
 {
   int langs = 0;
   char arg[MAX_INPUT_LENGTH];

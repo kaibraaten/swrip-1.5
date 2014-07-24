@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_clantalk( CHAR_DATA *ch, char *argument )
+void do_clantalk( Character *ch, char *argument )
 {
   if (is_not_authed(ch))
     {

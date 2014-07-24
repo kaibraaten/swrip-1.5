@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_quit( CHAR_DATA *ch, char *argument )
+void do_quit( Character *ch, char *argument )
 {
   int x = 0, y = 0, cost = 0;
   int level = 0;

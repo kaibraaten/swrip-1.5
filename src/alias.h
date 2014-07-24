@@ -40,8 +40,8 @@ struct  alias_type
 
 DECLARE_DO_FUN( do_alias );
 
-void free_aliases( CHAR_DATA *ch );
-bool check_alias( CHAR_DATA *ch, char *command, char *argument );
-ALIAS_DATA *find_alias( const CHAR_DATA *ch, const char *argument );
+void free_aliases( Character *ch );
+bool check_alias( Character *ch, char *command, char *argument );
+ALIAS_DATA *find_alias( const Character *ch, const char *argument );
 
 #endif

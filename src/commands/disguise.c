@@ -2,7 +2,7 @@
 #include "mud.h"
 #include "character.h"
 
-void do_disguise( CHAR_DATA *ch, char *argument )
+void do_disguise( Character *ch, char *argument )
 {
   int the_chance;
   short gsn;

@@ -1,10 +1,10 @@
 #include "character.h"
 #include "mud.h"
 
-bool spec_thief( CHAR_DATA *ch )
+bool spec_thief( Character *ch )
 {
-  CHAR_DATA *victim;
-  CHAR_DATA *v_next;
+  Character *victim;
+  Character *v_next;
   int gold, maxgold;
 
   if ( ch->position != POS_STANDING )

@@ -2,7 +2,7 @@
 #include "ships.h"
 #include "mud.h"
 
-void do_systemtalk( CHAR_DATA *ch, char *argument )
+void do_systemtalk( Character *ch, char *argument )
 {
   SHIP_DATA *ship = ship_from_cockpit(ch->in_room->vnum);
 

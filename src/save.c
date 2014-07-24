@@ -43,15 +43,15 @@
  * Array to keep track of equipment temporarily.                -Thoric
  */
 OBJ_DATA *save_equipment[MAX_WEAR][8];
-CHAR_DATA *quitting_char, *loading_char, *saving_char;
+Character *quitting_char, *loading_char, *saving_char;
 
 int file_ver;
 
 /*
  * Externals
  */
-void fwrite_comments( CHAR_DATA *ch, FILE *fp );
-void fread_comment( CHAR_DATA *ch, FILE *fp );
+void fwrite_comments( Character *ch, FILE *fp );
+void fread_comment( Character *ch, FILE *fp );
 
 extern FILE *fpArea;
 extern char strArea[MAX_INPUT_LENGTH];
@@ -65,16 +65,16 @@ static  OBJ_DATA *      rgObjNest       [MAX_NEST];
 /*
  * Local functions.
  */
-void    fwrite_char( CHAR_DATA *ch, FILE *fp );
-void    fread_char( CHAR_DATA *ch, FILE *fp, bool preload );
-void    write_corpses( CHAR_DATA *ch, char *name );
-CHAR_DATA *  fread_mobile( FILE *fp );
-void write_char_mobile( CHAR_DATA *ch , char *argument );
+void    fwrite_char( Character *ch, FILE *fp );
+void    fread_char( Character *ch, FILE *fp, bool preload );
+void    write_corpses( Character *ch, char *name );
+Character *  fread_mobile( FILE *fp );
+void write_char_mobile( Character *ch , char *argument );
 void read_char_mobile( char *argument );
-void fwrite_mobile( FILE *fp, CHAR_DATA *mob );
+void fwrite_mobile( FILE *fp, Character *mob );
 
 
-void save_home( CHAR_DATA *ch )
+void save_home( Character *ch )
 {
   if ( ch->plr_home )
     {
@@ -107,7 +107,7 @@ void save_home( CHAR_DATA *ch )
  * Un-equip character before saving to ensure proper    -Thoric
  * stats are saved in case of changes to or removal of EQ
  */
-void de_equip_char( CHAR_DATA *ch )
+void de_equip_char( Character *ch )
 {
   char buf[MAX_STRING_LENGTH];
   OBJ_DATA *obj;
@@ -140,7 +140,7 @@ void de_equip_char( CHAR_DATA *ch )
 /*
  * Re-equip character                                   -Thoric
  */
-void re_equip_char( CHAR_DATA *ch )
+void re_equip_char( Character *ch )
 {
   int x,y;
 
@@ -162,7 +162,7 @@ void re_equip_char( CHAR_DATA *ch )
  * Would be cool to save NPC's too for quest purposes,
  *   some of the infrastructure is provided.
  */
-void save_char_obj( CHAR_DATA *ch )
+void save_char_obj( Character *ch )
 {
   char strsave[MAX_INPUT_LENGTH];
   char strback[MAX_INPUT_LENGTH];
@@ -262,7 +262,7 @@ void save_char_obj( CHAR_DATA *ch )
   return;
 }
 
-void save_clone( CHAR_DATA *ch )
+void save_clone( Character *ch )
 {
   char strsave[MAX_INPUT_LENGTH];
   char strback[MAX_INPUT_LENGTH];
@@ -325,7 +325,7 @@ void save_clone( CHAR_DATA *ch )
 /*
  * Write the char.
  */
-void fwrite_char( CHAR_DATA *ch, FILE *fp )
+void fwrite_char( Character *ch, FILE *fp )
 {
   AFFECT_DATA *paf;
   ALIAS_DATA *pal;
@@ -596,7 +596,7 @@ void fwrite_char( CHAR_DATA *ch, FILE *fp )
 /*
  * Write an object and its contents.
  */
-void fwrite_obj( const CHAR_DATA *ch, const OBJ_DATA *obj, FILE *fp, int iNest,
+void fwrite_obj( const Character *ch, const OBJ_DATA *obj, FILE *fp, int iNest,
                  short os_type )
 {
   EXTRA_DESCR_DATA *ed;
@@ -775,14 +775,14 @@ void fwrite_obj( const CHAR_DATA *ch, const OBJ_DATA *obj, FILE *fp, int iNest,
 bool load_char_obj( DESCRIPTOR_DATA *d, char *name, bool preload )
 {
   char strsave[MAX_INPUT_LENGTH];
-  CHAR_DATA *ch;
+  Character *ch;
   FILE *fp;
   bool found;
   struct stat fst;
   int i, x;
   char buf[MAX_INPUT_LENGTH];
 
-  CREATE( ch, CHAR_DATA, 1 );
+  CREATE( ch, Character, 1 );
   for ( x = 0; x < MAX_WEAR; x++ )
     for ( i = 0; i < MAX_LAYERS; i++ )
       save_equipment[x][i] = NULL;
@@ -898,7 +898,7 @@ bool load_char_obj( DESCRIPTOR_DATA *d, char *name, bool preload )
               else
                 if ( !str_cmp( word, "MOBILE") )
                   {
-                    CHAR_DATA *mob;
+                    Character *mob;
                     mob = fread_mobile( fp );
                     ch->pcdata->pet = mob;
                     mob->master = ch;
@@ -1000,7 +1000,7 @@ bool load_char_obj( DESCRIPTOR_DATA *d, char *name, bool preload )
 /*
  * Read in a char.
  */
-void fread_char( CHAR_DATA *ch, FILE *fp, bool preload )
+void fread_char( Character *ch, FILE *fp, bool preload )
 {
   char buf[MAX_STRING_LENGTH];
   char *line;
@@ -1734,7 +1734,7 @@ void fread_char( CHAR_DATA *ch, FILE *fp, bool preload )
 }
 
 
-void fread_obj( CHAR_DATA *ch, FILE *fp, short os_type )
+void fread_obj( Character *ch, FILE *fp, short os_type )
 {
   OBJ_DATA *obj;
   const char *word;
@@ -2063,7 +2063,7 @@ void set_alarm( long seconds )
   alarm( seconds );
 }
 
-void write_corpses( CHAR_DATA *ch, char *name )
+void write_corpses( Character *ch, char *name )
 {
   OBJ_DATA *corpse;
   FILE *fp = NULL;
@@ -2321,7 +2321,7 @@ void save_storeroom( ROOM_INDEX_DATA *room )
 void load_vendors( void )
 {
   DIR *dp;
-  CHAR_DATA *mob;
+  Character *mob;
   struct dirent *de;
 
   if ( !(dp = opendir(VENDOR_DIR)) )
@@ -2379,7 +2379,7 @@ void load_vendors( void )
 /*
  * This will write one mobile structure pointed to be fp --Shaddai
  */
-void fwrite_mobile( FILE *fp, CHAR_DATA *mob )
+void fwrite_mobile( FILE *fp, Character *mob )
 {
   if ( !is_npc( mob ) || !fp )
     return;
@@ -2414,9 +2414,9 @@ void fwrite_mobile( FILE *fp, CHAR_DATA *mob )
 /*
  * This will read one mobile structure pointer to by fp --Shaddai
  */
-CHAR_DATA *  fread_mobile( FILE *fp )
+Character *  fread_mobile( FILE *fp )
 {
-  CHAR_DATA *mob = NULL;
+  Character *mob = NULL;
   const char *word;
   bool fMatch;
   int inroom = 0;
@@ -2514,10 +2514,10 @@ CHAR_DATA *  fread_mobile( FILE *fp )
 /*
  * This will write in the saved mobile for a char --Shaddai
  */
-void write_char_mobile( CHAR_DATA *ch , char *argument )
+void write_char_mobile( Character *ch , char *argument )
 {
   FILE *fp;
-  CHAR_DATA *mob;
+  Character *mob;
   char buf[MAX_STRING_LENGTH];
 
   if ( is_npc( ch ) || !ch->pcdata->pet )

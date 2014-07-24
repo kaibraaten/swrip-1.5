@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_bamfout( CHAR_DATA *ch, char *argument )
+void do_bamfout( Character *ch, char *argument )
 {
   if ( !is_npc(ch) )
     {

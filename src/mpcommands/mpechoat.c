@@ -3,10 +3,10 @@
 
 /* prints message only to victim */
 
-void do_mpechoat( CHAR_DATA *ch, char *argument )
+void do_mpechoat( Character *ch, char *argument )
 {
   char       arg[ MAX_INPUT_LENGTH ];
-  CHAR_DATA *victim;
+  Character *victim;
   int        actflags;
   short     color;
 

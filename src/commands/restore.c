@@ -3,7 +3,7 @@
 
 #define RESTORE_INTERVAL 21600
 
-void do_restore( CHAR_DATA *ch, char *argument )
+void do_restore( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
 
@@ -16,8 +16,8 @@ void do_restore( CHAR_DATA *ch, char *argument )
 
   if ( !str_cmp( arg, "all" ) )
     {
-      CHAR_DATA *vch;
-      CHAR_DATA *vch_next;
+      Character *vch;
+      Character *vch_next;
 
       if ( !ch->pcdata )
         return;
@@ -62,7 +62,7 @@ void do_restore( CHAR_DATA *ch, char *argument )
     }
   else
     {
-      CHAR_DATA *victim;
+      Character *victim;
 
       if ( ( victim = get_char_world( ch, arg ) ) == NULL )
         {

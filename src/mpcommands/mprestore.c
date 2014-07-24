@@ -4,11 +4,11 @@
 /*
  * syntax: mprestore (character) (#hps)                Gorog
  */
-void do_mp_restore( CHAR_DATA *ch, char *argument )
+void do_mp_restore( Character *ch, char *argument )
 {
   char arg1[ MAX_INPUT_LENGTH ];
   char arg2[ MAX_INPUT_LENGTH ];
-  CHAR_DATA *victim;
+  Character *victim;
   int hp;
 
   if ( is_affected_by( ch, AFF_CHARM ) )

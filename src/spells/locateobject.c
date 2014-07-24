@@ -4,7 +4,7 @@
 
 extern char *spell_target_name;
 
-ch_ret spell_locate_object( int sn, int level, CHAR_DATA *ch, void *vo )
+ch_ret spell_locate_object( int sn, int level, Character *ch, void *vo )
 {
   char buf[MAX_INPUT_LENGTH];
   OBJ_DATA *obj;

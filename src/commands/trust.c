@@ -1,11 +1,11 @@
 #include "mud.h"
 #include "character.h"
 
-void do_trust( CHAR_DATA *ch, char *argument )
+void do_trust( Character *ch, char *argument )
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
-  CHAR_DATA *victim;
+  Character *victim;
   int level;
 
   argument = one_argument( argument, arg1 );

@@ -1,7 +1,7 @@
 #include "mud.h"
 #include "character.h"
 
-void do_aassign( CHAR_DATA *ch, char *argument )
+void do_aassign( Character *ch, char *argument )
 {
   char buf[MAX_STRING_LENGTH];
   AREA_DATA *tarea, *tmp;

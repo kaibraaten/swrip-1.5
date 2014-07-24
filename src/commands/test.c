@@ -8,14 +8,14 @@ static char is_in_list( int needle, const int *haystack, size_t list_size );
 static size_t get_list_size( const int *teachers );
 static int comparator( const void*, const void* );
 static AREA_DATA *get_area( vnum_t vnum );
-static void command_teachers( CHAR_DATA *ch );
-static void command_noteacher( CHAR_DATA *ch );
+static void command_teachers( Character *ch );
+static void command_noteacher( Character *ch );
 static void add_area_to_list( AREA_DATA **arealist, AREA_DATA *area );
 static bool is_in_arealist( AREA_DATA **arealist, AREA_DATA *area );
 
 #define MAX_TEACHER 10000
 
-void do_test( CHAR_DATA *ch, char *argument )
+void do_test( Character *ch, char *argument )
 {
   char command[MAX_INPUT_LENGTH];
   argument = one_argument( argument, command );
@@ -35,7 +35,7 @@ void do_test( CHAR_DATA *ch, char *argument )
   ch_printf(ch, "Unknown option.\r\n");
 }
 
-static void command_noteacher( CHAR_DATA *ch )
+static void command_noteacher( Character *ch )
 {
   int sn = 0;
 
@@ -57,7 +57,7 @@ static void command_noteacher( CHAR_DATA *ch )
 
 #define MAX_AREA_LIST_SIZE 100
 
-static void command_teachers( CHAR_DATA *ch )
+static void command_teachers( Character *ch )
 {
   int sn = 0;
   int i = 0;

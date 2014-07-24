@@ -1,6 +1,6 @@
 #include "mud.h"
 
-void do_noresolve( CHAR_DATA *ch, char *argument )
+void do_noresolve( Character *ch, char *argument )
 {
   sysdata.NO_NAME_RESOLVING = !sysdata.NO_NAME_RESOLVING;
 

@@ -1,6 +1,6 @@
 #include "mud.h"
 
-void do_foldarea( CHAR_DATA *ch, char *argument )
+void do_foldarea( Character *ch, char *argument )
 {
   AREA_DATA *tarea = NULL;
   char arg[MAX_INPUT_LENGTH];

@@ -1,9 +1,9 @@
 #include "character.h"
 #include "mud.h"
 
-void show_char_to_char( CHAR_DATA *list, CHAR_DATA *ch );
+void show_char_to_char( Character *list, Character *ch );
 
-void do_scan( CHAR_DATA *ch, char *argument )
+void do_scan( Character *ch, char *argument )
 {
   ROOM_INDEX_DATA *was_in_room;
   ROOM_INDEX_DATA *to_room;

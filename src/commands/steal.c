@@ -1,12 +1,12 @@
 #include "character.h"
 #include "mud.h"
 
-void do_steal( CHAR_DATA *ch, char *argument )
+void do_steal( Character *ch, char *argument )
 {
   char buf  [MAX_STRING_LENGTH];
   char arg1 [MAX_INPUT_LENGTH];
   char arg2 [MAX_INPUT_LENGTH];
-  CHAR_DATA *victim, *mst;
+  Character *victim, *mst;
   OBJ_DATA *obj , *obj_next;
   int percent, xp;
 
