@@ -38,20 +38,20 @@
 #include "character.h"
 
 /* Externals */
-RESET_DATA *    parse_reset( AREA_DATA *tarea, char *argument,
+RESET_DATA *    parse_reset( Area *tarea, char *argument,
 			     Character *ch );
 
 bool is_room_reset( RESET_DATA *pReset, ROOM_INDEX_DATA *aRoom,
-		    AREA_DATA *pArea );
-void add_obj_reset( AREA_DATA *pArea, char cm, OBJ_DATA *obj, int v2, int v3 );
-void delete_reset( AREA_DATA *pArea, RESET_DATA *pReset );
-RESET_DATA *find_reset( AREA_DATA *pArea, ROOM_INDEX_DATA *pRoom, int num );
-void list_resets( Character *ch, AREA_DATA *pArea,
+		    Area *pArea );
+void add_obj_reset( Area *pArea, char cm, OBJ_DATA *obj, int v2, int v3 );
+void delete_reset( Area *pArea, RESET_DATA *pReset );
+RESET_DATA *find_reset( Area *pArea, ROOM_INDEX_DATA *pRoom, int num );
+void list_resets( Character *ch, Area *pArea,
 		  ROOM_INDEX_DATA *pRoom, int start, int end );
 
 
 
-RESET_DATA *find_reset(AREA_DATA *pArea, ROOM_INDEX_DATA *pRoom, int numb)
+RESET_DATA *find_reset(Area *pArea, ROOM_INDEX_DATA *pRoom, int numb)
 {
   RESET_DATA *pReset;
   int num = 0;
@@ -64,7 +64,7 @@ RESET_DATA *find_reset(AREA_DATA *pArea, ROOM_INDEX_DATA *pRoom, int numb)
 
 /* This is one loopy function.  Ugh. -- Altrag */
 bool is_room_reset( RESET_DATA *pReset, ROOM_INDEX_DATA *aRoom,
-                    AREA_DATA *pArea )
+                    Area *pArea )
 {
   ROOM_INDEX_DATA *pRoom;
   RESET_DATA *reset;
@@ -173,7 +173,7 @@ ROOM_INDEX_DATA *find_room( Character *ch, char *argument,
     reset = rprev;                              \
     continue;                                   \
   } while(0)
-void delete_reset( AREA_DATA *pArea, RESET_DATA *pReset )
+void delete_reset( Area *pArea, RESET_DATA *pReset )
 {
   RESET_DATA *reset;
   RESET_DATA *reset_prev;
@@ -232,7 +232,7 @@ void delete_reset( AREA_DATA *pArea, RESET_DATA *pReset )
 }
 #undef DEL_RESET
 
-RESET_DATA *find_oreset(Character *ch, AREA_DATA *pArea,
+RESET_DATA *find_oreset(Character *ch, Area *pArea,
                         ROOM_INDEX_DATA *pRoom, char *name)
 {
   RESET_DATA *reset;
@@ -286,7 +286,7 @@ RESET_DATA *find_oreset(Character *ch, AREA_DATA *pArea,
   return reset;
 }
 
-RESET_DATA *find_mreset(Character *ch, AREA_DATA *pArea,
+RESET_DATA *find_mreset(Character *ch, Area *pArea,
                         ROOM_INDEX_DATA *pRoom, char *name)
 {
   RESET_DATA *reset;
@@ -340,7 +340,7 @@ RESET_DATA *find_mreset(Character *ch, AREA_DATA *pArea,
   return reset;
 }
 
-void edit_reset( Character *ch, char *argument, AREA_DATA *pArea, ROOM_INDEX_DATA *aRoom )
+void edit_reset( Character *ch, char *argument, Area *pArea, ROOM_INDEX_DATA *aRoom )
 {
   char arg[MAX_INPUT_LENGTH];
   RESET_DATA *pReset = NULL;
@@ -943,7 +943,7 @@ void edit_reset( Character *ch, char *argument, AREA_DATA *pArea, ROOM_INDEX_DAT
   return;
 }
 
-void add_obj_reset( AREA_DATA *pArea, char cm, OBJ_DATA *obj, int v2, int v3 )
+void add_obj_reset( Area *pArea, char cm, OBJ_DATA *obj, int v2, int v3 )
 {
   OBJ_DATA *inobj;
   static int iNest;
@@ -973,7 +973,7 @@ void add_obj_reset( AREA_DATA *pArea, char cm, OBJ_DATA *obj, int v2, int v3 )
   return;
 }
 
-void instaroom( AREA_DATA *pArea, ROOM_INDEX_DATA *pRoom, bool dodoors )
+void instaroom( Area *pArea, ROOM_INDEX_DATA *pRoom, bool dodoors )
 {
   Character *rch;
   OBJ_DATA *obj;
@@ -1021,7 +1021,7 @@ void instaroom( AREA_DATA *pArea, ROOM_INDEX_DATA *pRoom, bool dodoors )
   return;
 }
 
-void wipe_resets( AREA_DATA *pArea, ROOM_INDEX_DATA *pRoom )
+void wipe_resets( Area *pArea, ROOM_INDEX_DATA *pRoom )
 {
   RESET_DATA *pReset;
 
@@ -1042,7 +1042,7 @@ void wipe_resets( AREA_DATA *pArea, ROOM_INDEX_DATA *pRoom )
   return;
 }
 
-int generate_itemlevel( AREA_DATA *pArea, OBJ_INDEX_DATA *pObjIndex )
+int generate_itemlevel( Area *pArea, OBJ_INDEX_DATA *pObjIndex )
 {
   int olevel;
   int min = UMAX(pArea->low_soft_range, 1);
@@ -1066,7 +1066,7 @@ int generate_itemlevel( AREA_DATA *pArea, OBJ_INDEX_DATA *pObjIndex )
 /*
  * Reset one area.
  */
-void reset_area( AREA_DATA *pArea )
+void reset_area( Area *pArea )
 {
   RESET_DATA *pReset;
   RESET_DATA *next_reset;
@@ -1490,7 +1490,7 @@ void reset_area( AREA_DATA *pArea )
   return;
 }
 
-void list_resets( Character *ch, AREA_DATA *pArea, ROOM_INDEX_DATA *pRoom,
+void list_resets( Character *ch, Area *pArea, ROOM_INDEX_DATA *pRoom,
                   int start, int end )
 {
   RESET_DATA *pReset;
@@ -1779,7 +1779,7 @@ void list_resets( Character *ch, AREA_DATA *pArea, ROOM_INDEX_DATA *pRoom,
 
 /* Setup put nesting levels, regardless of whether or not the resets will
    actually reset, or if they're bugged. */
-void renumber_put_resets( AREA_DATA *pArea )
+void renumber_put_resets( Area *pArea )
 {
   RESET_DATA *pReset, *lastobj = NULL;
 
@@ -1828,7 +1828,7 @@ RESET_DATA *make_reset( char letter, int extra, int arg1, int arg2, int arg3 )
 /*
  * Add a reset to an area                               -Thoric
  */
-RESET_DATA *add_reset( AREA_DATA *tarea, char letter, int extra, int arg1, int arg2, int arg3 )
+RESET_DATA *add_reset( Area *tarea, char letter, int extra, int arg1, int arg2, int arg3 )
 {
   RESET_DATA *pReset;
 
@@ -1859,7 +1859,7 @@ RESET_DATA *add_reset( AREA_DATA *tarea, char letter, int extra, int arg1, int a
 /*
  * Place a reset into an area, insert sorting it                -Thoric
  */
-RESET_DATA *place_reset( AREA_DATA *tarea, char letter, int extra, int arg1, int arg2, int arg3 )
+RESET_DATA *place_reset( Area *tarea, char letter, int extra, int arg1, int arg2, int arg3 )
 {
   RESET_DATA *pReset, *tmp, *tmp2;
 

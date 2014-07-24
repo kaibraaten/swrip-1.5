@@ -4,7 +4,7 @@
 void do_buyhome( Character *ch, char *argument )
 {
   ROOM_INDEX_DATA *room;
-  AREA_DATA *pArea;
+  Area *pArea;
 
   if ( !ch->in_room )
     return;

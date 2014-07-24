@@ -3,7 +3,7 @@
 
 void do_loadarea( Character *ch, char *argument )
 {
-  AREA_DATA     *tarea;
+  Area     *tarea;
   char   filename[256];
   int           tmp;
 

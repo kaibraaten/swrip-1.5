@@ -46,7 +46,7 @@ void do_minvoke( Character *ch, char *argument )
 
   if ( get_trust(ch) < LEVEL_DEMI )
     {
-      AREA_DATA *pArea;
+      Area *pArea;
 
       if ( is_npc(ch) )
         {

@@ -9,8 +9,8 @@ typedef int obj_ret;
 struct Affect;
 typedef struct Affect             Affect;
 
-struct area_data;
-typedef struct area_data               AREA_DATA;
+struct Area;
+typedef struct Area               Area;
 
 struct auction_data;
 typedef struct auction_data            AUCTION_DATA;

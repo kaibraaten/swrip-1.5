@@ -187,7 +187,7 @@ void do_redit( Character *ch, char *argument )
   if ( !str_cmp( arg, "rlist" ) )
     {
       RESET_DATA *pReset = NULL;
-      AREA_DATA *tarea = location->area;
+      Area *tarea = location->area;
       short num = 0;
 
       if ( !tarea->first_reset )

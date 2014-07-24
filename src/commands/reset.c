@@ -4,7 +4,7 @@
 
 void do_reset( Character *ch, char *argument )
 {
-  AREA_DATA *pArea = NULL;
+  Area *pArea = NULL;
   char arg[MAX_INPUT_LENGTH];
   char *parg;
 
@@ -12,11 +12,11 @@ void do_reset( Character *ch, char *argument )
 
   if ( ch->substate == SUB_REPEATCMD )
     {
-      pArea = (AREA_DATA*)ch->dest_buf;
+      pArea = (Area*)ch->dest_buf;
 
       if ( pArea && pArea != ch->pcdata->area && pArea != ch->in_room->area )
         {
-          AREA_DATA *tmp;
+          Area *tmp;
 
           for ( tmp = first_build; tmp; tmp = tmp->next )
 	    if ( tmp == pArea )

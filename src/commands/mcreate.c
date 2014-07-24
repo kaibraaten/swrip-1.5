@@ -51,7 +51,7 @@ void do_mcreate( Character *ch, char *argument )
 
   if ( get_trust( ch ) <= LEVEL_IMMORTAL )
     {
-      AREA_DATA *pArea;
+      Area *pArea;
 
       if ( !ch->pcdata || !(pArea=ch->pcdata->area) )
         {

@@ -101,7 +101,7 @@ void save_planet( const PLANET_DATA *planet )
     }
   else
     {
-      AREA_DATA *pArea;
+      Area *pArea;
 
       fprintf( fp, "#PLANET\n" );
       fprintf( fp, "Name         %s~\n", planet->name        );
@@ -153,7 +153,7 @@ static void fread_planet( PLANET_DATA *planet, FILE *fp )
           if ( !str_cmp( word, "Area" ) )
             {
               char aName[MAX_STRING_LENGTH];
-              AREA_DATA *pArea;
+              Area *pArea;
               char *tmp = fread_string(fp);
 
               sprintf (aName, "%s", tmp);

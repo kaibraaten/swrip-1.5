@@ -3,7 +3,7 @@
 
 void do_astat( Character *ch, char *argument )
 {
-  AREA_DATA *tarea = NULL;
+  Area *tarea = NULL;
   bool proto = FALSE;
   bool found= FALSE;
 

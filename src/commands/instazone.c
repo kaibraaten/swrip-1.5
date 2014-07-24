@@ -4,7 +4,7 @@
 
 void do_instazone( Character *ch, char *argument )
 {
-  AREA_DATA *pArea;
+  Area *pArea;
   int vnum;
   ROOM_INDEX_DATA *pRoom;
   bool dodoors;

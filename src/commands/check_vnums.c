@@ -6,7 +6,7 @@ void do_check_vnums( Character *ch, char *argument )
 {
   char buf[MAX_STRING_LENGTH];
   char buf2[MAX_STRING_LENGTH];
-  AREA_DATA *pArea;
+  Area *pArea;
   char arg1[MAX_STRING_LENGTH];
   char arg2[MAX_STRING_LENGTH];
   bool room, mob, obj, all, area_conflict;

@@ -8,7 +8,7 @@ void do_goto( Character *ch, char *argument )
   Character *fch;
   Character *fch_next;
   ROOM_INDEX_DATA *in_room;
-  AREA_DATA *pArea;
+  Area *pArea;
   short vnum;
 
   one_argument( argument, arg );

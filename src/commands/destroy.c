@@ -51,7 +51,7 @@ void do_destroy( Character *ch, char *argument )
            capitalize( arg ) );
   if ( !rename( buf, buf2 ) )
     {
-      AREA_DATA *pArea;
+      Area *pArea;
 
       set_char_color( AT_RED, ch );
       send_to_char( "Player destroyed.  Pfile saved in backup directory.\r\n", ch );

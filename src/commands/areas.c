@@ -2,7 +2,7 @@
 
 void do_areas( Character *ch, char *argument )
 {
-  AREA_DATA *pArea;
+  Area *pArea;
 
   set_pager_color( AT_PLAIN, ch );
   send_to_pager("\r\n   Author    |             Area                     | Recommended |  Enforced\r\n", ch);

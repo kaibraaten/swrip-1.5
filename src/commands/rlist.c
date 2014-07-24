@@ -7,7 +7,7 @@ void do_rlist( Character *ch, char *argument )
   int                    vnum;
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
-  AREA_DATA             *tarea;
+  Area             *tarea;
   int lrange;
   int trange;
 

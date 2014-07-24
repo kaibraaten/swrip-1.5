@@ -2,7 +2,7 @@
 
 void do_aset( Character *ch, char *argument )
 {
-  AREA_DATA *tarea;
+  Area *tarea;
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
   char arg3[MAX_INPUT_LENGTH];

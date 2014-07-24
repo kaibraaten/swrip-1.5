@@ -4,7 +4,7 @@
 
 void do_instaroom( Character *ch, char *argument )
 {
-  AREA_DATA *pArea;
+  Area *pArea;
   ROOM_INDEX_DATA *pRoom;
   bool dodoors;
   char arg[MAX_INPUT_LENGTH];

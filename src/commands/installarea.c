@@ -7,7 +7,7 @@
  */
 void do_installarea( Character *ch, char *argument )
 {
-  AREA_DATA     *tarea;
+  Area     *tarea;
   char  arg[MAX_INPUT_LENGTH];
   char  buf[MAX_STRING_LENGTH];
   int           num;

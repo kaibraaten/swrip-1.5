@@ -166,7 +166,7 @@ void save_banlist( void )
 /*
  * This could have other applications too.. move if needed. -- Altrag
  */
-void close_area( AREA_DATA *pArea )
+void close_area( Area *pArea )
 {
   Character *ech;
   Character *ech_next;

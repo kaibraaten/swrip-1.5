@@ -246,14 +246,14 @@ MOB_INDEX_DATA *mob_index_hash[MAX_KEY_HASH];
 OBJ_INDEX_DATA *obj_index_hash[MAX_KEY_HASH];
 ROOM_INDEX_DATA *room_index_hash[MAX_KEY_HASH];
 
-AREA_DATA *first_area = NULL;
-AREA_DATA *last_area = NULL;
-AREA_DATA *first_build = NULL;
-AREA_DATA *last_build = NULL;
-AREA_DATA *first_asort = NULL;
-AREA_DATA *last_asort = NULL;
-AREA_DATA *first_bsort = NULL;
-AREA_DATA *last_bsort = NULL;
+Area *first_area = NULL;
+Area *last_area = NULL;
+Area *first_build = NULL;
+Area *last_build = NULL;
+Area *first_asort = NULL;
+Area *last_asort = NULL;
+Area *first_bsort = NULL;
+Area *last_bsort = NULL;
 
 SYSTEM_DATA sysdata;
 
@@ -281,18 +281,18 @@ char strArea[MAX_INPUT_LENGTH];
  */
 void boot_log( const char *str, ... );
 void load_area( FILE *fp );
-void load_author( AREA_DATA *tarea, FILE *fp );
-void load_economy( AREA_DATA *tarea, FILE *fp );
-void load_resetmsg( AREA_DATA *tarea, FILE *fp ); /* Rennard */
-void load_flags( AREA_DATA *tarea, FILE *fp );
-void load_mobiles( AREA_DATA *tarea, FILE *fp );
-void load_objects( AREA_DATA *tarea, FILE *fp );
-void load_resets( AREA_DATA *tarea, FILE *fp );
-void load_rooms( AREA_DATA *tarea, FILE *fp );
-void load_shops( AREA_DATA *tarea, FILE *fp );
-void load_repairs( AREA_DATA *tarea, FILE *fp );
-void load_specials( AREA_DATA *tarea, FILE *fp );
-void load_ranges( AREA_DATA *tarea, FILE *fp );
+void load_author( Area *tarea, FILE *fp );
+void load_economy( Area *tarea, FILE *fp );
+void load_resetmsg( Area *tarea, FILE *fp ); /* Rennard */
+void load_flags( Area *tarea, FILE *fp );
+void load_mobiles( Area *tarea, FILE *fp );
+void load_objects( Area *tarea, FILE *fp );
+void load_resets( Area *tarea, FILE *fp );
+void load_rooms( Area *tarea, FILE *fp );
+void load_shops( Area *tarea, FILE *fp );
+void load_repairs( Area *tarea, FILE *fp );
+void load_specials( Area *tarea, FILE *fp );
+void load_ranges( Area *tarea, FILE *fp );
 void load_buildlist( void );
 bool load_systemdata( SYSTEM_DATA *sys );
 void load_banlist( void );
@@ -303,7 +303,7 @@ void fix_exits( void );
  * External booting function
  */
 void load_corpses( void );
-void renumber_put_resets( AREA_DATA *pArea );
+void renumber_put_resets( Area *pArea );
 
 /*
  * MUDprogram locals
@@ -316,9 +316,9 @@ MPROG_DATA *    oprog_file_read( char* f, MPROG_DATA* mprg,
 				 OBJ_INDEX_DATA *pObjIndex );
 MPROG_DATA *    rprog_file_read( char* f, MPROG_DATA* mprg,
 				 ROOM_INDEX_DATA *pRoomIndex );
-void            load_mudprogs( AREA_DATA *tarea, FILE* fp );
-void            load_objprogs( AREA_DATA *tarea, FILE* fp );
-void            load_roomprogs( AREA_DATA *tarea, FILE* fp );
+void            load_mudprogs( Area *tarea, FILE* fp );
+void            load_objprogs( Area *tarea, FILE* fp );
+void            load_roomprogs( Area *tarea, FILE* fp );
 void            mprog_read_programs( FILE* fp, MOB_INDEX_DATA *pMobIndex );
 void            oprog_read_programs( FILE* fp, OBJ_INDEX_DATA *pObjIndex );
 void            rprog_read_programs( FILE* fp, ROOM_INDEX_DATA *pRoomIndex );
@@ -735,9 +735,9 @@ void boot_db( bool fCopyOver )
  */
 void load_area( FILE *fp )
 {
-  AREA_DATA *pArea;
+  Area *pArea;
 
-  CREATE( pArea, AREA_DATA, 1 );
+  CREATE( pArea, Area, 1 );
   pArea->first_reset    = NULL;
   pArea->last_reset     = NULL;
   pArea->next_on_planet       = NULL;
@@ -768,7 +768,7 @@ void load_area( FILE *fp )
 /*
  * Load an author section. Scryn 2/1/96
  */
-void load_author( AREA_DATA *tarea, FILE *fp )
+void load_author( Area *tarea, FILE *fp )
 {
   if ( !tarea )
     {
@@ -791,7 +791,7 @@ void load_author( AREA_DATA *tarea, FILE *fp )
 /*
  * Load an economy section. Thoric
  */
-void load_economy( AREA_DATA *tarea, FILE *fp )
+void load_economy( Area *tarea, FILE *fp )
 {
   if ( !tarea )
     {
@@ -811,7 +811,7 @@ void load_economy( AREA_DATA *tarea, FILE *fp )
 }
 
 /* Reset Message Load, Rennard */
-void load_resetmsg( AREA_DATA *tarea, FILE *fp )
+void load_resetmsg( Area *tarea, FILE *fp )
 {
   if ( !tarea )
     {
@@ -834,7 +834,7 @@ void load_resetmsg( AREA_DATA *tarea, FILE *fp )
 /*
  * Load area flags. Narn, Mar/96
  */
-void load_flags( AREA_DATA *tarea, FILE *fp )
+void load_flags( Area *tarea, FILE *fp )
 {
   char *ln;
   int x1, x2;
@@ -873,7 +873,7 @@ void add_char( Character *ch )
 /*
  * Load a mob section.
  */
-void load_mobiles( AREA_DATA *tarea, FILE *fp )
+void load_mobiles( Area *tarea, FILE *fp )
 {
   MOB_INDEX_DATA *pMobIndex;
   char *ln;
@@ -1090,7 +1090,7 @@ void load_mobiles( AREA_DATA *tarea, FILE *fp )
 /*
  * Load an obj section.
  */
-void load_objects( AREA_DATA *tarea, FILE *fp )
+void load_objects( Area *tarea, FILE *fp )
 {
   OBJ_INDEX_DATA *pObjIndex;
   char letter;
@@ -1290,7 +1290,7 @@ void load_objects( AREA_DATA *tarea, FILE *fp )
 /*
  * Load a reset section.
  */
-void load_resets( AREA_DATA *tarea, FILE *fp )
+void load_resets( Area *tarea, FILE *fp )
 {
   char buf[MAX_STRING_LENGTH];
   bool not01 = FALSE;
@@ -1484,7 +1484,7 @@ void load_resets( AREA_DATA *tarea, FILE *fp )
 /*
  * Load a room section.
  */
-void load_rooms( AREA_DATA *tarea, FILE *fp )
+void load_rooms( Area *tarea, FILE *fp )
 {
   ROOM_INDEX_DATA *pRoomIndex;
   char buf[MAX_STRING_LENGTH];
@@ -1679,7 +1679,7 @@ void load_rooms( AREA_DATA *tarea, FILE *fp )
 /*
  * Load a shop section.
  */
-void load_shops( AREA_DATA *tarea, FILE *fp )
+void load_shops( Area *tarea, FILE *fp )
 {
   SHOP_DATA *pShop;
 
@@ -1719,7 +1719,7 @@ void load_shops( AREA_DATA *tarea, FILE *fp )
 /*
  * Load a repair shop section.                                  -Thoric
  */
-void load_repairs( AREA_DATA *tarea, FILE *fp )
+void load_repairs( Area *tarea, FILE *fp )
 {
   REPAIR_DATA *rShop;
 
@@ -1757,7 +1757,7 @@ void load_repairs( AREA_DATA *tarea, FILE *fp )
 /*
  * Load spec proc declarations.
  */
-void load_specials( AREA_DATA *tarea, FILE *fp )
+void load_specials( Area *tarea, FILE *fp )
 {
   for ( ; ; )
     {
@@ -1810,7 +1810,7 @@ void load_specials( AREA_DATA *tarea, FILE *fp )
 /*
  * Load soft / hard area ranges.
  */
-void load_ranges( AREA_DATA *tarea, FILE *fp )
+void load_ranges( Area *tarea, FILE *fp )
 {
   int x1, x2, x3, x4;
   char *ln;
@@ -1848,7 +1848,7 @@ void load_ranges( AREA_DATA *tarea, FILE *fp )
  */
 void initialize_economy( void )
 {
-  AREA_DATA *tarea;
+  Area *tarea;
   MOB_INDEX_DATA *mob;
   int idx, gold, rng;
 
@@ -2046,7 +2046,7 @@ void randomize_exits( ROOM_INDEX_DATA *room, short maxdir )
  */
 void area_update( void )
 {
-  AREA_DATA *pArea;
+  Area *pArea;
 
   for ( pArea = first_area; pArea; pArea = pArea->next )
     {
@@ -3145,7 +3145,7 @@ MPROG_DATA *mprog_file_read( char *f, MPROG_DATA *mprg,
 
 /* Load a MUDprogram section from the area file.
  */
-void load_mudprogs( AREA_DATA *tarea, FILE *fp )
+void load_mudprogs( Area *tarea, FILE *fp )
 {
   MOB_INDEX_DATA *iMob;
   MPROG_DATA     *original;
@@ -3360,7 +3360,7 @@ MPROG_DATA *oprog_file_read( char *f, MPROG_DATA *mprg,
 
 /* Load a MUDprogram section from the area file.
  */
-void load_objprogs( AREA_DATA *tarea, FILE *fp )
+void load_objprogs( Area *tarea, FILE *fp )
 {
   OBJ_INDEX_DATA *iObj;
   MPROG_DATA     *original;
@@ -3572,7 +3572,7 @@ MPROG_DATA *rprog_file_read( char *f, MPROG_DATA *mprg,
 
 /* Load a ROOMprogram section from the area file.
  */
-void load_roomprogs( AREA_DATA *tarea, FILE *fp )
+void load_roomprogs( Area *tarea, FILE *fp )
 {
   ROOM_INDEX_DATA *iRoom;
   MPROG_DATA     *original;
@@ -4058,7 +4058,7 @@ EXIT_DATA *make_exit( ROOM_INDEX_DATA *pRoomIndex, ROOM_INDEX_DATA *to_room, sho
   return pexit;
 }
 
-void fix_area_exits( AREA_DATA *tarea )
+void fix_area_exits( Area *tarea )
 {
   ROOM_INDEX_DATA *pRoomIndex;
   EXIT_DATA *pexit, *rev_exit;
@@ -4105,7 +4105,7 @@ void fix_area_exits( AREA_DATA *tarea )
     }
 }
 
-void load_area_file( AREA_DATA *tarea, char *filename )
+void load_area_file( Area *tarea, char *filename )
 {
   /*    FILE *fpin;
         what intelligent person stopped using fpArea?????
@@ -4220,7 +4220,7 @@ void load_buildlist( void )
   struct dirent *dentry;
   FILE *fp;
   char buf[MAX_STRING_LENGTH];
-  AREA_DATA *pArea;
+  Area *pArea;
   char line[81];
   char word[81];
   int low, hi;
@@ -4294,7 +4294,7 @@ void load_buildlist( void )
                   continue;
                 }
 #endif
-              CREATE( pArea, AREA_DATA, 1 );
+              CREATE( pArea, Area, 1 );
               sprintf( buf, "%s.are", dentry->d_name );
               pArea->author = STRALLOC( dentry->d_name );
               pArea->filename = str_dup( buf );
@@ -4330,10 +4330,10 @@ void load_buildlist( void )
 /*
  * Sort by room vnums                                   -Altrag & Thoric
  */
-void sort_area( AREA_DATA *pArea, bool proto )
+void sort_area( Area *pArea, bool proto )
 {
-  AREA_DATA *area = NULL;
-  AREA_DATA *first_sort, *last_sort;
+  Area *area = NULL;
+  Area *first_sort, *last_sort;
   bool found;
 
   if ( !pArea )
@@ -4408,7 +4408,7 @@ void sort_area( AREA_DATA *pArea, bool proto )
 void show_vnums( Character *ch, vnum_t low, vnum_t high, bool proto, bool shownl,
                  const char *loadst, const char *notloadst )
 {
-  AREA_DATA *pArea, *first_sort;
+  Area *pArea, *first_sort;
   int count, loaded;
 
   count = 0;    loaded = 0;

@@ -4,7 +4,7 @@
 void do_aassign( Character *ch, char *argument )
 {
   char buf[MAX_STRING_LENGTH];
-  AREA_DATA *tarea, *tmp;
+  Area *tarea, *tmp;
 
   if ( is_npc( ch ) )
     return;

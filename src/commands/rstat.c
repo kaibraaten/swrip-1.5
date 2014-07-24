@@ -16,7 +16,7 @@ void do_rstat( Character *ch, char *argument )
 
   if ( get_trust( ch ) < LEVEL_IMMORTAL )
     {
-      AREA_DATA * pArea = NULL;
+      Area * pArea = NULL;
 
       if ( !ch->pcdata || !(pArea=ch->pcdata->area) )
         {

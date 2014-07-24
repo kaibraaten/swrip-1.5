@@ -382,8 +382,8 @@ struct planet_data
   GUARD_DATA  *first_guard;
   GUARD_DATA  *last_guard;
   SPACE_DATA  *spaceobject;
-  AREA_DATA   *first_area;
-  AREA_DATA   *last_area;
+  Area   *first_area;
+  Area   *last_area;
   char        *name;
   char        *filename;
   long         base_value;
@@ -758,7 +758,7 @@ struct killed_data
 struct pc_data
 {
   CLAN_DATA  *clan;
-  AREA_DATA  *area;
+  Area  *area;
   char       *homepage;
   char       *clan_name;
   char       *pwd;
@@ -983,17 +983,17 @@ struct reset_data
 /*
  * Area definition.
  */
-struct area_data
+struct Area
 {
-  AREA_DATA   *next;
-  AREA_DATA   *prev;
-  AREA_DATA   *next_sort;
-  AREA_DATA   *prev_sort;
+  Area   *next;
+  Area   *prev;
+  Area   *next_sort;
+  Area   *prev_sort;
   RESET_DATA  *first_reset;
   RESET_DATA  *last_reset;
   PLANET_DATA *planet;
-  AREA_DATA   *next_on_planet;
-  AREA_DATA   *prev_on_planet;
+  Area   *next_on_planet;
+  Area   *prev_on_planet;
   char        *name;
   char        *filename;
   int          flags;
@@ -1101,7 +1101,7 @@ struct room_index_data
   OBJ_DATA         *last_content;
   EXTRA_DESCR_DATA *first_extradesc;
   EXTRA_DESCR_DATA *last_extradesc;
-  AREA_DATA        *area;
+  Area        *area;
   EXIT_DATA        *first_exit;
   EXIT_DATA        *last_exit;
   SHIP_DATA        *first_ship;
@@ -1603,14 +1603,14 @@ extern BOUNTY_DATA          *first_bounty;
 extern BOUNTY_DATA          *last_bounty;
 extern BOUNTY_DATA          *first_disintegration;
 extern BOUNTY_DATA          *last_disintegration;
-extern AREA_DATA            *first_area;
-extern AREA_DATA            *last_area;
-extern AREA_DATA            *first_build;
-extern AREA_DATA            *last_build;
-extern AREA_DATA            *first_asort;
-extern AREA_DATA            *last_asort;
-extern AREA_DATA            *first_bsort;
-extern AREA_DATA            *last_bsort;
+extern Area            *first_area;
+extern Area            *last_area;
+extern Area            *first_build;
+extern Area            *last_build;
+extern Area            *first_asort;
+extern Area            *last_asort;
+extern Area            *first_bsort;
+extern Area            *last_bsort;
 extern TELEPORT_DATA        *first_teleport;
 extern TELEPORT_DATA        *last_teleport;
 extern OBJ_DATA             *extracted_obj_queue;
@@ -2313,7 +2313,7 @@ extern "C" {
   /* act_wiz.c */
   void save_banlist( void );
   int str_count(const char *psource, const char *ptarget);
-  void close_area( AREA_DATA *pArea );
+  void close_area( Area *pArea );
   ROOM_INDEX_DATA *find_location( Character *ch, char *arg );
   void echo_to_room( short AT_COLOR, ROOM_INDEX_DATA *room,
 		     const char *argument );
@@ -2460,11 +2460,11 @@ extern "C" {
   /* reset.c */
   char *sprint_reset( Character *ch, RESET_DATA *pReset, short num, bool rlist );
   RESET_DATA *make_reset( char letter, int extra, int arg1, int arg2, int arg3 );
-  RESET_DATA *add_reset( AREA_DATA *tarea, char letter, int extra,
+  RESET_DATA *add_reset( Area *tarea, char letter, int extra,
 			 int arg1, int arg2, int arg3 );
-  RESET_DATA *place_reset( AREA_DATA *tarea, char letter,
+  RESET_DATA *place_reset( Area *tarea, char letter,
 			   int extra, int arg1, int arg2, int arg3 );
-  void  reset_area( AREA_DATA * pArea );
+  void  reset_area( Area * pArea );
 
   /* db.c */
   void show_vnums( Character *ch, vnum_t low, vnum_t high, bool proto, bool shownl,
@@ -2490,15 +2490,15 @@ extern "C" {
   OBJ_INDEX_DATA *make_object( vnum_t vnum, vnum_t cvnum, char *name );
   MOB_INDEX_DATA *make_mobile( vnum_t vnum, vnum_t cvnum, char *name );
   EXIT_DATA *make_exit( ROOM_INDEX_DATA *pRoomIndex, ROOM_INDEX_DATA *to_room, short door );
-  void  fix_area_exits( AREA_DATA *tarea );
-  void  load_area_file( AREA_DATA *tarea, char *filename );
+  void  fix_area_exits( Area *tarea );
+  void  load_area_file( Area *tarea, char *filename );
   void  randomize_exits( ROOM_INDEX_DATA *room, short maxdir );
   void  make_wizlist( void );
   bool    delete_room( ROOM_INDEX_DATA *room );
   bool    delete_obj( OBJ_INDEX_DATA *obj );
   bool    delete_mob( MOB_INDEX_DATA *mob );
 
-  void  sort_area( AREA_DATA *pArea, bool proto );
+  void  sort_area( Area *pArea, bool proto );
 
   /* build.c */
   void mpedit( Character *ch, MPROG_DATA *mprg, int mptype, char *argument );
@@ -2509,8 +2509,8 @@ extern "C" {
   bool can_omodify( const Character *ch, const OBJ_DATA *obj  );
   bool can_mmodify( const Character *ch, const Character *mob );
   bool can_medit( const Character *ch, const MOB_INDEX_DATA *mob );
-  void free_reset( AREA_DATA *are, RESET_DATA *res );
-  void free_area( AREA_DATA *are );
+  void free_reset( Area *are, RESET_DATA *res );
+  void free_area( Area *are );
   void assign_area( Character *ch );
   EXTRA_DESCR_DATA *SetRExtra( ROOM_INDEX_DATA *room, char *keywords );
   bool DelRExtra( ROOM_INDEX_DATA *room, char *keywords );
@@ -2518,7 +2518,7 @@ extern "C" {
   bool DelOExtra( OBJ_DATA *obj, char *keywords );
   EXTRA_DESCR_DATA *SetOExtraProto( OBJ_INDEX_DATA *obj, char *keywords );
   bool DelOExtraProto( OBJ_INDEX_DATA *obj, char *keywords );
-  void fold_area( AREA_DATA *tarea, char *filename, bool install );
+  void fold_area( Area *tarea, char *filename, bool install );
 
   /* fight.c */
   ch_ret  one_hit( Character *ch, Character *victim, int dt );
@@ -2638,7 +2638,7 @@ extern "C" {
   void clean_room( ROOM_INDEX_DATA *room );
   void clean_obj( OBJ_INDEX_DATA *obj );
   void clean_mob( MOB_INDEX_DATA *mob );
-  void clean_resets( AREA_DATA *tarea );
+  void clean_resets( Area *tarea );
   void extract_char( Character *ch, bool fPull );
   Character *get_char_room( const Character *ch, const char *argument );
   Character *get_char_world( const Character *ch, const char *argument );
@@ -2675,8 +2675,8 @@ extern "C" {
   short get_timer( const Character *ch, short type );
   void extract_timer( Character *ch, TIMER *timer );
   void remove_timer( Character *ch, short type );
-  bool in_soft_range( const Character *ch, const AREA_DATA *tarea );
-  bool in_hard_range( const Character *ch, const AREA_DATA *tarea );
+  bool in_soft_range( const Character *ch, const Area *tarea );
+  bool in_hard_range( const Character *ch, const Area *tarea );
   bool chance( const Character *ch, short percent );
   bool chance_attrib( const Character *ch, short percent, short attrib );
   OBJ_DATA *clone_object( const OBJ_DATA *obj );
@@ -2684,10 +2684,10 @@ extern "C" {
   void separate_obj( OBJ_DATA *obj );
   bool empty_obj( OBJ_DATA *obj,OBJ_DATA *destobj,ROOM_INDEX_DATA *destroom );
   OBJ_DATA *find_obj( Character *ch, const char *argument, bool carryonly );
-  void boost_economy( AREA_DATA *tarea, int gold );
-  void lower_economy( AREA_DATA *tarea, int gold );
+  void boost_economy( Area *tarea, int gold );
+  void lower_economy( Area *tarea, int gold );
   void economize_mobgold( Character *mob );
-  bool economy_has( const AREA_DATA *tarea, int gold );
+  bool economy_has( const Area *tarea, int gold );
   int count_users(const OBJ_DATA *obj);
 
   /* interp.c */

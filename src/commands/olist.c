@@ -5,7 +5,7 @@ void do_olist( Character *ch, char *argument )
 {
   OBJ_INDEX_DATA        *obj;
   int                    vnum;
-  AREA_DATA             *tarea;
+  Area             *tarea;
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
   int lrange;

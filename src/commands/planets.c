@@ -5,7 +5,7 @@ void do_planets( Character *ch, char *argument )
 {
   PLANET_DATA *planet;
   int count = 0;
-  AREA_DATA   *area;
+  Area   *area;
 
   set_pager_color( AT_WHITE, ch );
   for ( planet = first_planet; planet; planet = planet->next )

@@ -3,7 +3,7 @@
 
 void do_savearea( Character *ch, char *argument )
 {
-  AREA_DATA     *tarea;
+  Area     *tarea;
   char   filename[256];
 
   if ( is_npc(ch) || get_trust( ch ) < LEVEL_AVATAR || !ch->pcdata

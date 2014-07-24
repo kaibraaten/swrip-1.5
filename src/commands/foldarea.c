@@ -2,7 +2,7 @@
 
 void do_foldarea( Character *ch, char *argument )
 {
-  AREA_DATA *tarea = NULL;
+  Area *tarea = NULL;
   char arg[MAX_INPUT_LENGTH];
   bool fold_all_areas = false;
   bool found = false;

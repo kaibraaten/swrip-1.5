@@ -7,11 +7,11 @@ static void store_teachers( int *teachers, const SKILLTYPE *skill );
 static char is_in_list( int needle, const int *haystack, size_t list_size );
 static size_t get_list_size( const int *teachers );
 static int comparator( const void*, const void* );
-static AREA_DATA *get_area( vnum_t vnum );
+static Area *get_area( vnum_t vnum );
 static void command_teachers( Character *ch );
 static void command_noteacher( Character *ch );
-static void add_area_to_list( AREA_DATA **arealist, AREA_DATA *area );
-static bool is_in_arealist( AREA_DATA **arealist, AREA_DATA *area );
+static void add_area_to_list( Area **arealist, Area *area );
+static bool is_in_arealist( Area **arealist, Area *area );
 
 #define MAX_TEACHER 10000
 
@@ -63,7 +63,7 @@ static void command_teachers( Character *ch )
   int i = 0;
   int teachers[MAX_TEACHER];
   size_t list_size = 0;
-  AREA_DATA *arealist[MAX_AREA_LIST_SIZE];
+  Area *arealist[MAX_AREA_LIST_SIZE];
 
   memset( teachers, 0, sizeof( teachers ) );
   memset( arealist, 0, sizeof( arealist ) );
@@ -85,7 +85,7 @@ static void command_teachers( Character *ch )
   for( i = 0; i < MAX_TEACHER; i++ )
     {
       vnum_t vnum = teachers[i];
-      AREA_DATA *area = NULL;
+      Area *area = NULL;
 
       if( vnum == 0 )
 	{
@@ -102,7 +102,7 @@ static void command_teachers( Character *ch )
 
   for( i = 0; i < MAX_AREA_LIST_SIZE; ++i )
     {
-      AREA_DATA *area = arealist[i];
+      Area *area = arealist[i];
 
       if( !area )
 	{
@@ -113,7 +113,7 @@ static void command_teachers( Character *ch )
     }
 }
 
-static void add_area_to_list( AREA_DATA **arealist, AREA_DATA *area )
+static void add_area_to_list( Area **arealist, Area *area )
 {
   int i = 0;
 
@@ -132,7 +132,7 @@ static void add_area_to_list( AREA_DATA **arealist, AREA_DATA *area )
     }
 }
 
-static bool is_in_arealist( AREA_DATA **arealist, AREA_DATA *area )
+static bool is_in_arealist( Area **arealist, Area *area )
 {
   bool found = FALSE;
   int i = 0;
@@ -230,9 +230,9 @@ static char is_in_list( int needle, const int *haystack, size_t list_size )
   return found;
 }
 
-static AREA_DATA *get_area( vnum_t vnum )
+static Area *get_area( vnum_t vnum )
 {
-  AREA_DATA *area = NULL;
+  Area *area = NULL;
 
   for( area = first_area; area; area = area->next )
     {

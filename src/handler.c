@@ -2163,7 +2163,7 @@ void clean_mob( MOB_INDEX_DATA *mob )
 /*
  * Remove all resets from an area                               -Thoric
  */
-void clean_resets( AREA_DATA *tarea )
+void clean_resets( Area *tarea )
 {
   RESET_DATA *pReset, *pReset_next;
 
@@ -2438,7 +2438,7 @@ void remove_timer( Character *ch, short type )
     extract_timer( ch, timer );
 }
 
-bool in_soft_range( const Character *ch, const AREA_DATA *tarea )
+bool in_soft_range( const Character *ch, const Area *tarea )
 {
   if ( is_immortal(ch) )
     return TRUE;
@@ -2450,7 +2450,7 @@ bool in_soft_range( const Character *ch, const AREA_DATA *tarea )
     return FALSE;
 }
 
-bool in_hard_range( const Character *ch, const AREA_DATA *tarea )
+bool in_hard_range( const Character *ch, const Area *tarea )
 {
   if ( is_immortal(ch) )
     return TRUE;
@@ -2741,7 +2741,7 @@ bool empty_obj( OBJ_DATA *obj, OBJ_DATA *destobj, ROOM_INDEX_DATA *destroom )
 /*
  * Add gold to an area's economy                                -Thoric
  */
-void boost_economy( AREA_DATA *tarea, int gold )
+void boost_economy( Area *tarea, int gold )
 {
   while ( gold >= 1000000000 )
     {
@@ -2759,7 +2759,7 @@ void boost_economy( AREA_DATA *tarea, int gold )
 /*
  * Take gold from an area's economy                             -Thoric
  */
-void lower_economy( AREA_DATA *tarea, int gold )
+void lower_economy( Area *tarea, int gold )
 {
   while ( gold >= 1000000000 )
     {
@@ -2777,7 +2777,7 @@ void lower_economy( AREA_DATA *tarea, int gold )
 /*
  * Check to see if economy has at least this much gold             -Thoric
  */
-bool economy_has( const AREA_DATA *tarea, int gold )
+bool economy_has( const Area *tarea, int gold )
 {
   int hasgold = ((tarea->high_economy > 0) ? 1 : 0) * 1000000000
     + tarea->low_economy;
@@ -2796,7 +2796,7 @@ bool economy_has( const AREA_DATA *tarea, int gold )
 void economize_mobgold( Character *mob )
 {
   int gold;
-  AREA_DATA *tarea;
+  Area *tarea;
 
   /* make sure it isn't way too much */
   mob->gold = UMIN( mob->gold, mob->top_level * mob->top_level * 400 );

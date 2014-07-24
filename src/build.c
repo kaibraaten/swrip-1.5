@@ -30,7 +30,7 @@
 bool can_rmodify( const Character *ch, const ROOM_INDEX_DATA *room )
 {
   short vnum = room->vnum;
-  AREA_DATA *pArea;
+  Area *pArea;
 
   if ( is_npc( ch ) )
     return FALSE;
@@ -54,7 +54,7 @@ bool can_rmodify( const Character *ch, const ROOM_INDEX_DATA *room )
 bool can_omodify( const Character *ch, const OBJ_DATA *obj )
 {
   short vnum = obj->pIndexData->vnum;
-  AREA_DATA *pArea;
+  Area *pArea;
 
   if ( is_npc( ch ) )
     return FALSE;
@@ -78,7 +78,7 @@ bool can_omodify( const Character *ch, const OBJ_DATA *obj )
 bool can_oedit( const Character *ch, const OBJ_INDEX_DATA *obj )
 {
   short vnum = obj->vnum;
-  AREA_DATA *pArea;
+  Area *pArea;
 
   if ( is_npc( ch ) )
     return FALSE;
@@ -103,7 +103,7 @@ bool can_oedit( const Character *ch, const OBJ_INDEX_DATA *obj )
 bool can_mmodify( const Character *ch, const Character *mob )
 {
   short vnum;
-  AREA_DATA *pArea;
+  Area *pArea;
 
   if ( mob == ch )
     return TRUE;
@@ -140,7 +140,7 @@ bool can_mmodify( const Character *ch, const Character *mob )
 bool can_medit( const Character *ch, const MOB_INDEX_DATA *mob )
 {
   short vnum = mob->vnum;
-  AREA_DATA *pArea;
+  Area *pArea;
 
   if ( is_npc( ch ) )
     return FALSE;
@@ -159,13 +159,13 @@ bool can_medit( const Character *ch, const MOB_INDEX_DATA *mob )
   return FALSE;
 }
 
-void free_reset( AREA_DATA *are, RESET_DATA *res )
+void free_reset( Area *are, RESET_DATA *res )
 {
   UNLINK( res, are->first_reset, are->last_reset, next, prev );
   DISPOSE( res );
 }
 
-void free_area( AREA_DATA *are )
+void free_area( Area *are )
 {
   DISPOSE( are->name );
   DISPOSE( are->filename );
@@ -180,7 +180,7 @@ void assign_area( Character *ch )
   char buf[MAX_STRING_LENGTH];
   char buf2[MAX_STRING_LENGTH];
   char taf[1024];
-  AREA_DATA *tarea, *tmp;
+  Area *tarea, *tmp;
   bool created = FALSE;
 
   if ( is_npc( ch ) )
@@ -204,7 +204,7 @@ void assign_area( Character *ch )
         {
           sprintf( buf, "Creating area entry for %s", ch->name );
           log_string_plus( buf, LOG_NORMAL, ch->top_level );
-          CREATE( tarea, AREA_DATA, 1 );
+          CREATE( tarea, Area, 1 );
           LINK( tarea, first_build, last_build, next, prev );
           tarea->first_reset    = NULL;
           tarea->last_reset     = NULL;
@@ -353,7 +353,7 @@ bool DelOExtraProto( OBJ_INDEX_DATA *obj, char *keywords )
   return TRUE;
 }
 
-void fold_area( AREA_DATA *tarea, char *filename, bool install )
+void fold_area( Area *tarea, char *filename, bool install )
 {
   RESET_DATA            *treset;
   ROOM_INDEX_DATA       *room;
@@ -758,7 +758,7 @@ void fold_area( AREA_DATA *tarea, char *filename, bool install )
 
 void write_area_list( void )
 {
-  AREA_DATA *tarea;
+  Area *tarea;
   FILE *fpout;
 
   fpout = fopen( AREA_DIR AREA_LIST, "w" );
@@ -775,7 +775,7 @@ void write_area_list( void )
   fclose( fpout );
 }
 
-void add_reset_nested( AREA_DATA *tarea, OBJ_DATA *obj )
+void add_reset_nested( Area *tarea, OBJ_DATA *obj )
 {
   int limit;
 
@@ -794,7 +794,7 @@ void add_reset_nested( AREA_DATA *tarea, OBJ_DATA *obj )
 /*
  * Parse a reset command string into a reset_data structure
  */
-RESET_DATA *parse_reset( AREA_DATA *tarea, char *argument, Character *ch )
+RESET_DATA *parse_reset( Area *tarea, char *argument, Character *ch )
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];

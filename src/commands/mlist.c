@@ -5,7 +5,7 @@ void do_mlist( Character *ch, char *argument )
 {
   MOB_INDEX_DATA        *mob;
   int                    vnum;
-  AREA_DATA             *tarea;
+  Area             *tarea;
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
   int lrange;
