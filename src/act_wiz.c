@@ -27,8 +27,8 @@
 #include "character.h"
 #include "mud.h"
 
-BAN_DATA *first_ban = NULL;
-BAN_DATA *last_ban = NULL;
+Ban *first_ban = NULL;
+Ban *last_ban = NULL;
 
 /*
  * Global variables.
@@ -146,7 +146,7 @@ int str_count(const char *psource, const char *ptarget)
 
 void save_banlist( void )
 {
-  BAN_DATA *pban;
+  Ban *pban;
   FILE *fp;
 
   if ( !(fp = fopen( BAN_LIST, "w" )) )

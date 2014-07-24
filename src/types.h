@@ -15,8 +15,8 @@ typedef struct Area               Area;
 struct Auction;
 typedef struct Auction            Auction;
 
-struct ban_data;
-typedef struct ban_data                BAN_DATA;
+struct Ban;
+typedef struct Ban                Ban;
 
 struct extracted_char_data;
 typedef struct extracted_char_data     EXTRACT_Character;

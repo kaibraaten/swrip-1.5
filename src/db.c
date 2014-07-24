@@ -4670,7 +4670,7 @@ bool load_systemdata( SYSTEM_DATA *sys )
 
 void load_banlist( void )
 {
-  BAN_DATA *pban;
+  Ban *pban;
   FILE *fp;
   int number;
   char letter;
@@ -4692,7 +4692,7 @@ void load_banlist( void )
           fclose( fp );
           return;
         }
-      CREATE( pban, BAN_DATA, 1 );
+      CREATE( pban, Ban, 1 );
       pban->level = number;
       pban->name = fread_string_nohash( fp );
       if ( (letter = fread_letter(fp)) == '~' )

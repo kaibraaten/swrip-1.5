@@ -112,7 +112,7 @@ static void nanny_get_name( DESCRIPTOR_DATA *d, char *argument )
 {
   char buf[MAX_STRING_LENGTH];
   bool fOld = FALSE, chk = FALSE;
-  BAN_DATA *pban = NULL;
+  Ban *pban = NULL;
   Character *ch = d->character;
 
   if ( argument[0] == '\0' )

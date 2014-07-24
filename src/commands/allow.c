@@ -3,7 +3,7 @@
 void do_allow( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  BAN_DATA *pban;
+  Ban *pban;
 
   one_argument( argument, arg );
 

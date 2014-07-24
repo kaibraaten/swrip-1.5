@@ -675,7 +675,7 @@ void new_descriptor( socket_t new_desc )
 {
   char buf[MAX_STRING_LENGTH];
   DESCRIPTOR_DATA *dnew = NULL;
-  BAN_DATA *pban;
+  Ban *pban;
   struct hostent  *from;
   char *hostname;
   struct sockaddr_in sock;

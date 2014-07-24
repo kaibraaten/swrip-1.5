@@ -65,10 +65,10 @@ struct who_data
 /*
  * Site ban structure.
  */
-struct ban_data
+struct Ban
 {
-  BAN_DATA *next;
-  BAN_DATA *prev;
+  Ban *next;
+  Ban *prev;
   char     *name;
   int       level;
   char     *ban_time;
@@ -1575,8 +1575,8 @@ extern SHOP_DATA            *first_shop;
 extern SHOP_DATA            *last_shop;
 extern REPAIR_DATA          *first_repair;
 extern REPAIR_DATA          *last_repair;
-extern BAN_DATA             *first_ban;
-extern BAN_DATA             *last_ban;
+extern Ban             *first_ban;
+extern Ban             *last_ban;
 extern Character            *first_char;
 extern Character            *last_char;
 extern DESCRIPTOR_DATA      *first_descriptor;

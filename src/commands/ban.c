@@ -6,7 +6,7 @@ void do_ban( Character *ch, char *argument )
 {
   char buf[MAX_STRING_LENGTH];
   char arg[MAX_INPUT_LENGTH];
-  BAN_DATA *pban;
+  Ban *pban;
   int bnum;
 
   if ( is_npc(ch) )
@@ -101,7 +101,7 @@ void do_ban( Character *ch, char *argument )
         }
     }
 
-  CREATE( pban, BAN_DATA, 1 );
+  CREATE( pban, Ban, 1 );
   LINK( pban, first_ban, last_ban, next, prev );
   pban->name    = str_dup( arg );
   pban->level = LEVEL_AVATAR;
