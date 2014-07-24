@@ -77,13 +77,19 @@ static void OnStart( Character *ch, char *argument )
 
   if ( !checkneedle )
     {
-      send_to_char( "&RYou need need and thread to make a blaster.\r\n", ch);
+      send_to_char( "&RYou need need and thread to make a disguise.\r\n", ch);
       return;
     }
 
   if ( !checkfabric )
     {
       send_to_char( "&RYou need something to make it out of.\r\n", ch);
+      return;
+    }
+
+  if( !checkhair )
+    {
+      ch_printf( ch, "You need some hair to make a disguise.\r\n" );
       return;
     }
 
@@ -95,7 +101,7 @@ static void OnStart( Character *ch, char *argument )
     {
       send_to_char( "&GYou begin the long process of making a disguise.\r\n", ch);
       act( AT_PLAIN, "$n takes $s tools and a small oven and begins to work on something.", ch,
-	   NULL, argument , TO_ROOM );
+	   NULL, NULL, TO_ROOM );
       add_timer ( ch , TIMER_DO_FUN , 25 , do_makedisguise , 1 );
       ch->dest_buf   = str_dup(sexrace);
       ch->dest_buf_2   = str_dup(argument);
@@ -165,9 +171,9 @@ static void OnFinished( Character *ch )
   the_chance = is_npc(ch) ? ch->top_level
     : (int) (ch->pcdata->learned[gsn_disguise]) ;
 
-  if ( number_percent( ) > the_chance*2  || ( !checkneedle ) || ( !checkfabric ) )
+  if ( number_percent() > the_chance*2  || ( !checkneedle ) || ( !checkfabric ) )
     {
-      send_to_char( "&RYour blaster backfires destroying your weapon and burning your hand.\r\n", ch);
+      send_to_char( "&RYour disguise turns out to be really useless.\r\nYou quickly discard it.\r\n", ch);
       learn_from_failure( ch, gsn_disguise );
       return;
     }

@@ -8,7 +8,7 @@ void do_launch( Character *ch, char *argument )
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
 
-  int the_chance, sclass;
+  int the_chance;
   long price = 0;
   SHIP_DATA *ship;
   char buf[MAX_STRING_LENGTH];
@@ -16,12 +16,6 @@ void do_launch( Character *ch, char *argument )
 
   argument = one_argument( argument , arg1);
   argument = one_argument( argument , arg2);
-
-  if( arg1[0] != '\0' )
-    {
-      sclass = atoi(arg2);
-    }
-
 
   if ( (ship = ship_from_cockpit(ch->in_room->vnum)) == NULL )
     {

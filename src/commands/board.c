@@ -5,7 +5,6 @@
 
 void do_board( Character *ch, char *argument )
 {
-  ROOM_INDEX_DATA *fromroom;
   ROOM_INDEX_DATA *toroom;
   SHIP_DATA *ship;
   char * name = NULL;
@@ -23,7 +22,6 @@ void do_board( Character *ch, char *argument )
       return;
     }
 
-  fromroom = ch->in_room;
   if ( ( ship = ship_in_room( ch->in_room , argument ) ) != NULL )
     {
 

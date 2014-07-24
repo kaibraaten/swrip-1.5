@@ -9,7 +9,7 @@ void do_leaveship( Character *ch, char *argument )
   ROOM_INDEX_DATA *toroom = NULL;
   SHIP_DATA *ship = NULL;
   SHUTTLE_DATA * shuttle = NULL;
-  argument = NULL;
+
   fromroom = ch->in_room;
 
   if  ( (ship = ship_from_entrance(fromroom->vnum)) != NULL )

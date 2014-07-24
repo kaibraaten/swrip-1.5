@@ -40,6 +40,7 @@ void do_memory( Character *ch, char *argument )
 
   if ( !str_cmp( arg, "hash" ) )
     {
+#ifdef HASHSTR
       int hash = 0;
 
       if ( argument[0] != '\0' )
@@ -47,7 +48,6 @@ void do_memory( Character *ch, char *argument )
       else
 	hash = -1;
 
-#ifdef HASHSTR
       ch_printf( ch, "Hash statistics:\r\n%s", hash_stats() );
 
       if ( hash != -1 )
