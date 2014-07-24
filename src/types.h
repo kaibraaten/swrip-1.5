@@ -12,8 +12,8 @@ typedef struct Affect             Affect;
 struct Area;
 typedef struct Area               Area;
 
-struct auction_data;
-typedef struct auction_data            AUCTION_DATA;
+struct Auction;
+typedef struct Auction            Auction;
 
 struct ban_data;
 typedef struct ban_data                BAN_DATA;

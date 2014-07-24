@@ -71,7 +71,7 @@ int nummobsloaded = 0;
 int numobjsloaded = 0;
 int physicalobjects = 0;
 
-AUCTION_DATA *auction = NULL;
+Auction *auction = NULL;
 
 /* criminals */
 short gsn_torture;
@@ -421,7 +421,7 @@ void boot_db( bool fCopyOver )
   quitting_char = NULL;
   loading_char = NULL;
   saving_char = NULL;
-  CREATE( auction, AUCTION_DATA, 1);
+  CREATE( auction, Auction, 1);
   auction->item         = NULL;
 
   for ( wear = 0; wear < MAX_WEAR; wear++ )

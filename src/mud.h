@@ -1194,7 +1194,7 @@ struct skill_type
 };
 
 
-struct auction_data
+struct Auction
 {
   OBJ_DATA  *item;   /* a pointer to the item */
   Character *seller; /* a pointer to the seller - which may NOT quit */
@@ -1625,7 +1625,7 @@ extern bool                  fLogAll;
 extern char                  log_buf         [];
 extern TIME_INFO_DATA        time_info;
 extern WEATHER_DATA          weather_info;
-extern AUCTION_DATA         *auction;
+extern Auction         *auction;
 extern struct act_prog_data *mob_act_list;
 
 /*
