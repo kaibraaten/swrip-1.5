@@ -2,19 +2,48 @@
 #include "mud.h"
 #include "character.h"
 
+static void on_start( CHAR_DATA *ch, char *argument );
+static void on_finished( CHAR_DATA *ch );
+static void on_abort( CHAR_DATA *ch );
+
 void do_makejewelry( CHAR_DATA *ch, char *argument )
+{
+  switch( ch->substate )
+    {
+    default:
+      on_start( ch, argument );
+      break;
+
+    case SUB_PAUSE:
+      ch->substate = SUB_NONE;
+      on_finished( ch );
+      break;
+
+    case SUB_TIMER_DO_ABORT:
+      ch->substate = SUB_NONE;
+      on_abort( ch );
+      break;
+    }
+}
+
+static void on_start( CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
-  char buf[MAX_STRING_LENGTH];
-  int level, the_chance;
-  bool checktool, checkoven, checkmetal;
-  OBJ_DATA *obj;
-  OBJ_DATA *metal = NULL;
-  int value, cost;
+  int the_chance = 0;
+  bool checktool = false;
+  bool checkoven = false;
+  bool checkmetal = false;
+  OBJ_DATA *obj = NULL;
 
   argument = one_argument( argument, arg );
   strcpy ( arg2, argument);
+
+  if ( arg2[0] == '\0' )
+    {
+      send_to_char( "&RUsage: Makejewelry <wearloc> <name>\r\n&w", ch);
+      return;
+    }
 
   if ( !str_cmp( arg, "body" )
        || !str_cmp( arg, "head" )
@@ -45,20 +74,6 @@ void do_makejewelry( CHAR_DATA *ch, char *argument )
       return;
     }
 
-  switch( ch->substate )
-    {
-    default:
-
-      if ( arg2[0] == '\0' )
-        {
-          send_to_char( "&RUsage: Makejewelry <wearloc> <name>\r\n&w", ch);
-          return;
-        }
-
-      checktool = FALSE;
-      checkoven = FALSE;
-      checkmetal = FALSE;
-
       if ( !IS_SET( ch->in_room->room_flags, ROOM_FACTORY ) )
         {
           send_to_char( "&RYou need to be in a factory or workshop to do that.\r\n", ch);
@@ -68,11 +83,11 @@ void do_makejewelry( CHAR_DATA *ch, char *argument )
       for ( obj = ch->last_carrying; obj; obj = obj->prev_content )
         {
           if (obj->item_type == ITEM_TOOLKIT)
-            checktool = TRUE;
+            checktool = true;
           if (obj->item_type == ITEM_OVEN)
-            checkoven = TRUE;
+            checkoven = true;
           if (obj->item_type == ITEM_RARE_METAL)
-            checkmetal = TRUE;
+            checkmetal = true;
         }
 
       if ( !checktool )
@@ -99,58 +114,63 @@ void do_makejewelry( CHAR_DATA *ch, char *argument )
         {
           send_to_char( "&GYou begin the long process of creating some jewelry.\r\n", ch);
           act( AT_PLAIN, "$n takes $s toolkit and some metal and begins to work.", ch,
-               NULL, argument , TO_ROOM );
+               NULL, NULL , TO_ROOM );
           add_timer ( ch , TIMER_DO_FUN , 15 , do_makejewelry , 1 );
           ch->dest_buf = str_dup(arg);
           ch->dest_buf_2 = str_dup(arg2);
-          return;
         }
-      send_to_char("&RYou can't figure out what to do.\r\n",ch);
-      learn_from_failure( ch, gsn_makejewelry );
-      return;
+      else
+	{
+	  send_to_char("&RYou can't figure out what to do.\r\n",ch);
+	  learn_from_failure( ch, gsn_makejewelry );
+	}
+}
 
-    case SUB_PAUSE:
-      if ( !ch->dest_buf )
-        return;
-      if ( !ch->dest_buf_2 )
-        return;
-      strcpy(arg, (const char*)ch->dest_buf);
-      DISPOSE( ch->dest_buf);
-      strcpy(arg2, (const char*)ch->dest_buf_2);
-      DISPOSE( ch->dest_buf_2);
-      break;
+static void on_finished( CHAR_DATA *ch )
+{
+  char arg[MAX_INPUT_LENGTH];
+  char arg2[MAX_INPUT_LENGTH];
+  char buf[MAX_STRING_LENGTH];
+  int level = 0;
+  int the_chance = 0;
+  bool checktool = false;
+  bool checkoven = false;
+  bool checkmetal = false;
+  OBJ_DATA *obj = NULL;
+  OBJ_DATA *metal = NULL;
+  int value = 0;
+  int cost = 0;
+  long xpgain = 0;
 
-    case SUB_TIMER_DO_ABORT:
-      DISPOSE( ch->dest_buf );
-      DISPOSE( ch->dest_buf_2 );
-      ch->substate = SUB_NONE;
-      send_to_char("&RYou are interupted and fail to finish your work.\r\n", ch);
-      return;
-    }
+  if ( !ch->dest_buf )
+    return;
 
-  ch->substate = SUB_NONE;
+  if ( !ch->dest_buf_2 )
+    return;
+
+  strcpy(arg, (const char*)ch->dest_buf);
+  DISPOSE( ch->dest_buf);
+  strcpy(arg2, (const char*)ch->dest_buf_2);
+  DISPOSE( ch->dest_buf_2);
 
   level = is_npc(ch) ? ch->top_level : (int) (ch->pcdata->learned[gsn_makejewelry]);
-
-  checkmetal = FALSE;
-  checkoven = FALSE;
-  checktool = FALSE;
-  value=0;
-  cost=0;
 
   for ( obj = ch->last_carrying; obj; obj = obj->prev_content )
     {
       if (obj->item_type == ITEM_TOOLKIT)
-        checktool = TRUE;
+        checktool = true;
+
       if (obj->item_type == ITEM_OVEN)
-        checkoven = TRUE;
-      if (obj->item_type == ITEM_RARE_METAL && checkmetal == FALSE)
+        checkoven = true;
+
+      if (obj->item_type == ITEM_RARE_METAL && checkmetal == false)
         {
-          checkmetal = TRUE;
+          checkmetal = true;
           separate_obj( obj );
           obj_from_char( obj );
           metal = obj;
         }
+
       if (obj->item_type == ITEM_CRYSTAL)
         {
           cost += obj->cost;
@@ -201,15 +221,18 @@ void do_makejewelry( CHAR_DATA *ch, char *argument )
 
   send_to_char( "&GYou finish your work and hold up your newly created jewelry.&w\r\n", ch);
   act( AT_PLAIN, "$n finishes sewing some new jewelry.", ch,
-       NULL, argument , TO_ROOM );
+       NULL, NULL , TO_ROOM );
 
-  {
-    long xpgain;
-
-    xpgain = UMIN( obj->cost*100 ,( exp_level(get_level( ch, ENGINEERING_ABILITY ) + 1 ) - exp_level(get_level(ch, ENGINEERING_ABILITY ) ) ) );
-    gain_exp(ch, ENGINEERING_ABILITY, xpgain );
-    ch_printf( ch , "You gain %d engineering experience.", xpgain );
-  }
+  xpgain = UMIN( obj->cost*100 ,( exp_level(get_level( ch, ENGINEERING_ABILITY ) + 1 ) - exp_level(get_level(ch, ENGINEERING_ABILITY ) ) ) );
+  gain_exp(ch, ENGINEERING_ABILITY, xpgain );
+  ch_printf( ch , "You gain %d engineering experience.", xpgain );
 
   learn_from_success( ch, gsn_makejewelry );
+}
+
+static void on_abort( CHAR_DATA *ch )
+{
+  DISPOSE( ch->dest_buf );
+  DISPOSE( ch->dest_buf_2 );
+  send_to_char("&RYou are interupted and fail to finish your work.\r\n", ch);
 }
