@@ -2,31 +2,31 @@
 #include "mud.h"
 #include "character.h"
 
-static void on_start( CHAR_DATA *ch, char *argument );
-static void on_finished( CHAR_DATA *ch );
-static void on_abort( CHAR_DATA *ch );
+static void OnStart( CHAR_DATA *ch, char *argument );
+static void OnFinished( CHAR_DATA *ch );
+static void OnAbort( CHAR_DATA *ch );
 
 void do_makejewelry( CHAR_DATA *ch, char *argument )
 {
   switch( ch->substate )
     {
     default:
-      on_start( ch, argument );
+      OnStart( ch, argument );
       break;
 
     case SUB_PAUSE:
       ch->substate = SUB_NONE;
-      on_finished( ch );
+      OnFinished( ch );
       break;
 
     case SUB_TIMER_DO_ABORT:
       ch->substate = SUB_NONE;
-      on_abort( ch );
+      OnAbort( ch );
       break;
     }
 }
 
-static void on_start( CHAR_DATA *ch, char *argument )
+static void OnStart( CHAR_DATA *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
@@ -126,7 +126,7 @@ static void on_start( CHAR_DATA *ch, char *argument )
 	}
 }
 
-static void on_finished( CHAR_DATA *ch )
+static void OnFinished( CHAR_DATA *ch )
 {
   char arg[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
@@ -230,7 +230,7 @@ static void on_finished( CHAR_DATA *ch )
   learn_from_success( ch, gsn_makejewelry );
 }
 
-static void on_abort( CHAR_DATA *ch )
+static void OnAbort( CHAR_DATA *ch )
 {
   DISPOSE( ch->dest_buf );
   DISPOSE( ch->dest_buf_2 );
