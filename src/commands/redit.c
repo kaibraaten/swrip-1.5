@@ -11,7 +11,7 @@ void do_redit( Character *ch, char *argument )
   char buf[MAX_STRING_LENGTH];
   ROOM_INDEX_DATA *location = NULL, *tmp = NULL;
   EXTRA_DESCR_DATA *ed = NULL;
-  EXIT_DATA *xit = NULL, *texit = NULL;
+  Exit *xit = NULL, *texit = NULL;
   int value = 0;
   int edir = 0, ekey = 0, evnum = 0;
   char *origarg = argument;
@@ -541,7 +541,7 @@ void do_redit( Character *ch, char *argument )
    */
   if ( !str_cmp( arg, "bexit" ) )
     {
-      EXIT_DATA *this_exit, *rxit;
+      Exit *this_exit, *rxit;
       char tmpcmd[MAX_INPUT_LENGTH];
       ROOM_INDEX_DATA *tmploc;
       int vnum, exnum;

@@ -7,7 +7,7 @@ void do_loadup( Character *ch, char *argument )
   char fname[1024];
   char name[256];
   struct stat fst;
-  DESCRIPTOR_DATA *d;
+  Descriptor *d;
   int old_room_vnum;
   char buf[MAX_STRING_LENGTH];
 
@@ -24,7 +24,7 @@ void do_loadup( Character *ch, char *argument )
            capitalize( name ) );
   if ( stat( fname, &fst ) != -1 )
     {
-      CREATE( d, DESCRIPTOR_DATA, 1 );
+      CREATE( d, Descriptor, 1 );
       d->next = NULL;
       d->prev = NULL;
       d->connection_state = CON_GET_NAME;

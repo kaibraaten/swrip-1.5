@@ -30,11 +30,11 @@ typedef struct HuntHateFear          HuntHateFear;
 struct Fight;
 typedef struct Fight           Fight;
 
-struct descriptor_data;
-typedef struct descriptor_data         DESCRIPTOR_DATA;
+struct Descriptor;
+typedef struct Descriptor         Descriptor;
 
-struct exit_data;
-typedef struct exit_data               EXIT_DATA;
+struct Exit;
+typedef struct Exit               Exit;
 
 struct extra_descr_data;
 typedef struct extra_descr_data        EXTRA_DESCR_DATA;

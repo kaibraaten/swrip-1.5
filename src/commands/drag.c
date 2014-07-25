@@ -8,7 +8,7 @@ void do_drag( Character *ch, char *argument )
   char arg2[MAX_INPUT_LENGTH];
   int exit_dir;
   Character *victim;
-  EXIT_DATA *pexit;
+  Exit *pexit;
   ROOM_INDEX_DATA *to_room;
   bool nogo;
   int drag_chance;

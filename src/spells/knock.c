@@ -5,7 +5,7 @@ extern char *spell_target_name;
 
 ch_ret spell_knock( int sn, int level, Character *ch, void *vo )
 {
-  EXIT_DATA *pexit;
+  Exit *pexit;
   SKILLTYPE *skill = get_skilltype(sn);
 
   set_char_color(AT_MAGIC, ch);

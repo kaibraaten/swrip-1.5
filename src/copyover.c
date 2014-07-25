@@ -43,16 +43,16 @@
  */
 socket_t init_socket( short port );
 void new_descriptor( socket_t new_desc );
-bool read_from_descriptor( DESCRIPTOR_DATA * d );
-void init_descriptor( DESCRIPTOR_DATA * dnew, socket_t desc );
-void free_desc( DESCRIPTOR_DATA * d );
+bool read_from_descriptor( Descriptor * d );
+void init_descriptor( Descriptor * dnew, socket_t desc );
+void free_desc( Descriptor * d );
 
 /*  Warm reboot stuff, gotta make sure to thank Erwin for this :) */
 extern socket_t control;		/* Controlling descriptor       */
 
 void do_copyover( Character * ch, char *argument )
 {
-  DESCRIPTOR_DATA *d, *d_next;
+  Descriptor *d, *d_next;
   char buf[100];
   FILE *fp = fopen( COPYOVER_FILE, "w" );
 
@@ -186,7 +186,7 @@ void do_copyover( Character * ch, char *argument )
 /* Recover from a copyover - load players */
 void copyover_recover( void )
 {
-  DESCRIPTOR_DATA *d = NULL;
+  Descriptor *d = NULL;
   FILE *fp = NULL;
   char name[100];
   char host[MAX_STRING_LENGTH];
@@ -224,7 +224,7 @@ void copyover_recover( void )
     }
 #endif
 
-    CREATE( d, DESCRIPTOR_DATA, 1 );
+    CREATE( d, Descriptor, 1 );
     init_descriptor( d, desc ); /* set up various stuff */
     d->remote.hostname = STRALLOC( host );
 

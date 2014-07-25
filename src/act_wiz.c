@@ -42,7 +42,7 @@ extern ROOM_INDEX_DATA *room_index_hash[MAX_KEY_HASH];
 
 void echo_to_all( short AT_COLOR, const char *argument, short tar )
 {
-  DESCRIPTOR_DATA *d;
+  Descriptor *d;
 
   if ( !argument || argument[0] == '\0' )
     return;
@@ -183,7 +183,7 @@ void close_area( Area *pArea )
   RESET_DATA *ereset_next;
   EXTRA_DESCR_DATA *eed;
   EXTRA_DESCR_DATA *eed_next;
-  EXIT_DATA *exit_next;
+  Exit *exit_next;
   MPROG_ACT_LIST *mpact;
   MPROG_ACT_LIST *mpact_next;
   MPROG_DATA *mprog;
@@ -222,7 +222,7 @@ void close_area( Area *pArea )
     {
       for ( rid = room_index_hash[icnt]; rid; rid = rid_next )
         {
-	  EXIT_DATA *exit_iter = NULL;
+	  Exit *exit_iter = NULL;
           rid_next = rid->next;
 
           for ( exit_iter = rid->first_exit; exit_iter; exit_iter = exit_next )

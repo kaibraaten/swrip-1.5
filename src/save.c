@@ -772,7 +772,7 @@ void fwrite_obj( const Character *ch, const OBJ_DATA *obj, FILE *fp, int iNest,
 /*
  * Load a char and inventory into a new ch structure.
  */
-bool load_char_obj( DESCRIPTOR_DATA *d, char *name, bool preload )
+bool load_char_obj( Descriptor *d, char *name, bool preload )
 {
   char strsave[MAX_INPUT_LENGTH];
   Character *ch;

@@ -60,7 +60,7 @@ static ROOM_INDEX_DATA *toroom( ROOM_INDEX_DATA *room, short door )
 
 static bool valid_edge( ROOM_INDEX_DATA *room, short door )
 {
-  EXIT_DATA *pexit;
+  Exit *pexit;
   ROOM_INDEX_DATA *to_room;
 
   pexit = get_exit( room, door );
@@ -329,7 +329,7 @@ void hunt_victim( Character *ch )
   ret = find_first_step(ch->in_room, ch->hhf.hunting->who->in_room, 5000);
   if ( ret == BFS_NO_PATH )
     {
-      EXIT_DATA *pexit;
+      Exit *pexit;
       int attempt;
 
       for ( attempt = 0; attempt < 25; attempt++ )
@@ -377,7 +377,7 @@ static bool mob_snipe( Character *ch, Character *victim )
 {
   short            dir, dist;
   short            max_dist = 3;
-  EXIT_DATA       * pexit;
+  Exit       * pexit;
   ROOM_INDEX_DATA * was_in_room;
   ROOM_INDEX_DATA * to_room;
   char              buf[MAX_STRING_LENGTH];

@@ -863,7 +863,7 @@ bool check_hostile( SHIP_DATA *ship )
   return FALSE;
 }
 
-ch_ret drive_ship( Character *ch, SHIP_DATA *ship, EXIT_DATA *pexit, int fall )
+ch_ret drive_ship( Character *ch, SHIP_DATA *ship, Exit *pexit, int fall )
 {
   ROOM_INDEX_DATA *in_room;
   ROOM_INDEX_DATA *to_room;

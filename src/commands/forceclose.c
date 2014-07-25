@@ -4,7 +4,7 @@
 void do_forceclose( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  DESCRIPTOR_DATA *d;
+  Descriptor *d;
   int desc;
 
   one_argument( argument, arg );

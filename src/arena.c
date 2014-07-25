@@ -127,7 +127,7 @@ void start_arena(void)
 void start_game(void)
 {
   Character *i;
-  DESCRIPTOR_DATA *d;
+  Descriptor *d;
 
   for (d = first_descriptor; d; d = d->next)
     if (!d->connection_state)
@@ -193,7 +193,7 @@ void find_game_winner(void)
   char buf[MAX_INPUT_LENGTH];
   char buf2[MAX_INPUT_LENGTH];
   Character *i;
-  DESCRIPTOR_DATA *d;
+  Descriptor *d;
   struct hall_of_fame_element *fame_node;
 
   for (d = first_descriptor; d; d = d->next)
@@ -284,7 +284,7 @@ void do_end_game(void)
 {
   char buf[MAX_INPUT_LENGTH];
   Character *i;
-  DESCRIPTOR_DATA *d;
+  Descriptor *d;
 
   for (d = first_descriptor; d; d = d->next)
     if (!d->connection_state)
@@ -318,7 +318,7 @@ void do_end_game(void)
 int num_in_arena(void)
 {
   Character *i;
-  DESCRIPTOR_DATA *d;
+  Descriptor *d;
   int num = 0;
 
   for (d = first_descriptor; d; d = d->next)
@@ -389,7 +389,7 @@ void write_one_fame_node(FILE * fp, struct hall_of_fame_element * node)
 
 void find_bet_winners(Character *winner)
 {
-  DESCRIPTOR_DATA *d;
+  Descriptor *d;
   Character *wch;
 
   char buf1[MAX_INPUT_LENGTH];

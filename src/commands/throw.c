@@ -9,7 +9,7 @@ void do_throw( Character *ch, char *argument )
   char              arg2[MAX_INPUT_LENGTH];
   char              arg3[MAX_INPUT_LENGTH];
   short            dir;
-  EXIT_DATA       * pexit;
+  Exit       * pexit;
   ROOM_INDEX_DATA * was_in_room;
   ROOM_INDEX_DATA * to_room;
   Character       * victim;

@@ -7,7 +7,7 @@ void do_shove( Character *ch, char *argument )
   char arg[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
   int exit_dir = 0;
-  EXIT_DATA *pexit = NULL;
+  Exit *pexit = NULL;
   Character *victim = NULL;
   bool nogo = FALSE;
   int shove_chance = 0;

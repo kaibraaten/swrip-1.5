@@ -195,7 +195,7 @@ void talk_channel( Character *ch, const char *argument, int channel, const char 
 {
   char buf[MAX_STRING_LENGTH];
   char buf2[MAX_STRING_LENGTH];
-  DESCRIPTOR_DATA *d;
+  Descriptor *d;
   int position;
   CLAN_DATA *clan = NULL;
 
@@ -491,7 +491,7 @@ void talk_channel( Character *ch, const char *argument, int channel, const char 
 void to_channel( const char *argument, int channel, const char *verb, short level )
 {
   char buf[MAX_STRING_LENGTH];
-  DESCRIPTOR_DATA *d;
+  Descriptor *d;
 
   if ( !first_descriptor || argument[0] == '\0' )
     return;
@@ -628,7 +628,7 @@ bool is_same_group( const Character *ach, const Character *bch )
 
 void talk_auction (const char *argument)
 {
-  DESCRIPTOR_DATA *d;
+  Descriptor *d;
   char buf[MAX_STRING_LENGTH];
   Character *original;
 

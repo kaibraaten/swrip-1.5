@@ -3,7 +3,7 @@
 
 void do_leave( Character *ch, char *argument )
 {
-  EXIT_DATA *pexit = NULL;
+  Exit *pexit = NULL;
 
   if ( argument[0] == '\0' )
     {

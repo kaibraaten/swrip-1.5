@@ -5,7 +5,7 @@
 void do_mpasound( Character *ch, char *argument )
 {
   ROOM_INDEX_DATA *was_in_room;
-  EXIT_DATA       *pexit;
+  Exit       *pexit;
   int                actflags;
 
   if (!ch )

@@ -49,9 +49,9 @@ bool bootup = FALSE;
 /*
  * Global variables.
  */
-DESCRIPTOR_DATA *   first_descriptor = NULL; /* First descriptor */
-DESCRIPTOR_DATA *   last_descriptor = NULL;  /* Last descriptor              */
-DESCRIPTOR_DATA *   d_next = NULL;          /* Next descriptor in loop      */
+Descriptor *   first_descriptor = NULL; /* First descriptor */
+Descriptor *   last_descriptor = NULL;  /* Last descriptor              */
+Descriptor *   d_next = NULL;          /* Next descriptor in loop      */
 int                 num_descriptors = 0;
 bool                mud_down = FALSE;       /* Shutdown                     */
 bool                wizlock = FALSE;     /* Game is wizlocked            */
@@ -76,24 +76,24 @@ int                 maxdesc = 0;
 void game_loop( void );
 socket_t init_socket( short port );
 void new_descriptor( socket_t new_desc );
-bool read_from_descriptor( DESCRIPTOR_DATA *d );
+bool read_from_descriptor( Descriptor *d );
 
 /*
  * Other local functions (OS-independent).
  */
-bool check_reconnect( DESCRIPTOR_DATA *d, char *name, bool fConn );
-bool check_playing( DESCRIPTOR_DATA *d, char *name, bool kick );
-bool check_multi( DESCRIPTOR_DATA *d, char *name );
+bool check_reconnect( Descriptor *d, char *name, bool fConn );
+bool check_playing( Descriptor *d, char *name, bool kick );
+bool check_multi( Descriptor *d, char *name );
 int main( int argc, char **argv );
-void nanny( DESCRIPTOR_DATA *d, char *argument );
-bool flush_buffer( DESCRIPTOR_DATA *d, bool fPrompt );
-void read_from_buffer( DESCRIPTOR_DATA *d );
+void nanny( Descriptor *d, char *argument );
+bool flush_buffer( Descriptor *d, bool fPrompt );
+void read_from_buffer( Descriptor *d );
 void stop_idling( Character *ch );
-void free_desc( DESCRIPTOR_DATA *d );
-void display_prompt( DESCRIPTOR_DATA *d );
-int make_color_sequence( const char *col, char *buf, DESCRIPTOR_DATA *d );
-void set_pager_input( DESCRIPTOR_DATA *d, char *argument );
-bool pager_output( DESCRIPTOR_DATA *d );
+void free_desc( Descriptor *d );
+void display_prompt( Descriptor *d );
+int make_color_sequence( const char *col, char *buf, Descriptor *d );
+void set_pager_input( Descriptor *d, char *argument );
+bool pager_output( Descriptor *d );
 
 static void execute_on_exit( void )
 {
@@ -368,7 +368,7 @@ bool check_bad_desc( socket_t desc )
 void accept_new( socket_t ctrl )
 {
   static struct timeval null_time;
-  DESCRIPTOR_DATA *d = NULL;
+  Descriptor *d = NULL;
   int result = 0;
 
   /*
@@ -422,7 +422,7 @@ void game_loop( )
 {
   struct timeval          last_time;
   char cmdline[MAX_INPUT_LENGTH];
-  DESCRIPTOR_DATA *d;
+  Descriptor *d;
   /*  time_t    last_check = 0;  */
 
   signal( SIGPIPE, SIG_IGN );
@@ -656,7 +656,7 @@ void game_loop( )
   return;
 }
 
-void init_descriptor(DESCRIPTOR_DATA *dnew, socket_t desc)
+void init_descriptor(Descriptor *dnew, socket_t desc)
 {
   dnew->next          = NULL;
   dnew->descriptor    = desc;
@@ -674,7 +674,7 @@ void init_descriptor(DESCRIPTOR_DATA *dnew, socket_t desc)
 void new_descriptor( socket_t new_desc )
 {
   char buf[MAX_STRING_LENGTH];
-  DESCRIPTOR_DATA *dnew = NULL;
+  Descriptor *dnew = NULL;
   Ban *pban;
   struct hostent  *from;
   char *hostname;
@@ -721,7 +721,7 @@ void new_descriptor( socket_t new_desc )
   if ( check_bad_desc( new_desc ) )
     return;
 
-  CREATE( dnew, DESCRIPTOR_DATA, 1 );
+  CREATE( dnew, Descriptor, 1 );
   init_descriptor(dnew, desc);
   dnew->remote.port = ntohs( sock.sin_port );
 
@@ -774,7 +774,7 @@ void new_descriptor( socket_t new_desc )
 
   if ( !last_descriptor && first_descriptor )
     {
-      DESCRIPTOR_DATA *d;
+      Descriptor *d;
 
       bug( "New_descriptor: last_desc is NULL, but first_desc is not! ...fixing" );
       for ( d = first_descriptor; d; d = d->next )
@@ -812,7 +812,7 @@ void new_descriptor( socket_t new_desc )
   return;
 }
 
-void free_desc( DESCRIPTOR_DATA *d )
+void free_desc( Descriptor *d )
 {
   closesocket( d->descriptor );
   STRFREE( d->remote.hostname );
@@ -825,10 +825,10 @@ void free_desc( DESCRIPTOR_DATA *d )
   --num_descriptors;
 }
 
-void close_socket( DESCRIPTOR_DATA *dclose, bool force )
+void close_socket( Descriptor *dclose, bool force )
 {
   Character *ch;
-  DESCRIPTOR_DATA *d;
+  Descriptor *d;
   bool DoNotUnlink = FALSE;
 
   /* flush outbuf */
@@ -864,7 +864,7 @@ void close_socket( DESCRIPTOR_DATA *dclose, bool force )
   /* sanity check :( */
   if ( !dclose->prev && dclose != first_descriptor )
     {
-      DESCRIPTOR_DATA *dp, *dn;
+      Descriptor *dp, *dn;
       bug( "Close_socket: %s desc:%p != first_desc:%p and desc->prev = NULL!",
            ch ? ch->name : d->remote.hostname, dclose, first_descriptor );
       dp = NULL;
@@ -889,7 +889,7 @@ void close_socket( DESCRIPTOR_DATA *dclose, bool force )
     }
   if ( !dclose->next && dclose != last_descriptor )
     {
-      DESCRIPTOR_DATA *dp, *dn;
+      Descriptor *dp, *dn;
       bug( "Close_socket: %s desc:%p != last_desc:%p and desc->next = NULL!",
            ch ? ch->name : d->remote.hostname, dclose, last_descriptor );
       dn = NULL;
@@ -951,7 +951,7 @@ void close_socket( DESCRIPTOR_DATA *dclose, bool force )
   return;
 }
 
-bool read_from_descriptor( DESCRIPTOR_DATA *d )
+bool read_from_descriptor( Descriptor *d )
 {
   size_t iStart;
 
@@ -1013,7 +1013,7 @@ bool read_from_descriptor( DESCRIPTOR_DATA *d )
 /*
  * Transfer one line from input buffer to input line.
  */
-void read_from_buffer( DESCRIPTOR_DATA *d )
+void read_from_buffer( Descriptor *d )
 {
   int i, j, k;
 
@@ -1110,7 +1110,7 @@ void read_from_buffer( DESCRIPTOR_DATA *d )
 /*
  * Low level output function.
  */
-bool flush_buffer( DESCRIPTOR_DATA *d, bool fPrompt )
+bool flush_buffer( Descriptor *d, bool fPrompt )
 {
   char buf[MAX_INPUT_LENGTH];
   Character *ch;
@@ -1213,7 +1213,7 @@ bool flush_buffer( DESCRIPTOR_DATA *d, bool fPrompt )
 /*
  * Append onto an output buffer.
  */
-void write_to_buffer( DESCRIPTOR_DATA *d, const char *txt, size_t length )
+void write_to_buffer( Descriptor *d, const char *txt, size_t length )
 {
   if ( !d )
     {
@@ -1357,7 +1357,7 @@ bool check_parse_name( const char *name )
 /*
  * Look for link-dead player to reconnect.
  */
-bool check_reconnect( DESCRIPTOR_DATA *d, char *name, bool fConn )
+bool check_reconnect( Descriptor *d, char *name, bool fConn )
 {
   Character *ch;
 
@@ -1413,9 +1413,9 @@ bool check_reconnect( DESCRIPTOR_DATA *d, char *name, bool fConn )
  * Check if already playing.
  */
 
-bool check_multi( DESCRIPTOR_DATA *d , char *name )
+bool check_multi( Descriptor *d , char *name )
 {
-  DESCRIPTOR_DATA *dold;
+  Descriptor *dold;
 
   for ( dold = first_descriptor; dold; dold = dold->next )
     {
@@ -1444,11 +1444,11 @@ bool check_multi( DESCRIPTOR_DATA *d , char *name )
 
 }
 
-bool check_playing( DESCRIPTOR_DATA *d, char *name, bool kick )
+bool check_playing( Descriptor *d, char *name, bool kick )
 {
   Character *ch;
 
-  DESCRIPTOR_DATA *dold;
+  Descriptor *dold;
   int   cstate;
 
   for ( dold = first_descriptor; dold; dold = dold->next )
@@ -1518,7 +1518,7 @@ void stop_idling( Character *ch )
 
 void send_to_char( const char *txt, const Character *ch )
 {
-  DESCRIPTOR_DATA *d;
+  Descriptor *d;
   const char *colstr;
   const char *prevstr = txt;
   char colbuf[20];
@@ -1553,7 +1553,7 @@ void send_to_char( const char *txt, const Character *ch )
   return;
 }
 
-void write_to_pager( DESCRIPTOR_DATA *d, const char *txt, size_t length )
+void write_to_pager( Descriptor *d, const char *txt, size_t length )
 {
   if ( length <= 0 )
     length = strlen(txt);
@@ -1604,7 +1604,7 @@ void write_to_pager( DESCRIPTOR_DATA *d, const char *txt, size_t length )
 
 void send_to_pager( const char *txt, const Character *ch )
 {
-  DESCRIPTOR_DATA *d;
+  Descriptor *d;
   const char *colstr;
   const char *prevstr = txt;
   char colbuf[20];
@@ -1995,7 +1995,7 @@ int getcolor(char clr)
   return -1;
 }
 
-void display_prompt( DESCRIPTOR_DATA *d )
+void display_prompt( Descriptor *d )
 {
   Character *ch = d->character;
   Character *och = (d->original ? d->original : d->character);
@@ -2177,7 +2177,7 @@ void display_prompt( DESCRIPTOR_DATA *d )
   return;
 }
 
-int make_color_sequence(const char *col, char *buf, DESCRIPTOR_DATA *d)
+int make_color_sequence(const char *col, char *buf, Descriptor *d)
 {
   int ln;
   const char *ctype = col;
@@ -2277,7 +2277,7 @@ int make_color_sequence(const char *col, char *buf, DESCRIPTOR_DATA *d)
   return ln;
 }
 
-void set_pager_input( DESCRIPTOR_DATA *d, char *argument )
+void set_pager_input( Descriptor *d, char *argument )
 {
   while ( isspace(*argument) )
     argument++;
@@ -2285,7 +2285,7 @@ void set_pager_input( DESCRIPTOR_DATA *d, char *argument )
   d->pager.pagecmd = *argument;
 }
 
-bool pager_output( DESCRIPTOR_DATA *d )
+bool pager_output( Descriptor *d )
 {
   register char *last;
   Character *ch;

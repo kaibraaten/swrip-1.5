@@ -359,7 +359,7 @@ void stop_editing( Character *ch )
 
 void edit_buffer( Character *ch, char *argument )
 {
-  DESCRIPTOR_DATA *d;
+  Descriptor *d;
   EDITOR_DATA *edd;
   EDITOR_LINE *newline;
   char cmd[MAX_INPUT_LENGTH];
@@ -875,7 +875,7 @@ static void editor_escaped_cmd( Character *ch, EDITOR_DATA *edd, char *argument 
 
 static void editor_save( Character *ch, EDITOR_DATA *edd, char *argument )
 {
-  DESCRIPTOR_DATA *d;
+  Descriptor *d;
 
   d = ch->desc;
 

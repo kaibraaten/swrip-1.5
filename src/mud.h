@@ -113,11 +113,11 @@ struct wizent
 /*
  * Descriptor (channel) structure.
  */
-struct descriptor_data
+struct Descriptor
 {
-  DESCRIPTOR_DATA *next;
-  DESCRIPTOR_DATA *prev;
-  DESCRIPTOR_DATA *snoop_by;
+  Descriptor *next;
+  Descriptor *prev;
+  Descriptor *snoop_by;
   Character       *character;
   Character       *original;
 
@@ -934,11 +934,11 @@ struct obj_data
 /*
  * Exit data.
  */
-struct exit_data
+struct Exit
 {
-  EXIT_DATA       *prev;           /* previous exit in linked list */
-  EXIT_DATA       *next;           /* next exit in linked list     */
-  EXIT_DATA       *rexit;          /* Reverse exit pointer         */
+  Exit       *prev;           /* previous exit in linked list */
+  Exit       *next;           /* next exit in linked list     */
+  Exit       *rexit;          /* Reverse exit pointer         */
   ROOM_INDEX_DATA *to_room;        /* Pointer to destination room  */
   char            *keyword;        /* Keywords for exit or door    */
   char            *description;    /* Description of exit          */
@@ -1102,8 +1102,8 @@ struct room_index_data
   EXTRA_DESCR_DATA *first_extradesc;
   EXTRA_DESCR_DATA *last_extradesc;
   Area        *area;
-  EXIT_DATA        *first_exit;
-  EXIT_DATA        *last_exit;
+  Exit        *first_exit;
+  Exit        *last_exit;
   SHIP_DATA        *first_ship;
   SHIP_DATA        *last_ship;
   char             *name;
@@ -1579,8 +1579,8 @@ extern Ban             *first_ban;
 extern Ban             *last_ban;
 extern Character            *first_char;
 extern Character            *last_char;
-extern DESCRIPTOR_DATA      *first_descriptor;
-extern DESCRIPTOR_DATA      *last_descriptor;
+extern Descriptor      *first_descriptor;
+extern Descriptor      *last_descriptor;
 extern BOARD_DATA           *first_board;
 extern BOARD_DATA           *last_board;
 extern OBJ_DATA             *first_object;
@@ -2289,15 +2289,15 @@ extern "C" {
 
   /* act_move.c */
   bool has_key( const Character *ch, int key );
-  void set_bexit_flag( EXIT_DATA *pexit, int flag );
-  void remove_bexit_flag( EXIT_DATA *pexit, int flag );
-  ROOM_INDEX_DATA *generate_exit( ROOM_INDEX_DATA *in_room, EXIT_DATA **pexit );
+  void set_bexit_flag( Exit *pexit, int flag );
+  void remove_bexit_flag( Exit *pexit, int flag );
+  ROOM_INDEX_DATA *generate_exit( ROOM_INDEX_DATA *in_room, Exit **pexit );
   void  clear_vrooms( void );
-  EXIT_DATA *find_door( Character *ch, const char *arg, bool quiet );
-  EXIT_DATA *get_exit( const ROOM_INDEX_DATA *room, short dir );
-  EXIT_DATA *get_exit_to( const ROOM_INDEX_DATA *room, short dir, vnum_t vnum );
-  EXIT_DATA *get_exit_num( const ROOM_INDEX_DATA *room, short count );
-  ch_ret move_char( Character *ch, EXIT_DATA *pexit, int fall );
+  Exit *find_door( Character *ch, const char *arg, bool quiet );
+  Exit *get_exit( const ROOM_INDEX_DATA *room, short dir );
+  Exit *get_exit_to( const ROOM_INDEX_DATA *room, short dir, vnum_t vnum );
+  Exit *get_exit_num( const ROOM_INDEX_DATA *room, short count );
+  ch_ret move_char( Character *ch, Exit *pexit, int fall );
   void teleport( Character *ch, short room, int flags );
   short encumbrance( const Character *ch, short move );
   bool will_fall( Character *ch, int fall );
@@ -2444,10 +2444,10 @@ extern "C" {
 
   /* comm.c */
   char *obj_short( const OBJ_DATA *obj );
-  void close_socket( DESCRIPTOR_DATA *dclose, bool force );
+  void close_socket( Descriptor *dclose, bool force );
   bool write_to_descriptor( socket_t desc, char *txt, int length );
-  void write_to_buffer( DESCRIPTOR_DATA *d, const char *txt, size_t length );
-  void write_to_pager( DESCRIPTOR_DATA *d, const char *txt, size_t length );
+  void write_to_buffer( Descriptor *d, const char *txt, size_t length );
+  void write_to_pager( Descriptor *d, const char *txt, size_t length );
   void send_to_char( const char *txt, const Character *ch );
   void send_to_pager( const char *txt, const Character *ch );
   void set_char_color( short AType, Character *ch );
@@ -2489,7 +2489,7 @@ extern "C" {
   ROOM_INDEX_DATA *make_room( vnum_t vnum );
   OBJ_INDEX_DATA *make_object( vnum_t vnum, vnum_t cvnum, char *name );
   MOB_INDEX_DATA *make_mobile( vnum_t vnum, vnum_t cvnum, char *name );
-  EXIT_DATA *make_exit( ROOM_INDEX_DATA *pRoomIndex, ROOM_INDEX_DATA *to_room, short door );
+  Exit *make_exit( ROOM_INDEX_DATA *pRoomIndex, ROOM_INDEX_DATA *to_room, short door );
   void  fix_area_exits( Area *tarea );
   void  load_area_file( Area *tarea, char *filename );
   void  randomize_exits( ROOM_INDEX_DATA *room, short maxdir );
@@ -2633,7 +2633,7 @@ extern "C" {
   OBJ_DATA *obj_to_obj( OBJ_DATA *obj, OBJ_DATA *obj_to );
   void obj_from_obj( OBJ_DATA *obj );
   void extract_obj( OBJ_DATA *obj );
-  void extract_exit( ROOM_INDEX_DATA *room, EXIT_DATA *pexit );
+  void extract_exit( ROOM_INDEX_DATA *room, Exit *pexit );
   void extract_room( ROOM_INDEX_DATA *room );
   void clean_room( ROOM_INDEX_DATA *room );
   void clean_obj( OBJ_INDEX_DATA *obj );
@@ -2735,7 +2735,7 @@ extern "C" {
 #define OS_CORPSE       1
   void  save_char_obj( Character *ch );
   void  save_clone( Character *ch );
-  bool  load_char_obj( DESCRIPTOR_DATA *d, char *name, bool preload );
+  bool  load_char_obj( Descriptor *d, char *name, bool preload );
   void  set_alarm ( long seconds );
   void  requip_char( Character *ch );
   void fwrite_obj( const Character *ch, const OBJ_DATA *obj, FILE *fp,

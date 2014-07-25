@@ -1000,7 +1000,7 @@ void instaroom( Area *pArea, ROOM_INDEX_DATA *pRoom, bool dodoors )
     }
   if ( dodoors )
     {
-      EXIT_DATA *pexit;
+      Exit *pexit;
 
       for ( pexit = pRoom->first_exit; pexit; pexit = pexit->next )
         {
@@ -1077,7 +1077,7 @@ void reset_area( Area *pArea )
   MOB_INDEX_DATA *pMobIndex;
   OBJ_INDEX_DATA *pObjIndex;
   OBJ_INDEX_DATA *pObjToIndex;
-  EXIT_DATA *pexit;
+  Exit *pexit;
   OBJ_DATA *to_obj;
   int level = 0;
   int *plc;

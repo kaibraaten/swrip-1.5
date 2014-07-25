@@ -8,7 +8,7 @@ void do_dig( Character *ch, char *argument )
   OBJ_DATA *obj;
   OBJ_DATA *startobj;
   bool found, shovel;
-  EXIT_DATA *pexit;
+  Exit *pexit;
 
   switch( ch->substate )
     {

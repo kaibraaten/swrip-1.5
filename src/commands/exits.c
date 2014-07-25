@@ -5,7 +5,7 @@
 void do_exits( Character *ch, char *argument )
 {
   char buf[MAX_STRING_LENGTH];
-  EXIT_DATA *pexit;
+  Exit *pexit;
   bool found;
   bool fAuto;
 

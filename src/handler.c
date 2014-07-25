@@ -135,7 +135,7 @@ void room_explode_1( OBJ_DATA *obj, Character *xch, ROOM_INDEX_DATA *room, int b
 
   /* other rooms */
   {
-    EXIT_DATA *pexit;
+    Exit *pexit;
 
     for ( pexit = room->first_exit; pexit; pexit = pexit->next )
       {
@@ -167,7 +167,7 @@ void room_explode_2( ROOM_INDEX_DATA *room , int blast )
   if ( blast > 0 )
     {
       int roomblast;
-      EXIT_DATA *pexit;
+      Exit *pexit;
 
       for ( pexit = room->first_exit; pexit; pexit = pexit->next )
         {
@@ -2031,7 +2031,7 @@ OBJ_DATA *get_trap( const OBJ_DATA *obj )
 /*
  * Remove an exit from a room                                   -Thoric
  */
-void extract_exit( ROOM_INDEX_DATA *room, EXIT_DATA *pexit )
+void extract_exit( ROOM_INDEX_DATA *room, Exit *pexit )
 {
   UNLINK( pexit, room->first_exit, room->last_exit, next, prev );
   if ( pexit->rexit )
@@ -2047,7 +2047,7 @@ void extract_exit( ROOM_INDEX_DATA *room, EXIT_DATA *pexit )
 void clean_room( ROOM_INDEX_DATA *room )
 {
   EXTRA_DESCR_DATA      *ed, *ed_next;
-  EXIT_DATA             *pexit, *pexit_next;
+  Exit             *pexit, *pexit_next;
 
   if ( !room )
     return;

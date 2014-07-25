@@ -22,7 +22,7 @@ void do_destroy( Character *ch, char *argument )
       break;
   if ( !victim )
     {
-      DESCRIPTOR_DATA *d;
+      Descriptor *d;
 
       /* Make sure they aren't halfway logged in. */
       for ( d = first_descriptor; d; d = d->next )

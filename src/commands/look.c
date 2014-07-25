@@ -13,7 +13,7 @@ static void show_char_to_char_0( Character *victim, Character *ch );
 static void show_char_to_char_1( Character *victim, Character *ch );
 static void show_ships_to_char( SHIP_DATA *ship, Character *ch );
 static void show_visible_affects_to_char( Character *victim, Character *ch );
-static void show_exit_to_char( Character *ch, EXIT_DATA *pexit, short door );
+static void show_exit_to_char( Character *ch, Exit *pexit, short door );
 static void show_no_arg( Character *ch, bool is_auto );
 
 static char *get_sex( Character *ch );
@@ -27,7 +27,7 @@ void do_look( Character *ch, char *argument )
   char arg1 [MAX_INPUT_LENGTH];
   char arg2 [MAX_INPUT_LENGTH];
   char arg3 [MAX_INPUT_LENGTH];
-  EXIT_DATA *pexit;
+  Exit *pexit;
   Character *victim;
   OBJ_DATA *obj;
   char *pdesc;
@@ -689,7 +689,7 @@ static void look_in( Character *ch, char *what, bool doexaprog )
 {
   int count = 0;
   OBJ_DATA *obj = NULL;
-  EXIT_DATA *pexit = NULL;
+  Exit *pexit = NULL;
 
   if ( what[0] == '\0' )
     {
@@ -792,7 +792,7 @@ static void look_in( Character *ch, char *what, bool doexaprog )
     }
 }
 
-static void show_exit_to_char( Character *ch, EXIT_DATA *pexit, short door )
+static void show_exit_to_char( Character *ch, Exit *pexit, short door )
 {
   if ( pexit->keyword )
     {

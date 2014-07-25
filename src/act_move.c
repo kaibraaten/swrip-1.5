@@ -141,9 +141,9 @@ void clear_vrooms( void )
  * Function to get the equivelant exit of DIR 0-MAXDIR out of linked list.
  * Made to allow old-style diku-merc exit functions to work.    -Thoric
  */
-EXIT_DATA *get_exit( const ROOM_INDEX_DATA *room, short dir )
+Exit *get_exit( const ROOM_INDEX_DATA *room, short dir )
 {
-  EXIT_DATA *xit;
+  Exit *xit;
 
   if ( !room )
     {
@@ -160,9 +160,9 @@ EXIT_DATA *get_exit( const ROOM_INDEX_DATA *room, short dir )
 /*
  * Function to get an exit, leading the the specified room
  */
-EXIT_DATA *get_exit_to( const ROOM_INDEX_DATA *room, short dir, vnum_t vnum )
+Exit *get_exit_to( const ROOM_INDEX_DATA *room, short dir, vnum_t vnum )
 {
-  EXIT_DATA *xit;
+  Exit *xit;
 
   if ( !room )
     {
@@ -179,9 +179,9 @@ EXIT_DATA *get_exit_to( const ROOM_INDEX_DATA *room, short dir, vnum_t vnum )
 /*
  * Function to get the nth exit of a room                       -Thoric
  */
-EXIT_DATA *get_exit_num( const ROOM_INDEX_DATA *room, short count )
+Exit *get_exit_num( const ROOM_INDEX_DATA *room, short count )
 {
-  EXIT_DATA *xit;
+  Exit *xit;
   int cnt;
 
   if ( !room )
@@ -259,10 +259,10 @@ bool will_fall( Character *ch, int fall )
 /*
  * create a 'virtual' room                                      -Thoric
  */
-ROOM_INDEX_DATA *generate_exit( ROOM_INDEX_DATA *in_room, EXIT_DATA **pexit )
+ROOM_INDEX_DATA *generate_exit( ROOM_INDEX_DATA *in_room, Exit **pexit )
 {
-  EXIT_DATA *xit, *bxit;
-  EXIT_DATA *orig_exit = (EXIT_DATA *) *pexit;
+  Exit *xit, *bxit;
+  Exit *orig_exit = (Exit *) *pexit;
   ROOM_INDEX_DATA *room, *backroom;
   int brvnum;
   int serial;
@@ -349,7 +349,7 @@ ROOM_INDEX_DATA *generate_exit( ROOM_INDEX_DATA *in_room, EXIT_DATA **pexit )
 	}
       else
         {
-          EXIT_DATA *tmp = get_exit( backroom, vdir );
+          Exit *tmp = get_exit( backroom, vdir );
           int fulldist = tmp->distance;
 
           bxit->distance = fulldist - distance;
@@ -360,7 +360,7 @@ ROOM_INDEX_DATA *generate_exit( ROOM_INDEX_DATA *in_room, EXIT_DATA **pexit )
   return room;
 }
 
-ch_ret move_char( Character *ch, EXIT_DATA *pexit, int fall )
+ch_ret move_char( Character *ch, Exit *pexit, int fall )
 {
   ROOM_INDEX_DATA *in_room;
   ROOM_INDEX_DATA *to_room;
@@ -985,9 +985,9 @@ ch_ret move_char( Character *ch, EXIT_DATA *pexit, int fall )
   return retcode;
 }
 
-EXIT_DATA *find_door( Character *ch, const char *arg, bool quiet )
+Exit *find_door( Character *ch, const char *arg, bool quiet )
 {
-  EXIT_DATA *pexit;
+  Exit *pexit;
   int door;
 
   if (arg == NULL || !str_cmp(arg,""))
@@ -1043,9 +1043,9 @@ EXIT_DATA *find_door( Character *ch, const char *arg, bool quiet )
   return pexit;
 }
 
-void toggle_bexit_flag( EXIT_DATA *pexit, int flag )
+void toggle_bexit_flag( Exit *pexit, int flag )
 {
-  EXIT_DATA *pexit_rev;
+  Exit *pexit_rev;
 
   TOGGLE_BIT(pexit->exit_info, flag);
   if ( (pexit_rev = pexit->rexit) != NULL
@@ -1053,9 +1053,9 @@ void toggle_bexit_flag( EXIT_DATA *pexit, int flag )
     TOGGLE_BIT( pexit_rev->exit_info, flag );
 }
 
-void set_bexit_flag( EXIT_DATA *pexit, int flag )
+void set_bexit_flag( Exit *pexit, int flag )
 {
-  EXIT_DATA *pexit_rev;
+  Exit *pexit_rev;
 
   SET_BIT(pexit->exit_info, flag);
   if ( (pexit_rev = pexit->rexit) != NULL
@@ -1063,9 +1063,9 @@ void set_bexit_flag( EXIT_DATA *pexit, int flag )
     SET_BIT( pexit_rev->exit_info, flag );
 }
 
-void remove_bexit_flag( EXIT_DATA *pexit, int flag )
+void remove_bexit_flag( Exit *pexit, int flag )
 {
-  EXIT_DATA *pexit_rev;
+  Exit *pexit_rev;
 
   REMOVE_BIT(pexit->exit_info, flag);
   if ( (pexit_rev = pexit->rexit) != NULL

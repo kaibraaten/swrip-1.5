@@ -4,7 +4,7 @@
 #include <utility/vector3.h>
 #include "types.h"
 
-ch_ret drive_ship( Character *ch, SHIP_DATA *ship, EXIT_DATA *exit, int fall );
+ch_ret drive_ship( Character *ch, SHIP_DATA *ship, Exit *exit, int fall );
 void resetship( SHIP_DATA *ship );
 void write_ship_list( void );
 void echo_to_docked( int color, SHIP_DATA *ship, const char *argument );

@@ -2221,7 +2221,7 @@ void raw_kill( Character *ch, Character *victim )
 
   if ( !victim )
     {
-      DESCRIPTOR_DATA *d;
+      Descriptor *d;
 
       /* Make sure they aren't halfway logged in. */
       for ( d = first_descriptor; d; d = d->next )
@@ -2654,7 +2654,7 @@ bool get_cover( Character *ch )
   ROOM_INDEX_DATA *now_in;
   int attempt;
   short door;
-  EXIT_DATA *pexit;
+  Exit *pexit;
 
   if ( !who_fighting( ch ) )
     return FALSE;

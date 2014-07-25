@@ -29,7 +29,7 @@ void do_who( Character *ch, char *argument )
   char char_name[MAX_INPUT_LENGTH];
   char extra_title[MAX_STRING_LENGTH];
   char race_text[MAX_INPUT_LENGTH];
-  DESCRIPTOR_DATA *d;
+  Descriptor *d;
   int iRace;
   int iLevelLower;
   int iLevelUpper;

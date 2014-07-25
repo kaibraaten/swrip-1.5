@@ -142,7 +142,7 @@ char  * parse_target( Character *ch, char *oldstring )
   return oldstring;
 }
 
-char *get_multi_command( DESCRIPTOR_DATA *d, char *argument )
+char *get_multi_command( Descriptor *d, char *argument )
 {
   int counter, counter2;
   char leftover[MAX_INPUT_LENGTH];
@@ -400,7 +400,7 @@ void interpret( Character *ch, char *argument )
 #endif
 	   )
         {
-          EXIT_DATA *pexit;
+          Exit *pexit;
 
           /* check for an auto-matic exit command */
           if ( (pexit = find_door( ch, command, TRUE )) != NULL

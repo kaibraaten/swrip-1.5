@@ -913,7 +913,7 @@ static char *escape_string( const char *src )
  */
 static Character *imc_find_user( const char *name )
 {
-   DESCRIPTOR_DATA *d;
+   Descriptor *d;
    Character *vch = NULL;
 
    for( d = first_descriptor; d; d = d->next )
@@ -1754,7 +1754,7 @@ PFUN( imc_recv_tell )
 
 PFUN( imc_recv_emote )
 {
-   DESCRIPTOR_DATA *d;
+   Descriptor *d;
    Character *ch;
    char txt[LGST], lvl[SMST];
    int level;
@@ -1862,7 +1862,7 @@ static void update_imchistory( IMC_CHANNEL * channel, const char *message )
 
 static void imc_display_channel( IMC_CHANNEL * c, const char *from, char *txt, int emote )
 {
-   DESCRIPTOR_DATA *d;
+   Descriptor *d;
    Character *ch;
    char buf[LGST], name[SMST];
 
@@ -1998,7 +1998,7 @@ PFUN( imc_recv_chanwhoreply )
 
 static const char *get_local_chanwho( IMC_CHANNEL * c )
 {
-   DESCRIPTOR_DATA *d;
+   Descriptor *d;
    Character *person;
    static char buf[IMC_BUFF_SIZE];
    int count = 0, col = 0;
@@ -2279,7 +2279,7 @@ static char *process_who_template( char *head, char *tail, char *plrlines, char 
 static char *imc_assemble_who( void )
 {
    Character *person;
-   DESCRIPTOR_DATA *d;
+   Descriptor *d;
    int pcount = 0;
    bool plr = FALSE, imm = FALSE;
    char plrheader[SMST], immheader[SMST], rank[SMST], flags[SMST], name[SMST], title[SMST], plrline[SMST], immline[SMST];

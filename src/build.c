@@ -360,7 +360,7 @@ void fold_area( Area *tarea, char *filename, bool install )
   MOB_INDEX_DATA        *pMobIndex;
   OBJ_INDEX_DATA        *pObjIndex;
   MPROG_DATA            *mprog;
-  EXIT_DATA             *xit;
+  Exit             *xit;
   EXTRA_DESCR_DATA      *ed;
   Affect           *paf;
   SHOP_DATA             *pShop;
@@ -804,7 +804,7 @@ RESET_DATA *parse_reset( Area *tarea, char *argument, Character *ch )
   int extra, val1, val2, val3;
   int value;
   ROOM_INDEX_DATA *room;
-  EXIT_DATA     *pexit;
+  Exit     *pexit;
 
   argument = one_argument( argument, arg1 );
   argument = one_argument( argument, arg2 );

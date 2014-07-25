@@ -9,7 +9,7 @@ void do_authorize( Character *ch, char *argument )
   char arg2[MAX_INPUT_LENGTH];
   char buf[MAX_STRING_LENGTH];
   Character *victim;
-  DESCRIPTOR_DATA *d;
+  Descriptor *d;
 
   argument = one_argument( argument, arg1 );
   argument = one_argument( argument, arg2 );
@@ -88,7 +88,7 @@ void do_authorize( Character *ch, char *argument )
  */
 static Character *get_waiting_desc( const Character *ch, const char *name )
 {
-  DESCRIPTOR_DATA *d;
+  Descriptor *d;
   Character       *ret_char;
   static unsigned int number_of_hits;
 

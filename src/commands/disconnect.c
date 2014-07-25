@@ -4,7 +4,7 @@
 void do_disconnect( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  DESCRIPTOR_DATA *d;
+  Descriptor *d;
   Character *victim;
 
   one_argument( argument, arg );

@@ -112,7 +112,7 @@ static void map_exits( Character *ch, ROOM_INDEX_DATA *pRoom,
   int door;
   int exitx = 0, exity = 0;
   int roomx = 0, roomy = 0;
-  EXIT_DATA *pExit;
+  Exit *pExit;
   /*
     char *buf;
 

@@ -116,7 +116,7 @@ void do_diagnose( Character *ch, char *argument )
   }
 
   if (!str_cmp(arg1, "mm")) {
-    DESCRIPTOR_DATA *d;
+    Descriptor *d;
     Character *victim;
 
     if ( !*arg2 )

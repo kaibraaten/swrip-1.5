@@ -59,7 +59,7 @@ void pullorpush( Character *ch, OBJ_DATA *obj, bool pull )
   Character             *rch;
   bool           isup;
   ROOM_INDEX_DATA       *room,  *to_room = NULL;
-  EXIT_DATA             *pexit, *pexit_rev;
+  Exit             *pexit, *pexit_rev;
   int                    edir;
   char          *txt;
 

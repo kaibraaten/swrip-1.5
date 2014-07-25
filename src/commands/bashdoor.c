@@ -4,7 +4,7 @@
 void do_bashdoor( Character *ch, char *argument )
 {
   Character *gch = NULL;
-  EXIT_DATA *pexit = NULL;
+  Exit *pexit = NULL;
   char arg[MAX_INPUT_LENGTH];
 
   if ( !is_npc( ch )
@@ -31,7 +31,7 @@ void do_bashdoor( Character *ch, char *argument )
   if ( ( pexit = find_door( ch, arg, FALSE ) ) != NULL )
     {
       ROOM_INDEX_DATA *to_room = NULL;
-      EXIT_DATA *pexit_rev = NULL;
+      Exit *pexit_rev = NULL;
       int bash_chance = 0;
       char *keyword = NULL;
 

@@ -8,7 +8,7 @@ void do_flee( Character *ch, char *argument )
   char buf[MAX_STRING_LENGTH];
   int attempt;
   short door;
-  EXIT_DATA *pexit;
+  Exit *pexit;
 
   if ( !who_fighting( ch ) )
     {

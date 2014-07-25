@@ -5,7 +5,7 @@ void do_buzz (Character *ch, char *arg)
 {
   short exit_dir;
   ROOM_INDEX_DATA *home;
-  EXIT_DATA *exitdat;
+  Exit *exitdat;
 
   if ( !str_cmp( arg, "n"  ) || !str_cmp( arg, "north"     ) )
     exit_dir = DIR_NORTH;

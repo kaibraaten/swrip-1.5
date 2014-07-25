@@ -21,7 +21,7 @@ struct Character
   SPEC_FUN *            spec_2;
 
   MOB_INDEX_DATA *      pIndexData;
-  DESCRIPTOR_DATA *     desc;
+  Descriptor *     desc;
   Affect * first_affect;
   Affect * last_affect;
   OBJ_DATA *            first_carrying;

@@ -8,7 +8,7 @@ void do_rstat( Character *ch, char *argument )
   ROOM_INDEX_DATA *location = NULL;
   OBJ_DATA *obj = NULL;
   Character *rch = NULL;
-  EXIT_DATA *pexit = NULL;
+  Exit *pexit = NULL;
   int cnt = 0;
   static const char * const dir_text[] = { "n", "e", "s", "w", "u", "d", "ne", "nw", "se", "sw", "?" };
 

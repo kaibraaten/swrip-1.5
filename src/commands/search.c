@@ -103,7 +103,7 @@ void do_search( Character *ch, char *argument )
 
   if ( door != -1 )
     {
-      EXIT_DATA *pexit;
+      Exit *pexit;
 
       if ( (pexit = get_exit( ch->in_room, door )) != NULL
            &&   IS_SET( pexit->exit_info, EX_SECRET )

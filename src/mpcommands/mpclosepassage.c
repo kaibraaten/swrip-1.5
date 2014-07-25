@@ -15,7 +15,7 @@ void do_mp_close_passage( Character *ch, char *argument )
   char arg3[ MAX_INPUT_LENGTH ];
   ROOM_INDEX_DATA *fromRoom;
   int fromRoomVnum, exit_num;
-  EXIT_DATA *pexit;
+  Exit *pexit;
 
   if ( is_affected_by( ch, AFF_CHARM ) )
     return;

@@ -5,7 +5,7 @@ void do_open( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   OBJ_DATA *obj = NULL;
-  EXIT_DATA *pexit = NULL;
+  Exit *pexit = NULL;
   int door = 0;
 
   one_argument( argument, arg );
@@ -18,7 +18,7 @@ void do_open( Character *ch, char *argument )
 
   if ( ( pexit = find_door( ch, arg, TRUE ) ) != NULL )
     {
-      EXIT_DATA *pexit_rev = NULL;
+      Exit *pexit_rev = NULL;
 
       if ( !IS_SET(pexit->exit_info, EX_ISDOOR) )
         {

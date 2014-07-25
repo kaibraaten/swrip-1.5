@@ -4,7 +4,7 @@ void do_lock( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   OBJ_DATA *obj;
-  EXIT_DATA *pexit;
+  Exit *pexit;
 
   one_argument( argument, arg );
 

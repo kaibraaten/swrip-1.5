@@ -5,7 +5,7 @@
 void do_users( Character *ch, char *argument )
 {
   char buf[MAX_STRING_LENGTH];
-  DESCRIPTOR_DATA *d;
+  Descriptor *d;
   int count = 0;
   char arg[MAX_INPUT_LENGTH];
 

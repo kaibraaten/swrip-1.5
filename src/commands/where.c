@@ -5,7 +5,7 @@ void do_where( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   Character *victim;
-  DESCRIPTOR_DATA *d;
+  Descriptor *d;
   bool found;
 
   if (get_trust(ch) < LEVEL_IMMORTAL)

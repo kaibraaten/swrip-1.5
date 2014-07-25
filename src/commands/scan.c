@@ -7,7 +7,7 @@ void do_scan( Character *ch, char *argument )
 {
   ROOM_INDEX_DATA *was_in_room;
   ROOM_INDEX_DATA *to_room;
-  EXIT_DATA *pexit;
+  Exit *pexit;
   short dir = -1;
   short dist;
   short max_dist = 5;

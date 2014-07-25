@@ -6,7 +6,7 @@ void do_transfer( Character *ch, char *argument )
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
   ROOM_INDEX_DATA *location;
-  DESCRIPTOR_DATA *d;
+  Descriptor *d;
   Character *victim;
 
   argument = one_argument( argument, arg1 );

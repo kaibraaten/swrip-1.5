@@ -7,7 +7,7 @@ void do_pick( Character *ch, char *argument )
   char arg[MAX_INPUT_LENGTH];
   Character *gch;
   OBJ_DATA *obj;
-  EXIT_DATA *pexit;
+  Exit *pexit;
   SHIP_DATA *ship;
 
   if ( is_npc(ch) && is_affected_by( ch, AFF_CHARM ) )
@@ -51,7 +51,7 @@ void do_pick( Character *ch, char *argument )
     {
       /* 'pick door' */
       /*        ROOM_INDEX_DATA *to_room; */ /* Unused */
-      EXIT_DATA *pexit_rev;
+      Exit *pexit_rev;
 
       if ( !IS_SET(pexit->exit_info, EX_CLOSED) )
         { send_to_char( "It's not closed.\r\n",        ch ); return; }
@@ -124,7 +124,7 @@ void do_pick( Character *ch, char *argument )
 
   if ( ( ship = ship_in_room(ch->in_room, arg ) ) != NULL )
     {
-      DESCRIPTOR_DATA *d;
+      Descriptor *d;
 
       if ( check_pilot( ch , ship ) )
         {

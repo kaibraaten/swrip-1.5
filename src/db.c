@@ -1332,7 +1332,7 @@ void load_resets( Area *tarea, FILE *fp )
   for ( ; ; )
     {
       ROOM_INDEX_DATA *pRoomIndex;
-      EXIT_DATA *pexit;
+      Exit *pexit;
       char letter;
       int extra, arg1, arg2, arg3;
 
@@ -1600,7 +1600,7 @@ void load_rooms( Area *tarea, FILE *fp )
 
           if ( letter == 'D' )
             {
-              EXIT_DATA *pexit;
+              Exit *pexit;
               int locks;
 
               door = fread_number( fp );
@@ -1878,7 +1878,7 @@ void initialize_economy( void )
 void fix_exits( void )
 {
   ROOM_INDEX_DATA *pRoomIndex;
-  EXIT_DATA *pexit, *pexit_next, *rev_exit;
+  Exit *pexit, *pexit_next, *rev_exit;
   int iHash;
 
   for ( iHash = 0; iHash < MAX_KEY_HASH; iHash++ )
@@ -1943,9 +1943,9 @@ void fix_exits( void )
 /*
  * Get diku-compatable exit by number                           -Thoric
  */
-EXIT_DATA *get_exit_number( ROOM_INDEX_DATA *room, int xit )
+Exit *get_exit_number( ROOM_INDEX_DATA *room, int xit )
 {
-  EXIT_DATA *pexit;
+  Exit *pexit;
   int count;
 
   count = 0;
@@ -1959,7 +1959,7 @@ EXIT_DATA *get_exit_number( ROOM_INDEX_DATA *room, int xit )
  * (prelude...) This is going to be fun... NOT!
  * (conclusion) QSort is f*cked!
  */
-int exit_comp( EXIT_DATA **xit1, EXIT_DATA **xit2 )
+int exit_comp( Exit **xit1, Exit **xit2 )
 {
   int d1, d2;
 
@@ -1975,8 +1975,8 @@ int exit_comp( EXIT_DATA **xit1, EXIT_DATA **xit2 )
 
 void sort_exits( ROOM_INDEX_DATA *room )
 {
-  EXIT_DATA *pexit; /* *texit */ /* Unused */
-  EXIT_DATA *exits[MAX_REXITS];
+  Exit *pexit; /* *texit */ /* Unused */
+  Exit *exits[MAX_REXITS];
   int x, nexits;
 
   nexits = 0;
@@ -1989,7 +1989,7 @@ void sort_exits( ROOM_INDEX_DATA *room )
           return;
         }
     }
-  qsort( &exits[0], nexits, sizeof( EXIT_DATA * ),
+  qsort( &exits[0], nexits, sizeof( Exit * ),
          (int(*)(const void *, const void *)) exit_comp );
   for ( x = 0; x < nexits; x++ )
     {
@@ -2012,7 +2012,7 @@ void sort_exits( ROOM_INDEX_DATA *room )
 
 void randomize_exits( ROOM_INDEX_DATA *room, short maxdir )
 {
-  EXIT_DATA *pexit;
+  Exit *pexit;
   int nexits, /* maxd, */ d0, d1, count, door; /* Maxd unused */
   int vdirs[MAX_REXITS];
 
@@ -2817,7 +2817,7 @@ void log_string_plus( const char *str, short log_type, short level )
 
   if (lognone)
     {
-      DESCRIPTOR_DATA *d = NULL;
+      Descriptor *d = NULL;
 
       for ( d = first_descriptor; d; d = d->next )
 	{
@@ -4005,12 +4005,12 @@ MOB_INDEX_DATA *make_mobile( vnum_t vnum, vnum_t cvnum, char *name )
  * to_room and vnum.                                            -Thoric
  * Exits are inserted into the linked list based on vdir.
  */
-EXIT_DATA *make_exit( ROOM_INDEX_DATA *pRoomIndex, ROOM_INDEX_DATA *to_room, short door )
+Exit *make_exit( ROOM_INDEX_DATA *pRoomIndex, ROOM_INDEX_DATA *to_room, short door )
 {
-  EXIT_DATA *pexit, *texit;
+  Exit *pexit, *texit;
   bool broke;
 
-  CREATE( pexit, EXIT_DATA, 1 );
+  CREATE( pexit, Exit, 1 );
   pexit->vdir           = door;
   pexit->rvnum          = pRoomIndex->vnum;
   pexit->to_room                = to_room;
@@ -4061,7 +4061,7 @@ EXIT_DATA *make_exit( ROOM_INDEX_DATA *pRoomIndex, ROOM_INDEX_DATA *to_room, sho
 void fix_area_exits( Area *tarea )
 {
   ROOM_INDEX_DATA *pRoomIndex;
-  EXIT_DATA *pexit, *rev_exit;
+  Exit *pexit, *rev_exit;
   int rnum;
   bool fexit;
 

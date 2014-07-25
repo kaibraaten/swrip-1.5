@@ -776,7 +776,7 @@ void mobile_update( void )
 {
   char buf[MAX_STRING_LENGTH];
   Character *ch;
-  EXIT_DATA *pexit;
+  Exit *pexit;
   int door;
   ch_ret     retcode;
 
@@ -1035,7 +1035,7 @@ void update_taxes( void )
 {
   PLANET_DATA *planet;
   CLAN_DATA *clan;
-  DESCRIPTOR_DATA *d;
+  Descriptor *d;
 
   for ( planet = first_planet; planet; planet = planet->next )
     {
@@ -1091,7 +1091,7 @@ void update_taxes( void )
 void weather_update( void )
 {
   char buf[MAX_STRING_LENGTH];
-  DESCRIPTOR_DATA *d;
+  Descriptor *d;
   int diff;
   short AT_TEMP = AT_PLAIN;
 
@@ -1716,7 +1716,7 @@ void obj_update( void )
               (obj->wear_flags & ITEM_TAKE) )
             {
               ROOM_INDEX_DATA *new_room;
-              EXIT_DATA *xit;
+              Exit *xit;
 
               for (xit = obj->in_room->first_exit; xit; xit = xit->next )
                 if ( xit->vdir == DIR_DOWN )
@@ -1831,7 +1831,7 @@ void obj_update( void )
 void char_check( void )
 {
   Character *ch, *ch_next;
-  EXIT_DATA *pexit;
+  Exit *pexit;
   static int cnt = 0;
   int door, retcode;
 
@@ -1981,7 +1981,7 @@ void char_check( void )
  */
 void aggr_update( void )
 {
-  /*    DESCRIPTOR_DATA *d, *dnext; */
+  /*    Descriptor *d, *dnext; */
   Character *wch;
 
   Character *ch;
@@ -2386,7 +2386,7 @@ void remove_portal( OBJ_DATA *portal )
 {
   ROOM_INDEX_DATA *fromRoom, *toRoom;
   Character *ch;
-  EXIT_DATA *pexit;
+  Exit *pexit;
   bool found;
 
   if ( !portal )

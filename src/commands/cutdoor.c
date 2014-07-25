@@ -4,7 +4,7 @@
 void do_cutdoor( Character *ch, char *argument )
 {
   Character *gch;
-  EXIT_DATA *pexit;
+  Exit *pexit;
   char       arg [ MAX_INPUT_LENGTH ];
   OBJ_DATA *wield;
   int whichweap;
@@ -46,7 +46,7 @@ void do_cutdoor( Character *ch, char *argument )
   if ( ( pexit = find_door( ch, arg, FALSE ) ) != NULL )
     {
       ROOM_INDEX_DATA *to_room;
-      EXIT_DATA       *pexit_rev;
+      Exit       *pexit_rev;
       int              the_chance;
       char          *keyword;
 

@@ -11,7 +11,7 @@ void do_installarea( Character *ch, char *argument )
   char  arg[MAX_INPUT_LENGTH];
   char  buf[MAX_STRING_LENGTH];
   int           num;
-  DESCRIPTOR_DATA *d;
+  Descriptor *d;
 
   argument = one_argument( argument, arg );
   if ( arg[0] == '\0' )
