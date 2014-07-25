@@ -5,7 +5,7 @@ void do_mcreate( Character *ch, char *argument )
 {
   char arg [MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
-  MOB_INDEX_DATA *pMobIndex = NULL;
+  ProtoMobile *pMobIndex = NULL;
   Character *mob = NULL;
   int vnum = 0, cvnum = 0;
 

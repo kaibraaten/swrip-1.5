@@ -7,7 +7,7 @@ static bool qchance( int num );
 void generate_quest(Character *ch, Character *questman)
 {
   Character *victim;
-  MOB_INDEX_DATA *vsearch;
+  ProtoMobile *vsearch;
   ROOM_INDEX_DATA *room;
   OBJ_DATA *questitem;
   char buf[MAX_STRING_LENGTH];

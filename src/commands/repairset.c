@@ -3,7 +3,7 @@
 void do_repairset( Character *ch, char *argument )
 {
   REPAIR_DATA *repair;
-  MOB_INDEX_DATA *mob, *mob2;
+  ProtoMobile *mob, *mob2;
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
   short vnum;

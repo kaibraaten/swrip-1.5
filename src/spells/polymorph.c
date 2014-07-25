@@ -54,7 +54,7 @@ ch_ret spell_polymorph( int sn, int level, Character *ch, void *vo )
 static Character *make_poly_mob(const Character *ch, int vnum)
 {
   Character *mob;
-  MOB_INDEX_DATA *pMobIndex;
+  ProtoMobile *pMobIndex;
 
   if(!ch)
     {

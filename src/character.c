@@ -949,7 +949,7 @@ bool is_neutral( const Character *ch )
   return !is_good( ch ) && !is_evil( ch );
 }
 
-bool is_evil_mob_index_data( const MOB_INDEX_DATA *mob )
+bool is_evil_mob_index_data( const ProtoMobile *mob )
 {
   return mob->alignment <= -350;
 }

@@ -3,7 +3,7 @@
 
 void do_mlist( Character *ch, char *argument )
 {
-  MOB_INDEX_DATA        *mob;
+  ProtoMobile        *mob;
   int                    vnum;
   Area             *tarea;
   char arg1[MAX_INPUT_LENGTH];

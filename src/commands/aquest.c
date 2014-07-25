@@ -8,7 +8,7 @@ void do_aquest(Character *ch, char *argument)
   OBJ_DATA *obj=NULL, *obj_next;
   OBJ_INDEX_DATA *obj1, *obj2, *obj3, *obj4, *obj5;
   OBJ_INDEX_DATA *questinfoobj;
-  MOB_INDEX_DATA *questinfo;
+  ProtoMobile *questinfo;
   char buf [MAX_STRING_LENGTH];
   char arg1 [MAX_INPUT_LENGTH];
   char arg2 [MAX_INPUT_LENGTH];

@@ -7,7 +7,7 @@ void do_placevendor (Character *ch, char *argument)
   char strsave[MAX_INPUT_LENGTH];
   struct stat fst;
   Character *vendor;
-  MOB_INDEX_DATA *temp;
+  ProtoMobile *temp;
   OBJ_DATA *obj;
   char vnum1[MAX_INPUT_LENGTH];
   char buf [MAX_INPUT_LENGTH];

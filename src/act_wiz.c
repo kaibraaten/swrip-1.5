@@ -37,7 +37,7 @@ Ban *last_ban = NULL;
 char reboot_time[50];
 time_t new_boot_time_t;
 extern OBJ_INDEX_DATA *obj_index_hash[MAX_KEY_HASH];
-extern MOB_INDEX_DATA *mob_index_hash[MAX_KEY_HASH];
+extern ProtoMobile *mob_index_hash[MAX_KEY_HASH];
 extern ROOM_INDEX_DATA *room_index_hash[MAX_KEY_HASH];
 
 void echo_to_all( short AT_COLOR, const char *argument, short tar )
@@ -177,8 +177,8 @@ void close_area( Area *pArea )
   ROOM_INDEX_DATA *rid_next;
   OBJ_INDEX_DATA *oid;
   OBJ_INDEX_DATA *oid_next;
-  MOB_INDEX_DATA *mid;
-  MOB_INDEX_DATA *mid_next;
+  ProtoMobile *mid;
+  ProtoMobile *mid_next;
   RESET_DATA *ereset;
   RESET_DATA *ereset_next;
   ExtraDescription *eed;
@@ -332,7 +332,7 @@ void close_area( Area *pArea )
             mob_index_hash[icnt] = mid->next;
           else
             {
-              MOB_INDEX_DATA *tmid;
+              ProtoMobile *tmid;
 
               for ( tmid = mob_index_hash[icnt]; tmid; tmid = tmid->next )
                 if ( tmid->next == mid )

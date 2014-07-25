@@ -3,7 +3,7 @@
 void do_shopstat( Character *ch, char *argument )
 {
   SHOP_DATA *shop;
-  MOB_INDEX_DATA *mob;
+  ProtoMobile *mob;
   short vnum;
 
   if ( argument[0] == '\0' )

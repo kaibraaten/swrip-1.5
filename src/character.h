@@ -20,7 +20,7 @@ struct Character
   SPEC_FUN *            spec_fun;
   SPEC_FUN *            spec_2;
 
-  MOB_INDEX_DATA *      pIndexData;
+  ProtoMobile *      pIndexData;
   Descriptor *     desc;
   Affect * first_affect;
   Affect * last_affect;
@@ -353,7 +353,7 @@ bool is_evil( const Character *ch );
 
 bool is_neutral( const Character *ch );
 
-bool is_evil_mob_index_data( const MOB_INDEX_DATA *mob );
+bool is_evil_mob_index_data( const ProtoMobile *mob );
 
 bool is_awake( const Character *ch );
 

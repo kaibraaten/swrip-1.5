@@ -641,10 +641,10 @@ struct timer_data
  * Prototype for a mob.
  * This is the in-memory version of #MOBILES.
  */
-struct mob_index_data
+struct ProtoMobile
 {
-  MOB_INDEX_DATA *next;
-  MOB_INDEX_DATA *next_sort;
+  ProtoMobile *next;
+  ProtoMobile *next_sort;
   SPEC_FUN       *spec_fun;
   SPEC_FUN       *spec_2;
   SHOP_DATA      *pShop;
@@ -2475,12 +2475,12 @@ extern "C" {
   void  boot_db( bool fCopyover );
   void  area_update( void );
   void  add_char( Character *ch );
-  Character *create_mobile( MOB_INDEX_DATA *pMobIndex );
+  Character *create_mobile( ProtoMobile *pMobIndex );
   OBJ_DATA *create_object( OBJ_INDEX_DATA *pObjIndex, int level );
   void  clear_char( Character *ch );
   void  free_char( Character *ch );
   char *        get_extra_descr( const char *name, ExtraDescription *ed );
-  MOB_INDEX_DATA *get_mob_index( vnum_t vnum );
+  ProtoMobile *get_mob_index( vnum_t vnum );
   OBJ_INDEX_DATA *get_obj_index( vnum_t vnum );
   ROOM_INDEX_DATA *get_room_index( vnum_t vnum );
   void  bug( const char *str, ... );
@@ -2488,7 +2488,7 @@ extern "C" {
   void log_string_plus( const char *str, short log_type, short level );
   ROOM_INDEX_DATA *make_room( vnum_t vnum );
   OBJ_INDEX_DATA *make_object( vnum_t vnum, vnum_t cvnum, char *name );
-  MOB_INDEX_DATA *make_mobile( vnum_t vnum, vnum_t cvnum, char *name );
+  ProtoMobile *make_mobile( vnum_t vnum, vnum_t cvnum, char *name );
   Exit *make_exit( ROOM_INDEX_DATA *pRoomIndex, ROOM_INDEX_DATA *to_room, short door );
   void  fix_area_exits( Area *tarea );
   void  load_area_file( Area *tarea, char *filename );
@@ -2496,7 +2496,7 @@ extern "C" {
   void  make_wizlist( void );
   bool    delete_room( ROOM_INDEX_DATA *room );
   bool    delete_obj( OBJ_INDEX_DATA *obj );
-  bool    delete_mob( MOB_INDEX_DATA *mob );
+  bool    delete_mob( ProtoMobile *mob );
 
   void  sort_area( Area *pArea, bool proto );
 
@@ -2508,7 +2508,7 @@ extern "C" {
   bool can_rmodify( const Character *ch, const ROOM_INDEX_DATA *room );
   bool can_omodify( const Character *ch, const OBJ_DATA *obj  );
   bool can_mmodify( const Character *ch, const Character *mob );
-  bool can_medit( const Character *ch, const MOB_INDEX_DATA *mob );
+  bool can_medit( const Character *ch, const ProtoMobile *mob );
   void free_reset( Area *are, RESET_DATA *res );
   void free_area( Area *are );
   void assign_area( Character *ch );
@@ -2637,7 +2637,7 @@ extern "C" {
   void extract_room( ROOM_INDEX_DATA *room );
   void clean_room( ROOM_INDEX_DATA *room );
   void clean_obj( OBJ_INDEX_DATA *obj );
-  void clean_mob( MOB_INDEX_DATA *mob );
+  void clean_mob( ProtoMobile *mob );
   void clean_resets( Area *tarea );
   void extract_char( Character *ch, bool fPull );
   Character *get_char_room( const Character *ch, const char *argument );

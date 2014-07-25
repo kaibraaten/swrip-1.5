@@ -8,7 +8,7 @@
 void do_mpmload( Character *ch, char *argument )
 {
   char            arg[ MAX_INPUT_LENGTH ];
-  MOB_INDEX_DATA *pMobIndex;
+  ProtoMobile *pMobIndex;
   Character      *victim;
 
   if ( is_affected_by( ch, AFF_CHARM ) )

@@ -10,7 +10,7 @@ ch_ret spell_create_mob( int sn, int level, Character *ch, void *vo )
   int lvl;
   int vnum = skill->value;
   Character *mob;
-  MOB_INDEX_DATA *mi;
+  ProtoMobile *mi;
   Affect af;
 
   /* set maximum mob level */

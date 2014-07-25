@@ -7,7 +7,7 @@
 
 extern OBJ_INDEX_DATA *obj_index_hash[MAX_KEY_HASH];
 extern ROOM_INDEX_DATA *room_index_hash[MAX_KEY_HASH];
-extern MOB_INDEX_DATA *mob_index_hash[MAX_KEY_HASH];
+extern ProtoMobile *mob_index_hash[MAX_KEY_HASH];
 
 static int diag_int_comp(const void *i, const void *j);
 static void diagnose_help (Character *ch);
@@ -252,7 +252,7 @@ void do_diagnose( Character *ch, char *argument )
 
   if (!str_cmp(arg1, "mrc"))
     {
-      MOB_INDEX_DATA *pm;
+      ProtoMobile *pm;
       short race_num, dis_num, vnum1, vnum2, dis_cou = 0;
 
       if ( !*arg2 || !*arg3 || !*arg4 || !*arg5

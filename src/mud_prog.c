@@ -122,7 +122,7 @@ void init_supermob()
   supermob->short_descr         = STRALLOC(".");
   supermob->long_descr  = STRALLOC(".");
 
-  CREATE( supermob_index, MOB_INDEX_DATA, 1 )
+  CREATE( supermob_index, ProtoMobile, 1 )
 #endif
     }
 
@@ -365,7 +365,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
     }
   if ( !str_cmp(chck, "timeskilled") )
     {
-      MOB_INDEX_DATA *pMob;
+      ProtoMobile *pMob;
 
       if ( chkchar )
         pMob = chkchar->pIndexData;

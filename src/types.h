@@ -42,8 +42,8 @@ typedef struct ExtraDescription        ExtraDescription;
 struct HelpFile;
 typedef struct HelpFile               HelpFile;
 
-struct mob_index_data;
-typedef struct mob_index_data          MOB_INDEX_DATA;
+struct ProtoMobile;
+typedef struct ProtoMobile          ProtoMobile;
 
 struct note_data;
 typedef struct note_data               NOTE_DATA;

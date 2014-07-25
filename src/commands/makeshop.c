@@ -4,7 +4,7 @@ void do_makeshop( Character *ch, char *argument )
 {
   SHOP_DATA *shop;
   short vnum;
-  MOB_INDEX_DATA *mob;
+  ProtoMobile *mob;
 
   if ( !argument || argument[0] == '\0' )
     {

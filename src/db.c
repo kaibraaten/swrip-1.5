@@ -242,7 +242,7 @@ short gsn_top_sn = 0;
 /*
  * Locals.
  */
-MOB_INDEX_DATA *mob_index_hash[MAX_KEY_HASH];
+ProtoMobile *mob_index_hash[MAX_KEY_HASH];
 OBJ_INDEX_DATA *obj_index_hash[MAX_KEY_HASH];
 ROOM_INDEX_DATA *room_index_hash[MAX_KEY_HASH];
 
@@ -311,7 +311,7 @@ void renumber_put_resets( Area *pArea );
 
 int             mprog_name_to_type( char* name );
 MPROG_DATA *    mprog_file_read( char* f, MPROG_DATA* mprg,
-				 MOB_INDEX_DATA *pMobIndex );
+				 ProtoMobile *pMobIndex );
 MPROG_DATA *    oprog_file_read( char* f, MPROG_DATA* mprg,
 				 OBJ_INDEX_DATA *pObjIndex );
 MPROG_DATA *    rprog_file_read( char* f, MPROG_DATA* mprg,
@@ -319,7 +319,7 @@ MPROG_DATA *    rprog_file_read( char* f, MPROG_DATA* mprg,
 void            load_mudprogs( Area *tarea, FILE* fp );
 void            load_objprogs( Area *tarea, FILE* fp );
 void            load_roomprogs( Area *tarea, FILE* fp );
-void            mprog_read_programs( FILE* fp, MOB_INDEX_DATA *pMobIndex );
+void            mprog_read_programs( FILE* fp, ProtoMobile *pMobIndex );
 void            oprog_read_programs( FILE* fp, OBJ_INDEX_DATA *pObjIndex );
 void            rprog_read_programs( FILE* fp, ROOM_INDEX_DATA *pRoomIndex );
 
@@ -875,7 +875,7 @@ void add_char( Character *ch )
  */
 void load_mobiles( Area *tarea, FILE *fp )
 {
-  MOB_INDEX_DATA *pMobIndex;
+  ProtoMobile *pMobIndex;
   char *ln;
   int x1, x2, x3, x4, x5, x6, x7, x8;
 
@@ -939,7 +939,7 @@ void load_mobiles( Area *tarea, FILE *fp )
       else
         {
           oldmob = FALSE;
-          CREATE( pMobIndex, MOB_INDEX_DATA, 1 );
+          CREATE( pMobIndex, ProtoMobile, 1 );
         }
       fBootDb = tmpBootDb;
 
@@ -1685,7 +1685,7 @@ void load_shops( Area *tarea, FILE *fp )
 
   for ( ; ; )
     {
-      MOB_INDEX_DATA *pMobIndex;
+      ProtoMobile *pMobIndex;
       int iTrade;
 
       CREATE( pShop, SHOP_DATA, 1 );
@@ -1725,7 +1725,7 @@ void load_repairs( Area *tarea, FILE *fp )
 
   for ( ; ; )
     {
-      MOB_INDEX_DATA *pMobIndex;
+      ProtoMobile *pMobIndex;
       int iFix;
 
       CREATE( rShop, REPAIR_DATA, 1 );
@@ -1761,7 +1761,7 @@ void load_specials( Area *tarea, FILE *fp )
 {
   for ( ; ; )
     {
-      MOB_INDEX_DATA *pMobIndex;
+      ProtoMobile *pMobIndex;
       char letter;
 
       switch ( letter = fread_letter( fp ) )
@@ -1849,7 +1849,7 @@ void load_ranges( Area *tarea, FILE *fp )
 void initialize_economy( void )
 {
   Area *tarea;
-  MOB_INDEX_DATA *mob;
+  ProtoMobile *mob;
   int idx, gold, rng;
 
   for ( tarea = first_area; tarea; tarea = tarea->next )
@@ -2109,7 +2109,7 @@ void area_update( void )
 /*
  * Create an instance of a mobile.
  */
-Character *create_mobile( MOB_INDEX_DATA *pMobIndex )
+Character *create_mobile( ProtoMobile *pMobIndex )
 {
   Character *mob;
 
@@ -2585,9 +2585,9 @@ char *get_extra_descr( const char *name, ExtraDescription *ed )
  * Translates mob virtual number to its mob index struct.
  * Hash table lookup.
  */
-MOB_INDEX_DATA *get_mob_index( vnum_t vnum )
+ProtoMobile *get_mob_index( vnum_t vnum )
 {
-  MOB_INDEX_DATA *pMobIndex;
+  ProtoMobile *pMobIndex;
 
   if ( vnum < 0 )
     vnum = 0;
@@ -3071,7 +3071,7 @@ int mprog_name_to_type ( char *name )
 }
 
 MPROG_DATA *mprog_file_read( char *f, MPROG_DATA *mprg,
-                             MOB_INDEX_DATA *pMobIndex )
+                             ProtoMobile *pMobIndex )
 {
 
   char        MUDProgfile[ MAX_INPUT_LENGTH ];
@@ -3147,7 +3147,7 @@ MPROG_DATA *mprog_file_read( char *f, MPROG_DATA *mprg,
  */
 void load_mudprogs( Area *tarea, FILE *fp )
 {
-  MOB_INDEX_DATA *iMob;
+  ProtoMobile *iMob;
   MPROG_DATA     *original;
   MPROG_DATA     *working;
   char            letter;
@@ -3200,7 +3200,7 @@ void load_mudprogs( Area *tarea, FILE *fp )
 /* This procedure is responsible for reading any in_file MUDprograms.
  */
 
-void mprog_read_programs( FILE *fp, MOB_INDEX_DATA *pMobIndex)
+void mprog_read_programs( FILE *fp, ProtoMobile *pMobIndex)
 {
   MPROG_DATA *mprg;
   char        letter;
@@ -3751,7 +3751,7 @@ bool delete_obj( OBJ_INDEX_DATA *obj )
 }
 
 /* See comment on delete_room. */
-bool delete_mob( MOB_INDEX_DATA *mob )
+bool delete_mob( ProtoMobile *mob )
 {
   return TRUE;
 }
@@ -3884,9 +3884,9 @@ OBJ_INDEX_DATA *make_object( vnum_t vnum, vnum_t cvnum, char *name )
  * Create a new INDEX mobile (for online building)              -Thoric
  * Option to clone an existing index mobile.
  */
-MOB_INDEX_DATA *make_mobile( vnum_t vnum, vnum_t cvnum, char *name )
+ProtoMobile *make_mobile( vnum_t vnum, vnum_t cvnum, char *name )
 {
-  MOB_INDEX_DATA *pMobIndex, *cMobIndex;
+  ProtoMobile *pMobIndex, *cMobIndex;
   char buf[MAX_STRING_LENGTH];
   int   iHash;
 
@@ -3894,7 +3894,7 @@ MOB_INDEX_DATA *make_mobile( vnum_t vnum, vnum_t cvnum, char *name )
     cMobIndex = get_mob_index( cvnum );
   else
     cMobIndex = NULL;
-  CREATE( pMobIndex, MOB_INDEX_DATA, 1 );
+  CREATE( pMobIndex, ProtoMobile, 1 );
   pMobIndex->vnum                       = vnum;
   pMobIndex->count              = 0;
   pMobIndex->killed             = 0;

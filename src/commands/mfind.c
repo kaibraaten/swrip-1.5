@@ -1,11 +1,11 @@
 #include "mud.h"
 
-extern MOB_INDEX_DATA *mob_index_hash[MAX_KEY_HASH];
+extern ProtoMobile *mob_index_hash[MAX_KEY_HASH];
 
 void do_mfind( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  MOB_INDEX_DATA *pMobIndex;
+  ProtoMobile *pMobIndex;
   int hash;
   int nMatch;
   bool fAll;

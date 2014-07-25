@@ -137,7 +137,7 @@ bool can_mmodify( const Character *ch, const Character *mob )
   return FALSE;
 }
 
-bool can_medit( const Character *ch, const MOB_INDEX_DATA *mob )
+bool can_medit( const Character *ch, const ProtoMobile *mob )
 {
   short vnum = mob->vnum;
   Area *pArea;
@@ -357,7 +357,7 @@ void fold_area( Area *tarea, char *filename, bool install )
 {
   RESET_DATA            *treset;
   ROOM_INDEX_DATA       *room;
-  MOB_INDEX_DATA        *pMobIndex;
+  ProtoMobile        *pMobIndex;
   OBJ_INDEX_DATA        *pObjIndex;
   MPROG_DATA            *mprog;
   Exit             *xit;

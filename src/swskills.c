@@ -26,7 +26,7 @@
 
 void add_reinforcements( Character *ch )
 {
-  MOB_INDEX_DATA  * pMobIndex;
+  ProtoMobile  * pMobIndex;
   OBJ_DATA        * blaster;
   OBJ_INDEX_DATA  * pObjIndex;
   char         buf[MAX_INPUT_LENGTH];

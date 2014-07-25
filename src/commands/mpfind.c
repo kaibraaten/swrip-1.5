@@ -7,7 +7,7 @@ static void mpfind_help (Character *ch);
  */
 void do_mpfind( Character *ch, char *argument )   /* Gorog */
 {
-  MOB_INDEX_DATA  *   pMob;
+  ProtoMobile  *   pMob;
   MPROG_DATA      *   pProg;
   char                arg1 [MAX_INPUT_LENGTH];
   char                arg2 [MAX_INPUT_LENGTH];

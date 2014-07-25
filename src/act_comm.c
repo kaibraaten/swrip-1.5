@@ -32,7 +32,7 @@
  */
 void send_obj_page_to_char(Character * ch, OBJ_INDEX_DATA * idx, char page);
 void send_room_page_to_char(Character * ch, ROOM_INDEX_DATA * idx, char page);
-void send_page_to_char(Character * ch, MOB_INDEX_DATA * idx, char page);
+void send_page_to_char(Character * ch, ProtoMobile * idx, char page);
 void send_control_page_to_char(Character * ch, char page);
 
 void sound_to_room( const ROOM_INDEX_DATA *room, const char *argument )

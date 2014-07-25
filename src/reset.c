@@ -314,7 +314,7 @@ RESET_DATA *find_mreset(Character *ch, Area *pArea,
     {
       char arg[MAX_INPUT_LENGTH];
       int cnt = 0, num = number_argument(name, arg);
-      MOB_INDEX_DATA *pMob = NULL;
+      ProtoMobile *pMob = NULL;
 
       for ( reset = pArea->first_reset; reset; reset = reset->next )
         {
@@ -345,7 +345,7 @@ void edit_reset( Character *ch, char *argument, Area *pArea, ROOM_INDEX_DATA *aR
   char arg[MAX_INPUT_LENGTH];
   RESET_DATA *pReset = NULL;
   RESET_DATA *reset;
-  MOB_INDEX_DATA *pMob = NULL;
+  ProtoMobile *pMob = NULL;
   ROOM_INDEX_DATA *pRoom;
   OBJ_INDEX_DATA *pObj;
   int num = 0;
@@ -1074,7 +1074,7 @@ void reset_area( Area *pArea )
   OBJ_DATA *obj;
   OBJ_DATA *lastobj;
   ROOM_INDEX_DATA *pRoomIndex;
-  MOB_INDEX_DATA *pMobIndex;
+  ProtoMobile *pMobIndex;
   OBJ_INDEX_DATA *pObjIndex;
   OBJ_INDEX_DATA *pObjToIndex;
   Exit *pexit;
@@ -1495,7 +1495,7 @@ void list_resets( Character *ch, Area *pArea, ROOM_INDEX_DATA *pRoom,
 {
   RESET_DATA *pReset;
   ROOM_INDEX_DATA *room;
-  MOB_INDEX_DATA *mob;
+  ProtoMobile *mob;
   OBJ_INDEX_DATA *obj, *obj2;
   OBJ_INDEX_DATA *lastobj;
   RESET_DATA *lo_reset;
@@ -1708,7 +1708,7 @@ void list_resets( Character *ch, Area *pArea, ROOM_INDEX_DATA *pRoom,
               case BIT_RESET_MOBILE:
                 if ( pReset->arg1 > 0 )
                   {
-                    MOB_INDEX_DATA *mob2;
+                    ProtoMobile *mob2;
 
                     if ( !(mob2 = get_mob_index(pReset->arg1)) )
                       rname = "Mobile: *BAD VNUM*";
@@ -2040,7 +2040,7 @@ char *sprint_reset( Character *ch, RESET_DATA *pReset, short num, bool rlist )
   char objname[MAX_STRING_LENGTH];
   static ROOM_INDEX_DATA *room;
   static OBJ_INDEX_DATA *obj, *obj2;
-  static MOB_INDEX_DATA *mob;
+  static ProtoMobile *mob;
   vnum_t rvnum;
 
   if ( ch->in_room )

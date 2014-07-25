@@ -3,7 +3,7 @@
 void do_repairstat( Character *ch, char *argument )
 {
   REPAIR_DATA *repair;
-  MOB_INDEX_DATA *mob;
+  ProtoMobile *mob;
   short vnum;
 
   if ( argument[0] == '\0' )

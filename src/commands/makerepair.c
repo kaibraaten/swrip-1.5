@@ -4,7 +4,7 @@ void do_makerepair( Character *ch, char *argument )
 {
   REPAIR_DATA *repair;
   short vnum;
-  MOB_INDEX_DATA *mob;
+  ProtoMobile *mob;
 
   if ( !argument || argument[0] == '\0' )
     {

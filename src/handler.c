@@ -2126,7 +2126,7 @@ void clean_obj( OBJ_INDEX_DATA *obj )
 /*
  * clean out a mobile (index) (leave list pointers intact )     -Thoric
  */
-void clean_mob( MOB_INDEX_DATA *mob )
+void clean_mob( ProtoMobile *mob )
 {
   MPROG_DATA *mprog, *mprog_next;
 
