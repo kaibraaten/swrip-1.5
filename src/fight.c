@@ -120,7 +120,7 @@ void start_hunting( Character *ch, Character *victim )
   if ( ch->hhf.hunting )
     stop_hunting( ch );
 
-  CREATE( ch->hhf.hunting, HHF_DATA, 1 );
+  CREATE( ch->hhf.hunting, HuntHateFear, 1 );
   ch->hhf.hunting->name = QUICKLINK( victim->name );
   ch->hhf.hunting->who  = victim;
   return;
@@ -131,7 +131,7 @@ void start_hating( Character *ch, Character *victim )
   if ( ch->hhf.hating )
     stop_hating( ch );
 
-  CREATE( ch->hhf.hating, HHF_DATA, 1 );
+  CREATE( ch->hhf.hating, HuntHateFear, 1 );
   ch->hhf.hating->name = QUICKLINK( victim->name );
   ch->hhf.hating->who  = victim;
   return;
@@ -142,7 +142,7 @@ void start_fearing( Character *ch, Character *victim )
   if ( ch->hhf.fearing )
     stop_fearing( ch );
 
-  CREATE( ch->hhf.fearing, HHF_DATA, 1 );
+  CREATE( ch->hhf.fearing, HuntHateFear, 1 );
   ch->hhf.fearing->name = QUICKLINK( victim->name );
   ch->hhf.fearing->who  = victim;
   return;
@@ -1934,7 +1934,7 @@ void update_pos( Character *victim )
  */
 void set_fighting( Character *ch, Character *victim )
 {
-  FIGHT_DATA *fight;
+  Fight *fight = NULL;
 
   if ( ch->fighting )
     {
@@ -1956,22 +1956,24 @@ void set_fighting( Character *ch, Character *victim )
       return;
     }
 
-  CREATE( fight, FIGHT_DATA, 1 );
+  CREATE( fight, Fight, 1 );
   fight->who     = victim;
   fight->xp      = (int) xp_compute( ch, victim );
   fight->align = align_compute( ch, victim );
+
   if ( !is_npc(ch) && is_npc(victim) )
     fight->timeskilled = times_killed(ch, victim);
+
   ch->num_fighting = 1;
   ch->fighting = fight;
   ch->position = POS_FIGHTING;
   victim->num_fighting++;
+
   if ( victim->switched && is_affected_by(victim->switched, AFF_POSSESS) )
     {
       send_to_char( "You are disturbed!\r\n", victim->switched );
       do_return( victim->switched, "" );
     }
-  return;
 }
 
 

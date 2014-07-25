@@ -12,7 +12,7 @@ struct Character
   Character *           prev_in_room;
   Character *           master;
   Character *           leader;
-  FIGHT_DATA *  fighting;
+  Fight     *           fighting;
   Character *           reply;
   Character *           switched;
   Character *           mount;
@@ -116,9 +116,9 @@ struct Character
 
   struct
   {
-    HHF_DATA *hunting;
-    HHF_DATA *fearing;
-    HHF_DATA *hating;
+    HuntHateFear *hunting;
+    HuntHateFear *fearing;
+    HuntHateFear *hating;
   } hhf;
 
   struct

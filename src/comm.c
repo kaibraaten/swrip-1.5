@@ -1116,6 +1116,7 @@ bool flush_buffer( DESCRIPTOR_DATA *d, bool fPrompt )
   Character *ch;
 
   ch = d->original ? d->original : d->character;
+
   if( ch && ch->fighting && ch->fighting->who )
     show_condition( ch, ch->fighting->who );
 

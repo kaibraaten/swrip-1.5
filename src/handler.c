@@ -2311,7 +2311,7 @@ void set_cur_char( Character *ch )
  */
 bool char_died( const Character *ch )
 {
-  EXTRACT_Character *ccd;
+  ExtractedCharacter *ccd;
 
   if ( ch == cur_char && cur_char_died )
     return TRUE;
@@ -2328,14 +2328,14 @@ bool char_died( const Character *ch )
  */
 void queue_extracted_char( Character *ch, bool extract )
 {
-  EXTRACT_Character *ccd;
+  ExtractedCharacter *ccd;
 
   if ( !ch )
     {
       bug( "queue_extracted char: ch = NULL", 0 );
       return;
     }
-  CREATE( ccd, EXTRACT_Character, 1 );
+  CREATE( ccd, ExtractedCharacter, 1 );
   ccd->ch                       = ch;
   ccd->room                     = ch->in_room;
   ccd->extract          = extract;
@@ -2353,7 +2353,7 @@ void queue_extracted_char( Character *ch, bool extract )
  */
 void clean_char_queue()
 {
-  EXTRACT_Character *ccd;
+  ExtractedCharacter *ccd;
 
   for ( ccd = extracted_char_queue; ccd; ccd = extracted_char_queue )
     {

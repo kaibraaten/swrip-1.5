@@ -718,13 +718,13 @@ struct mob_index_data
 };
 
 
-struct hunt_hate_fear
+struct HuntHateFear
 {
   char      *name;
   Character *who;
 };
 
-struct fighting_data
+struct Fight
 {
   Character *who;
   int        xp;
@@ -733,9 +733,9 @@ struct fighting_data
   short      timeskilled;
 };
 
-struct extracted_char_data
+struct ExtractedCharacter
 {
-  EXTRACT_Character *next;
+  ExtractedCharacter *next;
   Character         *ch;
   ROOM_INDEX_DATA   *room;
   ch_ret             retcode;
@@ -1614,7 +1614,7 @@ extern Area            *last_bsort;
 extern TELEPORT_DATA        *first_teleport;
 extern TELEPORT_DATA        *last_teleport;
 extern OBJ_DATA             *extracted_obj_queue;
-extern EXTRACT_Character    *extracted_char_queue;
+extern ExtractedCharacter    *extracted_char_queue;
 extern OBJ_DATA             *save_equipment[MAX_WEAR][MAX_LAYERS];
 extern Character            *quitting_char;
 extern Character            *loading_char;

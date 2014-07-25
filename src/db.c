@@ -54,7 +54,7 @@ TELEPORT_DATA *first_teleport = NULL;
 TELEPORT_DATA *last_teleport = NULL;
 
 OBJ_DATA *extracted_obj_queue = NULL;
-EXTRACT_Character *extracted_char_queue = NULL;
+ExtractedCharacter *extracted_char_queue = NULL;
 
 Character *first_char = NULL;
 Character *last_char = NULL;

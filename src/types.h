@@ -18,17 +18,17 @@ typedef struct Auction            Auction;
 struct Ban;
 typedef struct Ban                Ban;
 
-struct extracted_char_data;
-typedef struct extracted_char_data     EXTRACT_Character;
+struct ExtractedCharacter;
+typedef struct ExtractedCharacter     ExtractedCharacter;
 
 struct Character;
 typedef struct Character               Character;
 
-struct hunt_hate_fear;
-typedef struct hunt_hate_fear          HHF_DATA;
+struct HuntHateFear;
+typedef struct HuntHateFear          HuntHateFear;
 
-struct fighting_data;
-typedef struct fighting_data           FIGHT_DATA;
+struct Fight;
+typedef struct Fight           Fight;
 
 struct descriptor_data;
 typedef struct descriptor_data         DESCRIPTOR_DATA;
