@@ -236,9 +236,9 @@ void assign_area( Character *ch )
     }
 }
 
-EXTRA_DESCR_DATA *SetRExtra( ROOM_INDEX_DATA *room, char *keywords )
+ExtraDescription *SetRExtra( ROOM_INDEX_DATA *room, char *keywords )
 {
-  EXTRA_DESCR_DATA *ed;
+  ExtraDescription *ed;
 
   for ( ed = room->first_extradesc; ed; ed = ed->next )
     {
@@ -247,7 +247,7 @@ EXTRA_DESCR_DATA *SetRExtra( ROOM_INDEX_DATA *room, char *keywords )
     }
   if ( !ed )
     {
-      CREATE( ed, EXTRA_DESCR_DATA, 1 );
+      CREATE( ed, ExtraDescription, 1 );
       LINK( ed, room->first_extradesc, room->last_extradesc, next, prev );
       ed->keyword       = STRALLOC( keywords );
       ed->description   = STRALLOC( "" );
@@ -258,7 +258,7 @@ EXTRA_DESCR_DATA *SetRExtra( ROOM_INDEX_DATA *room, char *keywords )
 
 bool DelRExtra( ROOM_INDEX_DATA *room, char *keywords )
 {
-  EXTRA_DESCR_DATA *rmed;
+  ExtraDescription *rmed;
 
   for ( rmed = room->first_extradesc; rmed; rmed = rmed->next )
     {
@@ -275,9 +275,9 @@ bool DelRExtra( ROOM_INDEX_DATA *room, char *keywords )
   return TRUE;
 }
 
-EXTRA_DESCR_DATA *SetOExtra( OBJ_DATA *obj, char *keywords )
+ExtraDescription *SetOExtra( OBJ_DATA *obj, char *keywords )
 {
-  EXTRA_DESCR_DATA *ed;
+  ExtraDescription *ed;
 
   for ( ed = obj->first_extradesc; ed; ed = ed->next )
     {
@@ -286,7 +286,7 @@ EXTRA_DESCR_DATA *SetOExtra( OBJ_DATA *obj, char *keywords )
     }
   if ( !ed )
     {
-      CREATE( ed, EXTRA_DESCR_DATA, 1 );
+      CREATE( ed, ExtraDescription, 1 );
       LINK( ed, obj->first_extradesc, obj->last_extradesc, next, prev );
       ed->keyword       = STRALLOC( keywords );
       ed->description   = STRALLOC( "" );
@@ -297,7 +297,7 @@ EXTRA_DESCR_DATA *SetOExtra( OBJ_DATA *obj, char *keywords )
 
 bool DelOExtra( OBJ_DATA *obj, char *keywords )
 {
-  EXTRA_DESCR_DATA *rmed;
+  ExtraDescription *rmed;
 
   for ( rmed = obj->first_extradesc; rmed; rmed = rmed->next )
     {
@@ -314,9 +314,9 @@ bool DelOExtra( OBJ_DATA *obj, char *keywords )
   return TRUE;
 }
 
-EXTRA_DESCR_DATA *SetOExtraProto( OBJ_INDEX_DATA *obj, char *keywords )
+ExtraDescription *SetOExtraProto( OBJ_INDEX_DATA *obj, char *keywords )
 {
-  EXTRA_DESCR_DATA *ed;
+  ExtraDescription *ed;
 
   for ( ed = obj->first_extradesc; ed; ed = ed->next )
     {
@@ -325,7 +325,7 @@ EXTRA_DESCR_DATA *SetOExtraProto( OBJ_INDEX_DATA *obj, char *keywords )
     }
   if ( !ed )
     {
-      CREATE( ed, EXTRA_DESCR_DATA, 1 );
+      CREATE( ed, ExtraDescription, 1 );
       LINK( ed, obj->first_extradesc, obj->last_extradesc, next, prev );
       ed->keyword       = STRALLOC( keywords );
       ed->description   = STRALLOC( "" );
@@ -336,7 +336,7 @@ EXTRA_DESCR_DATA *SetOExtraProto( OBJ_INDEX_DATA *obj, char *keywords )
 
 bool DelOExtraProto( OBJ_INDEX_DATA *obj, char *keywords )
 {
-  EXTRA_DESCR_DATA *rmed;
+  ExtraDescription *rmed;
 
   for ( rmed = obj->first_extradesc; rmed; rmed = rmed->next )
     {
@@ -361,7 +361,7 @@ void fold_area( Area *tarea, char *filename, bool install )
   OBJ_INDEX_DATA        *pObjIndex;
   MPROG_DATA            *mprog;
   Exit             *xit;
-  EXTRA_DESCR_DATA      *ed;
+  ExtraDescription      *ed;
   Affect           *paf;
   SHOP_DATA             *pShop;
   REPAIR_DATA           *pRepair;

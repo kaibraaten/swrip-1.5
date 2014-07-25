@@ -10,7 +10,7 @@ void do_redit( Character *ch, char *argument )
   char arg3[MAX_INPUT_LENGTH];
   char buf[MAX_STRING_LENGTH];
   ROOM_INDEX_DATA *location = NULL, *tmp = NULL;
-  EXTRA_DESCR_DATA *ed = NULL;
+  ExtraDescription *ed = NULL;
   Exit *xit = NULL, *texit = NULL;
   int value = 0;
   int edir = 0, ekey = 0, evnum = 0;
@@ -43,7 +43,7 @@ void do_redit( Character *ch, char *argument )
       return;
 
     case SUB_ROOM_EXTRA:
-      ed = (EXTRA_DESCR_DATA*)ch->dest_buf;
+      ed = (ExtraDescription*)ch->dest_buf;
 
       if ( !ed )
         {

@@ -11,7 +11,7 @@ void do_oset( Character *ch, char *argument )
   char buf  [MAX_STRING_LENGTH];
   char outbuf  [MAX_STRING_LENGTH];
   OBJ_DATA *obj, *tmpobj;
-  EXTRA_DESCR_DATA *ed;
+  ExtraDescription *ed;
   bool lockobj;
   char *origarg = argument;
 
@@ -48,7 +48,7 @@ void do_oset( Character *ch, char *argument )
        * the object and index-object lists, searching through the
        * extra_descr lists for a matching pointer...
        */
-      ed  = (EXTRA_DESCR_DATA*)ch->dest_buf;
+      ed  = (ExtraDescription*)ch->dest_buf;
       STRFREE( ed->description );
       ed->description = copy_buffer( ch );
       tmpobj = (OBJ_DATA*)ch->spare_ptr;

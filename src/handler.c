@@ -1024,8 +1024,8 @@ void extract_obj( OBJ_DATA *obj )
   }
 
   {
-    EXTRA_DESCR_DATA *ed;
-    EXTRA_DESCR_DATA *ed_next;
+    ExtraDescription *ed;
+    ExtraDescription *ed_next;
 
     for ( ed = obj->first_extradesc; ed; ed = ed_next )
       {
@@ -2046,7 +2046,7 @@ void extract_exit( ROOM_INDEX_DATA *room, Exit *pexit )
  */
 void clean_room( ROOM_INDEX_DATA *room )
 {
-  EXTRA_DESCR_DATA      *ed, *ed_next;
+  ExtraDescription      *ed, *ed_next;
   Exit             *pexit, *pexit_next;
 
   if ( !room )
@@ -2086,8 +2086,8 @@ void clean_obj( OBJ_INDEX_DATA *obj )
 {
   Affect *paf;
   Affect *paf_next;
-  EXTRA_DESCR_DATA *ed;
-  EXTRA_DESCR_DATA *ed_next;
+  ExtraDescription *ed;
+  ExtraDescription *ed_next;
 
   STRFREE( obj->name );
   STRFREE( obj->short_descr );

@@ -1229,9 +1229,9 @@ void load_objects( Area *tarea, FILE *fp )
 
           else if ( letter == 'E' )
             {
-              EXTRA_DESCR_DATA *ed;
+              ExtraDescription *ed;
 
-              CREATE( ed, EXTRA_DESCR_DATA, 1 );
+              CREATE( ed, ExtraDescription, 1 );
               ed->keyword               = fread_string( fp );
               ed->description           = fread_string( fp );
               LINK( ed, pObjIndex->first_extradesc, pObjIndex->last_extradesc,
@@ -1638,9 +1638,9 @@ void load_rooms( Area *tarea, FILE *fp )
             }
           else if ( letter == 'E' )
             {
-              EXTRA_DESCR_DATA *ed;
+              ExtraDescription *ed;
 
-              CREATE( ed, EXTRA_DESCR_DATA, 1 );
+              CREATE( ed, ExtraDescription, 1 );
               ed->keyword               = fread_string( fp );
               ed->description           = fread_string( fp );
               LINK( ed, pRoomIndex->first_extradesc, pRoomIndex->last_extradesc,
@@ -2570,7 +2570,7 @@ void free_char( Character *ch )
 /*
  * Get an extra description from a list.
  */
-char *get_extra_descr( const char *name, EXTRA_DESCR_DATA *ed )
+char *get_extra_descr( const char *name, ExtraDescription *ed )
 {
   for ( ; ed; ed = ed->next )
     if ( is_name( name, ed->keyword ) )
@@ -3833,7 +3833,7 @@ OBJ_INDEX_DATA *make_object( vnum_t vnum, vnum_t cvnum, char *name )
     }
   else
     {
-      EXTRA_DESCR_DATA *ed,  *ced;
+      ExtraDescription *ed,  *ced;
       Affect          *paf, *cpaf;
 
       pObjIndex->short_descr    = QUICKLINK( cObjIndex->short_descr );
@@ -3851,7 +3851,7 @@ OBJ_INDEX_DATA *make_object( vnum_t vnum, vnum_t cvnum, char *name )
       pObjIndex->cost           = cObjIndex->cost;
       for ( ced = cObjIndex->first_extradesc; ced; ced = ced->next )
         {
-          CREATE( ed, EXTRA_DESCR_DATA, 1 );
+          CREATE( ed, ExtraDescription, 1 );
           ed->keyword           = QUICKLINK( ced->keyword );
           ed->description               = QUICKLINK( ced->description );
           LINK( ed, pObjIndex->first_extradesc, pObjIndex->last_extradesc,

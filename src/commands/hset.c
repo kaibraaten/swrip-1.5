@@ -3,7 +3,7 @@
 
 void do_hset( Character *ch, char *argument )
 {
-  HELP_DATA *pHelp = NULL;
+  HelpFile *pHelp = NULL;
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
 

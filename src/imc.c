@@ -225,7 +225,7 @@ typedef struct imc_ignore IMC_IGNORE;  /* Player level ignores */
 typedef struct imcucache_data IMCUCACHE_DATA;   /* User cache data for gender targetting socials */
 typedef struct imc_color_table IMC_COLOR; /* The Color config */
 typedef struct imc_command_table IMC_CMD_DATA;  /* Command table */
-typedef struct imc_help_table IMC_HELP_DATA; /* Help table */
+typedef struct imc_help_table IMC_HelpFile; /* Help table */
 typedef struct imc_cmd_alias IMC_ALIAS;   /* Big, bad, bloated command alias thing */
 typedef struct imc_packet_handler IMC_PHANDLER; /* custom packet handlers added dynamically */
 typedef struct who_template WHO_TEMPLATE; /* The who templates */
@@ -283,8 +283,8 @@ struct imc_command_table
 
 struct imc_help_table
 {
-  IMC_HELP_DATA *next;
-  IMC_HELP_DATA *prev;
+  IMC_HelpFile *next;
+  IMC_HelpFile *prev;
   char *name;
   char *text;
   int level;
@@ -473,8 +473,8 @@ IMC_COLOR *first_imc_color;
 IMC_COLOR *last_imc_color;
 IMC_CMD_DATA *first_imc_command;
 IMC_CMD_DATA *last_imc_command;
-IMC_HELP_DATA *first_imc_help;
-IMC_HELP_DATA *last_imc_help;
+IMC_HelpFile *first_imc_help;
+IMC_HelpFile *last_imc_help;
 IMC_PHANDLER *first_phandler;
 IMC_PHANDLER *last_phandler;
 WHO_TEMPLATE *whot;
@@ -4068,7 +4068,7 @@ static void imc_load_color_table( void )
 static void imc_savehelps( void )
 {
    FILE *fp;
-   IMC_HELP_DATA *help;
+   IMC_HelpFile *help;
 
    if( !( fp = fopen( IMC_HELP_FILE, "w" ) ) )
    {
@@ -4088,7 +4088,7 @@ static void imc_savehelps( void )
    IMCFCLOSE( fp );
 }
 
-static void imc_readhelp( IMC_HELP_DATA * help, FILE * fp )
+static void imc_readhelp( IMC_HelpFile * help, FILE * fp )
 {
    const char *word;
    char hbuf[LGST];
@@ -4157,7 +4157,7 @@ static void imc_readhelp( IMC_HELP_DATA * help, FILE * fp )
 static void imc_load_helps( void )
 {
    FILE *fp;
-   IMC_HELP_DATA *help;
+   IMC_HelpFile *help;
 
    first_imc_help = last_imc_help = NULL;
 
@@ -4190,7 +4190,7 @@ static void imc_load_helps( void )
       word = fread_word( fp );
       if( !strcasecmp( word, "HELP" ) )
       {
-         IMCCREATE( help, IMC_HELP_DATA, 1 );
+         IMCCREATE( help, IMC_HelpFile, 1 );
          imc_readhelp( help, fp );
          IMCLINK( help, first_imc_help, last_imc_help, next, prev );
          continue;
@@ -4990,7 +4990,7 @@ static void free_imcdata( bool complete )
    IMCUCACHE_DATA *ucache, *next_ucache;
    IMC_CMD_DATA *cmd, *cmd_next;
    IMC_ALIAS *alias, *alias_next;
-   IMC_HELP_DATA *help, *help_next;
+   IMC_HelpFile *help, *help_next;
    IMC_COLOR *color, *color_next;
    IMC_PHANDLER *ph, *ph_next;
    IMC_CHANNEL *c, *c_next;
@@ -6904,7 +6904,7 @@ IMC_CMD( imcremoteadmin )
 IMC_CMD( imchelp )
 {
    char buf[LGST];
-   IMC_HELP_DATA *help;
+   IMC_HelpFile *help;
    int col, perm;
 
    if( !argument || argument[0] == '\0' )
@@ -7219,7 +7219,7 @@ IMC_CMD( imccedit )
 
 IMC_CMD( imchedit )
 {
-   IMC_HELP_DATA *help;
+   IMC_HelpFile *help;
    char name[SMST], cmd[SMST];
    bool found = FALSE;
 

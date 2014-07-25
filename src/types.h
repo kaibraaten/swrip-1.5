@@ -36,11 +36,11 @@ typedef struct Descriptor         Descriptor;
 struct Exit;
 typedef struct Exit               Exit;
 
-struct extra_descr_data;
-typedef struct extra_descr_data        EXTRA_DESCR_DATA;
+struct ExtraDescription;
+typedef struct ExtraDescription        ExtraDescription;
 
-struct help_data;
-typedef struct help_data               HELP_DATA;
+struct HelpFile;
+typedef struct HelpFile               HelpFile;
 
 struct mob_index_data;
 typedef struct mob_index_data          MOB_INDEX_DATA;

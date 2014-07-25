@@ -4,19 +4,19 @@
 #include "character.h"
 #include "mud.h"
 
-HELP_DATA *first_help = NULL;
-HELP_DATA *last_help = NULL;
+HelpFile *first_help = NULL;
+HelpFile *last_help = NULL;
 int top_help = 0;
 char *help_greeting = NULL;
 
 static char *help_fix( char *text );
 
-HELP_DATA *get_help( const Character *ch, char *argument )
+HelpFile *get_help( const Character *ch, char *argument )
 {
   char argall[MAX_INPUT_LENGTH];
   char argone[MAX_INPUT_LENGTH];
   char argnew[MAX_INPUT_LENGTH];
-  HELP_DATA *pHelp = NULL;
+  HelpFile *pHelp = NULL;
   int lev = 0;
 
   if ( argument[0] == '\0' )
@@ -77,9 +77,9 @@ HELP_DATA *get_help( const Character *ch, char *argument )
  * Page is insert-sorted by keyword.                    -Thoric
  * (The reason for sorting is to keep do_hlist looking nice)
  */
-void add_help( HELP_DATA *pHelp )
+void add_help( HelpFile *pHelp )
 {
-  HELP_DATA *tHelp = NULL;
+  HelpFile *tHelp = NULL;
   int match = 0;
 
   for ( tHelp = first_help; tHelp; tHelp = tHelp->next )
@@ -115,7 +115,7 @@ void add_help( HELP_DATA *pHelp )
   top_help++;
 }
 
-void unlink_help( HELP_DATA *help )
+void unlink_help( HelpFile *help )
 {
   UNLINK( help, first_help, last_help, next, prev );
   top_help--;
@@ -128,9 +128,9 @@ void load_helps( void )
 {
   FILE *fp = NULL;
 
-  if( !( fp = fopen( HELP_FILE, "r" ) ) )
+  if( !( fp = fopen( HELP_DATA_FILE, "r" ) ) )
     {
-      log_printf( "Unable to open %s", HELP_FILE );
+      log_printf( "Unable to open %s", HELP_DATA_FILE );
       return;
     }
 
@@ -138,7 +138,7 @@ void load_helps( void )
     {
       short level = fread_number( fp );
       char *keyword = fread_string( fp );
-      HELP_DATA *pHelp = create_help( keyword, level );
+      HelpFile *pHelp = create_help( keyword, level );
 
       if ( keyword[0] == '$' )
 	{
@@ -166,14 +166,14 @@ void load_helps( void )
 void save_helps( void )
 {
   FILE *filehandle = NULL;
-  HELP_DATA *pHelp = NULL;
+  HelpFile *pHelp = NULL;
 
-  rename( HELP_FILE, HELP_FILE ".bak" );
+  rename( HELP_DATA_FILE, HELP_DATA_FILE ".bak" );
 
-  if ( ( filehandle = fopen( HELP_FILE, "w" ) ) == NULL )
+  if ( ( filehandle = fopen( HELP_DATA_FILE, "w" ) ) == NULL )
     {
       bug( "%s: fopen", __FUNCTION__ );
-      perror( HELP_FILE );
+      perror( HELP_DATA_FILE );
       return;
     }
 
@@ -191,11 +191,11 @@ void save_helps( void )
   fclose( filehandle );
 }
 
-HELP_DATA *create_help( char *keyword, short level )
+HelpFile *create_help( char *keyword, short level )
 {
-  HELP_DATA *help = NULL;
+  HelpFile *help = NULL;
   
-  CREATE( help, HELP_DATA, 1 );
+  CREATE( help, HelpFile, 1 );
   set_help_keyword( help, keyword );
   set_help_text( help, "" );
   set_help_level( help, level );
@@ -203,7 +203,7 @@ HELP_DATA *create_help( char *keyword, short level )
   return help;
 }
 
-void destroy_help( HELP_DATA *help )
+void destroy_help( HelpFile *help )
 {
   STRFREE( help->keyword );
   STRFREE( help->text );
@@ -228,12 +228,12 @@ static char *help_fix( char *text )
   return fixed;
 }
 
-short get_help_level( const HELP_DATA *help )
+short get_help_level( const HelpFile *help )
 {
   return help->level;
 }
 
-void set_help_level( HELP_DATA *help, short level )
+void set_help_level( HelpFile *help, short level )
 {
   if( level >= -1 && level <= MAX_LEVEL )
     {
@@ -246,12 +246,12 @@ void set_help_level( HELP_DATA *help, short level )
     }
 }
 
-char *get_help_keyword( const HELP_DATA *help )
+char *get_help_keyword( const HelpFile *help )
 {
   return help->keyword;
 }
 
-void set_help_keyword( HELP_DATA *help, char *keyword )
+void set_help_keyword( HelpFile *help, char *keyword )
 {
   if( help->keyword )
     {
@@ -261,12 +261,12 @@ void set_help_keyword( HELP_DATA *help, char *keyword )
   help->keyword = STRALLOC( strupper( keyword ) );
 }
 
-char *get_help_text( const HELP_DATA *help )
+char *get_help_text( const HelpFile *help )
 {
   return help->text;
 }
 
-void set_help_text( HELP_DATA *help, char *text )
+void set_help_text( HelpFile *help, char *text )
 {
   if( help->text )
     {

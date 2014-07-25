@@ -8,7 +8,7 @@
  */
 void do_hedit( Character *ch, char *argument )
 {
-  HELP_DATA *pHelp = NULL;
+  HelpFile *pHelp = NULL;
 
   if ( !ch->desc )
     {
@@ -22,7 +22,7 @@ void do_hedit( Character *ch, char *argument )
       break;
 
     case SUB_HELP_EDIT:
-      pHelp = (HELP_DATA*) ch->dest_buf;
+      pHelp = (HelpFile*) ch->dest_buf;
 
       if ( !pHelp )
         {

@@ -14,7 +14,7 @@ void do_hlist( Character *ch, char *argument )
   int minlimit = maxlimit >= LEVEL_GREATER ? -1 : 0;
   int cnt = 0;
   char arg[MAX_INPUT_LENGTH];
-  HELP_DATA *help = NULL;
+  HelpFile *help = NULL;
 
   argument = one_argument( argument, arg );
 

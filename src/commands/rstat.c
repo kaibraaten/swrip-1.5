@@ -99,7 +99,7 @@ void do_rstat( Character *ch, char *argument )
 
   if ( location->first_extradesc )
     {
-      EXTRA_DESCR_DATA *ed = NULL;
+      ExtraDescription *ed = NULL;
 
       send_to_char( "Extra description keywords: '", ch );
 

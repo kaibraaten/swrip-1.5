@@ -599,7 +599,7 @@ void fwrite_char( Character *ch, FILE *fp )
 void fwrite_obj( const Character *ch, const OBJ_DATA *obj, FILE *fp, int iNest,
                  short os_type )
 {
-  EXTRA_DESCR_DATA *ed;
+  ExtraDescription *ed;
   Affect *paf;
   short wear, wear_loc, x;
 
@@ -1817,9 +1817,9 @@ void fread_obj( Character *ch, FILE *fp, short os_type )
 
           if ( !str_cmp( word, "ExtraDescr" ) )
             {
-              EXTRA_DESCR_DATA *ed;
+              ExtraDescription *ed;
 
-              CREATE( ed, EXTRA_DESCR_DATA, 1 );
+              CREATE( ed, ExtraDescription, 1 );
               ed->keyword               = fread_string( fp );
               ed->description           = fread_string( fp );
               LINK(ed, obj->first_extradesc, obj->last_extradesc, next, prev );
@@ -2028,7 +2028,7 @@ void fread_obj( Character *ch, FILE *fp, short os_type )
 
       if ( !fMatch )
         {
-          EXTRA_DESCR_DATA *ed;
+          ExtraDescription *ed;
           Affect *paf;
 
           bug( "Fread_obj: no match.", 0 );

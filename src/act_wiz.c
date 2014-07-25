@@ -181,8 +181,8 @@ void close_area( Area *pArea )
   MOB_INDEX_DATA *mid_next;
   RESET_DATA *ereset;
   RESET_DATA *ereset_next;
-  EXTRA_DESCR_DATA *eed;
-  EXTRA_DESCR_DATA *eed_next;
+  ExtraDescription *eed;
+  ExtraDescription *eed_next;
   Exit *exit_next;
   MPROG_ACT_LIST *mpact;
   MPROG_ACT_LIST *mpact_next;

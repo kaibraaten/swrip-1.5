@@ -294,7 +294,7 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
   int anum;
   int first_list;
   OBJ_DATA *quill, *paper, *tmpobj = NULL;
-  EXTRA_DESCR_DATA *ed = NULL;
+  ExtraDescription *ed = NULL;
   char notebuf[MAX_STRING_LENGTH];
   char short_desc_buf[MAX_STRING_LENGTH];
   char long_desc_buf[MAX_STRING_LENGTH];
@@ -325,7 +325,7 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
           return;
         }
 
-      ed = (EXTRA_DESCR_DATA*)ch->dest_buf;
+      ed = (ExtraDescription*)ch->dest_buf;
       STRFREE( ed->description );
       ed->description = copy_buffer( ch );
       stop_editing( ch );

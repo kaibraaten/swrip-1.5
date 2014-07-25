@@ -8,7 +8,7 @@ static void similar_help_files(Character *ch, char *argument);
 
 void do_help( Character *ch, char *argument )
 {
-  HELP_DATA *pHelp = NULL;
+  HelpFile *pHelp = NULL;
   const char *help_text = NULL;
 
   if ( !argument || argument[0] == '\0')
@@ -72,7 +72,7 @@ static short str_similarity( const char *astr, const char *bstr )
 
 static void similar_help_files(Character *ch, char *argument)
 {
-  HELP_DATA *pHelp = NULL;
+  HelpFile *pHelp = NULL;
   short level = 0;
   bool single = FALSE;
 

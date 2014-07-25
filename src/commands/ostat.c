@@ -78,7 +78,7 @@ void do_ostat( Character *ch, char *argument )
 
   if ( obj->pIndexData->first_extradesc )
     {
-      EXTRA_DESCR_DATA *ed;
+      ExtraDescription *ed;
 
       send_to_char( "Primary description keywords:   '", ch );
 
@@ -95,7 +95,7 @@ void do_ostat( Character *ch, char *argument )
 
   if ( obj->first_extradesc )
     {
-      EXTRA_DESCR_DATA *ed;
+      ExtraDescription *ed;
 
       send_to_char( "Secondary description keywords: '", ch );
 

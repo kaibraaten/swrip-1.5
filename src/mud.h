@@ -837,10 +837,10 @@ struct liq_type
 /*
  * Extra description data for a room or object.
  */
-struct extra_descr_data
+struct ExtraDescription
 {
-  EXTRA_DESCR_DATA *next;       /* Next in list                     */
-  EXTRA_DESCR_DATA *prev;       /* Previous in list                 */
+  ExtraDescription *next;       /* Next in list                     */
+  ExtraDescription *prev;       /* Previous in list                 */
   char             *keyword;              /* Keyword in look/examine          */
   char             *description;          /* What to see                      */
 };
@@ -854,8 +854,8 @@ struct obj_index_data
 {
   OBJ_INDEX_DATA   *next;
   OBJ_INDEX_DATA   *next_sort;
-  EXTRA_DESCR_DATA *first_extradesc;
-  EXTRA_DESCR_DATA *last_extradesc;
+  ExtraDescription *first_extradesc;
+  ExtraDescription *last_extradesc;
   Affect      *first_affect;
   Affect      *last_affect;
   char             *name;
@@ -897,8 +897,8 @@ struct obj_data
   OBJ_DATA         *last_content;
   OBJ_DATA         *in_obj;
   Character        *carried_by;
-  EXTRA_DESCR_DATA *first_extradesc;
-  EXTRA_DESCR_DATA *last_extradesc;
+  ExtraDescription *first_extradesc;
+  ExtraDescription *last_extradesc;
   Affect      *first_affect;
   Affect      *last_affect;
   OBJ_INDEX_DATA   *pIndexData;
@@ -1099,8 +1099,8 @@ struct room_index_data
   Character        *last_person;
   OBJ_DATA         *first_content;
   OBJ_DATA         *last_content;
-  EXTRA_DESCR_DATA *first_extradesc;
-  EXTRA_DESCR_DATA *last_extradesc;
+  ExtraDescription *first_extradesc;
+  ExtraDescription *last_extradesc;
   Area        *area;
   Exit        *first_exit;
   Exit        *last_exit;
@@ -2479,7 +2479,7 @@ extern "C" {
   OBJ_DATA *create_object( OBJ_INDEX_DATA *pObjIndex, int level );
   void  clear_char( Character *ch );
   void  free_char( Character *ch );
-  char *        get_extra_descr( const char *name, EXTRA_DESCR_DATA *ed );
+  char *        get_extra_descr( const char *name, ExtraDescription *ed );
   MOB_INDEX_DATA *get_mob_index( vnum_t vnum );
   OBJ_INDEX_DATA *get_obj_index( vnum_t vnum );
   ROOM_INDEX_DATA *get_room_index( vnum_t vnum );
@@ -2512,11 +2512,11 @@ extern "C" {
   void free_reset( Area *are, RESET_DATA *res );
   void free_area( Area *are );
   void assign_area( Character *ch );
-  EXTRA_DESCR_DATA *SetRExtra( ROOM_INDEX_DATA *room, char *keywords );
+  ExtraDescription *SetRExtra( ROOM_INDEX_DATA *room, char *keywords );
   bool DelRExtra( ROOM_INDEX_DATA *room, char *keywords );
-  EXTRA_DESCR_DATA *SetOExtra( OBJ_DATA *obj, char *keywords );
+  ExtraDescription *SetOExtra( OBJ_DATA *obj, char *keywords );
   bool DelOExtra( OBJ_DATA *obj, char *keywords );
-  EXTRA_DESCR_DATA *SetOExtraProto( OBJ_INDEX_DATA *obj, char *keywords );
+  ExtraDescription *SetOExtraProto( OBJ_INDEX_DATA *obj, char *keywords );
   bool DelOExtraProto( OBJ_INDEX_DATA *obj, char *keywords );
   void fold_area( Area *tarea, char *filename, bool install );
 
