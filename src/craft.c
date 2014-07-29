@@ -2,36 +2,59 @@
 #include "craft.h"
 #include "constants.h"
 
-struct Craft
+typedef struct CraftRecipe CraftRecipe;
+
+struct CraftRecipe
 {
   int XpAbility;
   int Skill;
-  Character *Engineer;
 };
 
-Craft *AllocateCraft( void )
+struct CraftingSession
 {
-  Craft *craft = NULL;
+  Character *Engineer;
+  CraftRecipe *Recipe;
+};
 
-  CREATE( craft, Craft, 1 );
+static CraftRecipe *AllocateCraftRecipe( void )
+{
+  CraftRecipe *recipe = NULL;
+  CREATE( recipe, CraftRecipe, 1 );
 
-  craft->XpAbility = ABILITY_NONE;
-  craft->Skill = 0;
-  craft->Engineer = NULL;
+  recipe->XpAbility = ABILITY_NONE;
+  recipe->Skill = 0;
 
-  return craft;
+  return recipe;
 }
 
-void FreeCraft( Craft *craft )
+static void FreeCraftRecipe( CraftRecipe *recipe )
 {
-  DISPOSE( craft );
+  DISPOSE( recipe );
 }
 
-void SetCraftXpAbility( Craft *craft, int ability )
+CraftingSession *AllocateCraftingSession( void )
+{
+  CraftingSession *session = NULL;
+
+  CREATE( session, CraftingSession, 1 );
+
+  session->Engineer = NULL;
+  session->Recipe = AllocateCraftRecipe();
+
+  return session;
+}
+
+void FreeCraftingSession( CraftingSession *session )
+{
+  FreeCraftRecipe( session->Recipe );
+  DISPOSE( session );
+}
+
+void SetCraftRecipeXpAbility( CraftingSession *session, int ability )
 {
   if( ability > ABILITY_NONE && ability < MAX_ABILITY )
     {
-      craft->XpAbility = ability;
+      session->Recipe->XpAbility = ability;
     }
   else
     {
@@ -39,11 +62,11 @@ void SetCraftXpAbility( Craft *craft, int ability )
     }
 }
 
-void SetCraftSkill( Craft *craft, int sn )
+void SetCraftRecipeSkill( CraftingSession *session, int sn )
 {
   if( get_skilltype( sn ) )
     {
-      craft->Skill = sn;
+      session->Recipe->Skill = sn;
     }
   else
     {

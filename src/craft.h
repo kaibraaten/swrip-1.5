@@ -3,7 +3,10 @@
 
 #include "types.h"
 
-Craft *AllocateCraft( void );
-void FreeCraft( Craft *craft );
+CraftingSession *AllocateCraftingSession( void );
+void FreeCraftingSession( CraftingSession *session );
+void SetCraftRecipeXpAbility( CraftingSession *session, int ability );
+void SetCraftRecipeSkill( CraftingSession *session, int sn );
+void SetCraftRecipeEngineer( CraftingSession *session, Character *engineer );
 
 #endif /* include guard */
