@@ -46,13 +46,13 @@ void do_mpapplyb( Character *ch, char *argument )
                race_table[victim->race].race_name);
       log_string( log_buf );
       to_channel( log_buf, CHANNEL_MONITOR, "Monitor", LEVEL_IMMORTAL );
-      add_timer(victim, TIMER_APPLIED, 10, NULL, 0);
+      add_timer(victim, TIMER_APPLIED, 10, NULL, SUB_NONE);
       victim->pcdata->auth_state = 1;
       break;
 
     case 2:
-      send_to_char("Your name has been deemed unsuitable by the gods.  Please choose a more apropriate name with the 'name' command.\r\n", victim);
-      add_timer(victim, TIMER_APPLIED, 10, NULL, 0);
+      send_to_char("Your name has been deemed unsuitable by the gods. Please choose a more apropriate name with the 'name' command.\r\n", victim);
+      add_timer(victim, TIMER_APPLIED, 10, NULL, SUB_NONE);
       break;
 
     case 3:
