@@ -9,23 +9,18 @@ static void OnAbort( Character *ch );
 
 void temp( Character *ch, char *argument )
 {
-  struct CraftingMaterial materials[] =
+  static struct CraftingMaterial materials[] =
     {
       { ITEM_FABRIC, 1, true },
       { ITEM_THREAD, 1, false },
       { ITEM_NONE, 0, false }
     };
 
-  CraftRecipe *recipe = AllocateCraftRecipe();
-  recipe->XpAbility = ENGINEERING_ABILITY;
-  recipe->Skill = gsn_makecontainer;
-  recipe->Materials = materials;
-  recipe->Prototype = OBJ_VNUM_CRAFTING_CONTAINER;
+  CraftRecipe *recipe = AllocateCraftRecipe( gsn_makecontainer, materials,
+					     10, OBJ_VNUM_CRAFTING_CONTAINER );
+  CraftingSession *session = AllocateCraftingSession( recipe, ch );
 
-  CraftingSession *session = AllocateCraftingSession();
-  session->Recipe = recipe;
-  session->Engineer = ch;
-  
+  ch = session->Engineer;
 }
 
 void do_makecontainer( Character *ch, char *argument )

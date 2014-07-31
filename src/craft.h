@@ -21,7 +21,6 @@ struct CraftingMaterial
 
 struct CraftRecipe
 {
-  int XpAbility;
   int Skill;
   CraftingMaterial *Materials;
   int Duration;
@@ -30,7 +29,7 @@ struct CraftRecipe
 
 struct FoundMaterial
 {
-  CraftMaterial Material;
+  CraftingMaterial Material;
   OBJ_DATA *Object;
 };
 
@@ -38,11 +37,12 @@ struct CraftingSession
 {
   Character *Engineer;
   CraftRecipe *Recipe;
-  CraftingMaterials *FoundMaterials;
+  struct FoundMaterial *FoundMaterials;
 };
 
-CraftRecipe *AllocateCraftRecipe();
-CraftingSession *AllocateCraftingSession( const CraftRecipe *recipe );
+CraftRecipe *AllocateCraftRecipe( int sn, CraftingMaterial*, int duration, vnum_t protoObject);
+void FreeCraftRecipe( CraftRecipe *recipe );
+CraftingSession *AllocateCraftingSession( CraftRecipe *recipe, Character *engineer );
 void FreeCraftingSession( CraftingSession *session );
 
 #endif /* include guard */
