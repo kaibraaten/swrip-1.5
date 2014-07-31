@@ -2,6 +2,28 @@
 #include "craft.h"
 #include "constants.h"
 
+struct CraftRecipe
+{
+  int Skill;
+  CraftingMaterial *Materials;
+  int Duration;
+  vnum_t Prototype;
+};
+
+struct FoundMaterial
+{
+  CraftingMaterial Material;
+  OBJ_DATA *Object;
+};
+
+struct CraftingSession
+{
+  Character *Engineer;
+  CraftRecipe *Recipe;
+  struct FoundMaterial *FoundMaterials;
+};
+
+
 CraftRecipe *AllocateCraftRecipe( int sn, CraftingMaterial *materialList, int duration, vnum_t prototypeObject )
 {
   CraftRecipe *recipe = NULL;
@@ -14,12 +36,12 @@ CraftRecipe *AllocateCraftRecipe( int sn, CraftingMaterial *materialList, int du
 
   if( !get_skilltype( recipe->Skill ) )
     {
-      bug( "%s/%s/%d: Bad SKILLTYPE %d", __FILE__, __FUNCTION__, __LINE__, recipe->Skill );
+      bug( "%s:%d %s(): Bad SKILLTYPE %d", __FILE__, __LINE__, __FUNCTION__, recipe->Skill );
     }
 
   if( !get_obj_index( recipe->Prototype ) )
     {
-      bug( "%s/%s/%d: Bad ProtoObject %d", __FILE__, __FUNCTION__, __LINE__, recipe->Prototype );
+      bug( "%s:%d %s(): Bad ProtoObject %d", __FILE__, __LINE__, __FUNCTION__, recipe->Prototype );
     }
 
   return recipe;
@@ -60,6 +82,30 @@ CraftingSession *AllocateCraftingSession( CraftRecipe *recipe, Character *engine
       session->FoundMaterials[i].Material.Count = 0;
       session->FoundMaterials[i].Object = NULL;
     }
+
+  /* Debug stuff */
+  {
+    /*
+    ch_printf(engineer, "------------------\r\nrecipe->Materials: %d\r\n------------------\r\n", numberOfElements);
+
+    for( i = 0; i < numberOfElements; ++i )
+      {
+	ch_printf( engineer, "%d x %s (%sextract)\r\n",
+		   recipe->Materials[i].Count,
+		   object_types[recipe->Materials[i].ItemType],
+		   recipe->Materials[i].Extract ? "" : "don't " );
+      }
+
+    ch_printf(engineer, "\r\n------------------\r\nsession->FoundMaterials: %d\r\n------------------\r\n", numberOfElements);
+
+    for( i = 0; i < numberOfElements; ++i )
+      {
+	ch_printf( engineer, "%d x %s (%sextract)\r\n",
+		   session->FoundMaterials[i].Material.Count,
+		   object_types[session->FoundMaterials[i].Material.ItemType],
+		   session->FoundMaterials[i].Material.Extract ? "" : "don't " );
+		   }*/
+  }
 
   return session;
 }

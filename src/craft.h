@@ -16,28 +16,7 @@ struct CraftingMaterial
 {
   int ItemType;
   int Count;
-  bool Consumable;
-};
-
-struct CraftRecipe
-{
-  int Skill;
-  CraftingMaterial *Materials;
-  int Duration;
-  vnum_t Prototype;
-};
-
-struct FoundMaterial
-{
-  CraftingMaterial Material;
-  OBJ_DATA *Object;
-};
-
-struct CraftingSession
-{
-  Character *Engineer;
-  CraftRecipe *Recipe;
-  struct FoundMaterial *FoundMaterials;
+  bool Extract;
 };
 
 CraftRecipe *AllocateCraftRecipe( int sn, CraftingMaterial*, int duration, vnum_t protoObject);

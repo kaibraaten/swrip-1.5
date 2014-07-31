@@ -9,6 +9,7 @@ static void OnAbort( Character *ch );
 
 void temp( Character *ch, char *argument )
 {
+  /*
   static struct CraftingMaterial materials[] =
     {
       { ITEM_FABRIC, 1, true },
@@ -21,6 +22,7 @@ void temp( Character *ch, char *argument )
   CraftingSession *session = AllocateCraftingSession( recipe, ch );
 
   ch = session->Engineer;
+  */
 }
 
 void do_makecontainer( Character *ch, char *argument )
