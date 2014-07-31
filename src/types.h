@@ -171,9 +171,6 @@ typedef struct shuttle_data SHUTTLE_DATA;
 struct stop_data;
 typedef struct stop_data STOP_DATA;
 
-struct CraftingSession;
-typedef struct CraftingSession CraftingSession;
-
 /*
  * Function types.
  */

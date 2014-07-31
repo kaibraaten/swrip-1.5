@@ -3,10 +3,46 @@
 
 #include "types.h"
 
-CraftingSession *AllocateCraftingSession( void );
+struct CraftingSession;
+typedef struct CraftingSession CraftingSession;
+
+struct CraftRecipe;
+typedef struct CraftRecipe CraftRecipe;
+
+struct CraftingMaterial;
+typedef struct CraftingMaterial CraftingMaterial;
+
+struct CraftingMaterial
+{
+  int ItemType;
+  int Count;
+  bool Consumable;
+};
+
+struct CraftRecipe
+{
+  int XpAbility;
+  int Skill;
+  CraftingMaterial *Materials;
+  int Duration;
+  vnum_t Prototype;
+};
+
+struct FoundMaterial
+{
+  CraftMaterial Material;
+  OBJ_DATA *Object;
+};
+
+struct CraftingSession
+{
+  Character *Engineer;
+  CraftRecipe *Recipe;
+  CraftingMaterials *FoundMaterials;
+};
+
+CraftRecipe *AllocateCraftRecipe();
+CraftingSession *AllocateCraftingSession( const CraftRecipe *recipe );
 void FreeCraftingSession( CraftingSession *session );
-void SetCraftRecipeXpAbility( CraftingSession *session, int ability );
-void SetCraftRecipeSkill( CraftingSession *session, int sn );
-void SetCraftRecipeEngineer( CraftingSession *session, Character *engineer );
 
 #endif /* include guard */

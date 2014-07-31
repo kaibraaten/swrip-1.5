@@ -2,21 +2,12 @@
 #include "craft.h"
 #include "constants.h"
 
-typedef struct CraftRecipe CraftRecipe;
-
-struct CraftRecipe
+void SetCraftingMaterials( CraftingSession *session, CraftingMaterial materials[] )
 {
-  int XpAbility;
-  int Skill;
-};
+  session->Recipe->Materials = materials;
+}
 
-struct CraftingSession
-{
-  Character *Engineer;
-  CraftRecipe *Recipe;
-};
-
-static CraftRecipe *AllocateCraftRecipe( void )
+CraftRecipe *AllocateCraftRecipe( void )
 {
   CraftRecipe *recipe = NULL;
   CREATE( recipe, CraftRecipe, 1 );
@@ -27,7 +18,7 @@ static CraftRecipe *AllocateCraftRecipe( void )
   return recipe;
 }
 
-static void FreeCraftRecipe( CraftRecipe *recipe )
+void FreeCraftRecipe( CraftRecipe *recipe )
 {
   DISPOSE( recipe );
 }
