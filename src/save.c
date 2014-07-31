@@ -1416,7 +1416,7 @@ void fread_char( Character *ch, FILE *fp, bool preload )
           KEY( "Prompt",        ch->pcdata->prompt,     fread_string( fp ) );
           if (!str_cmp ( word, "PTimer" ) )
             {
-              add_timer( ch , TIMER_PKILLED, fread_number(fp), NULL, 0 );
+              add_timer( ch , TIMER_PKILLED, fread_number(fp), NULL, SUB_NONE );
               fMatch = TRUE;
               break;
             }

@@ -179,24 +179,7 @@ void violence_update( void )
     {
       set_cur_char( ch );
 
-      if ( ch == first_char && ch->prev )
-        {
-          bug( "ERROR: first_char->prev != NULL, fixing...", 0 );
-          ch->prev = NULL;
-        }
-
       gch_prev  = ch->prev;
-
-      if ( gch_prev && gch_prev->next != ch )
-        {
-          sprintf( buf, "FATAL: violence_update: %s->prev->next doesn't point to ch.",
-                   ch->name );
-          bug( buf, 0 );
-          bug( "Short-cutting here", 0 );
-          ch->prev = NULL;
-          gch_prev = NULL;
-          do_shout( ch, "Thoric says, 'Prepare for the worst!'" );
-        }
 
       /*
        * See if we got a pointer to someone who recently died...
@@ -208,25 +191,6 @@ void violence_update( void )
       if ( char_died(ch) )
         continue;
 
-      /*
-       * See if we got a pointer to some bad looking data...
-       */
-      if ( !ch->in_room || !ch->name )
-        {
-          log_string( "violence_update: bad ch record!  (Shortcutting.)" );
-          sprintf( buf, "ch: %d  ch->in_room: %d  ch->prev: %d  ch->next: %d",
-                   (int) ch, (int) ch->in_room, (int) ch->prev, (int) ch->next );
-          log_string( buf );
-          log_string( lastplayercmd );
-          if ( lst_ch )
-            sprintf( buf, "lst_ch: %d  lst_ch->prev: %d  lst_ch->next: %d",
-                     (int) lst_ch, (int) lst_ch->prev, (int) lst_ch->next );
-          else
-            strcpy( buf, "lst_ch: NULL" );
-          log_string( buf );
-          gch_prev = NULL;
-          continue;
-        }
 
       /*
        * Experience gained during battle deceases as battle drags on
@@ -239,6 +203,7 @@ void violence_update( void )
       for ( timer = ch->first_timer; timer; timer = timer_next )
         {
           timer_next = timer->next;
+
           if ( --timer->count <= 0 )
             {
               if ( timer->type == TIMER_DO_FUN )
@@ -247,11 +212,14 @@ void violence_update( void )
 
                   tempsub = ch->substate;
                   ch->substate = timer->value;
-                  (timer->do_fun)( ch, "" );
+                  timer->do_fun( ch, "" );
+
                   if ( char_died(ch) )
                     break;
+
                   ch->substate = tempsub;
                 }
+
               extract_timer( ch, timer );
             }
         }
@@ -379,16 +347,18 @@ void violence_update( void )
                       int number;
 
                       target = NULL;
-                      number = 0;                       for ( vch = ch->in_room->first_person; vch; vch = vch->next )
-                                                          {
-                                                            if ( can_see( rch, vch )
-                                                                 &&   is_same_group( vch, victim )
-                                                                 &&   number_range( 0, number ) == 0 )
-                                                              {
-                                                                target = vch;
-                                                                number++;
-                                                              }
-                                                          }
+                      number = 0;
+
+		      for ( vch = ch->in_room->first_person; vch; vch = vch->next )
+			{
+			  if ( can_see( rch, vch )
+			       &&   is_same_group( vch, victim )
+			       &&   number_range( 0, number ) == 0 )
+			    {
+			      target = vch;
+			      number++;
+			    }
+			}
 
                       if ( target )
                         multi_hit( rch, target, TYPE_UNDEFINED );
@@ -397,8 +367,6 @@ void violence_update( void )
             }
         }
     }
-
-  return;
 }
 
 
@@ -414,7 +382,7 @@ ch_ret multi_hit( Character *ch, Character *victim, int dt )
 
   /* add timer if player is attacking another player */
   if ( !is_npc(ch) && !is_npc(victim) )
-    add_timer( ch, TIMER_RECENTFIGHT, 20, NULL, 0 );
+    add_timer( ch, TIMER_RECENTFIGHT, 20, NULL, SUB_NONE );
 
   if ( !is_npc(ch) && IS_SET( ch->act, PLR_NICE ) && !is_npc( victim ) )
     return rNONE;
@@ -1618,7 +1586,7 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
           ch_printf( victim, "You lose %ld experience.\r\n", xp_actually_lost );
         }
 
-      add_timer( victim, TIMER_RECENTFIGHT, 100, NULL, 0 );
+      add_timer( victim, TIMER_RECENTFIGHT, 100, NULL, SUB_NONE );
     }
 
   /*
