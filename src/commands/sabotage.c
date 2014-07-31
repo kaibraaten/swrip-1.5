@@ -38,9 +38,9 @@ void do_sabotage(Character *ch, char *argument )
           act( AT_PLAIN, "$n begins working on the ship's $T.", ch,
                NULL, argument , TO_ROOM );
           if ( !str_cmp(arg,"hull") )
-            add_timer ( ch , TIMER_DO_FUN , 15 , do_sabotage , 1 );
+            add_timer ( ch , TIMER_DO_FUN , 15 , do_sabotage , SUB_PAUSE );
           else
-            add_timer ( ch , TIMER_DO_FUN , 15 , do_sabotage , 1 );
+            add_timer ( ch , TIMER_DO_FUN , 15 , do_sabotage , SUB_PAUSE );
           ch->dest_buf = str_dup(arg);
 	  return;
         }

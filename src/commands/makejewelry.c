@@ -115,7 +115,7 @@ static void OnStart( Character *ch, char *argument )
           send_to_char( "&GYou begin the long process of creating some jewelry.\r\n", ch);
           act( AT_PLAIN, "$n takes $s toolkit and some metal and begins to work.", ch,
                NULL, NULL , TO_ROOM );
-          add_timer ( ch , TIMER_DO_FUN , 15 , do_makejewelry , 1 );
+          add_timer ( ch , TIMER_DO_FUN , 15 , do_makejewelry , SUB_PAUSE );
           ch->dest_buf = str_dup(arg);
           ch->dest_buf_2 = str_dup(arg2);
         }

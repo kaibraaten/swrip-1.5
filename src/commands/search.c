@@ -47,8 +47,7 @@ void do_search( Character *ch, char *argument )
               return;
             }
         }
-      add_timer( ch, TIMER_DO_FUN, UMIN(skill_table[gsn_search]->beats / 10, 3),
-                 do_search, 1 );
+      add_timer( ch, TIMER_DO_FUN, UMIN(skill_table[gsn_search]->beats / 10, 3), do_search, SUB_PAUSE );
       send_to_char( "You begin your search...\r\n", ch );
       ch->dest_buf = str_dup( arg );
       return;

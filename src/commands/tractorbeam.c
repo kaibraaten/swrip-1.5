@@ -139,7 +139,7 @@ void do_tractorbeam(Character *ch, char *argument )
           send_to_char( "&GTracking target.\r\n", ch);
           act( AT_PLAIN, "$n makes some adjustments on the targeting computer.", ch,
                NULL, argument , TO_ROOM );
-          add_timer ( ch , TIMER_DO_FUN , 1 , do_tractorbeam , 1 );
+          add_timer ( ch , TIMER_DO_FUN , 1 , do_tractorbeam , SUB_PAUSE );
           ch->dest_buf = str_dup(arg);
           return;
         }

@@ -103,7 +103,7 @@ static void OnStart( Character *ch, char *argument )
       send_to_char( "&GYou begin the long process of making a light.\r\n", ch);
       act( AT_PLAIN, "$n takes $s tools and begins to work on something.", ch,
 	   NULL, argument , TO_ROOM );
-      add_timer ( ch , TIMER_DO_FUN , 10 , do_makeglowrod , 1 );
+      add_timer ( ch , TIMER_DO_FUN , 10 , do_makeglowrod , SUB_PAUSE );
       ch->dest_buf   = str_dup(arg);
       return;
     }

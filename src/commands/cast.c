@@ -154,11 +154,12 @@ void do_cast( Character *ch, char *argument )
           send_to_char( "The force is not strong enough within you.\r\n", ch );
           return;
         }
+
       if ( skill->participants <= 1 )
         break;
+
       /* multi-participant spells                       -Thoric */
-      add_timer( ch, TIMER_DO_FUN, UMIN(skill->beats / 10, 3),
-                 do_cast, 1 );
+      add_timer( ch, TIMER_DO_FUN, UMIN(skill->beats / 10, 3), do_cast, SUB_PAUSE );
       act( AT_MAGIC, "You begin to feel the force in yourself and those around you...",
 	   ch, NULL, NULL, TO_CHAR );
       act( AT_MAGIC, "$n reaches out with the force to those around...", ch, NULL, NULL, TO_ROOM );

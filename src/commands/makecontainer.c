@@ -134,7 +134,7 @@ static void OnStart( Character *ch, char *argument )
       send_to_char( "&GYou begin the long process of creating a bag.\r\n", ch);
       act( AT_PLAIN, "$n takes $s sewing kit and some material and begins to work.", ch,
 	   NULL, argument , TO_ROOM );
-      add_timer ( ch , TIMER_DO_FUN , 10 , do_makecontainer , 1 );
+      add_timer ( ch , TIMER_DO_FUN , 10 , do_makecontainer , SUB_PAUSE );
       ch->dest_buf = str_dup(arg);
       ch->dest_buf_2 = str_dup(arg2);
       return;

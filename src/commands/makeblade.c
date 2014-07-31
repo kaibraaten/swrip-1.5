@@ -97,7 +97,7 @@ static void OnStart( Character *ch, char *argument )
       send_to_char( "&GYou begin the long process of crafting a vibroblade.\r\n", ch);
       act( AT_PLAIN, "$n takes $s tools and a small oven and begins to work on something.", ch,
 	   NULL, argument , TO_ROOM );
-      add_timer ( ch , TIMER_DO_FUN , 25 , do_makeblade , 1 );
+      add_timer ( ch , TIMER_DO_FUN , 25 , do_makeblade , SUB_PAUSE );
       ch->dest_buf = str_dup(arg);
       return;
     }

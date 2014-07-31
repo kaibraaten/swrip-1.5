@@ -39,7 +39,7 @@ void do_postguard( Character *ch, char *argument )
 	  send_to_char( "&GYou begin making the call for reinforcements.\r\n", ch);
           act( AT_PLAIN, "$n begins issuing orders int $s comlink.", ch,
                NULL, argument , TO_ROOM );
-          add_timer ( ch , TIMER_DO_FUN , 1 , do_postguard , 1 );
+          add_timer ( ch , TIMER_DO_FUN , 1 , do_postguard , SUB_PAUSE );
           ch->dest_buf = str_dup(arg);
           return;
         }

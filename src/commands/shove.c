@@ -289,6 +289,6 @@ void do_shove( Character *ch, char *argument )
   if ( IS_SET(ch->in_room->room_flags, ROOM_SAFE)
        && get_timer(ch, TIMER_SHOVEDRAG) <= 0 )
     {
-      add_timer( ch, TIMER_SHOVEDRAG, 10, NULL, 0 );
+      add_timer( ch, TIMER_SHOVEDRAG, 10, NULL, SUB_PAUSE );
     }
 }

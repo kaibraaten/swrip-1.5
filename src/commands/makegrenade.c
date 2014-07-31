@@ -103,7 +103,7 @@ static void OnStart( Character *ch, char *argument )
       send_to_char( "&GYou begin the long process of making a grenade.\r\n", ch);
       act( AT_PLAIN, "$n takes $s tools and a drink container and begins to work on something.", ch,
 	   NULL, NULL , TO_ROOM );
-      add_timer ( ch , TIMER_DO_FUN , 25 , do_makegrenade , 1 );
+      add_timer ( ch , TIMER_DO_FUN , 25 , do_makegrenade , SUB_PAUSE );
       ch->dest_buf   = str_dup(arg);
       return;
     }

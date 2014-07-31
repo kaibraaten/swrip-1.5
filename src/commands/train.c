@@ -115,7 +115,7 @@ void do_train( Character *ch, char *argument )
             }
           send_to_char("&GYou begin lessons in maners and ettiquite.\r\n", ch);
         }
-      add_timer ( ch , TIMER_DO_FUN , 10 , do_train , 1 );
+      add_timer ( ch , TIMER_DO_FUN , 10 , do_train , SUB_PAUSE );
       ch->dest_buf = str_dup(arg);
       return;
 
