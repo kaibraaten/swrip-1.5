@@ -30,10 +30,13 @@ struct CraftingMaterial
 CraftRecipe *AllocateCraftRecipe( int sn, CraftingMaterial*, int duration, vnum_t protoObject);
 void FreeCraftRecipe( CraftRecipe* );
 CraftingSession *AllocateCraftingSession( CraftRecipe*, Character *engineer, char *commandArgument,
-					  bool (*InterpretArguments)( CraftingSession*, char *argument ) );
+					  bool (*InterpretArguments)( CraftingSession*, char* ),
+					  void (*SetObjectStats)( CraftingSession*, OBJ_DATA* ) );
 void FreeCraftingSession( CraftingSession* );
 Character *GetEngineer( CraftingSession* );
 void AddCraftingArgument( CraftingSession*, char *argument );
+const char *GetCraftingArgument( const CraftingSession*, size_t argumentNumber );
+
 void StartCrafting( CraftingSession* );
 
 #endif /* include guard */

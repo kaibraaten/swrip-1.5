@@ -4,6 +4,42 @@
 #include "mud.h"
 #include "craft.h"
 
+enum { ItemType, ItemName };
+
+static void SetObjectStats( CraftingSession *session, OBJ_DATA *obj )
+{
+  const char *itemType = GetCraftingArgument( session, ItemType );
+  const char *itemName = GetCraftingArgument( session, ItemName );
+  char description[MAX_STRING_LENGTH];
+
+  int value = 0;
+
+  obj->item_type = ITEM_CONTAINER;
+  SET_BIT( obj->wear_flags, ITEM_TAKE );
+  value = get_wearflag( itemType );
+
+  if ( value < 0 || value > 31 )
+    SET_BIT( obj->wear_flags, ITEM_HOLD );
+  else
+    SET_BIT( obj->wear_flags, 1 << value );
+
+  STRFREE( obj->name );
+  obj->name = STRALLOC( itemName );
+
+  STRFREE( obj->short_descr );
+  obj->short_descr = STRALLOC( itemName );
+
+  STRFREE( obj->description );
+  sprintf( description, "%s was dropped here.", itemName );
+  obj->description = STRALLOC( description );
+
+  obj->value[0] = obj->level;
+  obj->value[1] = 0;
+  obj->value[2] = 0;
+  obj->value[3] = 10;
+  obj->cost *= 2;
+}
+
 static bool InterpretArguments( CraftingSession *session, char *argument )
 {
   char arg[MAX_STRING_LENGTH];
@@ -72,7 +108,8 @@ void do_test( Character *ch, char *argument )
   CraftRecipe *recipe = AllocateCraftRecipe( gsn_makecontainer, materials,
 					     10, OBJ_VNUM_CRAFTING_CONTAINER );
   CraftingSession *session = AllocateCraftingSession( recipe, ch, argument,
-						      InterpretArguments );
+						      InterpretArguments,
+						      SetObjectStats );
 
   StartCrafting( session );
 }
