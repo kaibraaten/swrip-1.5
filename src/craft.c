@@ -52,60 +52,48 @@ void FreeCraftRecipe( CraftRecipe *recipe )
   DISPOSE( recipe );
 }
 
+static size_t CountCraftingMaterials( const CraftingMaterial *material )
+{
+  size_t numberOfElements = 0;
+
+  while( material->ItemType != ITEM_NONE )
+    {
+      ++numberOfElements;
+      ++material;
+    }
+
+  ++numberOfElements; /* include ITEM_NONE */
+
+  return numberOfElements;
+}
+
+static struct FoundMaterial *AllocateFoundMaterials( const CraftingMaterial *recipeMaterials )
+{
+  size_t numberOfElements = CountCraftingMaterials( recipeMaterials );
+  size_t i = 0;
+  struct FoundMaterial *foundMaterials = NULL;
+
+  CREATE( foundMaterials, struct FoundMaterial, numberOfElements );
+
+  for( i = 0; i < numberOfElements; ++i )
+    {
+      foundMaterials[i].Material = recipeMaterials[i];
+      foundMaterials[i].Material.Count = 0;
+      foundMaterials[i].Object = NULL;
+    }
+
+  return foundMaterials;
+}
+
 CraftingSession *AllocateCraftingSession( CraftRecipe *recipe, Character *engineer )
 {
   CraftingSession *session = NULL;
-  size_t numberOfElements = 0;
-  size_t i = 0;
-  CraftingMaterial *currentMaterial = NULL;
   
   CREATE( session, CraftingSession, 1 );
 
   session->Engineer = engineer;
   session->Recipe = recipe;
-
-  currentMaterial = recipe->Materials;
-
-  while( currentMaterial->ItemType != ITEM_NONE )
-    {
-      ++numberOfElements;
-      ++currentMaterial;
-    }
-
-  ++numberOfElements; /* include ITEM_NONE */
-
-  CREATE( session->FoundMaterials, struct FoundMaterial, numberOfElements );
-
-  for( i = 0; i < numberOfElements; ++i )
-    {
-      session->FoundMaterials[i].Material = recipe->Materials[i];
-      session->FoundMaterials[i].Material.Count = 0;
-      session->FoundMaterials[i].Object = NULL;
-    }
-
-  /* Debug stuff */
-  {
-    /*
-    ch_printf(engineer, "------------------\r\nrecipe->Materials: %d\r\n------------------\r\n", numberOfElements);
-
-    for( i = 0; i < numberOfElements; ++i )
-      {
-	ch_printf( engineer, "%d x %s (%sextract)\r\n",
-		   recipe->Materials[i].Count,
-		   object_types[recipe->Materials[i].ItemType],
-		   recipe->Materials[i].Extract ? "" : "don't " );
-      }
-
-    ch_printf(engineer, "\r\n------------------\r\nsession->FoundMaterials: %d\r\n------------------\r\n", numberOfElements);
-
-    for( i = 0; i < numberOfElements; ++i )
-      {
-	ch_printf( engineer, "%d x %s (%sextract)\r\n",
-		   session->FoundMaterials[i].Material.Count,
-		   object_types[session->FoundMaterials[i].Material.ItemType],
-		   session->FoundMaterials[i].Material.Extract ? "" : "don't " );
-		   }*/
-  }
+  session->FoundMaterials = AllocateFoundMaterials( recipe->Materials );
 
   return session;
 }
