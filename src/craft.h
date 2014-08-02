@@ -28,8 +28,12 @@ struct CraftingMaterial
 };
 
 CraftRecipe *AllocateCraftRecipe( int sn, CraftingMaterial*, int duration, vnum_t protoObject);
-void FreeCraftRecipe( CraftRecipe *recipe );
-CraftingSession *AllocateCraftingSession( CraftRecipe *recipe, Character *engineer );
-void FreeCraftingSession( CraftingSession *session );
+void FreeCraftRecipe( CraftRecipe* );
+CraftingSession *AllocateCraftingSession( CraftRecipe*, Character *engineer, char *commandArgument,
+					  bool (*InterpretArguments)( CraftingSession*, char *argument ) );
+void FreeCraftingSession( CraftingSession* );
+Character *GetEngineer( CraftingSession* );
+void AddCraftingArgument( CraftingSession*, char *argument );
+void StartCrafting( CraftingSession* );
 
 #endif /* include guard */
