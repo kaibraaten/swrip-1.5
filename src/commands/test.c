@@ -8,9 +8,9 @@ void do_test( Character *ch, char *argument )
 {
   static struct CraftingMaterial materials[] =
     {
-      { ITEM_FABRIC, 1, true },
-      { ITEM_THREAD, 1, false },
-      { ITEM_NONE, 0, false }
+      { ITEM_FABRIC, 1, CRAFTFLAG_EXTRACT },
+      { ITEM_THREAD, 1, CRAFTFLAG_NONE },
+      { ITEM_NONE, 0, CRAFTFLAG_NONE }
     };
 
   CraftRecipe *recipe = AllocateCraftRecipe( gsn_makecontainer, materials,

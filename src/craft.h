@@ -2,6 +2,11 @@
 #define _SWRIP_CRAFT_H_
 
 #include "types.h"
+#include "constants.h"
+
+#define CRAFTFLAG_NONE     0
+#define CRAFTFLAG_EXTRACT  BV00
+#define CRAFTFLAG_OPTIONAL BV01
 
 struct CraftingSession;
 typedef struct CraftingSession CraftingSession;
@@ -16,7 +21,7 @@ struct CraftingMaterial
 {
   int ItemType;
   int Count;
-  bool Extract;
+  long Flags;
 };
 
 CraftRecipe *AllocateCraftRecipe( int sn, CraftingMaterial*, int duration, vnum_t protoObject);
