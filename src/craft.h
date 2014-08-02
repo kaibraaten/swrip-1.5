@@ -8,8 +8,11 @@
 #define CRAFTFLAG_EXTRACT  BV00
 #define CRAFTFLAG_OPTIONAL BV01
 
+/*
+ * Moved to types.h for now.
 struct CraftingSession;
 typedef struct CraftingSession CraftingSession;
+*/
 
 struct CraftRecipe;
 typedef struct CraftRecipe CraftRecipe;

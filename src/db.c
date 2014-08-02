@@ -32,6 +32,7 @@
 #include "character.h"
 #include "editor.h"
 #include "help.h"
+#include "craft.h"
 
 void init_supermob(void);
 
@@ -2522,6 +2523,11 @@ void free_char( Character *ch )
     {
       if ( ch->pcdata->pnote )
         free_note( ch->pcdata->pnote );
+
+      if( ch->pcdata->CraftingSession )
+	{
+	  FreeCraftingSession( ch->pcdata->CraftingSession );
+	}
 
       STRFREE( ch->pcdata->clan_name    );
       DISPOSE( ch->pcdata->pwd  );  /* no hash */
