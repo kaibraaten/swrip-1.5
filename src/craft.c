@@ -32,6 +32,9 @@ struct CraftingSession
 static void FinishedStage( CraftingSession *session );
 static void OnAbort( CraftingSession *session );
 static bool FindMaterials( CraftingSession *session, bool extract );
+static size_t CountCraftingMaterials( const CraftingMaterial *material );
+static struct FoundMaterial *AllocateFoundMaterials( const CraftingMaterial *recipeMaterials );
+static bool CheckSkill( const CraftingSession *session );
 
 void do_craftingengine( Character *ch, char *argument )
 {
