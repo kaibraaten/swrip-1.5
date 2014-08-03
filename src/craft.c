@@ -6,7 +6,7 @@
 struct CraftRecipe
 {
   int Skill;
-  CraftingMaterial *Materials;
+  const CraftingMaterial *Materials;
   int Duration;
   vnum_t Prototype;
 };
@@ -26,7 +26,7 @@ struct CraftingSession
   size_t NumberOfArguments;
   char *OriginalArgument;
   bool (*InterpretArguments)( CraftingSession*, char* );
-  void (*SetObjectStats)( CraftingSession*, OBJ_DATA* );
+  void (*SetObjectStats)( const CraftingSession*, OBJ_DATA* );
 };
 
 static void FinishedStage( CraftingSession *session );
@@ -132,7 +132,7 @@ Character *GetEngineer( const CraftingSession *session )
   return session->Engineer;
 }
 
-CraftRecipe *AllocateCraftRecipe( int sn, CraftingMaterial *materialList, int duration, vnum_t prototypeObject )
+CraftRecipe *AllocateCraftRecipe( int sn, const CraftingMaterial *materialList, int duration, vnum_t prototypeObject )
 {
   CraftRecipe *recipe = NULL;
   CREATE( recipe, CraftRecipe, 1 );
@@ -196,7 +196,7 @@ static struct FoundMaterial *AllocateFoundMaterials( const CraftingMaterial *rec
 CraftingSession *AllocateCraftingSession( CraftRecipe *recipe, Character *engineer,
 					  char *commandArgument,
 					  bool (*InterpretArguments)( CraftingSession*, char* ),
-					  void (*SetObjectStats)( CraftingSession*, OBJ_DATA* ) )
+					  void (*SetObjectStats)( const CraftingSession*, OBJ_DATA* ) )
 {
   CraftingSession *session = NULL;
   

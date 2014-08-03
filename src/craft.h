@@ -27,11 +27,11 @@ struct CraftingMaterial
   long Flags;
 };
 
-CraftRecipe *AllocateCraftRecipe( int sn, CraftingMaterial*, int duration, vnum_t protoObject);
+CraftRecipe *AllocateCraftRecipe( int sn, const CraftingMaterial*, int duration, vnum_t protoObject);
 void FreeCraftRecipe( CraftRecipe* );
 CraftingSession *AllocateCraftingSession( CraftRecipe*, Character *engineer, char *commandArgument,
 					  bool (*InterpretArguments)( CraftingSession*, char* ),
-					  void (*SetObjectStats)( CraftingSession*, OBJ_DATA* ) );
+					  void (*SetObjectStats)( const CraftingSession*, OBJ_DATA* ) );
 void FreeCraftingSession( CraftingSession* );
 Character *GetEngineer( const CraftingSession* );
 void AddCraftingArgument( CraftingSession*, char *argument );

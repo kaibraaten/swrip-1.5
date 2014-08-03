@@ -6,7 +6,7 @@
 
 enum { ItemType, ItemName };
 
-static void SetObjectStats( CraftingSession *session, OBJ_DATA *obj )
+static void SetObjectStats( const CraftingSession *session, OBJ_DATA *obj )
 {
   const char *itemType = GetCraftingArgument( session, ItemType );
   const char *itemName = GetCraftingArgument( session, ItemName );
@@ -98,7 +98,7 @@ static bool InterpretArguments( CraftingSession *session, char *argument )
 
 void do_test( Character *ch, char *argument )
 {
-  static struct CraftingMaterial materials[] =
+  static const struct CraftingMaterial materials[] =
     {
       { ITEM_FABRIC, 1, CRAFTFLAG_EXTRACT },
       { ITEM_THREAD, 1, CRAFTFLAG_NONE },
