@@ -3,6 +3,7 @@
 
 #include "mud.h"
 #include "craft.h"
+#include "character.h"
 
 enum { WearLocation, ItemName };
 
@@ -122,6 +123,25 @@ static void InterpretArgumentsHandler( void *userData, void *args )
   AddCraftingArgument( session, arg2 );
 }
 
+static void AbortHandler( void *userData, void *args )
+{
+  struct UserData *data = (struct UserData*) userData;
+  DISPOSE( data );
+}
+
+static void CheckRequirementsHandler( void *userData, void *args )
+{
+  CheckRequirementsEventArgs *eventArgs = (CheckRequirementsEventArgs*) args;
+  Character *ch = GetEngineer( eventArgs->CraftingSession );
+
+  if ( !IS_SET( ch->in_room->room_flags, ROOM_FACTORY ) )
+    {
+      ch_printf( ch, "&RYou need to be in a factory or workshop to do that.&w\r\n" );
+      eventArgs->AbortSession = true;
+      return;
+    }
+}
+
 void do_test( Character *ch, char *argument )
 {
   struct UserData *data;
@@ -139,9 +159,11 @@ void do_test( Character *ch, char *argument )
   CREATE( data, struct UserData, 1 );
 
   AddEventHandler( session->OnInterpretArguments, data, InterpretArgumentsHandler );
+  AddEventHandler( session->OnCheckRequirements, data, CheckRequirementsHandler );
   AddEventHandler( session->OnMaterialFound, data, MaterialFoundHandler );
   AddEventHandler( session->OnSetObjectStats, data, SetObjectStatsHandler );
   AddEventHandler( session->OnFinishedCrafting, data, FinishedCraftingHandler );
+  AddEventHandler( session->OnAbort, data, AbortHandler );
 
   StartCrafting( session );
 }

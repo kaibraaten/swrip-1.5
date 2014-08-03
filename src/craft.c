@@ -353,6 +353,10 @@ void StartCrafting( CraftingSession *session )
       || !FindMaterials( session, false )
       || !CheckSkill( session ) )
     {
+      AbortEventArgs abortEventArgs;
+      abortEventArgs.CraftingSession = session;
+
+      RaiseEvent( session->OnAbort, &abortEventArgs );
       FreeCraftingSession( session );
       return;
     }
