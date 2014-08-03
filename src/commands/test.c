@@ -4,7 +4,7 @@
 #include "mud.h"
 #include "craft.h"
 
-enum { ItemType, ItemName };
+enum { WearLocation, ItemName };
 
 struct UserData
 {
@@ -27,14 +27,14 @@ static void SetObjectStatsHandler( void *userData, void *args )
   /*struct UserData *data = (struct UserData*) userData;*/
   SetObjectStatsEventArgs *eventArgs = (SetObjectStatsEventArgs*) args;
   OBJ_DATA *obj = eventArgs->Object;
-  const char *itemType = GetCraftingArgument( eventArgs->CraftingSession, ItemType );
+  const char *wearLocation = GetCraftingArgument( eventArgs->CraftingSession, WearLocation );
   const char *itemName = GetCraftingArgument( eventArgs->CraftingSession, ItemName );
   char description[MAX_STRING_LENGTH];
   int value = 0;
 
   obj->item_type = ITEM_CONTAINER;
   SET_BIT( obj->wear_flags, ITEM_TAKE );
-  value = get_wearflag( itemType );
+  value = get_wearflag( wearLocation );
 
   if ( value < 0 || value > 31 )
     SET_BIT( obj->wear_flags, ITEM_HOLD );

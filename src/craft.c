@@ -146,9 +146,14 @@ static void FinishedCraftingHandler( void *userData, void *args )
 static void OnAbort( CraftingSession *session )
 {
   Character *ch = session->_pImpl->Engineer;
+  AbortEventArgs abortEventArgs;
+
   ch->substate = SUB_NONE;
+  abortEventArgs.CraftingSession = session;
 
   ch_printf( ch, "&RYou are interrupted and fail to finish your work.&w\r\n");
+
+  RaiseEvent( session->OnAbort, &abortEventArgs );
 
   /*************************************************/
   FreeCraftingSession( session );
@@ -228,9 +233,11 @@ CraftingSession *AllocateCraftingSession( CraftRecipe *recipe, Character *engine
 
   CREATE( session, CraftingSession, 1 );
   session->OnInterpretArguments = CreateEvent();
+  session->OnCheckRequirements = CreateEvent();
   session->OnMaterialFound = CreateEvent();
   session->OnSetObjectStats = CreateEvent();
   session->OnFinishedCrafting = CreateEvent();
+  session->OnAbort = CreateEvent();
 
   CREATE( finishedCraftingUserData, struct FinishedCraftingUserData, 1 );
   finishedCraftingUserData->Recipe = recipe;
@@ -251,9 +258,11 @@ CraftingSession *AllocateCraftingSession( CraftRecipe *recipe, Character *engine
 void FreeCraftingSession( CraftingSession *session )
 {
   DestroyEvent( session->OnInterpretArguments );
+  DestroyEvent( session->OnCheckRequirements );
   DestroyEvent( session->OnMaterialFound );
   DestroyEvent( session->OnSetObjectStats );
   DestroyEvent( session->OnFinishedCrafting );
+  DestroyEvent( session->OnAbort );
 
   if( session->_pImpl->NumberOfArguments > 0 )
     {
@@ -280,7 +289,7 @@ void FreeCraftingSession( CraftingSession *session )
   DISPOSE( session );
 }
 
-void AddCraftingArgument( CraftingSession *session, char *argument )
+void AddCraftingArgument( CraftingSession *session, const char *argument )
 {
   ++session->_pImpl->NumberOfArguments;
   RECREATE( session->_pImpl->Arguments, char*, session->_pImpl->NumberOfArguments );
@@ -321,14 +330,25 @@ void StartCrafting( CraftingSession *session )
 {
   Character *ch = session->_pImpl->Engineer;
   OBJ_INDEX_DATA *obj = NULL;
-  InterpretArgumentsEventArgs eventArgs;
-  eventArgs.CraftingSession = session;
-  eventArgs.CommandArguments = session->_pImpl->OriginalArgument;
-  eventArgs.AbortSession = false;
+  InterpretArgumentsEventArgs interpretArgumentsEventArgs;
+  CheckRequirementsEventArgs checkRequirementsEventArgs;
 
-  RaiseEvent( session->OnInterpretArguments, &eventArgs );
+  interpretArgumentsEventArgs.CraftingSession = session;
+  interpretArgumentsEventArgs.CommandArguments = session->_pImpl->OriginalArgument;
+  interpretArgumentsEventArgs.AbortSession = false;
 
-  if( eventArgs.AbortSession
+  checkRequirementsEventArgs.CraftingSession = session;
+  checkRequirementsEventArgs.AbortSession = false;
+
+  RaiseEvent( session->OnInterpretArguments, &interpretArgumentsEventArgs );
+
+  if( !interpretArgumentsEventArgs.AbortSession )
+    {
+      RaiseEvent( session->OnCheckRequirements, &checkRequirementsEventArgs );
+    }
+
+  if( interpretArgumentsEventArgs.AbortSession
+      || checkRequirementsEventArgs.AbortSession
       || !FindMaterials( session, false )
       || !CheckSkill( session ) )
     {

@@ -33,12 +33,18 @@ typedef struct MaterialFoundEventArgs MaterialFoundEventArgs;
 struct FinishedCraftingEventArgs;
 typedef struct FinishedCraftingEventArgs FinishedCraftingEventArgs;
 
+struct CheckRequirementsEventArgs;
+typedef struct CheckRequirementsEventArgs CheckRequirementsEventArgs;
+
+struct AbortEventArgs;
+typedef struct AbortEventArgs AbortEventArgs;
+
 struct CraftingSessionImpl;
 
 struct InterpretArgumentsEventArgs
 {
   CraftingSession *CraftingSession;
-  char *CommandArguments;
+  const char *CommandArguments;
   bool AbortSession;
 };
 
@@ -61,12 +67,25 @@ struct FinishedCraftingEventArgs
   OBJ_DATA *Object;
 };
 
+struct CheckRequirementsEventArgs
+{
+  CraftingSession *CraftingSession;
+  bool AbortSession;
+};
+
+struct AbortEventArgs
+{
+  CraftingSession *CraftingSession;
+};
+
 struct CraftingSession
 {
   event_t *OnInterpretArguments;
+  event_t *OnCheckRequirements;
   event_t *OnMaterialFound;
   event_t *OnSetObjectStats;
   event_t *OnFinishedCrafting;
+  event_t *OnAbort;
 
   struct CraftingSessionImpl *_pImpl;
 };
@@ -85,7 +104,7 @@ CraftingSession *AllocateCraftingSession( CraftRecipe*, Character *engineer,
 					  char *commandArgument );
 void FreeCraftingSession( CraftingSession* );
 Character *GetEngineer( const CraftingSession* );
-void AddCraftingArgument( CraftingSession*, char *argument );
+void AddCraftingArgument( CraftingSession*, const char *argument );
 const char *GetCraftingArgument( const CraftingSession*, size_t argumentNumber );
 
 void StartCrafting( CraftingSession* );
