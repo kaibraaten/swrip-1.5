@@ -55,7 +55,6 @@ static void SetObjectStatsHandler( void *userData, void *args )
   obj->value[1] = 0;
   obj->value[2] = 0;
   obj->value[3] = 10;
-  obj->cost *= 2;
 }
 
 static void InterpretArgumentsHandler( void *userData, void *args )
