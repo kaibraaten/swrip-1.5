@@ -6,12 +6,30 @@
 
 enum { ItemType, ItemName };
 
-static void SetObjectStats( const CraftingSession *session, OBJ_DATA *obj )
+struct UserData
 {
-  const char *itemType = GetCraftingArgument( session, ItemType );
-  const char *itemName = GetCraftingArgument( session, ItemName );
-  char description[MAX_STRING_LENGTH];
+  int Dummy;
+};
 
+static void MaterialFoundHandler( void *userData, void *args )
+{
+
+}
+
+static void FinishedCraftingHandler( void *userData, void *args )
+{
+  struct UserData *data = (struct UserData*) userData;
+  DISPOSE( data );
+}
+
+static void SetObjectStatsHandler( void *userData, void *args )
+{
+  /*struct UserData *data = (struct UserData*) userData;*/
+  SetObjectStatsEventArgs *eventArgs = (SetObjectStatsEventArgs*) args;
+  OBJ_DATA *obj = eventArgs->Object;
+  const char *itemType = GetCraftingArgument( eventArgs->CraftingSession, ItemType );
+  const char *itemName = GetCraftingArgument( eventArgs->CraftingSession, ItemName );
+  char description[MAX_STRING_LENGTH];
   int value = 0;
 
   obj->item_type = ITEM_CONTAINER;
@@ -40,19 +58,26 @@ static void SetObjectStats( const CraftingSession *session, OBJ_DATA *obj )
   obj->cost *= 2;
 }
 
-static bool InterpretArguments( CraftingSession *session, char *argument )
+static void InterpretArgumentsHandler( void *userData, void *args )
 {
+  /*struct UserData *data = (struct UserData*) userData;*/
+  InterpretArgumentsEventArgs *eventArgs = (InterpretArgumentsEventArgs*) args;
+  CraftingSession *session = eventArgs->CraftingSession;
+  char originalArgs[MAX_INPUT_LENGTH];
+  char *argument = originalArgs;
   char arg[MAX_STRING_LENGTH];
   char arg2[MAX_STRING_LENGTH];
   Character *ch = GetEngineer( session );
 
+  strcpy( argument, eventArgs->CommandArguments );
   argument = one_argument( argument, arg );
-  strcpy( arg2 , argument );
+  strcpy( arg2, argument );
 
   if ( arg2[0] == '\0' )
     {
       send_to_char( "&RUsage: Makecontainer <wearloc> <name>\r\n&w", ch);
-      return false;
+      eventArgs->AbortSession = true;
+      return;
     }
 
   if ( !str_cmp( arg, "eyes" )
@@ -65,7 +90,8 @@ static bool InterpretArguments( CraftingSession *session, char *argument )
     {
       send_to_char( "&RYou cannot make a container for that body part.\r\n&w", ch);
       send_to_char( "&RTry MAKEJEWELRY.\r\n&w", ch);
-      return false;
+      eventArgs->AbortSession = true;
+      return;
     }
 
   if ( !str_cmp( arg, "feet" )
@@ -73,31 +99,33 @@ static bool InterpretArguments( CraftingSession *session, char *argument )
     {
       send_to_char( "&RYou cannot make a container for that body part.\r\n&w", ch);
       send_to_char( "&RTry MAKEARMOR.\r\n&w", ch);
-      return false;
+      eventArgs->AbortSession = true;
+      return;
     }
 
   if ( !str_cmp( arg, "shield" ) )
     {
       send_to_char( "&RYou cannot make a container a shield.\r\n&w", ch);
       send_to_char( "&RTry MAKESHIELD.\r\n&w", ch);
-      return false;
+      eventArgs->AbortSession = true;
+      return;
     }
 
   if ( !str_cmp( arg, "wield" ) )
     {
       send_to_char( "&RAre you going to fight with a container?\r\n&w", ch);
       send_to_char( "&RTry MAKEBLADE...\r\n&w", ch);
-      return false;
+      eventArgs->AbortSession = true;
+      return;
     }
 
   AddCraftingArgument( session, arg );
   AddCraftingArgument( session, arg2 );
-
-  return true;
 }
 
 void do_test( Character *ch, char *argument )
 {
+  struct UserData *data;
   static const struct CraftingMaterial materials[] =
     {
       { ITEM_FABRIC, 1, CRAFTFLAG_EXTRACT },
@@ -107,9 +135,14 @@ void do_test( Character *ch, char *argument )
 
   CraftRecipe *recipe = AllocateCraftRecipe( gsn_makecontainer, materials,
 					     10, OBJ_VNUM_CRAFTING_CONTAINER );
-  CraftingSession *session = AllocateCraftingSession( recipe, ch, argument,
-						      InterpretArguments,
-						      SetObjectStats );
+  CraftingSession *session = AllocateCraftingSession( recipe, ch, argument );
+
+  CREATE( data, struct UserData, 1 );
+
+  AddEventHandler( session->OnInterpretArguments, data, InterpretArgumentsHandler );
+  AddEventHandler( session->OnMaterialFound, data, MaterialFoundHandler );
+  AddEventHandler( session->OnSetObjectStats, data, SetObjectStatsHandler );
+  AddEventHandler( session->OnFinishedCrafting, data, FinishedCraftingHandler );
 
   StartCrafting( session );
 }

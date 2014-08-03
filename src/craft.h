@@ -1,6 +1,7 @@
 #ifndef _SWRIP_CRAFT_H_
 #define _SWRIP_CRAFT_H_
 
+#include <event.h>
 #include "types.h"
 #include "constants.h"
 
@@ -20,6 +21,47 @@ typedef struct CraftRecipe CraftRecipe;
 struct CraftingMaterial;
 typedef struct CraftingMaterial CraftingMaterial;
 
+struct SetObjectStatsEventArgs;
+typedef struct SetObjectStatsEventArgs SetObjectStatsEventArgs;
+
+struct InterpretArgumentsEventArgs;
+typedef struct InterpretArgumentsEventArgs InterpretArgumentsEventArgs;
+
+struct MaterialFoundEventArgs;
+typedef struct MaterialFoundEventArgs MaterialFoundEventArgs;
+
+struct CraftingSessionImpl;
+
+struct InterpretArgumentsEventArgs
+{
+  CraftingSession *CraftingSession;
+  char *CommandArguments;
+  bool AbortSession;
+};
+
+struct MaterialFoundEventArgs
+{
+  CraftingSession *CraftingSession;
+  OBJ_DATA *Object;
+  bool Extract;
+};
+
+struct SetObjectStatsEventArgs
+{
+  CraftingSession *CraftingSession;
+  OBJ_DATA *Object;
+};
+
+struct CraftingSession
+{
+  event_t *OnInterpretArguments;
+  event_t *OnMaterialFound;
+  event_t *OnSetObjectStats;
+  event_t *OnFinishedCrafting;
+
+  struct CraftingSessionImpl *_pImpl;
+};
+
 struct CraftingMaterial
 {
   int ItemType;
@@ -27,11 +69,11 @@ struct CraftingMaterial
   long Flags;
 };
 
-CraftRecipe *AllocateCraftRecipe( int sn, const CraftingMaterial*, int duration, vnum_t protoObject);
+CraftRecipe *AllocateCraftRecipe( int sn, const CraftingMaterial*, int duration,
+				  vnum_t protoObject);
 void FreeCraftRecipe( CraftRecipe* );
-CraftingSession *AllocateCraftingSession( CraftRecipe*, Character *engineer, char *commandArgument,
-					  bool (*InterpretArguments)( CraftingSession*, char* ),
-					  void (*SetObjectStats)( const CraftingSession*, OBJ_DATA* ) );
+CraftingSession *AllocateCraftingSession( CraftRecipe*, Character *engineer,
+					  char *commandArgument );
 void FreeCraftingSession( CraftingSession* );
 Character *GetEngineer( const CraftingSession* );
 void AddCraftingArgument( CraftingSession*, char *argument );

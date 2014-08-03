@@ -17,7 +17,7 @@ struct FoundMaterial
   OBJ_DATA *Object;
 };
 
-struct CraftingSession
+struct CraftingSessionImpl
 {
   Character *Engineer;
   CraftRecipe *Recipe;
@@ -25,8 +25,6 @@ struct CraftingSession
   char **Arguments;
   size_t NumberOfArguments;
   char *OriginalArgument;
-  bool (*InterpretArguments)( CraftingSession*, char* );
-  void (*SetObjectStats)( const CraftingSession*, OBJ_DATA* );
 };
 
 static void FinishedStage( CraftingSession *session );
@@ -75,16 +73,18 @@ void do_craftingengine( Character *ch, char *argument )
 
 static void FinishedStage( CraftingSession *session )
 {
-  Character *ch = session->Engineer;
-  int the_chance = ch->pcdata->learned[session->Recipe->Skill];
+  CraftRecipe *recipe = session->_pImpl->Recipe;
+  Character *ch = session->_pImpl->Engineer;
+  int the_chance = ch->pcdata->learned[recipe->Skill];
   bool hasMaterials = FindMaterials( session, true );
-  int level = ch->pcdata->learned[session->Recipe->Skill];
+  int level = ch->pcdata->learned[recipe->Skill];
   OBJ_DATA *container = NULL;
-  OBJ_INDEX_DATA *proto = get_obj_index( session->Recipe->Prototype );
+  OBJ_INDEX_DATA *proto = get_obj_index( recipe->Prototype );
   long xpgain = 0;
-  SKILLTYPE *skill = get_skilltype( session->Recipe->Skill );
+  SKILLTYPE *skill = get_skilltype( recipe->Skill );
   const char *itemType = object_types[proto->item_type];
   char actBuf[MAX_STRING_LENGTH];
+  SetObjectStatsEventArgs eventArgs;
 
   ch->substate = SUB_NONE;
 
@@ -93,14 +93,17 @@ static void FinishedStage( CraftingSession *session )
       ch_printf( ch, "&RYou hold up your newly created %s.\r\n", itemType );
       ch_printf( ch, "&RIt suddenly dawns upon you that you have created the most useless\r\n" );
       ch_printf( ch, "&R%s you've ever seen. You quickly hide your mistake...&w\r\n", itemType);
-      learn_from_failure( ch, session->Recipe->Skill );
+      learn_from_failure( ch, recipe->Skill );
       FreeCraftingSession( session );
       return;
     }
 
   container = create_object( proto, level );
 
-  session->SetObjectStats( session, container );
+  eventArgs.CraftingSession = session;
+  eventArgs.Object = container;
+
+  RaiseEvent( session->OnSetObjectStats, &eventArgs );
 
   container = obj_to_char( container, ch );
 
@@ -114,14 +117,17 @@ static void FinishedStage( CraftingSession *session )
   gain_exp(ch, skill->guild, xpgain );
   ch_printf( ch , "You gain %d %s experience.", xpgain, ability_name[skill->guild] );
 
-  learn_from_success( ch, session->Recipe->Skill );
+  learn_from_success( ch, recipe->Skill );
+
+  RaiseEvent( session->OnFinishedCrafting, NULL );
+
   /*************************************************/
   FreeCraftingSession( session );
 }
 
 static void OnAbort( CraftingSession *session )
 {
-  Character *ch = session->Engineer;
+  Character *ch = session->_pImpl->Engineer;
   ch->substate = SUB_NONE;
 
   ch_printf( ch, "&RYou are interrupted and fail to finish your work.&w\r\n");
@@ -132,7 +138,7 @@ static void OnAbort( CraftingSession *session )
 
 Character *GetEngineer( const CraftingSession *session )
 {
-  return session->Engineer;
+  return session->_pImpl->Engineer;
 }
 
 CraftRecipe *AllocateCraftRecipe( int sn, const CraftingMaterial *materialList, int duration, vnum_t prototypeObject )
@@ -197,20 +203,22 @@ static struct FoundMaterial *AllocateFoundMaterials( const CraftingMaterial *rec
 }
 
 CraftingSession *AllocateCraftingSession( CraftRecipe *recipe, Character *engineer,
-					  char *commandArgument,
-					  bool (*InterpretArguments)( CraftingSession*, char* ),
-					  void (*SetObjectStats)( const CraftingSession*, OBJ_DATA* ) )
+					  char *commandArgument )
 {
   CraftingSession *session = NULL;
   
   CREATE( session, CraftingSession, 1 );
+  session->OnInterpretArguments = CreateEvent();
+  session->OnMaterialFound = CreateEvent();
+  session->OnSetObjectStats = CreateEvent();
+  session->OnFinishedCrafting = CreateEvent();
 
-  session->Engineer = engineer;
-  session->Recipe = recipe;
-  session->FoundMaterials = AllocateFoundMaterials( recipe->Materials );
-  session->OriginalArgument = str_dup( commandArgument );
-  session->InterpretArguments = InterpretArguments;
-  session->SetObjectStats = SetObjectStats;
+  CREATE( session->_pImpl, struct CraftingSessionImpl, 1 );
+
+  session->_pImpl->Engineer = engineer;
+  session->_pImpl->Recipe = recipe;
+  session->_pImpl->FoundMaterials = AllocateFoundMaterials( recipe->Materials );
+  session->_pImpl->OriginalArgument = str_dup( commandArgument );
 
   engineer->pcdata->CraftingSession = session;
 
@@ -219,61 +227,67 @@ CraftingSession *AllocateCraftingSession( CraftRecipe *recipe, Character *engine
 
 void FreeCraftingSession( CraftingSession *session )
 {
-  if( session->NumberOfArguments > 0 )
+  DestroyEvent( session->OnInterpretArguments );
+  DestroyEvent( session->OnMaterialFound );
+  DestroyEvent( session->OnSetObjectStats );
+  DestroyEvent( session->OnFinishedCrafting );
+
+  if( session->_pImpl->NumberOfArguments > 0 )
     {
       size_t i = 0;
 
-      for( i = 0; i < session->NumberOfArguments; ++i )
+      for( i = 0; i < session->_pImpl->NumberOfArguments; ++i )
 	{
-	  DISPOSE( session->Arguments[i] );
+	  DISPOSE( session->_pImpl->Arguments[i] );
 	}
 
-      DISPOSE( session->Arguments );
+      DISPOSE( session->_pImpl->Arguments );
     }
 
-  FreeCraftRecipe( session->Recipe );
-  DISPOSE( session->FoundMaterials );
-  DISPOSE( session->OriginalArgument );
+  FreeCraftRecipe( session->_pImpl->Recipe );
+  DISPOSE( session->_pImpl->FoundMaterials );
+  DISPOSE( session->_pImpl->OriginalArgument );
 
-  if( session->Engineer )
+  if( session->_pImpl->Engineer )
     {
-      session->Engineer->pcdata->CraftingSession = NULL;
+      session->_pImpl->Engineer->pcdata->CraftingSession = NULL;
     }
 
+  DISPOSE( session->_pImpl );
   DISPOSE( session );
 }
 
 void AddCraftingArgument( CraftingSession *session, char *argument )
 {
-  ++session->NumberOfArguments;
-  RECREATE( session->Arguments, char*, session->NumberOfArguments );
+  ++session->_pImpl->NumberOfArguments;
+  RECREATE( session->_pImpl->Arguments, char*, session->_pImpl->NumberOfArguments );
 
-  session->Arguments[session->NumberOfArguments - 1] = str_dup( argument );
+  session->_pImpl->Arguments[session->_pImpl->NumberOfArguments - 1] = str_dup( argument );
 }
 
 const char *GetCraftingArgument( const CraftingSession *session, size_t argumentNumber )
 {
-  if( session->NumberOfArguments == 0
-      || argumentNumber > session->NumberOfArguments - 1 )
+  if( session->_pImpl->NumberOfArguments == 0
+      || argumentNumber > session->_pImpl->NumberOfArguments - 1 )
     {
       bug( "%s:%d %s(): Requested argument is %d, but session has %d arguments",
            __FILE__, __LINE__, __FUNCTION__,
-	   argumentNumber, session->NumberOfArguments );
+	   argumentNumber, session->_pImpl->NumberOfArguments );
       return "";
     }
 
-  return session->Arguments[argumentNumber];
+  return session->_pImpl->Arguments[argumentNumber];
 }
 
 static bool CheckSkill( const CraftingSession *session )
 {
-  Character *ch = session->Engineer;
-  int the_chance = is_npc(ch) ? ch->top_level : (int) (ch->pcdata->learned[session->Recipe->Skill]);
+  Character *ch = session->_pImpl->Engineer;
+  int the_chance = is_npc(ch) ? ch->top_level : (int) (ch->pcdata->learned[session->_pImpl->Recipe->Skill]);
 
   if( number_percent() >= the_chance )
     {
       ch_printf( ch, "&RYou can't figure out what to do.\r\n" );
-      learn_from_failure( ch, session->Recipe->Skill );
+      learn_from_failure( ch, session->_pImpl->Recipe->Skill );
       return false;
     }
 
@@ -282,10 +296,16 @@ static bool CheckSkill( const CraftingSession *session )
 
 void StartCrafting( CraftingSession *session )
 {
-  Character *ch = session->Engineer;
+  Character *ch = session->_pImpl->Engineer;
   OBJ_INDEX_DATA *obj = NULL;
+  InterpretArgumentsEventArgs eventArgs;
+  eventArgs.CraftingSession = session;
+  eventArgs.CommandArguments = session->_pImpl->OriginalArgument;
+  eventArgs.AbortSession = false;
 
-  if( !session->InterpretArguments( session, session->OriginalArgument )
+  RaiseEvent( session->OnInterpretArguments, &eventArgs );
+
+  if( eventArgs.AbortSession
       || !FindMaterials( session, false )
       || !CheckSkill( session ) )
     {
@@ -293,14 +313,14 @@ void StartCrafting( CraftingSession *session )
       return;
     }
 
-  obj = get_obj_index( session->Recipe->Prototype );
+  obj = get_obj_index( session->_pImpl->Recipe->Prototype );
 
   ch_printf( ch, "&GYou begin the long process of creating %s.\r\n",
 	     aoran( object_types[obj->item_type] ) );
 
   act( AT_PLAIN, "$n takes $s tools and some material and begins to work.",
        ch, NULL, NULL, TO_ROOM );
-  add_timer( ch, TIMER_DO_FUN, session->Recipe->Duration, do_craftingengine, SUB_PAUSE );
+  add_timer( ch, TIMER_DO_FUN, session->_pImpl->Recipe->Duration, do_craftingengine, SUB_PAUSE );
 }
 
 static bool FindMaterials( CraftingSession *session, bool extract )
