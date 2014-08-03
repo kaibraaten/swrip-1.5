@@ -30,6 +30,9 @@ typedef struct InterpretArgumentsEventArgs InterpretArgumentsEventArgs;
 struct MaterialFoundEventArgs;
 typedef struct MaterialFoundEventArgs MaterialFoundEventArgs;
 
+struct FinishedCraftingEventArgs;
+typedef struct FinishedCraftingEventArgs FinishedCraftingEventArgs;
+
 struct CraftingSessionImpl;
 
 struct InterpretArgumentsEventArgs
@@ -47,6 +50,12 @@ struct MaterialFoundEventArgs
 };
 
 struct SetObjectStatsEventArgs
+{
+  CraftingSession *CraftingSession;
+  OBJ_DATA *Object;
+};
+
+struct FinishedCraftingEventArgs
 {
   CraftingSession *CraftingSession;
   OBJ_DATA *Object;

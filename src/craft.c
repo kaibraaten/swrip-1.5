@@ -27,6 +27,11 @@ struct CraftingSessionImpl
   char *OriginalArgument;
 };
 
+struct FinishedCraftingUserData
+{
+  CraftRecipe *Recipe;
+};
+
 static void FinishedStage( CraftingSession *session );
 static void OnAbort( CraftingSession *session );
 static bool FindMaterials( CraftingSession *session, bool extract );
@@ -78,13 +83,11 @@ static void FinishedStage( CraftingSession *session )
   int the_chance = ch->pcdata->learned[recipe->Skill];
   bool hasMaterials = FindMaterials( session, true );
   int level = ch->pcdata->learned[recipe->Skill];
-  OBJ_DATA *container = NULL;
+  OBJ_DATA *object = NULL;
   OBJ_INDEX_DATA *proto = get_obj_index( recipe->Prototype );
-  long xpgain = 0;
-  SKILLTYPE *skill = get_skilltype( recipe->Skill );
   const char *itemType = object_types[proto->item_type];
-  char actBuf[MAX_STRING_LENGTH];
   SetObjectStatsEventArgs eventArgs;
+  FinishedCraftingEventArgs finishedCraftingEventArgs;
 
   ch->substate = SUB_NONE;
 
@@ -98,31 +101,46 @@ static void FinishedStage( CraftingSession *session )
       return;
     }
 
-  container = create_object( proto, level );
+  object = create_object( proto, level );
 
   eventArgs.CraftingSession = session;
-  eventArgs.Object = container;
+  eventArgs.Object = object;
 
   RaiseEvent( session->OnSetObjectStats, &eventArgs );
 
-  container = obj_to_char( container, ch );
+  object = obj_to_char( object, ch );
+
+  finishedCraftingEventArgs.CraftingSession = session;
+  finishedCraftingEventArgs.Object = object;
+  RaiseEvent( session->OnFinishedCrafting, &finishedCraftingEventArgs );
+
+  FreeCraftingSession( session );
+}
+
+static void FinishedCraftingHandler( void *userData, void *args )
+{
+  FinishedCraftingEventArgs *eventArgs = (FinishedCraftingEventArgs*) args;
+  CraftingSession *session = eventArgs->CraftingSession;
+  struct FinishedCraftingUserData *data = (struct FinishedCraftingUserData*) userData;
+  Character *ch = GetEngineer( session );
+  const char *itemType = object_types[eventArgs->Object->item_type];
+  char actBuf[MAX_STRING_LENGTH];
+  long xpgain = 0;
+  SKILLTYPE *skill = get_skilltype( data->Recipe->Skill );
 
   ch_printf( ch, "&GYou finish your work and hold up your newly created %s.&w\r\n", itemType);
   sprintf( actBuf, "$n finishes making $s new %s.", itemType );
   act( AT_PLAIN, actBuf, ch, NULL, NULL, TO_ROOM );
 
-  xpgain = UMIN( container->cost * 100,
-		 exp_level(get_level(ch, skill->guild ) + 1)
-		 - exp_level(get_level(ch, skill->guild ) ) );
+  xpgain = UMIN( eventArgs->Object->cost * 100,
+                 exp_level(get_level(ch, skill->guild ) + 1)
+                 - exp_level(get_level(ch, skill->guild ) ) );
   gain_exp(ch, skill->guild, xpgain );
   ch_printf( ch , "You gain %d %s experience.", xpgain, ability_name[skill->guild] );
 
-  learn_from_success( ch, recipe->Skill );
+  learn_from_success( ch, data->Recipe->Skill );
 
-  RaiseEvent( session->OnFinishedCrafting, NULL );
-
-  /*************************************************/
-  FreeCraftingSession( session );
+  DISPOSE( data );
 }
 
 static void OnAbort( CraftingSession *session )
@@ -206,12 +224,17 @@ CraftingSession *AllocateCraftingSession( CraftRecipe *recipe, Character *engine
 					  char *commandArgument )
 {
   CraftingSession *session = NULL;
-  
+  struct FinishedCraftingUserData *finishedCraftingUserData = NULL;
+
   CREATE( session, CraftingSession, 1 );
   session->OnInterpretArguments = CreateEvent();
   session->OnMaterialFound = CreateEvent();
   session->OnSetObjectStats = CreateEvent();
   session->OnFinishedCrafting = CreateEvent();
+
+  CREATE( finishedCraftingUserData, struct FinishedCraftingUserData, 1 );
+  finishedCraftingUserData->Recipe = recipe;
+  AddEventHandler( session->OnFinishedCrafting, finishedCraftingUserData, FinishedCraftingHandler );
 
   CREATE( session->_pImpl, struct CraftingSessionImpl, 1 );
 
