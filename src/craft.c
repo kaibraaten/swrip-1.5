@@ -38,6 +38,7 @@ static bool FindMaterials( CraftingSession *session, bool extract );
 static size_t CountCraftingMaterials( const CraftingMaterial *material );
 static struct FoundMaterial *AllocateFoundMaterials( const CraftingMaterial *recipeMaterials );
 static bool CheckSkill( const CraftingSession *session );
+static const char *GetItemTypeName( int itemType, int extraInfo );
 
 void do_craftingengine( Character *ch, char *argument )
 {
@@ -85,7 +86,7 @@ static void FinishedStage( CraftingSession *session )
   int level = ch->pcdata->learned[recipe->Skill];
   OBJ_DATA *object = NULL;
   OBJ_INDEX_DATA *proto = get_obj_index( recipe->Prototype );
-  const char *itemType = object_types[proto->item_type];
+  const char *itemType = GetItemTypeName( proto->item_type, proto->value[3] );
   SetObjectStatsEventArgs eventArgs;
   FinishedCraftingEventArgs finishedCraftingEventArgs;
 
@@ -123,7 +124,7 @@ static void FinishedCraftingHandler( void *userData, void *args )
   CraftingSession *session = eventArgs->CraftingSession;
   struct FinishedCraftingUserData *data = (struct FinishedCraftingUserData*) userData;
   Character *ch = GetEngineer( session );
-  const char *itemType = object_types[eventArgs->Object->item_type];
+  const char *itemType = GetItemTypeName( eventArgs->Object->item_type, eventArgs->Object->value[3] );
   char actBuf[MAX_STRING_LENGTH];
   long xpgain = 0;
   SKILLTYPE *skill = get_skilltype( data->Recipe->Skill );
@@ -359,7 +360,7 @@ void StartCrafting( CraftingSession *session )
   obj = get_obj_index( session->_pImpl->Recipe->Prototype );
 
   ch_printf( ch, "&GYou begin the long process of creating %s.\r\n",
-	     aoran( object_types[obj->item_type] ) );
+	     aoran( GetItemTypeName( obj->item_type, obj->value[3] ) ) );
 
   act( AT_PLAIN, "$n takes $s tools and some material and begins to work.",
        ch, NULL, NULL, TO_ROOM );
@@ -369,4 +370,20 @@ void StartCrafting( CraftingSession *session )
 static bool FindMaterials( CraftingSession *session, bool extract )
 {
   return true;
+}
+
+static const char *GetItemTypeName( int itemType, int extraInfo )
+{
+  const char *type = NULL;
+
+  if( itemType == ITEM_WEAPON )
+    {
+      type = get_weapontype_name( extraInfo );
+    }
+  else
+    {
+      type = object_types[itemType];
+    }
+
+  return type;
 }
