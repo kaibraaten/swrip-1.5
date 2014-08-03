@@ -127,7 +127,7 @@ static void OnAbort( CraftingSession *session )
   FreeCraftingSession( session );
 }
 
-Character *GetEngineer( CraftingSession *session )
+Character *GetEngineer( const CraftingSession *session )
 {
   return session->Engineer;
 }

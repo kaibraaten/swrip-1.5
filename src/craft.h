@@ -33,7 +33,7 @@ CraftingSession *AllocateCraftingSession( CraftRecipe*, Character *engineer, cha
 					  bool (*InterpretArguments)( CraftingSession*, char* ),
 					  void (*SetObjectStats)( CraftingSession*, OBJ_DATA* ) );
 void FreeCraftingSession( CraftingSession* );
-Character *GetEngineer( CraftingSession* );
+Character *GetEngineer( const CraftingSession* );
 void AddCraftingArgument( CraftingSession*, char *argument );
 const char *GetCraftingArgument( const CraftingSession*, size_t argumentNumber );
 
