@@ -10,8 +10,8 @@ IMC = 1
 #Change from 0 to 1 to enable telnet debug logging.
 DEBUG_TELNET = -DSWRIP_DEBUG_TELNET=0
 
-CCFLAGS = -g3 -MMD -I. -Iutility $(WFLAGS) $(USE_DLSYM) $(DEBUG_TELNET) -pedantic
-LDFLAGS = -lm -lz -Lutility -lutility -Wl,-rpath,./src/utility
+CCFLAGS = -g3 -MMD -I. -Iutility -Ialiceevent $(WFLAGS) $(USE_DLSYM) $(DEBUG_TELNET) -pedantic
+LDFLAGS = -lm -lz -Lutility -lutility -Wl,-rpath,./src/utility -Laliceevent -laliceevent -Wl,-rpath,./src/aliceevent
 
 #Uncomment the next line of you're using Solaris and you get linker errors.
 #SOLARIS = 1
@@ -670,6 +670,7 @@ all:		libs $(BINARY)
 
 libs:
 		$(MAKE) -C utility
+		$(MAKE) -C aliceevent
 
 $(BINARY):	$(OBJ)
 		@echo "Linking" $(BINARY)
@@ -688,4 +689,4 @@ $(ODIR)/%.o:	%.c
 -include $(ODIR)/$(SPECDIR)/*.d
 
 clean:
-		-rm -f ../$(BINARY) *~ $(ODIR)/*.o $(ODIR)/*.d $(ODIR)/$(CMDDIR)/*.o $(ODIR)/$(CMDDIR)/*.d $(ODIR)/$(MPDIR)/*.o $(ODIR)/$(MPDIR)/*.d $(ODIR)/$(SPELLDIR)/*.o $(ODIR)/$(SPELLDIR)/*.d ../area/core.* $(ODIR)/$(SPECDIR)/*.o $(ODIR)/$(SPECDIR)/*.d
+		-rm -f ../$(BINARY) *~ $(ODIR)/*.o $(ODIR)/*.d $(ODIR)/$(CMDDIR)/*.o $(ODIR)/$(CMDDIR)/*.d $(ODIR)/$(MPDIR)/*.o $(ODIR)/$(MPDIR)/*.d $(ODIR)/$(SPELLDIR)/*.o $(ODIR)/$(SPELLDIR)/*.d ../core.* $(ODIR)/$(SPECDIR)/*.o $(ODIR)/$(SPECDIR)/*.d
