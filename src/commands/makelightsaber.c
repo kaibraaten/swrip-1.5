@@ -129,7 +129,7 @@ static void SetObjectStatsHandler( void *userData, void *args )
   paf->type               = -1;
   paf->duration           = -1;
   paf->location           = get_affecttype( "hitroll" );
-  paf->modifier           = URANGE( 0, ud->GemCount, lightsaber->level / 30 );
+  paf->modifier           = urange( 0, ud->GemCount, lightsaber->level / 30 );
   paf->bitvector          = 0;
   paf->next               = NULL;
   LINK( paf, lightsaber->first_affect, lightsaber->last_affect, next, prev );
