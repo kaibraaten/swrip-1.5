@@ -3,6 +3,8 @@
 #include "character.h"
 #include "craft.h"
 
+#define MAX_NUMBER_OF_CRYSTALS 3
+
 struct UserData
 {
   int GemType;
@@ -31,10 +33,10 @@ void do_makelightsaber( Character *ch, char *argument )
       { ITEM_BATTERY,        CRAFTFLAG_EXTRACT },
       { ITEM_CIRCUIT,        CRAFTFLAG_EXTRACT },
       { ITEM_SUPERCONDUCTOR, CRAFTFLAG_EXTRACT },
-      { ITEM_NONE,           CRAFTFLAG_NONE }
+      { ITEM_NONE,           CRAFTFLAG_EXTRACT },
     };
   CraftRecipe *recipe = AllocateCraftRecipe( gsn_lightsaber_crafting, materials,
-					     2 /*25*/, OBJ_VNUM_CRAFTING_LIGHTSABER );
+					     25, OBJ_VNUM_CRAFTING_LIGHTSABER );
   CraftingSession *session = AllocateCraftingSession( recipe, ch, argument );
 
   CREATE( data, struct UserData, 1 );
@@ -74,16 +76,15 @@ static void MaterialFoundHandler( void *userData, void *args )
       ud->Charge = umax( eventArgs->Object->value[0], 10 );
     }
 
-  if( eventArgs->Object->item_type == ITEM_CRYSTAL && ud->GemCount < 3 )
+  if( eventArgs->Object->item_type == ITEM_CRYSTAL
+      && ud->GemCount < MAX_NUMBER_OF_CRYSTALS )
     {
       ++ud->GemCount;
-      eventArgs->KeepFinding = ud->GemCount < 3;
+      eventArgs->KeepFinding = ud->GemCount < MAX_NUMBER_OF_CRYSTALS;
 
       if( ud->GemType < eventArgs->Object->value[0] )
 	{
 	  ud->GemType = eventArgs->Object->value[0];
-	  log_printf( "%s:%d %s(): Found %s crystal.",
-		      __FILE__, __LINE__, __FUNCTION__, get_crystaltype_name( ud->GemType ) );
 	}
     }
 }

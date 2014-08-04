@@ -380,7 +380,7 @@ static bool FindMaterials( CraftingSession *session, bool extract )
   bool foundAll = true;
   struct FoundMaterial *material = NULL;
 
-  for( obj = ch->last_carrying; obj; obj = obj->prev_content )
+  for( obj = ch->first_carrying; obj; obj = obj->next_content )
     {
       material = GetUnfoundMaterial( session, obj );
 
@@ -390,7 +390,6 @@ static bool FindMaterials( CraftingSession *session, bool extract )
 	}
 
       material->Found = true;
-      log_printf( "Found %s.", obj->name );
 
       if( extract )
 	{
@@ -399,9 +398,6 @@ static bool FindMaterials( CraftingSession *session, bool extract )
 	  args.Object = obj;
 	  args.KeepFinding = false;
 
-	  RaiseEvent( session->OnMaterialFound, &args );
-
-	  material->KeepFinding = args.KeepFinding;
 
 	  if( IS_SET( material->Material.Flags, CRAFTFLAG_EXTRACT ) )
 	    {
@@ -410,7 +406,8 @@ static bool FindMaterials( CraftingSession *session, bool extract )
 	      extract_obj( obj );
 	    }
 
-	  log_printf( "Extract mode." );
+	  RaiseEvent( session->OnMaterialFound, &args );
+	  material->KeepFinding = args.KeepFinding;
 	}
     }
 
