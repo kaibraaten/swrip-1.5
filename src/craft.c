@@ -14,7 +14,8 @@ struct CraftRecipe
 struct FoundMaterial
 {
   CraftingMaterial Material;
-  OBJ_DATA *Object;
+  bool Found;
+  bool KeepFinding;
 };
 
 struct CraftingSessionImpl
@@ -39,6 +40,7 @@ static size_t CountCraftingMaterials( const CraftingMaterial *material );
 static struct FoundMaterial *AllocateFoundMaterials( const CraftingMaterial *recipeMaterials );
 static bool CheckSkill( const CraftingSession *session );
 static const char *GetItemTypeName( int itemType, int extraInfo );
+static struct FoundMaterial *GetFoundMaterial( const CraftingSession *session, const OBJ_DATA *obj );
 
 void do_craftingengine( Character *ch, char *argument )
 {
@@ -219,7 +221,8 @@ static struct FoundMaterial *AllocateFoundMaterials( const CraftingMaterial *rec
   for( i = 0; i < numberOfElements; ++i )
     {
       foundMaterials[i].Material = recipeMaterials[i];
-      foundMaterials[i].Object = NULL;
+      foundMaterials[i].Found = false;
+      foundMaterials[i].KeepFinding = false;
     }
 
   return foundMaterials;
@@ -372,7 +375,65 @@ void StartCrafting( CraftingSession *session )
 
 static bool FindMaterials( CraftingSession *session, bool extract )
 {
-  return true;
+  OBJ_DATA *obj = NULL;
+  Character *ch = GetEngineer( session );
+  bool foundAll = true;
+  struct FoundMaterial *material = NULL;
+
+  for( obj = ch->last_carrying; obj; obj = obj->prev_content )
+    {
+      material = GetFoundMaterial( session, obj );
+
+      if( !material )
+	{
+	  continue;
+	}
+
+      material->Found = true;
+
+      if( extract )
+	{
+	  MaterialFoundEventArgs args;
+	  args.CraftingSession = session;
+	  args.Object = obj;
+	  args.KeepFinding = false;
+
+	  RaiseEvent( session->OnMaterialFound, &args );
+
+	  material->KeepFinding = args.KeepFinding;
+
+	  if( IS_SET( material->Material.Flags, CRAFTFLAG_EXTRACT ) )
+	    {
+	      separate_obj( obj );
+	      obj_from_char( obj );
+	      extract_obj( obj );
+	    }
+	}
+    }
+
+  material = session->_pImpl->FoundMaterials;
+
+  while( material->Material.ItemType != ITEM_NONE )
+    {
+      if( !material->Found )
+	{
+	  OBJ_INDEX_DATA *proto = get_obj_index( session->_pImpl->Recipe->Prototype );
+
+	  foundAll = false;
+	  ch_printf( ch, "&RYou need %s to complete the %s.\r\n",
+		     aoran( GetItemTypeName( material->Material.ItemType, 0 ) ),
+		     GetItemTypeName( proto->item_type, proto->value[3] ) );
+	}
+
+      ++material;
+    }
+
+  return foundAll;
+}
+
+static struct FoundMaterial *GetFoundMaterial( const CraftingSession *session, const OBJ_DATA *obj )
+{
+  return NULL;
 }
 
 static const char *GetItemTypeName( int itemType, int extraInfo )

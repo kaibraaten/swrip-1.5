@@ -52,7 +52,7 @@ struct MaterialFoundEventArgs
 {
   CraftingSession *CraftingSession;
   OBJ_DATA *Object;
-  bool Extract;
+  bool KeepFinding;
 };
 
 struct SetObjectStatsEventArgs
