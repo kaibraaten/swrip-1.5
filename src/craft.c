@@ -410,7 +410,7 @@ static bool FindMaterials( CraftingSession *session, bool extract )
 	      extract_obj( obj );
 	    }
 
-	  ch_printf( ch, "Extract mode.\r\n" );
+	  log_printf( "Extract mode." );
 	}
     }
 
