@@ -66,7 +66,26 @@ static void InterpretArgumentsHandler( void *userData, void *args )
 
 static void MaterialFoundHandler( void *userData, void *args )
 {
+  struct UserData *ud = (struct UserData*) userData;
+  MaterialFoundEventArgs *eventArgs = (MaterialFoundEventArgs*) args;
 
+  if( eventArgs->Object->item_type == ITEM_BATTERY )
+    {
+      ud->Charge = umax( eventArgs->Object->value[0], 10 );
+    }
+
+  if( eventArgs->Object->item_type == ITEM_CRYSTAL && ud->GemCount < 3 )
+    {
+      ++ud->GemCount;
+      eventArgs->KeepFinding = ud->GemCount < 3;
+
+      if( ud->GemType < eventArgs->Object->value[0] )
+	{
+	  ud->GemType = eventArgs->Object->value[0];
+	  log_printf( "%s:%d %s(): Found %s crystal.",
+		      __FILE__, __LINE__, __FUNCTION__, get_crystaltype_name( ud->GemType ) );
+	}
+    }
 }
 
 static void SetObjectStatsHandler( void *userData, void *args )

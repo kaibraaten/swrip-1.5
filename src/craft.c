@@ -418,7 +418,8 @@ static bool FindMaterials( CraftingSession *session, bool extract )
 
   while( material->Material.ItemType != ITEM_NONE )
     {
-      if( !material->Found )
+      if( !material->Found
+	  && !IS_SET( material->Material.Flags, CRAFTFLAG_OPTIONAL ) )
 	{
 	  OBJ_INDEX_DATA *proto = get_obj_index( session->_pImpl->Recipe->Prototype );
 
