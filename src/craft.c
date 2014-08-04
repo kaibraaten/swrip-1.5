@@ -40,7 +40,7 @@ static size_t CountCraftingMaterials( const CraftingMaterial *material );
 static struct FoundMaterial *AllocateFoundMaterials( const CraftingMaterial *recipeMaterials );
 static bool CheckSkill( const CraftingSession *session );
 static const char *GetItemTypeName( int itemType, int extraInfo );
-static struct FoundMaterial *GetFoundMaterial( const CraftingSession *session, const OBJ_DATA *obj );
+static struct FoundMaterial *GetUnfoundMaterial( const CraftingSession *session, const OBJ_DATA *obj );
 
 void do_craftingengine( Character *ch, char *argument )
 {
@@ -382,7 +382,7 @@ static bool FindMaterials( CraftingSession *session, bool extract )
 
   for( obj = ch->last_carrying; obj; obj = obj->prev_content )
     {
-      material = GetFoundMaterial( session, obj );
+      material = GetUnfoundMaterial( session, obj );
 
       if( !material )
 	{
@@ -390,6 +390,7 @@ static bool FindMaterials( CraftingSession *session, bool extract )
 	}
 
       material->Found = true;
+      log_printf( "Found %s.", obj->name );
 
       if( extract )
 	{
@@ -408,6 +409,8 @@ static bool FindMaterials( CraftingSession *session, bool extract )
 	      obj_from_char( obj );
 	      extract_obj( obj );
 	    }
+
+	  ch_printf( ch, "Extract mode.\r\n" );
 	}
     }
 
@@ -428,11 +431,27 @@ static bool FindMaterials( CraftingSession *session, bool extract )
       ++material;
     }
 
+  DISPOSE( session->_pImpl->FoundMaterials );
+  session->_pImpl->FoundMaterials = AllocateFoundMaterials( session->_pImpl->Recipe->Materials );
+
   return foundAll;
 }
 
-static struct FoundMaterial *GetFoundMaterial( const CraftingSession *session, const OBJ_DATA *obj )
+static struct FoundMaterial *GetUnfoundMaterial( const CraftingSession *session, const OBJ_DATA *obj )
 {
+  struct FoundMaterial *material = session->_pImpl->FoundMaterials;
+
+  while( material->Material.ItemType != ITEM_NONE )
+    {
+      if( obj->item_type == material->Material.ItemType
+	  && ( !material->Found || material->KeepFinding ) )
+	{
+	  return material;
+	}
+
+      ++material;
+    }
+
   return NULL;
 }
 
