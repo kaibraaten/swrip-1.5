@@ -22,16 +22,16 @@ void do_makelightsaber( Character *ch, char *argument )
   struct UserData *data = NULL;
   static const struct CraftingMaterial materials[] =
     {
-      { ITEM_TOOLKIT,        1, CRAFTFLAG_NONE },
-      { ITEM_OVEN,           1, CRAFTFLAG_NONE },
-      { ITEM_LENS,           1, CRAFTFLAG_EXTRACT },
-      { ITEM_CRYSTAL,        1, CRAFTFLAG_EXTRACT },
-      { ITEM_MIRROR,         1, CRAFTFLAG_EXTRACT },
-      { ITEM_DURAPLAST,      1, CRAFTFLAG_EXTRACT },
-      { ITEM_BATTERY,        1, CRAFTFLAG_EXTRACT },
-      { ITEM_CIRCUIT,        1, CRAFTFLAG_EXTRACT },
-      { ITEM_SUPERCONDUCTOR, 1, CRAFTFLAG_EXTRACT },
-      { ITEM_NONE,           0, CRAFTFLAG_NONE }
+      { ITEM_TOOLKIT,        CRAFTFLAG_NONE },
+      { ITEM_OVEN,           CRAFTFLAG_NONE },
+      { ITEM_LENS,           CRAFTFLAG_EXTRACT },
+      { ITEM_CRYSTAL,        CRAFTFLAG_EXTRACT },
+      { ITEM_MIRROR,         CRAFTFLAG_EXTRACT },
+      { ITEM_DURAPLAST,      CRAFTFLAG_EXTRACT },
+      { ITEM_BATTERY,        CRAFTFLAG_EXTRACT },
+      { ITEM_CIRCUIT,        CRAFTFLAG_EXTRACT },
+      { ITEM_SUPERCONDUCTOR, CRAFTFLAG_EXTRACT },
+      { ITEM_NONE,           CRAFTFLAG_NONE }
     };
   CraftRecipe *recipe = AllocateCraftRecipe( gsn_lightsaber_crafting, materials,
 					     2 /*25*/, OBJ_VNUM_CRAFTING_LIGHTSABER );

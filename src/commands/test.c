@@ -147,9 +147,9 @@ void do_test( Character *ch, char *argument )
   struct UserData *data;
   static const struct CraftingMaterial materials[] =
     {
-      { ITEM_FABRIC, 1, CRAFTFLAG_EXTRACT },
-      { ITEM_THREAD, 1, CRAFTFLAG_NONE },
-      { ITEM_NONE, 0, CRAFTFLAG_NONE }
+      { ITEM_FABRIC, CRAFTFLAG_EXTRACT },
+      { ITEM_THREAD, CRAFTFLAG_NONE },
+      { ITEM_NONE,   CRAFTFLAG_NONE }
     };
 
   CraftRecipe *recipe = AllocateCraftRecipe( gsn_makecontainer, materials,

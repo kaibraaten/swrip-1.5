@@ -93,7 +93,6 @@ struct CraftingSession
 struct CraftingMaterial
 {
   int ItemType;
-  int Count;
   long Flags;
 };
 

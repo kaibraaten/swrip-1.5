@@ -219,7 +219,6 @@ static struct FoundMaterial *AllocateFoundMaterials( const CraftingMaterial *rec
   for( i = 0; i < numberOfElements; ++i )
     {
       foundMaterials[i].Material = recipeMaterials[i];
-      foundMaterials[i].Material.Count = 0;
       foundMaterials[i].Object = NULL;
     }
 
