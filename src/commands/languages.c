@@ -36,7 +36,9 @@ void do_languages( Character *ch, char *argument )
 
       if ( !is_valid_language( lang_array[lang] ) )
         {
-          send_to_char( "You may not learn that language.\r\n", ch );
+          ch_printf( ch, "You may not learn that language.\r\n" );
+	  log_printf( "lang_array[%d] == %d, LANG_JAWA == %d",
+		      lang, lang_array[lang], LANG_JAWA );
           return;
         }
       if ( ( sn = skill_lookup( lang_names[lang] ) ) < 0 )
