@@ -94,10 +94,6 @@
 #define OBJ_VNUM_DEED           4   /* vnum of deed */
 #define ROOM_VNUM_VENSTOR       4  /* where messed up vendors go! */
 
-/* IMP rooms */
-#define IMP_ROOM1 109
-#define IMP_ROOM2 122
-
 #define PULSE_PER_SECOND            4
 #define PULSE_MINUTE              ( 60 * PULSE_PER_SECOND)
 #define PULSE_VIOLENCE            (  3 * PULSE_PER_SECOND)

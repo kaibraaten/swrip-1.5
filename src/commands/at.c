@@ -1,8 +1,6 @@
 #include "mud.h"
 #include "character.h"
 
-static bool check_for_immroom( const Character *ch, const ROOM_INDEX_DATA *location);
-
 void do_at( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
@@ -33,12 +31,6 @@ void do_at( Character *ch, char *argument )
         }
     }
 
-  if ( check_for_immroom( ch, location ) )
-    {
-      send_to_char( "That room is private right now.\r\n", ch );
-      return;
-    }
-
   if ( room_is_private( ch, location ) )
     {
       send_to_char( "Overriding private flag!\r\n", ch );
@@ -62,12 +54,4 @@ void do_at( Character *ch, char *argument )
           break;
         }
     }
-}
-
-static bool check_for_immroom( const Character *ch,
-			       const ROOM_INDEX_DATA *location)
-{
-  if (ch->top_level == 105 ? 0: (location->vnum == IMP_ROOM1?1:(location->vnum == IMP_ROOM2?1:0)))
-    return TRUE;
-  return FALSE;
 }

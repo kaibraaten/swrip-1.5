@@ -61,14 +61,7 @@ void do_goto( Character *ch, char *argument )
 
   if ( room_is_private(ch, location ) )
     {
-      if ( get_trust( ch ) < sysdata.level_override_private
-	   || ( ch->top_level == 105 ? 0 : ( location->vnum == IMP_ROOM1 ? 1 : ( location->vnum == IMP_ROOM2 ? 1 : 0 ) ) ) )
-        {
-          send_to_char( "That room is private right now.\r\n", ch );
-          return;
-        }
-      else
-	send_to_char( "Overriding private flag!\r\n", ch );
+      send_to_char( "Overriding private flag!\r\n", ch );
     }
 
   if ( get_trust( ch ) < LEVEL_GREATER &&

@@ -1646,8 +1646,7 @@ bool room_is_private( const Character *ch, const ROOM_INDEX_DATA *pRoomIndex )
 
   if ( IS_SET(pRoomIndex->room_flags, ROOM_SOLITARY) && count >= 1 )
     return TRUE;
-  if (ch->top_level == 105 ? 0: (pRoomIndex->vnum == IMP_ROOM1?1:(pRoomIndex->vnum == IMP_ROOM2?1:0)))
-    return TRUE;
+
   return FALSE;
 }
 
