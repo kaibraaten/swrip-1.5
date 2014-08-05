@@ -44,7 +44,7 @@ void do_minvoke( Character *ch, char *argument )
   else
     vnum = atoi( arg );
 
-  if ( get_trust(ch) < LEVEL_DEMI )
+  if ( get_trust(ch) < LEVEL_CREATOR )
     {
       Area *pArea;
 

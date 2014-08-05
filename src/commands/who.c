@@ -231,7 +231,7 @@ void do_who( Character *ch, char *argument )
       /* added optional invisibility on the who list to players who want it.
          Darrik Vequir */
 
-      if ( (wch->pcdata->whoCloak == TRUE) && (ch->top_level < LEVEL_GOD))
+      if ( (wch->pcdata->whoCloak == TRUE) && (ch->top_level < LEVEL_GREATER))
         continue;
 
       if ( fShowHomepage
@@ -249,7 +249,7 @@ void do_who( Character *ch, char *argument )
 
       race = race_text;
 
-      if (wch->stats.perm_frc > 0 && (ch->top_level >= LEVEL_GOD) && !is_immortal(wch))
+      if (wch->stats.perm_frc > 0 && (ch->top_level >= LEVEL_GREATER) && !is_immortal(wch))
         {
           if(is_jedi( wch ))
             force_char = '*';

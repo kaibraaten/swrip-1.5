@@ -152,7 +152,7 @@ void save_clan_storeroom( Character *ch, const CLAN_DATA *clan )
   else
     {
       templvl = ch->top_level;
-      ch->top_level = LEVEL_HERO;               /* make sure EQ doesn't get lost */
+      ch->top_level = LEVEL_AVATAR;               /* make sure EQ doesn't get lost */
       contents = ch->in_room->last_content;
       if (contents)
         fwrite_obj(ch, contents, fp, 0, OS_CARRY );

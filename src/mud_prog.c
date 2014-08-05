@@ -3046,7 +3046,7 @@ Character *get_char_room_mp( Character *ch, char *argument )
   if ( !str_cmp( arg, "self" ) )
     return ch;
 
-  if ( get_trust(ch) >= LEVEL_SAVIOR && is_number( arg ) )
+  if ( get_trust(ch) >= LEVEL_CREATOR && is_number( arg ) )
     vnum = atoi( arg );
   else
     vnum = -1;

@@ -70,7 +70,7 @@ void do_restore( Character *ch, char *argument )
           return;
         }
 
-      if ( get_trust( ch ) < LEVEL_LESSER
+      if ( get_trust( ch ) < LEVEL_CREATOR
            &&  victim != ch
            && !( is_npc( victim ) && IS_SET( victim->act, ACT_PROTOTYPE ) ) )
         {

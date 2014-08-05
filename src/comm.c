@@ -751,7 +751,7 @@ void new_descriptor( socket_t new_desc )
            !str_prefix( pban->name, dnew->remote.hostname )
            || !str_suffix ( pban->name , hostname )
            )
-          &&  pban->level >= LEVEL_SUPREME
+          &&  pban->level >= LEVEL_IMPLEMENTOR
           )
         {
           write_to_descriptor( desc,
@@ -918,7 +918,7 @@ void close_socket( Descriptor *dclose, bool force )
       sprintf( log_buf, "Closing link to %s.", ch->name );
       log_string_plus( log_buf, LOG_COMM, UMAX( sysdata.log_level, ch->top_level ) );
       /*
-        if ( ch->top_level < LEVEL_DEMI )
+        if ( ch->top_level < LEVEL_CREATOR )
         to_channel( log_buf, CHANNEL_MONITOR, "Monitor", ch->top_level );
       */
       if ( dclose->connection_state == CON_PLAYING
@@ -1425,8 +1425,8 @@ bool check_multi( Descriptor *d , char *name )
                          ? dold->original->name : dold->character->name )
            && !str_cmp(dold->remote.hostname , d->remote.hostname ) )
         {
-          if ( d->character->top_level >= LEVEL_LESSER
-               || ( dold->original ? dold->original : dold->character )->top_level >= LEVEL_LESSER )
+          if ( d->character->top_level >= LEVEL_CREATOR
+               || ( dold->original ? dold->original : dold->character )->top_level >= LEVEL_CREATOR )
 	    {
 	      return FALSE;
 	    }

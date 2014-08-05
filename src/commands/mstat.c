@@ -30,7 +30,7 @@ void do_mstat( Character *ch, char *argument )
       return;
     }
 
-  if ( ( ( get_trust( ch ) < LEVEL_GOD ) && !is_npc(victim) ) || ( ( get_trust( ch ) < get_trust( victim ) ) && !is_npc(victim) ) )
+  if ( ( ( get_trust( ch ) < LEVEL_GREATER ) && !is_npc(victim) ) || ( ( get_trust( ch ) < get_trust( victim ) ) && !is_npc(victim) ) )
     {
       set_char_color( AT_IMMORT, ch );
       send_to_char( "Their godly glow prevents you from getting a good look.\r\n", ch );
@@ -42,7 +42,7 @@ void do_mstat( Character *ch, char *argument )
              ( is_npc( victim ) || !victim->pcdata->clan ) ? "(none)"
              : victim->pcdata->clan->name );
 
-  if( get_trust(ch) >= LEVEL_GOD && !is_npc(victim) && victim->desc )
+  if( get_trust(ch) >= LEVEL_GREATER && !is_npc(victim) && victim->desc )
     ch_printf( ch, "Host: %s   Descriptor: %d   Trust: %d   AuthedBy: %s\r\n",
                victim->desc->remote.hostname, victim->desc->descriptor,
                victim->trust, victim->pcdata->authed_by[0] != '\0'

@@ -68,7 +68,7 @@ void do_mpedit( Character *ch, char *argument )
       return;
     }
 
-  if ( get_trust( ch ) < LEVEL_GOD )
+  if ( get_trust( ch ) < LEVEL_GREATER )
     {
       if ( ( victim = get_char_room( ch, arg1 ) ) == NULL )
         {

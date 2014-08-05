@@ -49,7 +49,7 @@ void do_reset( Character *ch, char *argument )
           return;
         }
     }
-  if ( !pArea && get_trust(ch) > LEVEL_GOD )
+  if ( !pArea && get_trust(ch) > LEVEL_GREATER )
     {
       char fname[80];
 

@@ -51,7 +51,7 @@ void do_cast( Character *ch, char *argument )
           return;
         }
 
-      if ( get_trust(ch) < LEVEL_GOD )
+      if ( get_trust(ch) < LEVEL_GREATER )
         {
           if ( ( sn = find_spell( ch, arg1, TRUE ) ) < 0
                || ( !is_npc(ch) &&  ch->pcdata->learned[sn] <= 0  ) )

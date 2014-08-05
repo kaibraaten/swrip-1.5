@@ -1733,7 +1733,7 @@ bool is_safe( Character *ch, Character *victim )
       return TRUE;
     }
 
-  if ( get_trust(ch) > LEVEL_HERO )
+  if ( get_trust(ch) > LEVEL_AVATAR )
     return FALSE;
 
   if ( is_npc(ch) || is_npc(victim) )

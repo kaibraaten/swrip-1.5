@@ -22,7 +22,7 @@ void do_users( Character *ch, char *argument )
     {
       if (arg[0] == '\0')
         {
-          if (  get_trust(ch) >= LEVEL_SUPREME
+          if (  get_trust(ch) >= LEVEL_IMPLEMENTOR
                 ||   (d->character && can_see( ch, d->character )) )
             {
               count++;
@@ -35,7 +35,7 @@ void do_users( Character *ch, char *argument )
                        d->original  ? d->original->name  :
                        d->character ? d->character->name : "(none)",
                        d->remote.hostip );
-	      if ( ch->top_level >= LEVEL_GOD && ( !d->character || d->character->top_level <= LEVEL_GOD ) )
+	      if ( ch->top_level >= LEVEL_GREATER && ( !d->character || d->character->top_level <= LEVEL_GREATER ) )
                 sprintf( buf + strlen( buf ), " (%s)", d->remote.hostname  );
               strcat(buf, "\r\n");
               send_to_pager( buf, ch );
@@ -43,7 +43,7 @@ void do_users( Character *ch, char *argument )
         }
       else
         {
-          if ( (get_trust(ch) >= LEVEL_SUPREME
+          if ( (get_trust(ch) >= LEVEL_IMPLEMENTOR
                 ||   (d->character && can_see( ch, d->character )) )
                &&   ( !str_prefix( arg, d->remote.hostname )
                       ||   ( d->character && !str_prefix( arg, d->character->name ) ) ) )

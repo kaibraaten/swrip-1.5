@@ -35,7 +35,7 @@ void do_toplevel( Character *ch, char *argument )
       return;
     }
 
-  if ( ch->top_level < LEVEL_SUPREME && victim->top_level >= ch->top_level )
+  if ( ch->top_level < LEVEL_IMPLEMENTOR && victim->top_level >= ch->top_level )
     {
       send_to_char( "You can't do that.\r\n", ch );
       return;

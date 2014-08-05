@@ -352,17 +352,17 @@ void boot_db( bool fCopyOver )
   log_string( "Loading sysdata configuration..." );
 
   /* default values */
-  sysdata.read_all_mail         = LEVEL_DEMI;
+  sysdata.read_all_mail         = LEVEL_CREATOR;
   sysdata.read_mail_free                = LEVEL_IMMORTAL;
   sysdata.write_mail_free               = LEVEL_IMMORTAL;
-  sysdata.take_others_mail              = LEVEL_DEMI;
-  sysdata.muse_level                    = LEVEL_DEMI;
+  sysdata.take_others_mail              = LEVEL_CREATOR;
+  sysdata.muse_level                    = LEVEL_CREATOR;
   sysdata.think_level                   = LEVEL_HIGOD;
-  sysdata.build_level                   = LEVEL_DEMI;
+  sysdata.build_level                   = LEVEL_CREATOR;
   sysdata.log_level                     = LEVEL_LOG;
-  sysdata.level_modify_proto            = LEVEL_LESSER;
+  sysdata.level_modify_proto            = LEVEL_CREATOR;
   sysdata.level_override_private        = LEVEL_GREATER;
-  sysdata.level_mset_player             = LEVEL_LESSER;
+  sysdata.level_mset_player             = LEVEL_CREATOR;
   sysdata.stun_plr_vs_plr               = 15;
   sysdata.stun_regular          = 15;
   sysdata.dam_plr_vs_plr                = 100;

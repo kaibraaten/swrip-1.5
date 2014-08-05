@@ -67,7 +67,7 @@ void do_oinvoke( Character *ch, char *argument )
   else
     vnum = atoi( arg1 );
 
-  if ( get_trust(ch) < LEVEL_DEMI )
+  if ( get_trust(ch) < LEVEL_CREATOR )
     {
       Area *pArea;
 

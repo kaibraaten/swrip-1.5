@@ -81,7 +81,7 @@ void do_whois( Character *ch, char *argument)
               victim->name,
               victim->pcdata->bio);
 
-  if( get_trust( ch ) >= LEVEL_GOD )
+  if( get_trust( ch ) >= LEVEL_GREATER )
     {
       send_to_char("----------------------------------------------------\r\n", ch);
 
@@ -134,7 +134,7 @@ void do_whois( Character *ch, char *argument)
       if ( victim->desc && victim->desc->remote.hostname[0]!='\0' )   /* added by Gorog */
         {
           sprintf (buf2, "%s's IP info: %s ", victim->name, victim->desc->remote.hostip);
-          if (get_trust(ch) > LEVEL_GOD)
+          if (get_trust(ch) > LEVEL_GREATER)
             {
               strcat (buf2, victim->desc->remote.hostname);
             }
@@ -142,7 +142,7 @@ void do_whois( Character *ch, char *argument)
           send_to_char(buf2, ch);
         }
 
-      if (get_trust(ch) >= LEVEL_GOD && get_trust(ch) >= get_trust( victim ) && victim->pcdata )
+      if (get_trust(ch) >= LEVEL_GREATER && get_trust(ch) >= get_trust( victim ) && victim->pcdata )
         {
           sprintf (buf2, "Email: %s\r\n" , victim->pcdata->email );
           send_to_char(buf2, ch);

@@ -81,8 +81,8 @@ short get_trust( const Character *ch )
   if ( is_npc(ch) && ch->top_level >= LEVEL_AVATAR )
     return LEVEL_AVATAR;
 
-  if ( ch->top_level >= LEVEL_NEOPHYTE && is_retired_immortal( ch ) )
-    return LEVEL_NEOPHYTE;
+  if ( ch->top_level >= LEVEL_IMMORTAL && is_retired_immortal( ch ) )
+    return LEVEL_IMMORTAL;
 
   return ch->top_level;
 }
@@ -421,7 +421,7 @@ OBJ_DATA *get_obj_carry( const Character *ch, const char *argument )
   int number, count, vnum;
 
   number = number_argument( argument, arg );
-  if ( get_trust(ch) >= LEVEL_SAVIOR && is_number( arg ) )
+  if ( get_trust(ch) >= LEVEL_CREATOR && is_number( arg ) )
     vnum = atoi( arg );
   else
     vnum = -1;
@@ -468,7 +468,7 @@ OBJ_DATA *get_obj_wear( const Character *ch, const char *argument )
 
   number = number_argument( argument, arg );
 
-  if ( get_trust(ch) >= LEVEL_SAVIOR && is_number( arg ) )
+  if ( get_trust(ch) >= LEVEL_CREATOR && is_number( arg ) )
     vnum = atoi( arg );
   else
     vnum = -1;
@@ -926,12 +926,12 @@ bool is_immortal( const Character *ch )
 
 bool is_god( const Character *ch )
 {
-  return get_trust( ch ) >= LEVEL_GOD;
+  return get_trust( ch ) >= LEVEL_GREATER;
 }
 
 bool is_hero( const Character *ch )
 {
-  return get_trust( ch ) >= LEVEL_HERO;
+  return get_trust( ch ) >= LEVEL_AVATAR;
 }
 
 bool is_good( const Character *ch )

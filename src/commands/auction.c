@@ -42,7 +42,7 @@ void do_auction (Character *ch, char *argument)
             sprintf (buf, "No bids on this item have been received.\r\n");
           set_char_color ( AT_BLUE, ch );
           send_to_char (buf,ch);
-          /*          spell_identify (0, LEVEL_HERO - 1, ch, auction->item); */
+          /*          spell_identify (0, LEVEL_AVATAR - 1, ch, auction->item); */
 
           sprintf( buf,
                    "Object '%s' is %s, special properties: %s %s.\r\nIts weight is %d, value is %d.\r\n",

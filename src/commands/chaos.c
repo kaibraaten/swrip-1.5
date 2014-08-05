@@ -24,7 +24,7 @@ void do_chaos(Character *ch, char *argument)
           arena.hi_lim, arena.start_time, arena.game_length);
   send_to_char(buf,ch);
 
-  if(arena.hi_lim >= LEVEL_IMPLEMENTOR +1)
+  if(arena.hi_lim >= LEVEL_IMPLEMENTOR)
     {
       send_to_char("Please choose a arena.hi_lim under the Imps level\r\n", ch);
       return;

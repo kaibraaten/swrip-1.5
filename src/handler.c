@@ -1207,7 +1207,7 @@ Character *get_char_room( const Character *ch, const char *argument )
   if ( !str_cmp( arg, "self" ) )
     return (Character*)ch;
 
-  if ( get_trust(ch) >= LEVEL_SAVIOR && is_number( arg ) )
+  if ( get_trust(ch) >= LEVEL_CREATOR && is_number( arg ) )
     vnum = atoi( arg );
   else
     vnum = -1;
@@ -1270,7 +1270,7 @@ Character *get_char_world( const Character *ch, const char *argument )
   /*
    * Allow reference by vnum for saints+                        -Thoric
    */
-  if ( get_trust(ch) >= LEVEL_SAVIOR && is_number( arg ) )
+  if ( get_trust(ch) >= LEVEL_CREATOR && is_number( arg ) )
     vnum = atoi( arg );
   else
     vnum = -1;
@@ -1462,7 +1462,7 @@ OBJ_DATA *get_obj_world( const Character *ch, const char *argument )
   /*
    * Allow reference by vnum for saints+                        -Thoric
    */
-  if ( get_trust(ch) >= LEVEL_SAVIOR && is_number( arg ) )
+  if ( get_trust(ch) >= LEVEL_CREATOR && is_number( arg ) )
     vnum = atoi( arg );
   else
     vnum = -1;

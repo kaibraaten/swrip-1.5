@@ -818,7 +818,7 @@ void do_mset( Character *ch, char *argument )
     {
       if ( !can_mmodify( ch, victim ) )
         return;
-      if ( !is_npc(victim) && get_trust( ch ) < LEVEL_SUPREME )
+      if ( !is_npc(victim) && get_trust( ch ) < LEVEL_IMPLEMENTOR )
         {
           send_to_char( "Not on PC's.\r\n", ch );
           return;
@@ -1160,7 +1160,7 @@ void do_mset( Character *ch, char *argument )
 
   if ( !str_cmp( arg2, "affected" ) )
     {
-      if ( !is_npc( victim ) && get_trust( ch ) < LEVEL_LESSER )
+      if ( !is_npc( victim ) && get_trust( ch ) < LEVEL_CREATOR )
         {
           send_to_char( "You can only modify a mobile's flags.\r\n", ch );
           return;
@@ -1192,7 +1192,7 @@ void do_mset( Character *ch, char *argument )
    */
   if ( !str_cmp( arg2, "r" ) )
     {
-      if ( !is_npc( victim ) && get_trust( ch ) < LEVEL_LESSER )
+      if ( !is_npc( victim ) && get_trust( ch ) < LEVEL_CREATOR )
         {
           send_to_char( "You can only modify a mobile's ris.\r\n", ch );
           return;
@@ -1206,7 +1206,7 @@ void do_mset( Character *ch, char *argument )
     }
   if ( !str_cmp( arg2, "i" ) )
     {
-      if ( !is_npc( victim ) && get_trust( ch ) < LEVEL_LESSER )
+      if ( !is_npc( victim ) && get_trust( ch ) < LEVEL_CREATOR )
         {
           send_to_char( "You can only modify a mobile's ris.\r\n", ch );
           return;
@@ -1221,7 +1221,7 @@ void do_mset( Character *ch, char *argument )
     }
   if ( !str_cmp( arg2, "s" ) )
     {
-      if ( !is_npc( victim ) && get_trust( ch ) < LEVEL_LESSER )
+      if ( !is_npc( victim ) && get_trust( ch ) < LEVEL_CREATOR )
         {
           send_to_char( "You can only modify a mobile's ris.\r\n", ch );
           return;
@@ -1235,7 +1235,7 @@ void do_mset( Character *ch, char *argument )
     }
   if ( !str_cmp( arg2, "ri" ) )
     {
-      if ( !is_npc( victim ) && get_trust( ch ) < LEVEL_LESSER )
+      if ( !is_npc( victim ) && get_trust( ch ) < LEVEL_CREATOR )
         {
           send_to_char( "You can only modify a mobile's ris.\r\n", ch );
           return;
@@ -1252,7 +1252,7 @@ void do_mset( Character *ch, char *argument )
 
   if ( !str_cmp( arg2, "rs" ) )
     {
-      if ( !is_npc( victim ) && get_trust( ch ) < LEVEL_LESSER )
+      if ( !is_npc( victim ) && get_trust( ch ) < LEVEL_CREATOR )
         {
           send_to_char( "You can only modify a mobile's ris.\r\n", ch );
           return;
@@ -1268,7 +1268,7 @@ void do_mset( Character *ch, char *argument )
     }
   if ( !str_cmp( arg2, "is" ) )
     {
-      if ( !is_npc( victim ) && get_trust( ch ) < LEVEL_LESSER )
+      if ( !is_npc( victim ) && get_trust( ch ) < LEVEL_CREATOR )
         {
           send_to_char( "You can only modify a mobile's ris.\r\n", ch );
           return;
@@ -1284,7 +1284,7 @@ void do_mset( Character *ch, char *argument )
     }
   if ( !str_cmp( arg2, "ris" ) )
     {
-      if ( !is_npc( victim ) && get_trust( ch ) < LEVEL_LESSER )
+      if ( !is_npc( victim ) && get_trust( ch ) < LEVEL_CREATOR )
         {
           send_to_char( "You can only modify a mobile's ris.\r\n", ch );
           return;
@@ -1303,7 +1303,7 @@ void do_mset( Character *ch, char *argument )
 
   if ( !str_cmp( arg2, "resistant" ) )
     {
-      if ( !is_npc( victim ) && get_trust( ch ) < LEVEL_LESSER )
+      if ( !is_npc( victim ) && get_trust( ch ) < LEVEL_CREATOR )
         {
           send_to_char( "You can only modify a mobile's resistancies.\r\n", ch );
           return;
@@ -1331,7 +1331,7 @@ void do_mset( Character *ch, char *argument )
 
   if ( !str_cmp( arg2, "immune" ) )
     {
-      if ( !is_npc( victim ) && get_trust( ch ) < LEVEL_LESSER )
+      if ( !is_npc( victim ) && get_trust( ch ) < LEVEL_CREATOR )
         {
           send_to_char( "You can only modify a mobile's immunities.\r\n", ch );
           return;
@@ -1360,7 +1360,7 @@ void do_mset( Character *ch, char *argument )
 
   if ( !str_cmp( arg2, "susceptible" ) )
     {
-      if ( !is_npc( victim ) && get_trust( ch ) < LEVEL_LESSER )
+      if ( !is_npc( victim ) && get_trust( ch ) < LEVEL_CREATOR )
         {
           send_to_char( "You can only modify a mobile's susceptibilities.\r\n", ch );
           return;
@@ -1389,7 +1389,7 @@ void do_mset( Character *ch, char *argument )
 
   if ( !str_cmp( arg2, "part" ) )
     {
-      if ( !is_npc( victim ) && get_trust( ch ) < LEVEL_LESSER )
+      if ( !is_npc( victim ) && get_trust( ch ) < LEVEL_CREATOR )
         {
           send_to_char( "You can only modify a mobile's parts.\r\n", ch );
           return;

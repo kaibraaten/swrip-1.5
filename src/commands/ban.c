@@ -52,9 +52,9 @@ void do_ban( Character *ch, char *argument )
               do_ban( ch, "help" );
               return;
             }
-          if ( atoi(arg) < 1 || atoi(arg) > LEVEL_SUPREME )
+          if ( atoi(arg) < 1 || atoi(arg) > LEVEL_IMPLEMENTOR )
             {
-              ch_printf(ch, "Level range: 1 - %d.\r\n", LEVEL_SUPREME);
+              ch_printf(ch, "Level range: 1 - %d.\r\n", LEVEL_IMPLEMENTOR);
               return;
             }
           pban->level = atoi(arg);
@@ -72,7 +72,7 @@ void do_ban( Character *ch, char *argument )
         }
       else if ( !str_cmp(arg, "total") )
         {
-          pban->level = LEVEL_SUPREME;
+          pban->level = LEVEL_IMPLEMENTOR;
           send_to_char( "Everyone banned.\r\n", ch );
         }
       else

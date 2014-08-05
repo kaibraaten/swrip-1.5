@@ -35,7 +35,7 @@ void do_trust( Character *ch, char *argument )
       return;
     }
 
-  if ( ch->top_level < LEVEL_SUPREME && get_trust( victim ) >= get_trust( ch ) )
+  if ( ch->top_level < LEVEL_IMPLEMENTOR && get_trust( victim ) >= get_trust( ch ) )
     {
       send_to_char( "You can't do that.\r\n", ch );
       return;

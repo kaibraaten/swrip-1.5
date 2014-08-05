@@ -313,7 +313,7 @@ static void nanny_get_old_password( Descriptor *d, char *argument )
   ch = d->character;
   sprintf( log_buf, "%s@%s has connected.", ch->name, d->remote.hostname );
 
-  if ( ch->top_level < LEVEL_DEMI )
+  if ( ch->top_level < LEVEL_CREATOR )
     {
       /*to_channel( log_buf, CHANNEL_MONITOR, "Monitor", ch->top_level );*/
       log_string_plus( log_buf, LOG_COMM, sysdata.log_level );

@@ -26,7 +26,7 @@ void do_loadarea( Character *ch, char *argument )
             found = TRUE;
             break;
 	  }
-      if ( is_npc(ch) || ( get_trust(ch) < LEVEL_GOD
+      if ( is_npc(ch) || ( get_trust(ch) < LEVEL_GREATER
                            &&   tarea && !is_name( tarea->filename, ch->pcdata->bestowments ) ) )
         {
           send_to_char( "You can only load areas you have permission for.\r\n", ch );

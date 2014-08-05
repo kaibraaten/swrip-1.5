@@ -78,27 +78,15 @@
 
 #define MAX_HERB                   20
 
-#define LEVEL_HERO                 (MAX_LEVEL - 5)
-#define LEVEL_IMMORTAL             (MAX_LEVEL - 4)
-#define LEVEL_SUPREME              MAX_LEVEL
-#define LEVEL_INFINITE             (MAX_LEVEL - 1)
-#define LEVEL_ETERNAL              (MAX_LEVEL - 1)
-#define LEVEL_IMPLEMENTOR          (MAX_LEVEL - 1)
+#define LEVEL_IMPLEMENTOR              MAX_LEVEL
 #define LEVEL_SUB_IMPLEM           (MAX_LEVEL - 1)
-#define LEVEL_ASCENDANT            (MAX_LEVEL - 2)
 #define LEVEL_GREATER              (MAX_LEVEL - 2)
-#define LEVEL_GOD                  (MAX_LEVEL - 2)
-#define LEVEL_LESSER               (MAX_LEVEL - 3)
-#define LEVEL_TRUEIMM              (MAX_LEVEL - 3)
-#define LEVEL_DEMI                 (MAX_LEVEL - 3)
-#define LEVEL_SAVIOR               (MAX_LEVEL - 3)
-#define LEVEL_CREATOR              (MAX_LEVEL - 3)
-#define LEVEL_ACOLYTE              (MAX_LEVEL - 4)
-#define LEVEL_NEOPHYTE             (MAX_LEVEL - 4)
+#define LEVEL_CREATOR               (MAX_LEVEL - 3)
+#define LEVEL_IMMORTAL             (MAX_LEVEL - 4)
 #define LEVEL_AVATAR               (MAX_LEVEL - 5)
 
-#define LEVEL_LOG                   LEVEL_LESSER
-#define LEVEL_HIGOD                 LEVEL_GOD
+#define LEVEL_LOG                   LEVEL_CREATOR
+#define LEVEL_HIGOD                 LEVEL_GREATER
 
 #define MOB_VNUM_VENDOR         4  /*vnum of vendor*/
 #define LEVEL_BUY_VENDOR        50   /* minimum level to buy a vendor */

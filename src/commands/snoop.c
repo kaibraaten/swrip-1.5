@@ -64,7 +64,7 @@ void do_snoop( Character *ch, char *argument )
     }
 
   /*  Snoop notification for higher imms, if desired, uncomment this
-      if ( get_trust(victim) > LEVEL_GOD && get_trust(ch) < LEVEL_SUPREME )
+      if ( get_trust(victim) > LEVEL_GREATER && get_trust(ch) < LEVEL_IMPLEMENTOR )
       write_to_descriptor( victim->desc->descriptor, "\r\nYou feel like someone is watching your every move...\r\n", 0 );
   */
   victim->desc->snoop_by = ch->desc;

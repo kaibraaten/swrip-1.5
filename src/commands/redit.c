@@ -231,7 +231,7 @@ void do_redit( Character *ch, char *argument )
           value = get_roomflag( arg2 );
           if ( value < 0 || value > 31 )
             ch_printf( ch, "Unknown flag: %s\r\n", arg2 );
-          else if ( 1 << value == ROOM_PLR_HOME && get_trust(ch) < LEVEL_SUPREME )
+          else if ( 1 << value == ROOM_PLR_HOME && get_trust(ch) < LEVEL_IMPLEMENTOR )
             send_to_char( "If you want to build a player home use the 'empty_home' flag instead.\r\n", ch );
           else
             {

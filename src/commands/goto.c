@@ -71,7 +71,7 @@ void do_goto( Character *ch, char *argument )
 	send_to_char( "Overriding private flag!\r\n", ch );
     }
 
-  if ( get_trust( ch ) < LEVEL_GOD &&
+  if ( get_trust( ch ) < LEVEL_GREATER &&
        !( ch->pcdata->bestowments && is_name( "intergoto", ch->pcdata->bestowments) ))
     {
       vnum = atoi( arg );

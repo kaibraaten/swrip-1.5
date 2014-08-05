@@ -1062,7 +1062,7 @@ struct system_data
   short  think_level;            /* Level of think channel LEVEL_HIGOD*/
   short  build_level;            /* Level of build channel LEVEL_BUILD*/
   short  log_level;              /* Level of log channel LEVEL LOG*/
-  short  level_modify_proto;     /* Level to modify prototype stuff LEVEL_LESSER */
+  short  level_modify_proto;     /* Level to modify prototype stuff LEVEL_CREATOR */
   short  level_override_private; /* override private flag */
   short  level_mset_player;      /* Level to mset a player */
   short  stun_plr_vs_plr;        /* Stun mod player vs. player */

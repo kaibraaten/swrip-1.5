@@ -83,7 +83,7 @@ bool can_oedit( const Character *ch, const OBJ_INDEX_DATA *obj )
   if ( is_npc( ch ) )
     return FALSE;
 
-  if ( get_trust( ch ) >= LEVEL_GOD )
+  if ( get_trust( ch ) >= LEVEL_GREATER )
     return TRUE;
 
   if ( !ch->pcdata || !(pArea=ch->pcdata->area) )
@@ -144,7 +144,7 @@ bool can_medit( const Character *ch, const ProtoMobile *mob )
 
   if ( is_npc( ch ) )
     return FALSE;
-  if ( get_trust( ch ) >= LEVEL_GOD )
+  if ( get_trust( ch ) >= LEVEL_GREATER )
     return TRUE;
   if ( !ch->pcdata || !(pArea=ch->pcdata->area) )
     {

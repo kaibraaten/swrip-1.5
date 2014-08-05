@@ -115,7 +115,7 @@ void do_hijack( Character *ch, char *argument )
 
         {
           p_prev = p->prev;  /* TRI */
-          if (!is_npc(p) && get_trust(p) >= LEVEL_GOD)
+          if (!is_npc(p) && get_trust(p) >= LEVEL_GREATER)
             {
               sprintf( buf2, "%s(%s)", ship->name, ship->personalname );
               ch_printf(p, "&R[alarm] %s has been hijacked by %s!\r\n", buf2, ch->name);

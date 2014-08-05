@@ -92,7 +92,7 @@ void save_home( Character *ch )
       else
         {
           templvl = ch->top_level;
-          ch->top_level = LEVEL_HERO;           /* make sure EQ doesn't get lost */
+          ch->top_level = LEVEL_AVATAR;           /* make sure EQ doesn't get lost */
           contents = ch->plr_home->last_content;
           if (contents)
             fwrite_obj(ch, contents, fp, 0, OS_CARRY );
@@ -208,7 +208,7 @@ void save_char_obj( Character *ch )
    * Also save the player flags so we the wizlist builder can see
    * who is a guest and who is retired.
    */
-  if ( get_trust(ch) > LEVEL_HERO )
+  if ( get_trust(ch) > LEVEL_AVATAR )
     {
       sprintf( strback, "%s%s", GOD_DIR, capitalize( ch->name ) );
 

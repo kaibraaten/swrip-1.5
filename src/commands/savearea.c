@@ -19,7 +19,7 @@ void do_savearea( Character *ch, char *argument )
     {
       bool found;
 
-      if ( get_trust( ch ) < LEVEL_GOD )
+      if ( get_trust( ch ) < LEVEL_GREATER )
         {
           send_to_char( "You can only save your own area.\r\n", ch );
           return;

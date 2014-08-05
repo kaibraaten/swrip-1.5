@@ -32,7 +32,7 @@ void do_retire( Character *ch, char *argument )
       return;
     }
 
-  if ( victim->top_level < LEVEL_SAVIOR )
+  if ( victim->top_level < LEVEL_CREATOR )
     {
       send_to_char( "The minimum level for retirement is savior.\r\n", ch );
       return;
