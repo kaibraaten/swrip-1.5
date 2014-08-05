@@ -2506,15 +2506,6 @@ void dam_message( Character *ch, Character *victim, int dam, int dt )
   if ( dt >=0 && dt < top_sn )
     skill = skill_table[dt];
 
-  if ( dt == (TYPE_HIT + WEAPON_BLASTER ) )
-    {
-      char sound[MAX_STRING_LENGTH];
-      int vol = number_range( 20 , 80 );
-
-      sprintf( sound , "!!SOUND(blaster V=%d)" , vol );
-      sound_to_room(ch->in_room, sound);
-    }
-
   if ( dt == TYPE_HIT || dam==0 )
     {
       sprintf( buf1, "$n %s $N%c",  vp, punct );

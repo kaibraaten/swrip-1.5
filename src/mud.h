@@ -1664,7 +1664,6 @@ DECLARE_DO_FUN( do_bribe );
 DECLARE_DO_FUN( do_seduce );
 DECLARE_DO_FUN( do_mass_propaganda );
 DECLARE_DO_FUN( do_copyship  );
-DECLARE_DO_FUN( do_sound  );
 DECLARE_DO_FUN( do_autopilot  );
 DECLARE_DO_FUN( do_allspeeders  );
 DECLARE_DO_FUN( do_speeders  );
@@ -2267,7 +2266,6 @@ extern "C" {
   char *drunk_speech( const char *argument, Character *ch );
   void talk_channel( Character *ch, const char *argument,
 		     int channel, const char *verb );
-  void sound_to_room( const ROOM_INDEX_DATA *room, const char *argument );
   bool circle_follow( const Character *ch, const Character *victim );
   void add_follower( Character *ch, Character *master );
   void stop_follower( Character *ch );

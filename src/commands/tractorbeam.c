@@ -215,7 +215,6 @@ void do_tractorbeam(Character *ch, char *argument )
   sprintf( buf , "You have been locked in a tractor beam by %s." , ship->name);
   echo_to_cockpit( AT_BLOOD , target , buf );
 
-  sound_to_room( ch->in_room , "!!SOUND(targetlock)" );
   learn_from_success( ch, gsn_tractorbeams );
 
   if ( is_autoflying(target) && !target->target0 && str_cmp( target->owner, ship->owner ) )

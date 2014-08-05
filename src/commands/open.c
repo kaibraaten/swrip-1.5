@@ -56,8 +56,6 @@ void do_open( Character *ch, char *argument )
 		  act( AT_ACTION, "The $d opens.",
 		       rch, NULL, pexit_rev->keyword, TO_CHAR );
 		}
-
-              sound_to_room( pexit->to_room , "!!SOUND(door)" );
             }
 
           remove_bexit_flag( pexit, EX_CLOSED );
@@ -68,7 +66,6 @@ void do_open( Character *ch, char *argument )
 	      check_room_for_traps( ch, trap_door[door]);
 	    }
 
-          sound_to_room( ch->in_room , "!!SOUND(door)" );
           return;
         }
     }

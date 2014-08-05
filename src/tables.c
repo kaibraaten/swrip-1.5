@@ -712,7 +712,6 @@ static const DO_FUN_ENTRY command_fun_table[] = {
       if ( !str_cmp( name, "do_sober" ))                return do_sober;
       if ( !str_cmp( name, "do_socials" ))              return do_socials;
       if ( !str_cmp( name, "do_south" ))                return do_south;
-      if ( !str_cmp( name, "do_sound" ))                return do_sound;
       if ( !str_cmp( name, "do_southeast" ))            return do_southeast;
       if ( !str_cmp( name, "do_southwest" ))            return do_southwest;
       if ( !str_cmp( name, "do_speak" ))                return do_speak;

@@ -180,7 +180,6 @@ void do_target(Character *ch, char *argument )
       if( dship->docked && dship->docked == ship )
         dship->target0 = target;
 
-  sound_to_room( ch->in_room , "!!SOUND(targetlock)" );
   learn_from_success( ch, gsn_weaponsystems );
 
   if ( is_autoflying(target) && !target->target0)

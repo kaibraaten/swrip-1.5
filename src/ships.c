@@ -544,22 +544,6 @@ static void launchship( SHIP_DATA *ship )
       return;
     }
 
-  if (ship->sclass == MIDSIZE_SHIP)
-    {
-      sound_to_room( get_room_index(ship->location) , "!!SOUND(falcon)" );
-      sound_to_ship(ship , "!!SOUND(falcon)" );
-    }
-  else if (ship->type == SHIP_IMPERIAL )
-    {
-      sound_to_ship(ship , "!!SOUND(tie)" );
-      sound_to_room( get_room_index(ship->location) , "!!SOUND(tie)" );
-    }
-  else
-    {
-      sound_to_ship(ship , "!!SOUND(xwing)" );
-      sound_to_room( get_room_index(ship->location) , "!!SOUND(xwing)" );
-    }
-
   extract_ship(ship);
 
   ship->location = 0;
@@ -1162,26 +1146,6 @@ void echo_to_ship( int color, SHIP_DATA *ship, const char *argument )
   for ( room = ship->room.first ; room <= ship->room.last ;room++ )
     {
       echo_to_room( color , get_room_index(room) , argument );
-    }
-}
-
-void sound_to_ship( SHIP_DATA *ship, const char *argument )
-{
-  int roomnum = 0;
-
-  for ( roomnum = ship->room.first ; roomnum <= ship->room.last ;roomnum++ )
-    {
-      ROOM_INDEX_DATA *room = get_room_index( roomnum );
-      Character *vic = NULL;
-
-      if ( room == NULL )
-        continue;
-
-      for ( vic = room->first_person; vic; vic = vic->next_in_room )
-        {
-          if ( !is_npc(vic) && IS_SET( vic->act, PLR_SOUND ) )
-            send_to_char( argument, vic );
-        }
     }
 }
 

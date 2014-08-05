@@ -91,11 +91,6 @@ void do_config( Character *ch, char *argument )
                      : "[-ansi     ] You don't receive receive ANSI colors.\r\n"
                      , ch );
 
-      send_to_char(  IS_SET(ch->act, PLR_SOUND)
-                     ? "[+SOUND     ] You have MSP support.\r\n"
-                     : "[-sound     ] You don't have MSP support.\r\n"
-                     , ch );
-
 
       send_to_char(  IS_SET(ch->act, PLR_SHOVEDRAG)
                      ? "[+SHOVEDRAG] You allow yourself to be shoved and dragged around.\r\n"
@@ -185,8 +180,6 @@ void do_config( Character *ch, char *argument )
 	bit = PLR_TELNET_GA;
       else if ( !str_prefix( arg+1, "ansi"     ) )
 	bit = PLR_ANSI;
-      else if ( !str_prefix( arg+1, "sound"      ) )
-	bit = PLR_SOUND;
       else if ( !str_prefix( arg+1, "flee"     ) )
 	bit = PLR_FLEE;
       else if ( !str_prefix( arg+1, "nice"     ) )

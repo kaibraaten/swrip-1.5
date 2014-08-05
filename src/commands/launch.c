@@ -204,8 +204,6 @@ void do_launch( Character *ch, char *argument )
           sprintf( buf , "The hatch on %s closes." , ship->name);
           echo_to_room( AT_YELLOW , get_room_index(ship->location) , buf );
           echo_to_room( AT_YELLOW , get_room_index(ship->room.entrance) , "The hatch slides shut." );
-          sound_to_room( get_room_index(ship->room.entrance) , "!!SOUND(door)" );
-          sound_to_room( get_room_index(ship->location) , "!!SOUND(door)" );
         }
 
       set_char_color( AT_GREEN, ch );
@@ -228,7 +226,6 @@ void do_launch( Character *ch, char *argument )
       if ( ship->sclass == CAPITAL_SHIP )
         learn_from_success( ch, gsn_capitalships );
 
-      sound_to_ship(ship , "!!SOUND(xwing)" );
       return;
     }
 

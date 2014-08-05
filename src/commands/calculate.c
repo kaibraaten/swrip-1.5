@@ -161,8 +161,6 @@ void do_calculate(Character *ch, char *argument )
 
   ship->orighyperdistance = ship->hyperdistance;
 
-  sound_to_room( ch->in_room , "!!SOUND(computer)" );
-
   sprintf(buf, "&GHyperspace course set. Estimated distance: %d\r\nReady for the jump to lightspeed.\r\n", ship->hyperdistance );
   send_to_char( buf, ch);
   echo_to_docked( AT_YELLOW , ship, "The docking port link shows a new course being calculated." );

@@ -31,11 +31,6 @@ void do_help( Character *ch, char *argument )
       pager_printf( ch, "%s\r\n", get_help_keyword( pHelp ) );
     }
 
-  if ( !is_npc(ch) && IS_SET( ch->act , PLR_SOUND ) )
-    {
-      pager_printf( ch, "!!SOUND(help)" );
-    }
-
   /*
    * Strip leading '.' to allow initial blanks.
    */

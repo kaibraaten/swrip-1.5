@@ -34,8 +34,6 @@ static void nanny_get_new_sex( Descriptor *d, char *argument );
 static void nanny_get_new_race( Descriptor *d, char *argument );
 static void nanny_get_new_class( Descriptor *d, char *argument );
 static void nanny_stats_ok( Descriptor *d, char *argument );
-static void nanny_get_want_ansi( Descriptor *d, char *argument );
-static void nanny_get_msp( Descriptor *d, char *argument );
 static void nanny_press_enter( Descriptor *d, char *argument );
 static void nanny_read_motd( Descriptor *d, char *argument );
 
@@ -88,14 +86,6 @@ void nanny( Descriptor *d, char *argument )
 
     case CON_STATS_OK:
       nanny_stats_ok( d, argument );
-      break;
-
-    case CON_GET_WANT_RIPANSI:
-      nanny_get_want_ansi( d, argument );
-      break;
-
-    case CON_GET_MSP:
-      nanny_get_msp( d, argument );
       break;
 
     case CON_PRESS_ENTER:
@@ -626,6 +616,7 @@ static void nanny_stats_ok( Descriptor *d, char *argument )
 {
   Character *ch = d->character;
   char buf[MAX_STRING_LENGTH];
+  int ability = ABILITY_NONE;
 
   switch ( argument[0] )
     {
@@ -661,54 +652,7 @@ static void nanny_stats_ok( Descriptor *d, char *argument )
       return;
     }
 
-  write_to_buffer( d, "\r\nWould you like ANSI color support, (Y/N)? ", 0 );
-  d->connection_state = CON_GET_WANT_RIPANSI;
-}
-
-static void nanny_get_want_ansi( Descriptor *d, char *argument )
-{
-  Character *ch = d->character;
-
-  switch ( argument[0] )
-    {
-    case 'y':
-    case 'Y':
-      SET_BIT(ch->act,PLR_ANSI);
-    break;
-
-    case 'n':
-    case 'N':
-      break;
-
-    default:
-      write_to_buffer( d, "Invalid selection.\r\nYES or NO? ", 0 );
-      return;
-    }
-
-  write_to_buffer( d, "Does your mud client have the Mud Sound Protocol, (Y/N)? ", 0);
-  d->connection_state = CON_GET_MSP;
-}
-
-static void nanny_get_msp( Descriptor *d, char *argument )
-{
-  int ability = 0;
-  Character *ch = d->character;
-
-  switch ( argument[0] )
-    {
-    case 'y':
-    case 'Y':
-      SET_BIT(ch->act,PLR_SOUND);
-    break;
-
-    case 'n':
-    case 'N':
-      break;
-
-    default:
-      write_to_buffer( d, "Invalid selection.\r\nYES or NO? ", 0 );
-      return;
-    }
+  SET_BIT( ch->act, PLR_ANSI );
 
   sprintf( log_buf, "%s@%s new %s.", ch->name, d->remote.hostname,
 	   race_table[ch->race].race_name);
@@ -716,7 +660,6 @@ static void nanny_get_msp( Descriptor *d, char *argument )
   to_channel( log_buf, CHANNEL_MONITOR, "Monitor", LEVEL_IMMORTAL );
   write_to_buffer( d, "Press [ENTER] ", 0 );
   write_to_buffer( d, "Press enter...\r\n", 0 );
-  d->connection_state = CON_PRESS_ENTER;
 
   for ( ability =0 ; ability < MAX_ABILITY ; ability++ )
     {
@@ -776,11 +719,6 @@ static void nanny_read_motd( Descriptor *d, char *argument )
   write_to_buffer( d, "\r\nWelcome to Rise in Power...\r\n\r\n", 0 );
   add_char( ch );
   d->connection_state      = CON_PLAYING;
-
-  if ( !is_npc(ch) && IS_SET( ch->act , PLR_SOUND ) )
-    {
-      send_to_char( "!!MUSIC(starwars.mid V=100)" , ch );
-    }
 
   if ( ch->top_level == 0 )
     {

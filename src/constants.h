@@ -67,7 +67,6 @@
 
 #define MAX_REXITS                 20   /* Maximum exits allowed in 1 room */
 #define MAX_SKILL                 276
-#define MAX_ABILITY                 9
 #define MAX_RL_ABILITY              8
 #define MAX_NPC_RACE               91
 #define MAX_LEVEL                 105
@@ -209,8 +208,9 @@ typedef enum
 #define SMUGGLING_ABILITY       4
 #define DIPLOMACY_ABILITY       5
 #define LEADERSHIP_ABILITY      6
-#define COMMANDO_ABILITY        8
 #define FORCE_ABILITY           7
+#define COMMANDO_ABILITY        8
+#define MAX_ABILITY             9
 
 /* the races */
 #define RACE_HUMAN                0
@@ -1365,23 +1365,21 @@ typedef enum
 /*
  * ACT bits for players.
  */
-#define PLR_is_npc                    BV00      /* Don't EVER set.      */
-#define PLR_BOUGHT_PET                BV01
-#define PLR_SHOVEDRAG                 BV02
-#define PLR_AUTOEXIT                  BV03
-#define PLR_AUTOLOOT                  BV04
-#define PLR_AUTOSAC                   BV05
-#define PLR_BLANK                     BV06
-#define PLR_QUESTOR                   BV07
-#define PLR_BRIEF                     BV08
-#define PLR_COMBINE                   BV09
-#define PLR_PROMPT                    BV10
-#define PLR_TELNET_GA                 BV11
-
+#define PLR_is_npc                 BV00      /* Don't EVER set.      */
+#define PLR_BOUGHT_PET             BV01
+#define PLR_SHOVEDRAG              BV02
+#define PLR_AUTOEXIT               BV03
+#define PLR_AUTOLOOT               BV04
+#define PLR_AUTOSAC                BV05
+#define PLR_BLANK                  BV06
+#define PLR_QUESTOR                BV07
+#define PLR_BRIEF                  BV08
+#define PLR_COMBINE                BV09
+#define PLR_PROMPT                 BV10
+#define PLR_TELNET_GA              BV11
 #define PLR_HOLYLIGHT              BV12
 #define PLR_WIZINVIS               BV13
 #define PLR_ROOMVNUM               BV14
-
 #define PLR_SILENCE                BV15
 #define PLR_NO_EMOTE               BV16
 #define PLR_DONTAUTOFUEL           BV17
@@ -1393,7 +1391,7 @@ typedef enum
 #define PLR_HOME_RESIDENT          BV23
 #define PLR_LITTERBUG              BV24
 #define PLR_ANSI                   BV25
-#define PLR_SOUND                  BV26
+
 #define PLR_NICE                   BV27
 #define PLR_FLEE                   BV28
 #define PLR_AUTOGOLD               BV29

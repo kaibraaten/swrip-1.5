@@ -183,7 +183,7 @@ void do_mset( Character *ch, char *argument )
     }
   else
     {
-      minattr = 3;
+      minattr = 1;
       maxattr = 25;
     }
 
@@ -301,9 +301,10 @@ void do_mset( Character *ch, char *argument )
     {
       if ( !can_mmodify( ch, victim ) )
         return;
-      if ( value < 0 || value > 20 )
+
+      if ( value < minattr || value > 20 )
         {
-          ch_printf( ch, "Frc range is %d to %d.\r\n", minattr, maxattr );
+          ch_printf( ch, "Frc range is %d to %d.\r\n", minattr, 20 );
           return;
         }
       victim->stats.perm_frc = value;

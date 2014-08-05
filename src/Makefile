@@ -456,7 +456,6 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/snoop.o \
 	$(CMDDIR)/sober.o \
 	$(CMDDIR)/socials.o \
-	$(CMDDIR)/sound.o \
 	$(CMDDIR)/south.o \
 	$(CMDDIR)/southeast.o \
 	$(CMDDIR)/southwest.o \

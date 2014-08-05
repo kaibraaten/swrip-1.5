@@ -8,7 +8,6 @@ ch_ret drive_ship( Character *ch, SHIP_DATA *ship, Exit *exit, int fall );
 void resetship( SHIP_DATA *ship );
 void write_ship_list( void );
 void echo_to_docked( int color, SHIP_DATA *ship, const char *argument );
-void sound_to_ship( SHIP_DATA *ship, const char *argument );
 bool candock( const SHIP_DATA *ship );
 bool ship_is_in_hyperspace( const SHIP_DATA *ship );
 bool ship_is_disabled( const SHIP_DATA *ship );
