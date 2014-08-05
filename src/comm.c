@@ -734,7 +734,7 @@ void new_descriptor( socket_t new_desc )
            buf, dnew->remote.port );
   log_string_plus( log_buf, LOG_COMM, sysdata.log_level );
 
-  dnew->remote.hostname = STRALLOC( buf );
+  dnew->remote.hostip = STRALLOC( buf );
 
   if ( !sysdata.NO_NAME_RESOLVING )
     from = gethostbyaddr( (char *) &sock.sin_addr,
