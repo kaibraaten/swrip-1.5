@@ -75,7 +75,6 @@
 #define MAX_PLANET                100
 #define MAX_SHIP                 1000
 #define MAX_BOUNTY                255
-#define MAX_GOV                   255
 #define MAX_RAN_POP                16
 
 #define MAX_HERB                   20
