@@ -658,15 +658,10 @@ void game_loop( )
 
 void init_descriptor(Descriptor *dnew, socket_t desc)
 {
-  dnew->next          = NULL;
   dnew->descriptor    = desc;
   dnew->connection_state     = CON_GET_NAME;
   dnew->outsize       = 2000;
-  dnew->idle          = 0;
-  dnew->newstate      = 0;
   dnew->prevcolor     = 0x07;
-  dnew->original      = NULL;
-  dnew->character     = NULL;
 
   CREATE( dnew->outbuf, char, dnew->outsize );
 }
@@ -677,7 +672,6 @@ void new_descriptor( socket_t new_desc )
   Descriptor *dnew = NULL;
   Ban *pban;
   struct hostent  *from;
-  char *hostname;
   struct sockaddr_in sock;
   socket_t desc = 0;
   socklen_t size = 0;
@@ -737,19 +731,23 @@ void new_descriptor( socket_t new_desc )
   dnew->remote.hostip = STRALLOC( buf );
 
   if ( !sysdata.NO_NAME_RESOLVING )
-    from = gethostbyaddr( (char *) &sock.sin_addr,
-                          sizeof(sock.sin_addr), AF_INET );
+    {
+      from = gethostbyaddr( (char *) &sock.sin_addr,
+			    sizeof(sock.sin_addr), AF_INET );
+    }
   else
-    from = NULL;
+    {
+      from = NULL;
+    }
 
-  hostname = STRALLOC( (char *)( from ? from->h_name : "") );
+  dnew->remote.hostname = STRALLOC( (char *)( from ? from->h_name : buf) );
 
   for ( pban = first_ban; pban; pban = pban->next )
     {
       if (
           (
            !str_prefix( pban->name, dnew->remote.hostname )
-           || !str_suffix ( pban->name , hostname )
+           || !str_suffix ( pban->name , dnew->remote.hostname )
            )
           &&  pban->level >= LEVEL_IMPLEMENTOR
           )
@@ -760,12 +758,6 @@ void new_descriptor( socket_t new_desc )
           set_alarm( 0 );
           return;
         }
-    }
-
-  if ( !sysdata.NO_NAME_RESOLVING )
-    {
-      STRFREE ( dnew->remote.hostname);
-      dnew->remote.hostname = STRALLOC( (char *)( from ? from->h_name : buf) );
     }
 
   /*

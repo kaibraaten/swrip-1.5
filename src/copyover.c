@@ -128,8 +128,8 @@ void do_copyover( Character * ch, char *argument )
       socket_t cur_desc = d->descriptor;
 #endif
 
-      fprintf( fp, "%d %d %s %s\n", cur_desc, 0, /*d->mccp ? 1 : 0,*/
-	       och->name, d->remote.hostname );
+      fprintf( fp, "%d %d %s %s %s\n", cur_desc, 0, /*d->mccp ? 1 : 0,*/
+	       och->name, d->remote.hostip, d->remote.hostname );
       save_char_obj( och );
       write_to_descriptor( d->descriptor, buf, 0 );
     }
@@ -190,6 +190,7 @@ void copyover_recover( void )
   FILE *fp = NULL;
   char name[100];
   char host[MAX_STRING_LENGTH];
+  char ip[MAX_STRING_LENGTH];
   socket_t desc = 0;
   bool fOld = FALSE;
   int use_mccp = 0;
@@ -209,7 +210,7 @@ void copyover_recover( void )
 				   - doesn't prevent reading */
   for( ;; )
   {
-    fscanf( fp, "%d %d %s %s\n", &desc, &use_mccp, name, host );
+    fscanf( fp, "%d %d %s %s %s\n", &desc, &use_mccp, name, ip, host );
 
     if( desc == -1 || feof( fp ) )
       break;
@@ -227,6 +228,7 @@ void copyover_recover( void )
     CREATE( d, Descriptor, 1 );
     init_descriptor( d, desc ); /* set up various stuff */
     d->remote.hostname = STRALLOC( host );
+    d->remote.hostip = STRALLOC( ip );
 
     /* Write something, and check if it goes error-free */
     if( !write_to_descriptor( d->descriptor, "\r\nThe surge of Light passes leaving you unscathed and your world reshaped anew\r\n", 0 ) )
