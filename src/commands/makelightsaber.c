@@ -33,7 +33,7 @@ void do_makelightsaber( Character *ch, char *argument )
       { ITEM_BATTERY,        CRAFTFLAG_EXTRACT },
       { ITEM_CIRCUIT,        CRAFTFLAG_EXTRACT },
       { ITEM_SUPERCONDUCTOR, CRAFTFLAG_EXTRACT },
-      { ITEM_NONE,           CRAFTFLAG_EXTRACT },
+      { ITEM_NONE,           CRAFTFLAG_NONE },
     };
   CraftRecipe *recipe = AllocateCraftRecipe( gsn_lightsaber_crafting, materials,
 					     25, OBJ_VNUM_CRAFTING_LIGHTSABER );
@@ -117,7 +117,7 @@ static void SetObjectStatsHandler( void *userData, void *args )
   lightsaber->short_descr = STRALLOC( buf );
 
   STRFREE( lightsaber->description );
-  strcat( buf, " was carelessly misplaced here." );
+  sprintf( buf, "%s was carelessly misplaced here.", capitalize( itemName ) );
   lightsaber->description = STRALLOC( buf );
 
   STRFREE( lightsaber->action_desc );

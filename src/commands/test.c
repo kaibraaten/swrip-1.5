@@ -49,7 +49,7 @@ static void SetObjectStatsHandler( void *userData, void *args )
   obj->short_descr = STRALLOC( itemName );
 
   STRFREE( obj->description );
-  sprintf( description, "%s was dropped here.", itemName );
+  sprintf( description, "%s was dropped here.", capitalize( itemName ) );
   obj->description = STRALLOC( description );
 
   obj->value[0] = obj->level;

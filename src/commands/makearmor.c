@@ -1,45 +1,73 @@
 #include <string.h>
 #include "mud.h"
 #include "character.h"
+#include "craft.h"
 
-static void OnStart( Character *ch, char *argument );
-static void OnFinished( Character *ch );
-static void OnAbort( Character *ch );
+enum { WearLocation, ItemName };
+
+struct UserData
+{
+  int ArmorValue;
+};
+
+static CraftRecipe *CreateMakeArmorRecipe( void );
+static void InterpretArgumentsHandler( void *userData, void *args );
+static void CheckRequirementsHandler( void *userData, void *args );
+static void MaterialFoundHandler( void *userData, void *args );
+static void SetObjectStatsHandler( void *userData, void *args );
+static void FinishedCraftingHandler( void *userData, void *args );
+static void AbortHandler( void *userData, void *args );
 
 void do_makearmor( Character *ch, char *argument )
 {
-  switch( ch->substate )
-    {
-    default:
-      OnStart( ch, argument );
-      break;
+  CraftRecipe *recipe = CreateMakeArmorRecipe();
+  CraftingSession *session = AllocateCraftingSession( recipe, ch, argument );
+  struct UserData *data;
 
-    case SUB_PAUSE:
-      ch->substate = SUB_NONE;
-      OnFinished( ch );
-      break;
+  CREATE( data, struct UserData, 1 );
 
-    case SUB_TIMER_DO_ABORT:
-      ch->substate = SUB_NONE;
-      OnAbort( ch );
-      break;
-    }
+  AddEventHandler( session->OnInterpretArguments, data, InterpretArgumentsHandler );
+  AddEventHandler( session->OnCheckRequirements, data, CheckRequirementsHandler );
+  AddEventHandler( session->OnMaterialFound, data, MaterialFoundHandler );
+  AddEventHandler( session->OnSetObjectStats, data, SetObjectStatsHandler );
+  AddEventHandler( session->OnFinishedCrafting, data, FinishedCraftingHandler );
+  AddEventHandler( session->OnAbort, data, AbortHandler );
+
+  StartCrafting( session );
 }
 
-static void OnStart( Character *ch, char *argument )
+static CraftRecipe *CreateMakeArmorRecipe( void )
 {
-  char arg[MAX_INPUT_LENGTH];
-  char arg2[MAX_INPUT_LENGTH];
-  int the_chance = 0;
-  bool checksew = false, checkfab = false;
-  OBJ_DATA *obj = NULL;
+  static const struct CraftingMaterial materials[] =
+    {
+      { ITEM_THREAD, CRAFTFLAG_NONE },
+      { ITEM_FABRIC, CRAFTFLAG_EXTRACT },
+      { ITEM_NONE, CRAFTFLAG_NONE }
+    };
+  CraftRecipe *recipe = AllocateCraftRecipe( gsn_makearmor, materials,
+					     15, OBJ_VNUM_CRAFTING_ARMOR );
 
+  return recipe;
+}
+
+static void InterpretArgumentsHandler( void *userData, void *args )
+{
+  InterpretArgumentsEventArgs *eventArgs = (InterpretArgumentsEventArgs*) args;
+  CraftingSession *session = eventArgs->CraftingSession;
+  char originalArgs[MAX_INPUT_LENGTH];
+  char *argument = originalArgs;
+  char arg[MAX_STRING_LENGTH];
+  char arg2[MAX_STRING_LENGTH];
+  Character *ch = GetEngineer( session );
+
+  strcpy( argument, eventArgs->CommandArguments );
   argument = one_argument( argument, arg );
-  strcpy ( arg2, argument);
+  strcpy( arg2, argument );
 
   if ( arg2[0] == '\0' )
     {
       send_to_char( "&RUsage: Makearmor <wearloc> <name>\r\n&w", ch);
+      eventArgs->AbortSession = true;
       return;
     }
 
@@ -52,6 +80,7 @@ static void OnStart( Character *ch, char *argument )
     {
       send_to_char( "&RYou cannot make clothing for that body part.\r\n&w", ch);
       send_to_char( "&RTry MAKEJEWELRY.\r\n&w", ch);
+      eventArgs->AbortSession = true;
       return;
     }
 
@@ -59,6 +88,7 @@ static void OnStart( Character *ch, char *argument )
     {
       send_to_char( "&RYou cannot make clothing worn as a shield.\r\n&w", ch);
       send_to_char( "&RTry MAKESHIELD.\r\n&w", ch);
+      eventArgs->AbortSession = true;
       return;
     }
 
@@ -66,149 +96,79 @@ static void OnStart( Character *ch, char *argument )
     {
       send_to_char( "&RAre you going to fight with your clothing?\r\n&w", ch);
       send_to_char( "&RTry MAKEBLADE...\r\n&w", ch);
+      eventArgs->AbortSession = true;
       return;
     }
+
+  AddCraftingArgument( session, arg );
+  AddCraftingArgument( session, arg2 );
+}
+
+static void CheckRequirementsHandler( void *userData, void *args )
+{
+  CheckRequirementsEventArgs *eventArgs = (CheckRequirementsEventArgs*) args;
+  Character *ch = GetEngineer( eventArgs->CraftingSession );
 
   if ( !IS_SET( ch->in_room->room_flags, ROOM_FACTORY ) )
     {
       send_to_char( "&RYou need to be in a factory or workshop to do that.\r\n", ch);
+      eventArgs->AbortSession = true;
       return;
-    }
-
-  for ( obj = ch->last_carrying; obj; obj = obj->prev_content )
-    {
-      if (obj->item_type == ITEM_FABRIC)
-	checkfab = true;
-
-      if (obj->item_type == ITEM_THREAD)
-	checksew = true;
-    }
-
-  if ( !checkfab )
-    {
-      send_to_char( "&RYou need some sort of fabric or material.\r\n", ch);
-      return;
-    }
-
-  if ( !checksew )
-    {
-      send_to_char( "&RYou need a needle and some thread.\r\n", ch);
-      return;
-    }
-
-  the_chance = is_npc(ch) ? ch->top_level
-    : (int) (ch->pcdata->learned[gsn_makearmor]);
-
-  if ( number_percent( ) < the_chance )
-    {
-      send_to_char( "&GYou begin the long process of creating some armor.\r\n", ch);
-      act( AT_PLAIN, "$n takes $s sewing kit and some material and begins to work.", ch,
-	   NULL, argument , TO_ROOM );
-      add_timer ( ch , TIMER_DO_FUN , 15 , do_makearmor , SUB_PAUSE );
-      ch->dest_buf = str_dup(arg);
-      ch->dest_buf_2 = str_dup(arg2);
-    }
-  else
-    {
-      send_to_char("&RYou can't figure out what to do.\r\n",ch);
-      learn_from_failure( ch, gsn_makearmor );
     }
 }
 
-static void OnFinished( Character *ch )
+static void MaterialFoundHandler( void *userData, void *args )
 {
-  char arg[MAX_INPUT_LENGTH];
-  char arg2[MAX_INPUT_LENGTH];
-  char buf[MAX_STRING_LENGTH];
-  int level = 0, the_chance = 0;
-  bool checksew = false, checkfab = false;
-  OBJ_DATA *obj = NULL;
-  OBJ_DATA *material = NULL;
-  int value = 0;
-  long xpgain = 0;
+  struct UserData *ud = (struct UserData*) userData;
+  MaterialFoundEventArgs *eventArgs = (MaterialFoundEventArgs*) args;
 
-  if ( !ch->dest_buf )
+  if( eventArgs->Object->item_type == ITEM_FABRIC )
     {
-      return;
+      ud->ArmorValue = eventArgs->Object->value[1];
     }
+}
 
-  if ( !ch->dest_buf_2 )
-    {
-      return;
-    }
+static void SetObjectStatsHandler( void *userData, void *args )
+{
+  struct UserData *ud = (struct UserData*) userData;
+  SetObjectStatsEventArgs *eventArgs = (SetObjectStatsEventArgs*) args;
+  OBJ_DATA *armor = eventArgs->Object;
+  const char *wearLocation = GetCraftingArgument( eventArgs->CraftingSession, WearLocation );
+  const char *itemName = GetCraftingArgument( eventArgs->CraftingSession, ItemName );
+  char description[MAX_STRING_LENGTH];
+  long value = 0;
 
-  strcpy(arg, (const char*)ch->dest_buf);
-  DISPOSE( ch->dest_buf);
-  strcpy(arg2, (const char*)ch->dest_buf_2);
-  DISPOSE( ch->dest_buf_2);
-
-  level = is_npc(ch) ? ch->top_level : (int) (ch->pcdata->learned[gsn_makearmor]);
-
-  for ( obj = ch->last_carrying; obj; obj = obj->prev_content )
-    {
-      if (obj->item_type == ITEM_THREAD)
-        checksew = true;
-      if (obj->item_type == ITEM_FABRIC && checkfab == false)
-        {
-          checkfab = true;
-          separate_obj( obj );
-          obj_from_char( obj );
-          material = obj;
-        }
-    }
-
-  the_chance = is_npc(ch) ? ch->top_level
-    : (int) (ch->pcdata->learned[gsn_makearmor]) ;
-
-  if ( number_percent( ) > the_chance*2  || ( !checkfab ) || ( !checksew ) )
-    {
-      send_to_char( "&RYou hold up your newly created armor.\r\n", ch);
-      send_to_char( "&RIt suddenly dawns upon you that you have created the most useless\r\n", ch);
-      send_to_char( "&Rgarment you've ever seen. You quickly hide your mistake...\r\n", ch);
-      learn_from_failure( ch, gsn_makearmor );
-      return;
-    }
-
-  obj = material;
-
-  obj->item_type = ITEM_ARMOR;
-  SET_BIT( obj->wear_flags, ITEM_TAKE );
-  value = get_wearflag( arg );
+  armor->item_type = ITEM_ARMOR;
+  SET_BIT( armor->wear_flags, ITEM_TAKE );
+  value = get_wearflag( wearLocation );
 
   if ( value < 0 || value > 31 )
-    SET_BIT( obj->wear_flags, ITEM_WEAR_BODY );
+    SET_BIT( armor->wear_flags, ITEM_WEAR_BODY );
   else
-    SET_BIT( obj->wear_flags, 1 << value );
+    SET_BIT( armor->wear_flags, 1 << value );
 
-  obj->level = level;
-  STRFREE( obj->name );
-  strcpy( buf, arg2 );
-  obj->name = STRALLOC( buf );
-  strcpy( buf, arg2 );
-  STRFREE( obj->short_descr );
-  obj->short_descr = STRALLOC( buf );
-  STRFREE( obj->description );
-  strcat( buf, " was dropped here." );
-  obj->description = STRALLOC( buf );
-  obj->value[0] = obj->value[1];
-  obj->cost *= 10;
+  STRFREE( armor->name );
+  armor->name = STRALLOC( itemName );
 
-  obj = obj_to_char( obj, ch );
+  STRFREE( armor->short_descr );
+  armor->short_descr = STRALLOC( itemName );
 
-  send_to_char( "&GYou finish your work and hold up your newly created garment.&w\r\n", ch);
-  act( AT_PLAIN, "$n finishes sewing some new armor.", ch,
-       NULL, NULL , TO_ROOM );
+  STRFREE( armor->description );
+  sprintf( description, "%s was dropped here.", capitalize( itemName ) );
+  armor->description = STRALLOC( description );
 
-  xpgain = UMIN( obj->cost*100 ,( exp_level(get_level( ch, ENGINEERING_ABILITY ) + 1) - exp_level(get_level( ch, ENGINEERING_ABILITY ) ) ) );
-  gain_exp(ch, ENGINEERING_ABILITY, xpgain );
-  ch_printf( ch , "You gain %d engineering experience.", xpgain );
-
-  learn_from_success( ch, gsn_makearmor );
+  armor->value[0] = armor->value[1] = ud->ArmorValue;
+  armor->cost *= 10;
 }
 
-static void OnAbort( Character *ch )
+static void FinishedCraftingHandler( void *userData, void *args )
 {
-  DISPOSE( ch->dest_buf );
-  DISPOSE( ch->dest_buf_2 );
-  send_to_char("&RYou are interupted and fail to finish your work.\r\n", ch);
+  struct UserData *ud = (struct UserData*) userData;
+  DISPOSE( ud );
+}
+
+static void AbortHandler( void *userData, void *args )
+{
+  struct UserData *ud = (struct UserData*) userData;
+  DISPOSE( ud );
 }
