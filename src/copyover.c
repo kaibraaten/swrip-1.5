@@ -104,7 +104,7 @@ void do_copyover( Character * ch, char *argument )
     {
       write_to_descriptor( d->descriptor, "\r\nSorry, we are rebooting."
 			   " Come back in a few minutes.\r\n", 0 );
-      close_socket( d, FALSE );	/* throw'em out */
+      close_socket( d, false );	/* throw'em out */
     }
     else
     {
@@ -192,7 +192,7 @@ void copyover_recover( void )
   char host[MAX_STRING_LENGTH];
   char ip[MAX_STRING_LENGTH];
   socket_t desc = 0;
-  bool fOld = FALSE;
+  bool fOld = false;
   int use_mccp = 0;
 
   log_string( "Copyover recovery initiated" );
@@ -243,14 +243,14 @@ void copyover_recover( void )
     d->connection_state = CON_COPYOVER_RECOVER; /* negative so close_socket will cut them off */
 
     /* Now, find the pfile */
-    fOld = load_char_obj( d, name, FALSE );
+    fOld = load_char_obj( d, name, false );
 
     if( !fOld )		/* Player file not found?! */
     {
       write_to_descriptor( d->descriptor,
 			   "\r\nSomehow, your character was lost in the copyover sorry.\r\n",
 			   0 );
-      close_socket( d, FALSE );
+      close_socket( d, false );
     }
     else			/* ok! */
     {
