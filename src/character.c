@@ -1012,7 +1012,7 @@ bool is_waiting_for_auth( const Character *ch )
 
 #define DISGUISE(ch)            ((!nifty_is_name((ch)->name, (ch)->pcdata->title)) ? 1 : 0)
 
-char *PERS( const Character *ch, const Character *looker )
+const char *PERS( const Character *ch, const Character *looker )
 {
   return can_see( looker, ch ) ? ( is_npc(ch) ? ch->short_descr : ((get_trust(looker) <= LEVEL_IMMORTAL) ? (DISGUISE(ch) ? ch->pcdata->title : ch->name ) : ch->name)) : ( is_immortal(ch) ? "A Great One" : "someone" );
 }

@@ -819,7 +819,7 @@ struct pc_data
   int         played;
   time_t      logon;
   time_t      save_time;
-  CraftingSession *CraftingSession;
+  struct CraftingSession *CraftingSession;
 #ifdef SWRIP_USE_IMC
   IMC_CHARDATA *imcchardata;
 #endif

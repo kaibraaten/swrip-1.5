@@ -43,39 +43,39 @@ struct CraftingSessionImpl;
 
 struct InterpretArgumentsEventArgs
 {
-  CraftingSession *CraftingSession;
+  struct CraftingSession *CraftingSession;
   const char *CommandArguments;
   bool AbortSession;
 };
 
 struct MaterialFoundEventArgs
 {
-  CraftingSession *CraftingSession;
+  struct CraftingSession *CraftingSession;
   OBJ_DATA *Object;
   bool KeepFinding;
 };
 
 struct SetObjectStatsEventArgs
 {
-  CraftingSession *CraftingSession;
+  struct CraftingSession *CraftingSession;
   OBJ_DATA *Object;
 };
 
 struct FinishedCraftingEventArgs
 {
-  CraftingSession *CraftingSession;
+  struct CraftingSession *CraftingSession;
   OBJ_DATA *Object;
 };
 
 struct CheckRequirementsEventArgs
 {
-  CraftingSession *CraftingSession;
+  struct CraftingSession *CraftingSession;
   bool AbortSession;
 };
 
 struct AbortEventArgs
 {
-  CraftingSession *CraftingSession;
+  struct CraftingSession *CraftingSession;
 };
 
 struct CraftingSession

@@ -371,7 +371,7 @@ bool is_not_authed( const Character *ch );
 
 bool is_waiting_for_auth( const Character *ch );
 
-char *PERS( const Character *ch, const Character *looker );
+const char *PERS( const Character *ch, const Character *looker );
 
 bool is_clanned( const Character *ch );
 
