@@ -106,7 +106,7 @@ ROOM_INDEX_DATA *find_location( Character *ch, char *arg )
  *
  * Note I made a change when modifying str_infix. If the target string is
  * null, I return NULL (meaning no match was found). str_infix returns
- * FALSE (meaning a match was found).  *grumble*
+ * false (meaning a match was found).  *grumble*
  */
 static const char *str_str( const char *astr, const char *bstr )
 {
@@ -196,14 +196,14 @@ void close_area( Area *pArea )
       ech_next = ech->next;
 
       if ( ech->fighting )
-        stop_fighting( ech, TRUE );
+        stop_fighting( ech, true );
       if ( is_npc(ech) )
         {
           /* if mob is in area, or part of area. */
           if ( URANGE(pArea->low_m_vnum, ech->pIndexData->vnum,
                       pArea->hi_m_vnum) == ech->pIndexData->vnum ||
                (ech->in_room && ech->in_room->area == pArea) )
-            extract_char( ech, TRUE );
+            extract_char( ech, true );
           continue;
         }
       if ( ech->in_room && ech->in_room->area == pArea )
@@ -247,9 +247,9 @@ void close_area( Area *pArea )
                 {
                   ech_next = ech->next_in_room;
                   if ( ech->fighting )
-                    stop_fighting( ech, TRUE );
+                    stop_fighting( ech, true );
                   if ( is_npc(ech) )
-                    extract_char( ech, TRUE );
+                    extract_char( ech, true );
                   else
                     do_recall( ech, "" );
                 }

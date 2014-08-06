@@ -69,16 +69,16 @@ bool check_alias( Character *ch, char *command, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   ALIAS_DATA *alias;
-  bool nullarg = TRUE;
+  bool nullarg = true;
 
   if ( argument && *argument!='\0' )
-    nullarg = FALSE;
+    nullarg = false;
 
   if ( (alias=find_alias(ch,command)) == NULL )
-    return FALSE;
+    return false;
 
   if (!alias->cmd || !*alias->cmd)
-    return FALSE;
+    return false;
 
   sprintf(arg, "%s", alias->cmd);
 
@@ -89,7 +89,7 @@ bool check_alias( Character *ch, char *command, char *argument )
           send_to_char("Unable to further process command, recurses too much.\r\n", ch);
           ch->cmd_recurse=-1;
         }
-      return FALSE;
+      return false;
     }
 
   if (argument && *argument!='\0' && !nullarg)
@@ -99,5 +99,5 @@ bool check_alias( Character *ch, char *command, char *argument )
     }
 
   interpret(ch, arg);
-  return TRUE;
+  return true;
 }

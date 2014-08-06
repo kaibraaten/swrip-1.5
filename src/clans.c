@@ -159,12 +159,12 @@ static void fread_clan( CLAN_DATA *clan, FILE *fp )
   for ( ; ; )
     {
       const char *word = feof( fp ) ? "End" : fread_word( fp );
-      bool fMatch = FALSE;
+      bool fMatch = false;
 
       switch ( UPPER(word[0]) )
         {
         case '*':
-          fMatch = TRUE;
+          fMatch = true;
           fread_to_eol( fp );
           break;
 
@@ -282,7 +282,7 @@ static bool load_clan_file( const char *clanfile )
   char filename[256];
   CLAN_DATA *clan;
   FILE *fp;
-  bool found = FALSE;
+  bool found = false;
 
   CREATE( clan, CLAN_DATA, 1 );
   clan->next_subclan = NULL;
@@ -296,7 +296,7 @@ static bool load_clan_file( const char *clanfile )
   if ( ( fp = fopen( filename, "r" ) ) != NULL )
     {
 
-      found = TRUE;
+      found = true;
 
       for ( ; ; )
         {
@@ -375,7 +375,7 @@ static bool load_clan_file( const char *clanfile )
 	      rgObjNest[iNest] = NULL;
 	    }
 
-          found = TRUE;
+          found = true;
 
           for ( ; ; )
             {
@@ -718,7 +718,7 @@ bool load_member_list( const char *filename )
   if( ( fp = fopen( buf, "r" ) ) == NULL )
     {
       bug( "Cannot open member list for reading", 0 );
-      return FALSE;
+      return false;
     }
 
   CREATE( members_list, MEMBER_LIST, 1 );
@@ -750,13 +750,13 @@ bool load_member_list( const char *filename )
             {
               LINK( members_list, first_member_list, last_member_list, next, prev );
               fclose( fp );
-              return TRUE;
+              return true;
             }
           else
             {
               bug( "load_members_list: bad section", 0 );
               fclose( fp );
-              return FALSE;
+              return false;
             }
     }
 

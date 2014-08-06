@@ -44,61 +44,61 @@ bool can_remove( Character *ch, BOARD_DATA *board )
 {
   /* If your trust is high enough, you can remove it. */
   if ( get_trust( ch ) >= board->min_remove_level )
-    return TRUE;
+    return true;
 
   if ( board->extra_removers[0] != '\0' )
     {
       if ( is_name( ch->name, board->extra_removers ) )
-        return TRUE;
+        return true;
     }
 
-  return FALSE;
+  return false;
 }
 
 bool can_read( Character *ch, BOARD_DATA *board )
 {
   /* If your trust is high enough, you can read it. */
   if ( get_trust( ch ) >= board->min_read_level )
-    return TRUE;
+    return true;
 
   /* Your trust wasn't high enough, so check if a read_group or extra
      readers have been set up. */
   if ( board->read_group[0] != '\0' )
     {
       if ( ch->pcdata->clan && !str_cmp( ch->pcdata->clan->name, board->read_group ) )
-        return TRUE;
+        return true;
 
       if ( ch->pcdata->clan && ch->pcdata->clan->mainclan && !str_cmp( ch->pcdata->clan->mainclan->name, board->read_group ) )
-        return TRUE;
+        return true;
 
     }
 
   if ( board->extra_readers[0] != '\0' )
     {
       if ( is_name( ch->name, board->extra_readers ) )
-        return TRUE;
+        return true;
     }
 
-  return FALSE;
+  return false;
 }
 
 bool can_post( Character *ch, BOARD_DATA *board )
 {
   /* If your trust is high enough, you can post. */
   if ( get_trust( ch ) >= board->min_post_level )
-    return TRUE;
+    return true;
 
   /* Your trust wasn't high enough, so check if a post_group has been set up. */
   if ( board->post_group[0] != '\0' )
     {
       if ( ch->pcdata->clan && !str_cmp( ch->pcdata->clan->name, board->post_group ) )
-        return TRUE;
+        return true;
 
       if ( ch->pcdata->clan && ch->pcdata->clan->mainclan && !str_cmp( ch->pcdata->clan->mainclan->name, board->post_group ) )
-        return TRUE;
+        return true;
     }
 
-  return FALSE;
+  return false;
 }
 
 
@@ -154,18 +154,18 @@ BOARD_DATA *get_board( OBJ_DATA *obj )
 bool is_note_to( Character *ch, NOTE_DATA *pnote )
 {
   if ( !str_cmp( ch->name, pnote->sender ) )
-    return TRUE;
+    return true;
 
   if ( is_name( "all", pnote->to_list ) )
-    return TRUE;
+    return true;
 
   if ( is_hero(ch) && is_name( "immortal", pnote->to_list ) )
-    return TRUE;
+    return true;
 
   if ( is_name( ch->name, pnote->to_list ) )
-    return TRUE;
+    return true;
 
-  return FALSE;
+  return false;
 }
 
 void note_attach( Character *ch )
@@ -274,7 +274,7 @@ void note_remove( Character *ch, BOARD_DATA *board, NOTE_DATA *pnote )
 
 OBJ_DATA *find_quill( Character *ch )
 {
-  OBJ_DATA *quill = FALSE;
+  OBJ_DATA *quill = false;
 
   for ( quill = ch->last_carrying; quill; quill = quill->prev_content )
     if ( quill->item_type == ITEM_PEN
@@ -299,8 +299,8 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
   char short_desc_buf[MAX_STRING_LENGTH];
   char long_desc_buf[MAX_STRING_LENGTH];
   char keyword_buf[MAX_STRING_LENGTH];
-  bool mfound = FALSE;
-  bool wasfound = FALSE;
+  bool mfound = false;
+  bool wasfound = false;
 
   if ( is_npc(ch) )
     return;
@@ -394,7 +394,7 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
           if (IS_MAIL) /* SB Mail check for Brit */
             {
               for ( pnote = board->first_note; pnote; pnote = pnote->next )
-                if (is_note_to( ch, pnote )) mfound = TRUE;
+                if (is_note_to( ch, pnote )) mfound = true;
 
               if ( !mfound && get_trust(ch) < sysdata.read_all_mail )
                 {
@@ -432,13 +432,13 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
 
       if ( !str_cmp( arg_passed, "all" ) )
         {
-          fAll = TRUE;
+          fAll = true;
           anum = 0;
         }
       else
         if ( is_number( arg_passed ) )
           {
-            fAll = FALSE;
+            fAll = false;
             anum = atoi( arg_passed );
           }
         else
@@ -458,7 +458,7 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
 
               if ( vnum == anum || fAll )
                 {
-                  wasfound = TRUE;
+                  wasfound = true;
                   pager_printf( ch, "[%3d] %s: %s\r\n%s\r\nTo: %s\r\n%s",
                                 vnum,
                                 pnote->sender,
@@ -492,7 +492,7 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
                   vnum++;
                   if ( vnum == anum || fAll )
                     {
-                      wasfound = TRUE;
+                      wasfound = true;
                       if ( ch->gold < 10
                            &&   get_trust(ch) < sysdata.read_mail_free )
                         {
@@ -636,7 +636,7 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
           return;
         }
 
-      operate_on_note( ch, "", FALSE );
+      operate_on_note( ch, "", false );
     }
 
   if ( !str_cmp( arg, "write" ) )
@@ -1105,12 +1105,12 @@ BOARD_DATA *read_board( char *boardfile, FILE *fp )
   for ( ; ; )
     {
       word   = feof( fp ) ? "End" : fread_word( fp );
-      fMatch = FALSE;
+      fMatch = false;
 
       switch ( UPPER(word[0]) )
         {
         case '*':
-          fMatch = TRUE;
+          fMatch = true;
           fread_to_eol( fp );
           break;
         case 'E':

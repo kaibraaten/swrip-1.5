@@ -213,9 +213,9 @@ void obj_fall( OBJ_DATA *obj, bool through )
                obj->in_room->first_person, obj, NULL, TO_CHAR );
         }
       obj_from_room( obj );
-      is_falling = TRUE;
+      is_falling = true;
       obj = obj_to_room( obj, to_room );
-      is_falling = FALSE;
+      is_falling = false;
 
       if (obj->in_room->first_person)
         {
@@ -278,7 +278,7 @@ void obj_fall( OBJ_DATA *obj, bool through )
               break;
             }
         }
-      obj_fall( obj, TRUE );
+      obj_fall( obj, true );
     }
 }
 
@@ -287,23 +287,23 @@ bool remove_obj( Character *ch, int iWear, bool fReplace )
   OBJ_DATA *obj, *tmpobj;
 
   if ( ( obj = get_eq_char( ch, iWear ) ) == NULL )
-    return TRUE;
+    return true;
 
   if ( !fReplace
        &&   ch->carry_number + get_obj_number( obj ) > can_carry_n( ch ) )
     {
       act( AT_PLAIN, "$d: you can't carry that many items.",
            ch, NULL, obj->name, TO_CHAR );
-      return FALSE;
+      return false;
     }
 
   if ( !fReplace )
-    return FALSE;
+    return false;
 
   if ( IS_OBJ_STAT(obj, ITEM_NOREMOVE) )
     {
       act( AT_PLAIN, "You can't remove $p.", ch, obj, NULL, TO_CHAR );
-      return FALSE;
+      return false;
     }
 
   if ( obj == get_eq_char( ch, WEAR_WIELD )
@@ -315,5 +315,5 @@ bool remove_obj( Character *ch, int iWear, bool fReplace )
   act( AT_ACTION, "$n stops using $p.", ch, obj, NULL, TO_ROOM );
   act( AT_ACTION, "You stop using $p.", ch, obj, NULL, TO_CHAR );
   oprog_remove_trigger( ch, obj );
-  return TRUE;
+  return true;
 }

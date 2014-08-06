@@ -243,7 +243,7 @@ void show_list_to_char( const OBJ_DATA *list, Character *ch, bool fShort, bool f
            && (obj->item_type != ITEM_TRAP || is_affected_by(ch, AFF_DETECTTRAPS) ) )
         {
           pstrShow = format_obj_to_char( obj, ch, fShort );
-          fCombine = FALSE;
+          fCombine = false;
 
           if ( is_npc(ch) || IS_SET(ch->act, PLR_COMBINE) )
             {
@@ -256,7 +256,7 @@ void show_list_to_char( const OBJ_DATA *list, Character *ch, bool fShort, bool f
                   if ( !str_cmp( prgpstrShow[iShow], pstrShow ) )
                     {
                       prgnShow[iShow] += obj->count;
-                      fCombine = TRUE;
+                      fCombine = true;
                       break;
                     }
                 }
@@ -349,18 +349,18 @@ void show_list_to_char( const OBJ_DATA *list, Character *ch, bool fShort, bool f
 bool check_blind( const Character *ch )
 {
   if ( !is_npc(ch) && IS_SET(ch->act, PLR_HOLYLIGHT) )
-    return TRUE;
+    return true;
 
   if ( is_affected_by(ch, AFF_TRUESIGHT) )
-    return TRUE;
+    return true;
 
   if ( is_affected_by(ch, AFF_BLIND) )
     {
       send_to_char( "You can't see a thing!\r\n", ch );
-      return FALSE;
+      return false;
     }
 
-  return TRUE;
+  return true;
 }
 
 void show_condition( const Character *ch, const Character *victim )

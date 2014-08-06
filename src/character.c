@@ -7,9 +7,9 @@ bool is_wizvis( const Character *ch, const Character *victim )
   if ( !is_npc(victim)
        && IS_SET(victim->act, PLR_WIZINVIS)
        && get_trust( ch ) < victim->pcdata->wizinvis )
-    return FALSE;
+    return false;
 
-  return TRUE;
+  return true;
 }
 
 /*
@@ -245,18 +245,18 @@ bool has_comlink( const Character *ch )
 
   if( is_immortal( ch ) )
     {
-      return TRUE;
+      return true;
     }
 
   for( obj = ch->last_carrying; obj; obj = obj->prev_content )
     {
       if( obj->pIndexData->item_type == ITEM_COMLINK )
         {
-          return TRUE;
+          return true;
         }
     }
 
-  return FALSE;
+  return false;
 }
 
 short get_level( const Character *ch, short ability )
@@ -287,9 +287,9 @@ bool is_affected( const Character *ch, int sn )
 
   for ( paf = ch->first_affect; paf; paf = paf->next )
     if ( paf->type == sn )
-      return TRUE;
+      return true;
 
-  return FALSE;
+  return false;
 }
 
 bool is_affected_by( const Character *ch, int affected_by_bit )
@@ -364,10 +364,10 @@ void equip_char( Character *ch, OBJ_DATA *obj, int iWear )
     ch->carry_weight  -= get_obj_weight( obj );
 
   for ( paf = obj->pIndexData->first_affect; paf; paf = paf->next )
-    affect_modify( ch, paf, TRUE );
+    affect_modify( ch, paf, true );
 
   for ( paf = obj->first_affect; paf; paf = paf->next )
-    affect_modify( ch, paf, TRUE );
+    affect_modify( ch, paf, true );
 
   if ( obj->item_type == ITEM_LIGHT
        &&   obj->value[2] != 0
@@ -396,10 +396,10 @@ void unequip_char( Character *ch, OBJ_DATA *obj )
   obj->wear_loc  = -1;
 
   for ( paf = obj->pIndexData->first_affect; paf; paf = paf->next )
-    affect_modify( ch, paf, FALSE );
+    affect_modify( ch, paf, false );
   if ( obj->carried_by )
     for ( paf = obj->first_affect; paf; paf = paf->next )
-      affect_modify( ch, paf, FALSE );
+      affect_modify( ch, paf, false );
 
   if ( !obj->carried_by )
     return;
@@ -515,10 +515,10 @@ bool ms_find_obj( const Character *ch )
   drunk = UMAX( 1, drunk );
 
   if ( abs(ms) + (drunk/3) < 30 )
-    return FALSE;
+    return false;
 
   if ( (number_percent() + (ms < 0 ? 15 : 5))> abs(ms)/2 + drunk/4 )
-    return FALSE;
+    return false;
 
   if ( ms > 15 )        /* range 1 to 20 */
     {
@@ -640,7 +640,7 @@ bool ms_find_obj( const Character *ch )
     }
 
   ch_printf( ch, t );
-  return TRUE;
+  return true;
 }
 
 /*
@@ -649,75 +649,75 @@ bool ms_find_obj( const Character *ch )
 bool can_see( const Character *ch, const Character *victim )
 {
   if (!victim)
-    return FALSE;
+    return false;
 
   if ( victim->position == POS_FIGHTING || victim->position < POS_SLEEPING )
-    return TRUE;
+    return true;
 
   if ( !ch )
     {
       if ( is_affected_by(victim, AFF_INVISIBLE)
            || is_affected_by(victim, AFF_HIDE)
            || IS_SET(victim->act, PLR_WIZINVIS) )
-        return FALSE;
+        return false;
       else
-        return TRUE;
+        return true;
     }
 
   if ( ch == victim )
-    return TRUE;
+    return true;
 
   if ( !is_npc(victim)
        && IS_SET(victim->act, PLR_WIZINVIS)
        && get_trust( ch ) < victim->pcdata->wizinvis )
-    return FALSE;
+    return false;
 
   if ( victim->position == POS_FIGHTING || victim->position < POS_SLEEPING )
-    return TRUE;
+    return true;
 
   if ( victim->position == POS_FIGHTING || victim->position < POS_SLEEPING )
-    return TRUE;
+    return true;
 
   /* SB */
   if ( is_npc(victim)
        && IS_SET(victim->act, ACT_MOBINVIS)
        && get_trust( ch ) < victim->mobinvis )
-    return FALSE;
+    return false;
 
   if ( !is_immortal(ch) && !is_npc(victim) && !victim->desc
        && get_timer(victim, TIMER_RECENTFIGHT) > 0
        && (!victim->switched || !is_affected_by(victim->switched, AFF_POSSESS)) )
-    return FALSE;
+    return false;
 
   if ( !is_npc(ch) && IS_SET(ch->act, PLR_HOLYLIGHT) )
-    return TRUE;
+    return true;
 
   /* The miracle cure for blindness? -- Altrag */
   if ( !is_affected_by(ch, AFF_TRUESIGHT) )
     {
       if ( is_affected_by(ch, AFF_BLIND) )
-        return FALSE;
+        return false;
 
       if ( room_is_dark( ch->in_room ) && !is_affected_by(ch, AFF_INFRARED) )
-        return FALSE;
+        return false;
 
       if ( is_affected_by(victim, AFF_HIDE)
            && !is_affected_by(ch, AFF_DETECT_HIDDEN)
            && !victim->fighting )
         {
           if ( ch->race == RACE_DEFEL && victim->race == RACE_DEFEL )
-            return TRUE;
+            return true;
 
-          return FALSE;
+          return false;
         }
 
 
       if ( is_affected_by(victim, AFF_INVISIBLE)
            &&  !is_affected_by(ch, AFF_DETECT_INVIS) )
-        return FALSE;
+        return false;
     }
 
-  return TRUE;
+  return true;
 }
 
 /*
@@ -726,30 +726,30 @@ bool can_see( const Character *ch, const Character *victim )
 bool can_see_obj( const Character *ch, const OBJ_DATA *obj )
 {
   if ( !is_npc(ch) && IS_SET(ch->act, PLR_HOLYLIGHT) )
-    return TRUE;
+    return true;
 
   if ( IS_OBJ_STAT( obj, ITEM_BURRIED ) )
-    return FALSE;
+    return false;
 
   if ( is_affected_by( ch, AFF_TRUESIGHT ) )
-    return TRUE;
+    return true;
 
   if ( is_affected_by( ch, AFF_BLIND ) )
-    return FALSE;
+    return false;
 
   if ( IS_OBJ_STAT(obj, ITEM_HIDDEN) )
-    return FALSE;
+    return false;
 
   if ( obj->item_type == ITEM_LIGHT && obj->value[2] != 0 )
-    return TRUE;
+    return true;
 
   if ( room_is_dark( ch->in_room ) && !is_affected_by(ch, AFF_INFRARED) )
-    return FALSE;
+    return false;
 
   if ( IS_OBJ_STAT(obj, ITEM_INVIS) && !is_affected_by(ch, AFF_DETECT_INVIS) )
-    return FALSE;
+    return false;
 
-  return TRUE;
+  return true;
 }
 
 /*
@@ -758,15 +758,15 @@ bool can_see_obj( const Character *ch, const OBJ_DATA *obj )
 bool can_drop_obj( const Character *ch, const OBJ_DATA *obj )
 {
   if ( !IS_OBJ_STAT(obj, ITEM_NODROP) )
-    return TRUE;
+    return true;
 
   if ( !is_npc(ch) && get_trust(ch) >= LEVEL_IMMORTAL )
-    return TRUE;
+    return true;
 
   if ( is_npc(ch) && ch->pIndexData->vnum == 3 )
-    return TRUE;
+    return true;
 
-  return FALSE;
+  return false;
 }
 
 /*
@@ -789,7 +789,7 @@ void fix_char( Character *ch )
     }
 
   for ( aff = ch->first_affect; aff; aff = aff->next )
-    affect_modify( ch, aff, FALSE );
+    affect_modify( ch, aff, false );
 
   ch->affected_by       = race_table[ch->race].affected;
   ch->mental_state      = 0;
@@ -817,7 +817,7 @@ void fix_char( Character *ch )
   ch->carry_number      = 0;
 
   for ( aff = ch->first_affect; aff; aff = aff->next )
-    affect_modify( ch, aff, TRUE );
+    affect_modify( ch, aff, true );
 
   for ( x = 0; x < ncarry; x++ )
     obj_to_char( carry[x], ch );

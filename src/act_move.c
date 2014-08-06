@@ -278,16 +278,16 @@ bool will_fall( Character *ch, int fall )
           char_from_room( ch );
           char_to_room( ch, get_room_index( wherehome(ch) ) );
           fall = 0;
-          return TRUE;
+          return true;
         }
 
       set_char_color( AT_FALLING, ch );
       send_to_char( "You're falling down...\r\n", ch );
       move_char( ch, get_exit(ch->in_room, DIR_DOWN), ++fall );
-      return TRUE;
+      return true;
     }
 
-  return FALSE;
+  return false;
 }
 
 
@@ -306,7 +306,7 @@ ROOM_INDEX_DATA *generate_exit( ROOM_INDEX_DATA *in_room, Exit **pexit )
   int distance = -1;
   int vdir = orig_exit->vdir;
   short hash = 0;
-  bool found = FALSE;
+  bool found = false;
 
   if ( in_room->vnum > 32767 )  /* room is virtual */
     {
@@ -346,7 +346,7 @@ ROOM_INDEX_DATA *generate_exit( ROOM_INDEX_DATA *in_room, Exit **pexit )
     {
       if ( room->vnum == serial && room->tele_vnum == roomnum )
 	{
-	  found = TRUE;
+	  found = true;
 	  break;
 	}
     }
@@ -408,14 +408,14 @@ ch_ret move_char( Character *ch, Exit *pexit, int fall )
   const char *dtxt;
   ch_ret retcode;
   short door, distance;
-  bool drunk = FALSE;
-  bool brief = FALSE;
+  bool drunk = false;
+  bool brief = false;
   int hpmove;
 
   if ( !is_npc( ch ) )
     if ( is_drunk( ch ) && ( ch->position != POS_SHOVE )
          && ( ch->position != POS_DRAG ) )
-      drunk = TRUE;
+      drunk = true;
 
   if ( drunk && !fall )
     {
@@ -593,13 +593,13 @@ ch_ret move_char( Character *ch, Exit *pexit, int fall )
               if ( is_affected_by( ch->mount, AFF_FLYING )
                    || is_affected_by( ch->mount, AFF_FLOATING ) )
 		{
-		  found = TRUE;
+		  found = true;
 		}
             }
           else if ( is_affected_by(ch, AFF_FLYING)
 		    || is_affected_by(ch, AFF_FLOATING) )
 	    {
-              found = TRUE;
+              found = true;
 	    }
 
           /*
@@ -610,7 +610,7 @@ ch_ret move_char( Character *ch, Exit *pexit, int fall )
               {
                 if ( obj->item_type == ITEM_BOAT )
                   {
-                    found = TRUE;
+                    found = true;
                     if ( drunk )
                       txt = "paddles unevenly";
                     else
@@ -630,12 +630,12 @@ ch_ret move_char( Character *ch, Exit *pexit, int fall )
         {
           bool found;
 
-          found = FALSE;
+          found = false;
           if ( ch->mount && is_affected_by( ch->mount, AFF_FLYING ) )
-            found = TRUE;
+            found = true;
           else
             if ( is_affected_by(ch, AFF_FLYING) )
-              found = TRUE;
+              found = true;
 
           if ( !found && !ch->mount )
             {
@@ -644,12 +644,12 @@ ch_ret move_char( Character *ch, Exit *pexit, int fall )
                    ||      drunk || ch->mental_state < -90 )
                 {
                   OBJ_DATA *obj;
-                  bool ch_rope = FALSE;
+                  bool ch_rope = false;
                   for ( obj = ch->last_carrying; obj; obj = obj->prev_content )
                     {
                       if (obj->item_type == ITEM_ROPE)
                         {
-                          ch_rope = TRUE;
+                          ch_rope = true;
                           break;
                         }
                     }
@@ -670,7 +670,7 @@ ch_ret move_char( Character *ch, Exit *pexit, int fall )
                       return retcode;
                     }
                 }
-              found = TRUE;
+              found = true;
               learn_from_success( ch, gsn_climb );
               set_wait_state( ch, skill_table[gsn_climb]->beats );
               txt = "climbs";
@@ -1162,9 +1162,9 @@ bool has_key( const Character *ch, vnum_t key )
 
   for ( obj = ch->first_carrying; obj; obj = obj->next_content )
     if ( obj->pIndexData->vnum == key || obj->value[0] == key )
-      return TRUE;
+      return true;
 
-  return FALSE;
+  return false;
 }
 
 /*
@@ -1197,9 +1197,9 @@ void teleport( Character *ch, vnum_t room, int flags )
     }
 
   if ( IS_SET( flags, TELE_SHOWDESC ) )
-    show = TRUE;
+    show = true;
   else
-    show = FALSE;
+    show = false;
 
   if ( !IS_SET( flags, TELE_TRANSALL ) )
     {

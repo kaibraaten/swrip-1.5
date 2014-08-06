@@ -210,7 +210,7 @@ void find_game_winner(void)
           char_to_room(i,get_room_index(i->retran));
           do_look(i, "auto");
           act(AT_YELLOW,"$n falls from the sky.", i, NULL, NULL, TO_ROOM);
-          stop_fighting( i, TRUE );
+          stop_fighting( i, true );
           if (i->hit > 1)
             {
               if(arena.time_left_in_game == 1)
@@ -300,7 +300,7 @@ void do_end_game(void)
             i->mana = i->max_mana;
             i->move = i->max_move;
             i->challenged = NULL;
-            stop_fighting(i, TRUE);
+            stop_fighting(i, true);
             char_from_room(i);
             char_to_room(i, get_room_index(i->retran));
             do_look(i,"auto");

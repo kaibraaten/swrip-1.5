@@ -33,22 +33,22 @@ bool can_rmodify( const Character *ch, const ROOM_INDEX_DATA *room )
   Area *pArea;
 
   if ( is_npc( ch ) )
-    return FALSE;
+    return false;
 
   if ( get_trust( ch ) >= sysdata.level_modify_proto )
-    return TRUE;
+    return true;
 
   if ( !ch->pcdata || !(pArea=ch->pcdata->area) )
     {
       send_to_char( "You must have an assigned area to modify this room.\r\n", ch );
-      return FALSE;
+      return false;
     }
 
   if ( vnum >= pArea->low_r_vnum && vnum <= pArea->hi_r_vnum )
-    return TRUE;
+    return true;
 
   send_to_char( "That room is not in your allocated range.\r\n", ch );
-  return FALSE;
+  return false;
 }
 
 bool can_omodify( const Character *ch, const OBJ_DATA *obj )
@@ -57,22 +57,22 @@ bool can_omodify( const Character *ch, const OBJ_DATA *obj )
   Area *pArea;
 
   if ( is_npc( ch ) )
-    return FALSE;
+    return false;
 
   if ( get_trust( ch ) >= sysdata.level_modify_proto )
-    return TRUE;
+    return true;
 
   if ( !ch->pcdata || !(pArea=ch->pcdata->area) )
     {
       send_to_char( "You must have an assigned area to modify this object.\r\n", ch );
-      return FALSE;
+      return false;
     }
 
   if ( vnum >= pArea->low_o_vnum && vnum <= pArea->hi_o_vnum )
-    return TRUE;
+    return true;
 
   send_to_char( "That object is not in your allocated range.\r\n", ch );
-  return FALSE;
+  return false;
 }
 
 bool can_oedit( const Character *ch, const OBJ_INDEX_DATA *obj )
@@ -81,23 +81,23 @@ bool can_oedit( const Character *ch, const OBJ_INDEX_DATA *obj )
   Area *pArea;
 
   if ( is_npc( ch ) )
-    return FALSE;
+    return false;
 
   if ( get_trust( ch ) >= LEVEL_GREATER )
-    return TRUE;
+    return true;
 
   if ( !ch->pcdata || !(pArea=ch->pcdata->area) )
     {
       send_to_char( "You must have an assigned area to modify this object.\r\n", ch );
-      return FALSE;
+      return false;
     }
 
   if ( vnum >= pArea->low_o_vnum
        &&   vnum <= pArea->hi_o_vnum )
-    return TRUE;
+    return true;
 
   send_to_char( "That object is not in your allocated range.\r\n", ch );
-  return FALSE;
+  return false;
 }
 
 bool can_mmodify( const Character *ch, const Character *mob )
@@ -106,35 +106,35 @@ bool can_mmodify( const Character *ch, const Character *mob )
   Area *pArea;
 
   if ( mob == ch )
-    return TRUE;
+    return true;
 
   if ( !is_npc( mob ) )
     {
       if ( get_trust( ch ) >= sysdata.level_modify_proto && get_trust(ch) >
            get_trust( mob ) )
-        return TRUE;
+        return true;
       else
         send_to_char( "You can't do that.\r\n", ch );
-      return FALSE;
+      return false;
     }
 
   vnum = mob->pIndexData->vnum;
 
   if ( is_npc( ch ) )
-    return FALSE;
+    return false;
   if ( get_trust( ch ) >= sysdata.level_modify_proto )
-    return TRUE;
+    return true;
   if ( !ch->pcdata || !(pArea=ch->pcdata->area) )
     {
       send_to_char( "You must have an assigned area to modify this mobile.\r\n", ch );
-      return FALSE;
+      return false;
     }
   if ( vnum >= pArea->low_m_vnum
        &&   vnum <= pArea->hi_m_vnum )
-    return TRUE;
+    return true;
 
   send_to_char( "That mobile is not in your allocated range.\r\n", ch );
-  return FALSE;
+  return false;
 }
 
 bool can_medit( const Character *ch, const ProtoMobile *mob )
@@ -143,20 +143,20 @@ bool can_medit( const Character *ch, const ProtoMobile *mob )
   Area *pArea;
 
   if ( is_npc( ch ) )
-    return FALSE;
+    return false;
   if ( get_trust( ch ) >= LEVEL_GREATER )
-    return TRUE;
+    return true;
   if ( !ch->pcdata || !(pArea=ch->pcdata->area) )
     {
       send_to_char( "You must have an assigned area to modify this mobile.\r\n", ch );
-      return FALSE;
+      return false;
     }
   if ( vnum >= pArea->low_m_vnum
        &&   vnum <= pArea->hi_m_vnum )
-    return TRUE;
+    return true;
 
   send_to_char( "That mobile is not in your allocated range.\r\n", ch );
-  return FALSE;
+  return false;
 }
 
 void free_reset( Area *are, RESET_DATA *res )
@@ -183,7 +183,7 @@ void assign_area( Character *ch )
   char buf2[MAX_STRING_LENGTH];
   char taf[1024];
   Area *tarea, *tmp;
-  bool created = FALSE;
+  bool created = false;
 
   if ( is_npc( ch ) )
     return;
@@ -219,7 +219,7 @@ void assign_area( Character *ch )
           tarea->nplayer        = 0;
           SET_BIT( tarea->flags, AFLAG_NOQUEST );
 
-          created = TRUE;
+          created = true;
         }
       else
         {
@@ -234,7 +234,7 @@ void assign_area( Character *ch )
       tarea->hi_m_vnum  = ch->pcdata->m_range_hi;
       ch->pcdata->area  = tarea;
       if ( created )
-        sort_area( tarea, TRUE );
+        sort_area( tarea, true );
     }
 }
 
@@ -268,13 +268,13 @@ bool DelRExtra( ROOM_INDEX_DATA *room, char *keywords )
         break;
     }
   if ( !rmed )
-    return FALSE;
+    return false;
   UNLINK( rmed, room->first_extradesc, room->last_extradesc, next, prev );
   STRFREE( rmed->keyword );
   STRFREE( rmed->description );
   DISPOSE( rmed );
   top_ed--;
-  return TRUE;
+  return true;
 }
 
 ExtraDescription *SetOExtra( OBJ_DATA *obj, char *keywords )
@@ -307,13 +307,13 @@ bool DelOExtra( OBJ_DATA *obj, char *keywords )
         break;
     }
   if ( !rmed )
-    return FALSE;
+    return false;
   UNLINK( rmed, obj->first_extradesc, obj->last_extradesc, next, prev );
   STRFREE( rmed->keyword );
   STRFREE( rmed->description );
   DISPOSE( rmed );
   top_ed--;
-  return TRUE;
+  return true;
 }
 
 ExtraDescription *SetOExtraProto( OBJ_INDEX_DATA *obj, char *keywords )
@@ -346,13 +346,13 @@ bool DelOExtraProto( OBJ_INDEX_DATA *obj, char *keywords )
         break;
     }
   if ( !rmed )
-    return FALSE;
+    return false;
   UNLINK( rmed, obj->first_extradesc, obj->last_extradesc, next, prev );
   STRFREE( rmed->keyword );
   STRFREE( rmed->description );
   DISPOSE( rmed );
   top_ed--;
-  return TRUE;
+  return true;
 }
 
 void fold_area( Area *tarea, char *filename, bool install )
@@ -428,9 +428,9 @@ void fold_area( Area *tarea, char *filename, bool install )
            ||   pMobIndex->speaks        != 0   ||   pMobIndex->speaking   != 0
            ||   pMobIndex->xflags        != 0   ||   pMobIndex->numattacks != 0
            ||   pMobIndex->vip_flags !=0 )
-        complexmob = TRUE;
+        complexmob = true;
       else
-        complexmob = FALSE;
+        complexmob = false;
       fprintf( fpout, "#%ld\n",  vnum                            );
       fprintf( fpout, "%s~\n",  pMobIndex->player_name          );
       fprintf( fpout,   "%s~\n",        pMobIndex->short_descr          );
@@ -611,7 +611,7 @@ void fold_area( Area *tarea, char *filename, bool install )
             {
               vnext = victim->next_in_room;
               if ( is_npc(victim) )
-                extract_char( victim, TRUE );
+                extract_char( victim, true );
             }
           /* purge room of (prototyped) objects */
           for ( obj = room->first_content; obj; obj = obj_next )

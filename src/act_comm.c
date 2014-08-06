@@ -458,7 +458,7 @@ void talk_channel( Character *ch, const char *argument, int channel, const char 
                  channel != CHANNEL_AVTALK
                  )  )
             sbuf = scramble(argument, ch->speaking);
-          MOBtrigger = FALSE;
+          MOBtrigger = false;
           if ( channel == CHANNEL_IMMTALK || channel == CHANNEL_AVTALK
                || channel == CHANNEL_103 || channel == CHANNEL_104 || channel == CHANNEL_105 )
             act( channel == CHANNEL_AVTALK ? AT_AVATAR : AT_IMMORT , buf, ch, sbuf, vch, TO_VICT );
@@ -525,9 +525,9 @@ bool circle_follow( const Character *ch, const Character *victim )
 
   for ( tmp = victim; tmp; tmp = tmp->master )
     if ( tmp == ch )
-      return TRUE;
+      return true;
 
-  return FALSE;
+  return false;
 }
 
 void add_follower( Character *ch, Character *master )
@@ -641,23 +641,23 @@ bool knows_language( const Character *ch, int language, const Character *cch )
   short sn;
 
   if ( !is_npc(ch) && is_immortal(ch) )
-    return TRUE;
+    return true;
   if ( is_npc(ch) && !ch->speaks ) /* No langs = knows all for npcs */
-    return TRUE;
+    return true;
   if ( is_npc(ch) && IS_SET(ch->speaks, (language & ~LANG_CLAN)) )
-    return TRUE;
+    return true;
   /* everyone does not KNOW common tongue
      if ( IS_SET(language, LANG_COMMON) )
-     return TRUE;
+     return true;
   */
   if ( language & LANG_CLAN )
     {
       /* Clan = common for mobs.. snicker.. -- Altrag */
       if ( is_npc(ch) || is_npc(cch) )
-        return TRUE;
+        return true;
       if ( ch->pcdata->clan == cch->pcdata->clan &&
            ch->pcdata->clan != NULL )
-        return TRUE;
+        return true;
     }
   if ( !is_npc( ch ) )
     {
@@ -665,7 +665,7 @@ bool knows_language( const Character *ch, int language, const Character *cch )
 
       /* Racial languages for PCs */
       if ( IS_SET(race_table[ch->race].language, language) )
-        return TRUE;
+        return true;
 
       for ( lang = 0; lang_array[lang] != LANG_UNKNOWN; lang++ )
         if ( IS_SET(language, lang_array[lang]) &&
@@ -674,21 +674,21 @@ bool knows_language( const Character *ch, int language, const Character *cch )
             if ( (sn = skill_lookup(lang_names[lang])) != -1 )
               {
                 if( number_percent()-1 < ch->pcdata->learned[sn] )
-                  return TRUE;
+                  return true;
               }
           }
     }
-  return FALSE;
+  return false;
 }
 
 bool can_learn_lang( const Character *ch, int language )
 {
   if ( language & LANG_CLAN )
-    return FALSE;
+    return false;
   if ( is_npc(ch) || is_immortal(ch) )
-    return FALSE;
+    return false;
   if ( race_table[ch->race].language & language )
-    return FALSE;
+    return false;
   if ( ch->speaks & language )
     {
       int lang;
@@ -699,7 +699,7 @@ bool can_learn_lang( const Character *ch, int language )
             int sn;
 
             if ( !is_valid_language( lang_array[lang] ) )
-              return FALSE;
+              return false;
 
             if ( ( sn = skill_lookup( lang_names[lang] ) ) < 0 )
               {
@@ -707,14 +707,14 @@ bool can_learn_lang( const Character *ch, int language )
                 continue;
               }
             if ( ch->pcdata->learned[sn] >= 99 )
-              return FALSE;
+              return false;
           }
     }
 
   if( is_valid_language( language ) )
-    return TRUE;
+    return true;
 
-  return FALSE;
+  return false;
 }
 
 /* Note: does not count racial language.  This is intentional (for now). */
