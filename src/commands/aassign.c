@@ -60,12 +60,17 @@ void do_aassign( Character *ch, char *argument )
             }
         }
 
+  if( !str_cmp( buf, "this" ) )
+    {
+      tarea = ch->in_room->area;
+    }
+
   if ( !tarea )
     {
       if ( get_trust(ch) >= sysdata.level_modify_proto )
-        send_to_char( "No such area.  Use 'zones'.\r\n", ch );
+        send_to_char( "No such area. Use 'zones'.\r\n", ch );
       else
-        send_to_char( "No such area.  Use 'newzones'.\r\n", ch );
+        send_to_char( "No such area. Use 'newzones'.\r\n", ch );
       return;
     }
   ch->pcdata->area = tarea;

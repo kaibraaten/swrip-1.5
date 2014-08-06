@@ -1,4 +1,6 @@
+#include <string.h>
 #include "mud.h"
+#include "character.h"
 
 void do_foldarea( Character *ch, char *argument )
 {
@@ -13,6 +15,11 @@ void do_foldarea( Character *ch, char *argument )
     {
       send_to_char( "Usage: foldarea <filename> [remproto]\r\n", ch );
       return;
+    }
+
+  if( !str_cmp( arg, "this" ) )
+    {
+      strcpy( arg, ch->in_room->area->filename );
     }
 
   fold_all_areas = !str_cmp( arg, "all" );
