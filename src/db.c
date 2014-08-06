@@ -828,7 +828,7 @@ void load_resetmsg( Area *tarea, FILE *fp )
  */
 void load_flags( Area *tarea, FILE *fp )
 {
-  char *ln;
+  const char *ln;
   int x1, x2;
 
   if ( !tarea )
@@ -871,7 +871,7 @@ void add_char( Character *ch )
 void load_mobiles( Area *tarea, FILE *fp )
 {
   ProtoMobile *pMobIndex = 0;
-  char *ln = NULL;
+  const char *ln = NULL;
   int x1, x2, x3, x4, x5, x6, x7, x8;
 
   if ( !tarea )
@@ -1124,7 +1124,7 @@ void load_objects( Area *tarea, FILE *fp )
   for ( ; ; )
     {
       OBJ_INDEX_DATA *pObjIndex;
-      char *ln;
+      const char *ln;
       int x1, x2, x3, x4, x5, x6;
       char buf[MAX_STRING_LENGTH];
       vnum_t vnum = INVALID_VNUM;
@@ -1507,7 +1507,7 @@ void load_rooms( Area *tarea, FILE *fp )
 {
   ROOM_INDEX_DATA *pRoomIndex;
   char buf[MAX_STRING_LENGTH];
-  char *ln;
+  const char *ln;
 
   if ( !tarea )
     {
