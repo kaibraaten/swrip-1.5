@@ -38,7 +38,7 @@ void    group_gain( Character *ch, Character *victim );
 int     align_compute( Character *gch, Character *victim );
 int     obj_hitroll( OBJ_DATA *obj );
 bool    get_cover( Character *ch );
-bool    dual_flip = FALSE;
+bool    dual_flip = false;
 
 /*
  * Check to see if weapon is poisoned.
@@ -49,9 +49,9 @@ bool is_wielding_poisoned( Character *ch )
 
   if ( ( obj = get_eq_char( ch, WEAR_WIELD )    )
        &&   (IS_SET( obj->extra_flags, ITEM_POISONED) ) )
-    return TRUE;
+    return true;
 
-  return FALSE;
+  return false;
 
 }
 
@@ -61,25 +61,25 @@ bool is_wielding_poisoned( Character *ch )
 bool is_hunting( Character *ch, Character *victim )
 {
   if ( !ch->hhf.hunting || ch->hhf.hunting->who != victim )
-    return FALSE;
+    return false;
 
-  return TRUE;
+  return true;
 }
 
 bool is_hating( Character *ch, Character *victim )
 {
   if ( !ch->hhf.hating || ch->hhf.hating->who != victim )
-    return FALSE;
+    return false;
 
-  return TRUE;
+  return true;
 }
 
 bool is_fearing( Character *ch, Character *victim )
 {
   if ( !ch->hhf.fearing || ch->hhf.fearing->who != victim )
-    return FALSE;
+    return false;
 
-  return TRUE;
+  return true;
 }
 
 void stop_hunting( Character *ch )
@@ -90,7 +90,6 @@ void stop_hunting( Character *ch )
       DISPOSE( ch->hhf.hunting );
       ch->hhf.hunting = NULL;
     }
-  return;
 }
 
 void stop_hating( Character *ch )
@@ -101,7 +100,6 @@ void stop_hating( Character *ch )
       DISPOSE( ch->hhf.hating );
       ch->hhf.hating = NULL;
     }
-  return;
 }
 
 void stop_fearing( Character *ch )
@@ -112,7 +110,6 @@ void stop_fearing( Character *ch )
       DISPOSE( ch->hhf.fearing );
       ch->hhf.fearing = NULL;
     }
-  return;
 }
 
 void start_hunting( Character *ch, Character *victim )
@@ -123,7 +120,6 @@ void start_hunting( Character *ch, Character *victim )
   CREATE( ch->hhf.hunting, HuntHateFear, 1 );
   ch->hhf.hunting->name = QUICKLINK( victim->name );
   ch->hhf.hunting->who  = victim;
-  return;
 }
 
 void start_hating( Character *ch, Character *victim )
@@ -134,7 +130,6 @@ void start_hating( Character *ch, Character *victim )
   CREATE( ch->hhf.hating, HuntHateFear, 1 );
   ch->hhf.hating->name = QUICKLINK( victim->name );
   ch->hhf.hating->who  = victim;
-  return;
 }
 
 void start_fearing( Character *ch, Character *victim )
@@ -145,9 +140,7 @@ void start_fearing( Character *ch, Character *victim )
   CREATE( ch->hhf.fearing, HuntHateFear, 1 );
   ch->hhf.fearing->name = QUICKLINK( victim->name );
   ch->hhf.fearing->who  = victim;
-  return;
 }
-
 
 int max_fight( Character *ch )
 {
@@ -208,9 +201,8 @@ void violence_update( void )
             {
               if ( timer->type == TIMER_DO_FUN )
                 {
-                  int tempsub;
+                  int tempsub = ch->substate;
 
-                  tempsub = ch->substate;
                   ch->substate = timer->value;
                   timer->do_fun( ch, "" );
 
@@ -276,13 +268,13 @@ void violence_update( void )
           sprintf( buf, "violence_update: %s fighting %s in a SAFE room.",
                    ch->name, victim->name );
           log_string( buf );
-          stop_fighting( ch, TRUE );
+          stop_fighting( ch, true );
         }
       else
         if ( is_awake(ch) && ch->in_room == victim->in_room )
           retcode = multi_hit( ch, victim, TYPE_UNDEFINED );
         else
-          stop_fighting( ch, FALSE );
+          stop_fighting( ch, false );
 
       if ( char_died(ch) )
         continue;
@@ -618,13 +610,13 @@ ch_ret one_hit( Character *ch, Character *victim, int dt )
    */
   if ( (wield = get_eq_char( ch, WEAR_DUAL_WIELD )) != NULL )
     {
-      if ( dual_flip == FALSE )
+      if ( dual_flip == false )
         {
-          dual_flip = TRUE;
+          dual_flip = true;
           wield = get_eq_char( ch, WEAR_WIELD );
         }
       else
-        dual_flip = FALSE;
+        dual_flip = false;
     }
   else
     wield = get_eq_char( ch, WEAR_WIELD );
@@ -856,15 +848,15 @@ ch_ret one_hit( Character *ch, Character *victim, int dt )
         {
           dam /= 10;
           wield->value[4] -= 3;
-          fail = FALSE;
+          fail = false;
           hit_chance = ris_save( victim, get_level( ch, COMBAT_ABILITY ), RIS_PARALYSIS );
           if ( hit_chance == 1000 )
-            fail = TRUE;
+            fail = true;
           else
             fail = saves_para_petri( hit_chance, victim );
           if ( victim->was_stunned > 0 )
             {
-              fail = TRUE;
+              fail = true;
               victim->was_stunned--;
             }
           hit_chance = 100 - get_curr_con(victim) - get_level( victim, COMBAT_ABILITY ) / 2;
@@ -882,7 +874,7 @@ ch_ret one_hit( Character *ch, Character *victim, int dt )
               act( AT_BLUE, "Blue rings of energy from $N's blaster knock you down leaving you stunned!", victim, NULL, ch, TO_CHAR );
               act( AT_BLUE, "Blue rings of energy from your blaster strike $N, leaving $M stunned!", ch, NULL, victim, TO_CHAR );
               act( AT_BLUE, "Blue rings of energy from $n's blaster hit $N, leaving $M stunned!", ch, NULL, victim, TO_NOTVICT );
-              stop_fighting( victim, TRUE );
+              stop_fighting( victim, true );
               if ( !is_affected_by( victim, AFF_PARALYSIS ) )
                 {
                   af.type      = gsn_stun;
@@ -993,22 +985,22 @@ ch_ret one_hit( Character *ch, Character *victim, int dt )
       if ( dt >= 0 && dt < top_sn )
         {
           SKILLTYPE *skill = skill_table[dt];
-          bool found = FALSE;
+          bool found = false;
 
           if ( skill->imm_char && skill->imm_char[0] != '\0' )
             {
               act( AT_HIT, skill->imm_char, ch, NULL, victim, TO_CHAR );
-              found = TRUE;
+              found = true;
             }
           if ( skill->imm_vict && skill->imm_vict[0] != '\0' )
             {
               act( AT_HITME, skill->imm_vict, ch, NULL, victim, TO_VICT );
-              found = TRUE;
+              found = true;
             }
           if ( skill->imm_room && skill->imm_room[0] != '\0' )
             {
               act( AT_ACTION, skill->imm_room, ch, NULL, victim, TO_NOTVICT );
-              found = TRUE;
+              found = true;
             }
           if ( found )
             return rNONE;
@@ -1073,7 +1065,7 @@ ch_ret one_hit( Character *ch, Character *victim, int dt )
   if ( is_npc(victim) )
     {
       OBJ_DATA *wielding = get_eq_char( victim, WEAR_WIELD );
-      if ( wielding != NULL && wielding->value[3] == WEAPON_BLASTER && get_cover( victim ) == TRUE )
+      if ( wielding != NULL && wielding->value[3] == WEAPON_BLASTER && get_cover( victim ) == true )
         {
           start_hating( victim, ch );
           start_hunting( victim, ch );
@@ -1181,23 +1173,23 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
         {
           if ( dt >= 0 && dt < top_sn )
             {
-              bool found = FALSE;
+              bool found = false;
               SKILLTYPE *skill = skill_table[dt];
 
               if ( skill->imm_char && skill->imm_char[0] != '\0' )
                 {
                   act( AT_HIT, skill->imm_char, ch, NULL, victim, TO_CHAR );
-                  found = TRUE;
+                  found = true;
                 }
               if ( skill->imm_vict && skill->imm_vict[0] != '\0' )
                 {
                   act( AT_HITME, skill->imm_vict, ch, NULL, victim, TO_VICT );
-                  found = TRUE;
+                  found = true;
                 }
               if ( skill->imm_room && skill->imm_room[0] != '\0' )
                 {
                   act( AT_ACTION, skill->imm_room, ch, NULL, victim, TO_NOTVICT );
-                  found = TRUE;
+                  found = true;
                 }
               if ( found )
                 return rNONE;
@@ -1269,7 +1261,7 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
                &&   victim->master->in_room == ch->in_room
                &&   number_bits( 3 ) == 0 )
             {
-              stop_fighting( ch, FALSE );
+              stop_fighting( ch, false );
               retcode = multi_hit( ch, victim->master, TYPE_UNDEFINED );
               return retcode;
             }
@@ -1414,7 +1406,7 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
           victim->move = victim->max_move;
           sprintf(buf,"%s is out of the fight.",victim->name);
           to_channel(buf,CHANNEL_ARENA,"&RArena&W",5);
-          stop_fighting(victim, TRUE);
+          stop_fighting(victim, true);
 
         }
     }
@@ -1529,7 +1521,7 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
            &&   victim->fighting->who->hhf.hating->who == victim )
         stop_hating( victim->fighting->who );
 
-      stop_fighting( victim, TRUE );
+      stop_fighting( victim, true );
     }
 
   if ( victim->hit <=0 && !is_npc(victim))
@@ -1540,7 +1532,7 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
 
       /* REMOVE_BIT( victim->act, PLR_ATTACKER ); Removed to add PLR_DONTAUTOFUEL */
 
-      stop_fighting( victim, TRUE );
+      stop_fighting( victim, true );
 
       if ( ( obj = get_eq_char( victim, WEAR_DUAL_WIELD ) ) != NULL )
         unequip_char( victim, obj );
@@ -1620,7 +1612,7 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
       if ( victim->in_room != ch->in_room || !is_npc(victim) || !IS_SET( victim->act, ACT_NOKILL )  )
         loot = legal_loot( ch, victim );
       else
-        loot = FALSE;
+        loot = false;
 
       set_cur_char(victim);
       raw_kill( ch, victim );
@@ -1720,27 +1712,27 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
 bool is_safe( Character *ch, Character *victim )
 {
   if ( !victim )
-    return FALSE;
+    return false;
 
   /* Thx Josh! */
   if ( who_fighting( ch ) == ch )
-    return FALSE;
+    return false;
 
   if ( IS_SET( victim->in_room->room_flags, ROOM_SAFE ) )
     {
       set_char_color( AT_MAGIC, ch );
       send_to_char( "You'll have to do that elswhere.\r\n", ch );
-      return TRUE;
+      return true;
     }
 
   if ( get_trust(ch) > LEVEL_AVATAR )
-    return FALSE;
+    return false;
 
   if ( is_npc(ch) || is_npc(victim) )
-    return FALSE;
+    return false;
 
 
-  return FALSE;
+  return false;
 
 }
 
@@ -1750,7 +1742,7 @@ bool is_safe( Character *ch, Character *victim )
 
 bool is_safe_nm( Character *ch, Character *victim )
 {
-  return FALSE;
+  return false;
 }
 
 
@@ -1761,12 +1753,12 @@ bool legal_loot( Character *ch, Character *victim )
 {
   /* pc's can now loot .. why not .. death is pretty final */
   if ( !is_npc(ch) )
-    return TRUE;
+    return true;
   /* non-charmed mobs can loot anything */
   if ( is_npc(ch) && !ch->master )
-    return TRUE;
+    return true;
 
-  return FALSE;
+  return false;
 }
 
 /*
@@ -1776,7 +1768,6 @@ bool legal_loot( Character *ch, Character *victim )
 
 void check_killer( Character *ch, Character *victim )
 {
-
   int x;
 
   /*
@@ -1830,12 +1821,9 @@ void check_killer( Character *ch, Character *victim )
         victim->pcdata->clan->pdeaths++;
     }
 
-
   if ( is_npc(ch) )
     if ( !is_npc(victim) )
       victim->in_room->area->mdeaths++;
-
-  return;
 }
 
 
@@ -1893,7 +1881,6 @@ void update_pos( Character *victim )
       REMOVE_BIT( victim->mount->act, ACT_MOUNTED );
       victim->mount = NULL;
     }
-  return;
 }
 
 
@@ -1906,11 +1893,8 @@ void set_fighting( Character *ch, Character *victim )
 
   if ( ch->fighting )
     {
-      char buf[MAX_STRING_LENGTH];
-
-      sprintf( buf, "Set_fighting: %s -> %s (already fighting %s)",
+      bug( "Set_fighting: %s -> %s (already fighting %s)",
                ch->name, victim->name, ch->fighting->who->name );
-      bug( buf, 0 );
       return;
     }
 
@@ -1944,7 +1928,6 @@ void set_fighting( Character *ch, Character *victim )
     }
 }
 
-
 Character *who_fighting( Character *ch )
 {
   if ( !ch )
@@ -1952,8 +1935,10 @@ Character *who_fighting( Character *ch )
       bug( "who_fighting: null ch", 0 );
       return NULL;
     }
+
   if ( !ch->fighting )
     return NULL;
+
   return ch->fighting->who;
 }
 
@@ -1961,20 +1946,25 @@ void free_fight( Character *ch )
 {
   if ( !ch )
     {
-      bug( "Free_fight: null ch!", 0 );
+      bug( "Free_fight: null ch!" );
       return;
     }
+
   if ( ch->fighting )
     {
       if ( !char_died(ch->fighting->who) )
         --ch->fighting->who->num_fighting;
+
       DISPOSE( ch->fighting );
     }
+
   ch->fighting = NULL;
+
   if ( ch->mount )
     ch->position = POS_MOUNTED;
   else
     ch->position = POS_STANDING;
+
   /* Berserk wears off after combat. -- Altrag */
   if ( is_affected_by(ch, AFF_BERSERK) )
     {
@@ -1983,9 +1973,7 @@ void free_fight( Character *ch )
       send_to_char(skill_table[gsn_berserk]->msg_off, ch);
       send_to_char("\r\n", ch);
     }
-  return;
 }
-
 
 /*
  * Stop fights.
@@ -2008,24 +1996,16 @@ void stop_fighting( Character *ch, bool fBoth )
           update_pos( fch );
         }
     }
-  return;
 }
-
-
 
 void death_cry( Character *ch )
 {
-
   return;
 }
 
-
-
 void raw_kill( Character *ch, Character *victim )
 {
-
   Character *victmp;
-
   char buf[MAX_STRING_LENGTH];
   char buf2[MAX_STRING_LENGTH];
   char arg[MAX_STRING_LENGTH];
@@ -2034,7 +2014,7 @@ void raw_kill( Character *ch, Character *victim )
 
   if ( !victim )
     {
-      bug( "raw_kill: null victim!", 0 );
+      bug( "raw_kill: null victim!" );
       return;
     }
 
@@ -2043,8 +2023,7 @@ void raw_kill( Character *ch, Character *victim )
   if ( !is_npc( victim ) && victim->pcdata->clan )
     remove_member( victim );
 
-
-  stop_fighting( victim, TRUE );
+  stop_fighting( victim, true );
 
   if ( ch && !is_npc(ch) && !is_npc(victim) )
     claim_disintegration( ch , victim );
@@ -2065,17 +2044,20 @@ void raw_kill( Character *ch, Character *victim )
       victim->in_room->area->planet->population--;
       victim->in_room->area->planet->population = UMAX( victim->in_room->area->planet->population , 0 );
       victim->in_room->area->planet->pop_support -= (float) ( 1 + 1 / (victim->in_room->area->planet->population + 1) );
+
       if ( victim->in_room->area->planet->pop_support < -100 )
         victim->in_room->area->planet->pop_support = -100;
     }
 
   if ( !is_npc(victim) || !IS_SET( victim->act, ACT_NOKILL  ) )
     mprog_death_trigger( ch, victim );
+
   if ( char_died(victim) )
     return;
 
   if ( !is_npc(victim) || !IS_SET( victim->act, ACT_NOKILL  ) )
     rprog_death_trigger( ch, victim );
+
   if ( char_died(victim) )
     return;
 
@@ -2101,8 +2083,9 @@ void raw_kill( Character *ch, Character *victim )
           send_to_char("&RYou have completed your quest! Return to your employer now to gain the reward!\r\n",ch);
 
         }
+
       victim->pIndexData->killed++;
-      extract_char( victim, TRUE );
+      extract_char( victim, true );
       victim = NULL;
       return;
     }
@@ -2110,10 +2093,7 @@ void raw_kill( Character *ch, Character *victim )
   set_char_color( AT_DIEMSG, victim );
   do_help(victim, "_DIEMSG_" );
 
-
   /* swreality chnages begin here */
-
-
   for ( ship = first_ship; ship; ship = ship->next )
     {
       if ( !str_cmp( ship->owner, victim->name ) )
@@ -2127,9 +2107,7 @@ void raw_kill( Character *ch, Character *victim )
 
           save_ship( ship );
         }
-
     }
-
 
   if ( victim->plr_home )
     {
@@ -2141,7 +2119,7 @@ void raw_kill( Character *ch, Character *victim )
       REMOVE_BIT( room->room_flags , ROOM_PLR_HOME );
       SET_BIT( room->room_flags , ROOM_EMPTY_HOME );
 
-      fold_area( room->area, room->area->filename, FALSE );
+      fold_area( room->area, room->area->filename, false );
     }
 
   if ( victim->pcdata && victim->pcdata->clan )
@@ -2196,7 +2174,7 @@ void raw_kill( Character *ch, Character *victim )
         if ( (victim = d->character) && !is_npc(victim)  )
           break;
       if ( d )
-        close_socket( d, TRUE );
+        close_socket( d, true );
     }
   else
     {
@@ -2205,7 +2183,7 @@ void raw_kill( Character *ch, Character *victim )
       quitting_char = victim;
       save_char_obj( victim );
       saving_char = NULL;
-      extract_char( victim, TRUE );
+      extract_char( victim, true );
       for ( x = 0; x < MAX_WEAR; x++ )
         for ( y = 0; y < MAX_LAYERS; y++ )
           save_equipment[x][y] = NULL;
@@ -2240,55 +2218,7 @@ void raw_kill( Character *ch, Character *victim )
   sprintf( buf, "%s%c/%s.home", PLAYER_DIR, tolower(arg[0]),
            capitalize( arg ) );
   remove( buf );
-
-  return;
-
-
-  /* original player kill started here
-
-     extract_char( victim, FALSE );
-     if ( !victim )
-     {
-     bug( "oops! raw_kill: extract_char destroyed pc char", 0 );
-     return;
-     }
-     while ( victim->first_affect )
-     affect_remove( victim, victim->first_affect );
-     victim->affected_by        = race_table[victim->race].affected;
-     victim->resistant   = 0;
-     victim->susceptible = 0;
-     victim->immune      = 0;
-     victim->carry_weight= 0;
-     victim->armor      = 100;
-     victim->stats.mod_str    = 0;
-     victim->stats.mod_dex    = 0;
-     victim->stats.mod_wis    = 0;
-     victim->stats.mod_int    = 0;
-     victim->stats.mod_con    = 0;
-     victim->stats.mod_cha    = 0;
-     victim->stats.mod_lck    = 0;
-     victim->damroll    = 0;
-     victim->hitroll    = 0;
-     victim->mental_state = -10;
-     victim->alignment  = URANGE( -1000, victim->alignment, 1000 );
-     victim->saving.spell_staff = 0;
-     victim->position   = POS_RESTING;
-     victim->hit                = UMAX( 1, victim->hit  );
-     victim->mana       = UMAX( 1, victim->mana );
-     victim->move       = UMAX( 1, victim->move );
-
-     victim->pcdata->condition[COND_FULL]   = 12;
-     victim->pcdata->condition[COND_THIRST] = 12;
-
-     if ( IS_SET( sysdata.save_flags, SV_DEATH ) )
-     save_char_obj( victim );
-     return;
-
-  */
-
 }
-
-
 
 void group_gain( Character *ch, Character *victim )
 {
@@ -2378,38 +2308,15 @@ void group_gain( Character *ch, Character *victim )
             }
         }
     }
-
-  return;
 }
 
 
 int align_compute( Character *gch, Character *victim )
 {
-
-  /* never cared much for this system
-
-     int align, newalign;
-
-     align = gch->alignment - victim->alignment;
-
-     if ( align >  500 )
-     newalign  = UMIN( gch->alignment + (align-500)/4,  1000 );
-     else
-     if ( align < -500 )
-     newalign  = UMAX( gch->alignment + (align+500)/4, -1000 );
-     else
-     newalign  = gch->alignment - (int) (gch->alignment / 4);
-
-     return newalign;
-
-     make it simple instead */
-
   return URANGE ( -1000,
                   (int) ( gch->alignment - victim->alignment/5 ),
                   1000 );
-
 }
-
 
 /*
  * Calculate how much XP gch should gain for killing victim
@@ -2461,8 +2368,8 @@ void dam_message( Character *ch, Character *victim, int dam, int dt )
   char punct;
   short dampc;
   struct skill_type *skill = NULL;
-  bool gcflag = FALSE;
-  bool gvflag = FALSE;
+  bool gcflag = false;
+  bool gvflag = false;
 
   if ( ! dam )
     dampc = 0;
@@ -2498,10 +2405,10 @@ void dam_message( Character *ch, Character *victim, int dam, int dt )
   punct   = (dampc <= 30) ? '.' : '!';
 
   if ( dam == 0 && (!is_npc(ch) &&
-                    (IS_SET(ch->pcdata->flags, PCFLAG_GAG)))) gcflag = TRUE;
+                    (IS_SET(ch->pcdata->flags, PCFLAG_GAG)))) gcflag = true;
 
   if ( dam == 0 && (!is_npc(victim) &&
-                    (IS_SET(victim->pcdata->flags, PCFLAG_GAG)))) gvflag = TRUE;
+                    (IS_SET(victim->pcdata->flags, PCFLAG_GAG)))) gvflag = true;
 
   if ( dt >=0 && dt < top_sn )
     skill = skill_table[dt];
@@ -2534,26 +2441,30 @@ void dam_message( Character *ch, Character *victim, int dam, int dt )
       {
         if ( skill )
           {
-            attack      = skill->noun_damage;
+            attack = skill->noun_damage;
+
             if ( dam == 0 )
               {
-                bool found = FALSE;
+                bool found = false;
 
                 if ( skill->miss_char && skill->miss_char[0] != '\0' )
                   {
                     act( AT_HIT, skill->miss_char, ch, NULL, victim, TO_CHAR );
-                    found = TRUE;
+                    found = true;
                   }
+
                 if ( skill->miss_vict && skill->miss_vict[0] != '\0' )
                   {
                     act( AT_HITME, skill->miss_vict, ch, NULL, victim, TO_VICT );
-                    found = TRUE;
+                    found = true;
                   }
+
                 if ( skill->miss_room && skill->miss_room[0] != '\0' )
                   {
                     act( AT_ACTION, skill->miss_room, ch, NULL, victim, TO_NOTVICT );
-                    found = TRUE;
+                    found = true;
                   }
+
                 if ( found )    /* miss message already sent */
                   return;
               }
@@ -2561,8 +2472,10 @@ void dam_message( Character *ch, Character *victim, int dam, int dt )
               {
                 if ( skill->hit_char && skill->hit_char[0] != '\0' )
                   act( AT_HIT, skill->hit_char, ch, NULL, victim, TO_CHAR );
+
                 if ( skill->hit_vict && skill->hit_vict[0] != '\0' )
                   act( AT_HITME, skill->hit_vict, ch, NULL, victim, TO_VICT );
+
                 if ( skill->hit_room && skill->hit_room[0] != '\0' )
                   act( AT_ACTION, skill->hit_room, ch, NULL, victim, TO_NOTVICT );
               }
@@ -2599,12 +2512,12 @@ void dam_message( Character *ch, Character *victim, int dam, int dt )
 bool in_arena( Character *ch )
 {
   if ( !str_cmp( ch->in_room->area->filename, "arena.are" ) )
-    return TRUE;
+    return true;
 
   if ( ch->in_room->vnum < 29 || ch->in_room->vnum > 43 )
-    return FALSE;
+    return false;
 
-  return TRUE;
+  return true;
 }
 
 bool get_cover( Character *ch )
@@ -2616,10 +2529,10 @@ bool get_cover( Character *ch )
   Exit *pexit;
 
   if ( !who_fighting( ch ) )
-    return FALSE;
+    return false;
 
   if ( ch->position < POS_FIGHTING )
-    return FALSE;
+    return false;
 
   was_in = ch->in_room;
   for ( attempt = 0; attempt < 10; attempt++ )
@@ -2637,7 +2550,7 @@ bool get_cover( Character *ch )
       affect_strip ( ch, gsn_sneak );
       REMOVE_BIT   ( ch->affected_by, AFF_SNEAK );
       if ( ch->mount && ch->mount->fighting )
-        stop_fighting( ch->mount, TRUE );
+        stop_fighting( ch->mount, true );
       move_char( ch, pexit, 0 );
       if ( ( now_in = ch->in_room ) == was_in )
         continue;
@@ -2647,10 +2560,10 @@ bool get_cover( Character *ch )
       ch->in_room = now_in;
       act( AT_FLEE, "$n spins around and takes aim.", ch, NULL, NULL, TO_ROOM );
 
-      stop_fighting( ch, TRUE );
+      stop_fighting( ch, true );
 
-      return TRUE;
+      return true;
     }
 
-  return FALSE;
+  return false;
 }
