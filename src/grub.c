@@ -21,11 +21,15 @@
 static int go_strcmp( const char *astr, const char *bstr )
 {
   int i;
+
   for ( ; *astr || *bstr; astr++, bstr++ )
     {
       i=LOWER(*astr)-LOWER(*bstr);
-      if ( i ) return i;
+
+      if( i )
+	return i;
     }
+
   return 0;
 }
 
@@ -35,24 +39,25 @@ static int go_strcmp( const char *astr, const char *bstr )
 bool go_eval_str (const char *lval, int op, const char *rval)
 {
   enum op_type {EQ, NE, SU, GE, GT, LE, LT};
+
   switch (op)
     {
-    case EQ: if ( !str_cmp(lval, rval) ) return TRUE;
-      else return FALSE;
-    case NE: if (  str_cmp(lval, rval) ) return TRUE;
-      else return FALSE;
-    case GT: if (  go_strcmp(lval, rval) >  0 ) return TRUE;
-      else return FALSE;
-    case GE: if (  go_strcmp(lval, rval) >= 0 ) return TRUE;
-      else return FALSE;
-    case LT: if (  go_strcmp(lval, rval) <  0 ) return TRUE;
-      else return FALSE;
-    case LE: if (  go_strcmp(lval, rval) <= 0 ) return TRUE;
-      else return FALSE;
-    case SU: if ( strstr(lval, rval) ) return TRUE;
-      else return FALSE;
+    case EQ: if ( !str_cmp(lval, rval) ) return true;
+      else return false;
+    case NE: if (  str_cmp(lval, rval) ) return true;
+      else return false;
+    case GT: if (  go_strcmp(lval, rval) >  0 ) return true;
+      else return false;
+    case GE: if (  go_strcmp(lval, rval) >= 0 ) return true;
+      else return false;
+    case LT: if (  go_strcmp(lval, rval) <  0 ) return true;
+      else return false;
+    case LE: if (  go_strcmp(lval, rval) <= 0 ) return true;
+      else return false;
+    case SU: if ( strstr(lval, rval) ) return true;
+      else return false;
     }
-  return FALSE;
+  return false;
 }
 
 /*
@@ -69,6 +74,6 @@ bool go_eval_num (long lval, int op, long rval)
     case GT: return lval >  rval;
     case LE: return lval <= rval;
     case LT: return lval <  rval;
-    default: return FALSE;
+    default: return false;
     }
 }

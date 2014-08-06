@@ -55,7 +55,7 @@ struct gr_struct               /* input record containing pfile info    */
   char pclass;
   char race;
   char level;
-  short room;
+  vnum_t room;
   long gold;
   char clan;
   char council;
