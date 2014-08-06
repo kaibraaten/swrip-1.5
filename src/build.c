@@ -29,7 +29,7 @@
 
 bool can_rmodify( const Character *ch, const ROOM_INDEX_DATA *room )
 {
-  short vnum = room->vnum;
+  vnum_t vnum = room->vnum;
   Area *pArea;
 
   if ( is_npc( ch ) )
@@ -53,7 +53,7 @@ bool can_rmodify( const Character *ch, const ROOM_INDEX_DATA *room )
 
 bool can_omodify( const Character *ch, const OBJ_DATA *obj )
 {
-  short vnum = obj->pIndexData->vnum;
+  vnum_t vnum = obj->pIndexData->vnum;
   Area *pArea;
 
   if ( is_npc( ch ) )
@@ -77,7 +77,7 @@ bool can_omodify( const Character *ch, const OBJ_DATA *obj )
 
 bool can_oedit( const Character *ch, const OBJ_INDEX_DATA *obj )
 {
-  short vnum = obj->vnum;
+  vnum_t vnum = obj->vnum;
   Area *pArea;
 
   if ( is_npc( ch ) )
@@ -102,7 +102,7 @@ bool can_oedit( const Character *ch, const OBJ_INDEX_DATA *obj )
 
 bool can_mmodify( const Character *ch, const Character *mob )
 {
-  short vnum;
+  vnum_t vnum;
   Area *pArea;
 
   if ( mob == ch )
@@ -139,7 +139,7 @@ bool can_mmodify( const Character *ch, const Character *mob )
 
 bool can_medit( const Character *ch, const ProtoMobile *mob )
 {
-  short vnum = mob->vnum;
+  vnum_t vnum = mob->vnum;
   Area *pArea;
 
   if ( is_npc( ch ) )
@@ -169,8 +169,10 @@ void free_area( Area *are )
 {
   DISPOSE( are->name );
   DISPOSE( are->filename );
+
   while ( are->first_reset )
     free_reset( are, are->first_reset );
+
   DISPOSE( are );
   are = NULL;
 }
@@ -367,7 +369,7 @@ void fold_area( Area *tarea, char *filename, bool install )
   REPAIR_DATA           *pRepair;
   char           buf[MAX_STRING_LENGTH];
   FILE          *fpout;
-  int                    vnum;
+  vnum_t                    vnum;
   int                    val0, val1, val2, val3, val4, val5;
   bool           complexmob;
   char backup[MAX_STRING_LENGTH];
@@ -429,7 +431,7 @@ void fold_area( Area *tarea, char *filename, bool install )
         complexmob = TRUE;
       else
         complexmob = FALSE;
-      fprintf( fpout, "#%d\n",  vnum                            );
+      fprintf( fpout, "#%ld\n",  vnum                            );
       fprintf( fpout, "%s~\n",  pMobIndex->player_name          );
       fprintf( fpout,   "%s~\n",        pMobIndex->short_descr          );
       fprintf( fpout,   "%s~\n",        strip_cr(pMobIndex->long_descr) );
@@ -509,7 +511,7 @@ void fold_area( Area *tarea, char *filename, bool install )
         continue;
       if ( install )
         REMOVE_BIT( pObjIndex->extra_flags, ITEM_PROTOTYPE );
-      fprintf( fpout, "#%d\n",  vnum                            );
+      fprintf( fpout, "#%ld\n",  vnum                            );
       fprintf( fpout, "%s~\n",  pObjIndex->name                 );
       fprintf( fpout, "%s~\n",  pObjIndex->short_descr          );
       fprintf( fpout, "%s~\n",  pObjIndex->description          );
@@ -618,7 +620,7 @@ void fold_area( Area *tarea, char *filename, bool install )
               extract_obj( obj );
             }
         }
-      fprintf( fpout, "#%d\n",  vnum                            );
+      fprintf( fpout, "#%ld\n",  vnum                            );
       fprintf( fpout, "%s~\n",  room->name                      );
       fprintf( fpout, "%s~\n",  strip_cr( room->description )   );
       if ( (room->tele_delay > 0 && room->tele_vnum > 0) || room->tunnel > 0 )
@@ -784,10 +786,13 @@ void add_reset_nested( Area *tarea, OBJ_DATA *obj )
   for ( obj = obj->first_content; obj; obj = obj->next_content )
     {
       limit = obj->pIndexData->count;
+
       if ( limit < 1 )
         limit = 1;
+
       add_reset( tarea, 'P', 1, obj->pIndexData->vnum, limit,
                  obj->in_obj->pIndexData->vnum );
+
       if ( obj->first_content )
         add_reset_nested( tarea, obj );
     }
@@ -806,7 +811,7 @@ RESET_DATA *parse_reset( Area *tarea, char *argument, Character *ch )
   int extra, val1, val2, val3;
   int value;
   ROOM_INDEX_DATA *room;
-  Exit     *pexit;
+  Exit *pexit;
 
   argument = one_argument( argument, arg1 );
   argument = one_argument( argument, arg2 );
