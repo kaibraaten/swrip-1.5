@@ -31,12 +31,12 @@ extern OBJ_DATA *gobj_prev;
 
 Character *cur_char = NULL;
 ROOM_INDEX_DATA *cur_room = NULL;
-bool cur_char_died = FALSE;
+bool cur_char_died = false;
 ch_ret global_retcode = rNONE;
 
 int cur_obj = 0;
 int cur_obj_serial = 0;
-bool cur_obj_extracted = FALSE;
+bool cur_obj_extracted = false;
 obj_ret global_objcode = rNONE;
 
 OBJ_DATA *group_object( OBJ_DATA *obj1, OBJ_DATA *obj2 );
@@ -51,9 +51,8 @@ void explode( OBJ_DATA *obj )
     {
       ROOM_INDEX_DATA *room;
       Character *xch;
-      bool held = FALSE;
-      OBJ_DATA *objcont;
-      objcont = obj;
+      bool held = false;
+      OBJ_DATA *objcont = obj;
 
       while ( objcont->in_obj && !obj->carried_by )
         objcont = objcont->in_obj;
@@ -66,7 +65,7 @@ void explode( OBJ_DATA *obj )
                 act( AT_WHITE, "$p EXPLODES in $n's hands!", objcont->carried_by, obj, NULL, TO_ROOM );
                 act( AT_WHITE, "$p EXPLODES in your hands!", objcont->carried_by, obj, NULL, TO_CHAR );
                 room = xch->in_room;
-                held = TRUE;
+                held = true;
               }
             else if ( objcont->in_room )
               room = objcont->in_room;
@@ -198,11 +197,11 @@ int exp_level( short level)
 bool can_take_proto( const Character *ch )
 {
   if ( is_immortal(ch) )
-    return TRUE;
+    return true;
   else if ( is_npc(ch) && IS_SET(ch->act, ACT_PROTOTYPE) )
-    return TRUE;
+    return true;
   else
-    return FALSE;
+    return false;
 }
 
 /*
@@ -478,8 +477,6 @@ void affect_modify( Character *ch, Affect *paf, bool fAdd )
           depth--;
         }
     }
-
-  return;
 }
 
 
@@ -511,8 +508,7 @@ void affect_to_char( Character *ch, Affect *paf )
   paf_new->modifier     = paf->modifier;
   paf_new->bitvector    = paf->bitvector;
 
-  affect_modify( ch, paf_new, TRUE );
-  return;
+  affect_modify( ch, paf_new, true );
 }
 
 
@@ -523,15 +519,14 @@ void affect_remove( Character *ch, Affect *paf )
 {
   if ( !ch->first_affect )
     {
-      bug( "Affect_remove: no affect.", 0 );
+      bug( "Affect_remove: no affect." );
       return;
     }
 
-  affect_modify( ch, paf, FALSE );
+  affect_modify( ch, paf, false );
 
   UNLINK( paf, ch->first_affect, ch->last_affect, next, prev );
   DISPOSE( paf );
-  return;
 }
 
 /*
@@ -545,11 +540,10 @@ void affect_strip( Character *ch, int sn )
   for ( paf = ch->first_affect; paf; paf = paf_next )
     {
       paf_next = paf->next;
+
       if ( paf->type == sn )
         affect_remove( ch, paf );
     }
-
-  return;
 }
 
 /*
@@ -574,7 +568,6 @@ void affect_join( Character *ch, Affect *paf )
       }
 
   affect_to_char( ch, paf );
-  return;
 }
 
 
@@ -587,7 +580,7 @@ void char_from_room( Character *ch )
 
   if ( !ch )
     {
-      bug( "Char_from_room: NULL char.", 0 );
+      bug( "Char_from_room: NULL char." );
       return;
     }
 
@@ -615,10 +608,7 @@ void char_from_room( Character *ch )
   if ( !is_npc(ch)
        &&   get_timer( ch, TIMER_SHOVEDRAG ) > 0 )
     remove_timer( ch, TIMER_SHOVEDRAG );
-
-  return;
 }
-
 
 /*
  * Move a char into a room.
@@ -629,16 +619,13 @@ void char_to_room( Character *ch, ROOM_INDEX_DATA *pRoomIndex )
 
   if ( !ch )
     {
-      bug( "Char_to_room: NULL ch!", 0 );
+      bug( "Char_to_room: NULL ch!" );
       return;
     }
   if ( !pRoomIndex )
     {
-      char buf[MAX_STRING_LENGTH];
-
-      sprintf( buf, "Char_to_room: %s -> NULL room!  Putting char in limbo (%d)",
-               ch->name, ROOM_VNUM_LIMBO );
-      bug( buf, 0 );
+      bug( "Char_to_room: %s -> NULL room!  Putting char in limbo (%ld)",
+	   ch->name, ROOM_VNUM_LIMBO );
       /* This used to just return, but there was a problem with crashing
          and I saw no reason not to just put the char in limbo. -Narn */
       pRoomIndex = get_room_index( ROOM_VNUM_LIMBO );
@@ -680,7 +667,6 @@ void char_to_room( Character *ch, ROOM_INDEX_DATA *pRoomIndex )
       tele->room                = pRoomIndex;
       tele->timer               = pRoomIndex->tele_delay;
     }
-  return;
 }
 
 /*
@@ -688,16 +674,13 @@ void char_to_room( Character *ch, ROOM_INDEX_DATA *pRoomIndex )
  */
 OBJ_DATA *obj_to_char( OBJ_DATA *obj, Character *ch )
 {
-  OBJ_DATA *otmp;
+  OBJ_DATA *otmp = NULL;
   OBJ_DATA *oret = obj;
-  bool skipgroup, grouped;
+  bool skipgroup = false, grouped = false;
   int oweight = get_obj_weight( obj );
   int onum = get_obj_number( obj );
   int wear_loc = obj->wear_loc;
   int extra_flags = obj->extra_flags;
-
-  skipgroup = FALSE;
-  grouped = FALSE;
 
   if (IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
     {
@@ -713,7 +696,7 @@ OBJ_DATA *obj_to_char( OBJ_DATA *obj, Character *ch )
         for ( y = 0; y < MAX_LAYERS; y++ )
           if ( save_equipment[x][y] == obj )
             {
-              skipgroup = TRUE;
+              skipgroup = true;
               break;
             }
     }
@@ -722,7 +705,7 @@ OBJ_DATA *obj_to_char( OBJ_DATA *obj, Character *ch )
     for ( otmp = ch->first_carrying; otmp; otmp = otmp->next_content )
       if ( (oret=group_object( otmp, obj )) == otmp )
         {
-          grouped = TRUE;
+          grouped = true;
           break;
         }
 
@@ -755,7 +738,7 @@ void obj_from_char( OBJ_DATA *obj )
 
   if ( ( ch = obj->carried_by ) == NULL )
     {
-      bug( "Obj_from_char: null ch.", 0 );
+      bug( "Obj_from_char: null ch." );
       return;
     }
 
@@ -775,7 +758,6 @@ void obj_from_char( OBJ_DATA *obj )
   obj->carried_by        = NULL;
   ch->carry_number      -= get_obj_number( obj );
   ch->carry_weight      -= get_obj_weight( obj );
-  return;
 }
 
 int count_users(const OBJ_DATA *obj)
@@ -854,7 +836,7 @@ void obj_from_room( OBJ_DATA *obj )
 
   if ( ( in_room = obj->in_room ) == NULL )
     {
-      bug( "obj_from_room: NULL.", 0 );
+      bug( "obj_from_room: NULL." );
       return;
     }
 
@@ -870,11 +852,10 @@ void obj_from_room( OBJ_DATA *obj )
   obj->carried_by   = NULL;
   obj->in_obj         = NULL;
   obj->in_room      = NULL;
+
   if ( obj->pIndexData->vnum == OBJ_VNUM_CORPSE_PC && falling == 0 )
     write_corpses( NULL, obj->short_descr+14 );
-  return;
 }
-
 
 /*
  * Move an obj into a room.
@@ -898,17 +879,19 @@ OBJ_DATA *obj_to_room( OBJ_DATA *obj, ROOM_INDEX_DATA *pRoomIndex )
   obj->in_room                          = pRoomIndex;
   obj->carried_by                               = NULL;
   obj->in_obj                                   = NULL;
+
   if (item_type == ITEM_FIRE)
     pRoomIndex->light += count;
+
   falling++;
-  obj_fall( obj, FALSE );
+  obj_fall( obj, false );
   falling--;
+
   if ( obj->pIndexData->vnum == OBJ_VNUM_CORPSE_PC && falling == 0 )
     write_corpses( NULL, obj->short_descr+14 );
+
   return obj;
 }
-
-
 
 /*
  * Move an object into an object.
@@ -919,7 +902,7 @@ OBJ_DATA *obj_to_obj( OBJ_DATA *obj, OBJ_DATA *obj_to )
 
   if ( obj == obj_to )
     {
-      bug( "Obj_to_obj: trying to put object inside itself: vnum %d", obj->pIndexData->vnum );
+      bug( "Obj_to_obj: trying to put object inside itself: vnum %ld", obj->pIndexData->vnum );
       return obj;
     }
   /* Big carry_weight bug fix here by Thoric */
@@ -927,6 +910,7 @@ OBJ_DATA *obj_to_obj( OBJ_DATA *obj, OBJ_DATA *obj_to )
     {
       if ( obj->carried_by )
         obj->carried_by->carry_weight -= get_obj_weight( obj );
+
       if ( obj_to->carried_by && obj_to->wear_loc != WEAR_FLOATING )
         obj_to->carried_by->carry_weight += get_obj_weight( obj );
     }
@@ -944,7 +928,6 @@ OBJ_DATA *obj_to_obj( OBJ_DATA *obj, OBJ_DATA *obj_to )
   return obj;
 }
 
-
 /*
  * Move an object out of an object.
  */
@@ -954,7 +937,7 @@ void obj_from_obj( OBJ_DATA *obj )
 
   if ( ( obj_from = obj->in_obj ) == NULL )
     {
-      bug( "Obj_from_obj: null obj_from.", 0 );
+      bug( "Obj_from_obj: null obj_from." );
       return;
     }
 
@@ -971,11 +954,7 @@ void obj_from_obj( OBJ_DATA *obj )
   for ( ; obj_from; obj_from = obj_from->in_obj )
     if ( obj_from->carried_by && obj_from->wear_loc != WEAR_FLOATING )
       obj_from->carried_by->carry_weight -= get_obj_weight( obj );
-
-  return;
 }
-
-
 
 /*
  * Extract an obj from the world.
@@ -1047,13 +1026,14 @@ void extract_obj( OBJ_DATA *obj )
   obj->pIndexData->count -= obj->count;
   numobjsloaded -= obj->count;
   --physicalobjects;
+
   if ( obj->serial == cur_obj )
     {
-      cur_obj_extracted = TRUE;
+      cur_obj_extracted = true;
+
       if ( global_objcode == rNONE )
         global_objcode = rOBJ_EXTRACTED;
     }
-  return;
 }
 
 
@@ -1094,7 +1074,8 @@ void extract_char( Character *ch, bool fPull )
     }
 
   if ( ch == cur_char )
-    cur_char_died = TRUE;
+    cur_char_died = true;
+
   /* shove onto extraction queue */
   queue_extracted_char( ch, fPull );
 
@@ -1104,7 +1085,7 @@ void extract_char( Character *ch, bool fPull )
   if ( fPull && !IS_SET(ch->act, ACT_POLYMORPHED))
     die_follower( ch );
 
-  stop_fighting( ch, TRUE );
+  stop_fighting( ch, true );
 
   if (IS_SET(ch->in_room->room_flags, ROOM_ARENA))
     {
@@ -1185,12 +1166,10 @@ void extract_char( Character *ch, bool fPull )
       else
         {
           ch->desc->character = NULL;
-          close_socket( ch->desc, FALSE );
+          close_socket( ch->desc, false );
           ch->desc = NULL;
         }
     }
-
-  return;
 }
 
 /*
@@ -1200,7 +1179,8 @@ Character *get_char_room( const Character *ch, const char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   Character *rch;
-  int number, count, vnum;
+  int number, count;
+  vnum_t vnum = INVALID_VNUM;
 
   number = number_argument( argument, arg );
 
@@ -1209,8 +1189,6 @@ Character *get_char_room( const Character *ch, const char *argument )
 
   if ( get_trust(ch) >= LEVEL_CREATOR && is_number( arg ) )
     vnum = atoi( arg );
-  else
-    vnum = -1;
 
   count  = 0;
 
@@ -1226,7 +1204,7 @@ Character *get_char_room( const Character *ch, const char *argument )
             return rch;
       }
 
-  if ( vnum != -1 )
+  if ( vnum != INVALID_VNUM )
     return NULL;
 
   /* If we didn't find an exact match, run through the list of characters
@@ -1259,7 +1237,8 @@ Character *get_char_world( const Character *ch, const char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   Character *wch;
-  int number, count, vnum;
+  int number, count;
+  vnum_t vnum = INVALID_VNUM;
 
   number = number_argument( argument, arg );
   count  = 0;
@@ -1272,8 +1251,6 @@ Character *get_char_world( const Character *ch, const char *argument )
    */
   if ( get_trust(ch) >= LEVEL_CREATOR && is_number( arg ) )
     vnum = atoi( arg );
-  else
-    vnum = -1;
 
   /* check the room for an exact match */
   for ( wch = ch->in_room->first_person; wch; wch = wch->next_in_room )
@@ -1302,7 +1279,7 @@ Character *get_char_world( const Character *ch, const char *argument )
       }
 
   /* bail out if looking for a vnum match */
-  if ( vnum != -1 )
+  if ( vnum != INVALID_VNUM )
     return NULL;
 
   /*
@@ -1342,8 +1319,6 @@ Character *get_char_world( const Character *ch, const char *argument )
   return NULL;
 }
 
-
-
 /*
  * Find some object with a given index data.
  * Used by area-reset 'P', 'T' and 'H' commands.
@@ -1358,7 +1333,6 @@ OBJ_DATA *get_obj_type( const OBJ_INDEX_DATA *pObjIndex )
 
   return NULL;
 }
-
 
 /*
  * Find an obj in a list.
@@ -1449,7 +1423,8 @@ OBJ_DATA *get_obj_world( const Character *ch, const char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   OBJ_DATA *obj;
-  int number, count, vnum;
+  int number, count;
+  vnum_t vnum = INVALID_VNUM;
 
   if (!ch)
     return NULL;
@@ -1464,10 +1439,9 @@ OBJ_DATA *get_obj_world( const Character *ch, const char *argument )
    */
   if ( get_trust(ch) >= LEVEL_CREATOR && is_number( arg ) )
     vnum = atoi( arg );
-  else
-    vnum = -1;
 
   count  = 0;
+
   for ( obj = first_object; obj; obj = obj->next )
     if ( can_see_obj( ch, obj ) && (nifty_is_name( arg, obj->name )
                                     ||   vnum == obj->pIndexData->vnum) )
@@ -1475,7 +1449,7 @@ OBJ_DATA *get_obj_world( const Character *ch, const char *argument )
         return obj;
 
   /* bail out if looking for a vnum */
-  if ( vnum != -1 )
+  if ( vnum != INVALID_VNUM )
     return NULL;
 
   /* If we didn't find an exact match, run through the list of objects
@@ -1551,6 +1525,7 @@ OBJ_DATA *find_obj( Character *ch, const char *orig_argument, bool carryonly )
         }
 
       obj = get_obj_list( ch, arg1, container->first_content );
+
       if ( !obj )
         act( AT_PLAIN, IS_OBJ_STAT(container, ITEM_COVERING) ?
              "I see nothing like that beneath $p." :
@@ -1558,6 +1533,7 @@ OBJ_DATA *find_obj( Character *ch, const char *orig_argument, bool carryonly )
              ch, container, NULL, TO_CHAR );
       return obj;
     }
+
   return NULL;
 }
 
@@ -1566,22 +1542,18 @@ int get_obj_number( const OBJ_DATA *obj )
   return obj->count;
 }
 
-
 /*
  * Return weight of an object, including weight of contents.
  */
 int get_obj_weight( const OBJ_DATA *obj )
 {
-  int weight;
+  int weight = obj->count * obj->weight;
 
-  weight = obj->count * obj->weight;
   for ( obj = obj->first_content; obj; obj = obj->next_content )
     weight += get_obj_weight( obj );
 
   return weight;
 }
-
-
 
 /*
  * True if room is dark.
@@ -1590,25 +1562,25 @@ bool room_is_dark( const ROOM_INDEX_DATA *pRoomIndex )
 {
   if ( !pRoomIndex )
     {
-      bug( "room_is_dark: NULL pRoomIndex", 0 );
-      return TRUE;
+      bug( "room_is_dark: NULL pRoomIndex" );
+      return true;
     }
 
   if ( pRoomIndex->light > 0 )
-    return FALSE;
+    return false;
 
   if ( IS_SET(pRoomIndex->room_flags, ROOM_DARK) )
-    return TRUE;
+    return true;
 
   if ( pRoomIndex->sector_type == SECT_INSIDE
        ||   pRoomIndex->sector_type == SECT_CITY )
-    return FALSE;
+    return false;
 
   if ( weather_info.sunlight == SUN_SET
        ||   weather_info.sunlight == SUN_DARK )
-    return TRUE;
+    return true;
 
-  return FALSE;
+  return false;
 }
 
 
@@ -1623,18 +1595,18 @@ bool room_is_private( const Character *ch, const ROOM_INDEX_DATA *pRoomIndex )
 
   if ( !ch )
     {
-      bug( "room_is_private: NULL ch", 0 );
-      return FALSE;
+      bug( "room_is_private: NULL ch" );
+      return false;
     }
 
   if ( !pRoomIndex )
     {
-      bug( "room_is_private: NULL pRoomIndex", 0 );
-      return FALSE;
+      bug( "room_is_private: NULL pRoomIndex" );
+      return false;
     }
 
   if ( IS_SET(pRoomIndex->room_flags, ROOM_PLR_HOME) && ch->plr_home != pRoomIndex)
-    return TRUE;
+    return true;
 
   count = 0;
 
@@ -1642,12 +1614,12 @@ bool room_is_private( const Character *ch, const ROOM_INDEX_DATA *pRoomIndex )
     count++;
 
   if ( IS_SET(pRoomIndex->room_flags, ROOM_PRIVATE)  && count >= 2 )
-    return TRUE;
+    return true;
 
   if ( IS_SET(pRoomIndex->room_flags, ROOM_SOLITARY) && count >= 1 )
-    return TRUE;
+    return true;
 
-  return FALSE;
+  return false;
 }
 
 /*
@@ -1994,20 +1966,20 @@ ch_ret check_room_for_traps( Character *ch, int flag )
 }
 
 /*
- * return TRUE if an object contains a trap                     -Thoric
+ * return true if an object contains a trap                     -Thoric
  */
 bool is_trapped( const OBJ_DATA *obj )
 {
   OBJ_DATA *check;
 
   if ( !obj->first_content )
-    return FALSE;
+    return false;
 
   for ( check = obj->first_content; check; check = check->next_content )
     if ( check->item_type == ITEM_TRAP )
-      return TRUE;
+      return true;
 
-  return FALSE;
+  return false;
 }
 
 /*
@@ -2240,7 +2212,7 @@ void showaffect( const Character *ch, const Affect *paf )
 void set_cur_obj( OBJ_DATA *obj )
 {
   cur_obj = obj->serial;
-  cur_obj_extracted = FALSE;
+  cur_obj_extracted = false;
   global_objcode = rNONE;
 }
 
@@ -2252,16 +2224,16 @@ bool obj_extracted( const OBJ_DATA *obj )
   OBJ_DATA *cod;
 
   if ( !obj )
-    return TRUE;
+    return true;
 
   if ( obj->serial == cur_obj
        &&   cur_obj_extracted )
-    return TRUE;
+    return true;
 
   for (cod = extracted_obj_queue; cod; cod = cod->next )
     if ( obj == cod )
-      return TRUE;
-  return FALSE;
+      return true;
+  return false;
 }
 
 /*
@@ -2300,7 +2272,7 @@ void clean_obj_queue()
 void set_cur_char( Character *ch )
 {
   cur_char         = ch;
-  cur_char_died  = FALSE;
+  cur_char_died  = false;
   cur_room         = ch->in_room;
   global_retcode = rNONE;
 }
@@ -2313,13 +2285,13 @@ bool char_died( const Character *ch )
   ExtractedCharacter *ccd;
 
   if ( ch == cur_char && cur_char_died )
-    return TRUE;
+    return true;
 
   for (ccd = extracted_char_queue; ccd; ccd = ccd->next )
     if ( ccd->ch == ch )
-      return TRUE;
+      return true;
 
-  return FALSE;
+  return false;
 }
 
 /*
@@ -2422,7 +2394,6 @@ void extract_timer( Character *ch, TIMER *timer )
 
   UNLINK( timer, ch->first_timer, ch->last_timer, next, prev );
   DISPOSE( timer );
-  return;
 }
 
 void remove_timer( Character *ch, short type )
@@ -2440,25 +2411,25 @@ void remove_timer( Character *ch, short type )
 bool in_soft_range( const Character *ch, const Area *tarea )
 {
   if ( is_immortal(ch) )
-    return TRUE;
+    return true;
   else if ( is_npc(ch) )
-    return TRUE;
+    return true;
   else if ( ch->top_level >= tarea->low_soft_range || ch->top_level <= tarea->hi_soft_range )
-    return TRUE;
+    return true;
   else
-    return FALSE;
+    return false;
 }
 
 bool in_hard_range( const Character *ch, const Area *tarea )
 {
   if ( is_immortal(ch) )
-    return TRUE;
+    return true;
   else if ( is_npc(ch) )
-    return TRUE;
+    return true;
   else if ( ch->top_level >= tarea->low_hard_range && ch->top_level <= tarea->hi_hard_range )
-    return TRUE;
+    return true;
   else
-    return FALSE;
+    return false;
 }
 
 /*
@@ -2471,7 +2442,7 @@ bool chance( const Character *ch, short percent )
   if (!ch)
     {
       bug("Chance: null ch!", 0);
-      return FALSE;
+      return false;
     }
 
   /* Code for clan stuff put in by Narn, Feb/96.  The idea is to punish clan
@@ -2499,9 +2470,9 @@ bool chance( const Character *ch, short percent )
   ms = 10 - abs(ch->mental_state);
 
   if ( (number_percent() - get_curr_lck(ch) + 13 - ms) <= percent )
-    return TRUE;
+    return true;
   else
-    return FALSE;
+    return false;
 }
 
 bool chance_attrib( const Character *ch, short percent, short attrib )
@@ -2509,14 +2480,13 @@ bool chance_attrib( const Character *ch, short percent, short attrib )
   if (!ch)
     {
       bug("Chance: null ch!", 0);
-      return FALSE;
+      return false;
     }
 
   if (number_percent() - get_curr_lck(ch) + 13 - attrib + 13 <= percent )
-    return TRUE;
+    return true;
   else
-    return FALSE;
-
+    return false;
 }
 
 
@@ -2570,6 +2540,7 @@ OBJ_DATA *group_object( OBJ_DATA *obj1, OBJ_DATA *obj2 )
 {
   if ( !obj1 || !obj2 )
     return NULL;
+
   if ( obj1 == obj2 )
     return obj1;
 
@@ -2607,6 +2578,7 @@ OBJ_DATA *group_object( OBJ_DATA *obj1, OBJ_DATA *obj2 )
       extract_obj( obj2 );
       return obj1;
     }
+
   return obj2;
 }
 
@@ -2674,12 +2646,12 @@ bool empty_obj( OBJ_DATA *obj, OBJ_DATA *destobj, ROOM_INDEX_DATA *destroom )
 {
   OBJ_DATA *otmp, *otmp_next;
   Character *ch = obj->carried_by;
-  bool movedsome = FALSE;
+  bool movedsome = false;
 
   if ( !obj )
     {
       bug( "empty_obj: NULL obj", 0 );
-      return FALSE;
+      return false;
     }
   if ( destobj || (!destroom && !ch && (destobj = obj->in_obj) != NULL) )
     {
@@ -2692,7 +2664,7 @@ bool empty_obj( OBJ_DATA *obj, OBJ_DATA *destobj, ROOM_INDEX_DATA *destroom )
             continue;
           obj_from_obj( otmp );
           obj_to_obj( otmp, destobj );
-          movedsome = TRUE;
+          movedsome = true;
         }
       return movedsome;
     }
@@ -2717,7 +2689,7 @@ bool empty_obj( OBJ_DATA *obj, OBJ_DATA *destobj, ROOM_INDEX_DATA *destroom )
               if ( char_died(ch) )
                 ch = NULL;
             }
-          movedsome = TRUE;
+          movedsome = true;
         }
       return movedsome;
     }
@@ -2728,13 +2700,13 @@ bool empty_obj( OBJ_DATA *obj, OBJ_DATA *destobj, ROOM_INDEX_DATA *destroom )
           otmp_next = otmp->next_content;
           obj_from_obj( otmp );
           obj_to_char( otmp, ch );
-          movedsome = TRUE;
+          movedsome = true;
         }
       return movedsome;
     }
-  bug( "empty_obj: could not determine a destination for vnum %d",
+  bug( "empty_obj: could not determine a destination for vnum %ld",
        obj->pIndexData->vnum );
-  return FALSE;
+  return false;
 }
 
 /*
@@ -2747,7 +2719,9 @@ void boost_economy( Area *tarea, int gold )
       ++tarea->high_economy;
       gold -= 1000000000;
     }
+
   tarea->low_economy += gold;
+
   while ( tarea->low_economy >= 1000000000 )
     {
       ++tarea->high_economy;
@@ -2765,7 +2739,9 @@ void lower_economy( Area *tarea, int gold )
       tarea->high_economy -= 1;
       gold -= 1000000000;
     }
+
   tarea->low_economy -= gold;
+
   while ( tarea->low_economy < 0 )
     {
       tarea->high_economy -=1;
@@ -2782,9 +2758,9 @@ bool economy_has( const Area *tarea, int gold )
     + tarea->low_economy;
 
   if ( hasgold >= gold )
-    return TRUE;
+    return true;
 
-  return FALSE;
+  return false;
 }
 
 /*
@@ -2799,12 +2775,15 @@ void economize_mobgold( Character *mob )
 
   /* make sure it isn't way too much */
   mob->gold = UMIN( mob->gold, mob->top_level * mob->top_level * 400 );
+
   if ( !mob->in_room )
     return;
+
   tarea = mob->in_room->area;
 
   gold = ((tarea->high_economy > 0) ? 1 : 0) * 1000000000 + tarea->low_economy;
   mob->gold = URANGE( 0, mob->gold, gold / 100 );
+
   if ( mob->gold )
     lower_economy( tarea, mob->gold );
 }
