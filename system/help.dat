@@ -2,6 +2,8 @@
 
 0 HELPS
 
+0 HELPS
+
 0 !~
 &CSyntax &W: &Y!
   
@@ -4150,7 +4152,8 @@ begin losing hps <hitpoints>, you should cast fly immediately.
 
 101 FOLDAREA~
 Syntax:  foldarea <area filename>
- 
+Syntax:  foldarea all
+
 This command is used to save a live (non-prototype) area file, usually after
 it has been modified.  It should be used with extreme care.
  
