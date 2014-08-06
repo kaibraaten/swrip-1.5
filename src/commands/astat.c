@@ -1,34 +1,45 @@
+#include <string.h>
 #include "character.h"
 #include "mud.h"
 
 void do_astat( Character *ch, char *argument )
 {
   Area *tarea = NULL;
-  bool proto = FALSE;
-  bool found= FALSE;
+  bool proto = false;
+  bool found= false;
+  char filename_buf[MAX_INPUT_LENGTH];
+  char *filename = filename_buf;
 
+  if( !str_cmp( argument, "this" ) )
+    {
+      strcpy( filename, ch->in_room->area->filename );
+    }
+  else
+    {
+      strcpy( filename, argument );
+    }
 
   for ( tarea = first_area; tarea; tarea = tarea->next )
-    if ( !str_cmp( tarea->filename, argument ) )
+    if ( !str_cmp( tarea->filename, filename ) )
       {
-        found = TRUE;
+        found = true;
         break;
       }
 
   if ( !found )
     for ( tarea = first_build; tarea; tarea = tarea->next )
-      if ( !str_cmp( tarea->filename, argument ) )
+      if ( !str_cmp( tarea->filename, filename ) )
         {
-          found = TRUE;
-          proto = TRUE;
+          found = true;
+          proto = true;
           break;
         }
 
   if ( !found )
     {
-      if ( argument && argument[0] != '\0' )
+      if ( filename && filename[0] != '\0' )
         {
-          send_to_char( "Area not found.  Check 'zones'.\r\n", ch );
+          send_to_char( "Area not found. Check 'zones'.\r\n", ch );
           return;
         }
       else

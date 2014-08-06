@@ -1,17 +1,18 @@
 #include "mud.h"
+#include "character.h"
 
 void do_aset( Character *ch, char *argument )
 {
-  Area *tarea;
+  Area *tarea = NULL;
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
   char arg3[MAX_INPUT_LENGTH];
-  bool found;
-  int vnum, value;
+  bool found = false;
+  int value = 0;
 
   argument = one_argument( argument, arg1 );
   argument = one_argument( argument, arg2 );
-  vnum = atoi( argument );
+  value = atoi( argument );
 
   if ( arg1[0] == '\0' || arg2[0] == '\0' )
     {
@@ -39,6 +40,12 @@ void do_aset( Character *ch, char *argument )
           found = TRUE;
           break;
         }
+
+  if( !str_cmp( arg1, "this" ) )
+    {
+      tarea = ch->in_room->area;
+      found = true;
+    }
 
   if ( !found )
     {
@@ -87,108 +94,108 @@ void do_aset( Character *ch, char *argument )
 
   if ( !str_cmp( arg2, "low_economy" ) )
     {
-      tarea->low_economy = vnum;
+      tarea->low_economy = value;
       send_to_char( "Done.\r\n", ch );
       return;
     }
 
   if ( !str_cmp( arg2, "high_economy" ) )
     {
-      tarea->high_economy = vnum;
+      tarea->high_economy = value;
       send_to_char( "Done.\r\n", ch );
       return;
     }
 
   if ( !str_cmp( arg2, "low_room" ) )
     {
-      tarea->low_r_vnum = vnum;
+      tarea->low_r_vnum = value;
       send_to_char( "Done.\r\n", ch );
       return;
     }
 
   if ( !str_cmp( arg2, "hi_room" ) )
     {
-      tarea->hi_r_vnum = vnum;
+      tarea->hi_r_vnum = value;
       send_to_char( "Done.\r\n", ch );
       return;
     }
 
   if ( !str_cmp( arg2, "low_obj" ) )
     {
-      tarea->low_o_vnum = vnum;
+      tarea->low_o_vnum = value;
       send_to_char( "Done.\r\n", ch );
       return;
     }
 
   if ( !str_cmp( arg2, "hi_obj" ) )
     {
-      tarea->hi_o_vnum = vnum;
+      tarea->hi_o_vnum = value;
       send_to_char( "Done.\r\n", ch );
       return;
     }
 
   if ( !str_cmp( arg2, "low_mob" ) )
     {
-      tarea->low_m_vnum = vnum;
+      tarea->low_m_vnum = value;
       send_to_char( "Done.\r\n", ch );
       return;
     }
 
   if ( !str_cmp( arg2, "hi_mob" ) )
     {
-      tarea->hi_m_vnum = vnum;
+      tarea->hi_m_vnum = value;
       send_to_char( "Done.\r\n", ch );
       return;
     }
 
   if ( !str_cmp( arg2, "low_soft" ) )
     {
-      if ( vnum < 0 || vnum > MAX_LEVEL )
+      if ( value < 0 || value > MAX_LEVEL )
         {
           send_to_char( "That is not an acceptable value.\r\n", ch);
           return;
         }
 
-      tarea->low_soft_range = vnum;
+      tarea->low_soft_range = value;
       send_to_char( "Done.\r\n", ch );
       return;
     }
 
   if ( !str_cmp( arg2, "hi_soft" ) )
     {
-      if ( vnum < 0 || vnum > MAX_LEVEL )
+      if ( value < 0 || value > MAX_LEVEL )
         {
           send_to_char( "That is not an acceptable value.\r\n", ch);
 	  return;
         }
 
-      tarea->hi_soft_range = vnum;
+      tarea->hi_soft_range = value;
       send_to_char( "Done.\r\n", ch );
       return;
     }
 
   if ( !str_cmp( arg2, "low_hard" ) )
     {
-      if ( vnum < 0 || vnum > MAX_LEVEL )
+      if ( value < 0 || value > MAX_LEVEL )
         {
           send_to_char( "That is not an acceptable value.\r\n", ch);
           return;
         }
 
-      tarea->low_hard_range = vnum;
+      tarea->low_hard_range = value;
       send_to_char( "Done.\r\n", ch );
       return;
     }
 
   if ( !str_cmp( arg2, "hi_hard" ) )
     {
-      if ( vnum < 0 || vnum > MAX_LEVEL )
+      if ( value < 0 || value > MAX_LEVEL )
         {
           send_to_char( "That is not an acceptable value.\r\n", ch);
           return;
         }
 
-      tarea->hi_hard_range = vnum;
+      tarea->hi_hard_range = value;
       send_to_char( "Done.\r\n", ch );
       return;
     }
@@ -213,7 +220,7 @@ void do_aset( Character *ch, char *argument )
 
   if ( !str_cmp( arg2, "resetfreq" ) )
     {
-      tarea->reset_frequency = vnum;
+      tarea->reset_frequency = value;
       send_to_char( "Done.\r\n", ch );
       return;
     }
