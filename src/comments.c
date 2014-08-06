@@ -96,8 +96,6 @@ void comment_remove( Character *ch, Character *victim, NOTE_DATA *pnote )
    * Rewrite entire list.
    */
   save_char_obj(victim);
-
-  return;
 }
 
 void do_comment( Character *ch, char *argument )
@@ -105,10 +103,10 @@ void do_comment( Character *ch, char *argument )
   char buf[MAX_STRING_LENGTH];
   char arg[MAX_INPUT_LENGTH];
   char arg1[MAX_INPUT_LENGTH];
-  NOTE_DATA  *pnote;
-  Character  *victim;
-  int vnum;
-  int anum;
+  NOTE_DATA *pnote = NULL;
+  Character *victim = NULL;
+  int noteNumber = 0;
+  int anum = 0;
 
   if ( is_npc(ch) )
     {
@@ -157,8 +155,8 @@ void do_comment( Character *ch, char *argument )
 
   if ( !str_cmp( arg, "about" ) )
     {
-
       victim = get_char_world(ch, argument);
+
       if (!victim)
         {
           send_to_char("They're not logged on!\r\n", ch);   /* maybe fix this? */
@@ -170,14 +168,13 @@ void do_comment( Character *ch, char *argument )
           send_to_char("No comments about mobs\r\n", ch);
           return;
         }
-
-
     }
 
 
   if ( !str_cmp( arg, "list" ) )
     {
       victim = get_char_world(ch, argument);
+
       if (!victim)
         {
           send_to_char("They're not logged on!\r\n", ch);   /* maybe fix this? */
@@ -202,12 +199,11 @@ void do_comment( Character *ch, char *argument )
           return;
         }
 
-      vnum = 0;
       for ( pnote = victim->pcdata->comments; pnote; pnote = pnote->next )
         {
-          vnum++;
+          noteNumber++;
           sprintf( buf, "%2d) %-10s [%s] %s\r\n",
-                   vnum,
+                   noteNumber,
                    pnote->sender,
                    pnote->date,
                    pnote->subject );
@@ -221,10 +217,11 @@ void do_comment( Character *ch, char *argument )
 
   if ( !str_cmp( arg, "read" ) )
     {
-      bool fAll;
+      bool fAll = false;
 
       argument = one_argument( argument, arg1 );
       victim = get_char_world(ch, arg1);
+
       if (!victim)
         {
           send_to_char("They're not logged on!\r\n", ch);   /* maybe fix this? */
@@ -249,33 +246,32 @@ void do_comment( Character *ch, char *argument )
           return;
         }
 
-
-
       if ( !str_cmp( argument, "all" ) )
         {
-          fAll = TRUE;
+          fAll = true;
           anum = 0;
         }
+      else if ( is_number( argument ) )
+	{
+	  fAll = false;
+	  anum = atoi( argument );
+	}
       else
-        if ( is_number( argument ) )
-          {
-            fAll = FALSE;
-            anum = atoi( argument );
-          }
-        else
-          {
-            send_to_char( "Note read which number?\r\n", ch );
-            return;
-          }
+	{
+	  send_to_char( "Note read which number?\r\n", ch );
+	  return;
+	}
 
-      vnum = 0;
+      noteNumber = 0;
+
       for ( pnote = victim->pcdata->comments; pnote; pnote = pnote->next )
         {
-          vnum++;
-          if ( vnum == anum || fAll )
+          noteNumber++;
+
+          if ( noteNumber == anum || fAll )
             {
               sprintf( buf, "[%3d] %s: %s\r\n%s\r\nTo: %s\r\n",
-                       vnum,
+                       noteNumber,
                        pnote->sender,
                        pnote->subject,
                        pnote->date,
@@ -459,12 +455,14 @@ void do_comment( Character *ch, char *argument )
         }
 
       anum = atoi( argument );
-      vnum = 0;
+      noteNumber = 0;
+
       for ( pnote = victim->pcdata->comments; pnote; pnote = pnote->next )
         {
-          vnum++;
+          noteNumber++;
+
           if ( ( 58 <= get_trust( ch ) )    /* switch to some LEVEL_ thingie */
-               &&   ( vnum == anum ) )
+               &&   ( noteNumber == anum ) )
             {
               comment_remove( ch, victim, pnote );
               send_to_char( "Ok.\r\n", ch );
@@ -477,14 +475,13 @@ void do_comment( Character *ch, char *argument )
       return;
     }
 
-  send_to_char( "Huh?  Type 'help comment' for usage (i hope!).\r\n", ch );
-  return;
+  send_to_char( "Huh? Type 'help comment' for usage.\r\n", ch );
 }
 
 
 void fwrite_comments( Character *ch, FILE *fp )
 {
-  NOTE_DATA *pnote;
+  NOTE_DATA *pnote = NULL;
 
   if( !ch->pcdata || !ch->pcdata->comments)
     return;
@@ -498,7 +495,6 @@ void fwrite_comments( Character *ch, FILE *fp )
       fprintf( fp,"subject      %s~\n",pnote->subject);
       fprintf( fp,"text\n%s~\n",pnote->text);
     }
-  return;
 }
 
 void fread_comment( Character *ch, FILE *fp )

@@ -44,7 +44,7 @@ static const char go_ahead_str    [] = { (const char)IAC, (const char)GA, '\0' }
 
 #define MAX_NEST        100
 
-bool bootup = FALSE;
+bool bootup = false;
 
 /*
  * Global variables.
@@ -53,8 +53,8 @@ Descriptor *   first_descriptor = NULL; /* First descriptor */
 Descriptor *   last_descriptor = NULL;  /* Last descriptor              */
 Descriptor *   d_next = NULL;          /* Next descriptor in loop      */
 int                 num_descriptors = 0;
-bool                mud_down = FALSE;       /* Shutdown                     */
-bool                wizlock = FALSE;     /* Game is wizlocked            */
+bool                mud_down = false;       /* Shutdown                     */
+bool                wizlock = false;     /* Game is wizlocked            */
 time_t              boot_time = 0;
 HOUR_MIN_SEC        set_boot_time_struct;
 HOUR_MIN_SEC *      set_boot_time = NULL;
@@ -113,7 +113,7 @@ static void execute_on_exit( void )
 int main( int argc, char **argv )
 {
   struct timeval now_time;
-  bool fCopyOver = FALSE;
+  bool fCopyOver = false;
 #ifdef SWRIP_USE_IMC
   socket_t imcsocket = INVALID_SOCKET;
 #endif
@@ -128,8 +128,8 @@ int main( int argc, char **argv )
   num_descriptors               = 0;
   first_descriptor              = NULL;
   last_descriptor               = NULL;
-  sysdata.NO_NAME_RESOLVING     = TRUE;
-  sysdata.WAIT_FOR_AUTH = TRUE;
+  sysdata.NO_NAME_RESOLVING     = true;
+  sysdata.WAIT_FOR_AUTH = true;
 
   os_setup();
   /*CREATE( sysdata.mccp_buf, unsigned char, COMPRESS_BUF_SIZE );*/
@@ -212,7 +212,7 @@ int main( int argc, char **argv )
 
       if( argv[2] && argv[2][0] )
         {
-          fCopyOver = TRUE;
+          fCopyOver = true;
 #if defined(AMIGA) || defined(__MORPHOS__)
           control = ObtainSocket( atoi( argv[3] ), PF_INET, SOCK_STREAM, IPPROTO_TCP );
 #ifdef SWRIP_USE_IMC
@@ -227,7 +227,7 @@ int main( int argc, char **argv )
         }
       else
         {
-          fCopyOver = FALSE;
+          fCopyOver = false;
         }
     }
 
@@ -236,11 +236,11 @@ int main( int argc, char **argv )
    */
 
   sprintf(log_buf,"PID: %d",getpid());
-  bootup = TRUE;
+  bootup = true;
   log_string(log_buf);
 #ifdef SWRIP_USE_IMC
   log_string( "Starting IMC2" );
-  imc_startup( FALSE, imcsocket, fCopyOver );
+  imc_startup( false, imcsocket, fCopyOver );
 #endif
   log_string("Booting Database");
   boot_db(fCopyOver);
@@ -253,11 +253,11 @@ int main( int argc, char **argv )
 
   sprintf( log_buf, "Rise in Power ready on port %d.", sysdata.port );
   log_string( log_buf );
-  bootup = FALSE;
+  bootup = false;
   game_loop( );
   closesocket( control  );
 #ifdef SWRIP_USE_IMC
-  imc_shutdown( FALSE );
+  imc_shutdown( false );
 #endif
   /*
    * That's all, folks.
@@ -359,9 +359,9 @@ bool check_bad_desc( socket_t desc )
       FD_CLR( desc, &in_set );
       FD_CLR( desc, &out_set );
       log_string( "Bad FD caught and disposed." );
-      return TRUE;
+      return true;
     }
-  return FALSE;
+  return false;
 }
 
 
@@ -459,14 +459,14 @@ void game_loop( )
                         ||   d->connection_state == CON_EDITING ) )
                 save_char_obj( d->character );
               d->outtop = 0;
-              close_socket( d, TRUE );
+              close_socket( d, true );
               continue;
             }
           else
-            if (( d->character ? d->character->top_level <= LEVEL_IMMORTAL : FALSE) &&
+            if (( d->character ? d->character->top_level <= LEVEL_IMMORTAL : false) &&
                 ( d->idle > 7200 ) && !IS_SET(d->character->act, PLR_AFK))                /* 30 minutes  */
               {
-                if( (d->character && d->character->in_room) ? d->character->top_level <= LEVEL_IMMORTAL : FALSE)
+                if( (d->character && d->character->in_room) ? d->character->top_level <= LEVEL_IMMORTAL : false)
                   {
                     write_to_descriptor( d->descriptor,
                                          "Idle 30 Minutes. Activating AFK Flag\r\n", 0 );
@@ -476,23 +476,23 @@ void game_loop( )
                   }
               }
             else
-              if (( d->character ? d->character->top_level <= LEVEL_IMMORTAL : TRUE) &&
+              if (( d->character ? d->character->top_level <= LEVEL_IMMORTAL : true) &&
                   ( (!d->character && d->idle > 360)              /* 2 mins */
                     ||   ( d->connection_state != CON_PLAYING && d->idle > 1200) /* 5 mins */
                     ||     d->idle > 28800 ))                             /* 2 hrs  */
                 {
-                  if( d->character ? d->character->top_level <= LEVEL_IMMORTAL : TRUE)
+                  if( d->character ? d->character->top_level <= LEVEL_IMMORTAL : true)
                     {
                       write_to_descriptor( d->descriptor,
                                            "Idle timeout... disconnecting.\r\n", 0 );
                       d->outtop = 0;
-                      close_socket( d, TRUE );
+                      close_socket( d, true );
                       continue;
                     }
                 }
               else
                 {
-                  d->fcommand   = FALSE;
+                  d->fcommand   = false;
 
                   if ( FD_ISSET( d->descriptor, &in_set ) )
                     {
@@ -507,7 +507,7 @@ void game_loop( )
                                     ||   d->connection_state == CON_EDITING ) )
                             save_char_obj( d->character );
                           d->outtop     = 0;
-                          close_socket( d, FALSE );
+                          close_socket( d, false );
                           continue;
                         }
                     }
@@ -521,7 +521,7 @@ void game_loop( )
                   read_from_buffer( d );
                   if ( d->incomm[0] != '\0' )
                     {
-                      d->fcommand       = TRUE;
+                      d->fcommand       = true;
                       stop_idling( d->character );
 
                       strcpy( cmdline, d->incomm );
@@ -580,17 +580,17 @@ void game_loop( )
                                 ||   d->connection_state == CON_EDITING ) )
                         save_char_obj( d->character );
                       d->outtop = 0;
-                      close_socket(d, FALSE);
+                      close_socket(d, false);
                     }
                 }
-              else if ( !flush_buffer( d, TRUE ) )
+              else if ( !flush_buffer( d, true ) )
                 {
                   if ( d->character
                        && ( d->connection_state == CON_PLAYING
                             ||   d->connection_state == CON_EDITING ) )
                     save_char_obj( d->character );
                   d->outtop     = 0;
-                  close_socket( d, FALSE );
+                  close_socket( d, false );
                 }
             }
           if ( d == last_descriptor )
@@ -821,11 +821,11 @@ void close_socket( Descriptor *dclose, bool force )
 {
   Character *ch;
   Descriptor *d;
-  bool DoNotUnlink = FALSE;
+  bool DoNotUnlink = false;
 
   /* flush outbuf */
   if ( !force && dclose->outtop > 0 )
-    flush_buffer( dclose, FALSE );
+    flush_buffer( dclose, false );
 
   /* say bye to whoever's snooping this descriptor */
   if ( dclose->snoop_by )
@@ -876,7 +876,7 @@ void close_socket( Descriptor *dclose, bool force )
         {
           bug( "Close_socket: %s desc:%p could not be found!.",
                ch ? ch->name : dclose->remote.hostname, dclose );
-          DoNotUnlink = TRUE;
+          DoNotUnlink = true;
         }
     }
   if ( !dclose->next && dclose != last_descriptor )
@@ -901,7 +901,7 @@ void close_socket( Descriptor *dclose, bool force )
         {
           bug( "Close_socket: %s desc:%p could not be found!.",
                ch ? ch->name : dclose->remote.hostname, dclose );
-          DoNotUnlink = TRUE;
+          DoNotUnlink = true;
         }
     }
 
@@ -948,7 +948,7 @@ bool read_from_descriptor( Descriptor *d )
   size_t iStart;
 
   if ( d->incomm[0] != '\0' )
-    return TRUE;
+    return true;
 
   iStart = strlen(d->inbuf);
 
@@ -958,7 +958,7 @@ bool read_from_descriptor( Descriptor *d )
       log_string( log_buf );
       write_to_descriptor( d->descriptor,
                            "\r\n*** PUT A LID ON IT!!! ***\r\n", 0 );
-      return FALSE;
+      return false;
     }
 
   for ( ; ; )
@@ -974,7 +974,7 @@ bool read_from_descriptor( Descriptor *d )
       if ( nRead == 0 )
         {
           log_string_plus( "EOF encountered on read.", LOG_COMM, sysdata.log_level );
-          return FALSE;
+          return false;
         }
 
       if( nRead == SOCKET_ERROR )
@@ -986,7 +986,7 @@ bool read_from_descriptor( Descriptor *d )
           else
             {
               log_string_plus( strerror( GETERROR ), LOG_COMM, sysdata.log_level );
-              return FALSE;
+              return false;
             }
         }
 
@@ -999,7 +999,7 @@ bool read_from_descriptor( Descriptor *d )
     }
 
   d->inbuf[iStart] = '\0';
-  return TRUE;
+  return true;
 }
 
 /*
@@ -1139,9 +1139,9 @@ bool flush_buffer( Descriptor *d, bool fPrompt )
       if ( !write_to_descriptor( d->descriptor, buf, 512 ) )
         {
           d->outtop = 0;
-          return FALSE;
+          return false;
         }
-      return TRUE;
+      return true;
     }
 
 
@@ -1164,7 +1164,7 @@ bool flush_buffer( Descriptor *d, bool fPrompt )
    * Short-circuit if nothing to write.
    */
   if ( d->outtop == 0 )
-    return TRUE;
+    return true;
 
   /*
    * Snoop-o-rama.
@@ -1191,12 +1191,12 @@ bool flush_buffer( Descriptor *d, bool fPrompt )
   if ( !write_to_descriptor( d->descriptor, d->outbuf, d->outtop ) )
     {
       d->outtop = 0;
-      return FALSE;
+      return false;
     }
   else
     {
       d->outtop = 0;
-      return TRUE;
+      return true;
     }
 }
 
@@ -1252,7 +1252,7 @@ void write_to_buffer( Descriptor *d, const char *txt, size_t length )
         {
           /* empty buffer */
           d->outtop = 0;
-          close_socket(d, TRUE);
+          close_socket(d, true);
           bug("Buffer overflow. Closing (%s).", d->character ? d->character->name : "???" );
           return;
         }
@@ -1299,11 +1299,11 @@ bool write_to_descriptor( socket_t desc, char *txt, int length )
 		  desc, strerror( GETERROR ) );
           log_string(logbuf);
           perror( "Write_to_descriptor" );
-          return FALSE;
+          return false;
         }
     }
 
-  return TRUE;
+  return true;
 }
 
 /*
@@ -1312,18 +1312,18 @@ bool write_to_descriptor( socket_t desc, char *txt, int length )
 bool check_parse_name( const char *name )
 {
   const char *pc = NULL;
-  bool fIll = TRUE;
+  bool fIll = true;
   /*
    * Reserved words.
    */
   if ( is_name( name, "all auto someone immortal self god supreme demigod dog guard cityguard cat cornholio spock hicaine hithoric death ass fuck shit piss crap quit" ) )
-    return FALSE;
+    return false;
 
   /*
    * Length restrictions.
    */
   if( strlen(name) <  MIN_NAME_LENGTH || strlen(name) > MAX_NAME_LENGTH )
-    return FALSE;
+    return false;
 
   /*
    * Alphanumerics only.
@@ -1332,18 +1332,18 @@ bool check_parse_name( const char *name )
   for ( pc = name; *pc != '\0'; pc++ )
     {
       if ( !isalpha(*pc) )
-	return FALSE;
+	return false;
 
       if ( LOWER(*pc) != 'i' && LOWER(*pc) != 'l' )
-	fIll = FALSE;
+	fIll = false;
       }
 
     if ( fIll )
       {
-	return FALSE;
+	return false;
       }
 
-  return TRUE;
+  return true;
 }
 
 /*
@@ -1373,7 +1373,7 @@ bool check_reconnect( Descriptor *d, char *name, bool fConn )
                 }
               return BERR;
             }
-          if ( fConn == FALSE )
+          if ( fConn == false )
             {
               DISPOSE( d->character->pcdata->pwd );
               d->character->pcdata->pwd = str_dup( ch->pcdata->pwd );
@@ -1392,11 +1392,11 @@ bool check_reconnect( Descriptor *d, char *name, bool fConn )
               log_string_plus( log_buf, LOG_COMM, UMAX( sysdata.log_level, ch->top_level ) );
               d->connection_state = CON_PLAYING;
             }
-          return TRUE;
+          return true;
         }
     }
 
-  return FALSE;
+  return false;
 }
 
 
@@ -1420,7 +1420,7 @@ bool check_multi( Descriptor *d , char *name )
           if ( d->character->top_level >= LEVEL_CREATOR
                || ( dold->original ? dold->original : dold->character )->top_level >= LEVEL_CREATOR )
 	    {
-	      return FALSE;
+	      return false;
 	    }
 
           write_to_buffer( d, "Sorry multi-playing is not allowed ... have you other character quit first.\r\n", 0 );
@@ -1428,11 +1428,11 @@ bool check_multi( Descriptor *d , char *name )
           log_string_plus( log_buf, LOG_COMM, sysdata.log_level );
           d->character = NULL;
           free_char( d->character );
-          return TRUE;
+          return true;
         }
     }
 
-  return FALSE;
+  return false;
 
 }
 
@@ -1461,10 +1461,10 @@ bool check_playing( Descriptor *d, char *name, bool kick )
               return BERR;
             }
           if ( !kick )
-            return TRUE;
+            return true;
           write_to_buffer( d, "Already playing... Kicking off old connection.\r\n", 0 );
           write_to_buffer( dold, "Kicking off old connection... bye!\r\n", 0 );
-          close_socket( dold, FALSE );
+          close_socket( dold, false );
           /* clear descriptor pointer to get rid of bug message in log */
           d->character->desc = NULL;
           free_char( d->character );
@@ -1482,11 +1482,11 @@ bool check_playing( Descriptor *d, char *name, bool kick )
           log_string_plus( log_buf, LOG_COMM, UMAX( sysdata.log_level, ch->top_level ) );
 
           d->connection_state = cstate;
-          return TRUE;
+          return true;
         }
     }
 
-  return FALSE;
+  return false;
 }
 
 
@@ -1959,7 +1959,7 @@ void act( short AType, const char *format, Character *ch, const void *arg1, cons
           mprog_act_trigger( txt, to, ch, (OBJ_DATA *)arg1, (void *)arg2 );
         }
     }
-  MOBtrigger = TRUE;
+  MOBtrigger = true;
   return;
 }
 
@@ -2286,7 +2286,7 @@ bool pager_output( Descriptor *d )
   bool ret;
 
   if ( !d || !d->pager.pagepoint || d->pager.pagecmd == -1 )
-    return TRUE;
+    return true;
 
   ch = d->original ? d->original : d->character;
   pclines = UMAX(ch->pcdata->pagerlen, 5) - 1;
@@ -2308,10 +2308,10 @@ bool pager_output( Descriptor *d )
     case 'q':
       d->pager.pagetop = 0;
       d->pager.pagepoint = NULL;
-      flush_buffer(d, TRUE);
+      flush_buffer(d, true);
       DISPOSE(d->pager.pagebuf);
       d->pager.pagesize = MAX_STRING_LENGTH;
-      return TRUE;
+      return true;
     }
 
   while ( lines < 0 && d->pager.pagepoint >= d->pager.pagebuf )
@@ -2339,7 +2339,7 @@ bool pager_output( Descriptor *d )
     {
       if ( !write_to_descriptor(d->descriptor, d->pager.pagepoint,
                                 (last-d->pager.pagepoint)) )
-        return FALSE;
+        return false;
 
       d->pager.pagepoint = last;
     }
@@ -2351,21 +2351,21 @@ bool pager_output( Descriptor *d )
     {
       d->pager.pagetop = 0;
       d->pager.pagepoint = NULL;
-      flush_buffer(d, TRUE);
+      flush_buffer(d, true);
       DISPOSE(d->pager.pagebuf);
       d->pager.pagesize = MAX_STRING_LENGTH;
-      return TRUE;
+      return true;
     }
 
   d->pager.pagecmd = -1;
 
   if ( IS_SET( ch->act, PLR_ANSI ) )
-    if ( write_to_descriptor(d->descriptor, "\033[1;36m", 7) == FALSE )
-      return FALSE;
+    if ( write_to_descriptor(d->descriptor, "\033[1;36m", 7) == false )
+      return false;
 
   if ( (ret=write_to_descriptor(d->descriptor,
-                                "(C)ontinue, (R)efresh, (B)ack, (Q)uit: [C] ", 0)) == FALSE )
-    return FALSE;
+                                "(C)ontinue, (R)efresh, (B)ack, (Q)uit: [C] ", 0)) == false )
+    return false;
 
   if ( IS_SET( ch->act, PLR_ANSI ) )
     {
