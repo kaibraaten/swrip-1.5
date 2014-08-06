@@ -290,7 +290,7 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
   char arg[MAX_INPUT_LENGTH];
   NOTE_DATA  *pnote;
   BOARD_DATA *board;
-  int vnum;
+  vnum_t vnum = INVALID_VNUM;
   int anum;
   int first_list;
   OBJ_DATA *quill, *paper, *tmpobj = NULL;
@@ -369,7 +369,7 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
 
       if (!IS_MAIL)
         {
-          vnum = 0;
+          vnum = INVALID_VNUM;
           set_pager_color( AT_NOTE, ch );
           for ( pnote = board->first_note; pnote; pnote = pnote->next )
             {
@@ -388,7 +388,7 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
         }
       else
         {
-          vnum = 0;
+          vnum = INVALID_VNUM;
 
 
           if (IS_MAIL) /* SB Mail check for Brit */
@@ -450,10 +450,12 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
       set_pager_color( AT_NOTE, ch );
       if (!IS_MAIL)
         {
-          vnum = 0;
+          vnum = INVALID_VNUM;
+
           for ( pnote = board->first_note; pnote; pnote = pnote->next )
             {
               vnum++;
+
               if ( vnum == anum || fAll )
                 {
                   wasfound = TRUE;
@@ -481,7 +483,8 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
         }
       else
         {
-          vnum = 0;
+          vnum = INVALID_VNUM;
+
           for ( pnote = board->first_note; pnote; pnote = pnote->next )
             {
               if (is_note_to(ch, pnote) || get_trust(ch) > sysdata.read_all_mail)
@@ -541,8 +544,10 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
         }
 
       vnum = 1;
+
       for ( pnote = board->first_note; pnote && vnum < anum; pnote = pnote->next )
         vnum++;
+
       if ( !pnote )
         {
           send_to_char( "No such note.\r\n", ch );
@@ -969,7 +974,8 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
         }
 
       anum = atoi( arg_passed );
-      vnum = 0;
+      vnum = INVALID_VNUM;
+
       for ( pnote = board->first_note; pnote; pnote = pnote->next )
         {
           if (IS_MAIL && ((is_note_to(ch, pnote))
@@ -1155,12 +1161,11 @@ BOARD_DATA *read_board( char *boardfile, FILE *fp )
 
 NOTE_DATA *read_note( char *notefile, FILE *fp )
 {
-  NOTE_DATA *pnote;
-  char *word;
-
   for ( ; ; )
     {
+      NOTE_DATA *pnote = NULL;
       char letter;
+      const char *word = NULL;
 
       do
         {
@@ -1282,9 +1287,7 @@ BOARD_DATA *find_board( Character *ch )
   OBJ_DATA *obj;
   BOARD_DATA  *board;
 
-  for ( obj = ch->in_room->first_content;
-        obj;
-        obj = obj->next_content )
+  for ( obj = ch->in_room->first_content; obj; obj = obj->next_content )
     {
       if ( (board = get_board(obj)) != NULL )
         return board;
