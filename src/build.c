@@ -622,7 +622,7 @@ void fold_area( Area *tarea, char *filename, bool install )
       fprintf( fpout, "%s~\n",  room->name                      );
       fprintf( fpout, "%s~\n",  strip_cr( room->description )   );
       if ( (room->tele_delay > 0 && room->tele_vnum > 0) || room->tunnel > 0 )
-        fprintf( fpout, "0 %d %d %d %d %d\n",   room->room_flags,
+        fprintf( fpout, "0 %d %d %d %ld %d\n",   room->room_flags,
                  room->sector_type,
                  room->tele_delay,
                  room->tele_vnum,
@@ -638,12 +638,14 @@ void fold_area( Area *tarea, char *filename, bool install )
           fprintf( fpout, "%s~\n",              strip_cr( xit->description ) );
           fprintf( fpout, "%s~\n",              strip_cr( xit->keyword ) );
           if ( xit->distance > 1 )
-            fprintf( fpout, "%d %d %d %d\n",    xit->exit_info & ~EX_BASHED,
+            fprintf( fpout, "%d %ld %ld %d\n",
+		     xit->exit_info & ~EX_BASHED,
                      xit->key,
                      xit->vnum,
                      xit->distance );
           else
-            fprintf( fpout, "%d %d %d\n",       xit->exit_info & ~EX_BASHED,
+            fprintf( fpout, "%d %ld %ld\n",
+		     xit->exit_info & ~EX_BASHED,
                      xit->key,
                      xit->vnum );
         }
@@ -698,7 +700,7 @@ void fold_area( Area *tarea, char *filename, bool install )
         continue;
       if ( (pShop = pMobIndex->pShop) == NULL )
         continue;
-      fprintf( fpout, " %d   %2d %2d %2d %2d %2d   %3d %3d",
+      fprintf( fpout, " %ld   %2d %2d %2d %2d %2d   %3d %3d",
                pShop->keeper,
                pShop->buy_type[0],
                pShop->buy_type[1],
@@ -722,7 +724,7 @@ void fold_area( Area *tarea, char *filename, bool install )
         continue;
       if ( (pRepair = pMobIndex->rShop) == NULL )
         continue;
-      fprintf( fpout, " %d   %2d %2d %2d         %3d %3d",
+      fprintf( fpout, " %ld   %2d %2d %2d         %3d %3d",
                pRepair->keeper,
                pRepair->fix_type[0],
                pRepair->fix_type[1],
@@ -743,10 +745,10 @@ void fold_area( Area *tarea, char *filename, bool install )
       if ( (pMobIndex = get_mob_index( vnum )) == NULL )
         continue;
       if ( pMobIndex->spec_fun )
-        fprintf( fpout, "M  %d %s\n",   pMobIndex->vnum,
+        fprintf( fpout, "M  %ld %s\n",   pMobIndex->vnum,
                  lookup_spec( pMobIndex->spec_fun ) );
       if ( pMobIndex->spec_2 )
-        fprintf( fpout, "M  %d %s\n",   pMobIndex->vnum,
+        fprintf( fpout, "M  %ld %s\n",   pMobIndex->vnum,
                  lookup_spec( pMobIndex->spec_2 ) );
     }
   fprintf( fpout, "S\n\n\n" );

@@ -314,20 +314,24 @@ void fwrite_vendor( FILE *fp, Character *mob )
 {
   if ( !is_npc( mob ) || !fp )
     return;
-  fprintf( fp, "Vnum     %d\n", mob->pIndexData->vnum );
+
+  fprintf( fp, "Vnum     %ld\n", mob->pIndexData->vnum );
+
   if (mob->gold > 0)
     fprintf (fp, "Gold     %d\n",mob->gold);
+
   if ( mob->home )
-    fprintf( fp, "Home     %d\n", mob->home->vnum );
+    fprintf( fp, "Home     %ld\n", mob->home->vnum );
+
   if (mob->owner != NULL )
     fprintf (fp, "Owner     %s~\n", mob->owner );
+
   if ( QUICKMATCH( mob->short_descr, mob->pIndexData->short_descr) == 0 )
     fprintf( fp, "Short     %s~\n", mob->short_descr );
+
   fprintf( fp, "Position   %d\n", mob->position );
   fprintf( fp, "Flags   %d\n",   mob->act );
   fprintf( fp, "END\n" );
-
-  return;
 }
 
 
@@ -426,7 +430,7 @@ Character *  fread_vendor( FILE *fp )
             }
 
           char_to_room(mob, pRoomIndex);
-          sprintf(vnum1,"%d", mob->pIndexData->vnum);
+          sprintf(vnum1,"%ld", mob->pIndexData->vnum);
           do_makeshop (mob, vnum1 );
           sprintf (buf, mob->long_descr, mob->owner);
           mob->long_descr =  STRALLOC( buf );
@@ -466,9 +470,6 @@ Character *  fread_vendor( FILE *fp )
   }
   return NULL;
 }
-
-
-
 
 void save_vendor( Character *ch )
 {

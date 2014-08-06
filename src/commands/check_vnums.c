@@ -149,13 +149,13 @@ void do_check_vnums( Character *ch, char *argument )
           sprintf(buf, "Conflict:%-15s| ",
                   (pArea->filename ? pArea->filename : "(invalid)"));
           if(room)
-            sprintf( buf2, "Rooms: %5d - %-5d\r\n", pArea->low_r_vnum,
+            sprintf( buf2, "Rooms: %5ld - %-5ld\r\n", pArea->low_r_vnum,
                      pArea->hi_r_vnum);
           if(mob)
-            sprintf( buf2, "Mobs: %5d - %-5d\r\n", pArea->low_m_vnum,
+            sprintf( buf2, "Mobs: %5ld - %-5ld\r\n", pArea->low_m_vnum,
                      pArea->hi_m_vnum);
           if(obj)
-            sprintf( buf2, "Objects: %5d - %-5d\r\n", pArea->low_o_vnum,
+            sprintf( buf2, "Objects: %5ld - %-5ld\r\n", pArea->low_o_vnum,
                      pArea->hi_o_vnum);
 
           strcat( buf, buf2 );
@@ -224,13 +224,13 @@ void do_check_vnums( Character *ch, char *argument )
           sprintf(buf, "Conflict:%-15s| ",
                   (pArea->filename ? pArea->filename : "(invalid)"));
           if(room)
-            sprintf( buf2, "Rooms: %5d - %-5d\r\n", pArea->low_r_vnum,
+            sprintf( buf2, "Rooms: %5ld - %-5ld\r\n", pArea->low_r_vnum,
                      pArea->hi_r_vnum);
           if(mob)
-            sprintf( buf2, "Mobs: %5d - %-5d\r\n", pArea->low_m_vnum,
+            sprintf( buf2, "Mobs: %5ld - %-5ld\r\n", pArea->low_m_vnum,
                      pArea->hi_m_vnum);
           if(obj)
-            sprintf( buf2, "Objects: %5d - %-5d\r\n", pArea->low_o_vnum,
+            sprintf( buf2, "Objects: %5ld - %-5ld\r\n", pArea->low_o_vnum,
                      pArea->hi_o_vnum);
 
           strcat( buf, buf2 );

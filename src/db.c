@@ -4202,7 +4202,7 @@ void load_area_file( Area *tarea, char *filename )
       if ( fBootDb )
         sort_area( tarea, FALSE );
 
-      fprintf( stderr, "%-14s: Rooms: %5d - %-5d Objs: %5d - %-5d Mobs: %5d - %d\n",
+      fprintf( stderr, "%-14s: Rooms: %5ld - %-5ld Objs: %5ld - %-5ld Mobs: %5ld - %ld\n",
                tarea->filename,
                tarea->low_r_vnum, tarea->hi_r_vnum,
                tarea->low_o_vnum, tarea->hi_o_vnum,
@@ -4318,8 +4318,8 @@ void load_buildlist( void )
               pArea->low_hard_range = -1; pArea->hi_hard_range = -1;
               pArea->first_reset = NULL; pArea->last_reset = NULL;
               LINK( pArea, first_build, last_build, next, prev );
-              fprintf( stderr, "%-14s: Rooms: %5d - %-5d Objs: %5d - %-5d "
-                       "Mobs: %5d - %-5d\n",
+              fprintf( stderr, "%-14s: Rooms: %5ld - %-5ld Objs: %5ld - %-5ld "
+                       "Mobs: %5ld - %-5ld\n",
                        pArea->filename,
                        pArea->low_r_vnum, pArea->hi_r_vnum,
                        pArea->low_o_vnum, pArea->hi_o_vnum,
@@ -4728,7 +4728,7 @@ void append_file( Character *ch, const char *file, const char *str )
     }
   else
     {
-      fprintf( fp, "[%5d] %s: %s\n",
+      fprintf( fp, "[%5ld] %s: %s\n",
 	       ch->in_room ? ch->in_room->vnum : 0, ch->name, str );
       fclose( fp );
     }

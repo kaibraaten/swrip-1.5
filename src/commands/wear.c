@@ -41,7 +41,7 @@ void do_wear( Character *ch, char *argument )
         {
           obj_next = obj->next_content;
           if ( obj->wear_loc == WEAR_NONE && can_see_obj( ch, obj ) )
-            wear_obj( ch, obj, FALSE, -1 );
+            wear_obj( ch, obj, false, -1 );
         }
 
       return;
@@ -59,7 +59,7 @@ void do_wear( Character *ch, char *argument )
       else
         wear_bit = -1;
 
-      wear_obj( ch, obj, TRUE, wear_bit );
+      wear_obj( ch, obj, true, wear_bit );
     }
 }
 
@@ -69,18 +69,20 @@ void do_wear( Character *ch, char *argument )
  * Big repetitive code, ick.
  * Restructured a bit to allow for specifying body location     -Thoric
  */
-void wear_obj( Character *ch, OBJ_DATA *obj, bool fReplace, short wear_bit )
+static void wear_obj( Character *ch, OBJ_DATA *obj, bool fReplace, short wear_bit )
 {
   char buf[MAX_STRING_LENGTH];
-  OBJ_DATA *tmpobj;
-  short bit, tmp;
-  bool check_size;
+  OBJ_DATA *tmpobj = NULL;
+  short bit = 0;
+  short tmp = 0;
+  bool check_size = false;
 
   separate_obj( obj );
 
   if ( wear_bit > -1 )
     {
       bit = wear_bit;
+
       if ( !CAN_WEAR(obj, 1 << bit) )
         {
           if ( fReplace )
@@ -90,15 +92,18 @@ void wear_obj( Character *ch, OBJ_DATA *obj, bool fReplace, short wear_bit )
                 case ITEM_HOLD:
                   send_to_char( "You cannot hold that.\r\n", ch );
                   break;
+
                 case ITEM_WIELD:
                   send_to_char( "You cannot wield that.\r\n", ch );
                   break;
+
 		default:
                   sprintf( buf, "You cannot wear that on your %s.\r\n",
                            wear_flags[bit] );
                   send_to_char( buf, ch );
                 }
             }
+
           return;
         }
     }
@@ -115,51 +120,58 @@ void wear_obj( Character *ch, OBJ_DATA *obj, bool fReplace, short wear_bit )
     }
 
 
-  check_size = FALSE;
-
   if (  1 << bit == ITEM_WIELD ||   1 << bit == ITEM_HOLD
         || obj->item_type == ITEM_LIGHT ||   1 << bit == ITEM_WEAR_SHIELD )
-    check_size = FALSE;
+    {
+      check_size = false;
+    }
   else if ( ch->race == RACE_DEFEL )
-    check_size = TRUE;
+    {
+      check_size = true;
+    }
   else if ( !is_npc(ch) )
-    switch (ch->race)
-      {
-      default:
-      case RACE_TRANDOSHAN:
-      case RACE_VERPINE:
-      case RACE_HUMAN:
-      case RACE_ADARIAN:
-      case RACE_RODIAN:
-      case RACE_TWI_LEK:
+    {
+      switch (ch->race)
+	{
+	default:
+	  if ( !IS_OBJ_STAT(obj, ITEM_HUMAN_SIZE) )
+	    {
+	      check_size = true;
+	    }
 
-        if ( !IS_OBJ_STAT(obj, ITEM_HUMAN_SIZE) )
-          check_size = TRUE;
-        break;
+	  break;
 
-      case RACE_HUTT:
-	if ( !IS_OBJ_STAT(obj, ITEM_HUTT_SIZE) )
-          check_size = TRUE;
-        break;
+	case RACE_HUTT:
+	  if ( !IS_OBJ_STAT(obj, ITEM_HUTT_SIZE) )
+	    {
+	      check_size = true;
+	    }
 
-      case RACE_GAMORREAN:
-      case RACE_MON_CALAMARI:
-      case RACE_QUARREN:
-      case RACE_WOOKIEE:
+	  break;
 
-        if ( !IS_OBJ_STAT(obj, ITEM_LARGE_SIZE) )
-          check_size = TRUE;
-        break;
+	case RACE_GAMORREAN:
+	case RACE_MON_CALAMARI:
+	case RACE_QUARREN:
+	case RACE_WOOKIEE:
+	  if ( !IS_OBJ_STAT(obj, ITEM_LARGE_SIZE) )
+	    {
+	      check_size = true;
+	    }
 
-      case RACE_CHADRA_FAN:
-      case RACE_EWOK:
-      case RACE_JAWA:
-      case RACE_SULLUSTAN:
-        if ( !IS_OBJ_STAT(obj, ITEM_SMALL_SIZE) )
-          check_size = TRUE;
-        break;
+	  break;
 
-      }
+	case RACE_CHADRA_FAN:
+	case RACE_EWOK:
+	case RACE_JAWA:
+	case RACE_SULLUSTAN:
+	  if ( !IS_OBJ_STAT(obj, ITEM_SMALL_SIZE) )
+	    {
+	      check_size = true;
+	    }
+
+	  break;
+	}
+    }
 
   /*
     this seems redundant but it enables both multiple sized objects to be
@@ -642,6 +654,13 @@ void wear_obj( Character *ch, OBJ_DATA *obj, bool fReplace, short wear_bit )
                   send_to_char( "It is too heavy for you to wield.\r\n", ch );
                   return;
                 }
+
+	      if( obj->item_type == ITEM_WEAPON && obj->value[3] == WEAPON_LIGHTSABER )
+		{
+		  ch_printf( ch, "You can't dual-wield lightsabers.\r\n" );
+		  return;
+		}
+
               if ( !oprog_use_trigger( ch, obj, NULL, NULL, NULL ) )
                 {
                   if ( !obj->action_desc || obj->action_desc[0]=='\0' )
@@ -650,8 +669,11 @@ void wear_obj( Character *ch, OBJ_DATA *obj, bool fReplace, short wear_bit )
                       act( AT_ACTION, "You dual-wield $p.", ch, obj, NULL, TO_CHAR );
                     }
                   else
-                    actiondesc( ch, obj, NULL );
+		    {
+		      actiondesc( ch, obj, NULL );
+		    }
                 }
+
               equip_char( ch, obj, WEAR_DUAL_WIELD );
               oprog_wear_trigger( ch, obj );
             }
@@ -755,16 +777,16 @@ static bool can_layer( const Character *ch, const OBJ_DATA *obj, short wear_loc 
     if ( otmp->wear_loc == wear_loc )
       {
         if ( !otmp->pIndexData->layers )
-          return FALSE;
+          return false;
         else
           bitlayers |= otmp->pIndexData->layers;
       }
 
   if ( (bitlayers && !objlayers) || bitlayers > objlayers )
-    return FALSE;
+    return false;
   if ( !bitlayers || ((bitlayers & ~objlayers) == bitlayers) )
-    return TRUE;
-  return FALSE;
+    return true;
+  return false;
 }
 
 /*
@@ -773,12 +795,12 @@ static bool can_layer( const Character *ch, const OBJ_DATA *obj, short wear_loc 
 static bool could_dual( const Character *ch )
 {
   if ( is_npc(ch) )
-    return TRUE;
+    return true;
 
   if ( ch->pcdata->learned[gsn_dual_wield] )
-    return TRUE;
+    return true;
 
-  return FALSE;
+  return false;
 }
 
 /*
@@ -787,19 +809,21 @@ static bool could_dual( const Character *ch )
 static bool can_dual( const Character *ch )
 {
   if ( !could_dual(ch) )
-    return FALSE;
+    {
+      return false;
+    }
 
   if ( get_eq_char( ch, WEAR_DUAL_WIELD ) )
     {
       send_to_char( "You are already wielding two weapons!\r\n", ch );
-      return FALSE;
+      return false;
     }
 
   if ( get_eq_char( ch, WEAR_HOLD ) )
     {
       send_to_char( "You cannot dual wield while holding something!\r\n", ch );
-      return FALSE;
+      return false;
     }
 
-  return TRUE;
+  return true;
 }

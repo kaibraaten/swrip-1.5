@@ -299,7 +299,7 @@ void hunt_victim( Character *ch )
 
   if (!found)
     {
-      do_say(ch, "Damn!  My prey is gone!!" );
+      do_say(ch, "Damn! My prey is gone!" );
       stop_hunting( ch );
       return;
     }
@@ -357,10 +357,8 @@ void hunt_victim( Character *ch )
         {
           if ( !ch->in_room )
             {
-              char buf[MAX_STRING_LENGTH];
-              sprintf( buf, "Hunt_victim: no ch->in_room!  Mob #%d, name: %s.  Placing mob in limbo.",
-                       ch->pIndexData->vnum, ch->name );
-              bug( buf, 0 );
+              bug( "Hunt_victim: no ch->in_room! Mob #%ld, name: %s. Placing mob in limbo.",
+		   ch->pIndexData->vnum, ch->name );
               char_to_room( ch, get_room_index( ROOM_VNUM_LIMBO ) );
               return;
             }

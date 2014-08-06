@@ -123,7 +123,7 @@ void write_boards_txt( void )
   for ( tboard = first_board; tboard; tboard = tboard->next )
     {
       fprintf( fpout, "Filename          %s~\n", tboard->note_file          );
-      fprintf( fpout, "Vnum              %d\n",  tboard->board_obj          );
+      fprintf( fpout, "Vnum              %ld\n",  tboard->board_obj          );
       fprintf( fpout, "Min_read_level    %d\n",  tboard->min_read_level   );
       fprintf( fpout, "Min_post_level    %d\n",  tboard->min_post_level   );
       fprintf( fpout, "Min_remove_level  %d\n",  tboard->min_remove_level );

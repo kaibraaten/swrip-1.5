@@ -1621,7 +1621,7 @@ void list_resets( Character *ch, Area *pArea, ROOM_INDEX_DATA *pRoom,
               else
                 rname = obj2->name;
             }
-          sprintf( pbuf, "(Put) %s (%d) -> %s (%d) [%d] {nest %d}\r\n", oname,
+          sprintf( pbuf, "(Put) %s (%d) -> %s (%ld) [%d] {nest %d}\r\n", oname,
                    pReset->arg1, rname, (obj2 ? obj2->vnum : pReset->arg3),
                    pReset->arg2, pReset->extra );
           break;
@@ -1639,7 +1639,7 @@ void list_resets( Character *ch, Area *pArea, ROOM_INDEX_DATA *pRoom,
             rname = "Object: *NULL obj*";
           else
             rname = oname;
-          sprintf(pbuf, "Hide %s (%d)\r\n", rname,
+          sprintf(pbuf, "Hide %s (%ld)\r\n", rname,
                   (pReset->arg1 > 0 ? pReset->arg1 : obj ? obj->vnum : 0));
           break;
         case 'B':
@@ -1701,7 +1701,7 @@ void list_resets( Character *ch, Area *pArea, ROOM_INDEX_DATA *pRoom,
                   rname = "Object: *NULL obj*";
                 else
                   rname = oname;
-                sprintf(pbuf, "Object %s (%d)", rname,
+                sprintf(pbuf, "Object %s (%ld)", rname,
                         (pReset->arg1 > 0 ? pReset->arg1 : obj ? obj->vnum : 0));
                 flagarray = object_flags;
                 break;
@@ -1719,7 +1719,7 @@ void list_resets( Character *ch, Area *pArea, ROOM_INDEX_DATA *pRoom,
                   rname = "Mobile: *NULL mob*";
                 else
                   rname = mname;
-                sprintf(pbuf, "Mobile %s (%d)", rname,
+                sprintf(pbuf, "Mobile %s (%ld)", rname,
                         (pReset->arg1 > 0 ? pReset->arg1 : mob ? mob->vnum : 0));
                 flagarray = affected_flags;
                 break;
@@ -2105,7 +2105,7 @@ char *sprint_reset( Character *ch, RESET_DATA *pReset, short num, bool rlist )
       else
         if ( !obj )
           strcpy( objname, "Object: *NULL obj*" );
-      sprintf( buf, "%2d) Hide %s (%d)\r\n",
+      sprintf( buf, "%2d) Hide %s (%ld)\r\n",
                num,
                objname,
                obj ? obj->vnum : pReset->arg1 );
@@ -2155,7 +2155,7 @@ char *sprint_reset( Character *ch, RESET_DATA *pReset, short num, bool rlist )
           strcpy( roomname, "Object2: *NULL obj*" );
         else
           strcpy( roomname, obj->name );
-      sprintf( buf, "%2d) (Put) %s (%d) -> %s (%d) [%d]\r\n",
+      sprintf( buf, "%2d) (Put) %s (%d) -> %s (%ld) [%d]\r\n",
 	       num,
                objname,
                pReset->arg1,

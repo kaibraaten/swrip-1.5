@@ -48,21 +48,21 @@ void do_owhere( Character *ch, char *argument )
 
       sprintf(field, "%-18s", obj_short(obj));
       trunc1(field, 18);
-      sprintf(buf, "%3d &R&w%5d &R&w%-18s &R&w", ++icnt, obj->pIndexData->vnum, field);
+      sprintf(buf, "%3d &R&w%5ld &R&w%-18s &R&w", ++icnt, obj->pIndexData->vnum, field);
 
       if ( outer_obj->carried_by )
         {
           sprintf(field, "%-18s", PERS(outer_obj->carried_by, ch));
           trunc1(field, 18);
-          sprintf(buf+strlen(buf), "%5d %-18s &R&w",
+          sprintf(buf+strlen(buf), "%5ld %-18s &R&w",
                   (is_npc(outer_obj->carried_by) ?
-                   outer_obj->carried_by->pIndexData->vnum : 0), field);
+                   outer_obj->carried_by->pIndexData->vnum : INVALID_VNUM), field);
 
           if ( outer_obj!=obj )
             {
               sprintf(field, "%-18s", obj->in_obj->name);
               trunc1(field, 18);
-              sprintf(buf+strlen(buf), "%5d %-18s &R&w",
+              sprintf(buf+strlen(buf), "%5ld %-18s &R&w",
                       obj->in_obj->pIndexData->vnum, field);
             }
 
@@ -73,14 +73,14 @@ void do_owhere( Character *ch, char *argument )
         {
           sprintf(field, "%-18s", outer_obj->in_room->name);
           trunc1(field, 18);
-          sprintf(buf+strlen(buf), "%5d %-18s &R&w",
+          sprintf(buf+strlen(buf), "%5ld %-18s &R&w",
                   outer_obj->in_room->vnum, field);
 
           if ( outer_obj!=obj )
             {
               sprintf(field, "%-18s", obj->in_obj->name);
               trunc1(field, 18);
-              sprintf(buf+strlen(buf), "%5d %-18s &R&w",
+              sprintf(buf+strlen(buf), "%5ld %-18s &R&w",
                       obj->in_obj->pIndexData->vnum, field);
             }
 

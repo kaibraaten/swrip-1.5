@@ -144,9 +144,9 @@ bool save_shuttle( const SHUTTLE_DATA * shuttle )
 
   fprintf( fp, "Type         %d\n",     shuttle->type);
   fprintf( fp, "State        %d\n",     shuttle->state);
-  fprintf( fp, "StartRoom    %d\n",     shuttle->room.first);
-  fprintf( fp, "EndRoom      %d\n",     shuttle->room.last);
-  fprintf( fp, "Entrance      %d\n",    shuttle->room.entrance);
+  fprintf( fp, "StartRoom    %ld\n",     shuttle->room.first);
+  fprintf( fp, "EndRoom      %ld\n",     shuttle->room.last);
+  fprintf( fp, "Entrance     %ld\n",    shuttle->room.entrance);
 
   fprintf( fp, "End\n\n");
 
@@ -154,7 +154,7 @@ bool save_shuttle( const SHUTTLE_DATA * shuttle )
     {
       fprintf( fp, "#STOP\n");
       fprintf( fp, "StopName       %s~\n", stop->stop_name);
-      fprintf( fp, "Room           %d\n",  stop->room);
+      fprintf( fp, "Room           %ld\n",  stop->room);
       fprintf( fp, "End\n\n");
     }
 

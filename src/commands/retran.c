@@ -21,6 +21,6 @@ void do_retran( Character *ch, char *argument )
       return;
     }
 
-  sprintf(buf, "'%s' %d", victim->name, victim->retran);
+  sprintf(buf, "'%s' %ld", victim->name, victim->retran);
   do_transfer(ch, buf);
 }

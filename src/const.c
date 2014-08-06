@@ -1653,7 +1653,7 @@ const char * const affect_types[] =
 
 const char * const act_flags[] =
   {
-    "npc", "sentinel", "scavenger", "r3", "r3", "aggressive", "stayarea",
+    "npc", "sentinel", "scavenger", "r3", "r4", "aggressive", "stayarea",
     "wimpy", "pet", "train", "practice", "immortal", "deadly", "polyself",
     "meta_aggr", "guardian", "running", "nowander", "mountable", "mounted",
     "scholar", "secretive", "polymorphed", "mobinvis", "noassist", "nokill",
@@ -1745,7 +1745,7 @@ const char * const ris_flags[] =
     "fire", "cold", "electricity", "energy", "blunt", "pierce", "slash",
     "acid", "poison", "drain", "sleep", "charm", "hold", "nonmagic", "plus1",
     "plus2", "plus3", "plus4", "plus5", "plus6", "magic", "paralysis",
-    "steal", "r2", "r3", "r4", "r5", "r6", "r7", "r8", "r9", "r10"
+    "steal", "r23", "r24", "r25", "r26", "r27", "r28", "r29", "r30", "r31"
   };
 
 const char * const trig_flags[] =
@@ -1754,7 +1754,7 @@ const char * const trig_flags[] =
     "d_down", "door", "container", "open", "close", "passage", "oload",
     "mload", "teleport", "teleportall", "teleportplus", "death", "cast",
     "fakeblade", "rand4", "rand6", "trapdoor", "anotherroom", "usedial",
-    "absolutevnum", "showroomdesc", "autoreturn", "r2", "r3"
+    "absolutevnum", "showroomdesc", "autoreturn", "r30", "r31"
   };
 
 const char * const part_flags[] =
@@ -1763,7 +1763,7 @@ const char * const part_flags[] =
     "fingers", "ear", "eye", "long_tongue", "eyestalks", "tentacles", "fins",
     "wings", "tail", "scales", "claws", "fangs", "horns", "tusks",
     "tailattack", "sharpscales", "beak", "haunches", "hooves", "paws",
-    "forelegs", "feathers", "r1", "r2"
+    "forelegs", "feathers", "r30", "r31"
   };
 
 const char * const defense_flags[] =

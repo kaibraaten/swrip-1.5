@@ -76,7 +76,7 @@ void do_placevendor (Character *ch, char *argument)
 
   act( AT_ACTION, "$n appears in a swirl of smoke.\n", vendor, NULL, NULL, TO_ROOM );
 
-  sprintf(vnum1,"%d", vendor->pIndexData->vnum);
+  sprintf(vnum1,"%ld", vendor->pIndexData->vnum);
   do_makeshop (vendor, vnum1 ); /*makes the vendor a shop.. there has to be a
                                   better way to do it but hell if i know what it is!*/
 }

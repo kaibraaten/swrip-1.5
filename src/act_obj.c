@@ -200,7 +200,7 @@ void obj_fall( OBJ_DATA *obj, bool through )
 
       if (obj->in_room == to_room)
         {
-          sprintf(buf, "Object falling into same room, room %d",
+          sprintf(buf, "Object falling into same room, room %ld",
                   to_room->vnum);
           bug( buf, 0 );
           extract_obj( obj );

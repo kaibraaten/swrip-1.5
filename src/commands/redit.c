@@ -13,7 +13,8 @@ void do_redit( Character *ch, char *argument )
   ExtraDescription *ed = NULL;
   Exit *xit = NULL, *texit = NULL;
   int value = 0;
-  int edir = 0, ekey = 0, evnum = 0;
+  int edir = 0;
+  vnum_t evnum = INVALID_VNUM;
   char *origarg = argument;
 
   if ( !ch->desc )
@@ -229,6 +230,7 @@ void do_redit( Character *ch, char *argument )
         {
           argument = one_argument( argument, arg2 );
           value = get_roomflag( arg2 );
+
           if ( value < 0 || value > 31 )
             ch_printf( ch, "Unknown flag: %s\r\n", arg2 );
           else if ( 1 << value == ROOM_PLR_HOME && get_trust(ch) < LEVEL_IMPLEMENTOR )
@@ -250,6 +252,7 @@ void do_redit( Character *ch, char *argument )
           send_to_char( "Usage: redit teledelay <value>\r\n", ch );
           return;
         }
+
       location->tele_delay = atoi( argument );
       send_to_char( "Done.\r\n", ch );
       return;
@@ -257,14 +260,28 @@ void do_redit( Character *ch, char *argument )
 
   if ( !str_cmp( arg, "televnum" ) )
     {
+      vnum_t televnum = INVALID_VNUM;
+
       if ( !argument || argument[0] == '\0' )
         {
 	  send_to_char( "Set the vnum of the room to teleport to.\r\n", ch );
           send_to_char( "Usage: redit televnum <vnum>\r\n", ch );
           return;
+
         }
-      location->tele_vnum = atoi( argument );
-      send_to_char( "Done.\r\n", ch );
+
+      televnum = atoi( argument );
+
+      if( !get_room_index( televnum ) )
+	{
+	  ch_printf( ch, "&R%ld is not a valid room vnum.\r\n" );
+	}
+      else
+	{
+	  location->tele_vnum = televnum;
+	  send_to_char( "Done.\r\n", ch );
+	}
+
       return;
     }
 
@@ -281,7 +298,9 @@ void do_redit( Character *ch, char *argument )
 
           return;
         }
+
       location->sector_type = atoi( argument );
+
       if ( location->sector_type < 0 || location->sector_type >= SECT_MAX )
         {
           location->sector_type = 1;
@@ -294,13 +313,17 @@ void do_redit( Character *ch, char *argument )
 
   if ( !str_cmp( arg, "exkey" ) )
     {
+      vnum_t keyvnum = INVALID_VNUM;
+
       argument = one_argument( argument, arg2 );
       argument = one_argument( argument, arg3 );
+
       if ( arg2[0] == '\0' || arg3[0] == '\0' )
         {
           send_to_char( "Usage: redit exkey <dir> <key vnum>\r\n", ch );
           return;
         }
+
       if ( arg2[0] == '#' )
         {
 	  edir = atoi( arg2+1 );
@@ -311,13 +334,16 @@ void do_redit( Character *ch, char *argument )
           edir = get_dir( arg2 );
           xit = get_exit( location, edir );
         }
-      value = atoi( arg3 );
+
+      keyvnum = atoi( arg3 );
+
       if ( !xit )
         {
           send_to_char( "No exit in that direction.  Use 'redit exit ...' first.\r\n", ch );
           return;
         }
-      xit->key = value;
+
+      xit->key = keyvnum;
       send_to_char( "Done.\r\n", ch );
       return;
     }
@@ -325,12 +351,14 @@ void do_redit( Character *ch, char *argument )
   if ( !str_cmp( arg, "exname" ) )
     {
       argument = one_argument( argument, arg2 );
+
       if ( arg2[0] == '\0' )
         {
           send_to_char( "Change or clear exit keywords.\r\n", ch );
           send_to_char( "Usage: redit exname <dir> [keywords]\r\n", ch );
           return;
         }
+
       if ( arg2[0] == '#' )
         {
           edir = atoi( arg2+1 );
@@ -341,11 +369,13 @@ void do_redit( Character *ch, char *argument )
           edir = get_dir( arg2 );
           xit = get_exit( location, edir );
         }
+
       if ( !xit )
         {
           send_to_char( "No exit in that direction.  Use 'redit exit ...' first.\r\n", ch );
           return;
         }
+
       STRFREE( xit->keyword );
       xit->keyword = STRALLOC( argument );
       send_to_char( "Done.\r\n", ch );
@@ -366,7 +396,9 @@ void do_redit( Character *ch, char *argument )
 
           return;
         }
+
       argument = one_argument( argument, arg2 );
+
       if ( arg2[0] == '#' )
         {
           edir = atoi( arg2+1 );
@@ -377,15 +409,18 @@ void do_redit( Character *ch, char *argument )
           edir = get_dir( arg2 );
           xit = get_exit( location, edir );
         }
+
       if ( !xit )
         {
           send_to_char( "No exit in that direction.  Use 'redit exit ...' first.\r\n", ch );
           return;
         }
+
       if ( argument[0] == '\0' )
         {
-          sprintf( buf, "Flags for exit direction: %d  Keywords: %s  Key: %d\r\n[ ",
+          sprintf( buf, "Flags for exit direction: %d  Keywords: %s  Key: %ld\r\n[ ",
                    xit->vdir, xit->keyword, xit->key );
+
           for ( value = 0; value <= MAX_EXFLAG; value++ )
             {
               if ( IS_SET( xit->exit_info, 1 << value ) )
@@ -394,19 +429,23 @@ void do_redit( Character *ch, char *argument )
                   strcat( buf, " " );
 		}
             }
+
           strcat( buf, "]\r\n" );
           send_to_char( buf, ch );
           return;
         }
+
       while ( argument[0] != '\0' )
         {
           argument = one_argument( argument, arg2 );
           value = get_exitflag( arg2 );
+
           if ( value < 0 || value > MAX_EXFLAG )
             ch_printf( ch, "Unknown flag: %s\r\n", arg2 );
           else
             TOGGLE_BIT( xit->exit_info, 1 << value );
         }
+
       return;
     }
 
@@ -443,7 +482,7 @@ void do_redit( Character *ch, char *argument )
         }
 
       if ( arg3[0] == '\0' )
-        evnum = 0;
+        evnum = INVALID_VNUM;
       else
         evnum = atoi( arg3 );
 
@@ -455,7 +494,7 @@ void do_redit( Character *ch, char *argument )
       else
         xit = get_exit(location, edir);
 
-      if ( !evnum )
+      if ( evnum == INVALID_VNUM )
         {
           if ( xit )
             {
@@ -463,24 +502,29 @@ void do_redit( Character *ch, char *argument )
               send_to_char( "Exit removed.\r\n", ch );
               return;
             }
+
           send_to_char( "No exit in that direction.\r\n", ch );
           return;
         }
+
       if ( evnum < 1 || evnum > MAX_VNUM )
         {
           send_to_char( "Invalid room number.\r\n", ch );
           return;
         }
+
       if ( (tmp = get_room_index( evnum )) == NULL )
         {
           send_to_char( "Non-existant room.\r\n", ch );
           return;
         }
+
       if ( get_trust(ch) <= LEVEL_IMMORTAL && tmp->area != location->area )
         {
           send_to_char( "You can't make an exit to that room.\r\n", ch );
           return;
         }
+
       if ( addexit || !xit )
         {
           if ( numnotdir )
@@ -488,11 +532,13 @@ void do_redit( Character *ch, char *argument )
               send_to_char( "Cannot add an exit by number, sorry.\r\n", ch );
               return;
             }
+
           if ( addexit && xit && get_exit_to(location, edir, tmp->vnum) )
             {
               send_to_char( "There is already an exit in that direction leading to that location.\r\n", ch );
               return;
             }
+
           xit = make_exit( location, tmp, edir );
 	  xit->keyword          = STRALLOC( "" );
           xit->description              = STRALLOC( "" );
@@ -502,35 +548,45 @@ void do_redit( Character *ch, char *argument )
         }
       else
         act( AT_IMMORT, "Something is different...", ch, NULL, NULL, TO_ROOM );
+
       if ( xit->to_room != tmp )
         {
           xit->to_room = tmp;
           xit->vnum = evnum;
           texit = get_exit_to( xit->to_room, get_rev_dir(edir), location->vnum );
+
           if ( texit )
             {
               texit->rexit = xit;
               xit->rexit = texit;
             }
         }
+
       argument = one_argument( argument, arg3 );
+
       if ( arg3[0] != '\0' )
         xit->exit_info = atoi( arg3 );
+
       if ( argument && argument[0] != '\0' )
         {
+	  vnum_t ekey = INVALID_VNUM;
+
           one_argument( argument, arg3 );
           ekey = atoi( arg3 );
+
           if ( ekey != 0 || arg3[0] == '0' )
             {
               argument = one_argument( argument, arg3 );
               xit->key = ekey;
             }
+
           if ( argument && argument[0] != '\0' )
             {
               STRFREE( xit->keyword );
               xit->keyword = STRALLOC( argument );
             }
         }
+
       send_to_char( "Done.\r\n", ch );
       return;
     }
@@ -541,59 +597,68 @@ void do_redit( Character *ch, char *argument )
    */
   if ( !str_cmp( arg, "bexit" ) )
     {
-      Exit *this_exit, *rxit;
+      Exit *this_exit = NULL, *rxit = NULL;
       char tmpcmd[MAX_INPUT_LENGTH];
-      ROOM_INDEX_DATA *tmploc;
-      int vnum, exnum;
+      ROOM_INDEX_DATA *tmploc = NULL;
+      vnum_t vnum = INVALID_VNUM;
+      int exnum = 0;
       char rvnum[MAX_INPUT_LENGTH];
-      bool numnotdir;
+      bool numnotdir = false;
 
       argument = one_argument( argument, arg2 );
       argument = one_argument( argument, arg3 );
+
       if ( arg2[0] == '\0' )
         {
           send_to_char( "Create, change or remove a two-way exit.\r\n", ch );
           send_to_char( "Usage: redit bexit <dir> [room] [flags] [key] [keywords]\r\n", ch );
           return;
         }
-      numnotdir = FALSE;
+
       switch( arg2[0] )
         {
         default:
           edir = get_dir( arg2 );
           break;
+
         case '#':
           numnotdir = TRUE;
           edir = atoi( arg2+1 );
           break;
+
         case '+':
           edir = get_dir( arg2+1 );
           break;
         }
+
       tmploc = location;
       exnum = edir;
+
       if ( numnotdir )
         {
           if ( (this_exit = get_exit_num(tmploc, edir)) != NULL )
-            edir = this_exit->vdir;
+	    {
+	      edir = this_exit->vdir;
+	    }
         }
       else
-        this_exit = get_exit(tmploc, edir);
-
-      rxit = NULL;
-      vnum = 0;
-      rvnum[0] = '\0';
+	{
+	  this_exit = get_exit(tmploc, edir);
+	}
 
       if ( this_exit )
         {
           vnum = this_exit->vnum;
+
           if ( arg3[0] != '\0' )
-            sprintf( rvnum, "%d", tmploc->vnum );
+            sprintf( rvnum, "%ld", tmploc->vnum );
+
           if ( this_exit->to_room )
             rxit = get_exit(this_exit->to_room, get_rev_dir(edir));
           else
             rxit = NULL;
         }
+
       sprintf( tmpcmd, "exit %s %s %s", arg2, arg3, argument );
       do_redit( ch, tmpcmd );
 
@@ -607,7 +672,7 @@ void do_redit( Character *ch, char *argument )
           vnum = this_exit->vnum;
 
           if ( arg3[0] != '\0' )
-            sprintf( rvnum, "%d", tmploc->vnum );
+            sprintf( rvnum, "%ld", tmploc->vnum );
 
           if ( this_exit->to_room )
             rxit = get_exit(this_exit->to_room, get_rev_dir(edir));
@@ -615,24 +680,27 @@ void do_redit( Character *ch, char *argument )
             rxit = NULL;
         }
 
-      if ( vnum )
+      if ( vnum != INVALID_VNUM )
         {
-          sprintf( tmpcmd, "%d redit exit %d %s %s",
+          sprintf( tmpcmd, "%ld redit exit %d %s %s",
                    vnum, get_rev_dir(edir), rvnum, argument );
           do_at( ch, tmpcmd );
         }
+
       return;
     }
 
   if ( !str_cmp( arg, "exdistance" ) )
     {
       argument = one_argument( argument, arg2 );
+
       if ( arg2[0] == '\0' )
         {
 	  send_to_char( "Set the distance (in rooms) between this room, and the destination room.\r\n", ch );
           send_to_char( "Usage: redit exdistance <dir> [distance]\r\n", ch );
           return;
         }
+
       if ( arg2[0] == '#' )
         {
           edir = atoi( arg2+1 );
@@ -643,6 +711,7 @@ void do_redit( Character *ch, char *argument )
           edir = get_dir( arg2 );
           xit = get_exit( location, edir );
         }
+
       if ( xit )
         {
           xit->distance = URANGE( 1, atoi(argument), 50 );
@@ -656,12 +725,14 @@ void do_redit( Character *ch, char *argument )
   if ( !str_cmp( arg, "exdesc" ) )
     {
       argument = one_argument( argument, arg2 );
+
       if ( arg2[0] == '\0' )
         {
           send_to_char( "Create or clear a description for an exit.\r\n", ch );
           send_to_char( "Usage: redit exdesc <dir> [description]\r\n", ch );
           return;
         }
+
       if ( arg2[0] == '#' )
         {
           edir = atoi( arg2+1 );
@@ -672,9 +743,11 @@ void do_redit( Character *ch, char *argument )
           edir = get_dir( arg2 );
           xit = get_exit( location, edir );
         }
+
       if ( xit )
 	{
           STRFREE( xit->description );
+
           if ( !argument || argument[0] == '\0' )
             xit->description = STRALLOC( "" );
           else
@@ -682,9 +755,11 @@ void do_redit( Character *ch, char *argument )
               sprintf( buf, "%s\r\n", argument );
               xit->description = STRALLOC( buf );
             }
+
           send_to_char( "Done.\r\n", ch );
           return;
         }
+
       send_to_char( "No exit in that direction.  Use 'redit exit ...' first.\r\n", ch );
       return;
     }

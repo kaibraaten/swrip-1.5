@@ -222,13 +222,13 @@ void save_char_obj( Character *ch )
           fprintf( fp, "Level        %d\n", ch->top_level );
           fprintf( fp, "Pcflags      %d\n", ch->pcdata->flags );
           if ( ch->pcdata->r_range_lo && ch->pcdata->r_range_hi )
-            fprintf( fp, "RoomRange    %d %d\n", ch->pcdata->r_range_lo,
+            fprintf( fp, "RoomRange    %ld %ld\n", ch->pcdata->r_range_lo,
                      ch->pcdata->r_range_hi     );
           if ( ch->pcdata->o_range_lo && ch->pcdata->o_range_hi )
-            fprintf( fp, "ObjRange     %d %d\n", ch->pcdata->o_range_lo,
+            fprintf( fp, "ObjRange     %ld %ld\n", ch->pcdata->o_range_lo,
                      ch->pcdata->o_range_hi     );
           if ( ch->pcdata->m_range_lo && ch->pcdata->m_range_hi )
-            fprintf( fp, "MobRange     %d %d\n", ch->pcdata->m_range_lo,
+            fprintf( fp, "MobRange     %ld %ld\n", ch->pcdata->m_range_lo,
                      ch->pcdata->m_range_hi     );
           fclose( fp );
         }
@@ -351,13 +351,13 @@ void fwrite_char( Character *ch, FILE *fp )
     fprintf( fp, "Trust        %d\n",   ch->trust               );
   fprintf( fp, "Played       %d\n",
            ch->pcdata->played + (int) (current_time - ch->pcdata->logon)                );
-  fprintf( fp, "Room         %d\n",
+  fprintf( fp, "Room         %ld\n",
            (  ch->in_room == get_room_index( ROOM_VNUM_LIMBO )
               && ch->was_in_room )
            ? ch->was_in_room->vnum
            : ch->in_room->vnum );
   if ( ch->plr_home != NULL )
-    fprintf( fp, "PlrHome      %d\n",          ch->plr_home->vnum );
+    fprintf( fp, "PlrHome      %ld\n",          ch->plr_home->vnum );
 
   fprintf( fp, "HpManaMove   %d %d 0 0 %d %d\n",
            ch->hit, ch->max_hit, ch->move, ch->max_move );
@@ -376,7 +376,7 @@ void fwrite_char( Character *ch, FILE *fp )
   fprintf( fp, "Clones         %d\n",   ch->pcdata->clones              );
   fprintf( fp, "Questpoints         %d\n",      ch->quest.questpoints         );
   fprintf( fp, "Nextquest         %d\n",        ch->quest.nextquest           );
-  fprintf( fp, "Jailvnum         %d\n", ch->pcdata->jail_vnum   );
+  fprintf( fp, "Jailvnum         %ld\n", ch->pcdata->jail_vnum   );
   if ( ch->act )
     fprintf( fp, "Act          %d\n", ch->act                   );
   if ( ch->affected_by )
@@ -415,7 +415,7 @@ void fwrite_char( Character *ch, FILE *fp )
 
   if ( is_npc(ch) )
     {
-      fprintf( fp, "Vnum         %d\n", ch->pIndexData->vnum    );
+      fprintf( fp, "Vnum         %ld\n", ch->pIndexData->vnum    );
       fprintf( fp, "Mobinvis     %d\n", ch->mobinvis            );
     }
   else
@@ -470,13 +470,13 @@ void fwrite_char( Character *ch, FILE *fp )
         {
           fprintf( fp, "WizInvis     %d\n", ch->pcdata->wizinvis );
           if ( ch->pcdata->r_range_lo && ch->pcdata->r_range_hi )
-            fprintf( fp, "RoomRange    %d %d\n", ch->pcdata->r_range_lo,
+            fprintf( fp, "RoomRange    %ld %ld\n", ch->pcdata->r_range_lo,
                      ch->pcdata->r_range_hi     );
           if ( ch->pcdata->o_range_lo && ch->pcdata->o_range_hi )
-            fprintf( fp, "ObjRange     %d %d\n", ch->pcdata->o_range_lo,
+            fprintf( fp, "ObjRange     %ld %ld\n", ch->pcdata->o_range_lo,
                      ch->pcdata->o_range_hi     );
           if ( ch->pcdata->m_range_lo && ch->pcdata->m_range_hi )
-            fprintf( fp, "MobRange     %d %d\n", ch->pcdata->m_range_lo,
+            fprintf( fp, "MobRange     %ld %ld\n", ch->pcdata->m_range_lo,
                      ch->pcdata->m_range_hi     );
         }
       if ( ch->pcdata->clan_name && ch->pcdata->clan_name[0] != '\0' )
@@ -577,9 +577,10 @@ void fwrite_char( Character *ch, FILE *fp )
   track = URANGE( 2, ((ch->top_level+3) * MAX_KILLTRACK)/LEVEL_AVATAR, MAX_KILLTRACK );
   for ( sn = 0; sn < track; sn++ )
     {
-      if ( ch->pcdata->killed[sn].vnum == 0 )
+      if ( ch->pcdata->killed[sn].vnum == INVALID_VNUM )
         break;
-      fprintf( fp, "Killed       %d %d\n",
+
+      fprintf( fp, "Killed       %ld %d\n",
                ch->pcdata->killed[sn].vnum,
                ch->pcdata->killed[sn].count );
     }
@@ -649,9 +650,9 @@ void fwrite_obj( const Character *ch, const OBJ_DATA *obj, FILE *fp, int iNest,
     fprintf( fp, "Description  %s~\n",  obj->description     );
   if ( QUICKMATCH( obj->action_desc, obj->pIndexData->action_desc ) == 0 )
     fprintf( fp, "ActionDesc   %s~\n",  obj->action_desc     );
-  fprintf( fp, "Vnum         %d\n",     obj->pIndexData->vnum        );
+  fprintf( fp, "Vnum         %ld\n",     obj->pIndexData->vnum        );
   if ( os_type == OS_CORPSE && obj->in_room )
-    fprintf( fp, "Room         %d\n",   obj->in_room->vnum         );
+    fprintf( fp, "Room         %ld\n",   obj->in_room->vnum         );
   if ( obj->extra_flags != obj->pIndexData->extra_flags )
     fprintf( fp, "ExtraFlags   %d\n",   obj->extra_flags     );
   if ( obj->wear_flags != obj->pIndexData->wear_flags )
@@ -2217,7 +2218,7 @@ void load_storerooms( void )
 
           if ( !IS_SET( storeroom->room_flags, ROOM_CLANSTOREROOM ) )
             {
-              sprintf( buf, "%s%d", STOREROOM_DIR, storeroom->vnum );
+              sprintf( buf, "%s%ld", STOREROOM_DIR, storeroom->vnum );
               remove( buf );
             }
 
@@ -2289,11 +2290,11 @@ void save_storeroom( ROOM_INDEX_DATA *room )
 
   if ( !room )
     {
-      bug( "save_storeroom: null ch!", 0 );
+      bug( "save_storeroom: null room!" );
       return;
     }
 
-  sprintf( strsave, "%s%d",STOREROOM_DIR, room->vnum );
+  sprintf( strsave, "%s%ld",STOREROOM_DIR, room->vnum );
 
   if ( ( fp = fopen( strsave, "w" ) ) == NULL )
     {
@@ -2383,22 +2384,29 @@ void fwrite_mobile( FILE *fp, Character *mob )
 {
   if ( !is_npc( mob ) || !fp )
     return;
+
   fprintf( fp, "#MOBILE\n" );
-  fprintf( fp, "Vnum    %d\n", mob->pIndexData->vnum );
+  fprintf( fp, "Vnum    %ld\n", mob->pIndexData->vnum );
+
   if ( mob->in_room )
-    fprintf( fp, "Room  %d\n",
+    fprintf( fp, "Room  %ld\n",
              (  mob->in_room == get_room_index( ROOM_VNUM_LIMBO )
                 && mob->was_in_room )
              ? mob->was_in_room->vnum
              : mob->in_room->vnum );
+
   if ( QUICKMATCH( mob->name, mob->pIndexData->player_name) == 0 )
     fprintf( fp, "Name     %s~\n", mob->name );
+
   if ( QUICKMATCH( mob->short_descr, mob->pIndexData->short_descr) == 0 )
     fprintf( fp, "Short %s~\n", mob->short_descr );
+
   if ( QUICKMATCH( mob->long_descr, mob->pIndexData->long_descr) == 0 )
     fprintf( fp, "Long  %s~\n", mob->long_descr );
+
   if ( QUICKMATCH( mob->description, mob->pIndexData->description) == 0 )
     fprintf( fp, "Description %s~\n", mob->description );
+
   fprintf( fp, "Position %d\n", mob->position );
   fprintf( fp, "Flags %d\n", mob->act );
   /* Might need these later --Shaddai
@@ -2407,8 +2415,8 @@ void fwrite_mobile( FILE *fp, Character *mob )
   */
   if ( mob->first_carrying )
     fwrite_obj( mob, mob->last_carrying, fp, 0, OS_CARRY );
+
   fprintf( fp, "EndMobile\n" );
-  return;
 }
 
 /*

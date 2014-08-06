@@ -456,10 +456,13 @@ void interpret( Character *ch, char *argument )
   /* laggy command notice: command took longer than 1.5 seconds */
   if ( tmptime > 1500000 )
     {
-      sprintf(log_buf, "[*****] LAG: %s: %s %s (R:%d S:%d.%06d)", ch->name,
-              cmd->name, (cmd->log == LOG_NEVER ? "XXX" : argument),
+      sprintf(log_buf, "[*****] LAG: %s: %s %s (R:%ld S:%d.%06d)",
+	      ch->name,
+              cmd->name,
+	      (cmd->log == LOG_NEVER ? "XXX" : argument),
               ch->in_room ? ch->in_room->vnum : 0,
-              (int) (time_used.tv_sec),(int) (time_used.tv_usec) );
+              (int) (time_used.tv_sec),
+	      (int) (time_used.tv_usec) );
       log_string_plus(log_buf, LOG_NORMAL, get_trust(ch));
     }
 }

@@ -29,15 +29,12 @@ void add_reinforcements( Character *ch )
   ProtoMobile  * pMobIndex;
   OBJ_DATA        * blaster;
   OBJ_INDEX_DATA  * pObjIndex;
-  char         buf[MAX_INPUT_LENGTH];
   int multiplier = 1;
 
   if ( ( pMobIndex = get_mob_index( ch->backup_mob ) ) == NULL )
     return;
 
-  sprintf(buf, "%s just posted a guard on %d!", ch->name, ch->in_room ? ch->in_room->vnum : 0 );
-  bug(buf, 0);
-
+  bug( "%s just posted a guard on %ld!", ch->name, ch->in_room ? ch->in_room->vnum : 0 );
 
   if ( ch->backup_mob == MOB_VNUM_STORMTROOPER ||
        ch->backup_mob == MOB_VNUM_NR_TROOPER   ||
@@ -46,8 +43,6 @@ void add_reinforcements( Character *ch )
        ch->backup_mob == MOB_VNUM_NR_FORCES   ||
        ch->backup_mob == MOB_VNUM_MERC_FORCES       )
     {
-
-
       Character * mob[3];
       int         mob_cnt;
 

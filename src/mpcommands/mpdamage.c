@@ -237,7 +237,7 @@ static ch_ret simple_damage( Character *ch, Character *victim, int dam, int dt )
     {
       if ( !npcvict )
         {
-          sprintf( log_buf, "%s killed by %s at %d",
+          sprintf( log_buf, "%s killed by %s at %ld",
                    victim->name,
                    (is_npc(ch) ? ch->short_descr : ch->name),
 		   victim->in_room->vnum );

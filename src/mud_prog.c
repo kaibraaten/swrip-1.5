@@ -2208,7 +2208,7 @@ void set_supermob( OBJ_DATA *obj)
 
   /* Added by Jenny to allow bug messages to show the vnum
      of the object, and not just supermob's vnum */
-  sprintf( buf, "Object #%d", obj->pIndexData->vnum );
+  sprintf( buf, "Object #%ld", obj->pIndexData->vnum );
   STRFREE( supermob->description );
   supermob->description = STRALLOC( buf );
 
@@ -2618,7 +2618,7 @@ void rset_supermob( ROOM_INDEX_DATA *room)
 
       /* Added by Jenny to allow bug messages to show the vnum
          of the room, and not just supermob's vnum */
-      sprintf( buf, "Room #%d", room->vnum );
+      sprintf( buf, "Room #%ld", room->vnum );
       STRFREE( supermob->description );
       supermob->description = STRALLOC( buf );
 
@@ -2895,8 +2895,6 @@ void rprog_hour_trigger( Character *ch )
 /* Written by Jenny, Nov 29/95 */
 void progbug( char *str, Character *mob )
 {
-  char buf[MAX_STRING_LENGTH];
-
   /* Check if we're dealing with supermob, which means the bug occurred
      in a room or obj prog. */
   if ( mob->pIndexData->vnum == 3 )
@@ -2904,16 +2902,13 @@ void progbug( char *str, Character *mob )
       /* It's supermob.  In set_supermob and rset_supermob, the description
          was set to indicate the object or room, so we just need to show
          the description in the bug message. */
-      sprintf( buf, "%s, %s.", str,
-               mob->description == NULL ? "(unknown)" : mob->description );
+      bug( "%s, %s.", str,
+	   mob->description == NULL ? "(unknown)" : mob->description );
     }
   else
     {
-      sprintf( buf, "%s, Mob #%d.", str, mob->pIndexData->vnum );
+      bug( "%s, Mob #%ld.", str, mob->pIndexData->vnum );
     }
-
-  bug( buf, 0 );
-  return;
 }
 
 

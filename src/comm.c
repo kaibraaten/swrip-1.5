@@ -2140,7 +2140,7 @@ void display_prompt( Descriptor *d )
 
             case 'R':
               if ( IS_SET(och->act, PLR_ROOMVNUM) )
-                sprintf(pbuf, "<#%d> ", ch->in_room->vnum);
+                sprintf(pbuf, "<#%ld> ", ch->in_room->vnum);
               break;
 
             case 'i':

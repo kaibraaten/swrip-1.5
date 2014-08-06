@@ -28,9 +28,8 @@ ch_ret spell_locate_object( int sn, int level, Character *ch, void *vo )
         ;
       if ( cnt >= MAX_NEST )
         {
-          sprintf( buf, "spell_locate_obj: object [%d] %s is nested more than %d times!",
+          bug( "spell_locate_obj: object [%ld] %s is nested more than %d times!",
                    obj->pIndexData->vnum, obj->short_descr, MAX_NEST );
-          bug( buf, 0 );
           continue;
         }
 

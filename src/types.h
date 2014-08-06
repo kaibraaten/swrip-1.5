@@ -177,11 +177,11 @@ typedef struct CraftingSession CraftingSession;
 /*
  * Function types.
  */
-typedef void    DO_FUN          ( Character *ch, char *argument );
-typedef bool    SPEC_FUN        ( Character *ch );
-typedef ch_ret  SPELL_FUN       ( int sn, int level, Character *ch, void *vo );
+typedef void DO_FUN( Character *ch, char *argument );
+typedef bool SPEC_FUN( Character *ch );
+typedef ch_ret SPELL_FUN( int sn, int level, Character *ch, void *vo );
 
-typedef int vnum_t;
+typedef long vnum_t;
 
 #ifdef __cplusplus
 #define DECLARE_DO_FUN( fun )    extern "C" { DO_FUN    fun; } DO_FUN fun##_mangled
