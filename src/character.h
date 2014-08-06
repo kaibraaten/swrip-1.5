@@ -167,8 +167,8 @@ struct Character
 
   struct
   {
-    short      questmob;
-    short      questobj;
+    vnum_t      questmob;
+    vnum_t      questobj;
     short      questpoints;
     int        nextquest;
     int        countdown;

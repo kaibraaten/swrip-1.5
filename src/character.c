@@ -417,16 +417,15 @@ void unequip_char( Character *ch, OBJ_DATA *obj )
 OBJ_DATA *get_obj_carry( const Character *ch, const char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  OBJ_DATA *obj;
-  int number, count, vnum;
+  OBJ_DATA *obj = NULL;
+  int number = 0, count = 0;
+  vnum_t vnum = INVALID_VNUM;
 
   number = number_argument( argument, arg );
+
   if ( get_trust(ch) >= LEVEL_CREATOR && is_number( arg ) )
     vnum = atoi( arg );
-  else
-    vnum = -1;
 
-  count  = 0;
   for ( obj = ch->last_carrying; obj; obj = obj->prev_content )
     if ( obj->wear_loc == WEAR_NONE
          &&   can_see_obj( ch, obj )
@@ -434,7 +433,7 @@ OBJ_DATA *get_obj_carry( const Character *ch, const char *argument )
       if ( (count += obj->count) >= number )
         return obj;
 
-  if ( vnum != -1 )
+  if ( vnum != INVALID_VNUM )
     return NULL;
 
   /* If we didn't find an exact match, run through the list of objects
@@ -442,6 +441,7 @@ OBJ_DATA *get_obj_carry( const Character *ch, const char *argument )
      Added by Narn, Sept/96
   */
   count = 0;
+
   for ( obj = ch->last_carrying; obj; obj = obj->prev_content )
     if ( obj->wear_loc == WEAR_NONE
          &&   can_see_obj( ch, obj )
@@ -458,8 +458,9 @@ OBJ_DATA *get_obj_carry( const Character *ch, const char *argument )
 OBJ_DATA *get_obj_wear( const Character *ch, const char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  OBJ_DATA *obj;
-  int number, count, vnum;
+  OBJ_DATA *obj = NULL;
+  int number = 0, count = 0;
+  vnum_t vnum = INVALID_VNUM;
 
   if ( !ch )
     {
@@ -470,10 +471,7 @@ OBJ_DATA *get_obj_wear( const Character *ch, const char *argument )
 
   if ( get_trust(ch) >= LEVEL_CREATOR && is_number( arg ) )
     vnum = atoi( arg );
-  else
-    vnum = -1;
 
-  count  = 0;
   for ( obj = ch->last_carrying; obj; obj = obj->prev_content )
     if ( obj->wear_loc != WEAR_NONE
          &&   can_see_obj( ch, obj )
@@ -481,7 +479,7 @@ OBJ_DATA *get_obj_wear( const Character *ch, const char *argument )
       if ( ++count == number )
         return obj;
 
-  if ( vnum != -1 )
+  if ( vnum != INVALID_VNUM )
     return NULL;
 
   /* If we didn't find an exact match, run through the list of objects
@@ -552,7 +550,7 @@ bool ms_find_obj( const Character *ch )
 	  break;
 
 	case 7:
-	  t="Whoa!  It's covered in blood!  Ack!  Ick!\r\n";
+	  t="Whoa! It's covered in blood! Ack! Ick!\r\n";
 	  break;
 
 	case 8:
@@ -572,7 +570,7 @@ bool ms_find_obj( const Character *ch )
 	  break;
 
 	case 12:
-	  t="You stratch yourself instead...\r\n";
+	  t="You scratch yourself instead...\r\n";
 	  break;
 
 	case 13:
