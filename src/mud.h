@@ -2288,7 +2288,7 @@ extern "C" {
 			  bool fShort, bool fShowNothing );
 
   /* act_move.c */
-  bool has_key( const Character *ch, int key );
+  bool has_key( const Character *ch, vnum_t key );
   void set_bexit_flag( Exit *pexit, int flag );
   void remove_bexit_flag( Exit *pexit, int flag );
   ROOM_INDEX_DATA *generate_exit( ROOM_INDEX_DATA *in_room, Exit **pexit );
@@ -2298,10 +2298,10 @@ extern "C" {
   Exit *get_exit_to( const ROOM_INDEX_DATA *room, short dir, vnum_t vnum );
   Exit *get_exit_num( const ROOM_INDEX_DATA *room, short count );
   ch_ret move_char( Character *ch, Exit *pexit, int fall );
-  void teleport( Character *ch, short room, int flags );
+  void teleport( Character *ch, vnum_t room, int flags );
   short encumbrance( const Character *ch, short move );
   bool will_fall( Character *ch, int fall );
-  int wherehome( const Character *ch );
+  vnum_t wherehome( const Character *ch );
 
   /* act_obj.c */
   bool remove_obj( Character *ch, int iWear, bool fReplace );

@@ -28,7 +28,7 @@
 
 ROOM_INDEX_DATA *vroom_hash[64];
 
-int wherehome( const Character *ch)
+vnum_t wherehome( const Character *ch)
 {
   if( ch->plr_home )
     {
@@ -104,14 +104,16 @@ static void decorate_room( ROOM_INDEX_DATA *room )
  */
 void clear_vrooms( void )
 {
-  int hash;
-  ROOM_INDEX_DATA *room, *room_next, *prev;
+  int hash = 0;
+  ROOM_INDEX_DATA *room = NULL;
+  ROOM_INDEX_DATA *room_next = NULL;
+  ROOM_INDEX_DATA *prev = NULL;
 
   for ( hash = 0; hash < 64; hash++ )
     {
       while ( vroom_hash[hash]
-              &&     !vroom_hash[hash]->first_person
-              &&     !vroom_hash[hash]->first_content )
+              && !vroom_hash[hash]->first_person
+              && !vroom_hash[hash]->first_content )
         {
           room = vroom_hash[hash];
           vroom_hash[hash] = room->next;
@@ -119,20 +121,29 @@ void clear_vrooms( void )
           DISPOSE( room );
           --top_vroom;
         }
+
       prev = NULL;
+
       for ( room = vroom_hash[hash]; room; room = room_next )
         {
           room_next = room->next;
+
           if ( !room->first_person && !room->first_content )
             {
               if ( prev )
-                prev->next = room_next;
+		{
+		  prev->next = room_next;
+		}
+
               clean_room( room );
               DISPOSE( room );
               --top_vroom;
             }
+
           if ( room )
-            prev = room;
+	    {
+	      prev = room;
+	    }
         }
     }
 }
@@ -143,17 +154,22 @@ void clear_vrooms( void )
  */
 Exit *get_exit( const ROOM_INDEX_DATA *room, short dir )
 {
-  Exit *xit;
+  Exit *xit = NULL;
 
   if ( !room )
     {
-      bug( "Get_exit: NULL room", 0 );
+      bug( "Get_exit: NULL room" );
       return NULL;
     }
 
   for (xit = room->first_exit; xit; xit = xit->next )
-    if ( xit->vdir == dir )
-      return xit;
+    {
+      if ( xit->vdir == dir )
+	{
+	  return xit;
+	}
+    }
+
   return NULL;
 }
 
@@ -162,17 +178,22 @@ Exit *get_exit( const ROOM_INDEX_DATA *room, short dir )
  */
 Exit *get_exit_to( const ROOM_INDEX_DATA *room, short dir, vnum_t vnum )
 {
-  Exit *xit;
+  Exit *xit = NULL;
 
   if ( !room )
     {
-      bug( "Get_exit: NULL room", 0 );
+      bug( "Get_exit: NULL room" );
       return NULL;
     }
 
   for (xit = room->first_exit; xit; xit = xit->next )
-    if ( xit->vdir == dir && xit->vnum == vnum )
-      return xit;
+    {
+      if ( xit->vdir == dir && xit->vnum == vnum )
+	{
+	  return xit;
+	}
+    }
+
   return NULL;
 }
 
@@ -181,8 +202,8 @@ Exit *get_exit_to( const ROOM_INDEX_DATA *room, short dir, vnum_t vnum )
  */
 Exit *get_exit_num( const ROOM_INDEX_DATA *room, short count )
 {
-  Exit *xit;
-  int cnt;
+  Exit *xit = NULL;
+  int cnt = 0;
 
   if ( !room )
     {
@@ -191,8 +212,13 @@ Exit *get_exit_num( const ROOM_INDEX_DATA *room, short count )
     }
 
   for (cnt = 0, xit = room->first_exit; xit; xit = xit->next )
-    if ( ++cnt == count )
-      return xit;
+    {
+      if ( ++cnt == count )
+	{
+	  return xit;
+	}
+    }
+
   return NULL;
 }
 
@@ -202,30 +228,37 @@ Exit *get_exit_num( const ROOM_INDEX_DATA *room, short count )
  */
 short encumbrance( const Character *ch, short move )
 {
-  int cur, max;
-
-  max = can_carry_w(ch);
-  cur = ch->carry_weight;
+  int max = can_carry_w(ch);
+  int cur = ch->carry_weight;
 
   if ( cur >= max )
-    return move * 4;
-  else
-    if ( cur >= max * 0.95 )
+    {
+      return move * 4;
+    }
+  else if ( cur >= max * 0.95 )
+    {
       return move * 3.5;
-    else
-      if ( cur >= max * 0.90 )
-        return move * 3;
-      else
-        if ( cur >= max * 0.85 )
-          return move * 2.5;
-        else
-          if ( cur >= max * 0.80 )
-            return move * 2;
-          else
-            if ( cur >= max * 0.75 )
-              return move * 1.5;
-            else
-              return move;
+    }
+  else if ( cur >= max * 0.90 )
+    {
+      return move * 3;
+    }
+  else if ( cur >= max * 0.85 )
+    {
+      return move * 2.5;
+    }
+  else if ( cur >= max * 0.80 )
+    {
+      return move * 2;
+    }
+  else if ( cur >= max * 0.75 )
+    {
+      return move * 1.5;
+    }
+  else
+    {
+      return move;
+    }
 }
 
 
@@ -235,7 +268,7 @@ short encumbrance( const Character *ch, short move )
 bool will_fall( Character *ch, int fall )
 {
   if ( IS_SET( ch->in_room->room_flags, ROOM_NOFLOOR )
-       &&   CAN_GO(ch, DIR_DOWN)
+       && CAN_GO(ch, DIR_DOWN)
        && (!is_affected_by( ch, AFF_FLYING )
            || ( ch->mount && !is_affected_by( ch->mount, AFF_FLYING ) ) ) )
     {
@@ -247,11 +280,13 @@ bool will_fall( Character *ch, int fall )
           fall = 0;
           return TRUE;
         }
+
       set_char_color( AT_FALLING, ch );
       send_to_char( "You're falling down...\r\n", ch );
       move_char( ch, get_exit(ch->in_room, DIR_DOWN), ++fall );
       return TRUE;
     }
+
   return FALSE;
 }
 
@@ -261,18 +296,19 @@ bool will_fall( Character *ch, int fall )
  */
 ROOM_INDEX_DATA *generate_exit( ROOM_INDEX_DATA *in_room, Exit **pexit )
 {
-  Exit *xit, *bxit;
+  Exit *xit = NULL, *bxit = NULL;
   Exit *orig_exit = (Exit *) *pexit;
-  ROOM_INDEX_DATA *room, *backroom;
-  int brvnum;
-  int serial;
-  int roomnum;
+  ROOM_INDEX_DATA *room = NULL;
+  ROOM_INDEX_DATA *backroom = NULL;
+  vnum_t brvnum = INVALID_VNUM;
+  vnum_t serial = INVALID_VNUM;
+  vnum_t roomnum = INVALID_VNUM;
   int distance = -1;
   int vdir = orig_exit->vdir;
-  short hash;
+  short hash = 0;
   bool found = FALSE;
 
-  if ( in_room->vnum > MAX_VNUM )  /* room is virtual */
+  if ( in_room->vnum > 32767 )  /* room is virtual */
     {
       serial = in_room->vnum;
       roomnum = in_room->tele_vnum;
@@ -307,11 +343,13 @@ ROOM_INDEX_DATA *generate_exit( ROOM_INDEX_DATA *in_room, Exit **pexit )
   hash = serial % 64;
 
   for ( room = vroom_hash[hash]; room; room = room->next )
-    if ( room->vnum == serial && room->tele_vnum == roomnum )
-      {
-        found = TRUE;
-        break;
-      }
+    {
+      if ( room->vnum == serial && room->tele_vnum == roomnum )
+	{
+	  found = TRUE;
+	  break;
+	}
+    }
 
   if ( !found )
     {
@@ -470,13 +508,17 @@ ch_ret move_char( Character *ch, Exit *pexit, int fall )
    * Crazy virtual room idea, created upon demand.              -Thoric
    */
   if ( distance > 1 )
-    if ( (to_room=generate_exit(in_room, &pexit)) == NULL )
-      send_to_char( "Alas, you cannot go that way.\r\n", ch );
+    {
+      if ( (to_room=generate_exit(in_room, &pexit)) == NULL )
+	{
+	  send_to_char( "Alas, you cannot go that way.\r\n", ch );
+	}
+    }
 
   if ( !fall
-       &&   is_affected_by(ch, AFF_CHARM)
-       &&   ch->master
-       &&   in_room == ch->master->in_room )
+       && is_affected_by(ch, AFF_CHARM)
+       && ch->master
+       && in_room == ch->master->in_room )
     {
       send_to_char( "What?  And leave your beloved master?\r\n", ch );
       return rNONE;
@@ -489,12 +531,13 @@ ch_ret move_char( Character *ch, Exit *pexit, int fall )
     }
 
   if ( !is_immortal(ch)
-       &&  !is_npc(ch)
-       &&  ch->in_room->area != to_room->area )
+       && !is_npc(ch)
+       && ch->in_room->area != to_room->area )
     {
       if ( ch->top_level < to_room->area->low_hard_range )
         {
           set_char_color( AT_TELL, ch );
+
           switch( to_room->area->low_hard_range - ch->top_level )
             {
             case 1:
@@ -511,13 +554,12 @@ ch_ret move_char( Character *ch, Exit *pexit, int fall )
             }
           return rNONE;
         }
-      else
-        if ( ch->top_level > to_room->area->hi_hard_range )
-          {
-            set_char_color( AT_TELL, ch );
-            send_to_char( "A voice in your mind says, 'There is nothing more for you down that path.'", ch );
-            return rNONE;
-          }
+      else if ( ch->top_level > to_room->area->hi_hard_range )
+	{
+	  set_char_color( AT_TELL, ch );
+	  send_to_char( "A voice in your mind says, 'There is nothing more for you down that path.'", ch );
+	  return rNONE;
+	}
     }
 
   if ( !fall && !is_npc(ch) )
@@ -543,20 +585,22 @@ ch_ret move_char( Character *ch, Exit *pexit, int fall )
       if ( in_room->sector_type == SECT_WATER_NOSWIM
            ||   to_room->sector_type == SECT_WATER_NOSWIM )
         {
-          OBJ_DATA *obj;
-          bool found;
+          OBJ_DATA *obj = NULL;
+          bool found = false;
 
-          found = FALSE;
           if ( ch->mount )
             {
               if ( is_affected_by( ch->mount, AFF_FLYING )
-                   ||   is_affected_by( ch->mount, AFF_FLOATING ) )
-                found = TRUE;
+                   || is_affected_by( ch->mount, AFF_FLOATING ) )
+		{
+		  found = TRUE;
+		}
             }
-          else
-            if ( is_affected_by(ch, AFF_FLYING)
-                 ||   is_affected_by(ch, AFF_FLOATING) )
+          else if ( is_affected_by(ch, AFF_FLYING)
+		    || is_affected_by(ch, AFF_FLOATING) )
+	    {
               found = TRUE;
+	    }
 
           /*
            * Look for a boat.
@@ -994,27 +1038,63 @@ Exit *find_door( Character *ch, const char *arg, bool quiet )
     return NULL;
 
   pexit = NULL;
-  if ( !str_cmp( arg, "n"  ) || !str_cmp( arg, "north"    ) ) door = 0;
-  else if ( !str_cmp( arg, "e"  ) || !str_cmp( arg, "east"        ) ) door = 1;
-  else if ( !str_cmp( arg, "s"  ) || !str_cmp( arg, "south"       ) ) door = 2;
-  else if ( !str_cmp( arg, "w"  ) || !str_cmp( arg, "west"        ) ) door = 3;
-  else if ( !str_cmp( arg, "u"  ) || !str_cmp( arg, "up"          ) ) door = 4;
-  else if ( !str_cmp( arg, "d"  ) || !str_cmp( arg, "down"        ) ) door = 5;
-  else if ( !str_cmp( arg, "ne" ) || !str_cmp( arg, "northeast" ) ) door = 6;
-  else if ( !str_cmp( arg, "nw" ) || !str_cmp( arg, "northwest" ) ) door = 7;
-  else if ( !str_cmp( arg, "se" ) || !str_cmp( arg, "southeast" ) ) door = 8;
-  else if ( !str_cmp( arg, "sw" ) || !str_cmp( arg, "southwest" ) ) door = 9;
+  if ( !str_cmp( arg, "n" ) || !str_cmp( arg, "north" ) )
+    {
+      door = DIR_NORTH;
+    }
+  else if ( !str_cmp( arg, "e" ) || !str_cmp( arg, "east" ) )
+    {
+      door = DIR_EAST;
+    }
+  else if ( !str_cmp( arg, "s" ) || !str_cmp( arg, "south" ) )
+    {
+      door = DIR_SOUTH;
+    }
+  else if ( !str_cmp( arg, "w" ) || !str_cmp( arg, "west" ) )
+    {
+      door = DIR_WEST;
+    }
+  else if ( !str_cmp( arg, "u" ) || !str_cmp( arg, "up" ) )
+    {
+      door = DIR_UP;
+    }
+  else if ( !str_cmp( arg, "d" ) || !str_cmp( arg, "down" ) )
+    {
+      door = DIR_DOWN;
+    }
+  else if ( !str_cmp( arg, "ne" ) || !str_cmp( arg, "northeast" ) )
+    {
+      door = DIR_NORTHEAST;
+    }
+  else if ( !str_cmp( arg, "nw" ) || !str_cmp( arg, "northwest" ) )
+    {
+      door = DIR_NORTHWEST;
+    }
+  else if ( !str_cmp( arg, "se" ) || !str_cmp( arg, "southeast" ) )
+    {
+      door = DIR_SOUTHEAST;
+    }
+  else if ( !str_cmp( arg, "sw" ) || !str_cmp( arg, "southwest" ) )
+    {
+      door = DIR_SOUTHWEST;
+    }
   else
     {
       for ( pexit = ch->in_room->first_exit; pexit; pexit = pexit->next )
         {
           if ( (quiet || IS_SET(pexit->exit_info, EX_ISDOOR))
-               &&    pexit->keyword
-               &&    nifty_is_name( arg, pexit->keyword ) )
-            return pexit;
+               && pexit->keyword
+               && nifty_is_name( arg, pexit->keyword ) )
+	    {
+	      return pexit;
+	    }
         }
+
       if ( !quiet )
-        act( AT_PLAIN, "You see no $T here.", ch, NULL, arg, TO_CHAR );
+	{
+	  act( AT_PLAIN, "You see no $T here.", ch, NULL, arg, TO_CHAR );
+	}
+
       return NULL;
     }
 
@@ -1048,8 +1128,9 @@ void toggle_bexit_flag( Exit *pexit, int flag )
   Exit *pexit_rev;
 
   TOGGLE_BIT(pexit->exit_info, flag);
+
   if ( (pexit_rev = pexit->rexit) != NULL
-       &&   pexit_rev != pexit )
+       && pexit_rev != pexit )
     TOGGLE_BIT( pexit_rev->exit_info, flag );
 }
 
@@ -1058,8 +1139,9 @@ void set_bexit_flag( Exit *pexit, int flag )
   Exit *pexit_rev;
 
   SET_BIT(pexit->exit_info, flag);
+
   if ( (pexit_rev = pexit->rexit) != NULL
-       &&   pexit_rev != pexit )
+       && pexit_rev != pexit )
     SET_BIT( pexit_rev->exit_info, flag );
 }
 
@@ -1068,12 +1150,13 @@ void remove_bexit_flag( Exit *pexit, int flag )
   Exit *pexit_rev;
 
   REMOVE_BIT(pexit->exit_info, flag);
+
   if ( (pexit_rev = pexit->rexit) != NULL
-       &&   pexit_rev != pexit )
+       && pexit_rev != pexit )
     REMOVE_BIT( pexit_rev->exit_info, flag );
 }
 
-bool has_key( const Character *ch, int key )
+bool has_key( const Character *ch, vnum_t key )
 {
   OBJ_DATA *obj;
 
@@ -1091,21 +1174,22 @@ void teleportch( Character *ch, ROOM_INDEX_DATA *room, bool show )
 {
   if ( room_is_private( ch, room ) )
     return;
+
   act( AT_ACTION, "$n disappears suddenly!", ch, NULL, NULL, TO_ROOM );
   char_from_room( ch );
   char_to_room( ch, room );
   act( AT_ACTION, "$n arrives suddenly!", ch, NULL, NULL, TO_ROOM );
+
   if ( show )
     do_look( ch, "auto" );
 }
 
-void teleport( Character *ch, short room, int flags )
+void teleport( Character *ch, vnum_t room, int flags )
 {
-  Character *nch, *nch_next;
-  ROOM_INDEX_DATA *pRoomIndex;
-  bool show;
+  Character *nch = NULL, *nch_next = NULL;
+  ROOM_INDEX_DATA *pRoomIndex = get_room_index( room );
+  bool show = false;
 
-  pRoomIndex = get_room_index( room );
   if ( !pRoomIndex )
     {
       bug( "teleport: bad room vnum %d", room );
@@ -1116,11 +1200,13 @@ void teleport( Character *ch, short room, int flags )
     show = TRUE;
   else
     show = FALSE;
+
   if ( !IS_SET( flags, TELE_TRANSALL ) )
     {
       teleportch( ch, pRoomIndex, show );
       return;
     }
+
   for ( nch = ch->in_room->first_person; nch; nch = nch_next )
     {
       nch_next = nch->next_in_room;

@@ -61,7 +61,7 @@
 #define MIN_NAME_LENGTH             3
 #define MAX_NAME_LENGTH            12
 #define MIN_VNUM                    1
-#define MAX_VNUM             LONG_MAX
+#define MAX_VNUM             SHRT_MAX
 #define MAX_EXP_WORTH          500000
 #define MIN_EXP_WORTH              25
 

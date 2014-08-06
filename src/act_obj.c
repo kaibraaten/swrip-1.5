@@ -29,9 +29,7 @@
  */
 short get_obj_resistance( const OBJ_DATA *obj )
 {
-  short resist;
-
-  resist = number_fuzzy(MAX_ITEM_IMPACT);
+  short resist = number_fuzzy(MAX_ITEM_IMPACT);
 
   /* magical items are more resistant */
   if ( IS_OBJ_STAT( obj, ITEM_MAGIC ) )
@@ -282,7 +280,6 @@ void obj_fall( OBJ_DATA *obj, bool through )
         }
       obj_fall( obj, TRUE );
     }
-  return;
 }
 
 bool remove_obj( Character *ch, int iWear, bool fReplace )
