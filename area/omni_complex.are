@@ -13,7 +13,7 @@ $
 #FLAGS
 2
 
-#ECONOMY 0 30557103
+#ECONOMY 0 30517103
 
 #MOBILES
 #0
@@ -209,7 +209,7 @@ galaxy are carefully planned and executed.  A terminal for the discourse
 of this topic has been carefully mounted in the far wall, and is blinking
 for some reason.  The only exit apparent to you is south.
 ~
-0 8 1
+0 67108872 1
 D2
 ~
 ~
@@ -538,21 +538,9 @@ D0
 0 -1 123
 S
 #125
-&bGraveyard.&R&W~
-Thousands of graves are here, with corresponding bleached white crosses.
-Pain and sorrow have no existance in this wasteland; the owner feels no
-such thing. The rotting stench of death attacks your senses, making your
-stomach turn. As time passes, the Graveyard acquires more and more dead,
-rotting souls. Of course, each life that was once living has a story; but
-no one cares, and never will. Upon looking out towards the endless void
-that the Graveyard is, a strong wind picks up, making you squint your
-eyes.  You recall a moment in your life where you lost a loved one, and
-tears stream down your cheek..but no pain can be felt.
-
-&rWelcome to Den.&R&W
-&b"I was me, but now he's gone."&R&W
+Omnipresent Being's Workshop~
 ~
-0 75563084 0
+0 109117516 0
 S
 #150
 Floating in a void~

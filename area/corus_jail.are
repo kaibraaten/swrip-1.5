@@ -11,7 +11,7 @@ $
 #FLAGS
 0
 
-#ECONOMY 0 0
+#ECONOMY 0 6250000
 
 #MOBILES
 #9000
@@ -26,7 +26,7 @@ Some god abandoned a newly created dude here.
 8 8 0
 10 10 10 10 10 10 10
 0 0 0 0 0
-0 0 0 0 0 0 0
+0 0 0 0 1 1 0
 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0
 #9049
@@ -41,7 +41,7 @@ Some god abandoned a newly created dude here.
 8 8 0
 10 10 10 10 10 10 10
 0 0 0 0 0
-0 0 0 0 0 0 0
+0 0 0 0 1 1 0
 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0
 #0
@@ -467,7 +467,6 @@ D3
 S
 #9029
 A Cell~
- 
 You may safely quit and reenter the game from here.
  
 ~
@@ -536,82 +535,82 @@ S
 #9034
 Floating in a void~
 ~
-0 1073741824 1
+0 1073741828 1
 S
 #9035
 Floating in a void~
 ~
-0 1073741824 1
+0 1073741828 1
 S
 #9036
 Floating in a void~
 ~
-0 1073741824 1
+0 1073741828 1
 S
 #9037
 Floating in a void~
 ~
-0 1073741824 1
+0 1073741828 1
 S
 #9038
 Floating in a void~
 ~
-0 1073741824 1
+0 1073741828 1
 S
 #9039
 Floating in a void~
 ~
-0 1073741824 1
+0 1073741828 1
 S
 #9040
 Floating in a void~
 ~
-0 1073741824 1
+0 1073741828 1
 S
 #9041
 Floating in a void~
 ~
-0 1073741824 1
+0 1073741828 1
 S
 #9042
 Floating in a void~
 ~
-0 1073741824 1
+0 1073741828 1
 S
 #9043
 Floating in a void~
 ~
-0 1073741824 1
+0 1073741828 1
 S
 #9044
 Floating in a void~
 ~
-0 1073741824 1
+0 1073741828 1
 S
 #9045
 Floating in a void~
 ~
-0 1073741824 1
+0 1073741828 1
 S
 #9046
 Floating in a void~
 ~
-0 1073741824 1
+0 1073741828 1
 S
 #9047
 Floating in a void~
 ~
-0 1073741824 1
+0 1073741828 1
 S
 #9048
 Floating in a void~
 ~
-0 1073741824 1
+0 1073741828 1
 S
 #9049
 Floating in a void~
 ~
-0 0 1
+0 4 1
 S
 #0
 

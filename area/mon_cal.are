@@ -13,7 +13,7 @@ $
 #FLAGS
 1
 
-#ECONOMY 0 187437360
+#ECONOMY 0 187437358
 
 #MOBILES
 #21000
@@ -1222,7 +1222,7 @@ for some time barring any accidents.
 8 8 0
 10 10 10 10 10 10 10
 0 0 0 0 0
-0 0 0 0 0 0 0
+0 0 0 0 1 1 0
 3 2 0 0 0 0 0 0
 0 0 0 0 0 0 0 0
 #21101
@@ -1237,7 +1237,7 @@ A janitor droid scoots about picking up your trash
 8 8 0
 10 10 10 10 10 10 10
 0 0 0 0 0
-0 0 0 0 0 0 0
+0 0 0 0 1 1 0
 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0
 #21400

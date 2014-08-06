@@ -26,7 +26,7 @@ Some god abandoned a newly created dud here.
 8 8 0
 10 10 10 10 10 10 10
 0 0 0 0 0
-0 3 0 0 0 0 0
+0 0 0 0 1 1 0
 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0
 #30999
@@ -41,7 +41,7 @@ Some god abandoned a newly created dud here.
 8 8 0
 10 10 10 10 10 10 10
 0 0 0 0 0
-0 3 0 0 0 0 0
+0 0 0 0 1 1 0
 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0
 #0
@@ -159,7 +159,7 @@ speeder has been proframed with a small radar that allows it to move
 quickly down the street automaticly avoiding collisions and slowing down
 only at intersections. Use DRIVE <DIR> to use it.
 ~
-0 1073741824 1
+0 1073741828 1
 S
 #30002
 A Small Speeder~
@@ -169,7 +169,7 @@ speeder has been proframed with a small radar that allows it to move
 quickly down the street automaticly avoiding collisions and slowing down
 only at intersections. Use DRIVE <DIR> to use it. 
 ~
-0 1073741824 1
+0 1073741828 1
 S
 #30003
 A Small Speeder~
@@ -179,7 +179,7 @@ speeder has been proframed with a small radar that allows it to move
 quickly down the street automaticly avoiding collisions and slowing down
 only at intersections. Use DRIVE <DIR> to use it.
 ~
-0 1073741824 1
+0 1073741828 1
 S
 #30004
 A Small Speeder~
@@ -189,7 +189,7 @@ speeder has been proframed with a small radar that allows it to move
 quickly down the street automaticly avoiding collisions and slowing down
 only at intersections. Use DRIVE <DIR> to use it. 
 ~
-0 1073741824 1
+0 1073741828 1
 S
 #30005
 A Small Speeder~
@@ -199,7 +199,7 @@ speeder has been proframed with a small radar that allows it to move
 quickly down the street automaticly avoiding collisions and slowing down
 only at intersections. Use DRIVE <DIR> to use it.
 ~
-0 1073741824 1
+0 1073741828 1
 S
 #30006
 A Small Speeder~
@@ -209,7 +209,7 @@ speeder has been proframed with a small radar that allows it to move
 quickly down the street automaticly avoiding collisions and slowing down
 only at intersections. Use DRIVE <DIR> to use it.
 ~
-0 1073741824 1
+0 1073741828 1
 S
 #30007
 A Small Speeder~
@@ -219,7 +219,7 @@ speeder has been proframed with a small radar that allows it to move
 quickly down the street automaticly avoiding collisions and slowing down
 only at intersections. Use DRIVE <DIR> to use it.
 ~
-0 1073741824 1
+0 1073741828 1
 S
 #30008
 A Small Speeder~
@@ -229,7 +229,7 @@ speeder has been proframed with a small radar that allows it to move
 quickly down the street automaticly avoiding collisions and slowing down
 only at intersections. Use DRIVE <DIR> to use it.
 ~
-0 1073741824 1
+0 1073741828 1
 S
 #30009
 A Small Speeder~
@@ -239,7 +239,7 @@ speeder has been proframed with a small radar that allows it to move
 quickly down the street automaticly avoiding collisions and slowing down
 only at intersections. Use DRIVE <DIR> to use it.
 ~
-0 1073741824 1
+0 1073741828 1
 S
 #30999
 Floating in a void~
