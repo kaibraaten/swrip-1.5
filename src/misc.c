@@ -562,3 +562,30 @@ bool is_valid_language( int language )
 {
   return VALID_LANGUAGES & language ? true : false;
 }
+
+const char *get_race( const Character *ch)
+{
+  if ( ch->race < MAX_NPC_RACE && ch->race >= 0)
+    return ( npc_race[ch->race] );
+
+  return "Unknown";
+}
+
+void set_title( Character *ch, const char *title )
+{
+  char buf[MAX_STRING_LENGTH];
+  char *bufptr = buf;
+
+  if ( is_npc(ch) )
+    {
+      bug( "Set_title: NPC.", 0 );
+      return;
+    }
+
+  strcpy(bufptr, title);
+
+  bufptr = trim_string(buf, ' ');
+
+  STRFREE( ch->pcdata->title );
+  ch->pcdata->title = STRALLOC( buf );
+}
