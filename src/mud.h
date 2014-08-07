@@ -2572,7 +2572,7 @@ extern "C" {
   /* mud_comm.c */
   Character *get_char_room_mp( Character *ch, char *argument );
   int get_color(const char *argument);
-  char *mprog_type_to_name( int type );
+  const char *mprog_type_to_name( int type );
 
   /* mud_prog.c */
   void mprog_wordlist_check( char * arg, Character *mob,
