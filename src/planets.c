@@ -51,8 +51,8 @@ PLANET_DATA *get_planet( const char *name )
 
 void write_planet_list( void )
 {
-  PLANET_DATA *tplanet;
-  FILE *fpout;
+  PLANET_DATA *tplanet = NULL;
+  FILE *fpout = NULL;
   char filename[256];
 
   sprintf( filename, "%s%s", PLANET_DIR, PLANET_LIST );
@@ -75,9 +75,8 @@ void write_planet_list( void )
 
 void save_planet( const PLANET_DATA *planet )
 {
-  FILE *fp;
+  FILE *fp = NULL;
   char filename[256];
-  char buf[MAX_STRING_LENGTH];
 
   if ( !planet )
     {
@@ -87,8 +86,7 @@ void save_planet( const PLANET_DATA *planet )
 
   if ( !planet->filename || planet->filename[0] == '\0' )
     {
-      sprintf( buf, "save_planet: %s has no filename", planet->name );
-      bug( buf, 0 );
+      bug( "save_planet: %s has no filename", planet->name );
       return;
     }
 
@@ -96,12 +94,12 @@ void save_planet( const PLANET_DATA *planet )
 
   if ( ( fp = fopen( filename, "w" ) ) == NULL )
     {
-      bug( "save_planet: fopen", 0 );
+      bug( "save_planet: fopen" );
       perror( filename );
     }
   else
     {
-      Area *pArea;
+      Area *pArea = NULL;
 
       fprintf( fp, "#PLANET\n" );
       fprintf( fp, "Name         %s~\n", planet->name        );
@@ -140,12 +138,12 @@ static void fread_planet( PLANET_DATA *planet, FILE *fp )
   for ( ; ; )
     {
       const char *word = feof( fp ) ? "End" : fread_word( fp );
-      bool fMatch = FALSE;
+      bool fMatch = false;
 
       switch ( UPPER(word[0]) )
         {
         case '*':
-          fMatch = TRUE;
+          fMatch = true;
           fread_to_eol( fp );
           break;
 
@@ -169,7 +167,7 @@ static void fread_planet( PLANET_DATA *planet, FILE *fp )
                     }
                 }
 
-              fMatch = TRUE;
+              fMatch = true;
             }
           break;
 
@@ -198,7 +196,7 @@ static void fread_planet( PLANET_DATA *planet, FILE *fp )
           if ( !str_cmp( word, "GovernedBy" ) )
             {
               planet->governed_by = get_clan ( fread_string(fp) );
-              fMatch = TRUE;
+              fMatch = true;
             }
           break;
 
@@ -225,7 +223,7 @@ static void fread_planet( PLANET_DATA *planet, FILE *fp )
                   spaceobject->planet = planet;
                 }
 
-              fMatch = TRUE;
+              fMatch = true;
             }
           break;
 
@@ -244,26 +242,17 @@ static void fread_planet( PLANET_DATA *planet, FILE *fp )
 static bool load_planet_file( const char *planetfile )
 {
   char filename[256];
-  PLANET_DATA *planet;
-  FILE *fp;
-  bool found = FALSE;
+  PLANET_DATA *planet = NULL;
+  FILE *fp = NULL;
+  bool found = false;
 
   CREATE( planet, PLANET_DATA, 1 );
-
-  planet->governed_by = NULL;
-  planet->next_in_system = NULL;
-  planet->prev_in_system = NULL;
-  planet->spaceobject = NULL ;
-  planet->first_area = NULL;
-  planet->last_area = NULL;
-  planet->first_guard = NULL;
-  planet->last_guard = NULL;
 
   sprintf( filename, "%s%s", PLANET_DIR, planetfile );
 
   if ( ( fp = fopen( filename, "r" ) ) != NULL )
     {
-      found = TRUE;
+      found = true;
 
       for ( ; ; )
         {
@@ -317,7 +306,7 @@ static bool load_planet_file( const char *planetfile )
 
 void load_planets( void )
 {
-  FILE *fpList;
+  FILE *fpList = NULL;
   char planetlist[256];
 
   log_string( "Loading planets..." );
@@ -351,9 +340,7 @@ void load_planets( void )
 
 long get_taxes( const PLANET_DATA *planet )
 {
-  long gain;
-
-  gain = planet->base_value;
+  long gain = planet->base_value;
   gain += planet->base_value*planet->pop_support/100;
   gain += UMAX(0, planet->pop_support/10 * planet->population);
 

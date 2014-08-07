@@ -49,7 +49,7 @@ void nanny( Descriptor *d, char *argument )
     {
     default:
       bug( "Nanny: bad d->connection_state %d.", d->connection_state );
-      close_socket( d, TRUE );
+      close_socket( d, true );
       return;
 
     case CON_GET_NAME:
@@ -101,13 +101,13 @@ void nanny( Descriptor *d, char *argument )
 static void nanny_get_name( Descriptor *d, char *argument )
 {
   char buf[MAX_STRING_LENGTH];
-  bool fOld = FALSE, chk = FALSE;
+  bool fOld = false, chk = false;
   Ban *pban = NULL;
   Character *ch = d->character;
 
   if ( argument[0] == '\0' )
     {
-      close_socket( d, FALSE );
+      close_socket( d, false );
       return;
     }
 
@@ -125,7 +125,7 @@ static void nanny_get_name( Descriptor *d, char *argument )
 	{
 	  /* New player */
 	  /* Don't allow new players if DENY_NEW_PLAYERS is true */
-	  if (sysdata.DENY_NEW_PLAYERS == TRUE)
+	  if (sysdata.DENY_NEW_PLAYERS == true)
 	    {
 	      sprintf( buf, "The mud is currently preparing for a reboot.\r\n" );
 	      write_to_buffer( d, buf, 0 );
@@ -133,7 +133,7 @@ static void nanny_get_name( Descriptor *d, char *argument )
 	      write_to_buffer( d, buf, 0 );
 	      sprintf( buf, "Please try again in a few minutes.\r\n" );
 	      write_to_buffer( d, buf, 0 );
-	      close_socket( d, FALSE );
+	      close_socket( d, false );
 	    }
 
 	  sprintf( buf, "\r\nChoosing a name is one of the most important parts of this game...\r\n"
@@ -153,20 +153,20 @@ static void nanny_get_name( Descriptor *d, char *argument )
 	}
     }
 
-  if ( check_playing( d, argument, FALSE ) == BERR )
+  if ( check_playing( d, argument, false ) == BERR )
     {
       write_to_buffer( d, "Name: ", 0 );
       return;
     }
 
-  fOld = load_char_obj( d, argument, TRUE );
+  fOld = load_char_obj( d, argument, true );
 
   if ( !d->character )
     {
       sprintf( log_buf, "Bad player file %s@%s.", argument, d->remote.hostname );
       log_string( log_buf );
       write_to_buffer( d, "Your playerfile is corrupt...Please notify mail@mymud.com\r\n", 0 );
-      close_socket( d, FALSE );
+      close_socket( d, false );
       return;
     }
 
@@ -180,7 +180,7 @@ static void nanny_get_name( Descriptor *d, char *argument )
 	{
 	  write_to_buffer( d,
 			   "Your site has been banned from this Mud.\r\n", 0 );
-	  close_socket( d, FALSE );
+	  close_socket( d, false );
 	  return;
 	}
     }
@@ -198,11 +198,11 @@ static void nanny_get_name( Descriptor *d, char *argument )
 	}
 
       write_to_buffer( d, "You are denied access.\r\n", 0 );
-      close_socket( d, FALSE );
+      close_socket( d, false );
       return;
     }
 
-  chk = check_reconnect( d, argument, FALSE );
+  chk = check_reconnect( d, argument, false );
 
   if ( chk == BERR )
     {
@@ -211,7 +211,7 @@ static void nanny_get_name( Descriptor *d, char *argument )
 
   if ( chk )
     {
-      fOld = TRUE;
+      fOld = true;
     }
   else
     {
@@ -219,7 +219,7 @@ static void nanny_get_name( Descriptor *d, char *argument )
 	{
 	  write_to_buffer( d, "The game is wizlocked. Only immortals can connect now.\r\n", 0 );
 	  write_to_buffer( d, "Please try back later.\r\n", 0 );
-	  close_socket( d, FALSE );
+	  close_socket( d, false );
 	  return;
 	}
     }
@@ -261,7 +261,7 @@ nother.\r\n", 0);
 static void nanny_get_old_password( Descriptor *d, char *argument )
 {
   Character *ch = d->character;
-  bool chk = FALSE;
+  bool chk = false;
   char buf[MAX_STRING_LENGTH];
 
   write_to_buffer( d, "\r\n", 2 );
@@ -271,18 +271,18 @@ static void nanny_get_old_password( Descriptor *d, char *argument )
       write_to_buffer( d, "Wrong password.\r\n", 0 );
       /* clear descriptor pointer to get rid of bug message in log */
       d->character->desc = NULL;
-      close_socket( d, FALSE );
+      close_socket( d, false );
       return;
     }
 
   write_to_buffer( d, echo_on_str, 0 );
 
-  if ( check_playing( d, ch->name, TRUE ) )
+  if ( check_playing( d, ch->name, true ) )
     {
       return;
     }
 
-  chk = check_reconnect( d, ch->name, TRUE );
+  chk = check_reconnect( d, ch->name, true );
 
   if ( chk == BERR )
     {
@@ -291,25 +291,25 @@ static void nanny_get_old_password( Descriptor *d, char *argument )
 	  d->character->desc = NULL;
 	}
 
-      close_socket( d, FALSE );
+      close_socket( d, false );
       return;
     }
 
-  if ( chk == TRUE )
+  if ( chk == true )
     {
       return;
     }
 
   if ( check_multi( d , ch->name  ) )
     {
-      close_socket( d, FALSE );
+      close_socket( d, false );
       return;
     }
 
   sprintf( buf, "%s", ch->name );
   d->character->desc = NULL;
   free_char( d->character );
-  load_char_obj( d, buf, FALSE );
+  load_char_obj( d, buf, false );
   ch = d->character;
   sprintf( log_buf, "%s@%s has connected.", ch->name, d->remote.hostname );
 
