@@ -2693,8 +2693,8 @@ extern "C" {
   /* interp.c */
   bool  check_pos( Character *ch, int position );
   void  interpret( Character *ch, char *argument );
-  SOCIALTYPE *find_social( char *command );
-  CMDTYPE *find_command( char *command );
+  SOCIALTYPE *find_social( const char *command );
+  CMDTYPE *find_command( const char *command );
   void  hash_commands( void );
   void  send_timer( struct timerset *vtime, Character *ch );
   void  update_userec( struct timeval *time_used, struct timerset *userec );

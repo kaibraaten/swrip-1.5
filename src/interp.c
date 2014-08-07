@@ -36,7 +36,7 @@ bool check_social( Character *ch, char *command, char *argument );
 /*
  * Log-all switch.
  */
-bool fLogAll = FALSE;
+bool fLogAll = false;
 
 
 CMDTYPE    *command_hash[126];  /* hash table for cmd_table */
@@ -77,13 +77,15 @@ bool check_pos( Character *ch, int position )
           break;
 
         case POS_FIGHTING:
-          send_to_char( "No way!  You are still fighting!\r\n", ch);
+          send_to_char( "No way! You are still fighting!\r\n", ch);
           break;
 
         }
-      return FALSE;
+
+      return false;
     }
-  return TRUE;
+
+  return true;
 }
 
 extern char lastplayercmd[MAX_INPUT_LENGTH*2];
@@ -95,17 +97,15 @@ extern char lastplayercmd[MAX_INPUT_LENGTH*2];
 
 char multicommand[MAX_INPUT_LENGTH];
 
-char  * parse_target( Character *ch, char *oldstring )
+char *parse_target( Character *ch, char *oldstring )
 {
-  const         char    *str;
-  int           count = 0;
-  char          *i = NULL;
-  char          *point;
-  char          buf[ MAX_INPUT_LENGTH   ];
+  const char *str = oldstring;
+  int count = 0;
+  char buf[MAX_INPUT_LENGTH];
+  char *point = buf;
 
   buf[0]  = '\0';
-  str     = oldstring;
-  point   = buf;
+
   while( *str != '\0' )
     {
       if( *str != '$' )
@@ -116,14 +116,17 @@ char  * parse_target( Character *ch, char *oldstring )
         }
 
       ++str;
+
       if ( *str == '$' && ch->pcdata->target[0] != '\0' )
         {
-          i = strdup(ch->pcdata->target);
+          char *i = strdup(ch->pcdata->target);
           ++str;
+
           while ( ( *point = *i ) != '\0' )
             {
               ++point, ++i;
               count++;
+
               if (count > MAX_INPUT_LENGTH)
                 {
                   send_to_char("Target substitution too long; not processed.\r\n",ch);
@@ -137,15 +140,19 @@ char  * parse_target( Character *ch, char *oldstring )
           count++;
         }
     }
+
   buf[count] = '\0';
   oldstring = strdup( buf );
+
   return oldstring;
 }
 
 char *get_multi_command( Descriptor *d, char *argument )
 {
-  int counter, counter2;
+  int counter = 0;
+  int counter2 = 0;
   char leftover[MAX_INPUT_LENGTH];
+
   multicommand[0] = '\0';
 
   for ( counter = 0; argument[counter] != '\0'; counter++ )
@@ -154,21 +161,31 @@ char *get_multi_command( Descriptor *d, char *argument )
         {
           multicommand[counter] = '\0';
           counter++;
+
           for (counter2 = 0; argument[counter] != '\0'; counter2++,counter++)
-            leftover[counter2] = argument[counter];
+	    {
+	      leftover[counter2] = argument[counter];
+	    }
+
           leftover[counter2] = '\0';
           strcpy( d->incomm,leftover );
           return (multicommand);
         }
       else if (argument[counter] == '|' && argument[counter+1] == '|')
-        for (counter2 = counter; argument[counter2] != '\0'; counter2++)
-          argument[counter2] = argument[counter2+1];
+	{
+	  for (counter2 = counter; argument[counter2] != '\0'; counter2++)
+	    {
+	      argument[counter2] = argument[counter2 + 1];
+	    }
+	}
+
       multicommand[counter] = argument[counter];
     }
+
   d->incomm[0] = '\0';
   multicommand[counter] = '\0';
 
-  return (multicommand);
+  return multicommand;
 }
 
 
@@ -179,11 +196,11 @@ void interpret( Character *ch, char *argument )
   char logname[MAX_INPUT_LENGTH];
   TIMER *timer = NULL;
   CMDTYPE *cmd = NULL;
-  int trust;
-  int loglvl;
-  bool found;
+  int trust = 0;
+  int loglvl = 0;
+  bool found = false;
   struct timeval time_used;
-  long tmptime;
+  long tmptime = 0;
 
   if ( !ch )
     {
@@ -191,20 +208,19 @@ void interpret( Character *ch, char *argument )
       return;
     }
 
-  found = FALSE;
   if ( ch->substate == SUB_REPEATCMD )
     {
-      DO_FUN *fun;
+      DO_FUN *fun = ch->last_cmd;
 
-      if ( (fun=ch->last_cmd) == NULL )
+      if ( fun == NULL )
         {
           ch->substate = SUB_NONE;
-          bug( "interpret: SUB_REPEATCMD with NULL last_cmd", 0 );
+          bug( "interpret: SUB_REPEATCMD with NULL last_cmd" );
           return;
         }
       else
         {
-          int x;
+          int x = 0;
 
           /*
            * yes... we lose out on the hashing speediness here...
@@ -213,20 +229,26 @@ void interpret( Character *ch, char *argument )
           for ( x = 0; x < 126; x++ )
             {
               for ( cmd = command_hash[x]; cmd; cmd = cmd->next )
-                if ( cmd->do_fun == fun )
-                  {
-                    found = TRUE;
-                    break;
-                  }
+		{
+		  if ( cmd->do_fun == fun )
+		    {
+		      found = true;
+		      break;
+		    }
+		}
+
               if ( found )
-                break;
+		{
+		  break;
+		}
             }
+
           if ( !found )
             {
-              cmd = NULL;
-              bug( "interpret: SUB_REPEATCMD: last_cmd invalid", 0 );
+              bug( "interpret: SUB_REPEATCMD: last_cmd invalid" );
               return;
             }
+
           sprintf( logline, "(%s) %s", cmd->name, argument );
         }
     }
@@ -244,13 +266,16 @@ void interpret( Character *ch, char *argument )
        * Strip leading spaces.
        */
       while ( isspace(*argument) )
-        argument++;
+	{
+	  argument++;
+	}
+
       if ( argument[0] == '\0' )
-        return;
+	{
+	  return;
+	}
 
       timer = get_timerptr( ch, TIMER_DO_FUN );
-
-      /* REMOVE_BIT( ch->affected_by, AFF_HIDE ); */
 
       /*
        * Implement freeze command.
@@ -269,24 +294,37 @@ void interpret( Character *ch, char *argument )
       strcpy( logline, argument );
 
       if( ch->desc && (index(argument, '|')))
-        argument = get_multi_command( ch->desc, argument );
+	{
+	  argument = get_multi_command( ch->desc, argument );
+	}
 
 
       if ( !is_npc(ch) && ch->pcdata && ch->pcdata->target )
-        if ( ch->pcdata->target[0] != '\0' )
-          if( index(argument, '$'))
-            argument = parse_target(ch, argument);
+	{
+	  if ( ch->pcdata->target[0] != '\0' )
+	    {
+	      if( index(argument, '$'))
+		{
+		  argument = parse_target(ch, argument);
+		}
+	    }
+	}
 
       if ( !isalpha(argument[0]) && !isdigit(argument[0]) )
         {
           command[0] = argument[0];
           command[1] = '\0';
           argument++;
+
           while ( isspace(*argument) )
-            argument++;
+	    {
+	      argument++;
+	    }
         }
       else
-        argument = one_argument( argument, command );
+	{
+	  argument = one_argument( argument, command );
+	}
 
       /*
        * Look for command in command table.
@@ -294,14 +332,15 @@ void interpret( Character *ch, char *argument )
        */
 
       trust = get_trust( ch );
+
       for ( cmd = command_hash[LOWER(command[0])%126]; cmd; cmd = cmd->next )
         if ( !str_prefix( command, cmd->name )
-             &&   (cmd->level <= trust
-                   ||  (!is_npc(ch) && ch->pcdata->bestowments && ch->pcdata->bestowments[0] != '\0'
-                        &&    is_name( cmd->name, ch->pcdata->bestowments )
-                        &&    cmd->level <= (trust+5)) ) )
+             && (cmd->level <= trust
+		 ||(!is_npc(ch) && ch->pcdata->bestowments && ch->pcdata->bestowments[0] != '\0'
+		    && is_name( cmd->name, ch->pcdata->bestowments )
+		    && cmd->level <= (trust + 5) ) ) )
           {
-            found = TRUE;
+            found = true;
             break;
           }
 
@@ -321,37 +360,40 @@ void interpret( Character *ch, char *argument )
   sprintf( lastplayercmd, "** %s: %s", ch->name, logline );
 
   if ( found && cmd->log == LOG_NEVER )
-    strcpy( logline, "XXXXXXXX XXXXXXXX XXXXXXXX" );
+    {
+      strcpy( logline, "XXXXXXXX XXXXXXXX XXXXXXXX" );
+    }
 
   loglvl = found ? cmd->log : LOG_NORMAL;
 
   if ( ( !is_npc(ch) && IS_SET(ch->act, PLR_LOG) )
-       ||   fLogAll
-       ||        loglvl == LOG_BUILD
-       ||   loglvl == LOG_HIGH
-       ||   loglvl == LOG_ALWAYS )
+       || fLogAll
+       || loglvl == LOG_BUILD
+       || loglvl == LOG_HIGH
+       || loglvl == LOG_ALWAYS )
     {
       /* Added by Narn to show who is switched into a mob that executes
          a logged command.  Check for descriptor in case force is used. */
       if ( ch->desc && ch->desc->original )
-        sprintf( log_buf, "Log %s (%s): %s", ch->name,
-                 ch->desc->original->name, logline );
+	{
+	  sprintf( log_buf, "Log %s (%s): %s", ch->name,
+		   ch->desc->original->name, logline );
+	}
       else
-        sprintf( log_buf, "Log %s: %s", ch->name, logline );
+	{
+	  sprintf( log_buf, "Log %s: %s", ch->name, logline );
+	}
 
       /*
        * Make it so a 'log all' will send most output to the log
        * file only, and not spam the log channel to death       -Thoric
        */
       if ( fLogAll && loglvl == LOG_NORMAL
-           &&  (is_npc(ch) || !IS_SET(ch->act, PLR_LOG)) )
-        loglvl = LOG_ALL;
+           && (is_npc(ch) || !IS_SET(ch->act, PLR_LOG)) )
+	{
+	  loglvl = LOG_ALL;
+	}
 
-      /* This is handled in get_trust already */
-      /*        if ( ch->desc && ch->desc->original )
-                log_string_plus( log_buf, loglvl,
-                ch->desc->original->level );
-                else*/
       log_string_plus( log_buf, loglvl, ch->top_level );
     }
 
@@ -364,17 +406,18 @@ void interpret( Character *ch, char *argument )
       write_to_buffer( ch->desc->snoop_by, "\r\n",  2 );
     }
 
-
-
   if ( timer )
     {
-      int tempsub;
+      int tempsub = ch->substate;
 
-      tempsub = ch->substate;
       ch->substate = SUB_TIMER_DO_ABORT;
-      (timer->do_fun)(ch,"");
+      timer->do_fun(ch,"");
+
       if ( char_died(ch) )
-        return;
+	{
+	  return;
+	}
+
       if ( ch->substate != SUB_TIMER_CANT_ABORT )
         {
           ch->substate = tempsub;
@@ -393,34 +436,42 @@ void interpret( Character *ch, char *argument )
   if ( !found )
     {
       if ( !check_skill( ch, command, argument )
-           &&   !check_alias( ch, command, argument )
-           &&   !check_social( ch, command, argument )
+           && !check_alias( ch, command, argument )
+           && !check_social( ch, command, argument )
 #ifdef SWRIP_USE_IMC
 	   && !imc_command_hook( ch, command, argument )
 #endif
 	   )
         {
-          Exit *pexit;
+          Exit *pexit = NULL;
 
           /* check for an auto-matic exit command */
-          if ( (pexit = find_door( ch, command, TRUE )) != NULL
-               &&   IS_SET( pexit->exit_info, EX_xAUTO ))
+          if ( ( pexit = find_door( ch, command, true ) ) != NULL
+               && IS_SET( pexit->exit_info, EX_xAUTO ) )
             {
-              if ( IS_SET(pexit->exit_info, EX_CLOSED)
-                   && (!is_affected_by(ch, AFF_PASS_DOOR)
-                       ||   IS_SET(pexit->exit_info, EX_NOPASSDOOR)) )
+              if ( IS_SET( pexit->exit_info, EX_CLOSED )
+                   && ( !is_affected_by( ch, AFF_PASS_DOOR )
+                       || IS_SET( pexit->exit_info, EX_NOPASSDOOR ) ) )
                 {
                   if ( !IS_SET( pexit->exit_info, EX_SECRET ) )
-                    act( AT_PLAIN, "The $d is closed.", ch, NULL, pexit->keyword, TO_CHAR );
+		    {
+		      act( AT_PLAIN, "The $d is closed.", ch, NULL, pexit->keyword, TO_CHAR );
+		    }
                   else
-                    send_to_char( "You cannot do that here.\r\n", ch );
+		    {
+		      send_to_char( "You cannot do that here.\r\n", ch );
+		    }
+
                   return;
                 }
+
               move_char( ch, pexit, 0 );
               return;
             }
+
           send_to_char( "Huh?\r\n", ch );
         }
+
       return;
     }
 
@@ -428,14 +479,16 @@ void interpret( Character *ch, char *argument )
    * Character not in position for command?
    */
   if ( !check_pos( ch, cmd->position ) )
-    return;
+    {
+      return;
+    }
 
   /* Berserk check for flee.. maybe add drunk to this?.. but too much
      hardcoding is annoying.. -- Altrag */
-  if ( !str_cmp(cmd->name, "flee") &&
-       is_affected_by(ch, AFF_BERSERK) )
+  if ( !str_cmp(cmd->name, "flee")
+       && is_affected_by(ch, AFF_BERSERK) )
     {
-      send_to_char( "You aren't thinking very clearly..\r\n", ch);
+      send_to_char( "You aren't thinking very clearly...\r\n", ch);
       return;
     }
 
@@ -445,8 +498,9 @@ void interpret( Character *ch, char *argument )
   ch->prev_cmd = ch->last_cmd;    /* haus, for automapping */
   ch->last_cmd = cmd->do_fun;
   start_timer(&time_used);
-  (*cmd->do_fun) ( ch, argument );
+  cmd->do_fun( ch, argument );
   end_timer(&time_used);
+
   /*
    * Update the record of how many times this command has been used (haus)
    */
@@ -467,33 +521,43 @@ void interpret( Character *ch, char *argument )
     }
 }
 
-CMDTYPE *find_command( char *command )
+CMDTYPE *find_command( const char *command )
 {
-  CMDTYPE *cmd;
-  int hash;
-
-  hash = LOWER(command[0]) % 126;
+  CMDTYPE *cmd = NULL;
+  int hash = LOWER(command[0]) % 126;
 
   for ( cmd = command_hash[hash]; cmd; cmd = cmd->next )
-    if ( !str_prefix( command, cmd->name ) )
-      return cmd;
+    {
+      if ( !str_prefix( command, cmd->name ) )
+	{
+	  return cmd;
+	}
+    }
 
   return NULL;
 }
 
-SOCIALTYPE *find_social( char *command )
+SOCIALTYPE *find_social( const char *command )
 {
-  SOCIALTYPE *social;
-  int hash;
+  SOCIALTYPE *social = NULL;
+  int hash = 0;
 
   if ( command[0] < 'a' || command[0] > 'z' )
-    hash = 0;
+    {
+      hash = 0;
+    }
   else
-    hash = (command[0] - 'a') + 1;
+    {
+      hash = (command[0] - 'a') + 1;
+    }
 
   for ( social = social_index[hash]; social; social = social->next )
-    if ( !str_prefix( command, social->name ) )
-      return social;
+    {
+      if ( !str_prefix( command, social->name ) )
+	{
+	  return social;
+	}
+    }
 
   return NULL;
 }
@@ -501,32 +565,34 @@ SOCIALTYPE *find_social( char *command )
 bool check_social( Character *ch, char *command, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  Character *victim;
-  SOCIALTYPE *social;
+  Character *victim = NULL;
+  SOCIALTYPE *social = NULL;
 
-  if ( (social=find_social(command)) == NULL )
-    return FALSE;
+  if ( !( social = find_social( command ) ) )
+    {
+      return false;
+    }
 
   if ( !is_npc(ch) && IS_SET(ch->act, PLR_NO_EMOTE) )
     {
       send_to_char( "You are anti-social!\r\n", ch );
-      return TRUE;
+      return true;
     }
 
   switch ( ch->position )
     {
     case POS_DEAD:
       send_to_char( "Lie still; you are DEAD.\r\n", ch );
-      return TRUE;
+      return true;
 
     case POS_INCAP:
     case POS_MORTAL:
       send_to_char( "You are hurt far too bad for that.\r\n", ch );
-      return TRUE;
+      return true;
 
     case POS_STUNNED:
       send_to_char( "You are too stunned to do that.\r\n", ch );
-      return TRUE;
+      return true;
 
     case POS_SLEEPING:
       /*
@@ -534,20 +600,23 @@ bool check_social( Character *ch, char *command, char *argument )
        * But two players asked for it already!  -- Furey
        */
       if ( !str_cmp( social->name, "snore" ) )
-        break;
+	{
+	  break;
+	}
+
       send_to_char( "In your dreams, or what?\r\n", ch );
-      return TRUE;
+      return true;
 
     }
 
   one_argument( argument, arg );
-  victim = NULL;
+
   if ( arg[0] == '\0' )
     {
       act( AT_SOCIAL, social->others_no_arg, ch, NULL, victim, TO_ROOM    );
       act( AT_SOCIAL, social->char_no_arg,   ch, NULL, victim, TO_CHAR    );
     }
-  else if ( ( victim = get_char_room( ch, arg ) ) == NULL )
+  else if ( !( victim = get_char_room( ch, arg ) ) )
     {
       send_to_char( "They aren't here.\r\n", ch );
     }
@@ -563,63 +632,73 @@ bool check_social( Character *ch, char *command, char *argument )
       act( AT_SOCIAL, social->vict_found,    ch, NULL, victim, TO_VICT    );
 
       if ( !is_npc(ch) && is_npc(victim)
-           &&   !is_affected_by(victim, AFF_CHARM)
-           &&   is_awake(victim)
-           &&   !IS_SET( victim->pIndexData->mprog.progtypes, ACT_PROG ) )
+           && !is_affected_by(victim, AFF_CHARM)
+           && is_awake(victim)
+           && !IS_SET( victim->pIndexData->mprog.progtypes, ACT_PROG ) )
         {
           switch ( number_bits( 4 ) )
             {
             case 0:
               if ( !IS_SET(ch->in_room->room_flags, ROOM_SAFE )
-                   &&    is_evil(ch) )
+                   && is_evil(ch) )
                 {
                   if ( !str_cmp( social->name, "slap" ) || !str_cmp( social->name, "punch" ) )
-                    multi_hit( victim, ch, TYPE_UNDEFINED );
+		    {
+		      multi_hit( victim, ch, TYPE_UNDEFINED );
+		    }
                 }
-              else
-                if ( is_neutral(ch) )
-                  {
-                    act( AT_ACTION, "$n slaps $N.",  victim, NULL, ch, TO_NOTVICT );
-                    act( AT_ACTION, "You slap $N.",  victim, NULL, ch, TO_CHAR    );
-                    act( AT_ACTION, "$n slaps you.", victim, NULL, ch, TO_VICT    );
-                  }
-                else
-                  {
-                    act( AT_ACTION, "$n acts like $N doesn't even exist.",  victim, NULL, ch, TO_NOTVICT );
-                    act( AT_ACTION, "You just ignore $N.",  victim, NULL, ch, TO_CHAR    );
-                    act( AT_ACTION, "$n appears to be ignoring you.", victim, NULL, ch, TO_VICT    );
-                  }
+              else if ( is_neutral(ch) )
+		{
+		  act( AT_ACTION, "$n slaps $N.", victim, NULL, ch, TO_NOTVICT );
+		  act( AT_ACTION, "You slap $N.", victim, NULL, ch, TO_CHAR );
+		  act( AT_ACTION, "$n slaps you.", victim, NULL, ch, TO_VICT );
+		}
+	      else
+		{
+		  act( AT_ACTION, "$n acts like $N doesn't even exist.", victim, NULL, ch, TO_NOTVICT );
+		  act( AT_ACTION, "You just ignore $N.",  victim, NULL, ch, TO_CHAR    );
+		  act( AT_ACTION, "$n appears to be ignoring you.", victim, NULL, ch, TO_VICT    );
+		}
               break;
 
-            case 1: case 2: case 3: case 4:
-            case 5: case 6: case 7: case 8:
-              act( AT_SOCIAL, social->others_found,
-                   victim, NULL, ch, TO_NOTVICT );
-              act( AT_SOCIAL, social->char_found,
-                   victim, NULL, ch, TO_CHAR    );
-              act( AT_SOCIAL, social->vict_found,
-                   victim, NULL, ch, TO_VICT    );
+            case 1:
+	    case 2:
+	    case 3:
+	    case 4:
+            case 5:
+	    case 6:
+	    case 7:
+	    case 8:
+              act( AT_SOCIAL, social->others_found, victim, NULL, ch, TO_NOTVICT );
+              act( AT_SOCIAL, social->char_found, victim, NULL, ch, TO_CHAR );
+              act( AT_SOCIAL, social->vict_found, victim, NULL, ch, TO_VICT );
               break;
 
-            case 9: case 10: case 11: case 12:
-              act( AT_ACTION, "$n slaps $N.",  victim, NULL, ch, TO_NOTVICT );
-              act( AT_ACTION, "You slap $N.",  victim, NULL, ch, TO_CHAR    );
-              act( AT_ACTION, "$n slaps you.", victim, NULL, ch, TO_VICT    );
+            case 9:
+	    case 10:
+	    case 11:
+	    case 12:
+              act( AT_ACTION, "$n slaps $N.", victim, NULL, ch, TO_NOTVICT );
+              act( AT_ACTION, "You slap $N.", victim, NULL, ch, TO_CHAR );
+              act( AT_ACTION, "$n slaps you.", victim, NULL, ch, TO_VICT );
               break;
             }
         }
     }
 
-  return TRUE;
+  return true;
 }
 
 void send_timer(struct timerset *vtime, Character *ch)
 {
   struct timeval ntime;
-  int carry;
+  int carry = 0;
 
   if ( vtime->num_uses == 0 )
-    return;
+    {
+      return;
+    }
+
   ntime.tv_sec  = vtime->total_time.tv_sec / vtime->num_uses;
   carry = (vtime->total_time.tv_sec % vtime->num_uses) * 1000000;
   ntime.tv_usec = (vtime->total_time.tv_usec + carry) / vtime->num_uses;
@@ -627,30 +706,32 @@ void send_timer(struct timerset *vtime, Character *ch)
   ch_printf(ch, "Time (in secs): min %d.%0.6d; avg: %d.%0.6d; max %d.%0.6d"
             "\r\n", vtime->min_time.tv_sec, vtime->min_time.tv_usec, ntime.tv_sec,
             ntime.tv_usec, vtime->max_time.tv_sec, vtime->max_time.tv_usec);
-  return;
 }
 
 void update_userec(struct timeval *time_used, struct timerset *userec)
 {
   userec->num_uses++;
+
   if ( !timerisset(&userec->min_time)
-       ||    timercmp(time_used, &userec->min_time, <) )
+       || timercmp(time_used, &userec->min_time, <) )
     {
       userec->min_time.tv_sec  = time_used->tv_sec;
       userec->min_time.tv_usec = time_used->tv_usec;
     }
+
   if ( !timerisset(&userec->max_time)
-       ||    timercmp(time_used, &userec->max_time, >) )
+       || timercmp(time_used, &userec->max_time, >) )
     {
       userec->max_time.tv_sec  = time_used->tv_sec;
       userec->max_time.tv_usec = time_used->tv_usec;
     }
+
   userec->total_time.tv_sec  += time_used->tv_sec;
   userec->total_time.tv_usec += time_used->tv_usec;
+
   while ( userec->total_time.tv_usec >= 1000000 )
     {
       userec->total_time.tv_sec++;
       userec->total_time.tv_usec -= 1000000;
     }
-  return;
 }
