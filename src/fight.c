@@ -2062,7 +2062,7 @@ void raw_kill( Character *ch, Character *victim )
     return;
 
   if ( !is_npc(victim) || ( !IS_SET( victim->act, ACT_NOKILL  ) && !IS_SET( victim->act, ACT_NOCORPSE ) ) )
-    make_corpse( victim, ch );
+    make_corpse( victim );
   else
     {
       for ( obj = victim->last_carrying; obj; obj = obj_next )

@@ -2554,7 +2554,7 @@ extern "C" {
 
 
   /* makeobjs.c */
-  void  make_corpse( Character *ch, Character *killer );
+  void  make_corpse( Character *ch );
   void  make_blood( Character *ch );
   void  make_bloodstain( Character *ch );
   void  make_scraps( OBJ_DATA *obj );

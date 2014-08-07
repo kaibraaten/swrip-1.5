@@ -33,12 +33,10 @@
  */
 void make_fire(ROOM_INDEX_DATA *in_room, short timer)
 {
-  OBJ_DATA *fire;
+  OBJ_DATA *fire = create_object( get_obj_index( OBJ_VNUM_FIRE ), 0 );
 
-  fire = create_object( get_obj_index( OBJ_VNUM_FIRE ), 0 );
   fire->timer = number_fuzzy(timer);
   obj_to_room( fire, in_room );
-  return;
 }
 
 /*
@@ -46,14 +44,14 @@ void make_fire(ROOM_INDEX_DATA *in_room, short timer)
  */
 OBJ_DATA *make_trap(int v0, int v1, int v2, int v3)
 {
-  OBJ_DATA *trap;
+  OBJ_DATA *trap = create_object( get_obj_index( OBJ_VNUM_TRAP ), 0 );
 
-  trap = create_object( get_obj_index( OBJ_VNUM_TRAP ), 0 );
   trap->timer = 0;
   trap->value[0] = v0;
   trap->value[1] = v1;
   trap->value[2] = v2;
   trap->value[3] = v3;
+
   return trap;
 }
 
@@ -64,11 +62,11 @@ OBJ_DATA *make_trap(int v0, int v1, int v2, int v3)
 void make_scraps( OBJ_DATA *obj )
 {
   char buf[MAX_STRING_LENGTH];
-  OBJ_DATA  *scraps, *tmpobj;
+  OBJ_DATA *scraps = create_object( get_obj_index( OBJ_VNUM_SCRAPS ), 0 );
+  OBJ_DATA *tmpobj = NULL;
   Character *ch = NULL;
 
   separate_obj( obj );
-  scraps        = create_object( get_obj_index( OBJ_VNUM_SCRAPS ), 0 );
   scraps->timer = number_range( 5, 15 );
 
   /* don't make scraps of scraps of scraps of ... */
@@ -93,26 +91,30 @@ void make_scraps( OBJ_DATA *obj )
     {
       act( AT_OBJECT, "$p falls to the ground in scraps!",
            obj->carried_by, obj, NULL, TO_CHAR );
+
       if ( obj == get_eq_char( obj->carried_by, WEAR_WIELD )
            &&  (tmpobj = get_eq_char( obj->carried_by, WEAR_DUAL_WIELD)) != NULL )
-        tmpobj->wear_loc = WEAR_WIELD;
+	{
+	  tmpobj->wear_loc = WEAR_WIELD;
+	}
 
       obj_to_room( scraps, obj->carried_by->in_room);
     }
-  else
-    if ( obj->in_room )
-      {
-        if ( (ch = obj->in_room->first_person ) != NULL )
-          {
-            act( AT_OBJECT, "$p is reduced to little more than scraps.",
-                 ch, obj, NULL, TO_ROOM );
-            act( AT_OBJECT, "$p is reduced to little more than scraps.",
-                 ch, obj, NULL, TO_CHAR );
-          }
-        obj_to_room( scraps, obj->in_room);
-      }
+  else if ( obj->in_room )
+    {
+      if ( (ch = obj->in_room->first_person ) != NULL )
+	{
+	  act( AT_OBJECT, "$p is reduced to little more than scraps.",
+	       ch, obj, NULL, TO_ROOM );
+	  act( AT_OBJECT, "$p is reduced to little more than scraps.",
+	       ch, obj, NULL, TO_CHAR );
+	}
+
+      obj_to_room( scraps, obj->in_room);
+    }
+
   if ( (obj->item_type == ITEM_CONTAINER
-        ||   obj->item_type == ITEM_CORPSE_PC) && obj->first_content )
+        || obj->item_type == ITEM_CORPSE_PC) && obj->first_content )
     {
       if ( ch && ch->in_room )
         {
@@ -121,65 +123,80 @@ void make_scraps( OBJ_DATA *obj )
           act( AT_OBJECT, "The contents of $p fall to the ground.",
                ch, obj, NULL, TO_CHAR );
         }
+
       if ( obj->carried_by )
-        empty_obj( obj, NULL, obj->carried_by->in_room );
-      else
-        if ( obj->in_room )
-          empty_obj( obj, NULL, obj->in_room );
-        else
-          if ( obj->in_obj )
-            empty_obj( obj, obj->in_obj, NULL );
+	{
+	  empty_obj( obj, NULL, obj->carried_by->in_room );
+	}
+      else if ( obj->in_room )
+	{
+	  empty_obj( obj, NULL, obj->in_room );
+	}
+      else if ( obj->in_obj )
+	{
+	  empty_obj( obj, obj->in_obj, NULL );
+	}
     }
+
   extract_obj( obj );
 }
-
 
 /*
  * Make a corpse out of a character.
  */
-void make_corpse( Character *ch, Character *killer )
+void make_corpse( Character *ch )
 {
   char buf[MAX_STRING_LENGTH];
-  OBJ_DATA *corpse;
-  OBJ_DATA *obj;
-  OBJ_DATA *obj_next;
-  char *name;
+  OBJ_DATA *corpse = NULL;
+  OBJ_DATA *obj = NULL;
+  OBJ_DATA *obj_next = NULL;
+  char *name = NULL;
 
   if ( is_npc(ch) )
     {
-      name              = ch->short_descr;
+      name = ch->short_descr;
+
       if ( IS_SET ( ch->act , ACT_DROID ) )
-        corpse          = create_object(get_obj_index(OBJ_VNUM_DROID_CORPSE), 0);
+	{
+	  corpse = create_object(get_obj_index(OBJ_VNUM_DROID_CORPSE), 0);
+	}
       else
-        corpse          = create_object(get_obj_index(OBJ_VNUM_CORPSE_NPC), 0);
-      corpse->timer     = 6;
+	{
+	  corpse = create_object(get_obj_index(OBJ_VNUM_CORPSE_NPC), 0);
+	}
+
+      corpse->timer = 6;
+
       if ( ch->gold > 0 )
         {
           if ( ch->in_room )
-            ch->in_room->area->gold_looted += ch->gold;
+	    {
+	      ch->in_room->area->gold_looted += ch->gold;
+	    }
+
           obj_to_obj( create_money( ch->gold ), corpse );
           ch->gold = 0;
         }
 
-      /* Cannot use these!  They are used.
-         corpse->value[0] = (int)ch->pIndexData->vnum;
-         corpse->value[1] = (int)ch->max_hit;
-      */
-      /*        Using corpse cost to cheat, since corpses not sellable */
+      /* Using corpse cost to cheat, since corpses not sellable */
       corpse->cost     = (-(int)ch->pIndexData->vnum);
       corpse->value[2] = corpse->timer;
     }
   else
     {
-      name              = ch->name;
-      corpse            = create_object(get_obj_index(OBJ_VNUM_CORPSE_PC), 0);
-      corpse->timer     = 40;
+      name = ch->name;
+      corpse = create_object(get_obj_index(OBJ_VNUM_CORPSE_PC), 0);
+      corpse->timer = 40;
       corpse->value[2] = (int)(corpse->timer/8);
       corpse->value[3] = 0;
+
       if ( ch->gold > 0 )
         {
           if ( ch->in_room )
-            ch->in_room->area->gold_looted += ch->gold;
+	    {
+	      ch->in_room->area->gold_looted += ch->gold;
+	    }
+
           obj_to_obj( create_money( ch->gold ), corpse );
           ch->gold = 0;
         }
@@ -202,39 +219,35 @@ void make_corpse( Character *ch, Character *killer )
     {
       obj_next = obj->next_content;
       obj_from_char( obj );
+
       if ( IS_OBJ_STAT( obj, ITEM_INVENTORY )
            || IS_OBJ_STAT( obj, ITEM_DEATHROT ) )
-        extract_obj( obj );
+	{
+	  extract_obj( obj );
+	}
       else
-        obj_to_obj( obj, corpse );
+	{
+	  obj_to_obj( obj, corpse );
+	}
     }
 
   obj_to_room( corpse, ch->in_room );
-  return;
 }
-
-
 
 void make_blood( Character *ch )
 {
-  OBJ_DATA *obj;
-
-  obj           = create_object( get_obj_index( OBJ_VNUM_BLOOD ), 0 );
-  obj->timer    = number_range( 2, 4 );
-  obj->value[1]   = number_range( 3, UMIN(5, ch->top_level) );
+  OBJ_DATA *obj = create_object( get_obj_index( OBJ_VNUM_BLOOD ), 0 );
+  obj->timer = number_range( 2, 4 );
+  obj->value[1] = number_range( 3, UMIN(5, ch->top_level) );
   obj_to_room( obj, ch->in_room );
 }
-
 
 void make_bloodstain( Character *ch )
 {
-  OBJ_DATA *obj;
-
-  obj           = create_object( get_obj_index( OBJ_VNUM_BLOODSTAIN ), 0 );
-  obj->timer    = number_range( 1, 2 );
+  OBJ_DATA *obj = create_object( get_obj_index( OBJ_VNUM_BLOODSTAIN ), 0 );
+  obj->timer = number_range( 1, 2 );
   obj_to_room( obj, ch->in_room );
 }
-
 
 /*
  * make some coinage
@@ -242,7 +255,7 @@ void make_bloodstain( Character *ch )
 OBJ_DATA *create_money( int amount )
 {
   char buf[MAX_STRING_LENGTH];
-  OBJ_DATA *obj;
+  OBJ_DATA *obj = NULL;
 
   if ( amount <= 0 )
     {
