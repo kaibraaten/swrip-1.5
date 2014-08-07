@@ -27,12 +27,12 @@
 #include "mud.h"
 #include "character.h"
 
-int pAbort;
+int pAbort = 0;
 
 /*
  * The kludgy global is for spells who want more stuff from command line.
  */
-char *spell_target_name;
+char *spell_target_name = NULL;
 
 ch_ret spell_null( int sn, int level, Character *ch, void *vo )
 {
@@ -56,40 +56,40 @@ bool is_immune( const Character *ch, short damtype )
     {
     case SD_FIRE:
       if (IS_SET(ch->immune, RIS_FIRE)) 
-	return TRUE;
+	return true;
 
     case SD_COLD:
       if (IS_SET(ch->immune, RIS_COLD))
-	return TRUE;
+	return true;
 
     case SD_ELECTRICITY:
       if (IS_SET(ch->immune, RIS_ELECTRICITY))
-	return TRUE;
+	return true;
 
     case SD_ENERGY:
       if (IS_SET(ch->immune, RIS_ENERGY))
-	return TRUE;
+	return true;
 
     case SD_ACID:
       if (IS_SET(ch->immune, RIS_ACID))
-	return TRUE;
+	return true;
 
     case SD_POISON:
       if (IS_SET(ch->immune, RIS_POISON))
-	return TRUE;
+	return true;
 
       if (ch->race == RACE_DROID)
-	return TRUE;
+	return true;
 
     case SD_DRAIN:
       if (IS_SET(ch->immune, RIS_DRAIN))
-	return TRUE;
+	return true;
 
       if (ch->race == RACE_DROID)
-	return TRUE;
+	return true;
     }
 
-  return FALSE;
+  return false;
 }
 
 /*
@@ -97,19 +97,26 @@ bool is_immune( const Character *ch, short damtype )
  */
 int ch_slookup( const Character *ch, const char *name )
 {
-  int sn;
+  int sn = 0;
 
   if ( is_npc(ch) )
-    return skill_lookup( name );
+    {
+      return skill_lookup( name );
+    }
 
   for ( sn = 0; sn < top_sn; sn++ )
     {
       if ( !skill_table[sn]->name )
-        break;
-      if (  ch->pcdata->learned[sn] > 0
-            &&    LOWER(name[0]) == LOWER(skill_table[sn]->name[0])
-            &&   !str_prefix( name, skill_table[sn]->name ) )
-        return sn;
+	{
+	  break;
+	}
+
+      if ( ch->pcdata->learned[sn] > 0
+	   && LOWER(name[0]) == LOWER(skill_table[sn]->name[0])
+	   &&!str_prefix( name, skill_table[sn]->name ) )
+	{
+	  return sn;
+	}
     }
 
   return -1;
@@ -120,16 +127,22 @@ int ch_slookup( const Character *ch, const char *name )
  */
 int herb_lookup( const char *name )
 {
-  int sn;
+  int sn = 0;
 
   for ( sn = 0; sn < top_herb; sn++ )
     {
       if ( !herb_table[sn] || !herb_table[sn]->name )
-        return -1;
-      if ( LOWER(name[0]) == LOWER(herb_table[sn]->name[0])
-           &&  !str_prefix( name, herb_table[sn]->name ) )
-        return sn;
+	{
+	  return -1;
+	}
+
+      if ( LOWER( name[0] ) == LOWER( herb_table[sn]->name[0] )
+           && !str_prefix( name, herb_table[sn]->name ) )
+	{
+	  return sn;
+	}
     }
+
   return -1;
 }
 
@@ -140,22 +153,35 @@ int skill_lookup( const char *name )
 {
   int sn;
 
-  if ( (sn=bsearch_skill(name, gsn_first_spell, gsn_first_skill-1)) == -1 )
-    if ( (sn=bsearch_skill(name, gsn_first_skill, gsn_first_weapon-1)) == -1 )
-      if ( (sn=bsearch_skill(name, gsn_first_weapon, gsn_first_tongue-1)) == -1 )
-        if ( (sn=bsearch_skill(name, gsn_first_tongue, gsn_top_sn-1)) == -1
-             &&    gsn_top_sn < top_sn )
-          {
-            for ( sn = gsn_top_sn; sn < top_sn; sn++ )
-              {
-                if ( !skill_table[sn] || !skill_table[sn]->name )
-                  return -1;
-                if ( LOWER(name[0]) == LOWER(skill_table[sn]->name[0])
-                     &&  !str_prefix( name, skill_table[sn]->name ) )
-                  return sn;
-              }
-            return -1;
-          }
+  if ( ( sn = bsearch_skill( name, gsn_first_spell, gsn_first_skill - 1 ) ) == -1 )
+    {
+      if ( ( sn = bsearch_skill( name, gsn_first_skill, gsn_first_weapon - 1 ) ) == -1 )
+	{
+	  if ( ( sn = bsearch_skill( name, gsn_first_weapon, gsn_first_tongue - 1 ) ) == -1 )
+	    {
+	      if ( ( sn = bsearch_skill( name, gsn_first_tongue, gsn_top_sn - 1 ) ) == -1
+		   && gsn_top_sn < top_sn )
+		{
+		  for ( sn = gsn_top_sn; sn < top_sn; sn++ )
+		    {
+		      if ( !skill_table[sn] || !skill_table[sn]->name )
+			{
+			  return -1;
+			}
+
+		      if ( LOWER( name[0] ) == LOWER( skill_table[sn]->name[0] )
+			   &&!str_prefix( name, skill_table[sn]->name ) )
+			{
+			  return sn;
+			}
+		    }
+
+		  return -1;
+		}
+	    }
+	}
+    }
+
   return sn;
 }
 
@@ -166,11 +192,20 @@ int skill_lookup( const char *name )
 SKILLTYPE *get_skilltype( int sn )
 {
   if ( sn >= TYPE_PERSONAL )
-    return NULL;
+    {
+      return NULL;
+    }
+
   if ( sn >= TYPE_HERB )
-    return IS_VALID_HERB(sn-TYPE_HERB) ? herb_table[sn-TYPE_HERB] : NULL;
+    {
+      return IS_VALID_HERB(sn-TYPE_HERB) ? herb_table[sn-TYPE_HERB] : NULL;
+    }
+
   if ( sn >= TYPE_HIT )
-    return NULL;
+    {
+      return NULL;
+    }
+
   return IS_VALID_SN(sn) ? skill_table[sn] : NULL;
 }
 
@@ -180,22 +215,31 @@ SKILLTYPE *get_skilltype( int sn )
  */
 int bsearch_skill( const char *name, int first, int top )
 {
-  int sn;
-
   for (;;)
     {
-      sn = (first + top) >> 1;
+      int sn = (first + top) >> 1;
 
-      if ( LOWER(name[0]) == LOWER(skill_table[sn]->name[0])
-           &&  !str_prefix(name, skill_table[sn]->name) )
-        return sn;
+      if ( LOWER( name[0] ) == LOWER( skill_table[sn]->name[0] )
+           && !str_prefix( name, skill_table[sn]->name ) )
+	{
+	  return sn;
+	}
+
       if (first >= top)
-        return -1;
+	{
+	  return -1;
+	}
+
       if (strcasecmp(name, skill_table[sn]->name) < 1)
-        top = sn - 1;
+	{
+	  top = sn - 1;
+	}
       else
-        first = sn + 1;
+	{
+	  first = sn + 1;
+	}
     }
+
   return -1;
 }
 
@@ -206,20 +250,30 @@ int bsearch_skill( const char *name, int first, int top )
  */
 int bsearch_skill_exact( const char *name, int first, int top )
 {
-  int sn;
-
   for (;;)
     {
-      sn = (first + top) >> 1;
+      int sn = (first + top) >> 1;
+
       if ( !str_prefix(name, skill_table[sn]->name) )
-        return sn;
+	{
+	  return sn;
+	}
+
       if (first >= top)
-        return -1;
+	{
+	  return -1;
+	}
+
       if (strcasecmp(name, skill_table[sn]->name) < 1)
-        top = sn - 1;
+	{
+	  top = sn - 1;
+	}
       else
-        first = sn + 1;
+	{
+	  first = sn + 1;
+	}
     }
+
   return -1;
 }
 
@@ -230,23 +284,32 @@ int bsearch_skill_exact( const char *name, int first, int top )
  */
 int ch_bsearch_skill( const Character *ch, const char *name, int first, int top )
 {
-  int sn;
-
   for (;;)
     {
-      sn = (first + top) >> 1;
+      int sn = (first + top) >> 1;
 
       if ( LOWER(name[0]) == LOWER(skill_table[sn]->name[0])
-           &&  !str_prefix(name, skill_table[sn]->name)
-           &&   ch->pcdata->learned[sn] > 0 )
-        return sn;
+           && !str_prefix(name, skill_table[sn]->name)
+           && ch->pcdata->learned[sn] > 0 )
+	{
+	  return sn;
+	}
+
       if (first >= top)
-        return -1;
+	{
+	  return -1;
+	}
+
       if (strcasecmp( name, skill_table[sn]->name) < 1)
-        top = sn - 1;
+	{
+	  top = sn - 1;
+	}
       else
-        first = sn + 1;
+	{
+	  first = sn + 1;
+	}
     }
+
   return -1;
 }
 
@@ -254,33 +317,49 @@ int ch_bsearch_skill( const Character *ch, const char *name, int first, int top 
 int find_spell( const Character *ch, const char *name, bool know )
 {
   if ( is_npc(ch) || !know )
-    return bsearch_skill( name, gsn_first_spell, gsn_first_skill-1 );
+    {
+      return bsearch_skill( name, gsn_first_spell, gsn_first_skill-1 );
+    }
   else
-    return ch_bsearch_skill( ch, name, gsn_first_spell, gsn_first_skill-1 );
+    {
+      return ch_bsearch_skill( ch, name, gsn_first_spell, gsn_first_skill-1 );
+    }
 }
 
 int find_skill( const Character *ch, const char *name, bool know )
 {
   if ( is_npc(ch) || !know )
-    return bsearch_skill( name, gsn_first_skill, gsn_first_weapon-1 );
+    {
+      return bsearch_skill( name, gsn_first_skill, gsn_first_weapon-1 );
+    }
   else
-    return ch_bsearch_skill( ch, name, gsn_first_skill, gsn_first_weapon-1 );
+    {
+      return ch_bsearch_skill( ch, name, gsn_first_skill, gsn_first_weapon-1 );
+    }
 }
 
 int find_weapon( const Character *ch, const char *name, bool know )
 {
   if ( is_npc(ch) || !know )
-    return bsearch_skill( name, gsn_first_weapon, gsn_first_tongue-1 );
+    {
+      return bsearch_skill( name, gsn_first_weapon, gsn_first_tongue-1 );
+    }
   else
-    return ch_bsearch_skill( ch, name, gsn_first_weapon, gsn_first_tongue-1 );
+    {
+      return ch_bsearch_skill( ch, name, gsn_first_weapon, gsn_first_tongue-1 );
+    }
 }
 
 int find_tongue( const Character *ch, const char *name, bool know )
 {
   if ( is_npc(ch) || !know )
-    return bsearch_skill( name, gsn_first_tongue, gsn_top_sn-1 );
+    {
+      return bsearch_skill( name, gsn_first_tongue, gsn_top_sn-1 );
+    }
   else
-    return ch_bsearch_skill( ch, name, gsn_first_tongue, gsn_top_sn-1 );
+    {
+      return ch_bsearch_skill( ch, name, gsn_first_tongue, gsn_top_sn-1 );
+    }
 }
 
 /*
@@ -290,19 +369,25 @@ int find_tongue( const Character *ch, const char *name, bool know )
 int slot_lookup( int slot )
 {
   extern bool fBootDb;
-  int sn;
+  int sn = 0;
 
   if ( slot <= 0 )
-    return -1;
+    {
+      return -1;
+    }
 
   for ( sn = 0; sn < top_sn; sn++ )
-    if ( slot == skill_table[sn]->slot )
-      return sn;
+    {
+      if ( slot == skill_table[sn]->slot )
+	{
+	  return sn;
+	}
+    }
 
   if ( fBootDb )
     {
       bug( "Slot_lookup: bad slot %d.", slot );
-      abort( );
+      abort();
     }
 
   return -1;
@@ -315,8 +400,8 @@ void successful_casting( SKILLTYPE *skill, Character *ch,
                          Character *victim, OBJ_DATA *obj )
 {
   short chitroom = (skill->type == SKILL_SPELL ? AT_MAGIC : AT_ACTION);
-  short chit        = (skill->type == SKILL_SPELL ? AT_MAGIC : AT_HIT);
-  short chitme   = (skill->type == SKILL_SPELL ? AT_MAGIC : AT_HITME);
+  short chit = (skill->type == SKILL_SPELL ? AT_MAGIC : AT_HIT);
+  short chitme  = (skill->type == SKILL_SPELL ? AT_MAGIC : AT_HITME);
 
   if ( skill->target != TAR_CHAR_OFFENSIVE )
     {
@@ -327,23 +412,35 @@ void successful_casting( SKILLTYPE *skill, Character *ch,
   if ( ch && ch != victim )
     {
       if ( skill->hit_char && skill->hit_char[0] != '\0' )
-        act( chit, skill->hit_char, ch, obj, victim, TO_CHAR );
-      else
-        if ( skill->type == SKILL_SPELL )
+	{
+	  act( chit, skill->hit_char, ch, obj, victim, TO_CHAR );
+	}
+      else if ( skill->type == SKILL_SPELL )
+	{
           act( chit, "Ok.", ch, NULL, NULL, TO_CHAR );
+	}
     }
+
   if ( ch && skill->hit_room && skill->hit_room[0] != '\0' )
-    act( chitroom, skill->hit_room, ch, obj, victim, TO_NOTVICT );
+    {
+      act( chitroom, skill->hit_room, ch, obj, victim, TO_NOTVICT );
+    }
+
   if ( ch && victim && skill->hit_vict && skill->hit_vict[0] != '\0' )
     {
       if ( ch != victim )
-        act( chitme, skill->hit_vict, ch, obj, victim, TO_VICT );
+	{
+	  act( chitme, skill->hit_vict, ch, obj, victim, TO_VICT );
+	}
       else
-        act( chitme, skill->hit_vict, ch, obj, victim, TO_CHAR );
+	{
+	  act( chitme, skill->hit_vict, ch, obj, victim, TO_CHAR );
+	}
     }
-  else
-    if ( ch && ch == victim && skill->type == SKILL_SPELL )
+  else if ( ch && ch == victim && skill->type == SKILL_SPELL )
+    {
       act( chitme, "Ok.", ch, NULL, NULL, TO_CHAR );
+    }
 }
 
 /*
@@ -353,8 +450,8 @@ void failed_casting( SKILLTYPE *skill, Character *ch,
                      Character *victim, OBJ_DATA *obj )
 {
   short chitroom = (skill->type == SKILL_SPELL ? AT_MAGIC : AT_ACTION);
-  short chit        = (skill->type == SKILL_SPELL ? AT_MAGIC : AT_HIT);
-  short chitme   = (skill->type == SKILL_SPELL ? AT_MAGIC : AT_HITME);
+  short chit = (skill->type == SKILL_SPELL ? AT_MAGIC : AT_HIT);
+  short chitme = (skill->type == SKILL_SPELL ? AT_MAGIC : AT_HITME);
 
   if ( skill->target != TAR_CHAR_OFFENSIVE )
     {
@@ -365,29 +462,42 @@ void failed_casting( SKILLTYPE *skill, Character *ch,
   if ( ch && ch != victim )
     {
       if ( skill->miss_char && skill->miss_char[0] != '\0' )
-        act( chit, skill->miss_char, ch, obj, victim, TO_CHAR );
-      else
-        if ( skill->type == SKILL_SPELL )
+	{
+	  act( chit, skill->miss_char, ch, obj, victim, TO_CHAR );
+	}
+      else if ( skill->type == SKILL_SPELL )
+	{
           act( chit, "You failed.", ch, NULL, NULL, TO_CHAR );
+	}
     }
+
   if ( ch && skill->miss_room && skill->miss_room[0] != '\0' )
-    act( chitroom, skill->miss_room, ch, obj, victim, TO_NOTVICT );
+    {
+      act( chitroom, skill->miss_room, ch, obj, victim, TO_NOTVICT );
+    }
+
   if ( ch && victim && skill->miss_vict && skill->miss_vict[0] != '\0' )
     {
       if ( ch != victim )
-        act( chitme, skill->miss_vict, ch, obj, victim, TO_VICT );
+	{
+	  act( chitme, skill->miss_vict, ch, obj, victim, TO_VICT );
+	}
       else
-        act( chitme, skill->miss_vict, ch, obj, victim, TO_CHAR );
+	{
+	  act( chitme, skill->miss_vict, ch, obj, victim, TO_CHAR );
+	}
     }
-  else
-    if ( ch && ch == victim )
-      {
-        if ( skill->miss_char && skill->miss_char[0] != '\0' )
-          act( chitme, skill->miss_char, ch, obj, victim, TO_CHAR );
-        else
-          if ( skill->type == SKILL_SPELL )
-            act( chitme, "You failed.", ch, NULL, NULL, TO_CHAR );
-      }
+  else if ( ch && ch == victim )
+    {
+      if ( skill->miss_char && skill->miss_char[0] != '\0' )
+	{
+	  act( chitme, skill->miss_char, ch, obj, victim, TO_CHAR );
+	}
+      else if ( skill->type == SKILL_SPELL )
+	{
+	  act( chitme, "You failed.", ch, NULL, NULL, TO_CHAR );
+	}
+    }
 }
 
 /*
@@ -397,8 +507,8 @@ void immune_casting( SKILLTYPE *skill, Character *ch,
                      Character *victim, OBJ_DATA *obj )
 {
   short chitroom = (skill->type == SKILL_SPELL ? AT_MAGIC : AT_ACTION);
-  short chit        = (skill->type == SKILL_SPELL ? AT_MAGIC : AT_HIT);
-  short chitme   = (skill->type == SKILL_SPELL ? AT_MAGIC : AT_HITME);
+  short chit = (skill->type == SKILL_SPELL ? AT_MAGIC : AT_HIT);
+  short chitme = (skill->type == SKILL_SPELL ? AT_MAGIC : AT_HITME);
 
   if ( skill->target != TAR_CHAR_OFFENSIVE )
     {
@@ -409,46 +519,65 @@ void immune_casting( SKILLTYPE *skill, Character *ch,
   if ( ch && ch != victim )
     {
       if ( skill->imm_char && skill->imm_char[0] != '\0' )
-        act( chit, skill->imm_char, ch, obj, victim, TO_CHAR );
-      else
-        if ( skill->miss_char && skill->miss_char[0] != '\0' )
-          act( chit, skill->hit_char, ch, obj, victim, TO_CHAR );
-        else
-          if ( skill->type == SKILL_SPELL || skill->type == SKILL_SKILL )
-            act( chit, "That appears to have no effect.", ch, NULL, NULL, TO_CHAR );
+	{
+	  act( chit, skill->imm_char, ch, obj, victim, TO_CHAR );
+	}
+      else if ( skill->miss_char && skill->miss_char[0] != '\0' )
+	{
+	  act( chit, skill->hit_char, ch, obj, victim, TO_CHAR );
+	}
+      else if ( skill->type == SKILL_SPELL || skill->type == SKILL_SKILL )
+	{
+	  act( chit, "That appears to have no effect.", ch, NULL, NULL, TO_CHAR );
+	}
     }
+
   if ( ch && skill->imm_room && skill->imm_room[0] != '\0' )
-    act( chitroom, skill->imm_room, ch, obj, victim, TO_NOTVICT );
-  else
-    if ( ch && skill->miss_room && skill->miss_room[0] != '\0' )
+    {
+      act( chitroom, skill->imm_room, ch, obj, victim, TO_NOTVICT );
+    }
+  else if ( ch && skill->miss_room && skill->miss_room[0] != '\0' )
+    {
       act( chitroom, skill->miss_room, ch, obj, victim, TO_NOTVICT );
+    }
+
   if ( ch && victim && skill->imm_vict && skill->imm_vict[0] != '\0' )
     {
       if ( ch != victim )
-        act( chitme, skill->imm_vict, ch, obj, victim, TO_VICT );
+	{
+	  act( chitme, skill->imm_vict, ch, obj, victim, TO_VICT );
+	}
       else
-        act( chitme, skill->imm_vict, ch, obj, victim, TO_CHAR );
+	{
+	  act( chitme, skill->imm_vict, ch, obj, victim, TO_CHAR );
+	}
     }
-  else
-    if ( ch && victim && skill->miss_vict && skill->miss_vict[0] != '\0' )
-      {
-        if ( ch != victim )
-          act( chitme, skill->miss_vict, ch, obj, victim, TO_VICT );
-        else
-          act( chitme, skill->miss_vict, ch, obj, victim, TO_CHAR );
-      }
-    else
-      if ( ch && ch == victim )
-        {
-          if ( skill->imm_char && skill->imm_char[0] != '\0' )
-            act( chit, skill->imm_char, ch, obj, victim, TO_CHAR );
-          else
-            if ( skill->miss_char && skill->miss_char[0] != '\0' )
-              act( chit, skill->hit_char, ch, obj, victim, TO_CHAR );
-            else
-              if ( skill->type == SKILL_SPELL || skill->type == SKILL_SKILL )
-                act( chit, "That appears to have no affect.", ch, NULL, NULL, TO_CHAR );
-        }
+  else if ( ch && victim && skill->miss_vict && skill->miss_vict[0] != '\0' )
+    {
+      if ( ch != victim )
+	{
+	  act( chitme, skill->miss_vict, ch, obj, victim, TO_VICT );
+	}
+      else
+	{
+	  act( chitme, skill->miss_vict, ch, obj, victim, TO_CHAR );
+	}
+    }
+  else if ( ch && ch == victim )
+    {
+      if ( skill->imm_char && skill->imm_char[0] != '\0' )
+	{
+	  act( chit, skill->imm_char, ch, obj, victim, TO_CHAR );
+	}
+      else if( skill->miss_char && skill->miss_char[0] != '\0' )
+	{
+	  act( chit, skill->hit_char, ch, obj, victim, TO_CHAR );
+	}
+      else if ( skill->type == SKILL_SPELL || skill->type == SKILL_SKILL )
+	{
+	  act( chit, "That appears to have no affect.", ch, NULL, NULL, TO_CHAR );
+	}
+    }
 }
 
 /*
@@ -501,7 +630,9 @@ int rd_parse(const Character *ch, int level, char *expr)
 
   /* take care of nulls coming in */
   if (!expr || !strlen(expr))
-    return 0;
+    {
+      return 0;
+    }
 
   /* get rid of brackets if they surround the entire expresion */
   if ((*expr == '(') && !strchr(expr+1,'(') && expr[strlen(expr)-1] == ')')
@@ -512,56 +643,128 @@ int rd_parse(const Character *ch, int level, char *expr)
 
   /* check if the expresion is just a number */
   len = strlen(expr);
+
   if ( len == 1 && isalpha(expr[0]) )
-    switch(expr[0]) {
-    case 'L': case 'l': return level;
-    case 'H': case 'h': return ch->hit;
-    case 'M': case 'm': return ch->mana;
-    case 'V': case 'v': return ch->move;
-    case 'S': case 's': return get_curr_str(ch);
-    case 'I': case 'i': return get_curr_int(ch);
-    case 'W': case 'w': return get_curr_wis(ch);
-    case 'X': case 'x': return get_curr_dex(ch);
-    case 'C': case 'c': return get_curr_con(ch);
-    case 'A': case 'a': return get_curr_cha(ch);
-    case 'U': case 'u': return get_curr_lck(ch);
-    case 'Y': case 'y': return get_age(ch);
+    {
+      switch(expr[0])
+	{
+	case 'L':
+	case 'l':
+	  return level;
+
+	case 'H':
+	case 'h':
+	  return ch->hit;
+
+	case 'M':
+	case 'm':
+	  return ch->mana;
+
+	case 'V':
+	case 'v':
+	  return ch->move;
+
+	case 'S':
+	case 's':
+	  return get_curr_str(ch);
+
+	case 'I':
+	case 'i':
+	  return get_curr_int(ch);
+
+	case 'W':
+	case 'w':
+	  return get_curr_wis(ch);
+
+	case 'X':
+	case 'x':
+	  return get_curr_dex(ch);
+
+	case 'C':
+	case 'c':
+	  return get_curr_con(ch);
+
+	case 'A':
+	case 'a':
+	  return get_curr_cha(ch);
+
+	case 'U':
+	case 'u':
+	  return get_curr_lck(ch);
+
+	case 'Y':
+	case 'y':
+	  return get_age(ch);
+	}
     }
 
   for (x = 0; x < len; ++x)
-    if (!isdigit(expr[x]) && !isspace(expr[x]))
-      break;
+    {
+      if (!isdigit(expr[x]) && !isspace(expr[x]))
+	{
+	  break;
+	}
+    }
 
   if (x == len)
-    return(atoi(expr));
+    {
+      return(atoi(expr));
+    }
 
   /* break it into 2 parts */
   for (x = 0; x < (int)strlen(expr); ++x)
-    switch(expr[x]) {
-    case '^':
-      if (!total)
-        eop = x;
-      break;
-    case '-': case '+':
-      if (!total)
-        lop = x;
-      break;
-    case '*': case '/': case '%': case 'd': case 'D':
-      if (!total)
-        gop =  x;
-      break;
-    case '(':
-      ++total;
-      break;
-    case ')':
-      --total;
-      break;
+    {
+      switch(expr[x])
+	{
+	case '^':
+	  if (!total)
+	    {
+	      eop = x;
+	    }
+	  break;
+
+	case '-':
+	case '+':
+	  if (!total)
+	    {
+	      lop = x;
+	    }
+	  break;
+
+	case '*':
+	case '/':
+	case '%':
+	case 'd':
+	case 'D':
+	  if (!total)
+	    {
+	      gop =  x;
+	    }
+	  break;
+
+	case '(':
+	  ++total;
+	  break;
+
+	case ')':
+	  --total;
+	  break;
+	}
     }
-  if (lop) x = lop;
+
+  if (lop)
+    {
+      x = lop;
+    }
+  else if (gop)
+    {
+      x = gop;
+    }
   else
-    if (gop) x = gop;
-    else
+    {
       x = eop;
+    }
+
   operation = expr[x];
   expr[x] = '\0';
   sexp[0] = expr;
@@ -569,22 +772,46 @@ int rd_parse(const Character *ch, int level, char *expr)
 
   /* work it out */
   total = rd_parse(ch, level, sexp[0]);
-  switch(operation) {
-  case '-':             total -= rd_parse(ch, level, sexp[1]);  break;
-  case '+':             total += rd_parse(ch, level, sexp[1]);  break;
-  case '*':             total *= rd_parse(ch, level, sexp[1]);  break;
-  case '/':             total /= rd_parse(ch, level, sexp[1]);  break;
-  case '%':             total %= rd_parse(ch, level, sexp[1]);  break;
-  case 'd': case 'D':   total = dice( total, rd_parse(ch, level, sexp[1]) );    break;
-  case '^':
-    {
-      int y = rd_parse(ch, level, sexp[1]), z = total;
 
-      for (x = 1; x < y; ++x, z *= total);
-      total = z;
+  switch(operation)
+    {
+    case '-':
+      total -= rd_parse(ch, level, sexp[1]);
       break;
+
+    case '+':
+      total += rd_parse(ch, level, sexp[1]);
+      break;
+
+    case '*':
+      total *= rd_parse(ch, level, sexp[1]);
+      break;
+
+    case '/':
+      total /= rd_parse(ch, level, sexp[1]);
+      break;
+
+    case '%':
+      total %= rd_parse(ch, level, sexp[1]);
+      break;
+
+    case 'd':
+    case 'D':
+      total = dice( total, rd_parse(ch, level, sexp[1]) );
+    break;
+
+    case '^':
+      {
+	int y = rd_parse(ch, level, sexp[1]), z = total;
+
+	for (x = 1; x < y; ++x, z *= total)
+	  ;
+
+	total = z;
+	break;
+      }
     }
-  }
+
   return total;
 }
 
@@ -603,245 +830,83 @@ int dice_parse(const Character *ch, int level, char *expr)
  */
 bool saves_poison_death( int level, const Character *victim )
 {
-  int save;
+  int save = 50 + ( victim->top_level - level - victim->saving.poison_death ) * 2;
 
-  save = 50 + ( victim->top_level - level - victim->saving.poison_death ) * 2;
   if ( victim->race == RACE_DROID )
-    save += 50;
+    {
+      save += 50;
+    }
+
   save = URANGE( 5, save, 95 );
+
   return chance( victim, save );
 }
+
 bool saves_wands( int level, const Character *victim )
 {
-  int save;
+  int save = 0;
 
   if ( IS_SET( victim->immune, RIS_MAGIC ) )
-    return TRUE;
+    {
+      return true;
+    }
 
   save = 50 + ( victim->top_level - level - victim->saving.wand ) * 2;
   save = URANGE( 5, save, 95 );
+
   return chance( victim, save );
 }
+
 bool saves_para_petri( int level, const Character *victim )
 {
-  int save;
+  int save = 50 + ( victim->top_level - level - victim->saving.para_petri ) * 2;
 
-  save = 50 + ( victim->top_level - level - victim->saving.para_petri ) * 2;
   if ( victim->race == RACE_DROID )
-    save += 50;
+    {
+      save += 50;
+    }
+
   save = URANGE( 5, save, 95 );
   return chance( victim, save );
 }
+
 bool saves_breath( int level, const Character *victim )
 {
-  int save;
+  int save = 50 + ( victim->top_level - level - victim->saving.breath ) * 2;
 
-  save = 50 + ( victim->top_level - level - victim->saving.breath ) * 2;
   save = URANGE( 5, save, 95 );
+
   return chance( victim, save );
 }
+
 bool saves_spell_staff( int level, const Character *victim )
 {
-  int save;
+  int save = 0;
 
   if ( IS_SET( victim->immune, RIS_MAGIC ) )
-    return TRUE;
+    {
+      return true;
+    }
 
   if ( is_npc( victim ) && level > 10 )
-    level -= 5;
+    {
+      level -= 5;
+    }
+
   save = 50 + ( victim->top_level - level - victim->saving.spell_staff ) * 2;
+
   if ( victim->race == RACE_DROID )
-    save += 20;
+    {
+      save += 20;
+    }
+
   save = URANGE( 5, save, 95 );
   return chance( victim, save );
 }
 
-
-/*
- * Process the spell's required components, if any              -Thoric
- * -----------------------------------------------
- * T###         check for item of type ###
- * V#####       check for item of vnum #####
- * Kword        check for item with keyword 'word'
- * G#####       check if player has ##### amount of gold
- * H####        check if player has #### amount of hitpoints
- *
- * Special operators:
- * ! spell fails if player has this
- * + don't consume this component
- * @ decrease component's value[0], and extract if it reaches 0
- * # decrease component's value[1], and extract if it reaches 0
- * $ decrease component's value[2], and extract if it reaches 0
- * % decrease component's value[3], and extract if it reaches 0
- * ^ decrease component's value[4], and extract if it reaches 0
- * & decrease component's value[5], and extract if it reaches 0
- */
 bool process_spell_components( Character *ch, int sn )
 {
-  SKILLTYPE *skill      = get_skilltype(sn);
-  char *comp            = skill->components;
-  char *check;
-  char arg[MAX_INPUT_LENGTH];
-  bool consume, fail, found;
-  int  val, value;
-  OBJ_DATA *obj;
-
-  /* if no components necessary, then everything is cool */
-  if ( !comp || comp[0] == '\0' )
-    return TRUE;
-
-  /* disable the whole damn shabang */
-
-  return TRUE;
-
-  while ( comp[0] != '\0' )
-    {
-      comp = one_argument( comp, arg );
-      consume = TRUE;
-      fail = found = FALSE;
-      val = -1;
-      switch( arg[1] )
-        {
-        default:        check = arg+1;                          break;
-        case '!':       check = arg+2;  fail = TRUE;            break;
-        case '+':       check = arg+2;  consume = FALSE;        break;
-        case '@':       check = arg+2;  val = 0;                break;
-        case '#':       check = arg+2;  val = 1;                break;
-        case '$':       check = arg+2;  val = 2;                break;
-        case '%':       check = arg+2;  val = 3;                break;
-        case '^':       check = arg+2;  val = 4;                break;
-        case '&':       check = arg+2;  val = 5;                break;
-        }
-      value = atoi(check);
-      obj = NULL;
-      switch( UPPER(arg[0]) )
-        {
-        case 'T':
-          for ( obj = ch->first_carrying; obj; obj = obj->next_content )
-            if ( obj->item_type == value )
-              {
-                if ( fail )
-                  {
-                    send_to_char( "Something disrupts the use of this power...\r\n", ch );
-                    return FALSE;
-                  }
-                found = TRUE;
-                break;
-              }
-          break;
-        case 'V':
-          for ( obj = ch->first_carrying; obj; obj = obj->next_content )
-            if ( obj->pIndexData->vnum == value )
-              {
-                if ( fail )
-                  {
-                    send_to_char( "Something disrupts the use of this power...\r\n", ch );
-                    return FALSE;
-                  }
-                found = TRUE;
-                break;
-              }
-          break;
-        case 'K':
-          for ( obj = ch->first_carrying; obj; obj = obj->next_content )
-            if ( nifty_is_name( check, obj->name ) )
-              {
-                if ( fail )
-                  {
-                    send_to_char( "Something disrupts the use of this power...\r\n", ch );
-                    return FALSE;
-                  }
-                found = TRUE;
-                break;
-              }
-          break;
-        case 'G':
-          if ( ch->gold >= value )
-            {
-              if ( fail )
-                {
-                  send_to_char( "Something disrupts the use of this power...\r\n", ch );
-                  return FALSE;
-                }
-              else
-                {
-                  if ( consume )
-                    {
-                      set_char_color( AT_GOLD, ch );
-                      send_to_char( "You feel a little lighter...\r\n", ch );
-                      ch->gold -= value;
-                    }
-                  continue;
-                }
-            }
-          break;
-        case 'H':
-          if ( ch->hit >= value )
-            {
-              if ( fail )
-                {
-                  send_to_char( "Something disrupts the use of this power...\r\n", ch );
-                  return FALSE;
-                }
-              else
-                {
-                  if ( consume )
-                    {
-                      set_char_color( AT_BLOOD, ch );
-                      send_to_char( "You feel a little weaker...\r\n", ch );
-                      ch->hit -= value;
-                      update_pos( ch );
-                    }
-                  continue;
-                }
-            }
-          break;
-        }
-      /* having this component would make the spell fail... if we get
-         here, then the caster didn't have that component */
-      if ( fail )
-        continue;
-      if ( !found )
-        {
-          send_to_char( "Something is missing...\r\n", ch );
-          return FALSE;
-        }
-      if ( obj )
-        {
-          if ( val >=0 && val < 6 )
-            {
-              separate_obj(obj);
-              if ( obj->value[val] <= 0 )
-                return FALSE;
-              else
-                if ( --obj->value[val] == 0 )
-                  {
-                    act( AT_MAGIC, "$p glows briefly, then disappears in a puff of smoke!", ch, obj, NULL, TO_CHAR );
-                    act( AT_MAGIC, "$p glows briefly, then disappears in a puff of smoke!", ch, obj, NULL, TO_ROOM );
-                    extract_obj( obj );
-                  }
-                else
-                  act( AT_MAGIC, "$p glows briefly and a whisp of smoke rises from it.", ch, obj, NULL, TO_CHAR );
-            }
-          else
-            if ( consume )
-              {
-                separate_obj(obj);
-                act( AT_MAGIC, "$p glows brightly, then disappears in a puff of smoke!", ch, obj, NULL, TO_CHAR );
-                act( AT_MAGIC, "$p glows brightly, then disappears in a puff of smoke!", ch, obj, NULL, TO_ROOM );
-                extract_obj( obj );
-              }
-            else
-              {
-                int count = obj->count;
-
-                obj->count = 1;
-                act( AT_MAGIC, "$p glows briefly.", ch, obj, NULL, TO_CHAR );
-                obj->count = count;
-              }
-        }
-    }
-  return TRUE;
+  return true;
 }
 
 /*
@@ -850,10 +915,10 @@ bool process_spell_components( Character *ch, int sn )
 void *locate_targets( Character *ch, char *arg, int sn, Character **victim, OBJ_DATA **obj )
 {
   SKILLTYPE *skill = get_skilltype( sn );
-  void *vo      = NULL;
+  void *vo = NULL;
 
-  *victim       = NULL;
-  *obj  = NULL;
+  *victim = NULL;
+  *obj = NULL;
 
   switch ( skill->target )
     {
@@ -867,7 +932,7 @@ void *locate_targets( Character *ch, char *arg, int sn, Character **victim, OBJ_
     case TAR_CHAR_OFFENSIVE:
       if ( arg[0] == '\0' )
         {
-          if ( ( *victim = who_fighting( ch ) ) == NULL )
+          if ( !( *victim = who_fighting( ch ) ) )
             {
               send_to_char( "Cast the spell on whom?\r\n", ch );
               return &pAbort;
@@ -875,7 +940,7 @@ void *locate_targets( Character *ch, char *arg, int sn, Character **victim, OBJ_
         }
       else
         {
-          if ( ( *victim = get_char_room( ch, arg ) ) == NULL )
+          if ( !( *victim = get_char_room( ch, arg ) ) )
             {
               send_to_char( "They aren't here.\r\n", ch );
               return &pAbort;
@@ -883,7 +948,9 @@ void *locate_targets( Character *ch, char *arg, int sn, Character **victim, OBJ_
         }
 
       if ( is_safe( ch, *victim ) )
-        return &pAbort;
+	{
+	  return &pAbort;
+	}
 
       if ( ch == *victim )
         {
@@ -905,7 +972,6 @@ void *locate_targets( Character *ch, char *arg, int sn, Character **victim, OBJ_
                   send_to_char( "This player has been killed in the last 5 minutes.\r\n", ch );
                   return &pAbort;
                 }
-
             }
 
           if ( is_affected_by(ch, AFF_CHARM) && ch->master == *victim )
@@ -920,15 +986,18 @@ void *locate_targets( Character *ch, char *arg, int sn, Character **victim, OBJ_
 
     case TAR_CHAR_DEFENSIVE:
       if ( arg[0] == '\0' )
-        *victim = ch;
+	{
+	  *victim = ch;
+	}
       else
         {
-          if ( ( *victim = get_char_room( ch, arg ) ) == NULL )
+          if ( !( *victim = get_char_room( ch, arg ) ) )
             {
               send_to_char( "They aren't here.\r\n", ch );
               return &pAbort;
             }
         }
+
       vo = (void *) *victim;
       break;
 
@@ -967,14 +1036,17 @@ void *locate_targets( Character *ch, char *arg, int sn, Character **victim, OBJ_
  */
 ch_ret obj_cast_spell( int sn, int level, Character *ch, Character *victim, OBJ_DATA *obj )
 {
-  void *vo;
+  void *vo = NULL;
   ch_ret retcode = rNONE;
   int levdiff = ch->top_level - level;
   SKILLTYPE *skill = get_skilltype( sn );
   struct timeval time_used;
 
   if ( sn == -1 )
-    return retcode;
+    {
+      return retcode;
+    }
+
   if ( !skill || !skill->spell_fun )
     {
       bug( "Obj_cast_spell: bad sn %d.", sn );
@@ -993,27 +1065,43 @@ ch_ret obj_cast_spell( int sn, int level, Character *ch, Character *victim, OBJ_
    * 40 scrolls in battle too often ;)          -Thoric
    */
   if ( (skill->target == TAR_CHAR_OFFENSIVE
-        ||    number_bits(7) == 1)      /* 1/128 chance if non-offensive */
-       &&    skill->type != SKILL_HERB
-       &&   !chance( ch, 95 + levdiff ) )
+        || number_bits(7) == 1)      /* 1/128 chance if non-offensive */
+       && skill->type != SKILL_HERB
+       && !chance( ch, 95 + levdiff ) )
     {
       switch( number_bits(2) )
         {
-        case 0: failed_casting( skill, ch, victim, NULL );      break;
+        case 0:
+	  failed_casting( skill, ch, victim, NULL );
+	  break;
+
         case 1:
           act( AT_MAGIC, "The $t backfires!", ch, skill->name, victim, TO_CHAR );
+
           if ( victim )
-            act( AT_MAGIC, "$n's $t backfires!", ch, skill->name, victim, TO_VICT );
+	    {
+	      act( AT_MAGIC, "$n's $t backfires!", ch, skill->name, victim, TO_VICT );
+	    }
+
           act( AT_MAGIC, "$n's $t backfires!", ch, skill->name, victim, TO_NOTVICT );
           return damage( ch, ch, number_range( 1, level ), TYPE_UNDEFINED );
-        case 2: failed_casting( skill, ch, victim, NULL );      break;
+
+        case 2:
+	  failed_casting( skill, ch, victim, NULL );
+	  break;
+
         case 3:
           act( AT_MAGIC, "The $t backfires!", ch, skill->name, victim, TO_CHAR );
+
           if ( victim )
-            act( AT_MAGIC, "$n's $t backfires!", ch, skill->name, victim, TO_VICT );
+	    {
+	      act( AT_MAGIC, "$n's $t backfires!", ch, skill->name, victim, TO_VICT );
+	    }
+
           act( AT_MAGIC, "$n's $t backfires!", ch, skill->name, victim, TO_NOTVICT );
           return damage( ch, ch, number_range( 1, level ), TYPE_UNDEFINED );
         }
+
       return rNONE;
     }
 
@@ -1027,35 +1115,50 @@ ch_ret obj_cast_spell( int sn, int level, Character *ch, Character *victim, OBJ_
 
     case TAR_IGNORE:
       vo = NULL;
+
       if ( victim )
-        spell_target_name = victim->name;
-      else
-        if ( obj )
-          spell_target_name = obj->name;
+	{
+	  spell_target_name = victim->name;
+	}
+      else if ( obj )
+	{
+	  spell_target_name = obj->name;
+	}
       break;
 
     case TAR_CHAR_OFFENSIVE:
       if ( victim != ch )
         {
           if ( !victim )
-            victim = who_fighting( ch );
+	    {
+	      victim = who_fighting( ch );
+	    }
+
           if ( !victim || !is_npc(victim) )
             {
               send_to_char( "You can't do that.\r\n", ch );
               return rNONE;
             }
         }
+
       if ( ch != victim && is_safe( ch, victim ) )
-        return rNONE;
+	{
+	  return rNONE;
+	}
+
       vo = (void *) victim;
       break;
 
     case TAR_CHAR_DEFENSIVE:
       if ( victim == NULL )
-        victim = ch;
+	{
+	  victim = ch;
+	}
+
       vo = (void *) victim;
+
       if ( skill->type != SKILL_HERB
-           &&   IS_SET(victim->immune, RIS_MAGIC ) )
+           && IS_SET(victim->immune, RIS_MAGIC ) )
         {
           immune_casting( skill, ch, victim, NULL );
           return rNONE;
@@ -1064,8 +1167,9 @@ ch_ret obj_cast_spell( int sn, int level, Character *ch, Character *victim, OBJ_
 
     case TAR_CHAR_SELF:
       vo = (void *) ch;
+
       if ( skill->type != SKILL_HERB
-           &&   IS_SET(ch->immune, RIS_MAGIC ) )
+           && IS_SET(ch->immune, RIS_MAGIC ) )
         {
           immune_casting( skill, ch, victim, NULL );
           return rNONE;
@@ -1073,39 +1177,47 @@ ch_ret obj_cast_spell( int sn, int level, Character *ch, Character *victim, OBJ_
       break;
 
     case TAR_OBJ_INV:
-      if ( obj == NULL )
+      if ( !obj )
         {
           send_to_char( "You can't do that.\r\n", ch );
           return rNONE;
         }
+
       vo = (void *) obj;
       break;
     }
 
   start_timer(&time_used);
-  retcode = (*skill->spell_fun) ( sn, level, ch, vo );
+  retcode = skill->spell_fun( sn, level, ch, vo );
   end_timer(&time_used);
   update_userec(&time_used, &skill->userec);
 
   if ( retcode == rSPELL_FAILED )
-    retcode = rNONE;
+    {
+      retcode = rNONE;
+    }
 
   if ( retcode == rCHAR_DIED || retcode == rERROR )
-    return retcode;
+    {
+      return retcode;
+    }
 
   if ( char_died(ch) )
-    return rCHAR_DIED;
+    {
+      return rCHAR_DIED;
+    }
 
   if ( skill->target == TAR_CHAR_OFFENSIVE
-       &&   victim != ch
-       &&  !char_died(victim) )
+       && victim != ch
+       && !char_died(victim) )
     {
-      Character *vch;
-      Character *vch_next;
+      Character *vch = NULL;
+      Character *vch_next = NULL;
 
       for ( vch = ch->in_room->first_person; vch; vch = vch_next )
         {
           vch_next = vch->next_in_room;
+
           if ( victim == vch && !victim->fighting && victim->master != ch )
             {
               retcode = multi_hit( victim, ch, TYPE_UNDEFINED );
@@ -1127,25 +1239,39 @@ ch_ret obj_cast_spell( int sn, int level, Character *ch, Character *victim, OBJ_
 bool check_save( int sn, int level, const Character *ch, const Character *victim )
 {
   SKILLTYPE *skill = get_skilltype(sn);
-  bool saved = FALSE;
+  bool saved = false;
 
   if ( SPELL_FLAG(skill, SF_PKSENSITIVE)
-       &&  !is_npc(ch) && !is_npc(victim) )
-    level /= 2;
+       && !is_npc(ch) && !is_npc(victim) )
+    {
+      level /= 2;
+    }
 
   if ( skill->saves )
-    switch( skill->saves )
-      {
-      case SS_POISON_DEATH:
-        saved = saves_poison_death(level, victim);      break;
-      case SS_ROD_WANDS:
-        saved = saves_wands(level, victim);             break;
-      case SS_PARA_PETRI:
-        saved = saves_para_petri(level, victim);        break;
-      case SS_BREATH:
-        saved = saves_breath(level, victim);    break;
-      case SS_SPELL_STAFF:
-        saved = saves_spell_staff(level, victim);       break;
-      }
+    {
+      switch( skill->saves )
+	{
+	case SS_POISON_DEATH:
+	  saved = saves_poison_death(level, victim);
+	  break;
+
+	case SS_ROD_WANDS:
+	  saved = saves_wands(level, victim);
+	  break;
+
+	case SS_PARA_PETRI:
+	  saved = saves_para_petri(level, victim);
+	  break;
+
+	case SS_BREATH:
+	  saved = saves_breath(level, victim);
+	  break;
+
+	case SS_SPELL_STAFF:
+	  saved = saves_spell_staff(level, victim);
+	  break;
+	}
+    }
+
   return saved;
 }
