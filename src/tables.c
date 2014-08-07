@@ -241,7 +241,6 @@ static const DO_FUN_ENTRY command_fun_table[] = {
       if ( !str_cmp( name, "do_apply" ))                return do_apply;
       if ( !str_cmp( name, "do_appraise" ))             return do_appraise;
       if ( !str_cmp( name, "do_appoint" ))              return do_appoint;
-      if ( !str_cmp( name, "do_aquest" ))               return do_aquest;
       if ( !str_cmp( name, "do_areas" ))                return do_areas;
       if ( !str_cmp( name, "do_arena" ))              return do_arena;
       if ( !str_cmp( name, "do_arm" ))          return do_arm;
@@ -601,7 +600,6 @@ static const DO_FUN_ENTRY command_fun_table[] = {
       break;
     case 'q':
       if ( !str_cmp( name, "do_quaff" ))                return do_quaff;
-      if ( !str_cmp( name, "do_quest" ))                return do_quest;
       if ( !str_cmp( name, "do_qui" ))          return do_qui;
       if ( !str_cmp( name, "do_quit" ))         return do_quit;
       break;

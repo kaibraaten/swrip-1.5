@@ -928,9 +928,6 @@ if ( (iLang = skill_lookup( "common" )) < 0 )
   if ( IS_SET(ch->act, ACT_POLYMORPHED) )
     REMOVE_BIT(ch->act, ACT_POLYMORPHED);
 
-  if ( IS_SET(ch->act, PLR_QUESTOR) )
-    REMOVE_BIT(ch->act, PLR_QUESTOR);
-
   if ( get_timer( ch, TIMER_SHOVEDRAG ) > 0 )
     remove_timer( ch, TIMER_SHOVEDRAG );
 

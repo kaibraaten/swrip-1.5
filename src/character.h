@@ -164,16 +164,6 @@ struct Character
     short mod_lck;
     short mod_frc;
   } stats;
-
-  struct
-  {
-    vnum_t      questmob;
-    vnum_t      questobj;
-    short      questpoints;
-    int        nextquest;
-    int        countdown;
-    Character *questgiver;
-  } quest;
 };
 
 bool is_wizvis( const Character *ch, const Character *victim );

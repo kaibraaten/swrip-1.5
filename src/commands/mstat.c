@@ -105,17 +105,13 @@ void do_mstat( Character *ch, char *argument )
              victim->fighting ? victim->fighting->who->name : "(none)",
              victim->master      ? victim->master->name   : "(none)",
              victim->leader      ? victim->leader->name   : "(none)" );
-  ch_printf( ch, "Questpoints: %d    Current QuestMob: %d    Current QuestObj: %d\r\n",
-             victim->quest.questpoints, victim->quest.questmob, victim->quest.questobj );
 
   if ( !is_npc(victim) )
     ch_printf( ch,
-               "Thirst: %d   Full: %d   Drunk: %d     Glory: %d/%d\r\n",
+               "Thirst: %d   Full: %d   Drunk: %d\r\n",
                victim->pcdata->condition[COND_THIRST],
                victim->pcdata->condition[COND_FULL],
-               victim->pcdata->condition[COND_DRUNK],
-               victim->pcdata->quest_curr,
-               victim->pcdata->quest_accum );
+               victim->pcdata->condition[COND_DRUNK] );
   else
     ch_printf( ch, "Hit dice: %dd%d+%d.  Damage dice: %dd%d+%d.\r\n",
                victim->pIndexData->hitnodice,

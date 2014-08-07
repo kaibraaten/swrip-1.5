@@ -51,7 +51,6 @@ DECLARE_SPEC_FUN( spec_police_fine );
 DECLARE_SPEC_FUN( spec_police );
 DECLARE_SPEC_FUN( spec_clan_guard );
 DECLARE_SPEC_FUN( spec_newbie_pilot );
-DECLARE_SPEC_FUN( spec_questmaster );
 
 typedef struct spec_fun_entry
 {
@@ -67,7 +66,6 @@ static const SPEC_FUN_ENTRY spec_fun_table[] = {
   { "spec_janitor",           spec_janitor },
   { "spec_poison",            spec_poison },
   { "spec_thief",             spec_thief },
-  { "spec_questmaster",       spec_questmaster },
   { "spec_auth",              spec_auth },
   { "spec_stormtrooper",      spec_stormtrooper },
   { "spec_rebel_trooper",     spec_rebel_trooper },

@@ -217,7 +217,6 @@ void assign_area( Character *ch )
           tarea->author         = STRALLOC( buf2 );
           tarea->age            = 0;
           tarea->nplayer        = 0;
-          SET_BIT( tarea->flags, AFLAG_NOQUEST );
 
           created = true;
         }

@@ -28,7 +28,6 @@
 #include <time.h>
 #include <math.h>
 #include "mud.h"
-#include "quest.h"
 #include "arena.h"
 #include "ships.h"
 #include "shuttle.h"
@@ -2280,7 +2279,6 @@ void update_handler( void )
     {
       pulse_area = number_range( PULSE_AREA / 2, 3 * PULSE_AREA / 2 );
       area_update();
-      quest_update();
     }
 
   if ( --pulse_taxes <= 0 )

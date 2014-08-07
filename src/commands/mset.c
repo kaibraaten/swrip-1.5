@@ -557,34 +557,6 @@ void do_mset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "nextquest" ) )
-    {
-      if ( !can_mmodify( ch, victim ) )
-        return;
-      if ( value < 0 || value > 100 )
-        {
-          send_to_char( "Let's be responible, hmm?", ch );
-          victim->quest.nextquest = 0;
-          return;
-        }
-      victim->quest.nextquest = value;
-      return;
-    }
-
-  if ( !str_cmp( arg2, "questpoints" ) )
-    {
-      if ( !can_mmodify( ch, victim ) )
-        return;
-      if ( value < 0 || value > 2000 )
-        {
-          send_to_char( "Let's be responible, hmm?", ch );
-          victim->quest.questpoints = 0;
-          return;
-        }
-      victim->quest.questpoints = value;
-      return;
-    }
-
   if ( !str_cmp( arg2, "force" ) )
     {
       if ( !can_mmodify( ch, victim ) )
@@ -669,54 +641,6 @@ void do_mset( Character *ch, char *argument )
         save_char_obj( victim );
       send_to_char( "Ok.\r\n", ch );
       ch_printf( victim, "Your password has been changed by %s.\r\n", ch->name );
-      return;
-    }
-
-  if ( !str_cmp( arg2, "quest" ) )
-    {
-      if ( is_npc(victim) )
-        {
-          send_to_char( "Not on NPC's.\r\n", ch );
-          return;
-        }
-
-      if ( value < 0 || value > 500 )
-        {
-          send_to_char( "The current quest range is 0 to 500.\r\n", ch );
-          return;
-        }
-
-      victim->pcdata->quest_number = value;
-      return;
-    }
-
-  if ( !str_cmp( arg2, "qpa" ) )
-    {
-      if ( is_npc(victim) )
-        {
-          send_to_char( "Not on NPC's.\r\n", ch );
-          return;
-        }
-
-      victim->pcdata->quest_accum = value;
-      return;
-    }
-
-  if ( !str_cmp( arg2, "qp" ) )
-    {
-      if ( is_npc(victim) )
-        {
-          send_to_char( "Not on NPC's.\r\n", ch );
-          return;
-	}
-
-      if ( value < 0 || value > 5000 )
-        {
-          send_to_char( "The current quest point range is 0 to 5000.\r\n", ch );
-          return;
-        }
-
-      victim->pcdata->quest_curr = value;
       return;
     }
 

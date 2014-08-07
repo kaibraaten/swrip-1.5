@@ -2073,17 +2073,8 @@ void raw_kill( Character *ch, Character *victim )
         }
     }
 
-  /*    make_blood( victim ); */
-
   if ( is_npc(victim) )
     {
-      if ( victim->pIndexData->vnum == ch->quest.questmob )
-        {
-          ch->quest.questmob = -1;
-          send_to_char("&RYou have completed your quest! Return to your employer now to gain the reward!\r\n",ch);
-
-        }
-
       victim->pIndexData->killed++;
       extract_char( victim, true );
       victim = NULL;

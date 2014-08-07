@@ -50,11 +50,6 @@ void do_oldscore( Character *ch, char *argument )
   ch_printf( ch,
              "You have have %d credits.\r\n" , ch->gold );
 
-  if ( !is_npc(ch) )
-    ch_printf( ch,
-               "You have achieved %d glory during your life, and currently have %d.\r\n",
-               ch->pcdata->quest_accum, ch->pcdata->quest_curr );
-
   ch_printf( ch, "Autoexit: %s   Autoloot: %s   Autosac: %s   Autocred: %s\r\n",
              (!is_npc(ch) && IS_SET(ch->act, PLR_AUTOEXIT)) ? "yes" : "no",
              (!is_npc(ch) && IS_SET(ch->act, PLR_AUTOLOOT)) ? "yes" : "no",

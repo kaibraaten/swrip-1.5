@@ -868,21 +868,6 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
                   mprog_veval(chkchar->mobinvis, opr, atoi(rval), mob) : false);
         }
 
-      if ( !str_cmp(chck, "questmob") )
-        {
-          return ( mprog_veval(chkchar->quest.questmob, opr, atoi(rval), mob ) );
-        }
-
-      if ( !str_cmp(chck, "questobj") )
-        {
-          return ( mprog_veval(chkchar->quest.questobj, opr, atoi(rval), mob ) );
-        }
-
-      if ( !str_cmp(chck, "questpoints") )
-        {
-          return ( mprog_veval(chkchar->quest.questpoints, opr, atoi(rval), mob ) );
-        }
-
       if ( !str_cmp(chck, "ispc") )
         {
           return is_npc(chkchar) ? false : true;
@@ -977,12 +962,6 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
       if ( !str_cmp(chck, "position") )
         {
           return mprog_veval(chkchar->position, opr, atoi(rval), mob);
-        }
-
-      if ( !str_cmp(chck, "doingquest") )
-        {
-          return is_npc(actor) ? false :
-            mprog_veval(chkchar->pcdata->quest_number, opr, atoi(rval), mob);
         }
 
       if ( !str_cmp(chck, "ishelled") )

@@ -787,9 +787,6 @@ struct pc_data
   short       condition[MAX_CONDS];
   short       learned[MAX_SKILL];
   KILLED_DATA killed[MAX_KILLTRACK];
-  short       quest_number;   /* current *QUEST BEING DONE* DON'T REMOVE! */
-  short       quest_curr;     /* current number of quest points */
-  int         quest_accum;    /* quest points accumulated in players life */
   int         auth_state;
   time_t      release_date;   /* Auto-helling.. Altrag */
   vnum_t      jail_vnum;
@@ -1764,7 +1761,6 @@ DECLARE_DO_FUN( do_showspaceobject );
 DECLARE_DO_FUN( skill_notfound  );
 DECLARE_DO_FUN( do_aassign      );
 DECLARE_DO_FUN( do_adjusttractorbeam );
-DECLARE_DO_FUN( do_aquest       );
 DECLARE_DO_FUN( do_addbounty    );
 DECLARE_DO_FUN( do_rembounty    );
 DECLARE_DO_FUN( do_vassign      );
@@ -1998,7 +1994,6 @@ DECLARE_DO_FUN( do_push         );
 DECLARE_DO_FUN( do_put          );
 DECLARE_DO_FUN( do_qpset        );
 DECLARE_DO_FUN( do_quaff        );
-DECLARE_DO_FUN( do_quest        );
 DECLARE_DO_FUN( do_quit         );
 DECLARE_DO_FUN( do_rank         );
 DECLARE_DO_FUN( do_rat          );

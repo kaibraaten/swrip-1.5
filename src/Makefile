@@ -41,7 +41,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	boards.o bounty.o build.o character.o clans.o comm.o comments.o const.o \
 	copyover.o craft.o db.o editor.o fight.o grub.o handler.o help.o interp.o magic.o \
 	makeobjs.o mapper.o misc.o mud_prog.o nanny.o \
-	planets.o quest.o reset.o save.o ships.o shops.o shuttle.o \
+	planets.o reset.o save.o ships.o shops.o shuttle.o \
 	skills.o special.o space.o spaceobjects.o swskills.o \
 	tables.o track.o turret.o update.o vector3_aux.o \
 	$(CMDDIR)/aassign.o \
@@ -69,7 +69,6 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/apply.o \
 	$(CMDDIR)/appoint.o \
 	$(CMDDIR)/appraise.o \
-	$(CMDDIR)/aquest.o \
 	$(CMDDIR)/areas.o \
 	$(CMDDIR)/arena.o \
 	$(CMDDIR)/arm.o \
@@ -354,7 +353,6 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(CMDDIR)/push.o \
 	$(CMDDIR)/put.o \
 	$(CMDDIR)/quaff.o \
-	$(CMDDIR)/quest.o \
 	$(CMDDIR)/quit.o \
 	$(CMDDIR)/radar.o \
 	$(CMDDIR)/rank.o \
@@ -571,7 +569,6 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(SPECDIR)/policefine.o \
 	$(SPECDIR)/policejail.o \
 	$(SPECDIR)/policeundercover.o \
-	$(SPECDIR)/questmaster.o \
 	$(SPECDIR)/rebeltrooper.o \
 	$(SPECDIR)/stormtrooper.o \
 	$(SPECDIR)/thief.o \

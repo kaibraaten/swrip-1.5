@@ -43,11 +43,6 @@ void do_channels( Character *ch, char *argument )
                         ch );
         }
 
-      send_to_char( !IS_SET(ch->deaf, CHANNEL_QUEST)
-                    ? " +QUEST"
-                    : " -quest",
-                    ch );
-
       send_to_char( !IS_SET( ch->deaf, CHANNEL_TELLS )
                     ? " +TELLS"
                     : " -tells",
@@ -165,8 +160,6 @@ void do_channels( Character *ch, char *argument )
 	bit = CHANNEL_CLAN;
       else if ( !str_cmp( arg+1, "guild"    ) )
 	bit = CHANNEL_GUILD;
-      else if ( !str_cmp( arg+1, "quest"    ) )
-	bit = CHANNEL_QUEST;
       else if ( !str_cmp( arg+1, "tells"    ) )
 	bit = CHANNEL_TELLS;
       else if ( !str_cmp( arg+1, "immtalk"  ) )
@@ -211,7 +204,6 @@ void do_channels( Character *ch, char *argument )
         {
           REMOVE_BIT(ch->deaf, CHANNEL_AUCTION);
           REMOVE_BIT(ch->deaf, CHANNEL_CHAT);
-          REMOVE_BIT(ch->deaf, CHANNEL_QUEST);
           REMOVE_BIT(ch->deaf, CHANNEL_PRAY);
           REMOVE_BIT(ch->deaf, CHANNEL_MUSIC);
           REMOVE_BIT(ch->deaf, CHANNEL_ASK);
@@ -230,7 +222,6 @@ void do_channels( Character *ch, char *argument )
         {
           SET_BIT(ch->deaf, CHANNEL_AUCTION);
           SET_BIT(ch->deaf, CHANNEL_CHAT);
-          SET_BIT(ch->deaf, CHANNEL_QUEST);
           SET_BIT(ch->deaf, CHANNEL_PRAY);
 	  SET_BIT(ch->deaf, CHANNEL_MUSIC);
           SET_BIT(ch->deaf, CHANNEL_ASK);

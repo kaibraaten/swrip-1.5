@@ -1621,7 +1621,7 @@ typedef enum
 #define PLR_AUTOLOOT       BV04
 #define PLR_AUTOSAC        BV05
 #define PLR_BLANK          BV06
-#define PLR_QUESTOR        BV07
+
 #define PLR_BRIEF          BV08
 #define PLR_COMBINE        BV09
 #define PLR_PROMPT         BV10
@@ -1677,7 +1677,7 @@ typedef enum
  */
 #define CHANNEL_AUCTION   BV00
 #define CHANNEL_CHAT      BV01
-#define CHANNEL_QUEST     BV02
+
 #define CHANNEL_IMMTALK   BV03
 #define CHANNEL_MUSIC     BV04
 #define CHANNEL_ASK       BV05
@@ -1716,7 +1716,7 @@ typedef enum
 
 /* Area flags - Narn Mar/96 */
 #define AFLAG_NOPKILL  BV00
-#define AFLAG_NOQUEST  BV01
+
 #define AFLAG_CHANGED  BV02
 
 /*
