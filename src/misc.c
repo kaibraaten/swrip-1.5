@@ -42,10 +42,12 @@ void sith_penalty( Character *ch )
 {
   if ( number_range( 1 , 100 ) == 1 )
     {
-      ch->max_mana++ ;
+      ch->max_mana++;
+
       if (ch->max_hit > 100)
-        ch->max_hit--   ;
-      ch->hit--   ;
+        ch->max_hit--;
+
+      ch->hit--;
       send_to_char("&zYour body grows weaker as your strength in the dark side grows.&w\r\n",ch);
     }
 }
@@ -56,17 +58,13 @@ void sith_penalty( Character *ch )
 void pullorpush( Character *ch, OBJ_DATA *obj, bool pull )
 {
   char buf[MAX_STRING_LENGTH];
-  Character             *rch;
-  bool           isup;
-  ROOM_INDEX_DATA       *room,  *to_room = NULL;
-  Exit             *pexit, *pexit_rev;
-  int                    edir;
-  char          *txt;
+  Character *rch = NULL;
+  ROOM_INDEX_DATA *room = NULL,  *to_room = NULL;
+  Exit *pexit = NULL, *pexit_rev = NULL;
+  dir_types edir = DIR_INVALID;
+  char *txt = NULL;
+  bool isup = IS_SET( obj->value[0], TRIG_UP );
 
-  if ( IS_SET( obj->value[0], TRIG_UP ) )
-    isup = TRUE;
-  else
-    isup = FALSE;
   switch( obj->item_type )
     {
     default:
@@ -74,6 +72,7 @@ void pullorpush( Character *ch, OBJ_DATA *obj, bool pull )
       send_to_char( buf, ch );
       return;
       break;
+
     case ITEM_SWITCH:
     case ITEM_LEVER:
     case ITEM_PULLCHAIN:
@@ -83,6 +82,8 @@ void pullorpush( Character *ch, OBJ_DATA *obj, bool pull )
           send_to_char( buf, ch );
           return;
         }
+      break;
+
     case ITEM_BUTTON:
       if ( (!pull && isup) || (pull & !isup) )
         {
@@ -92,17 +93,25 @@ void pullorpush( Character *ch, OBJ_DATA *obj, bool pull )
         }
       break;
     }
-  if( (pull) && IS_SET(obj->pIndexData->mprog.progtypes,PULL_PROG) )
+
+  if( pull && IS_SET(obj->pIndexData->mprog.progtypes,PULL_PROG) )
     {
       if ( !IS_SET(obj->value[0], TRIG_AUTORETURN ) )
-        REMOVE_BIT( obj->value[0], TRIG_UP );
+	{
+	  REMOVE_BIT( obj->value[0], TRIG_UP );
+	}
+
       oprog_pull_trigger( ch, obj );
       return;
     }
-  if( (!pull) && IS_SET(obj->pIndexData->mprog.progtypes,PUSH_PROG) )
+
+  if( !pull && IS_SET(obj->pIndexData->mprog.progtypes,PUSH_PROG) )
     {
       if ( !IS_SET(obj->value[0], TRIG_AUTORETURN ) )
-        SET_BIT( obj->value[0], TRIG_UP );
+	{
+	  SET_BIT( obj->value[0], TRIG_UP );
+	}
+
       oprog_push_trigger( ch, obj );
       return;
     }
@@ -118,37 +127,50 @@ void pullorpush( Character *ch, OBJ_DATA *obj, bool pull )
   if ( !IS_SET(obj->value[0], TRIG_AUTORETURN ) )
     {
       if ( pull )
-        REMOVE_BIT( obj->value[0], TRIG_UP );
+	{
+	  REMOVE_BIT( obj->value[0], TRIG_UP );
+	}
       else
-        SET_BIT( obj->value[0], TRIG_UP );
+	{
+	  SET_BIT( obj->value[0], TRIG_UP );
+	}
     }
+
   if ( IS_SET( obj->value[0], TRIG_TELEPORT )
-       ||   IS_SET( obj->value[0], TRIG_TELEPORTALL )
-       ||   IS_SET( obj->value[0], TRIG_TELEPORTPLUS ) )
+       || IS_SET( obj->value[0], TRIG_TELEPORTALL )
+       || IS_SET( obj->value[0], TRIG_TELEPORTPLUS ) )
     {
-      int flags;
+      int flags = 0;
 
       if ( ( room = get_room_index( obj->value[1] ) ) == NULL )
         {
           bug( "PullOrPush: obj points to invalid room %d", obj->value[1] );
           return;
         }
-      flags = 0;
+
       if ( IS_SET( obj->value[0], TRIG_SHOWROOMDESC ) )
-        SET_BIT( flags, TELE_SHOWDESC );
+	{
+	  SET_BIT( flags, TELE_SHOWDESC );
+	}
+
       if ( IS_SET( obj->value[0], TRIG_TELEPORTALL ) )
-        SET_BIT( flags, TELE_TRANSALL );
+	{
+	  SET_BIT( flags, TELE_TRANSALL );
+	}
+
       if ( IS_SET( obj->value[0], TRIG_TELEPORTPLUS ) )
-        SET_BIT( flags, TELE_TRANSALLPLUS );
+	{
+	  SET_BIT( flags, TELE_TRANSALLPLUS );
+	}
 
       teleport( ch, obj->value[1], flags );
       return;
     }
 
   if ( IS_SET( obj->value[0], TRIG_RAND4 )
-       ||        IS_SET( obj->value[0], TRIG_RAND6 ) )
+       || IS_SET( obj->value[0], TRIG_RAND6 ) )
     {
-      int maxd;
+      int maxd = 0;
 
       if ( ( room = get_room_index( obj->value[1] ) ) == NULL )
         {
@@ -162,63 +184,67 @@ void pullorpush( Character *ch, OBJ_DATA *obj, bool pull )
         maxd = 5;
 
       randomize_exits( room, maxd );
+
       for ( rch = room->first_person; rch; rch = rch->next_in_room )
         {
           send_to_char( "You hear a loud rumbling sound.\r\n", rch );
           send_to_char( "Something seems different...\r\n", rch );
         }
     }
+
   if ( IS_SET( obj->value[0], TRIG_DOOR ) )
     {
       room = get_room_index( obj->value[1] );
+
       if ( !room )
-        room = obj->in_room;
+	{
+	  room = obj->in_room;
+	}
+
       if ( !room )
         {
           bug( "PullOrPush: obj points to invalid room %d", obj->value[1] );
           return;
         }
+
       if ( IS_SET( obj->value[0], TRIG_D_NORTH ) )
         {
           edir = DIR_NORTH;
           txt = "to the north";
         }
+      else if ( IS_SET( obj->value[0], TRIG_D_SOUTH ) )
+	{
+	  edir = DIR_SOUTH;
+	  txt = "to the south";
+	}
+      else if ( IS_SET( obj->value[0], TRIG_D_EAST ) )
+	{
+	  edir = DIR_EAST;
+	  txt = "to the east";
+	}
+      else if ( IS_SET( obj->value[0], TRIG_D_WEST ) )
+	{
+	  edir = DIR_WEST;
+	  txt = "to the west";
+	}
+      else if ( IS_SET( obj->value[0], TRIG_D_UP ) )
+	{
+	  edir = DIR_UP;
+	  txt = "from above";
+	}
+      else if ( IS_SET( obj->value[0], TRIG_D_DOWN ) )
+	{
+	  edir = DIR_DOWN;
+	  txt = "from below";
+	}
       else
-        if ( IS_SET( obj->value[0], TRIG_D_SOUTH ) )
-          {
-            edir = DIR_SOUTH;
-            txt = "to the south";
-          }
-        else
-          if ( IS_SET( obj->value[0], TRIG_D_EAST ) )
-            {
-              edir = DIR_EAST;
-              txt = "to the east";
-            }
-          else
-            if ( IS_SET( obj->value[0], TRIG_D_WEST ) )
-              {
-                edir = DIR_WEST;
-                txt = "to the west";
-              }
-            else
-              if ( IS_SET( obj->value[0], TRIG_D_UP ) )
-                {
-                  edir = DIR_UP;
-                  txt = "from above";
-                }
-              else
-                if ( IS_SET( obj->value[0], TRIG_D_DOWN ) )
-                  {
-                    edir = DIR_DOWN;
-                    txt = "from below";
-                  }
-                else
-                  {
-                    bug( "PullOrPush: door: no direction flag set.", 0 );
-                    return;
-                  }
+	{
+	  bug( "PullOrPush: door: no direction flag set.", 0 );
+	  return;
+	}
+
       pexit = get_exit( room, edir );
+
       if ( !pexit )
         {
           if ( !IS_SET( obj->value[0], TRIG_PASSAGE ) )
@@ -226,12 +252,15 @@ void pullorpush( Character *ch, OBJ_DATA *obj, bool pull )
               bug( "PullOrPush: obj points to non-exit %d", obj->value[1] );
               return;
             }
+
           to_room = get_room_index( obj->value[2] );
+
           if ( !to_room )
             {
               bug( "PullOrPush: dest points to invalid room %d", obj->value[2] );
               return;
             }
+
           pexit = make_exit( room, to_room, edir );
           pexit->keyword        = STRALLOC( "" );
           pexit->description    = STRALLOC( "" );
@@ -242,57 +271,81 @@ void pullorpush( Character *ch, OBJ_DATA *obj, bool pull )
           act( AT_PLAIN, "A passage opens!", ch, NULL, NULL, TO_ROOM );
           return;
         }
+
       if ( IS_SET( obj->value[0], TRIG_UNLOCK )
-           &&   IS_SET( pexit->exit_info, EX_LOCKED) )
+           && IS_SET( pexit->exit_info, EX_LOCKED) )
         {
           REMOVE_BIT(pexit->exit_info, EX_LOCKED);
           act( AT_PLAIN, "You hear a faint click $T.", ch, NULL, txt, TO_CHAR );
           act( AT_PLAIN, "You hear a faint click $T.", ch, NULL, txt, TO_ROOM );
+
           if ( ( pexit_rev = pexit->rexit ) != NULL
                &&   pexit_rev->to_room == ch->in_room )
             REMOVE_BIT( pexit_rev->exit_info, EX_LOCKED );
+
           return;
         }
+
       if ( IS_SET( obj->value[0], TRIG_LOCK   )
-           &&  !IS_SET( pexit->exit_info, EX_LOCKED) )
+           && !IS_SET( pexit->exit_info, EX_LOCKED) )
         {
           SET_BIT(pexit->exit_info, EX_LOCKED);
           act( AT_PLAIN, "You hear a faint click $T.", ch, NULL, txt, TO_CHAR );
           act( AT_PLAIN, "You hear a faint click $T.", ch, NULL, txt, TO_ROOM );
+
           if ( ( pexit_rev = pexit->rexit ) != NULL
                &&   pexit_rev->to_room == ch->in_room )
             SET_BIT( pexit_rev->exit_info, EX_LOCKED );
+
           return;
         }
+
       if ( IS_SET( obj->value[0], TRIG_OPEN   )
-           &&   IS_SET( pexit->exit_info, EX_CLOSED) )
+           && IS_SET( pexit->exit_info, EX_CLOSED) )
         {
           REMOVE_BIT(pexit->exit_info, EX_CLOSED);
+
           for ( rch = room->first_person; rch; rch = rch->next_in_room )
-            act( AT_ACTION, "The $d opens.", rch, NULL, pexit->keyword, TO_CHAR );
+	    {
+	      act( AT_ACTION, "The $d opens.", rch, NULL, pexit->keyword, TO_CHAR );
+	    }
+
           if ( ( pexit_rev = pexit->rexit ) != NULL
-               &&   pexit_rev->to_room == ch->in_room )
+               && pexit_rev->to_room == ch->in_room )
             {
               REMOVE_BIT( pexit_rev->exit_info, EX_CLOSED );
+
               for ( rch = to_room->first_person; rch; rch = rch->next_in_room )
-                act( AT_ACTION, "The $d opens.", rch, NULL, pexit_rev->keyword, TO_CHAR );
+		{
+		  act( AT_ACTION, "The $d opens.", rch, NULL, pexit_rev->keyword, TO_CHAR );
+		}
             }
+
           check_room_for_traps( ch, trap_door[edir]);
           return;
         }
+
       if ( IS_SET( obj->value[0], TRIG_CLOSE   )
-           &&  !IS_SET( pexit->exit_info, EX_CLOSED) )
+           && !IS_SET( pexit->exit_info, EX_CLOSED) )
         {
           SET_BIT(pexit->exit_info, EX_CLOSED);
+
           for ( rch = room->first_person; rch; rch = rch->next_in_room )
-            act( AT_ACTION, "The $d closes.", rch, NULL, pexit->keyword, TO_CHAR );
+	    {
+	      act( AT_ACTION, "The $d closes.", rch, NULL, pexit->keyword, TO_CHAR );
+	    }
+
           if ( ( pexit_rev = pexit->rexit ) != NULL
-               &&   pexit_rev->to_room == ch->in_room )
+               && pexit_rev->to_room == ch->in_room )
             {
               SET_BIT( pexit_rev->exit_info, EX_CLOSED );
+
               for ( rch = to_room->first_person; rch; rch = rch->next_in_room )
-                act( AT_ACTION, "The $d closes.", rch, NULL, pexit_rev->keyword, TO_CHAR );
+		{
+		  act( AT_ACTION, "The $d closes.", rch, NULL, pexit_rev->keyword, TO_CHAR );
+		}
             }
+
           check_room_for_traps( ch, trap_door[edir]);
           return;
         }
@@ -306,8 +359,8 @@ void actiondesc( Character *ch, OBJ_DATA *obj, void *vo )
   char *srcptr = obj->action_desc;
   char *charptr = charbuf;
   char *roomptr = roombuf;
-  const char *ichar;
-  const char *iroom;
+  const char *ichar = NULL;
+  const char *iroom = NULL;
 
   while ( *srcptr != '\0' )
     {
@@ -407,7 +460,7 @@ bool check_bad_name( const char *name )
       fprintf(fp,"ShitEater~\n");
       fprintf(fp,"$~");
       fclose(fp);
-      return FALSE;
+      return false;
     }
 
   while (!feof(fp))
@@ -417,30 +470,32 @@ bool check_bad_name( const char *name )
       if (is_name(name,ln))
         {
           fclose(fp);
-          return TRUE;
+          return true;
         }
 
       if (is_name("$",ln))
         {
           fclose(fp);
-          return FALSE;
+          return false;
         }
     }
 
   fclose(fp);
-  return FALSE;
+  return false;
 }
 
 int add_bad_name(const char *name)
 {
-  FILE *fp;
+  FILE *fp = NULL;
   const char *ln = NULL;
   fpos_t pos;
 
   if (check_bad_name(name))
-    return 0;
+    {
+      return 0;
+    }
 
-  if ((fp = fopen(BAD_NAME_FILE,"r+")) == NULL)
+  if( !( fp = fopen(BAD_NAME_FILE,"r+") ) )
     {
       bug("Error opening Bad Name file.");
       return -1;
@@ -449,7 +504,9 @@ int add_bad_name(const char *name)
   ln = fread_string_nohash(fp);
 
   while(!is_name("$",ln) && !feof(fp))
-    ln = fread_string_nohash(fp);
+    {
+      ln = fread_string_nohash(fp);
+    }
 
   /* Delete the $~ from the end of the file */
   fgetpos(fp, &pos);

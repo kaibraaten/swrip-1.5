@@ -93,7 +93,7 @@ static void clear_coord( int x, int y )
   map[x][y].vnum = 0;
   map[x][y].depth = 0;
   map[x][y].info = 0;
-  map[x][y].can_see = TRUE;
+  map[x][y].can_see = true;
 }
 
 /* Clear all exits for one room */
