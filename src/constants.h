@@ -987,11 +987,6 @@ typedef enum
 #define OBJ_VNUM_DROID_CORPSE             9
 #define OBJ_VNUM_CORPSE_NPC              10
 #define OBJ_VNUM_CORPSE_PC               11
-#define OBJ_VNUM_SEVERED_HEAD            12
-#define OBJ_VNUM_TORN_HEART              13
-#define OBJ_VNUM_SLICED_ARM              14
-#define OBJ_VNUM_SLICED_LEG              15
-#define OBJ_VNUM_SPILLED_GUTS            16
 #define OBJ_VNUM_BLOODSTAIN              18
 #define OBJ_VNUM_SCRAPS                  19
 
@@ -1008,9 +1003,10 @@ typedef enum
 #define OBJ_VNUM_TRAP                    31
 #define OBJ_VNUM_PORTAL                  32
 
+
 #define OBJ_VNUM_BLACK_POWDER            33
+
 #define OBJ_VNUM_SCROLL_SCRIBING         34
-#define OBJ_VNUM_FLASK_BREWING           35
 #define OBJ_VNUM_NOTE                    36
 
 /* Academy eq */
