@@ -36,38 +36,45 @@ static void get_exit_dir( int dir, int *x, int *y, int xorig, int yorig )
   switch( dir )
     {
       /* North */
-    case 0:
+    case DIR_NORTH:
       *x = xorig;
       *y = yorig - 1;
       break;
+
       /* East */
-    case 1:
+    case DIR_EAST:
       *x = xorig + 1;
       *y = yorig;
       break;
+
       /* South */
-    case 2:
+    case DIR_SOUTH:
       *x = xorig;
       *y = yorig + 1;
       break;
+
       /* West */
-    case 3:
+    case DIR_WEST:
       *x = xorig - 1;
       *y = yorig;
       break;
-    case 6:
+
+    case DIR_NORTHEAST:
       *x = xorig + 1;
       *y = yorig - 1;
       break;
-    case 7:
+
+    case DIR_NORTHWEST:
       *x = xorig - 1;
       *y = yorig - 1;
       break;
-    case 8:
+
+    case DIR_SOUTHEAST:
       *x = xorig + 1;
       *y = yorig + 1;
       break;
-    case 9:
+
+    case DIR_SOUTHWEST:
       *x = xorig - 1;
       *y = yorig + 1;
       break;
@@ -92,13 +99,17 @@ static void clear_coord( int x, int y )
 /* Clear all exits for one room */
 static void clear_room( int x, int y )
 {
-  int dir, exitx, exity;
+  int dir = DIR_INVALID;
 
   /* Cycle through the four directions */
   for( dir = 0; dir < 10; dir++ )
     {
+      int exitx = 0;
+      int exity = 0;
+
       /* Find next coord in this direction */
       get_exit_dir( dir, &exitx, &exity, x, y );
+
       /* If coord is valid, clear it */
       if ( !BOUNDARY( exitx, exity ) )
         clear_coord( exitx, exity );
@@ -109,18 +120,8 @@ static void clear_room( int x, int y )
 static void map_exits( Character *ch, ROOM_INDEX_DATA *pRoom,
 		       int x, int y, int depth )
 {
-  int door;
-  int exitx = 0, exity = 0;
-  int roomx = 0, roomy = 0;
-  Exit *pExit;
-  /*
-    char *buf;
+  int door = 0;
 
-    for ( rch = pRoom->first_person; rch; rch = rch->next_in_room )
-    count++;
-
-    sprintf( buf, "%d", count );
-  */
   /* Setup this coord as a room */
   map[x][y].mapch = 'O';
   map[x][y].vnum = pRoom->vnum;
@@ -135,13 +136,11 @@ static void map_exits( Character *ch, ROOM_INDEX_DATA *pRoom,
   /* This room is done, deal with it's exits */
   for( door = 0; door < 10; door++ )
     {
+      int exitx = 0, exity = 0;
+      int roomx = 0, roomy = 0;
+      Exit *pExit = NULL;
+
       /* Skip if there is no exit in this direction */
-      /*      for (xit = pRoom->first_exit; xit; xit = xit->next )
-              if ( xit->vdir == door )
-              break;
-              if ( !xit )
-              continue;
-      */
       if ( ( pExit = get_exit( pRoom, door ) )== NULL )
         continue;
 
@@ -188,8 +187,8 @@ static void map_exits( Character *ch, ROOM_INDEX_DATA *pRoom,
 
       /* More to do? If so we recurse */
       if ( ( depth < MAXDEPTH ) &&
-           ( ( map[roomx][roomy].vnum == pExit->to_room->vnum ) ||
-             ( map[roomx][roomy].vnum == 0 ) ) )
+           ( ( map[roomx][roomy].vnum == pExit->to_room->vnum )
+             || ( map[roomx][roomy].vnum == 0 ) ) )
         {
           /* Depth increases by one each time */
           map_exits( ch, pExit->to_room, roomx, roomy, depth + 1 );
@@ -201,9 +200,7 @@ static void map_exits( Character *ch, ROOM_INDEX_DATA *pRoom,
 static void show_map( Character *ch, char *text )
 {
   char buf[MAX_STRING_LENGTH * 2];
-  int x, y;
-
-  buf[0] = '\0';
+  int y = 0;
 
   /* Place Marker 2 - referred to later */
 
@@ -215,6 +212,8 @@ static void show_map( Character *ch, char *text )
   /* Write out the main map area with text */
   for( y = 0; y <= MAPY; y++ )
     {
+      int x = 0;
+
       strcat( buf, "|" );
 
       for( x = 0; x <= MAPX; x++ )
@@ -243,7 +242,7 @@ void draw_map( Character *ch, char *desc )
 {
   int x, y;
   static char buf[MAX_STRING_LENGTH];
-  OBJ_DATA *device;
+  OBJ_DATA *device = NULL;
 
   if ( ( device = get_eq_char( ch, WEAR_HOLD ) ) == NULL )
     {
