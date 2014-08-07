@@ -992,7 +992,6 @@ typedef enum
 #define OBJ_VNUM_SLICED_ARM              14
 #define OBJ_VNUM_SLICED_LEG              15
 #define OBJ_VNUM_SPILLED_GUTS            16
-#define OBJ_VNUM_BLOOD                   17
 #define OBJ_VNUM_BLOODSTAIN              18
 #define OBJ_VNUM_SCRAPS                  19
 

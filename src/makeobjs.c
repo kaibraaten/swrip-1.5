@@ -234,14 +234,6 @@ void make_corpse( Character *ch )
   obj_to_room( corpse, ch->in_room );
 }
 
-void make_blood( Character *ch )
-{
-  OBJ_DATA *obj = create_object( get_obj_index( OBJ_VNUM_BLOOD ), 0 );
-  obj->timer = number_range( 2, 4 );
-  obj->value[1] = number_range( 3, UMIN(5, ch->top_level) );
-  obj_to_room( obj, ch->in_room );
-}
-
 void make_bloodstain( Character *ch )
 {
   OBJ_DATA *obj = create_object( get_obj_index( OBJ_VNUM_BLOODSTAIN ), 0 );
