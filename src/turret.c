@@ -60,7 +60,7 @@ bool is_turret_ready( const TURRET_DATA *turret )
 
 bool is_turret_recharging( const TURRET_DATA *turret )
 {
-  return turret->weapon_state > turret->owner->sclass;
+  return turret->weapon_state > (int)turret->owner->sclass;
 }
 
 void fire_turret( TURRET_DATA *turret )

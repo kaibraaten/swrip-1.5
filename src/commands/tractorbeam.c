@@ -108,20 +108,21 @@ void do_tractorbeam(Character *ch, char *argument )
 
       if ( !str_cmp(ship->owner, "Trainer") && str_cmp(target->owner, "Trainer") )
         {
-          send_to_char("&RTrainers can only target other trainers!!\r\n",ch);
+          send_to_char("&RTrainers can only target other trainers!\r\n",ch);
           return;
         }
       if ( str_cmp(ship->owner, "Trainer") && !str_cmp(target->owner, "Trainer") )
         {
-          send_to_char("&ROnly trainers can target other trainers!!\r\n",ch);
+          send_to_char("&ROnly trainers can target other trainers!\r\n",ch);
           return;
         }
 
-      if ( ship->energy < (25 + 25*target->sclass) )
+      if ( ship->energy < (25 + 25 * ((int)target->sclass) ) )
         {
 	  send_to_char("&RTheres not enough fuel!\r\n",ch);
           return;
         }
+
       if( ship->sclass <= SHIP_PLATFORM)
         {
           if ( ship_distance_to_ship( ship, target ) > 100+ship->tractorbeam )

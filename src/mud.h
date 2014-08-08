@@ -333,15 +333,15 @@ struct space_data
 
   struct
   {
-    char *locationa;
-    char *locationb;
-    char *locationc;
-    int   doca;
-    int   docb;
-    int   docc;
-    bool  seca;
-    bool  secb;
-    bool  secc;
+    char  *locationa;
+    char  *locationb;
+    char  *locationc;
+    vnum_t doca;
+    vnum_t docb;
+    vnum_t docc;
+    bool   seca;
+    bool   secb;
+    bool   secc;
   } landing_site;
 };
 
@@ -456,7 +456,7 @@ struct ship_data
   char            *copilot;
   char            *dest;
   short            type;
-  short            sclass;
+  ShipClass        sclass;
   short            comm;
   short            sensor;
   short            astro_array;

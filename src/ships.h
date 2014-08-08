@@ -47,7 +47,7 @@ void destroy_ship( SHIP_DATA *ship , Character *ch );
 void ship_to_spaceobject( SHIP_DATA *ship, SPACE_DATA *spaceobject );
 void ship_from_spaceobject( SHIP_DATA *ship, SPACE_DATA *spaceobject);
 SHIP_DATA *ship_in_room( ROOM_INDEX_DATA *room, const char *name );
-void transship( SHIP_DATA *ship , int destination );
+void transship( SHIP_DATA *ship , vnum_t destination );
 void dockship( Character *ch, SHIP_DATA *ship );
 bool is_autoflying( const SHIP_DATA *ship );
 bool check_pilot( Character *ch , SHIP_DATA *ship );

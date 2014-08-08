@@ -970,7 +970,7 @@ void edit_reset( Character *ch, char *argument, Area *pArea, ROOM_INDEX_DATA *aR
 
   if ( !str_cmp(arg, "random") )
     {
-      dir_types direction;
+      DirectionType direction = DIR_INVALID;
 
       argument = one_argument(argument, arg);
       direction = get_dir( arg );

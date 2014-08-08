@@ -479,7 +479,7 @@ typedef enum
     WALKER,
     SHIP_TRAINER,
     SHIP_DEBRIS
-  } ship_classes;
+  } ShipClass;
 
 typedef enum
   {
@@ -1470,7 +1470,7 @@ typedef enum
     DIR_SOUTHEAST, /*  8 */
     DIR_SOUTHWEST, /*  9 */
     DIR_SOMEWHERE  /* 10 */
-  } dir_types;
+  } DirectionType;
 
 #define MAX_DIR     DIR_SOUTHWEST   /* max for normal walking */
 #define DIR_PORTAL  DIR_SOMEWHERE   /* portal direction       */

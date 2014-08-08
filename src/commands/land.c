@@ -92,7 +92,7 @@ void do_land( Character *ch, char *argument )
       return;
     }
 
-  if ( ship->energy < (25 + 25*ship->sclass) )
+  if ( ship->energy < (25 + 25 * ((int)ship->sclass) ) )
     {
       send_to_char("&RTheres not enough fuel!\r\n",ch);
       return;

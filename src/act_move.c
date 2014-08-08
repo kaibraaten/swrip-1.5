@@ -911,18 +911,51 @@ ch_ret move_char( Character *ch, Exit *pexit, int fall )
           }
       switch( door )
         {
-        default: dtxt = "somewhere";    break;
-        case 0:  dtxt = "the south";    break;
-        case 1:  dtxt = "the west";     break;
-        case 2:  dtxt = "the north";    break;
-        case 3:  dtxt = "the east";     break;
-        case 4:  dtxt = "below";                break;
-        case 5:  dtxt = "above";                break;
-        case 6:  dtxt = "the south-west";       break;
-        case 7:  dtxt = "the south-east";       break;
-        case 8:  dtxt = "the north-west";       break;
-        case 9:  dtxt = "the north-east";       break;
+        default:
+	  dtxt = "somewhere";
+	  break;
+
+        case DIR_NORTH:
+	  dtxt = "the south";
+	  break;
+
+        case DIR_EAST:
+	  dtxt = "the west";
+	  break;
+
+        case DIR_SOUTH:
+	  dtxt = "the north";
+	  break;
+
+        case DIR_WEST:
+	  dtxt = "the east";
+	  break;
+
+        case DIR_UP:
+	  dtxt = "below";
+	  break;
+
+        case DIR_DOWN:
+	  dtxt = "above";
+	  break;
+
+        case DIR_NORTHEAST:
+	  dtxt = "the south-west";
+	  break;
+
+        case DIR_NORTHWEST:
+	  dtxt = "the south-east";
+	  break;
+
+        case DIR_SOUTHEAST:
+	  dtxt = "the north-west";
+	  break;
+
+        case DIR_SOUTHWEST:
+	  dtxt = "the north-east";
+	  break;
         }
+
       if ( ch->mount )
         {
           sprintf( buf, "$n %s from %s upon $N.", txt, dtxt );

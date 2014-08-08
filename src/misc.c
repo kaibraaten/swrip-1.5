@@ -61,7 +61,7 @@ void pullorpush( Character *ch, OBJ_DATA *obj, bool pull )
   Character *rch = NULL;
   ROOM_INDEX_DATA *room = NULL,  *to_room = NULL;
   Exit *pexit = NULL, *pexit_rev = NULL;
-  dir_types edir = DIR_INVALID;
+  DirectionType edir = DIR_INVALID;
   char *txt = NULL;
   bool isup = IS_SET( obj->value[0], TRIG_UP );
 

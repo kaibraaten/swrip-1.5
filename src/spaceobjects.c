@@ -148,9 +148,9 @@ void save_spaceobject( SPACE_DATA *spaceobject )
       fprintf( fp, "Locationa      %s~\n", spaceobject->landing_site.locationa );
       fprintf( fp, "Locationb      %s~\n", spaceobject->landing_site.locationb );
       fprintf( fp, "Locationc      %s~\n", spaceobject->landing_site.locationc );
-      fprintf( fp, "Doca          %d\n",   spaceobject->landing_site.doca      );
-      fprintf( fp, "Docb          %d\n",   spaceobject->landing_site.docb      );
-      fprintf( fp, "Docc          %d\n",   spaceobject->landing_site.docc      );
+      fprintf( fp, "Doca          %ld\n",   spaceobject->landing_site.doca      );
+      fprintf( fp, "Docb          %ld\n",   spaceobject->landing_site.docb      );
+      fprintf( fp, "Docc          %ld\n",   spaceobject->landing_site.docc      );
       fprintf( fp, "Seca          %d\n",   spaceobject->landing_site.seca      );
       fprintf( fp, "Secb          %d\n",   spaceobject->landing_site.secb      );
       fprintf( fp, "Secc          %d\n",   spaceobject->landing_site.secc      );
