@@ -1,8 +1,8 @@
-/***************************************************************************
- *           	Star Wars: Storm of Vengeance Alpha 0.1			   *
+/****************************************************************************
+ *           	Star Wars: Storm of Vengeance Alpha 0.1                     *
  *==========================================================================*
  * Sw-Storm Alpha 0.1 Code Changes by Iczer/K.lopes w/ help from Maelfius   *
- * Additional Code within go to their respective owners.			   *
+ * Additional Code within go to their respective owners.                    *
  *==========================================================================*
  * Star Wars Reality Code Additions and changes from the Smaug Code         *
  * copyright (c) 1997 by Sean Cooper                                        *
@@ -18,8 +18,9 @@
  * Original Diku Mud copyright (C) 1990, 1991 by Sebastian Hammer,          *
  * Michael Seifert, Hans Henrik St{rfeldt, Tom Madsen, and Katja Nyboe.     *
  *==========================================================================*
- *                       Warmboot/Copyover Module			   *
+ *                       Warmboot/Copyover Module                           *
  ****************************************************************************/
+
 /* Origional Copyover Code by Erwin S. Andreasen http://www.andreasen.org/ */
 
 #ifdef __STRICT_ANSI__

@@ -1,4 +1,4 @@
-/***************************************************************************
+/****************************************************************************
  *                   Star Wars: Rise in Power MUD Codebase                  *
  *--------------------------------------------------------------------------*
  * SWRiP Code Additions and changes from the SWReality and Smaug Code       *
@@ -16,13 +16,13 @@
  * Merc 2.1 Diku Mud improvments copyright (C) 1992, 1993 by Michael        *
  * Chastain, Michael Quan, and Mitchell Tse.                                *
  * Original Diku Mud copyright (C) 1990, 1991 by Sebastian Hammer,          *
- * Michael Seifert, Hans Henrik St{rfeldt, Tom Madsen, and Katja Nyboe.     *
+ * Michael Seifert, Hans Henrik Staerfeldt, Tom Madsen, and Katja Nyboe.    *
  * ------------------------------------------------------------------------ *
  *  The MUDprograms are heavily based on the original MOBprogram code that  *
- *  was written by N'Atas-ha.                                              *
+ *  was written by N'Atas-ha.                                               *
  *  Much has been added, including the capability to put a "program" on     *
  *  rooms and objects, not to mention many more triggers and ifchecks, as   *
- *  well as "script" support.                                              *
+ *  well as "script" support.                                               *
  *                                                                          *
  *  Error reporting has been changed to specify whether the offending       *
  *  program is on a mob, a room or and object, along with the vnum.         *

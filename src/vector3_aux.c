@@ -36,7 +36,7 @@
  *   Vector3 head; // heading/trajectory
  * };
  *
- * Don't forget to initialze the structures before use:
+ * Don't forget to initialize the structures before use:
  * vector_init( &ship->pos );
  * vector_init( &ship->head );
  *

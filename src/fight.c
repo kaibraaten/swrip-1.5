@@ -1,4 +1,4 @@
-/***************************************************************************
+/****************************************************************************
  *                   Star Wars: Rise in Power MUD Codebase                  *
  *--------------------------------------------------------------------------*
  * SWRiP Code Additions and changes from the SWReality and Smaug Code       *
@@ -16,9 +16,7 @@
  * Merc 2.1 Diku Mud improvments copyright (C) 1992, 1993 by Michael        *
  * Chastain, Michael Quan, and Mitchell Tse.                                *
  * Original Diku Mud copyright (C) 1990, 1991 by Sebastian Hammer,          *
- * Michael Seifert, Hans Henrik St{rfeldt, Tom Madsen, and Katja Nyboe.     *
- * ------------------------------------------------------------------------ *
- *                          Battle & death module                          *
+ * Michael Seifert, Hans Henrik Staerfeldt, Tom Madsen, and Katja Nyboe.    *
  ****************************************************************************/
 
 #include <string.h>
@@ -27,18 +25,18 @@
 #include "ships.h"
 #include "character.h"
 
-extern char             lastplayercmd[MAX_INPUT_LENGTH];
-extern Character *      gch_prev;
+extern char lastplayercmd[MAX_INPUT_LENGTH];
+extern Character *gch_prev;
 
 /*
  * Local functions.
  */
-void    dam_message( Character *ch, Character *victim, int dam, int dt );
-void    group_gain( Character *ch, Character *victim );
-int     align_compute( Character *gch, Character *victim );
-int     obj_hitroll( OBJ_DATA *obj );
-bool    get_cover( Character *ch );
-bool    dual_flip = false;
+void dam_message( Character *ch, Character *victim, int dam, int dt );
+void group_gain( Character *ch, Character *victim );
+int align_compute( Character *gch, Character *victim );
+int obj_hitroll( OBJ_DATA *obj );
+bool get_cover( Character *ch );
+bool dual_flip = false;
 
 /*
  * Check to see if weapon is poisoned.

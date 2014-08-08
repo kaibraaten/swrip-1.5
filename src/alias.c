@@ -1,4 +1,4 @@
-/***************************************************************************
+/****************************************************************************
  *                   Star Wars: Rise in Power MUD Codebase                  *
  *--------------------------------------------------------------------------*
  * SWRiP Code Additions and changes from the SWReality and Smaug Code       *
@@ -14,15 +14,16 @@
  * Merc 2.1 Diku Mud improvments copyright (C) 1992, 1993 by Michael        *
  * Chastain, Michael Quan, and Mitchell Tse.                                *
  * Original Diku Mud copyright (C) 1990, 1991 by Sebastian Hammer,          *
- * Michael Seifert, Hans Henrik St{rfeldt, Tom Madsen, and Katja Nyboe.     *
+ * Michael Seifert, Hans Henrik Staerfeldt, Tom Madsen, and Katja Nyboe.    *
  * ------------------------------------------------------------------------ *
  *                        Alias module                                      *
  ****************************************************************************/
+
 /******************************************************
             Desolation of the Dragon MUD II
       (C) 1997, 1998  Jesse DeFer and Heath Leach
  http://dotd.mudservices.com  dotd@dotd.mudservices.com
-******************************************************/
+ ******************************************************/
 
 #include <string.h>
 #include "mud.h"
