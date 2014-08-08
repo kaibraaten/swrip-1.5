@@ -2742,7 +2742,7 @@ extern "C" {
   void load_storerooms( void );
 
   /* shops.c */
-  int get_cost_quit( Character *ch );
+  int get_cost_quit( const Character *ch );
 
   /* special.c */
   SPEC_FUN *spec_lookup( const char *name );
