@@ -37,7 +37,6 @@
 void skill_notfound( Character *ch, char *argument )
 {
   send_to_char( "Huh?\r\n", ch );
-  return;
 }
 
 extern char *spell_target_name;       /* from magic.c */
@@ -47,13 +46,13 @@ extern char *spell_target_name;       /* from magic.c */
  * Each different section of the skill table is sorted alphabetically
  * Only match skills player knows                               -Thoric
  */
-bool check_skill( Character *ch, char *command, char *argument )
+bool check_skill( Character *ch, const char *command, char *argument )
 {
-  int sn;
+  int sn = 0;
   int first = gsn_first_skill;
   int top   = gsn_first_weapon-1;
   struct timeval time_used;
-  int mana;
+  int mana = 0;
 
   /* bsearch for the skill */
   for (;;)
@@ -65,25 +64,36 @@ bool check_skill( Character *ch, char *command, char *argument )
            &&  (skill_table[sn]->skill_fun || skill_table[sn]->spell_fun != spell_null)
            &&  (is_npc(ch)
                 ||  ( ch->pcdata->learned[sn] > 0 )) )
-        break;
+	{
+	  break;
+	}
+
       if (first >= top)
-        return FALSE;
+	{
+	  return false;
+	}
 
       if (strcasecmp( command, skill_table[sn]->name) < 1)
-        top = sn - 1;
+	{
+	  top = sn - 1;
+	}
       else
-        first = sn + 1;
+	{
+	  first = sn + 1;
+	}
     }
 
   if ( !check_pos( ch, skill_table[sn]->minimum_position ) )
-    return TRUE;
+    {
+      return true;
+    }
 
   if ( is_npc(ch)
-       &&  (is_affected_by( ch, AFF_CHARM ) || is_affected_by( ch, AFF_POSSESS )) )
+       && (is_affected_by( ch, AFF_CHARM ) || is_affected_by( ch, AFF_POSSESS )) )
     {
       send_to_char( "For some reason, you seem unable to perform that...\r\n", ch );
       act( AT_GREY,"$n looks around.", ch, NULL, NULL, TO_ROOM );
-      return TRUE;
+      return true;
     }
 
   /* check if mana is required */
@@ -94,7 +104,7 @@ bool check_skill( Character *ch, char *command, char *argument )
       if ( !is_npc(ch) && ch->mana < mana )
         {
           send_to_char( "You need to rest before using the Force any more.\r\n", ch );
-          return TRUE;
+          return true;
         }
     }
   else
@@ -119,35 +129,42 @@ bool check_skill( Character *ch, char *command, char *argument )
         default:
           bug( "Check_skill: bad target for sn %d.", sn );
           send_to_char( "Something went wrong...\r\n", ch );
-          return TRUE;
+          return true;
 
         case TAR_IGNORE:
           vo = NULL;
           if ( argument[0] == '\0' )
             {
               if ( (victim=who_fighting(ch)) != NULL )
-                spell_target_name = victim->name;
+		{
+		  spell_target_name = victim->name;
+		}
             }
           else
-            spell_target_name = argument;
+	    {
+	      spell_target_name = argument;
+	    }
           break;
 
         case TAR_CHAR_OFFENSIVE:
           if ( argument[0] == '\0'
-               &&  (victim=who_fighting(ch)) == NULL )
+               && (victim=who_fighting(ch)) == NULL )
             {
               ch_printf( ch, "%s who?\r\n", capitalize( skill_table[sn]->name ) );
-              return TRUE;
+              return true;
             }
-          else
-            if ( argument[0] != '\0'
-                 &&  (victim=get_char_room(ch, argument)) == NULL )
-              {
-                send_to_char( "They aren't here.\r\n", ch );
-                return TRUE;
-              }
+          else  if ( argument[0] != '\0'
+		     && (victim=get_char_room(ch, argument)) == NULL )
+	    {
+	      send_to_char( "They aren't here.\r\n", ch );
+	      return true;
+	    }
+
           if ( is_safe( ch, victim ) )
-            return TRUE;
+	    {
+	      return true;
+	    }
+
           vo = (void *) victim;
           break;
 
@@ -156,10 +173,14 @@ bool check_skill( Character *ch, char *command, char *argument )
                &&  (victim=get_char_room(ch, argument)) == NULL )
             {
               send_to_char( "They aren't here.\r\n", ch );
-              return TRUE;
+              return true;
             }
+
           if ( !victim )
-            victim = ch;
+	    {
+	      victim = ch;
+	    }
+
           vo = (void *) victim;
           break;
 
@@ -171,40 +192,50 @@ bool check_skill( Character *ch, char *command, char *argument )
           if ( (obj=get_obj_carry(ch, argument)) == NULL )
             {
               send_to_char( "You can't find that.\r\n", ch );
-              return TRUE;
+              return true;
             }
+
           vo = (void *) obj;
           break;
         }
 
       /* waitstate */
       set_wait_state( ch, skill_table[sn]->beats );
+
       /* check for failure */
       if ( (number_percent( ) + skill_table[sn]->difficulty * 5)
            > (is_npc(ch) ? 75 : ch->pcdata->learned[sn]) )
         {
-          failed_casting( skill_table[sn], ch, (Character*)vo, obj );
+          failed_casting( skill_table[sn], ch, vo, obj );
           learn_from_failure( ch, sn );
+
           if ( mana )
             {
               ch->mana -= mana/2;
             }
-          return TRUE;
+
+          return true;
         }
+
       if ( mana )
         {
           ch->mana -= mana;
         }
+
       start_timer(&time_used);
-      retcode = (*skill_table[sn]->spell_fun) ( sn, ch->top_level, ch, vo );
+      retcode = skill_table[sn]->spell_fun( sn, ch->top_level, ch, vo );
       end_timer(&time_used);
       update_userec(&time_used, &skill_table[sn]->userec);
 
       if ( retcode == rCHAR_DIED || retcode == rERROR )
-        return TRUE;
+	{
+	  return true;
+	}
 
       if ( char_died(ch) )
-        return TRUE;
+	{
+	  return true;
+	}
 
       if ( retcode == rSPELL_FAILED )
         {
@@ -212,18 +243,21 @@ bool check_skill( Character *ch, char *command, char *argument )
           retcode = rNONE;
         }
       else
-        learn_from_success( ch, sn );
+	{
+	  learn_from_success( ch, sn );
+	}
 
       if ( skill_table[sn]->target == TAR_CHAR_OFFENSIVE
-           &&   victim != ch
-           &&  !char_died(victim) )
+           && victim != ch
+           && !char_died(victim) )
         {
-          Character *vch;
-          Character *vch_next;
+          Character *vch = NULL;
+          Character *vch_next = NULL;
 
           for ( vch = ch->in_room->first_person; vch; vch = vch_next )
             {
               vch_next = vch->next_in_room;
+
               if ( victim == vch && !victim->fighting && victim->master != ch )
                 {
                   retcode = multi_hit( victim, ch, TYPE_UNDEFINED );
@@ -231,47 +265,66 @@ bool check_skill( Character *ch, char *command, char *argument )
                 }
             }
         }
-      return TRUE;
+
+      return true;
     }
 
   if ( mana )
     {
       ch->mana -= mana;
     }
+
   ch->prev_cmd = ch->last_cmd;    /* haus, for automapping */
   ch->last_cmd = skill_table[sn]->skill_fun;
   start_timer(&time_used);
-  (*skill_table[sn]->skill_fun) ( ch, argument );
+  skill_table[sn]->skill_fun( ch, argument );
   end_timer(&time_used);
   update_userec(&time_used, &skill_table[sn]->userec);
 
-  return TRUE;
+  return true;
 }
 
 void learn_from_success( Character *ch, int sn )
 {
-  int adept, gain, sklvl, learn, percent, learn_chance;
+  int adept = 0;
+  int gain = 0;
+  int sklvl = 0;
+  int learn = 0;
+  int percent = 0;
+  int learn_chance = 0;
 
   if ( is_npc(ch) || ch->pcdata->learned[sn] <= 0 )
-    return;
+    {
+      return;
+    }
 
   if ( sn == skill_lookup( "meditate" ) && !is_jedi( ch ) )
-    if ( ch->pcdata->learned[sn] < 50 )
-      gain_exp( ch, FORCE_ABILITY, 25 );
+    {
+      if ( ch->pcdata->learned[sn] < 50 )
+	{
+	  gain_exp( ch, FORCE_ABILITY, 25 );
+	}
+    }
 
   sklvl = skill_table[sn]->min_level;
 
   if (skill_table[sn]->guild < 0 || skill_table[sn]->guild >= MAX_ABILITY )
-    return;
+    {
+      return;
+    }
 
   adept = ( get_level(ch, skill_table[sn]->guild ) - skill_table[sn]->min_level )* 5 + 50;
   adept = UMIN(adept, 100);
 
   if ( ch->pcdata->learned[sn] >= adept )
-    return;
+    {
+      return;
+    }
 
   if ( sklvl == 0 || sklvl > get_level( ch, skill_table[sn]->guild ) )
-    sklvl = get_level( ch, skill_table[sn]->guild );
+    {
+      sklvl = get_level( ch, skill_table[sn]->guild );
+    }
 
   if ( ch->pcdata->learned[sn] < 100 )
     {
@@ -279,13 +332,20 @@ void learn_from_success( Character *ch, int sn )
       percent = number_percent();
 
       if ( percent >= learn_chance )
-        learn = 2;
+	{
+	  learn = 2;
+	}
+      else if ( learn_chance - percent > 25 )
+	{
+	  return;
+	}
       else
-        if ( learn_chance - percent > 25 )
-          return;
-        else
-          learn = 1;
+	{
+	  learn = 1;
+	}
+
       ch->pcdata->learned[sn] = UMIN( adept, ch->pcdata->learned[sn] + learn );
+
       if ( ch->pcdata->learned[sn] == 100 )      /* fully learned! */
         {
           gain = 50 * sklvl;
@@ -296,6 +356,7 @@ void learn_from_success( Character *ch, int sn )
       else
         {
           gain = 10 * sklvl;
+
           if ( !ch->fighting && sn != gsn_hide && sn != gsn_sneak )
             {
               set_char_color( AT_WHITE, ch );
@@ -320,22 +381,29 @@ void learn_from_failure( Character *ch, int sn )
  */
 void disarm( Character *ch, Character *victim )
 {
-  OBJ_DATA *obj, *tmpobj;
+  OBJ_DATA *obj = NULL;
+  OBJ_DATA *tmpobj = NULL;
 
   if ( ( obj = get_eq_char( victim, WEAR_WIELD ) ) == NULL )
-    return;
+    {
+      return;
+    }
 
   if ( ( tmpobj = get_eq_char( victim, WEAR_DUAL_WIELD ) ) != NULL
-       &&     number_bits( 1 ) == 0 )
-    obj = tmpobj;
+       && number_bits( 1 ) == 0 )
+    {
+      obj = tmpobj;
+    }
 
-  if ( get_eq_char( ch, WEAR_WIELD ) == NULL && number_bits( 1 ) == 0 )
+  if ( get_eq_char( ch, WEAR_WIELD ) == NULL
+       && number_bits( 1 ) == 0 )
     {
       learn_from_failure( ch, gsn_disarm );
       return;
     }
 
-  if ( is_npc( ch ) && !can_see_obj( ch, obj ) && number_bits( 1 ) == 0)
+  if ( is_npc( ch ) && !can_see_obj( ch, obj )
+       && number_bits( 1 ) == 0)
     {
       learn_from_failure( ch, gsn_disarm );
       return;
@@ -354,12 +422,12 @@ void disarm( Character *ch, Character *victim )
 
   if ( obj == get_eq_char( victim, WEAR_WIELD )
        &&  (tmpobj = get_eq_char( victim, WEAR_DUAL_WIELD)) != NULL )
-    tmpobj->wear_loc = WEAR_WIELD;
+    {
+      tmpobj->wear_loc = WEAR_WIELD;
+    }
 
   obj_from_char( obj );
   obj_to_room( obj, victim->in_room );
-
-  return;
 }
 
 /*
@@ -370,12 +438,18 @@ void trip( Character *ch, Character *victim )
 {
   if ( is_affected_by( victim, AFF_FLYING )
        ||   is_affected_by( victim, AFF_FLOATING ) )
-    return;
+    {
+      return;
+    }
+
   if ( victim->mount )
     {
       if ( is_affected_by( victim->mount, AFF_FLYING )
-           ||   is_affected_by( victim->mount, AFF_FLOATING ) )
-        return;
+           || is_affected_by( victim->mount, AFF_FLOATING ) )
+	{
+	  return;
+	}
+
       act( AT_SKILL, "$n trips your mount and you fall off!", ch, NULL, victim, TO_VICT    );
       act( AT_SKILL, "You trip $N's mount and $N falls off!", ch, NULL, victim, TO_CHAR    );
       act( AT_SKILL, "$n trips $N's mount and $N falls off!", ch, NULL, victim, TO_NOTVICT );
@@ -386,6 +460,7 @@ void trip( Character *ch, Character *victim )
       victim->position = POS_RESTING;
       return;
     }
+
   if ( victim->wait == 0 )
     {
       act( AT_SKILL, "$n trips you and you go down!", ch, NULL, victim, TO_VICT    );
@@ -396,36 +471,35 @@ void trip( Character *ch, Character *victim )
       set_wait_state( victim, 2 * PULSE_VIOLENCE );
       victim->position = POS_RESTING;
     }
-
-  return;
 }
 
-bool permsneak( Character *ch )
+bool permsneak( const Character *ch )
 {
   switch(ch->race)
     {
     case RACE_SHISTAVANEN:
-      return TRUE;
-      break;
+      return true;
+
     case RACE_DEFEL:
-      return TRUE;
-      break;
+      return true;
+
     case RACE_BOTHAN:
-      return TRUE;
-      break;
+      return true;
+
     case RACE_TOGARIAN:
-      return TRUE;
-      break;
+      return true;
+
     case RACE_DUG:
-      return TRUE;
-      break;
+      return true;
+
     case RACE_COYNITE:
-      return TRUE;
-      break;
+      return true;
+
     default:
-      return FALSE;
+      return false;
     }
-  return FALSE;
+
+  return false;
 }
 
 /*
@@ -433,14 +507,18 @@ bool permsneak( Character *ch )
  */
 bool check_parry( Character *ch, Character *victim )
 {
-  int chances;
-  OBJ_DATA *wield;
+  int chances = 0;
+  OBJ_DATA *wield = NULL;
 
   if ( !is_awake(victim) )
-    return FALSE;
+    {
+      return false;
+    }
 
   if ( is_npc(victim) && !IS_SET(victim->defenses, DFND_PARRY) )
-    return FALSE;
+    {
+      return false;
+    }
 
   if ( is_npc(victim) )
     {
@@ -453,8 +531,11 @@ bool check_parry( Character *ch, Character *victim )
         {
           if ( ( wield = get_eq_char( victim, WEAR_DUAL_WIELD ) ) == NULL ||
                ( wield->value[3] != WEAPON_LIGHTSABER ) )
-            return FALSE;
+	    {
+	      return false;
+	    }
         }
+
       chances = (int) (victim->pcdata->learned[gsn_parry] );
     }
 
@@ -463,72 +544,95 @@ bool check_parry( Character *ch, Character *victim )
   if ( number_range( 1, 100 ) > chances )
     {
       learn_from_failure( victim, gsn_parry );
-      return FALSE;
+      return false;
     }
+
   if ( !is_npc(victim)
        && !IS_SET( victim->pcdata->flags, PCFLAG_GAG) ) /*SB*/
-    act( AT_SKILL, "You parry $n's attack.",  ch, NULL, victim, TO_VICT    );
+    {
+      act( AT_SKILL, "You parry $n's attack.",  ch, NULL, victim, TO_VICT    );
+    }
 
   if ( !is_npc(ch)
        && !IS_SET( ch->pcdata->flags, PCFLAG_GAG) )  /* SB */
-    act( AT_SKILL, "$N parries your attack.", ch, NULL, victim, TO_CHAR    );
+    {
+      act( AT_SKILL, "$N parries your attack.", ch, NULL, victim, TO_CHAR    );
+    }
 
   learn_from_success( victim, gsn_parry );
-  return TRUE;
+  return true;
 }
-
-
 
 /*
  * Check for dodge.
  */
 bool check_dodge( Character *ch, Character *victim )
 {
-  int chances;
+  int chances = 0;
 
   if ( !is_awake(victim) )
-    return FALSE;
+    {
+      return false;
+    }
 
   if ( is_npc(victim) && !IS_SET(victim->defenses, DFND_DODGE) )
-    return FALSE;
+    {
+      return false;
+    }
 
   if ( is_npc(victim) )
-    chances  = UMIN( 60, victim->top_level );
+    {
+      chances  = UMIN( 60, victim->top_level );
+    }
   else
-    chances  = (int) (victim->pcdata->learned[gsn_dodge] / 2);
+    {
+      chances  = (int) (victim->pcdata->learned[gsn_dodge] / 2);
+    }
 
   chances += 5*(get_curr_dex(victim) - 20);
 
   if ( number_range( 1, 100 ) > chances )
     {
       learn_from_failure( victim, gsn_dodge );
-      return FALSE;
+      return false;
     }
 
   if ( !is_npc(victim) && !IS_SET( victim->pcdata->flags, PCFLAG_GAG) )
-    act( AT_SKILL, "You dodge $n's attack.", ch, NULL, victim, TO_VICT    );
+    {
+      act( AT_SKILL, "You dodge $n's attack.", ch, NULL, victim, TO_VICT    );
+    }
 
   if ( !is_npc(ch) && !IS_SET( ch->pcdata->flags, PCFLAG_GAG) )
-    act( AT_SKILL, "$N dodges your attack.", ch, NULL, victim, TO_CHAR    );
+    {
+      act( AT_SKILL, "$N dodges your attack.", ch, NULL, victim, TO_CHAR    );
+    }
 
   learn_from_success( victim, gsn_dodge );
-  return TRUE;
+  return true;
 }
 
 bool check_grip( Character *ch, Character *victim )
 {
-  int grip_chance;
+  int grip_chance = 0;
 
   if ( !is_awake(victim) )
-    return FALSE;
+    {
+      return false;
+    }
 
   if ( is_npc(victim) && !IS_SET(victim->defenses, DFND_GRIP) )
-    return FALSE;
+    {
+      return false;
+    }
 
   if ( is_npc(victim) )
-    grip_chance  = UMIN( 60, 2 * victim->top_level );
+    {
+      grip_chance  = UMIN( 60, 2 * victim->top_level );
+    }
   else
-    grip_chance  = (int) (victim->pcdata->learned[gsn_grip] / 2);
+    {
+      grip_chance  = (int) (victim->pcdata->learned[gsn_grip] / 2);
+    }
 
   /* Consider luck as a factor */
   grip_chance += (2 * (get_curr_lck(victim) - 13 ) );
@@ -536,11 +640,12 @@ bool check_grip( Character *ch, Character *victim )
   if ( number_percent( ) >= grip_chance + victim->top_level - ch->top_level )
     {
       learn_from_failure( victim, gsn_grip );
-      return FALSE;
+      return false;
     }
+
   act( AT_SKILL, "You evade $n's attempt to disarm you.", ch, NULL, victim, TO_VICT    );
   act( AT_SKILL, "$N holds $S weapon strongly, and is not disarmed.",
        ch, NULL, victim, TO_CHAR    );
   learn_from_success( victim, gsn_grip );
-  return TRUE;
+  return true;
 }
