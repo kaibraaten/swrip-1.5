@@ -25,13 +25,15 @@
 
 void add_reinforcements( Character *ch )
 {
-  ProtoMobile  * pMobIndex;
-  OBJ_DATA        * blaster;
-  OBJ_INDEX_DATA  * pObjIndex;
+  ProtoMobile *pMobIndex = NULL;
+  OBJ_DATA *blaster = NULL;
+  OBJ_INDEX_DATA *pObjIndex = NULL;
   int multiplier = 1;
 
   if ( ( pMobIndex = get_mob_index( ch->backup_mob ) ) == NULL )
-    return;
+    {
+      return;
+    }
 
   bug( "%s just posted a guard on %ld!", ch->name, ch->in_room ? ch->in_room->vnum : 0 );
 
@@ -42,26 +44,31 @@ void add_reinforcements( Character *ch )
        ch->backup_mob == MOB_VNUM_NR_FORCES   ||
        ch->backup_mob == MOB_VNUM_MERC_FORCES       )
     {
-      Character * mob[3];
-      int         mob_cnt;
+      Character *mob[3];
+      int mob_cnt = 0;
 
       if ( ch->backup_mob == MOB_VNUM_IMP_FORCES ||
            ch->backup_mob == MOB_VNUM_NR_FORCES   ||
            ch->backup_mob == MOB_VNUM_MERC_FORCES )
-        { multiplier = 2; }
-
+        {
+	  multiplier = 2;
+	}
 
       send_to_char( "Your reinforcements have arrived.\r\n", ch );
+
       for ( mob_cnt = 0 ; mob_cnt < 3 ; mob_cnt++ )
         {
-          int ability;
+          int ability = 0;
+
           mob[mob_cnt] = create_mobile( pMobIndex );
           char_to_room( mob[mob_cnt], ch->in_room );
           act( AT_IMMORT, "$N has arrived.", ch, NULL, mob[mob_cnt], TO_ROOM );
           mob[mob_cnt]->top_level = multiplier / 1.4 * get_level( ch, LEADERSHIP_ABILITY ) / 3;
 
           for ( ability = 0 ; ability < MAX_ABILITY ; ability++ )
-            set_level( mob[mob_cnt], ability, mob[mob_cnt]->top_level );
+	    {
+	      set_level( mob[mob_cnt], ability, mob[mob_cnt]->top_level );
+	    }
 
           mob[mob_cnt]->hit = mob[mob_cnt]->top_level*15;
           mob[mob_cnt]->max_hit = mob[mob_cnt]->hit;
@@ -77,7 +84,9 @@ void add_reinforcements( Character *ch )
             }
 
           if ( mob[mob_cnt]->master )
-            stop_follower( mob[mob_cnt] );
+	    {
+	      stop_follower( mob[mob_cnt] );
+	    }
 
           add_follower( mob[mob_cnt], ch );
           SET_BIT( mob[mob_cnt]->affected_by, AFF_CHARM );
@@ -86,16 +95,19 @@ void add_reinforcements( Character *ch )
     }
   else
     {
-      Character *mob;
-      int ability;
+      Character *mob = NULL;
+      int ability = 0;
 
       if ( ch->backup_mob == MOB_VNUM_IMP_ELITE ||
            ch->backup_mob == MOB_VNUM_NR_ELITE   ||
            ch->backup_mob == MOB_VNUM_MERC_ELITE )
-        { multiplier = 2; }
+        {
+	  multiplier = 2;
+	}
 
       mob = create_mobile( pMobIndex );
       char_to_room( mob, ch->in_room );
+
       if ( ch->pcdata && ch->pcdata->clan )
         {
           char tmpbuf[MAX_STRING_LENGTH];
@@ -106,12 +118,15 @@ void add_reinforcements( Character *ch )
           STRFREE( mob->long_descr );
           mob->long_descr = STRALLOC( tmpbuf );
         }
+
       act( AT_IMMORT, "$N has arrived.", ch, NULL, mob, TO_ROOM );
       send_to_char( "Your guard has arrived.\r\n", ch );
       mob->top_level = multiplier * get_level( ch, LEADERSHIP_ABILITY ) / 2;
 
       for ( ability = 0 ; ability < MAX_ABILITY ; ability++ )
-        set_level( mob, ability, mob->top_level );
+	{
+	  set_level( mob, ability, mob->top_level );
+	}
 
       mob->hit = mob->top_level*10;
       mob->max_hit = mob->hit;
@@ -129,8 +144,13 @@ void add_reinforcements( Character *ch )
       /* for making this more accurate in the future */
 
       if ( mob->mob_clan )
-        STRFREE ( mob->mob_clan );
+	{
+	  STRFREE ( mob->mob_clan );
+	}
+
       if ( ch->pcdata && ch->pcdata->clan )
-        mob->mob_clan = STRALLOC( ch->pcdata->clan->name );
+	{
+	  mob->mob_clan = STRALLOC( ch->pcdata->clan->name );
+	}
     }
 }
