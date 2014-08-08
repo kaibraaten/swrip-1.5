@@ -8,12 +8,11 @@
 
 struct stop_data
 {
-  STOP_DATA     *prev; /* Previous Stop */
-  STOP_DATA     *next; /* Next Stop */
-  char*         stop_name; /* Name of the Stop, ie 'Coruscant' or 'Monument Plaza' */
-  vnum_t        room;
+  STOP_DATA *prev; /* Previous Stop */
+  STOP_DATA *next; /* Next Stop */
+  char      *stop_name; /* Name of the Stop, ie 'Coruscant' or 'Monument Plaza' */
+  vnum_t     room;
 };
-
 
 enum _shuttle_state {
   SHUTTLE_STATE_LANDING,
@@ -24,47 +23,41 @@ enum _shuttle_state {
   SHUTTLE_STATE_HYPERSPACE_END
 };
 
-
 typedef enum {
-  SHUTTLE_TURBOCAR, /* Pretty much the same as shuttle EDIT:: Changes messages to be appropriate to groudn - Greven*/
+  SHUTTLE_TURBOCAR, /* Pretty much the same as shuttle EDIT:: Changes messages to be appropriate to ground - Greven*/
   SHUTTLE_SPACE, /* Has some message about taking off and landing */
   SHUTTLE_HYPERSPACE
 } SHUTTLE_CLASS;
 
 struct shuttle_data
 {
-  /* Linked List Stuff */
   SHUTTLE_DATA* prev;
   SHUTTLE_DATA* next;
 
-  /* For wherever we are */
   SHUTTLE_DATA* next_in_room;
   SHUTTLE_DATA* prev_in_room;
 
-  /* Where are We */
   ROOM_INDEX_DATA* in_room;
 
   /* HOTBOOT info, save vnum of current, then loop through on load to find it */
-  STOP_DATA*    current;
-  int           current_number;
-  /* Current State */
-  int           state;
+  STOP_DATA *current;
+  int current_number;
 
-  /* Stops */
-  STOP_DATA*    first_stop;
-  STOP_DATA*    last_stop;
+  int state;
 
-  /* Shuttle Class */
-  SHUTTLE_CLASS         type;
+  STOP_DATA *first_stop;
+  STOP_DATA *last_stop;
 
-  /* Shuttle Filename */
-  char *                filename;
-  /* Shuttle Name */
-  char *                name;
+  SHUTTLE_CLASS type;
+
+  char *filename;
+  char *name;
+
   /* Delay Between Stops */
-  int           delay;
+  int delay;
   /* Actual time for delay.. */
-  int           current_delay;
+  int current_delay;
+
   /* For echoing any messages */
   struct
   {
@@ -83,8 +76,8 @@ struct shuttle_data
 #endif
 
 /* Used for double linked list */
-extern SHUTTLE_DATA     *first_shuttle;
-extern SHUTTLE_DATA     *last_shuttle;
+extern SHUTTLE_DATA *first_shuttle;
+extern SHUTTLE_DATA *last_shuttle;
 
 /* Function prototypes */
 
