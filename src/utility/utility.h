@@ -28,21 +28,7 @@ typedef unsigned char bool;
 #define true 1
 #define false 0
 #endif
-
-#if     !defined(FALSE)
-#define FALSE    false
-#endif
-
-#if     !defined(TRUE)
-#define TRUE     true
-#endif
-
-#else /* C++ */
-#if !defined(__STORMGCC__) && !defined(__MORPHOS__)
-#define TRUE true
-#define FALSE false
-#endif /* StormC4 */
-#endif /* __cplusplus */
+#endif /* !__cplusplus */
 
 #if     !defined(BERR)
 #define BERR     255
