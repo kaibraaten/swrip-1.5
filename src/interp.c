@@ -29,7 +29,7 @@
 #include "character.h"
 #include "mud.h"
 
-bool check_social( Character *ch, char *command, char *argument );
+bool check_social( Character *ch, const char *command, char *argument );
 
 /*
  * Log-all switch.
@@ -560,7 +560,7 @@ SOCIALTYPE *find_social( const char *command )
   return NULL;
 }
 
-bool check_social( Character *ch, char *command, char *argument )
+bool check_social( Character *ch, const char *command, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   Character *victim = NULL;
