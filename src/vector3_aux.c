@@ -78,7 +78,7 @@ static bool ship_is_facing( const SHIP_DATA * const ship,
 			    const Vector3 * const target )
 {
   Vector3 h, d;
-  bool facing = FALSE;
+  bool facing = false;
   double cosofa = 0.0;
 
   vector_copy( &h, &ship->head );
@@ -91,7 +91,7 @@ static bool ship_is_facing( const SHIP_DATA * const ship,
     vector_dot( &h, &d ) / ( vector_length( &h ) + vector_length( &d ) );
 
   if( cosofa > 0.75 )
-    facing = TRUE;
+    facing = true;
 
   return facing;
 }
@@ -172,7 +172,6 @@ void ship_align_heading( SHIP_DATA * const ship,
 /*
  * Calculate new position based on heading and speed.
  */
-
 static void handle_movement( Vector3 * const pos,
 			     const Vector3 * const head, const int speed )
 {
