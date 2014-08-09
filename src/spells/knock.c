@@ -13,7 +13,7 @@ ch_ret spell_knock( int sn, int level, Character *ch, void *vo )
    * shouldn't know why it didn't work, and shouldn't work on pickproof
    * exits.  -Thoric
    */
-  if ( !(pexit=find_door(ch, spell_target_name, FALSE))
+  if ( !(pexit=find_door(ch, spell_target_name, false))
        ||   !IS_SET(pexit->exit_info, EX_CLOSED)
        ||   !IS_SET(pexit->exit_info, EX_LOCKED)
        ||    IS_SET(pexit->exit_info, EX_PICKPROOF) )

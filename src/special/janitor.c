@@ -7,7 +7,7 @@ bool spec_janitor( Character *ch )
   OBJ_DATA *trash_next;
 
   if ( !is_awake(ch) )
-    return FALSE;
+    return false;
 
   for ( trash = ch->in_room->first_content; trash; trash = trash_next )
     {
@@ -24,9 +24,9 @@ bool spec_janitor( Character *ch )
           act( AT_ACTION, "$n picks up some trash.", ch, NULL, NULL, TO_ROOM );
           obj_from_room( trash );
           obj_to_char( trash, ch );
-          return TRUE;
+          return true;
         }
     }
 
-  return FALSE;
+  return false;
 }

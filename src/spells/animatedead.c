@@ -14,7 +14,7 @@ ch_ret spell_animate_dead( int sn, int level, Character *ch, void *vo )
   char       buf[MAX_STRING_LENGTH];
   SKILLTYPE *skill = get_skilltype(sn);
 
-  found = FALSE;
+  found = false;
 
   for (corpse = ch->in_room->first_content; corpse; corpse = corpse_next)
     {
@@ -22,7 +22,7 @@ ch_ret spell_animate_dead( int sn, int level, Character *ch, void *vo )
 
       if (corpse->item_type == ITEM_CORPSE_NPC && corpse->cost != -5)
         {
-          found = TRUE;
+          found = true;
           break;
         }
     }

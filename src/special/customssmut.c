@@ -10,7 +10,7 @@ bool spec_customs_smut( Character *ch )
   long       ch_exp;
 
   if ( !is_awake(ch) || ch->position == POS_FIGHTING )
-    return FALSE;
+    return false;
 
   for ( victim = ch->in_room->first_person; victim; victim = v_next )
     {
@@ -28,7 +28,7 @@ bool spec_customs_smut( Character *ch )
                   sprintf( buf , "%s is illegal contraband. I'm going to have to confiscate that.", obj->short_descr );
                   do_say( ch , buf );
                   if ( obj->wear_loc != WEAR_NONE )
-                    remove_obj( victim, obj->wear_loc, TRUE );
+                    remove_obj( victim, obj->wear_loc, true );
                   separate_obj( obj );
                   obj_from_char( obj );
                   act( AT_ACTION, "$n confiscates $p from $N.", ch, obj, victim, TO_NOTVICT );
@@ -38,7 +38,7 @@ bool spec_customs_smut( Character *ch )
                   ch_exp = UMIN( obj->cost*10 , ( exp_level( get_level( victim, SMUGGLING_ABILITY ) + 1) - exp_level( get_level( victim, SMUGGLING_ABILITY ) ) ) );
                   ch_printf( victim, "You lose %ld experience.\r\n " , ch_exp );
                   gain_exp( victim, SMUGGLING_ABILITY, 0 - ch_exp );
-                  return TRUE;
+                  return true;
                 }
               else if ( can_see( ch, victim ) && !IS_SET( obj->extra_flags , ITEM_CONTRABAND)  )
                 {
@@ -51,7 +51,7 @@ bool spec_customs_smut( Character *ch )
                   act( AT_ACTION, "$n looks at you suspiciously.",   ch, NULL, victim, TO_VICT  );
                   SET_BIT( obj->extra_flags , ITEM_CONTRABAND);
 
-                  return TRUE;
+                  return true;
                 }
               else if ( !IS_SET( obj->extra_flags , ITEM_CONTRABAND)  )
                 {
@@ -61,7 +61,7 @@ bool spec_customs_smut( Character *ch )
                   gain_exp( victim, SMUGGLING_ABILITY, ch_exp );
 
                   SET_BIT( obj->extra_flags , ITEM_CONTRABAND);
-                  return TRUE;
+                  return true;
                 }
             }
           else if ( obj->item_type == ITEM_CONTAINER )
@@ -76,12 +76,12 @@ bool spec_customs_smut( Character *ch )
                       ch_printf( victim, "You receive %ld experience for smuggling %s.\r\n " , ch_exp , content->short_descr );
                       gain_exp( victim, SMUGGLING_ABILITY, ch_exp );
 		      SET_BIT( content->extra_flags , ITEM_CONTRABAND);
-                      return TRUE;
+                      return true;
                     }
                 }
             }
         }
     }
 
-  return FALSE;
+  return false;
 }

@@ -11,7 +11,7 @@ bool spec_police_jail( Character *ch )
   char buf[MAX_STRING_LENGTH];
 
   if ( !is_awake(ch) || ch->fighting )
-    return FALSE;
+    return false;
 
   for ( victim = ch->in_room->first_person; victim; victim = v_next )
     {
@@ -56,9 +56,9 @@ bool spec_police_jail( Character *ch )
                 char_to_room( victim , jail );
               }
 
-            return TRUE;
+            return true;
           }
     }
 
-  return FALSE;
+  return false;
 }

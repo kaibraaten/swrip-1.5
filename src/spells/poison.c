@@ -6,7 +6,7 @@ ch_ret spell_poison( int sn, int level, Character *ch, void *vo )
   Character *victim = (Character *) vo;
   Affect af;
   int poison_chance;
-  bool first = TRUE;
+  bool first = true;
 
   send_to_char("You feel the hatred grow within you!\r\n", ch);
   ch->alignment = ch->alignment - 100;
@@ -19,7 +19,7 @@ ch_ret spell_poison( int sn, int level, Character *ch, void *vo )
     return rSPELL_FAILED;
 
   if ( is_affected_by( victim, AFF_POISON ) )
-    first = FALSE;
+    first = false;
 
   af.type      = sn;
   af.duration  = level * DUR_CONV;

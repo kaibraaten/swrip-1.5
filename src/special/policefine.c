@@ -9,7 +9,7 @@ bool spec_police_fine( Character *ch )
   char buf[MAX_STRING_LENGTH];
 
   if ( !is_awake(ch) || ch->fighting )
-    return FALSE;
+    return false;
 
   for ( victim = ch->in_room->first_person; victim; victim = v_next )
     {
@@ -31,10 +31,10 @@ bool spec_police_fine( Character *ch )
               boost_economy( victim->in_room->area, (victim->gold)/2 );
             victim->gold /= 2;
 	    REMOVE_BIT( victim->pcdata->wanted_flags , 1 << vip );
-            return TRUE;
+            return true;
           }
 
     }
 
-  return FALSE;
+  return false;
 }

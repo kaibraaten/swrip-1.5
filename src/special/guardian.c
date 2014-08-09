@@ -11,7 +11,7 @@ bool spec_guardian( Character *ch )
   int max_evil;
 
   if ( !is_awake(ch) || ch->fighting )
-    return FALSE;
+    return false;
 
   max_evil = 300;
   ech      = NULL;
@@ -34,7 +34,7 @@ bool spec_guardian( Character *ch )
       sprintf( buf, "%s is a %s!  As well as a COWARD!",
                victim->name, crime );
       do_yell( ch, buf );
-      return TRUE;
+      return true;
     }
 
   if ( victim )
@@ -43,7 +43,7 @@ bool spec_guardian( Character *ch )
                victim->name, crime );
       do_shout( ch, buf );
       multi_hit( ch, victim, TYPE_UNDEFINED );
-      return TRUE;
+      return true;
     }
 
   if ( ech )
@@ -51,8 +51,8 @@ bool spec_guardian( Character *ch )
       act( AT_YELL, "$n screams 'PROTECT THE INNOCENT!!",
            ch, NULL, NULL, TO_ROOM );
       multi_hit( ch, ech, TYPE_UNDEFINED );
-      return TRUE;
+      return true;
     }
 
-  return FALSE;
+  return false;
 }

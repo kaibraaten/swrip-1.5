@@ -133,7 +133,7 @@ ch_ret spell_affectchar( int sn, int level, Character *ch, void *vo )
               update_pos( victim );
               break;
             default:
-              affect_modify( victim, &af, TRUE );
+              affect_modify( victim, &af, true );
               break;
             }
         }

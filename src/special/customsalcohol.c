@@ -11,7 +11,7 @@ bool spec_customs_alcohol( Character *ch )
   long       ch_exp;
 
   if ( !is_awake(ch) || ch->position == POS_FIGHTING )
-    return FALSE;
+    return false;
 
   for ( victim = ch->in_room->first_person; victim; victim = v_next )
     {
@@ -35,7 +35,7 @@ bool spec_customs_alcohol( Character *ch )
 		      do_say( ch , buf );
 
                       if ( obj->wear_loc != WEAR_NONE )
-                        remove_obj( victim, obj->wear_loc, TRUE );
+                        remove_obj( victim, obj->wear_loc, true );
 
                       separate_obj( obj );
                       obj_from_char( obj );
@@ -46,7 +46,7 @@ bool spec_customs_alcohol( Character *ch )
                       ch_exp = UMIN( obj->cost*10 , ( exp_level( get_level(victim, SMUGGLING_ABILITY ) + 1) - exp_level( get_level( victim, SMUGGLING_ABILITY ) ) ) );
                       ch_printf( victim, "You lose %ld experience. \r\n" , ch_exp );
                       gain_exp( victim, SMUGGLING_ABILITY, 0 - ch_exp );
-                      return TRUE;
+                      return true;
                     }
                   else if ( can_see( ch, victim ) && !IS_SET( obj->extra_flags , ITEM_CONTRABAND)  )
                     {
@@ -57,7 +57,7 @@ bool spec_customs_alcohol( Character *ch )
                       act( AT_ACTION, "$n looks at $N suspiciously.", ch, NULL, victim, TO_NOTVICT );
                       act( AT_ACTION, "$n look at you suspiciously.",   ch, NULL, victim, TO_VICT  );
                       SET_BIT( obj->extra_flags , ITEM_CONTRABAND);
-                      return TRUE;
+                      return true;
                     }
                   else if ( !IS_SET( obj->extra_flags , ITEM_CONTRABAND)  )
                     {
@@ -66,7 +66,7 @@ bool spec_customs_alcohol( Character *ch )
                       gain_exp( victim, SMUGGLING_ABILITY, ch_exp );
 
                       SET_BIT( obj->extra_flags , ITEM_CONTRABAND);
-                      return TRUE;
+                      return true;
                     }
                 }
             }
@@ -86,7 +86,7 @@ bool spec_customs_alcohol( Character *ch )
                       ch_printf( victim, "You receive %ld experience for smuggling %d.\r\n " , ch_exp , content->short_descr);
                       gain_exp( victim, SMUGGLING_ABILITY, ch_exp );
                       SET_BIT( content->extra_flags , ITEM_CONTRABAND);
-                      return TRUE;
+                      return true;
                     }
                 }
             }
@@ -94,5 +94,5 @@ bool spec_customs_alcohol( Character *ch )
 
     }
 
-  return FALSE;
+  return false;
 }

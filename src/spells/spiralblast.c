@@ -9,7 +9,7 @@ ch_ret spell_spiral_blast( int sn, int level, Character *ch, void *vo )
   int hpch;
   bool ch_died;
 
-  ch_died = FALSE;
+  ch_died = false;
 
   if ( IS_SET( ch->in_room->room_flags, ROOM_SAFE ) )
     {
@@ -49,7 +49,7 @@ ch_ret spell_spiral_blast( int sn, int level, Character *ch, void *vo )
 
           if ( damage( ch, vch, dam, sn ) == rCHAR_DIED ||
                char_died(ch) )
-            ch_died = TRUE;
+            ch_died = true;
         }
     }
 

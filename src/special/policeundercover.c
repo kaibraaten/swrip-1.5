@@ -9,7 +9,7 @@ bool spec_police_undercover( Character *ch )
   char buf[MAX_STRING_LENGTH];
 
   if ( !is_awake(ch) || ch->fighting )
-    return FALSE;
+    return false;
 
   for ( victim = ch->in_room->first_person; victim; victim = v_next )
     {
@@ -27,9 +27,9 @@ bool spec_police_undercover( Character *ch )
             do_say( ch , buf );
             REMOVE_BIT( victim->pcdata->wanted_flags , 1 << vip );
             multi_hit( ch, victim, TYPE_UNDEFINED );
-            return TRUE;
+            return true;
           }
     }
 
-  return FALSE;
+  return false;
 }

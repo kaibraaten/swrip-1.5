@@ -7,7 +7,7 @@ bool spec_rebel_trooper( Character *ch )
   Character *v_next;
 
   if ( !is_awake(ch) || ch->fighting )
-    return FALSE;
+    return false;
 
   for ( victim = ch->in_room->first_person; victim; victim = v_next )
     {
@@ -23,10 +23,10 @@ bool spec_rebel_trooper( Character *ch )
         {
           do_yell( ch, "Long live the Rebel Alliance!" );
           multi_hit( ch, victim, TYPE_UNDEFINED );
-          return TRUE;
+          return true;
         }
 
     }
 
-  return FALSE;
+  return false;
 }

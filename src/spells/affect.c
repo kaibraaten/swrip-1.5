@@ -12,7 +12,7 @@ ch_ret spell_affect( int sn, int level, Character *ch, void *vo )
   Character *victim = (Character *) vo;
   bool groupsp;
   bool areasp;
-  bool hitchar, hitroom, hitvict = FALSE;
+  bool hitchar, hitroom, hitvict = false;
   ch_ret retcode;
 
   if ( !skill->affects )
@@ -21,14 +21,14 @@ ch_ret spell_affect( int sn, int level, Character *ch, void *vo )
       return rNONE;
     }
   if ( SPELL_FLAG(skill, SF_GROUPSPELL) )
-    groupsp = TRUE;
+    groupsp = true;
   else
-    groupsp = FALSE;
+    groupsp = false;
 
   if ( SPELL_FLAG(skill, SF_AREA ) )
-    areasp = TRUE;
+    areasp = true;
   else
-    areasp = FALSE;
+    areasp = false;
   if ( !groupsp && !areasp )
     {
       /* Can't find a victim */
@@ -74,19 +74,19 @@ ch_ret spell_affect( int sn, int level, Character *ch, void *vo )
       if ( skill->hit_char && skill->hit_char[0] != '\0' )
         {
           if ( strstr(skill->hit_char, "$N") )
-            hitchar = TRUE;
+            hitchar = true;
           else
 	    act( AT_MAGIC, skill->hit_char, ch, NULL, NULL, TO_CHAR );
         }
       if ( skill->hit_room && skill->hit_room[0] != '\0' )
         {
           if ( strstr(skill->hit_room, "$N") )
-            hitroom = TRUE;
+            hitroom = true;
           else
             act( AT_MAGIC, skill->hit_room, ch, NULL, NULL, TO_ROOM );
         }
       if ( skill->hit_vict && skill->hit_vict[0] != '\0' )
-        hitvict = TRUE;
+        hitvict = true;
       if ( victim )
         victim = victim->in_room->first_person;
       else

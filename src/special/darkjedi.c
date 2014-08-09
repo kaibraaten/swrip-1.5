@@ -9,7 +9,7 @@ bool spec_dark_jedi( Character *ch )
   int sn;
 
   if ( ch->position != POS_FIGHTING )
-    return FALSE;
+    return false;
 
   for ( victim = ch->in_room->first_person; victim; victim = v_next )
     {
@@ -19,7 +19,7 @@ bool spec_dark_jedi( Character *ch )
     }
 
   if ( !victim || victim == ch )
-    return FALSE;
+    return false;
 
   for ( ;; )
     {
@@ -37,7 +37,7 @@ bool spec_dark_jedi( Character *ch )
         case  8: min_level = 13; spell = "harm";          break;
         case  9: min_level = 9; spell = "force bolt";       break;
         case 10: min_level = 1; spell = "force spray";     break;
-        default: return FALSE;
+        default: return false;
         }
 
       if ( ch->top_level >= min_level )
@@ -45,9 +45,9 @@ bool spec_dark_jedi( Character *ch )
     }
 
   if ( ( sn = skill_lookup( spell ) ) < 0 )
-    return FALSE;
+    return false;
 
   (*skill_table[sn]->spell_fun) ( sn, ch->top_level, ch, victim );
 
-  return TRUE;
+  return true;
 }

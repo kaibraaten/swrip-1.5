@@ -16,11 +16,11 @@ bool spec_auth( Character *ch )
 
       if ( !is_npc(victim) && ( pObjIndex = get_obj_index( OBJ_VNUM_SCHOOL_DIPLOMA ) ) != NULL )
         {
-          hasdiploma = FALSE;
+          hasdiploma = false;
 
           for ( obj = victim->last_carrying; obj; obj = obj->prev_content )
             if (obj->pIndexData == get_obj_index( OBJ_VNUM_SCHOOL_DIPLOMA ) )
-              hasdiploma = TRUE;
+              hasdiploma = true;
 
           if ( !hasdiploma )
             {
@@ -44,5 +44,5 @@ bool spec_auth( Character *ch )
       to_channel( buf, CHANNEL_MONITOR, "Monitor", ch->top_level );
     }
 
-  return FALSE;
+  return false;
 }

@@ -9,7 +9,7 @@ bool spec_newbie_pilot( Character *ch )
   Character   * v_next;
   OBJ_DATA    * obj;
   char          buf[MAX_STRING_LENGTH];
-  bool          diploma = FALSE;
+  bool          diploma = false;
 
   for ( victim = ch->in_room->first_person; victim; victim = v_next )
     {
@@ -20,7 +20,7 @@ bool spec_newbie_pilot( Character *ch )
 
       for ( obj = victim->last_carrying; obj; obj = obj->prev_content )
         if ( obj->pIndexData->vnum == OBJ_VNUM_SCHOOL_DIPLOMA )
-          diploma = TRUE;
+          diploma = true;
 
       if ( !diploma )
         continue;
@@ -88,5 +88,5 @@ bool spec_newbie_pilot( Character *ch )
       echo_to_room( AT_ACTION , ch->in_room, buf );
     }
 
-  return FALSE;
+  return false;
 }

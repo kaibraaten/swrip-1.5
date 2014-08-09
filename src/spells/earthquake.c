@@ -9,7 +9,7 @@ ch_ret spell_earthquake( int sn, int level, Character *ch, void *vo )
   ch_ret retcode;
   SKILLTYPE *skill = get_skilltype(sn);
 
-  ch_died = FALSE;
+  ch_died = false;
   retcode = rNONE;
 
   if ( IS_SET( ch->in_room->room_flags, ROOM_SAFE ) )
@@ -47,7 +47,7 @@ ch_ret spell_earthquake( int sn, int level, Character *ch, void *vo )
           retcode = damage( ch, vch, level + dice(2, 8), sn );
           if ( retcode == rCHAR_DIED || char_died(ch) )
             {
-              ch_died = TRUE;
+              ch_died = true;
               continue;
             }
           if ( char_died(vch) )

@@ -24,7 +24,7 @@ ch_ret spell_area_attack( int sn, int level, Character *ch, void *vo )
       return rSPELL_FAILED;
     }
 
-  affects = (skill->affects ? TRUE : FALSE);
+  affects = (skill->affects ? true : false);
   if ( skill->hit_char && skill->hit_char[0] != '\0' )
     act( AT_MAGIC, skill->hit_char, ch, NULL, NULL, TO_CHAR );
   if ( skill->hit_room && skill->hit_room[0] != '\0' )

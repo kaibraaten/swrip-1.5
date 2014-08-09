@@ -9,7 +9,7 @@ bool spec_fido( Character *ch )
   OBJ_DATA *obj_next;
 
   if ( !is_awake(ch) )
-    return FALSE;
+    return false;
 
   for ( corpse = ch->in_room->first_content; corpse; corpse = c_next )
     {
@@ -25,8 +25,8 @@ bool spec_fido( Character *ch )
           obj_to_room( obj, ch->in_room );
         }
       extract_obj( corpse );
-      return TRUE;
+      return true;
     }
 
-  return FALSE;
+  return false;
 }

@@ -6,10 +6,10 @@ bool spec_clan_guard( Character *ch )
   Character *victim;
   Character *v_next;
   CLAN_DATA *clan;
-  bool found = FALSE;
+  bool found = false;
 
   if ( !is_awake(ch) || ch->fighting )
-    return FALSE;
+    return false;
 
   clan = get_clan(ch->name);
 
@@ -30,9 +30,9 @@ bool spec_clan_guard( Character *ch )
 
           do_yell( ch, "Hey you're not allowed in here!" );
           multi_hit( ch, victim, TYPE_UNDEFINED );
-          return TRUE;
+          return true;
         }
     }
 
-  return FALSE;
+  return false;
 }

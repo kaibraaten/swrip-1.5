@@ -12,7 +12,7 @@ ch_ret spell_locate_object( int sn, int level, Character *ch, void *vo )
   bool found;
   int cnt;
 
-  found = FALSE;
+  found = false;
   for ( obj = first_object; obj; obj = obj->next )
     {
       if ( !can_see_obj( ch, obj ) || !nifty_is_name( spell_target_name, obj->name ) )
@@ -20,7 +20,7 @@ ch_ret spell_locate_object( int sn, int level, Character *ch, void *vo )
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) && !is_immortal(ch) )
         continue;
 
-      found = TRUE;
+      found = true;
 
       for ( cnt = 0, in_obj = obj;
             in_obj->in_obj && cnt < 100;

@@ -8,7 +8,7 @@ bool spec_thief( Character *ch )
   int gold, maxgold;
 
   if ( ch->position != POS_STANDING )
-    return FALSE;
+    return false;
 
   for ( victim = ch->in_room->first_person; victim; victim = v_next )
     {
@@ -25,7 +25,7 @@ bool spec_thief( Character *ch )
                ch, NULL, victim, TO_VICT );
           act( AT_ACTION, "$N discovers $n's hands in $S wallet!",
                ch, NULL, victim, TO_NOTVICT );
-          return TRUE;
+          return true;
         }
       else
         {
@@ -38,9 +38,9 @@ bool spec_thief( Character *ch )
 	      boost_economy( ch->in_room->area, ch->gold - maxgold/2 );
 	      ch->gold = maxgold/2;
 	    }
-	  return TRUE;
+	  return true;
         }
     }
 
-  return FALSE;
+  return false;
 }

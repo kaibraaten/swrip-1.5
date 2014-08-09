@@ -33,7 +33,7 @@ ch_ret spell_call_lightning( int sn, int level, Character *ch, void *vo )
   act( AT_MAGIC, "$n calls Lightning to strike $s foes!",
        ch, NULL, NULL, TO_ROOM );
 
-  ch_died = FALSE;
+  ch_died = false;
   for ( vch = first_char; vch; vch = vch_next )
     {
       vch_next  = vch->next;
@@ -48,7 +48,7 @@ ch_ret spell_call_lightning( int sn, int level, Character *ch, void *vo )
           if ( vch != ch && ( is_npc(ch) ? !is_npc(vch) : is_npc(vch) ) )
             retcode = damage( ch, vch, saves_spell_staff( level, vch ) ? dam/2 : dam, sn );
           if ( retcode == rCHAR_DIED || char_died(ch) )
-            ch_died = TRUE;
+            ch_died = true;
           continue;
         }
 
