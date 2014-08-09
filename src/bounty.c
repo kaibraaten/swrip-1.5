@@ -62,9 +62,9 @@ bool is_disintegration( const Character *victim )
 
   for ( bounty = first_disintegration; bounty; bounty = bounty->next )
     if ( !str_cmp( victim->name , bounty->target ) )
-      return TRUE;
+      return true;
 
-  return FALSE;
+  return false;
 }
 
 BOUNTY_DATA *get_disintegration( const char *target )
@@ -124,7 +124,7 @@ void load_bounties( void )
 void disintegration ( const Character *ch , const Character *victim , long amount )
 {
   BOUNTY_DATA *bounty = NULL;
-  bool found = FALSE;
+  bool found = false;
   char buf[MAX_STRING_LENGTH];
   Character *p = NULL;
   Character *p_prev = NULL;
@@ -133,7 +133,7 @@ void disintegration ( const Character *ch , const Character *victim , long amoun
     {
       if ( !str_cmp( bounty->target , victim->name ))
         {
-          found = TRUE;
+          found = true;
           break;
         }
     }
