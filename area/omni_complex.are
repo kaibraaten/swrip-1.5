@@ -13,7 +13,7 @@ $
 #FLAGS
 2
 
-#ECONOMY 0 30517103
+#ECONOMY 0 30507103
 
 #MOBILES
 #0
@@ -96,6 +96,10 @@ D2
 ~
 ~
 0 -1 106
+D3
+~
+~
+0 -1 125
 D4
 ~
 ~
@@ -541,6 +545,10 @@ S
 Omnipresent Being's Workshop~
 ~
 0 109117516 0
+D1
+~
+~
+0 -1 100
 S
 #150
 Floating in a void~
