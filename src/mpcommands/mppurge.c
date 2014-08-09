@@ -32,7 +32,7 @@ void do_mppurge( Character *ch, char *argument )
         {
 	  vnext = victim->next_in_room;
           if ( is_npc( victim ) && victim != ch )
-            extract_char( victim, TRUE );
+            extract_char( victim, true );
         }
       while ( ch->in_room->first_content )
         extract_obj( ch->in_room->first_content );
@@ -67,5 +67,5 @@ void do_mppurge( Character *ch, char *argument )
       return;
     }
 
-  extract_char( victim, TRUE );
+  extract_char( victim, true );
 }

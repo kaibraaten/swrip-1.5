@@ -31,7 +31,7 @@ void do_mpgoto( Character *ch, char *argument )
     }
 
   if ( ch->fighting )
-    stop_fighting( ch, TRUE );
+    stop_fighting( ch, true );
 
   char_from_room( ch );
   char_to_room( ch, location );

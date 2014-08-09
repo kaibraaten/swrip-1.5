@@ -69,7 +69,7 @@ void do_mp_damage( Character *ch, char *argument )
    */
   if ( simple_damage(ch, victim, dam, TYPE_UNDEFINED ) == rVICT_DIED )
     {
-      stop_fighting( ch, FALSE );
+      stop_fighting( ch, false );
       stop_hating( ch );
       stop_fearing( ch );
       stop_hunting( ch );
