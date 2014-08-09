@@ -71,8 +71,8 @@ void do_hitall( Character *ch, char *argument )
 static bool is_legal_kill(Character *ch, Character *vch)
 {
   if ( is_npc(ch) || is_npc(vch) )
-    return TRUE;
+    return true;
   if ( is_safe(ch,vch) )
-    return FALSE;
-  return TRUE;
+    return false;
+  return true;
 }

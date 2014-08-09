@@ -4,7 +4,7 @@
 void do_vsearch( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  bool found = FALSE;
+  bool found = false;
   OBJ_DATA *obj;
   OBJ_DATA *in_obj;
   int obj_counter = 1;
@@ -30,7 +30,7 @@ void do_vsearch( Character *ch, char *argument )
       if ( !can_see_obj( ch, obj ) || !( argi == obj->pIndexData->vnum ))
         continue;
 
-      found = TRUE;
+      found = true;
       for ( in_obj = obj; in_obj->in_obj != NULL;
             in_obj = in_obj->in_obj );
 

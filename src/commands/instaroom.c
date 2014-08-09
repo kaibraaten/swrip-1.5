@@ -18,9 +18,9 @@ void do_instaroom( Character *ch, char *argument )
     }
   argument = one_argument(argument, arg);
   if ( !str_cmp(argument, "nodoors") )
-    dodoors = FALSE;
+    dodoors = false;
   else
-    dodoors = TRUE;
+    dodoors = true;
   pArea = ch->pcdata->area;
   if ( !(pRoom = find_room(ch, arg, NULL)) )
     {

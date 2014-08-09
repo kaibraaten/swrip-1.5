@@ -52,7 +52,7 @@ void do_flee( Character *ch, char *argument )
           REMOVE_BIT   ( ch->affected_by, AFF_SNEAK );
         }
       if ( ch->mount && ch->mount->fighting )
-        stop_fighting( ch->mount, TRUE );
+        stop_fighting( ch->mount, true );
       move_char( ch, pexit, 0 );
 
       mprog_entry_trigger( ch );
@@ -81,7 +81,7 @@ void do_flee( Character *ch, char *argument )
       sprintf(buf, "You run for cover!");
       send_to_char( buf, ch );
 
-      stop_fighting( ch, TRUE );
+      stop_fighting( ch, true );
       return;
     }
 

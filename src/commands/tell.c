@@ -9,7 +9,7 @@ void do_tell( Character *ch, char *argument )
   int position = POS_STANDING;
   Character *switched_victim = NULL;
   Character *vch = NULL;
-  bool sameroom = FALSE;
+  bool sameroom = false;
 
   if ( IS_SET( ch->deaf, CHANNEL_TELLS ) && !is_immortal( ch ) )
     {
@@ -55,7 +55,7 @@ void do_tell( Character *ch, char *argument )
 
   if (victim->in_room == ch->in_room )
     {
-      sameroom = TRUE;
+      sameroom = true;
     }
   else
     {
@@ -180,7 +180,7 @@ void do_tell( Character *ch, char *argument )
 
           sbuf = drunk_speech( sbuf, ch );
 
-          MOBtrigger = FALSE;
+          MOBtrigger = false;
           act( AT_SAY, "$n says quietly into $s comlink '$t'",
 	       ch, sbuf, vch, TO_VICT );
         }

@@ -92,5 +92,5 @@ static bool aff_paralysis( Character *ch, Character *victim )
         }
     }
 
-  return TRUE;
+  return true;
 }

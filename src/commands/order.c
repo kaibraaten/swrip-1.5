@@ -9,8 +9,8 @@ void do_order( Character *ch, char *argument )
   Character *victim = NULL;
   Character *och = NULL;
   Character *och_next = NULL;
-  bool found = FALSE;
-  bool fAll = FALSE;
+  bool found = false;
+  bool fAll = false;
 
   strcpy( argbuf, argument );
   argument = one_argument( argument, arg );
@@ -29,7 +29,7 @@ void do_order( Character *ch, char *argument )
 
   if ( !str_cmp( arg, "all" ) )
     {
-      fAll = TRUE;
+      fAll = true;
     }
   else
     {
@@ -66,7 +66,7 @@ void do_order( Character *ch, char *argument )
            && och->master == ch
            && ( fAll || och == victim ) )
         {
-          found = TRUE;
+          found = true;
           act( AT_ACTION, "$n orders you to '$t'.",
 	       ch, argument, och, TO_VICT );
 	  interpret( och, argument );

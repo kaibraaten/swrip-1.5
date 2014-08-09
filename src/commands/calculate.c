@@ -12,7 +12,7 @@ void do_calculate(Character *ch, char *argument )
   int the_chance , distance = 0;
   SHIP_DATA *ship;
   SPACE_DATA *spaceobj, *spaceobject;
-  bool found = FALSE;
+  bool found = false;
 
   argument = one_argument( argument , arg1);
   argument = one_argument( argument , arg2);
@@ -85,13 +85,13 @@ void do_calculate(Character *ch, char *argument )
       if( ship->currjump )
         {
           vector_copy( &ship->jump, &ship->currjump->pos );
-          found = TRUE;
+          found = true;
         }
     }
   else if( arg2[0] != '\0' && arg2[0] != '\0' )
     {
       vector_set( &ship->jump, atoi(arg1), atoi(arg2), atoi(arg3) );
-      found = TRUE;
+      found = true;
     }
   else
     {

@@ -16,7 +16,7 @@ void do_close( Character *ch, char *argument )
       return;
     }
 
-  if ( ( pexit = find_door( ch, arg, TRUE ) ) != NULL )
+  if ( ( pexit = find_door( ch, arg, true ) ) != NULL )
     {
       /* 'close door' */
       Exit *pexit_rev = NULL;

@@ -181,9 +181,9 @@ void do_launch( Character *ch, char *argument )
             ship->energy = ship->maxenergy;
 
           ship->shield = 0;
-          ship->autorecharge = FALSE;
-          ship->autotrack = FALSE;
-          ship->autospeed = FALSE;
+          ship->autorecharge = false;
+          ship->autotrack = false;
+          ship->autospeed = false;
           ship->hull = ship->maxhull;
 
           ship->missilestate = MISSILE_READY;
@@ -200,7 +200,7 @@ void do_launch( Character *ch, char *argument )
 
       if (ship->hatchopen)
         {
-          ship->hatchopen = FALSE;
+          ship->hatchopen = false;
           sprintf( buf , "The hatch on %s closes." , ship->name);
           echo_to_room( AT_YELLOW , get_room_index(ship->location) , buf );
           echo_to_room( AT_YELLOW , get_room_index(ship->room.entrance) , "The hatch slides shut." );

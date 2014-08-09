@@ -36,7 +36,7 @@ void do_disconnect( Character *ch, char *argument )
     {
       if ( d == victim->desc )
         {
-          close_socket( d, FALSE );
+          close_socket( d, false );
           send_to_char( "Ok.\r\n", ch );
 	  return;
         }

@@ -25,11 +25,11 @@ void do_mine( Character *ch, char *argument )
   if ( ms_find_obj(ch) )
     return;
 
-  shovel = FALSE;
+  shovel = false;
   for ( obj = ch->first_carrying; obj; obj = obj->next_content )
     if ( obj->item_type == ITEM_SHOVEL )
       {
-        shovel = TRUE;
+        shovel = true;
         break;
       }
 

@@ -69,7 +69,7 @@ static void similar_help_files(Character *ch, char *argument)
 {
   HelpFile *pHelp = NULL;
   short level = 0;
-  bool single = FALSE;
+  bool single = false;
 
   pager_printf( ch, "&C&BSimilar Help Files:\r\n" );
 
@@ -90,11 +90,11 @@ static void similar_help_files(Character *ch, char *argument)
           if ( str_similarity(argument, buf) > level)
             {
               level = str_similarity(argument, buf);
-	      single = TRUE;
+	      single = true;
             }
           else if ( str_similarity(argument, buf) == level && level > 0)
             {
-              single = FALSE;
+              single = false;
             }
         }
     }

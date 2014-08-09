@@ -64,7 +64,7 @@ void do_mset( Character *ch, char *argument )
     }
 
   victim = NULL;
-  lockvictim = FALSE;
+  lockvictim = false;
   smash_tilde( argument );
 
   if ( ch->substate == SUB_REPEATCMD )
@@ -98,14 +98,14 @@ void do_mset( Character *ch, char *argument )
     }
   if ( victim )
     {
-      lockvictim = TRUE;
+      lockvictim = true;
       strcpy( arg1, victim->name );
       argument = one_argument( argument, arg2 );
       strcpy( arg3, argument );
     }
   else
     {
-      lockvictim = FALSE;
+      lockvictim = false;
       argument = one_argument( argument, arg1 );
       argument = one_argument( argument, arg2 );
       strcpy( arg3, argument );
@@ -946,13 +946,13 @@ void do_mset( Character *ch, char *argument )
 
       if ( (victim->pcdata) && (victim->pcdata->whoCloak) )
         {
-          victim->pcdata->whoCloak = FALSE;
+          victim->pcdata->whoCloak = false;
           send_to_char( "This user will no longer be cloaked.\r\n", ch);
 	  return;
         }
       if ( (victim->pcdata) && (!(victim->pcdata->whoCloak)) )
         {
-          victim->pcdata->whoCloak = TRUE;
+          victim->pcdata->whoCloak = true;
           send_to_char( "This user will now be cloaked on the who list!\r\n", ch);
           return;
         }
@@ -980,13 +980,13 @@ void do_mset( Character *ch, char *argument )
         }
       while ( argument[0] != '\0' )
         {
-          pcflag = FALSE;
+          pcflag = false;
           argument = one_argument( argument, arg3 );
           value = is_npc( victim) ? get_actflag( arg3 ) : get_plrflag( arg3 );
 
           if ( !is_npc( victim ) && ( value < 0 || value > 31 ) )
             {
-              pcflag = TRUE;
+              pcflag = true;
               value = get_pcflag( arg3 );
             }
           if ( value < 0 || value > 31 )

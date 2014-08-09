@@ -89,7 +89,7 @@ void do_search( Character *ch, char *argument )
         }
     }
 
-  found = FALSE;
+  found = false;
 
   if ( (!startobj && door == -1) || is_npc(ch) )
     {
@@ -122,7 +122,7 @@ void do_search( Character *ch, char *argument )
         if ( IS_OBJ_STAT( obj, ITEM_HIDDEN )
              &&   percent < ch->pcdata->learned[gsn_search] )
           {
-            found = TRUE;
+            found = true;
             break;
           }
       }

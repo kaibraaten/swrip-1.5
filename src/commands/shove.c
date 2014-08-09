@@ -9,7 +9,7 @@ void do_shove( Character *ch, char *argument )
   int exit_dir = 0;
   Exit *pexit = NULL;
   Character *victim = NULL;
-  bool nogo = FALSE;
+  bool nogo = false;
   int shove_chance = 0;
 
   argument = one_argument( argument, arg );
@@ -234,13 +234,13 @@ void do_shove( Character *ch, char *argument )
             }
         }
 
-      nogo = TRUE;
+      nogo = true;
     }
   else if ( IS_SET(pexit->exit_info, EX_CLOSED)
 	    && (!is_affected_by(victim, AFF_PASS_DOOR)
 		|| IS_SET(pexit->exit_info, EX_NOPASSDOOR)) )
     {
-      nogo = TRUE;
+      nogo = true;
     }
 
   if ( nogo )

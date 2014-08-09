@@ -176,21 +176,21 @@ static void OnFinished( Character *ch )
       if (obj->item_type == ITEM_TOOLKIT)
         checktool = true;
 
-      if (obj->item_type == ITEM_CRYSTAL && checkgem == FALSE)
+      if (obj->item_type == ITEM_CRYSTAL && checkgem == false)
         {
           checkgem = true;
           separate_obj( obj );
           obj_from_char( obj );
           extract_obj( obj );
         }
-      if (obj->item_type == ITEM_CIRCUIT && checkcirc == FALSE)
+      if (obj->item_type == ITEM_CIRCUIT && checkcirc == false)
         {
           checkcirc = true;
           separate_obj( obj );
           obj_from_char( obj );
           extract_obj( obj );
         }
-      if (obj->item_type == ITEM_BATTERY && checkbatt == FALSE )
+      if (obj->item_type == ITEM_BATTERY && checkbatt == false )
         {
           separate_obj( obj );
           obj_from_char( obj );

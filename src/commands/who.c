@@ -40,7 +40,7 @@ void do_who( Character *ch, char *argument )
   bool fImmortalOnly;
   bool fShowHomepage;
   bool fClanMatch;
-  bool NullCh = FALSE;
+  bool NullCh = false;
   CLAN_DATA *pClan;
   FILE *whoout;
   PC_DATA *pcdata;
@@ -57,17 +57,17 @@ void do_who( Character *ch, char *argument )
   iLevelLower    = 0;
   iLevelUpper    = MAX_LEVEL;
 
-  fRaceRestrict  = FALSE;
-  fImmortalOnly  = FALSE;
-  fShowHomepage  = FALSE;
-  fClanMatch = FALSE;
+  fRaceRestrict  = false;
+  fImmortalOnly  = false;
+  fShowHomepage  = false;
+  fClanMatch = false;
 
   for ( iRace = 0; iRace < MAX_RACE; iRace++ )
-    rgfRace[iRace] = FALSE;
+    rgfRace[iRace] = false;
 
   if ( !ch )
     {
-      NullCh = TRUE;
+      NullCh = true;
       CREATE( ch, Character, 1 );
       ch->top_level = 1;
       ch->trust = 0;
@@ -115,7 +115,7 @@ void do_who( Character *ch, char *argument )
               if (!ch->pcdata->whoCloak)
                 {
                   send_to_char( "Who Cloaking is on.\r\n", ch );
-                  ch->pcdata->whoCloak = TRUE;
+                  ch->pcdata->whoCloak = true;
                   return;
                 }
               else
@@ -128,7 +128,7 @@ void do_who( Character *ch, char *argument )
             {
               if (ch->pcdata->whoCloak)
                 { send_to_char( "Who Cloaking is off.\r\n", ch );
-                  ch->pcdata->whoCloak = FALSE;
+                  ch->pcdata->whoCloak = false;
                   return;
                 }
               else
@@ -149,22 +149,22 @@ void do_who( Character *ch, char *argument )
            */
 
           if ( !str_cmp( arg, "imm" ) || !str_cmp( arg, "gods" ) )
-            fImmortalOnly = TRUE;
+            fImmortalOnly = true;
           else
             {
               if ( !str_cmp( arg, "www" ) )
-                fShowHomepage = TRUE;
+                fShowHomepage = true;
               else               /* SB who clan (order), guild */
                 {
                   if (!str_cmp( arg, "clan" ) && ch->pcdata && ch->pcdata->clan)
                     strcpy(arg, ch->pcdata->clan->name);
-                  if ( (pClan = get_clan (arg)) && (fClanMatch != TRUE))
+                  if ( (pClan = get_clan (arg)) && (fClanMatch != true))
                     {
                       if ((ch->top_level >= LEVEL_IMMORTAL)
 			  || (ch->pcdata && ch->pcdata->clan
 			      && !str_cmp(ch->pcdata->clan->name,pClan->name)))
                         {
-                          fClanMatch = TRUE;
+                          fClanMatch = true;
                         }
                       else
                         {
@@ -178,13 +178,13 @@ void do_who( Character *ch, char *argument )
                         {
                           if ( is_god(ch) && (!str_cmp( arg, race_table[iRace].race_name ) ) )
                             {
-                              rgfRace[iRace] = TRUE;
+                              rgfRace[iRace] = true;
                               break;
                             }
                         }
                       if ( iRace != MAX_RACE )
-                        fRaceRestrict = TRUE;
-                      if ( iRace == MAX_RACE && fClanMatch == FALSE )
+                        fRaceRestrict = true;
+                      if ( iRace == MAX_RACE && fClanMatch == false )
                         {
                           send_to_char( "Only immortals can do that.\r\n", ch );
                           return;
@@ -231,7 +231,7 @@ void do_who( Character *ch, char *argument )
       /* added optional invisibility on the who list to players who want it.
          Darrik Vequir */
 
-      if ( (wch->pcdata->whoCloak == TRUE) && (ch->top_level < LEVEL_GREATER))
+      if ( (wch->pcdata->whoCloak == true) && (ch->top_level < LEVEL_GREATER))
         continue;
 
       if ( fShowHomepage

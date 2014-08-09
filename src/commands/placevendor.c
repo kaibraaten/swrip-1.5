@@ -12,7 +12,7 @@ void do_placevendor (Character *ch, char *argument)
   char vnum1[MAX_INPUT_LENGTH];
   char buf [MAX_INPUT_LENGTH];
 
-  if (  find_keeper_q (ch, FALSE) )
+  if (  find_keeper_q (ch, false) )
     {
       send_to_char ("A vendor is already here!\r\n",ch);
       return;

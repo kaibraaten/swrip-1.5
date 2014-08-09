@@ -91,7 +91,7 @@ void do_practice( Character *ch, char *argument )
     {
       Character *mob;
       int adept;
-      bool can_prac = TRUE;
+      bool can_prac = true;
 
       if ( !is_awake(ch) )
         {

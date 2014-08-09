@@ -40,34 +40,34 @@ void do_autorecharge(Character *ch, char *argument )
 
   if ( !str_cmp(argument,"on" ) )
     {
-      ship->autorecharge=TRUE;
+      ship->autorecharge=true;
       send_to_char( "&GYou power up the shields.\r\n", ch);
       echo_to_cockpit( AT_YELLOW , ship , "Shields ON. Autorecharge ON.");
     }
   else if ( !str_cmp(argument,"off" ) )
     {
-      ship->autorecharge=FALSE;
+      ship->autorecharge=false;
       send_to_char( "&GYou shutdown the shields.\r\n", ch);
       echo_to_cockpit( AT_YELLOW , ship , "Shields OFF. Shield strength set to 0. Autorecharge OFF.");
       ship->shield = 0;
     }
   else if ( !str_cmp(argument,"idle" ) )
     {
-      ship->autorecharge=FALSE;
+      ship->autorecharge=false;
       send_to_char( "&GYou let the shields idle.\r\n", ch);
       echo_to_cockpit( AT_YELLOW , ship , "Autorecharge OFF. Shields IDLEING.");
     }
   else
     {
-      if (ship->autorecharge == TRUE)
+      if (ship->autorecharge == true)
         {
-          ship->autorecharge=FALSE;
+          ship->autorecharge=false;
           send_to_char( "&GYou toggle the shields.\r\n", ch);
           echo_to_cockpit( AT_YELLOW , ship , "Autorecharge OFF. Shields IDLEING.");
         }
       else
         {
-          ship->autorecharge=TRUE;
+          ship->autorecharge=true;
           send_to_char( "&GYou toggle the shields.\r\n", ch);
           echo_to_cockpit( AT_YELLOW , ship , "Shields ON. Autorecharge ON");
         }

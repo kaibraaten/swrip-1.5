@@ -89,7 +89,7 @@ void do_request(Character *ch, char *argument)
       return;
     }
 
-  if ( eShip->bayopen == TRUE )
+  if ( eShip->bayopen == true )
     {
       send_to_char("&RThat ship's bay doors are already open!\r\n",ch);
       return;
@@ -99,7 +99,7 @@ void do_request(Character *ch, char *argument)
 
   send_to_char("&RYou open the bay doors of the remote ship.",ch);
   act(AT_PLAIN,"$n flips a switch on the control panel.",ch,NULL,argument,TO_ROOM);
-  eShip->bayopen = TRUE;
+  eShip->bayopen = true;
   sprintf( buf ,"%s's bay doors open." , eShip->name );
   echo_to_nearby_ships( AT_YELLOW, ship, buf , NULL );
 }

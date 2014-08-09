@@ -60,7 +60,7 @@ void do_recall( Character *ch, char *argument )
         }
 
       ch_printf( ch, "You recall from combat!\r\n" );
-      stop_fighting( ch, TRUE );
+      stop_fighting( ch, true );
     }
 
   act( AT_ACTION, "$n disappears in a swirl of the Force.", ch, NULL, NULL, TO_ROOM );

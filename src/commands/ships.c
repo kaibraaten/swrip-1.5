@@ -10,7 +10,7 @@ void do_ships( Character *ch, char *argument )
   char pilottype[MAX_STRING_LENGTH];
   char pilottype2[MAX_STRING_LENGTH];
   int count = 0;
-  bool owned = FALSE, set = FALSE;
+  bool owned = false, set = false;
 
   if ( !is_npc(ch) )
     {
@@ -19,7 +19,7 @@ void do_ships( Character *ch, char *argument )
       send_to_pager( "\r\n&WShip                                                   Owner\r\n",ch);
       for ( ship = first_ship; ship; ship = ship->next )
         {
-          owned = FALSE, set = FALSE;
+          owned = false, set = false;
           if ( str_cmp(ship->owner, ch->name) )
             {
               if ( !check_pilot( ch, ship ) || !str_cmp(ship->owner, "public") || !str_cmp(ship->owner, "trainer") )
@@ -41,26 +41,26 @@ void do_ships( Character *ch, char *argument )
           if( !str_cmp(ship->owner, ch->name ) )
             {
               strcpy( pilottype2, "Owner" );
-              owned = TRUE;
-              set = TRUE;
+              owned = true;
+              set = true;
             }
 
           if( !set && !str_cmp( ship->pilot, ch->name ) )
             {
               strcpy( pilottype2, "Pilot" );
-              set = TRUE;
+              set = true;
             }
 
           if( !set && !str_cmp( ship->pilot, ch->name ) )
             {
               strcpy( pilottype2, "Co-Pilot" );
-              set = TRUE;
+              set = true;
             }
 
           if( !set )
             {
               strcpy( pilottype2, "Clan-Pilot" );
-              set = TRUE;
+              set = true;
             }
 
           if( !owned )

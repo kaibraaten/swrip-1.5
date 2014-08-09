@@ -43,7 +43,7 @@ void do_cutdoor( Character *ch, char *argument )
       return;
     }
 
-  if ( ( pexit = find_door( ch, arg, FALSE ) ) != NULL )
+  if ( ( pexit = find_door( ch, arg, false ) ) != NULL )
     {
       ROOM_INDEX_DATA *to_room;
       Exit       *pexit_rev;

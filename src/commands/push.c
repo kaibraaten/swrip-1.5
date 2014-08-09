@@ -22,5 +22,5 @@ void do_push( Character *ch, char *argument )
       return;
     }
 
-  pullorpush( ch, obj, FALSE );
+  pullorpush( ch, obj, false );
 }

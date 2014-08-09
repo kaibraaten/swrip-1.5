@@ -79,7 +79,7 @@ void do_auction (Character *ch, char *argument)
             {
               set_char_color( AT_OBJECT, ch );
               send_to_char( "Contents:\r\n", ch );
-              show_list_to_char( obj->first_content, ch, TRUE, FALSE );
+              show_list_to_char( obj->first_content, ch, true, false );
             }
 
           if (is_immortal(ch))

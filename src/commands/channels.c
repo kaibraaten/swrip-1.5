@@ -138,12 +138,12 @@ void do_channels( Character *ch, char *argument )
       int bit;
 
       bit=0;
-      ClearAll = FALSE;
+      ClearAll = false;
 
       if ( arg[0] == '+' )
-	fClear = TRUE;
+	fClear = true;
       else if ( arg[0] == '-' )
-	fClear = FALSE;
+	fClear = false;
       else
         {
           send_to_char( "Channels -channel or +channel?\r\n", ch );
@@ -193,7 +193,7 @@ void do_channels( Character *ch, char *argument )
       else if ( !str_cmp( arg+1, "arena"  ) )
 	bit = CHANNEL_ARENA;
       else if ( !str_cmp( arg+1, "all"      ) )
-	ClearAll = TRUE;
+	ClearAll = true;
       else
         {
           send_to_char( "Set or clear which channel?\r\n", ch );

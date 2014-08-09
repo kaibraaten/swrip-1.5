@@ -12,7 +12,7 @@ void do_calculate_diff(Character *ch, char *argument )
   int the_chance , distance = 0;
   SHIP_DATA *ship;
   SPACE_DATA *spaceobj, *spaceobject;
-  bool found = FALSE;
+  bool found = false;
 
   argument = one_argument( argument , arg1);
   argument = one_argument( argument , arg2);
@@ -82,7 +82,7 @@ void do_calculate_diff(Character *ch, char *argument )
       ship->jump.x = ship->pos.x + atoi(arg1);
       ship->jump.y = ship->pos.y + atoi(arg2);
       ship->jump.z = ship->pos.z + atoi(arg3);
-      found = TRUE;
+      found = true;
     }
   else
     {

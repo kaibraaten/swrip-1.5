@@ -186,10 +186,10 @@ void do_cedit( Character *ch, char *argument )
       if ( arg1[0] != command->name[0] )
         {
           unlink_command( command );
-          relocate = TRUE;
+          relocate = true;
         }
       else
-        relocate = FALSE;
+        relocate = false;
       if ( command->name )
         DISPOSE( command->name );
       command->name = str_dup( arg1 );

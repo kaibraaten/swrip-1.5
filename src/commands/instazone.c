@@ -17,9 +17,9 @@ void do_instazone( Character *ch, char *argument )
       return;
     }
   if ( !str_cmp(argument, "nodoors") )
-    dodoors = FALSE;
+    dodoors = false;
   else
-    dodoors = TRUE;
+    dodoors = true;
   pArea = ch->pcdata->area;
   if ( pArea->first_reset )
     wipe_resets(pArea, NULL);

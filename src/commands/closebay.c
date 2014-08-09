@@ -24,7 +24,7 @@ void do_closebay( Character *ch, char *argument )
       return;
     }
 
-  if (ship->bayopen == FALSE)
+  if (ship->bayopen == false)
     {
       send_to_char("Bay doors are already closed!", ch);
       return;
@@ -32,7 +32,7 @@ void do_closebay( Character *ch, char *argument )
 
   act( AT_PLAIN, "$n flips a switch on the control panel.", ch,
        NULL, argument , TO_ROOM );
-  ship->bayopen = FALSE;
+  ship->bayopen = false;
 
   echo_to_cockpit( AT_YELLOW , ship, "Bay Doors close");
   send_to_char("You close the bay doors.", ch);

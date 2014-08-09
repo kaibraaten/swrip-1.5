@@ -12,10 +12,10 @@ void do_check_vnums( Character *ch, char *argument )
   bool room, mob, obj, all, area_conflict;
   int low_range, high_range;
 
-  room = FALSE;
-  mob  = FALSE;
-  obj  = FALSE;
-  all  = FALSE;
+  room = false;
+  mob  = false;
+  obj  = false;
+  all  = false;
 
   argument = one_argument( argument, arg1 );
   argument = one_argument( argument, arg2 );
@@ -27,16 +27,16 @@ void do_check_vnums( Character *ch, char *argument )
     }
 
   if(!str_cmp(arg1, "room"))
-    room = TRUE;
+    room = true;
 
   else if(!str_cmp(arg1, "mob"))
-    mob = TRUE;
+    mob = true;
 
   else if(!str_cmp(arg1, "object"))
-    obj = TRUE;
+    obj = true;
 
   else if(!str_cmp(arg1, "all"))
-    all = TRUE;
+    all = true;
   else
     {
       send_to_char("Please specify room, mob, or object as your first argument.\r\n", ch);
@@ -90,58 +90,58 @@ void do_check_vnums( Character *ch, char *argument )
 
   for ( pArea = first_asort; pArea; pArea = pArea->next_sort )
     {
-      area_conflict = FALSE;
+      area_conflict = false;
       if ( IS_SET( pArea->status, AREA_DELETED ) )
         continue;
       else
         if (room)
           {
             if ( low_range < pArea->low_r_vnum && pArea->low_r_vnum < high_range )
-              area_conflict = TRUE;
+              area_conflict = true;
 
             if ( low_range < pArea->hi_r_vnum && pArea->hi_r_vnum < high_range )
-              area_conflict = TRUE;
+              area_conflict = true;
 
             if ( ( low_range >= pArea->low_r_vnum )
                  && ( low_range <= pArea->hi_r_vnum ) )
-              area_conflict = TRUE;
+              area_conflict = true;
 
             if ( ( high_range <= pArea->hi_r_vnum )
                  && ( high_range >= pArea->low_r_vnum ) )
-              area_conflict = TRUE;
+              area_conflict = true;
           }
 
       if (mob)
         {
           if ( low_range < pArea->low_m_vnum && pArea->low_m_vnum < high_range )
-            area_conflict = TRUE;
+            area_conflict = true;
 
 	  if ( low_range < pArea->hi_m_vnum && pArea->hi_m_vnum < high_range )
-            area_conflict = TRUE;
+            area_conflict = true;
           if ( ( low_range >= pArea->low_m_vnum )
                && ( low_range <= pArea->hi_m_vnum ) )
-            area_conflict = TRUE;
+            area_conflict = true;
 
           if ( ( high_range <= pArea->hi_m_vnum )
                && ( high_range >= pArea->low_m_vnum ) )
-            area_conflict = TRUE;
+            area_conflict = true;
         }
 
       if (obj)
         {
           if ( low_range < pArea->low_o_vnum && pArea->low_o_vnum < high_range )
-            area_conflict = TRUE;
+            area_conflict = true;
 
           if ( low_range < pArea->hi_o_vnum && pArea->hi_o_vnum < high_range )
-            area_conflict = TRUE;
+            area_conflict = true;
 
           if ( ( low_range >= pArea->low_o_vnum )
                && ( low_range <= pArea->hi_o_vnum ) )
-            area_conflict = TRUE;
+            area_conflict = true;
 
           if ( ( high_range <= pArea->hi_o_vnum )
                && ( high_range >= pArea->low_o_vnum ) )
-            area_conflict = TRUE;
+            area_conflict = true;
         }
 
       if (area_conflict)
@@ -165,58 +165,58 @@ void do_check_vnums( Character *ch, char *argument )
     }
   for ( pArea = first_bsort; pArea; pArea = pArea->next_sort )
     {
-      area_conflict = FALSE;
+      area_conflict = false;
       if ( IS_SET( pArea->status, AREA_DELETED ) )
         continue;
       else
         if (room)
           {
             if ( low_range < pArea->low_r_vnum && pArea->low_r_vnum < high_range )
-              area_conflict = TRUE;
+              area_conflict = true;
 
             if ( low_range < pArea->hi_r_vnum && pArea->hi_r_vnum < high_range )
-              area_conflict = TRUE;
+              area_conflict = true;
 
             if ( ( low_range >= pArea->low_r_vnum )
                  && ( low_range <= pArea->hi_r_vnum ) )
-              area_conflict = TRUE;
+              area_conflict = true;
 
             if ( ( high_range <= pArea->hi_r_vnum )
                  && ( high_range >= pArea->low_r_vnum ) )
-              area_conflict = TRUE;
+              area_conflict = true;
           }
 
       if (mob)
         {
           if ( low_range < pArea->low_m_vnum && pArea->low_m_vnum < high_range )
-            area_conflict = TRUE;
+            area_conflict = true;
 
           if ( low_range < pArea->hi_m_vnum && pArea->hi_m_vnum < high_range )
-            area_conflict = TRUE;
+            area_conflict = true;
           if ( ( low_range >= pArea->low_m_vnum )
                && ( low_range <= pArea->hi_m_vnum ) )
-            area_conflict = TRUE;
+            area_conflict = true;
 
           if ( ( high_range <= pArea->hi_m_vnum )
                && ( high_range >= pArea->low_m_vnum ) )
-            area_conflict = TRUE;
+            area_conflict = true;
         }
 
       if (obj)
         {
           if ( low_range < pArea->low_o_vnum && pArea->low_o_vnum < high_range )
-            area_conflict = TRUE;
+            area_conflict = true;
 
 	  if ( low_range < pArea->hi_o_vnum && pArea->hi_o_vnum < high_range )
-            area_conflict = TRUE;
+            area_conflict = true;
 
           if ( ( low_range >= pArea->low_o_vnum )
                && ( low_range <= pArea->hi_o_vnum ) )
-            area_conflict = TRUE;
+            area_conflict = true;
 
           if ( ( high_range <= pArea->hi_o_vnum )
                && ( high_range >= pArea->low_o_vnum ) )
-            area_conflict = TRUE;
+            area_conflict = true;
         }
 
       if (area_conflict)

@@ -7,7 +7,7 @@ void do_reply( Character *ch, char *argument )
   Character *victim = NULL;
   int position = POS_STANDING;
   Character *vch = NULL;
-  bool sameroom = FALSE;
+  bool sameroom = false;
 
   REMOVE_BIT( ch->deaf, CHANNEL_TELLS );
 
@@ -62,7 +62,7 @@ void do_reply( Character *ch, char *argument )
 
   if (victim->in_room == ch->in_room )
     {
-      sameroom = TRUE;
+      sameroom = true;
     }
 
   act( AT_TELL, "(&COutgoing Message&B) $N: '$t'", ch, argument, victim, TO_CHAR );
@@ -106,7 +106,7 @@ void do_reply( Character *ch, char *argument )
 
           sbuf = drunk_speech( sbuf, ch );
 
-          MOBtrigger = FALSE;
+          MOBtrigger = false;
           act( AT_SAY, "$n says quietly into his comlink '$t'", ch, sbuf, vch, TO_VICT );
         }
 

@@ -51,7 +51,7 @@ void do_cset( Character *ch, char *argument )
 
   if( !str_cmp( arg, "disable_hunger" ) )
     {
-      sysdata.disable_hunger = sysdata.disable_hunger ? FALSE : TRUE;
+      sysdata.disable_hunger = sysdata.disable_hunger ? false : true;
       ch_printf( ch, "Hunger and thirst now %s\r\n",
 		 sysdata.disable_hunger ? "DISABLED" : "ENABLED" );
       return;

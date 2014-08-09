@@ -30,11 +30,11 @@ void do_timecmd( Character *ch, char *argument )
     }
   set_char_color(AT_PLAIN, ch);
   send_to_char( "Starting timer.\r\n", ch );
-  timing = TRUE;
+  timing = true;
   gettimeofday(&start_time, NULL);
   interpret(ch, argument);
   gettimeofday(&etime, NULL);
-  timing = FALSE;
+  timing = false;
   set_char_color(AT_PLAIN, ch);
   send_to_char( "Timing complete.\r\n", ch );
   subtract_times(&etime, &start_time);

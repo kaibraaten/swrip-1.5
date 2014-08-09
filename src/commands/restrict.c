@@ -8,7 +8,7 @@ void do_restrict( Character *ch, char *argument )
   char buf[MAX_STRING_LENGTH];
   short level, hash;
   CMDTYPE *cmd;
-  bool found = FALSE;
+  bool found = false;
 
   argument = one_argument( argument, arg );
 
@@ -34,7 +34,7 @@ void do_restrict( Character *ch, char *argument )
       if ( !str_prefix( arg, cmd->name )
            &&    cmd->level <= get_trust( ch ) )
         {
-          found = TRUE;
+          found = true;
           break;
         }
     }

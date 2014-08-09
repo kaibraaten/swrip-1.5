@@ -18,14 +18,14 @@ void do_list( Character *ch, char *argument )
           return;
         }
 
-      found = FALSE;
+      found = false;
       for ( pet = pRoomIndexNext->first_person; pet; pet = pet->next_in_room )
         {
           if ( IS_SET(pet->act, ACT_PET) && is_npc(pet) )
             {
               if ( !found )
                 {
-                  found = TRUE;
+                  found = true;
                   send_to_char( "Pets for sale:\r\n", ch );
                 }
 	      ch_printf( ch, "[%2d] %8d - %s\r\n",
@@ -52,21 +52,21 @@ void do_list( Character *ch, char *argument )
       if ( ( keeper = find_keeper( ch ) ) == NULL )
         return;
 
-      found = FALSE;
+      found = false;
       for ( obj = keeper->last_carrying; obj; obj = obj->prev_content )
         {
           if ( obj->wear_loc == WEAR_NONE
                &&   can_see_obj( ch, obj ) )
             {
               oref++;
-              if ( ( cost = get_cost( ch, keeper, obj, TRUE ) ) > 0
+              if ( ( cost = get_cost( ch, keeper, obj, true ) ) > 0
                    && ( arg[0] == '\0' || nifty_is_name( arg, obj->name ) ) )
                 {
                   if (keeper->home != NULL)
                     cost = obj->cost;
                   if ( !found )
                     {
-                      found = TRUE;
+                      found = true;
                       send_to_char( "[Price] {ref} Item\r\n", ch );
                     }
                   ch_printf( ch, "[%5d] {%3d} %s%s.\r\n",

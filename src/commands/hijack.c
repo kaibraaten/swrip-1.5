@@ -88,7 +88,7 @@ void do_hijack( Character *ch, char *argument )
 
       if (ship->hatchopen)
         {
-          ship->hatchopen = FALSE;
+          ship->hatchopen = false;
           sprintf( buf , "The hatch on %s closes." , ship->name);
           echo_to_room( AT_YELLOW , get_room_index(ship->location) , buf );
           echo_to_room( AT_YELLOW , get_room_index(ship->room.entrance) , "The hatch slides shut." );

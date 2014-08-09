@@ -5,7 +5,7 @@ void do_beep( Character *ch, char *argument )
 {
   Character *victim = NULL;
   char arg[MAX_STRING_LENGTH];
-  bool ch_comlink = FALSE, victim_comlink = FALSE;
+  bool ch_comlink = false, victim_comlink = false;
 
   argument = one_argument( argument, arg );
 
@@ -40,12 +40,12 @@ void do_beep( Character *ch, char *argument )
 
   if ( is_immortal( ch ) )
     {
-      ch_comlink = TRUE;
-      victim_comlink = TRUE;
+      ch_comlink = true;
+      victim_comlink = true;
     }
 
   if ( is_immortal( victim ) )
-    victim_comlink = TRUE;
+    victim_comlink = true;
 
   ch_comlink = has_comlink( ch );
 

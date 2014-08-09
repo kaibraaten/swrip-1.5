@@ -31,7 +31,7 @@ void do_buyvendor (Character *ch, char *argument)
     }
 
 
-  if (  (keeper = find_keeper_q( ch, FALSE ) )  == NULL  )
+  if (  (keeper = find_keeper_q( ch, false ) )  == NULL  )
     {
       send_to_char ("There is no one to buy that from!\r\n", ch);
       return;

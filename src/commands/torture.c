@@ -68,11 +68,11 @@ void do_torture( Character *ch, char *argument )
 
   set_wait_state( ch, skill_table[gsn_torture]->beats );
 
-  fail = FALSE;
+  fail = false;
   the_chance = ris_save( victim, get_level( ch, LEADERSHIP_ABILITY ) / 10, RIS_PARALYSIS );
 
   if ( the_chance == 1000 )
-    fail = TRUE;
+    fail = true;
   else
     fail = saves_para_petri( the_chance, victim );
 

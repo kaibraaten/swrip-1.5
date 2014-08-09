@@ -11,7 +11,7 @@ void do_put( Character *ch, char *argument )
   CLAN_DATA *clan;
   short count;
   int           number;
-  bool  save_char = FALSE;
+  bool  save_char = false;
 
   argument = one_argument( argument, arg1 );
   if ( is_number(arg1) )
@@ -54,7 +54,7 @@ void do_put( Character *ch, char *argument )
     }
 
   if ( !container->carried_by && IS_SET( sysdata.save_flags, SV_PUT ) )
-    save_char = TRUE;
+    save_char = true;
 
   if ( IS_OBJ_STAT(container, ITEM_COVERING) )
     {
@@ -151,15 +151,15 @@ void do_put( Character *ch, char *argument )
     }
   else
     {
-      bool found = FALSE;
+      bool found = false;
       int cnt = 0;
       bool fAll;
       char *chk;
 
       if ( !str_cmp(arg1, "all") )
-        fAll = TRUE;
+        fAll = true;
       else
-        fAll = FALSE;
+        fAll = false;
       if ( number > 1 )
         chk = arg1;
       else
@@ -186,7 +186,7 @@ void do_put( Character *ch, char *argument )
               act( AT_ACTION, "$n puts $p in $P.", ch, obj, container, TO_ROOM );
               act( AT_ACTION, "You put $p in $P.", ch, obj, container, TO_CHAR );
               obj = obj_to_obj( obj, container );
-              found = TRUE;
+              found = true;
 
               check_for_trap( ch, container, TRAP_PUT );
               if ( char_died(ch) )

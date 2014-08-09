@@ -29,9 +29,9 @@ void do_foldarea( Character *ch, char *argument )
       if ( !str_cmp( tarea->filename, arg ) || fold_all_areas )
         {
           if (!str_cmp( argument, "remproto") )
-            fold_area( tarea, tarea->filename, TRUE );
+            fold_area( tarea, tarea->filename, true );
           else
-            fold_area( tarea, tarea->filename, FALSE );
+            fold_area( tarea, tarea->filename, false );
 
 	  found = true;
         }

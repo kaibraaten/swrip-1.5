@@ -13,7 +13,7 @@ void do_fill( Character *ch, char *argument )
   OBJ_DATA *source;
   short    dest_item, src_item1, src_item2, src_item3, src_item4;
   int       diff;
-  bool      all = FALSE;
+  bool      all = false;
 
   argument = one_argument( argument, arg1 );
   argument = one_argument( argument, arg2 );
@@ -95,7 +95,7 @@ void do_fill( Character *ch, char *argument )
       if ( dest_item == ITEM_CONTAINER
            && (!str_cmp( arg2, "all" ) || !str_prefix( "all.", arg2 )) )
         {
-          all = TRUE;
+          all = true;
           source = NULL;
         }
       else
@@ -137,10 +137,10 @@ void do_fill( Character *ch, char *argument )
 
   if ( !source )
     {
-      bool      found = FALSE;
+      bool      found = false;
       OBJ_DATA *src_next;
 
-      found = FALSE;
+      found = false;
       separate_obj( obj );
       for ( source = ch->in_room->first_content;
             source;
@@ -166,7 +166,7 @@ void do_fill( Character *ch, char *argument )
                 }
 	      else
                 obj_to_obj(source, obj);
-              found = TRUE;
+              found = true;
             }
           else
             if (source->item_type == src_item1
@@ -174,7 +174,7 @@ void do_fill( Character *ch, char *argument )
                 ||  source->item_type == src_item3
                 ||  source->item_type == src_item4 )
               {
-                found = TRUE;
+                found = true;
                 break;
               }
         }
@@ -213,7 +213,7 @@ void do_fill( Character *ch, char *argument )
       char name[MAX_INPUT_LENGTH];
       Character *gch;
       char *pd;
-      bool found = FALSE;
+      bool found = false;
 
       if ( source == obj )
         {
@@ -259,14 +259,14 @@ void do_fill( Character *ch, char *argument )
             {
               bool fGroup;
 
-              fGroup = FALSE;
+              fGroup = false;
               for ( gch = first_char; gch; gch = gch->next )
                 {
                   if ( !is_npc(gch)
                        &&   is_same_group( ch, gch )
                        &&   !str_cmp( name, gch->name ) )
                     {
-                      fGroup = TRUE;
+                      fGroup = true;
                       break;
                     }
                 }
@@ -305,7 +305,7 @@ void do_fill( Character *ch, char *argument )
                 continue;
               obj_from_obj(otmp);
               obj_to_obj(otmp, obj);
-              found = TRUE;
+              found = true;
             }
           if ( found )
             {

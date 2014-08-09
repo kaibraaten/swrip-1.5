@@ -25,7 +25,7 @@ void do_unhell( Character *ch, char *argument )
   location = get_room_index( wherehome(victim) );
   if ( !location )
     location = ch->in_room;
-  MOBtrigger = FALSE;
+  MOBtrigger = false;
   act( AT_MAGIC, "$n disappears in a cloud of godly light.", victim, NULL, ch, TO_NOTVICT );
   char_from_room(victim);
   char_to_room(victim, location);
@@ -42,7 +42,7 @@ void do_unhell( Character *ch, char *argument )
       victim->pcdata->helled_by = NULL;
     }
 
-  MOBtrigger = FALSE;
+  MOBtrigger = false;
   act( AT_MAGIC, "$n appears in a cloud of godly light.", victim, NULL, ch, TO_NOTVICT );
   victim->pcdata->release_date = 0;
   save_char_obj(victim);

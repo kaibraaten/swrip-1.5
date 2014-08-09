@@ -24,10 +24,10 @@ void do_savearea( Character *ch, char *argument )
           send_to_char( "You can only save your own area.\r\n", ch );
           return;
         }
-      for ( found = FALSE, tarea = first_build; tarea; tarea = tarea->next )
+      for ( found = false, tarea = first_build; tarea; tarea = tarea->next )
         if ( !str_cmp( tarea->filename, argument ) )
           {
-            found = TRUE;
+            found = true;
             break;
           }
       if ( !found )
@@ -51,6 +51,6 @@ void do_savearea( Character *ch, char *argument )
     }
 
   sprintf( filename, "%s%s", BUILD_DIR, tarea->filename );
-  fold_area( tarea, filename, FALSE );
+  fold_area( tarea, filename, false );
   send_to_char( "Done.\r\n", ch );
 }

@@ -105,7 +105,7 @@ void do_propaganda ( Character *ch , char *argument )
   if ( victim->top_level - get_curr_cha(ch) > ch->pcdata->learned[gsn_propaganda]  )
     {
 
-      if ( (ch->pcdata->clan) ? planet->governed_by != clan : TRUE)
+      if ( (ch->pcdata->clan) ? planet->governed_by != clan : true)
         {
           sprintf( buf, "%s is a traitor!" , ch->name);
           do_yell( victim, buf );

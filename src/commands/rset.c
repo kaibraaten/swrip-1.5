@@ -52,9 +52,9 @@ void do_rset( Character *ch, char *argument )
        * Protect from messing up prototype flag
        */
       if ( IS_SET( location->room_flags, ROOM_PROTOTYPE ) )
-        proto = TRUE;
+        proto = true;
       else
-        proto = FALSE;
+        proto = false;
       location->room_flags      = value;
       if ( proto )
         SET_BIT( location->room_flags, ROOM_PROTOTYPE );

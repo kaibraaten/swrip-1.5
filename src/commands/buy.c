@@ -129,7 +129,7 @@ void do_buy( Character *ch, char *argument )
       if ( !obj && arg[0] == '#' )
         {
           int onum, oref;
-          bool ofound = FALSE;
+          bool ofound = false;
 
           onum =0;
           oref = atoi(arg+1);
@@ -140,7 +140,7 @@ void do_buy( Character *ch, char *argument )
                 onum++;
               if ( onum == oref )
                 {
-                  ofound = TRUE;
+                  ofound = true;
                   break;
                 }
               else if ( onum > oref )
@@ -157,7 +157,7 @@ void do_buy( Character *ch, char *argument )
         }
 
 
-      cost = ( get_cost( ch, keeper, obj, TRUE ) * noi );
+      cost = ( get_cost( ch, keeper, obj, true ) * noi );
 
       if (keeper->home != NULL && obj->cost > 0)
         cost= obj->cost;

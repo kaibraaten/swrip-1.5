@@ -151,9 +151,9 @@ void do_config( Character *ch, char *argument )
       int bit = 0;
 
       if ( arg[0] == '+' )
-	fSet = TRUE;
+	fSet = true;
       else if ( arg[0] == '-' )
-	fSet = FALSE;
+	fSet = false;
       else
         {
           send_to_char( "Config -option or +option?\r\n", ch );

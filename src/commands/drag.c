@@ -63,7 +63,7 @@ void do_drag( Character *ch, char *argument )
       return;
     }
 
-  nogo = FALSE;
+  nogo = false;
   if ((pexit = get_exit(ch->in_room, exit_dir)) == NULL )
     {
       if (!str_cmp( arg2, "in" ))
@@ -223,13 +223,13 @@ void do_drag( Character *ch, char *argument )
               return;
             }
         }
-      nogo = TRUE;
+      nogo = true;
     }
   else
     if ( IS_SET(pexit->exit_info, EX_CLOSED)
          && (!is_affected_by(victim, AFF_PASS_DOOR)
              ||   IS_SET(pexit->exit_info, EX_NOPASSDOOR)) )
-      nogo = TRUE;
+      nogo = true;
   if ( nogo )
     {
       send_to_char( "There's no exit in that direction.\r\n", ch );

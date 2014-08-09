@@ -8,7 +8,7 @@ void do_hail( Character *ch , char *argument )
 {
   int vnum;
   long gold = 1;
-  bool steal = FALSE;
+  bool steal = false;
   ROOM_INDEX_DATA *room;
   char arg[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
@@ -128,7 +128,7 @@ void do_hail( Character *ch , char *argument )
     }
 
   if ( gold && number_range( 1, 10 ) == 1 )
-    steal = TRUE;
+    steal = true;
 
   vnum = ch->in_room->vnum;
 

@@ -31,7 +31,7 @@ void do_detrap( Character *ch, char *argument )
         }
       if ( ms_find_obj(ch) )
         return;
-      found = FALSE;
+      found = false;
       if ( ch->mount )
         {
           send_to_char( "You can't do that while mounted.\r\n", ch );
@@ -46,7 +46,7 @@ void do_detrap( Character *ch, char *argument )
         {
           if ( can_see_obj( ch, obj ) && nifty_is_name( arg, obj->name ) )
             {
-              found = TRUE;
+              found = true;
               break;
             }
         }
@@ -89,7 +89,7 @@ void do_detrap( Character *ch, char *argument )
     {
       if ( can_see_obj( ch, obj ) && nifty_is_name( arg, obj->name ) )
         {
-          found = TRUE;
+          found = true;
           break;
         }
     }

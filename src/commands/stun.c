@@ -36,11 +36,11 @@ void do_stun( Character *ch, char *argument )
     }
 
   set_wait_state( ch, skill_table[gsn_stun]->beats );
-  fail = FALSE;
+  fail = false;
   stun_chance = ris_save( victim, get_level( ch, COMBAT_ABILITY ), RIS_PARALYSIS );
 
   if ( stun_chance == 1000 )
-    fail = TRUE;
+    fail = true;
   else
     fail = saves_para_petri( stun_chance, victim );
 

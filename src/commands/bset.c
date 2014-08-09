@@ -3,7 +3,7 @@
 void do_bset( Character *ch, char *argument )
 {
   BOARD_DATA *board = NULL;
-  bool found = FALSE;
+  bool found = false;
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
   char buf[MAX_STRING_LENGTH];
@@ -27,7 +27,7 @@ void do_bset( Character *ch, char *argument )
     {
       if ( !str_cmp( arg1, board->note_file ) )
 	{
-	  found = TRUE;
+	  found = true;
 	  break;
 	}
     }

@@ -5,7 +5,7 @@ void do_bury( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   OBJ_DATA *obj = NULL;
-  bool shovel = FALSE;
+  bool shovel = false;
   short move = 0;
 
   one_argument( argument, arg );
@@ -25,7 +25,7 @@ void do_bury( Character *ch, char *argument )
     {
       if ( obj->item_type == ITEM_SHOVEL )
 	{
-	  shovel = TRUE;
+	  shovel = true;
 	  break;
 	}
     }

@@ -47,5 +47,5 @@ void do_low_purge( Character *ch, char *argument )
   act( AT_IMMORT, "$n purges $N.", ch, NULL, victim, TO_NOTVICT );
   act( AT_IMMORT, "You make $N disappear in a puff of smoke!",
        ch, NULL, victim, TO_CHAR );
-  extract_char( victim, TRUE );
+  extract_char( victim, true );
 }

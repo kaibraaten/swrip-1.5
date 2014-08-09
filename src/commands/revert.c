@@ -24,7 +24,7 @@ void do_revert(Character *ch, char *argument)
       ch->desc->character->desc = ch->desc;
       ch->desc->character->switched = NULL;
       ch->desc                  = NULL;
-      extract_char(mob, TRUE);
+      extract_char(mob, true);
       return;
     }
 

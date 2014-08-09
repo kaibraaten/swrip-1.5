@@ -33,7 +33,7 @@ static void gr_read( Character *ch, int op_num, bool or_sw, int dis_num);
 void do_grub (Character *ch, char *argument)
 {
   char arg1[MAX_STRING_LENGTH];
-  bool or_sw = FALSE;                       /* or search criteria           */
+  bool or_sw = false;                       /* or search criteria           */
   int  dis_num;                             /* display lines requested      */
   int  op_num = 0;                          /* num of operands on cmd line  */
 
@@ -83,55 +83,55 @@ static bool gr_eval_and (GR_STRUCT r, int op_num)
         {
         case name:
           if ( !go_eval_str (r.name, gr_op[cou].op, gr_op[cou].sval) )
-            return FALSE;
+            return false;
           else break;
         case sex:
           if ( !go_eval_num (r.sex, gr_op[cou].op, gr_op[cou].nval) )
-            return FALSE;
+            return false;
           else break;
         case pclass:
           if ( !go_eval_num (r.pclass, gr_op[cou].op, gr_op[cou].nval) )
-	    return FALSE;
+	    return false;
           else break;
         case race:
           if ( !go_eval_num (r.race, gr_op[cou].op, gr_op[cou].nval) )
-            return FALSE;
+            return false;
           else break;
         case level:
           if ( !go_eval_num (r.level, gr_op[cou].op, gr_op[cou].nval) )
-            return FALSE;
+            return false;
           else break;
         case room:
           if ( !go_eval_num (r.room, gr_op[cou].op, gr_op[cou].nval) )
-            return FALSE;
+            return false;
           else break;
         case gold:
           if ( !go_eval_num (r.gold, gr_op[cou].op, gr_op[cou].nval) )
-            return FALSE;
+            return false;
           else break;
         case clan:
           if ( !go_eval_num (r.clan, gr_op[cou].op, gr_op[cou].nval) )
-            return FALSE;
+            return false;
           else break;
         case council:
           if ( !go_eval_num (r.council, gr_op[cou].op, gr_op[cou].nval) )
-            return FALSE;
+            return false;
           else break;
         case site:
           if ( !go_eval_str (r.site, gr_op[cou].op, gr_op[cou].sval) )
-            return FALSE;
+            return false;
           else break;
         case last:
           if ( !go_eval_num (r.last, gr_op[cou].op, gr_op[cou].nval) )
-            return FALSE;
+            return false;
           else break;
         case pkill:
           if ( !go_eval_str (gr_strc(r.pkill), gr_op[cou].op, gr_op[cou].sval) )
-            return FALSE;
+            return false;
           else break;
         }
     }
-  return TRUE;
+  return true;
 }
 
 /*
@@ -147,72 +147,72 @@ static bool gr_eval_or (GR_STRUCT r, int op_num)
         {
         case name:
           if ( go_eval_str (r.name, gr_op[cou].op, gr_op[cou].sval) )
-            return TRUE;
+            return true;
           else break;
         case sex:
           if ( go_eval_num (r.sex, gr_op[cou].op, gr_op[cou].nval) )
-            return TRUE;
+            return true;
           else break;
         case pclass:
           if ( go_eval_num (r.pclass, gr_op[cou].op, gr_op[cou].nval) )
-            return TRUE;
+            return true;
           else break;
         case race:
           if ( go_eval_num (r.race, gr_op[cou].op, gr_op[cou].nval) )
-            return TRUE;
+            return true;
           else break;
         case level:
           if ( go_eval_num (r.level, gr_op[cou].op, gr_op[cou].nval) )
-            return TRUE;
+            return true;
           else break;
         case room:
           if ( go_eval_num (r.room, gr_op[cou].op, gr_op[cou].nval) )
-            return TRUE;
+            return true;
           else break;
         case gold:
           if ( go_eval_num (r.gold, gr_op[cou].op, gr_op[cou].nval) )
-            return TRUE;
+            return true;
           else break;
         case clan:
           if ( go_eval_num (r.clan, gr_op[cou].op, gr_op[cou].nval) )
-            return TRUE;
+            return true;
           else break;
         case council:
           if ( go_eval_num (r.council, gr_op[cou].op, gr_op[cou].nval) )
-            return TRUE;
+            return true;
           else break;
 	case site:
           if ( go_eval_str (r.site, gr_op[cou].op, gr_op[cou].sval) )
-            return TRUE;
+            return true;
           else break;
         case last:
           if ( go_eval_num (r.last, gr_op[cou].op, gr_op[cou].nval) )
-            return TRUE;
+            return true;
           else break;
         case pkill:
           if ( go_eval_str (gr_strc(r.pkill), gr_op[cou].op, gr_op[cou].sval) )
-            return TRUE;
+            return true;
           else break;
 
         }
     }
-  return FALSE;
+  return false;
 }
 
 static void gr_init (void)
 {
-  strcpy(gr_fd[ 0].nam, "name"   ); gr_fd[0].num=FALSE;
-  strcpy(gr_fd[ 1].nam, "sex"    ); gr_fd[ 1].num=TRUE;
-  strcpy(gr_fd[ 2].nam, "class"  ); gr_fd[ 2].num=TRUE;
-  strcpy(gr_fd[ 3].nam, "race"   ); gr_fd[ 3].num=TRUE;
-  strcpy(gr_fd[ 4].nam, "level"  ); gr_fd[ 4].num=TRUE;
-  strcpy(gr_fd[ 5].nam, "room"   ); gr_fd[ 5].num=TRUE;
-  strcpy(gr_fd[ 6].nam, "gold"   ); gr_fd[ 6].num=TRUE;
-  strcpy(gr_fd[ 7].nam, "clan"   ); gr_fd[ 7].num=TRUE;
-  strcpy(gr_fd[ 8].nam, "council"); gr_fd[ 8].num=TRUE;
-  strcpy(gr_fd[ 9].nam, "site"   ); gr_fd[ 9].num=FALSE;
-  strcpy(gr_fd[10].nam, "last"   ); gr_fd[10].num=TRUE;
-  strcpy(gr_fd[11].nam, "pkill"  ); gr_fd[11].num=FALSE;
+  strcpy(gr_fd[ 0].nam, "name"   ); gr_fd[0].num=false;
+  strcpy(gr_fd[ 1].nam, "sex"    ); gr_fd[ 1].num=true;
+  strcpy(gr_fd[ 2].nam, "class"  ); gr_fd[ 2].num=true;
+  strcpy(gr_fd[ 3].nam, "race"   ); gr_fd[ 3].num=true;
+  strcpy(gr_fd[ 4].nam, "level"  ); gr_fd[ 4].num=true;
+  strcpy(gr_fd[ 5].nam, "room"   ); gr_fd[ 5].num=true;
+  strcpy(gr_fd[ 6].nam, "gold"   ); gr_fd[ 6].num=true;
+  strcpy(gr_fd[ 7].nam, "clan"   ); gr_fd[ 7].num=true;
+  strcpy(gr_fd[ 8].nam, "council"); gr_fd[ 8].num=true;
+  strcpy(gr_fd[ 9].nam, "site"   ); gr_fd[ 9].num=false;
+  strcpy(gr_fd[10].nam, "last"   ); gr_fd[10].num=true;
+  strcpy(gr_fd[11].nam, "pkill"  ); gr_fd[11].num=false;
 }
 
 /*
@@ -233,7 +233,7 @@ static bool gr_parse_operator (Character *ch, const char *pch, int *op_num)
       }
 
   if ( gr_op[*op_num].op < 0 )
-    {ch_printf(ch, "Invalid operator: %s\r\n", pch); return FALSE;}
+    {ch_printf(ch, "Invalid operator: %s\r\n", pch); return false;}
 
   if ( gr_op[*op_num].op==EQ || gr_op[*op_num].op==LT
        || gr_op[*op_num].op==GT )
@@ -241,22 +241,22 @@ static bool gr_parse_operator (Character *ch, const char *pch, int *op_num)
   else pch+=2;                               /* advance to operand value */
 
   if ( *pch=='\0' )
-    {ch_printf(ch, "Value is missing from operand.\r\n"); return FALSE;}
+    {ch_printf(ch, "Value is missing from operand.\r\n"); return false;}
 
   if ( gr_fd[gr_op[*op_num].field].num )
     {
-      gr_op[*op_num].num  = TRUE;
+      gr_op[*op_num].num  = true;
       gr_op[*op_num].nval = atol (pch);   /* store num operand value in table */
     }
   else
     {
       if ( strlen(pch) > MAX_FIELD_LENGTH )
-        {ch_printf(ch, "Char string is too long:%s\r\n", pch); return FALSE;}
-      gr_op[*op_num].num  = FALSE;
+        {ch_printf(ch, "Char string is too long:%s\r\n", pch); return false;}
+      gr_op[*op_num].num  = false;
       strcpy (gr_op[*op_num].sval, pch);  /* store str operand value in table */
     }
   (*op_num)++;                         /* operand now stored in table      */
-  return TRUE;
+  return true;
 }
 
 /*
@@ -267,7 +267,7 @@ static bool gr_parse_operand (Character *ch, const char *arg, bool *or_sw, int *
   int cou;
 
   if ( !str_cmp(arg, "or") )
-    return *or_sw = TRUE;
+    return *or_sw = true;
 
   for (cou=1; cou<=GR_NUM_FIELDS; cou++)          /* check field name    */
     if ( !str_prefix( gr_fd[cou-1].nam, arg ) )
@@ -275,11 +275,11 @@ static bool gr_parse_operand (Character *ch, const char *arg, bool *or_sw, int *
         arg += strlen( gr_fd[ cou-1 ].nam );     /* advance to operator */
         gr_op[ *op_num ].field = cou-1;          /* store field name    */
         if ( !gr_parse_operator (ch, arg, op_num) )
-          return FALSE;
-        return TRUE;
+          return false;
+        return true;
       }
   ch_printf(ch, "Sorry. Invalid field name: %s\r\n", arg);
-  return FALSE;
+  return false;
 }
 
 /*
@@ -289,7 +289,7 @@ static void gr_read( Character *ch, int op_num, bool or_sw, int dis_num)
 {
   FILE *fp;
   bool res;                                 /* result of a boolean exp   */
-  bool title_sw = FALSE;                    /* only print title once     */
+  bool title_sw = false;                    /* only print title once     */
   int  tot_match = 0;                       /* total records matched     */
   GR_STRUCT r;                              /* input (physical record)   */
   const char sex_map[]   = "NMF";                     /* convert sex to text       */
@@ -325,7 +325,7 @@ static void gr_read( Character *ch, int op_num, bool or_sw, int dis_num)
                         "\r\n%-12s %-2s %1s %-2s %1s %3s %3s %5s %11s %-15s %-6s %s\r\n",
                         "Name", "Lv", "S", "R", "C", "Cln", "Cou", "Room", "Gold",
                         "Site", "Last", "Pk");
-              title_sw = TRUE;
+              title_sw = true;
             }
           if ( tot_match <= dis_num )         /* print record if applicable */
             ch_printf(ch,

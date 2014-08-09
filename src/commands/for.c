@@ -47,7 +47,7 @@ void do_for(Character *ch, char *argument)
 {
   char range[MAX_INPUT_LENGTH];
   char buf[MAX_STRING_LENGTH];
-  bool fGods = FALSE, fMortals = FALSE, fMobs = FALSE, fEverywhere = FALSE, found;
+  bool fGods = false, fMortals = false, fMobs = false, fEverywhere = false, found;
   ROOM_INDEX_DATA *room, *old_room;
   Character *p, *p_prev;  /* p_next to p_prev -- TRI */
   int i;
@@ -69,17 +69,17 @@ void do_for(Character *ch, char *argument)
 
   if (!str_cmp (range, "all"))
     {
-      fMortals = TRUE;
-      fGods = TRUE;
+      fMortals = true;
+      fGods = true;
     }
   else if (!str_cmp (range, "gods"))
-    fGods = TRUE;
+    fGods = true;
   else if (!str_cmp (range, "mortals"))
-    fMortals = TRUE;
+    fMortals = true;
   else if (!str_cmp (range, "mobs"))
-    fMobs = TRUE;
+    fMobs = true;
   else if (!str_cmp (range, "everywhere"))
-    fEverywhere = TRUE;
+    fEverywhere = true;
   else
     do_help (ch, "for"); /* show syntax */
 
@@ -97,17 +97,17 @@ void do_for(Character *ch, char *argument)
         {
           p_prev = p->prev;  /* TRI */
           /*    p_next = p->next; */ /* In case someone DOES try to AT MOBS SLAY # */
-          found = FALSE;
+          found = false;
 
           if (!(p->in_room) || room_is_private(p, p->in_room) || (p == ch))
             continue;
 
           if (is_npc(p) && fMobs)
-            found = TRUE;
+            found = true;
           else if (!is_npc(p) && get_trust(p) >= LEVEL_IMMORTAL && fGods)
-            found = TRUE;
+            found = true;
           else if (!is_npc(p) && get_trust(p) < LEVEL_IMMORTAL && fMortals)
-            found = TRUE;
+            found = true;
 
           /* It looks ugly to me.. but it works :) */
           if (found) /* p is 'appropriate' */
@@ -148,11 +148,11 @@ void do_for(Character *ch, char *argument)
       for (i = 0; i < MAX_KEY_HASH; i++) /* run through all the buckets */
         for (room = room_index_hash[i] ; room ; room = room->next)
           {
-            found = FALSE;
+            found = false;
 
             /* Anyone in here at all? */
             if (fEverywhere) /* Everywhere executes always */
-              found = TRUE;
+              found = true;
             else if (!room->first_person) /* Skip it if room is empty */
               continue;
             /* ->people changed to first_person -- TRI */
@@ -167,11 +167,11 @@ void do_for(Character *ch, char *argument)
                   continue;
 
                 if (is_npc(p) && fMobs)
-                  found = TRUE;
+                  found = true;
                 else if (!is_npc(p) && ( get_trust(p) >= LEVEL_IMMORTAL) && fGods)
-                  found = TRUE;
+                  found = true;
                 else if (!is_npc(p) && ( get_trust(p) <= LEVEL_IMMORTAL) && fMortals)
-                  found = TRUE;
+                  found = true;
 	      } /* for everyone inside the room */
 
             if (found && !room_is_private(p, room)) /* Any of the required type here AND room not private? */

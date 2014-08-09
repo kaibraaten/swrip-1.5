@@ -9,7 +9,7 @@ void do_jail ( Character *ch , char *argument )
   ROOM_INDEX_DATA *jail =NULL;
   char arg[MAX_INPUT_LENGTH];
   short jail_time;
-  bool h_d = FALSE;
+  bool h_d = false;
   struct tm *tms;
 
   argument = one_argument(argument, arg);
@@ -122,7 +122,7 @@ void do_jail ( Character *ch , char *argument )
   argument = one_argument(argument, arg);
 
   if ( !*arg || !str_prefix(arg, "hours") )
-    h_d = TRUE;
+    h_d = true;
   else if ( str_prefix(arg, "days") )
     {
       send_to_char( "Is that value in hours or days?\r\n", ch );

@@ -202,7 +202,7 @@ void do_redit( Character *ch, char *argument )
 	  const char *bptr = NULL;
           num++;
 
-          if ( (bptr = sprint_reset( ch, pReset, num, TRUE )) == NULL )
+          if ( (bptr = sprint_reset( ch, pReset, num, true )) == NULL )
             continue;
 
           send_to_char( bptr, ch );
@@ -451,8 +451,8 @@ void do_redit( Character *ch, char *argument )
 
   if ( !str_cmp( arg, "exit" ) )
     {
-      bool addexit = FALSE;
-      bool numnotdir = FALSE;
+      bool addexit = false;
+      bool numnotdir = false;
 
       argument = one_argument( argument, arg2 );
       argument = one_argument( argument, arg3 );
@@ -472,12 +472,12 @@ void do_redit( Character *ch, char *argument )
 
         case '+':
 	  edir = get_dir(arg2+1);
-	  addexit = TRUE;
+	  addexit = true;
 	  break;
 
         case '#':
 	  edir = atoi(arg2+1);
-	  numnotdir = TRUE;
+	  numnotdir = true;
 	  break;
         }
 
@@ -622,7 +622,7 @@ void do_redit( Character *ch, char *argument )
           break;
 
         case '#':
-          numnotdir = TRUE;
+          numnotdir = true;
           edir = atoi( arg2+1 );
           break;
 

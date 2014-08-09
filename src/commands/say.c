@@ -35,12 +35,12 @@ void do_say( Character *ch, char *argument )
 
       sbuf = drunk_speech( sbuf, ch );
 
-      MOBtrigger = FALSE;
+      MOBtrigger = false;
       act( AT_SAY, "$n says '$t'", ch, sbuf, vch, TO_VICT );
     }
 
   ch->act = actflags;
-  MOBtrigger = FALSE;
+  MOBtrigger = false;
   act( AT_SAY, "You say '$T'", ch, NULL, drunk_speech( argument, ch ), TO_CHAR );
 
   if ( IS_SET( ch->in_room->room_flags, ROOM_LOGSPEECH ) )

@@ -24,12 +24,12 @@ void do_aset( Character *ch, char *argument )
       return;
     }
 
-  found = FALSE;
+  found = false;
 
   for ( tarea = first_area; tarea; tarea = tarea->next )
     if ( !str_cmp( tarea->filename, arg1 ) )
       {
-        found = TRUE;
+        found = true;
         break;
       }
 
@@ -37,7 +37,7 @@ void do_aset( Character *ch, char *argument )
     for ( tarea = first_build; tarea; tarea = tarea->next )
       if ( !str_cmp( tarea->filename, arg1 ) )
         {
-          found = TRUE;
+          found = true;
           break;
         }
 
@@ -87,7 +87,7 @@ void do_aset( Character *ch, char *argument )
       DISPOSE( tarea->filename );
       tarea->filename = str_dup( argument );
       write_area_list();
-      fold_area( tarea, tarea->filename, TRUE );
+      fold_area( tarea, tarea->filename, true );
       send_to_char( "Done.\r\n", ch );
       return;
     }

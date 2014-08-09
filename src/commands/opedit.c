@@ -171,13 +171,13 @@ void do_opedit( Character *ch, char *argument )
           send_to_char( "Program not found.\r\n", ch );
           return;
         }
-      cnt = 0; found = FALSE;
+      cnt = 0; found = false;
       for ( mprg = mprog; mprg; mprg = mprg->next )
         {
           if ( ++cnt == value )
             {
               mptype = mprg->type;
-              found = TRUE;
+              found = true;
               break;
             }
         }

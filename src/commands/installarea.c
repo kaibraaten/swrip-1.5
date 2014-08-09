@@ -32,7 +32,7 @@ void do_installarea( Character *ch, char *argument )
 
 	  /* Fold area with install flag -- auto-removes prototype flags */
           send_to_char( "Saving and installing file...\r\n", ch );
-          fold_area( tarea, tarea->filename, TRUE );
+          fold_area( tarea, tarea->filename, true );
 
           /* Remove from prototype area list */
           UNLINK( tarea, first_build, last_build, next, prev );

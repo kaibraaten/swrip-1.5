@@ -14,7 +14,7 @@ void do_snipe( Character *ch, char *argument )
   Character       * victim = NULL;
   int               the_chance;
   char              buf[MAX_STRING_LENGTH];
-  bool              pfound = FALSE;
+  bool              pfound = false;
 
 
   if ( IS_SET( ch->in_room->room_flags, ROOM_SAFE ) )
@@ -84,12 +84,12 @@ void do_snipe( Character *ch, char *argument )
 
       if ( is_npc(ch) && ( victim = get_char_room_mp( ch, arg2 ) ) != NULL )
         {
-          pfound = TRUE;
+          pfound = true;
           break;
         }
       else if ( !is_npc(ch) && ( victim = get_char_room( ch, arg2 ) ) != NULL )
         {
-          pfound = TRUE;
+          pfound = true;
           break;
         }
 
@@ -190,7 +190,7 @@ void do_snipe( Character *ch, char *argument )
       if ( char_died(ch) )
         return;
 
-      stop_fighting( ch , TRUE );
+      stop_fighting( ch , true );
 
       learn_from_success( ch, gsn_snipe );
     }

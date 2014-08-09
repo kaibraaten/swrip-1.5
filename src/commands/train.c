@@ -6,8 +6,8 @@ void do_train( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   Character *mob;
-  bool tfound = FALSE;
-  bool successful = FALSE;
+  bool tfound = false;
+  bool successful = false;
 
   if ( is_npc(ch) )
     return;
@@ -34,7 +34,7 @@ void do_train( Character *ch, char *argument )
       for ( mob = ch->in_room->first_person; mob; mob = mob->next_in_room )
         if ( is_npc(mob) && IS_SET(mob->act, ACT_TRAIN) )
           {
-            tfound = TRUE;
+            tfound = true;
             break;
           }
 
@@ -137,7 +137,7 @@ void do_train( Character *ch, char *argument )
 
   if ( number_bits ( 2 ) == 0 )
     {
-      successful = TRUE;
+      successful = true;
     }
 
   if ( !str_cmp( arg, "str" ) || !str_cmp( arg, "strength" ) )

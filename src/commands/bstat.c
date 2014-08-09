@@ -3,7 +3,7 @@
 void do_bstat( Character *ch, char *argument )
 {
   BOARD_DATA *board = NULL;
-  bool found = FALSE;
+  bool found = false;
   char arg[MAX_INPUT_LENGTH];
 
   argument = one_argument( argument, arg );
@@ -18,7 +18,7 @@ void do_bstat( Character *ch, char *argument )
     {
       if ( !str_cmp( arg, board->note_file ) )
 	{
-	  found = TRUE;
+	  found = true;
 	  break;
 	}
     }

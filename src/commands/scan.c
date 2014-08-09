@@ -79,7 +79,7 @@ void do_scan( Character *ch, char *argument )
       set_char_color( AT_RMNAME, ch );
       send_to_char( ch->in_room->name, ch );
       send_to_char( "\r\n", ch );
-      show_list_to_char( ch->in_room->first_content, ch, FALSE, FALSE );
+      show_list_to_char( ch->in_room->first_content, ch, false, false );
       show_char_to_char( ch->in_room->first_person, ch );
 
       switch( ch->in_room->sector_type )

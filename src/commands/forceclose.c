@@ -27,7 +27,7 @@ void do_forceclose( Character *ch, char *argument )
               return;
             }
 
-          close_socket( d, FALSE );
+          close_socket( d, false );
           send_to_char( "Ok.\r\n", ch );
           return;
         }

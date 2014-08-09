@@ -10,7 +10,7 @@ void do_set_boot_time( Character *ch, char *argument)
   char arg1[MAX_INPUT_LENGTH];
   bool check;
 
-  check = FALSE;
+  check = false;
 
   argument = one_argument(argument, arg);
 
@@ -90,7 +90,7 @@ void do_set_boot_time( Character *ch, char *argument)
       get_reboot_string();
 
       ch_printf(ch, "Boot time set to %s\r\n", reboot_time);
-      check = TRUE;
+      check = true;
     }
   else if ( !str_cmp(arg, "manual") )
     {
@@ -115,7 +115,7 @@ void do_set_boot_time( Character *ch, char *argument)
 
       set_boot_time->manual = atoi(arg1);
       ch_printf(ch, "Manual bit set to %s\r\n", arg1);
-      check = TRUE;
+      check = true;
       get_reboot_string();
       return;
     }
@@ -133,10 +133,10 @@ void do_set_boot_time( Character *ch, char *argument)
       new_boot_time->tm_sec = 0;
       new_boot_time = update_time(new_boot_time);
 
-      sysdata.DENY_NEW_PLAYERS = FALSE;
+      sysdata.DENY_NEW_PLAYERS = false;
 
       send_to_char("Reboot time set back to normal.\r\n", ch);
-      check = TRUE;
+      check = true;
     }
 
   if (!check)

@@ -19,7 +19,7 @@ void do_purge( Character *ch, char *argument )
         {
           vnext = victim->next_in_room;
           if ( is_npc(victim) && victim != ch && !IS_SET(victim->act, ACT_POLYMORPHED))
-            extract_char( victim, TRUE );
+            extract_char( victim, true );
         }
 
       for ( obj = ch->in_room->first_content; obj; obj = obj_next )
@@ -80,5 +80,5 @@ void do_purge( Character *ch, char *argument )
     }
 
   act( AT_IMMORT, "$n purges $N.", ch, NULL, victim, TO_NOTVICT );
-  extract_char( victim, TRUE );
+  extract_char( victim, true );
 }

@@ -13,7 +13,7 @@ void do_mailroom(Character *ch, char *argument)
   switch( ch->substate )
     {
     case SUB_WRITING_NOTE:
-      operate_on_note(ch, arg_passed, TRUE);
+      operate_on_note(ch, arg_passed, true);
       break;
 
     default:
@@ -24,7 +24,7 @@ void do_mailroom(Character *ch, char *argument)
       if (!str_cmp(arg, "write") || !str_cmp(arg, "to")
           ||  !str_cmp(arg, "subject") || !str_cmp(arg, "show"))
         {
-          operate_on_note(ch, arg_passed, TRUE);
+          operate_on_note(ch, arg_passed, true);
           return;
         }
 
@@ -43,7 +43,7 @@ void do_mailroom(Character *ch, char *argument)
         }
       else
         {
-          operate_on_note(ch, arg_passed, TRUE);
+          operate_on_note(ch, arg_passed, true);
           return;
         }
     }

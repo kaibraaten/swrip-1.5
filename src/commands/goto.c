@@ -94,7 +94,7 @@ void do_goto( Character *ch, char *argument )
   in_room = ch->in_room;
 
   if ( ch->fighting )
-    stop_fighting( ch, TRUE );
+    stop_fighting( ch, true );
 
   if ( !IS_SET(ch->act, PLR_WIZINVIS) )
     {

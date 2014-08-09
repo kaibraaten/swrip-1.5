@@ -38,10 +38,10 @@ void do_emote( Character *ch, char *argument )
       strcat( buf, "." );
     }
 
-  MOBtrigger = FALSE;
+  MOBtrigger = false;
   act( AT_ACTION, "$n $T", ch, NULL, buf, TO_ROOM );
 
-  MOBtrigger = FALSE;
+  MOBtrigger = false;
   act( AT_ACTION, "$n $T", ch, NULL, buf, TO_CHAR );
 
   ch->act = actflags;

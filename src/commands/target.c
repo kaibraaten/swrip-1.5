@@ -12,7 +12,7 @@ void do_target(Character *ch, char *argument )
   SHIP_DATA *ship;
   SHIP_DATA *target, *dship;
   char buf[MAX_STRING_LENGTH];
-  bool is_turret = FALSE;
+  bool is_turret = false;
   size_t turret_num = 0;
 
   strcpy( arg, argument );
@@ -27,7 +27,7 @@ void do_target(Character *ch, char *argument )
         }
 
       if ( ship->room.gunseat != ch->in_room->vnum )
-        is_turret = TRUE;
+        is_turret = true;
 
       if ( ship_is_in_hyperspace( ship ) && ship->sclass <= SHIP_PLATFORM)
         {

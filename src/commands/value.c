@@ -32,7 +32,7 @@ void do_value( Character *ch, char *argument )
       return;
     }
 
-  if ( ( cost = get_cost( ch, keeper, obj, FALSE ) ) <= 0 )
+  if ( ( cost = get_cost( ch, keeper, obj, false ) ) <= 0 )
     {
       act( AT_ACTION, "$n looks uninterested in $p.", keeper, obj, ch, TO_VICT );
       return;

@@ -18,13 +18,13 @@ void do_exits( Character *ch, char *argument )
 
   strcpy( buf, fAuto ? "Exits:" : "Obvious exits:\r\n" );
 
-  found = FALSE;
+  found = false;
   for ( pexit = ch->in_room->first_exit; pexit; pexit = pexit->next )
     {
       if ( pexit->to_room
            &&  !IS_SET(pexit->exit_info, EX_HIDDEN) )
         {
-          found = TRUE;
+          found = true;
           if ( !fAuto )
             {
               if ( IS_SET(pexit->exit_info, EX_CLOSED) )

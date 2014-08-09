@@ -23,7 +23,7 @@ void do_where( Character *ch, char *argument )
         send_to_pager( "Players logged in:\r\n", ch );
       else
         pager_printf( ch, "Players near you in %s:\r\n", ch->in_room->area->name );
-      found = FALSE;
+      found = false;
       for ( d = first_descriptor; d; d = d->next )
         if ( (d->connection_state == CON_PLAYING || d->connection_state == CON_EDITING )
              && ( victim = d->character ) != NULL
@@ -32,7 +32,7 @@ void do_where( Character *ch, char *argument )
              &&   (victim->in_room->area == ch->in_room->area || get_trust(ch) >= LEVEL_IMMORTAL )
              &&   can_see( ch, victim ) )
           {
-            found = TRUE;
+            found = true;
             pager_printf( ch, "%-28s %s\r\n",
                           victim->name, victim->in_room->name );
           }
@@ -42,7 +42,7 @@ void do_where( Character *ch, char *argument )
     }
   else
     {
-      found = FALSE;
+      found = false;
       for ( victim = first_char; victim; victim = victim->next )
         if ( victim->in_room
              &&   victim->in_room->area == ch->in_room->area
@@ -51,7 +51,7 @@ void do_where( Character *ch, char *argument )
              &&   can_see( ch, victim )
              &&   is_name( arg, victim->name ) )
           {
-            found = TRUE;
+            found = true;
             pager_printf( ch, "%-28s %s\r\n",
                           PERS(victim, ch), victim->in_room->name );
             break;

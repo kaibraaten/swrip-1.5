@@ -130,9 +130,9 @@ void do_drop( Character *ch, char *argument )
       bool fAll;
 
       if ( !str_cmp(arg, "all") )
-        fAll = TRUE;
+        fAll = true;
       else
-	fAll = FALSE;
+	fAll = false;
       if ( number > 1 )
         chk = arg;
       else
@@ -143,7 +143,7 @@ void do_drop( Character *ch, char *argument )
           send_to_char( "You can't seem to do that here...\r\n", ch );
           return;
         }
-      found = FALSE;
+      found = false;
       for ( obj = ch->first_carrying; obj; obj = obj_next )
         {
           obj_next = obj->next_content;
@@ -153,7 +153,7 @@ void do_drop( Character *ch, char *argument )
                &&   obj->wear_loc == WEAR_NONE
                &&   can_drop_obj( ch, obj ) )
             {
-              found = TRUE;
+              found = true;
               if ( obj->pIndexData->mprog.progtypes & DROP_PROG && obj->count > 1 )
                 {
                   ++cnt;

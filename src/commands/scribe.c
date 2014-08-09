@@ -25,7 +25,7 @@ void do_scribe( Character *ch, char *argument )
   if ( ms_find_obj(ch) )
     return;
 
-  if ( (sn = find_spell( ch, argument, TRUE )) < 0 && (sn = find_skill( ch, argument, TRUE )) )
+  if ( (sn = find_spell( ch, argument, true )) < 0 && (sn = find_skill( ch, argument, true )) )
     {
       send_to_char( "You have not learned that spell.\r\n", ch );
       return;

@@ -16,7 +16,7 @@ void do_open( Character *ch, char *argument )
       return;
     }
 
-  if ( ( pexit = find_door( ch, arg, TRUE ) ) != NULL )
+  if ( ( pexit = find_door( ch, arg, true ) ) != NULL )
     {
       Exit *pexit_rev = NULL;
 

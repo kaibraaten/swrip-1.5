@@ -19,14 +19,14 @@ void do_bodybag( Character *ch, char *argument )
   sprintf(buf3, " ");
   /* check to see if vict is playing? */
   sprintf(buf2,"the corpse of %s",arg);
-  found = FALSE;
+  found = false;
   for ( obj = first_object; obj; obj = obj->next )
     {
       if ( obj->in_room
            && !str_cmp( buf2, obj->short_descr )
            && (obj->pIndexData->vnum == 11 ) )
         {
-          found = TRUE;
+          found = true;
           ch_printf( ch, "Bagging body: [%5d] %-28s [%5d] %s\r\n",
                      obj->pIndexData->vnum,
                      obj->short_descr,

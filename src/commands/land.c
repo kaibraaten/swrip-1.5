@@ -12,7 +12,7 @@ void do_land( Character *ch, char *argument )
   SHIP_DATA *target;
   char buf[MAX_STRING_LENGTH];
   SPACE_DATA *spaceobj;
-  bool found = FALSE;
+  bool found = false;
 
   strcpy( arg, argument );
 
@@ -140,7 +140,7 @@ void do_land( Character *ch, char *argument )
            !str_prefix(argument,spaceobj->landing_site.locationb) ||
            !str_prefix(argument,spaceobj->landing_site.locationc))
         {
-          found = TRUE;
+          found = true;
           break;
         }
 

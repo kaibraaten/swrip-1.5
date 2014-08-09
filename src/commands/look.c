@@ -34,7 +34,7 @@ void do_look( Character *ch, char *argument )
   bool doexaprog;
   short door;
   int number, cnt;
-  bool is_auto = FALSE;
+  bool is_auto = false;
 
   if( !requirements_are_met( ch ) )
     {
@@ -76,7 +76,7 @@ void do_look( Character *ch, char *argument )
     }
 
   door = get_dir( arg1 );
-  pexit = find_door( ch, arg1, TRUE );
+  pexit = find_door( ch, arg1, true );
 
   if ( pexit )
     {
@@ -477,7 +477,7 @@ static void show_char_to_char_1( Character *victim, Character *ch )
 
   show_condition( ch, victim );
 
-  found = FALSE;
+  found = false;
 
   if( ( (obj = get_eq_char( victim, WEAR_OVER ) ) == NULL ) || obj->value[2] == 0 || is_god(ch) )
     {
@@ -491,10 +491,10 @@ static void show_char_to_char_1( Character *victim, Character *ch )
                 {
                   send_to_char( "\r\n", ch );
 		  act( AT_PLAIN, "$N is using:", ch, NULL, victim, TO_CHAR );
-                  found = TRUE;
+                  found = true;
                 }
               send_to_char( where_name[iWear], ch );
-              send_to_char( format_obj_to_char( obj, ch, TRUE ), ch );
+              send_to_char( format_obj_to_char( obj, ch, true ), ch );
               send_to_char( "\r\n", ch );
             }
         }
@@ -502,7 +502,7 @@ static void show_char_to_char_1( Character *victim, Character *ch )
   else
     {
       send_to_char( where_name[WEAR_OVER], ch );
-      send_to_char( format_obj_to_char( obj, ch, TRUE ), ch );
+      send_to_char( format_obj_to_char( obj, ch, true ), ch );
       send_to_char( "\r\n", ch );
     }
 
@@ -512,7 +512,7 @@ static void show_char_to_char_1( Character *victim, Character *ch )
   if ( number_percent( ) < ch->pcdata->learned[gsn_peek] )
     {
       send_to_char( "\r\nYou peek at the inventory:\r\n", ch );
-      show_list_to_char( victim->first_carrying, ch, TRUE, TRUE );
+      show_list_to_char( victim->first_carrying, ch, true, true );
       learn_from_success( ch, gsn_peek );
     }
   else
@@ -631,7 +631,7 @@ static void look_under( Character *ch, char *what, bool doexaprog )
 
   if ( IS_OBJ_STAT( obj, ITEM_COVERING ) )
     {
-      show_list_to_char( obj->first_content, ch, TRUE, TRUE );
+      show_list_to_char( obj->first_content, ch, true, true );
     }
   else
     {
@@ -648,26 +648,26 @@ static bool requirements_are_met( Character *ch )
 {
   if( !ch->desc )
     {
-      return FALSE;
+      return false;
     }
 
   if ( ch->position < POS_SLEEPING )
     {
       ch_printf( ch, "You can't see anything but stars!\r\n" );
 
-      return FALSE;
+      return false;
     }
 
   if ( ch->position == POS_SLEEPING )
     {
       ch_printf( ch, "You can't see anything, you're sleeping!\r\n" );
 
-      return FALSE;
+      return false;
     }
 
   if ( !check_blind( ch ) )
     {
-      return FALSE;
+      return false;
     }
 
   if ( !is_npc(ch)
@@ -679,10 +679,10 @@ static bool requirements_are_met( Character *ch )
       send_to_char( "It is pitch black...\r\n", ch );
       show_char_to_char( ch->in_room->first_person, ch );
 
-      return FALSE;
+      return false;
     }
 
-  return TRUE;
+  return true;
 }
 
 static void look_in( Character *ch, char *what, bool doexaprog )
@@ -781,7 +781,7 @@ static void look_in( Character *ch, char *what, bool doexaprog )
       obj->count = 1;
       act( AT_PLAIN, "$p contains:", ch, obj, NULL, TO_CHAR );
       obj->count = count;
-      show_list_to_char( obj->first_content, ch, TRUE, TRUE );
+      show_list_to_char( obj->first_content, ch, true, true );
 
       if ( doexaprog )
 	{
@@ -927,7 +927,7 @@ static void show_no_arg( Character *ch, bool is_auto )
 
   show_ships_to_char( ch->in_room->first_ship, ch );
   show_shuttles_to_char( ch->in_room->first_shuttle, ch );
-  show_list_to_char( ch->in_room->first_content, ch, FALSE, FALSE );
+  show_list_to_char( ch->in_room->first_content, ch, false, false );
   show_char_to_char( ch->in_room->first_person,  ch );
 
   if ( !is_auto )

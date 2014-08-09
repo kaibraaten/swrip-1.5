@@ -17,7 +17,7 @@ void do_eat( Character *ch, char *argument )
     if ( ms_find_obj(ch) )
       return;
 
-  if ( (obj = find_obj(ch, argument, TRUE)) == NULL )
+  if ( (obj = find_obj(ch, argument, true)) == NULL )
     return;
 
   if ( !is_immortal(ch) )

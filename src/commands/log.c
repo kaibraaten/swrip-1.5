@@ -18,12 +18,12 @@ void do_log( Character *ch, char *argument )
     {
       if ( fLogAll )
         {
-          fLogAll = FALSE;
+          fLogAll = false;
           send_to_char( "Log ALL off.\r\n", ch );
         }
       else
         {
-          fLogAll = TRUE;
+          fLogAll = true;
           send_to_char( "Log ALL on.\r\n", ch );
         }
       return;

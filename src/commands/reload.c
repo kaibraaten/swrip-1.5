@@ -71,9 +71,9 @@ void do_reload( Character *ch, char *argument )
 
   ship->energy = ship->maxenergy;
   ship->shield = 0;
-  ship->autorecharge = FALSE;
-  ship->autotrack = FALSE;
-  ship->autospeed = FALSE;
+  ship->autorecharge = false;
+  ship->autotrack = false;
+  ship->autospeed = false;
   ship->hull = ship->maxhull;
 
   ship->missilestate = MISSILE_READY;

@@ -7,7 +7,7 @@ void do_hell( Character *ch, char *argument )
   Character *victim;
   char arg[MAX_INPUT_LENGTH];
   short hell_time;
-  bool h_d = FALSE;
+  bool h_d = false;
   struct tm *tms;
 
   argument = one_argument(argument, arg);
@@ -53,7 +53,7 @@ void do_hell( Character *ch, char *argument )
 
   if ( !*arg || !str_prefix(arg, "hours") )
     {
-      h_d = TRUE;
+      h_d = true;
     }
   else if ( str_prefix(arg, "days") )
     {

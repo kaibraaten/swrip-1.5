@@ -37,17 +37,17 @@ void do_autopilot(Character *ch, char *argument )
 
   if ( ship->target0 )
     {
-      ship->autotrack = FALSE;
+      ship->autotrack = false;
     }
 
 
   act( AT_PLAIN, "$n flips a switch on the control panel.", ch,
        NULL, argument , TO_ROOM );
 
-  if ( ( ship->autopilot == TRUE && str_cmp(argument,"on") )
+  if ( ( ship->autopilot == true && str_cmp(argument,"on") )
        || !str_cmp(argument,"off") )
     {
-      ship->autopilot=FALSE;
+      ship->autopilot=false;
       send_to_char( "&GYou toggle the autopilot.\r\n", ch);
       echo_to_cockpit( AT_YELLOW , ship , "Autopilot OFF.");
     }
@@ -58,8 +58,8 @@ void do_autopilot(Character *ch, char *argument )
           send_to_char("&RNot while you are docked!\r\n",ch);
           return;
         }
-      ship->autopilot=TRUE;
-      ship->autorecharge = TRUE;
+      ship->autopilot=true;
+      ship->autorecharge = true;
       send_to_char( "&GYou toggle the autopilot.\r\n", ch);
       echo_to_cockpit( AT_YELLOW , ship , "Autopilot ON.");
     }

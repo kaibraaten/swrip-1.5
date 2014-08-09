@@ -9,7 +9,7 @@ void do_owhere( Character *ch, char *argument )
   char buf[MAX_STRING_LENGTH], field[MAX_INPUT_LENGTH];
   char arg[MAX_INPUT_LENGTH];
   OBJ_DATA *obj, *outer_obj;
-  bool found = FALSE;
+  bool found = false;
   int icnt=0, vnum=0;
   const char *heading =
     "    Vnum  Short Desc        Vnum  Room/Char          Vnum  Container\r\n";
@@ -40,7 +40,7 @@ void do_owhere( Character *ch, char *argument )
       if ( !found )
 	send_to_pager( heading, ch );       /* print report heading */
 
-      found = TRUE;
+      found = true;
       outer_obj = obj;
 
       while ( outer_obj->in_obj )

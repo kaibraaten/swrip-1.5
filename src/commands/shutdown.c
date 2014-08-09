@@ -33,5 +33,5 @@ void do_shutdown( Character *ch, char *argument )
         save_ship( ship );
     }
 
-  mud_down = TRUE;
+  mud_down = true;
 }

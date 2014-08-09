@@ -10,7 +10,7 @@ void do_fire(Character *ch, char *argument )
   SHIP_DATA *ship;
   SHIP_DATA *target;
   char buf[MAX_STRING_LENGTH];
-  bool is_turret = FALSE;
+  bool is_turret = false;
   int turret_num = 0;
 
   if (  (ship = ship_from_turret(ch->in_room->vnum))  == NULL )
@@ -19,7 +19,7 @@ void do_fire(Character *ch, char *argument )
       return;
     }
   if ( ship->room.gunseat != ch->in_room->vnum )
-    is_turret = TRUE;
+    is_turret = true;
 
   if ( ship_is_in_hyperspace( ship ) && ship->sclass <= SHIP_PLATFORM )
     {

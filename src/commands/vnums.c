@@ -21,5 +21,5 @@ void do_vnums( Character *ch, char *argument )
         high = atoi(arg2);
     }
 
-  show_vnums( ch, low, high, TRUE, TRUE, " *", "" );
+  show_vnums( ch, low, high, true, true, " *", "" );
 }

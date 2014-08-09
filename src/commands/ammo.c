@@ -5,7 +5,7 @@ void do_ammo( Character *ch, char *argument )
 {
   OBJ_DATA *wield;
   OBJ_DATA *obj;
-  bool checkammo = FALSE;
+  bool checkammo = false;
   int charge =0;
 
   obj = NULL;
@@ -45,7 +45,7 @@ void do_ammo( Character *ch, char *argument )
               return;
             }
           unequip_char( ch, obj );
-          checkammo = TRUE;
+          checkammo = true;
           charge = obj->value[0];
           separate_obj( obj );
           extract_obj( obj );
@@ -61,7 +61,7 @@ void do_ammo( Character *ch, char *argument )
                       send_to_char( "That cartridge is too big for your blaster.", ch);
                       continue;
                     }
-                  checkammo = TRUE;
+                  checkammo = true;
                   charge = obj->value[0];
                   separate_obj( obj );
                   extract_obj( obj );
@@ -97,7 +97,7 @@ void do_ammo( Character *ch, char *argument )
               return;
             }
           unequip_char( ch, obj );
-          checkammo = TRUE;
+          checkammo = true;
           charge = obj->value[0];
           separate_obj( obj );
           extract_obj( obj );
@@ -113,7 +113,7 @@ void do_ammo( Character *ch, char *argument )
                       send_to_char( "That cartridge is too big for your bowcaster.", ch);
                       continue;
                     }
-                  checkammo = TRUE;
+                  checkammo = true;
 		  charge = obj->value[0];
                   separate_obj( obj );
                   extract_obj( obj );
@@ -144,7 +144,7 @@ void do_ammo( Character *ch, char *argument )
       if (obj)
         {
           unequip_char( ch, obj );
-          checkammo = TRUE;
+          checkammo = true;
           charge = obj->value[0];
           separate_obj( obj );
           extract_obj( obj );
@@ -155,7 +155,7 @@ void do_ammo( Character *ch, char *argument )
             {
               if ( obj->item_type == ITEM_BATTERY)
                 {
-                  checkammo = TRUE;
+                  checkammo = true;
                   charge = obj->value[0];
                   separate_obj( obj );
                   extract_obj( obj );

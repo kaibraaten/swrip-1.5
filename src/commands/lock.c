@@ -14,7 +14,7 @@ void do_lock( Character *ch, char *argument )
       return;
     }
 
-  if ( ( pexit = find_door( ch, arg, TRUE ) ) != NULL )
+  if ( ( pexit = find_door( ch, arg, true ) ) != NULL )
     {
       if ( !IS_SET(pexit->exit_info, EX_ISDOOR) )
         {

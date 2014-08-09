@@ -10,7 +10,7 @@ void do_peace( Character *ch, char *argument )
     {
       if ( rch->fighting )
         {
-          stop_fighting( rch, TRUE );
+          stop_fighting( rch, true );
           do_sit( rch, "" );
         }
 

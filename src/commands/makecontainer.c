@@ -88,9 +88,9 @@ static void OnStart( Character *ch, char *argument )
   for ( obj = ch->last_carrying; obj; obj = obj->prev_content )
     {
       if (obj->item_type == ITEM_FABRIC)
-	checkfab = TRUE;
+	checkfab = true;
       if (obj->item_type == ITEM_THREAD)
-	checksew = TRUE;
+	checksew = true;
     }
 
   if ( !checkfab )
@@ -153,11 +153,11 @@ static void OnFinished( Character *ch )
   for ( obj = ch->last_carrying; obj; obj = obj->prev_content )
     {
       if (obj->item_type == ITEM_THREAD)
-        checksew = TRUE;
+        checksew = true;
 
-      if (obj->item_type == ITEM_FABRIC && checkfab == FALSE)
+      if (obj->item_type == ITEM_FABRIC && checkfab == false)
         {
-          checkfab = TRUE;
+          checkfab = true;
           separate_obj( obj );
           obj_from_char( obj );
           material = obj;

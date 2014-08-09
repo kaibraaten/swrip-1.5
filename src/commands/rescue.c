@@ -81,10 +81,10 @@ void do_rescue( Character *ch, char *argument )
   ch->alignment = URANGE( -1000, ch->alignment, 1000 );
 
   learn_from_success( ch, gsn_rescue );
-  stop_fighting( fch, FALSE );
-  stop_fighting( victim, FALSE );
+  stop_fighting( fch, false );
+  stop_fighting( victim, false );
   if ( ch->fighting )
-    stop_fighting( ch, FALSE );
+    stop_fighting( ch, false );
 
   /* check_killer( ch, fch ); */
   set_fighting( ch, fch );

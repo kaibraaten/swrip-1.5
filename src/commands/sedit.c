@@ -170,10 +170,10 @@ void do_sedit( Character *ch, char *argument )
       if ( arg1[0] != social->name[0] )
         {
           unlink_social( social );
-          relocate = TRUE;
+          relocate = true;
         }
       else
-        relocate = FALSE;
+        relocate = false;
       if ( social->name )
         DISPOSE( social->name );
       social->name = str_dup( arg1 );

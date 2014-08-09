@@ -7,7 +7,7 @@ void do_info(Character *ch, char *argument )
 {
   SHIP_DATA *ship;
   SHIP_DATA *target;
-  bool fromafar = TRUE;
+  bool fromafar = true;
 
   if (  (ship = ship_from_cockpit(ch->in_room->vnum))  == NULL )
     {
@@ -45,7 +45,7 @@ void do_info(Character *ch, char *argument )
   else if (argument[0] == '\0')
     {
       target = ship;
-      fromafar = FALSE;
+      fromafar = false;
     }
   else
     target = get_ship_here( argument , ship );
@@ -57,7 +57,7 @@ void do_info(Character *ch, char *argument )
     }
 
   if ( check_pilot( ch , target ) )
-    fromafar = FALSE;
+    fromafar = false;
 
   if( ship_distance_to_ship( ship, target ) > 500 + ship->sensor * 2 )
     {
@@ -84,7 +84,7 @@ void do_info(Character *ch, char *argument )
   ch_printf( ch, "Description: %s\r\nOwner: %s",
              target->description,
              target->owner );
-  if( fromafar == FALSE )
+  if( fromafar == false )
     ch_printf( ch, "   Pilot: %s   Copilot: %s", target->pilot,  target->copilot );
   ch_printf( ch, "\r\nLaser cannons: %d  Ion cannons: %d\r\n",
              target->lasers, target->ions);

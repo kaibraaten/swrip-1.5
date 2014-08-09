@@ -37,5 +37,5 @@ void do_reboot( Character *ch, char *argument )
   for ( ship = first_ship; ship; ship = ship->next )
     save_ship( ship );
 
-  mud_down = TRUE;
+  mud_down = true;
 }

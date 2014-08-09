@@ -15,14 +15,14 @@ void do_mwhere( Character *ch, char *argument )
     }
 
   set_pager_color( AT_PLAIN, ch );
-  found = FALSE;
+  found = false;
   for ( victim = first_char; victim; victim = victim->next )
     {
       if ( is_npc(victim)
            &&   victim->in_room
            &&   nifty_is_name( arg, victim->name ) )
         {
-          found = TRUE;
+          found = true;
           pager_printf( ch, "[%5d] %-28s [%5d] %s\r\n",
                         victim->pIndexData->vnum,
                         victim->short_descr,

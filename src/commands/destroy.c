@@ -30,7 +30,7 @@ void do_destroy( Character *ch, char *argument )
 	     !str_cmp(victim->name, arg) )
           break;
       if ( d )
-        close_socket( d, TRUE );
+        close_socket( d, true );
     }
   else
     {
@@ -39,7 +39,7 @@ void do_destroy( Character *ch, char *argument )
       quitting_char = victim;
       save_char_obj( victim );
       saving_char = NULL;
-      extract_char( victim, TRUE );
+      extract_char( victim, true );
       for ( x = 0; x < MAX_WEAR; x++ )
         for ( y = 0; y < MAX_LAYERS; y++ )
           save_equipment[x][y] = NULL;
@@ -72,7 +72,7 @@ void do_destroy( Character *ch, char *argument )
           {
             sprintf( buf, "%s%s", BUILD_DIR, buf2 );
             if ( IS_SET( pArea->status, AREA_LOADED ) )
-	      fold_area( pArea, buf, FALSE );
+	      fold_area( pArea, buf, false );
             close_area( pArea );
             sprintf( buf2, "%s.bak", buf );
             set_char_color( AT_RED, ch ); /* Log message changes colors */

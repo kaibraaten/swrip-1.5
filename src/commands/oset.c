@@ -125,14 +125,14 @@ void do_oset( Character *ch, char *argument )
     }
   if ( obj )
     {
-      lockobj = TRUE;
+      lockobj = true;
       strcpy( arg1, obj->name );
       argument = one_argument( argument, arg2 );
       strcpy( arg3, argument );
     }
   else
     {
-      lockobj = FALSE;
+      lockobj = false;
       argument = one_argument( argument, arg1 );
       argument = one_argument( argument, arg2 );
       strcpy( arg3, argument );

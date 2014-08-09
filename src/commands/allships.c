@@ -7,11 +7,11 @@ void do_allships( Character *ch, char *argument )
   SHIP_DATA *ship;
   char buf[MAX_STRING_LENGTH];
   int count = 0;
-  bool unowned = FALSE, mobship = FALSE, checkowner = FALSE;
+  bool unowned = false, mobship = false, checkowner = false;
   int type = -1;
 
   if ( !str_cmp( argument, "unowned" ) )
-    unowned = TRUE;
+    unowned = true;
   else if ( !str_cmp( argument, "imperial" ) )
     type = SHIP_IMPERIAL;
   else if ( !str_cmp( argument, "rebel" ) )
@@ -19,11 +19,11 @@ void do_allships( Character *ch, char *argument )
   else if ( !str_cmp( argument, "civilian" ) )
     type = SHIP_CIVILIAN;
   else if ( !str_cmp( argument, "mob" ) )
-    mobship = TRUE;
+    mobship = true;
   else if ( !argument || argument[0] == '\0' || !str_cmp( argument, "" ) )
     ;
   else
-    checkowner = TRUE;
+    checkowner = true;
 
   count = 0;
   send_to_pager( "&Y\r\nThe following ships are currently formed:\r\n", ch );

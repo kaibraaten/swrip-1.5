@@ -1097,7 +1097,7 @@ static bool room_is_in_use( const SHIP_DATA *ship, int room_vnum )
       || room_vnum == ship->room.coseat
       || room_vnum == ship->room.gunseat )
     {
-      return TRUE;
+      return true;
     }
   else
     {
@@ -1109,10 +1109,10 @@ static bool room_is_in_use( const SHIP_DATA *ship, int room_vnum )
 
 	  if( get_turret_room( turret ) == room_vnum )
 	    {
-	      return TRUE;
+	      return true;
 	    }
 	}
     }
 
-  return FALSE;
+  return false;
 }

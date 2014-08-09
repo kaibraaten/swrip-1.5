@@ -75,7 +75,7 @@ void do_shiptrack( Character *ch, char *argument)
       ship->trackvector.y = head.y;
       ship->trackvector.z = head.z;
 
-      ship->tracking = TRUE;
+      ship->tracking = true;
       ship->ch = ch;
       do_trajectory( ch, buf);
 
@@ -101,7 +101,7 @@ void do_shiptrack( Character *ch, char *argument)
           echo_to_cockpit( AT_RED, ship, "WARNING... Jump coordinates outside of the known galaxy.");
           echo_to_cockpit( AT_RED, ship, "WARNING... Hyperjump NOT set.");
           ship->currjump = NULL;
-          ship->tracking = FALSE;
+          ship->tracking = false;
           return;
         }
 
@@ -114,7 +114,7 @@ void do_shiptrack( Character *ch, char *argument)
 
   if( !str_cmp( arg, "stop" ) || !str_cmp( arg, "halt" ))
     {
-      ship->tracking = FALSE;
+      ship->tracking = false;
       send_to_char( "Tracking program cancelled.\r\n", ch);
 
       if( ship_is_in_hyperspace( ship ) )

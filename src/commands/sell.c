@@ -9,7 +9,7 @@ void do_sell( Character *ch, char *argument )
   Character *keeper;
   OBJ_DATA *obj;
   int cost;
-  bool spice = FALSE;
+  bool spice = false;
 
   one_argument( argument, arg );
 
@@ -42,14 +42,14 @@ void do_sell( Character *ch, char *argument )
       return;
     }
 
-  if ( ( cost = get_cost( ch, keeper, obj, FALSE ) ) <= 0 )
+  if ( ( cost = get_cost( ch, keeper, obj, false ) ) <= 0 )
     {
       act( AT_ACTION, "$n looks uninterested in $p.", keeper, obj, ch, TO_VICT );
       return;
     }
 
   if( obj->item_type == ITEM_SPICE )
-    spice = TRUE;
+    spice = true;
 
   if ( cost > keeper->gold && ( economy_has( ch->in_room->area, cost) || spice ) )
     {

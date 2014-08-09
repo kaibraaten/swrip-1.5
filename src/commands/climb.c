@@ -17,7 +17,7 @@ void do_climb( Character *ch, char *argument )
       return;
     }
 
-  pexit = find_door( ch, argument, TRUE );
+  pexit = find_door( ch, argument, true );
 
   if ( pexit && IS_SET( pexit->exit_info, EX_xCLIMB ) )
     {

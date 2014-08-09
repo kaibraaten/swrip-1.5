@@ -11,8 +11,8 @@ void do_get( Character *ch, char *argument )
   OBJ_DATA *obj_next = NULL;
   OBJ_DATA *container = NULL;
   short number = 0;
-  bool found = FALSE;
-  bool foundowner = FALSE;
+  bool found = false;
+  bool foundowner = false;
   Character *p = NULL, *p_prev = NULL;
 
   argument = one_argument( argument, arg1 );
@@ -71,7 +71,7 @@ void do_get( Character *ch, char *argument )
 
               if ( p->plr_home && p->plr_home->vnum == ch->in_room->vnum )
 		{
-		  foundowner = TRUE;
+		  foundowner = true;
 		}
             }
 
@@ -117,7 +117,7 @@ void do_get( Character *ch, char *argument )
       else
         {
           short cnt = 0;
-          bool fAll = FALSE;
+          bool fAll = false;
           const char *chk = NULL;
 
           if ( IS_SET( ch->in_room->room_flags, ROOM_DONATION ) )
@@ -127,9 +127,9 @@ void do_get( Character *ch, char *argument )
             }
 
           if ( !str_cmp(arg1, "all") )
-            fAll = TRUE;
+            fAll = true;
           else
-            fAll = FALSE;
+            fAll = false;
 
           if ( number > 1 )
             chk = arg1;
@@ -144,7 +144,7 @@ void do_get( Character *ch, char *argument )
               if ( ( fAll || nifty_is_name( chk, obj->name ) )
                    && can_see_obj( ch, obj ) )
                 {
-                  found = TRUE;
+                  found = true;
 
                   if ( number && (cnt + obj->count) > number )
                     split_obj( obj, number - cnt );
@@ -281,16 +281,16 @@ void do_get( Character *ch, char *argument )
             }
 
           if ( !str_cmp(arg1, "all") )
-            fAll = TRUE;
+            fAll = true;
           else
-            fAll = FALSE;
+            fAll = false;
 
           if ( number > 1 )
             chk = arg1;
           else
             chk = &arg1[4];
 
-          found = FALSE;
+          found = false;
 
           for ( obj = container->first_content; obj; obj = obj_next )
             {
@@ -298,7 +298,7 @@ void do_get( Character *ch, char *argument )
               if ( ( fAll || nifty_is_name( chk, obj->name ) )
                    &&   can_see_obj( ch, obj ) )
                 {
-                  found = TRUE;
+                  found = true;
                   if ( number && (cnt + obj->count) > number )
                     split_obj( obj, number - cnt );
                   cnt += obj->count;

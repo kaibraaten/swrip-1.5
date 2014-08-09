@@ -28,7 +28,7 @@ void do_commands( Character *ch, char *argument )
     }
   else
     {
-      found = FALSE;
+      found = false;
       for ( hash = 0; hash < 126; hash++ )
         for ( command = command_hash[hash]; command; command = command->next )
           if ( command->level <  LEVEL_AVATAR
@@ -38,7 +38,7 @@ void do_commands( Character *ch, char *argument )
                     &&   command->name[1] != 'p') )
 	    {
               pager_printf( ch, "%-12s", command->name );
-              found = TRUE;
+              found = true;
               if ( ++col % 6 == 0 )
                 send_to_pager( "\r\n", ch );
             }

@@ -75,7 +75,7 @@ void do_override(Character *ch, char *argument)
     {
       if( eShip->shield == 0 )
         {
-          eShip->autorecharge=TRUE;
+          eShip->autorecharge=true;
           send_to_char( "&GShields on. Confirmed.\r\n", ch);
           echo_to_cockpit( AT_YELLOW , eShip , "Shields ON. Autorecharge ON.");
           return;
@@ -83,14 +83,14 @@ void do_override(Character *ch, char *argument)
       else
         {
           eShip->shield = 0;
-          eShip->autorecharge=FALSE;
+          eShip->autorecharge=false;
           send_to_char("Shields down. Confirmed", ch);
           return;
         }
     }
   if ( !str_cmp( arg2, "closebay" ) )
     {
-      eShip->bayopen=FALSE;
+      eShip->bayopen=false;
       send_to_char( "&GBays Close. Confirmed.\r\n", ch);
       echo_to_cockpit( AT_YELLOW , eShip , "Bays Open");
       sprintf( buf ,"%s's bay doors close." , eShip->name );
@@ -112,14 +112,14 @@ void do_override(Character *ch, char *argument)
     {
       if ( ship->autopilot )
         {
-          eShip->autopilot=FALSE;
+          eShip->autopilot=false;
           send_to_char( "&GYou toggle the autopilot.\r\n", ch);
           echo_to_cockpit( AT_YELLOW , eShip , "Autopilot OFF.");
           return;
         }
       else if ( !ship->autopilot )
         {
-          eShip->autopilot=TRUE;
+          eShip->autopilot=true;
           send_to_char( "&GYou toggle the autopilot.\r\n", ch);
           echo_to_cockpit( AT_YELLOW , eShip , "Autopilot ON.");
           return;
@@ -130,7 +130,7 @@ void do_override(Character *ch, char *argument)
     {
       send_to_char("&RYou open the bay doors of the remote ship.",ch);
       act(AT_PLAIN,"$n flips a switch on the control panel.",ch,NULL,argument,TO_ROOM);
-      eShip->bayopen = TRUE;
+      eShip->bayopen = true;
       sprintf( buf ,"%s's bay doors open." , eShip->name );
       echo_to_nearby_ships( AT_YELLOW, ship, buf , NULL );
       return;

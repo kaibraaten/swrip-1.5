@@ -19,7 +19,7 @@ void do_cast( Character *ch, char *argument )
   int mana;
   int sn;
   ch_ret retcode;
-  bool dont_wait = FALSE;
+  bool dont_wait = false;
   SKILLTYPE *skill = NULL;
   struct timeval time_used;
 
@@ -53,7 +53,7 @@ void do_cast( Character *ch, char *argument )
 
       if ( get_trust(ch) < LEVEL_GREATER )
         {
-          if ( ( sn = find_spell( ch, arg1, TRUE ) ) < 0
+          if ( ( sn = find_spell( ch, arg1, true ) ) < 0
                || ( !is_npc(ch) &&  ch->pcdata->learned[sn] <= 0  ) )
             {
               send_to_char( "You can't do that.\r\n", ch );
@@ -239,7 +239,7 @@ void do_cast( Character *ch, char *argument )
                     tmp->tempnum = -1;
                     DISPOSE( tmp->dest_buf );
                   }
-              dont_wait = TRUE;
+              dont_wait = true;
               send_to_char( "You concentrate all the energy into a burst of force!\r\n", ch );
               vo = locate_targets( ch, arg2, sn, &victim, &obj );
               if ( vo == &pAbort )

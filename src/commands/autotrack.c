@@ -61,12 +61,12 @@ void do_autotrack( Character *ch, char *argument )
        NULL, argument , TO_ROOM );
   if (ship->autotrack)
     {
-      ship->autotrack = FALSE;
+      ship->autotrack = false;
       echo_to_cockpit( AT_YELLOW , ship, "Autotracking off.");
     }
   else
     {
-      ship->autotrack = TRUE;
+      ship->autotrack = true;
       echo_to_cockpit( AT_YELLOW , ship, "Autotracking on.");
     }
 

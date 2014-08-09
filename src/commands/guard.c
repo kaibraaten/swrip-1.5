@@ -40,28 +40,28 @@ void do_guard( Character *ch, char *argument )
 
   if ( !str_cmp(argument,"on" ) )
     {
-      ship->guard=TRUE;
+      ship->guard=true;
       send_to_char( "&GYou activate the guard system.\r\n", ch);
       echo_to_cockpit( AT_YELLOW , ship , "Guard System: ACTIVATED.");
       ship->currspeed = 0;
     }
   else if ( !str_cmp(argument,"off" ) )
     {
-      ship->guard=FALSE;
+      ship->guard=false;
       send_to_char( "&GYou shutdown the guard system.\r\n", ch);
       echo_to_cockpit( AT_YELLOW , ship , "Guard System: DEACTIVATED.");
     }
   else
     {
-      if (ship->guard == TRUE)
+      if (ship->guard == true)
         {
-          ship->guard=FALSE;
+          ship->guard=false;
           send_to_char( "&GYou shutdown the guard system.\r\n", ch);
           echo_to_cockpit( AT_YELLOW , ship , "Guard System: DEACTIVATED.");
         }
       else
         {
-          ship->guard=TRUE;
+          ship->guard=true;
           send_to_char( "&GYou activate the guard system.\r\n", ch);
           echo_to_cockpit( AT_YELLOW , ship , "Guard System: ACTIVATED.");
           ship->currspeed = 0;

@@ -47,7 +47,7 @@ void do_pick( Character *ch, char *argument )
     }
 
 
-  if ( ( pexit = find_door( ch, arg, TRUE ) ) != NULL )
+  if ( ( pexit = find_door( ch, arg, true ) ) != NULL )
     {
       /* 'pick door' */
       /*        ROOM_INDEX_DATA *to_room; */ /* Unused */
@@ -183,7 +183,7 @@ void do_pick( Character *ch, char *argument )
 
       if ( !ship->hatchopen)
         {
-          ship->hatchopen = TRUE;
+          ship->hatchopen = true;
           act( AT_PLAIN, "You pick the lock and open the hatch on $T.", ch, NULL, ship->name, TO_CHAR );
           act( AT_PLAIN, "$n picks open the hatch on $T.", ch, NULL, ship->name, TO_ROOM );
           echo_to_room( AT_YELLOW , get_room_index(ship->room.entrance) , "The hatch opens from the outside." );

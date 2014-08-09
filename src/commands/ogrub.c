@@ -45,14 +45,14 @@ static bool go_read_names( Character *ch, OBJ_DATA *po, GO_STRUCT *r, bool np_sw
   {
   pager_printf(ch, "Sorry. There is currently insufficient memory avail"
   " to service your request. Try later or speak to a coder.\r\n");
-  return FALSE;
+  return false;
   }
   p = (GO_STRUCT **) calloc( UMIN(dis_num, MAX_DISPLAY_LINES), sizeof *p);
   if (!p)
   {
   pager_printf(ch, "Sorry. There is currently insufficient memory avail"
   " to service your request. Try later or speak to a coder.\r\n");
-  return FALSE;
+  return false;
   }
   free(p); free(a);
 */
@@ -66,13 +66,13 @@ void do_ogrub (Character *ch, char *argument)
   int  dis_num;                            /* display lines requested     */
   int  op_num = 0;                         /* num of operands on cmd line */
   int  sor_ind  = OVNUM;                   /* sort indicator              */
-  bool or_sw    = FALSE;                   /* or search criteria          */
+  bool or_sw    = false;                   /* or search criteria          */
   bool sor_dir  = 1;                       /* sort indicator              */
-  bool np_sw    = FALSE;                   /* no players                  */
-  bool nm_sw    = FALSE;                   /* no mobs                     */
-  bool ng_sw    = FALSE;                   /* no ground objs              */
-  bool do_sw    = FALSE;                   /* display operand table       */
-  bool d2_sw    = FALSE;                   /* alternate display format    */
+  bool np_sw    = false;                   /* no players                  */
+  bool nm_sw    = false;                   /* no mobs                     */
+  bool ng_sw    = false;                   /* no ground objs              */
+  bool do_sw    = false;                   /* display operand table       */
+  bool d2_sw    = false;                   /* alternate display format    */
 
   go_init();                              /* initialize data structures  */
   argument = one_argument (argument, arg1);
@@ -128,9 +128,9 @@ static void go_init (void)
   int cou;
 
   for (cou=0; cou<GO_NUM_FIELDS; cou++)
-    go_fd[cou].num=TRUE;
-  go_fd[22].num=FALSE;
-  go_fd[23].num=FALSE;
+    go_fd[cou].num=true;
+  go_fd[22].num=false;
+  go_fd[23].num=false;
 
   strcpy(go_fd[ 0].nam, "count");
   strcpy(go_fd[ 1].nam, "vnum" );
@@ -184,30 +184,30 @@ static bool go_parse_operand (Character *ch, const char *arg, int *op_num, int *
 {
   int cou;
 
-  if ( !str_cmp(arg, "or"    ) ) return *or_sw    = TRUE;
-  if ( !str_cmp(arg, "np"    ) ) return *np_sw    = TRUE;
-  if ( !str_cmp(arg, "nm"    ) ) return *nm_sw    = TRUE;
-  if ( !str_cmp(arg, "ng"    ) ) return *ng_sw    = TRUE;
-  if ( !str_cmp(arg, "do"    ) ) return *do_sw    = TRUE;
-  if ( !str_cmp(arg, "d2"    ) ) return *d2_sw = TRUE;
+  if ( !str_cmp(arg, "or"    ) ) return *or_sw    = true;
+  if ( !str_cmp(arg, "np"    ) ) return *np_sw    = true;
+  if ( !str_cmp(arg, "nm"    ) ) return *nm_sw    = true;
+  if ( !str_cmp(arg, "ng"    ) ) return *ng_sw    = true;
+  if ( !str_cmp(arg, "do"    ) ) return *do_sw    = true;
+  if ( !str_cmp(arg, "d2"    ) ) return *d2_sw = true;
 
   if ( arg[0]=='+' || arg[0]=='-')
     {
       const char *pch = arg + 1;
-      *sor_dir = (arg[0]=='+') ? TRUE : FALSE;
+      *sor_dir = (arg[0]=='+') ? true : false;
 
       if ( pch[0] == '\0')
         {
           pager_printf(ch, "Sorry. Missing sort field: %s\r\n", arg);
-          return FALSE;
+          return false;
         }
 
       if ( (*sor_ind = go_fnam_to_num(pch)) == -1 )
         {
           pager_printf(ch, "Sorry. Invalid sort field: %s\r\n", arg);
-          return FALSE;
+          return false;
         }
-      return TRUE;
+      return true;
     }
 
   for (cou=0; cou<GO_NUM_FIELDS; cou++)           /* check field name    */
@@ -217,11 +217,11 @@ static bool go_parse_operand (Character *ch, const char *arg, int *op_num, int *
         go_op[ *op_num ].field = cou;
         /* store field enum */
         if ( !go_parse_operator (ch, arg, op_num) )
-          return FALSE;
-        return TRUE;
+          return false;
+        return true;
       }
   pager_printf(ch, "Sorry. Invalid field name: %s\r\n", arg);
-  return FALSE;
+  return false;
 }
 
 static int go_fnam_to_num( const char *arg )
@@ -254,17 +254,17 @@ static bool go_parse_operator (Character *ch, const char *pch, int *op_num)
         break;
       }
   if ( go_op[*op_num].op < 0 )
-    {pager_printf(ch, "Invalid operator: %s\r\n", pch); return FALSE;}
+    {pager_printf(ch, "Invalid operator: %s\r\n", pch); return false;}
   if ( go_op[*op_num].op==EQ || go_op[*op_num].op==GT
        ||   go_op[*op_num].op==LT )
     pch++;
   else pch+=2;                              /* advance to operand value */
   if ( *pch=='\0' )
-    {pager_printf(ch, "Value is missing from operand.\r\n"); return FALSE;}
+    {pager_printf(ch, "Value is missing from operand.\r\n"); return false;}
 
   if ( go_fd[ go_op[ *op_num ].field ].num )
     {
-      go_op[*op_num].num  = TRUE;
+      go_op[*op_num].num  = true;
       if ( isdigit(*pch) )                        /* user entered number */
         go_op[*op_num].nval = atoi ( pch );
       else
@@ -276,17 +276,17 @@ static bool go_parse_operator (Character *ch, const char *pch, int *op_num)
     }
   else
     {
-      go_op[*op_num].num  = FALSE;
+      go_op[*op_num].num  = false;
 
       if ( strlen(pch) > MAX_FIELD_LENGTH )
         {
           pager_printf(ch, "Char string is too long:%s\r\n", pch);
-          return FALSE;
+          return false;
         }
       strcpy ( go_op[*op_num].sval, pch );      /* store str value in table */
     }
   (*op_num)++;                            /* operand now stored in table */
-  return TRUE;
+  return true;
 }
 
 static int owear_to_num (const char *arg)
@@ -334,7 +334,7 @@ static bool go_read( Character *ch, int dis_num, int op_num, int sor_ind,
   memset(ok_otype, 0, sizeof ok_otype);
   ok_otype[ITEM_LIGHT] = ok_otype[ITEM_WAND] = ok_otype[ITEM_KEY] =
     ok_otype[ITEM_STAFF] = ok_otype[ITEM_WEAPON] = ok_otype[ITEM_ARMOR] =
-    ok_otype[ITEM_CONTAINER] = TRUE;
+    ok_otype[ITEM_CONTAINER] = true;
 
   for (po=first_object; po; po=po->next)   /* Loop through all objects   */
     {
@@ -374,7 +374,7 @@ static bool go_read( Character *ch, int dis_num, int op_num, int sor_ind,
              ( sor_ind <= OSAV4 ), sor_dir );
 
   go_display( ch, dis_num, tot_match, d2_sw, p );
-  return TRUE;
+  return true;
 }
 
 static short go_wear_ext (long arg)    /* extract bit set in arg ignoring pos 1 */
@@ -400,8 +400,8 @@ static short go_wear_ext (long arg)    /* extract bit set in arg ignoring pos 1 
  * 4th parm indicates the last  record in the sort range
  *     e.g. the array may contain 100 records but we may wish to sort
  *     only the first fifty.
- * 5th parm is n_s - number/string - TRUE is number - FALSE is string
- * 6th parm is direction - TRUE is ascending - FALSE is descending
+ * 5th parm is n_s - number/string - true is number - false is string
+ * 6th parm is direction - true is ascending - false is descending
  */
 static void go_sort( const Character *ch, GO_STRUCT **p,
                      int ind, int left, int right, bool n_s, bool sor_dir )
@@ -493,7 +493,7 @@ static bool go_eval_and (Character *ch, GO_STRUCT *r, int op_num)
         {
           if ( !go_eval_num
                (r->n[go_op[cou].field], go_op[cou].op, go_op[cou].nval) )
-            return FALSE;
+            return false;
           else continue;
         }
       else
@@ -501,11 +501,11 @@ static bool go_eval_and (Character *ch, GO_STRUCT *r, int op_num)
           if ( !go_eval_str(
                             r->s[go_op[cou].field-OSAV4-1], go_op[cou].op,
                             go_op[cou].sval) )
-            return FALSE;
+            return false;
           else continue;
         }
     }
-  return TRUE;
+  return true;
 }
 
 /*
@@ -523,18 +523,18 @@ static bool go_eval_or (Character *ch, GO_STRUCT *r, int op_num)
         {
           if ( go_eval_num( r->n[ go_op[cou].field ], go_op[cou].op,
                             go_op[cou].nval ) )
-            return TRUE;
+            return true;
           else continue;
         }
       else
         {
           if ( go_eval_str( r->s[go_op[cou].field-OSAV4-1], go_op[cou].op,
                             go_op[cou].sval) )
-            return TRUE;
+            return true;
           else continue;
         }
     }
-  return FALSE;
+  return false;
 }
 
 static void go_display( Character *ch, int dis_num, int tot_match, bool d2_sw,
@@ -663,9 +663,9 @@ static bool go_read_names( Character *ch, OBJ_DATA *po, GO_STRUCT *r, bool np_sw
 
   if ( po->carried_by )                  /* it's being carried by a char */
     {
-      if ( get_trust(ch) < po->carried_by->top_level ) return FALSE;
-      if ( nm_sw &&  is_npc(po->carried_by) ) return FALSE;
-      if ( np_sw && !is_npc(po->carried_by) ) return FALSE;
+      if ( get_trust(ch) < po->carried_by->top_level ) return false;
+      if ( nm_sw &&  is_npc(po->carried_by) ) return false;
+      if ( np_sw && !is_npc(po->carried_by) ) return false;
       r->s[CNAME] = po->carried_by->name;
     }
   else if ( po->in_obj )                 /* it's in a container          */
@@ -674,22 +674,22 @@ static bool go_read_names( Character *ch, OBJ_DATA *po, GO_STRUCT *r, bool np_sw
       while( pt->in_obj )
         pt=pt->in_obj;
       if ( pt->carried_by && get_trust(ch) < pt->carried_by->top_level )
-        return FALSE;
+        return false;
       if ( pt->carried_by && nm_sw &&  is_npc(pt->carried_by) )
-        return FALSE;
+        return false;
       if ( pt->carried_by && np_sw && !is_npc(pt->carried_by) )
-        return FALSE;
+        return false;
       if ( pt->carried_by ) r->s[CNAME] = pt->carried_by->name;
       else
         {
-          if ( ng_sw ) return FALSE;
+          if ( ng_sw ) return false;
           r->s[CNAME] = ground;
         }
     }
   else if ( !po->in_obj )                /* it's on the ground           */
     {
-      if ( ng_sw ) return FALSE;
+      if ( ng_sw ) return false;
       r->s[CNAME] = ground;
     }
-  return TRUE;
+  return true;
 }

@@ -26,7 +26,7 @@ void do_dig( Character *ch, char *argument )
       one_argument( argument, arg );
       if ( arg[0] != '\0' )
         {
-	  if ( ( pexit = find_door( ch, arg, TRUE ) ) == NULL
+	  if ( ( pexit = find_door( ch, arg, true ) ) == NULL
                &&     get_dir(arg) == -1 )
             {
               send_to_char( "What direction is that?\r\n", ch );
@@ -89,18 +89,18 @@ void do_dig( Character *ch, char *argument )
   ch->substate = SUB_NONE;
 
   /* not having a shovel makes it harder to succeed */
-  shovel = FALSE;
+  shovel = false;
   for ( obj = ch->first_carrying; obj; obj = obj->next_content )
     if ( obj->item_type == ITEM_SHOVEL )
       {
-        shovel = TRUE;
+        shovel = true;
         break;
       }
 
   /* dig out an EX_DIG exit... */
   if ( arg[0] != '\0' )
     {
-      if ( ( pexit = find_door( ch, arg, TRUE ) ) != NULL
+      if ( ( pexit = find_door( ch, arg, true ) ) != NULL
            &&     IS_SET( pexit->exit_info, EX_DIG )
            &&     IS_SET( pexit->exit_info, EX_CLOSED ) )
         {
@@ -122,7 +122,7 @@ void do_dig( Character *ch, char *argument )
     }
 
   startobj = ch->in_room->first_content;
-  found = FALSE;
+  found = false;
 
   for ( obj = startobj; obj; obj = obj->next_content )
     {
@@ -131,7 +131,7 @@ void do_dig( Character *ch, char *argument )
            &&  (number_percent() * (shovel ? 1 : 2)) <
            (is_npc(ch) ? 80 : ch->pcdata->learned[gsn_dig]) )
         {
-          found = TRUE;
+          found = true;
           break;
         }
     }

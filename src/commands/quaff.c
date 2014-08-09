@@ -12,7 +12,7 @@ void do_quaff( Character *ch, char *argument )
       return;
     }
 
-  if ( (obj = find_obj(ch, argument, TRUE)) == NULL )
+  if ( (obj = find_obj(ch, argument, true)) == NULL )
     return;
 
   if ( obj->item_type != ITEM_POTION )

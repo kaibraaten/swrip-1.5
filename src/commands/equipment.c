@@ -11,7 +11,7 @@ void do_equipment( Character *ch, char *argument )
 
   set_char_color( AT_RED, ch );
   send_to_char( "You are using:\r\n", ch );
-  found = FALSE;
+  found = false;
   set_char_color( AT_OBJECT, ch );
   for ( iWear = 0; iWear < MAX_WEAR; iWear++ )
     {
@@ -21,7 +21,7 @@ void do_equipment( Character *ch, char *argument )
             send_to_char( where_name[iWear], ch );
             if ( can_see_obj( ch, obj ) )
               {
-                send_to_char( format_obj_to_char( obj, ch, TRUE ), ch );
+                send_to_char( format_obj_to_char( obj, ch, true ), ch );
                 strcpy( buf , "" );
                 switch ( obj->item_type )
                   {
@@ -81,7 +81,7 @@ void do_equipment( Character *ch, char *argument )
 	      }
             else
               send_to_char( "something.\r\n", ch );
-            found = TRUE;
+            found = true;
           }
     }
 

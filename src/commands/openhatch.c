@@ -31,7 +31,7 @@ void do_openhatch(Character *ch, char *argument )
                   send_to_char("&RPlease wait till the ship lands!\r\n",ch);
                   return;
                 }
-              ship->hatchopen = TRUE;
+              ship->hatchopen = true;
               send_to_char("&GYou open the hatch.\r\n",ch);
               act( AT_PLAIN, "$n opens the hatch.", ch, NULL, argument, TO_ROOM );
               sprintf( buf , "The hatch on %s opens." , ship->name);
@@ -67,7 +67,7 @@ void do_openhatch(Character *ch, char *argument )
 
   if ( !ship->hatchopen)
     {
-      ship->hatchopen = TRUE;
+      ship->hatchopen = true;
       act( AT_PLAIN, "You open the hatch on $T.", ch, NULL, ship->name, TO_CHAR );
       act( AT_PLAIN, "$n opens the hatch on $T.", ch, NULL, ship->name, TO_ROOM );
       echo_to_room( AT_YELLOW , get_room_index(ship->room.entrance) , "The hatch opens from the outside." );

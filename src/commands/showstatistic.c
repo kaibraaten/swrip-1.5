@@ -7,7 +7,7 @@ void do_showstatistic( Character *ch, char *argument )
   PC_DATA *pcdata;
   Character *raceCh;
   int race, pclass, iR, iC, iC2;
-  bool chk_race = FALSE;
+  bool chk_race = false;
   char buf[MAX_INPUT_LENGTH];
   char buf2[MAX_INPUT_LENGTH];
 
@@ -18,7 +18,7 @@ void do_showstatistic( Character *ch, char *argument )
   if ( race < 0 )
     pclass = get_class_from_name( argument );
   else
-    chk_race = TRUE;
+    chk_race = true;
 
   if( race < 0 && pclass < 0 )
     {

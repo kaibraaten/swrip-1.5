@@ -27,8 +27,8 @@ void do_resetship( Character *ch, char *argument )
 
       vector_randomize( &ship->pos, -5000, 5000 );
       ship->shipstate = SHIP_READY;
-      ship->autopilot = TRUE;
-      ship->autorecharge = TRUE;
+      ship->autopilot = true;
+      ship->autorecharge = true;
       ship->shield = ship->maxshield;
     }
 }

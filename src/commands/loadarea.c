@@ -20,10 +20,10 @@ void do_loadarea( Character *ch, char *argument )
     {
       bool found;
 
-      for ( found = FALSE, tarea = first_build; tarea; tarea = tarea->next )
+      for ( found = false, tarea = first_build; tarea; tarea = tarea->next )
         if ( !str_cmp( tarea->filename, argument ) )
           {
-            found = TRUE;
+            found = true;
             break;
 	  }
       if ( is_npc(ch) || ( get_trust(ch) < LEVEL_GREATER
