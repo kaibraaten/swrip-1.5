@@ -297,7 +297,7 @@ typedef enum
 #define RACE_GAND                31
 #define RACE_DUROS               32
 #define RACE_COYNITE             33
-#define RACE_PROTOCAL_DROID      34
+#define RACE_PROTOCOL_DROID      34
 #define RACE_ASSASSIN_DROID      35
 #define RACE_GLADIATOR_DROID     36
 #define RACE_ASTROMECH_DROID     37

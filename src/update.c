@@ -83,7 +83,7 @@ const char * const d_corpse_descs[] =
 bool is_droid( const Character *ch )
 {
   return ch->race == RACE_DROID
-    || ch->race == RACE_PROTOCAL_DROID
+    || ch->race == RACE_PROTOCOL_DROID
     || ch->race == RACE_ASSASSIN_DROID
     || ch->race == RACE_GLADIATOR_DROID
     || ch->race == RACE_ASTROMECH_DROID
@@ -254,7 +254,7 @@ int max_level( const Character *ch, int ability)
       if ( ch->race == RACE_DUROS)
 	level += 30;
 
-      if ( ch->race == RACE_PROTOCAL_DROID)
+      if ( ch->race == RACE_PROTOCOL_DROID)
 	level -= 15;
 
       if ( ch->race == RACE_ASSASSIN_DROID)
@@ -334,7 +334,7 @@ int max_level( const Character *ch, int ability)
       if ( ch->race == RACE_DUROS )
 	level += 25;
 
-      if ( ch->race == RACE_PROTOCAL_DROID)
+      if ( ch->race == RACE_PROTOCOL_DROID)
 	level -= 40;
 
       if ( ch->race == RACE_GLADIATOR_DROID)
@@ -465,7 +465,7 @@ int max_level( const Character *ch, int ability)
       if ( ch->race == RACE_DROID)
 	level -= 20;
 
-      if ( ch->race == RACE_PROTOCAL_DROID)
+      if ( ch->race == RACE_PROTOCOL_DROID)
 	level -= 40;
 
       if ( ch->race == RACE_ASSASSIN_DROID)
@@ -521,7 +521,7 @@ int max_level( const Character *ch, int ability)
       if ( ch->race == RACE_COYNITE )
 	level += 10;
 
-      if ( ch->race == RACE_PROTOCAL_DROID )
+      if ( ch->race == RACE_PROTOCOL_DROID )
 	level -= 40;
 
       if ( ch->race == RACE_GLADIATOR_DROID )
