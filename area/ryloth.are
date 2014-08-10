@@ -1,0 +1,1933 @@
+#AREA   Ryloth~
+
+
+
+#AUTHOR Darrik~
+
+#RANGES
+0 0 0 100
+$
+
+#FLAGS
+0
+
+#ECONOMY 0 4483179
+
+#MOBILES
+#800
+twi'lek~
+a twi'lek~
+A twi'lek works hard refining ryll here.
+~
+~
+1073741827 512 0 Z
+104 0 -160 21d10+1050 10d4+2
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+2 0 0 0 5 5 0
+23 21 0 0 0 0 0 2
+0 0 0 0 0 0 0 0
+#801
+twi'lek~
+a twi'lek~
+A twi'lek sells hardware equipment while he works.
+~
+~
+1107296259 512 0 Z
+104 0 -160 21d10+1050 10d4+2
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+2 0 0 0 5 4 0
+0 0 0 0 0 0 0 2
+0 0 0 0 0 0 0 0
+#802
+a twi'lek stat trainer~
+a twi'lek~
+A twi'lek is here to help develop your abilities
+~
+~
+1073742339 512 0 Z
+104 0 -160 21d10+1050 10d4+2
+0 0
+8 8 0
+25 25 25 25 25 25 10
+0 0 0 0 0
+2 0 0 0 5 4 0
+0 0 0 0 0 0 0 2
+0 0 0 0 0 0 0 0
+#803
+a twilek janitor~
+a twi'lek~
+A twi'lek goes through the trash, preparing for compaction.
+~
+~
+1073741827 512 0 Z
+104 0 -160 21d10+1050 10d4+2
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+2 0 0 0 5 4 0
+0 0 0 0 0 0 0 2
+0 0 0 0 0 0 0 0
+> speech_prog compact~
+mpecho The Janitor ushers you out as the walls begin to close
+mppurge
+mpecho You are allowed back in after the cycle is complete. 
+~
+> rand_prog 25~
+mpecho The janitor ushers you out as the walls begin to close.
+mppurge
+mpecho You are allowed back in after the cycle is complete.
+~
+|
+#822
+Koh'shak, starport master~
+Koh'shak~
+Koh'shak, starport master
+~
+~
+1073741825 0 0 Z
+95 0 -137 19d10+950 9d4+2
+0 0
+8 8 0
+20 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+20 20 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+> act_prog gives~
+if ovnuminv(881) >= 1 
+say So! That little thief has finally gotten around to paying me! 
+say It must have been that bounty hunter I sent after him.
+mpwithdraw 5000
+give 5000 credits $n
+drop 5000 credits
+mpgain $n 5 100000 
+mpat 10299 drop all 
+mpat 10299 mppurge 
+say There. I must go call off the bounty I set on him. 
+mpecho Koh'shak walks a little ways off and gets out his comlink. 
+endif 
+if ovnuminv(24611) == 1
+smile $n
+say My customer was wondering if you would get
+these.
+say Good job!
+mpwithdraw 250000
+give 250000 credits $n
+drop 250000 credits
+endif
+mpat 10299 drop all
+mpat 10299 mppurge
+~
+> speech_prog p queen~
+say I had an odd customer in here the other day.
+emote shakes her head.
+say They asked if I could acquire the queens jewels.
+emote blinks.
+say You're not going to believe which queen.
+say The Queen Mother of Hapes! Ha!
+say I'd pay anyone who got them enormously though.
+~
+|
+#889
+A Twi'lek Merchant~
+a newly created A Twi'lek Merchant~
+A Twi'lek Merchant
+~
+~
+1107296257 0 0 Z
+1 0 0 0d0+0 0d0+0
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 1050624 0 0 0
+0 0 0 0 0 0 0 0
+#890
+A Twi'lek Police~
+A Twi'lek Cop~
+A Twi'lek Peace Official is protecting the innocent.
+~
+~
+1073741825 0 0 Z
+24 0 40 4d10+240 2d4+2
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 5 5 0
+4 4 0 0 2048 0 0 0
+4 0 0 0 0 0 0 0
+> fight_prog 100~
+~
+|
+#891
+twi'lek twilek citizen~
+Twi'lek Male~
+A twi'lek moves around Kala'uun on business.
+~
+This is your everyday Twi'lek, really.  He stands 2 meters tall, with his
+lekku hanging behind his
+head.
+~
+1 0 0 Z
+5 0 87 1d10+50 0d4+2
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 4 4 0
+1 1 0 0 0 0 0 0
+4 0 0 0 0 0 0 0
+#892
+Kookab'urra~
+Kookab'urra~
+Kookab'urra is selling comlinks
+~
+~
+1107296259 0 0 Z
+1 0 0 0d0+0 0d0+0
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 5 5 0
+0 0 0 0 1050624 0 0 0
+4 0 0 0 0 0 0 0
+#893
+Sal'mara~
+Sal'mara the Vendor~
+Sal'mara is here looking to unload some shields
+~
+~
+1107296257 0 0 Z
+65 0 -62 13d10+650 6d4+2
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 5 5 0
+13 13 0 0 1050624 0 0 0
+4 0 0 0 0 0 0 0
+#894
+A Twi'lek Junkie~
+A Twi'lek Junkie~
+A Twi'lek Junkie is hoarding Ryll.
+~
+~
+1059 0 0 Z
+45 0 -12 4d10+450 4d4+2
+0 0
+8 8 1
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 5 5 0
+11 11 0 0 0 0 2 2
+4 0 0 0 0 0 0 0
+> all_greet_prog 100~
+mpechoat $n &cA Twi'lek Junkie looks at you with utter contempt.
+'Get out of here!  This is our Ryll!
+~
+> death_prog 100~
+mpmload 894
+~
+|
+#895
+Lavar'inaa~
+Lavar'inaa the cook~
+Lavar'inaa is serving Twi'lek delicacies.
+~
+~
+33554435 0 0 Z
+25 0 37 5d10+250 2d4+2
+0 0
+8 8 2
+10 10 10 10 10 10 10
+0 0 0 0 0
+2 0 0 0 5 5 0
+5 5 0 0 1050624 0 0 0
+4 0 0 0 0 0 0 0
+> all_greet_prog 100~
+smile $n
+'Uncle Tam'arr isn't feeling well so I'm watching the cafe today.
+giggle
+'Would you like something to eat?
+flirt $n
+~
+> speech_prog yes yeah yup yep oui si sure~
+'Well in that case, pull up a seat.
+mpecho &cLavar'inaa leans on the greasy counter.
+'We got a lot of good stuff
+here.
+giggle
+~
+> speech_prog food~
+'The food?
+mpecho &cLavar'inaa laughs nervously.
+'Well...they're not exactly Twi'lek delicacies.
+inno $n
+'Listen, Uncle Tam'arr is sick.  This is the best I can do.
+~
+> bribe_prog 1~
+mpechoat $n &cLavar'inaa takes your credits.
+'A tip?  Thanks, $n.  You're a doll.
+mpecho &cLavar'inaa puts some credits in her pocket.
+smile $n
+thank $n
+~
+|
+#896
+Fal'vira is renting out RYLL tanks??~
+Fal'vira~
+Fal'vira is renting out RYLL tanks??
+~
+~
+3 0 0 Z
+55 0 -37 11d10+550 5d4+2
+0 0
+8 8 1
+10 10 10 10 10 10 10
+0 0 0 0 0
+2 0 0 0 5 5 0
+11 11 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+> all_greet_prog 100~
+smile $n
+'Welcome.  Are you wounded?
+exam $n
+'Come relax in my Ryll tank.  Only 100 credits.
+comfort $n
+~
+> bribe_prog 100~
+'Oh dear, you are hurt, aren't you?  Well, we'll have you fixed up.
+smile
+,gestures downwards and lowers you into the tank.
+mptransfer $n 812
+~
+> speech_prog ryll spice drugs~
+'Yes, it's true.  Some evil Twi'leks have changed the purpose of
+mpecho &Cryll.
+sigh
+'They use it as a drug.  But ryll is meant strictly for
+mpecho &chealing.
+~
+> speech_prog bacta~
+'Bacta??
+snort
+'Bacta is for human wimps who must get rid of their pain faster.
+chuckle
+'We Twi'leks are strong enough to only need Ryll to heal our wounds.
+'In fact, using Bacta is seen as a weakness here on Ryloth.
+laugh
+'Bacta...silly tourists...
+~
+|
+#897
+Faro the Triad Armor Guy~
+Triad Armor Repairman~
+Faro, the Triad Armorer is fixing armor for members
+~
+~
+3 0 0 Z
+75 0 -87 15d10+750 7d4+2
+0 0
+8 8 1
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+15 15 0 0 2048 0 0 0
+0 0 0 0 0 0 0 0
+#898
+A Fat Twi'lek Banker~
+A Twi'lek Banker~
+A Fat Twi'lek Banker is here smelling credits.
+~
+~
+3 0 -500 Z
+1 0 0 0d0+0 0d0+0
+0 0
+8 8 1
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 5 5 0
+10 10 0 0 0 0 0 0
+4 0 0 0 0 0 0 0
+> bribe_prog 1~
+snicker
+say Thanks, Bud.  Your credits are mine now.
+muha
+~
+> speech_prog hi hello sup aloha konichiwa shalom hola bonjour utini~
+say Oh, hello there. 
+,peers around nervously.
+evilgrin
+say Care to make a little transaction?
+cough
+~
+> speech_prog ryll spice~
+grin
+sat Yes, Ryll is grown here.  I never take it.  I have enough to worry
+about.
+mutter
+~
+> all_greet_prog 100~
+chuckle
+'Hello there.  You got credits?  Give them
+mpecho &Chere'&c
+grin
+~
+|
+#899
+Gira'haad~
+Gira'haad the Bartender~
+Gira'haad waits to take your order.
+~
+Gira'haad is a weathered Twi'lek female.  You can tell she has been running
+this cantina for a long time and is fed up with the everyday scum that
+comes here. What keeps that lovely smile on her face?
+~
+1107296259 0 0 Z
+70 0 -75 14d10+700 7d4+2
+0 0
+8 8 2
+10 10 10 10 10 10 10
+0 0 0 0 0
+2 0 0 0 5 5 0
+14 14 0 0 1050624 0 0 0
+0 0 0 0 0 0 0 0
+> bribe_prog 50~
+say ooh, thanks Honey.  Here...
+,reaches down under the counter and rises with a stim of ryll.
+mpoload 32230
+give ryll to $n
+say This'll make you feel real good!
+cackle
+~
+> speech_prog Hi hello hey sup konichiwa shalom aloha hola~
+,looks up from the counter.
+say Hello there, $n.  Can I get you something?  Some alcohol perhaps?
+mpechoat $n Is that Ryll in her cloak pocket?
+~
+> act_prog gives~
+if ovnuminv(2100) >= 1
+'Ah, my special Ry...um, Ale.
+giggle
+mpwithdraw 5000
+give 5000 credits $n
+mpgain $n 5 100000
+mpat 10299 drop all
+mpat 10299 mppurge
+mpechoat $n &gThe Bitch forgot to pay you!
+endif
+~
+|
+#0
+
+
+#OBJECTS
+#880
+Pure Ryll~
+Pure Ryll~
+Some of Ryloth's Finest was left around here.~
+~
+78 0 16385
+2 25 0 0
+3 0 0
+#881
+A package for Koh'shak~
+A package for Koh'shak~
+A package for Koh'shak~
+~
+15 0 1
+0 0 0 0
+200 10000 1000
+#900
+A Super-Advanced Battery~
+a A Super-Advanced Battery~
+A Super-Advanced Battery~
+~
+65 8192 1
+250 0 0 0
+1 350 35
+#0
+
+
+#ROOMS
+#800
+Kala'uun Spaceport Landing Pad~
+~
+0 48 1
+D3
+~
+~
+0 -1 801
+> rand_prog 100~
+~
+|
+S
+#801
+In the heart of Kala'uun Spaceport~
+~
+0 0 1
+D0
+~
+~
+0 -1 802
+D1
+~
+~
+0 -1 800
+D3
+~
+~
+0 -1 805
+S
+#802
+Gira'haad Cantina.~
+~
+0 8 1
+D0
+~
+~
+0 -1 804
+D2
+~
+~
+0 -1 801
+D3
+~
+~
+0 -1 803
+> rand_prog 100~
+~
+|
+S
+#803
+A cramped booth~
+You can refine spice here.
+~
+0 33554440 1
+D1
+~
+~
+0 -1 802
+D6
+~
+~
+0 -1 804
+> rand_prog 100~
+mpechoat $n &gA Small Cock-a-Roach skitters past your boot...
+~
+|
+S
+#804
+Gira'haad's Counter~
+~
+0 8 1
+D2
+~
+~
+0 -1 802
+D9
+~
+~
+0 -1 803
+> rand_prog 100~
+mpechoat $n &gThe hustle and bustle of the bar gets a bit louder...
+~
+|
+S
+#805
+Entrance to Kala'uun~
+~
+0 0 1
+D1
+~
+~
+0 -1 801
+D2
+~
+~
+0 -1 806
+D3
+~
+~
+0 -1 816
+S
+#806
+Nuntav'ara Street~
+~
+0 0 1
+D0
+~
+~
+0 -1 805
+D9
+~
+~
+0 -1 807
+> rand_prog 100~
+~
+|
+S
+#807
+Nuntav'ara Street~
+~
+0 0 1
+D1
+~
+~
+0 -1 815
+D6
+~
+~
+0 -1 806
+D9
+~
+~
+0 -1 808
+S
+#808
+Nuntav'ara Street~
+~
+0 0 1
+D2
+~
+~
+0 -1 809
+D3
+~
+~
+0 -1 810
+D6
+~
+~
+0 -1 807
+> rand_prog 100~
+~
+|
+S
+#809
+Ryloth Planetary Bank~
+The Planetary Bank is one of the few bustling offices in town.  Mainly
+because it's indoors, and offers it's residents an escape from the heat.
+There are lines 30 people long in each of the 5 teller windows, and as
+always, 8 windows are left closed. Then, you see a fat Twi'lek man wearing
+the bankers uniform stand off near a table.  You dash over to him in hopes
+that he can record your credit transactions.  Upon closer inspection, you
+notice his uniform is not quite right...
+~
+0 264 1
+D0
+~
+~
+0 -1 808
+> all_greet_prog ~
+~
+> all_greet_prog 100~
+mpechoat $n The Fat Banker snickers under his breath.
+mpechoat $n The Fat Banker says, "Hello, there.  Just give all your credits
+to
+me."
+mpechoat $n The Fat Banker guffaws loudly to nobody in particular.
+~
+> rand_prog 100~
+mpecho &gThe clanging of exchanged credits fills the room...
+~
+|
+S
+#810
+Nuntav'ara Street~
+~
+0 0 1
+D0
+~
+~
+0 -1 811
+D1
+~
+~
+0 -1 808
+D7
+~
+~
+0 -1 813
+> rand_prog 100~
+~
+|
+S
+#811
+Fal'vira Ryll Clinic~
+~
+0 8 1
+D2
+~
+~
+0 -1 810
+S
+#812
+Ryll Tank~
+Well, you've made it into a ryll tank.  Once you get in here, you notice
+something is clearly different from most bacta tanks. While in bacta, your
+wounds go away much faster, but here in the ryll, your pain lingers for a
+little while longer.  It certainly feels better than bacta somehow, and
+you are comforted by the fact that you won't be tasting bacta in your
+mouth for weeks to come.
+~
+0 12 1 0 0 1
+D3
+~
+~
+0 -1 849
+> rand_prog 100~
+feel 'cure serious' $n
+mpechoat $n You feel the Ryll healing you slightly.
+~
+|
+S
+#813
+A Dark alley.~
+DO NOT GO NORTHWEST UNLESS YOU FEEL VERY COMFORTABLE ABOUT YOUR FIGHTING
+SKILLS!!!
+~
+0 1 1
+D7
+~
+~
+0 -1 814
+D8
+~
+~
+0 -1 810
+> rand_prog 100~
+mpechoat $n &gAn unidentified rodent skitters by your feet...
+~
+|
+S
+#814
+A Dead End~
+~
+0 1 1
+D8
+~
+~
+0 -1 813
+> rand_prog 100~
+~
+|
+S
+#815
+Tam'arr Food Bar.~
+~
+0 0 1
+D3
+~
+~
+0 -1 807
+S
+#816
+Malachu Market~
+~
+0 4 1
+D1
+~
+~
+0 -1 805
+> rand_prog 100~
+~
+> rand_prog 100~
+mpechoat $n &bWater rises from the plaza fountain blasting 50 meters in the
+mpechoat $n &bair and falling back down into the tiny pool...
+~
+|
+S
+#817
+The Komlinks of Kookab'urra~
+~
+0 4 1
+D3
+~
+~
+0 -1 846
+S
+#818
+Power Cell Kiosk~
+~
+0 4 1
+D3
+~
+~
+16777216 -1 848
+D10
+~
+spice~
+526336 -1 820
+> rand_prog 100~
+~
+|
+S
+#819
+Sal'mara Shields.~
+~
+0 4 1
+D3
+~
+~
+16777216 -1 847
+S
+#820
+A Raw Ryll Depository.~
+~
+0 4 1
+D8
+~
+~
+0 -1 818
+> rand_prog 100~
+~
+|
+S
+#821
+Kala'uun Hostel.~
+Amenities here are spare.  This hostel is strictly for getting much needed
+rest for non-twl'lek travelers, since no aliens are allowed into the
+warrens. Two rooms and one commons is provided.
+~
+0 8388612 1
+D1
+~
+~
+0 -1 880
+D2
+~
+~
+0 -1 881
+D3
+~
+~
+0 -1 822
+D10
+~
+pluogusnow~
+526344 -1 32149
+S
+#822
+Kala'uun Starport : Serin Landing Bay~
+The starport is a colossil cavern which had been hollowed out out of the
+heart of the mountain that sheltered it. Above the landing area lay level
+upon level of Twi'lek clan warrens, comprising the living quarters and
+work areas of over 100,00 Twi'leks.
+~
+0 52 1
+D1
+~
+~
+0 -1 821
+D3
+~
+~
+0 -1 823
+D7
+~
+~
+0 -1 824
+> rand_prog 100~
+~
+|
+S
+#823
+Kala'uun Starport : Landing Bay~
+The starport is a colossil cavern which had been hollowed out out of the
+heart of the mountain that sheltered it. Above the landing area lay level
+upon level of Twi'lek clan warrens, comprising the living quarters and
+work areas of over 100,00 Twi'leks.    This section of the Starport is
+reserved for Twi'lek Clan ships. Mostly this consists of merchant vessels,
+but occasionally a starfighter of various kind will land here.
+~
+0 4 1
+D1
+~
+~
+0 -1 822
+D6
+~
+~
+0 -1 824
+S
+#824
+Kala'uun Starport~
+The starport is a colossil cavern which had been hollowed out out of the
+heart of the mountain that sheltered it. Above the landing area lay level
+upon level of Twi'lek clan warrens, comprising the living quarters and
+work areas of over 100,00 Twi'leks. 
+~
+0 4 1
+D0
+~
+~
+0 -1 825
+D8
+~
+~
+0 -1 822
+D9
+~
+~
+0 -1 823
+> rand_prog 100~
+~
+|
+S
+#825
+Kala'uun Starport : Warren Entrance~
+The starport is a colossil cavern which had been hollowed out out of the
+heart of the mountain that sheltered it. Above the landing area lay level
+upon level of Twi'lek clan warrens, comprising the living quarters and
+work areas of over 100,00 Twi'leks.   The areas beyond this are private.
+Only Twi'lek clan members are allowedibeyond here. 
+~
+0 4 1
+D2
+~
+~
+0 -1 824
+D4
+~
+~
+0 -1 826
+D5
+~
+~
+0 -1 854
+S
+#826
+Kala'uun Starport : Warrens~
+The stair case you climb brings you to a hallway. Hollowed out of stone,
+the hallway is lighted by glowrods attached to the ceiling. To the west
+lies the thousands of warrens where the Twi'lek clans live. To the east
+lies the shops where one can buy what one needs. 
+~
+0 4 1
+D1
+~
+~
+0 -1 844
+D3
+~
+~
+0 -1 827
+D4
+~
+~
+0 -1 850
+D5
+~
+~
+0 -1 825
+> rand_prog 100~
+~
+> entry_prog 100~
+if isimmort($n)
+else
+if race($n) == twi'lek
+else
+mpechoat $n Someone says, 'You don't belong in here!'
+mpechoat $n You run back downstairs.
+endif
+endif
+~
+|
+S
+#827
+Kala'uun Starport : Warrens~
+Hollowed out of stone, the hallway is lighted by glowrods attached to the
+ceiling.
+~
+0 4 1
+D1
+~
+~
+0 -1 826
+D3
+~
+~
+0 -1 828
+S
+#828
+Kala'uun Starport : Warrens~
+Hollowed out of stone, the hallway is lighted by glowrods attached to the
+ceiling.
+~
+0 4 1
+D1
+~
+~
+0 -1 827
+D2
+~
+~
+0 -1 829
+> rand_prog 100~
+~
+|
+S
+#829
+Kala'uun Starport : Warrens~
+Hollowed out of stone, the hallway is lighted by glowrods attached to the
+ceiling.
+~
+0 4 1
+D0
+~
+~
+0 -1 828
+D1
+~
+~
+0 -1 835
+D2
+~
+~
+0 -1 830
+S
+#830
+Kala'uun Starport : Warrens~
+Hollowed out of stone, the hallway is lighted by glowrods attached to
+the ceiling.
+~
+0 4 1
+D0
+~
+~
+0 -1 829
+D1
+~
+~
+0 -1 836
+D2
+~
+~
+0 -1 831
+S
+#831
+Kala'uun Starport : Warrens~
+Hollowed out of stone, the hallway is lighted by glowrods attached to the
+ceiling.
+~
+0 1073741824 1
+D0
+~
+~
+0 -1 830
+D1
+~
+~
+0 -1 837
+D2
+~
+~
+0 -1 832
+D3
+~
+~
+0 -1 842
+S
+#832
+Kala'uun Starport : Warrens~
+Hollowed out of stone, the hallway is lighted by glowrods attached to the
+ceiling.
+~
+0 1073741824 1
+D0
+~
+~
+0 -1 831
+D1
+~
+~
+0 -1 838
+D2
+~
+~
+0 -1 833
+D3
+~
+~
+0 -1 841
+S
+#833
+Kala'uun Starport : Warrens~
+Hollowed out of stone, the hallway is lighted by glowrods attached to the
+ceiling.
+~
+0 1073741824 1
+D0
+~
+~
+0 -1 832
+D1
+~
+~
+0 -1 839
+D2
+~
+~
+0 -1 834
+D3
+~
+~
+0 -1 840
+S
+#834
+An Empty Warren~
+~
+0 1084227584 1
+D0
+~
+~
+0 -1 833
+S
+#835
+An Empty Apartment~
+~
+0 1084227584 1
+D1
+~
+~
+33554432 -1 822
+D3
+~
+~
+0 -1 829
+S
+#836
+An Empty Warren~
+~
+0 1084227584 1
+D1
+~
+~
+33554432 -1 822
+D3
+~
+~
+0 -1 830
+S
+#837
+An Empty Apartment~
+~
+0 1084227584 1
+D1
+~
+~
+33554432 -1 822
+D3
+~
+~
+0 -1 831
+S
+#838
+An Empty Warren~
+~
+0 1084227584 1
+D1
+~
+~
+33554432 -1 822
+D3
+~
+~
+0 -1 832
+S
+#839
+An Empty Warren~
+~
+0 1084227584 1
+D1
+~
+~
+33554432 -1 822
+D3
+~
+~
+0 -1 833
+S
+#840
+An Empty Warren~
+~
+0 1084227584 1
+D1
+~
+~
+0 -1 833
+S
+#841
+An Empty Warren~
+~
+0 1084227584 1
+D1
+~
+~
+0 -1 832
+S
+#842
+Butcher~
+~
+0 1073741824 1
+D0
+~
+~
+0 -1 843
+D1
+~
+~
+0 -1 831
+S
+#843
+Meat Locker~
+~
+0 1073741824 1
+D2
+~
+~
+0 -1 842
+S
+#844
+Kala'uun Starport : Warrens~
+Hollowed out of stone, the hallway is lighted by glowrods attached to the
+ceiling. 
+~
+0 1073741828 1
+D1
+~
+~
+0 -1 845
+D3
+~
+~
+0 -1 826
+S
+#845
+Kala'uun Starport : Warrens~
+Hollowed out of stone, the hallway is lighted by glowrods attached to the
+ceiling. 
+~
+0 1073741828 1
+D2
+~
+~
+0 -1 846
+D3
+~
+~
+0 -1 844
+S
+#846
+Kala'uun Starport : Warrens~
+Hollowed out of stone, the hallway is lighted by glowrods attached to the
+ceiling. 
+~
+0 1073741828 1
+D0
+~
+~
+0 -1 845
+D1
+~
+~
+0 -1 817
+D2
+~
+~
+0 -1 847
+S
+#847
+Kala'uun Starport : Warrens~
+Hollowed out of stone, the hallway is lighted by glowrods attached to the
+ceiling. 
+~
+0 1073741828 1
+D0
+~
+~
+0 -1 846
+D1
+~
+~
+0 -1 819
+D2
+~
+~
+0 -1 848
+S
+#848
+Kala'uun Starport : Warrens~
+Hollowed out of stone, the hallway is lighted by glowrods attached to the
+ceiling. 
+~
+0 1073741828 1
+D0
+~
+~
+0 -1 847
+D1
+~
+~
+0 -1 818
+D2
+~
+~
+0 -1 849
+S
+#849
+Kala'uun Starport : Warrens~
+Hollowed out of stone, the hallway is lighted by glowrods attached to the
+ceiling. 
+~
+0 1073741828 1
+D0
+~
+~
+0 -1 848
+D1
+~
+~
+0 -1 812
+S
+#850
+Kala'uun Starport : Work Area~
+The stair case you climb brings you to a hallway. Hollowed out of stone,
+the hallway is lighted by glowrods attached to the ceiling. Thousands of
+twi'leks move in and out of this area, where things are built and pieces
+of hardware are sold.
+~
+0 1073741828 1
+D0
+~
+~
+0 -1 851
+D4
+~
+~
+0 -1 875
+D5
+~
+~
+0 -1 826
+S
+#851
+Kala'uun Starport : Work Area~
+The stair case you climb brings you to a hallway. Hollowed out of stone,
+the hallway is lighted by glowrods attached to the ceiling. Thousands of
+twi'leks move in and out of this area, where things are built and pieces
+of hardware are sold.
+~
+0 1073741828 1
+D1
+~
+~
+0 -1 852
+D2
+~
+~
+0 -1 850
+D3
+~
+~
+0 -1 853
+S
+#852
+Workshop~
+~
+0 1140850692 1
+D1
+~
+~
+0 -1 879
+D3
+~
+~
+0 -1 851
+S
+#853
+Hardware~
+~
+0 1140850692 1
+D1
+~
+~
+0 -1 851
+S
+#854
+A Dark Tunnel~
+~
+0 1073741829 1
+D0
+~
+~
+0 -1 855
+D4
+~
+~
+0 -1 825
+S
+#855
+A Dark Tunnel~
+~
+0 1073741829 1
+D0
+~
+~
+0 -1 856
+D2
+~
+~
+0 -1 854
+S
+#856
+A Dark Tunnel~
+~
+0 1073741829 1
+D0
+~
+~
+0 -1 857
+D2
+~
+~
+0 -1 855
+S
+#857
+A Dark Tunnel~
+~
+0 1073741829 1
+D0
+~
+~
+0 -1 858
+D2
+~
+~
+0 -1 856
+S
+#858
+A Dark Tunnel~
+~
+0 1073741829 1
+D0
+~
+~
+0 -1 859
+D2
+~
+~
+0 -1 857
+S
+#859
+A Dark Tunnel~
+~
+0 1073741829 1
+D2
+~
+~
+0 -1 858
+D10
+~
+Mines~
+524288 -1 860
+S
+#860
+Ryll Mines~
+~
+0 1073741829 1
+D1
+~
+~
+0 -1 861
+D2
+~
+~
+0 -1 859
+D3
+~
+~
+0 -1 863
+S
+#861
+Ryll Mines~
+~
+0 1073741829 1
+D1
+~
+~
+0 -1 862
+D3
+~
+~
+0 -1 860
+D5
+~
+~
+0 -1 865
+S
+#862
+Ryll Mines~
+~
+0 1107296261 1
+D3
+~
+~
+0 -1 861
+S
+#863
+Ryll Mines~
+~
+0 1073741829 1
+D1
+~
+~
+0 -1 860
+D3
+~
+~
+0 -1 864
+D5
+~
+~
+0 -1 867
+S
+#864
+Ryll Mines~
+~
+0 1107296261 1
+D1
+~
+~
+0 -1 863
+S
+#865
+Ryll Mines~
+~
+0 1073741829 1
+D1
+~
+~
+0 -1 866
+D4
+~
+~
+0 -1 861
+D5
+~
+~
+0 -1 872
+S
+#866
+Ryll Mines~
+~
+0 1073741829 1
+D3
+~
+~
+0 -1 865
+S
+#867
+Ryll Mines~
+~
+0 1073741829 1
+D3
+~
+~
+0 -1 868
+D4
+~
+~
+0 -1 863
+D5
+~
+~
+0 -1 870
+S
+#868
+Ryll Mines~
+~
+0 1073741829 1
+D1
+~
+~
+0 -1 867
+S
+#869
+Ryll Mines~
+~
+0 1073741829 1
+D1
+~
+~
+0 -1 870
+S
+#870
+Ryll Mines~
+~
+0 1073741829 1
+D1
+~
+~
+0 -1 871
+D3
+~
+~
+0 -1 869
+D4
+~
+~
+0 -1 867
+S
+#871
+Ryll Mines~
+~
+0 1073741829 1
+D1
+~
+~
+0 -1 872
+D3
+~
+~
+0 -1 870
+S
+#872
+Ryll Mines~
+~
+0 1073741829 1
+D1
+~
+~
+0 -1 873
+D3
+~
+~
+0 -1 871
+D4
+~
+~
+0 -1 865
+S
+#873
+Ryll Mines~
+~
+0 1073741829 1
+D3
+~
+~
+0 -1 872
+S
+#874
+Floating in a void~
+~
+0 1073741829 1
+S
+#875
+Kala'uun Starport : Academy~
+The stair case you climb brings you to a hallway. Hollowed out of stone,
+the hallway is lighted by glowrods attached to the ceiling. Twi'leks come
+here to train before going out into the world. 
+~
+0 1073741828 1
+D0
+~
+~
+0 -1 876
+D5
+~
+~
+0 -1 850
+S
+#876
+Kala'uun Starport : Academy~
+The stair case you climb brings you to a hallway. Hollowed out of stone,
+the hallway is lighted by glowrods attached to the ceiling. Twi'leks come
+here to train before going out into the world. 
+~
+0 1073741828 1
+D1
+~
+~
+0 -1 878
+D2
+~
+~
+0 -1 875
+D3
+~
+~
+0 -1 877
+S
+#877
+Kala'uun Starport : Academy Training~
+~
+0 1073741828 1
+D1
+~
+~
+0 -1 876
+S
+#878
+Kala'uun Starport : Combat Skills~
+~
+0 1073741828 1
+D3
+~
+~
+0 -1 876
+S
+#879
+Compactor~
+~
+0 1073741828 1
+D3
+~
+~
+0 -1 852
+S
+#880
+Hostel Commons~
+The hostel commons is simply an area where travelers can get food and drink
+for cheap prices. It is small and crowded with tables.  A fireplace sits
+near the bar, and a bartender waits on your order. 
+~
+0 1073741828 1
+D2
+~
+~
+0 -1 882
+D3
+~
+~
+0 -1 821
+S
+#881
+Hostel Room~
+Small and cramped, the room will fit a family of 4 in 2 beds, with little
+space to spare.
+~
+0 1082130436 1
+D0
+~
+~
+0 -1 821
+S
+#882
+Hostel Room~
+Small and cramped, the room will fit a family of 4 in 2 beds, with little
+space to spare. 
+~
+0 1082130436 1
+D0
+~
+~
+0 -1 880
+S
+#883
+Floating in a void~
+~
+0 1073741828 1
+S
+#884
+Floating in a void~
+~
+0 1073741828 1
+S
+#885
+Floating in a void~
+~
+0 1073741828 1
+S
+#886
+Floating in a void~
+~
+0 1073741828 1
+S
+#887
+Floating in a void~
+~
+0 1073741828 1
+S
+#888
+Floating in a void~
+~
+0 1073741828 1
+S
+#889
+Floating in a void~
+~
+0 1073741828 1
+S
+#890
+Floating in a void~
+~
+0 1073741828 1
+S
+#891
+Floating in a void~
+~
+0 1073741828 1
+S
+#892
+Floating in a void~
+~
+0 1073741828 1
+S
+#893
+Floating in a void~
+~
+0 1073741828 1
+S
+#894
+Floating in a void~
+~
+0 4 1
+S
+#895
+Floating in a void~
+~
+0 1073741828 1
+S
+#896
+Floating in a void~
+~
+0 1073741828 1
+S
+#897
+Floating in a void~
+~
+0 1073741828 1
+S
+#898
+Floating in a void~
+~
+0 1073741828 1
+S
+#0
+
+
+#RESETS
+M 1 891 5 801
+M 1 890 3 808
+M 1 893 1 808
+M 1 898 1 809
+M 1 890 3 813
+M 1 894 2 814
+M 1 894 2 814
+G 1 32230 1
+M 1 895 1 815
+G 1 302 1
+M 1 890 3 815
+O 1 32259 1 816
+O 1 326 1 820
+O 1 90 1 805
+M 1 800 1 864
+G 1 326 1
+O 1 880 1 864
+M 1 800 2 862
+G 1 326 1
+O 1 880 1 862
+O 1 326 1 873
+O 1 326 1 872
+O 1 326 1 871
+O 1 326 1 869
+O 1 326 1 870
+M 1 801 1 853
+G 1 32210 1
+G 1 32234 1
+G 1 10494 1
+G 1 324 1
+G 1 10497 1
+M 1 802 1 877
+M 1 10509 3 878
+M 1 803 1 879
+M 1 899 1 880
+G 1 3 1
+M 1 895 1 842
+G 1 302 1
+M 1 889 1 818
+G 1 900 1
+G 1 32234 1
+M 1 892 1 817
+G 1 32229 1
+G 1 10424 1
+M 1 822 1 822
+M 1 891 11 821
+M 1 891 11 821
+M 1 891 11 821
+M 1 891 11 821
+M 1 891 11 821
+M 1 891 11 821
+M 1 891 18 824
+M 1 891 18 824
+M 1 891 18 824
+M 1 891 18 824
+M 1 891 18 824
+M 1 891 18 824
+M 1 891 18 824
+M 1 891 26 823
+M 1 891 26 823
+M 1 891 26 823
+M 1 891 26 823
+M 1 891 26 823
+M 1 891 26 823
+M 1 891 26 823
+M 1 891 26 823
+M 1 891 34 825
+M 1 891 34 825
+M 1 891 34 825
+M 1 891 34 825
+M 1 891 34 825
+M 1 891 34 825
+M 1 891 34 825
+M 1 891 34 825
+M 1 891 37 826
+M 1 891 37 826
+M 1 891 37 826
+M 1 891 41 845
+M 1 891 41 845
+M 1 891 41 845
+M 1 891 41 845
+M 1 891 45 828
+M 1 891 45 828
+M 1 891 45 828
+M 1 891 45 828
+M 1 893 1 819
+S
+
+
+#SHOPS
+ 801    0  0  0  0  0   120  90         0 23    ; a twi'lek
+ 889    0  0  0  0  0   120  90         0 23    ; a newly created A Twi'lek Merchant
+ 892   72  0  0  0  0   120  90         0 23    ; Kookab'urra
+ 893    0  0  0  0  0   120   0         0 23    ; Sal'mara the Vendor
+ 895    0  0  0  0  0   120  75         0 23    ; Lavar'inaa the cook
+ 899   78  0  0  0  0   120  50         0 23    ; Gira'haad the Bartender
+0
+
+
+#REPAIRS
+ 897    9  5  0          50   1         0 23    ; Triad Armor Repairman
+0
+
+
+#SPECIALS
+M  890 spec_guardian
+M  890 spec_police_attack
+M  894 spec_janitor
+S
+
+
+#$
