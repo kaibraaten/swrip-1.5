@@ -12,13 +12,20 @@ void do_showstatistic( Character *ch, char *argument )
   char buf2[MAX_INPUT_LENGTH];
 
   if( !ch )
-    do_showstatistic_web( NULL, argument );
+    {
+      do_showstatistic_web( NULL, argument );
+    }
 
   race = get_race_from_name( argument );
+
   if ( race < 0 )
-    pclass = get_class_from_name( argument );
+    {
+      pclass = get_class_from_name( argument );
+    }
   else
-    chk_race = true;
+    {
+      chk_race = true;
+    }
 
   if( race < 0 && pclass < 0 )
     {
@@ -47,7 +54,9 @@ void do_showstatistic( Character *ch, char *argument )
   raceCh->stats.perm_lck = 3;
 
   if( chk_race )
-    raceCh->race = race;
+    {
+      raceCh->race = race;
+    }
   else
     {
       raceCh->ability.main = pclass;
@@ -63,23 +72,27 @@ void do_showstatistic( Character *ch, char *argument )
 
   if( chk_race )
     {
-      sprintf( buf, "&R%s Statistics\r\n", race_table[race].race_name );
-      send_to_pager( buf, ch );
-      sprintf( buf, "&cStr: &C%d  &cWis: &C%d  &cInt: &C%d  &cDex: &C%d  &cCon: &C%d  &cCha: &C%d\r\n",
+      pager_printf( ch, "&R%s Statistics\r\n", race_table[race].race_name );
+      pager_printf( ch, "&cStr: &C%d  &cWis: &C%d  &cInt: &C%d  &cDex: &C%d  &cCon: &C%d  &cCha: &C%d\r\n",
                raceCh->stats.perm_str, raceCh->stats.perm_wis, raceCh->stats.perm_int,
                raceCh->stats.perm_dex, raceCh->stats.perm_con, raceCh->stats.perm_cha );
-      send_to_pager( buf, ch );
+      pager_printf( ch, "                     &B| &CCMB &B| &CPIL &B| &CENG &B| &CBH  &B| &CSMUG &B| &CDIP &B| &CLEA &B|" );
 
       for( iC = 0; iC < MAX_ABILITY; iC++ )
         {
           if( iC == FORCE_ABILITY )
-            continue;
+	    {
+	      continue;
+	    }
+
           raceCh->ability.main = iC;
-	  sprintf( buf, "\r\n&c%-20s &B| &C", ability_name[iC] );
+	  sprintf( buf, "\r\n&c%-20s &B| &C", capitalize( ability_name[iC] ) );
+
           for( iC2 = 0; iC2 < MAX_ABILITY; iC2++ )
             {
               if( iC2 == FORCE_ABILITY )
                 continue;
+
               if( iC2 == COMMANDO_ABILITY )
                 continue;
 
@@ -90,13 +103,16 @@ void do_showstatistic( Character *ch, char *argument )
 
               strcat( buf, buf2 );
             }
+
           send_to_pager( buf, ch );
         }
     }
   else
     {
-      sprintf( buf, "&R%s Statistics\r\n", ability_name[pclass]);
+      sprintf( buf, "&R%s Statistics\r\n", capitalize(ability_name[pclass]));
       send_to_pager( buf, ch );
+
+      pager_printf( ch, "                     &B| &CCMB &B| &CPIL &B| &CENG &B| &CBH  &B| &CSMUG &B| &CDIP &B| &CLEA &B|" );
 
       for( iR = 0; iR < MAX_RACE; iR++ )
         {
@@ -108,14 +124,17 @@ void do_showstatistic( Character *ch, char *argument )
           raceCh->stats.perm_con = 20 + race_table[raceCh->race].stats.mod_con;
           raceCh->stats.perm_cha = 20 + race_table[raceCh->race].stats.mod_cha;
           sprintf( buf, "\r\n&c%-20s &B| &C", race_table[iR].race_name );
+
           for( iC2 = 0; iC2 < FORCE_ABILITY; iC2++ )
             {
               if( iC2 == SMUGGLING_ABILITY )
                 sprintf( buf2, "%-3d+ &B| &C", max_level( raceCh, iC2 ) );
               else
                 sprintf( buf2, "%-3d &B| &C", max_level( raceCh, iC2 ) );
+
               strcat( buf, buf2 );
             }
+
           send_to_pager( buf, ch );
         }
     }
