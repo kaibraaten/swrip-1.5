@@ -53,6 +53,17 @@ const struct race_type race_table[MAX_RACE] =
 	0,        /*   mod_lck          */
 	0         /*   mod_frc          */
       },
+      {
+	0, /* COMBAT_ABILITY */
+	0, /* PILOTING_ABILITY */
+	0, /* ENGINEERING_ABILITY */
+	0, /* HUNTING_ABILITY */
+	0, /* SMUGGLING_ABILITY */
+	0, /* DIPLOMACY_ABILITY */
+	0, /* LEADERSHIP_ABILITY */
+	0, /* FORCE_ABILITY */
+	0  /* COMMANDO_ABILITY */
+      },
       0,          /* hit                */
       0,          /* mana               */
       0,          /* resist             */
@@ -72,6 +83,17 @@ const struct race_type race_table[MAX_RACE] =
 	-2,
 	0,
 	0
+      },
+      {
+        +31, /* COMBAT_ABILITY */
+          0, /* PILOTING_ABILITY */
+        +10, /* ENGINEERING_ABILITY */
+        +10, /* HUNTING_ABILITY */
+          0, /* SMUGGLING_ABILITY */
+        -50, /* DIPLOMACY_ABILITY */
+          0, /* LEADERSHIP_ABILITY */
+          0, /* FORCE_ABILITY */
+          0  /* COMMANDO_ABILITY */
       },
       +30,
       0,
@@ -93,6 +115,17 @@ const struct race_type race_table[MAX_RACE] =
 	0,
 	0,
       },
+      {
+          0, /* COMBAT_ABILITY */
+          0, /* PILOTING_ABILITY */
+          0, /* ENGINEERING_ABILITY */
+        +10, /* HUNTING_ABILITY */
+        +40, /* SMUGGLING_ABILITY */
+        -25, /* DIPLOMACY_ABILITY */
+        -25, /* LEADERSHIP_ABILITY */
+          0, /* FORCE_ABILITY */
+          0  /* COMMANDO_ABILITY */
+      },
       0,
       0,
       0,
@@ -112,6 +145,17 @@ const struct race_type race_table[MAX_RACE] =
 	-1,
 	0,
 	0,
+      },
+      {
+          0, /* COMBAT_ABILITY */
+          0, /* PILOTING_ABILITY */
+        -10, /* ENGINEERING_ABILITY */
+        +50, /* HUNTING_ABILITY */
+          0, /* SMUGGLING_ABILITY */
+        -20, /* DIPLOMACY_ABILITY */
+        -20, /* LEADERSHIP_ABILITY */
+          0, /* FORCE_ABILITY */
+          0  /* COMMANDO_ABILITY */
       },
       -10,
       0,
@@ -133,6 +177,17 @@ const struct race_type race_table[MAX_RACE] =
 	0,
 	0,
       },
+      {
+        -20, /* COMBAT_ABILITY */
+        -10, /* PILOTING_ABILITY */
+        -10, /* ENGINEERING_ABILITY */
+        -20, /* HUNTING_ABILITY */
+          0, /* SMUGGLING_ABILITY */
+        +85, /* DIPLOMACY_ABILITY */
+        +35, /* LEADERSHIP_ABILITY */
+          0, /* FORCE_ABILITY */
+          0  /* COMMANDO_ABILITY */
+      },
       +700,
       0,
       RIS_SLEEP + RIS_POISON + RIS_PARALYSIS + RIS_ENERGY,
@@ -152,6 +207,17 @@ const struct race_type race_table[MAX_RACE] =
 	0,
 	0,
 	0,
+      },
+      {
+         -1, /* COMBAT_ABILITY */
+          0, /* PILOTING_ABILITY */
+        +10, /* ENGINEERING_ABILITY */
+        +30, /* HUNTING_ABILITY */
+        -20, /* SMUGGLING_ABILITY */
+        +10, /* DIPLOMACY_ABILITY */
+        +30, /* LEADERSHIP_ABILITY */
+          0, /* FORCE_ABILITY */
+          0  /* COMMANDO_ABILITY */
       },
       +20,
       0,
@@ -173,6 +239,17 @@ const struct race_type race_table[MAX_RACE] =
 	0,
 	0,
       },
+      {
+        +35, /* COMBAT_ABILITY */
+         +5, /* PILOTING_ABILITY */
+        -20, /* ENGINEERING_ABILITY */
+        +20, /* HUNTING_ABILITY */
+        +15, /* SMUGGLING_ABILITY */
+        -30, /* DIPLOMACY_ABILITY */
+        -15, /* LEADERSHIP_ABILITY */
+          0, /* FORCE_ABILITY */
+          0  /* COMMANDO_ABILITY */
+      },
       +20,
       0,
       0,
@@ -193,6 +270,17 @@ const struct race_type race_table[MAX_RACE] =
 	0,
 	0,
       },
+      {
+        +30, /* COMBAT_ABILITY */
+        -10, /* PILOTING_ABILITY */
+        -10, /* ENGINEERING_ABILITY */
+          0, /* HUNTING_ABILITY */
+          0, /* SMUGGLING_ABILITY */
+        -10, /* DIPLOMACY_ABILITY */
+          0, /* LEADERSHIP_ABILITY */
+          0, /* FORCE_ABILITY */
+          0  /* COMMANDO_ABILITY */
+      },
       +60,
       0,
       0,
@@ -211,6 +299,17 @@ const struct race_type race_table[MAX_RACE] =
 	-2,
 	0,
 	0,
+      },
+      {
+          0, /* COMBAT_ABILITY */
+          0, /* PILOTING_ABILITY */
+          0, /* ENGINEERING_ABILITY */
+        -10, /* HUNTING_ABILITY */
+        +30, /* SMUGGLING_ABILITY */
+        -10, /* DIPLOMACY_ABILITY */
+        -10, /* LEADERSHIP_ABILITY */
+          0, /* FORCE_ABILITY */
+          0  /* COMMANDO_ABILITY */
       },
       -20,
       0,
@@ -232,6 +331,17 @@ const struct race_type race_table[MAX_RACE] =
 	0,
 	0,
       },
+      {
+          0, /* COMBAT_ABILITY */
+          0, /* PILOTING_ABILITY */
+          0, /* ENGINEERING_ABILITY */
+        -30, /* HUNTING_ABILITY */
+        -20, /* SMUGGLING_ABILITY */
+        +40, /* DIPLOMACY_ABILITY */
+        +10, /* LEADERSHIP_ABILITY */
+          0, /* FORCE_ABILITY */
+          0  /* COMMANDO_ABILITY */
+      },
       -50,
       0,
       0,
@@ -251,6 +361,17 @@ const struct race_type race_table[MAX_RACE] =
 	+5,
 	0,
 	0,
+      },
+      {
+        0, /* COMBAT_ABILITY */
+        0, /* PILOTING_ABILITY */
+        0, /* ENGINEERING_ABILITY */
+        0, /* HUNTING_ABILITY */
+        0, /* SMUGGLING_ABILITY */
+        0, /* DIPLOMACY_ABILITY */
+        0, /* LEADERSHIP_ABILITY */
+        0, /* FORCE_ABILITY */
+        0  /* COMMANDO_ABILITY */
       },
       -100,
       0,
@@ -272,6 +393,17 @@ const struct race_type race_table[MAX_RACE] =
 	0,
 	0,
       },
+      {
+         +1, /* COMBAT_ABILITY */
+          0, /* PILOTING_ABILITY */
+        +70, /* ENGINEERING_ABILITY */
+          0, /* HUNTING_ABILITY */
+        -20, /* SMUGGLING_ABILITY */
+        -10, /* DIPLOMACY_ABILITY */
+          0, /* LEADERSHIP_ABILITY */
+          0, /* FORCE_ABILITY */
+	  0  /* COMMANDO_ABILITY */
+      },
       0,
       0,
       0,
@@ -291,6 +423,17 @@ const struct race_type race_table[MAX_RACE] =
 	0,
 	0,
 	0,
+      },
+      {
+        +25, /* COMBAT_ABILITY */
+          0, /* PILOTING_ABILITY */
+          0, /* ENGINEERING_ABILITY */
+          0, /* HUNTING_ABILITY */
+        +25, /* SMUGGLING_ABILITY */
+        -30, /* DIPLOMACY_ABILITY */
+          0, /* LEADERSHIP_ABILITY */
+          0, /* FORCE_ABILITY */
+          0  /* COMMANDO_ABILITY */
       },
       +15,
       0,
@@ -312,6 +455,17 @@ const struct race_type race_table[MAX_RACE] =
 	0,
 	0,
       },
+      {
+        +20, /* COMBAT_ABILITY */
+          0, /* PILOTING_ABILITY */
+        -10, /* ENGINEERING_ABILITY */
+        +30, /* HUNTING_ABILITY */
+          0, /* SMUGGLING_ABILITY */
+        -30, /* DIPLOMACY_ABILITY */
+        -10, /* LEADERSHIP_ABILITY */
+          0, /* FORCE_ABILITY */
+          0  /* COMMANDO_ABILITY */
+      },
       +35,
       0,
       0,
@@ -331,6 +485,17 @@ const struct race_type race_table[MAX_RACE] =
 	0,
 	0,
 	0,
+      },
+      {
+          0, /* COMBAT_ABILITY */
+          0, /* PILOTING_ABILITY */
+        +15, /* ENGINEERING_ABILITY */
+        -25, /* HUNTING_ABILITY */
+        +10, /* SMUGGLING_ABILITY */
+          0, /* DIPLOMACY_ABILITY */
+          0, /* LEADERSHIP_ABILITY */
+          0, /* FORCE_ABILITY */
+          0  /* COMMANDO_ABILITY */
       },
       -85,
       0,
@@ -352,6 +517,17 @@ const struct race_type race_table[MAX_RACE] =
 	0,
 	0,
       },
+      {
+          0, /* COMBAT_ABILITY */
+        +10, /* PILOTING_ABILITY */
+          0, /* ENGINEERING_ABILITY */
+          0, /* HUNTING_ABILITY */
+        +20, /* SMUGGLING_ABILITY */
+        -20, /* DIPLOMACY_ABILITY */
+        -10, /* LEADERSHIP_ABILITY */
+          0, /* FORCE_ABILITY */
+          0  /* COMMANDO_ABILITY */
+      },
       -10,
       0,
       0,
@@ -371,6 +547,17 @@ const struct race_type race_table[MAX_RACE] =
 	+1,
 	0,
 	0,
+      },
+      {
+        -10, /* COMBAT_ABILITY */
+        +30, /* PILOTING_ABILITY */
+        +20, /* ENGINEERING_ABILITY */
+        -25, /* HUNTING_ABILITY */
+        +10, /* SMUGGLING_ABILITY */
+        +10, /* DIPLOMACY_ABILITY */
+        -10, /* LEADERSHIP_ABILITY */
+          0, /* FORCE_ABILITY */
+          0  /* COMMANDO_ABILITY */
       },
       0,
       0,
@@ -392,6 +579,17 @@ const struct race_type race_table[MAX_RACE] =
 	0,
 	0,
       },
+      {
+        0, /* COMBAT_ABILITY */
+        0, /* PILOTING_ABILITY */
+        0, /* ENGINEERING_ABILITY */
+        0, /* HUNTING_ABILITY */
+        0, /* SMUGGLING_ABILITY */
+        0, /* DIPLOMACY_ABILITY */
+        0, /* LEADERSHIP_ABILITY */
+        0, /* FORCE_ABILITY */
+        0  /* COMMANDO_ABILITY */
+      },
       0,
       0,
       0,
@@ -411,7 +609,18 @@ const struct race_type race_table[MAX_RACE] =
 	-4,
 	0,
 	0,
-      },      
+      },
+      {
+        -101, /* COMBAT_ABILITY */
+           0, /* PILOTING_ABILITY */
+           0, /* ENGINEERING_ABILITY */
+           0, /* HUNTING_ABILITY */
+           0, /* SMUGGLING_ABILITY */
+           0, /* DIPLOMACY_ABILITY */
+           0, /* LEADERSHIP_ABILITY */
+           0, /* FORCE_ABILITY */
+           0  /* COMMANDO_ABILITY */
+      },
       -30,
       0,
       0,
@@ -431,6 +640,17 @@ const struct race_type race_table[MAX_RACE] =
 	-3,
 	0,
 	0,
+      },
+      {
+        0, /* COMBAT_ABILITY */
+        0, /* PILOTING_ABILITY */
+        0, /* ENGINEERING_ABILITY */
+        0, /* HUNTING_ABILITY */
+        0, /* SMUGGLING_ABILITY */
+        0, /* DIPLOMACY_ABILITY */
+        0, /* LEADERSHIP_ABILITY */
+        0, /* FORCE_ABILITY */
+        0  /* COMMANDO_ABILITY */
       },
       0,
       0,
@@ -452,6 +672,17 @@ const struct race_type race_table[MAX_RACE] =
 	0,
 	0,
       },
+      {
+        0, /* COMBAT_ABILITY */
+        0, /* PILOTING_ABILITY */
+        0, /* ENGINEERING_ABILITY */
+        0, /* HUNTING_ABILITY */
+        0, /* SMUGGLING_ABILITY */
+        0, /* DIPLOMACY_ABILITY */
+        0, /* LEADERSHIP_ABILITY */
+        0, /* FORCE_ABILITY */
+        0  /* COMMANDO_ABILITY */
+      },
       0,
       0,
       0,
@@ -472,6 +703,17 @@ const struct race_type race_table[MAX_RACE] =
 	0,
 	0,
       },
+      {
+          0, /* COMBAT_ABILITY */
+        -10, /* PILOTING_ABILITY */
+        +20, /* ENGINEERING_ABILITY */
+        -40, /* HUNTING_ABILITY */
+        -20, /* SMUGGLING_ABILITY */
+        -10, /* DIPLOMACY_ABILITY */
+        -10, /* LEADERSHIP_ABILITY */
+          0, /* FORCE_ABILITY */
+          0  /* COMMANDO_ABILITY */
+      },
       0,
       0,
       0,
@@ -485,12 +727,23 @@ const struct race_type race_table[MAX_RACE] =
       {
         +1,
 	-2,
-	0,
-	0,
+	 0,
+ 	 0,
 	+2,
 	+3,
-	0,
-	0,
+	 0,
+	 0,
+      },
+      {
+        +11, /* COMBAT_ABILITY */
+          0, /* PILOTING_ABILITY */
+          0, /* ENGINEERING_ABILITY */
+          0, /* HUNTING_ABILITY */
+          0, /* SMUGGLING_ABILITY */
+          0, /* DIPLOMACY_ABILITY */
+          0, /* LEADERSHIP_ABILITY */
+          0, /* FORCE_ABILITY */
+          0  /* COMMANDO_ABILITY */
       },
       +40,
       +1000,
@@ -513,6 +766,17 @@ const struct race_type race_table[MAX_RACE] =
 	0,
 	0,
       },
+      {
+        +35, /* COMBAT_ABILITY */
+          0, /* PILOTING_ABILITY */
+          0, /* ENGINEERING_ABILITY */
+          0, /* HUNTING_ABILITY */
+          0, /* SMUGGLING_ABILITY */
+        -20, /* DIPLOMACY_ABILITY */
+          0, /* LEADERSHIP_ABILITY */
+          0, /* FORCE_ABILITY */
+          0  /* COMMANDO_ABILITY */
+      },
       +220,
       0,
       0,
@@ -532,6 +796,17 @@ const struct race_type race_table[MAX_RACE] =
 	+4,
 	0,
 	0,
+      },
+      {
+        -11, /* COMBAT_ABILITY */
+          0, /* PILOTING_ABILITY */
+          0, /* ENGINEERING_ABILITY */
+          0, /* HUNTING_ABILITY */
+          0, /* SMUGGLING_ABILITY */
+        +35, /* DIPLOMACY_ABILITY */
+        +20, /* LEADERSHIP_ABILITY */
+          0, /* FORCE_ABILITY */
+          0  /* COMMANDO_ABILITY */
       },
       0,
       0,
@@ -553,6 +828,17 @@ const struct race_type race_table[MAX_RACE] =
 	0,
 	0,
       },
+      {
+        +40, /* COMBAT_ABILITY */
+        +10, /* PILOTING_ABILITY */
+        -10, /* ENGINEERING_ABILITY */
+        +30, /* HUNTING_ABILITY */
+        +15, /* SMUGGLING_ABILITY */
+        -40, /* DIPLOMACY_ABILITY */
+          0, /* LEADERSHIP_ABILITY */
+          0, /* FORCE_ABILITY */
+          0  /* COMMANDO_ABILITY */
+      },
       +40,
       0,
       0,
@@ -572,6 +858,17 @@ const struct race_type race_table[MAX_RACE] =
 	-2,
 	0,
 	0,
+      },
+      {
+        +11, /* COMBAT_ABILITY */
+          0, /* PILOTING_ABILITY */
+         -5, /* ENGINEERING_ABILITY */
+          0, /* HUNTING_ABILITY */
+          0, /* SMUGGLING_ABILITY */
+        -14, /* DIPLOMACY_ABILITY */
+        +15, /* LEADERSHIP_ABILITY */
+          0, /* FORCE_ABILITY */
+          0  /* COMMANDO_ABILITY */
       },
       -15,
       0,
@@ -593,6 +890,17 @@ const struct race_type race_table[MAX_RACE] =
 	0,
 	0,
       },
+      {
+        +16, /* COMBAT_ABILITY */
+        -10, /* PILOTING_ABILITY */
+          0, /* ENGINEERING_ABILITY */
+        +10, /* HUNTING_ABILITY */
+          0, /* SMUGGLING_ABILITY */
+        -12, /* DIPLOMACY_ABILITY */
+        +30, /* LEADERSHIP_ABILITY */
+          0, /* FORCE_ABILITY */
+          0  /* COMMANDO_ABILITY */
+      },
       0,
       0,
       0,
@@ -612,6 +920,17 @@ const struct race_type race_table[MAX_RACE] =
 	-1,
 	0,
 	0,
+      },
+      {
+        +26, /* COMBAT_ABILITY */
+          0, /* PILOTING_ABILITY */
+         +9, /* ENGINEERING_ABILITY */
+          0, /* HUNTING_ABILITY */
+          0, /* SMUGGLING_ABILITY */
+        -14, /* DIPLOMACY_ABILITY */
+          0, /* LEADERSHIP_ABILITY */
+          0, /* FORCE_ABILITY */
+          0  /* COMMANDO_ABILITY */
       },
       +35,
       0,
@@ -633,6 +952,17 @@ const struct race_type race_table[MAX_RACE] =
 	0,
 	0,
       },
+      {
+        +8, /* COMBAT_ABILITY */
+        -6, /* PILOTING_ABILITY */
+        -7, /* ENGINEERING_ABILITY */
+         0, /* HUNTING_ABILITY */
+         0, /* SMUGGLING_ABILITY */
+         0, /* DIPLOMACY_ABILITY */
+         0, /* LEADERSHIP_ABILITY */
+         0, /* FORCE_ABILITY */
+         0  /* COMMANDO_ABILITY */
+      },
       0,
       0,
       RIS_POISON,
@@ -652,6 +982,17 @@ const struct race_type race_table[MAX_RACE] =
 	-8,
 	0,
 	0,
+      },
+      {
+        +26, /* COMBAT_ABILITY */
+         +7, /* PILOTING_ABILITY */
+        +30, /* ENGINEERING_ABILITY */
+          0, /* HUNTING_ABILITY */
+          0, /* SMUGGLING_ABILITY */
+        -10, /* DIPLOMACY_ABILITY */
+         +5, /* LEADERSHIP_ABILITY */
+          0, /* FORCE_ABILITY */
+          0  /* COMMANDO_ABILITY */
       },
       +45,
       0,
@@ -673,6 +1014,17 @@ const struct race_type race_table[MAX_RACE] =
 	0,
 	0,
       },
+      {
+         +6, /* COMBAT_ABILITY */
+        +30, /* PILOTING_ABILITY */
+        -16, /* ENGINEERING_ABILITY */
+        +10, /* HUNTING_ABILITY */
+          0, /* SMUGGLING_ABILITY */
+          0, /* DIPLOMACY_ABILITY */
+          0, /* LEADERSHIP_ABILITY */
+          0, /* FORCE_ABILITY */
+          0  /* COMMANDO_ABILITY */
+      },
       0,
       0,
       0,
@@ -692,6 +1044,17 @@ const struct race_type race_table[MAX_RACE] =
 	-1,
 	0,
 	0,
+      },
+      {
+          0, /* COMBAT_ABILITY */
+        +30, /* PILOTING_ABILITY */
+        +25, /* ENGINEERING_ABILITY */
+          0, /* HUNTING_ABILITY */
+          0, /* SMUGGLING_ABILITY */
+        -10, /* DIPLOMACY_ABILITY */
+          0, /* LEADERSHIP_ABILITY */
+          0, /* FORCE_ABILITY */
+          0  /* COMMANDO_ABILITY */
       },
       0,
       0,
@@ -713,6 +1076,17 @@ const struct race_type race_table[MAX_RACE] =
 	0,
 	0,
       },
+      {
+        +25, /* COMBAT_ABILITY */
+        +10, /* PILOTING_ABILITY */
+          0, /* ENGINEERING_ABILITY */
+        +15, /* HUNTING_ABILITY */
+        +15, /* SMUGGLING_ABILITY */
+        -40, /* DIPLOMACY_ABILITY */
+        +10, /* LEADERSHIP_ABILITY */
+          0, /* FORCE_ABILITY */
+          0  /* COMMANDO_ABILITY */
+      },
       +30,
       0,
       0,
@@ -732,6 +1106,17 @@ const struct race_type race_table[MAX_RACE] =
 	+5,
 	0,
 	0,
+      },
+      {
+          0, /* COMBAT_ABILITY */
+        -15, /* PILOTING_ABILITY */
+        -40, /* ENGINEERING_ABILITY */
+          0, /* HUNTING_ABILITY */
+        -40, /* SMUGGLING_ABILITY */
+          0, /* DIPLOMACY_ABILITY */
+        -40, /* LEADERSHIP_ABILITY */
+          0, /* FORCE_ABILITY */
+          0  /* COMMANDO_ABILITY */
       },
       0,
       0,
@@ -753,6 +1138,17 @@ const struct race_type race_table[MAX_RACE] =
 	0,
 	0,
       },
+      {
+        +45, /* COMBAT_ABILITY */
+        +10, /* PILOTING_ABILITY */
+          0, /* ENGINEERING_ABILITY */
+        +65, /* HUNTING_ABILITY */
+        +15, /* SMUGGLING_ABILITY */
+        -30, /* DIPLOMACY_ABILITY */
+          0, /* LEADERSHIP_ABILITY */
+          0, /* FORCE_ABILITY */
+          0  /* COMMANDO_ABILITY */
+      },
       +100,
       0,
       0,
@@ -772,6 +1168,17 @@ const struct race_type race_table[MAX_RACE] =
 	-9,
 	0,
 	0,
+      },
+      {
+         +60, /* COMBAT_ABILITY */
+        -110, /* PILOTING_ABILITY */
+         -25, /* ENGINEERING_ABILITY */
+           0, /* HUNTING_ABILITY */
+         -25, /* SMUGGLING_ABILITY */
+         -30, /* DIPLOMACY_ABILITY */
+         -40, /* LEADERSHIP_ABILITY */
+           0, /* FORCE_ABILITY */
+           0  /* COMMANDO_ABILITY */
       },
       +150,
       0,
@@ -793,6 +1200,17 @@ const struct race_type race_table[MAX_RACE] =
 	0,
 	0,
       },
+      {
+        -110, /* COMBAT_ABILITY */
+         +70, /* PILOTING_ABILITY */
+         -46, /* ENGINEERING_ABILITY */
+           0, /* HUNTING_ABILITY */
+         -25, /* SMUGGLING_ABILITY */
+         -55, /* DIPLOMACY_ABILITY */
+         -50, /* LEADERSHIP_ABILITY */
+           0, /* FORCE_ABILITY */
+           0  /* COMMANDO_ABILITY */
+      },
       0,
       0,
       0,
@@ -813,6 +1231,17 @@ const struct race_type race_table[MAX_RACE] =
 	0,
 	0,
       },
+      {
+           0, /* COMBAT_ABILITY */
+        -120, /* PILOTING_ABILITY */
+         -58, /* ENGINEERING_ABILITY */
+           0, /* HUNTING_ABILITY */
+        -125, /* SMUGGLING_ABILITY */
+        -100, /* DIPLOMACY_ABILITY */
+        +140, /* LEADERSHIP_ABILITY */
+           0, /* FORCE_ABILITY */
+	   0  /* COMMANDO_ABILITY */
+      },
       0,
       0,
       0,
@@ -832,6 +1261,17 @@ const struct race_type race_table[MAX_RACE] =
 	+5,
 	+5,
 	+5,
+      },
+      {
+        +150, /* COMBAT_ABILITY */
+        +150, /* PILOTING_ABILITY */
+        +150, /* ENGINEERING_ABILITY */
+        +150, /* HUNTING_ABILITY */
+        +150, /* SMUGGLING_ABILITY */
+        +150, /* DIPLOMACY_ABILITY */
+        +150, /* LEADERSHIP_ABILITY */
+        +150, /* FORCE_ABILITY */
+        +150  /* COMMANDO_ABILITY */
       },
       +2000,
       +5000,

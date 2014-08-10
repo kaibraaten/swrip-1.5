@@ -180,114 +180,7 @@ static int GetMaxCombatLevel( const Character *ch )
       break;
     }
 
-  switch( ch->race )
-    {
-    case RACE_SHISTAVANEN:
-      level += 35;
-      break;
-
-    case RACE_WOOKIEE:
-      level += 31;
-      break;
-
-      /*
-      case RACE_NOGHRI:
-      level += 50;
-      break;
-      */
-
-    case RACE_GAMORREAN:
-      level += 30;
-      break;
-
-    case RACE_DEFEL:
-      level += 25;
-      break;
-
-    case RACE_TRANDOSHAN:
-      level += 20;
-      break;
-
-    case RACE_SULLUSTAN:
-      level -= 10;
-      break;
-
-    case RACE_HUTT:
-      level -= 20;
-      break;
-
-    case RACE_MON_CALAMARI:
-      level -= 1;
-      break;
-
-    case RACE_VERPINE:
-      level += 1;
-      break;
-
-    case RACE_ITHORIAN:
-      level -= 101;
-      break;
-
-    case RACE_FIRRERREO:
-      level += 11;
-      break;
-
-    case RACE_BARABEL:
-      level += 35;
-      break;
-
-    case RACE_BOTHAN:
-      level -= 11;
-      break;
-
-    case RACE_TOGORIAN:
-      level += 40;
-      break;
-
-    case RACE_DUG:
-      level += 11;
-      break;
-
-    case RACE_KUBAZ:
-      level += 16;
-      break;
-
-    case RACE_SELONIAN:
-      level += 26;
-      break;
-
-    case RACE_GRAN:
-      level += 8;
-      break;
-
-    case RACE_YEVETHA:
-      level += 26;
-      break;
-
-    case RACE_COYNITE:
-      level += 25;
-      break;
-
-    case RACE_GAND:
-      level += 6;
-      break;
-
-    case RACE_ASSASSIN_DROID:
-      level += 45;
-      break;
-
-    case RACE_GLADIATOR_DROID:
-      level += 60;
-      break;
-
-    case RACE_ASTROMECH_DROID:
-      level -= 110;
-      break;
-
-    default:
-      break;
-    }
-
+  level += race_table[ch->race].AbilityMod[COMBAT_ABILITY];
   level += ch->stats.perm_con + ch->stats.perm_dex + ch->stats.perm_str;
 
   return urange( 1, level, 150 );
@@ -315,64 +208,8 @@ static int GetMaxPilotingLevel( const Character *ch )
   if ( ch->ability.main == COMMANDO_ABILITY )
     level = 25;
 
-  if ( ch->race == RACE_SHISTAVANEN)
-    level += 5;
-
-  if ( ch->race == RACE_HUTT )
-    level -= 10;
-
-  if ( ch->race == RACE_GAMORREAN )
-    level -= 10;
-
-  if ( ch->race == RACE_QUARREN )
-    level += 10;
-
-  if ( ch->race == RACE_SULLUSTAN )
-    level += 30;
-
-  if ( ch->race == RACE_DROID)
-    level -= 10;
-
-  if ( ch->race == RACE_HUTT)
-    level += 10;
-
-  if ( ch->race == RACE_TOGORIAN)
-    level += 10;
-
-  if ( ch->race == RACE_GRAN)
-    level -= 6;
-
-  if ( ch->race == RACE_YEVETHA)
-    level += 7;
-
-  if ( ch->race == RACE_COYNITE)
-    level += 10;
-
-  if ( ch->race == RACE_DUROS)
-    level += 30;
-
-  if ( ch->race == RACE_PROTOCOL_DROID)
-    level -= 15;
-
-  if ( ch->race == RACE_ASSASSIN_DROID)
-    level += 10;
-
-  if ( ch->race == RACE_GLADIATOR_DROID)
-    level -= 110;
-
-  if ( ch->race == RACE_ASTROMECH_DROID )
-    level += 70;
-
-  if ( ch->race == RACE_INTERROGATION_DROID)
-    level -= 120;
-
-  if ( ch->race == RACE_KUBAZ)
-    level -= 10;
-
-  if ( ch->race == RACE_GAND )
-    level += 30;
-
-  level += ch->stats.perm_dex*2;
+  level += race_table[ch->race].AbilityMod[PILOTING_ABILITY];
+  level += ch->stats.perm_dex * 2;
 
   return urange( 1, level, 150 );
 }
@@ -387,72 +224,7 @@ static int GetMaxEngineeringLevel( const Character *ch )
   if ( ch->ability.main == PILOTING_ABILITY )
     level = 20;
 
-  if ( ch->race == RACE_SHISTAVANEN)
-    level -= 20;
-
-  if ( ch->race == RACE_WOOKIEE )
-    level += 10;
-
-  if ( ch->race == RACE_RODIAN )
-    level -= 10;
-
-  if ( ch->race == RACE_HUTT )
-    level -= 10;
-
-  if ( ch->race == RACE_MON_CALAMARI )
-    level += 10;
-
-  if ( ch->race == RACE_GAMORREAN )
-    level -= 10;
-
-  if ( ch->race == RACE_VERPINE )
-    level += 50;
-
-  if ( ch->race == RACE_TRANDOSHAN )
-    level -= 10;
-
-  if ( ch->race == RACE_CHADRA_FAN )
-    level += 15;
-
-  if ( ch->race == RACE_SULLUSTAN )
-    level += 20;
-
-  if ( ch->race == RACE_DROID)
-    level += 20;
-
-  if ( ch->race == RACE_TOGORIAN )
-    level -= 10;
-
-  if ( ch->race == RACE_DUG )
-    level -= 5;
-
-  if ( ch->race == RACE_SELONIAN )
-    level += 9;
-
-  if ( ch->race == RACE_GRAN )
-    level -= 7;
-
-  if ( ch->race == RACE_DUROS )
-    level += 25;
-
-  if ( ch->race == RACE_PROTOCOL_DROID)
-    level -= 40;
-
-  if ( ch->race == RACE_GLADIATOR_DROID)
-    level -= 25;
-
-  if ( ch->race == RACE_ASTROMECH_DROID)
-    level -= 46;
-
-  if ( ch->race == RACE_INTERROGATION_DROID)
-    level -= 58;
-
-  if ( ch->race == RACE_YEVETHA)
-    level += 30;
-
-  if ( ch->race == RACE_GAND )
-    level -= 16;
-
+  level += race_table[ch->race].AbilityMod[ENGINEERING_ABILITY];
   level += ch->stats.perm_int * 2;
 
   return urange( 1, level, 150 );
@@ -465,56 +237,7 @@ static int GetMaxBountyHuntingLevel( const Character *ch )
   if ( ch->ability.main == HUNTING_ABILITY )
     level = 100;
 
-  if ( ch->race == RACE_SHISTAVANEN)
-    level += 20;
-
-  if ( ch->race == RACE_WOOKIEE )
-    level += 10;
-
-  if ( ch->race == RACE_RODIAN )
-    level += 50;
-
-  if ( ch->race == RACE_TWI_LEK )
-    level += 10;
-
-  if ( ch->race == RACE_HUTT )
-    level -= 20;
-
-  if ( ch->race == RACE_MON_CALAMARI )
-    level += 30;
-
-  if ( ch->race == RACE_JAWA )
-    level -= 10;
-
-  if ( ch->race == RACE_TOGORIAN )
-    level += 30;
-
-  if ( ch->race == RACE_ADARIAN )
-    level -= 30;
-
-  if ( ch->race == RACE_TRANDOSHAN )
-    level += 30;
-
-  if ( ch->race == RACE_CHADRA_FAN )
-    level -= 25;
-
-  if ( ch->race == RACE_SULLUSTAN )
-    level -= 25;
-
-  if ( ch->race == RACE_ASSASSIN_DROID)
-    level += 65;
-
-  if ( ch->race == RACE_DROID)
-    level -= 40;
-
-  if ( ch->race == RACE_GAND)
-    level += 10;
-
-  if ( ch->race == RACE_KUBAZ)
-    level += 10;
-
-  if ( ch->race == RACE_COYNITE)
-    level += 15;
+  level += race_table[ch->race].AbilityMod[HUNTING_ABILITY];
 
   return urange( 1, level, 150 );
 }
@@ -535,61 +258,8 @@ static int GetMaxSmugglingLevel( const Character *ch )
   if ( ch->ability.main == COMMANDO_ABILITY )
     level = 50;
 
-  if ( ch->race == RACE_SHISTAVANEN)
-    level += 15;
-
-  if ( ch->race == RACE_TOGORIAN )
-    level += 15;
-
-  if ( ch->race == RACE_COYNITE)
-    level += 15;
-
-  if ( ch->race == RACE_TWI_LEK )
-    level += 40;
-
-  if ( ch->race == RACE_MON_CALAMARI )
-    level -= 20;
-
-  if ( ch->race == RACE_JAWA )
-    level += 30;
-
-  if ( ch->race == RACE_ADARIAN )
-    level -= 20;
-
-  if ( ch->race == RACE_VERPINE )
-    level -= 20;
-
-  if ( ch->race == RACE_DEFEL )
-    level += 25;
-
-  if ( ch->race == RACE_QUARREN )
-    level += 20;
-
-  if ( ch->race == RACE_CHADRA_FAN )
-    level += 10;
-
-  if ( ch->race == RACE_SULLUSTAN )
-    level += 10;
-
-  if ( ch->race == RACE_DROID)
-    level -= 20;
-
-  if ( ch->race == RACE_PROTOCOL_DROID)
-    level -= 40;
-
-  if ( ch->race == RACE_ASSASSIN_DROID)
-    level += 15;
-
-  if ( ch->race == RACE_GLADIATOR_DROID)
-    level -= 25;
-
-  if ( ch->race == RACE_ASTROMECH_DROID )
-    level -= 25;
-
-  if ( ch->race == RACE_INTERROGATION_DROID)
-    level -= 125;
-
-  level += ch->stats.perm_lck*2;
+  level += race_table[ch->race].AbilityMod[SMUGGLING_ABILITY];
+  level += ch->stats.perm_lck * 2;
 
   return urange( 1, level, 150 );
 }
@@ -607,69 +277,7 @@ static int GetMaxLeadershipLevel( const Character *ch )
   if ( ch->ability.main == DIPLOMACY_ABILITY )
     level = 50;
 
-  if ( ch->race == RACE_SHISTAVANEN)
-    level -= 15;
-
-  if ( ch->race == RACE_TWI_LEK )
-    level -= 25;
-
-  if ( ch->race == RACE_RODIAN )
-    level -= 20;
-
-  if ( ch->race == RACE_HUTT )
-    level += 35;
-
-  if ( ch->race == RACE_BOTHAN )
-    level += 20;
-
-  if ( ch->race == RACE_DUG )
-    level += 15;
-
-  if ( ch->race == RACE_KUBAZ )
-    level += 30;
-
-  if ( ch->race == RACE_YEVETHA )
-    level += 5;
-
-  if ( ch->race == RACE_COYNITE )
-    level += 10;
-
-  if ( ch->race == RACE_PROTOCOL_DROID )
-    level -= 40;
-
-  if ( ch->race == RACE_GLADIATOR_DROID )
-    level -= 40;
-
-  if ( ch->race == RACE_INTERROGATION_DROID )
-    level += 125;
-
-  if ( ch->race == RACE_ASTROMECH_DROID )
-    level -= 50;
-
-  if ( ch->race == RACE_MON_CALAMARI )
-    level += 30;
-
-  if ( ch->race == RACE_JAWA )
-    level -= 10;
-
-  if ( ch->race == RACE_ADARIAN )
-    level += 10;
-
-  if ( ch->race == RACE_TRANDOSHAN )
-    level -= 10;
-
-  if ( ch->race == RACE_QUARREN )
-    level -= 10;
-
-  if ( ch->race == RACE_SULLUSTAN )
-    level -= 10;
-
-  if ( ch->race == RACE_DROID)
-    level -= 10;
-
-  if ( ch->race == RACE_INTERROGATION_DROID)
-    level += 140;
-
+  level += race_table[ch->race].AbilityMod[LEADERSHIP_ABILITY];
   level += ch->stats.perm_wis + ch->stats.perm_cha + ch->stats.perm_int;
 
   return urange( 1, level, 150 );
@@ -688,94 +296,8 @@ static int GetMaxDiplomacyLevel( const Character *ch )
   if ( ch->ability.main == LEADERSHIP_ABILITY )
     level = 50;
 
-  if ( ch->race == RACE_SHISTAVANEN)
-    level -= 30;
-
-  if ( ch->race == RACE_WOOKIEE )
-    level -= 50;
-
-  if ( ch->race == RACE_TWI_LEK )
-    level -= 25;
-
-  if ( ch->race == RACE_RODIAN )
-    level -= 20;
-
-  if ( ch->race == RACE_HUTT )
-    level += 85;
-
-  if ( ch->race == RACE_MON_CALAMARI )
-    level += 10;
-
-  /* if ( ch->race == RACE_NOGHRI )
-     level -= 50; */
-
-  if ( ch->race == RACE_GAMORREAN )
-    level -= 10;
-
-  if ( ch->race == RACE_JAWA )
-    level -= 10;
-
-  if ( ch->race == RACE_ADARIAN )
-    level += 40;
-
-  if ( ch->race == RACE_VERPINE )
-    level -= 10;
-
-  if ( ch->race == RACE_DEFEL )
-    level -= 30;
-
-  if ( ch->race == RACE_TRANDOSHAN )
-    level -= 30;
-
-  if ( ch->race == RACE_QUARREN )
-    level -= 20;
-
-  if ( ch->race == RACE_SULLUSTAN )
-    level += 10;
-
-  if ( ch->race == RACE_DROID)
-    level -= 10;
-
-  if ( ch->race == RACE_ASSASSIN_DROID )
-    level -= 30;
-
-  if ( ch->race == RACE_GLADIATOR_DROID )
-    level -= 30;
-
-  if ( ch->race == RACE_INTERROGATION_DROID )
-    level -= 100;
-
-  if ( ch->race == RACE_ASTROMECH_DROID )
-    level -= 55;
-
-  if ( ch->race == RACE_YEVETHA)
-    level -= 10;
-
-  if ( ch->race == RACE_COYNITE)
-    level -= 40;
-
-  if ( ch->race == RACE_DUROS)
-    level -= 10;
-
-  if ( ch->race == RACE_SELONIAN)
-    level -= 14;
-
-  if ( ch->race == RACE_KUBAZ)
-    level -= 12;
-
-  if ( ch->race == RACE_DUG)
-    level -= 14;
-
-  if ( ch->race == RACE_TOGORIAN)
-    level -= 40;
-
-  if ( ch->race == RACE_BOTHAN)
-    level += 35;
-
-  if ( ch->race == RACE_BARABEL)
-    level -= 20;
-
-  level += ch->stats.perm_cha*3;
+  level += race_table[ch->race].AbilityMod[DIPLOMACY_ABILITY];
+  level += ch->stats.perm_cha * 3;
 
   return urange( 1, level, 150 );
 }

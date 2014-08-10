@@ -279,6 +279,8 @@ struct race_type
     short mod_frc;               /* Frc      "                   */
   } stats;
 
+  int AbilityMod[MAX_ABILITY];
+
   short hit;
   short mana;
   int   resist;
