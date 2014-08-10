@@ -27,6 +27,11 @@ void do_slist( Character *ch, char *argument )
           continue;
         }
 
+      if( ability == COMMANDO_ABILITY )
+	{
+	  continue;
+	}
+
       if(filter_ability != -1 && filter_ability != ability)
         {
           continue;
@@ -34,7 +39,7 @@ void do_slist( Character *ch, char *argument )
 
       if ( ability >= 0 )
         {
-          sprintf(skn2, "** %s **", ability_name[ability] );
+          sprintf(skn2, "** %s **", capitalize( ability_name[ability] ) );
           sprintf(skn, "\r\n\t\t\t  %s \r\n", skn2 );
 	}
       else
@@ -69,7 +74,7 @@ void do_slist( Character *ch, char *argument )
                 {
                   set_pager_color( AT_LBLUE, ch );
                   pager_printf(ch, "(%3d) %-18.18s  ",
-                               i,  skill_table[sn]->name );
+                               i,  capitalize( skill_table[sn]->name ) );
 
                   if ( ++col == 3 )
                     {
