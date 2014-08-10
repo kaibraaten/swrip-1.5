@@ -4990,7 +4990,7 @@ class, race and CON.  Equipment can also add to your total hp.
  
 &YOnly assassin droids will be allowed to roleplay as HRDs, and even
 then only with the express permission of a Head Admin. Gladiator droids
-and protocal droids and the like will not be allowed to.
+and protocol droids and the like will not be allowed to.
 ~
 
 101 HSET~
@@ -8216,7 +8216,7 @@ slayed. There are no exceptions to this rule. &R&w
 &W12. &cDefel                &W31. &cGand
 &W13. &cTrandoshan           &W32. &cDuros
 &W14. &cChadra-Fan           &W33. &cCoynite
-&W15. &cQuarren              &W34. &cProtocal Droid
+&W15. &cQuarren              &W34. &cProtocol Droid
 &W16. &cSullustan            &W35. &cAssassin Droid
 &W17. &cFalleen              &W36. &cGladiator Droid
 &W18. &cIthorian             &W37. &cAstromech Droid
