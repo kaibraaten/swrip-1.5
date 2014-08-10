@@ -53,6 +53,15 @@ static void char_check( void );
 static void drunk_randoms( Character *ch );
 static void halucinations( Character *ch );
 
+static int GetMaxCombatLevel( const Character *ch );
+static int GetMaxPilotingLevel( const Character *ch );
+static int GetMaxEngineeringLevel( const Character *ch );
+static int GetMaxBountyHuntingLevel( const Character *ch );
+static int GetMaxSmugglingLevel( const Character *ch );
+static int GetMaxLeadershipLevel( const Character *ch );
+static int GetMaxDiplomacyLevel( const Character *ch );
+static int GetMaxForceLevel( const Character *ch );
+
 /*
  * Global Variables
  */
@@ -106,576 +115,638 @@ int max_level( const Character *ch, int ability)
       return 200;
     }
 
-  if ( ability == COMBAT_ABILITY )
+  switch( ability )
     {
-      if ( ch->ability.main == COMBAT_ABILITY )
-	level = 100;
+    case COMBAT_ABILITY:
+      level = GetMaxCombatLevel( ch );
+      break;
 
-      if ( ch->ability.main == FORCE_ABILITY )
-	level = 25;
+    case PILOTING_ABILITY:
+      level = GetMaxPilotingLevel( ch );
+      break;
 
-      if ( ch->ability.main == HUNTING_ABILITY )
-	level = 25;
+    case ENGINEERING_ABILITY:
+      level = GetMaxEngineeringLevel( ch );
+      break;
 
-      if ( ch->ability.main == COMMANDO_ABILITY )
-	level = 50;
+    case HUNTING_ABILITY:
+      level = GetMaxBountyHuntingLevel( ch );
+      break;
 
-      if ( ch->race == RACE_SHISTAVANEN)
-	level += 35;
+    case SMUGGLING_ABILITY:
+      level = GetMaxSmugglingLevel( ch );
+      break;
 
-      if ( ch->race == RACE_WOOKIEE )
-	level += 31;
+    case LEADERSHIP_ABILITY:
+      level = GetMaxLeadershipLevel( ch );
+      break;
 
-      /* if ( ch->race == RACE_NOGHRI )
-	 level += 50; */
+    case DIPLOMACY_ABILITY:
+      level = GetMaxDiplomacyLevel( ch );
+      break;
 
-      if ( ch->race == RACE_GAMORREAN )
-	level += 30;
-
-      if ( ch->race == RACE_DEFEL )
-	level += 25;
-
-      if ( ch->race == RACE_TRANDOSHAN )
-	level += 20;
-
-      if ( ch->race == RACE_SULLUSTAN )
-	level -= 10;
-
-      if ( ch->race == RACE_HUTT )
-	level -= 20;
-
-      if ( ch->race == RACE_MON_CALAMARI )
-	level -= 1;
-
-      if ( ch->race == RACE_VERPINE )
-	level += 1;
-
-      if ( ch->race == RACE_ITHORIAN )
-	level -= 101;
-
-      if ( ch->race == RACE_FIRRERREO )
-	level += 11;
-
-      if ( ch->race == RACE_BARABEL )
-	level += 35;
-
-      if ( ch->race == RACE_BOTHAN )
-	level -= 11;
-
-      if ( ch->race == RACE_TOGARIAN )
-	level += 40;
-
-      if ( ch->race == RACE_DUG )
-	level += 11;
-
-      if ( ch->race == RACE_KUBAZ )
-	level += 16;
-
-      if ( ch->race == RACE_SELONIAN )
-	level += 26;
-
-      if ( ch->race == RACE_GRAN )
-	level += 8;
-
-      if ( ch->race == RACE_YEVETHA )
-	level += 26;
-
-      if ( ch->race == RACE_COYNITE )
-	level += 25;
-
-      if ( ch->race == RACE_GAND )
-	level += 6;
-
-      if ( ch->race == RACE_ASSASSIN_DROID )
-	level += 45;
-
-      if ( ch->race == RACE_GLADIATOR_DROID )
-	level += 60;
-
-      if ( ch->race == RACE_ASTROMECH_DROID )
-	level -= 110;
-
-      level += ch->stats.perm_con + ch->stats.perm_dex + ch->stats.perm_str;
+    case FORCE_ABILITY:
+      level = GetMaxForceLevel( ch );
+      break;
     }
 
-  if ( ability == PILOTING_ABILITY )
+  return level;
+}
+
+static int GetMaxCombatLevel( const Character *ch )
+{
+  int level = 0;
+
+  if ( ch->ability.main == COMBAT_ABILITY )
+    level = 100;
+
+  if ( ch->ability.main == FORCE_ABILITY )
+    level = 25;
+
+  if ( ch->ability.main == HUNTING_ABILITY )
+    level = 25;
+
+  if ( ch->ability.main == COMMANDO_ABILITY )
+    level = 50;
+
+  if ( ch->race == RACE_SHISTAVANEN)
+    level += 35;
+
+  if ( ch->race == RACE_WOOKIEE )
+    level += 31;
+
+  /* if ( ch->race == RACE_NOGHRI )
+     level += 50; */
+
+  if ( ch->race == RACE_GAMORREAN )
+    level += 30;
+
+  if ( ch->race == RACE_DEFEL )
+    level += 25;
+
+  if ( ch->race == RACE_TRANDOSHAN )
+    level += 20;
+
+  if ( ch->race == RACE_SULLUSTAN )
+    level -= 10;
+
+  if ( ch->race == RACE_HUTT )
+    level -= 20;
+
+  if ( ch->race == RACE_MON_CALAMARI )
+    level -= 1;
+
+  if ( ch->race == RACE_VERPINE )
+    level += 1;
+
+  if ( ch->race == RACE_ITHORIAN )
+    level -= 101;
+
+  if ( ch->race == RACE_FIRRERREO )
+    level += 11;
+
+  if ( ch->race == RACE_BARABEL )
+    level += 35;
+
+  if ( ch->race == RACE_BOTHAN )
+    level -= 11;
+
+  if ( ch->race == RACE_TOGARIAN )
+    level += 40;
+
+  if ( ch->race == RACE_DUG )
+    level += 11;
+
+  if ( ch->race == RACE_KUBAZ )
+    level += 16;
+
+  if ( ch->race == RACE_SELONIAN )
+    level += 26;
+
+  if ( ch->race == RACE_GRAN )
+    level += 8;
+
+  if ( ch->race == RACE_YEVETHA )
+    level += 26;
+
+  if ( ch->race == RACE_COYNITE )
+    level += 25;
+
+  if ( ch->race == RACE_GAND )
+    level += 6;
+
+  if ( ch->race == RACE_ASSASSIN_DROID )
+    level += 45;
+
+  if ( ch->race == RACE_GLADIATOR_DROID )
+    level += 60;
+
+  if ( ch->race == RACE_ASTROMECH_DROID )
+    level -= 110;
+
+  level += ch->stats.perm_con + ch->stats.perm_dex + ch->stats.perm_str;
+
+  return urange( 1, level, 150 );
+}
+
+static int GetMaxPilotingLevel( const Character *ch )
+{
+  int level = 0;
+
+  if ( ch->ability.main == PILOTING_ABILITY )
+    level = 100;
+
+  if ( ch->ability.main == ENGINEERING_ABILITY )
+    level = 25;
+
+  if ( ch->ability.main == HUNTING_ABILITY )
+    level = 25;
+
+  if ( ch->ability.main == SMUGGLING_ABILITY )
+    level = 50;
+
+  if ( ch->ability.main == FORCE_ABILITY )
+    level = 25;
+
+  if ( ch->ability.main == COMMANDO_ABILITY )
+    level = 25;
+
+  if ( ch->race == RACE_SHISTAVANEN)
+    level += 5;
+
+  if ( ch->race == RACE_HUTT )
+    level -= 10;
+
+  if ( ch->race == RACE_GAMORREAN )
+    level -= 10;
+
+  if ( ch->race == RACE_QUARREN )
+    level += 10;
+
+  if ( ch->race == RACE_SULLUSTAN )
+    level += 30;
+
+  if ( ch->race == RACE_DROID)
+    level -= 10;
+
+  if ( ch->race == RACE_HUTT)
+    level += 10;
+
+  if ( ch->race == RACE_TOGARIAN)
+    level += 10;
+
+  if ( ch->race == RACE_GRAN)
+    level -= 6;
+
+  if ( ch->race == RACE_YEVETHA)
+    level += 7;
+
+  if ( ch->race == RACE_COYNITE)
+    level += 10;
+
+  if ( ch->race == RACE_DUROS)
+    level += 30;
+
+  if ( ch->race == RACE_PROTOCOL_DROID)
+    level -= 15;
+
+  if ( ch->race == RACE_ASSASSIN_DROID)
+    level += 10;
+
+  if ( ch->race == RACE_GLADIATOR_DROID)
+    level -= 110;
+
+  if ( ch->race == RACE_ASTROMECH_DROID )
+    level += 70;
+
+  if ( ch->race == RACE_INTERROGATION_DROID)
+    level -= 120;
+
+  if ( ch->race == RACE_KUBAZ)
+    level -= 10;
+
+  if ( ch->race == RACE_GAND )
+    level += 30;
+
+  level += ch->stats.perm_dex*2;
+
+  return urange( 1, level, 150 );
+}
+
+static int GetMaxEngineeringLevel( const Character *ch )
+{
+  int level = 0;
+
+  if ( ch->ability.main == ENGINEERING_ABILITY )
+    level = 100;
+
+  if ( ch->ability.main == PILOTING_ABILITY )
+    level = 20;
+
+  if ( ch->race == RACE_SHISTAVANEN)
+    level -= 20;
+
+  if ( ch->race == RACE_WOOKIEE )
+    level += 10;
+
+  if ( ch->race == RACE_RODIAN )
+    level -= 10;
+
+  if ( ch->race == RACE_HUTT )
+    level -= 10;
+
+  if ( ch->race == RACE_MON_CALAMARI )
+    level += 10;
+
+  if ( ch->race == RACE_GAMORREAN )
+    level -= 10;
+
+  if ( ch->race == RACE_VERPINE )
+    level += 50;
+
+  if ( ch->race == RACE_TRANDOSHAN )
+    level -= 10;
+
+  if ( ch->race == RACE_CHADRA_FAN )
+    level += 15;
+
+  if ( ch->race == RACE_SULLUSTAN )
+    level += 20;
+
+  if ( ch->race == RACE_DROID)
+    level += 20;
+
+  if ( ch->race == RACE_TOGARIAN )
+    level -= 10;
+
+  if ( ch->race == RACE_DUG )
+    level -= 5;
+
+  if ( ch->race == RACE_SELONIAN )
+    level += 9;
+
+  if ( ch->race == RACE_GRAN )
+    level -= 7;
+
+  if ( ch->race == RACE_DUROS )
+    level += 25;
+
+  if ( ch->race == RACE_PROTOCOL_DROID)
+    level -= 40;
+
+  if ( ch->race == RACE_GLADIATOR_DROID)
+    level -= 25;
+
+  if ( ch->race == RACE_ASTROMECH_DROID)
+    level -= 46;
+
+  if ( ch->race == RACE_INTERROGATION_DROID)
+    level -= 58;
+
+  if ( ch->race == RACE_YEVETHA)
+    level += 30;
+
+  if ( ch->race == RACE_GAND )
+    level -= 16;
+
+  level += ch->stats.perm_int * 2;
+
+  return urange( 1, level, 150 );
+}
+
+static int GetMaxBountyHuntingLevel( const Character *ch )
+{
+  int level = 0;
+
+  if ( ch->ability.main == HUNTING_ABILITY )
+    level = 100;
+
+  if ( ch->race == RACE_SHISTAVANEN)
+    level += 20;
+
+  if ( ch->race == RACE_WOOKIEE )
+    level += 10;
+
+  if ( ch->race == RACE_RODIAN )
+    level += 50;
+
+  if ( ch->race == RACE_TWI_LEK )
+    level += 10;
+
+  if ( ch->race == RACE_HUTT )
+    level -= 20;
+
+  if ( ch->race == RACE_MON_CALAMARI )
+    level += 30;
+
+  if ( ch->race == RACE_JAWA )
+    level -= 10;
+
+  if ( ch->race == RACE_TOGARIAN )
+    level += 30;
+
+  if ( ch->race == RACE_ADARIAN )
+    level -= 30;
+
+  if ( ch->race == RACE_TRANDOSHAN )
+    level += 30;
+
+  if ( ch->race == RACE_CHADRA_FAN )
+    level -= 25;
+
+  if ( ch->race == RACE_SULLUSTAN )
+    level -= 25;
+
+  if ( ch->race == RACE_ASSASSIN_DROID)
+    level += 65;
+
+  if ( ch->race == RACE_DROID)
+    level -= 40;
+
+  if ( ch->race == RACE_GAND)
+    level += 10;
+
+  if ( ch->race == RACE_KUBAZ)
+    level += 10;
+
+  if ( ch->race == RACE_COYNITE)
+    level += 15;
+
+  return urange( 1, level, 150 );
+}
+
+static int GetMaxSmugglingLevel( const Character *ch )
+{
+  int level = 0;
+
+  if ( ch->ability.main == SMUGGLING_ABILITY )
+    level = 100;
+
+  if ( ch->ability.main == PILOTING_ABILITY )
+    level = 20;
+
+  if ( ch->ability.main == ENGINEERING_ABILITY )
+    level = 25;
+
+  if ( ch->ability.main == COMMANDO_ABILITY )
+    level = 50;
+
+  if ( ch->race == RACE_SHISTAVANEN)
+    level += 15;
+
+  if ( ch->race == RACE_TOGARIAN )
+    level += 15;
+
+  if ( ch->race == RACE_COYNITE)
+    level += 15;
+
+  if ( ch->race == RACE_TWI_LEK )
+    level += 40;
+
+  if ( ch->race == RACE_MON_CALAMARI )
+    level -= 20;
+
+  if ( ch->race == RACE_JAWA )
+    level += 30;
+
+  if ( ch->race == RACE_ADARIAN )
+    level -= 20;
+
+  if ( ch->race == RACE_VERPINE )
+    level -= 20;
+
+  if ( ch->race == RACE_DEFEL )
+    level += 25;
+
+  if ( ch->race == RACE_QUARREN )
+    level += 20;
+
+  if ( ch->race == RACE_CHADRA_FAN )
+    level += 10;
+
+  if ( ch->race == RACE_SULLUSTAN )
+    level += 10;
+
+  if ( ch->race == RACE_DROID)
+    level -= 20;
+
+  if ( ch->race == RACE_PROTOCOL_DROID)
+    level -= 40;
+
+  if ( ch->race == RACE_ASSASSIN_DROID)
+    level += 15;
+
+  if ( ch->race == RACE_GLADIATOR_DROID)
+    level -= 25;
+
+  if ( ch->race == RACE_ASTROMECH_DROID )
+    level -= 25;
+
+  if ( ch->race == RACE_INTERROGATION_DROID)
+    level -= 125;
+
+  level += ch->stats.perm_lck*2;
+
+  return urange( 1, level, 150 );
+}
+
+
+static int GetMaxLeadershipLevel( const Character *ch )
+{
+  int level = 0;
+
+  if ( ch->ability.main == LEADERSHIP_ABILITY )
+    level = 100;
+
+  if ( ch->ability.main == COMBAT_ABILITY )
+    level = 50;
+
+  if ( ch->ability.main == DIPLOMACY_ABILITY )
+    level = 50;
+
+  if ( ch->race == RACE_SHISTAVANEN)
+    level -= 15;
+
+  if ( ch->race == RACE_TWI_LEK )
+    level -= 25;
+
+  if ( ch->race == RACE_RODIAN )
+    level -= 20;
+
+  if ( ch->race == RACE_HUTT )
+    level += 35;
+
+  if ( ch->race == RACE_BOTHAN )
+    level += 20;
+
+  if ( ch->race == RACE_DUG )
+    level += 15;
+
+  if ( ch->race == RACE_KUBAZ )
+    level += 30;
+
+  if ( ch->race == RACE_YEVETHA )
+    level += 5;
+
+  if ( ch->race == RACE_COYNITE )
+    level += 10;
+
+  if ( ch->race == RACE_PROTOCOL_DROID )
+    level -= 40;
+
+  if ( ch->race == RACE_GLADIATOR_DROID )
+    level -= 40;
+
+  if ( ch->race == RACE_INTERROGATION_DROID )
+    level += 125;
+
+  if ( ch->race == RACE_ASTROMECH_DROID )
+    level -= 50;
+
+  if ( ch->race == RACE_MON_CALAMARI )
+    level += 30;
+
+  if ( ch->race == RACE_JAWA )
+    level -= 10;
+
+  if ( ch->race == RACE_ADARIAN )
+    level += 10;
+
+  if ( ch->race == RACE_TRANDOSHAN )
+    level -= 10;
+
+  if ( ch->race == RACE_QUARREN )
+    level -= 10;
+
+  if ( ch->race == RACE_SULLUSTAN )
+    level -= 10;
+
+  if ( ch->race == RACE_DROID)
+    level -= 10;
+
+  if ( ch->race == RACE_INTERROGATION_DROID)
+    level += 140;
+
+  level += ch->stats.perm_wis + ch->stats.perm_cha + ch->stats.perm_int;
+
+  return urange( 1, level, 150 );
+}
+
+static int GetMaxDiplomacyLevel( const Character *ch )
+{
+  int level = 0;
+
+  if ( ch->ability.main == DIPLOMACY_ABILITY )
+    level = 100;
+
+  if ( ch->ability.main == PILOTING_ABILITY )
+    level = 10;
+
+  if ( ch->ability.main == LEADERSHIP_ABILITY )
+    level = 50;
+
+  if ( ch->race == RACE_SHISTAVANEN)
+    level -= 30;
+
+  if ( ch->race == RACE_WOOKIEE )
+    level -= 50;
+
+  if ( ch->race == RACE_TWI_LEK )
+    level -= 25;
+
+  if ( ch->race == RACE_RODIAN )
+    level -= 20;
+
+  if ( ch->race == RACE_HUTT )
+    level += 85;
+
+  if ( ch->race == RACE_MON_CALAMARI )
+    level += 10;
+
+  /* if ( ch->race == RACE_NOGHRI )
+     level -= 50; */
+
+  if ( ch->race == RACE_GAMORREAN )
+    level -= 10;
+
+  if ( ch->race == RACE_JAWA )
+    level -= 10;
+
+  if ( ch->race == RACE_ADARIAN )
+    level += 40;
+
+  if ( ch->race == RACE_VERPINE )
+    level -= 10;
+
+  if ( ch->race == RACE_DEFEL )
+    level -= 30;
+
+  if ( ch->race == RACE_TRANDOSHAN )
+    level -= 30;
+
+  if ( ch->race == RACE_QUARREN )
+    level -= 20;
+
+  if ( ch->race == RACE_SULLUSTAN )
+    level += 10;
+
+  if ( ch->race == RACE_DROID)
+    level -= 10;
+
+  if ( ch->race == RACE_ASSASSIN_DROID )
+    level -= 30;
+
+  if ( ch->race == RACE_GLADIATOR_DROID )
+    level -= 30;
+
+  if ( ch->race == RACE_INTERROGATION_DROID )
+    level -= 100;
+
+  if ( ch->race == RACE_ASTROMECH_DROID )
+    level -= 55;
+
+  if ( ch->race == RACE_YEVETHA)
+    level -= 10;
+
+  if ( ch->race == RACE_COYNITE)
+    level -= 40;
+
+  if ( ch->race == RACE_DUROS)
+    level -= 10;
+
+  if ( ch->race == RACE_SELONIAN)
+    level -= 14;
+
+  if ( ch->race == RACE_KUBAZ)
+    level -= 12;
+
+  if ( ch->race == RACE_DUG)
+    level -= 14;
+
+  if ( ch->race == RACE_TOGARIAN)
+    level -= 40;
+
+  if ( ch->race == RACE_BOTHAN)
+    level += 35;
+
+  if ( ch->race == RACE_BARABEL)
+    level -= 20;
+
+  level += ch->stats.perm_cha*3;
+
+  return urange( 1, level, 150 );
+}
+
+static int GetMaxForceLevel( const Character *ch )
+{
+  int level = 0;
+
+  if ( ch->ability.main == FORCE_ABILITY )
     {
-      if ( ch->ability.main == ability )
-	level = 100;
-
-      if ( ch->ability.main == ENGINEERING_ABILITY )
-	level = 25;
-
-      if ( ch->ability.main == HUNTING_ABILITY )
-	level = 25;
-
-      if ( ch->ability.main == SMUGGLING_ABILITY )
-	level = 50;
-
-      if ( ch->ability.main == FORCE_ABILITY )
-	level = 25;
-
-      if ( ch->ability.main == COMMANDO_ABILITY )
-	level = 25;
-
-      if ( ch->race == RACE_SHISTAVANEN)
-	level += 5;
-
-      if ( ch->race == RACE_HUTT )
-	level -= 10;
-
-      if ( ch->race == RACE_GAMORREAN )
-	level -= 10;
-
-      if ( ch->race == RACE_QUARREN )
-	level += 10;
-
-      if ( ch->race == RACE_SULLUSTAN )
-	level += 30;
-
-      if ( ch->race == RACE_DROID)
-	level -= 10;
-
-      if ( ch->race == RACE_HUTT)
-	level += 10;
-
-      if ( ch->race == RACE_TOGARIAN)
-	level += 10;
-
-      if ( ch->race == RACE_GRAN)
-	level -= 6;
-
-      if ( ch->race == RACE_YEVETHA)
-	level += 7;
-
-      if ( ch->race == RACE_COYNITE)
-	level += 10;
-
-      if ( ch->race == RACE_DUROS)
-	level += 30;
-
-      if ( ch->race == RACE_PROTOCOL_DROID)
-	level -= 15;
-
-      if ( ch->race == RACE_ASSASSIN_DROID)
-	level += 10;
-
-      if ( ch->race == RACE_GLADIATOR_DROID)
-	level -= 110;
-
-      if ( ch->race == RACE_ASTROMECH_DROID )
-	level += 70;
-
-      if ( ch->race == RACE_INTERROGATION_DROID)
-	level -= 120;
-
-      if ( ch->race == RACE_KUBAZ)
-	level -= 10;
-
-      if ( ch->race == RACE_GAND )
-	level += 30;
-
-      level += ch->stats.perm_dex*2;
+      level = 20;
     }
 
-  if ( ability == ENGINEERING_ABILITY )
-    {
-      if ( ch->ability.main == ability )
-	level = 100;
-
-      if ( ch->ability.main == PILOTING_ABILITY )
-	level = 20;
-
-      if ( ch->race == RACE_SHISTAVANEN)
-	level -= 20;
-
-      if ( ch->race == RACE_WOOKIEE )
-	level += 10;
-
-      if ( ch->race == RACE_RODIAN )
-	level -= 10;
-
-      if ( ch->race == RACE_HUTT )
-	level -= 10;
-
-      if ( ch->race == RACE_MON_CALAMARI )
-	level += 10;
-
-      if ( ch->race == RACE_GAMORREAN )
-	level -= 10;
-
-      if ( ch->race == RACE_VERPINE )
-	level += 50;
-
-      if ( ch->race == RACE_TRANDOSHAN )
-	level -= 10;
-
-      if ( ch->race == RACE_CHADRA_FAN )
-	level += 15;
-
-      if ( ch->race == RACE_SULLUSTAN )
-	level += 20;
-
-      if ( ch->race == RACE_DROID)
-	level += 20;
-
-      if ( ch->race == RACE_TOGARIAN )
-	level -= 10;
-
-      if ( ch->race == RACE_DUG )
-	level -= 5;
-
-      if ( ch->race == RACE_SELONIAN )
-	level += 9;
-
-      if ( ch->race == RACE_GRAN )
-	level -= 7;
-
-      if ( ch->race == RACE_DUROS )
-	level += 25;
-
-      if ( ch->race == RACE_PROTOCOL_DROID)
-	level -= 40;
-
-      if ( ch->race == RACE_GLADIATOR_DROID)
-	level -= 25;
-
-      if ( ch->race == RACE_ASTROMECH_DROID)
-	level -= 46;
-
-      if ( ch->race == RACE_INTERROGATION_DROID)
-	level -= 58;
-
-      if ( ch->race == RACE_YEVETHA)
-	level += 30;
-
-      if ( ch->race == RACE_GAND )
-	level -= 16;
-
-      level += ch->stats.perm_int * 2;
-    }
-
-  if ( ability == HUNTING_ABILITY )
-    {
-      if ( ch->ability.main == ability )
-	level = 100;
-
-      if ( ch->race == RACE_SHISTAVANEN)
-	level += 20;
-
-      if ( ch->race == RACE_WOOKIEE )
-	level += 10;
-
-      if ( ch->race == RACE_RODIAN )
-	level += 50;
-
-      if ( ch->race == RACE_TWI_LEK )
-	level += 10;
-
-      if ( ch->race == RACE_HUTT )
-	level -= 20;
-
-      if ( ch->race == RACE_MON_CALAMARI )
-	level += 30;
-
-      if ( ch->race == RACE_JAWA )
-	level -= 10;
-
-      if ( ch->race == RACE_TOGARIAN )
-	level += 30;
-
-      if ( ch->race == RACE_ADARIAN )
-	level -= 30;
-
-      if ( ch->race == RACE_TRANDOSHAN )
-	level += 30;
-
-      if ( ch->race == RACE_CHADRA_FAN )
-	level -= 25;
-
-      if ( ch->race == RACE_SULLUSTAN )
-	level -= 25;
-
-      if ( ch->race == RACE_ASSASSIN_DROID)
-	level += 65;
-
-      if ( ch->race == RACE_DROID)
-	level -= 40;
-
-      if ( ch->race == RACE_GAND)
-	level += 10;
-
-      if ( ch->race == RACE_KUBAZ)
-	level += 10;
-
-      if ( ch->race == RACE_COYNITE)
-	level += 15;
-    }
-
-  if ( ability == SMUGGLING_ABILITY )
-    {
-      if ( ch->ability.main == ability )
-	level = 100;
-
-      if ( ch->ability.main == PILOTING_ABILITY )
-	level = 20;
-
-      if ( ch->ability.main == ENGINEERING_ABILITY )
-	level = 25;
-
-      if ( ch->ability.main == COMMANDO_ABILITY )
-	level = 50;
-
-      if ( ch->race == RACE_SHISTAVANEN)
-	level += 15;
-
-      if ( ch->race == RACE_TOGARIAN )
-	level += 15;
-
-      if ( ch->race == RACE_COYNITE)
-	level += 15;
-
-      if ( ch->race == RACE_TWI_LEK )
-	level += 40;
-
-      if ( ch->race == RACE_MON_CALAMARI )
-	level -= 20;
-
-      if ( ch->race == RACE_JAWA )
-	level += 30;
-
-      if ( ch->race == RACE_ADARIAN )
-	level -= 20;
-
-      if ( ch->race == RACE_VERPINE )
-	level -= 20;
-
-      if ( ch->race == RACE_DEFEL )
-	level += 25;
-
-      if ( ch->race == RACE_QUARREN )
-	level += 20;
-
-      if ( ch->race == RACE_CHADRA_FAN )
-	level += 10;
-
-      if ( ch->race == RACE_SULLUSTAN )
-	level += 10;
-
-      if ( ch->race == RACE_DROID)
-	level -= 20;
-
-      if ( ch->race == RACE_PROTOCOL_DROID)
-	level -= 40;
-
-      if ( ch->race == RACE_ASSASSIN_DROID)
-	level += 15;
-
-      if ( ch->race == RACE_GLADIATOR_DROID)
-	level -= 25;
-
-      if ( ch->race == RACE_ASTROMECH_DROID )
-	level -= 25;
-
-      if ( ch->race == RACE_INTERROGATION_DROID)
-	level -= 125;
-
-      level += ch->stats.perm_lck*2;
-    }
-
-  if ( ability == LEADERSHIP_ABILITY )
-    {
-      if ( ch->ability.main == ability )
-	level = 100;
-
-      if ( ch->ability.main == COMBAT_ABILITY )
-	level = 50;
-
-      if ( ch->ability.main == DIPLOMACY_ABILITY )
-	level = 50;
-
-      if ( ch->race == RACE_SHISTAVANEN)
-	level -= 15;
-
-      if ( ch->race == RACE_TWI_LEK )
-	level -= 25;
-
-      if ( ch->race == RACE_RODIAN )
-	level -= 20;
-
-      if ( ch->race == RACE_HUTT )
-	level += 35;
-
-      if ( ch->race == RACE_BOTHAN )
-	level += 20;
-
-      if ( ch->race == RACE_DUG )
-	level += 15;
-
-      if ( ch->race == RACE_KUBAZ )
-	level += 30;
-
-      if ( ch->race == RACE_YEVETHA )
-	level += 5;
-
-      if ( ch->race == RACE_COYNITE )
-	level += 10;
-
-      if ( ch->race == RACE_PROTOCOL_DROID )
-	level -= 40;
-
-      if ( ch->race == RACE_GLADIATOR_DROID )
-	level -= 40;
-
-      if ( ch->race == RACE_INTERROGATION_DROID )
-	level += 125;
-
-      if ( ch->race == RACE_ASTROMECH_DROID )
-	level -= 50;
-
-      if ( ch->race == RACE_MON_CALAMARI )
-	level += 30;
-
-      if ( ch->race == RACE_JAWA )
-	level -= 10;
-
-      if ( ch->race == RACE_ADARIAN )
-	level += 10;
-
-      if ( ch->race == RACE_TRANDOSHAN )
-	level -= 10;
-
-      if ( ch->race == RACE_QUARREN )
-	level -= 10;
-
-      if ( ch->race == RACE_SULLUSTAN )
-	level -= 10;
-
-      if ( ch->race == RACE_DROID)
-	level -= 10;
-
-      if ( ch->race == RACE_INTERROGATION_DROID)
-	level += 140;
-
-      level += ch->stats.perm_wis + ch->stats.perm_cha + ch->stats.perm_int;
-    }
-
-  if ( ability == DIPLOMACY_ABILITY )
-    {
-      if ( ch->ability.main == ability )
-	level = 100;
-
-      if ( ch->ability.main == PILOTING_ABILITY )
-	level = 10;
-
-      if ( ch->ability.main == LEADERSHIP_ABILITY )
-	level = 50;
-
-      if ( ch->race == RACE_SHISTAVANEN)
-	level -= 30;
-
-      if ( ch->race == RACE_WOOKIEE )
-	level -= 50;
-
-      if ( ch->race == RACE_TWI_LEK )
-	level -= 25;
-
-      if ( ch->race == RACE_RODIAN )
-	level -= 20;
-
-      if ( ch->race == RACE_HUTT )
-	level += 85;
-
-      if ( ch->race == RACE_MON_CALAMARI )
-	level += 10;
-
-      /* if ( ch->race == RACE_NOGHRI )
-	 level -= 50; */
-
-      if ( ch->race == RACE_GAMORREAN )
-	level -= 10;
-
-      if ( ch->race == RACE_JAWA )
-	level -= 10;
-
-      if ( ch->race == RACE_ADARIAN )
-	level += 40;
-
-      if ( ch->race == RACE_VERPINE )
-	level -= 10;
-
-      if ( ch->race == RACE_DEFEL )
-	level -= 30;
-
-      if ( ch->race == RACE_TRANDOSHAN )
-	level -= 30;
-
-      if ( ch->race == RACE_QUARREN )
-	level -= 20;
-
-      if ( ch->race == RACE_SULLUSTAN )
-	level += 10;
-
-      if ( ch->race == RACE_DROID)
-	level -= 10;
-
-      if ( ch->race == RACE_ASSASSIN_DROID )
-	level -= 30;
-
-      if ( ch->race == RACE_GLADIATOR_DROID )
-	level -= 30;
-
-      if ( ch->race == RACE_INTERROGATION_DROID )
-	level -= 100;
-
-      if ( ch->race == RACE_ASTROMECH_DROID )
-	level -= 55;
-
-      if ( ch->race == RACE_YEVETHA)
-	level -= 10;
-
-      if ( ch->race == RACE_COYNITE)
-	level -= 40;
-
-      if ( ch->race == RACE_DUROS)
-	level -= 10;
-
-      if ( ch->race == RACE_SELONIAN)
-	level -= 14;
-
-      if ( ch->race == RACE_KUBAZ)
-	level -= 12;
-
-      if ( ch->race == RACE_DUG)
-	level -= 14;
-
-      if ( ch->race == RACE_TOGARIAN)
-	level -= 40;
-
-      if ( ch->race == RACE_BOTHAN)
-	level += 35;
-
-      if ( ch->race == RACE_BARABEL)
-	level -= 20;
-
-      level += ch->stats.perm_cha*3;
-    }
-
-  level = URANGE( 1, level, 150 );
-
-  if ( ability == FORCE_ABILITY )
-    {
-      if ( ch->ability.main == ability )
-	{
-	  level = 20;
-	}
-      else
-	{
-	  level = 0;
-	}
-
-      level += ch->stats.perm_frc*5;
-    }
+  level += ch->stats.perm_frc * 5;
 
   return level;
 }
