@@ -13,7 +13,7 @@ $
 #FLAGS
 0 20
 
-#ECONOMY 0 125016605
+#ECONOMY 0 125014415
 
 #MOBILES
 #28600
@@ -517,7 +517,7 @@ livable. The walls that partially surround  the pad have the tools that
 the techs use for the repairs as well as some pictures of female wookiees
 in compromising positions. The only way out is back the way you came.
 ~
-0 0 1
+0 16 1
 D0
 ~
 ~

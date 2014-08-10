@@ -11,7 +11,7 @@ $
 #FLAGS
 0
 
-#ECONOMY 0 30770139
+#ECONOMY 0 30740139
 
 #MOBILES
 #31500
@@ -5191,7 +5191,7 @@ outside in the  sun, but smells of ships. On the walls there are blaster
 bolts. Extra tools lay on the ground for  a mechanic that walks around
 here.   
 ~
-0 8 10
+0 24 10
 D1
 ~
 ~
@@ -5447,7 +5447,7 @@ D1
 0 -1 31870
 S
 #31872
-The Bus stop.~
+The Bus Stop~
 You are standing on a platform where the public busses land every so
 often. You can access different planets using these busses. Although
 the busses are slow they are a mean of transportation. The only

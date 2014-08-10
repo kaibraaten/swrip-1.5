@@ -13,7 +13,7 @@ $
 #FLAGS
 0 10
 
-#ECONOMY 0 18908329
+#ECONOMY 0 18886672
 
 #MOBILES
 #32000
@@ -7753,6 +7753,10 @@ in the core worlds. The planet is mostly covered in jungle. It apears the
 only artificial structure is a small building to the north of here.  
 ~
 0 12 1
+D3
+~
+~
+0 -1 10006
 S
 #32298
 A Small Shuttle~

@@ -11,7 +11,7 @@ $
 #FLAGS
 0
 
-#ECONOMY 0 31248557
+#ECONOMY 0 31248516
 
 #MOBILES
 #29000
@@ -532,7 +532,7 @@ a small opening.  It appears to be a small cave.  To the north
 and south there isn't really anything special.  Just vast desert
 plains.  To the east is a thin and winding road.
 ~
-0 270336 1
+0 262160 1
 D0
 ~
 desert sands~

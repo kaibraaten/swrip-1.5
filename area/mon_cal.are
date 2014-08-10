@@ -13,7 +13,7 @@ $
 #FLAGS
 1
 
-#ECONOMY 0 187437358
+#ECONOMY 0 187437357
 
 #MOBILES
 #21000
@@ -4677,7 +4677,7 @@ D2
 The Docking bay leads outside of Akatamer.
 ~
 Docking bay~
-1 21073 21075
+7 21073 21075
 S
 #21075
 Outside the Southern Docking bay~
@@ -4693,7 +4693,7 @@ D0
 The Docking bay leads into the city of Akatamer.
 ~
 Docking bay~
-1 21073 21074
+7 21073 21074
 D1
 A path begins to the east.
 ~
@@ -4958,7 +4958,7 @@ D1
 The Docking bay leads into the city of Akatamer.
 ~
 Docking bay~
-1 21070 21088
+7 21070 21088
 D2
 A road begins to the south.
 ~
@@ -4984,7 +4984,7 @@ D3
 The road continues deep into the metallic waste land s of Haon Dor.
 ~
 Docking bay~
-1 21070 21087
+7 21070 21087
 S
 #21089
 On a Road north of the Western Docking Bay~
@@ -5224,7 +5224,7 @@ D2
 The Docking bay leads into Akatamer.
 ~
 Docking bay~
-1 21071 21100
+7 21071 21100
 D3
 The road begins to the west.
 ~
@@ -5243,12 +5243,12 @@ transport. To the North is outside the city. While to the South is the
 intersection of Anna Avenue and Security Road. We hope you enjoy your stay
 here at Coral City (formally Akatamer)!
 ~
-0 4 1
+0 20 1
 D0
 The Docking bay leads out of Akatamer.
 ~
 Docking bay~
-1 21071 21099
+7 21071 21099
 D1
 ~
 ~
@@ -5496,7 +5496,7 @@ D3
 The Docking bay leads into Akatamer.
 ~
 Docking bay~
-1 21072 21113
+7 21072 21113
 S
 #21113
 Inside the Eastern Docking bay~
@@ -5511,7 +5511,7 @@ D1
 The Docking bay leads out of Akatamer.
 ~
 Docking bay~
-1 21072 21112
+7 21072 21112
 D3
 Two roads cross to the west.
 ~

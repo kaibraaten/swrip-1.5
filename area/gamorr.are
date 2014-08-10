@@ -13,7 +13,7 @@ $
 #FLAGS
 0
 
-#ECONOMY 0 100014629
+#ECONOMY 0 100007619
 
 #MOBILES
 #28000
@@ -1641,7 +1641,7 @@ Large Mud Hole.~
 0 4 1
 S
 #28038
-Landing Area.~
+Landing Area~
 The landing area is rather large, it looks as though it can hold and
 Imperial Star Destroyer, but how often do you see that. The area has
 the odd small cargo ship parked here and there as well as one or two
@@ -1649,7 +1649,7 @@ stock light freighters loading and unloading so stuff you don't want
 to get involved with. You even see a ship loading a couple of infant
 Gamorrean watch-beasts with extream caution
 ~
-0 0 1
+0 16 1
 D3
 ~
 ~
