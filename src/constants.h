@@ -288,7 +288,7 @@ typedef enum
 #define RACE_FIRRERREO           22
 #define RACE_BARABEL             23
 #define RACE_BOTHAN              24
-#define RACE_TOGARIAN            25
+#define RACE_TOGORIAN            25
 #define RACE_DUG                 26
 #define RACE_KUBAZ               27
 #define RACE_SELONIAN            28

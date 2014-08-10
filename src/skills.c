@@ -485,7 +485,7 @@ bool permsneak( const Character *ch )
     case RACE_BOTHAN:
       return true;
 
-    case RACE_TOGARIAN:
+    case RACE_TOGORIAN:
       return true;
 
     case RACE_DUG:

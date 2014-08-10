@@ -157,92 +157,136 @@ static int GetMaxCombatLevel( const Character *ch )
 {
   int level = 0;
 
-  if ( ch->ability.main == COMBAT_ABILITY )
-    level = 100;
+  switch( ch->ability.main )
+    {
+    case COMBAT_ABILITY:
+      level = 100;
+      break;
 
-  if ( ch->ability.main == FORCE_ABILITY )
-    level = 25;
+    case FORCE_ABILITY:
+      level = 25;
+      break;
 
-  if ( ch->ability.main == HUNTING_ABILITY )
-    level = 25;
+    case HUNTING_ABILITY:
+      level = 25;
+      break;
 
-  if ( ch->ability.main == COMMANDO_ABILITY )
-    level = 50;
+    case COMMANDO_ABILITY:
+      level = 50;
+      break;
 
-  if ( ch->race == RACE_SHISTAVANEN)
-    level += 35;
+    default:
+      level = 0;
+      break;
+    }
 
-  if ( ch->race == RACE_WOOKIEE )
-    level += 31;
+  switch( ch->race )
+    {
+    case RACE_SHISTAVANEN:
+      level += 35;
+      break;
 
-  /* if ( ch->race == RACE_NOGHRI )
-     level += 50; */
+    case RACE_WOOKIEE:
+      level += 31;
+      break;
 
-  if ( ch->race == RACE_GAMORREAN )
-    level += 30;
+      /*
+      case RACE_NOGHRI:
+      level += 50;
+      break;
+      */
 
-  if ( ch->race == RACE_DEFEL )
-    level += 25;
+    case RACE_GAMORREAN:
+      level += 30;
+      break;
 
-  if ( ch->race == RACE_TRANDOSHAN )
-    level += 20;
+    case RACE_DEFEL:
+      level += 25;
+      break;
 
-  if ( ch->race == RACE_SULLUSTAN )
-    level -= 10;
+    case RACE_TRANDOSHAN:
+      level += 20;
+      break;
 
-  if ( ch->race == RACE_HUTT )
-    level -= 20;
+    case RACE_SULLUSTAN:
+      level -= 10;
+      break;
 
-  if ( ch->race == RACE_MON_CALAMARI )
-    level -= 1;
+    case RACE_HUTT:
+      level -= 20;
+      break;
 
-  if ( ch->race == RACE_VERPINE )
-    level += 1;
+    case RACE_MON_CALAMARI:
+      level -= 1;
+      break;
 
-  if ( ch->race == RACE_ITHORIAN )
-    level -= 101;
+    case RACE_VERPINE:
+      level += 1;
+      break;
 
-  if ( ch->race == RACE_FIRRERREO )
-    level += 11;
+    case RACE_ITHORIAN:
+      level -= 101;
+      break;
 
-  if ( ch->race == RACE_BARABEL )
-    level += 35;
+    case RACE_FIRRERREO:
+      level += 11;
+      break;
 
-  if ( ch->race == RACE_BOTHAN )
-    level -= 11;
+    case RACE_BARABEL:
+      level += 35;
+      break;
 
-  if ( ch->race == RACE_TOGARIAN )
-    level += 40;
+    case RACE_BOTHAN:
+      level -= 11;
+      break;
 
-  if ( ch->race == RACE_DUG )
-    level += 11;
+    case RACE_TOGORIAN:
+      level += 40;
+      break;
 
-  if ( ch->race == RACE_KUBAZ )
-    level += 16;
+    case RACE_DUG:
+      level += 11;
+      break;
 
-  if ( ch->race == RACE_SELONIAN )
-    level += 26;
+    case RACE_KUBAZ:
+      level += 16;
+      break;
 
-  if ( ch->race == RACE_GRAN )
-    level += 8;
+    case RACE_SELONIAN:
+      level += 26;
+      break;
 
-  if ( ch->race == RACE_YEVETHA )
-    level += 26;
+    case RACE_GRAN:
+      level += 8;
+      break;
 
-  if ( ch->race == RACE_COYNITE )
-    level += 25;
+    case RACE_YEVETHA:
+      level += 26;
+      break;
 
-  if ( ch->race == RACE_GAND )
-    level += 6;
+    case RACE_COYNITE:
+      level += 25;
+      break;
 
-  if ( ch->race == RACE_ASSASSIN_DROID )
-    level += 45;
+    case RACE_GAND:
+      level += 6;
+      break;
 
-  if ( ch->race == RACE_GLADIATOR_DROID )
-    level += 60;
+    case RACE_ASSASSIN_DROID:
+      level += 45;
+      break;
 
-  if ( ch->race == RACE_ASTROMECH_DROID )
-    level -= 110;
+    case RACE_GLADIATOR_DROID:
+      level += 60;
+      break;
+
+    case RACE_ASTROMECH_DROID:
+      level -= 110;
+      break;
+
+    default:
+      break;
+    }
 
   level += ch->stats.perm_con + ch->stats.perm_dex + ch->stats.perm_str;
 
@@ -292,7 +336,7 @@ static int GetMaxPilotingLevel( const Character *ch )
   if ( ch->race == RACE_HUTT)
     level += 10;
 
-  if ( ch->race == RACE_TOGARIAN)
+  if ( ch->race == RACE_TOGORIAN)
     level += 10;
 
   if ( ch->race == RACE_GRAN)
@@ -376,7 +420,7 @@ static int GetMaxEngineeringLevel( const Character *ch )
   if ( ch->race == RACE_DROID)
     level += 20;
 
-  if ( ch->race == RACE_TOGARIAN )
+  if ( ch->race == RACE_TOGORIAN )
     level -= 10;
 
   if ( ch->race == RACE_DUG )
@@ -442,7 +486,7 @@ static int GetMaxBountyHuntingLevel( const Character *ch )
   if ( ch->race == RACE_JAWA )
     level -= 10;
 
-  if ( ch->race == RACE_TOGARIAN )
+  if ( ch->race == RACE_TOGORIAN )
     level += 30;
 
   if ( ch->race == RACE_ADARIAN )
@@ -494,7 +538,7 @@ static int GetMaxSmugglingLevel( const Character *ch )
   if ( ch->race == RACE_SHISTAVANEN)
     level += 15;
 
-  if ( ch->race == RACE_TOGARIAN )
+  if ( ch->race == RACE_TOGORIAN )
     level += 15;
 
   if ( ch->race == RACE_COYNITE)
@@ -549,7 +593,6 @@ static int GetMaxSmugglingLevel( const Character *ch )
 
   return urange( 1, level, 150 );
 }
-
 
 static int GetMaxLeadershipLevel( const Character *ch )
 {
@@ -723,7 +766,7 @@ static int GetMaxDiplomacyLevel( const Character *ch )
   if ( ch->race == RACE_DUG)
     level -= 14;
 
-  if ( ch->race == RACE_TOGARIAN)
+  if ( ch->race == RACE_TOGORIAN)
     level -= 40;
 
   if ( ch->race == RACE_BOTHAN)

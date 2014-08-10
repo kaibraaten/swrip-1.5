@@ -531,15 +531,6 @@ static void nanny_get_new_race( Descriptor *d, char *argument )
 	}
     }
 
-  /*
-        if ( iRace == RACE_ASSASSIN_DROID || iRace == RACE_YEVETHA || iRace == RACE_COYNITE || iRace == RACE_TOGARIAN)
-        {
-        write_to_buffer( d,
-        "Do to too many people choosing this race, it now must be applied for.\r\nWhat IS your race? ", 0 );
-        return;
-        }
-  */
-
   if ( iRace == MAX_RACE || iRace == RACE_GOD
        || !race_table[iRace].race_name
        || race_table[iRace].race_name[0] == '\0')
