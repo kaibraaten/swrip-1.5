@@ -55,7 +55,8 @@ static void OnStart( Character *ch, char *argument )
     {
       if (obj->item_type == ITEM_TOOLKIT)
 	checktool = true;
-      if (obj->item_type == ITEM_DRINK_CON && obj->value[1] == 0 )
+      if (obj->item_type == ITEM_DRINK_CON
+	  && obj->value[OVAL_DRINK_CON_CURRENT_AMOUNT] == 0 )
 	checkdrink = true;
       if (obj->item_type == ITEM_BATTERY)
 	checkbatt = true;
@@ -151,7 +152,8 @@ static void OnFinished( Character *ch )
     {
       if (obj->item_type == ITEM_TOOLKIT)
         checktool = true;
-      if (obj->item_type == ITEM_DRINK_CON && checkdrink == false && obj->value[1] == 0 )
+      if (obj->item_type == ITEM_DRINK_CON && checkdrink == false
+	  && obj->value[OVAL_DRINK_CON_CURRENT_AMOUNT] == 0 )
         {
           checkdrink = true;
           separate_obj( obj );
@@ -167,7 +169,7 @@ static void OnFinished( Character *ch )
         }
       if (obj->item_type == ITEM_CHEMICAL)
         {
-          strength = URANGE( 10, obj->value[0], level * 5 );
+          strength = URANGE( 10, obj->value[OVAL_CHEMICAL_STRENGTH], level * 5 );
           weight = obj->weight;
           separate_obj( obj );
           obj_from_char( obj );
@@ -210,9 +212,9 @@ static void OnFinished( Character *ch )
   STRFREE( obj->description );
   strcat( buf, " was carelessly misplaced here." );
   obj->description = STRALLOC( buf );
-  obj->value[0] = strength/2;
-  obj->value[1] = strength;
-  obj->cost = obj->value[1]*5;
+  obj->value[OVAL_GRENADE_MIN_DMG] = strength/2;
+  obj->value[OVAL_GRENADE_MAX_DMG] = strength;
+  obj->cost = obj->value[OVAL_GRENADE_MAX_DMG]*5;
 
   obj = obj_to_char( obj, ch );
 

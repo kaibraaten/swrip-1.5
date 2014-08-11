@@ -4,9 +4,8 @@
 void do_drink( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  OBJ_DATA *obj;
-  int amount;
-  int liquid;
+  OBJ_DATA *obj = NULL;
+  int liquid = 0;
 
   argument = one_argument( argument, arg );
   /* munch optional words */
@@ -78,16 +77,16 @@ void do_drink( Character *ch, char *argument )
       break;
 
     case ITEM_DRINK_CON:
-      if ( obj->value[1] <= 0 )
+      if ( obj->value[OVAL_DRINK_CON_CURRENT_AMOUNT] <= 0 )
         {
           send_to_char( "It is already empty.\r\n", ch );
           return;
         }
 
-      if ( ( liquid = obj->value[2] ) >= LIQ_MAX )
+      if ( ( liquid = obj->value[OVAL_DRINK_CON_LIQUID_TYPE] ) >= LIQ_MAX )
         {
           bug( "Do_drink: bad liquid number %d.", liquid );
-          liquid = obj->value[2] = 0;
+          liquid = obj->value[OVAL_DRINK_CON_LIQUID_TYPE] = LIQ_WATER;
         }
 
       if ( !oprog_use_trigger( ch, obj, NULL, NULL, NULL ) )
@@ -98,16 +97,12 @@ void do_drink( Character *ch, char *argument )
                ch, obj, liq_table[liquid].liq_name, TO_CHAR );
         }
 
-      amount = 1; /* UMIN(amount, obj->value[1]); */
-      /* what was this? concentrated drinks?  concentrated water
-         too I suppose... sheesh! */
-
       gain_condition( ch, COND_DRUNK,
-                      amount * liq_table[liquid].liq_affect[COND_DRUNK  ] );
+                      liq_table[liquid].liq_affect[COND_DRUNK  ] );
       gain_condition( ch, COND_FULL,
-                      amount * liq_table[liquid].liq_affect[COND_FULL   ] );
+                      liq_table[liquid].liq_affect[COND_FULL   ] );
       gain_condition( ch, COND_THIRST,
-                      amount * liq_table[liquid].liq_affect[COND_THIRST ] );
+                      liq_table[liquid].liq_affect[COND_THIRST ] );
 
       if ( !is_npc(ch) )
         {
@@ -133,7 +128,7 @@ void do_drink( Character *ch, char *argument )
 	    send_to_char( "You do not feel thirsty.\r\n", ch );
         }
 
-      if ( obj->value[3] )
+      if ( obj->value[OVAL_DRINK_CON_POISON_STRENGTH] > 0 )
         {
           /* The drink was poisoned! */
           Affect af;
@@ -142,14 +137,14 @@ void do_drink( Character *ch, char *argument )
           act( AT_POISON, "You sputter and gag.", ch, NULL, NULL, TO_CHAR );
           ch->mental_state = URANGE( 20, ch->mental_state + 5, 100 );
           af.type      = gsn_poison;
-          af.duration  = 3 * obj->value[3];
+          af.duration  = 3 * obj->value[OVAL_DRINK_CON_POISON_STRENGTH];
           af.location  = APPLY_NONE;
           af.modifier  = 0;
           af.bitvector = AFF_POISON;
           affect_join( ch, &af );
         }
 
-      obj->value[1] -= amount;
+      obj->value[OVAL_DRINK_CON_CURRENT_AMOUNT] -= 1;
       break;
     }
 
