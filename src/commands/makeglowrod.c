@@ -151,7 +151,7 @@ static void OnFinished( Character *ch )
 
       if (obj->item_type == ITEM_BATTERY && checkbatt == false)
         {
-          strength = obj->value[0];
+          strength = obj->value[OVAL_BATTERY_CARGE];
           separate_obj( obj );
           obj_from_char( obj );
           extract_obj( obj );
@@ -206,8 +206,8 @@ static void OnFinished( Character *ch )
   STRFREE( obj->description );
   strcat( buf, " was carelessly misplaced here." );
   obj->description = STRALLOC( buf );
-  obj->value[2] = strength;
-  obj->cost = obj->value[2];
+  obj->value[OVAL_LIGHT_POWER] = strength;
+  obj->cost = obj->value[OVAL_LIGHT_POWER];
 
   obj = obj_to_char( obj, ch );
 

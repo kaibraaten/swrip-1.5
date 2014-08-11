@@ -213,7 +213,9 @@ static void OnFinished( Character *ch )
   STRFREE( obj->description );
   strcat( buf, " was dropped here." );
   obj->description = STRALLOC( buf );
-  obj->value[0] = obj->value[1];
+
+  obj->value[OVAL_ARMOR_CONDITION] = obj->value[OVAL_ARMOR_AC];
+
   obj->cost *= 10;
   obj->cost += cost;
 
