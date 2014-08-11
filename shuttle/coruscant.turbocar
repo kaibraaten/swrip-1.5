@@ -1,0 +1,64 @@
+#SHUTTLE
+Name         A Turbocar~
+Filename     coruscant.turbocar~
+Delay        1
+CurrentDelay 1
+Current      5
+Type         0
+State        2
+StartRoom    225
+EndRoom      225
+Entrance     225
+End
+
+#STOP
+StopName       Manarai Spaceport~
+Room           215
+End
+
+#STOP
+StopName       Skydome Botanical Gardens~
+Room           216
+End
+
+#STOP
+StopName       Grand Towers~
+Room           217
+End
+
+#STOP
+StopName       Grandis Mon Theater~
+Room           218
+End
+
+#STOP
+StopName       Palace Station~
+Room           219
+End
+
+#STOP
+StopName       Great Galactic Museum~
+Room           220
+End
+
+#STOP
+StopName       College Station~
+Room           221
+End
+
+#STOP
+StopName       Holographic Zoo of Extinct Animals~
+Room           222
+End
+
+#STOP
+StopName       Dometown Station~
+Room           223
+End
+
+#STOP
+StopName       Monument Plaza~
+Room           224
+End
+
+#END

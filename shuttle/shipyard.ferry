@@ -1,0 +1,24 @@
+#SHUTTLE
+Name         Shipyard Ferry~
+Filename     shipyard.ferry~
+Delay        2
+CurrentDelay 1
+Current      0
+Type         1
+State        0
+StartRoom    200
+EndRoom      200
+Entrance     200
+End
+
+#STOP
+StopName       Manarai Spaceport~
+Room           202
+End
+
+#STOP
+StopName       Coruscant Shipyard~
+Room           32015
+End
+
+#END
