@@ -47,27 +47,40 @@ void do_fill( Character *ch, char *argument )
       act( AT_ACTION, "$n tries to fill $p... (Don't ask me how)", ch, obj, NULL, TO_ROOM );
       send_to_char( "You cannot fill that.\r\n", ch );
       return;
+
       /* place all fillable item types here */
     case ITEM_DRINK_CON:
-      src_item1 = ITEM_FOUNTAIN;        src_item2 = ITEM_BLOOD;         break;
+      src_item1 = ITEM_FOUNTAIN;
+      src_item2 = ITEM_BLOOD;
+      break;
+
     case ITEM_HERB_CON:
-      src_item1 = ITEM_HERB;    src_item2 = ITEM_HERB_CON;      break;
+      src_item1 = ITEM_HERB;
+      src_item2 = ITEM_HERB_CON;
+      break;
+
     case ITEM_PIPE:
-      src_item1 = ITEM_HERB;    src_item2 = ITEM_HERB_CON;      break;
+      src_item1 = ITEM_HERB;
+      src_item2 = ITEM_HERB_CON;
+      break;
+
     case ITEM_CONTAINER:
-      src_item1 = ITEM_CONTAINER;       src_item2 = ITEM_CORPSE_NPC;
-      src_item3 = ITEM_CORPSE_PC;       src_item4 = ITEM_CORPSE_NPC;    break;
+      src_item1 = ITEM_CONTAINER;
+      src_item2 = ITEM_CORPSE_NPC;
+      src_item3 = ITEM_CORPSE_PC;
+      src_item4 = ITEM_CORPSE_NPC;
+      break;
     }
 
   if ( dest_item == ITEM_CONTAINER )
     {
-      if ( IS_SET(obj->value[1], CONT_CLOSED) )
+      if ( IS_SET(obj->value[OVAL_CONTAINER_FLAGS], CONT_CLOSED) )
         {
           act( AT_PLAIN, "The $d is closed.", ch, NULL, obj->name, TO_CHAR );
           return;
         }
       if ( get_obj_weight( obj ) / obj->count
-           >=   obj->value[0] )
+           >= obj->value[OVAL_CONTAINER_CAPACITY] )
         {
           send_to_char( "It's already full as it can be.\r\n", ch );
           return;
@@ -75,8 +88,9 @@ void do_fill( Character *ch, char *argument )
     }
   else
     {
-      diff = obj->value[0] - obj->value[1];
-      if ( diff < 1 || obj->value[1] >= obj->value[0] )
+      diff = obj->value[OVAL_DRINK_CON_CAPACITY] - obj->value[OVAL_DRINK_CON_CURRENT_AMOUNT];
+
+      if ( diff < 1 || obj->value[OVAL_DRINK_CON_CURRENT_AMOUNT] >= obj->value[OVAL_DRINK_CON_CAPACITY] )
         {
           send_to_char( "It's already full as it can be.\r\n", ch );
           return;
@@ -84,7 +98,7 @@ void do_fill( Character *ch, char *argument )
     }
 
   if ( dest_item == ITEM_PIPE
-       &&   IS_SET( obj->value[3], PIPE_FULLOFASH ) )
+       && IS_SET( obj->value[OVAL_PIPE_FLAGS], PIPE_FULLOFASH ) )
     {
       send_to_char( "It's full of ashes, and needs to be emptied first.\r\n", ch );
       return;
@@ -153,7 +167,7 @@ void do_fill( Character *ch, char *argument )
                    ||   (IS_OBJ_STAT( source, ITEM_PROTOTYPE) && !can_take_proto(ch))
                    ||    ch->carry_weight + get_obj_weight(source) > can_carry_w(ch)
                    ||   (get_obj_weight(source) + get_obj_weight(obj)/obj->count)
-                   > obj->value[0] )
+                   > obj->value[OVAL_CONTAINER_CAPACITY] )
                 continue;
               if ( all && arg2[3] == '.'
                    &&  !nifty_is_name( &arg2[4], source->name ) )
@@ -161,7 +175,7 @@ void do_fill( Character *ch, char *argument )
               obj_from_room(source);
               if ( source->item_type == ITEM_MONEY )
                 {
-                  ch->gold += source->value[0];
+                  ch->gold += source->value[OVAL_MONEY_AMOUNT];
                   extract_obj( source );
                 }
 	      else
@@ -229,7 +243,7 @@ void do_fill( Character *ch, char *argument )
                ||   (IS_OBJ_STAT( source, ITEM_PROTOTYPE) && !can_take_proto(ch))
                ||    ch->carry_weight + get_obj_weight(source) > can_carry_w(ch)
                ||   (get_obj_weight(source) + get_obj_weight(obj)/obj->count)
-               > obj->value[0] )
+               > obj->value[OVAL_CONTAINER_CAPACITY] )
             {
               send_to_char( "You can't do that.\r\n", ch );
               return;
@@ -279,7 +293,7 @@ void do_fill( Character *ch, char *argument )
 
         case ITEM_CONTAINER:
           if ( source->item_type == ITEM_CONTAINER  /* don't remove */
-               &&   IS_SET(source->value[1], CONT_CLOSED) )
+               &&   IS_SET(source->value[OVAL_CONTAINER_FLAGS], CONT_CLOSED) )
             {
               act( AT_PLAIN, "The $d is closed.", ch, NULL, source->name, TO_CHAR );
               return;
@@ -301,8 +315,9 @@ void do_fill( Character *ch, char *argument )
 		   ||    ch->carry_number + otmp->count > can_carry_n(ch)
                    ||    ch->carry_weight + get_obj_weight(otmp) > can_carry_w(ch)
                    ||   (get_obj_weight(source) + get_obj_weight(obj)/obj->count)
-                   > obj->value[0] )
+                   > obj->value[OVAL_CORPSE_0] )
                 continue;
+
               obj_from_obj(otmp);
               obj_to_obj(otmp, obj);
               found = true;
@@ -319,7 +334,7 @@ void do_fill( Character *ch, char *argument )
       return;
     }
 
-  if ( source->value[1] < 1 )
+  if ( source->value[OVAL_DRINK_CON_CURRENT_AMOUNT] < 1 )
     {
       send_to_char( "There's none left!\r\n", ch );
       return;

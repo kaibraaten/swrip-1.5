@@ -1248,7 +1248,16 @@ typedef enum
 #define OVAL_FOOD_MAX_CONDITION 1
 #define OVAL_FOOD_OPTIONAL_INITIAL_CONDITION 4
 
-#define OVAL_MONEY_0 0
+#define OVAL_MONEY_AMOUNT 0
+
+#define OVAL_PIPE_TOBACCO_AMOUNT 1
+#define OVAL_PIPE_FLAGS 3
+
+#define OVAL_CORPSE_0 0
+#define OVAL_CORPSE_DECAY 2
+
+#define OVAL_FOUNTAIN_1 1
+#define OVAL_FOUNTAIN_2 2
 
 /*
  * Extra flags.

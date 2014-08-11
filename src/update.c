@@ -1468,9 +1468,9 @@ void char_update( void )
 
           if ( ( obj = get_eq_char( ch, WEAR_LIGHT ) ) != NULL
                && obj->item_type == ITEM_LIGHT
-               && obj->value[2] > 0 )
+               && obj->value[OVAL_LIGHT_POWER] > 0 )
             {
-              if ( --obj->value[2] == 0 && ch->in_room )
+              if ( --obj->value[OVAL_LIGHT_POWER] == 0 && ch->in_room )
                 {
                   ch->in_room->light -= obj->count;
                   act( AT_ACTION, "$p goes out.", ch, obj, NULL, TO_ROOM );
@@ -1819,21 +1819,23 @@ void obj_update( void )
 	  continue;
 	}
 
-      if ( obj->item_type == ITEM_WEAPON && obj->carried_by  &&
-           ( obj->wear_loc == WEAR_WIELD || obj->wear_loc == WEAR_DUAL_WIELD ) &&
-           obj->value[3] != WEAPON_BLASTER && obj->value[4] > 0 &&
-           obj->value[3] != WEAPON_BOWCASTER &&  obj->value[3] != WEAPON_FORCE_PIKE)
+      if ( obj->item_type == ITEM_WEAPON && obj->carried_by
+	   && ( obj->wear_loc == WEAR_WIELD || obj->wear_loc == WEAR_DUAL_WIELD )
+	   && obj->value[OVAL_WEAPON_TYPE] != WEAPON_BLASTER
+	   && obj->value[OVAL_WEAPON_CHARGE] > 0
+	   && obj->value[OVAL_WEAPON_TYPE] != WEAPON_BOWCASTER
+	   && obj->value[OVAL_WEAPON_TYPE] != WEAPON_FORCE_PIKE)
         {
-          obj->value[4]--;
+          obj->value[OVAL_WEAPON_CHARGE]--;
 
-          if ( obj->value[4] <= 0 )
+          if ( obj->value[OVAL_WEAPON_CHARGE] <= 0 )
             {
-              if ( obj->value[3] == WEAPON_LIGHTSABER )
+              if ( obj->value[OVAL_WEAPON_TYPE] == WEAPON_LIGHTSABER )
                 {
                   act( AT_PLAIN, "$p fizzles and dies." , obj->carried_by, obj, NULL, TO_CHAR );
                   act( AT_PLAIN, "$n's lightsaber fizzles and dies." , obj->carried_by, NULL, NULL, TO_ROOM );
                 }
-              else if ( obj->value[3] == WEAPON_VIBRO_BLADE )
+              else if ( obj->value[OVAL_WEAPON_TYPE] == WEAPON_VIBRO_BLADE )
                 {
                   act( AT_PLAIN, "$p stops vibrating." , obj->carried_by, obj, NULL, TO_CHAR );
                 }
@@ -1842,38 +1844,38 @@ void obj_update( void )
 
       if ( obj->item_type == ITEM_PIPE )
         {
-          if ( IS_SET( obj->value[3], PIPE_LIT ) )
+          if ( IS_SET( obj->value[OVAL_PIPE_FLAGS], PIPE_LIT ) )
             {
-              if ( --obj->value[1] <= 0 )
+              if ( --obj->value[OVAL_PIPE_TOBACCO_AMOUNT] <= 0 )
                 {
-                  obj->value[1] = 0;
-                  REMOVE_BIT( obj->value[3], PIPE_LIT );
+                  obj->value[OVAL_PIPE_TOBACCO_AMOUNT] = 0;
+                  REMOVE_BIT( obj->value[OVAL_PIPE_FLAGS], PIPE_LIT );
                 }
-              else if ( IS_SET( obj->value[3], PIPE_HOT ) )
+              else if ( IS_SET( obj->value[OVAL_PIPE_FLAGS], PIPE_HOT ) )
 		{
-		  REMOVE_BIT( obj->value[3], PIPE_HOT );
+		  REMOVE_BIT( obj->value[OVAL_PIPE_FLAGS], PIPE_HOT );
 		}
 	      else
 		{
-		  if ( IS_SET( obj->value[3], PIPE_GOINGOUT ) )
+		  if ( IS_SET( obj->value[OVAL_PIPE_FLAGS], PIPE_GOINGOUT ) )
 		    {
-		      REMOVE_BIT( obj->value[3], PIPE_LIT );
-		      REMOVE_BIT( obj->value[3], PIPE_GOINGOUT );
+		      REMOVE_BIT( obj->value[OVAL_PIPE_FLAGS], PIPE_LIT );
+		      REMOVE_BIT( obj->value[OVAL_PIPE_FLAGS], PIPE_GOINGOUT );
 		    }
 		  else
 		    {
-		      SET_BIT( obj->value[3], PIPE_GOINGOUT );
+		      SET_BIT( obj->value[OVAL_PIPE_FLAGS], PIPE_GOINGOUT );
 		    }
 		}
 
-              if ( !IS_SET( obj->value[3], PIPE_LIT ) )
+              if ( !IS_SET( obj->value[OVAL_PIPE_FLAGS], PIPE_LIT ) )
 		{
-		  SET_BIT( obj->value[3], PIPE_FULLOFASH );
+		  SET_BIT( obj->value[OVAL_PIPE_FLAGS], PIPE_FULLOFASH );
 		}
             }
           else
 	    {
-	      REMOVE_BIT( obj->value[3], PIPE_HOT );
+	      REMOVE_BIT( obj->value[OVAL_PIPE_FLAGS], PIPE_HOT );
 	    }
         }
 
@@ -1888,7 +1890,7 @@ void obj_update( void )
 	      timerfrac = (int)(obj->timer / 8 + 1);
 	    }
 
-          if ( obj->timer > 0 && obj->value[2] > timerfrac )
+          if ( obj->timer > 0 && obj->value[OVAL_CORPSE_DECAY] > timerfrac )
             {
               char buf[MAX_STRING_LENGTH];
               char name[MAX_STRING_LENGTH];
@@ -1899,7 +1901,7 @@ void obj_update( void )
               bufptr = one_argument( bufptr, name );
 
               separate_obj(obj);
-              obj->value[2] = timerfrac;
+              obj->value[OVAL_CORPSE_DECAY] = timerfrac;
 
               if ( obj->item_type == ITEM_DROID_CORPSE )
 		{
@@ -2373,7 +2375,7 @@ void aggr_update( void )
 
               if ( !ch->mount
                    && (obj = get_eq_char( ch, WEAR_WIELD )) != NULL
-                   && obj->value[3] == 11
+                   && obj->value[OVAL_WEAPON_TYPE] == WEAPON_FORCE_PIKE
                    && !victim->fighting
                    && victim->hit >= victim->max_hit )
                 {

@@ -266,18 +266,18 @@ int get_cost( const Character *ch, const Character *keeper, const OBJ_DATA *obj,
 
   if ( obj->item_type == ITEM_ARMOR )
     {
-      cost = (int) (cost * (obj->value[0]+1) / (obj->value[1]+1) );
+      cost = (int) (cost * (obj->value[OVAL_ARMOR_CONDITION]+1) / (obj->value[OVAL_ARMOR_AC]+1) );
     }
 
   if ( obj->item_type == ITEM_WEAPON )
     {
-      cost = (int) (cost * (obj->value[0]+1) / INIT_WEAPON_CONDITION+1);
-      cost = (int) (cost * (obj->value[4]+1) / (obj->value[5]+1));
+      cost = (int) (cost * (obj->value[OVAL_WEAPON_CONDITION]+1) / INIT_WEAPON_CONDITION+1);
+      cost = (int) (cost * (obj->value[OVAL_WEAPON_CHARGE]+1) / (obj->value[OVAL_WEAPON_MAX_CHARGE]+1));
     }
 
   if ( obj->item_type == ITEM_DEVICE )
     {
-      cost = (int) (cost * (obj->value[2]+1) / (obj->value[1]+1));
+      cost = (int) (cost * (obj->value[OVAL_DEVICE_CHARGES]+1) / (obj->value[OVAL_DEVICE_MAX_CHARGES]+1));
     }
 
   return cost;
@@ -320,35 +320,35 @@ int get_repaircost( const Character *keeper, const OBJ_DATA *obj )
       switch (obj->item_type)
         {
         case ITEM_ARMOR:
-          if (obj->value[0] >= obj->value[1])
+          if (obj->value[OVAL_ARMOR_CONDITION] >= obj->value[OVAL_ARMOR_AC])
 	    {
 	      cost = -2;
 	    }
           else
 	    {
-	      cost *= (obj->value[1] - obj->value[0]);
+	      cost *= (obj->value[OVAL_ARMOR_AC] - obj->value[OVAL_ARMOR_CONDITION]);
 	    }
           break;
 
         case ITEM_WEAPON:
-          if (INIT_WEAPON_CONDITION == obj->value[0])
+          if (INIT_WEAPON_CONDITION == obj->value[OVAL_WEAPON_CONDITION])
 	    {
 	      cost = -2;
 	    }
           else
 	    {
-	      cost *= (INIT_WEAPON_CONDITION - obj->value[0]);
+	      cost *= (INIT_WEAPON_CONDITION - obj->value[OVAL_WEAPON_CONDITION]);
 	    }
           break;
 
         case ITEM_DEVICE:
-          if (obj->value[2] >= obj->value[1])
+          if (obj->value[OVAL_DEVICE_CHARGES] >= obj->value[OVAL_DEVICE_MAX_CHARGES])
 	    {
 	      cost = -2;
 	    }
           else
 	    {
-	      cost *= (obj->value[1] - obj->value[2]);
+	      cost *= (obj->value[OVAL_DEVICE_MAX_CHARGES] - obj->value[OVAL_DEVICE_CHARGES]);
 	    }
         }
     }

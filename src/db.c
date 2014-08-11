@@ -2453,7 +2453,7 @@ OBJ_DATA *create_object( OBJ_INDEX_DATA *pObjIndex, int level )
       break;
 
     case ITEM_MONEY:
-      obj->value[OVAL_MONEY_0] = obj->cost;
+      obj->value[OVAL_MONEY_AMOUNT] = obj->cost;
       break;
     }
 
