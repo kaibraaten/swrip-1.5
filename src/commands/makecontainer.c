@@ -197,10 +197,10 @@ static void OnFinished( Character *ch )
   STRFREE( obj->description );
   strcat( buf, " was dropped here." );
   obj->description = STRALLOC( buf );
-  obj->value[0] = level;
-  obj->value[1] = 0;
-  obj->value[2] = 0;
-  obj->value[3] = 10;
+  obj->value[OVAL_CONTAINER_CAPACITY] = level;
+  obj->value[OVAL_CONTAINER_FLAGS] = 0;
+  obj->value[OVAL_CONTAINER_KEY] = INVALID_VNUM;
+  obj->value[OVAL_CONTAINER_CONDITION] = 10;
   obj->cost *= 2;
 
   obj = obj_to_char( obj, ch );

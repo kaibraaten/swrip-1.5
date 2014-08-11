@@ -278,13 +278,13 @@ static void OnFinished( Character *ch )
     }
   ++top_affect;
   obj->value[OVAL_WEAPON_CONDITION] = INIT_WEAPON_CONDITION;       /* condition  */
-  obj->value[OVAL_WEAPON_MIN_DMG] = (int) (level/10+15);      /* min dmg  */
-  obj->value[OVAL_WEAPON_MAX_DMG] = (int) (level/5+25);      /* max dmg  */
+  obj->value[OVAL_WEAPON_NUM_DAM_DIE] = (int) (level/10+15);      /* min dmg  */
+  obj->value[OVAL_WEAPON_SIZE_DAM_DIE] = (int) (level/5+25);      /* max dmg  */
   obj->value[OVAL_WEAPON_TYPE] = WEAPON_BLASTER;
   obj->value[OVAL_WEAPON_CHARGE] = ammo;
-  obj->value[OVAL_WEAPON_5] = 2000;
+  obj->value[OVAL_WEAPON_MAX_CHARGE] = 2000;
 
-  obj->cost = obj->value[OVAL_WEAPON_MAX_DMG]*50;
+  obj->cost = obj->value[OVAL_WEAPON_SIZE_DAM_DIE]*50;
 
   obj = obj_to_char( obj, ch );
 

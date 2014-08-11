@@ -83,7 +83,7 @@ void explode( OBJ_DATA *obj )
 
 void room_explode( OBJ_DATA *obj, Character *xch, ROOM_INDEX_DATA *room )
 {
-  int blast = (int) (obj->value[1] / 500) ;
+  int blast = (int) (obj->value[OVAL_EXPLOSIVE_MAX_DMG] / 500) ;
   room_explode_1( obj , xch, room , blast );
   room_explode_2( room , blast );
 }
@@ -105,7 +105,7 @@ void room_explode_1( OBJ_DATA *obj, Character *xch, ROOM_INDEX_DATA *room, int b
     {
       rnext = rch->next_in_room;
       act( AT_WHITE, "The shockwave from a massive explosion rips through your body!", room->first_person , obj, NULL, TO_ROOM );
-      dam = number_range ( obj->value[0] , obj->value[1] );
+      dam = number_range ( obj->value[OVAL_EXPLOSIVE_MIN_DMG] , obj->value[OVAL_EXPLOSIVE_MAX_DMG] );
       damage( rch, rch , dam, TYPE_UNDEFINED );
       if ( !char_died(rch) )
         {
@@ -150,7 +150,6 @@ void room_explode_1( OBJ_DATA *obj, Character *xch, ROOM_INDEX_DATA *room, int b
           }
       }
   }
-
 }
 
 void room_explode_2( ROOM_INDEX_DATA *room , int blast )
@@ -592,10 +591,12 @@ void char_from_room( Character *ch )
     --ch->in_room->area->nplayer;
 
   if ( ( obj = get_eq_char( ch, WEAR_LIGHT ) ) != NULL
-       &&   obj->item_type == ITEM_LIGHT
-       &&   obj->value[2] != 0
-       &&   ch->in_room->light > 0 )
-    --ch->in_room->light;
+       && obj->item_type == ITEM_LIGHT
+       && obj->value[OVAL_LIGHT_POWER] != 0
+       && ch->in_room->light > 0 )
+    {
+      --ch->in_room->light;
+    }
 
   UNLINK( ch, ch->in_room->first_person, ch->in_room->last_person,
           next_in_room, prev_in_room );
@@ -639,7 +640,7 @@ void char_to_room( Character *ch, ROOM_INDEX_DATA *pRoomIndex )
 
   if ( ( obj = get_eq_char( ch, WEAR_LIGHT ) ) != NULL
        &&   obj->item_type == ITEM_LIGHT
-       &&   obj->value[2] != 0 )
+       &&   obj->value[OVAL_LIGHT_POWER] != 0 )
     ++ch->in_room->light;
 
   if ( !is_npc(ch)
@@ -784,23 +785,23 @@ int apply_ac( const OBJ_DATA *obj, int iWear )
 
   switch ( iWear )
     {
-    case WEAR_BODY:     return 3 * obj->value[0];
-    case WEAR_HEAD:     return 2 * obj->value[0];
-    case WEAR_LEGS:     return 2 * obj->value[0];
-    case WEAR_FEET:     return     obj->value[0];
-    case WEAR_HANDS:    return     obj->value[0];
-    case WEAR_ARMS:     return     obj->value[0];
-    case WEAR_SHIELD:   return     obj->value[0];
-    case WEAR_FINGER_L: return     obj->value[0];
-    case WEAR_FINGER_R: return     obj->value[0];
-    case WEAR_NECK_1:   return     obj->value[0];
-    case WEAR_NECK_2:   return     obj->value[0];
-    case WEAR_ABOUT:    return 2 * obj->value[0];
-    case WEAR_WAIST:    return     obj->value[0];
-    case WEAR_WRIST_L:  return     obj->value[0];
-    case WEAR_WRIST_R:  return     obj->value[0];
-    case WEAR_HOLD:     return     obj->value[0];
-    case WEAR_EYES:     return     obj->value[0];
+    case WEAR_BODY:     return 3 * obj->value[OVAL_ARMOR_CONDITION];
+    case WEAR_HEAD:     return 2 * obj->value[OVAL_ARMOR_CONDITION];
+    case WEAR_LEGS:     return 2 * obj->value[OVAL_ARMOR_CONDITION];
+    case WEAR_FEET:     return     obj->value[OVAL_ARMOR_CONDITION];
+    case WEAR_HANDS:    return     obj->value[OVAL_ARMOR_CONDITION];
+    case WEAR_ARMS:     return     obj->value[OVAL_ARMOR_CONDITION];
+    case WEAR_SHIELD:   return     obj->value[OVAL_ARMOR_CONDITION];
+    case WEAR_FINGER_L: return     obj->value[OVAL_ARMOR_CONDITION];
+    case WEAR_FINGER_R: return     obj->value[OVAL_ARMOR_CONDITION];
+    case WEAR_NECK_1:   return     obj->value[OVAL_ARMOR_CONDITION];
+    case WEAR_NECK_2:   return     obj->value[OVAL_ARMOR_CONDITION];
+    case WEAR_ABOUT:    return 2 * obj->value[OVAL_ARMOR_CONDITION];
+    case WEAR_WAIST:    return     obj->value[OVAL_ARMOR_CONDITION];
+    case WEAR_WRIST_L:  return     obj->value[OVAL_ARMOR_CONDITION];
+    case WEAR_WRIST_R:  return     obj->value[OVAL_ARMOR_CONDITION];
+    case WEAR_HOLD:     return     obj->value[OVAL_ARMOR_CONDITION];
+    case WEAR_EYES:     return     obj->value[OVAL_ARMOR_CONDITION];
     }
 
   return 0;
@@ -1516,7 +1517,7 @@ OBJ_DATA *find_obj( Character *ch, const char *orig_argument, bool carryonly )
         }
 
       if ( !IS_OBJ_STAT(container, ITEM_COVERING )
-           &&    IS_SET(container->value[1], CONT_CLOSED) )
+           &&    IS_SET(container->value[OVAL_CONTAINER_FLAGS], CONT_CLOSED) )
         {
           act( AT_PLAIN, "The $d is closed.", ch, NULL, container->name, TO_CHAR );
           return NULL;
@@ -1816,16 +1817,11 @@ const char *magic_bit_name( int magic_flags )
 ch_ret spring_trap( Character *ch, OBJ_DATA *obj )
 {
   int dam;
-  int typ;
-  int lev;
   char *txt;
   char buf[MAX_STRING_LENGTH];
-  ch_ret retcode;
-
-  typ = obj->value[1];
-  lev = obj->value[2];
-
-  retcode = rNONE;
+  int typ = obj->value[OVAL_TRAP_TYPE];
+  int lev = obj->value[OVAL_TRAP_STRENGTH];
+  ch_ret retcode = rNONE;
 
   switch(typ)
     {
@@ -1859,14 +1855,17 @@ ch_ret spring_trap( Character *ch, OBJ_DATA *obj )
       txt = "surrounded by a mysterious aura";          break;
     }
 
-  dam = number_range( obj->value[2], obj->value[2] * 2);
+  dam = number_range( obj->value[OVAL_TRAP_STRENGTH], obj->value[OVAL_TRAP_STRENGTH] * 2);
   sprintf( buf, "You are %s!", txt );
   act( AT_HITME, buf, ch, NULL, NULL, TO_CHAR );
   sprintf( buf, "$n is %s.", txt );
   act( AT_ACTION, buf, ch, NULL, NULL, TO_ROOM );
-  --obj->value[0];
-  if ( obj->value[0] <= 0 )
+
+  --obj->value[OVAL_TRAP_CHARGE];
+
+  if ( obj->value[OVAL_TRAP_CHARGE] <= 0 )
     extract_obj( obj );
+
   switch(typ)
     {
     default:
@@ -1918,7 +1917,7 @@ ch_ret check_for_trap( Character *ch, const OBJ_DATA *obj, int flag )
 
   for ( check = obj->first_content; check; check = check->next_content )
     if ( check->item_type == ITEM_TRAP
-         &&   IS_SET(check->value[3], flag) )
+         && IS_SET(check->value[OVAL_TRAP_FLAGS], flag) )
       {
         retcode = spring_trap( ch, check );
 
@@ -1951,7 +1950,7 @@ ch_ret check_room_for_traps( Character *ch, int flag )
           return rNONE;
         }
       else if ( check->item_type == ITEM_TRAP
-                &&   IS_SET(check->value[3], flag) )
+                && IS_SET(check->value[OVAL_TRAP_FLAGS], flag) )
         {
           retcode = spring_trap( ch, check );
 
@@ -2072,22 +2071,28 @@ void clean_obj( OBJ_INDEX_DATA *obj )
   obj->value[1]         = 0;
   obj->value[2]         = 0;
   obj->value[3]         = 0;
+  obj->value[4]         = 0;
+  obj->value[5]         = 0;
+
   for ( paf = obj->first_affect; paf; paf = paf_next )
     {
       paf_next    = paf->next;
       DISPOSE( paf );
       top_affect--;
     }
+
   obj->first_affect     = NULL;
   obj->last_affect      = NULL;
+
   for ( ed = obj->first_extradesc; ed; ed = ed_next )
     {
-      ed_next           = ed->next;
+      ed_next = ed->next;
       STRFREE( ed->description );
       STRFREE( ed->keyword     );
       DISPOSE( ed );
       top_ed--;
     }
+
   obj->first_extradesc  = NULL;
   obj->last_extradesc   = NULL;
 }
@@ -2656,10 +2661,14 @@ bool empty_obj( OBJ_DATA *obj, OBJ_DATA *destobj, ROOM_INDEX_DATA *destroom )
       for ( otmp = obj->first_content; otmp; otmp = otmp_next )
         {
           otmp_next = otmp->next_content;
+
           if ( destobj->item_type == ITEM_CONTAINER
                &&   get_obj_weight( otmp ) + get_obj_weight( destobj )
-               > destobj->value[0] )
-            continue;
+               > destobj->value[OVAL_CONTAINER_CAPACITY] )
+	    {
+	      continue;
+	    }
+
           obj_from_obj( otmp );
           obj_to_obj( otmp, destobj );
           movedsome = true;

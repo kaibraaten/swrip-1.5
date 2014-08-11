@@ -146,12 +146,12 @@ static void SetObjectStatsHandler( void *userData, void *args )
   ++top_affect;
 
   lightsaber->value[OVAL_WEAPON_CONDITION] = INIT_WEAPON_CONDITION;
-  lightsaber->value[OVAL_WEAPON_MIN_DMG] = (int) (lightsaber->level / 10 + ud->GemType * 2);
-  lightsaber->value[OVAL_WEAPON_MAX_DMG] = (int) (lightsaber->level / 5 + ud->GemType * 6);
+  lightsaber->value[OVAL_WEAPON_NUM_DAM_DIE] = (int) (lightsaber->level / 10 + ud->GemType * 2);
+  lightsaber->value[OVAL_WEAPON_SIZE_DAM_DIE] = (int) (lightsaber->level / 5 + ud->GemType * 6);
   lightsaber->value[OVAL_WEAPON_TYPE] = WEAPON_LIGHTSABER;
   lightsaber->value[OVAL_WEAPON_CHARGE] = ud->Charge;
-  lightsaber->value[OVAL_WEAPON_5] = ud->Charge;
-  lightsaber->cost = lightsaber->value[OVAL_WEAPON_MAX_DMG] * 75;
+  lightsaber->value[OVAL_WEAPON_MAX_CHARGE] = ud->Charge;
+  lightsaber->cost = lightsaber->value[OVAL_WEAPON_SIZE_DAM_DIE] * 75;
 }
 
 static void FinishedCraftingHandler( void *userData, void *args )

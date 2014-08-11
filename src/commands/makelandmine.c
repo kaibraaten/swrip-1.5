@@ -210,9 +210,9 @@ static void OnFinished( Character *ch )
   STRFREE( obj->description );
   strcat( buf, " was carelessly misplaced here." );
   obj->description = STRALLOC( buf );
-  obj->value[OVAL_LANDMINE_MIN_DMG] = strength/2;
-  obj->value[OVAL_LANDMINE_MAX_DMG] = strength;
-  obj->cost = obj->value[OVAL_LANDMINE_MAX_DMG]*5;
+  obj->value[OVAL_EXPLOSIVE_MIN_DMG] = strength/2;
+  obj->value[OVAL_EXPLOSIVE_MAX_DMG] = strength;
+  obj->cost = obj->value[OVAL_EXPLOSIVE_MAX_DMG]*5;
 
   obj = obj_to_char( obj, ch );
 

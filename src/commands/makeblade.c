@@ -232,12 +232,12 @@ static void OnFinished( Character *ch )
   else
     obj->value[OVAL_WEAPON_TYPE] = WEAPON_FORCE_PIKE;
 
-  obj->value[OVAL_WEAPON_MIN_DMG] = (int) (level/20+8+obj->value[OVAL_WEAPON_TYPE]);
-  obj->value[OVAL_WEAPON_MAX_DMG] = (int) (level/10+18+obj->value[OVAL_WEAPON_TYPE]);
+  obj->value[OVAL_WEAPON_NUM_DAM_DIE] = (int) (level/20+8+obj->value[OVAL_WEAPON_TYPE]);
+  obj->value[OVAL_WEAPON_SIZE_DAM_DIE] = (int) (level/10+18+obj->value[OVAL_WEAPON_TYPE]);
 
   obj->value[OVAL_WEAPON_CHARGE] = charge;
-  obj->value[OVAL_WEAPON_5] = charge;
-  obj->cost = obj->value[OVAL_WEAPON_MAX_DMG]*10;
+  obj->value[OVAL_WEAPON_MAX_CHARGE] = charge;
+  obj->cost = obj->value[OVAL_WEAPON_SIZE_DAM_DIE]*10;
 
   obj = obj_to_char( obj, ch );
 

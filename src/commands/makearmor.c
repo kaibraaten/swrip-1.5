@@ -124,7 +124,7 @@ static void MaterialFoundHandler( void *userData, void *args )
 
   if( eventArgs->Object->item_type == ITEM_FABRIC )
     {
-      ud->ArmorValue = eventArgs->Object->value[1];
+      ud->ArmorValue = eventArgs->Object->value[OVAL_FABRIC_STRENGTH];
     }
 }
 
@@ -157,7 +157,7 @@ static void SetObjectStatsHandler( void *userData, void *args )
   sprintf( description, "%s was dropped here.", capitalize( itemName ) );
   armor->description = STRALLOC( description );
 
-  armor->value[0] = armor->value[1] = ud->ArmorValue;
+  armor->value[OVAL_ARMOR_CONDITION] = armor->value[OVAL_ARMOR_AC] = ud->ArmorValue;
   armor->cost *= 10;
 }
 

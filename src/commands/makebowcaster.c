@@ -267,12 +267,12 @@ static void OnFinished( Character *ch )
   LINK( paf2, obj->first_affect, obj->last_affect, next, prev );
   ++top_affect;
   obj->value[OVAL_WEAPON_CONDITION] = INIT_WEAPON_CONDITION;
-  obj->value[OVAL_WEAPON_MIN_DMG] = (int) (level/10+25);
-  obj->value[OVAL_WEAPON_MAX_DMG] = (int) (level/5+25);
+  obj->value[OVAL_WEAPON_NUM_DAM_DIE] = (int) (level/10+25);
+  obj->value[OVAL_WEAPON_SIZE_DAM_DIE] = (int) (level/5+25);
   obj->value[OVAL_WEAPON_TYPE] = WEAPON_BOWCASTER;
   obj->value[OVAL_WEAPON_CHARGE] = ammo;
-  obj->value[OVAL_WEAPON_5] = 250;
-  obj->cost = obj->value[OVAL_WEAPON_MAX_DMG]*50;
+  obj->value[OVAL_WEAPON_MAX_CHARGE] = 250;
+  obj->cost = obj->value[OVAL_WEAPON_SIZE_DAM_DIE]*50;
 
   obj = obj_to_char( obj, ch );
 

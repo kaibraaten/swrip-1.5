@@ -43,8 +43,14 @@ short get_obj_resistance( const OBJ_DATA *obj )
   resist += (obj->level / 10);
 
   /* and lasty... take armor or weapon's condition into consideration */
-  if (obj->item_type == ITEM_ARMOR || obj->item_type == ITEM_WEAPON)
-    resist += (obj->value[0]);
+  if (obj->item_type == ITEM_ARMOR )
+    {
+      resist += (obj->value[OVAL_ARMOR_CONDITION]);
+    }
+  else if (obj->item_type == ITEM_WEAPON)
+    {
+      resist += (obj->value[OVAL_WEAPON_CONDITION]);
+    }
 
   return URANGE(10, resist, 99);
 }
@@ -88,26 +94,28 @@ obj_ret damage_obj( OBJ_DATA *obj )
       objcode = rOBJ_SCRAPPED;
       break;
     case ITEM_CONTAINER:
-      if (--obj->value[3] <= 0)
+      if (--obj->value[OVAL_CONTAINER_CONDITION] <= 0)
         {
           make_scraps( obj );
           objcode = rOBJ_SCRAPPED;
         }
       break;
     case ITEM_ARMOR:
-      if ( ch && obj->value[0] >= 1 )
+      if ( ch && obj->value[OVAL_ARMOR_CONDITION] >= 1 )
         ch->armor += apply_ac( obj, obj->wear_loc );
-      if (--obj->value[0] <= 0)
+
+      if (--obj->value[OVAL_ARMOR_CONDITION] <= 0)
         {
           make_scraps( obj );
           objcode = rOBJ_SCRAPPED;
         }
       else
-        if ( ch && obj->value[0] >= 1 )
+        if ( ch && obj->value[OVAL_ARMOR_CONDITION] >= 1 )
           ch->armor -= apply_ac( obj, obj->wear_loc );
+
       break;
     case ITEM_WEAPON:
-      if (--obj->value[0] <= 0)
+      if (--obj->value[OVAL_WEAPON_CONDITION] <= 0)
         {
           make_scraps( obj );
           objcode = rOBJ_SCRAPPED;

@@ -2422,6 +2422,7 @@ OBJ_DATA *create_object( OBJ_INDEX_DATA *pObjIndex, int level )
     case ITEM_ARMOR:
       if (obj->value[0] == 0)
         obj->value[0] = obj->value[1];
+
       obj->timer = obj->value[3];
       break;
 
