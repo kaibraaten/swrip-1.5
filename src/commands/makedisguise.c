@@ -194,10 +194,10 @@ static void OnFinished( Character *ch )
   STRFREE( obj->description );
   obj->description = STRALLOC( "" );
 
-  obj->value[0] = INIT_WEAPON_CONDITION;  /* beginning condition  */
-  obj->value[1] = INIT_WEAPON_CONDITION;      /* condition */
-  obj->value[2] = race;      /* race */
-  obj->value[3] = sex;  /* sex */
+  obj->value[OVAL_DISGUISE_MAX_CONDITION] = INIT_WEAPON_CONDITION;
+  obj->value[OVAL_DISGUISE_CONDITION] = INIT_WEAPON_CONDITION;
+  obj->value[OVAL_DISGUISE_RACE] = race;
+  obj->value[OVAL_DISGUISE_SEX] = sex;
   obj->cost = 5000;
 
   obj = obj_to_char( obj, ch );

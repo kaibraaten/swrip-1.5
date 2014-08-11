@@ -1233,6 +1233,11 @@ typedef enum
 #define OVAL_LEVER_TRIGFLAGS 0
 #define OVAL_BUTTON_TRIGFLAGS 0
 
+#define OVAL_DISGUISE_MAX_CONDITION 0
+#define OVAL_DISGUISE_CONDITION 1
+#define OVAL_DISGUISE_RACE 2
+#define OVAL_DISGUISE_SEX 3
+
 /*
  * Extra flags.
  * Used in #OBJECTS.
