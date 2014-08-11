@@ -1280,17 +1280,18 @@ void load_objects( Area *tarea, FILE *fp )
         {
         case ITEM_PILL:
         case ITEM_POTION:
-          pObjIndex->value[1] = slot_lookup( pObjIndex->value[1] );
-          pObjIndex->value[2] = slot_lookup( pObjIndex->value[2] );
-          pObjIndex->value[3] = slot_lookup( pObjIndex->value[3] );
+          pObjIndex->value[OVAL_PILL_SPELL1] = slot_lookup( pObjIndex->value[OVAL_PILL_SPELL1] );
+          pObjIndex->value[OVAL_PILL_SPELL2] = slot_lookup( pObjIndex->value[OVAL_PILL_SPELL2] );
+          pObjIndex->value[OVAL_PILL_SPELL3] = slot_lookup( pObjIndex->value[OVAL_PILL_SPELL3] );
           break;
 
         case ITEM_DEVICE:
-          pObjIndex->value[3] = slot_lookup( pObjIndex->value[3] );
+          pObjIndex->value[OVAL_DEVICE_SPELL] = slot_lookup( pObjIndex->value[OVAL_DEVICE_SPELL] );
           break;
+
         case ITEM_SALVE:
-          pObjIndex->value[4] = slot_lookup( pObjIndex->value[4] );
-          pObjIndex->value[5] = slot_lookup( pObjIndex->value[5] );
+          pObjIndex->value[OVAL_SALVE_SPELL1] = slot_lookup( pObjIndex->value[OVAL_SALVE_SPELL1] );
+          pObjIndex->value[OVAL_SALVE_SPELL2] = slot_lookup( pObjIndex->value[OVAL_SALVE_SPELL2] );
           break;
         }
 
@@ -2333,16 +2334,21 @@ OBJ_DATA *create_object( OBJ_INDEX_DATA *pObjIndex, int level )
     case ITEM_DRINK_CON:
     case ITEM_KEY:
       break;
+
     case ITEM_FOOD:
       /*
        * optional food condition (rotting food)         -Thoric
        * value1 is the max condition of the food
        * value4 is the optional initial condition
        */
-      if ( obj->value[4] )
-        obj->timer = obj->value[4];
+      if ( obj->value[OVAL_FOOD_OPTIONAL_INITIAL_CONDITION] )
+	{
+	  obj->timer = obj->value[OVAL_FOOD_OPTIONAL_INITIAL_CONDITION];
+	}
       else
-        obj->timer = obj->value[1];
+	{
+	  obj->timer = obj->value[OVAL_FOOD_MAX_CONDITION];
+	}
       break;
 
     case ITEM_DROID_CORPSE:
@@ -2369,70 +2375,85 @@ OBJ_DATA *create_object( OBJ_INDEX_DATA *pObjIndex, int level )
       break;
 
     case ITEM_SALVE:
-      obj->value[3]     = number_fuzzy( obj->value[3] );
+      obj->value[OVAL_SALVE_DELAY] = number_fuzzy( obj->value[OVAL_SALVE_DELAY] );
       break;
 
     case ITEM_DEVICE:
-      obj->value[0]     = number_fuzzy( obj->value[0] );
-      obj->value[1]     = number_fuzzy( obj->value[1] );
-      obj->value[2]     = obj->value[1];
+      obj->value[OVAL_DEVICE_LEVEL] = number_fuzzy( obj->value[OVAL_DEVICE_LEVEL] );
+      obj->value[OVAL_DEVICE_MAX_CHARGES] = number_fuzzy( obj->value[OVAL_DEVICE_MAX_CHARGES] );
+      obj->value[OVAL_DEVICE_CHARGES] = obj->value[1];
       break;
 
     case ITEM_BATTERY:
-      if ( obj->value[0] <= 0 )
-        obj->value[0] = number_fuzzy(95);
+      if ( obj->value[OVAL_BATTERY_CARGE] <= 0 )
+        obj->value[OVAL_BATTERY_CARGE] = number_fuzzy(95);
+
       break;
 
 
     case ITEM_BOLT:
-      if ( obj->value[0] <= 0 )
-        obj->value[0] = number_fuzzy(95);
+      if ( obj->value[OVAL_BOLT_CHARGE] <= 0 )
+        obj->value[OVAL_BOLT_CHARGE] = number_fuzzy(95);
+
       break;
 
     case ITEM_AMMO:
-      if ( obj->value[0] <=0 )
-        obj->value[0] = number_fuzzy(495);
+      if ( obj->value[OVAL_AMMO_CHARGE] <=0 )
+        obj->value[OVAL_AMMO_CHARGE] = number_fuzzy(495);
+
       break;
 
     case ITEM_WEAPON:
-      if ( obj->value[1] && obj->value[2] )
-        obj->value[2] *= obj->value[1];
+      if ( obj->value[OVAL_WEAPON_NUM_DAM_DIE] && obj->value[OVAL_WEAPON_SIZE_DAM_DIE] )
+	{
+	  obj->value[OVAL_WEAPON_SIZE_DAM_DIE] *= obj->value[OVAL_WEAPON_NUM_DAM_DIE];
+	}
       else
         {
-          obj->value[1] = number_fuzzy( number_fuzzy( 1 + level/20 ) );
-          obj->value[2] = number_fuzzy( number_fuzzy( 10 + level/10 ) );
+          obj->value[OVAL_WEAPON_NUM_DAM_DIE] = number_fuzzy( number_fuzzy( 1 + level/20 ) );
+          obj->value[OVAL_WEAPON_SIZE_DAM_DIE] = number_fuzzy( number_fuzzy( 10 + level/10 ) );
         }
-      if ( obj->value[1] > obj->value[2] )
-        obj->value[1] = obj->value[2]/3;
-      if (obj->value[0] == 0)
-        obj->value[0] = INIT_WEAPON_CONDITION;
-      switch (obj->value[3])
+
+      if ( obj->value[OVAL_WEAPON_NUM_DAM_DIE] > obj->value[OVAL_WEAPON_SIZE_DAM_DIE] )
+	{
+	  obj->value[OVAL_WEAPON_NUM_DAM_DIE] = obj->value[OVAL_WEAPON_SIZE_DAM_DIE] / 3;
+	}
+
+      if (obj->value[OVAL_WEAPON_CONDITION] == 0)
+	{
+	  obj->value[OVAL_WEAPON_CONDITION] = INIT_WEAPON_CONDITION;
+	}
+
+      switch (obj->value[OVAL_WEAPON_TYPE])
         {
         case WEAPON_BLASTER:
         case WEAPON_LIGHTSABER:
         case WEAPON_VIBRO_BLADE:
         case WEAPON_FORCE_PIKE:
         case WEAPON_BOWCASTER:
-          if ( obj->value[5] <=0 )
-            obj->value[5] = number_fuzzy(1000);
+          if ( obj->value[OVAL_WEAPON_MAX_CHARGE] <=0 )
+	    {
+	      obj->value[OVAL_WEAPON_MAX_CHARGE] = number_fuzzy(1000);
+	    }
         }
-      obj->value[4] = obj->value[5];
+
+      obj->value[OVAL_WEAPON_CHARGE] = obj->value[OVAL_WEAPON_MAX_CHARGE];
       break;
 
     case ITEM_ARMOR:
-      if (obj->value[0] == 0)
-        obj->value[0] = obj->value[1];
+      if (obj->value[OVAL_ARMOR_CONDITION] == 0)
+        obj->value[OVAL_ARMOR_CONDITION] = obj->value[OVAL_ARMOR_AC];
 
-      obj->timer = obj->value[3];
+      obj->timer = obj->value[OVAL_ARMOR_3];
       break;
 
     case ITEM_POTION:
     case ITEM_PILL:
-      obj->value[0]     = number_fuzzy( number_fuzzy( obj->value[0] ) );
+      obj->value[OVAL_PILL_LEVEL] = number_fuzzy( number_fuzzy( obj->value[OVAL_PILL_LEVEL] ) );
       break;
 
     case ITEM_MONEY:
-      obj->value[0]     = obj->cost;
+      obj->value[OVAL_MONEY_0] = obj->cost;
       break;
     }
 
@@ -3871,6 +3892,8 @@ OBJ_INDEX_DATA *make_object( vnum_t vnum, vnum_t cvnum, char *name )
       pObjIndex->value[1]               = 0;
       pObjIndex->value[2]               = 0;
       pObjIndex->value[3]               = 0;
+      pObjIndex->value[4]               = 0;
+      pObjIndex->value[5]               = 0;
       pObjIndex->weight         = 1;
       pObjIndex->cost           = 0;
     }
@@ -3890,8 +3913,11 @@ OBJ_INDEX_DATA *make_object( vnum_t vnum, vnum_t cvnum, char *name )
       pObjIndex->value[1]               = cObjIndex->value[1];
       pObjIndex->value[2]               = cObjIndex->value[2];
       pObjIndex->value[3]               = cObjIndex->value[3];
+      pObjIndex->value[4]               = cObjIndex->value[4];
+      pObjIndex->value[5]               = cObjIndex->value[5];
       pObjIndex->weight         = cObjIndex->weight;
       pObjIndex->cost           = cObjIndex->cost;
+
       for ( ced = cObjIndex->first_extradesc; ced; ced = ced->next )
         {
           CREATE( ed, ExtraDescription, 1 );
@@ -3901,6 +3927,7 @@ OBJ_INDEX_DATA *make_object( vnum_t vnum, vnum_t cvnum, char *name )
                 next, prev );
           top_ed++;
         }
+
       for ( cpaf = cObjIndex->first_affect; cpaf; cpaf = cpaf->next )
         {
           CREATE( paf, Affect, 1 );

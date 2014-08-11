@@ -255,7 +255,7 @@ void obj_fall( OBJ_DATA *obj, bool through )
             {
             case ITEM_WEAPON:
             case ITEM_ARMOR:
-              if ( (obj->value[0] - dam) <= 0 )
+              if ( (obj->value[OVAL_ARMOR_CONDITION] - dam) <= 0 )
                 {
                   if (obj->in_room->first_person)
                     {
@@ -267,7 +267,7 @@ void obj_fall( OBJ_DATA *obj, bool through )
                   make_scraps(obj);
                 }
               else
-                obj->value[0] -= dam;
+                obj->value[OVAL_ARMOR_CONDITION] -= dam;
               break;
             default:
               if ( (dam*15) > get_obj_resistance(obj) )

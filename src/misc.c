@@ -58,7 +58,7 @@ void pullorpush( Character *ch, OBJ_DATA *obj, bool pull )
   Exit *pexit = NULL, *pexit_rev = NULL;
   DirectionType edir = DIR_INVALID;
   char *txt = NULL;
-  bool isup = IS_SET( obj->value[0], TRIG_UP );
+  bool isup = IS_SET( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_UP );
 
   switch( obj->item_type )
     {
@@ -91,9 +91,9 @@ void pullorpush( Character *ch, OBJ_DATA *obj, bool pull )
 
   if( pull && IS_SET(obj->pIndexData->mprog.progtypes,PULL_PROG) )
     {
-      if ( !IS_SET(obj->value[0], TRIG_AUTORETURN ) )
+      if ( !IS_SET(obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_AUTORETURN ) )
 	{
-	  REMOVE_BIT( obj->value[0], TRIG_UP );
+	  REMOVE_BIT( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_UP );
 	}
 
       oprog_pull_trigger( ch, obj );
@@ -102,9 +102,9 @@ void pullorpush( Character *ch, OBJ_DATA *obj, bool pull )
 
   if( !pull && IS_SET(obj->pIndexData->mprog.progtypes,PUSH_PROG) )
     {
-      if ( !IS_SET(obj->value[0], TRIG_AUTORETURN ) )
+      if ( !IS_SET(obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_AUTORETURN ) )
 	{
-	  SET_BIT( obj->value[0], TRIG_UP );
+	  SET_BIT( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_UP );
 	}
 
       oprog_push_trigger( ch, obj );
@@ -119,61 +119,63 @@ void pullorpush( Character *ch, OBJ_DATA *obj, bool pull )
       act( AT_ACTION, buf, ch, obj, NULL, TO_CHAR );
     }
 
-  if ( !IS_SET(obj->value[0], TRIG_AUTORETURN ) )
+  if ( !IS_SET(obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_AUTORETURN ) )
     {
       if ( pull )
 	{
-	  REMOVE_BIT( obj->value[0], TRIG_UP );
+	  REMOVE_BIT( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_UP );
 	}
       else
 	{
-	  SET_BIT( obj->value[0], TRIG_UP );
+	  SET_BIT( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_UP );
 	}
     }
 
-  if ( IS_SET( obj->value[0], TRIG_TELEPORT )
-       || IS_SET( obj->value[0], TRIG_TELEPORTALL )
-       || IS_SET( obj->value[0], TRIG_TELEPORTPLUS ) )
+  if ( IS_SET( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_TELEPORT )
+       || IS_SET( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_TELEPORTALL )
+       || IS_SET( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_TELEPORTPLUS ) )
     {
       int flags = 0;
 
-      if ( ( room = get_room_index( obj->value[1] ) ) == NULL )
+      if ( ( room = get_room_index( obj->value[OVAL_BUTTON_TELEPORT_DESTINATION] ) ) == NULL )
         {
-          bug( "PullOrPush: obj points to invalid room %d", obj->value[1] );
+          bug( "PullOrPush: obj points to invalid room %d",
+	       obj->value[OVAL_BUTTON_TELEPORT_DESTINATION] );
           return;
         }
 
-      if ( IS_SET( obj->value[0], TRIG_SHOWROOMDESC ) )
+      if ( IS_SET( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_SHOWROOMDESC ) )
 	{
 	  SET_BIT( flags, TELE_SHOWDESC );
 	}
 
-      if ( IS_SET( obj->value[0], TRIG_TELEPORTALL ) )
+      if ( IS_SET( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_TELEPORTALL ) )
 	{
 	  SET_BIT( flags, TELE_TRANSALL );
 	}
 
-      if ( IS_SET( obj->value[0], TRIG_TELEPORTPLUS ) )
+      if ( IS_SET( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_TELEPORTPLUS ) )
 	{
 	  SET_BIT( flags, TELE_TRANSALLPLUS );
 	}
 
-      teleport( ch, obj->value[1], flags );
+      teleport( ch, obj->value[OVAL_BUTTON_TELEPORT_DESTINATION], flags );
       return;
     }
 
-  if ( IS_SET( obj->value[0], TRIG_RAND4 )
-       || IS_SET( obj->value[0], TRIG_RAND6 ) )
+  if ( IS_SET( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_RAND4 )
+       || IS_SET( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_RAND6 ) )
     {
       int maxd = 0;
 
-      if ( ( room = get_room_index( obj->value[1] ) ) == NULL )
+      if ( ( room = get_room_index( obj->value[OVAL_BUTTON_TELEPORT_DESTINATION] ) ) == NULL )
         {
-          bug( "PullOrPush: obj points to invalid room %d", obj->value[1] );
+          bug( "PullOrPush: obj points to invalid room %d",
+	       obj->value[OVAL_BUTTON_TELEPORT_DESTINATION] );
           return;
         }
 
-      if ( IS_SET( obj->value[0], TRIG_RAND4 ) )
+      if ( IS_SET( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_RAND4 ) )
         maxd = 3;
       else
         maxd = 5;
@@ -187,9 +189,9 @@ void pullorpush( Character *ch, OBJ_DATA *obj, bool pull )
         }
     }
 
-  if ( IS_SET( obj->value[0], TRIG_DOOR ) )
+  if ( IS_SET( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_DOOR ) )
     {
-      room = get_room_index( obj->value[1] );
+      room = get_room_index( obj->value[OVAL_BUTTON_TELEPORT_DESTINATION] );
 
       if ( !room )
 	{
@@ -198,36 +200,37 @@ void pullorpush( Character *ch, OBJ_DATA *obj, bool pull )
 
       if ( !room )
         {
-          bug( "PullOrPush: obj points to invalid room %d", obj->value[1] );
+          bug( "PullOrPush: obj points to invalid room %d",
+	       obj->value[OVAL_BUTTON_TELEPORT_DESTINATION] );
           return;
         }
 
-      if ( IS_SET( obj->value[0], TRIG_D_NORTH ) )
+      if ( IS_SET( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_D_NORTH ) )
         {
           edir = DIR_NORTH;
           txt = "to the north";
         }
-      else if ( IS_SET( obj->value[0], TRIG_D_SOUTH ) )
+      else if ( IS_SET( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_D_SOUTH ) )
 	{
 	  edir = DIR_SOUTH;
 	  txt = "to the south";
 	}
-      else if ( IS_SET( obj->value[0], TRIG_D_EAST ) )
+      else if ( IS_SET( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_D_EAST ) )
 	{
 	  edir = DIR_EAST;
 	  txt = "to the east";
 	}
-      else if ( IS_SET( obj->value[0], TRIG_D_WEST ) )
+      else if ( IS_SET( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_D_WEST ) )
 	{
 	  edir = DIR_WEST;
 	  txt = "to the west";
 	}
-      else if ( IS_SET( obj->value[0], TRIG_D_UP ) )
+      else if ( IS_SET( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_D_UP ) )
 	{
 	  edir = DIR_UP;
 	  txt = "from above";
 	}
-      else if ( IS_SET( obj->value[0], TRIG_D_DOWN ) )
+      else if ( IS_SET( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_D_DOWN ) )
 	{
 	  edir = DIR_DOWN;
 	  txt = "from below";
@@ -242,17 +245,19 @@ void pullorpush( Character *ch, OBJ_DATA *obj, bool pull )
 
       if ( !pexit )
         {
-          if ( !IS_SET( obj->value[0], TRIG_PASSAGE ) )
+          if ( !IS_SET( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_PASSAGE ) )
             {
-              bug( "PullOrPush: obj points to non-exit %d", obj->value[1] );
+              bug( "PullOrPush: obj points to non-exit %d",
+		   obj->value[OVAL_BUTTON_TELEPORT_DESTINATION] );
               return;
             }
 
-          to_room = get_room_index( obj->value[2] );
+          to_room = get_room_index( obj->value[OVAL_BUTTON_2] );
 
           if ( !to_room )
             {
-              bug( "PullOrPush: dest points to invalid room %d", obj->value[2] );
+              bug( "PullOrPush: dest points to invalid room %d",
+		   obj->value[OVAL_BUTTON_2] );
               return;
             }
 
@@ -267,7 +272,7 @@ void pullorpush( Character *ch, OBJ_DATA *obj, bool pull )
           return;
         }
 
-      if ( IS_SET( obj->value[0], TRIG_UNLOCK )
+      if ( IS_SET( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_UNLOCK )
            && IS_SET( pexit->exit_info, EX_LOCKED) )
         {
           REMOVE_BIT(pexit->exit_info, EX_LOCKED);
@@ -281,7 +286,7 @@ void pullorpush( Character *ch, OBJ_DATA *obj, bool pull )
           return;
         }
 
-      if ( IS_SET( obj->value[0], TRIG_LOCK   )
+      if ( IS_SET( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_LOCK )
            && !IS_SET( pexit->exit_info, EX_LOCKED) )
         {
           SET_BIT(pexit->exit_info, EX_LOCKED);
@@ -295,7 +300,7 @@ void pullorpush( Character *ch, OBJ_DATA *obj, bool pull )
           return;
         }
 
-      if ( IS_SET( obj->value[0], TRIG_OPEN   )
+      if ( IS_SET( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_OPEN   )
            && IS_SET( pexit->exit_info, EX_CLOSED) )
         {
           REMOVE_BIT(pexit->exit_info, EX_CLOSED);
@@ -320,7 +325,7 @@ void pullorpush( Character *ch, OBJ_DATA *obj, bool pull )
           return;
         }
 
-      if ( IS_SET( obj->value[0], TRIG_CLOSE   )
+      if ( IS_SET( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_CLOSE   )
            && !IS_SET( pexit->exit_info, EX_CLOSED) )
         {
           SET_BIT(pexit->exit_info, EX_CLOSED);
@@ -424,8 +429,10 @@ void actiondesc( Character *ch, OBJ_DATA *obj, void *vo )
   switch( obj->item_type )
     {
     case ITEM_DRINK_CON:
-      act( AT_ACTION, charbuf, ch, obj, liq_table[obj->value[2]].liq_name, TO_CHAR );
-      act( AT_ACTION, roombuf, ch, obj, liq_table[obj->value[2]].liq_name, TO_ROOM );
+      act( AT_ACTION, charbuf, ch, obj,
+	   liq_table[obj->value[OVAL_DRINK_CON_LIQUID_TYPE]].liq_name, TO_CHAR );
+      act( AT_ACTION, roombuf, ch, obj,
+	   liq_table[obj->value[OVAL_DRINK_CON_LIQUID_TYPE]].liq_name, TO_ROOM );
       return;
 
     case ITEM_ARMOR:
