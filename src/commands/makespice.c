@@ -109,8 +109,9 @@ static void OnFinished( Character *ch )
       return;
     }
 
-  obj->value[1] = URANGE (10, obj->value[1], ( is_npc(ch) ? ch->top_level
-                                               : (int) (ch->pcdata->learned[gsn_spice_refining]) ) +10);
+  obj->value[OVAL_SPICE_GRADE] = URANGE (10, obj->value[OVAL_SPICE_GRADE], ( is_npc(ch) ? ch->top_level
+									     : (int) (ch->pcdata->learned[gsn_spice_refining]) ) +10);
+
   strcpy( buf, obj->name );
   STRFREE( obj->name );
   strcat( buf, " drug spice" );
@@ -130,7 +131,8 @@ static void OnFinished( Character *ch )
 
   if ( !obj->cost )
     obj->cost = 500;
-  obj->cost += obj->value[1]*10;
+
+  obj->cost += obj->value[OVAL_SPICE_GRADE] * 10;
   obj->cost *= 2;
 
   xpgain = UMIN( obj->cost*50 ,( exp_level(get_level(ch, ENGINEERING_ABILITY ) + 1) - exp_level(get_level( ch, ENGINEERING_ABILITY ) ) ) );

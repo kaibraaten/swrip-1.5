@@ -55,7 +55,8 @@ static void OnStart( Character *ch, char *argument )
     {
       if (obj->item_type == ITEM_TOOLKIT)
 	checktool = true;
-      if (obj->item_type == ITEM_DRINK_CON && obj->value[OVAL_DRINK_CON_CURRENT_AMOUNT] == 0 )
+      if (obj->item_type == ITEM_DRINK_CON
+	  && obj->value[OVAL_DRINK_CON_CURRENT_AMOUNT] == 0 )
 	checkdrink = true;
       if (obj->item_type == ITEM_BATTERY)
 	checkbatt = true;

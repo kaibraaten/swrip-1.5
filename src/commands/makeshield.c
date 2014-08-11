@@ -153,7 +153,7 @@ static void OnFinished( Character *ch )
 
       if (obj->item_type == ITEM_BATTERY && checkbatt == false)
         {
-          charge = UMIN(obj->value[1], 10);
+          charge = UMIN(obj->value[OVAL_BATTERY_CARGE], 10);
           separate_obj( obj );
           obj_from_char( obj );
           extract_obj( obj );
@@ -175,7 +175,7 @@ static void OnFinished( Character *ch )
         }
       if (obj->item_type == ITEM_CRYSTAL && checkgems == false)
         {
-          gemtype = obj->value[0];
+          gemtype = obj->value[OVAL_CRYSTAL_TYPE];
           separate_obj( obj );
           obj_from_char( obj );
           extract_obj( obj );
@@ -212,11 +212,11 @@ static void OnFinished( Character *ch )
   STRFREE( obj->description );
   strcat( buf, " was carelessly misplaced here." );
   obj->description = STRALLOC( buf );
-  obj->value[0] = (int) (level/10+gemtype*2);      /* condition */
-  obj->value[1] = (int) (level/10+gemtype*2);      /* armor */
+  obj->value[OVAL_ARMOR_CONDITION] = (int) (level / 10 + gemtype * 2);
+  obj->value[OVAL_ARMOR_AC] = (int) (level / 10 + gemtype * 2);
   obj->value[4] = charge;
   obj->value[5] = charge;
-  obj->cost = obj->value[2]*100;
+  obj->cost = obj->value[OVAL_ARMOR_AC] * 100;
 
   obj = obj_to_char( obj, ch );
 
