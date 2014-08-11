@@ -162,7 +162,7 @@ static void OnFinished( Character *ch )
 
       if (obj->item_type == ITEM_BATTERY && checkbatt == false )
         {
-          charge = UMAX( 5, obj->value[0] );
+          charge = UMAX( 5, obj->value[OVAL_BATTERY_CARGE] );
           separate_obj( obj );
           obj_from_char( obj );
           extract_obj( obj );
@@ -224,18 +224,20 @@ static void OnFinished( Character *ch )
       LINK( paf2, obj->first_affect, obj->last_affect, next, prev );
       ++top_affect;
     }
-  obj->value[0] = INIT_WEAPON_CONDITION;
+
+  obj->value[OVAL_WEAPON_CONDITION] = INIT_WEAPON_CONDITION;
+
   if( !checkstaff )
-    obj->value[3] = WEAPON_VIBRO_BLADE;
+    obj->value[OVAL_WEAPON_TYPE] = WEAPON_VIBRO_BLADE;
   else
-    obj->value[3] = WEAPON_FORCE_PIKE;
+    obj->value[OVAL_WEAPON_TYPE] = WEAPON_FORCE_PIKE;
 
-  obj->value[1] = (int) (level/20+8+obj->value[3]);      /* min dmg  */
-  obj->value[2] = (int) (level/10+18+obj->value[3]);      /* max dmg */
+  obj->value[OVAL_WEAPON_MIN_DMG] = (int) (level/20+8+obj->value[OVAL_WEAPON_TYPE]);
+  obj->value[OVAL_WEAPON_MAX_DMG] = (int) (level/10+18+obj->value[OVAL_WEAPON_TYPE]);
 
-  obj->value[4] = charge;
-  obj->value[5] = charge;
-  obj->cost = obj->value[2]*10;
+  obj->value[OVAL_WEAPON_CHARGE] = charge;
+  obj->value[OVAL_WEAPON_5] = charge;
+  obj->cost = obj->value[OVAL_WEAPON_MAX_DMG]*10;
 
   obj = obj_to_char( obj, ch );
 

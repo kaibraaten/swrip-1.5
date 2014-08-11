@@ -171,7 +171,7 @@ static void OnFinished( Character *ch )
         }
       if (obj->item_type == ITEM_AMMO && checkammo == false)
         {
-          ammo = obj->value[0];
+          ammo = obj->value[OVAL_AMMO_CHARGE];
           checkammo = true;
           separate_obj( obj );
           obj_from_char( obj );
@@ -277,13 +277,14 @@ static void OnFinished( Character *ch )
       LINK( paf2, obj->first_affect, obj->last_affect, next, prev );
     }
   ++top_affect;
-  obj->value[0] = INIT_WEAPON_CONDITION;       /* condition  */
-  obj->value[1] = (int) (level/10+15);      /* min dmg  */
-  obj->value[2] = (int) (level/5+25);      /* max dmg  */
-  obj->value[3] = WEAPON_BLASTER;
-  obj->value[4] = ammo;
-  obj->value[5] = 2000;
-  obj->cost = obj->value[2]*50;
+  obj->value[OVAL_WEAPON_CONDITION] = INIT_WEAPON_CONDITION;       /* condition  */
+  obj->value[OVAL_WEAPON_MIN_DMG] = (int) (level/10+15);      /* min dmg  */
+  obj->value[OVAL_WEAPON_MAX_DMG] = (int) (level/5+25);      /* max dmg  */
+  obj->value[OVAL_WEAPON_TYPE] = WEAPON_BLASTER;
+  obj->value[OVAL_WEAPON_CHARGE] = ammo;
+  obj->value[OVAL_WEAPON_5] = 2000;
+
+  obj->cost = obj->value[OVAL_WEAPON_MAX_DMG]*50;
 
   obj = obj_to_char( obj, ch );
 

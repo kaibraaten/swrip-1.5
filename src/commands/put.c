@@ -72,7 +72,7 @@ void do_put( Character *ch, char *argument )
           return;
         }
 
-      if ( IS_SET(container->value[1], CONT_CLOSED) )
+      if ( IS_SET(container->value[OVAL_CONTAINER_FLAGS], CONT_CLOSED) )
         {
           act( AT_PLAIN, "The $d is closed.", ch, NULL, container->name, TO_CHAR );
           return;
@@ -111,7 +111,7 @@ void do_put( Character *ch, char *argument )
 
       if ( (get_obj_weight( obj ) / obj->count)
            + (get_obj_weight( container ) / container->count)
-           >  container->value[0] )
+           >  container->value[OVAL_CONTAINER_CAPACITY] )
         {
           send_to_char( "It won't fit.\r\n", ch );
           return;
@@ -177,7 +177,7 @@ void do_put( Character *ch, char *argument )
                &&   obj != container
                &&   can_drop_obj( ch, obj )
 	       &&   get_obj_weight( obj ) + get_obj_weight( container )
-               <= container->value[0] )
+               <= container->value[OVAL_CONTAINER_CAPACITY] )
             {
               if ( number && (cnt + obj->count) > number )
                 split_obj( obj, number - cnt );

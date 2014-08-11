@@ -44,7 +44,7 @@ void do_equipment( Character *ch, char *argument )
                     break;
 
                   case ITEM_WEAPON:
-                    dam = INIT_WEAPON_CONDITION - obj->value[0];
+                    dam = INIT_WEAPON_CONDITION - obj->value[OVAL_WEAPON_CONDITION];
                     if (dam < 2) strcat( buf, " (superb) ");
                     else if (dam < 4) strcat( buf, " (good) ");
                     else if (dam < 7) strcat( buf, " (worn) ");
@@ -52,7 +52,8 @@ void do_equipment( Character *ch, char *argument )
                     else if (dam < 12) strcat( buf, " (awful) ");
                     else if (dam ==  12) strcat( buf, " (broken) ");
                     send_to_char( buf, ch );
-                    if (obj->value[3] == WEAPON_BLASTER )
+
+                    if (obj->value[OVAL_WEAPON_TYPE] == WEAPON_BLASTER )
                       {
                         if (obj->blaster_setting == BLASTER_FULL)
                           ch_printf( ch, "FULL");
@@ -66,14 +67,14 @@ void do_equipment( Character *ch, char *argument )
                           ch_printf( ch, "LOW");
                         else if (obj->blaster_setting == BLASTER_STUN)
                           ch_printf( ch, "STUN");
-                        ch_printf( ch, " %d", obj->value[4] );
+                        ch_printf( ch, " %d", obj->value[OVAL_WEAPON_CHARGE] );
                       }
-                    else if (     ( obj->value[3] == WEAPON_LIGHTSABER ||
-                                    obj->value[3] == WEAPON_VIBRO_BLADE
-                                    || obj->value[3] == WEAPON_FORCE_PIKE
-                                    || obj->value[3] == WEAPON_BOWCASTER ) )
+                    else if( ( obj->value[OVAL_WEAPON_TYPE] == WEAPON_LIGHTSABER
+			       || obj->value[OVAL_WEAPON_TYPE] == WEAPON_VIBRO_BLADE
+			       || obj->value[OVAL_WEAPON_TYPE] == WEAPON_FORCE_PIKE
+			       || obj->value[OVAL_WEAPON_TYPE] == WEAPON_BOWCASTER ) )
                       {
-                        ch_printf( ch, "%d", obj->value[4] );
+                        ch_printf( ch, "%d", obj->value[OVAL_WEAPON_CHARGE] );
                       }
                     break;
                   }

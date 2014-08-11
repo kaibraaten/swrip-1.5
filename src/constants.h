@@ -1159,6 +1159,27 @@ typedef enum
 
 
 #define MAX_ITEM_TYPE  ITEM_HAIR
+
+#define OVAL_WEAPON_CONDITION 0
+#define OVAL_WEAPON_MIN_DMG 1
+#define OVAL_WEAPON_MAX_DMG 2
+#define OVAL_WEAPON_TYPE 3
+#define OVAL_WEAPON_CHARGE 4
+#define OVAL_WEAPON_5 5
+
+#define OVAL_BATTERY_CARGE 0
+
+#define OVAL_AMMO_CHARGE 0
+
+#define OVAL_BOLT_CHARGE 0
+
+#define OVAL_CRYSTAL_TYPE 0
+
+#define OVAL_CONTAINER_CAPACITY 0
+#define OVAL_CONTAINER_FLAGS 1
+
+#define OVAL_DRINK_CONT_CAPACITY 0
+
 /*
  * Extra flags.
  * Used in #OBJECTS.

@@ -73,7 +73,7 @@ static void MaterialFoundHandler( void *userData, void *args )
 
   if( eventArgs->Object->item_type == ITEM_BATTERY )
     {
-      ud->Charge = umax( eventArgs->Object->value[0], 10 );
+      ud->Charge = umax( eventArgs->Object->value[OVAL_BATTERY_CARGE], 10 );
     }
 
   if( eventArgs->Object->item_type == ITEM_CRYSTAL
@@ -82,9 +82,9 @@ static void MaterialFoundHandler( void *userData, void *args )
       ++ud->GemCount;
       eventArgs->KeepFinding = ud->GemCount < MAX_NUMBER_OF_CRYSTALS;
 
-      if( ud->GemType < eventArgs->Object->value[0] )
+      if( ud->GemType < eventArgs->Object->value[OVAL_CRYSTAL_TYPE] )
 	{
-	  ud->GemType = eventArgs->Object->value[0];
+	  ud->GemType = eventArgs->Object->value[OVAL_CRYSTAL_TYPE];
 	}
     }
 }
@@ -145,13 +145,13 @@ static void SetObjectStatsHandler( void *userData, void *args )
   LINK( paf2, lightsaber->first_affect, lightsaber->last_affect, next, prev );
   ++top_affect;
 
-  lightsaber->value[0] = INIT_WEAPON_CONDITION;                            /* condition  */
-  lightsaber->value[1] = (int) (lightsaber->level / 10 + ud->GemType * 2); /* min dmg  */
-  lightsaber->value[2] = (int) (lightsaber->level / 5 + ud->GemType * 6);  /* max dmg */
-  lightsaber->value[3] = WEAPON_LIGHTSABER;
-  lightsaber->value[4] = ud->Charge;
-  lightsaber->value[5] = ud->Charge;
-  lightsaber->cost = lightsaber->value[2] * 75;
+  lightsaber->value[OVAL_WEAPON_CONDITION] = INIT_WEAPON_CONDITION;
+  lightsaber->value[OVAL_WEAPON_MIN_DMG] = (int) (lightsaber->level / 10 + ud->GemType * 2);
+  lightsaber->value[OVAL_WEAPON_MAX_DMG] = (int) (lightsaber->level / 5 + ud->GemType * 6);
+  lightsaber->value[OVAL_WEAPON_TYPE] = WEAPON_LIGHTSABER;
+  lightsaber->value[OVAL_WEAPON_CHARGE] = ud->Charge;
+  lightsaber->value[OVAL_WEAPON_5] = ud->Charge;
+  lightsaber->cost = lightsaber->value[OVAL_WEAPON_MAX_DMG] * 75;
 }
 
 static void FinishedCraftingHandler( void *userData, void *args )
