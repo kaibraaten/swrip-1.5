@@ -1,306 +1,167 @@
 #include <string.h>
 #include "mud.h"
 #include "character.h"
+#include "craft.h"
 
-static void OnStart( Character *ch, char *argument );
-static void OnFinished( Character *ch );
-static void OnAbort( Character *ch );
+static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventArgs *args );
+static void MaterialFoundHandler( void *userData, MaterialFoundEventArgs *args );
+static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args );
+static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *args );
+static void AbortHandler( void *userData, AbortCraftingEventArgs *args );
+
+struct UserData
+{
+  int Ammo;
+  bool Scope;
+  int Lens;
+  int Power;
+};
 
 void do_makeblaster( Character *ch, char *argument )
 {
-  switch( ch->substate )
+  struct UserData *data = NULL;
+  static const struct CraftingMaterial materials[] =
     {
-    default:
-      OnStart( ch, argument );
-      break;
+      { ITEM_TOOLKIT,         CRAFTFLAG_NONE },
+      { ITEM_OVEN,            CRAFTFLAG_NONE },
+      { ITEM_DURAPLAST,       CRAFTFLAG_EXTRACT },
+      { ITEM_BATTERY,         CRAFTFLAG_EXTRACT },
+      { ITEM_SUPERCONDUCTOR,  CRAFTFLAG_EXTRACT },
+      { ITEM_CIRCUIT,         CRAFTFLAG_EXTRACT },
+      { ITEM_AMMO,            CRAFTFLAG_EXTRACT | CRAFTFLAG_OPTIONAL },
+      { ITEM_SCOPE,           CRAFTFLAG_EXTRACT | CRAFTFLAG_OPTIONAL },
+      { ITEM_LENS,            CRAFTFLAG_EXTRACT | CRAFTFLAG_OPTIONAL },
+      { ITEM_NONE,            CRAFTFLAG_NONE },
+    };
+  CraftRecipe *recipe = AllocateCraftRecipe( gsn_makeblaster, materials,
+                                             25, OBJ_VNUM_CRAFTING_BLASTER,
+					     CRAFTFLAG_NEED_WORKSHOP );
+  CraftingSession *session = AllocateCraftingSession( recipe, ch, argument );
 
-    case SUB_PAUSE:
-      ch->substate = SUB_NONE;
-      OnFinished( ch );
-      break;
+  CREATE( data, struct UserData, 1 );
 
-    case SUB_TIMER_DO_ABORT:
-      ch->substate = SUB_NONE;
-      OnAbort( ch );
-      break;
+  AddInterpretArgumentsCraftingHandler( session, data, InterpretArgumentsHandler );
+  AddMaterialFoundCraftingHandler( session, data, MaterialFoundHandler );
+  AddSetObjectStatsCraftingHandler( session, data, SetObjectStatsHandler );
+  AddFinishedCraftingHandler( session, data, FinishedCraftingHandler );
+  AddAbortCraftingHandler( session, data, AbortHandler );
+
+  StartCrafting( session );
+}
+
+static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventArgs *args )
+{
+  Character *ch = GetEngineer( args->CraftingSession );
+
+  if ( args->CommandArguments[0] == '\0' )
+    {
+      ch_printf( ch, "&RUsage: Makeblaster <name>\r\n&w" );
+      args->AbortSession = true;
+      return;
+    }
+
+  AddCraftingArgument( args->CraftingSession, args->CommandArguments );
+}
+
+static void MaterialFoundHandler( void *userData, MaterialFoundEventArgs *args )
+{
+  struct UserData *ud = (struct UserData*) userData;
+
+  if( args->Object->item_type == ITEM_AMMO )
+    {
+      ud->Ammo = args->Object->value[OVAL_AMMO_CHARGE];
+    }
+
+  if( args->Object->item_type == ITEM_SCOPE )
+    {
+      ud->Scope = true;
+    }
+
+  if( args->Object->item_type == ITEM_SUPERCONDUCTOR && ud->Power < 2 )
+    {
+      ++ud->Power;
+      args->KeepFinding = ud->Power < 2;
     }
 }
 
-void OnStart( Character *ch, char *argument )
+static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args )
 {
-  char arg[MAX_INPUT_LENGTH];
-  int the_chance = 0;
-  bool checktool = false;
-  bool checkdura = false;
-  bool checkbatt = false;
-  bool checkoven = false;
-  bool checkcond = false;
-  bool checkcirc = false;
-  OBJ_DATA *obj = NULL;
-
-  strcpy( arg , argument );
-
-  if ( arg[0] == '\0' )
-    {
-      send_to_char( "&RUsage: Makeblaster <name>\r\n&w", ch);
-      return;
-    }
-
-  if ( !IS_SET( ch->in_room->room_flags, ROOM_FACTORY ) )
-    {
-      send_to_char( "&RYou need to be in a factory or workshop to do that.\r\n", ch);
-      return;
-    }
-
-  for ( obj = ch->last_carrying; obj; obj = obj->prev_content )
-    {
-      if (obj->item_type == ITEM_TOOLKIT)
-	checktool = true;
-      if (obj->item_type == ITEM_DURAPLAST)
-	checkdura = true;
-      if (obj->item_type == ITEM_BATTERY)
-	checkbatt = true;
-      if (obj->item_type == ITEM_OVEN)
-	checkoven = true;
-      if (obj->item_type == ITEM_CIRCUIT)
-	checkcirc = true;
-      if (obj->item_type == ITEM_SUPERCONDUCTOR)
-	checkcond = true;
-    }
-
-  if ( !checktool )
-    {
-      send_to_char( "&RYou need toolkit to make a blaster.\r\n", ch);
-      return;
-    }
-
-  if ( !checkdura )
-    {
-      send_to_char( "&RYou need something to make it out of.\r\n", ch);
-      return;
-    }
-
-  if ( !checkbatt )
-    {
-      send_to_char( "&RYou need a power source for your blaster.\r\n", ch);
-      return;
-    }
-
-  if ( !checkoven )
-    {
-      send_to_char( "&RYou need a small furnace to heat the plastics.\r\n", ch);
-      return;
-    }
-
-  if ( !checkcirc )
-    {
-      send_to_char( "&RYou need a small circuit board to control the firing mechanism.\r\n", ch);
-      return;
-    }
-
-  if ( !checkcond )
-    {
-      send_to_char( "&RYou still need a small superconductor.\r\n", ch);
-      return;
-    }
-
-  the_chance = is_npc(ch) ? ch->top_level
-    : (int) (ch->pcdata->learned[gsn_makeblaster]);
-
-  if ( number_percent( ) < the_chance )
-    {
-      send_to_char( "&GYou begin the long process of making a blaster.\r\n", ch);
-      act( AT_PLAIN, "$n takes $s tools and a small oven and begins to work on something.", ch,
-	   NULL, NULL , TO_ROOM );
-      add_timer ( ch , TIMER_DO_FUN , 25 , do_makeblaster , SUB_PAUSE );
-      ch->dest_buf   = str_dup(arg);
-      return;
-    }
-  send_to_char("&RYou can't figure out how to fit the parts together.\r\n",ch);
-  learn_from_failure( ch, gsn_makeblaster );
-}
-
-static void OnFinished( Character *ch )
-{
-  long xpgain = 0;
-  char arg[MAX_INPUT_LENGTH];
+  struct UserData *ud = (struct UserData*) userData;
+  const char *itemName = GetCraftingArgument( args->CraftingSession, 0 );
   char buf[MAX_STRING_LENGTH];
-  int level = 0, the_chance = 0;
-  bool checktool = false;
-  bool checkdura = false;
-  bool checkbatt = false;
-  bool checkoven = false;
-  bool checkcond = false;
-  bool checkcirc = false;
-  bool checkammo = false;
-  bool checkscope = false;
-  OBJ_DATA *obj = NULL;
-  OBJ_INDEX_DATA *pObjIndex = NULL;
-  vnum_t vnum = INVALID_VNUM;
-  int power = 0, scope = 0, ammo = 0;
-  Affect *paf = NULL;
-  Affect *paf2 = NULL;
+  Affect *hitroll = NULL;
+  Affect *damroll = NULL;
+  OBJ_DATA *blaster = args->Object;
 
-  if ( !ch->dest_buf )
-    return;
-
-  strcpy(arg, (const char*)ch->dest_buf);
-  DISPOSE( ch->dest_buf);
-
-  level = is_npc(ch) ? ch->top_level : (int) (ch->pcdata->learned[gsn_makeblaster]);
-  vnum = OBJ_VNUM_CRAFTING_BLASTER;
-
-  if ( ( pObjIndex = get_obj_index( vnum ) ) == NULL )
+  if( ud->Scope )
     {
-      send_to_char( "&RThe item you are trying to create is missing from the database.\r\nPlease inform the administration of this error.\r\n", ch );
-      return;
+      ud->Power = 0;
     }
 
-  for ( obj = ch->last_carrying; obj; obj = obj->prev_content )
-    {
-      if (obj->item_type == ITEM_TOOLKIT)
-        checktool = true;
-      if (obj->item_type == ITEM_OVEN)
-        checkoven = true;
-      if (obj->item_type == ITEM_DURAPLAST && checkdura == false)
-        {
-	  checkdura = true;
-          separate_obj( obj );
-          obj_from_char( obj );
-          extract_obj( obj );
-        }
-      if (obj->item_type == ITEM_AMMO && checkammo == false)
-        {
-          ammo = obj->value[OVAL_AMMO_CHARGE];
-          checkammo = true;
-          separate_obj( obj );
-          obj_from_char( obj );
-          extract_obj( obj );
-        }
-      if (obj->item_type == ITEM_BATTERY && checkbatt == false)
-        {
-          separate_obj( obj );
-          obj_from_char( obj );
-          extract_obj( obj );
-          checkbatt = true;
-        }
-      if (obj->item_type == ITEM_LENS && scope == 0)
-        {
-          separate_obj( obj );
-          obj_from_char( obj );
-          extract_obj( obj );
-          scope++;
-        }
-      if (obj->item_type == ITEM_SUPERCONDUCTOR && power<2)
-        {
-          power++;
-          separate_obj( obj );
-          obj_from_char( obj );
-          extract_obj( obj );
-          checkcond = true;
-        }
-      if (obj->item_type == ITEM_CIRCUIT && checkcirc == false)
-        {
-          separate_obj( obj );
-          obj_from_char( obj );
-          extract_obj( obj );
-          checkcirc = true;
-        }
-      if (obj->item_type == ITEM_SCOPE && checkscope == false)
-        {
-          separate_obj( obj );
-	  obj_from_char( obj );
-          extract_obj( obj );
-          checkscope = true;
-        }
-    }
+  SET_BIT( blaster->wear_flags, ITEM_WIELD );
+  SET_BIT( blaster->wear_flags, ITEM_TAKE );
+  blaster->weight = 2 + blaster->level / 10;
 
-  the_chance = is_npc(ch) ? ch->top_level
-    : (int) (ch->pcdata->learned[gsn_makeblaster]) ;
+  STRFREE( blaster->name );
+  strcpy( buf, itemName );
+  strcat( buf, " blaster");
+  blaster->name = STRALLOC( buf );
 
-  if ( number_percent( ) > the_chance*2  || ( !checktool ) || ( !checkdura ) || ( !checkbatt ) || ( !checkoven )  || ( !checkcond ) || ( !checkcirc) )
-    {
-      send_to_char( "&RYou hold up your new blaster and aim at a leftover piece of plastic.\r\n", ch);
-      send_to_char( "&RYou slowly squeeze the trigger hoping for the best...\r\n", ch);
-      send_to_char( "&RYour blaster backfires destroying your weapon and burning your hand.\r\n", ch);
-      learn_from_failure( ch, gsn_makeblaster );
-      return;
-    }
+  strcpy( buf, itemName );
+  STRFREE( blaster->short_descr );
+  blaster->short_descr = STRALLOC( buf );
 
-  if (checkscope)
-    power = 0;
-
-  obj = create_object( pObjIndex, level );
-
-  obj->item_type = ITEM_WEAPON;
-  SET_BIT( obj->wear_flags, ITEM_WIELD );
-  SET_BIT( obj->wear_flags, ITEM_TAKE );
-  obj->level = level;
-  obj->weight = 2+level/10;
-  STRFREE( obj->name );
-  strcpy( buf , arg );
-  strcat( buf , " blaster");
-  obj->name = STRALLOC( buf );
-  strcpy( buf, arg );
-  STRFREE( obj->short_descr );
-  obj->short_descr = STRALLOC( buf );
-  STRFREE( obj->description );
+  STRFREE( blaster->description );
   strcat( buf, " was carelessly misplaced here." );
-  obj->description = STRALLOC( buf );
-  CREATE( paf, Affect, 1 );
-  paf->type               = -1;
-  paf->duration           = -1;
-  paf->location           = get_affecttype( "hitroll" );
-  paf->modifier           = URANGE( 0, 1+scope, level/30 );
-  paf->bitvector          = 0;
-  paf->next               = NULL;
-  LINK( paf, obj->first_affect, obj->last_affect, next, prev );
+  blaster->description = STRALLOC( capitalize( buf ) );
+
+  CREATE( hitroll, Affect, 1 );
+  hitroll->type       = -1;
+  hitroll->duration   = -1;
+  hitroll->location   = get_affecttype( "hitroll" );
+  hitroll->modifier   = urange( 0, 1 + ud->Scope, blaster->level / 30 );
+  LINK( hitroll, blaster->first_affect, blaster->last_affect, next, prev );
   ++top_affect;
-  CREATE( paf2, Affect, 1 );
-  paf2->type               = -1;
-  paf2->duration           = -1;
-  paf2->location           = get_affecttype( "damroll" );
-  paf2->modifier           = URANGE( 0, power, level/30);
-  paf2->bitvector          = 0;
-  paf2->next               = NULL;
-  LINK( paf2, obj->first_affect, obj->last_affect, next, prev );
+
+  CREATE( damroll, Affect, 1 );
+  damroll->type      = -1;
+  damroll->duration  = -1;
+  damroll->location  = get_affecttype( "damroll" );
+  damroll->modifier  = urange( 0, ud->Power, blaster->level / 30);
+  LINK( damroll, blaster->first_affect, blaster->last_affect, next, prev );
   ++top_affect;
-  if ( checkscope == true )
+
+  if ( ud->Scope == true )
     {
-      CREATE( paf2, Affect, 1 );
-      paf2->type               = -1;
-      paf2->duration           = -1;
-      paf2->location           = get_affecttype( "snipe" );
-      paf2->modifier           = URANGE( 0, 30 , level/3);
-      paf2->bitvector          = 0;
-      paf2->next               = NULL;
-      LINK( paf2, obj->first_affect, obj->last_affect, next, prev );
+      Affect *snipe = NULL;
+
+      CREATE( snipe, Affect, 1 );
+      snipe->type      = -1;
+      snipe->duration  = -1;
+      snipe->location  = get_affecttype( "snipe" );
+      snipe->modifier  = urange( 0, 30, blaster->level / 3);
+      LINK( snipe, blaster->first_affect, blaster->last_affect, next, prev );
     }
+
   ++top_affect;
-  obj->value[OVAL_WEAPON_CONDITION] = INIT_WEAPON_CONDITION;       /* condition  */
-  obj->value[OVAL_WEAPON_NUM_DAM_DIE] = (int) (level/10+15);      /* min dmg  */
-  obj->value[OVAL_WEAPON_SIZE_DAM_DIE] = (int) (level/5+25);      /* max dmg  */
-  obj->value[OVAL_WEAPON_TYPE] = WEAPON_BLASTER;
-  obj->value[OVAL_WEAPON_CHARGE] = ammo;
-  obj->value[OVAL_WEAPON_MAX_CHARGE] = 2000;
+  blaster->value[OVAL_WEAPON_CONDITION] = INIT_WEAPON_CONDITION;
+  blaster->value[OVAL_WEAPON_NUM_DAM_DIE] = (int) (blaster->level / 10 + 15);
+  blaster->value[OVAL_WEAPON_SIZE_DAM_DIE] = (int) (blaster->level / 5 + 25);
+  blaster->value[OVAL_WEAPON_TYPE] = WEAPON_BLASTER;
+  blaster->value[OVAL_WEAPON_CHARGE] = ud->Ammo;
+  blaster->value[OVAL_WEAPON_MAX_CHARGE] = 2000;
 
-  obj->cost = obj->value[OVAL_WEAPON_SIZE_DAM_DIE]*50;
-
-  obj = obj_to_char( obj, ch );
-
-  send_to_char( "&GYou finish your work and hold up your newly created blaster.&w\r\n", ch);
-  act( AT_PLAIN, "$n finishes making $s new blaster.", ch,
-       NULL, NULL, TO_ROOM );
-
-  xpgain = UMIN( obj->cost*50 ,( exp_level(get_level(ch, ENGINEERING_ABILITY ) + 1) - exp_level(get_level( ch, ENGINEERING_ABILITY ) ) ) );
-  gain_exp(ch, ENGINEERING_ABILITY, xpgain );
-  ch_printf( ch , "You gain %d engineering experience.", xpgain );
-
-  learn_from_success( ch, gsn_makeblaster );
+  blaster->cost = blaster->value[OVAL_WEAPON_SIZE_DAM_DIE] * 50;
 }
 
-static void OnAbort( Character *ch )
+static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *args )
 {
-  DISPOSE( ch->dest_buf );
-  send_to_char("&RYou are interupted and fail to finish your work.\r\n", ch);
+  struct UserData *ud = (struct UserData*) userData;
+  DISPOSE( ud );
+}
+
+static void AbortHandler( void *userData, AbortCraftingEventArgs *args )
+{
+  struct UserData *ud = (struct UserData*) userData;
+  DISPOSE( ud );
 }

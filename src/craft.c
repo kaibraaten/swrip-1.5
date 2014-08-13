@@ -30,6 +30,7 @@ struct CraftRecipe
   const CraftingMaterial *Materials;
   int Duration;
   vnum_t Prototype;
+  long Flags;
 };
 
 struct FoundMaterial
@@ -70,6 +71,7 @@ static bool CheckSkill( const CraftingSession *session );
 static const char *GetItemTypeName( int itemType, int extraInfo );
 static struct FoundMaterial *GetUnfoundMaterial( const CraftingSession *session, const OBJ_DATA *obj );
 static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *eventArgs );
+static void CheckRequirementsHandler( void *userData, CheckRequirementsEventArgs *args );
 
 void do_craftingengine( Character *ch, char *argument )
 {
@@ -174,6 +176,18 @@ static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *
   DISPOSE( data );
 }
 
+static void CheckRequirementsHandler( void *userData, CheckRequirementsEventArgs *args )
+{
+  Character *ch = GetEngineer( args->CraftingSession );
+
+  if( IS_SET( args->CraftingSession->Recipe->Flags, CRAFTFLAG_NEED_WORKSHOP )
+      && !IS_SET( ch->in_room->room_flags, ROOM_FACTORY ) )
+    {
+      ch_printf( ch, "&RYou need to be in a factory or workshop to do that.\r\n" );
+      args->AbortSession = true;
+    }
+}
+
 static void OnAbort( CraftingSession *session )
 {
   Character *ch = session->Engineer;
@@ -195,7 +209,7 @@ Character *GetEngineer( const CraftingSession *session )
 }
 
 CraftRecipe *AllocateCraftRecipe( int sn, const CraftingMaterial *materialList, int duration,
-				  vnum_t prototypeObject )
+				  vnum_t prototypeObject, long flags )
 {
   CraftRecipe *recipe = NULL;
   CREATE( recipe, CraftRecipe, 1 );
@@ -204,6 +218,7 @@ CraftRecipe *AllocateCraftRecipe( int sn, const CraftingMaterial *materialList, 
   recipe->Materials = materialList;
   recipe->Duration = duration;
   recipe->Prototype = prototypeObject;
+  recipe->Flags = flags;
 
   if( !get_skilltype( recipe->Skill ) )
     {
@@ -280,6 +295,8 @@ CraftingSession *AllocateCraftingSession( CraftRecipe *recipe, Character *engine
   session->OriginalArgument = str_dup( commandArgument );
 
   engineer->pcdata->CraftingSession = session;
+
+  AddCheckRequirementsCraftingHandler( session, NULL, CheckRequirementsHandler );
 
   return session;
 }

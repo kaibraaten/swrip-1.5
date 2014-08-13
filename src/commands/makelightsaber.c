@@ -36,7 +36,8 @@ void do_makelightsaber( Character *ch, char *argument )
       { ITEM_NONE,           CRAFTFLAG_NONE },
     };
   CraftRecipe *recipe = AllocateCraftRecipe( gsn_lightsaber_crafting, materials,
-					     25, OBJ_VNUM_CRAFTING_LIGHTSABER );
+					     25, OBJ_VNUM_CRAFTING_LIGHTSABER,
+					     CRAFTFLAG_NONE );
   CraftingSession *session = AllocateCraftingSession( recipe, ch, argument );
 
   CREATE( data, struct UserData, 1 );

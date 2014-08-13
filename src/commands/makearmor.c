@@ -12,7 +12,6 @@ struct UserData
 
 static CraftRecipe *CreateMakeArmorRecipe( void );
 static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventArgs *args );
-static void CheckRequirementsHandler( void *userData, CheckRequirementsEventArgs *args );
 static void MaterialFoundHandler( void *userData, MaterialFoundEventArgs *args );
 static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args );
 static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *args );
@@ -27,7 +26,6 @@ void do_makearmor( Character *ch, char *argument )
   CREATE( data, struct UserData, 1 );
 
   AddInterpretArgumentsCraftingHandler( session, data, InterpretArgumentsHandler );
-  AddCheckRequirementsCraftingHandler( session, data, CheckRequirementsHandler );
   AddMaterialFoundCraftingHandler( session, data, MaterialFoundHandler );
   AddSetObjectStatsCraftingHandler( session, data, SetObjectStatsHandler );
   AddFinishedCraftingHandler( session, data, FinishedCraftingHandler );
@@ -45,7 +43,8 @@ static CraftRecipe *CreateMakeArmorRecipe( void )
       { ITEM_NONE, CRAFTFLAG_NONE }
     };
   CraftRecipe *recipe = AllocateCraftRecipe( gsn_makearmor, materials,
-					     15, OBJ_VNUM_CRAFTING_ARMOR );
+					     15, OBJ_VNUM_CRAFTING_ARMOR,
+					     CRAFTFLAG_NEED_WORKSHOP );
 
   return recipe;
 }
@@ -101,18 +100,6 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
 
   AddCraftingArgument( session, arg );
   AddCraftingArgument( session, arg2 );
-}
-
-static void CheckRequirementsHandler( void *userData, CheckRequirementsEventArgs *eventArgs )
-{
-  Character *ch = GetEngineer( eventArgs->CraftingSession );
-
-  if ( !IS_SET( ch->in_room->room_flags, ROOM_FACTORY ) )
-    {
-      send_to_char( "&RYou need to be in a factory or workshop to do that.\r\n", ch);
-      eventArgs->AbortSession = true;
-      return;
-    }
 }
 
 static void MaterialFoundHandler( void *userData, MaterialFoundEventArgs *eventArgs )

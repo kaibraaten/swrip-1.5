@@ -4,7 +4,6 @@
 #include "craft.h"
 
 static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventArgs *args );
-static void CheckRequirementsHandler( void *userData, CheckRequirementsEventArgs *args );
 static void MaterialFoundHandler( void *userData, MaterialFoundEventArgs *args );
 static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args );
 static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *args );
@@ -29,13 +28,13 @@ void do_makeblade( Character *ch, char *argument )
       { ITEM_NONE,       CRAFTFLAG_NONE },
     };
   CraftRecipe *recipe = AllocateCraftRecipe( gsn_makeblade, materials,
-                                             25, OBJ_VNUM_CRAFTING_BLADE );
+                                             25, OBJ_VNUM_CRAFTING_BLADE,
+					     CRAFTFLAG_NEED_WORKSHOP );
   CraftingSession *session = AllocateCraftingSession( recipe, ch, argument );
 
   CREATE( data, struct UserData, 1 );
 
   AddInterpretArgumentsCraftingHandler( session, data, InterpretArgumentsHandler );
-  AddCheckRequirementsCraftingHandler( session, data, CheckRequirementsHandler );
   AddMaterialFoundCraftingHandler( session, data, MaterialFoundHandler );
   AddSetObjectStatsCraftingHandler( session, data, SetObjectStatsHandler );
   AddFinishedCraftingHandler( session, data, FinishedCraftingHandler );
@@ -56,18 +55,6 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
     }
 
   AddCraftingArgument( args->CraftingSession, args->CommandArguments );
-}
-
-static void CheckRequirementsHandler( void *userData, CheckRequirementsEventArgs *args )
-{
-  Character *ch = GetEngineer( args->CraftingSession );
-
-  if( !IS_SET( ch->in_room->room_flags, ROOM_FACTORY ) )
-    {
-      ch_printf( ch, "&RYou need to be in a factory or workshop to do that.\r\n" );
-      args->AbortSession = true;
-      return;
-    }
 }
 
 static void MaterialFoundHandler( void *userData, MaterialFoundEventArgs *args )

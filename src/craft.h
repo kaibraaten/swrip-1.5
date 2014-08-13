@@ -26,10 +26,10 @@
 #include "types.h"
 #include "constants.h"
 
-#define CRAFTFLAG_NONE     0
-#define CRAFTFLAG_EXTRACT  BV00
-#define CRAFTFLAG_OPTIONAL BV01
-
+#define CRAFTFLAG_NONE           0
+#define CRAFTFLAG_EXTRACT        BV00
+#define CRAFTFLAG_OPTIONAL       BV01
+#define CRAFTFLAG_NEED_WORKSHOP  BV02
 /*
  * Moved to types.h for now.
 struct CraftingSession;
@@ -104,7 +104,7 @@ struct CraftingMaterial
 };
 
 CraftRecipe *AllocateCraftRecipe( int sn, const CraftingMaterial*, int duration,
-				  vnum_t protoObject);
+				  vnum_t protoObject, long flags );
 void FreeCraftRecipe( CraftRecipe* );
 CraftingSession *AllocateCraftingSession( CraftRecipe*, Character *engineer,
 					  char *commandArgument );

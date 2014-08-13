@@ -30,7 +30,8 @@ void do_makecontainer( Character *ch, char *argument )
     };
 
   CraftRecipe *recipe = AllocateCraftRecipe( gsn_makecontainer, materials,
-                                             10, OBJ_VNUM_CRAFTING_CONTAINER );
+                                             10, OBJ_VNUM_CRAFTING_CONTAINER,
+					     CRAFTFLAG_NONE );
   CraftingSession *session = AllocateCraftingSession( recipe, ch, argument );
 
   CREATE( data, struct UserData, 1 );
