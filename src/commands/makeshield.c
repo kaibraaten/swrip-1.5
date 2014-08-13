@@ -153,7 +153,7 @@ static void OnFinished( Character *ch )
 
       if (obj->item_type == ITEM_BATTERY && checkbatt == false)
         {
-          charge = UMIN(obj->value[OVAL_BATTERY_CARGE], 10);
+          charge = UMIN(obj->value[OVAL_BATTERY_CHARGE], 10);
           separate_obj( obj );
           obj_from_char( obj );
           extract_obj( obj );

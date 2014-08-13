@@ -2385,8 +2385,8 @@ OBJ_DATA *create_object( OBJ_INDEX_DATA *pObjIndex, int level )
       break;
 
     case ITEM_BATTERY:
-      if ( obj->value[OVAL_BATTERY_CARGE] <= 0 )
-        obj->value[OVAL_BATTERY_CARGE] = number_fuzzy(95);
+      if ( obj->value[OVAL_BATTERY_CHARGE] <= 0 )
+        obj->value[OVAL_BATTERY_CHARGE] = number_fuzzy(95);
 
       break;
 

@@ -313,7 +313,6 @@ void show_list_to_char( const OBJ_DATA *list, Character *ch, bool fShort, bool f
       case ITEM_SCROLL:
       case ITEM_WAND:
       case ITEM_STAFF:
-        set_char_color( AT_MAGIC, ch );
         break;
       }
       if ( fShowNothing )

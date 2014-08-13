@@ -1167,7 +1167,7 @@ typedef enum
 #define OVAL_WEAPON_CHARGE 4
 #define OVAL_WEAPON_MAX_CHARGE 5
 
-#define OVAL_BATTERY_CARGE 0
+#define OVAL_BATTERY_CHARGE 0
 
 #define OVAL_AMMO_CHARGE 0
 

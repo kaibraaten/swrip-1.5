@@ -151,7 +151,7 @@ static void OnFinished( Character *ch )
 
       if (obj->item_type == ITEM_BATTERY && checkbatt == false)
         {
-          strength = obj->value[OVAL_BATTERY_CARGE];
+          strength = obj->value[OVAL_BATTERY_CHARGE];
           separate_obj( obj );
           obj_from_char( obj );
           extract_obj( obj );

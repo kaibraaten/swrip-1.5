@@ -71,7 +71,7 @@ static void MaterialFoundHandler( void *userData, MaterialFoundEventArgs *eventA
 
   if( eventArgs->Object->item_type == ITEM_BATTERY )
     {
-      ud->Charge = umax( eventArgs->Object->value[OVAL_BATTERY_CARGE], 10 );
+      ud->Charge = umax( eventArgs->Object->value[OVAL_BATTERY_CHARGE], 10 );
     }
 
   if( eventArgs->Object->item_type == ITEM_CRYSTAL
