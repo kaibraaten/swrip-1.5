@@ -13,7 +13,7 @@ $
 #FLAGS
 3 3
 
-#ECONOMY 0 496060910
+#ECONOMY 0 496060550
 
 #MOBILES
 #10340
@@ -840,11 +840,11 @@ A toolkit is lying here.~
 0 0 0 0
 1 0 0
 #10491
-durastaff~
+staff durastaff~
 a durastaff~
 A durastaff is lying here.~
 ~
-64 0 1
+4 0 1
 0 0 0 0
 1 0 0
 #10492
