@@ -12,12 +12,12 @@ struct UserData
   int Charge;
 };
 
-static void InterpretArgumentsHandler( void *userData, void *args );
-static void CheckRequirementsHandler( void *userData, void *args );
-static void MaterialFoundHandler( void *userData, void *args );
-static void SetObjectStatsHandler( void *userData, void *args );
-static void FinishedCraftingHandler( void *userData, void *args );
-static void AbortHandler( void *userData, void *args );
+static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventArgs *args );
+static void CheckRequirementsHandler( void *userData, CheckRequirementsEventArgs *args );
+static void MaterialFoundHandler( void *userData, MaterialFoundEventArgs *args );
+static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args );
+static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *args );
+static void AbortHandler( void *userData, AbortCraftingEventArgs *args );
 
 void do_makelightsaber( Character *ch, char *argument )
 {
@@ -41,19 +41,18 @@ void do_makelightsaber( Character *ch, char *argument )
 
   CREATE( data, struct UserData, 1 );
 
-  AddEventHandler( session->OnInterpretArguments, data, InterpretArgumentsHandler );
-  AddEventHandler( session->OnCheckRequirements, data, CheckRequirementsHandler );
-  AddEventHandler( session->OnMaterialFound, data, MaterialFoundHandler );
-  AddEventHandler( session->OnSetObjectStats, data, SetObjectStatsHandler );
-  AddEventHandler( session->OnFinishedCrafting, data, FinishedCraftingHandler );
-  AddEventHandler( session->OnAbort, data, AbortHandler );
+  AddInterpretArgumentsCraftingHandler( session, data, InterpretArgumentsHandler );
+  AddCheckRequirementsCraftingHandler( session, data, CheckRequirementsHandler );
+  AddMaterialFoundCraftingHandler( session, data, MaterialFoundHandler );
+  AddSetObjectStatsCraftingHandler( session, data, SetObjectStatsHandler );
+  AddFinishedCraftingHandler( session, data, FinishedCraftingHandler );
+  AddAbortCraftingHandler( session, data, AbortHandler );
 
   StartCrafting( session );
 }
 
-static void InterpretArgumentsHandler( void *userData, void *args )
+static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventArgs *eventArgs )
 {
-  InterpretArgumentsEventArgs *eventArgs = (InterpretArgumentsEventArgs*) args;
   Character *ch = GetEngineer( eventArgs->CraftingSession );
 
   if ( eventArgs->CommandArguments[0] == '\0' )
@@ -66,10 +65,9 @@ static void InterpretArgumentsHandler( void *userData, void *args )
   AddCraftingArgument( eventArgs->CraftingSession, eventArgs->CommandArguments );
 }
 
-static void MaterialFoundHandler( void *userData, void *args )
+static void MaterialFoundHandler( void *userData, MaterialFoundEventArgs *eventArgs )
 {
   struct UserData *ud = (struct UserData*) userData;
-  MaterialFoundEventArgs *eventArgs = (MaterialFoundEventArgs*) args;
 
   if( eventArgs->Object->item_type == ITEM_BATTERY )
     {
@@ -89,10 +87,9 @@ static void MaterialFoundHandler( void *userData, void *args )
     }
 }
 
-static void SetObjectStatsHandler( void *userData, void *args )
+static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *eventArgs )
 {
   struct UserData *ud = (struct UserData*) userData;
-  SetObjectStatsEventArgs *eventArgs = (SetObjectStatsEventArgs*) args;
   OBJ_DATA *lightsaber = eventArgs->Object;
   const char *itemName = GetCraftingArgument( eventArgs->CraftingSession, 0 );
   char buf[MAX_STRING_LENGTH];
@@ -154,21 +151,20 @@ static void SetObjectStatsHandler( void *userData, void *args )
   lightsaber->cost = lightsaber->value[OVAL_WEAPON_SIZE_DAM_DIE] * 75;
 }
 
-static void FinishedCraftingHandler( void *userData, void *args )
+static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *args )
 {
   struct UserData *ud = (struct UserData*) userData;
   DISPOSE( ud );
 }
 
-static void AbortHandler( void *userData, void *args )
+static void AbortHandler( void *userData, AbortCraftingEventArgs *args )
 {
   struct UserData *ud = (struct UserData*) userData;
   DISPOSE( ud );
 }
 
-static void CheckRequirementsHandler( void *userData, void *args )
+static void CheckRequirementsHandler( void *userData, CheckRequirementsEventArgs *eventArgs )
 {
-  CheckRequirementsEventArgs *eventArgs = (CheckRequirementsEventArgs*) args;
   Character *ch = GetEngineer( eventArgs->CraftingSession );
 
   if ( !IS_SET( ch->in_room->room_flags, ROOM_SAFE )

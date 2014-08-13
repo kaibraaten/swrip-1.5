@@ -12,21 +12,26 @@ struct UserData
   int Dummy;
 };
 
-static void MaterialFoundHandler( void *userData, void *args )
+static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventArgs *args );
+static void CheckRequirementsHandler( void *userData, CheckRequirementsEventArgs *args );
+static void MaterialFoundHandler( void *userData, MaterialFoundEventArgs *args );
+static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args );
+static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *args );
+static void AbortHandler( void *userData, AbortCraftingEventArgs *args );
+
+static void MaterialFoundHandler( void *userData, MaterialFoundEventArgs *args )
 {
 
 }
 
-static void FinishedCraftingHandler( void *userData, void *args )
+static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *args )
 {
   struct UserData *data = (struct UserData*) userData;
   DISPOSE( data );
 }
 
-static void SetObjectStatsHandler( void *userData, void *args )
+static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *eventArgs )
 {
-  /*struct UserData *data = (struct UserData*) userData;*/
-  SetObjectStatsEventArgs *eventArgs = (SetObjectStatsEventArgs*) args;
   OBJ_DATA *obj = eventArgs->Object;
   const char *wearLocation = GetCraftingArgument( eventArgs->CraftingSession, WearLocation );
   const char *itemName = GetCraftingArgument( eventArgs->CraftingSession, ItemName );
@@ -58,10 +63,8 @@ static void SetObjectStatsHandler( void *userData, void *args )
   obj->value[3] = 10;
 }
 
-static void InterpretArgumentsHandler( void *userData, void *args )
+static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventArgs *eventArgs )
 {
-  /*struct UserData *data = (struct UserData*) userData;*/
-  InterpretArgumentsEventArgs *eventArgs = (InterpretArgumentsEventArgs*) args;
   CraftingSession *session = eventArgs->CraftingSession;
   char originalArgs[MAX_INPUT_LENGTH];
   char *argument = originalArgs;
@@ -123,15 +126,14 @@ static void InterpretArgumentsHandler( void *userData, void *args )
   AddCraftingArgument( session, arg2 );
 }
 
-static void AbortHandler( void *userData, void *args )
+static void AbortHandler( void *userData, AbortCraftingEventArgs *args )
 {
   struct UserData *data = (struct UserData*) userData;
   DISPOSE( data );
 }
 
-static void CheckRequirementsHandler( void *userData, void *args )
+static void CheckRequirementsHandler( void *userData, CheckRequirementsEventArgs *eventArgs )
 {
-  CheckRequirementsEventArgs *eventArgs = (CheckRequirementsEventArgs*) args;
   Character *ch = GetEngineer( eventArgs->CraftingSession );
 
   if ( !IS_SET( ch->in_room->room_flags, ROOM_FACTORY ) )
@@ -158,12 +160,12 @@ void do_test( Character *ch, char *argument )
 
   CREATE( data, struct UserData, 1 );
 
-  AddEventHandler( session->OnInterpretArguments, data, InterpretArgumentsHandler );
-  AddEventHandler( session->OnCheckRequirements, data, CheckRequirementsHandler );
-  AddEventHandler( session->OnMaterialFound, data, MaterialFoundHandler );
-  AddEventHandler( session->OnSetObjectStats, data, SetObjectStatsHandler );
-  AddEventHandler( session->OnFinishedCrafting, data, FinishedCraftingHandler );
-  AddEventHandler( session->OnAbort, data, AbortHandler );
+  AddInterpretArgumentsCraftingHandler( session, data, InterpretArgumentsHandler );
+  AddCheckRequirementsCraftingHandler( session, data, CheckRequirementsHandler );
+  AddMaterialFoundCraftingHandler( session, data, MaterialFoundHandler );
+  AddSetObjectStatsCraftingHandler( session, data, SetObjectStatsHandler );
+  AddFinishedCraftingHandler( session, data, FinishedCraftingHandler );
+  AddAbortCraftingHandler( session, data, AbortHandler );
 
   StartCrafting( session );
 }

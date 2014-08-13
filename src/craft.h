@@ -57,10 +57,8 @@ typedef struct FinishedCraftingEventArgs FinishedCraftingEventArgs;
 struct CheckRequirementsEventArgs;
 typedef struct CheckRequirementsEventArgs CheckRequirementsEventArgs;
 
-struct AbortEventArgs;
-typedef struct AbortEventArgs AbortEventArgs;
-
-struct CraftingSessionImpl;
+struct AbortCraftingEventArgs;
+typedef struct AbortCraftingEventArgs AbortCraftingEventArgs;
 
 struct InterpretArgumentsEventArgs
 {
@@ -94,21 +92,9 @@ struct CheckRequirementsEventArgs
   bool AbortSession;
 };
 
-struct AbortEventArgs
+struct AbortCraftingEventArgs
 {
   struct CraftingSession *CraftingSession;
-};
-
-struct CraftingSession
-{
-  event_t *OnInterpretArguments;
-  event_t *OnCheckRequirements;
-  event_t *OnMaterialFound;
-  event_t *OnSetObjectStats;
-  event_t *OnFinishedCrafting;
-  event_t *OnAbort;
-
-  struct CraftingSessionImpl *_pImpl;
 };
 
 struct CraftingMaterial
@@ -126,6 +112,19 @@ void FreeCraftingSession( CraftingSession* );
 Character *GetEngineer( const CraftingSession* );
 void AddCraftingArgument( CraftingSession*, const char *argument );
 const char *GetCraftingArgument( const CraftingSession*, size_t argumentNumber );
+
+void AddInterpretArgumentsCraftingHandler( CraftingSession *session, void *userData,
+					   void (*handler)(void*, InterpretArgumentsEventArgs* ));
+void AddCheckRequirementsCraftingHandler( CraftingSession *session, void *userData,
+					  void (*handler)(void*, CheckRequirementsEventArgs* ));
+void AddMaterialFoundCraftingHandler( CraftingSession *session, void *userData,
+				      void (*handler)(void*, MaterialFoundEventArgs* ));
+void AddSetObjectStatsCraftingHandler( CraftingSession *session, void *userData,
+				       void (*handler)(void*, SetObjectStatsEventArgs* ));
+void AddFinishedCraftingHandler( CraftingSession *session, void *userData,
+				 void (*handler)(void*, FinishedCraftingEventArgs* ));
+void AddAbortCraftingHandler( CraftingSession *session, void *userData,
+			      void (*handler)(void*, AbortCraftingEventArgs* ));
 
 void StartCrafting( CraftingSession* );
 
