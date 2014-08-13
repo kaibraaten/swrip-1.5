@@ -22,7 +22,6 @@
 #ifndef _SWRIP_CRAFT_H_
 #define _SWRIP_CRAFT_H_
 
-#include <event.h>
 #include "types.h"
 #include "constants.h"
 
