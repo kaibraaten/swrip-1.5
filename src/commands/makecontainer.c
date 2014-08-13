@@ -13,7 +13,6 @@ struct UserData
 };
 
 static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventArgs *args );
-static void CheckRequirementsHandler( void *userData, CheckRequirementsEventArgs *args );
 static void MaterialFoundHandler( void *userData, MaterialFoundEventArgs *args );
 static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args );
 static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *args );
@@ -31,13 +30,12 @@ void do_makecontainer( Character *ch, char *argument )
 
   CraftRecipe *recipe = AllocateCraftRecipe( gsn_makecontainer, materials,
                                              10, OBJ_VNUM_CRAFTING_CONTAINER,
-					     CRAFTFLAG_NONE );
+					     CRAFTFLAG_NEED_WORKSHOP );
   CraftingSession *session = AllocateCraftingSession( recipe, ch, argument );
 
   CREATE( data, struct UserData, 1 );
 
   AddInterpretArgumentsCraftingHandler( session, data, InterpretArgumentsHandler );
-  AddCheckRequirementsCraftingHandler( session, data, CheckRequirementsHandler );
   AddMaterialFoundCraftingHandler( session, data, MaterialFoundHandler );
   AddSetObjectStatsCraftingHandler( session, data, SetObjectStatsHandler );
   AddFinishedCraftingHandler( session, data, FinishedCraftingHandler );
@@ -157,16 +155,4 @@ static void AbortHandler( void *userData, AbortCraftingEventArgs *args )
 {
   struct UserData *data = (struct UserData*) userData;
   DISPOSE( data );
-}
-
-static void CheckRequirementsHandler( void *userData, CheckRequirementsEventArgs *eventArgs )
-{
-  Character *ch = GetEngineer( eventArgs->CraftingSession );
-
-  if ( !IS_SET( ch->in_room->room_flags, ROOM_FACTORY ) )
-    {
-      ch_printf( ch, "&RYou need to be in a factory or workshop to do that.&w\r\n" );
-      eventArgs->AbortSession = true;
-      return;
-    }
 }
