@@ -3,18 +3,19 @@
 #include "character.h"
 #include "craft.h"
 
-static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventArgs *args );
-static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args );
-static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *args );
-static void AbortHandler( void *userData, AbortCraftingEventArgs *args );
-static CraftRecipe *MakeCraftRecipe( void );
-
 struct UserData
 {
   int Race;
   int Sex;
   char *Name;
 };
+
+static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventArgs *args );
+static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args );
+static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *args );
+static void AbortHandler( void *userData, AbortCraftingEventArgs *args );
+static void FreeUserData( struct UserData *ud );
+static CraftRecipe *MakeCraftRecipe( void );
 
 void do_makedisguise( Character *ch, char *argument )
 {
@@ -140,19 +141,17 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
 static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *args )
 {
   struct UserData *ud = (struct UserData*) userData;
-
-  if( ud->Name )
-    {
-      DISPOSE( ud->Name );
-    }
-
-  DISPOSE( ud );
+  FreeUserData( ud );
 }
 
 static void AbortHandler( void *userData, AbortCraftingEventArgs *args )
 {
   struct UserData *ud = (struct UserData*) userData;
+  FreeUserData( ud );
+}
 
+static void FreeUserData( struct UserData *ud )
+{
   if( ud->Name )
     {
       DISPOSE( ud->Name );
