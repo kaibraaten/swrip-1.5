@@ -7,20 +7,11 @@
 
 enum { WearLocation, ItemName };
 
-struct UserData
-{
-  int Dummy;
-};
-
 static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventArgs *args );
-static void MaterialFoundHandler( void *userData, MaterialFoundEventArgs *args );
 static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args );
-static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *args );
-static void AbortHandler( void *userData, AbortCraftingEventArgs *args );
 
 void do_makecontainer( Character *ch, char *argument )
 {
-  struct UserData *data;
   static const struct CraftingMaterial materials[] =
     {
       { ITEM_FABRIC, CRAFTFLAG_EXTRACT },
@@ -33,26 +24,10 @@ void do_makecontainer( Character *ch, char *argument )
 					     CRAFTFLAG_NEED_WORKSHOP );
   CraftingSession *session = AllocateCraftingSession( recipe, ch, argument );
 
-  CREATE( data, struct UserData, 1 );
-
-  AddInterpretArgumentsCraftingHandler( session, data, InterpretArgumentsHandler );
-  AddMaterialFoundCraftingHandler( session, data, MaterialFoundHandler );
-  AddSetObjectStatsCraftingHandler( session, data, SetObjectStatsHandler );
-  AddFinishedCraftingHandler( session, data, FinishedCraftingHandler );
-  AddAbortCraftingHandler( session, data, AbortHandler );
+  AddInterpretArgumentsCraftingHandler( session, NULL, InterpretArgumentsHandler );
+  AddSetObjectStatsCraftingHandler( session, NULL, SetObjectStatsHandler );
 
   StartCrafting( session );
-}
-
-static void MaterialFoundHandler( void *userData, MaterialFoundEventArgs *args )
-{
-
-}
-
-static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *args )
-{
-  struct UserData *data = (struct UserData*) userData;
-  DISPOSE( data );
 }
 
 static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *eventArgs )
@@ -149,10 +124,4 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
 
   AddCraftingArgument( session, arg );
   AddCraftingArgument( session, arg2 );
-}
-
-static void AbortHandler( void *userData, AbortCraftingEventArgs *args )
-{
-  struct UserData *data = (struct UserData*) userData;
-  DISPOSE( data );
 }
