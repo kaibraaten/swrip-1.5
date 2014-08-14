@@ -7,6 +7,7 @@
 
 struct UserData
 {
+  char *ItemName;
   int GemType;
   int GemCount;
   int Charge;
@@ -18,6 +19,7 @@ static void MaterialFoundHandler( void *userData, MaterialFoundEventArgs *args )
 static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args );
 static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *args );
 static void AbortHandler( void *userData, AbortCraftingEventArgs *args );
+static void FreeUserData( struct UserData *ud );
 
 void do_makelightsaber( Character *ch, char *argument )
 {
@@ -55,6 +57,7 @@ void do_makelightsaber( Character *ch, char *argument )
 static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventArgs *eventArgs )
 {
   Character *ch = GetEngineer( eventArgs->CraftingSession );
+  struct UserData *ud = (struct UserData*) userData;
 
   if ( eventArgs->CommandArguments[0] == '\0' )
     {
@@ -63,7 +66,7 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
       return;
     }
 
-  AddCraftingArgument( eventArgs->CraftingSession, eventArgs->CommandArguments );
+  ud->ItemName = str_dup( eventArgs->CommandArguments );
 }
 
 static void MaterialFoundHandler( void *userData, MaterialFoundEventArgs *eventArgs )
@@ -92,10 +95,9 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *even
 {
   struct UserData *ud = (struct UserData*) userData;
   OBJ_DATA *lightsaber = eventArgs->Object;
-  const char *itemName = GetCraftingArgument( eventArgs->CraftingSession, 0 );
   char buf[MAX_STRING_LENGTH];
-  Affect *paf = NULL;
-  Affect *paf2 = NULL;
+  Affect *hitroll = NULL;
+  Affect *parry = NULL;
 
   SET_BIT( lightsaber->wear_flags, ITEM_WIELD );
   SET_BIT( lightsaber->wear_flags, ITEM_TAKE );
@@ -110,37 +112,37 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *even
   STRFREE( lightsaber->name );
   lightsaber->name = STRALLOC( "lightsaber saber" );
 
-  strcpy( buf, itemName );
+  strcpy( buf, ud->ItemName );
   STRFREE( lightsaber->short_descr );
   lightsaber->short_descr = STRALLOC( buf );
 
   STRFREE( lightsaber->description );
-  sprintf( buf, "%s was carelessly misplaced here.", capitalize( itemName ) );
+  sprintf( buf, "%s was carelessly misplaced here.", capitalize( ud->ItemName ) );
   lightsaber->description = STRALLOC( buf );
 
   STRFREE( lightsaber->action_desc );
-  strcpy( buf, itemName );
+  strcpy( buf, ud->ItemName );
   strcat( buf, " ignites with a hum and a soft glow." );
   lightsaber->action_desc = STRALLOC( buf );
 
-  CREATE( paf, Affect, 1 );
-  paf->type               = -1;
-  paf->duration           = -1;
-  paf->location           = get_affecttype( "hitroll" );
-  paf->modifier           = urange( 0, ud->GemCount, lightsaber->level / 30 );
-  paf->bitvector          = 0;
-  paf->next               = NULL;
-  LINK( paf, lightsaber->first_affect, lightsaber->last_affect, next, prev );
+  CREATE( hitroll, Affect, 1 );
+  hitroll->type               = -1;
+  hitroll->duration           = -1;
+  hitroll->location           = get_affecttype( "hitroll" );
+  hitroll->modifier           = urange( 0, ud->GemCount, lightsaber->level / 30 );
+  hitroll->bitvector          = 0;
+  hitroll->next               = NULL;
+  LINK( hitroll, lightsaber->first_affect, lightsaber->last_affect, next, prev );
   ++top_affect;
 
-  CREATE( paf2, Affect, 1 );
-  paf2->type               = -1;
-  paf2->duration           = -1;
-  paf2->location           = get_affecttype( "parry" );
-  paf2->modifier           = ( lightsaber->level / 3 );
-  paf2->bitvector          = 0;
-  paf2->next               = NULL;
-  LINK( paf2, lightsaber->first_affect, lightsaber->last_affect, next, prev );
+  CREATE( parry, Affect, 1 );
+  parry->type               = -1;
+  parry->duration           = -1;
+  parry->location           = get_affecttype( "parry" );
+  parry->modifier           = lightsaber->level / 3;
+  parry->bitvector          = 0;
+  parry->next               = NULL;
+  LINK( parry, lightsaber->first_affect, lightsaber->last_affect, next, prev );
   ++top_affect;
 
   lightsaber->value[OVAL_WEAPON_CONDITION] = INIT_WEAPON_CONDITION;
@@ -155,12 +157,22 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *even
 static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *args )
 {
   struct UserData *ud = (struct UserData*) userData;
-  DISPOSE( ud );
+  FreeUserData( ud );
 }
 
 static void AbortHandler( void *userData, AbortCraftingEventArgs *args )
 {
   struct UserData *ud = (struct UserData*) userData;
+  FreeUserData( ud );
+}
+
+static void FreeUserData( struct UserData *ud )
+{
+  if( ud->ItemName )
+    {
+      DISPOSE( ud->ItemName );
+    }
+
   DISPOSE( ud );
 }
 
