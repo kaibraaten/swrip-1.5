@@ -3,19 +3,32 @@
 #include "character.h"
 #include "craft.h"
 
-enum { WearLocation, ItemName };
+struct UserData
+{
+  char *ItemName;
+  int WearLocation;
+};
 
 static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventArgs *args );
 static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args );
+static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *args );
+static void AbortHandler( void *userData, AbortCraftingEventArgs *args );
+static void FreeUserData( struct UserData *ud );
+
 static CraftRecipe *MakeCraftRecipe( void );
 
 void do_makecomlink( Character *ch, char *argument )
 {
   CraftRecipe *recipe = MakeCraftRecipe();
   CraftingSession *session = AllocateCraftingSession( recipe, ch, argument );
+  struct UserData *ud = NULL;
 
-  AddInterpretArgumentsCraftingHandler( session, NULL, InterpretArgumentsHandler );
-  AddSetObjectStatsCraftingHandler( session, NULL, SetObjectStatsHandler );
+  CREATE( ud, struct UserData, 1 );
+
+  AddInterpretArgumentsCraftingHandler( session, ud, InterpretArgumentsHandler );
+  AddSetObjectStatsCraftingHandler( session, ud, SetObjectStatsHandler );
+  AddFinishedCraftingHandler( session, ud, FinishedCraftingHandler );
+  AddAbortCraftingHandler( session, ud, AbortHandler );
 
   StartCrafting( session );
 }
@@ -39,40 +52,53 @@ static CraftRecipe *MakeCraftRecipe( void )
 
 static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventArgs *args )
 {
+  struct UserData *ud = (struct UserData*) userData;
   Character *ch = GetEngineer( args->CraftingSession );
   char originalArgs[MAX_INPUT_LENGTH];
   char *argument = originalArgs;
-  char wearloc[MAX_STRING_LENGTH];
-  char itemname[MAX_STRING_LENGTH];
+  char wearLoc[MAX_STRING_LENGTH];
+  char itemName[MAX_STRING_LENGTH];
 
   strcpy( argument, args->CommandArguments );
-  argument = one_argument( argument, wearloc );
-  strcpy( itemname, argument );
+  argument = one_argument( argument, wearLoc );
+  strcpy( itemName, argument );
 
-  if ( itemname[0] == '\0' )
+  if ( itemName[0] == '\0' )
     {
       ch_printf( ch, "&RUsage: Makecomlink <wearloc> <name>\r\n&w" );
       args->AbortSession = true;
       return;
     }
 
-  if ( !str_cmp( wearloc, "body" )
-       || !str_cmp( wearloc, "head" )
-       || !str_cmp( wearloc, "legs" )
-       || !str_cmp( wearloc, "arms" )
-       || !str_cmp( wearloc, "about" )
-       || !str_cmp( wearloc, "eyes" )
-       || !str_cmp( wearloc, "waist" )
-       || !str_cmp( wearloc, "hold" )
-       || !str_cmp( wearloc, "feet" )
-       || !str_cmp( wearloc, "hands" ) )
+  ud->WearLocation = get_wearflag( wearLoc );
+
+  if( ud->WearLocation == -1 )
+    {
+      ch_printf( ch, "&R'%s' is not a wear location.&w\r\n", wearLoc );
+      args->AbortSession = true;
+      return;
+    }
+  else
+    {
+      ud->WearLocation = 1 << ud->WearLocation;
+    }
+
+  if ( ud->WearLocation == ITEM_WEAR_BODY
+       || ud->WearLocation == ITEM_WEAR_HEAD
+       || ud->WearLocation == ITEM_WEAR_LEGS
+       || ud->WearLocation == ITEM_WEAR_ARMS
+       || ud->WearLocation == ITEM_WEAR_ABOUT
+       || ud->WearLocation == ITEM_WEAR_EYES
+       || ud->WearLocation == ITEM_WEAR_WAIST
+       || ud->WearLocation == ITEM_WEAR_FEET
+       || ud->WearLocation == ITEM_WEAR_HANDS )
     {
       ch_printf( ch, "&RYou cannot make a comlink for that body part.\r\n&w" );
       args->AbortSession = true;
       return;
     }
 
-  if ( !str_cmp( wearloc, "shield" ) )
+  if ( ud->WearLocation == ITEM_WEAR_SHIELD )
     {
       ch_printf( ch, "&RYou cannot make a comlink worn as a shield.\r\n&w" );
       ch_printf( ch, "&RTry MAKESHIELD.\r\n&w" );
@@ -80,51 +106,61 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
       return;
     }
 
-  if ( !str_cmp( wearloc, "wield" ) )
+  if ( ud->WearLocation == ITEM_WIELD )
     {
       ch_printf( ch, "&RAre you going to fight with your comlink?\r\n&w" );
       args->AbortSession = true;
       return;
     }
 
-  AddCraftingArgument( args->CraftingSession, wearloc );
-  AddCraftingArgument( args->CraftingSession, itemname );
+  ud->ItemName = str_dup( itemName );
 }
 
 static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args )
 {
-  const char *wearLoc = GetCraftingArgument( args->CraftingSession, WearLocation );
-  const char *itemName = GetCraftingArgument( args->CraftingSession, ItemName );
+  struct UserData *ud = (struct UserData*) userData;
   char buf[MAX_STRING_LENGTH];
-  OBJ_DATA *obj = args->Object;
-  int value = 0;
+  OBJ_DATA *comlink = args->Object;
 
-  SET_BIT( obj->wear_flags, ITEM_TAKE );
-  value = get_wearflag( wearLoc );
+  SET_BIT( comlink->wear_flags, ITEM_TAKE );
+  SET_BIT( comlink->wear_flags, ud->WearLocation );
 
-  if ( value < 0 || value > 31 )
-    {
-      SET_BIT( obj->wear_flags, ITEM_HOLD );
-    }
-  else
-    {
-      SET_BIT( obj->wear_flags, 1 << value );
-    }
+  comlink->weight = 1;
 
-  obj->weight = 1;
-
-  STRFREE( obj->name );
-  strcpy( buf, itemName );
+  STRFREE( comlink->name );
+  strcpy( buf, ud->ItemName );
   strcat( buf, " comlink" );
-  obj->name = STRALLOC( buf );
+  comlink->name = STRALLOC( buf );
 
-  strcpy( buf, itemName );
-  STRFREE( obj->short_descr );
-  obj->short_descr = STRALLOC( buf );
+  strcpy( buf, ud->ItemName );
+  STRFREE( comlink->short_descr );
+  comlink->short_descr = STRALLOC( buf );
 
-  STRFREE( obj->description );
+  STRFREE( comlink->description );
   strcat( buf, " was left here." );
-  obj->description = STRALLOC( capitalize( buf ) );
+  comlink->description = STRALLOC( capitalize( buf ) );
 
-  obj->cost = 50;
+  comlink->cost = 50;
+}
+
+static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *args )
+{
+  struct UserData *ud = (struct UserData*) userData;
+  FreeUserData( ud );
+}
+
+static void AbortHandler( void *userData, AbortCraftingEventArgs *args )
+{
+  struct UserData *ud = (struct UserData*) userData;
+  FreeUserData( ud );
+}
+
+static void FreeUserData( struct UserData *ud )
+{
+  if( ud->ItemName )
+    {
+      DISPOSE( ud->ItemName );
+    }
+
+  DISPOSE( ud );
 }
