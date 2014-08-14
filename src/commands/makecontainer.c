@@ -5,10 +5,17 @@
 #include "craft.h"
 #include "character.h"
 
-enum { WearLocation, ItemName };
+struct UserData
+{
+  int WearLocation;
+  char *ItemName;
+};
 
 static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventArgs *args );
 static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args );
+static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *args );
+static void AbortHandler( void *userData, AbortCraftingEventArgs *args );
+static void FreeUserData( struct UserData *ud );
 
 void do_makecontainer( Character *ch, char *argument )
 {
@@ -23,73 +30,84 @@ void do_makecontainer( Character *ch, char *argument )
                                              10, OBJ_VNUM_CRAFTING_CONTAINER,
 					     CRAFTFLAG_NEED_WORKSHOP );
   CraftingSession *session = AllocateCraftingSession( recipe, ch, argument );
+  struct UserData *ud = NULL;
 
-  AddInterpretArgumentsCraftingHandler( session, NULL, InterpretArgumentsHandler );
-  AddSetObjectStatsCraftingHandler( session, NULL, SetObjectStatsHandler );
+  CREATE( ud, struct UserData, 1 );
+
+  AddInterpretArgumentsCraftingHandler( session, ud, InterpretArgumentsHandler );
+  AddSetObjectStatsCraftingHandler( session, ud, SetObjectStatsHandler );
+  AddFinishedCraftingHandler( session, ud, FinishedCraftingHandler );
+  AddAbortCraftingHandler( session, ud, AbortHandler );
 
   StartCrafting( session );
 }
 
 static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *eventArgs )
 {
-  OBJ_DATA *obj = eventArgs->Object;
-  const char *wearLocation = GetCraftingArgument( eventArgs->CraftingSession, WearLocation );
-  const char *itemName = GetCraftingArgument( eventArgs->CraftingSession, ItemName );
+  struct UserData *ud = (struct UserData*) userData;
+  OBJ_DATA *container = eventArgs->Object;
   char description[MAX_STRING_LENGTH];
-  int value = 0;
 
-  obj->item_type = ITEM_CONTAINER;
-  SET_BIT( obj->wear_flags, ITEM_TAKE );
-  value = get_wearflag( wearLocation );
+  SET_BIT( container->wear_flags, ITEM_TAKE );
+  SET_BIT( container->wear_flags, ud->WearLocation );
 
-  if ( value < 0 || value > 31 )
-    SET_BIT( obj->wear_flags, ITEM_HOLD );
-  else
-    SET_BIT( obj->wear_flags, 1 << value );
+  STRFREE( container->name );
+  container->name = STRALLOC( ud->ItemName );
 
-  STRFREE( obj->name );
-  obj->name = STRALLOC( itemName );
+  STRFREE( container->short_descr );
+  container->short_descr = STRALLOC( ud->ItemName );
 
-  STRFREE( obj->short_descr );
-  obj->short_descr = STRALLOC( itemName );
+  STRFREE( container->description );
+  sprintf( description, "%s was dropped here.", capitalize( ud->ItemName ) );
+  container->description = STRALLOC( description );
 
-  STRFREE( obj->description );
-  sprintf( description, "%s was dropped here.", capitalize( itemName ) );
-  obj->description = STRALLOC( description );
-
-  obj->value[0] = obj->level;
-  obj->value[1] = 0;
-  obj->value[2] = 0;
-  obj->value[3] = 10;
+  container->value[0] = container->level;
+  container->value[1] = 0;
+  container->value[2] = 0;
+  container->value[3] = 10;
 }
 
 static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventArgs *eventArgs )
 {
+  struct UserData *ud = (struct UserData*) userData;
   CraftingSession *session = eventArgs->CraftingSession;
   char originalArgs[MAX_INPUT_LENGTH];
   char *argument = originalArgs;
-  char arg[MAX_STRING_LENGTH];
-  char arg2[MAX_STRING_LENGTH];
+  char wearLoc[MAX_STRING_LENGTH];
+  char itemName[MAX_STRING_LENGTH];
   Character *ch = GetEngineer( session );
 
   strcpy( argument, eventArgs->CommandArguments );
-  argument = one_argument( argument, arg );
-  strcpy( arg2, argument );
+  argument = one_argument( argument, wearLoc );
+  strcpy( itemName, argument );
 
-  if ( arg2[0] == '\0' )
+  if ( itemName[0] == '\0' )
     {
       send_to_char( "&RUsage: Makecontainer <wearloc> <name>\r\n&w", ch);
       eventArgs->AbortSession = true;
       return;
     }
 
-  if ( !str_cmp( arg, "eyes" )
-       || !str_cmp( arg, "ears" )
-       || !str_cmp( arg, "finger" )
-       || !str_cmp( arg, "neck" )
-       || !str_cmp( arg, "floating" )
-       || !str_cmp( arg, "over" )
-       || !str_cmp( arg, "wrist" ) )
+  ud->WearLocation = get_wearflag( wearLoc );
+
+  if( ud->WearLocation == -1 )
+    {
+      ch_printf( ch, "&R'%s' is not a wear location.&w\r\n", wearLoc );
+      eventArgs->AbortSession = true;
+      return;
+    }
+  else
+    {
+      ud->WearLocation = 1 << ud->WearLocation;
+    }
+
+  if ( ud->WearLocation == ITEM_WEAR_EYES
+       || ud->WearLocation == ITEM_WEAR_EARS
+       || ud->WearLocation == ITEM_WEAR_FINGER
+       || ud->WearLocation == ITEM_WEAR_NECK
+       || ud->WearLocation == ITEM_WEAR_FLOATING
+       || ud->WearLocation == ITEM_WEAR_OVER
+       || ud->WearLocation == ITEM_WEAR_WRIST )
     {
       send_to_char( "&RYou cannot make a container for that body part.\r\n&w", ch);
       send_to_char( "&RTry MAKEJEWELRY.\r\n&w", ch);
@@ -97,8 +115,8 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
       return;
     }
 
-  if ( !str_cmp( arg, "feet" )
-       || !str_cmp( arg, "hands" ) )
+  if ( ud->WearLocation == ITEM_WEAR_FEET
+       || ud->WearLocation == ITEM_WEAR_HANDS )
     {
       send_to_char( "&RYou cannot make a container for that body part.\r\n&w", ch);
       send_to_char( "&RTry MAKEARMOR.\r\n&w", ch);
@@ -106,7 +124,7 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
       return;
     }
 
-  if ( !str_cmp( arg, "shield" ) )
+  if ( ud->WearLocation == ITEM_WEAR_SHIELD )
     {
       send_to_char( "&RYou cannot make a container a shield.\r\n&w", ch);
       send_to_char( "&RTry MAKESHIELD.\r\n&w", ch);
@@ -114,7 +132,7 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
       return;
     }
 
-  if ( !str_cmp( arg, "wield" ) )
+  if ( ud->WearLocation == ITEM_WIELD )
     {
       send_to_char( "&RAre you going to fight with a container?\r\n&w", ch);
       send_to_char( "&RTry MAKEBLADE...\r\n&w", ch);
@@ -122,6 +140,27 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
       return;
     }
 
-  AddCraftingArgument( session, arg );
-  AddCraftingArgument( session, arg2 );
+  ud->ItemName = str_dup( itemName );
+}
+
+static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *args )
+{
+  struct UserData *ud = (struct UserData*) userData;
+  FreeUserData( ud );
+}
+
+static void AbortHandler( void *userData, AbortCraftingEventArgs *args )
+{
+  struct UserData *ud = (struct UserData*) userData;
+  FreeUserData( ud );
+}
+
+static void FreeUserData( struct UserData *ud )
+{
+  if( ud->ItemName )
+    {
+      DISPOSE( ud->ItemName );
+    }
+
+  DISPOSE( ud );
 }

@@ -56,12 +56,12 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
   CraftingSession *session = eventArgs->CraftingSession;
   char originalArgs[MAX_INPUT_LENGTH];
   char *argument = originalArgs;
-  char wearloc[MAX_STRING_LENGTH];
+  char wearLoc[MAX_STRING_LENGTH];
   char name[MAX_STRING_LENGTH];
   Character *ch = GetEngineer( session );
 
   strcpy( argument, eventArgs->CommandArguments );
-  argument = one_argument( argument, wearloc );
+  argument = one_argument( argument, wearLoc );
   strcpy( name, argument );
 
   if ( name[0] == '\0' )
@@ -71,11 +71,11 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
       return;
     }
 
-  ud->WearLocation = get_wearflag( wearloc );
+  ud->WearLocation = get_wearflag( wearLoc );
 
   if( ud->WearLocation == -1 )
     {
-      ch_printf( ch, "&R'%s' is not a wear location.&w\r\n", wearloc );
+      ch_printf( ch, "&R'%s' is not a wear location.&w\r\n", wearLoc );
       eventArgs->AbortSession = true;
       return;
     }
