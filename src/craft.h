@@ -109,9 +109,6 @@ CraftingSession *AllocateCraftingSession( CraftRecipe*, Character *engineer,
 					  char *commandArgument );
 void FreeCraftingSession( CraftingSession* );
 Character *GetEngineer( const CraftingSession* );
-void AddCraftingArgument( CraftingSession*, const char *argument );
-const char *GetCraftingArgument( const CraftingSession*, size_t argumentNumber );
-
 void AddInterpretArgumentsCraftingHandler( CraftingSession *session, void *userData,
 					   void (*handler)(void*, InterpretArgumentsEventArgs* ));
 void AddCheckRequirementsCraftingHandler( CraftingSession *session, void *userData,

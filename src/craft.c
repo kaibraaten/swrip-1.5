@@ -53,8 +53,6 @@ struct CraftingSession
   Character *Engineer;
   CraftRecipe *Recipe;
   struct FoundMaterial *FoundMaterials;
-  char **Arguments;
-  size_t NumberOfArguments;
   char *OriginalArgument;
 };
 
@@ -311,18 +309,6 @@ void FreeCraftingSession( CraftingSession *session )
   DestroyEvent( session->OnFinishedCrafting );
   DestroyEvent( session->OnAbort );
 
-  if( session->NumberOfArguments > 0 )
-    {
-      size_t i = 0;
-
-      for( i = 0; i < session->NumberOfArguments; ++i )
-	{
-	  DISPOSE( session->Arguments[i] );
-	}
-
-      DISPOSE( session->Arguments );
-    }
-
   FreeCraftRecipe( session->Recipe );
   DISPOSE( session->FoundMaterials );
   DISPOSE( session->OriginalArgument );
@@ -333,28 +319,6 @@ void FreeCraftingSession( CraftingSession *session )
     }
 
   DISPOSE( session );
-}
-
-void AddCraftingArgument( CraftingSession *session, const char *argument )
-{
-  ++session->NumberOfArguments;
-  RECREATE( session->Arguments, char*, session->NumberOfArguments );
-
-  session->Arguments[session->NumberOfArguments - 1] = str_dup( argument );
-}
-
-const char *GetCraftingArgument( const CraftingSession *session, size_t argumentNumber )
-{
-  if( session->NumberOfArguments == 0
-      || argumentNumber > session->NumberOfArguments - 1 )
-    {
-      bug( "%s:%d %s(): Requested argument is %d, but session has %d arguments",
-           __FILE__, __LINE__, __FUNCTION__,
-	   argumentNumber, session->NumberOfArguments );
-      return "";
-    }
-
-  return session->Arguments[argumentNumber];
 }
 
 static bool CheckSkill( const CraftingSession *session )
