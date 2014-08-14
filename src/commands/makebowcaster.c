@@ -3,6 +3,14 @@
 #include "character.h"
 #include "craft.h"
 
+struct UserData
+{
+  int Ammo;
+  int Tinder;
+  int Lenses;
+  char *ItemName;
+};
+
 static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventArgs *args );
 static void CheckRequirementsHandler( void *userData, CheckRequirementsEventArgs *args );
 static void MaterialFoundHandler( void *userData, MaterialFoundEventArgs *args );
@@ -10,13 +18,7 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
 static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *args );
 static void AbortHandler( void *userData, AbortCraftingEventArgs *args );
 static CraftRecipe *CreateMakeBowcasterCraftRecipe( void );
-
-struct UserData
-{
-  int Ammo;
-  int Tinder;
-  int Lenses;
-};
+static void FreeUserData( struct UserData *ud );
 
 void do_makebowcaster( Character *ch, char *argument )
 {
@@ -60,6 +62,7 @@ static CraftRecipe *CreateMakeBowcasterCraftRecipe( void )
 static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventArgs *args )
 {
   Character *ch = GetEngineer( args->CraftingSession );
+  struct UserData *ud = (struct UserData*) userData;
 
   if ( args->CommandArguments[0] == '\0' )
     {
@@ -68,7 +71,7 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
       return;
     }
 
-  AddCraftingArgument( args->CraftingSession, args->CommandArguments );
+  ud->ItemName = str_dup( args->CommandArguments );
 }
 
 static void CheckRequirementsHandler( void *userData, CheckRequirementsEventArgs *args )
@@ -107,7 +110,6 @@ static void MaterialFoundHandler( void *userData, MaterialFoundEventArgs *args )
 static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args )
 {
   struct UserData *ud = (struct UserData*) userData;
-  const char *itemName = GetCraftingArgument( args->CraftingSession, 0 );
   char buf[MAX_STRING_LENGTH];
   OBJ_DATA *obj = args->Object;
   Affect *hitroll = NULL;
@@ -119,11 +121,11 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   obj->weight = 2 + obj->level / 7;
 
   STRFREE( obj->name );
-  strcpy( buf, itemName );
+  strcpy( buf, ud->ItemName );
   strcat( buf, " bowcaster");
   obj->name = STRALLOC( buf );
 
-  strcpy( buf, itemName );
+  strcpy( buf, ud->ItemName );
   STRFREE( obj->short_descr );
   obj->short_descr = STRALLOC( buf );
 
@@ -159,11 +161,21 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
 static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *args )
 {
   struct UserData *ud = (struct UserData*) userData;
-  DISPOSE( ud );
+  FreeUserData( ud );
 }
 
 static void AbortHandler( void *userData, AbortCraftingEventArgs *args )
 {
   struct UserData *ud = (struct UserData*) userData;
+  FreeUserData( ud );
+}
+
+static void FreeUserData( struct UserData *ud )
+{
+  if( ud->ItemName )
+    {
+      DISPOSE( ud->ItemName );
+    }
+
   DISPOSE( ud );
 }
