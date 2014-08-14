@@ -3,11 +3,11 @@
 #include "character.h"
 #include "craft.h"
 
-enum { WearLocation, ItemName };
-
 struct UserData
 {
   int ArmorValue;
+  int WearLocation;
+  char *ItemName;
 };
 
 static CraftRecipe *CreateMakeArmorRecipe( void );
@@ -16,6 +16,7 @@ static void MaterialFoundHandler( void *userData, MaterialFoundEventArgs *args )
 static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args );
 static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *args );
 static void AbortHandler( void *userData, AbortCraftingEventArgs *args );
+static void FreeUserData( struct UserData *ud );
 
 void do_makearmor( Character *ch, char *argument )
 {
@@ -51,30 +52,44 @@ static CraftRecipe *CreateMakeArmorRecipe( void )
 
 static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventArgs *eventArgs )
 {
+  struct UserData *ud = (struct UserData*) userData;
   CraftingSession *session = eventArgs->CraftingSession;
   char originalArgs[MAX_INPUT_LENGTH];
   char *argument = originalArgs;
-  char arg[MAX_STRING_LENGTH];
-  char arg2[MAX_STRING_LENGTH];
+  char wearloc[MAX_STRING_LENGTH];
+  char name[MAX_STRING_LENGTH];
   Character *ch = GetEngineer( session );
 
   strcpy( argument, eventArgs->CommandArguments );
-  argument = one_argument( argument, arg );
-  strcpy( arg2, argument );
+  argument = one_argument( argument, wearloc );
+  strcpy( name, argument );
 
-  if ( arg2[0] == '\0' )
+  if ( name[0] == '\0' )
     {
       send_to_char( "&RUsage: Makearmor <wearloc> <name>\r\n&w", ch);
       eventArgs->AbortSession = true;
       return;
     }
 
-  if ( !str_cmp( arg, "eyes" )
-       || !str_cmp( arg, "ears" )
-       || !str_cmp( arg, "finger" )
-       || !str_cmp( arg, "neck" )
-       || !str_cmp( arg, "floating" )
-       || !str_cmp( arg, "wrist" ) )
+  ud->WearLocation = get_wearflag( wearloc );
+
+  if( ud->WearLocation == -1 )
+    {
+      ch_printf( ch, "&R'%s' is not a wear location.&w\r\n", wearloc );
+      eventArgs->AbortSession = true;
+      return;
+    }
+  else
+    {
+      ud->WearLocation = 1 << ud->WearLocation;
+    }
+
+  if ( ud->WearLocation == ITEM_WEAR_EYES
+       || ud->WearLocation == ITEM_WEAR_EARS
+       || ud->WearLocation == ITEM_WEAR_FINGER
+       || ud->WearLocation == ITEM_WEAR_NECK
+       || ud->WearLocation == ITEM_WEAR_FLOATING
+       || ud->WearLocation == ITEM_WEAR_WRIST )
     {
       send_to_char( "&RYou cannot make clothing for that body part.\r\n&w", ch);
       send_to_char( "&RTry MAKEJEWELRY.\r\n&w", ch);
@@ -82,7 +97,7 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
       return;
     }
 
-  if ( !str_cmp( arg, "shield" ) )
+  if ( ud->WearLocation == ITEM_WEAR_SHIELD )
     {
       send_to_char( "&RYou cannot make clothing worn as a shield.\r\n&w", ch);
       send_to_char( "&RTry MAKESHIELD.\r\n&w", ch);
@@ -90,7 +105,7 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
       return;
     }
 
-  if ( !str_cmp( arg, "wield" ) )
+  if ( ud->WearLocation == ITEM_WIELD )
     {
       send_to_char( "&RAre you going to fight with your clothing?\r\n&w", ch);
       send_to_char( "&RTry MAKEBLADE...\r\n&w", ch);
@@ -98,8 +113,7 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
       return;
     }
 
-  AddCraftingArgument( session, arg );
-  AddCraftingArgument( session, arg2 );
+  ud->ItemName = str_dup( name );
 }
 
 static void MaterialFoundHandler( void *userData, MaterialFoundEventArgs *eventArgs )
@@ -115,28 +129,20 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *even
 {
   struct UserData *ud = (struct UserData*) userData;
   OBJ_DATA *armor = eventArgs->Object;
-  const char *wearLocation = GetCraftingArgument( eventArgs->CraftingSession, WearLocation );
-  const char *itemName = GetCraftingArgument( eventArgs->CraftingSession, ItemName );
   char description[MAX_STRING_LENGTH];
-  long value = 0;
 
   armor->item_type = ITEM_ARMOR;
   SET_BIT( armor->wear_flags, ITEM_TAKE );
-  value = get_wearflag( wearLocation );
-
-  if ( value < 0 || value > 31 )
-    SET_BIT( armor->wear_flags, ITEM_WEAR_BODY );
-  else
-    SET_BIT( armor->wear_flags, 1 << value );
+  SET_BIT( armor->wear_flags, ud->WearLocation );
 
   STRFREE( armor->name );
-  armor->name = STRALLOC( itemName );
+  armor->name = STRALLOC( ud->ItemName );
 
   STRFREE( armor->short_descr );
-  armor->short_descr = STRALLOC( itemName );
+  armor->short_descr = STRALLOC( ud->ItemName );
 
   STRFREE( armor->description );
-  sprintf( description, "%s was dropped here.", capitalize( itemName ) );
+  sprintf( description, "%s was dropped here.", capitalize( ud->ItemName ) );
   armor->description = STRALLOC( description );
 
   armor->value[OVAL_ARMOR_CONDITION] = armor->value[OVAL_ARMOR_AC] = ud->ArmorValue;
@@ -146,11 +152,21 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *even
 static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *args )
 {
   struct UserData *ud = (struct UserData*) userData;
-  DISPOSE( ud );
+  FreeUserData( ud );
 }
 
 static void AbortHandler( void *userData, AbortCraftingEventArgs *args )
 {
   struct UserData *ud = (struct UserData*) userData;
+  FreeUserData( ud );
+}
+
+static void FreeUserData( struct UserData *ud )
+{
+  if( ud->ItemName )
+    {
+      DISPOSE( ud->ItemName );
+    }
+
   DISPOSE( ud );
 }
