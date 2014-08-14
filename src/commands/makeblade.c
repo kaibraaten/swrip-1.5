@@ -3,17 +3,19 @@
 #include "character.h"
 #include "craft.h"
 
+struct UserData
+{
+  int Charge;
+  bool HasStaff;
+  char *ItemName;
+};
+
 static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventArgs *args );
 static void MaterialFoundHandler( void *userData, MaterialFoundEventArgs *args );
 static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args );
 static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *args );
 static void AbortHandler( void *userData, AbortCraftingEventArgs *args );
-
-struct UserData
-{
-  int Charge;
-  bool HasStaff;
-};
+static void FreeUserData( struct UserData *ud );
 
 void do_makeblade( Character *ch, char *argument )
 {
@@ -46,6 +48,7 @@ void do_makeblade( Character *ch, char *argument )
 static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventArgs *args )
 {
   Character *ch = GetEngineer( args->CraftingSession );
+  struct UserData *ud = (struct UserData*) userData;
 
   if ( args->CommandArguments[0] == '\0' )
     {
@@ -54,7 +57,7 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
       return;
     }
 
-  AddCraftingArgument( args->CraftingSession, args->CommandArguments );
+  ud->ItemName = str_dup( args->CommandArguments );
 }
 
 static void MaterialFoundHandler( void *userData, MaterialFoundEventArgs *args )
@@ -75,7 +78,6 @@ static void MaterialFoundHandler( void *userData, MaterialFoundEventArgs *args )
 static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args )
 {
   struct UserData *ud = (struct UserData*) userData;
-  const char *itemName = GetCraftingArgument( args->CraftingSession, 0 );
   char buf[MAX_STRING_LENGTH];
   Affect *paf = NULL;
   OBJ_DATA *weapon = args->Object;
@@ -86,7 +88,7 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   weapon->weight = 3;
 
   STRFREE( weapon->name );
-  strcpy( buf, itemName );
+  strcpy( buf, ud->ItemName );
 
   if (!ud->HasStaff )
     {
@@ -99,7 +101,7 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
 
   weapon->name = STRALLOC( buf );
 
-  strcpy( buf, itemName );
+  strcpy( buf, ud->ItemName );
   STRFREE( weapon->short_descr );
   weapon->short_descr = STRALLOC( buf );
 
@@ -154,11 +156,21 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
 static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *args )
 {
   struct UserData *ud = (struct UserData*) userData;
-  DISPOSE( ud );
+  FreeUserData( ud );
 }
 
 static void AbortHandler( void *userData, AbortCraftingEventArgs *args )
 {
   struct UserData *ud = (struct UserData*) userData;
+  FreeUserData( ud );
+}
+
+static void FreeUserData( struct UserData *ud )
+{
+  if( ud->ItemName )
+    {
+      DISPOSE( ud->ItemName );
+    }
+
   DISPOSE( ud );
 }
