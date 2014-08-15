@@ -118,7 +118,7 @@ static void FinishedStage( CraftingSession *session )
   int level = ch->pcdata->learned[recipe->Skill];
   OBJ_DATA *object = NULL;
   OBJ_INDEX_DATA *proto = get_obj_index( recipe->Prototype );
-  const char *itemType = GetItemTypeName( proto->item_type, proto->value[3] );
+  const char *itemType = GetItemTypeName( proto->item_type, proto->value[OVAL_WEAPON_TYPE] );
   SetObjectStatsEventArgs eventArgs;
   FinishedCraftingEventArgs finishedCraftingEventArgs;
 
@@ -155,7 +155,7 @@ static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *
   CraftingSession *session = eventArgs->CraftingSession;
   struct FinishedCraftingUserData *data = (struct FinishedCraftingUserData*) userData;
   Character *ch = GetEngineer( session );
-  const char *itemType = GetItemTypeName( eventArgs->Object->item_type, eventArgs->Object->value[3] );
+  const char *itemType = GetItemTypeName( eventArgs->Object->item_type, eventArgs->Object->value[OVAL_WEAPON_TYPE] );
   char actBuf[MAX_STRING_LENGTH];
   long xpgain = 0;
   SKILLTYPE *skill = get_skilltype( data->Recipe->Skill );
@@ -373,7 +373,7 @@ void StartCrafting( CraftingSession *session )
   obj = get_obj_index( session->Recipe->Prototype );
 
   ch_printf( ch, "&GYou begin the long process of creating %s.\r\n",
-	     aoran( GetItemTypeName( obj->item_type, obj->value[3] ) ) );
+	     aoran( GetItemTypeName( obj->item_type, obj->value[OVAL_WEAPON_TYPE] ) ) );
 
   act( AT_PLAIN, "$n takes $s tools and some material and begins to work.",
        ch, NULL, NULL, TO_ROOM );
@@ -405,7 +405,6 @@ static bool FindMaterials( CraftingSession *session, bool extract )
 	  args.Object = obj;
 	  args.KeepFinding = false;
 
-
 	  if( IS_SET( material->Material.Flags, CRAFTFLAG_EXTRACT ) )
 	    {
 	      separate_obj( obj );
@@ -430,7 +429,7 @@ static bool FindMaterials( CraftingSession *session, bool extract )
 	  foundAll = false;
 	  ch_printf( ch, "&RYou need %s to complete the %s.\r\n",
 		     aoran( GetItemTypeName( material->Material.ItemType, 0 ) ),
-		     GetItemTypeName( proto->item_type, proto->value[3] ) );
+		     GetItemTypeName( proto->item_type, proto->value[OVAL_WEAPON_TYPE] ) );
 	}
 
       ++material;
