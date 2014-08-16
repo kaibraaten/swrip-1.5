@@ -606,8 +606,7 @@ typedef enum
 #define VIP_CORUSCANT        BV00
 #define VIP_KASHYYYK         BV01
 #define VIP_RYLOTH           BV02
-#define VIP_RODIA            BV03
-#define VIP_NAL_HUTTA        BV04
+
 #define VIP_MON_CALAMARI     BV05
 #define VIP_HONOGHR          BV06
 #define VIP_GAMORR           BV07
@@ -615,51 +614,11 @@ typedef enum
 #define VIP_ADARI            BV09
 #define VIP_BYSS             BV10
 #define VIP_ENDOR            BV11
-#define VIP_ROCHE            BV12
-#define VIP_AF_EL            BV13
-#define VIP_TRANDOSH         BV14
-#define VIP_CHAD             BV15
+
 #define VIP_CORELLIA         BV16
 #define VIP_HOTH             BV17
-#define VIP_ASTEROID         BV18
-#define VIP_BESPIN           BV19
+
 #define VIP_KUAT             BV20
-#define VIP_SOCORRO          BV21
-#define VIP_CORULAG          BV22
-#define VIP_HAPES            BV23
-#define VIP_WROONA           BV24
-#define VIP_DATHOMIR         BV25
-#define VIP_SULLUST          BV26
-
-/* player wanted bits */
-
-#define WANTED_MON_CALAMARI  VIP_MON_CALAMARI
-#define WANTED_CORUSCAN      VIP_CORUSCANT
-#define WANTED_ADARI         VIP_ADARI
-#define WANTED_RODIA         VIP_RODIA
-#define WANTED_RYLOTH        VIP_RYLOTH
-#define WANTED_GAMORR        VIP_GAMORR
-#define WANTED_TATOOINE      VIP_TATOOINE
-#define WANTED_BYSS          VIP_BYSS
-#define WANTED_NAL_HUTTA     VIP_NAL_HUTTA
-#define WANTED_KASHYYYK      VIP_KASHYYYK
-#define WANTED_HONOGHR       VIP_HONOGHR
-#define WANTED_ENDOR         BV11
-#define WANTED_ROCHE         BV12
-#define WANTED_AF_EL         BV13
-#define WANTED_TRANDOSH      BV14
-#define WANTED_CHAD          BV15
-#define WANTED_CORELLIA      VIP_CORELLIA
-#define WANTED_HOTH          VIP_HOTH
-#define WANTED_ASTEROID      VIP_ASTEROID
-#define WANTED_BESPIN        VIP_BESPIN
-#define WANTED_KUAT          VIP_KUAT
-#define WANTED_SOCORRO       VIP_SOCORRO
-#define WANTED_CORULAG       VIP_CORULAG
-#define WANTED_HAPES         VIP_HAPES
-#define WANTED_WROONA        VIP_WROONA
-#define WANTED_DATHOMIR      VIP_DATHOMIR
-#define WANTED_SULLUST       VIP_SULLUST
 
 #define ROOM_JAIL_MON_CALAMARI_1  21148
 #define ROOM_JAIL_MON_CALAMARI_2  21149

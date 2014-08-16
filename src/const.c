@@ -2180,11 +2180,11 @@ const char * const act_flags[] =
 
 const char * const planet_flags[] =
   {
-    "coruscant", "kashyyyk", "ryloth", "rodia", "nal hutta", "mon calamari",
-    "honoghr", "gamorr", "tatooine", "adari", "byss", "endor", "roche",
-    "af'el", "trandosh", "chad", "", "corellia", "hoth", "asteroid", "bespin",
-    "kuat", "socorro", "corulag", "hapes", "wroona", "roche", "dathomir",
-    "sullust", "p28", "p29", "p30", "p31"
+    "coruscant", "kashyyyk", "ryloth", "f3", "f4", "mon calamari",
+    "honoghr", "gamorr", "tatooine", "adari", "byss", "endor", "f12",
+    "f13", "f14", "f15", "f16", "corellia", "hoth", "f18", "f19",
+    "kuat", "f21", "f22", "f23", "f24", "f25", "f26",
+    "f27", "f28", "f29", "f30", "f31"
   };
 
 const char * const weapon_table[13] =

@@ -1837,7 +1837,7 @@ void check_killer( Character *ch, Character *victim )
               if ( IS_SET(victim->vip_flags , 1 << x ) )
                 {
                   SET_BIT(ch->pcdata->wanted_flags, 1 << x );
-                  ch_printf( ch, "&YYou are now wanted on %s.&w\r\n", planet_flags[x] , victim->short_descr );
+                  ch_printf( ch, "&YYou are now wanted on %s.&w\r\n", planet_flags[x] );
                 }
             }
           if ( ch->pcdata->clan )
