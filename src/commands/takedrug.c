@@ -66,7 +66,7 @@ void do_takedrug( Character *ch, char *argument )
 
       drug = obj->value[0];
 
-      set_wait_state( ch, PULSE_PER_SECOND/4 );
+      SetWaitState( ch, PULSE_PER_SECOND/4 );
 
       gain_condition( ch, COND_THIRST, 1 );
 

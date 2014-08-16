@@ -269,7 +269,7 @@ void violence_update( void )
           stop_fighting( ch, true );
         }
       else
-        if ( is_awake(ch) && ch->in_room == victim->in_room )
+        if ( IsAwake(ch) && ch->in_room == victim->in_room )
           retcode = multi_hit( ch, victim, TYPE_UNDEFINED );
         else
           stop_fighting( ch, false );
@@ -308,7 +308,7 @@ void violence_update( void )
         {
           rch_next = rch->next_in_room;
 
-          if ( is_awake(rch) && !rch->fighting )
+          if ( IsAwake(rch) && !rch->fighting )
             {
               /*
                * PC's auto-assist others in their group.
@@ -341,7 +341,7 @@ void violence_update( void )
 
 		      for ( vch = ch->in_room->first_person; vch; vch = vch->next )
 			{
-			  if ( can_see( rch, vch )
+			  if ( CanSeeCharacter( rch, vch )
 			       &&   is_same_group( vch, victim )
 			       &&   number_range( 0, number ) == 0 )
 			    {
@@ -720,19 +720,19 @@ ch_ret one_hit( Character *ch, Character *victim, int dt )
    */
   thac0_00 = 20;
   thac0_32 = 10;
-  thac0     = interpolate( GetAbilityLevel( ch, COMBAT_ABILITY ), thac0_00, thac0_32 ) - get_hitroll(ch);
-  victim_ac = (int) (get_armor_class(victim) / 10);
+  thac0     = interpolate( GetAbilityLevel( ch, COMBAT_ABILITY ), thac0_00, thac0_32 ) - GetHitRoll(ch);
+  victim_ac = (int) (GetArmorClass(victim) / 10);
 
   /* if you can't see what's coming... */
-  if ( wield && !can_see_obj( victim, wield) )
+  if ( wield && !CanSeeItem( victim, wield) )
     victim_ac += 1;
-  if ( !can_see( ch, victim ) )
+  if ( !CanSeeCharacter( ch, victim ) )
     victim_ac -= 4;
 
   if ( ch->race == RACE_DEFEL )
     victim_ac += 2;
 
-  if ( !is_awake ( victim ) )
+  if ( !IsAwake ( victim ) )
     victim_ac += 5;
 
   /* Weapon proficiency bonus */
@@ -772,7 +772,7 @@ ch_ret one_hit( Character *ch, Character *victim, int dt )
    * Bonuses.
    */
 
-  dam += get_damroll(ch);
+  dam += GetDamageRoll(ch);
 
   if ( prof_bonus )
     dam *= ( 1 + prof_bonus / 100 );
@@ -785,7 +785,7 @@ ch_ret one_hit( Character *ch, Character *victim, int dt )
     }
 
 
-  if ( !is_awake(victim) )
+  if ( !IsAwake(victim) )
     dam *= 2;
   if ( dt == gsn_backstab )
     dam *= (2 + urange( 2, GetAbilityLevel( ch, HUNTING_ABILITY ) - (GetAbilityLevel( victim, COMBAT_ABILITY ) / 4), 30 ) / 8);
@@ -904,7 +904,7 @@ ch_ret one_hit( Character *ch, Character *victim, int dt )
 
           if ( !fail && number_percent() < hit_chance )
             {
-              set_wait_state( victim, PULSE_VIOLENCE );
+              SetWaitState( victim, PULSE_VIOLENCE );
               act( AT_BLUE, "Blue rings of energy from $N's blaster knock you down leaving you stunned!", victim, NULL, ch, TO_CHAR );
               act( AT_BLUE, "Blue rings of energy from your blaster strike $N, leaving $M stunned!", ch, NULL, victim, TO_CHAR );
               act( AT_BLUE, "Blue rings of energy from $n's blaster hit $N, leaving $M stunned!", ch, NULL, victim, TO_NOTVICT );
@@ -1331,7 +1331,7 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
       if ( IsAffectedBy(victim, AFF_SANCTUARY) )
         dam /= 2;
 
-      if ( IsAffectedBy(victim, AFF_PROTECT) && is_evil(ch) )
+      if ( IsAffectedBy(victim, AFF_PROTECT) && IsEvil(ch) )
         dam -= (int) (dam / 4);
 
       if ( dam < 0 )
@@ -1452,7 +1452,7 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
 
   /* Make sure newbies dont die */
 
-  if (!IsNpc(victim) && is_not_authed(victim) && victim->hit < 1)
+  if (!IsNpc(victim) && IsNotAuthed(victim) && victim->hit < 1)
     victim->hit = 1;
 
   if ( dam > 0 && dt > TYPE_HIT
@@ -1528,7 +1528,7 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
         {
           act( AT_HURT, "That really did HURT!", victim, 0, 0, TO_CHAR );
           if ( number_bits(3) == 0 )
-            worsen_mental_state( ch, 1 );
+            WorsenMentalState( ch, 1 );
         }
       if ( victim->hit < victim->max_hit / 4 )
 
@@ -1536,7 +1536,7 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
           act( AT_DANGER, "You wish that your wounds would stop BLEEDING so much!",
                victim, 0, 0, TO_CHAR );
           if ( number_bits(2) == 0 )
-            worsen_mental_state( ch, 1 );
+            WorsenMentalState( ch, 1 );
         }
       break;
     }
@@ -1544,7 +1544,7 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
   /*
    * Sleep spells and extremely wounded folks.
    */
-  if ( !is_awake(victim)                /* lets make NPC's not slaughter PC's */
+  if ( !IsAwake(victim)                /* lets make NPC's not slaughter PC's */
        &&   !IsAffectedBy( victim, AFF_PARALYSIS ) )
     {
       if ( victim->fighting
@@ -2320,9 +2320,9 @@ void group_gain( Character *ch, Character *victim )
           if ( obj->wear_loc == WEAR_NONE )
             continue;
 
-          if ( ( IS_OBJ_STAT(obj, ITEM_ANTI_EVIL)    && is_evil(ch)    )
-               ||   ( IS_OBJ_STAT(obj, ITEM_ANTI_GOOD)    && is_good(ch)    )
-               ||   ( IS_OBJ_STAT(obj, ITEM_ANTI_NEUTRAL) && is_neutral(ch) ) )
+          if ( ( IS_OBJ_STAT(obj, ITEM_ANTI_EVIL)    && IsEvil(ch)    )
+               ||   ( IS_OBJ_STAT(obj, ITEM_ANTI_GOOD)    && IsGood(ch)    )
+               ||   ( IS_OBJ_STAT(obj, ITEM_ANTI_NEUTRAL) && IsNeutral(ch) ) )
             {
               act( AT_MAGIC, "You are zapped by $p.", ch, obj, NULL, TO_CHAR );
               act( AT_MAGIC, "$n is zapped by $p.",   ch, obj, NULL, TO_ROOM );

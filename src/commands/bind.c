@@ -52,7 +52,7 @@ void do_bind ( Character *ch , char *argument )
 
   ch->alignment -= 10;
 
-  set_wait_state( ch, 1 * PULSE_VIOLENCE );
+  SetWaitState( ch, 1 * PULSE_VIOLENCE );
 
   if ( IsNpc(victim) || number_percent( ) > ch->pcdata->learned[gsn_bind] )
     {

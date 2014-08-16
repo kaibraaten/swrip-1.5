@@ -19,7 +19,7 @@ void do_equipment( Character *ch, char *argument )
         if ( obj->wear_loc == iWear )
           {
             send_to_char( where_name[iWear], ch );
-            if ( can_see_obj( ch, obj ) )
+            if ( CanSeeItem( ch, obj ) )
               {
                 send_to_char( format_obj_to_char( obj, ch, true ), ch );
                 strcpy( buf , "" );

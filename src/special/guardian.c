@@ -10,7 +10,7 @@ bool spec_guardian( Character *ch )
   char *crime;
   int max_evil;
 
-  if ( !is_awake(ch) || ch->fighting )
+  if ( !IsAwake(ch) || ch->fighting )
     return false;
 
   max_evil = 300;

@@ -7,16 +7,16 @@ ch_ret spell_dispel_evil( int sn, int level, Character *ch, void *vo )
   int dam;
   SKILLTYPE *skill = get_skilltype(sn);
 
-  if ( !IsNpc(ch) && is_evil(ch) )
+  if ( !IsNpc(ch) && IsEvil(ch) )
     victim = ch;
 
-  if ( is_good(victim) )
+  if ( IsGood(victim) )
     {
       act( AT_MAGIC, "The light side protects $N.", ch, NULL, victim, TO_ROOM );
       return rSPELL_FAILED;
     }
 
-  if ( is_neutral(victim) )
+  if ( IsNeutral(victim) )
     {
       act( AT_MAGIC, "$N does not seem to be affected.", ch, NULL, victim, TO_CHAR );
       return rSPELL_FAILED;

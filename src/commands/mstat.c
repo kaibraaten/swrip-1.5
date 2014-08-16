@@ -92,14 +92,14 @@ void do_mstat( Character *ch, char *argument )
   ch_printf( ch,
              "Top Level: %d     Race: %d  Align: %d  AC: %d  Gold: %d\r\n",
              victim->top_level,  victim->race,   victim->alignment,
-             get_armor_class(victim),      victim->gold );
+             GetArmorClass(victim),      victim->gold );
 
   if (  victim->race  < MAX_NPC_RACE  && victim->race  >= 0 )
     ch_printf( ch, "Race: %s\r\n",
                npc_race[victim->race] );
 
   ch_printf( ch, "Hitroll: %d   Damroll: %d   Position: %d   Wimpy: %d \r\n",
-             get_hitroll(victim), get_damroll(victim),
+             GetHitRoll(victim), GetDamageRoll(victim),
              victim->position,    victim->wimpy );
   ch_printf( ch, "Fighting: %s    Master: %s    Leader: %s\r\n",
              victim->fighting ? victim->fighting->who->name : "(none)",
@@ -130,7 +130,7 @@ void do_mstat( Character *ch, char *argument )
              victim->saving.breath,
              victim->saving.spell_staff  );
   ch_printf( ch, "Carry figures: items (%d/%d)  weight (%d/%d)   Numattacks: %d\r\n",
-             victim->carry_number, can_carry_n(victim), victim->carry_weight, can_carry_w(victim), victim->numattacks );
+             victim->carry_number, GetCarryCapacityNumber(victim), victim->carry_weight, GetCarryCapacityWeight(victim), victim->numattacks );
 
   if ( IsNpc( victim ) )
     {

@@ -6,7 +6,7 @@ bool spec_janitor( Character *ch )
   OBJ_DATA *trash;
   OBJ_DATA *trash_next;
 
-  if ( !is_awake(ch) )
+  if ( !IsAwake(ch) )
     return false;
 
   for ( trash = ch->in_room->first_content; trash; trash = trash_next )

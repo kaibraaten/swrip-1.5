@@ -41,7 +41,7 @@ void do_tell( Character *ch, char *argument )
 
   if ( ( victim = get_char_world( ch, arg ) ) == NULL
        || ( IsNpc(victim) && victim->in_room != ch->in_room )
-       || (!is_not_authed(ch) && is_not_authed(victim) && !IsImmortal(ch) ) )
+       || (!IsNotAuthed(ch) && IsNotAuthed(victim) && !IsImmortal(ch) ) )
     {
       send_to_char( "They can't hear you.\r\n", ch );
       return;
@@ -75,7 +75,7 @@ void do_tell( Character *ch, char *argument )
         }
     }
 
-  if (is_not_authed(ch) && !is_not_authed(victim) && !IsImmortal(victim) )
+  if (IsNotAuthed(ch) && !IsNotAuthed(victim) && !IsImmortal(victim) )
     {
       send_to_char( "They can't hear you because you are not authorized.\r\n", ch);
       return;
@@ -113,7 +113,7 @@ void do_tell( Character *ch, char *argument )
       send_to_char( "That player is silenced. They will receive your message but can not respond.\r\n", ch );
     }
 
-  if ( (!IsImmortal(ch) && !is_awake(victim) )
+  if ( (!IsImmortal(ch) && !IsAwake(victim) )
        || (!IsNpc(victim)&&IS_SET(victim->in_room->room_flags, ROOM_SILENCE ) ) )
     {
       act( AT_PLAIN, "$E can't hear you.", ch, 0, victim, TO_CHAR );

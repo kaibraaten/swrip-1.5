@@ -1192,7 +1192,7 @@ Character *get_char_room( const Character *ch, const char *argument )
   count  = 0;
 
   for ( rch = ch->in_room->first_person; rch; rch = rch->next_in_room )
-    if ( can_see( ch, rch )
+    if ( CanSeeCharacter( ch, rch )
          &&  (( (nifty_is_name( arg, rch->name ) || (!IsNpc(rch) && nifty_is_name( arg, rch->pcdata->title )))
                 ||  (IsNpc(rch) && vnum == rch->pIndexData->vnum))) )
       {
@@ -1213,7 +1213,7 @@ Character *get_char_room( const Character *ch, const char *argument )
   count  = 0;
   for ( rch = ch->in_room->first_person; rch; rch = rch->next_in_room )
     {
-      if ( !can_see( ch, rch ) ||
+      if ( !CanSeeCharacter( ch, rch ) ||
            (!nifty_is_name_prefix( arg, rch->name ) &&
             (IsNpc(rch) || (!IsNpc(rch) && !nifty_is_name_prefix( arg, rch->pcdata->title )))
             )
@@ -1344,7 +1344,7 @@ OBJ_DATA *get_obj_list( const Character *ch, const char *argument, OBJ_DATA *lis
   int count  = 0;
 
   for ( obj = list; obj; obj = obj->next_content )
-    if ( can_see_obj( ch, obj ) && nifty_is_name( arg, obj->name ) )
+    if ( CanSeeItem( ch, obj ) && nifty_is_name( arg, obj->name ) )
       if ( (count += obj->count) >= number )
         return obj;
 
@@ -1355,7 +1355,7 @@ OBJ_DATA *get_obj_list( const Character *ch, const char *argument, OBJ_DATA *lis
   count = 0;
 
   for ( obj = list; obj; obj = obj->next_content )
-    if ( can_see_obj( ch, obj ) && nifty_is_name_prefix( arg, obj->name ) )
+    if ( CanSeeItem( ch, obj ) && nifty_is_name_prefix( arg, obj->name ) )
       if ( (count += obj->count) >= number )
         return obj;
 
@@ -1375,7 +1375,7 @@ OBJ_DATA *get_obj_list_rev( const Character *ch, const char *argument, OBJ_DATA 
   number = number_argument( argument, arg );
   count  = 0;
   for ( obj = list; obj; obj = obj->prev_content )
-    if ( can_see_obj( ch, obj ) && nifty_is_name( arg, obj->name ) )
+    if ( CanSeeItem( ch, obj ) && nifty_is_name( arg, obj->name ) )
       if ( (count += obj->count) >= number )
         return obj;
 
@@ -1385,7 +1385,7 @@ OBJ_DATA *get_obj_list_rev( const Character *ch, const char *argument, OBJ_DATA 
   */
   count = 0;
   for ( obj = list; obj; obj = obj->prev_content )
-    if ( can_see_obj( ch, obj ) && nifty_is_name_prefix( arg, obj->name ) )
+    if ( CanSeeItem( ch, obj ) && nifty_is_name_prefix( arg, obj->name ) )
       if ( (count += obj->count) >= number )
         return obj;
 
@@ -1442,7 +1442,7 @@ OBJ_DATA *get_obj_world( const Character *ch, const char *argument )
   count  = 0;
 
   for ( obj = first_object; obj; obj = obj->next )
-    if ( can_see_obj( ch, obj ) && (nifty_is_name( arg, obj->name )
+    if ( CanSeeItem( ch, obj ) && (nifty_is_name( arg, obj->name )
                                     ||   vnum == obj->pIndexData->vnum) )
       if ( (count += obj->count) >= number )
         return obj;
@@ -1457,7 +1457,7 @@ OBJ_DATA *get_obj_world( const Character *ch, const char *argument )
   */
   count  = 0;
   for ( obj = first_object; obj; obj = obj->next )
-    if ( can_see_obj( ch, obj ) && nifty_is_name_prefix( arg, obj->name ) )
+    if ( CanSeeItem( ch, obj ) && nifty_is_name_prefix( arg, obj->name ) )
       if ( (count += obj->count) >= number )
         return obj;
 
@@ -2362,7 +2362,7 @@ bool chance( const Character *ch, short percent )
      Note that since the neutral clannies can only be off by 1000 points, their
      maximum penalty will only be half that of the other clan types.
 
-     if ( is_clanned( ch ) )
+     if ( IsClanned( ch ) )
      clan_factor = 1 + abs( ch->alignment - ch->pcdata->clan->alignment ) / 1000;
      else
      clan_factor = 1;

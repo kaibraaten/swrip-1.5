@@ -53,7 +53,7 @@ ch_ret spell_area_attack( int sn, int level, Character *ch, void *vo )
               dam = dice( 1, level );
           if ( saved && SPELL_FLAG( skill, SF_SAVE_HALF_DAMAGE ) )
             dam /= 2;
-          if ( IsAffectedBy(vch, AFF_PROTECT) && is_evil(ch) )
+          if ( IsAffectedBy(vch, AFF_PROTECT) && IsEvil(ch) )
             dam -= (int) (dam / 4);
 
           retcode = damage( ch, vch, dam, sn );

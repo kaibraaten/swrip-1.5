@@ -21,7 +21,7 @@ void do_authorize( Character *ch, char *argument )
       send_to_char( " Chosen Character Name\r\n", ch );
       send_to_char( "---------------------------------------------\r\n", ch );
       for ( d = first_descriptor; d; d = d->next )
-        if ( (victim = d->character) != NULL && is_waiting_for_auth(victim) )
+        if ( (victim = d->character) != NULL && IsWaitingForAuth(victim) )
           ch_printf( ch, " %s@%s new %s...\r\n",
                      victim->name,
                      victim->desc->remote.hostname,
@@ -97,7 +97,7 @@ static Character *get_waiting_desc( const Character *ch, const char *name )
   for ( d = first_descriptor; d; d = d->next )
     {
       if ( d->character && (!str_prefix( name, d->character->name )) &&
-           is_waiting_for_auth(d->character) )
+           IsWaitingForAuth(d->character) )
         {
           if ( ++number_of_hits > 1 )
             {

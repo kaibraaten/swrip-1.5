@@ -20,7 +20,7 @@ void do_gather_intelligence ( Character *ch , char *argument )
   strcat(buf, "0.");
   strcat(buf, argument);
 
-  set_wait_state( ch, skill_table[gsn_gather_intelligence]->beats );
+  SetWaitState( ch, skill_table[gsn_gather_intelligence]->beats );
 
   if( ( ( victim = get_char_world(ch, buf) ) == NULL ))
     {
@@ -159,7 +159,7 @@ void do_gather_intelligence ( Character *ch , char *argument )
 
       if ( the_chance < 55 )
         {
-          if ( is_jedi( victim ) )
+          if ( IsJedi( victim ) )
             {
               if ( victim->mana > 1000 )
                 sprintf( buf, "%s appears to have centered his attention on studying the force, and is rumored to excel at its use.", victim->name );

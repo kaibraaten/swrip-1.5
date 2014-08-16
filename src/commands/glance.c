@@ -48,7 +48,7 @@ void do_glance( Character *ch, char *argument )
     }
   else
     {
-      if ( can_see( victim, ch ) )
+      if ( CanSeeCharacter( victim, ch ) )
         {
           act( AT_ACTION, "$n glances at you.", ch, NULL, victim, TO_VICT    );
           act( AT_ACTION, "$n glances at $N.",  ch, NULL, victim, TO_NOTVICT );

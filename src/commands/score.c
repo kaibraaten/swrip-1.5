@@ -28,13 +28,13 @@ void do_score(Character * ch, char *argument)
             capitalize(get_race(ch)), ( IsNpc(ch) ? "(null)" : ctime(&(ch->pcdata->logon)) ) );
 
   ch_printf(ch,   "&cHitroll: &C%-2.2d  &cDamroll: &C%-2.2d   &cArmor: &C%-4d        &cSaved:  &C%s\r",
-            get_hitroll(ch), get_damroll(ch), get_armor_class(ch),
+            GetHitRoll(ch), GetDamageRoll(ch), GetArmorClass(ch),
             (ch->pcdata && ch->pcdata->save_time) ? ctime(&(ch->pcdata->save_time)) : "no\n" );
 
   ch_printf(ch,   "&cAlign: &C%-5d    &cWimpy: &C%-3d                    &cTime:   &C%s\r",
             ch->alignment, ch->wimpy  , ctime(&current_time) );
 
-  if ( is_jedi( ch ) || IsImmortal(ch) )
+  if ( IsJedi( ch ) || IsImmortal(ch) )
     ch_printf(ch, "&cHit Points: &C%d &cof &C%d     &cMove: &C%d &cof &C%d     &cForce: &C%d &cof &C%d\r\n",
               ch->hit, ch->max_hit, ch->move, ch->max_move, ch->mana, ch->max_mana );
   else
@@ -52,7 +52,7 @@ void do_score(Character * ch, char *argument)
 
     for ( ability = 0 ; ability < MAX_RL_ABILITY ; ability++ )
       {
-	if ( ability != FORCE_ABILITY || is_jedi(ch) )
+	if ( ability != FORCE_ABILITY || IsJedi(ch) )
 	  {
 	    char maxbuf[MAX_STRING_LENGTH];
 
@@ -87,7 +87,7 @@ void do_score(Character * ch, char *argument)
             ch->gold, ch->pcdata->bank, ch->pcdata->pkills, ch->pcdata->mkills);
 
   ch_printf(ch, "&cWeight: &C%5.5d &c(&Cmax %7.7d&c)    Items: &C%5.5d &c(&Cmax %5.5d&c)\r\n",
-            ch->carry_weight, can_carry_w(ch) , ch->carry_number, can_carry_n(ch));
+            ch->carry_weight, GetCarryCapacityWeight(ch) , ch->carry_number, GetCarryCapacityNumber(ch));
 
   ch_printf(ch, "&cPager: &C(%c) %3d   &cAutoExit(&C%c&c)  AutoLoot(&C%c&c)  Autosac(&C%c&c)\r\n",
             IS_SET(ch->pcdata->flags, PCFLAG_PAGERON) ? 'X' : ' ',

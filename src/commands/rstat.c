@@ -118,7 +118,7 @@ void do_rstat( Character *ch, char *argument )
 
   for ( rch = location->first_person; rch; rch = rch->next_in_room )
     {
-      if ( can_see( ch, rch ) )
+      if ( CanSeeCharacter( ch, rch ) )
         {
           send_to_char( " ", ch );
           one_argument( rch->name, buf );

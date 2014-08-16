@@ -34,21 +34,21 @@ void do_bash( Character *ch, char *argument )
   if ( victim->fighting && victim->fighting->who != ch )
     bash_chance += 19;
 
-  set_wait_state( ch, skill_table[gsn_bash]->beats );
+  SetWaitState( ch, skill_table[gsn_bash]->beats );
 
   if ( IsNpc(ch)
        || (number_percent( ) + bash_chance) < ch->pcdata->learned[gsn_bash] )
     {
       learn_from_success( ch, gsn_bash );
       /* do not change anything here!  -Thoric */
-      set_wait_state( ch,     2 * PULSE_VIOLENCE );
-      set_wait_state( victim, 2 * PULSE_VIOLENCE );
+      SetWaitState( ch,     2 * PULSE_VIOLENCE );
+      SetWaitState( victim, 2 * PULSE_VIOLENCE );
       victim->position = POS_SITTING;
       global_retcode = damage( ch, victim, number_range( 1, GetAbilityLevel( ch, COMBAT_ABILITY ) ), gsn_bash );
     }
   else
     {
-      set_wait_state( ch,     2 * PULSE_VIOLENCE );
+      SetWaitState( ch,     2 * PULSE_VIOLENCE );
       learn_from_failure( ch, gsn_bash );
       global_retcode = damage( ch, victim, 0, gsn_bash );
     }

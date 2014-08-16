@@ -9,7 +9,7 @@ bool spec_customs_weapons( Character *ch )
   char       buf[MAX_STRING_LENGTH];
   long       ch_exp;
 
-  if ( !is_awake(ch) || ch->position == POS_FIGHTING )
+  if ( !IsAwake(ch) || ch->position == POS_FIGHTING )
     return false;
 
   for ( victim = ch->in_room->first_person; victim; victim = v_next )
@@ -26,7 +26,7 @@ bool spec_customs_weapons( Character *ch )
         {
           if (obj->pIndexData->item_type == ITEM_WEAPON)
 	    {
-              if ( victim != ch && can_see( ch, victim ) && can_see_obj( ch,obj ) )
+              if ( victim != ch && CanSeeCharacter( ch, victim ) && CanSeeItem( ch,obj ) )
                 {
                   sprintf( buf , "Weapons are banned from non-military usage. I'm going to have to confiscate %s.", obj->short_descr );
                   do_say( ch , buf );
@@ -43,7 +43,7 @@ bool spec_customs_weapons( Character *ch )
                   gain_exp( victim, SMUGGLING_ABILITY, 0 - ch_exp );
                   return true;
                 }
-              else if ( can_see( ch, victim ) && !IS_SET( obj->extra_flags , ITEM_CONTRABAND)  )
+              else if ( CanSeeCharacter( ch, victim ) && !IS_SET( obj->extra_flags , ITEM_CONTRABAND)  )
                 {
                   ch_exp = umin( obj->cost*10 , ( exp_level( GetAbilityLevel( victim, SMUGGLING_ABILITY ) + 1) - exp_level( GetAbilityLevel( victim, SMUGGLING_ABILITY ) ) ) );
                   ch_printf( victim, "You receive %ld experience for smuggling %d.\r\n " , ch_exp, obj->short_descr );

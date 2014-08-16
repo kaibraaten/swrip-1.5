@@ -243,7 +243,7 @@ void found_prey( Character *ch, Character *victim )
 
   sprintf( victname, "%s", IsNpc( victim ) ? victim->short_descr : victim->name );
 
-  if ( !can_see(ch, victim) )
+  if ( !CanSeeCharacter(ch, victim) )
     {
       if ( number_percent( ) < 90 )
 	{
@@ -558,7 +558,7 @@ static bool mob_snipe( Character *ch, Character *victim )
 	  return false;
 	}
 
-      if ( !can_see(ch, victim))
+      if ( !CanSeeCharacter(ch, victim))
 	{
 	  return false;
 	}

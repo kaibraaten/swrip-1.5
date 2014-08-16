@@ -100,7 +100,7 @@ void do_drop( Character *ch, char *argument )
           return;
         }
 
-      if ( !can_drop_obj( ch, obj ) )
+      if ( !CanDropItem( ch, obj ) )
         {
           send_to_char( "You can't let go of it.\r\n", ch );
           return;
@@ -149,9 +149,9 @@ void do_drop( Character *ch, char *argument )
           obj_next = obj->next_content;
 
           if ( (fAll || nifty_is_name( chk, obj->name ) )
-               &&   can_see_obj( ch, obj )
+               &&   CanSeeItem( ch, obj )
                &&   obj->wear_loc == WEAR_NONE
-               &&   can_drop_obj( ch, obj ) )
+               &&   CanDropItem( ch, obj ) )
             {
               found = true;
               if ( obj->pIndexData->mprog.progtypes & DROP_PROG && obj->count > 1 )

@@ -478,7 +478,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
 
       for ( pObj = mob->first_carrying; pObj; pObj = pObj->next_content )
 	{
-	  if ( can_see_obj(mob, pObj) && pObj->pIndexData->vnum == vnum )
+	  if ( CanSeeItem(mob, pObj) && pObj->pIndexData->vnum == vnum )
 	    {
 	      lhsvl++;
 	    }
@@ -487,7 +487,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
       for ( pObj = mob->in_room->first_content; pObj;
             pObj = pObj->next_content )
 	{
-	  if ( can_see_obj(mob, pObj) && pObj->pIndexData->vnum == vnum )
+	  if ( CanSeeItem(mob, pObj) && pObj->pIndexData->vnum == vnum )
 	    {
 	      lhsvl++;
 	    }
@@ -528,7 +528,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
 
       for ( pObj = mob->first_carrying; pObj; pObj = pObj->next_content )
 	{
-	  if ( can_see_obj(mob, pObj) && pObj->item_type == type )
+	  if ( CanSeeItem(mob, pObj) && pObj->item_type == type )
 	    {
 	      lhsvl++;
 	    }
@@ -537,7 +537,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
       for ( pObj = mob->in_room->first_content; pObj;
             pObj = pObj->next_content )
 	{
-	  if ( can_see_obj(mob, pObj) && pObj->item_type == type )
+	  if ( CanSeeItem(mob, pObj) && pObj->item_type == type )
 	    {
 	      lhsvl++;
 	    }
@@ -574,7 +574,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
       for ( pObj = mob->in_room->first_content; pObj;
             pObj = pObj->next_content )
 	{
-	  if ( can_see_obj(mob, pObj) && pObj->pIndexData->vnum == vnum )
+	  if ( CanSeeItem(mob, pObj) && pObj->pIndexData->vnum == vnum )
 	    {
 	      lhsvl++;
 	    }
@@ -620,7 +620,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
       for ( pObj = mob->in_room->first_content; pObj;
             pObj = pObj->next_content )
 	{
-	  if ( can_see_obj(mob, pObj) && pObj->item_type == type )
+	  if ( CanSeeItem(mob, pObj) && pObj->item_type == type )
 	    {
 	      lhsvl++;
 	    }
@@ -656,7 +656,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
 
       for ( pObj = mob->first_carrying; pObj; pObj = pObj->next_content )
 	{
-	  if ( can_see_obj(mob, pObj) && pObj->pIndexData->vnum == vnum )
+	  if ( CanSeeItem(mob, pObj) && pObj->pIndexData->vnum == vnum )
 	    {
 	      lhsvl++;
 	    }
@@ -701,7 +701,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
 
       for ( pObj = mob->first_carrying; pObj; pObj = pObj->next_content )
 	{
-	  if ( can_see_obj(mob, pObj) && pObj->item_type == type )
+	  if ( CanSeeItem(mob, pObj) && pObj->item_type == type )
 	    {
 	      lhsvl++;
 	    }
@@ -736,7 +736,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
 
       for ( pObj = mob->first_carrying; pObj; pObj = pObj->next_content )
 	{
-	  if ( pObj->wear_loc != WEAR_NONE && can_see_obj(mob, pObj) &&
+	  if ( pObj->wear_loc != WEAR_NONE && CanSeeItem(mob, pObj) &&
 	       pObj->pIndexData->vnum == vnum )
 	    {
 	      lhsvl++;
@@ -777,7 +777,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
       lhsvl = 0;
 
       for ( pObj = mob->first_carrying; pObj; pObj = pObj->next_content )
-        if ( pObj->wear_loc != WEAR_NONE && can_see_obj(mob, pObj) &&
+        if ( pObj->wear_loc != WEAR_NONE && CanSeeItem(mob, pObj) &&
              pObj->item_type == type )
           lhsvl++;
 
@@ -806,7 +806,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
       lhsvl = 0;
 
       for ( pObj = mob->first_carrying; pObj; pObj = pObj->next_content )
-        if ( pObj->wear_loc == WEAR_NONE && can_see_obj(mob, pObj) &&
+        if ( pObj->wear_loc == WEAR_NONE && CanSeeItem(mob, pObj) &&
              pObj->pIndexData->vnum == vnum )
           lhsvl++;
 
@@ -840,7 +840,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
       lhsvl = 0;
 
       for ( pObj = mob->first_carrying; pObj; pObj = pObj->next_content )
-        if ( pObj->wear_loc == WEAR_NONE && can_see_obj(mob, pObj) &&
+        if ( pObj->wear_loc == WEAR_NONE && CanSeeItem(mob, pObj) &&
              pObj->item_type == type )
           lhsvl++;
 
@@ -885,17 +885,17 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
 
       if ( !str_cmp(chck, "isgood") )
         {
-          return is_good(chkchar) ? true : false;
+          return IsGood(chkchar) ? true : false;
         }
 
       if ( !str_cmp(chck, "isneutral") )
         {
-          return is_neutral(chkchar) ? true : false;
+          return IsNeutral(chkchar) ? true : false;
         }
 
       if ( !str_cmp(chck, "isevil") )
         {
-          return is_evil(chkchar) ? true : false;
+          return IsEvil(chkchar) ? true : false;
         }
 
       if ( !str_cmp(chck, "isfight") )
@@ -1263,7 +1263,7 @@ void mprog_translate( char ch, char *t, Character *mob, Character *actor,
   case 'N':
     if( actor && !char_died( actor ) )
       {
-	if( can_see( mob, actor ) )
+	if( CanSeeCharacter( mob, actor ) )
 	  {
 	    if( IsNpc( actor ) )
 	      {
@@ -1306,7 +1306,7 @@ void mprog_translate( char ch, char *t, Character *mob, Character *actor,
   case 'T':
     if ( vict && !char_died(vict) )
       {
-        if ( can_see( mob, vict ) )
+        if ( CanSeeCharacter( mob, vict ) )
 	  {
 	    if ( IsNpc( vict ) )
 	      {
@@ -1349,7 +1349,7 @@ void mprog_translate( char ch, char *t, Character *mob, Character *actor,
   case 'R':
     if ( rndm && !char_died(rndm) )
       {
-        if ( can_see( mob, rndm ) )
+        if ( CanSeeCharacter( mob, rndm ) )
 	  {
 	    if ( IsNpc( rndm ) )
 	      {
@@ -1376,7 +1376,7 @@ void mprog_translate( char ch, char *t, Character *mob, Character *actor,
   case 'e':
     if ( actor && !char_died(actor) )
       {
-        if( can_see( mob, actor ) )
+        if( CanSeeCharacter( mob, actor ) )
 	  {
 	    strcpy( t, he_she[ actor->sex ] );
 	  }
@@ -1394,7 +1394,7 @@ void mprog_translate( char ch, char *t, Character *mob, Character *actor,
   case 'm':
     if ( actor && !char_died(actor) )
       {
-        if( can_see( mob, actor ) )
+        if( CanSeeCharacter( mob, actor ) )
 	  {
 	    strcpy( t, him_her[ actor->sex ] );
 	  }
@@ -1412,7 +1412,7 @@ void mprog_translate( char ch, char *t, Character *mob, Character *actor,
   case 's':
     if ( actor && !char_died(actor) )
       {
-        if( can_see( mob, actor ) )
+        if( CanSeeCharacter( mob, actor ) )
 	  {
 	    strcpy( t, his_her[ actor->sex ] );
 	  }
@@ -1430,7 +1430,7 @@ void mprog_translate( char ch, char *t, Character *mob, Character *actor,
   case 'E':
     if ( vict && !char_died(vict) )
       {
-        if( can_see( mob, vict ) )
+        if( CanSeeCharacter( mob, vict ) )
 	  {
 	    strcpy( t, he_she[ vict->sex ] );
 	  }
@@ -1448,7 +1448,7 @@ void mprog_translate( char ch, char *t, Character *mob, Character *actor,
   case 'M':
     if ( vict && !char_died(vict) )
       {
-        if( can_see( mob, vict ) )
+        if( CanSeeCharacter( mob, vict ) )
 	  {
 	    strcpy( t, him_her[ vict->sex ] );
 	  }
@@ -1466,7 +1466,7 @@ void mprog_translate( char ch, char *t, Character *mob, Character *actor,
   case 'S':
     if ( vict && !char_died(vict) )
       {
-        if( can_see( mob, vict ) )
+        if( CanSeeCharacter( mob, vict ) )
 	  {
 	    strcpy( t, his_her[ vict->sex ] );
 	  }
@@ -1515,7 +1515,7 @@ void mprog_translate( char ch, char *t, Character *mob, Character *actor,
   case 'J':
     if ( rndm && !char_died(rndm) )
       {
-        if( can_see( mob, rndm ) )
+        if( CanSeeCharacter( mob, rndm ) )
 	  {
 	    strcpy( t, he_she[ rndm->sex ] );
 	  }
@@ -1533,7 +1533,7 @@ void mprog_translate( char ch, char *t, Character *mob, Character *actor,
   case 'K':
     if ( rndm && !char_died(rndm) )
       {
-        if( can_see( mob, rndm ) )
+        if( CanSeeCharacter( mob, rndm ) )
 	  {
 	    strcpy( t, him_her[ rndm->sex ] );
 	  }
@@ -1551,7 +1551,7 @@ void mprog_translate( char ch, char *t, Character *mob, Character *actor,
   case 'L':
     if ( rndm && !char_died(rndm) )
       {
-        if( can_see( mob, rndm ) )
+        if( CanSeeCharacter( mob, rndm ) )
 	  {
 	    strcpy( t, his_her[ rndm->sex ] );
 	  }
@@ -1569,7 +1569,7 @@ void mprog_translate( char ch, char *t, Character *mob, Character *actor,
   case 'o':
     if ( obj && !obj_extracted(obj) )
       {
-	if( can_see_obj( mob, obj ) )
+	if( CanSeeItem( mob, obj ) )
 	  {
 	    one_argument( obj->name, t );
 	  }
@@ -1587,7 +1587,7 @@ void mprog_translate( char ch, char *t, Character *mob, Character *actor,
   case 'O':
     if ( obj && !obj_extracted(obj) )
       {
-        if( can_see_obj( mob, obj ) )
+        if( CanSeeItem( mob, obj ) )
 	  {
 	    strcpy( t, obj->short_descr );
 	  }
@@ -1605,7 +1605,7 @@ void mprog_translate( char ch, char *t, Character *mob, Character *actor,
   case 'p':
     if ( v_obj && !obj_extracted(v_obj) )
       {
-        if( can_see_obj( mob, v_obj ) )
+        if( CanSeeItem( mob, v_obj ) )
 	  {
 	    one_argument( v_obj->name, t );
 	  }
@@ -1623,7 +1623,7 @@ void mprog_translate( char ch, char *t, Character *mob, Character *actor,
   case 'P':
     if ( v_obj && !obj_extracted(v_obj) )
       {
-        if( can_see_obj( mob, v_obj ) )
+        if( CanSeeItem( mob, v_obj ) )
 	  {
 	    strcpy( t, v_obj->short_descr );
 	  }
@@ -2472,7 +2472,7 @@ void mprog_greet_trigger( Character *ch )
 
       if ( !IsNpc( vmob )
            || vmob->fighting
-           || !is_awake( vmob ) )
+           || !IsAwake( vmob ) )
 	{
 	  continue;
 	}

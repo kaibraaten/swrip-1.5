@@ -148,6 +148,6 @@ void do_drink( Character *ch, char *argument )
       break;
     }
 
-  set_wait_state(ch, PULSE_PER_SECOND );
+  SetWaitState(ch, PULSE_PER_SECOND );
 }
 

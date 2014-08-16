@@ -71,8 +71,8 @@ int GetExperienceWorth( const Character *ch )
   xp = GetAbilityLevel( ch, COMBAT_ABILITY ) * ch->top_level * 50;
   xp += ch->max_hit * 2;
   xp -= (ch->armor-50) * 2;
-  xp += ( ch->barenumdie * ch->baresizedie + get_damroll(ch) ) * 50;
-  xp += get_hitroll(ch) * ch->top_level * 10;
+  xp += ( ch->barenumdie * ch->baresizedie + GetDamageRoll(ch) ) * 50;
+  xp += GetHitRoll(ch) * ch->top_level * 10;
 
   if ( IsAffectedBy(ch, AFF_SANCTUARY) )
     xp += xp * 1.5;
@@ -102,7 +102,7 @@ short GetTrustLevel( const Character *ch )
   if ( IsNpc(ch) && ch->top_level >= LEVEL_AVATAR )
     return LEVEL_AVATAR;
 
-  if ( ch->top_level >= LEVEL_IMMORTAL && is_retired_immortal( ch ) )
+  if ( ch->top_level >= LEVEL_IMMORTAL && IsRetiredImmortal( ch ) )
     return LEVEL_IMMORTAL;
 
   return ch->top_level;
@@ -356,9 +356,9 @@ void EquipCharacter( Character *ch, OBJ_DATA *obj, int iWear )
     }
 
   separate_obj(obj);    /* just in case */
-  if ( ( IS_OBJ_STAT(obj, ITEM_ANTI_EVIL)    && is_evil(ch)    )
-       ||   ( IS_OBJ_STAT(obj, ITEM_ANTI_GOOD)    && is_good(ch)    )
-       ||   ( IS_OBJ_STAT(obj, ITEM_ANTI_NEUTRAL) && is_neutral(ch) ) )
+  if ( ( IS_OBJ_STAT(obj, ITEM_ANTI_EVIL)    && IsEvil(ch)    )
+       ||   ( IS_OBJ_STAT(obj, ITEM_ANTI_GOOD)    && IsGood(ch)    )
+       ||   ( IS_OBJ_STAT(obj, ITEM_ANTI_NEUTRAL) && IsNeutral(ch) ) )
     {
       /*
        * Thanks to Morgenes for the bug fix here!
@@ -449,7 +449,7 @@ OBJ_DATA *GetCarriedItem( const Character *ch, const char *argument )
 
   for ( obj = ch->last_carrying; obj; obj = obj->prev_content )
     if ( obj->wear_loc == WEAR_NONE
-         &&   can_see_obj( ch, obj )
+         &&   CanSeeItem( ch, obj )
          &&  (nifty_is_name( arg, obj->name ) || obj->pIndexData->vnum == vnum) )
       if ( (count += obj->count) >= number )
         return obj;
@@ -465,7 +465,7 @@ OBJ_DATA *GetCarriedItem( const Character *ch, const char *argument )
 
   for ( obj = ch->last_carrying; obj; obj = obj->prev_content )
     if ( obj->wear_loc == WEAR_NONE
-         &&   can_see_obj( ch, obj )
+         &&   CanSeeItem( ch, obj )
          &&   nifty_is_name_prefix( arg, obj->name ) )
       if ( (count += obj->count) >= number )
         return obj;
@@ -495,7 +495,7 @@ OBJ_DATA *GetWornItem( const Character *ch, const char *argument )
 
   for ( obj = ch->last_carrying; obj; obj = obj->prev_content )
     if ( obj->wear_loc != WEAR_NONE
-         &&   can_see_obj( ch, obj )
+         &&   CanSeeItem( ch, obj )
          &&  (nifty_is_name( arg, obj->name ) || obj->pIndexData->vnum == vnum) )
       if ( ++count == number )
         return obj;
@@ -510,7 +510,7 @@ OBJ_DATA *GetWornItem( const Character *ch, const char *argument )
   count = 0;
   for ( obj = ch->last_carrying; obj; obj = obj->prev_content )
     if ( obj->wear_loc != WEAR_NONE
-         &&   can_see_obj( ch, obj )
+         &&   CanSeeItem( ch, obj )
          &&   nifty_is_name_prefix( arg, obj->name ) )
       if ( ++count == number )
         return obj;
@@ -667,7 +667,7 @@ bool ms_find_obj( const Character *ch )
 /*
  * True if char can see victim.
  */
-bool can_see( const Character *ch, const Character *victim )
+bool CanSeeCharacter( const Character *ch, const Character *victim )
 {
   if (!victim)
     return false;
@@ -744,7 +744,7 @@ bool can_see( const Character *ch, const Character *victim )
 /*
  * True if char can see obj.
  */
-bool can_see_obj( const Character *ch, const OBJ_DATA *obj )
+bool CanSeeItem( const Character *ch, const OBJ_DATA *obj )
 {
   if ( !IsNpc(ch) && IS_SET(ch->act, PLR_HOLYLIGHT) )
     return true;
@@ -776,7 +776,7 @@ bool can_see_obj( const Character *ch, const OBJ_DATA *obj )
 /*
  * True if char can drop obj.
  */
-bool can_drop_obj( const Character *ch, const OBJ_DATA *obj )
+bool CanDropItem( const Character *ch, const OBJ_DATA *obj )
 {
   if ( !IS_OBJ_STAT(obj, ITEM_NODROP) )
     return true;
@@ -793,16 +793,16 @@ bool can_drop_obj( const Character *ch, const OBJ_DATA *obj )
 /*
  * "Fix" a character's stats                                    -Thoric
  */
-void fix_char( Character *ch )
+void FixCharacterStats( Character *ch )
 {
-  Affect *aff;
+  Affect *aff = NULL;
   OBJ_DATA *carry[MAX_LEVEL*200];
-  OBJ_DATA *obj;
-  int x, ncarry;
+  OBJ_DATA *obj = NULL;
+  int x = 0;
+  int ncarry = 0;
 
   de_EquipCharacter( ch );
 
-  ncarry = 0;
   while ( (obj=ch->first_carrying) != NULL )
     {
       carry[ncarry++]  = obj;
@@ -810,32 +810,34 @@ void fix_char( Character *ch )
     }
 
   for ( aff = ch->first_affect; aff; aff = aff->next )
-    affect_modify( ch, aff, false );
+    {
+      affect_modify( ch, aff, false );
+    }
 
-  ch->affected_by       = race_table[ch->race].affected;
-  ch->mental_state      = 0;
-  ch->hit               = umax( 1, ch->hit  );
-  ch->mana              = umax( 1, ch->mana );
-  ch->move              = umax( 1, ch->move );
-  ch->armor             = 100;
-  ch->stats.mod_str           = 0;
-  ch->stats.mod_dex           = 0;
-  ch->stats.mod_wis           = 0;
-  ch->stats.mod_int           = 0;
-  ch->stats.mod_con           = 0;
-  ch->stats.mod_cha           = 0;
-  ch->stats.mod_lck           = 0;
-  ch->damroll           = 0;
-  ch->hitroll           = 0;
+  ch->affected_by          = race_table[ch->race].affected;
+  ch->mental_state         = 0;
+  ch->hit                  = umax( 1, ch->hit  );
+  ch->mana                 = umax( 1, ch->mana );
+  ch->move                 = umax( 1, ch->move );
+  ch->armor                = 100;
+  ch->stats.mod_str        = 0;
+  ch->stats.mod_dex        = 0;
+  ch->stats.mod_wis        = 0;
+  ch->stats.mod_int        = 0;
+  ch->stats.mod_con        = 0;
+  ch->stats.mod_cha        = 0;
+  ch->stats.mod_lck        = 0;
+  ch->damroll              = 0;
+  ch->hitroll              = 0;
   ch->alignment = urange( -1000, ch->alignment, 1000 );
-  ch->saving.breath     = 0;
-  ch->saving.wand       = 0;
-  ch->saving.para_petri = 0;
-  ch->saving.spell_staff = 0;
-  ch->saving.poison_death = 0;
+  ch->saving.breath        = 0;
+  ch->saving.wand          = 0;
+  ch->saving.para_petri    = 0;
+  ch->saving.spell_staff   = 0;
+  ch->saving.poison_death  = 0;
 
-  ch->carry_weight      = 0;
-  ch->carry_number      = 0;
+  ch->carry_weight         = 0;
+  ch->carry_number         = 0;
 
   for ( aff = ch->first_affect; aff; aff = aff->next )
     affect_modify( ch, aff, true );
@@ -849,7 +851,7 @@ void fix_char( Character *ch )
 /*
  * Improve mental state                                         -Thoric
  */
-void better_mental_state( Character *ch, int mod )
+void ImproveMentalState( Character *ch, int mod )
 {
   int c = urange( 0, abs(mod), 20 );
   int con = GetCurrentConstitution(ch);
@@ -866,7 +868,7 @@ void better_mental_state( Character *ch, int mod )
 /*
  * Deteriorate mental state                                     -Thoric
  */
-void worsen_mental_state( Character *ch, int mod )
+void WorsenMentalState( Character *ch, int mod )
 {
   int c   = urange( 0, abs(mod), 20 );
   int con = GetCurrentConstitution(ch);
@@ -891,7 +893,7 @@ void worsen_mental_state( Character *ch, int mod )
  * Retrieve a character's carry capacity.
  * Vastly reduced (finally) due to containers           -Thoric
  */
-int can_carry_n( const Character *ch )
+int GetCarryCapacityNumber( const Character *ch )
 {
   int penalty = 0;
 
@@ -922,7 +924,7 @@ int can_carry_n( const Character *ch )
 /*
  * Retrieve a character's carry capacity.
  */
-int can_carry_w( const Character *ch )
+int GetCarryCapacityWeight( const Character *ch )
 {
   if ( !IsNpc(ch) && GetTrustLevel(ch) >= LEVEL_IMMORTAL )
     return 1000000;
@@ -943,50 +945,45 @@ bool IsImmortal( const Character *ch )
   return GetTrustLevel( ch ) >= LEVEL_IMMORTAL;
 }
 
-bool is_god( const Character *ch )
+bool IsGreater( const Character *ch )
 {
   return GetTrustLevel( ch ) >= LEVEL_GREATER;
 }
 
-bool is_hero( const Character *ch )
+bool IsAvatar( const Character *ch )
 {
   return GetTrustLevel( ch ) >= LEVEL_AVATAR;
 }
 
-bool is_good( const Character *ch )
+bool IsGood( const Character *ch )
 {
   return ch->alignment >= 350;
 }
 
-bool is_evil( const Character *ch )
+bool IsEvil( const Character *ch )
 {
   return ch->alignment <= -350;
 }
 
-bool is_neutral( const Character *ch )
+bool IsNeutral( const Character *ch )
 {
-  return !is_good( ch ) && !is_evil( ch );
+  return !IsGood( ch ) && !IsEvil( ch );
 }
 
-bool is_evil_mob_index_data( const ProtoMobile *mob )
-{
-  return mob->alignment <= -350;
-}
-
-bool is_awake( const Character *ch )
+bool IsAwake( const Character *ch )
 {
   return ch->position > POS_SLEEPING;
 }
 
-int get_armor_class( const Character *ch )
+int GetArmorClass( const Character *ch )
 {
-  int dexterity_modifier = is_awake( ch ) ? dex_app[GetCurrentDexterity(ch)].defensive : 0;
+  int dexterity_modifier = IsAwake( ch ) ? dex_app[GetCurrentDexterity(ch)].defensive : 0;
   int combat_level_modifier = ch->race == RACE_DEFEL ? GetAbilityLevel( ch, COMBAT_ABILITY ) * 2 + 5 : GetAbilityLevel( ch, COMBAT_ABILITY ) / 2;
 
   return ch->armor + dexterity_modifier - combat_level_modifier;
 }
 
-int get_hitroll( const Character *ch )
+int GetHitRoll( const Character *ch )
 {
   int base_hitroll = ch->hitroll;
   int strength_modifier = str_app[GetCurrentStrength( ch )].tohit;
@@ -995,7 +992,7 @@ int get_hitroll( const Character *ch )
   return base_hitroll + strength_modifier + mental_state_modifier;
 }
 
-int get_damroll( const Character *ch )
+int GetDamageRoll( const Character *ch )
 {
   int base_damroll = ch->damroll;
   int strength_modifier = str_app[GetCurrentStrength(ch)].todam;
@@ -1004,24 +1001,24 @@ int get_damroll( const Character *ch )
   return base_damroll + strength_modifier + mental_state_modifier;
 }
 
-bool is_drunk( const Character *ch )
+bool IsDrunk( const Character *ch )
 {
   return number_percent() < ch->pcdata->condition[COND_DRUNK];
 }
 
-bool is_retired_immortal( const Character *ch )
+bool IsRetiredImmortal( const Character *ch )
 {
   return !IsNpc( ch ) && IS_SET( ch->pcdata->flags, PCFLAG_RETIRED );
 }
 
-bool is_not_authed( const Character *ch )
+bool IsNotAuthed( const Character *ch )
 {
   return !IsNpc( ch )
     && ch->pcdata->auth_state <= 3
     && IS_SET( ch->pcdata->flags, PCFLAG_UNAUTHED);
 }
 
-bool is_waiting_for_auth( const Character *ch )
+bool IsWaitingForAuth( const Character *ch )
 {
   return !IsNpc( ch )
     && ch->desc
@@ -1033,20 +1030,20 @@ bool is_waiting_for_auth( const Character *ch )
 
 const char *PERS( const Character *ch, const Character *looker )
 {
-  return can_see( looker, ch ) ? ( IsNpc(ch) ? ch->short_descr : ((GetTrustLevel(looker) <= LEVEL_IMMORTAL) ? (DISGUISE(ch) ? ch->pcdata->title : ch->name ) : ch->name)) : ( IsImmortal(ch) ? "A Great One" : "someone" );
+  return CanSeeCharacter( looker, ch ) ? ( IsNpc(ch) ? ch->short_descr : ((GetTrustLevel(looker) <= LEVEL_IMMORTAL) ? (DISGUISE(ch) ? ch->pcdata->title : ch->name ) : ch->name)) : ( IsImmortal(ch) ? "A Great One" : "someone" );
 }
 
-bool is_clanned( const Character *ch )
+bool IsClanned( const Character *ch )
 {
   return !IsNpc( ch ) && ch->pcdata->clan;
 }
 
-void set_wait_state( Character *ch, short number_of_pulses )
+void SetWaitState( Character *ch, short number_of_pulses )
 {
   ch->wait = umax( ch->wait, number_of_pulses );
 }
 
-bool is_jedi( const Character *ch )
+bool IsJedi( const Character *ch )
 {
   return GetAbilityLevel( ch, FORCE_ABILITY ) > 1;
 }

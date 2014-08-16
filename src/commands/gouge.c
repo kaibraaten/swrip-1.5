@@ -51,8 +51,8 @@ void do_gouge( Character *ch, char *argument )
               affect_to_char( victim, &af );
               act( AT_SKILL, "You can't see a thing!", victim, NULL, NULL, TO_CHAR );
             }
-          set_wait_state( ch,     PULSE_VIOLENCE );
-          set_wait_state( victim, PULSE_VIOLENCE );
+          SetWaitState( ch,     PULSE_VIOLENCE );
+          SetWaitState( victim, PULSE_VIOLENCE );
           /* Taken out by request - put back in by Thoric
            * This is how it was designed.  You'd be a tad stunned
            * if someone gouged you in the eye.
@@ -69,7 +69,7 @@ void do_gouge( Character *ch, char *argument )
     }
   else
     {
-      set_wait_state( ch, skill_table[gsn_gouge]->beats );
+      SetWaitState( ch, skill_table[gsn_gouge]->beats );
       global_retcode = damage( ch, victim, 0, gsn_gouge );
       learn_from_failure( ch, gsn_gouge );
     }

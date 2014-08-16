@@ -102,7 +102,7 @@ void do_look( Character *ch, char *argument )
 
   for ( cnt = 0, obj = ch->last_carrying; obj; obj = obj->prev_content )
     {
-      if ( can_see_obj( ch, obj ) )
+      if ( CanSeeItem( ch, obj ) )
         {
           if ( (pdesc=get_extra_descr(arg, obj->first_extradesc)) != NULL )
             {
@@ -141,7 +141,7 @@ void do_look( Character *ch, char *argument )
 
   for ( obj = ch->in_room->last_content; obj; obj = obj->prev_content )
     {
-      if ( can_see_obj( ch, obj ) )
+      if ( CanSeeItem( ch, obj ) )
         {
           if ( (pdesc=get_extra_descr(arg, obj->first_extradesc)) != NULL )
             {
@@ -223,7 +223,7 @@ static void show_char_to_char_0( Character *victim, Character *ch )
   if ( IsAffectedBy(victim, AFF_HIDE)        ) strcat( buf, "(Stealth) "       );
   if ( IsAffectedBy(victim, AFF_PASS_DOOR)   ) strcat( buf, "(Translucent) ");
   if ( IsAffectedBy(victim, AFF_FAERIE_FIRE) ) strcat( buf, "&P(Pink Aura)&w "  );
-  if ( is_evil(victim)
+  if ( IsEvil(victim)
        &&   IsAffectedBy(ch, AFF_DETECT_EVIL)     ) strcat( buf, "&R(Red Aura)&w "   );
   if ( ( victim->mana > 10 )
        &&   ( IsAffectedBy( ch , AFF_DETECT_MAGIC ) || IsImmortal( ch ) ) )
@@ -458,7 +458,7 @@ static void show_char_to_char_1( Character *victim, Character *ch )
   int iWear;
   bool found;
 
-  if ( can_see( victim, ch ) )
+  if ( CanSeeCharacter( victim, ch ) )
     {
       act( AT_ACTION, "$n looks at you.", ch, NULL, victim, TO_VICT    );
       act( AT_ACTION, "$n looks at $N.",  ch, NULL, victim, TO_NOTVICT );
@@ -479,12 +479,12 @@ static void show_char_to_char_1( Character *victim, Character *ch )
 
   found = false;
 
-  if( ( (obj = GetEquipmentOnCharacter( victim, WEAR_OVER ) ) == NULL ) || obj->value[2] == 0 || is_god(ch) )
+  if( ( (obj = GetEquipmentOnCharacter( victim, WEAR_OVER ) ) == NULL ) || obj->value[2] == 0 || IsGreater(ch) )
     {
       for ( iWear = 0; iWear < MAX_WEAR; iWear++ )
         {
           if ( ( obj = GetEquipmentOnCharacter( victim, iWear ) ) != NULL
-               &&   can_see_obj( ch, obj ) &&
+               &&   CanSeeItem( ch, obj ) &&
                ( ( obj->description && obj->description[0] != '\0' ) || ( IS_SET(ch->act, PLR_HOLYLIGHT) || IsNpc(ch) ) ) )
             {
               if ( !found )
@@ -546,7 +546,7 @@ void show_char_to_char( Character *list, Character *ch )
       if ( rch == ch )
         continue;
 
-      if ( can_see( ch, rch ) )
+      if ( CanSeeCharacter( ch, rch ) )
         {
           show_char_to_char_0( rch, ch );
         }
@@ -617,7 +617,7 @@ static void look_under( Character *ch, char *what, bool doexaprog )
       return;
     }
 
-  if ( ch->carry_weight + obj->weight > can_carry_w( ch ) )
+  if ( ch->carry_weight + obj->weight > GetCarryCapacityWeight( ch ) )
     {
       send_to_char( "It's too heavy for you to look under.\r\n", ch );
       return;

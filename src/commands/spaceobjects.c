@@ -13,7 +13,7 @@ void do_spaceobjects( Character *ch, char *argument )
       if( spaceobject->type > SPACE_SUN )
         continue;
 
-      if ( !(spaceobject->trainer && (!is_god(ch))) )
+      if ( !(spaceobject->trainer && (!IsGreater(ch))) )
         ch_printf( ch, "%s\r\n", spaceobject->name );
 
       count++;
@@ -27,7 +27,7 @@ void do_spaceobjects( Character *ch, char *argument )
       if( spaceobject->type != SPACE_PLANET )
 	continue;
 
-      if ( !(spaceobject->trainer && (!is_god(ch))) )
+      if ( !(spaceobject->trainer && (!IsGreater(ch))) )
         ch_printf( ch, "%s\r\n", spaceobject->name );
 
       count++;

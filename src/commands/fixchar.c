@@ -19,6 +19,6 @@ void do_fixchar( Character *ch, char *argument )
       return;
     }
 
-  fix_char( victim );
+  FixCharacterStats( victim );
   send_to_char( "Done.\r\n", ch );
 }

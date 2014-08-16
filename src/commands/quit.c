@@ -39,7 +39,7 @@ void do_quit( Character *ch, char *argument )
 
   if ( !IsImmortal(ch) && ch->in_room
        && !IS_SET( ch->in_room->room_flags, ROOM_HOTEL )
-       && !is_not_authed(ch) )
+       && !IsNotAuthed(ch) )
     {
       send_to_char("You may not quit here.\r\n", ch);
       send_to_char("You will have to find a safer resting place such as a hotel...\r\n", ch);
@@ -51,7 +51,7 @@ void do_quit( Character *ch, char *argument )
        && IS_SET( ch->in_room->room_flags, ROOM_HOTEL )
        && !IS_SET( ch->in_room->room_flags, ROOM_PLR_HOME )
        && !IS_SET( ch->in_room->room_flags, ROOM_SPACECRAFT )
-       && !is_not_authed(ch) )
+       && !IsNotAuthed(ch) )
     {
       cost = get_cost_quit( ch );
 

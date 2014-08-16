@@ -30,7 +30,7 @@ void do_reply( Character *ch, char *argument )
     }
 
   if ( !IsNpc( victim ) && ( victim->switched )
-       && can_see( ch, victim ) && ( GetTrustLevel( ch ) > LEVEL_AVATAR ) )
+       && CanSeeCharacter( ch, victim ) && ( GetTrustLevel( ch ) > LEVEL_AVATAR ) )
     {
       send_to_char( "That player is switched.\r\n", ch );
       return;
@@ -48,7 +48,7 @@ void do_reply( Character *ch, char *argument )
       return;
     }
 
-  if ( ( !IsImmortal(ch) && !is_awake(victim) )
+  if ( ( !IsImmortal(ch) && !IsAwake(victim) )
        || ( !IsNpc(victim) && IS_SET( victim->in_room->room_flags, ROOM_SILENCE ) ) )
     {
       act( AT_PLAIN, "$E can't hear you.", ch, 0, victim, TO_CHAR );

@@ -64,6 +64,6 @@ void do_delay( Character *ch, char *argument )
       return;
     }
 
-  set_wait_state( victim, delay * PULSE_VIOLENCE );
+  SetWaitState( victim, delay * PULSE_VIOLENCE );
   ch_printf( ch, "You've delayed %s for %d rounds.\r\n", victim->name, delay );
 }

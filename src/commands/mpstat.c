@@ -53,7 +53,7 @@ void do_mpstat( Character *ch, char *argument )
   ch_printf( ch,
              "Lv: %d.  Align: %d.  AC: %d.  Credits: %d.\r\n",
              victim->top_level,        victim->alignment,
-             get_armor_class( victim ),    victim->gold);
+             GetArmorClass( victim ),    victim->gold);
 
   for ( mprg = victim->pIndexData->mprog.mudprogs; mprg; mprg = mprg->next )
     ch_printf( ch, ">%s %s\r\n%s\r\n",

@@ -17,7 +17,7 @@ void do_channels( Character *ch, char *argument )
 
       send_to_char( "Channels:", ch );
 
-      if ( GetTrustLevel( ch ) > 2 && !is_not_authed( ch ) )
+      if ( GetTrustLevel( ch ) > 2 && !IsNotAuthed( ch ) )
         {
           send_to_char( !IS_SET(ch->deaf, CHANNEL_AUCTION)
                         ? " +AUCTION"
@@ -53,7 +53,7 @@ void do_channels( Character *ch, char *argument )
                     : " -wartalk",
                     ch );
 
-      if ( is_hero(ch) )
+      if ( IsAvatar(ch) )
         {
           send_to_char( !IS_SET(ch->deaf, CHANNEL_AVTALK)
                         ? " +AVATAR"

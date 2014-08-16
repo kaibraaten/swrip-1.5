@@ -631,21 +631,21 @@ bool check_social( Character *ch, const char *command, char *argument )
 
       if ( !IsNpc(ch) && IsNpc(victim)
            && !IsAffectedBy(victim, AFF_CHARM)
-           && is_awake(victim)
+           && IsAwake(victim)
            && !IS_SET( victim->pIndexData->mprog.progtypes, ACT_PROG ) )
         {
           switch ( number_bits( 4 ) )
             {
             case 0:
               if ( !IS_SET(ch->in_room->room_flags, ROOM_SAFE )
-                   && is_evil(ch) )
+                   && IsEvil(ch) )
                 {
                   if ( !str_cmp( social->name, "slap" ) || !str_cmp( social->name, "punch" ) )
 		    {
 		      multi_hit( victim, ch, TYPE_UNDEFINED );
 		    }
                 }
-              else if ( is_neutral(ch) )
+              else if ( IsNeutral(ch) )
 		{
 		  act( AT_ACTION, "$n slaps $N.", victim, NULL, ch, TO_NOTVICT );
 		  act( AT_ACTION, "You slap $N.", victim, NULL, ch, TO_CHAR );

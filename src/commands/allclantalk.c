@@ -3,7 +3,7 @@
 
 void do_allclantalk( Character *ch, char *argument )
 {
-  if (is_not_authed(ch))
+  if (IsNotAuthed(ch))
     {
       send_to_char("Huh?\r\n", ch);
       return;

@@ -312,82 +312,80 @@ bool ms_find_obj( const Character *ch );
 /*
  * True if char can see victim.
  */
-bool can_see( const Character *ch, const Character *victim );
+bool CanSeeCharacter( const Character *ch, const Character *victim );
 
 /*
  * True if char can see obj.
  */
-bool can_see_obj( const Character *ch, const OBJ_DATA *obj );
+bool CanSeeItem( const Character *ch, const OBJ_DATA *obj );
 
 /*
  * True if char can drop obj.
  */
-bool can_drop_obj( const Character *ch, const OBJ_DATA *obj );
+bool CanDropItem( const Character *ch, const OBJ_DATA *obj );
 
 /*
  * "Fix" a character's stats                                    -Thoric
  */
-void fix_char( Character *ch );
+void FixCharacterStats( Character *ch );
 
 /*
  * Improve mental state                                         -Thoric
  */
-void better_mental_state( Character *ch, int mod );
+void ImproveMentalState( Character *ch, int mod );
 
 /*
  * Deteriorate mental state                                     -Thoric
  */
-void worsen_mental_state( Character *ch, int mod );
+void WorsenMentalState( Character *ch, int mod );
 
 /*
  * Retrieve a character's carry capacity.
  */
-int can_carry_w( const Character *ch );
+int GetCarryCapacityWeight( const Character *ch );
 
 /*
  * Retrieve a character's carry capacity.
  * Vastly reduced (finally) due to containers           -Thoric
  */
-int can_carry_n( const Character *ch );
+int GetCarryCapacityNumber( const Character *ch );
 
 bool IsNpc( const Character *ch );
 
 bool IsImmortal( const Character *ch );
 
-bool is_god( const Character *ch );
+bool IsGreater( const Character *ch );
 
-bool is_hero( const Character *ch );
+bool IsAvatar( const Character *ch );
 
-bool is_good( const Character *ch );
+bool IsGood( const Character *ch );
 
-bool is_evil( const Character *ch );
+bool IsEvil( const Character *ch );
 
-bool is_neutral( const Character *ch );
+bool IsNeutral( const Character *ch );
 
-bool is_evil_mob_index_data( const ProtoMobile *mob );
+bool IsAwake( const Character *ch );
 
-bool is_awake( const Character *ch );
+int GetArmorClass( const Character *ch );
 
-int get_armor_class( const Character *ch );
+int GetHitRoll( const Character *ch );
 
-int get_hitroll( const Character *ch );
+int GetDamageRoll( const Character *ch );
 
-int get_damroll( const Character *ch );
+bool IsDrunk( const Character *ch );
 
-bool is_drunk( const Character *ch );
+bool IsRetiredImmortal( const Character *ch );
 
-bool is_retired_immortal( const Character *ch );
+bool IsNotAuthed( const Character *ch );
 
-bool is_not_authed( const Character *ch );
-
-bool is_waiting_for_auth( const Character *ch );
+bool IsWaitingForAuth( const Character *ch );
 
 const char *PERS( const Character *ch, const Character *looker );
 
-bool is_clanned( const Character *ch );
+bool IsClanned( const Character *ch );
 
-void set_wait_state( Character *ch, short number_of_pulses );
+void SetWaitState( Character *ch, short number_of_pulses );
 
-bool is_jedi( const Character *ch );
+bool IsJedi( const Character *ch );
 
 #endif

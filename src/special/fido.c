@@ -8,7 +8,7 @@ bool spec_fido( Character *ch )
   OBJ_DATA *obj;
   OBJ_DATA *obj_next;
 
-  if ( !is_awake(ch) )
+  if ( !IsAwake(ch) )
     return false;
 
   for ( corpse = ch->in_room->first_content; corpse; corpse = c_next )

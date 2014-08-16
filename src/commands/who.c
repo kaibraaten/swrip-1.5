@@ -176,7 +176,7 @@ void do_who( Character *ch, char *argument )
                     {
                       for ( iRace = 0; iRace < MAX_RACE; iRace++ )
                         {
-                          if ( is_god(ch) && (!str_cmp( arg, race_table[iRace].race_name ) ) )
+                          if ( IsGreater(ch) && (!str_cmp( arg, race_table[iRace].race_name ) ) )
                             {
                               rgfRace[iRace] = true;
                               break;
@@ -217,7 +217,7 @@ void do_who( Character *ch, char *argument )
       char force_char = ' ';
 
       if ( (d->connection_state != CON_PLAYING && d->connection_state != CON_EDITING)
-           || ( !can_see( ch, d->character ) && IsImmortal( d->character ) )
+           || ( !CanSeeCharacter( ch, d->character ) && IsImmortal( d->character ) )
            || d->original)
         continue;
       wch   = d->original ? d->original : d->character;
@@ -242,7 +242,7 @@ void do_who( Character *ch, char *argument )
       else
         strcpy( char_name, "") ;
 
-      if ( is_god(ch) )
+      if ( IsGreater(ch) )
         sprintf( race_text, "(%s) ", race_table[wch->race].race_name);
       else
         strcpy( race_text, "" );
@@ -251,7 +251,7 @@ void do_who( Character *ch, char *argument )
 
       if (wch->stats.perm_frc > 0 && (ch->top_level >= LEVEL_GREATER) && !IsImmortal(wch))
         {
-          if(is_jedi( wch ))
+          if(IsJedi( wch ))
             force_char = '*';
           else
             force_char = '+';
@@ -273,14 +273,14 @@ void do_who( Character *ch, char *argument )
       else
         strcpy(extra_title, "");
 
-      if ( is_retired_immortal( wch ) )
+      if ( IsRetiredImmortal( wch ) )
         race = "Retired";
       else if ( wch->pcdata->rank && wch->pcdata->rank[0] != '\0' )
         race = wch->pcdata->rank;
 
       if ( wch->pcdata->clan && ( (!IsNpc(ch) &&  ch->pcdata->clan
                                    && ch->pcdata->clan == wch->pcdata->clan )
-                                  || is_god( ch ) ) )
+                                  || IsGreater( ch ) ) )
         {
           CLAN_DATA *pclan = wch->pcdata->clan;
 

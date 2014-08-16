@@ -47,8 +47,8 @@ void do_steal( Character *ch, char *argument )
       return;
     }
 
-  set_wait_state( ch, skill_table[gsn_steal]->beats );
-  percent  = number_percent( ) + ( is_awake(victim) ? 10 : -50 )
+  SetWaitState( ch, skill_table[gsn_steal]->beats );
+  percent  = number_percent( ) + ( IsAwake(victim) ? 10 : -50 )
     - (GetCurrentLuck(ch) - 15) + (GetCurrentLuck(victim) - 13)
     + TimesKilled( ch, victim )*7;
 
@@ -152,7 +152,7 @@ void do_steal( Character *ch, char *argument )
       return;
     }
 
-  if ( !can_drop_obj( ch, obj )
+  if ( !CanDropItem( ch, obj )
        ||   IS_OBJ_STAT(obj, ITEM_INVENTORY)
        ||        IS_OBJ_STAT(obj, ITEM_PROTOTYPE))
     {
@@ -161,14 +161,14 @@ void do_steal( Character *ch, char *argument )
       return;
     }
 
-  if ( ch->carry_number + (get_obj_number(obj)/obj->count) > can_carry_n( ch ) )
+  if ( ch->carry_number + (get_obj_number(obj)/obj->count) > GetCarryCapacityNumber( ch ) )
     {
       send_to_char( "You have your hands full.\r\n", ch );
       learn_from_failure( ch, gsn_steal );
       return;
     }
 
-  if ( ch->carry_weight + (get_obj_weight(obj)/obj->count) > can_carry_w( ch ) )
+  if ( ch->carry_weight + (get_obj_weight(obj)/obj->count) > GetCarryCapacityWeight( ch ) )
     {
       send_to_char( "You can't carry that much weight.\r\n", ch );
       learn_from_failure( ch, gsn_steal );

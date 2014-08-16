@@ -16,7 +16,7 @@ void do_bank( Character *ch, char *argument )
   if ( IsNpc(ch) || !ch->pcdata )
     return;
 
-  if ( is_not_authed(ch) )
+  if ( IsNotAuthed(ch) )
     {
       send_to_char("You can not access your bank account until after you've graduated from the acadamey.\r\n", ch);
       return;

@@ -64,13 +64,13 @@ void do_bury( Character *ch, char *argument )
       return;
     }
 
-  if ( obj->weight > (umax(5, (can_carry_w(ch) / 10))) && !shovel )
+  if ( obj->weight > (umax(5, (GetCarryCapacityWeight(ch) / 10))) && !shovel )
     {
       send_to_char( "You'd need a shovel to bury something that big.\r\n", ch );
       return;
     }
 
-  move = (obj->weight * 50 * (shovel ? 1 : 5)) / umax(1, can_carry_w(ch));
+  move = (obj->weight * 50 * (shovel ? 1 : 5)) / umax(1, GetCarryCapacityWeight(ch));
   move = urange( 2, move, 1000 );
 
   if ( move > ch->move )
@@ -84,5 +84,5 @@ void do_bury( Character *ch, char *argument )
   act( AT_ACTION, "You solemnly bury $p...", ch, obj, NULL, TO_CHAR );
   act( AT_ACTION, "$n solemnly buries $p...", ch, obj, NULL, TO_ROOM );
   SET_BIT( obj->extra_flags, ITEM_BURRIED );
-  set_wait_state( ch, urange( 10, move / 2, 100 ) );
+  SetWaitState( ch, urange( 10, move / 2, 100 ) );
 }

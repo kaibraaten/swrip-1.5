@@ -50,7 +50,7 @@ void do_appraise( Character *ch, char *argument )
       return;
     }
 
-  if ( !can_drop_obj( ch, obj ) )
+  if ( !CanDropItem( ch, obj ) )
     {
       send_to_char( "You can't let go of it.\r\n", ch );
       return;
@@ -83,13 +83,13 @@ static void appraise_all( Character *ch, Character *keeper, char *fixstr )
   for ( obj = ch->first_carrying; obj != NULL ; obj = obj->next_content )
     {
       if ( obj->wear_loc  == WEAR_NONE
-           &&   can_see_obj( ch, obj )
+           &&   CanSeeItem( ch, obj )
            && ( obj->item_type == ITEM_ARMOR
                 ||   obj->item_type == ITEM_WEAPON
                 ||   obj->item_type == ITEM_DEVICE ) )
 
         {
-          if ( !can_drop_obj( ch, obj ) )
+          if ( !CanDropItem( ch, obj ) )
             ch_printf( ch, "You can't let go of %s.\r\n", obj->name );
           else if ( ( cost = get_repaircost( keeper, obj ) ) < 0 )
             {

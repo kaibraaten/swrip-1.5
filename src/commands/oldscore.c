@@ -35,8 +35,8 @@ void do_oldscore( Character *ch, char *argument )
 
   ch_printf( ch,
              "You are carrying %d/%d items with weight %d/%d kg.\r\n",
-             ch->carry_number, can_carry_n(ch),
-             ch->carry_weight, can_carry_w(ch) );
+             ch->carry_number, GetCarryCapacityNumber(ch),
+             ch->carry_weight, GetCarryCapacityWeight(ch) );
 
   ch_printf( ch,
              "Str: %d  Int: %d  Wis: %d  Dex: %d  Con: %d  Cha: %d  Lck: ??  Frc: ??\r\n",
@@ -130,25 +130,25 @@ void do_oldscore( Character *ch, char *argument )
     }
 
   if ( ch->top_level >= 25 )
-    ch_printf( ch, "AC: %d.  ", get_armor_class(ch) );
+    ch_printf( ch, "AC: %d.  ", GetArmorClass(ch) );
 
   send_to_char( "You are ", ch );
-  if ( get_armor_class(ch) >=  101 ) send_to_char( "WORSE than naked!\r\n", ch );
-  else if ( get_armor_class(ch) >=   80 ) send_to_char( "naked.\r\n",            ch );
-  else if ( get_armor_class(ch) >=   60 ) send_to_char( "wearing clothes.\r\n",  ch );
-  else if ( get_armor_class(ch) >=   40 ) send_to_char( "slightly armored.\r\n", ch );
-  else if ( get_armor_class(ch) >=   20 ) send_to_char( "somewhat armored.\r\n", ch );
-  else if ( get_armor_class(ch) >=    0 ) send_to_char( "armored.\r\n",          ch );
-  else if ( get_armor_class(ch) >= - 20 ) send_to_char( "well armored.\r\n",     ch );
-  else if ( get_armor_class(ch) >= - 40 ) send_to_char( "strongly armored.\r\n", ch );
-  else if ( get_armor_class(ch) >= - 60 ) send_to_char( "heavily armored.\r\n",  ch );
-  else if ( get_armor_class(ch) >= - 80 ) send_to_char( "superbly armored.\r\n", ch );
-  else if ( get_armor_class(ch) >= -100 ) send_to_char( "divinely armored.\r\n", ch );
+  if ( GetArmorClass(ch) >=  101 ) send_to_char( "WORSE than naked!\r\n", ch );
+  else if ( GetArmorClass(ch) >=   80 ) send_to_char( "naked.\r\n",            ch );
+  else if ( GetArmorClass(ch) >=   60 ) send_to_char( "wearing clothes.\r\n",  ch );
+  else if ( GetArmorClass(ch) >=   40 ) send_to_char( "slightly armored.\r\n", ch );
+  else if ( GetArmorClass(ch) >=   20 ) send_to_char( "somewhat armored.\r\n", ch );
+  else if ( GetArmorClass(ch) >=    0 ) send_to_char( "armored.\r\n",          ch );
+  else if ( GetArmorClass(ch) >= - 20 ) send_to_char( "well armored.\r\n",     ch );
+  else if ( GetArmorClass(ch) >= - 40 ) send_to_char( "strongly armored.\r\n", ch );
+  else if ( GetArmorClass(ch) >= - 60 ) send_to_char( "heavily armored.\r\n",  ch );
+  else if ( GetArmorClass(ch) >= - 80 ) send_to_char( "superbly armored.\r\n", ch );
+  else if ( GetArmorClass(ch) >= -100 ) send_to_char( "divinely armored.\r\n", ch );
   else                           send_to_char( "invincible!\r\n",       ch );
 
   if ( ch->top_level >= 15 )
     ch_printf( ch, "Hitroll: %d  Damroll: %d.\r\n",
-               get_hitroll(ch), get_damroll(ch) );
+               GetHitRoll(ch), GetDamageRoll(ch) );
 
   if ( ch->top_level >= 10 )
     ch_printf( ch, "Alignment: %d.  ", ch->alignment );

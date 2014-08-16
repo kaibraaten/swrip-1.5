@@ -26,7 +26,7 @@ void do_transfer( Character *ch, char *argument )
                && d->character != ch
                && d->character->in_room
                && d->newstate != 2
-               && can_see( ch, d->character ) )
+               && CanSeeCharacter( ch, d->character ) )
             {
               char buf[MAX_STRING_LENGTH];
               sprintf( buf, "%s %s", d->character->name, arg2 );
@@ -65,7 +65,7 @@ void do_transfer( Character *ch, char *argument )
       return;
     }
 
-  if (is_not_authed(victim))
+  if (IsNotAuthed(victim))
     {
       send_to_char( "They are not authorized yet!\r\n", ch);
       return;

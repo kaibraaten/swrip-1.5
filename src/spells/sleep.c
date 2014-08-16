@@ -70,13 +70,13 @@ ch_ret spell_sleep( int sn, int level, Character *ch, void *vo )
       to_channel( log_buf, CHANNEL_MONITOR, "Monitor", umax( LEVEL_IMMORTAL, ch->top_level ) );
     }
 
-  if ( is_awake(victim) && victim->race != RACE_DROID )
+  if ( IsAwake(victim) && victim->race != RACE_DROID )
     {
       act( AT_MAGIC, "You feel very sleepy ..... zzzzzz.", victim, NULL, NULL, TO_CHAR );
       act( AT_MAGIC, "$n goes to sleep.", victim, NULL, NULL, TO_ROOM );
       victim->position = POS_SLEEPING;
     }
-  else if ( is_awake(victim) && victim->race == RACE_DROID )
+  else if ( IsAwake(victim) && victim->race == RACE_DROID )
     {
       act( AT_MAGIC, "You feel a jolt as you are deactivated.", victim, NULL, NULL, TO_CHAR );
       act( AT_MAGIC, "$n shutsdown.", victim, NULL, NULL, TO_ROOM );

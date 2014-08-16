@@ -193,7 +193,7 @@ void save_char_obj( Character *ch )
       return;
     }
 
-  if ( IsNpc(ch) || is_not_authed(ch) )
+  if ( IsNpc(ch) || IsNotAuthed(ch) )
     {
       return;
     }
@@ -317,7 +317,7 @@ void save_clone( Character *ch )
       return;
     }
 
-  if ( IsNpc(ch) || is_not_authed(ch) )
+  if ( IsNpc(ch) || IsNotAuthed(ch) )
     {
       return;
     }
@@ -2005,12 +2005,12 @@ void fread_char( Character *ch, FILE *fp, bool preload )
                   ch->hit = urange( 1 , ch->hit + hitgain , ch->max_hit );
                   ch->move = urange( 1 , ch->move + hitgain , ch->max_move );
 
-                  if ( is_jedi( ch ) )
+                  if ( IsJedi( ch ) )
 		    {
 		      ch->mana = urange( 0 , ch->mana + hitgain , ch->max_mana );
 		    }
 
-                  better_mental_state( ch , hitgain );
+                  ImproveMentalState( ch , hitgain );
                 }
 
               for ( sn = 0; sn < top_sn; sn++ )

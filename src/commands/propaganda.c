@@ -100,7 +100,7 @@ void do_propaganda ( Character *ch , char *argument )
       act( AT_ACTION, "$n speaks about his organization.\r\n", ch, NULL, victim, TO_VICT    );
       act( AT_ACTION, "$n tells $N about their organization.\r\n",  ch, NULL, victim, TO_NOTVICT );
     }
-  set_wait_state( ch, skill_table[gsn_propaganda]->beats );
+  SetWaitState( ch, skill_table[gsn_propaganda]->beats );
 
   if ( victim->top_level - GetCurrentCharisma(ch) > ch->pcdata->learned[gsn_propaganda]  )
     {

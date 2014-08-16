@@ -160,7 +160,7 @@ static bool is_note_to( const Character *ch, const NOTE_DATA *pnote )
   if ( is_name( "all", pnote->to_list ) )
     return true;
 
-  if ( is_hero(ch) && is_name( "immortal", pnote->to_list ) )
+  if ( IsAvatar(ch) && is_name( "immortal", pnote->to_list ) )
     return true;
 
   if ( is_name( ch->name, pnote->to_list ) )
@@ -276,7 +276,7 @@ static OBJ_DATA *find_quill( const Character *ch )
 
   for ( quill = ch->last_carrying; quill; quill = quill->prev_content )
     if ( quill->item_type == ITEM_PEN
-         && can_see_obj( ch, quill ) )
+         && CanSeeItem( ch, quill ) )
       return quill;
 
   return quill;

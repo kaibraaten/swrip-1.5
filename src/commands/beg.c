@@ -79,7 +79,7 @@ void do_beg( Character *ch, char *argument )
       return;
     }
 
-  set_wait_state( ch, skill_table[gsn_beg]->beats );
+  SetWaitState( ch, skill_table[gsn_beg]->beats );
   percent  = number_percent( ) + GetAbilityLevel( ch, SMUGGLING_ABILITY ) + victim->top_level;
 
   if ( percent > ch->pcdata->learned[gsn_beg]  )

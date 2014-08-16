@@ -30,7 +30,7 @@ void do_sell( Character *ch, char *argument )
       return;
     }
 
-  if ( !can_drop_obj( ch, obj ) )
+  if ( !CanDropItem( ch, obj ) )
     {
       send_to_char( "You can't let go of it!\r\n", ch );
       return;

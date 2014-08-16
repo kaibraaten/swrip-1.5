@@ -149,5 +149,5 @@ void do_calculate_diff(Character *ch, char *argument )
 
   learn_from_success( ch, gsn_navigation );
 
-  set_wait_state( ch , 2*PULSE_VIOLENCE );
+  SetWaitState( ch , 2*PULSE_VIOLENCE );
 }

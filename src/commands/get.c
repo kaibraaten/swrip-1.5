@@ -27,7 +27,7 @@ void do_get( Character *ch, char *argument )
           return;
         }
 
-      if ( (ch->carry_number + number) > can_carry_n(ch) )
+      if ( (ch->carry_number + number) > GetCarryCapacityNumber(ch) )
         {
           send_to_char( "You can't carry that many.\r\n", ch );
           return;
@@ -142,7 +142,7 @@ void do_get( Character *ch, char *argument )
               obj_next = obj->next_content;
 
               if ( ( fAll || nifty_is_name( chk, obj->name ) )
-                   && can_see_obj( ch, obj ) )
+                   && CanSeeItem( ch, obj ) )
                 {
                   found = true;
 
@@ -153,8 +153,8 @@ void do_get( Character *ch, char *argument )
                   get_obj( ch, obj, NULL );
 
                   if ( char_died(ch)
-                       || ch->carry_number >= can_carry_n( ch )
-                       || ch->carry_weight >= can_carry_w( ch )
+                       || ch->carry_number >= GetCarryCapacityNumber( ch )
+                       || ch->carry_weight >= GetCarryCapacityWeight( ch )
                        || (number && cnt >= number) )
                     {
                       if ( IS_SET(sysdata.save_flags, SV_GET)
@@ -217,7 +217,7 @@ void do_get( Character *ch, char *argument )
               return;
             }
 
-          if ( ch->carry_weight + container->weight > can_carry_w( ch ) )
+          if ( ch->carry_weight + container->weight > GetCarryCapacityWeight( ch ) )
             {
               send_to_char( "It's too heavy for you to lift.\r\n", ch );
               return;
@@ -296,7 +296,7 @@ void do_get( Character *ch, char *argument )
             {
               obj_next = obj->next_content;
               if ( ( fAll || nifty_is_name( chk, obj->name ) )
-                   &&   can_see_obj( ch, obj ) )
+                   &&   CanSeeItem( ch, obj ) )
                 {
                   found = true;
                   if ( number && (cnt + obj->count) > number )
@@ -304,8 +304,8 @@ void do_get( Character *ch, char *argument )
                   cnt += obj->count;
                   get_obj( ch, obj, container );
                   if ( char_died(ch)
-                       ||   ch->carry_number >= can_carry_n( ch )
-                       ||   ch->carry_weight >= can_carry_w( ch )
+                       ||   ch->carry_number >= GetCarryCapacityNumber( ch )
+                       ||   ch->carry_weight >= GetCarryCapacityWeight( ch )
                        ||   (number && cnt >= number) )
                     return;
                 }
@@ -359,7 +359,7 @@ static void get_obj( Character *ch, OBJ_DATA *obj, OBJ_DATA *container )
       return;
     }
 
-  if ( ch->carry_number + get_obj_number( obj ) > can_carry_n( ch ) )
+  if ( ch->carry_number + get_obj_number( obj ) > GetCarryCapacityNumber( ch ) )
     {
       act( AT_PLAIN, "$d: you can't carry that many items.",
            ch, NULL, obj->name, TO_CHAR );
@@ -371,7 +371,7 @@ static void get_obj( Character *ch, OBJ_DATA *obj, OBJ_DATA *container )
   else
     weight = get_obj_weight( obj );
 
-  if ( ch->carry_weight + weight > can_carry_w( ch ) )
+  if ( ch->carry_weight + weight > GetCarryCapacityWeight( ch ) )
     {
       act( AT_PLAIN, "$d: you can't carry that much weight.",
            ch, NULL, obj->name, TO_CHAR );

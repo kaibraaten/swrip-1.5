@@ -70,7 +70,7 @@ void do_use( Character *ch, char *argument )
         }
     }
 
-  set_wait_state( ch, 1 * PULSE_VIOLENCE );
+  SetWaitState( ch, 1 * PULSE_VIOLENCE );
 
   if ( device->value[2] > 0 )
     {

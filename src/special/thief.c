@@ -16,10 +16,10 @@ bool spec_thief( Character *ch )
 
       if ( GetTrustLevel(victim) >= LEVEL_IMMORTAL
            ||   number_bits( 2 ) != 0
-           ||   !can_see( ch, victim ) )        /* Thx Glop */
+           ||   !CanSeeCharacter( ch, victim ) )        /* Thx Glop */
         continue;
 
-      if ( is_awake(victim) && number_range( 0, ch->top_level ) == 0 )
+      if ( IsAwake(victim) && number_range( 0, ch->top_level ) == 0 )
         {
           act( AT_ACTION, "You discover $n's hands in your wallet!",
                ch, NULL, victim, TO_VICT );

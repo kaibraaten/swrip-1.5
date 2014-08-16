@@ -48,7 +48,7 @@ void do_apply( Character *ch, char *argument )
         actiondesc( ch, obj, NULL );
     }
 
-  set_wait_state( ch, obj->value[2] );
+  SetWaitState( ch, obj->value[2] );
   retcode = obj_cast_spell( obj->value[4], obj->value[0], ch, ch, NULL );
 
   if ( retcode == rNONE )

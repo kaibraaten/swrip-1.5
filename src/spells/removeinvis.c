@@ -35,7 +35,7 @@ ch_ret spell_remove_invis( int sn, int level, Character *ch, void *vo )
 
       if (victim)
         {
-          if(!can_see(ch, victim))
+          if(!CanSeeCharacter(ch, victim))
             {
               ch_printf(ch, "You don't see %s!\r\n", spell_target_name);
 	      return rSPELL_FAILED;

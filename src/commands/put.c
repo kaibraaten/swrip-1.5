@@ -58,7 +58,7 @@ void do_put( Character *ch, char *argument )
 
   if ( IS_OBJ_STAT(container, ITEM_COVERING) )
     {
-      if ( ch->carry_weight + container->weight > can_carry_w( ch ) )
+      if ( ch->carry_weight + container->weight > GetCarryCapacityWeight( ch ) )
         {
           send_to_char( "It's too heavy for you to lift.\r\n", ch );
           return;
@@ -94,7 +94,7 @@ void do_put( Character *ch, char *argument )
           return;
         }
 
-      if ( !can_drop_obj( ch, obj ) )
+      if ( !CanDropItem( ch, obj ) )
         {
           send_to_char( "You can't let go of it.\r\n", ch );
           return;
@@ -172,10 +172,10 @@ void do_put( Character *ch, char *argument )
           obj_next = obj->next_content;
 
           if ( ( fAll || nifty_is_name( chk, obj->name ) )
-               &&   can_see_obj( ch, obj )
+               &&   CanSeeItem( ch, obj )
                &&   obj->wear_loc == WEAR_NONE
                &&   obj != container
-               &&   can_drop_obj( ch, obj )
+               &&   CanDropItem( ch, obj )
 	       &&   get_obj_weight( obj ) + get_obj_weight( container )
                <= container->value[OVAL_CONTAINER_CAPACITY] )
             {

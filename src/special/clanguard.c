@@ -8,7 +8,7 @@ bool spec_clan_guard( Character *ch )
   CLAN_DATA *clan;
   bool found = false;
 
-  if ( !is_awake(ch) || ch->fighting )
+  if ( !IsAwake(ch) || ch->fighting )
     return false;
 
   clan = get_clan(ch->name);
@@ -16,11 +16,11 @@ bool spec_clan_guard( Character *ch )
   for ( victim = ch->in_room->first_person; victim; victim = v_next )
     {
       v_next = victim->next_in_room;
-      if ( !can_see( ch, victim ) )
+      if ( !CanSeeCharacter( ch, victim ) )
         continue;
       if ( get_timer(victim, TIMER_RECENTFIGHT) > 0 )
         continue;
-      if ( !IsNpc( victim ) && victim->pcdata && victim->pcdata->clan && clan && is_awake(victim)
+      if ( !IsNpc( victim ) && victim->pcdata && victim->pcdata->clan && clan && IsAwake(victim)
            && (clan != victim->pcdata->clan )
            && ( !victim->pcdata->clan->mainclan || clan != victim->pcdata->clan->mainclan )
            && ( !clan->mainclan || clan->mainclan != victim->pcdata->clan ) )

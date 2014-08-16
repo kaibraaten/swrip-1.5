@@ -22,7 +22,7 @@ void do_teach( Character *ch, char *argument )
       Character *victim;
       int adept;
 
-      if ( !is_awake(ch) )
+      if ( !IsAwake(ch) )
         {
           send_to_char( "In your dreams, or what?\r\n", ch );
           return;

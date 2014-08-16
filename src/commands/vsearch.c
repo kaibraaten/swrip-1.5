@@ -27,7 +27,7 @@ void do_vsearch( Character *ch, char *argument )
     }
   for ( obj = first_object; obj != NULL; obj = obj->next )
     {
-      if ( !can_see_obj( ch, obj ) || !( argi == obj->pIndexData->vnum ))
+      if ( !CanSeeItem( ch, obj ) || !( argi == obj->pIndexData->vnum ))
         continue;
 
       found = true;

@@ -381,9 +381,9 @@ void talk_channel( Character *ch, const char *argument, int channel, const char 
             continue;
           if ( channel == CHANNEL_105 && och->top_level < 105 )
             continue;
-          if ( channel == CHANNEL_WARTALK && is_not_authed( och ) )
+          if ( channel == CHANNEL_WARTALK && IsNotAuthed( och ) )
             continue;
-          if ( channel == CHANNEL_AVTALK && !is_hero(och) )
+          if ( channel == CHANNEL_AVTALK && !IsAvatar(och) )
             continue;
 
           if ( IS_SET( vch->in_room->room_flags, ROOM_SILENCE ) )
@@ -541,7 +541,7 @@ void add_follower( Character *ch, Character *master )
   if ( IsNpc(ch) && IS_SET(ch->act, ACT_PET) && !IsNpc(master) )
     master->pcdata->pet = ch;
 
-  if ( can_see( master, ch ) )
+  if ( CanSeeCharacter( master, ch ) )
     act( AT_ACTION, "$n now follows you.", ch, NULL, master, TO_VICT );
 
   act( AT_ACTION, "You now follow $N.",  ch, NULL, master, TO_CHAR );
@@ -564,7 +564,7 @@ void stop_follower( Character *ch )
       affect_strip( ch, gsn_charm_person );
     }
 
-  if ( can_see( ch->master, ch ) )
+  if ( CanSeeCharacter( ch->master, ch ) )
     act( AT_ACTION, "$n stops following you.",     ch, NULL, ch->master, TO_VICT    );
   act( AT_ACTION, "You stop following $N.",      ch, NULL, ch->master, TO_CHAR    );
 
@@ -625,7 +625,7 @@ void talk_auction (const char *argument)
     {
       original = d->original ? d->original : d->character; /* if switched */
       if ((d->connection_state == CON_PLAYING) && !IS_SET(original->deaf,CHANNEL_AUCTION)
-          && !IS_SET(original->in_room->room_flags, ROOM_SILENCE) && !is_not_authed(original))
+          && !IS_SET(original->in_room->room_flags, ROOM_SILENCE) && !IsNotAuthed(original))
         act( AT_GOSSIP, buf, original, NULL, NULL, TO_CHAR );
     }
 }

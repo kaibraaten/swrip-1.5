@@ -63,7 +63,7 @@ void do_punch( Character *ch, char *argument )
         ch->alignment -= 10;
     }
 
-  set_wait_state( ch, skill_table[gsn_punch]->beats );
+  SetWaitState( ch, skill_table[gsn_punch]->beats );
 
   if ( IsNpc(ch) || number_percent( ) < ch->pcdata->learned[gsn_punch] )
     {

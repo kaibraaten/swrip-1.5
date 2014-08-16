@@ -869,7 +869,7 @@ ch_ret drive_ship( Character *ch, SHIP_DATA *ship, Exit *pexit, int fall )
 
   if ( !IsNpc( ch ) )
     {
-      if ( is_drunk( ch ) && ( ch->position != POS_SHOVE )
+      if ( IsDrunk( ch ) && ( ch->position != POS_SHOVE )
 	   && ( ch->position != POS_DRAG ) )
 	{
 	  drunk = true;

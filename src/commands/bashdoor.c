@@ -41,7 +41,7 @@ void do_bashdoor( Character *ch, char *argument )
           return;
         }
 
-      set_wait_state( ch, skill_table[gsn_bashdoor]->beats );
+      SetWaitState( ch, skill_table[gsn_bashdoor]->beats );
 
       if ( IS_SET( pexit->exit_info, EX_SECRET ) )
         keyword = "wall";
@@ -115,7 +115,7 @@ void do_bashdoor( Character *ch, char *argument )
     {
       for ( gch = ch->in_room->first_person; gch; gch = gch->next_in_room )
 	{
-	  if ( is_awake( gch )
+	  if ( IsAwake( gch )
 	       && !gch->fighting
 	       && ( IsNpc( gch ) && !IsAffectedBy( gch, AFF_CHARM ) )
 	       && ( ch->top_level - gch->top_level <= 4 )

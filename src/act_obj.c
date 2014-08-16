@@ -296,7 +296,7 @@ bool remove_obj( Character *ch, int iWear, bool fReplace )
     return true;
 
   if ( !fReplace
-       &&   ch->carry_number + get_obj_number( obj ) > can_carry_n( ch ) )
+       &&   ch->carry_number + get_obj_number( obj ) > GetCarryCapacityNumber( ch ) )
     {
       act( AT_PLAIN, "$d: you can't carry that many items.",
            ch, NULL, obj->name, TO_CHAR );

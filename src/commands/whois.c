@@ -43,7 +43,7 @@ void do_whois( Character *ch, char *argument)
       return;
     }
 
-  if (is_god(ch))
+  if (IsGreater(ch))
     {
       ch_printf(ch, "%s is a %s %s",
                 victim->name,

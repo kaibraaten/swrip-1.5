@@ -8,7 +8,7 @@ bool spec_police( Character *ch )
   int vip;
   char buf[MAX_STRING_LENGTH];
 
-  if ( !is_awake(ch) || ch->fighting )
+  if ( !IsAwake(ch) || ch->fighting )
     return false;
 
   for ( victim = ch->in_room->first_person; victim; victim = v_next )
@@ -16,7 +16,7 @@ bool spec_police( Character *ch )
       v_next = victim->next_in_room;
       if ( IsNpc(victim) )
         continue;
-      if ( !can_see( ch, victim ) )
+      if ( !CanSeeCharacter( ch, victim ) )
         continue;
       if ( number_bits ( 1 ) == 0 )
         continue;

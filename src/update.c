@@ -323,7 +323,7 @@ void advance_level( Character *ch, int ability )
       ch->top_level = urange( 1, GetAbilityLevel( ch, ability ), 100 );
     }
 
-  if( is_jedi( ch ) && ability == FORCE_ABILITY )
+  if( IsJedi( ch ) && ability == FORCE_ABILITY )
     {
       ch->max_mana += 20;
     }
@@ -343,7 +343,7 @@ void gain_exp( Character *ch, short ability, long gain )
 
   SetExperience( ch, ability, umax( 0, GetExperience( ch, ability ) + gain ) );
 
-  if (is_not_authed(ch) && GetExperience( ch, ability ) >= exp_level(GetAbilityLevel(ch, ability ) + 1))
+  if (IsNotAuthed(ch) && GetExperience( ch, ability ) >= exp_level(GetAbilityLevel(ch, ability ) + 1))
     {
       send_to_char("You can not ascend to a higher level until you are authorized.\r\n", ch);
       SetExperience( ch, ability, exp_level( GetAbilityLevel(ch, ability) + 1 ) - 1);
@@ -463,7 +463,7 @@ int mana_gain( const Character *ch )
     }
   else
     {
-      if ( !is_jedi( ch ) )
+      if ( !IsJedi( ch ) )
 	{
 	  return (0 - ch->mana);
 	}
@@ -626,18 +626,18 @@ void gain_addiction( Character *ch )
         {
           ch_printf ( ch, "You feel like you are going to die. You NEED %s\r\n.",
 		      get_spicetype_name(drug) );
-          worsen_mental_state( ch, 2 );
+          WorsenMentalState( ch, 2 );
           damage(ch, ch, 5, TYPE_UNDEFINED);
         }
       else if ( ch->pcdata->addiction[drug] > ch->pcdata->drug_level[drug]+100 )
         {
           ch_printf ( ch, "You need some %s.\r\n", get_spicetype_name(drug) );
-          worsen_mental_state( ch, 2 );
+          WorsenMentalState( ch, 2 );
         }
       else if ( ch->pcdata->addiction[drug] > ch->pcdata->drug_level[drug]+50 )
         {
           ch_printf ( ch, "You really crave some %s.\r\n", get_spicetype_name(drug) );
-          worsen_mental_state( ch, 1 );
+          WorsenMentalState( ch, 1 );
         }
       else if ( ch->pcdata->addiction[drug] > ch->pcdata->drug_level[drug]+25 )
         {
@@ -674,7 +674,7 @@ void gain_condition( Character *ch, int iCond, int value )
        || IsNpc(ch)
        || IsImmortal( ch )
        || IsDroid(ch)
-       || is_not_authed(ch))
+       || IsNotAuthed(ch))
     return;
 
   if( ( iCond == COND_THIRST || iCond == COND_FULL )
@@ -695,7 +695,7 @@ void gain_condition( Character *ch, int iCond, int value )
             {
               set_char_color( AT_HUNGRY, ch );
               send_to_char( "You are STARVING!\r\n",  ch );
-              worsen_mental_state( ch, 1 );
+              WorsenMentalState( ch, 1 );
               retcode = damage(ch, ch, 5, TYPE_UNDEFINED);
             }
           break;
@@ -705,7 +705,7 @@ void gain_condition( Character *ch, int iCond, int value )
             {
               set_char_color( AT_THIRSTY, ch );
               send_to_char( "You are DYING of THIRST!\r\n", ch );
-              worsen_mental_state( ch, 2 );
+              WorsenMentalState( ch, 2 );
               retcode = damage(ch, ch, 5, TYPE_UNDEFINED);
             }
           break;
@@ -744,7 +744,7 @@ void gain_condition( Character *ch, int iCond, int value )
 
               if ( number_bits(1) == 0 )
 		{
-		  worsen_mental_state( ch, 1 );
+		  WorsenMentalState( ch, 1 );
 		}
             }
           break;
@@ -754,7 +754,7 @@ void gain_condition( Character *ch, int iCond, int value )
             {
               set_char_color( AT_THIRSTY, ch );
               send_to_char( "You are really thirsty.\r\n", ch );
-              worsen_mental_state( ch, 1 );
+              WorsenMentalState( ch, 1 );
             }
           break;
 
@@ -890,27 +890,27 @@ void mobile_update( void )
         {
           if (  ch->top_level < 20 )
 	    {
-	      set_wait_state( ch, 6 * PULSE_PER_SECOND );
+	      SetWaitState( ch, 6 * PULSE_PER_SECOND );
 	    }
           else if (  ch->top_level < 40 )
 	    {
-	      set_wait_state( ch, 5 * PULSE_PER_SECOND );
+	      SetWaitState( ch, 5 * PULSE_PER_SECOND );
 	    }
           else if (  ch->top_level < 60 )
 	    {
-	      set_wait_state( ch, 4 * PULSE_PER_SECOND );
+	      SetWaitState( ch, 4 * PULSE_PER_SECOND );
 	    }
           else if (  ch->top_level < 80 )
 	    {
-	      set_wait_state( ch, 3 * PULSE_PER_SECOND );
+	      SetWaitState( ch, 3 * PULSE_PER_SECOND );
 	    }
           else if (  ch->top_level < 100 )
 	    {
-	      set_wait_state( ch, 2 * PULSE_PER_SECOND );
+	      SetWaitState( ch, 2 * PULSE_PER_SECOND );
 	    }
           else
 	    {
-	      set_wait_state( ch, 1 * PULSE_PER_SECOND );
+	      SetWaitState( ch, 1 * PULSE_PER_SECOND );
 	    }
 
           hunt_victim( ch );
@@ -1261,7 +1261,7 @@ void weather_update( void )
         {
           if ( d->connection_state == CON_PLAYING
                && IS_OUTSIDE(d->character)
-               && is_awake(d->character)
+               && IsAwake(d->character)
                && d->character->in_room
                && d->character->in_room->sector_type != SECT_UNDERWATER
                && d->character->in_room->sector_type != SECT_OCEANFLOOR
@@ -1365,7 +1365,7 @@ void weather_update( void )
         {
           if ( d->connection_state == CON_PLAYING
                &&   IS_OUTSIDE(d->character)
-               &&   is_awake(d->character) )
+               &&   IsAwake(d->character) )
 	    {
 	      act( AT_TEMP, buf, d->character, 0, 0, TO_CHAR );
 	    }
@@ -1427,7 +1427,7 @@ void char_update( void )
        * See if player should be auto-saved.
        */
       if ( !IsNpc(ch)
-           && !is_not_authed(ch)
+           && !IsNotAuthed(ch)
            && current_time - ch->pcdata->save_time > (sysdata.save_frequency*60) )
 	{
 	  ch_save = ch;
@@ -1448,7 +1448,7 @@ void char_update( void )
           if ( ch->hit  < ch->max_hit )
             ch->hit  += hit_gain(ch);
 
-          if ( ch->mana < ch->max_mana && is_jedi( ch ) )
+          if ( ch->mana < ch->max_mana && IsJedi( ch ) )
             ch->mana += mana_gain(ch);
 
           if ( ch->move < ch->max_move )
@@ -1487,7 +1487,7 @@ void char_update( void )
 
           if ( ch->pcdata->condition[COND_DRUNK] > 8 )
 	    {
-	      worsen_mental_state( ch, ch->pcdata->condition[COND_DRUNK]/8 );
+	      WorsenMentalState( ch, ch->pcdata->condition[COND_DRUNK]/8 );
 	    }
 
           if ( ch->pcdata->condition[COND_FULL] > 1 )
@@ -1495,26 +1495,26 @@ void char_update( void )
               switch( ch->position )
                 {
                 case POS_SLEEPING:
-		  better_mental_state( ch, 4 );
+		  ImproveMentalState( ch, 4 );
 		  break;
 
                 case POS_RESTING:
-		  better_mental_state( ch, 3 );
+		  ImproveMentalState( ch, 3 );
 		  break;
 
                 case POS_SITTING:
                 case POS_MOUNTED:
-		  better_mental_state( ch, 2 );
+		  ImproveMentalState( ch, 2 );
 		  break;
 
                 case POS_STANDING:
-		  better_mental_state( ch, 1 );
+		  ImproveMentalState( ch, 1 );
 		  break;
 
                 case POS_FIGHTING:
                   if ( number_bits(2) == 0 )
 		    {
-		      better_mental_state( ch, 1 );
+		      ImproveMentalState( ch, 1 );
 		    }
                   break;
                 }
@@ -1525,26 +1525,26 @@ void char_update( void )
               switch( ch->position )
                 {
                 case POS_SLEEPING:
-		  better_mental_state( ch, 5 );
+		  ImproveMentalState( ch, 5 );
 		  break;
 
                 case POS_RESTING:
-		  better_mental_state( ch, 3 );
+		  ImproveMentalState( ch, 3 );
 		  break;
 
                 case POS_SITTING:
                 case POS_MOUNTED:
-		  better_mental_state( ch, 2 );
+		  ImproveMentalState( ch, 2 );
 		  break;
 
                 case POS_STANDING:
-		  better_mental_state( ch, 1 );
+		  ImproveMentalState( ch, 1 );
 		  break;
 
                 case POS_FIGHTING:
                   if ( number_bits(2) == 0 )
 		    {
-		      better_mental_state( ch, 1 );
+		      ImproveMentalState( ch, 1 );
 		    }
 
                   break;
@@ -2116,7 +2116,7 @@ void char_check( void )
               if ( !IS_SET( ch->act, ACT_SENTINEL )
                    && !ch->fighting && ch->hhf.hunting )
                 {
-                  set_wait_state( ch, 2 * PULSE_VIOLENCE );
+                  SetWaitState( ch, 2 * PULSE_VIOLENCE );
                   hunt_victim( ch );
                   continue;
                 }
@@ -2320,7 +2320,7 @@ void aggr_update( void )
       if ( !IsNpc(ch)
            || ch->fighting
            || IsAffectedBy(ch, AFF_CHARM)
-           || !is_awake(ch)
+           || !IsAwake(ch)
            || ( IS_SET(ch->act, ACT_WIMPY) ) )
 	{
 	  continue;
@@ -2346,7 +2346,7 @@ void aggr_update( void )
           if ( char_died(wch)
                || wch->top_level >= LEVEL_IMMORTAL
                || !wch->in_room
-               || !can_see( ch, wch ) )
+               || !CanSeeCharacter( ch, wch ) )
 	    {
 	      continue;
 	    }
@@ -2379,9 +2379,9 @@ void aggr_update( void )
                    && !victim->fighting
                    && victim->hit >= victim->max_hit )
                 {
-                  set_wait_state( ch, skill_table[gsn_backstab]->beats );
+                  SetWaitState( ch, skill_table[gsn_backstab]->beats );
 
-                  if ( !is_awake(victim)
+                  if ( !IsAwake(victim)
                        || number_percent( )+5 < ch->top_level )
                     {
                       global_retcode = multi_hit( ch, victim, gsn_backstab );
@@ -2912,7 +2912,7 @@ void auction_update (void)
 
           if ( (auction->buyer->carry_weight
                 + get_obj_weight( auction->item ))
-               > can_carry_w( auction->buyer ) )
+               > GetCarryCapacityWeight( auction->buyer ) )
             {
               act( AT_PLAIN, "$p is too heavy for you to carry with your current inventory.", auction->buyer, auction->item, NULL, TO_CHAR );
               act( AT_PLAIN, "$n is carrying too much to also carry $p, and $e drops it.", auction->buyer, auction->item, NULL, TO_ROOM );
@@ -2950,7 +2950,7 @@ void auction_update (void)
 
           if ( (auction->seller->carry_weight
                 + get_obj_weight( auction->item ))
-               > can_carry_w( auction->seller ) )
+               > GetCarryCapacityWeight( auction->seller ) )
             {
               act( AT_PLAIN, "You drop $p as it is just too much to carry"
                    " with everything else you're carrying.", auction->seller,

@@ -1832,9 +1832,9 @@ char *act_string(const char *format, Character *to, Character *ch,
             case 'q': i = (to == ch) ? "" : "s";                                break;
             case 'Q': i = (to == ch) ? "your" :
               his_her[urange(0,  ch->sex, 2)];                  break;
-            case 'p': i = (!to || can_see_obj(to, obj1)
+            case 'p': i = (!to || CanSeeItem(to, obj1)
                            ? obj_short(obj1) : "something");                    break;
-            case 'P': i = (!to || can_see_obj(to, obj2)
+            case 'P': i = (!to || CanSeeItem(to, obj2)
                            ? obj_short(obj2) : "something");                    break;
             case 'd':
               if ( !arg2 || ((char *) arg2)[0] == '\0' )
@@ -1926,11 +1926,11 @@ void act( short AType, const char *format, Character *ch, const void *arg1, cons
     {
       if (((!to || !to->desc)
            && (  IsNpc(to) && !IS_SET(to->pIndexData->mprog.progtypes, ACT_PROG) ))
-          ||   !is_awake(to) )
+          ||   !IsAwake(to) )
         continue;
 
 
-      if(!can_see(to, ch) && type != TO_VICT )
+      if(!CanSeeCharacter(to, ch) && type != TO_VICT )
         continue;
 
       if ( type == TO_CHAR && to != ch )
@@ -1942,7 +1942,7 @@ void act( short AType, const char *format, Character *ch, const void *arg1, cons
       if ( type == TO_NOTVICT && (to == ch || to == vch) )
         continue;
 
-      if(!can_see(to, ch) && type != TO_VICT )
+      if(!CanSeeCharacter(to, ch) && type != TO_VICT )
         continue;
 
       txt = act_string(format, to, ch, arg1, arg2);
@@ -1966,7 +1966,7 @@ char *default_prompt( Character *ch )
   static char buf[MAX_STRING_LENGTH];
   strcpy( buf,"" );
 
-  if (is_jedi(ch) || GetTrustLevel(ch) >= LEVEL_IMMORTAL )
+  if (IsJedi(ch) || GetTrustLevel(ch) >= LEVEL_IMMORTAL )
     strcat(buf, "&pForce:&P%m/&p%M  &pAlign:&P%a\r\n");
 
   strcat(buf, "&BHealth:&C%h&B/%H  &BMovement:&C%v&B/%V");
@@ -2072,9 +2072,9 @@ void display_prompt( Descriptor *d )
             case 'a':
               if ( ch->top_level >= 10 )
                 the_stat = ch->alignment;
-              else if ( is_good(ch) )
+              else if ( IsGood(ch) )
                 strcpy(pbuf, "good");
-              else if ( is_evil(ch) )
+              else if ( IsEvil(ch) )
                 strcpy(pbuf, "evil");
               else
                 strcpy(pbuf, "neutral");
@@ -2089,14 +2089,14 @@ void display_prompt( Descriptor *d )
               break;
 
             case 'm':
-              if ( IsImmortal(ch) || is_jedi( ch ) )
+              if ( IsImmortal(ch) || IsJedi( ch ) )
                 the_stat = ch->mana;
               else
                 the_stat = 0;
               break;
 
             case 'M':
-              if ( IsImmortal(ch) || is_jedi( ch ) )
+              if ( IsImmortal(ch) || IsJedi( ch ) )
                 the_stat = ch->max_mana;
               else
                 the_stat = 0;

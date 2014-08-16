@@ -136,7 +136,7 @@ void do_buy( Character *ch, char *argument )
           for ( obj = keeper->last_carrying; obj; obj = obj->prev_content )
             {
               if ( obj->wear_loc == WEAR_NONE
-                   &&   can_see_obj( ch, obj ) )
+                   &&   CanSeeItem( ch, obj ) )
                 onum++;
               if ( onum == oref )
                 {
@@ -163,7 +163,7 @@ void do_buy( Character *ch, char *argument )
         cost= obj->cost;
 
 
-      if ( cost <= 0 || !can_see_obj( ch, obj ) )
+      if ( cost <= 0 || !CanSeeItem( ch, obj ) )
 	{
           act( AT_TELL, "$n tells you 'I don't sell that -- try 'list'.'",
                keeper, NULL, ch, TO_VICT );
@@ -197,14 +197,14 @@ void do_buy( Character *ch, char *argument )
           return;
         }
 
-      if ( ch->carry_number + get_obj_number( obj ) > can_carry_n( ch ) )
+      if ( ch->carry_number + get_obj_number( obj ) > GetCarryCapacityNumber( ch ) )
         {
           send_to_char( "You can't carry that many items.\r\n", ch );
           return;
         }
 
       if ( ch->carry_weight + ( get_obj_weight( obj ) * noi )
-           + (noi > 1 ? 2 : 0) > can_carry_w( ch ) )
+           + (noi > 1 ? 2 : 0) > GetCarryCapacityWeight( ch ) )
         {
           send_to_char( "You can't carry that much weight.\r\n", ch );
           return;

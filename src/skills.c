@@ -199,7 +199,7 @@ bool check_skill( Character *ch, const char *command, char *argument )
         }
 
       /* waitstate */
-      set_wait_state( ch, skill_table[sn]->beats );
+      SetWaitState( ch, skill_table[sn]->beats );
 
       /* check for failure */
       if ( (number_percent( ) + skill_table[sn]->difficulty * 5)
@@ -297,7 +297,7 @@ void learn_from_success( Character *ch, int sn )
       return;
     }
 
-  if ( sn == skill_lookup( "meditate" ) && !is_jedi( ch ) )
+  if ( sn == skill_lookup( "meditate" ) && !IsJedi( ch ) )
     {
       if ( ch->pcdata->learned[sn] < 50 )
 	{
@@ -401,7 +401,7 @@ void disarm( Character *ch, Character *victim )
       return;
     }
 
-  if ( IsNpc( ch ) && !can_see_obj( ch, obj )
+  if ( IsNpc( ch ) && !CanSeeItem( ch, obj )
        && number_bits( 1 ) == 0)
     {
       learn_from_failure( ch, gsn_disarm );
@@ -454,8 +454,8 @@ void trip( Character *ch, Character *victim )
       act( AT_SKILL, "$n trips $N's mount and $N falls off!", ch, NULL, victim, TO_NOTVICT );
       REMOVE_BIT( victim->mount->act, ACT_MOUNTED );
       victim->mount = NULL;
-      set_wait_state( ch,     2 * PULSE_VIOLENCE );
-      set_wait_state( victim, 2 * PULSE_VIOLENCE );
+      SetWaitState( ch,     2 * PULSE_VIOLENCE );
+      SetWaitState( victim, 2 * PULSE_VIOLENCE );
       victim->position = POS_RESTING;
       return;
     }
@@ -466,8 +466,8 @@ void trip( Character *ch, Character *victim )
       act( AT_SKILL, "You trip $N and $N goes down!", ch, NULL, victim, TO_CHAR    );
       act( AT_SKILL, "$n trips $N and $N goes down!", ch, NULL, victim, TO_NOTVICT );
 
-      set_wait_state( ch,     2 * PULSE_VIOLENCE );
-      set_wait_state( victim, 2 * PULSE_VIOLENCE );
+      SetWaitState( ch,     2 * PULSE_VIOLENCE );
+      SetWaitState( victim, 2 * PULSE_VIOLENCE );
       victim->position = POS_RESTING;
     }
 }
@@ -509,7 +509,7 @@ bool check_parry( Character *ch, Character *victim )
   int chances = 0;
   OBJ_DATA *wield = NULL;
 
-  if ( !is_awake(victim) )
+  if ( !IsAwake(victim) )
     {
       return false;
     }
@@ -569,7 +569,7 @@ bool check_dodge( Character *ch, Character *victim )
 {
   int chances = 0;
 
-  if ( !is_awake(victim) )
+  if ( !IsAwake(victim) )
     {
       return false;
     }
@@ -614,7 +614,7 @@ bool check_grip( Character *ch, Character *victim )
 {
   int grip_chance = 0;
 
-  if ( !is_awake(victim) )
+  if ( !IsAwake(victim) )
     {
       return false;
     }

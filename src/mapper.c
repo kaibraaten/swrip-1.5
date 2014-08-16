@@ -42,7 +42,7 @@ struct map_type
   /* Recursive depth this coord was found at */
   int depth;
   int info;
-  bool can_see;
+  bool CanSeeCharacter;
 };
 
 /* Chars for each of the four compass direction exits */
@@ -114,7 +114,7 @@ static void clear_coord( int x, int y )
   map[x][y].vnum = 0;
   map[x][y].depth = 0;
   map[x][y].info = 0;
-  map[x][y].can_see = true;
+  map[x][y].CanSeeCharacter = true;
 }
 
 /* Clear all exits for one room */
@@ -148,7 +148,7 @@ static void map_exits( Character *ch, ROOM_INDEX_DATA *pRoom,
   map[x][y].vnum = pRoom->vnum;
   map[x][y].depth = depth;
   map[x][y].info = pRoom->room_flags;
-  map[x][y].can_see = room_is_dark( pRoom );
+  map[x][y].CanSeeCharacter = room_is_dark( pRoom );
 
   /* Limit recursion */
   if ( depth > MAXDEPTH )

@@ -22,7 +22,7 @@ void do_remove( Character *ch, char *argument )
       for ( obj = ch->first_carrying; obj != NULL ; obj = obj_next )
         {
           obj_next = obj->next_content;
-          if ( obj->wear_loc != WEAR_NONE && can_see_obj ( ch, obj ) )
+          if ( obj->wear_loc != WEAR_NONE && CanSeeItem ( ch, obj ) )
             remove_obj ( ch, obj->wear_loc, true );
         }
 

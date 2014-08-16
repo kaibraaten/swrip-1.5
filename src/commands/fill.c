@@ -165,7 +165,7 @@ void do_fill( Character *ch, char *argument )
             {
               if ( !CAN_WEAR(source, ITEM_TAKE)
                    ||   (IS_OBJ_STAT( source, ITEM_PROTOTYPE) && !can_take_proto(ch))
-                   ||    ch->carry_weight + get_obj_weight(source) > can_carry_w(ch)
+                   ||    ch->carry_weight + get_obj_weight(source) > GetCarryCapacityWeight(ch)
                    ||   (get_obj_weight(source) + get_obj_weight(obj)/obj->count)
                    > obj->value[OVAL_CONTAINER_CAPACITY] )
                 continue;
@@ -241,7 +241,7 @@ void do_fill( Character *ch, char *argument )
           if ( !source->in_room /* disallow inventory items */
                ||   !CAN_WEAR(source, ITEM_TAKE)
                ||   (IS_OBJ_STAT( source, ITEM_PROTOTYPE) && !can_take_proto(ch))
-               ||    ch->carry_weight + get_obj_weight(source) > can_carry_w(ch)
+               ||    ch->carry_weight + get_obj_weight(source) > GetCarryCapacityWeight(ch)
                ||   (get_obj_weight(source) + get_obj_weight(obj)/obj->count)
                > obj->value[OVAL_CONTAINER_CAPACITY] )
             {
@@ -312,8 +312,8 @@ void do_fill( Character *ch, char *argument )
 
               if ( !CAN_WEAR(otmp, ITEM_TAKE)
                    ||   (IS_OBJ_STAT( otmp, ITEM_PROTOTYPE) && !can_take_proto(ch))
-		   ||    ch->carry_number + otmp->count > can_carry_n(ch)
-                   ||    ch->carry_weight + get_obj_weight(otmp) > can_carry_w(ch)
+		   ||    ch->carry_number + otmp->count > GetCarryCapacityNumber(ch)
+                   ||    ch->carry_weight + get_obj_weight(otmp) > GetCarryCapacityWeight(ch)
                    ||   (get_obj_weight(source) + get_obj_weight(obj)/obj->count)
                    > obj->value[OVAL_CORPSE_0] )
                 continue;

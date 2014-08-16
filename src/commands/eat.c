@@ -39,7 +39,7 @@ void do_eat( Character *ch, char *argument )
   /* required due to object grouping */
   separate_obj( obj );
 
-  set_wait_state( ch, PULSE_PER_SECOND/2 );
+  SetWaitState( ch, PULSE_PER_SECOND/2 );
 
   if ( obj->in_obj )
     {

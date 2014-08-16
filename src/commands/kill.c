@@ -51,6 +51,6 @@ void do_kill( Character *ch, char *argument )
   if ( victim->vip_flags != 0 && !IS_SET( victim->act, ACT_DROID )  )
     ch->alignment -= 10;
 
-  set_wait_state( ch, 1 * PULSE_VIOLENCE );
+  SetWaitState( ch, 1 * PULSE_VIOLENCE );
   multi_hit( ch, victim, TYPE_UNDEFINED );
 }

@@ -29,7 +29,7 @@ void do_brandish( Character *ch, char *argument )
       return;
     }
 
-  set_wait_state( ch, 2 * PULSE_VIOLENCE );
+  SetWaitState( ch, 2 * PULSE_VIOLENCE );
 
   if ( staff->value[2] > 0 )
     {

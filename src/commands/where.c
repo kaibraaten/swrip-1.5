@@ -30,7 +30,7 @@ void do_where( Character *ch, char *argument )
              &&   !IsNpc(victim)
              &&   victim->in_room
              &&   (victim->in_room->area == ch->in_room->area || GetTrustLevel(ch) >= LEVEL_IMMORTAL )
-             &&   can_see( ch, victim ) )
+             &&   CanSeeCharacter( ch, victim ) )
           {
             found = true;
             pager_printf( ch, "%-28s %s\r\n",
@@ -48,7 +48,7 @@ void do_where( Character *ch, char *argument )
              &&   victim->in_room->area == ch->in_room->area
              &&   !IsAffectedBy(victim, AFF_HIDE)
              &&   !IsAffectedBy(victim, AFF_SNEAK)
-             &&   can_see( ch, victim )
+             &&   CanSeeCharacter( ch, victim )
              &&   is_name( arg, victim->name ) )
           {
             found = true;

@@ -64,7 +64,7 @@ void do_password( Character *ch, char *argument )
 
   if ( str_cmp( encode_string( arg1 ), ch->pcdata->pwd ) )
     {
-      set_wait_state( ch, 40 );
+      SetWaitState( ch, 40 );
       send_to_char( "Wrong password.  Wait 10 seconds.\r\n", ch );
       return;
     }

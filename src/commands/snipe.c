@@ -206,15 +206,15 @@ void do_snipe( Character *ch, char *argument )
   char_to_room( ch, was_in_room );
 
   if ( IsNpc(ch) )
-    set_wait_state( ch, 1 * PULSE_VIOLENCE );
+    SetWaitState( ch, 1 * PULSE_VIOLENCE );
   else
     {
       if ( number_percent() < ch->pcdata->learned[gsn_third_attack] )
-        set_wait_state( ch, 1 * PULSE_PER_SECOND );
+        SetWaitState( ch, 1 * PULSE_PER_SECOND );
       else if ( number_percent() < ch->pcdata->learned[gsn_second_attack] )
-	set_wait_state( ch, 2 * PULSE_PER_SECOND );
+	SetWaitState( ch, 2 * PULSE_PER_SECOND );
       else
-        set_wait_state( ch, 3 * PULSE_PER_SECOND );
+        SetWaitState( ch, 3 * PULSE_PER_SECOND );
     }
   if ( IsNpc( victim ) && !char_died(victim) )
     {

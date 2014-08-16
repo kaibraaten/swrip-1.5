@@ -285,7 +285,7 @@ void do_auction (Character *ch, char *argument)
   else
     {
       act (AT_TELL, "Try again later - $p is being auctioned right now!",ch,auction->item,NULL,TO_CHAR);
-      set_wait_state( ch, 1.5 * PULSE_VIOLENCE );
+      SetWaitState( ch, 1.5 * PULSE_VIOLENCE );
       return;
     }
 }

@@ -52,7 +52,7 @@ void do_zap( Character *ch, char *argument )
         }
     }
 
-  set_wait_state( ch, 1 * PULSE_VIOLENCE );
+  SetWaitState( ch, 1 * PULSE_VIOLENCE );
 
   if ( wand->value[2] > 0 )
     {

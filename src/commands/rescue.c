@@ -63,7 +63,7 @@ void do_rescue( Character *ch, char *argument )
   percent = number_percent( ) - (GetCurrentLuck(ch) - 14)
     - (GetCurrentLuck(victim) - 16);
 
-  set_wait_state( ch, skill_table[gsn_rescue]->beats );
+  SetWaitState( ch, skill_table[gsn_rescue]->beats );
   if ( !IsNpc(ch) && percent > ch->pcdata->learned[gsn_rescue] )
     {
       send_to_char( "You fail the rescue.\r\n", ch );

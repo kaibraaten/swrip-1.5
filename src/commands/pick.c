@@ -33,12 +33,12 @@ void do_pick( Character *ch, char *argument )
       return;
     }
 
-  set_wait_state( ch, skill_table[gsn_pick_lock]->beats );
+  SetWaitState( ch, skill_table[gsn_pick_lock]->beats );
 
   /* look for guards */
   for ( gch = ch->in_room->first_person; gch; gch = gch->next_in_room )
     {
-      if ( IsNpc(gch) && is_awake(gch) && GetAbilityLevel( ch, SMUGGLING_ABILITY ) < gch->top_level )
+      if ( IsNpc(gch) && IsAwake(gch) && GetAbilityLevel( ch, SMUGGLING_ABILITY ) < gch->top_level )
         {
           act( AT_PLAIN, "$N is standing too close to the lock.",
                ch, NULL, gch, TO_CHAR );
@@ -138,7 +138,7 @@ void do_pick( Character *ch, char *argument )
           return;
         }
 
-      set_wait_state( ch, skill_table[gsn_pickshiplock]->beats );
+      SetWaitState( ch, skill_table[gsn_pickshiplock]->beats );
 
       if ( IsNpc(ch) || !ch->pcdata || number_percent( ) > ch->pcdata->learned[gsn_pickshiplock] )
         {
@@ -170,7 +170,7 @@ void do_pick( Character *ch, char *argument )
                             || IsAffectedBy(victim->switched, AFF_POSSESS) ) )
                 victim = victim->switched;
 
-              if ( !is_awake(victim) || IS_SET(victim->in_room->room_flags,ROOM_SILENCE) )
+              if ( !IsAwake(victim) || IS_SET(victim->in_room->room_flags,ROOM_SILENCE) )
                 continue;
 
               if ( d->connection_state == CON_EDITING )
@@ -214,7 +214,7 @@ void do_pick( Character *ch, char *argument )
                             || IsAffectedBy(victim->switched, AFF_POSSESS) ) )
                 victim = victim->switched;
 
-              if ( !is_awake(victim) || IS_SET(victim->in_room->room_flags,ROOM_SILENCE) )
+              if ( !IsAwake(victim) || IS_SET(victim->in_room->room_flags,ROOM_SILENCE) )
                 continue;
 
               if ( d->connection_state == CON_EDITING )

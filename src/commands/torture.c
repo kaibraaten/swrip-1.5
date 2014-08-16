@@ -48,7 +48,7 @@ void do_torture( Character *ch, char *argument )
       return;
     }
 
-  if ( !is_awake(victim) )
+  if ( !IsAwake(victim) )
     {
       send_to_char( "You need to wake them first.\r\n", ch );
       return;
@@ -66,7 +66,7 @@ void do_torture( Character *ch, char *argument )
   ch->alignment -= 100;
   ch->alignment = urange( -1000, ch->alignment, 1000 );
 
-  set_wait_state( ch, skill_table[gsn_torture]->beats );
+  SetWaitState( ch, skill_table[gsn_torture]->beats );
 
   fail = false;
   the_chance = ris_save( victim, GetAbilityLevel( ch, LEADERSHIP_ABILITY ) / 10, RIS_PARALYSIS );
@@ -86,8 +86,8 @@ void do_torture( Character *ch, char *argument )
              || (number_percent( ) + the_chance) < ch->pcdata->learned[gsn_torture] ) )
     {
       learn_from_success( ch, gsn_torture );
-      set_wait_state( ch,     2 * PULSE_VIOLENCE );
-      set_wait_state( victim, PULSE_VIOLENCE );
+      SetWaitState( ch,     2 * PULSE_VIOLENCE );
+      SetWaitState( victim, PULSE_VIOLENCE );
       act( AT_SKILL, "$N slowly tortures you. The pain is excruciating.", victim, NULL, ch, TO_CHAR );
       act( AT_SKILL, "You torture $N, leaving $M screaming in pain.", ch, NULL, victim, TO_CHAR );
       act( AT_SKILL, "$n tortures $N, leaving $M screaming in agony!", ch, NULL, victim, TO_NOTVICT );
@@ -105,7 +105,7 @@ void do_torture( Character *ch, char *argument )
       act( AT_SKILL, "$N tries to cut off your finger!", victim, NULL, ch, TO_CHAR );
       act( AT_SKILL, "You mess up big time.", ch, NULL, victim, TO_CHAR );
       act( AT_SKILL, "$n tries to painfully torture $N.", ch, NULL, victim, TO_NOTVICT );
-      set_wait_state( ch,     2 * PULSE_VIOLENCE );
+      SetWaitState( ch,     2 * PULSE_VIOLENCE );
       global_retcode = multi_hit( victim, ch, TYPE_UNDEFINED );
     }
 }

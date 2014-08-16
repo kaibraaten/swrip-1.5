@@ -226,7 +226,7 @@ Exit *get_exit_num( const ROOM_INDEX_DATA *room, short count )
  */
 short encumbrance( const Character *ch, short move )
 {
-  int max = can_carry_w(ch);
+  int max = GetCarryCapacityWeight(ch);
   int cur = ch->carry_weight;
 
   if ( cur >= max )
@@ -411,7 +411,7 @@ ch_ret move_char( Character *ch, Exit *pexit, int fall )
   int hpmove;
 
   if ( !IsNpc( ch ) )
-    if ( is_drunk( ch ) && ( ch->position != POS_SHOVE )
+    if ( IsDrunk( ch ) && ( ch->position != POS_SHOVE )
          && ( ch->position != POS_DRAG ) )
       drunk = true;
 
@@ -662,7 +662,7 @@ ch_ret move_char( Character *ch, Exit *pexit, int fall )
                         }
                       set_char_color( AT_HURT, ch );
                       send_to_char( "OUCH! You hit the ground!\r\n", ch );
-                      set_wait_state( ch, 20 );
+                      SetWaitState( ch, 20 );
                       retcode = damage( ch, ch, (pexit->vdir == DIR_UP ? 10 : 5),
                                         TYPE_UNDEFINED );
                       return retcode;
@@ -670,7 +670,7 @@ ch_ret move_char( Character *ch, Exit *pexit, int fall )
                 }
               found = true;
               learn_from_success( ch, gsn_climb );
-              set_wait_state( ch, skill_table[gsn_climb]->beats );
+              SetWaitState( ch, skill_table[gsn_climb]->beats );
               txt = "climbs";
             }
 
@@ -749,7 +749,7 @@ ch_ret move_char( Character *ch, Exit *pexit, int fall )
             }
         }
 
-      set_wait_state( ch, move );
+      SetWaitState( ch, move );
       if ( ch->mount )
         ch->mount->move -= move;
       else
@@ -1048,7 +1048,7 @@ ch_ret move_char( Character *ch, Exit *pexit, int fall )
         {
           set_char_color( AT_HURT, ch );
           send_to_char( "OUCH! You hit the ground!\r\n", ch );
-          set_wait_state( ch, 20 );
+          SetWaitState( ch, 20 );
           retcode = damage( ch, ch, 50 * fall, TYPE_UNDEFINED );
         }
       else

@@ -23,7 +23,7 @@ void do_users( Character *ch, char *argument )
       if (arg[0] == '\0')
         {
           if (  GetTrustLevel(ch) >= LEVEL_IMPLEMENTOR
-                ||   (d->character && can_see( ch, d->character )) )
+                ||   (d->character && CanSeeCharacter( ch, d->character )) )
             {
               count++;
               sprintf( buf,
@@ -44,7 +44,7 @@ void do_users( Character *ch, char *argument )
       else
         {
           if ( (GetTrustLevel(ch) >= LEVEL_IMPLEMENTOR
-                ||   (d->character && can_see( ch, d->character )) )
+                ||   (d->character && CanSeeCharacter( ch, d->character )) )
                &&   ( !str_prefix( arg, d->remote.hostname )
                       ||   ( d->character && !str_prefix( arg, d->character->name ) ) ) )
             {

@@ -94,25 +94,25 @@ void do_give( Character *ch, char *argument )
       return;
     }
 
-  if ( !can_drop_obj( ch, obj ) )
+  if ( !CanDropItem( ch, obj ) )
     {
       send_to_char( "You can't let go of it.\r\n", ch );
       return;
     }
 
-  if ( victim->carry_number + (get_obj_number(obj)/obj->count) > can_carry_n( victim ) )
+  if ( victim->carry_number + (get_obj_number(obj)/obj->count) > GetCarryCapacityNumber( victim ) )
     {
       act( AT_PLAIN, "$N has $S hands full.", ch, NULL, victim, TO_CHAR );
       return;
     }
 
-  if ( victim->carry_weight + (get_obj_weight(obj)/obj->count) > can_carry_w( victim ) )
+  if ( victim->carry_weight + (get_obj_weight(obj)/obj->count) > GetCarryCapacityWeight( victim ) )
     {
       act( AT_PLAIN, "$N can't carry that much weight.", ch, NULL, victim, TO_CHAR );
       return;
     }
 
-  if ( !can_see_obj( victim, obj ) )
+  if ( !CanSeeItem( victim, obj ) )
     {
       act( AT_PLAIN, "$N can't see it.", ch, NULL, victim, TO_CHAR );
       return;

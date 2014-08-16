@@ -7,7 +7,7 @@ void do_level( Character *ch, char *argument )
 
   for ( ability = 0 ; ability < MAX_RL_ABILITY ; ability++ )
     {
-      if ( ability != FORCE_ABILITY || is_jedi( ch ) )
+      if ( ability != FORCE_ABILITY || IsJedi( ch ) )
 	{
 	  char maxbuf[MAX_STRING_LENGTH];
 
