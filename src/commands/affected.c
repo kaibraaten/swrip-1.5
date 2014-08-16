@@ -17,7 +17,7 @@ void do_affected ( Character *ch, char *argument )
       set_char_color( AT_BLUE, ch );
       send_to_char( "\r\nImbued with:\r\n", ch );
       set_char_color( AT_SCORE, ch );
-      ch_printf( ch, "%s\r\n", affect_bit_name( ch->affected_by ) );
+      ch_printf( ch, "%s\r\n", flag_string( ch->affected_by, affected_flags ) );
       if ( ch->top_level >= 20 )
         {
           send_to_char( "\r\n", ch );

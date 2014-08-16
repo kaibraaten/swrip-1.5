@@ -48,8 +48,8 @@ void do_auction (Character *ch, char *argument)
                    "Object '%s' is %s, special properties: %s %s.\r\nIts weight is %d, value is %d.\r\n",
                    obj->name,
                    aoran( item_type_name( obj ) ),
-                   extra_bit_name( obj->extra_flags ),
-                   magic_bit_name( obj->magic_flags ),
+                   flag_string( obj->extra_flags, object_flags ),
+                   flag_string( obj->magic_flags, mag_flags ),
                    obj->weight,
                    obj->cost );
           set_char_color( AT_LBLUE, ch );

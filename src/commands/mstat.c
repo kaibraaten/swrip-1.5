@@ -151,7 +151,7 @@ void do_mstat( Character *ch, char *argument )
     }
 
   ch_printf( ch, "Affected by: %s\r\n",
-             affect_bit_name( victim->affected_by ) );
+             flag_string( victim->affected_by, affected_flags ) );
   ch_printf( ch, "Speaks: %d   Speaking: %d\r\n",
              victim->speaks, victim->speaking );
   send_to_char( "Languages: ", ch );
@@ -223,7 +223,7 @@ void do_mstat( Character *ch, char *argument )
 		     affect_loc_name( paf->location ),
 		     paf->modifier,
 		     paf->duration,
-		     affect_bit_name( paf->bitvector )
+		     flag_string( paf->bitvector, affected_flags )
 		     );
 	}
     }

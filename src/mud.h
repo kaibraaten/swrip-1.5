@@ -2647,9 +2647,6 @@ extern "C" {
   bool room_is_private( const Character *ch, const ROOM_INDEX_DATA *pRoomIndex );
   const char *item_type_name( const OBJ_DATA *obj );
   const char *affect_loc_name( int location );
-  const char *affect_bit_name( int vector );
-  const char *extra_bit_name( int extra_flags );
-  const char *magic_bit_name( int magic_flags );
   ch_ret check_for_trap( Character *ch, const OBJ_DATA *obj, int flag );
   ch_ret check_room_for_traps( Character *ch, int flag );
   bool is_trapped( const OBJ_DATA *obj );
