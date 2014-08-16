@@ -5,13 +5,13 @@ void do_clanfunds( Character *ch, char *argument )
 {
   CLAN_DATA *clan;
 
-  if ( is_npc( ch ) || !ch->pcdata->clan )
+  if ( IsNpc( ch ) || !ch->pcdata->clan )
     {
       send_to_char("You don't seem to belong to an organization.\r\n",ch);
       return;
     }
 
-  if ( !has_comlink( ch ) )
+  if ( !HasComlink( ch ) )
     {
       if (!ch->in_room || !IS_SET(ch->in_room->room_flags, ROOM_BANK) )
         {

@@ -18,7 +18,7 @@ void do_mset( Character *ch, char *argument )
   bool lockvictim;
   char *origarg = argument;
 
-  if ( is_npc( ch ) )
+  if ( IsNpc( ch ) )
     {
       send_to_char( "Mob's can't mset\r\n", ch );
       return;
@@ -53,7 +53,7 @@ void do_mset( Character *ch, char *argument )
         }
       STRFREE( victim->description );
       victim->description = copy_buffer( ch );
-      if ( is_npc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
         {
           STRFREE( victim->pIndexData->description );
           victim->pIndexData->description = QUICKLINK( victim->description );
@@ -144,7 +144,7 @@ void do_mset( Character *ch, char *argument )
       return;
     }
 
-  if ( !victim && get_trust( ch ) <= LEVEL_IMMORTAL )
+  if ( !victim && GetTrustLevel( ch ) <= LEVEL_IMMORTAL )
     {
       if ( ( victim = get_char_room( ch, arg1 ) ) == NULL )
         {
@@ -161,13 +161,13 @@ void do_mset( Character *ch, char *argument )
             return;
           }
       }
-  if ( get_trust(ch) < sysdata.level_mset_player && (victim != ch) && !is_npc( victim ) )
+  if ( GetTrustLevel(ch) < sysdata.level_mset_player && (victim != ch) && !IsNpc( victim ) )
     {
       send_to_char( "You can't do that!\r\n", ch );
       DISPOSE(ch->dest_buf);
       return;
     }
-  if ( get_trust( ch ) < get_trust( victim ) && !is_npc( victim ) )
+  if ( GetTrustLevel( ch ) < GetTrustLevel( victim ) && !IsNpc( victim ) )
     {
       send_to_char( "You can't do that!\r\n", ch );
       DISPOSE(ch->dest_buf);
@@ -176,7 +176,7 @@ void do_mset( Character *ch, char *argument )
   if ( lockvictim )
     ch->dest_buf = victim;
 
-  if ( is_npc(victim) )
+  if ( IsNpc(victim) )
     {
       minattr = 1;
       maxattr = 25;
@@ -202,7 +202,7 @@ void do_mset( Character *ch, char *argument )
           return;
         }
       victim->stats.perm_str = value;
-      if ( is_npc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->stats.perm_str = value;
       return;
     }
@@ -217,7 +217,7 @@ void do_mset( Character *ch, char *argument )
           return;
         }
       victim->stats.perm_int = value;
-      if ( is_npc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->stats.perm_int = value;
       return;
     }
@@ -232,7 +232,7 @@ void do_mset( Character *ch, char *argument )
           return;
         }
       victim->stats.perm_wis = value;
-      if ( is_npc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->stats.perm_wis = value;
       return;
     }
@@ -247,7 +247,7 @@ void do_mset( Character *ch, char *argument )
           return;
         }
       victim->stats.perm_dex = value;
-      if ( is_npc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->stats.perm_dex = value;
       return;
     }
@@ -262,7 +262,7 @@ void do_mset( Character *ch, char *argument )
           return;
         }
       victim->stats.perm_con = value;
-      if ( is_npc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->stats.perm_con = value;
       return;
     }
@@ -277,7 +277,7 @@ void do_mset( Character *ch, char *argument )
           return;
         }
       victim->stats.perm_cha = value;
-      if ( is_npc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->stats.perm_cha = value;
       return;
     }
@@ -292,7 +292,7 @@ void do_mset( Character *ch, char *argument )
           return;
         }
       victim->stats.perm_lck = value;
-      if ( is_npc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->stats.perm_lck = value;
       return;
     }
@@ -308,7 +308,7 @@ void do_mset( Character *ch, char *argument )
           return;
         }
       victim->stats.perm_frc = value;
-      if ( is_npc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->stats.perm_frc = value;
       return;
     }
@@ -323,7 +323,7 @@ void do_mset( Character *ch, char *argument )
           return;
         }
       victim->saving.poison_death = value;
-      if ( is_npc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->saving.poison_death = value;
       return;
     }
@@ -338,7 +338,7 @@ void do_mset( Character *ch, char *argument )
           return;
         }
       victim->saving.wand = value;
-      if ( is_npc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->saving.wand = value;
       return;
     }
@@ -353,7 +353,7 @@ void do_mset( Character *ch, char *argument )
           return;
         }
       victim->saving.para_petri = value;
-      if ( is_npc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->saving.para_petri = value;
       return;
     }
@@ -368,7 +368,7 @@ void do_mset( Character *ch, char *argument )
           return;
         }
       victim->saving.breath = value;
-      if ( is_npc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->saving.breath = value;
       return;
     }
@@ -383,7 +383,7 @@ void do_mset( Character *ch, char *argument )
           return;
         }
       victim->saving.spell_staff = value;
-      if ( is_npc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->saving.spell_staff = value;
       return;
     }
@@ -398,7 +398,7 @@ void do_mset( Character *ch, char *argument )
           return;
         }
       victim->sex = value;
-      if ( is_npc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->sex = value;
       return;
     }
@@ -410,18 +410,18 @@ void do_mset( Character *ch, char *argument )
       value = get_npc_race( arg3 );
       if ( value < 0 )
         value = atoi( arg3 );
-      if ( !is_npc(victim) && (value < 0 || value >= MAX_RACE) )
+      if ( !IsNpc(victim) && (value < 0 || value >= MAX_RACE) )
         {
           ch_printf( ch, "Race range is 0 to %d.\n", MAX_RACE-1 );
           return;
         }
-      if ( is_npc(victim) && (value < 0 || value >= MAX_NPC_RACE) )
+      if ( IsNpc(victim) && (value < 0 || value >= MAX_NPC_RACE) )
         {
           ch_printf( ch, "Race range is 0 to %d.\n", MAX_NPC_RACE-1 );
           return;
         }
       victim->race = value;
-      if ( is_npc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->race = value;
       return;
     }
@@ -436,7 +436,7 @@ void do_mset( Character *ch, char *argument )
 	  return;
         }
       victim->armor = value;
-      if ( is_npc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->ac = value;
       return;
     }
@@ -445,7 +445,7 @@ void do_mset( Character *ch, char *argument )
     {
       if ( !can_mmodify( ch, victim ) )
         return;
-      if ( !is_npc(victim) )
+      if ( !IsNpc(victim) )
         {
           send_to_char( "Not on PC's.\r\n", ch );
           return;
@@ -470,7 +470,7 @@ void do_mset( Character *ch, char *argument )
       victim->hitroll = value/5;
       victim->damroll = value/5;
 
-      if ( is_npc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
         {
           victim->pIndexData->level = value;
           victim->pIndexData->ac = 100-value*2.5;
@@ -497,7 +497,7 @@ void do_mset( Character *ch, char *argument )
     {
       if ( !can_mmodify( ch, victim ) )
         return;
-      if ( !is_npc(victim) )
+      if ( !IsNpc(victim) )
         {
           send_to_char( "Not on PC's.\r\n", ch );
           return;
@@ -509,7 +509,7 @@ void do_mset( Character *ch, char *argument )
           return;
         }
       victim->numattacks = value;
-      if ( is_npc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->numattacks = value;
       return;
     }
@@ -519,7 +519,7 @@ void do_mset( Character *ch, char *argument )
       if ( !can_mmodify( ch, victim ) )
         return;
       victim->gold = value;
-      if ( is_npc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->gold = value;
       return;
     }
@@ -529,7 +529,7 @@ void do_mset( Character *ch, char *argument )
       if ( !can_mmodify( ch, victim ) )
         return;
       victim->hitroll = URANGE(0, value, 85);
-      if ( is_npc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->hitroll = victim->hitroll;
       return;
     }
@@ -539,7 +539,7 @@ void do_mset( Character *ch, char *argument )
       if ( !can_mmodify( ch, victim ) )
         return;
       victim->damroll = URANGE(0, value, 65);
-      if ( is_npc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->damroll = victim->damroll;
       return;
     }
@@ -593,7 +593,7 @@ void do_mset( Character *ch, char *argument )
 	  return;
         }
       victim->alignment = value;
-      if ( is_npc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->alignment = value;
       return;
     }
@@ -603,12 +603,12 @@ void do_mset( Character *ch, char *argument )
       char *pwdnew;
       char *p;
 
-      if ( get_trust( ch ) < LEVEL_SUB_IMPLEM )
+      if ( GetTrustLevel( ch ) < LEVEL_SUB_IMPLEM )
         {
           send_to_char( "You can't do that.\r\n", ch );
           return;
         }
-      if ( is_npc( victim ) )
+      if ( IsNpc( victim ) )
         {
           send_to_char( "Mobs don't have passwords.\r\n", ch );
           return;
@@ -668,7 +668,7 @@ void do_mset( Character *ch, char *argument )
 
   if ( !str_cmp( arg2, "thirst" ) )
     {
-      if ( is_npc(victim) )
+      if ( IsNpc(victim) )
         {
           send_to_char( "Not on NPC's.\r\n", ch );
           return;
@@ -686,7 +686,7 @@ void do_mset( Character *ch, char *argument )
 
   if ( !str_cmp( arg2, "drunk" ) )
     {
-      if ( is_npc(victim) )
+      if ( IsNpc(victim) )
         {
           send_to_char( "Not on NPC's.\r\n", ch );
           return;
@@ -704,7 +704,7 @@ void do_mset( Character *ch, char *argument )
 
   if ( !str_cmp( arg2, "full" ) )
     {
-      if ( is_npc(victim) )
+      if ( IsNpc(victim) )
         {
           send_to_char( "Not on NPC's.\r\n", ch );
           return;
@@ -722,7 +722,7 @@ void do_mset( Character *ch, char *argument )
 
   if ( !str_cmp( arg2, "blood" ) )
     {
-      if ( is_npc(victim) )
+      if ( IsNpc(victim) )
         {
           send_to_char( "Not on NPC's.\r\n", ch );
           return;
@@ -742,7 +742,7 @@ void do_mset( Character *ch, char *argument )
     {
       if ( !can_mmodify( ch, victim ) )
         return;
-      if ( !is_npc(victim) && get_trust( ch ) < LEVEL_IMPLEMENTOR )
+      if ( !IsNpc(victim) && GetTrustLevel( ch ) < LEVEL_IMPLEMENTOR )
         {
           send_to_char( "Not on PC's.\r\n", ch );
           return;
@@ -750,7 +750,7 @@ void do_mset( Character *ch, char *argument )
 
       STRFREE( victim->name );
       victim->name = STRALLOC( arg3 );
-      if ( is_npc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
         {
           STRFREE( victim->pIndexData->player_name );
           victim->pIndexData->player_name = QUICKLINK( victim->name );
@@ -760,12 +760,12 @@ void do_mset( Character *ch, char *argument )
 
   if ( !str_cmp( arg2, "minsnoop" ) )
     {
-      if ( get_trust( ch ) < LEVEL_SUB_IMPLEM )
+      if ( GetTrustLevel( ch ) < LEVEL_SUB_IMPLEM )
         {
           send_to_char( "You can't do that.\r\n", ch );
           return;
         }
-      if ( is_npc(victim) )
+      if ( IsNpc(victim) )
         {
 	  send_to_char( "Not on NPC's.\r\n", ch );
           return;
@@ -781,12 +781,12 @@ void do_mset( Character *ch, char *argument )
     {
       CLAN_DATA *clan;
 
-      if ( get_trust( ch ) < LEVEL_GREATER )
+      if ( GetTrustLevel( ch ) < LEVEL_GREATER )
         {
           send_to_char( "You can't do that.\r\n", ch );
           return;
         }
-      if ( is_npc(victim) )
+      if ( IsNpc(victim) )
         {
           send_to_char( "Not on NPC's.\r\n", ch );
           return;
@@ -820,7 +820,7 @@ void do_mset( Character *ch, char *argument )
     {
       STRFREE( victim->short_descr );
       victim->short_descr = STRALLOC( arg3 );
-      if ( is_npc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
         {
           STRFREE( victim->pIndexData->short_descr );
           victim->pIndexData->short_descr = QUICKLINK( victim->short_descr );
@@ -834,7 +834,7 @@ void do_mset( Character *ch, char *argument )
       strcpy( buf, arg3 );
       strcat( buf, "\r\n" );
       victim->long_descr = STRALLOC( buf );
-      if ( is_npc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
         {
           STRFREE( victim->pIndexData->long_descr );
           victim->pIndexData->long_descr = QUICKLINK( victim->long_descr );
@@ -848,7 +848,7 @@ void do_mset( Character *ch, char *argument )
         {
           STRFREE( victim->description );
           victim->description = STRALLOC( arg3 );
-          if ( is_npc( victim ) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+          if ( IsNpc( victim ) && IS_SET( victim->act, ACT_PROTOTYPE ) )
             {
               STRFREE(victim->pIndexData->description );
               victim->pIndexData->description = QUICKLINK( victim->description );
@@ -869,7 +869,7 @@ void do_mset( Character *ch, char *argument )
 
   if ( !str_cmp( arg2, "title" ) )
     {
-      if ( is_npc(victim) )
+      if ( IsNpc(victim) )
         {
           send_to_char( "Not on NPC's.\r\n", ch );
           return;
@@ -883,7 +883,7 @@ void do_mset( Character *ch, char *argument )
     {
       if ( !can_mmodify( ch, victim ) )
         return;
-      if ( !is_npc(victim) )
+      if ( !IsNpc(victim) )
         {
           send_to_char( "Not on PC's.\r\n", ch );
           return;
@@ -893,7 +893,7 @@ void do_mset( Character *ch, char *argument )
         {
           victim->spec_fun = NULL;
           send_to_char( "Special function removed.\r\n", ch );
-          if ( is_npc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+          if ( IsNpc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
             victim->pIndexData->spec_fun = victim->spec_fun;
           return;
         }
@@ -903,7 +903,7 @@ void do_mset( Character *ch, char *argument )
           send_to_char( "No such spec fun.\r\n", ch );
           return;
         }
-      if ( is_npc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->spec_fun = victim->spec_fun;
       return;
     }
@@ -912,7 +912,7 @@ void do_mset( Character *ch, char *argument )
     {
       if ( !can_mmodify( ch, victim ) )
         return;
-      if ( !is_npc(victim) )
+      if ( !IsNpc(victim) )
         {
           send_to_char( "Not on PC's.\r\n", ch );
           return;
@@ -922,7 +922,7 @@ void do_mset( Character *ch, char *argument )
         {
           victim->spec_2 = NULL;
           send_to_char( "Special function removed.\r\n", ch );
-          if ( is_npc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+          if ( IsNpc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
             victim->pIndexData->spec_2 = victim->spec_2;
           return;
         }
@@ -932,13 +932,13 @@ void do_mset( Character *ch, char *argument )
           send_to_char( "No such spec fun.\r\n", ch );
           return;
         }
-      if ( is_npc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->spec_2 = victim->spec_2;
       return;
     }
   if ( !str_cmp( arg2, "whoCloak" ) )
     {
-      if ( is_npc(victim) )
+      if ( IsNpc(victim) )
         {
           send_to_char( "Not on NPC's.\r\n", ch );
           return;
@@ -963,7 +963,7 @@ void do_mset( Character *ch, char *argument )
   if ( !str_cmp( arg2, "flags" ) )
     {
       bool pcflag;
-      if ( !is_npc( victim ) && get_trust( ch ) < LEVEL_GREATER )
+      if ( !IsNpc( victim ) && GetTrustLevel( ch ) < LEVEL_GREATER )
         {
           send_to_char( "You can only modify a mobile's flags.\r\n", ch );
           return;
@@ -982,9 +982,9 @@ void do_mset( Character *ch, char *argument )
         {
           pcflag = false;
           argument = one_argument( argument, arg3 );
-          value = is_npc( victim) ? get_actflag( arg3 ) : get_plrflag( arg3 );
+          value = IsNpc( victim) ? get_actflag( arg3 ) : get_plrflag( arg3 );
 
-          if ( !is_npc( victim ) && ( value < 0 || value > 31 ) )
+          if ( !IsNpc( victim ) && ( value < 0 || value > 31 ) )
             {
               pcflag = true;
               value = get_pcflag( arg3 );
@@ -993,10 +993,10 @@ void do_mset( Character *ch, char *argument )
             ch_printf( ch, "Unknown flag: %s\r\n", arg3 );
 	  else
             {
-              if ( is_npc(victim) && 1 << value == ACT_is_npc )
+              if ( IsNpc(victim) && 1 << value == ACT_IsNpc )
                 send_to_char( "If that could be changed, it would cause many problems.\r\n", ch );
               else
-                if ( is_npc(victim) && 1 << value == ACT_POLYMORPHED )
+                if ( IsNpc(victim) && 1 << value == ACT_POLYMORPHED )
                   send_to_char( "Changing that would be a _bad_ thing.\r\n", ch);
                 else
                   {
@@ -1006,26 +1006,26 @@ void do_mset( Character *ch, char *argument )
                       {
                         TOGGLE_BIT( victim->act, 1 << value );
                         /* NPC check added by Gorog */
-                        if ( is_npc(victim) && (1 << value == ACT_PROTOTYPE) )
+                        if ( IsNpc(victim) && (1 << value == ACT_PROTOTYPE) )
                           victim->pIndexData->act = victim->act;
                       }
                   }
             }
         }
-      if ( is_npc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->act = victim->act;
       return;
     }
 
   if ( !str_cmp( arg2, "wanted" ) )
     {
-      if ( is_npc( victim ) )
+      if ( IsNpc( victim ) )
         {
           send_to_char( "Wanted flags are for players only.\r\n", ch );
           return;
         }
 
-      if ( get_trust( ch ) < LEVEL_GREATER )
+      if ( GetTrustLevel( ch ) < LEVEL_GREATER )
         {
           send_to_char( "You are not a high enough level to do that.\r\n", ch );
           return;
@@ -1053,7 +1053,7 @@ void do_mset( Character *ch, char *argument )
 
   if ( !str_cmp( arg2, "vip" ) )
     {
-      if ( !is_npc( victim ))
+      if ( !IsNpc( victim ))
         {
           send_to_char( "VIP flags are for mobs only.\r\n", ch );
           return;
@@ -1077,14 +1077,14 @@ void do_mset( Character *ch, char *argument )
           else
             TOGGLE_BIT( victim->vip_flags, 1 << value );
         }
-      if ( is_npc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->vip_flags = victim->vip_flags;
       return;
     }
 
   if ( !str_cmp( arg2, "affected" ) )
     {
-      if ( !is_npc( victim ) && get_trust( ch ) < LEVEL_CREATOR )
+      if ( !IsNpc( victim ) && GetTrustLevel( ch ) < LEVEL_CREATOR )
         {
           send_to_char( "You can only modify a mobile's flags.\r\n", ch );
           return;
@@ -1106,7 +1106,7 @@ void do_mset( Character *ch, char *argument )
           else
             TOGGLE_BIT( victim->affected_by, 1 << value );
         }
-      if ( is_npc( victim ) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc( victim ) && IS_SET( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->affected_by = victim->affected_by;
       return;
     }
@@ -1116,7 +1116,7 @@ void do_mset( Character *ch, char *argument )
    */
   if ( !str_cmp( arg2, "r" ) )
     {
-      if ( !is_npc( victim ) && get_trust( ch ) < LEVEL_CREATOR )
+      if ( !IsNpc( victim ) && GetTrustLevel( ch ) < LEVEL_CREATOR )
         {
           send_to_char( "You can only modify a mobile's ris.\r\n", ch );
           return;
@@ -1130,7 +1130,7 @@ void do_mset( Character *ch, char *argument )
     }
   if ( !str_cmp( arg2, "i" ) )
     {
-      if ( !is_npc( victim ) && get_trust( ch ) < LEVEL_CREATOR )
+      if ( !IsNpc( victim ) && GetTrustLevel( ch ) < LEVEL_CREATOR )
         {
           send_to_char( "You can only modify a mobile's ris.\r\n", ch );
           return;
@@ -1145,7 +1145,7 @@ void do_mset( Character *ch, char *argument )
     }
   if ( !str_cmp( arg2, "s" ) )
     {
-      if ( !is_npc( victim ) && get_trust( ch ) < LEVEL_CREATOR )
+      if ( !IsNpc( victim ) && GetTrustLevel( ch ) < LEVEL_CREATOR )
         {
           send_to_char( "You can only modify a mobile's ris.\r\n", ch );
           return;
@@ -1159,7 +1159,7 @@ void do_mset( Character *ch, char *argument )
     }
   if ( !str_cmp( arg2, "ri" ) )
     {
-      if ( !is_npc( victim ) && get_trust( ch ) < LEVEL_CREATOR )
+      if ( !IsNpc( victim ) && GetTrustLevel( ch ) < LEVEL_CREATOR )
         {
           send_to_char( "You can only modify a mobile's ris.\r\n", ch );
           return;
@@ -1176,7 +1176,7 @@ void do_mset( Character *ch, char *argument )
 
   if ( !str_cmp( arg2, "rs" ) )
     {
-      if ( !is_npc( victim ) && get_trust( ch ) < LEVEL_CREATOR )
+      if ( !IsNpc( victim ) && GetTrustLevel( ch ) < LEVEL_CREATOR )
         {
           send_to_char( "You can only modify a mobile's ris.\r\n", ch );
           return;
@@ -1192,7 +1192,7 @@ void do_mset( Character *ch, char *argument )
     }
   if ( !str_cmp( arg2, "is" ) )
     {
-      if ( !is_npc( victim ) && get_trust( ch ) < LEVEL_CREATOR )
+      if ( !IsNpc( victim ) && GetTrustLevel( ch ) < LEVEL_CREATOR )
         {
           send_to_char( "You can only modify a mobile's ris.\r\n", ch );
           return;
@@ -1208,7 +1208,7 @@ void do_mset( Character *ch, char *argument )
     }
   if ( !str_cmp( arg2, "ris" ) )
     {
-      if ( !is_npc( victim ) && get_trust( ch ) < LEVEL_CREATOR )
+      if ( !IsNpc( victim ) && GetTrustLevel( ch ) < LEVEL_CREATOR )
         {
           send_to_char( "You can only modify a mobile's ris.\r\n", ch );
           return;
@@ -1227,7 +1227,7 @@ void do_mset( Character *ch, char *argument )
 
   if ( !str_cmp( arg2, "resistant" ) )
     {
-      if ( !is_npc( victim ) && get_trust( ch ) < LEVEL_CREATOR )
+      if ( !IsNpc( victim ) && GetTrustLevel( ch ) < LEVEL_CREATOR )
         {
           send_to_char( "You can only modify a mobile's resistancies.\r\n", ch );
           return;
@@ -1248,14 +1248,14 @@ void do_mset( Character *ch, char *argument )
           else
             TOGGLE_BIT( victim->resistant, 1 << value );
         }
-      if ( is_npc( victim ) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc( victim ) && IS_SET( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->resistant = victim->resistant;
       return;
     }
 
   if ( !str_cmp( arg2, "immune" ) )
     {
-      if ( !is_npc( victim ) && get_trust( ch ) < LEVEL_CREATOR )
+      if ( !IsNpc( victim ) && GetTrustLevel( ch ) < LEVEL_CREATOR )
         {
           send_to_char( "You can only modify a mobile's immunities.\r\n", ch );
           return;
@@ -1277,14 +1277,14 @@ void do_mset( Character *ch, char *argument )
           else
             TOGGLE_BIT( victim->immune, 1 << value );
         }
-      if ( is_npc( victim ) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc( victim ) && IS_SET( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->immune = victim->immune;
       return;
     }
 
   if ( !str_cmp( arg2, "susceptible" ) )
     {
-      if ( !is_npc( victim ) && get_trust( ch ) < LEVEL_CREATOR )
+      if ( !IsNpc( victim ) && GetTrustLevel( ch ) < LEVEL_CREATOR )
         {
           send_to_char( "You can only modify a mobile's susceptibilities.\r\n", ch );
           return;
@@ -1305,15 +1305,15 @@ void do_mset( Character *ch, char *argument )
           else
             TOGGLE_BIT( victim->susceptible, 1 << value );
         }
-      if ( is_npc( victim ) && IS_SET( victim->act, ACT_PROTOTYPE ) )
-	if ( is_npc( victim ) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc( victim ) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+	if ( IsNpc( victim ) && IS_SET( victim->act, ACT_PROTOTYPE ) )
 	  victim->pIndexData->susceptible = victim->susceptible;
       return;
     }
 
   if ( !str_cmp( arg2, "part" ) )
     {
-      if ( !is_npc( victim ) && get_trust( ch ) < LEVEL_CREATOR )
+      if ( !IsNpc( victim ) && GetTrustLevel( ch ) < LEVEL_CREATOR )
         {
           send_to_char( "You can only modify a mobile's parts.\r\n", ch );
           return;
@@ -1334,14 +1334,14 @@ void do_mset( Character *ch, char *argument )
           else
             TOGGLE_BIT( victim->xflags, 1 << value );
         }
-      if ( is_npc( victim ) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc( victim ) && IS_SET( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->xflags = victim->xflags;
       return;
     }
 
   if ( !str_cmp( arg2, "attack" ) )
     {
-      if ( !is_npc( victim ) )
+      if ( !IsNpc( victim ) )
         {
           send_to_char( "You can only modify a mobile's attacks.\r\n", ch );
           return;
@@ -1365,14 +1365,14 @@ void do_mset( Character *ch, char *argument )
           else
             TOGGLE_BIT( victim->attacks, 1 << value );
         }
-      if ( is_npc( victim ) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc( victim ) && IS_SET( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->attacks = victim->attacks;
       return;
     }
 
   if ( !str_cmp( arg2, "defense" ) )
     {
-      if ( !is_npc( victim ) )
+      if ( !IsNpc( victim ) )
         {
           send_to_char( "You can only modify a mobile's defenses.\r\n", ch );
           return;
@@ -1394,14 +1394,14 @@ void do_mset( Character *ch, char *argument )
           else
             TOGGLE_BIT( victim->defenses, 1 << value );
         }
-      if ( is_npc( victim ) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc( victim ) && IS_SET( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->defenses = victim->defenses;
       return;
     }
 
   if ( !str_cmp( arg2, "pos" ) )
     {
-      if ( !is_npc(victim) )
+      if ( !IsNpc(victim) )
         {
           send_to_char( "Mobiles only.\r\n", ch );
           return;
@@ -1414,7 +1414,7 @@ void do_mset( Character *ch, char *argument )
           return;
         }
       victim->position = value;
-      if ( is_npc( victim ) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc( victim ) && IS_SET( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->position = victim->position;
       send_to_char( "Done.\r\n", ch );
       return;
@@ -1422,7 +1422,7 @@ void do_mset( Character *ch, char *argument )
 
   if ( !str_cmp( arg2, "defpos" ) )
     {
-      if ( !is_npc(victim) )
+      if ( !IsNpc(victim) )
         {
           send_to_char( "Mobiles only.\r\n", ch );
           return;
@@ -1435,7 +1435,7 @@ void do_mset( Character *ch, char *argument )
           return;
         }
       victim->defposition = value;
-      if ( is_npc( victim ) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc( victim ) && IS_SET( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->defposition = victim->defposition;
       send_to_char( "Done.\r\n", ch );
       return;
@@ -1446,7 +1446,7 @@ void do_mset( Character *ch, char *argument )
    */
   if ( !str_cmp( arg2, "hitdie" ) )
     {
-      if ( !is_npc(victim) )
+      if ( !IsNpc(victim) )
         {
           send_to_char( "Mobiles only.\r\n", ch );
           return;
@@ -1470,7 +1470,7 @@ void do_mset( Character *ch, char *argument )
    */
   if ( !str_cmp( arg2, "damdie" ) )
     {
-      if ( !is_npc(victim) )
+      if ( !IsNpc(victim) )
         {
           send_to_char( "Mobiles only.\r\n", ch );
           return;
@@ -1490,7 +1490,7 @@ void do_mset( Character *ch, char *argument )
 
   if ( !str_cmp( arg2, "hitnumdie" ) )
     {
-      if ( !is_npc(victim) )
+      if ( !IsNpc(victim) )
         {
           send_to_char( "Mobiles only.\r\n", ch );
           return;
@@ -1502,7 +1502,7 @@ void do_mset( Character *ch, char *argument )
           send_to_char( "Number of hitpoint dice range is 0 to 30000.\r\n", ch );
           return;
         }
-      if ( is_npc( victim ) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc( victim ) && IS_SET( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->hitnodice = value;
       send_to_char( "Done.\r\n", ch );
       return;
@@ -1510,7 +1510,7 @@ void do_mset( Character *ch, char *argument )
 
   if ( !str_cmp( arg2, "hitsizedie" ) )
     {
-      if ( !is_npc(victim) )
+      if ( !IsNpc(victim) )
         {
           send_to_char( "Mobiles only.\r\n", ch );
           return;
@@ -1522,7 +1522,7 @@ void do_mset( Character *ch, char *argument )
           send_to_char( "Hitpoint dice size range is 0 to 30000.\r\n", ch );
           return;
         }
-      if ( is_npc( victim ) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc( victim ) && IS_SET( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->hitsizedice = value;
       send_to_char( "Done.\r\n", ch );
       return;
@@ -1530,7 +1530,7 @@ void do_mset( Character *ch, char *argument )
 
   if ( !str_cmp( arg2, "hitplus" ) )
     {
-      if ( !is_npc(victim) )
+      if ( !IsNpc(victim) )
         {
 	  send_to_char( "Mobiles only.\r\n", ch );
           return;
@@ -1542,7 +1542,7 @@ void do_mset( Character *ch, char *argument )
           send_to_char( "Hitpoint bonus range is 0 to 30000.\r\n", ch );
           return;
         }
-      if ( is_npc( victim ) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc( victim ) && IS_SET( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->hitplus = value;
       send_to_char( "Done.\r\n", ch );
       return;
@@ -1550,7 +1550,7 @@ void do_mset( Character *ch, char *argument )
 
   if ( !str_cmp( arg2, "damnumdie" ) )
     {
-      if ( !is_npc(victim) )
+      if ( !IsNpc(victim) )
         {
           send_to_char( "Mobiles only.\r\n", ch );
           return;
@@ -1562,7 +1562,7 @@ void do_mset( Character *ch, char *argument )
           send_to_char( "Number of damage dice range is 0 to 100.\r\n", ch );
           return;
         }
-      if ( is_npc( victim ) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc( victim ) && IS_SET( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->damnodice = value;
       send_to_char( "Done.\r\n", ch );
       return;
@@ -1570,7 +1570,7 @@ void do_mset( Character *ch, char *argument )
 
   if ( !str_cmp( arg2, "damsizedie" ) )
     {
-      if ( !is_npc(victim) )
+      if ( !IsNpc(victim) )
         {
           send_to_char( "Mobiles only.\r\n", ch );
           return;
@@ -1583,7 +1583,7 @@ void do_mset( Character *ch, char *argument )
           send_to_char( "Damage dice size range is 0 to 100.\r\n", ch );
           return;
         }
-      if ( is_npc( victim ) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc( victim ) && IS_SET( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->damsizedice = value;
       send_to_char( "Done.\r\n", ch );
       return;
@@ -1591,7 +1591,7 @@ void do_mset( Character *ch, char *argument )
 
   if ( !str_cmp( arg2, "damplus" ) )
     {
-      if ( !is_npc(victim) )
+      if ( !IsNpc(victim) )
         {
           send_to_char( "Mobiles only.\r\n", ch );
           return;
@@ -1604,7 +1604,7 @@ void do_mset( Character *ch, char *argument )
           return;
         }
 
-      if ( is_npc( victim ) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc( victim ) && IS_SET( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->damplus = value;
       send_to_char( "Done.\r\n", ch );
       return;
@@ -1614,7 +1614,7 @@ void do_mset( Character *ch, char *argument )
 
   if ( !str_cmp( arg2, "aloaded" ) )
     {
-      if ( is_npc(victim) )
+      if ( IsNpc(victim) )
         {
           send_to_char( "Player Characters only.\r\n", ch );
           return;
@@ -1657,7 +1657,7 @@ void do_mset( Character *ch, char *argument )
           if ( value == LANG_UNKNOWN )
             ch_printf( ch, "Unknown language: %s\r\n", arg3 );
           else
-            if ( !is_npc( victim ) )
+            if ( !IsNpc( victim ) )
               {
                 int valid_langs = LANG_COMMON | LANG_WOOKIEE | LANG_TWI_LEK | LANG_RODIAN
                   | LANG_HUTT | LANG_MON_CALAMARI | LANG_NOGHRI | LANG_GAMORREAN
@@ -1673,7 +1673,7 @@ void do_mset( Character *ch, char *argument )
               }
           TOGGLE_BIT( victim->speaks, value );
         }
-      if ( !is_npc( victim ) )
+      if ( !IsNpc( victim ) )
         {
           REMOVE_BIT( victim->speaks, race_table[victim->race].language );
           if ( !knows_language( victim, victim->speaking, victim ) )
@@ -1688,7 +1688,7 @@ void do_mset( Character *ch, char *argument )
 
   if ( !str_cmp( arg2, "speaking" ) )
     {
-      if ( !is_npc( victim ) )
+      if ( !IsNpc( victim ) )
         {
           send_to_char( "Players must choose the language they speak themselves.\r\n", ch );
           return;
@@ -1709,7 +1709,7 @@ void do_mset( Character *ch, char *argument )
           else
             TOGGLE_BIT( victim->speaking, value );
         }
-      if ( is_npc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->speaking = victim->speaking;
       send_to_char( "Done.\r\n", ch );
       return;

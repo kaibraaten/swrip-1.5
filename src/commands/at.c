@@ -22,7 +22,7 @@ void do_at( Character *ch, char *argument )
       return;
     }
 
-  if ( get_trust( ch ) < LEVEL_GREATER )
+  if ( GetTrustLevel( ch ) < LEVEL_GREATER )
     {
       if ( room_is_private( ch, location ) )
         {

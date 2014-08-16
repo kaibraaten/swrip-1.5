@@ -27,12 +27,12 @@ void do_goto( Character *ch, char *argument )
           return;
 	}
 
-      if ( vnum < 1 || is_npc(ch) || !ch->pcdata->area )
+      if ( vnum < 1 || IsNpc(ch) || !ch->pcdata->area )
         {
           send_to_char( "No such location.\r\n", ch );
           return;
         }
-      if ( get_trust( ch ) < sysdata.level_modify_proto &&
+      if ( GetTrustLevel( ch ) < sysdata.level_modify_proto &&
            !( ch->pcdata->bestowments && is_name( "intergoto", ch->pcdata->bestowments) ))
 
         {
@@ -64,7 +64,7 @@ void do_goto( Character *ch, char *argument )
       send_to_char( "Overriding private flag!\r\n", ch );
     }
 
-  if ( get_trust( ch ) < LEVEL_GREATER &&
+  if ( GetTrustLevel( ch ) < LEVEL_GREATER &&
        !( ch->pcdata->bestowments && is_name( "intergoto", ch->pcdata->bestowments) ))
     {
       vnum = atoi( arg );
@@ -133,7 +133,7 @@ void do_goto( Character *ch, char *argument )
   for ( fch = in_room->first_person; fch; fch = fch_next )
     {
       fch_next = fch->next_in_room;
-      if ( fch->master == ch && is_immortal(fch) )
+      if ( fch->master == ch && IsImmortal(fch) )
         {
           act( AT_ACTION, "You follow $N.", fch, NULL, ch, TO_CHAR );
           do_goto( fch, argument );

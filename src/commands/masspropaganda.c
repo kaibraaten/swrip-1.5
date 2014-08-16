@@ -10,7 +10,7 @@ void do_mass_propaganda ( Character *ch , char *argument )
   CLAN_DATA   *clan;
   int percent = 0;
 
-  if ( is_npc(ch) || !ch->pcdata || !ch->pcdata->clan || !ch->in_room->area || !ch->in_room->area->planet )
+  if ( IsNpc(ch) || !ch->pcdata || !ch->pcdata->clan || !ch->in_room->area || !ch->in_room->area->planet )
     {
       send_to_char( "What would be the point of that.\r\n", ch );
       return;
@@ -87,7 +87,7 @@ void do_mass_propaganda ( Character *ch , char *argument )
 
   set_wait_state( ch, skill_table[gsn_masspropaganda]->beats );
 
-  if ( percent - get_curr_cha(ch) + victim->top_level > ch->pcdata->learned[gsn_masspropaganda]  )
+  if ( percent - GetCurrentCharisma(ch) + victim->top_level > ch->pcdata->learned[gsn_masspropaganda]  )
     {
 
       if ( planet->governed_by != clan )

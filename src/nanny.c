@@ -237,7 +237,7 @@ static void nanny_get_name( Descriptor *d, char *argument )
     }
   else
     {
-      if ( wizlock && !is_immortal(ch) )
+      if ( wizlock && !IsImmortal(ch) )
 	{
 	  write_to_buffer( d, "The game is wizlocked. Only immortals can connect now.\r\n", 0 );
 	  write_to_buffer( d, "Please try back later.\r\n", 0 );
@@ -697,7 +697,7 @@ static void nanny_press_enter( Descriptor *d, char *argument )
       send_to_pager( "\014", ch );
     }
 
-  if ( is_immortal(ch) )
+  if ( IsImmortal(ch) )
     {
       send_to_pager( "&WImmortal Message of the Day&w\r\n", ch );
       do_help( ch, "imotd" );
@@ -765,7 +765,7 @@ static void nanny_read_motd( Descriptor *d, char *argument )
 
       /* Droids do not recieve force */
 
-      if( is_droid(ch) )
+      if( IsDroid(ch) )
 	{
 	  ch->stats.perm_frc = 0;
 	}
@@ -832,7 +832,7 @@ if ( (iLang = skill_lookup( "common" )) < 0 )
 	for ( ability =0 ; ability < MAX_ABILITY ; ability++ )
 	  {
 	    set_level( ch, ability, 1 );
-	    set_exp( ch, ability, 0 );
+	    SetExperience( ch, ability, 0 );
 	  }
       }
 
@@ -898,7 +898,7 @@ if ( (iLang = skill_lookup( "common" )) < 0 )
       /* Display_prompt interprets blank as default */
       ch->pcdata->prompt = STRALLOC("");
     }
-  else if ( !is_immortal(ch) && ch->pcdata->release_date > current_time )
+  else if ( !IsImmortal(ch) && ch->pcdata->release_date > current_time )
     {
       if ( ch->pcdata->jail_vnum )
 	{
@@ -909,13 +909,13 @@ if ( (iLang = skill_lookup( "common" )) < 0 )
 	  char_to_room( ch, get_room_index(6) );
 	}
     }
-  else if ( ch->in_room && !is_immortal( ch )
+  else if ( ch->in_room && !IsImmortal( ch )
 	    && !IS_SET( ch->in_room->room_flags, ROOM_SPACECRAFT )
 	    && ch->in_room != get_room_index(6) )
     {
       char_to_room( ch, ch->in_room );
     }
-  else if ( ch->in_room && !is_immortal( ch )
+  else if ( ch->in_room && !IsImmortal( ch )
 	    && IS_SET( ch->in_room->room_flags, ROOM_SPACECRAFT )
 	    && ch->in_room != get_room_index(6) )
     {

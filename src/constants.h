@@ -567,7 +567,7 @@ typedef enum
  * ACT bits for mobs.
  * Used in #MOBILES.
  */
-#define ACT_is_npc           BV00           /* Auto set for mobs    */
+#define ACT_IsNpc           BV00           /* Auto set for mobs    */
 #define ACT_SENTINEL         BV01           /* Stays in one room    */
 #define ACT_SCAVENGER        BV02           /* Picks up objects     */
 #define ACT_UNUSED_03        BV03

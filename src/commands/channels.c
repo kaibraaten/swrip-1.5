@@ -9,7 +9,7 @@ void do_channels( Character *ch, char *argument )
 
   if ( arg[0] == '\0' )
     {
-      if ( !is_npc(ch) && IS_SET(ch->act, PLR_SILENCE) )
+      if ( !IsNpc(ch) && IS_SET(ch->act, PLR_SILENCE) )
         {
           send_to_char( "You are silenced.\r\n", ch );
           return;
@@ -17,7 +17,7 @@ void do_channels( Character *ch, char *argument )
 
       send_to_char( "Channels:", ch );
 
-      if ( get_trust( ch ) > 2 && !is_not_authed( ch ) )
+      if ( GetTrustLevel( ch ) > 2 && !is_not_authed( ch ) )
         {
           send_to_char( !IS_SET(ch->deaf, CHANNEL_AUCTION)
                         ? " +AUCTION"
@@ -35,7 +35,7 @@ void do_channels( Character *ch, char *argument )
                     : " -ooc",
                     ch );
 
-      if ( !is_npc( ch ) && ch->pcdata->clan )
+      if ( !IsNpc( ch ) && ch->pcdata->clan )
 	{
           send_to_char( !IS_SET(ch->deaf, CHANNEL_CLAN)
                         ? " +CLAN"
@@ -61,7 +61,7 @@ void do_channels( Character *ch, char *argument )
                         ch );
         }
 
-      if ( is_immortal(ch) )
+      if ( IsImmortal(ch) )
         {
           send_to_char( !IS_SET(ch->deaf, CHANNEL_IMMTALK)
                         ? " +IMMTALK"
@@ -99,7 +99,7 @@ void do_channels( Character *ch, char *argument )
                     : " -arena",
                     ch );
 
-      if ( is_immortal(ch) )
+      if ( IsImmortal(ch) )
         {
           send_to_char( !IS_SET(ch->deaf, CHANNEL_MONITOR)
                         ? " +MONITOR"
@@ -112,7 +112,7 @@ void do_channels( Character *ch, char *argument )
                     : " -newbie",
                     ch );
 
-      if ( get_trust(ch) >= sysdata.log_level )
+      if ( GetTrustLevel(ch) >= sysdata.log_level )
         {
           send_to_char( !IS_SET(ch->deaf, CHANNEL_LOG)
                         ? " +LOG"

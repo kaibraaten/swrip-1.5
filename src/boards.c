@@ -40,7 +40,7 @@ static void note_remove( BOARD_DATA *board, NOTE_DATA *pnote );
 static bool can_remove( const Character *ch, const BOARD_DATA *board )
 {
   /* If your trust is high enough, you can remove it. */
-  if ( get_trust( ch ) >= board->min_remove_level )
+  if ( GetTrustLevel( ch ) >= board->min_remove_level )
     return true;
 
   if ( board->extra_removers[0] != '\0' )
@@ -55,7 +55,7 @@ static bool can_remove( const Character *ch, const BOARD_DATA *board )
 static bool can_read( const Character *ch, const BOARD_DATA *board )
 {
   /* If your trust is high enough, you can read it. */
-  if ( get_trust( ch ) >= board->min_read_level )
+  if ( GetTrustLevel( ch ) >= board->min_read_level )
     return true;
 
   /* Your trust wasn't high enough, so check if a read_group or extra
@@ -82,7 +82,7 @@ static bool can_read( const Character *ch, const BOARD_DATA *board )
 static bool can_post( const Character *ch, const BOARD_DATA *board )
 {
   /* If your trust is high enough, you can post. */
-  if ( get_trust( ch ) >= board->min_post_level )
+  if ( GetTrustLevel( ch ) >= board->min_post_level )
     return true;
 
   /* Your trust wasn't high enough, so check if a post_group has been set up. */
@@ -173,7 +173,7 @@ void note_attach( Character *ch )
 {
   NOTE_DATA *pnote = NULL;
 
-  if ( is_npc( ch ) )
+  if ( IsNpc( ch ) )
     return;
 
   if ( ch->pcdata->pnote )
@@ -300,7 +300,7 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
   bool mfound = false;
   bool wasfound = false;
 
-  if ( is_npc(ch) )
+  if ( IsNpc(ch) )
     return;
 
   if ( !ch->desc )
@@ -394,7 +394,7 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
               for ( pnote = board->first_note; pnote; pnote = pnote->next )
                 if (is_note_to( ch, pnote )) mfound = true;
 
-              if ( !mfound && get_trust(ch) < sysdata.read_all_mail )
+              if ( !mfound && GetTrustLevel(ch) < sysdata.read_all_mail )
                 {
                   ch_printf( ch, "You have no mail.\r\n");
                   return;
@@ -402,7 +402,7 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
             }
 
           for ( pnote = board->first_note; pnote; pnote = pnote->next )
-            if (is_note_to( ch, pnote ) || get_trust(ch) > sysdata.read_all_mail)
+            if (is_note_to( ch, pnote ) || GetTrustLevel(ch) > sysdata.read_all_mail)
               ch_printf( ch, "%2d%c %s: %s\r\n",
                          ++vnum,
                          is_note_to( ch, pnote ) ? '-' : '}',
@@ -485,19 +485,19 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
 
           for ( pnote = board->first_note; pnote; pnote = pnote->next )
             {
-              if (is_note_to(ch, pnote) || get_trust(ch) > sysdata.read_all_mail)
+              if (is_note_to(ch, pnote) || GetTrustLevel(ch) > sysdata.read_all_mail)
                 {
                   vnum++;
                   if ( vnum == anum || fAll )
                     {
                       wasfound = true;
                       if ( ch->gold < 10
-                           &&   get_trust(ch) < sysdata.read_mail_free )
+                           &&   GetTrustLevel(ch) < sysdata.read_mail_free )
                         {
                           send_to_char("It costs 10 credits to read a message.\r\n", ch);
                           return;
                         }
-                      if (get_trust(ch) < sysdata.read_mail_free)
+                      if (GetTrustLevel(ch) < sysdata.read_mail_free)
                         ch->gold -= 10;
                       pager_printf( ch, "[%3d] %s: %s\r\n%s\r\nTo: %s\r\n%s",
                                     vnum,
@@ -644,7 +644,7 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
           send_to_char( "You cannot write a note from within another command.\r\n", ch );
           return;
         }
-      if (get_trust (ch) < sysdata.write_mail_free)
+      if (GetTrustLevel (ch) < sysdata.write_mail_free)
         {
           quill = find_quill( ch );
           if (!quill)
@@ -661,7 +661,7 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
       if ( ( paper = get_eq_char(ch, WEAR_HOLD) ) == NULL
            ||     paper->item_type != ITEM_PAPER )
         {
-          if (get_trust(ch) < sysdata.write_mail_free )
+          if (GetTrustLevel(ch) < sysdata.write_mail_free )
             {
               send_to_char("You need to be holding a message disk to write a note.\r\n", ch);
               return;
@@ -684,7 +684,7 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
           ch->substate = SUB_WRITING_NOTE;
           ch->dest_buf = ed;
 
-          if ( get_trust(ch) < sysdata.write_mail_free )
+          if ( GetTrustLevel(ch) < sysdata.write_mail_free )
 	    {
 	      --quill->value[OVAL_PEN_INK_AMOUNT];
 	    }
@@ -701,7 +701,7 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
 
   if ( !str_cmp( arg, "subject" ) )
     {
-      if(get_trust(ch) < sysdata.write_mail_free)
+      if(GetTrustLevel(ch) < sysdata.write_mail_free)
         {
           quill = find_quill( ch );
           if ( !quill )
@@ -723,7 +723,7 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
       if ( ( paper = get_eq_char(ch, WEAR_HOLD) ) == NULL
            ||     paper->item_type != ITEM_PAPER )
         {
-          if(get_trust(ch) < sysdata.write_mail_free )
+          if(GetTrustLevel(ch) < sysdata.write_mail_free )
             {
               send_to_char("You need to be holding a message disk to record a note.\r\n", ch);
               return;
@@ -758,7 +758,7 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
     {
       struct stat fst;
       char fname[1024];
-      if(get_trust(ch) < sysdata.write_mail_free )
+      if(GetTrustLevel(ch) < sysdata.write_mail_free )
         {
           quill = find_quill( ch );
           if ( !quill )
@@ -780,7 +780,7 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
       if ( ( paper = get_eq_char(ch, WEAR_HOLD) ) == NULL
            ||     paper->item_type != ITEM_PAPER )
         {
-          if(get_trust(ch) < sysdata.write_mail_free )
+          if(GetTrustLevel(ch) < sysdata.write_mail_free )
             {
               send_to_char("You need to be holding a message disk to record a note.\r\n", ch);
               return;
@@ -954,7 +954,7 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
         take = 1;
       else if ( !str_cmp( arg, "copy" ) )
         {
-          if ( !is_immortal(ch) )
+          if ( !IsImmortal(ch) )
             {
               send_to_char( "Huh?  Type 'help note' for usage.\r\n", ch );
               return;
@@ -982,7 +982,7 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
       for ( pnote = board->first_note; pnote; pnote = pnote->next )
         {
           if (IS_MAIL && ((is_note_to(ch, pnote))
-                          ||  get_trust(ch) >= sysdata.take_others_mail))
+                          ||  GetTrustLevel(ch) >= sysdata.take_others_mail))
             vnum++;
           else if (!IS_MAIL)
             vnum++;
@@ -991,7 +991,7 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
                &&   ( vnum == anum ) )
             {
               if ( (is_name("all", pnote->to_list))
-                   &&   (get_trust( ch ) < sysdata.take_others_mail)
+                   &&   (GetTrustLevel( ch ) < sysdata.take_others_mail)
                    &&   (take != 2) )
                 {
                   send_to_char("Notes addressed to 'all' can not be taken.\r\n", ch);
@@ -1000,7 +1000,7 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
 
               if ( take != 0 )
                 {
-                  if ( ch->gold < 50 && get_trust(ch) < sysdata.read_mail_free )
+                  if ( ch->gold < 50 && GetTrustLevel(ch) < sysdata.read_mail_free )
                     {
                       if ( take == 1 )
                         send_to_char("It costs 50 credits to take your mail.\r\n", ch);
@@ -1008,7 +1008,7 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
                         send_to_char("It costs 50 credits to copy your mail.\r\n", ch);
                       return;
                     }
-                  if ( get_trust(ch) < sysdata.read_mail_free )
+                  if ( GetTrustLevel(ch) < sysdata.read_mail_free )
                     ch->gold -= 50;
                   paper = create_object( get_obj_index(OBJ_VNUM_NOTE), 0 );
                   ed = SetOExtra( paper, "_sender_" );

@@ -867,7 +867,7 @@ ch_ret drive_ship( Character *ch, SHIP_DATA *ship, Exit *pexit, int fall )
   Character *rch = NULL;
   Character *next_rch = NULL;
 
-  if ( !is_npc( ch ) )
+  if ( !IsNpc( ch ) )
     {
       if ( is_drunk( ch ) && ( ch->position != POS_SHOVE )
 	   && ( ch->position != POS_DRAG ) )
@@ -908,14 +908,14 @@ ch_ret drive_ship( Character *ch, SHIP_DATA *ship, Exit *pexit, int fall )
     }
 
   if ( IS_SET(pexit->exit_info, EX_PORTAL)
-       && is_npc(ch) )
+       && IsNpc(ch) )
     {
       act( AT_PLAIN, "Mobs can't use portals.", ch, NULL, NULL, TO_CHAR );
       return rNONE;
     }
 
   if ( IS_SET(pexit->exit_info, EX_NOMOB)
-       && is_npc(ch) )
+       && IsNpc(ch) )
     {
       act( AT_PLAIN, "Mobs can't enter there.", ch, NULL, NULL, TO_CHAR );
       return rNONE;
@@ -960,8 +960,8 @@ ch_ret drive_ship( Character *ch, SHIP_DATA *ship, Exit *pexit, int fall )
       return rNONE;
     }
 
-  if ( !is_immortal(ch)
-       && !is_npc(ch)
+  if ( !IsImmortal(ch)
+       && !IsNpc(ch)
        && ch->in_room->area != to_room->area )
     {
       if ( ch->top_level < to_room->area->low_hard_range )
@@ -1082,7 +1082,7 @@ ch_ret drive_ship( Character *ch, SHIP_DATA *ship, Exit *pexit, int fall )
 	}
     }
 
-  the_chance = is_npc(ch) ? ch->top_level : (int) (ch->pcdata->learned[gsn_speeders]) ;
+  the_chance = IsNpc(ch) ? ch->top_level : (int) (ch->pcdata->learned[gsn_speeders]) ;
 
   if ( number_percent() > the_chance )
     {
@@ -3318,7 +3318,7 @@ bool check_pilot( Character *ch , SHIP_DATA *ship )
       return true;
     }
 
-  if ( !is_npc(ch) && ch->pcdata && ch->pcdata->clan )
+  if ( !IsNpc(ch) && ch->pcdata && ch->pcdata->clan )
     {
       if ( !str_cmp(ch->pcdata->clan->name,ship->owner) )
         {
@@ -3666,7 +3666,7 @@ void destroy_ship( SHIP_DATA *ship , Character *ch )
 
           while ( rch )
             {
-              if ( is_immortal(rch) )
+              if ( IsImmortal(rch) )
                 {
                   char_from_room(rch);
                   char_to_room( rch, get_room_index(wherehome(rch)) );
@@ -3743,7 +3743,7 @@ bool rent_ship( Character *ch , SHIP_DATA *ship )
 {
   long price = 0;
 
-  if ( is_npc ( ch ) )
+  if ( IsNpc ( ch ) )
     {
       return false;
     }

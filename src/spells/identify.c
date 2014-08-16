@@ -152,7 +152,7 @@ ch_ret spell_identify( int sn, int level, Character *ch, void *vo )
           return rSPELL_FAILED;
         }
 
-      if ( is_npc(victim) )
+      if ( IsNpc(victim) )
         {
           ch_printf(ch, "%s appears to be between level %d and %d.\r\n",
                     victim->name,
@@ -168,7 +168,7 @@ ch_ret spell_identify( int sn, int level, Character *ch, void *vo )
                 victim->name, aoran(get_race(victim)));
 
       if ( (chance(ch, 50) && ch->top_level >= victim->top_level + 10 )
-           ||    is_immortal(ch) )
+           ||    IsImmortal(ch) )
         {
           ch_printf(ch, "%s appears to be affected by: ", victim->name);
 

@@ -8,7 +8,7 @@ void do_showship( Character *ch, char *argument )
   SHIP_DATA *ship = NULL;
   size_t turret_num = 0;
 
-  if ( is_npc( ch ) )
+  if ( IsNpc( ch ) )
     {
       send_to_char( "Huh?\r\n", ch );
       return;

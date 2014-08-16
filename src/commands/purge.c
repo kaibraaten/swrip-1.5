@@ -18,7 +18,7 @@ void do_purge( Character *ch, char *argument )
       for ( victim = ch->in_room->first_person; victim; victim = vnext )
         {
           vnext = victim->next_in_room;
-          if ( is_npc(victim) && victim != ch && !IS_SET(victim->act, ACT_POLYMORPHED))
+          if ( IsNpc(victim) && victim != ch && !IS_SET(victim->act, ACT_POLYMORPHED))
             extract_char( victim, true );
         }
 
@@ -61,7 +61,7 @@ void do_purge( Character *ch, char *argument )
     }
 
 
-  if ( !is_npc(victim) )
+  if ( !IsNpc(victim) )
     {
       send_to_char( "Not on PC's.\r\n", ch );
       return;

@@ -18,7 +18,7 @@ void do_destroy( Character *ch, char *argument )
     }
 
   for ( victim = first_char; victim; victim = victim->next )
-    if ( !is_npc(victim) && !str_cmp(victim->name, arg) )
+    if ( !IsNpc(victim) && !str_cmp(victim->name, arg) )
       break;
   if ( !victim )
     {
@@ -26,7 +26,7 @@ void do_destroy( Character *ch, char *argument )
 
       /* Make sure they aren't halfway logged in. */
       for ( d = first_descriptor; d; d = d->next )
-        if ( (victim = d->character) && !is_npc(victim) &&
+        if ( (victim = d->character) && !IsNpc(victim) &&
 	     !str_cmp(victim->name, arg) )
           break;
       if ( d )

@@ -22,7 +22,7 @@ void do_users( Character *ch, char *argument )
     {
       if (arg[0] == '\0')
         {
-          if (  get_trust(ch) >= LEVEL_IMPLEMENTOR
+          if (  GetTrustLevel(ch) >= LEVEL_IMPLEMENTOR
                 ||   (d->character && can_see( ch, d->character )) )
             {
               count++;
@@ -43,7 +43,7 @@ void do_users( Character *ch, char *argument )
         }
       else
         {
-          if ( (get_trust(ch) >= LEVEL_IMPLEMENTOR
+          if ( (GetTrustLevel(ch) >= LEVEL_IMPLEMENTOR
                 ||   (d->character && can_see( ch, d->character )) )
                &&   ( !str_prefix( arg, d->remote.hostname )
                       ||   ( d->character && !str_prefix( arg, d->character->name ) ) ) )

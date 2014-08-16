@@ -233,7 +233,7 @@ void do_redit( Character *ch, char *argument )
 
           if ( value < 0 || value > 31 )
             ch_printf( ch, "Unknown flag: %s\r\n", arg2 );
-          else if ( 1 << value == ROOM_PLR_HOME && get_trust(ch) < LEVEL_IMPLEMENTOR )
+          else if ( 1 << value == ROOM_PLR_HOME && GetTrustLevel(ch) < LEVEL_IMPLEMENTOR )
             send_to_char( "If you want to build a player home use the 'empty_home' flag instead.\r\n", ch );
           else
             {
@@ -519,7 +519,7 @@ void do_redit( Character *ch, char *argument )
           return;
         }
 
-      if ( get_trust(ch) <= LEVEL_IMMORTAL && tmp->area != location->area )
+      if ( GetTrustLevel(ch) <= LEVEL_IMMORTAL && tmp->area != location->area )
         {
           send_to_char( "You can't make an exit to that room.\r\n", ch );
           return;

@@ -8,13 +8,13 @@ void do_gouge( Character *ch, char *argument )
   short dam;
   int percent;
 
-  if ( is_npc(ch) && is_affected_by( ch, AFF_CHARM ) )
+  if ( IsNpc(ch) && is_affected_by( ch, AFF_CHARM ) )
     {
       send_to_char( "You can't concentrate enough for that.\r\n", ch );
       return;
     }
 
-  if ( !is_npc(ch) && !ch->pcdata->learned[gsn_gouge] )
+  if ( !IsNpc(ch) && !ch->pcdata->learned[gsn_gouge] )
     {
       send_to_char("You do not yet know of this skill.\r\n", ch );
       return;
@@ -32,9 +32,9 @@ void do_gouge( Character *ch, char *argument )
       return;
     }
 
-  percent = number_percent( ) - (get_curr_lck(ch) - 13);
+  percent = number_percent( ) - (GetCurrentLuck(ch) - 13);
 
-  if ( is_npc(ch) || percent < ch->pcdata->learned[gsn_gouge] )
+  if ( IsNpc(ch) || percent < ch->pcdata->learned[gsn_gouge] )
     {
       dam = number_range( 1, get_level( ch, COMBAT_ABILITY ) );
       global_retcode = damage( ch, victim, dam, gsn_gouge );

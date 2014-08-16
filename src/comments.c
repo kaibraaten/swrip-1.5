@@ -60,7 +60,7 @@ void note_attach(Character *ch);
 
 void comment_remove( Character *ch, Character *victim, NOTE_DATA *pnote )
 {
-  if ( is_npc( victim ) )
+  if ( IsNpc( victim ) )
     {
       bug( "comment remove: NPC", 0 );
       return;
@@ -108,7 +108,7 @@ void do_comment( Character *ch, char *argument )
   int noteNumber = 0;
   int anum = 0;
 
-  if ( is_npc(ch) )
+  if ( IsNpc(ch) )
     {
       send_to_char("Mobs can't use the comment command.\r\n", ch);
       return;
@@ -163,7 +163,7 @@ void do_comment( Character *ch, char *argument )
           return;
         }
 
-      if ( is_npc(victim) )
+      if ( IsNpc(victim) )
         {
           send_to_char("No comments about mobs\r\n", ch);
           return;
@@ -181,13 +181,13 @@ void do_comment( Character *ch, char *argument )
           return;
         }
 
-      if ( is_npc(victim) )
+      if ( IsNpc(victim) )
         {
           send_to_char("No comments about mobs\r\n", ch);
           return;
         }
 
-      if ( get_trust(victim) >= get_trust( ch ) )
+      if ( GetTrustLevel(victim) >= GetTrustLevel( ch ) )
         {
           send_to_char( "You're not of the right caliber to do this...\r\n", ch );
           return;
@@ -228,13 +228,13 @@ void do_comment( Character *ch, char *argument )
           return;
         }
 
-      if ( is_npc(victim) )
+      if ( IsNpc(victim) )
         {
           send_to_char("No comments about mobs\r\n", ch);
           return;
         }
 
-      if ( get_trust(victim) >= get_trust( ch ) )
+      if ( GetTrustLevel(victim) >= GetTrustLevel( ch ) )
         {
           send_to_char( "You're not of the right caliber to do this...\r\n", ch );
           return;
@@ -368,13 +368,13 @@ void do_comment( Character *ch, char *argument )
           return;
         }
 
-      if ( is_npc(victim) )
+      if ( IsNpc(victim) )
         {
           send_to_char("No comments about mobs\r\n", ch);
           return;
         }
 
-      if (  get_trust(victim) > get_trust( ch ) )
+      if (  GetTrustLevel(victim) > GetTrustLevel( ch ) )
         {
           send_to_char( "You're not of the right caliber to do this...\r\n", ch );
           return;
@@ -434,14 +434,14 @@ void do_comment( Character *ch, char *argument )
           return;
         }
 
-      if ( is_npc(victim) )
+      if ( IsNpc(victim) )
         {
           send_to_char("No comments about mobs\r\n", ch);
           return;
         }
 
-      if (  (get_trust(victim) >= get_trust( ch ) )
-            || ( get_trust( ch ) < 58                ) )   /* switch to some LEVEL_ thingie */
+      if (  (GetTrustLevel(victim) >= GetTrustLevel( ch ) )
+            || ( GetTrustLevel( ch ) < 58                ) )   /* switch to some LEVEL_ thingie */
         {
           send_to_char( "You're not of the right caliber to do this...\r\n", ch );
           return;
@@ -461,7 +461,7 @@ void do_comment( Character *ch, char *argument )
         {
           noteNumber++;
 
-          if ( ( 58 <= get_trust( ch ) )    /* switch to some LEVEL_ thingie */
+          if ( ( 58 <= GetTrustLevel( ch ) )    /* switch to some LEVEL_ thingie */
                &&   ( noteNumber == anum ) )
             {
               comment_remove( ch, victim, pnote );
@@ -501,7 +501,7 @@ void fread_comment( Character *ch, FILE *fp )
 {
   NOTE_DATA *pnote;
 
-  if( is_npc( ch ) )
+  if( IsNpc( ch ) )
     return;
 
   for ( ; ; )

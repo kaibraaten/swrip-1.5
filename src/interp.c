@@ -278,7 +278,7 @@ void interpret( Character *ch, char *argument )
       /*
        * Implement freeze command.
        */
-      if ( !is_npc(ch) && IS_SET(ch->act, PLR_FREEZE) )
+      if ( !IsNpc(ch) && IS_SET(ch->act, PLR_FREEZE) )
         {
           send_to_char( "You're totally frozen!\r\n", ch );
           return;
@@ -297,7 +297,7 @@ void interpret( Character *ch, char *argument )
 	}
 
 
-      if ( !is_npc(ch) && ch->pcdata && ch->pcdata->target )
+      if ( !IsNpc(ch) && ch->pcdata && ch->pcdata->target )
 	{
 	  if ( ch->pcdata->target[0] != '\0' )
 	    {
@@ -329,12 +329,12 @@ void interpret( Character *ch, char *argument )
        * Check for council powers and/or bestowments
        */
 
-      trust = get_trust( ch );
+      trust = GetTrustLevel( ch );
 
       for ( cmd = command_hash[LOWER(command[0])%126]; cmd; cmd = cmd->next )
         if ( !str_prefix( command, cmd->name )
              && (cmd->level <= trust
-		 ||(!is_npc(ch) && ch->pcdata->bestowments && ch->pcdata->bestowments[0] != '\0'
+		 ||(!IsNpc(ch) && ch->pcdata->bestowments && ch->pcdata->bestowments[0] != '\0'
 		    && is_name( cmd->name, ch->pcdata->bestowments )
 		    && cmd->level <= (trust + 5) ) ) )
           {
@@ -364,7 +364,7 @@ void interpret( Character *ch, char *argument )
 
   loglvl = found ? cmd->log : LOG_NORMAL;
 
-  if ( ( !is_npc(ch) && IS_SET(ch->act, PLR_LOG) )
+  if ( ( !IsNpc(ch) && IS_SET(ch->act, PLR_LOG) )
        || fLogAll
        || loglvl == LOG_BUILD
        || loglvl == LOG_HIGH
@@ -387,7 +387,7 @@ void interpret( Character *ch, char *argument )
        * file only, and not spam the log channel to death       -Thoric
        */
       if ( fLogAll && loglvl == LOG_NORMAL
-           && (is_npc(ch) || !IS_SET(ch->act, PLR_LOG)) )
+           && (IsNpc(ch) || !IS_SET(ch->act, PLR_LOG)) )
 	{
 	  loglvl = LOG_ALL;
 	}
@@ -515,7 +515,7 @@ void interpret( Character *ch, char *argument )
               ch->in_room ? ch->in_room->vnum : 0,
               (int) (time_used.tv_sec),
 	      (int) (time_used.tv_usec) );
-      log_string_plus(log_buf, LOG_NORMAL, get_trust(ch));
+      log_string_plus(log_buf, LOG_NORMAL, GetTrustLevel(ch));
     }
 }
 
@@ -571,7 +571,7 @@ bool check_social( Character *ch, const char *command, char *argument )
       return false;
     }
 
-  if ( !is_npc(ch) && IS_SET(ch->act, PLR_NO_EMOTE) )
+  if ( !IsNpc(ch) && IS_SET(ch->act, PLR_NO_EMOTE) )
     {
       send_to_char( "You are anti-social!\r\n", ch );
       return true;
@@ -629,7 +629,7 @@ bool check_social( Character *ch, const char *command, char *argument )
       act( AT_SOCIAL, social->char_found,    ch, NULL, victim, TO_CHAR    );
       act( AT_SOCIAL, social->vict_found,    ch, NULL, victim, TO_VICT    );
 
-      if ( !is_npc(ch) && is_npc(victim)
+      if ( !IsNpc(ch) && IsNpc(victim)
            && !is_affected_by(victim, AFF_CHARM)
            && is_awake(victim)
            && !IS_SET( victim->pIndexData->mprog.progtypes, ACT_PROG ) )

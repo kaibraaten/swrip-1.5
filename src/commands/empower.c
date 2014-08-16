@@ -9,7 +9,7 @@ void do_empower ( Character *ch , char *argument )
   CLAN_DATA *clan;
   char buf[MAX_STRING_LENGTH];
 
-  if ( is_npc( ch ) || !ch->pcdata->clan )
+  if ( IsNpc( ch ) || !ch->pcdata->clan )
     {
       send_to_char( "Huh?\r\n", ch );
       return;
@@ -42,7 +42,7 @@ void do_empower ( Character *ch , char *argument )
       return;
     }
 
-  if ( is_npc(victim) )
+  if ( IsNpc(victim) )
     {
       send_to_char( "Not on NPC's.\r\n", ch );
       return;

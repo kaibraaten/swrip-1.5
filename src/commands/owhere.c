@@ -55,7 +55,7 @@ void do_owhere( Character *ch, char *argument )
           sprintf(field, "%-18s", PERS(outer_obj->carried_by, ch));
           trunc1(field, 18);
           sprintf(buf+strlen(buf), "%5ld %-18s &R&w",
-                  (is_npc(outer_obj->carried_by) ?
+                  (IsNpc(outer_obj->carried_by) ?
                    outer_obj->carried_by->pIndexData->vnum : INVALID_VNUM), field);
 
           if ( outer_obj!=obj )

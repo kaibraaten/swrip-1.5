@@ -21,7 +21,7 @@ void do_forceclose( Character *ch, char *argument )
     {
       if ( d->descriptor == desc )
         {
-          if ( d->character && get_trust(d->character) >= get_trust(ch) )
+          if ( d->character && GetTrustLevel(d->character) >= GetTrustLevel(ch) )
             {
               send_to_char( "They might not like that...\r\n", ch );
               return;

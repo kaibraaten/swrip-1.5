@@ -6,7 +6,7 @@ void do_clan_withdraw( Character *ch, char *argument )
   CLAN_DATA *clan = NULL;
   long amount = 0;
 
-  if ( is_npc( ch ) || !ch->pcdata->clan )
+  if ( IsNpc( ch ) || !ch->pcdata->clan )
     {
       send_to_char( "You don't seem to belong to an organization to withdraw funds from...\r\n",
 		    ch );
@@ -25,7 +25,7 @@ void do_clan_withdraw( Character *ch, char *argument )
       return;
     }
 
-  if ( !has_comlink( ch ) )
+  if ( !HasComlink( ch ) )
     {
       if (!ch->in_room || !IS_SET(ch->in_room->room_flags, ROOM_BANK) )
         {

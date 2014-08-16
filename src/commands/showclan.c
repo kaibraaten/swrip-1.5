@@ -7,7 +7,7 @@ void do_showclan( Character *ch, char *argument )
 {
   CLAN_DATA *clan;
 
-  if ( is_npc( ch ) )
+  if ( IsNpc( ch ) )
     {
       send_to_char( "Huh?\r\n", ch );
       return;

@@ -56,7 +56,7 @@ void explode( OBJ_DATA *obj )
         objcont = objcont->in_obj;
 
       for ( xch = first_char; xch; xch = xch->next )
-        if ( !is_npc( xch ) && nifty_is_name( obj->armed_by, xch->name ) )
+        if ( !IsNpc( xch ) && nifty_is_name( obj->armed_by, xch->name ) )
           {
             if ( objcont->carried_by )
               {
@@ -109,7 +109,7 @@ void room_explode_1( OBJ_DATA *obj, Character *xch, ROOM_INDEX_DATA *room, int b
       damage( rch, rch , dam, TYPE_UNDEFINED );
       if ( !char_died(rch) )
         {
-          if ( is_npc( rch ) )
+          if ( IsNpc( rch ) )
             {
               if ( IS_SET( rch->act , ACT_SENTINEL ) )
                 {
@@ -193,9 +193,9 @@ int exp_level( short level)
  */
 bool can_take_proto( const Character *ch )
 {
-  if ( is_immortal(ch) )
+  if ( IsImmortal(ch) )
     return true;
-  else if ( is_npc(ch) && IS_SET(ch->act, ACT_PROTOTYPE) )
+  else if ( IsNpc(ch) && IS_SET(ch->act, ACT_PROTOTYPE) )
     return true;
   else
     return false;
@@ -284,19 +284,19 @@ void affect_modify( Character *ch, Affect *paf, bool fAdd )
     case APPLY_REMOVE:        REMOVE_BIT(ch->affected_by, mod); break;
 
     case APPLY_FULL:
-      if ( !is_npc(ch) )
+      if ( !IsNpc(ch) )
         ch->pcdata->condition[COND_FULL] =
           URANGE( 0, ch->pcdata->condition[COND_FULL] + mod, 48 );
       break;
 
     case APPLY_THIRST:
-      if ( !is_npc(ch) )
+      if ( !IsNpc(ch) )
         ch->pcdata->condition[COND_THIRST] =
           URANGE( 0, ch->pcdata->condition[COND_THIRST] + mod, 48 );
       break;
 
     case APPLY_DRUNK:
-      if ( !is_npc(ch) )
+      if ( !IsNpc(ch) )
         ch->pcdata->condition[COND_DRUNK] =
           URANGE( 0, ch->pcdata->condition[COND_DRUNK] + mod, 48 );
       break;
@@ -337,117 +337,117 @@ void affect_modify( Character *ch, Affect *paf, bool fAdd )
 
     case APPLY_PALM:    /* not implemented yet */               break;
     case APPLY_TRACK:
-      if ( !is_npc(ch) && ch->pcdata->learned[gsn_track]> 0 )
+      if ( !IsNpc(ch) && ch->pcdata->learned[gsn_track]> 0 )
         ch->pcdata->learned[gsn_track] =
           ( ch->pcdata->learned[gsn_track] >= 100 ? 100 : URANGE( 1, ch->pcdata->learned[gsn_track] + mod, 100 ) );
       break;
     case APPLY_HIDE:
-      if ( !is_npc(ch) && ch->pcdata->learned[gsn_hide]> 0)
+      if ( !IsNpc(ch) && ch->pcdata->learned[gsn_hide]> 0)
         ch->pcdata->learned[gsn_hide] =
           ( ch->pcdata->learned[gsn_hide] >= 100 ? 100 : URANGE( 1, ch->pcdata->learned[gsn_hide] + mod, 100 ) );
       break;
     case APPLY_STEAL:
-      if ( !is_npc(ch) && ch->pcdata->learned[gsn_steal] > 0)
+      if ( !IsNpc(ch) && ch->pcdata->learned[gsn_steal] > 0)
         ch->pcdata->learned[gsn_steal] =
           ( ch->pcdata->learned[gsn_steal] >= 100 ? 100 : URANGE( 1, ch->pcdata->learned[gsn_steal] + mod, 100 ) );
       break;
     case APPLY_SNEAK:
-      if ( !is_npc(ch) && ch->pcdata->learned[gsn_sneak]> 0)
+      if ( !IsNpc(ch) && ch->pcdata->learned[gsn_sneak]> 0)
         ch->pcdata->learned[gsn_sneak] =
           ( ch->pcdata->learned[gsn_sneak] >= 100 ? 100 : URANGE( 1, ch->pcdata->learned[gsn_sneak] + mod, 100 ) );
       break;
     case APPLY_PICK:
-      if ( !is_npc(ch) && ch->pcdata->learned[gsn_pick_lock]> 0)
+      if ( !IsNpc(ch) && ch->pcdata->learned[gsn_pick_lock]> 0)
         ch->pcdata->learned[gsn_pick_lock] =
           ( ch->pcdata->learned[gsn_pick_lock] >= 100 ? 100 : URANGE( 1, ch->pcdata->learned[gsn_pick_lock] + mod, 100 ) );
       break;
     case APPLY_BACKSTAB:
-      if ( !is_npc(ch) && ch->pcdata->learned[gsn_backstab]> 0)
+      if ( !IsNpc(ch) && ch->pcdata->learned[gsn_backstab]> 0)
         ch->pcdata->learned[gsn_backstab] =
           ( ch->pcdata->learned[gsn_backstab] >= 100 ? 100 : URANGE( 1, ch->pcdata->learned[gsn_backstab] + mod, 100 ) );
       break;
     case APPLY_DETRAP:
-      if ( !is_npc(ch) && ch->pcdata->learned[gsn_detrap]> 0)
+      if ( !IsNpc(ch) && ch->pcdata->learned[gsn_detrap]> 0)
         ch->pcdata->learned[gsn_detrap] =
           ( ch->pcdata->learned[gsn_detrap] >= 100 ? 100 : URANGE( 1, ch->pcdata->learned[gsn_detrap] + mod, 100 ) );
       break;
     case APPLY_DODGE:
-      if ( !is_npc(ch) && ch->pcdata->learned[gsn_dodge]> 0)
+      if ( !IsNpc(ch) && ch->pcdata->learned[gsn_dodge]> 0)
         ch->pcdata->learned[gsn_dodge] =
           ( ch->pcdata->learned[gsn_dodge] >= 100 ? 100 : URANGE( 1, ch->pcdata->learned[gsn_dodge] + mod, 100 ) );
       break;
     case APPLY_PEEK:
-      if ( !is_npc(ch) && ch->pcdata->learned[gsn_peek]> 0)
+      if ( !IsNpc(ch) && ch->pcdata->learned[gsn_peek]> 0)
         ch->pcdata->learned[gsn_peek] =
           ( ch->pcdata->learned[gsn_peek] >= 100 ? 100 : URANGE( 1, ch->pcdata->learned[gsn_peek] + mod, 100 ) );
       break;
     case APPLY_SCAN:
-      if ( !is_npc(ch) && ch->pcdata->learned[gsn_scan]> 0)
+      if ( !IsNpc(ch) && ch->pcdata->learned[gsn_scan]> 0)
         ch->pcdata->learned[gsn_scan] =
           ( ch->pcdata->learned[gsn_scan] >= 100 ? 100 : URANGE( 1, ch->pcdata->learned[gsn_scan] + mod, 100 ) );
       break;
     case APPLY_GOUGE:
-      if ( !is_npc(ch) && ch->pcdata->learned[gsn_gouge]> 0)
+      if ( !IsNpc(ch) && ch->pcdata->learned[gsn_gouge]> 0)
         ch->pcdata->learned[gsn_gouge] =
           ( ch->pcdata->learned[gsn_gouge] >= 100 ? 100 : URANGE( 1, ch->pcdata->learned[gsn_gouge] + mod, 100 ) );
       break;
     case APPLY_SEARCH:
-      if ( !is_npc(ch) && ch->pcdata->learned[gsn_search]> 0)
+      if ( !IsNpc(ch) && ch->pcdata->learned[gsn_search]> 0)
         ch->pcdata->learned[gsn_search] =
           ( ch->pcdata->learned[gsn_search] >= 100 ? 100 : URANGE( 1, ch->pcdata->learned[gsn_search] + mod, 100 ) );
       break;
     case APPLY_DIG:
-      if ( !is_npc(ch) && ch->pcdata->learned[gsn_dig]> 0)
+      if ( !IsNpc(ch) && ch->pcdata->learned[gsn_dig]> 0)
         ch->pcdata->learned[gsn_dig] =
           ( ch->pcdata->learned[gsn_dig] >= 100 ? 100 : URANGE( 1, ch->pcdata->learned[gsn_dig] + mod, 100 ) );
       break;
     case APPLY_MOUNT:
-      if ( !is_npc(ch) && ch->pcdata->learned[gsn_mount]> 0 )
+      if ( !IsNpc(ch) && ch->pcdata->learned[gsn_mount]> 0 )
         ch->pcdata->learned[gsn_mount] =
           ( ch->pcdata->learned[gsn_mount] >= 100 ? 100 : URANGE( 1, ch->pcdata->learned[gsn_mount] + mod, 100 ) );
       break;
     case APPLY_DISARM:
-      if ( !is_npc(ch) && ch->pcdata->learned[gsn_disarm]> 0 )
+      if ( !IsNpc(ch) && ch->pcdata->learned[gsn_disarm]> 0 )
         ch->pcdata->learned[gsn_disarm] =
           ( ch->pcdata->learned[gsn_disarm] >= 100 ? 100 : URANGE( 1, ch->pcdata->learned[gsn_disarm] + mod, 100 ) );
       break;
     case APPLY_KICK:
-      if ( !is_npc(ch) && ch->pcdata->learned[gsn_kick]> 0)
+      if ( !IsNpc(ch) && ch->pcdata->learned[gsn_kick]> 0)
         ch->pcdata->learned[gsn_kick] =
           ( ch->pcdata->learned[gsn_kick] >= 100 ? 100 : URANGE( 1, ch->pcdata->learned[gsn_kick] + mod, 100 ) );
       break;
     case APPLY_PARRY:
-      if ( !is_npc(ch) && ch->pcdata->learned[gsn_parry]> 0)
+      if ( !IsNpc(ch) && ch->pcdata->learned[gsn_parry]> 0)
         ch->pcdata->learned[gsn_parry] =
           ( ch->pcdata->learned[gsn_parry] >= 100 ? 100 : URANGE( 1, ch->pcdata->learned[gsn_parry] + mod, 100 ) );
       break;
     case APPLY_BASH:
-      if ( !is_npc(ch) && ch->pcdata->learned[gsn_bash]> 0)
+      if ( !IsNpc(ch) && ch->pcdata->learned[gsn_bash]> 0)
         ch->pcdata->learned[gsn_bash] =
           ( ch->pcdata->learned[gsn_bash] >= 100 ? 100 : URANGE( 1, ch->pcdata->learned[gsn_bash] + mod, 100 ) );
       break;
     case APPLY_STUN:
-      if ( !is_npc(ch) && ch->pcdata->learned[gsn_stun]> 0)
+      if ( !IsNpc(ch) && ch->pcdata->learned[gsn_stun]> 0)
         ch->pcdata->learned[gsn_stun] =
           ( ch->pcdata->learned[gsn_stun] >= 100 ? 100 : URANGE( 1, ch->pcdata->learned[gsn_stun] + mod, 100 ) );
       break;
     case APPLY_PUNCH:
-      if ( !is_npc(ch) && ch->pcdata->learned[gsn_punch]> 0)
+      if ( !IsNpc(ch) && ch->pcdata->learned[gsn_punch]> 0)
         ch->pcdata->learned[gsn_punch] =
           ( ch->pcdata->learned[gsn_punch] >= 100 ? 100 : URANGE( 1, ch->pcdata->learned[gsn_punch] + mod, 100 ) );
       break;
     case APPLY_CLIMB:
-      if ( !is_npc(ch) && ch->pcdata->learned[gsn_climb]> 0)
+      if ( !IsNpc(ch) && ch->pcdata->learned[gsn_climb]> 0)
         ch->pcdata->learned[gsn_climb] =
           ( ch->pcdata->learned[gsn_climb] >= 100 ? 100 : URANGE( 1, ch->pcdata->learned[gsn_climb] + mod, 100 ) );
       break;
     case APPLY_GRIP:
-      if ( !is_npc(ch) && ch->pcdata->learned[gsn_grip]> 0)
+      if ( !IsNpc(ch) && ch->pcdata->learned[gsn_grip]> 0)
         ch->pcdata->learned[gsn_grip] =
           ( ch->pcdata->learned[gsn_grip] >= 100 ? 100 : URANGE( 1, ch->pcdata->learned[gsn_grip] + mod, 100 ) );
       break;
     case APPLY_SNIPE:
-      if ( !is_npc(ch) && ch->pcdata->learned[gsn_snipe]> 0)
+      if ( !IsNpc(ch) && ch->pcdata->learned[gsn_snipe]> 0)
         ch->pcdata->learned[gsn_snipe] =
           ( ch->pcdata->learned[gsn_snipe] >= 100 ? 100 : URANGE( 1, ch->pcdata->learned[gsn_snipe] + mod, 100 ) );
       break;
@@ -457,10 +457,10 @@ void affect_modify( Character *ch, Affect *paf, bool fAdd )
    * Check for weapon wielding.
    * Guard against recursion (for weapons with affects).
    */
-  if ( !is_npc( ch )
+  if ( !IsNpc( ch )
        &&   saving_char != ch
        && ( wield = get_eq_char( ch, WEAR_WIELD ) ) != NULL
-       &&   get_obj_weight(wield) > str_app[get_curr_str(ch)].wield )
+       &&   get_obj_weight(wield) > str_app[GetCurrentStrength(ch)].wield )
     {
       static int depth;
 
@@ -587,7 +587,7 @@ void char_from_room( Character *ch )
       return;
     }
 
-  if ( !is_npc(ch) )
+  if ( !IsNpc(ch) )
     --ch->in_room->area->nplayer;
 
   if ( ( obj = get_eq_char( ch, WEAR_LIGHT ) ) != NULL
@@ -604,7 +604,7 @@ void char_from_room( Character *ch )
   ch->next_in_room = NULL;
   ch->prev_in_room = NULL;
 
-  if ( !is_npc(ch)
+  if ( !IsNpc(ch)
        &&   get_timer( ch, TIMER_SHOVEDRAG ) > 0 )
     remove_timer( ch, TIMER_SHOVEDRAG );
 }
@@ -634,7 +634,7 @@ void char_to_room( Character *ch, ROOM_INDEX_DATA *pRoomIndex )
   LINK( ch, pRoomIndex->first_person, pRoomIndex->last_person,
         next_in_room, prev_in_room );
 
-  if ( !is_npc(ch) )
+  if ( !IsNpc(ch) )
     if ( ++ch->in_room->area->nplayer > ch->in_room->area->max_players )
       ch->in_room->area->max_players = ch->in_room->area->nplayer;
 
@@ -643,7 +643,7 @@ void char_to_room( Character *ch, ROOM_INDEX_DATA *pRoomIndex )
        &&   obj->value[OVAL_LIGHT_POWER] != 0 )
     ++ch->in_room->light;
 
-  if ( !is_npc(ch)
+  if ( !IsNpc(ch)
        &&    IS_SET(ch->in_room->room_flags, ROOM_SAFE)
        &&    get_timer(ch, TIMER_SHOVEDRAG) <= 0 )
     add_timer( ch, TIMER_SHOVEDRAG, 10, NULL, SUB_NONE );  /*-30 Seconds-*/
@@ -683,8 +683,8 @@ OBJ_DATA *obj_to_char( OBJ_DATA *obj, Character *ch )
 
   if (IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
     {
-      if (!is_immortal( ch )
-          && (is_npc(ch) && !IS_SET(ch->act, ACT_PROTOTYPE)) )
+      if (!IsImmortal( ch )
+          && (IsNpc(ch) && !IS_SET(ch->act, ACT_PROTOTYPE)) )
         return obj_to_room( obj, ch->in_room );
     }
 
@@ -1100,7 +1100,7 @@ void extract_char( Character *ch, bool fPull )
       ch->position = POS_STANDING;
     }
 
-  if ( is_npc(ch) && IS_SET( ch->act, ACT_MOUNTED ) )
+  if ( IsNpc(ch) && IS_SET( ch->act, ACT_MOUNTED ) )
     for ( wch = first_char; wch; wch = wch->next )
       {
         if ( wch->mount == ch )
@@ -1140,7 +1140,7 @@ void extract_char( Character *ch, bool fPull )
       return;
     }
 
-  if ( is_npc(ch) )
+  if ( IsNpc(ch) )
     {
       --ch->pIndexData->count;
       --nummobsloaded;
@@ -1186,17 +1186,17 @@ Character *get_char_room( const Character *ch, const char *argument )
   if ( !str_cmp( arg, "self" ) )
     return (Character*)ch;
 
-  if ( get_trust(ch) >= LEVEL_CREATOR && is_number( arg ) )
+  if ( GetTrustLevel(ch) >= LEVEL_CREATOR && is_number( arg ) )
     vnum = atoi( arg );
 
   count  = 0;
 
   for ( rch = ch->in_room->first_person; rch; rch = rch->next_in_room )
     if ( can_see( ch, rch )
-         &&  (( (nifty_is_name( arg, rch->name ) || (!is_npc(rch) && nifty_is_name( arg, rch->pcdata->title )))
-                ||  (is_npc(rch) && vnum == rch->pIndexData->vnum))) )
+         &&  (( (nifty_is_name( arg, rch->name ) || (!IsNpc(rch) && nifty_is_name( arg, rch->pcdata->title )))
+                ||  (IsNpc(rch) && vnum == rch->pIndexData->vnum))) )
       {
-        if ( number == 0 && !is_npc(rch) )
+        if ( number == 0 && !IsNpc(rch) )
           return rch;
         else
           if ( ++count == number )
@@ -1215,11 +1215,11 @@ Character *get_char_room( const Character *ch, const char *argument )
     {
       if ( !can_see( ch, rch ) ||
            (!nifty_is_name_prefix( arg, rch->name ) &&
-            (is_npc(rch) || (!is_npc(rch) && !nifty_is_name_prefix( arg, rch->pcdata->title )))
+            (IsNpc(rch) || (!IsNpc(rch) && !nifty_is_name_prefix( arg, rch->pcdata->title )))
             )
            )
         continue;
-      if ( number == 0 && !is_npc(rch) )
+      if ( number == 0 && !IsNpc(rch) )
         return rch;
       else
         if ( ++count == number )
@@ -1248,15 +1248,15 @@ Character *get_char_world( const Character *ch, const char *argument )
   /*
    * Allow reference by vnum for saints+                        -Thoric
    */
-  if ( get_trust(ch) >= LEVEL_CREATOR && is_number( arg ) )
+  if ( GetTrustLevel(ch) >= LEVEL_CREATOR && is_number( arg ) )
     vnum = atoi( arg );
 
   /* check the room for an exact match */
   for ( wch = ch->in_room->first_person; wch; wch = wch->next_in_room )
     if ( (nifty_is_name( arg, wch->name )
-          ||  (is_npc(wch) && vnum == wch->pIndexData->vnum)) && is_wizvis(ch,wch))
+          ||  (IsNpc(wch) && vnum == wch->pIndexData->vnum)) && IsWizVis(ch,wch))
       {
-        if ( number == 0 && !is_npc(wch) )
+        if ( number == 0 && !IsNpc(wch) )
           return wch;
         else
           if ( ++count == number )
@@ -1268,9 +1268,9 @@ Character *get_char_world( const Character *ch, const char *argument )
   /* check the world for an exact match */
   for ( wch = first_char; wch; wch = wch->next )
     if ( (nifty_is_name( arg, wch->name )
-          ||  (is_npc(wch) && vnum == wch->pIndexData->vnum)) && is_wizvis(ch,wch) )
+          ||  (IsNpc(wch) && vnum == wch->pIndexData->vnum)) && IsWizVis(ch,wch) )
       {
-        if ( number == 0 && !is_npc(wch) )
+        if ( number == 0 && !IsNpc(wch) )
           return wch;
         else
           if ( ++count == number  )
@@ -1291,10 +1291,10 @@ Character *get_char_world( const Character *ch, const char *argument )
     {
       if ( !nifty_is_name_prefix( arg, wch->name ) )
         continue;
-      if ( number == 0 && !is_npc(wch) && is_wizvis(ch,wch))
+      if ( number == 0 && !IsNpc(wch) && IsWizVis(ch,wch))
         return wch;
       else
-        if ( ++count == number  && is_wizvis(ch, wch) )
+        if ( ++count == number  && IsWizVis(ch, wch) )
           return wch;
     }
 
@@ -1308,10 +1308,10 @@ Character *get_char_world( const Character *ch, const char *argument )
     {
       if ( !nifty_is_name_prefix( arg, wch->name ) )
         continue;
-      if ( number == 0 && !is_npc(wch) && is_wizvis(ch, wch) )
+      if ( number == 0 && !IsNpc(wch) && IsWizVis(ch, wch) )
         return wch;
       else
-        if ( ++count == number  && is_wizvis(ch, wch) )
+        if ( ++count == number  && IsWizVis(ch, wch) )
           return wch;
     }
 
@@ -1436,7 +1436,7 @@ OBJ_DATA *get_obj_world( const Character *ch, const char *argument )
   /*
    * Allow reference by vnum for saints+                        -Thoric
    */
-  if ( get_trust(ch) >= LEVEL_CREATOR && is_number( arg ) )
+  if ( GetTrustLevel(ch) >= LEVEL_CREATOR && is_number( arg ) )
     vnum = atoi( arg );
 
   count  = 0;
@@ -2317,9 +2317,9 @@ void remove_timer( Character *ch, short type )
 
 bool in_soft_range( const Character *ch, const Area *tarea )
 {
-  if ( is_immortal(ch) )
+  if ( IsImmortal(ch) )
     return true;
-  else if ( is_npc(ch) )
+  else if ( IsNpc(ch) )
     return true;
   else if ( ch->top_level >= tarea->low_soft_range || ch->top_level <= tarea->hi_soft_range )
     return true;
@@ -2329,9 +2329,9 @@ bool in_soft_range( const Character *ch, const Area *tarea )
 
 bool in_hard_range( const Character *ch, const Area *tarea )
 {
-  if ( is_immortal(ch) )
+  if ( IsImmortal(ch) )
     return true;
-  else if ( is_npc(ch) )
+  else if ( IsNpc(ch) )
     return true;
   else if ( ch->top_level >= tarea->low_hard_range && ch->top_level <= tarea->hi_hard_range )
     return true;
@@ -2376,7 +2376,7 @@ bool chance( const Character *ch, short percent )
 
   ms = 10 - abs(ch->mental_state);
 
-  if ( (number_percent() - get_curr_lck(ch) + 13 - ms) <= percent )
+  if ( (number_percent() - GetCurrentLuck(ch) + 13 - ms) <= percent )
     return true;
   else
     return false;
@@ -2390,7 +2390,7 @@ bool chance_attrib( const Character *ch, short percent, short attrib )
       return false;
     }
 
-  if (number_percent() - get_curr_lck(ch) + 13 - attrib + 13 <= percent )
+  if (number_percent() - GetCurrentLuck(ch) + 13 - attrib + 13 <= percent )
     return true;
   else
     return false;

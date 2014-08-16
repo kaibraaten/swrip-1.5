@@ -13,7 +13,7 @@ void do_setship( Character *ch, char *argument )
   int tempnum = 0;
   ROOM_INDEX_DATA *roomindex = NULL;
 
-  if ( is_npc( ch ) )
+  if ( IsNpc( ch ) )
     {
       send_to_char( "Huh?\r\n", ch );
       return;

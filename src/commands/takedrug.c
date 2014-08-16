@@ -14,7 +14,7 @@ void do_takedrug( Character *ch, char *argument )
       return;
     }
 
-  if( is_droid(ch) )
+  if( IsDroid(ch) )
     {
       send_to_char( "That would have no affect on you.\r\n", ch );
       return;
@@ -44,7 +44,7 @@ void do_takedrug( Character *ch, char *argument )
       act( AT_PLAIN, "$n takes $p from $P.", ch, obj, obj->in_obj, TO_ROOM );
     }
 
-  if ( ch->fighting && number_percent( ) > (get_curr_dex(ch) * 2 + 48) )
+  if ( ch->fighting && number_percent( ) > (GetCurrentDexterity(ch) * 2 + 48) )
     {
       act( AT_MAGIC, "$n accidentally drops $p rendering it useless.", ch, obj, NULL, TO_ROOM );
       act( AT_MAGIC, "Oops... $p gets knocked from your hands rendering it completely useless!",
@@ -58,7 +58,7 @@ void do_takedrug( Character *ch, char *argument )
           act( AT_ACTION, "You take $p.", ch, obj, NULL, TO_CHAR );
         }
 
-      if ( is_npc(ch) )
+      if ( IsNpc(ch) )
         {
           extract_obj( obj );
           return;

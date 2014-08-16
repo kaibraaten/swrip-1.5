@@ -23,14 +23,14 @@ void do_level( Character *ch, char *argument )
 	  ch_printf( ch, "%-15s   Level: %-3d   Max: %-3s   Exp: %-10ld   Next: %-10ld\r\n",
 		     capitalize(ability_name[ability]),
 		     get_level( ch, ability ), maxbuf,
-		     get_exp( ch, ability ),
+		     GetExperience( ch, ability ),
 		     exp_level( get_level( ch, ability ) + 1 ) );
 	}
       else
 	{
 	  ch_printf( ch, "%-15s   Level: %-3d   Max: ???   Exp: ???          Next: ???\r\n",
 		     capitalize(ability_name[ability]),
-		     get_level( ch, ability ), get_exp( ch, ability ) );
+		     get_level( ch, ability ), GetExperience( ch, ability ) );
 	}
     }
 }

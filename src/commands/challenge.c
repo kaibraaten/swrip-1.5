@@ -13,13 +13,13 @@ void do_challenge(Character *ch, char *argument)
       return;
     }
 
-  if (is_immortal(ch) || is_immortal(victim))
+  if (IsImmortal(ch) || IsImmortal(victim))
     {
       send_to_char("Sorry, Immortals are not allowed to participate in the arena.\r\n",ch);
       return;
     }
 
-  if (is_npc(victim))
+  if (IsNpc(victim))
     {
       send_to_char("&WYou cannot challenge mobiles!\r\n",ch);
       return;

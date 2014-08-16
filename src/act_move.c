@@ -32,7 +32,7 @@ vnum_t wherehome( const Character *ch)
     {
       return ch->plr_home->vnum;
     }
-  else if( get_trust(ch) >= LEVEL_IMMORTAL )
+  else if( GetTrustLevel(ch) >= LEVEL_IMMORTAL )
     {
       return ROOM_START_IMMORTAL;
     }
@@ -410,7 +410,7 @@ ch_ret move_char( Character *ch, Exit *pexit, int fall )
   bool brief = false;
   int hpmove;
 
-  if ( !is_npc( ch ) )
+  if ( !IsNpc( ch ) )
     if ( is_drunk( ch ) && ( ch->position != POS_SHOVE )
          && ( ch->position != POS_DRAG ) )
       drunk = true;
@@ -432,7 +432,7 @@ ch_ret move_char( Character *ch, Exit *pexit, int fall )
   retcode = rNONE;
   txt = NULL;
 
-  if ( is_npc(ch) && IS_SET( ch->act, ACT_MOUNTED ) )
+  if ( IsNpc(ch) && IS_SET( ch->act, ACT_MOUNTED ) )
     return retcode;
 
   in_room = ch->in_room;
@@ -461,14 +461,14 @@ ch_ret move_char( Character *ch, Exit *pexit, int fall )
     }
 
   if (  IS_SET(pexit->exit_info, EX_PORTAL)
-        && is_npc(ch) )
+        && IsNpc(ch) )
     {
       act( AT_PLAIN, "Mobs can't use portals.", ch, NULL, NULL, TO_CHAR );
       return rNONE;
     }
 
   if ( IS_SET(pexit->exit_info, EX_NOMOB)
-       && is_npc(ch) && !IS_SET(ch->act, ACT_SCAVENGER) )
+       && IsNpc(ch) && !IS_SET(ch->act, ACT_SCAVENGER) )
     {
       act( AT_PLAIN, "Mobs can't enter there.", ch, NULL, NULL, TO_CHAR );
       return rNONE;
@@ -528,8 +528,8 @@ ch_ret move_char( Character *ch, Exit *pexit, int fall )
       return rNONE;
     }
 
-  if ( !is_immortal(ch)
-       && !is_npc(ch)
+  if ( !IsImmortal(ch)
+       && !IsNpc(ch)
        && ch->in_room->area != to_room->area )
     {
       if ( ch->top_level < to_room->area->low_hard_range )
@@ -560,7 +560,7 @@ ch_ret move_char( Character *ch, Exit *pexit, int fall )
 	}
     }
 
-  if ( !fall && !is_npc(ch) )
+  if ( !fall && !IsNpc(ch) )
     {
       int move;
 
@@ -638,7 +638,7 @@ ch_ret move_char( Character *ch, Exit *pexit, int fall )
           if ( !found && !ch->mount )
             {
 
-              if ( ( !is_npc(ch) && number_percent( ) > ch->pcdata->learned[gsn_climb] )
+              if ( ( !IsNpc(ch) && number_percent( ) > ch->pcdata->learned[gsn_climb] )
                    ||      drunk || ch->mental_state < -90 )
                 {
                   OBJ_DATA *obj;
@@ -778,7 +778,7 @@ ch_ret move_char( Character *ch, Exit *pexit, int fall )
   /* check for traps on exit - later */
 
   if ( !is_affected_by(ch, AFF_SNEAK)
-       && ( is_npc(ch) || !IS_SET(ch->act, PLR_WIZINVIS) ) )
+       && ( IsNpc(ch) || !IS_SET(ch->act, PLR_WIZINVIS) ) )
     {
       if ( fall )
         txt = "falls";
@@ -861,7 +861,7 @@ ch_ret move_char( Character *ch, Exit *pexit, int fall )
 
   char_to_room( ch, to_room );
   if ( !is_affected_by(ch, AFF_SNEAK)
-       && ( is_npc(ch) || !IS_SET(ch->act, PLR_WIZINVIS) ) )
+       && ( IsNpc(ch) || !IS_SET(ch->act, PLR_WIZINVIS) ) )
     {
       if ( fall )
         txt = "falls";
@@ -966,8 +966,8 @@ ch_ret move_char( Character *ch, Exit *pexit, int fall )
         }
     }
 
-  if ( !is_immortal(ch)
-       &&  !is_npc(ch)
+  if ( !IsImmortal(ch)
+       &&  !IsNpc(ch)
        &&  ch->in_room->area != to_room->area )
     {
       if ( ch->top_level < to_room->area->low_soft_range )

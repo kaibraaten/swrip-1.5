@@ -21,13 +21,13 @@ void do_invis( Character *ch, char *argument )
           return;
         }
 
-      if (!is_npc(ch))
+      if (!IsNpc(ch))
         {
           ch->pcdata->wizinvis = level;
           ch_printf( ch, "Wizinvis level set to %d.\r\n", level );
         }
 
-      if (is_npc(ch))
+      if (IsNpc(ch))
         {
           ch->mobinvis = level;
           ch_printf( ch, "Mobinvis level set to %d.\r\n", level );
@@ -35,13 +35,13 @@ void do_invis( Character *ch, char *argument )
       return;
     }
 
-  if (!is_npc(ch))
+  if (!IsNpc(ch))
     {
       if ( ch->pcdata->wizinvis < 2 )
         ch->pcdata->wizinvis = ch->top_level;
     }
 
-  if (is_npc(ch))
+  if (IsNpc(ch))
     {
       if ( ch->mobinvis < 2 )
         ch->mobinvis = ch->top_level;

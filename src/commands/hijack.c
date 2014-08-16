@@ -35,7 +35,7 @@ void do_hijack( Character *ch, char *argument )
       return;
     }
 
-  if ( ship->type == MOB_SHIP && get_trust(ch) < 102 )
+  if ( ship->type == MOB_SHIP && GetTrustLevel(ch) < 102 )
     {
       send_to_char("&RThis ship isn't pilotable by mortals at this point in time...\r\n",ch);
       return;
@@ -65,7 +65,7 @@ void do_hijack( Character *ch, char *argument )
       return;
     }
 
-  the_chance = is_npc(ch) ? ch->top_level
+  the_chance = IsNpc(ch) ? ch->top_level
     : (int)  (ch->pcdata->learned[gsn_hijack]) ;
   if ( number_percent( ) > the_chance )
     {
@@ -75,13 +75,13 @@ void do_hijack( Character *ch, char *argument )
     }
 
   if ( ship->sclass == FIGHTER_SHIP )
-    the_chance = is_npc(ch) ? ch->top_level
+    the_chance = IsNpc(ch) ? ch->top_level
       : (int)  (ch->pcdata->learned[gsn_starfighters]) ;
   if ( ship->sclass == MIDSIZE_SHIP )
-    the_chance = is_npc(ch) ? ch->top_level
+    the_chance = IsNpc(ch) ? ch->top_level
       : (int)  (ch->pcdata->learned[gsn_midships]) ;
   if ( ship->sclass == CAPITAL_SHIP )
-    the_chance = is_npc(ch) ? ch->top_level
+    the_chance = IsNpc(ch) ? ch->top_level
       : (int) (ch->pcdata->learned[gsn_capitalships]);
   if ( number_percent( ) < the_chance )
     {
@@ -115,7 +115,7 @@ void do_hijack( Character *ch, char *argument )
 
         {
           p_prev = p->prev;  /* TRI */
-          if (!is_npc(p) && get_trust(p) >= LEVEL_GREATER)
+          if (!IsNpc(p) && GetTrustLevel(p) >= LEVEL_GREATER)
             {
               sprintf( buf2, "%s(%s)", ship->name, ship->personalname );
               ch_printf(p, "&R[alarm] %s has been hijacked by %s!\r\n", buf2, ch->name);
@@ -131,10 +131,10 @@ void do_hijack( Character *ch, char *argument )
           if ( !check_pilot(victim,ship) )
             continue;
 
-          if ( !has_comlink( victim ) )
+          if ( !HasComlink( victim ) )
             continue;
 
-          if ( !is_npc( victim ) && victim->switched )
+          if ( !IsNpc( victim ) && victim->switched )
             continue;
 
           if ( !is_awake(victim) || IS_SET(victim->in_room->room_flags,ROOM_SILENCE) )

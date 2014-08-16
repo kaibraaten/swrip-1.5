@@ -23,7 +23,7 @@ void do_buy( Character *ch, char *argument )
       ROOM_INDEX_DATA *pRoomIndexNext;
       ROOM_INDEX_DATA *in_room;
 
-      if ( is_npc(ch) )
+      if ( IsNpc(ch) )
         return;
 
       pRoomIndexNext = get_room_index( ch->in_room->vnum + 1 );
@@ -40,7 +40,7 @@ void do_buy( Character *ch, char *argument )
       pet         = get_char_room( ch, arg );
       ch->in_room = in_room;
 
-      if ( pet == NULL || !is_npc( pet ) || !IS_SET(pet->act, ACT_PET) )
+      if ( pet == NULL || !IsNpc( pet ) || !IS_SET(pet->act, ACT_PET) )
         {
           send_to_char( "Sorry, you can't buy that here.\r\n", ch );
           return;
@@ -189,7 +189,7 @@ void do_buy( Character *ch, char *argument )
         }
 
       if ( IS_SET(obj->extra_flags, ITEM_PROTOTYPE)
-           && get_trust( ch ) < LEVEL_IMMORTAL )
+           && GetTrustLevel( ch ) < LEVEL_IMMORTAL )
         {
           act( AT_TELL, "$n tells you 'This is a only a prototype!  I can't sell you that...'",
                keeper, NULL, ch, TO_VICT );

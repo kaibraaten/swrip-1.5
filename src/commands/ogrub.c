@@ -663,9 +663,9 @@ static bool go_read_names( Character *ch, OBJ_DATA *po, GO_STRUCT *r, bool np_sw
 
   if ( po->carried_by )                  /* it's being carried by a char */
     {
-      if ( get_trust(ch) < po->carried_by->top_level ) return false;
-      if ( nm_sw &&  is_npc(po->carried_by) ) return false;
-      if ( np_sw && !is_npc(po->carried_by) ) return false;
+      if ( GetTrustLevel(ch) < po->carried_by->top_level ) return false;
+      if ( nm_sw &&  IsNpc(po->carried_by) ) return false;
+      if ( np_sw && !IsNpc(po->carried_by) ) return false;
       r->s[CNAME] = po->carried_by->name;
     }
   else if ( po->in_obj )                 /* it's in a container          */
@@ -673,11 +673,11 @@ static bool go_read_names( Character *ch, OBJ_DATA *po, GO_STRUCT *r, bool np_sw
       pt = po;
       while( pt->in_obj )
         pt=pt->in_obj;
-      if ( pt->carried_by && get_trust(ch) < pt->carried_by->top_level )
+      if ( pt->carried_by && GetTrustLevel(ch) < pt->carried_by->top_level )
         return false;
-      if ( pt->carried_by && nm_sw &&  is_npc(pt->carried_by) )
+      if ( pt->carried_by && nm_sw &&  IsNpc(pt->carried_by) )
         return false;
-      if ( pt->carried_by && np_sw && !is_npc(pt->carried_by) )
+      if ( pt->carried_by && np_sw && !IsNpc(pt->carried_by) )
         return false;
       if ( pt->carried_by ) r->s[CNAME] = pt->carried_by->name;
       else

@@ -24,13 +24,13 @@ void do_balzhur( Character *ch, char *argument )
       return;
     }
 
-  if ( is_npc(victim) )
+  if ( IsNpc(victim) )
     {
       send_to_char( "Not on NPC's.\r\n", ch );
       return;
     }
 
-  if ( get_trust( victim ) >= get_trust( ch ) )
+  if ( GetTrustLevel( victim ) >= GetTrustLevel( ch ) )
     {
       send_to_char( "I wouldn't even think of that if I were you...\r\n", ch );
       return;
@@ -50,7 +50,7 @@ void do_balzhur( Character *ch, char *argument )
 
     for ( ability = 0 ; ability < MAX_ABILITY ; ability++ )
       {
-        set_exp( victim, ability, 1 );
+        SetExperience( victim, ability, 1 );
         set_level( victim, ability, 1 );
       }
   }

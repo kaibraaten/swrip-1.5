@@ -32,7 +32,7 @@ void do_low_purge( Character *ch, char *argument )
       return;
     }
 
-  if ( !is_npc(victim) )
+  if ( !IsNpc(victim) )
     {
       send_to_char( "Not on PC's.\r\n", ch );
       return;

@@ -29,7 +29,7 @@ void do_cast( Character *ch, char *argument )
     {
     default:
       /* no ordering charmed mobs to cast spells */
-      if ( is_npc(ch) && is_affected_by( ch, AFF_CHARM ) )
+      if ( IsNpc(ch) && is_affected_by( ch, AFF_CHARM ) )
         {
           send_to_char( "You can't seem to do that right now...\r\n", ch );
 	  return;
@@ -51,10 +51,10 @@ void do_cast( Character *ch, char *argument )
           return;
         }
 
-      if ( get_trust(ch) < LEVEL_GREATER )
+      if ( GetTrustLevel(ch) < LEVEL_GREATER )
         {
           if ( ( sn = find_spell( ch, arg1, true ) ) < 0
-               || ( !is_npc(ch) &&  ch->pcdata->learned[sn] <= 0  ) )
+               || ( !IsNpc(ch) &&  ch->pcdata->learned[sn] <= 0  ) )
             {
               send_to_char( "You can't do that.\r\n", ch );
               return;
@@ -132,7 +132,7 @@ void do_cast( Character *ch, char *argument )
           return;
         }
 
-      mana = is_npc(ch) ? 0 : skill->min_mana;
+      mana = IsNpc(ch) ? 0 : skill->min_mana;
 
       /*
        * Locate targets.
@@ -149,7 +149,7 @@ void do_cast( Character *ch, char *argument )
         }
 
 
-      if ( !is_npc(ch) && ch->mana < mana )
+      if ( !IsNpc(ch) && ch->mana < mana )
         {
           send_to_char( "The force is not strong enough within you.\r\n", ch );
           return;
@@ -177,9 +177,9 @@ void do_cast( Character *ch, char *argument )
               bug( "do_cast: SUB_TIMER_DO_ABORT: bad sn %d", sn );
               return;
             }
-          mana = is_npc(ch) ? 0 : skill->min_mana;
+          mana = IsNpc(ch) ? 0 : skill->min_mana;
 
-          if ( get_trust(ch) < LEVEL_IMMORTAL)    /* so imms dont lose mana */
+          if ( GetTrustLevel(ch) < LEVEL_IMMORTAL)    /* so imms dont lose mana */
             ch->mana -= mana / 3;
         }
       set_char_color( AT_MAGIC, ch );
@@ -200,7 +200,7 @@ void do_cast( Character *ch, char *argument )
           bug( "do_cast: ch->dest_buf NULL or bad sn (%d)", sn );
           return;
         }
-      mana = is_npc(ch) ? 0 : skill->min_mana;
+      mana = IsNpc(ch) ? 0 : skill->min_mana;
       strcpy( staticbuf, (const char*)ch->dest_buf );
       spell_target_name = one_argument(staticbuf, arg2);
       DISPOSE( ch->dest_buf );
@@ -250,7 +250,7 @@ void do_cast( Character *ch, char *argument )
               set_char_color( AT_MAGIC, ch );
               send_to_char( "There was not enough power for that to succeed...\r\n", ch );
 
-              if (get_trust(ch)  < LEVEL_IMMORTAL)    /* so imms dont lose mana */
+              if (GetTrustLevel(ch)  < LEVEL_IMMORTAL)    /* so imms dont lose mana */
                 ch->mana -= mana / 2;
               learn_from_failure( ch, sn );
               return;
@@ -267,30 +267,30 @@ void do_cast( Character *ch, char *argument )
   if ( !process_spell_components( ch, sn ) )
     {
 
-      if (get_trust(ch)  < LEVEL_IMMORTAL)    /* so imms dont lose mana */
+      if (GetTrustLevel(ch)  < LEVEL_IMMORTAL)    /* so imms dont lose mana */
         ch->mana -= mana / 2;
       learn_from_failure( ch, sn );
       return;
     }
 
-  if ( !is_npc(ch) && abs(ch->alignment - skill->alignment) > 1010 )
+  if ( !IsNpc(ch) && abs(ch->alignment - skill->alignment) > 1010 )
     {
       if ( ch->alignment > skill->alignment  )
         {
           send_to_char( "You do not have enough anger in you.\r\n", ch );
-          if (get_trust(ch)  < LEVEL_IMMORTAL)    /* so imms dont lose mana */
+          if (GetTrustLevel(ch)  < LEVEL_IMMORTAL)    /* so imms dont lose mana */
             ch->mana -= mana / 2;
           return;
         }
       if (  ch->alignment < skill->alignment )
         {
           send_to_char( "Your anger and hatred prevent you from focusing.\r\n", ch );
-          if (get_trust(ch)  < LEVEL_IMMORTAL)    /* so imms dont lose mana */
+          if (GetTrustLevel(ch)  < LEVEL_IMMORTAL)    /* so imms dont lose mana */
             ch->mana -= mana / 2;
           return;
         }
     }
-  if ( !is_npc(ch)
+  if ( !IsNpc(ch)
        &&   (number_percent( ) + skill->difficulty * 5) > ch->pcdata->learned[sn] )
     {
       /* Some more interesting loss of concentration messages  -Thoric */
@@ -327,7 +327,7 @@ void do_cast( Character *ch, char *argument )
           break;
         }
 
-      if (get_trust(ch)  < LEVEL_IMMORTAL)    /* so imms dont lose mana */
+      if (GetTrustLevel(ch)  < LEVEL_IMMORTAL)    /* so imms dont lose mana */
         ch->mana -= mana / 2;
       learn_from_failure( ch, sn );
       return;

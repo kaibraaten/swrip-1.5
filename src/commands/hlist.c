@@ -10,7 +10,7 @@ void do_hlist( Character *ch, char *argument )
 {
   int min = 0;
   int max = 0;
-  int maxlimit = get_trust(ch);
+  int maxlimit = GetTrustLevel(ch);
   int minlimit = maxlimit >= LEVEL_GREATER ? -1 : 0;
   int cnt = 0;
   char arg[MAX_INPUT_LENGTH];

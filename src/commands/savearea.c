@@ -6,7 +6,7 @@ void do_savearea( Character *ch, char *argument )
   Area     *tarea;
   char   filename[256];
 
-  if ( is_npc(ch) || get_trust( ch ) < LEVEL_AVATAR || !ch->pcdata
+  if ( IsNpc(ch) || GetTrustLevel( ch ) < LEVEL_AVATAR || !ch->pcdata
        ||  ( argument[0] == '\0' && !ch->pcdata->area) )
     {
       send_to_char( "You don't have an assigned area to save.\r\n", ch );
@@ -19,7 +19,7 @@ void do_savearea( Character *ch, char *argument )
     {
       bool found;
 
-      if ( get_trust( ch ) < LEVEL_GREATER )
+      if ( GetTrustLevel( ch ) < LEVEL_GREATER )
         {
           send_to_char( "You can only save your own area.\r\n", ch );
           return;

@@ -187,80 +187,80 @@ struct Character
   } stats;
 };
 
-bool is_wizvis( const Character *ch, const Character *victim );
+bool IsWizVis( const Character *ch, const Character *victim );
 
 /*
  * Return how much exp a char has for a specified ability.
  */
-long get_exp( const Character *ch, short ability );
+long GetExperience( const Character *ch, short ability );
 
-void set_exp( Character *ch, short ability, long xp );
+void SetExperience( Character *ch, short ability, long xp );
 
 /*
  * Calculate roughly how much experience a character is worth
  */
-int get_exp_worth( const Character *ch );
+int GetExperienceWorth( const Character *ch );
 
 /*
  * Retrieve a character's trusted level for permission checking.
  */
-short get_trust( const Character *ch );
+short GetTrustLevel( const Character *ch );
 
 /*
  * Retrieve a character's age.
  */
-short get_age( const Character *ch ) ;
+short GetAge( const Character *ch ) ;
 
 /*
  * Retrieve character's current strength.
  */
-short get_curr_str( const Character *ch );
+short GetCurrentStrength( const Character *ch );
 
 /*
  * Retrieve character's current intelligence.
  */
-short get_curr_int( const Character *ch );
+short GetCurrentIntelligence( const Character *ch );
 
 /*
  * Retrieve character's current wisdom.
  */
-short get_curr_wis( const Character *ch );
+short GetCurrentWisdom( const Character *ch );
 
 /*
  * Retrieve character's current dexterity.
  */
-short get_curr_dex( const Character *ch );
+short GetCurrentDexterity( const Character *ch );
 
 /*
  * Retrieve character's current constitution.
  */
-short get_curr_con( const Character *ch );
+short GetCurrentConstitution( const Character *ch );
 
 /*
  * Retrieve character's current charisma.
  */
-short get_curr_cha( const Character *ch );
+short GetCurrentCharisma( const Character *ch );
 
 /*
  * Retrieve character's current luck.
  */
-short get_curr_lck( const Character *ch );
+short GetCurrentLuck( const Character *ch );
 
-short get_curr_frc( const Character *ch );
+short GetCurrentForce( const Character *ch );
 
 /*
  * Add another notch on that there belt... ;)
  * Keep track of the last so many kills by vnum                 -Thoric
  */
-void add_kill( Character *ch, const Character *mob );
+void AddKill( Character *ch, const Character *mob );
 
 /*
  * Return how many times this player has killed this mob        -Thoric
  * Only keeps track of so many (MAX_KILLTRACK), and keeps track by vnum
  */
-int times_killed( const Character *ch, const Character *mob );
+int TimesKilled( const Character *ch, const Character *mob );
 
-bool has_comlink( const Character *ch );
+bool HasComlink( const Character *ch );
 
 short get_level( const Character *ch, short ability );
 
@@ -350,9 +350,9 @@ int can_carry_w( const Character *ch );
  */
 int can_carry_n( const Character *ch );
 
-bool is_npc( const Character *ch );
+bool IsNpc( const Character *ch );
 
-bool is_immortal( const Character *ch );
+bool IsImmortal( const Character *ch );
 
 bool is_god( const Character *ch );
 

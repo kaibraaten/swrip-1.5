@@ -74,7 +74,7 @@ HelpFile *get_help( const Character *ch, char *argument )
 
   for ( pHelp = first_help; pHelp; pHelp = pHelp->next )
     {
-      if ( get_help_level( pHelp ) > get_trust( ch ) )
+      if ( get_help_level( pHelp ) > GetTrustLevel( ch ) )
 	{
 	  continue;
 	}

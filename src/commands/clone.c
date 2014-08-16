@@ -17,7 +17,7 @@ void do_clone( Character *ch, char *argument )
   short frc, change, change2, frc_level, low_frc = 0, mana;
   ROOM_INDEX_DATA *home;
 
-  if ( is_npc(ch) )
+  if ( IsNpc(ch) )
     {
       ch_printf( ch, "Yeah right!\r\n" );
       return;
@@ -83,7 +83,7 @@ void do_clone( Character *ch, char *argument )
     }
 
   frc_level = get_level( ch, FORCE_ABILITY );
-  frc_experience = get_exp( ch, FORCE_ABILITY );
+  frc_experience = GetExperience( ch, FORCE_ABILITY );
 
   /* Droids and hunters dont get force. DV */
 
@@ -97,13 +97,13 @@ void do_clone( Character *ch, char *argument )
     {
       if(ch->stats.perm_frc > 0)
         {
-          set_exp( ch, FORCE_ABILITY, 500 );
+          SetExperience( ch, FORCE_ABILITY, 500 );
           set_level( ch, FORCE_ABILITY, 2 );
         }
     }
   else
     {
-      set_exp( ch, FORCE_ABILITY, 0 );
+      SetExperience( ch, FORCE_ABILITY, 0 );
       set_level( ch, FORCE_ABILITY, 1 );
     }
 
@@ -139,9 +139,9 @@ void do_clone( Character *ch, char *argument )
 
       for(ability = 0; ability < MAX_ABILITY; ability++)
         {
-          experience[ability] = get_exp( ch, ability );
+          experience[ability] = GetExperience( ch, ability );
           skill_level[ability] = get_level( ch, ability );
-          set_exp( ch, ability, 0 );
+          SetExperience( ch, ability, 0 );
           set_level( ch, ability, 1 );
         }
 
@@ -170,14 +170,14 @@ void do_clone( Character *ch, char *argument )
   ch->stats.perm_frc = frc;
 
   set_level( ch, FORCE_ABILITY, frc_level );
-  set_exp( ch, FORCE_ABILITY, frc_experience );
+  SetExperience( ch, FORCE_ABILITY, frc_experience );
   ch->mana = mana;
 
   if( ch->pcdata->clones == 2 )
     {
       for(ability = 0; ability < MAX_ABILITY; ability++)
         {
-          set_exp( ch, ability, experience[ability] );
+          SetExperience( ch, ability, experience[ability] );
           set_level( ch, ability, skill_level[ability] );
         }
     }

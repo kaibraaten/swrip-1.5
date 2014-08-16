@@ -5,7 +5,7 @@ void do_mount( Character *ch, char *argument )
 {
   Character *victim;
 
-  if ( !is_npc(ch)
+  if ( !IsNpc(ch)
        &&   ch->pcdata->learned[gsn_mount] <= 0  )
     {
       send_to_char(
@@ -25,7 +25,7 @@ void do_mount( Character *ch, char *argument )
       return;
     }
 
-  if ( !is_npc(victim) || !IS_SET(victim->act, ACT_MOUNTABLE ) )
+  if ( !IsNpc(victim) || !IS_SET(victim->act, ACT_MOUNTABLE ) )
     {
       send_to_char( "You can't mount that!\r\n", ch );
       return;
@@ -50,7 +50,7 @@ void do_mount( Character *ch, char *argument )
     }
 
   set_wait_state( ch, skill_table[gsn_mount]->beats );
-  if ( is_npc(ch) || number_percent( ) < ch->pcdata->learned[gsn_mount] )
+  if ( IsNpc(ch) || number_percent( ) < ch->pcdata->learned[gsn_mount] )
     {
       SET_BIT( victim->act, ACT_MOUNTED );
       ch->mount = victim;

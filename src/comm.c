@@ -1353,7 +1353,7 @@ bool check_reconnect( Descriptor *d, char *name, bool fConn )
 
   for ( ch = first_char; ch; ch = ch->next )
     {
-      if ( !is_npc(ch)
+      if ( !IsNpc(ch)
            && ( !fConn || !ch->desc )
            &&    ch->name
            &&   !str_cmp( name, ch->name ) )
@@ -1611,7 +1611,7 @@ void send_to_pager( const char *txt, const Character *ch )
   d = ch->desc;
   ch = d->original ? d->original : d->character;
 
-  if ( is_npc(ch) || !IS_SET(ch->pcdata->flags, PCFLAG_PAGERON) )
+  if ( IsNpc(ch) || !IS_SET(ch->pcdata->flags, PCFLAG_PAGERON) )
     {
       send_to_char(txt, d->character);
       return;
@@ -1657,7 +1657,7 @@ void set_char_color( short AType, Character *ch )
     return;
 
   och = (ch->desc->original ? ch->desc->original : ch);
-  if ( !is_npc(och) && IS_SET(och->act, PLR_ANSI) )
+  if ( !IsNpc(och) && IS_SET(och->act, PLR_ANSI) )
     {
       if ( AType == 7 )
         strcpy( buf, "\033[m" );
@@ -1678,7 +1678,7 @@ void set_pager_color( short AType, Character *ch )
     return;
 
   och = (ch->desc->original ? ch->desc->original : ch);
-  if ( !is_npc(och) && IS_SET(och->act, PLR_ANSI) )
+  if ( !IsNpc(och) && IS_SET(och->act, PLR_ANSI) )
     {
       if ( AType == 7 )
         strcpy( buf, "\033[m" );
@@ -1735,7 +1735,7 @@ char *obj_short( const OBJ_DATA *obj )
  * The primary output interface for formatted output.
  */
 /* Major overhaul. -- Alty */
-#define NAME(ch)        (is_npc(ch) ? ch->short_descr : ch->name)
+#define NAME(ch)        (IsNpc(ch) ? ch->short_descr : ch->name)
 char *act_string(const char *format, Character *to, Character *ch,
                  const void *arg1, const void *arg2)
 {
@@ -1885,7 +1885,7 @@ void act( short AType, const char *format, Character *ch, const void *arg1, cons
   /*
    * ACT_SECRETIVE handling
    */
-  if ( is_npc(ch) && IS_SET(ch->act, ACT_SECRETIVE) && type != TO_CHAR )
+  if ( IsNpc(ch) && IS_SET(ch->act, ACT_SECRETIVE) && type != TO_CHAR )
     return;
 
   if ( type == TO_VICT )
@@ -1925,7 +1925,7 @@ void act( short AType, const char *format, Character *ch, const void *arg1, cons
           ? NULL : to->next_in_room )
     {
       if (((!to || !to->desc)
-           && (  is_npc(to) && !IS_SET(to->pIndexData->mprog.progtypes, ACT_PROG) ))
+           && (  IsNpc(to) && !IS_SET(to->pIndexData->mprog.progtypes, ACT_PROG) ))
           ||   !is_awake(to) )
         continue;
 
@@ -1966,7 +1966,7 @@ char *default_prompt( Character *ch )
   static char buf[MAX_STRING_LENGTH];
   strcpy( buf,"" );
 
-  if (is_jedi(ch) || get_trust(ch) >= LEVEL_IMMORTAL )
+  if (is_jedi(ch) || GetTrustLevel(ch) >= LEVEL_IMMORTAL )
     strcat(buf, "&pForce:&P%m/&p%M  &pAlign:&P%a\r\n");
 
   strcat(buf, "&BHealth:&C%h&B/%H  &BMovement:&C%v&B/%V");
@@ -1989,7 +1989,7 @@ void display_prompt( Descriptor *d )
 {
   Character *ch = d->character;
   Character *och = (d->original ? d->original : d->character);
-  bool ansi = (!is_npc(och) && IS_SET(och->act, PLR_ANSI));
+  bool ansi = (!IsNpc(och) && IS_SET(och->act, PLR_ANSI));
   const char *prompt;
   char buf[MAX_STRING_LENGTH];
   char *pbuf = buf;
@@ -2001,10 +2001,10 @@ void display_prompt( Descriptor *d )
       return;
     }
 
-  if ( !is_npc(ch) && ch->substate != SUB_NONE && ch->pcdata->subprompt
+  if ( !IsNpc(ch) && ch->substate != SUB_NONE && ch->pcdata->subprompt
        &&   ch->pcdata->subprompt[0] != '\0' )
     prompt = ch->pcdata->subprompt;
-  else if ( is_npc(ch) || !ch->pcdata->prompt || !*ch->pcdata->prompt )
+  else if ( IsNpc(ch) || !ch->pcdata->prompt || !*ch->pcdata->prompt )
     prompt = default_prompt(ch);
   else
     prompt = ch->pcdata->prompt;
@@ -2089,14 +2089,14 @@ void display_prompt( Descriptor *d )
               break;
 
             case 'm':
-              if ( is_immortal(ch) || is_jedi( ch ) )
+              if ( IsImmortal(ch) || is_jedi( ch ) )
                 the_stat = ch->mana;
               else
                 the_stat = 0;
               break;
 
             case 'M':
-              if ( is_immortal(ch) || is_jedi( ch ) )
+              if ( IsImmortal(ch) || is_jedi( ch ) )
                 the_stat = ch->max_mana;
               else
                 the_stat = 0;
@@ -2132,7 +2132,7 @@ void display_prompt( Descriptor *d )
               break;
 
             case 'r':
-              if ( is_immortal(och) )
+              if ( IsImmortal(och) )
                 the_stat = ch->in_room->vnum;
               break;
 
@@ -2142,15 +2142,15 @@ void display_prompt( Descriptor *d )
               break;
 
             case 'i':
-              if ( (!is_npc(ch) && IS_SET(ch->act, PLR_WIZINVIS)) ||
-                   (is_npc(ch) && IS_SET(ch->act, ACT_MOBINVIS)) )
-                sprintf(pbuf, "(Invis %d) ", (is_npc(ch) ? ch->mobinvis : ch->pcdata->wizinvis));
+              if ( (!IsNpc(ch) && IS_SET(ch->act, PLR_WIZINVIS)) ||
+                   (IsNpc(ch) && IS_SET(ch->act, ACT_MOBINVIS)) )
+                sprintf(pbuf, "(Invis %d) ", (IsNpc(ch) ? ch->mobinvis : ch->pcdata->wizinvis));
               else if ( is_affected_by(ch, AFF_INVISIBLE) )
 		sprintf(pbuf, "(Invis) " );
               break;
 
             case 'I':
-              the_stat = (is_npc(ch) ? (IS_SET(ch->act, ACT_MOBINVIS) ? ch->mobinvis : 0)
+              the_stat = (IsNpc(ch) ? (IS_SET(ch->act, ACT_MOBINVIS) ? ch->mobinvis : 0)
                       : (IS_SET(ch->act, PLR_WIZINVIS) ? ch->pcdata->wizinvis : 0));
               break;
             }
@@ -2176,7 +2176,7 @@ int make_color_sequence(const char *col, char *buf, Descriptor *d)
   bool ansi;
 
   och = (d->original ? d->original : d->character);
-  ansi = (!is_npc(och) && IS_SET(och->act, PLR_ANSI));
+  ansi = (!IsNpc(och) && IS_SET(och->act, PLR_ANSI));
   col++;
   if ( !*col )
     ln = -1;

@@ -89,7 +89,7 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   OBJ_DATA *spice = args->Object;
   Character *ch = GetEngineer( args->CraftingSession );
 
-  spice->value[OVAL_SPICE_GRADE] = urange(10, ud->SpiceGrade, ( is_npc(ch) ? ch->top_level : (int) (ch->pcdata->learned[gsn_spice_refining]) ) + 10);
+  spice->value[OVAL_SPICE_GRADE] = urange(10, ud->SpiceGrade, ( IsNpc(ch) ? ch->top_level : (int) (ch->pcdata->learned[gsn_spice_refining]) ) + 10);
 
   strcpy( buf, ud->ItemName );
   STRFREE( spice->name );

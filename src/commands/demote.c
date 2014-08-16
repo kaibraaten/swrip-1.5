@@ -4,7 +4,7 @@
 void do_demote ( Character *ch , char *argument )
 {
 
-  if ( is_npc( ch ) || !ch->pcdata )
+  if ( IsNpc( ch ) || !ch->pcdata )
     return;
 
   if ( !ch->pcdata->clan )

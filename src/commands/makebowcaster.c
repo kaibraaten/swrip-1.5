@@ -78,7 +78,7 @@ static void CheckRequirementsHandler( void *userData, CheckRequirementsEventArgs
 {
   Character *ch = GetEngineer( args->CraftingSession );
 
-  if( ch->race != RACE_WOOKIEE && !is_immortal( ch ) )
+  if( ch->race != RACE_WOOKIEE && !IsImmortal( ch ) )
     {
       ch_printf( ch, "&ROnly wookiees have the knowledge to craft bowcasters.\r\n&w" );
       args->AbortSession = true;

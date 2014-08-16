@@ -6,7 +6,7 @@ void do_practice( Character *ch, char *argument )
   char buf[MAX_STRING_LENGTH];
   int sn;
 
-  if ( is_npc(ch) )
+  if ( IsNpc(ch) )
     return;
 
   if ( argument[0] == '\0' )
@@ -29,13 +29,13 @@ void do_practice( Character *ch, char *argument )
 	  if( ( skill->type == SKILL_UNKNOWN
 	      || skill->type == SKILL_HERB
 	      || skill->type == SKILL_TONGUE )
-	      && !is_immortal( ch ) )
+	      && !IsImmortal( ch ) )
 	    {
 	      lasttype = skill->type;
 	      continue;
 	    }
 
-          if ( !str_cmp(skill_table[sn]->name, "reserved") && is_immortal(ch) )
+          if ( !str_cmp(skill_table[sn]->name, "reserved") && IsImmortal(ch) )
             {
               if ( col % 3 != 0 )
                 send_to_pager( "&r\r\n", ch );
@@ -100,7 +100,7 @@ void do_practice( Character *ch, char *argument )
         }
 
       for ( mob = ch->in_room->first_person; mob; mob = mob->next_in_room )
-        if ( is_npc(mob) && IS_SET(mob->act, ACT_PRACTICE) )
+        if ( IsNpc(mob) && IS_SET(mob->act, ACT_PRACTICE) )
           break;
 
       if ( !mob )
@@ -126,7 +126,7 @@ void do_practice( Character *ch, char *argument )
           return;
         }
 
-      if ( can_prac &&  !is_npc(ch)
+      if ( can_prac &&  !IsNpc(ch)
            && get_level( ch, skill_table[sn]->guild ) < skill_table[sn]->min_level )
         {
           act( AT_TELL, "$n tells you 'You're not ready to learn that yet...'",
@@ -183,7 +183,7 @@ void do_practice( Character *ch, char *argument )
       else
         {
           ch->gold -= skill_table[sn]->min_level*10;
-          ch->pcdata->learned[sn] += int_app[get_curr_int(ch)].learn;
+          ch->pcdata->learned[sn] += int_app[GetCurrentIntelligence(ch)].learn;
           act( AT_ACTION, "You practice $T.",
                ch, NULL, skill_table[sn]->name, TO_CHAR );
           act( AT_ACTION, "$n practices $T.",

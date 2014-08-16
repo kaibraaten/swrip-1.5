@@ -9,7 +9,7 @@ void do_transship(Character *ch, char *argument)
   int arg3, origShipyard;
   SHIP_DATA *ship;
 
-  if ( is_npc( ch ) )
+  if ( IsNpc( ch ) )
     {
       send_to_char( "Huh?\r\n", ch );
       return;

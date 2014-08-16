@@ -30,10 +30,10 @@ bool can_rmodify( const Character *ch, const ROOM_INDEX_DATA *room )
   vnum_t vnum = room->vnum;
   Area *pArea;
 
-  if ( is_npc( ch ) )
+  if ( IsNpc( ch ) )
     return false;
 
-  if ( get_trust( ch ) >= sysdata.level_modify_proto )
+  if ( GetTrustLevel( ch ) >= sysdata.level_modify_proto )
     return true;
 
   if ( !ch->pcdata || !(pArea=ch->pcdata->area) )
@@ -54,10 +54,10 @@ bool can_omodify( const Character *ch, const OBJ_DATA *obj )
   vnum_t vnum = obj->pIndexData->vnum;
   Area *pArea;
 
-  if ( is_npc( ch ) )
+  if ( IsNpc( ch ) )
     return false;
 
-  if ( get_trust( ch ) >= sysdata.level_modify_proto )
+  if ( GetTrustLevel( ch ) >= sysdata.level_modify_proto )
     return true;
 
   if ( !ch->pcdata || !(pArea=ch->pcdata->area) )
@@ -78,10 +78,10 @@ bool can_oedit( const Character *ch, const OBJ_INDEX_DATA *obj )
   vnum_t vnum = obj->vnum;
   Area *pArea;
 
-  if ( is_npc( ch ) )
+  if ( IsNpc( ch ) )
     return false;
 
-  if ( get_trust( ch ) >= LEVEL_GREATER )
+  if ( GetTrustLevel( ch ) >= LEVEL_GREATER )
     return true;
 
   if ( !ch->pcdata || !(pArea=ch->pcdata->area) )
@@ -106,10 +106,10 @@ bool can_mmodify( const Character *ch, const Character *mob )
   if ( mob == ch )
     return true;
 
-  if ( !is_npc( mob ) )
+  if ( !IsNpc( mob ) )
     {
-      if ( get_trust( ch ) >= sysdata.level_modify_proto && get_trust(ch) >
-           get_trust( mob ) )
+      if ( GetTrustLevel( ch ) >= sysdata.level_modify_proto && GetTrustLevel(ch) >
+           GetTrustLevel( mob ) )
         return true;
       else
         send_to_char( "You can't do that.\r\n", ch );
@@ -118,9 +118,9 @@ bool can_mmodify( const Character *ch, const Character *mob )
 
   vnum = mob->pIndexData->vnum;
 
-  if ( is_npc( ch ) )
+  if ( IsNpc( ch ) )
     return false;
-  if ( get_trust( ch ) >= sysdata.level_modify_proto )
+  if ( GetTrustLevel( ch ) >= sysdata.level_modify_proto )
     return true;
   if ( !ch->pcdata || !(pArea=ch->pcdata->area) )
     {
@@ -140,9 +140,9 @@ bool can_medit( const Character *ch, const ProtoMobile *mob )
   vnum_t vnum = mob->vnum;
   Area *pArea;
 
-  if ( is_npc( ch ) )
+  if ( IsNpc( ch ) )
     return false;
-  if ( get_trust( ch ) >= LEVEL_GREATER )
+  if ( GetTrustLevel( ch ) >= LEVEL_GREATER )
     return true;
   if ( !ch->pcdata || !(pArea=ch->pcdata->area) )
     {
@@ -183,9 +183,9 @@ void assign_area( Character *ch )
   Area *tarea, *tmp;
   bool created = false;
 
-  if ( is_npc( ch ) )
+  if ( IsNpc( ch ) )
     return;
-  if ( get_trust( ch ) >= LEVEL_AVATAR
+  if ( GetTrustLevel( ch ) >= LEVEL_AVATAR
        &&   ch->pcdata->r_range_lo
        &&   ch->pcdata->r_range_hi )
     {
@@ -608,7 +608,7 @@ void fold_area( Area *tarea, char *filename, bool install )
           for ( victim = room->first_person; victim; victim = vnext )
             {
               vnext = victim->next_in_room;
-              if ( is_npc(victim) )
+              if ( IsNpc(victim) )
                 extract_char( victim, true );
             }
           /* purge room of (prototyped) objects */

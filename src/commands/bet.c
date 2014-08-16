@@ -12,7 +12,7 @@ void do_bet(Character *ch, char *argument)
   argument = one_argument(argument,arg);
   one_argument(argument,buf1);
 
-  if (is_npc(ch))
+  if (IsNpc(ch))
     {
       send_to_char("Mobs cant bet on the arena.\r\n",ch);
       return;

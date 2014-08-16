@@ -9,7 +9,7 @@ void do_clantalk( Character *ch, char *argument )
       return;
     }
 
-  if ( is_npc( ch ) || !ch->pcdata->clan )
+  if ( IsNpc( ch ) || !ch->pcdata->clan )
     {
       send_to_char( "Huh?\r\n", ch );
       return;

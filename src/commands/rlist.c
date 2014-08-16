@@ -11,8 +11,8 @@ void do_rlist( Character *ch, char *argument )
   int lrange;
   int trange;
 
-  if ( is_npc(ch) || get_trust( ch ) < LEVEL_AVATAR || !ch->pcdata
-       || ( !ch->pcdata->area && get_trust( ch ) < LEVEL_GREATER ) )
+  if ( IsNpc(ch) || GetTrustLevel( ch ) < LEVEL_AVATAR || !ch->pcdata
+       || ( !ch->pcdata->area && GetTrustLevel( ch ) < LEVEL_GREATER ) )
     {
       send_to_char( "You don't have an assigned area.\r\n", ch );
       return;
@@ -34,7 +34,7 @@ void do_rlist( Character *ch, char *argument )
         trange = atoi(arg2);
 
       if ( ( lrange < tarea->low_r_vnum || trange > tarea->hi_r_vnum )
-           && get_trust( ch ) < LEVEL_GREATER )
+           && GetTrustLevel( ch ) < LEVEL_GREATER )
         {
           send_to_char("That is out of your vnum range.\r\n", ch);
           return;

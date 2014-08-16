@@ -193,7 +193,7 @@ void save_char_obj( Character *ch )
       return;
     }
 
-  if ( is_npc(ch) || is_not_authed(ch) )
+  if ( IsNpc(ch) || is_not_authed(ch) )
     {
       return;
     }
@@ -201,7 +201,7 @@ void save_char_obj( Character *ch )
   saving_char = ch;
 
   /* save pc's clan's data while we're at it to keep the data in sync */
-  if ( !is_npc(ch) && ch->pcdata->clan )
+  if ( !IsNpc(ch) && ch->pcdata->clan )
     {
       save_clan( ch->pcdata->clan );
     }
@@ -234,7 +234,7 @@ void save_char_obj( Character *ch )
    * Also save the player flags so we the wizlist builder can see
    * who is a guest and who is retired.
    */
-  if ( get_trust(ch) > LEVEL_AVATAR )
+  if ( GetTrustLevel(ch) > LEVEL_AVATAR )
     {
       sprintf( strback, "%s%s", GOD_DIR, capitalize( ch->name ) );
 
@@ -317,7 +317,7 @@ void save_clone( Character *ch )
       return;
     }
 
-  if ( is_npc(ch) || is_not_authed(ch) )
+  if ( IsNpc(ch) || is_not_authed(ch) )
     {
       return;
     }
@@ -382,7 +382,7 @@ void fwrite_char( Character *ch, FILE *fp )
   int drug = 0;
   SKILLTYPE *skill = NULL;
 
-  fprintf( fp, "#%s\n", is_npc(ch) ? "MOB" : "PLAYER"           );
+  fprintf( fp, "#%s\n", IsNpc(ch) ? "MOB" : "PLAYER"           );
 
   fprintf( fp, "Version      %d\n",   SAVEVERSION               );
   fprintf( fp, "Name         %s~\n",    ch->name                );
@@ -436,7 +436,7 @@ void fwrite_char( Character *ch, FILE *fp )
     int ability;
     for ( ability = 0 ; ability < MAX_ABILITY ; ability++ )
       fprintf( fp, "Ability        %d %d %ld\n",
-               ability, get_level( ch, ability ), get_exp( ch, ability ) );
+               ability, get_level( ch, ability ), GetExperience( ch, ability ) );
   }
 
   fprintf( fp, "Clones         %d\n",   ch->pcdata->clones              );
@@ -509,7 +509,7 @@ void fwrite_char( Character *ch, FILE *fp )
       fprintf( fp, "Mentalstate  %d\n",   ch->mental_state        );
     }
 
-  if ( is_npc(ch) )
+  if ( IsNpc(ch) )
     {
       fprintf( fp, "Vnum         %ld\n", ch->pIndexData->vnum    );
       fprintf( fp, "Mobinvis     %d\n", ch->mobinvis            );
@@ -608,7 +608,7 @@ void fwrite_char( Character *ch, FILE *fp )
 	  fprintf( fp, "Wanted       %d\n",       ch->pcdata->wanted_flags );
 	}
 
-      if ( is_immortal( ch ) || ch->pcdata->area )
+      if ( IsImmortal( ch ) || ch->pcdata->area )
         {
           fprintf( fp, "WizInvis     %d\n", ch->pcdata->wizinvis );
 
@@ -1272,7 +1272,7 @@ bool load_char_obj( Descriptor *d, char *name, bool preload )
 	  ch->pcdata->authed_by    = STRALLOC( "" );
 	}
 
-      if ( !is_npc( ch ) && get_trust( ch ) > LEVEL_AVATAR )
+      if ( !IsNpc( ch ) && GetTrustLevel( ch ) > LEVEL_AVATAR )
         {
           if ( ch->pcdata->wizinvis < 2 )
 	    {
@@ -1367,7 +1367,7 @@ void fread_char( Character *ch, FILE *fp, bool preload )
               if ( x0 >= 0 && x0 < MAX_ABILITY )
                 {
                   set_level( ch, x0, x1 );
-                  set_exp( ch, x0, x2 );
+                  SetExperience( ch, x0, x2 );
                 }
 
               fMatch = true;
@@ -1981,10 +1981,10 @@ void fread_char( Character *ch, FILE *fp, bool preload )
                   }
               }
 
-              if ( !is_immortal( ch ) && !ch->speaking )
+              if ( !IsImmortal( ch ) && !ch->speaking )
                 ch->speaking = race_table[ch->race].language;
 
-              if ( is_immortal( ch ) )
+              if ( IsImmortal( ch ) )
                 {
                   ch->speaks = ~0;
 
@@ -2529,7 +2529,7 @@ void write_corpses( Character *ch, const char *name )
 
   /* Name and ch support so that we dont have to have a char to save their
      corpses.. (ie: decayed corpses while offline) */
-  if ( ch && is_npc(ch) )
+  if ( ch && IsNpc(ch) )
     {
       bug( "Write_corpses: writing NPC corpse." );
       return;
@@ -2883,7 +2883,7 @@ void load_vendors( void )
  */
 void fwrite_mobile( FILE *fp, Character *mob )
 {
-  if ( !is_npc( mob ) || !fp )
+  if ( !IsNpc( mob ) || !fp )
     {
       return;
     }
@@ -3068,7 +3068,7 @@ void write_char_mobile( Character *ch , char *argument )
   FILE *fp = NULL;
   Character *mob = NULL;
 
-  if ( is_npc( ch ) || !ch->pcdata->pet )
+  if ( IsNpc( ch ) || !ch->pcdata->pet )
     {
       return;
     }

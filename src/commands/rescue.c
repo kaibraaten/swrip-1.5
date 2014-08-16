@@ -8,7 +8,7 @@ void do_rescue( Character *ch, char *argument )
   Character *fch;
   int percent;
 
-  if ( is_npc(ch) && is_affected_by( ch, AFF_CHARM ) )
+  if ( IsNpc(ch) && is_affected_by( ch, AFF_CHARM ) )
     {
       send_to_char( "You can't concentrate enough for that.\r\n", ch );
       return;
@@ -39,7 +39,7 @@ void do_rescue( Character *ch, char *argument )
       return;
     }
 
-  if ( !is_npc(ch) && is_npc(victim) )
+  if ( !IsNpc(ch) && IsNpc(victim) )
     {
       send_to_char( "Doesn't need your help!\r\n", ch );
       return;
@@ -60,11 +60,11 @@ void do_rescue( Character *ch, char *argument )
   ch->alignment = ch->alignment + 5;
   ch->alignment = URANGE( -1000, ch->alignment, 1000 );
 
-  percent = number_percent( ) - (get_curr_lck(ch) - 14)
-    - (get_curr_lck(victim) - 16);
+  percent = number_percent( ) - (GetCurrentLuck(ch) - 14)
+    - (GetCurrentLuck(victim) - 16);
 
   set_wait_state( ch, skill_table[gsn_rescue]->beats );
-  if ( !is_npc(ch) && percent > ch->pcdata->learned[gsn_rescue] )
+  if ( !IsNpc(ch) && percent > ch->pcdata->learned[gsn_rescue] )
     {
       send_to_char( "You fail the rescue.\r\n", ch );
       act( AT_SKILL, "$n tries to rescue you!", ch, NULL, victim, TO_VICT   );

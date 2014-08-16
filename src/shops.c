@@ -62,7 +62,7 @@ Character *find_keeper_q( const Character *ch, bool message )
         keeper;
         keeper = keeper->next_in_room )
     {
-      if ( is_npc(keeper) && (pShop = keeper->pIndexData->pShop) != NULL )
+      if ( IsNpc(keeper) && (pShop = keeper->pIndexData->pShop) != NULL )
 	{
 	  break;
 	}
@@ -126,7 +126,7 @@ Character *find_fixer( const Character *ch )
         keeper;
         keeper = keeper->next_in_room )
     {
-      if ( is_npc(keeper) && (rShop = keeper->pIndexData->rShop) != NULL )
+      if ( IsNpc(keeper) && (rShop = keeper->pIndexData->rShop) != NULL )
 	{
 	  break;
 	}
@@ -179,7 +179,7 @@ int get_cost_quit( const Character *ch )
       return 0;
     }
 
-  gold = ch->gold + (is_npc(ch) ? 0 : ch->pcdata->bank) + 1;
+  gold = ch->gold + (IsNpc(ch) ? 0 : ch->pcdata->bank) + 1;
 
   if( gold < 5000 )
     {
@@ -203,7 +203,7 @@ int get_cost( const Character *ch, const Character *keeper, const OBJ_DATA *obj,
       return 0;
     }
 
-  if ( ( ch->gold + (is_npc(ch) ? 0 : ch->pcdata->bank) ) > (ch->top_level * 1000) )
+  if ( ( ch->gold + (IsNpc(ch) ? 0 : ch->pcdata->bank) ) > (ch->top_level * 1000) )
     {
       richcustomer = true;
     }
@@ -216,7 +216,7 @@ int get_cost( const Character *ch, const Character *keeper, const OBJ_DATA *obj,
     {
       cost = (int) (obj->cost * (80 + UMIN(ch->top_level, LEVEL_AVATAR))) / 100;
 
-      profitmod = 13 - get_curr_cha(ch) + (richcustomer ? 15 : 0)
+      profitmod = 13 - GetCurrentCharisma(ch) + (richcustomer ? 15 : 0)
         + ((URANGE(5,ch->top_level,LEVEL_AVATAR)-20)/2);
       cost = (int) (obj->cost
                     * UMAX( (pShop->profit_sell+1), pShop->profit_buy+profitmod ) )
@@ -227,7 +227,7 @@ int get_cost( const Character *ch, const Character *keeper, const OBJ_DATA *obj,
       const OBJ_DATA *obj2 = NULL;
       int itype = 0;
 
-      profitmod = get_curr_cha(ch) - 13 - (richcustomer ? 15 : 0);
+      profitmod = GetCurrentCharisma(ch) - 13 - (richcustomer ? 15 : 0);
       cost = 0;
 
       for ( itype = 0; itype < MAX_TRADE; itype++ )
@@ -359,7 +359,7 @@ int get_repaircost( const Character *keeper, const OBJ_DATA *obj )
 /* Write vendor to file */
 void fwrite_vendor( FILE *fp, Character *mob )
 {
-  if ( !is_npc( mob ) || !fp )
+  if ( !IsNpc( mob ) || !fp )
     {
       return;
     }

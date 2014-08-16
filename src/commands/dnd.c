@@ -3,7 +3,7 @@
 
 void do_dnd( Character *ch, char *argument )
 {
-  if ( !is_npc(ch) && ch->pcdata )
+  if ( !IsNpc(ch) && ch->pcdata )
     {
       if ( IS_SET(ch->pcdata->flags, PCFLAG_DND) )
 	{

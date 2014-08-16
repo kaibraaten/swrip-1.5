@@ -6,13 +6,13 @@ void do_clan_donate( Character *ch, char *argument )
   CLAN_DATA *clan = NULL;
   long amount = 0;
 
-  if ( is_npc( ch ) || !ch->pcdata->clan )
+  if ( IsNpc( ch ) || !ch->pcdata->clan )
     {
       send_to_char( "You don't seem to belong to an organization to donate to...\r\n", ch );
       return;
     }
 
-  if ( !has_comlink( ch ) )
+  if ( !HasComlink( ch ) )
     {
       if (!ch->in_room || !IS_SET(ch->in_room->room_flags, ROOM_BANK) )
         {

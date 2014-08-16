@@ -10,7 +10,7 @@ void do_score(Character * ch, char *argument)
   Affect    *paf;
   int iLang, drug;
 
-  if (is_npc(ch))
+  if (IsNpc(ch))
     {
       do_oldscore(ch, argument);
       return;
@@ -19,13 +19,13 @@ void do_score(Character * ch, char *argument)
 
   ch_printf(ch, "\r\n&CScore for %s.\r\n", ch->pcdata->title);
   set_char_color(AT_SCORE, ch);
-  if ( get_trust( ch ) != ch->top_level )
-    ch_printf( ch, "&cYou are trusted at level &C%d.\r\n", get_trust( ch ) );
+  if ( GetTrustLevel( ch ) != ch->top_level )
+    ch_printf( ch, "&cYou are trusted at level &C%d.\r\n", GetTrustLevel( ch ) );
 
   send_to_char("&C----------------------------------------------------------------------------\r\n", ch);
 
   ch_printf(ch,   "&cRace: %-17.10s                &cLog In:  &C%s\r",
-            capitalize(get_race(ch)), ( is_npc(ch) ? "(null)" : ctime(&(ch->pcdata->logon)) ) );
+            capitalize(get_race(ch)), ( IsNpc(ch) ? "(null)" : ctime(&(ch->pcdata->logon)) ) );
 
   ch_printf(ch,   "&cHitroll: &C%-2.2d  &cDamroll: &C%-2.2d   &cArmor: &C%-4d        &cSaved:  &C%s\r",
             get_hitroll(ch), get_damroll(ch), get_armor_class(ch),
@@ -34,7 +34,7 @@ void do_score(Character * ch, char *argument)
   ch_printf(ch,   "&cAlign: &C%-5d    &cWimpy: &C%-3d                    &cTime:   &C%s\r",
             ch->alignment, ch->wimpy  , ctime(&current_time) );
 
-  if ( is_jedi( ch ) || is_immortal(ch) )
+  if ( is_jedi( ch ) || IsImmortal(ch) )
     ch_printf(ch, "&cHit Points: &C%d &cof &C%d     &cMove: &C%d &cof &C%d     &cForce: &C%d &cof &C%d\r\n",
               ch->hit, ch->max_hit, ch->move, ch->max_move, ch->mana, ch->max_mana );
   else
@@ -42,7 +42,7 @@ void do_score(Character * ch, char *argument)
               ch->hit, ch->max_hit, ch->move, ch->max_move);
 
   ch_printf(ch, "&cStr: &C%2d  &cDex: &C%2d  &cCon: &C%2d  &cInt: &C%2d  &cWis: &C%2d  &cCha: &C%2d  &cLck: &C??  &cFrc: &C??\r\n",
-            get_curr_str(ch), get_curr_dex(ch),get_curr_con(ch),get_curr_int(ch),get_curr_wis(ch),get_curr_cha(ch));
+            GetCurrentStrength(ch), GetCurrentDexterity(ch),GetCurrentConstitution(ch),GetCurrentIntelligence(ch),GetCurrentWisdom(ch),GetCurrentCharisma(ch));
 
 
   send_to_char("&C----------------------------------------------------------------------------\r\n", ch);
@@ -68,13 +68,13 @@ void do_score(Character * ch, char *argument)
 	    ch_printf( ch, "&c%-15s   &CLevel: %-3d   Max: %-3s   Exp: %-10ld   Next: %-10ld\r\n",
 		       capitalize(ability_name[ability]),
 		       get_level( ch, ability ), maxbuf,
-		       get_exp( ch, ability ),
+		       GetExperience( ch, ability ),
 		       exp_level( get_level( ch, ability ) + 1 ) );
 	  }
 	else
 	  {
 	    ch_printf( ch, "&c%-15s   &CLevel: %-3d   Max: ???   Exp: ???          Next: ???\r\n",
-		       capitalize(ability_name[ability]), get_level( ch, ability ), get_exp( ch, ability ) );
+		       capitalize(ability_name[ability]), get_level( ch, ability ), GetExperience( ch, ability ) );
 	  }
       }
   }
@@ -130,11 +130,11 @@ void do_score(Character * ch, char *argument)
 
   send_to_char( buf, ch );
 
-  if (!is_npc(ch) && ch->pcdata->condition[COND_DRUNK] > 10)
+  if (!IsNpc(ch) && ch->pcdata->condition[COND_DRUNK] > 10)
     send_to_char("&CYou are drunk.\r\n", ch);
-  if (!is_npc(ch) && ch->pcdata->condition[COND_THIRST] == 0)
+  if (!IsNpc(ch) && ch->pcdata->condition[COND_THIRST] == 0)
     send_to_char("&CYou are in danger of dehydrating.\r\n", ch);
-  if (!is_npc(ch) && ch->pcdata->condition[COND_FULL] == 0)
+  if (!IsNpc(ch) && ch->pcdata->condition[COND_FULL] == 0)
     send_to_char("&CYou are starving to death.\r\n", ch);
   if ( ch->position != POS_SLEEPING )
     switch( ch->mental_state / 10 )
@@ -175,7 +175,7 @@ void do_score(Character * ch, char *argument)
           if ( ch->mental_state <-25 )
             send_to_char( "&CYou are in deep slumber.\r\n", ch );
 
-  if ( !is_npc(ch) )
+  if ( !IsNpc(ch) )
     {
       if (ch->pcdata->target && ch->pcdata->target[0] != '\0' )
 	{
@@ -198,10 +198,10 @@ void do_score(Character * ch, char *argument)
   send_to_char("\r\n&cLanguages: &c", ch );
   for ( iLang = 0; lang_array[iLang] != LANG_UNKNOWN; iLang++ )
     if ( knows_language( ch, lang_array[iLang], ch )
-         ||  (is_npc(ch) && ch->speaks == 0) )
+         ||  (IsNpc(ch) && ch->speaks == 0) )
       {
         if ( lang_array[iLang] & ch->speaking
-             ||  (is_npc(ch) && !ch->speaking) )
+             ||  (IsNpc(ch) && !ch->speaking) )
           set_char_color( AT_RED, ch );
         send_to_char( lang_names[iLang], ch );
         send_to_char( " ", ch );
@@ -223,7 +223,7 @@ void do_score(Character * ch, char *argument)
                 ch->pcdata->clan->name, ch->pcdata->salary, ch->pcdata->clan->pkills, ch->pcdata->clan->pdeaths) ;
       send_to_char( "\r\n", ch );
     }
-  if (is_immortal(ch))
+  if (IsImmortal(ch))
     {
       send_to_char( "&C----------------------------------------------------------------------------\r\n", ch);
 

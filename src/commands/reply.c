@@ -17,7 +17,7 @@ void do_reply( Character *ch, char *argument )
       return;
     }
 
-  if ( !is_npc(ch) && IS_SET(ch->act, PLR_SILENCE) )
+  if ( !IsNpc(ch) && IS_SET(ch->act, PLR_SILENCE) )
     {
       send_to_char( "Your message didn't get through.\r\n", ch );
       return;
@@ -29,33 +29,33 @@ void do_reply( Character *ch, char *argument )
       return;
     }
 
-  if ( !is_npc( victim ) && ( victim->switched )
-       && can_see( ch, victim ) && ( get_trust( ch ) > LEVEL_AVATAR ) )
+  if ( !IsNpc( victim ) && ( victim->switched )
+       && can_see( ch, victim ) && ( GetTrustLevel( ch ) > LEVEL_AVATAR ) )
     {
       send_to_char( "That player is switched.\r\n", ch );
       return;
     }
-  else if ( !is_npc( victim ) && ( !victim->desc ) )
+  else if ( !IsNpc( victim ) && ( !victim->desc ) )
     {
       send_to_char( "That player is link-dead.\r\n", ch );
       return;
     }
 
   if ( IS_SET( victim->deaf, CHANNEL_TELLS )
-       && ( !is_immortal( ch ) || ( get_trust( ch ) < get_trust( victim ) ) ) )
+       && ( !IsImmortal( ch ) || ( GetTrustLevel( ch ) < GetTrustLevel( victim ) ) ) )
     {
       act( AT_PLAIN, "They can't hear you.", ch, NULL, victim, TO_CHAR );
       return;
     }
 
-  if ( ( !is_immortal(ch) && !is_awake(victim) )
-       || ( !is_npc(victim) && IS_SET( victim->in_room->room_flags, ROOM_SILENCE ) ) )
+  if ( ( !IsImmortal(ch) && !is_awake(victim) )
+       || ( !IsNpc(victim) && IS_SET( victim->in_room->room_flags, ROOM_SILENCE ) ) )
     {
       act( AT_PLAIN, "$E can't hear you.", ch, 0, victim, TO_CHAR );
       return;
     }
 
-  if ( !is_npc (victim) && ( IS_SET (victim->act, PLR_AFK ) ) )
+  if ( !IsNpc (victim) && ( IS_SET (victim->act, PLR_AFK ) ) )
     {
       send_to_char( "That player is afk so he may not respond.\r\n", ch );
     }
@@ -70,7 +70,7 @@ void do_reply( Character *ch, char *argument )
   victim->position = POS_STANDING;
 
   if ( knows_language( victim, ch->speaking, ch ) ||
-       (is_npc(ch) && !ch->speaking) )
+       (IsNpc(ch) && !ch->speaking) )
     {
       act( AT_TELL, "(&CIncoming Message&B) $n: '$t'", ch, argument, victim, TO_VICT );
     }
@@ -85,13 +85,13 @@ void do_reply( Character *ch, char *argument )
   if ( IS_SET( ch->in_room->room_flags, ROOM_LOGSPEECH ) )
     {
       sprintf( buf, "%s: %s (reply to) %s.",
-               is_npc( ch ) ? ch->short_descr : ch->name,
+               IsNpc( ch ) ? ch->short_descr : ch->name,
                argument,
-               is_npc( victim ) ? victim->short_descr : victim->name );
+               IsNpc( victim ) ? victim->short_descr : victim->name );
       append_to_file( LOG_FILE, buf );
     }
 
-  if( !is_immortal(ch) && !sameroom )
+  if( !IsImmortal(ch) && !sameroom )
     {
       for ( vch = ch->in_room->first_person; vch; vch = vch->next_in_room )
         {
@@ -101,7 +101,7 @@ void do_reply( Character *ch, char *argument )
             continue;
 
           if ( !knows_language(vch, ch->speaking, ch) &&
-               (!is_npc(ch) || ch->speaking != 0) )
+               (!IsNpc(ch) || ch->speaking != 0) )
             sbuf = scramble(argument, ch->speaking);
 
           sbuf = drunk_speech( sbuf, ch );
@@ -110,7 +110,7 @@ void do_reply( Character *ch, char *argument )
           act( AT_SAY, "$n says quietly into his comlink '$t'", ch, sbuf, vch, TO_VICT );
         }
 
-      if ( !is_immortal(victim) )
+      if ( !IsImmortal(victim) )
 	{
 	  act( AT_ACTION, "$n's comlink buzzes with a message.",
 	       victim, NULL, NULL, TO_ROOM);

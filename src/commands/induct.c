@@ -7,7 +7,7 @@ void do_induct( Character *ch, char *argument )
   Character *victim;
   CLAN_DATA *clan;
 
-  if ( is_npc( ch ) || !ch->pcdata->clan )
+  if ( IsNpc( ch ) || !ch->pcdata->clan )
     {
       send_to_char( "Huh?\r\n", ch );
       return;
@@ -43,7 +43,7 @@ void do_induct( Character *ch, char *argument )
       return;
     }
 
-  if ( is_npc(victim) )
+  if ( IsNpc(victim) )
     {
       send_to_char( "Not on NPCs.\r\n", ch );
       return;

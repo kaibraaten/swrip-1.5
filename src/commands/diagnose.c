@@ -122,7 +122,7 @@ void do_diagnose( Character *ch, char *argument )
     if ( !*arg2 )
       return;
 
-    if ( get_trust(ch) < LEVEL_SUB_IMPLEM )
+    if ( GetTrustLevel(ch) < LEVEL_SUB_IMPLEM )
       return;
 
     if ( ( victim = get_char_world( ch, arg2 ) ) == NULL )
@@ -152,7 +152,7 @@ void do_diagnose( Character *ch, char *argument )
         return;
       }
 
-    if ( get_trust( victim ) >= get_trust( ch ) )
+    if ( GetTrustLevel( victim ) >= GetTrustLevel( ch ) )
       {
         send_to_char( "Busy.\r\n", ch );
         return;

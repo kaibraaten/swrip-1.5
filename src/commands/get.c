@@ -61,7 +61,7 @@ void do_get( Character *ch, char *argument )
     }
 
   if ( ch->in_room && IS_SET(ch->in_room->room_flags, ROOM_PLR_HOME)
-       && get_trust(ch) < LEVEL_SUB_IMPLEM )
+       && GetTrustLevel(ch) < LEVEL_SUB_IMPLEM )
     {
       if ( !ch->plr_home || ch->plr_home->vnum != ch->in_room->vnum )
         {

@@ -19,7 +19,7 @@ void do_cedit( Character *ch, char *argument )
   if ( arg1[0] == '\0' )
     {
       send_to_char( "Syntax: cedit save\r\n", ch );
-      if ( get_trust(ch) > LEVEL_SUB_IMPLEM )
+      if ( GetTrustLevel(ch) > LEVEL_SUB_IMPLEM )
         {
           send_to_char( "Syntax: cedit <command> create [code]\r\n", ch );
           send_to_char( "Syntax: cedit <command> delete\r\n", ch );
@@ -32,7 +32,7 @@ void do_cedit( Character *ch, char *argument )
       return;
     }
 
-  if ( get_trust(ch) > LEVEL_GREATER && !str_cmp( arg1, "save" ) )
+  if ( GetTrustLevel(ch) > LEVEL_GREATER && !str_cmp( arg1, "save" ) )
     {
       save_commands();
       send_to_char( "Saved.\r\n", ch );
@@ -41,7 +41,7 @@ void do_cedit( Character *ch, char *argument )
 
   command = find_command( arg1 );
 
-  if ( get_trust(ch) > LEVEL_SUB_IMPLEM && !str_cmp( arg2, "create" ) )
+  if ( GetTrustLevel(ch) > LEVEL_SUB_IMPLEM && !str_cmp( arg2, "create" ) )
     {
       if ( command )
         {
@@ -51,7 +51,7 @@ void do_cedit( Character *ch, char *argument )
 
       CREATE( command, CMDTYPE, 1 );
       command->name = str_dup( arg1 );
-      command->level = get_trust(ch);
+      command->level = GetTrustLevel(ch);
 
       if ( *argument )
         one_argument(argument, arg2);
@@ -81,7 +81,7 @@ void do_cedit( Character *ch, char *argument )
       return;
     }
   else
-    if ( command->level > get_trust(ch) )
+    if ( command->level > GetTrustLevel(ch) )
       {
         send_to_char( "You cannot touch this command.\r\n", ch );
         return;
@@ -99,7 +99,7 @@ void do_cedit( Character *ch, char *argument )
       return;
     }
 
-  if ( get_trust(ch) <= LEVEL_SUB_IMPLEM )
+  if ( GetTrustLevel(ch) <= LEVEL_SUB_IMPLEM )
     {
       do_cedit( ch, "" );
       return;
@@ -134,7 +134,7 @@ void do_cedit( Character *ch, char *argument )
     {
       int level = atoi( argument );
 
-      if ( level < 0 || level > get_trust(ch) )
+      if ( level < 0 || level > GetTrustLevel(ch) )
         {
           send_to_char( "Level out of range.\r\n", ch );
           return;

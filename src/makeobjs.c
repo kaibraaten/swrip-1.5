@@ -150,7 +150,7 @@ void make_corpse( Character *ch )
   OBJ_DATA *obj_next = NULL;
   char *name = NULL;
 
-  if ( is_npc(ch) )
+  if ( IsNpc(ch) )
     {
       name = ch->short_descr;
 

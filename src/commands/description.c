@@ -4,7 +4,7 @@
 
 void do_description( Character *ch, char *argument )
 {
-  if ( is_npc( ch ) )
+  if ( IsNpc( ch ) )
     {
       send_to_char( "Monsters are too dumb to do that!\r\n", ch );
       return;

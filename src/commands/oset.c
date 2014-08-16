@@ -17,7 +17,7 @@ void do_oset( Character *ch, char *argument )
 
   int value, tmp;
 
-  if ( is_npc( ch ) )
+  if ( IsNpc( ch ) )
     {
       send_to_char( "Mob's can't oset\r\n", ch );
       return;
@@ -174,7 +174,7 @@ void do_oset( Character *ch, char *argument )
       return;
     }
 
-  if ( !obj && get_trust(ch) <= LEVEL_IMMORTAL )
+  if ( !obj && GetTrustLevel(ch) <= LEVEL_IMMORTAL )
     {
       if ( ( obj = get_obj_here( ch, arg1 ) ) == NULL )
         {

@@ -30,7 +30,7 @@ void do_sabotage(Character *ch, char *argument )
           return;
         }
 
-      the_chance = is_npc(ch) ? ch->top_level
+      the_chance = IsNpc(ch) ? ch->top_level
         : (int) (ch->pcdata->learned[gsn_sabotage]);
       if ( number_percent( ) < the_chance )
         {

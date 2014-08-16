@@ -5,7 +5,7 @@ void do_enlist( Character *ch, char *argument )
 {
   CLAN_DATA *clan;
 
-  if ( is_npc(ch) || !ch->pcdata )
+  if ( IsNpc(ch) || !ch->pcdata )
     {
       send_to_char( "You can't do that.\r\n", ch );
       return;

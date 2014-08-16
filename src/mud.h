@@ -2736,7 +2736,7 @@ extern "C" {
   void auction_update( void );
   void remove_portal( OBJ_DATA *portal );
   int max_level( const Character *ch, int ability );
-  bool is_droid( const Character *ch );
+  bool IsDroid( const Character *ch );
 
   /* newscore.c */
   const char *get_race( const Character *ch );

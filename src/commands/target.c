@@ -109,7 +109,7 @@ void do_target(Character *ch, char *argument )
             }
         }
 
-      the_chance = is_npc(ch) ? ch->top_level
+      the_chance = IsNpc(ch) ? ch->top_level
         : (int)  (ch->pcdata->learned[gsn_weaponsystems]) ;
       if ( number_percent( ) < the_chance )
         {

@@ -3,7 +3,7 @@
 
 void do_rank( Character *ch, char *argument )
 {
-  if ( is_npc(ch) )
+  if ( IsNpc(ch) )
     return;
 
   if ( !argument || argument[0] == '\0' )

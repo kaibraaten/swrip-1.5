@@ -14,7 +14,7 @@ void do_bestowarea( Character *ch, char *argument )
 
   argument = one_argument( argument, arg );
 
-  if ( get_trust (ch) < LEVEL_SUB_IMPLEM )
+  if ( GetTrustLevel (ch) < LEVEL_SUB_IMPLEM )
     {
       send_to_char( "Sorry...\r\n", ch );
       return;
@@ -37,13 +37,13 @@ void do_bestowarea( Character *ch, char *argument )
       return;
     }
 
-  if ( is_npc( victim ) )
+  if ( IsNpc( victim ) )
     {
       send_to_char( "You can't give special abilities to a mob!\r\n", ch );
       return;
     }
 
-  if ( get_trust(victim) < LEVEL_IMMORTAL )
+  if ( GetTrustLevel(victim) < LEVEL_IMMORTAL )
     {
       send_to_char( "They aren't an immortal.\r\n", ch );
       return;

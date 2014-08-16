@@ -19,7 +19,7 @@ void do_rempilot(Character *ch, char *argument )
       return;
     }
   the_chance = number_percent( );
-  if ( is_npc(ch) || the_chance >= ch->pcdata->learned[gsn_slicing] )
+  if ( IsNpc(ch) || the_chance >= ch->pcdata->learned[gsn_slicing] )
     {
       if ( !check_pilot( ch , ship ) )
         {

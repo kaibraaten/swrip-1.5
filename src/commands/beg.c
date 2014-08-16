@@ -9,7 +9,7 @@ void do_beg( Character *ch, char *argument )
   int percent, xp;
   int amount;
 
-  if ( is_npc (ch) ) return;
+  if ( IsNpc (ch) ) return;
 
   argument = one_argument( argument, arg1 );
 
@@ -71,7 +71,7 @@ void do_beg( Character *ch, char *argument )
       return;
     }
 
-  if ( !is_npc( victim ) )
+  if ( !IsNpc( victim ) )
     {
       send_to_char( "You beg them for money.\r\n", ch );
       act( AT_ACTION, "$n begs you to give $s some change.\r\n", ch, NULL, victim, TO_VICT    );

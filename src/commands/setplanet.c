@@ -7,7 +7,7 @@ void do_setplanet( Character *ch, char *argument )
   char arg2[MAX_INPUT_LENGTH];
   PLANET_DATA *planet;
 
-  if ( is_npc( ch ) )
+  if ( IsNpc( ch ) )
     {
       send_to_char( "Huh?\r\n", ch );
       return;

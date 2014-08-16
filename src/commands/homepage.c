@@ -6,7 +6,7 @@ void do_homepage( Character *ch, char *argument )
 {
   char buf[MAX_STRING_LENGTH];
 
-  if ( is_npc(ch) )
+  if ( IsNpc(ch) )
     return;
 
   if ( argument[0] == '\0' )

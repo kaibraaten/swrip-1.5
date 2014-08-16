@@ -21,13 +21,13 @@ void do_notitle( Character *ch, char *argument )
       return;
     }
 
-  if ( is_npc(victim) )
+  if ( IsNpc(victim) )
     {
       send_to_char( "Not on NPC's.\r\n", ch );
       return;
     }
 
-  if ( get_trust( victim ) >= get_trust( ch ) )
+  if ( GetTrustLevel( victim ) >= GetTrustLevel( ch ) )
     {
       send_to_char( "You failed.\r\n", ch );
       return;

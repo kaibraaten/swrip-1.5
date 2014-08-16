@@ -46,8 +46,8 @@ void do_snoop( Character *ch, char *argument )
    * Minimum snoop level... a secret mset value
    * makes the snooper think that the victim is already being snooped
    */
-  if ( get_trust( victim ) >= get_trust( ch )
-       ||  (victim->pcdata && victim->pcdata->min_snoop > get_trust( ch )) )
+  if ( GetTrustLevel( victim ) >= GetTrustLevel( ch )
+       ||  (victim->pcdata && victim->pcdata->min_snoop > GetTrustLevel( ch )) )
     {
       send_to_char( "Busy already.\r\n", ch );
       return;
@@ -64,7 +64,7 @@ void do_snoop( Character *ch, char *argument )
     }
 
   /*  Snoop notification for higher imms, if desired, uncomment this
-      if ( get_trust(victim) > LEVEL_GREATER && get_trust(ch) < LEVEL_IMPLEMENTOR )
+      if ( GetTrustLevel(victim) > LEVEL_GREATER && GetTrustLevel(ch) < LEVEL_IMPLEMENTOR )
       write_to_descriptor( victim->desc->descriptor, "\r\nYou feel like someone is watching your every move...\r\n", 0 );
   */
   victim->desc->snoop_by = ch->desc;

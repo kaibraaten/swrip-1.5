@@ -24,7 +24,7 @@ void do_oassign( Character *ch, char *argument )
       send_to_char( "They don't seem to be around.\r\n", ch );
       return;
     }
-  if ( is_npc( victim ) || get_trust( victim ) < LEVEL_CREATOR )
+  if ( IsNpc( victim ) || GetTrustLevel( victim ) < LEVEL_CREATOR )
     {
       send_to_char( "They wouldn't know what to do with an object range.\r\n", ch );
       return;

@@ -14,7 +14,7 @@ bool spec_police_fine( Character *ch )
   for ( victim = ch->in_room->first_person; victim; victim = v_next )
     {
       v_next = victim->next_in_room;
-      if ( is_npc(victim) )
+      if ( IsNpc(victim) )
         continue;
       if ( !can_see( ch, victim ) )
         continue;

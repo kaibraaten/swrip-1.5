@@ -3,7 +3,7 @@
 
 void do_bamfin( Character *ch, char *argument )
 {
-  if ( !is_npc(ch) )
+  if ( !IsNpc(ch) )
     {
       smash_tilde( argument );
       DISPOSE( ch->pcdata->bamfin );

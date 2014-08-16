@@ -7,7 +7,7 @@ void do_teach( Character *ch, char *argument )
   int sn;
   char arg[MAX_INPUT_LENGTH];
 
-  if ( is_npc(ch) )
+  if ( IsNpc(ch) )
     return;
 
   argument = one_argument(argument, arg);
@@ -34,7 +34,7 @@ void do_teach( Character *ch, char *argument )
           return;
         }
 
-      if (is_npc(victim))
+      if (IsNpc(victim))
         {
 	  send_to_char( "You can't teach that to them!\r\n", ch );
           return;
@@ -84,7 +84,7 @@ void do_teach( Character *ch, char *argument )
 	}
       else
         {
-          victim->pcdata->learned[sn] += int_app[get_curr_int(ch)].learn;
+          victim->pcdata->learned[sn] += int_app[GetCurrentIntelligence(ch)].learn;
           sprintf( buf, "You teach %s $T.", victim->name );
           act( AT_ACTION, buf,
                ch, NULL, skill_table[sn]->name, TO_CHAR );

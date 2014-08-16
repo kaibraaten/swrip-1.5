@@ -9,7 +9,7 @@ void do_propaganda ( Character *ch , char *argument )
   PLANET_DATA *planet;
   CLAN_DATA   *clan;
 
-  if ( is_npc(ch) || !ch->pcdata || !ch->in_room->area || !ch->in_room->area->planet || !ch->pcdata->clan)
+  if ( IsNpc(ch) || !ch->pcdata || !ch->in_room->area || !ch->in_room->area->planet || !ch->pcdata->clan)
     {
       send_to_char( "What would be the point of that.\r\n", ch );
       return;
@@ -102,7 +102,7 @@ void do_propaganda ( Character *ch , char *argument )
     }
   set_wait_state( ch, skill_table[gsn_propaganda]->beats );
 
-  if ( victim->top_level - get_curr_cha(ch) > ch->pcdata->learned[gsn_propaganda]  )
+  if ( victim->top_level - GetCurrentCharisma(ch) > ch->pcdata->learned[gsn_propaganda]  )
     {
 
       if ( (ch->pcdata->clan) ? planet->governed_by != clan : true)

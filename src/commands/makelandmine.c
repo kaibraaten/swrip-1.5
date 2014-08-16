@@ -96,7 +96,7 @@ static void OnStart( Character *ch, char *argument )
       return;
     }
 
-  the_chance = is_npc(ch) ? ch->top_level
+  the_chance = IsNpc(ch) ? ch->top_level
     : (int) (ch->pcdata->learned[gsn_makelandmine]);
 
   if ( number_percent( ) < the_chance )
@@ -138,7 +138,7 @@ static void OnFinished( Character *ch )
   strcpy(arg, (const char*)ch->dest_buf);
   DISPOSE( ch->dest_buf);
 
-  level = is_npc(ch) ? ch->top_level : (int) (ch->pcdata->learned[gsn_makelandmine]);
+  level = IsNpc(ch) ? ch->top_level : (int) (ch->pcdata->learned[gsn_makelandmine]);
   vnum = OBJ_VNUM_CRAFTING_LANDMINE;
 
   if ( ( pObjIndex = get_obj_index( vnum ) ) == NULL )
@@ -184,7 +184,7 @@ static void OnFinished( Character *ch )
         }
     }
 
-  the_chance = is_npc(ch) ? ch->top_level
+  the_chance = IsNpc(ch) ? ch->top_level
     : (int) (ch->pcdata->learned[gsn_makelandmine]) ;
 
   if ( number_percent( ) > the_chance*2  || ( !checktool ) || ( !checkdrink ) || ( !checkbatt ) || ( !checkchem ) || ( !checkcirc) )

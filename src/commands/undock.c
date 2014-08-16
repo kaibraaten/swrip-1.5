@@ -65,13 +65,13 @@ void do_undock(Character *ch, char *argument)
   eShip = ship->docked;
 
   if ( ship->sclass == FIGHTER_SHIP )
-    the_chance = is_npc(ch) ? ch->top_level
+    the_chance = IsNpc(ch) ? ch->top_level
       : (int)  (ch->pcdata->learned[gsn_starfighters]) ;
   if ( ship->sclass == MIDSIZE_SHIP )
-    the_chance = is_npc(ch) ? ch->top_level
+    the_chance = IsNpc(ch) ? ch->top_level
       : (int)  (ch->pcdata->learned[gsn_midships]) ;
   if ( ship->sclass == CAPITAL_SHIP )
-    the_chance = is_npc(ch) ? ch->top_level
+    the_chance = IsNpc(ch) ? ch->top_level
       : (int) (ch->pcdata->learned[gsn_capitalships]);
   if ( number_percent( ) > the_chance )
     {

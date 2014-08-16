@@ -31,7 +31,7 @@ ch_ret spell_dispel_magic( int sn, int level, Character *ch, void *vo )
         return rSPELL_FAILED;
       }
 
-  if ( !is_npc(victim) )
+  if ( !IsNpc(victim) )
     {
       send_to_char( "You can't do that... yet.\r\n", ch );
       return rSPELL_FAILED;

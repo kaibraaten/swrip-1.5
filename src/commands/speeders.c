@@ -8,7 +8,7 @@ void do_speeders( Character *ch, char *argument )
   int count;
   char buf[MAX_STRING_LENGTH];
 
-  if ( !is_npc(ch) )
+  if ( !IsNpc(ch) )
     {
       count = 0;
       send_to_pager( "&YThe following are owned by you or by your organization:\r\n", ch );

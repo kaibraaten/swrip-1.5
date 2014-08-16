@@ -9,7 +9,7 @@ void do_instazone( Character *ch, char *argument )
   ROOM_INDEX_DATA *pRoom;
   bool dodoors;
 
-  if ( is_npc(ch) || get_trust(ch) < LEVEL_CREATOR || !ch->pcdata ||
+  if ( IsNpc(ch) || GetTrustLevel(ch) < LEVEL_CREATOR || !ch->pcdata ||
        !ch->pcdata->area )
     {
       send_to_char( "You don't have an assigned area to create resets for.\r\n",

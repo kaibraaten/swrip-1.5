@@ -129,7 +129,7 @@ static void wear_obj( Character *ch, OBJ_DATA *obj, bool fReplace, short wear_bi
     {
       check_size = true;
     }
-  else if ( !is_npc(ch) )
+  else if ( !IsNpc(ch) )
     {
       switch (ch->race)
 	{
@@ -649,7 +649,7 @@ static void wear_obj( Character *ch, OBJ_DATA *obj, bool fReplace, short wear_bi
         {
           if ( can_dual(ch) )
             {
-              if ( get_obj_weight( obj ) + get_obj_weight( tmpobj ) > str_app[get_curr_str(ch)].wield )
+              if ( get_obj_weight( obj ) + get_obj_weight( tmpobj ) > str_app[GetCurrentStrength(ch)].wield )
                 {
                   send_to_char( "It is too heavy for you to wield.\r\n", ch );
                   return;
@@ -680,7 +680,7 @@ static void wear_obj( Character *ch, OBJ_DATA *obj, bool fReplace, short wear_bi
           return;
         }
 
-      if ( get_obj_weight( obj ) > str_app[get_curr_str(ch)].wield )
+      if ( get_obj_weight( obj ) > str_app[GetCurrentStrength(ch)].wield )
         {
           send_to_char( "It is too heavy for you to wield.\r\n", ch );
           return;
@@ -794,7 +794,7 @@ static bool can_layer( const Character *ch, const OBJ_DATA *obj, short wear_loc 
  */
 static bool could_dual( const Character *ch )
 {
-  if ( is_npc(ch) )
+  if ( IsNpc(ch) )
     return true;
 
   if ( ch->pcdata->learned[gsn_dual_wield] )

@@ -3,7 +3,7 @@
 
 void do_roster( Character *ch, char *argument )
 {
-  if( is_npc( ch ) || !ch->pcdata->clan
+  if( IsNpc( ch ) || !ch->pcdata->clan
       || ( str_cmp(ch->name, ch->pcdata->clan->leadership.leader )
            && str_cmp(ch->name, ch->pcdata->clan->leadership.number1 )
            && str_cmp(ch->name, ch->pcdata->clan->leadership.number2 )

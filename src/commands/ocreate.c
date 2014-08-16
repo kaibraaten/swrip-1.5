@@ -9,7 +9,7 @@ void do_ocreate( Character *ch, char *argument )
   OBJ_DATA *obj = NULL;
   int vnum = 0, cvnum = 0;
 
-  if ( is_npc(ch) )
+  if ( IsNpc(ch) )
     {
       send_to_char( "Mobiles cannot create.\r\n", ch );
       return;
@@ -46,10 +46,10 @@ void do_ocreate( Character *ch, char *argument )
       return;
     }
 
-  if ( is_npc( ch ) )
+  if ( IsNpc( ch ) )
     return;
 
-  if ( get_trust( ch ) <= LEVEL_IMMORTAL )
+  if ( GetTrustLevel( ch ) <= LEVEL_IMMORTAL )
     {
       Area *pArea;
 
@@ -79,7 +79,7 @@ void do_ocreate( Character *ch, char *argument )
       return;
     }
 
-  obj = create_object( pObjIndex, get_trust(ch) );
+  obj = create_object( pObjIndex, GetTrustLevel(ch) );
   obj_to_char( obj, ch );
   act( AT_IMMORT, "$n makes some ancient arcane gestures, and opens $s hands to reveal $p!",
        ch, obj, NULL, TO_ROOM );

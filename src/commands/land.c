@@ -191,10 +191,10 @@ void do_land( Character *ch, char *argument )
     }
 
   if ( ship->sclass == FIGHTER_SHIP )
-    the_chance = is_npc(ch) ? ch->top_level
+    the_chance = IsNpc(ch) ? ch->top_level
       : (int)  (ch->pcdata->learned[gsn_starfighters]) ;
   if ( ship->sclass == MIDSIZE_SHIP )
-    the_chance = is_npc(ch) ? ch->top_level
+    the_chance = IsNpc(ch) ? ch->top_level
       : (int)  (ch->pcdata->learned[gsn_midships]) ;
   if ( number_percent( ) < the_chance )
     {

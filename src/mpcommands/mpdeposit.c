@@ -9,7 +9,7 @@ void do_mp_deposit( Character *ch, char *argument )
   char arg[MAX_STRING_LENGTH];
   int gold;
 
-  if ( !is_npc(ch) )
+  if ( !IsNpc(ch) )
     {
       send_to_char("Huh?\r\n", ch);
       return;

@@ -97,7 +97,7 @@ int ch_slookup( const Character *ch, const char *name )
 {
   int sn = 0;
 
-  if ( is_npc(ch) )
+  if ( IsNpc(ch) )
     {
       return skill_lookup( name );
     }
@@ -314,7 +314,7 @@ int ch_bsearch_skill( const Character *ch, const char *name, int first, int top 
 
 int find_spell( const Character *ch, const char *name, bool know )
 {
-  if ( is_npc(ch) || !know )
+  if ( IsNpc(ch) || !know )
     {
       return bsearch_skill( name, gsn_first_spell, gsn_first_skill-1 );
     }
@@ -326,7 +326,7 @@ int find_spell( const Character *ch, const char *name, bool know )
 
 int find_skill( const Character *ch, const char *name, bool know )
 {
-  if ( is_npc(ch) || !know )
+  if ( IsNpc(ch) || !know )
     {
       return bsearch_skill( name, gsn_first_skill, gsn_first_weapon-1 );
     }
@@ -338,7 +338,7 @@ int find_skill( const Character *ch, const char *name, bool know )
 
 int find_weapon( const Character *ch, const char *name, bool know )
 {
-  if ( is_npc(ch) || !know )
+  if ( IsNpc(ch) || !know )
     {
       return bsearch_skill( name, gsn_first_weapon, gsn_first_tongue-1 );
     }
@@ -350,7 +350,7 @@ int find_weapon( const Character *ch, const char *name, bool know )
 
 int find_tongue( const Character *ch, const char *name, bool know )
 {
-  if ( is_npc(ch) || !know )
+  if ( IsNpc(ch) || !know )
     {
       return bsearch_skill( name, gsn_first_tongue, gsn_top_sn-1 );
     }
@@ -664,35 +664,35 @@ int rd_parse(const Character *ch, int level, char *expr)
 
 	case 'S':
 	case 's':
-	  return get_curr_str(ch);
+	  return GetCurrentStrength(ch);
 
 	case 'I':
 	case 'i':
-	  return get_curr_int(ch);
+	  return GetCurrentIntelligence(ch);
 
 	case 'W':
 	case 'w':
-	  return get_curr_wis(ch);
+	  return GetCurrentWisdom(ch);
 
 	case 'X':
 	case 'x':
-	  return get_curr_dex(ch);
+	  return GetCurrentDexterity(ch);
 
 	case 'C':
 	case 'c':
-	  return get_curr_con(ch);
+	  return GetCurrentConstitution(ch);
 
 	case 'A':
 	case 'a':
-	  return get_curr_cha(ch);
+	  return GetCurrentCharisma(ch);
 
 	case 'U':
 	case 'u':
-	  return get_curr_lck(ch);
+	  return GetCurrentLuck(ch);
 
 	case 'Y':
 	case 'y':
-	  return get_age(ch);
+	  return GetAge(ch);
 	}
     }
 
@@ -886,7 +886,7 @@ bool saves_spell_staff( int level, const Character *victim )
       return true;
     }
 
-  if ( is_npc( victim ) && level > 10 )
+  if ( IsNpc( victim ) && level > 10 )
     {
       level -= 5;
     }
@@ -955,9 +955,9 @@ void *locate_targets( Character *ch, char *arg, int sn, Character **victim, OBJ_
           send_to_char( "Cast this on yourself? Okay...\r\n", ch );
         }
 
-      if ( !is_npc(ch) )
+      if ( !IsNpc(ch) )
         {
-          if ( !is_npc(*victim) )
+          if ( !IsNpc(*victim) )
             {
               if ( get_timer( ch, TIMER_PKILLED ) > 0 )
                 {
@@ -1132,7 +1132,7 @@ ch_ret obj_cast_spell( int sn, int level, Character *ch, Character *victim, OBJ_
 	      victim = who_fighting( ch );
 	    }
 
-          if ( !victim || !is_npc(victim) )
+          if ( !victim || !IsNpc(victim) )
             {
               send_to_char( "You can't do that.\r\n", ch );
               return rNONE;
@@ -1240,7 +1240,7 @@ bool check_save( int sn, int level, const Character *ch, const Character *victim
   bool saved = false;
 
   if ( SPELL_FLAG(skill, SF_PKSENSITIVE)
-       && !is_npc(ch) && !is_npc(victim) )
+       && !IsNpc(ch) && !IsNpc(victim) )
     {
       level /= 2;
     }

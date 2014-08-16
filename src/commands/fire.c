@@ -43,12 +43,12 @@ void do_fire(Character *ch, char *argument )
       return;
     }
 
-  the_chance = is_npc(ch) ? ch->top_level
+  the_chance = IsNpc(ch) ? ch->top_level
     : (int) ( ch->stats.perm_dex*2 + ch->pcdata->learned[gsn_spacecombat]/3
               + ch->pcdata->learned[gsn_spacecombat2]/3 + ch->pcdata->learned[gsn_spacecombat3]/3 );
   origthe_chance = the_chance;
 
-  if ( ship->sclass > SHIP_PLATFORM && !is_npc(ch))
+  if ( ship->sclass > SHIP_PLATFORM && !IsNpc(ch))
     ((ch->pcdata->learned[gsn_speeders] == 100) ? (the_chance -= 100 - ch->pcdata->learned[gsn_speedercombat]) : (the_chance = 0) );
 
   if ( ch->in_room->vnum == ship->room.gunseat && !str_prefix( argument , "lasers"))

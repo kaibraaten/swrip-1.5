@@ -11,7 +11,7 @@ void do_whois( Character *ch, char *argument)
 
   buf[0] = '\0';
 
-  if(is_npc(ch))
+  if(IsNpc(ch))
     return;
 
   if(argument[0] == '\0')
@@ -29,7 +29,7 @@ void do_whois( Character *ch, char *argument)
       return;
     }
 
-  if(is_npc(victim))
+  if(IsNpc(victim))
     {
       send_to_char("That's not a player!\r\n", ch);
       return;
@@ -59,7 +59,7 @@ void do_whois( Character *ch, char *argument)
 
   if ( victim->pcdata->clan && ( ( ch->pcdata->clan
                                    && ch->pcdata->clan == victim->pcdata->clan )
-                                 || is_immortal( ch ) ) )
+                                 || IsImmortal( ch ) ) )
     {
       if ( victim->pcdata->clan->clan_type == CLAN_CRIME )
         send_to_char( ", and belongs to the crime family ", ch );
@@ -81,7 +81,7 @@ void do_whois( Character *ch, char *argument)
               victim->name,
               victim->pcdata->bio);
 
-  if( get_trust( ch ) >= LEVEL_GREATER )
+  if( GetTrustLevel( ch ) >= LEVEL_GREATER )
     {
       send_to_char("----------------------------------------------------\r\n", ch);
 
@@ -111,7 +111,7 @@ void do_whois( Character *ch, char *argument)
                   victim->pcdata->helled_by,
                   ctime(&victim->pcdata->release_date));
 
-      if(get_trust(victim) < get_trust(ch))
+      if(GetTrustLevel(victim) < GetTrustLevel(ch))
         {
           sprintf(buf2, "list %s", buf);
           do_comment(ch, buf2);
@@ -134,7 +134,7 @@ void do_whois( Character *ch, char *argument)
       if ( victim->desc && victim->desc->remote.hostname[0]!='\0' )   /* added by Gorog */
         {
           sprintf (buf2, "%s's IP info: %s ", victim->name, victim->desc->remote.hostip);
-          if (get_trust(ch) > LEVEL_GREATER)
+          if (GetTrustLevel(ch) > LEVEL_GREATER)
             {
               strcat (buf2, victim->desc->remote.hostname);
             }
@@ -142,7 +142,7 @@ void do_whois( Character *ch, char *argument)
           send_to_char(buf2, ch);
         }
 
-      if (get_trust(ch) >= LEVEL_GREATER && get_trust(ch) >= get_trust( victim ) && victim->pcdata )
+      if (GetTrustLevel(ch) >= LEVEL_GREATER && GetTrustLevel(ch) >= GetTrustLevel( victim ) && victim->pcdata )
         {
           sprintf (buf2, "Email: %s\r\n" , victim->pcdata->email );
           send_to_char(buf2, ch);

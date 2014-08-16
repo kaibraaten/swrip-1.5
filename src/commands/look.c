@@ -197,24 +197,24 @@ static void show_char_to_char_0( Character *victim, Character *ch )
   buf[0] = '\0';
 
   /*
-  if ( is_npc(victim) )
+  if ( IsNpc(victim) )
     strcat( buf, " "  );
   */
 
-  if ( !is_npc(victim) && !victim->desc )
+  if ( !IsNpc(victim) && !victim->desc )
     {
       if ( !victim->switched )          strcat( buf, "(Link Dead) "  );
       else
         if ( !is_affected_by(victim->switched, AFF_POSSESS) )
           strcat( buf, "(Switched) " );
     }
-  if ( !is_npc(victim)
+  if ( !IsNpc(victim)
        && IS_SET(victim->act, PLR_AFK) )                strcat( buf, "[AFK] ");
 
-  if ( (!is_npc(victim) && IS_SET(victim->act, PLR_WIZINVIS))
-       || (is_npc(victim) && IS_SET(victim->act, ACT_MOBINVIS)) )
+  if ( (!IsNpc(victim) && IS_SET(victim->act, PLR_WIZINVIS))
+       || (IsNpc(victim) && IS_SET(victim->act, ACT_MOBINVIS)) )
     {
-      if (!is_npc(victim))
+      if (!IsNpc(victim))
         sprintf( buf1,"(Invis %d) ", victim->pcdata->wizinvis );
       else sprintf( buf1,"(Mobinvis %d) ", victim->mobinvis);
       strcat( buf, buf1 );
@@ -226,11 +226,11 @@ static void show_char_to_char_0( Character *victim, Character *ch )
   if ( is_evil(victim)
        &&   is_affected_by(ch, AFF_DETECT_EVIL)     ) strcat( buf, "&R(Red Aura)&w "   );
   if ( ( victim->mana > 10 )
-       &&   ( is_affected_by( ch , AFF_DETECT_MAGIC ) || is_immortal( ch ) ) )
+       &&   ( is_affected_by( ch , AFF_DETECT_MAGIC ) || IsImmortal( ch ) ) )
     strcat( buf, "&B(Blue Aura)&w "  );
-  if ( !is_npc(victim) && IS_SET(victim->act, PLR_LITTERBUG  ) )
+  if ( !IsNpc(victim) && IS_SET(victim->act, PLR_LITTERBUG  ) )
     strcat( buf, "(LITTERBUG) "  );
-  if ( is_npc(victim) && is_immortal(ch)
+  if ( IsNpc(victim) && IsImmortal(ch)
        && IS_SET(victim->act, ACT_PROTOTYPE) ) strcat( buf, "(PROTO) " );
   if ( victim->desc && victim->desc->connection_state == CON_EDITING )
     strcat( buf, "(Writing) " );
@@ -244,7 +244,7 @@ static void show_char_to_char_0( Character *victim, Character *ch )
       return;
     }
 
-  if ( !is_npc(victim) && !IS_SET(ch->act, PLR_BRIEF) )
+  if ( !IsNpc(victim) && !IS_SET(ch->act, PLR_BRIEF) )
     strcat( buf, victim->pcdata->title );
   else
     strcat( buf, PERS( victim, ch ) );
@@ -389,18 +389,18 @@ static void show_char_to_char_0( Character *victim, Character *ch )
         }
       break;
     case POS_STANDING:
-      if ( is_immortal(victim) )
+      if ( IsImmortal(victim) )
         strcat( buf, " is here before you." );
       else
         if ( ( victim->in_room->sector_type == SECT_UNDERWATER )
-             && !is_affected_by(victim, AFF_AQUA_BREATH) && !is_npc(victim) )
+             && !is_affected_by(victim, AFF_AQUA_BREATH) && !IsNpc(victim) )
           strcat( buf, " is drowning here." );
         else
           if ( victim->in_room->sector_type == SECT_UNDERWATER )
             strcat( buf, " is here in the water." );
           else
             if ( ( victim->in_room->sector_type == SECT_OCEANFLOOR )
-                 && !is_affected_by(victim, AFF_AQUA_BREATH) && !is_npc(victim) )
+                 && !is_affected_by(victim, AFF_AQUA_BREATH) && !IsNpc(victim) )
               strcat( buf, " is drowning here." );
             else
               if ( victim->in_room->sector_type == SECT_OCEANFLOOR )
@@ -485,7 +485,7 @@ static void show_char_to_char_1( Character *victim, Character *ch )
         {
           if ( ( obj = get_eq_char( victim, iWear ) ) != NULL
                &&   can_see_obj( ch, obj ) &&
-               ( ( obj->description && obj->description[0] != '\0' ) || ( IS_SET(ch->act, PLR_HOLYLIGHT) || is_npc(ch) ) ) )
+               ( ( obj->description && obj->description[0] != '\0' ) || ( IS_SET(ch->act, PLR_HOLYLIGHT) || IsNpc(ch) ) ) )
             {
               if ( !found )
                 {
@@ -506,7 +506,7 @@ static void show_char_to_char_1( Character *victim, Character *ch )
       send_to_char( "\r\n", ch );
     }
 
-  if ( is_npc(ch) || victim == ch )
+  if ( IsNpc(ch) || victim == ch )
     return;
 
   if ( number_percent( ) < ch->pcdata->learned[gsn_peek] )
@@ -572,9 +572,9 @@ static void show_visible_affects_to_char( Character *victim, Character *ch )
     {
       set_char_color( AT_MAGIC, ch );
       ch_printf( ch, "%s looks ahead free of expression.\r\n",
-                 is_npc( victim ) ? capitalize(victim->short_descr) : (victim->name) );
+                 IsNpc( victim ) ? capitalize(victim->short_descr) : (victim->name) );
     }
-  if ( !is_npc(victim) && !victim->desc
+  if ( !IsNpc(victim) && !victim->desc
        &&    victim->switched && is_affected_by(victim->switched, AFF_POSSESS) )
     {
       set_char_color( AT_MAGIC, ch );
@@ -670,7 +670,7 @@ static bool requirements_are_met( Character *ch )
       return false;
     }
 
-  if ( !is_npc(ch)
+  if ( !IsNpc(ch)
        && !IS_SET(ch->act, PLR_HOLYLIGHT)
        && !is_affected_by(ch, AFF_TRUESIGHT)
        && room_is_dark( ch->in_room ) )
@@ -747,7 +747,7 @@ static void look_in( Character *ch, char *what, bool doexaprog )
 	      ROOM_INDEX_DATA *original = NULL;
 
 	      if ( room_is_private( ch, pexit->to_room )
-		   && get_trust(ch) < sysdata.level_override_private )
+		   && GetTrustLevel(ch) < sysdata.level_override_private )
 		{
 		  set_char_color( AT_WHITE, ch );
 		  send_to_char( "That room is private buster!\r\n", ch );
@@ -834,17 +834,17 @@ static void show_exit_to_char( Character *ch, Exit *pexit, short door )
   if ( pexit->to_room
        && ( is_affected_by( ch, AFF_SCRYING )
 	    || IS_SET( pexit->exit_info, EX_xLOOK )
-	    || get_trust(ch) >= LEVEL_IMMORTAL ) )
+	    || GetTrustLevel(ch) >= LEVEL_IMMORTAL ) )
     {
       ROOM_INDEX_DATA *original = NULL;
 
       if ( !IS_SET( pexit->exit_info, EX_xLOOK )
-	   && get_trust( ch ) < LEVEL_IMMORTAL )
+	   && GetTrustLevel( ch ) < LEVEL_IMMORTAL )
 	{
 	  set_char_color( AT_MAGIC, ch );
 	  send_to_char( "You attempt to scry...\r\n", ch );
 
-	  if (!is_npc(ch) )
+	  if (!IsNpc(ch) )
 	    {
 	      int percent = 99;
 
@@ -857,7 +857,7 @@ static void show_exit_to_char( Character *ch, Exit *pexit, short door )
 	}
 
       if ( room_is_private( ch, pexit->to_room )
-	   && get_trust(ch) < sysdata.level_override_private )
+	   && GetTrustLevel(ch) < sysdata.level_override_private )
 	{
 	  set_char_color( AT_WHITE, ch );
 	  send_to_char( "That room is private buster!\r\n", ch );
@@ -902,7 +902,7 @@ static void show_no_arg( Character *ch, bool is_auto )
 
   if ( !ch->desc->original )
     {
-      if ((get_trust(ch) >= LEVEL_IMMORTAL) && (IS_SET(ch->pcdata->flags, PCFLAG_ROOM)))
+      if ((GetTrustLevel(ch) >= LEVEL_IMMORTAL) && (IS_SET(ch->pcdata->flags, PCFLAG_ROOM)))
 	{
 	  set_char_color(AT_PURPLE, ch);
 	  ch_printf(ch, "{%d:%s}", ch->in_room->vnum, ch->in_room->area->filename);
@@ -915,12 +915,12 @@ static void show_no_arg( Character *ch, bool is_auto )
   send_to_char( "\r\n", ch );
   set_char_color( AT_RMDESC, ch );
 
-  if ( !is_npc(ch) && !IS_SET(ch->act, PLR_BRIEF ) )
+  if ( !IsNpc(ch) && !IS_SET(ch->act, PLR_BRIEF ) )
     {
       send_to_char( ch->in_room->description, ch );
     }
 
-  if ( !is_npc(ch) && IS_SET(ch->act, PLR_AUTOEXIT) )
+  if ( !IsNpc(ch) && IS_SET(ch->act, PLR_AUTOEXIT) )
     {
       do_exits( ch, "" );
     }

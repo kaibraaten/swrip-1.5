@@ -89,7 +89,7 @@ const char * const d_corpse_descs[] =
     "The shattered remains %s are here."
   };
 
-bool is_droid( const Character *ch )
+bool IsDroid( const Character *ch )
 {
   return ch->race == RACE_DROID
     || ch->race == RACE_PROTOCOL_DROID
@@ -105,12 +105,12 @@ int max_level( const Character *ch, int ability)
 {
   int level = 0;
 
-  if ( is_npc(ch) )
+  if ( IsNpc(ch) )
     {
       return 100;
     }
 
-  if ( is_immortal(ch) || ch->race == RACE_GOD )
+  if ( IsImmortal(ch) || ch->race == RACE_GOD )
     {
       return 200;
     }
@@ -328,7 +328,7 @@ void advance_level( Character *ch, int ability )
       ch->max_mana += 20;
     }
 
-  if ( !is_npc(ch) )
+  if ( !IsNpc(ch) )
     {
       REMOVE_BIT( ch->act, PLR_BOUGHT_PET );
     }
@@ -336,28 +336,28 @@ void advance_level( Character *ch, int ability )
 
 void gain_exp( Character *ch, short ability, long gain )
 {
-  if ( is_npc(ch) )
+  if ( IsNpc(ch) )
     {
       return;
     }
 
-  set_exp( ch, ability, UMAX( 0, get_exp( ch, ability ) + gain ) );
+  SetExperience( ch, ability, UMAX( 0, GetExperience( ch, ability ) + gain ) );
 
-  if (is_not_authed(ch) && get_exp( ch, ability ) >= exp_level(get_level(ch, ability ) + 1))
+  if (is_not_authed(ch) && GetExperience( ch, ability ) >= exp_level(get_level(ch, ability ) + 1))
     {
       send_to_char("You can not ascend to a higher level until you are authorized.\r\n", ch);
-      set_exp( ch, ability, exp_level( get_level(ch, ability) + 1 ) - 1);
+      SetExperience( ch, ability, exp_level( get_level(ch, ability) + 1 ) - 1);
       return;
     }
 
-  while ( get_exp( ch, ability ) >= exp_level( get_level( ch, ability ) + 1))
+  while ( GetExperience( ch, ability ) >= exp_level( get_level( ch, ability ) + 1))
     {
       short current_level = get_level( ch, ability );
       short new_level = 0;
 
       if ( current_level >= max_level( ch, ability ) )
         {
-          set_exp( ch, ability, exp_level( get_level( ch, ability ) + 1 ) - 1);
+          SetExperience( ch, ability, exp_level( get_level( ch, ability ) + 1 ) - 1);
           return;
         }
 
@@ -377,14 +377,14 @@ long lose_exp( Character *ch, short ability, long loss )
   int new_exp = 0;
   int actual_loss = 0;
 
-  if ( is_npc(ch) )
+  if ( IsNpc(ch) )
     return 0;
 
-  current_exp = get_exp( ch, ability );
+  current_exp = GetExperience( ch, ability );
   actual_loss = UMAX( loss, 0 );
   new_exp = current_exp - actual_loss;
 
-  set_exp( ch, ability, new_exp );
+  SetExperience( ch, ability, new_exp );
 
   return actual_loss;
 }
@@ -396,7 +396,7 @@ int hit_gain( const Character *ch )
 {
   int gain = 0;
 
-  if ( is_npc(ch) )
+  if ( IsNpc(ch) )
     {
       gain = ch->top_level;
     }
@@ -416,14 +416,14 @@ int hit_gain( const Character *ch )
 	  return -20;
 
         case POS_STUNNED:
-	  return get_curr_con(ch) * 2;
+	  return GetCurrentConstitution(ch) * 2;
 
         case POS_SLEEPING:
-	  gain += get_curr_con(ch) * 1.5;
+	  gain += GetCurrentConstitution(ch) * 1.5;
 	  break;
 
         case POS_RESTING:
-	  gain += get_curr_con(ch);
+	  gain += GetCurrentConstitution(ch);
 	  break;
         }
 
@@ -457,7 +457,7 @@ int mana_gain( const Character *ch )
 {
   int gain = 0;
 
-  if ( is_npc(ch) )
+  if ( IsNpc(ch) )
     {
       gain = ch->top_level;
     }
@@ -478,11 +478,11 @@ int mana_gain( const Character *ch )
       switch ( ch->position )
         {
         case POS_SLEEPING:
-	  gain += get_curr_int(ch) * 3;
+	  gain += GetCurrentIntelligence(ch) * 3;
 	  break;
 
         case POS_RESTING:
-	  gain += get_curr_int(ch) * 1.5;
+	  gain += GetCurrentIntelligence(ch) * 1.5;
 	  break;
         }
 
@@ -509,7 +509,7 @@ int move_gain( const Character *ch )
 {
   int gain = 0;
 
-  if ( is_npc(ch) )
+  if ( IsNpc(ch) )
     {
       gain = ch->top_level;
     }
@@ -532,11 +532,11 @@ int move_gain( const Character *ch )
 	  return 1;
 
         case POS_SLEEPING:
-	  gain += get_curr_dex(ch) * 2;
+	  gain += GetCurrentDexterity(ch) * 2;
 	  break;
 
         case POS_RESTING:
-	  gain += get_curr_dex(ch);
+	  gain += GetCurrentDexterity(ch);
 	  break;
         }
 
@@ -671,9 +671,9 @@ void gain_condition( Character *ch, int iCond, int value )
   ch_ret retcode = 0;
 
   if ( value == 0
-       || is_npc(ch)
-       || is_immortal( ch )
-       || is_droid(ch)
+       || IsNpc(ch)
+       || IsImmortal( ch )
+       || IsDroid(ch)
        || is_not_authed(ch))
     return;
 
@@ -852,7 +852,7 @@ void mobile_update( void )
           do_shout( ch, "Thoric says, 'Prepare for the worst!'" );
         }
 
-      if ( !is_npc(ch) )
+      if ( !IsNpc(ch) )
         {
           drunk_randoms(ch);
           halucinations(ch);
@@ -876,7 +876,7 @@ void mobile_update( void )
 		  ch, NULL, NULL, TO_ROOM);
 	    }
 
-          if(is_npc(ch)) /* Guard against purging switched? */
+          if(IsNpc(ch)) /* Guard against purging switched? */
 	    {
 	      extract_char(ch, true);
 	    }
@@ -1406,13 +1406,13 @@ void char_update( void )
        *  Do a room_prog rand check right off the bat
        *   if ch disappears (rprog might wax npc's), continue
        */
-      if(!is_npc(ch))
+      if(!IsNpc(ch))
         rprog_random_trigger( ch );
 
       if( char_died(ch) )
         continue;
 
-      if(is_npc(ch))
+      if(IsNpc(ch))
         mprog_time_trigger(ch);
 
       if( char_died(ch) )
@@ -1426,7 +1426,7 @@ void char_update( void )
       /*
        * See if player should be auto-saved.
        */
-      if ( !is_npc(ch)
+      if ( !IsNpc(ch)
            && !is_not_authed(ch)
            && current_time - ch->pcdata->save_time > (sysdata.save_frequency*60) )
 	{
@@ -1462,7 +1462,7 @@ void char_update( void )
         gain_addiction( ch );
 
 
-      if ( !is_npc(ch) && ch->top_level < LEVEL_IMMORTAL )
+      if ( !IsNpc(ch) && ch->top_level < LEVEL_IMMORTAL )
         {
           OBJ_DATA *obj = NULL;
 
@@ -1749,7 +1749,7 @@ void char_update( void )
 		}
             }
 
-          if ( !is_npc (ch) )
+          if ( !IsNpc (ch) )
             {
               if ( ++ch->timer > 15 && !ch->desc )
                 {
@@ -2103,7 +2103,7 @@ void char_check( void )
 	  continue;
 	}
 
-      if ( is_npc( ch ) )
+      if ( IsNpc( ch ) )
         {
           if ( cnt != 0 )
 	    {
@@ -2190,7 +2190,7 @@ void char_check( void )
             {
               if ( !is_affected_by( ch, AFF_AQUA_BREATH ) )
                 {
-                  if ( get_trust(ch) < LEVEL_IMMORTAL )
+                  if ( GetTrustLevel(ch) < LEVEL_IMMORTAL )
                     {
 		      int dam = number_range( ch->max_hit / 50 , ch->max_hit / 30 );
                       dam = UMAX( 1, dam );
@@ -2224,7 +2224,7 @@ void char_check( void )
                    && !is_affected_by( ch, AFF_AQUA_BREATH )
                    && !ch->mount )
                 {
-                  if ( !is_immortal( ch ) )
+                  if ( !IsImmortal( ch ) )
                     {
                       int dam;
 
@@ -2317,7 +2317,7 @@ void aggr_update( void )
     {
       wch_next = ch->next;
 
-      if ( !is_npc(ch)
+      if ( !IsNpc(ch)
            || ch->fighting
            || is_affected_by(ch, AFF_CHARM)
            || !is_awake(ch)
@@ -2369,7 +2369,7 @@ void aggr_update( void )
 	      continue;
 	    }
 
-          if ( is_npc(ch) && IS_SET(ch->attacks, ATCK_BACKSTAB ) )
+          if ( IsNpc(ch) && IS_SET(ch->attacks, ATCK_BACKSTAB ) )
             {
               OBJ_DATA *obj = NULL;
 
@@ -2419,7 +2419,7 @@ void drunk_randoms( Character *ch )
       return;
     }
 
-  if ( is_npc( ch ) || !ch->pcdata || ch->pcdata->condition[COND_DRUNK] <= 0 )
+  if ( IsNpc( ch ) || !ch->pcdata || ch->pcdata->condition[COND_DRUNK] <= 0 )
     {
       return;
     }
@@ -2449,7 +2449,7 @@ void drunk_randoms( Character *ch )
     {
       check_social( ch, "fart", "" );
     }
-  else if ( drunk > (10+(get_curr_con(ch)/5))
+  else if ( drunk > (10+(GetCurrentConstitution(ch)/5))
 	    && number_percent() < ( 2 * drunk / 18 ) )
     {
       char name[MAX_STRING_LENGTH];
@@ -2835,7 +2835,7 @@ void reboot_check( time_t reset )
 
       for ( vch = first_char; vch; vch = vch->next )
 	{
-	  if ( !is_npc(vch) )
+	  if ( !IsNpc(vch) )
 	    {
 	      save_char_obj(vch);
 	    }
@@ -2901,7 +2901,7 @@ void auction_update (void)
         {
           sprintf (buf, "%s sold to %s for %d.",
                    auction->item->short_descr,
-                   is_npc(auction->buyer) ? auction->buyer->short_descr : auction->buyer->name,
+                   IsNpc(auction->buyer) ? auction->buyer->short_descr : auction->buyer->name,
                    auction->bet);
           talk_auction(buf);
 

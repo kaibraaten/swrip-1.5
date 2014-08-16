@@ -217,7 +217,7 @@ void do_who( Character *ch, char *argument )
       char force_char = ' ';
 
       if ( (d->connection_state != CON_PLAYING && d->connection_state != CON_EDITING)
-           || ( !can_see( ch, d->character ) && is_immortal( d->character ) )
+           || ( !can_see( ch, d->character ) && IsImmortal( d->character ) )
            || d->original)
         continue;
       wch   = d->original ? d->original : d->character;
@@ -249,7 +249,7 @@ void do_who( Character *ch, char *argument )
 
       race = race_text;
 
-      if (wch->stats.perm_frc > 0 && (ch->top_level >= LEVEL_GREATER) && !is_immortal(wch))
+      if (wch->stats.perm_frc > 0 && (ch->top_level >= LEVEL_GREATER) && !IsImmortal(wch))
         {
           if(is_jedi( wch ))
             force_char = '*';
@@ -278,7 +278,7 @@ void do_who( Character *ch, char *argument )
       else if ( wch->pcdata->rank && wch->pcdata->rank[0] != '\0' )
         race = wch->pcdata->rank;
 
-      if ( wch->pcdata->clan && ( (!is_npc(ch) &&  ch->pcdata->clan
+      if ( wch->pcdata->clan && ( (!IsNpc(ch) &&  ch->pcdata->clan
                                    && ch->pcdata->clan == wch->pcdata->clan )
                                   || is_god( ch ) ) )
         {
@@ -325,9 +325,9 @@ void do_who( Character *ch, char *argument )
       /* First make the structure. */
       CREATE( cur_who, WHO_DATA, 1 );
       cur_who->text = str_dup( buf );
-      if ( is_immortal( wch ) )
+      if ( IsImmortal( wch ) )
         cur_who->type = WT_IMM;
-      else if ( get_trust( wch ) <= 5 )
+      else if ( GetTrustLevel( wch ) <= 5 )
         cur_who->type = WT_NEWBIE;
       else
         cur_who->type = WT_MORTAL;

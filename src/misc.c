@@ -399,7 +399,7 @@ void actiondesc( Character *ch, OBJ_DATA *obj, void *vo )
       else if ( *srcptr == '%' && *++srcptr == 's' )
         {
           ichar = "You";
-          iroom = is_npc( ch ) ? ch->short_descr : ch->name;
+          iroom = IsNpc( ch ) ? ch->short_descr : ch->name;
         }
       else
         {
@@ -578,7 +578,7 @@ void set_title( Character *ch, const char *title )
   char buf[MAX_STRING_LENGTH];
   char *bufptr = buf;
 
-  if ( is_npc(ch) )
+  if ( IsNpc(ch) )
     {
       bug( "Set_title: NPC.", 0 );
       return;

@@ -7,7 +7,7 @@ void do_appoint ( Character *ch , char *argument )
 
   argument = one_argument( argument, arg );
 
-  if ( is_npc( ch ) || !ch->pcdata )
+  if ( IsNpc( ch ) || !ch->pcdata )
     return;
 
   if ( !ch->pcdata->clan )

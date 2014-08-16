@@ -5,7 +5,7 @@ void do_showplanet( Character *ch, char *argument )
 {
   PLANET_DATA *planet;
 
-  if ( is_npc( ch ) )
+  if ( IsNpc( ch ) )
     {
       send_to_char( "Huh?\r\n", ch );
       return;

@@ -6,7 +6,7 @@ void do_arena(Character *ch, char *argument)
 {
   char buf[MAX_INPUT_LENGTH];
 
-  if (is_npc(ch))
+  if (IsNpc(ch))
     {
       send_to_char("Mobs cant play in the arena.\r\n",ch);
       return;

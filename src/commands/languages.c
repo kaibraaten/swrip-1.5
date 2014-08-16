@@ -9,7 +9,7 @@ void do_languages( Character *ch, char *argument )
 
   argument = one_argument( argument, arg );
   if ( arg[0] != '\0' && !str_prefix( arg, "learn" ) &&
-       !is_immortal(ch) && !is_npc(ch) )
+       !IsImmortal(ch) && !IsNpc(ch) )
     {
       Character *sch;
       char arg2[MAX_INPUT_LENGTH];
@@ -52,7 +52,7 @@ void do_languages( Character *ch, char *argument )
           return;
         }
       for ( sch = ch->in_room->first_person; sch; sch = sch->next )
-        if ( is_npc(sch) && IS_SET(sch->act, ACT_SCHOLAR) &&
+        if ( IsNpc(sch) && IS_SET(sch->act, ACT_SCHOLAR) &&
              knows_language( sch, ch->speaking, ch ) &&
              knows_language( sch, lang_array[lang], sch ) &&
              (!sch->speaking || knows_language( ch, sch->speaking, sch )) )
@@ -69,7 +69,7 @@ void do_languages( Character *ch, char *argument )
         }
       ch->gold -= 25;
       /* Max 12% (5 + 4 + 3) at 24+ int and 21+ wis. -- Altrag */
-      prct = 5 + (get_curr_int(ch) / 6) + (get_curr_wis(ch) / 7);
+      prct = 5 + (GetCurrentIntelligence(ch) / 6) + (GetCurrentWisdom(ch) / 7);
       ch->pcdata->learned[sn] += prct;
       ch->pcdata->learned[sn] = UMIN(ch->pcdata->learned[sn], 99);
       SET_BIT( ch->speaks, lang_array[lang] );
@@ -96,7 +96,7 @@ void do_languages( Character *ch, char *argument )
         continue;
 
       if ( ch->speaking & lang_array[lang] ||
-           (is_npc(ch) && !ch->speaking) )
+           (IsNpc(ch) && !ch->speaking) )
         set_char_color( AT_RED, ch );
       else
         set_char_color( AT_SAY, ch );

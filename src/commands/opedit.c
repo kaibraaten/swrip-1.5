@@ -12,7 +12,7 @@ void do_opedit( Character *ch, char *argument )
   MPROG_DATA *mprog, *mprg, *mprg_next;
   int value, mptype, cnt;
 
-  if ( is_npc( ch ) )
+  if ( IsNpc( ch ) )
     {
       send_to_char( "Mob's can't opedit\r\n", ch );
       return;
@@ -68,7 +68,7 @@ void do_opedit( Character *ch, char *argument )
       return;
     }
 
-  if ( get_trust( ch ) < LEVEL_GREATER )
+  if ( GetTrustLevel( ch ) < LEVEL_GREATER )
     {
       if ( ( obj = get_obj_carry( ch, arg1 ) ) == NULL )
 	{

@@ -15,7 +15,7 @@ void do_wizhelp( Character *ch, char *argument )
 
       for ( cmd = command_hash[hash]; cmd; cmd = cmd->next )
 	{
-	  if ( cmd->level >= LEVEL_AVATAR && cmd->level <= get_trust( ch ) )
+	  if ( cmd->level >= LEVEL_AVATAR && cmd->level <= GetTrustLevel( ch ) )
 	    {
 	      pager_printf( ch, "%-12s", cmd->name );
 

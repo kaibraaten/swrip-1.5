@@ -1324,7 +1324,7 @@ void instaroom( Area *pArea, ROOM_INDEX_DATA *pRoom, bool dodoors )
 
   for ( rch = pRoom->first_person; rch; rch = rch->next_in_room )
     {
-      if ( !is_npc(rch) )
+      if ( !IsNpc(rch) )
 	{
 	  continue;
 	}
@@ -1726,7 +1726,7 @@ void reset_area( Area *pArea )
 
                   if ( pArea->nplayer > 0 ||
                        !(to_obj = get_obj_type(pObjToIndex)) ||
-                       (to_obj->carried_by && !is_npc(to_obj->carried_by)) ||
+                       (to_obj->carried_by && !IsNpc(to_obj->carried_by)) ||
                        is_trapped(to_obj) )
 		    {
 		      break;

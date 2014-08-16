@@ -10,7 +10,7 @@ void do_smalltalk ( Character *ch , char *argument )
   CLAN_DATA   *clan = NULL;
   int percent = 0;
 
-  if ( is_npc(ch) || !ch->pcdata )
+  if ( IsNpc(ch) || !ch->pcdata )
     {
       send_to_char( "What would be the point of that.\r\n", ch );
     }
@@ -61,7 +61,7 @@ void do_smalltalk ( Character *ch , char *argument )
     }
 
 
-  if ( !is_npc(victim) || victim->vip_flags == 0 )
+  if ( !IsNpc(victim) || victim->vip_flags == 0 )
     {
       send_to_char( "Diplomacy would be wasted on them.\r\n" , ch );
       return;
@@ -104,7 +104,7 @@ void do_smalltalk ( Character *ch , char *argument )
   act( AT_ACTION, "$n smiles at you and says, 'hello'.\r\n", ch, NULL, victim, TO_VICT    );
   act( AT_ACTION, "$n chats briefly with $N.\r\n",  ch, NULL, victim, TO_NOTVICT );
 
-  if ( is_npc(ch) || !ch->pcdata || !ch->pcdata->clan || !ch->in_room->area || !ch->in_room->area->planet )
+  if ( IsNpc(ch) || !ch->pcdata || !ch->pcdata->clan || !ch->in_room->area || !ch->in_room->area->planet )
     return;
 
   if ( ( clan = ch->pcdata->clan->mainclan ) == NULL )

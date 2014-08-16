@@ -9,7 +9,7 @@ void do_ban( Character *ch, char *argument )
   Ban *pban;
   int bnum;
 
-  if ( is_npc(ch) )
+  if ( IsNpc(ch) )
     return;
 
   argument = one_argument( argument, arg );

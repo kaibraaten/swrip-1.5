@@ -76,9 +76,9 @@ void do_craftingengine( Character *ch, char *argument )
 {
   CraftingSession *session = NULL;
 
-  if( is_npc( ch ) )
+  if( IsNpc( ch ) )
     {
-      bug( "%s:%d %s(): IsNPC(\"%s\") == true",
+      bug( "%s:%d %s(): IsNpc(\"%s\") == true",
            __FILE__, __LINE__, __FUNCTION__, ch->name );
       return;
     }
@@ -330,7 +330,7 @@ void FreeCraftingSession( CraftingSession *session )
 static bool CheckSkill( const CraftingSession *session )
 {
   Character *ch = session->Engineer;
-  int the_chance = is_npc(ch) ? ch->top_level : (int) (ch->pcdata->learned[session->Recipe->Skill]);
+  int the_chance = IsNpc(ch) ? ch->top_level : (int) (ch->pcdata->learned[session->Recipe->Skill]);
 
   if( number_percent() >= the_chance )
     {

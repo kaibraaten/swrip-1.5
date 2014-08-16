@@ -36,7 +36,7 @@ void do_drag( Character *ch, char *argument )
       return;
     }
 
-  if ( is_npc(victim) )
+  if ( IsNpc(victim) )
     {
       send_to_char("You can only drag player characters.\r\n", ch);
       return;
