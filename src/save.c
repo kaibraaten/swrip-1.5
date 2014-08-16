@@ -982,7 +982,7 @@ void fwrite_obj( const Character *ch, const OBJ_DATA *obj, FILE *fp, int iNest,
       if ( IS_VALID_SN(obj->value[OVAL_DEVICE_SPELL]) )
 	{
 	  fprintf( fp, "Spell 3      '%s'\n",
-		   skill_table[obj->value[3]]->name );
+		   skill_table[obj->value[OVAL_DEVICE_SPELL]]->name );
 	}
       break;
 

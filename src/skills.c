@@ -526,10 +526,10 @@ bool check_parry( Character *ch, Character *victim )
   else
     {
       if ( ( wield = get_eq_char( victim, WEAR_WIELD ) ) == NULL ||
-           ( wield->value[3] != WEAPON_LIGHTSABER ) )
+           ( wield->value[OVAL_WEAPON_TYPE] != WEAPON_LIGHTSABER ) )
         {
           if ( ( wield = get_eq_char( victim, WEAR_DUAL_WIELD ) ) == NULL ||
-               ( wield->value[3] != WEAPON_LIGHTSABER ) )
+               ( wield->value[OVAL_WEAPON_TYPE] != WEAPON_LIGHTSABER ) )
 	    {
 	      return false;
 	    }

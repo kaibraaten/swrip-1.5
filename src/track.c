@@ -383,7 +383,7 @@ void hunt_victim( Character *ch )
   {
     OBJ_DATA *wield = get_eq_char( ch, WEAR_WIELD );
 
-    if ( wield != NULL && wield->value[3] == WEAPON_BLASTER  )
+    if ( wield != NULL && wield->value[OVAL_WEAPON_TYPE] == WEAPON_BLASTER  )
       {
         if ( mob_snipe( ch, ch->hhf.hunting->who ) == true )
 	  {

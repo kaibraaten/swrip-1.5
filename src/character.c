@@ -391,8 +391,8 @@ void equip_char( Character *ch, OBJ_DATA *obj, int iWear )
     affect_modify( ch, paf, true );
 
   if ( obj->item_type == ITEM_LIGHT
-       &&   obj->value[2] != 0
-       &&   ch->in_room )
+       && obj->value[OVAL_LIGHT_POWER] != 0
+       && ch->in_room )
     ++ch->in_room->light;
 }
 
@@ -426,7 +426,7 @@ void unequip_char( Character *ch, OBJ_DATA *obj )
     return;
 
   if ( obj->item_type == ITEM_LIGHT
-       &&   obj->value[2] != 0
+       &&   obj->value[OVAL_LIGHT_POWER] != 0
        &&   ch->in_room
        &&   ch->in_room->light > 0 )
     --ch->in_room->light;
@@ -761,7 +761,7 @@ bool can_see_obj( const Character *ch, const OBJ_DATA *obj )
   if ( IS_OBJ_STAT(obj, ITEM_HIDDEN) )
     return false;
 
-  if ( obj->item_type == ITEM_LIGHT && obj->value[2] != 0 )
+  if ( obj->item_type == ITEM_LIGHT && obj->value[OVAL_LIGHT_POWER] != 0 )
     return true;
 
   if ( room_is_dark( ch->in_room ) && !is_affected_by(ch, AFF_INFRARED) )

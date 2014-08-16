@@ -508,25 +508,56 @@ int weapon_prof_bonus_check( Character *ch, OBJ_DATA *wield, int *gsn_ptr )
   bonus = 0;    *gsn_ptr = -1;
   if ( !is_npc(ch) && wield )
     {
-      switch(wield->value[3])
+      switch(wield->value[OVAL_WEAPON_TYPE])
         {
-        default:        *gsn_ptr = -1;                  break;
-        case 3:      *gsn_ptr = gsn_lightsabers;     break;
-        case 2: *gsn_ptr = gsn_vibro_blades;    break;
-        case 4: *gsn_ptr = gsn_flexible_arms;   break;
-        case 5: *gsn_ptr = gsn_talonous_arms;   break;
-        case 6: *gsn_ptr = gsn_blasters;        break;
-        case 8: *gsn_ptr = gsn_bludgeons;       break;
-        case 9: *gsn_ptr = gsn_bowcasters;      break;
-        case 11:        *gsn_ptr = gsn_force_pikes;     break;
+        default:
+	  *gsn_ptr = -1;
+	  break;
 
+        case 3:
+	  *gsn_ptr = gsn_lightsabers;
+	  break;
+
+        case 2:
+	  *gsn_ptr = gsn_vibro_blades;
+	  break;
+
+        case 4:
+	  *gsn_ptr = gsn_flexible_arms;
+	  break;
+
+        case 5:
+	  *gsn_ptr = gsn_talonous_arms;
+	  break;
+
+        case 6:
+	  *gsn_ptr = gsn_blasters;
+	  break;
+
+        case 8:
+	  *gsn_ptr = gsn_bludgeons;
+	  break;
+
+        case 9:
+	  *gsn_ptr = gsn_bowcasters;
+	  break;
+
+        case 11:
+	  *gsn_ptr = gsn_force_pikes;
+	  break;
         }
-      if ( *gsn_ptr != -1 )
-        bonus = (int) ( ch->pcdata->learned[*gsn_ptr] );
 
+      if ( *gsn_ptr != -1 )
+	{
+	  bonus = (int) ( ch->pcdata->learned[*gsn_ptr] );
+	}
     }
+
   if ( is_npc(ch) && wield )
-    bonus = get_trust(ch);
+    {
+      bonus = get_trust(ch);
+    }
+
   return bonus;
 }
 
@@ -681,7 +712,7 @@ ch_ret one_hit( Character *ch, Character *victim, int dt )
     {
       dt = TYPE_HIT;
       if ( wield && wield->item_type == ITEM_WEAPON )
-        dt += wield->value[3];
+        dt += wield->value[OVAL_WEAPON_TYPE];
     }
 
   /*
@@ -728,9 +759,14 @@ ch_ret one_hit( Character *ch, Character *victim, int dt )
    */
 
   if ( !wield )       /* dice formula fixed by Thoric */
-    dam = number_range( ch->barenumdie, ch->baresizedie * ch->barenumdie );
+    {
+      dam = number_range( ch->barenumdie, ch->baresizedie * ch->barenumdie );
+    }
   else
-    dam = number_range( wield->value[1], wield->value[2] );
+    {
+      dam = number_range( wield->value[OVAL_WEAPON_NUM_DAM_DIE],
+			  wield->value[OVAL_WEAPON_SIZE_DAM_DIE] );
+    }
 
   /*
    * Bonuses.
@@ -818,7 +854,7 @@ ch_ret one_hit( Character *ch, Character *victim, int dt )
 
   if ( dt == (TYPE_HIT + WEAPON_BLASTER ) && wield && wield->item_type == ITEM_WEAPON )
     {
-      if ( wield->value[4] < 1  )
+      if ( wield->value[OVAL_WEAPON_CHARGE] < 1  )
         {
           act( AT_YELLOW, "$n points their blaster at you but nothing happens.",  ch, NULL, victim, TO_VICT    );
           act( AT_YELLOW, "*CLICK* ... your blaster needs a new ammunition cell!", ch, NULL, victim, TO_CHAR    );
@@ -828,24 +864,24 @@ ch_ret one_hit( Character *ch, Character *victim, int dt )
             }
           return rNONE;
         }
-      else if ( wield->blaster_setting == BLASTER_FULL && wield->value[4] >=5 )
+      else if ( wield->blaster_setting == BLASTER_FULL && wield->value[OVAL_WEAPON_CHARGE] >=5 )
         {
           dam *=  1.5;
-          wield->value[4] -= 5;
+          wield->value[OVAL_WEAPON_CHARGE] -= 5;
         }
-      else if ( wield->blaster_setting == BLASTER_HIGH && wield->value[4] >=4 )
+      else if ( wield->blaster_setting == BLASTER_HIGH && wield->value[OVAL_WEAPON_CHARGE] >=4 )
         {
           dam *=  1.25;
-          wield->value[4] -= 4;
+          wield->value[OVAL_WEAPON_CHARGE] -= 4;
         }
-      else if ( wield->blaster_setting == BLASTER_NORMAL && wield->value[4] >=3 )
+      else if ( wield->blaster_setting == BLASTER_NORMAL && wield->value[OVAL_WEAPON_CHARGE] >=3 )
         {
-          wield->value[4] -= 3;
+          wield->value[OVAL_WEAPON_CHARGE] -= 3;
         }
-      else if ( wield->blaster_setting == BLASTER_STUN && wield->value[4] >=5 )
+      else if ( wield->blaster_setting == BLASTER_STUN && wield->value[OVAL_WEAPON_CHARGE] >=5 )
         {
           dam /= 10;
-          wield->value[4] -= 3;
+          wield->value[OVAL_WEAPON_CHARGE] -= 3;
           fail = false;
           hit_chance = ris_save( victim, get_level( ch, COMBAT_ABILITY ), RIS_PARALYSIS );
           if ( hit_chance == 1000 )
@@ -898,15 +934,15 @@ ch_ret one_hit( Character *ch, Character *victim, int dt )
 
             }
         }
-      else if ( wield->blaster_setting == BLASTER_HALF && wield->value[4] >=2 )
+      else if ( wield->blaster_setting == BLASTER_HALF && wield->value[OVAL_WEAPON_CHARGE] >=2 )
         {
           dam *=  0.75;
-          wield->value[4] -= 2;
+          wield->value[OVAL_WEAPON_CHARGE] -= 2;
         }
       else
         {
           dam *= 0.5;
-          wield->value[4] -= 1;
+          wield->value[OVAL_WEAPON_CHARGE] -= 1;
         }
 
     }
@@ -915,7 +951,7 @@ ch_ret one_hit( Character *ch, Character *victim, int dt )
            && wield && wield->item_type == ITEM_WEAPON
            )
     {
-      if ( wield->value[4] < 1  )
+      if ( wield->value[OVAL_WEAPON_CHARGE] < 1  )
         {
           act( AT_YELLOW, "Your vibro-blade needs recharging ...", ch, NULL, victim, TO_CHAR    );
           dam /= 3;
@@ -926,20 +962,20 @@ ch_ret one_hit( Character *ch, Character *victim, int dt )
            && wield && wield->item_type == ITEM_WEAPON
            )
     {
-      if ( wield->value[4] < 1  )
+      if ( wield->value[OVAL_WEAPON_CHARGE] < 1  )
         {
           act( AT_YELLOW, "Your force-pike needs recharging ...", ch, NULL, victim, TO_CHAR    );
           dam /= 2;
         }
       else
-        wield->value[4]--;
+        wield->value[OVAL_WEAPON_CHARGE]--;
     }
   else if (
            dt == (TYPE_HIT + WEAPON_LIGHTSABER )
            && wield && wield->item_type == ITEM_WEAPON
            )
     {
-      if ( wield->value[4] < 1  )
+      if ( wield->value[OVAL_WEAPON_CHARGE] < 1  )
         {
           act( AT_YELLOW, "$n waves a dead hand grip around in the air.",  ch, NULL, victim, TO_VICT    );
           act( AT_YELLOW, "You need to recharge your lightsaber ... it seems to be lacking a blade.", ch, NULL, victim, TO_CHAR    );
@@ -952,7 +988,7 @@ ch_ret one_hit( Character *ch, Character *victim, int dt )
     }
   else if ( dt == (TYPE_HIT + WEAPON_BOWCASTER ) && wield && wield->item_type == ITEM_WEAPON )
     {
-      if ( wield->value[4] < 1  )
+      if ( wield->value[OVAL_WEAPON_CHARGE] < 1  )
         {
           act( AT_YELLOW, "$n points their bowcaster at you but nothing happens.",  ch, NULL, victim, TO_VICT    );
           act( AT_YELLOW, "*CLICK* ... your bowcaster needs a new bolt cartridge!", ch, NULL, victim, TO_CHAR    );
@@ -963,7 +999,7 @@ ch_ret one_hit( Character *ch, Character *victim, int dt )
           return rNONE;
         }
       else
-        wield->value[4]--;
+        wield->value[OVAL_WEAPON_CHARGE]--;
     }
 
   if ( dam <= 0 )
@@ -1063,7 +1099,9 @@ ch_ret one_hit( Character *ch, Character *victim, int dt )
   if ( is_npc(victim) )
     {
       OBJ_DATA *wielding = get_eq_char( victim, WEAR_WIELD );
-      if ( wielding != NULL && wielding->value[3] == WEAPON_BLASTER && get_cover( victim ) == true )
+      if ( wielding != NULL
+	   && wielding->value[OVAL_WEAPON_TYPE] == WEAPON_BLASTER
+	   && get_cover( victim ) == true )
         {
           start_hating( victim, ch );
           start_hunting( victim, ch );

@@ -2382,7 +2382,6 @@ OBJ_DATA *create_object( OBJ_INDEX_DATA *pObjIndex, int level )
     case ITEM_DEVICE:
       obj->value[OVAL_DEVICE_LEVEL] = number_fuzzy( obj->value[OVAL_DEVICE_LEVEL] );
       obj->value[OVAL_DEVICE_MAX_CHARGES] = number_fuzzy( obj->value[OVAL_DEVICE_MAX_CHARGES] );
-      obj->value[OVAL_DEVICE_CHARGES] = obj->value[1];
       break;
 
     case ITEM_BATTERY:

@@ -277,19 +277,19 @@ void draw_map( Character *ch, char *desc )
       return;
     }
 
-  if (device->value[3] != 52 )
+  if (device->value[OVAL_DEVICE_SPELL] != 52 )
     {
       send_to_char( "You must have a scanner to draw a map of the surrounding area.\r\n", ch );
       return;
     }
 
-  if ( device->value[2] <= 0 )
+  if ( device->value[OVAL_DEVICE_CHARGES] <= 0 )
     {
       send_to_char( "Your scanner has no more charge left.", ch);
       return;
     }
 
-  device->value[2]--;
+  device->value[OVAL_DEVICE_CHARGES]--;
 
   /* Clear map */
   for( y = 0; y <= MAPY; y++ )
