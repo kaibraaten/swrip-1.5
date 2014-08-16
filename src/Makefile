@@ -592,7 +592,6 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(SPELLDIR)/dream.o \
 	$(SPELLDIR)/earthquake.o \
 	$(SPELLDIR)/energydrain.o \
-	$(SPELLDIR)/etherealfist.o \
 	$(SPELLDIR)/farsight.o \
 	$(SPELLDIR)/fireball.o \
 	$(SPELLDIR)/flamestrike.o \
@@ -602,30 +601,14 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(SPELLDIR)/invis.o \
 	$(SPELLDIR)/knowalignment.o \
 	$(SPELLDIR)/lightningbolt.o \
-	$(SPELLDIR)/locateobject.o \
-	$(SPELLDIR)/magicmissile.o \
-	$(SPELLDIR)/magneticthrust.o \
-	$(SPELLDIR)/midastouch.o \
-	$(SPELLDIR)/mindwrack.o \
-	$(SPELLDIR)/mindwrench.o \
 	$(SPELLDIR)/objinv.o \
-	$(SPELLDIR)/passdoor.o \
 	$(SPELLDIR)/poison.o \
-	$(SPELLDIR)/polymorph.o \
 	$(SPELLDIR)/possess.o \
-	$(SPELLDIR)/quantumspike.o \
-	$(SPELLDIR)/recharge.o \
 	$(SPELLDIR)/removeinvis.o \
 	$(SPELLDIR)/removetrap.o \
-	$(SPELLDIR)/revive.o \
-	$(SPELLDIR)/scorchingsurge.o \
 	$(SPELLDIR)/shockinggrasp.o \
 	$(SPELLDIR)/sleep.o \
 	$(SPELLDIR)/smaug.o \
-	$(SPELLDIR)/sonicresonance.o \
-	$(SPELLDIR)/spectralfuror.o \
-	$(SPELLDIR)/spiralblast.o \
-	$(SPELLDIR)/sulfurousspray.o \
 	$(SPELLDIR)/ventriloquate.o \
 	$(SPELLDIR)/weaken.o \
 
