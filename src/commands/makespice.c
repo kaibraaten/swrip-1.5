@@ -1,143 +1,140 @@
 #include <string.h>
 #include "mud.h"
 #include "character.h"
+#include "craft.h"
 
-static void OnStart( Character *ch, char *argument );
-static void OnFinished( Character *ch );
-static void OnAbort( Character *ch );
+struct UserData
+{
+  char *ItemName;
+  int SpiceType;
+  int SpiceGrade;
+};
+
+static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventArgs *args );
+static void CheckRequirementsHandler( void *userData, CheckRequirementsEventArgs *args );
+static void MaterialFoundHandler( void *userData, MaterialFoundEventArgs *args );
+static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args );
+static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *args );
+static void AbortHandler( void *userData, AbortCraftingEventArgs *args );
+static CraftRecipe *MakeCraftRecipe( void );
+static void FreeUserData( struct UserData *ud );
 
 void do_makespice( Character *ch, char *argument )
 {
-  switch( ch->substate )
+  struct UserData *data = NULL;
+  CraftRecipe *recipe = MakeCraftRecipe();
+  CraftingSession *session = AllocateCraftingSession( recipe, ch, argument );
+
+  CREATE( data, struct UserData, 1 );
+
+  AddInterpretArgumentsCraftingHandler( session, data, InterpretArgumentsHandler );
+  AddCheckRequirementsCraftingHandler( session, data, CheckRequirementsHandler );
+  AddMaterialFoundCraftingHandler( session, data, MaterialFoundHandler );
+  AddSetObjectStatsCraftingHandler( session, data, SetObjectStatsHandler );
+  AddFinishedCraftingHandler( session, data, FinishedCraftingHandler );
+  AddAbortCraftingHandler( session, data, AbortHandler );
+
+  StartCrafting( session );
+}
+
+static CraftRecipe *MakeCraftRecipe( void )
+{
+  static const struct CraftingMaterial materials[] =
     {
-    default:
-      OnStart( ch, argument );
-      break;
+      { ITEM_RAWSPICE, CRAFTFLAG_EXTRACT },
+      { ITEM_NONE,      CRAFTFLAG_NONE }
+    };
+  CraftRecipe *recipe = AllocateCraftRecipe( gsn_spice_refining, materials,
+					     10, OBJ_VNUM_CRAFTING_SPICE,
+					     CRAFTFLAG_NEED_REFINERY );
 
-    case SUB_PAUSE:
-      ch->substate = SUB_NONE;
-      OnFinished( ch );
-      break;
+  return recipe;
+}
 
-    case SUB_TIMER_DO_ABORT:
-      ch->substate = SUB_NONE;
-      OnAbort( ch );
-      break;
+static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventArgs *args )
+{
+  struct UserData *ud = (struct UserData*) userData;
+  Character *ch = GetEngineer( args->CraftingSession );
+
+  if ( args->CommandArguments[0] == '\0' )
+    {
+      ch_printf( ch, "&RUsage: Makespice <name>\r\n&w" );
+      args->AbortSession = true;
+      return;
+    }
+
+  ud->ItemName = str_dup( args->CommandArguments );
+}
+
+static void CheckRequirementsHandler( void *userData, CheckRequirementsEventArgs *args )
+{
+
+}
+
+static void MaterialFoundHandler( void *userData, MaterialFoundEventArgs *args )
+{
+  struct UserData *ud = (struct UserData*) userData;
+
+  if( args->Object->item_type == ITEM_RAWSPICE )
+    {
+      ud->SpiceType = args->Object->value[OVAL_RAWSPICE_TYPE];
+      ud->SpiceGrade = args->Object->value[OVAL_RAWSPICE_GRADE];
     }
 }
 
-static void OnAbort( Character *ch )
+static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args )
 {
-  DISPOSE( ch->dest_buf );
-  send_to_char("&RYou are distracted and are unable to finish your work.\r\n&w", ch);
-}
-
-static void OnStart( Character *ch, char *argument )
-{
-  char arg[MAX_INPUT_LENGTH];
-  int the_chance = 0;
-  OBJ_DATA *obj = NULL;
-
-  strcpy( arg, argument );
-
-  if ( arg[0] == '\0' )
-    {
-      send_to_char( "&RFrom what?\r\n&w", ch);
-      return;
-    }
-
-  if ( !IS_SET( ch->in_room->room_flags, ROOM_REFINERY ) )
-    {
-      send_to_char( "&RYou need to be in a refinery to create drugs from spice.\r\n", ch);
-      return;
-    }
-
-  if ( ms_find_obj(ch) )
-    return;
-
-  if ( ( obj = get_obj_carry( ch, arg ) ) == NULL )
-    {
-      send_to_char( "&RYou do not have that item.\r\n&w", ch );
-      return;
-    }
-
-  if ( obj->item_type != ITEM_RAWSPICE )
-    {
-      send_to_char( "&RYou can't make a drug out of that\r\n&w",ch);
-      return;
-    }
-
-  the_chance = is_npc(ch) ? ch->top_level
-    : (int) (ch->pcdata->learned[gsn_spice_refining]);
-
-  if ( number_percent( ) < the_chance )
-    {
-      send_to_char( "&GYou begin the long process of refining spice into a drug.\r\n", ch);
-      act( AT_PLAIN, "$n begins working on something.", ch,
-	   NULL, argument , TO_ROOM );
-      add_timer ( ch , TIMER_DO_FUN , 10 , do_makespice , SUB_PAUSE );
-      ch->dest_buf = str_dup(arg);
-    }
-  else
-    {
-      send_to_char("&RYou can't figure out what to do with the stuff.\r\n",ch);
-      learn_from_failure( ch, gsn_spice_refining );
-    }
-}
-
-static void OnFinished( Character *ch )
-{
-  char arg[MAX_INPUT_LENGTH];
+  struct UserData *ud = (struct UserData*) userData;
   char buf[MAX_STRING_LENGTH];
-  OBJ_DATA *obj = NULL;
-  long xpgain = 0;
+  OBJ_DATA *spice = args->Object;
+  Character *ch = GetEngineer( args->CraftingSession );
 
-  if ( !ch->dest_buf )
-    return;
+  spice->value[OVAL_SPICE_GRADE] = urange(10, ud->SpiceGrade, ( is_npc(ch) ? ch->top_level : (int) (ch->pcdata->learned[gsn_spice_refining]) ) + 10);
 
-  strcpy(arg, (const char*)ch->dest_buf);
-  DISPOSE( ch->dest_buf);
+  strcpy( buf, ud->ItemName );
+  STRFREE( spice->name );
+  strcat( buf, " drug spice " );
+  strcat( buf, get_spicetype_name( ud->SpiceType ) );
+  spice->name = STRALLOC( buf );
 
-  if ( ( obj = get_obj_carry( ch, arg ) ) == NULL )
-    {
-      send_to_char( "You seem to have lost your spice!\r\n", ch );
-      return;
-    }
-  if ( obj->item_type != ITEM_RAWSPICE )
-    {
-      send_to_char( "&RYou get your tools mixed up and can't finish your work.\r\n&w",ch);
-      return;
-    }
+  strcpy( buf, ud->ItemName );
+  STRFREE( spice->short_descr );
+  spice->short_descr = STRALLOC( buf );
 
-  obj->value[OVAL_SPICE_GRADE] = URANGE (10, obj->value[OVAL_SPICE_GRADE], ( is_npc(ch) ? ch->top_level
-									     : (int) (ch->pcdata->learned[gsn_spice_refining]) ) +10);
-
-  strcpy( buf, obj->name );
-  STRFREE( obj->name );
-  strcat( buf, " drug spice" );
-  obj->name = STRALLOC( buf );
-  strcpy( buf, "a drug made from " );
-  strcat( buf, obj->short_descr );
-  STRFREE( obj->short_descr );
-  obj->short_descr = STRALLOC( buf );
   strcat( buf, " was foolishly left lying around here." );
-  STRFREE( obj->description );
-  obj->description = STRALLOC( buf );
-  obj->item_type = ITEM_SPICE;
+  STRFREE( spice->description );
+  spice->description = STRALLOC( capitalize( buf ) );
+
+  spice->item_type = ITEM_SPICE;
+  spice->value[OVAL_SPICE_TYPE] = ud->SpiceType;
+  spice->value[OVAL_SPICE_GRADE] = ud->SpiceGrade;
 
   send_to_char( "&GYou finish your work.\r\n", ch);
-  act( AT_PLAIN, "$n finishes $s work.", ch,
-       NULL, NULL, TO_ROOM );
+  act( AT_PLAIN, "$n finishes $s work.", ch, NULL, NULL, TO_ROOM );
 
-  if ( !obj->cost )
-    obj->cost = 500;
+  spice->cost  = 500;
+  spice->cost += spice->value[OVAL_SPICE_GRADE] * 10;
+  spice->cost *= 2;
+}
 
-  obj->cost += obj->value[OVAL_SPICE_GRADE] * 10;
-  obj->cost *= 2;
+static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *args )
+{
+  struct UserData *ud = (struct UserData*) userData;
+  FreeUserData( ud );
+}
 
-  xpgain = UMIN( obj->cost*50 ,( exp_level(get_level(ch, ENGINEERING_ABILITY ) + 1) - exp_level(get_level( ch, ENGINEERING_ABILITY ) ) ) );
-  gain_exp(ch, ENGINEERING_ABILITY, xpgain );
-  ch_printf( ch , "You gain %d engineering experience.", xpgain );
+static void AbortHandler( void *userData, AbortCraftingEventArgs *args )
+{
+  struct UserData *ud = (struct UserData*) userData;
+  FreeUserData( ud );
+}
 
-  learn_from_success( ch, gsn_spice_refining );
+static void FreeUserData( struct UserData *ud )
+{
+  if( ud->ItemName )
+    {
+      DISPOSE( ud->ItemName );
+    }
+
+  DISPOSE( ud );
 }

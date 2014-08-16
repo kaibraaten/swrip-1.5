@@ -29,6 +29,8 @@
 #define CRAFTFLAG_EXTRACT        BV00
 #define CRAFTFLAG_OPTIONAL       BV01
 #define CRAFTFLAG_NEED_WORKSHOP  BV02
+#define CRAFTFLAG_NEED_REFINERY  BV03
+
 /*
  * Moved to types.h for now.
 struct CraftingSession;

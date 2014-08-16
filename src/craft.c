@@ -185,6 +185,13 @@ static void CheckRequirementsHandler( void *userData, CheckRequirementsEventArgs
       ch_printf( ch, "&RYou need to be in a factory or workshop to do that.\r\n" );
       args->AbortSession = true;
     }
+
+  if( IS_SET( args->CraftingSession->Recipe->Flags, CRAFTFLAG_NEED_REFINERY )
+      && !IS_SET( ch->in_room->room_flags, ROOM_REFINERY ) )
+    {
+      ch_printf( ch, "&RYou need to be in a refinery to do that.\r\n" );
+      args->AbortSession = true;
+    }
 }
 
 static void OnAbort( CraftingSession *session )

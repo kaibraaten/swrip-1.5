@@ -2213,7 +2213,7 @@ const char *get_weapontype_name( size_t type )
 
 const char * const spice_table[] =
   {
-    "glitterstim", "carsanum", "ryll","andris","lumni","s5","s6","s7","s8","s9"
+    "glitterstim", "carsanum", "ryll","andris","lumni"
   };
 
 size_t spicetable_size(void)
