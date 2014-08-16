@@ -13,7 +13,7 @@ $
 #FLAGS
 3 3
 
-#ECONOMY 0 496059830
+#ECONOMY 0 496059470
 
 #MOBILES
 #10340
@@ -813,6 +813,14 @@ a prototype disguise~
 A prototype disguise is here.~
 ~
 92 0 1
+0 0 0 0
+1 0 0
+#10435
+prototype spice~
+a prototype spice~
+A prototype spice is here.~
+~
+78 0 1
 0 0 0 0
 1 0 0
 #10487
