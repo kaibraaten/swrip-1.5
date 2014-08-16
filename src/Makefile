@@ -582,20 +582,13 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(SPELLDIR)/causelight.o \
 	$(SPELLDIR)/causeserious.o \
 	$(SPELLDIR)/charmperson.o \
-	$(SPELLDIR)/chilltouch.o \
-	$(SPELLDIR)/colourspray.o \
-	$(SPELLDIR)/controlweather.o \
-	$(SPELLDIR)/createfood.o \
 	$(SPELLDIR)/createmob.o \
 	$(SPELLDIR)/createobj.o \
-	$(SPELLDIR)/createwater.o \
 	$(SPELLDIR)/cureblindness.o \
 	$(SPELLDIR)/curepoison.o \
-	$(SPELLDIR)/curse.o \
 	$(SPELLDIR)/detectpoison.o \
 	$(SPELLDIR)/dispelevil.o \
 	$(SPELLDIR)/dispelmagic.o \
-	$(SPELLDIR)/disruption.o \
 	$(SPELLDIR)/dream.o \
 	$(SPELLDIR)/earthquake.o \
 	$(SPELLDIR)/enchantweapon.o \
