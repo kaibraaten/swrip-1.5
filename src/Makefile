@@ -572,12 +572,8 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(SPECDIR)/rebeltrooper.o \
 	$(SPECDIR)/stormtrooper.o \
 	$(SPECDIR)/thief.o \
-	$(SPELLDIR)/acetumprimus.o \
-	$(SPELLDIR)/acidblast.o \
-	$(SPELLDIR)/acidbreath.o \
 	$(SPELLDIR)/affect.o \
 	$(SPELLDIR)/affectchar.o \
-	$(SPELLDIR)/animatedead.o \
 	$(SPELLDIR)/areaattack.o \
 	$(SPELLDIR)/attack.o \
 	$(SPELLDIR)/blackfist.o \
