@@ -50,9 +50,9 @@ void do_oset( Character *ch, char *argument )
        */
       ed  = (ExtraDescription*)ch->dest_buf;
       STRFREE( ed->description );
-      ed->description = copy_buffer( ch );
+      ed->description = CopyBuffer( ch );
       tmpobj = (OBJ_DATA*)ch->spare_ptr;
-      stop_editing( ch );
+      StopEditing( ch );
       ch->dest_buf = tmpobj;
       ch->substate = ch->tempnum;
       return;
@@ -71,12 +71,12 @@ void do_oset( Character *ch, char *argument )
       if ( obj && obj_extracted(obj) )
         {
           send_to_char( "Your object was extracted!\r\n", ch );
-          stop_editing( ch );
+          StopEditing( ch );
           return;
         }
 
       STRFREE( obj->description );
-      obj->description = copy_buffer( ch );
+      obj->description = CopyBuffer( ch );
 
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
         {
@@ -85,7 +85,7 @@ void do_oset( Character *ch, char *argument )
 	}
 
       tmpobj = (OBJ_DATA*)ch->spare_ptr;
-      stop_editing( ch );
+      StopEditing( ch );
       ch->substate = ch->tempnum;
       ch->dest_buf = tmpobj;
       return;
@@ -502,7 +502,7 @@ void do_oset( Character *ch, char *argument )
         ch->spare_ptr = NULL;
       ch->substate = SUB_OBJ_LONG;
       ch->dest_buf = obj;
-      start_editing( ch, obj->description );
+      StartEditing( ch, obj->description );
       return;
     }
 
@@ -668,7 +668,7 @@ void do_oset( Character *ch, char *argument )
         ch->spare_ptr = NULL;
       ch->substate = SUB_OBJ_EXTRA;
       ch->dest_buf = ed;
-      start_editing( ch, ed->description );
+      StartEditing( ch, ed->description );
       return;
     }
 
@@ -699,7 +699,7 @@ void do_oset( Character *ch, char *argument )
         ch->spare_ptr = NULL;
       ch->substate = SUB_OBJ_EXTRA;
       ch->dest_buf = ed;
-      start_editing( ch, ed->description );
+      StartEditing( ch, ed->description );
       return;
     }
 

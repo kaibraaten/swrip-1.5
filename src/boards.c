@@ -319,14 +319,14 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
            ||     paper->item_type != ITEM_PAPER )
         {
           bug("%s: player not holding paper", __FUNCTION__);
-          stop_editing( ch );
+          StopEditing( ch );
           return;
         }
 
       ed = (ExtraDescription*)ch->dest_buf;
       STRFREE( ed->description );
-      ed->description = copy_buffer( ch );
-      stop_editing( ch );
+      ed->description = CopyBuffer( ch );
+      StopEditing( ch );
       return;
     }
 
@@ -689,7 +689,7 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
 	      --quill->value[OVAL_PEN_INK_AMOUNT];
 	    }
 
-          start_editing( ch, ed->description );
+          StartEditing( ch, ed->description );
           return;
         }
       else

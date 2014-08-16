@@ -142,8 +142,8 @@ typedef struct mob_prog_data           MPROG_DATA;
 struct mob_prog_act_list;
 typedef struct mob_prog_act_list       MPROG_ACT_LIST;
 
-struct editor_data;
-typedef struct editor_data             EDITOR_DATA;
+struct Editor;
+typedef struct Editor                  Editor;
 
 struct teleport_data;
 typedef struct teleport_data           TELEPORT_DATA;

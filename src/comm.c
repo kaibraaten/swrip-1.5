@@ -541,7 +541,7 @@ void game_loop( )
                             interpret( d->character, cmdline );
                             break;
                           case CON_EDITING:
-                            edit_buffer( d->character, cmdline );
+                            EditBuffer( d->character, cmdline );
                             break;
                           }
                     }

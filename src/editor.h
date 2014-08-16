@@ -35,10 +35,10 @@
 
 #include "types.h"
 
-void start_editing( Character *ch, char *data );
-void stop_editing( Character *ch );
-void edit_buffer( Character *ch, char *argument );
-char *copy_buffer( Character *ch );
-void set_editor_desc( Character *ch, const char *desc_fmt, ... );
+void StartEditing( Character *ch, char *data );
+void StopEditing( Character *ch );
+void EditBuffer( Character *ch, char *argument );
+char *CopyBuffer( Character *ch );
+void SetEditorDescription( Character *ch, const char *desc_fmt, ... );
 
 #endif

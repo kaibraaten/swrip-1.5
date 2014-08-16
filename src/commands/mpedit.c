@@ -45,8 +45,8 @@ void do_mpedit( Character *ch, char *argument )
       if ( mprog->comlist )
         STRFREE( mprog->comlist );
 
-      mprog->comlist = copy_buffer( ch );
-      stop_editing( ch );
+      mprog->comlist = CopyBuffer( ch );
+      StopEditing( ch );
       return;
     }
 

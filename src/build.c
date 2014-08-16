@@ -1056,7 +1056,7 @@ void mpedit( Character *ch, MPROG_DATA *mprg, int mptype, char *argument )
   ch->dest_buf = mprg;
   if ( !mprg->comlist )
     mprg->comlist = STRALLOC( "" );
-  start_editing( ch, mprg->comlist );
+  StartEditing( ch, mprg->comlist );
 }
 
 /*
@@ -1075,5 +1075,5 @@ void rpedit( Character *ch, MPROG_DATA *mprg, int mptype, char *argument )
   ch->dest_buf = mprg;
   if(!mprg->comlist)
     mprg->comlist = STRALLOC("");
-  start_editing( ch, mprg->comlist );
+  StartEditing( ch, mprg->comlist );
 }

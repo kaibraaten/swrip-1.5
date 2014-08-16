@@ -29,13 +29,13 @@ void do_description( Character *ch, char *argument )
     case SUB_NONE:
       ch->substate = SUB_PERSONAL_DESC;
       ch->dest_buf = ch;
-      start_editing( ch, ch->description );
+      StartEditing( ch, ch->description );
       return;
 
     case SUB_PERSONAL_DESC:
       STRFREE( ch->description );
-      ch->description = copy_buffer( ch );
-      stop_editing( ch );
+      ch->description = CopyBuffer( ch );
+      StopEditing( ch );
       return;
     }
 }

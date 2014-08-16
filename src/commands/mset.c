@@ -48,17 +48,17 @@ void do_mset( Character *ch, char *argument )
       if ( char_died(victim) )
         {
           send_to_char( "Your victim died!\r\n", ch );
-          stop_editing( ch );
+          StopEditing( ch );
           return;
         }
       STRFREE( victim->description );
-      victim->description = copy_buffer( ch );
+      victim->description = CopyBuffer( ch );
       if ( IsNpc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
         {
           STRFREE( victim->pIndexData->description );
           victim->pIndexData->description = QUICKLINK( victim->description );
         }
-      stop_editing( ch );
+      StopEditing( ch );
       ch->substate = ch->tempnum;
       return;
     }
@@ -863,7 +863,7 @@ void do_mset( Character *ch, char *argument )
         ch->tempnum = SUB_NONE;
       ch->substate = SUB_MOB_DESC;
       ch->dest_buf = victim;
-      start_editing( ch, victim->description );
+      StartEditing( ch, victim->description );
       return;
     }
 

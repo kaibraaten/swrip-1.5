@@ -138,14 +138,14 @@ void do_comment( Character *ch, char *argument )
         {
           bug( "do_comment: note got lost?", 0 );
           send_to_char( "Your note got lost!\r\n", ch );
-          stop_editing(ch);
+          StopEditing(ch);
           return;
         }
       if ( ch->dest_buf != ch->pcdata->pnote )
         bug( "do_comment: sub_writing_note: ch->dest_buf != ch->pnote", 0 );
       STRFREE( ch->pcdata->pnote->text );
-      ch->pcdata->pnote->text = copy_buffer( ch );
-      stop_editing( ch );
+      ch->pcdata->pnote->text = CopyBuffer( ch );
+      StopEditing( ch );
       return;
     }
 
@@ -293,7 +293,7 @@ void do_comment( Character *ch, char *argument )
       note_attach( ch );
       ch->substate = SUB_WRITING_NOTE;
       ch->dest_buf = ch->pcdata->pnote;
-      start_editing( ch, ch->pcdata->pnote->text );
+      StartEditing( ch, ch->pcdata->pnote->text );
       return;
     }
 

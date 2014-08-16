@@ -27,13 +27,13 @@ void do_hedit( Character *ch, char *argument )
       if ( !pHelp )
         {
           bug( "hedit: sub_help_edit: NULL ch->dest_buf", 0 );
-          stop_editing( ch );
+          StopEditing( ch );
           return;
         }
 
       STRFREE( pHelp->text );
-      pHelp->text = copy_buffer( ch );
-      stop_editing( ch );
+      pHelp->text = CopyBuffer( ch );
+      StopEditing( ch );
       return;
     }
 
@@ -48,5 +48,5 @@ void do_hedit( Character *ch, char *argument )
 
   ch->substate = SUB_HELP_EDIT;
   ch->dest_buf = pHelp;
-  start_editing( ch, pHelp->text );
+  StartEditing( ch, pHelp->text );
 }

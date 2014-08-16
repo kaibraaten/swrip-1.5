@@ -29,13 +29,13 @@ void do_bio( Character *ch, char *argument )
     case SUB_NONE:
       ch->substate = SUB_PERSONAL_BIO;
       ch->dest_buf = ch;
-      start_editing( ch, ch->pcdata->bio );
+      StartEditing( ch, ch->pcdata->bio );
       return;
 
     case SUB_PERSONAL_BIO:
       STRFREE( ch->pcdata->bio );
-      ch->pcdata->bio = copy_buffer( ch );
-      stop_editing( ch );
+      ch->pcdata->bio = CopyBuffer( ch );
+      StopEditing( ch );
       return;
     }
 }

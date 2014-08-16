@@ -42,7 +42,7 @@
  * Data types and other definitions
  */
 
-typedef struct editor_line EDITOR_LINE;
+typedef struct EditorLine EditorLine;
 
 #define CHAR_BLOCK (80)
 
@@ -59,19 +59,19 @@ typedef struct editor_line EDITOR_LINE;
       (buf_size) += added_size;                                 \
     }
 
-struct editor_line
+struct EditorLine
 {
   char        *line;           /* line text */
   short        line_size;      /* size allocated in "line" */
   short        line_used;      /* bytes used of "line" */
-  EDITOR_LINE *next;
+  EditorLine *next;
 };
 
-struct  editor_data
+struct Editor
 {
-  EDITOR_LINE *first_line;     /* list of lines */
+  EditorLine *first_line;     /* list of lines */
   short        line_count;     /* number of lines allocated */
-  EDITOR_LINE *on_line;        /* pointer to the line being edited */
+  EditorLine *on_line;        /* pointer to the line being edited */
   int          text_size;      /* total size of text (not counting
                                   newlines). */
   int          max_size;       /* max size in chars of string being
@@ -97,46 +97,49 @@ struct  editor_data
  */
 
 /* funcs to manipulate editor datas */
-static EDITOR_LINE *make_new_line( char *str );
-static void discard_editdata( EDITOR_DATA *edd );
-static EDITOR_DATA *clone_editdata( EDITOR_DATA *edd );
-static EDITOR_DATA *str_to_editdata( char *str, short max_size );
-static char *editdata_to_str( EDITOR_DATA *edd );
+static EditorLine *make_new_line( char *str );
+static void discard_editdata( Editor *edd );
+static Editor *clone_editdata( Editor *edd );
+static Editor *str_to_editdata( char *str, short max_size );
+static char *editdata_to_str( Editor *edd );
 
-static void start_editing_nolimit( Character *ch, char *old_text, short max_total );
+static void StartEditing_nolimit( Character *ch, char *old_text, short max_total );
 
 /* misc functions */
 static char *finer_one_argument( char *argument, char *arg_first );
 static char *text_replace( char *src, char *word_src, char *word_dst, short *pnew_size, short *prepl_count );
 
 /* editor sub functions */
-static void editor_print_info( Character *ch, EDITOR_DATA *edd, char *argument );
-static void editor_help( Character *ch, EDITOR_DATA *edd, char *argument );
-static void editor_clear_buf( Character *ch, EDITOR_DATA *edd, char *argument );
-static void editor_search_and_replace( Character *ch, EDITOR_DATA *edd, char *argument );
-static void editor_insert_line( Character *ch, EDITOR_DATA *edd, char *argument );
-static void editor_delete_line( Character *ch, EDITOR_DATA *edd, char *argument );
-static void editor_goto_line( Character *ch, EDITOR_DATA *edd, char *argument );
-static void editor_list( Character *ch, EDITOR_DATA *edd, char *argument );
-static void editor_abort( Character *ch, EDITOR_DATA *edd, char *argument );
-static void editor_escaped_cmd( Character *ch, EDITOR_DATA *edd, char *argument );
-static void editor_save( Character *ch, EDITOR_DATA *edd, char *argument );
+static void editor_print_info( Character *ch, Editor *edd, char *argument );
+static void editor_help( Character *ch, Editor *edd, char *argument );
+static void editor_clear_buf( Character *ch, Editor *edd, char *argument );
+static void editor_search_and_replace( Character *ch, Editor *edd, char *argument );
+static void editor_insert_line( Character *ch, Editor *edd, char *argument );
+static void editor_delete_line( Character *ch, Editor *edd, char *argument );
+static void editor_goto_line( Character *ch, Editor *edd, char *argument );
+static void editor_list( Character *ch, Editor *edd, char *argument );
+static void editor_abort( Character *ch, Editor *edd, char *argument );
+static void editor_escaped_cmd( Character *ch, Editor *edd, char *argument );
+static void editor_save( Character *ch, Editor *edd, char *argument );
 
 /****************************************************************************
  * Edit_data manipulation functions
  */
 
-static EDITOR_LINE *make_new_line( char *str )
+static EditorLine *make_new_line( char *str )
 {
-  EDITOR_LINE *new_line;
-  short size;
+  EditorLine *new_line = NULL;
+  short size = 0;
 
   size = strlen( str );
   size = BLOCK_ROUNDUP( size );
-  if( size == 0 )
-    size = CHAR_BLOCK;
 
-  CREATE(new_line, EDITOR_LINE, 1);
+  if( size == 0 )
+    {
+      size = CHAR_BLOCK;
+    }
+
+  CREATE(new_line, EditorLine, 1);
   CREATE(new_line->line, char, size);
   new_line->line_size = size;
   new_line->line_used = strlen( str );
@@ -145,35 +148,44 @@ static EDITOR_LINE *make_new_line( char *str )
   return new_line;
 }
 
-static void discard_editdata( EDITOR_DATA *edd )
+static void discard_editdata( Editor *edd )
 {
-  EDITOR_LINE *eline, *elnext;
+  EditorLine *eline = edd->first_line;
 
-  eline = edd->first_line;
   while( eline )
     {
-      elnext = eline->next;
+      EditorLine *elnext = eline->next;
       DISPOSE( eline->line );
       DISPOSE( eline );
       eline = elnext;
     }
+
   if( edd->desc )
-    STRFREE( edd->desc );
+    {
+      STRFREE( edd->desc );
+    }
+
   DISPOSE( edd );
 }
 
-static EDITOR_DATA *clone_editdata( EDITOR_DATA *edd )
+static Editor *clone_editdata( Editor *edd )
 {
-  EDITOR_DATA *new_edd;
-  EDITOR_LINE *new_line, *eline, root_line;
+  Editor *new_edd = NULL;
+  EditorLine *eline = NULL;
+  EditorLine root_line;
+  EditorLine *new_line = &root_line;
 
-  CREATE( new_edd, EDITOR_DATA, 1 );
-  new_line = &root_line;
+  CREATE( new_edd, Editor, 1 );
+
   for( eline = edd->first_line ; eline ; eline = eline->next )
     {
       new_line->next = make_new_line( eline->line );
+
       if( edd->on_line == eline )
-        new_edd->on_line = new_line->next;
+	{
+	  new_edd->on_line = new_line->next;
+	}
+
       new_line = new_line->next;
     }
 
@@ -186,35 +198,37 @@ static EDITOR_DATA *clone_editdata( EDITOR_DATA *edd )
   return new_edd;
 }
 
-static EDITOR_DATA *str_to_editdata( char *str, short max_size )
+static Editor *str_to_editdata( char *str, short max_size )
 {
-  char *p;
-  EDITOR_DATA *edd;
-  EDITOR_LINE *eline;
-  short i;
-  short tsize, line_count;
+  char *p = str;
+  Editor *edd = NULL;
+  EditorLine *eline = make_new_line( "" );
+  short i = 0;
+  short tsize = 0;
+  short line_count = 1;
 
-  CREATE(edd, EDITOR_DATA, 1);
-  eline = make_new_line( "" );
+  CREATE(edd, Editor, 1);
+
   edd->first_line = eline;
-  i = 0;
 
-  tsize = 0;
-  line_count = 1;
-  p = str;
   while( *p )
     {
       if( tsize + line_count*2 + 1 >= max_size )
-        break;
+	{
+	  break;
+	}
+
       if( *p == '\r' )
-        ;
+	{
+	  ;
+	}
       else if( *p == '\n' )
         {
           eline->line[i] = '\0';
           eline->next = make_new_line( "" );
           eline = eline->next;
           line_count++;
-          i=0;
+	  i = 0;
         }
       else
         {
@@ -225,6 +239,7 @@ static EDITOR_DATA *str_to_editdata( char *str, short max_size )
           RESIZE_IF_NEEDED( eline->line, eline->line_size,
                             eline->line_used, 1 );
         }
+
       p++;
     }
 
@@ -244,25 +259,31 @@ static EDITOR_DATA *str_to_editdata( char *str, short max_size )
   return edd;
 }
 
-static char *editdata_to_str( EDITOR_DATA *edd )
+static char *editdata_to_str( Editor *edd )
 {
-  EDITOR_LINE *eline;
-  char *buf, *src, *tmp;
-  short size, used, i;
+  EditorLine *eline = edd->first_line;
+  char *buf = NULL;
+  char *tmp = NULL;
+  short size = MAX_STRING_LENGTH;
+  short used = 0;
+  short i = 0;
 
   CREATE(buf, char, MAX_STRING_LENGTH );
-  size = MAX_STRING_LENGTH;
-  used = 0;
+
   buf[0] = '\0';
 
-  eline = edd->first_line;
-  i = 0;
   while( eline )
     {
+      char *src = NULL;
+
       /* ignore the last empty line */
       if( eline->next == NULL && eline->line[0] == '\0' )
-        break;
+	{
+	  break;
+	}
+
       src = eline->line;
+
       while( *src )
         {
           buf[i++] = *src++;
@@ -274,6 +295,7 @@ static char *editdata_to_str( EDITOR_DATA *edd )
               size += MAX_STRING_LENGTH;
             }
         }
+
       buf[i++] = '\n';
       buf[i++] = '\r';
       used += 2;
@@ -289,50 +311,58 @@ static char *editdata_to_str( EDITOR_DATA *edd )
   return tmp;
 }
 
-
-
 /****************************************************************************
  * Main editor functions
  */
 
-void start_editing( Character *ch, char *data )
+void StartEditing( Character *ch, char *data )
 {
-  start_editing_nolimit( ch, data, MAX_STRING_LENGTH );
+  StartEditing_nolimit( ch, data, MAX_STRING_LENGTH );
 }
 
-void set_editor_desc( Character *ch, const char *desc_fmt, ... )
+void SetEditorDescription( Character *ch, const char *desc_fmt, ... )
 {
   char buf[ MAX_STRING_LENGTH * 2 ]; /* umpf.. */
   va_list args;
 
   if( !ch || !ch->editor )
-    return;
+    {
+      return;
+    }
 
   va_start(args, desc_fmt);
   vsprintf(buf, desc_fmt, args);
   va_end(args);
 
   if( ch->editor->desc )
-    STRFREE( ch->editor->desc );
+    {
+      STRFREE( ch->editor->desc );
+    }
 
   ch->editor->desc = STRALLOC( buf );
 }
 
-static void start_editing_nolimit( Character *ch, char *old_text, short max_total )
+static void StartEditing_nolimit( Character *ch, char *old_text, short max_total )
 {
   if ( !ch->desc )
     {
-      bug( "Fatal: start_editing: no desc", 0 );
+      bug( "Fatal: StartEditing: no desc", 0 );
       return;
     }
+
   if ( ch->substate == SUB_RESTRICTED )
-    bug( "NOT GOOD: start_editing: ch->substate == SUB_RESTRICTED", 0 );
+    {
+      bug( "NOT GOOD: StartEditing: ch->substate == SUB_RESTRICTED", 0 );
+    }
 
   set_char_color( AT_GREEN, ch );
-  send_to_char( "Begin entering your text now (/? = help /s = save /c = clear /l = list)\r\n", ch );
-  send_to_char( "-----------------------------------------------------------------------\r\n", ch );
+  ch_printf( ch, "Begin entering your text now (/? = help /s = save /c = clear /l = list)\r\n" );
+  ch_printf( ch, "-----------------------------------------------------------------------\r\n" );
+
   if ( ch->editor )
-    stop_editing( ch );
+    {
+      StopEditing( ch );
+    }
 
   ch->editor = str_to_editdata( old_text, max_total );
   ch->editor->desc = STRALLOC( "Unknown buffer" );
@@ -341,19 +371,19 @@ static void start_editing_nolimit( Character *ch, char *old_text, short max_tota
   send_to_char( "> ", ch );
 }
 
-char *copy_buffer( Character *ch )
+char *CopyBuffer( Character *ch )
 {
-  char *buf;
+  char *buf = NULL;
 
   if ( !ch )
     {
-      bug( "copy_buffer: null ch", 0 );
+      bug( "CopyBuffer: null ch", 0 );
       return STRALLOC( "" );
     }
 
   if ( !ch->editor )
     {
-      bug( "copy_buffer: null editor", 0 );
+      bug( "CopyBuffer: null editor", 0 );
       return STRALLOC( "" );
     }
 
@@ -361,7 +391,7 @@ char *copy_buffer( Character *ch )
   return buf;
 }
 
-void stop_editing( Character *ch )
+void StopEditing( Character *ch )
 {
   set_char_color( AT_PLAIN, ch );
   discard_editdata( ch->editor );
@@ -370,25 +400,28 @@ void stop_editing( Character *ch )
   ch->dest_buf  = NULL;
   ch->spare_ptr = NULL;
   ch->substate  = SUB_NONE;
+
   if ( !ch->desc )
     {
-      bug( "Fatal: stop_editing: no desc", 0 );
+      bug( "Fatal: StopEditing: no desc" );
       return;
     }
+
   ch->desc->connection_state = CON_PLAYING;
 }
 
-void edit_buffer( Character *ch, char *argument )
+void EditBuffer( Character *ch, char *argument )
 {
   Descriptor *d;
-  EDITOR_DATA *edd;
-  EDITOR_LINE *newline;
+  Editor *edd;
+  EditorLine *newline;
   char cmd[MAX_INPUT_LENGTH];
   short linelen;
   bool cont_line;
   char *p;
 
   d = ch->desc;
+
   if ( d == NULL )
     {
       send_to_char( "You have no descriptor.\r\n", ch );
@@ -398,7 +431,7 @@ void edit_buffer( Character *ch, char *argument )
   if ( d->connection_state != CON_EDITING )
     {
       send_to_char( "You can't do that!\r\n", ch );
-      bug( "Edit_buffer: d->connection_state != CON_EDITING", 0 );
+      bug( "Edit_buffer: d->connection_state != CON_EDITING" );
       return;
     }
 
@@ -413,7 +446,7 @@ void edit_buffer( Character *ch, char *argument )
   if ( !ch->editor )
     {
       send_to_char( "You can't do that!\r\n", ch );
-      bug( "Edit_buffer: null editor", 0 );
+      bug( "Edit_buffer: null editor" );
       d->connection_state = CON_PLAYING;
       return;
     }
@@ -489,21 +522,28 @@ void edit_buffer( Character *ch, char *argument )
   /* Kludgy fix. Read_from_buffer in comm.c adds a space on
    * empty lines. Don't let this fill up usable buffer space.. */
   if( !str_cmp( argument, " " ) )
-    strcpy( argument, "" );
+    {
+      strcpy( argument, "" );
+    }
 
   linelen = strlen(argument);
 
   p = argument + linelen - 1;
+
   while( p > argument && isspace(*p) )
-    p--;
+    {
+      p--;
+    }
+
   if( p > argument && *p == '\\' )
     {
       cont_line = true;
       *p = '\0';
     }
   else
-    cont_line = false;
-
+    {
+      cont_line = false;
+    }
 
   if( TOTAL_BUFFER_SIZE(edd) + linelen+2 >= edd->max_size )
     {
@@ -529,24 +569,28 @@ void edit_buffer( Character *ch, char *argument )
           edd->line_count++;
         }
       else
-        send_to_char( "(Continued)\r\n", ch );
+	{
+	  send_to_char( "(Continued)\r\n", ch );
+	}
 
       send_to_char( "> ", ch );
     }
 }
 
-static void editor_print_info( Character *ch, EDITOR_DATA *edd, char *argument )
+static void editor_print_info( Character *ch, Editor *edd, char *argument )
 {
-  short i;
-  EDITOR_LINE *eline;
+  short i = 0;
+  EditorLine *eline = edd->first_line;
 
-  eline = edd->first_line;
-  i = 0;
   while( eline )
     {
       i++;
+
       if( eline == edd->on_line )
-        break;
+	{
+	  break;
+	}
+
       eline = eline->next;
     }
 
@@ -559,9 +603,9 @@ static void editor_print_info( Character *ch, EDITOR_DATA *edd, char *argument )
              TOTAL_BUFFER_SIZE(edd), edd->max_size );
 }
 
-static void editor_help( Character *ch, EDITOR_DATA *edd, char *argument )
+static void editor_help( Character *ch, Editor *edd, char *argument )
 {
-  short i;
+  size_t i = 0;
   static const char *arg[] = {"", "l", "c", "d", "g", "i", "r", "a", "p", "!", "s", NULL};
   static const char *editor_help_text[] = {
     /* general help */
@@ -609,47 +653,52 @@ static void editor_help( Character *ch, EDITOR_DATA *edd, char *argument )
     "/s: Saves the current buffer, terminating the edition session.\r\n",
   };
 
-  for( i=0; arg[i] != NULL ; i++ )
+  for( i = 0; arg[i] != NULL ; i++ )
     {
       if( !str_cmp( argument, arg[i] ) )
-        break;
+	{
+	  break;
+	}
     }
 
   if( arg[i] == NULL )
-    send_to_char( "No editor help about that.\r\n", ch );
+    {
+      send_to_char( "No editor help about that.\r\n", ch );
+    }
   else
-    send_to_char( editor_help_text[i], ch );
+    {
+      send_to_char( editor_help_text[i], ch );
+    }
 }
 
-static void editor_clear_buf( Character *ch, EDITOR_DATA *edd, char *argument )
+static void editor_clear_buf( Character *ch, Editor *edd, char *argument )
 {
-  char *desc;
-  short max_size;
-  max_size = edd->max_size;
-  desc = STRALLOC( edd->desc );
+  char *desc = STRALLOC( edd->desc );
+  short max_size = edd->max_size;
+
   discard_editdata( edd );
   ch->editor = str_to_editdata( "", max_size );
   ch->editor->desc = desc;
   send_to_char( "Buffer cleared.\r\n", ch );
 }
 
-
-static void editor_search_and_replace( Character *ch, EDITOR_DATA *edd, char *argument )
+static void editor_search_and_replace( Character *ch, Editor *edd, char *argument )
 {
   char word_src[ MAX_INPUT_LENGTH];
   char word_dst[ MAX_INPUT_LENGTH];
-  EDITOR_DATA *cloned_edd;
-  EDITOR_LINE *eline;
-  char *new_text;
-  short new_size, repl_count, line_repl;
+  Editor *cloned_edd = NULL;
+  EditorLine *eline = NULL;
+  short repl_count = 0;
 
   argument = finer_one_argument( argument, word_src );
   argument = finer_one_argument( argument, word_dst );
+
   if ( word_src[0] == '\0' || word_dst[0] == '\0' )
     {
       send_to_char( "Need word to replace, and replacement.\r\n", ch );
       return;
     }
+
   if ( strcmp( word_src, word_dst ) == 0 )
     {
       send_to_char( "Done.\r\n", ch );
@@ -667,10 +716,13 @@ static void editor_search_and_replace( Character *ch, EDITOR_DATA *edd, char *ar
   cloned_edd = clone_editdata( edd );
 
   eline = cloned_edd->first_line;
-  repl_count = 0;
+
   while( eline )
     {
-      new_text = text_replace( eline->line, word_src, word_dst, &new_size, &line_repl );
+      short new_size = 0;
+      short line_repl = 0;
+      char *new_text = text_replace( eline->line, word_src, word_dst, &new_size, &line_repl );
+
       DISPOSE( eline->line );
       eline->line = new_text;
       cloned_edd->text_size -= eline->line_used;
@@ -695,19 +747,19 @@ static void editor_search_and_replace( Character *ch, EDITOR_DATA *edd, char *ar
       ch->editor = cloned_edd;
       ch_printf( ch, "Found and replaced %d occurrence(s).\r\n", repl_count );
     }
-
 }
 
-static void editor_insert_line( Character *ch, EDITOR_DATA *edd, char *argument )
+static void editor_insert_line( Character *ch, Editor *edd, char *argument )
 {
-  short lineindex, num;
-  EDITOR_LINE *eline, *newline;
+  short lineindex = 0;
+  EditorLine *newline = NULL;
 
   if( argument[0] == '\0' || !is_number(argument) )
     {
       send_to_char( "Must supply the line number.\r\n", ch );
       return;
     }
+
   lineindex = atoi(argument);
 
   if( lineindex < 1 || lineindex > edd->line_count )
@@ -717,6 +769,7 @@ static void editor_insert_line( Character *ch, EDITOR_DATA *edd, char *argument 
     }
 
   newline = make_new_line( "" );
+
   if( lineindex == 1 )
     {
       newline->next = edd->first_line;
@@ -724,13 +777,15 @@ static void editor_insert_line( Character *ch, EDITOR_DATA *edd, char *argument 
     }
   else
     {
-      num = 1;
-      eline = edd->first_line;
+      short num = 1;
+      EditorLine *eline = edd->first_line;
+
       while( num < lineindex-1 )
         {
           eline = eline->next;
           num++;
         }
+
       newline->next = eline->next;
       eline->next = newline;
     }
@@ -740,16 +795,18 @@ static void editor_insert_line( Character *ch, EDITOR_DATA *edd, char *argument 
   ch_printf( ch, "Inserted line at %d.\r\n", lineindex );
 }
 
-static void editor_delete_line( Character *ch, EDITOR_DATA *edd, char *argument )
+static void editor_delete_line( Character *ch, Editor *edd, char *argument )
 {
-  short lineindex, num;
-  EDITOR_LINE *prev_line, *del_line;
+  short lineindex = 0;
+  EditorLine *prev_line = NULL;
+  EditorLine *del_line = NULL;
 
   if( argument[0] == '\0' || !is_number(argument) )
     {
       send_to_char( "Must supply the line number.\r\n", ch );
       return;
     }
+
   lineindex = atoi(argument);
 
   if( lineindex < 1 || lineindex > edd->line_count )
@@ -758,7 +815,6 @@ static void editor_delete_line( Character *ch, EDITOR_DATA *edd, char *argument 
       return;
     }
 
-  prev_line = NULL;
   if( lineindex == 1 )
     {
       if( edd->line_count == 1 )
@@ -771,7 +827,10 @@ static void editor_delete_line( Character *ch, EDITOR_DATA *edd, char *argument 
               send_to_char( "Deleted line 1.\r\n", ch );
             }
           else
-            send_to_char( "The buffer is empty.\r\n", ch );
+	    {
+	      send_to_char( "The buffer is empty.\r\n", ch );
+	    }
+
           return;
         }
 
@@ -780,13 +839,16 @@ static void editor_delete_line( Character *ch, EDITOR_DATA *edd, char *argument 
     }
   else
     {
-      num = 1;
+      short num = 1;
+
       prev_line = edd->first_line;
+
       while( num < lineindex-1 )
         {
           prev_line = prev_line->next;
           num++;
         }
+
       del_line = prev_line->next;
       prev_line->next = del_line->next;
     }
@@ -794,12 +856,19 @@ static void editor_delete_line( Character *ch, EDITOR_DATA *edd, char *argument 
   if( edd->on_line == del_line )
     {
       if( del_line->next )
-        edd->on_line = del_line->next;
+	{
+	  edd->on_line = del_line->next;
+	}
       else if( prev_line != NULL )
-        edd->on_line = prev_line;
+	{
+	  edd->on_line = prev_line;
+	}
       else
-        edd->on_line = edd->first_line;
+	{
+	  edd->on_line = edd->first_line;
+	}
     }
+
   edd->line_count--;
   DISPOSE(del_line->line);
   DISPOSE(del_line);
@@ -807,15 +876,17 @@ static void editor_delete_line( Character *ch, EDITOR_DATA *edd, char *argument 
   ch_printf( ch, "Deleted line %d.\r\n", lineindex);
 }
 
-static void editor_goto_line( Character *ch, EDITOR_DATA *edd, char *argument )
+static void editor_goto_line( Character *ch, Editor *edd, char *argument )
 {
-  short lineindex, num;
+  short lineindex = 0;
+  short num = 0;
 
   if( argument[0] == '\0' || !is_number(argument) )
     {
       send_to_char( "Must supply the line number.\r\n", ch );
       return;
     }
+
   lineindex = atoi(argument);
 
   if( lineindex < 1 || lineindex > edd->line_count )
@@ -826,6 +897,7 @@ static void editor_goto_line( Character *ch, EDITOR_DATA *edd, char *argument )
 
   edd->on_line = edd->first_line;
   num = 1;
+
   while( num < lineindex )
     {
       edd->on_line = edd->on_line->next;
@@ -835,78 +907,97 @@ static void editor_goto_line( Character *ch, EDITOR_DATA *edd, char *argument )
   ch_printf( ch, "On line %d.\r\n", lineindex);
 }
 
-static void editor_list( Character *ch, EDITOR_DATA *edd, char *argument )
+static void editor_list( Character *ch, Editor *edd, char *argument )
 {
-  EDITOR_LINE *eline;
-  short line_num;
-  short from, to;
+  EditorLine *eline = NULL;
+  short line_num = 1;
+  short from = 0;
+  short to = 0;
   char arg1[ MAX_INPUT_LENGTH ];
 
   argument = one_argument( argument, arg1 );
+
   if( arg1[0] != '\0' && is_number(arg1) )
-    from = atoi(arg1);
+    {
+      from = atoi(arg1);
+    }
   else
-    from = 1;
+    {
+      from = 1;
+    }
+
   argument = one_argument( argument, arg1 );
+
   if( arg1[0] != '\0' && is_number(arg1) )
-    to = atoi(arg1);
+    {
+      to = atoi(arg1);
+    }
   else
-    to = edd->line_count;
+    {
+      to = edd->line_count;
+    }
 
   send_to_pager( "------------------\r\n", ch );
-  line_num = 1;
   eline = edd->first_line;
+
   while( eline )
     {
       if( line_num >= from && line_num <= to )
-        pager_printf( ch, "%2d>%c%s\r\n",
-                      line_num,
-                      eline == edd->on_line ? '*' : ' ',
-                      eline->line );
+	{
+	  pager_printf( ch, "%2d>%c%s\r\n",
+			line_num,
+			eline == edd->on_line ? '*' : ' ',
+			eline->line );
+	}
+
       eline = eline->next;
       line_num++;
     }
+
   send_to_pager( "------------------\r\n", ch );
 }
 
-static void editor_abort( Character *ch, EDITOR_DATA *edd, char *argument )
+static void editor_abort( Character *ch, Editor *edd, char *argument )
 {
   send_to_char( "\r\nAborting... ", ch );
-  stop_editing( ch );
+  StopEditing( ch );
 }
 
-static void editor_escaped_cmd( Character *ch, EDITOR_DATA *edd, char *argument )
+static void editor_escaped_cmd( Character *ch, Editor *edd, char *argument )
 {
-  if ( GetTrustLevel(ch) > LEVEL_IMMORTAL )
+  if ( IsGreater( ch ) )
     {
-      DO_FUN *last_cmd;
+      DO_FUN *last_cmd = ch->last_cmd;
       int substate = ch->substate;
 
-      last_cmd = ch->last_cmd;
       ch->substate = SUB_RESTRICTED;
       interpret(ch, argument);
+
       ch->substate = substate;
       ch->last_cmd = last_cmd;
+
       set_char_color( AT_GREEN, ch );
       send_to_char( "\r\n", ch );
     }
   else
-    send_to_char( "You can't use '/!'.\r\n", ch );
+    {
+      send_to_char( "You can't use '/!'.\r\n", ch );
+    }
 }
 
-static void editor_save( Character *ch, EDITOR_DATA *edd, char *argument )
+static void editor_save( Character *ch, Editor *edd, char *argument )
 {
-  Descriptor *d;
-
-  d = ch->desc;
+  Descriptor *d = ch->desc;
 
   d->connection_state = CON_PLAYING;
+
   if ( !ch->last_cmd )
-    return;
-  (*ch->last_cmd) ( ch, "" );
+    {
+      return;
+    }
+
+  ch->last_cmd( ch, "" );
 }
-
-
 
 /****************************************************************************
  * Misc functions
@@ -919,23 +1010,23 @@ static char *text_replace( char *src, char *word_src, char *word_dst, short *pne
  * length of the string and is a multiple of CHAR_BLOCK. Stores in prepl_count
  * the number of replacements it made */
 {
-  char *dst_buf;
-  char *next_found, *last_found;
-  short dst_used, dst_size, len;
-  short repl_count;
+  char *dst_buf = NULL;
+  char *last_found = src;
+  short dst_used = 0;
+  short dst_size = CHAR_BLOCK;
+  short repl_count = 0;
 
   /* prepare the destination buffer */
   CREATE( dst_buf, char, CHAR_BLOCK );
-  dst_size = CHAR_BLOCK;
-  dst_used = 0;
+
   dst_buf[0] = '\0';
 
-  last_found = src;
-  repl_count = 0;
   for(;;)
     {
       /* look for next instance of word */
-      next_found = strstr( last_found, word_src );
+      char *next_found = strstr( last_found, word_src );
+      short len = 0;
+
       if( next_found == NULL )
         {
           /* if theres no more instances of word,
@@ -946,6 +1037,7 @@ static char *text_replace( char *src, char *word_src, char *word_dst, short *pne
           dst_used += len;
           break;
         }
+
       /* copy the buffer up to this instance of the word
        * and then copy the replacement word */
       len = next_found-last_found + strlen(word_dst);
@@ -957,6 +1049,7 @@ static char *text_replace( char *src, char *word_src, char *word_dst, short *pne
       last_found = next_found + strlen(word_src);
       repl_count ++;
     }
+
   *pnew_size = dst_size;
   *prepl_count = repl_count;
   return dst_buf;
@@ -971,37 +1064,47 @@ static char *text_replace( char *src, char *word_src, char *word_dst, short *pne
  */
 static char *finer_one_argument( char *argument, char *arg_first )
 {
-  char cEnd;
-  short count;
-  bool escaped;
-
-  count = 0;
+  char cEnd = ' ';
+  short count = 0;
+  bool escaped = false;
 
   while ( isspace(*argument) )
-    argument++;
+    {
+      argument++;
+    }
 
-  cEnd = ' ';
   if ( *argument == '\'' || *argument == '"' )
-    cEnd = *argument++;
+    {
+      cEnd = *argument++;
+    }
 
-  escaped = false;
   while ( *argument != '\0' || ++count >= MAX_INPUT_LENGTH )
     {
       if( cEnd != ' ' && escaped )
         {
           if( *argument == '\\' )
-            *arg_first = '\\';
+	    {
+	      *arg_first = '\\';
+	    }
           else if( *argument == '\'' )
-            *arg_first = '\'';
+	    {
+	      *arg_first = '\'';
+	    }
           else if( *argument == '"' )
-            *arg_first = '"';
+	    {
+	      *arg_first = '"';
+	    }
           else
-            *arg_first = *argument;
+	    {
+	      *arg_first = *argument;
+	    }
+
           arg_first++;
           argument++;
           escaped = false;
           continue;
         }
+
       if( cEnd != ' ' && *argument == '\\' && !escaped )
         {
           escaped = true;
@@ -1014,14 +1117,18 @@ static char *finer_one_argument( char *argument, char *arg_first )
           argument++;
           break;
         }
+
       *arg_first = *argument;
       arg_first++;
       argument++;
     }
+
   *arg_first = '\0';
 
   while ( isspace(*argument) )
-    argument++;
+    {
+      argument++;
+    }
 
   return argument;
 }

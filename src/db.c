@@ -2569,7 +2569,7 @@ void free_char( Character *ch )
   STRFREE( ch->description      );
 
   if ( ch->editor )
-    stop_editing( ch );
+    StopEditing( ch );
 
   stop_hunting( ch );
   stop_hating ( ch );

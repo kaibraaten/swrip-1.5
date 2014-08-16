@@ -38,8 +38,8 @@ void do_redit( Character *ch, char *argument )
         }
 
       STRFREE( location->description );
-      location->description = copy_buffer( ch );
-      stop_editing( ch );
+      location->description = CopyBuffer( ch );
+      StopEditing( ch );
       ch->substate = ch->tempnum;
       return;
 
@@ -49,13 +49,13 @@ void do_redit( Character *ch, char *argument )
       if ( !ed )
         {
           bug( "redit: sub_room_extra: NULL ch->dest_buf", 0 );
-          stop_editing( ch );
+          StopEditing( ch );
           return;
         }
 
       STRFREE( ed->description );
-      ed->description = copy_buffer( ch );
-      stop_editing( ch );
+      ed->description = CopyBuffer( ch );
+      StopEditing( ch );
       ch->substate = ch->tempnum;
       return;
     }
@@ -127,7 +127,7 @@ void do_redit( Character *ch, char *argument )
 
       ch->substate = SUB_ROOM_DESC;
       ch->dest_buf = location;
-      start_editing( ch, location->description );
+      StartEditing( ch, location->description );
       return;
     }
 
@@ -164,7 +164,7 @@ void do_redit( Character *ch, char *argument )
 
       ch->substate = SUB_ROOM_EXTRA;
       ch->dest_buf = ed;
-      start_editing( ch, ed->description );
+      StartEditing( ch, ed->description );
       return;
     }
 

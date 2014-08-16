@@ -58,7 +58,7 @@ struct Character
   void *                dest_buf_2;
   void *                spare_ptr;
   int                   tempnum;
-  EDITOR_DATA * editor;
+  Editor * editor;
   TIMER *       first_timer;
   TIMER *       last_timer;
   char *                name;
