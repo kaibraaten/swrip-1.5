@@ -576,11 +576,8 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(SPELLDIR)/affectchar.o \
 	$(SPELLDIR)/areaattack.o \
 	$(SPELLDIR)/attack.o \
-	$(SPELLDIR)/blackfist.o \
-	$(SPELLDIR)/blackhand.o \
 	$(SPELLDIR)/blacklightning.o \
 	$(SPELLDIR)/blindness.o \
-	$(SPELLDIR)/burninghands.o \
 	$(SPELLDIR)/calllightning.o \
 	$(SPELLDIR)/causecritical.o \
 	$(SPELLDIR)/causelight.o \

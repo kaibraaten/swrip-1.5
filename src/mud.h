@@ -2169,7 +2169,6 @@ DECLARE_SPELL_FUN( spell_obj_inv );
 DECLARE_SPELL_FUN(      spell_null              );
 DECLARE_SPELL_FUN(      spell_notfound          );
 DECLARE_SPELL_FUN(      spell_blindness         );
-DECLARE_SPELL_FUN(      spell_burning_hands     );
 DECLARE_SPELL_FUN(      spell_call_lightning    );
 DECLARE_SPELL_FUN(      spell_cause_critical    );
 DECLARE_SPELL_FUN(      spell_cause_light       );
@@ -2235,8 +2234,6 @@ DECLARE_SPELL_FUN(      spell_caustic_fount                 );
 DECLARE_SPELL_FUN(      spell_galvanic_whip                 );
 DECLARE_SPELL_FUN(      spell_magnetic_thrust               );
 DECLARE_SPELL_FUN(      spell_quantum_spike                 );
-DECLARE_SPELL_FUN(      spell_black_hand                    );
-DECLARE_SPELL_FUN(      spell_black_fist                    );
 DECLARE_SPELL_FUN(      spell_black_lightning               );
 DECLARE_SPELL_FUN(      spell_midas_touch                   );
 
