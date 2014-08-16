@@ -29,20 +29,20 @@
 
 #include "types.h"
 
-typedef struct alias_type ALIAS_DATA;
+typedef struct Alias Alias;
 
-struct  alias_type
+struct Alias
 {
-  ALIAS_DATA *next;
-  ALIAS_DATA *prev;
+  Alias *next;
+  Alias *prev;
   char *name;
   char *cmd;
 };
 
 DECLARE_DO_FUN( do_alias );
 
-void free_aliases( Character *ch );
-bool check_alias( Character *ch, char *command, char *argument );
-ALIAS_DATA *find_alias( const Character *ch, const char *argument );
+void FreeAliases( Character *ch );
+bool CheckAlias( Character *ch, char *command, char *argument );
+Alias *FindAlias( const Character *ch, const char *argument );
 
 #endif

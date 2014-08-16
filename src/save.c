@@ -376,7 +376,7 @@ void save_clone( Character *ch )
 void fwrite_char( Character *ch, FILE *fp )
 {
   Affect *paf = NULL;
-  ALIAS_DATA *pal = NULL;
+  Alias *pal = NULL;
   int sn = 0;
   int track = 0;
   int drug = 0;
@@ -1440,7 +1440,7 @@ void fread_char( Character *ch, FILE *fp, bool preload )
 
           if ( !str_cmp( word, "Alias" ) )
             {
-              ALIAS_DATA *pal = NULL;
+              Alias *pal = NULL;
 
               if ( preload )
                 {
@@ -1449,7 +1449,7 @@ void fread_char( Character *ch, FILE *fp, bool preload )
                   break;
 
                 }
-              CREATE( pal, ALIAS_DATA, 1 );
+              CREATE( pal, Alias, 1 );
 
               pal->name = fread_string_nohash( fp );
               pal->cmd  = fread_string_nohash( fp );

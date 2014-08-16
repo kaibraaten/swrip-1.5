@@ -2601,7 +2601,7 @@ void free_char( Character *ch )
       STRFREE( ch->pcdata->prompt       );
       if ( ch->pcdata->subprompt )
         STRFREE( ch->pcdata->subprompt );
-      free_aliases( ch );
+      FreeAliases( ch );
 #ifdef SWRIP_USE_IMC
       imc_freechardata( ch );
 #endif

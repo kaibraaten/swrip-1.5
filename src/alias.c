@@ -29,9 +29,9 @@
 #include "mud.h"
 #include "character.h"
 
-ALIAS_DATA *find_alias( const Character *ch, const char *original_argument )
+Alias *FindAlias( const Character *ch, const char *original_argument )
 {
-  ALIAS_DATA *pal;
+  Alias *pal;
   char alias_name[MAX_INPUT_LENGTH];
   char argument[MAX_INPUT_LENGTH];
 
@@ -48,9 +48,9 @@ ALIAS_DATA *find_alias( const Character *ch, const char *original_argument )
   return(NULL);
 }
 
-void free_aliases( Character *ch )
+void FreeAliases( Character *ch )
 {
-  ALIAS_DATA *pal, *next_pal;
+  Alias *pal, *next_pal;
 
   if (!ch || !ch->pcdata)
     return;
@@ -66,16 +66,16 @@ void free_aliases( Character *ch )
     }
 }
 
-bool check_alias( Character *ch, char *command, char *argument )
+bool CheckAlias( Character *ch, char *command, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  ALIAS_DATA *alias;
+  Alias *alias;
   bool nullarg = true;
 
   if ( argument && *argument!='\0' )
     nullarg = false;
 
-  if ( (alias=find_alias(ch,command)) == NULL )
+  if ( (alias=FindAlias(ch,command)) == NULL )
     return false;
 
   if (!alias->cmd || !*alias->cmd)

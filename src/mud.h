@@ -806,8 +806,8 @@ struct pc_data
   int         bet_amt;
   int         salary;
   long        salary_date;    /* Auto-Salary Darrik Vequir */
-  ALIAS_DATA *first_alias;
-  ALIAS_DATA *last_alias;
+  Alias *first_alias;
+  Alias *last_alias;
   Character  *pet;
   char       *target;
   NOTE_DATA  *pnote;

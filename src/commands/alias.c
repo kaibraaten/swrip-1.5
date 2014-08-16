@@ -4,7 +4,7 @@
 
 void do_alias( Character *ch, char *argument )
 {
-  ALIAS_DATA *pal = NULL;
+  Alias *pal = NULL;
   char arg[MAX_INPUT_LENGTH];
 
   if (!ch || !ch->pcdata)
@@ -28,7 +28,7 @@ void do_alias( Character *ch, char *argument )
 
   if ( !*argument)
     {
-      if ( (pal = find_alias(ch, arg)) != NULL )
+      if ( (pal = FindAlias(ch, arg)) != NULL )
         {
           DISPOSE(pal->name);
           DISPOSE(pal->cmd);
@@ -41,9 +41,9 @@ void do_alias( Character *ch, char *argument )
       return;
     }
 
-  if ( (pal=find_alias(ch, arg)) == NULL )
+  if ( (pal=FindAlias(ch, arg)) == NULL )
     {
-      CREATE(pal, ALIAS_DATA, 1);
+      CREATE(pal, Alias, 1);
       pal->name = str_dup(arg);
       pal->cmd  = str_dup(argument);
       LINK(pal, ch->pcdata->first_alias, ch->pcdata->last_alias, next, prev);
