@@ -1260,6 +1260,8 @@ typedef enum
 #define OVAL_FOUNTAIN_1 1
 #define OVAL_FOUNTAIN_2 2
 
+#define OVAL_KEY_UNLOCKS_VNUM 0
+
 /*
  * Extra flags.
  * Used in #OBJECTS.

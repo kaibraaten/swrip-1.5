@@ -1189,11 +1189,15 @@ void remove_bexit_flag( Exit *pexit, int flag )
 
 bool has_key( const Character *ch, vnum_t key )
 {
-  OBJ_DATA *obj;
+  OBJ_DATA *obj = NULL;
 
   for ( obj = ch->first_carrying; obj; obj = obj->next_content )
-    if ( obj->pIndexData->vnum == key || obj->value[0] == key )
-      return true;
+    {
+      if ( obj->pIndexData->vnum == key || obj->value[OVAL_KEY_UNLOCKS_VNUM] == key )
+	{
+	  return true;
+	}
+    }
 
   return false;
 }

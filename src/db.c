@@ -2252,7 +2252,8 @@ Character *create_mobile( ProtoMobile *pMobIndex )
  */
 OBJ_DATA *create_object( OBJ_INDEX_DATA *pObjIndex, int level )
 {
-  OBJ_DATA *obj;
+  OBJ_DATA *obj = NULL;
+  int oval = 0;
 
   if ( !pObjIndex )
     {
@@ -2278,12 +2279,12 @@ OBJ_DATA *create_object( OBJ_INDEX_DATA *pObjIndex, int level )
   obj->item_type        = pObjIndex->item_type;
   obj->extra_flags      = pObjIndex->extra_flags;
   obj->wear_flags       = pObjIndex->wear_flags;
-  obj->value[0] = pObjIndex->value[0];
-  obj->value[1] = pObjIndex->value[1];
-  obj->value[2] = pObjIndex->value[2];
-  obj->value[3] = pObjIndex->value[3];
-  obj->value[4] = pObjIndex->value[4];
-  obj->value[5] = pObjIndex->value[5];
+
+  for( oval = 0; oval < MAX_OVAL; ++oval )
+    {
+      obj->value[oval] = pObjIndex->value[oval];
+    }
+
   obj->weight           = pObjIndex->weight;
   obj->cost             = pObjIndex->cost;
   /*
@@ -3861,21 +3862,20 @@ ROOM_INDEX_DATA *make_room( vnum_t vnum )
  */
 OBJ_INDEX_DATA *make_object( vnum_t vnum, vnum_t cvnum, char *name )
 {
-  OBJ_INDEX_DATA *pObjIndex, *cObjIndex;
+  OBJ_INDEX_DATA *pObjIndex = NULL, *cObjIndex = NULL;
   char buf[MAX_STRING_LENGTH];
-  int   iHash;
+  int iHash = 0;
 
   if ( cvnum > 0 )
-    cObjIndex = get_obj_index( cvnum );
-  else
-    cObjIndex = NULL;
+    {
+      cObjIndex = get_obj_index( cvnum );
+    }
+
   CREATE( pObjIndex, OBJ_INDEX_DATA, 1 );
-  pObjIndex->vnum                       = vnum;
-  pObjIndex->name                       = STRALLOC( name );
-  pObjIndex->first_affect               = NULL;
-  pObjIndex->last_affect                = NULL;
-  pObjIndex->first_extradesc    = NULL;
-  pObjIndex->last_extradesc     = NULL;
+
+  pObjIndex->vnum = vnum;
+  pObjIndex->name = STRALLOC( name );
+
   if ( !cObjIndex )
     {
       sprintf( buf, "A %s", name );
@@ -3885,36 +3885,28 @@ OBJ_INDEX_DATA *make_object( vnum_t vnum, vnum_t cvnum, char *name )
       pObjIndex->action_desc    = STRALLOC( "" );
       pObjIndex->short_descr[0] = LOWER(pObjIndex->short_descr[0]);
       pObjIndex->description[0] = UPPER(pObjIndex->description[0]);
-      pObjIndex->item_type              = ITEM_TRASH;
+      pObjIndex->item_type      = ITEM_TRASH;
       pObjIndex->extra_flags    = ITEM_PROTOTYPE;
-      pObjIndex->wear_flags             = 0;
-      pObjIndex->value[0]               = 0;
-      pObjIndex->value[1]               = 0;
-      pObjIndex->value[2]               = 0;
-      pObjIndex->value[3]               = 0;
-      pObjIndex->value[4]               = 0;
-      pObjIndex->value[5]               = 0;
       pObjIndex->weight         = 1;
-      pObjIndex->cost           = 0;
     }
   else
     {
-      ExtraDescription *ed,  *ced;
-      Affect          *paf, *cpaf;
+      ExtraDescription *ed = NULL, *ced = NULL;
+      Affect *paf = NULL, *cpaf = NULL;
+      int oval = 0;
 
       pObjIndex->short_descr    = QUICKLINK( cObjIndex->short_descr );
       pObjIndex->description    = QUICKLINK( cObjIndex->description );
       pObjIndex->action_desc    = QUICKLINK( cObjIndex->action_desc );
-      pObjIndex->item_type              = cObjIndex->item_type;
-      pObjIndex->extra_flags    = cObjIndex->extra_flags
-        | ITEM_PROTOTYPE;
-      pObjIndex->wear_flags             = cObjIndex->wear_flags;
-      pObjIndex->value[0]               = cObjIndex->value[0];
-      pObjIndex->value[1]               = cObjIndex->value[1];
-      pObjIndex->value[2]               = cObjIndex->value[2];
-      pObjIndex->value[3]               = cObjIndex->value[3];
-      pObjIndex->value[4]               = cObjIndex->value[4];
-      pObjIndex->value[5]               = cObjIndex->value[5];
+      pObjIndex->item_type      = cObjIndex->item_type;
+      pObjIndex->extra_flags    = cObjIndex->extra_flags | ITEM_PROTOTYPE;
+      pObjIndex->wear_flags     = cObjIndex->wear_flags;
+
+      for( oval = 0; oval < MAX_OVAL; ++oval )
+        {
+          pObjIndex->value[oval] = 0;
+        }
+
       pObjIndex->weight         = cObjIndex->weight;
       pObjIndex->cost           = cObjIndex->cost;
 
@@ -3935,16 +3927,16 @@ OBJ_INDEX_DATA *make_object( vnum_t vnum, vnum_t cvnum, char *name )
           paf->duration         = cpaf->duration;
           paf->location         = cpaf->location;
           paf->modifier         = cpaf->modifier;
-          paf->bitvector                = cpaf->bitvector;
+          paf->bitvector        = cpaf->bitvector;
           LINK( paf, pObjIndex->first_affect, pObjIndex->last_affect,
                 next, prev );
           top_affect++;
         }
     }
-  pObjIndex->count              = 0;
-  iHash                         = vnum % MAX_KEY_HASH;
-  pObjIndex->next                       = obj_index_hash[iHash];
-  obj_index_hash[iHash]         = pObjIndex;
+
+  iHash                  = vnum % MAX_KEY_HASH;
+  pObjIndex->next        = obj_index_hash[iHash];
+  obj_index_hash[iHash]  = pObjIndex;
   top_obj_index++;
 
   return pObjIndex;

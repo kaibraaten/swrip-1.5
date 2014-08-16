@@ -2052,27 +2052,27 @@ void clean_room( ROOM_INDEX_DATA *room )
  */
 void clean_obj( OBJ_INDEX_DATA *obj )
 {
-  Affect *paf;
-  Affect *paf_next;
-  ExtraDescription *ed;
-  ExtraDescription *ed_next;
+  Affect *paf = NULL;
+  Affect *paf_next = NULL;
+  ExtraDescription *ed = 0;
+  ExtraDescription *ed_next = 0;
+  int oval = 0;
 
   STRFREE( obj->name );
   STRFREE( obj->short_descr );
   STRFREE( obj->description );
   STRFREE( obj->action_desc );
-  obj->item_type                = 0;
+  obj->item_type        = 0;
   obj->extra_flags      = 0;
-  obj->wear_flags               = 0;
+  obj->wear_flags       = 0;
   obj->count            = 0;
   obj->weight           = 0;
   obj->cost             = 0;
-  obj->value[0]         = 0;
-  obj->value[1]         = 0;
-  obj->value[2]         = 0;
-  obj->value[3]         = 0;
-  obj->value[4]         = 0;
-  obj->value[5]         = 0;
+
+  for( oval = 0; oval < MAX_OVAL; ++oval )
+    {
+      obj->value[oval] = 0;
+    }
 
   for ( paf = obj->first_affect; paf; paf = paf_next )
     {
@@ -2498,7 +2498,8 @@ bool chance_attrib( const Character *ch, short percent, short attrib )
  */
 OBJ_DATA *clone_object( const OBJ_DATA *obj )
 {
-  OBJ_DATA *clone;
+  OBJ_DATA *clone = NULL;
+  int oval = 0;
 
   CREATE( clone, OBJ_DATA, 1 );
   clone->pIndexData     = obj->pIndexData;
@@ -2515,12 +2516,12 @@ OBJ_DATA *clone_object( const OBJ_DATA *obj )
   clone->cost           = obj->cost;
   clone->level  = obj->level;
   clone->timer  = obj->timer;
-  clone->value[0]       = obj->value[0];
-  clone->value[1]       = obj->value[1];
-  clone->value[2]       = obj->value[2];
-  clone->value[3]       = obj->value[3];
-  clone->value[4]       = obj->value[4];
-  clone->value[5]       = obj->value[5];
+
+  for( oval = 0; oval < MAX_OVAL; ++oval )
+    {
+      clone->value[oval] = obj->value[oval];
+    }
+
   clone->count  = 1;
   ++obj->pIndexData->count;
   ++numobjsloaded;
@@ -2529,6 +2530,21 @@ OBJ_DATA *clone_object( const OBJ_DATA *obj )
   clone->serial = clone->pIndexData->serial = cur_obj_serial;
   LINK( clone, first_object, last_object, next, prev );
   return clone;
+}
+
+static bool HasSameOvalues( const OBJ_DATA *a, const OBJ_DATA *b )
+{
+  int oval = 0;
+
+  for( oval = 0; oval < MAX_OVAL; ++oval )
+    {
+      if( a->value[oval] != b->value[oval] )
+	{
+	  return false;
+	}
+    }
+
+  return true;
 }
 
 /*
@@ -2548,32 +2564,26 @@ OBJ_DATA *group_object( OBJ_DATA *obj1, OBJ_DATA *obj2 )
     return obj1;
 
   if ( obj1->pIndexData == obj2->pIndexData
-       /*
-         &&     !obj1->pIndexData->mprog.mudprogs
-         &&  !obj2->pIndexData->mprog.mudprogs
-       */
-       &&   QUICKMATCH( obj1->name,     obj2->name )
-       &&   QUICKMATCH( obj1->short_descr,      obj2->short_descr )
-       &&   QUICKMATCH( obj1->description,      obj2->description )
-       &&   QUICKMATCH( obj1->action_desc,      obj2->action_desc )
-       &&   obj1->item_type     == obj2->item_type
-       &&   obj1->extra_flags   == obj2->extra_flags
-       &&   obj1->magic_flags   == obj2->magic_flags
-       &&   obj1->wear_flags    == obj2->wear_flags
-       &&   obj1->wear_loc              == obj2->wear_loc
-       &&        obj1->weight           == obj2->weight
-       &&        obj1->cost             == obj2->cost
-       &&   obj1->level         == obj2->level
-       &&   obj1->timer         == obj2->timer
-       &&        obj1->value[0]         == obj2->value[0]
-       &&        obj1->value[1]         == obj2->value[1]
-       &&        obj1->value[2]         == obj2->value[2]
-       &&        obj1->value[3]         == obj2->value[3]
-       &&        obj1->value[4]         == obj2->value[4]
-       &&        obj1->value[5]         == obj2->value[5]
-       &&       !obj1->first_extradesc  && !obj2->first_extradesc
-       &&  !obj1->first_affect  && !obj2->first_affect
-       &&  !obj1->first_content && !obj2->first_content )
+       && QUICKMATCH( obj1->name,         obj2->name )
+       && QUICKMATCH( obj1->short_descr,  obj2->short_descr )
+       && QUICKMATCH( obj1->description,  obj2->description )
+       && QUICKMATCH( obj1->action_desc,  obj2->action_desc )
+       && obj1->item_type    == obj2->item_type
+       && obj1->extra_flags  == obj2->extra_flags
+       && obj1->magic_flags  == obj2->magic_flags
+       && obj1->wear_flags   == obj2->wear_flags
+       && obj1->wear_loc     == obj2->wear_loc
+       && obj1->weight       == obj2->weight
+       && obj1->cost         == obj2->cost
+       && obj1->level        == obj2->level
+       && obj1->timer        == obj2->timer
+       && HasSameOvalues( obj1, obj2 )
+       && !obj1->first_extradesc
+       && !obj2->first_extradesc
+       && !obj1->first_affect
+       && !obj2->first_affect
+       && !obj1->first_content
+       && !obj2->first_content )
     {
       obj1->count += obj2->count;
       obj1->pIndexData->count += obj2->count;   /* to be decremented in */
@@ -2591,13 +2601,15 @@ OBJ_DATA *group_object( OBJ_DATA *obj1, OBJ_DATA *obj2 )
  */
 void split_obj( OBJ_DATA *obj, int num )
 {
-  int count;
-  OBJ_DATA *rest;
+  int count = 0;
+  OBJ_DATA *rest = NULL;
 
   if (!obj)
-    return;
+    {
+      return;
+    }
 
-  count =obj->count;
+  count = obj->count;
 
   if ( count <= num || num == 0 )
     return;
