@@ -591,26 +591,17 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(SPELLDIR)/dispelmagic.o \
 	$(SPELLDIR)/dream.o \
 	$(SPELLDIR)/earthquake.o \
-	$(SPELLDIR)/enchantweapon.o \
 	$(SPELLDIR)/energydrain.o \
 	$(SPELLDIR)/etherealfist.o \
-	$(SPELLDIR)/faeriefire.o \
-	$(SPELLDIR)/faeriefog.o \
 	$(SPELLDIR)/farsight.o \
 	$(SPELLDIR)/fireball.o \
-	$(SPELLDIR)/firebreath.o \
 	$(SPELLDIR)/flamestrike.o \
-	$(SPELLDIR)/frostbreath.o \
-	$(SPELLDIR)/galvanicwhip.o \
-	$(SPELLDIR)/gasbreath.o \
 	$(SPELLDIR)/handofchaos.o \
 	$(SPELLDIR)/harm.o \
 	$(SPELLDIR)/identify.o \
 	$(SPELLDIR)/invis.o \
-	$(SPELLDIR)/knock.o \
 	$(SPELLDIR)/knowalignment.o \
 	$(SPELLDIR)/lightningbolt.o \
-	$(SPELLDIR)/lightningbreath.o \
 	$(SPELLDIR)/locateobject.o \
 	$(SPELLDIR)/magicmissile.o \
 	$(SPELLDIR)/magneticthrust.o \
