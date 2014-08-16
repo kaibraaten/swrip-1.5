@@ -606,6 +606,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	$(SPELLDIR)/possess.o \
 	$(SPELLDIR)/removeinvis.o \
 	$(SPELLDIR)/removetrap.o \
+	$(SPELLDIR)/scorchingsurge.o \
 	$(SPELLDIR)/shockinggrasp.o \
 	$(SPELLDIR)/sleep.o \
 	$(SPELLDIR)/smaug.o \
