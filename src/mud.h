@@ -2323,8 +2323,8 @@ extern "C" {
 
   /* boards.c */
   void load_boards( void );
-  BOARD_DATA *get_board( OBJ_DATA *obj );
-  BOARD_DATA *find_board( Character *ch );
+  BOARD_DATA *get_board( const OBJ_DATA *obj );
+  BOARD_DATA *find_board( const Character *ch );
   void free_note( NOTE_DATA *pnote );
   void write_boards_txt( void );
   void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL );
