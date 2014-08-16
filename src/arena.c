@@ -43,15 +43,15 @@ Arena arena;
 #define ARENA_END   41   /* vnum of last real arena room*/
 #define HALL_FAME_FILE  SYSTEM_DIR "halloffame.lst"
 
-static void show_jack_pot(void);
-static void find_game_winner(void);
-static void do_end_game(void);
-static void start_game(void);
-static void silent_end(void);
-static void write_fame_list(void);
-static void write_one_fame_node(FILE * fp, struct HallOfFameElement * node);
-static void find_bet_winners(Character *winner);
-static void reset_bets(void);
+static void ShowJackpot(void);
+static void FindGameWinner(void);
+static void DoEndGame(void);
+static void StartGame(void);
+static void SilentEnd(void);
+static void WriteFameList(void);
+static void WriteOneFameNode(FILE * fp, struct HallOfFameElement * node);
+static void FindBetWinners(Character *winner);
+static void ResetBets(void);
 
 struct HallOfFameElement *fame_list = NULL;
 
@@ -60,15 +60,15 @@ void StartArena(void)
   char buf1[MAX_INPUT_LENGTH];
   char buf2[MAX_INPUT_LENGTH];
 
-  if (!(arena.ppl_challenged))
+  if (!arena.ppl_challenged)
     {
       if(arena.time_to_start == 0)
         {
           arena.in_StartArena = 0;
-          show_jack_pot();
+          ShowJackpot();
           arena.ppl_in_arena = 1;    /* start the blood shed */
           arena.time_left_in_game = arena.game_length;
-          start_game();
+          StartGame();
         }
       else
         {
@@ -88,63 +88,66 @@ void StartArena(void)
               sprintf(buf2,"The killing fields are open.\r\n");
               sprintf(buf2,"%s&R1 &Whour to start\r\n",buf2);
             }
+
           sprintf(buf1, "%sType &Rarena &Wto enter.\r\n", buf1);
           to_channel(buf1,CHANNEL_ARENA,"&RArena&W",arena.lo_lim);
           sprintf(buf2,"%sPlace your bets!!!\r\n",buf2);
           to_channel(buf2,CHANNEL_ARENA,"&RArena&W",5);
-          /* echo_to_all(AT_WHITE, buf1, ECHOTAR_ALL); */
           arena.time_to_start--;
         }
     }
-  else
-    if (!(arena.ppl_in_arena))
-      {
-        if(arena.time_to_start == 0)
-          {
-            arena.ppl_challenged = 0;
-            show_jack_pot();
-            arena.ppl_in_arena = 1;    /* start the blood shed */
-            arena.time_left_in_game = 5;
-            start_game();
-          }
-        else
-          {
-            if(arena.time_to_start >1)
-              {
-                sprintf(buf1, "The dual will start in %d hours. Place your bets!",
-                        arena.time_to_start);
-              }
-            else
-              {
-                sprintf(buf1, "The dual will start in 1 hour. Place your bets!");
-              }
-            to_channel(buf1,CHANNEL_ARENA,"&RArena&W",5);
-            arena.time_to_start--;
-          }
-      }
+  else if (!arena.ppl_in_arena)
+    {
+      if(arena.time_to_start == 0)
+	{
+	  arena.ppl_challenged = 0;
+	  ShowJackpot();
+	  arena.ppl_in_arena = 1;    /* start the blood shed */
+	  arena.time_left_in_game = 5;
+	  StartGame();
+	}
+      else
+	{
+	  if(arena.time_to_start >1)
+	    {
+	      sprintf(buf1, "The duel will start in %d hours. Place your bets!",
+		      arena.time_to_start);
+	    }
+	  else
+	    {
+	      sprintf(buf1, "The duel will start in 1 hour. Place your bets!");
+	    }
+
+	  to_channel(buf1,CHANNEL_ARENA,"&RArena&W",5);
+	  arena.time_to_start--;
+	}
+    }
 }
 
-void start_game(void)
+static void StartGame(void)
 {
-  Character *i;
-  Descriptor *d;
+  Descriptor *d = NULL;
 
   for (d = first_descriptor; d; d = d->next)
-    if (!d->connection_state)
-      {
-        i = d->character;
+    {
+      if (!d->connection_state)
+	{
+	  Character *i = d->character;
 
-        if (i == NULL)
-          continue;
+	  if (i == NULL)
+	    {
+	      continue;
+	    }
 
-        if (i->in_room && IS_SET(i->in_room->room_flags, ROOM_ARENA))
-          {
-            send_to_char("\r\nThe floor falls out from below, dropping you in the arena.\r\n", i);
-            char_from_room(i);
-            char_to_room(i, get_room_index( ARENA_START));
-            do_look(i,"auto");
-          }
-      }
+	  if (i->in_room && IS_SET(i->in_room->room_flags, ROOM_ARENA))
+	    {
+	      send_to_char("\r\nThe floor falls out from below, dropping you in the arena.\r\n", i);
+	      char_from_room(i);
+	      char_to_room(i, get_room_index( ARENA_START));
+	      do_look(i,"auto");
+	    }
+	}
+    }
 
   UpdateArena();
 }
@@ -157,17 +160,17 @@ void UpdateArena(void)
     {
       arena.ppl_in_arena = 0;
       arena.ppl_challenged = 0;
-      find_game_winner();
+      FindGameWinner();
     }
   else if(arena.time_left_in_game == 0)
     {
-      do_end_game();
+      DoEndGame();
     }
   else if(CharactersInArena() == 0)
     {
       arena.ppl_in_arena = 0;
       arena.ppl_challenged = 0;
-      silent_end();
+      SilentEnd();
     }
   else if(arena.time_left_in_game % 5)
     {
@@ -187,23 +190,22 @@ void UpdateArena(void)
               arena.time_left_in_game, CharactersInArena());
       to_channel(buf,CHANNEL_ARENA,"&RArena&W",5);
     }
+
   arena.time_left_in_game--;
 }
 
-void find_game_winner(void)
+static void FindGameWinner(void)
 {
-  char buf[MAX_INPUT_LENGTH];
-  char buf2[MAX_INPUT_LENGTH];
-  Character *i;
-  Descriptor *d;
-  struct HallOfFameElement *fame_node;
+  Descriptor *d = NULL;
 
   for (d = first_descriptor; d; d = d->next)
     {
-      i = d->original ? d->original : d->character;
+      Character *i = d->original ? d->original : d->character;
 
       if (i == NULL)
-        continue;
+	{
+	  continue;
+	}
 
       if (i->in_room && IS_SET(i->in_room->room_flags,ROOM_ARENA)
           && !IsImmortal(i))
@@ -213,8 +215,12 @@ void find_game_winner(void)
           do_look(i, "auto");
           act(AT_YELLOW,"$n falls from the sky.", i, NULL, NULL, TO_ROOM);
           stop_fighting( i, true );
+
           if (i->hit > 1)
             {
+	      struct HallOfFameElement *fame_node = NULL;
+	      char buf[MAX_INPUT_LENGTH];
+
               if(arena.time_left_in_game == 1)
                 {
                   sprintf(buf, "After 1 hour of battle %s is declared the winner",i->name);
@@ -226,13 +232,14 @@ void find_game_winner(void)
                           arena.game_length - arena.time_left_in_game, i->name);
                   to_channel(buf,CHANNEL_ARENA,"&RArena&W",5);
                 }
+
               i->gold += arena.arena_pot/2;
-              sprintf(buf, "You have been awarded %d credits for winning the arena\r\n",
-                      (arena.arena_pot/2));
-              send_to_char(buf, i);
-              sprintf(buf2, "%s awarded %d credits for winning arena", i->name,
-                      (arena.arena_pot/2));
-              bug(buf2, 0);
+              ch_printf(i, "You have been awarded %d credits for winning the arena\r\n",
+			(arena.arena_pot/2));
+
+              bug( "%s awarded %d credits for winning arena", i->name,
+		   (arena.arena_pot/2));
+
               CREATE(fame_node, struct HallOfFameElement, 1);
               strncpy(fame_node->name, i->name, MAX_INPUT_LENGTH);
               fame_node->name[MAX_INPUT_LENGTH] = '\0';
@@ -240,21 +247,23 @@ void find_game_winner(void)
               fame_node->award = (arena.arena_pot/2);
               fame_node->next = fame_list;
               fame_list = fame_node;
-              write_fame_list();
-              find_bet_winners(i);
+
+              WriteFameList();
+              FindBetWinners(i);
               arena.ppl_in_arena = 0;
-              reset_bets();
+              ResetBets();
               arena.ppl_challenged = 0;
             }
+
           i->hit = i->max_hit;
           i->mana = i->max_mana;
           i->move = i->max_move;
-          i->challenged=NULL;
+          i->challenged = NULL;
         }
     }
 }
 
-void show_jack_pot(void)
+static void ShowJackpot(void)
 {
   char buf1[MAX_INPUT_LENGTH];
 
@@ -265,9 +274,10 @@ void show_jack_pot(void)
   to_channel(buf1,CHANNEL_ARENA,"&RArena&W",5);
 }
 
-void silent_end(void)
+static void SilentEnd(void)
 {
   char buf[MAX_INPUT_LENGTH];
+
   arena.ppl_in_arena = 0;
   arena.ppl_challenged = 0;
   arena.in_StartArena = 0;
@@ -279,61 +289,68 @@ void silent_end(void)
   arena.bet_pot = 0;
   sprintf(buf, "It looks like no one was brave enough to enter the Arena.");
   to_channel(buf,CHANNEL_ARENA,"&RArena&W",5);
-  reset_bets();
+  ResetBets();
 }
 
-void do_end_game(void)
+static void DoEndGame(void)
 {
   char buf[MAX_INPUT_LENGTH];
-  Character *i;
-  Descriptor *d;
+  Descriptor *d = NULL;
 
   for (d = first_descriptor; d; d = d->next)
-    if (!d->connection_state)
-      {
-        i = d->character;
+    {
+      if (!d->connection_state)
+	{
+	  Character *i = d->character;
 
-        if (i == NULL)
-          continue;
+	  if (i == NULL)
+	    {
+	      continue;
+	    }
 
-        if (i->in_room && IS_SET(i->in_room->room_flags, ROOM_ARENA))
-          {
-            i->hit = i->max_hit;
-            i->mana = i->max_mana;
-            i->move = i->max_move;
-            i->challenged = NULL;
-            stop_fighting(i, true);
-            char_from_room(i);
-            char_to_room(i, get_room_index(i->retran));
-            do_look(i,"auto");
-            act(AT_TELL,"$n falls from the sky.", i, NULL, NULL, TO_ROOM);
-          }
-      }
+	  if (i->in_room && IS_SET(i->in_room->room_flags, ROOM_ARENA))
+	    {
+	      i->hit = i->max_hit;
+	      i->mana = i->max_mana;
+	      i->move = i->max_move;
+	      i->challenged = NULL;
+	      stop_fighting(i, true);
+	      char_from_room(i);
+	      char_to_room(i, get_room_index(i->retran));
+	      do_look(i,"auto");
+	      act(AT_TELL,"$n falls from the sky.", i, NULL, NULL, TO_ROOM);
+	    }
+	}
+    }
+
   sprintf(buf, "After %d hours of battle the Match is a draw",arena.game_length);
   to_channel(buf,CHANNEL_ARENA,"&RArena&W",5);
   arena.time_left_in_game = 0;
   arena.ppl_in_arena=0;
   arena.ppl_challenged = 0;
-  reset_bets();
+  ResetBets();
 }
 
 int CharactersInArena(void)
 {
-  Character *i;
   Descriptor *d;
   int num = 0;
 
   for (d = first_descriptor; d; d = d->next)
     {
-      i = d->original ? d->original : d->character;
+      Character *i = d->original ? d->original : d->character;
+
       if (i == NULL)
-        continue;
+	{
+	  continue;
+	}
 
       if (i->in_room && IS_SET(i->in_room->room_flags,ROOM_ARENA))
         {
-          if (!IsImmortal(i)
-              && i->hit > 1)
-            num++;
+          if (!IsImmortal(i) && i->hit > 1)
+	    {
+	      num++;
+	    }
         }
     }
 
@@ -342,10 +359,10 @@ int CharactersInArena(void)
 
 void LoadHallOfFame(void)
 {
-  FILE *fl;
-  int date, award;
+  FILE *fl = NULL;
+  int date = 0;
+  int award = 0;
   char name[MAX_INPUT_LENGTH + 1];
-  struct HallOfFameElement *next_node;
 
   if (!(fl = fopen(HALL_FAME_FILE, "r")))
     {
@@ -355,6 +372,8 @@ void LoadHallOfFame(void)
 
   while (fscanf(fl, "%s %d %d", name, &date, &award) == 3)
     {
+      struct HallOfFameElement *next_node = NULL;
+
       CREATE(next_node, struct HallOfFameElement, 1);
       strncpy(next_node->name, name, MAX_INPUT_LENGTH);
       next_node->date = date;
@@ -366,9 +385,9 @@ void LoadHallOfFame(void)
   fclose(fl);
 }
 
-void write_fame_list(void)
+static void WriteFameList(void)
 {
-  FILE *fl;
+  FILE *fl = NULL;
 
   if (!(fl = fopen(HALL_FAME_FILE, "w")))
     {
@@ -376,52 +395,53 @@ void write_fame_list(void)
       return;
     }
 
-  write_one_fame_node(fl, fame_list);/* recursively write from end to start */
+  WriteOneFameNode(fl, fame_list);/* recursively write from end to start */
   fclose(fl);
 }
 
-void write_one_fame_node(FILE * fp, struct HallOfFameElement * node)
+static void WriteOneFameNode(FILE * fp, struct HallOfFameElement * node)
 {
   if (node)
     {
-      write_one_fame_node(fp, node->next);
+      WriteOneFameNode(fp, node->next);
       fprintf(fp, "%s %ld %d\n",node->name,(long) node->date, node->award);
     }
 }
 
-void find_bet_winners(Character *winner)
+static void FindBetWinners(Character *winner)
 {
-  Descriptor *d;
-  Character *wch;
-
-  char buf1[MAX_INPUT_LENGTH];
+  Descriptor *d = NULL;
 
   for (d = first_descriptor; d; d = d->next)
-    if (!d->connection_state)
-      {
-        wch = d->original ? d->original : d->character;
+    {
+      if (!d->connection_state)
+	{
+	  Character *wch = d->original ? d->original : d->character;
 
-        if (wch == NULL)
-          continue;
+	  if (wch == NULL)
+	    {
+	      continue;
+	    }
 
-        if ((!IsNpc(wch)) && (GET_BET_AMT(wch) > 0) && (GET_BETTED_ON(wch) == winner))
-          {
-            sprintf(buf1, "You have won %d credits on your bet.\r\n",(GET_BET_AMT(wch))*2);
-            send_to_char(buf1, wch);
-            wch->gold += GET_BET_AMT(wch)*2;
-            GET_BETTED_ON(wch) = NULL;
-            GET_BET_AMT(wch) = 0;
-          }
-      }
+	  if ((!IsNpc(wch)) && (GET_BET_AMT(wch) > 0) && (GET_BETTED_ON(wch) == winner))
+	    {
+	      ch_printf(wch, "You have won %d credits on your bet.\r\n",
+			(GET_BET_AMT(wch))*2);
+	      wch->gold += GET_BET_AMT(wch)*2;
+	      GET_BETTED_ON(wch) = NULL;
+	      GET_BET_AMT(wch) = 0;
+	    }
+	}
+    }
 }
 
 /*
  * Reset bets for those that did not win.
  * Added by Ulysses, rewritten by Darrik Vequir.
  */
-void reset_bets(void)
+static void ResetBets(void)
 {
-  Character *ch;
+  Character *ch = NULL;
 
   for (ch = first_char; ch; ch = ch->next )
     {
