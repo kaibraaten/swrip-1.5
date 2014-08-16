@@ -7,7 +7,7 @@ void do_ahall(Character *ch, char *argument)
 {
   char site[MAX_INPUT_LENGTH], format[MAX_INPUT_LENGTH], *timestr;
   char format2[MAX_INPUT_LENGTH];
-  struct hall_of_fame_element *fame_node;
+  struct HallOfFameElement *fame_node;
 
   char buf[MAX_INPUT_LENGTH];
   char buf2[MAX_INPUT_LENGTH];

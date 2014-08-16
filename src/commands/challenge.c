@@ -62,7 +62,7 @@ void do_challenge(Character *ch, char *argument)
       return;
     }
 
-  if (num_in_arena()>0)
+  if (CharactersInArena()>0)
     {
       send_to_char("&WSomeone is already in the arena!\r\n",ch);
       return;

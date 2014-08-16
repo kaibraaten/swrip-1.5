@@ -37,7 +37,7 @@
 #include "mud.h"
 #include "arena.h"
 
-ARENA_DATA arena;
+Arena arena;
 
 #define ARENA_START number_range( 29, 41)    /* vnum of first real arena room*/
 #define ARENA_END   41   /* vnum of last real arena room*/
@@ -49,13 +49,13 @@ static void do_end_game(void);
 static void start_game(void);
 static void silent_end(void);
 static void write_fame_list(void);
-static void write_one_fame_node(FILE * fp, struct hall_of_fame_element * node);
+static void write_one_fame_node(FILE * fp, struct HallOfFameElement * node);
 static void find_bet_winners(Character *winner);
 static void reset_bets(void);
 
-struct hall_of_fame_element *fame_list = NULL;
+struct HallOfFameElement *fame_list = NULL;
 
-void start_arena(void)
+void StartArena(void)
 {
   char buf1[MAX_INPUT_LENGTH];
   char buf2[MAX_INPUT_LENGTH];
@@ -64,7 +64,7 @@ void start_arena(void)
     {
       if(arena.time_to_start == 0)
         {
-          arena.in_start_arena = 0;
+          arena.in_StartArena = 0;
           show_jack_pot();
           arena.ppl_in_arena = 1;    /* start the blood shed */
           arena.time_left_in_game = arena.game_length;
@@ -133,6 +133,7 @@ void start_game(void)
     if (!d->connection_state)
       {
         i = d->character;
+
         if (i == NULL)
           continue;
 
@@ -144,14 +145,15 @@ void start_game(void)
             do_look(i,"auto");
           }
       }
-  do_game();
+
+  UpdateArena();
 }
 
-void do_game(void)
+void UpdateArena(void)
 {
   char buf[MAX_INPUT_LENGTH];
 
-  if(num_in_arena() == 1)
+  if(CharactersInArena() == 1)
     {
       arena.ppl_in_arena = 0;
       arena.ppl_challenged = 0;
@@ -161,7 +163,7 @@ void do_game(void)
     {
       do_end_game();
     }
-  else if(num_in_arena() == 0)
+  else if(CharactersInArena() == 0)
     {
       arena.ppl_in_arena = 0;
       arena.ppl_challenged = 0;
@@ -170,19 +172,19 @@ void do_game(void)
   else if(arena.time_left_in_game % 5)
     {
       sprintf(buf, "With %d hours left in the game there are %d players left.",
-              arena.time_left_in_game, num_in_arena());
+              arena.time_left_in_game, CharactersInArena());
       to_channel(buf,CHANNEL_ARENA,"&RArena&W",5);
     }
   else if(arena.time_left_in_game == 1)
     {
       sprintf(buf, "With 1 hour left in the game there are %d players left.",
-              num_in_arena());
+              CharactersInArena());
       to_channel(buf,CHANNEL_ARENA,"&RArena&W",5);
     }
   else if(arena.time_left_in_game <= 4)
     {
       sprintf(buf, "With %d hours left in the game there are %d players left.",
-              arena.time_left_in_game, num_in_arena());
+              arena.time_left_in_game, CharactersInArena());
       to_channel(buf,CHANNEL_ARENA,"&RArena&W",5);
     }
   arena.time_left_in_game--;
@@ -194,7 +196,7 @@ void find_game_winner(void)
   char buf2[MAX_INPUT_LENGTH];
   Character *i;
   Descriptor *d;
-  struct hall_of_fame_element *fame_node;
+  struct HallOfFameElement *fame_node;
 
   for (d = first_descriptor; d; d = d->next)
     {
@@ -231,7 +233,7 @@ void find_game_winner(void)
               sprintf(buf2, "%s awarded %d credits for winning arena", i->name,
                       (arena.arena_pot/2));
               bug(buf2, 0);
-              CREATE(fame_node, struct hall_of_fame_element, 1);
+              CREATE(fame_node, struct HallOfFameElement, 1);
               strncpy(fame_node->name, i->name, MAX_INPUT_LENGTH);
               fame_node->name[MAX_INPUT_LENGTH] = '\0';
               fame_node->date = time(0);
@@ -268,7 +270,7 @@ void silent_end(void)
   char buf[MAX_INPUT_LENGTH];
   arena.ppl_in_arena = 0;
   arena.ppl_challenged = 0;
-  arena.in_start_arena = 0;
+  arena.in_StartArena = 0;
   arena.start_time = 0;
   arena.game_length = 0;
   arena.time_to_start = 0;
@@ -315,7 +317,7 @@ void do_end_game(void)
   reset_bets();
 }
 
-int num_in_arena(void)
+int CharactersInArena(void)
 {
   Character *i;
   Descriptor *d;
@@ -338,12 +340,12 @@ int num_in_arena(void)
   return num;
 }
 
-void load_hall_of_fame(void)
+void LoadHallOfFame(void)
 {
   FILE *fl;
   int date, award;
   char name[MAX_INPUT_LENGTH + 1];
-  struct hall_of_fame_element *next_node;
+  struct HallOfFameElement *next_node;
 
   if (!(fl = fopen(HALL_FAME_FILE, "r")))
     {
@@ -353,7 +355,7 @@ void load_hall_of_fame(void)
 
   while (fscanf(fl, "%s %d %d", name, &date, &award) == 3)
     {
-      CREATE(next_node, struct hall_of_fame_element, 1);
+      CREATE(next_node, struct HallOfFameElement, 1);
       strncpy(next_node->name, name, MAX_INPUT_LENGTH);
       next_node->date = date;
       next_node->award = award;
@@ -378,7 +380,7 @@ void write_fame_list(void)
   fclose(fl);
 }
 
-void write_one_fame_node(FILE * fp, struct hall_of_fame_element * node)
+void write_one_fame_node(FILE * fp, struct HallOfFameElement * node)
 {
   if (node)
     {

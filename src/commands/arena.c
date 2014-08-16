@@ -12,7 +12,7 @@ void do_arena(Character *ch, char *argument)
       return;
     }
 
-  if(!arena.in_start_arena)
+  if(!arena.in_StartArena)
     {
       send_to_char("The killing fields are closed right now.\r\n", ch);
       return;

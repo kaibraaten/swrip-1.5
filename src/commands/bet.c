@@ -29,7 +29,7 @@ void do_bet(Character *ch, char *argument)
       send_to_char("Usage: bet <player> <amt>\r\n",ch);
       return;
     }
-  else if(!arena.in_start_arena && !arena.ppl_challenged)
+  else if(!arena.in_StartArena && !arena.ppl_challenged)
     {
       send_to_char("Sorry the arena is closed, wait until it opens up to bet.\r\n", ch);
       return;

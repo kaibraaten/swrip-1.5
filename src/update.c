@@ -2608,7 +2608,7 @@ void update_handler( void )
   static int pulse_space;
   static int pulse_ship;
   static int pulse_recharge;
-  static int pulse_start_arena = PULSE_ARENA;
+  static int pulse_StartArena = PULSE_ARENA;
   static int pulse_arena = PULSE_ARENA;
   struct timeval start_time;
   struct timeval etime;
@@ -2688,21 +2688,21 @@ void update_handler( void )
       auction_update();
     }
 
-  if(arena.in_start_arena || arena.ppl_challenged)
+  if(arena.in_StartArena || arena.ppl_challenged)
     {
-      if( --pulse_start_arena <= 0)
+      if( --pulse_StartArena <= 0)
 	{
-	  pulse_start_arena = PULSE_ARENA;
-	  start_arena();
+	  pulse_StartArena = PULSE_ARENA;
+	  StartArena();
 	}
     }
 
   if(arena.ppl_in_arena)
     {
-      if(( --pulse_arena <= 0) || (num_in_arena()==1))
+      if(( --pulse_arena <= 0) || (CharactersInArena()==1))
 	{
 	  pulse_arena = PULSE_ARENA;
-	  do_game();
+	  UpdateArena();
 	}
     }
 

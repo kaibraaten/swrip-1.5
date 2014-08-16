@@ -711,7 +711,7 @@ void boot_db( bool fCopyOver )
   load_shuttles();
 
   log_string( "Loading Hall of Fame" );
-  load_hall_of_fame();
+  LoadHallOfFame();
 
   log_string( "Loading help files" );
   load_helps();

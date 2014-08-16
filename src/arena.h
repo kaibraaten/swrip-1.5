@@ -5,13 +5,13 @@
 #define PREP_START  42   /* vnum of first prep room */
 #define PREP_END    43   /* vnum of last prep room */
 
-typedef struct arena_data ARENA_DATA;
+typedef struct Arena Arena;
 
-struct arena_data
+struct Arena
 {
   int ppl_challenged;
   int ppl_in_arena;
-  int in_start_arena;
+  int in_StartArena;
   int start_time;
   int game_length;
   int lo_lim;
@@ -22,20 +22,20 @@ struct arena_data
   int bet_pot;
 };
 
-struct hall_of_fame_element
+struct HallOfFameElement
 {
   char name[MAX_INPUT_LENGTH+1];
   time_t date;
   int award;
-  struct  hall_of_fame_element *next;
+  struct  HallOfFameElement *next;
 };
 
-extern ARENA_DATA arena;
-extern struct hall_of_fame_element *fame_list;
+extern Arena arena;
+extern struct HallOfFameElement *fame_list;
 
-void start_arena(void);
-void load_hall_of_fame(void);
-void do_game(void);
-int num_in_arena(void);
+void StartArena(void);
+void LoadHallOfFame(void);
+void UpdateArena(void);
+int CharactersInArena(void);
 
 #endif

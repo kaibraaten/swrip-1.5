@@ -6,7 +6,7 @@ void do_accept(Character *ch, char *argument)
 {
   char buf[MAX_INPUT_LENGTH];
 
-  if (num_in_arena()>0)
+  if (CharactersInArena()>0)
     {
       send_to_char("Please wait until the current arena is closed before you accept.\r\n",ch);
       return;
@@ -53,7 +53,7 @@ void do_accept(Character *ch, char *argument)
       arena.time_left_in_game =0;
       arena.arena_pot =0;
       arena.bet_pot = 0;
-      start_arena();
+      StartArena();
       return;
     }
 }
