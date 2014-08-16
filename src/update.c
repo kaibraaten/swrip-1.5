@@ -343,7 +343,7 @@ void gain_exp( Character *ch, short ability, long gain )
 
   SetExperience( ch, ability, umax( 0, GetExperience( ch, ability ) + gain ) );
 
-  if (IsNotAuthed(ch) && GetExperience( ch, ability ) >= exp_level(GetAbilityLevel(ch, ability ) + 1))
+  if (!IsAuthed(ch) && GetExperience( ch, ability ) >= exp_level(GetAbilityLevel(ch, ability ) + 1))
     {
       send_to_char("You can not ascend to a higher level until you are authorized.\r\n", ch);
       SetExperience( ch, ability, exp_level( GetAbilityLevel(ch, ability) + 1 ) - 1);
@@ -674,7 +674,7 @@ void gain_condition( Character *ch, int iCond, int value )
        || IsNpc(ch)
        || IsImmortal( ch )
        || IsDroid(ch)
-       || IsNotAuthed(ch))
+       || !IsAuthed(ch))
     return;
 
   if( ( iCond == COND_THIRST || iCond == COND_FULL )
@@ -1427,7 +1427,7 @@ void char_update( void )
        * See if player should be auto-saved.
        */
       if ( !IsNpc(ch)
-           && !IsNotAuthed(ch)
+           && IsAuthed(ch)
            && current_time - ch->pcdata->save_time > (sysdata.save_frequency*60) )
 	{
 	  ch_save = ch;

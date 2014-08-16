@@ -32,7 +32,7 @@ void do_beep( Character *ch, char *argument )
 
   if ( ( victim = get_char_world( ch, arg ) ) == NULL
        || ( IsNpc(victim) && victim->in_room != ch->in_room )
-       || (!IsNotAuthed(ch) && IsNotAuthed(victim) && !IsImmortal(ch) ) )
+       || (IsAuthed(ch) && !IsAuthed(victim) && !IsImmortal(ch) ) )
     {
       send_to_char( "They aren't here.\r\n", ch );
       return;
@@ -66,7 +66,7 @@ void do_beep( Character *ch, char *argument )
       return;
     }
 
-  if (IsNotAuthed(ch) && !IsNotAuthed(victim) && !IsImmortal(victim) )
+  if (!IsAuthed(ch) && IsAuthed(victim) && !IsImmortal(victim) )
     {
       send_to_char( "They can't hear you because you are not authorized.\r\n", ch);
       return;

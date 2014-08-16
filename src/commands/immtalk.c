@@ -3,7 +3,7 @@
 
 void do_immtalk( Character *ch, char *argument )
 {
-  if (IsNotAuthed(ch))
+  if (!IsAuthed(ch))
     {
       send_to_char("Huh?\r\n", ch);
       return;

@@ -16,9 +16,9 @@ void do_bank( Character *ch, char *argument )
   if ( IsNpc(ch) || !ch->pcdata )
     return;
 
-  if ( IsNotAuthed(ch) )
+  if ( !IsAuthed(ch) )
     {
-      send_to_char("You can not access your bank account until after you've graduated from the acadamey.\r\n", ch);
+      send_to_char("You can not access your bank account until after you've graduated from the academy.\r\n", ch);
       return;
     }
 
@@ -33,7 +33,7 @@ void do_bank( Character *ch, char *argument )
 
   if ( arg1[0] == '\0' )
     {
-      send_to_char( "Usage: BANK <deposit|withdraw|balance|transfer> [amount] [recievee]\r\n", ch );
+      send_to_char( "Usage: BANK <deposit|withdraw|balance|transfer> [amount] [receivee]\r\n", ch );
       return;
     }
 

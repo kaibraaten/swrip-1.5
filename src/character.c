@@ -1011,11 +1011,14 @@ bool IsRetiredImmortal( const Character *ch )
   return !IsNpc( ch ) && IS_SET( ch->pcdata->flags, PCFLAG_RETIRED );
 }
 
-bool IsNotAuthed( const Character *ch )
+bool IsAuthed( const Character *ch )
 {
-  return !IsNpc( ch )
-    && ch->pcdata->auth_state <= 3
-    && IS_SET( ch->pcdata->flags, PCFLAG_UNAUTHED);
+  if( IsNpc( ch ) )
+    {
+      return true;
+    }
+
+  return !IS_SET( ch->pcdata->flags, PCFLAG_UNAUTHED);
 }
 
 bool IsWaitingForAuth( const Character *ch )

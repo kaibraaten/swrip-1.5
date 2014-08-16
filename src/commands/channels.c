@@ -17,7 +17,7 @@ void do_channels( Character *ch, char *argument )
 
       send_to_char( "Channels:", ch );
 
-      if ( GetTrustLevel( ch ) > 2 && !IsNotAuthed( ch ) )
+      if ( GetTrustLevel( ch ) > 2 && IsAuthed( ch ) )
         {
           send_to_char( !IS_SET(ch->deaf, CHANNEL_AUCTION)
                         ? " +AUCTION"

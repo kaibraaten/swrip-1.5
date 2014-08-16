@@ -198,13 +198,6 @@ void talk_channel( Character *ch, const char *argument, int channel, const char 
         }
 
     }
-  /*    else if ( channel == CHANNEL_OOC && !IS_SET(ch->in_room->room_flags, ROOM_HOTEL ) )
-   *    {
-   *         send_to_char("&ROut of character conversations are restricted to hotels!\r\n",ch);
-   *            return;
-   *    }
-   */
-
   else if ( IsNpc( ch ) && ( channel == CHANNEL_CLAN || channel == CHANNEL_ALLCLAN ) )
     {
       send_to_char( "Mobs can't be in clans.\r\n", ch );
@@ -381,7 +374,7 @@ void talk_channel( Character *ch, const char *argument, int channel, const char 
             continue;
           if ( channel == CHANNEL_105 && och->top_level < 105 )
             continue;
-          if ( channel == CHANNEL_WARTALK && IsNotAuthed( och ) )
+          if ( channel == CHANNEL_WARTALK && !IsAuthed( och ) )
             continue;
           if ( channel == CHANNEL_AVTALK && !IsAvatar(och) )
             continue;
@@ -625,7 +618,7 @@ void talk_auction (const char *argument)
     {
       original = d->original ? d->original : d->character; /* if switched */
       if ((d->connection_state == CON_PLAYING) && !IS_SET(original->deaf,CHANNEL_AUCTION)
-          && !IS_SET(original->in_room->room_flags, ROOM_SILENCE) && !IsNotAuthed(original))
+          && !IS_SET(original->in_room->room_flags, ROOM_SILENCE) && IsAuthed(original))
         act( AT_GOSSIP, buf, original, NULL, NULL, TO_CHAR );
     }
 }

@@ -21,9 +21,9 @@ void do_save( Character *ch, char *argument )
   if ( !IS_SET( ch->susceptible, race_table[ch->race].suscept ) )
     SET_BIT( ch->susceptible, race_table[ch->race].suscept );
 
-  if ( IsNotAuthed(ch) )
+  if ( !IsAuthed(ch) )
     {
-      send_to_char("You can't save untill after you've graduated from the acadamey.\r\n", ch);
+      send_to_char("You can't save until after you've graduated from the academy.\r\n", ch);
       return;
     }
 

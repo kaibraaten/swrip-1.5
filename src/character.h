@@ -376,7 +376,7 @@ bool IsDrunk( const Character *ch );
 
 bool IsRetiredImmortal( const Character *ch );
 
-bool IsNotAuthed( const Character *ch );
+bool IsAuthed( const Character *ch );
 
 bool IsWaitingForAuth( const Character *ch );
 

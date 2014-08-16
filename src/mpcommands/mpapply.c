@@ -29,7 +29,7 @@ void do_mpapply( Character *ch, char *argument )
       return;
     }
 
-  if( !IsNotAuthed(victim) )
+  if( IsAuthed(victim) )
     return;
 
   if( victim->pcdata->auth_state >= 1 )

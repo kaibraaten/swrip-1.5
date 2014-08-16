@@ -37,8 +37,8 @@ void do_mptransfer( Character *ch, char *argument )
         {
           nextinroom = victim->next_in_room;
           if ( victim != ch
-               &&   !IsNotAuthed(victim)
-               &&   CanSeeCharacter( ch, victim ) )
+               && IsAuthed(victim)
+               && CanSeeCharacter( ch, victim ) )
             {
               sprintf( buf, "%s %s", victim->name, arg2 );
               do_mptransfer( ch, buf );
@@ -81,7 +81,7 @@ void do_mptransfer( Character *ch, char *argument )
       return;
     }
 
-  if (IsNotAuthed(victim) && location->area != victim->in_room->area)
+  if (!IsAuthed(victim) && location->area != victim->in_room->area)
     {
       progbug( "Mptransfer - transferring unauthorized player", ch);
       return;

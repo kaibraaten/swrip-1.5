@@ -1452,7 +1452,7 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
 
   /* Make sure newbies dont die */
 
-  if (!IsNpc(victim) && IsNotAuthed(victim) && victim->hit < 1)
+  if (!IsNpc(victim) && !IsAuthed(victim) && victim->hit < 1)
     victim->hit = 1;
 
   if ( dam > 0 && dt > TYPE_HIT

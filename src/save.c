@@ -193,7 +193,7 @@ void save_char_obj( Character *ch )
       return;
     }
 
-  if ( IsNpc(ch) || IsNotAuthed(ch) )
+  if ( IsNpc(ch) || !IsAuthed(ch) )
     {
       return;
     }
@@ -317,7 +317,7 @@ void save_clone( Character *ch )
       return;
     }
 
-  if ( IsNpc(ch) || IsNotAuthed(ch) )
+  if ( IsNpc(ch) || !IsAuthed(ch) )
     {
       return;
     }
