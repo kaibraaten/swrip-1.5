@@ -45,7 +45,7 @@ bool is_wielding_poisoned( Character *ch )
 {
   OBJ_DATA *obj;
 
-  if ( ( obj = get_eq_char( ch, WEAR_WIELD )    )
+  if ( ( obj = GetEquipmentOnCharacter( ch, WEAR_WIELD )    )
        &&   (IS_SET( obj->extra_flags, ITEM_POISONED) ) )
     return true;
 
@@ -256,7 +256,7 @@ void violence_update( void )
         }
 
       if ( ( victim = who_fighting( ch ) ) == NULL
-           ||   is_affected_by( ch, AFF_PARALYSIS ) )
+           ||   IsAffectedBy( ch, AFF_PARALYSIS ) )
         continue;
 
       retcode = rNONE;
@@ -313,9 +313,9 @@ void violence_update( void )
               /*
                * PC's auto-assist others in their group.
                */
-              if ( !IsNpc(ch) || is_affected_by(ch, AFF_CHARM) )
+              if ( !IsNpc(ch) || IsAffectedBy(ch, AFF_CHARM) )
                 {
-                  if ( ( !IsNpc(rch) || is_affected_by(rch, AFF_CHARM) )
+                  if ( ( !IsNpc(rch) || IsAffectedBy(rch, AFF_CHARM) )
                        &&   is_same_group(ch, rch) )
                     multi_hit( rch, victim, TYPE_UNDEFINED );
                   continue;
@@ -324,7 +324,7 @@ void violence_update( void )
               /*
                * NPC's assist NPC's of same type or 12.5% chance regardless.
                */
-              if ( IsNpc(rch) && !is_affected_by(rch, AFF_CHARM)
+              if ( IsNpc(rch) && !IsAffectedBy(rch, AFF_CHARM)
                    &&  !IS_SET(rch->act, ACT_NOASSIST) )
                 {
                   if ( char_died(ch) )
@@ -388,14 +388,14 @@ ch_ret multi_hit( Character *ch, Character *victim, int dt )
   /* -- Altrag */
   hit_chance = IsNpc(ch) ? 100 : (ch->pcdata->learned[gsn_berserk]*5/2);
 
-  if ( is_affected_by(ch, AFF_BERSERK) && number_percent() < hit_chance )
+  if ( IsAffectedBy(ch, AFF_BERSERK) && number_percent() < hit_chance )
     if ( (retcode = one_hit( ch, victim, dt )) != rNONE ||
          who_fighting( ch ) != victim )
       return retcode;
 
-  if ( get_eq_char( ch, WEAR_DUAL_WIELD ) )
+  if ( GetEquipmentOnCharacter( ch, WEAR_DUAL_WIELD ) )
     {
-      dual_bonus = IsNpc(ch) ? (get_level( ch, COMBAT_ABILITY ) / 10) : (ch->pcdata->learned[gsn_dual_wield] / 10);
+      dual_bonus = IsNpc(ch) ? (GetAbilityLevel( ch, COMBAT_ABILITY ) / 10) : (ch->pcdata->learned[gsn_dual_wield] / 10);
       hit_chance = IsNpc(ch) ? ch->top_level : ch->pcdata->learned[gsn_dual_wield];
       if ( number_percent( ) < hit_chance )
         {
@@ -485,8 +485,8 @@ ch_ret multi_hit( Character *ch, Character *victim, int dt )
     {
       int move;
 
-      if ( !is_affected_by(ch, AFF_FLYING)
-           &&   !is_affected_by(ch, AFF_FLOATING) )
+      if ( !IsAffectedBy(ch, AFF_FLYING)
+           &&   !IsAffectedBy(ch, AFF_FLOATING) )
         move = encumbrance( ch, movement_loss[UMIN(SECT_MAX-1, ch->in_room->sector_type)] );
       else
         move = encumbrance( ch, 1 );
@@ -588,8 +588,8 @@ short off_shld_lvl( Character *ch, Character *victim )
 
   if ( !IsNpc(ch) )            /* players get much less effect */
     {
-      lvl = UMAX( 1, (get_level( ch, FORCE_ABILITY ) ) );
-      if ( number_percent() + (get_level( victim, COMBAT_ABILITY ) - lvl) < 35 )
+      lvl = UMAX( 1, (GetAbilityLevel( ch, FORCE_ABILITY ) ) );
+      if ( number_percent() + (GetAbilityLevel( victim, COMBAT_ABILITY ) - lvl) < 35 )
         return lvl;
       else
         return 0;
@@ -597,7 +597,7 @@ short off_shld_lvl( Character *ch, Character *victim )
   else
     {
       lvl = ch->top_level;
-      if ( number_percent() + (get_level( victim, COMBAT_ABILITY ) - lvl) < 70 )
+      if ( number_percent() + (GetAbilityLevel( victim, COMBAT_ABILITY ) - lvl) < 70 )
         return lvl;
       else
         return 0;
@@ -637,18 +637,18 @@ ch_ret one_hit( Character *ch, Character *victim, int dt )
   /*
    * Figure out the weapon doing the damage                     -Thoric
    */
-  if ( (wield = get_eq_char( ch, WEAR_DUAL_WIELD )) != NULL )
+  if ( (wield = GetEquipmentOnCharacter( ch, WEAR_DUAL_WIELD )) != NULL )
     {
       if ( dual_flip == false )
         {
           dual_flip = true;
-          wield = get_eq_char( ch, WEAR_WIELD );
+          wield = GetEquipmentOnCharacter( ch, WEAR_WIELD );
         }
       else
         dual_flip = false;
     }
   else
-    wield = get_eq_char( ch, WEAR_WIELD );
+    wield = GetEquipmentOnCharacter( ch, WEAR_WIELD );
 
   prof_bonus = weapon_prof_bonus_check( ch, wield, &prof_gsn );
 
@@ -720,7 +720,7 @@ ch_ret one_hit( Character *ch, Character *victim, int dt )
    */
   thac0_00 = 20;
   thac0_32 = 10;
-  thac0     = interpolate( get_level( ch, COMBAT_ABILITY ), thac0_00, thac0_32 ) - get_hitroll(ch);
+  thac0     = interpolate( GetAbilityLevel( ch, COMBAT_ABILITY ), thac0_00, thac0_32 ) - get_hitroll(ch);
   victim_ac = (int) (get_armor_class(victim) / 10);
 
   /* if you can't see what's coming... */
@@ -788,10 +788,10 @@ ch_ret one_hit( Character *ch, Character *victim, int dt )
   if ( !is_awake(victim) )
     dam *= 2;
   if ( dt == gsn_backstab )
-    dam *= (2 + URANGE( 2, get_level( ch, HUNTING_ABILITY ) - (get_level( victim, COMBAT_ABILITY ) / 4), 30 ) / 8);
+    dam *= (2 + URANGE( 2, GetAbilityLevel( ch, HUNTING_ABILITY ) - (GetAbilityLevel( victim, COMBAT_ABILITY ) / 4), 30 ) / 8);
 
   if ( dt == gsn_circle )
-    dam *= (2 + URANGE( 2, get_level( ch, HUNTING_ABILITY ) - (get_level( victim, COMBAT_ABILITY ) / 2), 30 ) / 40);
+    dam *= (2 + URANGE( 2, GetAbilityLevel( ch, HUNTING_ABILITY ) - (GetAbilityLevel( victim, COMBAT_ABILITY ) / 2), 30 ) / 40);
 
   plusris = 0;
 
@@ -883,7 +883,7 @@ ch_ret one_hit( Character *ch, Character *victim, int dt )
           dam /= 10;
           wield->value[OVAL_WEAPON_CHARGE] -= 3;
           fail = false;
-          hit_chance = ris_save( victim, get_level( ch, COMBAT_ABILITY ), RIS_PARALYSIS );
+          hit_chance = ris_save( victim, GetAbilityLevel( ch, COMBAT_ABILITY ), RIS_PARALYSIS );
           if ( hit_chance == 1000 )
             fail = true;
           else
@@ -893,7 +893,7 @@ ch_ret one_hit( Character *ch, Character *victim, int dt )
               fail = true;
               victim->was_stunned--;
             }
-          hit_chance = 100 - GetCurrentConstitution(victim) - get_level( victim, COMBAT_ABILITY ) / 2;
+          hit_chance = 100 - GetCurrentConstitution(victim) - GetAbilityLevel( victim, COMBAT_ABILITY ) / 2;
           /* harder for player to stun another player */
           if ( !IsNpc(ch) && !IsNpc(victim) )
             hit_chance -= sysdata.stun_plr_vs_plr;
@@ -909,7 +909,7 @@ ch_ret one_hit( Character *ch, Character *victim, int dt )
               act( AT_BLUE, "Blue rings of energy from your blaster strike $N, leaving $M stunned!", ch, NULL, victim, TO_CHAR );
               act( AT_BLUE, "Blue rings of energy from $n's blaster hit $N, leaving $M stunned!", ch, NULL, victim, TO_NOTVICT );
               stop_fighting( victim, true );
-              if ( !is_affected_by( victim, AFF_PARALYSIS ) )
+              if ( !IsAffectedBy( victim, AFF_PARALYSIS ) )
                 {
                   af.type      = gsn_stun;
                   af.location  = APPLY_AC;
@@ -1078,8 +1078,8 @@ ch_ret one_hit( Character *ch, Character *victim, int dt )
   /*
    * magic shields that retaliate                               -Thoric
    */
-  if ( is_affected_by( victim, AFF_FIRESHIELD )
-       &&  !is_affected_by( ch, AFF_FIRESHIELD ) )
+  if ( IsAffectedBy( victim, AFF_FIRESHIELD )
+       &&  !IsAffectedBy( ch, AFF_FIRESHIELD ) )
     retcode = spell_fireball( gsn_fireball, off_shld_lvl(victim, ch), victim, ch );
   if ( retcode != rNONE || char_died(ch) || char_died(victim) )
     return retcode;
@@ -1087,8 +1087,8 @@ ch_ret one_hit( Character *ch, Character *victim, int dt )
   if ( retcode != rNONE || char_died(ch) || char_died(victim) )
     return retcode;
 
-  if ( is_affected_by( victim, AFF_SHOCKSHIELD )
-       &&  !is_affected_by( ch, AFF_SHOCKSHIELD ) )
+  if ( IsAffectedBy( victim, AFF_SHOCKSHIELD )
+       &&  !IsAffectedBy( ch, AFF_SHOCKSHIELD ) )
     retcode = spell_lightning_bolt( gsn_lightning_bolt, off_shld_lvl(victim, ch), victim, ch );
   if ( retcode != rNONE || char_died(ch) || char_died(victim) )
     return retcode;
@@ -1098,7 +1098,7 @@ ch_ret one_hit( Character *ch, Character *victim, int dt )
    */
   if ( IsNpc(victim) )
     {
-      OBJ_DATA *wielding = get_eq_char( victim, WEAR_WIELD );
+      OBJ_DATA *wielding = GetEquipmentOnCharacter( victim, WEAR_WIELD );
       if ( wielding != NULL
 	   && wielding->value[OVAL_WEAPON_TYPE] == WEAPON_BLASTER
 	   && get_cover( victim ) == true )
@@ -1292,7 +1292,7 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
            */
           if ( IsNpc(ch)
                &&   npcvict
-               &&   is_affected_by(victim, AFF_CHARM)
+               &&   IsAffectedBy(victim, AFF_CHARM)
                &&   victim->master
                &&   victim->master->in_room == ch->in_room
                &&   number_bits( 3 ) == 0 )
@@ -1314,7 +1314,7 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
       /*
        * Inviso attacks ... not.
        */
-      if ( is_affected_by(ch, AFF_INVISIBLE))
+      if ( IsAffectedBy(ch, AFF_INVISIBLE))
         {
           affect_strip( ch, gsn_invis );
           affect_strip( ch, gsn_mass_invis );
@@ -1323,15 +1323,15 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
         }
 
       /* Take away Hide */
-      if ( is_affected_by(ch, AFF_HIDE) && ch->race != RACE_DEFEL )
+      if ( IsAffectedBy(ch, AFF_HIDE) && ch->race != RACE_DEFEL )
         REMOVE_BIT(ch->affected_by, AFF_HIDE);
       /*
        * Damage modifiers.
        */
-      if ( is_affected_by(victim, AFF_SANCTUARY) )
+      if ( IsAffectedBy(victim, AFF_SANCTUARY) )
         dam /= 2;
 
-      if ( is_affected_by(victim, AFF_PROTECT) && is_evil(ch) )
+      if ( IsAffectedBy(victim, AFF_PROTECT) && is_evil(ch) )
         dam -= (int) (dam / 4);
 
       if ( dam < 0 )
@@ -1344,12 +1344,12 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
         {
           if ( IsNpc(ch)
                &&   IS_SET( ch->attacks, DFND_DISARM )
-               &&   number_percent( ) < get_level( ch, COMBAT_ABILITY ) / 2 )
+               &&   number_percent( ) < GetAbilityLevel( ch, COMBAT_ABILITY ) / 2 )
             disarm( ch, victim );
 
           if ( IsNpc(ch)
                &&   IS_SET( ch->attacks, ATCK_TRIP )
-               &&   number_percent( ) < get_level( ch, COMBAT_ABILITY ) )
+               &&   number_percent( ) < GetAbilityLevel( ch, COMBAT_ABILITY ) )
             trip( ch, victim );
 
           if ( check_parry( ch, victim ) )
@@ -1393,7 +1393,7 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
     {
       /* get a random body eq part */
       dameq  = number_range(WEAR_LIGHT, WEAR_EYES);
-      damobj = get_eq_char(victim, dameq);
+      damobj = GetEquipmentOnCharacter(victim, dameq);
       if ( damobj )
         {
           if ( dam > get_obj_resistance(damobj) )
@@ -1456,10 +1456,10 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
     victim->hit = 1;
 
   if ( dam > 0 && dt > TYPE_HIT
-       && !is_affected_by( victim, AFF_POISON )
+       && !IsAffectedBy( victim, AFF_POISON )
        &&  is_wielding_poisoned( ch )
        && !IS_SET( victim->immune, RIS_POISON )
-       && !saves_poison_death( get_level( ch, COMBAT_ABILITY ), victim ) )
+       && !saves_poison_death( GetAbilityLevel( ch, COMBAT_ABILITY ), victim ) )
     {
       Affect af;
 
@@ -1494,7 +1494,7 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
       break;
 
     case POS_STUNNED:
-      if ( !is_affected_by( victim, AFF_PARALYSIS ) )
+      if ( !IsAffectedBy( victim, AFF_PARALYSIS ) )
         {
           act( AT_ACTION, "$n is stunned, but will probably recover.",
                victim, NULL, NULL, TO_ROOM );
@@ -1545,7 +1545,7 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
    * Sleep spells and extremely wounded folks.
    */
   if ( !is_awake(victim)                /* lets make NPC's not slaughter PC's */
-       &&   !is_affected_by( victim, AFF_PARALYSIS ) )
+       &&   !IsAffectedBy( victim, AFF_PARALYSIS ) )
     {
       if ( victim->fighting
            &&   victim->fighting->who->hhf.hunting
@@ -1570,16 +1570,16 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
 
       stop_fighting( victim, true );
 
-      if ( ( obj = get_eq_char( victim, WEAR_DUAL_WIELD ) ) != NULL )
-        unequip_char( victim, obj );
-      if ( ( obj = get_eq_char( victim, WEAR_WIELD ) ) != NULL )
-        unequip_char( victim, obj );
-      if ( ( obj = get_eq_char( victim, WEAR_HOLD ) ) != NULL )
-        unequip_char( victim, obj );
-      if ( ( obj = get_eq_char( victim, WEAR_MISSILE_WIELD ) ) != NULL )
-        unequip_char( victim, obj );
-      if ( ( obj = get_eq_char( victim, WEAR_LIGHT ) ) != NULL )
-        unequip_char( victim, obj );
+      if ( ( obj = GetEquipmentOnCharacter( victim, WEAR_DUAL_WIELD ) ) != NULL )
+        UnequipCharacter( victim, obj );
+      if ( ( obj = GetEquipmentOnCharacter( victim, WEAR_WIELD ) ) != NULL )
+        UnequipCharacter( victim, obj );
+      if ( ( obj = GetEquipmentOnCharacter( victim, WEAR_HOLD ) ) != NULL )
+        UnequipCharacter( victim, obj );
+      if ( ( obj = GetEquipmentOnCharacter( victim, WEAR_MISSILE_WIELD ) ) != NULL )
+        UnequipCharacter( victim, obj );
+      if ( ( obj = GetEquipmentOnCharacter( victim, WEAR_LIGHT ) ) != NULL )
+        UnequipCharacter( victim, obj );
 
       for ( obj = victim->first_carrying; obj; obj = obj_next )
         {
@@ -1608,7 +1608,7 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
 
       if ( IsNpc( ch ) && !IsNpc( victim ) )
         {
-          long xp_to_lose = UMAX( ( GetExperience( victim, COMBAT_ABILITY ) - exp_level( get_level( ch, COMBAT_ABILITY ) ) ), 0 );
+          long xp_to_lose = UMAX( ( GetExperience( victim, COMBAT_ABILITY ) - exp_level( GetAbilityLevel( ch, COMBAT_ABILITY ) ) ), 0 );
 	  long xp_actually_lost = lose_exp( victim, COMBAT_ABILITY, xp_to_lose );
 
           ch_printf( victim, "You lose %ld experience.\r\n", xp_actually_lost );
@@ -1724,7 +1724,7 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
     {
       if ( ( IS_SET(victim->act, ACT_WIMPY) && number_bits( 1 ) == 0
              &&   victim->hit < victim->max_hit / 2 )
-           ||   ( is_affected_by(victim, AFF_CHARM) && victim->master
+           ||   ( IsAffectedBy(victim, AFF_CHARM) && victim->master
                   &&     victim->master->in_room != victim->in_room ) )
         {
           start_fearing( victim, ch );
@@ -1879,7 +1879,7 @@ void update_pos( Character *victim )
     {
       if ( victim->position <= POS_STUNNED )
         victim->position = POS_STANDING;
-      if ( is_affected_by( victim, AFF_PARALYSIS ) )
+      if ( IsAffectedBy( victim, AFF_PARALYSIS ) )
         victim->position = POS_STUNNED;
       return;
     }
@@ -1907,7 +1907,7 @@ void update_pos( Character *victim )
   else                          victim->position = POS_STUNNED;
 
   if ( victim->position > POS_STUNNED
-       &&   is_affected_by( victim, AFF_PARALYSIS ) )
+       &&   IsAffectedBy( victim, AFF_PARALYSIS ) )
     victim->position = POS_STUNNED;
 
   if ( victim->mount )
@@ -1934,7 +1934,7 @@ void set_fighting( Character *ch, Character *victim )
       return;
     }
 
-  if ( is_affected_by(ch, AFF_SLEEP) )
+  if ( IsAffectedBy(ch, AFF_SLEEP) )
     affect_strip( ch, gsn_sleep );
 
   /* Limit attackers -Thoric */
@@ -1957,7 +1957,7 @@ void set_fighting( Character *ch, Character *victim )
   ch->position = POS_FIGHTING;
   victim->num_fighting++;
 
-  if ( victim->switched && is_affected_by(victim->switched, AFF_POSSESS) )
+  if ( victim->switched && IsAffectedBy(victim->switched, AFF_POSSESS) )
     {
       send_to_char( "You are disturbed!\r\n", victim->switched );
       do_return( victim->switched, "" );
@@ -2002,7 +2002,7 @@ void free_fight( Character *ch )
     ch->position = POS_STANDING;
 
   /* Berserk wears off after combat. -- Altrag */
-  if ( is_affected_by(ch, AFF_BERSERK) )
+  if ( IsAffectedBy(ch, AFF_BERSERK) )
     {
       affect_strip(ch, gsn_berserk);
       set_char_color(AT_WEAROFF, ch);
@@ -2307,7 +2307,7 @@ void group_gain( Character *ch, Character *victim )
 
       if ( lch == gch && members > 1 )
         {
-          xp = URANGE( members, xp*members, (exp_level( get_level( gch, LEADERSHIP_ABILITY ) + 1) - exp_level(get_level( gch, LEADERSHIP_ABILITY ) ) / 10) );
+          xp = URANGE( members, xp*members, (exp_level( GetAbilityLevel( gch, LEADERSHIP_ABILITY ) + 1) - exp_level(GetAbilityLevel( gch, LEADERSHIP_ABILITY ) ) / 10) );
           sprintf( buf, "You get %d leadership experience for leading your group to victory.\r\n", xp );
           send_to_char( buf, gch );
           gain_exp( gch, LEADERSHIP_ABILITY, xp );
@@ -2353,7 +2353,7 @@ int xp_compute( const Character *gch, const Character *victim )
 {
   int align;
   int xp = (GetExperienceWorth( victim )
-	    *  URANGE( 1, (get_level( victim, COMBAT_ABILITY ) - get_level( gch, COMBAT_ABILITY ) ) + 10, 20 )) / 10;
+	    *  URANGE( 1, (GetAbilityLevel( victim, COMBAT_ABILITY ) - GetAbilityLevel( gch, COMBAT_ABILITY ) ) + 10, 20 )) / 10;
   align = gch->alignment - victim->alignment;
 
   /* bonus for attacking opposite alignment */
@@ -2380,7 +2380,7 @@ int xp_compute( const Character *gch, const Character *victim )
 
   /* new xp cap for swreality */
 
-  return URANGE(1, xp, ( exp_level( get_level( gch, COMBAT_ABILITY ) + 1 ) - exp_level( get_level( gch, COMBAT_ABILITY ) ) ) );
+  return URANGE(1, xp, ( exp_level( GetAbilityLevel( gch, COMBAT_ABILITY ) + 1 ) - exp_level( GetAbilityLevel( gch, COMBAT_ABILITY ) ) ) );
 }
 
 /*
@@ -2524,7 +2524,7 @@ void dam_message( Character *ch, Character *victim, int dam, int dt )
         sprintf( buf3, "$n's %s %s you%c", attack, vp, punct );
       }
 
-  if ( get_level( ch, COMBAT_ABILITY ) >= 50 )
+  if ( GetAbilityLevel( ch, COMBAT_ABILITY ) >= 50 )
     sprintf( buf2, "%s You do %d points of damage.", buf2, dam);
 
   act( AT_ACTION, buf1, ch, NULL, victim, TO_NOTVICT );
@@ -2569,7 +2569,7 @@ bool get_cover( Character *ch )
       if ( ( pexit = get_exit(was_in, door) ) == NULL
            ||   !pexit->to_room
            || ( IS_SET(pexit->exit_info, EX_CLOSED)
-                &&   !is_affected_by( ch, AFF_PASS_DOOR ) )
+                &&   !IsAffectedBy( ch, AFF_PASS_DOOR ) )
            || ( IsNpc(ch)
                 &&   IS_SET(pexit->to_room->room_flags, ROOM_NO_MOB) ) )
         continue;

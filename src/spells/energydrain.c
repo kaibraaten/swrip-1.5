@@ -43,7 +43,7 @@ ch_ret spell_energy_drain( int sn, int level, Character *ch, void *vo )
 
   if ( ch->hit > ch->max_hit )
     ch->hit = ch->max_hit;
-  if ( is_affected_by(victim, AFF_PROTECT) && is_evil(ch) )
+  if ( IsAffectedBy(victim, AFF_PROTECT) && is_evil(ch) )
     dam -= (int) (dam / 4);
 
   return damage( ch, victim, dam, sn );

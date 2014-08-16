@@ -124,7 +124,7 @@ void do_buy( Character *ch, char *argument )
             }
         }
 
-      obj  = get_obj_carry( keeper, arg );
+      obj  = GetCarriedItem( keeper, arg );
 
       if ( !obj && arg[0] == '#' )
         {

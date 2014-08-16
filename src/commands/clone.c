@@ -82,7 +82,7 @@ void do_clone( Character *ch, char *argument )
 
     }
 
-  frc_level = get_level( ch, FORCE_ABILITY );
+  frc_level = GetAbilityLevel( ch, FORCE_ABILITY );
   frc_experience = GetExperience( ch, FORCE_ABILITY );
 
   /* Droids and hunters dont get force. DV */
@@ -98,13 +98,13 @@ void do_clone( Character *ch, char *argument )
       if(ch->stats.perm_frc > 0)
         {
           SetExperience( ch, FORCE_ABILITY, 500 );
-          set_level( ch, FORCE_ABILITY, 2 );
+          SetAbilityLevel( ch, FORCE_ABILITY, 2 );
         }
     }
   else
     {
       SetExperience( ch, FORCE_ABILITY, 0 );
-      set_level( ch, FORCE_ABILITY, 1 );
+      SetAbilityLevel( ch, FORCE_ABILITY, 1 );
     }
 
   ch->mana = 100 + 100*ch->stats.perm_frc;
@@ -140,9 +140,9 @@ void do_clone( Character *ch, char *argument )
       for(ability = 0; ability < MAX_ABILITY; ability++)
         {
           experience[ability] = GetExperience( ch, ability );
-          skill_level[ability] = get_level( ch, ability );
+          skill_level[ability] = GetAbilityLevel( ch, ability );
           SetExperience( ch, ability, 0 );
-          set_level( ch, ability, 1 );
+          SetAbilityLevel( ch, ability, 1 );
         }
 
       experience[FORCE_ABILITY] = frc_experience;
@@ -169,7 +169,7 @@ void do_clone( Character *ch, char *argument )
     save_clone( ch );
   ch->stats.perm_frc = frc;
 
-  set_level( ch, FORCE_ABILITY, frc_level );
+  SetAbilityLevel( ch, FORCE_ABILITY, frc_level );
   SetExperience( ch, FORCE_ABILITY, frc_experience );
   ch->mana = mana;
 
@@ -178,7 +178,7 @@ void do_clone( Character *ch, char *argument )
       for(ability = 0; ability < MAX_ABILITY; ability++)
         {
           SetExperience( ch, ability, experience[ability] );
-          set_level( ch, ability, skill_level[ability] );
+          SetAbilityLevel( ch, ability, skill_level[ability] );
         }
     }
 

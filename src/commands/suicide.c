@@ -27,7 +27,7 @@ void do_suicide( Character *ch, char *argument )
       return;
     }
 
-  if ( ( obj = get_eq_char( ch, WEAR_WIELD ) ) == NULL
+  if ( ( obj = GetEquipmentOnCharacter( ch, WEAR_WIELD ) ) == NULL
 
        ||   ( obj->value[3] != WEAPON_VIBRO_BLADE ) )
     {

@@ -20,7 +20,7 @@ ch_ret spell_affectchar( int sn, int level, Character *ch, void *vo )
         victim = (Character *) vo;
       /* Check if char has this bitvector already */
       if ( (af.bitvector=saf->bitvector) != 0
-           &&    is_affected_by( victim, af.bitvector )
+           &&    IsAffectedBy( victim, af.bitvector )
            &&   !SPELL_FLAG( skill, SF_ACCUMULATIVE ) )
         continue;
       /*

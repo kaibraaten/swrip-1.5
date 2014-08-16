@@ -10,7 +10,7 @@ void do_mpechoat( Character *ch, char *argument )
   int        actflags;
   short     color;
 
-  if ( is_affected_by( ch, AFF_CHARM ) )
+  if ( IsAffectedBy( ch, AFF_CHARM ) )
     return;
 
   if ( !IsNpc( ch ) )

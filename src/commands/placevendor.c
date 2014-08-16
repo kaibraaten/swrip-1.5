@@ -24,7 +24,7 @@ void do_placevendor (Character *ch, char *argument)
 
 
   /* better way to do this? what if they have another object called deed?*/
-  if ( ( obj = get_obj_carry( ch, "deed" ) ) == NULL )
+  if ( ( obj = GetCarriedItem( ch, "deed" ) ) == NULL )
     {
       send_to_char( "You do not have a deed!.\r\n", ch );
       return;

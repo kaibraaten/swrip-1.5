@@ -262,45 +262,45 @@ int TimesKilled( const Character *ch, const Character *mob );
 
 bool HasComlink( const Character *ch );
 
-short get_level( const Character *ch, short ability );
+short GetAbilityLevel( const Character *ch, short ability );
 
-void set_level( Character *ch, short ability, int newlevel );
+void SetAbilityLevel( Character *ch, short ability, int newlevel );
 
 /*
  * Return true if a char is affected by a spell.
  */
-bool is_affected( const Character *ch, int sn );
+bool IsAffected( const Character *ch, int sn );
 
 /*
  * Return true if a certain ch->affected_by bit is set.
  */
-bool is_affected_by( const Character *ch, int affected_by_bit );
+bool IsAffectedBy( const Character *ch, int affected_by_bit );
 
 /*
  * Find a piece of eq on a character.
  * Will pick the top layer if clothing is layered.              -Thoric
  */
-OBJ_DATA *get_eq_char( const Character *ch, int iWear );
+OBJ_DATA *GetEquipmentOnCharacter( const Character *ch, int iWear );
 
 /*
  * Equip a char with an obj.
  */
-void equip_char( Character *ch, OBJ_DATA *obj, int iWear );
+void EquipCharacter( Character *ch, OBJ_DATA *obj, int iWear );
 
 /*
  * Unequip a char with an obj.
  */
-void unequip_char( Character *ch, OBJ_DATA *obj );
+void UnequipCharacter( Character *ch, OBJ_DATA *obj );
 
 /*
  * Find an obj in player's inventory.
  */
-OBJ_DATA *get_obj_carry( const Character *ch, const char *argument );
+OBJ_DATA *GetCarriedItem( const Character *ch, const char *argument );
 
 /*
  * Find an obj in player's equipment.
  */
-OBJ_DATA *get_obj_wear( const Character *ch, const char *argument );
+OBJ_DATA *GetWornItem( const Character *ch, const char *argument );
 
 /*
  * How mental state could affect finding an object              -Thoric

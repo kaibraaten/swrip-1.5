@@ -14,7 +14,7 @@ void do_mpkill( Character *ch, char *argument )
       return;
     }
 
-  if ( is_affected_by( ch, AFF_CHARM ) )
+  if ( IsAffectedBy( ch, AFF_CHARM ) )
     return;
 
   if ( !IsNpc( ch ) )
@@ -43,7 +43,7 @@ void do_mpkill( Character *ch, char *argument )
       return;
     }
 
-  if ( is_affected_by( ch, AFF_CHARM ) && ch->master == victim )
+  if ( IsAffectedBy( ch, AFF_CHARM ) && ch->master == victim )
     {
       progbug( "MpKill - Charmed mob attacking master", ch );
       return;

@@ -2173,7 +2173,7 @@ Character *create_mobile( ProtoMobile *pMobIndex )
   {
     int ability;
     for ( ability = 0 ; ability < MAX_ABILITY ; ability++ )
-      set_level( mob, ability, mob->top_level );
+      SetAbilityLevel( mob, ability, mob->top_level );
   }
   mob->act                      = pMobIndex->act;
   mob->affected_by              = pMobIndex->affected_by;

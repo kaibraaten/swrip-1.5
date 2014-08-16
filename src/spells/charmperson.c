@@ -31,9 +31,9 @@ ch_ret spell_charm_person( int sn, int level, Character *ch, void *vo )
 
   charm_chance = ris_save( victim, level, RIS_CHARM );
 
-  if ( is_affected_by(victim, AFF_CHARM)
+  if ( IsAffectedBy(victim, AFF_CHARM)
        ||   charm_chance == 1000
-       ||   is_affected_by(ch, AFF_CHARM)
+       ||   IsAffectedBy(ch, AFF_CHARM)
        ||   level < victim->top_level
        ||        circle_follow( victim, ch )
        ||   saves_spell_staff( charm_chance, victim ) )

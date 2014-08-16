@@ -88,7 +88,7 @@ bool check_skill( Character *ch, const char *command, char *argument )
     }
 
   if ( IsNpc(ch)
-       && (is_affected_by( ch, AFF_CHARM ) || is_affected_by( ch, AFF_POSSESS )) )
+       && (IsAffectedBy( ch, AFF_CHARM ) || IsAffectedBy( ch, AFF_POSSESS )) )
     {
       send_to_char( "For some reason, you seem unable to perform that...\r\n", ch );
       act( AT_GREY,"$n looks around.", ch, NULL, NULL, TO_ROOM );
@@ -188,7 +188,7 @@ bool check_skill( Character *ch, const char *command, char *argument )
           break;
 
         case TAR_OBJ_INV:
-          if ( (obj=get_obj_carry(ch, argument)) == NULL )
+          if ( (obj=GetCarriedItem(ch, argument)) == NULL )
             {
               send_to_char( "You can't find that.\r\n", ch );
               return true;
@@ -312,7 +312,7 @@ void learn_from_success( Character *ch, int sn )
       return;
     }
 
-  adept = ( get_level(ch, skill_table[sn]->guild ) - skill_table[sn]->min_level )* 5 + 50;
+  adept = ( GetAbilityLevel(ch, skill_table[sn]->guild ) - skill_table[sn]->min_level )* 5 + 50;
   adept = UMIN(adept, 100);
 
   if ( ch->pcdata->learned[sn] >= adept )
@@ -320,9 +320,9 @@ void learn_from_success( Character *ch, int sn )
       return;
     }
 
-  if ( sklvl == 0 || sklvl > get_level( ch, skill_table[sn]->guild ) )
+  if ( sklvl == 0 || sklvl > GetAbilityLevel( ch, skill_table[sn]->guild ) )
     {
-      sklvl = get_level( ch, skill_table[sn]->guild );
+      sklvl = GetAbilityLevel( ch, skill_table[sn]->guild );
     }
 
   if ( ch->pcdata->learned[sn] < 100 )
@@ -383,18 +383,18 @@ void disarm( Character *ch, Character *victim )
   OBJ_DATA *obj = NULL;
   OBJ_DATA *tmpobj = NULL;
 
-  if ( ( obj = get_eq_char( victim, WEAR_WIELD ) ) == NULL )
+  if ( ( obj = GetEquipmentOnCharacter( victim, WEAR_WIELD ) ) == NULL )
     {
       return;
     }
 
-  if ( ( tmpobj = get_eq_char( victim, WEAR_DUAL_WIELD ) ) != NULL
+  if ( ( tmpobj = GetEquipmentOnCharacter( victim, WEAR_DUAL_WIELD ) ) != NULL
        && number_bits( 1 ) == 0 )
     {
       obj = tmpobj;
     }
 
-  if ( get_eq_char( ch, WEAR_WIELD ) == NULL
+  if ( GetEquipmentOnCharacter( ch, WEAR_WIELD ) == NULL
        && number_bits( 1 ) == 0 )
     {
       learn_from_failure( ch, gsn_disarm );
@@ -419,8 +419,8 @@ void disarm( Character *ch, Character *victim )
   act( AT_SKILL, "$n disarms $N!",  ch, NULL, victim, TO_NOTVICT );
   learn_from_success( ch, gsn_disarm );
 
-  if ( obj == get_eq_char( victim, WEAR_WIELD )
-       &&  (tmpobj = get_eq_char( victim, WEAR_DUAL_WIELD)) != NULL )
+  if ( obj == GetEquipmentOnCharacter( victim, WEAR_WIELD )
+       &&  (tmpobj = GetEquipmentOnCharacter( victim, WEAR_DUAL_WIELD)) != NULL )
     {
       tmpobj->wear_loc = WEAR_WIELD;
     }
@@ -435,16 +435,16 @@ void disarm( Character *ch, Character *victim )
  */
 void trip( Character *ch, Character *victim )
 {
-  if ( is_affected_by( victim, AFF_FLYING )
-       ||   is_affected_by( victim, AFF_FLOATING ) )
+  if ( IsAffectedBy( victim, AFF_FLYING )
+       ||   IsAffectedBy( victim, AFF_FLOATING ) )
     {
       return;
     }
 
   if ( victim->mount )
     {
-      if ( is_affected_by( victim->mount, AFF_FLYING )
-           || is_affected_by( victim->mount, AFF_FLOATING ) )
+      if ( IsAffectedBy( victim->mount, AFF_FLYING )
+           || IsAffectedBy( victim->mount, AFF_FLOATING ) )
 	{
 	  return;
 	}
@@ -521,14 +521,14 @@ bool check_parry( Character *ch, Character *victim )
 
   if ( IsNpc(victim) )
     {
-      chances = UMIN( 60, get_level( victim, COMBAT_ABILITY ) );
+      chances = UMIN( 60, GetAbilityLevel( victim, COMBAT_ABILITY ) );
     }
   else
     {
-      if ( ( wield = get_eq_char( victim, WEAR_WIELD ) ) == NULL ||
+      if ( ( wield = GetEquipmentOnCharacter( victim, WEAR_WIELD ) ) == NULL ||
            ( wield->value[OVAL_WEAPON_TYPE] != WEAPON_LIGHTSABER ) )
         {
-          if ( ( wield = get_eq_char( victim, WEAR_DUAL_WIELD ) ) == NULL ||
+          if ( ( wield = GetEquipmentOnCharacter( victim, WEAR_DUAL_WIELD ) ) == NULL ||
                ( wield->value[OVAL_WEAPON_TYPE] != WEAPON_LIGHTSABER ) )
 	    {
 	      return false;

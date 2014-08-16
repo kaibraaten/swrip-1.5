@@ -318,9 +318,9 @@ static int GetMaxForceLevel( const Character *ch )
 
 void advance_level( Character *ch, int ability )
 {
-  if ( ch->top_level < get_level( ch, ability ) && ch->top_level < 100 )
+  if ( ch->top_level < GetAbilityLevel( ch, ability ) && ch->top_level < 100 )
     {
-      ch->top_level = URANGE( 1, get_level( ch, ability ), 100 );
+      ch->top_level = URANGE( 1, GetAbilityLevel( ch, ability ), 100 );
     }
 
   if( is_jedi( ch ) && ability == FORCE_ABILITY )
@@ -343,30 +343,30 @@ void gain_exp( Character *ch, short ability, long gain )
 
   SetExperience( ch, ability, UMAX( 0, GetExperience( ch, ability ) + gain ) );
 
-  if (is_not_authed(ch) && GetExperience( ch, ability ) >= exp_level(get_level(ch, ability ) + 1))
+  if (is_not_authed(ch) && GetExperience( ch, ability ) >= exp_level(GetAbilityLevel(ch, ability ) + 1))
     {
       send_to_char("You can not ascend to a higher level until you are authorized.\r\n", ch);
-      SetExperience( ch, ability, exp_level( get_level(ch, ability) + 1 ) - 1);
+      SetExperience( ch, ability, exp_level( GetAbilityLevel(ch, ability) + 1 ) - 1);
       return;
     }
 
-  while ( GetExperience( ch, ability ) >= exp_level( get_level( ch, ability ) + 1))
+  while ( GetExperience( ch, ability ) >= exp_level( GetAbilityLevel( ch, ability ) + 1))
     {
-      short current_level = get_level( ch, ability );
+      short current_level = GetAbilityLevel( ch, ability );
       short new_level = 0;
 
       if ( current_level >= max_level( ch, ability ) )
         {
-          SetExperience( ch, ability, exp_level( get_level( ch, ability ) + 1 ) - 1);
+          SetExperience( ch, ability, exp_level( GetAbilityLevel( ch, ability ) + 1 ) - 1);
           return;
         }
 
       set_char_color( AT_WHITE + AT_BLINK, ch );
       new_level = current_level + 1;
-      set_level( ch, ability, new_level );
+      SetAbilityLevel( ch, ability, new_level );
 
       ch_printf( ch, "You have now obtained %s level %d!\r\n",
-		 ability_name[ability], get_level( ch, ability ) );
+		 ability_name[ability], GetAbilityLevel( ch, ability ) );
       advance_level( ch , ability);
     }
 }
@@ -438,7 +438,7 @@ int hit_gain( const Character *ch )
 	}
     }
 
-  if ( is_affected_by(ch, AFF_POISON) )
+  if ( IsAffectedBy(ch, AFF_POISON) )
     {
       gain /= 4;
     }
@@ -468,7 +468,7 @@ int mana_gain( const Character *ch )
 	  return (0 - ch->mana);
 	}
 
-      gain = UMIN( 5, get_level( ch, FORCE_ABILITY ) / 2 );
+      gain = UMIN( 5, GetAbilityLevel( ch, FORCE_ABILITY ) / 2 );
 
       if ( ch->position < POS_SLEEPING )
 	{
@@ -497,7 +497,7 @@ int mana_gain( const Character *ch )
 	}
     }
 
-  if ( is_affected_by( ch, AFF_POISON ) )
+  if ( IsAffectedBy( ch, AFF_POISON ) )
     {
       gain /= 4;
     }
@@ -551,7 +551,7 @@ int move_gain( const Character *ch )
 	}
     }
 
-  if ( is_affected_by(ch, AFF_POISON) )
+  if ( IsAffectedBy(ch, AFF_POISON) )
     {
       gain /= 4;
     }
@@ -577,7 +577,7 @@ void gain_addiction( Character *ch )
             {
             default:
             case SPICE_GLITTERSTIM:
-              if ( !is_affected_by( ch, AFF_BLIND ) )
+              if ( !IsAffectedBy( ch, AFF_BLIND ) )
                 {
                   af.type      = gsn_blindness;
                   af.location  = APPLY_AC;
@@ -588,7 +588,7 @@ void gain_addiction( Character *ch )
                 }
 
             case SPICE_CARSANUM:
-              if ( !is_affected_by( ch, AFF_WEAKEN ) )
+              if ( !IsAffectedBy( ch, AFF_WEAKEN ) )
                 {
                   af.type      = -1;
                   af.location  = APPLY_DAMROLL;
@@ -599,7 +599,7 @@ void gain_addiction( Character *ch )
                 }
 
             case SPICE_RYLL:
-              if ( !is_affected_by( ch, AFF_WEAKEN ) )
+              if ( !IsAffectedBy( ch, AFF_WEAKEN ) )
                 {
                   af.type      = -1;
                   af.location  = APPLY_DEX;
@@ -610,7 +610,7 @@ void gain_addiction( Character *ch )
                 }
 
             case SPICE_ANDRIS:
-              if ( !is_affected_by( ch, AFF_WEAKEN ) )
+              if ( !IsAffectedBy( ch, AFF_WEAKEN ) )
                 {
                   af.type      = -1;
                   af.location  = APPLY_CON;
@@ -860,15 +860,15 @@ void mobile_update( void )
         }
 
       if ( !ch->in_room
-           || is_affected_by(ch, AFF_CHARM)
-           || is_affected_by(ch, AFF_PARALYSIS) )
+           || IsAffectedBy(ch, AFF_CHARM)
+           || IsAffectedBy(ch, AFF_PARALYSIS) )
 	{
 	  continue;
 	}
 
       /* Clean up 'animated corpses' that are not charmed' - Scryn */
 
-      if ( ch->pIndexData->vnum == 5 && !is_affected_by(ch, AFF_CHARM) )
+      if ( ch->pIndexData->vnum == 5 && !IsAffectedBy(ch, AFF_CHARM) )
         {
           if(ch->in_room->first_person)
 	    {
@@ -1466,7 +1466,7 @@ void char_update( void )
         {
           OBJ_DATA *obj = NULL;
 
-          if ( ( obj = get_eq_char( ch, WEAR_LIGHT ) ) != NULL
+          if ( ( obj = GetEquipmentOnCharacter( ch, WEAR_LIGHT ) ) != NULL
                && obj->item_type == ITEM_LIGHT
                && obj->value[OVAL_LIGHT_POWER] > 0 )
             {
@@ -1585,7 +1585,7 @@ void char_update( void )
            *   MUST NOT refer to ch after damage taken,
            *   as it may be lethal damage (on NPC).
            */
-          if ( is_affected_by(ch, AFF_POISON) )
+          if ( IsAffectedBy(ch, AFF_POISON) )
             {
               act( AT_POISON, "$n shivers and suffers.", ch, NULL, NULL, TO_ROOM );
               act( AT_POISON, "You shiver and suffer.", ch, NULL, NULL, TO_CHAR );
@@ -1927,7 +1927,7 @@ void obj_update( void )
 
       if ( obj->item_type == ITEM_GRENADE && obj->carried_by)
         {
-          wield = get_eq_char( obj->carried_by, WEAR_HOLD );
+          wield = GetEquipmentOnCharacter( obj->carried_by, WEAR_HOLD );
 
           if( wield == obj )
 	    {
@@ -2188,7 +2188,7 @@ void char_check( void )
           if ( ( ch->in_room && ch->in_room->sector_type == SECT_UNDERWATER )
                || ( ch->in_room && ch->in_room->sector_type == SECT_OCEANFLOOR ) )
             {
-              if ( !is_affected_by( ch, AFF_AQUA_BREATH ) )
+              if ( !IsAffectedBy( ch, AFF_AQUA_BREATH ) )
                 {
                   if ( GetTrustLevel(ch) < LEVEL_IMMORTAL )
                     {
@@ -2219,9 +2219,9 @@ void char_check( void )
                && (( ch->in_room->sector_type == SECT_WATER_NOSWIM )
                    || ( ch->in_room->sector_type == SECT_WATER_SWIM ) ) )
             {
-              if ( !is_affected_by( ch, AFF_FLYING )
-                   && !is_affected_by( ch, AFF_FLOATING )
-                   && !is_affected_by( ch, AFF_AQUA_BREATH )
+              if ( !IsAffectedBy( ch, AFF_FLYING )
+                   && !IsAffectedBy( ch, AFF_FLOATING )
+                   && !IsAffectedBy( ch, AFF_AQUA_BREATH )
                    && !ch->mount )
                 {
                   if ( !IsImmortal( ch ) )
@@ -2319,7 +2319,7 @@ void aggr_update( void )
 
       if ( !IsNpc(ch)
            || ch->fighting
-           || is_affected_by(ch, AFF_CHARM)
+           || IsAffectedBy(ch, AFF_CHARM)
            || !is_awake(ch)
            || ( IS_SET(ch->act, ACT_WIMPY) ) )
 	{
@@ -2374,7 +2374,7 @@ void aggr_update( void )
               OBJ_DATA *obj = NULL;
 
               if ( !ch->mount
-                   && (obj = get_eq_char( ch, WEAR_WIELD )) != NULL
+                   && (obj = GetEquipmentOnCharacter( ch, WEAR_WIELD )) != NULL
                    && obj->value[OVAL_WEAPON_TYPE] == WEAPON_FORCE_PIKE
                    && !victim->fighting
                    && victim->hit >= victim->max_hit )

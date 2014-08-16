@@ -29,13 +29,13 @@ void do_remove( Character *ch, char *argument )
       return;
     }
 
-  if ( ( obj = get_obj_wear( ch, arg ) ) == NULL )
+  if ( ( obj = GetWornItem( ch, arg ) ) == NULL )
     {
       send_to_char( "You are not using that item.\r\n", ch );
       return;
     }
 
-  if ( (obj_next=get_eq_char(ch, obj->wear_loc)) != obj )
+  if ( (obj_next=GetEquipmentOnCharacter(ch, obj->wear_loc)) != obj )
     {
       act( AT_PLAIN, "You must remove $p first.",
 	   ch, obj_next, NULL, TO_CHAR );

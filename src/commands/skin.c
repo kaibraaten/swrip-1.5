@@ -20,7 +20,7 @@ void do_skin( Character *ch, char *argument)
       send_to_char( "You cannot find that here.\r\n", ch );
       return;
     }
-  if ( (obj=get_eq_char(ch, WEAR_WIELD)) == NULL )
+  if ( (obj=GetEquipmentOnCharacter(ch, WEAR_WIELD)) == NULL )
     {
       send_to_char( "You have no weapon with which to perform this deed.\r\n", ch );
       return;

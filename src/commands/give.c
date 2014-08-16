@@ -76,7 +76,7 @@ void do_give( Character *ch, char *argument )
       return;
     }
 
-  if ( ( obj = get_obj_carry( ch, arg1 ) ) == NULL )
+  if ( ( obj = GetCarriedItem( ch, arg1 ) ) == NULL )
     {
       send_to_char( "You do not have that item.\r\n", ch );
       return;

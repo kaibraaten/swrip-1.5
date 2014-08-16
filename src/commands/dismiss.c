@@ -20,7 +20,7 @@ void do_dismiss( Character *ch, char *argument )
       return;
     }
 
-  if ( is_affected_by( victim, AFF_CHARM )
+  if ( IsAffectedBy( victim, AFF_CHARM )
        && IsNpc( victim )
        && victim->master == ch )
     {

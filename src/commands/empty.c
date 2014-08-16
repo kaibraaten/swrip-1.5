@@ -20,7 +20,7 @@ void do_empty( Character *ch, char *argument )
   if ( ms_find_obj(ch) )
     return;
 
-  if ( (obj = get_obj_carry( ch, arg1 )) == NULL )
+  if ( (obj = GetCarriedItem( ch, arg1 )) == NULL )
     {
       send_to_char( "You aren't carrying that.\r\n", ch );
       return;

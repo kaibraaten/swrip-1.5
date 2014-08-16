@@ -11,7 +11,7 @@ void do_mpmload( Character *ch, char *argument )
   ProtoMobile *pMobIndex;
   Character      *victim;
 
-  if ( is_affected_by( ch, AFF_CHARM ) )
+  if ( IsAffectedBy( ch, AFF_CHARM ) )
     return;
 
   if ( !IsNpc( ch ) )

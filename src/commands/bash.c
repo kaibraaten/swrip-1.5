@@ -6,7 +6,7 @@ void do_bash( Character *ch, char *argument )
   Character *victim;
   int bash_chance;
 
-  if ( IsNpc(ch) && is_affected_by( ch, AFF_CHARM ) )
+  if ( IsNpc(ch) && IsAffectedBy( ch, AFF_CHARM ) )
     {
       send_to_char( "You can't concentrate enough for that.\r\n", ch );
       return;
@@ -44,7 +44,7 @@ void do_bash( Character *ch, char *argument )
       set_wait_state( ch,     2 * PULSE_VIOLENCE );
       set_wait_state( victim, 2 * PULSE_VIOLENCE );
       victim->position = POS_SITTING;
-      global_retcode = damage( ch, victim, number_range( 1, get_level( ch, COMBAT_ABILITY ) ), gsn_bash );
+      global_retcode = damage( ch, victim, number_range( 1, GetAbilityLevel( ch, COMBAT_ABILITY ) ), gsn_bash );
     }
   else
     {

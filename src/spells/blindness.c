@@ -20,7 +20,7 @@ ch_ret spell_blindness( int sn, int level, Character *ch, void *vo )
       return rSPELL_FAILED;
     }
 
-  if ( is_affected_by(victim, AFF_BLIND) || saves_spell_staff( tmp, victim ) )
+  if ( IsAffectedBy(victim, AFF_BLIND) || saves_spell_staff( tmp, victim ) )
     {
       failed_casting( skill, ch, victim, NULL );
       return rSPELL_FAILED;

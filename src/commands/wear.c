@@ -48,7 +48,7 @@ void do_wear( Character *ch, char *argument )
     }
   else
     {
-      if ( ( obj = get_obj_carry( ch, arg1 ) ) == NULL )
+      if ( ( obj = GetCarriedItem( ch, arg1 ) ) == NULL )
         {
           send_to_char( "You do not have that item.\r\n", ch );
           return;
@@ -228,7 +228,7 @@ static void wear_obj( Character *ch, OBJ_DATA *obj, bool fReplace, short wear_bi
           else
             actiondesc( ch, obj, NULL );
         }
-      equip_char( ch, obj, WEAR_LIGHT );
+      EquipCharacter( ch, obj, WEAR_LIGHT );
       oprog_wear_trigger( ch, obj );
       return;
     }
@@ -249,13 +249,13 @@ static void wear_obj( Character *ch, OBJ_DATA *obj, bool fReplace, short wear_bi
       return;
 
     case ITEM_WEAR_FINGER:
-      if ( get_eq_char( ch, WEAR_FINGER_L )
-           &&   get_eq_char( ch, WEAR_FINGER_R )
+      if ( GetEquipmentOnCharacter( ch, WEAR_FINGER_L )
+           &&   GetEquipmentOnCharacter( ch, WEAR_FINGER_R )
            &&   !remove_obj( ch, WEAR_FINGER_L, fReplace )
            &&   !remove_obj( ch, WEAR_FINGER_R, fReplace ) )
         return;
 
-      if ( !get_eq_char( ch, WEAR_FINGER_L ) )
+      if ( !GetEquipmentOnCharacter( ch, WEAR_FINGER_L ) )
         {
           if ( !oprog_use_trigger( ch, obj, NULL, NULL, NULL ) )
             {
@@ -267,12 +267,12 @@ static void wear_obj( Character *ch, OBJ_DATA *obj, bool fReplace, short wear_bi
               else
                 actiondesc( ch, obj, NULL );
             }
-          equip_char( ch, obj, WEAR_FINGER_L );
+          EquipCharacter( ch, obj, WEAR_FINGER_L );
           oprog_wear_trigger( ch, obj );
           return;
         }
 
-      if ( !get_eq_char( ch, WEAR_FINGER_R ) )
+      if ( !GetEquipmentOnCharacter( ch, WEAR_FINGER_R ) )
         {
           if ( !oprog_use_trigger( ch, obj, NULL, NULL, NULL ) )
             {
@@ -285,7 +285,7 @@ static void wear_obj( Character *ch, OBJ_DATA *obj, bool fReplace, short wear_bi
                 actiondesc( ch, obj, NULL );
             }
 
-	  equip_char( ch, obj, WEAR_FINGER_R );
+	  EquipCharacter( ch, obj, WEAR_FINGER_R );
           oprog_wear_trigger( ch, obj );
           return;
         }
@@ -295,13 +295,13 @@ static void wear_obj( Character *ch, OBJ_DATA *obj, bool fReplace, short wear_bi
       return;
 
     case ITEM_WEAR_NECK:
-      if ( get_eq_char( ch, WEAR_NECK_1 ) != NULL
-           &&   get_eq_char( ch, WEAR_NECK_2 ) != NULL
+      if ( GetEquipmentOnCharacter( ch, WEAR_NECK_1 ) != NULL
+           &&   GetEquipmentOnCharacter( ch, WEAR_NECK_2 ) != NULL
            &&   !remove_obj( ch, WEAR_NECK_1, fReplace )
            &&   !remove_obj( ch, WEAR_NECK_2, fReplace ) )
         return;
 
-      if ( !get_eq_char( ch, WEAR_NECK_1 ) )
+      if ( !GetEquipmentOnCharacter( ch, WEAR_NECK_1 ) )
         {
           if ( !oprog_use_trigger( ch, obj, NULL, NULL, NULL ) )
             {
@@ -313,12 +313,12 @@ static void wear_obj( Character *ch, OBJ_DATA *obj, bool fReplace, short wear_bi
               else
                 actiondesc( ch, obj, NULL );
             }
-          equip_char( ch, obj, WEAR_NECK_1 );
+          EquipCharacter( ch, obj, WEAR_NECK_1 );
           oprog_wear_trigger( ch, obj );
           return;
         }
 
-      if ( !get_eq_char( ch, WEAR_NECK_2 ) )
+      if ( !GetEquipmentOnCharacter( ch, WEAR_NECK_2 ) )
         {
           if ( !oprog_use_trigger( ch, obj, NULL, NULL, NULL ) )
             {
@@ -330,7 +330,7 @@ static void wear_obj( Character *ch, OBJ_DATA *obj, bool fReplace, short wear_bi
               else
                 actiondesc( ch, obj, NULL );
             }
-	  equip_char( ch, obj, WEAR_NECK_2 );
+	  EquipCharacter( ch, obj, WEAR_NECK_2 );
           oprog_wear_trigger( ch, obj );
           return;
         }
@@ -359,7 +359,7 @@ static void wear_obj( Character *ch, OBJ_DATA *obj, bool fReplace, short wear_bi
           else
             actiondesc( ch, obj, NULL );
         }
-      equip_char( ch, obj, WEAR_BODY );
+      EquipCharacter( ch, obj, WEAR_BODY );
       oprog_wear_trigger( ch, obj );
       return;
 
@@ -381,7 +381,7 @@ static void wear_obj( Character *ch, OBJ_DATA *obj, bool fReplace, short wear_bi
           else
             actiondesc( ch, obj, NULL );
         }
-      equip_char( ch, obj, WEAR_HEAD );
+      EquipCharacter( ch, obj, WEAR_HEAD );
       oprog_wear_trigger( ch, obj );
       return;
 
@@ -398,7 +398,7 @@ static void wear_obj( Character *ch, OBJ_DATA *obj, bool fReplace, short wear_bi
           else
             actiondesc( ch, obj, NULL );
         }
-      equip_char( ch, obj, WEAR_EYES );
+      EquipCharacter( ch, obj, WEAR_EYES );
       oprog_wear_trigger( ch, obj );
       return;
 
@@ -421,7 +421,7 @@ static void wear_obj( Character *ch, OBJ_DATA *obj, bool fReplace, short wear_bi
             actiondesc( ch, obj, NULL );
         }
 
-      equip_char( ch, obj, WEAR_EARS );
+      EquipCharacter( ch, obj, WEAR_EARS );
       oprog_wear_trigger( ch, obj );
       return;
 
@@ -450,7 +450,7 @@ static void wear_obj( Character *ch, OBJ_DATA *obj, bool fReplace, short wear_bi
           else
             actiondesc( ch, obj, NULL );
         }
-      equip_char( ch, obj, WEAR_LEGS );
+      EquipCharacter( ch, obj, WEAR_LEGS );
       oprog_wear_trigger( ch, obj );
       return;
 
@@ -479,7 +479,7 @@ static void wear_obj( Character *ch, OBJ_DATA *obj, bool fReplace, short wear_bi
           else
             actiondesc( ch, obj, NULL );
         }
-      equip_char( ch, obj, WEAR_FEET );
+      EquipCharacter( ch, obj, WEAR_FEET );
       oprog_wear_trigger( ch, obj );
       return;
 
@@ -503,7 +503,7 @@ static void wear_obj( Character *ch, OBJ_DATA *obj, bool fReplace, short wear_bi
           else
             actiondesc( ch, obj, NULL );
         }
-      equip_char( ch, obj, WEAR_HANDS );
+      EquipCharacter( ch, obj, WEAR_HANDS );
       oprog_wear_trigger( ch, obj );
       return;
 
@@ -523,7 +523,7 @@ static void wear_obj( Character *ch, OBJ_DATA *obj, bool fReplace, short wear_bi
           else
             actiondesc( ch, obj, NULL );
         }
-      equip_char( ch, obj, WEAR_ARMS );
+      EquipCharacter( ch, obj, WEAR_ARMS );
       oprog_wear_trigger( ch, obj );
       return;
 
@@ -547,7 +547,7 @@ static void wear_obj( Character *ch, OBJ_DATA *obj, bool fReplace, short wear_bi
           else
             actiondesc( ch, obj, NULL );
         }
-      equip_char( ch, obj, WEAR_ABOUT );
+      EquipCharacter( ch, obj, WEAR_ABOUT );
       oprog_wear_trigger( ch, obj );
       return;
 
@@ -567,18 +567,18 @@ static void wear_obj( Character *ch, OBJ_DATA *obj, bool fReplace, short wear_bi
           else
             actiondesc( ch, obj, NULL );
         }
-      equip_char( ch, obj, WEAR_WAIST );
+      EquipCharacter( ch, obj, WEAR_WAIST );
       oprog_wear_trigger( ch, obj );
       return;
 
     case ITEM_WEAR_WRIST:
-      if ( get_eq_char( ch, WEAR_WRIST_L )
-           &&   get_eq_char( ch, WEAR_WRIST_R )
+      if ( GetEquipmentOnCharacter( ch, WEAR_WRIST_L )
+           &&   GetEquipmentOnCharacter( ch, WEAR_WRIST_R )
            &&   !remove_obj( ch, WEAR_WRIST_L, fReplace )
            &&   !remove_obj( ch, WEAR_WRIST_R, fReplace ) )
         return;
 
-      if ( !get_eq_char( ch, WEAR_WRIST_L ) )
+      if ( !GetEquipmentOnCharacter( ch, WEAR_WRIST_L ) )
         {
           if ( !oprog_use_trigger( ch, obj, NULL, NULL, NULL ) )
             {
@@ -592,12 +592,12 @@ static void wear_obj( Character *ch, OBJ_DATA *obj, bool fReplace, short wear_bi
               else
                 actiondesc( ch, obj, NULL );
             }
-          equip_char( ch, obj, WEAR_WRIST_L );
+          EquipCharacter( ch, obj, WEAR_WRIST_L );
 	  oprog_wear_trigger( ch, obj );
           return;
         }
 
-      if ( !get_eq_char( ch, WEAR_WRIST_R ) )
+      if ( !GetEquipmentOnCharacter( ch, WEAR_WRIST_R ) )
         {
           if ( !oprog_use_trigger( ch, obj, NULL, NULL, NULL ) )
             {
@@ -611,7 +611,7 @@ static void wear_obj( Character *ch, OBJ_DATA *obj, bool fReplace, short wear_bi
               else
                 actiondesc( ch, obj, NULL );
             }
-          equip_char( ch, obj, WEAR_WRIST_R );
+          EquipCharacter( ch, obj, WEAR_WRIST_R );
           oprog_wear_trigger( ch, obj );
           return;
         }
@@ -633,12 +633,12 @@ static void wear_obj( Character *ch, OBJ_DATA *obj, bool fReplace, short wear_bi
           else
             actiondesc( ch, obj, NULL );
         }
-      equip_char( ch, obj, WEAR_SHIELD );
+      EquipCharacter( ch, obj, WEAR_SHIELD );
       oprog_wear_trigger( ch, obj );
       return;
 
     case ITEM_WIELD:
-      if ( (tmpobj  = get_eq_char( ch, WEAR_WIELD )) != NULL
+      if ( (tmpobj  = GetEquipmentOnCharacter( ch, WEAR_WIELD )) != NULL
            &&   !could_dual(ch) )
         {
           send_to_char( "You're already wielding something.\r\n", ch );
@@ -674,7 +674,7 @@ static void wear_obj( Character *ch, OBJ_DATA *obj, bool fReplace, short wear_bi
 		    }
                 }
 
-              equip_char( ch, obj, WEAR_DUAL_WIELD );
+              EquipCharacter( ch, obj, WEAR_DUAL_WIELD );
               oprog_wear_trigger( ch, obj );
             }
           return;
@@ -696,12 +696,12 @@ static void wear_obj( Character *ch, OBJ_DATA *obj, bool fReplace, short wear_bi
 	  else
             actiondesc( ch, obj, NULL );
         }
-      equip_char( ch, obj, WEAR_WIELD );
+      EquipCharacter( ch, obj, WEAR_WIELD );
       oprog_wear_trigger( ch, obj );
       return;
 
     case ITEM_HOLD:
-      if ( get_eq_char( ch, WEAR_DUAL_WIELD ) )
+      if ( GetEquipmentOnCharacter( ch, WEAR_DUAL_WIELD ) )
         {
           send_to_char( "You cannot hold something AND two weapons!\r\n", ch );
           return;
@@ -721,7 +721,7 @@ static void wear_obj( Character *ch, OBJ_DATA *obj, bool fReplace, short wear_bi
           act( AT_ACTION, "$n holds $p in $s hands.",   ch, obj, NULL, TO_ROOM );
           act( AT_ACTION, "You hold $p in your hands.", ch, obj, NULL, TO_CHAR );
         }
-      equip_char( ch, obj, WEAR_HOLD );
+      EquipCharacter( ch, obj, WEAR_HOLD );
       oprog_wear_trigger( ch, obj );
       return;
 
@@ -741,7 +741,7 @@ static void wear_obj( Character *ch, OBJ_DATA *obj, bool fReplace, short wear_bi
 	  else
             actiondesc( ch, obj, NULL );
         }
-      equip_char( ch, obj, WEAR_FLOATING );
+      EquipCharacter( ch, obj, WEAR_FLOATING );
       oprog_wear_trigger( ch, obj );
       return;
     case ITEM_WEAR_OVER:
@@ -757,7 +757,7 @@ static void wear_obj( Character *ch, OBJ_DATA *obj, bool fReplace, short wear_bi
           else
             actiondesc( ch, obj, NULL );
         }
-      equip_char( ch, obj, WEAR_OVER );
+      EquipCharacter( ch, obj, WEAR_OVER );
       oprog_wear_trigger( ch, obj );
       return;
     }
@@ -813,13 +813,13 @@ static bool can_dual( const Character *ch )
       return false;
     }
 
-  if ( get_eq_char( ch, WEAR_DUAL_WIELD ) )
+  if ( GetEquipmentOnCharacter( ch, WEAR_DUAL_WIELD ) )
     {
       send_to_char( "You are already wielding two weapons!\r\n", ch );
       return false;
     }
 
-  if ( get_eq_char( ch, WEAR_HOLD ) )
+  if ( GetEquipmentOnCharacter( ch, WEAR_HOLD ) )
     {
       send_to_char( "You cannot dual wield while holding something!\r\n", ch );
       return false;

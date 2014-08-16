@@ -90,8 +90,8 @@ void make_scraps( OBJ_DATA *obj )
       act( AT_OBJECT, "$p falls to the ground in scraps!",
            obj->carried_by, obj, NULL, TO_CHAR );
 
-      if ( obj == get_eq_char( obj->carried_by, WEAR_WIELD )
-           &&  (tmpobj = get_eq_char( obj->carried_by, WEAR_DUAL_WIELD)) != NULL )
+      if ( obj == GetEquipmentOnCharacter( obj->carried_by, WEAR_WIELD )
+           &&  (tmpobj = GetEquipmentOnCharacter( obj->carried_by, WEAR_DUAL_WIELD)) != NULL )
 	{
 	  tmpobj->wear_loc = WEAR_WIELD;
 	}

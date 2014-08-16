@@ -1587,7 +1587,7 @@ void reset_area( Area *pArea )
 
           if ( pReset->command == 'E' )
 	    {
-	      equip_char(mob, obj, pReset->arg3);
+	      EquipCharacter(mob, obj, pReset->arg3);
 	    }
 
           lastobj = obj;

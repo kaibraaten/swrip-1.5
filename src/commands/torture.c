@@ -16,7 +16,7 @@ void do_torture( Character *ch, char *argument )
       return;
     }
 
-  if ( IsNpc(ch) && is_affected_by( ch, AFF_CHARM ) )
+  if ( IsNpc(ch) && IsAffectedBy( ch, AFF_CHARM ) )
     {
       send_to_char( "You can't do that right now.\r\n", ch );
       return;
@@ -69,7 +69,7 @@ void do_torture( Character *ch, char *argument )
   set_wait_state( ch, skill_table[gsn_torture]->beats );
 
   fail = false;
-  the_chance = ris_save( victim, get_level( ch, LEADERSHIP_ABILITY ) / 10, RIS_PARALYSIS );
+  the_chance = ris_save( victim, GetAbilityLevel( ch, LEADERSHIP_ABILITY ) / 10, RIS_PARALYSIS );
 
   if ( the_chance == 1000 )
     fail = true;
@@ -92,7 +92,7 @@ void do_torture( Character *ch, char *argument )
       act( AT_SKILL, "You torture $N, leaving $M screaming in pain.", ch, NULL, victim, TO_CHAR );
       act( AT_SKILL, "$n tortures $N, leaving $M screaming in agony!", ch, NULL, victim, TO_NOTVICT );
 
-      dam = dice( get_level( ch, LEADERSHIP_ABILITY ) / 80 , 4 );
+      dam = dice( GetAbilityLevel( ch, LEADERSHIP_ABILITY ) / 80 , 4 );
       dam = URANGE( 0, victim->max_hit-10, dam );
       victim->hit -= dam;
       victim->max_hit -= dam;

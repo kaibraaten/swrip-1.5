@@ -234,7 +234,7 @@ void talk_channel( Character *ch, const char *argument, int channel, const char 
       return;
     }
 
-  if ( IsNpc( ch ) && is_affected_by( ch, AFF_CHARM ) )
+  if ( IsNpc( ch ) && IsAffectedBy( ch, AFF_CHARM ) )
     {
       if ( ch->master )
         send_to_char( "I don't think so...\r\n", ch->master );
@@ -558,7 +558,7 @@ void stop_follower( Character *ch )
   if ( IsNpc(ch) && !IsNpc(ch->master) && ch->master->pcdata->pet == ch )
     ch->master->pcdata->pet = NULL;
 
-  if ( is_affected_by(ch, AFF_CHARM) )
+  if ( IsAffectedBy(ch, AFF_CHARM) )
     {
       REMOVE_BIT( ch->affected_by, AFF_CHARM );
       affect_strip( ch, gsn_charm_person );

@@ -52,7 +52,7 @@ ch_ret spell_possess( int sn, int level, Character *ch, void *vo )
       return rSPELL_FAILED;
     }
 
-  if ( is_affected_by(victim, AFF_POSSESS)
+  if ( IsAffectedBy(victim, AFF_POSSESS)
        ||   level < (victim->top_level + 30)
        ||  victim->desc
        ||  !chance(ch, 25) )
@@ -67,7 +67,7 @@ ch_ret spell_possess( int sn, int level, Character *ch, void *vo )
   sith_penalty( ch );
 
   af.type      = sn;
-  af.duration  = 20 + (get_level( ch, FORCE_ABILITY ) - victim->top_level) / 2;
+  af.duration  = 20 + (GetAbilityLevel( ch, FORCE_ABILITY ) - victim->top_level) / 2;
   af.location  = 0;
   af.modifier  = 0;
   af.bitvector = AFF_POSSESS;

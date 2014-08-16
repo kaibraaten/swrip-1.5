@@ -117,7 +117,7 @@ void do_bashdoor( Character *ch, char *argument )
 	{
 	  if ( is_awake( gch )
 	       && !gch->fighting
-	       && ( IsNpc( gch ) && !is_affected_by( gch, AFF_CHARM ) )
+	       && ( IsNpc( gch ) && !IsAffectedBy( gch, AFF_CHARM ) )
 	       && ( ch->top_level - gch->top_level <= 4 )
 	       && number_bits( 2 ) == 0 )
 	    {

@@ -29,7 +29,7 @@ void do_cast( Character *ch, char *argument )
     {
     default:
       /* no ordering charmed mobs to cast spells */
-      if ( IsNpc(ch) && is_affected_by( ch, AFF_CHARM ) )
+      if ( IsNpc(ch) && IsAffectedBy( ch, AFF_CHARM ) )
         {
           send_to_char( "You can't seem to do that right now...\r\n", ch );
 	  return;
@@ -352,7 +352,7 @@ void do_cast( Character *ch, char *argument )
       else
         {
           start_timer(&time_used);
-          retcode = (*skill->spell_fun) ( sn, get_level( ch, FORCE_ABILITY ), ch, vo );
+          retcode = (*skill->spell_fun) ( sn, GetAbilityLevel( ch, FORCE_ABILITY ), ch, vo );
           end_timer(&time_used);
           update_userec(&time_used, &skill->userec);
         }
@@ -365,7 +365,7 @@ void do_cast( Character *ch, char *argument )
       int force_exp;
 
       force_exp = skill->min_level*skill->min_level*10;
-      force_exp = URANGE( 0 , force_exp, ( exp_level(get_level( ch, FORCE_ABILITY ) + 1 ) - exp_level(get_level(ch, FORCE_ABILITY ) ) )/35 );
+      force_exp = URANGE( 0 , force_exp, ( exp_level(GetAbilityLevel( ch, FORCE_ABILITY ) + 1 ) - exp_level(GetAbilityLevel(ch, FORCE_ABILITY ) ) )/35 );
       if( !ch->fighting  )
         ch_printf( ch, "You gain %d force experience.\r\n" , force_exp );
       gain_exp(ch, FORCE_ABILITY, force_exp );

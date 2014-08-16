@@ -121,7 +121,7 @@ void do_steal( Character *ch, char *argument )
 
       if ( IsNpc( victim ) )
 	{
-	  xp = UMIN( amount*10 , ( exp_level( get_level(ch, SMUGGLING_ABILITY ) + 1 ) - exp_level( get_level(ch, SMUGGLING_ABILITY))  ) / 35  );
+	  xp = UMIN( amount*10 , ( exp_level( GetAbilityLevel(ch, SMUGGLING_ABILITY ) + 1 ) - exp_level( GetAbilityLevel(ch, SMUGGLING_ABILITY))  ) / 35  );
 	  xp = UMIN( xp , xp_compute( ch, victim ) );
 	  gain_exp( ch, SMUGGLING_ABILITY, xp );
 	  ch_printf( ch, "&WYou gain %ld smuggling experience!\r\n", xp );
@@ -129,13 +129,13 @@ void do_steal( Character *ch, char *argument )
       return;
     }
 
-  if ( ( obj = get_obj_carry( victim, arg1 ) ) == NULL )
+  if ( ( obj = GetCarriedItem( victim, arg1 ) ) == NULL )
     {
       if ( victim->position <= POS_SLEEPING )
         {
-          if ( ( obj = get_obj_wear( victim, arg1 ) ) != NULL )
+          if ( ( obj = GetWornItem( victim, arg1 ) ) != NULL )
             {
-              if ( (obj_next=get_eq_char(victim, obj->wear_loc)) != obj )
+              if ( (obj_next=GetEquipmentOnCharacter(victim, obj->wear_loc)) != obj )
                 {
                   ch_printf( ch, "They are wearing %s on top of %s.\r\n", obj_next->short_descr, obj->short_descr);
                   send_to_char( "You'll have to steal that first.\r\n", ch );
@@ -143,7 +143,7 @@ void do_steal( Character *ch, char *argument )
                   return;
                 }
               else
-                unequip_char( victim, obj );
+                UnequipCharacter( victim, obj );
             }
         }
 
@@ -180,7 +180,7 @@ void do_steal( Character *ch, char *argument )
     learn_from_success( ch, gsn_steal );
   if ( IsNpc( victim ) )
     {
-      xp = UMIN( obj->cost*10 , ( exp_level( get_level(ch, SMUGGLING_ABILITY) + 1) - exp_level( get_level( ch, SMUGGLING_ABILITY) ) ) / 10  );
+      xp = UMIN( obj->cost*10 , ( exp_level( GetAbilityLevel(ch, SMUGGLING_ABILITY) + 1) - exp_level( GetAbilityLevel( ch, SMUGGLING_ABILITY) ) ) / 10  );
       xp = UMIN( xp , xp_compute( ch, victim ) );
       gain_exp( ch, SMUGGLING_ABILITY, xp );
       ch_printf( ch, "&WYou gain %ld smuggling experience!\r\n", xp );

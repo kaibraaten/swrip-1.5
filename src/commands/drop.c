@@ -94,7 +94,7 @@ void do_drop( Character *ch, char *argument )
   if ( number <= 1 && str_cmp( arg, "all" ) && str_prefix( "all.", arg ) )
     {
       /* 'drop obj' */
-      if ( ( obj = get_obj_carry( ch, arg ) ) == NULL )
+      if ( ( obj = GetCarriedItem( ch, arg ) ) == NULL )
         {
           send_to_char( "You do not have that item.\r\n", ch );
           return;

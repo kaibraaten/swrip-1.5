@@ -212,7 +212,7 @@ void claim_disintegration( Character *ch, const Character *victim )
     {
       if ( IS_SET(victim->act , PLR_KILLER ) && !IsNpc(ch) )
         {
-          xp = URANGE(1, xp_compute(ch, victim) , ( exp_level(get_level( ch, HUNTING_ABILITY ) + 1) - exp_level(get_level( ch, HUNTING_ABILITY ) ) ) );
+          xp = URANGE(1, xp_compute(ch, victim) , ( exp_level(GetAbilityLevel( ch, HUNTING_ABILITY ) + 1) - exp_level(GetAbilityLevel( ch, HUNTING_ABILITY ) ) ) );
           gain_exp( ch, HUNTING_ABILITY, xp );
           set_char_color( AT_BLOOD, ch );
           ch_printf( ch, "You receive %ld hunting experience for executing a wanted killer.\r\n", xp );
@@ -228,7 +228,7 @@ void claim_disintegration( Character *ch, const Character *victim )
 
   ch->gold += bounty->amount;
 
-  xp = URANGE(1, bounty->amount + xp_compute(ch, victim) , ( exp_level(get_level( ch, HUNTING_ABILITY ) + 1) - exp_level(get_level( ch, HUNTING_ABILITY ) ) ) );
+  xp = URANGE(1, bounty->amount + xp_compute(ch, victim) , ( exp_level(GetAbilityLevel( ch, HUNTING_ABILITY ) + 1) - exp_level(GetAbilityLevel( ch, HUNTING_ABILITY ) ) ) );
   gain_exp( ch, HUNTING_ABILITY, xp );
 
   set_char_color( AT_BLOOD, ch );

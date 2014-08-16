@@ -18,7 +18,7 @@ void do_value( Character *ch, char *argument )
   if ( ( keeper = find_keeper( ch ) ) == NULL )
     return;
 
-  if ( ( obj = get_obj_carry( ch, argument ) ) == NULL )
+  if ( ( obj = GetCarriedItem( ch, argument ) ) == NULL )
     {
       act( AT_TELL, "$n tells you 'You don't have that item.'",
            keeper, NULL, ch, TO_VICT );

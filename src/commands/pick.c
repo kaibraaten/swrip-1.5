@@ -10,7 +10,7 @@ void do_pick( Character *ch, char *argument )
   Exit *pexit;
   SHIP_DATA *ship;
 
-  if ( IsNpc(ch) && is_affected_by( ch, AFF_CHARM ) )
+  if ( IsNpc(ch) && IsAffectedBy( ch, AFF_CHARM ) )
     {
       send_to_char( "You can't concentrate enough for that.\r\n", ch );
       return;
@@ -38,7 +38,7 @@ void do_pick( Character *ch, char *argument )
   /* look for guards */
   for ( gch = ch->in_room->first_person; gch; gch = gch->next_in_room )
     {
-      if ( IsNpc(gch) && is_awake(gch) && get_level( ch, SMUGGLING_ABILITY ) < gch->top_level )
+      if ( IsNpc(gch) && is_awake(gch) && GetAbilityLevel( ch, SMUGGLING_ABILITY ) < gch->top_level )
         {
           act( AT_PLAIN, "$N is standing too close to the lock.",
                ch, NULL, gch, TO_CHAR );
@@ -163,11 +163,11 @@ void do_pick( Character *ch, char *argument )
 
 	      if ( !IsNpc( victim ) && victim->switched
                    && !IS_SET(victim->switched->act, ACT_POLYMORPHED)
-                   && !is_affected_by(victim->switched, AFF_POSSESS) )
+                   && !IsAffectedBy(victim->switched, AFF_POSSESS) )
                 continue;
               else if ( !IsNpc( victim ) && victim->switched
                         && (IS_SET(victim->switched->act, ACT_POLYMORPHED)
-                            || is_affected_by(victim->switched, AFF_POSSESS) ) )
+                            || IsAffectedBy(victim->switched, AFF_POSSESS) ) )
                 victim = victim->switched;
 
               if ( !is_awake(victim) || IS_SET(victim->in_room->room_flags,ROOM_SILENCE) )
@@ -207,11 +207,11 @@ void do_pick( Character *ch, char *argument )
 
               if ( !IsNpc( victim ) && victim->switched
 		   && !IS_SET(victim->switched->act, ACT_POLYMORPHED)
-                   && !is_affected_by(victim->switched, AFF_POSSESS) )
+                   && !IsAffectedBy(victim->switched, AFF_POSSESS) )
                 continue;
               else if ( !IsNpc( victim ) && victim->switched
                         && (IS_SET(victim->switched->act, ACT_POLYMORPHED)
-                            || is_affected_by(victim->switched, AFF_POSSESS) ) )
+                            || IsAffectedBy(victim->switched, AFF_POSSESS) ) )
                 victim = victim->switched;
 
               if ( !is_awake(victim) || IS_SET(victim->in_room->room_flags,ROOM_SILENCE) )

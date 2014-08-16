@@ -8,7 +8,7 @@ void do_stun( Character *ch, char *argument )
   int stun_chance;
   bool fail;
 
-  if ( IsNpc(ch) && is_affected_by( ch, AFF_CHARM ) )
+  if ( IsNpc(ch) && IsAffectedBy( ch, AFF_CHARM ) )
     {
       send_to_char( "You can't concentrate enough for that.\r\n", ch );
       return;
@@ -37,7 +37,7 @@ void do_stun( Character *ch, char *argument )
 
   set_wait_state( ch, skill_table[gsn_stun]->beats );
   fail = false;
-  stun_chance = ris_save( victim, get_level( ch, COMBAT_ABILITY ), RIS_PARALYSIS );
+  stun_chance = ris_save( victim, GetAbilityLevel( ch, COMBAT_ABILITY ), RIS_PARALYSIS );
 
   if ( stun_chance == 1000 )
     fail = true;
@@ -65,7 +65,7 @@ void do_stun( Character *ch, char *argument )
       act( AT_SKILL, "$N smashes into you, leaving you stunned!", victim, NULL, ch, TO_CHAR );
       act( AT_SKILL, "You smash into $N, leaving $M stunned!", ch, NULL, victim, TO_CHAR );
       act( AT_SKILL, "$n smashes into $N, leaving $M stunned!", ch, NULL, victim, TO_NOTVICT );
-      if ( !is_affected_by( victim, AFF_PARALYSIS ) )
+      if ( !IsAffectedBy( victim, AFF_PARALYSIS ) )
         {
           af.type      = gsn_stun;
           af.location  = APPLY_AC;

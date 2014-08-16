@@ -27,21 +27,21 @@ void do_throw( Character *ch, char *argument )
       return;
     }
 
-  obj = get_eq_char( ch, WEAR_MISSILE_WIELD );
+  obj = GetEquipmentOnCharacter( ch, WEAR_MISSILE_WIELD );
 
   if ( !obj || !nifty_is_name( arg, obj->name ) )
-    obj = get_eq_char( ch, WEAR_HOLD );
+    obj = GetEquipmentOnCharacter( ch, WEAR_HOLD );
   if ( !obj || !nifty_is_name( arg, obj->name ) )
-    obj = get_eq_char( ch, WEAR_WIELD );
+    obj = GetEquipmentOnCharacter( ch, WEAR_WIELD );
   if ( !obj || !nifty_is_name( arg, obj->name ) )
-    obj = get_eq_char( ch, WEAR_DUAL_WIELD );
+    obj = GetEquipmentOnCharacter( ch, WEAR_DUAL_WIELD );
   if ( !obj || !nifty_is_name( arg, obj->name ) )
     if ( !obj || !nifty_is_name_prefix( arg, obj->name ) )
-      obj = get_eq_char( ch, WEAR_HOLD );
+      obj = GetEquipmentOnCharacter( ch, WEAR_HOLD );
   if ( !obj || !nifty_is_name_prefix( arg, obj->name ) )
-    obj = get_eq_char( ch, WEAR_WIELD );
+    obj = GetEquipmentOnCharacter( ch, WEAR_WIELD );
   if ( !obj || !nifty_is_name_prefix( arg, obj->name ) )
-    obj = get_eq_char( ch, WEAR_DUAL_WIELD );
+    obj = GetEquipmentOnCharacter( ch, WEAR_DUAL_WIELD );
   if ( !obj || !nifty_is_name_prefix( arg, obj->name ) )
     {
       ch_printf( ch, "You don't seem to be holding or wielding %s.\r\n", arg );
@@ -130,7 +130,7 @@ void do_throw( Character *ch, char *argument )
           if ( is_safe( ch, victim ) )
             return;
 
-          if ( is_affected_by(ch, AFF_CHARM) && ch->master == victim )
+          if ( IsAffectedBy(ch, AFF_CHARM) && ch->master == victim )
             {
               act( AT_PLAIN, "$N is your beloved master.", ch, NULL, victim, TO_CHAR );
               return;
@@ -184,7 +184,7 @@ void do_throw( Character *ch, char *argument )
       if ( is_safe( ch, victim ) )
         return;
 
-      if ( is_affected_by(ch, AFF_CHARM) && ch->master == victim )
+      if ( IsAffectedBy(ch, AFF_CHARM) && ch->master == victim )
         {
           act( AT_PLAIN, "$N is your beloved master.", ch, NULL, victim, TO_CHAR );
           return;
@@ -204,11 +204,11 @@ void do_throw( Character *ch, char *argument )
     }
 
 
-  if ( obj == get_eq_char( ch, WEAR_WIELD )
-       && ( tmpobj = get_eq_char( ch, WEAR_DUAL_WIELD)) != NULL )
+  if ( obj == GetEquipmentOnCharacter( ch, WEAR_WIELD )
+       && ( tmpobj = GetEquipmentOnCharacter( ch, WEAR_DUAL_WIELD)) != NULL )
     tmpobj->wear_loc = WEAR_WIELD;
 
-  unequip_char( ch, obj );
+  UnequipCharacter( ch, obj );
   separate_obj( obj );
   obj_from_char( obj );
   obj = obj_to_room( obj, ch->in_room );

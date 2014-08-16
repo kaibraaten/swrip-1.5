@@ -16,7 +16,7 @@ void do_study( Character *ch, char *argument ) /* study by Absalom */
       return;
     }
 
-  if ( ( obj = get_obj_carry( ch, arg ) ) == NULL )
+  if ( ( obj = GetCarriedItem( ch, arg ) ) == NULL )
     {
       send_to_char( "You do not have that item.\r\n", ch );
       return;

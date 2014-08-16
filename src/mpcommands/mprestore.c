@@ -11,7 +11,7 @@ void do_mp_restore( Character *ch, char *argument )
   Character *victim;
   int hp;
 
-  if ( is_affected_by( ch, AFF_CHARM ) )
+  if ( IsAffectedBy( ch, AFF_CHARM ) )
     return;
 
   if ( !IsNpc( ch ) || ( ch->desc && GetTrustLevel( ch ) < LEVEL_IMMORTAL )  )

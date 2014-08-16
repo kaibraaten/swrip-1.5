@@ -109,7 +109,7 @@ void save_home( Character *ch )
  * Un-equip character before saving to ensure proper    -Thoric
  * stats are saved in case of changes to or removal of EQ
  */
-void de_equip_char( Character *ch )
+void de_EquipCharacter( Character *ch )
 {
   OBJ_DATA *obj = NULL;
   int x = 0;
@@ -142,7 +142,7 @@ void de_equip_char( Character *ch )
 		   ch->name, MAX_LAYERS, obj->wear_loc, obj->name );
 	    }
 
-	  unequip_char(ch, obj);
+	  UnequipCharacter(ch, obj);
 	}
     }
 }
@@ -150,7 +150,7 @@ void de_equip_char( Character *ch )
 /*
  * Re-equip character                                   -Thoric
  */
-void re_equip_char( Character *ch )
+void re_EquipCharacter( Character *ch )
 {
   int x = 0;
   int y = 0;
@@ -163,7 +163,7 @@ void re_equip_char( Character *ch )
 	    {
 	      if ( quitting_char != ch )
 		{
-		  equip_char(ch, save_equipment[x][y], x);
+		  EquipCharacter(ch, save_equipment[x][y], x);
 		}
 
 	      save_equipment[x][y] = NULL;
@@ -211,7 +211,7 @@ void save_char_obj( Character *ch )
       ch = ch->desc->original;
     }
 
-  de_equip_char( ch );
+  de_EquipCharacter( ch );
 
   ch->pcdata->save_time = current_time;
   sprintf( strsave, "%s%c/%s", PLAYER_DIR, tolower(ch->name[0]),
@@ -298,7 +298,7 @@ void save_char_obj( Character *ch )
       fclose( fp );
     }
 
-  re_equip_char( ch );
+  re_EquipCharacter( ch );
 
   write_corpses(ch, NULL);
   quitting_char = NULL;
@@ -327,7 +327,7 @@ void save_clone( Character *ch )
       ch = ch->desc->original;
     }
 
-  de_equip_char( ch );
+  de_EquipCharacter( ch );
   ch->pcdata->clones++;
 
   ch->pcdata->save_time = current_time;
@@ -363,7 +363,7 @@ void save_clone( Character *ch )
     }
 
   ch->pcdata->clones--;
-  re_equip_char( ch );
+  re_EquipCharacter( ch );
 
   write_corpses(ch, NULL);
   quitting_char = NULL;
@@ -436,7 +436,7 @@ void fwrite_char( Character *ch, FILE *fp )
     int ability;
     for ( ability = 0 ; ability < MAX_ABILITY ; ability++ )
       fprintf( fp, "Ability        %d %d %ld\n",
-               ability, get_level( ch, ability ), GetExperience( ch, ability ) );
+               ability, GetAbilityLevel( ch, ability ), GetExperience( ch, ability ) );
   }
 
   fprintf( fp, "Clones         %d\n",   ch->pcdata->clones              );
@@ -1290,7 +1290,7 @@ bool load_char_obj( Descriptor *d, char *name, bool preload )
 		{
 		  if ( save_equipment[i][x] )
 		    {
-		      equip_char( ch, save_equipment[i][x], i );
+		      EquipCharacter( ch, save_equipment[i][x], i );
 		      save_equipment[i][x] = NULL;
 		    }
 		  else
@@ -1366,7 +1366,7 @@ void fread_char( Character *ch, FILE *fp, bool preload )
 
               if ( x0 >= 0 && x0 < MAX_ABILITY )
                 {
-                  set_level( ch, x0, x1 );
+                  SetAbilityLevel( ch, x0, x1 );
                   SetExperience( ch, x0, x2 );
                 }
 
@@ -1974,9 +1974,9 @@ void fread_char( Character *ch, FILE *fp, bool preload )
 
                 for ( ability = 0 ; ability < MAX_ABILITY ; ability++ )
                   {
-                    if ( get_level( ch, ability ) == 0 )
+                    if ( GetAbilityLevel( ch, ability ) == 0 )
 		      {
-			set_level( ch, ability, 1 );
+			SetAbilityLevel( ch, ability, 1 );
 		      }
                   }
               }
@@ -2026,7 +2026,7 @@ void fread_char( Character *ch, FILE *fp, bool preload )
 		    }
 
                   if ( ch->pcdata->learned[sn] > 0
-		       && get_level( ch, skill_table[sn]->guild ) < skill_table[sn]->min_level )
+		       && GetAbilityLevel( ch, skill_table[sn]->guild ) < skill_table[sn]->min_level )
 		    {
 		      ch->pcdata->learned[sn] = 0;
 		    }
@@ -2923,8 +2923,8 @@ void fwrite_mobile( FILE *fp, Character *mob )
   fprintf( fp, "Position %d\n", mob->position );
   fprintf( fp, "Flags %d\n", mob->act );
   /* Might need these later --Shaddai
-     de_equip_char( mob );
-     re_equip_char( mob );
+     de_EquipCharacter( mob );
+     re_EquipCharacter( mob );
   */
   if ( mob->first_carrying )
     {

@@ -17,7 +17,7 @@ void do_mp_close_passage( Character *ch, char *argument )
   int fromRoomVnum, exit_num;
   Exit *pexit;
 
-  if ( is_affected_by( ch, AFF_CHARM ) )
+  if ( IsAffectedBy( ch, AFF_CHARM ) )
     return;
 
   if ( !IsNpc( ch ) || ( ch->desc && GetTrustLevel( ch ) < LEVEL_IMMORTAL )  )

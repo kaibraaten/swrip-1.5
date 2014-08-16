@@ -9,7 +9,7 @@ void do_brandish( Character *ch, char *argument )
   ch_ret retcode = rNONE;
   int sn = 0;
 
-  if ( ( staff = get_eq_char( ch, WEAR_HOLD ) ) == NULL )
+  if ( ( staff = GetEquipmentOnCharacter( ch, WEAR_HOLD ) ) == NULL )
     {
       send_to_char( "You hold nothing in your hand.\r\n", ch );
       return;

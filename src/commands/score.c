@@ -67,14 +67,14 @@ void do_score(Character * ch, char *argument)
 
 	    ch_printf( ch, "&c%-15s   &CLevel: %-3d   Max: %-3s   Exp: %-10ld   Next: %-10ld\r\n",
 		       capitalize(ability_name[ability]),
-		       get_level( ch, ability ), maxbuf,
+		       GetAbilityLevel( ch, ability ), maxbuf,
 		       GetExperience( ch, ability ),
-		       exp_level( get_level( ch, ability ) + 1 ) );
+		       exp_level( GetAbilityLevel( ch, ability ) + 1 ) );
 	  }
 	else
 	  {
 	    ch_printf( ch, "&c%-15s   &CLevel: %-3d   Max: ???   Exp: ???          Next: ???\r\n",
-		       capitalize(ability_name[ability]), get_level( ch, ability ), GetExperience( ch, ability ) );
+		       capitalize(ability_name[ability]), GetAbilityLevel( ch, ability ), GetExperience( ch, ability ) );
 	  }
       }
   }

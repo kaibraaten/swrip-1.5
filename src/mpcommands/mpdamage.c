@@ -13,7 +13,7 @@ void do_mp_damage( Character *ch, char *argument )
   Character *victim;
   int dam;
 
-  if ( is_affected_by( ch, AFF_CHARM ) )
+  if ( IsAffectedBy( ch, AFF_CHARM ) )
     return;
 
   if ( !IsNpc( ch ) || ( ch->desc && GetTrustLevel( ch ) < LEVEL_IMMORTAL )  )
@@ -142,10 +142,10 @@ static ch_ret simple_damage( Character *ch, Character *victim, int dam, int dt )
       /*
        * Damage modifiers.
        */
-      if ( is_affected_by(victim, AFF_SANCTUARY) )
+      if ( IsAffectedBy(victim, AFF_SANCTUARY) )
         dam /= 2;
 
-      if ( is_affected_by(victim, AFF_PROTECT) && is_evil(ch) )
+      if ( IsAffectedBy(victim, AFF_PROTECT) && is_evil(ch) )
         dam -= (int) (dam / 4);
 
       if ( dam < 0 )
@@ -162,7 +162,7 @@ static ch_ret simple_damage( Character *ch, Character *victim, int dam, int dt )
     {
       /* get a random body eq part */
       dameq  = number_range(WEAR_LIGHT, WEAR_EYES);
-      damobj = get_eq_char(victim, dameq);
+      damobj = GetEquipmentOnCharacter(victim, dameq);
       if ( damobj )
         {
           if ( dam > get_obj_resistance(damobj) )
@@ -207,7 +207,7 @@ static ch_ret simple_damage( Character *ch, Character *victim, int dam, int dt )
       break;
 
     case POS_STUNNED:
-      if ( !is_affected_by( victim, AFF_PARALYSIS ) )
+      if ( !IsAffectedBy( victim, AFF_PARALYSIS ) )
         {
           act( AT_ACTION, "$n is stunned, but will probably recover.",
                victim, NULL, NULL, TO_ROOM );
@@ -275,7 +275,7 @@ static ch_ret simple_damage( Character *ch, Character *victim, int dam, int dt )
     {
       if ( ( IS_SET(victim->act, ACT_WIMPY) && number_bits( 1 ) == 0
              &&   victim->hit < victim->max_hit / 2 )
-           ||   ( is_affected_by(victim, AFF_CHARM) && victim->master
+           ||   ( IsAffectedBy(victim, AFF_CHARM) && victim->master
                   &&     victim->master->in_room != victim->in_room ) )
         {
           start_fearing( victim, ch );

@@ -14,7 +14,7 @@ ch_ret spell_remove_invis( int sn, int level, Character *ch, void *vo )
       return rSPELL_FAILED;
     }
 
-  obj = get_obj_carry( ch, spell_target_name );
+  obj = GetCarriedItem( ch, spell_target_name );
 
   if ( obj )
     {
@@ -44,7 +44,7 @@ ch_ret spell_remove_invis( int sn, int level, Character *ch, void *vo )
           if ( victim->race == RACE_DEFEL )
             return rSPELL_FAILED;
 
-          if(!is_affected_by(victim, AFF_INVISIBLE))
+          if(!IsAffectedBy(victim, AFF_INVISIBLE))
             {
               send_to_char("They are not invisible!\r\n", ch);
               return rSPELL_FAILED;
@@ -63,7 +63,7 @@ ch_ret spell_remove_invis( int sn, int level, Character *ch, void *vo )
             }
           if( !IsNpc(victim) )
             {
-              if( chance(ch, 50) && get_level( ch, FORCE_ABILITY ) < victim->top_level )
+              if( chance(ch, 50) && GetAbilityLevel( ch, FORCE_ABILITY ) < victim->top_level )
                 {
                   failed_casting( skill, ch, victim, NULL );
                   return rSPELL_FAILED;
@@ -72,7 +72,7 @@ ch_ret spell_remove_invis( int sn, int level, Character *ch, void *vo )
             }
           else
             {
-              if( chance(ch, 50) && get_level( ch, FORCE_ABILITY ) + 15 < victim->top_level )
+              if( chance(ch, 50) && GetAbilityLevel( ch, FORCE_ABILITY ) + 15 < victim->top_level )
                 {
                   failed_casting( skill, ch, victim, NULL );
                   return rSPELL_FAILED;

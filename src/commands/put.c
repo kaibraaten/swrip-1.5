@@ -82,7 +82,7 @@ void do_put( Character *ch, char *argument )
   if ( number <= 1 && str_cmp( arg1, "all" ) && str_prefix( "all.", arg1 ) )
     {
       /* 'put obj container' */
-      if ( ( obj = get_obj_carry( ch, arg1 ) ) == NULL )
+      if ( ( obj = GetCarriedItem( ch, arg1 ) ) == NULL )
         {
           send_to_char( "You do not have that item.\r\n", ch );
           return;

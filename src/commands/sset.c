@@ -650,7 +650,7 @@ void do_sset( Character *ch, char *argument )
           if (skill_table[sn]->guild < 0 || skill_table[sn]->guild >= MAX_ABILITY )
             continue;
           if ( skill_table[sn]->name
-               && ( get_level( victim, skill_table[sn]->guild ) >= skill_table[sn]->min_level
+               && ( GetAbilityLevel( victim, skill_table[sn]->guild ) >= skill_table[sn]->min_level
                     || value == 0 ) )
             victim->pcdata->learned[sn] = value;
         }

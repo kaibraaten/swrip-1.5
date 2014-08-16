@@ -12,7 +12,7 @@ ch_ret spell_cure_poison( int sn, int level, Character *ch, void *vo )
       return rSPELL_FAILED;
     }
 
-  if ( is_affected( victim, gsn_poison ) )
+  if ( IsAffected( victim, gsn_poison ) )
     {
       if ( ch != victim )
         {

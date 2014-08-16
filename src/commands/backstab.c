@@ -8,7 +8,7 @@ void do_backstab( Character *ch, char *argument )
   OBJ_DATA *obj;
   int percent;
 
-  if ( IsNpc(ch) && is_affected_by( ch, AFF_CHARM ) )
+  if ( IsNpc(ch) && IsAffectedBy( ch, AFF_CHARM ) )
     {
       send_to_char( "You can't do that right now.\r\n", ch );
       return;
@@ -44,7 +44,7 @@ void do_backstab( Character *ch, char *argument )
     return;
 
   /* Added stabbing weapon. -Narn */
-  if ( ( obj = get_eq_char( ch, WEAR_WIELD ) ) == NULL
+  if ( ( obj = GetEquipmentOnCharacter( ch, WEAR_WIELD ) ) == NULL
        ||   ( obj->value[3] != WEAPON_VIBRO_BLADE ) )
     {
       send_to_char( "You need to wield a stabbing weapon.\r\n", ch );

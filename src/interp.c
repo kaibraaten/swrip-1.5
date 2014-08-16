@@ -448,7 +448,7 @@ void interpret( Character *ch, char *argument )
                && IS_SET( pexit->exit_info, EX_xAUTO ) )
             {
               if ( IS_SET( pexit->exit_info, EX_CLOSED )
-                   && ( !is_affected_by( ch, AFF_PASS_DOOR )
+                   && ( !IsAffectedBy( ch, AFF_PASS_DOOR )
                        || IS_SET( pexit->exit_info, EX_NOPASSDOOR ) ) )
                 {
                   if ( !IS_SET( pexit->exit_info, EX_SECRET ) )
@@ -484,7 +484,7 @@ void interpret( Character *ch, char *argument )
   /* Berserk check for flee.. maybe add drunk to this?.. but too much
      hardcoding is annoying.. -- Altrag */
   if ( !str_cmp(cmd->name, "flee")
-       && is_affected_by(ch, AFF_BERSERK) )
+       && IsAffectedBy(ch, AFF_BERSERK) )
     {
       send_to_char( "You aren't thinking very clearly...\r\n", ch);
       return;
@@ -630,7 +630,7 @@ bool check_social( Character *ch, const char *command, char *argument )
       act( AT_SOCIAL, social->vict_found,    ch, NULL, victim, TO_VICT    );
 
       if ( !IsNpc(ch) && IsNpc(victim)
-           && !is_affected_by(victim, AFF_CHARM)
+           && !IsAffectedBy(victim, AFF_CHARM)
            && is_awake(victim)
            && !IS_SET( victim->pIndexData->mprog.progtypes, ACT_PROG ) )
         {

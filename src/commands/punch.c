@@ -6,7 +6,7 @@ void do_punch( Character *ch, char *argument )
   Character *victim;
   char arg[MAX_INPUT_LENGTH];
 
-  if ( IsNpc(ch) && is_affected_by( ch, AFF_CHARM ) )
+  if ( IsNpc(ch) && IsAffectedBy( ch, AFF_CHARM ) )
     {
       send_to_char( "You can't concentrate enough for that.\r\n", ch );
       return;
@@ -53,7 +53,7 @@ void do_punch( Character *ch, char *argument )
       if ( is_safe( ch, victim ) )
         return;
 
-      if ( is_affected_by(ch, AFF_CHARM) && ch->master == victim )
+      if ( IsAffectedBy(ch, AFF_CHARM) && ch->master == victim )
         {
           act( AT_PLAIN, "$N is your beloved master.", ch, NULL, victim, TO_CHAR );
           return;
@@ -68,7 +68,7 @@ void do_punch( Character *ch, char *argument )
   if ( IsNpc(ch) || number_percent( ) < ch->pcdata->learned[gsn_punch] )
     {
       learn_from_success( ch, gsn_punch );
-      global_retcode = damage( ch, victim, number_range( 1, get_level(ch, COMBAT_ABILITY ) ), gsn_punch );
+      global_retcode = damage( ch, victim, number_range( 1, GetAbilityLevel(ch, COMBAT_ABILITY ) ), gsn_punch );
     }
   else
     {

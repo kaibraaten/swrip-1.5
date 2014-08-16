@@ -5,7 +5,7 @@ void do_report( Character *ch, char *argument )
 {
   char buf[MAX_INPUT_LENGTH];
 
-  if ( is_affected_by(ch, AFF_POSSESS) )
+  if ( IsAffectedBy(ch, AFF_POSSESS) )
     {
       send_to_char("You can't do that in your current state of mind!\r\n", ch);
       return;

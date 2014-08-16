@@ -6,12 +6,12 @@ void do_setblaster( Character *ch, char *argument )
   OBJ_DATA *wield;
   OBJ_DATA *wield2;
 
-  wield = get_eq_char( ch, WEAR_WIELD );
+  wield = GetEquipmentOnCharacter( ch, WEAR_WIELD );
 
   if( wield && !( wield->item_type == ITEM_WEAPON && wield->value[3] == WEAPON_BLASTER ) )
     wield = NULL;
 
-  wield2 = get_eq_char( ch, WEAR_DUAL_WIELD );
+  wield2 = GetEquipmentOnCharacter( ch, WEAR_DUAL_WIELD );
 
   if( wield2 && !( wield2->item_type == ITEM_WEAPON && wield2->value[3] == WEAPON_BLASTER ) )
     wield2 = NULL;

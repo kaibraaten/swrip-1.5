@@ -18,7 +18,7 @@ void do_apply( Character *ch, char *argument )
   if ( ms_find_obj(ch) )
     return;
 
-  if ( ( obj = get_obj_carry( ch, argument ) ) == NULL )
+  if ( ( obj = GetCarriedItem( ch, argument ) ) == NULL )
     {
       send_to_char( "You do not have that.\r\n", ch );
       return;

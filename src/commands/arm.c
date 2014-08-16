@@ -17,7 +17,7 @@ void do_arm( Character *ch, char *argument )
       return;
     }
 
-  obj = get_eq_char( ch, WEAR_HOLD );
+  obj = GetEquipmentOnCharacter( ch, WEAR_HOLD );
 
   if ( !obj || obj->item_type != ITEM_GRENADE )
     {

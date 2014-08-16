@@ -10,7 +10,7 @@ void do_mpat( Character *ch, char *argument )
   ROOM_INDEX_DATA *original;
   Character       *wch;
 
-  if ( is_affected_by( ch, AFF_CHARM ) )
+  if ( IsAffectedBy( ch, AFF_CHARM ) )
     return;
 
   if ( !IsNpc( ch ) )

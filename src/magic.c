@@ -972,7 +972,7 @@ void *locate_targets( Character *ch, char *arg, int sn, Character **victim, OBJ_
                 }
             }
 
-          if ( is_affected_by(ch, AFF_CHARM) && ch->master == *victim )
+          if ( IsAffectedBy(ch, AFF_CHARM) && ch->master == *victim )
             {
               send_to_char( "You can't do that on your own follower.\r\n", ch );
               return &pAbort;
@@ -1016,7 +1016,7 @@ void *locate_targets( Character *ch, char *arg, int sn, Character **victim, OBJ_
           return &pAbort;
         }
 
-      if ( ( *obj = get_obj_carry( ch, arg ) ) == NULL )
+      if ( ( *obj = GetCarriedItem( ch, arg ) ) == NULL )
         {
           send_to_char( "You are not carrying that.\r\n", ch );
           return &pAbort;

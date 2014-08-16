@@ -16,7 +16,7 @@ void do_zap( Character *ch, char *argument )
       return;
     }
 
-  if ( ( wand = get_eq_char( ch, WEAR_HOLD ) ) == NULL )
+  if ( ( wand = GetEquipmentOnCharacter( ch, WEAR_HOLD ) ) == NULL )
     {
       send_to_char( "You hold nothing in your hand.\r\n", ch );
       return;

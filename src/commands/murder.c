@@ -36,7 +36,7 @@ void do_murder( Character *ch, char *argument )
   if ( is_safe( ch, victim ) )
     return;
 
-  if ( is_affected_by(ch, AFF_CHARM) )
+  if ( IsAffectedBy(ch, AFF_CHARM) )
     {
       if ( ch->master == victim )
         {

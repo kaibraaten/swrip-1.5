@@ -12,7 +12,7 @@ void do_mppurge( Character *ch, char *argument )
   Character *victim;
   OBJ_DATA  *obj;
 
-  if ( is_affected_by( ch, AFF_CHARM ) )
+  if ( IsAffectedBy( ch, AFF_CHARM ) )
     return;
 
   if ( !IsNpc( ch ) )

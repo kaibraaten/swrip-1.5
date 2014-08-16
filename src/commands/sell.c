@@ -22,7 +22,7 @@ void do_sell( Character *ch, char *argument )
   if ( ( keeper = find_keeper( ch ) ) == NULL )
     return;
 
-  if ( ( obj = get_obj_carry( ch, arg ) ) == NULL )
+  if ( ( obj = GetCarriedItem( ch, arg ) ) == NULL )
     {
       act( AT_TELL, "$n tells you 'You don't have that item.'",
            keeper, NULL, ch, TO_VICT );
@@ -80,7 +80,7 @@ void do_sell( Character *ch, char *argument )
     {
       long ch_exp;
 
-      ch_exp = UMIN( obj->cost*10 , ( exp_level( get_level( ch, SMUGGLING_ABILITY ) + 1) - exp_level( get_level( ch, SMUGGLING_ABILITY ) )  ) / 10  );
+      ch_exp = UMIN( obj->cost*10 , ( exp_level( GetAbilityLevel( ch, SMUGGLING_ABILITY ) + 1) - exp_level( GetAbilityLevel( ch, SMUGGLING_ABILITY ) )  ) / 10  );
       ch_printf( ch, "You receive %ld smuggling experience for unloading your contraband.\r\n " , ch_exp );
       gain_exp( ch, SMUGGLING_ABILITY, ch_exp );
 

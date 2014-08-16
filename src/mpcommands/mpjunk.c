@@ -11,7 +11,7 @@ void do_mpjunk( Character *ch, char *argument )
   OBJ_DATA *obj;
   OBJ_DATA *obj_next;
 
-  if ( is_affected_by( ch, AFF_CHARM ) )
+  if ( IsAffectedBy( ch, AFF_CHARM ) )
     return;
 
   if ( !IsNpc( ch ) )
@@ -30,13 +30,13 @@ void do_mpjunk( Character *ch, char *argument )
 
   if ( str_cmp( arg, "all" ) && str_prefix( "all.", arg ) )
     {
-      if ( ( obj = get_obj_wear( ch, arg ) ) != NULL )
+      if ( ( obj = GetWornItem( ch, arg ) ) != NULL )
         {
-          unequip_char( ch, obj );
+          UnequipCharacter( ch, obj );
           extract_obj( obj );
           return;
         }
-      if ( ( obj = get_obj_carry( ch, arg ) ) == NULL )
+      if ( ( obj = GetCarriedItem( ch, arg ) ) == NULL )
         return;
       extract_obj( obj );
     }
@@ -47,7 +47,7 @@ void do_mpjunk( Character *ch, char *argument )
         if ( arg[3] == '\0' || is_name( &arg[4], obj->name ) )
           {
             if ( obj->wear_loc != WEAR_NONE)
-              unequip_char( ch, obj );
+              UnequipCharacter( ch, obj );
             extract_obj( obj );
           }
       }

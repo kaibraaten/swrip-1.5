@@ -5,7 +5,7 @@ void do_sneak( Character *ch, char *argument )
 {
   Affect af;
 
-  if ( IsNpc(ch) && is_affected_by( ch, AFF_CHARM ) )
+  if ( IsNpc(ch) && IsAffectedBy( ch, AFF_CHARM ) )
     {
       send_to_char( "You can't concentrate enough for that.\r\n", ch );
       return;
@@ -23,7 +23,7 @@ void do_sneak( Character *ch, char *argument )
   if ( IsNpc(ch) || number_percent( ) < ch->pcdata->learned[gsn_sneak] )
     {
       af.type      = gsn_sneak;
-      af.duration  = get_level( ch, SMUGGLING_ABILITY ) * DUR_CONV;
+      af.duration  = GetAbilityLevel( ch, SMUGGLING_ABILITY ) * DUR_CONV;
       af.location  = APPLY_NONE;
       af.modifier  = 0;
       af.bitvector = AFF_SNEAK;

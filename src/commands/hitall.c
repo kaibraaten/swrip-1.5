@@ -34,7 +34,7 @@ void do_hitall( Character *ch, char *argument )
            !can_see(ch, vch) || is_safe(ch, vch) )
         continue;
 
-      if ( ++nvict > get_level( ch, COMBAT_ABILITY ) / 5 )
+      if ( ++nvict > GetAbilityLevel( ch, COMBAT_ABILITY ) / 5 )
         break;
 
       if ( IS_SET(vch->act, PLR_AFK))

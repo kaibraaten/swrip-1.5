@@ -7,7 +7,7 @@ void do_disarm( Character *ch, char *argument )
   OBJ_DATA *obj;
   int percent;
 
-  if ( IsNpc(ch) && is_affected_by( ch, AFF_CHARM ) )
+  if ( IsNpc(ch) && IsAffectedBy( ch, AFF_CHARM ) )
     {
       send_to_char( "You can't concentrate enough for that.\r\n", ch );
       return;
@@ -20,7 +20,7 @@ void do_disarm( Character *ch, char *argument )
       return;
     }
 
-  if ( get_eq_char( ch, WEAR_WIELD ) == NULL )
+  if ( GetEquipmentOnCharacter( ch, WEAR_WIELD ) == NULL )
     {
       send_to_char( "You must wield a weapon to disarm.\r\n", ch );
       return;
@@ -32,15 +32,15 @@ void do_disarm( Character *ch, char *argument )
       return;
     }
 
-  if ( ( obj = get_eq_char( victim, WEAR_WIELD ) ) == NULL )
+  if ( ( obj = GetEquipmentOnCharacter( victim, WEAR_WIELD ) ) == NULL )
     {
       send_to_char( "Your opponent is not wielding a weapon.\r\n", ch );
       return;
     }
 
   set_wait_state( ch, skill_table[gsn_disarm]->beats );
-  percent = number_percent() + get_level( victim, COMBAT_ABILITY )
-    - get_level( ch, COMBAT_ABILITY )
+  percent = number_percent() + GetAbilityLevel( victim, COMBAT_ABILITY )
+    - GetAbilityLevel( ch, COMBAT_ABILITY )
     - (GetCurrentLuck(ch) - 15) + (GetCurrentLuck(victim) - 15);
 
   if ( !can_see_obj( ch, obj ) )

@@ -14,7 +14,7 @@ ch_ret spell_weaken( int sn, int level, Character *ch, void *vo )
     }
   if (victim->race == RACE_DROID)
     return rSPELL_FAILED;
-  if ( is_affected( victim, sn ) || saves_wands( level, victim ) )
+  if ( IsAffected( victim, sn ) || saves_wands( level, victim ) )
     return rSPELL_FAILED;
   af.type      = sn;
   af.duration  = level / 2 * DUR_CONV;

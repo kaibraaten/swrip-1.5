@@ -63,7 +63,7 @@ ch_ret spell_smaug( int sn, int level, Character *ch, void *vo )
           /* cure poison */
           if ( SPELL_DAMAGE(skill) == SD_POISON )
             {
-              if ( is_affected( victim, gsn_poison ) )
+              if ( IsAffected( victim, gsn_poison ) )
                 {
                   affect_strip( victim, gsn_poison );
                   victim->mental_state = URANGE( -100, victim->mental_state, -10 );
@@ -76,7 +76,7 @@ ch_ret spell_smaug( int sn, int level, Character *ch, void *vo )
           /* cure blindness */
           if ( SPELL_CLASS(skill) == SC_ILLUSION )
             {
-              if ( is_affected( victim, gsn_blindness ) )
+              if ( IsAffected( victim, gsn_blindness ) )
 		{
                   affect_strip( victim, gsn_blindness );
                   successful_casting( skill, ch, victim, NULL );

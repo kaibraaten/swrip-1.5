@@ -2686,12 +2686,12 @@ extern "C" {
   void  save_clone( Character *ch );
   bool  load_char_obj( Descriptor *d, char *name, bool preload );
   void  set_alarm ( long seconds );
-  void  requip_char( Character *ch );
+  void  rEquipCharacter( Character *ch );
   void fwrite_obj( const Character *ch, const OBJ_DATA *obj, FILE *fp,
 		   int iNest, short os_type );
   void  fread_obj( Character *ch,  FILE *fp, short os_type );
-  void  de_equip_char( Character *ch );
-  void  re_equip_char( Character *ch );
+  void  de_EquipCharacter( Character *ch );
+  void  re_EquipCharacter( Character *ch );
   void  save_home( Character *ch );
   void save_storeroom( ROOM_INDEX_DATA *room );
   void load_storerooms( void );

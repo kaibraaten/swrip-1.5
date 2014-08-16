@@ -28,7 +28,7 @@ ch_ret spell_shocking_grasp( int sn, int level, Character *ch, void *vo )
   dam           = number_range( dam_each[level] / 2, dam_each[level] * 2 );
   if ( saves_spell_staff( level, victim ) )
     dam /= 2;
-  if ( is_affected_by(victim, AFF_PROTECT) && is_evil(ch) )
+  if ( IsAffectedBy(victim, AFF_PROTECT) && is_evil(ch) )
     dam -= (int) (dam / 4);
 
   return damage( ch, victim, dam, sn );

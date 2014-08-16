@@ -19,7 +19,7 @@ void do_compare( Character *ch, char *argument )
       return;
     }
 
-  if ( ( obj1 = get_obj_carry( ch, arg1 ) ) == NULL )
+  if ( ( obj1 = GetCarriedItem( ch, arg1 ) ) == NULL )
     {
       send_to_char( "You do not have that item.\r\n", ch );
       return;
@@ -44,7 +44,7 @@ void do_compare( Character *ch, char *argument )
     }
   else
     {
-      if ( ( obj2 = get_obj_carry( ch, arg2 ) ) == NULL )
+      if ( ( obj2 = GetCarriedItem( ch, arg2 ) ) == NULL )
         {
           send_to_char( "You do not have that item.\r\n", ch );
           return;

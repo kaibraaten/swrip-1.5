@@ -27,7 +27,7 @@ void do_postguard( Character *ch, char *argument )
           return;
         }
 
-      if ( ch->gold < get_level( ch, LEADERSHIP_ABILITY ) * 30 )
+      if ( ch->gold < GetAbilityLevel( ch, LEADERSHIP_ABILITY ) * 30 )
         {
           ch_printf( ch, "&RYou dont have enough credits.\r\n", ch );
           return;
@@ -65,7 +65,7 @@ void do_postguard( Character *ch, char *argument )
 
   send_to_char( "&GYour guard is on the way.\r\n", ch);
 
-  credits = get_level( ch, LEADERSHIP_ABILITY ) * 30;
+  credits = GetAbilityLevel( ch, LEADERSHIP_ABILITY ) * 30;
   ch_printf( ch, "It cost you %d credits.\r\n", credits);
   ch->gold -= UMIN( credits , ch->gold );
 

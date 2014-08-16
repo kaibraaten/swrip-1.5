@@ -205,7 +205,7 @@ static void show_char_to_char_0( Character *victim, Character *ch )
     {
       if ( !victim->switched )          strcat( buf, "(Link Dead) "  );
       else
-        if ( !is_affected_by(victim->switched, AFF_POSSESS) )
+        if ( !IsAffectedBy(victim->switched, AFF_POSSESS) )
           strcat( buf, "(Switched) " );
     }
   if ( !IsNpc(victim)
@@ -219,14 +219,14 @@ static void show_char_to_char_0( Character *victim, Character *ch )
       else sprintf( buf1,"(Mobinvis %d) ", victim->mobinvis);
       strcat( buf, buf1 );
     }
-  if ( is_affected_by(victim, AFF_INVISIBLE)   ) strcat( buf, "(Invis) "      );
-  if ( is_affected_by(victim, AFF_HIDE)        ) strcat( buf, "(Stealth) "       );
-  if ( is_affected_by(victim, AFF_PASS_DOOR)   ) strcat( buf, "(Translucent) ");
-  if ( is_affected_by(victim, AFF_FAERIE_FIRE) ) strcat( buf, "&P(Pink Aura)&w "  );
+  if ( IsAffectedBy(victim, AFF_INVISIBLE)   ) strcat( buf, "(Invis) "      );
+  if ( IsAffectedBy(victim, AFF_HIDE)        ) strcat( buf, "(Stealth) "       );
+  if ( IsAffectedBy(victim, AFF_PASS_DOOR)   ) strcat( buf, "(Translucent) ");
+  if ( IsAffectedBy(victim, AFF_FAERIE_FIRE) ) strcat( buf, "&P(Pink Aura)&w "  );
   if ( is_evil(victim)
-       &&   is_affected_by(ch, AFF_DETECT_EVIL)     ) strcat( buf, "&R(Red Aura)&w "   );
+       &&   IsAffectedBy(ch, AFF_DETECT_EVIL)     ) strcat( buf, "&R(Red Aura)&w "   );
   if ( ( victim->mana > 10 )
-       &&   ( is_affected_by( ch , AFF_DETECT_MAGIC ) || IsImmortal( ch ) ) )
+       &&   ( IsAffectedBy( ch , AFF_DETECT_MAGIC ) || IsImmortal( ch ) ) )
     strcat( buf, "&B(Blue Aura)&w "  );
   if ( !IsNpc(victim) && IS_SET(victim->act, PLR_LITTERBUG  ) )
     strcat( buf, "(LITTERBUG) "  );
@@ -393,21 +393,21 @@ static void show_char_to_char_0( Character *victim, Character *ch )
         strcat( buf, " is here before you." );
       else
         if ( ( victim->in_room->sector_type == SECT_UNDERWATER )
-             && !is_affected_by(victim, AFF_AQUA_BREATH) && !IsNpc(victim) )
+             && !IsAffectedBy(victim, AFF_AQUA_BREATH) && !IsNpc(victim) )
           strcat( buf, " is drowning here." );
         else
           if ( victim->in_room->sector_type == SECT_UNDERWATER )
             strcat( buf, " is here in the water." );
           else
             if ( ( victim->in_room->sector_type == SECT_OCEANFLOOR )
-                 && !is_affected_by(victim, AFF_AQUA_BREATH) && !IsNpc(victim) )
+                 && !IsAffectedBy(victim, AFF_AQUA_BREATH) && !IsNpc(victim) )
               strcat( buf, " is drowning here." );
             else
               if ( victim->in_room->sector_type == SECT_OCEANFLOOR )
                 strcat( buf, " is standing here in the water." );
               else
-                if ( is_affected_by(victim, AFF_FLOATING)
-                     || is_affected_by(victim, AFF_FLYING) )
+                if ( IsAffectedBy(victim, AFF_FLOATING)
+                     || IsAffectedBy(victim, AFF_FLYING) )
 		  strcat( buf, " is hovering here." );
                 else
                   strcat( buf, " is standing here." );
@@ -479,11 +479,11 @@ static void show_char_to_char_1( Character *victim, Character *ch )
 
   found = false;
 
-  if( ( (obj = get_eq_char( victim, WEAR_OVER ) ) == NULL ) || obj->value[2] == 0 || is_god(ch) )
+  if( ( (obj = GetEquipmentOnCharacter( victim, WEAR_OVER ) ) == NULL ) || obj->value[2] == 0 || is_god(ch) )
     {
       for ( iWear = 0; iWear < MAX_WEAR; iWear++ )
         {
-          if ( ( obj = get_eq_char( victim, iWear ) ) != NULL
+          if ( ( obj = GetEquipmentOnCharacter( victim, iWear ) ) != NULL
                &&   can_see_obj( ch, obj ) &&
                ( ( obj->description && obj->description[0] != '\0' ) || ( IS_SET(ch->act, PLR_HOLYLIGHT) || IsNpc(ch) ) ) )
             {
@@ -556,7 +556,7 @@ void show_char_to_char( Character *list, Character *ch )
           send_to_char( "You see a pair of red eyes staring back at you.\r\n", ch );
         }
       else if ( room_is_dark( ch->in_room )
-                &&        is_affected_by(rch, AFF_INFRARED ) )
+                &&        IsAffectedBy(rch, AFF_INFRARED ) )
         {
           set_char_color( AT_BLOOD, ch );
           send_to_char( "The red form of a living creature is here.\r\n", ch );
@@ -568,14 +568,14 @@ static void show_visible_affects_to_char( Character *victim, Character *ch )
 {
   char buf[MAX_STRING_LENGTH];
 
-  if ( is_affected_by(victim, AFF_CHARM)       )
+  if ( IsAffectedBy(victim, AFF_CHARM)       )
     {
       set_char_color( AT_MAGIC, ch );
       ch_printf( ch, "%s looks ahead free of expression.\r\n",
                  IsNpc( victim ) ? capitalize(victim->short_descr) : (victim->name) );
     }
   if ( !IsNpc(victim) && !victim->desc
-       &&    victim->switched && is_affected_by(victim->switched, AFF_POSSESS) )
+       &&    victim->switched && IsAffectedBy(victim->switched, AFF_POSSESS) )
     {
       set_char_color( AT_MAGIC, ch );
       strcpy( buf, PERS( victim, ch ) );
@@ -672,7 +672,7 @@ static bool requirements_are_met( Character *ch )
 
   if ( !IsNpc(ch)
        && !IS_SET(ch->act, PLR_HOLYLIGHT)
-       && !is_affected_by(ch, AFF_TRUESIGHT)
+       && !IsAffectedBy(ch, AFF_TRUESIGHT)
        && room_is_dark( ch->in_room ) )
     {
       set_char_color( AT_DGREY, ch );
@@ -832,7 +832,7 @@ static void show_exit_to_char( Character *ch, Exit *pexit, short door )
    * Ability to look into the next room                     -Thoric
    */
   if ( pexit->to_room
-       && ( is_affected_by( ch, AFF_SCRYING )
+       && ( IsAffectedBy( ch, AFF_SCRYING )
 	    || IS_SET( pexit->exit_info, EX_xLOOK )
 	    || GetTrustLevel(ch) >= LEVEL_IMMORTAL ) )
     {

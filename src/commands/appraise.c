@@ -42,7 +42,7 @@ void do_appraise( Character *ch, char *argument )
       return;
     }
 
-  if ( ( obj = get_obj_carry( ch, arg ) ) == NULL )
+  if ( ( obj = GetCarriedItem( ch, arg ) ) == NULL )
     {
       act( AT_TELL, "$n tells you 'You don't have that item.'",
            keeper, NULL, ch, TO_VICT );

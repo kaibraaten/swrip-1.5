@@ -9,16 +9,16 @@ void do_ammo( Character *ch, char *argument )
   int charge =0;
 
   obj = NULL;
-  wield = get_eq_char( ch, WEAR_WIELD );
+  wield = GetEquipmentOnCharacter( ch, WEAR_WIELD );
   if (wield)
     {
-      obj = get_eq_char( ch, WEAR_DUAL_WIELD );
+      obj = GetEquipmentOnCharacter( ch, WEAR_DUAL_WIELD );
       if (!obj)
-        obj = get_eq_char( ch, WEAR_HOLD );
+        obj = GetEquipmentOnCharacter( ch, WEAR_HOLD );
     }
   else
     {
-      wield = get_eq_char( ch, WEAR_HOLD );
+      wield = GetEquipmentOnCharacter( ch, WEAR_HOLD );
       obj = NULL;
     }
 
@@ -44,7 +44,7 @@ void do_ammo( Character *ch, char *argument )
               send_to_char( "That cartridge is too big for your blaster.", ch);
               return;
             }
-          unequip_char( ch, obj );
+          UnequipCharacter( ch, obj );
           checkammo = true;
           charge = obj->value[0];
           separate_obj( obj );
@@ -96,7 +96,7 @@ void do_ammo( Character *ch, char *argument )
               send_to_char( "That cartridge is too big for your bowcaster.", ch);
               return;
             }
-          unequip_char( ch, obj );
+          UnequipCharacter( ch, obj );
           checkammo = true;
           charge = obj->value[0];
           separate_obj( obj );
@@ -143,7 +143,7 @@ void do_ammo( Character *ch, char *argument )
 
       if (obj)
         {
-          unequip_char( ch, obj );
+          UnequipCharacter( ch, obj );
           checkammo = true;
           charge = obj->value[0];
           separate_obj( obj );

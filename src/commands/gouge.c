@@ -8,7 +8,7 @@ void do_gouge( Character *ch, char *argument )
   short dam;
   int percent;
 
-  if ( IsNpc(ch) && is_affected_by( ch, AFF_CHARM ) )
+  if ( IsNpc(ch) && IsAffectedBy( ch, AFF_CHARM ) )
     {
       send_to_char( "You can't concentrate enough for that.\r\n", ch );
       return;
@@ -36,17 +36,17 @@ void do_gouge( Character *ch, char *argument )
 
   if ( IsNpc(ch) || percent < ch->pcdata->learned[gsn_gouge] )
     {
-      dam = number_range( 1, get_level( ch, COMBAT_ABILITY ) );
+      dam = number_range( 1, GetAbilityLevel( ch, COMBAT_ABILITY ) );
       global_retcode = damage( ch, victim, dam, gsn_gouge );
 
       if ( global_retcode == rNONE )
         {
-          if ( !is_affected_by( victim, AFF_BLIND ) )
+          if ( !IsAffectedBy( victim, AFF_BLIND ) )
             {
               af.type      = gsn_blindness;
               af.location  = APPLY_HITROLL;
               af.modifier  = -6;
-              af.duration  = 3 + (get_level(ch, COMBAT_ABILITY ) / 20);
+              af.duration  = 3 + (GetAbilityLevel(ch, COMBAT_ABILITY ) / 20);
               af.bitvector = AFF_BLIND;
               affect_to_char( victim, &af );
               act( AT_SKILL, "You can't see a thing!", victim, NULL, NULL, TO_CHAR );

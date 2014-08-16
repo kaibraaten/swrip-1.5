@@ -910,7 +910,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
 
       if ( !str_cmp(chck, "ischarmed") )
         {
-          return is_affected_by(chkchar, AFF_CHARM) ? true : false;
+          return IsAffectedBy(chkchar, AFF_CHARM) ? true : false;
         }
 
       if ( !str_cmp(chck, "isfollow") )
@@ -929,7 +929,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
               return BERR;
             }
 
-          return is_affected_by(chkchar, 1 << value) ? true : false;
+          return IsAffectedBy(chkchar, 1 << value) ? true : false;
         }
 
       if ( !str_cmp(chck, "hitprcnt") )
@@ -1692,7 +1692,7 @@ void mprog_driver ( char *com_list, Character *mob, Character *actor,
   bool ifstate[MAX_IFS][ DO_ELSE + 1 ];
   static int prog_nest = 0;
 
-  if( is_affected_by( mob, AFF_CHARM ) )
+  if( IsAffectedBy( mob, AFF_CHARM ) )
     {
       return;
     }
@@ -2746,7 +2746,7 @@ void oprog_random_trigger( OBJ_DATA *obj )
 }
 
 /*
- * in wear_obj, between each successful equip_char
+ * in wear_obj, between each successful EquipCharacter
  * the subsequent return
  */
 void oprog_wear_trigger( Character *ch, OBJ_DATA *obj )
@@ -2791,7 +2791,7 @@ bool oprog_use_trigger( Character *ch, OBJ_DATA *obj, Character *vict,
 }
 
 /*
- * call in remove_obj, right after unequip_char
+ * call in remove_obj, right after UnequipCharacter
  * do a if(!ch) return right after, and return true (?)
  * if !ch
  */

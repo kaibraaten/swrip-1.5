@@ -14,7 +14,7 @@ void do_mpasound( Character *ch, char *argument )
       return;
     }
 
-  if ( is_affected_by( ch, AFF_CHARM ) )
+  if ( IsAffectedBy( ch, AFF_CHARM ) )
     return;
 
   if ( !IsNpc( ch ) )

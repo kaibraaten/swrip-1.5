@@ -676,7 +676,7 @@ static void nanny_stats_ok( Descriptor *d, char *argument )
 
   for ( ability =0 ; ability < MAX_ABILITY ; ability++ )
     {
-      set_level( ch, ability, 0 );
+      SetAbilityLevel( ch, ability, 0 );
     }
 
   ch->top_level = 0;
@@ -831,7 +831,7 @@ if ( (iLang = skill_lookup( "common" )) < 0 )
 
 	for ( ability =0 ; ability < MAX_ABILITY ; ability++ )
 	  {
-	    set_level( ch, ability, 1 );
+	    SetAbilityLevel( ch, ability, 1 );
 	    SetExperience( ch, ability, 0 );
 	  }
       }
@@ -866,11 +866,11 @@ if ( (iLang = skill_lookup( "common" )) < 0 )
 
       obj = create_object( get_obj_index(OBJ_VNUM_SCHOOL_GLOWROD), 0 );
       obj_to_char( obj, ch );
-      equip_char( ch, obj, WEAR_LIGHT );
+      EquipCharacter( ch, obj, WEAR_LIGHT );
 
       obj = create_object( get_obj_index(OBJ_VNUM_SCHOOL_BLADE), 0 );
       obj_to_char( obj, ch );
-      equip_char( ch, obj, WEAR_WIELD );
+      EquipCharacter( ch, obj, WEAR_WIELD );
 
       /* comlink */
 

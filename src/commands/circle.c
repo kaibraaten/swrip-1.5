@@ -8,7 +8,7 @@ void do_circle( Character *ch, char *argument )
   OBJ_DATA *obj;
   int percent;
 
-  if ( IsNpc(ch) && is_affected_by( ch, AFF_CHARM ) )
+  if ( IsNpc(ch) && IsAffectedBy( ch, AFF_CHARM ) )
     {
       send_to_char( "You can't concentrate enough for that.\r\n", ch );
       return;
@@ -43,7 +43,7 @@ void do_circle( Character *ch, char *argument )
   if ( is_safe( ch, victim ) )
     return;
 
-  if ( ( obj = get_eq_char( ch, WEAR_WIELD ) ) == NULL
+  if ( ( obj = GetEquipmentOnCharacter( ch, WEAR_WIELD ) ) == NULL
        ||   ( obj->value[3] != 11 && obj->value[3] != 2 ) )
     {
       send_to_char( "You need to wield a piercing or stabbing weapon.\r\n", ch );
@@ -73,7 +73,7 @@ void do_circle( Character *ch, char *argument )
     + (GetCurrentLuck(victim) - 13);
 
   set_wait_state( ch, skill_table[gsn_circle]->beats );
-  if ( percent < (IsNpc(ch) ? (get_level( ch, HUNTING_ABILITY ) * 1.5) : ch->pcdata->learned[gsn_circle]) )
+  if ( percent < (IsNpc(ch) ? (GetAbilityLevel( ch, HUNTING_ABILITY ) * 1.5) : ch->pcdata->learned[gsn_circle]) )
     {
       learn_from_success( ch, gsn_circle );
       global_retcode = multi_hit( ch, victim, gsn_circle );

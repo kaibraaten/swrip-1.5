@@ -63,11 +63,11 @@ void add_reinforcements( Character *ch )
           mob[mob_cnt] = create_mobile( pMobIndex );
           char_to_room( mob[mob_cnt], ch->in_room );
           act( AT_IMMORT, "$N has arrived.", ch, NULL, mob[mob_cnt], TO_ROOM );
-          mob[mob_cnt]->top_level = multiplier / 1.4 * get_level( ch, LEADERSHIP_ABILITY ) / 3;
+          mob[mob_cnt]->top_level = multiplier / 1.4 * GetAbilityLevel( ch, LEADERSHIP_ABILITY ) / 3;
 
           for ( ability = 0 ; ability < MAX_ABILITY ; ability++ )
 	    {
-	      set_level( mob[mob_cnt], ability, mob[mob_cnt]->top_level );
+	      SetAbilityLevel( mob[mob_cnt], ability, mob[mob_cnt]->top_level );
 	    }
 
           mob[mob_cnt]->hit = mob[mob_cnt]->top_level*15;
@@ -80,7 +80,7 @@ void add_reinforcements( Character *ch )
             {
               blaster = create_object( pObjIndex, mob[mob_cnt]->top_level );
               obj_to_char( blaster, mob[mob_cnt] );
-              equip_char( mob[mob_cnt], blaster, WEAR_WIELD );
+              EquipCharacter( mob[mob_cnt], blaster, WEAR_WIELD );
             }
 
           if ( mob[mob_cnt]->master )
@@ -121,11 +121,11 @@ void add_reinforcements( Character *ch )
 
       act( AT_IMMORT, "$N has arrived.", ch, NULL, mob, TO_ROOM );
       send_to_char( "Your guard has arrived.\r\n", ch );
-      mob->top_level = multiplier * get_level( ch, LEADERSHIP_ABILITY ) / 2;
+      mob->top_level = multiplier * GetAbilityLevel( ch, LEADERSHIP_ABILITY ) / 2;
 
       for ( ability = 0 ; ability < MAX_ABILITY ; ability++ )
 	{
-	  set_level( mob, ability, mob->top_level );
+	  SetAbilityLevel( mob, ability, mob->top_level );
 	}
 
       mob->hit = mob->top_level*10;
@@ -138,7 +138,7 @@ void add_reinforcements( Character *ch )
         {
           blaster = create_object( pObjIndex, mob->top_level );
           obj_to_char( blaster, mob );
-          equip_char( mob, blaster, WEAR_WIELD );
+          EquipCharacter( mob, blaster, WEAR_WIELD );
         }
 
       /* for making this more accurate in the future */

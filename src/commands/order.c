@@ -21,7 +21,7 @@ void do_order( Character *ch, char *argument )
       return;
     }
 
-  if ( is_affected_by( ch, AFF_CHARM ) )
+  if ( IsAffectedBy( ch, AFF_CHARM ) )
     {
       send_to_char( "You feel like taking, not giving, orders.\r\n", ch );
       return;
@@ -45,7 +45,7 @@ void do_order( Character *ch, char *argument )
           return;
         }
 
-      if ( !is_affected_by(victim, AFF_CHARM) || victim->master != ch )
+      if ( !IsAffectedBy(victim, AFF_CHARM) || victim->master != ch )
         {
           send_to_char( "Do it yourself!\r\n", ch );
           return;
@@ -62,7 +62,7 @@ void do_order( Character *ch, char *argument )
     {
       och_next = och->next_in_room;
 
-      if ( is_affected_by(och, AFF_CHARM)
+      if ( IsAffectedBy(och, AFF_CHARM)
            && och->master == ch
            && ( fAll || och == victim ) )
         {

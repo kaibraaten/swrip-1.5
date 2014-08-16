@@ -22,7 +22,7 @@ void do_use( Character *ch, char *argument )
       return;
     }
 
-  if ( ( device = get_eq_char( ch, WEAR_HOLD ) ) == NULL ||
+  if ( ( device = GetEquipmentOnCharacter( ch, WEAR_HOLD ) ) == NULL ||
        !nifty_is_name(argd, device->name) )
     {
       do_takedrug( ch , argd );

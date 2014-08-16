@@ -18,7 +18,7 @@ ch_ret spell_poison( int sn, int level, Character *ch, void *vo )
   if ( poison_chance == 1000 || saves_poison_death( poison_chance, victim ) )
     return rSPELL_FAILED;
 
-  if ( is_affected_by( victim, AFF_POISON ) )
+  if ( IsAffectedBy( victim, AFF_POISON ) )
     first = false;
 
   af.type      = sn;

@@ -292,7 +292,7 @@ bool remove_obj( Character *ch, int iWear, bool fReplace )
 {
   OBJ_DATA *obj, *tmpobj;
 
-  if ( ( obj = get_eq_char( ch, iWear ) ) == NULL )
+  if ( ( obj = GetEquipmentOnCharacter( ch, iWear ) ) == NULL )
     return true;
 
   if ( !fReplace
@@ -312,11 +312,11 @@ bool remove_obj( Character *ch, int iWear, bool fReplace )
       return false;
     }
 
-  if ( obj == get_eq_char( ch, WEAR_WIELD )
-       && ( tmpobj = get_eq_char( ch, WEAR_DUAL_WIELD)) != NULL )
+  if ( obj == GetEquipmentOnCharacter( ch, WEAR_WIELD )
+       && ( tmpobj = GetEquipmentOnCharacter( ch, WEAR_DUAL_WIELD)) != NULL )
     tmpobj->wear_loc = WEAR_WIELD;
 
-  unequip_char( ch, obj );
+  UnequipCharacter( ch, obj );
 
   act( AT_ACTION, "$n stops using $p.", ch, obj, NULL, TO_ROOM );
   act( AT_ACTION, "You stop using $p.", ch, obj, NULL, TO_CHAR );

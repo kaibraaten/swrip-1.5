@@ -39,7 +39,7 @@ ch_ret spell_sleep( int sn, int level, Character *ch, void *vo )
   else
     tmp = level;
 
-  if ( is_affected_by(victim, AFF_SLEEP)
+  if ( IsAffectedBy(victim, AFF_SLEEP)
        ||       (sleep_chance=ris_save(victim, tmp, RIS_SLEEP)) == 1000
        ||  (victim != ch && IS_SET(victim->in_room->room_flags, ROOM_SAFE))
        ||   saves_spell_staff( sleep_chance, victim ) )

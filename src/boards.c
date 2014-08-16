@@ -315,7 +315,7 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
       break;
 
     case SUB_WRITING_NOTE:
-      if ( ( paper = get_eq_char(ch, WEAR_HOLD) ) == NULL
+      if ( ( paper = GetEquipmentOnCharacter(ch, WEAR_HOLD) ) == NULL
            ||     paper->item_type != ITEM_PAPER )
         {
           bug("%s: player not holding paper", __FUNCTION__);
@@ -658,7 +658,7 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
               return;
             }
         }
-      if ( ( paper = get_eq_char(ch, WEAR_HOLD) ) == NULL
+      if ( ( paper = GetEquipmentOnCharacter(ch, WEAR_HOLD) ) == NULL
            ||     paper->item_type != ITEM_PAPER )
         {
           if (GetTrustLevel(ch) < sysdata.write_mail_free )
@@ -667,10 +667,10 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
               return;
             }
           paper = create_object( get_obj_index(OBJ_VNUM_NOTE), 0 );
-          if ((tmpobj = get_eq_char(ch, WEAR_HOLD)) != NULL)
-            unequip_char(ch, tmpobj);
+          if ((tmpobj = GetEquipmentOnCharacter(ch, WEAR_HOLD)) != NULL)
+            UnequipCharacter(ch, tmpobj);
           paper = obj_to_char(paper, ch);
-          equip_char(ch, paper, WEAR_HOLD);
+          EquipCharacter(ch, paper, WEAR_HOLD);
           act(AT_MAGIC, "$n grabs a message tisk to record a note.",
               ch, NULL, NULL, TO_ROOM);
           act(AT_MAGIC, "You get a message disk to record your note.",
@@ -720,7 +720,7 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
           send_to_char("What do you wish the subject to be?\r\n", ch);
           return;
         }
-      if ( ( paper = get_eq_char(ch, WEAR_HOLD) ) == NULL
+      if ( ( paper = GetEquipmentOnCharacter(ch, WEAR_HOLD) ) == NULL
            ||     paper->item_type != ITEM_PAPER )
         {
           if(GetTrustLevel(ch) < sysdata.write_mail_free )
@@ -729,10 +729,10 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
               return;
             }
           paper = create_object( get_obj_index(OBJ_VNUM_NOTE), 0 );
-          if ((tmpobj = get_eq_char(ch, WEAR_HOLD)) != NULL)
-            unequip_char(ch, tmpobj);
+          if ((tmpobj = GetEquipmentOnCharacter(ch, WEAR_HOLD)) != NULL)
+            UnequipCharacter(ch, tmpobj);
           paper = obj_to_char(paper, ch);
-          equip_char(ch, paper, WEAR_HOLD);
+          EquipCharacter(ch, paper, WEAR_HOLD);
           act(AT_MAGIC, "$n grabs a message disk.",
               ch, NULL, NULL, TO_ROOM);
           act(AT_MAGIC, "You get a message disk to record your note.",
@@ -777,7 +777,7 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
           send_to_char("Please specify an addressee.\r\n", ch);
           return;
         }
-      if ( ( paper = get_eq_char(ch, WEAR_HOLD) ) == NULL
+      if ( ( paper = GetEquipmentOnCharacter(ch, WEAR_HOLD) ) == NULL
            ||     paper->item_type != ITEM_PAPER )
         {
           if(GetTrustLevel(ch) < sysdata.write_mail_free )
@@ -786,10 +786,10 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
               return;
             }
           paper = create_object( get_obj_index(OBJ_VNUM_NOTE), 0 );
-          if ((tmpobj = get_eq_char(ch, WEAR_HOLD)) != NULL)
-            unequip_char(ch, tmpobj);
+          if ((tmpobj = GetEquipmentOnCharacter(ch, WEAR_HOLD)) != NULL)
+            UnequipCharacter(ch, tmpobj);
           paper = obj_to_char(paper, ch);
-          equip_char(ch, paper, WEAR_HOLD);
+          EquipCharacter(ch, paper, WEAR_HOLD);
           act(AT_MAGIC, "$n gets a message disk to record a note.",
               ch, NULL, NULL, TO_ROOM);
           act(AT_MAGIC, "You grab a message disk to record your note.",
@@ -828,7 +828,7 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
     {
       char *subject, *to_list, *text;
 
-      if ( ( paper = get_eq_char(ch, WEAR_HOLD) ) == NULL
+      if ( ( paper = GetEquipmentOnCharacter(ch, WEAR_HOLD) ) == NULL
            ||     paper->item_type != ITEM_PAPER )
         {
           send_to_char("You are not holding a message disk.\r\n", ch);
@@ -854,7 +854,7 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
     {
       char *strtime, *text;
 
-      if ( ( paper = get_eq_char(ch, WEAR_HOLD) ) == NULL
+      if ( ( paper = GetEquipmentOnCharacter(ch, WEAR_HOLD) ) == NULL
            ||     paper->item_type != ITEM_PAPER )
         {
           send_to_char("You are not holding a message disk.\r\n", ch);

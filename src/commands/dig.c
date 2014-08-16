@@ -13,7 +13,7 @@ void do_dig( Character *ch, char *argument )
   switch( ch->substate )
     {
     default:
-      if ( IsNpc(ch)  && is_affected_by( ch, AFF_CHARM ) )
+      if ( IsNpc(ch)  && IsAffectedBy( ch, AFF_CHARM ) )
         {
           send_to_char( "You can't concentrate enough for that.\r\n", ch );
           return;

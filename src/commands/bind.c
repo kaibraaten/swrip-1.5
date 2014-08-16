@@ -35,7 +35,7 @@ void do_bind ( Character *ch , char *argument )
   if ( is_safe( ch, victim ) )
     return;
 
-  if ( is_affected_by(ch, AFF_CHARM) )
+  if ( IsAffectedBy(ch, AFF_CHARM) )
     {
       if ( ch->master == victim )
         {
@@ -74,7 +74,7 @@ static bool aff_paralysis( Character *ch, Character *victim )
 {
   Affect af;
 
-  if ( !is_affected_by( victim, AFF_PARALYSIS ) )
+  if ( !IsAffectedBy( victim, AFF_PARALYSIS ) )
     {
       af.type      = gsn_stun;
       af.location  = APPLY_AC;

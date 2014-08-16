@@ -84,14 +84,14 @@ void do_tell( Character *ch, char *argument )
   if ( !IsNpc( victim ) && ( victim->switched )
        && ( GetTrustLevel( ch ) > LEVEL_AVATAR )
        && !IS_SET(victim->switched->act, ACT_POLYMORPHED)
-       && !is_affected_by(victim->switched, AFF_POSSESS) )
+       && !IsAffectedBy(victim->switched, AFF_POSSESS) )
     {
       send_to_char( "That player is switched.\r\n", ch );
       return;
     }
   else if ( !IsNpc( victim ) && ( victim->switched )
             && (IS_SET(victim->switched->act, ACT_POLYMORPHED)
-                ||  is_affected_by(victim->switched, AFF_POSSESS) ) )
+                ||  IsAffectedBy(victim->switched, AFF_POSSESS) ) )
     {
       switched_victim = victim->switched;
     }

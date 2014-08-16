@@ -14,7 +14,7 @@ void do_first_aid( Character *ch, char *argument )
       return;
     }
 
-  medpac = get_eq_char( ch, WEAR_HOLD );
+  medpac = GetEquipmentOnCharacter( ch, WEAR_HOLD );
   if ( !medpac || medpac->item_type != ITEM_MEDPAC )
     {
       send_to_char( "You need to be holding a medpac.\r\n",ch );

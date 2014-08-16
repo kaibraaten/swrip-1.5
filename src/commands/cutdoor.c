@@ -11,7 +11,7 @@ void do_cutdoor( Character *ch, char *argument )
   int SABER = 1;
   int PIKE = 0;
 
-  if ( ( wield = get_eq_char( ch, WEAR_WIELD ) ) == NULL ||
+  if ( ( wield = GetEquipmentOnCharacter( ch, WEAR_WIELD ) ) == NULL ||
        ( ( wield->value[3] != WEAPON_LIGHTSABER ) && ( wield->value[3] != WEAPON_FORCE_PIKE ) ) )
     {
       send_to_char( "You need a lightsaber for that!\r\n", ch );
@@ -124,7 +124,7 @@ void do_cutdoor( Character *ch, char *argument )
       {
         if ( is_awake( gch )
 	     && !gch->fighting
-             && ( IsNpc( gch ) && !is_affected_by( gch, AFF_CHARM ) )
+             && ( IsNpc( gch ) && !IsAffectedBy( gch, AFF_CHARM ) )
              && ( ch->top_level - gch->top_level <= 4 )
              && number_bits( 2 ) == 0 )
           multi_hit( gch, ch, TYPE_UNDEFINED );

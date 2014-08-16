@@ -24,13 +24,13 @@ void do_snipe( Character *ch, char *argument )
       return;
     }
 
-  if ( get_eq_char( ch, WEAR_DUAL_WIELD ) != NULL )
+  if ( GetEquipmentOnCharacter( ch, WEAR_DUAL_WIELD ) != NULL )
     {
       send_to_char( "You can't do that while wielding two weapons.",ch );
       return;
     }
 
-  wield = get_eq_char( ch, WEAR_WIELD );
+  wield = GetEquipmentOnCharacter( ch, WEAR_WIELD );
   if ( !wield || wield->item_type != ITEM_WEAPON || wield->value[3] != WEAPON_BLASTER )
     {
       send_to_char( "You don't seem to be holding a blaster",ch );
@@ -127,7 +127,7 @@ void do_snipe( Character *ch, char *argument )
   if ( is_safe( ch, victim ) )
     return;
 
-  if ( is_affected_by(ch, AFF_CHARM) && ch->master == victim )
+  if ( IsAffectedBy(ch, AFF_CHARM) && ch->master == victim )
     {
       act( AT_PLAIN, "$N is your beloved master.", ch, NULL, victim, TO_CHAR );
       return;

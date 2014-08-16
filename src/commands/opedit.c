@@ -70,7 +70,7 @@ void do_opedit( Character *ch, char *argument )
 
   if ( GetTrustLevel( ch ) < LEVEL_GREATER )
     {
-      if ( ( obj = get_obj_carry( ch, arg1 ) ) == NULL )
+      if ( ( obj = GetCarriedItem( ch, arg1 ) ) == NULL )
 	{
           send_to_char( "You aren't carrying that.\r\n", ch );
           return;

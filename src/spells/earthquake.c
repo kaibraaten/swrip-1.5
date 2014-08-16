@@ -38,7 +38,7 @@ ch_ret spell_earthquake( int sn, int level, Character *ch, void *vo )
                && vch->pcdata->wizinvis >= LEVEL_IMMORTAL )
 	    continue;
 
-          if ( is_affected_by(vch, AFF_FLOATING) || is_affected_by(vch, AFF_FLYING) )
+          if ( IsAffectedBy(vch, AFF_FLOATING) || IsAffectedBy(vch, AFF_FLYING) )
             continue;
 
           if  (ch == vch )

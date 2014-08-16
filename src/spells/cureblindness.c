@@ -12,7 +12,7 @@ ch_ret spell_cure_blindness( int sn, int level, Character *ch, void *vo )
       return rSPELL_FAILED;
     }
 
-  if ( !is_affected( victim, gsn_blindness ) )
+  if ( !IsAffected( victim, gsn_blindness ) )
     return rSPELL_FAILED;
 
   if ( ch != victim )

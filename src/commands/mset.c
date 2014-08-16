@@ -461,7 +461,7 @@ void do_mset( Character *ch, char *argument )
 
         for ( ability = 0 ; ability < MAX_ABILITY ; ability++ )
 	  {
-	    set_level( victim, ability, value );
+	    SetAbilityLevel( victim, ability, value );
 	  }
       }
 

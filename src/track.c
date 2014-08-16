@@ -381,7 +381,7 @@ void hunt_victim( Character *ch )
 
   /* hunting with snipe */
   {
-    OBJ_DATA *wield = get_eq_char( ch, WEAR_WIELD );
+    OBJ_DATA *wield = GetEquipmentOnCharacter( ch, WEAR_WIELD );
 
     if ( wield != NULL && wield->value[OVAL_WEAPON_TYPE] == WEAPON_BLASTER  )
       {
@@ -548,7 +548,7 @@ static bool mob_snipe( Character *ch, Character *victim )
 	  return false;
 	}
 
-      if ( is_affected_by(ch, AFF_CHARM) && ch->master == victim )
+      if ( IsAffectedBy(ch, AFF_CHARM) && ch->master == victim )
 	{
 	  return false;
 	}

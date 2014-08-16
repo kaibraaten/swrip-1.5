@@ -27,7 +27,7 @@ void do_reinforcements( Character *ch, char *argument )
           return;
         }
 
-      if ( ch->gold < get_level( ch, LEADERSHIP_ABILITY ) * 50 )
+      if ( ch->gold < GetAbilityLevel( ch, LEADERSHIP_ABILITY ) * 50 )
         {
           ch_printf( ch, "&RYou dont have enough credits to send for reinforcements.\r\n" );
           return;
@@ -64,7 +64,7 @@ void do_reinforcements( Character *ch, char *argument )
   ch->substate = SUB_NONE;
 
   send_to_char( "&GYour reinforcements are on the way.\r\n", ch);
-  credits = get_level( ch, LEADERSHIP_ABILITY ) * 50;
+  credits = GetAbilityLevel( ch, LEADERSHIP_ABILITY ) * 50;
   ch_printf( ch, "It cost you %d credits.\r\n", credits);
   ch->gold -= UMIN( credits , ch->gold );
 

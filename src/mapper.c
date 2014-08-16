@@ -265,7 +265,7 @@ void draw_map( Character *ch, char *desc )
   static char buf[MAX_STRING_LENGTH];
   OBJ_DATA *device = NULL;
 
-  if ( ( device = get_eq_char( ch, WEAR_HOLD ) ) == NULL )
+  if ( ( device = GetEquipmentOnCharacter( ch, WEAR_HOLD ) ) == NULL )
     {
       send_to_char( "You must have a scanner to draw a map of the surrounding area.\r\n", ch );
       return;

@@ -68,22 +68,22 @@ int GetExperienceWorth( const Character *ch )
 {
   int xp = 0;
 
-  xp = get_level( ch, COMBAT_ABILITY ) * ch->top_level * 50;
+  xp = GetAbilityLevel( ch, COMBAT_ABILITY ) * ch->top_level * 50;
   xp += ch->max_hit * 2;
   xp -= (ch->armor-50) * 2;
   xp += ( ch->barenumdie * ch->baresizedie + get_damroll(ch) ) * 50;
   xp += get_hitroll(ch) * ch->top_level * 10;
 
-  if ( is_affected_by(ch, AFF_SANCTUARY) )
+  if ( IsAffectedBy(ch, AFF_SANCTUARY) )
     xp += xp * 1.5;
 
-  if ( is_affected_by(ch, AFF_FIRESHIELD) )
+  if ( IsAffectedBy(ch, AFF_FIRESHIELD) )
     xp += xp * 1.2;
 
-  if ( is_affected_by(ch, AFF_SHOCKSHIELD) )
+  if ( IsAffectedBy(ch, AFF_SHOCKSHIELD) )
     xp += xp * 1.2;
 
-  xp = URANGE( MIN_EXP_WORTH, xp, MAX_EXP_WORTH );
+  xp = urange( MIN_EXP_WORTH, xp, MAX_EXP_WORTH );
 
   return xp;
 }
@@ -125,7 +125,7 @@ short GetAge( const Character *ch )
 short GetCurrentStrength( const Character *ch )
 {
   short max = 25;
-  return URANGE( 3, ch->stats.perm_str + ch->stats.mod_str, max );
+  return urange( 3, ch->stats.perm_str + ch->stats.mod_str, max );
 }
 
 /*
@@ -134,7 +134,7 @@ short GetCurrentStrength( const Character *ch )
 short GetCurrentIntelligence( const Character *ch )
 {
   short max = 25;
-  return URANGE( 3, ch->stats.perm_int + ch->stats.mod_int, max );
+  return urange( 3, ch->stats.perm_int + ch->stats.mod_int, max );
 }
 
 /*
@@ -143,7 +143,7 @@ short GetCurrentIntelligence( const Character *ch )
 short GetCurrentWisdom( const Character *ch )
 {
   short max = 25;
-  return URANGE( 3, ch->stats.perm_wis + ch->stats.mod_wis, max );
+  return urange( 3, ch->stats.perm_wis + ch->stats.mod_wis, max );
 }
 
 /*
@@ -152,7 +152,7 @@ short GetCurrentWisdom( const Character *ch )
 short GetCurrentDexterity( const Character *ch )
 {
   short max = 25;
-  return URANGE( 3, ch->stats.perm_dex + ch->stats.mod_dex, max );
+  return urange( 3, ch->stats.perm_dex + ch->stats.mod_dex, max );
 }
 
 /*
@@ -161,7 +161,7 @@ short GetCurrentDexterity( const Character *ch )
 short GetCurrentConstitution( const Character *ch )
 {
   short max = 25;
-  return URANGE( 3, ch->stats.perm_con + ch->stats.mod_con, max );
+  return urange( 3, ch->stats.perm_con + ch->stats.mod_con, max );
 }
 
 /*
@@ -170,7 +170,7 @@ short GetCurrentConstitution( const Character *ch )
 short GetCurrentCharisma( const Character *ch )
 {
   short max = 25;
-  return URANGE( 3, ch->stats.perm_cha + ch->stats.mod_cha, max );
+  return urange( 3, ch->stats.perm_cha + ch->stats.mod_cha, max );
 }
 
 /*
@@ -179,7 +179,7 @@ short GetCurrentCharisma( const Character *ch )
 short GetCurrentLuck( const Character *ch )
 {
   short max = 25;
-  return URANGE( 3, ch->stats.perm_lck + ch->stats.mod_lck, max );
+  return urange( 3, ch->stats.perm_lck + ch->stats.mod_lck, max );
 }
 
 short GetCurrentForce( const Character *ch )
@@ -189,14 +189,14 @@ short GetCurrentForce( const Character *ch )
   if (!IsNpc(ch))
     {
       max = 20 + race_table[ch->race].stats.mod_frc;
-      max = UMIN(max,25);
+      max = umin(max,25);
     }
   else
     {
       max  = 25;
     }
 
-  return URANGE( 0 , ch->stats.perm_frc + ch->stats.mod_frc, max );
+  return urange( 0 , ch->stats.perm_frc + ch->stats.mod_frc, max );
 }
 
 /*
@@ -215,7 +215,7 @@ void AddKill( Character *ch, const Character *mob )
     return;
 
   vnum = mob->pIndexData->vnum;
-  track = URANGE( 2, ((get_level( ch, COMBAT_ABILITY ) + 3) * MAX_KILLTRACK)/LEVEL_AVATAR, MAX_KILLTRACK );
+  track = urange( 2, ((GetAbilityLevel( ch, COMBAT_ABILITY ) + 3) * MAX_KILLTRACK)/LEVEL_AVATAR, MAX_KILLTRACK );
   for ( x = 0; x < track; x++ )
     if ( ch->pcdata->killed[x].vnum == vnum )
       {
@@ -250,7 +250,7 @@ int TimesKilled( const Character *ch, const Character *mob )
     return 0;
 
   vnum = mob->pIndexData->vnum;
-  track = URANGE( 2, ((get_level( ch, COMBAT_ABILITY ) + 3) * MAX_KILLTRACK)/LEVEL_AVATAR, MAX_KILLTRACK );
+  track = urange( 2, ((GetAbilityLevel( ch, COMBAT_ABILITY ) + 3) * MAX_KILLTRACK)/LEVEL_AVATAR, MAX_KILLTRACK );
   for ( x = 0; x < track; x++ )
     if ( ch->pcdata->killed[x].vnum == vnum )
       return ch->pcdata->killed[x].count;
@@ -280,12 +280,12 @@ bool HasComlink( const Character *ch )
   return false;
 }
 
-short get_level( const Character *ch, short ability )
+short GetAbilityLevel( const Character *ch, short ability )
 {
   return ch->ability.level[ability];
 }
 
-void set_level( Character *ch, short ability, int newlevel )
+void SetAbilityLevel( Character *ch, short ability, int newlevel )
 {
   int maxlevel = IsImmortal( ch ) ? 200 : MAX_ABILITY_LEVEL;
 
@@ -302,7 +302,7 @@ void set_level( Character *ch, short ability, int newlevel )
 /*
  * Return true if a char is affected by a spell.
  */
-bool is_affected( const Character *ch, int sn )
+bool IsAffected( const Character *ch, int sn )
 {
   Affect *paf = NULL;
 
@@ -313,7 +313,7 @@ bool is_affected( const Character *ch, int sn )
   return false;
 }
 
-bool is_affected_by( const Character *ch, int affected_by_bit )
+bool IsAffectedBy( const Character *ch, int affected_by_bit )
 {
   return IS_SET( ch->affected_by, affected_by_bit );
 }
@@ -322,7 +322,7 @@ bool is_affected_by( const Character *ch, int affected_by_bit )
  * Find a piece of eq on a character.
  * Will pick the top layer if clothing is layered.              -Thoric
  */
-OBJ_DATA *get_eq_char( const Character *ch, int iWear )
+OBJ_DATA *GetEquipmentOnCharacter( const Character *ch, int iWear )
 {
   OBJ_DATA *obj, *maxobj = NULL;
 
@@ -343,12 +343,12 @@ OBJ_DATA *get_eq_char( const Character *ch, int iWear )
 /*
  * Equip a char with an obj.
  */
-void equip_char( Character *ch, OBJ_DATA *obj, int iWear )
+void EquipCharacter( Character *ch, OBJ_DATA *obj, int iWear )
 {
   Affect *paf;
   OBJ_DATA      *otmp;
 
-  if ( (otmp=get_eq_char( ch, iWear )) != NULL
+  if ( (otmp=GetEquipmentOnCharacter( ch, iWear )) != NULL
        &&   (!otmp->pIndexData->layers || !obj->pIndexData->layers) )
     {
       bug( "Equip_char: already equipped (%d).", iWear );
@@ -399,13 +399,13 @@ void equip_char( Character *ch, OBJ_DATA *obj, int iWear )
 /*
  * Unequip a char with an obj.
  */
-void unequip_char( Character *ch, OBJ_DATA *obj )
+void UnequipCharacter( Character *ch, OBJ_DATA *obj )
 {
   Affect *paf;
 
   if ( obj->wear_loc == WEAR_NONE )
     {
-      bug( "Unequip_char: already unequipped.", 0 );
+      bug( "UnEquipCharacter: already unequipped.", 0 );
       return;
     }
 
@@ -435,7 +435,7 @@ void unequip_char( Character *ch, OBJ_DATA *obj )
 /*
  * Find an obj in player's inventory.
  */
-OBJ_DATA *get_obj_carry( const Character *ch, const char *argument )
+OBJ_DATA *GetCarriedItem( const Character *ch, const char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   OBJ_DATA *obj = NULL;
@@ -476,7 +476,7 @@ OBJ_DATA *get_obj_carry( const Character *ch, const char *argument )
 /*
  * Find an obj in player's equipment.
  */
-OBJ_DATA *get_obj_wear( const Character *ch, const char *argument )
+OBJ_DATA *GetWornItem( const Character *ch, const char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   OBJ_DATA *obj = NULL;
@@ -485,7 +485,7 @@ OBJ_DATA *get_obj_wear( const Character *ch, const char *argument )
 
   if ( !ch )
     {
-      bug( "get_obj_wear: null ch" );
+      bug( "GetWornItem: null ch" );
     }
 
   number = number_argument( argument, arg );
@@ -533,7 +533,7 @@ bool ms_find_obj( const Character *ch )
    * we're going to be nice and let nothing weird happen unless
    * you're a tad messed up
    */
-  drunk = UMAX( 1, drunk );
+  drunk = umax( 1, drunk );
 
   if ( abs(ms) + (drunk/3) < 30 )
     return false;
@@ -543,7 +543,7 @@ bool ms_find_obj( const Character *ch )
 
   if ( ms > 15 )        /* range 1 to 20 */
     {
-      switch( number_range( UMAX(1, (ms/5-15)), (ms+4) / 5 ) )
+      switch( number_range( umax(1, (ms/5-15)), (ms+4) / 5 ) )
 	{
 	default:
 	case 1:
@@ -629,7 +629,7 @@ bool ms_find_obj( const Character *ch )
     }
   else
     {
-      int sub = URANGE(1, abs(ms)/2 + drunk, 60);
+      int sub = urange(1, abs(ms)/2 + drunk, 60);
 
       switch( number_range( 1, sub/10 ) )
         {
@@ -677,8 +677,8 @@ bool can_see( const Character *ch, const Character *victim )
 
   if ( !ch )
     {
-      if ( is_affected_by(victim, AFF_INVISIBLE)
-           || is_affected_by(victim, AFF_HIDE)
+      if ( IsAffectedBy(victim, AFF_INVISIBLE)
+           || IsAffectedBy(victim, AFF_HIDE)
            || IS_SET(victim->act, PLR_WIZINVIS) )
         return false;
       else
@@ -707,23 +707,23 @@ bool can_see( const Character *ch, const Character *victim )
 
   if ( !IsImmortal(ch) && !IsNpc(victim) && !victim->desc
        && get_timer(victim, TIMER_RECENTFIGHT) > 0
-       && (!victim->switched || !is_affected_by(victim->switched, AFF_POSSESS)) )
+       && (!victim->switched || !IsAffectedBy(victim->switched, AFF_POSSESS)) )
     return false;
 
   if ( !IsNpc(ch) && IS_SET(ch->act, PLR_HOLYLIGHT) )
     return true;
 
   /* The miracle cure for blindness? -- Altrag */
-  if ( !is_affected_by(ch, AFF_TRUESIGHT) )
+  if ( !IsAffectedBy(ch, AFF_TRUESIGHT) )
     {
-      if ( is_affected_by(ch, AFF_BLIND) )
+      if ( IsAffectedBy(ch, AFF_BLIND) )
         return false;
 
-      if ( room_is_dark( ch->in_room ) && !is_affected_by(ch, AFF_INFRARED) )
+      if ( room_is_dark( ch->in_room ) && !IsAffectedBy(ch, AFF_INFRARED) )
         return false;
 
-      if ( is_affected_by(victim, AFF_HIDE)
-           && !is_affected_by(ch, AFF_DETECT_HIDDEN)
+      if ( IsAffectedBy(victim, AFF_HIDE)
+           && !IsAffectedBy(ch, AFF_DETECT_HIDDEN)
            && !victim->fighting )
         {
           if ( ch->race == RACE_DEFEL && victim->race == RACE_DEFEL )
@@ -733,8 +733,8 @@ bool can_see( const Character *ch, const Character *victim )
         }
 
 
-      if ( is_affected_by(victim, AFF_INVISIBLE)
-           &&  !is_affected_by(ch, AFF_DETECT_INVIS) )
+      if ( IsAffectedBy(victim, AFF_INVISIBLE)
+           &&  !IsAffectedBy(ch, AFF_DETECT_INVIS) )
         return false;
     }
 
@@ -752,10 +752,10 @@ bool can_see_obj( const Character *ch, const OBJ_DATA *obj )
   if ( IS_OBJ_STAT( obj, ITEM_BURRIED ) )
     return false;
 
-  if ( is_affected_by( ch, AFF_TRUESIGHT ) )
+  if ( IsAffectedBy( ch, AFF_TRUESIGHT ) )
     return true;
 
-  if ( is_affected_by( ch, AFF_BLIND ) )
+  if ( IsAffectedBy( ch, AFF_BLIND ) )
     return false;
 
   if ( IS_OBJ_STAT(obj, ITEM_HIDDEN) )
@@ -764,10 +764,10 @@ bool can_see_obj( const Character *ch, const OBJ_DATA *obj )
   if ( obj->item_type == ITEM_LIGHT && obj->value[OVAL_LIGHT_POWER] != 0 )
     return true;
 
-  if ( room_is_dark( ch->in_room ) && !is_affected_by(ch, AFF_INFRARED) )
+  if ( room_is_dark( ch->in_room ) && !IsAffectedBy(ch, AFF_INFRARED) )
     return false;
 
-  if ( IS_OBJ_STAT(obj, ITEM_INVIS) && !is_affected_by(ch, AFF_DETECT_INVIS) )
+  if ( IS_OBJ_STAT(obj, ITEM_INVIS) && !IsAffectedBy(ch, AFF_DETECT_INVIS) )
     return false;
 
   return true;
@@ -800,7 +800,7 @@ void fix_char( Character *ch )
   OBJ_DATA *obj;
   int x, ncarry;
 
-  de_equip_char( ch );
+  de_EquipCharacter( ch );
 
   ncarry = 0;
   while ( (obj=ch->first_carrying) != NULL )
@@ -814,9 +814,9 @@ void fix_char( Character *ch )
 
   ch->affected_by       = race_table[ch->race].affected;
   ch->mental_state      = 0;
-  ch->hit               = UMAX( 1, ch->hit  );
-  ch->mana              = UMAX( 1, ch->mana );
-  ch->move              = UMAX( 1, ch->move );
+  ch->hit               = umax( 1, ch->hit  );
+  ch->mana              = umax( 1, ch->mana );
+  ch->move              = umax( 1, ch->move );
   ch->armor             = 100;
   ch->stats.mod_str           = 0;
   ch->stats.mod_dex           = 0;
@@ -827,7 +827,7 @@ void fix_char( Character *ch )
   ch->stats.mod_lck           = 0;
   ch->damroll           = 0;
   ch->hitroll           = 0;
-  ch->alignment = URANGE( -1000, ch->alignment, 1000 );
+  ch->alignment = urange( -1000, ch->alignment, 1000 );
   ch->saving.breath     = 0;
   ch->saving.wand       = 0;
   ch->saving.para_petri = 0;
@@ -843,7 +843,7 @@ void fix_char( Character *ch )
   for ( x = 0; x < ncarry; x++ )
     obj_to_char( carry[x], ch );
 
-  re_equip_char( ch );
+  re_EquipCharacter( ch );
 }
 
 /*
@@ -851,16 +851,16 @@ void fix_char( Character *ch )
  */
 void better_mental_state( Character *ch, int mod )
 {
-  int c = URANGE( 0, abs(mod), 20 );
+  int c = urange( 0, abs(mod), 20 );
   int con = GetCurrentConstitution(ch);
 
   c += number_percent() < con ? 1 : 0;
 
   if ( ch->mental_state < 0 )
-    ch->mental_state = URANGE( -100, ch->mental_state + c, 0 );
+    ch->mental_state = urange( -100, ch->mental_state + c, 0 );
   else
     if ( ch->mental_state > 0 )
-      ch->mental_state = URANGE( 0, ch->mental_state - c, 100 );
+      ch->mental_state = urange( 0, ch->mental_state - c, 100 );
 }
 
 /*
@@ -868,7 +868,7 @@ void better_mental_state( Character *ch, int mod )
  */
 void worsen_mental_state( Character *ch, int mod )
 {
-  int c   = URANGE( 0, abs(mod), 20 );
+  int c   = urange( 0, abs(mod), 20 );
   int con = GetCurrentConstitution(ch);
 
   c -= number_percent() < con ? 1 : 0;
@@ -880,9 +880,9 @@ void worsen_mental_state( Character *ch, int mod )
     return;
 
   if ( ch->mental_state < 0 )
-    ch->mental_state = URANGE( -100, ch->mental_state - c, 100 );
+    ch->mental_state = urange( -100, ch->mental_state - c, 100 );
   else if ( ch->mental_state > 0 )
-    ch->mental_state = URANGE( -100, ch->mental_state + c, 100 );
+    ch->mental_state = urange( -100, ch->mental_state + c, 100 );
   else
     ch->mental_state -= c;
 }
@@ -901,22 +901,22 @@ int can_carry_n( const Character *ch )
   if ( IsNpc(ch) && IS_SET(ch->act, ACT_PET) )
     return 0;
 
-  if ( get_eq_char(ch, WEAR_WIELD) )
+  if ( GetEquipmentOnCharacter(ch, WEAR_WIELD) )
     ++penalty;
 
-  if ( get_eq_char(ch, WEAR_DUAL_WIELD) )
+  if ( GetEquipmentOnCharacter(ch, WEAR_DUAL_WIELD) )
     ++penalty;
 
-  if ( get_eq_char(ch, WEAR_MISSILE_WIELD) )
+  if ( GetEquipmentOnCharacter(ch, WEAR_MISSILE_WIELD) )
     ++penalty;
 
-  if ( get_eq_char(ch, WEAR_HOLD) )
+  if ( GetEquipmentOnCharacter(ch, WEAR_HOLD) )
     ++penalty;
 
-  if ( get_eq_char(ch, WEAR_SHIELD) )
+  if ( GetEquipmentOnCharacter(ch, WEAR_SHIELD) )
     ++penalty;
 
-  return URANGE(5, (ch->top_level+15)/5 + GetCurrentDexterity(ch)-13 - penalty, 20);
+  return urange(5, (ch->top_level+15)/5 + GetCurrentDexterity(ch)-13 - penalty, 20);
 }
 
 /*
@@ -981,7 +981,7 @@ bool is_awake( const Character *ch )
 int get_armor_class( const Character *ch )
 {
   int dexterity_modifier = is_awake( ch ) ? dex_app[GetCurrentDexterity(ch)].defensive : 0;
-  int combat_level_modifier = ch->race == RACE_DEFEL ? get_level( ch, COMBAT_ABILITY ) * 2 + 5 : get_level( ch, COMBAT_ABILITY ) / 2;
+  int combat_level_modifier = ch->race == RACE_DEFEL ? GetAbilityLevel( ch, COMBAT_ABILITY ) * 2 + 5 : GetAbilityLevel( ch, COMBAT_ABILITY ) / 2;
 
   return ch->armor + dexterity_modifier - combat_level_modifier;
 }
@@ -1043,10 +1043,10 @@ bool is_clanned( const Character *ch )
 
 void set_wait_state( Character *ch, short number_of_pulses )
 {
-  ch->wait = UMAX( ch->wait, number_of_pulses );
+  ch->wait = umax( ch->wait, number_of_pulses );
 }
 
 bool is_jedi( const Character *ch )
 {
-  return get_level( ch, FORCE_ABILITY ) > 1;
+  return GetAbilityLevel( ch, FORCE_ABILITY ) > 1;
 }

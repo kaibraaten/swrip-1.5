@@ -2145,7 +2145,7 @@ void display_prompt( Descriptor *d )
               if ( (!IsNpc(ch) && IS_SET(ch->act, PLR_WIZINVIS)) ||
                    (IsNpc(ch) && IS_SET(ch->act, ACT_MOBINVIS)) )
                 sprintf(pbuf, "(Invis %d) ", (IsNpc(ch) ? ch->mobinvis : ch->pcdata->wizinvis));
-              else if ( is_affected_by(ch, AFF_INVISIBLE) )
+              else if ( IsAffectedBy(ch, AFF_INVISIBLE) )
 		sprintf(pbuf, "(Invis) " );
               break;
 

@@ -25,7 +25,7 @@ ch_ret spell_invis( int sn, int level, Character *ch, void *vo )
           return rSPELL_FAILED;
         }
 
-      if ( is_affected_by(victim, AFF_INVISIBLE) )
+      if ( IsAffectedBy(victim, AFF_INVISIBLE) )
         {
           failed_casting( skill, ch, victim, NULL );
           return rSPELL_FAILED;
@@ -45,7 +45,7 @@ ch_ret spell_invis( int sn, int level, Character *ch, void *vo )
     {
       OBJ_DATA *obj;
 
-      obj = get_obj_carry( ch, spell_target_name );
+      obj = GetCarriedItem( ch, spell_target_name );
 
       if (obj)
         {

@@ -52,7 +52,7 @@ void do_scribe( Character *ch, char *argument )
       return;
     }
 
-  if ( ( scroll = get_eq_char( ch, WEAR_HOLD ) ) == NULL )
+  if ( ( scroll = GetEquipmentOnCharacter( ch, WEAR_HOLD ) ) == NULL )
     {
       send_to_char( "You must be holding a blank scroll to scribe it.\r\n", ch );
       return;

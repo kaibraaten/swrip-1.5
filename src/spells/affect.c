@@ -47,7 +47,7 @@ ch_ret spell_affect( int sn, int level, Character *ch, void *vo )
         }
 
       /* Spell is already on this guy */
-      if ( is_affected( victim, sn )
+      if ( IsAffected( victim, sn )
            &&  !SPELL_FLAG( skill, SF_ACCUMULATIVE )
            &&  !SPELL_FLAG( skill, SF_RECASTABLE ) )
         {
@@ -57,7 +57,7 @@ ch_ret spell_affect( int sn, int level, Character *ch, void *vo )
 
       if ( (saf = skill->affects) && !saf->next
            &&    saf->location == APPLY_STRIPSN
-           &&   !is_affected( victim, dice_parse(ch, level, saf->modifier) ) )
+           &&   !IsAffected( victim, dice_parse(ch, level, saf->modifier) ) )
         {
           failed_casting( skill, ch, victim, NULL );
           return rSPELL_FAILED;
@@ -107,7 +107,7 @@ ch_ret spell_affect( int sn, int level, Character *ch, void *vo )
               ||         IS_SET( victim->immune, RIS_MAGIC )
               ||   is_immune( victim, SPELL_DAMAGE(skill) )
               ||   check_save(sn, level, ch, victim)
-              || (!SPELL_FLAG(skill, SF_RECASTABLE) && is_affected(victim, sn)))
+              || (!SPELL_FLAG(skill, SF_RECASTABLE) && IsAffected(victim, sn)))
             continue;
 
           if ( hitvict && ch != victim )

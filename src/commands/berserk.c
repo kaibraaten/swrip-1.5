@@ -12,7 +12,7 @@ void do_berserk( Character *ch, char *argument )
       return;
     }
 
-  if ( is_affected_by(ch, AFF_BERSERK) )
+  if ( IsAffectedBy(ch, AFF_BERSERK) )
     {
       send_to_char( "Your rage is already at its peak!\r\n", ch );
       return;

@@ -51,7 +51,7 @@ void do_balzhur( Character *ch, char *argument )
     for ( ability = 0 ; ability < MAX_ABILITY ; ability++ )
       {
         SetExperience( victim, ability, 1 );
-        set_level( victim, ability, 1 );
+        SetAbilityLevel( victim, ability, 1 );
       }
   }
   victim->max_hit  = 500;

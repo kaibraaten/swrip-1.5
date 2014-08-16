@@ -48,7 +48,7 @@ void do_rest( Character *ch, char *argument )
   switch ( ch->position )
     {
     case POS_SLEEPING:
-      if (is_affected_by(ch,AFF_SLEEP))
+      if (IsAffectedBy(ch,AFF_SLEEP))
         {
           send_to_char("You can't wake up!\r\n",ch);
           return;

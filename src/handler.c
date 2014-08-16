@@ -328,7 +328,7 @@ void affect_modify( Character *ch, Affect *paf, bool fAdd )
       if ( IS_VALID_SN(mod)
            &&  (skill=skill_table[mod]) != NULL
            &&   skill->type == SKILL_SPELL )
-        if ( (retcode=(*skill->spell_fun) ( mod, get_level( ch, FORCE_ABILITY ), ch, ch )) == rCHAR_DIED || char_died(ch) )
+        if ( (retcode=(*skill->spell_fun) ( mod, GetAbilityLevel( ch, FORCE_ABILITY ), ch, ch )) == rCHAR_DIED || char_died(ch) )
           return;
       break;
 
@@ -459,7 +459,7 @@ void affect_modify( Character *ch, Affect *paf, bool fAdd )
    */
   if ( !IsNpc( ch )
        &&   saving_char != ch
-       && ( wield = get_eq_char( ch, WEAR_WIELD ) ) != NULL
+       && ( wield = GetEquipmentOnCharacter( ch, WEAR_WIELD ) ) != NULL
        &&   get_obj_weight(wield) > str_app[GetCurrentStrength(ch)].wield )
     {
       static int depth;
@@ -470,7 +470,7 @@ void affect_modify( Character *ch, Affect *paf, bool fAdd )
           act( AT_ACTION, "You are too weak to wield $p any longer.",
                ch, wield, NULL, TO_CHAR );
           act( AT_ACTION, "$n stops wielding $p.", ch, wield, NULL, TO_ROOM );
-          unequip_char( ch, wield );
+          UnequipCharacter( ch, wield );
           depth--;
         }
     }
@@ -590,7 +590,7 @@ void char_from_room( Character *ch )
   if ( !IsNpc(ch) )
     --ch->in_room->area->nplayer;
 
-  if ( ( obj = get_eq_char( ch, WEAR_LIGHT ) ) != NULL
+  if ( ( obj = GetEquipmentOnCharacter( ch, WEAR_LIGHT ) ) != NULL
        && obj->item_type == ITEM_LIGHT
        && obj->value[OVAL_LIGHT_POWER] != 0
        && ch->in_room->light > 0 )
@@ -638,7 +638,7 @@ void char_to_room( Character *ch, ROOM_INDEX_DATA *pRoomIndex )
     if ( ++ch->in_room->area->nplayer > ch->in_room->area->max_players )
       ch->in_room->area->max_players = ch->in_room->area->nplayer;
 
-  if ( ( obj = get_eq_char( ch, WEAR_LIGHT ) ) != NULL
+  if ( ( obj = GetEquipmentOnCharacter( ch, WEAR_LIGHT ) ) != NULL
        &&   obj->item_type == ITEM_LIGHT
        &&   obj->value[OVAL_LIGHT_POWER] != 0 )
     ++ch->in_room->light;
@@ -742,7 +742,7 @@ void obj_from_char( OBJ_DATA *obj )
     }
 
   if ( obj->wear_loc != WEAR_NONE )
-    unequip_char( ch, obj );
+    UnequipCharacter( ch, obj );
 
   /* obj may drop during unequip... */
   if ( !obj->carried_by )
@@ -1406,10 +1406,10 @@ OBJ_DATA *get_obj_here( const Character *ch, const char *argument )
   if ( obj )
     return obj;
 
-  if ( ( obj = get_obj_carry( ch, argument ) ) != NULL )
+  if ( ( obj = GetCarriedItem( ch, argument ) ) != NULL )
     return obj;
 
-  if ( ( obj = get_obj_wear( ch, argument ) ) != NULL )
+  if ( ( obj = GetWornItem( ch, argument ) ) != NULL )
     return obj;
 
   return NULL;
@@ -1486,7 +1486,7 @@ OBJ_DATA *find_obj( Character *ch, const char *orig_argument, bool carryonly )
 
   if ( arg2[0] == '\0' )
     {
-      if ( carryonly && ( obj = get_obj_carry( ch, arg1 ) ) == NULL )
+      if ( carryonly && ( obj = GetCarriedItem( ch, arg1 ) ) == NULL )
         {
           send_to_char( "You do not have that item.\r\n", ch );
           return NULL;
@@ -1504,8 +1504,8 @@ OBJ_DATA *find_obj( Character *ch, const char *orig_argument, bool carryonly )
       OBJ_DATA *container;
 
       if ( carryonly
-           && ( container = get_obj_carry( ch, arg2 ) ) == NULL
-           && ( container = get_obj_wear( ch, arg2 ) ) == NULL )
+           && ( container = GetCarriedItem( ch, arg2 ) ) == NULL
+           && ( container = GetWornItem( ch, arg2 ) ) == NULL )
         {
           send_to_char( "You do not have that item.\r\n", ch );
           return NULL;

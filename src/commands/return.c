@@ -19,7 +19,7 @@ void do_return( Character *ch, char *argument )
     }
 
   send_to_char( "You return to your original body.\r\n", ch );
-  if ( IsNpc( ch ) && is_affected_by( ch, AFF_POSSESS ) )
+  if ( IsNpc( ch ) && IsAffectedBy( ch, AFF_POSSESS ) )
     {
       affect_strip( ch, gsn_possess );
       REMOVE_BIT( ch->affected_by, AFF_POSSESS );

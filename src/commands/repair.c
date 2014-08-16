@@ -51,7 +51,7 @@ void do_repair( Character *ch, char *argument )
       return;
     }
 
-  if ( ( obj = get_obj_carry( ch, argument ) ) == NULL )
+  if ( ( obj = GetCarriedItem( ch, argument ) ) == NULL )
     {
       act( AT_TELL, "$n tells you 'You don't have that item.'",
            keeper, NULL, ch, TO_VICT );

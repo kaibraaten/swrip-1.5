@@ -8,7 +8,7 @@ void do_mpforce( Character *ch, char *argument )
 {
   char arg[ MAX_INPUT_LENGTH ];
 
-  if ( is_affected_by( ch, AFF_CHARM ) )
+  if ( IsAffectedBy( ch, AFF_CHARM ) )
     return;
 
   if ( !IsNpc( ch ) || ch->desc )

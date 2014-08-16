@@ -563,7 +563,7 @@ void save_vendor( Character *ch )
       return;
     }
 
-  de_equip_char( ch );
+  de_EquipCharacter( ch );
 
 
   sprintf( strsave, "%s%s",VENDOR_DIR, capitalize( ch->owner ) );
@@ -597,5 +597,5 @@ void save_vendor( Character *ch )
         }
     }
 
-  re_equip_char( ch );
+  re_EquipCharacter( ch );
 }

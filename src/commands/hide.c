@@ -3,7 +3,7 @@
 
 void do_hide( Character *ch, char *argument )
 {
-  if ( IsNpc(ch) && is_affected_by( ch, AFF_CHARM ) )
+  if ( IsNpc(ch) && IsAffectedBy( ch, AFF_CHARM ) )
     {
       send_to_char( "You can't concentrate enough for that.\r\n", ch );
       return;
@@ -17,7 +17,7 @@ void do_hide( Character *ch, char *argument )
 
   send_to_char( "You make an attempt at stealth.\r\n", ch );
 
-  if ( is_affected_by(ch, AFF_HIDE) )
+  if ( IsAffectedBy(ch, AFF_HIDE) )
     REMOVE_BIT(ch->affected_by, AFF_HIDE);
 
   if ( IsNpc(ch) || number_percent( ) < ch->pcdata->learned[gsn_hide] )

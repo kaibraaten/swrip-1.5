@@ -109,31 +109,31 @@ ch_ret spell_obj_inv( int sn, int level, Character *ch, void *vo )
 
         default:
         case SP_NONE:
-          if ( obj->cost > get_level( ch, FORCE_ABILITY ) * GetCurrentIntelligence(ch) * GetCurrentWisdom(ch) )
+          if ( obj->cost > GetAbilityLevel( ch, FORCE_ABILITY ) * GetCurrentIntelligence(ch) * GetCurrentWisdom(ch) )
             {
               failed_casting( skill, ch, NULL, obj );
               return rNONE;
             }
           break;
         case SP_MINOR:
-          if ( get_level( ch, FORCE_ABILITY ) - obj->level < 20
-               || obj->cost > get_level( ch, FORCE_ABILITY ) * GetCurrentIntelligence(ch) / 5 )
+          if ( GetAbilityLevel( ch, FORCE_ABILITY ) - obj->level < 20
+               || obj->cost > GetAbilityLevel( ch, FORCE_ABILITY ) * GetCurrentIntelligence(ch) / 5 )
             {
               failed_casting( skill, ch, NULL, obj );
 	      return rNONE;
             }
           break;
         case SP_GREATER:
-          if ( get_level( ch, FORCE_ABILITY ) - obj->level < 5
-               || obj->cost > get_level( ch, FORCE_ABILITY ) * 10 * GetCurrentIntelligence(ch) * GetCurrentWisdom(ch) )
+          if ( GetAbilityLevel( ch, FORCE_ABILITY ) - obj->level < 5
+               || obj->cost > GetAbilityLevel( ch, FORCE_ABILITY ) * 10 * GetCurrentIntelligence(ch) * GetCurrentWisdom(ch) )
             {
               failed_casting( skill, ch, NULL, obj );
               return rNONE;
             }
           break;
         case SP_MAJOR:
-          if ( get_level( ch, FORCE_ABILITY ) - obj->level < 0
-               || obj->cost > get_level( ch, FORCE_ABILITY ) * 50 * GetCurrentIntelligence(ch) * GetCurrentWisdom(ch) )
+          if ( GetAbilityLevel( ch, FORCE_ABILITY ) - obj->level < 0
+               || obj->cost > GetAbilityLevel( ch, FORCE_ABILITY ) * 50 * GetCurrentIntelligence(ch) * GetCurrentWisdom(ch) )
             {
               failed_casting( skill, ch, NULL, obj );
               return rNONE;
