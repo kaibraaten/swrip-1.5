@@ -49,7 +49,7 @@ static CraftRecipe *MakeCraftRecipe( void )
       { ITEM_NONE,        CRAFTFLAG_NONE }
     };
   CraftRecipe *recipe = AllocateCraftRecipe( gsn_makejewelry, materials,
-					     10, OBJ_VNUM_CRAFTING_ARMOR,
+					     15, OBJ_VNUM_CRAFTING_ARMOR,
 					     CRAFTFLAG_NEED_WORKSHOP );
 
   return recipe;
