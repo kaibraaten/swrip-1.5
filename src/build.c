@@ -529,6 +529,7 @@ void fold_area( Area *tarea, char *filename, bool install )
       val3 = pObjIndex->value[3];
       val4 = pObjIndex->value[4];
       val5 = pObjIndex->value[5];
+
       switch ( pObjIndex->item_type )
         {
         case ITEM_PILL:

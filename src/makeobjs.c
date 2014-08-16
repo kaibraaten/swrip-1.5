@@ -45,10 +45,10 @@ OBJ_DATA *make_trap(int v0, int v1, int v2, int v3)
   OBJ_DATA *trap = create_object( get_obj_index( OBJ_VNUM_TRAP ), 0 );
 
   trap->timer = 0;
-  trap->value[0] = v0;
-  trap->value[1] = v1;
-  trap->value[2] = v2;
-  trap->value[3] = v3;
+  trap->value[OVAL_TRAP_CHARGE] = v0;
+  trap->value[OVAL_TRAP_TYPE] = v1;
+  trap->value[OVAL_TRAP_STRENGTH] = v2;
+  trap->value[OVAL_TRAP_FLAGS] = v3;
 
   return trap;
 }
@@ -178,15 +178,14 @@ void make_corpse( Character *ch )
 
       /* Using corpse cost to cheat, since corpses not sellable */
       corpse->cost     = (-(int)ch->pIndexData->vnum);
-      corpse->value[2] = corpse->timer;
+      corpse->value[OVAL_CORPSE_DECAY] = corpse->timer;
     }
   else
     {
       name = ch->name;
       corpse = create_object(get_obj_index(OBJ_VNUM_CORPSE_PC), 0);
       corpse->timer = 40;
-      corpse->value[2] = (int)(corpse->timer/8);
-      corpse->value[3] = 0;
+      corpse->value[OVAL_CORPSE_DECAY] = (int)(corpse->timer/8);
 
       if ( ch->gold > 0 )
         {
@@ -263,7 +262,7 @@ OBJ_DATA *create_money( int amount )
       sprintf( buf, obj->short_descr, amount );
       STRFREE( obj->short_descr );
       obj->short_descr = STRALLOC( buf );
-      obj->value[0]      = amount;
+      obj->value[OVAL_MONEY_AMOUNT]      = amount;
     }
 
   return obj;

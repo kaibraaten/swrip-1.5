@@ -2386,7 +2386,7 @@ void mprog_bribe_trigger( Character *mob, Character *ch, int amount )
       sprintf( buf, obj->short_descr, amount );
       STRFREE( obj->short_descr );
       obj->short_descr = STRALLOC( buf );
-      obj->value[0]    = amount;
+      obj->value[OVAL_MONEY_AMOUNT] = amount;
       obj = obj_to_char( obj, mob );
       mob->gold -= amount;
 

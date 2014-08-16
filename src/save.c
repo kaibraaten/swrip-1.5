@@ -66,6 +66,7 @@ static OBJ_DATA *rgObjNest[MAX_NEST];
 /*
  * Local functions.
  */
+static bool HasAnyOvalues( const OBJ_DATA *obj );
 void fwrite_char( Character *ch, FILE *fp );
 void fread_char( Character *ch, FILE *fp, bool preload );
 void write_corpses( Character *ch, const char *name );
@@ -785,6 +786,21 @@ void fwrite_char( Character *ch, FILE *fp )
   fprintf( fp, "End\n\n" );
 }
 
+static bool HasAnyOvalues( const OBJ_DATA *obj )
+{
+  int oval = 0;
+
+  for( oval = 0; oval < MAX_OVAL; ++oval )
+    {
+      if( obj->value[oval] != 0 )
+	{
+	  return true;
+	}
+    }
+
+  return false;
+}
+
 /*
  * Write an object and its contents.
  */
@@ -932,8 +948,7 @@ void fwrite_obj( const Character *ch, const OBJ_DATA *obj, FILE *fp, int iNest,
       fprintf( fp, "Cost         %d\n",   obj->cost                    );
     }
 
-  if ( obj->value[0] || obj->value[1] || obj->value[2]
-       || obj->value[3] || obj->value[4] || obj->value[5] )
+  if( HasAnyOvalues( obj ) )
     {
       fprintf( fp, "Values       %d %d %d %d %d %d\n",
 	       obj->value[0], obj->value[1], obj->value[2],
@@ -944,27 +959,27 @@ void fwrite_obj( const Character *ch, const OBJ_DATA *obj, FILE *fp, int iNest,
     {
     case ITEM_PILL: /* was down there with staff and wand, wrongly - Scryn */
     case ITEM_POTION:
-      if ( IS_VALID_SN(obj->value[1]) )
+      if ( IS_VALID_SN(obj->value[OVAL_PILL_SPELL1]) )
 	{
 	  fprintf( fp, "Spell 1      '%s'\n",
-		   skill_table[obj->value[1]]->name );
+		   skill_table[obj->value[OVAL_PILL_SPELL1]]->name );
 	}
 
-      if ( IS_VALID_SN(obj->value[2]) )
+      if ( IS_VALID_SN(obj->value[OVAL_PILL_SPELL2]) )
 	{
 	  fprintf( fp, "Spell 2      '%s'\n",
-		   skill_table[obj->value[2]]->name );
+		   skill_table[obj->value[OVAL_PILL_SPELL2]]->name );
 	}
 
-      if ( IS_VALID_SN(obj->value[3]) )
+      if ( IS_VALID_SN(obj->value[OVAL_PILL_SPELL3]) )
 	{
 	  fprintf( fp, "Spell 3      '%s'\n",
-		   skill_table[obj->value[3]]->name );
+		   skill_table[obj->value[OVAL_PILL_SPELL3]]->name );
 	}
       break;
 
     case ITEM_DEVICE:
-      if ( IS_VALID_SN(obj->value[3]) )
+      if ( IS_VALID_SN(obj->value[OVAL_DEVICE_SPELL]) )
 	{
 	  fprintf( fp, "Spell 3      '%s'\n",
 		   skill_table[obj->value[3]]->name );
@@ -972,16 +987,16 @@ void fwrite_obj( const Character *ch, const OBJ_DATA *obj, FILE *fp, int iNest,
       break;
 
     case ITEM_SALVE:
-      if ( IS_VALID_SN(obj->value[4]) )
+      if ( IS_VALID_SN(obj->value[OVAL_SALVE_SPELL1]) )
 	{
 	  fprintf( fp, "Spell 4      '%s'\n",
-		   skill_table[obj->value[4]]->name );
+		   skill_table[obj->value[OVAL_SALVE_SPELL1]]->name );
 	}
 
-      if ( IS_VALID_SN(obj->value[5]) )
+      if ( IS_VALID_SN(obj->value[OVAL_SALVE_SPELL2]) )
 	{
 	  fprintf( fp, "Spell 5      '%s'\n",
-		   skill_table[obj->value[5]]->name );
+		   skill_table[obj->value[OVAL_SALVE_SPELL2]]->name );
 	}
 
       break;
@@ -2528,9 +2543,9 @@ void write_corpses( Character *ch, const char *name )
   /* Go by vnum, less chance of screwups. -- Altrag */
   for ( corpse = first_object; corpse; corpse = corpse->next )
     {
-      if ( corpse->pIndexData->vnum == OBJ_VNUM_CORPSE_PC &&
-	   corpse->in_room != NULL && corpse->value[1] != 1 &&
-	   !str_cmp(corpse->short_descr+14, name) )
+      if ( corpse->pIndexData->vnum == OBJ_VNUM_CORPSE_PC
+	   && corpse->in_room != NULL && corpse->value[OVAL_CORPSE_1] != 1
+	   && !str_cmp(corpse->short_descr+14, name) )
 	{
 	  if ( !fp )
 	    {

@@ -1276,7 +1276,7 @@ void add_obj_reset( Area *pArea, char cm, OBJ_DATA *obj, int v2, int v3 )
     {
       if ( cm == 'O' )
 	{
-	  add_reset(pArea, 'T', obj->value[3], obj->value[1], obj->value[0], v3);
+	  add_reset(pArea, 'T', obj->value[OVAL_TRAP_FLAGS], obj->value[OVAL_TRAP_TYPE], obj->value[OVAL_TRAP_CHARGE], v3);
 	}
 
       return;

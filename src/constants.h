@@ -1255,6 +1255,7 @@ typedef enum
 #define OVAL_PIPE_FLAGS 3
 
 #define OVAL_CORPSE_0 0
+#define OVAL_CORPSE_1 1
 #define OVAL_CORPSE_DECAY 2
 
 #define OVAL_FOUNTAIN_1 1
