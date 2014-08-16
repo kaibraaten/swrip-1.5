@@ -17,7 +17,7 @@ void do_help( Character *ch, char *argument )
       return;
     }
 
-  pHelp = get_help( ch, argument );
+  pHelp = GetHelpFile( ch, argument );
 
   if ( !pHelp )
     {
@@ -26,21 +26,21 @@ void do_help( Character *ch, char *argument )
       return;
     }
 
-  if ( get_help_level( pHelp ) >= 0 && str_cmp( argument, "imotd" ) )
+  if ( GetHelpLevel( pHelp ) >= 0 && str_cmp( argument, "imotd" ) )
     {
-      pager_printf( ch, "%s\r\n", get_help_keyword( pHelp ) );
+      pager_printf( ch, "%s\r\n", GetHelpFileKeyword( pHelp ) );
     }
 
   /*
    * Strip leading '.' to allow initial blanks.
    */
-  if ( get_help_text( pHelp )[0] == '.' )
+  if ( GetHelpFileText( pHelp )[0] == '.' )
     {
-      help_text = get_help_text( pHelp ) + 1;
+      help_text = GetHelpFileText( pHelp ) + 1;
     }
   else
     {
-      help_text = get_help_text( pHelp );
+      help_text = GetHelpFileText( pHelp );
     }
 
   pager_printf( ch, help_text );

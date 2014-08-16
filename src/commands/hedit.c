@@ -37,13 +37,13 @@ void do_hedit( Character *ch, char *argument )
       return;
     }
 
-  pHelp = get_help( ch, argument );
+  pHelp = GetHelpFile( ch, argument );
 
   if ( !pHelp ) /* new help */
     {
       int level = GetTrustLevel( ch );
-      pHelp = create_help( argument, level );
-      add_help( pHelp );
+      pHelp = CreateHelpFile( argument, level );
+      AddHelpFile( pHelp );
     }
 
   ch->substate = SUB_HELP_EDIT;

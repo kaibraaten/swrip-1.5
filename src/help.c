@@ -30,9 +30,9 @@ HelpFile *last_help = NULL;
 int top_help = 0;
 char *help_greeting = NULL;
 
-static char *help_fix( char *text );
+static char *MunchLeadingSpace( char *text );
 
-HelpFile *get_help( const Character *ch, char *argument )
+HelpFile *GetHelpFile( const Character *ch, char *argument )
 {
   char argall[MAX_INPUT_LENGTH];
   char argone[MAX_INPUT_LENGTH];
@@ -74,17 +74,17 @@ HelpFile *get_help( const Character *ch, char *argument )
 
   for ( pHelp = first_help; pHelp; pHelp = pHelp->next )
     {
-      if ( get_help_level( pHelp ) > GetTrustLevel( ch ) )
+      if ( GetHelpLevel( pHelp ) > GetTrustLevel( ch ) )
 	{
 	  continue;
 	}
 
-      if ( lev != -2 && get_help_level( pHelp ) != lev )
+      if ( lev != -2 && GetHelpLevel( pHelp ) != lev )
 	{
 	  continue;
 	}
 
-      if ( is_name( argall, get_help_keyword( pHelp ) ) )
+      if ( is_name( argall, GetHelpFileKeyword( pHelp ) ) )
 	{
 	  return pHelp;
 	}
@@ -98,7 +98,7 @@ HelpFile *get_help( const Character *ch, char *argument )
  * Page is insert-sorted by keyword.                    -Thoric
  * (The reason for sorting is to keep do_hlist looking nice)
  */
-void add_help( HelpFile *pHelp )
+void AddHelpFile( HelpFile *pHelp )
 {
   HelpFile *tHelp = NULL;
   int match = 0;
@@ -108,8 +108,8 @@ void add_help( HelpFile *pHelp )
       if ( pHelp->level == tHelp->level
 	   &&   str_cmp(pHelp->keyword, tHelp->keyword) == 0 )
 	{
-	  bug( "add_help: duplicate: %s. Deleting.", pHelp->keyword );
-	  destroy_help( pHelp );
+	  bug( "AddHelpFile: duplicate: %s. Deleting.", pHelp->keyword );
+	  DestroyHelpFile( pHelp );
 	  return;
 	}
       else if ( (match=str_cmp(pHelp->keyword[0]=='\'' ? pHelp->keyword+1 : pHelp->keyword,
@@ -117,13 +117,17 @@ void add_help( HelpFile *pHelp )
 		|| (match == 0 && pHelp->level > tHelp->level) )
 	{
 	  if ( !tHelp->prev )
-	    first_help    = pHelp;
+	    {
+	      first_help = pHelp;
+	    }
 	  else
-	    tHelp->prev->next = pHelp;
+	    {
+	      tHelp->prev->next = pHelp;
+	    }
 
-	  pHelp->prev             = tHelp->prev;
-	  pHelp->next             = tHelp;
-	  tHelp->prev             = pHelp;
+	  pHelp->prev  = tHelp->prev;
+	  pHelp->next  = tHelp;
+	  tHelp->prev  = pHelp;
 	  break;
 	}
     }
@@ -136,7 +140,7 @@ void add_help( HelpFile *pHelp )
   top_help++;
 }
 
-void unlink_help( HelpFile *help )
+void UnlinkHelpFile( HelpFile *help )
 {
   UNLINK( help, first_help, last_help, next, prev );
   top_help--;
@@ -145,7 +149,7 @@ void unlink_help( HelpFile *help )
 /*
  * Load a help section.
  */
-void load_helps( void )
+void LoadHelpFiles( void )
 {
   FILE *fp = NULL;
 
@@ -159,11 +163,11 @@ void load_helps( void )
     {
       short level = fread_number( fp );
       char *keyword = fread_string( fp );
-      HelpFile *pHelp = create_help( keyword, level );
+      HelpFile *pHelp = CreateHelpFile( keyword, level );
 
       if ( keyword[0] == '$' )
 	{
-	  destroy_help( pHelp );
+	  DestroyHelpFile( pHelp );
 	  break;
 	}
 
@@ -171,20 +175,20 @@ void load_helps( void )
 
       if ( pHelp->keyword[0] == '\0' )
 	{
-	  destroy_help( pHelp );
+	  DestroyHelpFile( pHelp );
           continue;
         }
 
-      if ( !str_cmp( get_help_keyword( pHelp ), "greeting" ) )
+      if ( !str_cmp( GetHelpFileKeyword( pHelp ), "greeting" ) )
 	{
-	  help_greeting = get_help_text( pHelp );
+	  help_greeting = GetHelpFileText( pHelp );
 	}
 
-      add_help( pHelp );
+      AddHelpFile( pHelp );
     }
 }
 
-void save_helps( void )
+void SaveHelpFiles( void )
 {
   FILE *filehandle = NULL;
   HelpFile *pHelp = NULL;
@@ -203,28 +207,28 @@ void save_helps( void )
   for ( pHelp = first_help; pHelp; pHelp = pHelp->next )
     {
       fprintf( filehandle, "%d %s~\n%s~\n\n",
-	       get_help_level( pHelp ),
-	       get_help_keyword( pHelp ),
-	       help_fix( get_help_text( pHelp ) ) );
+	       GetHelpLevel( pHelp ),
+	       GetHelpFileKeyword( pHelp ),
+	       MunchLeadingSpace( GetHelpFileText( pHelp ) ) );
     }
 
   fprintf( filehandle, "0 $~\n\n\n#$\n" );
   fclose( filehandle );
 }
 
-HelpFile *create_help( char *keyword, short level )
+HelpFile *CreateHelpFile( char *keyword, short level )
 {
   HelpFile *help = NULL;
   
   CREATE( help, HelpFile, 1 );
-  set_help_keyword( help, keyword );
-  set_help_text( help, "" );
-  set_help_level( help, level );
+  SetHelpFileKeyword( help, keyword );
+  SetHelpFileText( help, "" );
+  SetHelpLevel( help, level );
 
   return help;
 }
 
-void destroy_help( HelpFile *help )
+void DestroyHelpFile( HelpFile *help )
 {
   STRFREE( help->keyword );
   STRFREE( help->text );
@@ -234,9 +238,9 @@ void destroy_help( HelpFile *help )
 /*
  * Stupid leading space muncher fix                             -Thoric
  */
-static char *help_fix( char *text )
+static char *MunchLeadingSpace( char *text )
 {
-  char *fixed;
+  char *fixed = NULL;
 
   if ( !text )
     return "";
@@ -249,12 +253,12 @@ static char *help_fix( char *text )
   return fixed;
 }
 
-short get_help_level( const HelpFile *help )
+short GetHelpLevel( const HelpFile *help )
 {
   return help->level;
 }
 
-void set_help_level( HelpFile *help, short level )
+void SetHelpLevel( HelpFile *help, short level )
 {
   if( level >= -1 && level <= MAX_LEVEL )
     {
@@ -267,12 +271,12 @@ void set_help_level( HelpFile *help, short level )
     }
 }
 
-char *get_help_keyword( const HelpFile *help )
+char *GetHelpFileKeyword( const HelpFile *help )
 {
   return help->keyword;
 }
 
-void set_help_keyword( HelpFile *help, char *keyword )
+void SetHelpFileKeyword( HelpFile *help, char *keyword )
 {
   if( help->keyword )
     {
@@ -282,12 +286,12 @@ void set_help_keyword( HelpFile *help, char *keyword )
   help->keyword = STRALLOC( strupper( keyword ) );
 }
 
-char *get_help_text( const HelpFile *help )
+char *GetHelpFileText( const HelpFile *help )
 {
   return help->text;
 }
 
-void set_help_text( HelpFile *help, char *text )
+void SetHelpFileText( HelpFile *help, char *text )
 {
   if( help->text )
     {

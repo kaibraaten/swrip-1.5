@@ -22,7 +22,7 @@ void do_hset( Character *ch, char *argument )
   if ( !str_cmp( arg1, "save" ) )
     {
       log_string_plus( "Saving help files.", LOG_NORMAL, LEVEL_GREATER );
-      save_helps();
+      SaveHelpFiles();
       send_to_char( "Saved.\r\n", ch );
       return;
     }
@@ -32,7 +32,7 @@ void do_hset( Character *ch, char *argument )
       argument = one_argument( argument, arg2 );
     }
 
-  pHelp = get_help( ch, argument );
+  pHelp = GetHelpFile( ch, argument );
 
   if ( !pHelp )
     {
@@ -42,8 +42,8 @@ void do_hset( Character *ch, char *argument )
 
   if ( !str_cmp( arg1, "remove" ) )
     {
-      unlink_help( pHelp );
-      destroy_help( pHelp );
+      UnlinkHelpFile( pHelp );
+      DestroyHelpFile( pHelp );
       send_to_char( "Removed.\r\n", ch );
       return;
     }

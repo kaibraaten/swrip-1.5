@@ -4175,7 +4175,7 @@ static void imc_readhelp( IMC_HelpFile * help, FILE * fp )
    }
 }
 
-static void imc_load_helps( void )
+static void imc_LoadHelpFiles( void )
 {
    FILE *fp;
    IMC_HelpFile *help;
@@ -4204,7 +4204,7 @@ static void imc_load_helps( void )
 
       if( letter != '#' )
       {
-         imcbug( "%s", "imc_load_helps: # not found." );
+         imcbug( "%s", "imc_LoadHelpFiles: # not found." );
          break;
       }
 
@@ -4220,7 +4220,7 @@ static void imc_load_helps( void )
          break;
       else
       {
-         imcbug( "imc_load_helps: bad section: %s.", word );
+         imcbug( "imc_LoadHelpFiles: bad section: %s.", word );
          continue;
       }
    }
@@ -5225,7 +5225,7 @@ void imc_startup( bool force, socket_t desc, bool connected )
     * Help information should persist even when the network is not connected... 
     */
    if( first_imc_help == NULL )
-      imc_load_helps(  );
+      imc_LoadHelpFiles(  );
 
    /*
     * ... as should the color table. 

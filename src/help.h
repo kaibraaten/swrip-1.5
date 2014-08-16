@@ -41,21 +41,21 @@ extern HelpFile *first_help;
 extern HelpFile *last_help;
 extern char *help_greeting;
 
-HelpFile *get_help( const Character *ch, char *argument );
-void add_help( HelpFile *pHelp );
-void unlink_help( HelpFile *pHelp );
-void load_helps( void );
-void save_helps( void );
-HelpFile *create_help( char *keyword, short level );
-void destroy_help( HelpFile *help );
+HelpFile *GetHelpFile( const Character *ch, char *argument );
+void AddHelpFile( HelpFile *pHelp );
+void UnlinkHelpFile( HelpFile *pHelp );
+void LoadHelpFiles( void );
+void SaveHelpFiles( void );
+HelpFile *CreateHelpFile( char *keyword, short level );
+void DestroyHelpFile( HelpFile *help );
 
-short get_help_level( const HelpFile *help );
-void set_help_level( HelpFile *help, short level );
+short GetHelpLevel( const HelpFile *help );
+void SetHelpLevel( HelpFile *help, short level );
 
-char *get_help_keyword( const HelpFile *help );
-void set_help_keyword( HelpFile *help, char *keyword );
+char *GetHelpFileKeyword( const HelpFile *help );
+void SetHelpFileKeyword( HelpFile *help, char *keyword );
 
-char *get_help_text( const HelpFile *help );
-void set_help_text( HelpFile *help, char *text );
+char *GetHelpFileText( const HelpFile *help );
+void SetHelpFileText( HelpFile *help, char *text );
 
 #endif
