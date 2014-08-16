@@ -53,7 +53,7 @@ struct CraftingSession
   Character *Engineer;
   CraftRecipe *Recipe;
   struct FoundMaterial *FoundMaterials;
-  char *OriginalArgument;
+  char *CommandArgument;
 };
 
 struct FinishedCraftingUserData
@@ -61,9 +61,9 @@ struct FinishedCraftingUserData
   CraftRecipe *Recipe;
 };
 
-static void FinishedStage( CraftingSession *session );
-static void OnAbort( CraftingSession *session );
-static bool FindMaterials( CraftingSession *session, bool extract );
+static void AfterDelay( CraftingSession *session );
+static void AbortSession( CraftingSession *session );
+static bool CheckMaterials( CraftingSession *session, bool extract );
 static size_t CountCraftingMaterials( const CraftingMaterial *material );
 static struct FoundMaterial *AllocateFoundMaterials( const CraftingMaterial *recipeMaterials );
 static bool CheckSkill( const CraftingSession *session );
@@ -100,21 +100,21 @@ void do_craftingengine( Character *ch, char *argument )
       break;
 
     case SUB_PAUSE:
-      FinishedStage( session );
+      AfterDelay( session );
       break;
 
     case SUB_TIMER_DO_ABORT:
-      OnAbort( session );
+      AbortSession( session );
       break;
     }
 }
 
-static void FinishedStage( CraftingSession *session )
+static void AfterDelay( CraftingSession *session )
 {
   CraftRecipe *recipe = session->Recipe;
   Character *ch = session->Engineer;
   int the_chance = ch->pcdata->learned[recipe->Skill];
-  bool hasMaterials = FindMaterials( session, true );
+  bool hasMaterials = CheckMaterials( session, true );
   int level = ch->pcdata->learned[recipe->Skill];
   OBJ_DATA *object = NULL;
   OBJ_INDEX_DATA *proto = get_obj_index( recipe->Prototype );
@@ -124,7 +124,7 @@ static void FinishedStage( CraftingSession *session )
 
   ch->substate = SUB_NONE;
 
-  if ( number_percent() > the_chance*2  || !hasMaterials )
+  if ( number_percent() > the_chance * 2  || !hasMaterials )
     {
       ch_printf( ch, "&RYou hold up your newly created %s.\r\n", itemType );
       ch_printf( ch, "&RIt suddenly dawns upon you that you have created the most useless\r\n" );
@@ -138,7 +138,6 @@ static void FinishedStage( CraftingSession *session )
 
   eventArgs.CraftingSession = session;
   eventArgs.Object = object;
-
   RaiseEvent( session->OnSetObjectStats, &eventArgs );
 
   object = obj_to_char( object, ch );
@@ -164,7 +163,7 @@ static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *
   sprintf( actBuf, "$n finishes making $s new %s.", itemType );
   act( AT_PLAIN, actBuf, ch, NULL, NULL, TO_ROOM );
 
-  xpgain = UMIN( eventArgs->Object->cost * 100,
+  xpgain = umin( eventArgs->Object->cost * 100,
                  exp_level(get_level(ch, skill->guild ) + 1)
                  - exp_level(get_level(ch, skill->guild ) ) );
   gain_exp(ch, skill->guild, xpgain );
@@ -194,7 +193,7 @@ static void CheckRequirementsHandler( void *userData, CheckRequirementsEventArgs
     }
 }
 
-static void OnAbort( CraftingSession *session )
+static void AbortSession( CraftingSession *session )
 {
   Character *ch = session->Engineer;
   AbortCraftingEventArgs abortEventArgs;
@@ -220,11 +219,11 @@ CraftRecipe *AllocateCraftRecipe( int sn, const CraftingMaterial *materialList, 
   CraftRecipe *recipe = NULL;
   CREATE( recipe, CraftRecipe, 1 );
 
-  recipe->Skill = sn;
-  recipe->Materials = materialList;
-  recipe->Duration = duration;
-  recipe->Prototype = prototypeObject;
-  recipe->Flags = flags;
+  recipe->Skill      = sn;
+  recipe->Materials  = materialList;
+  recipe->Duration   = duration;
+  recipe->Prototype  = prototypeObject;
+  recipe->Flags      = flags;
 
   if( !get_skilltype( recipe->Skill ) )
     {
@@ -298,7 +297,7 @@ CraftingSession *AllocateCraftingSession( CraftRecipe *recipe, Character *engine
   session->Engineer = engineer;
   session->Recipe = recipe;
   session->FoundMaterials = AllocateFoundMaterials( recipe->Materials );
-  session->OriginalArgument = str_dup( commandArgument );
+  session->CommandArgument = str_dup( commandArgument );
 
   engineer->pcdata->CraftingSession = session;
 
@@ -318,7 +317,7 @@ void FreeCraftingSession( CraftingSession *session )
 
   FreeCraftRecipe( session->Recipe );
   DISPOSE( session->FoundMaterials );
-  DISPOSE( session->OriginalArgument );
+  DISPOSE( session->CommandArgument );
 
   if( session->Engineer )
     {
@@ -351,7 +350,7 @@ void StartCrafting( CraftingSession *session )
   CheckRequirementsEventArgs checkRequirementsEventArgs;
 
   interpretArgumentsEventArgs.CraftingSession = session;
-  interpretArgumentsEventArgs.CommandArguments = session->OriginalArgument;
+  interpretArgumentsEventArgs.CommandArguments = session->CommandArgument;
   interpretArgumentsEventArgs.AbortSession = false;
 
   checkRequirementsEventArgs.CraftingSession = session;
@@ -366,7 +365,7 @@ void StartCrafting( CraftingSession *session )
 
   if( interpretArgumentsEventArgs.AbortSession
       || checkRequirementsEventArgs.AbortSession
-      || !FindMaterials( session, false )
+      || !CheckMaterials( session, false )
       || !CheckSkill( session ) )
     {
       AbortCraftingEventArgs abortEventArgs;
@@ -387,7 +386,7 @@ void StartCrafting( CraftingSession *session )
   add_timer( ch, TIMER_DO_FUN, session->Recipe->Duration, do_craftingengine, SUB_PAUSE );
 }
 
-static bool FindMaterials( CraftingSession *session, bool extract )
+static bool CheckMaterials( CraftingSession *session, bool extract )
 {
   OBJ_DATA *obj = NULL;
   Character *ch = GetEngineer( session );
