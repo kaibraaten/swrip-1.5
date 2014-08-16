@@ -37,5 +37,6 @@ Reset *AddReset( Area *tarea, char letter, int extra,
 		  int arg1, int arg2, int arg3 );
 Reset *PlaceReset( Area *tarea, char letter,
 		    int extra, int arg1, int arg2, int arg3 );
+void RenumberPutResets( Area *pArea );
 
 #endif

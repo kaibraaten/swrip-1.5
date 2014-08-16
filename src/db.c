@@ -303,7 +303,6 @@ void fix_exits( void );
  * External booting function
  */
 void load_corpses( void );
-void renumber_put_resets( Area *pArea );
 
 /*
  * MUDprogram locals
@@ -1495,7 +1494,7 @@ void load_resets( Area *tarea, FILE *fp )
     }
 
   if ( !not01 )
-    renumber_put_resets(tarea);
+    RenumberPutResets(tarea);
 }
 
 

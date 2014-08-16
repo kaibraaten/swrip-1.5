@@ -1992,7 +1992,7 @@ void ResetArea( Area *pArea )
 }
 
 void ListResets( Character *ch, Area *pArea, ROOM_INDEX_DATA *pRoom,
-                  int start, int end )
+		 int start, int end )
 {
   Reset *pReset = NULL;
   ROOM_INDEX_DATA *room = NULL;
@@ -2339,7 +2339,7 @@ void ListResets( Character *ch, Area *pArea, ROOM_INDEX_DATA *pRoom,
 
 /* Setup put nesting levels, regardless of whether or not the resets will
    actually reset, or if they're bugged. */
-void renumber_put_resets( Area *pArea )
+void RenumberPutResets( Area *pArea )
 {
   Reset *pReset = NULL, *lastobj = NULL;
 
