@@ -276,7 +276,7 @@ OBJ_DATA *find_quill( Character *ch )
 
   for ( quill = ch->last_carrying; quill; quill = quill->prev_content )
     if ( quill->item_type == ITEM_PEN
-         &&   can_see_obj( ch, quill ) )
+         && can_see_obj( ch, quill ) )
       return quill;
 
   return quill;
@@ -652,7 +652,7 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
               send_to_char("You need a datapad to record a message.\r\n", ch);
               return;
             }
-          if ( quill->value[0] < 1 )
+          if ( quill->value[OVAL_PEN_INK_AMOUNT] < 1 )
             {
               send_to_char("Your quill is dry.\r\n", ch);
               return;
@@ -676,14 +676,19 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
           act(AT_MAGIC, "You get a message disk to record your note.",
               ch, NULL, NULL, TO_CHAR);
         }
-      if (paper->value[0] < 2 )
+
+      if (paper->value[OVAL_PAPER_0] < 2 )
         {
-          paper->value[0] = 1;
+          paper->value[OVAL_PAPER_0] = 1;
           ed = SetOExtra(paper, "_text_");
           ch->substate = SUB_WRITING_NOTE;
           ch->dest_buf = ed;
+
           if ( get_trust(ch) < sysdata.write_mail_free )
-            --quill->value[0];
+	    {
+	      --quill->value[OVAL_PEN_INK_AMOUNT];
+	    }
+
           start_editing( ch, ed->description );
           return;
         }
@@ -704,7 +709,7 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
               send_to_char("You need a datapad to record a disk.\r\n", ch);
               return;
             }
-          if ( quill->value[0] < 1 )
+          if ( quill->value[OVAL_PEN_INK_AMOUNT] < 1 )
             {
               send_to_char("Your quill is dry.\r\n", ch);
               return;
@@ -733,14 +738,14 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
           act(AT_MAGIC, "You get a message disk to record your note.",
               ch, NULL, NULL, TO_CHAR);
         }
-      if (paper->value[1] > 1 )
+      if (paper->value[OVAL_PAPER_0] > 1 )
         {
           send_to_char("You cannot modify this message.\r\n", ch);
           return;
         }
       else
         {
-          paper->value[1] = 1;
+          paper->value[OVAL_PAPER_1] = 1;
           ed = SetOExtra(paper, "_subject_");
           STRFREE( ed->description );
           ed->description = STRALLOC( arg_passed );
@@ -761,7 +766,7 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
               send_to_char("You need a datapad to record a message.\r\n", ch);
               return;
             }
-          if ( quill->value[0] < 1 )
+          if ( quill->value[OVAL_PEN_INK_AMOUNT] < 1 )
             {
               send_to_char("Your quill is dry.\r\n", ch);
               return;
@@ -791,7 +796,7 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
               ch, NULL, NULL, TO_CHAR);
         }
 
-      if (paper->value[2] > 1)
+      if (paper->value[OVAL_PAPER_2] > 1)
         {
           send_to_char("You cannot modify this message.\r\n",ch);
           return;
@@ -804,7 +809,7 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
 
       if ( !IS_MAIL || stat( fname, &fst ) != -1 || !str_cmp(arg_passed, "all") )
         {
-          paper->value[2] = 1;
+          paper->value[OVAL_PAPER_2] = 1;
           ed = SetOExtra(paper, "_to_");
           STRFREE( ed->description );
           ed->description = STRALLOC( arg_passed );
@@ -856,22 +861,22 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
           return;
         }
 
-      if ( paper->value[0] == 0 )
+      if ( paper->value[OVAL_PAPER_0] == 0 )
         {
           send_to_char("There is nothing written on this disk.\r\n", ch);
           return;
         }
 
-      if ( paper->value[1] == 0 )
+      if ( paper->value[OVAL_PAPER_1] == 0 )
         {
           send_to_char("This message has no subject... using 'none'.\r\n", ch);
-          paper->value[1] = 1;
+          paper->value[OVAL_PAPER_1] = 1;
           ed = SetOExtra(paper, "_subject_");
           STRFREE( ed->description );
           ed->description = STRALLOC( "none" );
         }
 
-      if (paper->value[2] == 0)
+      if (paper->value[OVAL_PAPER_2] == 0)
         {
           if ( IS_MAIL )
             {
@@ -881,7 +886,7 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
           else
             {
               send_to_char("This message is addressed to no one... sending to 'all'!\r\n", ch);
-              paper->value[2] = 1;
+              paper->value[OVAL_PAPER_2] = 1;
               ed = SetOExtra(paper, "_to_");
               STRFREE( ed->description );
               ed->description = STRALLOC( "All" );
@@ -1033,9 +1038,9 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
                   strcat(notebuf, pnote->text);
                   strcat(notebuf, "\r\n");
                   ed->description = STRALLOC(notebuf);
-                  paper->value[0] = 2;
-                  paper->value[1] = 2;
-                  paper->value[2] = 2;
+                  paper->value[OVAL_PAPER_0] = 2;
+                  paper->value[OVAL_PAPER_1] = 2;
+                  paper->value[OVAL_PAPER_2] = 2;
                   sprintf(short_desc_buf, "a note from %s to %s",
                           pnote->sender, pnote->to_list);
                   STRFREE(paper->short_descr);

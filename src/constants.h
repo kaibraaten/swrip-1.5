@@ -1262,6 +1262,12 @@ typedef enum
 
 #define OVAL_KEY_UNLOCKS_VNUM 0
 
+#define OVAL_PEN_INK_AMOUNT 0
+
+#define OVAL_PAPER_0 0
+#define OVAL_PAPER_1 1
+#define OVAL_PAPER_2 2
+
 /*
  * Extra flags.
  * Used in #OBJECTS.
