@@ -427,7 +427,7 @@ static const DO_FUN_ENTRY command_fun_table[] = {
       if ( !str_cmp( name, "do_info" ))               return do_info;
       if ( !str_cmp( name, "do_induct" ))               return do_induct;
       if ( !str_cmp( name, "do_installarea" ))  return do_installarea;
-      if ( !str_cmp( name, "do_instaroom" ))            return do_instaroom;
+      if ( !str_cmp( name, "do_InstallRoom" ))            return do_InstallRoom;
       if ( !str_cmp( name, "do_instazone" ))            return do_instazone;
       if ( !str_cmp( name, "do_inventory" ))            return do_inventory;
       if ( !str_cmp( name, "do_invis" ))                return do_invis;

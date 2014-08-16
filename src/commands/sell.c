@@ -22,7 +22,7 @@ void do_sell( Character *ch, char *argument )
   if ( ( keeper = find_keeper( ch ) ) == NULL )
     return;
 
-  if ( ( obj = GetCarriedItem( ch, arg ) ) == NULL )
+  if ( ( obj = GetCarriedObject( ch, arg ) ) == NULL )
     {
       act( AT_TELL, "$n tells you 'You don't have that item.'",
            keeper, NULL, ch, TO_VICT );
@@ -30,7 +30,7 @@ void do_sell( Character *ch, char *argument )
       return;
     }
 
-  if ( !CanDropItem( ch, obj ) )
+  if ( !CanDropObject( ch, obj ) )
     {
       send_to_char( "You can't let go of it!\r\n", ch );
       return;

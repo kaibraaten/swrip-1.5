@@ -21,6 +21,7 @@
 
 #include <string.h>
 #include <ctype.h>
+#include "reset.h"
 #include "mud.h"
 #include "character.h"
 #include "editor.h"
@@ -157,7 +158,7 @@ bool can_medit( const Character *ch, const ProtoMobile *mob )
   return false;
 }
 
-void free_reset( Area *are, RESET_DATA *res )
+void free_reset( Area *are, Reset *res )
 {
   UNLINK( res, are->first_reset, are->last_reset, next, prev );
   DISPOSE( res );
@@ -354,7 +355,7 @@ bool DelOExtraProto( OBJ_INDEX_DATA *obj, char *keywords )
 
 void fold_area( Area *tarea, char *filename, bool install )
 {
-  RESET_DATA            *treset;
+  Reset            *treset;
   ROOM_INDEX_DATA       *room;
   ProtoMobile        *pMobIndex;
   OBJ_INDEX_DATA        *pObjIndex;
@@ -777,7 +778,7 @@ void write_area_list( void )
   fclose( fpout );
 }
 
-void add_reset_nested( Area *tarea, OBJ_DATA *obj )
+void AddReset_nested( Area *tarea, OBJ_DATA *obj )
 {
   int limit;
 
@@ -788,18 +789,18 @@ void add_reset_nested( Area *tarea, OBJ_DATA *obj )
       if ( limit < 1 )
         limit = 1;
 
-      add_reset( tarea, 'P', 1, obj->pIndexData->vnum, limit,
+      AddReset( tarea, 'P', 1, obj->pIndexData->vnum, limit,
                  obj->in_obj->pIndexData->vnum );
 
       if ( obj->first_content )
-        add_reset_nested( tarea, obj );
+        AddReset_nested( tarea, obj );
     }
 }
 
 /*
  * Parse a reset command string into a reset_data structure
  */
-RESET_DATA *parse_reset( Area *tarea, char *argument, Character *ch )
+Reset *ParseReset( Area *tarea, char *argument, Character *ch )
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
@@ -1040,7 +1041,7 @@ RESET_DATA *parse_reset( Area *tarea, char *argument, Character *ch )
   if ( letter == '*' )
     return NULL;
   else
-    return make_reset( letter, extra, val1, val3, val2 );
+    return MakeReset( letter, extra, val1, val3, val2 );
 }
 
 void mpedit( Character *ch, MPROG_DATA *mprg, int mptype, char *argument )

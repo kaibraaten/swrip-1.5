@@ -40,7 +40,7 @@ void do_wear( Character *ch, char *argument )
       for ( obj = ch->first_carrying; obj; obj = obj_next )
         {
           obj_next = obj->next_content;
-          if ( obj->wear_loc == WEAR_NONE && CanSeeItem( ch, obj ) )
+          if ( obj->wear_loc == WEAR_NONE && CanSeeObject( ch, obj ) )
             wear_obj( ch, obj, false, -1 );
         }
 
@@ -48,7 +48,7 @@ void do_wear( Character *ch, char *argument )
     }
   else
     {
-      if ( ( obj = GetCarriedItem( ch, arg1 ) ) == NULL )
+      if ( ( obj = GetCarriedObject( ch, arg1 ) ) == NULL )
         {
           send_to_char( "You do not have that item.\r\n", ch );
           return;

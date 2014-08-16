@@ -23,7 +23,7 @@ bool spec_customs_spice( Character *ch )
         {
           if (obj->pIndexData->item_type == ITEM_SPICE || obj->pIndexData->item_type  == ITEM_RAWSPICE)
             {
-              if ( victim != ch && CanSeeCharacter( ch, victim ) && CanSeeItem( ch,obj ) )
+              if ( victim != ch && CanSeeCharacter( ch, victim ) && CanSeeObject( ch,obj ) )
                 {
                   sprintf( buf , "%s is illegal contraband. I'm going to have to confiscate that.", obj->short_descr );
 		  do_say( ch , buf );

@@ -478,7 +478,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
 
       for ( pObj = mob->first_carrying; pObj; pObj = pObj->next_content )
 	{
-	  if ( CanSeeItem(mob, pObj) && pObj->pIndexData->vnum == vnum )
+	  if ( CanSeeObject(mob, pObj) && pObj->pIndexData->vnum == vnum )
 	    {
 	      lhsvl++;
 	    }
@@ -487,7 +487,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
       for ( pObj = mob->in_room->first_content; pObj;
             pObj = pObj->next_content )
 	{
-	  if ( CanSeeItem(mob, pObj) && pObj->pIndexData->vnum == vnum )
+	  if ( CanSeeObject(mob, pObj) && pObj->pIndexData->vnum == vnum )
 	    {
 	      lhsvl++;
 	    }
@@ -528,7 +528,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
 
       for ( pObj = mob->first_carrying; pObj; pObj = pObj->next_content )
 	{
-	  if ( CanSeeItem(mob, pObj) && pObj->item_type == type )
+	  if ( CanSeeObject(mob, pObj) && pObj->item_type == type )
 	    {
 	      lhsvl++;
 	    }
@@ -537,7 +537,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
       for ( pObj = mob->in_room->first_content; pObj;
             pObj = pObj->next_content )
 	{
-	  if ( CanSeeItem(mob, pObj) && pObj->item_type == type )
+	  if ( CanSeeObject(mob, pObj) && pObj->item_type == type )
 	    {
 	      lhsvl++;
 	    }
@@ -574,7 +574,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
       for ( pObj = mob->in_room->first_content; pObj;
             pObj = pObj->next_content )
 	{
-	  if ( CanSeeItem(mob, pObj) && pObj->pIndexData->vnum == vnum )
+	  if ( CanSeeObject(mob, pObj) && pObj->pIndexData->vnum == vnum )
 	    {
 	      lhsvl++;
 	    }
@@ -620,7 +620,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
       for ( pObj = mob->in_room->first_content; pObj;
             pObj = pObj->next_content )
 	{
-	  if ( CanSeeItem(mob, pObj) && pObj->item_type == type )
+	  if ( CanSeeObject(mob, pObj) && pObj->item_type == type )
 	    {
 	      lhsvl++;
 	    }
@@ -656,7 +656,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
 
       for ( pObj = mob->first_carrying; pObj; pObj = pObj->next_content )
 	{
-	  if ( CanSeeItem(mob, pObj) && pObj->pIndexData->vnum == vnum )
+	  if ( CanSeeObject(mob, pObj) && pObj->pIndexData->vnum == vnum )
 	    {
 	      lhsvl++;
 	    }
@@ -701,7 +701,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
 
       for ( pObj = mob->first_carrying; pObj; pObj = pObj->next_content )
 	{
-	  if ( CanSeeItem(mob, pObj) && pObj->item_type == type )
+	  if ( CanSeeObject(mob, pObj) && pObj->item_type == type )
 	    {
 	      lhsvl++;
 	    }
@@ -736,7 +736,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
 
       for ( pObj = mob->first_carrying; pObj; pObj = pObj->next_content )
 	{
-	  if ( pObj->wear_loc != WEAR_NONE && CanSeeItem(mob, pObj) &&
+	  if ( pObj->wear_loc != WEAR_NONE && CanSeeObject(mob, pObj) &&
 	       pObj->pIndexData->vnum == vnum )
 	    {
 	      lhsvl++;
@@ -777,7 +777,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
       lhsvl = 0;
 
       for ( pObj = mob->first_carrying; pObj; pObj = pObj->next_content )
-        if ( pObj->wear_loc != WEAR_NONE && CanSeeItem(mob, pObj) &&
+        if ( pObj->wear_loc != WEAR_NONE && CanSeeObject(mob, pObj) &&
              pObj->item_type == type )
           lhsvl++;
 
@@ -806,7 +806,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
       lhsvl = 0;
 
       for ( pObj = mob->first_carrying; pObj; pObj = pObj->next_content )
-        if ( pObj->wear_loc == WEAR_NONE && CanSeeItem(mob, pObj) &&
+        if ( pObj->wear_loc == WEAR_NONE && CanSeeObject(mob, pObj) &&
              pObj->pIndexData->vnum == vnum )
           lhsvl++;
 
@@ -840,7 +840,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
       lhsvl = 0;
 
       for ( pObj = mob->first_carrying; pObj; pObj = pObj->next_content )
-        if ( pObj->wear_loc == WEAR_NONE && CanSeeItem(mob, pObj) &&
+        if ( pObj->wear_loc == WEAR_NONE && CanSeeObject(mob, pObj) &&
              pObj->item_type == type )
           lhsvl++;
 
@@ -1569,7 +1569,7 @@ void mprog_translate( char ch, char *t, Character *mob, Character *actor,
   case 'o':
     if ( obj && !obj_extracted(obj) )
       {
-	if( CanSeeItem( mob, obj ) )
+	if( CanSeeObject( mob, obj ) )
 	  {
 	    one_argument( obj->name, t );
 	  }
@@ -1587,7 +1587,7 @@ void mprog_translate( char ch, char *t, Character *mob, Character *actor,
   case 'O':
     if ( obj && !obj_extracted(obj) )
       {
-        if( CanSeeItem( mob, obj ) )
+        if( CanSeeObject( mob, obj ) )
 	  {
 	    strcpy( t, obj->short_descr );
 	  }
@@ -1605,7 +1605,7 @@ void mprog_translate( char ch, char *t, Character *mob, Character *actor,
   case 'p':
     if ( v_obj && !obj_extracted(v_obj) )
       {
-        if( CanSeeItem( mob, v_obj ) )
+        if( CanSeeObject( mob, v_obj ) )
 	  {
 	    one_argument( v_obj->name, t );
 	  }
@@ -1623,7 +1623,7 @@ void mprog_translate( char ch, char *t, Character *mob, Character *actor,
   case 'P':
     if ( v_obj && !obj_extracted(v_obj) )
       {
-        if( CanSeeItem( mob, v_obj ) )
+        if( CanSeeObject( mob, v_obj ) )
 	  {
 	    strcpy( t, v_obj->short_descr );
 	  }

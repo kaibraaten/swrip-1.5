@@ -31,6 +31,7 @@
 #include "editor.h"
 #include "help.h"
 #include "craft.h"
+#include "reset.h"
 
 void init_supermob(void);
 
@@ -654,7 +655,7 @@ void boot_db( bool fCopyOver )
 
   /*
    *   initialize supermob.
-   *    must be done before reset_area!
+   *    must be done before ResetArea!
    *
    */
   init_supermob();
@@ -1331,7 +1332,7 @@ void load_resets( Area *tarea, FILE *fp )
     {
       if ( fBootDb )
         {
-          RESET_DATA *rtmp;
+          Reset *rtmp;
 
           bug( "load_resets: WARNING: resets already exist for this area." );
           for ( rtmp = tarea->first_reset; rtmp; rtmp = rtmp->next )
@@ -1490,7 +1491,7 @@ void load_resets( Area *tarea, FILE *fp )
         }
 
       /* finally, add the reset */
-      add_reset( tarea, letter, extra, arg1, arg2, arg3 );
+      AddReset( tarea, letter, extra, arg1, arg2, arg3 );
     }
 
   if ( !not01 )
@@ -2129,7 +2130,7 @@ void area_update( void )
           ROOM_INDEX_DATA *pRoomIndex;
 
           fprintf( stderr, "Resetting: %s\n", pArea->filename );
-          reset_area( pArea );
+          ResetArea( pArea );
           if ( reset_age == -1 )
             pArea->age = -1;
           else

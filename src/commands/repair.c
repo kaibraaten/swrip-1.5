@@ -41,7 +41,7 @@ void do_repair( Character *ch, char *argument )
       for ( obj = ch->first_carrying; obj ; obj = obj->next_content )
         {
           if ( obj->wear_loc  == WEAR_NONE
-               &&   CanSeeItem( ch, obj )
+               &&   CanSeeObject( ch, obj )
                && ( obj->item_type == ITEM_ARMOR
 		    ||   obj->item_type == ITEM_WEAPON
                     ||   obj->item_type == ITEM_DEVICE ) )
@@ -51,7 +51,7 @@ void do_repair( Character *ch, char *argument )
       return;
     }
 
-  if ( ( obj = GetCarriedItem( ch, argument ) ) == NULL )
+  if ( ( obj = GetCarriedObject( ch, argument ) ) == NULL )
     {
       act( AT_TELL, "$n tells you 'You don't have that item.'",
            keeper, NULL, ch, TO_VICT );
@@ -68,7 +68,7 @@ static void repair_one_obj( Character *ch, Character *keeper, OBJ_DATA *obj,
   char buf[MAX_STRING_LENGTH];
   int cost;
 
-  if ( !CanDropItem( ch, obj ) )
+  if ( !CanDropObject( ch, obj ) )
     ch_printf( ch, "You can't let go of %s.\r\n", obj->name );
   else if ( ( cost = get_repaircost( keeper, obj ) ) < 0 )
     {

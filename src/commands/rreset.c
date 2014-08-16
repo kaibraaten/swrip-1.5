@@ -22,5 +22,5 @@ void do_rreset( Character *ch, char *argument )
     pRoom = ch->in_room;
   if ( !can_rmodify(ch, pRoom) )
     return;
-  edit_reset(ch, argument, pRoom->area, pRoom);
+  EditReset(ch, argument, pRoom->area, pRoom);
 }

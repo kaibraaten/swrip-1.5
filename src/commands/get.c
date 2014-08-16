@@ -142,7 +142,7 @@ void do_get( Character *ch, char *argument )
               obj_next = obj->next_content;
 
               if ( ( fAll || nifty_is_name( chk, obj->name ) )
-                   && CanSeeItem( ch, obj ) )
+                   && CanSeeObject( ch, obj ) )
                 {
                   found = true;
 
@@ -296,7 +296,7 @@ void do_get( Character *ch, char *argument )
             {
               obj_next = obj->next_content;
               if ( ( fAll || nifty_is_name( chk, obj->name ) )
-                   &&   CanSeeItem( ch, obj ) )
+                   &&   CanSeeObject( ch, obj ) )
                 {
                   found = true;
                   if ( number && (cnt + obj->count) > number )

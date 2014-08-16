@@ -129,11 +129,11 @@ void do_steal( Character *ch, char *argument )
       return;
     }
 
-  if ( ( obj = GetCarriedItem( victim, arg1 ) ) == NULL )
+  if ( ( obj = GetCarriedObject( victim, arg1 ) ) == NULL )
     {
       if ( victim->position <= POS_SLEEPING )
         {
-          if ( ( obj = GetWornItem( victim, arg1 ) ) != NULL )
+          if ( ( obj = GetWornObject( victim, arg1 ) ) != NULL )
             {
               if ( (obj_next=GetEquipmentOnCharacter(victim, obj->wear_loc)) != obj )
                 {
@@ -152,7 +152,7 @@ void do_steal( Character *ch, char *argument )
       return;
     }
 
-  if ( !CanDropItem( ch, obj )
+  if ( !CanDropObject( ch, obj )
        ||   IS_OBJ_STAT(obj, ITEM_INVENTORY)
        ||        IS_OBJ_STAT(obj, ITEM_PROTOTYPE))
     {

@@ -16,7 +16,7 @@ void do_smoke( Character *ch, char *argument )
   if ( ms_find_obj(ch) )
     return;
 
-  if ( (pipe_obj = GetCarriedItem( ch, arg )) == NULL )
+  if ( (pipe_obj = GetCarriedObject( ch, arg )) == NULL )
     {
       send_to_char( "You aren't carrying that.\r\n", ch );
       return;

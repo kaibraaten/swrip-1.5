@@ -19,7 +19,7 @@ void do_compare( Character *ch, char *argument )
       return;
     }
 
-  if ( ( obj1 = GetCarriedItem( ch, arg1 ) ) == NULL )
+  if ( ( obj1 = GetCarriedObject( ch, arg1 ) ) == NULL )
     {
       send_to_char( "You do not have that item.\r\n", ch );
       return;
@@ -30,7 +30,7 @@ void do_compare( Character *ch, char *argument )
       for ( obj2 = ch->first_carrying; obj2; obj2 = obj2->next_content )
         {
           if ( obj2->wear_loc != WEAR_NONE
-               &&   CanSeeItem( ch, obj2 )
+               &&   CanSeeObject( ch, obj2 )
                &&   obj1->item_type == obj2->item_type
                && ( obj1->wear_flags & obj2->wear_flags & ~ITEM_TAKE) != 0 )
             break;
@@ -44,7 +44,7 @@ void do_compare( Character *ch, char *argument )
     }
   else
     {
-      if ( ( obj2 = GetCarriedItem( ch, arg2 ) ) == NULL )
+      if ( ( obj2 = GetCarriedObject( ch, arg2 ) ) == NULL )
         {
           send_to_char( "You do not have that item.\r\n", ch );
           return;

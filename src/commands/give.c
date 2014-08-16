@@ -76,7 +76,7 @@ void do_give( Character *ch, char *argument )
       return;
     }
 
-  if ( ( obj = GetCarriedItem( ch, arg1 ) ) == NULL )
+  if ( ( obj = GetCarriedObject( ch, arg1 ) ) == NULL )
     {
       send_to_char( "You do not have that item.\r\n", ch );
       return;
@@ -94,7 +94,7 @@ void do_give( Character *ch, char *argument )
       return;
     }
 
-  if ( !CanDropItem( ch, obj ) )
+  if ( !CanDropObject( ch, obj ) )
     {
       send_to_char( "You can't let go of it.\r\n", ch );
       return;
@@ -112,7 +112,7 @@ void do_give( Character *ch, char *argument )
       return;
     }
 
-  if ( !CanSeeItem( victim, obj ) )
+  if ( !CanSeeObject( victim, obj ) )
     {
       act( AT_PLAIN, "$N can't see it.", ch, NULL, victim, TO_CHAR );
       return;

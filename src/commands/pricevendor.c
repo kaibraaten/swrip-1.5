@@ -68,7 +68,7 @@ void do_pricevendor (Character *ch, char *argument)
       return;
     }
 
-  if ( (obj  = GetCarriedItem( vendor, arg1 )) != NULL)
+  if ( (obj  = GetCarriedObject( vendor, arg1 )) != NULL)
     {
       obj->cost = atoi (arg2);
       send_to_char("The price has been changed\r\n",ch);

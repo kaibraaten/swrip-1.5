@@ -31,7 +31,7 @@ void do_poison_weapon( Character *ch, char *argument )
   if ( ms_find_obj(ch) )
     return;
 
-  if ( !( obj = GetCarriedItem( ch, arg ) ) )
+  if ( !( obj = GetCarriedObject( ch, arg ) ) )
     {
       send_to_char( "You do not have that weapon.\r\n",      ch );
       return;

@@ -94,13 +94,13 @@ void do_drop( Character *ch, char *argument )
   if ( number <= 1 && str_cmp( arg, "all" ) && str_prefix( "all.", arg ) )
     {
       /* 'drop obj' */
-      if ( ( obj = GetCarriedItem( ch, arg ) ) == NULL )
+      if ( ( obj = GetCarriedObject( ch, arg ) ) == NULL )
         {
           send_to_char( "You do not have that item.\r\n", ch );
           return;
         }
 
-      if ( !CanDropItem( ch, obj ) )
+      if ( !CanDropObject( ch, obj ) )
         {
           send_to_char( "You can't let go of it.\r\n", ch );
           return;
@@ -149,9 +149,9 @@ void do_drop( Character *ch, char *argument )
           obj_next = obj->next_content;
 
           if ( (fAll || nifty_is_name( chk, obj->name ) )
-               &&   CanSeeItem( ch, obj )
+               &&   CanSeeObject( ch, obj )
                &&   obj->wear_loc == WEAR_NONE
-               &&   CanDropItem( ch, obj ) )
+               &&   CanDropObject( ch, obj ) )
             {
               found = true;
               if ( obj->pIndexData->mprog.progtypes & DROP_PROG && obj->count > 1 )

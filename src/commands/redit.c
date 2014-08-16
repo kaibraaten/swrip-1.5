@@ -2,6 +2,7 @@
 #include "mud.h"
 #include "character.h"
 #include "editor.h"
+#include "reset.h"
 
 void do_redit( Character *ch, char *argument )
 {
@@ -187,7 +188,7 @@ void do_redit( Character *ch, char *argument )
 
   if ( !str_cmp( arg, "rlist" ) )
     {
-      RESET_DATA *pReset = NULL;
+      Reset *pReset = NULL;
       Area *tarea = location->area;
       short num = 0;
 
@@ -202,7 +203,7 @@ void do_redit( Character *ch, char *argument )
 	  const char *bptr = NULL;
           num++;
 
-          if ( (bptr = sprint_reset( ch, pReset, num, true )) == NULL )
+          if ( (bptr = SPrintReset( ch, pReset, num, true )) == NULL )
             continue;
 
           send_to_char( bptr, ch );

@@ -85,8 +85,8 @@ typedef struct obj_index_data          OBJ_INDEX_DATA;
 struct pc_data;
 typedef struct pc_data                 PC_DATA;
 
-struct reset_data;
-typedef struct reset_data              RESET_DATA;
+struct Reset;
+typedef struct Reset                   Reset;
 
 struct room_index_data;
 typedef struct room_index_data         ROOM_INDEX_DATA;

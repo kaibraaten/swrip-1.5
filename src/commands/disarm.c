@@ -43,7 +43,7 @@ void do_disarm( Character *ch, char *argument )
     - GetAbilityLevel( ch, COMBAT_ABILITY )
     - (GetCurrentLuck(ch) - 15) + (GetCurrentLuck(victim) - 15);
 
-  if ( !CanSeeItem( ch, obj ) )
+  if ( !CanSeeObject( ch, obj ) )
     percent += 10;
 
   if ( IsNpc(ch) || percent < ch->pcdata->learned[gsn_disarm] * 2 / 3 )

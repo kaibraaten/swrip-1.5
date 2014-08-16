@@ -1016,7 +1016,7 @@ void *locate_targets( Character *ch, char *arg, int sn, Character **victim, OBJ_
           return &pAbort;
         }
 
-      if ( ( *obj = GetCarriedItem( ch, arg ) ) == NULL )
+      if ( ( *obj = GetCarriedObject( ch, arg ) ) == NULL )
         {
           send_to_char( "You are not carrying that.\r\n", ch );
           return &pAbort;

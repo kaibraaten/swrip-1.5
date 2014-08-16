@@ -32,7 +32,7 @@ void do_fill( Character *ch, char *argument )
   if ( ms_find_obj(ch) )
     return;
 
-  if ( ( obj = GetCarriedItem( ch, arg1 ) ) == NULL )
+  if ( ( obj = GetCarriedObject( ch, arg1 ) ) == NULL )
     {
       send_to_char( "You do not have that item.\r\n", ch );
       return;
@@ -119,7 +119,7 @@ void do_fill( Character *ch, char *argument )
            right.  Check out Lord Fitzgibbon if you're curious.  -Narn */
         if ( dest_item == ITEM_PIPE )
           {
-            if ( ( source = GetCarriedItem( ch, arg2 ) ) == NULL )
+            if ( ( source = GetCarriedObject( ch, arg2 ) ) == NULL )
               {
                 send_to_char( "You don't have that item.\r\n", ch );
                 return;

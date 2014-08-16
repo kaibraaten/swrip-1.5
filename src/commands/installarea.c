@@ -1,5 +1,6 @@
 #include "character.h"
 #include "mud.h"
+#include "reset.h"
 
 /*
  * A complicated to use command as it currently exists.         -Thoric
@@ -63,7 +64,7 @@ void do_installarea( Character *ch, char *argument )
           send_to_char( "Resetting new area.\r\n", ch );
           num = tarea->nplayer;
           tarea->nplayer = 0;
-          reset_area( tarea );
+          ResetArea( tarea );
           tarea->nplayer = num;
           send_to_char( "Renaming author's building file.\r\n", ch );
           sprintf( buf, "%s%s.installed", BUILD_DIR, tarea->filename );

@@ -1344,7 +1344,7 @@ OBJ_DATA *get_obj_list( const Character *ch, const char *argument, OBJ_DATA *lis
   int count  = 0;
 
   for ( obj = list; obj; obj = obj->next_content )
-    if ( CanSeeItem( ch, obj ) && nifty_is_name( arg, obj->name ) )
+    if ( CanSeeObject( ch, obj ) && nifty_is_name( arg, obj->name ) )
       if ( (count += obj->count) >= number )
         return obj;
 
@@ -1355,7 +1355,7 @@ OBJ_DATA *get_obj_list( const Character *ch, const char *argument, OBJ_DATA *lis
   count = 0;
 
   for ( obj = list; obj; obj = obj->next_content )
-    if ( CanSeeItem( ch, obj ) && nifty_is_name_prefix( arg, obj->name ) )
+    if ( CanSeeObject( ch, obj ) && nifty_is_name_prefix( arg, obj->name ) )
       if ( (count += obj->count) >= number )
         return obj;
 
@@ -1375,7 +1375,7 @@ OBJ_DATA *get_obj_list_rev( const Character *ch, const char *argument, OBJ_DATA 
   number = number_argument( argument, arg );
   count  = 0;
   for ( obj = list; obj; obj = obj->prev_content )
-    if ( CanSeeItem( ch, obj ) && nifty_is_name( arg, obj->name ) )
+    if ( CanSeeObject( ch, obj ) && nifty_is_name( arg, obj->name ) )
       if ( (count += obj->count) >= number )
         return obj;
 
@@ -1385,7 +1385,7 @@ OBJ_DATA *get_obj_list_rev( const Character *ch, const char *argument, OBJ_DATA 
   */
   count = 0;
   for ( obj = list; obj; obj = obj->prev_content )
-    if ( CanSeeItem( ch, obj ) && nifty_is_name_prefix( arg, obj->name ) )
+    if ( CanSeeObject( ch, obj ) && nifty_is_name_prefix( arg, obj->name ) )
       if ( (count += obj->count) >= number )
         return obj;
 
@@ -1406,10 +1406,10 @@ OBJ_DATA *get_obj_here( const Character *ch, const char *argument )
   if ( obj )
     return obj;
 
-  if ( ( obj = GetCarriedItem( ch, argument ) ) != NULL )
+  if ( ( obj = GetCarriedObject( ch, argument ) ) != NULL )
     return obj;
 
-  if ( ( obj = GetWornItem( ch, argument ) ) != NULL )
+  if ( ( obj = GetWornObject( ch, argument ) ) != NULL )
     return obj;
 
   return NULL;
@@ -1442,7 +1442,7 @@ OBJ_DATA *get_obj_world( const Character *ch, const char *argument )
   count  = 0;
 
   for ( obj = first_object; obj; obj = obj->next )
-    if ( CanSeeItem( ch, obj ) && (nifty_is_name( arg, obj->name )
+    if ( CanSeeObject( ch, obj ) && (nifty_is_name( arg, obj->name )
                                     ||   vnum == obj->pIndexData->vnum) )
       if ( (count += obj->count) >= number )
         return obj;
@@ -1457,7 +1457,7 @@ OBJ_DATA *get_obj_world( const Character *ch, const char *argument )
   */
   count  = 0;
   for ( obj = first_object; obj; obj = obj->next )
-    if ( CanSeeItem( ch, obj ) && nifty_is_name_prefix( arg, obj->name ) )
+    if ( CanSeeObject( ch, obj ) && nifty_is_name_prefix( arg, obj->name ) )
       if ( (count += obj->count) >= number )
         return obj;
 
@@ -1486,7 +1486,7 @@ OBJ_DATA *find_obj( Character *ch, const char *orig_argument, bool carryonly )
 
   if ( arg2[0] == '\0' )
     {
-      if ( carryonly && ( obj = GetCarriedItem( ch, arg1 ) ) == NULL )
+      if ( carryonly && ( obj = GetCarriedObject( ch, arg1 ) ) == NULL )
         {
           send_to_char( "You do not have that item.\r\n", ch );
           return NULL;
@@ -1504,8 +1504,8 @@ OBJ_DATA *find_obj( Character *ch, const char *orig_argument, bool carryonly )
       OBJ_DATA *container;
 
       if ( carryonly
-           && ( container = GetCarriedItem( ch, arg2 ) ) == NULL
-           && ( container = GetWornItem( ch, arg2 ) ) == NULL )
+           && ( container = GetCarriedObject( ch, arg2 ) ) == NULL
+           && ( container = GetWornObject( ch, arg2 ) ) == NULL )
         {
           send_to_char( "You do not have that item.\r\n", ch );
           return NULL;
@@ -2043,7 +2043,7 @@ void clean_mob( ProtoMobile *mob )
  */
 void clean_resets( Area *tarea )
 {
-  RESET_DATA *pReset, *pReset_next;
+  Reset *pReset, *pReset_next;
 
   for ( pReset = tarea->first_reset; pReset; pReset = pReset_next )
     {

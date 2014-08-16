@@ -2,7 +2,7 @@
 #include "mud.h"
 #include "character.h"
 
-void do_instaroom( Character *ch, char *argument )
+void do_InstallRoom( Character *ch, char *argument )
 {
   Area *pArea;
   ROOM_INDEX_DATA *pRoom;
@@ -22,7 +22,7 @@ void do_instaroom( Character *ch, char *argument )
   else
     dodoors = true;
   pArea = ch->pcdata->area;
-  if ( !(pRoom = find_room(ch, arg, NULL)) )
+  if ( !(pRoom = FindRoom(ch, arg, NULL)) )
     {
       send_to_char( "Room doesn't exist.\r\n", ch );
       return;
@@ -35,7 +35,7 @@ void do_instaroom( Character *ch, char *argument )
       return;
     }
   if ( pArea->first_reset )
-    wipe_resets(pArea, pRoom);
-  instaroom(pArea, pRoom, dodoors);
+    WipeResets(pArea, pRoom);
+  InstallRoom(pArea, pRoom, dodoors);
   send_to_char( "Room resets installed.\r\n", ch );
 }

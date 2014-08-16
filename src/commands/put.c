@@ -82,7 +82,7 @@ void do_put( Character *ch, char *argument )
   if ( number <= 1 && str_cmp( arg1, "all" ) && str_prefix( "all.", arg1 ) )
     {
       /* 'put obj container' */
-      if ( ( obj = GetCarriedItem( ch, arg1 ) ) == NULL )
+      if ( ( obj = GetCarriedObject( ch, arg1 ) ) == NULL )
         {
           send_to_char( "You do not have that item.\r\n", ch );
           return;
@@ -94,7 +94,7 @@ void do_put( Character *ch, char *argument )
           return;
         }
 
-      if ( !CanDropItem( ch, obj ) )
+      if ( !CanDropObject( ch, obj ) )
         {
           send_to_char( "You can't let go of it.\r\n", ch );
           return;
@@ -172,10 +172,10 @@ void do_put( Character *ch, char *argument )
           obj_next = obj->next_content;
 
           if ( ( fAll || nifty_is_name( chk, obj->name ) )
-               &&   CanSeeItem( ch, obj )
+               &&   CanSeeObject( ch, obj )
                &&   obj->wear_loc == WEAR_NONE
                &&   obj != container
-               &&   CanDropItem( ch, obj )
+               &&   CanDropObject( ch, obj )
 	       &&   get_obj_weight( obj ) + get_obj_weight( container )
                <= container->value[OVAL_CONTAINER_CAPACITY] )
             {

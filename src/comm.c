@@ -1832,9 +1832,9 @@ char *act_string(const char *format, Character *to, Character *ch,
             case 'q': i = (to == ch) ? "" : "s";                                break;
             case 'Q': i = (to == ch) ? "your" :
               his_her[urange(0,  ch->sex, 2)];                  break;
-            case 'p': i = (!to || CanSeeItem(to, obj1)
+            case 'p': i = (!to || CanSeeObject(to, obj1)
                            ? obj_short(obj1) : "something");                    break;
-            case 'P': i = (!to || CanSeeItem(to, obj2)
+            case 'P': i = (!to || CanSeeObject(to, obj2)
                            ? obj_short(obj2) : "something");                    break;
             case 'd':
               if ( !arg2 || ((char *) arg2)[0] == '\0' )

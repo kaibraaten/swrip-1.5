@@ -208,7 +208,7 @@ void do_auction (Character *ch, char *argument)
   if ( ms_find_obj(ch) )
     return;
 
-  obj = GetCarriedItem (ch, arg1); /* does char have the item ? */
+  obj = GetCarriedObject (ch, arg1); /* does char have the item ? */
 
   if (obj == NULL)
     {

@@ -22,14 +22,14 @@ void do_remove( Character *ch, char *argument )
       for ( obj = ch->first_carrying; obj != NULL ; obj = obj_next )
         {
           obj_next = obj->next_content;
-          if ( obj->wear_loc != WEAR_NONE && CanSeeItem ( ch, obj ) )
+          if ( obj->wear_loc != WEAR_NONE && CanSeeObject ( ch, obj ) )
             remove_obj ( ch, obj->wear_loc, true );
         }
 
       return;
     }
 
-  if ( ( obj = GetWornItem( ch, arg ) ) == NULL )
+  if ( ( obj = GetWornObject( ch, arg ) ) == NULL )
     {
       send_to_char( "You are not using that item.\r\n", ch );
       return;

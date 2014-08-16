@@ -236,7 +236,7 @@ void show_list_to_char( const OBJ_DATA *list, Character *ch, bool fShort, bool f
           --tmp;
         }
       if ( obj->wear_loc == WEAR_NONE
-           && CanSeeItem( ch, obj )
+           && CanSeeObject( ch, obj )
            && ( ( obj->description && obj->description[0] != '\0' ) || ( IS_SET(ch->act, PLR_HOLYLIGHT) || IsNpc(ch) ) )
            && (obj->item_type != ITEM_TRAP || IsAffectedBy(ch, AFF_DETECTTRAPS) ) )
         {

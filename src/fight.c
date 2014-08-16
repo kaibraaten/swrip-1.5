@@ -724,7 +724,7 @@ ch_ret one_hit( Character *ch, Character *victim, int dt )
   victim_ac = (int) (GetArmorClass(victim) / 10);
 
   /* if you can't see what's coming... */
-  if ( wield && !CanSeeItem( victim, wield) )
+  if ( wield && !CanSeeObject( victim, wield) )
     victim_ac += 1;
   if ( !CanSeeCharacter( ch, victim ) )
     victim_ac -= 4;

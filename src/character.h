@@ -295,12 +295,12 @@ void UnequipCharacter( Character *ch, OBJ_DATA *obj );
 /*
  * Find an obj in player's inventory.
  */
-OBJ_DATA *GetCarriedItem( const Character *ch, const char *argument );
+OBJ_DATA *GetCarriedObject( const Character *ch, const char *argument );
 
 /*
  * Find an obj in player's equipment.
  */
-OBJ_DATA *GetWornItem( const Character *ch, const char *argument );
+OBJ_DATA *GetWornObject( const Character *ch, const char *argument );
 
 /*
  * How mental state could affect finding an object              -Thoric
@@ -317,12 +317,12 @@ bool CanSeeCharacter( const Character *ch, const Character *victim );
 /*
  * True if char can see obj.
  */
-bool CanSeeItem( const Character *ch, const OBJ_DATA *obj );
+bool CanSeeObject( const Character *ch, const OBJ_DATA *obj );
 
 /*
  * True if char can drop obj.
  */
-bool CanDropItem( const Character *ch, const OBJ_DATA *obj );
+bool CanDropObject( const Character *ch, const OBJ_DATA *obj );
 
 /*
  * "Fix" a character's stats                                    -Thoric

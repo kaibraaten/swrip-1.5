@@ -276,7 +276,7 @@ static OBJ_DATA *find_quill( const Character *ch )
 
   for ( quill = ch->last_carrying; quill; quill = quill->prev_content )
     if ( quill->item_type == ITEM_PEN
-         && CanSeeItem( ch, quill ) )
+         && CanSeeObject( ch, quill ) )
       return quill;
 
   return quill;

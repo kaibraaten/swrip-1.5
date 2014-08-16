@@ -177,8 +177,8 @@ void close_area( Area *pArea )
   OBJ_INDEX_DATA *oid_next;
   ProtoMobile *mid;
   ProtoMobile *mid_next;
-  RESET_DATA *ereset;
-  RESET_DATA *ereset_next;
+  Reset *ereset;
+  Reset *ereset_next;
   ExtraDescription *eed;
   ExtraDescription *eed_next;
   Exit *exit_next;

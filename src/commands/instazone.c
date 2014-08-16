@@ -22,12 +22,12 @@ void do_instazone( Character *ch, char *argument )
     dodoors = true;
   pArea = ch->pcdata->area;
   if ( pArea->first_reset )
-    wipe_resets(pArea, NULL);
+    WipeResets(pArea, NULL);
   for ( vnum = pArea->low_r_vnum; vnum <= pArea->hi_r_vnum; vnum++ )
     {
       if ( !(pRoom = get_room_index(vnum)) || pRoom->area != pArea )
         continue;
-      instaroom( pArea, pRoom, dodoors );
+      InstallRoom( pArea, pRoom, dodoors );
     }
   send_to_char( "Area resets installed.\r\n", ch );
 }

@@ -14,7 +14,7 @@ ch_ret spell_remove_invis( int sn, int level, Character *ch, void *vo )
       return rSPELL_FAILED;
     }
 
-  obj = GetCarriedItem( ch, spell_target_name );
+  obj = GetCarriedObject( ch, spell_target_name );
 
   if ( obj )
     {

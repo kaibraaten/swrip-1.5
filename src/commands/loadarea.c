@@ -1,5 +1,6 @@
 #include "character.h"
 #include "mud.h"
+#include "reset.h"
 
 void do_loadarea( Character *ch, char *argument )
 {
@@ -61,7 +62,7 @@ void do_loadarea( Character *ch, char *argument )
       tmp = tarea->nplayer;
       tarea->nplayer = 0;
       send_to_char( "Resetting area...\r\n", ch );
-      reset_area( tarea );
+      ResetArea( tarea );
       tarea->nplayer = tmp;
     }
   send_to_char( "Done.\r\n", ch );

@@ -29,7 +29,7 @@ bool spec_customs_alcohol( Character *ch )
 
               if ( liq_table[ liquid ].liq_affect[COND_DRUNK] > 0 )
                 {
-                  if ( victim != ch && CanSeeCharacter( ch, victim ) && CanSeeItem( ch,obj ) )
+                  if ( victim != ch && CanSeeCharacter( ch, victim ) && CanSeeObject( ch,obj ) )
                     {
                       sprintf( buf , "%s is illegal contraband. I'm going to have to confiscate that.", obj->short_descr );
 		      do_say( ch , buf );

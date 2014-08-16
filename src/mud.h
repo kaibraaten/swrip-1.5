@@ -967,10 +967,10 @@ struct Exit
 /*
  * Area-reset definition.
  */
-struct reset_data
+struct Reset
 {
-  RESET_DATA *next;
-  RESET_DATA *prev;
+  Reset *next;
+  Reset *prev;
   char        command;
   int         extra;
   int         arg1;
@@ -987,8 +987,8 @@ struct Area
   Area   *prev;
   Area   *next_sort;
   Area   *prev_sort;
-  RESET_DATA  *first_reset;
-  RESET_DATA  *last_reset;
+  Reset  *first_reset;
+  Reset  *last_reset;
   PLANET_DATA *planet;
   Area   *next_on_planet;
   Area   *prev_on_planet;
@@ -1011,8 +1011,8 @@ struct Area
   int          hi_hard_range;
   char        *author; /* Scryn */
   char        *resetmsg; /* Rennard */
-  RESET_DATA  *last_mob_reset;
-  RESET_DATA  *last_obj_reset;
+  Reset  *last_mob_reset;
+  Reset  *last_obj_reset;
   short        max_players;
   int          mkills;
   int          mdeaths;
@@ -1908,7 +1908,7 @@ DECLARE_DO_FUN( do_immortalize  );
 DECLARE_DO_FUN( do_immtalk      );
 DECLARE_DO_FUN( do_induct       );
 DECLARE_DO_FUN( do_installarea  );
-DECLARE_DO_FUN( do_instaroom    );
+DECLARE_DO_FUN( do_InstallRoom    );
 DECLARE_DO_FUN( do_instazone    );
 DECLARE_DO_FUN( do_inventory    );
 DECLARE_DO_FUN( do_invis        );
@@ -2410,15 +2410,6 @@ extern "C" {
   void act( short AType, const char *format, Character *ch,
             const void *arg1, const void *arg2, int type );
 
-  /* reset.c */
-  char *sprint_reset( Character *ch, RESET_DATA *pReset, short num, bool rlist );
-  RESET_DATA *make_reset( char letter, int extra, int arg1, int arg2, int arg3 );
-  RESET_DATA *add_reset( Area *tarea, char letter, int extra,
-			 int arg1, int arg2, int arg3 );
-  RESET_DATA *place_reset( Area *tarea, char letter,
-			   int extra, int arg1, int arg2, int arg3 );
-  void  reset_area( Area * pArea );
-
   /* db.c */
   void show_vnums( Character *ch, vnum_t low, vnum_t high, bool proto, bool shownl,
 		   const char *loadst, const char *notloadst );
@@ -2462,7 +2453,7 @@ extern "C" {
   bool can_omodify( const Character *ch, const OBJ_DATA *obj  );
   bool can_mmodify( const Character *ch, const Character *mob );
   bool can_medit( const Character *ch, const ProtoMobile *mob );
-  void free_reset( Area *are, RESET_DATA *res );
+  void free_reset( Area *are, Reset *res );
   void free_area( Area *are );
   void assign_area( Character *ch );
   ExtraDescription *SetRExtra( ROOM_INDEX_DATA *room, char *keywords );

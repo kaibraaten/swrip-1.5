@@ -30,13 +30,13 @@ void do_mpjunk( Character *ch, char *argument )
 
   if ( str_cmp( arg, "all" ) && str_prefix( "all.", arg ) )
     {
-      if ( ( obj = GetWornItem( ch, arg ) ) != NULL )
+      if ( ( obj = GetWornObject( ch, arg ) ) != NULL )
         {
           UnequipCharacter( ch, obj );
           extract_obj( obj );
           return;
         }
-      if ( ( obj = GetCarriedItem( ch, arg ) ) == NULL )
+      if ( ( obj = GetCarriedObject( ch, arg ) ) == NULL )
         return;
       extract_obj( obj );
     }

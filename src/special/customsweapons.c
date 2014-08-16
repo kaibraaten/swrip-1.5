@@ -26,7 +26,7 @@ bool spec_customs_weapons( Character *ch )
         {
           if (obj->pIndexData->item_type == ITEM_WEAPON)
 	    {
-              if ( victim != ch && CanSeeCharacter( ch, victim ) && CanSeeItem( ch,obj ) )
+              if ( victim != ch && CanSeeCharacter( ch, victim ) && CanSeeObject( ch,obj ) )
                 {
                   sprintf( buf , "Weapons are banned from non-military usage. I'm going to have to confiscate %s.", obj->short_descr );
                   do_say( ch , buf );

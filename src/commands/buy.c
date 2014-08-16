@@ -124,7 +124,7 @@ void do_buy( Character *ch, char *argument )
             }
         }
 
-      obj  = GetCarriedItem( keeper, arg );
+      obj  = GetCarriedObject( keeper, arg );
 
       if ( !obj && arg[0] == '#' )
         {
@@ -136,7 +136,7 @@ void do_buy( Character *ch, char *argument )
           for ( obj = keeper->last_carrying; obj; obj = obj->prev_content )
             {
               if ( obj->wear_loc == WEAR_NONE
-                   &&   CanSeeItem( ch, obj ) )
+                   &&   CanSeeObject( ch, obj ) )
                 onum++;
               if ( onum == oref )
                 {
@@ -163,7 +163,7 @@ void do_buy( Character *ch, char *argument )
         cost= obj->cost;
 
 
-      if ( cost <= 0 || !CanSeeItem( ch, obj ) )
+      if ( cost <= 0 || !CanSeeObject( ch, obj ) )
 	{
           act( AT_TELL, "$n tells you 'I don't sell that -- try 'list'.'",
                keeper, NULL, ch, TO_VICT );

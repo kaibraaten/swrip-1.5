@@ -37,34 +37,34 @@
 #include "character.h"
 
 /* Externals */
-RESET_DATA *parse_reset( Area *tarea, char *argument, Character *ch );
+Reset *ParseReset( Area *tarea, char *argument, Character *ch );
 
-bool is_room_reset( RESET_DATA *pReset, ROOM_INDEX_DATA *aRoom,
+bool IsRoomReset( Reset *pReset, ROOM_INDEX_DATA *aRoom,
 		    Area *pArea );
-void add_obj_reset( Area *pArea, char cm, OBJ_DATA *obj, int v2, int v3 );
-void delete_reset( Area *pArea, RESET_DATA *pReset );
-RESET_DATA *find_reset( Area *pArea, ROOM_INDEX_DATA *pRoom, int num );
-void list_resets( Character *ch, Area *pArea,
+void AddObjectReset( Area *pArea, char cm, OBJ_DATA *obj, int v2, int v3 );
+void DeleteReset( Area *pArea, Reset *pReset );
+Reset *FindReset( Area *pArea, ROOM_INDEX_DATA *pRoom, int num );
+void ListResets( Character *ch, Area *pArea,
 		  ROOM_INDEX_DATA *pRoom, int start, int end );
 
-RESET_DATA *find_reset(Area *pArea, ROOM_INDEX_DATA *pRoom, int numb)
+Reset *FindReset(Area *pArea, ROOM_INDEX_DATA *pRoom, int numb)
 {
-  RESET_DATA *pReset = NULL;
+  Reset *pReset = NULL;
   int num = 0;
 
   for ( pReset = pArea->first_reset; pReset; pReset = pReset->next )
-    if ( is_room_reset(pReset, pRoom, pArea) && ++num >= numb )
+    if ( IsRoomReset(pReset, pRoom, pArea) && ++num >= numb )
       return pReset;
 
   return NULL;
 }
 
 /* This is one loopy function.  Ugh. -- Altrag */
-bool is_room_reset( RESET_DATA *pReset, ROOM_INDEX_DATA *aRoom,
+bool IsRoomReset( Reset *pReset, ROOM_INDEX_DATA *aRoom,
                     Area *pArea )
 {
   ROOM_INDEX_DATA *pRoom = NULL;
-  RESET_DATA *reset = NULL;
+  Reset *reset = NULL;
   int pr = 0;
 
   if ( !aRoom )
@@ -107,7 +107,7 @@ bool is_room_reset( RESET_DATA *pReset, ROOM_INDEX_DATA *aRoom,
 	    }
 	}
 
-      if ( reset && is_room_reset(reset, aRoom, pArea) )
+      if ( reset && IsRoomReset(reset, aRoom, pArea) )
 	{
 	  return true;
 	}
@@ -130,7 +130,7 @@ bool is_room_reset( RESET_DATA *pReset, ROOM_INDEX_DATA *aRoom,
 		}
 	    }
 
-          if ( reset && is_room_reset(reset, aRoom, pArea) )
+          if ( reset && IsRoomReset(reset, aRoom, pArea) )
 	    {
 	      return true;
 	    }
@@ -147,7 +147,7 @@ bool is_room_reset( RESET_DATA *pReset, ROOM_INDEX_DATA *aRoom,
 		break;
 	      }
 
-          if ( reset && is_room_reset(reset, aRoom, pArea) )
+          if ( reset && IsRoomReset(reset, aRoom, pArea) )
 	    {
 	      return true;
 	    }
@@ -167,7 +167,7 @@ bool is_room_reset( RESET_DATA *pReset, ROOM_INDEX_DATA *aRoom,
 	    }
 	}
 
-      if ( reset && is_room_reset(reset, aRoom, pArea) )
+      if ( reset && IsRoomReset(reset, aRoom, pArea) )
 	{
 	  return true;
 	}
@@ -192,7 +192,7 @@ bool is_room_reset( RESET_DATA *pReset, ROOM_INDEX_DATA *aRoom,
   return false;
 }
 
-ROOM_INDEX_DATA *find_room( Character *ch, char *argument,
+ROOM_INDEX_DATA *FindRoom( Character *ch, char *argument,
                             ROOM_INDEX_DATA *pRoom )
 {
   char arg[MAX_INPUT_LENGTH];
@@ -232,15 +232,15 @@ ROOM_INDEX_DATA *find_room( Character *ch, char *argument,
 #define DEL_RESET(area, reset, rprev)           \
   do {                                          \
     rprev = reset->prev;                        \
-    delete_reset(area, reset);                  \
+    DeleteReset(area, reset);                  \
     reset = rprev;                              \
     continue;                                   \
   } while(0)
 
-void delete_reset( Area *pArea, RESET_DATA *pReset )
+void DeleteReset( Area *pArea, Reset *pReset )
 {
-  RESET_DATA *reset = NULL;
-  RESET_DATA *reset_prev = NULL;
+  Reset *reset = NULL;
+  Reset *reset_prev = NULL;
 
   if ( pReset->command == 'M' )
     {
@@ -323,16 +323,16 @@ void delete_reset( Area *pArea, RESET_DATA *pReset )
 }
 #undef DEL_RESET
 
-RESET_DATA *find_oreset(Character *ch, Area *pArea,
+static Reset *FindObjectReset(Character *ch, Area *pArea,
                         ROOM_INDEX_DATA *pRoom, char *name)
 {
-  RESET_DATA *reset = NULL;
+  Reset *reset = NULL;
 
   if ( !*name )
     {
       for ( reset = pArea->last_reset; reset; reset = reset->prev )
         {
-          if ( !is_room_reset(reset, pRoom, pArea) )
+          if ( !IsRoomReset(reset, pRoom, pArea) )
 	    {
 	      continue;
 	    }
@@ -367,7 +367,7 @@ RESET_DATA *find_oreset(Character *ch, Area *pArea,
 
       for ( reset = pArea->first_reset; reset; reset = reset->next )
         {
-          if ( !is_room_reset(reset, pRoom, pArea) )
+          if ( !IsRoomReset(reset, pRoom, pArea) )
 	    {
 	      continue;
 	    }
@@ -401,16 +401,16 @@ RESET_DATA *find_oreset(Character *ch, Area *pArea,
   return reset;
 }
 
-RESET_DATA *find_mreset(Character *ch, Area *pArea,
-                        ROOM_INDEX_DATA *pRoom, char *name)
+static Reset *FindMobileReset(Character *ch, Area *pArea,
+			      ROOM_INDEX_DATA *pRoom, char *name)
 {
-  RESET_DATA *reset = NULL;
+  Reset *reset = NULL;
 
   if ( !*name )
     {
       for ( reset = pArea->last_reset; reset; reset = reset->prev )
         {
-          if ( !is_room_reset(reset, pRoom, pArea) )
+          if ( !IsRoomReset(reset, pRoom, pArea) )
 	    {
 	      continue;
 	    }
@@ -441,7 +441,7 @@ RESET_DATA *find_mreset(Character *ch, Area *pArea,
 
       for ( reset = pArea->first_reset; reset; reset = reset->next )
         {
-          if ( !is_room_reset(reset, pRoom, pArea) )
+          if ( !IsRoomReset(reset, pRoom, pArea) )
 	    {
 	      continue;
 	    }
@@ -472,11 +472,11 @@ RESET_DATA *find_mreset(Character *ch, Area *pArea,
   return reset;
 }
 
-void edit_reset( Character *ch, char *argument, Area *pArea, ROOM_INDEX_DATA *aRoom )
+void EditReset( Character *ch, char *argument, Area *pArea, ROOM_INDEX_DATA *aRoom )
 {
   char arg[MAX_INPUT_LENGTH];
-  RESET_DATA *pReset = NULL;
-  RESET_DATA *reset = NULL;
+  Reset *pReset = NULL;
+  Reset *reset = NULL;
   ProtoMobile *pMob = NULL;
   ROOM_INDEX_DATA *pRoom = NULL;
   OBJ_INDEX_DATA *pObj = NULL;
@@ -542,7 +542,7 @@ void edit_reset( Character *ch, char *argument, Area *pArea, ROOM_INDEX_DATA *aR
 
       num = pArea->nplayer;
       pArea->nplayer = 0;
-      reset_area(pArea);
+      ResetArea(pArea);
       pArea->nplayer = num;
       send_to_char( "Done.\r\n", ch );
       return;
@@ -558,7 +558,7 @@ void edit_reset( Character *ch, char *argument, Area *pArea, ROOM_INDEX_DATA *aR
       argument = one_argument(argument, arg);
       end = is_number(arg) ? atoi(arg) : -1;
 
-      list_resets(ch, pArea, aRoom, start, end);
+      ListResets(ch, pArea, aRoom, start, end);
       return;
     }
 
@@ -572,13 +572,13 @@ void edit_reset( Character *ch, char *argument, Area *pArea, ROOM_INDEX_DATA *aR
           return;
         }
 
-      if ( !(pReset = find_reset(pArea, aRoom, num)) )
+      if ( !(pReset = FindReset(pArea, aRoom, num)) )
         {
           send_to_char( "Reset not found.\r\n", ch );
           return;
         }
 
-      if ( !(reset = parse_reset(pArea, argument, ch)) )
+      if ( !(reset = ParseReset(pArea, argument, ch)) )
         {
           send_to_char( "Error in reset. Reset not changed.\r\n", ch );
           return;
@@ -612,13 +612,13 @@ void edit_reset( Character *ch, char *argument, Area *pArea, ROOM_INDEX_DATA *aR
 
   if ( !str_cmp(arg, "add") )
     {
-      if ( (pReset = parse_reset(pArea, argument, ch)) == NULL )
+      if ( (pReset = ParseReset(pArea, argument, ch)) == NULL )
         {
           send_to_char( "Error in reset. Reset not added.\r\n", ch );
           return;
         }
 
-      add_reset(pArea, pReset->command, pReset->extra, pReset->arg1,
+      AddReset(pArea, pReset->command, pReset->extra, pReset->arg1,
                 pReset->arg2, pReset->arg3);
       DISPOSE(pReset);
       send_to_char( "Done.\r\n", ch );
@@ -627,13 +627,13 @@ void edit_reset( Character *ch, char *argument, Area *pArea, ROOM_INDEX_DATA *aR
 
   if ( !str_cmp(arg, "place") )
     {
-      if ( (pReset = parse_reset(pArea, argument, ch)) == NULL )
+      if ( (pReset = ParseReset(pArea, argument, ch)) == NULL )
         {
           send_to_char( "Error in reset. Reset not added.\r\n", ch );
           return;
         }
 
-      place_reset(pArea, pReset->command, pReset->extra, pReset->arg1,
+      PlaceReset(pArea, pReset->command, pReset->extra, pReset->arg1,
                   pReset->arg2, pReset->arg3);
       DISPOSE(pReset);
       send_to_char( "Done.\r\n", ch );
@@ -652,13 +652,13 @@ void edit_reset( Character *ch, char *argument, Area *pArea, ROOM_INDEX_DATA *aR
 
       num = atoi(arg);
 
-      if ( (reset = find_reset(pArea, aRoom, num)) == NULL )
+      if ( (reset = FindReset(pArea, aRoom, num)) == NULL )
         {
           send_to_char( "Reset not found.\r\n", ch );
           return;
         }
 
-      if ( (pReset = parse_reset(pArea, argument, ch)) == NULL )
+      if ( (pReset = ParseReset(pArea, argument, ch)) == NULL )
         {
           send_to_char( "Error in reset.  Reset not inserted.\r\n", ch );
           return;
@@ -689,7 +689,7 @@ void edit_reset( Character *ch, char *argument, Area *pArea, ROOM_INDEX_DATA *aR
         {
           reset = pReset->next;
 
-          if ( !is_room_reset(pReset, aRoom, pArea) )
+          if ( !IsRoomReset(pReset, aRoom, pArea) )
 	    {
 	      continue;
 	    }
@@ -744,7 +744,7 @@ void edit_reset( Character *ch, char *argument, Area *pArea, ROOM_INDEX_DATA *aR
 
       for ( pReset = pArea->first_reset; pReset; pReset = pReset->next )
         {
-          if ( is_room_reset( pReset, aRoom, pArea ) && ++num == iarg )
+          if ( IsRoomReset( pReset, aRoom, pArea ) && ++num == iarg )
 	    {
 	      break;
 	    }
@@ -756,7 +756,7 @@ void edit_reset( Character *ch, char *argument, Area *pArea, ROOM_INDEX_DATA *aR
           return;
         }
 
-      delete_reset( pArea, pReset );
+      DeleteReset( pArea, pReset );
       send_to_char( "Reset deleted.\r\n", ch );
       return;
     }
@@ -793,12 +793,12 @@ void edit_reset( Character *ch, char *argument, Area *pArea, ROOM_INDEX_DATA *aR
 	  num = atoi(arg);
 	}
 
-      if ( !(pRoom = find_room(ch, argument, aRoom)) )
+      if ( !(pRoom = FindRoom(ch, argument, aRoom)) )
 	{
 	  return;
 	}
 
-      pReset = make_reset('M', 0, pMob->vnum, num, pRoom->vnum);
+      pReset = MakeReset('M', 0, pMob->vnum, num, pRoom->vnum);
       LINK(pReset, pArea->first_reset, pArea->last_reset, next, prev);
       send_to_char( "Mobile reset added.\r\n", ch );
       return;
@@ -829,7 +829,7 @@ void edit_reset( Character *ch, char *argument, Area *pArea, ROOM_INDEX_DATA *aR
         {
           argument = one_argument(argument, arg);
 
-          if ( !(reset = find_oreset(ch, pArea, aRoom, arg)) )
+          if ( !(reset = FindObjectReset(ch, pArea, aRoom, arg)) )
 	    {
 	      return;
 	    }
@@ -849,7 +849,7 @@ void edit_reset( Character *ch, char *argument, Area *pArea, ROOM_INDEX_DATA *aR
 	      vnum = 1;
 	    }
 
-          pReset = make_reset('P', reset->extra+1, pObj->vnum, vnum, 0);
+          pReset = MakeReset('P', reset->extra+1, pObj->vnum, vnum, 0);
           /* Grumble.. insert puts pReset before reset, and we need it after,
              so we make a hackup and reverse all the list params.. :P.. */
           INSERT(pReset, reset, pArea->last_reset, prev, next);
@@ -861,7 +861,7 @@ void edit_reset( Character *ch, char *argument, Area *pArea, ROOM_INDEX_DATA *aR
         {
           argument = one_argument(argument, arg);
 
-          if ( !(reset = find_mreset(ch, pArea, aRoom, arg)) )
+          if ( !(reset = FindMobileReset(ch, pArea, aRoom, arg)) )
 	    {
 	      return;
 	    }
@@ -878,7 +878,7 @@ void edit_reset( Character *ch, char *argument, Area *pArea, ROOM_INDEX_DATA *aR
 	      vnum = 1;
 	    }
 
-          pReset = make_reset('G', 1, pObj->vnum, vnum, 0);
+          pReset = MakeReset('G', 1, pObj->vnum, vnum, 0);
           INSERT(pReset, reset, pArea->last_reset, prev, next);
           send_to_char( "Object reset to mobile created.\r\n", ch );
           return;
@@ -888,7 +888,7 @@ void edit_reset( Character *ch, char *argument, Area *pArea, ROOM_INDEX_DATA *aR
         {
           argument = one_argument(argument, arg);
 
-          if ( !(reset = find_mreset(ch, pArea, aRoom, arg)) )
+          if ( !(reset = FindMobileReset(ch, pArea, aRoom, arg)) )
 	    {
 	      return;
 	    }
@@ -927,7 +927,7 @@ void edit_reset( Character *ch, char *argument, Area *pArea, ROOM_INDEX_DATA *aR
 	      vnum = 1;
 	    }
 
-          pReset = make_reset('E', 1, pObj->vnum, vnum, num);
+          pReset = MakeReset('E', 1, pObj->vnum, vnum, num);
           INSERT(pReset, reset, pArea->last_reset, prev, next);
           send_to_char( "Object reset equipped by mobile created.\r\n", ch );
           return;
@@ -941,7 +941,7 @@ void edit_reset( Character *ch, char *argument, Area *pArea, ROOM_INDEX_DATA *aR
 	      argument = one_argument(argument, arg);
 	    }
 
-          if ( !(pRoom = find_room(ch, argument, aRoom)) )
+          if ( !(pRoom = FindRoom(ch, argument, aRoom)) )
 	    {
 	      return;
 	    }
@@ -957,7 +957,7 @@ void edit_reset( Character *ch, char *argument, Area *pArea, ROOM_INDEX_DATA *aR
 	      vnum = 1;
 	    }
 
-          pReset = make_reset('O', 0, pObj->vnum, vnum, pRoom->vnum);
+          pReset = MakeReset('O', 0, pObj->vnum, vnum, pRoom->vnum);
           LINK(pReset, pArea->first_reset, pArea->last_reset, next, prev);
           send_to_char( "Object reset added.\r\n", ch );
           return;
@@ -986,7 +986,7 @@ void edit_reset( Character *ch, char *argument, Area *pArea, ROOM_INDEX_DATA *aR
           return;
         }
 
-      pRoom = find_room(ch, argument, aRoom);
+      pRoom = FindRoom(ch, argument, aRoom);
 
       if ( pRoom->area != pArea )
         {
@@ -994,7 +994,7 @@ void edit_reset( Character *ch, char *argument, Area *pArea, ROOM_INDEX_DATA *aR
           return;
         }
 
-      pReset = make_reset('R', 0, pRoom->vnum, direction, 0);
+      pReset = MakeReset('R', 0, pRoom->vnum, direction, 0);
       LINK(pReset, pArea->first_reset, pArea->last_reset, next, prev);
       send_to_char( "Reset random doors created.\r\n", ch );
       return;
@@ -1039,7 +1039,7 @@ void edit_reset( Character *ch, char *argument, Area *pArea, ROOM_INDEX_DATA *aR
             }
           else
             {
-              if ( !(reset = find_oreset(ch, pArea, aRoom, oname)) )
+              if ( !(reset = FindObjectReset(ch, pArea, aRoom, oname)) )
                 return;
               /*        vnum = reset->arg1;*/
               vnum = 0;
@@ -1073,7 +1073,7 @@ void edit_reset( Character *ch, char *argument, Area *pArea, ROOM_INDEX_DATA *aR
           SET_BIT(extra, 1 << value);
         }
 
-      pReset = make_reset('T', extra, num, chrg, vnum);
+      pReset = MakeReset('T', extra, num, chrg, vnum);
 
       if ( reset )
         INSERT(pReset, reset, pArea->last_reset, prev, next);
@@ -1139,7 +1139,7 @@ void edit_reset( Character *ch, char *argument, Area *pArea, ROOM_INDEX_DATA *aR
               pRoom = ch->in_room;
               argument = parg;
             }
-          else if ( !(pRoom = find_room(ch, arg, aRoom)) )
+          else if ( !(pRoom = FindRoom(ch, arg, aRoom)) )
 	    {
 	      return;
 	    }
@@ -1164,7 +1164,7 @@ void edit_reset( Character *ch, char *argument, Area *pArea, ROOM_INDEX_DATA *aR
           vnum = 0;
           flfunc = &get_objectflag;
 
-          if ( !(reset = find_oreset(ch, pArea, aRoom, arg)) )
+          if ( !(reset = FindObjectReset(ch, pArea, aRoom, arg)) )
 	    {
 	      return;
 	    }
@@ -1175,7 +1175,7 @@ void edit_reset( Character *ch, char *argument, Area *pArea, ROOM_INDEX_DATA *aR
           vnum = 0;
           flfunc = &get_affectedflag;
 
-          if ( !(reset = find_mreset(ch, pArea, aRoom, arg)) )
+          if ( !(reset = FindMobileReset(ch, pArea, aRoom, arg)) )
 	    {
 	      return;
 	    }
@@ -1194,7 +1194,7 @@ void edit_reset( Character *ch, char *argument, Area *pArea, ROOM_INDEX_DATA *aR
               pRoom = ch->in_room;
               argument = parg;
             }
-          else if ( !(pRoom = find_room(ch, arg, aRoom)) )
+          else if ( !(pRoom = FindRoom(ch, arg, aRoom)) )
 	    {
 	      return;
 	    }
@@ -1230,7 +1230,7 @@ void edit_reset( Character *ch, char *argument, Area *pArea, ROOM_INDEX_DATA *aR
           return;
         }
 
-      pReset = make_reset('B', 1, vnum, num, flags);
+      pReset = MakeReset('B', 1, vnum, num, flags);
 
       if ( reset )
         INSERT(pReset, reset, pArea->last_reset, prev, next);
@@ -1245,10 +1245,10 @@ void edit_reset( Character *ch, char *argument, Area *pArea, ROOM_INDEX_DATA *aR
     {
       argument = one_argument(argument, arg);
 
-      if ( !(reset = find_oreset(ch, pArea, aRoom, arg)) )
+      if ( !(reset = FindObjectReset(ch, pArea, aRoom, arg)) )
         return;
 
-      pReset = make_reset('H', 1, 0, 0, 0);
+      pReset = MakeReset('H', 1, 0, 0, 0);
       INSERT(pReset, reset, pArea->last_reset, prev, next);
       send_to_char( "Object hide reset created.\r\n", ch );
       return;
@@ -1263,11 +1263,11 @@ void edit_reset( Character *ch, char *argument, Area *pArea, ROOM_INDEX_DATA *aR
     }
   else
     {
-      edit_reset(ch, "", pArea, aRoom);
+      EditReset(ch, "", pArea, aRoom);
     }
 }
 
-void add_obj_reset( Area *pArea, char cm, OBJ_DATA *obj, int v2, int v3 )
+void AddObjectReset( Area *pArea, char cm, OBJ_DATA *obj, int v2, int v3 )
 {
   OBJ_DATA *inobj;
   static int iNest;
@@ -1276,13 +1276,13 @@ void add_obj_reset( Area *pArea, char cm, OBJ_DATA *obj, int v2, int v3 )
     {
       if ( cm == 'O' )
 	{
-	  add_reset(pArea, 'T', obj->value[OVAL_TRAP_FLAGS], obj->value[OVAL_TRAP_TYPE], obj->value[OVAL_TRAP_CHARGE], v3);
+	  AddReset(pArea, 'T', obj->value[OVAL_TRAP_FLAGS], obj->value[OVAL_TRAP_TYPE], obj->value[OVAL_TRAP_CHARGE], v3);
 	}
 
       return;
     }
 
-  add_reset( pArea, cm, (cm == 'P' ? iNest : 1), obj->pIndexData->vnum,
+  AddReset( pArea, cm, (cm == 'P' ? iNest : 1), obj->pIndexData->vnum,
              v2, v3 );
 
   /* Only add hide for in-room objects that are hidden and cant be moved, as
@@ -1290,14 +1290,14 @@ void add_obj_reset( Area *pArea, char cm, OBJ_DATA *obj, int v2, int v3 )
   if ( cm == 'O' && IS_OBJ_STAT(obj, ITEM_HIDDEN) &&
        !IS_SET(obj->wear_flags, ITEM_TAKE) )
     {
-      add_reset(pArea, 'H', 1, 0, 0, 0);
+      AddReset(pArea, 'H', 1, 0, 0, 0);
     }
 
   for ( inobj = obj->first_content; inobj; inobj = inobj->next_content )
     {
       if ( inobj->pIndexData->vnum == OBJ_VNUM_TRAP )
 	{
-	  add_obj_reset(pArea, 'O', inobj, 0, 0);
+	  AddObjectReset(pArea, 'O', inobj, 0, 0);
 	}
     }
 
@@ -1308,7 +1308,7 @@ void add_obj_reset( Area *pArea, char cm, OBJ_DATA *obj, int v2, int v3 )
 
   for ( inobj = obj->first_content; inobj; inobj = inobj->next_content )
     {
-      add_obj_reset( pArea, 'P', inobj, 1, 0 );
+      AddObjectReset( pArea, 'P', inobj, 1, 0 );
     }
 
   if ( cm == 'P' )
@@ -1317,7 +1317,7 @@ void add_obj_reset( Area *pArea, char cm, OBJ_DATA *obj, int v2, int v3 )
     }
 }
 
-void instaroom( Area *pArea, ROOM_INDEX_DATA *pRoom, bool dodoors )
+void InstallRoom( Area *pArea, ROOM_INDEX_DATA *pRoom, bool dodoors )
 {
   Character *rch = NULL;
   OBJ_DATA *obj = NULL;
@@ -1329,18 +1329,18 @@ void instaroom( Area *pArea, ROOM_INDEX_DATA *pRoom, bool dodoors )
 	  continue;
 	}
 
-      add_reset( pArea, 'M', 1, rch->pIndexData->vnum, rch->pIndexData->count,
+      AddReset( pArea, 'M', 1, rch->pIndexData->vnum, rch->pIndexData->count,
                  pRoom->vnum );
 
       for ( obj = rch->first_carrying; obj; obj = obj->next_content )
         {
           if ( obj->wear_loc == WEAR_NONE )
 	    {
-	      add_obj_reset( pArea, 'G', obj, 1, 0 );
+	      AddObjectReset( pArea, 'G', obj, 1, 0 );
 	    }
           else
 	    {
-	      add_obj_reset( pArea, 'E', obj, 1, obj->wear_loc );
+	      AddObjectReset( pArea, 'E', obj, 1, obj->wear_loc );
 	    }
         }
     }
@@ -1352,7 +1352,7 @@ void instaroom( Area *pArea, ROOM_INDEX_DATA *pRoom, bool dodoors )
 	  continue;
 	}
 
-      add_obj_reset( pArea, 'O', obj, 1, pRoom->vnum );
+      AddObjectReset( pArea, 'O', obj, 1, pRoom->vnum );
     }
 
   if ( dodoors )
@@ -1380,24 +1380,24 @@ void instaroom( Area *pArea, ROOM_INDEX_DATA *pRoom, bool dodoors )
 		}
             }
 
-          add_reset( pArea, 'D', 0, pRoom->vnum, pexit->vdir, state );
+          AddReset( pArea, 'D', 0, pRoom->vnum, pexit->vdir, state );
         }
     }
 }
 
-void wipe_resets( Area *pArea, ROOM_INDEX_DATA *pRoom )
+void WipeResets( Area *pArea, ROOM_INDEX_DATA *pRoom )
 {
-  RESET_DATA *pReset = NULL;
+  Reset *pReset = NULL;
 
   for ( pReset = pArea->first_reset; pReset; )
     {
-      if ( pReset->command != 'R' && is_room_reset( pReset, pRoom, pArea ) )
+      if ( pReset->command != 'R' && IsRoomReset( pReset, pRoom, pArea ) )
         {
           /* Resets always go forward, so we can safely use the previous reset,
              providing it exists, or first_reset if it doesnt.  -- Altrag */
-          RESET_DATA *prev = pReset->prev;
+          Reset *prev = pReset->prev;
 
-          delete_reset(pArea, pReset);
+          DeleteReset(pArea, pReset);
           pReset = (prev ? prev->next : pArea->first_reset);
         }
       else
@@ -1407,7 +1407,7 @@ void wipe_resets( Area *pArea, ROOM_INDEX_DATA *pRoom )
     }
 }
 
-int generate_itemlevel( Area *pArea, OBJ_INDEX_DATA *pObjIndex )
+static int GenerateItemLevel( Area *pArea, OBJ_INDEX_DATA *pObjIndex )
 {
   int olevel = 0;
   int min = umax(pArea->low_soft_range, 1);
@@ -1453,10 +1453,10 @@ int generate_itemlevel( Area *pArea, OBJ_INDEX_DATA *pObjIndex )
 /*
  * Reset one area.
  */
-void reset_area( Area *pArea )
+void ResetArea( Area *pArea )
 {
-  RESET_DATA *pReset = NULL;
-  RESET_DATA *next_reset = NULL;
+  Reset *pReset = NULL;
+  Reset *next_reset = NULL;
   Character *mob = NULL;
   OBJ_DATA *obj = NULL;
   OBJ_DATA *lastobj = NULL;
@@ -1471,7 +1471,7 @@ void reset_area( Area *pArea )
 
   if ( !pArea )
     {
-      bug( "reset_area: NULL pArea" );
+      bug( "ResetArea: NULL pArea" );
       return;
     }
 
@@ -1573,7 +1573,7 @@ void reset_area( Area *pArea )
 
           if ( mob->pIndexData->pShop )
             {
-              int olevel = generate_itemlevel( pArea, pObjIndex );
+              int olevel = GenerateItemLevel( pArea, pObjIndex );
               obj = create_object(pObjIndex, olevel);
               SET_BIT(obj->extra_flags, ITEM_INVENTORY);
             }
@@ -1627,7 +1627,7 @@ void reset_area( Area *pArea )
               break;
             }
 
-          obj = create_object(pObjIndex, number_fuzzy(generate_itemlevel(pArea, pObjIndex)));
+          obj = create_object(pObjIndex, number_fuzzy(GenerateItemLevel(pArea, pObjIndex)));
           obj->level = umin(obj->level, LEVEL_AVATAR);
           obj->cost = 0;
           obj_to_room(obj, pRoomIndex);
@@ -1699,7 +1699,7 @@ void reset_area( Area *pArea )
 		}
             }
 
-          obj = create_object(pObjIndex, number_fuzzy(umax(generate_itemlevel(pArea, pObjIndex),to_obj->level)));
+          obj = create_object(pObjIndex, number_fuzzy(umax(GenerateItemLevel(pArea, pObjIndex),to_obj->level)));
           obj->level = umin(obj->level, LEVEL_AVATAR);
           obj_to_obj(obj, to_obj);
           break;
@@ -1991,16 +1991,16 @@ void reset_area( Area *pArea )
     }
 }
 
-void list_resets( Character *ch, Area *pArea, ROOM_INDEX_DATA *pRoom,
+void ListResets( Character *ch, Area *pArea, ROOM_INDEX_DATA *pRoom,
                   int start, int end )
 {
-  RESET_DATA *pReset = NULL;
+  Reset *pReset = NULL;
   ROOM_INDEX_DATA *room = NULL;
   ProtoMobile *mob = NULL;
   OBJ_INDEX_DATA *obj = NULL;
   OBJ_INDEX_DATA *obj2 = NULL;
   OBJ_INDEX_DATA *lastobj = NULL;
-  RESET_DATA *lo_reset = NULL;
+  Reset *lo_reset = NULL;
   int num = 0;
   const char *rname = NULL;
   const char *mname = NULL;
@@ -2016,7 +2016,7 @@ void list_resets( Character *ch, Area *pArea, ROOM_INDEX_DATA *pRoom,
       char *pbuf = NULL;
       char buf[256];
 
-      if ( !is_room_reset(pReset, pRoom, pArea) )
+      if ( !IsRoomReset(pReset, pRoom, pArea) )
 	{
 	  continue;
 	}
@@ -2128,7 +2128,7 @@ void list_resets( Character *ch, Area *pArea, ROOM_INDEX_DATA *pRoom,
           else
             {
               int iNest;
-              RESET_DATA *reset = lo_reset->next;
+              Reset *reset = lo_reset->next;
 
               for ( iNest = 0; iNest < pReset->extra; iNest++ )
                 {
@@ -2341,7 +2341,7 @@ void list_resets( Character *ch, Area *pArea, ROOM_INDEX_DATA *pRoom,
    actually reset, or if they're bugged. */
 void renumber_put_resets( Area *pArea )
 {
-  RESET_DATA *pReset = NULL, *lastobj = NULL;
+  Reset *pReset = NULL, *lastobj = NULL;
 
   for ( pReset = pArea->first_reset; pReset; pReset = pReset->next )
     {
@@ -2375,11 +2375,11 @@ void renumber_put_resets( Area *pArea )
 /*
  * Create a new reset (for online building)                     -Thoric
  */
-RESET_DATA *make_reset( char letter, int extra, int arg1, int arg2, int arg3 )
+Reset *MakeReset( char letter, int extra, int arg1, int arg2, int arg3 )
 {
-  RESET_DATA *pReset = NULL;
+  Reset *pReset = NULL;
 
-  CREATE( pReset, RESET_DATA, 1 );
+  CREATE( pReset, Reset, 1 );
   pReset->command       = letter;
   pReset->extra = extra;
   pReset->arg1  = arg1;
@@ -2393,18 +2393,18 @@ RESET_DATA *make_reset( char letter, int extra, int arg1, int arg2, int arg3 )
 /*
  * Add a reset to an area                               -Thoric
  */
-RESET_DATA *add_reset( Area *tarea, char letter, int extra, int arg1, int arg2, int arg3 )
+Reset *AddReset( Area *tarea, char letter, int extra, int arg1, int arg2, int arg3 )
 {
-  RESET_DATA *pReset = NULL;
+  Reset *pReset = NULL;
 
   if ( !tarea )
     {
-      bug( "add_reset: NULL area!", 0 );
+      bug( "AddReset: NULL area!", 0 );
       return NULL;
     }
 
   letter = UPPER(letter);
-  pReset = make_reset( letter, extra, arg1, arg2, arg3 );
+  pReset = MakeReset( letter, extra, arg1, arg2, arg3 );
 
   switch( letter )
     {
@@ -2441,20 +2441,20 @@ RESET_DATA *add_reset( Area *tarea, char letter, int extra, int arg1, int arg2, 
 /*
  * Place a reset into an area, insert sorting it                -Thoric
  */
-RESET_DATA *place_reset( Area *tarea, char letter, int extra, int arg1, int arg2, int arg3 )
+Reset *PlaceReset( Area *tarea, char letter, int extra, int arg1, int arg2, int arg3 )
 {
-  RESET_DATA *pReset = NULL;
-  RESET_DATA *tmp = NULL;
-  RESET_DATA *tmp2 = NULL;
+  Reset *pReset = NULL;
+  Reset *tmp = NULL;
+  Reset *tmp2 = NULL;
 
   if ( !tarea )
     {
-      bug( "place_reset: NULL area!", 0 );
+      bug( "PlaceReset: NULL area!", 0 );
       return NULL;
     }
 
   letter = UPPER(letter);
-  pReset = make_reset( letter, extra, arg1, arg2, arg3 );
+  pReset = MakeReset( letter, extra, arg1, arg2, arg3 );
 
   if ( letter == 'M' )
     {
@@ -2466,7 +2466,7 @@ RESET_DATA *place_reset( Area *tarea, char letter, int extra, int arg1, int arg2
       switch( letter )
         {
         default:
-          bug( "place_reset: Bad reset type %c", letter );
+          bug( "PlaceReset: Bad reset type %c", letter );
           return NULL;
 
         case 'D':
@@ -2689,7 +2689,7 @@ RESET_DATA *place_reset( Area *tarea, char letter, int extra, int arg1, int arg2
   return pReset;
 }
 
-char *sprint_reset( Character *ch, RESET_DATA *pReset, short num, bool rlist )
+char *SPrintReset( Character *ch, Reset *pReset, short num, bool rlist )
 {
   static char buf[MAX_STRING_LENGTH];
   char mobname[MAX_STRING_LENGTH];

@@ -45,7 +45,7 @@ ch_ret spell_invis( int sn, int level, Character *ch, void *vo )
     {
       OBJ_DATA *obj;
 
-      obj = GetCarriedItem( ch, spell_target_name );
+      obj = GetCarriedObject( ch, spell_target_name );
 
       if (obj)
         {

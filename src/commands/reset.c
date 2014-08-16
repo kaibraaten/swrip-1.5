@@ -81,5 +81,5 @@ void do_reset( Character *ch, char *argument )
       return;
     }
 
-  edit_reset(ch, argument, pArea, NULL);
+  EditReset(ch, argument, pArea, NULL);
 }

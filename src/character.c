@@ -435,7 +435,7 @@ void UnequipCharacter( Character *ch, OBJ_DATA *obj )
 /*
  * Find an obj in player's inventory.
  */
-OBJ_DATA *GetCarriedItem( const Character *ch, const char *argument )
+OBJ_DATA *GetCarriedObject( const Character *ch, const char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   OBJ_DATA *obj = NULL;
@@ -449,7 +449,7 @@ OBJ_DATA *GetCarriedItem( const Character *ch, const char *argument )
 
   for ( obj = ch->last_carrying; obj; obj = obj->prev_content )
     if ( obj->wear_loc == WEAR_NONE
-         &&   CanSeeItem( ch, obj )
+         &&   CanSeeObject( ch, obj )
          &&  (nifty_is_name( arg, obj->name ) || obj->pIndexData->vnum == vnum) )
       if ( (count += obj->count) >= number )
         return obj;
@@ -465,7 +465,7 @@ OBJ_DATA *GetCarriedItem( const Character *ch, const char *argument )
 
   for ( obj = ch->last_carrying; obj; obj = obj->prev_content )
     if ( obj->wear_loc == WEAR_NONE
-         &&   CanSeeItem( ch, obj )
+         &&   CanSeeObject( ch, obj )
          &&   nifty_is_name_prefix( arg, obj->name ) )
       if ( (count += obj->count) >= number )
         return obj;
@@ -476,7 +476,7 @@ OBJ_DATA *GetCarriedItem( const Character *ch, const char *argument )
 /*
  * Find an obj in player's equipment.
  */
-OBJ_DATA *GetWornItem( const Character *ch, const char *argument )
+OBJ_DATA *GetWornObject( const Character *ch, const char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   OBJ_DATA *obj = NULL;
@@ -485,7 +485,7 @@ OBJ_DATA *GetWornItem( const Character *ch, const char *argument )
 
   if ( !ch )
     {
-      bug( "GetWornItem: null ch" );
+      bug( "GetWornObject: null ch" );
     }
 
   number = number_argument( argument, arg );
@@ -495,7 +495,7 @@ OBJ_DATA *GetWornItem( const Character *ch, const char *argument )
 
   for ( obj = ch->last_carrying; obj; obj = obj->prev_content )
     if ( obj->wear_loc != WEAR_NONE
-         &&   CanSeeItem( ch, obj )
+         &&   CanSeeObject( ch, obj )
          &&  (nifty_is_name( arg, obj->name ) || obj->pIndexData->vnum == vnum) )
       if ( ++count == number )
         return obj;
@@ -510,7 +510,7 @@ OBJ_DATA *GetWornItem( const Character *ch, const char *argument )
   count = 0;
   for ( obj = ch->last_carrying; obj; obj = obj->prev_content )
     if ( obj->wear_loc != WEAR_NONE
-         &&   CanSeeItem( ch, obj )
+         &&   CanSeeObject( ch, obj )
          &&   nifty_is_name_prefix( arg, obj->name ) )
       if ( ++count == number )
         return obj;
@@ -744,7 +744,7 @@ bool CanSeeCharacter( const Character *ch, const Character *victim )
 /*
  * True if char can see obj.
  */
-bool CanSeeItem( const Character *ch, const OBJ_DATA *obj )
+bool CanSeeObject( const Character *ch, const OBJ_DATA *obj )
 {
   if ( !IsNpc(ch) && IS_SET(ch->act, PLR_HOLYLIGHT) )
     return true;
@@ -776,7 +776,7 @@ bool CanSeeItem( const Character *ch, const OBJ_DATA *obj )
 /*
  * True if char can drop obj.
  */
-bool CanDropItem( const Character *ch, const OBJ_DATA *obj )
+bool CanDropObject( const Character *ch, const OBJ_DATA *obj )
 {
   if ( !IS_OBJ_STAT(obj, ITEM_NODROP) )
     return true;

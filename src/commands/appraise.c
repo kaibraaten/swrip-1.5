@@ -42,7 +42,7 @@ void do_appraise( Character *ch, char *argument )
       return;
     }
 
-  if ( ( obj = GetCarriedItem( ch, arg ) ) == NULL )
+  if ( ( obj = GetCarriedObject( ch, arg ) ) == NULL )
     {
       act( AT_TELL, "$n tells you 'You don't have that item.'",
            keeper, NULL, ch, TO_VICT );
@@ -50,7 +50,7 @@ void do_appraise( Character *ch, char *argument )
       return;
     }
 
-  if ( !CanDropItem( ch, obj ) )
+  if ( !CanDropObject( ch, obj ) )
     {
       send_to_char( "You can't let go of it.\r\n", ch );
       return;
@@ -83,13 +83,13 @@ static void appraise_all( Character *ch, Character *keeper, char *fixstr )
   for ( obj = ch->first_carrying; obj != NULL ; obj = obj->next_content )
     {
       if ( obj->wear_loc  == WEAR_NONE
-           &&   CanSeeItem( ch, obj )
+           &&   CanSeeObject( ch, obj )
            && ( obj->item_type == ITEM_ARMOR
                 ||   obj->item_type == ITEM_WEAPON
                 ||   obj->item_type == ITEM_DEVICE ) )
 
         {
-          if ( !CanDropItem( ch, obj ) )
+          if ( !CanDropObject( ch, obj ) )
             ch_printf( ch, "You can't let go of %s.\r\n", obj->name );
           else if ( ( cost = get_repaircost( keeper, obj ) ) < 0 )
             {

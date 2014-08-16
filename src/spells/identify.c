@@ -18,7 +18,7 @@ ch_ret spell_identify( int sn, int level, Character *ch, void *vo )
       return rSPELL_FAILED;
     }
 
-  if ( ( obj = GetCarriedItem( ch, spell_target_name ) ) != NULL )
+  if ( ( obj = GetCarriedObject( ch, spell_target_name ) ) != NULL )
     {
       set_char_color( AT_LBLUE, ch );
       ch_printf( ch,

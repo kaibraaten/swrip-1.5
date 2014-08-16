@@ -102,7 +102,7 @@ void do_look( Character *ch, char *argument )
 
   for ( cnt = 0, obj = ch->last_carrying; obj; obj = obj->prev_content )
     {
-      if ( CanSeeItem( ch, obj ) )
+      if ( CanSeeObject( ch, obj ) )
         {
           if ( (pdesc=get_extra_descr(arg, obj->first_extradesc)) != NULL )
             {
@@ -141,7 +141,7 @@ void do_look( Character *ch, char *argument )
 
   for ( obj = ch->in_room->last_content; obj; obj = obj->prev_content )
     {
-      if ( CanSeeItem( ch, obj ) )
+      if ( CanSeeObject( ch, obj ) )
         {
           if ( (pdesc=get_extra_descr(arg, obj->first_extradesc)) != NULL )
             {
@@ -484,7 +484,7 @@ static void show_char_to_char_1( Character *victim, Character *ch )
       for ( iWear = 0; iWear < MAX_WEAR; iWear++ )
         {
           if ( ( obj = GetEquipmentOnCharacter( victim, iWear ) ) != NULL
-               &&   CanSeeItem( ch, obj ) &&
+               &&   CanSeeObject( ch, obj ) &&
                ( ( obj->description && obj->description[0] != '\0' ) || ( IS_SET(ch->act, PLR_HOLYLIGHT) || IsNpc(ch) ) ) )
             {
               if ( !found )

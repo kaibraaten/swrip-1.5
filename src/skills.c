@@ -188,7 +188,7 @@ bool check_skill( Character *ch, const char *command, char *argument )
           break;
 
         case TAR_OBJ_INV:
-          if ( (obj=GetCarriedItem(ch, argument)) == NULL )
+          if ( (obj=GetCarriedObject(ch, argument)) == NULL )
             {
               send_to_char( "You can't find that.\r\n", ch );
               return true;
@@ -401,7 +401,7 @@ void disarm( Character *ch, Character *victim )
       return;
     }
 
-  if ( IsNpc( ch ) && !CanSeeItem( ch, obj )
+  if ( IsNpc( ch ) && !CanSeeObject( ch, obj )
        && number_bits( 1 ) == 0)
     {
       learn_from_failure( ch, gsn_disarm );

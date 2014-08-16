@@ -26,9 +26,16 @@
 #include <utility/utility.h>
 #include "types.h"
 
-ROOM_INDEX_DATA *find_room( Character *ch, char *argument, ROOM_INDEX_DATA *pRoom );
-void wipe_resets( Area *pArea, ROOM_INDEX_DATA *pRoom );
-void instaroom( Area *pArea, ROOM_INDEX_DATA *pRoom, bool dodoors );
-void edit_reset( Character *ch, char *argument, Area *pArea, ROOM_INDEX_DATA *aRoom );
+ROOM_INDEX_DATA *FindRoom( Character *ch, char *argument, ROOM_INDEX_DATA *pRoom );
+void WipeResets( Area *pArea, ROOM_INDEX_DATA *pRoom );
+void InstallRoom( Area *pArea, ROOM_INDEX_DATA *pRoom, bool dodoors );
+void EditReset( Character *ch, char *argument, Area *pArea, ROOM_INDEX_DATA *aRoom );
+void ResetArea( Area *pArea );
+char *SPrintReset( Character *ch, Reset *pReset, short num, bool rlist );
+Reset *MakeReset( char letter, int extra, int arg1, int arg2, int arg3 );
+Reset *AddReset( Area *tarea, char letter, int extra,
+		  int arg1, int arg2, int arg3 );
+Reset *PlaceReset( Area *tarea, char letter,
+		    int extra, int arg1, int arg2, int arg3 );
 
 #endif
