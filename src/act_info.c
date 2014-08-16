@@ -92,10 +92,10 @@ char *format_obj_to_char( const OBJ_DATA *obj, const Character *ch, bool fShort 
  */
 char *halucinated_object( int ms, bool fShort )
 {
-  int sms = URANGE( 1, (ms+10)/5, 20 );
+  int sms = urange( 1, (ms+10)/5, 20 );
 
   if ( fShort )
-    switch( number_range( 6-URANGE(1,sms/2,5), sms ) )
+    switch( number_range( 6-urange(1,sms/2,5), sms ) )
       {
       case  1: return "a sword";
       case  2: return "a stick";
@@ -118,7 +118,7 @@ char *halucinated_object( int ms, bool fShort )
       case 19: return "the answer";
       case 20: return "the key to life, the universe and everything";
       }
-  switch( number_range( 6-URANGE(1,sms/2,5), sms ) )
+  switch( number_range( 6-urange(1,sms/2,5), sms ) )
     {
     case  1: return "A nice looking sword catches your eye.";
     case  2: return "The ground is covered in small sticks.";
@@ -192,7 +192,7 @@ void show_list_to_char( const OBJ_DATA *list, Character *ch, bool fShort, bool f
    */
   if ( abs(ms) > 40 )
     {
-      offcount = URANGE( -(count), (count * ms) / 100, count*2 );
+      offcount = urange( -(count), (count * ms) / 100, count*2 );
       if ( offcount < 0 )
         offcount += number_range(0, abs(offcount));
       else

@@ -58,7 +58,7 @@ static void decorate_room( ROOM_INDEX_DATA *room )
 
   room->name    = STRALLOC( sect_names[sector][0] );
   buf[0] = '\0';
-  nRand = number_range( 1, UMIN(8,sent_total[sector]) );
+  nRand = number_range( 1, umin(8,sent_total[sector]) );
 
   for ( iRand = 0; iRand < nRand; iRand++ )
     previous[iRand] = -1;
@@ -333,7 +333,7 @@ ROOM_INDEX_DATA *generate_exit( ROOM_INDEX_DATA *in_room, Exit **pexit )
 
       brvnum = r1;
       backroom = in_room;
-      serial = (UMAX( r1, r2 ) << 16) | UMIN( r1, r2 );
+      serial = (umax( r1, r2 ) << 16) | umin( r1, r2 );
       distance = orig_exit->distance - 1;
       roomnum = r1 < r2 ? 1 : distance;
     }
@@ -722,7 +722,7 @@ ch_ret move_char( Character *ch, Exit *pexit, int fall )
 
           if ( !IsAffectedBy(ch->mount, AFF_FLYING)
                &&   !IsAffectedBy(ch->mount, AFF_FLOATING) )
-            move = movement_loss[UMIN(SECT_MAX-1, in_room->sector_type)];
+            move = movement_loss[umin(SECT_MAX-1, in_room->sector_type)];
           else
             move = 1;
 
@@ -738,7 +738,7 @@ ch_ret move_char( Character *ch, Exit *pexit, int fall )
 
           if ( !IsAffectedBy(ch, AFF_FLYING)
                &&   !IsAffectedBy(ch, AFF_FLOATING) )
-            move = hpmove*encumbrance( ch, movement_loss[UMIN(SECT_MAX-1, in_room->sector_type)] );
+            move = hpmove*encumbrance( ch, movement_loss[umin(SECT_MAX-1, in_room->sector_type)] );
           else
             move = 1;
 

@@ -1410,12 +1410,12 @@ void wipe_resets( Area *pArea, ROOM_INDEX_DATA *pRoom )
 int generate_itemlevel( Area *pArea, OBJ_INDEX_DATA *pObjIndex )
 {
   int olevel = 0;
-  int min = UMAX(pArea->low_soft_range, 1);
-  int max = UMIN(pArea->hi_soft_range, min + 15);
+  int min = umax(pArea->low_soft_range, 1);
+  int max = umin(pArea->hi_soft_range, min + 15);
 
   if ( pObjIndex->level > 0 )
     {
-      olevel = UMIN(pObjIndex->level, MAX_LEVEL);
+      olevel = umin(pObjIndex->level, MAX_LEVEL);
     }
   else
     {
@@ -1541,7 +1541,7 @@ void reset_area( Area *pArea )
 
           char_to_room(mob, pRoomIndex);
           economize_mobgold(mob);
-          level = URANGE(0, mob->top_level - 2, LEVEL_AVATAR);
+          level = urange(0, mob->top_level - 2, LEVEL_AVATAR);
 
           if ( mob->vip_flags != 0 && pArea->planet )
 	    {
@@ -1582,7 +1582,7 @@ void reset_area( Area *pArea )
 	      obj = create_object(pObjIndex, number_fuzzy(level));
 	    }
 
-          obj->level = URANGE(0, obj->level, LEVEL_AVATAR);
+          obj->level = urange(0, obj->level, LEVEL_AVATAR);
           obj = obj_to_char(obj, mob);
 
           if ( pReset->command == 'E' )
@@ -1628,7 +1628,7 @@ void reset_area( Area *pArea )
             }
 
           obj = create_object(pObjIndex, number_fuzzy(generate_itemlevel(pArea, pObjIndex)));
-          obj->level = UMIN(obj->level, LEVEL_AVATAR);
+          obj->level = umin(obj->level, LEVEL_AVATAR);
           obj->cost = 0;
           obj_to_room(obj, pRoomIndex);
           lastobj = obj;
@@ -1699,8 +1699,8 @@ void reset_area( Area *pArea )
 		}
             }
 
-          obj = create_object(pObjIndex, number_fuzzy(UMAX(generate_itemlevel(pArea, pObjIndex),to_obj->level)));
-          obj->level = UMIN(obj->level, LEVEL_AVATAR);
+          obj = create_object(pObjIndex, number_fuzzy(umax(generate_itemlevel(pArea, pObjIndex),to_obj->level)));
+          obj->level = umin(obj->level, LEVEL_AVATAR);
           obj_to_obj(obj, to_obj);
           break;
 
@@ -2209,7 +2209,7 @@ void list_resets( Character *ch, Area *pArea, ROOM_INDEX_DATA *pRoom,
                     rname = room->name;
                   door = (pReset->arg2 & BIT_RESET_DOOR_MASK)
                     >> BIT_RESET_DOOR_THRESHOLD;
-                  door = URANGE(0, door, MAX_DIR+1);
+                  door = urange(0, door, MAX_DIR+1);
                   sprintf(pbuf, "Exit %s%s (%d), Room %s (%d)",
 			  get_dir_name(door),
                           (room && get_exit(room, door) ? "" : " (NO EXIT!)"), door,
@@ -2282,7 +2282,7 @@ void list_resets( Character *ch, Area *pArea, ROOM_INDEX_DATA *pRoom,
           {
             const char *ef_name;
 
-            pReset->arg2 = URANGE(0, pReset->arg2, MAX_DIR+1);
+            pReset->arg2 = urange(0, pReset->arg2, MAX_DIR+1);
 
             if ( !(room = get_room_index(pReset->arg1)) )
               rname = "Room: *BAD VNUM*";

@@ -125,7 +125,7 @@ void do_accelerate( Character *ch, char *argument )
 
   ship->energy -= abs((change-abs(ship->currspeed))/10);
 
-  ship->currspeed = URANGE( 0 , change , ship->realspeed );
+  ship->currspeed = urange( 0 , change , ship->realspeed );
 
   if ( ship->sclass == FIGHTER_SHIP )
     learn_from_success( ch, gsn_starfighters );

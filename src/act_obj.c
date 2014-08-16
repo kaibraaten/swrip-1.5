@@ -52,7 +52,7 @@ short get_obj_resistance( const OBJ_DATA *obj )
       resist += (obj->value[OVAL_WEAPON_CONDITION]);
     }
 
-  return URANGE(10, resist, 99);
+  return urange(10, resist, 99);
 }
 
 /*

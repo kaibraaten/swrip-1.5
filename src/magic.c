@@ -835,7 +835,7 @@ bool saves_poison_death( int level, const Character *victim )
       save += 50;
     }
 
-  save = URANGE( 5, save, 95 );
+  save = urange( 5, save, 95 );
 
   return chance( victim, save );
 }
@@ -850,7 +850,7 @@ bool saves_wands( int level, const Character *victim )
     }
 
   save = 50 + ( victim->top_level - level - victim->saving.wand ) * 2;
-  save = URANGE( 5, save, 95 );
+  save = urange( 5, save, 95 );
 
   return chance( victim, save );
 }
@@ -864,7 +864,7 @@ bool saves_para_petri( int level, const Character *victim )
       save += 50;
     }
 
-  save = URANGE( 5, save, 95 );
+  save = urange( 5, save, 95 );
   return chance( victim, save );
 }
 
@@ -872,7 +872,7 @@ bool saves_breath( int level, const Character *victim )
 {
   int save = 50 + ( victim->top_level - level - victim->saving.breath ) * 2;
 
-  save = URANGE( 5, save, 95 );
+  save = urange( 5, save, 95 );
 
   return chance( victim, save );
 }
@@ -898,7 +898,7 @@ bool saves_spell_staff( int level, const Character *victim )
       save += 20;
     }
 
-  save = URANGE( 5, save, 95 );
+  save = urange( 5, save, 95 );
   return chance( victim, save );
 }
 

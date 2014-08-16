@@ -69,15 +69,15 @@ void do_mine( Character *ch, char *argument )
       return;
     }
 
-  if ( obj->weight > (UMAX(5, (can_carry_w(ch) / 10)))
+  if ( obj->weight > (umax(5, (can_carry_w(ch) / 10)))
        &&  !shovel )
     {
       send_to_char( "You'd need a shovel to bury something that big.\r\n", ch );
       return;
     }
 
-  move = (obj->weight * 50 * (shovel ? 1 : 5)) / UMAX(1, can_carry_w(ch));
-  move = URANGE( 2, move, 1000 );
+  move = (obj->weight * 50 * (shovel ? 1 : 5)) / umax(1, can_carry_w(ch));
+  move = urange( 2, move, 1000 );
   if ( move > ch->move )
     {
       send_to_char( "You don't have the energy to bury something of that size.\r\n", ch );
@@ -86,7 +86,7 @@ void do_mine( Character *ch, char *argument )
   ch->move -= move;
 
   SET_BIT( obj->extra_flags, ITEM_BURRIED );
-  set_wait_state( ch, URANGE( 10, move / 2, 100 ) );
+  set_wait_state( ch, urange( 10, move / 2, 100 ) );
 
   STRFREE ( obj->armed_by );
   obj->armed_by = STRALLOC ( ch->name );

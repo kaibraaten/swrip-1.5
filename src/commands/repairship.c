@@ -77,7 +77,7 @@ void do_repairship(Character *ch, char *argument )
 
   if ( !str_cmp(arg,"hull") )
     {
-      change = URANGE( 0 ,
+      change = urange( 0 ,
                        number_range( (int) ( ch->pcdata->learned[gsn_shipmaintenance] / 2 ) , (int) (ch->pcdata->learned[gsn_shipmaintenance]) ),
                        ( ship->maxhull - ship->hull ) );
       ship->hull += change;

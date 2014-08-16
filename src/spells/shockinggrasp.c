@@ -19,12 +19,12 @@ ch_ret spell_shocking_grasp( int sn, int level, Character *ch, void *vo )
 
   send_to_char("You feel the hatred grow within you!\r\n", ch);
   ch->alignment = ch->alignment - 100;
-  ch->alignment = URANGE( -1000, ch->alignment, 1000 );
+  ch->alignment = urange( -1000, ch->alignment, 1000 );
   sith_penalty( ch );
 
 
-  level = UMIN(level, sizeof(dam_each)/sizeof(dam_each[0]) - 1);
-  level = UMAX(0, level);
+  level = umin(level, sizeof(dam_each)/sizeof(dam_each[0]) - 1);
+  level = umax(0, level);
   dam           = number_range( dam_each[level] / 2, dam_each[level] * 2 );
   if ( saves_spell_staff( level, victim ) )
     dam /= 2;

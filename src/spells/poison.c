@@ -10,7 +10,7 @@ ch_ret spell_poison( int sn, int level, Character *ch, void *vo )
 
   send_to_char("You feel the hatred grow within you!\r\n", ch);
   ch->alignment = ch->alignment - 100;
-  ch->alignment = URANGE( -1000, ch->alignment, 1000 );
+  ch->alignment = urange( -1000, ch->alignment, 1000 );
   sith_penalty( ch );
 
   poison_chance = ris_save( victim, level, RIS_POISON );
@@ -29,7 +29,7 @@ ch_ret spell_poison( int sn, int level, Character *ch, void *vo )
   affect_join( victim, &af );
   set_char_color( AT_MAGIC, victim );
   send_to_char( "You feel very sick.\r\n", victim );
-  victim->mental_state = URANGE( 20, victim->mental_state
+  victim->mental_state = urange( 20, victim->mental_state
                                  + (first ? 5 : 0), 100 );
   if ( ch != victim )
     send_to_char( "Ok.\r\n", ch );

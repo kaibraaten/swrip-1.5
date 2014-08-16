@@ -891,7 +891,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !str_cmp( arg2, "dockingports" ) )
     {
-      ship->dockingports = URANGE( -1, atoi(argument) , 20 );
+      ship->dockingports = urange( -1, atoi(argument) , 20 );
       send_to_char( "Done.\r\n", ch );
       save_ship( ship );
       return;
@@ -899,7 +899,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !str_cmp( arg2, "guard" ) )
     {
-      ship->guard = URANGE( -1, atoi(argument) , 1 );
+      ship->guard = urange( -1, atoi(argument) , 1 );
       send_to_char( "Done.\r\n", ch );
       save_ship( ship );
       return;
@@ -907,7 +907,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !str_cmp( arg2, "manuever" ) )
     {
-      ship->manuever = URANGE( 0, atoi(argument) , 250 );
+      ship->manuever = urange( 0, atoi(argument) , 250 );
       send_to_char( "Done.\r\n", ch );
       save_ship( ship );
       return;
@@ -916,9 +916,9 @@ void do_setship( Character *ch, char *argument )
   if ( !str_cmp( arg2, "lasers" ) )
     {
       if ( ch->top_level == 105 )
-        ship->lasers = URANGE( 0, atoi(argument) , 20 );
+        ship->lasers = urange( 0, atoi(argument) , 20 );
       else
-        ship->lasers = URANGE( 0, atoi(argument) , 10 );
+        ship->lasers = urange( 0, atoi(argument) , 10 );
 
       send_to_char( "Done.\r\n", ch );
       save_ship( ship );
@@ -928,9 +928,9 @@ void do_setship( Character *ch, char *argument )
   if ( !str_cmp( arg2, "ions" ) )
     {
       if ( ch->top_level == 105 )
-        ship->ions = URANGE( 0, atoi(argument) , 20 );
+        ship->ions = urange( 0, atoi(argument) , 20 );
       else
-        ship->ions = URANGE( 0, atoi(argument) , 10 );
+        ship->ions = urange( 0, atoi(argument) , 10 );
 
       send_to_char( "Done.\r\n", ch );
       save_ship( ship );
@@ -939,7 +939,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !str_cmp( arg2, "class" ) )
     {
-      ship->sclass = URANGE( 0, atoi(argument) , WALKER );
+      ship->sclass = urange( 0, atoi(argument) , WALKER );
       send_to_char( "Done.\r\n", ch );
       save_ship( ship );
       return;
@@ -947,7 +947,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !str_cmp( arg2, "missiles" ) )
     {
-      ship->missiles = URANGE( 0, atoi(argument) , 255 );
+      ship->missiles = urange( 0, atoi(argument) , 255 );
       send_to_char( "Done.\r\n", ch );
       save_ship( ship );
       return;
@@ -955,7 +955,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !str_cmp( arg2, "torpedos" ) )
     {
-      ship->torpedos = URANGE( 0, atoi(argument) , 255 );
+      ship->torpedos = urange( 0, atoi(argument) , 255 );
       send_to_char( "Done.\r\n", ch );
       save_ship( ship );
       return;
@@ -963,7 +963,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !str_cmp( arg2, "rockets" ) )
     {
-      ship->rockets = URANGE( 0, atoi(argument) , 255 );
+      ship->rockets = urange( 0, atoi(argument) , 255 );
       send_to_char( "Done.\r\n", ch );
       save_ship( ship );
       return;
@@ -972,9 +972,9 @@ void do_setship( Character *ch, char *argument )
   if ( !str_cmp( arg2, "speed" ) )
     {
       if ( ch->top_level == 105 )
-        ship->realspeed = URANGE( 0, atoi(argument) , 255 );
+        ship->realspeed = urange( 0, atoi(argument) , 255 );
       else
-        ship->realspeed = URANGE( 0, atoi(argument) , 150 );
+        ship->realspeed = urange( 0, atoi(argument) , 150 );
 
       send_to_char( "Done.\r\n", ch );
       save_ship( ship );
@@ -983,7 +983,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !str_cmp( arg2, "tractorbeam" ) )
     {
-      ship->tractorbeam = URANGE( 0, atoi(argument) , 255 );
+      ship->tractorbeam = urange( 0, atoi(argument) , 255 );
       send_to_char( "Done.\r\n", ch );
       save_ship( ship );
       return;
@@ -991,7 +991,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !str_cmp( arg2, "hyperspeed" ) )
     {
-      ship->hyperspeed = URANGE( 0, atoi(argument) , 255 );
+      ship->hyperspeed = urange( 0, atoi(argument) , 255 );
       send_to_char( "Done.\r\n", ch );
       save_ship( ship );
       return;
@@ -1000,9 +1000,9 @@ void do_setship( Character *ch, char *argument )
   if ( !str_cmp( arg2, "shield" ) )
     {
       if ( ch->top_level == 105 )
-        ship->maxshield = URANGE( 0, atoi(argument) , 30000 );
+        ship->maxshield = urange( 0, atoi(argument) , 30000 );
       else
-        ship->maxshield = URANGE( 0, atoi(argument) , 1000 );
+        ship->maxshield = urange( 0, atoi(argument) , 1000 );
 
       send_to_char( "Done.\r\n", ch );
       save_ship( ship );
@@ -1013,13 +1013,13 @@ void do_setship( Character *ch, char *argument )
     {
       if ( ch->top_level == 105 )
         {
-          ship->hull = URANGE( 1, atoi(argument) , 30000 );
-          ship->maxhull = URANGE( 1, atoi(argument) , 30000 );
+          ship->hull = urange( 1, atoi(argument) , 30000 );
+          ship->maxhull = urange( 1, atoi(argument) , 30000 );
         }
       else
         {
-          ship->hull = URANGE( 1, atoi(argument) , 20000 );
-          ship->maxhull = URANGE( 1, atoi(argument) , 20000 );
+          ship->hull = urange( 1, atoi(argument) , 20000 );
+          ship->maxhull = urange( 1, atoi(argument) , 20000 );
         }
 
       send_to_char( "Done.\r\n", ch );
@@ -1029,8 +1029,8 @@ void do_setship( Character *ch, char *argument )
 
   if ( !str_cmp( arg2, "energy" ) )
     {
-      ship->energy = URANGE( 1, atoi(argument) , 30000 );
-      ship->maxenergy = URANGE( 1, atoi(argument) , 30000 );
+      ship->energy = urange( 1, atoi(argument) , 30000 );
+      ship->maxenergy = urange( 1, atoi(argument) , 30000 );
       send_to_char( "Done.\r\n", ch );
       save_ship( ship );
       return;
@@ -1038,7 +1038,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !str_cmp( arg2, "sensor" ) )
     {
-      ship->sensor = URANGE( 0, atoi(argument) , 255 );
+      ship->sensor = urange( 0, atoi(argument) , 255 );
       send_to_char( "Done.\r\n", ch );
       save_ship( ship );
       return;
@@ -1046,7 +1046,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !str_cmp( arg2, "astroarray" ) )
     {
-      ship->astro_array = URANGE( 0, atoi(argument) , 255 );
+      ship->astro_array = urange( 0, atoi(argument) , 255 );
       send_to_char( "Done.\r\n", ch );
       save_ship( ship );
       return;
@@ -1054,7 +1054,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !str_cmp( arg2, "comm" ) )
     {
-      ship->comm = URANGE( 0, atoi(argument) , 255 );
+      ship->comm = urange( 0, atoi(argument) , 255 );
       send_to_char( "Done.\r\n", ch );
       save_ship( ship );
       return;
@@ -1064,11 +1064,11 @@ void do_setship( Character *ch, char *argument )
     {
       if ( ch->top_level == 105 )
         {
-          ship->chaff = URANGE( 0, atoi(argument) , 255 );
+          ship->chaff = urange( 0, atoi(argument) , 255 );
         }
       else
 	{
-          ship->chaff = URANGE( 0, atoi(argument) , 25 );
+          ship->chaff = urange( 0, atoi(argument) , 25 );
         }
 
       send_to_char( "Done.\r\n", ch );
@@ -1078,7 +1078,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !str_cmp(arg2,"alarm") )
     {
-      ship->alarm = URANGE(0,atoi(argument),5);
+      ship->alarm = urange(0,atoi(argument),5);
       send_to_char("Done.\r\n",ch);
       save_ship(ship);
       return;

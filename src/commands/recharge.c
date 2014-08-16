@@ -47,7 +47,7 @@ void do_recharge(Character *ch, char *argument )
   learn_from_success( ch, gsn_shipsystems );
 
   recharge  = 25+ship->sclass*25;
-  recharge  = UMIN(  ship->maxshield-ship->shield , recharge );
+  recharge  = umin(  ship->maxshield-ship->shield , recharge );
   ship->shield += recharge;
   ship->energy -= ( recharge*2 + recharge * ship->sclass );
 }

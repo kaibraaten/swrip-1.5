@@ -151,7 +151,7 @@ void do_hail( Character *ch , char *argument )
       return;
     }
 
-  ch->gold -= UMAX( gold, 0);
+  ch->gold -= umax( gold, 0);
   if( ch->in_room && ch->in_room->area )
     boost_economy( ch->in_room->area, gold );
 

@@ -37,7 +37,7 @@ ch_ret spell_create_mob( int sn, int level, Character *ch, void *vo )
       failed_casting( skill, ch, NULL, NULL );
       return rNONE;
     }
-  mob->top_level   = UMIN( lvl, skill->dice ? dice_parse(ch, level, skill->dice) : mob->top_level );
+  mob->top_level   = umin( lvl, skill->dice ? dice_parse(ch, level, skill->dice) : mob->top_level );
   mob->armor     = interpolate( mob->top_level, 100, -100 );
 
   mob->max_hit = mob->top_level * 8 + number_range(

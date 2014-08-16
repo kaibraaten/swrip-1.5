@@ -38,7 +38,7 @@ ch_ret spell_obj_inv( int sn, int level, Character *ch, void *vo )
               return rSPELL_FAILED;
             }
 
-          water = UMIN( (skill->dice ? dice_parse(ch, level, skill->dice) : level)
+          water = umin( (skill->dice ? dice_parse(ch, level, skill->dice) : level)
                         * (weather_info.sky >= SKY_RAINING ? 2 : 1),
                         obj->value[0] - obj->value[1] );
 

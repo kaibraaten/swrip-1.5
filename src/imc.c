@@ -7485,32 +7485,32 @@ static char *imc_act_string( const char *format, Character * ch, Character * vic
 
             case 'e':
                i = should_upper ?
-                  capitalize( he_she[URANGE( 0, CH_IMCSEX( ch ), 2 )] ) : he_she[URANGE( 0, CH_IMCSEX( ch ), 2 )];
+                  capitalize( he_she[urange( 0, CH_IMCSEX( ch ), 2 )] ) : he_she[urange( 0, CH_IMCSEX( ch ), 2 )];
                break;
 
             case 'E':
                i = should_upper ?
-                  capitalize( he_she[URANGE( 0, CH_IMCSEX( vic ), 2 )] ) : he_she[URANGE( 0, CH_IMCSEX( vic ), 2 )];
+                  capitalize( he_she[urange( 0, CH_IMCSEX( vic ), 2 )] ) : he_she[urange( 0, CH_IMCSEX( vic ), 2 )];
                break;
 
             case 'm':
                i = should_upper ?
-                  capitalize( him_her[URANGE( 0, CH_IMCSEX( ch ), 2 )] ) : him_her[URANGE( 0, CH_IMCSEX( ch ), 2 )];
+                  capitalize( him_her[urange( 0, CH_IMCSEX( ch ), 2 )] ) : him_her[urange( 0, CH_IMCSEX( ch ), 2 )];
                break;
 
             case 'M':
                i = should_upper ?
-                  capitalize( him_her[URANGE( 0, CH_IMCSEX( vic ), 2 )] ) : him_her[URANGE( 0, CH_IMCSEX( vic ), 2 )];
+                  capitalize( him_her[urange( 0, CH_IMCSEX( vic ), 2 )] ) : him_her[urange( 0, CH_IMCSEX( vic ), 2 )];
                break;
 
             case 's':
                i = should_upper ?
-                  capitalize( his_her[URANGE( 0, CH_IMCSEX( ch ), 2 )] ) : his_her[URANGE( 0, CH_IMCSEX( ch ), 2 )];
+                  capitalize( his_her[urange( 0, CH_IMCSEX( ch ), 2 )] ) : his_her[urange( 0, CH_IMCSEX( ch ), 2 )];
                break;
 
             case 'S':
                i = should_upper ?
-                  capitalize( his_her[URANGE( 0, CH_IMCSEX( vic ), 2 )] ) : his_her[URANGE( 0, CH_IMCSEX( vic ), 2 )];
+                  capitalize( his_her[urange( 0, CH_IMCSEX( vic ), 2 )] ) : his_her[urange( 0, CH_IMCSEX( vic ), 2 )];
                break;
 
             case 'k':

@@ -67,7 +67,7 @@ void do_mpgain( Character *ch, char *argument )
       return;
     }
 
-  xp =  URANGE(1, xp, ( exp_level( GetAbilityLevel( victim, ability ) + 1 ) - exp_level( GetAbilityLevel( victim, ability ) ) ) );
+  xp =  urange(1, xp, ( exp_level( GetAbilityLevel( victim, ability ) + 1 ) - exp_level( GetAbilityLevel( victim, ability ) ) ) );
 
   ch_printf( victim, "You gain %ld %s experience.\r\n", xp, ability_name[ability]  );
   gain_exp( victim, ability, xp );

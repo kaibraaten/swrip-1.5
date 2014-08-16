@@ -53,7 +53,7 @@ void do_aid( Character *ch, char *argument )
     }
 
   ch->alignment = ch->alignment + 20;
-  ch->alignment = URANGE( -1000, ch->alignment, 1000 );
+  ch->alignment = urange( -1000, ch->alignment, 1000 );
 
   percent = number_percent( ) - (GetCurrentLuck(ch) - 13);
   set_wait_state( ch, skill_table[gsn_aid]->beats );
@@ -65,7 +65,7 @@ void do_aid( Character *ch, char *argument )
     }
 
   ch->alignment = ch->alignment + 20;
-  ch->alignment = URANGE( -1000, ch->alignment, 1000 );
+  ch->alignment = urange( -1000, ch->alignment, 1000 );
 
   act( AT_SKILL, "You aid $N!",  ch, NULL, victim, TO_CHAR    );
   act( AT_SKILL, "$n aids $N!",  ch, NULL, victim, TO_NOTVICT );

@@ -67,7 +67,7 @@ void do_add_patrol ( Character *ch , char *argument )
 
   credits = GetAbilityLevel( ch, LEADERSHIP_ABILITY ) * 30;
   ch_printf( ch, "It cost you %d credits.\r\n", credits);
-  ch->gold -= UMIN( credits , ch->gold );
+  ch->gold -= umin( credits , ch->gold );
 
   learn_from_success( ch, gsn_addpatrol );
 

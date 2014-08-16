@@ -313,7 +313,7 @@ void learn_from_success( Character *ch, int sn )
     }
 
   adept = ( GetAbilityLevel(ch, skill_table[sn]->guild ) - skill_table[sn]->min_level )* 5 + 50;
-  adept = UMIN(adept, 100);
+  adept = umin(adept, 100);
 
   if ( ch->pcdata->learned[sn] >= adept )
     {
@@ -343,7 +343,7 @@ void learn_from_success( Character *ch, int sn )
 	  learn = 1;
 	}
 
-      ch->pcdata->learned[sn] = UMIN( adept, ch->pcdata->learned[sn] + learn );
+      ch->pcdata->learned[sn] = umin( adept, ch->pcdata->learned[sn] + learn );
 
       if ( ch->pcdata->learned[sn] == 100 )      /* fully learned! */
         {
@@ -521,7 +521,7 @@ bool check_parry( Character *ch, Character *victim )
 
   if ( IsNpc(victim) )
     {
-      chances = UMIN( 60, GetAbilityLevel( victim, COMBAT_ABILITY ) );
+      chances = umin( 60, GetAbilityLevel( victim, COMBAT_ABILITY ) );
     }
   else
     {
@@ -538,7 +538,7 @@ bool check_parry( Character *ch, Character *victim )
       chances = (int) (victim->pcdata->learned[gsn_parry] );
     }
 
-  chances = URANGE ( 10 , chances , 90 );
+  chances = urange ( 10 , chances , 90 );
 
   if ( number_range( 1, 100 ) > chances )
     {
@@ -581,7 +581,7 @@ bool check_dodge( Character *ch, Character *victim )
 
   if ( IsNpc(victim) )
     {
-      chances  = UMIN( 60, victim->top_level );
+      chances  = umin( 60, victim->top_level );
     }
   else
     {
@@ -626,7 +626,7 @@ bool check_grip( Character *ch, Character *victim )
 
   if ( IsNpc(victim) )
     {
-      grip_chance  = UMIN( 60, 2 * victim->top_level );
+      grip_chance  = umin( 60, 2 * victim->top_level );
     }
   else
     {

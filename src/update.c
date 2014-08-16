@@ -320,7 +320,7 @@ void advance_level( Character *ch, int ability )
 {
   if ( ch->top_level < GetAbilityLevel( ch, ability ) && ch->top_level < 100 )
     {
-      ch->top_level = URANGE( 1, GetAbilityLevel( ch, ability ), 100 );
+      ch->top_level = urange( 1, GetAbilityLevel( ch, ability ), 100 );
     }
 
   if( is_jedi( ch ) && ability == FORCE_ABILITY )
@@ -341,7 +341,7 @@ void gain_exp( Character *ch, short ability, long gain )
       return;
     }
 
-  SetExperience( ch, ability, UMAX( 0, GetExperience( ch, ability ) + gain ) );
+  SetExperience( ch, ability, umax( 0, GetExperience( ch, ability ) + gain ) );
 
   if (is_not_authed(ch) && GetExperience( ch, ability ) >= exp_level(GetAbilityLevel(ch, ability ) + 1))
     {
@@ -381,7 +381,7 @@ long lose_exp( Character *ch, short ability, long loss )
     return 0;
 
   current_exp = GetExperience( ch, ability );
-  actual_loss = UMAX( loss, 0 );
+  actual_loss = umax( loss, 0 );
   new_exp = current_exp - actual_loss;
 
   SetExperience( ch, ability, new_exp );
@@ -402,7 +402,7 @@ int hit_gain( const Character *ch )
     }
   else
     {
-      gain = UMIN( 5, ch->top_level );
+      gain = umin( 5, ch->top_level );
 
       switch ( ch->position )
         {
@@ -448,7 +448,7 @@ int hit_gain( const Character *ch )
       gain *= 2 ;
     }
 
-  return UMIN(gain, ch->max_hit - ch->hit);
+  return umin(gain, ch->max_hit - ch->hit);
 }
 
 
@@ -468,7 +468,7 @@ int mana_gain( const Character *ch )
 	  return (0 - ch->mana);
 	}
 
-      gain = UMIN( 5, GetAbilityLevel( ch, FORCE_ABILITY ) / 2 );
+      gain = umin( 5, GetAbilityLevel( ch, FORCE_ABILITY ) / 2 );
 
       if ( ch->position < POS_SLEEPING )
 	{
@@ -502,7 +502,7 @@ int mana_gain( const Character *ch )
       gain /= 4;
     }
 
-  return UMIN(gain, ch->max_mana - ch->mana);
+  return umin(gain, ch->max_mana - ch->mana);
 }
 
 int move_gain( const Character *ch )
@@ -515,7 +515,7 @@ int move_gain( const Character *ch )
     }
   else
     {
-      gain = UMAX( 15, 2 * ch->top_level );
+      gain = umax( 15, 2 * ch->top_level );
 
       switch ( ch->position )
         {
@@ -556,7 +556,7 @@ int move_gain( const Character *ch )
       gain /= 4;
     }
 
-  return UMIN(gain, ch->max_move - ch->move);
+  return umin(gain, ch->max_move - ch->move);
 }
 
 void gain_addiction( Character *ch )
@@ -684,7 +684,7 @@ void gain_condition( Character *ch, int iCond, int value )
     }
 
   condition                    = ch->pcdata->condition[iCond];
-  ch->pcdata->condition[iCond] = URANGE( 0, condition + value, 48 );
+  ch->pcdata->condition[iCond] = urange( 0, condition + value, 48 );
 
   if ( ch->pcdata->condition[iCond] == 0 )
     {
@@ -1287,12 +1287,12 @@ void weather_update( void )
     }
 
   weather_info.change += diff * dice(1, 4) + dice(2, 6) - dice(2, 6);
-  weather_info.change  = UMAX(weather_info.change, -12);
-  weather_info.change  = UMIN(weather_info.change,  12);
+  weather_info.change  = umax(weather_info.change, -12);
+  weather_info.change  = umin(weather_info.change,  12);
 
   weather_info.mmhg += weather_info.change;
-  weather_info.mmhg  = UMAX(weather_info.mmhg,  960);
-  weather_info.mmhg  = UMIN(weather_info.mmhg, 1040);
+  weather_info.mmhg  = umax(weather_info.mmhg,  960);
+  weather_info.mmhg  = umin(weather_info.mmhg, 1040);
 
   AT_TEMP = AT_GREY;
 
@@ -1589,7 +1589,7 @@ void char_update( void )
             {
               act( AT_POISON, "$n shivers and suffers.", ch, NULL, NULL, TO_ROOM );
               act( AT_POISON, "You shiver and suffer.", ch, NULL, NULL, TO_CHAR );
-              ch->mental_state = URANGE( 20, ch->mental_state
+              ch->mental_state = urange( 20, ch->mental_state
                                          + 4 , 100 );
               damage( ch, ch, 6, gsn_poison );
             }
@@ -1760,7 +1760,7 @@ void char_update( void )
 
                   char_to_room( ch, get_room_index( ROOM_PLUOGUS_QUIT ) );
                   ch->position = POS_RESTING;
-                  ch->hit = UMAX ( 1 , ch->hit );
+                  ch->hit = umax ( 1 , ch->hit );
                   save_char_obj( ch );
                   do_quit( ch, "" );
                 }
@@ -1883,7 +1883,7 @@ void obj_update( void )
       if ( obj->item_type == ITEM_CORPSE_PC || obj->item_type == ITEM_CORPSE_NPC
            || obj->item_type == ITEM_DROID_CORPSE )
         {
-          short timerfrac = UMAX(1, obj->timer - 1);
+          short timerfrac = umax(1, obj->timer - 1);
 
           if ( obj->item_type == ITEM_CORPSE_PC )
 	    {
@@ -1905,12 +1905,12 @@ void obj_update( void )
 
               if ( obj->item_type == ITEM_DROID_CORPSE )
 		{
-		  sprintf( buf, d_corpse_descs[ UMIN( timerfrac - 1, 4 ) ],
+		  sprintf( buf, d_corpse_descs[ umin( timerfrac - 1, 4 ) ],
 			   bufptr );
 		}
               else
 		{
-		  sprintf( buf, corpse_descs[ UMIN( timerfrac - 1, 4 ) ],
+		  sprintf( buf, corpse_descs[ umin( timerfrac - 1, 4 ) ],
 			   capitalize( bufptr ) );
 		}
 
@@ -2193,11 +2193,11 @@ void char_check( void )
                   if ( GetTrustLevel(ch) < LEVEL_IMMORTAL )
                     {
 		      int dam = number_range( ch->max_hit / 50 , ch->max_hit / 30 );
-                      dam = UMAX( 1, dam );
+                      dam = umax( 1, dam );
 
                       if(  ch->hit <= 0 )
 			{
-			  dam = UMIN( 10, dam );
+			  dam = umin( 10, dam );
 			}
 
                       if ( number_bits(3) == 0 )
@@ -2235,11 +2235,11 @@ void char_check( void )
                       else
                         {
                           dam = number_range( ch->max_hit / 50, ch->max_hit / 30 );
-                          dam = UMAX( 1, dam );
+                          dam = umax( 1, dam );
 
                           if( ch->hit <= 0 )
 			    {
-			      dam = UMIN( 10, dam );
+			      dam = umin( 10, dam );
 			    }
 
                           if ( number_bits(3) == 0 )
@@ -2476,7 +2476,7 @@ void halucinations( Character *ch )
     {
       const char *t;
 
-      switch( number_range( 1, UMIN(20, (ch->mental_state+5) / 5)) )
+      switch( number_range( 1, umin(20, (ch->mental_state+5) / 5)) )
         {
         default:
         case 1:

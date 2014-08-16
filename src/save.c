@@ -765,7 +765,7 @@ void fwrite_char( Character *ch, FILE *fp )
 	}
     }
 
-  track = URANGE( 2, ((ch->top_level+3) * MAX_KILLTRACK)/LEVEL_AVATAR, MAX_KILLTRACK );
+  track = urange( 2, ((ch->top_level+3) * MAX_KILLTRACK)/LEVEL_AVATAR, MAX_KILLTRACK );
 
   for ( sn = 0; sn < track; sn++ )
     {
@@ -1966,7 +1966,7 @@ void fread_char( Character *ch, FILE *fp, bool preload )
                 ch->pcdata->prompt      = STRALLOC( "" );
 
               ch->editor                = NULL;
-              killcnt = URANGE( 2, ((ch->top_level+3) * MAX_KILLTRACK)/LEVEL_AVATAR, MAX_KILLTRACK );
+              killcnt = urange( 2, ((ch->top_level+3) * MAX_KILLTRACK)/LEVEL_AVATAR, MAX_KILLTRACK );
               if ( killcnt < MAX_KILLTRACK )
                 ch->pcdata->killed[killcnt].vnum = 0;
               {
@@ -2002,12 +2002,12 @@ void fread_char( Character *ch, FILE *fp, bool preload )
               if ( lastplayed != 0 )
                 {
                   int hitgain = ( ( int ) ( current_time - lastplayed ) / 60 );
-                  ch->hit = URANGE( 1 , ch->hit + hitgain , ch->max_hit );
-                  ch->move = URANGE( 1 , ch->move + hitgain , ch->max_move );
+                  ch->hit = urange( 1 , ch->hit + hitgain , ch->max_hit );
+                  ch->move = urange( 1 , ch->move + hitgain , ch->max_move );
 
                   if ( is_jedi( ch ) )
 		    {
-		      ch->mana = URANGE( 0 , ch->mana + hitgain , ch->max_mana );
+		      ch->mana = urange( 0 , ch->mana + hitgain , ch->max_mana );
 		    }
 
                   better_mental_state( ch , hitgain );
@@ -2073,7 +2073,7 @@ void fread_char( Character *ch, FILE *fp, bool preload )
 
           KEY( "Trust", ch->trust, fread_number( fp ) );
           /* Let no character be trusted higher than one below maxlevel -- Narn */
-          ch->trust = UMIN( ch->trust, MAX_LEVEL - 1 );
+          ch->trust = umin( ch->trust, MAX_LEVEL - 1 );
 
           if ( !str_cmp( word, "Title" ) )
             {
@@ -2284,7 +2284,7 @@ void fread_obj( Character *ch, FILE *fp, short os_type )
 
                   if ( !obj->serial )
                     {
-                      cur_obj_serial = UMAX((cur_obj_serial + 1 ) & (BV30-1), 1);
+                      cur_obj_serial = umax((cur_obj_serial + 1 ) & (BV30-1), 1);
                       obj->serial = obj->pIndexData->serial = cur_obj_serial;
                     }
 

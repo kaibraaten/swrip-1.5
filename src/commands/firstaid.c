@@ -64,7 +64,7 @@ void do_first_aid( Character *ch, char *argument )
     }
 
   --medpac->value[0];
-  victim->hit += URANGE ( 0, heal , victim->max_hit - victim->hit );
+  victim->hit += urange ( 0, heal , victim->max_hit - victim->hit );
 
   learn_from_success( ch , gsn_first_aid );
 }

@@ -286,31 +286,31 @@ void do_sset( Character *ch, char *argument )
         }
       if ( !str_cmp( arg2, "minpos" ) )
         {
-          skill->minimum_position = URANGE( POS_DEAD, atoi( argument ), POS_DRAG );
+          skill->minimum_position = urange( POS_DEAD, atoi( argument ), POS_DRAG );
           send_to_char( "Ok.\r\n", ch );
           return;
         }
       if ( !str_cmp( arg2, "minlevel" ) )
         {
-          skill->min_level = URANGE( 1, atoi( argument ), MAX_ABILITY_LEVEL );
+          skill->min_level = urange( 1, atoi( argument ), MAX_ABILITY_LEVEL );
           send_to_char( "Ok.\r\n", ch );
           return;
         }
       if ( !str_cmp( arg2, "slot" ) )
         {
-          skill->slot = URANGE( 0, atoi( argument ), 30000 );
+          skill->slot = urange( 0, atoi( argument ), 30000 );
 	  send_to_char( "Ok.\r\n", ch );
           return;
         }
       if ( !str_cmp( arg2, "mana" ) )
         {
-          skill->min_mana = URANGE( 0, atoi( argument ), 2000 );
+          skill->min_mana = urange( 0, atoi( argument ), 2000 );
           send_to_char( "Ok.\r\n", ch );
           return;
         }
       if ( !str_cmp( arg2, "beats" ) )
         {
-          skill->beats = URANGE( 0, atoi( argument ), 120 );
+          skill->beats = urange( 0, atoi( argument ), 120 );
           send_to_char( "Ok.\r\n", ch );
           return;
         }
@@ -419,7 +419,7 @@ void do_sset( Character *ch, char *argument )
         }
       if ( !str_cmp( arg2, "level" ) )
         {
-          skill->min_level = URANGE( 1, atoi( argument ), MAX_ABILITY_LEVEL );
+          skill->min_level = urange( 1, atoi( argument ), MAX_ABILITY_LEVEL );
           send_to_char( "Ok.\r\n", ch );
           return;
         }

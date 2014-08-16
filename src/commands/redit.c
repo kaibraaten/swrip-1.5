@@ -140,7 +140,7 @@ void do_redit( Character *ch, char *argument )
           return;
         }
 
-      location->tunnel = URANGE( 0, atoi(argument), 1000 );
+      location->tunnel = urange( 0, atoi(argument), 1000 );
       send_to_char( "Done.\r\n", ch );
       return;
     }
@@ -714,7 +714,7 @@ void do_redit( Character *ch, char *argument )
 
       if ( xit )
         {
-          xit->distance = URANGE( 1, atoi(argument), 50 );
+          xit->distance = urange( 1, atoi(argument), 50 );
           send_to_char( "Done.\r\n", ch );
           return;
         }

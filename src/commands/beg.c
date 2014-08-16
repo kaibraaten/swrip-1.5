@@ -107,7 +107,7 @@ void do_beg( Character *ch, char *argument )
   act( AT_ACTION, "$n begs $N for money.\r\n",  ch, NULL, victim, TO_NOTVICT );
   act( AT_ACTION, "$n begs you for money!\r\n", ch, NULL, victim, TO_VICT    );
 
-  amount = UMIN( victim->gold , number_range(1, 10) );
+  amount = umin( victim->gold , number_range(1, 10) );
   if ( amount <= 0 )
     {
       do_look( victim , ch->name );
@@ -120,8 +120,8 @@ void do_beg( Character *ch, char *argument )
   victim->gold -= amount;
   ch_printf( ch, "%s gives you %d credits.\r\n", victim->short_descr , amount );
   learn_from_success( ch, gsn_beg );
-  xp = UMIN( amount*10 , ( exp_level( GetAbilityLevel( ch, SMUGGLING_ABILITY ) + 1) - exp_level( GetAbilityLevel( ch, SMUGGLING_ABILITY ) )  )  );
-  xp = UMIN( xp , xp_compute( ch, victim ) );
+  xp = umin( amount*10 , ( exp_level( GetAbilityLevel( ch, SMUGGLING_ABILITY ) + 1) - exp_level( GetAbilityLevel( ch, SMUGGLING_ABILITY ) )  )  );
+  xp = umin( xp , xp_compute( ch, victim ) );
   gain_exp( ch, SMUGGLING_ABILITY, xp );
   ch_printf( ch, "&WYou gain %ld smuggling experience points!\r\n", xp );
   act( AT_ACTION, "$N gives $n some money.\r\n",  ch, NULL, victim, TO_NOTVICT );

@@ -67,7 +67,7 @@ ch_ret spell_sleep( int sn, int level, Character *ch, void *vo )
     {
       sprintf( log_buf, "%s has cast sleep on %s.", ch->name, victim->name );
       log_string_plus( log_buf, LOG_NORMAL, ch->top_level );
-      to_channel( log_buf, CHANNEL_MONITOR, "Monitor", UMAX( LEVEL_IMMORTAL, ch->top_level ) );
+      to_channel( log_buf, CHANNEL_MONITOR, "Monitor", umax( LEVEL_IMMORTAL, ch->top_level ) );
     }
 
   if ( is_awake(victim) && victim->race != RACE_DROID )

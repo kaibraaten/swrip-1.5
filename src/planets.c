@@ -341,7 +341,7 @@ long get_taxes( const PLANET_DATA *planet )
 {
   long gain = planet->base_value;
   gain += planet->base_value*planet->pop_support/100;
-  gain += UMAX(0, planet->pop_support/10 * planet->population);
+  gain += umax(0, planet->pop_support/10 * planet->population);
 
   return gain;
 }

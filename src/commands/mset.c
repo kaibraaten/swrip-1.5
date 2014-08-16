@@ -528,7 +528,7 @@ void do_mset( Character *ch, char *argument )
     {
       if ( !can_mmodify( ch, victim ) )
         return;
-      victim->hitroll = URANGE(0, value, 85);
+      victim->hitroll = urange(0, value, 85);
       if ( IsNpc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->hitroll = victim->hitroll;
       return;
@@ -538,7 +538,7 @@ void do_mset( Character *ch, char *argument )
     {
       if ( !can_mmodify( ch, victim ) )
         return;
-      victim->damroll = URANGE(0, value, 65);
+      victim->damroll = urange(0, value, 65);
       if ( IsNpc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->damroll = victim->damroll;
       return;

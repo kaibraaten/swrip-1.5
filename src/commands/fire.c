@@ -108,7 +108,7 @@ void do_fire(Character *ch, char *argument )
       the_chance -= origthe_chance;
       the_chance /= 2;
       the_chance += origthe_chance;
-      the_chance = URANGE( 1 , the_chance , 99 );
+      the_chance = urange( 1 , the_chance , 99 );
 
       act( AT_PLAIN, "$n presses the fire button.", ch,
            NULL, argument , TO_ROOM );
@@ -213,7 +213,7 @@ void do_fire(Character *ch, char *argument )
       the_chance -= origthe_chance;
       the_chance /= 2;
       the_chance += origthe_chance;
-      the_chance = URANGE( 1 , the_chance , 99 );
+      the_chance = urange( 1 , the_chance , 99 );
 
       act( AT_PLAIN, "$n presses the fire button.", ch,
            NULL, argument , TO_ROOM );
@@ -320,7 +320,7 @@ void do_fire(Character *ch, char *argument )
 
       the_chance += 30;
 
-      the_chance = URANGE( 20 , the_chance , 99 );
+      the_chance = urange( 20 , the_chance , 99 );
 
       act( AT_PLAIN, "$n presses the fire button.", ch,
            NULL, argument , TO_ROOM );
@@ -417,7 +417,7 @@ void do_fire(Character *ch, char *argument )
 
       the_chance += 30;
 
-      the_chance = URANGE( 20 , the_chance , 99 );
+      the_chance = urange( 20 , the_chance , 99 );
 
       act( AT_PLAIN, "$n presses the fire button.", ch,
            NULL, argument , TO_ROOM );
@@ -515,7 +515,7 @@ void do_fire(Character *ch, char *argument )
 
       the_chance += 30;
 
-      the_chance = URANGE( 20 , the_chance , 99 );
+      the_chance = urange( 20 , the_chance , 99 );
 
       act( AT_PLAIN, "$n presses the fire button.", ch,
            NULL, argument , TO_ROOM );
@@ -615,7 +615,7 @@ void do_fire(Character *ch, char *argument )
 	  the_chance -= origthe_chance;
 	  the_chance /= 2;
 	  the_chance += origthe_chance;
-	  the_chance = URANGE( 1 , the_chance , 99 );
+	  the_chance = urange( 1 , the_chance , 99 );
 
 	  act( AT_PLAIN, "$n presses the fire button.", ch,
 	       NULL, argument , TO_ROOM );

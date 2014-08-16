@@ -32,7 +32,7 @@ ch_ret spell_affectchar( int sn, int level, Character *ch, void *vo )
         case AFF_POISON:        af.type = gsn_poison;
 	  send_to_char("You feel the hatred grow within you!\r\n", ch);
           ch->alignment = ch->alignment - 100;
-          ch->alignment = URANGE( -1000, ch->alignment, 1000 );
+          ch->alignment = urange( -1000, ch->alignment, 1000 );
           sith_penalty( ch );
           aff_chance = ris_save( victim, level, RIS_POISON );
 
@@ -54,7 +54,7 @@ ch_ret spell_affectchar( int sn, int level, Character *ch, void *vo )
                 return retcode;
               continue;
             }
-          victim->mental_state = URANGE( 30, victim->mental_state + 2, 100 );
+          victim->mental_state = urange( 30, victim->mental_state + 2, 100 );
           break;
         case AFF_BLIND: af.type = gsn_blindness;        break;
         case AFF_INVISIBLE:     af.type = gsn_invis;            break;
@@ -99,14 +99,14 @@ ch_ret spell_affectchar( int sn, int level, Character *ch, void *vo )
                 {
                   send_to_char("The noble Jedi use their powers to help others!\r\n", ch);
                   ch->alignment = ch->alignment +20 ;
-                  ch->alignment = URANGE( -1000, ch->alignment, 1000 );
+                  ch->alignment = urange( -1000, ch->alignment, 1000 );
                   jedi_bonus(ch);
                 }
               if  ( af.modifier > 0 && victim->hit >= victim->max_hit )
                 {
                   return rSPELL_FAILED;
                 }
-              victim->hit = URANGE( 0, victim->hit + af.modifier, victim->max_hit );
+              victim->hit = urange( 0, victim->hit + af.modifier, victim->max_hit );
               update_pos( victim );
               break;
             case APPLY_MANA:
@@ -118,10 +118,10 @@ ch_ret spell_affectchar( int sn, int level, Character *ch, void *vo )
                 {
                   send_to_char("The noble Jedi use their powers to help others!\r\n", ch);
                   ch->alignment = ch->alignment +25 ;
-                  ch->alignment = URANGE( -1000, ch->alignment, 1000 );
+                  ch->alignment = urange( -1000, ch->alignment, 1000 );
 		  jedi_bonus(ch);
                 }
-              victim->mana = URANGE( 0, victim->mana + af.modifier, victim->max_mana );
+              victim->mana = urange( 0, victim->mana + af.modifier, victim->max_mana );
               update_pos( victim );
               break;
             case APPLY_MOVE:
@@ -129,7 +129,7 @@ ch_ret spell_affectchar( int sn, int level, Character *ch, void *vo )
                 {
                   return rSPELL_FAILED;
                 }
-              victim->move = URANGE( 0, victim->move + af.modifier, victim->max_move );
+              victim->move = urange( 0, victim->move + af.modifier, victim->max_move );
               update_pos( victim );
               break;
             default:

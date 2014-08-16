@@ -67,7 +67,7 @@ void do_elite_guard ( Character *ch , char *argument )
 
   credits = GetAbilityLevel(ch, LEADERSHIP_ABILITY) * 200;
   ch_printf( ch, "It cost you %d credits.\r\n", credits);
-  ch->gold -= UMIN( credits , ch->gold );
+  ch->gold -= umin( credits , ch->gold );
 
   learn_from_success( ch, gsn_eliteguard );
 

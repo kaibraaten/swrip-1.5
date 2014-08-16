@@ -159,7 +159,7 @@ void do_cast( Character *ch, char *argument )
         break;
 
       /* multi-participant spells                       -Thoric */
-      add_timer( ch, TIMER_DO_FUN, UMIN(skill->beats / 10, 3), do_cast, SUB_PAUSE );
+      add_timer( ch, TIMER_DO_FUN, umin(skill->beats / 10, 3), do_cast, SUB_PAUSE );
       act( AT_MAGIC, "You begin to feel the force in yourself and those around you...",
 	   ch, NULL, NULL, TO_CHAR );
       act( AT_MAGIC, "$n reaches out with the force to those around...", ch, NULL, NULL, TO_ROOM );
@@ -365,7 +365,7 @@ void do_cast( Character *ch, char *argument )
       int force_exp;
 
       force_exp = skill->min_level*skill->min_level*10;
-      force_exp = URANGE( 0 , force_exp, ( exp_level(GetAbilityLevel( ch, FORCE_ABILITY ) + 1 ) - exp_level(GetAbilityLevel(ch, FORCE_ABILITY ) ) )/35 );
+      force_exp = urange( 0 , force_exp, ( exp_level(GetAbilityLevel( ch, FORCE_ABILITY ) + 1 ) - exp_level(GetAbilityLevel(ch, FORCE_ABILITY ) ) )/35 );
       if( !ch->fighting  )
         ch_printf( ch, "You gain %d force experience.\r\n" , force_exp );
       gain_exp(ch, FORCE_ABILITY, force_exp );

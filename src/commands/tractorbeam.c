@@ -186,7 +186,7 @@ void do_tractorbeam(Character *ch, char *argument )
   the_chance += ship->manuever - target->manuever;
   the_chance -= ship_distance_to_ship( ship, target ) /(10*(target->sclass+1));
   the_chance /= 2;
-  the_chance = URANGE( 1 , the_chance , 99 );
+  the_chance = urange( 1 , the_chance , 99 );
 
   if ( number_percent( ) >= the_chance )
     {

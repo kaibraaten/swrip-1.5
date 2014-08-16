@@ -1220,7 +1220,7 @@ void load_objects( Area *tarea, FILE *fp )
       pObjIndex->value[4]               = x5;
       pObjIndex->value[5]               = x6;
       pObjIndex->weight         = fread_number( fp );
-      pObjIndex->weight = UMAX( 1, pObjIndex->weight );
+      pObjIndex->weight = umax( 1, pObjIndex->weight );
       pObjIndex->cost                   = fread_number( fp );
       pObjIndex->rent                   = fread_number( fp ); /* unused */
 
@@ -1726,8 +1726,8 @@ void load_shops( Area *tarea, FILE *fp )
 
       pShop->profit_buy = fread_number( fp );
       pShop->profit_sell        = fread_number( fp );
-      pShop->profit_buy = URANGE( pShop->profit_sell+5, pShop->profit_buy, 1000 );
-      pShop->profit_sell        = URANGE( 0, pShop->profit_sell, pShop->profit_buy-5 );
+      pShop->profit_buy = urange( pShop->profit_sell+5, pShop->profit_buy, 1000 );
+      pShop->profit_sell        = urange( 0, pShop->profit_sell, pShop->profit_buy-5 );
       pShop->business_hours.open  = fread_number( fp );
       pShop->business_hours.close = fread_number( fp );
       fread_to_eol( fp );
@@ -2268,7 +2268,7 @@ OBJ_DATA *create_object( OBJ_INDEX_DATA *pObjIndex, int level )
   obj->level            = level;
   obj->wear_loc = -1;
   obj->count            = 1;
-  cur_obj_serial = UMAX((cur_obj_serial + 1 ) & (BV30-1), 1);
+  cur_obj_serial = umax((cur_obj_serial + 1 ) & (BV30-1), 1);
   obj->serial = obj->pIndexData->serial = cur_obj_serial;
 
   obj->armed_by       = STRALLOC( "" );

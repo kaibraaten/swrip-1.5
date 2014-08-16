@@ -63,7 +63,7 @@ void do_study( Character *ch, char *argument ) /* study by Absalom */
       else
         act( AT_MAGIC, "You have absorbed everything the book teachs you on the ability to $t!", ch ,skill_table[sn]->name, NULL, TO_CHAR);
 
-      ch->pcdata->learned[sn] += URANGE( 0, 20-ch->pcdata->learned[sn], 5);
+      ch->pcdata->learned[sn] += urange( 0, 20-ch->pcdata->learned[sn], 5);
       ch->pcdata->learned[sn] += 5;
       learn_from_success( ch, gsn_study );
       return;

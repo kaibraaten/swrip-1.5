@@ -198,7 +198,7 @@ void close_area( Area *pArea )
       if ( IsNpc(ech) )
         {
           /* if mob is in area, or part of area. */
-          if ( URANGE(pArea->low_m_vnum, ech->pIndexData->vnum,
+          if ( urange(pArea->low_m_vnum, ech->pIndexData->vnum,
                       pArea->hi_m_vnum) == ech->pIndexData->vnum ||
                (ech->in_room && ech->in_room->area == pArea) )
             extract_char( ech, true );
@@ -211,7 +211,7 @@ void close_area( Area *pArea )
     {
       eobj_next = eobj->next;
       /* if obj is in area, or part of area. */
-      if ( URANGE(pArea->low_o_vnum, eobj->pIndexData->vnum,
+      if ( urange(pArea->low_o_vnum, eobj->pIndexData->vnum,
                   pArea->hi_o_vnum) == eobj->pIndexData->vnum ||
            (eobj->in_room && eobj->in_room->area == pArea) )
         extract_obj( eobj );

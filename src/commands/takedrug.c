@@ -70,14 +70,14 @@ void do_takedrug( Character *ch, char *argument )
 
       gain_condition( ch, COND_THIRST, 1 );
 
-      ch->pcdata->drug_level[drug] = UMIN(ch->pcdata->drug_level[drug]+obj->value[1] , 255);
+      ch->pcdata->drug_level[drug] = umin(ch->pcdata->drug_level[drug]+obj->value[1] , 255);
 
       if ( ch->pcdata->drug_level[drug] >=255
 	   || ch->pcdata->drug_level[drug] > ( ch->pcdata->addiction[drug]+100 ) )
         {
           act( AT_POISON, "$n sputters and gags.", ch, NULL, NULL, TO_ROOM );
           act( AT_POISON, "You feel sick. You may have taken too much.", ch, NULL, NULL, TO_CHAR );
-          ch->mental_state = URANGE( 20, ch->mental_state + 5, 100 );
+          ch->mental_state = urange( 20, ch->mental_state + 5, 100 );
           af.type      = gsn_poison;
           af.location  = APPLY_INT;
           af.modifier  = -5;
@@ -98,7 +98,7 @@ void do_takedrug( Character *ch, char *argument )
               af.type      = sn;
               af.location  = APPLY_AC;
               af.modifier  = -10;
-              af.duration  = URANGE( 1, ch->pcdata->drug_level[drug] - ch->pcdata->addiction[drug] ,obj->value[1] );
+              af.duration  = urange( 1, ch->pcdata->drug_level[drug] - ch->pcdata->addiction[drug] ,obj->value[1] );
               af.bitvector = AFF_TRUESIGHT;
               affect_to_char( ch, &af );
             }
@@ -112,7 +112,7 @@ void do_takedrug( Character *ch, char *argument )
               af.type      = sn;
               af.location  = APPLY_NONE;
               af.modifier  = 0;
-              af.duration  = URANGE( 1, ch->pcdata->drug_level[drug] - ch->pcdata->addiction[drug] ,obj->value[1] );
+              af.duration  = urange( 1, ch->pcdata->drug_level[drug] - ch->pcdata->addiction[drug] ,obj->value[1] );
               af.bitvector = AFF_DETECT_HIDDEN;
               affect_to_char( ch, &af );
             }
@@ -126,7 +126,7 @@ void do_takedrug( Character *ch, char *argument )
               af.type      = sn;
               af.location  = APPLY_NONE;
               af.modifier  = 0;
-              af.duration  = URANGE( 1, ch->pcdata->drug_level[drug] - ch->pcdata->addiction[drug] ,obj->value[1] );
+              af.duration  = urange( 1, ch->pcdata->drug_level[drug] - ch->pcdata->addiction[drug] ,obj->value[1] );
               af.bitvector = AFF_SANCTUARY;
               affect_to_char( ch, &af );
             }
@@ -136,21 +136,21 @@ void do_takedrug( Character *ch, char *argument )
           af.type      = -1;
           af.location  = APPLY_CON;
           af.modifier  = 4;
-          af.duration  = URANGE( 1, 2*(ch->pcdata->drug_level[drug] - ch->pcdata->addiction[drug]) ,2*obj->value[1] );
+          af.duration  = urange( 1, 2*(ch->pcdata->drug_level[drug] - ch->pcdata->addiction[drug]) ,2*obj->value[1] );
           af.bitvector = AFF_NONE;
           affect_to_char( ch, &af );
 
           af.type      = -1;
           af.location  = APPLY_IMMUNE;
           af.modifier  = RIS_POISON;
-          af.duration  = URANGE( 1, 2*(ch->pcdata->drug_level[drug] - ch->pcdata->addiction[drug]) ,2*obj->value[1] );
+          af.duration  = urange( 1, 2*(ch->pcdata->drug_level[drug] - ch->pcdata->addiction[drug]) ,2*obj->value[1] );
           af.bitvector = AFF_NONE;
           affect_to_char( ch, &af );
 
           af.type      = -1;
           af.location  = APPLY_HIT;
           af.modifier  = 10;
-          af.duration  = URANGE( 1, 2*(ch->pcdata->drug_level[drug] - ch->pcdata->addiction[drug]) ,2*obj->value[1] );
+          af.duration  = urange( 1, 2*(ch->pcdata->drug_level[drug] - ch->pcdata->addiction[drug]) ,2*obj->value[1] );
           af.bitvector = AFF_NONE;
           affect_to_char( ch, &af );
           break;
@@ -159,14 +159,14 @@ void do_takedrug( Character *ch, char *argument )
           af.type      = -1;
           af.location  = APPLY_PARRY;
           af.modifier  = 50;
-          af.duration  = URANGE( 1, 2*(ch->pcdata->drug_level[drug] - ch->pcdata->addiction[drug]) ,2*obj->value[1] );
+          af.duration  = urange( 1, 2*(ch->pcdata->drug_level[drug] - ch->pcdata->addiction[drug]) ,2*obj->value[1] );
           af.bitvector = AFF_NONE;
 	  affect_to_char( ch, &af );
 
           af.type      = -1;
           af.location  = APPLY_DEX;
           af.modifier  = 2;
-          af.duration  = URANGE( 1, 2*(ch->pcdata->drug_level[drug] - ch->pcdata->addiction[drug]) ,2*obj->value[1] );
+          af.duration  = urange( 1, 2*(ch->pcdata->drug_level[drug] - ch->pcdata->addiction[drug]) ,2*obj->value[1] );
           af.bitvector = AFF_NONE;
           affect_to_char( ch, &af );
 

@@ -40,7 +40,7 @@ static float cost_equation( const OBJ_DATA *obj )
 {
   float count = obj->pIndexData->count;
 
-  count = URANGE( 50, count, 500 );
+  count = urange( 50, count, 500 );
 
   return (100/(count));
 }
@@ -214,12 +214,12 @@ int get_cost( const Character *ch, const Character *keeper, const OBJ_DATA *obj,
 
   if ( fBuy )
     {
-      cost = (int) (obj->cost * (80 + UMIN(ch->top_level, LEVEL_AVATAR))) / 100;
+      cost = (int) (obj->cost * (80 + umin(ch->top_level, LEVEL_AVATAR))) / 100;
 
       profitmod = 13 - GetCurrentCharisma(ch) + (richcustomer ? 15 : 0)
-        + ((URANGE(5,ch->top_level,LEVEL_AVATAR)-20)/2);
+        + ((urange(5,ch->top_level,LEVEL_AVATAR)-20)/2);
       cost = (int) (obj->cost
-                    * UMAX( (pShop->profit_sell+1), pShop->profit_buy+profitmod ) )
+                    * umax( (pShop->profit_sell+1), pShop->profit_buy+profitmod ) )
         / 100;
     }
   else
@@ -235,7 +235,7 @@ int get_cost( const Character *ch, const Character *keeper, const OBJ_DATA *obj,
           if ( obj->item_type == pShop->buy_type[itype] )
             {
               cost = (int) (obj->cost
-                            * UMIN( (pShop->profit_buy-1),
+                            * umin( (pShop->profit_buy-1),
                                     pShop->profit_sell+profitmod) ) / 100;
               break;
             }
@@ -249,7 +249,7 @@ int get_cost( const Character *ch, const Character *keeper, const OBJ_DATA *obj,
             }
         }
 
-      cost = UMIN( cost , 2500 );
+      cost = umin( cost , 2500 );
 
     }
 

@@ -67,18 +67,18 @@ void do_clone( Character *ch, char *argument )
   if(ch->stats.perm_frc > 0)
     {
       change = number_range(-2, ch->stats.perm_frc);
-      change = URANGE( -2 , change , 0 );
+      change = urange( -2 , change , 0 );
       change2 = number_range( -1000, ch->stats.perm_frc );
-      change2 = URANGE(0, change2, 1);
-      ch->stats.perm_frc = URANGE( low_frc, ch->stats.perm_frc + change + change2, 20);
+      change2 = urange(0, change2, 1);
+      ch->stats.perm_frc = urange( low_frc, ch->stats.perm_frc + change + change2, 20);
     }
   else
     {
       /* a character with no force has a 1/100 chance of gaining it */
 
       change = number_range(-500, 2);
-      change = URANGE( 0, change, 2);
-      ch->stats.perm_frc = URANGE( low_frc, ch->stats.perm_frc + change, 20);
+      change = urange( 0, change, 2);
+      ch->stats.perm_frc = urange( low_frc, ch->stats.perm_frc + change, 20);
 
     }
 

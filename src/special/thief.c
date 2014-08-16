@@ -30,7 +30,7 @@ bool spec_thief( Character *ch )
       else
         {
           maxgold = 1000;
-	  gold = victim->gold * number_range( 1, URANGE(2, ch->top_level/4, 10) ) / 100;
+	  gold = victim->gold * number_range( 1, urange(2, ch->top_level/4, 10) ) / 100;
 	  ch->gold     += 9 * gold / 10;
 	  victim->gold -= gold;
 	  if ( ch->gold > maxgold )

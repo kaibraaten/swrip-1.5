@@ -40,14 +40,14 @@ static bool go_read_names( Character *ch, OBJ_DATA *po, GO_STRUCT *r, bool np_sw
 
   GO_STRUCT        *a;
   GO_STRUCT       **p;
-  a = (GO_STRUCT  *) calloc( UMIN(dis_num, MAX_DISPLAY_LINES), sizeof *a);
+  a = (GO_STRUCT  *) calloc( umin(dis_num, MAX_DISPLAY_LINES), sizeof *a);
   if (!a)
   {
   pager_printf(ch, "Sorry. There is currently insufficient memory avail"
   " to service your request. Try later or speak to a coder.\r\n");
   return false;
   }
-  p = (GO_STRUCT **) calloc( UMIN(dis_num, MAX_DISPLAY_LINES), sizeof *p);
+  p = (GO_STRUCT **) calloc( umin(dis_num, MAX_DISPLAY_LINES), sizeof *p);
   if (!p)
   {
   pager_printf(ch, "Sorry. There is currently insufficient memory avail"
@@ -370,7 +370,7 @@ static bool go_read( Character *ch, int dis_num, int op_num, int sor_ind,
   ind = ( sor_ind<=OSAV4 ) ? sor_ind : sor_ind - OSAV4 - 1;
 
   if ( tot_match > 1 && dis_num > 0 )
-    go_sort( ch, p, ind, 0, UMIN((tot_match - 1), MAX_DISPLAY_LINES - 1),
+    go_sort( ch, p, ind, 0, umin((tot_match - 1), MAX_DISPLAY_LINES - 1),
              ( sor_ind <= OSAV4 ), sor_dir );
 
   go_display( ch, dis_num, tot_match, d2_sw, p );
@@ -411,7 +411,7 @@ static void go_sort( const Character *ch, GO_STRUCT **p,
   static char tests[ MAX_STRING_LENGTH ];
 
   if ( left < 0 || left >= right ) return;
-  right = UMIN(right, MAX_DISPLAY_LINES - 1);
+  right = umin(right, MAX_DISPLAY_LINES - 1);
 
   if ( n_s )
     testn = p[left]->n[ind];
@@ -565,7 +565,7 @@ static void go_display( Character *ch, int dis_num, int tot_match, bool d2_sw,
                      "Character", "Cou", "OVnum", "Lv", "OName", "Ty", "We",
                      "Av", "Hr", "Dr", "Hp", "Mp", "S0", "S1", "S2", "S3", "S4");
     }
-  lim = UMIN(tot_match, dis_num);
+  lim = umin(tot_match, dis_num);
 
   for ( cou=0; cou<lim; cou++)
     {

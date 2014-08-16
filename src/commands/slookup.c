@@ -107,7 +107,7 @@ void do_slookup( Character *ch, char *argument )
 
         ch_printf( ch, "Type: %s  Target: %s  Minpos: %d  Mana: %d  Beats: %d\r\n",
                    skill_tname[skill->type],
-                   get_spelltarget_name(URANGE(TAR_IGNORE, skill->target, TAR_OBJ_INV)),
+                   get_spelltarget_name(urange(TAR_IGNORE, skill->target, TAR_OBJ_INV)),
                    skill->minimum_position,
                    skill->min_mana,
                    skill->beats );

@@ -381,7 +381,7 @@ void accept_new( socket_t ctrl )
 
   for ( d = first_descriptor; d; d = d->next )
     {
-      maxdesc = UMAX( maxdesc, d->descriptor );
+      maxdesc = umax( maxdesc, d->descriptor );
       FD_SET( d->descriptor, &in_set  );
       FD_SET( d->descriptor, &out_set );
       FD_SET( d->descriptor, &exc_set );
@@ -906,7 +906,7 @@ void close_socket( Descriptor *dclose, bool force )
   if ( dclose->character )
     {
       sprintf( log_buf, "Closing link to %s.", ch->name );
-      log_string_plus( log_buf, LOG_COMM, UMAX( sysdata.log_level, ch->top_level ) );
+      log_string_plus( log_buf, LOG_COMM, umax( sysdata.log_level, ch->top_level ) );
       /*
         if ( ch->top_level < LEVEL_CREATOR )
         to_channel( log_buf, CHANNEL_MONITOR, "Monitor", ch->top_level );
@@ -1284,7 +1284,7 @@ bool write_to_descriptor( socket_t desc, char *txt, int length )
 
   for ( iStart = 0; iStart < length; iStart += nWrite )
     {
-      nBlock = UMIN( length - iStart, 4096 );
+      nBlock = umin( length - iStart, 4096 );
 
 #if defined(AMIGA) || defined(__MORPHOS__)
       if( ( nWrite = send( d->descriptor, (char*) txt + iStart, nBlock, 0 ) ) == SOCKET_ERROR )
@@ -1387,7 +1387,7 @@ bool check_reconnect( Descriptor *d, char *name, bool fConn )
               send_to_char( "Reconnecting.\r\n", ch );
               act( AT_ACTION, "$n has reconnected.", ch, NULL, NULL, TO_ROOM );
               sprintf( log_buf, "%s@%s reconnected.", ch->name, d->remote.hostname );
-              log_string_plus( log_buf, LOG_COMM, UMAX( sysdata.log_level, ch->top_level ) );
+              log_string_plus( log_buf, LOG_COMM, umax( sysdata.log_level, ch->top_level ) );
               d->connection_state = CON_PLAYING;
             }
           return true;
@@ -1477,7 +1477,7 @@ bool check_playing( Descriptor *d, char *name, bool kick )
                ch, NULL, NULL, TO_ROOM );
           sprintf( log_buf, "%s@%s reconnected, kicking off old link.",
                    ch->name, d->remote.hostname );
-          log_string_plus( log_buf, LOG_COMM, UMAX( sysdata.log_level, ch->top_level ) );
+          log_string_plus( log_buf, LOG_COMM, umax( sysdata.log_level, ch->top_level ) );
 
           d->connection_state = cstate;
           return true;
@@ -1782,7 +1782,7 @@ char *act_string(const char *format, Character *to, Character *ch,
                   i = "it";
                 }
               else
-                i = he_she [URANGE(0,  ch->sex, 2)];
+                i = he_she [urange(0,  ch->sex, 2)];
               break;
             case 'E': if (vch->sex > 2 || vch->sex < 0)
                 {
@@ -1791,7 +1791,7 @@ char *act_string(const char *format, Character *to, Character *ch,
                   i = "it";
                 }
               else
-                i = he_she [URANGE(0, vch->sex, 2)];
+                i = he_she [urange(0, vch->sex, 2)];
               break;
             case 'm': if (ch->sex > 2 || ch->sex < 0)
                 {
@@ -1800,7 +1800,7 @@ char *act_string(const char *format, Character *to, Character *ch,
                   i = "it";
                 }
               else
-                i = him_her[URANGE(0,  ch->sex, 2)];
+                i = him_her[urange(0,  ch->sex, 2)];
               break;
             case 'M': if (vch->sex > 2 || vch->sex < 0)
                 {
@@ -1809,7 +1809,7 @@ char *act_string(const char *format, Character *to, Character *ch,
                   i = "it";
                 }
               else
-                i = him_her[URANGE(0, vch->sex, 2)];
+                i = him_her[urange(0, vch->sex, 2)];
               break;
             case 's': if (ch->sex > 2 || ch->sex < 0)
                 {
@@ -1818,7 +1818,7 @@ char *act_string(const char *format, Character *to, Character *ch,
                   i = "its";
                 }
               else
-                i = his_her[URANGE(0,  ch->sex, 2)];
+                i = his_her[urange(0,  ch->sex, 2)];
               break;
             case 'S': if (vch->sex > 2 || vch->sex < 0)
                 {
@@ -1827,11 +1827,11 @@ char *act_string(const char *format, Character *to, Character *ch,
                   i = "its";
                 }
               else
-                i = his_her[URANGE(0, vch->sex, 2)];
+                i = his_her[urange(0, vch->sex, 2)];
               break;
             case 'q': i = (to == ch) ? "" : "s";                                break;
             case 'Q': i = (to == ch) ? "your" :
-              his_her[URANGE(0,  ch->sex, 2)];                  break;
+              his_her[urange(0,  ch->sex, 2)];                  break;
             case 'p': i = (!to || can_see_obj(to, obj1)
                            ? obj_short(obj1) : "something");                    break;
             case 'P': i = (!to || can_see_obj(to, obj2)
@@ -2287,7 +2287,7 @@ bool pager_output( Descriptor *d )
     return true;
 
   ch = d->original ? d->original : d->character;
-  pclines = UMAX(ch->pcdata->pagerlen, 5) - 1;
+  pclines = umax(ch->pcdata->pagerlen, 5) - 1;
 
   switch(LOWER(d->pager.pagecmd))
     {

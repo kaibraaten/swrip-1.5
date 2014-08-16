@@ -422,10 +422,10 @@ static void landship( SHIP_DATA *ship, const char *arg )
 
       ch = ship->ch;
       xp =  (exp_level( GetAbilityLevel(ch, PILOTING_ABILITY ) + 1) - exp_level( GetAbilityLevel(ch, PILOTING_ABILITY)));
-      xp = UMIN( get_ship_value( ship ) , xp );
+      xp = umin( get_ship_value( ship ) , xp );
       gain_exp( ch, PILOTING_ABILITY, xp );
       ch_printf( ch, "&WYou gain %ld points of flight experience!\r\n",
-		 UMIN( get_ship_value( ship ) , xp ) );
+		 umin( get_ship_value( ship ) , xp ) );
       ship->ch = NULL;
     }
 
@@ -1304,7 +1304,7 @@ void recharge_ships( void )
                               the_chance -= origthe_chance;
                               the_chance /= 2;
                               the_chance += origthe_chance;
-                              the_chance = URANGE( 1 , the_chance , 99 );
+                              the_chance = urange( 1 , the_chance , 99 );
 
                               if ( number_percent( ) > the_chance )
                                 {
@@ -1516,15 +1516,15 @@ void update_ships( void )
 	  ship->docking = SHIP_DOCK_2;
 	}
 
-      ship->shield = UMAX( 0 , ship->shield-1-ship->sclass);
+      ship->shield = umax( 0 , ship->shield-1-ship->sclass);
 
       if (ship->autorecharge
 	  && ship->maxshield > ship->shield
 	  && ship->energy > 100)
         {
-          recharge = UMIN( ship->maxshield-ship->shield, 10 + ship->sclass*10 );
-          recharge = UMIN( recharge , ship->energy/2 -100 );
-	  recharge = UMAX( 1, recharge );
+          recharge = umin( ship->maxshield-ship->shield, 10 + ship->sclass*10 );
+          recharge = umin( recharge , ship->energy/2 -100 );
+	  recharge = umax( 1, recharge );
           ship->shield += recharge;
           ship->energy -= recharge;
         }
@@ -1534,7 +1534,7 @@ void update_ships( void )
            && ( ( ship->maxshield - ship->shield ) >= ( 25 + ((int)ship->sclass) * 25 ) ) )
         {
           recharge = 25+ship->sclass*25;
-          recharge = UMIN(  ship->maxshield-ship->shield , recharge );
+          recharge = umin(  ship->maxshield-ship->shield , recharge );
           ship->shield += recharge;
           ship->energy -= ( recharge*2 + recharge * ship->sclass );
         }
@@ -1661,7 +1661,7 @@ void update_ships( void )
           echo_to_cockpit( AT_RED , ship,  "Warning: Ship fuel low." );
 	}
 
-      ship->energy = URANGE( 0 , ship->energy, ship->maxenergy );
+      ship->energy = urange( 0 , ship->energy, ship->maxenergy );
     }
 
   for ( ship = first_ship; ship; ship = ship->next )
@@ -1797,7 +1797,7 @@ void update_ships( void )
                           the_chance += target->sclass*target->sclass*25;
                           the_chance -= ( ship_distance_to_ship( ship, target ) * 3 ) / 100;
                           the_chance += 30;
-                          the_chance = URANGE( 10 , the_chance , 90 );
+                          the_chance = urange( 10 , the_chance , 90 );
 
                           if( ( target->sclass == SHIP_PLATFORM
 				|| ( target->sclass == CAPITAL_SHIP
@@ -3430,12 +3430,12 @@ void damage_ship_ch( SHIP_DATA *ship , int min , int max , Character *ch )
     }
 
   xp = ( exp_level( GetAbilityLevel(ch, PILOTING_ABILITY ) + 1) - exp_level( GetAbilityLevel( ch, PILOTING_ABILITY ) ) ) / 25;
-  xp = UMIN( get_ship_value( ship ) / 100, xp ) ;
+  xp = umin( get_ship_value( ship ) / 100, xp ) ;
   gain_exp( ch, PILOTING_ABILITY, xp );
 
   if ( ship->shield > 0 )
     {
-      shield_dmg = UMIN( ship->shield, dmg );
+      shield_dmg = umin( ship->shield, dmg );
       dmg -= shield_dmg;
       ship->shield -= shield_dmg;
 
@@ -3498,7 +3498,7 @@ void damage_ship_ch( SHIP_DATA *ship , int min , int max , Character *ch )
 		  ship->name, ship->personalname, ch->name );
 
       xp =  ( exp_level( GetAbilityLevel( ch, PILOTING_ABILITY ) + 1) - exp_level( GetAbilityLevel( ch, PILOTING_ABILITY ) ) );
-      xp = UMIN( get_ship_value( ship ) , xp );
+      xp = umin( get_ship_value( ship ) , xp );
       gain_exp( ch, PILOTING_ABILITY, xp);
       ch_printf( ch, "&WYou gain %ld piloting experience!\r\n", xp );
       return;
@@ -3534,7 +3534,7 @@ void damage_ship( SHIP_DATA *ship , SHIP_DATA *assaulter, int min , int max )
 
   if ( ship->shield > 0 )
     {
-      shield_dmg = UMIN( ship->shield , dmg );
+      shield_dmg = umin( ship->shield , dmg );
       dmg -= shield_dmg;
       ship->shield -= shield_dmg;
 
@@ -3546,7 +3546,7 @@ void damage_ship( SHIP_DATA *ship , SHIP_DATA *assaulter, int min , int max )
 
   if ( ship->shield > 0 )
     {
-      shield_dmg = UMIN( ship->shield , dmg );
+      shield_dmg = umin( ship->shield , dmg );
       dmg -= shield_dmg;
       ship->shield -= shield_dmg;
 

@@ -75,8 +75,8 @@ void do_autorecharge(Character *ch, char *argument )
 
   if (ship->autorecharge)
     {
-      recharge  = URANGE( 1, ship->maxshield-ship->shield, 25+ship->sclass*25 );
-      recharge  = UMIN( recharge, ship->energy*5 + 100 );
+      recharge  = urange( 1, ship->maxshield-ship->shield, 25+ship->sclass*25 );
+      recharge  = umin( recharge, ship->energy*5 + 100 );
       ship->shield += recharge;
       ship->energy -= ( recharge*2 + recharge * ship->sclass );
     }

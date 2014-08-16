@@ -66,7 +66,7 @@ void do_reinforcements( Character *ch, char *argument )
   send_to_char( "&GYour reinforcements are on the way.\r\n", ch);
   credits = GetAbilityLevel( ch, LEADERSHIP_ABILITY ) * 50;
   ch_printf( ch, "It cost you %d credits.\r\n", credits);
-  ch->gold -= UMIN( credits , ch->gold );
+  ch->gold -= umin( credits , ch->gold );
 
   learn_from_success( ch, gsn_reinforcements );
 

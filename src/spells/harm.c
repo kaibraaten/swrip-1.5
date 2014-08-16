@@ -15,15 +15,15 @@ ch_ret spell_harm( int sn, int level, Character *ch, void *vo )
 
   send_to_char("You feel the hatred grow within you!\r\n", ch);
   ch->alignment = ch->alignment - 100;
-  ch->alignment = URANGE( -1000, ch->alignment, 1000 );
+  ch->alignment = urange( -1000, ch->alignment, 1000 );
   sith_penalty( ch );
 
 
-  dam = UMAX(  20, victim->hit - dice(1,4) );
+  dam = umax(  20, victim->hit - dice(1,4) );
 
   if ( saves_spell_staff( level, victim ) )
-    dam = UMIN( 50, dam / 4 );
-  dam = UMIN( 100, dam );
+    dam = umin( 50, dam / 4 );
+  dam = umin( 100, dam );
 
   if ( IsAffectedBy(victim, AFF_PROTECT) && is_evil(ch) )
     dam -= (int) (dam / 4);

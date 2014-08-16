@@ -487,11 +487,11 @@ ch_ret multi_hit( Character *ch, Character *victim, int dt )
 
       if ( !IsAffectedBy(ch, AFF_FLYING)
            &&   !IsAffectedBy(ch, AFF_FLOATING) )
-        move = encumbrance( ch, movement_loss[UMIN(SECT_MAX-1, ch->in_room->sector_type)] );
+        move = encumbrance( ch, movement_loss[umin(SECT_MAX-1, ch->in_room->sector_type)] );
       else
         move = encumbrance( ch, 1 );
       if ( ch->move )
-        ch->move = UMAX( 0, ch->move - move );
+        ch->move = umax( 0, ch->move - move );
     }
 
   return retcode;
@@ -588,7 +588,7 @@ short off_shld_lvl( Character *ch, Character *victim )
 
   if ( !IsNpc(ch) )            /* players get much less effect */
     {
-      lvl = UMAX( 1, (GetAbilityLevel( ch, FORCE_ABILITY ) ) );
+      lvl = umax( 1, (GetAbilityLevel( ch, FORCE_ABILITY ) ) );
       if ( number_percent() + (GetAbilityLevel( victim, COMBAT_ABILITY ) - lvl) < 35 )
         return lvl;
       else
@@ -788,10 +788,10 @@ ch_ret one_hit( Character *ch, Character *victim, int dt )
   if ( !is_awake(victim) )
     dam *= 2;
   if ( dt == gsn_backstab )
-    dam *= (2 + URANGE( 2, GetAbilityLevel( ch, HUNTING_ABILITY ) - (GetAbilityLevel( victim, COMBAT_ABILITY ) / 4), 30 ) / 8);
+    dam *= (2 + urange( 2, GetAbilityLevel( ch, HUNTING_ABILITY ) - (GetAbilityLevel( victim, COMBAT_ABILITY ) / 4), 30 ) / 8);
 
   if ( dt == gsn_circle )
-    dam *= (2 + URANGE( 2, GetAbilityLevel( ch, HUNTING_ABILITY ) - (GetAbilityLevel( victim, COMBAT_ABILITY ) / 2), 30 ) / 40);
+    dam *= (2 + urange( 2, GetAbilityLevel( ch, HUNTING_ABILITY ) - (GetAbilityLevel( victim, COMBAT_ABILITY ) / 2), 30 ) / 40);
 
   plusris = 0;
 
@@ -816,7 +816,7 @@ ch_ret one_hit( Character *ch, Character *victim, int dt )
       int i, res, imm, sus, mod;
 
       if ( plusris )
-        plusris = RIS_PLUS1 << UMIN(plusris, 7);
+        plusris = RIS_PLUS1 << umin(plusris, 7);
 
       /* initialize values to handle a zero plusris */
       imm = res = -1;  sus = 1;
@@ -900,7 +900,7 @@ ch_ret one_hit( Character *ch, Character *victim, int dt )
           else
             hit_chance -= sysdata.stun_regular;
 
-          hit_chance = URANGE( 5, hit_chance, 95 );
+          hit_chance = urange( 5, hit_chance, 95 );
 
           if ( !fail && number_percent() < hit_chance )
             {
@@ -1469,7 +1469,7 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
       af.modifier  = -2;
       af.bitvector = AFF_POISON;
       affect_join( victim, &af );
-      ch->mental_state = URANGE( 20, ch->mental_state + 2, 100 );
+      ch->mental_state = urange( 20, ch->mental_state + 2, 100 );
     }
 
   if ( !npcvict
@@ -1608,7 +1608,7 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
 
       if ( IsNpc( ch ) && !IsNpc( victim ) )
         {
-          long xp_to_lose = UMAX( ( GetExperience( victim, COMBAT_ABILITY ) - exp_level( GetAbilityLevel( ch, COMBAT_ABILITY ) ) ), 0 );
+          long xp_to_lose = umax( ( GetExperience( victim, COMBAT_ABILITY ) - exp_level( GetAbilityLevel( ch, COMBAT_ABILITY ) ) ), 0 );
 	  long xp_actually_lost = lose_exp( victim, COMBAT_ABILITY, xp_to_lose );
 
           ch_printf( victim, "You lose %ld experience.\r\n", xp_actually_lost );
@@ -2078,7 +2078,7 @@ void raw_kill( Character *ch, Character *victim )
   if ( victim->in_room && IsNpc(victim) && victim->vip_flags != 0 && victim->in_room->area && victim->in_room->area->planet )
     {
       victim->in_room->area->planet->population--;
-      victim->in_room->area->planet->population = UMAX( victim->in_room->area->planet->population , 0 );
+      victim->in_room->area->planet->population = umax( victim->in_room->area->planet->population , 0 );
       victim->in_room->area->planet->pop_support -= (float) ( 1 + 1 / (victim->in_room->area->planet->population + 1) );
 
       if ( victim->in_room->area->planet->pop_support < -100 )
@@ -2307,7 +2307,7 @@ void group_gain( Character *ch, Character *victim )
 
       if ( lch == gch && members > 1 )
         {
-          xp = URANGE( members, xp*members, (exp_level( GetAbilityLevel( gch, LEADERSHIP_ABILITY ) + 1) - exp_level(GetAbilityLevel( gch, LEADERSHIP_ABILITY ) ) / 10) );
+          xp = urange( members, xp*members, (exp_level( GetAbilityLevel( gch, LEADERSHIP_ABILITY ) + 1) - exp_level(GetAbilityLevel( gch, LEADERSHIP_ABILITY ) ) / 10) );
           sprintf( buf, "You get %d leadership experience for leading your group to victory.\r\n", xp );
           send_to_char( buf, gch );
           gain_exp( gch, LEADERSHIP_ABILITY, xp );
@@ -2340,7 +2340,7 @@ void group_gain( Character *ch, Character *victim )
 
 int align_compute( Character *gch, Character *victim )
 {
-  return URANGE ( -1000,
+  return urange ( -1000,
                   (int) ( gch->alignment - victim->alignment/5 ),
                   1000 );
 }
@@ -2353,7 +2353,7 @@ int xp_compute( const Character *gch, const Character *victim )
 {
   int align;
   int xp = (GetExperienceWorth( victim )
-	    *  URANGE( 1, (GetAbilityLevel( victim, COMBAT_ABILITY ) - GetAbilityLevel( gch, COMBAT_ABILITY ) ) + 10, 20 )) / 10;
+	    *  urange( 1, (GetAbilityLevel( victim, COMBAT_ABILITY ) - GetAbilityLevel( gch, COMBAT_ABILITY ) ) + 10, 20 )) / 10;
   align = gch->alignment - victim->alignment;
 
   /* bonus for attacking opposite alignment */
@@ -2380,7 +2380,7 @@ int xp_compute( const Character *gch, const Character *victim )
 
   /* new xp cap for swreality */
 
-  return URANGE(1, xp, ( exp_level( GetAbilityLevel( gch, COMBAT_ABILITY ) + 1 ) - exp_level( GetAbilityLevel( gch, COMBAT_ABILITY ) ) ) );
+  return urange(1, xp, ( exp_level( GetAbilityLevel( gch, COMBAT_ABILITY ) + 1 ) - exp_level( GetAbilityLevel( gch, COMBAT_ABILITY ) ) ) );
 }
 
 /*

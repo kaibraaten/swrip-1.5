@@ -20,11 +20,11 @@ void do_hlist( Character *ch, char *argument )
 
   if ( arg[0] != '\0' )
     {
-      min = URANGE( minlimit, atoi(arg), maxlimit );
+      min = urange( minlimit, atoi(arg), maxlimit );
 
       if ( argument[0] != '\0' )
 	{
-	  max = URANGE( min, atoi(argument), maxlimit );
+	  max = urange( min, atoi(argument), maxlimit );
 	}
       else
 	{

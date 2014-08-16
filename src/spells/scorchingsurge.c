@@ -19,11 +19,11 @@ ch_ret spell_scorching_surge( int sn, int level, Character *ch, void *vo )
 
   send_to_char("You feel the hatred grow within you!\r\n", ch);
   ch->alignment = ch->alignment - 100;
-  ch->alignment = URANGE( -1000, ch->alignment, 1000 );
+  ch->alignment = urange( -1000, ch->alignment, 1000 );
   sith_penalty( ch );
 
-  level       = UMIN(level/2, sizeof(dam_each)/sizeof(dam_each[0]) - 1);
-  level       = UMAX(0, level);
+  level       = umin(level/2, sizeof(dam_each)/sizeof(dam_each[0]) - 1);
+  level       = umax(0, level);
   dam         = number_range( dam_each[level] , dam_each[level] * 10 );
 
   if ( saves_spell_staff( level, victim ) )

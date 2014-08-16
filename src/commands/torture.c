@@ -64,7 +64,7 @@ void do_torture( Character *ch, char *argument )
     }
 
   ch->alignment -= 100;
-  ch->alignment = URANGE( -1000, ch->alignment, 1000 );
+  ch->alignment = urange( -1000, ch->alignment, 1000 );
 
   set_wait_state( ch, skill_table[gsn_torture]->beats );
 
@@ -93,7 +93,7 @@ void do_torture( Character *ch, char *argument )
       act( AT_SKILL, "$n tortures $N, leaving $M screaming in agony!", ch, NULL, victim, TO_NOTVICT );
 
       dam = dice( GetAbilityLevel( ch, LEADERSHIP_ABILITY ) / 80 , 4 );
-      dam = URANGE( 0, victim->max_hit-10, dam );
+      dam = urange( 0, victim->max_hit-10, dam );
       victim->hit -= dam;
       victim->max_hit -= dam;
 

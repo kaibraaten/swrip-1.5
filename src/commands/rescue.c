@@ -58,7 +58,7 @@ void do_rescue( Character *ch, char *argument )
     }
 
   ch->alignment = ch->alignment + 5;
-  ch->alignment = URANGE( -1000, ch->alignment, 1000 );
+  ch->alignment = urange( -1000, ch->alignment, 1000 );
 
   percent = number_percent( ) - (GetCurrentLuck(ch) - 14)
     - (GetCurrentLuck(victim) - 16);
@@ -78,7 +78,7 @@ void do_rescue( Character *ch, char *argument )
   act( AT_SKILL, "$n moves in front of $N!",  ch, NULL, victim, TO_NOTVICT );
 
   ch->alignment = ch->alignment + 50;
-  ch->alignment = URANGE( -1000, ch->alignment, 1000 );
+  ch->alignment = urange( -1000, ch->alignment, 1000 );
 
   learn_from_success( ch, gsn_rescue );
   stop_fighting( fch, false );

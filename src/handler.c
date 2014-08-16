@@ -183,7 +183,7 @@ void room_explode_2( ROOM_INDEX_DATA *room , int blast )
  */
 int exp_level( short level)
 {
-  int lvl = UMAX(0, level - 1);
+  int lvl = umax(0, level - 1);
 
   return lvl * lvl * 500;
 }
@@ -257,7 +257,7 @@ void affect_modify( Character *ch, Affect *paf, bool fAdd )
       ch->sex = (ch->sex+mod) % 3;
       if ( ch->sex < 0 )
         ch->sex += 2;
-      ch->sex = URANGE( 0, ch->sex, 2 );
+      ch->sex = urange( 0, ch->sex, 2 );
       break;
     case APPLY_LEVEL:                                           break;
     case APPLY_AGE:                                             break;
@@ -286,26 +286,26 @@ void affect_modify( Character *ch, Affect *paf, bool fAdd )
     case APPLY_FULL:
       if ( !IsNpc(ch) )
         ch->pcdata->condition[COND_FULL] =
-          URANGE( 0, ch->pcdata->condition[COND_FULL] + mod, 48 );
+          urange( 0, ch->pcdata->condition[COND_FULL] + mod, 48 );
       break;
 
     case APPLY_THIRST:
       if ( !IsNpc(ch) )
         ch->pcdata->condition[COND_THIRST] =
-          URANGE( 0, ch->pcdata->condition[COND_THIRST] + mod, 48 );
+          urange( 0, ch->pcdata->condition[COND_THIRST] + mod, 48 );
       break;
 
     case APPLY_DRUNK:
       if ( !IsNpc(ch) )
         ch->pcdata->condition[COND_DRUNK] =
-          URANGE( 0, ch->pcdata->condition[COND_DRUNK] + mod, 48 );
+          urange( 0, ch->pcdata->condition[COND_DRUNK] + mod, 48 );
       break;
 
     case APPLY_MENTALSTATE:
-      ch->mental_state  = URANGE(-100, ch->mental_state + mod, 100);
+      ch->mental_state  = urange(-100, ch->mental_state + mod, 100);
       break;
     case APPLY_EMOTION:
-      ch->emotional_state       = URANGE(-100, ch->emotional_state + mod, 100);
+      ch->emotional_state       = urange(-100, ch->emotional_state + mod, 100);
       break;
 
     case APPLY_STRIPSN:
@@ -339,117 +339,117 @@ void affect_modify( Character *ch, Affect *paf, bool fAdd )
     case APPLY_TRACK:
       if ( !IsNpc(ch) && ch->pcdata->learned[gsn_track]> 0 )
         ch->pcdata->learned[gsn_track] =
-          ( ch->pcdata->learned[gsn_track] >= 100 ? 100 : URANGE( 1, ch->pcdata->learned[gsn_track] + mod, 100 ) );
+          ( ch->pcdata->learned[gsn_track] >= 100 ? 100 : urange( 1, ch->pcdata->learned[gsn_track] + mod, 100 ) );
       break;
     case APPLY_HIDE:
       if ( !IsNpc(ch) && ch->pcdata->learned[gsn_hide]> 0)
         ch->pcdata->learned[gsn_hide] =
-          ( ch->pcdata->learned[gsn_hide] >= 100 ? 100 : URANGE( 1, ch->pcdata->learned[gsn_hide] + mod, 100 ) );
+          ( ch->pcdata->learned[gsn_hide] >= 100 ? 100 : urange( 1, ch->pcdata->learned[gsn_hide] + mod, 100 ) );
       break;
     case APPLY_STEAL:
       if ( !IsNpc(ch) && ch->pcdata->learned[gsn_steal] > 0)
         ch->pcdata->learned[gsn_steal] =
-          ( ch->pcdata->learned[gsn_steal] >= 100 ? 100 : URANGE( 1, ch->pcdata->learned[gsn_steal] + mod, 100 ) );
+          ( ch->pcdata->learned[gsn_steal] >= 100 ? 100 : urange( 1, ch->pcdata->learned[gsn_steal] + mod, 100 ) );
       break;
     case APPLY_SNEAK:
       if ( !IsNpc(ch) && ch->pcdata->learned[gsn_sneak]> 0)
         ch->pcdata->learned[gsn_sneak] =
-          ( ch->pcdata->learned[gsn_sneak] >= 100 ? 100 : URANGE( 1, ch->pcdata->learned[gsn_sneak] + mod, 100 ) );
+          ( ch->pcdata->learned[gsn_sneak] >= 100 ? 100 : urange( 1, ch->pcdata->learned[gsn_sneak] + mod, 100 ) );
       break;
     case APPLY_PICK:
       if ( !IsNpc(ch) && ch->pcdata->learned[gsn_pick_lock]> 0)
         ch->pcdata->learned[gsn_pick_lock] =
-          ( ch->pcdata->learned[gsn_pick_lock] >= 100 ? 100 : URANGE( 1, ch->pcdata->learned[gsn_pick_lock] + mod, 100 ) );
+          ( ch->pcdata->learned[gsn_pick_lock] >= 100 ? 100 : urange( 1, ch->pcdata->learned[gsn_pick_lock] + mod, 100 ) );
       break;
     case APPLY_BACKSTAB:
       if ( !IsNpc(ch) && ch->pcdata->learned[gsn_backstab]> 0)
         ch->pcdata->learned[gsn_backstab] =
-          ( ch->pcdata->learned[gsn_backstab] >= 100 ? 100 : URANGE( 1, ch->pcdata->learned[gsn_backstab] + mod, 100 ) );
+          ( ch->pcdata->learned[gsn_backstab] >= 100 ? 100 : urange( 1, ch->pcdata->learned[gsn_backstab] + mod, 100 ) );
       break;
     case APPLY_DETRAP:
       if ( !IsNpc(ch) && ch->pcdata->learned[gsn_detrap]> 0)
         ch->pcdata->learned[gsn_detrap] =
-          ( ch->pcdata->learned[gsn_detrap] >= 100 ? 100 : URANGE( 1, ch->pcdata->learned[gsn_detrap] + mod, 100 ) );
+          ( ch->pcdata->learned[gsn_detrap] >= 100 ? 100 : urange( 1, ch->pcdata->learned[gsn_detrap] + mod, 100 ) );
       break;
     case APPLY_DODGE:
       if ( !IsNpc(ch) && ch->pcdata->learned[gsn_dodge]> 0)
         ch->pcdata->learned[gsn_dodge] =
-          ( ch->pcdata->learned[gsn_dodge] >= 100 ? 100 : URANGE( 1, ch->pcdata->learned[gsn_dodge] + mod, 100 ) );
+          ( ch->pcdata->learned[gsn_dodge] >= 100 ? 100 : urange( 1, ch->pcdata->learned[gsn_dodge] + mod, 100 ) );
       break;
     case APPLY_PEEK:
       if ( !IsNpc(ch) && ch->pcdata->learned[gsn_peek]> 0)
         ch->pcdata->learned[gsn_peek] =
-          ( ch->pcdata->learned[gsn_peek] >= 100 ? 100 : URANGE( 1, ch->pcdata->learned[gsn_peek] + mod, 100 ) );
+          ( ch->pcdata->learned[gsn_peek] >= 100 ? 100 : urange( 1, ch->pcdata->learned[gsn_peek] + mod, 100 ) );
       break;
     case APPLY_SCAN:
       if ( !IsNpc(ch) && ch->pcdata->learned[gsn_scan]> 0)
         ch->pcdata->learned[gsn_scan] =
-          ( ch->pcdata->learned[gsn_scan] >= 100 ? 100 : URANGE( 1, ch->pcdata->learned[gsn_scan] + mod, 100 ) );
+          ( ch->pcdata->learned[gsn_scan] >= 100 ? 100 : urange( 1, ch->pcdata->learned[gsn_scan] + mod, 100 ) );
       break;
     case APPLY_GOUGE:
       if ( !IsNpc(ch) && ch->pcdata->learned[gsn_gouge]> 0)
         ch->pcdata->learned[gsn_gouge] =
-          ( ch->pcdata->learned[gsn_gouge] >= 100 ? 100 : URANGE( 1, ch->pcdata->learned[gsn_gouge] + mod, 100 ) );
+          ( ch->pcdata->learned[gsn_gouge] >= 100 ? 100 : urange( 1, ch->pcdata->learned[gsn_gouge] + mod, 100 ) );
       break;
     case APPLY_SEARCH:
       if ( !IsNpc(ch) && ch->pcdata->learned[gsn_search]> 0)
         ch->pcdata->learned[gsn_search] =
-          ( ch->pcdata->learned[gsn_search] >= 100 ? 100 : URANGE( 1, ch->pcdata->learned[gsn_search] + mod, 100 ) );
+          ( ch->pcdata->learned[gsn_search] >= 100 ? 100 : urange( 1, ch->pcdata->learned[gsn_search] + mod, 100 ) );
       break;
     case APPLY_DIG:
       if ( !IsNpc(ch) && ch->pcdata->learned[gsn_dig]> 0)
         ch->pcdata->learned[gsn_dig] =
-          ( ch->pcdata->learned[gsn_dig] >= 100 ? 100 : URANGE( 1, ch->pcdata->learned[gsn_dig] + mod, 100 ) );
+          ( ch->pcdata->learned[gsn_dig] >= 100 ? 100 : urange( 1, ch->pcdata->learned[gsn_dig] + mod, 100 ) );
       break;
     case APPLY_MOUNT:
       if ( !IsNpc(ch) && ch->pcdata->learned[gsn_mount]> 0 )
         ch->pcdata->learned[gsn_mount] =
-          ( ch->pcdata->learned[gsn_mount] >= 100 ? 100 : URANGE( 1, ch->pcdata->learned[gsn_mount] + mod, 100 ) );
+          ( ch->pcdata->learned[gsn_mount] >= 100 ? 100 : urange( 1, ch->pcdata->learned[gsn_mount] + mod, 100 ) );
       break;
     case APPLY_DISARM:
       if ( !IsNpc(ch) && ch->pcdata->learned[gsn_disarm]> 0 )
         ch->pcdata->learned[gsn_disarm] =
-          ( ch->pcdata->learned[gsn_disarm] >= 100 ? 100 : URANGE( 1, ch->pcdata->learned[gsn_disarm] + mod, 100 ) );
+          ( ch->pcdata->learned[gsn_disarm] >= 100 ? 100 : urange( 1, ch->pcdata->learned[gsn_disarm] + mod, 100 ) );
       break;
     case APPLY_KICK:
       if ( !IsNpc(ch) && ch->pcdata->learned[gsn_kick]> 0)
         ch->pcdata->learned[gsn_kick] =
-          ( ch->pcdata->learned[gsn_kick] >= 100 ? 100 : URANGE( 1, ch->pcdata->learned[gsn_kick] + mod, 100 ) );
+          ( ch->pcdata->learned[gsn_kick] >= 100 ? 100 : urange( 1, ch->pcdata->learned[gsn_kick] + mod, 100 ) );
       break;
     case APPLY_PARRY:
       if ( !IsNpc(ch) && ch->pcdata->learned[gsn_parry]> 0)
         ch->pcdata->learned[gsn_parry] =
-          ( ch->pcdata->learned[gsn_parry] >= 100 ? 100 : URANGE( 1, ch->pcdata->learned[gsn_parry] + mod, 100 ) );
+          ( ch->pcdata->learned[gsn_parry] >= 100 ? 100 : urange( 1, ch->pcdata->learned[gsn_parry] + mod, 100 ) );
       break;
     case APPLY_BASH:
       if ( !IsNpc(ch) && ch->pcdata->learned[gsn_bash]> 0)
         ch->pcdata->learned[gsn_bash] =
-          ( ch->pcdata->learned[gsn_bash] >= 100 ? 100 : URANGE( 1, ch->pcdata->learned[gsn_bash] + mod, 100 ) );
+          ( ch->pcdata->learned[gsn_bash] >= 100 ? 100 : urange( 1, ch->pcdata->learned[gsn_bash] + mod, 100 ) );
       break;
     case APPLY_STUN:
       if ( !IsNpc(ch) && ch->pcdata->learned[gsn_stun]> 0)
         ch->pcdata->learned[gsn_stun] =
-          ( ch->pcdata->learned[gsn_stun] >= 100 ? 100 : URANGE( 1, ch->pcdata->learned[gsn_stun] + mod, 100 ) );
+          ( ch->pcdata->learned[gsn_stun] >= 100 ? 100 : urange( 1, ch->pcdata->learned[gsn_stun] + mod, 100 ) );
       break;
     case APPLY_PUNCH:
       if ( !IsNpc(ch) && ch->pcdata->learned[gsn_punch]> 0)
         ch->pcdata->learned[gsn_punch] =
-          ( ch->pcdata->learned[gsn_punch] >= 100 ? 100 : URANGE( 1, ch->pcdata->learned[gsn_punch] + mod, 100 ) );
+          ( ch->pcdata->learned[gsn_punch] >= 100 ? 100 : urange( 1, ch->pcdata->learned[gsn_punch] + mod, 100 ) );
       break;
     case APPLY_CLIMB:
       if ( !IsNpc(ch) && ch->pcdata->learned[gsn_climb]> 0)
         ch->pcdata->learned[gsn_climb] =
-          ( ch->pcdata->learned[gsn_climb] >= 100 ? 100 : URANGE( 1, ch->pcdata->learned[gsn_climb] + mod, 100 ) );
+          ( ch->pcdata->learned[gsn_climb] >= 100 ? 100 : urange( 1, ch->pcdata->learned[gsn_climb] + mod, 100 ) );
       break;
     case APPLY_GRIP:
       if ( !IsNpc(ch) && ch->pcdata->learned[gsn_grip]> 0)
         ch->pcdata->learned[gsn_grip] =
-          ( ch->pcdata->learned[gsn_grip] >= 100 ? 100 : URANGE( 1, ch->pcdata->learned[gsn_grip] + mod, 100 ) );
+          ( ch->pcdata->learned[gsn_grip] >= 100 ? 100 : urange( 1, ch->pcdata->learned[gsn_grip] + mod, 100 ) );
       break;
     case APPLY_SNIPE:
       if ( !IsNpc(ch) && ch->pcdata->learned[gsn_snipe]> 0)
         ch->pcdata->learned[gsn_snipe] =
-          ( ch->pcdata->learned[gsn_snipe] >= 100 ? 100 : URANGE( 1, ch->pcdata->learned[gsn_snipe] + mod, 100 ) );
+          ( ch->pcdata->learned[gsn_snipe] >= 100 ? 100 : urange( 1, ch->pcdata->learned[gsn_snipe] + mod, 100 ) );
       break;
     }
 
@@ -555,9 +555,9 @@ void affect_join( Character *ch, Affect *paf )
   for ( paf_old = ch->first_affect; paf_old; paf_old = paf_old->next )
     if ( paf_old->type == paf->type )
       {
-        paf->duration = UMIN( 1000000, paf->duration + paf_old->duration );
+        paf->duration = umin( 1000000, paf->duration + paf_old->duration );
         if ( paf->modifier )
-          paf->modifier = UMIN( 5000, paf->modifier + paf_old->modifier );
+          paf->modifier = umin( 5000, paf->modifier + paf_old->modifier );
         else
           paf->modifier = paf_old->modifier;
         affect_remove( ch, paf_old );
@@ -2430,7 +2430,7 @@ OBJ_DATA *clone_object( const OBJ_DATA *obj )
   ++obj->pIndexData->count;
   ++numobjsloaded;
   ++physicalobjects;
-  cur_obj_serial = UMAX((cur_obj_serial + 1 ) & (BV30-1), 1);
+  cur_obj_serial = umax((cur_obj_serial + 1 ) & (BV30-1), 1);
   clone->serial = clone->pIndexData->serial = cur_obj_serial;
   LINK( clone, first_object, last_object, next, prev );
   return clone;
@@ -2697,7 +2697,7 @@ void economize_mobgold( Character *mob )
   Area *tarea;
 
   /* make sure it isn't way too much */
-  mob->gold = UMIN( mob->gold, mob->top_level * mob->top_level * 400 );
+  mob->gold = umin( mob->gold, mob->top_level * mob->top_level * 400 );
 
   if ( !mob->in_room )
     return;
@@ -2705,7 +2705,7 @@ void economize_mobgold( Character *mob )
   tarea = mob->in_room->area;
 
   gold = ((tarea->high_economy > 0) ? 1 : 0) * 1000000000 + tarea->low_economy;
-  mob->gold = URANGE( 0, mob->gold, gold / 100 );
+  mob->gold = urange( 0, mob->gold, gold / 100 );
 
   if ( mob->gold )
     lower_economy( tarea, mob->gold );

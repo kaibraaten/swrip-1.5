@@ -26,7 +26,7 @@ void do_rpfind( Character *ch, char *argument )   /* Gorog */
     }
 
   disp_limit = atoi (arg1);
-  disp_limit = UMAX(0, disp_limit);
+  disp_limit = umax(0, disp_limit);
 
   if ( str_cmp(arg2, "mud") )
     {
@@ -40,8 +40,8 @@ void do_rpfind( Character *ch, char *argument )   /* Gorog */
         }
       else
         {
-          lo_vnum = URANGE(1, atoi(arg2), 32767);
-          hi_vnum = URANGE(1, atoi(arg3), 32767);
+          lo_vnum = urange(1, atoi(arg2), 32767);
+          hi_vnum = urange(1, atoi(arg3), 32767);
 
           if ( lo_vnum > hi_vnum )
             {

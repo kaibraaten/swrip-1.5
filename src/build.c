@@ -933,7 +933,7 @@ RESET_DATA *parse_reset( Area *tarea, char *argument, Character *ch )
                         send_to_char( "Reset: PUT: no such container\r\n", ch );
                         return NULL;
                       }
-                    extra = UMAX(val3, 0);
+                    extra = umax(val3, 0);
                     argument = one_argument(argument, arg4);
                     val3 = (is_number(argument) ? atoi(arg4) : 0);
                     if ( val3 < 0 )

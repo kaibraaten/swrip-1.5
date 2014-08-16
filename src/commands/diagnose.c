@@ -187,8 +187,8 @@ void do_diagnose( Character *ch, char *argument )
             }
       if (zero_num > 0) {
         zero_sort (vnums, count, 0, zero_obj_ind - 1);
-        zero_num = UMIN (zero_num, ZERO_MAX);
-        zero_num = UMIN (zero_num, zero_obj_ind);
+        zero_num = umin (zero_num, ZERO_MAX);
+        zero_num = umin (zero_num, zero_obj_ind);
         for (cou=0; cou<zero_num; cou++)
           ch_printf (ch, "%6d %6d %6d\r\n",
                      cou+1, vnums[cou], count[cou]);
@@ -263,7 +263,7 @@ void do_diagnose( Character *ch, char *argument )
           diagnose_help(ch);
           return;
         }
-      dis_num  = UMIN(atoi (arg2), DIAG_MAX_SIZE);
+      dis_num  = umin(atoi (arg2), DIAG_MAX_SIZE);
       race_num     = atoi (arg3);
       vnum1    = atoi (arg4);
       vnum2    = atoi (arg5);

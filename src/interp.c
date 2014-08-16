@@ -503,7 +503,7 @@ void interpret( Character *ch, char *argument )
    * Update the record of how many times this command has been used (haus)
    */
   update_userec(&time_used, &cmd->userec);
-  tmptime = UMIN(time_used.tv_sec,19) * 1000000 + time_used.tv_usec;
+  tmptime = umin(time_used.tv_sec,19) * 1000000 + time_used.tv_usec;
 
   /* laggy command notice: command took longer than 1.5 seconds */
   if ( tmptime > 1500000 )

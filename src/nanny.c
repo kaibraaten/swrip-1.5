@@ -749,11 +749,11 @@ static void nanny_read_motd( Descriptor *d, char *argument )
 
       if ( ch->ability.main == FORCE_ABILITY )
 	{
-	  ch->stats.perm_frc = URANGE( 1 , ch->stats.perm_frc , 20 );
+	  ch->stats.perm_frc = urange( 1 , ch->stats.perm_frc , 20 );
 	}
       else
 	{
-	  ch->stats.perm_frc = URANGE( 0 , ch->stats.perm_frc , 20 );
+	  ch->stats.perm_frc = urange( 0 , ch->stats.perm_frc , 20 );
 	}
 
       /* Hunters do not recieve force */

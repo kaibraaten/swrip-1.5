@@ -71,7 +71,7 @@ void do_languages( Character *ch, char *argument )
       /* Max 12% (5 + 4 + 3) at 24+ int and 21+ wis. -- Altrag */
       prct = 5 + (GetCurrentIntelligence(ch) / 6) + (GetCurrentWisdom(ch) / 7);
       ch->pcdata->learned[sn] += prct;
-      ch->pcdata->learned[sn] = UMIN(ch->pcdata->learned[sn], 99);
+      ch->pcdata->learned[sn] = umin(ch->pcdata->learned[sn], 99);
       SET_BIT( ch->speaks, lang_array[lang] );
       if ( ch->pcdata->learned[sn] == prct )
         act( AT_PLAIN, "You begin lessons in $t.", ch, lang_names[lang],

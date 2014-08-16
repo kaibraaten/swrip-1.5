@@ -121,8 +121,8 @@ void do_steal( Character *ch, char *argument )
 
       if ( IsNpc( victim ) )
 	{
-	  xp = UMIN( amount*10 , ( exp_level( GetAbilityLevel(ch, SMUGGLING_ABILITY ) + 1 ) - exp_level( GetAbilityLevel(ch, SMUGGLING_ABILITY))  ) / 35  );
-	  xp = UMIN( xp , xp_compute( ch, victim ) );
+	  xp = umin( amount*10 , ( exp_level( GetAbilityLevel(ch, SMUGGLING_ABILITY ) + 1 ) - exp_level( GetAbilityLevel(ch, SMUGGLING_ABILITY))  ) / 35  );
+	  xp = umin( xp , xp_compute( ch, victim ) );
 	  gain_exp( ch, SMUGGLING_ABILITY, xp );
 	  ch_printf( ch, "&WYou gain %ld smuggling experience!\r\n", xp );
 	}
@@ -180,8 +180,8 @@ void do_steal( Character *ch, char *argument )
     learn_from_success( ch, gsn_steal );
   if ( IsNpc( victim ) )
     {
-      xp = UMIN( obj->cost*10 , ( exp_level( GetAbilityLevel(ch, SMUGGLING_ABILITY) + 1) - exp_level( GetAbilityLevel( ch, SMUGGLING_ABILITY) ) ) / 10  );
-      xp = UMIN( xp , xp_compute( ch, victim ) );
+      xp = umin( obj->cost*10 , ( exp_level( GetAbilityLevel(ch, SMUGGLING_ABILITY) + 1) - exp_level( GetAbilityLevel( ch, SMUGGLING_ABILITY) ) ) / 10  );
+      xp = umin( xp , xp_compute( ch, victim ) );
       gain_exp( ch, SMUGGLING_ABILITY, xp );
       ch_printf( ch, "&WYou gain %ld smuggling experience!\r\n", xp );
     }

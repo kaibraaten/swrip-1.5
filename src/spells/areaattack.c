@@ -15,7 +15,7 @@ ch_ret spell_area_attack( int sn, int level, Character *ch, void *vo )
 
   send_to_char("You feel the hatred grow within you!\r\n", ch);
   ch->alignment = ch->alignment - 100;
-  ch->alignment = URANGE( -1000, ch->alignment, 1000 );
+  ch->alignment = urange( -1000, ch->alignment, 1000 );
   sith_penalty( ch );
 
   if ( IS_SET( ch->in_room->room_flags, ROOM_SAFE ) )

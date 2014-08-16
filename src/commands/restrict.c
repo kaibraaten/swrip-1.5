@@ -25,7 +25,7 @@ void do_restrict( Character *ch, char *argument )
   else
     level = atoi( arg2 );
 
-  level = UMAX( UMIN( GetTrustLevel( ch ), level ), 0 );
+  level = umax( umin( GetTrustLevel( ch ), level ), 0 );
 
   hash = arg[0] % 126;
 
