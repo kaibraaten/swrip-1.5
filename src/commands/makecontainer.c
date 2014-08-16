@@ -16,6 +16,7 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
 static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *args );
 static void AbortHandler( void *userData, AbortCraftingEventArgs *args );
 static void FreeUserData( struct UserData *ud );
+static bool CanUseWearLocation( int wearLocation );
 
 void do_makecontainer( Character *ch, char *argument )
 {
@@ -101,41 +102,9 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
       ud->WearLocation = 1 << ud->WearLocation;
     }
 
-  if ( ud->WearLocation == ITEM_WEAR_EYES
-       || ud->WearLocation == ITEM_WEAR_EARS
-       || ud->WearLocation == ITEM_WEAR_FINGER
-       || ud->WearLocation == ITEM_WEAR_NECK
-       || ud->WearLocation == ITEM_WEAR_FLOATING
-       || ud->WearLocation == ITEM_WEAR_OVER
-       || ud->WearLocation == ITEM_WEAR_WRIST )
+  if ( !CanUseWearLocation( ud->WearLocation ) )
     {
-      send_to_char( "&RYou cannot make a container for that body part.\r\n&w", ch);
-      send_to_char( "&RTry MAKEJEWELRY.\r\n&w", ch);
-      eventArgs->AbortSession = true;
-      return;
-    }
-
-  if ( ud->WearLocation == ITEM_WEAR_FEET
-       || ud->WearLocation == ITEM_WEAR_HANDS )
-    {
-      send_to_char( "&RYou cannot make a container for that body part.\r\n&w", ch);
-      send_to_char( "&RTry MAKEARMOR.\r\n&w", ch);
-      eventArgs->AbortSession = true;
-      return;
-    }
-
-  if ( ud->WearLocation == ITEM_WEAR_SHIELD )
-    {
-      send_to_char( "&RYou cannot make a container a shield.\r\n&w", ch);
-      send_to_char( "&RTry MAKESHIELD.\r\n&w", ch);
-      eventArgs->AbortSession = true;
-      return;
-    }
-
-  if ( ud->WearLocation == ITEM_WIELD )
-    {
-      send_to_char( "&RAre you going to fight with a container?\r\n&w", ch);
-      send_to_char( "&RTry MAKEBLADE...\r\n&w", ch);
+      ch_printf( ch, "&RYou cannot make a container for that body part.\r\n&w" );
       eventArgs->AbortSession = true;
       return;
     }
@@ -163,4 +132,12 @@ static void FreeUserData( struct UserData *ud )
     }
 
   DISPOSE( ud );
+}
+
+static bool CanUseWearLocation( int wearLocation )
+{
+  return wearLocation == ITEM_WEAR_BODY
+    || wearLocation == ITEM_WEAR_ABOUT
+    || wearLocation == ITEM_HOLD
+    || wearLocation == ITEM_TAKE;
 }

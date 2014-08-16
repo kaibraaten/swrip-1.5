@@ -17,6 +17,7 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
 static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *args );
 static void AbortHandler( void *userData, AbortCraftingEventArgs *args );
 static void FreeUserData( struct UserData *ud );
+static bool CanUseWearLocation( int wearLocation );
 
 void do_makearmor( Character *ch, char *argument )
 {
@@ -84,31 +85,9 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
       ud->WearLocation = 1 << ud->WearLocation;
     }
 
-  if ( ud->WearLocation == ITEM_WEAR_EYES
-       || ud->WearLocation == ITEM_WEAR_EARS
-       || ud->WearLocation == ITEM_WEAR_FINGER
-       || ud->WearLocation == ITEM_WEAR_NECK
-       || ud->WearLocation == ITEM_WEAR_FLOATING
-       || ud->WearLocation == ITEM_WEAR_WRIST )
+  if ( !CanUseWearLocation( ud->WearLocation ) )
     {
-      send_to_char( "&RYou cannot make clothing for that body part.\r\n&w", ch);
-      send_to_char( "&RTry MAKEJEWELRY.\r\n&w", ch);
-      eventArgs->AbortSession = true;
-      return;
-    }
-
-  if ( ud->WearLocation == ITEM_WEAR_SHIELD )
-    {
-      send_to_char( "&RYou cannot make clothing worn as a shield.\r\n&w", ch);
-      send_to_char( "&RTry MAKESHIELD.\r\n&w", ch);
-      eventArgs->AbortSession = true;
-      return;
-    }
-
-  if ( ud->WearLocation == ITEM_WIELD )
-    {
-      send_to_char( "&RAre you going to fight with your clothing?\r\n&w", ch);
-      send_to_char( "&RTry MAKEBLADE...\r\n&w", ch);
+      ch_printf( ch, "&RYou cannot make clothing for that body part.\r\n&w" );
       eventArgs->AbortSession = true;
       return;
     }
@@ -169,4 +148,16 @@ static void FreeUserData( struct UserData *ud )
     }
 
   DISPOSE( ud );
+}
+
+static bool CanUseWearLocation( int wearLocation )
+{
+  return wearLocation == ITEM_WEAR_BODY
+    || wearLocation == ITEM_WEAR_HEAD
+    || wearLocation == ITEM_WEAR_LEGS
+    || wearLocation == ITEM_WEAR_FEET
+    || wearLocation == ITEM_WEAR_ARMS
+    || wearLocation == ITEM_WEAR_ABOUT
+    || wearLocation == ITEM_WEAR_WAIST
+    || wearLocation == ITEM_WEAR_OVER;
 }

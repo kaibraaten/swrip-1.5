@@ -14,7 +14,7 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
 static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *args );
 static void AbortHandler( void *userData, AbortCraftingEventArgs *args );
 static void FreeUserData( struct UserData *ud );
-
+static bool CanUseWearLocation( int wearLocation );
 static CraftRecipe *MakeCraftRecipe( void );
 
 void do_makecomlink( Character *ch, char *argument )
@@ -83,32 +83,9 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
       ud->WearLocation = 1 << ud->WearLocation;
     }
 
-  if ( ud->WearLocation == ITEM_WEAR_BODY
-       || ud->WearLocation == ITEM_WEAR_HEAD
-       || ud->WearLocation == ITEM_WEAR_LEGS
-       || ud->WearLocation == ITEM_WEAR_ARMS
-       || ud->WearLocation == ITEM_WEAR_ABOUT
-       || ud->WearLocation == ITEM_WEAR_EYES
-       || ud->WearLocation == ITEM_WEAR_WAIST
-       || ud->WearLocation == ITEM_WEAR_FEET
-       || ud->WearLocation == ITEM_WEAR_HANDS )
+  if ( !CanUseWearLocation( ud->WearLocation ) )
     {
       ch_printf( ch, "&RYou cannot make a comlink for that body part.\r\n&w" );
-      args->AbortSession = true;
-      return;
-    }
-
-  if ( ud->WearLocation == ITEM_WEAR_SHIELD )
-    {
-      ch_printf( ch, "&RYou cannot make a comlink worn as a shield.\r\n&w" );
-      ch_printf( ch, "&RTry MAKESHIELD.\r\n&w" );
-      args->AbortSession = true;
-      return;
-    }
-
-  if ( ud->WearLocation == ITEM_WIELD )
-    {
-      ch_printf( ch, "&RAre you going to fight with your comlink?\r\n&w" );
       args->AbortSession = true;
       return;
     }
@@ -163,4 +140,12 @@ static void FreeUserData( struct UserData *ud )
     }
 
   DISPOSE( ud );
+}
+
+static bool CanUseWearLocation( int wearLocation )
+{
+  return wearLocation == ITEM_HOLD
+    || wearLocation == ITEM_WEAR_NECK
+    || wearLocation == ITEM_WEAR_WRIST
+    || wearLocation == ITEM_WEAR_EARS;
 }
