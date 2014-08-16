@@ -869,7 +869,7 @@ struct obj_index_data
   short             count;
   short             weight;
   int               cost;
-  int               value[6];
+  int               value[MAX_OVAL];
   int               serial;
   short             layers;
   int               rent;                   /* Unused */
@@ -916,7 +916,7 @@ struct obj_data
   int               cost;
   short             level;
   short             timer;
-  int               value[6];
+  int               value[MAX_OVAL];
   short             count;          /* support for object grouping */
   int               serial;         /* serial number               */
 

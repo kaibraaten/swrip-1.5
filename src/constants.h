@@ -126,6 +126,8 @@
 #define PULSE_TAXES      ( 60 * PULSE_MINUTE)
 #define PULSE_ARENA      ( 30 * PULSE_PER_SECOND)
 
+#define MAX_OVAL 6
+
 /*
  * Command logging types.
  */
