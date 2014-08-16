@@ -279,14 +279,6 @@ Log         0
 End
 
 #COMMAND
-Name        aquest~
-Code        do_aquest
-Position    0
-Level       1
-Log         0
-End
-
-#COMMAND
 Name        addsalary~
 Code        do_addsalary
 Position    0
@@ -1224,7 +1216,7 @@ End
 
 #COMMAND
 Name        findserin~
-Code        do_showshuttle
+Code        do_pluogus
 Position    0
 Level       1
 Log         0
@@ -2543,14 +2535,6 @@ Log         0
 End
 
 #COMMAND
-Name        quest~
-Code        do_quest
-Position    6
-Level       0
-Log         0
-End
-
-#COMMAND
 Name        radar~
 Code        do_radar
 Position    5
@@ -3335,14 +3319,6 @@ Log         0
 End
 
 #COMMAND
-Name        sound~
-Code        do_sound
-Position    0
-Level       1
-Log         0
-End
-
-#COMMAND
 Name        setplanet~
 Code        do_setplanet
 Position    0
@@ -3428,6 +3404,14 @@ Code        do_setshuttle
 Position    0
 Level       105
 Log         3
+End
+
+#COMMAND
+Name        showshuttle~
+Code        do_showshuttle
+Position    0
+Level       105
+Log         0
 End
 
 #COMMAND
