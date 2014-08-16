@@ -175,7 +175,7 @@ int number_fuzzy( int number )
       break;
   }
 
-  return UMAX( 1, number );
+  return umax( 1, number );
 }
 
 /*

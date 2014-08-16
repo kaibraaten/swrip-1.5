@@ -37,9 +37,6 @@ typedef unsigned char bool;
 /*
  * Utility macros.
  */
-#define UMIN( a, b )      ( umin( (a), (b) ) )
-#define UMAX( a, b )      ( umax( (a), (b) ) )
-#define URANGE(a, b, c )  ( urange( (a), (b), (c) ) )
 #define LOWER(c)                ((char) tolower((int)(c)))
 #define UPPER(c)                ((char) toupper((int)(c)))
 #define IS_SET(flag, bit)       ((flag) & (bit))
