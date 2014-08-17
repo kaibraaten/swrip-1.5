@@ -2039,7 +2039,7 @@ void death_cry( Character *ch )
   return;
 }
 
-void raw_kill( Character *ch, Character *victim )
+void raw_kill( Character *killer, Character *victim )
 {
   Character *victmp;
   char buf[MAX_STRING_LENGTH];
@@ -2061,8 +2061,8 @@ void raw_kill( Character *ch, Character *victim )
 
   stop_fighting( victim, true );
 
-  if ( ch && !IsNpc(ch) && !IsNpc(victim) )
-    claim_disintegration( ch , victim );
+  if ( killer && !IsNpc(killer) && !IsNpc(victim) )
+    claim_disintegration( killer, victim );
 
   /* Take care of polymorphed chars */
   if(IsNpc(victim) && IS_SET(victim->act, ACT_POLYMORPHED))
@@ -2071,7 +2071,7 @@ void raw_kill( Character *ch, Character *victim )
       char_to_room(victim->desc->original, victim->in_room);
       victmp = victim->desc->original;
       do_revert(victim, "");
-      raw_kill(ch, victmp);
+      raw_kill(killer, victmp);
       return;
     }
 
@@ -2086,13 +2086,13 @@ void raw_kill( Character *ch, Character *victim )
     }
 
   if ( !IsNpc(victim) || !IS_SET( victim->act, ACT_NOKILL  ) )
-    mprog_death_trigger( ch, victim );
+    mprog_death_trigger( killer, victim );
 
   if ( char_died(victim) )
     return;
 
   if ( !IsNpc(victim) || !IS_SET( victim->act, ACT_NOKILL  ) )
-    rprog_death_trigger( ch, victim );
+    rprog_death_trigger( killer, victim );
 
   if ( char_died(victim) )
     return;
@@ -2233,12 +2233,14 @@ void raw_kill( Character *ch, Character *victim )
   sprintf( buf, "%s%s", GOD_DIR, capitalize(victim->name) );
 
   if ( !remove( buf ) )
-    send_to_char( "Player's immortal data destroyed.\r\n", ch );
+    {
+      send_to_char( "Player's immortal data destroyed.\r\n", killer );
+    }
   else if ( errno != ENOENT )
     {
-      ch_printf( ch, "Unknown error #%d - %s (immortal data).  Report to Darrik\r\n",
+      ch_printf( killer, "Unknown error #%d - %s (immortal data).  Report to Darrik\r\n",
                  errno, strerror( errno ) );
-      sprintf( buf2, "%s slaying %s", ch->name, buf );
+      sprintf( buf2, "%s slaying %s", killer->name, buf );
       perror( buf2 );
     }
 

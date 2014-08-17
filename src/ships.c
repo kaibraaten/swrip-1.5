@@ -1152,7 +1152,7 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
   return retcode;
 }
 
-void EchoToShip( int color, Ship *ship, const char *argument )
+void EchoToShip( int color, const Ship *ship, const char *argument )
 {
   vnum_t room = INVALID_VNUM;
 
@@ -1939,7 +1939,7 @@ void UpdateShips( void )
     }
 }
 
-void EchoToDockedShip( int color, Ship *ship, const char *argument )
+void EchoToDockedShip( int color, const Ship *ship, const char *argument )
 {
   Ship *dship = NULL;
 
@@ -1952,7 +1952,7 @@ void EchoToDockedShip( int color, Ship *ship, const char *argument )
     }
 }
 
-void EchoToCockpit( int color, Ship *ship, const char *argument )
+void EchoToCockpit( int color, const Ship *ship, const char *argument )
 {
   vnum_t room = INVALID_VNUM;
 
@@ -2016,7 +2016,7 @@ static bool CaughtInGravity( const Ship *ship, const Spaceobject *object )
     && vector_distance( &object->pos, &ship->hyperpos ) < object->gravity * 5;
 }
 
-long int GetShipValue( Ship *ship )
+long int GetShipValue( const Ship *ship )
 {
   long int price = 0;
   int turret_num = 0;
@@ -2869,8 +2869,8 @@ void ResetShip( Ship *ship )
   SaveShip(ship);
 }
 
-void EchoToNearbyShips( int color, Ship *ship, const char *argument,
-			   Ship *ignore )
+void EchoToNearbyShips( int color, const Ship *ship, const char *argument,
+			const Ship *ignore )
 {
   Ship *target = NULL;
 
@@ -2894,7 +2894,7 @@ void EchoToNearbyShips( int color, Ship *ship, const char *argument,
     }
 }
 
-Ship * GetShipInRoom( Room *room, const char *name )
+Ship *GetShipInRoom( const Room *room, const char *name )
 {
   Ship *ship = NULL;
 
@@ -2968,7 +2968,7 @@ Ship *GetShipAnywhere( const char *name )
 /*
  * Checks if ship is in a spaceobject and returns pointer if it is.
  */
-Ship *GetShipInRange( const char *name , Ship *eShip)
+Ship *GetShipInRange( const char *name, const Ship *eShip)
 {
   Ship *ship = NULL;
   char arg[MAX_INPUT_LENGTH];
@@ -3243,7 +3243,7 @@ void ShipFromSpaceobject( Ship *ship, Spaceobject *spaceobject )
   ship->spaceobject = NULL;
 }
 
-bool IsShipRental( Character *ch, Ship *ship )
+bool IsShipRental( const Character *ch, const Ship *ship )
 {
   if ( !str_cmp("Public",ship->owner) )
     {
@@ -3305,7 +3305,7 @@ bool CanDock( const Ship *ship )
   return true;
 }
 
-bool CheckPilot( Character *ch , Ship *ship )
+bool CheckPilot( const Character *ch, const Ship *ship )
 {
   if ( !str_cmp(ch->name,ship->owner)
        || !str_cmp(ch->name,ship->pilot)
@@ -3404,7 +3404,7 @@ bool ExtractShip( Ship *ship )
   return true;
 }
 
-void DamageShip( Ship *ship, int min, int max, Character *ch, Ship *assaulter )
+void DamageShip( Ship *ship, int min, int max, Character *ch, const Ship *assaulter )
 {
   short ionFactor = 1;
   int dmg = 0;
@@ -3521,7 +3521,7 @@ void DamageShip( Ship *ship, int min, int max, Character *ch, Ship *assaulter )
     }
 }
 
-void DestroyShip( Ship *ship , Character *ch )
+void DestroyShip( Ship *ship, Character *killer )
 {
   char buf[MAX_STRING_LENGTH];
   vnum_t roomnum = INVALID_VNUM;
@@ -3576,9 +3576,9 @@ void DestroyShip( Ship *ship , Character *ch )
                 }
               else
                 {
-                  if ( ch )
+                  if ( killer )
 		    {
-		      raw_kill( ch , rch );
+		      raw_kill( killer, rch );
 		    }
                   else
 		    {
@@ -3611,10 +3611,10 @@ void DestroyShip( Ship *ship , Character *ch )
           ship->docking = SHIP_READY;
         }
 
-      if ( ch )
+      if ( killer )
         {
 	  log_printf( "%s(%s) was just destroyed by %s.",
-		      lship->name, lship->personalname, ch->name );
+		      lship->name, lship->personalname, killer->name );
         }
       else
         {
@@ -3622,7 +3622,7 @@ void DestroyShip( Ship *ship , Character *ch )
 		      lship->name, lship->personalname );
         }
 
-      DestroyShip( lship, ch );
+      DestroyShip( lship, killer );
     }
 
   ResetShip(ship);
@@ -3642,7 +3642,7 @@ bool ShipToRoom(Ship *ship, vnum_t vnum )
   return true;
 }
 
-bool RentShip( Character *ch , Ship *ship )
+bool RentShip( Character *ch, const Ship *ship )
 {
   long price = 0;
 

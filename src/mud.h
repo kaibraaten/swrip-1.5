@@ -2465,36 +2465,36 @@ extern "C" {
   void fold_area( Area *tarea, char *filename, bool install );
 
   /* fight.c */
-  ch_ret  one_hit( Character *ch, Character *victim, int dt );
+  ch_ret one_hit( Character *ch, Character *victim, int dt );
   int xp_compute( const Character *gch, const Character *victim );
-  int   max_fight( Character *ch );
-  void  violence_update( void );
-  ch_ret        multi_hit( Character *ch, Character *victim, int dt );
+  int max_fight( Character *ch );
+  void violence_update( void );
+  ch_ret multi_hit( Character *ch, Character *victim, int dt );
   short ris_damage( Character *ch, short dam, int ris );
-  ch_ret        damage( Character *ch, Character *victim, int dam, int dt );
-  void  update_pos( Character *victim );
-  void  set_fighting( Character *ch, Character *victim );
-  void  stop_fighting( Character *ch, bool fBoth );
-  void  free_fight( Character *ch );
+  ch_ret damage( Character *ch, Character *victim, int dam, int dt );
+  void update_pos( Character *victim );
+  void set_fighting( Character *ch, Character *victim );
+  void stop_fighting( Character *ch, bool fBoth );
+  void free_fight( Character *ch );
   Character *who_fighting( Character *ch );
-  void  check_killer( Character *ch, Character *victim );
-  void  check_attacker( Character *ch, Character *victim );
-  void  death_cry( Character *ch );
-  void  stop_hunting( Character *ch );
-  void  stop_hating( Character *ch );
-  void  stop_fearing( Character *ch );
-  void  start_hunting( Character *ch, Character *victim );
-  void  start_hating( Character *ch, Character *victim );
-  void  start_fearing( Character *ch, Character *victim );
-  bool  is_hunting( Character *ch, Character *victim );
-  bool  is_hating( Character *ch, Character *victim );
-  bool  is_fearing( Character *ch, Character *victim );
-  bool  is_safe( Character *ch, Character *victim );
-  bool  is_safe_nm( Character *ch, Character *victim );
-  bool  legal_loot( Character *ch, Character *victim );
-  bool    check_illegal_pk( Character *ch, Character *victim );
-  void    raw_kill( Character *ch, Character *victim );
-  bool  in_arena( Character *ch );
+  void check_killer( Character *ch, Character *victim );
+  void check_attacker( Character *ch, Character *victim );
+  void death_cry( Character *ch );
+  void stop_hunting( Character *ch );
+  void stop_hating( Character *ch );
+  void stop_fearing( Character *ch );
+  void start_hunting( Character *ch, Character *victim );
+  void start_hating( Character *ch, Character *victim );
+  void start_fearing( Character *ch, Character *victim );
+  bool is_hunting( Character *ch, Character *victim );
+  bool is_hating( Character *ch, Character *victim );
+  bool is_fearing( Character *ch, Character *victim );
+  bool is_safe( Character *ch, Character *victim );
+  bool is_safe_nm( Character *ch, Character *victim );
+  bool legal_loot( Character *ch, Character *victim );
+  bool check_illegal_pk( Character *ch, Character *victim );
+  void raw_kill( Character *killer, Character *victim );
+  bool in_arena( Character *ch );
 
 
   /* makeobjs.c */
