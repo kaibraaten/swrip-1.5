@@ -1154,11 +1154,22 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
 
 void EchoToShip( int color, const Ship *ship, const char *argument )
 {
-  vnum_t room = INVALID_VNUM;
+  vnum_t roomVnum = INVALID_VNUM;
 
-  for ( room = ship->room.first ; room <= ship->room.last ;room++ )
+  for ( roomVnum = ship->room.first ; roomVnum <= ship->room.last ;roomVnum++ )
     {
-      echo_to_room( color, get_room_index(room), argument );
+      Room *room = get_room_index( roomVnum );
+
+      if( room )
+	{
+	  echo_to_room( color, room, argument );
+	}
+      else
+	{
+	  bug( "%s:%d %s(): Ship '%s (%s)' has invalid room vnum %d",
+	       __FILE__, __LINE__, __FUNCTION__,
+	       ship->name, ship->personalname, roomVnum );
+	}
     }
 }
 
@@ -1187,7 +1198,7 @@ void RechargeShips( void )
   Ship *ship = NULL;
   char buf[MAX_STRING_LENGTH];
   bool closeem = false;
-  int origthe_chance = 100;
+  int origchance = 100;
 
   baycount++;
 
@@ -1299,9 +1310,9 @@ void RechargeShips( void )
                               the_chance += ship->currspeed - target->currspeed;
                               the_chance += ship->manuever - target->manuever;
                               the_chance -= ship_distance_to_ship( ship, target ) / ( 10 * ( target->sclass + 1 ) );
-                              the_chance -= origthe_chance;
+                              the_chance -= origchance;
                               the_chance /= 2;
-                              the_chance += origthe_chance;
+                              the_chance += origchance;
                               the_chance = urange( 1 , the_chance , 99 );
 
                               if ( number_percent( ) > the_chance )
