@@ -33,7 +33,7 @@ Ship *last_ship = NULL;
 
 static int baycount = 0;
 
-static void FReadShip( Ship *ship, FILE *fp );
+static void ReadShip( Ship *ship, FILE *fp );
 static bool LoadShipFile( const char *shipfile );
 static void ApproachLandingSite( Ship *ship, const char *arg );
 static void LandShip( Ship *ship, const char *arg );
@@ -2301,7 +2301,7 @@ void SaveShip( const Ship *ship )
   fclose( fp );
 }
 
-static void FReadShip( Ship *ship, FILE *fp )
+static void ReadShip( Ship *ship, FILE *fp )
 {
   for ( ; ; )
     {
@@ -2617,7 +2617,7 @@ static bool LoadShipFile( const char *shipfile )
           word = fread_word( fp );
 	  if ( !str_cmp( word, "SHIP"   ) )
             {
-              FReadShip( ship, fp );
+              ReadShip( ship, fp );
             }
           else if ( !str_cmp( word, "END"  ) )
             {

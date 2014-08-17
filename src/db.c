@@ -340,7 +340,6 @@ void boot_db( bool fCopyOver )
 {
   short wear, x;
 
-  show_hash( 32 );
   unlink( BOOTLOG_FILE );
   boot_log( "---------------------[ Boot Log ]--------------------" );
 
