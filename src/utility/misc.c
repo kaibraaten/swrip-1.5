@@ -219,7 +219,7 @@ char *flag_string( int bitvector, const char * const flagarray[] )
 
   for ( x = 0; x < 32 ; x++ )
     {
-      if ( IS_SET( bitvector, 1 << x ) )
+      if ( IsBitSet( bitvector, 1 << x ) )
 	{
 	  strcat( buf, flagarray[x] );
 	  strcat( buf, " " );

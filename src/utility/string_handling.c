@@ -182,7 +182,7 @@ bool str_cmp( const char *astr, const char *bstr )
 
   for ( ; *astr || *bstr; astr++, bstr++ )
     {
-      if ( LOWER(*astr) != LOWER(*bstr) )
+      if ( CharToLowercase(*astr) != CharToLowercase(*bstr) )
         return true;
     }
 
@@ -210,7 +210,7 @@ bool str_prefix( const char *astr, const char *bstr )
 
   for ( ; *astr; astr++, bstr++ )
     {
-      if ( LOWER(*astr) != LOWER(*bstr) )
+      if ( CharToLowercase(*astr) != CharToLowercase(*bstr) )
         return true;
     }
 
@@ -229,11 +229,11 @@ bool str_infix( const char *astr, const char *bstr )
   int ichar = 0;
   char c0 = 0;
 
-  if ( ( c0 = LOWER(astr[0]) ) == '\0' )
+  if ( ( c0 = CharToLowercase(astr[0]) ) == '\0' )
     return false;
 
   for ( ichar = 0; ichar <= sstr2 - sstr1; ichar++ )
-    if ( c0 == LOWER(bstr[ichar]) && !str_prefix( astr, bstr + ichar ) )
+    if ( c0 == CharToLowercase(bstr[ichar]) && !str_prefix( astr, bstr + ichar ) )
       return false;
 
   return true;
@@ -303,7 +303,7 @@ char *strlower( const char *str )
   int i = 0;
 
   for ( i = 0; str[i] != '\0'; i++ )
-    strlow[i] = LOWER(str[i]);
+    strlow[i] = CharToLowercase(str[i]);
 
   strlow[i] = '\0';
   return strlow;
@@ -318,7 +318,7 @@ char *strupper( const char *str )
   int i = 0;
 
   for ( i = 0; str[i] != '\0'; i++ )
-    strup[i] = UPPER(str[i]);
+    strup[i] = CharToUppercase(str[i]);
 
   strup[i] = '\0';
   return strup;

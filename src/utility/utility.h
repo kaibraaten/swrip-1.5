@@ -37,12 +37,12 @@ typedef unsigned char bool;
 /*
  * Utility macros.
  */
-#define LOWER(c)                ((char) tolower((int)(c)))
-#define UPPER(c)                ((char) toupper((int)(c)))
-#define IS_SET(flag, bit)       ((flag) & (bit))
-#define SET_BIT(var, bit)       ((var) |= (bit))
-#define REMOVE_BIT(var, bit)    ((var) &= ~(bit))
-#define TOGGLE_BIT(var, bit)    ((var) ^= (bit))
+#define CharToLowercase(c)                ((char) tolower((int)(c)))
+#define CharToUppercase(c)                ((char) toupper((int)(c)))
+#define IsBitSet(flag, bit)       ((flag) & (bit))
+#define SetBit(var, bit)       ((var) |= (bit))
+#define RemoveBit(var, bit)    ((var) &= ~(bit))
+#define ToggleBit(var, bit)    ((var) ^= (bit))
 
 /*
  * Memory allocation macros.
@@ -79,8 +79,6 @@ do                                                              \
  else free(point);                                             \
  point = NULL;                                                 \
  } while(0)
-
-#define QUICKMATCH(p1, p2)      (strcmp((p1), (p2)) == 0)
 
 #if defined(KEY)
 #undef KEY

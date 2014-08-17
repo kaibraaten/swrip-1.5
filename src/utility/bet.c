@@ -70,7 +70,7 @@ static int advatoi (const char *s)
   while ( isdigit((int)s[0]) )
     number = (number * 10) + (*s++ - '0');
 
-  switch (UPPER(s[0]))
+  switch (CharToUppercase(s[0]))
   {
     case 'K'  : number *= (multiplier = 1000);	++s; break;
     case 'M'  : number *= (multiplier = 1000000);	++s; break;
