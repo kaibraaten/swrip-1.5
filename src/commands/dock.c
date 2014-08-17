@@ -153,7 +153,7 @@ void do_dock(Character *ch, char *argument)
       return;
     }
 
-  if ( ship_distance_to_ship(ship, eShip) > 100 )
+  if ( GetShipDistanceToShip(ship, eShip) > 100 )
     {
       send_to_char("&RYou aren't close enough to dock. Get a little closer first then try again.\r\n",ch);
       return;

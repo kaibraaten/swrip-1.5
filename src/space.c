@@ -145,10 +145,10 @@ void update_missiles( void )
 
       if ( target->spaceobject && IsMissileInRange( ship, missile ) )
         {
-          missile_set_course_to_ship( missile, target );
-          move_missile( missile );
+          SetMissileCourseTowardsShip( missile, target );
+          MoveMissile( missile );
 
-          if ( missile_distance_to_ship( missile, target ) <= 20 )
+          if ( GetMissileDistanceToShip( missile, target ) <= 20 )
             {
               if ( target->chaff_released <= 0)
                 {

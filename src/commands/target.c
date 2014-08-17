@@ -102,7 +102,7 @@ void do_target(Character *ch, char *argument )
 
       if( ship->sclass <= SHIP_PLATFORM)
         {
-          if ( ship_distance_to_ship( ship, target ) > 5000 )
+          if ( GetShipDistanceToShip( ship, target ) > 5000 )
             {
               send_to_char("&RThat ship is too far away to target.\r\n",ch);
               return;

@@ -28,7 +28,7 @@ void do_status(Character *ch, char *argument )
       return;
     }
 
-  if( ship_distance_to_ship( ship, target ) > 500+ship->sensor*2 )
+  if( GetShipDistanceToShip( ship, target ) > 500+ship->sensor*2 )
     {
       send_to_char("&RThat ship is to far away to scan.\r\n",ch);
       return;

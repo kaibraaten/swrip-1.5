@@ -125,7 +125,7 @@ void do_tractorbeam(Character *ch, char *argument )
 
       if( ship->sclass <= SHIP_PLATFORM)
         {
-          if ( ship_distance_to_ship( ship, target ) > 100+ship->tractorbeam )
+          if ( GetShipDistanceToShip( ship, target ) > 100+ship->tractorbeam )
             {
               send_to_char("&RThat ship is too far away to tractor.\r\n",ch);
               return;
@@ -184,7 +184,7 @@ void do_tractorbeam(Character *ch, char *argument )
   the_chance += target->sclass - ship->sclass;
   the_chance += ship->currspeed - target->currspeed;
   the_chance += ship->manuever - target->manuever;
-  the_chance -= ship_distance_to_ship( ship, target ) /(10*(target->sclass+1));
+  the_chance -= GetShipDistanceToShip( ship, target ) /(10*(target->sclass+1));
   the_chance /= 2;
   the_chance = urange( 1 , the_chance , 99 );
 
@@ -203,13 +203,13 @@ void do_tractorbeam(Character *ch, char *argument )
   if ( target->sclass <= ship->sclass )
     {
       target->currspeed = ship->tractorbeam/2;
-      ship_set_course_to_ship( target, ship );
+      SetShipCourseTowardsShip( target, ship );
     }
 
   if ( target->sclass > ship->sclass )
     {
       ship->currspeed = ship->tractorbeam/2;
-      ship_set_course_to_ship( ship, target );
+      SetShipCourseTowardsShip( ship, target );
     }
 
   send_to_char( "&GTarget Locked.\r\n", ch);

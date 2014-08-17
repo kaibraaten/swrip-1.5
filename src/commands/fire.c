@@ -85,7 +85,7 @@ void do_fire(Character *ch, char *argument )
 
       if(ship->sclass <= SHIP_PLATFORM)
         {
-          if( ship_distance_to_ship( ship, target ) > 1000 )
+          if( GetShipDistanceToShip( ship, target ) > 1000 )
             {
               send_to_char("&RThat ship is out of laser range.\r\n",ch);
               return;
@@ -93,7 +93,7 @@ void do_fire(Character *ch, char *argument )
         }
 
       if ( ship->sclass < CAPITAL_SHIP
-           && !ship_is_facing_ship( ship, target ) )
+           && !IsShipFacingShip( ship, target ) )
         {
           send_to_char("&RThe main laser can only fire forward. You'll need to turn your ship!\r\n",ch);
           return;
@@ -104,7 +104,7 @@ void do_fire(Character *ch, char *argument )
       the_chance += target->sclass - ship->sclass;
       the_chance += ship->currspeed - target->currspeed;
       the_chance += ship->manuever - target->manuever;
-      the_chance -= ship_distance_to_ship( ship, target ) / ( 10 * ( target->sclass + 1 ) );
+      the_chance -= GetShipDistanceToShip( ship, target ) / ( 10 * ( target->sclass + 1 ) );
       the_chance -= origthe_chance;
       the_chance /= 2;
       the_chance += origthe_chance;
@@ -193,13 +193,13 @@ void do_fire(Character *ch, char *argument )
         }
       if (ship->sclass <= SHIP_PLATFORM)
         {
-          if( ship_distance_to_ship( ship, target ) > 1000 )
+          if( GetShipDistanceToShip( ship, target ) > 1000 )
             {
               send_to_char("&RThat ship is out of ion range.\r\n",ch);
               return;
             }
         }
-      if ( ship->sclass < CAPITAL_SHIP && !ship_is_facing_ship( ship, target ) )
+      if ( ship->sclass < CAPITAL_SHIP && !IsShipFacingShip( ship, target ) )
         {
           send_to_char("&RThe main ion cannon can only fire forward. You'll need to turn your ship!\r\n",ch);
           return;
@@ -209,7 +209,7 @@ void do_fire(Character *ch, char *argument )
       the_chance += target->sclass - ship->sclass;
       the_chance += ship->currspeed - target->currspeed;
       the_chance += ship->manuever - target->manuever;
-      the_chance -= ship_distance_to_ship(ship, target) / (10*(target->sclass+1));
+      the_chance -= GetShipDistanceToShip(ship, target) / (10*(target->sclass+1));
       the_chance -= origthe_chance;
       the_chance /= 2;
       the_chance += origthe_chance;
@@ -297,14 +297,14 @@ void do_fire(Character *ch, char *argument )
         }
       if(ship->sclass <= SHIP_PLATFORM)
         {
-          if( ship_distance_to_ship( ship, target ) > 1000 )
+          if( GetShipDistanceToShip( ship, target ) > 1000 )
             {
               send_to_char("&RThat ship is out of missile range.\r\n",ch);
               return;
             }
         }
       if ( ship->sclass < CAPITAL_SHIP
-           && !ship_is_facing_ship( ship, target ) )
+           && !IsShipFacingShip( ship, target ) )
         {
           send_to_char("&RMissiles can only fire in a forward. You'll need to turn your ship!\r\n",ch);
           return;
@@ -313,7 +313,7 @@ void do_fire(Character *ch, char *argument )
       the_chance += target->sclass - ship->sclass;
       the_chance += ship->currspeed - target->currspeed;
       the_chance += ship->manuever - target->manuever;
-      the_chance -= ship_distance_to_ship(ship, target)/(10*(target->sclass+1));
+      the_chance -= GetShipDistanceToShip(ship, target)/(10*(target->sclass+1));
       the_chance -= origthe_chance;
       the_chance /= 2;
       the_chance += origthe_chance;
@@ -396,14 +396,14 @@ void do_fire(Character *ch, char *argument )
         }
       if(ship->sclass <= SHIP_PLATFORM)
         {
-          if( ship_distance_to_ship( ship, target ) > 1000 )
+          if( GetShipDistanceToShip( ship, target ) > 1000 )
             {
               send_to_char("&RThat ship is out of torpedo range.\r\n",ch);
               return;
             }
         }
       if ( ship->sclass < CAPITAL_SHIP
-           && !ship_is_facing_ship( ship, target ) )
+           && !IsShipFacingShip( ship, target ) )
         {
           send_to_char("&RTorpedos can only fire in a forward direction. You'll need to turn your ship!\r\n",ch);
 	  return;
@@ -412,7 +412,7 @@ void do_fire(Character *ch, char *argument )
       the_chance += target->sclass - ship->sclass;
       the_chance += ship->currspeed - target->currspeed;
       the_chance += ship->manuever - target->manuever;
-      the_chance -= ship_distance_to_ship( ship, target ) / (10*(target->sclass+1));
+      the_chance -= GetShipDistanceToShip( ship, target ) / (10*(target->sclass+1));
       the_chance -= origthe_chance;
       the_chance /= 2;
       the_chance += origthe_chance;
@@ -494,14 +494,14 @@ void do_fire(Character *ch, char *argument )
         }
       if (ship->sclass <= SHIP_PLATFORM)
         {
-          if( ship_distance_to_ship( ship, target ) > 800 )
+          if( GetShipDistanceToShip( ship, target ) > 800 )
             {
 	      send_to_char("&RThat ship is out of rocket range.\r\n",ch);
               return;
             }
         }
       if ( ship->sclass < CAPITAL_SHIP
-           && !ship_is_facing_ship( ship, target ) )
+           && !IsShipFacingShip( ship, target ) )
         {
           send_to_char("&RRockets can only fire forward. You'll need to turn your ship!\r\n",ch);
           return;
@@ -510,7 +510,7 @@ void do_fire(Character *ch, char *argument )
       the_chance += target->sclass - ship->sclass;
       the_chance += ship->currspeed - target->currspeed;
       the_chance += ship->manuever - target->manuever;
-      the_chance -= ship_distance_to_ship(ship, target) / (10*(target->sclass+1));
+      the_chance -= GetShipDistanceToShip(ship, target) / (10*(target->sclass+1));
       the_chance -= origthe_chance;
       the_chance /= 2;
       the_chance += origthe_chance;
@@ -598,7 +598,7 @@ void do_fire(Character *ch, char *argument )
 
 	  if (ship->sclass <= SHIP_PLATFORM)
 	    {
-	      if( ship_distance_to_ship( ship, target ) > 1000 )
+	      if( GetShipDistanceToShip( ship, target ) > 1000 )
 		{
 		  send_to_char("&RThat ship is out of laser range.\r\n",ch);
 		  return;
@@ -613,7 +613,7 @@ void do_fire(Character *ch, char *argument )
 	  the_chance += target->sclass - CAPITAL_SHIP+1;
 	  the_chance += ship->currspeed - target->currspeed;
 	  the_chance += 100 - target->manuever;
-	  the_chance -= ship_distance_to_ship( ship, target ) / (10*(target->sclass+1));
+	  the_chance -= GetShipDistanceToShip( ship, target ) / (10*(target->sclass+1));
 	  the_chance -= origthe_chance;
 	  the_chance /= 2;
 	  the_chance += origthe_chance;

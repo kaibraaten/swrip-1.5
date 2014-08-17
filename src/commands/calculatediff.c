@@ -99,7 +99,7 @@ void do_calculate_diff(Character *ch, char *argument )
       return;
     }
 
-  vector_randomize( &ship->jump, ship->astro_array - 300, 300 - ship->astro_array );
+  RandomizeVector( &ship->jump, ship->astro_array - 300, 300 - ship->astro_array );
   ship->jump.x += (distance ? distance : (spaceobject && spaceobject->gravity ? spaceobject->gravity : 0 ) );
   ship->jump.y += (distance ? distance : (spaceobject && spaceobject->gravity ? spaceobject->gravity : 0 ) );
   ship->jump.z += (distance ? distance : (spaceobject && spaceobject->gravity ? spaceobject->gravity : 0 ) );

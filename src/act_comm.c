@@ -430,8 +430,8 @@ void talk_channel( Character *ch, const char *argument, int channel, const char 
                 if (!IsShipInCombatRange( ship, target ) )
                   continue;
 
-	      if( ship_distance_to_ship( target, ship ) > 100 * ( ship->sensor + 10 ) * ( ( target->sclass ) + 1 )
-		  && ship_distance_to_ship( target, ship ) > 100 * ( ship->comm + target->comm + 20 ) )
+	      if( GetShipDistanceToShip( target, ship ) > 100 * ( ship->sensor + 10 ) * ( ( target->sclass ) + 1 )
+		  && GetShipDistanceToShip( target, ship ) > 100 * ( ship->comm + target->comm + 20 ) )
 		{
 		  continue;
 		}

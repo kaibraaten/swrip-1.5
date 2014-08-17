@@ -87,7 +87,7 @@ void do_adjusttractorbeam(Character *ch, char *argument )
 
   if ( !str_cmp( arg, "dock") )
     {
-      if ( ship_distance_to_ship(ship, eShip) > 100 )
+      if ( GetShipDistanceToShip(ship, eShip) > 100 )
 	{
           send_to_char("&RYou aren't close enough to dock target.\r\n",ch);
           return;
@@ -107,7 +107,7 @@ void do_adjusttractorbeam(Character *ch, char *argument )
 
   if ( !str_cmp( arg, "land") )
     {
-      if ( ship_distance_to_ship(ship, eShip) > 100 )
+      if ( GetShipDistanceToShip(ship, eShip) > 100 )
         {
           send_to_char("&RYou aren't close enough to the target to pull it into your hanger.\r\n",ch);
           return;
@@ -139,7 +139,7 @@ void do_adjusttractorbeam(Character *ch, char *argument )
 
   if ( !str_cmp( arg, "undock" ) )
     {
-      if ( ship_distance_to_ship(ship, eShip) > 100 )
+      if ( GetShipDistanceToShip(ship, eShip) > 100 )
         {
           send_to_char("&RYou aren't close enough to the target to pull it off its position.\r\n",ch);
           return;

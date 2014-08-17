@@ -980,7 +980,7 @@ static void show_no_arg( Character *ch, bool is_auto )
 		{
 		  if ( target != ship && target->spaceobject )
 		    {
-		      if( ship_distance_to_ship( target, ship ) < 100 * ( ship->sensor + 10 ) * ( ( target->sclass == SHIP_DEBRIS ? 2 : target->sclass ) + 1 ) )
+		      if( GetShipDistanceToShip( target, ship ) < 100 * ( ship->sensor + 10 ) * ( ( target->sclass == SHIP_DEBRIS ? 2 : target->sclass ) + 1 ) )
 			{
 			  ch_printf(ch, "%s    %.0f %.0f %.0f\r\n",
 				    target->name,
@@ -988,7 +988,7 @@ static void show_no_arg( Character *ch, bool is_auto )
 				    (target->pos.y - ship->pos.y),
 				    (target->pos.z - ship->pos.z));
 			}
-		      else if ( ship_distance_to_ship( target, ship ) < 100 * ( ship->sensor + 10 ) * ( ( target->sclass == SHIP_DEBRIS ? 2 : target->sclass ) + 3 ) )
+		      else if ( GetShipDistanceToShip( target, ship ) < 100 * ( ship->sensor + 10 ) * ( ( target->sclass == SHIP_DEBRIS ? 2 : target->sclass ) + 3 ) )
 			{
 			  if ( target->sclass == FIGHTER_SHIP )
 			    {

@@ -70,13 +70,13 @@ void do_request(Character *ch, char *argument)
       return;
     }
 
-  if( ship_distance_to_ship(eShip, ship) > 100*((ship->comm)+(eShip->comm)+20))
+  if( GetShipDistanceToShip(eShip, ship) > 100*((ship->comm)+(eShip->comm)+20))
     {
       send_to_char("&RThat ship is out of the range of your comm system.\r\n&w", ch);
       return;
     }
 
-  if( ship_distance_to_ship(eShip, ship) > 100*(ship->sensor+10)*((eShip->sclass)+1))
+  if( GetShipDistanceToShip(eShip, ship) > 100*(ship->sensor+10)*((eShip->sclass)+1))
     {
       send_to_char("&RThat ship is too far away to remotely open bay doors.\r\n",ch);
       return;

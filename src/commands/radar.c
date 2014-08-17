@@ -111,13 +111,13 @@ void do_radar( Character *ch, char *argument )
     {
       if ( target != ship && target->spaceobject )
         {
-          if( ship_distance_to_ship( ship, target ) < 100*(ship->sensor+10)*((target->sclass == SHIP_DEBRIS ? 2 : target->sclass) +1))
+          if( GetShipDistanceToShip( ship, target ) < 100*(ship->sensor+10)*((target->sclass == SHIP_DEBRIS ? 2 : target->sclass) +1))
             ch_printf(ch, "%s    %.0f %.0f %.0f\r\n",
                       target->name,
                       (target->pos.x - ship->pos.x),
                       (target->pos.y - ship->pos.y),
                       (target->pos.z - ship->pos.z));
-          else if ( ship_distance_to_ship( ship, target ) < 100*(ship->sensor+10)*((target->sclass == SHIP_DEBRIS ? 2 : target->sclass)+3))
+          else if ( GetShipDistanceToShip( ship, target ) < 100*(ship->sensor+10)*((target->sclass == SHIP_DEBRIS ? 2 : target->sclass)+3))
             {
               if ( target->sclass == FIGHTER_SHIP )
                 ch_printf(ch, "A small metallic mass    %.0f %.0f %.0f\r\n",
@@ -147,7 +147,7 @@ void do_radar( Character *ch, char *argument )
   for ( missile = first_missile; missile; missile = missile->next )
     {
 
-      if( missile_distance_to_ship( missile, ship ) < 50*(ship->sensor+10)*2)
+      if( GetMissileDistanceToShip( missile, ship ) < 50*(ship->sensor+10)*2)
         {
           ch_printf(ch, "%s    %.0f %.0f %.0f\r\n",
                     missile->missiletype == CONCUSSION_MISSILE ? "A Concusion missile" :

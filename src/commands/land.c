@@ -173,7 +173,7 @@ void do_land( Character *ch, char *argument )
           return;
         }
 
-      if( ship_distance_to_ship( ship, target ) > 200 )
+      if( GetShipDistanceToShip( ship, target ) > 200 )
         {
           send_to_char("&R That ship is too far away! You'll have to fly a litlle closer.\r\n",ch);
           return;
@@ -183,7 +183,7 @@ void do_land( Character *ch, char *argument )
     {
       ship->spaceobject = spaceobj;
 
-      if( ship_distance_to_spaceobject( ship, spaceobj ) > 500 )
+      if( GetShipDistanceToSpaceobject( ship, spaceobj ) > 500 )
         {
           send_to_char("&R That platform is too far away! You'll have to fly a little closer.\r\n",ch);
           return;

@@ -65,53 +65,27 @@
 #include "mud.h"
 #include "vector3_aux.h"
 
-/*
- * To check if a ship is facing a specific position, which can be another
- * ship, a planet, an asteroid, etc.
- *
- * if( ship_is_facing( ship, &target->pos ) )
- * {
- *   ... your code here
- * }
- */
-static bool ship_is_facing( const Ship * const ship,
-			    const Vector3 * const target )
-{
-  Vector3 h, d;
-  bool facing = false;
-  double cosofa = 0.0;
+static bool IsShipFacing( const Ship * const ship,
+                          const Vector3 * const target );
+static void HandleMovement( Vector3 * const pos,
+                            const Vector3 * const head, const int speed );
 
-  vector_copy( &h, &ship->head );
-
-  d.x = target->x - ship->pos.x;
-  d.y = target->y - ship->pos.y;
-  d.z = target->z - ship->pos.z;
-
-  cosofa =
-    vector_dot( &h, &d ) / ( vector_length( &h ) + vector_length( &d ) );
-
-  if( cosofa > 0.75 )
-    facing = true;
-
-  return facing;
-}
-
-bool ship_is_facing_ship( const Ship * const ship,
+bool IsShipFacingShip( const Ship * const ship,
 			  const Ship * const target )
 {
-  return ship_is_facing( ship, &target->pos );
+  return IsShipFacing( ship, &target->pos );
 }
 
-bool ship_is_facing_spaceobject( const Ship * const ship,
+bool IsShipFacingSpaceobject( const Ship * const ship,
 				 const Spaceobject * const target )
 {
-  return ship_is_facing( ship, &target->pos );
+  return IsShipFacing( ship, &target->pos );
 }
 
 /*
  * Flip the trajectory to head the opposite way (180 degrees).
  */
-void ship_turn_180( Ship * const ship )
+void TurnShip180( Ship * const ship )
 {
   ship->head.x *= -1;
   ship->head.y *= -1;
@@ -122,14 +96,14 @@ void ship_turn_180( Ship * const ship )
  * Set a new course towards another space object's position.
  *
  * Towards another ship.
- * ship_set_course( ship, &target->pos );
+ * SetShipCourse( ship, &target->pos );
  *
  * Towards a spaceobject.
- * ship_set_course( ship, &spaceobject->pos );
+ * SetShipCourse( ship, &spaceobject->pos );
  *
  * Etc, etc...
  */
-void ship_set_course( Ship * const ship,
+void SetShipCourse( Ship * const ship,
 		      const Vector3 * const destination )
 {
   ship->head.x = destination->x - ship->pos.x;
@@ -138,19 +112,19 @@ void ship_set_course( Ship * const ship,
   vector_normalize( &ship->head );
 }
 
-void ship_set_course_to_ship( Ship * const ship,
+void SetShipCourseTowardsShip( Ship * const ship,
 			      const Ship * const target )
 {
-  ship_set_course( ship, &target->pos );
+  SetShipCourse( ship, &target->pos );
 }
 
-void ship_set_course_to_spaceobject( Ship * const ship,
+void SetShipCourseTowardsSpaceobject( Ship * const ship,
 				     const Spaceobject * const target )
 {
-  ship_set_course( ship, &target->pos );
+  SetShipCourse( ship, &target->pos );
 }
 
-void missile_set_course_to_ship( Missile * const missile,
+void SetMissileCourseTowardsShip( Missile * const missile,
 				 const Ship * const target )
 {
   missile->head.x = target->pos.x - missile->pos.x;
@@ -163,71 +137,101 @@ void missile_set_course_to_ship( Missile * const missile,
  * High-level function to align a ship's trajectory with another's.
  * Useful for grouped ships, docked ships, etc.
  */
-void ship_align_heading( Ship * const ship,
+void AlignShipTrajectory( Ship * const ship,
 			 const Ship * const target )
 {
   vector_copy( &ship->head, &target->head );
 }
 
-/*
- * Calculate new position based on heading and speed.
- */
-static void handle_movement( Vector3 * const pos,
-			     const Vector3 * const head, const int speed )
+void MoveSpaceobject( Spaceobject * const spaceobj )
 {
-  if( speed > 0 )
-  {
-    const double change = vector_length( head );
-
-    if( change > 0 )
-    {
-      Vector3 tmpv;
-      tmpv.x = head->x / change;
-      tmpv.y = head->y / change;
-      tmpv.z = head->z / change;
-      pos->x += ( tmpv.x * speed ) / 5;
-      pos->y += ( tmpv.y * speed ) / 5;
-      pos->z += ( tmpv.z * speed ) / 5;
-    }
-  }
+  HandleMovement( &spaceobj->pos, &spaceobj->head, spaceobj->speed );
 }
 
-void move_spaceobject( Spaceobject * const spaceobj )
+void MoveShip( Ship * const ship )
 {
-  handle_movement( &spaceobj->pos, &spaceobj->head, spaceobj->speed );
+  HandleMovement( &ship->pos, &ship->head, ship->currspeed );
 }
 
-void move_ship( Ship * const ship )
+void MoveMissile( Missile * const missile )
 {
-  handle_movement( &ship->pos, &ship->head, ship->currspeed );
+  HandleMovement( &missile->pos, &missile->head, missile->speed );
 }
 
-void move_missile( Missile * const missile )
-{
-  handle_movement( &missile->pos, &missile->head, missile->speed );
-}
-
-double ship_distance_to_ship( const Ship * const ship,
+double GetShipDistanceToShip( const Ship * const ship,
 			      const Ship * const target )
 {
   return vector_distance( &ship->pos, &target->pos );
 }
 
-double ship_distance_to_spaceobject( const Ship * const ship,
+double GetShipDistanceToSpaceobject( const Ship * const ship,
 				     const Spaceobject * const spaceobject )
 {
   return vector_distance( &ship->pos, &spaceobject->pos );
 }
 
-double missile_distance_to_ship( const Missile * const missile,
+double GetMissileDistanceToShip( const Missile * const missile,
 				 const Ship * const target )
 {
   return vector_distance( &missile->pos, &target->pos );
 }
 
-void vector_randomize( Vector3 * const vec, int from, int to )
+void RandomizeVector( Vector3 * const vec, int from, int to )
 {
   vec->x += number_range( from, to );
   vec->y += number_range( from, to );
   vec->z += number_range( from, to );
+}
+
+/*
+ * Calculate new position based on heading and speed.
+ */
+static void HandleMovement( Vector3 * const pos,
+                            const Vector3 * const head, const int speed )
+{
+  if( speed > 0 )
+    {
+      const double change = vector_length( head );
+
+      if( change > 0 )
+	{
+	  Vector3 tmpv;
+	  tmpv.x = head->x / change;
+	  tmpv.y = head->y / change;
+	  tmpv.z = head->z / change;
+	  pos->x += ( tmpv.x * speed ) / 5;
+	  pos->y += ( tmpv.y * speed ) / 5;
+	  pos->z += ( tmpv.z * speed ) / 5;
+	}
+    }
+}
+
+/*
+ * To check if a ship is facing a specific position, which can be another
+ * ship, a planet, an asteroid, etc.
+ *
+ * if( ship_is_facing( ship, &target->pos ) )
+ * {
+ *   ... your code here
+ * }
+ */
+static bool IsShipFacing( const Ship * const ship,
+                          const Vector3 * const target )
+{
+  Vector3 h, d;
+  bool facing = false;
+  double cosofa = 0.0;
+
+  vector_copy( &h, &ship->head );
+
+  d.x = target->x - ship->pos.x;
+  d.y = target->y - ship->pos.y;
+  d.z = target->z - ship->pos.z;
+
+  cosofa = vector_dot( &h, &d ) / ( vector_length( &h ) + vector_length( &d ) );
+
+  if( cosofa > 0.75 )
+    facing = true;
+
+  return facing;
 }

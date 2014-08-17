@@ -45,7 +45,7 @@ static bool WillCollideWithSun( const Ship *ship, const Spaceobject *sun )
 {
   if ( sun->name
        && str_cmp( sun->name, "" )
-       && ship_distance_to_spaceobject( ship, sun ) < 10 )
+       && GetShipDistanceToSpaceobject( ship, sun ) < 10 )
     {
       return true;
     }
@@ -114,7 +114,7 @@ void UpdateShipMovement( void )
 
       if ( ship->shipstate != SHIP_LAND && ship->shipstate != SHIP_LAND_2)
         {
-          move_ship( ship );
+          MoveShip( ship );
         }
 
       /*
@@ -126,9 +126,9 @@ void UpdateShipMovement( void )
           if( ship->tractoredby->sclass <= ship->sclass )
             {
               ship->tractoredby->currspeed = ship->tractoredby->tractorbeam/4;
-              ship_set_course_to_ship( ship->tractoredby, ship );
+              SetShipCourseTowardsShip( ship->tractoredby, ship );
 
-	      if( ship_distance_to_ship( ship, ship->tractoredby ) < 10 )
+	      if( GetShipDistanceToShip( ship, ship->tractoredby ) < 10 )
                 {
                   vector_copy( &ship->tractoredby->pos, &ship->pos );
                 }
@@ -138,9 +138,9 @@ void UpdateShipMovement( void )
           if ( ship->tractoredby->sclass > ship->sclass )
             {
               ship->currspeed = ship->tractoredby->tractorbeam/4;
-              ship_set_course_to_ship( ship, ship->tractoredby );
+              SetShipCourseTowardsShip( ship, ship->tractoredby );
 
-              if( ship_distance_to_ship( ship, ship->tractoredby ) < 10 )
+              if( GetShipDistanceToShip( ship, ship->tractoredby ) < 10 )
                 {
                   vector_copy( &ship->pos, &ship->tractoredby->pos );
                 }
@@ -165,7 +165,7 @@ void UpdateShipMovement( void )
             {
               if ( spaceobj->type >= SPACE_PLANET
                    && spaceobj->name && str_cmp(spaceobj->name,"")
-                   && ship_distance_to_spaceobject( ship, spaceobj ) < 10 )
+                   && GetShipDistanceToSpaceobject( ship, spaceobj ) < 10 )
                 {
                   sprintf( buf, "You begin orbitting %s.", spaceobj->name);
                   EchoToCockpit( AT_YELLOW, ship, buf);
@@ -801,7 +801,7 @@ bool CheckHostile( Ship *ship )
           if ( !str_cmp( target->owner , "The Rebel Alliance" )
 	       || !str_cmp( target->owner , "The New Republic"))
             {
-              tempdistance = ship_distance_to_ship( ship, target );
+              tempdistance = GetShipDistanceToShip( ship, target );
 
               if( distance == -1 || distance > tempdistance )
                 {
@@ -816,7 +816,7 @@ bool CheckHostile( Ship *ship )
         {
           if ( !str_cmp( target->owner, "The Empire" ) )
             {
-              tempdistance = ship_distance_to_ship( ship, target );
+              tempdistance = GetShipDistanceToShip( ship, target );
 
               if( distance == -1 || distance > tempdistance )
                 {
@@ -830,7 +830,7 @@ bool CheckHostile( Ship *ship )
         {
           if ( str_cmp(target->owner, "Pirates") )
             {
-              tempdistance = ship_distance_to_ship( ship, target );
+              tempdistance = GetShipDistanceToShip( ship, target );
 
               if( distance == -1 || distance > tempdistance )
                 {
@@ -1302,14 +1302,14 @@ void RechargeShips( void )
                       if ( !IsShipInHyperspace( ship )
                           && ship->energy > 25
                           && IsShipInCombatRange( ship, target )
-                          && ship_distance_to_ship( target, ship ) <= 1000 )
+                          && GetShipDistanceToShip( target, ship ) <= 1000 )
                         {
-                          if ( ship->sclass > MIDSIZE_SHIP || ship_is_facing_ship( ship , target ) )
+                          if ( ship->sclass > MIDSIZE_SHIP || IsShipFacingShip( ship , target ) )
                             {
                               the_chance += target->sclass - ship->sclass;
                               the_chance += ship->currspeed - target->currspeed;
                               the_chance += ship->manuever - target->manuever;
-                              the_chance -= ship_distance_to_ship( ship, target ) / ( 10 * ( target->sclass + 1 ) );
+                              the_chance -= GetShipDistanceToShip( ship, target ) / ( 10 * ( target->sclass + 1 ) );
                               the_chance -= origchance;
                               the_chance /= 2;
                               the_chance += origchance;
@@ -1586,7 +1586,7 @@ void UpdateShips( void )
           for( spaceobj = first_spaceobject; spaceobj; spaceobj = spaceobj->next )
 	    {
 	      if( spaceobj->name &&  str_cmp(spaceobj->name,"")
-		  && ship_distance_to_spaceobject( ship, spaceobj ) < too_close )
+		  && GetShipDistanceToSpaceobject( ship, spaceobj ) < too_close )
 		{
 		  sprintf( buf, "Proximity alert: %s  %.0f %.0f %.0f", spaceobj->name,
 			   spaceobj->pos.x, spaceobj->pos.y, spaceobj->pos.z);
@@ -1612,7 +1612,7 @@ void UpdateShips( void )
               if( target->spaceobject )
                 {
                   if( target != ship
-                      && ship_distance_to_ship( ship, target ) < target_too_close
+                      && GetShipDistanceToShip( ship, target ) < target_too_close
                       && ship->docked != target && target->docked != ship )
                     {
                       sprintf( buf, "Proximity alert: %s  %.0f %.0f %.0f",
@@ -1694,10 +1694,10 @@ void UpdateShips( void )
 
           if ( target != ship && ship->shipstate == SHIP_READY
                && ship->docked == NULL && ship->shipstate != SHIP_DOCKED
-               && ship_distance_to_ship( ship, target ) < target_too_close )
+               && GetShipDistanceToShip( ship, target ) < target_too_close )
             {
-              ship_set_course_to_ship( ship, ship->target0 );
-              ship_turn_180( ship );
+              SetShipCourseTowardsShip( ship, ship->target0 );
+              TurnShip180( ship );
               ship->energy -= ship->currspeed/10;
               echo_to_room( AT_RED , get_room_index(ship->room.pilotseat), "Autotrack: Evading to avoid collision!\r\n" );
 
@@ -1715,10 +1715,10 @@ void UpdateShips( void )
 		  ship->shipstate = SHIP_BUSY;
 		}
             }
-          else if ( !ship_is_facing_ship(ship, ship->target0)
+          else if ( !IsShipFacingShip(ship, ship->target0)
                     && ship->docked == NULL && ship->shipstate != SHIP_DOCKED )
             {
-              ship_set_course_to_ship( ship, ship->target0 );
+              SetShipCourseTowardsShip( ship, ship->target0 );
               ship->energy -= ship->currspeed / 10;
               echo_to_room( AT_BLUE , get_room_index(ship->room.pilotseat), "Autotracking target... setting new course.\r\n" );
 
@@ -1797,14 +1797,14 @@ void UpdateShips( void )
 		      && ship->energy > 25
                       && ship->missilestate == MISSILE_READY
                       && IsShipInCombatRange( ship, target )
-                      && ship_distance_to_ship( target, ship ) <= 1200 )
+                      && GetShipDistanceToShip( target, ship ) <= 1200 )
                     {
-                      if ( ship->sclass > MIDSIZE_SHIP || ship_is_facing_ship( ship , target ) )
+                      if ( ship->sclass > MIDSIZE_SHIP || IsShipFacingShip( ship , target ) )
                         {
                           the_chance -= target->manuever/5;
                           the_chance -= target->currspeed/20;
                           the_chance += target->sclass*target->sclass*25;
-                          the_chance -= ( ship_distance_to_ship( ship, target ) * 3 ) / 100;
+                          the_chance -= ( GetShipDistanceToShip( ship, target ) * 3 ) / 100;
                           the_chance += 30;
                           the_chance = urange( 10 , the_chance , 90 );
 
@@ -1917,7 +1917,7 @@ void UpdateShips( void )
                       vector_copy( &ship->pos, &ship->spaceobject->pos );
                     }
 
-                  vector_randomize( &ship->pos, -5000, 5000 );
+                  RandomizeVector( &ship->pos, -5000, 5000 );
                 }
             }
         }
@@ -1994,7 +1994,7 @@ bool IsShipInCombatRange( const Ship *ship, const Ship *target )
     {
       if ( target->spaceobject && ship->spaceobject
            && target->shipstate != SHIP_LANDED
-           && ship_distance_to_ship( ship, target ) < 100 * ( ship->sensor + 10 ) * ( ( target->sclass == SHIP_DEBRIS ? 2 : target->sclass ) + 3 ) )
+           && GetShipDistanceToShip( ship, target ) < 100 * ( ship->sensor + 10 ) * ( ( target->sclass == SHIP_DEBRIS ? 2 : target->sclass ) + 3 ) )
 	{
 	  return true;
 	}
@@ -2006,19 +2006,19 @@ bool IsShipInCombatRange( const Ship *ship, const Ship *target )
 bool IsMissileInRange( const Ship *ship, const Missile *missile )
 {
   return missile && ship && ship->spaceobject
-    && missile_distance_to_ship( missile, ship ) < 5000;
+    && GetMissileDistanceToShip( missile, ship ) < 5000;
 }
 
 bool IsSpaceobjectInRange( const Ship *ship, const Spaceobject *object )
 {
   return object && ship && ship->spaceobject
-    && ship_distance_to_spaceobject( ship, object ) < 100000;
+    && GetShipDistanceToSpaceobject( ship, object ) < 100000;
 }
 
 bool IsSpaceobjectInCaptureRange( const Ship *ship, const Spaceobject *object )
 {
   return object && ship
-    && ship_distance_to_spaceobject( ship, object ) < 10000;
+    && GetShipDistanceToSpaceobject( ship, object ) < 10000;
 }
 
 static bool CaughtInGravity( const Ship *ship, const Spaceobject *object )
@@ -2717,7 +2717,7 @@ static bool LoadShipFile( const char *shipfile )
                       vector_copy( &ship->pos, &ship->spaceobject->pos );
                     }
 
-                  vector_randomize( &ship->pos, -5000, 5000 );
+                  RandomizeVector( &ship->pos, -5000, 5000 );
                   ship->shipstate = SHIP_READY;
                   ship->autopilot = true;
                   ship->autorecharge = true;
@@ -2898,7 +2898,7 @@ void EchoToNearbyShips( int color, const Ship *ship, const char *argument,
         }
 
       if (target != ship && target != ignore
-	  && ship_distance_to_ship( ship, target ) < 100*(target->sensor+10)*((ship->sclass == SHIP_DEBRIS ? 2 : ship->sclass)+1))
+	  && GetShipDistanceToShip( ship, target ) < 100*(target->sensor+10)*((ship->sclass == SHIP_DEBRIS ? 2 : ship->sclass)+1))
         {
           EchoToCockpit( color , target , argument );
         }

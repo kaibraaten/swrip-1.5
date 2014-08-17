@@ -109,7 +109,7 @@ void do_trajectory_actual( Character *ch, char *argument )
   if( argvec.x == 0 && argvec.y == 0 && argvec.z == 0 )
     argvec.z = ship->pos.z + 1;
 
-  ship_set_course( ship, &argvec );
+  SetShipCourse( ship, &argvec );
   ship->energy -= (ship->currspeed/10);
 
   ch_printf( ch ,"&GNew course set, approaching %.0f %.0f %.0f.\r\n",
