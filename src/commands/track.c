@@ -33,7 +33,7 @@ void do_track( Character *ch, char *argument )
   if ( !IsNpc(ch) )
     maxdist = (maxdist * ch->pcdata->learned[gsn_track]) / 100;
 
-  dir = find_first_step(ch->in_room, vict->in_room, maxdist);
+  dir = FindFirstStep(ch->in_room, vict->in_room, maxdist);
   switch(dir) {
   case BFS_ERROR:
     send_to_char("Hmm... something seems to be wrong.\r\n", ch);

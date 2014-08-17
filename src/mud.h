@@ -2710,10 +2710,6 @@ extern "C" {
   void  load_herb_table( void );
   void  save_herb_table( void );
 
-  /* track.c */
-  void  found_prey( Character *ch, Character *victim );
-  void  hunt_victim( Character *ch );
-
   /* swskills.c */
   void add_reinforcements( Character *ch );
 

@@ -30,7 +30,7 @@
 
 #define TRACK_THROUGH_DOORS
 
-static bool mob_snipe( Character *ch, Character *victim);
+static bool MobSnipe( Character *ch, Character *victim);
 
 /* You can define or not define TRACK_THOUGH_DOORS, above, depending on
    whether or not you want track to find paths which lead through closed
@@ -52,15 +52,15 @@ static struct bfs_queue_struct *room_queue = NULL;
 #define UNMARK(room)    (REMOVE_BIT(    (room)->room_flags, BFS_MARK) )
 #define IS_MARKED(room) (IS_SET(        (room)->room_flags, BFS_MARK) )
 
-static Room *toroom( Room *room, DirectionType door )
+static Room *ToRoom( const Room *room, DirectionType door )
 {
   return (get_exit( room, door )->to_room);
 }
 
-static bool valid_edge( Room *room, short door )
+static bool IsValidEdge( const Room *room, short door )
 {
-  Exit *pexit = NULL;
-  Room *to_room = NULL;
+  const Exit *pexit = NULL;
+  const Room *to_room = NULL;
 
   pexit = get_exit( room, door );
 
@@ -144,14 +144,14 @@ static void clean_room_queue(void)
   room_queue = NULL;
 }
 
-int find_first_step(Room *src, Room *target, int maxdist )
+int FindFirstStep(Room *src, Room *target, int maxdist )
 {
   DirectionType curr_dir = DIR_INVALID;
   int count = 0;
 
   if ( !src || !target )
     {
-      bug("Illegal value passed to find_first_step (track.c)", 0 );
+      bug("Illegal value passed to FindFirstStep (track.c)", 0 );
       return BFS_ERROR;
     }
 
@@ -171,11 +171,11 @@ int find_first_step(Room *src, Room *target, int maxdist )
   /* first, enqueue the first steps, saving which direction we're going. */
   for (curr_dir = 0; curr_dir < 10; curr_dir++)
     {
-      if (valid_edge(src, curr_dir))
+      if (IsValidEdge(src, curr_dir))
 	{
-	  MARK(toroom(src, curr_dir));
-	  room_enqueue(toroom(src, curr_dir));
-	  bfs_enqueue(toroom(src, curr_dir), curr_dir);
+	  MARK(ToRoom(src, curr_dir));
+	  room_enqueue(ToRoom(src, curr_dir));
+	  bfs_enqueue(ToRoom(src, curr_dir), curr_dir);
 	}
     }
 
@@ -201,11 +201,11 @@ int find_first_step(Room *src, Room *target, int maxdist )
 	{
 	  for (curr_dir = 0; curr_dir < 10; curr_dir++)
 	    {
-	      if (valid_edge(queue_head->room, curr_dir))
+	      if (IsValidEdge(queue_head->room, curr_dir))
 		{
-		  MARK(toroom(queue_head->room, curr_dir));
-		  room_enqueue(toroom(queue_head->room, curr_dir));
-		  bfs_enqueue(toroom(queue_head->room, curr_dir),queue_head->dir);
+		  MARK(ToRoom(queue_head->room, curr_dir));
+		  room_enqueue(ToRoom(queue_head->room, curr_dir));
+		  bfs_enqueue(ToRoom(queue_head->room, curr_dir),queue_head->dir);
 		}
 	    }
 
@@ -218,7 +218,7 @@ int find_first_step(Room *src, Room *target, int maxdist )
   return BFS_NO_PATH;
 }
 
-void found_prey( Character *ch, Character *victim )
+void FoundPrey( Character *ch, Character *victim )
 {
   char buf[MAX_STRING_LENGTH];
   char victname[MAX_STRING_LENGTH];
@@ -341,7 +341,7 @@ void found_prey( Character *ch, Character *victim )
   multi_hit(ch, victim, TYPE_UNDEFINED);
 }
 
-void hunt_victim( Character *ch )
+void HuntVictim( Character *ch )
 {
   bool found = false;
   Character *tmp = NULL;
@@ -375,7 +375,7 @@ void hunt_victim( Character *ch )
 	  return;
 	}
 
-      found_prey( ch, ch->hhf.hunting->who );
+      FoundPrey( ch, ch->hhf.hunting->who );
       return;
     }
 
@@ -385,7 +385,7 @@ void hunt_victim( Character *ch )
 
     if ( wield != NULL && wield->value[OVAL_WEAPON_TYPE] == WEAPON_BLASTER  )
       {
-        if ( mob_snipe( ch, ch->hhf.hunting->who ) == true )
+        if ( MobSnipe( ch, ch->hhf.hunting->who ) == true )
 	  {
 	    return;
 	  }
@@ -396,7 +396,7 @@ void hunt_victim( Character *ch )
       }
   }
 
-  ret = find_first_step(ch->in_room, ch->hhf.hunting->who->in_room, 5000);
+  ret = FindFirstStep(ch->in_room, ch->hhf.hunting->who->in_room, 5000);
 
   if ( ret == BFS_NO_PATH )
     {
@@ -447,14 +447,14 @@ void hunt_victim( Character *ch )
 
       if (ch->in_room == ch->hhf.hunting->who->in_room)
 	{
-	  found_prey( ch, ch->hhf.hunting->who );
+	  FoundPrey( ch, ch->hhf.hunting->who );
 	}
 
       return;
     }
 }
 
-static bool mob_snipe( Character *ch, Character *victim )
+static bool MobSnipe( Character *ch, Character *victim )
 {
   DirectionType dir = DIR_INVALID;
   short dist = 0;

@@ -31,6 +31,7 @@
 #include "ships.h"
 #include "shuttle.h"
 #include "character.h"
+#include "track.h"
 
 /* mud_prog.c */
 void room_act_update( void );
@@ -913,7 +914,7 @@ void mobile_update( void )
 	      SetWaitState( ch, 1 * PULSE_PER_SECOND );
 	    }
 
-          hunt_victim( ch );
+          HuntVictim( ch );
           continue;
         }
       else if ( !ch->fighting && !ch->hhf.hunting
@@ -2117,7 +2118,7 @@ void char_check( void )
                    && !ch->fighting && ch->hhf.hunting )
                 {
                   SetWaitState( ch, 2 * PULSE_VIOLENCE );
-                  hunt_victim( ch );
+                  HuntVictim( ch );
                   continue;
                 }
 
@@ -2339,7 +2340,7 @@ void aggr_update( void )
 
           if ( is_hating( ch, wch ) )
             {
-              found_prey( ch, wch );
+              FoundPrey( ch, wch );
               continue;
             }
 

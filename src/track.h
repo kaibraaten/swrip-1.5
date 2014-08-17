@@ -30,6 +30,8 @@
 #define BFS_NO_PATH        -3
 #define BFS_MARK         BV01
 
-int find_first_step(Room *src, Room *target, int maxdist );
+int FindFirstStep(Room *src, Room *target, int maxdist );
+void FoundPrey( Character *ch, Character *victim );
+void HuntVictim( Character *ch );
 
 #endif
