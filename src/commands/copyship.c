@@ -4,8 +4,8 @@
 
 void do_copyship( Character *ch, char *argument )
 {
-  SHIP_DATA *ship = NULL;
-  SHIP_DATA *old = NULL;
+  Ship *ship = NULL;
+  Ship *old = NULL;
   char arg[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
   int turret_num = 0;
@@ -27,7 +27,7 @@ void do_copyship( Character *ch, char *argument )
       return;
     }
 
-  CREATE( ship, SHIP_DATA, 1 );
+  CREATE( ship, Ship, 1 );
   LINK( ship, first_ship, last_ship, next, prev );
 
   for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )

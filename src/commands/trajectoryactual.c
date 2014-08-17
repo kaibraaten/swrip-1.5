@@ -10,7 +10,7 @@ void do_trajectory_actual( Character *ch, char *argument )
   char  arg3[MAX_INPUT_LENGTH];
   int the_chance;
   Vector3 argvec;
-  SHIP_DATA *ship;
+  Ship *ship;
 
   if (  (ship = ship_from_cockpit(ch->in_room->vnum))  == NULL )
     {

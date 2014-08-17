@@ -8,7 +8,7 @@ void do_sabotage(Character *ch, char *argument )
   char arg[MAX_INPUT_LENGTH];
   char buf[MAX_INPUT_LENGTH];
   int the_chance, change;
-  SHIP_DATA *ship;
+  Ship *ship;
 
   strcpy( arg, argument );
 

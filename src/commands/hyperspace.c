@@ -7,8 +7,8 @@ void do_hyperspace(Character *ch, char *argument )
 {
   int the_chance;
   Vector3 tmp;
-  SHIP_DATA *ship;
-  SHIP_DATA *dship;
+  Ship *ship;
+  Ship *dship;
   SPACE_DATA *spaceobject;
   char buf[MAX_STRING_LENGTH];
 

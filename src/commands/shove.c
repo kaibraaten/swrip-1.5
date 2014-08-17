@@ -61,7 +61,7 @@ void do_shove( Character *ch, char *argument )
       if (!str_cmp( arg2, "in" ))
         {
 	  ROOM_INDEX_DATA *to_room = NULL;
-	  SHIP_DATA *ship = NULL;
+	  Ship *ship = NULL;
 
           if ( !argument || argument[0] == '\0')
             {
@@ -149,7 +149,7 @@ void do_shove( Character *ch, char *argument )
         {
 	  ROOM_INDEX_DATA *to_room = NULL;
           ROOM_INDEX_DATA *fromroom = ch->in_room;
-	  SHIP_DATA *ship = ship_from_entrance(fromroom->vnum);
+	  Ship *ship = ship_from_entrance(fromroom->vnum);
 
           if ( !ship )
             {

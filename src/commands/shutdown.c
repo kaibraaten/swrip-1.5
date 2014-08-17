@@ -7,7 +7,7 @@ void do_shutdown( Character *ch, char *argument )
 {
   char buf[MAX_STRING_LENGTH];
   Character *vch;
-  SHIP_DATA *ship;
+  Ship *ship;
 
   if ( str_cmp( argument, "mud now" ) && str_cmp(argument, "nosave") )
     {

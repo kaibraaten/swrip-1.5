@@ -4,7 +4,7 @@
 
 void do_closehatch(Character *ch, char *argument )
 {
-  SHIP_DATA *ship;
+  Ship *ship;
   char buf[MAX_STRING_LENGTH];
 
   if ( !argument || argument[0] == '\0' || !str_cmp(argument,"hatch") )

@@ -8,7 +8,7 @@ void do_pick( Character *ch, char *argument )
   Character *gch;
   OBJ_DATA *obj;
   Exit *pexit;
-  SHIP_DATA *ship;
+  Ship *ship;
 
   if ( IsNpc(ch) && IsAffectedBy( ch, AFF_CHARM ) )
     {

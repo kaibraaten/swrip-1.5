@@ -7,8 +7,8 @@
 void do_fire(Character *ch, char *argument )
 {
   int the_chance, origthe_chance;
-  SHIP_DATA *ship;
-  SHIP_DATA *target;
+  Ship *ship;
+  Ship *target;
   char buf[MAX_STRING_LENGTH];
   bool is_turret = false;
   int turret_num = 0;
@@ -563,7 +563,7 @@ void do_fire(Character *ch, char *argument )
 
   for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
     {
-      TURRET_DATA *turret = ship->turret[turret_num];
+      Turret *turret = ship->turret[turret_num];
 
       if ( ch->in_room->vnum == get_turret_room( turret ) && !str_prefix( argument , "lasers") )
 	{

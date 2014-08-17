@@ -6,7 +6,7 @@
 void do_drive( Character *ch, char *argument )
 {
   int dir;
-  SHIP_DATA *ship, *target;
+  Ship *ship, *target;
   char arg[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
   char buf[MAX_INPUT_LENGTH];

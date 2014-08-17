@@ -4,7 +4,7 @@
 
 void do_resetship( Character *ch, char *argument )
 {
-  SHIP_DATA *ship = get_ship( argument );
+  Ship *ship = get_ship( argument );
 
   if (ship == NULL)
     {

@@ -4,7 +4,7 @@
 
 void do_closebay( Character *ch, char *argument )
 {
-  SHIP_DATA *ship;
+  Ship *ship;
   char buf[MAX_STRING_LENGTH];
   if ( ship_from_pilotseat(ch->in_room->vnum) == NULL
        && ship_from_hanger(ch->in_room->vnum) == NULL )

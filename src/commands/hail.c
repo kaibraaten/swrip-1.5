@@ -13,8 +13,8 @@ void do_hail( Character *ch , char *argument )
   char arg[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
   char buf[MAX_STRING_LENGTH];
-  SHIP_DATA *ship;
-  SHIP_DATA *target = NULL;
+  Ship *ship;
+  Ship *target = NULL;
 
   argument = one_argument( argument, arg );
   strcpy ( arg2, argument);

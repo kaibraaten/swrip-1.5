@@ -5,7 +5,7 @@
 void do_clansellship(Character *ch, char *argument )
 {
   long         price;
-  SHIP_DATA   *ship;
+  Ship   *ship;
   CLAN_DATA   *clan;
 
   if ( IsNpc(ch) || !ch->pcdata )

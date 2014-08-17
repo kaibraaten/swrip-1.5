@@ -2046,7 +2046,7 @@ void raw_kill( Character *ch, Character *victim )
   char buf2[MAX_STRING_LENGTH];
   char arg[MAX_STRING_LENGTH];
   OBJ_DATA *obj, *obj_next;
-  SHIP_DATA *ship;
+  Ship *ship;
 
   if ( !victim )
     {

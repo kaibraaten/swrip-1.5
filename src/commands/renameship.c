@@ -4,7 +4,7 @@
 
 void do_renameship( Character *ch, char *argument )
 {
-  SHIP_DATA *ship;
+  Ship *ship;
   CLAN_DATA *clan;
   if ( (ship = ship_from_cockpit( ch->in_room->vnum ) ) == NULL)
     {

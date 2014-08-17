@@ -9,8 +9,8 @@ void do_dock(Character *ch, char *argument)
   char arg[MAX_INPUT_LENGTH];
 
   int the_chance = 0;
-  SHIP_DATA *ship;
-  SHIP_DATA *eShip = NULL;
+  Ship *ship;
+  Ship *eShip = NULL;
 
   strcpy( arg, argument );
 

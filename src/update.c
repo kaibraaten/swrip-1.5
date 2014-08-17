@@ -2783,7 +2783,7 @@ void reboot_check( time_t reset )
   static bool init = false;
   int timesize = umin(sizeof(times)/sizeof(*times), sizeof(tmsg)/sizeof(*tmsg));
   char buf[MAX_STRING_LENGTH];
-  SHIP_DATA *ship = NULL;
+  Ship *ship = NULL;
 
   if ( !init || reset >= current_time )
     {

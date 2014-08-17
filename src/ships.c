@@ -28,20 +28,20 @@
 #include "character.h"
 #include "turret.h"
 
-SHIP_DATA *first_ship = NULL;
-SHIP_DATA *last_ship = NULL;
+Ship *first_ship = NULL;
+Ship *last_ship = NULL;
 
 static int baycount = 0;
 
-static void fread_ship( SHIP_DATA *ship, FILE *fp );
+static void fread_ship( Ship *ship, FILE *fp );
 static bool load_ship_file( const char *shipfile );
-static void approachland( SHIP_DATA *ship, const char *arg );
-static void landship( SHIP_DATA *ship, const char *arg );
-static void launchship( SHIP_DATA *ship );
-static void makedebris( SHIP_DATA *ship );
-static bool space_in_range_h( const SHIP_DATA *ship, const SPACE_DATA *space);
+static void approachland( Ship *ship, const char *arg );
+static void landship( Ship *ship, const char *arg );
+static void launchship( Ship *ship );
+static void makedebris( Ship *ship );
+static bool space_in_range_h( const Ship *ship, const SPACE_DATA *space);
 
-static bool will_collide_with_sun( const SHIP_DATA *ship,
+static bool will_collide_with_sun( const Ship *ship,
 				   const SPACE_DATA *sun )
 {
   if ( sun->name
@@ -54,22 +54,22 @@ static bool will_collide_with_sun( const SHIP_DATA *ship,
   return false;
 }
 
-static bool ship_has_state( const SHIP_DATA *ship, short state )
+static bool ship_has_state( const Ship *ship, short state )
 {
   return ship->shipstate == state;
 }
 
-bool ship_is_in_hyperspace( const SHIP_DATA *ship )
+bool ship_is_in_hyperspace( const Ship *ship )
 {
   return ship_has_state( ship, SHIP_HYPERSPACE );
 }
 
-bool ship_is_disabled( const SHIP_DATA *ship )
+bool ship_is_disabled( const Ship *ship )
 {
   return ship_has_state( ship, SHIP_DISABLED );
 }
 
-static void evade_collision_with_sun( SHIP_DATA *ship, const SPACE_DATA *sun )
+static void evade_collision_with_sun( Ship *ship, const SPACE_DATA *sun )
 {
   ship->head.x = 10 * ship->pos.x;
   ship->head.y = 10 * ship->pos.y;
@@ -97,7 +97,7 @@ static void evade_collision_with_sun( SHIP_DATA *ship, const SPACE_DATA *sun )
 
 void update_shipmovement( void )
 {
-  SHIP_DATA *ship = NULL;
+  Ship *ship = NULL;
   SPACE_DATA *spaceobj = NULL;
   char buf[MAX_STRING_LENGTH];
 
@@ -331,7 +331,7 @@ void update_shipmovement( void )
 
       if( ship->docked )
         {
-          SHIP_DATA *docked = ship->docked;
+          Ship *docked = ship->docked;
           vector_copy( &ship->pos, &docked->pos );
           vector_copy( &ship->hyperpos, &docked->hyperpos );
           vector_copy( &ship->originpos, &docked->originpos );
@@ -368,9 +368,9 @@ void update_shipmovement( void )
     }
 }
 
-static void landship( SHIP_DATA *ship, const char *arg )
+static void landship( Ship *ship, const char *arg )
 {
-  SHIP_DATA *target = NULL;
+  Ship *target = NULL;
   char buf[MAX_STRING_LENGTH];
   vnum_t destination = INVALID_VNUM;
   Character *ch = NULL;
@@ -472,7 +472,7 @@ static void landship( SHIP_DATA *ship, const char *arg )
 
       for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
 	{
-	  TURRET_DATA *turret = ship->turret[turret_num];
+	  Turret *turret = ship->turret[turret_num];
 	  reset_turret( turret );
 	}
 
@@ -484,13 +484,13 @@ static void landship( SHIP_DATA *ship, const char *arg )
   save_ship(ship);
 }
 
-static void approachland( SHIP_DATA *ship, const char *arg)
+static void approachland( Ship *ship, const char *arg)
 {
   SPACE_DATA *spaceobj = NULL;
   char buf[MAX_STRING_LENGTH];
   char buf2[MAX_STRING_LENGTH];
   bool found = false;
-  SHIP_DATA *target = NULL;
+  Ship *target = NULL;
 
   for( spaceobj = first_spaceobject; spaceobj; spaceobj = spaceobj->next )
     {
@@ -542,10 +542,10 @@ static void approachland( SHIP_DATA *ship, const char *arg)
   echo_to_nearby_ships( AT_YELLOW, ship, buf , NULL );
 }
 
-static void launchship( SHIP_DATA *ship )
+static void launchship( Ship *ship )
 {
   char buf[MAX_STRING_LENGTH];
-  SHIP_DATA *target = NULL;
+  Ship *target = NULL;
   int plusminus = 0;
 
   ship_to_spaceobject( ship, spaceobject_from_vnum( ship->location ) );
@@ -635,9 +635,9 @@ static void launchship( SHIP_DATA *ship )
   echo_to_room( AT_YELLOW , get_room_index(ship->lastdoc) , buf );
 }
 
-static void makedebris( SHIP_DATA *ship )
+static void makedebris( Ship *ship )
 {
-  SHIP_DATA *debris = NULL;
+  Ship *debris = NULL;
   char buf[MAX_STRING_LENGTH];
   int turret_num = 0;
 
@@ -646,7 +646,7 @@ static void makedebris( SHIP_DATA *ship )
       return;
     }
 
-  CREATE( debris, SHIP_DATA, 1 );
+  CREATE( debris, Ship, 1 );
 
   LINK( debris, first_ship, last_ship, next, prev );
 
@@ -693,7 +693,7 @@ static void makedebris( SHIP_DATA *ship )
   vector_copy( &debris->head, &ship->head );
 }
 
-void dockship( Character *ch, SHIP_DATA *ship )
+void dockship( Character *ch, Ship *ship )
 {
   if ( ship->statetdocking == SHIP_DISABLED )
     {
@@ -742,7 +742,7 @@ void dockship( Character *ch, SHIP_DATA *ship )
     }
 }
 
-void transship(SHIP_DATA *ship, vnum_t destination)
+void transship(Ship *ship, vnum_t destination)
 {
   vnum_t origShipyard = INVALID_VNUM;
 
@@ -772,7 +772,7 @@ void transship(SHIP_DATA *ship, vnum_t destination)
   save_ship(ship);
 }
 
-void target_ship( SHIP_DATA *ship, SHIP_DATA *target )
+void target_ship( Ship *ship, Ship *target )
 {
   char buf[MAX_STRING_LENGTH];
 
@@ -783,12 +783,12 @@ void target_ship( SHIP_DATA *ship, SHIP_DATA *target )
   echo_to_cockpit( AT_BLOOD , ship , buf );
 }
 
-bool check_hostile( SHIP_DATA *ship )
+bool check_hostile( Ship *ship )
 {
   long distance = -1;
   long tempdistance = 0;
-  SHIP_DATA *target = NULL;
-  SHIP_DATA *enemy = NULL;
+  Ship *target = NULL;
+  Ship *enemy = NULL;
 
   if ( !is_autoflying(ship) || ship->sclass == SHIP_DEBRIS )
     return false;
@@ -852,7 +852,7 @@ bool check_hostile( SHIP_DATA *ship )
   return false;
 }
 
-ch_ret drive_ship( Character *ch, SHIP_DATA *ship, Exit *pexit, int fall )
+ch_ret drive_ship( Character *ch, Ship *ship, Exit *pexit, int fall )
 {
   ROOM_INDEX_DATA *in_room = NULL;
   ROOM_INDEX_DATA *to_room = NULL;
@@ -1154,7 +1154,7 @@ ch_ret drive_ship( Character *ch, SHIP_DATA *ship, Exit *pexit, int fall )
   return retcode;
 }
 
-void echo_to_ship( int color, SHIP_DATA *ship, const char *argument )
+void echo_to_ship( int color, Ship *ship, const char *argument )
 {
   vnum_t room = INVALID_VNUM;
 
@@ -1164,7 +1164,7 @@ void echo_to_ship( int color, SHIP_DATA *ship, const char *argument )
     }
 }
 
-bool is_autoflying( const SHIP_DATA *ship )
+bool is_autoflying( const Ship *ship )
 {
   if (!ship)
     {
@@ -1186,7 +1186,7 @@ bool is_autoflying( const SHIP_DATA *ship )
 
 void recharge_ships( void )
 {
-  SHIP_DATA *ship = NULL;
+  Ship *ship = NULL;
   char buf[MAX_STRING_LENGTH];
   bool closeem = false;
   int origthe_chance = 100;
@@ -1225,7 +1225,7 @@ void recharge_ships( void )
 
       for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
 	{
-	  TURRET_DATA *turret = ship->turret[turret_num];
+	  Turret *turret = ship->turret[turret_num];
 	  ship->energy -= get_energy_draw( turret );
 	}
 
@@ -1269,7 +1269,7 @@ void recharge_ships( void )
               if (ship->target0 && ship->statet0 != LASER_DAMAGED )
                 {
                   int the_chance = 75;
-                  SHIP_DATA *target = ship->target0;
+                  Ship *target = ship->target0;
                   int shots = 0, guns = 0;
                   int whichguns = 0;
 
@@ -1420,8 +1420,8 @@ void recharge_ships( void )
 
 void update_ships( void )
 {
-  SHIP_DATA *ship = NULL;
-  SHIP_DATA *target = NULL;
+  Ship *ship = NULL;
+  Ship *target = NULL;
   char buf[MAX_STRING_LENGTH];
   int too_close = 0, target_too_close = 0;
   SPACE_DATA *spaceobj = NULL;
@@ -1637,11 +1637,11 @@ void update_ships( void )
 
       for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
 	{
-	  TURRET_DATA *turret = ship->turret[turret_num];
+	  Turret *turret = ship->turret[turret_num];
 
 	  if ( turret_has_target( turret ) && ship->sclass <= SHIP_PLATFORM)
 	    {
-	      const  SHIP_DATA *turret_target = get_turret_target( turret );
+	      const  Ship *turret_target = get_turret_target( turret );
 
 	      sprintf( buf, "%s   %.0f %.0f %.0f", turret_target->name,
 		       turret_target->pos.x, turret_target->pos.y,
@@ -1941,9 +1941,9 @@ void update_ships( void )
     }
 }
 
-void echo_to_docked( int color, SHIP_DATA *ship, const char *argument )
+void echo_to_docked( int color, Ship *ship, const char *argument )
 {
-  SHIP_DATA *dship = NULL;
+  Ship *dship = NULL;
 
   for( dship = first_ship; dship; dship = dship->next )
     {
@@ -1954,7 +1954,7 @@ void echo_to_docked( int color, SHIP_DATA *ship, const char *argument )
     }
 }
 
-void echo_to_cockpit( int color, SHIP_DATA *ship, const char *argument )
+void echo_to_cockpit( int color, Ship *ship, const char *argument )
 {
   vnum_t room = INVALID_VNUM;
 
@@ -1979,7 +1979,7 @@ void echo_to_cockpit( int color, SHIP_DATA *ship, const char *argument )
     }
 }
 
-bool ship_in_range( const SHIP_DATA *ship, const SHIP_DATA *target )
+bool ship_in_range( const Ship *ship, const Ship *target )
 {
   if (target && ship && target != ship )
     {
@@ -1994,31 +1994,31 @@ bool ship_in_range( const SHIP_DATA *ship, const SHIP_DATA *target )
   return false;
 }
 
-bool missile_in_range( const SHIP_DATA *ship, const MISSILE_DATA *missile )
+bool missile_in_range( const Ship *ship, const Missile *missile )
 {
   return missile && ship && ship->spaceobject
     && missile_distance_to_ship( missile, ship ) < 5000;
 }
 
-bool space_in_range( const SHIP_DATA *ship, const SPACE_DATA *object )
+bool space_in_range( const Ship *ship, const SPACE_DATA *object )
 {
   return object && ship && ship->spaceobject
     && ship_distance_to_spaceobject( ship, object ) < 100000;
 }
 
-bool space_in_range_c( const SHIP_DATA *ship, const SPACE_DATA *object )
+bool space_in_range_c( const Ship *ship, const SPACE_DATA *object )
 {
   return object && ship
     && ship_distance_to_spaceobject( ship, object ) < 10000;
 }
 
-static bool space_in_range_h( const SHIP_DATA *ship, const SPACE_DATA *object )
+static bool space_in_range_h( const Ship *ship, const SPACE_DATA *object )
 {
   return object && ship
     && vector_distance( &object->pos, &ship->hyperpos ) < object->gravity * 5;
 }
 
-long int get_ship_value( SHIP_DATA *ship )
+long int get_ship_value( Ship *ship )
 {
   long int price = 0;
   int turret_num = 0;
@@ -2116,7 +2116,7 @@ long int get_ship_value( SHIP_DATA *ship )
 
   for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
     {
-      const TURRET_DATA *turret = ship->turret[turret_num];
+      const Turret *turret = ship->turret[turret_num];
 
       if( is_turret_installed( turret ) )
 	{
@@ -2141,7 +2141,7 @@ long int get_ship_value( SHIP_DATA *ship )
 
 void write_ship_list( void )
 {
-  SHIP_DATA *tship = NULL;
+  Ship *tship = NULL;
   FILE *fpout = NULL;
   char filename[256];
 
@@ -2166,7 +2166,7 @@ void write_ship_list( void )
   fclose( fpout );
 }
 
-void save_ship( const SHIP_DATA *ship )
+void save_ship( const Ship *ship )
 {
   FILE *fp = NULL;
   char filename[256];
@@ -2292,7 +2292,7 @@ void save_ship( const SHIP_DATA *ship )
   fclose( fp );
 }
 
-static void fread_ship( SHIP_DATA *ship, FILE *fp )
+static void fread_ship( Ship *ship, FILE *fp )
 {
   for ( ; ; )
     {
@@ -2387,7 +2387,7 @@ static void fread_ship( SHIP_DATA *ship, FILE *fp )
 
 	      for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
 		{
-		  TURRET_DATA *turret = ship->turret[turret_num];
+		  Turret *turret = ship->turret[turret_num];
 
 		  set_turret_room( turret, turret_placeholder[turret_num].room_vnum );
 
@@ -2568,14 +2568,14 @@ static void fread_ship( SHIP_DATA *ship, FILE *fp )
 static bool load_ship_file( const char *shipfile )
 {
   char filename[256];
-  SHIP_DATA *ship = NULL;
+  Ship *ship = NULL;
   FILE *fp = NULL;
   bool found = false;
   int turret_num = 0;
   ROOM_INDEX_DATA *pRoomIndex = NULL;
   CLAN_DATA *clan = NULL;
 
-  CREATE( ship, SHIP_DATA, 1 );
+  CREATE( ship, Ship, 1 );
 
   for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
     {
@@ -2628,7 +2628,7 @@ static bool load_ship_file( const char *shipfile )
     {
       for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
 	{
-	  TURRET_DATA *turret = ship->turret[turret_num];
+	  Turret *turret = ship->turret[turret_num];
 	  destroy_turret( turret );
 	}
 
@@ -2777,7 +2777,7 @@ void load_ships( )
   log_string(" Done ships " );
 }
 
-void resetship( SHIP_DATA *ship )
+void resetship( Ship *ship )
 {
   int turret_num = 0;
 
@@ -2809,7 +2809,7 @@ void resetship( SHIP_DATA *ship )
 
   for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
     {
-      TURRET_DATA *turret = ship->turret[turret_num];
+      Turret *turret = ship->turret[turret_num];
       reset_turret( turret );
     }
 
@@ -2871,10 +2871,10 @@ void resetship( SHIP_DATA *ship )
   save_ship(ship);
 }
 
-void echo_to_nearby_ships( int color, SHIP_DATA *ship, const char *argument,
-			   SHIP_DATA *ignore )
+void echo_to_nearby_ships( int color, Ship *ship, const char *argument,
+			   Ship *ignore )
 {
-  SHIP_DATA *target = NULL;
+  Ship *target = NULL;
 
   if (!ship->spaceobject)
     {
@@ -2896,9 +2896,9 @@ void echo_to_nearby_ships( int color, SHIP_DATA *ship, const char *argument,
     }
 }
 
-SHIP_DATA * ship_in_room( ROOM_INDEX_DATA *room, const char *name )
+Ship * ship_in_room( ROOM_INDEX_DATA *room, const char *name )
 {
-  SHIP_DATA *ship = NULL;
+  Ship *ship = NULL;
 
   if ( !room )
     {
@@ -2937,9 +2937,9 @@ SHIP_DATA * ship_in_room( ROOM_INDEX_DATA *room, const char *name )
 /*
  * Get pointer to ship structure from ship name.
  */
-SHIP_DATA *get_ship( const char *name )
+Ship *get_ship( const char *name )
 {
-  SHIP_DATA *ship = NULL;
+  Ship *ship = NULL;
 
   for ( ship = first_ship; ship; ship = ship->next )
     {
@@ -2970,9 +2970,9 @@ SHIP_DATA *get_ship( const char *name )
 /*
  * Checks if ship is in a spaceobject and returns pointer if it is.
  */
-SHIP_DATA *get_ship_here( const char *name , SHIP_DATA *eShip)
+Ship *get_ship_here( const char *name , Ship *eShip)
 {
-  SHIP_DATA *ship = NULL;
+  Ship *ship = NULL;
   char arg[MAX_INPUT_LENGTH];
   int number = number_argument( name, arg );
   int count = 0;
@@ -3051,9 +3051,9 @@ SHIP_DATA *get_ship_here( const char *name , SHIP_DATA *eShip)
 /*
  * Get pointer to ship structure from cockpit, turret, or entrance ramp vnum.
  */
-SHIP_DATA *ship_from_cockpit( vnum_t vnum )
+Ship *ship_from_cockpit( vnum_t vnum )
 {
-  SHIP_DATA *ship = NULL;
+  Ship *ship = NULL;
 
   for ( ship = first_ship; ship; ship = ship->next )
     {
@@ -3082,9 +3082,9 @@ SHIP_DATA *ship_from_cockpit( vnum_t vnum )
   return NULL;
 }
 
-SHIP_DATA *ship_from_pilotseat( vnum_t vnum )
+Ship *ship_from_pilotseat( vnum_t vnum )
 {
-  SHIP_DATA *ship = NULL;
+  Ship *ship = NULL;
 
   for ( ship = first_ship; ship; ship = ship->next )
     {
@@ -3097,9 +3097,9 @@ SHIP_DATA *ship_from_pilotseat( vnum_t vnum )
   return NULL;
 }
 
-SHIP_DATA *ship_from_coseat( vnum_t vnum )
+Ship *ship_from_coseat( vnum_t vnum )
 {
-  SHIP_DATA *ship = NULL;
+  Ship *ship = NULL;
 
   for ( ship = first_ship; ship; ship = ship->next )
     {
@@ -3112,9 +3112,9 @@ SHIP_DATA *ship_from_coseat( vnum_t vnum )
   return NULL;
 }
 
-SHIP_DATA *ship_from_navseat( vnum_t vnum )
+Ship *ship_from_navseat( vnum_t vnum )
 {
-  SHIP_DATA *ship = NULL;
+  Ship *ship = NULL;
 
   for ( ship = first_ship; ship; ship = ship->next )
     {
@@ -3127,9 +3127,9 @@ SHIP_DATA *ship_from_navseat( vnum_t vnum )
   return NULL;
 }
 
-SHIP_DATA *ship_from_gunseat( vnum_t vnum )
+Ship *ship_from_gunseat( vnum_t vnum )
 {
-  SHIP_DATA *ship = NULL;
+  Ship *ship = NULL;
 
   for ( ship = first_ship; ship; ship = ship->next )
     {
@@ -3142,9 +3142,9 @@ SHIP_DATA *ship_from_gunseat( vnum_t vnum )
   return NULL;
 }
 
-SHIP_DATA *ship_from_engine( vnum_t vnum )
+Ship *ship_from_engine( vnum_t vnum )
 {
-  SHIP_DATA *ship = NULL;
+  Ship *ship = NULL;
 
   for ( ship = first_ship; ship; ship = ship->next )
     {
@@ -3167,9 +3167,9 @@ SHIP_DATA *ship_from_engine( vnum_t vnum )
   return NULL;
 }
 
-SHIP_DATA *ship_from_turret( vnum_t vnum )
+Ship *ship_from_turret( vnum_t vnum )
 {
-  SHIP_DATA *ship = NULL;
+  Ship *ship = NULL;
 
   for ( ship = first_ship; ship; ship = ship->next )
     {
@@ -3192,9 +3192,9 @@ SHIP_DATA *ship_from_turret( vnum_t vnum )
   return NULL;
 }
 
-SHIP_DATA *ship_from_entrance( vnum_t vnum )
+Ship *ship_from_entrance( vnum_t vnum )
 {
-  SHIP_DATA *ship = NULL;
+  Ship *ship = NULL;
 
   for ( ship = first_ship; ship; ship = ship->next )
     {
@@ -3207,9 +3207,9 @@ SHIP_DATA *ship_from_entrance( vnum_t vnum )
   return NULL;
 }
 
-SHIP_DATA *ship_from_hanger( vnum_t vnum )
+Ship *ship_from_hanger( vnum_t vnum )
 {
-  SHIP_DATA *ship = NULL;
+  Ship *ship = NULL;
 
   for ( ship = first_ship; ship; ship = ship->next )
     {
@@ -3222,7 +3222,7 @@ SHIP_DATA *ship_from_hanger( vnum_t vnum )
   return NULL;
 }
 
-void ship_to_spaceobject( SHIP_DATA *ship, SPACE_DATA *spaceobject )
+void ship_to_spaceobject( Ship *ship, SPACE_DATA *spaceobject )
 {
   if( ship && spaceobject )
     {
@@ -3230,7 +3230,7 @@ void ship_to_spaceobject( SHIP_DATA *ship, SPACE_DATA *spaceobject )
     }
 }
 
-void ship_from_spaceobject( SHIP_DATA *ship, SPACE_DATA *spaceobject )
+void ship_from_spaceobject( Ship *ship, SPACE_DATA *spaceobject )
 {
   if ( spaceobject == NULL )
     {
@@ -3245,7 +3245,7 @@ void ship_from_spaceobject( SHIP_DATA *ship, SPACE_DATA *spaceobject )
   ship->spaceobject = NULL;
 }
 
-bool is_rental( Character *ch, SHIP_DATA *ship )
+bool is_rental( Character *ch, Ship *ship )
 {
   if ( !str_cmp("Public",ship->owner) )
     {
@@ -3265,10 +3265,10 @@ bool is_rental( Character *ch, SHIP_DATA *ship )
   return false;
 }
 
-bool candock( const SHIP_DATA *ship )
+bool candock( const Ship *ship )
 {
   int count = 0;
-  SHIP_DATA *dship = NULL;
+  Ship *dship = NULL;
   int ports = 0;
 
   if ( !ship )
@@ -3307,7 +3307,7 @@ bool candock( const SHIP_DATA *ship )
   return true;
 }
 
-bool check_pilot( Character *ch , SHIP_DATA *ship )
+bool check_pilot( Character *ch , Ship *ship )
 {
   if ( !str_cmp(ch->name,ship->owner)
        || !str_cmp(ch->name,ship->pilot)
@@ -3393,7 +3393,7 @@ bool check_pilot( Character *ch , SHIP_DATA *ship )
   return false;
 }
 
-bool extract_ship( SHIP_DATA *ship )
+bool extract_ship( Ship *ship )
 {
   ROOM_INDEX_DATA *room = ship->in_room;
 
@@ -3406,7 +3406,7 @@ bool extract_ship( SHIP_DATA *ship )
   return true;
 }
 
-void damage_ship_ch( SHIP_DATA *ship , int min , int max , Character *ch )
+void damage_ship_ch( Ship *ship , int min , int max , Character *ch )
 {
   short ionFactor = 1;
   int dmg = 0;
@@ -3469,7 +3469,7 @@ void damage_ship_ch( SHIP_DATA *ship , int min , int max , Character *ch )
 
       for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
 	{
-	  TURRET_DATA *turret = ship->turret[turret_num];
+	  Turret *turret = ship->turret[turret_num];
 
 	  if ( number_range(1, 100) <= 5 * ionFactor && !is_turret_damaged( turret ) )
 	    {
@@ -3510,7 +3510,7 @@ void damage_ship_ch( SHIP_DATA *ship , int min , int max , Character *ch )
     }
 }
 
-void damage_ship( SHIP_DATA *ship , SHIP_DATA *assaulter, int min , int max )
+void damage_ship( Ship *ship , Ship *assaulter, int min , int max )
 {
   int dmg = 0;
   int shield_dmg = 0;
@@ -3580,7 +3580,7 @@ void damage_ship( SHIP_DATA *ship , SHIP_DATA *assaulter, int min , int max )
 
       for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
         {
-          TURRET_DATA *turret = ship->turret[turret_num];
+          Turret *turret = ship->turret[turret_num];
 
           if ( number_range(1, 100) <= 5 * ionFactor && !is_turret_damaged( turret ) )
             {
@@ -3618,14 +3618,14 @@ void damage_ship( SHIP_DATA *ship , SHIP_DATA *assaulter, int min , int max )
     }
 }
 
-void destroy_ship( SHIP_DATA *ship , Character *ch )
+void destroy_ship( Ship *ship , Character *ch )
 {
   char buf[MAX_STRING_LENGTH];
   vnum_t roomnum = INVALID_VNUM;
   ROOM_INDEX_DATA *room = NULL;
   OBJ_DATA *robj = NULL;
   Character *rch = NULL;
-  SHIP_DATA *lship = NULL;
+  Ship *lship = NULL;
 
   if (!ship)
     {
@@ -3725,7 +3725,7 @@ void destroy_ship( SHIP_DATA *ship , Character *ch )
   resetship(ship);
 }
 
-bool ship_to_room(SHIP_DATA *ship, vnum_t vnum )
+bool ship_to_room(Ship *ship, vnum_t vnum )
 {
   ROOM_INDEX_DATA *shipto = NULL;
 
@@ -3739,7 +3739,7 @@ bool ship_to_room(SHIP_DATA *ship, vnum_t vnum )
   return true;
 }
 
-bool rent_ship( Character *ch , SHIP_DATA *ship )
+bool rent_ship( Character *ch , Ship *ship )
 {
   long price = 0;
 

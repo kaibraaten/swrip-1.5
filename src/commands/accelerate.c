@@ -6,7 +6,7 @@ void do_accelerate( Character *ch, char *argument )
 {
   int the_chance;
   int change;
-  SHIP_DATA *ship;
+  Ship *ship;
   char buf[MAX_STRING_LENGTH];
 
   if (  (ship = ship_from_cockpit(ch->in_room->vnum))  == NULL )

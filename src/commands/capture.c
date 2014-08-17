@@ -57,7 +57,7 @@ void do_capture ( Character *ch , char *argument )
 
   if ( planet->spaceobject )
     {
-      SHIP_DATA *ship;
+      Ship *ship;
       CLAN_DATA *sClan;
 
       for ( ship = first_ship ; ship ; ship = ship->next )

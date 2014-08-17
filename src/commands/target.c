@@ -9,8 +9,8 @@ void do_target(Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   int the_chance;
-  SHIP_DATA *ship;
-  SHIP_DATA *target, *dship;
+  Ship *ship;
+  Ship *target, *dship;
   char buf[MAX_STRING_LENGTH];
   bool is_turret = false;
   size_t turret_num = 0;
@@ -61,7 +61,7 @@ void do_target(Character *ch, char *argument )
 
 	  for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
 	    {
-	      TURRET_DATA *turret = ship->turret[turret_num];
+	      Turret *turret = ship->turret[turret_num];
 
 	      if( ch->in_room->vnum == get_turret_room( turret ) )
 		{
@@ -162,7 +162,7 @@ void do_target(Character *ch, char *argument )
 
   for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
     {
-      TURRET_DATA *turret = ship->turret[turret_num];
+      Turret *turret = ship->turret[turret_num];
 
       if( ch->in_room->vnum == get_turret_room( turret ) )
 	{

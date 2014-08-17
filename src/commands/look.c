@@ -11,7 +11,7 @@ void show_char_to_char( Character *list, Character *ch );
 
 static void show_char_to_char_0( Character *victim, Character *ch );
 static void show_char_to_char_1( Character *victim, Character *ch );
-static void show_ships_to_char( SHIP_DATA *ship, Character *ch );
+static void show_ships_to_char( Ship *ship, Character *ch );
 static void show_visible_affects_to_char( Character *victim, Character *ch );
 static void show_exit_to_char( Character *ch, Exit *pexit, short door );
 static void show_no_arg( Character *ch, bool is_auto );
@@ -520,10 +520,10 @@ static void show_char_to_char_1( Character *victim, Character *ch )
       learn_from_failure( ch, gsn_peek );
 }
 
-static void show_ships_to_char( SHIP_DATA *ship, Character *ch )
+static void show_ships_to_char( Ship *ship, Character *ch )
 {
-  SHIP_DATA *rship;
-  SHIP_DATA *nship=NULL;
+  Ship *rship;
+  Ship *nship=NULL;
 
   for ( rship = ship; rship; rship = nship )
     {
@@ -932,7 +932,7 @@ static void show_no_arg( Character *ch, bool is_auto )
 
   if ( !is_auto )
     {
-      SHIP_DATA *ship = ship_from_cockpit(ch->in_room->vnum);
+      Ship *ship = ship_from_cockpit(ch->in_room->vnum);
 
       if ( ship )
 	{
@@ -961,7 +961,7 @@ static void show_no_arg( Character *ch, bool is_auto )
 	    }
 	  else if (ship->spaceobject )
 	    {
-	      SHIP_DATA *target = NULL;
+	      Ship *target = NULL;
 	      SPACE_DATA *spaceobject = NULL;
 
 	      set_char_color(  AT_GREEN, ch );

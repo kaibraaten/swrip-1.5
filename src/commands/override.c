@@ -9,8 +9,8 @@ void do_override(Character *ch, char *argument)
   char arg[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
   char buf[MAX_STRING_LENGTH];
-  SHIP_DATA *ship;
-  SHIP_DATA *eShip = NULL;
+  Ship *ship;
+  Ship *eShip = NULL;
 
   argument = one_argument( argument, arg );
   strcpy ( arg2, argument);

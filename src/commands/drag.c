@@ -13,7 +13,7 @@ void do_drag( Character *ch, char *argument )
   bool nogo;
   int drag_chance;
   ROOM_INDEX_DATA *fromroom;
-  SHIP_DATA *ship;
+  Ship *ship;
 
   argument = one_argument( argument, arg );
   argument = one_argument( argument, arg2 );

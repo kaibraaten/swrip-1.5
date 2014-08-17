@@ -8,7 +8,7 @@ void do_adjusttractorbeam(Character *ch, char *argument )
 {
   char buf[MAX_INPUT_LENGTH];
   char arg[MAX_INPUT_LENGTH];
-  SHIP_DATA *ship, *eShip;
+  Ship *ship, *eShip;
 
   strcpy( arg, argument );
 

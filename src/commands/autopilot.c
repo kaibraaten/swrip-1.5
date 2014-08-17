@@ -4,7 +4,7 @@
 
 void do_autopilot(Character *ch, char *argument )
 {
-  SHIP_DATA *ship;
+  Ship *ship;
 
   if (  (ship = ship_from_cockpit(ch->in_room->vnum))  == NULL )
     {

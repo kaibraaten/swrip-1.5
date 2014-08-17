@@ -5,7 +5,7 @@
 
 void do_showship( Character *ch, char *argument )
 {
-  SHIP_DATA *ship = NULL;
+  Ship *ship = NULL;
   size_t turret_num = 0;
 
   if ( IsNpc( ch ) )
@@ -80,7 +80,7 @@ void do_showship( Character *ch, char *argument )
     {
       static const char * const literal_number[MAX_NUMBER_OF_TURRETS_IN_SHIP] =
 	{ "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten" };
-      const TURRET_DATA *turret = ship->turret[turret_num];
+      const Turret *turret = ship->turret[turret_num];
 
       if ( is_turret_installed( turret ) )
 	{

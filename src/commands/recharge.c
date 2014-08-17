@@ -6,7 +6,7 @@ void do_recharge(Character *ch, char *argument )
 {
   int recharge;
   int the_chance;
-  SHIP_DATA *ship;
+  Ship *ship;
 
   if (  (ship = ship_from_cockpit(ch->in_room->vnum))  == NULL )
     {

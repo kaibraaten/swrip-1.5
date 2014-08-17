@@ -5,8 +5,8 @@
 
 void do_info(Character *ch, char *argument )
 {
-  SHIP_DATA *ship;
-  SHIP_DATA *target;
+  Ship *ship;
+  Ship *target;
   bool fromafar = true;
 
   if (  (ship = ship_from_cockpit(ch->in_room->vnum))  == NULL )

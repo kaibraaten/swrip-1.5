@@ -10,7 +10,7 @@ void do_launch( Character *ch, char *argument )
 
   int the_chance;
   long price = 0;
-  SHIP_DATA *ship;
+  Ship *ship;
   char buf[MAX_STRING_LENGTH];
   ROOM_INDEX_DATA *room;
 
@@ -123,7 +123,7 @@ void do_launch( Character *ch, char *argument )
 
 	  for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
 	    {
-	      const TURRET_DATA *turret = ship->turret[turret_num];
+	      const Turret *turret = ship->turret[turret_num];
 
 	      if ( is_turret_damaged( turret ) )
 		{
@@ -191,7 +191,7 @@ void do_launch( Character *ch, char *argument )
 
 	  for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
 	    {
-	      TURRET_DATA *turret = ship->turret[turret_num];
+	      Turret *turret = ship->turret[turret_num];
 	      set_turret_ready( turret );
 	    }
 

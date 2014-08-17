@@ -4,7 +4,7 @@
 
 void do_fuel(Character *ch, char *argument )
 {
-  SHIP_DATA *ship, *eShip;
+  Ship *ship, *eShip;
   int amount = 0;
   char arg1[MAX_INPUT_LENGTH];
   char buf[MAX_STRING_LENGTH];

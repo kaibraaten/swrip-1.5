@@ -8,7 +8,7 @@ void do_reload( Character *ch, char *argument )
 {
   /* Reload code added by Darrik Vequir */
   char arg[MAX_INPUT_LENGTH];
-  SHIP_DATA *ship;
+  Ship *ship;
   short price = 0;
   size_t turret_num = 0;
 
@@ -37,7 +37,7 @@ void do_reload( Character *ch, char *argument )
 
   for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
     {
-      const TURRET_DATA *turret = ship->turret[turret_num];
+      const Turret *turret = ship->turret[turret_num];
 
       if( is_turret_damaged( turret ) )
 	{
@@ -81,7 +81,7 @@ void do_reload( Character *ch, char *argument )
 
   for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
     {
-      TURRET_DATA *turret = ship->turret[turret_num];
+      Turret *turret = ship->turret[turret_num];
       set_turret_ready( turret );
     }
 

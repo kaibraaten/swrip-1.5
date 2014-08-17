@@ -4,7 +4,7 @@
 
 void do_addpilot(Character *ch, char *argument )
 {
-  SHIP_DATA *ship;
+  Ship *ship;
   int the_chance;
 
   if (  (ship = ship_from_cockpit(ch->in_room->vnum))  == NULL )

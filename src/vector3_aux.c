@@ -74,7 +74,7 @@
  *   ... your code here
  * }
  */
-static bool ship_is_facing( const SHIP_DATA * const ship,
+static bool ship_is_facing( const Ship * const ship,
 			    const Vector3 * const target )
 {
   Vector3 h, d;
@@ -96,13 +96,13 @@ static bool ship_is_facing( const SHIP_DATA * const ship,
   return facing;
 }
 
-bool ship_is_facing_ship( const SHIP_DATA * const ship,
-			  const SHIP_DATA * const target )
+bool ship_is_facing_ship( const Ship * const ship,
+			  const Ship * const target )
 {
   return ship_is_facing( ship, &target->pos );
 }
 
-bool ship_is_facing_spaceobject( const SHIP_DATA * const ship,
+bool ship_is_facing_spaceobject( const Ship * const ship,
 				 const SPACE_DATA * const target )
 {
   return ship_is_facing( ship, &target->pos );
@@ -111,7 +111,7 @@ bool ship_is_facing_spaceobject( const SHIP_DATA * const ship,
 /*
  * Flip the trajectory to head the opposite way (180 degrees).
  */
-void ship_turn_180( SHIP_DATA * const ship )
+void ship_turn_180( Ship * const ship )
 {
   ship->head.x *= -1;
   ship->head.y *= -1;
@@ -129,7 +129,7 @@ void ship_turn_180( SHIP_DATA * const ship )
  *
  * Etc, etc...
  */
-void ship_set_course( SHIP_DATA * const ship,
+void ship_set_course( Ship * const ship,
 		      const Vector3 * const destination )
 {
   ship->head.x = destination->x - ship->pos.x;
@@ -138,20 +138,20 @@ void ship_set_course( SHIP_DATA * const ship,
   vector_normalize( &ship->head );
 }
 
-void ship_set_course_to_ship( SHIP_DATA * const ship,
-			      const SHIP_DATA * const target )
+void ship_set_course_to_ship( Ship * const ship,
+			      const Ship * const target )
 {
   ship_set_course( ship, &target->pos );
 }
 
-void ship_set_course_to_spaceobject( SHIP_DATA * const ship,
+void ship_set_course_to_spaceobject( Ship * const ship,
 				     const SPACE_DATA * const target )
 {
   ship_set_course( ship, &target->pos );
 }
 
-void missile_set_course_to_ship( MISSILE_DATA * const missile,
-				 const SHIP_DATA * const target )
+void missile_set_course_to_ship( Missile * const missile,
+				 const Ship * const target )
 {
   missile->head.x = target->pos.x - missile->pos.x;
   missile->head.y = target->pos.y - missile->pos.y;
@@ -163,8 +163,8 @@ void missile_set_course_to_ship( MISSILE_DATA * const missile,
  * High-level function to align a ship's trajectory with another's.
  * Useful for grouped ships, docked ships, etc.
  */
-void ship_align_heading( SHIP_DATA * const ship,
-			 const SHIP_DATA * const target )
+void ship_align_heading( Ship * const ship,
+			 const Ship * const target )
 {
   vector_copy( &ship->head, &target->head );
 }
@@ -197,30 +197,30 @@ void move_spaceobject( SPACE_DATA * const spaceobj )
   handle_movement( &spaceobj->pos, &spaceobj->head, spaceobj->speed );
 }
 
-void move_ship( SHIP_DATA * const ship )
+void move_ship( Ship * const ship )
 {
   handle_movement( &ship->pos, &ship->head, ship->currspeed );
 }
 
-void move_missile( MISSILE_DATA * const missile )
+void move_missile( Missile * const missile )
 {
   handle_movement( &missile->pos, &missile->head, missile->speed );
 }
 
-double ship_distance_to_ship( const SHIP_DATA * const ship,
-			      const SHIP_DATA * const target )
+double ship_distance_to_ship( const Ship * const ship,
+			      const Ship * const target )
 {
   return vector_distance( &ship->pos, &target->pos );
 }
 
-double ship_distance_to_spaceobject( const SHIP_DATA * const ship,
+double ship_distance_to_spaceobject( const Ship * const ship,
 				     const SPACE_DATA * const spaceobject )
 {
   return vector_distance( &ship->pos, &spaceobject->pos );
 }
 
-double missile_distance_to_ship( const MISSILE_DATA * const missile,
-				 const SHIP_DATA * const target )
+double missile_distance_to_ship( const Missile * const missile,
+				 const Ship * const target )
 {
   return vector_distance( &missile->pos, &target->pos );
 }

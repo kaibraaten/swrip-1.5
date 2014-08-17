@@ -5,7 +5,7 @@
 void do_buyship(Character *ch, char *argument )
 {
   long         price;
-  SHIP_DATA   *ship;
+  Ship   *ship;
 
   if ( IsNpc(ch) || !ch->pcdata )
     {

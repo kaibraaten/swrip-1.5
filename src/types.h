@@ -124,14 +124,14 @@ typedef struct space_data              SPACE_DATA;
 struct clan_data;
 typedef struct clan_data               CLAN_DATA;
 
-struct ship_data;
-typedef struct ship_data               SHIP_DATA;
+struct Ship;
+typedef struct Ship                    Ship;
 
-struct turret_data;
-typedef struct turret_data             TURRET_DATA;
+struct Turret;
+typedef struct Turret                  Turret;
 
-struct missile_data;
-typedef struct missile_data            MISSILE_DATA;
+struct Missile;
+typedef struct Missile                 Missile;
 
 struct tourney_data;
 typedef struct tourney_data            TOURNEY_DATA;

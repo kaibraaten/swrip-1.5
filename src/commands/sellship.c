@@ -5,7 +5,7 @@
 void do_sellship(Character *ch, char *argument )
 {
   long         price;
-  SHIP_DATA   *ship;
+  Ship   *ship;
 
   ship = ship_in_room( ch->in_room , argument );
   if ( !ship )

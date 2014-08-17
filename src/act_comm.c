@@ -409,8 +409,8 @@ void talk_channel( Character *ch, const char *argument, int channel, const char 
 
           if ( channel == CHANNEL_SHIP || channel == CHANNEL_SPACE || channel == CHANNEL_SYSTEM )
             {
-              SHIP_DATA *ship = ship_from_cockpit( ch->in_room->vnum );
-              SHIP_DATA *target;
+              Ship *ship = ship_from_cockpit( ch->in_room->vnum );
+              Ship *target;
 
               if ( !ship )
                 continue;

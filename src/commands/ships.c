@@ -5,7 +5,7 @@
 
 void do_ships( Character *ch, char *argument )
 {
-  SHIP_DATA *ship = NULL;
+  Ship *ship = NULL;
   char buf[MAX_STRING_LENGTH];
   char pilottype[MAX_STRING_LENGTH];
   char pilottype2[MAX_STRING_LENGTH];

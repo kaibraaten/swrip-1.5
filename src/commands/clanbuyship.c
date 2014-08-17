@@ -5,7 +5,7 @@
 void do_clanbuyship(Character *ch, char *argument )
 {
   long         price;
-  SHIP_DATA   *ship;
+  Ship   *ship;
   CLAN_DATA   *clan;
   CLAN_DATA   *mainclan;
 

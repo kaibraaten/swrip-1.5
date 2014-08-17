@@ -24,27 +24,27 @@
 #include "turret.h"
 #include "constants.h"
 
-struct turret_data
+struct Turret
 {
   vnum_t room_vnum;
   int weapon_state;
-  SHIP_DATA *target;
-  SHIP_DATA *owner;
+  Ship *target;
+  Ship *owner;
 };
 
-TURRET_DATA *create_turret( SHIP_DATA *owner )
+Turret *create_turret( Ship *owner )
 {
-  TURRET_DATA *turret = NULL;
-  CREATE( turret, TURRET_DATA, 1 );
+  Turret *turret = NULL;
+  CREATE( turret, Turret, 1 );
   turret->owner = owner;
   reset_turret( turret );
 
   return turret;
 }
 
-TURRET_DATA *copy_turret( const TURRET_DATA *old_turret, SHIP_DATA *owner_of_new_turret )
+Turret *copy_turret( const Turret *old_turret, Ship *owner_of_new_turret )
 {
-  TURRET_DATA *new_turret = create_turret( owner_of_new_turret );
+  Turret *new_turret = create_turret( owner_of_new_turret );
 
   set_turret_room( new_turret, old_turret->room_vnum );
   new_turret->weapon_state = old_turret->weapon_state;
@@ -54,38 +54,38 @@ TURRET_DATA *copy_turret( const TURRET_DATA *old_turret, SHIP_DATA *owner_of_new
   return new_turret;
 }
 
-bool is_turret_installed( const TURRET_DATA *turret )
+bool is_turret_installed( const Turret *turret )
 {
   return get_turret_room( turret ) != 0;
 }
 
-void destroy_turret( TURRET_DATA *turret )
+void destroy_turret( Turret *turret )
 {
   DISPOSE( turret );
 }
 
-void reset_turret( TURRET_DATA *turret )
+void reset_turret( Turret *turret )
 {
   set_turret_ready( turret );
   clear_turret_target( turret );
 }
 
-void set_turret_ready( TURRET_DATA *turret )
+void set_turret_ready( Turret *turret )
 {
   turret->weapon_state = LASER_READY;
 }
 
-bool is_turret_ready( const TURRET_DATA *turret )
+bool is_turret_ready( const Turret *turret )
 {
   return turret->weapon_state == LASER_READY;
 }
 
-bool is_turret_recharging( const TURRET_DATA *turret )
+bool is_turret_recharging( const Turret *turret )
 {
   return turret->weapon_state > (int)turret->owner->sclass;
 }
 
-void fire_turret( TURRET_DATA *turret )
+void fire_turret( Turret *turret )
 {
   if( turret_has_target( turret ) )
     {
@@ -93,7 +93,7 @@ void fire_turret( TURRET_DATA *turret )
     }
 }
 
-void set_turret_damaged( TURRET_DATA *turret )
+void set_turret_damaged( Turret *turret )
 {
   if( is_turret_installed( turret ) )
     {
@@ -101,42 +101,42 @@ void set_turret_damaged( TURRET_DATA *turret )
     }
 }
 
-bool is_turret_damaged( const TURRET_DATA *turret )
+bool is_turret_damaged( const Turret *turret )
 {
   return turret->weapon_state == LASER_DAMAGED;
 }
 
-void clear_turret_target( TURRET_DATA *turret )
+void clear_turret_target( Turret *turret )
 {
   turret->target = 0;
 }
 
-void set_turret_target( TURRET_DATA *turret, SHIP_DATA *target )
+void set_turret_target( Turret *turret, Ship *target )
 {
   turret->target = target;
 }
 
-SHIP_DATA *get_turret_target( const TURRET_DATA *turret )
+Ship *get_turret_target( const Turret *turret )
 {
   return turret->target;
 }
 
-bool turret_has_target( const TURRET_DATA *turret )
+bool turret_has_target( const Turret *turret )
 {
   return get_turret_target( turret ) != NULL;
 }
 
-void set_turret_room( TURRET_DATA *turret, vnum_t room_vnum )
+void set_turret_room( Turret *turret, vnum_t room_vnum )
 {
   turret->room_vnum = room_vnum;
 }
 
-vnum_t get_turret_room( const TURRET_DATA *turret )
+vnum_t get_turret_room( const Turret *turret )
 {
   return turret->room_vnum;
 }
 
-int get_energy_draw( const TURRET_DATA *turret )
+int get_energy_draw( const Turret *turret )
 {
   int draw = 0;
 

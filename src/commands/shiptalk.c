@@ -4,7 +4,7 @@
 
 void do_shiptalk( Character *ch, char *argument )
 {
-  SHIP_DATA *ship = ship_from_cockpit(ch->in_room->vnum);
+  Ship *ship = ship_from_cockpit(ch->in_room->vnum);
 
   if ( !ship )
     {

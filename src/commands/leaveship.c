@@ -7,7 +7,7 @@ void do_leaveship( Character *ch, char *argument )
 {
   ROOM_INDEX_DATA *fromroom = NULL;
   ROOM_INDEX_DATA *toroom = NULL;
-  SHIP_DATA *ship = NULL;
+  Ship *ship = NULL;
   SHUTTLE_DATA * shuttle = NULL;
 
   fromroom = ch->in_room;

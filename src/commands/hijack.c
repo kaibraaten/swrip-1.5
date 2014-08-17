@@ -5,7 +5,7 @@
 void do_hijack( Character *ch, char *argument )
 {
   int the_chance;
-  SHIP_DATA *ship;
+  Ship *ship;
   char buf[MAX_STRING_LENGTH];
   char buf2[MAX_STRING_LENGTH];
   Character *p, *p_prev, *victim;

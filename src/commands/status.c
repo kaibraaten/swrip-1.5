@@ -7,8 +7,8 @@
 void do_status(Character *ch, char *argument )
 {
   int the_chance;
-  SHIP_DATA *ship;
-  SHIP_DATA *target;
+  Ship *ship;
+  Ship *target;
   size_t turret_num = 0;
 
   if (  (ship = ship_from_cockpit(ch->in_room->vnum))  == NULL )
@@ -69,8 +69,8 @@ void do_status(Character *ch, char *argument )
     {
       static const char * const literal_number[MAX_NUMBER_OF_TURRETS_IN_SHIP] =
 	{ "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten" };
-      const TURRET_DATA *turret = target->turret[turret_num];
-      const SHIP_DATA *turret_target = turret_has_target( turret ) ? get_turret_target( turret ) : NULL;
+      const Turret *turret = target->turret[turret_num];
+      const Ship *turret_target = turret_has_target( turret ) ? get_turret_target( turret ) : NULL;
       const char *turret_target_name = turret_target ? turret_target->name : "none";
       const char *turret_status = is_turret_damaged( turret ) ? "Damaged" : "Good";
 

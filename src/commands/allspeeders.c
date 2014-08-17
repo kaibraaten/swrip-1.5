@@ -3,7 +3,7 @@
 
 void do_allspeeders( Character *ch, char *argument )
 {
-  SHIP_DATA *ship;
+  Ship *ship;
   int count = 0;
   char buf[MAX_STRING_LENGTH];
 

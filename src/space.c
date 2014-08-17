@@ -25,8 +25,8 @@
 #include "ships.h"
 #include "character.h"
 
-MISSILE_DATA *first_missile = NULL;
-MISSILE_DATA *last_missile = NULL;
+Missile *first_missile = NULL;
+Missile *last_missile = NULL;
 
 void echo_to_room_dnr( int ecolor, ROOM_INDEX_DATA *room,
 		       const char *argument )
@@ -45,10 +45,10 @@ void echo_to_room_dnr( int ecolor, ROOM_INDEX_DATA *room,
     }
 }
 
-void new_missile( SHIP_DATA *ship , SHIP_DATA *target , Character *ch , int missiletype )
+void new_missile( Ship *ship , Ship *target , Character *ch , int missiletype )
 {
   SPACE_DATA *spaceobject = NULL;
-  MISSILE_DATA *missile = NULL;
+  Missile *missile = NULL;
 
   if ( ship  == NULL )
     {
@@ -65,7 +65,7 @@ void new_missile( SHIP_DATA *ship , SHIP_DATA *target , Character *ch , int miss
       return;
     }
 
-  CREATE( missile, MISSILE_DATA, 1 );
+  CREATE( missile, Missile, 1 );
   LINK( missile, first_missile, last_missile, next, prev );
 
   missile->target = target;
@@ -104,7 +104,7 @@ void new_missile( SHIP_DATA *ship , SHIP_DATA *target , Character *ch , int miss
   missile->spaceobject = spaceobject;
 }
 
-void extract_missile( MISSILE_DATA *missile )
+void extract_missile( Missile *missile )
 {
   SPACE_DATA *spaceobject = NULL;
 
@@ -133,13 +133,13 @@ void extract_missile( MISSILE_DATA *missile )
 
 void update_missiles( void )
 {
-  MISSILE_DATA *missile = NULL;
-  MISSILE_DATA *m_next = NULL;
+  Missile *missile = NULL;
+  Missile *m_next = NULL;
 
   for ( missile = first_missile; missile; missile = m_next )
     {
-      SHIP_DATA *ship = missile->fired_from;
-      SHIP_DATA *target = missile->target;
+      Ship *ship = missile->fired_from;
+      Ship *target = missile->target;
 
       m_next = missile->next;
 

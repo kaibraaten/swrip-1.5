@@ -7,7 +7,7 @@ void do_transship(Character *ch, char *argument)
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
   int arg3, origShipyard;
-  SHIP_DATA *ship;
+  Ship *ship;
 
   if ( IsNpc( ch ) )
     {

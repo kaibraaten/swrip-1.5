@@ -10,7 +10,7 @@ void do_calculate_diff(Character *ch, char *argument )
   char arg3[MAX_INPUT_LENGTH];
   char buf[MAX_INPUT_LENGTH];
   int the_chance , distance = 0;
-  SHIP_DATA *ship;
+  Ship *ship;
   SPACE_DATA *spaceobj, *spaceobject;
   bool found = false;
 

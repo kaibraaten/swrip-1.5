@@ -5,7 +5,7 @@
 void do_chaff( Character *ch, char *argument )
 {
   int the_chance;
-  SHIP_DATA *ship;
+  Ship *ship;
 
   if (  (ship = ship_from_cockpit(ch->in_room->vnum))  == NULL )
     {

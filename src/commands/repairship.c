@@ -8,7 +8,7 @@ void do_repairship(Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   int the_chance, change;
-  SHIP_DATA *ship;
+  Ship *ship;
 
   strcpy( arg, argument );
 
@@ -121,7 +121,7 @@ void do_repairship(Character *ch, char *argument )
     {
       char number_string[MAX_INPUT_LENGTH];
       long turret_number = 0;
-      TURRET_DATA *turret = NULL;
+      Turret *turret = NULL;
 
       argument = one_argument( arg, number_string );
       turret_number = strtol( number_string, 0, 10 );

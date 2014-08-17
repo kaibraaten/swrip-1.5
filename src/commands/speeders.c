@@ -4,7 +4,7 @@
 
 void do_speeders( Character *ch, char *argument )
 {
-  SHIP_DATA *ship;
+  Ship *ship;
   int count;
   char buf[MAX_STRING_LENGTH];
 

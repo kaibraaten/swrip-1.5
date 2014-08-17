@@ -3,13 +3,13 @@
 #include "mud.h"
 #include "turret.h"
 
-static bool room_is_in_use( const SHIP_DATA *ship, int room_vnum );
+static bool room_is_in_use( const Ship *ship, int room_vnum );
 
 void do_setship( Character *ch, char *argument )
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
-  SHIP_DATA *ship = NULL;
+  Ship *ship = NULL;
   int tempnum = 0;
   ROOM_INDEX_DATA *roomindex = NULL;
 
@@ -124,7 +124,7 @@ void do_setship( Character *ch, char *argument )
 
       for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
 	{
-	  TURRET_DATA *turret = ship->turret[turret_num];
+	  Turret *turret = ship->turret[turret_num];
 	  set_turret_room( turret, 0 );
 	}
 
@@ -1087,7 +1087,7 @@ void do_setship( Character *ch, char *argument )
   do_setship( ch, "" );
 }
 
-static bool room_is_in_use( const SHIP_DATA *ship, int room_vnum )
+static bool room_is_in_use( const Ship *ship, int room_vnum )
 {
   if( room_vnum == ship->room.hanger
       || room_vnum == ship->room.entrance
@@ -1105,7 +1105,7 @@ static bool room_is_in_use( const SHIP_DATA *ship, int room_vnum )
 
       for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
 	{
-	  const TURRET_DATA *turret = ship->turret[turret_num];
+	  const Turret *turret = ship->turret[turret_num];
 
 	  if( get_turret_room( turret ) == room_vnum )
 	    {

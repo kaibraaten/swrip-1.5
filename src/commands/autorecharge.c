@@ -5,7 +5,7 @@
 void do_autorecharge(Character *ch, char *argument )
 {
   int the_chance;
-  SHIP_DATA *ship;
+  Ship *ship;
   int recharge;
 
   if (  (ship = ship_from_cockpit(ch->in_room->vnum))  == NULL )

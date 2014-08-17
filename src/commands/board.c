@@ -6,7 +6,7 @@
 void do_board( Character *ch, char *argument )
 {
   ROOM_INDEX_DATA *toroom;
-  SHIP_DATA *ship;
+  Ship *ship;
   char * name = NULL;
   SHUTTLE_DATA *shuttle;
 

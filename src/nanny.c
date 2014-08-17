@@ -919,7 +919,7 @@ if ( (iLang = skill_lookup( "common" )) < 0 )
 	    && IS_SET( ch->in_room->room_flags, ROOM_SPACECRAFT )
 	    && ch->in_room != get_room_index(6) )
     {
-      SHIP_DATA *ship;
+      Ship *ship;
 
       for ( ship = first_ship; ship; ship = ship->next )
 	{

@@ -4,7 +4,7 @@
 
 void do_shiptrack( Character *ch, char *argument)
 {
-  SHIP_DATA *ship;
+  Ship *ship;
   SPACE_DATA *spaceobject;
   char arg[MAX_INPUT_LENGTH];
   char arg1[MAX_INPUT_LENGTH];

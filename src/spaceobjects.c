@@ -83,7 +83,7 @@ SPACE_DATA *spaceobject_from_name( const char *name )
 SPACE_DATA *spaceobject_from_vnum( vnum_t vnum )
 {
   SPACE_DATA *spaceobject = NULL;
-  SHIP_DATA *ship = NULL;
+  Ship *ship = NULL;
 
   for ( spaceobject = first_spaceobject; spaceobject; spaceobject = spaceobject->next )
     {

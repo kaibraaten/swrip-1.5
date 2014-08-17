@@ -5,10 +5,10 @@
 
 void do_radar( Character *ch, char *argument )
 {
-  SHIP_DATA *target;
+  Ship *target;
   int the_chance;
-  SHIP_DATA *ship;
-  MISSILE_DATA *missile;
+  Ship *ship;
+  Missile *missile;
   SPACE_DATA *spaceobj;
   if (   (ship = ship_from_cockpit(ch->in_room->vnum))  == NULL )
     {

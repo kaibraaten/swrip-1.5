@@ -4,7 +4,7 @@
 
 void do_allships( Character *ch, char *argument )
 {
-  SHIP_DATA *ship;
+  Ship *ship;
   char buf[MAX_STRING_LENGTH];
   int count = 0;
   bool unowned = false, mobship = false, checkowner = false;

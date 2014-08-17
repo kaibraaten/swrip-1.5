@@ -41,16 +41,16 @@ extern "C" {
  *   ... your code here
  * }
  */
-bool ship_is_facing_ship( const SHIP_DATA * const ship,
-			  const SHIP_DATA * const target );
+bool ship_is_facing_ship( const Ship * const ship,
+			  const Ship * const target );
 
-bool ship_is_facing_spaceobject( const SHIP_DATA * const ship,
+bool ship_is_facing_spaceobject( const Ship * const ship,
 				 const SPACE_DATA * const spaceobject );
 
 /*
  * Flip the trajectory to head the opposite way (180 degrees).
  */
-void ship_turn_180( SHIP_DATA * const ship );
+void ship_turn_180( Ship * const ship );
 
 /*
  * Set a new course towards another space object's position.
@@ -63,37 +63,37 @@ void ship_turn_180( SHIP_DATA * const ship );
  *
  * Etc, etc...
  */
-void ship_set_course( SHIP_DATA * const ship,
+void ship_set_course( Ship * const ship,
                       const Vector3 * const destination );
 
-void ship_set_course_to_ship( SHIP_DATA * const ship,
-			      const SHIP_DATA * const target );
+void ship_set_course_to_ship( Ship * const ship,
+			      const Ship * const target );
 
-void ship_set_course_to_spaceobject( SHIP_DATA * const ship,
+void ship_set_course_to_spaceobject( Ship * const ship,
 				     const SPACE_DATA * const spaceobject );
-void missile_set_course_to_ship( MISSILE_DATA * const m,
-				 const SHIP_DATA * const target );
+void missile_set_course_to_ship( Missile * const m,
+				 const Ship * const target );
 
 /*
  * High-level function to align a ship's trajectory with another's.
  * Useful for grouped ships, docked ships, etc.
  */
-void ship_align_heading( SHIP_DATA * const ship,
-                         const SHIP_DATA * const target );
+void ship_align_heading( Ship * const ship,
+                         const Ship * const target );
 
 /*
  * Calculate new position based on heading and speed.
  */
-void move_ship( SHIP_DATA * const ship );
-void move_missile( MISSILE_DATA * const m );
+void move_ship( Ship * const ship );
+void move_missile( Missile * const m );
 void move_spaceobject( SPACE_DATA * const spaceobj );
 
-double ship_distance_to_ship( const SHIP_DATA * const ship,
-			      const SHIP_DATA * const target );
-double ship_distance_to_spaceobject( const SHIP_DATA * const ship,
+double ship_distance_to_ship( const Ship * const ship,
+			      const Ship * const target );
+double ship_distance_to_spaceobject( const Ship * const ship,
 				     const SPACE_DATA * const spaceobject );
-double missile_distance_to_ship( const MISSILE_DATA * const m,
-				 const SHIP_DATA * const s );
+double missile_distance_to_ship( const Missile * const m,
+				 const Ship * const s );
 void vector_randomize( Vector3 * const vec, int from, int to );
 
 #ifdef __cplusplus

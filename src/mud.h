@@ -435,14 +435,14 @@ struct clan_data
   } leadership;
 };
 
-struct ship_data
+struct Ship
 {
-  SHIP_DATA       *next;
-  SHIP_DATA       *prev;
-  SHIP_DATA       *next_in_spaceobject;
-  SHIP_DATA       *prev_in_spaceobject;
-  SHIP_DATA       *next_in_room;
-  SHIP_DATA       *prev_in_room;
+  Ship       *next;
+  Ship       *prev;
+  Ship       *next_in_spaceobject;
+  Ship       *prev_in_spaceobject;
+  Ship       *next_in_room;
+  Ship       *prev_in_room;
   ROOM_INDEX_DATA *in_room;
   SPACE_DATA      *spaceobject;
   SPACE_DATA      *destin;
@@ -525,9 +525,9 @@ struct ship_data
   } room;
 
   long             collision;
-  SHIP_DATA       *target0; /* target of main weapon systems (ie, not turrest) */
-  SHIP_DATA       *tractoredby;
-  SHIP_DATA       *tractored;
+  Ship       *target0; /* target of main weapon systems (ie, not turrest) */
+  Ship       *tractoredby;
+  Ship       *tractored;
   SPACE_DATA      *currjump;
   SPACE_DATA      *lastsystem;
   short            chaff;
@@ -535,24 +535,24 @@ struct ship_data
   bool             chaff_released;
   bool             autopilot;
   bool             opentube;
-  SHIP_DATA       *docked;
+  Ship       *docked;
   short            alarm;
   short            ions;
   Character       *ch;
   SPACE_DATA      *inorbitof;
   int              count;
-  TURRET_DATA *turret[MAX_NUMBER_OF_TURRETS_IN_SHIP];
+  Turret *turret[MAX_NUMBER_OF_TURRETS_IN_SHIP];
 };
 
-struct missile_data
+struct Missile
 {
-  MISSILE_DATA *next;
-  MISSILE_DATA *prev;
-  MISSILE_DATA *next_in_spaceobject;
-  MISSILE_DATA *prev_in_spaceobject;
+  Missile *next;
+  Missile *prev;
+  Missile *next_in_spaceobject;
+  Missile *prev_in_spaceobject;
   SPACE_DATA   *spaceobject;
-  SHIP_DATA    *target;
-  SHIP_DATA    *fired_from;
+  Ship    *target;
+  Ship    *fired_from;
   char         *fired_by;
   short         missiletype;
   short         age;
@@ -1102,8 +1102,8 @@ struct room_index_data
   Area        *area;
   Exit        *first_exit;
   Exit        *last_exit;
-  SHIP_DATA        *first_ship;
-  SHIP_DATA        *last_ship;
+  Ship        *first_ship;
+  Ship        *last_ship;
   char             *name;
   char             *description;
   vnum_t            vnum;
@@ -1589,10 +1589,10 @@ extern MEMBER_LIST          *first_member_list;
 extern MEMBER_LIST          *last_member_list;
 extern GUARD_DATA           *first_guard;
 extern GUARD_DATA           *last_guard;
-extern SHIP_DATA            *first_ship;
-extern SHIP_DATA            *last_ship;
-extern MISSILE_DATA         *first_missile;
-extern MISSILE_DATA         *last_missile;
+extern Ship            *first_ship;
+extern Ship            *last_ship;
+extern Missile         *first_missile;
+extern Missile         *last_missile;
 extern SPACE_DATA           *first_spaceobject;
 extern SPACE_DATA           *last_spaceobject;
 extern PLANET_DATA          *first_planet;
@@ -2391,9 +2391,9 @@ extern "C" {
   SPACE_DATA * spaceobject_from_vnum( vnum_t vnum );
   void update_spaceobjects( void );
   void update_missiles( void );
-  void         new_missile( SHIP_DATA *ship, SHIP_DATA *target, Character *ch,
+  void         new_missile( Ship *ship, Ship *target, Character *ch,
                             int missiletype );
-  void         extract_missile( MISSILE_DATA *missile );
+  void         extract_missile( Missile *missile );
 
   /* comm.c */
   char *obj_short( const OBJ_DATA *obj );

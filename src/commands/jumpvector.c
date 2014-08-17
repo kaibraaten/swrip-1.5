@@ -3,15 +3,15 @@
 #include "ships.h"
 #include "character.h"
 
-static bool ship_was_in_range( SHIP_DATA *ship, SHIP_DATA *target );
+static bool ship_was_in_range( Ship *ship, Ship *target );
 
 void do_jumpvector( Character *ch, char *argument )
 {
   int the_chance, num;
   float randnum;
   Vector3 projected;
-  SHIP_DATA *ship;
-  SHIP_DATA *target;
+  Ship *ship;
+  Ship *target;
   char buf[MAX_STRING_LENGTH];
 
   num = number_range( 1, 16 );
@@ -88,7 +88,7 @@ void do_jumpvector( Character *ch, char *argument )
   learn_from_success( ch, gsn_jumpvector );
 }
 
-static bool ship_was_in_range( SHIP_DATA *ship, SHIP_DATA *target )
+static bool ship_was_in_range( Ship *ship, Ship *target )
 {
   return target && ship && target != ship
     && ship_distance_to_ship( ship, target ) < 100*(ship->sensor+10)*((target->sclass == SHIP_DEBRIS ? 2 : target->sclass)+3);
