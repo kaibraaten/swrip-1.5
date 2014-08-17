@@ -29,7 +29,7 @@
 /*
  * Copy vector 'from' into 'to'
  */
-void vector_copy( Vector3 * const to, const Vector3 * const from )
+void CopyVector( Vector3 * const to, const Vector3 * const from )
 {
   to->x = from->x;
   to->y = from->y;
@@ -39,7 +39,7 @@ void vector_copy( Vector3 * const to, const Vector3 * const from )
 /*
  * Return the length of a vector
  */
-double vector_length( const Vector3 * const v )
+double GetVectorLength( const Vector3 * const v )
 {
   return sqrt( v->x * v->x + v->y * v->y + v->z * v->z );
 }
@@ -47,7 +47,7 @@ double vector_length( const Vector3 * const v )
 /*
  * Return the distance between two vectors
  */
-double vector_distance( const Vector3 * const a, const Vector3 * const b )
+double GetDistanceBetweenVectors( const Vector3 * const a, const Vector3 * const b )
 {
   return sqrt( ( a->x - b->x ) * ( a->x - b->x )
 	       + ( a->y - b->y ) * ( a->y - b->y )
@@ -57,7 +57,7 @@ double vector_distance( const Vector3 * const a, const Vector3 * const b )
 /*
  * Calculate dot product
  */
-double vector_dot( const Vector3 * const a, const Vector3 * const b )
+double GetVectorDotProduct( const Vector3 * const a, const Vector3 * const b )
 {
   return ( a->x * b->x ) + ( a->y * b->y ) + ( a->z * b->z );
 }
@@ -65,7 +65,7 @@ double vector_dot( const Vector3 * const a, const Vector3 * const b )
 /*
  * Normalize a vector
  */
-void vector_normalize( Vector3 * const v )
+void NormalizeVector( Vector3 * const v )
 {
   float magnitude = ( v->x * v->x ) + ( v->y * v->y ) + ( v->z * v->z );
 
@@ -81,14 +81,12 @@ void vector_normalize( Vector3 * const v )
 /*
  * Initialize a vector's member variables.
  */
-void vector_init( Vector3 * const v )
+void InitializeVector( Vector3 * const v )
 {
-  v->x = 0.0;
-  v->y = 0.0;
-  v->z = 0.0;
+  SetVector( v, 0.0, 0.0, 0.0 );
 }
 
-void vector_set( Vector3 * const vec, double x, double y, double z )
+void SetVector( Vector3 * const vec, double x, double y, double z )
 {
   vec->x = x;
   vec->y = y;

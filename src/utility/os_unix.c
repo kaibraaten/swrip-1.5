@@ -4,17 +4,17 @@
 #include <string.h>
 #include "os.h"
 
-void os_setup( void )
+void OsSetup( void )
 {
 
 }
 
-void os_cleanup( void )
+void OsCleanup( void )
 {
 
 }
 
-int set_nonblocking( socket_t sock )
+int SetNonBlockingSocket( socket_t sock )
 {
   return fcntl( sock, F_SETFL, O_NONBLOCK );
 }

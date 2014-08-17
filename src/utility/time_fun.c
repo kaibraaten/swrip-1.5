@@ -15,13 +15,13 @@ void bug( const char *str, ... );
 }
 #endif
 
-struct tm *update_time( struct tm *old_time )
+struct tm *UpdateTime( struct tm *old_time )
 {
   time_t t = mktime(old_time);
   return localtime(&t);
 }
 
-void subtract_times(struct timeval *etime, struct timeval *start_time)
+void SubtractTimes(struct timeval *etime, struct timeval *start_time)
 {
   etime->tv_sec -= start_time->tv_sec;
   etime->tv_usec -= start_time->tv_usec;
@@ -33,7 +33,7 @@ void subtract_times(struct timeval *etime, struct timeval *start_time)
   }
 }
 
-void start_timer(struct timeval *start_time)
+void StartTimer(struct timeval *start_time)
 {
   if ( !start_time )
   {
@@ -44,7 +44,7 @@ void start_timer(struct timeval *start_time)
   gettimeofday(start_time, NULL);
 }
 
-time_t end_timer(struct timeval *start_time)
+time_t StopTimer(struct timeval *start_time)
 {
   struct timeval etime;
 
@@ -57,7 +57,7 @@ time_t end_timer(struct timeval *start_time)
     return 0;
   }
 
-  subtract_times(&etime, start_time);
+  SubtractTimes(&etime, start_time);
 
   /* start_time becomes time used */
   *start_time = etime;

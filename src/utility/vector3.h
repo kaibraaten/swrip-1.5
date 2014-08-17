@@ -44,38 +44,38 @@ extern "C" {
  * Return the length of a vector
  * Not to be confused with the distance between two vectors!
  */
-double vector_length( const Vector3 * const v );
+double GetVectorLength( const Vector3 * const v );
 
 /*
  * Normalize a vector
  */
-void vector_normalize( Vector3 * const v );
+void NormalizeVector( Vector3 * const v );
 
 /*
  * Copy vector a vector
  */
-void vector_copy( Vector3 * const to, const Vector3 * const from );
+void CopyVector( Vector3 * const to, const Vector3 * const from );
 
 /*
  * Return the distance between two vectors
  */
-double vector_distance( const Vector3 * const a, const Vector3 * const b );
+double GetDistanceBetweenVectors( const Vector3 * const a, const Vector3 * const b );
 
 /*
  * Calculate dot product
  */
-double vector_dot( const Vector3 * const a, const Vector3 * const b );
+double GetVectorDotProduct( const Vector3 * const a, const Vector3 * const b );
 
 /*
  * Initialize a vector's member variables.
  */
-void vector_init( Vector3 * const v );
+void InitializeVector( Vector3 * const v );
 
 /*
  * Set the coordinates.
  */
 
-void vector_set( Vector3 * const vec, double x, double y, double z );
+void SetVector( Vector3 * const vec, double x, double y, double z );
 
 #ifdef __cplusplus
 }

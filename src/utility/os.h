@@ -40,10 +40,10 @@
 extern "C" {
 #endif
 
-void os_setup( void );
-void os_cleanup( void );
-int set_nonblocking( socket_t sock );
-FILE *open_log_file(void);
+void OsSetup( void );
+void OsCleanup( void );
+int SetNonBlockingSocket( socket_t sock );
+FILE *OpenLogFile(void);
 
 #ifdef __cplusplus
 }

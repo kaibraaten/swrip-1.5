@@ -29,13 +29,13 @@ int urange( int mincheck, int check, int maxcheck )
   return check;
 }
 
-char *scramble( const char *argument, int modifier )
+char *Scramble( const char *argument, int modifier )
 {
   static char arg[MAX_INPUT_LENGTH];
   int position = 0;
   int conversion = 0;
 
-  modifier %= number_range( 80, 300 ); /* Bitvectors get way too large #s */
+  modifier %= GetRandomNumberFromRange( 80, 300 ); /* Bitvectors get way too large #s */
 
   for ( position = 0; position < MAX_INPUT_LENGTH; position++ )
   {
@@ -48,7 +48,7 @@ char *scramble( const char *argument, int modifier )
     {
       conversion = -conversion + position
 	- modifier + argument[position] - 'A';
-      conversion = number_range( conversion - 5, conversion + 5 );
+      conversion = GetRandomNumberFromRange( conversion - 5, conversion + 5 );
       while ( conversion > 25 )
 	conversion -= 26;
       while ( conversion < 0 )
@@ -59,7 +59,7 @@ char *scramble( const char *argument, int modifier )
     {
       conversion = -conversion + position
 	- modifier + argument[position] - 'a';
-      conversion = number_range( conversion - 5, conversion + 5 );
+      conversion = GetRandomNumberFromRange( conversion - 5, conversion + 5 );
       while ( conversion > 25 )
 	conversion -= 26;
       while ( conversion < 0 )
@@ -70,7 +70,7 @@ char *scramble( const char *argument, int modifier )
     {
       conversion = -conversion + position
 	- modifier + argument[position] - '0';
-      conversion = number_range( conversion - 2, conversion + 2 );
+      conversion = GetRandomNumberFromRange( conversion - 2, conversion + 2 );
       while ( conversion > 9 )
 	conversion -= 10;
       while ( conversion < 0 )
@@ -93,7 +93,7 @@ char *scramble( const char *argument, int modifier )
  */
 static int rgiState[2+55];
 
-void init_mm( void )
+void InitMM( void )
 {
   int *piState = &rgiState[2];
   int iState = 0;
@@ -131,7 +131,7 @@ static int number_mm( void )
   return iRand >> 6;
 }
 
-int number_bits( int width )
+int NumberBits( int width )
 {
   return number_mm( ) & ( ( 1 << width ) - 1 );
 }
@@ -139,7 +139,7 @@ int number_bits( int width )
 /*
  * Roll some dice.                                              -Thoric
  */
-int dice( int number, int size )
+int RollDice( int number, int size )
 {
   int idice = 0;
   int sum = 0;
@@ -154,7 +154,7 @@ int dice( int number, int size )
   }
 
   for ( idice = 0, sum = 0; idice < number; idice++ )
-    sum += number_range( 1, size );
+    sum += GetRandomNumberFromRange( 1, size );
 
   return sum;
 }
@@ -162,9 +162,9 @@ int dice( int number, int size )
 /*
  * Stick a little fuzz on a number.
  */
-int number_fuzzy( int number )
+int NumberFuzzy( int number )
 {
-  switch ( number_bits( 2 ) )
+  switch ( NumberBits( 2 ) )
   {
     case 0:
       number -= 1;
@@ -181,7 +181,7 @@ int number_fuzzy( int number )
 /*
  * Generate a random number.
  */
-int number_range( int from, int to )
+int GetRandomNumberFromRange( int from, int to )
 {
   if ( ( to = to - from + 1 ) <= 1 )
     return from;
@@ -192,7 +192,7 @@ int number_range( int from, int to )
 /*
  * Generate a percentile roll.
  */
-int number_percent( void )
+int GetRandomPercent( void )
 {
   return number_mm() % 100;
 }
@@ -200,7 +200,7 @@ int number_percent( void )
 /*
  * Generate a random door.
  */
-int number_door( void )
+int GetRandomDoor( void )
 {
   int door = 0;
 
@@ -210,7 +210,7 @@ int number_door( void )
   return door;
 }
 
-char *flag_string( int bitvector, const char * const flagarray[] )
+char *FlagString( int bitvector, const char * const flagarray[] )
 {
   static char buf[MAX_STRING_LENGTH];
   int x = 0;
@@ -237,13 +237,13 @@ char *flag_string( int bitvector, const char * const flagarray[] )
 /*
  * Simple linear interpolation.
  */
-int interpolate( int level, int value_00, int value_32 )
+int Interpolate( int level, int value_00, int value_32 )
 {
   return value_00 + level * (value_32 - value_00) / 32;
 }
 
 /*
- * stripclr - removes the color codes from a string.
+ * StripColorCodes - removes the color codes from a string.
  *
  * Notice: currently setup for the default smaug/swr color code system,
  * if you do not use these, then you will have to do some editing.
@@ -260,7 +260,7 @@ int interpolate( int level, int value_00, int value_32 )
  * - Gavin - ur_gavin@hotmail.com
  * - Unknown Regions - http://ur.lynker.com
  */
-char *stripclr( char *text )
+char *StripColorCodes( char *text )
 {
   int i = 0, j = 0;
 

@@ -30,7 +30,7 @@
 
 /*
    util function, converts an 'advanced' ASCII-number-string into a number.
-   Used by parsebet() but could also be used by do_give or do_wimpy.
+   Used by ParseBet() but could also be used by do_give or do_wimpy.
 
    Advanced strings can contain 'k' (or 'K') and 'm' ('M') in them, not just
    numbers. The letters multiply whatever is left of them by 1,000 and
@@ -117,7 +117,7 @@ static int advatoi (const char *s)
    gives 10,000 etc.
 
 */
-int parsebet (const int currentbet, const char *s)
+int ParseBet (const int currentbet, const char *s)
 {
   /* check to make sure it's not blank */
   if ( s[0] != '\0' )

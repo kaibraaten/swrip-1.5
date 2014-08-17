@@ -32,7 +32,7 @@ extern bool fBootDb;
 /*
  * Read a letter from a file.
  */
-char fread_letter( FILE *fp )
+char ReadChar( FILE *fp )
 {
   char c = '\0';
 
@@ -40,7 +40,7 @@ char fread_letter( FILE *fp )
   {
     if ( feof(fp) )
     {
-      bug("fread_letter: EOF encountered on read.\r\n");
+      bug("ReadChar: EOF encountered on read.\r\n");
       if ( fBootDb )
 	exit( EXIT_FAILURE );
 
@@ -57,7 +57,7 @@ char fread_letter( FILE *fp )
 /*
  * Read a float number from a file. Turn the result into a float value.
  */
-float fread_float( FILE *fp )
+float ReadFloat( FILE *fp )
 {
   float number = 0.0;
   bool sign = false, decimal = false;
@@ -132,13 +132,13 @@ float fread_float( FILE *fp )
 
   if( c == '|' )
     {
-      number += fread_float( fp );
+      number += ReadFloat( fp );
     }
   else if( c != ' ' )
     {
       if( ungetc( c, fp ) == EOF )
 	{
-	  bug("fread_float: EOF encountered on ungetc.\r\n");
+	  bug("ReadFloat: EOF encountered on ungetc.\r\n");
 
 	  if ( fBootDb )
 	    exit( EXIT_FAILURE );
@@ -151,7 +151,7 @@ float fread_float( FILE *fp )
 /*
  * Read a number from a file.
  */
-int fread_number( FILE *fp )
+int ReadInt( FILE *fp )
 {
   int number = 0;
   bool sign = false;
@@ -161,7 +161,7 @@ int fread_number( FILE *fp )
   {
     if ( feof(fp) )
     {
-      bug("fread_number: EOF encountered on read.\r\n");
+      bug("ReadInt: EOF encountered on read.\r\n");
       if ( fBootDb )
 	exit( EXIT_FAILURE );
       return 0;
@@ -182,9 +182,11 @@ int fread_number( FILE *fp )
 
   if ( !isdigit((int) c) )
   {
-    bug( "Fread_number: bad format. (%c)", c );
+    bug( "ReadInt: bad format. (%c)", c );
+
     if ( fBootDb )
       exit( EXIT_FAILURE );
+
     return 0;
   }
 
@@ -192,7 +194,7 @@ int fread_number( FILE *fp )
   {
     if ( feof(fp) )
     {
-      bug("fread_number: EOF encountered on read.\r\n");
+      bug("ReadInt: EOF encountered on read.\r\n");
       if ( fBootDb )
 	exit( EXIT_FAILURE );
       return number;
@@ -205,12 +207,12 @@ int fread_number( FILE *fp )
     number = 0 - number;
 
   if ( c == '|' )
-    number += fread_number( fp );
+    number += ReadInt( fp );
   else if ( c != ' ' )
     {
       if( ungetc( c, fp ) == EOF )
         {
-          bug("fread_number: EOF encountered on ungetc.\r\n");
+          bug("ReadInt: EOF encountered on ungetc.\r\n");
 
           if ( fBootDb )
             exit( EXIT_FAILURE );
@@ -223,7 +225,7 @@ int fread_number( FILE *fp )
 /*
  * Read a string from file fp
  */
-char *fread_string( FILE *fp )
+char *ReadStringToTilde( FILE *fp )
 {
   char buf[MAX_STRING_LENGTH];
   char *plast = buf;
@@ -240,25 +242,25 @@ char *fread_string( FILE *fp )
   {
     if ( feof(fp) )
     {
-      bug("fread_string: EOF encountered on read.\r\n");
+      bug("ReadStringToTilde: EOF encountered on read.\r\n");
       if ( fBootDb )
 	exit( EXIT_FAILURE );
-      return str_dup("");
+      return CopyString("");
     }
     c = fgetc( fp );
   }
   while ( isspace((int)c) );
 
   if ( ( *plast++ = c ) == '~' )
-    return str_dup( "" );
+    return CopyString( "" );
 
   for ( ;; )
   {
     if ( ln >= (MAX_STRING_LENGTH - 1) )
     {
-      bug( "fread_string: string too long" );
+      bug( "ReadStringToTilde: string too long" );
       *plast = '\0';
-      return str_dup( buf );
+      return CopyString( buf );
     }
     switch ( (int)( *plast = fgetc( fp ) ) )
     {
@@ -267,11 +269,11 @@ char *fread_string( FILE *fp )
 	break;
 
       case EOF:
-	bug( "Fread_string: EOF" );
+	bug( "ReadStringToTilde: EOF" );
 	if ( fBootDb )
 	  exit( EXIT_FAILURE );
 	*plast = '\0';
-	return str_dup(buf);
+	return CopyString(buf);
 	break;
 
       case '\n':
@@ -284,15 +286,15 @@ char *fread_string( FILE *fp )
 
       case '~':
 	*plast = '\0';
-	return str_dup( buf );
+	return CopyString( buf );
     }
   }
 }
 
 /*
- * Read a string from file fp using str_dup (ie: no string hashing)
+ * Read a string from file fp using CopyString (ie: no string hashing)
  */
-char *fread_string_nohash( FILE *fp )
+char *ReadStringToTildeNoHash( FILE *fp )
 {
   char buf[MAX_STRING_LENGTH];
   char *plast = buf;
@@ -309,25 +311,27 @@ char *fread_string_nohash( FILE *fp )
   {
     if ( feof(fp) )
     {
-      bug("fread_string_no_hash: EOF encountered on read.\r\n");
+      bug("ReadStringToTildeNoHash: EOF encountered on read.\r\n");
+
       if ( fBootDb )
 	exit( EXIT_FAILURE );
-      return str_dup("");
+
+      return CopyString("");
     }
     c = fgetc( fp );
   }
   while ( isspace((int)c) );
 
   if ( ( *plast++ = c ) == '~' )
-    return str_dup( "" );
+    return CopyString( "" );
 
   for ( ;; )
   {
     if ( ln >= (MAX_STRING_LENGTH - 1) )
     {
-      bug( "fread_string_no_hash: string too long" );
+      bug( "ReadStringToTildeNoHash: string too long" );
       *plast = '\0';
-      return str_dup( buf );
+      return CopyString( buf );
     }
     switch ( (int)( *plast = fgetc( fp ) ) )
     {
@@ -336,11 +340,11 @@ char *fread_string_nohash( FILE *fp )
 	break;
 
       case EOF:
-	bug( "Fread_string_no_hash: EOF" );
+	bug( "ReadStringToTildeNoHash: EOF" );
 	if ( fBootDb )
 	  exit( EXIT_FAILURE );
 	*plast = '\0';
-	return str_dup(buf);
+	return CopyString(buf);
 	break;
 
       case '\n':
@@ -353,7 +357,7 @@ char *fread_string_nohash( FILE *fp )
 
       case '~':
 	*plast = '\0';
-	return str_dup( buf );
+	return CopyString( buf );
     }
   }
 }
@@ -361,7 +365,7 @@ char *fread_string_nohash( FILE *fp )
 /*
  * Read to end of line (for comments).
  */
-void fread_to_eol( FILE *fp )
+void ReadToEndOfLine( FILE *fp )
 {
   char c = 0;
 
@@ -369,7 +373,7 @@ void fread_to_eol( FILE *fp )
   {
     if ( feof(fp) )
     {
-      bug("fread_to_eol: EOF encountered on read.\r\n");
+      bug("ReadToEndOfLine: EOF encountered on read.\r\n");
       if ( fBootDb )
 	exit( EXIT_FAILURE );
       return;
@@ -386,7 +390,7 @@ void fread_to_eol( FILE *fp )
 
   if( ungetc( c, fp ) == EOF )
     {
-      bug("fread_to_eol: EOF encountered on ungetc.\r\n");
+      bug("ReadToEndOfLine: EOF encountered on ungetc.\r\n");
 
       if ( fBootDb )
 	exit( EXIT_FAILURE );
@@ -396,7 +400,7 @@ void fread_to_eol( FILE *fp )
 /*
  * Read to end of line into static buffer                       -Thoric
  */
-char *fread_line( FILE *fp )
+char *ReadLine( FILE *fp )
 {
   static char line[MAX_STRING_LENGTH];
   char *pline = line;
@@ -413,7 +417,7 @@ char *fread_line( FILE *fp )
   {
     if ( feof(fp) )
     {
-      bug("fread_line: EOF encountered on read.\r\n");
+      bug("ReadLine: EOF encountered on read.\r\n");
       if ( fBootDb )
 	exit( EXIT_FAILURE );
       strcpy(line, "");
@@ -425,7 +429,7 @@ char *fread_line( FILE *fp )
 
   if( ungetc( c, fp ) == EOF )
     {
-      bug("fread_line: EOF encountered on ungetc.\r\n");
+      bug("ReadLine: EOF encountered on ungetc.\r\n");
 
       if ( fBootDb )
 	exit( EXIT_FAILURE );
@@ -435,7 +439,7 @@ char *fread_line( FILE *fp )
   {
     if ( feof(fp) )
     {
-      bug("fread_line: EOF encountered on read.\r\n");
+      bug("ReadLine: EOF encountered on read.\r\n");
       if ( fBootDb )
 	exit( EXIT_FAILURE );
       *pline = '\0';
@@ -445,7 +449,7 @@ char *fread_line( FILE *fp )
     *pline++ = c; ln++;
     if ( ln >= (MAX_STRING_LENGTH - 1) )
     {
-      bug( "fread_line: line too long" );
+      bug( "ReadLine: line too long" );
       break;
     }
   }
@@ -472,7 +476,7 @@ char *fread_line( FILE *fp )
 /*
  * Read one word (into static buffer).
  */
-char *fread_word( FILE *fp )
+char *ReadWord( FILE *fp )
 {
   static char word[MAX_INPUT_LENGTH];
   char *pword = NULL;
@@ -482,7 +486,7 @@ char *fread_word( FILE *fp )
   {
     if ( feof(fp) )
     {
-      bug("fread_word: EOF encountered on read.\r\n");
+      bug("ReadWord: EOF encountered on read.\r\n");
       if ( fBootDb )
 	exit( EXIT_FAILURE );
       word[0] = '\0';
@@ -507,7 +511,7 @@ char *fread_word( FILE *fp )
   {
     if ( feof(fp) )
     {
-      bug("fread_word: EOF encountered on read.\r\n");
+      bug("ReadWord: EOF encountered on read.\r\n");
       if ( fBootDb )
 	exit( EXIT_FAILURE );
       *pword = '\0';
@@ -532,7 +536,7 @@ char *fread_word( FILE *fp )
     }
   }
 
-  bug( "Fread_word: word too long" );
+  bug( "ReadWord: word too long" );
   exit( EXIT_FAILURE );
   return NULL;
 }
@@ -540,7 +544,7 @@ char *fread_word( FILE *fp )
 /*
  * Append a string to a file.
  */
-void append_to_file( const char *file, const char *str )
+void AppendToFile( const char *file, const char *str )
 {
   FILE *fp = NULL;
 

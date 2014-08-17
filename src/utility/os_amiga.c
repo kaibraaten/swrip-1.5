@@ -106,13 +106,13 @@ static const char *get_next_filename( CONST_STRPTR directory )
 }
 */
 /*
-FILE *open_log_file(void)
+FILE *OpenLogFile(void)
 {
   return fopen( get_next_filename( (CONST_STRPTR) "PROGDIR:log/" ), "w+" );
 }
 */
 
-void os_setup( void )
+void OsSetup( void )
 {
   if( !( SocketBase = OpenLibrary( (CONST_STRPTR) "bsdsocket.library", 2 ) ) )
   {
@@ -145,7 +145,7 @@ void os_setup( void )
 #endif
 }
 
-void os_cleanup( void )
+void OsCleanup( void )
 {
 #if defined(__MORPHOS__) && defined(SWRIP_USE_DLSYM)
   if( DynLoadBase )
@@ -177,7 +177,7 @@ void os_cleanup( void )
   */
 }
 
-int set_nonblocking( socket_t sock )
+int SetNonBlockingSocket( socket_t sock )
 {
   char optval = 1;
   return IoctlSocket( sock, FIONBIO, &optval );

@@ -59,7 +59,7 @@ static const char *get_next_filename( const char *directory )
 }
 */
 
-void os_setup( void )
+void OsSetup( void )
 {
   WSADATA wsaData;
 
@@ -71,7 +71,7 @@ void os_setup( void )
   }
 }
 
-void os_cleanup( void )
+void OsCleanup( void )
 {
   WSACleanup();
 }
@@ -120,7 +120,7 @@ int gettimeofday( struct timeval *tv, struct timezone *tz )
   return 0;
 }
 
-int set_nonblocking( socket_t sock )
+int SetNonBlockingSocket( socket_t sock )
 {
   unsigned long optval = 1;
   return ioctlsocket( sock, FIONBIO, &optval );

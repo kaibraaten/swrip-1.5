@@ -85,7 +85,7 @@ do                                                              \
 #endif
 
 #define KEY( literal, field, value )                                    \
-  if ( !str_cmp( (word), (literal) ) )					\
+  if ( !StrCmp( (word), (literal) ) )					\
     {                                       \
       (field) = (value);		    \
       fMatch = true;			    \
@@ -134,73 +134,73 @@ do                                                              \
    (link)->next->prev        = (link)->prev;                 \
   } while(0)
 
-int parsebet (const int currentbet, const char *s);
+int ParseBet (const int currentbet, const char *s);
 int umin( int check, int ncheck );
 int umax( int check, int ncheck );
 int urange( int mincheck, int check, int maxcheck );
 
 /* string_handling.c */
-char *wordwrap( char *txt, unsigned short wrap );
-char *cat_sprintf(char *dest, const char *fmt, ...);
-bool is_number( const char *arg );
-int number_argument( const char *argument, char *arg );
-char *one_argument( char *argument, char *arg_first );
-char *one_argument2( char *argument, char *arg_first );
-bool is_name( const char *str, const char *namelist );
-bool is_name_prefix( const char *str, const char *namelist );
-bool nifty_is_name( const char *str, const char *namelist );
-bool nifty_is_name_prefix( const char *str, const char *namelist );
-bool str_cmp( const char *astr, const char *bstr );
-bool str_prefix( const char *astr, const char *bstr );
-bool str_infix( const char *astr, const char *bstr );
-bool str_suffix( const char *astr, const char *bstr );
-char *capitalize( const char *str );
-char *strlower( const char *str );
-char *strupper( const char *str );
-const char *aoran( const char *str );
-char *strip_cr( const char *str  );
-char *str_dup( const char *str );
-char fread_letter( FILE *fp );
-float fread_float( FILE *fp );
-int fread_number( FILE *fp );
-char *fread_string( FILE *fp );
-char *fread_string_nohash( FILE *fp );
-void fread_to_eol( FILE *fp );
-char *fread_word( FILE *fp );
-char *fread_line( FILE *fp );
-void smash_tilde( char *str );
-void hide_tilde( char *str );
-char *show_tilde( const char *str );
-void replace_char( char*, char, char );
-void smush_tilde( char* );
-char *encode_string( const char* );
-char *trim_start( char *string, char junk );
-char *trim_end( char *string, char junk );
-char *trim_string( char *string, char junk );
+char *WordWrap( char *txt, unsigned short wrap );
+char *CatSprintf(char *dest, const char *fmt, ...);
+bool IsNumber( const char *arg );
+int NumberArgument( const char *argument, char *arg );
+char *OneArgument( char *argument, char *arg_first );
+char *OneArgument2( char *argument, char *arg_first );
+bool IsName( const char *str, const char *namelist );
+bool IsNamePrefix( const char *str, const char *namelist );
+bool NiftyIsName( const char *str, const char *namelist );
+bool NiftyIsNamePrefix( const char *str, const char *namelist );
+bool StrCmp( const char *astr, const char *bstr );
+bool StringPrefix( const char *astr, const char *bstr );
+bool StringInfix( const char *astr, const char *bstr );
+bool StringSuffix( const char *astr, const char *bstr );
+char *Capitalize( const char *str );
+char *StringToLowercase( const char *str );
+char *StringToUppercase( const char *str );
+const char *AOrAn( const char *str );
+char *StripCarriageReturn( const char *str  );
+char *CopyString( const char *str );
+char ReadChar( FILE *fp );
+float ReadFloat( FILE *fp );
+int ReadInt( FILE *fp );
+char *ReadStringToTilde( FILE *fp );
+char *ReadStringToTildeNoHash( FILE *fp );
+void ReadToEndOfLine( FILE *fp );
+char *ReadWord( FILE *fp );
+char *ReadLine( FILE *fp );
+void SmashTilde( char *str );
+void SmushTilde( char* );
+void HideTilde( char *str );
+char *ShowTilde( const char *str );
+void ReplaceChar( char*, char, char );
+char *EncodeString( const char* );
+char *TrimStringStart( char *string, char junk );
+char *TrimStringEnd( char *string, char junk );
+char *TrimString( char *string, char junk );
 
-char *scramble( const char *argument, int modifier );
+char *Scramble( const char *argument, int modifier );
 
 /* Random number stuff */
-void init_mm( void );
-int number_fuzzy( int number );
-int number_range( int from, int to );
-int number_percent( void );
-int number_door( void );
-int number_bits( int width );
-int dice( int number, int size );
+void InitMM( void );
+int NumberFuzzy( int number );
+int GetRandomNumberFromRange( int from, int to );
+int GetRandomPercent( void );
+int GetRandomDoor( void );
+int NumberBits( int width );
+int RollDice( int number, int size );
 
 /* misc stuff */
-int interpolate( int level, int value_00, int value_32 );
-char *stripclr( char *text );
+int Interpolate( int level, int value_00, int value_32 );
+char *StripColorCodes( char *text );
 
 /* time_fun.c */
-struct tm *update_time( struct tm *old_time );
-void subtract_times( struct timeval *etime, struct timeval *start_time );
-void start_timer(struct timeval *start_time);
-time_t end_timer(struct timeval *start_time);
+struct tm *UpdateTime( struct tm *old_time );
+void SubtractTimes( struct timeval *etime, struct timeval *start_time );
+void StartTimer(struct timeval *start_time);
+time_t StopTimer(struct timeval *start_time);
 
-char *flag_string( int bitvector, const char * const flagarray[] );
-void append_to_file( const char *file, const char *str );
+char *FlagString( int bitvector, const char * const flagarray[] );
+void AppendToFile( const char *file, const char *str );
 
 #ifdef __cplusplus
 }

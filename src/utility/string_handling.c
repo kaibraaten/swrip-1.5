@@ -24,15 +24,15 @@ extern "C" {
 }
 #endif
 
-static bool is_name2( const char*, const char* );
-static bool is_name2_prefix( const char*, const char* );
-static bool is_name_internal( const char*, const char*, STRING_COMPARATOR, STRING_TOKENIZER );
-static bool nifty_is_name_internal( const char*, const char*,
+static bool IsName2( const char*, const char* );
+static bool IsName2_prefix( const char*, const char* );
+static bool IsName_internal( const char*, const char*, STRING_COMPARATOR, STRING_TOKENIZER );
+static bool NiftyIsName_internal( const char*, const char*,
                                     STRING_COMPARATOR, STRING_TOKENIZER );
 /*
  * See if a string is one of the names of an object.
  */
-static bool is_name_internal( const char *str, const char *namelist,
+static bool IsName_internal( const char *str, const char *namelist,
                               STRING_COMPARATOR compare_string,
                               STRING_TOKENIZER tokenize_string )
 {
@@ -57,34 +57,34 @@ static bool is_name_internal( const char *str, const char *namelist,
     }
 }
 
-bool is_name( const char *str, const char *namelist )
+bool IsName( const char *str, const char *namelist )
 {
-  return is_name_internal( str, namelist, str_cmp, one_argument );
+  return IsName_internal( str, namelist, StrCmp, OneArgument );
 }
 
-bool is_name_prefix( const char *str, const char *namelist )
+bool IsNamePrefix( const char *str, const char *namelist )
 {
-  return is_name_internal( str, namelist, str_prefix, one_argument );
+  return IsName_internal( str, namelist, StringPrefix, OneArgument );
 }
 
 /*
  * See if a string is one of the names of an object.            -Thoric
  * Treats a dash as a word delimiter as well as a space
  */
-bool is_name2( const char *str, const char *namelist )
+bool IsName2( const char *str, const char *namelist )
 {
-  return is_name_internal( str, namelist, str_cmp, one_argument2 );
+  return IsName_internal( str, namelist, StrCmp, OneArgument2 );
 }
 
-bool is_name2_prefix( const char *str, const char *namelist )
+bool IsName2_prefix( const char *str, const char *namelist )
 {
-  return is_name_internal( str, namelist, str_prefix, one_argument2 );
+  return IsName_internal( str, namelist, StringPrefix, OneArgument2 );
 }
 
 /*                                                              -Thoric
  * Checks if str is a name in namelist supporting multiple keywords
  */
-static bool nifty_is_name_internal( const char *str, const char *namelist,
+static bool NiftyIsName_internal( const char *str, const char *namelist,
                                     STRING_COMPARATOR compare_string,
                                     STRING_TOKENIZER tokenize_string )
 {
@@ -112,35 +112,35 @@ static bool nifty_is_name_internal( const char *str, const char *namelist,
     }
 }
 
-bool nifty_is_name( const char *str, const char *namelist )
+bool NiftyIsName( const char *str, const char *namelist )
 {
-  return nifty_is_name_internal( str, namelist, is_name2, one_argument2 );
+  return NiftyIsName_internal( str, namelist, IsName2, OneArgument2 );
 }
 
-bool nifty_is_name_prefix( const char *str, const char *namelist )
+bool NiftyIsNamePrefix( const char *str, const char *namelist )
 {
-  return nifty_is_name_internal( str, namelist, is_name2_prefix, one_argument2 );
+  return NiftyIsName_internal( str, namelist, IsName2_prefix, OneArgument2 );
 }
 
 /*
  * Removes the tildes from a string.
  * Used for player-entered strings that go into disk files.
  */
-void smash_tilde( char *str )
+void SmashTilde( char *str )
 {
-  replace_char( str, '~', '-' );
+  ReplaceChar( str, '~', '-' );
 }
 
 /*
  * Encodes the tildes in a string.                              -Thoric
  * Used for player-entered strings that go into disk files.
  */
-void hide_tilde( char *str )
+void HideTilde( char *str )
 {
-  replace_char( str, '~', HIDDEN_TILDE );
+  ReplaceChar( str, '~', HIDDEN_TILDE );
 }
 
-char *show_tilde( const char *str )
+char *ShowTilde( const char *str )
 {
   static char buf[MAX_STRING_LENGTH];
   char *bufptr = buf;
@@ -162,13 +162,13 @@ char *show_tilde( const char *str )
  * Return true if different
  *   (compatibility with historical functions).
  */
-bool str_cmp( const char *astr, const char *bstr )
+bool StrCmp( const char *astr, const char *bstr )
 {
   if ( !astr )
     {
       bug( "Str_cmp: null astr." );
       if ( bstr )
-        fprintf( stdout, "str_cmp: astr: (null)  bstr: %s\n", bstr );
+        fprintf( stdout, "StrCmp: astr: (null)  bstr: %s\n", bstr );
       return true;
     }
 
@@ -176,7 +176,7 @@ bool str_cmp( const char *astr, const char *bstr )
     {
       bug( "Str_cmp: null bstr." );
       if ( astr )
-        fprintf( stdout, "str_cmp: astr: %s  bstr: (null)\n", astr );
+        fprintf( stdout, "StrCmp: astr: %s  bstr: (null)\n", astr );
       return true;
     }
 
@@ -194,7 +194,7 @@ bool str_cmp( const char *astr, const char *bstr )
  * Return true if astr not a prefix of bstr
  *   (compatibility with historical functions).
  */
-bool str_prefix( const char *astr, const char *bstr )
+bool StringPrefix( const char *astr, const char *bstr )
 {
   if ( !astr )
     {
@@ -222,7 +222,7 @@ bool str_prefix( const char *astr, const char *bstr )
  * Returns true is astr not part of bstr.
  *   (compatibility with historical functions).
  */
-bool str_infix( const char *astr, const char *bstr )
+bool StringInfix( const char *astr, const char *bstr )
 {
   int sstr1 = strlen(astr);
   int sstr2 = strlen(bstr);
@@ -233,7 +233,7 @@ bool str_infix( const char *astr, const char *bstr )
     return false;
 
   for ( ichar = 0; ichar <= sstr2 - sstr1; ichar++ )
-    if ( c0 == CharToLowercase(bstr[ichar]) && !str_prefix( astr, bstr + ichar ) )
+    if ( c0 == CharToLowercase(bstr[ichar]) && !StringPrefix( astr, bstr + ichar ) )
       return false;
 
   return true;
@@ -244,12 +244,12 @@ bool str_infix( const char *astr, const char *bstr )
  * Return true if astr not a suffix of bstr
  *   (compatibility with historical functions).
  */
-bool str_suffix( const char *astr, const char *bstr )
+bool StringSuffix( const char *astr, const char *bstr )
 {
   int sstr1 = strlen(astr);
   int sstr2 = strlen(bstr);
 
-  if ( sstr1 <= sstr2 && !str_cmp( astr, bstr + sstr2 - sstr1 ) )
+  if ( sstr1 <= sstr2 && !StrCmp( astr, bstr + sstr2 - sstr1 ) )
     return false;
   else
     return true;
@@ -259,7 +259,7 @@ bool str_suffix( const char *astr, const char *bstr )
  * Returns an initial-capped string.
  * Rewritten by FearItself@AvP
  */
-char *capitalize( const char *str )
+char *Capitalize( const char *str )
 {
   static char buf[MAX_STRING_LENGTH];
   char *dest = buf;
@@ -297,7 +297,7 @@ char *capitalize( const char *str )
 /*
  * Returns a lowercase string.
  */
-char *strlower( const char *str )
+char *StringToLowercase( const char *str )
 {
   static char strlow[MAX_STRING_LENGTH];
   int i = 0;
@@ -312,7 +312,7 @@ char *strlower( const char *str )
 /*
  * Returns an uppercase string.
  */
-char *strupper( const char *str )
+char *StringToUppercase( const char *str )
 {
   static char strup[MAX_STRING_LENGTH];
   int i = 0;
@@ -344,7 +344,7 @@ static bool isavowel( unsigned letter )
 /*
  * Shove either "a " or "an " onto the beginning of a string    -Thoric
  */
-const char *aoran( const char *str )
+const char *AOrAn( const char *str )
 {
   static char temp[MAX_STRING_LENGTH];
 
@@ -365,7 +365,7 @@ const char *aoran( const char *str )
   return temp;
 }
 
-void replace_char( char *buf, char replace, char with )
+void ReplaceChar( char *buf, char replace, char with )
 {
   size_t i = 0;
 
@@ -381,7 +381,7 @@ void replace_char( char *buf, char replace, char with )
 /*
  * Return true if an argument is completely numeric.
  */
-bool is_number( const char *arg )
+bool IsNumber( const char *arg )
 {
   if ( *arg == '\0' )
     return false;
@@ -398,7 +398,7 @@ bool is_number( const char *arg )
 /*
  * Given a string like 14.foo, return 14 and 'foo'
  */
-int number_argument( const char *orig_argument, char *arg )
+int NumberArgument( const char *orig_argument, char *arg )
 {
   char *pdot = NULL;
   int number = 0;
@@ -425,7 +425,7 @@ int number_argument( const char *orig_argument, char *arg )
  * Pick off one argument from a string and return the rest.
  * Understands quotes.
  */
-char *one_argument( char *argument, char *arg_first )
+char *OneArgument( char *argument, char *arg_first )
 {
   char cEnd = ' ';
   short count = 0;
@@ -461,7 +461,7 @@ char *one_argument( char *argument, char *arg_first )
  * Pick off one argument from a string and return the rest.
  * Understands quotes.  Delimiters = { ' ', '-' }
  */
-char *one_argument2( char *argument, char *arg_first )
+char *OneArgument2( char *argument, char *arg_first )
 {
   char cEnd = ' ';
   short count = 0;
@@ -496,7 +496,7 @@ char *one_argument2( char *argument, char *arg_first )
 /*
  * Remove carriage returns from a line
  */
-char *strip_cr( const char *str )
+char *StripCarriageReturn( const char *str )
 {
   static char newstr[MAX_STRING_LENGTH];
   int i = 0, j = 0;
@@ -513,7 +513,7 @@ char *strip_cr( const char *str )
 /*
  * Removes the tildes from a line, except if it's the last character.
  */
-void smush_tilde( char *str )
+void SmushTilde( char *str )
 {
   char *strptr = str;
   size_t len = strlen( str );
@@ -559,7 +559,7 @@ static char *grab_word( char *argument, char *arg_first )
   return argument;
 }
 
-char *wordwrap( char *txt, unsigned short wrap )
+char *WordWrap( char *txt, unsigned short wrap )
 {
   static char buf[MAX_STRING_LENGTH];
   char *bufp = buf;
@@ -627,12 +627,12 @@ char *wordwrap( char *txt, unsigned short wrap )
   return bufp;
 }
 
-char *encode_string( const char *str )
+char *EncodeString( const char *str )
 {
   return sha256_crypt( str );
 }
 
-char *cat_sprintf(char *dest, const char *fmt, ...)
+char *CatSprintf(char *dest, const char *fmt, ...)
 {
   char buf[MAX_STRING_LENGTH];
 
@@ -646,9 +646,9 @@ char *cat_sprintf(char *dest, const char *fmt, ...)
 }
 
 /*
- * custom str_dup using create                                  -Thoric
+ * custom CopyString using create                                  -Thoric
  */
-char *str_dup( const char *str )
+char *CopyString( const char *str )
 {
   static char *ret = NULL;
 
@@ -660,7 +660,7 @@ char *str_dup( const char *str )
   return ret;
 }
 
-char *trim_start( char *string, char junk )
+char *TrimStringStart( char *string, char junk )
 {
   while( *string == junk )
     ++string;
@@ -668,7 +668,7 @@ char *trim_start( char *string, char junk )
   return string;
 }
 
-char *trim_end( char *string, char junk )
+char *TrimStringEnd( char *string, char junk )
 {
   size_t pos = strlen( string ) - 1;
 
@@ -681,10 +681,10 @@ char *trim_end( char *string, char junk )
   return string;
 }
 
-char *trim_string( char *string, char junk )
+char *TrimString( char *string, char junk )
 {
-  string = trim_start( string, junk );
-  string = trim_end( string, junk );
+  string = TrimStringStart( string, junk );
+  string = TrimStringEnd( string, junk );
 
   return string;
 }
