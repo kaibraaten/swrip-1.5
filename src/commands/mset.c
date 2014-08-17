@@ -864,6 +864,8 @@ void do_mset( Character *ch, char *argument )
       ch->substate = SUB_MOB_DESC;
       ch->dest_buf = victim;
       StartEditing( ch, victim->description );
+      SetEditorDescription( ch, "Mobile %d (%s) description",
+			    victim->pIndexData->vnum, victim->name );
       return;
     }
 

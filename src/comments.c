@@ -294,6 +294,7 @@ void do_comment( Character *ch, char *argument )
       ch->substate = SUB_WRITING_NOTE;
       ch->dest_buf = ch->pcdata->pnote;
       StartEditing( ch, ch->pcdata->pnote->text );
+      SetEditorDescription( ch, "Player comment" );
       return;
     }
 

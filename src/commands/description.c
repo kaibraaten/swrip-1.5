@@ -30,6 +30,7 @@ void do_description( Character *ch, char *argument )
       ch->substate = SUB_PERSONAL_DESC;
       ch->dest_buf = ch;
       StartEditing( ch, ch->description );
+      SetEditorDescription( ch, "Your character description" );
       return;
 
     case SUB_PERSONAL_DESC:

@@ -1049,15 +1049,25 @@ void mpedit( Character *ch, MPROG_DATA *mprg, int mptype, char *argument )
   if ( mptype != -1 )
     {
       mprg->type = 1 << mptype;
+
       if ( mprg->arglist )
-        STRFREE( mprg->arglist );
+	{
+	  STRFREE( mprg->arglist );
+	}
+
       mprg->arglist = STRALLOC( argument );
     }
+
   ch->substate = SUB_MPROG_EDIT;
   ch->dest_buf = mprg;
+
   if ( !mprg->comlist )
-    mprg->comlist = STRALLOC( "" );
+    {
+      mprg->comlist = STRALLOC( "" );
+    }
+
   StartEditing( ch, mprg->comlist );
+  SetEditorDescription( ch, "MOBPROG script" );
 }
 
 /*
@@ -1068,13 +1078,23 @@ void rpedit( Character *ch, MPROG_DATA *mprg, int mptype, char *argument )
   if ( mptype != -1 )
     {
       mprg->type = 1 << mptype;
+
       if ( mprg->arglist )
-        STRFREE( mprg->arglist );
+	{
+	  STRFREE( mprg->arglist );
+	}
+
       mprg->arglist = STRALLOC( argument );
     }
+
   ch->substate = SUB_MPROG_EDIT;
   ch->dest_buf = mprg;
+
   if(!mprg->comlist)
-    mprg->comlist = STRALLOC("");
+    {
+      mprg->comlist = STRALLOC("");
+    }
+
   StartEditing( ch, mprg->comlist );
+  SetEditorDescription( ch, "ROOMPROG script" );
 }

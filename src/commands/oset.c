@@ -503,6 +503,8 @@ void do_oset( Character *ch, char *argument )
       ch->substate = SUB_OBJ_LONG;
       ch->dest_buf = obj;
       StartEditing( ch, obj->description );
+      SetEditorDescription( ch, "Object %d (%s) long description",
+			    obj->pIndexData->vnum, obj->name );
       return;
     }
 
@@ -669,6 +671,8 @@ void do_oset( Character *ch, char *argument )
       ch->substate = SUB_OBJ_EXTRA;
       ch->dest_buf = ed;
       StartEditing( ch, ed->description );
+      SetEditorDescription( ch, "Object %d (%s) extra description: %s",
+			    obj->pIndexData->vnum, obj->name, arg3 );
       return;
     }
 
@@ -700,6 +704,8 @@ void do_oset( Character *ch, char *argument )
       ch->substate = SUB_OBJ_EXTRA;
       ch->dest_buf = ed;
       StartEditing( ch, ed->description );
+      SetEditorDescription( ch, "Object %d (%s) description",
+                            obj->pIndexData->vnum, obj->name );
       return;
     }
 

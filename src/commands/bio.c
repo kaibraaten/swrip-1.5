@@ -30,6 +30,7 @@ void do_bio( Character *ch, char *argument )
       ch->substate = SUB_PERSONAL_BIO;
       ch->dest_buf = ch;
       StartEditing( ch, ch->pcdata->bio );
+      SetEditorDescription( ch, "Your character biography" );
       return;
 
     case SUB_PERSONAL_BIO:

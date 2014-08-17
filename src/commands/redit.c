@@ -129,6 +129,8 @@ void do_redit( Character *ch, char *argument )
       ch->substate = SUB_ROOM_DESC;
       ch->dest_buf = location;
       StartEditing( ch, location->description );
+      SetEditorDescription( ch, "Room %d (%s) description",
+                            location->vnum, location->name );
       return;
     }
 
@@ -166,6 +168,8 @@ void do_redit( Character *ch, char *argument )
       ch->substate = SUB_ROOM_EXTRA;
       ch->dest_buf = ed;
       StartEditing( ch, ed->description );
+      SetEditorDescription( ch, "Room %d (%s) extra description: %s",
+                            location->vnum, location->name, argument );
       return;
     }
 

@@ -690,6 +690,7 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
 	    }
 
           StartEditing( ch, ed->description );
+	  SetEditorDescription( ch, "Note" );
           return;
         }
       else
