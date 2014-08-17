@@ -12,7 +12,7 @@ bool spec_janitor( Character *ch )
   for ( trash = ch->in_room->first_content; trash; trash = trash_next )
     {
       trash_next = trash->next_content;
-      if ( !IS_SET( trash->wear_flags, ITEM_TAKE )
+      if ( !IsBitSet( trash->wear_flags, ITEM_TAKE )
            ||    IS_OBJ_STAT( trash, ITEM_BURRIED ) )
         continue;
       if ( trash->item_type == ITEM_DRINK_CON

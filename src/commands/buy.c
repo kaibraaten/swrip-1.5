@@ -16,7 +16,7 @@ void do_buy( Character *ch, char *argument )
       return;
     }
 
-  if ( IS_SET(ch->in_room->room_flags, ROOM_PET_SHOP) )
+  if ( IsBitSet(ch->in_room->room_flags, ROOM_PET_SHOP) )
     {
       char buf[MAX_STRING_LENGTH];
       Character *pet;
@@ -40,13 +40,13 @@ void do_buy( Character *ch, char *argument )
       pet         = get_char_room( ch, arg );
       ch->in_room = in_room;
 
-      if ( pet == NULL || !IsNpc( pet ) || !IS_SET(pet->act, ACT_PET) )
+      if ( pet == NULL || !IsNpc( pet ) || !IsBitSet(pet->act, ACT_PET) )
         {
           send_to_char( "Sorry, you can't buy that here.\r\n", ch );
           return;
         }
 
-      if ( IS_SET(ch->act, PLR_BOUGHT_PET) )
+      if ( IsBitSet(ch->act, PLR_BOUGHT_PET) )
         {
           send_to_char( "You already bought one pet this level.\r\n", ch );
           return;
@@ -68,9 +68,9 @@ void do_buy( Character *ch, char *argument )
       ch->gold  -= maxgold;
       boost_economy( ch->in_room->area, maxgold );
       pet               = create_mobile( pet->pIndexData );
-      /* SET_BIT(ch->act, PLR_BOUGHT_PET); */
-      SET_BIT(pet->act, ACT_PET);
-      SET_BIT(pet->affected_by, AFF_CHARM);
+      /* SetBit(ch->act, PLR_BOUGHT_PET); */
+      SetBit(pet->act, ACT_PET);
+      SetBit(pet->affected_by, AFF_CHARM);
 
       argument = one_argument( argument, arg );
 
@@ -188,7 +188,7 @@ void do_buy( Character *ch, char *argument )
           return;
         }
 
-      if ( IS_SET(obj->extra_flags, ITEM_PROTOTYPE)
+      if ( IsBitSet(obj->extra_flags, ITEM_PROTOTYPE)
            && GetTrustLevel( ch ) < LEVEL_IMMORTAL )
         {
           act( AT_TELL, "$n tells you 'This is a only a prototype!  I can't sell you that...'",

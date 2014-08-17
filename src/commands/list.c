@@ -4,7 +4,7 @@
 
 void do_list( Character *ch, char *argument )
 {
-  if ( IS_SET(ch->in_room->room_flags, ROOM_PET_SHOP) )
+  if ( IsBitSet(ch->in_room->room_flags, ROOM_PET_SHOP) )
     {
       Room *pRoomIndexNext;
       Character *pet;
@@ -21,7 +21,7 @@ void do_list( Character *ch, char *argument )
       found = false;
       for ( pet = pRoomIndexNext->first_person; pet; pet = pet->next_in_room )
         {
-          if ( IS_SET(pet->act, ACT_PET) && IsNpc(pet) )
+          if ( IsBitSet(pet->act, ACT_PET) && IsNpc(pet) )
             {
               if ( !found )
                 {
@@ -71,10 +71,10 @@ void do_list( Character *ch, char *argument )
                     }
                   ch_printf( ch, "[%5d] {%3d} %s%s.\r\n",
                              cost, oref, capitalize( obj->short_descr ),
-                             IS_SET(obj->extra_flags, ITEM_HUTT_SIZE) ? " (hutt size)" :
-                             ( IS_SET(obj->extra_flags, ITEM_LARGE_SIZE) ? " (large)" :
-			       ( IS_SET(obj->extra_flags, ITEM_HUMAN_SIZE) ? " (medium)" :
-                                 ( IS_SET(obj->extra_flags, ITEM_SMALL_SIZE) ? " (small)" :
+                             IsBitSet(obj->extra_flags, ITEM_HUTT_SIZE) ? " (hutt size)" :
+                             ( IsBitSet(obj->extra_flags, ITEM_LARGE_SIZE) ? " (large)" :
+			       ( IsBitSet(obj->extra_flags, ITEM_HUMAN_SIZE) ? " (medium)" :
+                                 ( IsBitSet(obj->extra_flags, ITEM_SMALL_SIZE) ? " (small)" :
                                    "" ) ) ) );
                 }
             }

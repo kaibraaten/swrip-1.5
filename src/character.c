@@ -26,7 +26,7 @@
 bool IsWizVis( const Character *ch, const Character *victim )
 {
   if ( !IsNpc(victim)
-       && IS_SET(victim->act, PLR_WIZINVIS)
+       && IsBitSet(victim->act, PLR_WIZINVIS)
        && GetTrustLevel( ch ) < victim->pcdata->wizinvis )
     return false;
 
@@ -315,7 +315,7 @@ bool IsAffected( const Character *ch, int sn )
 
 bool IsAffectedBy( const Character *ch, int affected_by_bit )
 {
-  return IS_SET( ch->affected_by, affected_by_bit );
+  return IsBitSet( ch->affected_by, affected_by_bit );
 }
 
 /*
@@ -372,7 +372,7 @@ void EquipCharacter( Character *ch, OBJ_DATA *obj, int iWear )
         obj_from_char( obj );
       obj_to_room( obj, ch->in_room );
       oprog_zap_trigger( ch, obj);
-      if ( IS_SET(sysdata.save_flags, SV_ZAPDROP) && !char_died(ch) )
+      if ( IsBitSet(sysdata.save_flags, SV_ZAPDROP) && !char_died(ch) )
         save_char_obj( ch );
       return;
     }
@@ -381,7 +381,7 @@ void EquipCharacter( Character *ch, OBJ_DATA *obj, int iWear )
   obj->wear_loc  = iWear;
 
   ch->carry_number      -= get_obj_number( obj );
-  if ( IS_SET( obj->extra_flags, ITEM_MAGIC ) || obj->wear_loc == WEAR_FLOATING )
+  if ( IsBitSet( obj->extra_flags, ITEM_MAGIC ) || obj->wear_loc == WEAR_FLOATING )
     ch->carry_weight  -= get_obj_weight( obj );
 
   for ( paf = obj->pIndexData->first_affect; paf; paf = paf->next )
@@ -410,7 +410,7 @@ void UnequipCharacter( Character *ch, OBJ_DATA *obj )
     }
 
   ch->carry_number      += get_obj_number( obj );
-  if ( IS_SET( obj->extra_flags, ITEM_MAGIC ) || obj->wear_loc == WEAR_FLOATING )
+  if ( IsBitSet( obj->extra_flags, ITEM_MAGIC ) || obj->wear_loc == WEAR_FLOATING )
     ch->carry_weight  += get_obj_weight( obj );
 
   ch->armor             += apply_ac( obj, obj->wear_loc );
@@ -679,7 +679,7 @@ bool CanSeeCharacter( const Character *ch, const Character *victim )
     {
       if ( IsAffectedBy(victim, AFF_INVISIBLE)
            || IsAffectedBy(victim, AFF_HIDE)
-           || IS_SET(victim->act, PLR_WIZINVIS) )
+           || IsBitSet(victim->act, PLR_WIZINVIS) )
         return false;
       else
         return true;
@@ -689,7 +689,7 @@ bool CanSeeCharacter( const Character *ch, const Character *victim )
     return true;
 
   if ( !IsNpc(victim)
-       && IS_SET(victim->act, PLR_WIZINVIS)
+       && IsBitSet(victim->act, PLR_WIZINVIS)
        && GetTrustLevel( ch ) < victim->pcdata->wizinvis )
     return false;
 
@@ -701,7 +701,7 @@ bool CanSeeCharacter( const Character *ch, const Character *victim )
 
   /* SB */
   if ( IsNpc(victim)
-       && IS_SET(victim->act, ACT_MOBINVIS)
+       && IsBitSet(victim->act, ACT_MOBINVIS)
        && GetTrustLevel( ch ) < victim->mobinvis )
     return false;
 
@@ -710,7 +710,7 @@ bool CanSeeCharacter( const Character *ch, const Character *victim )
        && (!victim->switched || !IsAffectedBy(victim->switched, AFF_POSSESS)) )
     return false;
 
-  if ( !IsNpc(ch) && IS_SET(ch->act, PLR_HOLYLIGHT) )
+  if ( !IsNpc(ch) && IsBitSet(ch->act, PLR_HOLYLIGHT) )
     return true;
 
   /* The miracle cure for blindness? -- Altrag */
@@ -746,7 +746,7 @@ bool CanSeeCharacter( const Character *ch, const Character *victim )
  */
 bool CanSeeObject( const Character *ch, const OBJ_DATA *obj )
 {
-  if ( !IsNpc(ch) && IS_SET(ch->act, PLR_HOLYLIGHT) )
+  if ( !IsNpc(ch) && IsBitSet(ch->act, PLR_HOLYLIGHT) )
     return true;
 
   if ( IS_OBJ_STAT( obj, ITEM_BURRIED ) )
@@ -900,7 +900,7 @@ int GetCarryCapacityNumber( const Character *ch )
   if ( !IsNpc(ch) && GetTrustLevel(ch) >= LEVEL_IMMORTAL )
     return GetTrustLevel(ch)*200;
 
-  if ( IsNpc(ch) && IS_SET(ch->act, ACT_PET) )
+  if ( IsNpc(ch) && IsBitSet(ch->act, ACT_PET) )
     return 0;
 
   if ( GetEquipmentOnCharacter(ch, WEAR_WIELD) )
@@ -929,7 +929,7 @@ int GetCarryCapacityWeight( const Character *ch )
   if ( !IsNpc(ch) && GetTrustLevel(ch) >= LEVEL_IMMORTAL )
     return 1000000;
 
-  if ( IsNpc(ch) && IS_SET(ch->act, ACT_PET) )
+  if ( IsNpc(ch) && IsBitSet(ch->act, ACT_PET) )
     return 0;
 
   return str_app[GetCurrentStrength(ch)].carry;
@@ -937,7 +937,7 @@ int GetCarryCapacityWeight( const Character *ch )
 
 bool IsNpc( const Character *ch )
 {
-  return IS_SET( ch->act, ACT_IsNpc ) || !ch->pcdata;
+  return IsBitSet( ch->act, ACT_IsNpc ) || !ch->pcdata;
 }
 
 bool IsImmortal( const Character *ch )
@@ -1008,7 +1008,7 @@ bool IsDrunk( const Character *ch )
 
 bool IsRetiredImmortal( const Character *ch )
 {
-  return !IsNpc( ch ) && IS_SET( ch->pcdata->flags, PCFLAG_RETIRED );
+  return !IsNpc( ch ) && IsBitSet( ch->pcdata->flags, PCFLAG_RETIRED );
 }
 
 bool IsAuthed( const Character *ch )
@@ -1018,7 +1018,7 @@ bool IsAuthed( const Character *ch )
       return true;
     }
 
-  return !IS_SET( ch->pcdata->flags, PCFLAG_UNAUTHED);
+  return !IsBitSet( ch->pcdata->flags, PCFLAG_UNAUTHED);
 }
 
 bool IsWaitingForAuth( const Character *ch )
@@ -1026,7 +1026,7 @@ bool IsWaitingForAuth( const Character *ch )
   return !IsNpc( ch )
     && ch->desc
     && ch->pcdata->auth_state == 1
-    && IS_SET(ch->pcdata->flags, PCFLAG_UNAUTHED);
+    && IsBitSet(ch->pcdata->flags, PCFLAG_UNAUTHED);
 }
 
 #define DISGUISE(ch)            ((!nifty_is_name((ch)->name, (ch)->pcdata->title)) ? 1 : 0)

@@ -110,7 +110,7 @@ void do_clone( Character *ch, char *argument )
   ch->mana = 100 + 100*ch->stats.perm_frc;
 
   flags   = ch->act;
-  REMOVE_BIT( ch->act, PLR_KILLER );
+  RemoveBit( ch->act, PLR_KILLER );
   credits = ch->gold;
   if(credits <= CLONEGOLD)
     {

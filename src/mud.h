@@ -1381,9 +1381,9 @@ extern short gsn_yevethan;
 /*
  * Character macros.
  */
-#define IS_OUTSIDE(ch)          (!IS_SET(                               \
+#define IS_OUTSIDE(ch)          (!IsBitSet(                               \
                                          (ch)->in_room->room_flags,     \
-                                         ROOM_INDOORS) && !IS_SET(      \
+                                         ROOM_INDOORS) && !IsBitSet(      \
                                                                   (ch)->in_room->room_flags, \
                                                                   ROOM_SPACECRAFT) )
 
@@ -1391,7 +1391,7 @@ extern short gsn_yevethan;
 
 #define CAN_GO(ch, door)        (EXIT((ch),(door))                      \
                                  && (EXIT((ch),(door))->to_room != NULL) \
-                                 && !IS_SET(EXIT((ch), (door))->exit_info, EX_CLOSED))
+                                 && !IsBitSet(EXIT((ch), (door))->exit_info, EX_CLOSED))
 
 #define IS_VALID_SN(sn)         ( (sn) >=0 && (sn) < MAX_SKILL  \
                                   && skill_table[(sn)]          \
@@ -1401,7 +1401,7 @@ extern short gsn_yevethan;
                                   && herb_table[(sn)]           \
                                   && herb_table[(sn)]->name )
 
-#define SPELL_FLAG(skill, flag) ( IS_SET((skill)->flags, (flag)) )
+#define SPELL_FLAG(skill, flag) ( IsBitSet((skill)->flags, (flag)) )
 #define SPELL_DAMAGE(skill)     ( ((skill)->flags     ) & 7 )
 #define SPELL_ACTION(skill)     ( ((skill)->flags >> 3) & 7 )
 #define SPELL_CLASS(skill)      ( ((skill)->flags >> 6) & 7 )
@@ -1434,8 +1434,8 @@ extern short gsn_yevethan;
 /*
  * Object macros.
  */
-#define CAN_WEAR(obj, part)     (IS_SET((obj)->wear_flags,  (part)))
-#define IS_OBJ_STAT(obj, stat)  (IS_SET((obj)->extra_flags, (stat)))
+#define CAN_WEAR(obj, part)     (IsBitSet((obj)->wear_flags,  (part)))
+#define IS_OBJ_STAT(obj, stat)  (IsBitSet((obj)->extra_flags, (stat)))
 
 #define log_string( txt )       ( log_string_plus( (txt), LOG_NORMAL, LEVEL_LOG ) )
 
@@ -2851,7 +2851,7 @@ extern "C" {
 
 #define GET_BETTED_ON(ch)    ((ch)->betted_on)
 #define GET_BET_AMT(ch) ((ch)->bet_amt)
-#define IN_ARENA(ch)            (IS_SET((ch)->in_room->room_flags, ROOM_ARENA))
+#define IN_ARENA(ch)            (IsBitSet((ch)->in_room->room_flags, ROOM_ARENA))
 
 #ifdef __cplusplus
 }

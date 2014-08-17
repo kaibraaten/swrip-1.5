@@ -146,7 +146,7 @@ ch_ret spell_identify( int sn, int level, Character *ch, void *vo )
   else if ( ( victim = get_char_room( ch, spell_target_name ) ) != NULL )
     {
 
-      if ( IS_SET( victim->immune, RIS_MAGIC ) )
+      if ( IsBitSet( victim->immune, RIS_MAGIC ) )
         {
           immune_casting( skill, ch, victim, NULL );
           return rSPELL_FAILED;

@@ -35,7 +35,7 @@ void do_cast( Character *ch, char *argument )
 	  return;
         }
 
-      if ( IS_SET( ch->in_room->room_flags, ROOM_NO_MAGIC ) )
+      if ( IsBitSet( ch->in_room->room_flags, ROOM_NO_MAGIC ) )
         {
           set_char_color( AT_MAGIC, ch );
           send_to_char( "You failed.\r\n", ch );
@@ -344,7 +344,7 @@ void do_cast( Character *ch, char *argument )
        */
       if ( (skill->target == TAR_CHAR_DEFENSIVE
             ||    skill->target == TAR_CHAR_SELF)
-           &&    victim && IS_SET(victim->immune, RIS_MAGIC) )
+           &&    victim && IsBitSet(victim->immune, RIS_MAGIC) )
         {
           immune_casting( skill, ch, victim, NULL );
           retcode = rSPELL_FAILED;

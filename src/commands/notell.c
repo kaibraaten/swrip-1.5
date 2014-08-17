@@ -32,15 +32,15 @@ void do_notell( Character *ch, char *argument )
       return;
     }
 
-  if ( IS_SET(victim->act, PLR_NO_TELL) )
+  if ( IsBitSet(victim->act, PLR_NO_TELL) )
     {
-      REMOVE_BIT(victim->act, PLR_NO_TELL);
+      RemoveBit(victim->act, PLR_NO_TELL);
       send_to_char( "You can tell again.\r\n", victim );
       send_to_char( "NO_TELL removed.\r\n", ch );
     }
   else
     {
-      SET_BIT(victim->act, PLR_NO_TELL);
+      SetBit(victim->act, PLR_NO_TELL);
       send_to_char( "You can't tell!\r\n", victim );
       send_to_char( "NO_TELL set.\r\n", ch );
     }

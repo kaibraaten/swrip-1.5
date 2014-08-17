@@ -32,7 +32,7 @@ void do_arena(Character *ch, char *argument)
       return;
     }
 
-  if(IS_SET(ch->in_room->room_flags, ROOM_ARENA))
+  if(IsBitSet(ch->in_room->room_flags, ROOM_ARENA))
     {
       send_to_char("You are in the arena already\r\n",ch);
       return;

@@ -117,15 +117,15 @@ void do_whois( Character *ch, char *argument)
           do_comment(ch, buf2);
         }
 
-      if(IS_SET(victim->act, PLR_SILENCE) || IS_SET(victim->act, PLR_NO_EMOTE)
-         || IS_SET(victim->act, PLR_NO_TELL) )
+      if(IsBitSet(victim->act, PLR_SILENCE) || IsBitSet(victim->act, PLR_NO_EMOTE)
+         || IsBitSet(victim->act, PLR_NO_TELL) )
         {
           sprintf(buf2, "This player has the following flags set:");
-          if(IS_SET(victim->act, PLR_SILENCE))
+          if(IsBitSet(victim->act, PLR_SILENCE))
             strcat(buf2, " silence");
-          if(IS_SET(victim->act, PLR_NO_EMOTE))
+          if(IsBitSet(victim->act, PLR_NO_EMOTE))
             strcat(buf2, " noemote");
-          if(IS_SET(victim->act, PLR_NO_TELL) )
+          if(IsBitSet(victim->act, PLR_NO_TELL) )
             strcat(buf2, " notell");
           strcat(buf2, ".\r\n");
           send_to_char(buf2, ch);

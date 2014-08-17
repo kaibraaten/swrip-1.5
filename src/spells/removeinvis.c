@@ -21,7 +21,7 @@ ch_ret spell_remove_invis( int sn, int level, Character *ch, void *vo )
       if ( !IS_OBJ_STAT(obj, ITEM_INVIS) )
         return rSPELL_FAILED;
 
-      REMOVE_BIT(obj->extra_flags, ITEM_INVIS);
+      RemoveBit(obj->extra_flags, ITEM_INVIS);
       act( AT_MAGIC, "$p becomes visible again.", ch, obj, NULL, TO_CHAR );
 
       send_to_char( "Ok.\r\n", ch );
@@ -56,7 +56,7 @@ ch_ret spell_remove_invis( int sn, int level, Character *ch, void *vo )
               return rSPELL_FAILED;
             }
 
-          if ( IS_SET( victim->immune, RIS_MAGIC ) )
+          if ( IsBitSet( victim->immune, RIS_MAGIC ) )
             {
               immune_casting( skill, ch, victim, NULL );
               return rSPELL_FAILED;
@@ -81,7 +81,7 @@ ch_ret spell_remove_invis( int sn, int level, Character *ch, void *vo )
 
           affect_strip ( victim, gsn_invis                        );
           affect_strip ( victim, gsn_mass_invis                   );
-          REMOVE_BIT   ( victim->affected_by, AFF_INVISIBLE       );
+          RemoveBit   ( victim->affected_by, AFF_INVISIBLE       );
           send_to_char( "Ok.\r\n", ch );
 	  return rNONE;
         }

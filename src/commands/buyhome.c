@@ -29,7 +29,7 @@ void do_buyhome( Character *ch, char *argument )
         }
     }
 
-  if ( !IS_SET( room->room_flags , ROOM_EMPTY_HOME ) )
+  if ( !IsBitSet( room->room_flags , ROOM_EMPTY_HOME ) )
     {
       send_to_char( "&RThis room isn't for sale!\r\n&w", ch);
       return;
@@ -53,8 +53,8 @@ void do_buyhome( Character *ch, char *argument )
 
   ch->gold -= 100000;
 
-  REMOVE_BIT( room->room_flags , ROOM_EMPTY_HOME );
-  SET_BIT( room->room_flags , ROOM_PLR_HOME );
+  RemoveBit( room->room_flags , ROOM_EMPTY_HOME );
+  SetBit( room->room_flags , ROOM_PLR_HOME );
 
   fold_area( room->area, room->area->filename, false );
 

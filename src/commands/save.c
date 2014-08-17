@@ -3,7 +3,7 @@
 
 void do_save( Character *ch, char *argument )
 {
-  if ( IsNpc(ch) && IS_SET(ch->act, ACT_POLYMORPHED))
+  if ( IsNpc(ch) && IsBitSet(ch->act, ACT_POLYMORPHED))
     {
       send_to_char("You can't save while polymorphed.\r\n", ch);
       return;
@@ -12,14 +12,14 @@ void do_save( Character *ch, char *argument )
   if ( IsNpc(ch) )
     return;
 
-  if ( !IS_SET( ch->affected_by, race_table[ch->race].affected ) )
-    SET_BIT( ch->affected_by, race_table[ch->race].affected );
+  if ( !IsBitSet( ch->affected_by, race_table[ch->race].affected ) )
+    SetBit( ch->affected_by, race_table[ch->race].affected );
 
-  if ( !IS_SET( ch->resistant, race_table[ch->race].resist ) )
-    SET_BIT( ch->resistant, race_table[ch->race].resist );
+  if ( !IsBitSet( ch->resistant, race_table[ch->race].resist ) )
+    SetBit( ch->resistant, race_table[ch->race].resist );
 
-  if ( !IS_SET( ch->susceptible, race_table[ch->race].suscept ) )
-    SET_BIT( ch->susceptible, race_table[ch->race].suscept );
+  if ( !IsBitSet( ch->susceptible, race_table[ch->race].suscept ) )
+    SetBit( ch->susceptible, race_table[ch->race].suscept );
 
   if ( !IsAuthed(ch) )
     {
@@ -30,7 +30,7 @@ void do_save( Character *ch, char *argument )
   save_char_obj( ch );
   save_home (ch );
 
-  if ( IS_SET( ch->in_room->room_flags, ROOM_CLANSTOREROOM ) )
+  if ( IsBitSet( ch->in_room->room_flags, ROOM_CLANSTOREROOM ) )
     save_storeroom( ch->in_room );
 
   saving_char = NULL;

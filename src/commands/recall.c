@@ -37,13 +37,13 @@ void do_recall( Character *ch, char *argument )
   if ( ch->in_room == location )
     return;
 
-  /*    if ( IS_SET(ch->in_room->room_flags, ROOM_NO_RECALL) )
+  /*    if ( IsBitSet(ch->in_room->room_flags, ROOM_NO_RECALL) )
         {
         send_to_char( "For some strange reason... nothing happens.\r\n", ch );
         return;
         }*/
 
-  if ( IS_SET(ch->affected_by, AFF_CURSE) )
+  if ( IsBitSet(ch->affected_by, AFF_CURSE) )
     {
       send_to_char("You are cursed and cannot recall!\r\n", ch );
       return;

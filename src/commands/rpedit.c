@@ -162,7 +162,7 @@ void do_rpedit( Character *ch, char *argument )
         }
       cnt = num = 0;
       for ( mprg = mprog; mprg; mprg = mprg->next )
-        if ( IS_SET( mprg->type, mptype ) )
+        if ( IsBitSet( mprg->type, mptype ) )
 	  num++;
       if ( value == 1 )
         {
@@ -183,7 +183,7 @@ void do_rpedit( Character *ch, char *argument )
       DISPOSE( mprg_next->comlist );
       DISPOSE( mprg_next );
       if ( num <= 1 )
-        REMOVE_BIT( ch->in_room->mprog.progtypes, mptype );
+        RemoveBit( ch->in_room->mprog.progtypes, mptype );
       send_to_char( "Program removed.\r\n", ch );
       return;
     }

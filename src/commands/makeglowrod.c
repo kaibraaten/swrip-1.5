@@ -91,7 +91,7 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   OBJ_DATA *glowrod = args->Object;
 
   glowrod->item_type = ITEM_LIGHT;
-  SET_BIT( glowrod->wear_flags, ITEM_TAKE );
+  SetBit( glowrod->wear_flags, ITEM_TAKE );
   glowrod->weight = 3;
 
   DISPOSE( glowrod->name );

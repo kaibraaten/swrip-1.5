@@ -40,13 +40,13 @@ void do_retire( Character *ch, char *argument )
 
   if ( IsRetiredImmortal( victim ) )
     {
-      REMOVE_BIT( victim->pcdata->flags, PCFLAG_RETIRED );
+      RemoveBit( victim->pcdata->flags, PCFLAG_RETIRED );
       ch_printf( ch, "%s returns from retirement.\r\n", victim->name );
       ch_printf( victim, "%s brings you back from retirement.\r\n", ch->name );
     }
   else
     {
-      SET_BIT( victim->pcdata->flags, PCFLAG_RETIRED );
+      SetBit( victim->pcdata->flags, PCFLAG_RETIRED );
       ch_printf( ch, "%s is now a retired immortal.\r\n", victim->name );
       ch_printf( victim, "Courtesy of %s, you are now a retired immortal.\r\n",
 		 ch->name );

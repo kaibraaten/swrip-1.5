@@ -13,14 +13,14 @@ void do_say( Character *ch, char *argument )
       return;
     }
 
-  if ( IS_SET( ch->in_room->room_flags, ROOM_SILENCE ) )
+  if ( IsBitSet( ch->in_room->room_flags, ROOM_SILENCE ) )
     {
       send_to_char( "You can't do that here.\r\n", ch );
       return;
     }
 
   if ( IsNpc( ch ) )
-    REMOVE_BIT( ch->act, ACT_SECRETIVE );
+    RemoveBit( ch->act, ACT_SECRETIVE );
 
   for ( vch = ch->in_room->first_person; vch; vch = vch->next_in_room )
     {
@@ -43,7 +43,7 @@ void do_say( Character *ch, char *argument )
   MOBtrigger = false;
   act( AT_SAY, "You say '$T'", ch, NULL, drunk_speech( argument, ch ), TO_CHAR );
 
-  if ( IS_SET( ch->in_room->room_flags, ROOM_LOGSPEECH ) )
+  if ( IsBitSet( ch->in_room->room_flags, ROOM_LOGSPEECH ) )
     {
       sprintf( buf, "%s: %s", IsNpc( ch ) ? ch->short_descr : ch->name,
                argument );

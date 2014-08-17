@@ -44,7 +44,7 @@ void do_savearea( Character *ch, char *argument )
     }
 
   /* Ensure not wiping out their area with save before load - Scryn 8/11 */
-  if ( !IS_SET(tarea->status, AREA_LOADED ) )
+  if ( !IsBitSet(tarea->status, AREA_LOADED ) )
     {
       send_to_char( "Your area is not loaded!\r\n", ch );
       return;

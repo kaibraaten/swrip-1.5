@@ -1070,7 +1070,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
               return;
             }
 
-          SET_BIT(extra, 1 << value);
+          SetBit(extra, 1 << value);
         }
 
       pReset = MakeReset('T', extra, num, chrg, vnum);
@@ -1103,11 +1103,11 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
 
       if ( !str_prefix(option, "set") )
 	{
-	  SET_BIT(num, BIT_RESET_SET);
+	  SetBit(num, BIT_RESET_SET);
 	}
       else if ( !str_prefix(option, "toggle") )
 	{
-	  SET_BIT(num, BIT_RESET_TOGGLE);
+	  SetBit(num, BIT_RESET_TOGGLE);
 	}
       else if ( str_prefix(option, "remove") )
         {
@@ -1127,7 +1127,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
 
       if ( !str_prefix(option, "door") )
         {
-          SET_BIT(num, BIT_RESET_DOOR);
+          SetBit(num, BIT_RESET_DOOR);
 
           if ( aRoom )
             {
@@ -1153,14 +1153,14 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
             }
 
           vnum = get_dir(arg);
-          SET_BIT(num, vnum << BIT_RESET_DOOR_THRESHOLD);
+          SetBit(num, vnum << BIT_RESET_DOOR_THRESHOLD);
           vnum = pRoom->vnum;
           flfunc = &get_exitflag;
           reset = NULL;
         }
       else if ( !str_prefix(option, "object") )
         {
-          SET_BIT(num, BIT_RESET_OBJECT);
+          SetBit(num, BIT_RESET_OBJECT);
           vnum = 0;
           flfunc = &get_objectflag;
 
@@ -1171,7 +1171,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
         }
       else if ( !str_prefix(option, "mobile") )
         {
-          SET_BIT(num, BIT_RESET_MOBILE);
+          SetBit(num, BIT_RESET_MOBILE);
           vnum = 0;
           flfunc = &get_affectedflag;
 
@@ -1182,7 +1182,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
         }
       else if ( !str_prefix(option, "room") )
         {
-          SET_BIT(num, BIT_RESET_ROOM);
+          SetBit(num, BIT_RESET_ROOM);
 
           if ( aRoom )
             {
@@ -1221,7 +1221,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
               return;
             }
 
-          SET_BIT(flags, 1 << value);
+          SetBit(flags, 1 << value);
         }
 
       if ( !flags )
@@ -1288,7 +1288,7 @@ void AddObjectReset( Area *pArea, char cm, OBJ_DATA *obj, int v2, int v3 )
   /* Only add hide for in-room objects that are hidden and cant be moved, as
      hide is an update reset, not a load-only reset. */
   if ( cm == 'O' && IS_OBJ_STAT(obj, ITEM_HIDDEN) &&
-       !IS_SET(obj->wear_flags, ITEM_TAKE) )
+       !IsBitSet(obj->wear_flags, ITEM_TAKE) )
     {
       AddReset(pArea, 'H', 1, 0, 0, 0);
     }
@@ -1363,14 +1363,14 @@ void InstallRoom( Area *pArea, Room *pRoom, bool dodoors )
         {
           int state = 0;
 
-          if ( !IS_SET( pexit->exit_info, EX_ISDOOR ) )
+          if ( !IsBitSet( pexit->exit_info, EX_ISDOOR ) )
 	    {
 	      continue;
 	    }
 
-          if ( IS_SET( pexit->exit_info, EX_CLOSED ) )
+          if ( IsBitSet( pexit->exit_info, EX_CLOSED ) )
             {
-              if ( IS_SET( pexit->exit_info, EX_LOCKED ) )
+              if ( IsBitSet( pexit->exit_info, EX_LOCKED ) )
 		{
 		  state = 2;
 		}
@@ -1528,15 +1528,15 @@ void ResetArea( Area *pArea )
           {
             Room *pRoomPrev = get_room_index(pReset->arg3 - 1);
 
-            if ( pRoomPrev && IS_SET(pRoomPrev->room_flags, ROOM_PET_SHOP) )
+            if ( pRoomPrev && IsBitSet(pRoomPrev->room_flags, ROOM_PET_SHOP) )
 	      {
-		SET_BIT(mob->act, ACT_PET);
+		SetBit(mob->act, ACT_PET);
 	      }
           }
 
           if ( room_is_dark(pRoomIndex) )
 	    {
-	      SET_BIT(mob->affected_by, AFF_INFRARED);
+	      SetBit(mob->affected_by, AFF_INFRARED);
 	    }
 
           char_to_room(mob, pRoomIndex);
@@ -1575,7 +1575,7 @@ void ResetArea( Area *pArea )
             {
               int olevel = GenerateItemLevel( pArea, pObjIndex );
               obj = create_object(pObjIndex, olevel);
-              SET_BIT(obj->extra_flags, ITEM_INVENTORY);
+              SetBit(obj->extra_flags, ITEM_INVENTORY);
             }
           else
 	    {
@@ -1705,7 +1705,7 @@ void ResetArea( Area *pArea )
           break;
 
         case 'T':
-          if ( IS_SET(pReset->extra, TRAP_OBJ) )
+          if ( IsBitSet(pReset->extra, TRAP_OBJ) )
             {
               /* We need to preserve obj for future 'T' and 'H' checks */
               OBJ_DATA *pobj = NULL;
@@ -1809,7 +1809,7 @@ void ResetArea( Area *pArea )
               to_obj = obj;
             }
 
-          SET_BIT(to_obj->extra_flags, ITEM_HIDDEN);
+          SetBit(to_obj->extra_flags, ITEM_HIDDEN);
           break;
 
         case 'B':
@@ -1908,17 +1908,17 @@ void ResetArea( Area *pArea )
               continue;
             }
 
-          if ( IS_SET(pReset->arg2, BIT_RESET_SET) )
+          if ( IsBitSet(pReset->arg2, BIT_RESET_SET) )
 	    {
-	      SET_BIT(*plc, pReset->arg3);
+	      SetBit(*plc, pReset->arg3);
 	    }
-          else if ( IS_SET(pReset->arg2, BIT_RESET_TOGGLE) )
+          else if ( IsBitSet(pReset->arg2, BIT_RESET_TOGGLE) )
 	    {
-	      TOGGLE_BIT(*plc, pReset->arg3);
+	      ToggleBit(*plc, pReset->arg3);
 	    }
           else
 	    {
-	      REMOVE_BIT(*plc, pReset->arg3);
+	      RemoveBit(*plc, pReset->arg3);
 	    }
 
           break;
@@ -1945,26 +1945,26 @@ void ResetArea( Area *pArea )
           switch( pReset->arg3 )
             {
             case 0:
-              REMOVE_BIT( pexit->exit_info, EX_CLOSED );
-              REMOVE_BIT( pexit->exit_info, EX_LOCKED );
+              RemoveBit( pexit->exit_info, EX_CLOSED );
+              RemoveBit( pexit->exit_info, EX_LOCKED );
               break;
 
             case 1:
-              SET_BIT( pexit->exit_info, EX_CLOSED );
-              REMOVE_BIT( pexit->exit_info, EX_LOCKED );
+              SetBit( pexit->exit_info, EX_CLOSED );
+              RemoveBit( pexit->exit_info, EX_LOCKED );
 
-              if ( IS_SET( pexit->exit_info, EX_xSEARCHABLE ) )
+              if ( IsBitSet( pexit->exit_info, EX_xSEARCHABLE ) )
 		{
-		  SET_BIT( pexit->exit_info, EX_SECRET );
+		  SetBit( pexit->exit_info, EX_SECRET );
 		}
               break;
 
             case 2:
-              SET_BIT( pexit->exit_info, EX_CLOSED );
-              SET_BIT( pexit->exit_info, EX_LOCKED );
+              SetBit( pexit->exit_info, EX_CLOSED );
+              SetBit( pexit->exit_info, EX_LOCKED );
 
-              if ( IS_SET( pexit->exit_info, EX_xSEARCHABLE ) )
-                SET_BIT( pexit->exit_info, EX_SECRET );
+              if ( IsBitSet( pexit->exit_info, EX_xSEARCHABLE ) )
+                SetBit( pexit->exit_info, EX_SECRET );
 
               break;
 
@@ -2051,7 +2051,7 @@ void ListResets( Character *ch, Area *pArea, Room *pRoom,
             mob = NULL;
 
           if ( (room = get_room_index(pReset->arg3-1)) &&
-               IS_SET(room->room_flags, ROOM_PET_SHOP) )
+               IsBitSet(room->room_flags, ROOM_PET_SHOP) )
             strcat( buf, " (pet)\r\n" );
           else
             strcat( buf, "\r\n" );
@@ -2181,12 +2181,12 @@ void ListResets( Character *ch, Area *pArea, Room *pRoom,
             strcpy(pbuf, "BIT: ");
             pbuf += 5;
 
-            if ( IS_SET(pReset->arg2, BIT_RESET_SET) )
+            if ( IsBitSet(pReset->arg2, BIT_RESET_SET) )
               {
                 strcpy(pbuf, "Set: ");
                 pbuf += 5;
               }
-            else if ( IS_SET(pReset->arg2, BIT_RESET_TOGGLE) )
+            else if ( IsBitSet(pReset->arg2, BIT_RESET_TOGGLE) )
               {
                 strcpy(pbuf, "Toggle: ");
                 pbuf += 8;
@@ -2403,7 +2403,7 @@ Reset *AddReset( Area *tarea, char letter, int extra, int arg1, int arg2, int ar
       return NULL;
     }
 
-  letter = UPPER(letter);
+  letter = CharToUppercase(letter);
   pReset = MakeReset( letter, extra, arg1, arg2, arg3 );
 
   switch( letter )
@@ -2426,7 +2426,7 @@ Reset *AddReset( Area *tarea, char letter, int extra, int arg1, int arg2, int ar
     break;
 
     case 'T':
-      if ( IS_SET( extra, TRAP_OBJ ) && arg1 == 0)
+      if ( IsBitSet( extra, TRAP_OBJ ) && arg1 == 0)
 	{
 	  tarea->last_obj_reset = pReset;
 	}
@@ -2453,7 +2453,7 @@ Reset *PlaceReset( Area *tarea, char letter, int extra, int arg1, int arg2, int 
       return NULL;
     }
 
-  letter = UPPER(letter);
+  letter = CharToUppercase(letter);
   pReset = MakeReset( letter, extra, arg1, arg2, arg3 );
 
   if ( letter == 'M' )
@@ -2579,7 +2579,7 @@ Reset *PlaceReset( Area *tarea, char letter, int extra, int arg1, int arg2, int 
         case 'P':       case 'T':   case 'H':
           /* find the object in question */
           if ( ((letter == 'P' && arg3 == 0)
-                ||    (letter == 'T' && IS_SET(extra, TRAP_OBJ) && arg1 == 0)
+                ||    (letter == 'T' && IsBitSet(extra, TRAP_OBJ) && arg1 == 0)
                 ||    (letter == 'H' && arg1 == 0))
                &&    (tmp=tarea->last_obj_reset) != NULL )
             {

@@ -15,8 +15,8 @@ ch_ret spell_charm_person( int sn, int level, Character *ch, void *vo )
       return rSPELL_FAILED;
     }
 
-  if ( IS_SET( victim->immune, RIS_MAGIC )
-       ||   IS_SET( victim->immune, RIS_CHARM ) )
+  if ( IsBitSet( victim->immune, RIS_MAGIC )
+       ||   IsBitSet( victim->immune, RIS_CHARM ) )
     {
       immune_casting( skill, ch, victim, NULL );
       return rSPELL_FAILED;

@@ -29,11 +29,11 @@ void do_tamp( Character *ch, char *argument )
       return;
     }
 
-  if ( !IS_SET( pipe_obj->value[3], PIPE_TAMPED ) )
+  if ( !IsBitSet( pipe_obj->value[3], PIPE_TAMPED ) )
     {
       act( AT_ACTION, "You gently tamp $p.", ch, pipe_obj, NULL, TO_CHAR );
       act( AT_ACTION, "$n gently tamps $p.", ch, pipe_obj, NULL, TO_ROOM );
-      SET_BIT( pipe_obj->value[3], PIPE_TAMPED );
+      SetBit( pipe_obj->value[3], PIPE_TAMPED );
       return;
     }
 

@@ -115,7 +115,7 @@ void do_setplanet( Character *ch, char *argument )
 	{
           if ( !str_cmp( farg, "nocapture" ) )
             {
-              TOGGLE_BIT( planet->flags, PLANET_NOCAPTURE );
+              ToggleBit( planet->flags, PLANET_NOCAPTURE );
             }
           else
             {

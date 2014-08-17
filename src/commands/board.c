@@ -16,7 +16,7 @@ void do_board( Character *ch, char *argument )
       return;
     }
 
-  if ( IS_SET( ch->act, ACT_MOUNTED ) && IsNpc(ch))
+  if ( IsBitSet( ch->act, ACT_MOUNTED ) && IsNpc(ch))
     {
       act( AT_PLAIN, "You can't go in there riding THAT.", ch, NULL, argument, TO_CHAR );
       return;

@@ -18,7 +18,7 @@ void do_purge( Character *ch, char *argument )
       for ( victim = ch->in_room->first_person; victim; victim = vnext )
         {
           vnext = victim->next_in_room;
-          if ( IsNpc(victim) && victim != ch && !IS_SET(victim->act, ACT_POLYMORPHED))
+          if ( IsNpc(victim) && victim != ch && !IsBitSet(victim->act, ACT_POLYMORPHED))
             extract_char( victim, true );
         }
 
@@ -73,7 +73,7 @@ void do_purge( Character *ch, char *argument )
       return;
     }
 
-  if (IS_SET(victim->act, ACT_POLYMORPHED))
+  if (IsBitSet(victim->act, ACT_POLYMORPHED))
     {
       send_to_char("You cannot purge a polymorphed player.\r\n", ch);
       return;

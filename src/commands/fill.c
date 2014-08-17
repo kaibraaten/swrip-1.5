@@ -74,7 +74,7 @@ void do_fill( Character *ch, char *argument )
 
   if ( dest_item == ITEM_CONTAINER )
     {
-      if ( IS_SET(obj->value[OVAL_CONTAINER_FLAGS], CONT_CLOSED) )
+      if ( IsBitSet(obj->value[OVAL_CONTAINER_FLAGS], CONT_CLOSED) )
         {
           act( AT_PLAIN, "The $d is closed.", ch, NULL, obj->name, TO_CHAR );
           return;
@@ -98,7 +98,7 @@ void do_fill( Character *ch, char *argument )
     }
 
   if ( dest_item == ITEM_PIPE
-       && IS_SET( obj->value[OVAL_PIPE_FLAGS], PIPE_FULLOFASH ) )
+       && IsBitSet( obj->value[OVAL_PIPE_FLAGS], PIPE_FULLOFASH ) )
     {
       send_to_char( "It's full of ashes, and needs to be emptied first.\r\n", ch );
       return;
@@ -293,7 +293,7 @@ void do_fill( Character *ch, char *argument )
 
         case ITEM_CONTAINER:
           if ( source->item_type == ITEM_CONTAINER  /* don't remove */
-               &&   IS_SET(source->value[OVAL_CONTAINER_FLAGS], CONT_CLOSED) )
+               &&   IsBitSet(source->value[OVAL_CONTAINER_FLAGS], CONT_CLOSED) )
             {
               act( AT_PLAIN, "The $d is closed.", ch, NULL, source->name, TO_CHAR );
               return;

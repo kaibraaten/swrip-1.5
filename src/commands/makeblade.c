@@ -83,8 +83,8 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   OBJ_DATA *weapon = args->Object;
 
   weapon->item_type = ITEM_WEAPON;
-  SET_BIT( weapon->wear_flags, ITEM_WIELD );
-  SET_BIT( weapon->wear_flags, ITEM_TAKE );
+  SetBit( weapon->wear_flags, ITEM_WIELD );
+  SetBit( weapon->wear_flags, ITEM_TAKE );
   weapon->weight = 3;
 
   DISPOSE( weapon->name );

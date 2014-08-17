@@ -17,7 +17,7 @@ void do_enlist( Character *ch, char *argument )
       return;
     }
 
-  if ( ! IS_SET( ch->in_room->room_flags , ROOM_RECRUIT ) )
+  if ( ! IsBitSet( ch->in_room->room_flags , ROOM_RECRUIT ) )
     {
       send_to_char( "You don't seem to be in a recruitment office.\r\n", ch );
       return;
@@ -35,7 +35,7 @@ void do_enlist( Character *ch, char *argument )
               send_to_char( "&CThe recruiter says, 'You will need to find a sponsor to enlist'&R&w\r\n", ch );
               return;
             }
-          SET_BIT( ch->speaks, LANG_CLAN );
+          SetBit( ch->speaks, LANG_CLAN );
           ++clan->members;
           DISPOSE( ch->pcdata->clan_name );
           ch->pcdata->clan_name = str_dup( clan->name );

@@ -12,7 +12,7 @@ void do_hitall( Character *ch, char *argument )
   short percent;
   char logbuf[MAX_STRING_LENGTH];
 
-  if ( IS_SET(ch->in_room->room_flags, ROOM_SAFE) )
+  if ( IsBitSet(ch->in_room->room_flags, ROOM_SAFE) )
     {
       send_to_char( "You cannot do that here.\r\n", ch);
       return;
@@ -37,7 +37,7 @@ void do_hitall( Character *ch, char *argument )
       if ( ++nvict > GetAbilityLevel( ch, COMBAT_ABILITY ) / 5 )
         break;
 
-      if ( IS_SET(vch->act, PLR_AFK))
+      if ( IsBitSet(vch->act, PLR_AFK))
         {
           sprintf( logbuf , "%s just attacked %s with HITALL with an afk flag on!." , ch->name, vch->name );
           log_string( logbuf );

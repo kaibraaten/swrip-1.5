@@ -23,7 +23,7 @@ void do_oldscore( Character *ch, char *argument )
     ch_printf( ch, "You are trusted at level %d.\r\n",
                GetTrustLevel( ch ) );
 
-  if ( IS_SET(ch->act, ACT_MOBINVIS) )
+  if ( IsBitSet(ch->act, ACT_MOBINVIS) )
     ch_printf( ch, "You are mobinvis at level %d.\r\n",
                ch->mobinvis);
 
@@ -51,10 +51,10 @@ void do_oldscore( Character *ch, char *argument )
              "You have have %d credits.\r\n" , ch->gold );
 
   ch_printf( ch, "Autoexit: %s   Autoloot: %s   Autosac: %s   Autocred: %s\r\n",
-             (!IsNpc(ch) && IS_SET(ch->act, PLR_AUTOEXIT)) ? "yes" : "no",
-             (!IsNpc(ch) && IS_SET(ch->act, PLR_AUTOLOOT)) ? "yes" : "no",
-             (!IsNpc(ch) && IS_SET(ch->act, PLR_AUTOSAC) ) ? "yes" : "no",
-             (!IsNpc(ch) && IS_SET(ch->act, PLR_AUTOGOLD)) ? "yes" : "no" );
+             (!IsNpc(ch) && IsBitSet(ch->act, PLR_AUTOEXIT)) ? "yes" : "no",
+             (!IsNpc(ch) && IsBitSet(ch->act, PLR_AUTOLOOT)) ? "yes" : "no",
+             (!IsNpc(ch) && IsBitSet(ch->act, PLR_AUTOSAC) ) ? "yes" : "no",
+             (!IsNpc(ch) && IsBitSet(ch->act, PLR_AUTOGOLD)) ? "yes" : "no" );
 
   ch_printf( ch, "Wimpy set to %d hit points.\r\n", ch->wimpy );
 
@@ -187,7 +187,7 @@ void do_oldscore( Character *ch, char *argument )
     {
       ch_printf( ch, "WizInvis level: %d   WizInvis is %s\r\n",
 		 ch->pcdata->wizinvis,
-                 IS_SET( ch->act, PLR_WIZINVIS ) ? "ON" : "OFF" );
+                 IsBitSet( ch->act, PLR_WIZINVIS ) ? "ON" : "OFF" );
       if ( ch->pcdata->r_range_lo && ch->pcdata->r_range_hi )
         ch_printf( ch, "Room Range: %d - %d\r\n", ch->pcdata->r_range_lo,
                    ch->pcdata->r_range_hi       );

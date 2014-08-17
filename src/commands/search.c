@@ -41,7 +41,7 @@ void do_search( Character *ch, char *argument )
               send_to_char( "You can't search in that!\r\n", ch );
               return;
             }
-          if ( IS_SET(container->value[1], CONT_CLOSED) )
+          if ( IsBitSet(container->value[1], CONT_CLOSED) )
             {
               send_to_char( "It is closed.\r\n", ch );
               return;
@@ -105,13 +105,13 @@ void do_search( Character *ch, char *argument )
       Exit *pexit;
 
       if ( (pexit = get_exit( ch->in_room, door )) != NULL
-           &&   IS_SET( pexit->exit_info, EX_SECRET )
-           &&   IS_SET( pexit->exit_info, EX_xSEARCHABLE )
+           &&   IsBitSet( pexit->exit_info, EX_SECRET )
+           &&   IsBitSet( pexit->exit_info, EX_xSEARCHABLE )
            &&   percent < (IsNpc(ch) ? 80 : ch->pcdata->learned[gsn_search]) )
         {
           act( AT_SKILL, "Your search reveals the $d!", ch, NULL, pexit->keyword, TO_CHAR );
           act( AT_SKILL, "$n finds the $d!", ch, NULL, pexit->keyword, TO_ROOM );
-          REMOVE_BIT( pexit->exit_info, EX_SECRET );
+          RemoveBit( pexit->exit_info, EX_SECRET );
           learn_from_success( ch, gsn_search );
           return;
         }
@@ -135,7 +135,7 @@ void do_search( Character *ch, char *argument )
     }
 
   separate_obj(obj);
-  REMOVE_BIT( obj->extra_flags, ITEM_HIDDEN );
+  RemoveBit( obj->extra_flags, ITEM_HIDDEN );
   act( AT_SKILL, "Your search reveals $p!", ch, obj, NULL, TO_CHAR );
   act( AT_SKILL, "$n finds $p!", ch, obj, NULL, TO_ROOM );
   learn_from_success( ch, gsn_search );

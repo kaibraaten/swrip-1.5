@@ -27,7 +27,7 @@ void do_smoke( Character *ch, char *argument )
       act( AT_ACTION, "$n tries to smoke $p... (I wonder what $e's been putting his $s pipe_obj?)", ch, pipe_obj, NULL, TO_ROOM );
       return;
     }
-  if ( !IS_SET( pipe_obj->value[3], PIPE_LIT ) )
+  if ( !IsBitSet( pipe_obj->value[3], PIPE_LIT ) )
     {
       act( AT_ACTION, "You try to smoke $p, but it's not lit.", ch, pipe_obj, NULL, TO_CHAR );
       act( AT_ACTION, "$n tries to smoke $p, but it's not lit.", ch, pipe_obj, NULL, TO_ROOM );
@@ -56,12 +56,12 @@ void do_smoke( Character *ch, char *argument )
       else
         bug( "do_smoke: bad herb type %d", pipe_obj->value[2] );
 
-      SET_BIT( pipe_obj->value[3], PIPE_HOT );
+      SetBit( pipe_obj->value[3], PIPE_HOT );
       if ( --pipe_obj->value[1] < 1 )
         {
-          REMOVE_BIT( pipe_obj->value[3], PIPE_LIT );
-          SET_BIT( pipe_obj->value[3], PIPE_DIRTY );
-          SET_BIT( pipe_obj->value[3], PIPE_FULLOFASH );
+          RemoveBit( pipe_obj->value[3], PIPE_LIT );
+          SetBit( pipe_obj->value[3], PIPE_DIRTY );
+          SetBit( pipe_obj->value[3], PIPE_FULLOFASH );
         }
     }
 }

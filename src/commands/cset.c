@@ -65,7 +65,7 @@ void do_cset( Character *ch, char *argument )
         send_to_char( "Not a save flag.\r\n", ch );
       else
         {
-          TOGGLE_BIT( sysdata.save_flags, 1 << x );
+          ToggleBit( sysdata.save_flags, 1 << x );
           send_to_char( "Ok.\r\n", ch );
         }
       return;

@@ -41,7 +41,7 @@ void do_brandish( Character *ch, char *argument )
       for ( vch = ch->in_room->first_person; vch; vch = vch_next )
 	{
           vch_next      = vch->next_in_room;
-          if ( !IsNpc( vch ) && IS_SET( vch->act, PLR_WIZINVIS )
+          if ( !IsNpc( vch ) && IsBitSet( vch->act, PLR_WIZINVIS )
                && vch->pcdata->wizinvis >= LEVEL_IMMORTAL )
             continue;
           else

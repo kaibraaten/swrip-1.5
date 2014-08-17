@@ -273,7 +273,7 @@ static ch_ret simple_damage( Character *ch, Character *victim, int dam, int dt )
    */
   if ( npcvict && dam > 0 )
     {
-      if ( ( IS_SET(victim->act, ACT_WIMPY) && number_bits( 1 ) == 0
+      if ( ( IsBitSet(victim->act, ACT_WIMPY) && number_bits( 1 ) == 0
              &&   victim->hit < victim->max_hit / 2 )
            ||   ( IsAffectedBy(victim, AFF_CHARM) && victim->master
                   &&     victim->master->in_room != victim->in_room ) )
@@ -290,7 +290,7 @@ static ch_ret simple_damage( Character *ch, Character *victim, int dam, int dt )
        &&   victim->wait == 0 )
     do_flee( victim, "" );
   else
-    if ( !npcvict && IS_SET( victim->act, PLR_FLEE ) )
+    if ( !npcvict && IsBitSet( victim->act, PLR_FLEE ) )
       do_flee( victim, "" );
 
   return rNONE;

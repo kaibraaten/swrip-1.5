@@ -76,7 +76,7 @@ void do_sell( Character *ch, char *argument )
 
   if ( obj->item_type == ITEM_TRASH )
     extract_obj( obj );
-  else  if ( IS_SET( obj->extra_flags , ITEM_CONTRABAND) )
+  else  if ( IsBitSet( obj->extra_flags , ITEM_CONTRABAND) )
     {
       long ch_exp;
 
@@ -88,7 +88,7 @@ void do_sell( Character *ch, char *argument )
         extract_obj( obj );
       else
         {
-          REMOVE_BIT( obj->extra_flags , ITEM_CONTRABAND );
+          RemoveBit( obj->extra_flags , ITEM_CONTRABAND );
           obj_from_char( obj );
           obj_to_char( obj, keeper );
         }

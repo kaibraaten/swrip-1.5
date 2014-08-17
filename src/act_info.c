@@ -171,7 +171,7 @@ void show_list_to_char( const OBJ_DATA *list, Character *ch, bool fShort, bool f
     {
       if ( fShowNothing )
         {
-          if ( IsNpc(ch) || IS_SET(ch->act, PLR_COMBINE) )
+          if ( IsNpc(ch) || IsBitSet(ch->act, PLR_COMBINE) )
             send_to_char( "     ", ch );
           send_to_char( "Nothing.\r\n", ch );
         }
@@ -206,7 +206,7 @@ void show_list_to_char( const OBJ_DATA *list, Character *ch, bool fShort, bool f
     {
       if ( fShowNothing )
         {
-          if ( IsNpc(ch) || IS_SET(ch->act, PLR_COMBINE) )
+          if ( IsNpc(ch) || IsBitSet(ch->act, PLR_COMBINE) )
             send_to_char( "     ", ch );
           send_to_char( "Nothing.\r\n", ch );
         }
@@ -237,13 +237,13 @@ void show_list_to_char( const OBJ_DATA *list, Character *ch, bool fShort, bool f
         }
       if ( obj->wear_loc == WEAR_NONE
            && CanSeeObject( ch, obj )
-           && ( ( obj->description && obj->description[0] != '\0' ) || ( IS_SET(ch->act, PLR_HOLYLIGHT) || IsNpc(ch) ) )
+           && ( ( obj->description && obj->description[0] != '\0' ) || ( IsBitSet(ch->act, PLR_HOLYLIGHT) || IsNpc(ch) ) )
            && (obj->item_type != ITEM_TRAP || IsAffectedBy(ch, AFF_DETECTTRAPS) ) )
         {
           pstrShow = format_obj_to_char( obj, ch, fShort );
           fCombine = false;
 
-          if ( IsNpc(ch) || IS_SET(ch->act, PLR_COMBINE) )
+          if ( IsNpc(ch) || IsBitSet(ch->act, PLR_COMBINE) )
             {
               /*
                * Look for duplicates, case sensitive.
@@ -318,7 +318,7 @@ void show_list_to_char( const OBJ_DATA *list, Character *ch, bool fShort, bool f
       if ( fShowNothing )
         send_to_char( "     ", ch );
       send_to_char( prgpstrShow[iShow], ch );
-      /*        if ( IsNpc(ch) || IS_SET(ch->act, PLR_COMBINE) ) */
+      /*        if ( IsNpc(ch) || IsBitSet(ch->act, PLR_COMBINE) ) */
       {
         if ( prgnShow[iShow] != 1 )
           ch_printf( ch, " (%d)", prgnShow[iShow] );
@@ -330,7 +330,7 @@ void show_list_to_char( const OBJ_DATA *list, Character *ch, bool fShort, bool f
 
   if ( fShowNothing && nShow == 0 )
     {
-      if ( IsNpc(ch) || IS_SET(ch->act, PLR_COMBINE) )
+      if ( IsNpc(ch) || IsBitSet(ch->act, PLR_COMBINE) )
         send_to_char( "     ", ch );
       send_to_char( "Nothing.\r\n", ch );
     }
@@ -345,7 +345,7 @@ void show_list_to_char( const OBJ_DATA *list, Character *ch, bool fShort, bool f
 
 bool check_blind( const Character *ch )
 {
-  if ( !IsNpc(ch) && IS_SET(ch->act, PLR_HOLYLIGHT) )
+  if ( !IsNpc(ch) && IsBitSet(ch->act, PLR_HOLYLIGHT) )
     return true;
 
   if ( IsAffectedBy(ch, AFF_TRUESIGHT) )
@@ -373,7 +373,7 @@ void show_condition( const Character *ch, const Character *victim )
 
   strcpy( buf, PERS(victim, ch) );
 
-  if ( (IsNpc ( victim ) && IS_SET( victim->act , ACT_DROID ) ) ||
+  if ( (IsNpc ( victim ) && IsBitSet( victim->act , ACT_DROID ) ) ||
        ( victim->race == RACE_DROID ) )
     {
 
@@ -406,6 +406,6 @@ void show_condition( const Character *ch, const Character *victim )
       else                       strcat( buf, " is DYING.\r\n"              );
 
     }
-  buf[0] = UPPER(buf[0]);
+  buf[0] = CharToUppercase(buf[0]);
   send_to_char( buf, ch );
 }

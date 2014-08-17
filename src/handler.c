@@ -96,10 +96,10 @@ void room_explode_1( OBJ_DATA *obj, Character *xch, Room *room, int blast )
   OBJ_DATA  *robj_next;
   int dam;
 
-  if ( IS_SET( room->room_flags, BFS_MARK ) )
+  if ( IsBitSet( room->room_flags, BFS_MARK ) )
     return;
 
-  SET_BIT( room->room_flags , BFS_MARK );
+  SetBit( room->room_flags , BFS_MARK );
 
   for ( rch = room->first_person ; rch ;  rch = rnext )
     {
@@ -111,10 +111,10 @@ void room_explode_1( OBJ_DATA *obj, Character *xch, Room *room, int blast )
         {
           if ( IsNpc( rch ) )
             {
-              if ( IS_SET( rch->act , ACT_SENTINEL ) )
+              if ( IsBitSet( rch->act , ACT_SENTINEL ) )
                 {
                   rch->was_sentinel = rch->in_room;
-                  REMOVE_BIT( rch->act, ACT_SENTINEL );
+                  RemoveBit( rch->act, ACT_SENTINEL );
                 }
               start_hating( rch , xch );
               start_hunting( rch , xch );
@@ -155,10 +155,10 @@ void room_explode_1( OBJ_DATA *obj, Character *xch, Room *room, int blast )
 void room_explode_2( Room *room , int blast )
 {
 
-  if ( !IS_SET( room->room_flags, BFS_MARK ) )
+  if ( !IsBitSet( room->room_flags, BFS_MARK ) )
     return;
 
-  REMOVE_BIT( room->room_flags , BFS_MARK );
+  RemoveBit( room->room_flags , BFS_MARK );
 
   if ( blast > 0 )
     {
@@ -195,7 +195,7 @@ bool can_take_proto( const Character *ch )
 {
   if ( IsImmortal(ch) )
     return true;
-  else if ( IsNpc(ch) && IS_SET(ch->act, ACT_PROTOTYPE) )
+  else if ( IsNpc(ch) && IsBitSet(ch->act, ACT_PROTOTYPE) )
     return true;
   else
     return false;
@@ -215,11 +215,11 @@ void affect_modify( Character *ch, Affect *paf, bool fAdd )
 
   if ( fAdd )
     {
-      SET_BIT( ch->affected_by, paf->bitvector );
+      SetBit( ch->affected_by, paf->bitvector );
     }
   else
     {
-      REMOVE_BIT( ch->affected_by, paf->bitvector );
+      RemoveBit( ch->affected_by, paf->bitvector );
       /*
        * might be an idea to have a duration removespell which returns
        * the spell after the duration... but would have to store
@@ -229,12 +229,12 @@ void affect_modify( Character *ch, Affect *paf, bool fAdd )
         return;
       switch( paf->location % REVERSE_APPLY )
         {
-        case APPLY_AFFECT:        REMOVE_BIT( ch->affected_by, mod );   return;
-        case APPLY_RESISTANT:     REMOVE_BIT( ch->resistant, mod );     return;
-        case APPLY_IMMUNE:        REMOVE_BIT( ch->immune, mod );        return;
-        case APPLY_SUSCEPTIBLE:   REMOVE_BIT( ch->susceptible, mod );   return;
+        case APPLY_AFFECT:        RemoveBit( ch->affected_by, mod );   return;
+        case APPLY_RESISTANT:     RemoveBit( ch->resistant, mod );     return;
+        case APPLY_IMMUNE:        RemoveBit( ch->immune, mod );        return;
+        case APPLY_SUSCEPTIBLE:   RemoveBit( ch->susceptible, mod );   return;
         case APPLY_WEARSPELL:       /* affect only on wear */           return;
-        case APPLY_REMOVE:          SET_BIT( ch->affected_by, mod );    return;
+        case APPLY_REMOVE:          SetBit( ch->affected_by, mod );    return;
         }
       mod = 0 - mod;
     }
@@ -276,12 +276,12 @@ void affect_modify( Character *ch, Affect *paf, bool fAdd )
     case APPLY_SAVING_PARA:   ch->saving.para_petri     += mod; break;
     case APPLY_SAVING_BREATH: ch->saving.breath         += mod; break;
     case APPLY_SAVING_SPELL:  ch->saving.spell_staff    += mod; break;
-    case APPLY_AFFECT:        SET_BIT( ch->affected_by, mod );  break;
-    case APPLY_RESISTANT:     SET_BIT( ch->resistant, mod );    break;
-    case APPLY_IMMUNE:        SET_BIT( ch->immune, mod );       break;
-    case APPLY_SUSCEPTIBLE:   SET_BIT( ch->susceptible, mod );  break;
+    case APPLY_AFFECT:        SetBit( ch->affected_by, mod );  break;
+    case APPLY_RESISTANT:     SetBit( ch->resistant, mod );    break;
+    case APPLY_IMMUNE:        SetBit( ch->immune, mod );       break;
+    case APPLY_SUSCEPTIBLE:   SetBit( ch->susceptible, mod );  break;
     case APPLY_WEAPONSPELL:     /* see fight.c */               break;
-    case APPLY_REMOVE:        REMOVE_BIT(ch->affected_by, mod); break;
+    case APPLY_REMOVE:        RemoveBit(ch->affected_by, mod); break;
 
     case APPLY_FULL:
       if ( !IsNpc(ch) )
@@ -318,8 +318,8 @@ void affect_modify( Character *ch, Affect *paf, bool fAdd )
       /* spell cast upon wear/removal of an object      -Thoric */
     case APPLY_WEARSPELL:
     case APPLY_REMOVESPELL:
-      if ( IS_SET(ch->in_room->room_flags, ROOM_NO_MAGIC)
-           ||   IS_SET(ch->immune, RIS_MAGIC)
+      if ( IsBitSet(ch->in_room->room_flags, ROOM_NO_MAGIC)
+           ||   IsBitSet(ch->immune, RIS_MAGIC)
            ||   saving_char == ch               /* so save/quit doesn't trigger */
            ||   loading_char == ch )    /* so loading doesn't trigger */
         return;
@@ -644,7 +644,7 @@ void char_to_room( Character *ch, Room *pRoomIndex )
     ++ch->in_room->light;
 
   if ( !IsNpc(ch)
-       &&    IS_SET(ch->in_room->room_flags, ROOM_SAFE)
+       &&    IsBitSet(ch->in_room->room_flags, ROOM_SAFE)
        &&    get_timer(ch, TIMER_SHOVEDRAG) <= 0 )
     add_timer( ch, TIMER_SHOVEDRAG, 10, NULL, SUB_NONE );  /*-30 Seconds-*/
 
@@ -652,7 +652,7 @@ void char_to_room( Character *ch, Room *pRoomIndex )
    * Delayed Teleport rooms                                     -Thoric
    * Should be the last thing checked in this function
    */
-  if ( IS_SET( ch->in_room->room_flags, ROOM_TELEPORT )
+  if ( IsBitSet( ch->in_room->room_flags, ROOM_TELEPORT )
        &&        ch->in_room->tele_delay > 0 )
     {
       TELEPORT_DATA *tele;
@@ -684,7 +684,7 @@ OBJ_DATA *obj_to_char( OBJ_DATA *obj, Character *ch )
   if (IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
     {
       if (!IsImmortal( ch )
-          && (IsNpc(ch) && !IS_SET(ch->act, ACT_PROTOTYPE)) )
+          && (IsNpc(ch) && !IsBitSet(ch->act, ACT_PROTOTYPE)) )
         return obj_to_room( obj, ch->in_room );
     }
 
@@ -721,7 +721,7 @@ OBJ_DATA *obj_to_char( OBJ_DATA *obj, Character *ch )
       ch->carry_weight  += oweight;
     }
   else
-    if ( !IS_SET(extra_flags, ITEM_MAGIC) && wear_loc != WEAR_FLOATING )
+    if ( !IsBitSet(extra_flags, ITEM_MAGIC) && wear_loc != WEAR_FLOATING )
       ch->carry_weight  += oweight;
   return (oret ? oret : obj);
 }
@@ -1081,12 +1081,12 @@ void extract_char( Character *ch, bool fPull )
   if ( gch_prev == ch )
     gch_prev = ch->prev;
 
-  if ( fPull && !IS_SET(ch->act, ACT_POLYMORPHED))
+  if ( fPull && !IsBitSet(ch->act, ACT_POLYMORPHED))
     die_follower( ch );
 
   stop_fighting( ch, true );
 
-  if (IS_SET(ch->in_room->room_flags, ROOM_ARENA))
+  if (IsBitSet(ch->in_room->room_flags, ROOM_ARENA))
     {
       ch->hit = ch->max_hit;
       ch->mana = ch->max_mana;
@@ -1095,12 +1095,12 @@ void extract_char( Character *ch, bool fPull )
 
   if ( ch->mount )
     {
-      REMOVE_BIT( ch->mount->act, ACT_MOUNTED );
+      RemoveBit( ch->mount->act, ACT_MOUNTED );
       ch->mount = NULL;
       ch->position = POS_STANDING;
     }
 
-  if ( IsNpc(ch) && IS_SET( ch->act, ACT_MOUNTED ) )
+  if ( IsNpc(ch) && IsBitSet( ch->act, ACT_MOUNTED ) )
     for ( wch = first_char; wch; wch = wch->next )
       {
         if ( wch->mount == ch )
@@ -1116,7 +1116,7 @@ void extract_char( Character *ch, bool fPull )
                    wch, NULL, ch, TO_CHAR );
           }
       }
-  REMOVE_BIT( ch->act, ACT_MOUNTED );
+  RemoveBit( ch->act, ACT_MOUNTED );
 
   while ( (obj = ch->last_carrying) != NULL )
     extract_obj( obj );
@@ -1146,7 +1146,7 @@ void extract_char( Character *ch, bool fPull )
       --nummobsloaded;
     }
 
-  if ( ch->desc && ch->desc->original && IS_SET(ch->act, ACT_POLYMORPHED))
+  if ( ch->desc && ch->desc->original && IsBitSet(ch->act, ACT_POLYMORPHED))
     do_revert( ch, "" );
 
   if ( ch->desc && ch->desc->original )
@@ -1517,7 +1517,7 @@ OBJ_DATA *find_obj( Character *ch, const char *orig_argument, bool carryonly )
         }
 
       if ( !IS_OBJ_STAT(container, ITEM_COVERING )
-           &&    IS_SET(container->value[OVAL_CONTAINER_FLAGS], CONT_CLOSED) )
+           &&    IsBitSet(container->value[OVAL_CONTAINER_FLAGS], CONT_CLOSED) )
         {
           act( AT_PLAIN, "The $d is closed.", ch, NULL, container->name, TO_CHAR );
           return NULL;
@@ -1568,7 +1568,7 @@ bool room_is_dark( const Room *pRoomIndex )
   if ( pRoomIndex->light > 0 )
     return false;
 
-  if ( IS_SET(pRoomIndex->room_flags, ROOM_DARK) )
+  if ( IsBitSet(pRoomIndex->room_flags, ROOM_DARK) )
     return true;
 
   if ( pRoomIndex->sector_type == SECT_INSIDE
@@ -1604,7 +1604,7 @@ bool room_is_private( const Character *ch, const Room *pRoomIndex )
       return false;
     }
 
-  if ( IS_SET(pRoomIndex->room_flags, ROOM_PLR_HOME) && ch->plr_home != pRoomIndex)
+  if ( IsBitSet(pRoomIndex->room_flags, ROOM_PLR_HOME) && ch->plr_home != pRoomIndex)
     return true;
 
   count = 0;
@@ -1612,10 +1612,10 @@ bool room_is_private( const Character *ch, const Room *pRoomIndex )
   for ( rch = pRoomIndex->first_person; rch; rch = rch->next_in_room )
     count++;
 
-  if ( IS_SET(pRoomIndex->room_flags, ROOM_PRIVATE)  && count >= 2 )
+  if ( IsBitSet(pRoomIndex->room_flags, ROOM_PRIVATE)  && count >= 2 )
     return true;
 
-  if ( IS_SET(pRoomIndex->room_flags, ROOM_SOLITARY) && count >= 1 )
+  if ( IsBitSet(pRoomIndex->room_flags, ROOM_SOLITARY) && count >= 1 )
     return true;
 
   return false;
@@ -1821,7 +1821,7 @@ ch_ret check_for_trap( Character *ch, const OBJ_DATA *obj, int flag )
 
   for ( check = obj->first_content; check; check = check->next_content )
     if ( check->item_type == ITEM_TRAP
-         && IS_SET(check->value[OVAL_TRAP_FLAGS], flag) )
+         && IsBitSet(check->value[OVAL_TRAP_FLAGS], flag) )
       {
         retcode = spring_trap( ch, check );
 
@@ -1854,7 +1854,7 @@ ch_ret check_room_for_traps( Character *ch, int flag )
           return rNONE;
         }
       else if ( check->item_type == ITEM_TRAP
-                && IS_SET(check->value[OVAL_TRAP_FLAGS], flag) )
+                && IsBitSet(check->value[OVAL_TRAP_FLAGS], flag) )
         {
           retcode = spring_trap( ch, check );
 
@@ -2081,7 +2081,7 @@ void showaffect( const Character *ch, const Affect *paf )
           sprintf( buf, "Affects %s by",
                    affect_loc_name( paf->location ) );
           for ( x = 0; x < 32 ; x++ )
-            if ( IS_SET( paf->modifier, 1 << x ) )
+            if ( IsBitSet( paf->modifier, 1 << x ) )
               {
                 strcat( buf, " " );
                 strcat( buf, affected_flags[x] );
@@ -2101,7 +2101,7 @@ void showaffect( const Character *ch, const Affect *paf )
           sprintf( buf, "Affects %s by",
                    affect_loc_name( paf->location ) );
           for ( x = 0; x < 32 ; x++ )
-            if ( IS_SET( paf->modifier, 1 << x ) )
+            if ( IsBitSet( paf->modifier, 1 << x ) )
               {
                 strcat( buf, " " );
                 strcat( buf, ris_flags[x] );
@@ -2468,10 +2468,10 @@ OBJ_DATA *group_object( OBJ_DATA *obj1, OBJ_DATA *obj2 )
     return obj1;
 
   if ( obj1->pIndexData == obj2->pIndexData
-       && QUICKMATCH( obj1->name,         obj2->name )
-       && QUICKMATCH( obj1->short_descr,  obj2->short_descr )
-       && QUICKMATCH( obj1->description,  obj2->description )
-       && QUICKMATCH( obj1->action_desc,  obj2->action_desc )
+       && !str_cmp( obj1->name,         obj2->name )
+       && !str_cmp( obj1->short_descr,  obj2->short_descr )
+       && !str_cmp( obj1->description,  obj2->description )
+       && !str_cmp( obj1->action_desc,  obj2->action_desc )
        && obj1->item_type    == obj2->item_type
        && obj1->extra_flags  == obj2->extra_flags
        && obj1->magic_flags  == obj2->magic_flags

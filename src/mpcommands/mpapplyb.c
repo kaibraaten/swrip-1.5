@@ -57,7 +57,7 @@ void do_mpapplyb( Character *ch, char *argument )
 
     case 3:
       send_to_char( "The gods permit you to enter the Star Wars Reality.\r\n", victim);
-      REMOVE_BIT(victim->pcdata->flags, PCFLAG_UNAUTHED);
+      RemoveBit(victim->pcdata->flags, PCFLAG_UNAUTHED);
       if ( victim->fighting )
         stop_fighting( victim, true );
       char_from_room(victim);

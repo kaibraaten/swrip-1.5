@@ -30,7 +30,7 @@ void do_resign( Character *ch, char *argument )
   if ( ch->speaking & LANG_CLAN )
     ch->speaking = LANG_COMMON;
 
-  REMOVE_BIT( ch->speaks, LANG_CLAN );
+  RemoveBit( ch->speaks, LANG_CLAN );
   --clan->members;
 
   if ( !str_cmp( ch->name, ch->pcdata->clan->leadership.number1 ) )

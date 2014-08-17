@@ -32,15 +32,15 @@ void do_litterbug( Character *ch, char *argument )
       return;
     }
 
-  if ( IS_SET(victim->act, PLR_LITTERBUG) )
+  if ( IsBitSet(victim->act, PLR_LITTERBUG) )
     {
-      REMOVE_BIT(victim->act, PLR_LITTERBUG);
+      RemoveBit(victim->act, PLR_LITTERBUG);
       send_to_char( "You can drop items again.\r\n", victim );
       send_to_char( "LITTERBUG removed.\r\n", ch );
     }
   else
     {
-      SET_BIT(victim->act, PLR_LITTERBUG);
+      SetBit(victim->act, PLR_LITTERBUG);
       send_to_char( "You a strange force prevents you from dropping any more items!\r\n", victim );
       send_to_char( "LITTERBUG set.\r\n", ch );
     }

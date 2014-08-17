@@ -111,8 +111,8 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *even
   char description[MAX_STRING_LENGTH];
 
   armor->item_type = ITEM_ARMOR;
-  SET_BIT( armor->wear_flags, ITEM_TAKE );
-  SET_BIT( armor->wear_flags, ud->WearLocation );
+  SetBit( armor->wear_flags, ITEM_TAKE );
+  SetBit( armor->wear_flags, ud->WearLocation );
 
   DISPOSE( armor->name );
   armor->name = str_dup( ud->ItemName );

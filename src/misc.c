@@ -58,7 +58,7 @@ void pullorpush( Character *ch, OBJ_DATA *obj, bool pull )
   Exit *pexit = NULL, *pexit_rev = NULL;
   DirectionType edir = DIR_INVALID;
   char *txt = NULL;
-  bool isup = IS_SET( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_UP );
+  bool isup = IsBitSet( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_UP );
 
   switch( obj->item_type )
     {
@@ -89,22 +89,22 @@ void pullorpush( Character *ch, OBJ_DATA *obj, bool pull )
       break;
     }
 
-  if( pull && IS_SET(obj->pIndexData->mprog.progtypes,PULL_PROG) )
+  if( pull && IsBitSet(obj->pIndexData->mprog.progtypes,PULL_PROG) )
     {
-      if ( !IS_SET(obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_AUTORETURN ) )
+      if ( !IsBitSet(obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_AUTORETURN ) )
 	{
-	  REMOVE_BIT( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_UP );
+	  RemoveBit( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_UP );
 	}
 
       oprog_pull_trigger( ch, obj );
       return;
     }
 
-  if( !pull && IS_SET(obj->pIndexData->mprog.progtypes,PUSH_PROG) )
+  if( !pull && IsBitSet(obj->pIndexData->mprog.progtypes,PUSH_PROG) )
     {
-      if ( !IS_SET(obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_AUTORETURN ) )
+      if ( !IsBitSet(obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_AUTORETURN ) )
 	{
-	  SET_BIT( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_UP );
+	  SetBit( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_UP );
 	}
 
       oprog_push_trigger( ch, obj );
@@ -119,21 +119,21 @@ void pullorpush( Character *ch, OBJ_DATA *obj, bool pull )
       act( AT_ACTION, buf, ch, obj, NULL, TO_CHAR );
     }
 
-  if ( !IS_SET(obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_AUTORETURN ) )
+  if ( !IsBitSet(obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_AUTORETURN ) )
     {
       if ( pull )
 	{
-	  REMOVE_BIT( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_UP );
+	  RemoveBit( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_UP );
 	}
       else
 	{
-	  SET_BIT( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_UP );
+	  SetBit( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_UP );
 	}
     }
 
-  if ( IS_SET( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_TELEPORT )
-       || IS_SET( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_TELEPORTALL )
-       || IS_SET( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_TELEPORTPLUS ) )
+  if ( IsBitSet( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_TELEPORT )
+       || IsBitSet( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_TELEPORTALL )
+       || IsBitSet( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_TELEPORTPLUS ) )
     {
       int flags = 0;
 
@@ -144,27 +144,27 @@ void pullorpush( Character *ch, OBJ_DATA *obj, bool pull )
           return;
         }
 
-      if ( IS_SET( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_SHOWROOMDESC ) )
+      if ( IsBitSet( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_SHOWROOMDESC ) )
 	{
-	  SET_BIT( flags, TELE_SHOWDESC );
+	  SetBit( flags, TELE_SHOWDESC );
 	}
 
-      if ( IS_SET( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_TELEPORTALL ) )
+      if ( IsBitSet( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_TELEPORTALL ) )
 	{
-	  SET_BIT( flags, TELE_TRANSALL );
+	  SetBit( flags, TELE_TRANSALL );
 	}
 
-      if ( IS_SET( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_TELEPORTPLUS ) )
+      if ( IsBitSet( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_TELEPORTPLUS ) )
 	{
-	  SET_BIT( flags, TELE_TRANSALLPLUS );
+	  SetBit( flags, TELE_TRANSALLPLUS );
 	}
 
       teleport( ch, obj->value[OVAL_BUTTON_TELEPORT_DESTINATION], flags );
       return;
     }
 
-  if ( IS_SET( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_RAND4 )
-       || IS_SET( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_RAND6 ) )
+  if ( IsBitSet( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_RAND4 )
+       || IsBitSet( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_RAND6 ) )
     {
       int maxd = 0;
 
@@ -175,7 +175,7 @@ void pullorpush( Character *ch, OBJ_DATA *obj, bool pull )
           return;
         }
 
-      if ( IS_SET( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_RAND4 ) )
+      if ( IsBitSet( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_RAND4 ) )
         maxd = 3;
       else
         maxd = 5;
@@ -189,7 +189,7 @@ void pullorpush( Character *ch, OBJ_DATA *obj, bool pull )
         }
     }
 
-  if ( IS_SET( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_DOOR ) )
+  if ( IsBitSet( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_DOOR ) )
     {
       room = get_room_index( obj->value[OVAL_BUTTON_TELEPORT_DESTINATION] );
 
@@ -205,32 +205,32 @@ void pullorpush( Character *ch, OBJ_DATA *obj, bool pull )
           return;
         }
 
-      if ( IS_SET( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_D_NORTH ) )
+      if ( IsBitSet( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_D_NORTH ) )
         {
           edir = DIR_NORTH;
           txt = "to the north";
         }
-      else if ( IS_SET( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_D_SOUTH ) )
+      else if ( IsBitSet( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_D_SOUTH ) )
 	{
 	  edir = DIR_SOUTH;
 	  txt = "to the south";
 	}
-      else if ( IS_SET( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_D_EAST ) )
+      else if ( IsBitSet( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_D_EAST ) )
 	{
 	  edir = DIR_EAST;
 	  txt = "to the east";
 	}
-      else if ( IS_SET( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_D_WEST ) )
+      else if ( IsBitSet( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_D_WEST ) )
 	{
 	  edir = DIR_WEST;
 	  txt = "to the west";
 	}
-      else if ( IS_SET( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_D_UP ) )
+      else if ( IsBitSet( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_D_UP ) )
 	{
 	  edir = DIR_UP;
 	  txt = "from above";
 	}
-      else if ( IS_SET( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_D_DOWN ) )
+      else if ( IsBitSet( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_D_DOWN ) )
 	{
 	  edir = DIR_DOWN;
 	  txt = "from below";
@@ -245,7 +245,7 @@ void pullorpush( Character *ch, OBJ_DATA *obj, bool pull )
 
       if ( !pexit )
         {
-          if ( !IS_SET( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_PASSAGE ) )
+          if ( !IsBitSet( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_PASSAGE ) )
             {
               bug( "PullOrPush: obj points to non-exit %d",
 		   obj->value[OVAL_BUTTON_TELEPORT_DESTINATION] );
@@ -272,38 +272,38 @@ void pullorpush( Character *ch, OBJ_DATA *obj, bool pull )
           return;
         }
 
-      if ( IS_SET( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_UNLOCK )
-           && IS_SET( pexit->exit_info, EX_LOCKED) )
+      if ( IsBitSet( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_UNLOCK )
+           && IsBitSet( pexit->exit_info, EX_LOCKED) )
         {
-          REMOVE_BIT(pexit->exit_info, EX_LOCKED);
+          RemoveBit(pexit->exit_info, EX_LOCKED);
           act( AT_PLAIN, "You hear a faint click $T.", ch, NULL, txt, TO_CHAR );
           act( AT_PLAIN, "You hear a faint click $T.", ch, NULL, txt, TO_ROOM );
 
           if ( ( pexit_rev = pexit->rexit ) != NULL
                &&   pexit_rev->to_room == ch->in_room )
-            REMOVE_BIT( pexit_rev->exit_info, EX_LOCKED );
+            RemoveBit( pexit_rev->exit_info, EX_LOCKED );
 
           return;
         }
 
-      if ( IS_SET( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_LOCK )
-           && !IS_SET( pexit->exit_info, EX_LOCKED) )
+      if ( IsBitSet( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_LOCK )
+           && !IsBitSet( pexit->exit_info, EX_LOCKED) )
         {
-          SET_BIT(pexit->exit_info, EX_LOCKED);
+          SetBit(pexit->exit_info, EX_LOCKED);
           act( AT_PLAIN, "You hear a faint click $T.", ch, NULL, txt, TO_CHAR );
           act( AT_PLAIN, "You hear a faint click $T.", ch, NULL, txt, TO_ROOM );
 
           if ( ( pexit_rev = pexit->rexit ) != NULL
                &&   pexit_rev->to_room == ch->in_room )
-            SET_BIT( pexit_rev->exit_info, EX_LOCKED );
+            SetBit( pexit_rev->exit_info, EX_LOCKED );
 
           return;
         }
 
-      if ( IS_SET( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_OPEN   )
-           && IS_SET( pexit->exit_info, EX_CLOSED) )
+      if ( IsBitSet( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_OPEN   )
+           && IsBitSet( pexit->exit_info, EX_CLOSED) )
         {
-          REMOVE_BIT(pexit->exit_info, EX_CLOSED);
+          RemoveBit(pexit->exit_info, EX_CLOSED);
 
           for ( rch = room->first_person; rch; rch = rch->next_in_room )
 	    {
@@ -313,7 +313,7 @@ void pullorpush( Character *ch, OBJ_DATA *obj, bool pull )
           if ( ( pexit_rev = pexit->rexit ) != NULL
                && pexit_rev->to_room == ch->in_room )
             {
-              REMOVE_BIT( pexit_rev->exit_info, EX_CLOSED );
+              RemoveBit( pexit_rev->exit_info, EX_CLOSED );
 
               for ( rch = to_room->first_person; rch; rch = rch->next_in_room )
 		{
@@ -325,10 +325,10 @@ void pullorpush( Character *ch, OBJ_DATA *obj, bool pull )
           return;
         }
 
-      if ( IS_SET( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_CLOSE   )
-           && !IS_SET( pexit->exit_info, EX_CLOSED) )
+      if ( IsBitSet( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_CLOSE   )
+           && !IsBitSet( pexit->exit_info, EX_CLOSED) )
         {
-          SET_BIT(pexit->exit_info, EX_CLOSED);
+          SetBit(pexit->exit_info, EX_CLOSED);
 
           for ( rch = room->first_person; rch; rch = rch->next_in_room )
 	    {
@@ -338,7 +338,7 @@ void pullorpush( Character *ch, OBJ_DATA *obj, bool pull )
           if ( ( pexit_rev = pexit->rexit ) != NULL
                && pexit_rev->to_room == ch->in_room )
             {
-              SET_BIT( pexit_rev->exit_info, EX_CLOSED );
+              SetBit( pexit_rev->exit_info, EX_CLOSED );
 
               for ( rch = to_room->first_person; rch; rch = rch->next_in_room )
 		{

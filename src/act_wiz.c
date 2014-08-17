@@ -111,14 +111,14 @@ static const char *str_str( const char *astr, const char *bstr )
   int sstr1, sstr2, ichar;
   char c0;
 
-  if ( ( c0 = LOWER(bstr[0]) ) == '\0' )
+  if ( ( c0 = CharToLowercase(bstr[0]) ) == '\0' )
     return NULL;
 
   sstr1 = strlen(astr);
   sstr2 = strlen(bstr);
 
   for ( ichar = 0; ichar <= sstr1 - sstr2; ichar++ )
-    if ( c0 == LOWER(astr[ichar]) && !str_prefix(bstr, astr+ichar) )
+    if ( c0 == CharToLowercase(astr[ichar]) && !str_prefix(bstr, astr+ichar) )
       return (astr+ichar);
 
   return NULL;
@@ -497,7 +497,7 @@ void add_social( SOCIALTYPE *social )
 
   /* make sure the name is all lowercase */
   for ( x = 0; social->name[x] != '\0'; x++ )
-    social->name[x] = LOWER(social->name[x]);
+    social->name[x] = CharToLowercase(social->name[x]);
 
   if ( social->name[0] < 'a' || social->name[0] > 'z' )
     hash = 0;
@@ -614,7 +614,7 @@ void add_command( CMDTYPE *command )
 
   /* make sure the name is all lowercase */
   for ( x = 0; command->name[x] != '\0'; x++ )
-    command->name[x] = LOWER(command->name[x]);
+    command->name[x] = CharToLowercase(command->name[x]);
 
   hash = command->name[0] % 126;
 

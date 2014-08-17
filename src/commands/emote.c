@@ -9,7 +9,7 @@ void do_emote( Character *ch, char *argument )
   char *plast = NULL;
   int actflags = ch->act;
 
-  if ( !IsNpc(ch) && IS_SET(ch->act, PLR_NO_EMOTE) )
+  if ( !IsNpc(ch) && IsBitSet(ch->act, PLR_NO_EMOTE) )
     {
       send_to_char( "You can't show your emotions.\r\n", ch );
       return;
@@ -23,7 +23,7 @@ void do_emote( Character *ch, char *argument )
 
   if ( IsNpc( ch ) )
     {
-      REMOVE_BIT( ch->act, ACT_SECRETIVE );
+      RemoveBit( ch->act, ACT_SECRETIVE );
     }
 
   for ( plast = argument; *plast != '\0'; plast++ )
@@ -46,7 +46,7 @@ void do_emote( Character *ch, char *argument )
 
   ch->act = actflags;
 
-  if ( IS_SET( ch->in_room->room_flags, ROOM_LOGSPEECH ) )
+  if ( IsBitSet( ch->in_room->room_flags, ROOM_LOGSPEECH ) )
     {
       sprintf( buf, "%s %s (emote)", IsNpc( ch ) ? ch->short_descr : ch->name,
                argument );

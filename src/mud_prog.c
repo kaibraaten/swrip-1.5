@@ -117,7 +117,7 @@ void init_supermob()
   CREATE( supermob, Character, 1 );
   clear_char( supermob );
 
-  SET_BIT(supermob->act,ACT_IsNpc);
+  SetBit(supermob->act,ACT_IsNpc);
   supermob->name                = str_dup("supermob");
   supermob->short_descr         = str_dup(".");
   supermob->long_descr  = str_dup(".");
@@ -859,7 +859,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
     {
       if ( !str_cmp(chck, "ismobinvis") )
         {
-          return (IsNpc(chkchar) && IS_SET(chkchar->act, ACT_MOBINVIS));
+          return (IsNpc(chkchar) && IsBitSet(chkchar->act, ACT_MOBINVIS));
         }
 
       if ( !str_cmp(chck, "mobinvislevel") )
@@ -949,7 +949,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
 
       if ( !str_cmp(chck, "norecall") )
         {
-          /*    return IS_SET(chkchar->in_room->room_flags, ROOM_NO_RECALL) ? true : false;
+          /*    return IsBitSet(chkchar->in_room->room_flags, ROOM_NO_RECALL) ? true : false;
            */
           return false;
         }
@@ -1252,7 +1252,7 @@ void mprog_translate( char ch, char *t, Character *mob, Character *actor,
         one_argument( actor->name, t );
 
         if ( !IsNpc( actor ) )
-          *t = UPPER( *t );
+          *t = CharToUppercase( *t );
       }
     else
       {
@@ -1293,7 +1293,7 @@ void mprog_translate( char ch, char *t, Character *mob, Character *actor,
 
         if ( !IsNpc( vict ) )
 	  {
-	    *t = UPPER( *t );
+	    *t = CharToUppercase( *t );
 	  }
       }
     else
@@ -1337,7 +1337,7 @@ void mprog_translate( char ch, char *t, Character *mob, Character *actor,
 
         if ( !IsNpc( rndm ) )
           {
-            *t = UPPER( *t );
+            *t = CharToUppercase( *t );
           }
       }
     else
@@ -2111,10 +2111,10 @@ bool mprog_keyword_check( const char *argu, const char *argl )
   arglist = arg2;
 
   for ( i = 0; i < strlen( arglist ); i++ )
-    arglist[i] = LOWER( arglist[i] );
+    arglist[i] = CharToLowercase( arglist[i] );
 
   for ( i = 0; i < strlen( arg ); i++ )
-    arg[i] = LOWER( arg[i] );
+    arg[i] = CharToLowercase( arg[i] );
 
   if ( ( arglist[0] == 'p' ) && ( arglist[1] == ' ' ) )
     {
@@ -2191,7 +2191,7 @@ void mprog_wordlist_check( char *arg, Character *mob, Character *actor,
 
 	  for ( i = 0; i < strlen( list ); i++ )
 	    {
-	      list[i] = LOWER( list[i] );
+	      list[i] = CharToLowercase( list[i] );
 	    }
 
 	  strcpy( temp2, arg );
@@ -2199,7 +2199,7 @@ void mprog_wordlist_check( char *arg, Character *mob, Character *actor,
 
 	  for ( i = 0; i < strlen( dupl ); i++ )
 	    {
-	      dupl[i] = LOWER( dupl[i] );
+	      dupl[i] = CharToLowercase( dupl[i] );
 	    }
 
 	  if ( ( list[0] == 'p' ) && ( list[1] == ' ' ) )
@@ -2329,7 +2329,7 @@ void mprog_act_trigger( char *buf, Character *mob, Character *ch,
   bool found = false;
 
   if ( IsNpc( mob )
-       && IS_SET( mob->pIndexData->mprog.progtypes, ACT_PROG ) )
+       && IsBitSet( mob->pIndexData->mprog.progtypes, ACT_PROG ) )
     {
       /* Don't let a mob trigger itself, nor one instance of a mob
          trigger another instance. */
@@ -2974,7 +2974,7 @@ void oprog_wordlist_check( char *arg, Character *mob, Character *actor,
 
 	  for ( i = 0; i < strlen( list ); i++ )
 	    {
-	      list[i] = LOWER( list[i] );
+	      list[i] = CharToLowercase( list[i] );
 	    }
 
 	  strcpy( temp2, arg );
@@ -2982,7 +2982,7 @@ void oprog_wordlist_check( char *arg, Character *mob, Character *actor,
 
 	  for ( i = 0; i < strlen( dupl ); i++ )
 	    {
-	      dupl[i] = LOWER( dupl[i] );
+	      dupl[i] = CharToLowercase( dupl[i] );
 	    }
 
 	  if ( ( list[0] == 'p' ) && ( list[1] == ' ' ) )
@@ -3234,7 +3234,7 @@ void rprog_wordlist_check( char *arg, Character *mob, Character *actor,
 
 	  for ( i = 0; i < strlen( list ); i++ )
 	    {
-	      list[i] = LOWER( list[i] );
+	      list[i] = CharToLowercase( list[i] );
 	    }
 
 	  strcpy( temp2, arg );
@@ -3242,7 +3242,7 @@ void rprog_wordlist_check( char *arg, Character *mob, Character *actor,
 
 	  for ( i = 0; i < strlen( dupl ); i++ )
 	    {
-	      dupl[i] = LOWER( dupl[i] );
+	      dupl[i] = CharToLowercase( dupl[i] );
 	    }
 
 	  if ( ( list[0] == 'p' ) && ( list[1] == ' ' ) )

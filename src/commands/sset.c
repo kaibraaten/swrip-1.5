@@ -221,7 +221,7 @@ void do_sset( Character *ch, char *argument )
             send_to_char( "Not a spell flag.\r\n", ch );
           else
             {
-              TOGGLE_BIT( skill->flags, 1 << (x+11) );
+              ToggleBit( skill->flags, 1 << (x+11) );
               send_to_char( "Ok.\r\n", ch );
             }
           return;

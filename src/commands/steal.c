@@ -40,7 +40,7 @@ void do_steal( Character *ch, char *argument )
       return;
     }
 
-  if ( IS_SET( ch->in_room->room_flags, ROOM_SAFE ) )
+  if ( IsBitSet( ch->in_room->room_flags, ROOM_SAFE ) )
     {
       set_char_color( AT_MAGIC, ch );
       send_to_char( "This isn't a good place to do that.\r\n", ch );
@@ -52,7 +52,7 @@ void do_steal( Character *ch, char *argument )
     - (GetCurrentLuck(ch) - 15) + (GetCurrentLuck(victim) - 13)
     + TimesKilled( ch, victim )*7;
 
-  if ( ( IS_SET( victim->immune, RIS_STEAL ) ) ||
+  if ( ( IsBitSet( victim->immune, RIS_STEAL ) ) ||
        ( victim->position != POS_STUNNED && (victim->position == POS_FIGHTING
                                              ||   percent > ( IsNpc(ch) ? 90 : ch->pcdata->learned[gsn_steal] ) ) ) )
     {

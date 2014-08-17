@@ -38,8 +38,8 @@ void do_empty( Character *ch, char *argument )
     case ITEM_PIPE:
       act( AT_ACTION, "You gently tap $p and empty it out.", ch, obj, NULL, TO_CHAR );
       act( AT_ACTION, "$n gently taps $p and empties it out.", ch, obj, NULL, TO_ROOM );
-      REMOVE_BIT( obj->value[3], PIPE_FULLOFASH );
-      REMOVE_BIT( obj->value[3], PIPE_LIT );
+      RemoveBit( obj->value[3], PIPE_FULLOFASH );
+      RemoveBit( obj->value[3], PIPE_LIT );
       obj->value[1] = 0;
       return;
     case ITEM_DRINK_CON:
@@ -53,7 +53,7 @@ void do_empty( Character *ch, char *argument )
       obj->value[1] = 0;
       return;
     case ITEM_CONTAINER:
-      if ( IS_SET(obj->value[1], CONT_CLOSED) )
+      if ( IsBitSet(obj->value[1], CONT_CLOSED) )
         {
           act( AT_PLAIN, "The $d is closed.", ch, NULL, obj->name, TO_CHAR );
           return;
@@ -65,8 +65,8 @@ void do_empty( Character *ch, char *argument )
         }
       if ( arg2[0] == '\0' )
         {
-          if ( IS_SET( ch->in_room->room_flags, ROOM_NODROP )
-               || ( !IsNpc(ch) &&  IS_SET( ch->act, PLR_LITTERBUG ) ) )
+          if ( IsBitSet( ch->in_room->room_flags, ROOM_NODROP )
+               || ( !IsNpc(ch) &&  IsBitSet( ch->act, PLR_LITTERBUG ) ) )
             {
               set_char_color( AT_MAGIC, ch );
               send_to_char( "A magical force stops you!\r\n", ch );
@@ -74,7 +74,7 @@ void do_empty( Character *ch, char *argument )
 	      send_to_char( "Someone tells you, 'No littering here!'\r\n", ch );
               return;
             }
-          if ( IS_SET( ch->in_room->room_flags, ROOM_NODROPALL ) )
+          if ( IsBitSet( ch->in_room->room_flags, ROOM_NODROPALL ) )
             {
               send_to_char( "You can't seem to do that here...\r\n", ch );
               return;
@@ -83,7 +83,7 @@ void do_empty( Character *ch, char *argument )
             {
               act( AT_ACTION, "You empty $p.", ch, obj, NULL, TO_CHAR );
               act( AT_ACTION, "$n empties $p.", ch, obj, NULL, TO_ROOM );
-              if ( IS_SET( sysdata.save_flags, SV_DROP ) )
+              if ( IsBitSet( sysdata.save_flags, SV_DROP ) )
                 save_char_obj( ch );
             }
           else
@@ -108,7 +108,7 @@ void do_empty( Character *ch, char *argument )
               send_to_char( "That's not a container!\r\n", ch );
               return;
             }
-          if ( IS_SET(dest->value[1], CONT_CLOSED) )
+          if ( IsBitSet(dest->value[1], CONT_CLOSED) )
             {
               act( AT_PLAIN, "The $d is closed.", ch, NULL, dest->name, TO_CHAR );
               return;
@@ -119,7 +119,7 @@ void do_empty( Character *ch, char *argument )
 	      act( AT_ACTION, "You empty $p into $P.", ch, obj, dest, TO_CHAR );
               act( AT_ACTION, "$n empties $p into $P.", ch, obj, dest, TO_ROOM );
               if ( !dest->carried_by
-                   &&    IS_SET( sysdata.save_flags, SV_PUT ) )
+                   &&    IsBitSet( sysdata.save_flags, SV_PUT ) )
                 save_char_obj( ch );
             }
           else

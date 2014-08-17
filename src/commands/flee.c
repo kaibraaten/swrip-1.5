@@ -40,16 +40,16 @@ void do_flee( Character *ch, char *argument )
       door = number_door( );
       if ( ( pexit = get_exit(was_in, door) ) == NULL
            ||   !pexit->to_room
-           || ( IS_SET(pexit->exit_info, EX_CLOSED)
+           || ( IsBitSet(pexit->exit_info, EX_CLOSED)
                 &&   !IsAffectedBy( ch, AFF_PASS_DOOR ) )
            || ( IsNpc(ch)
-                &&   IS_SET(pexit->to_room->room_flags, ROOM_NO_MOB) ) )
+                &&   IsBitSet(pexit->to_room->room_flags, ROOM_NO_MOB) ) )
         continue;
 
       if ( !permsneak(ch) )
         {
           affect_strip ( ch, gsn_sneak );
-          REMOVE_BIT   ( ch->affected_by, AFF_SNEAK );
+          RemoveBit   ( ch->affected_by, AFF_SNEAK );
         }
       if ( ch->mount && ch->mount->fighting )
         stop_fighting( ch->mount, true );

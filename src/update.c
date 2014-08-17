@@ -331,7 +331,7 @@ void advance_level( Character *ch, int ability )
 
   if ( !IsNpc(ch) )
     {
-      REMOVE_BIT( ch->act, PLR_BOUGHT_PET );
+      RemoveBit( ch->act, PLR_BOUGHT_PET );
     }
 }
 
@@ -885,8 +885,8 @@ void mobile_update( void )
           continue;
         }
 
-      if ( !IS_SET( ch->act, ACT_RUNNING )
-           && !IS_SET( ch->act, ACT_SENTINEL )
+      if ( !IsBitSet( ch->act, ACT_RUNNING )
+           && !IsBitSet( ch->act, ACT_SENTINEL )
            && !ch->fighting && ch->hhf.hunting )
         {
           if (  ch->top_level < 20 )
@@ -918,19 +918,19 @@ void mobile_update( void )
           continue;
         }
       else if ( !ch->fighting && !ch->hhf.hunting
-                && !IS_SET( ch->act, ACT_RUNNING)
+                && !IsBitSet( ch->act, ACT_RUNNING)
                 && ch->was_sentinel && ch->position >= POS_STANDING )
         {
           act( AT_ACTION, "$n leaves.", ch, NULL, NULL, TO_ROOM );
           char_from_room( ch );
           char_to_room( ch , ch->was_sentinel );
           act( AT_ACTION, "$n arrives.", ch, NULL, NULL, TO_ROOM );
-          SET_BIT( ch->act , ACT_SENTINEL );
+          SetBit( ch->act , ACT_SENTINEL );
           ch->was_sentinel = NULL;
         }
 
       /* Examine call for special procedure */
-      if ( !IS_SET( ch->act, ACT_RUNNING )
+      if ( !IsBitSet( ch->act, ACT_RUNNING )
            && ch->spec_fun )
         {
           if ( (*ch->spec_fun) ( ch ) )
@@ -944,7 +944,7 @@ void mobile_update( void )
 	    }
         }
 
-      if ( !IS_SET( ch->act, ACT_RUNNING )
+      if ( !IsBitSet( ch->act, ACT_RUNNING )
            && ch->spec_2 )
         {
           if ( (*ch->spec_2) ( ch ) )
@@ -959,7 +959,7 @@ void mobile_update( void )
         }
 
       /* Check for mudprogram script on mob */
-      if ( IS_SET( ch->pIndexData->mprog.progtypes, SCRIPT_PROG ) )
+      if ( IsBitSet( ch->pIndexData->mprog.progtypes, SCRIPT_PROG ) )
         {
           mprog_script_trigger( ch );
           continue;
@@ -977,9 +977,9 @@ void mobile_update( void )
 	  continue;
 	}
 
-      if ( IS_SET(ch->act, ACT_MOUNTED ) )
+      if ( IsBitSet(ch->act, ACT_MOUNTED ) )
         {
-          if ( IS_SET(ch->act, ACT_AGGRESSIVE) )
+          if ( IsBitSet(ch->act, ACT_AGGRESSIVE) )
 	    {
 	      do_emote( ch, "snarls and growls." );
 	    }
@@ -987,8 +987,8 @@ void mobile_update( void )
           continue;
         }
 
-      if ( IS_SET(ch->in_room->room_flags, ROOM_SAFE )
-           && IS_SET(ch->act, ACT_AGGRESSIVE) )
+      if ( IsBitSet(ch->in_room->room_flags, ROOM_SAFE )
+           && IsBitSet(ch->act, ACT_AGGRESSIVE) )
 	{
 	  do_emote( ch, "glares around and snarls." );
 	}
@@ -1030,7 +1030,7 @@ void mobile_update( void )
 	}
 
       /* Scavenge */
-      if ( IS_SET(ch->act, ACT_SCAVENGER)
+      if ( IsBitSet(ch->act, ACT_SCAVENGER)
            && ch->in_room->first_content
            && number_bits( 2 ) == 0 )
         {
@@ -1057,15 +1057,15 @@ void mobile_update( void )
         }
 
       /* Wander */
-      if ( !IS_SET(ch->act, ACT_RUNNING)
-           && !IS_SET(ch->act, ACT_SENTINEL)
-           && !IS_SET(ch->act, ACT_PROTOTYPE)
+      if ( !IsBitSet(ch->act, ACT_RUNNING)
+           && !IsBitSet(ch->act, ACT_SENTINEL)
+           && !IsBitSet(ch->act, ACT_PROTOTYPE)
            && ( door = number_bits( 5 ) ) <= 9
            && ( pexit = get_exit(ch->in_room, door) ) != NULL
            && pexit->to_room
-           && !IS_SET(pexit->exit_info, EX_CLOSED)
-           && !IS_SET(pexit->to_room->room_flags, ROOM_NO_MOB)
-           && ( !IS_SET(ch->act, ACT_STAY_AREA)
+           && !IsBitSet(pexit->exit_info, EX_CLOSED)
+           && !IsBitSet(pexit->to_room->room_flags, ROOM_NO_MOB)
+           && ( !IsBitSet(ch->act, ACT_STAY_AREA)
                 ||   pexit->to_room->area == ch->in_room->area ) )
         {
           retcode = move_char( ch, pexit, 0 );
@@ -1079,7 +1079,7 @@ void mobile_update( void )
 	      continue;
 	    }
 
-          if ( retcode != rNONE || IS_SET(ch->act, ACT_SENTINEL)
+          if ( retcode != rNONE || IsBitSet(ch->act, ACT_SENTINEL)
                || ch->position < POS_STANDING )
 	    {
 	      continue;
@@ -1091,8 +1091,8 @@ void mobile_update( void )
            && ( door = number_bits( 4 ) ) <= 9
            && ( pexit = get_exit(ch->in_room,door) ) != NULL
            && pexit->to_room
-           && !IS_SET(pexit->exit_info, EX_CLOSED)
-           && !IS_SET(pexit->to_room->room_flags, ROOM_NO_MOB) )
+           && !IsBitSet(pexit->exit_info, EX_CLOSED)
+           && !IsBitSet(pexit->to_room->room_flags, ROOM_NO_MOB) )
         {
           Character *rch = NULL;
           bool found = false;
@@ -1765,7 +1765,7 @@ void char_update( void )
                   save_char_obj( ch );
                   do_quit( ch, "" );
                 }
-              else if ( ch == ch_save && IS_SET( sysdata.save_flags, SV_AUTO )
+              else if ( ch == ch_save && IsBitSet( sysdata.save_flags, SV_AUTO )
 			&& ++save_count < 10 )   /* save max of 10 per tick */
 		{
 		  save_char_obj( ch );
@@ -1845,38 +1845,38 @@ void obj_update( void )
 
       if ( obj->item_type == ITEM_PIPE )
         {
-          if ( IS_SET( obj->value[OVAL_PIPE_FLAGS], PIPE_LIT ) )
+          if ( IsBitSet( obj->value[OVAL_PIPE_FLAGS], PIPE_LIT ) )
             {
               if ( --obj->value[OVAL_PIPE_TOBACCO_AMOUNT] <= 0 )
                 {
                   obj->value[OVAL_PIPE_TOBACCO_AMOUNT] = 0;
-                  REMOVE_BIT( obj->value[OVAL_PIPE_FLAGS], PIPE_LIT );
+                  RemoveBit( obj->value[OVAL_PIPE_FLAGS], PIPE_LIT );
                 }
-              else if ( IS_SET( obj->value[OVAL_PIPE_FLAGS], PIPE_HOT ) )
+              else if ( IsBitSet( obj->value[OVAL_PIPE_FLAGS], PIPE_HOT ) )
 		{
-		  REMOVE_BIT( obj->value[OVAL_PIPE_FLAGS], PIPE_HOT );
+		  RemoveBit( obj->value[OVAL_PIPE_FLAGS], PIPE_HOT );
 		}
 	      else
 		{
-		  if ( IS_SET( obj->value[OVAL_PIPE_FLAGS], PIPE_GOINGOUT ) )
+		  if ( IsBitSet( obj->value[OVAL_PIPE_FLAGS], PIPE_GOINGOUT ) )
 		    {
-		      REMOVE_BIT( obj->value[OVAL_PIPE_FLAGS], PIPE_LIT );
-		      REMOVE_BIT( obj->value[OVAL_PIPE_FLAGS], PIPE_GOINGOUT );
+		      RemoveBit( obj->value[OVAL_PIPE_FLAGS], PIPE_LIT );
+		      RemoveBit( obj->value[OVAL_PIPE_FLAGS], PIPE_GOINGOUT );
 		    }
 		  else
 		    {
-		      SET_BIT( obj->value[OVAL_PIPE_FLAGS], PIPE_GOINGOUT );
+		      SetBit( obj->value[OVAL_PIPE_FLAGS], PIPE_GOINGOUT );
 		    }
 		}
 
-              if ( !IS_SET( obj->value[OVAL_PIPE_FLAGS], PIPE_LIT ) )
+              if ( !IsBitSet( obj->value[OVAL_PIPE_FLAGS], PIPE_LIT ) )
 		{
-		  SET_BIT( obj->value[OVAL_PIPE_FLAGS], PIPE_FULLOFASH );
+		  SetBit( obj->value[OVAL_PIPE_FLAGS], PIPE_FULLOFASH );
 		}
             }
           else
 	    {
-	      REMOVE_BIT( obj->value[OVAL_PIPE_FLAGS], PIPE_HOT );
+	      RemoveBit( obj->value[OVAL_PIPE_FLAGS], PIPE_HOT );
 	    }
         }
 
@@ -2112,9 +2112,9 @@ void char_check( void )
 	    }
 
           /* running mobs       -Thoric */
-          if ( IS_SET(ch->act, ACT_RUNNING) )
+          if ( IsBitSet(ch->act, ACT_RUNNING) )
             {
-              if ( !IS_SET( ch->act, ACT_SENTINEL )
+              if ( !IsBitSet( ch->act, ACT_SENTINEL )
                    && !ch->fighting && ch->hhf.hunting )
                 {
                   SetWaitState( ch, 2 * PULSE_VIOLENCE );
@@ -2148,14 +2148,14 @@ void char_check( void )
 		    }
                 }
 
-              if ( !IS_SET(ch->act, ACT_SENTINEL)
-                   && !IS_SET(ch->act, ACT_PROTOTYPE)
+              if ( !IsBitSet(ch->act, ACT_SENTINEL)
+                   && !IsBitSet(ch->act, ACT_PROTOTYPE)
                    && ( door = number_bits( 4 ) ) <= 9
                    && ( pexit = get_exit(ch->in_room, door) ) != NULL
                    && pexit->to_room
-                   && !IS_SET(pexit->exit_info, EX_CLOSED)
-                   && !IS_SET(pexit->to_room->room_flags, ROOM_NO_MOB)
-                   && ( !IS_SET(ch->act, ACT_STAY_AREA)
+                   && !IsBitSet(pexit->exit_info, EX_CLOSED)
+                   && !IsBitSet(pexit->to_room->room_flags, ROOM_NO_MOB)
+                   && ( !IsBitSet(ch->act, ACT_STAY_AREA)
                         || pexit->to_room->area == ch->in_room->area ) )
                 {
                   retcode = move_char( ch, pexit, 0 );
@@ -2165,7 +2165,7 @@ void char_check( void )
 		      continue;
 		    }
 
-                  if ( retcode != rNONE || IS_SET(ch->act, ACT_SENTINEL)
+                  if ( retcode != rNONE || IsBitSet(ch->act, ACT_SENTINEL)
                        || ch->position < POS_STANDING )
 		    {
 		      continue;
@@ -2180,7 +2180,7 @@ void char_check( void )
           if ( ch->mount
                && ch->in_room != ch->mount->in_room )
             {
-              REMOVE_BIT( ch->mount->act, ACT_MOUNTED );
+              RemoveBit( ch->mount->act, ACT_MOUNTED );
               ch->mount = NULL;
               ch->position = POS_STANDING;
               send_to_char( "No longer upon your mount, you fall to the ground...\r\nOUCH!\r\n", ch );
@@ -2322,14 +2322,14 @@ void aggr_update( void )
            || ch->fighting
            || IsAffectedBy(ch, AFF_CHARM)
            || !IsAwake(ch)
-           || ( IS_SET(ch->act, ACT_WIMPY) ) )
+           || ( IsBitSet(ch->act, ACT_WIMPY) ) )
 	{
 	  continue;
 	}
 
-      if ( !IS_SET(ch->act, ACT_AGGRESSIVE)
-           || IS_SET(ch->act, ACT_MOUNTED)
-           || IS_SET(ch->in_room->room_flags, ROOM_SAFE ) )
+      if ( !IsBitSet(ch->act, ACT_AGGRESSIVE)
+           || IsBitSet(ch->act, ACT_MOUNTED)
+           || IsBitSet(ch->in_room->room_flags, ROOM_SAFE ) )
 	{
 	  continue;
 	}
@@ -2352,7 +2352,7 @@ void aggr_update( void )
 	      continue;
 	    }
 
-          if ( IS_SET(wch->act, ACT_AGGRESSIVE) )
+          if ( IsBitSet(wch->act, ACT_AGGRESSIVE) )
 	    {
 	      continue;
 	    }
@@ -2370,7 +2370,7 @@ void aggr_update( void )
 	      continue;
 	    }
 
-          if ( IsNpc(ch) && IS_SET(ch->attacks, ATCK_BACKSTAB ) )
+          if ( IsNpc(ch) && IsBitSet(ch->attacks, ATCK_BACKSTAB ) )
             {
               OBJ_DATA *obj = NULL;
 
@@ -2736,7 +2736,7 @@ void remove_portal( OBJ_DATA *portal )
 
   for ( pexit = fromRoom->first_exit; pexit; pexit = pexit->next )
     {
-      if ( IS_SET( pexit->exit_info, EX_PORTAL ) )
+      if ( IsBitSet( pexit->exit_info, EX_PORTAL ) )
 	{
 	  found = true;
 	  break;
@@ -2933,7 +2933,7 @@ void auction_update (void)
           send_to_char(buf, auction->seller);
           auction->item = NULL; /* reset item */
 
-          if ( IS_SET( sysdata.save_flags, SV_AUCTION ) )
+          if ( IsBitSet( sysdata.save_flags, SV_AUCTION ) )
             {
               save_char_obj( auction->buyer );
               save_char_obj( auction->seller );
@@ -2980,7 +2980,7 @@ void auction_update (void)
 	      auction->seller->gold -= tax;
 	    }
 
-          if ( IS_SET( sysdata.save_flags, SV_AUCTION ) )
+          if ( IsBitSet( sysdata.save_flags, SV_AUCTION ) )
 	    {
 	      save_char_obj( auction->seller );
 	    }

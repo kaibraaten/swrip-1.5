@@ -29,7 +29,7 @@ bool spec_guardian( Character *ch )
         }
     }
 
-  if ( victim && IS_SET( ch->in_room->room_flags, ROOM_SAFE ) )
+  if ( victim && IsBitSet( ch->in_room->room_flags, ROOM_SAFE ) )
     {
       sprintf( buf, "%s is a %s!  As well as a COWARD!",
                victim->name, crime );

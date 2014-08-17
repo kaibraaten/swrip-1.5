@@ -15,7 +15,7 @@ void do_name( Character *ch, char *argument )
       return;
     }
 
-  argument[0] = UPPER(argument[0]);
+  argument[0] = CharToUppercase(argument[0]);
 
   if (!check_parse_name(argument))
     {

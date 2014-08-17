@@ -85,11 +85,11 @@ static void decorate_room( Room *room )
           if ( len > 5 && buf[len-1] == '.' )
             {
               strcat( buf, "  " );
-              buf2[0] = UPPER(buf2[0] );
+              buf2[0] = CharToUppercase(buf2[0] );
             }
           else
             if ( len == 0 )
-              buf2[0] = UPPER(buf2[0] );
+              buf2[0] = CharToUppercase(buf2[0] );
           strcat( buf, buf2 );
         }
     }
@@ -265,7 +265,7 @@ short encumbrance( const Character *ch, short move )
  */
 bool will_fall( Character *ch, int fall )
 {
-  if ( IS_SET( ch->in_room->room_flags, ROOM_NOFLOOR )
+  if ( IsBitSet( ch->in_room->room_flags, ROOM_NOFLOOR )
        && CAN_GO(ch, DIR_DOWN)
        && (!IsAffectedBy( ch, AFF_FLYING )
            || ( ch->mount && !IsAffectedBy( ch->mount, AFF_FLYING ) ) ) )
@@ -432,7 +432,7 @@ ch_ret move_char( Character *ch, Exit *pexit, int fall )
   retcode = rNONE;
   txt = NULL;
 
-  if ( IsNpc(ch) && IS_SET( ch->act, ACT_MOUNTED ) )
+  if ( IsNpc(ch) && IsBitSet( ch->act, ACT_MOUNTED ) )
     return retcode;
 
   in_room = ch->in_room;
@@ -453,33 +453,33 @@ ch_ret move_char( Character *ch, Exit *pexit, int fall )
    * Exit is only a "window", there is no way to travel in that direction
    * unless it's a door with a window in it             -Thoric
    */
-  if ( IS_SET( pexit->exit_info, EX_WINDOW )
-       &&  !IS_SET( pexit->exit_info, EX_ISDOOR ) )
+  if ( IsBitSet( pexit->exit_info, EX_WINDOW )
+       &&  !IsBitSet( pexit->exit_info, EX_ISDOOR ) )
     {
       send_to_char( "Alas, you cannot go that way.\r\n", ch );
       return rNONE;
     }
 
-  if (  IS_SET(pexit->exit_info, EX_PORTAL)
+  if (  IsBitSet(pexit->exit_info, EX_PORTAL)
         && IsNpc(ch) )
     {
       act( AT_PLAIN, "Mobs can't use portals.", ch, NULL, NULL, TO_CHAR );
       return rNONE;
     }
 
-  if ( IS_SET(pexit->exit_info, EX_NOMOB)
-       && IsNpc(ch) && !IS_SET(ch->act, ACT_SCAVENGER) )
+  if ( IsBitSet(pexit->exit_info, EX_NOMOB)
+       && IsNpc(ch) && !IsBitSet(ch->act, ACT_SCAVENGER) )
     {
       act( AT_PLAIN, "Mobs can't enter there.", ch, NULL, NULL, TO_CHAR );
       return rNONE;
     }
 
-  if ( IS_SET(pexit->exit_info, EX_CLOSED)
+  if ( IsBitSet(pexit->exit_info, EX_CLOSED)
        && (!IsAffectedBy(ch, AFF_PASS_DOOR)
-           ||   IS_SET(pexit->exit_info, EX_NOPASSDOOR)) )
+           ||   IsBitSet(pexit->exit_info, EX_NOPASSDOOR)) )
     {
-      if ( !IS_SET( pexit->exit_info, EX_SECRET )
-           &&   !IS_SET( pexit->exit_info, EX_DIG ) )
+      if ( !IsBitSet( pexit->exit_info, EX_SECRET )
+           &&   !IsBitSet( pexit->exit_info, EX_DIG ) )
         {
           if ( drunk )
             {
@@ -566,7 +566,7 @@ ch_ret move_char( Character *ch, Exit *pexit, int fall )
 
       if ( in_room->sector_type == SECT_AIR
            ||   to_room->sector_type == SECT_AIR
-           ||   IS_SET( pexit->exit_info, EX_FLY ) )
+           ||   IsBitSet( pexit->exit_info, EX_FLY ) )
         {
           if ( ch->mount && !IsAffectedBy( ch->mount, AFF_FLYING ) )
             {
@@ -624,7 +624,7 @@ ch_ret move_char( Character *ch, Exit *pexit, int fall )
             }
         }
 
-      if ( IS_SET( pexit->exit_info, EX_CLIMB ) )
+      if ( IsBitSet( pexit->exit_info, EX_CLIMB ) )
         {
           bool found;
 
@@ -778,7 +778,7 @@ ch_ret move_char( Character *ch, Exit *pexit, int fall )
   /* check for traps on exit - later */
 
   if ( !IsAffectedBy(ch, AFF_SNEAK)
-       && ( IsNpc(ch) || !IS_SET(ch->act, PLR_WIZINVIS) ) )
+       && ( IsNpc(ch) || !IsBitSet(ch->act, PLR_WIZINVIS) ) )
     {
       if ( fall )
         txt = "falls";
@@ -861,7 +861,7 @@ ch_ret move_char( Character *ch, Exit *pexit, int fall )
 
   char_to_room( ch, to_room );
   if ( !IsAffectedBy(ch, AFF_SNEAK)
-       && ( IsNpc(ch) || !IS_SET(ch->act, PLR_WIZINVIS) ) )
+       && ( IsNpc(ch) || !IsBitSet(ch->act, PLR_WIZINVIS) ) )
     {
       if ( fall )
         txt = "falls";
@@ -985,7 +985,7 @@ ch_ret move_char( Character *ch, Exit *pexit, int fall )
 
   do_look( ch, "auto" );
   if ( brief )
-    SET_BIT( ch->act, PLR_BRIEF );
+    SetBit( ch->act, PLR_BRIEF );
 
 
   /* BIG ugly looping problem here when the character is mptransed back
@@ -1113,7 +1113,7 @@ Exit *find_door( Character *ch, const char *arg, bool quiet )
     {
       for ( pexit = ch->in_room->first_exit; pexit; pexit = pexit->next )
         {
-          if ( (quiet || IS_SET(pexit->exit_info, EX_ISDOOR))
+          if ( (quiet || IsBitSet(pexit->exit_info, EX_ISDOOR))
                && pexit->keyword
                && nifty_is_name( arg, pexit->keyword ) )
 	    {
@@ -1139,13 +1139,13 @@ Exit *find_door( Character *ch, const char *arg, bool quiet )
   if ( quiet )
     return pexit;
 
-  if ( IS_SET(pexit->exit_info, EX_SECRET) )
+  if ( IsBitSet(pexit->exit_info, EX_SECRET) )
     {
       act( AT_PLAIN, "You see no $T here.", ch, NULL, arg, TO_CHAR );
       return NULL;
     }
 
-  if ( !IS_SET(pexit->exit_info, EX_ISDOOR) )
+  if ( !IsBitSet(pexit->exit_info, EX_ISDOOR) )
     {
       send_to_char( "You can't do that.\r\n", ch );
       return NULL;
@@ -1158,33 +1158,33 @@ void toggle_bexit_flag( Exit *pexit, int flag )
 {
   Exit *pexit_rev;
 
-  TOGGLE_BIT(pexit->exit_info, flag);
+  ToggleBit(pexit->exit_info, flag);
 
   if ( (pexit_rev = pexit->rexit) != NULL
        && pexit_rev != pexit )
-    TOGGLE_BIT( pexit_rev->exit_info, flag );
+    ToggleBit( pexit_rev->exit_info, flag );
 }
 
 void set_bexit_flag( Exit *pexit, int flag )
 {
   Exit *pexit_rev;
 
-  SET_BIT(pexit->exit_info, flag);
+  SetBit(pexit->exit_info, flag);
 
   if ( (pexit_rev = pexit->rexit) != NULL
        && pexit_rev != pexit )
-    SET_BIT( pexit_rev->exit_info, flag );
+    SetBit( pexit_rev->exit_info, flag );
 }
 
 void remove_bexit_flag( Exit *pexit, int flag )
 {
   Exit *pexit_rev;
 
-  REMOVE_BIT(pexit->exit_info, flag);
+  RemoveBit(pexit->exit_info, flag);
 
   if ( (pexit_rev = pexit->rexit) != NULL
        && pexit_rev != pexit )
-    REMOVE_BIT( pexit_rev->exit_info, flag );
+    RemoveBit( pexit_rev->exit_info, flag );
 }
 
 bool has_key( const Character *ch, vnum_t key )
@@ -1231,12 +1231,12 @@ void teleport( Character *ch, vnum_t room, int flags )
       return;
     }
 
-  if ( IS_SET( flags, TELE_SHOWDESC ) )
+  if ( IsBitSet( flags, TELE_SHOWDESC ) )
     show = true;
   else
     show = false;
 
-  if ( !IS_SET( flags, TELE_TRANSALL ) )
+  if ( !IsBitSet( flags, TELE_TRANSALL ) )
     {
       teleportch( ch, pRoomIndex, show );
       return;

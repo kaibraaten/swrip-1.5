@@ -9,15 +9,15 @@ void do_reply( Character *ch, char *argument )
   Character *vch = NULL;
   bool sameroom = false;
 
-  REMOVE_BIT( ch->deaf, CHANNEL_TELLS );
+  RemoveBit( ch->deaf, CHANNEL_TELLS );
 
-  if ( IS_SET( ch->in_room->room_flags, ROOM_SILENCE ) )
+  if ( IsBitSet( ch->in_room->room_flags, ROOM_SILENCE ) )
     {
       send_to_char( "You can't do that here.\r\n", ch );
       return;
     }
 
-  if ( !IsNpc(ch) && IS_SET(ch->act, PLR_SILENCE) )
+  if ( !IsNpc(ch) && IsBitSet(ch->act, PLR_SILENCE) )
     {
       send_to_char( "Your message didn't get through.\r\n", ch );
       return;
@@ -41,7 +41,7 @@ void do_reply( Character *ch, char *argument )
       return;
     }
 
-  if ( IS_SET( victim->deaf, CHANNEL_TELLS )
+  if ( IsBitSet( victim->deaf, CHANNEL_TELLS )
        && ( !IsImmortal( ch ) || ( GetTrustLevel( ch ) < GetTrustLevel( victim ) ) ) )
     {
       act( AT_PLAIN, "They can't hear you.", ch, NULL, victim, TO_CHAR );
@@ -49,13 +49,13 @@ void do_reply( Character *ch, char *argument )
     }
 
   if ( ( !IsImmortal(ch) && !IsAwake(victim) )
-       || ( !IsNpc(victim) && IS_SET( victim->in_room->room_flags, ROOM_SILENCE ) ) )
+       || ( !IsNpc(victim) && IsBitSet( victim->in_room->room_flags, ROOM_SILENCE ) ) )
     {
       act( AT_PLAIN, "$E can't hear you.", ch, 0, victim, TO_CHAR );
       return;
     }
 
-  if ( !IsNpc (victim) && ( IS_SET (victim->act, PLR_AFK ) ) )
+  if ( !IsNpc (victim) && ( IsBitSet (victim->act, PLR_AFK ) ) )
     {
       send_to_char( "That player is afk so he may not respond.\r\n", ch );
     }
@@ -82,7 +82,7 @@ void do_reply( Character *ch, char *argument )
   victim->position = position;
   victim->reply = ch;
 
-  if ( IS_SET( ch->in_room->room_flags, ROOM_LOGSPEECH ) )
+  if ( IsBitSet( ch->in_room->room_flags, ROOM_LOGSPEECH ) )
     {
       sprintf( buf, "%s: %s (reply to) %s.",
                IsNpc( ch ) ? ch->short_descr : ch->name,

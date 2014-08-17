@@ -67,7 +67,7 @@ void do_outcast( Character *ch, char *argument )
       victim->speaking = LANG_COMMON;
     }
 
-  REMOVE_BIT( victim->speaks, LANG_CLAN );
+  RemoveBit( victim->speaks, LANG_CLAN );
   --clan->members;
 
   if ( !str_cmp( victim->name, ch->pcdata->clan->leadership.number1 ) )

@@ -898,32 +898,32 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
 
   door = pexit->vdir;
 
-  if ( IS_SET( pexit->exit_info, EX_WINDOW )
-       && !IS_SET( pexit->exit_info, EX_ISDOOR ) )
+  if ( IsBitSet( pexit->exit_info, EX_WINDOW )
+       && !IsBitSet( pexit->exit_info, EX_ISDOOR ) )
     {
       send_to_char( "Alas, you cannot go that way.\r\n", ch );
       return rNONE;
     }
 
-  if ( IS_SET(pexit->exit_info, EX_PORTAL)
+  if ( IsBitSet(pexit->exit_info, EX_PORTAL)
        && IsNpc(ch) )
     {
       act( AT_PLAIN, "Mobs can't use portals.", ch, NULL, NULL, TO_CHAR );
       return rNONE;
     }
 
-  if ( IS_SET(pexit->exit_info, EX_NOMOB)
+  if ( IsBitSet(pexit->exit_info, EX_NOMOB)
        && IsNpc(ch) )
     {
       act( AT_PLAIN, "Mobs can't enter there.", ch, NULL, NULL, TO_CHAR );
       return rNONE;
     }
 
-  if ( IS_SET(pexit->exit_info, EX_CLOSED)
-       && (IS_SET(pexit->exit_info, EX_NOPASSDOOR)) )
+  if ( IsBitSet(pexit->exit_info, EX_CLOSED)
+       && (IsBitSet(pexit->exit_info, EX_NOPASSDOOR)) )
     {
-      if ( !IS_SET( pexit->exit_info, EX_SECRET )
-           &&   !IS_SET( pexit->exit_info, EX_DIG ) )
+      if ( !IsBitSet( pexit->exit_info, EX_SECRET )
+           &&   !IsBitSet( pexit->exit_info, EX_DIG ) )
         {
           if ( drunk )
             {
@@ -996,15 +996,15 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
 
   if ( !fall )
     {
-      if ( IS_SET( to_room->room_flags, ROOM_INDOORS )
-           || IS_SET( to_room->room_flags, ROOM_SPACECRAFT )
+      if ( IsBitSet( to_room->room_flags, ROOM_INDOORS )
+           || IsBitSet( to_room->room_flags, ROOM_SPACECRAFT )
            || to_room->sector_type == SECT_INSIDE )
         {
           send_to_char( "You can't drive indoors!\r\n", ch );
           return rNONE;
         }
 
-      if ( IS_SET( to_room->room_flags, ROOM_NO_DRIVING ) )
+      if ( IsBitSet( to_room->room_flags, ROOM_NO_DRIVING ) )
         {
           send_to_char( "You can't take a vehicle through there!\r\n", ch );
           return rNONE;
@@ -1012,7 +1012,7 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
 
       if ( in_room->sector_type == SECT_AIR
            || to_room->sector_type == SECT_AIR
-           || IS_SET( pexit->exit_info, EX_FLY ) )
+           || IsBitSet( pexit->exit_info, EX_FLY ) )
         {
           if ( ship->sclass > CLOUD_CAR )
             {
@@ -1035,7 +1035,7 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
 
         }
 
-      if ( IS_SET( pexit->exit_info, EX_CLIMB ) )
+      if ( IsBitSet( pexit->exit_info, EX_CLIMB ) )
         {
           if ( ship->sclass < CLOUD_CAR )
             {
@@ -2314,7 +2314,7 @@ static void ReadShip( Ship *ship, FILE *fp )
 	int weapon_state;
       } turret_placeholder[MAX_NUMBER_OF_TURRETS_IN_SHIP];
 
-      switch ( UPPER(word[0]) )
+      switch ( CharToUppercase(word[0]) )
         {
         case '*':
           fMatch = true;

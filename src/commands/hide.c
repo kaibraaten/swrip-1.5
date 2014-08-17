@@ -18,11 +18,11 @@ void do_hide( Character *ch, char *argument )
   send_to_char( "You make an attempt at stealth.\r\n", ch );
 
   if ( IsAffectedBy(ch, AFF_HIDE) )
-    REMOVE_BIT(ch->affected_by, AFF_HIDE);
+    RemoveBit(ch->affected_by, AFF_HIDE);
 
   if ( IsNpc(ch) || number_percent( ) < ch->pcdata->learned[gsn_hide] )
     {
-      SET_BIT(ch->affected_by, AFF_HIDE);
+      SetBit(ch->affected_by, AFF_HIDE);
       learn_from_success( ch, gsn_hide );
     }
   else

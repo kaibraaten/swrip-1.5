@@ -18,7 +18,7 @@ void do_bet(Character *ch, char *argument)
       return;
     }
 
-  if (IS_SET(ch->in_room->room_flags, ROOM_ARENA))
+  if (IsBitSet(ch->in_room->room_flags, ROOM_ARENA))
     {
       send_to_char("Arena players can not make bets.",ch);
       return;
@@ -43,7 +43,7 @@ void do_bet(Character *ch, char *argument)
     send_to_char("No such person exists in the galaxy.", ch);
   else if (ch->betted_on == ch)
     send_to_char("That doesn't make much sense, does it?\r\n", ch);
-  else if(ch->in_room && !(IS_SET(ch->betted_on->in_room->room_flags, ROOM_ARENA)))
+  else if(ch->in_room && !(IsBitSet(ch->betted_on->in_room->room_flags, ROOM_ARENA)))
     send_to_char("Sorry that person is not in the arena.\r\n", ch);
   else
     {

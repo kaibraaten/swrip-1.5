@@ -8,7 +8,7 @@ void do_climb( Character *ch, char *argument )
   if ( argument[0] == '\0' )
     {
       for ( pexit = ch->in_room->first_exit; pexit; pexit = pexit->next )
-        if ( IS_SET( pexit->exit_info, EX_xCLIMB ) )
+        if ( IsBitSet( pexit->exit_info, EX_xCLIMB ) )
           {
             move_char( ch, pexit, 0 );
             return;
@@ -19,7 +19,7 @@ void do_climb( Character *ch, char *argument )
 
   pexit = find_door( ch, argument, true );
 
-  if ( pexit && IS_SET( pexit->exit_info, EX_xCLIMB ) )
+  if ( pexit && IsBitSet( pexit->exit_info, EX_xCLIMB ) )
     {
       move_char( ch, pexit, 0 );
       return;

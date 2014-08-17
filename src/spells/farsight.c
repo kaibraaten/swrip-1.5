@@ -23,10 +23,10 @@ ch_ret spell_farsight( int sn, int level, Character *ch, void *vo )
   if ( ( victim = get_char_world( ch, spell_target_name ) ) == NULL
        ||   victim == ch
        ||   !victim->in_room
-       ||   IS_SET(victim->in_room->room_flags, ROOM_PRIVATE)
-       ||   IS_SET(victim->in_room->room_flags, ROOM_SOLITARY)
-       ||   IS_SET(victim->in_room->room_flags, ROOM_PROTOTYPE)
-       ||       (IsNpc(victim) && IS_SET(victim->act, ACT_PROTOTYPE))
+       ||   IsBitSet(victim->in_room->room_flags, ROOM_PRIVATE)
+       ||   IsBitSet(victim->in_room->room_flags, ROOM_SOLITARY)
+       ||   IsBitSet(victim->in_room->room_flags, ROOM_PROTOTYPE)
+       ||       (IsNpc(victim) && IsBitSet(victim->act, ACT_PROTOTYPE))
        ||  (IsNpc(victim) && saves_spell_staff( level, victim ))
        || saving <= 50 )
     {

@@ -31,11 +31,11 @@ bool spec_auth( Character *ch )
         }
 
       if ( IsNpc(victim)
-           ||   !IS_SET(victim->pcdata->flags, PCFLAG_UNAUTHED) || victim->pcdata->auth_state == 2 )
+           ||   !IsBitSet(victim->pcdata->flags, PCFLAG_UNAUTHED) || victim->pcdata->auth_state == 2 )
         continue;
 
       victim->pcdata->auth_state = 3;
-      REMOVE_BIT(victim->pcdata->flags, PCFLAG_UNAUTHED);
+      RemoveBit(victim->pcdata->flags, PCFLAG_UNAUTHED);
       if ( victim->pcdata->authed_by )
         DISPOSE( victim->pcdata->authed_by );
       victim->pcdata->authed_by = str_dup( ch->name );

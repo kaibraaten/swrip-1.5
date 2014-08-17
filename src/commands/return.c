@@ -12,7 +12,7 @@ void do_return( Character *ch, char *argument )
       return;
     }
 
-  if (IS_SET(ch->act, ACT_POLYMORPHED))
+  if (IsBitSet(ch->act, ACT_POLYMORPHED))
     {
       send_to_char("Use revert to return from a polymorphed mob.\r\n", ch);
       return;
@@ -22,7 +22,7 @@ void do_return( Character *ch, char *argument )
   if ( IsNpc( ch ) && IsAffectedBy( ch, AFF_POSSESS ) )
     {
       affect_strip( ch, gsn_possess );
-      REMOVE_BIT( ch->affected_by, AFF_POSSESS );
+      RemoveBit( ch->affected_by, AFF_POSSESS );
     }
 
   ch->desc->character       = ch->desc->original;

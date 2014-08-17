@@ -83,7 +83,7 @@ void do_goto( Character *ch, char *argument )
         }
 
       if ( ( ch->in_room->vnum < pArea->low_r_vnum || ch->in_room->vnum > pArea->hi_r_vnum )
-	   && !IS_SET(ch->in_room->room_flags , ROOM_HOTEL) )
+	   && !IsBitSet(ch->in_room->room_flags , ROOM_HOTEL) )
         {
           send_to_char( "Builders can only use goto from a hotel or in their zone.\r\n", ch );
           return;
@@ -96,7 +96,7 @@ void do_goto( Character *ch, char *argument )
   if ( ch->fighting )
     stop_fighting( ch, true );
 
-  if ( !IS_SET(ch->act, PLR_WIZINVIS) )
+  if ( !IsBitSet(ch->act, PLR_WIZINVIS) )
     {
       if (ch->pcdata && ch->pcdata->bamfout[0] != '\0')
         act( AT_IMMORT, "$T", ch, NULL, ch->pcdata->bamfout ,  TO_ROOM );
@@ -115,7 +115,7 @@ void do_goto( Character *ch, char *argument )
 
   char_to_room( ch, location );
 
-  if ( !IS_SET(ch->act, PLR_WIZINVIS) )
+  if ( !IsBitSet(ch->act, PLR_WIZINVIS) )
     {
       if (ch->pcdata && ch->pcdata->bamfin[0] != '\0')
         act( AT_IMMORT, "$T", ch, NULL, ch->pcdata->bamfin ,  TO_ROOM );

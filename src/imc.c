@@ -120,8 +120,8 @@ typedef enum
 #define IMC_MSN(ch)           (CH_IMCDATA((ch))->msn)
 #define IMC_COMMENT(ch)       (CH_IMCDATA((ch))->comment)
 #define IMCTELLHISTORY(ch,x)  (CH_IMCDATA((ch))->imc_tellhistory[(x)])
-#define IMCISINVIS(ch)        ( IS_SET( IMCFLAG((ch)), IMC_INVIS ) )
-#define IMCAFK(ch)            ( IS_SET( IMCFLAG((ch)), IMC_AFK ) )
+#define IMCISINVIS(ch)        ( IsBitSet( IMCFLAG((ch)), IMC_INVIS ) )
+#define IMCAFK(ch)            ( IsBitSet( IMCFLAG((ch)), IMC_AFK ) )
 
 #define CH_IMCDATA(ch)           ((ch)->pcdata->imcchardata)
 #define CH_IMCLEVEL(ch)          ((ch)->top_level)
@@ -676,7 +676,7 @@ static const char *color_itom( const char *txt, Character * ch )
    if( !txt || *txt == '\0' )
       return "";
 
-   if( IS_SET( IMCFLAG( ch ), IMC_COLORFLAG ) )
+   if( IsBitSet( IMCFLAG( ch ), IMC_COLORFLAG ) )
    {
       strncpy( tbuf, txt, LGST );
       for( color = first_imc_color; color; color = color->next )
@@ -1733,7 +1733,7 @@ PFUN( imc_recv_tell )
          return;
       }
 
-      if( IS_SET( IMCFLAG( vic ), IMC_TELL ) || IS_SET( IMCFLAG( vic ), IMC_DENYTELL ) )
+      if( IsBitSet( IMCFLAG( vic ), IMC_TELL ) || IsBitSet( IMCFLAG( vic ), IMC_DENYTELL ) )
       {
          if( strcasecmp( imc_nameof( q->from ), "*" ) )
          {
@@ -1823,7 +1823,7 @@ static void update_imchistory( IMC_CHANNEL * channel, const char *message )
                    local->tm_mon + 1, local->tm_mday, local->tm_hour, local->tm_min, msg );
          channel->history[x] = IMCSTRALLOC( buf );
 
-         if( IS_SET( channel->flags, IMCCHAN_LOG ) )
+         if( IsBitSet( channel->flags, IMCCHAN_LOG ) )
          {
             FILE *fp;
             snprintf( buf, LGST, "%s%s.log", IMC_DIR, channel->local_name );
@@ -1862,7 +1862,7 @@ static void update_imchistory( IMC_CHANNEL * channel, const char *message )
          IMCSTRFREE( channel->history[x] );
          channel->history[x] = IMCSTRALLOC( buf );
 
-         if( IS_SET( channel->flags, IMCCHAN_LOG ) )
+         if( IsBitSet( channel->flags, IMCCHAN_LOG ) )
          {
             FILE *fp;
             snprintf( buf, LGST, "%s%s.log", IMC_DIR, channel->local_name );
@@ -2428,7 +2428,7 @@ static void imc_process_finger( const char *from, const char *type )
              imcperm_names[IMCPERM( victim )],
              ( IMC_LISTEN( victim ) && IMC_LISTEN( victim )[0] != '\0' ) ? IMC_LISTEN( victim ) : "None" );
 
-   if( !IS_SET( IMCFLAG( victim ), IMC_PRIVACY ) )
+   if( !IsBitSet( IMCFLAG( victim ), IMC_PRIVACY ) )
       snprintf( buf + strlen( buf ), IMC_BUFF_SIZE - strlen( buf ),
                 "~cEmail   : ~W%s\r\n"
                 "~cHomepage: ~W%s\r\n"
@@ -2564,7 +2564,7 @@ PFUN( imc_recv_beep )
       return;
    }
 
-   if( IS_SET( IMCFLAG( vic ), IMC_BEEP ) || IS_SET( IMCFLAG( vic ), IMC_DENYBEEP ) )
+   if( IsBitSet( IMCFLAG( vic ), IMC_BEEP ) || IsBitSet( IMCFLAG( vic ), IMC_DENYBEEP ) )
    {
       if( strcasecmp( imc_nameof( q->from ), "*" ) )
       {
@@ -3491,7 +3491,7 @@ static void imc_adjust_perms( Character * ch )
     * * course comes at the cost of forgetting you may have done so and caused the override flag to be set, but hey.
     * * This isn't a perfect system and never will be. Samson 2-8-04.
     */
-   if( !IS_SET( IMCFLAG( ch ), IMC_PERMOVERRIDE ) )
+   if( !IsBitSet( IMCFLAG( ch ), IMC_PERMOVERRIDE ) )
    {
       if( CH_IMCLEVEL( ch ) < this_imcmud->minlevel )
          IMCPERM( ch ) = IMCPERM_NONE;
@@ -3535,7 +3535,7 @@ static void imc_char_login( Character * ch )
       return;
 
    imc_ucache_update( buf, sex );
-   if( !IS_SET( IMCFLAG( ch ), IMC_INVIS ) )
+   if( !IsBitSet( IMCFLAG( ch ), IMC_INVIS ) )
       imc_send_ucache_update( CH_IMCNAME( ch ), sex );
 }
 
@@ -3714,7 +3714,7 @@ void imc_initchar( Character * ch )
    IMC_MSN( ch ) = NULL;
    IMC_COMMENT( ch ) = NULL;
    IMCFLAG( ch ) = 0;
-   SET_BIT( IMCFLAG( ch ), IMC_COLORFLAG );
+   SetBit( IMCFLAG( ch ), IMC_COLORFLAG );
    FIRST_IMCIGNORE( ch ) = NULL;
    LAST_IMCIGNORE( ch ) = NULL;
    IMCPERM( ch ) = IMCPERM_NOTSET;
@@ -5729,7 +5729,7 @@ IMC_CMD( imctell )
 {
    char buf[LGST], buf1[LGST];
 
-   if( IS_SET( IMCFLAG( ch ), IMC_DENYTELL ) )
+   if( IsBitSet( IMCFLAG( ch ), IMC_DENYTELL ) )
    {
       imc_to_char( "You are not authorized to use imctell.\r\n", ch );
       return;
@@ -5756,19 +5756,19 @@ IMC_CMD( imctell )
 
    if( !strcasecmp( argument, "on" ) )
    {
-      REMOVE_BIT( IMCFLAG( ch ), IMC_TELL );
+      RemoveBit( IMCFLAG( ch ), IMC_TELL );
       imc_to_char( "You now send and receive imctells.\r\n", ch );
       return;
    }
 
    if( !strcasecmp( argument, "off" ) )
    {
-      SET_BIT( IMCFLAG( ch ), IMC_TELL );
+      SetBit( IMCFLAG( ch ), IMC_TELL );
       imc_to_char( "You no longer send and receive imctells.\r\n", ch );
       return;
    }
 
-   if( IS_SET( IMCFLAG( ch ), IMC_TELL ) )
+   if( IsBitSet( IMCFLAG( ch ), IMC_TELL ) )
    {
       imc_to_char( "You have imctells turned off.\r\n", ch );
       return;
@@ -5829,13 +5829,13 @@ IMC_CMD( imcreply )
    /*
     * just check for deny 
     */
-   if( IS_SET( IMCFLAG( ch ), IMC_DENYTELL ) )
+   if( IsBitSet( IMCFLAG( ch ), IMC_DENYTELL ) )
    {
       imc_to_char( "You are not authorized to use imcreply.\r\n", ch );
       return;
    }
 
-   if( IS_SET( IMCFLAG( ch ), IMC_TELL ) )
+   if( IsBitSet( IMCFLAG( ch ), IMC_TELL ) )
    {
       imc_to_char( "You have imctells turned off.\r\n", ch );
       return;
@@ -5944,7 +5944,7 @@ IMC_CMD( imcfinger )
 {
    char name[LGST], arg[SMST];
 
-   if( IS_SET( IMCFLAG( ch ), IMC_DENYFINGER ) )
+   if( IsBitSet( IMCFLAG( ch ), IMC_DENYFINGER ) )
    {
       imc_to_char( "You are not authorized to use imcfinger.\r\n", ch );
       return;
@@ -5973,20 +5973,20 @@ IMC_CMD( imcfinger )
       imc_printf( ch, "~GMSN     : ~g%s\r\n", ( IMC_MSN( ch ) && IMC_MSN( ch )[0] != '\0' ) ? IMC_MSN( ch ) : "None" );
       imc_printf( ch, "~GComment : ~g%s\r\n",
                   ( IMC_COMMENT( ch ) && IMC_COMMENT( ch )[0] != '\0' ) ? IMC_COMMENT( ch ) : "None" );
-      imc_printf( ch, "~GPrivacy : ~g%s\r\n", IS_SET( IMCFLAG( ch ), IMC_PRIVACY ) ? "Enabled" : "Disabled" );
+      imc_printf( ch, "~GPrivacy : ~g%s\r\n", IsBitSet( IMCFLAG( ch ), IMC_PRIVACY ) ? "Enabled" : "Disabled" );
       return;
    }
 
    if( !strcasecmp( arg, "privacy" ) )
    {
-      if( IS_SET( IMCFLAG( ch ), IMC_PRIVACY ) )
+      if( IsBitSet( IMCFLAG( ch ), IMC_PRIVACY ) )
       {
-         REMOVE_BIT( IMCFLAG( ch ), IMC_PRIVACY );
+         RemoveBit( IMCFLAG( ch ), IMC_PRIVACY );
          imc_to_char( "Privacy flag removed. Your information will now be visible on imcfinger.\r\n", ch );
       }
       else
       {
-         SET_BIT( IMCFLAG( ch ), IMC_PRIVACY );
+         SetBit( IMCFLAG( ch ), IMC_PRIVACY );
          imc_to_char( "Privacy flag enabled. Your information will no longer be visible on imcfinger.\r\n", ch );
       }
       return;
@@ -6087,7 +6087,7 @@ IMC_CMD( imcinfo )
 
 IMC_CMD( imcbeep )
 {
-   if( IS_SET( IMCFLAG( ch ), IMC_DENYBEEP ) )
+   if( IsBitSet( IMCFLAG( ch ), IMC_DENYBEEP ) )
    {
       imc_to_char( "You are not authorized to use imcbeep.\r\n", ch );
       return;
@@ -6102,19 +6102,19 @@ IMC_CMD( imcbeep )
 
    if( !strcasecmp( argument, "on" ) )
    {
-      REMOVE_BIT( IMCFLAG( ch ), IMC_BEEP );
+      RemoveBit( IMCFLAG( ch ), IMC_BEEP );
       imc_to_char( "You now send and receive imcbeeps.\r\n", ch );
       return;
    }
 
    if( !strcasecmp( argument, "off" ) )
    {
-      SET_BIT( IMCFLAG( ch ), IMC_BEEP );
+      SetBit( IMCFLAG( ch ), IMC_BEEP );
       imc_to_char( "You no longer send and receive imcbeeps.\r\n", ch );
       return;
    }
 
-   if( IS_SET( IMCFLAG( ch ), IMC_BEEP ) )
+   if( IsBitSet( IMCFLAG( ch ), IMC_BEEP ) )
    {
       imc_to_char( "You have imcbeep turned off.\r\n", ch );
       return;
@@ -6635,39 +6635,39 @@ IMC_CMD( imc_deny_channel )
 
    if( !strcasecmp( argument, "tell" ) )
    {
-      if( !IS_SET( IMCFLAG( victim ), IMC_DENYTELL ) )
+      if( !IsBitSet( IMCFLAG( victim ), IMC_DENYTELL ) )
       {
-         SET_BIT( IMCFLAG( victim ), IMC_DENYTELL );
+         SetBit( IMCFLAG( victim ), IMC_DENYTELL );
          imc_printf( ch, "%s can no longer use imctells.\r\n", CH_IMCNAME( victim ) );
          return;
       }
-      REMOVE_BIT( IMCFLAG( victim ), IMC_DENYTELL );
+      RemoveBit( IMCFLAG( victim ), IMC_DENYTELL );
       imc_printf( ch, "%s can use imctells again.\r\n", CH_IMCNAME( victim ) );
       return;
    }
 
    if( !strcasecmp( argument, "beep" ) )
    {
-      if( !IS_SET( IMCFLAG( victim ), IMC_DENYBEEP ) )
+      if( !IsBitSet( IMCFLAG( victim ), IMC_DENYBEEP ) )
       {
-         SET_BIT( IMCFLAG( victim ), IMC_DENYBEEP );
+         SetBit( IMCFLAG( victim ), IMC_DENYBEEP );
          imc_printf( ch, "%s can no longer use imcbeeps.\r\n", CH_IMCNAME( victim ) );
          return;
       }
-      REMOVE_BIT( IMCFLAG( victim ), IMC_DENYBEEP );
+      RemoveBit( IMCFLAG( victim ), IMC_DENYBEEP );
       imc_printf( ch, "%s can use imcbeeps again.\r\n", CH_IMCNAME( victim ) );
       return;
    }
 
    if( !strcasecmp( argument, "finger" ) )
    {
-      if( !IS_SET( IMCFLAG( victim ), IMC_DENYFINGER ) )
+      if( !IsBitSet( IMCFLAG( victim ), IMC_DENYFINGER ) )
       {
-         SET_BIT( IMCFLAG( victim ), IMC_DENYFINGER );
+         SetBit( IMCFLAG( victim ), IMC_DENYFINGER );
          imc_printf( ch, "%s can no longer use imcfingers.\r\n", CH_IMCNAME( victim ) );
          return;
       }
-      REMOVE_BIT( IMCFLAG( victim ), IMC_DENYFINGER );
+      RemoveBit( IMCFLAG( victim ), IMC_DENYFINGER );
       imc_printf( ch, "%s can use imcfingers again.\r\n", CH_IMCNAME( victim ) );
       return;
    }
@@ -6717,7 +6717,7 @@ IMC_CMD( imcpermstats )
 
    imc_printf( ch, "~GPermissions for %s: %s\r\n", CH_IMCNAME( victim ), imcperm_names[IMCPERM( victim )] );
    imc_printf( ch, "~gThese permissions were obtained %s.\r\n",
-               IS_SET( IMCFLAG( victim ), IMC_PERMOVERRIDE ) ? "manually via imcpermset" : "automatically by level" );
+               IsBitSet( IMCFLAG( victim ), IMC_PERMOVERRIDE ) ? "manually via imcpermset" : "automatically by level" );
 }
 
 IMC_CMD( imcpermset )
@@ -6762,13 +6762,13 @@ IMC_CMD( imcpermset )
 
    if( permvalue == -1 )
    {
-      REMOVE_BIT( IMCFLAG( victim ), IMC_PERMOVERRIDE );
+      RemoveBit( IMCFLAG( victim ), IMC_PERMOVERRIDE );
       imc_printf( ch, "~YPermission flag override has been removed from %s\r\n", CH_IMCNAME( victim ) );
       return;
    }
 
    IMCPERM( victim ) = permvalue;
-   SET_BIT( IMCFLAG( victim ), IMC_PERMOVERRIDE );
+   SetBit( IMCFLAG( victim ), IMC_PERMOVERRIDE );
 
    imc_printf( ch, "~YPermission level for %s has been changed to %s\r\n", CH_IMCNAME( victim ), imcperm_names[permvalue] );
    /*
@@ -6802,14 +6802,14 @@ IMC_CMD( imcpermset )
 
 IMC_CMD( imcinvis )
 {
-   if( IS_SET( IMCFLAG( ch ), IMC_INVIS ) )
+   if( IsBitSet( IMCFLAG( ch ), IMC_INVIS ) )
    {
-      REMOVE_BIT( IMCFLAG( ch ), IMC_INVIS );
+      RemoveBit( IMCFLAG( ch ), IMC_INVIS );
       imc_to_char( "You are now imcvisible.\r\n", ch );
    }
    else
    {
-      SET_BIT( IMCFLAG( ch ), IMC_INVIS );
+      SetBit( IMCFLAG( ch ), IMC_INVIS );
       imc_to_char( "You are now imcinvisible.\r\n", ch );
    }
 }
@@ -6968,28 +6968,28 @@ IMC_CMD( imchelp )
 
 IMC_CMD( imccolor )
 {
-   if( IS_SET( IMCFLAG( ch ), IMC_COLORFLAG ) )
+   if( IsBitSet( IMCFLAG( ch ), IMC_COLORFLAG ) )
    {
-      REMOVE_BIT( IMCFLAG( ch ), IMC_COLORFLAG );
+      RemoveBit( IMCFLAG( ch ), IMC_COLORFLAG );
       imc_to_char( "IMC2 color is now off.\r\n", ch );
    }
    else
    {
-      SET_BIT( IMCFLAG( ch ), IMC_COLORFLAG );
+      SetBit( IMCFLAG( ch ), IMC_COLORFLAG );
       imc_to_char( "~RIMC2 c~Yo~Gl~Bo~Pr ~Ris now on. Enjoy :)\r\n", ch );
    }
 }
 
 IMC_CMD( imcafk )
 {
-   if( IS_SET( IMCFLAG( ch ), IMC_AFK ) )
+   if( IsBitSet( IMCFLAG( ch ), IMC_AFK ) )
    {
-      REMOVE_BIT( IMCFLAG( ch ), IMC_AFK );
+      RemoveBit( IMCFLAG( ch ), IMC_AFK );
       imc_to_char( "You are no longer AFK to IMC2.\r\n", ch );
    }
    else
    {
-      SET_BIT( IMCFLAG( ch ), IMC_AFK );
+      SetBit( IMCFLAG( ch ), IMC_AFK );
       imc_to_char( "You are now AFK to IMC2.\r\n", ch );
    }
 }
@@ -7531,7 +7531,7 @@ static char *imc_act_string( const char *format, Character * ch, Character * vic
    point++;
    *point = '\0';
 
-   buf[0] = UPPER( buf[0] );
+   buf[0] = CharToUppercase( buf[0] );
    return buf;
 }
 
@@ -7901,15 +7901,15 @@ bool imc_command_hook( Character * ch, const char *command, const char *argument
 
    if( IMCPERM( ch ) >= IMCPERM_ADMIN && !strcasecmp( argument, "log" ) )
    {
-      if( !IS_SET( c->flags, IMCCHAN_LOG ) )
+      if( !IsBitSet( c->flags, IMCCHAN_LOG ) )
       {
-         SET_BIT( c->flags, IMCCHAN_LOG );
+         SetBit( c->flags, IMCCHAN_LOG );
          imc_printf( ch, "~RFile logging enabled for %s, PLEASE don't forget to undo this when it isn't needed!\r\n",
                      c->local_name );
       }
       else
       {
-         REMOVE_BIT( c->flags, IMCCHAN_LOG );
+         RemoveBit( c->flags, IMCCHAN_LOG );
          imc_printf( ch, "~GFile logging disabled for %s.\r\n", c->local_name );
       }
       imc_save_channels(  );

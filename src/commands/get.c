@@ -60,7 +60,7 @@ void do_get( Character *ch, char *argument )
       return;
     }
 
-  if ( ch->in_room && IS_SET(ch->in_room->room_flags, ROOM_PLR_HOME)
+  if ( ch->in_room && IsBitSet(ch->in_room->room_flags, ROOM_PLR_HOME)
        && GetTrustLevel(ch) < LEVEL_SUB_IMPLEM )
     {
       if ( !ch->plr_home || ch->plr_home->vnum != ch->in_room->vnum )
@@ -103,14 +103,14 @@ void do_get( Character *ch, char *argument )
           if ( char_died(ch) )
             return;
 
-          if ( IS_SET( sysdata.save_flags, SV_GET ) )
+          if ( IsBitSet( sysdata.save_flags, SV_GET ) )
             {
               save_char_obj( ch );
 
-              if( IS_SET( ch->in_room->room_flags, ROOM_PLR_HOME ) )
+              if( IsBitSet( ch->in_room->room_flags, ROOM_PLR_HOME ) )
                 save_home (ch );
 
-              if ( IS_SET( ch->in_room->room_flags, ROOM_CLANSTOREROOM ) )
+              if ( IsBitSet( ch->in_room->room_flags, ROOM_CLANSTOREROOM ) )
                 save_storeroom( ch->in_room );
 	    }
         }
@@ -120,7 +120,7 @@ void do_get( Character *ch, char *argument )
           bool fAll = false;
           const char *chk = NULL;
 
-          if ( IS_SET( ch->in_room->room_flags, ROOM_DONATION ) )
+          if ( IsBitSet( ch->in_room->room_flags, ROOM_DONATION ) )
             {
               send_to_char( "The gods frown upon such a display of greed!\r\n", ch );
               return;
@@ -157,15 +157,15 @@ void do_get( Character *ch, char *argument )
                        || ch->carry_weight >= GetCarryCapacityWeight( ch )
                        || (number && cnt >= number) )
                     {
-                      if ( IS_SET(sysdata.save_flags, SV_GET)
+                      if ( IsBitSet(sysdata.save_flags, SV_GET)
                            &&  !char_died(ch) )
                         {
                           save_char_obj( ch );
 
-                          if( IS_SET( ch->in_room->room_flags, ROOM_PLR_HOME ) )
+                          if( IsBitSet( ch->in_room->room_flags, ROOM_PLR_HOME ) )
                             save_home (ch );
 
-			  if ( IS_SET( ch->in_room->room_flags, ROOM_CLANSTOREROOM ) )
+			  if ( IsBitSet( ch->in_room->room_flags, ROOM_CLANSTOREROOM ) )
                             save_storeroom( ch->in_room );
                         }
 
@@ -181,14 +181,14 @@ void do_get( Character *ch, char *argument )
               else
                 act( AT_PLAIN, "I see no $T here.", ch, NULL, chk, TO_CHAR );
             }
-          else if ( IS_SET( sysdata.save_flags, SV_GET ) )
+          else if ( IsBitSet( sysdata.save_flags, SV_GET ) )
 	    {
 	      save_char_obj( ch );
 
-	      if( IS_SET( ch->in_room->room_flags, ROOM_PLR_HOME ) )
+	      if( IsBitSet( ch->in_room->room_flags, ROOM_PLR_HOME ) )
 		save_home (ch );
 
-	      if ( IS_SET( ch->in_room->room_flags, ROOM_CLANSTOREROOM ) )
+	      if ( IsBitSet( ch->in_room->room_flags, ROOM_CLANSTOREROOM ) )
 		save_storeroom( ch->in_room );
 	    }
         }
@@ -233,7 +233,7 @@ void do_get( Character *ch, char *argument )
         }
 
       if ( !IS_OBJ_STAT(container, ITEM_COVERING )
-           &&    IS_SET(container->value[1], CONT_CLOSED) )
+           &&    IsBitSet(container->value[1], CONT_CLOSED) )
         {
           act( AT_PLAIN, "The $d is closed.", ch, NULL, container->name, TO_CHAR );
           return;
@@ -258,12 +258,12 @@ void do_get( Character *ch, char *argument )
           check_for_trap( ch, container, TRAP_GET );
           if ( char_died(ch) )
             return;
-          if ( IS_SET( sysdata.save_flags, SV_GET ) )
+          if ( IsBitSet( sysdata.save_flags, SV_GET ) )
             {
 	      save_char_obj( ch );
-              if( IS_SET( ch->in_room->room_flags, ROOM_PLR_HOME ) )
+              if( IsBitSet( ch->in_room->room_flags, ROOM_PLR_HOME ) )
                 save_home (ch );
-              if ( IS_SET( ch->in_room->room_flags, ROOM_CLANSTOREROOM ) )
+              if ( IsBitSet( ch->in_room->room_flags, ROOM_CLANSTOREROOM ) )
                 save_storeroom( ch->in_room );
             }
         }
@@ -328,12 +328,12 @@ void do_get( Character *ch, char *argument )
             check_for_trap( ch, container, TRAP_GET );
           if ( char_died(ch) )
             return;
-          if ( found && IS_SET( sysdata.save_flags, SV_GET ) )
+          if ( found && IsBitSet( sysdata.save_flags, SV_GET ) )
             {
               save_char_obj( ch );
-              if( IS_SET( ch->in_room->room_flags, ROOM_PLR_HOME ) )
+              if( IsBitSet( ch->in_room->room_flags, ROOM_PLR_HOME ) )
                 save_home (ch );
-              if ( IS_SET( ch->in_room->room_flags, ROOM_CLANSTOREROOM ) )
+              if ( IsBitSet( ch->in_room->room_flags, ROOM_CLANSTOREROOM ) )
                 save_storeroom( ch->in_room );
             }
         }
@@ -396,7 +396,7 @@ static void get_obj( Character *ch, OBJ_DATA *obj, OBJ_DATA *container )
     }
 
   /* Clan storeroom checks */
-  if ( IS_SET(ch->in_room->room_flags, ROOM_CLANSTOREROOM)
+  if ( IsBitSet(ch->in_room->room_flags, ROOM_CLANSTOREROOM)
        && (!container || container->carried_by == NULL) )
     for ( clan = first_clan; clan; clan = clan->next )
       if ( clan->storeroom == ch->in_room->vnum )

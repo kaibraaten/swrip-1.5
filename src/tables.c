@@ -1247,7 +1247,7 @@ SKILLTYPE *fread_skill( FILE *fp )
       const char *word = feof( fp ) ? "End" : fread_word( fp );
       bool fMatch = false;
 
-      switch ( UPPER(word[0]) )
+      switch ( CharToUppercase(word[0]) )
         {
         case '*':
           fMatch = true;
@@ -1526,7 +1526,7 @@ void fread_social( FILE *fp )
       const char *word = feof( fp ) ? "End" : fread_word( fp );
       bool fMatch = false;
 
-      switch ( UPPER(word[0]) )
+      switch ( CharToUppercase(word[0]) )
         {
         case '*':
           fMatch = true;
@@ -1646,7 +1646,7 @@ void fread_command( FILE *fp )
       const char *word = feof( fp ) ? "End" : fread_word( fp );
       bool fMatch = false;
 
-      switch ( UPPER(word[0]) )
+      switch ( CharToUppercase(word[0]) )
         {
         case '*':
           fMatch = true;

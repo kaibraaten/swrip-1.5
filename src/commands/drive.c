@@ -62,7 +62,7 @@ void do_drive( Character *ch, char *argument )
           return;
         }
 
-      if ( IS_SET( target->in_room->room_flags, ROOM_INDOORS )
+      if ( IsBitSet( target->in_room->room_flags, ROOM_INDOORS )
            || target->in_room->sector_type == SECT_INSIDE )
         {
           send_to_char( "You can't drive indoors!\r\n", ch );
@@ -103,7 +103,7 @@ void do_drive( Character *ch, char *argument )
           return;
         }
 
-      if ( IS_SET( target->in_room->room_flags, ROOM_INDOORS )
+      if ( IsBitSet( target->in_room->room_flags, ROOM_INDOORS )
            || target->in_room->sector_type == SECT_INSIDE )
         {
           send_to_char( "You can't drive indoors!\r\n", ch );

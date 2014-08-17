@@ -53,13 +53,13 @@ void do_pick( Character *ch, char *argument )
       /*        Room *to_room; */ /* Unused */
       Exit *pexit_rev;
 
-      if ( !IS_SET(pexit->exit_info, EX_CLOSED) )
+      if ( !IsBitSet(pexit->exit_info, EX_CLOSED) )
         { send_to_char( "It's not closed.\r\n",        ch ); return; }
       if ( pexit->key < 0 )
         { send_to_char( "It can't be picked.\r\n",     ch ); return; }
-      if ( !IS_SET(pexit->exit_info, EX_LOCKED) )
+      if ( !IsBitSet(pexit->exit_info, EX_LOCKED) )
         { send_to_char( "It's already unlocked.\r\n",  ch ); return; }
-      if ( IS_SET(pexit->exit_info, EX_PICKPROOF) )
+      if ( IsBitSet(pexit->exit_info, EX_PICKPROOF) )
         {
           send_to_char( "You failed.\r\n", ch );
           learn_from_failure( ch, gsn_pick_lock );
@@ -74,7 +74,7 @@ void do_pick( Character *ch, char *argument )
 	  return;
         }
 
-      REMOVE_BIT(pexit->exit_info, EX_LOCKED);
+      RemoveBit(pexit->exit_info, EX_LOCKED);
       send_to_char( "*Click*\r\n", ch );
       act( AT_ACTION, "$n picks the $d.", ch, NULL, pexit->keyword, TO_ROOM );
       learn_from_success( ch, gsn_pick_lock );
@@ -82,7 +82,7 @@ void do_pick( Character *ch, char *argument )
       if ( ( pexit_rev = pexit->rexit ) != NULL
            &&   pexit_rev->to_room == ch->in_room )
         {
-          REMOVE_BIT( pexit_rev->exit_info, EX_LOCKED );
+          RemoveBit( pexit_rev->exit_info, EX_LOCKED );
         }
       check_room_for_traps( ch, TRAP_PICK | trap_door[pexit->vdir] );
       return;
@@ -92,13 +92,13 @@ void do_pick( Character *ch, char *argument )
     {
       if ( obj->item_type != ITEM_CONTAINER )
         { send_to_char( "You can't pick that.\r\n", ch ); return; }
-      if ( !IS_SET(obj->value[1], CONT_CLOSED) )
+      if ( !IsBitSet(obj->value[1], CONT_CLOSED) )
         { send_to_char( "It's not closed.\r\n",        ch ); return; }
       if ( obj->value[2] < 0 )
         { send_to_char( "It can't be unlocked.\r\n",   ch ); return; }
-      if ( !IS_SET(obj->value[1], CONT_LOCKED) )
+      if ( !IsBitSet(obj->value[1], CONT_LOCKED) )
         { send_to_char( "It's already unlocked.\r\n",  ch ); return; }
-      if ( IS_SET(obj->value[1], CONT_PICKPROOF) )
+      if ( IsBitSet(obj->value[1], CONT_PICKPROOF) )
         {
           send_to_char( "You failed.\r\n", ch );
           learn_from_failure( ch, gsn_pick_lock );
@@ -114,7 +114,7 @@ void do_pick( Character *ch, char *argument )
         }
 
       separate_obj( obj );
-      REMOVE_BIT(obj->value[1], CONT_LOCKED);
+      RemoveBit(obj->value[1], CONT_LOCKED);
       send_to_char( "*Click*\r\n", ch );
       act( AT_ACTION, "$n picks $p.", ch, obj, NULL, TO_ROOM );
       learn_from_success( ch, gsn_pick_lock );
@@ -162,15 +162,15 @@ void do_pick( Character *ch, char *argument )
                 continue;
 
 	      if ( !IsNpc( victim ) && victim->switched
-                   && !IS_SET(victim->switched->act, ACT_POLYMORPHED)
+                   && !IsBitSet(victim->switched->act, ACT_POLYMORPHED)
                    && !IsAffectedBy(victim->switched, AFF_POSSESS) )
                 continue;
               else if ( !IsNpc( victim ) && victim->switched
-                        && (IS_SET(victim->switched->act, ACT_POLYMORPHED)
+                        && (IsBitSet(victim->switched->act, ACT_POLYMORPHED)
                             || IsAffectedBy(victim->switched, AFF_POSSESS) ) )
                 victim = victim->switched;
 
-              if ( !IsAwake(victim) || IS_SET(victim->in_room->room_flags,ROOM_SILENCE) )
+              if ( !IsAwake(victim) || IsBitSet(victim->in_room->room_flags,ROOM_SILENCE) )
                 continue;
 
               if ( d->connection_state == CON_EDITING )
@@ -206,15 +206,15 @@ void do_pick( Character *ch, char *argument )
                 continue;
 
               if ( !IsNpc( victim ) && victim->switched
-		   && !IS_SET(victim->switched->act, ACT_POLYMORPHED)
+		   && !IsBitSet(victim->switched->act, ACT_POLYMORPHED)
                    && !IsAffectedBy(victim->switched, AFF_POSSESS) )
                 continue;
               else if ( !IsNpc( victim ) && victim->switched
-                        && (IS_SET(victim->switched->act, ACT_POLYMORPHED)
+                        && (IsBitSet(victim->switched->act, ACT_POLYMORPHED)
                             || IsAffectedBy(victim->switched, AFF_POSSESS) ) )
                 victim = victim->switched;
 
-              if ( !IsAwake(victim) || IS_SET(victim->in_room->room_flags,ROOM_SILENCE) )
+              if ( !IsAwake(victim) || IsBitSet(victim->in_room->room_flags,ROOM_SILENCE) )
                 continue;
 
               if ( d->connection_state == CON_EDITING )

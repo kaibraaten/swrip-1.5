@@ -18,7 +18,7 @@ void do_loadup( Character *ch, char *argument )
       return;
     }
 
-  name[0] = UPPER(name[0]);
+  name[0] = CharToUppercase(name[0]);
 
   sprintf( fname, "%s%c/%s", PLAYER_DIR, tolower(name[0]),
            capitalize( name ) );

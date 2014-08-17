@@ -49,9 +49,9 @@ void do_scan( Character *ch, char *argument )
 
   for ( dist = 1; dist <= max_dist; )
     {
-      if ( IS_SET( pexit->exit_info, EX_CLOSED ) )
+      if ( IsBitSet( pexit->exit_info, EX_CLOSED ) )
         {
-          if ( IS_SET( pexit->exit_info, EX_SECRET ) )
+          if ( IsBitSet( pexit->exit_info, EX_SECRET ) )
             act( AT_GREY, "Your view $t is blocked by a wall.", ch,
                  get_dir_name(dir), NULL, TO_CHAR );
           else

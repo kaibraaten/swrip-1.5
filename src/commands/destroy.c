@@ -71,7 +71,7 @@ void do_destroy( Character *ch, char *argument )
         if ( !str_cmp( pArea->filename, buf2 ) )
           {
             sprintf( buf, "%s%s", BUILD_DIR, buf2 );
-            if ( IS_SET( pArea->status, AREA_LOADED ) )
+            if ( IsBitSet( pArea->status, AREA_LOADED ) )
 	      fold_area( pArea, buf, false );
             close_area( pArea );
             sprintf( buf2, "%s.bak", buf );

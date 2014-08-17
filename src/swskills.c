@@ -89,7 +89,7 @@ void add_reinforcements( Character *ch )
 	    }
 
           add_follower( mob[mob_cnt], ch );
-          SET_BIT( mob[mob_cnt]->affected_by, AFF_CHARM );
+          SetBit( mob[mob_cnt]->affected_by, AFF_CHARM );
           do_setblaster( mob[mob_cnt] , "full" );
         }
     }

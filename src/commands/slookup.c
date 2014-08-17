@@ -152,7 +152,7 @@ void do_slookup( Character *ch, char *argument )
 
                 strcat( buf, " applies" );
                 for ( x = 0; x < 32; x++ )
-                  if ( IS_SET(aff->bitvector, 1 << x) )
+                  if ( IsBitSet(aff->bitvector, 1 << x) )
                     {
                       strcat( buf, " " );
                       strcat( buf, affected_flags[x] );

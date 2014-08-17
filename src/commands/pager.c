@@ -12,7 +12,7 @@ void do_pager( Character *ch, char *argument )
 
   if ( !*arg )
     {
-      if ( IS_SET(ch->pcdata->flags, PCFLAG_PAGERON) )
+      if ( IsBitSet(ch->pcdata->flags, PCFLAG_PAGERON) )
         do_config(ch, "-pager");
       else
         do_config(ch, "+pager");

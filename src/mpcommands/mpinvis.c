@@ -41,15 +41,15 @@ void do_mpinvis( Character *ch, char *argument )
   if ( ch->mobinvis < 2 )
     ch->mobinvis = ch->top_level;
 
-  if ( IS_SET(ch->act, ACT_MOBINVIS) )
+  if ( IsBitSet(ch->act, ACT_MOBINVIS) )
     {
-      REMOVE_BIT(ch->act, ACT_MOBINVIS);
+      RemoveBit(ch->act, ACT_MOBINVIS);
       act(AT_IMMORT, "$n slowly fades into existence.", ch, NULL, NULL,TO_ROOM );
       send_to_char( "You slowly fade back into existence.\r\n", ch );
     }
   else
     {
-      SET_BIT(ch->act, ACT_MOBINVIS);
+      SetBit(ch->act, ACT_MOBINVIS);
       act( AT_IMMORT, "$n slowly fades into thin air.", ch, NULL, NULL, TO_ROOM );
       send_to_char( "You slowly vanish into thin air.\r\n", ch );
     }

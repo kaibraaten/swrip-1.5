@@ -30,7 +30,7 @@ void do_mpasound( Character *ch, char *argument )
     }
 
   actflags = ch->act;
-  REMOVE_BIT(ch->act, ACT_SECRETIVE);
+  RemoveBit(ch->act, ACT_SECRETIVE);
   was_in_room = ch->in_room;
   for ( pexit = was_in_room->first_exit; pexit; pexit = pexit->next )
     {

@@ -97,8 +97,8 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   OBJ_DATA *shield = args->Object;
 
   shield->item_type = ITEM_ARMOR;
-  SET_BIT( shield->wear_flags, ITEM_WIELD );
-  SET_BIT( shield->wear_flags, ITEM_WEAR_SHIELD );
+  SetBit( shield->wear_flags, ITEM_WIELD );
+  SetBit( shield->wear_flags, ITEM_WEAR_SHIELD );
   shield->weight = 2;
 
   DISPOSE( shield->name );

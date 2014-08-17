@@ -322,7 +322,7 @@ void do_oset( Character *ch, char *argument )
             ch_printf( ch, "Unknown flag: %s\r\n", arg3 );
           else
             {
-              TOGGLE_BIT(obj->extra_flags, 1 << value);
+              ToggleBit(obj->extra_flags, 1 << value);
               if ( 1 << value == ITEM_PROTOTYPE )
                 obj->pIndexData->extra_flags = obj->extra_flags;
             }
@@ -354,7 +354,7 @@ void do_oset( Character *ch, char *argument )
 	  if ( value < 0 || value > 31 )
             ch_printf( ch, "Unknown flag: %s\r\n", arg3 );
           else
-            TOGGLE_BIT( obj->wear_flags, 1 << value );
+            ToggleBit( obj->wear_flags, 1 << value );
         }
 
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
@@ -553,7 +553,7 @@ void do_oset( Character *ch, char *argument )
               if ( value < 0 || value > 31 )
                 ch_printf( ch, "Unknown flag: %s\r\n", arg3 );
               else
-                SET_BIT( bitv, 1 << value );
+                SetBit( bitv, 1 << value );
             }
           if ( !bitv )
             return;

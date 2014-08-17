@@ -14,7 +14,7 @@ void do_auction (Character *ch, char *argument)
   if (IsNpc(ch)) /* NPC can be extracted at any time and thus can't auction! */
     return;
 
-  if ( !IS_SET( ch->in_room->room_flags , ROOM_HOTEL ) && !IS_SET( ch->in_room->room_flags , ROOM_HOTEL ) )
+  if ( !IsBitSet( ch->in_room->room_flags , ROOM_HOTEL ) && !IsBitSet( ch->in_room->room_flags , ROOM_HOTEL ) )
     {
       set_char_color ( AT_LBLUE, ch );
       send_to_char ( "\r\nYou must go to an auction hall to do that!\r\n", ch );
@@ -115,7 +115,7 @@ void do_auction (Character *ch, char *argument)
                    auction->item->short_descr);
           talk_auction (buf);
           obj_to_char (auction->item, auction->seller);
-          if ( IS_SET( sysdata.save_flags, SV_AUCTION ) )
+          if ( IsBitSet( sysdata.save_flags, SV_AUCTION ) )
 	    save_char_obj(auction->seller);
           auction->item = NULL;
           if (auction->buyer != NULL && auction->buyer != auction->seller) /* return money to the buyer */
@@ -184,7 +184,7 @@ void do_auction (Character *ch, char *argument)
             auction->buyer->gold += auction->bet;
 
           ch->gold -= newbet; /* substract the gold - important :) */
-          if ( IS_SET( sysdata.save_flags, SV_AUCTION ) )
+          if ( IsBitSet( sysdata.save_flags, SV_AUCTION ) )
             save_char_obj(ch);
           auction->buyer = ch;
           auction->bet   = newbet;
@@ -264,7 +264,7 @@ void do_auction (Character *ch, char *argument)
 	  separate_obj(obj);
 	  obj_from_char (obj);
 
-	  if ( IS_SET( sysdata.save_flags, SV_AUCTION ) )
+	  if ( IsBitSet( sysdata.save_flags, SV_AUCTION ) )
 	    save_char_obj(ch);
 
 	  auction->item = obj;

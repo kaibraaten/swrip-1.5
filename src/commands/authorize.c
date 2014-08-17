@@ -36,7 +36,7 @@ void do_authorize( Character *ch, char *argument )
   if ( arg2[0]=='\0' || !str_cmp( arg2,"accept" ) || !str_cmp( arg2,"yes" ))
     {
       victim->pcdata->auth_state = 3;
-      REMOVE_BIT(victim->pcdata->flags, PCFLAG_UNAUTHED);
+      RemoveBit(victim->pcdata->flags, PCFLAG_UNAUTHED);
       if ( victim->pcdata->authed_by )
         DISPOSE( victim->pcdata->authed_by );
       victim->pcdata->authed_by = str_dup( ch->name );

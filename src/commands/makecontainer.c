@@ -49,8 +49,8 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *even
   OBJ_DATA *container = eventArgs->Object;
   char description[MAX_STRING_LENGTH];
 
-  SET_BIT( container->wear_flags, ITEM_TAKE );
-  SET_BIT( container->wear_flags, ud->WearLocation );
+  SetBit( container->wear_flags, ITEM_TAKE );
+  SetBit( container->wear_flags, ud->WearLocation );
 
   DISPOSE( container->name );
   container->name = str_dup( ud->ItemName );

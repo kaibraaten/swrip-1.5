@@ -300,7 +300,7 @@ void do_who( Character *ch, char *argument )
         clan_name[0] = '\0';
 
 
-      if ( IS_SET(wch->act, PLR_WIZINVIS) )
+      if ( IsBitSet(wch->act, PLR_WIZINVIS) )
 	sprintf( invis_str, "(%d) ", wch->pcdata->wizinvis );
       else
         invis_str[0] = '\0';
@@ -309,12 +309,12 @@ void do_who( Character *ch, char *argument )
                force_char,
                race,
                invis_str,
-               IS_SET(wch->act, PLR_AFK) ? "[AFK] " : "",
+               IsBitSet(wch->act, PLR_AFK) ? "[AFK] " : "",
                char_name,
                wch->pcdata->title,
                extra_title, wch->pcdata->whoCloak ? "<WC>" : "",
                clan_name,
-               IS_SET(wch->act, PLR_KILLER) && (ch->top_level >= LEVEL_IMMORTAL) ? "&R [Wanted for Murder]&W" : "&W" );
+               IsBitSet(wch->act, PLR_KILLER) && (ch->top_level >= LEVEL_IMMORTAL) ? "&R [Wanted for Murder]&W" : "&W" );
 
 
       /*

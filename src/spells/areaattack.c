@@ -18,7 +18,7 @@ ch_ret spell_area_attack( int sn, int level, Character *ch, void *vo )
   ch->alignment = urange( -1000, ch->alignment, 1000 );
   sith_penalty( ch );
 
-  if ( IS_SET( ch->in_room->room_flags, ROOM_SAFE ) )
+  if ( IsBitSet( ch->in_room->room_flags, ROOM_SAFE ) )
     {
       failed_casting( skill, ch, NULL, NULL );
       return rSPELL_FAILED;
@@ -34,7 +34,7 @@ ch_ret spell_area_attack( int sn, int level, Character *ch, void *vo )
     {
       vch_next = vch->next_in_room;
 
-      if ( !IsNpc( vch ) && IS_SET( vch->act, PLR_WIZINVIS )
+      if ( !IsNpc( vch ) && IsBitSet( vch->act, PLR_WIZINVIS )
            && vch->pcdata->wizinvis >= LEVEL_IMMORTAL )
         continue;
 

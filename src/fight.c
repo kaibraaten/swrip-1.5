@@ -46,7 +46,7 @@ bool is_wielding_poisoned( Character *ch )
   OBJ_DATA *obj;
 
   if ( ( obj = GetEquipmentOnCharacter( ch, WEAR_WIELD )    )
-       &&   (IS_SET( obj->extra_flags, ITEM_POISONED) ) )
+       &&   (IsBitSet( obj->extra_flags, ITEM_POISONED) ) )
     return true;
 
   return false;
@@ -261,7 +261,7 @@ void violence_update( void )
 
       retcode = rNONE;
 
-      if ( IS_SET(ch->in_room->room_flags, ROOM_SAFE ) )
+      if ( IsBitSet(ch->in_room->room_flags, ROOM_SAFE ) )
         {
           sprintf( buf, "violence_update: %s fighting %s in a SAFE room.",
                    ch->name, victim->name );
@@ -325,7 +325,7 @@ void violence_update( void )
                * NPC's assist NPC's of same type or 12.5% chance regardless.
                */
               if ( IsNpc(rch) && !IsAffectedBy(rch, AFF_CHARM)
-                   &&  !IS_SET(rch->act, ACT_NOASSIST) )
+                   &&  !IsBitSet(rch->act, ACT_NOASSIST) )
                 {
                   if ( char_died(ch) )
                     break;
@@ -374,7 +374,7 @@ ch_ret multi_hit( Character *ch, Character *victim, int dt )
   if ( !IsNpc(ch) && !IsNpc(victim) )
     add_timer( ch, TIMER_RECENTFIGHT, 20, NULL, SUB_NONE );
 
-  if ( !IsNpc(ch) && IS_SET( ch->act, PLR_NICE ) && !IsNpc( victim ) )
+  if ( !IsNpc(ch) && IsBitSet( ch->act, PLR_NICE ) && !IsNpc( victim ) )
     return rNONE;
 
   if ( (retcode = one_hit( ch, victim, dt )) != rNONE )
@@ -662,7 +662,7 @@ ch_ret one_hit( Character *ch, Character *victim, int dt )
         {
           x = number_range( 0, 6 );
           attacktype = 1 << x;
-          if ( IS_SET( ch->attacks, attacktype ) )
+          if ( IsBitSet( ch->attacks, attacktype ) )
             break;
           if ( cnt++ > 16 )
             {
@@ -797,7 +797,7 @@ ch_ret one_hit( Character *ch, Character *victim, int dt )
 
   if ( wield )
     {
-      if ( IS_SET( wield->extra_flags, ITEM_MAGIC ) )
+      if ( IsBitSet( wield->extra_flags, ITEM_MAGIC ) )
         dam = ris_damage( victim, dam, RIS_MAGIC );
       else
         dam = ris_damage( victim, dam, RIS_NONMAGIC );
@@ -824,11 +824,11 @@ ch_ret one_hit( Character *ch, Character *victim, int dt )
       /* find high ris */
       for ( i = RIS_PLUS1; i <= RIS_PLUS6; i <<= 1 )
         {
-          if ( IS_SET( victim->immune, i ) )
+          if ( IsBitSet( victim->immune, i ) )
             imm = i;
-          if ( IS_SET( victim->resistant, i ) )
+          if ( IsBitSet( victim->resistant, i ) )
             res = i;
-          if ( IS_SET( victim->susceptible, i ) )
+          if ( IsBitSet( victim->susceptible, i ) )
             sus = i;
         }
       mod = 10;
@@ -1054,8 +1054,8 @@ ch_ret one_hit( Character *ch, Character *victim, int dt )
 
   /* weapon spells      -Thoric */
   if ( wield
-       &&  !IS_SET(victim->immune, RIS_MAGIC)
-       &&  !IS_SET(victim->in_room->room_flags, ROOM_NO_MAGIC) )
+       &&  !IsBitSet(victim->immune, RIS_MAGIC)
+       &&  !IsBitSet(victim->in_room->room_flags, ROOM_NO_MAGIC) )
     {
       Affect *aff;
 
@@ -1120,11 +1120,11 @@ short ris_damage( Character *ch, short dam, int ris )
   short modifier;
 
   modifier = 10;
-  if ( IS_SET(ch->immune, ris ) )
+  if ( IsBitSet(ch->immune, ris ) )
     modifier -= 10;
-  if ( IS_SET(ch->resistant, ris ) )
+  if ( IsBitSet(ch->resistant, ris ) )
     modifier -= 2;
-  if ( IS_SET(ch->susceptible, ris ) )
+  if ( IsBitSet(ch->susceptible, ris ) )
     modifier += 2;
   if ( modifier <= 0 )
     return -1;
@@ -1236,7 +1236,7 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
 
   if ( dam && npcvict && ch != victim )
     {
-      if ( !IS_SET( victim->act, ACT_SENTINEL ) )
+      if ( !IsBitSet( victim->act, ACT_SENTINEL ) )
         {
           if ( victim->hhf.hunting )
             {
@@ -1318,13 +1318,13 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
         {
           affect_strip( ch, gsn_invis );
           affect_strip( ch, gsn_mass_invis );
-          REMOVE_BIT( ch->affected_by, AFF_INVISIBLE );
+          RemoveBit( ch->affected_by, AFF_INVISIBLE );
           act( AT_MAGIC, "$n fades into existence.", ch, NULL, NULL, TO_ROOM );
         }
 
       /* Take away Hide */
       if ( IsAffectedBy(ch, AFF_HIDE) && ch->race != RACE_DEFEL )
-        REMOVE_BIT(ch->affected_by, AFF_HIDE);
+        RemoveBit(ch->affected_by, AFF_HIDE);
       /*
        * Damage modifiers.
        */
@@ -1343,12 +1343,12 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
       if ( dt >= TYPE_HIT )
         {
           if ( IsNpc(ch)
-               &&   IS_SET( ch->attacks, DFND_DISARM )
+               &&   IsBitSet( ch->attacks, DFND_DISARM )
                &&   number_percent( ) < GetAbilityLevel( ch, COMBAT_ABILITY ) / 2 )
             disarm( ch, victim );
 
           if ( IsNpc(ch)
-               &&   IS_SET( ch->attacks, ATCK_TRIP )
+               &&   IsBitSet( ch->attacks, ATCK_TRIP )
                &&   number_percent( ) < GetAbilityLevel( ch, COMBAT_ABILITY ) )
             trip( ch, victim );
 
@@ -1426,11 +1426,11 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
 
   if ( !IsNpc(victim)
        &&   ( victim->top_level >= LEVEL_IMMORTAL
-              ||     IS_SET(victim->in_room->room_flags,ROOM_ARENA) )
+              ||     IsBitSet(victim->in_room->room_flags,ROOM_ARENA) )
        &&   victim->hit < 1 )
     {
       victim->hit = 1;
-      if (IS_SET(victim->in_room->room_flags, ROOM_ARENA) )
+      if (IsBitSet(victim->in_room->room_flags, ROOM_ARENA) )
         {
           char buf[MAX_STRING_LENGTH];
           char_from_room(victim);
@@ -1447,7 +1447,7 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
         }
     }
 
-  if ( IsNpc(victim) && IS_SET(victim->act,ACT_IMMORTAL) )
+  if ( IsNpc(victim) && IsBitSet(victim->act,ACT_IMMORTAL) )
     victim->hit = victim->max_hit;
 
   /* Make sure newbies dont die */
@@ -1458,7 +1458,7 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
   if ( dam > 0 && dt > TYPE_HIT
        && !IsAffectedBy( victim, AFF_POISON )
        &&  is_wielding_poisoned( ch )
-       && !IS_SET( victim->immune, RIS_POISON )
+       && !IsBitSet( victim->immune, RIS_POISON )
        && !saves_poison_death( GetAbilityLevel( ch, COMBAT_ABILITY ), victim ) )
     {
       Affect af;
@@ -1514,9 +1514,9 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
           if ( skill->die_room && skill->die_room[0] != '\0' )
             act( AT_DEAD, skill->die_room, ch, NULL, victim, TO_NOTVICT );
         }
-      if ( IsNpc(victim) && IS_SET( victim->act, ACT_NOKILL )  )
+      if ( IsNpc(victim) && IsBitSet( victim->act, ACT_NOKILL )  )
         act( AT_YELLOW, "$n flees for $s life... barely escaping certain death!", victim, 0, 0, TO_ROOM );
-      else if ( (IsNpc(victim) && IS_SET( victim->act, ACT_DROID ) ) || (!IsNpc(victim) && victim->race == RACE_DROID ) )
+      else if ( (IsNpc(victim) && IsBitSet( victim->act, ACT_DROID ) ) || (!IsNpc(victim) && victim->race == RACE_DROID ) )
         act( AT_DEAD, "$n EXPLODES into many small pieces!", victim, 0, 0, TO_ROOM );
       else
         act( AT_DEAD, "$n is DEAD!", victim, 0, 0, TO_ROOM );
@@ -1566,7 +1566,7 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
       OBJ_DATA *obj_next;
       int cnt=0;
 
-      /* REMOVE_BIT( victim->act, PLR_ATTACKER ); Removed to add PLR_DONTAUTOFUEL */
+      /* RemoveBit( victim->act, PLR_ATTACKER ); Removed to add PLR_DONTAUTOFUEL */
 
       stop_fighting( victim, true );
 
@@ -1645,7 +1645,7 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
       if ( !IsNpc( victim ) && victim->pcdata->clan )
         update_member( victim );
 
-      if ( victim->in_room != ch->in_room || !IsNpc(victim) || !IS_SET( victim->act, ACT_NOKILL )  )
+      if ( victim->in_room != ch->in_room || !IsNpc(victim) || !IsBitSet( victim->act, ACT_NOKILL )  )
         loot = legal_loot( ch, victim );
       else
         loot = false;
@@ -1657,7 +1657,7 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
       if ( !IsNpc(ch) && loot )
         {
           /* Autogold by Scryn 8/12 */
-          if ( IS_SET(ch->act, PLR_AUTOGOLD) )
+          if ( IsBitSet(ch->act, PLR_AUTOGOLD) )
             {
               init_gold = ch->gold;
               do_get( ch, "credits corpse" );
@@ -1669,12 +1669,12 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
                   do_split( ch, buf1 );
                 }
             }
-          if ( IS_SET(ch->act, PLR_AUTOLOOT) )
+          if ( IsBitSet(ch->act, PLR_AUTOLOOT) )
             do_get( ch, "all corpse" );
           else
             do_look( ch, "in corpse" );
 
-          if ( IS_SET(ch->act, PLR_AUTOSAC) )
+          if ( IsBitSet(ch->act, PLR_AUTOSAC) )
             do_junk( ch, "corpse" );
         }
       if (IsNpc(ch) && loot)
@@ -1691,7 +1691,7 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
         if( victim->in_room && victim->in_room->area )
           boost_economy( victim->in_room->area, victim->gold );
 
-      if ( IS_SET( sysdata.save_flags, SV_KILL ) )
+      if ( IsBitSet( sysdata.save_flags, SV_KILL ) )
         save_char_obj( ch );
       return rVICT_DIED;
     }
@@ -1722,7 +1722,7 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
    */
   if ( npcvict && dam > 0 )
     {
-      if ( ( IS_SET(victim->act, ACT_WIMPY) && number_bits( 1 ) == 0
+      if ( ( IsBitSet(victim->act, ACT_WIMPY) && number_bits( 1 ) == 0
              &&   victim->hit < victim->max_hit / 2 )
            ||   ( IsAffectedBy(victim, AFF_CHARM) && victim->master
                   &&     victim->master->in_room != victim->in_room ) )
@@ -1739,7 +1739,7 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
        &&   victim->wait == 0 )
     do_flee( victim, "" );
   else
-    if ( !npcvict && IS_SET( victim->act, PLR_FLEE ) )
+    if ( !npcvict && IsBitSet( victim->act, PLR_FLEE ) )
       do_flee( victim, "" );
 
   return rNONE;
@@ -1754,7 +1754,7 @@ bool is_safe( Character *ch, Character *victim )
   if ( who_fighting( ch ) == ch )
     return false;
 
-  if ( IS_SET( victim->in_room->room_flags, ROOM_SAFE ) )
+  if ( IsBitSet( victim->in_room->room_flags, ROOM_SAFE ) )
     {
       set_char_color( AT_MAGIC, ch );
       send_to_char( "You'll have to do that elswhere.\r\n", ch );
@@ -1809,7 +1809,7 @@ void check_killer( Character *ch, Character *victim )
   /*
    * Charm-o-rama.
    */
-  if ( IS_SET(ch->affected_by, AFF_CHARM) )
+  if ( IsBitSet(ch->affected_by, AFF_CHARM) )
     {
       if ( !ch->master )
         {
@@ -1819,7 +1819,7 @@ void check_killer( Character *ch, Character *victim )
                    IsNpc(ch) ? ch->short_descr : ch->name );
           bug( buf, 0 );
           affect_strip( ch, gsn_charm_person );
-          REMOVE_BIT( ch->affected_by, AFF_CHARM );
+          RemoveBit( ch->affected_by, AFF_CHARM );
           return;
         }
 
@@ -1834,9 +1834,9 @@ void check_killer( Character *ch, Character *victim )
         {
           for ( x = 0; x < 32; x++ )
             {
-              if ( IS_SET(victim->vip_flags , 1 << x ) )
+              if ( IsBitSet(victim->vip_flags , 1 << x ) )
                 {
-                  SET_BIT(ch->pcdata->wanted_flags, 1 << x );
+                  SetBit(ch->pcdata->wanted_flags, 1 << x );
                   ch_printf( ch, "&YYou are now wanted on %s.&w\r\n", planet_flags[x] );
                 }
             }
@@ -1895,7 +1895,7 @@ void update_pos( Character *victim )
         {
           act( AT_ACTION, "$n falls from $N.",
                victim, NULL, victim->mount, TO_ROOM );
-          REMOVE_BIT( victim->mount->act, ACT_MOUNTED );
+          RemoveBit( victim->mount->act, ACT_MOUNTED );
           victim->mount = NULL;
         }
       victim->position = POS_DEAD;
@@ -1914,7 +1914,7 @@ void update_pos( Character *victim )
     {
       act( AT_ACTION, "$n falls unconscious from $N.",
            victim, NULL, victim->mount, TO_ROOM );
-      REMOVE_BIT( victim->mount->act, ACT_MOUNTED );
+      RemoveBit( victim->mount->act, ACT_MOUNTED );
       victim->mount = NULL;
     }
 }
@@ -2065,7 +2065,7 @@ void raw_kill( Character *killer, Character *victim )
     claim_disintegration( killer, victim );
 
   /* Take care of polymorphed chars */
-  if(IsNpc(victim) && IS_SET(victim->act, ACT_POLYMORPHED))
+  if(IsNpc(victim) && IsBitSet(victim->act, ACT_POLYMORPHED))
     {
       char_from_room(victim->desc->original);
       char_to_room(victim->desc->original, victim->in_room);
@@ -2085,19 +2085,19 @@ void raw_kill( Character *killer, Character *victim )
         victim->in_room->area->planet->pop_support = -100;
     }
 
-  if ( !IsNpc(victim) || !IS_SET( victim->act, ACT_NOKILL  ) )
+  if ( !IsNpc(victim) || !IsBitSet( victim->act, ACT_NOKILL  ) )
     mprog_death_trigger( killer, victim );
 
   if ( char_died(victim) )
     return;
 
-  if ( !IsNpc(victim) || !IS_SET( victim->act, ACT_NOKILL  ) )
+  if ( !IsNpc(victim) || !IsBitSet( victim->act, ACT_NOKILL  ) )
     rprog_death_trigger( killer, victim );
 
   if ( char_died(victim) )
     return;
 
-  if ( !IsNpc(victim) || ( !IS_SET( victim->act, ACT_NOKILL  ) && !IS_SET( victim->act, ACT_NOCORPSE ) ) )
+  if ( !IsNpc(victim) || ( !IsBitSet( victim->act, ACT_NOKILL  ) && !IsBitSet( victim->act, ACT_NOCORPSE ) ) )
     make_corpse( victim );
   else
     {
@@ -2143,8 +2143,8 @@ void raw_kill( Character *killer, Character *victim )
       DISPOSE( room->name );
       room->name = str_dup( "An Empty Apartment" );
 
-      REMOVE_BIT( room->room_flags , ROOM_PLR_HOME );
-      SET_BIT( room->room_flags , ROOM_EMPTY_HOME );
+      RemoveBit( room->room_flags , ROOM_PLR_HOME );
+      SetBit( room->room_flags , ROOM_EMPTY_HOME );
 
       fold_area( room->area, room->area->filename, false );
     }
@@ -2434,10 +2434,10 @@ void dam_message( Character *ch, Character *victim, int dam, int dt )
   punct   = (dampc <= 30) ? '.' : '!';
 
   if ( dam == 0 && (!IsNpc(ch) &&
-                    (IS_SET(ch->pcdata->flags, PCFLAG_GAG)))) gcflag = true;
+                    (IsBitSet(ch->pcdata->flags, PCFLAG_GAG)))) gcflag = true;
 
   if ( dam == 0 && (!IsNpc(victim) &&
-                    (IS_SET(victim->pcdata->flags, PCFLAG_GAG)))) gvflag = true;
+                    (IsBitSet(victim->pcdata->flags, PCFLAG_GAG)))) gvflag = true;
 
   if ( dt >=0 && dt < top_sn )
     skill = skill_table[dt];
@@ -2570,14 +2570,14 @@ bool get_cover( Character *ch )
       door = number_door( );
       if ( ( pexit = get_exit(was_in, door) ) == NULL
            ||   !pexit->to_room
-           || ( IS_SET(pexit->exit_info, EX_CLOSED)
+           || ( IsBitSet(pexit->exit_info, EX_CLOSED)
                 &&   !IsAffectedBy( ch, AFF_PASS_DOOR ) )
            || ( IsNpc(ch)
-                &&   IS_SET(pexit->to_room->room_flags, ROOM_NO_MOB) ) )
+                &&   IsBitSet(pexit->to_room->room_flags, ROOM_NO_MOB) ) )
         continue;
 
       affect_strip ( ch, gsn_sneak );
-      REMOVE_BIT   ( ch->affected_by, AFF_SNEAK );
+      RemoveBit   ( ch->affected_by, AFF_SNEAK );
       if ( ch->mount && ch->mount->fighting )
         stop_fighting( ch->mount, true );
       move_char( ch, pexit, 0 );

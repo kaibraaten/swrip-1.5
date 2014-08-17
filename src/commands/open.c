@@ -20,25 +20,25 @@ void do_open( Character *ch, char *argument )
     {
       Exit *pexit_rev = NULL;
 
-      if ( !IS_SET(pexit->exit_info, EX_ISDOOR) )
+      if ( !IsBitSet(pexit->exit_info, EX_ISDOOR) )
         {
 	  send_to_char( "You can't do that.\r\n", ch );
 	  return;
 	}
 
-      if ( !IS_SET(pexit->exit_info, EX_CLOSED) )
+      if ( !IsBitSet(pexit->exit_info, EX_CLOSED) )
         {
 	  send_to_char( "It's already open.\r\n", ch );
 	  return;
 	}
 
-      if (  IS_SET(pexit->exit_info, EX_LOCKED) )
+      if (  IsBitSet(pexit->exit_info, EX_LOCKED) )
         {
 	  send_to_char( "It's locked.\r\n", ch );
 	  return;
 	}
 
-      if ( !IS_SET(pexit->exit_info, EX_SECRET)
+      if ( !IsBitSet(pexit->exit_info, EX_SECRET)
            || (pexit->keyword && nifty_is_name( arg, pexit->keyword )) )
         {
           act( AT_ACTION, "$n opens the $d.",
@@ -89,27 +89,27 @@ void do_open( Character *ch, char *argument )
           return;
         }
 
-      if ( !IS_SET(obj->value[1], CONT_CLOSED) )
+      if ( !IsBitSet(obj->value[1], CONT_CLOSED) )
         {
 	  ch_printf( ch, "%s is already open.\r\n",
 		     capitalize( obj->short_descr ) );
           return;
         }
 
-      if ( !IS_SET(obj->value[1], CONT_CLOSEABLE) )
+      if ( !IsBitSet(obj->value[1], CONT_CLOSEABLE) )
         {
           ch_printf( ch, "%s cannot be opened or closed.\r\n",
 		     capitalize( obj->short_descr ) );
           return;
         }
 
-      if ( IS_SET(obj->value[1], CONT_LOCKED) )
+      if ( IsBitSet(obj->value[1], CONT_LOCKED) )
         {
           ch_printf( ch, "%s is locked.\r\n", capitalize( obj->short_descr ) );
           return;
         }
 
-      REMOVE_BIT(obj->value[1], CONT_CLOSED);
+      RemoveBit(obj->value[1], CONT_CLOSED);
       act( AT_ACTION, "You open $p.", ch, obj, NULL, TO_CHAR );
       act( AT_ACTION, "$n opens $p.", ch, obj, NULL, TO_ROOM );
       check_for_trap( ch, obj, TRAP_OPEN );

@@ -17,7 +17,7 @@ void do_snipe( Character *ch, char *argument )
   bool              pfound = false;
 
 
-  if ( IS_SET( ch->in_room->room_flags, ROOM_SAFE ) )
+  if ( IsBitSet( ch->in_room->room_flags, ROOM_SAFE ) )
     {
       set_char_color( AT_MAGIC, ch );
       send_to_char( "You'll have to do that elswhere.\r\n", ch );
@@ -55,7 +55,7 @@ void do_snipe( Character *ch, char *argument )
       return;
     }
 
-  if ( IS_SET( pexit->exit_info, EX_CLOSED ) )
+  if ( IsBitSet( pexit->exit_info, EX_CLOSED ) )
     {
       send_to_char( "Are you expecting to fire through a door!?\r\n", ch );
       return;
@@ -65,7 +65,7 @@ void do_snipe( Character *ch, char *argument )
 
   for ( dist = 0; dist <= max_dist; dist++ )
     {
-      if ( IS_SET( pexit->exit_info, EX_CLOSED ) )
+      if ( IsBitSet( pexit->exit_info, EX_CLOSED ) )
         break;
 
       if ( !pexit->to_room )
@@ -117,7 +117,7 @@ void do_snipe( Character *ch, char *argument )
       return;
     }
 
-  if ( IS_SET( victim->in_room->room_flags, ROOM_SAFE ) )
+  if ( IsBitSet( victim->in_room->room_flags, ROOM_SAFE ) )
     {
       set_char_color( AT_MAGIC, ch );
       send_to_char( "You can't shoot them there.\r\n", ch );
@@ -139,7 +139,7 @@ void do_snipe( Character *ch, char *argument )
       return;
     }
 
-  if ( !IsNpc( victim ) && IS_SET( ch->act, PLR_NICE ) )
+  if ( !IsNpc( victim ) && IsBitSet( ch->act, PLR_NICE ) )
     {
       send_to_char( "You feel too nice to do that!\r\n", ch );
       return;
@@ -218,10 +218,10 @@ void do_snipe( Character *ch, char *argument )
     }
   if ( IsNpc( victim ) && !char_died(victim) )
     {
-      if ( IS_SET( victim->act , ACT_SENTINEL ) )
+      if ( IsBitSet( victim->act , ACT_SENTINEL ) )
         {
           victim->was_sentinel = victim->in_room;
-          REMOVE_BIT( victim->act, ACT_SENTINEL );
+          RemoveBit( victim->act, ACT_SENTINEL );
         }
 
       start_hating( victim , ch );

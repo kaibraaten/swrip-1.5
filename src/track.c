@@ -48,9 +48,9 @@ static struct bfs_queue_struct *queue_tail = NULL;
 static struct bfs_queue_struct *room_queue = NULL;
 
 /* Utility macros */
-#define MARK(room)      (SET_BIT(       (room)->room_flags, BFS_MARK) )
-#define UNMARK(room)    (REMOVE_BIT(    (room)->room_flags, BFS_MARK) )
-#define IS_MARKED(room) (IS_SET(        (room)->room_flags, BFS_MARK) )
+#define MARK(room)      (SetBit(       (room)->room_flags, BFS_MARK) )
+#define UNMARK(room)    (RemoveBit(    (room)->room_flags, BFS_MARK) )
+#define IS_MARKED(room) (IsBitSet(        (room)->room_flags, BFS_MARK) )
 
 static Room *ToRoom( const Room *room, DirectionType door )
 {
@@ -67,7 +67,7 @@ static bool IsValidEdge( const Room *room, short door )
   if ( pexit
        &&  (to_room = pexit->to_room) != NULL
 #ifndef TRACK_THROUGH_DOORS
-       &&  !IS_SET( pexit->exit_info, EX_CLOSED )
+       &&  !IsBitSet( pexit->exit_info, EX_CLOSED )
 #endif
        &&  !IS_MARKED( to_room ) )
     {
@@ -278,7 +278,7 @@ void FoundPrey( Character *ch, Character *victim )
       return;
     }
 
-  if ( IS_SET( ch->in_room->room_flags, ROOM_SAFE ) )
+  if ( IsBitSet( ch->in_room->room_flags, ROOM_SAFE ) )
     {
       if ( number_percent( ) < 90 )
 	{
@@ -390,7 +390,7 @@ void HuntVictim( Character *ch )
 	    return;
 	  }
       }
-    else if ( !IS_SET( ch->act, ACT_DROID ) )
+    else if ( !IsBitSet( ch->act, ACT_DROID ) )
       {
 	do_hide ( ch, "" );
       }
@@ -409,8 +409,8 @@ void HuntVictim( Character *ch )
 
           if ( ( pexit = get_exit(ch->in_room, ret) ) == NULL
                || !pexit->to_room
-               || IS_SET(pexit->exit_info, EX_CLOSED)
-               || IS_SET(pexit->to_room->room_flags, ROOM_NO_MOB) )
+               || IsBitSet(pexit->exit_info, EX_CLOSED)
+               || IsBitSet(pexit->to_room->room_flags, ROOM_NO_MOB) )
 	    {
 	      continue;
 	    }
@@ -470,7 +470,7 @@ static bool MobSnipe( Character *ch, Character *victim )
       return false;
     }
 
-  if ( IS_SET( ch->in_room->room_flags, ROOM_SAFE ) )
+  if ( IsBitSet( ch->in_room->room_flags, ROOM_SAFE ) )
     {
       return false;
     }
@@ -482,7 +482,7 @@ static bool MobSnipe( Character *ch, Character *victim )
 	  continue;
 	}
 
-      if ( IS_SET( pexit->exit_info, EX_CLOSED ) )
+      if ( IsBitSet( pexit->exit_info, EX_CLOSED ) )
 	{
 	  continue;
 	}
@@ -491,7 +491,7 @@ static bool MobSnipe( Character *ch, Character *victim )
 
       for ( dist = 0; dist <= max_dist; dist++ )
         {
-          if ( IS_SET( pexit->exit_info, EX_CLOSED ) )
+          if ( IsBitSet( pexit->exit_info, EX_CLOSED ) )
 	    {
 	      break;
 	    }
@@ -538,7 +538,7 @@ static bool MobSnipe( Character *ch, Character *victim )
           continue;
         }
 
-      if ( IS_SET( victim->in_room->room_flags, ROOM_SAFE ) )
+      if ( IsBitSet( victim->in_room->room_flags, ROOM_SAFE ) )
 	{
 	  return false;
 	}

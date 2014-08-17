@@ -58,7 +58,7 @@ bool check_skill( Character *ch, const char *command, char *argument )
     {
       sn = (first + top) >> 1;
 
-      if ( LOWER(command[0]) == LOWER(skill_table[sn]->name[0])
+      if ( CharToLowercase(command[0]) == CharToLowercase(skill_table[sn]->name[0])
            &&  !str_prefix(command, skill_table[sn]->name)
            &&  (skill_table[sn]->skill_fun || skill_table[sn]->spell_fun != spell_null)
            &&  (IsNpc(ch)
@@ -452,7 +452,7 @@ void trip( Character *ch, Character *victim )
       act( AT_SKILL, "$n trips your mount and you fall off!", ch, NULL, victim, TO_VICT    );
       act( AT_SKILL, "You trip $N's mount and $N falls off!", ch, NULL, victim, TO_CHAR    );
       act( AT_SKILL, "$n trips $N's mount and $N falls off!", ch, NULL, victim, TO_NOTVICT );
-      REMOVE_BIT( victim->mount->act, ACT_MOUNTED );
+      RemoveBit( victim->mount->act, ACT_MOUNTED );
       victim->mount = NULL;
       SetWaitState( ch,     2 * PULSE_VIOLENCE );
       SetWaitState( victim, 2 * PULSE_VIOLENCE );
@@ -514,7 +514,7 @@ bool check_parry( Character *ch, Character *victim )
       return false;
     }
 
-  if ( IsNpc(victim) && !IS_SET(victim->defenses, DFND_PARRY) )
+  if ( IsNpc(victim) && !IsBitSet(victim->defenses, DFND_PARRY) )
     {
       return false;
     }
@@ -547,13 +547,13 @@ bool check_parry( Character *ch, Character *victim )
     }
 
   if ( !IsNpc(victim)
-       && !IS_SET( victim->pcdata->flags, PCFLAG_GAG) ) /*SB*/
+       && !IsBitSet( victim->pcdata->flags, PCFLAG_GAG) ) /*SB*/
     {
       act( AT_SKILL, "You parry $n's attack.",  ch, NULL, victim, TO_VICT    );
     }
 
   if ( !IsNpc(ch)
-       && !IS_SET( ch->pcdata->flags, PCFLAG_GAG) )  /* SB */
+       && !IsBitSet( ch->pcdata->flags, PCFLAG_GAG) )  /* SB */
     {
       act( AT_SKILL, "$N parries your attack.", ch, NULL, victim, TO_CHAR    );
     }
@@ -574,7 +574,7 @@ bool check_dodge( Character *ch, Character *victim )
       return false;
     }
 
-  if ( IsNpc(victim) && !IS_SET(victim->defenses, DFND_DODGE) )
+  if ( IsNpc(victim) && !IsBitSet(victim->defenses, DFND_DODGE) )
     {
       return false;
     }
@@ -596,12 +596,12 @@ bool check_dodge( Character *ch, Character *victim )
       return false;
     }
 
-  if ( !IsNpc(victim) && !IS_SET( victim->pcdata->flags, PCFLAG_GAG) )
+  if ( !IsNpc(victim) && !IsBitSet( victim->pcdata->flags, PCFLAG_GAG) )
     {
       act( AT_SKILL, "You dodge $n's attack.", ch, NULL, victim, TO_VICT    );
     }
 
-  if ( !IsNpc(ch) && !IS_SET( ch->pcdata->flags, PCFLAG_GAG) )
+  if ( !IsNpc(ch) && !IsBitSet( ch->pcdata->flags, PCFLAG_GAG) )
     {
       act( AT_SKILL, "$N dodges your attack.", ch, NULL, victim, TO_CHAR    );
     }
@@ -619,7 +619,7 @@ bool check_grip( Character *ch, Character *victim )
       return false;
     }
 
-  if ( IsNpc(victim) && !IS_SET(victim->defenses, DFND_GRIP) )
+  if ( IsNpc(victim) && !IsBitSet(victim->defenses, DFND_GRIP) )
     {
       return false;
     }

@@ -133,7 +133,7 @@ static void nanny_get_name( Descriptor *d, char *argument )
       return;
     }
 
-  argument[0] = UPPER(argument[0]);
+  argument[0] = CharToUppercase(argument[0]);
 
   if ( !check_parse_name( argument ) )
     {
@@ -207,7 +207,7 @@ static void nanny_get_name( Descriptor *d, char *argument )
 	}
     }
 
-  if ( IS_SET(ch->act, PLR_DENY) )
+  if ( IsBitSet(ch->act, PLR_DENY) )
     {
       sprintf( log_buf, "Denying access to %s@%s.", argument, d->remote.hostname );
       log_string_plus( log_buf, LOG_COMM, sysdata.log_level );
@@ -665,7 +665,7 @@ static void nanny_stats_ok( Descriptor *d, char *argument )
       return;
     }
 
-  SET_BIT( ch->act, PLR_ANSI );
+  SetBit( ch->act, PLR_ANSI );
 
   sprintf( log_buf, "%s@%s new %s.", ch->name, d->remote.hostname,
 	   race_table[ch->race].race_name);
@@ -688,7 +688,7 @@ static void nanny_press_enter( Descriptor *d, char *argument )
 {
   Character *ch = d->character;
 
-  if ( IS_SET(ch->act, PLR_ANSI) )
+  if ( IsBitSet(ch->act, PLR_ANSI) )
     {
       send_to_pager( "\033[2J", ch );
     }
@@ -812,7 +812,7 @@ if ( (iLang = skill_lookup( "common" )) < 0 )
 		   && (iLang = skill_lookup( "quarren" )) >= 0 )
 		{
 		  ch->pcdata->learned[iLang] = 100;
-		  SET_BIT( ch->speaks , LANG_QUARREN );
+		  SetBit( ch->speaks , LANG_QUARREN );
 		}
 
 	      if ( ch->race == RACE_MON_CALAMARI
@@ -859,8 +859,8 @@ if ( (iLang = skill_lookup( "common" )) < 0 )
 
       /* Added by Narn.  Start new characters with autoexit and autgold
 	 already turned on.  Very few people don't use those. */
-      SET_BIT( ch->act, PLR_AUTOGOLD );
-      SET_BIT( ch->act, PLR_AUTOEXIT );
+      SetBit( ch->act, PLR_AUTOGOLD );
+      SetBit( ch->act, PLR_AUTOEXIT );
 
       /* New players don't have to earn some eq */
 
@@ -893,7 +893,7 @@ if ( (iLang = skill_lookup( "common" )) < 0 )
 	{
 	  char_to_room( ch, get_room_index( ROOM_VNUM_SCHOOL ) );
 	  ch->pcdata->auth_state = 1;
-	  SET_BIT(ch->pcdata->flags, PCFLAG_UNAUTHED);
+	  SetBit(ch->pcdata->flags, PCFLAG_UNAUTHED);
 	}
       /* Display_prompt interprets blank as default */
       ch->pcdata->prompt = str_dup("");
@@ -910,13 +910,13 @@ if ( (iLang = skill_lookup( "common" )) < 0 )
 	}
     }
   else if ( ch->in_room && !IsImmortal( ch )
-	    && !IS_SET( ch->in_room->room_flags, ROOM_SPACECRAFT )
+	    && !IsBitSet( ch->in_room->room_flags, ROOM_SPACECRAFT )
 	    && ch->in_room != get_room_index(6) )
     {
       char_to_room( ch, ch->in_room );
     }
   else if ( ch->in_room && !IsImmortal( ch )
-	    && IS_SET( ch->in_room->room_flags, ROOM_SPACECRAFT )
+	    && IsBitSet( ch->in_room->room_flags, ROOM_SPACECRAFT )
 	    && ch->in_room != get_room_index(6) )
     {
       Ship *ship;
@@ -938,8 +938,8 @@ if ( (iLang = skill_lookup( "common" )) < 0 )
       char_to_room( ch, get_room_index( wherehome(ch) ) );
     }
 
-  if ( IS_SET(ch->act, ACT_POLYMORPHED) )
-    REMOVE_BIT(ch->act, ACT_POLYMORPHED);
+  if ( IsBitSet(ch->act, ACT_POLYMORPHED) )
+    RemoveBit(ch->act, ACT_POLYMORPHED);
 
   if ( get_timer( ch, TIMER_SHOVEDRAG ) > 0 )
     remove_timer( ch, TIMER_SHOVEDRAG );

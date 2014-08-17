@@ -47,7 +47,7 @@ void do_loadarea( Character *ch, char *argument )
     }
 
   /* Stops char from loading when already loaded - Scryn 8/11 */
-  if ( IS_SET ( tarea->status, AREA_LOADED) )
+  if ( IsBitSet ( tarea->status, AREA_LOADED) )
     {
       send_to_char( "Your area is already loaded.\r\n", ch );
       return;

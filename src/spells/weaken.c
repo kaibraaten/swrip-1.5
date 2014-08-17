@@ -7,7 +7,7 @@ ch_ret spell_weaken( int sn, int level, Character *ch, void *vo )
   Affect af;
   SKILLTYPE *skill = get_skilltype(sn);
 
-  if ( IS_SET( victim->immune, RIS_MAGIC ) )
+  if ( IsBitSet( victim->immune, RIS_MAGIC ) )
     {
       immune_casting( skill, ch, victim, NULL );
       return rSPELL_FAILED;

@@ -803,7 +803,7 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
           return;
         }
 
-      arg_passed[0] = UPPER(arg_passed[0]);
+      arg_passed[0] = CharToUppercase(arg_passed[0]);
 
       sprintf( fname, "%s%c/%s", PLAYER_DIR, tolower(arg_passed[0]),
                capitalize( arg_passed ) );
@@ -1110,7 +1110,7 @@ BOARD_DATA *read_board( char *boardfile, FILE *fp )
       const char *word = feof( fp ) ? "End" : fread_word( fp );
       bool fMatch = false;
 
-      switch ( UPPER(word[0]) )
+      switch ( CharToUppercase(word[0]) )
         {
         case '*':
           fMatch = true;

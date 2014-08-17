@@ -169,13 +169,13 @@ void do_examine( Character *ch, char *argument )
         case ITEM_SWITCH:
         case ITEM_LEVER:
         case ITEM_PULLCHAIN:
-          if ( IS_SET( obj->value[0], TRIG_UP ) )
+          if ( IsBitSet( obj->value[0], TRIG_UP ) )
             send_to_char( "You notice that it is in the up position.\r\n", ch );
           else
             send_to_char( "You notice that it is in the down position.\r\n", ch );
           break;
         case ITEM_BUTTON:
-          if ( IS_SET( obj->value[0], TRIG_UP ) )
+          if ( IsBitSet( obj->value[0], TRIG_UP ) )
             send_to_char( "You notice that it is depressed.\r\n", ch );
           else
             send_to_char( "You notice that it is not depressed.\r\n", ch );

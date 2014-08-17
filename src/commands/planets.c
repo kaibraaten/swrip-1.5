@@ -13,7 +13,7 @@ void do_planets( Character *ch, char *argument )
       pager_printf( ch, "&wPlanet: &G%-15s   &wGoverned By: &G%s %s\r\n",
                     planet->name ,
                     planet->governed_by ? planet->governed_by->name : "",
-                    IS_SET(planet->flags, PLANET_NOCAPTURE ) ? "(permanent)" : "" );
+                    IsBitSet(planet->flags, PLANET_NOCAPTURE ) ? "(permanent)" : "" );
       pager_printf( ch, "&WValue: &O%-10ld&W/&O%-10d   ",
                     get_taxes(planet) , planet->base_value);
       pager_printf( ch, "&WPopulation: &O%-5d   &W Pop Support: &R%.1f\r\n",

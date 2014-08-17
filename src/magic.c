@@ -53,34 +53,34 @@ bool is_immune( const Character *ch, short damtype )
   switch( damtype )
     {
     case SD_FIRE:
-      if (IS_SET(ch->immune, RIS_FIRE)) 
+      if (IsBitSet(ch->immune, RIS_FIRE)) 
 	return true;
 
     case SD_COLD:
-      if (IS_SET(ch->immune, RIS_COLD))
+      if (IsBitSet(ch->immune, RIS_COLD))
 	return true;
 
     case SD_ELECTRICITY:
-      if (IS_SET(ch->immune, RIS_ELECTRICITY))
+      if (IsBitSet(ch->immune, RIS_ELECTRICITY))
 	return true;
 
     case SD_ENERGY:
-      if (IS_SET(ch->immune, RIS_ENERGY))
+      if (IsBitSet(ch->immune, RIS_ENERGY))
 	return true;
 
     case SD_ACID:
-      if (IS_SET(ch->immune, RIS_ACID))
+      if (IsBitSet(ch->immune, RIS_ACID))
 	return true;
 
     case SD_POISON:
-      if (IS_SET(ch->immune, RIS_POISON))
+      if (IsBitSet(ch->immune, RIS_POISON))
 	return true;
 
       if (ch->race == RACE_DROID)
 	return true;
 
     case SD_DRAIN:
-      if (IS_SET(ch->immune, RIS_DRAIN))
+      if (IsBitSet(ch->immune, RIS_DRAIN))
 	return true;
 
       if (ch->race == RACE_DROID)
@@ -110,7 +110,7 @@ int ch_slookup( const Character *ch, const char *name )
 	}
 
       if ( ch->pcdata->learned[sn] > 0
-	   && LOWER(name[0]) == LOWER(skill_table[sn]->name[0])
+	   && CharToLowercase(name[0]) == CharToLowercase(skill_table[sn]->name[0])
 	   &&!str_prefix( name, skill_table[sn]->name ) )
 	{
 	  return sn;
@@ -134,7 +134,7 @@ int herb_lookup( const char *name )
 	  return -1;
 	}
 
-      if ( LOWER( name[0] ) == LOWER( herb_table[sn]->name[0] )
+      if ( CharToLowercase( name[0] ) == CharToLowercase( herb_table[sn]->name[0] )
            && !str_prefix( name, herb_table[sn]->name ) )
 	{
 	  return sn;
@@ -167,7 +167,7 @@ int skill_lookup( const char *name )
 			  return -1;
 			}
 
-		      if ( LOWER( name[0] ) == LOWER( skill_table[sn]->name[0] )
+		      if ( CharToLowercase( name[0] ) == CharToLowercase( skill_table[sn]->name[0] )
 			   &&!str_prefix( name, skill_table[sn]->name ) )
 			{
 			  return sn;
@@ -217,7 +217,7 @@ int bsearch_skill( const char *name, int first, int top )
     {
       int sn = (first + top) >> 1;
 
-      if ( LOWER( name[0] ) == LOWER( skill_table[sn]->name[0] )
+      if ( CharToLowercase( name[0] ) == CharToLowercase( skill_table[sn]->name[0] )
            && !str_prefix( name, skill_table[sn]->name ) )
 	{
 	  return sn;
@@ -286,7 +286,7 @@ int ch_bsearch_skill( const Character *ch, const char *name, int first, int top 
     {
       int sn = (first + top) >> 1;
 
-      if ( LOWER(name[0]) == LOWER(skill_table[sn]->name[0])
+      if ( CharToLowercase(name[0]) == CharToLowercase(skill_table[sn]->name[0])
            && !str_prefix(name, skill_table[sn]->name)
            && ch->pcdata->learned[sn] > 0 )
 	{
@@ -585,7 +585,7 @@ int ris_save( const Character *ch, int save_chance, int ris )
 {
   short modifier = 10;
 
-  if ( IS_SET(ch->immune, ris ) )
+  if ( IsBitSet(ch->immune, ris ) )
     modifier -= 10;
 
   if ( ch->race == RACE_DROID && ( ris == SD_POISON || ris == SD_DRAIN ) )
@@ -594,10 +594,10 @@ int ris_save( const Character *ch, int save_chance, int ris )
   if ( ch->race == RACE_DROID && ris == RIS_MAGIC )
     modifier -= 5;
 
-  if ( IS_SET(ch->resistant, ris ) )
+  if ( IsBitSet(ch->resistant, ris ) )
     modifier -= 2;
 
-  if ( IS_SET(ch->susceptible, ris ) )
+  if ( IsBitSet(ch->susceptible, ris ) )
     modifier += 2;
 
   if ( modifier <= 0 )
@@ -844,7 +844,7 @@ bool saves_wands( int level, const Character *victim )
 {
   int save = 0;
 
-  if ( IS_SET( victim->immune, RIS_MAGIC ) )
+  if ( IsBitSet( victim->immune, RIS_MAGIC ) )
     {
       return true;
     }
@@ -881,7 +881,7 @@ bool saves_spell_staff( int level, const Character *victim )
 {
   int save = 0;
 
-  if ( IS_SET( victim->immune, RIS_MAGIC ) )
+  if ( IsBitSet( victim->immune, RIS_MAGIC ) )
     {
       return true;
     }
@@ -1051,7 +1051,7 @@ ch_ret obj_cast_spell( int sn, int level, Character *ch, Character *victim, OBJ_
       return rERROR;
     }
 
-  if ( IS_SET( ch->in_room->room_flags, ROOM_NO_MAGIC ) )
+  if ( IsBitSet( ch->in_room->room_flags, ROOM_NO_MAGIC ) )
     {
       set_char_color( AT_MAGIC, ch );
       send_to_char( "Nothing seems to happen...\r\n", ch );
@@ -1156,7 +1156,7 @@ ch_ret obj_cast_spell( int sn, int level, Character *ch, Character *victim, OBJ_
       vo = (void *) victim;
 
       if ( skill->type != SKILL_HERB
-           && IS_SET(victim->immune, RIS_MAGIC ) )
+           && IsBitSet(victim->immune, RIS_MAGIC ) )
         {
           immune_casting( skill, ch, victim, NULL );
           return rNONE;
@@ -1167,7 +1167,7 @@ ch_ret obj_cast_spell( int sn, int level, Character *ch, Character *victim, OBJ_
       vo = (void *) ch;
 
       if ( skill->type != SKILL_HERB
-           && IS_SET(ch->immune, RIS_MAGIC ) )
+           && IsBitSet(ch->immune, RIS_MAGIC ) )
         {
           immune_casting( skill, ch, victim, NULL );
           return rNONE;

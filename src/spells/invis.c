@@ -19,7 +19,7 @@ ch_ret spell_invis( int sn, int level, Character *ch, void *vo )
     {
       Affect af;
 
-      if ( IS_SET( victim->immune, RIS_MAGIC ) )
+      if ( IsBitSet( victim->immune, RIS_MAGIC ) )
         {
           immune_casting( skill, ch, victim, NULL );
           return rSPELL_FAILED;
@@ -56,7 +56,7 @@ ch_ret spell_invis( int sn, int level, Character *ch, void *vo )
               return rSPELL_FAILED;
             }
 
-          SET_BIT( obj->extra_flags, ITEM_INVIS );
+          SetBit( obj->extra_flags, ITEM_INVIS );
           act( AT_MAGIC, "$p fades out of existence.", ch, obj, NULL, TO_CHAR );
           return rNONE;
         }

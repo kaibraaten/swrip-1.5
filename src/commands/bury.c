@@ -83,6 +83,6 @@ void do_bury( Character *ch, char *argument )
 
   act( AT_ACTION, "You solemnly bury $p...", ch, obj, NULL, TO_CHAR );
   act( AT_ACTION, "$n solemnly buries $p...", ch, obj, NULL, TO_ROOM );
-  SET_BIT( obj->extra_flags, ITEM_BURRIED );
+  SetBit( obj->extra_flags, ITEM_BURRIED );
   SetWaitState( ch, urange( 10, move / 2, 100 ) );
 }

@@ -381,7 +381,7 @@ void WriteVendor( FILE *fp, Character *mob )
       fprintf (fp, "Owner     %s~\n", mob->owner );
     }
 
-  if ( QUICKMATCH( mob->short_descr, mob->pIndexData->short_descr) == 0 )
+  if ( str_cmp( mob->short_descr, mob->pIndexData->short_descr) )
     {
       fprintf( fp, "Short     %s~\n", mob->short_descr );
     }
@@ -445,7 +445,7 @@ Character *ReadVendor( FILE *fp )
 
       word = feof( fp ) ? "END" : fread_word( fp );
 
-      switch ( UPPER(word[0]) )
+      switch ( CharToUppercase(word[0]) )
 	{
 	case '*':
 	  fMatch = true;

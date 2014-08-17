@@ -21,13 +21,13 @@ void do_close( Character *ch, char *argument )
       /* 'close door' */
       Exit *pexit_rev = NULL;
 
-      if ( !IS_SET(pexit->exit_info, EX_ISDOOR) )
+      if ( !IsBitSet(pexit->exit_info, EX_ISDOOR) )
         {
 	  send_to_char( "You can't do that.\r\n", ch );
 	  return;
 	}
 
-      if ( IS_SET(pexit->exit_info, EX_CLOSED) )
+      if ( IsBitSet(pexit->exit_info, EX_CLOSED) )
         {
 	  send_to_char( "It's already closed.\r\n", ch );
 	  return;
@@ -42,7 +42,7 @@ void do_close( Character *ch, char *argument )
         {
           Character *rch = NULL;
 
-          SET_BIT( pexit_rev->exit_info, EX_CLOSED );
+          SetBit( pexit_rev->exit_info, EX_CLOSED );
 
           for ( rch = pexit->to_room->first_person; rch; rch = rch->next_in_room )
 	    {
@@ -80,21 +80,21 @@ void do_close( Character *ch, char *argument )
           return;
         }
 
-      if ( IS_SET(obj->value[1], CONT_CLOSED) )
+      if ( IsBitSet(obj->value[1], CONT_CLOSED) )
         {
           ch_printf( ch, "%s is already closed.\r\n",
 		     capitalize( obj->short_descr ) );
           return;
         }
 
-      if ( !IS_SET(obj->value[1], CONT_CLOSEABLE) )
+      if ( !IsBitSet(obj->value[1], CONT_CLOSEABLE) )
         {
           ch_printf( ch, "%s cannot be opened or closed.\r\n",
 		     capitalize( obj->short_descr ) );
 	  return;
         }
 
-      SET_BIT(obj->value[1], CONT_CLOSED);
+      SetBit(obj->value[1], CONT_CLOSED);
       act( AT_ACTION, "You close $p.", ch, obj, NULL, TO_CHAR );
       act( AT_ACTION, "$n closes $p.", ch, obj, NULL, TO_ROOM );
       check_for_trap( ch, obj, TRAP_CLOSE );

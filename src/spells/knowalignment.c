@@ -14,7 +14,7 @@ ch_ret spell_know_alignment( int sn, int level, Character *ch, void *vo )
       return rSPELL_FAILED;
     }
 
-  if ( IS_SET( victim->immune, RIS_MAGIC ) )
+  if ( IsBitSet( victim->immune, RIS_MAGIC ) )
     {
       immune_casting( skill, ch, victim, NULL );
       return rSPELL_FAILED;

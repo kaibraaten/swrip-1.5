@@ -240,10 +240,10 @@ void do_aset( Character *ch, char *argument )
             ch_printf( ch, "Unknown flag: %s\r\n", arg3 );
           else
             {
-              if ( IS_SET( tarea->flags, 1 << value ) )
-                REMOVE_BIT( tarea->flags, 1 << value );
+              if ( IsBitSet( tarea->flags, 1 << value ) )
+                RemoveBit( tarea->flags, 1 << value );
               else
-                SET_BIT( tarea->flags, 1 << value );
+                SetBit( tarea->flags, 1 << value );
             }
         }
       return;

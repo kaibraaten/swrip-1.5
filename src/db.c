@@ -958,8 +958,8 @@ void load_mobiles( Area *tarea, FILE *fp )
       pMobIndex->long_descr      = fread_string( fp );
       pMobIndex->description     = fread_string( fp );
 
-      pMobIndex->long_descr[0]   = UPPER(pMobIndex->long_descr[0]);
-      pMobIndex->description[0]  = UPPER(pMobIndex->description[0]);
+      pMobIndex->long_descr[0]   = CharToUppercase(pMobIndex->long_descr[0]);
+      pMobIndex->description[0]  = CharToUppercase(pMobIndex->description[0]);
 
       pMobIndex->act             = fread_number( fp ) | ACT_IsNpc;
       pMobIndex->affected_by     = fread_number( fp );
@@ -1196,8 +1196,8 @@ void load_objects( Area *tarea, FILE *fp )
 
       /* Commented out by Narn, Apr/96 to allow item short descs like
          Bonecrusher and Oblivion */
-      /*pObjIndex->short_descr[0]       = LOWER(pObjIndex->short_descr[0]);*/
-      pObjIndex->description[0] = UPPER(pObjIndex->description[0]);
+      /*pObjIndex->short_descr[0]       = CharToLowercase(pObjIndex->short_descr[0]);*/
+      pObjIndex->description[0] = CharToUppercase(pObjIndex->description[0]);
 
       ln = fread_line( fp );
       x1=x2=x3=x4=0;
@@ -1451,7 +1451,7 @@ void load_resets( Area *tarea, FILE *fp )
           if ( arg2 < 0
                ||   arg2 > MAX_DIR+1
                || ( pexit = get_exit(pRoomIndex, arg2)) == NULL
-               || !IS_SET( pexit->exit_info, EX_ISDOOR ) )
+               || !IsBitSet( pexit->exit_info, EX_ISDOOR ) )
             {
               bug( "Load_resets: 'D': exit %d not door.", arg2 );
               bug( "Reset: %c %d %d %d %d", letter, extra, arg1, arg2,
@@ -1945,7 +1945,7 @@ void fix_exits( void )
             }
 
           if ( !fexit )
-            SET_BIT( pRoomIndex->room_flags, ROOM_NO_MOB );
+            SetBit( pRoomIndex->room_flags, ROOM_NO_MOB );
         }
     }
 
@@ -2899,7 +2899,7 @@ void log_string_plus( const char *str, short log_type, short level )
 	    }
 
 	  if ( d->connection_state == CON_PLAYING
-	       && !IS_SET(och->deaf, CHANNEL_LOG)
+	       && !IsBitSet(och->deaf, CHANNEL_LOG)
 	       && vch->top_level >= level )
 	    {
 	      set_char_color( AT_LOG, vch );
@@ -3021,9 +3021,9 @@ void make_wizlist( )
               else
                 iflags = 0;
               fclose( gfp );
-              if ( IS_SET( iflags, PCFLAG_RETIRED ) )
+              if ( IsBitSet( iflags, PCFLAG_RETIRED ) )
                 ilevel = MAX_LEVEL - 4;
-              if ( IS_SET( iflags, PCFLAG_GUEST ) )
+              if ( IsBitSet( iflags, PCFLAG_GUEST ) )
                 ilevel = MAX_LEVEL - 4;
               add_to_wizlist( dentry->d_name, ilevel );
             }
@@ -3881,8 +3881,8 @@ OBJ_INDEX_DATA *make_object( vnum_t vnum, vnum_t cvnum, char *name )
       sprintf( buf, "A %s is here.", name );
       pObjIndex->description    = str_dup( buf );
       pObjIndex->action_desc    = str_dup( "" );
-      pObjIndex->short_descr[0] = LOWER(pObjIndex->short_descr[0]);
-      pObjIndex->description[0] = UPPER(pObjIndex->description[0]);
+      pObjIndex->short_descr[0] = CharToLowercase(pObjIndex->short_descr[0]);
+      pObjIndex->description[0] = CharToUppercase(pObjIndex->description[0]);
       pObjIndex->item_type      = ITEM_TRASH;
       pObjIndex->extra_flags    = ITEM_PROTOTYPE;
       pObjIndex->weight         = 1;
@@ -3966,9 +3966,9 @@ ProtoMobile *make_mobile( vnum_t vnum, vnum_t cvnum, char *name )
       sprintf( buf, "Some god abandoned a newly created %s here.\r\n", name );
       pMobIndex->long_descr             = str_dup( buf );
       pMobIndex->description    = str_dup( "" );
-      pMobIndex->short_descr[0] = LOWER(pMobIndex->short_descr[0]);
-      pMobIndex->long_descr[0]  = UPPER(pMobIndex->long_descr[0]);
-      pMobIndex->description[0] = UPPER(pMobIndex->description[0]);
+      pMobIndex->short_descr[0] = CharToLowercase(pMobIndex->short_descr[0]);
+      pMobIndex->long_descr[0]  = CharToUppercase(pMobIndex->long_descr[0]);
+      pMobIndex->description[0] = CharToUppercase(pMobIndex->description[0]);
       pMobIndex->act            = ACT_IsNpc | ACT_PROTOTYPE;
       pMobIndex->affected_by    = 0;
       pMobIndex->pShop          = NULL;
@@ -4141,7 +4141,7 @@ void fix_area_exits( Area *tarea )
             pexit->to_room = get_room_index( pexit->vnum );
         }
       if ( !fexit )
-        SET_BIT( pRoomIndex->room_flags, ROOM_NO_MOB );
+        SetBit( pRoomIndex->room_flags, ROOM_NO_MOB );
     }
 
 
@@ -4263,7 +4263,7 @@ void load_area_file( Area *tarea, char *filename )
                tarea->low_m_vnum, tarea->hi_m_vnum );
       if ( !tarea->author )
         tarea->author = str_dup( "" );
-      SET_BIT( tarea->status, AREA_LOADED );
+      SetBit( tarea->status, AREA_LOADED );
     }
   else
     fprintf( stderr, "(%s)\n", filename );
@@ -4481,7 +4481,7 @@ void show_vnums( Character *ch, vnum_t low, vnum_t high, bool proto, bool shownl
 
   for ( pArea = first_sort; pArea; pArea = pArea->next_sort )
     {
-      if ( IS_SET( pArea->status, AREA_DELETED ) )
+      if ( IsBitSet( pArea->status, AREA_DELETED ) )
         continue;
 
       if ( pArea->low_r_vnum < low )
@@ -4490,7 +4490,7 @@ void show_vnums( Character *ch, vnum_t low, vnum_t high, bool proto, bool shownl
       if ( pArea->hi_r_vnum > high )
         break;
 
-      if ( IS_SET(pArea->status, AREA_LOADED) )
+      if ( IsBitSet(pArea->status, AREA_LOADED) )
         loaded++;
       else if ( !shownl )
           continue;
@@ -4501,7 +4501,7 @@ void show_vnums( Character *ch, vnum_t low, vnum_t high, bool proto, bool shownl
                    pArea->low_r_vnum, pArea->hi_r_vnum,
                    pArea->low_o_vnum, pArea->hi_o_vnum,
                    pArea->low_m_vnum, pArea->hi_m_vnum,
-                   IS_SET(pArea->status, AREA_LOADED) ? loadst : notloadst );
+                   IsBitSet(pArea->status, AREA_LOADED) ? loadst : notloadst );
       count++;
     }
 
@@ -4571,7 +4571,7 @@ void fread_sysdata( SYSTEM_DATA *sys, FILE *fp )
       word   = feof( fp ) ? "End" : fread_word( fp );
       fMatch = false;
 
-      switch ( UPPER(word[0]) )
+      switch ( CharToUppercase(word[0]) )
         {
         case '*':
           fMatch = true;

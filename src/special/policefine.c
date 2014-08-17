@@ -21,7 +21,7 @@ bool spec_police_fine( Character *ch )
       if ( number_bits ( 1 ) == 0 )
         continue;
       for ( vip = 0 ; vip <= 31 ; vip++ )
-        if ( IS_SET ( ch->vip_flags , 1 << vip ) &&  IS_SET( victim->pcdata->wanted_flags , 1 << vip) )
+        if ( IsBitSet ( ch->vip_flags , 1 << vip ) &&  IsBitSet( victim->pcdata->wanted_flags , 1 << vip) )
           {
             sprintf( buf , "Hey you're wanted on %s!", planet_flags[vip] );
             do_say( ch , buf );
@@ -30,7 +30,7 @@ bool spec_police_fine( Character *ch )
             if( victim->in_room && victim->in_room->area )
               boost_economy( victim->in_room->area, (victim->gold)/2 );
             victim->gold /= 2;
-	    REMOVE_BIT( victim->pcdata->wanted_flags , 1 << vip );
+	    RemoveBit( victim->pcdata->wanted_flags , 1 << vip );
             return true;
           }
 

@@ -16,131 +16,131 @@ void do_config( Character *ch, char *argument )
     {
       send_to_char( "[ Keyword  ] Option\r\n", ch );
 
-      send_to_char(  IS_SET(ch->act, PLR_FLEE)
+      send_to_char(  IsBitSet(ch->act, PLR_FLEE)
                      ? "[+FLEE     ] You flee if you get attacked.\r\n"
                      : "[-flee     ] You fight back if you get attacked.\r\n"
                      , ch );
 
-      send_to_char(  IS_SET(ch->pcdata->flags, PCFLAG_NORECALL)
+      send_to_char(  IsBitSet(ch->pcdata->flags, PCFLAG_NORECALL)
                      ? "[+NORECALL ] You fight to the death, link-dead or not.\r\n"
                      : "[-norecall ] You try to recall if fighting link-dead.\r\n"
                      , ch );
 
-      send_to_char(  IS_SET(ch->act, PLR_AUTOEXIT)
+      send_to_char(  IsBitSet(ch->act, PLR_AUTOEXIT)
                      ? "[+AUTOEXIT ] You automatically see exits.\r\n"
                      : "[-autoexit ] You don't automatically see exits.\r\n"
                      , ch );
 
-      send_to_char(  IS_SET(ch->act, PLR_AUTOLOOT)
+      send_to_char(  IsBitSet(ch->act, PLR_AUTOLOOT)
                      ? "[+AUTOLOOT ] You automatically loot corpses.\r\n"
                      : "[-autoloot ] You don't automatically loot corpses.\r\n"
                      , ch );
 
-      send_to_char(  IS_SET(ch->act, PLR_AUTOSAC)
+      send_to_char(  IsBitSet(ch->act, PLR_AUTOSAC)
 ? "[+AUTOSAC  ] You automatically sacrifice corpses.\r\n"
                      : "[-autosac  ] You don't automatically sacrifice corpses.\r\n"
                      , ch );
 
-      send_to_char(  IS_SET(ch->act, PLR_AUTOGOLD)
+      send_to_char(  IsBitSet(ch->act, PLR_AUTOGOLD)
                      ? "[+AUTOCRED ] You automatically split credits from kills in groups.\r\n"
                      : "[-autocred ] You don't automatically split credits from kills in groups.\r\n"
                      , ch );
 
-      send_to_char(  IS_SET(ch->pcdata->flags, PCFLAG_GAG)
+      send_to_char(  IsBitSet(ch->pcdata->flags, PCFLAG_GAG)
                      ? "[+GAG      ] You see only necessary battle text.\r\n"
                      : "[-gag      ] You see full battle text.\r\n"
                      , ch );
 
-      send_to_char(  IS_SET(ch->pcdata->flags, PCFLAG_PAGERON)
+      send_to_char(  IsBitSet(ch->pcdata->flags, PCFLAG_PAGERON)
                      ? "[+PAGER    ] Long output is page-paused.\r\n"
                      : "[-pager    ] Long output scrolls to the end.\r\n"
                      , ch );
 
-      send_to_char(  IS_SET(ch->act, PLR_BLANK)
+      send_to_char(  IsBitSet(ch->act, PLR_BLANK)
                      ? "[+BLANK    ] You have a blank line before your prompt.\r\n"
                      : "[-blank    ] You have no blank line before your prompt.\r\n"
                      , ch );
 
-      send_to_char(  IS_SET(ch->act, PLR_BRIEF)
+      send_to_char(  IsBitSet(ch->act, PLR_BRIEF)
                      ? "[+BRIEF    ] You see brief descriptions.\r\n"
                      : "[-brief    ] You see long descriptions.\r\n"
                      , ch );
 
-      send_to_char(  IS_SET(ch->act, PLR_COMBINE)
+      send_to_char(  IsBitSet(ch->act, PLR_COMBINE)
                      ? "[+COMBINE  ] You see object lists in combined format.\r\n"
                      : "[-combine  ] You see object lists in single format.\r\n"
                      , ch );
 
-      send_to_char(  IS_SET(ch->pcdata->flags, PCFLAG_NOINTRO)
+      send_to_char(  IsBitSet(ch->pcdata->flags, PCFLAG_NOINTRO)
                      ? "[+NOINTRO  ] You don't see the ascii intro screen on login.\r\n"
                      : "[-nointro  ] You see the ascii intro screen on login.\r\n"
                      , ch );
 
-      send_to_char(  IS_SET(ch->act, PLR_PROMPT)
+      send_to_char(  IsBitSet(ch->act, PLR_PROMPT)
                      ? "[+PROMPT   ] You have a prompt.\r\n"
                      : "[-prompt   ] You don't have a prompt.\r\n"
                      , ch );
 
-      send_to_char(  IS_SET(ch->act, PLR_TELNET_GA)
+      send_to_char(  IsBitSet(ch->act, PLR_TELNET_GA)
  ? "[+TELNETGA ] You receive a telnet GA sequence.\r\n"
                      : "[-telnetga ] You don't receive a telnet GA sequence.\r\n"
                      , ch );
 
-      send_to_char(  IS_SET(ch->act, PLR_ANSI)
+      send_to_char(  IsBitSet(ch->act, PLR_ANSI)
                      ? "[+ANSI     ] You receive ANSI color sequences.\r\n"
                      : "[-ansi     ] You don't receive receive ANSI colors.\r\n"
                      , ch );
 
 
-      send_to_char(  IS_SET(ch->act, PLR_SHOVEDRAG)
+      send_to_char(  IsBitSet(ch->act, PLR_SHOVEDRAG)
                      ? "[+SHOVEDRAG] You allow yourself to be shoved and dragged around.\r\n"
                      : "[-shovedrag] You'd rather not be shoved or dragged around.\r\n"
                      , ch );
 
-      send_to_char(  IS_SET( ch->pcdata->flags, PCFLAG_NOSUMMON )
+      send_to_char(  IsBitSet( ch->pcdata->flags, PCFLAG_NOSUMMON )
                      ? "[+NOSUMMON ] You do not allow other players to summon you.\r\n"
                      : "[-nosummon ] You allow other players to summon you.\r\n"
                      , ch );
 
-      send_to_char(  IS_SET( ch->act, PLR_DONTAUTOFUEL )
+      send_to_char(  IsBitSet( ch->act, PLR_DONTAUTOFUEL )
                      ? "[+dontautofuel ] You will not refuel automatically on launch.\r\n"
                      : "[-dontautofuel] You refuel automatically on launch.\r\n"
                      , ch );
 
       if ( IsImmortal( ch ) )
-        send_to_char(  IS_SET(ch->act, PLR_ROOMVNUM)
+        send_to_char(  IsBitSet(ch->act, PLR_ROOMVNUM)
                        ? "[+VNUM     ] You can see the VNUM of a room.\r\n"
                        : "[-vnum     ] You do not see the VNUM of a room.\r\n"
                        , ch );
 
       if ( IsImmortal( ch ) )
-        send_to_char(  IS_SET(ch->act, PLR_AUTOMAP)    /* maps */
+        send_to_char(  IsBitSet(ch->act, PLR_AUTOMAP)    /* maps */
                        ? "[+MAP      ] You can see the MAP of a room.\r\n"
                        : "[-map      ] You do not see the MAP of a room.\r\n"
                        , ch );
 
       if ( IsImmortal( ch) )             /* Added 10/16 by Kuran of SWR */
-        send_to_char( IS_SET(ch->pcdata->flags, PCFLAG_ROOM)
+        send_to_char( IsBitSet(ch->pcdata->flags, PCFLAG_ROOM)
                       ? "[+ROOMFLAGS] You will see room flags.\r\n"
 		      : "[-roomflags] You will not see room flags.\r\n"
                       , ch );
 
-      send_to_char(  IS_SET(ch->act, PLR_SILENCE)
+      send_to_char(  IsBitSet(ch->act, PLR_SILENCE)
                      ? "[+SILENCE  ] You are silenced.\r\n"
                      : ""
                      , ch );
 
-      send_to_char( !IS_SET(ch->act, PLR_NO_EMOTE)
+      send_to_char( !IsBitSet(ch->act, PLR_NO_EMOTE)
                     ? ""
                     : "[-emote    ] You can't emote.\r\n"
                     , ch );
 
-      send_to_char( !IS_SET(ch->act, PLR_NO_TELL)
+      send_to_char( !IsBitSet(ch->act, PLR_NO_TELL)
                     ? ""
                     : "[-tell     ] You can't use 'tell'.\r\n"
                     , ch );
 
-      send_to_char( !IS_SET(ch->act, PLR_LITTERBUG)
+      send_to_char( !IsBitSet(ch->act, PLR_LITTERBUG)
                     ? ""
                     : "[-litter  ] A convicted litterbug. You cannot drop anything.\r\n"
                     , ch );
@@ -199,9 +199,9 @@ void do_config( Character *ch, char *argument )
         {
 
           if ( fSet )
-            SET_BIT    (ch->act, bit);
+            SetBit    (ch->act, bit);
           else
-            REMOVE_BIT (ch->act, bit);
+            RemoveBit (ch->act, bit);
 
           send_to_char( "Ok.\r\n", ch );
           return;
@@ -228,9 +228,9 @@ void do_config( Character *ch, char *argument )
             }
 
           if ( fSet )
-            SET_BIT(ch->pcdata->flags, bit);
+            SetBit(ch->pcdata->flags, bit);
           else
-            REMOVE_BIT(ch->pcdata->flags, bit);
+            RemoveBit(ch->pcdata->flags, bit);
 
           send_to_char( "Ok.\r\n", ch );
           return;

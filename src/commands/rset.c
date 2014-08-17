@@ -51,13 +51,13 @@ void do_rset( Character *ch, char *argument )
       /*
        * Protect from messing up prototype flag
        */
-      if ( IS_SET( location->room_flags, ROOM_PROTOTYPE ) )
+      if ( IsBitSet( location->room_flags, ROOM_PROTOTYPE ) )
         proto = true;
       else
         proto = false;
       location->room_flags      = value;
       if ( proto )
-        SET_BIT( location->room_flags, ROOM_PROTOTYPE );
+        SetBit( location->room_flags, ROOM_PROTOTYPE );
       return;
     }
 

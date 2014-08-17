@@ -48,7 +48,7 @@ void do_kill( Character *ch, char *argument )
       return;
     }
 
-  if ( victim->vip_flags != 0 && !IS_SET( victim->act, ACT_DROID )  )
+  if ( victim->vip_flags != 0 && !IsBitSet( victim->act, ACT_DROID )  )
     ch->alignment -= 10;
 
   SetWaitState( ch, 1 * PULSE_VIOLENCE );

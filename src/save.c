@@ -220,7 +220,7 @@ void save_char_obj( Character *ch )
   /*
    * Auto-backup pfile (can cause lag with high disk access situtations
    */
-  if ( IS_SET( sysdata.save_flags, SV_BACKUP ) )
+  if ( IsBitSet( sysdata.save_flags, SV_BACKUP ) )
     {
       sprintf( strback, "%s%c/%s", BACKUP_DIR, tolower(ch->name[0]),
                capitalize( ch->name ) );
@@ -337,7 +337,7 @@ void save_clone( Character *ch )
   /*
    * Auto-backup pfile (can cause lag with high disk access situtations
    */
-  if ( IS_SET( sysdata.save_flags, SV_BACKUP ) )
+  if ( IsBitSet( sysdata.save_flags, SV_BACKUP ) )
     {
       sprintf( strback, "%s%c/%s", BACKUP_DIR, tolower(ch->name[0]),
                capitalize( ch->name ) );
@@ -863,31 +863,31 @@ void fwrite_obj( const Character *ch, const OBJ_DATA *obj, FILE *fp, int iNest,
       fprintf( fp, "Count        %d\n",   obj->count           );
     }
 
-  if ( QUICKMATCH( obj->name, obj->pIndexData->name ) == 0 )
+  if ( str_cmp( obj->name, obj->pIndexData->name ) )
     {
       fprintf( fp, "Name         %s~\n",  obj->name            );
     }
 
-  if ( QUICKMATCH( obj->short_descr, obj->pIndexData->short_descr ) == 0 )
+  if ( str_cmp( obj->short_descr, obj->pIndexData->short_descr ) )
     {
       fprintf( fp, "ShortDescr   %s~\n",  obj->short_descr     );
     }
 
-  if ( QUICKMATCH( obj->description, obj->pIndexData->description ) == 0 )
+  if ( str_cmp( obj->description, obj->pIndexData->description ) )
     {
       fprintf( fp, "Description  %s~\n",  obj->description     );
     }
 
-  if ( QUICKMATCH( obj->action_desc, obj->pIndexData->action_desc ) == 0 )
+  if ( str_cmp( obj->action_desc, obj->pIndexData->action_desc ) )
     {
       fprintf( fp, "ActionDesc   %s~\n",  obj->action_desc     );
     }
 
-  fprintf( fp, "Vnum         %ld\n",     obj->pIndexData->vnum        );
+  fprintf( fp, "Vnum         %ld\n",     obj->pIndexData->vnum );
 
   if ( os_type == OS_CORPSE && obj->in_room )
     {
-      fprintf( fp, "Room         %ld\n",   obj->in_room->vnum         );
+      fprintf( fp, "Room         %ld\n",   obj->in_room->vnum  );
     }
 
   if ( obj->extra_flags != obj->pIndexData->extra_flags )
@@ -1199,7 +1199,7 @@ bool load_char_obj( Descriptor *d, char *name, bool preload )
 	      Character *mob = fread_mobile( fp );
 	      ch->pcdata->pet = mob;
 	      mob->master = ch;
-	      SET_BIT(mob->affected_by, AFF_CHARM);
+	      SetBit(mob->affected_by, AFF_CHARM);
 	    }
 	  else if ( !str_cmp( word, "END"    ) )
 	    {
@@ -1324,7 +1324,7 @@ void fread_char( Character *ch, FILE *fp, bool preload )
       const char *word = feof( fp ) ? "End" : fread_word( fp );
       bool fMatch = false;
 
-      switch ( UPPER(word[0]) )
+      switch ( CharToUppercase(word[0]) )
         {
         case '*':
           fMatch = true;
@@ -2165,7 +2165,7 @@ void fread_obj( Character *ch, FILE *fp, short os_type )
       const char *word = feof( fp ) ? "End" : fread_word( fp );
       bool fMatch = false;
 
-      switch ( UPPER(word[0]) )
+      switch ( CharToUppercase(word[0]) )
         {
         case '*':
           fMatch = true;
@@ -2698,7 +2698,7 @@ void load_storerooms( void )
               return;
             }
 
-          if ( !IS_SET( storeroom->room_flags, ROOM_CLANSTOREROOM ) )
+          if ( !IsBitSet( storeroom->room_flags, ROOM_CLANSTOREROOM ) )
             {
               sprintf( buf, "%s%ld", STOREROOM_DIR, storeroom->vnum );
               remove( buf );
@@ -2900,22 +2900,22 @@ void fwrite_mobile( FILE *fp, Character *mob )
 	       : mob->in_room->vnum );
     }
 
-  if ( QUICKMATCH( mob->name, mob->pIndexData->player_name) == 0 )
+  if ( str_cmp( mob->name, mob->pIndexData->player_name) )
     {
       fprintf( fp, "Name     %s~\n", mob->name );
     }
 
-  if ( QUICKMATCH( mob->short_descr, mob->pIndexData->short_descr) == 0 )
+  if ( str_cmp( mob->short_descr, mob->pIndexData->short_descr) )
     {
       fprintf( fp, "Short %s~\n", mob->short_descr );
     }
 
-  if ( QUICKMATCH( mob->long_descr, mob->pIndexData->long_descr) == 0 )
+  if ( str_cmp( mob->long_descr, mob->pIndexData->long_descr) )
     {
       fprintf( fp, "Long  %s~\n", mob->long_descr );
     }
 
-  if ( QUICKMATCH( mob->description, mob->pIndexData->description) == 0 )
+  if ( str_cmp( mob->description, mob->pIndexData->description) )
     {
       fprintf( fp, "Description %s~\n", mob->description );
     }
@@ -2991,7 +2991,7 @@ Character *fread_mobile( FILE *fp )
       word = feof( fp ) ? "EndMobile" : fread_word( fp );
       fMatch = false;
 
-      switch ( UPPER(word[0]) )
+      switch ( CharToUppercase(word[0]) )
 	{
 	case '*':
 	  fMatch = true;
@@ -3081,7 +3081,7 @@ void write_char_mobile( Character *ch , char *argument )
     }
 
   mob = ch->pcdata->pet;
-  REMOVE_BIT( mob->affected_by, AFF_CHARM );
+  RemoveBit( mob->affected_by, AFF_CHARM );
   fwrite_mobile( fp, mob );
   fclose( fp );
 }

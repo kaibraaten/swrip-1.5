@@ -27,7 +27,7 @@ void do_clan_withdraw( Character *ch, char *argument )
 
   if ( !HasComlink( ch ) )
     {
-      if (!ch->in_room || !IS_SET(ch->in_room->room_flags, ROOM_BANK) )
+      if (!ch->in_room || !IsBitSet(ch->in_room->room_flags, ROOM_BANK) )
         {
           send_to_char( "You must be in a bank or have a comlink to do that!\r\n", ch );
           return;

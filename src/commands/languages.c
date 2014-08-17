@@ -52,7 +52,7 @@ void do_languages( Character *ch, char *argument )
           return;
         }
       for ( sch = ch->in_room->first_person; sch; sch = sch->next )
-        if ( IsNpc(sch) && IS_SET(sch->act, ACT_SCHOLAR) &&
+        if ( IsNpc(sch) && IsBitSet(sch->act, ACT_SCHOLAR) &&
              knows_language( sch, ch->speaking, ch ) &&
              knows_language( sch, lang_array[lang], sch ) &&
              (!sch->speaking || knows_language( ch, sch->speaking, sch )) )
@@ -72,7 +72,7 @@ void do_languages( Character *ch, char *argument )
       prct = 5 + (GetCurrentIntelligence(ch) / 6) + (GetCurrentWisdom(ch) / 7);
       ch->pcdata->learned[sn] += prct;
       ch->pcdata->learned[sn] = umin(ch->pcdata->learned[sn], 99);
-      SET_BIT( ch->speaks, lang_array[lang] );
+      SetBit( ch->speaks, lang_array[lang] );
       if ( ch->pcdata->learned[sn] == prct )
         act( AT_PLAIN, "You begin lessons in $t.", ch, lang_names[lang],
              NULL, TO_CHAR );

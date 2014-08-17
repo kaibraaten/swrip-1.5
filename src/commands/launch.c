@@ -132,7 +132,7 @@ void do_launch( Character *ch, char *argument )
 	    }
         }
 
-      if( IS_SET( ch->act, PLR_DONTAUTOFUEL ) )
+      if( IsBitSet( ch->act, PLR_DONTAUTOFUEL ) )
         {
           if( IsShipDisabled( ship ) )
             {
@@ -173,7 +173,7 @@ void do_launch( Character *ch, char *argument )
 
         }
 
-      if( !IS_SET( ch->act, PLR_DONTAUTOFUEL ) )
+      if( !IsBitSet( ch->act, PLR_DONTAUTOFUEL ) )
         {
 	  int turret_num = 0;
 

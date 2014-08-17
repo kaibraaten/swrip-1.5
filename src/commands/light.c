@@ -26,7 +26,7 @@ void do_light( Character *ch, char *argument )
       send_to_char( "You can't light that.\r\n", ch );
       return;
     }
-  if ( !IS_SET( pipe_obj->value[3], PIPE_LIT ) )
+  if ( !IsBitSet( pipe_obj->value[3], PIPE_LIT ) )
     {
       if ( pipe_obj->value[1] < 1 )
         {
@@ -36,7 +36,7 @@ void do_light( Character *ch, char *argument )
         }
       act( AT_ACTION, "You carefully light $p.", ch, pipe_obj, NULL, TO_CHAR );
       act( AT_ACTION, "$n carefully lights $p.", ch, pipe_obj, NULL, TO_ROOM );
-      SET_BIT( pipe_obj->value[3], PIPE_LIT );
+      SetBit( pipe_obj->value[3], PIPE_LIT );
       return;
     }
   send_to_char( "It's already lit.\r\n", ch );

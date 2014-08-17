@@ -24,7 +24,7 @@ static int go_strcmp( const char *astr, const char *bstr )
 
   for ( ; *astr || *bstr; astr++, bstr++ )
     {
-      i=LOWER(*astr)-LOWER(*bstr);
+      i=CharToLowercase(*astr)-CharToLowercase(*bstr);
 
       if( i )
 	return i;

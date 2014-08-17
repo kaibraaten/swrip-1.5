@@ -96,7 +96,7 @@ void do_hail( Character *ch , char *argument )
       return;
     }
 
-  if ( IS_SET( ch->in_room->room_flags , ROOM_INDOORS ) )
+  if ( IsBitSet( ch->in_room->room_flags , ROOM_INDOORS ) )
     {
       send_to_char( "You'll have to go outside to do that!\r\n", ch );
       return;
@@ -109,7 +109,7 @@ void do_hail( Character *ch , char *argument )
     }
 
 
-  if ( IS_SET( ch->in_room->room_flags , ROOM_SPACECRAFT ) )
+  if ( IsBitSet( ch->in_room->room_flags , ROOM_SPACECRAFT ) )
     {
       send_to_char( "You can't do that on spacecraft!\r\n", ch );
       return;
@@ -138,7 +138,7 @@ void do_hail( Character *ch , char *argument )
 
       if ( room != NULL )
         {
-          if ( IS_SET(room->room_flags , ROOM_HOTEL ) )
+          if ( IsBitSet(room->room_flags , ROOM_HOTEL ) )
             break;
           else
             room = NULL;

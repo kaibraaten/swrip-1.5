@@ -63,12 +63,12 @@ void do_vassign( Character *ch, char *argument )
 
   if (r_lo == 0)                                /* Scryn 8/12/95 */
     {
-      REMOVE_BIT ( victim->pcdata->area->status, AREA_LOADED );
-      SET_BIT( victim->pcdata->area->status, AREA_DELETED );
+      RemoveBit ( victim->pcdata->area->status, AREA_LOADED );
+      SetBit( victim->pcdata->area->status, AREA_DELETED );
     }
   else
     {
-      SET_BIT( victim->pcdata->area->status, AREA_LOADED );
-      REMOVE_BIT( victim->pcdata->area->status, AREA_DELETED );
+      SetBit( victim->pcdata->area->status, AREA_LOADED );
+      RemoveBit( victim->pcdata->area->status, AREA_DELETED );
     }
 }

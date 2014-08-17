@@ -39,7 +39,7 @@ ch_ret spell_affect( int sn, int level, Character *ch, void *vo )
         }
 
       if ( (skill->type != SKILL_HERB
-            &&    IS_SET( victim->immune, RIS_MAGIC ))
+            &&    IsBitSet( victim->immune, RIS_MAGIC ))
            ||    is_immune( victim, SPELL_DAMAGE(skill) ) )
         {
           immune_casting( skill, ch, victim, NULL );
@@ -104,7 +104,7 @@ ch_ret spell_affect( int sn, int level, Character *ch, void *vo )
       if ( groupsp || areasp )
         {
           if ((groupsp && !is_same_group( victim, ch ))
-              ||         IS_SET( victim->immune, RIS_MAGIC )
+              ||         IsBitSet( victim->immune, RIS_MAGIC )
               ||   is_immune( victim, SPELL_DAMAGE(skill) )
               ||   check_save(sn, level, ch, victim)
               || (!SPELL_FLAG(skill, SF_RECASTABLE) && IsAffected(victim, sn)))

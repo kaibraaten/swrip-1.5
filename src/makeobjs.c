@@ -154,7 +154,7 @@ void make_corpse( Character *ch )
     {
       name = ch->short_descr;
 
-      if ( IS_SET ( ch->act , ACT_DROID ) )
+      if ( IsBitSet ( ch->act , ACT_DROID ) )
 	{
 	  corpse = create_object(get_obj_index(OBJ_VNUM_DROID_CORPSE), 0);
 	}

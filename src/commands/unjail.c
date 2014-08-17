@@ -26,7 +26,7 @@ void do_unjail ( Character *ch , char *argument )
       return;
     }
 
-  if ( IS_SET( ch->in_room->room_flags, ROOM_SAFE ) )
+  if ( IsBitSet( ch->in_room->room_flags, ROOM_SAFE ) )
     {
       set_char_color( AT_MAGIC, ch );
       send_to_char( "This isn't a good place to do that.\r\n", ch );

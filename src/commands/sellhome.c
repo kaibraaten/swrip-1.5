@@ -23,7 +23,7 @@ void do_sellhome (Character *ch, char *argument)
       return;
     }
 
-  if ( IS_SET(ch->act,PLR_HOME_RESIDENT) )
+  if ( IsBitSet(ch->act,PLR_HOME_RESIDENT) )
     {
       send_to_char("&RYou are not the owner of this home.\r\n",ch);
       return;
@@ -32,8 +32,8 @@ void do_sellhome (Character *ch, char *argument)
   DISPOSE(room->name);
   room->name = str_dup("An Empty Apartment");
   ch->gold += sellHomeCreditReturn;
-  REMOVE_BIT(room->room_flags,ROOM_PLR_HOME);
-  SET_BIT(room->room_flags,ROOM_EMPTY_HOME);
+  RemoveBit(room->room_flags,ROOM_PLR_HOME);
+  SetBit(room->room_flags,ROOM_EMPTY_HOME);
   fold_area(room->area,room->area->filename,false);
   ch->plr_home = NULL;
   do_save(ch,"");

@@ -92,7 +92,7 @@ void do_password( Character *ch, char *argument )
 
   DISPOSE( ch->pcdata->pwd );
   ch->pcdata->pwd = str_dup( pwdnew );
-  if ( IS_SET(sysdata.save_flags, SV_PASSCHG) )
+  if ( IsBitSet(sysdata.save_flags, SV_PASSCHG) )
     save_char_obj( ch );
   send_to_char( "Ok.\r\n", ch );
   return;

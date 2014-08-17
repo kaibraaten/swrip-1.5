@@ -99,13 +99,13 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *even
   Affect *hitroll = NULL;
   Affect *parry = NULL;
 
-  SET_BIT( lightsaber->wear_flags, ITEM_WIELD );
-  SET_BIT( lightsaber->wear_flags, ITEM_TAKE );
-  SET_BIT( lightsaber->extra_flags, ITEM_ANTI_SOLDIER );
-  SET_BIT( lightsaber->extra_flags, ITEM_ANTI_THIEF );
-  SET_BIT( lightsaber->extra_flags, ITEM_ANTI_HUNTER );
-  SET_BIT( lightsaber->extra_flags, ITEM_ANTI_PILOT );
-  SET_BIT( lightsaber->extra_flags, ITEM_ANTI_CITIZEN );
+  SetBit( lightsaber->wear_flags, ITEM_WIELD );
+  SetBit( lightsaber->wear_flags, ITEM_TAKE );
+  SetBit( lightsaber->extra_flags, ITEM_ANTI_SOLDIER );
+  SetBit( lightsaber->extra_flags, ITEM_ANTI_THIEF );
+  SetBit( lightsaber->extra_flags, ITEM_ANTI_HUNTER );
+  SetBit( lightsaber->extra_flags, ITEM_ANTI_PILOT );
+  SetBit( lightsaber->extra_flags, ITEM_ANTI_CITIZEN );
 
   lightsaber->weight = 5;
 
@@ -180,8 +180,8 @@ static void CheckRequirementsHandler( void *userData, CheckRequirementsEventArgs
 {
   Character *ch = GetEngineer( eventArgs->CraftingSession );
 
-  if ( !IS_SET( ch->in_room->room_flags, ROOM_SAFE )
-       || !IS_SET( ch->in_room->room_flags, ROOM_SILENCE ))
+  if ( !IsBitSet( ch->in_room->room_flags, ROOM_SAFE )
+       || !IsBitSet( ch->in_room->room_flags, ROOM_SILENCE ))
     {
       ch_printf( ch, "&RYou need to be in a quiet, peaceful place to craft a lightsaber.&w\r\n" );
       eventArgs->AbortSession = true;

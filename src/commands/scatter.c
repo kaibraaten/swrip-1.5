@@ -39,10 +39,10 @@ void do_scatter( Character *ch, char *argument )
       pRoomIndex = get_room_index( number_range( 0, 32767 ) );
 
       if ( pRoomIndex
-	   && !IS_SET(pRoomIndex->room_flags, ROOM_PRIVATE)
-	   && !IS_SET(pRoomIndex->room_flags, ROOM_SOLITARY)
-	   && !IS_SET(pRoomIndex->room_flags, ROOM_PROTOTYPE)
-	   && !IS_SET(pRoomIndex->room_flags, ROOM_SPACECRAFT) )
+	   && !IsBitSet(pRoomIndex->room_flags, ROOM_PRIVATE)
+	   && !IsBitSet(pRoomIndex->room_flags, ROOM_SOLITARY)
+	   && !IsBitSet(pRoomIndex->room_flags, ROOM_PROTOTYPE)
+	   && !IsBitSet(pRoomIndex->room_flags, ROOM_SPACECRAFT) )
 	{
 	  break;
 	}

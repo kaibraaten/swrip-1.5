@@ -25,7 +25,7 @@ void do_mpecho( Character *ch, char *argument )
     }
 
   actflags = ch->act;
-  REMOVE_BIT(ch->act, ACT_SECRETIVE);
+  RemoveBit(ch->act, ACT_SECRETIVE);
 
   if ( (color = get_color(argument)) )
     {

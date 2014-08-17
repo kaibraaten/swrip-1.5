@@ -414,7 +414,7 @@ void fold_area( Area *tarea, char *filename, bool install )
       if ( (pMobIndex = get_mob_index( vnum )) == NULL )
         continue;
       if ( install )
-        REMOVE_BIT( pMobIndex->act, ACT_PROTOTYPE );
+        RemoveBit( pMobIndex->act, ACT_PROTOTYPE );
       if ( pMobIndex->stats.perm_str != 13    ||   pMobIndex->stats.perm_int   != 13
            ||   pMobIndex->stats.perm_wis != 13       ||   pMobIndex->stats.perm_dex   != 13
            ||   pMobIndex->stats.perm_con != 13       ||   pMobIndex->stats.perm_cha   != 13
@@ -508,7 +508,7 @@ void fold_area( Area *tarea, char *filename, bool install )
       if ( (pObjIndex = get_obj_index( vnum )) == NULL )
         continue;
       if ( install )
-        REMOVE_BIT( pObjIndex->extra_flags, ITEM_PROTOTYPE );
+        RemoveBit( pObjIndex->extra_flags, ITEM_PROTOTYPE );
       fprintf( fpout, "#%ld\n",  vnum                            );
       fprintf( fpout, "%s~\n",  pObjIndex->name                 );
       fprintf( fpout, "%s~\n",  pObjIndex->short_descr          );
@@ -604,7 +604,7 @@ void fold_area( Area *tarea, char *filename, bool install )
           OBJ_DATA  *obj, *obj_next;
 
           /* remove prototype flag from room */
-          REMOVE_BIT( room->room_flags, ROOM_PROTOTYPE );
+          RemoveBit( room->room_flags, ROOM_PROTOTYPE );
           /* purge room of (prototyped) mobiles */
           for ( victim = room->first_person; victim; victim = vnext )
             {
@@ -633,7 +633,7 @@ void fold_area( Area *tarea, char *filename, bool install )
                  room->sector_type      );
       for ( xit = room->first_exit; xit; xit = xit->next )
         {
-          if ( IS_SET(xit->exit_info, EX_PORTAL) ) /* don't fold portals */
+          if ( IsBitSet(xit->exit_info, EX_PORTAL) ) /* don't fold portals */
             continue;
           fprintf( fpout, "D%d\n",              xit->vdir );
           fprintf( fpout, "%s~\n",              strip_cr( xit->description ) );
@@ -681,12 +681,12 @@ void fold_area( Area *tarea, char *filename, bool install )
         case 'e': case 'E':
         case 'd': case 'D':
         case 't': case 'T':
-          fprintf( fpout, "%c %d %d %d %d\n", UPPER(treset->command),
+          fprintf( fpout, "%c %d %d %d %d\n", CharToUppercase(treset->command),
                    treset->extra, treset->arg1, treset->arg2, treset->arg3 );
           break;
         case 'g': case 'G':
         case 'r': case 'R':
-          fprintf( fpout, "%c %d %d %d\n", UPPER(treset->command),
+          fprintf( fpout, "%c %d %d %d\n", CharToUppercase(treset->command),
                    treset->extra, treset->arg1, treset->arg2 );
           break;
         }
@@ -955,7 +955,7 @@ Reset *ParseReset( Area *tarea, char *argument, Character *ch )
                           return NULL;
                         }
                       if ( (pexit = get_exit(room, val2)) == NULL
-                           ||   !IS_SET( pexit->exit_info, EX_ISDOOR ) )
+                           ||   !IsBitSet( pexit->exit_info, EX_ISDOOR ) )
                         {
                           send_to_char( "Reset: DOOR: no such door\r\n", ch );
                           return NULL;
@@ -1005,29 +1005,29 @@ Reset *ParseReset( Area *tarea, char *argument, Character *ch )
                               argument = one_argument( argument, arg4 );
                               value = get_trapflag( arg4 );
                               if ( value >= 0 || value < 32 )
-                                SET_BIT( extra, 1 << value );
+                                SetBit( extra, 1 << value );
                               else
                                 {
                                   send_to_char( "Reset: TRAP: bad flag\r\n", ch );
                                   return NULL;
                                 }
                             }
-                          if ( IS_SET(extra, TRAP_ROOM) && IS_SET(extra, TRAP_OBJ) )
+                          if ( IsBitSet(extra, TRAP_ROOM) && IsBitSet(extra, TRAP_OBJ) )
                             {
                               send_to_char( "Reset: TRAP: Must specify room OR object, not both!\r\n", ch );
                               return NULL;
                             }
-                          if ( IS_SET(extra, TRAP_ROOM) && !get_room_index(val1) )
+                          if ( IsBitSet(extra, TRAP_ROOM) && !get_room_index(val1) )
                             {
                               send_to_char( "Reset: TRAP: no such room\r\n", ch );
                               return NULL;
                             }
-                          if ( IS_SET(extra, TRAP_OBJ)  && val1>0 && !get_obj_index(val1) )
+                          if ( IsBitSet(extra, TRAP_OBJ)  && val1>0 && !get_obj_index(val1) )
                             {
                               send_to_char( "Reset: TRAP: no such object\r\n", ch );
                               return NULL;
                             }
-                          if (!IS_SET(extra, TRAP_ROOM) && !IS_SET(extra, TRAP_OBJ) )
+                          if (!IsBitSet(extra, TRAP_ROOM) && !IsBitSet(extra, TRAP_OBJ) )
                             {
                               send_to_char( "Reset: TRAP: Must specify ROOM or OBJECT\r\n", ch );
                               return NULL;

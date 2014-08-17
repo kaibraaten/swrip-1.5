@@ -15,7 +15,7 @@ ch_ret spell_ventriloquate( int sn, int level, Character *ch, void *vo )
 
   sprintf( buf1, "%s says '%s'.\r\n",              speaker, spell_target_name );
   sprintf( buf2, "Someone makes %s say '%s'.\r\n", speaker, spell_target_name );
-  buf1[0] = UPPER(buf1[0]);
+  buf1[0] = CharToUppercase(buf1[0]);
 
   for ( vch = ch->in_room->first_person; vch; vch = vch->next_in_room )
     {

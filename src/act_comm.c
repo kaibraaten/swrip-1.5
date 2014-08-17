@@ -221,7 +221,7 @@ void talk_channel( Character *ch, const char *argument, int channel, const char 
       return;
     }
 
-  if ( IS_SET( ch->in_room->room_flags, ROOM_SILENCE ) )
+  if ( IsBitSet( ch->in_room->room_flags, ROOM_SILENCE ) )
     {
       send_to_char( "You can't do that here.\r\n", ch );
       return;
@@ -237,18 +237,18 @@ void talk_channel( Character *ch, const char *argument, int channel, const char 
   if ( argument[0] == '\0' )
     {
       sprintf( buf, "%s what?\r\n", verb );
-      buf[0] = UPPER(buf[0]);
+      buf[0] = CharToUppercase(buf[0]);
       send_to_char( buf, ch );  /* where'd this line go? */
       return;
     }
 
-  if ( !IsNpc(ch) && IS_SET(ch->act, PLR_SILENCE) )
+  if ( !IsNpc(ch) && IsBitSet(ch->act, PLR_SILENCE) )
     {
       ch_printf( ch, "You can't %s.\r\n", verb );
       return;
     }
 
-  REMOVE_BIT(ch->deaf, channel);
+  RemoveBit(ch->deaf, channel);
 
   switch ( channel )
     {
@@ -333,7 +333,7 @@ void talk_channel( Character *ch, const char *argument, int channel, const char 
       break;
     }
 
-  if ( IS_SET( ch->in_room->room_flags, ROOM_LOGSPEECH ) )
+  if ( IsBitSet( ch->in_room->room_flags, ROOM_LOGSPEECH ) )
     {
       sprintf( buf2, "%s: %s (%s)", IsNpc( ch ) ? ch->short_descr : ch->name,
                argument, verb );
@@ -350,7 +350,7 @@ void talk_channel( Character *ch, const char *argument, int channel, const char 
 
       if ( d->connection_state == CON_PLAYING
            &&   vch != ch
-           &&  !IS_SET(och->deaf, channel) )
+           &&  !IsBitSet(och->deaf, channel) )
         {
           const char *sbuf = argument;
 
@@ -379,7 +379,7 @@ void talk_channel( Character *ch, const char *argument, int channel, const char 
           if ( channel == CHANNEL_AVTALK && !IsAvatar(och) )
             continue;
 
-          if ( IS_SET( vch->in_room->room_flags, ROOM_SILENCE ) )
+          if ( IsBitSet( vch->in_room->room_flags, ROOM_SILENCE ) )
             continue;
 
           if ( channel == CHANNEL_YELL || channel == CHANNEL_SHOUT )
@@ -495,7 +495,7 @@ void to_channel( const char *argument, int channel, const char *verb, short leve
         continue;
 
       if ( d->connection_state == CON_PLAYING
-           &&  !IS_SET(och->deaf, channel)
+           &&  !IsBitSet(och->deaf, channel)
            &&   vch->top_level >= level )
         {
           set_char_color( AT_LOG, vch );
@@ -531,7 +531,7 @@ void add_follower( Character *ch, Character *master )
 
   ch->master        = master;
   ch->leader        = NULL;
-  if ( IsNpc(ch) && IS_SET(ch->act, ACT_PET) && !IsNpc(master) )
+  if ( IsNpc(ch) && IsBitSet(ch->act, ACT_PET) && !IsNpc(master) )
     master->pcdata->pet = ch;
 
   if ( CanSeeCharacter( master, ch ) )
@@ -553,7 +553,7 @@ void stop_follower( Character *ch )
 
   if ( IsAffectedBy(ch, AFF_CHARM) )
     {
-      REMOVE_BIT( ch->affected_by, AFF_CHARM );
+      RemoveBit( ch->affected_by, AFF_CHARM );
       affect_strip( ch, gsn_charm_person );
     }
 
@@ -617,8 +617,8 @@ void talk_auction (const char *argument)
   for (d = first_descriptor; d; d = d->next)
     {
       original = d->original ? d->original : d->character; /* if switched */
-      if ((d->connection_state == CON_PLAYING) && !IS_SET(original->deaf,CHANNEL_AUCTION)
-          && !IS_SET(original->in_room->room_flags, ROOM_SILENCE) && IsAuthed(original))
+      if ((d->connection_state == CON_PLAYING) && !IsBitSet(original->deaf,CHANNEL_AUCTION)
+          && !IsBitSet(original->in_room->room_flags, ROOM_SILENCE) && IsAuthed(original))
         act( AT_GOSSIP, buf, original, NULL, NULL, TO_CHAR );
     }
 }
@@ -635,10 +635,10 @@ bool knows_language( const Character *ch, int language, const Character *cch )
     return true;
   if ( IsNpc(ch) && !ch->speaks ) /* No langs = knows all for npcs */
     return true;
-  if ( IsNpc(ch) && IS_SET(ch->speaks, (language & ~LANG_CLAN)) )
+  if ( IsNpc(ch) && IsBitSet(ch->speaks, (language & ~LANG_CLAN)) )
     return true;
   /* everyone does not KNOW common tongue
-     if ( IS_SET(language, LANG_COMMON) )
+     if ( IsBitSet(language, LANG_COMMON) )
      return true;
   */
   if ( language & LANG_CLAN )
@@ -655,12 +655,12 @@ bool knows_language( const Character *ch, int language, const Character *cch )
       int lang;
 
       /* Racial languages for PCs */
-      if ( IS_SET(race_table[ch->race].language, language) )
+      if ( IsBitSet(race_table[ch->race].language, language) )
         return true;
 
       for ( lang = 0; lang_array[lang] != LANG_UNKNOWN; lang++ )
-        if ( IS_SET(language, lang_array[lang]) &&
-             IS_SET(ch->speaks, lang_array[lang]) )
+        if ( IsBitSet(language, lang_array[lang]) &&
+             IsBitSet(ch->speaks, lang_array[lang]) )
           {
             if ( (sn = skill_lookup(lang_names[lang])) != -1 )
               {

@@ -11,21 +11,21 @@ void do_tell( Character *ch, char *argument )
   Character *vch = NULL;
   bool sameroom = false;
 
-  if ( IS_SET( ch->deaf, CHANNEL_TELLS ) && !IsImmortal( ch ) )
+  if ( IsBitSet( ch->deaf, CHANNEL_TELLS ) && !IsImmortal( ch ) )
     {
       act( AT_PLAIN, "You have tells turned off... try chan +tells first",
 	   ch, NULL, NULL, TO_CHAR );
       return;
     }
 
-  if ( IS_SET( ch->in_room->room_flags, ROOM_SILENCE ) )
+  if ( IsBitSet( ch->in_room->room_flags, ROOM_SILENCE ) )
     {
       send_to_char( "You can't do that here.\r\n", ch );
       return;
     }
 
   if (!IsNpc(ch)
-      && ( IS_SET(ch->act, PLR_SILENCE) ||   IS_SET(ch->act, PLR_NO_TELL) ) )
+      && ( IsBitSet(ch->act, PLR_SILENCE) ||   IsBitSet(ch->act, PLR_NO_TELL) ) )
     {
       send_to_char( "You can't do that.\r\n", ch );
       return;
@@ -83,14 +83,14 @@ void do_tell( Character *ch, char *argument )
 
   if ( !IsNpc( victim ) && ( victim->switched )
        && ( GetTrustLevel( ch ) > LEVEL_AVATAR )
-       && !IS_SET(victim->switched->act, ACT_POLYMORPHED)
+       && !IsBitSet(victim->switched->act, ACT_POLYMORPHED)
        && !IsAffectedBy(victim->switched, AFF_POSSESS) )
     {
       send_to_char( "That player is switched.\r\n", ch );
       return;
     }
   else if ( !IsNpc( victim ) && ( victim->switched )
-            && (IS_SET(victim->switched->act, ACT_POLYMORPHED)
+            && (IsBitSet(victim->switched->act, ACT_POLYMORPHED)
                 ||  IsAffectedBy(victim->switched, AFF_POSSESS) ) )
     {
       switched_victim = victim->switched;
@@ -101,20 +101,20 @@ void do_tell( Character *ch, char *argument )
       return;
     }
 
-  if ( IS_SET( victim->deaf, CHANNEL_TELLS )
+  if ( IsBitSet( victim->deaf, CHANNEL_TELLS )
        && ( !IsImmortal( ch ) || ( GetTrustLevel( ch ) < GetTrustLevel( victim ) ) ) )
     {
       act( AT_PLAIN, "They can't hear you.", ch, NULL, victim, TO_CHAR );
       return;
     }
 
-  if ( !IsNpc (victim) && ( IS_SET (victim->act, PLR_SILENCE ) ) )
+  if ( !IsNpc (victim) && ( IsBitSet (victim->act, PLR_SILENCE ) ) )
     {
       send_to_char( "That player is silenced. They will receive your message but can not respond.\r\n", ch );
     }
 
   if ( (!IsImmortal(ch) && !IsAwake(victim) )
-       || (!IsNpc(victim)&&IS_SET(victim->in_room->room_flags, ROOM_SILENCE ) ) )
+       || (!IsNpc(victim)&&IsBitSet(victim->in_room->room_flags, ROOM_SILENCE ) ) )
     {
       act( AT_PLAIN, "$E can't hear you.", ch, 0, victim, TO_CHAR );
       return;
@@ -128,7 +128,7 @@ void do_tell( Character *ch, char *argument )
       return;
     }
 
-  if ( !IsNpc (victim) && ( IS_SET (victim->act, PLR_AFK ) ) )
+  if ( !IsNpc (victim) && ( IsBitSet (victim->act, PLR_AFK ) ) )
     {
       send_to_char( "That player is afk so he may not respond.\r\n", ch );
     }
@@ -156,7 +156,7 @@ void do_tell( Character *ch, char *argument )
   victim->position = position;
   victim->reply = ch;
 
-  if ( IS_SET( ch->in_room->room_flags, ROOM_LOGSPEECH ) )
+  if ( IsBitSet( ch->in_room->room_flags, ROOM_LOGSPEECH ) )
     {
       sprintf( buf, "%s: %s (tell to) %s.",
                IsNpc( ch ) ? ch->short_descr : ch->name,

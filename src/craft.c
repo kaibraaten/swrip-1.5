@@ -178,15 +178,15 @@ static void CheckRequirementsHandler( void *userData, CheckRequirementsEventArgs
 {
   Character *ch = GetEngineer( args->CraftingSession );
 
-  if( IS_SET( args->CraftingSession->Recipe->Flags, CRAFTFLAG_NEED_WORKSHOP )
-      && !IS_SET( ch->in_room->room_flags, ROOM_FACTORY ) )
+  if( IsBitSet( args->CraftingSession->Recipe->Flags, CRAFTFLAG_NEED_WORKSHOP )
+      && !IsBitSet( ch->in_room->room_flags, ROOM_FACTORY ) )
     {
       ch_printf( ch, "&RYou need to be in a factory or workshop to do that.\r\n" );
       args->AbortSession = true;
     }
 
-  if( IS_SET( args->CraftingSession->Recipe->Flags, CRAFTFLAG_NEED_REFINERY )
-      && !IS_SET( ch->in_room->room_flags, ROOM_REFINERY ) )
+  if( IsBitSet( args->CraftingSession->Recipe->Flags, CRAFTFLAG_NEED_REFINERY )
+      && !IsBitSet( ch->in_room->room_flags, ROOM_REFINERY ) )
     {
       ch_printf( ch, "&RYou need to be in a refinery to do that.\r\n" );
       args->AbortSession = true;
@@ -411,7 +411,7 @@ static bool CheckMaterials( CraftingSession *session, bool extract )
 	  args.Object = obj;
 	  args.KeepFinding = false;
 
-	  if( IS_SET( material->Material.Flags, CRAFTFLAG_EXTRACT ) )
+	  if( IsBitSet( material->Material.Flags, CRAFTFLAG_EXTRACT ) )
 	    {
 	      separate_obj( obj );
 	      obj_from_char( obj );
@@ -428,7 +428,7 @@ static bool CheckMaterials( CraftingSession *session, bool extract )
   while( material->Material.ItemType != ITEM_NONE )
     {
       if( !material->Found
-	  && !IS_SET( material->Material.Flags, CRAFTFLAG_OPTIONAL ) )
+	  && !IsBitSet( material->Material.Flags, CRAFTFLAG_OPTIONAL ) )
 	{
 	  OBJ_INDEX_DATA *proto = get_obj_index( session->Recipe->Prototype );
 

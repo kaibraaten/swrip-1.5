@@ -9,16 +9,16 @@ void do_beep( Character *ch, char *argument )
 
   argument = one_argument( argument, arg );
 
-  REMOVE_BIT( ch->deaf, CHANNEL_TELLS );
-  if ( IS_SET( ch->in_room->room_flags, ROOM_SILENCE ) )
+  RemoveBit( ch->deaf, CHANNEL_TELLS );
+  if ( IsBitSet( ch->in_room->room_flags, ROOM_SILENCE ) )
     {
       send_to_char( "You can't do that here.\r\n", ch );
       return;
     }
 
   if (!IsNpc(ch)
-      && ( IS_SET(ch->act, PLR_SILENCE)
-           ||   IS_SET(ch->act, PLR_NO_TELL) ) )
+      && ( IsBitSet(ch->act, PLR_SILENCE)
+           ||   IsBitSet(ch->act, PLR_NO_TELL) ) )
     {
       send_to_char( "You can't do that.\r\n", ch );
       return;
@@ -84,7 +84,7 @@ void do_beep( Character *ch, char *argument )
       return;
     }
 
-  if ( IS_SET( victim->deaf, CHANNEL_TELLS )
+  if ( IsBitSet( victim->deaf, CHANNEL_TELLS )
        && ( !IsImmortal( ch ) || ( GetTrustLevel( ch ) < GetTrustLevel( victim ) ) ) )
     {
       act( AT_PLAIN, "$E has $S tells turned off.", ch, NULL, victim,
@@ -92,13 +92,13 @@ void do_beep( Character *ch, char *argument )
       return;
     }
 
-  if ( !IsNpc (victim) && ( IS_SET (victim->act, PLR_SILENCE ) ) )
+  if ( !IsNpc (victim) && ( IsBitSet (victim->act, PLR_SILENCE ) ) )
     {
       send_to_char( "That player is silenced.  They will receive your message but can not respond.\r\n", ch );
     }
 
   if ( (!IsImmortal(ch) && !IsAwake(victim) )
-       || (!IsNpc(victim)&&IS_SET(victim->in_room->room_flags, ROOM_SILENCE ) ) )
+       || (!IsNpc(victim)&&IsBitSet(victim->in_room->room_flags, ROOM_SILENCE ) ) )
     {
       act( AT_PLAIN, "$E can't hear you.", ch, 0, victim, TO_CHAR );
       return;

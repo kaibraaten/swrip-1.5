@@ -209,10 +209,10 @@ static void show_char_to_char_0( Character *victim, Character *ch )
           strcat( buf, "(Switched) " );
     }
   if ( !IsNpc(victim)
-       && IS_SET(victim->act, PLR_AFK) )                strcat( buf, "[AFK] ");
+       && IsBitSet(victim->act, PLR_AFK) )                strcat( buf, "[AFK] ");
 
-  if ( (!IsNpc(victim) && IS_SET(victim->act, PLR_WIZINVIS))
-       || (IsNpc(victim) && IS_SET(victim->act, ACT_MOBINVIS)) )
+  if ( (!IsNpc(victim) && IsBitSet(victim->act, PLR_WIZINVIS))
+       || (IsNpc(victim) && IsBitSet(victim->act, ACT_MOBINVIS)) )
     {
       if (!IsNpc(victim))
         sprintf( buf1,"(Invis %d) ", victim->pcdata->wizinvis );
@@ -228,10 +228,10 @@ static void show_char_to_char_0( Character *victim, Character *ch )
   if ( ( victim->mana > 10 )
        &&   ( IsAffectedBy( ch , AFF_DETECT_MAGIC ) || IsImmortal( ch ) ) )
     strcat( buf, "&B(Blue Aura)&w "  );
-  if ( !IsNpc(victim) && IS_SET(victim->act, PLR_LITTERBUG  ) )
+  if ( !IsNpc(victim) && IsBitSet(victim->act, PLR_LITTERBUG  ) )
     strcat( buf, "(LITTERBUG) "  );
   if ( IsNpc(victim) && IsImmortal(ch)
-       && IS_SET(victim->act, ACT_PROTOTYPE) ) strcat( buf, "(PROTO) " );
+       && IsBitSet(victim->act, ACT_PROTOTYPE) ) strcat( buf, "(PROTO) " );
   if ( victim->desc && victim->desc->connection_state == CON_EDITING )
     strcat( buf, "(Writing) " );
 
@@ -244,7 +244,7 @@ static void show_char_to_char_0( Character *victim, Character *ch )
       return;
     }
 
-  if ( !IsNpc(victim) && !IS_SET(ch->act, PLR_BRIEF) )
+  if ( !IsNpc(victim) && !IsBitSet(ch->act, PLR_BRIEF) )
     strcat( buf, victim->pcdata->title );
   else
     strcat( buf, PERS( victim, ch ) );
@@ -447,7 +447,7 @@ static void show_char_to_char_0( Character *victim, Character *ch )
     }
 
   strcat( buf, "\r\n" );
-  buf[0] = UPPER(buf[0]);
+  buf[0] = CharToUppercase(buf[0]);
   send_to_char( buf, ch );
   show_visible_affects_to_char( victim, ch );
 }
@@ -485,7 +485,7 @@ static void show_char_to_char_1( Character *victim, Character *ch )
         {
           if ( ( obj = GetEquipmentOnCharacter( victim, iWear ) ) != NULL
                &&   CanSeeObject( ch, obj ) &&
-               ( ( obj->description && obj->description[0] != '\0' ) || ( IS_SET(ch->act, PLR_HOLYLIGHT) || IsNpc(ch) ) ) )
+               ( ( obj->description && obj->description[0] != '\0' ) || ( IsBitSet(ch->act, PLR_HOLYLIGHT) || IsNpc(ch) ) ) )
             {
               if ( !found )
                 {
@@ -671,7 +671,7 @@ static bool requirements_are_met( Character *ch )
     }
 
   if ( !IsNpc(ch)
-       && !IS_SET(ch->act, PLR_HOLYLIGHT)
+       && !IsBitSet(ch->act, PLR_HOLYLIGHT)
        && !IsAffectedBy(ch, AFF_TRUESIGHT)
        && room_is_dark( ch->in_room ) )
     {
@@ -742,7 +742,7 @@ static void look_in( Character *ch, char *what, bool doexaprog )
       for ( pexit = ch->in_room->first_exit; pexit; pexit = pexit->next )
 	{
 	  if ( pexit->vdir == DIR_PORTAL
-	       &&   IS_SET(pexit->exit_info, EX_PORTAL) )
+	       &&   IsBitSet(pexit->exit_info, EX_PORTAL) )
 	    {
 	      Room *original = NULL;
 
@@ -771,7 +771,7 @@ static void look_in( Character *ch, char *what, bool doexaprog )
     case ITEM_CORPSE_NPC:
     case ITEM_CORPSE_PC:
     case ITEM_DROID_CORPSE:
-      if ( IS_SET(obj->value[1], CONT_CLOSED) )
+      if ( IsBitSet(obj->value[1], CONT_CLOSED) )
 	{
 	  send_to_char( "It is closed.\r\n", ch );
 	  break;
@@ -796,10 +796,10 @@ static void show_exit_to_char( Character *ch, Exit *pexit, short door )
 {
   if ( pexit->keyword )
     {
-      if ( IS_SET(pexit->exit_info, EX_CLOSED)
-	   && !IS_SET(pexit->exit_info, EX_WINDOW) )
+      if ( IsBitSet(pexit->exit_info, EX_CLOSED)
+	   && !IsBitSet(pexit->exit_info, EX_WINDOW) )
 	{
-	  if ( IS_SET(pexit->exit_info, EX_SECRET)
+	  if ( IsBitSet(pexit->exit_info, EX_SECRET)
 	       && door != DIR_INVALID )
 	    {
 	      send_to_char( "Nothing special there.\r\n", ch );
@@ -812,7 +812,7 @@ static void show_exit_to_char( Character *ch, Exit *pexit, short door )
 	  return;
 	}
 
-      if ( IS_SET( pexit->exit_info, EX_BASHED ) )
+      if ( IsBitSet( pexit->exit_info, EX_BASHED ) )
 	{
 	  act(AT_RED, "The $d has been bashed from its hinges!",
 	      ch, NULL, pexit->keyword, TO_CHAR);
@@ -833,12 +833,12 @@ static void show_exit_to_char( Character *ch, Exit *pexit, short door )
    */
   if ( pexit->to_room
        && ( IsAffectedBy( ch, AFF_SCRYING )
-	    || IS_SET( pexit->exit_info, EX_xLOOK )
+	    || IsBitSet( pexit->exit_info, EX_xLOOK )
 	    || GetTrustLevel(ch) >= LEVEL_IMMORTAL ) )
     {
       Room *original = NULL;
 
-      if ( !IS_SET( pexit->exit_info, EX_xLOOK )
+      if ( !IsBitSet( pexit->exit_info, EX_xLOOK )
 	   && GetTrustLevel( ch ) < LEVEL_IMMORTAL )
 	{
 	  set_char_color( AT_MAGIC, ch );
@@ -902,7 +902,7 @@ static void show_no_arg( Character *ch, bool is_auto )
 
   if ( !ch->desc->original )
     {
-      if ((GetTrustLevel(ch) >= LEVEL_IMMORTAL) && (IS_SET(ch->pcdata->flags, PCFLAG_ROOM)))
+      if ((GetTrustLevel(ch) >= LEVEL_IMMORTAL) && (IsBitSet(ch->pcdata->flags, PCFLAG_ROOM)))
 	{
 	  set_char_color(AT_PURPLE, ch);
 	  ch_printf(ch, "{%d:%s}", ch->in_room->vnum, ch->in_room->area->filename);
@@ -915,12 +915,12 @@ static void show_no_arg( Character *ch, bool is_auto )
   send_to_char( "\r\n", ch );
   set_char_color( AT_RMDESC, ch );
 
-  if ( !IsNpc(ch) && !IS_SET(ch->act, PLR_BRIEF ) )
+  if ( !IsNpc(ch) && !IsBitSet(ch->act, PLR_BRIEF ) )
     {
       send_to_char( ch->in_room->description, ch );
     }
 
-  if ( !IsNpc(ch) && IS_SET(ch->act, PLR_AUTOEXIT) )
+  if ( !IsNpc(ch) && IsBitSet(ch->act, PLR_AUTOEXIT) )
     {
       do_exits( ch, "" );
     }

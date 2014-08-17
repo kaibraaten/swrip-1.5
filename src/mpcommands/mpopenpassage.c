@@ -77,7 +77,7 @@ void do_mp_open_passage( Character *ch, char *argument )
 
   if( (pexit = get_exit( fromRoom, exit_num )) != NULL )
     {
-      if( !IS_SET( pexit->exit_info, EX_PASSAGE) )
+      if( !IsBitSet( pexit->exit_info, EX_PASSAGE) )
         return;
       progbug( "MpOpenPassage - Exit exists", ch );
       return;

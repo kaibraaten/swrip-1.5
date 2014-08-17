@@ -278,7 +278,7 @@ void interpret( Character *ch, char *argument )
       /*
        * Implement freeze command.
        */
-      if ( !IsNpc(ch) && IS_SET(ch->act, PLR_FREEZE) )
+      if ( !IsNpc(ch) && IsBitSet(ch->act, PLR_FREEZE) )
         {
           send_to_char( "You're totally frozen!\r\n", ch );
           return;
@@ -331,7 +331,7 @@ void interpret( Character *ch, char *argument )
 
       trust = GetTrustLevel( ch );
 
-      for ( cmd = command_hash[LOWER(command[0])%126]; cmd; cmd = cmd->next )
+      for ( cmd = command_hash[CharToLowercase(command[0])%126]; cmd; cmd = cmd->next )
         if ( !str_prefix( command, cmd->name )
              && (cmd->level <= trust
 		 ||(!IsNpc(ch) && ch->pcdata->bestowments && ch->pcdata->bestowments[0] != '\0'
@@ -345,9 +345,9 @@ void interpret( Character *ch, char *argument )
       /*
        * Turn off afk bit when any command performed.
        */
-      if ( IS_SET ( ch->act, PLR_AFK)  && (str_cmp(command, "AFK")))
+      if ( IsBitSet ( ch->act, PLR_AFK)  && (str_cmp(command, "AFK")))
         {
-          REMOVE_BIT( ch->act, PLR_AFK );
+          RemoveBit( ch->act, PLR_AFK );
           act( AT_GREY, "$n is no longer afk.", ch, NULL, NULL, TO_ROOM );
         }
     }
@@ -364,7 +364,7 @@ void interpret( Character *ch, char *argument )
 
   loglvl = found ? cmd->log : LOG_NORMAL;
 
-  if ( ( !IsNpc(ch) && IS_SET(ch->act, PLR_LOG) )
+  if ( ( !IsNpc(ch) && IsBitSet(ch->act, PLR_LOG) )
        || fLogAll
        || loglvl == LOG_BUILD
        || loglvl == LOG_HIGH
@@ -387,7 +387,7 @@ void interpret( Character *ch, char *argument )
        * file only, and not spam the log channel to death       -Thoric
        */
       if ( fLogAll && loglvl == LOG_NORMAL
-           && (IsNpc(ch) || !IS_SET(ch->act, PLR_LOG)) )
+           && (IsNpc(ch) || !IsBitSet(ch->act, PLR_LOG)) )
 	{
 	  loglvl = LOG_ALL;
 	}
@@ -445,13 +445,13 @@ void interpret( Character *ch, char *argument )
 
           /* check for an auto-matic exit command */
           if ( ( pexit = find_door( ch, command, true ) ) != NULL
-               && IS_SET( pexit->exit_info, EX_xAUTO ) )
+               && IsBitSet( pexit->exit_info, EX_xAUTO ) )
             {
-              if ( IS_SET( pexit->exit_info, EX_CLOSED )
+              if ( IsBitSet( pexit->exit_info, EX_CLOSED )
                    && ( !IsAffectedBy( ch, AFF_PASS_DOOR )
-                       || IS_SET( pexit->exit_info, EX_NOPASSDOOR ) ) )
+                       || IsBitSet( pexit->exit_info, EX_NOPASSDOOR ) ) )
                 {
-                  if ( !IS_SET( pexit->exit_info, EX_SECRET ) )
+                  if ( !IsBitSet( pexit->exit_info, EX_SECRET ) )
 		    {
 		      act( AT_PLAIN, "The $d is closed.", ch, NULL, pexit->keyword, TO_CHAR );
 		    }
@@ -522,7 +522,7 @@ void interpret( Character *ch, char *argument )
 CMDTYPE *find_command( const char *command )
 {
   CMDTYPE *cmd = NULL;
-  int hash = LOWER(command[0]) % 126;
+  int hash = CharToLowercase(command[0]) % 126;
 
   for ( cmd = command_hash[hash]; cmd; cmd = cmd->next )
     {
@@ -571,7 +571,7 @@ bool check_social( Character *ch, const char *command, char *argument )
       return false;
     }
 
-  if ( !IsNpc(ch) && IS_SET(ch->act, PLR_NO_EMOTE) )
+  if ( !IsNpc(ch) && IsBitSet(ch->act, PLR_NO_EMOTE) )
     {
       send_to_char( "You are anti-social!\r\n", ch );
       return true;
@@ -632,12 +632,12 @@ bool check_social( Character *ch, const char *command, char *argument )
       if ( !IsNpc(ch) && IsNpc(victim)
            && !IsAffectedBy(victim, AFF_CHARM)
            && IsAwake(victim)
-           && !IS_SET( victim->pIndexData->mprog.progtypes, ACT_PROG ) )
+           && !IsBitSet( victim->pIndexData->mprog.progtypes, ACT_PROG ) )
         {
           switch ( number_bits( 4 ) )
             {
             case 0:
-              if ( !IS_SET(ch->in_room->room_flags, ROOM_SAFE )
+              if ( !IsBitSet(ch->in_room->room_flags, ROOM_SAFE )
                    && IsEvil(ch) )
                 {
                   if ( !str_cmp( social->name, "slap" ) || !str_cmp( social->name, "punch" ) )

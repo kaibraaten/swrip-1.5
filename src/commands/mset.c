@@ -53,7 +53,7 @@ void do_mset( Character *ch, char *argument )
         }
       DISPOSE( victim->description );
       victim->description = CopyBuffer( ch );
-      if ( IsNpc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc(victim) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
         {
           DISPOSE( victim->pIndexData->description );
           victim->pIndexData->description = str_dup( victim->description );
@@ -202,7 +202,7 @@ void do_mset( Character *ch, char *argument )
           return;
         }
       victim->stats.perm_str = value;
-      if ( IsNpc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc(victim) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->stats.perm_str = value;
       return;
     }
@@ -217,7 +217,7 @@ void do_mset( Character *ch, char *argument )
           return;
         }
       victim->stats.perm_int = value;
-      if ( IsNpc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc(victim) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->stats.perm_int = value;
       return;
     }
@@ -232,7 +232,7 @@ void do_mset( Character *ch, char *argument )
           return;
         }
       victim->stats.perm_wis = value;
-      if ( IsNpc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc(victim) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->stats.perm_wis = value;
       return;
     }
@@ -247,7 +247,7 @@ void do_mset( Character *ch, char *argument )
           return;
         }
       victim->stats.perm_dex = value;
-      if ( IsNpc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc(victim) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->stats.perm_dex = value;
       return;
     }
@@ -262,7 +262,7 @@ void do_mset( Character *ch, char *argument )
           return;
         }
       victim->stats.perm_con = value;
-      if ( IsNpc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc(victim) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->stats.perm_con = value;
       return;
     }
@@ -277,7 +277,7 @@ void do_mset( Character *ch, char *argument )
           return;
         }
       victim->stats.perm_cha = value;
-      if ( IsNpc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc(victim) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->stats.perm_cha = value;
       return;
     }
@@ -292,7 +292,7 @@ void do_mset( Character *ch, char *argument )
           return;
         }
       victim->stats.perm_lck = value;
-      if ( IsNpc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc(victim) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->stats.perm_lck = value;
       return;
     }
@@ -308,7 +308,7 @@ void do_mset( Character *ch, char *argument )
           return;
         }
       victim->stats.perm_frc = value;
-      if ( IsNpc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc(victim) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->stats.perm_frc = value;
       return;
     }
@@ -323,7 +323,7 @@ void do_mset( Character *ch, char *argument )
           return;
         }
       victim->saving.poison_death = value;
-      if ( IsNpc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc(victim) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->saving.poison_death = value;
       return;
     }
@@ -338,7 +338,7 @@ void do_mset( Character *ch, char *argument )
           return;
         }
       victim->saving.wand = value;
-      if ( IsNpc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc(victim) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->saving.wand = value;
       return;
     }
@@ -353,7 +353,7 @@ void do_mset( Character *ch, char *argument )
           return;
         }
       victim->saving.para_petri = value;
-      if ( IsNpc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc(victim) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->saving.para_petri = value;
       return;
     }
@@ -368,7 +368,7 @@ void do_mset( Character *ch, char *argument )
           return;
         }
       victim->saving.breath = value;
-      if ( IsNpc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc(victim) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->saving.breath = value;
       return;
     }
@@ -383,7 +383,7 @@ void do_mset( Character *ch, char *argument )
           return;
         }
       victim->saving.spell_staff = value;
-      if ( IsNpc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc(victim) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->saving.spell_staff = value;
       return;
     }
@@ -398,7 +398,7 @@ void do_mset( Character *ch, char *argument )
           return;
         }
       victim->sex = value;
-      if ( IsNpc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc(victim) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->sex = value;
       return;
     }
@@ -421,7 +421,7 @@ void do_mset( Character *ch, char *argument )
           return;
         }
       victim->race = value;
-      if ( IsNpc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc(victim) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->race = value;
       return;
     }
@@ -436,7 +436,7 @@ void do_mset( Character *ch, char *argument )
 	  return;
         }
       victim->armor = value;
-      if ( IsNpc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc(victim) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->ac = value;
       return;
     }
@@ -470,7 +470,7 @@ void do_mset( Character *ch, char *argument )
       victim->hitroll = value/5;
       victim->damroll = value/5;
 
-      if ( IsNpc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc(victim) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
         {
           victim->pIndexData->level = value;
           victim->pIndexData->ac = 100-value*2.5;
@@ -509,7 +509,7 @@ void do_mset( Character *ch, char *argument )
           return;
         }
       victim->numattacks = value;
-      if ( IsNpc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc(victim) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->numattacks = value;
       return;
     }
@@ -519,7 +519,7 @@ void do_mset( Character *ch, char *argument )
       if ( !can_mmodify( ch, victim ) )
         return;
       victim->gold = value;
-      if ( IsNpc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc(victim) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->gold = value;
       return;
     }
@@ -529,7 +529,7 @@ void do_mset( Character *ch, char *argument )
       if ( !can_mmodify( ch, victim ) )
         return;
       victim->hitroll = urange(0, value, 85);
-      if ( IsNpc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc(victim) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->hitroll = victim->hitroll;
       return;
     }
@@ -539,7 +539,7 @@ void do_mset( Character *ch, char *argument )
       if ( !can_mmodify( ch, victim ) )
         return;
       victim->damroll = urange(0, value, 65);
-      if ( IsNpc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc(victim) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->damroll = victim->damroll;
       return;
     }
@@ -593,7 +593,7 @@ void do_mset( Character *ch, char *argument )
 	  return;
         }
       victim->alignment = value;
-      if ( IsNpc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc(victim) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->alignment = value;
       return;
     }
@@ -637,7 +637,7 @@ void do_mset( Character *ch, char *argument )
 
       DISPOSE( victim->pcdata->pwd );
       victim->pcdata->pwd = str_dup( pwdnew );
-      if ( IS_SET(sysdata.save_flags, SV_PASSCHG) )
+      if ( IsBitSet(sysdata.save_flags, SV_PASSCHG) )
         save_char_obj( victim );
       send_to_char( "Ok.\r\n", ch );
       ch_printf( victim, "Your password has been changed by %s.\r\n", ch->name );
@@ -750,7 +750,7 @@ void do_mset( Character *ch, char *argument )
 
       DISPOSE( victim->name );
       victim->name = str_dup( arg3 );
-      if ( IsNpc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc(victim) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
         {
           DISPOSE( victim->pIndexData->player_name );
           victim->pIndexData->player_name = str_dup( victim->name );
@@ -820,7 +820,7 @@ void do_mset( Character *ch, char *argument )
     {
       DISPOSE( victim->short_descr );
       victim->short_descr = str_dup( arg3 );
-      if ( IsNpc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc(victim) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
         {
           DISPOSE( victim->pIndexData->short_descr );
           victim->pIndexData->short_descr = str_dup( victim->short_descr );
@@ -834,7 +834,7 @@ void do_mset( Character *ch, char *argument )
       strcpy( buf, arg3 );
       strcat( buf, "\r\n" );
       victim->long_descr = str_dup( buf );
-      if ( IsNpc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc(victim) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
         {
           DISPOSE( victim->pIndexData->long_descr );
           victim->pIndexData->long_descr = str_dup( victim->long_descr );
@@ -848,7 +848,7 @@ void do_mset( Character *ch, char *argument )
         {
           DISPOSE( victim->description );
           victim->description = str_dup( arg3 );
-          if ( IsNpc( victim ) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+          if ( IsNpc( victim ) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
             {
               DISPOSE(victim->pIndexData->description );
               victim->pIndexData->description = str_dup( victim->description );
@@ -895,7 +895,7 @@ void do_mset( Character *ch, char *argument )
         {
           victim->spec_fun = NULL;
           send_to_char( "Special function removed.\r\n", ch );
-          if ( IsNpc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+          if ( IsNpc(victim) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
             victim->pIndexData->spec_fun = victim->spec_fun;
           return;
         }
@@ -905,7 +905,7 @@ void do_mset( Character *ch, char *argument )
           send_to_char( "No such spec fun.\r\n", ch );
           return;
         }
-      if ( IsNpc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc(victim) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->spec_fun = victim->spec_fun;
       return;
     }
@@ -924,7 +924,7 @@ void do_mset( Character *ch, char *argument )
         {
           victim->spec_2 = NULL;
           send_to_char( "Special function removed.\r\n", ch );
-          if ( IsNpc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+          if ( IsNpc(victim) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
             victim->pIndexData->spec_2 = victim->spec_2;
           return;
         }
@@ -934,7 +934,7 @@ void do_mset( Character *ch, char *argument )
           send_to_char( "No such spec fun.\r\n", ch );
           return;
         }
-      if ( IsNpc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc(victim) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->spec_2 = victim->spec_2;
       return;
     }
@@ -1003,10 +1003,10 @@ void do_mset( Character *ch, char *argument )
                 else
                   {
                     if ( pcflag )
-                      TOGGLE_BIT( victim->pcdata->flags, 1 << value );
+                      ToggleBit( victim->pcdata->flags, 1 << value );
                     else
                       {
-                        TOGGLE_BIT( victim->act, 1 << value );
+                        ToggleBit( victim->act, 1 << value );
                         /* NPC check added by Gorog */
                         if ( IsNpc(victim) && (1 << value == ACT_PROTOTYPE) )
                           victim->pIndexData->act = victim->act;
@@ -1014,7 +1014,7 @@ void do_mset( Character *ch, char *argument )
                   }
             }
         }
-      if ( IsNpc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc(victim) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->act = victim->act;
       return;
     }
@@ -1048,7 +1048,7 @@ void do_mset( Character *ch, char *argument )
           if ( value < 0 || value > 31 )
             ch_printf( ch, "Unknown flag: %s\r\n", arg3 );
           else
-            TOGGLE_BIT( victim->pcdata->wanted_flags, 1 << value );
+            ToggleBit( victim->pcdata->wanted_flags, 1 << value );
         }
       return;
     }
@@ -1077,9 +1077,9 @@ void do_mset( Character *ch, char *argument )
           if ( value < 0 || value > 31 )
             ch_printf( ch, "Unknown flag: %s\r\n", arg3 );
           else
-            TOGGLE_BIT( victim->vip_flags, 1 << value );
+            ToggleBit( victim->vip_flags, 1 << value );
         }
-      if ( IsNpc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc(victim) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->vip_flags = victim->vip_flags;
       return;
     }
@@ -1106,9 +1106,9 @@ void do_mset( Character *ch, char *argument )
           if ( value < 0 || value > 31 )
             ch_printf( ch, "Unknown flag: %s\r\n", arg3 );
           else
-            TOGGLE_BIT( victim->affected_by, 1 << value );
+            ToggleBit( victim->affected_by, 1 << value );
         }
-      if ( IsNpc( victim ) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc( victim ) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->affected_by = victim->affected_by;
       return;
     }
@@ -1248,9 +1248,9 @@ void do_mset( Character *ch, char *argument )
           if ( value < 0 || value > 31 )
             ch_printf( ch, "Unknown flag: %s\r\n", arg3 );
           else
-            TOGGLE_BIT( victim->resistant, 1 << value );
+            ToggleBit( victim->resistant, 1 << value );
         }
-      if ( IsNpc( victim ) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc( victim ) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->resistant = victim->resistant;
       return;
     }
@@ -1277,9 +1277,9 @@ void do_mset( Character *ch, char *argument )
           if ( value < 0 || value > 31 )
             ch_printf( ch, "Unknown flag: %s\r\n", arg3 );
           else
-            TOGGLE_BIT( victim->immune, 1 << value );
+            ToggleBit( victim->immune, 1 << value );
         }
-      if ( IsNpc( victim ) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc( victim ) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->immune = victim->immune;
       return;
     }
@@ -1305,10 +1305,10 @@ void do_mset( Character *ch, char *argument )
           if ( value < 0 || value > 31 )
             ch_printf( ch, "Unknown flag: %s\r\n", arg3 );
           else
-            TOGGLE_BIT( victim->susceptible, 1 << value );
+            ToggleBit( victim->susceptible, 1 << value );
         }
-      if ( IsNpc( victim ) && IS_SET( victim->act, ACT_PROTOTYPE ) )
-	if ( IsNpc( victim ) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc( victim ) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
+	if ( IsNpc( victim ) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
 	  victim->pIndexData->susceptible = victim->susceptible;
       return;
     }
@@ -1334,9 +1334,9 @@ void do_mset( Character *ch, char *argument )
           if ( value < 0 || value > 31 )
             ch_printf( ch, "Unknown flag: %s\r\n", arg3 );
           else
-            TOGGLE_BIT( victim->xflags, 1 << value );
+            ToggleBit( victim->xflags, 1 << value );
         }
-      if ( IsNpc( victim ) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc( victim ) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->xflags = victim->xflags;
       return;
     }
@@ -1365,9 +1365,9 @@ void do_mset( Character *ch, char *argument )
           if ( value < 0 || value > 31 )
             ch_printf( ch, "Unknown flag: %s\r\n", arg3 );
           else
-            TOGGLE_BIT( victim->attacks, 1 << value );
+            ToggleBit( victim->attacks, 1 << value );
         }
-      if ( IsNpc( victim ) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc( victim ) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->attacks = victim->attacks;
       return;
     }
@@ -1394,9 +1394,9 @@ void do_mset( Character *ch, char *argument )
           if ( value < 0 || value > 31 )
             ch_printf( ch, "Unknown flag: %s\r\n", arg3 );
           else
-            TOGGLE_BIT( victim->defenses, 1 << value );
+            ToggleBit( victim->defenses, 1 << value );
         }
-      if ( IsNpc( victim ) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc( victim ) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->defenses = victim->defenses;
       return;
     }
@@ -1416,7 +1416,7 @@ void do_mset( Character *ch, char *argument )
           return;
         }
       victim->position = value;
-      if ( IsNpc( victim ) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc( victim ) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->position = victim->position;
       send_to_char( "Done.\r\n", ch );
       return;
@@ -1437,7 +1437,7 @@ void do_mset( Character *ch, char *argument )
           return;
         }
       victim->defposition = value;
-      if ( IsNpc( victim ) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc( victim ) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->defposition = victim->defposition;
       send_to_char( "Done.\r\n", ch );
       return;
@@ -1504,7 +1504,7 @@ void do_mset( Character *ch, char *argument )
           send_to_char( "Number of hitpoint dice range is 0 to 30000.\r\n", ch );
           return;
         }
-      if ( IsNpc( victim ) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc( victim ) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->hitnodice = value;
       send_to_char( "Done.\r\n", ch );
       return;
@@ -1524,7 +1524,7 @@ void do_mset( Character *ch, char *argument )
           send_to_char( "Hitpoint dice size range is 0 to 30000.\r\n", ch );
           return;
         }
-      if ( IsNpc( victim ) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc( victim ) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->hitsizedice = value;
       send_to_char( "Done.\r\n", ch );
       return;
@@ -1544,7 +1544,7 @@ void do_mset( Character *ch, char *argument )
           send_to_char( "Hitpoint bonus range is 0 to 30000.\r\n", ch );
           return;
         }
-      if ( IsNpc( victim ) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc( victim ) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->hitplus = value;
       send_to_char( "Done.\r\n", ch );
       return;
@@ -1564,7 +1564,7 @@ void do_mset( Character *ch, char *argument )
           send_to_char( "Number of damage dice range is 0 to 100.\r\n", ch );
           return;
         }
-      if ( IsNpc( victim ) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc( victim ) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->damnodice = value;
       send_to_char( "Done.\r\n", ch );
       return;
@@ -1585,7 +1585,7 @@ void do_mset( Character *ch, char *argument )
           send_to_char( "Damage dice size range is 0 to 100.\r\n", ch );
           return;
         }
-      if ( IsNpc( victim ) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc( victim ) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->damsizedice = value;
       send_to_char( "Done.\r\n", ch );
       return;
@@ -1606,7 +1606,7 @@ void do_mset( Character *ch, char *argument )
           return;
         }
 
-      if ( IsNpc( victim ) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc( victim ) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->damplus = value;
       send_to_char( "Done.\r\n", ch );
       return;
@@ -1625,9 +1625,9 @@ void do_mset( Character *ch, char *argument )
       if ( !can_mmodify( ch, victim ) )
         return;
 
-      if ( !IS_SET(victim->pcdata->area->status, AREA_LOADED ) )
+      if ( !IsBitSet(victim->pcdata->area->status, AREA_LOADED ) )
         {
-          SET_BIT( victim->pcdata->area->status, AREA_LOADED );
+          SetBit( victim->pcdata->area->status, AREA_LOADED );
           send_to_char( "Your area set to LOADED!\r\n", victim );
           if ( ch != victim )
             send_to_char( "Area set to LOADED!\r\n", ch );
@@ -1635,7 +1635,7 @@ void do_mset( Character *ch, char *argument )
         }
       else
         {
-          REMOVE_BIT( victim->pcdata->area->status, AREA_LOADED );
+          RemoveBit( victim->pcdata->area->status, AREA_LOADED );
           send_to_char( "Your area set to NOT-LOADED!\r\n", victim );
           if ( ch != victim )
             send_to_char( "Area set to NON-LOADED!\r\n", ch );
@@ -1673,16 +1673,16 @@ void do_mset( Character *ch, char *argument )
                     continue;
                   }
               }
-          TOGGLE_BIT( victim->speaks, value );
+          ToggleBit( victim->speaks, value );
         }
       if ( !IsNpc( victim ) )
         {
-          REMOVE_BIT( victim->speaks, race_table[victim->race].language );
+          RemoveBit( victim->speaks, race_table[victim->race].language );
           if ( !knows_language( victim, victim->speaking, victim ) )
             victim->speaking = race_table[victim->race].language;
         }
       else
-        if ( IS_SET( victim->act, ACT_PROTOTYPE ) )
+        if ( IsBitSet( victim->act, ACT_PROTOTYPE ) )
           victim->pIndexData->speaks = victim->speaks;
       send_to_char( "Done.\r\n", ch );
       return;
@@ -1709,9 +1709,9 @@ void do_mset( Character *ch, char *argument )
           if ( value == LANG_UNKNOWN )
             ch_printf( ch, "Unknown language: %s\r\n", arg3 );
           else
-            TOGGLE_BIT( victim->speaking, value );
+            ToggleBit( victim->speaking, value );
         }
-      if ( IsNpc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
+      if ( IsNpc(victim) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
         victim->pIndexData->speaking = victim->speaking;
       send_to_char( "Done.\r\n", ch );
       return;

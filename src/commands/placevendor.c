@@ -36,7 +36,7 @@ void do_placevendor (Character *ch, char *argument)
       return;
     }
 
-  if (!IS_SET(ch->in_room->room_flags, ROOM_PLR_SHOP) )
+  if (!IsBitSet(ch->in_room->room_flags, ROOM_PLR_SHOP) )
     {
       send_to_char( "You need to find a free shop.\r\n", ch);
       return;

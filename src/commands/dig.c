@@ -34,8 +34,8 @@ void do_dig( Character *ch, char *argument )
             }
           if ( pexit )
             {
-              if ( !IS_SET(pexit->exit_info, EX_DIG)
-                   &&   !IS_SET(pexit->exit_info, EX_CLOSED) )
+              if ( !IsBitSet(pexit->exit_info, EX_DIG)
+                   &&   !IsBitSet(pexit->exit_info, EX_CLOSED) )
                 {
                   send_to_char( "There is no need to dig out that exit.\r\n", ch );
                   return;
@@ -101,14 +101,14 @@ void do_dig( Character *ch, char *argument )
   if ( arg[0] != '\0' )
     {
       if ( ( pexit = find_door( ch, arg, true ) ) != NULL
-           &&     IS_SET( pexit->exit_info, EX_DIG )
-           &&     IS_SET( pexit->exit_info, EX_CLOSED ) )
+           &&     IsBitSet( pexit->exit_info, EX_DIG )
+           &&     IsBitSet( pexit->exit_info, EX_CLOSED ) )
         {
           /* 4 times harder to dig open a passage without a shovel */
           if ( (number_percent() * (shovel ? 1 : 4)) <
                (IsNpc(ch) ? 80 : ch->pcdata->learned[gsn_dig]) )
             {
-              REMOVE_BIT( pexit->exit_info, EX_CLOSED );
+              RemoveBit( pexit->exit_info, EX_CLOSED );
               send_to_char( "You dig open a passageway!\r\n", ch );
               act( AT_PLAIN, "$n digs open a passageway!", ch, NULL, NULL, TO_ROOM );
               learn_from_success( ch, gsn_dig );
@@ -145,7 +145,7 @@ void do_dig( Character *ch, char *argument )
     }
 
   separate_obj(obj);
-  REMOVE_BIT( obj->extra_flags, ITEM_BURRIED );
+  RemoveBit( obj->extra_flags, ITEM_BURRIED );
   act( AT_SKILL, "Your dig uncovered $p!", ch, obj, NULL, TO_CHAR );
   act( AT_SKILL, "$n's dig uncovered $p!", ch, obj, NULL, TO_ROOM );
   learn_from_success( ch, gsn_dig );

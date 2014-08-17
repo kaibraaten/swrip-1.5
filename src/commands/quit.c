@@ -8,7 +8,7 @@ void do_quit( Character *ch, char *argument )
   char qbuf[MAX_INPUT_LENGTH];
   char buf[MAX_INPUT_LENGTH];
 
-  if ( IsNpc(ch) && IS_SET(ch->act, ACT_POLYMORPHED))
+  if ( IsNpc(ch) && IsBitSet(ch->act, ACT_POLYMORPHED))
     {
       send_to_char("You can't quit while polymorphed.\r\n", ch);
       return;
@@ -38,7 +38,7 @@ void do_quit( Character *ch, char *argument )
     }
 
   if ( !IsImmortal(ch) && ch->in_room
-       && !IS_SET( ch->in_room->room_flags, ROOM_HOTEL )
+       && !IsBitSet( ch->in_room->room_flags, ROOM_HOTEL )
        && IsAuthed(ch) )
     {
       send_to_char("You may not quit here.\r\n", ch);
@@ -48,9 +48,9 @@ void do_quit( Character *ch, char *argument )
     }
 
   if ( !IsImmortal(ch) && ch->in_room
-       && IS_SET( ch->in_room->room_flags, ROOM_HOTEL )
-       && !IS_SET( ch->in_room->room_flags, ROOM_PLR_HOME )
-       && !IS_SET( ch->in_room->room_flags, ROOM_SPACECRAFT )
+       && IsBitSet( ch->in_room->room_flags, ROOM_HOTEL )
+       && !IsBitSet( ch->in_room->room_flags, ROOM_PLR_HOME )
+       && !IsBitSet( ch->in_room->room_flags, ROOM_SPACECRAFT )
        && IsAuthed(ch) )
     {
       cost = GetCostToQuit( ch );

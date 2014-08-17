@@ -5,13 +5,13 @@ void do_revert(Character *ch, char *argument)
 {
   Character *mob;
 
-  if ( !IsNpc(ch) || !IS_SET(ch->act, ACT_POLYMORPHED) )
+  if ( !IsNpc(ch) || !IsBitSet(ch->act, ACT_POLYMORPHED) )
     {
       send_to_char("You are not polymorphed.\r\n", ch);
       return;
     }
 
-  REMOVE_BIT(ch->act, ACT_POLYMORPHED);
+  RemoveBit(ch->act, ACT_POLYMORPHED);
 
   char_from_room(ch->desc->original);
 

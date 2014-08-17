@@ -47,15 +47,15 @@ void do_invis( Character *ch, char *argument )
         ch->mobinvis = ch->top_level;
     }
 
-  if ( IS_SET(ch->act, PLR_WIZINVIS) )
+  if ( IsBitSet(ch->act, PLR_WIZINVIS) )
     {
-      REMOVE_BIT(ch->act, PLR_WIZINVIS);
+      RemoveBit(ch->act, PLR_WIZINVIS);
       act( AT_IMMORT, "$n slowly fades into existence.", ch, NULL, NULL, TO_ROOM );
       send_to_char( "You slowly fade back into existence.\r\n", ch );
     }
   else
     {
-      SET_BIT(ch->act, PLR_WIZINVIS);
+      SetBit(ch->act, PLR_WIZINVIS);
       act( AT_IMMORT, "$n slowly fades into thin air.", ch, NULL, NULL, TO_ROOM );
       send_to_char( "You slowly vanish into thin air.\r\n", ch );
     }

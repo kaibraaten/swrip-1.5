@@ -210,7 +210,7 @@ void claim_disintegration( Character *ch, const Character *victim )
 
   if (bounty == NULL)
     {
-      if ( IS_SET(victim->act , PLR_KILLER ) && !IsNpc(ch) )
+      if ( IsBitSet(victim->act , PLR_KILLER ) && !IsNpc(ch) )
         {
           xp = urange(1, xp_compute(ch, victim) , ( exp_level(GetAbilityLevel( ch, HUNTING_ABILITY ) + 1) - exp_level(GetAbilityLevel( ch, HUNTING_ABILITY ) ) ) );
           gain_exp( ch, HUNTING_ABILITY, xp );
@@ -219,7 +219,7 @@ void claim_disintegration( Character *ch, const Character *victim )
         }
       else if ( !IsNpc(ch) )
         {
-          SET_BIT(ch->act, PLR_KILLER );
+          SetBit(ch->act, PLR_KILLER );
           ch_printf( ch, "You are now wanted for the murder of %s.\r\n", victim->name );
         }
 
@@ -237,8 +237,8 @@ void claim_disintegration( Character *ch, const Character *victim )
   sprintf( buf, "The disintegration bounty on %s has been claimed!",victim->name );
   echo_to_all ( AT_RED , buf, 0 );
 
-  if ( !IS_SET(victim->act , PLR_KILLER ) )
-    SET_BIT(ch->act, PLR_KILLER );
+  if ( !IsBitSet(victim->act , PLR_KILLER ) )
+    SetBit(ch->act, PLR_KILLER );
 
   remove_disintegration(bounty);
 }

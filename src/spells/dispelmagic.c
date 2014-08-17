@@ -7,7 +7,7 @@ ch_ret spell_dispel_magic( int sn, int level, Character *ch, void *vo )
   int affected_by, cnt;
   SKILLTYPE *skill = get_skilltype(sn);
 
-  if ( IS_SET( victim->immune, RIS_MAGIC ) )
+  if ( IsBitSet( victim->immune, RIS_MAGIC ) )
     {
       immune_casting( skill, ch, victim, NULL );
       return rSPELL_FAILED;
@@ -42,7 +42,7 @@ ch_ret spell_dispel_magic( int sn, int level, Character *ch, void *vo )
   for ( ;; )
     {
       affected_by = 1 << number_bits( 5 );
-      if ( IS_SET(victim->affected_by, affected_by) )
+      if ( IsBitSet(victim->affected_by, affected_by) )
         break;
       if ( cnt++ > 30 )
         {
@@ -51,7 +51,7 @@ ch_ret spell_dispel_magic( int sn, int level, Character *ch, void *vo )
         }
     }
 
-  REMOVE_BIT(victim->affected_by, affected_by);
+  RemoveBit(victim->affected_by, affected_by);
   successful_casting( skill, ch, victim, NULL );
 
   return rNONE;

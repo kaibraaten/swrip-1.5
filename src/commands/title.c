@@ -7,7 +7,7 @@ void do_title( Character *ch, char *argument )
   if ( IsNpc(ch) )
     return;
 
-  if ( IS_SET( ch->pcdata->flags, PCFLAG_NOTITLE ))
+  if ( IsBitSet( ch->pcdata->flags, PCFLAG_NOTITLE ))
     {
       send_to_char( "You try but the Force resists you.\r\n", ch );
       return;

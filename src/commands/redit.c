@@ -242,7 +242,7 @@ void do_redit( Character *ch, char *argument )
             send_to_char( "If you want to build a player home use the 'empty_home' flag instead.\r\n", ch );
           else
             {
-              TOGGLE_BIT( location->room_flags, 1 << value );
+              ToggleBit( location->room_flags, 1 << value );
             }
         }
 
@@ -428,7 +428,7 @@ void do_redit( Character *ch, char *argument )
 
           for ( value = 0; value <= MAX_EXFLAG; value++ )
             {
-              if ( IS_SET( xit->exit_info, 1 << value ) )
+              if ( IsBitSet( xit->exit_info, 1 << value ) )
                 {
                   strcat( buf, exit_flags[value] );
                   strcat( buf, " " );
@@ -448,7 +448,7 @@ void do_redit( Character *ch, char *argument )
           if ( value < 0 || value > MAX_EXFLAG )
             ch_printf( ch, "Unknown flag: %s\r\n", arg2 );
           else
-            TOGGLE_BIT( xit->exit_info, 1 << value );
+            ToggleBit( xit->exit_info, 1 << value );
         }
 
       return;

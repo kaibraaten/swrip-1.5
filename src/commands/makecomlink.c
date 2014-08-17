@@ -99,8 +99,8 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   char buf[MAX_STRING_LENGTH];
   OBJ_DATA *comlink = args->Object;
 
-  SET_BIT( comlink->wear_flags, ITEM_TAKE );
-  SET_BIT( comlink->wear_flags, ud->WearLocation );
+  SetBit( comlink->wear_flags, ITEM_TAKE );
+  SetBit( comlink->wear_flags, ud->WearLocation );
 
   comlink->weight = 1;
 

@@ -32,15 +32,15 @@ void do_freeze( Character *ch, char *argument )
       return;
     }
 
-  if ( IS_SET(victim->act, PLR_FREEZE) )
+  if ( IsBitSet(victim->act, PLR_FREEZE) )
     {
-      REMOVE_BIT(victim->act, PLR_FREEZE);
+      RemoveBit(victim->act, PLR_FREEZE);
       send_to_char( "You can play again.\r\n", victim );
       send_to_char( "FREEZE removed.\r\n", ch );
     }
   else
     {
-      SET_BIT(victim->act, PLR_FREEZE);
+      SetBit(victim->act, PLR_FREEZE);
       send_to_char( "You can't do ANYthing!\r\n", victim );
       send_to_char( "FREEZE set.\r\n", ch );
     }

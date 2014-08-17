@@ -56,7 +56,7 @@ void do_drag( Character *ch, char *argument )
 
   exit_dir = get_dir( arg2 );
 
-  if ( IS_SET(victim->in_room->room_flags, ROOM_SAFE)
+  if ( IsBitSet(victim->in_room->room_flags, ROOM_SAFE)
        &&   get_timer( victim, TIMER_SHOVEDRAG ) <= 0)
     {
       send_to_char("That character cannot be dragged right now.\r\n", ch);
@@ -80,7 +80,7 @@ void do_drag( Character *ch, char *argument )
               return;
             }
 
-          if ( IS_SET( ch->act, ACT_MOUNTED ) )
+          if ( IsBitSet( ch->act, ACT_MOUNTED ) )
             {
 	      act( AT_PLAIN, "You can't go in there riding THAT.", ch, NULL, argument, TO_CHAR );
               return;
@@ -151,7 +151,7 @@ void do_drag( Character *ch, char *argument )
               return;
             }
 
-          if ( IS_SET( ch->act, ACT_MOUNTED ) )
+          if ( IsBitSet( ch->act, ACT_MOUNTED ) )
             {
               act( AT_PLAIN, "You can't go out there riding THAT.", ch, NULL, argument, TO_CHAR );
               return;
@@ -226,9 +226,9 @@ void do_drag( Character *ch, char *argument )
       nogo = true;
     }
   else
-    if ( IS_SET(pexit->exit_info, EX_CLOSED)
+    if ( IsBitSet(pexit->exit_info, EX_CLOSED)
          && (!IsAffectedBy(victim, AFF_PASS_DOOR)
-             ||   IS_SET(pexit->exit_info, EX_NOPASSDOOR)) )
+             ||   IsBitSet(pexit->exit_info, EX_NOPASSDOOR)) )
       nogo = true;
   if ( nogo )
     {

@@ -8,13 +8,13 @@ void do_addresident(Character *ch, char *argument)
 
   home = ch->in_room;
 
-  if ( !IS_SET(home->room_flags,ROOM_PLR_HOME) || home != ch->plr_home )
+  if ( !IsBitSet(home->room_flags,ROOM_PLR_HOME) || home != ch->plr_home )
     {
       send_to_char("&RThis isn't your home!\r\n",ch);
       return;
     }
 
-  if ( IS_SET(ch->act,PLR_HOME_RESIDENT) )
+  if ( IsBitSet(ch->act,PLR_HOME_RESIDENT) )
     {
       send_to_char("&RYou are not the owner of this home.\r\n",ch);
       return;
@@ -45,7 +45,7 @@ void do_addresident(Character *ch, char *argument)
     }
 
   victim->plr_home = home;
-  SET_BIT(victim->act,PLR_HOME_RESIDENT);
+  SetBit(victim->act,PLR_HOME_RESIDENT);
   do_save(victim,"");
 
   act(AT_PLAIN,"You add $N as a resident.",ch,NULL,victim,TO_CHAR);

@@ -35,7 +35,7 @@ void do_glance( Character *ch, char *argument )
   if ( arg1[0] == '\0' )
     {
       save_act = ch->act;
-      SET_BIT( ch->act, PLR_BRIEF );
+      SetBit( ch->act, PLR_BRIEF );
       do_look( ch, "auto" );
       ch->act = save_act;
       return;

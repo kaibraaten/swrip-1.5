@@ -32,9 +32,9 @@ void do_unsilence( Character *ch, char *argument )
       return;
     }
 
-  if ( IS_SET(victim->act, PLR_SILENCE) )
+  if ( IsBitSet(victim->act, PLR_SILENCE) )
     {
-      REMOVE_BIT(victim->act, PLR_SILENCE);
+      RemoveBit(victim->act, PLR_SILENCE);
       send_to_char( "You can use channels again.\r\n", victim );
       send_to_char( "SILENCE removed.\r\n", ch );
     }

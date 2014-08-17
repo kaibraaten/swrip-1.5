@@ -161,7 +161,7 @@ void do_mstat( Character *ch, char *argument )
       if ( knows_language( victim, lang_array[x], victim )
 	   || (IsNpc(victim) && victim->speaks == 0) )
 	{
-	  if ( IS_SET(lang_array[x], victim->speaking)
+	  if ( IsBitSet(lang_array[x], victim->speaking)
 	       || (IsNpc(victim) && !victim->speaking) )
 	    {
 	      set_char_color( AT_RED, ch );
@@ -171,7 +171,7 @@ void do_mstat( Character *ch, char *argument )
         send_to_char( " ", ch );
         set_char_color( AT_PLAIN, ch );
       }
-    else if ( IS_SET(lang_array[x], victim->speaking)
+    else if ( IsBitSet(lang_array[x], victim->speaking)
 	      || (IsNpc(victim) && !victim->speaking) )
       {
 	set_char_color( AT_PINK, ch );

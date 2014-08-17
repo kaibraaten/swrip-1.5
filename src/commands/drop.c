@@ -33,8 +33,8 @@ void do_drop( Character *ch, char *argument )
   if ( ms_find_obj(ch) )
     return;
 
-  if ( IS_SET( ch->in_room->room_flags, ROOM_NODROP )
-       ||   ( !IsNpc(ch) && IS_SET( ch->act, PLR_LITTERBUG )) )
+  if ( IsBitSet( ch->in_room->room_flags, ROOM_NODROP )
+       ||   ( !IsNpc(ch) && IsBitSet( ch->act, PLR_LITTERBUG )) )
     {
       set_char_color( AT_MAGIC, ch );
       send_to_char( "A magical force stops you!\r\n", ch );
@@ -78,12 +78,12 @@ void do_drop( Character *ch, char *argument )
           act( AT_ACTION, "$n drops some credits.", ch, NULL, NULL, TO_ROOM );
           obj_to_room( create_money( number ), ch->in_room );
           send_to_char( "OK.\r\n", ch );
-          if ( IS_SET( sysdata.save_flags, SV_DROP ) )
+          if ( IsBitSet( sysdata.save_flags, SV_DROP ) )
             {
               save_char_obj( ch );
-              if( IS_SET( ch->in_room->room_flags, ROOM_PLR_HOME ) )
+              if( IsBitSet( ch->in_room->room_flags, ROOM_PLR_HOME ) )
                 save_home (ch );
-              if ( IS_SET( ch->in_room->room_flags, ROOM_CLANSTOREROOM ) )
+              if ( IsBitSet( ch->in_room->room_flags, ROOM_CLANSTOREROOM ) )
                 save_storeroom( ch->in_room );
             }
 
@@ -118,7 +118,7 @@ void do_drop( Character *ch, char *argument )
         return;
 
       /* Clan storeroom saving */
-      if ( IS_SET(ch->in_room->room_flags, ROOM_CLANSTOREROOM) )
+      if ( IsBitSet(ch->in_room->room_flags, ROOM_CLANSTOREROOM) )
         for ( clan = first_clan; clan; clan = clan->next )
           if ( clan->storeroom == ch->in_room->vnum )
             save_clan_storeroom(ch, clan);
@@ -138,7 +138,7 @@ void do_drop( Character *ch, char *argument )
       else
         chk = &arg[4];
       /* 'drop all' or 'drop all.obj' */
-      if ( IS_SET( ch->in_room->room_flags, ROOM_NODROPALL ) )
+      if ( IsBitSet( ch->in_room->room_flags, ROOM_NODROPALL ) )
         {
           send_to_char( "You can't seem to do that here...\r\n", ch );
           return;
@@ -180,7 +180,7 @@ void do_drop( Character *ch, char *argument )
 	    }
         }
 
-      if ( IS_SET(ch->in_room->room_flags, ROOM_CLANSTOREROOM) )
+      if ( IsBitSet(ch->in_room->room_flags, ROOM_CLANSTOREROOM) )
         for ( clan = first_clan; clan; clan = clan->next )
           if ( clan->storeroom == ch->in_room->vnum )
             save_clan_storeroom(ch, clan);
@@ -195,12 +195,12 @@ void do_drop( Character *ch, char *argument )
                  ch, NULL, chk, TO_CHAR );
         }
     }
-  if ( IS_SET( sysdata.save_flags, SV_DROP ) )
+  if ( IsBitSet( sysdata.save_flags, SV_DROP ) )
     {
       save_char_obj( ch );
-      if( IS_SET( ch->in_room->room_flags, ROOM_PLR_HOME ) )
+      if( IsBitSet( ch->in_room->room_flags, ROOM_PLR_HOME ) )
         save_home (ch );
-      if ( IS_SET( ch->in_room->room_flags, ROOM_CLANSTOREROOM ) )
+      if ( IsBitSet( ch->in_room->room_flags, ROOM_CLANSTOREROOM ) )
         save_storeroom( ch->in_room );
     } /* duping protector */
 }

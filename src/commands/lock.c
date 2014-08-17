@@ -16,13 +16,13 @@ void do_lock( Character *ch, char *argument )
 
   if ( ( pexit = find_door( ch, arg, true ) ) != NULL )
     {
-      if ( !IS_SET(pexit->exit_info, EX_ISDOOR) )
+      if ( !IsBitSet(pexit->exit_info, EX_ISDOOR) )
         {
 	  send_to_char( "You can't do that.\r\n", ch );
 	  return;
 	}
 
-      if ( !IS_SET(pexit->exit_info, EX_CLOSED) )
+      if ( !IsBitSet(pexit->exit_info, EX_CLOSED) )
         {
 	  send_to_char( "It's not closed.\r\n", ch );
 	  return;
@@ -40,13 +40,13 @@ void do_lock( Character *ch, char *argument )
 	  return;
 	}
 
-      if ( IS_SET(pexit->exit_info, EX_LOCKED) )
+      if ( IsBitSet(pexit->exit_info, EX_LOCKED) )
         {
 	  send_to_char( "It's already locked.\r\n", ch );
 	  return;
 	}
 
-      if ( !IS_SET(pexit->exit_info, EX_SECRET)
+      if ( !IsBitSet(pexit->exit_info, EX_SECRET)
            || (pexit->keyword && nifty_is_name( arg, pexit->keyword )) )
         {
           send_to_char( "*Click*\r\n", ch );
@@ -66,7 +66,7 @@ void do_lock( Character *ch, char *argument )
 	  return;
 	}
 
-      if ( !IS_SET(obj->value[1], CONT_CLOSED) )
+      if ( !IsBitSet(obj->value[1], CONT_CLOSED) )
         {
 	  send_to_char( "It's not closed.\r\n", ch );
 	  return;
@@ -84,13 +84,13 @@ void do_lock( Character *ch, char *argument )
 	  return;
 	}
 
-      if ( IS_SET(obj->value[1], CONT_LOCKED) )
+      if ( IsBitSet(obj->value[1], CONT_LOCKED) )
         {
 	  send_to_char( "It's already locked.\r\n", ch );
 	  return;
 	}
 
-      SET_BIT(obj->value[1], CONT_LOCKED);
+      SetBit(obj->value[1], CONT_LOCKED);
       send_to_char( "*Click*\r\n", ch );
       act( AT_ACTION, "$n locks $p.", ch, obj, NULL, TO_ROOM );
       return;

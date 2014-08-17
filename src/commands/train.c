@@ -32,7 +32,7 @@ void do_train( Character *ch, char *argument )
         }
 
       for ( mob = ch->in_room->first_person; mob; mob = mob->next_in_room )
-        if ( IsNpc(mob) && IS_SET(mob->act, ACT_TRAIN) )
+        if ( IsNpc(mob) && IsBitSet(mob->act, ACT_TRAIN) )
           {
             tfound = true;
             break;

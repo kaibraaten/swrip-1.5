@@ -69,7 +69,7 @@ obj_ret damage_obj( OBJ_DATA *obj )
   ch = obj->carried_by;
   objcode = rNONE;
 
-  if (ch && ch->in_room && IS_SET(ch->in_room->room_flags,ROOM_ARENA))
+  if (ch && ch->in_room && IsBitSet(ch->in_room->room_flags,ROOM_ARENA))
     return objcode;
 
   separate_obj( obj );
@@ -189,7 +189,7 @@ void obj_fall( OBJ_DATA *obj, bool through )
       return;
     }
 
-  if ( IS_SET( obj->in_room->room_flags, ROOM_NOFLOOR )
+  if ( IsBitSet( obj->in_room->room_flags, ROOM_NOFLOOR )
        &&   CAN_GO( obj, DIR_DOWN )
        &&   !IS_OBJ_STAT( obj, ITEM_MAGIC ) )
     {
@@ -231,7 +231,7 @@ void obj_fall( OBJ_DATA *obj, bool through )
                obj->in_room->first_person, obj, NULL, TO_CHAR );
         }
 
-      if (!IS_SET( obj->in_room->room_flags, ROOM_NOFLOOR ) && through )
+      if (!IsBitSet( obj->in_room->room_flags, ROOM_NOFLOOR ) && through )
         {
           /*            int dam = (int)9.81*sqrt(fall_count*2/9.81)*obj->weight/2;
            */           int dam = fall_count*obj->weight/2;

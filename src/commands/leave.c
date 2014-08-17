@@ -9,7 +9,7 @@ void do_leave( Character *ch, char *argument )
     {
       for ( pexit = ch->in_room->first_exit; pexit; pexit = pexit->next )
 	{
-	  if ( IS_SET( pexit->exit_info, EX_xLEAVE ) )
+	  if ( IsBitSet( pexit->exit_info, EX_xLEAVE ) )
 	    {
 	      move_char( ch, pexit, 0 );
 	      return;
@@ -22,7 +22,7 @@ void do_leave( Character *ch, char *argument )
 
   pexit = find_door( ch, argument, true );
 
-  if ( pexit && IS_SET( pexit->exit_info, EX_xLEAVE ) )
+  if ( pexit && IsBitSet( pexit->exit_info, EX_xLEAVE ) )
     {
       move_char( ch, pexit, 0 );
       return;

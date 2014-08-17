@@ -87,7 +87,7 @@ void do_capture ( Character *ch , char *argument )
         }
     }
 
-  if ( IS_SET( planet->flags, PLANET_NOCAPTURE ) )
+  if ( IsBitSet( planet->flags, PLANET_NOCAPTURE ) )
     {
       send_to_char ( "This planet cannot be captured.\r\n" , ch);
       return;

@@ -462,13 +462,13 @@ void game_loop( )
             }
           else
             if (( d->character ? d->character->top_level <= LEVEL_IMMORTAL : false) &&
-                ( d->idle > 7200 ) && !IS_SET(d->character->act, PLR_AFK))                /* 30 minutes  */
+                ( d->idle > 7200 ) && !IsBitSet(d->character->act, PLR_AFK))                /* 30 minutes  */
               {
                 if( (d->character && d->character->in_room) ? d->character->top_level <= LEVEL_IMMORTAL : false)
                   {
                     write_to_descriptor( d->descriptor,
                                          "Idle 30 Minutes. Activating AFK Flag\r\n", 0 );
-                    SET_BIT(d->character->act, PLR_AFK);
+                    SetBit(d->character->act, PLR_AFK);
                     act(AT_GREY,"$n is now afk due to idle time.", d->character, NULL, NULL, TO_ROOM);
                     continue;
                   }
@@ -1152,12 +1152,12 @@ bool flush_buffer( Descriptor *d, bool fPrompt )
   if ( fPrompt && !mud_down && d->connection_state == CON_PLAYING )
     {
       ch = d->original ? d->original : d->character;
-      if ( IS_SET(ch->act, PLR_BLANK) )
+      if ( IsBitSet(ch->act, PLR_BLANK) )
         write_to_buffer( d, "\r\n", 2 );
 
-      if ( IS_SET(ch->act, PLR_PROMPT) )
+      if ( IsBitSet(ch->act, PLR_PROMPT) )
         display_prompt(d);
-      if ( IS_SET(ch->act, PLR_TELNET_GA) )
+      if ( IsBitSet(ch->act, PLR_TELNET_GA) )
         write_to_buffer( d, go_ahead_str, 0 );
     }
 
@@ -1335,7 +1335,7 @@ bool check_parse_name( const char *name )
       if ( !isalpha(*pc) )
 	return false;
 
-      if ( LOWER(*pc) != 'i' && LOWER(*pc) != 'l' )
+      if ( CharToLowercase(*pc) != 'i' && CharToLowercase(*pc) != 'l' )
 	fIll = false;
       }
 
@@ -1614,7 +1614,7 @@ void send_to_pager( const char *txt, const Character *ch )
   d = ch->desc;
   ch = d->original ? d->original : d->character;
 
-  if ( IsNpc(ch) || !IS_SET(ch->pcdata->flags, PCFLAG_PAGERON) )
+  if ( IsNpc(ch) || !IsBitSet(ch->pcdata->flags, PCFLAG_PAGERON) )
     {
       send_to_char(txt, d->character);
       return;
@@ -1660,7 +1660,7 @@ void set_char_color( short AType, Character *ch )
     return;
 
   och = (ch->desc->original ? ch->desc->original : ch);
-  if ( !IsNpc(och) && IS_SET(och->act, PLR_ANSI) )
+  if ( !IsNpc(och) && IsBitSet(och->act, PLR_ANSI) )
     {
       if ( AType == 7 )
         strcpy( buf, "\033[m" );
@@ -1681,7 +1681,7 @@ void set_pager_color( short AType, Character *ch )
     return;
 
   och = (ch->desc->original ? ch->desc->original : ch);
-  if ( !IsNpc(och) && IS_SET(och->act, PLR_ANSI) )
+  if ( !IsNpc(och) && IsBitSet(och->act, PLR_ANSI) )
     {
       if ( AType == 7 )
         strcpy( buf, "\033[m" );
@@ -1855,7 +1855,7 @@ char *act_string(const char *format, Character *to, Character *ch,
         ++point, ++i;
     }
   strcpy(point, "\r\n");
-  buf[0] = UPPER(buf[0]);
+  buf[0] = CharToUppercase(buf[0]);
   return buf;
 }
 #undef NAME
@@ -1888,7 +1888,7 @@ void act( short AType, const char *format, Character *ch, const void *arg1, cons
   /*
    * ACT_SECRETIVE handling
    */
-  if ( IsNpc(ch) && IS_SET(ch->act, ACT_SECRETIVE) && type != TO_CHAR )
+  if ( IsNpc(ch) && IsBitSet(ch->act, ACT_SECRETIVE) && type != TO_CHAR )
     return;
 
   if ( type == TO_VICT )
@@ -1914,11 +1914,11 @@ void act( short AType, const char *format, Character *ch, const void *arg1, cons
       OBJ_DATA *to_obj;
 
       txt = act_string(format, NULL, ch, arg1, arg2);
-      if ( IS_SET(to->in_room->mprog.progtypes, ACT_PROG) )
+      if ( IsBitSet(to->in_room->mprog.progtypes, ACT_PROG) )
         rprog_act_trigger(txt, to->in_room, ch, (OBJ_DATA *)arg1, (void *)arg2);
       for ( to_obj = to->in_room->first_content; to_obj;
             to_obj = to_obj->next_content )
-        if ( IS_SET(to_obj->pIndexData->mprog.progtypes, ACT_PROG) )
+        if ( IsBitSet(to_obj->pIndexData->mprog.progtypes, ACT_PROG) )
           oprog_act_trigger(txt, to_obj, ch, (OBJ_DATA *)arg1, (void *)arg2);
     }
 
@@ -1928,7 +1928,7 @@ void act( short AType, const char *format, Character *ch, const void *arg1, cons
           ? NULL : to->next_in_room )
     {
       if (((!to || !to->desc)
-           && (  IsNpc(to) && !IS_SET(to->pIndexData->mprog.progtypes, ACT_PROG) ))
+           && (  IsNpc(to) && !IsBitSet(to->pIndexData->mprog.progtypes, ACT_PROG) ))
           ||   !IsAwake(to) )
         continue;
 
@@ -1992,7 +1992,7 @@ void display_prompt( Descriptor *d )
 {
   Character *ch = d->character;
   Character *och = (d->original ? d->original : d->character);
-  bool ansi = (!IsNpc(och) && IS_SET(och->act, PLR_ANSI));
+  bool ansi = (!IsNpc(och) && IsBitSet(och->act, PLR_ANSI));
   const char *prompt;
   char buf[MAX_STRING_LENGTH];
   char *pbuf = buf;
@@ -2140,21 +2140,21 @@ void display_prompt( Descriptor *d )
               break;
 
             case 'R':
-              if ( IS_SET(och->act, PLR_ROOMVNUM) )
+              if ( IsBitSet(och->act, PLR_ROOMVNUM) )
                 sprintf(pbuf, "<#%ld> ", ch->in_room->vnum);
               break;
 
             case 'i':
-              if ( (!IsNpc(ch) && IS_SET(ch->act, PLR_WIZINVIS)) ||
-                   (IsNpc(ch) && IS_SET(ch->act, ACT_MOBINVIS)) )
+              if ( (!IsNpc(ch) && IsBitSet(ch->act, PLR_WIZINVIS)) ||
+                   (IsNpc(ch) && IsBitSet(ch->act, ACT_MOBINVIS)) )
                 sprintf(pbuf, "(Invis %d) ", (IsNpc(ch) ? ch->mobinvis : ch->pcdata->wizinvis));
               else if ( IsAffectedBy(ch, AFF_INVISIBLE) )
 		sprintf(pbuf, "(Invis) " );
               break;
 
             case 'I':
-              the_stat = (IsNpc(ch) ? (IS_SET(ch->act, ACT_MOBINVIS) ? ch->mobinvis : 0)
-                      : (IS_SET(ch->act, PLR_WIZINVIS) ? ch->pcdata->wizinvis : 0));
+              the_stat = (IsNpc(ch) ? (IsBitSet(ch->act, ACT_MOBINVIS) ? ch->mobinvis : 0)
+                      : (IsBitSet(ch->act, PLR_WIZINVIS) ? ch->pcdata->wizinvis : 0));
               break;
             }
 
@@ -2179,7 +2179,7 @@ int make_color_sequence(const char *col, char *buf, Descriptor *d)
   bool ansi;
 
   och = (d->original ? d->original : d->character);
-  ansi = (!IsNpc(och) && IS_SET(och->act, PLR_ANSI));
+  ansi = (!IsNpc(och) && IsBitSet(och->act, PLR_ANSI));
   col++;
   if ( !*col )
     ln = -1;
@@ -2292,7 +2292,7 @@ bool pager_output( Descriptor *d )
   ch = d->original ? d->original : d->character;
   pclines = umax(ch->pcdata->pagerlen, 5) - 1;
 
-  switch(LOWER(d->pager.pagecmd))
+  switch(CharToLowercase(d->pager.pagecmd))
     {
     default:
       lines = 0;
@@ -2360,7 +2360,7 @@ bool pager_output( Descriptor *d )
 
   d->pager.pagecmd = -1;
 
-  if ( IS_SET( ch->act, PLR_ANSI ) )
+  if ( IsBitSet( ch->act, PLR_ANSI ) )
     if ( write_to_descriptor(d->descriptor, "\033[1;36m", 7) == false )
       return false;
 
@@ -2368,7 +2368,7 @@ bool pager_output( Descriptor *d )
                                 "(C)ontinue, (R)efresh, (B)ack, (Q)uit: [C] ", 0)) == false )
     return false;
 
-  if ( IS_SET( ch->act, PLR_ANSI ) )
+  if ( IsBitSet( ch->act, PLR_ANSI ) )
     {
       char buf[32];
 

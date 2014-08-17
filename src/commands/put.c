@@ -53,7 +53,7 @@ void do_put( Character *ch, char *argument )
       return;
     }
 
-  if ( !container->carried_by && IS_SET( sysdata.save_flags, SV_PUT ) )
+  if ( !container->carried_by && IsBitSet( sysdata.save_flags, SV_PUT ) )
     save_char = true;
 
   if ( IS_OBJ_STAT(container, ITEM_COVERING) )
@@ -72,7 +72,7 @@ void do_put( Character *ch, char *argument )
           return;
         }
 
-      if ( IS_SET(container->value[OVAL_CONTAINER_FLAGS], CONT_CLOSED) )
+      if ( IsBitSet(container->value[OVAL_CONTAINER_FLAGS], CONT_CLOSED) )
         {
           act( AT_PLAIN, "The $d is closed.", ch, NULL, container->name, TO_CHAR );
           return;
@@ -137,13 +137,13 @@ void do_put( Character *ch, char *argument )
       if ( save_char )
         {
           save_char_obj( ch );
-          if( IS_SET( ch->in_room->room_flags, ROOM_PLR_HOME ) )
+          if( IsBitSet( ch->in_room->room_flags, ROOM_PLR_HOME ) )
             save_home (ch );
-          if ( IS_SET( ch->in_room->room_flags, ROOM_CLANSTOREROOM ) )
+          if ( IsBitSet( ch->in_room->room_flags, ROOM_CLANSTOREROOM ) )
             save_storeroom( ch->in_room );
         }
       /* Clan storeroom check */
-      if ( IS_SET(ch->in_room->room_flags, ROOM_CLANSTOREROOM)
+      if ( IsBitSet(ch->in_room->room_flags, ROOM_CLANSTOREROOM)
            &&   container->carried_by == NULL)
         for ( clan = first_clan; clan; clan = clan->next )
           if ( clan->storeroom == ch->in_room->vnum )
@@ -213,13 +213,13 @@ void do_put( Character *ch, char *argument )
       if ( save_char )
         {
           save_char_obj( ch );
-          if( IS_SET( ch->in_room->room_flags, ROOM_PLR_HOME ) )
+          if( IsBitSet( ch->in_room->room_flags, ROOM_PLR_HOME ) )
             save_home (ch );
-          if ( IS_SET( ch->in_room->room_flags, ROOM_CLANSTOREROOM ) )
+          if ( IsBitSet( ch->in_room->room_flags, ROOM_CLANSTOREROOM ) )
             save_storeroom( ch->in_room );
         }
       /* Clan storeroom check */
-      if ( IS_SET(ch->in_room->room_flags, ROOM_CLANSTOREROOM)
+      if ( IsBitSet(ch->in_room->room_flags, ROOM_CLANSTOREROOM)
            && container->carried_by == NULL )
 	for ( clan = first_clan; clan; clan = clan->next )
           if ( clan->storeroom == ch->in_room->vnum )

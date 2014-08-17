@@ -45,7 +45,7 @@ static void OnStart( Character *ch, char *argument )
       return;
     }
 
-  if ( !IS_SET( ch->in_room->room_flags, ROOM_FACTORY ) )
+  if ( !IsBitSet( ch->in_room->room_flags, ROOM_FACTORY ) )
     {
       send_to_char( "&RYou need to be in a factory or workshop to do that.\r\n", ch);
       return;
@@ -197,8 +197,8 @@ static void OnFinished( Character *ch )
   obj = create_object( pObjIndex, level );
 
   obj->item_type = ITEM_LANDMINE;
-  SET_BIT( obj->wear_flags, ITEM_HOLD );
-  SET_BIT( obj->wear_flags, ITEM_TAKE );
+  SetBit( obj->wear_flags, ITEM_HOLD );
+  SetBit( obj->wear_flags, ITEM_TAKE );
   obj->level = level;
   obj->weight = weight;
   DISPOSE( obj->name );
