@@ -34,9 +34,9 @@
 #include "shops.h"
 #include "character.h"
 
-#define COST_EQUATION  (int) (cost*cost_equation( obj ))
+#define COST_EQUATION  (int) (cost*CostEquation( obj ))
 
-static float cost_equation( const OBJ_DATA *obj )
+static float CostEquation( const OBJ_DATA *obj )
 {
   float count = obj->pIndexData->count;
 
@@ -48,12 +48,12 @@ static float cost_equation( const OBJ_DATA *obj )
 /*
  * Shopping commands.
  */
-Character *find_keeper( const Character *ch )
+Character *FindKeeper( const Character *ch )
 {
-  return find_keeper_q( ch, true );
+  return FindKeeperQ( ch, true );
 }
 
-Character *find_keeper_q( const Character *ch, bool message )
+Character *FindKeeperQ( const Character *ch, bool message )
 {
   Character *keeper = NULL;
   const SHOP_DATA *pShop = NULL;
@@ -117,7 +117,7 @@ Character *find_keeper_q( const Character *ch, bool message )
 /*
  * repair commands.
  */
-Character *find_fixer( const Character *ch )
+Character *FindFixer( const Character *ch )
 {
   Character *keeper = NULL;
   const REPAIR_DATA *rShop = NULL;
@@ -163,7 +163,7 @@ Character *find_fixer( const Character *ch )
   return keeper;
 }
 
-int get_cost_quit( const Character *ch )
+int GetCostToQuit( const Character *ch )
 {
   long cost = 1000;
   int golddem = 100000;
@@ -191,7 +191,7 @@ int get_cost_quit( const Character *ch )
   return (int) cost;
 }
 
-int get_cost( const Character *ch, const Character *keeper, const OBJ_DATA *obj, bool fBuy )
+int GetObjectCost( const Character *ch, const Character *keeper, const OBJ_DATA *obj, bool fBuy )
 {
   const SHOP_DATA *pShop = NULL;
   int cost = 0;
@@ -283,7 +283,7 @@ int get_cost( const Character *ch, const Character *keeper, const OBJ_DATA *obj,
   return cost;
 }
 
-int get_repaircost( const Character *keeper, const OBJ_DATA *obj )
+int GetRepairCost( const Character *keeper, const OBJ_DATA *obj )
 {
   const REPAIR_DATA *rShop = NULL;
   int cost = 0;
@@ -357,7 +357,7 @@ int get_repaircost( const Character *keeper, const OBJ_DATA *obj )
 }
 
 /* Write vendor to file */
-void fwrite_vendor( FILE *fp, Character *mob )
+void WriteVendor( FILE *fp, Character *mob )
 {
   if ( !IsNpc( mob ) || !fp )
     {
@@ -392,7 +392,7 @@ void fwrite_vendor( FILE *fp, Character *mob )
 }
 
 /* read vendor from file */
-Character *fread_vendor( FILE *fp )
+Character *ReadVendor( FILE *fp )
 {
   Character *mob = NULL;
   const char *word = NULL;
@@ -552,7 +552,7 @@ Character *fread_vendor( FILE *fp )
   return NULL;
 }
 
-void save_vendor( Character *ch )
+void SaveVendor( Character *ch )
 {
   char strsave[MAX_INPUT_LENGTH];
   FILE *fp = NULL;
@@ -579,7 +579,7 @@ void save_vendor( Character *ch )
 
       fchmod(fileno(fp), S_IRUSR|S_IWUSR | S_IRGRP|S_IWGRP | S_IROTH|S_IWOTH);
       fprintf( fp, "#VENDOR\n"          );
-      fwrite_vendor( fp, ch );
+      WriteVendor( fp, ch );
 
       if ( ch->first_carrying )
 	{

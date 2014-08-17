@@ -103,7 +103,7 @@ void do_buy( Character *ch, char *argument )
       int noi = 1;              /* Number of items */
       short mnoi = 20;  /* Max number of items to be bought at once */
 
-      if ( ( keeper = find_keeper( ch ) ) == NULL )
+      if ( ( keeper = FindKeeper( ch ) ) == NULL )
         return;
 
       if ( keeper == NULL )
@@ -157,7 +157,7 @@ void do_buy( Character *ch, char *argument )
         }
 
 
-      cost = ( get_cost( ch, keeper, obj, true ) * noi );
+      cost = ( GetObjectCost( ch, keeper, obj, true ) * noi );
 
       if (keeper->home != NULL && obj->cost > 0)
         cost= obj->cost;
@@ -267,7 +267,7 @@ void do_buy( Character *ch, char *argument )
               /* vendor snippit. Forces vendor to save after anyone buys anything*/
               if (  keeper->home != NULL )
                 {
-                  save_vendor (keeper);
+                  SaveVendor (keeper);
                   bag->cost = 0;
                 }
             }
@@ -277,7 +277,7 @@ void do_buy( Character *ch, char *argument )
           /* vendor snippit. Forces vendor to save after anyone buys anything*/
           if (  keeper->home != NULL )
             {
-              save_vendor (keeper);
+              SaveVendor (keeper);
               buy_obj->cost = 0;
             }
         }
@@ -289,7 +289,7 @@ void do_buy( Character *ch, char *argument )
           /* vendor snippit. Forces vendor to save after anyone buys anything*/
           if (  keeper->home != NULL )
             {
-              save_vendor (keeper);
+              SaveVendor (keeper);
               obj->cost = 0;
             }
         }

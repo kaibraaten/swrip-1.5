@@ -2688,7 +2688,7 @@ extern "C" {
   void load_storerooms( void );
 
   /* shops.c */
-  int get_cost_quit( const Character *ch );
+  int GetCostToQuit( const Character *ch );
 
   /* special.c */
   SPEC_FUN *spec_lookup( const char *name );
@@ -2737,10 +2737,10 @@ extern "C" {
   int   add_bad_name( const char *name );
 
   /* vendor.c*/
-  void fwrite_vendor( FILE *fp, Character *mob );
-  Character *fread_vendor( FILE *fp );
+  void WriteVendor( FILE *fp, Character *mob );
+  Character *ReadVendor( FILE *fp );
   void load_vendors( void );
-  void save_vendor( Character *ch );
+  void SaveVendor( Character *ch );
 
   /*
 #define SHORT 1

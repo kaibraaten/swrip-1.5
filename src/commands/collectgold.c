@@ -13,7 +13,7 @@ void do_collectgold (Character *ch, char *argument)
   char name[MAX_INPUT_LENGTH];
   struct tm *tms;
 
-  if ( ( vendor = find_keeper (ch) ) == NULL )
+  if ( ( vendor = FindKeeper (ch) ) == NULL )
     {
       return;
     }

@@ -29,7 +29,7 @@ void do_pricevendor (Character *ch, char *argument)
     }
 
 
-  if ( ( vendor = find_keeper (ch) ) == NULL )
+  if ( ( vendor = FindKeeper (ch) ) == NULL )
     {
       return;
     }
@@ -72,11 +72,11 @@ void do_pricevendor (Character *ch, char *argument)
     {
       obj->cost = atoi (arg2);
       send_to_char("The price has been changed\r\n",ch);
-      save_vendor(vendor);
+      SaveVendor(vendor);
       return;
     }
 
 
   send_to_char("He doesnt have that item!\r\n",ch);
-  save_vendor(vendor);
+  SaveVendor(vendor);
 }

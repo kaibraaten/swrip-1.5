@@ -2856,7 +2856,7 @@ void load_vendors( void )
 
               if ( !str_cmp(word, "VENDOR" ) )
 		{
-		  mob = fread_vendor( fpArea );
+		  mob = ReadVendor( fpArea );
 		}
               else if ( !str_cmp(word, "OBJECT" ) )
 		{

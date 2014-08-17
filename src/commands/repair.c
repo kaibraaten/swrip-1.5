@@ -19,7 +19,7 @@ void do_repair( Character *ch, char *argument )
       return;
     }
 
-  if ( ( keeper = find_fixer( ch ) ) == NULL )
+  if ( ( keeper = FindFixer( ch ) ) == NULL )
     return;
 
   maxgold = keeper->top_level * 10;
@@ -70,7 +70,7 @@ static void repair_one_obj( Character *ch, Character *keeper, OBJ_DATA *obj,
 
   if ( !CanDropObject( ch, obj ) )
     ch_printf( ch, "You can't let go of %s.\r\n", obj->name );
-  else if ( ( cost = get_repaircost( keeper, obj ) ) < 0 )
+  else if ( ( cost = GetRepairCost( keeper, obj ) ) < 0 )
     {
       if (cost != -2)
         act( AT_TELL, "$n tells you, 'Sorry, I can't do anything with $p.'",

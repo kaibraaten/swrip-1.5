@@ -19,7 +19,7 @@ void do_sell( Character *ch, char *argument )
       return;
     }
 
-  if ( ( keeper = find_keeper( ch ) ) == NULL )
+  if ( ( keeper = FindKeeper( ch ) ) == NULL )
     return;
 
   if ( ( obj = GetCarriedObject( ch, arg ) ) == NULL )
@@ -42,7 +42,7 @@ void do_sell( Character *ch, char *argument )
       return;
     }
 
-  if ( ( cost = get_cost( ch, keeper, obj, false ) ) <= 0 )
+  if ( ( cost = GetObjectCost( ch, keeper, obj, false ) ) <= 0 )
     {
       act( AT_ACTION, "$n looks uninterested in $p.", keeper, obj, ch, TO_VICT );
       return;

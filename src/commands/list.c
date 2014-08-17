@@ -49,7 +49,7 @@ void do_list( Character *ch, char *argument )
 
       one_argument( argument, arg );
 
-      if ( ( keeper = find_keeper( ch ) ) == NULL )
+      if ( ( keeper = FindKeeper( ch ) ) == NULL )
         return;
 
       found = false;
@@ -59,7 +59,7 @@ void do_list( Character *ch, char *argument )
                &&   CanSeeObject( ch, obj ) )
             {
               oref++;
-              if ( ( cost = get_cost( ch, keeper, obj, true ) ) > 0
+              if ( ( cost = GetObjectCost( ch, keeper, obj, true ) ) > 0
                    && ( arg[0] == '\0' || nifty_is_name( arg, obj->name ) ) )
                 {
                   if (keeper->home != NULL)

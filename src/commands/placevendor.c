@@ -12,7 +12,7 @@ void do_placevendor (Character *ch, char *argument)
   char vnum1[MAX_INPUT_LENGTH];
   char buf [MAX_INPUT_LENGTH];
 
-  if (  find_keeper_q (ch, false) )
+  if (  FindKeeperQ (ch, false) )
     {
       send_to_char ("A vendor is already here!\r\n",ch);
       return;
@@ -69,7 +69,7 @@ void do_placevendor (Character *ch, char *argument)
   vendor->owner = STRALLOC(buf);
   vendor->home = ch->in_room;
 
-  save_vendor (vendor);
+  SaveVendor (vendor);
 
   separate_obj( obj );
   extract_obj( obj );

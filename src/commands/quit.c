@@ -53,7 +53,7 @@ void do_quit( Character *ch, char *argument )
        && !IS_SET( ch->in_room->room_flags, ROOM_SPACECRAFT )
        && IsAuthed(ch) )
     {
-      cost = get_cost_quit( ch );
+      cost = GetCostToQuit( ch );
 
       if( !cost )
         {
