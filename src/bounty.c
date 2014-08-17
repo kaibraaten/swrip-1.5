@@ -102,7 +102,7 @@ void load_bounties( void )
       target = feof( fpList ) ? "$" : ReadWord( fpList );
       if ( target[0] == '$' )
         break;
-      CREATE( bounty, BOUNTY_DATA, 1 );
+      AllocateMemory( bounty, BOUNTY_DATA, 1 );
       LINK( bounty, first_disintegration, last_disintegration, next, prev );
       bounty->target = CopyString(target);
 
@@ -140,7 +140,7 @@ void disintegration ( const Character *ch , const Character *victim , long amoun
 
   if (! found)
     {
-      CREATE( bounty, BOUNTY_DATA, 1 );
+      AllocateMemory( bounty, BOUNTY_DATA, 1 );
       LINK( bounty, first_disintegration, last_disintegration, next, prev );
 
       bounty->target = CopyString( victim->name );
@@ -174,9 +174,9 @@ void disintegration ( const Character *ch , const Character *victim , long amoun
 void remove_disintegration( BOUNTY_DATA *bounty )
 {
   UNLINK( bounty, first_disintegration, last_disintegration, next, prev );
-  DISPOSE( bounty->target );
-  DISPOSE( bounty->poster );
-  DISPOSE( bounty );
+  FreeMemory( bounty->target );
+  FreeMemory( bounty->poster );
+  FreeMemory( bounty );
 
   save_disintegrations();
 }

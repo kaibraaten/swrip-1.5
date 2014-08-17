@@ -269,7 +269,7 @@ bool load_one_spaceobject( const char *spaceobjectfile )
   FILE *fp = NULL;
   bool found = false;
 
-  CREATE( spaceobject, Spaceobject, 1 );
+  AllocateMemory( spaceobject, Spaceobject, 1 );
   sprintf( filename, "%s%s", SPACE_DIR, spaceobjectfile );
 
   if ( ( fp = fopen( filename, "r" ) ) != NULL )
@@ -315,7 +315,7 @@ bool load_one_spaceobject( const char *spaceobjectfile )
     }
 
   if ( !(found) )
-    DISPOSE( spaceobject );
+    FreeMemory( spaceobject );
 
   return found;
 }

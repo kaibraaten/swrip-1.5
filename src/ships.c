@@ -226,7 +226,7 @@ void UpdateShipMovement( void )
 		  ship->currjump = NULL;
 		  EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );
 		  ship->shipstate = SHIP_READY;
-		  DISPOSE( ship->home );
+		  FreeMemory( ship->home );
 		  ship->home = CopyString( ship->spaceobject->name );
 		}
 	    }
@@ -253,7 +253,7 @@ void UpdateShipMovement( void )
                   ship->currjump = NULL;
                   EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );
                   ship->shipstate = SHIP_READY;
-                  DISPOSE( ship->home );
+                  FreeMemory( ship->home );
                   ship->home = CopyString( ship->spaceobject->name );
                 }
             }
@@ -278,7 +278,7 @@ void UpdateShipMovement( void )
                   ship->currjump = NULL;
                   EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );
                   ship->shipstate = SHIP_READY;
-                  DISPOSE( ship->home );
+                  FreeMemory( ship->home );
                   ship->home = CopyString( ship->spaceobject->name );
 
                   SetVector( &ship->jump,
@@ -644,7 +644,7 @@ static void MakeDebris( const Ship *ship )
       return;
     }
 
-  CREATE( debris, Ship, 1 );
+  AllocateMemory( debris, Ship, 1 );
 
   LINK( debris, first_ship, last_ship, next, prev );
 
@@ -2584,7 +2584,7 @@ static bool LoadShipFile( const char *shipfile )
   Room *pRoomIndex = NULL;
   CLAN_DATA *clan = NULL;
 
-  CREATE( ship, Ship, 1 );
+  AllocateMemory( ship, Ship, 1 );
 
   for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
     {
@@ -2641,7 +2641,7 @@ static bool LoadShipFile( const char *shipfile )
 	  FreeTurret( turret );
 	}
 
-      DISPOSE( ship );
+      FreeMemory( ship );
     }
   else
     {
@@ -2849,11 +2849,11 @@ void ResetShip( Ship *ship )
             clan->vehicles--;
         }
 
-      DISPOSE( ship->owner );
+      FreeMemory( ship->owner );
       ship->owner = CopyString( "" );
-      DISPOSE( ship->pilot );
+      FreeMemory( ship->pilot );
       ship->pilot = CopyString( "" );
-      DISPOSE( ship->copilot );
+      FreeMemory( ship->copilot );
       ship->copilot = CopyString( "" );
     }
 #endif
@@ -2862,17 +2862,17 @@ void ResetShip( Ship *ship )
     {
       if ( ship->type == SHIP_REBEL || ( ship->type == MOB_SHIP && ((!StrCmp( ship->owner , "The Rebel Alliance" )) || (!StrCmp( ship->owner , "The New Republic" )))))
         {
-          DISPOSE( ship->home );
+          FreeMemory( ship->home );
           ship->home = CopyString( "Coruscant" );
         }
       else if ( ship->type == SHIP_IMPERIAL || ( ship->type == MOB_SHIP && !StrCmp(ship->owner, "the empire") ))
         {
-          DISPOSE( ship->home );
+          FreeMemory( ship->home );
 	  ship->home = CopyString( "Byss" );
         }
       else if ( ship->type == SHIP_CIVILIAN)
         {
-          DISPOSE( ship->home );
+          FreeMemory( ship->home );
           ship->home = CopyString( "corporate" );
         }
     }

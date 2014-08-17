@@ -228,16 +228,16 @@ void close_area( Area *pArea )
               exit_next = exit_iter->next;
               if ( rid->area == pArea || exit_iter->to_room->area == pArea )
                 {
-                  DISPOSE( exit_iter->keyword );
-                  DISPOSE( exit_iter->description );
+                  FreeMemory( exit_iter->keyword );
+                  FreeMemory( exit_iter->description );
                   UNLINK( exit_iter, rid->first_exit, rid->last_exit, next, prev );
-                  DISPOSE( exit_iter );
+                  FreeMemory( exit_iter );
                 }
             }
           if ( rid->area != pArea )
             continue;
-          DISPOSE(rid->name);
-          DISPOSE(rid->description);
+          FreeMemory(rid->name);
+          FreeMemory(rid->description);
           if ( rid->first_person )
             {
               bug( "close_area: room with people #%d", rid->vnum );
@@ -264,22 +264,22 @@ void close_area( Area *pArea )
           for ( eed = rid->first_extradesc; eed; eed = eed_next )
             {
               eed_next = eed->next;
-              DISPOSE( eed->keyword );
-              DISPOSE( eed->description );
-              DISPOSE( eed );
+              FreeMemory( eed->keyword );
+              FreeMemory( eed->description );
+              FreeMemory( eed );
             }
           for ( mpact = rid->mprog.mpact; mpact; mpact = mpact_next )
             {
               mpact_next = mpact->next;
-              DISPOSE( mpact->buf );
-              DISPOSE( mpact );
+              FreeMemory( mpact->buf );
+              FreeMemory( mpact );
             }
           for ( mprog = rid->mprog.mudprogs; mprog; mprog = mprog_next )
             {
               mprog_next = mprog->next;
-              DISPOSE( mprog->arglist );
-              DISPOSE( mprog->comlist );
-              DISPOSE( mprog );
+              FreeMemory( mprog->arglist );
+              FreeMemory( mprog->comlist );
+              FreeMemory( mprog );
             }
           if ( rid == room_index_hash[icnt] )
             room_index_hash[icnt] = rid->next;
@@ -295,7 +295,7 @@ void close_area( Area *pArea )
               else
                 trid->next = rid->next;
             }
-          DISPOSE(rid);
+          FreeMemory(rid);
         }
 
       for ( mid = mob_index_hash[icnt]; mid; mid = mid_next )
@@ -305,26 +305,26 @@ void close_area( Area *pArea )
           if ( mid->vnum < pArea->low_m_vnum || mid->vnum > pArea->hi_m_vnum )
             continue;
 
-          DISPOSE( mid->player_name );
-          DISPOSE( mid->short_descr );
-          DISPOSE( mid->long_descr  );
-          DISPOSE( mid->description );
+          FreeMemory( mid->player_name );
+          FreeMemory( mid->short_descr );
+          FreeMemory( mid->long_descr  );
+          FreeMemory( mid->description );
           if ( mid->pShop )
             {
               UNLINK( mid->pShop, first_shop, last_shop, next, prev );
-              DISPOSE( mid->pShop );
+              FreeMemory( mid->pShop );
             }
           if ( mid->rShop )
             {
               UNLINK( mid->rShop, first_repair, last_repair, next, prev );
-              DISPOSE( mid->rShop );
+              FreeMemory( mid->rShop );
             }
           for ( mprog = mid->mprog.mudprogs; mprog; mprog = mprog_next )
             {
               mprog_next = mprog->next;
-              DISPOSE(mprog->arglist);
-              DISPOSE(mprog->comlist);
-              DISPOSE(mprog);
+              FreeMemory(mprog->arglist);
+              FreeMemory(mprog->comlist);
+              FreeMemory(mprog);
             }
           if ( mid == mob_index_hash[icnt] )
             mob_index_hash[icnt] = mid->next;
@@ -340,7 +340,7 @@ void close_area( Area *pArea )
               else
                 tmid->next = mid->next;
             }
-          DISPOSE(mid);
+          FreeMemory(mid);
         }
 
       for ( oid = obj_index_hash[icnt]; oid; oid = oid_next )
@@ -350,29 +350,29 @@ void close_area( Area *pArea )
           if ( oid->vnum < pArea->low_o_vnum || oid->vnum > pArea->hi_o_vnum )
             continue;
 
-          DISPOSE(oid->name);
-          DISPOSE(oid->short_descr);
-          DISPOSE(oid->description);
-          DISPOSE(oid->action_desc);
+          FreeMemory(oid->name);
+          FreeMemory(oid->short_descr);
+          FreeMemory(oid->description);
+          FreeMemory(oid->action_desc);
 
           for ( eed = oid->first_extradesc; eed; eed = eed_next )
             {
               eed_next = eed->next;
-              DISPOSE(eed->keyword);
-              DISPOSE(eed->description);
-              DISPOSE(eed);
+              FreeMemory(eed->keyword);
+              FreeMemory(eed->description);
+              FreeMemory(eed);
             }
           for ( paf = oid->first_affect; paf; paf = paf_next )
             {
               paf_next = paf->next;
-              DISPOSE(paf);
+              FreeMemory(paf);
             }
           for ( mprog = oid->mprog.mudprogs; mprog; mprog = mprog_next )
             {
               mprog_next = mprog->next;
-              DISPOSE(mprog->arglist);
-              DISPOSE(mprog->comlist);
-              DISPOSE(mprog);
+              FreeMemory(mprog->arglist);
+              FreeMemory(mprog->comlist);
+              FreeMemory(mprog);
             }
           if ( oid == obj_index_hash[icnt] )
             obj_index_hash[icnt] = oid->next;
@@ -388,20 +388,20 @@ void close_area( Area *pArea )
               else
                 toid->next = oid->next;
             }
-          DISPOSE(oid);
+          FreeMemory(oid);
         }
     }
   for ( ereset = pArea->first_reset; ereset; ereset = ereset_next )
     {
       ereset_next = ereset->next;
-      DISPOSE(ereset);
+      FreeMemory(ereset);
     }
-  DISPOSE(pArea->name);
-  DISPOSE(pArea->filename);
-  DISPOSE(pArea->author);
+  FreeMemory(pArea->name);
+  FreeMemory(pArea->filename);
+  FreeMemory(pArea->author);
   UNLINK( pArea, first_build, last_build, next, prev );
   UNLINK( pArea, first_asort, last_asort, next_sort, prev_sort );
-  DISPOSE( pArea );
+  FreeMemory( pArea );
 }
 
 void get_reboot_string(void)
@@ -415,22 +415,22 @@ void get_reboot_string(void)
 void free_social( SOCIALTYPE *social )
 {
   if ( social->name )
-    DISPOSE( social->name );
+    FreeMemory( social->name );
   if ( social->char_no_arg )
-    DISPOSE( social->char_no_arg );
+    FreeMemory( social->char_no_arg );
   if ( social->others_no_arg )
-    DISPOSE( social->others_no_arg );
+    FreeMemory( social->others_no_arg );
   if ( social->char_found )
-    DISPOSE( social->char_found );
+    FreeMemory( social->char_found );
   if ( social->others_found )
-    DISPOSE( social->others_found );
+    FreeMemory( social->others_found );
   if ( social->vict_found )
-    DISPOSE( social->vict_found );
+    FreeMemory( social->vict_found );
   if ( social->char_auto )
-    DISPOSE( social->char_auto );
+    FreeMemory( social->char_auto );
   if ( social->others_auto )
-    DISPOSE( social->others_auto );
-  DISPOSE( social );
+    FreeMemory( social->others_auto );
+  FreeMemory( social );
 }
 
 /*
@@ -546,12 +546,12 @@ void add_social( SOCIALTYPE *social )
 void free_command( CMDTYPE *command )
 {
   if ( command->name )
-    DISPOSE( command->name );
+    FreeMemory( command->name );
 
   if( command->fun_name )
-    DISPOSE( command->fun_name );
+    FreeMemory( command->fun_name );
 
-  DISPOSE( command );
+  FreeMemory( command );
 }
 
 /*

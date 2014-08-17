@@ -282,7 +282,7 @@ static bool load_clan_file( const char *clanfile )
   FILE *fp;
   bool found = false;
 
-  CREATE( clan, CLAN_DATA, 1 );
+  AllocateMemory( clan, CLAN_DATA, 1 );
   clan->next_subclan = NULL;
   clan->prev_subclan = NULL;
   clan->last_subclan = NULL;
@@ -345,7 +345,7 @@ static bool load_clan_file( const char *clanfile )
           MEMBER_LIST *members_list = NULL;
 
           log_string( "No memberlist found, creating new list" );
-          CREATE( members_list, MEMBER_LIST, 1 );
+          AllocateMemory( members_list, MEMBER_LIST, 1 );
           members_list->name = CopyString( clan->name );
           LINK( members_list, first_member_list, last_member_list, next, prev );
           save_member_list( members_list );
@@ -429,7 +429,7 @@ static bool load_clan_file( const char *clanfile )
     }
   else
     {
-      DISPOSE( clan );
+      FreeMemory( clan );
     }
 
   return found;
@@ -534,7 +534,7 @@ void show_members( const Character *ch, const char *argument, const char *format
           MS_DATA *first_member = NULL;
           MS_DATA *last_member = NULL;
 
-          CREATE( sort, MS_DATA, 1 );
+          AllocateMemory( sort, MS_DATA, 1 );
           sort->member = members_list->first_member;
           LINK( sort, first_member, last_member, next, prev );
 
@@ -547,7 +547,7 @@ void show_members( const Character *ch, const char *argument, const char *format
                     {
                       if( member->kills > sort->member->kills )
                         {
-                          CREATE( insert, MS_DATA, 1 );
+                          AllocateMemory( insert, MS_DATA, 1 );
                           insert->member = member;
                           INSERT( insert, sort, first_member, next, prev );
                           break;
@@ -557,7 +557,7 @@ void show_members( const Character *ch, const char *argument, const char *format
                     {
                       if( member->deaths > sort->member->deaths )
                         {
-                          CREATE( insert, MS_DATA, 1 );
+                          AllocateMemory( insert, MS_DATA, 1 );
                           insert->member = member;
                           INSERT( insert, sort, first_member, next, prev );
                           break;
@@ -567,7 +567,7 @@ void show_members( const Character *ch, const char *argument, const char *format
                     {
                       if( strcmp( member->name, sort->member->name ) < 0 )
                         {
-                          CREATE( insert, MS_DATA, 1 );
+                          AllocateMemory( insert, MS_DATA, 1 );
                           insert->member = member;
                           INSERT( insert, sort, first_member, next, prev );
                           break;
@@ -578,7 +578,7 @@ void show_members( const Character *ch, const char *argument, const char *format
 
               if( insert == NULL )
                 {
-                  CREATE( insert, MS_DATA, 1 );
+                  AllocateMemory( insert, MS_DATA, 1 );
                   insert->member = member;
                   LINK( insert, first_member, last_member, next, prev );
                 }
@@ -657,9 +657,9 @@ void remove_member( const Character *ch )
             if( !StrCmp( member->name, ch->name ) )
               {
                 UNLINK( member, members_list->first_member, members_list->last_member, next, prev );
-                DISPOSE( member->name );
-                DISPOSE( member->since );
-                DISPOSE( member );
+                FreeMemory( member->name );
+                FreeMemory( member->since );
+                FreeMemory( member );
                 save_member_list( members_list );
                 break;
               }
@@ -719,7 +719,7 @@ bool load_member_list( const char *filename )
       return false;
     }
 
-  CREATE( members_list, MEMBER_LIST, 1 );
+  AllocateMemory( members_list, MEMBER_LIST, 1 );
 
   for( ; ; )
     {
@@ -733,7 +733,7 @@ bool load_member_list( const char *filename )
       else
         if( !StrCmp( word, "Member" ) )
           {
-            CREATE( member, MEMBER_DATA, 1 );
+            AllocateMemory( member, MEMBER_DATA, 1 );
             member->name = CopyString( ReadWord( fp ) );
             member->since = CopyString( ReadWord( fp ) );
             member->kills = ReadInt( fp );
@@ -798,7 +798,7 @@ void update_member( const Character *ch )
 	      struct tm *t = localtime(&current_time);
 	      char buf[MAX_STRING_LENGTH];
 
-	      CREATE( member, MEMBER_DATA, 1 );
+	      AllocateMemory( member, MEMBER_DATA, 1 );
 	      member->name = CopyString( ch->name );
 	      member->level = ch->top_level;
 	      member->mclass = ch->ability.main;

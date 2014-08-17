@@ -15,7 +15,7 @@ void do_rreset( Character *ch, char *argument )
           bug("do_rreset: %s's dest_buf points to invalid room", (int)ch->name);
         }
       ch->substate = SUB_NONE;
-      DISPOSE(ch->dest_buf);
+      FreeMemory(ch->dest_buf);
       return;
     }
   else

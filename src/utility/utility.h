@@ -52,14 +52,14 @@ typedef unsigned char bool;
  * NOTE: Do NOT change from calloc to malloc. This will lead to undefined
  * behaviour because a lot of the code assumes the memory is initialized.
  */
-#define CREATE(result, type, number)                            \
+#define AllocateMemory(result, type, number)                            \
 do                                                              \
   {                                                               \
  if (!((result) = (type *) calloc ((number), sizeof(type))))  \
    { perror("calloc failure"); abort(); }                  \
   } while(0)
 
-#define RECREATE(result,type,number)                            \
+#define ReAllocateMemory(result,type,number)                            \
 do                                                              \
   {                                                               \
  if (!((result) = (type *) realloc ((result), sizeof(type) * (number))))\
@@ -67,7 +67,7 @@ do                                                              \
   } while(0)
 
 
-#define DISPOSE(point)                                          \
+#define FreeMemory(point)                                          \
 do                                                              \
   {                                                               \
  if (!(point))                                                 \

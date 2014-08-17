@@ -23,7 +23,7 @@ void do_makedisguise( Character *ch, char *argument )
   CraftRecipe *recipe = MakeCraftRecipe();
   CraftingSession *session = AllocateCraftingSession( recipe, ch, argument );
 
-  CREATE( data, struct UserData, 1 );
+  AllocateMemory( data, struct UserData, 1 );
 
   AddInterpretArgumentsCraftingHandler( session, data, InterpretArgumentsHandler );
   AddSetObjectStatsCraftingHandler( session, data, SetObjectStatsHandler );
@@ -119,16 +119,16 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   SetBit( disguise->wear_flags, ITEM_DISGUISE );
   SetBit( disguise->wear_flags, ITEM_TAKE );
 
-  DISPOSE( disguise->name );
+  FreeMemory( disguise->name );
   strcpy( buf, ud->Name );
   strcat( buf, " disguise");
   disguise->name = CopyString( buf );
 
   strcpy( buf, ud->Name );
-  DISPOSE( disguise->short_descr );
+  FreeMemory( disguise->short_descr );
   disguise->short_descr = CopyString( buf );
 
-  DISPOSE( disguise->description );
+  FreeMemory( disguise->description );
   disguise->description = CopyString( "" );
 
   disguise->value[OVAL_DISGUISE_MAX_CONDITION] = INIT_WEAPON_CONDITION;
@@ -154,8 +154,8 @@ static void FreeUserData( struct UserData *ud )
 {
   if( ud->Name )
     {
-      DISPOSE( ud->Name );
+      FreeMemory( ud->Name );
     }
 
-  DISPOSE( ud );
+  FreeMemory( ud );
 }

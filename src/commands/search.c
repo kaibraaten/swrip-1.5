@@ -60,10 +60,10 @@ void do_search( Character *ch, char *argument )
           return;
         }
       strcpy( arg, (const char*)ch->dest_buf );
-      DISPOSE( ch->dest_buf );
+      FreeMemory( ch->dest_buf );
       break;
     case SUB_TIMER_DO_ABORT:
-      DISPOSE( ch->dest_buf );
+      FreeMemory( ch->dest_buf );
       ch->substate = SUB_NONE;
       send_to_char( "You stop your search...\r\n", ch );
       return;

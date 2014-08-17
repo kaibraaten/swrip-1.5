@@ -40,7 +40,7 @@ void do_makeblaster( Character *ch, char *argument )
 					     CRAFTFLAG_NEED_WORKSHOP );
   CraftingSession *session = AllocateCraftingSession( recipe, ch, argument );
 
-  CREATE( data, struct UserData, 1 );
+  AllocateMemory( data, struct UserData, 1 );
 
   AddInterpretArgumentsCraftingHandler( session, data, InterpretArgumentsHandler );
   AddMaterialFoundCraftingHandler( session, data, MaterialFoundHandler );
@@ -104,20 +104,20 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   SetBit( blaster->wear_flags, ITEM_TAKE );
   blaster->weight = 2 + blaster->level / 10;
 
-  DISPOSE( blaster->name );
+  FreeMemory( blaster->name );
   strcpy( buf, ud->ItemName );
   strcat( buf, " blaster");
   blaster->name = CopyString( buf );
 
   strcpy( buf, ud->ItemName );
-  DISPOSE( blaster->short_descr );
+  FreeMemory( blaster->short_descr );
   blaster->short_descr = CopyString( buf );
 
-  DISPOSE( blaster->description );
+  FreeMemory( blaster->description );
   strcat( buf, " was carelessly misplaced here." );
   blaster->description = CopyString( Capitalize( buf ) );
 
-  CREATE( hitroll, Affect, 1 );
+  AllocateMemory( hitroll, Affect, 1 );
   hitroll->type       = -1;
   hitroll->duration   = -1;
   hitroll->location   = get_affecttype( "hitroll" );
@@ -125,7 +125,7 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   LINK( hitroll, blaster->first_affect, blaster->last_affect, next, prev );
   ++top_affect;
 
-  CREATE( damroll, Affect, 1 );
+  AllocateMemory( damroll, Affect, 1 );
   damroll->type      = -1;
   damroll->duration  = -1;
   damroll->location  = get_affecttype( "damroll" );
@@ -137,7 +137,7 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
     {
       Affect *snipe = NULL;
 
-      CREATE( snipe, Affect, 1 );
+      AllocateMemory( snipe, Affect, 1 );
       snipe->type      = -1;
       snipe->duration  = -1;
       snipe->location  = get_affecttype( "snipe" );
@@ -172,8 +172,8 @@ static void FreeUserData( struct UserData *ud )
 {
   if( ud->ItemName )
     {
-      DISPOSE( ud->ItemName );
+      FreeMemory( ud->ItemName );
     }
 
-  DISPOSE( ud );
+  FreeMemory( ud );
 }

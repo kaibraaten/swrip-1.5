@@ -15,7 +15,7 @@ void do_makespaceobject( Character *ch, char *argument )
     }
 
 
-  CREATE( spaceobject, Spaceobject, 1 );
+  AllocateMemory( spaceobject, Spaceobject, 1 );
   LINK( spaceobject, first_spaceobject, last_spaceobject, next, prev );
 
   spaceobject->name      = CopyString( argument );

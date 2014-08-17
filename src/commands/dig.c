@@ -75,11 +75,11 @@ void do_dig( Character *ch, char *argument )
           return;
         }
       strcpy( arg, (const char*)ch->dest_buf );
-      DISPOSE( ch->dest_buf );
+      FreeMemory( ch->dest_buf );
       break;
 
     case SUB_TIMER_DO_ABORT:
-      DISPOSE( ch->dest_buf );
+      FreeMemory( ch->dest_buf );
       ch->substate = SUB_NONE;
       send_to_char( "You stop digging...\r\n", ch );
       act( AT_PLAIN, "$n stops digging...", ch, NULL, NULL, TO_ROOM );

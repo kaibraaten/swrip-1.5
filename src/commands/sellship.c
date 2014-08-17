@@ -28,7 +28,7 @@ void do_sellship(Character *ch, char *argument )
   act( AT_PLAIN, "$n walks over to a terminal and makes a credit transaction.",ch,
        NULL, argument , TO_ROOM );
 
-  DISPOSE( ship->owner );
+  FreeMemory( ship->owner );
   ship->owner = CopyString( "" );
   ship->pilot = CopyString( "" );
   ship->copilot = CopyString( "" );

@@ -35,7 +35,7 @@ void do_setplanet( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "name" ) )
     {
-      DISPOSE( planet->name );
+      FreeMemory( planet->name );
       planet->name = CopyString( argument );
       send_to_char( "Done.\r\n", ch );
       save_planet( planet );
@@ -83,7 +83,7 @@ void do_setplanet( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "filename" ) )
     {
-      DISPOSE( planet->filename );
+      FreeMemory( planet->filename );
       planet->filename = CopyString( argument );
       send_to_char( "Done.\r\n", ch );
       save_planet( planet );

@@ -88,7 +88,7 @@ void do_mine( Character *ch, char *argument )
   SetBit( obj->extra_flags, ITEM_BURRIED );
   SetWaitState( ch, urange( 10, move / 2, 100 ) );
 
-  DISPOSE ( obj->armed_by );
+  FreeMemory( obj->armed_by );
   obj->armed_by = CopyString ( ch->name );
 
   ch_printf( ch, "You arm and bury %s.\r\n", obj->short_descr );

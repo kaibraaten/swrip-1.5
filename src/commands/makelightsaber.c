@@ -42,7 +42,7 @@ void do_makelightsaber( Character *ch, char *argument )
 					     CRAFTFLAG_NONE );
   CraftingSession *session = AllocateCraftingSession( recipe, ch, argument );
 
-  CREATE( data, struct UserData, 1 );
+  AllocateMemory( data, struct UserData, 1 );
 
   AddInterpretArgumentsCraftingHandler( session, data, InterpretArgumentsHandler );
   AddCheckRequirementsCraftingHandler( session, data, CheckRequirementsHandler );
@@ -109,23 +109,23 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *even
 
   lightsaber->weight = 5;
 
-  DISPOSE( lightsaber->name );
+  FreeMemory( lightsaber->name );
   lightsaber->name = CopyString( "lightsaber saber" );
 
   strcpy( buf, ud->ItemName );
-  DISPOSE( lightsaber->short_descr );
+  FreeMemory( lightsaber->short_descr );
   lightsaber->short_descr = CopyString( buf );
 
-  DISPOSE( lightsaber->description );
+  FreeMemory( lightsaber->description );
   sprintf( buf, "%s was carelessly misplaced here.", Capitalize( ud->ItemName ) );
   lightsaber->description = CopyString( buf );
 
-  DISPOSE( lightsaber->action_desc );
+  FreeMemory( lightsaber->action_desc );
   strcpy( buf, ud->ItemName );
   strcat( buf, " ignites with a hum and a soft glow." );
   lightsaber->action_desc = CopyString( buf );
 
-  CREATE( hitroll, Affect, 1 );
+  AllocateMemory( hitroll, Affect, 1 );
   hitroll->type               = -1;
   hitroll->duration           = -1;
   hitroll->location           = get_affecttype( "hitroll" );
@@ -135,7 +135,7 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *even
   LINK( hitroll, lightsaber->first_affect, lightsaber->last_affect, next, prev );
   ++top_affect;
 
-  CREATE( parry, Affect, 1 );
+  AllocateMemory( parry, Affect, 1 );
   parry->type               = -1;
   parry->duration           = -1;
   parry->location           = get_affecttype( "parry" );
@@ -170,10 +170,10 @@ static void FreeUserData( struct UserData *ud )
 {
   if( ud->ItemName )
     {
-      DISPOSE( ud->ItemName );
+      FreeMemory( ud->ItemName );
     }
 
-  DISPOSE( ud );
+  FreeMemory( ud );
 }
 
 static void CheckRequirementsHandler( void *userData, CheckRequirementsEventArgs *eventArgs )

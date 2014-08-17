@@ -84,8 +84,8 @@ void stop_hunting( Character *ch )
 {
   if ( ch->hhf.hunting )
     {
-      DISPOSE( ch->hhf.hunting->name );
-      DISPOSE( ch->hhf.hunting );
+      FreeMemory( ch->hhf.hunting->name );
+      FreeMemory( ch->hhf.hunting );
       ch->hhf.hunting = NULL;
     }
 }
@@ -94,8 +94,8 @@ void stop_hating( Character *ch )
 {
   if ( ch->hhf.hating )
     {
-      DISPOSE( ch->hhf.hating->name );
-      DISPOSE( ch->hhf.hating );
+      FreeMemory( ch->hhf.hating->name );
+      FreeMemory( ch->hhf.hating );
       ch->hhf.hating = NULL;
     }
 }
@@ -104,8 +104,8 @@ void stop_fearing( Character *ch )
 {
   if ( ch->hhf.fearing )
     {
-      DISPOSE( ch->hhf.fearing->name );
-      DISPOSE( ch->hhf.fearing );
+      FreeMemory( ch->hhf.fearing->name );
+      FreeMemory( ch->hhf.fearing );
       ch->hhf.fearing = NULL;
     }
 }
@@ -115,7 +115,7 @@ void start_hunting( Character *ch, Character *victim )
   if ( ch->hhf.hunting )
     stop_hunting( ch );
 
-  CREATE( ch->hhf.hunting, HuntHateFear, 1 );
+  AllocateMemory( ch->hhf.hunting, HuntHateFear, 1 );
   ch->hhf.hunting->name = CopyString( victim->name );
   ch->hhf.hunting->who  = victim;
 }
@@ -125,7 +125,7 @@ void start_hating( Character *ch, Character *victim )
   if ( ch->hhf.hating )
     stop_hating( ch );
 
-  CREATE( ch->hhf.hating, HuntHateFear, 1 );
+  AllocateMemory( ch->hhf.hating, HuntHateFear, 1 );
   ch->hhf.hating->name = CopyString( victim->name );
   ch->hhf.hating->who  = victim;
 }
@@ -135,7 +135,7 @@ void start_fearing( Character *ch, Character *victim )
   if ( ch->hhf.fearing )
     stop_fearing( ch );
 
-  CREATE( ch->hhf.fearing, HuntHateFear, 1 );
+  AllocateMemory( ch->hhf.fearing, HuntHateFear, 1 );
   ch->hhf.fearing->name = CopyString( victim->name );
   ch->hhf.fearing->who  = victim;
 }
@@ -1242,7 +1242,7 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
             {
               if ( victim->hhf.hunting->who != ch )
                 {
-                  DISPOSE( victim->hhf.hunting->name );
+                  FreeMemory( victim->hhf.hunting->name );
                   victim->hhf.hunting->name = CopyString( ch->name );
                   victim->hhf.hunting->who  = ch;
                 }
@@ -1255,7 +1255,7 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
         {
           if ( victim->hhf.hating->who != ch )
             {
-              DISPOSE( victim->hhf.hating->name );
+              FreeMemory( victim->hhf.hating->name );
               victim->hhf.hating->name = CopyString( ch->name );
               victim->hhf.hating->who  = ch;
             }
@@ -1944,7 +1944,7 @@ void set_fighting( Character *ch, Character *victim )
       return;
     }
 
-  CREATE( fight, Fight, 1 );
+  AllocateMemory( fight, Fight, 1 );
   fight->who     = victim;
   fight->xp      = (int) xp_compute( ch, victim );
   fight->align = align_compute( ch, victim );
@@ -1991,7 +1991,7 @@ void free_fight( Character *ch )
       if ( !char_died(ch->fighting->who) )
         --ch->fighting->who->num_fighting;
 
-      DISPOSE( ch->fighting );
+      FreeMemory( ch->fighting );
     }
 
   ch->fighting = NULL;
@@ -2125,11 +2125,11 @@ void raw_kill( Character *killer, Character *victim )
     {
       if ( !StrCmp( ship->owner, victim->name ) )
         {
-          DISPOSE( ship->owner );
+          FreeMemory( ship->owner );
           ship->owner = CopyString( "" );
-          DISPOSE( ship->pilot );
+          FreeMemory( ship->pilot );
           ship->pilot = CopyString( "" );
-          DISPOSE( ship->copilot );
+          FreeMemory( ship->copilot );
           ship->copilot = CopyString( "" );
 
           SaveShip( ship );
@@ -2140,7 +2140,7 @@ void raw_kill( Character *killer, Character *victim )
     {
       Room *room = victim->plr_home;
 
-      DISPOSE( room->name );
+      FreeMemory( room->name );
       room->name = CopyString( "An Empty Apartment" );
 
       RemoveBit( room->room_flags , ROOM_PLR_HOME );
@@ -2153,17 +2153,17 @@ void raw_kill( Character *killer, Character *victim )
     {
       if ( !StrCmp( victim->name, victim->pcdata->clan->leadership.leader ) )
         {
-          DISPOSE( victim->pcdata->clan->leadership.leader );
+          FreeMemory( victim->pcdata->clan->leadership.leader );
           if ( victim->pcdata->clan->leadership.number1 )
             {
               victim->pcdata->clan->leadership.leader = CopyString( victim->pcdata->clan->leadership.number1 );
-              DISPOSE( victim->pcdata->clan->leadership.number1 );
+              FreeMemory( victim->pcdata->clan->leadership.number1 );
               victim->pcdata->clan->leadership.number1 = CopyString( "" );
             }
           else if ( victim->pcdata->clan->leadership.number2 )
             {
               victim->pcdata->clan->leadership.leader = CopyString( victim->pcdata->clan->leadership.number2 );
-              DISPOSE( victim->pcdata->clan->leadership.number2 );
+              FreeMemory( victim->pcdata->clan->leadership.number2 );
               victim->pcdata->clan->leadership.number2 = CopyString( "" );
             }
           else
@@ -2172,11 +2172,11 @@ void raw_kill( Character *killer, Character *victim )
 
       if ( !StrCmp( victim->name, victim->pcdata->clan->leadership.number1 ) )
         {
-          DISPOSE( victim->pcdata->clan->leadership.number1 );
+          FreeMemory( victim->pcdata->clan->leadership.number1 );
           if ( victim->pcdata->clan->leadership.number2 )
             {
               victim->pcdata->clan->leadership.number1 = CopyString( victim->pcdata->clan->leadership.number2 );
-              DISPOSE( victim->pcdata->clan->leadership.number2 );
+              FreeMemory( victim->pcdata->clan->leadership.number2 );
               victim->pcdata->clan->leadership.number2 = CopyString( "" );
             }
           else
@@ -2185,7 +2185,7 @@ void raw_kill( Character *killer, Character *victim )
 
       if ( !StrCmp( victim->name, victim->pcdata->clan->leadership.number2 ) )
         {
-          DISPOSE( victim->pcdata->clan->leadership.number2 );
+          FreeMemory( victim->pcdata->clan->leadership.number2 );
           victim->pcdata->clan->leadership.number1 = CopyString( "" );
         }
 

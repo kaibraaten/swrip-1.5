@@ -95,7 +95,7 @@ void do_setshuttle(Character * ch, char * argument)
     {
       if (shuttle->name)
 	{
-	  DISPOSE(shuttle->name);
+	  FreeMemory(shuttle->name);
 	}
 
       shuttle->name = CopyString(argument);
@@ -107,7 +107,7 @@ void do_setshuttle(Character * ch, char * argument)
           char filename[MSL];
           snprintf(filename, MSL, "%s/%s", SHUTTLE_DIR, shuttle->filename);
           unlink(filename);
-          DISPOSE(shuttle->filename);
+          FreeMemory(shuttle->filename);
         }
 
       shuttle->filename = CopyString(argument);
@@ -159,7 +159,7 @@ void do_setshuttle(Character * ch, char * argument)
 
           if ( stop->stop_name )
 	    {
-	      DISPOSE( stop->stop_name );
+	      FreeMemory( stop->stop_name );
 	    }
 
           stop->stop_name = CopyString("Stopless Name");
@@ -205,7 +205,7 @@ void do_setshuttle(Character * ch, char * argument)
 	    {
 	      if (stop->stop_name)
 		{
-		  DISPOSE(stop->stop_name);
+		  FreeMemory(stop->stop_name);
 		}
 
 	      stop->stop_name = CopyString(argument);
@@ -221,10 +221,10 @@ void do_setshuttle(Character * ch, char * argument)
 
 	      if (stop->stop_name)
 		{
-		  DISPOSE(stop->stop_name);
+		  FreeMemory(stop->stop_name);
 		}
 
-	      DISPOSE(stop);
+	      FreeMemory(stop);
 	      send_to_char("Stop removed.\r\n", ch);
 	      return;
 	    }

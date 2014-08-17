@@ -45,7 +45,7 @@ void do_sedit( Character *ch, char *argument )
           send_to_char( "That social already exists!\r\n", ch );
           return;
         }
-      CREATE( social, SOCIALTYPE, 1 );
+      AllocateMemory( social, SOCIALTYPE, 1 );
       social->name = CopyString( arg1 );
       sprintf( arg2, "You %s.", arg1 );
       social->char_no_arg = CopyString( arg2 );
@@ -91,7 +91,7 @@ void do_sedit( Character *ch, char *argument )
           return;
         }
       if ( social->char_no_arg )
-        DISPOSE( social->char_no_arg );
+        FreeMemory( social->char_no_arg );
       social->char_no_arg = CopyString( argument );
       send_to_char( "Done.\r\n", ch );
       return;
@@ -100,7 +100,7 @@ void do_sedit( Character *ch, char *argument )
   if ( !StrCmp( arg2, "onoarg" ) )
     {
       if ( social->others_no_arg )
-        DISPOSE( social->others_no_arg );
+        FreeMemory( social->others_no_arg );
       if ( argument[0] != '\0' && StrCmp( argument, "clear" ) )
         social->others_no_arg = CopyString( argument );
       send_to_char( "Done.\r\n", ch );
@@ -110,7 +110,7 @@ void do_sedit( Character *ch, char *argument )
   if ( !StrCmp( arg2, "cfound" ) )
     {
       if ( social->char_found )
-        DISPOSE( social->char_found );
+        FreeMemory( social->char_found );
       if ( argument[0] != '\0' && StrCmp( argument, "clear" ) )
         social->char_found = CopyString( argument );
       send_to_char( "Done.\r\n", ch );
@@ -120,7 +120,7 @@ void do_sedit( Character *ch, char *argument )
   if ( !StrCmp( arg2, "ofound" ) )
     {
       if ( social->others_found )
-        DISPOSE( social->others_found );
+        FreeMemory( social->others_found );
       if ( argument[0] != '\0' && StrCmp( argument, "clear" ) )
         social->others_found = CopyString( argument );
       send_to_char( "Done.\r\n", ch );
@@ -130,7 +130,7 @@ void do_sedit( Character *ch, char *argument )
   if ( !StrCmp( arg2, "vfound" ) )
     {
       if ( social->vict_found )
-        DISPOSE( social->vict_found );
+        FreeMemory( social->vict_found );
       if ( argument[0] != '\0' && StrCmp( argument, "clear" ) )
         social->vict_found = CopyString( argument );
       send_to_char( "Done.\r\n", ch );
@@ -140,7 +140,7 @@ void do_sedit( Character *ch, char *argument )
   if ( !StrCmp( arg2, "cauto" ) )
     {
       if ( social->char_auto )
-        DISPOSE( social->char_auto );
+        FreeMemory( social->char_auto );
       if ( argument[0] != '\0' && StrCmp( argument, "clear" ) )
         social->char_auto = CopyString( argument );
       send_to_char( "Done.\r\n", ch );
@@ -150,7 +150,7 @@ void do_sedit( Character *ch, char *argument )
   if ( !StrCmp( arg2, "oauto" ) )
     {
       if ( social->others_auto )
-        DISPOSE( social->others_auto );
+        FreeMemory( social->others_auto );
       if ( argument[0] != '\0' && StrCmp( argument, "clear" ) )
         social->others_auto = CopyString( argument );
       send_to_char( "Done.\r\n", ch );
@@ -175,7 +175,7 @@ void do_sedit( Character *ch, char *argument )
       else
         relocate = false;
       if ( social->name )
-        DISPOSE( social->name );
+        FreeMemory( social->name );
       social->name = CopyString( arg1 );
       if ( relocate )
         add_social( social );

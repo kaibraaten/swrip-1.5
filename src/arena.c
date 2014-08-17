@@ -240,7 +240,7 @@ static void FindGameWinner(void)
               bug( "%s awarded %d credits for winning arena", i->name,
 		   (arena.arena_pot/2));
 
-              CREATE(fame_node, struct HallOfFameElement, 1);
+              AllocateMemory(fame_node, struct HallOfFameElement, 1);
               strncpy(fame_node->name, i->name, MAX_INPUT_LENGTH);
               fame_node->name[MAX_INPUT_LENGTH] = '\0';
               fame_node->date = time(0);
@@ -374,7 +374,7 @@ void LoadHallOfFame(void)
     {
       struct HallOfFameElement *next_node = NULL;
 
-      CREATE(next_node, struct HallOfFameElement, 1);
+      AllocateMemory(next_node, struct HallOfFameElement, 1);
       strncpy(next_node->name, name, MAX_INPUT_LENGTH);
       next_node->date = date;
       next_node->award = award;

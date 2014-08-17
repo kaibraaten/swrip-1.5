@@ -60,20 +60,20 @@ void do_skin( Character *ch, char *argument)
   skin                = create_object( get_obj_index(OBJ_VNUM_SKIN), 0 );
   name                = IsNpc(ch) ? korps->short_descr : corpse->short_descr;
   sprintf( buf, skin->short_descr, name );
-  DISPOSE( skin->short_descr );
+  FreeMemory( skin->short_descr );
   skin->short_descr = CopyString( buf );
   sprintf( buf, skin->description, name );
-  DISPOSE( skin->description );
+  FreeMemory( skin->description );
   skin->description = CopyString( buf );
 
   sprintf( buf, "The skinned bones of %s", name );
-  DISPOSE( corpse->name );
+  FreeMemory( corpse->name );
   corpse->name = CopyString( buf );
   sprintf( buf, "The skinned bones of %s", name );
-  DISPOSE( corpse->description );
+  FreeMemory( corpse->description );
   corpse->description = CopyString( buf );
   sprintf( buf, "The skinned bones of %s", name );
-  DISPOSE( corpse->short_descr );
+  FreeMemory( corpse->short_descr );
   corpse->short_descr = CopyString( buf );
   corpse->value[1] = 1;
   corpse->value[2] = -1;

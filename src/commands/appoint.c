@@ -36,7 +36,7 @@ void do_appoint ( Character *ch , char *argument )
           return;
         }
 
-      DISPOSE( ch->pcdata->clan->leadership.number1 );
+      FreeMemory( ch->pcdata->clan->leadership.number1 );
       ch->pcdata->clan->leadership.number1 = CopyString( arg );
     }
   else if ( !StrCmp( argument , "second" )  )
@@ -47,7 +47,7 @@ void do_appoint ( Character *ch , char *argument )
           return;
         }
 
-      DISPOSE( ch->pcdata->clan->leadership.number2 );
+      FreeMemory( ch->pcdata->clan->leadership.number2 );
       ch->pcdata->clan->leadership.number2 = CopyString( arg );
     }
   else

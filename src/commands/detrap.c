@@ -69,12 +69,12 @@ void do_detrap( Character *ch, char *argument )
           return;
         }
       strcpy( arg, (const char*)ch->dest_buf );
-      DISPOSE( ch->dest_buf );
-      DISPOSE(ch->dest_buf);
+      FreeMemory( ch->dest_buf );
+      FreeMemory(ch->dest_buf);
       ch->substate = SUB_NONE;
       break;
     case SUB_TIMER_DO_ABORT:
-      DISPOSE(ch->dest_buf);
+      FreeMemory(ch->dest_buf);
       ch->substate = SUB_NONE;
       send_to_char( "You carefully stop what you were doing.\r\n", ch );
       return;

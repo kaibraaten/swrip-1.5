@@ -319,7 +319,7 @@ void DeleteReset( Area *pArea, Reset *pReset )
     }
 
   UNLINK(pReset, pArea->first_reset, pArea->last_reset, next, prev);
-  DISPOSE(pReset);
+  FreeMemory(pReset);
 }
 #undef DEL_RESET
 
@@ -605,7 +605,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
 	  pReset->next->prev = reset;
 	}
 
-      DISPOSE(pReset);
+      FreeMemory(pReset);
       send_to_char( "Done.\r\n", ch );
       return;
     }
@@ -620,7 +620,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
 
       AddReset(pArea, pReset->command, pReset->extra, pReset->arg1,
                 pReset->arg2, pReset->arg3);
-      DISPOSE(pReset);
+      FreeMemory(pReset);
       send_to_char( "Done.\r\n", ch );
       return;
     }
@@ -635,7 +635,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
 
       PlaceReset(pArea, pReset->command, pReset->extra, pReset->arg1,
                   pReset->arg2, pReset->arg3);
-      DISPOSE(pReset);
+      FreeMemory(pReset);
       send_to_char( "Done.\r\n", ch );
       return;
     }
@@ -711,7 +711,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
 	      pArea->last_mob_reset = NULL;
 	    }
 
-          DISPOSE(pReset);
+          FreeMemory(pReset);
           top_reset--;
           found = true;
         }
@@ -1498,7 +1498,7 @@ void ResetArea( Area *pArea )
               if( !bootup )
                 {
                   UNLINK( pReset, pArea->first_reset, pArea->last_reset, next, prev );
-                  DISPOSE( pReset );
+                  FreeMemory( pReset );
                 }
 
               continue;
@@ -1511,7 +1511,7 @@ void ResetArea( Area *pArea )
               if( !bootup )
                 {
                   UNLINK( pReset, pArea->first_reset, pArea->last_reset, next, prev );
-                  DISPOSE( pReset );
+                  FreeMemory( pReset );
                 }
 
               continue;
@@ -1559,7 +1559,7 @@ void ResetArea( Area *pArea )
               if( !bootup )
                 {
                   UNLINK( pReset, pArea->first_reset, pArea->last_reset, next, prev );
-                  DISPOSE( pReset );
+                  FreeMemory( pReset );
                 }
 
               continue;
@@ -1601,7 +1601,7 @@ void ResetArea( Area *pArea )
               if( !bootup )
                 {
                   UNLINK( pReset, pArea->first_reset, pArea->last_reset, next, prev );
-                  DISPOSE( pReset );
+                  FreeMemory( pReset );
                 }
 
               continue;
@@ -1614,7 +1614,7 @@ void ResetArea( Area *pArea )
               if( !bootup )
                 {
                   UNLINK( pReset, pArea->first_reset, pArea->last_reset, next, prev );
-                  DISPOSE( pReset );
+                  FreeMemory( pReset );
                 }
 
               continue;
@@ -1642,7 +1642,7 @@ void ResetArea( Area *pArea )
               if( !bootup )
                 {
                   UNLINK( pReset, pArea->first_reset, pArea->last_reset, next, prev );
-                  DISPOSE( pReset );
+                  FreeMemory( pReset );
                 }
 
               continue;
@@ -1657,7 +1657,7 @@ void ResetArea( Area *pArea )
                   if( !bootup )
                     {
                       UNLINK( pReset, pArea->first_reset, pArea->last_reset, next, prev );
-                      DISPOSE( pReset );
+                      FreeMemory( pReset );
                     }
 
                   continue;
@@ -1718,7 +1718,7 @@ void ResetArea( Area *pArea )
                       if( !bootup )
                         {
                           UNLINK( pReset, pArea->first_reset, pArea->last_reset, next, prev );
-                          DISPOSE( pReset );
+                          FreeMemory( pReset );
                         }
 
                       continue;
@@ -1755,7 +1755,7 @@ void ResetArea( Area *pArea )
                   if( !bootup )
                     {
                       UNLINK( pReset, pArea->first_reset, pArea->last_reset, next, prev );
-                      DISPOSE( pReset );
+                      FreeMemory( pReset );
                     }
 
                   continue;
@@ -1784,7 +1784,7 @@ void ResetArea( Area *pArea )
                   if( !bootup )
                     {
                       UNLINK( pReset, pArea->first_reset, pArea->last_reset, next, prev );
-                      DISPOSE( pReset );
+                      FreeMemory( pReset );
                     }
 
                   continue;
@@ -1825,7 +1825,7 @@ void ResetArea( Area *pArea )
                     if( !bootup )
                       {
                         UNLINK( pReset, pArea->first_reset, pArea->last_reset, next, prev );
-                        DISPOSE( pReset );
+                        FreeMemory( pReset );
                       }
 
                     continue;
@@ -1850,7 +1850,7 @@ void ResetArea( Area *pArea )
                   if( !bootup )
                     {
                       UNLINK( pReset, pArea->first_reset, pArea->last_reset, next, prev );
-                      DISPOSE( pReset );
+                      FreeMemory( pReset );
                     }
 
                   continue;
@@ -1868,7 +1868,7 @@ void ResetArea( Area *pArea )
                       if( !bootup )
                         {
                           UNLINK( pReset, pArea->first_reset, pArea->last_reset, next, prev );
-                          DISPOSE( pReset );
+                          FreeMemory( pReset );
                         }
 
                       continue;
@@ -1931,7 +1931,7 @@ void ResetArea( Area *pArea )
               if( !bootup )
                 {
                   UNLINK( pReset, pArea->first_reset, pArea->last_reset, next, prev );
-                  DISPOSE( pReset );
+                  FreeMemory( pReset );
                 }
 
               continue;
@@ -1979,7 +1979,7 @@ void ResetArea( Area *pArea )
               if( !bootup )
                 {
                   UNLINK( pReset, pArea->first_reset, pArea->last_reset, next, prev );
-                  DISPOSE( pReset );
+                  FreeMemory( pReset );
                 }
 
               continue;
@@ -2379,7 +2379,7 @@ Reset *MakeReset( char letter, int extra, int arg1, int arg2, int arg3 )
 {
   Reset *pReset = NULL;
 
-  CREATE( pReset, Reset, 1 );
+  AllocateMemory( pReset, Reset, 1 );
   pReset->command       = letter;
   pReset->extra = extra;
   pReset->arg1  = arg1;

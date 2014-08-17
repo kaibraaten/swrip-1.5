@@ -38,7 +38,7 @@ void do_redit( Character *ch, char *argument )
           location = ch->in_room;
         }
 
-      DISPOSE( location->description );
+      FreeMemory( location->description );
       location->description = CopyBuffer( ch );
       StopEditing( ch );
       ch->substate = ch->tempnum;
@@ -54,7 +54,7 @@ void do_redit( Character *ch, char *argument )
           return;
         }
 
-      DISPOSE( ed->description );
+      FreeMemory( ed->description );
       ed->description = CopyBuffer( ch );
       StopEditing( ch );
       ch->substate = ch->tempnum;
@@ -79,7 +79,7 @@ void do_redit( Character *ch, char *argument )
           send_to_char( "Redit mode off.\r\n", ch );
 
 	  if ( ch->pcdata && ch->pcdata->subprompt )
-            DISPOSE( ch->pcdata->subprompt );
+            FreeMemory( ch->pcdata->subprompt );
 
           ch->substate = SUB_NONE;
           return;
@@ -114,7 +114,7 @@ void do_redit( Character *ch, char *argument )
           return;
         }
 
-      DISPOSE( location->name );
+      FreeMemory( location->name );
       location->name = CopyString( argument );
       return;
     }
@@ -381,7 +381,7 @@ void do_redit( Character *ch, char *argument )
           return;
         }
 
-      DISPOSE( xit->keyword );
+      FreeMemory( xit->keyword );
       xit->keyword = CopyString( argument );
       send_to_char( "Done.\r\n", ch );
       return;
@@ -587,7 +587,7 @@ void do_redit( Character *ch, char *argument )
 
           if ( argument && argument[0] != '\0' )
             {
-              DISPOSE( xit->keyword );
+              FreeMemory( xit->keyword );
               xit->keyword = CopyString( argument );
             }
         }
@@ -751,7 +751,7 @@ void do_redit( Character *ch, char *argument )
 
       if ( xit )
 	{
-          DISPOSE( xit->description );
+          FreeMemory( xit->description );
 
           if ( !argument || argument[0] == '\0' )
             xit->description = CopyString( "" );

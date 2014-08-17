@@ -25,7 +25,7 @@ void do_makearmor( Character *ch, char *argument )
   CraftingSession *session = AllocateCraftingSession( recipe, ch, argument );
   struct UserData *data;
 
-  CREATE( data, struct UserData, 1 );
+  AllocateMemory( data, struct UserData, 1 );
 
   AddInterpretArgumentsCraftingHandler( session, data, InterpretArgumentsHandler );
   AddMaterialFoundCraftingHandler( session, data, MaterialFoundHandler );
@@ -114,13 +114,13 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *even
   SetBit( armor->wear_flags, ITEM_TAKE );
   SetBit( armor->wear_flags, ud->WearLocation );
 
-  DISPOSE( armor->name );
+  FreeMemory( armor->name );
   armor->name = CopyString( ud->ItemName );
 
-  DISPOSE( armor->short_descr );
+  FreeMemory( armor->short_descr );
   armor->short_descr = CopyString( ud->ItemName );
 
-  DISPOSE( armor->description );
+  FreeMemory( armor->description );
   sprintf( description, "%s was dropped here.", Capitalize( ud->ItemName ) );
   armor->description = CopyString( description );
 
@@ -144,10 +144,10 @@ static void FreeUserData( struct UserData *ud )
 {
   if( ud->ItemName )
     {
-      DISPOSE( ud->ItemName );
+      FreeMemory( ud->ItemName );
     }
 
-  DISPOSE( ud );
+  FreeMemory( ud );
 }
 
 static bool CanUseWearLocation( int wearLocation )

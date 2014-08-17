@@ -408,7 +408,7 @@ static void nanny_get_new_password( Descriptor *d, char *argument )
 	}
     }
 
-  DISPOSE( ch->pcdata->pwd );
+  FreeMemory( ch->pcdata->pwd );
   ch->pcdata->pwd   = CopyString( pwdnew );
   write_to_buffer( d, "\r\nPlease retype the password to confirm: ", 0 );
   d->connection_state = CON_CONFIRM_NEW_PASSWORD;

@@ -213,9 +213,9 @@ void show_list_to_char( const OBJ_DATA *list, Character *ch, bool fShort, bool f
       return;
     }
 
-  CREATE( prgpstrShow,  char*,  count + ((offcount > 0) ? offcount : 0) );
-  CREATE( prgnShow,             int,    count + ((offcount > 0) ? offcount : 0) );
-  CREATE( pitShow,              int,    count + ((offcount > 0) ? offcount : 0) );
+  AllocateMemory( prgpstrShow,  char*,  count + ((offcount > 0) ? offcount : 0) );
+  AllocateMemory( prgnShow,             int,    count + ((offcount > 0) ? offcount : 0) );
+  AllocateMemory( pitShow,              int,    count + ((offcount > 0) ? offcount : 0) );
   nShow = 0;
   tmp           = (offcount > 0) ? offcount : 0;
   cnt           = 0;
@@ -325,7 +325,7 @@ void show_list_to_char( const OBJ_DATA *list, Character *ch, bool fShort, bool f
       }
 
       send_to_char( "\r\n", ch );
-      DISPOSE( prgpstrShow[iShow] );
+      FreeMemory( prgpstrShow[iShow] );
     }
 
   if ( fShowNothing && nShow == 0 )
@@ -338,9 +338,9 @@ void show_list_to_char( const OBJ_DATA *list, Character *ch, bool fShort, bool f
   /*
    * Clean up.
    */
-  DISPOSE( prgpstrShow );
-  DISPOSE( prgnShow );
-  DISPOSE( pitShow );
+  FreeMemory( prgpstrShow );
+  FreeMemory( prgnShow );
+  FreeMemory( pitShow );
 }
 
 bool check_blind( const Character *ch )

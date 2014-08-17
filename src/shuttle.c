@@ -39,7 +39,7 @@ ShuttleStop *AllocateShuttleStop( void )
 {
   ShuttleStop *stop = NULL;
 
-  CREATE( stop, ShuttleStop, 1);
+  AllocateMemory( stop, ShuttleStop, 1);
   stop->room = INVALID_VNUM;
 
   return stop;
@@ -49,7 +49,7 @@ static Shuttle *AllocateShuttle( void )
 {
   Shuttle *shuttle = NULL;
 
-  CREATE(shuttle, Shuttle, 1);
+  AllocateMemory(shuttle, Shuttle, 1);
   shuttle->current_number = -1;
   shuttle->state          = SHUTTLE_STATE_LANDED;
   shuttle->first_stop     = shuttle->last_stop = NULL;
@@ -73,9 +73,9 @@ Shuttle *MakeShuttle( const char *filename, const char *name )
     }
   else
     {
-      DISPOSE(shuttle->name);
-      DISPOSE(shuttle->filename);
-      DISPOSE(shuttle);
+      FreeMemory(shuttle->name);
+      FreeMemory(shuttle->filename);
+      FreeMemory(shuttle);
       shuttle = NULL;
     }
 
@@ -530,7 +530,7 @@ bool LoadShuttleFile( const char * shuttlefile )
 
   if ( !(found) )
     {
-      DISPOSE( shuttle );
+      FreeMemory( shuttle );
     }
   else
     {
@@ -675,23 +675,23 @@ static void FreeShuttle( Shuttle *shuttle )
 
       if (stop->stop_name)
         {
-          DISPOSE(stop->stop_name);
+          FreeMemory(stop->stop_name);
         }
 
-      DISPOSE(stop);
+      FreeMemory(stop);
     }
 
   if (shuttle->name)
     {
-      DISPOSE(shuttle->name);
+      FreeMemory(shuttle->name);
     }
 
   if (shuttle->filename)
     {
-      DISPOSE(shuttle->filename);
+      FreeMemory(shuttle->filename);
     }
 
-  DISPOSE(shuttle);
+  FreeMemory(shuttle);
 }
 
 void DestroyShuttle(Shuttle *shuttle)
@@ -703,7 +703,7 @@ void DestroyShuttle(Shuttle *shuttle)
       char buf[MSL];
       snprintf(buf, MSL, "%s/%s", SHUTTLE_DIR, shuttle->filename);
       unlink(buf);
-      DISPOSE(shuttle->filename);
+      FreeMemory(shuttle->filename);
     }
 
   FreeShuttle( shuttle );

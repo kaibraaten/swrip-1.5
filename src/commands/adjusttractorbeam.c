@@ -72,7 +72,7 @@ void do_adjusttractorbeam(Character *ch, char *argument )
       eShip->shipstate = SHIP_TRACTORED;
       eShip->docked = NULL;
       eShip->docking = SHIP_READY;
-      DISPOSE(eShip->dest);
+      FreeMemory(eShip->dest);
       return;
     }
   if ( !StrCmp( arg, "abort" ) )
@@ -81,7 +81,7 @@ void do_adjusttractorbeam(Character *ch, char *argument )
       eShip->shipstate = SHIP_TRACTORED;
       eShip->docked = NULL;
       eShip->docking = SHIP_READY;
-      DISPOSE(eShip->dest);
+      FreeMemory(eShip->dest);
       return;
     }
 

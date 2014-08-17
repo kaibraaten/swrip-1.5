@@ -24,7 +24,7 @@ void do_makeglowrod( Character *ch, char *argument )
   CraftRecipe *recipe = MakeCraftRecipe();
   CraftingSession *session = AllocateCraftingSession( recipe, ch, argument );
 
-  CREATE( data, struct UserData, 1 );
+  AllocateMemory( data, struct UserData, 1 );
 
   AddInterpretArgumentsCraftingHandler( session, data, InterpretArgumentsHandler );
   AddCheckRequirementsCraftingHandler( session, data, CheckRequirementsHandler );
@@ -94,16 +94,16 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   SetBit( glowrod->wear_flags, ITEM_TAKE );
   glowrod->weight = 3;
 
-  DISPOSE( glowrod->name );
+  FreeMemory( glowrod->name );
   strcpy( buf, ud->ItemName );
   strcat( buf, " glowrod");
   glowrod->name = CopyString( buf );
 
   strcpy( buf, ud->ItemName );
-  DISPOSE( glowrod->short_descr );
+  FreeMemory( glowrod->short_descr );
   glowrod->short_descr = CopyString( buf );
 
-  DISPOSE( glowrod->description );
+  FreeMemory( glowrod->description );
   strcat( buf, " was carelessly misplaced here." );
   glowrod->description = CopyString( Capitalize( buf ) );
 
@@ -127,8 +127,8 @@ static void FreeUserData( struct UserData *ud )
 {
   if( ud->ItemName )
     {
-      DISPOSE( ud->ItemName );
+      FreeMemory( ud->ItemName );
     }
 
-  DISPOSE( ud );
+  FreeMemory( ud );
 }

@@ -77,13 +77,13 @@ void do_buy( Character *ch, char *argument )
       if ( arg[0] != '\0' )
         {
           sprintf( buf, "%s %s", pet->name, arg );
-          DISPOSE( pet->name );
+          FreeMemory( pet->name );
           pet->name = CopyString( buf );
         }
 
       sprintf( buf, "%sA neck tag says 'I belong to %s'.\r\n",
                pet->description, ch->name );
-      DISPOSE( pet->description );
+      FreeMemory( pet->description );
       pet->description = CopyString( buf );
 
       if( ch->pcdata )

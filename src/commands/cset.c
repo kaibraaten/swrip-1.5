@@ -73,7 +73,7 @@ void do_cset( Character *ch, char *argument )
 
   if (!StringPrefix( arg, "guild_overseer" ) )
     {
-      DISPOSE( sysdata.guild_overseer );
+      FreeMemory( sysdata.guild_overseer );
       sysdata.guild_overseer = CopyString( argument );
       send_to_char("Ok.\r\n", ch);
       return;
@@ -81,7 +81,7 @@ void do_cset( Character *ch, char *argument )
 
   if (!StringPrefix( arg, "guild_advisor" ) )
     {
-      DISPOSE( sysdata.guild_advisor );
+      FreeMemory( sysdata.guild_advisor );
       sysdata.guild_advisor = CopyString( argument );
       send_to_char("Ok.\r\n", ch);
       return;

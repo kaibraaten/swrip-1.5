@@ -22,7 +22,7 @@ void do_prompt( Character *ch, char *argument )
     }
 
   if (ch->pcdata->prompt)
-    DISPOSE(ch->pcdata->prompt);
+    FreeMemory(ch->pcdata->prompt);
 
   if ( strlen(argument) > 128 )
     argument[128] = '\0';

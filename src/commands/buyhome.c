@@ -48,7 +48,7 @@ void do_buyhome( Character *ch, char *argument )
       return;
     }
 
-  DISPOSE( room->name );
+  FreeMemory( room->name );
   room->name = CopyString( argument );
 
   ch->gold -= 100000;

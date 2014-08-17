@@ -23,7 +23,7 @@ void do_makecomlink( Character *ch, char *argument )
   CraftingSession *session = AllocateCraftingSession( recipe, ch, argument );
   struct UserData *ud = NULL;
 
-  CREATE( ud, struct UserData, 1 );
+  AllocateMemory( ud, struct UserData, 1 );
 
   AddInterpretArgumentsCraftingHandler( session, ud, InterpretArgumentsHandler );
   AddSetObjectStatsCraftingHandler( session, ud, SetObjectStatsHandler );
@@ -104,16 +104,16 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
 
   comlink->weight = 1;
 
-  DISPOSE( comlink->name );
+  FreeMemory( comlink->name );
   strcpy( buf, ud->ItemName );
   strcat( buf, " comlink" );
   comlink->name = CopyString( buf );
 
   strcpy( buf, ud->ItemName );
-  DISPOSE( comlink->short_descr );
+  FreeMemory( comlink->short_descr );
   comlink->short_descr = CopyString( buf );
 
-  DISPOSE( comlink->description );
+  FreeMemory( comlink->description );
   strcat( buf, " was left here." );
   comlink->description = CopyString( Capitalize( buf ) );
 
@@ -136,10 +136,10 @@ static void FreeUserData( struct UserData *ud )
 {
   if( ud->ItemName )
     {
-      DISPOSE( ud->ItemName );
+      FreeMemory( ud->ItemName );
     }
 
-  DISPOSE( ud );
+  FreeMemory( ud );
 }
 
 static bool CanUseWearLocation( int wearLocation )

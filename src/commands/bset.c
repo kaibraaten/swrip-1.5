@@ -74,7 +74,7 @@ void do_bset( Character *ch, char *argument )
           return;
         }
 
-      DISPOSE( board->read_group );
+      FreeMemory( board->read_group );
 
       if ( !StrCmp( argument, "none" ) )
 	board->read_group = CopyString( "" );
@@ -94,7 +94,7 @@ void do_bset( Character *ch, char *argument )
           return;
         }
 
-      DISPOSE( board->post_group );
+      FreeMemory( board->post_group );
 
       if ( !StrCmp( argument, "none" ) )
         board->post_group = CopyString( "" );
@@ -123,7 +123,7 @@ void do_bset( Character *ch, char *argument )
 	  sprintf( buf, "%s %s", board->extra_removers, argument );
 	}
 
-      DISPOSE( board->extra_removers );
+      FreeMemory( board->extra_removers );
       board->extra_removers = CopyString( buf );
       write_boards_txt();
       send_to_char( "Done.\r\n", ch );
@@ -147,7 +147,7 @@ void do_bset( Character *ch, char *argument )
 	  sprintf( buf, "%s %s", board->extra_readers, argument );
 	}
 
-      DISPOSE( board->extra_readers );
+      FreeMemory( board->extra_readers );
       board->extra_readers = CopyString( buf );
       write_boards_txt();
       send_to_char( "Done.\r\n", ch );
@@ -162,7 +162,7 @@ void do_bset( Character *ch, char *argument )
           return;
         }
 
-      DISPOSE( board->note_file );
+      FreeMemory( board->note_file );
       board->note_file = CopyString( argument );
       write_boards_txt();
       send_to_char( "Done.\r\n", ch );

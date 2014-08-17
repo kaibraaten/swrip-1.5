@@ -220,7 +220,7 @@ void copyover_recover( void )
     }
 #endif
 
-    CREATE( d, Descriptor, 1 );
+    AllocateMemory( d, Descriptor, 1 );
     init_descriptor( d, desc ); /* set up various stuff */
     d->remote.hostname = CopyString( host );
     d->remote.hostip = CopyString( ip );

@@ -57,7 +57,7 @@ void do_hset( Character *ch, char *argument )
 
   if ( !StrCmp( arg1, "keyword" ) )
     {
-      DISPOSE( pHelp->keyword );
+      FreeMemory( pHelp->keyword );
       pHelp->keyword = CopyString( StringToUppercase(arg2) );
       send_to_char( "Done.\r\n", ch );
       return;

@@ -22,7 +22,7 @@ void do_homepage( Character *ch, char *argument )
   if ( !StrCmp( argument, "clear" ) )
     {
       if ( ch->pcdata->homepage )
-        DISPOSE(ch->pcdata->homepage);
+        FreeMemory(ch->pcdata->homepage);
       ch->pcdata->homepage = CopyString("");
       send_to_char( "Homepage cleared.\r\n", ch );
       return;
@@ -39,7 +39,7 @@ void do_homepage( Character *ch, char *argument )
   HideTilde( buf );
 
   if ( ch->pcdata->homepage )
-    DISPOSE(ch->pcdata->homepage);
+    FreeMemory(ch->pcdata->homepage);
 
   ch->pcdata->homepage = CopyString(buf);
   send_to_char( "Homepage set.\r\n", ch );

@@ -29,7 +29,7 @@ void do_makerepair( Character *ch, char *argument )
       return;
     }
 
-  CREATE( repair, REPAIR_DATA, 1 );
+  AllocateMemory( repair, REPAIR_DATA, 1 );
 
   LINK( repair, first_repair, last_repair, next, prev );
   repair->keeper        = vnum;

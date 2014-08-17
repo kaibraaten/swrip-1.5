@@ -208,7 +208,7 @@ void do_setspaceobject( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "name" ) )
     {
-      DISPOSE( spaceobject->name );
+      FreeMemory( spaceobject->name );
       spaceobject->name = CopyString( argument );
       send_to_char( "Done.\r\n", ch );
       save_spaceobject( spaceobject );
@@ -217,7 +217,7 @@ void do_setspaceobject( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "filename" ) )
     {
-      DISPOSE( spaceobject->filename );
+      FreeMemory( spaceobject->filename );
       spaceobject->filename = CopyString( argument );
       send_to_char( "Done.\r\n", ch );
       save_spaceobject( spaceobject );
@@ -226,7 +226,7 @@ void do_setspaceobject( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "locationa" ) )
     {
-      DISPOSE( spaceobject->landing_site.locationa );
+      FreeMemory( spaceobject->landing_site.locationa );
       spaceobject->landing_site.locationa = CopyString( argument );
       send_to_char( "Done.\r\n", ch );
       save_spaceobject( spaceobject );
@@ -234,7 +234,7 @@ void do_setspaceobject( Character *ch, char *argument )
     }
   if ( !StrCmp( arg2, "locationb" ) )
     {
-      DISPOSE( spaceobject->landing_site.locationb );
+      FreeMemory( spaceobject->landing_site.locationb );
       spaceobject->landing_site.locationb = CopyString( argument );
       send_to_char( "Done.\r\n", ch );
       save_spaceobject( spaceobject );
@@ -242,7 +242,7 @@ void do_setspaceobject( Character *ch, char *argument )
     }
   if ( !StrCmp( arg2, "locationc" ) )
     {
-      DISPOSE( spaceobject->landing_site.locationc );
+      FreeMemory( spaceobject->landing_site.locationc );
       spaceobject->landing_site.locationc = CopyString( argument );
       send_to_char( "Done.\r\n", ch );
       save_spaceobject( spaceobject );

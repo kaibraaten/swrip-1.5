@@ -34,7 +34,7 @@ void do_bio( Character *ch, char *argument )
       return;
 
     case SUB_PERSONAL_BIO:
-      DISPOSE( ch->pcdata->bio );
+      FreeMemory( ch->pcdata->bio );
       ch->pcdata->bio = CopyBuffer( ch );
       StopEditing( ch );
       return;

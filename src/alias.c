@@ -59,10 +59,10 @@ void FreeAliases( Character *ch )
     {
       next_pal=pal->next;
       if (pal->name)
-        DISPOSE(pal->name);
+        FreeMemory(pal->name);
       if (pal->cmd)
-        DISPOSE(pal->cmd);
-      DISPOSE( pal );
+        FreeMemory(pal->cmd);
+      FreeMemory( pal );
     }
 }
 

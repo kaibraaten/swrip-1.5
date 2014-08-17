@@ -72,25 +72,25 @@ void do_outcast( Character *ch, char *argument )
 
   if ( !StrCmp( victim->name, ch->pcdata->clan->leadership.number1 ) )
     {
-      DISPOSE( ch->pcdata->clan->leadership.number1 );
+      FreeMemory( ch->pcdata->clan->leadership.number1 );
       ch->pcdata->clan->leadership.number1 = CopyString( "" );
     }
 
   if ( !StrCmp( victim->name, ch->pcdata->clan->leadership.number2 ) )
     {
-      DISPOSE( ch->pcdata->clan->leadership.number2 );
+      FreeMemory( ch->pcdata->clan->leadership.number2 );
       ch->pcdata->clan->leadership.number2 = CopyString( "" );
     }
 
   victim->pcdata->clan = NULL;
   remove_member( victim );
-  DISPOSE(victim->pcdata->clan_name);
+  FreeMemory(victim->pcdata->clan_name);
   victim->pcdata->clan_name = CopyString( "" );
   act( AT_MAGIC, "You outcast $N from $t", ch, clan->name, victim, TO_CHAR );
   act( AT_MAGIC, "$n outcasts $N from $t", ch, clan->name, victim, TO_ROOM );
   act( AT_MAGIC, "$n outcasts you from $t", ch, clan->name, victim, TO_VICT );
 
-  DISPOSE( victim->pcdata->bestowments );
+  FreeMemory( victim->pcdata->bestowments );
   victim->pcdata->bestowments = CopyString("");
 
   save_char_obj( victim );      /* clan gets saved when pfile is saved */

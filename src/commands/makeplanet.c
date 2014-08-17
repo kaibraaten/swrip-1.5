@@ -13,7 +13,7 @@ void do_makeplanet( Character *ch, char *argument )
 
   sprintf( filename, "%s%s", PLANET_DIR, StringToLowercase(argument) );
 
-  CREATE( planet, PLANET_DATA, 1 );
+  AllocateMemory( planet, PLANET_DATA, 1 );
   LINK( planet, first_planet, last_planet, next, prev );
   planet->governed_by = NULL;
   planet->next_in_system = NULL;

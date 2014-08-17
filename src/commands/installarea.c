@@ -27,7 +27,7 @@ void do_installarea( Character *ch, char *argument )
         {
           if ( argument && argument[0] != '\0' )
             {
-              DISPOSE( tarea->name );
+              FreeMemory( tarea->name );
               tarea->name = CopyString( argument );
             }
 

@@ -154,15 +154,15 @@ void do_clone( Character *ch, char *argument )
   if ( ch->pcdata->clan_name && ch->pcdata->clan_name[0] != '\0' )
     {
       strcpy( clanname, ch->pcdata->clan_name);
-      DISPOSE( ch->pcdata->clan_name );
+      FreeMemory( ch->pcdata->clan_name );
       ch->pcdata->clan_name = CopyString( "" );
       strcpy( bestowments, ch->pcdata->bestowments);
-      DISPOSE( ch->pcdata->bestowments );
+      FreeMemory( ch->pcdata->bestowments );
       ch->pcdata->bestowments = CopyString( "" );
       save_clone(ch);
-      DISPOSE( ch->pcdata->clan_name );
+      FreeMemory( ch->pcdata->clan_name );
       ch->pcdata->clan_name = CopyString( clanname );
-      DISPOSE( ch->pcdata->bestowments );
+      FreeMemory( ch->pcdata->bestowments );
       ch->pcdata->bestowments = CopyString( clanname );
     }
   else

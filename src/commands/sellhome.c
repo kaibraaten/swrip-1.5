@@ -29,7 +29,7 @@ void do_sellhome (Character *ch, char *argument)
       return;
     }
 
-  DISPOSE(room->name);
+  FreeMemory(room->name);
   room->name = CopyString("An Empty Apartment");
   ch->gold += sellHomeCreditReturn;
   RemoveBit(room->room_flags,ROOM_PLR_HOME);

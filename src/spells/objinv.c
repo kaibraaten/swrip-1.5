@@ -52,7 +52,7 @@ ch_ret spell_obj_inv( int sn, int level, Character *ch, void *vo )
                   char buf[MAX_STRING_LENGTH];
 
                   sprintf( buf, "%s water", obj->name );
-                  DISPOSE( obj->name );
+                  FreeMemory( obj->name );
                   obj->name = CopyString( buf );
                 }
             }

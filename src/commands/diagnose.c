@@ -99,7 +99,7 @@ void do_diagnose( Character *ch, char *argument )
       diagnose_help(ch);
       return;
     }
-    CREATE(freq, OBJ_INDEX_DATA *, num);           /* dynamic freq array */
+    AllocateMemory(freq, OBJ_INDEX_DATA *, num);           /* dynamic freq array */
     for (cou = 0; cou < num; cou++)                /* initialize freq array */
       freq[cou] = NULL;                          /* to NULL pointers */
     for (cou = 0; cou < MAX_KEY_HASH; cou++) {     /* loop thru obj_index_hash */
@@ -111,7 +111,7 @@ void do_diagnose( Character *ch, char *argument )
     ch_printf (ch, "\r\nObject Frequencies\r\n");  /* send results to char */
     for (cou = 0; cou < num && freq[cou]; cou++)
       ch_printf(ch, "%3d%8d%8d\r\n", cou+1,freq[cou]->vnum,freq[cou]->count);
-    DISPOSE(freq);
+    FreeMemory(freq);
     return;
   }
 

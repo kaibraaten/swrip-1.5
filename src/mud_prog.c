@@ -114,7 +114,7 @@ void init_supermob()
   char_to_room( supermob, office );
 
 #ifdef NOTDEFD
-  CREATE( supermob, Character, 1 );
+  AllocateMemory( supermob, Character, 1 );
   clear_char( supermob );
 
   SetBit(supermob->act,ACT_IsNpc);
@@ -122,7 +122,7 @@ void init_supermob()
   supermob->short_descr         = CopyString(".");
   supermob->long_descr  = CopyString(".");
 
-  CREATE( supermob_index, ProtoMobile, 1 )
+  AllocateMemory( supermob_index, ProtoMobile, 1 )
 #endif
     }
 
@@ -2307,7 +2307,7 @@ void mob_act_add( Character *mob )
 	}
     }
 
-  CREATE(runner, struct act_prog_data, 1);
+  AllocateMemory(runner, struct act_prog_data, 1);
   runner->vo = mob;
   runner->next = mob_act_list;
   mob_act_list = runner;
@@ -2350,7 +2350,7 @@ void mprog_act_trigger( char *buf, Character *mob, Character *ch,
       if ( !found )
         return;
 
-      CREATE( tmp_act, MPROG_ACT_LIST, 1 );
+      AllocateMemory( tmp_act, MPROG_ACT_LIST, 1 );
 
       if ( mob->mprog.mpactnum > 0 )
         tmp_act->next = mob->mprog.mpact;
@@ -2384,7 +2384,7 @@ void mprog_bribe_trigger( Character *mob, Character *ch, int amount )
 
       obj = create_object( get_obj_index( OBJ_VNUM_MONEY_SOME ), 0 );
       sprintf( buf, obj->short_descr, amount );
-      DISPOSE( obj->short_descr );
+      FreeMemory( obj->short_descr );
       obj->short_descr = CopyString( buf );
       obj->value[OVAL_MONEY_AMOUNT] = amount;
       obj = obj_to_char( obj, mob );
@@ -2648,7 +2648,7 @@ void set_supermob( OBJ_DATA *obj)
     return;
 
   if (supermob->short_descr)
-    DISPOSE(supermob->short_descr);
+    FreeMemory(supermob->short_descr);
 
   supermob->short_descr = CopyString(obj->short_descr);
   supermob->mprog.mpscriptpos = obj->mprog.mpscriptpos;
@@ -2656,7 +2656,7 @@ void set_supermob( OBJ_DATA *obj)
   /* Added by Jenny to allow bug messages to show the vnum
      of the object, and not just supermob's vnum */
   sprintf( buf, "Object #%ld", obj->pIndexData->vnum );
-  DISPOSE( supermob->description );
+  FreeMemory( supermob->description );
   supermob->description = CopyString( buf );
 
   if(room != NULL)
@@ -2935,7 +2935,7 @@ void oprog_act_trigger( char *buf, OBJ_DATA *mobj, Character *ch,
     {
       MPROG_ACT_LIST *tmp_act;
 
-      CREATE(tmp_act, MPROG_ACT_LIST, 1);
+      AllocateMemory(tmp_act, MPROG_ACT_LIST, 1);
 
       if ( mobj->mprog.mpactnum > 0 )
         tmp_act->next = mobj->mprog.mpact;
@@ -3051,9 +3051,9 @@ void rset_supermob( Room *room)
 
   if (room)
     {
-      DISPOSE(supermob->short_descr);
+      FreeMemory(supermob->short_descr);
       supermob->short_descr = CopyString(room->name);
-      DISPOSE(supermob->name);
+      FreeMemory(supermob->name);
       supermob->name        = CopyString(room->name);
 
       supermob->mprog.mpscriptpos = room->mprog.mpscriptpos;
@@ -3061,7 +3061,7 @@ void rset_supermob( Room *room)
       /* Added by Jenny to allow bug messages to show the vnum
          of the room, and not just supermob's vnum */
       sprintf( buf, "Room #%ld", room->vnum );
-      DISPOSE( supermob->description );
+      FreeMemory( supermob->description );
       supermob->description = CopyString( buf );
 
       char_from_room (supermob );
@@ -3107,7 +3107,7 @@ void rprog_act_trigger( char *buf, Room *room, Character *ch,
     {
       MPROG_ACT_LIST *tmp_act;
 
-      CREATE(tmp_act, MPROG_ACT_LIST, 1);
+      AllocateMemory(tmp_act, MPROG_ACT_LIST, 1);
 
       if ( room->mprog.mpactnum > 0 )
         tmp_act->next = room->mprog.mpact;
@@ -3382,7 +3382,7 @@ void room_act_add( Room *room )
 	}
     }
 
-  CREATE(runner, struct act_prog_data, 1);
+  AllocateMemory(runner, struct act_prog_data, 1);
   runner->vo = room;
   runner->next = room_act_list;
   room_act_list = runner;
@@ -3406,14 +3406,14 @@ void room_act_update( void )
 	    }
 
           room->mprog.mpact = mpact->next;
-          DISPOSE(mpact->buf);
-          DISPOSE(mpact);
+          FreeMemory(mpact->buf);
+          FreeMemory(mpact);
         }
 
       room->mprog.mpact = NULL;
       room->mprog.mpactnum = 0;
       room_act_list = runner->next;
-      DISPOSE(runner);
+      FreeMemory(runner);
     }
 }
 
@@ -3429,7 +3429,7 @@ void obj_act_add( OBJ_DATA *obj )
 	}
     }
 
-  CREATE(runner, struct act_prog_data, 1);
+  AllocateMemory(runner, struct act_prog_data, 1);
   runner->vo = obj;
   runner->next = obj_act_list;
   obj_act_list = runner;
@@ -3449,14 +3449,14 @@ void obj_act_update( void )
           oprog_wordlist_check(mpact->buf, supermob, mpact->ch, mpact->obj,
                                mpact->vo, ACT_PROG, obj);
           obj->mprog.mpact = mpact->next;
-          DISPOSE(mpact->buf);
-          DISPOSE(mpact);
+          FreeMemory(mpact->buf);
+          FreeMemory(mpact);
         }
 
       obj->mprog.mpact = NULL;
       obj->mprog.mpactnum = 0;
       obj_act_list = runner->next;
-      DISPOSE(runner);
+      FreeMemory(runner);
     }
 }
 

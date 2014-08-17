@@ -136,7 +136,7 @@ static void OnFinished( Character *ch )
     return;
 
   strcpy(arg, (const char*)ch->dest_buf);
-  DISPOSE( ch->dest_buf);
+  FreeMemory( ch->dest_buf);
 
   level = IsNpc(ch) ? ch->top_level : (int) (ch->pcdata->learned[gsn_makelandmine]);
   vnum = OBJ_VNUM_CRAFTING_LANDMINE;
@@ -201,14 +201,14 @@ static void OnFinished( Character *ch )
   SetBit( obj->wear_flags, ITEM_TAKE );
   obj->level = level;
   obj->weight = weight;
-  DISPOSE( obj->name );
+  FreeMemory( obj->name );
   strcpy( buf , arg );
   strcat( buf , " landmine");
   obj->name = CopyString( buf );
   strcpy( buf, arg );
-  DISPOSE( obj->short_descr );
+  FreeMemory( obj->short_descr );
   obj->short_descr = CopyString( buf );
-  DISPOSE( obj->description );
+  FreeMemory( obj->description );
   strcat( buf, " was carelessly misplaced here." );
   obj->description = CopyString( buf );
   obj->value[OVAL_EXPLOSIVE_MIN_DMG] = strength/2;
@@ -230,6 +230,6 @@ static void OnFinished( Character *ch )
 
 static void OnAbort( Character *ch )
 {
-  DISPOSE( ch->dest_buf );
+  FreeMemory( ch->dest_buf );
   send_to_char("&RYou are interupted and fail to finish your work.\r\n", ch);
 }

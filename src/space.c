@@ -65,7 +65,7 @@ void new_missile( Ship *ship , Ship *target , Character *ch , int missiletype )
       return;
     }
 
-  CREATE( missile, Missile, 1 );
+  AllocateMemory( missile, Missile, 1 );
   LINK( missile, first_missile, last_missile, next, prev );
 
   missile->target = target;
@@ -125,10 +125,10 @@ void extract_missile( Missile *missile )
 
   if (  missile->fired_by )
     {
-      DISPOSE( missile->fired_by );
+      FreeMemory( missile->fired_by );
     }
 
-  DISPOSE( missile );
+  FreeMemory( missile );
 }
 
 void update_missiles( void )

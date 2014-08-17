@@ -25,7 +25,7 @@ void do_makeshield( Character *ch, char *argument )
   CraftRecipe *recipe = MakeCraftRecipe();
   CraftingSession *session = AllocateCraftingSession( recipe, ch, argument );
 
-  CREATE( data, struct UserData, 1 );
+  AllocateMemory( data, struct UserData, 1 );
 
   AddInterpretArgumentsCraftingHandler( session, data, InterpretArgumentsHandler );
   AddCheckRequirementsCraftingHandler( session, data, CheckRequirementsHandler );
@@ -101,14 +101,14 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   SetBit( shield->wear_flags, ITEM_WEAR_SHIELD );
   shield->weight = 2;
 
-  DISPOSE( shield->name );
+  FreeMemory( shield->name );
   shield->name = CopyString( "energy shield" );
 
   strcpy( buf, ud->ItemName );
-  DISPOSE( shield->short_descr );
+  FreeMemory( shield->short_descr );
   shield->short_descr = CopyString( buf );
 
-  DISPOSE( shield->description );
+  FreeMemory( shield->description );
   strcat( buf, " was carelessly misplaced here." );
   shield->description = CopyString( Capitalize( buf ) );
 
@@ -135,8 +135,8 @@ static void FreeUserData( struct UserData *ud )
 {
   if( ud->ItemName )
     {
-      DISPOSE( ud->ItemName );
+      FreeMemory( ud->ItemName );
     }
 
-  DISPOSE( ud );
+  FreeMemory( ud );
 }

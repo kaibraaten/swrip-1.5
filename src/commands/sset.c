@@ -89,7 +89,7 @@ void do_sset( Character *ch, char *argument )
             return;
           }
 
-      CREATE( skill, struct skill_type, 1 );
+      AllocateMemory( skill, struct skill_type, 1 );
 
       if ( type == SKILL_HERB )
         {
@@ -250,7 +250,7 @@ void do_sset( Character *ch, char *argument )
             {
               skill->spell_fun = spellfun;
               skill->skill_fun = NULL;
-              DISPOSE( skill->fun_name );
+              FreeMemory( skill->fun_name );
               skill->fun_name = CopyString( argument );
             }
           else if ( !StringPrefix( "do_", argument )
@@ -258,7 +258,7 @@ void do_sset( Character *ch, char *argument )
             {
               skill->skill_fun = dofun;
               skill->spell_fun = NULL;
-              DISPOSE( skill->fun_name );
+              FreeMemory( skill->fun_name );
               skill->fun_name = CopyString( argument );
             }
           else
@@ -347,9 +347,9 @@ void do_sset( Character *ch, char *argument )
 	  if ( num == 1 )
             {
               skill->affects = aff->next;
-              DISPOSE( aff->duration );
-              DISPOSE( aff->modifier );
-              DISPOSE( aff );
+              FreeMemory( aff->duration );
+              FreeMemory( aff->modifier );
+              FreeMemory( aff );
               send_to_char( "Removed.\r\n", ch );
               return;
             }
@@ -358,9 +358,9 @@ void do_sset( Character *ch, char *argument )
               if ( ++cnt == num && (aff_next=aff->next) != NULL )
                 {
                   aff->next = aff_next->next;
-                  DISPOSE( aff_next->duration );
-                  DISPOSE( aff_next->modifier );
-                  DISPOSE( aff_next );
+                  FreeMemory( aff_next->duration );
+                  FreeMemory( aff_next->modifier );
+                  FreeMemory( aff_next );
                   send_to_char( "Removed.\r\n", ch );
                   return;
                 }
@@ -403,7 +403,7 @@ void do_sset( Character *ch, char *argument )
               else
                 bit |= (1 << tmpbit);
             }
-          CREATE( aff, SMAUG_AFF, 1 );
+          AllocateMemory( aff, SMAUG_AFF, 1 );
           if ( !StrCmp( duration, "0" ) )
             duration[0] = '\0';
           if ( !StrCmp( modifier, "0" ) )
@@ -429,14 +429,14 @@ void do_sset( Character *ch, char *argument )
         }
       if ( !StrCmp( arg2, "name" ) )
         {
-          DISPOSE(skill->name);
+          FreeMemory(skill->name);
           skill->name = CopyString( argument );
           send_to_char( "Ok.\r\n", ch );
           return;
         }
       if ( !StrCmp( arg2, "dammsg" ) )
         {
-          DISPOSE(skill->noun_damage);
+          FreeMemory(skill->noun_damage);
           if ( !StrCmp( argument, "clear" ) )
             skill->noun_damage = CopyString( "" );
           else
@@ -446,7 +446,7 @@ void do_sset( Character *ch, char *argument )
         }
       if ( !StrCmp( arg2, "wearoff" ) )
         {
-          DISPOSE(skill->msg_off);
+          FreeMemory(skill->msg_off);
           if ( StrCmp( argument, "clear" ) )
             skill->msg_off = CopyString( argument );
           send_to_char( "Ok.\r\n", ch );
@@ -455,7 +455,7 @@ void do_sset( Character *ch, char *argument )
       if ( !StrCmp( arg2, "hitchar" ) )
         {
           if ( skill->hit_char )
-            DISPOSE(skill->hit_char);
+            FreeMemory(skill->hit_char);
           if ( StrCmp( argument, "clear" ) )
             skill->hit_char = CopyString( argument );
           send_to_char( "Ok.\r\n", ch );
@@ -464,7 +464,7 @@ void do_sset( Character *ch, char *argument )
       if ( !StrCmp( arg2, "hitvict" ) )
         {
           if ( skill->hit_vict )
-            DISPOSE(skill->hit_vict);
+            FreeMemory(skill->hit_vict);
           if ( StrCmp( argument, "clear" ) )
             skill->hit_vict = CopyString( argument );
           send_to_char( "Ok.\r\n", ch );
@@ -473,7 +473,7 @@ void do_sset( Character *ch, char *argument )
       if ( !StrCmp( arg2, "hitroom" ) )
         {
           if ( skill->hit_room )
-            DISPOSE(skill->hit_room);
+            FreeMemory(skill->hit_room);
           if ( StrCmp( argument, "clear" ) )
             skill->hit_room = CopyString( argument );
           send_to_char( "Ok.\r\n", ch );
@@ -482,7 +482,7 @@ void do_sset( Character *ch, char *argument )
       if ( !StrCmp( arg2, "misschar" ) )
         {
           if ( skill->miss_char )
-            DISPOSE(skill->miss_char);
+            FreeMemory(skill->miss_char);
           if ( StrCmp( argument, "clear" ) )
             skill->miss_char = CopyString( argument );
           send_to_char( "Ok.\r\n", ch );
@@ -491,7 +491,7 @@ void do_sset( Character *ch, char *argument )
       if ( !StrCmp( arg2, "missvict" ) )
         {
           if ( skill->miss_vict )
-            DISPOSE(skill->miss_vict);
+            FreeMemory(skill->miss_vict);
           if ( StrCmp( argument, "clear" ) )
             skill->miss_vict = CopyString( argument );
           send_to_char( "Ok.\r\n", ch );
@@ -500,7 +500,7 @@ void do_sset( Character *ch, char *argument )
       if ( !StrCmp( arg2, "missroom" ) )
         {
           if ( skill->miss_room )
-            DISPOSE(skill->miss_room);
+            FreeMemory(skill->miss_room);
           if ( StrCmp( argument, "clear" ) )
             skill->miss_room = CopyString( argument );
           send_to_char( "Ok.\r\n", ch );
@@ -509,7 +509,7 @@ void do_sset( Character *ch, char *argument )
       if ( !StrCmp( arg2, "diechar" ) )
         {
           if ( skill->die_char )
-            DISPOSE(skill->die_char);
+            FreeMemory(skill->die_char);
           if ( StrCmp( argument, "clear" ) )
             skill->die_char = CopyString( argument );
           send_to_char( "Ok.\r\n", ch );
@@ -518,7 +518,7 @@ void do_sset( Character *ch, char *argument )
       if ( !StrCmp( arg2, "dievict" ) )
         {
           if ( skill->die_vict )
-            DISPOSE(skill->die_vict);
+            FreeMemory(skill->die_vict);
           if ( StrCmp( argument, "clear" ) )
             skill->die_vict = CopyString( argument );
           send_to_char( "Ok.\r\n", ch );
@@ -527,7 +527,7 @@ void do_sset( Character *ch, char *argument )
       if ( !StrCmp( arg2, "dieroom" ) )
         {
           if ( skill->die_room )
-            DISPOSE(skill->die_room);
+            FreeMemory(skill->die_room);
           if ( StrCmp( argument, "clear" ) )
             skill->die_room = CopyString( argument );
           send_to_char( "Ok.\r\n", ch );
@@ -536,7 +536,7 @@ void do_sset( Character *ch, char *argument )
       if ( !StrCmp( arg2, "immchar" ) )
         {
           if ( skill->imm_char )
-            DISPOSE(skill->imm_char);
+            FreeMemory(skill->imm_char);
           if ( StrCmp( argument, "clear" ) )
             skill->imm_char = CopyString( argument );
           send_to_char( "Ok.\r\n", ch );
@@ -545,7 +545,7 @@ void do_sset( Character *ch, char *argument )
       if ( !StrCmp( arg2, "immvict" ) )
         {
           if ( skill->imm_vict )
-            DISPOSE(skill->imm_vict);
+            FreeMemory(skill->imm_vict);
           if ( StrCmp( argument, "clear" ) )
             skill->imm_vict = CopyString( argument );
           send_to_char( "Ok.\r\n", ch );
@@ -554,7 +554,7 @@ void do_sset( Character *ch, char *argument )
       if ( !StrCmp( arg2, "immroom" ) )
         {
           if ( skill->imm_room )
-            DISPOSE(skill->imm_room);
+            FreeMemory(skill->imm_room);
           if ( StrCmp( argument, "clear" ) )
             skill->imm_room = CopyString( argument );
           send_to_char( "Ok.\r\n", ch );
@@ -563,7 +563,7 @@ void do_sset( Character *ch, char *argument )
       if ( !StrCmp( arg2, "dice" ) )
         {
           if ( skill->dice )
-            DISPOSE(skill->dice);
+            FreeMemory(skill->dice);
           if ( StrCmp( argument, "clear" ) )
             skill->dice = CopyString( argument );
           send_to_char( "Ok.\r\n", ch );
@@ -572,7 +572,7 @@ void do_sset( Character *ch, char *argument )
       if ( !StrCmp( arg2, "components" ) )
         {
           if ( skill->components )
-            DISPOSE(skill->components);
+            FreeMemory(skill->components);
           if ( StrCmp( argument, "clear" ) )
             skill->components = CopyString( argument );
           send_to_char( "Ok.\r\n", ch );
@@ -581,7 +581,7 @@ void do_sset( Character *ch, char *argument )
       if ( !StrCmp( arg2, "teachers" ) )
         {
           if ( skill->teachers )
-            DISPOSE(skill->teachers);
+            FreeMemory(skill->teachers);
           if ( StrCmp( argument, "clear" ) )
             skill->teachers = CopyString( argument );
           send_to_char( "Ok.\r\n", ch );

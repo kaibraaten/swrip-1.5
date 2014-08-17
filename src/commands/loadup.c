@@ -24,12 +24,12 @@ void do_loadup( Character *ch, char *argument )
            Capitalize( name ) );
   if ( stat( fname, &fst ) != -1 )
     {
-      CREATE( d, Descriptor, 1 );
+      AllocateMemory( d, Descriptor, 1 );
       d->next = NULL;
       d->prev = NULL;
       d->connection_state = CON_GET_NAME;
       d->outsize = 2000;
-      CREATE( d->outbuf, char, d->outsize );
+      AllocateMemory( d->outbuf, char, d->outsize );
 
       add_char( d->character );
       old_room_vnum = d->character->in_room->vnum;
@@ -117,8 +117,8 @@ void do_loadup( Character *ch, char *argument )
       d->character->desc        = NULL;
       d->character->retran    = old_room_vnum;
       d->character              = NULL;
-      DISPOSE( d->outbuf );
-      DISPOSE( d );
+      FreeMemory( d->outbuf );
+      FreeMemory( d );
       ch_printf(ch, "Player %s loaded from room %d.\r\n", Capitalize( name ),old_room_vnum );
       sprintf(buf, "%s appears from nowhere, eyes glazed over.\r\n", Capitalize( name ) );
       act( AT_IMMORT, buf, ch, NULL, NULL, TO_ROOM );

@@ -49,7 +49,7 @@ void do_oset( Character *ch, char *argument )
        * extra_descr lists for a matching pointer...
        */
       ed  = (ExtraDescription*)ch->dest_buf;
-      DISPOSE( ed->description );
+      FreeMemory( ed->description );
       ed->description = CopyBuffer( ch );
       tmpobj = (OBJ_DATA*)ch->spare_ptr;
       StopEditing( ch );
@@ -75,12 +75,12 @@ void do_oset( Character *ch, char *argument )
           return;
         }
 
-      DISPOSE( obj->description );
+      FreeMemory( obj->description );
       obj->description = CopyBuffer( ch );
 
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
         {
-          DISPOSE( obj->pIndexData->description );
+          FreeMemory( obj->pIndexData->description );
           obj->pIndexData->description = CopyString( obj->description );
 	}
 
@@ -117,9 +117,9 @@ void do_oset( Character *ch, char *argument )
         {
           send_to_char( "Oset mode off.\r\n", ch );
           ch->substate = SUB_NONE;
-          DISPOSE(ch->dest_buf);
+          FreeMemory(ch->dest_buf);
           if ( ch->pcdata && ch->pcdata->subprompt )
-            DISPOSE( ch->pcdata->subprompt );
+            FreeMemory( ch->pcdata->subprompt );
           return;
         }
     }
@@ -194,7 +194,7 @@ void do_oset( Character *ch, char *argument )
   if ( lockobj )
     ch->dest_buf = obj;
   else
-    DISPOSE(ch->dest_buf);
+    FreeMemory(ch->dest_buf);
 
   separate_obj( obj );
   value = atoi( arg3 );
@@ -424,11 +424,11 @@ void do_oset( Character *ch, char *argument )
     {
       if ( !can_omodify( ch, obj ) )
         return;
-      DISPOSE( obj->name );
+      FreeMemory( obj->name );
       obj->name = CopyString( arg3 );
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
         {
-          DISPOSE(obj->pIndexData->name );
+          FreeMemory(obj->pIndexData->name );
           obj->pIndexData->name = CopyString( obj->name );
         }
       return;
@@ -436,11 +436,11 @@ void do_oset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "short" ) )
     {
-      DISPOSE( obj->short_descr );
+      FreeMemory( obj->short_descr );
       obj->short_descr = CopyString( arg3 );
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
         {
-          DISPOSE(obj->pIndexData->short_descr );
+          FreeMemory(obj->pIndexData->short_descr );
 	  obj->pIndexData->short_descr = CopyString( obj->short_descr );
         }
       else
@@ -452,7 +452,7 @@ void do_oset( Character *ch, char *argument )
           if ( StringInfix( "rename", obj->name ) )
             {
               sprintf( buf, "%s %s", obj->name, "rename" );
-              DISPOSE( obj->name );
+              FreeMemory( obj->name );
               obj->name = CopyString( buf );
             }
         }
@@ -468,11 +468,11 @@ void do_oset( Character *ch, char *argument )
           send_to_char( "Illegal characters!\r\n", ch );
           return;
         }
-      DISPOSE( obj->action_desc );
+      FreeMemory( obj->action_desc );
       obj->action_desc = CopyString( arg3 );
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
         {
-          DISPOSE(obj->pIndexData->action_desc );
+          FreeMemory(obj->pIndexData->action_desc );
           obj->pIndexData->action_desc = CopyString( obj->action_desc );
         }
       return;
@@ -482,11 +482,11 @@ void do_oset( Character *ch, char *argument )
     {
       if ( arg3[0] )
         {
-          DISPOSE( obj->description );
+          FreeMemory( obj->description );
           obj->description = CopyString( arg3 );
           if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
             {
-	      DISPOSE(obj->pIndexData->description );
+	      FreeMemory(obj->pIndexData->description );
               obj->pIndexData->description = CopyString( obj->description );
             }
           return;
@@ -564,7 +564,7 @@ void do_oset( Character *ch, char *argument )
           argument = OneArgument( argument, arg3 );
           value = atoi( arg3 );
         }
-      CREATE( paf, Affect, 1 );
+      AllocateMemory( paf, Affect, 1 );
       paf->type         = -1;
       paf->duration             = -1;
       paf->location             = loc;
@@ -610,7 +610,7 @@ void do_oset( Character *ch, char *argument )
               if ( ++count == loc )
                 {
                   UNLINK( paf, pObjIndex->first_affect, pObjIndex->last_affect, next, prev );
-                  DISPOSE( paf );
+                  FreeMemory( paf );
                   send_to_char( "Removed.\r\n", ch );
                   --top_affect;
                   return;
@@ -626,7 +626,7 @@ void do_oset( Character *ch, char *argument )
               if ( ++count == loc )
                 {
                   UNLINK( paf, obj->first_affect, obj->last_affect, next, prev );
-                  DISPOSE( paf );
+                  FreeMemory( paf );
                   send_to_char( "Removed.\r\n", ch );
                   --top_affect;
                   return;

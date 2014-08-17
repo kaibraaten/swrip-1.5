@@ -33,7 +33,7 @@ void do_makecontainer( Character *ch, char *argument )
   CraftingSession *session = AllocateCraftingSession( recipe, ch, argument );
   struct UserData *ud = NULL;
 
-  CREATE( ud, struct UserData, 1 );
+  AllocateMemory( ud, struct UserData, 1 );
 
   AddInterpretArgumentsCraftingHandler( session, ud, InterpretArgumentsHandler );
   AddSetObjectStatsCraftingHandler( session, ud, SetObjectStatsHandler );
@@ -52,13 +52,13 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *even
   SetBit( container->wear_flags, ITEM_TAKE );
   SetBit( container->wear_flags, ud->WearLocation );
 
-  DISPOSE( container->name );
+  FreeMemory( container->name );
   container->name = CopyString( ud->ItemName );
 
-  DISPOSE( container->short_descr );
+  FreeMemory( container->short_descr );
   container->short_descr = CopyString( ud->ItemName );
 
-  DISPOSE( container->description );
+  FreeMemory( container->description );
   sprintf( description, "%s was dropped here.", Capitalize( ud->ItemName ) );
   container->description = CopyString( description );
 
@@ -128,10 +128,10 @@ static void FreeUserData( struct UserData *ud )
 {
   if( ud->ItemName )
     {
-      DISPOSE( ud->ItemName );
+      FreeMemory( ud->ItemName );
     }
 
-  DISPOSE( ud );
+  FreeMemory( ud );
 }
 
 static bool CanUseWearLocation( int wearLocation )

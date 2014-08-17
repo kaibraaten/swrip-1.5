@@ -1238,7 +1238,7 @@ void save_commands( void )
 SKILLTYPE *fread_skill( FILE *fp )
 {
   SKILLTYPE *skill = NULL;
-  CREATE( skill, SKILLTYPE, 1 );
+  AllocateMemory( skill, SKILLTYPE, 1 );
 
   skill->guild = -1;
 
@@ -1261,7 +1261,7 @@ SKILLTYPE *fread_skill( FILE *fp )
             {
               SMAUG_AFF *aff = NULL;
 
-              CREATE( aff, SMAUG_AFF, 1 );
+              AllocateMemory( aff, SMAUG_AFF, 1 );
               aff->duration = CopyString( ReadWord( fp ) );
               aff->location = ReadInt( fp );
               aff->modifier = CopyString( ReadWord( fp ) );
@@ -1519,7 +1519,7 @@ void fread_social( FILE *fp )
 {
   SOCIALTYPE *social = NULL;
 
-  CREATE( social, SOCIALTYPE, 1 );
+  AllocateMemory( social, SOCIALTYPE, 1 );
 
   for ( ;; )
     {
@@ -1639,7 +1639,7 @@ void fread_command( FILE *fp )
 {
   CMDTYPE *command = NULL;
 
-  CREATE( command, CMDTYPE, 1 );
+  AllocateMemory( command, CMDTYPE, 1 );
 
   for ( ;; )
     {

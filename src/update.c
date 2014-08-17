@@ -1915,7 +1915,7 @@ void obj_update( void )
 			   Capitalize( bufptr ) );
 		}
 
-              DISPOSE( obj->description );
+              FreeMemory( obj->description );
               obj->description = CopyString( buf );
             }
         }
@@ -2302,8 +2302,8 @@ void aggr_update( void )
 		}
 
               wch->mprog.mpact = tmp_act->next;
-              DISPOSE(tmp_act->buf);
-              DISPOSE(tmp_act);
+              FreeMemory(tmp_act->buf);
+              FreeMemory(tmp_act);
             }
 
           wch->mprog.mpactnum = 0;
@@ -2311,7 +2311,7 @@ void aggr_update( void )
         }
 
       mob_act_list = apdtmp->next;
-      DISPOSE( apdtmp );
+      FreeMemory( apdtmp );
     }
 
   for( ch = first_char; ch; ch = wch_next )
@@ -2588,7 +2588,7 @@ void tele_update( void )
             }
 
           UNLINK( tele, first_teleport, last_teleport, next, prev );
-          DISPOSE( tele );
+          FreeMemory( tele );
         }
     }
 }

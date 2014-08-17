@@ -38,7 +38,7 @@ void do_unhell( Character *ch, char *argument )
       if( StrCmp(ch->name, victim->pcdata->helled_by) )
         ch_printf(ch, "(You should probably write a note to %s, explaining the early release.)\r\n",
                   victim->pcdata->helled_by);
-      DISPOSE(victim->pcdata->helled_by);
+      FreeMemory(victim->pcdata->helled_by);
       victim->pcdata->helled_by = NULL;
     }
 

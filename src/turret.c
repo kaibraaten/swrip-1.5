@@ -35,7 +35,7 @@ struct Turret
 Turret *AllocateTurret( Ship *owner )
 {
   Turret *turret = NULL;
-  CREATE( turret, Turret, 1 );
+  AllocateMemory( turret, Turret, 1 );
   turret->owner = owner;
   ResetTurret( turret );
 
@@ -61,7 +61,7 @@ bool IsTurretInstalled( const Turret *turret )
 
 void FreeTurret( Turret *turret )
 {
-  DISPOSE( turret );
+  FreeMemory( turret );
 }
 
 void ResetTurret( Turret *turret )

@@ -90,7 +90,7 @@ void do_password( Character *ch, char *argument )
         }
     }
 
-  DISPOSE( ch->pcdata->pwd );
+  FreeMemory( ch->pcdata->pwd );
   ch->pcdata->pwd = CopyString( pwdnew );
   if ( IsBitSet(sysdata.save_flags, SV_PASSCHG) )
     save_char_obj( ch );

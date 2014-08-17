@@ -37,7 +37,7 @@ void do_enlist( Character *ch, char *argument )
             }
           SetBit( ch->speaks, LANG_CLAN );
           ++clan->members;
-          DISPOSE( ch->pcdata->clan_name );
+          FreeMemory( ch->pcdata->clan_name );
           ch->pcdata->clan_name = CopyString( clan->name );
           ch->pcdata->clan = clan;
           ch_printf( ch, "Welcome to %s.\r\n", clan->name );

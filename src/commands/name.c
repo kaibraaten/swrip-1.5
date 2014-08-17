@@ -49,7 +49,7 @@ void do_name( Character *ch, char *argument )
       return;
     }
 
-  DISPOSE( ch->name );
+  FreeMemory( ch->name );
   ch->name = CopyString( argument );
   sprintf( buf, "%s the %s",ch->name,
            race_table[ch->race].race_name );

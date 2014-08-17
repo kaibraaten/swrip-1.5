@@ -16,7 +16,7 @@ void do_makeship( Character *ch, char *argument )
       return;
     }
 
-  CREATE( ship, Ship, 1 );
+  AllocateMemory( ship, Ship, 1 );
   LINK( ship, first_ship, last_ship, next, prev );
 
   for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )

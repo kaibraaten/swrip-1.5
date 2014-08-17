@@ -655,7 +655,7 @@ char *CopyString( const char *str )
   if( !str )
     return NULL;
 
-  CREATE( ret, char, strlen( str ) + 1 );
+  AllocateMemory( ret, char, strlen( str ) + 1 );
   strcpy( ret, str );
   return ret;
 }

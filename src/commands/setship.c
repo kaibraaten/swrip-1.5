@@ -57,7 +57,7 @@ void do_setship( Character *ch, char *argument )
             clan->vehicles--;
         }
 
-      DISPOSE( ship->owner );
+      FreeMemory( ship->owner );
       ship->owner = CopyString( argument );
       send_to_char( "Done.\r\n", ch );
       SaveShip( ship );
@@ -75,7 +75,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "home" ) )
     {
-      DISPOSE( ship->home );
+      FreeMemory( ship->home );
       ship->home = CopyString( argument );
       send_to_char( "Done.\r\n", ch );
       SaveShip( ship );
@@ -84,7 +84,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "pilot" ) )
     {
-      DISPOSE( ship->pilot );
+      FreeMemory( ship->pilot );
       ship->pilot = CopyString( argument );
       send_to_char( "Done.\r\n", ch );
       SaveShip( ship );
@@ -93,7 +93,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "copilot" ) )
     {
-      DISPOSE( ship->copilot );
+      FreeMemory( ship->copilot );
       ship->copilot = CopyString( argument );
       send_to_char( "Done.\r\n", ch );
       SaveShip( ship );
@@ -852,7 +852,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "name" ) )
     {
-      DISPOSE( ship->name );
+      FreeMemory( ship->name );
       ship->name = CopyString( argument );
       send_to_char( "Done.\r\n", ch );
       SaveShip( ship );
@@ -862,7 +862,7 @@ void do_setship( Character *ch, char *argument )
   if ( !StrCmp( arg2, "personalname" ) )
     {
       if ( ship->personalname )
-        DISPOSE( ship->personalname );
+        FreeMemory( ship->personalname );
 
       ship->personalname = CopyString( argument );
       send_to_char( "Done.\r\n", ch );
@@ -872,7 +872,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "filename" ) )
     {
-      DISPOSE( ship->filename );
+      FreeMemory( ship->filename );
       ship->filename = CopyString( argument );
       send_to_char( "Done.\r\n", ch );
       SaveShip( ship );
@@ -882,7 +882,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "desc" ) )
     {
-      DISPOSE( ship->description );
+      FreeMemory( ship->description );
       ship->description = CopyString( argument );
       send_to_char( "Done.\r\n", ch );
       SaveShip( ship );

@@ -55,7 +55,7 @@ typedef struct EditorLine EditorLine;
       added_size = BLOCK_ROUNDUP( added_use );                  \
       if( added_size == 0 )                                     \
         added_size = CHAR_BLOCK;                                \
-      RECREATE( (buf), char, buf_size + added_size );           \
+      ReAllocateMemory( (buf), char, buf_size + added_size );           \
       (buf_size) += added_size;                                 \
     }
 
@@ -139,8 +139,8 @@ static EditorLine *make_new_line( char *str )
       size = CHAR_BLOCK;
     }
 
-  CREATE(new_line, EditorLine, 1);
-  CREATE(new_line->line, char, size);
+  AllocateMemory(new_line, EditorLine, 1);
+  AllocateMemory(new_line->line, char, size);
   new_line->line_size = size;
   new_line->line_used = strlen( str );
   strcpy( new_line->line, str );
@@ -155,17 +155,17 @@ static void discard_editdata( Editor *edd )
   while( eline )
     {
       EditorLine *elnext = eline->next;
-      DISPOSE( eline->line );
-      DISPOSE( eline );
+      FreeMemory( eline->line );
+      FreeMemory( eline );
       eline = elnext;
     }
 
   if( edd->desc )
     {
-      DISPOSE( edd->desc );
+      FreeMemory( edd->desc );
     }
 
-  DISPOSE( edd );
+  FreeMemory( edd );
 }
 
 static Editor *clone_editdata( Editor *edd )
@@ -175,7 +175,7 @@ static Editor *clone_editdata( Editor *edd )
   EditorLine root_line;
   EditorLine *new_line = &root_line;
 
-  CREATE( new_edd, Editor, 1 );
+  AllocateMemory( new_edd, Editor, 1 );
 
   for( eline = edd->first_line ; eline ; eline = eline->next )
     {
@@ -207,7 +207,7 @@ static Editor *str_to_editdata( char *str, short max_size )
   short tsize = 0;
   short line_count = 1;
 
-  CREATE(edd, Editor, 1);
+  AllocateMemory(edd, Editor, 1);
 
   edd->first_line = eline;
 
@@ -268,7 +268,7 @@ static char *editdata_to_str( Editor *edd )
   short used = 0;
   short i = 0;
 
-  CREATE(buf, char, MAX_STRING_LENGTH );
+  AllocateMemory(buf, char, MAX_STRING_LENGTH );
 
   buf[0] = '\0';
 
@@ -291,7 +291,7 @@ static char *editdata_to_str( Editor *edd )
 
           if( used >= size-3 )
             {
-              RECREATE(buf, char, size + MAX_STRING_LENGTH );
+              ReAllocateMemory(buf, char, size + MAX_STRING_LENGTH );
               size += MAX_STRING_LENGTH;
             }
         }
@@ -306,7 +306,7 @@ static char *editdata_to_str( Editor *edd )
   used++;
 
   tmp = CopyString( buf );
-  DISPOSE(buf);
+  FreeMemory(buf);
   SmushTilde(tmp);
   return tmp;
 }
@@ -336,7 +336,7 @@ void SetEditorDescription( Character *ch, const char *desc_fmt, ... )
 
   if( ch->editor->desc )
     {
-      DISPOSE( ch->editor->desc );
+      FreeMemory( ch->editor->desc );
     }
 
   ch->editor->desc = CopyString( buf );
@@ -723,7 +723,7 @@ static void editor_search_and_replace( Character *ch, Editor *edd, char *argumen
       short line_repl = 0;
       char *new_text = text_replace( eline->line, word_src, word_dst, &new_size, &line_repl );
 
-      DISPOSE( eline->line );
+      FreeMemory( eline->line );
       eline->line = new_text;
       cloned_edd->text_size -= eline->line_used;
       eline->line_used = strlen( eline->line );
@@ -870,8 +870,8 @@ static void editor_delete_line( Character *ch, Editor *edd, char *argument )
     }
 
   edd->line_count--;
-  DISPOSE(del_line->line);
-  DISPOSE(del_line);
+  FreeMemory(del_line->line);
+  FreeMemory(del_line);
 
   ch_printf( ch, "Deleted line %d.\r\n", lineindex);
 }
@@ -1017,7 +1017,7 @@ static char *text_replace( char *src, char *word_src, char *word_dst, short *pne
   short repl_count = 0;
 
   /* prepare the destination buffer */
-  CREATE( dst_buf, char, CHAR_BLOCK );
+  AllocateMemory( dst_buf, char, CHAR_BLOCK );
 
   dst_buf[0] = '\0';
 

@@ -101,7 +101,7 @@ void do_ban( Character *ch, char *argument )
         }
     }
 
-  CREATE( pban, Ban, 1 );
+  AllocateMemory( pban, Ban, 1 );
   LINK( pban, first_ban, last_ban, next, prev );
   pban->name    = CopyString( arg );
   pban->level = LEVEL_AVATAR;

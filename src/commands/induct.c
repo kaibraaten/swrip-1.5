@@ -95,7 +95,7 @@ void do_induct( Character *ch, char *argument )
   clan->members++;
 
   victim->pcdata->clan = clan;
-  DISPOSE(victim->pcdata->clan_name);
+  FreeMemory(victim->pcdata->clan_name);
   victim->pcdata->clan_name = CopyString( clan->name );
   update_member( victim );
   act( AT_MAGIC, "You induct $N into $t", ch, clan->name, victim, TO_CHAR );

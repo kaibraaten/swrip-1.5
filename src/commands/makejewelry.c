@@ -26,7 +26,7 @@ void do_makejewelry( Character *ch, char *argument )
   CraftRecipe *recipe = MakeCraftRecipe();
   CraftingSession *session = AllocateCraftingSession( recipe, ch, argument );
 
-  CREATE( data, struct UserData, 1 );
+  AllocateMemory( data, struct UserData, 1 );
 
   AddInterpretArgumentsCraftingHandler( session, data, InterpretArgumentsHandler );
   AddCheckRequirementsCraftingHandler( session, data, CheckRequirementsHandler );
@@ -128,15 +128,15 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   SetBit( obj->wear_flags, ITEM_TAKE );
   SetBit( obj->wear_flags, ud->WearLocation );
 
-  DISPOSE( obj->name );
+  FreeMemory( obj->name );
   strcpy( buf, ud->ItemName );
   obj->name = CopyString( buf );
 
   strcpy( buf, ud->ItemName );
-  DISPOSE( obj->short_descr );
+  FreeMemory( obj->short_descr );
   obj->short_descr = CopyString( buf );
 
-  DISPOSE( obj->description );
+  FreeMemory( obj->description );
   strcat( buf, " was dropped here." );
   obj->description = CopyString( Capitalize( buf ) );
 
@@ -161,10 +161,10 @@ static void FreeUserData( struct UserData *ud )
 {
   if( ud->ItemName )
     {
-      DISPOSE( ud->ItemName );
+      FreeMemory( ud->ItemName );
     }
 
-  DISPOSE( ud );
+  FreeMemory( ud );
 }
 
 static bool CanUseWearLocation( int wearLocation )

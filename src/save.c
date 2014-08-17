@@ -1066,7 +1066,7 @@ bool load_char_obj( Descriptor *d, char *name, bool preload )
   int i = 0, x = 0;
   char buf[MAX_INPUT_LENGTH];
 
-  CREATE( ch, Character, 1 );
+  AllocateMemory( ch, Character, 1 );
 
   for ( x = 0; x < MAX_WEAR; x++ )
     {
@@ -1079,7 +1079,7 @@ bool load_char_obj( Descriptor *d, char *name, bool preload )
   clear_char( ch );
   loading_char = ch;
 
-  CREATE( ch->pcdata, PC_DATA, 1 );
+  AllocateMemory( ch->pcdata, PC_DATA, 1 );
   d->character                = ch;
   ch->on                              = NULL;
   ch->desc                            = d;
@@ -1385,7 +1385,7 @@ void fread_char( Character *ch, FILE *fp, bool preload )
                   break;
                 }
 
-              CREATE( paf, Affect, 1 );
+              AllocateMemory( paf, Affect, 1 );
 
               if ( !StrCmp( word, "Affect" ) )
                 {
@@ -1449,7 +1449,7 @@ void fread_char( Character *ch, FILE *fp, bool preload )
                   break;
 
                 }
-              CREATE( pal, Alias, 1 );
+              AllocateMemory( pal, Alias, 1 );
 
               pal->name = ReadStringToTildeNoHash( fp );
               pal->cmd  = ReadStringToTildeNoHash( fp );
@@ -1502,7 +1502,7 @@ void fread_char( Character *ch, FILE *fp, bool preload )
                    && ( ch->pcdata->clan = get_clan( ch->pcdata->clan_name )) == NULL )
                 {
                   ch_printf( ch, "Warning: the organization %s no longer exists, and therefore you no longer\r\nbelong to that organization.\r\n", ch->pcdata->clan_name );
-                  DISPOSE( ch->pcdata->clan_name );
+                  FreeMemory( ch->pcdata->clan_name );
                   remove_member(ch);
                   ch->pcdata->clan_name = CopyString( "" );
                 }
@@ -1591,7 +1591,7 @@ void fread_char( Character *ch, FILE *fp, bool preload )
                 {
                   ch_printf( ch, "Warning: the organization %s no longer exists, and therefore you no longer\r\nbelong to that organization.\r\n",
                            ch->pcdata->clan_name );
-                  DISPOSE( ch->pcdata->clan_name );
+                  FreeMemory( ch->pcdata->clan_name );
                   ch->pcdata->clan_name = CopyString( "" );
                 }
 
@@ -1608,7 +1608,7 @@ void fread_char( Character *ch, FILE *fp, bool preload )
 
               if ( ch->pcdata->release_date < current_time )
                 {
-                  DISPOSE(ch->pcdata->helled_by);
+                  FreeMemory(ch->pcdata->helled_by);
                   ch->pcdata->helled_by = NULL;
                   ch->pcdata->release_date = 0;
                   ch->pcdata->jail_vnum = 0;
@@ -2085,7 +2085,7 @@ void fread_char( Character *ch, FILE *fp, bool preload )
                   sprintf( buf, "%s", ch->pcdata->title );
 
                   if ( ch->pcdata->title )
-                    DISPOSE( ch->pcdata->title );
+                    FreeMemory( ch->pcdata->title );
 
                   ch->pcdata->title = CopyString( buf );
                 }
@@ -2155,7 +2155,7 @@ void fread_obj( Character *ch, FILE *fp, short os_type )
   bool fVnum = true; /* indeed be initialized as true */
   Room *room = NULL;
 
-  CREATE( obj, OBJ_DATA, 1 );
+  AllocateMemory( obj, OBJ_DATA, 1 );
   obj->count     = 1;
   obj->wear_loc  = -1;
   obj->weight    = 1;
@@ -2178,7 +2178,7 @@ void fread_obj( Character *ch, FILE *fp, short os_type )
               Affect *paf = NULL;
               int pafmod = 0;
 
-              CREATE( paf, Affect, 1 );
+              AllocateMemory( paf, Affect, 1 );
 
               if ( !StrCmp( word, "Affect" ) )
                 {
@@ -2238,7 +2238,7 @@ void fread_obj( Character *ch, FILE *fp, short os_type )
             {
               ExtraDescription *ed = NULL;
 
-              CREATE( ed, ExtraDescription, 1 );
+              AllocateMemory( ed, ExtraDescription, 1 );
               ed->keyword = ReadStringToTilde( fp );
               ed->description = ReadStringToTilde( fp );
               LINK(ed, obj->first_extradesc, obj->last_extradesc, next, prev );
@@ -2252,15 +2252,15 @@ void fread_obj( Character *ch, FILE *fp, short os_type )
                   bug( "Fread_obj: incomplete object.", 0 );
 
                   if ( obj->name )
-                    DISPOSE( obj->name );
+                    FreeMemory( obj->name );
 
                   if ( obj->description )
-                    DISPOSE( obj->description );
+                    FreeMemory( obj->description );
 
                   if ( obj->short_descr )
-                    DISPOSE( obj->short_descr );
+                    FreeMemory( obj->short_descr );
 
-                  DISPOSE( obj );
+                  FreeMemory( obj );
                   return;
                 }
               else
@@ -2489,29 +2489,29 @@ void fread_obj( Character *ch, FILE *fp, short os_type )
           ReadToEndOfLine( fp );
 
           if ( obj->name )
-            DISPOSE( obj->name        );
+            FreeMemory( obj->name        );
 
           if ( obj->description )
-            DISPOSE( obj->description );
+            FreeMemory( obj->description );
 
           if ( obj->short_descr )
-            DISPOSE( obj->short_descr );
+            FreeMemory( obj->short_descr );
 
           while ( (ed=obj->first_extradesc) != NULL )
             {
-              DISPOSE( ed->keyword );
-              DISPOSE( ed->description );
+              FreeMemory( ed->keyword );
+              FreeMemory( ed->description );
               UNLINK( ed, obj->first_extradesc, obj->last_extradesc, next, prev );
-              DISPOSE( ed );
+              FreeMemory( ed );
             }
 
           while ( (paf=obj->first_affect) != NULL )
             {
               UNLINK( paf, obj->first_affect, obj->last_affect, next, prev );
-              DISPOSE( paf );
+              FreeMemory( paf );
             }
 
-          DISPOSE( obj );
+          FreeMemory( obj );
           return;
         }
     }

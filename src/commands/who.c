@@ -68,10 +68,10 @@ void do_who( Character *ch, char *argument )
   if ( !ch )
     {
       NullCh = true;
-      CREATE( ch, Character, 1 );
+      AllocateMemory( ch, Character, 1 );
       ch->top_level = 1;
       ch->trust = 0;
-      CREATE( pcdata, PC_DATA, 1 );
+      AllocateMemory( pcdata, PC_DATA, 1 );
       ch->pcdata = pcdata;
       ch->in_room = get_room_index( ROOM_VNUM_LIMBO );
     }
@@ -323,7 +323,7 @@ void do_who( Character *ch, char *argument )
        */
 
       /* First make the structure. */
-      CREATE( cur_who, WHO_DATA, 1 );
+      AllocateMemory( cur_who, WHO_DATA, 1 );
       cur_who->text = CopyString( buf );
       if ( IsImmortal( wch ) )
         cur_who->type = WT_IMM;
@@ -373,8 +373,8 @@ void do_who( Character *ch, char *argument )
       else
         send_to_pager( cur_who->text, ch );
       next_who = cur_who->next;
-      DISPOSE( cur_who->text );
-      DISPOSE( cur_who );
+      FreeMemory( cur_who->text );
+      FreeMemory( cur_who );
     }
 
 
@@ -393,8 +393,8 @@ void do_who( Character *ch, char *argument )
       else
         send_to_pager( cur_who->text, ch );
       next_who = cur_who->next;
-      DISPOSE( cur_who->text );
-      DISPOSE( cur_who );
+      FreeMemory( cur_who->text );
+      FreeMemory( cur_who );
     }
 
   if ( first_imm )
@@ -412,8 +412,8 @@ void do_who( Character *ch, char *argument )
       else
         send_to_pager( cur_who->text, ch );
       next_who = cur_who->next;
-      DISPOSE( cur_who->text );
-      DISPOSE( cur_who );
+      FreeMemory( cur_who->text );
+      FreeMemory( cur_who );
     }
 
   if ( NullCh )

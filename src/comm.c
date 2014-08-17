@@ -95,7 +95,7 @@ bool pager_output( Descriptor *d );
 
 static void execute_on_exit( void )
 {
-  /*DISPOSE( sysdata.mccp_buf );*/
+  /*FreeMemory( sysdata.mccp_buf );*/
 
 #ifdef SWRIP_USE_DLSYM
 #ifdef _WIN32
@@ -130,7 +130,7 @@ int main( int argc, char **argv )
   sysdata.WAIT_FOR_AUTH = true;
 
   OsSetup();
-  /*CREATE( sysdata.mccp_buf, unsigned char, COMPRESS_BUF_SIZE );*/
+  /*AllocateMemory( sysdata.mccp_buf, unsigned char, COMPRESS_BUF_SIZE );*/
 
   atexit( execute_on_exit );
 #ifdef SWRIP_USE_DLSYM
@@ -661,7 +661,7 @@ void init_descriptor(Descriptor *dnew, socket_t desc)
   dnew->outsize       = 2000;
   dnew->prevcolor     = 0x07;
 
-  CREATE( dnew->outbuf, char, dnew->outsize );
+  AllocateMemory( dnew->outbuf, char, dnew->outsize );
 }
 
 void new_descriptor( socket_t new_desc )
@@ -713,7 +713,7 @@ void new_descriptor( socket_t new_desc )
   if ( check_bad_desc( new_desc ) )
     return;
 
-  CREATE( dnew, Descriptor, 1 );
+  AllocateMemory( dnew, Descriptor, 1 );
   init_descriptor(dnew, desc);
   dnew->remote.port = ntohs( sock.sin_port );
 
@@ -792,7 +792,7 @@ void new_descriptor( socket_t new_desc )
   if ( sysdata.maxplayers > sysdata.alltimemax )
     {
       if ( sysdata.time_of_max )
-        DISPOSE(sysdata.time_of_max);
+        FreeMemory(sysdata.time_of_max);
       sprintf(buf, "%24.24s", ctime(&current_time));
       sysdata.time_of_max = CopyString(buf);
       sysdata.alltimemax = sysdata.maxplayers;
@@ -808,13 +808,13 @@ void new_descriptor( socket_t new_desc )
 void free_desc( Descriptor *d )
 {
   closesocket( d->descriptor );
-  DISPOSE( d->remote.hostname );
-  DISPOSE( d->outbuf );
+  FreeMemory( d->remote.hostname );
+  FreeMemory( d->outbuf );
 
   if ( d->pager.pagebuf )
-    DISPOSE( d->pager.pagebuf );
+    FreeMemory( d->pager.pagebuf );
 
-  DISPOSE( d );
+  FreeMemory( d );
   --num_descriptors;
 }
 
@@ -1258,7 +1258,7 @@ void write_to_buffer( Descriptor *d, const char *txt, size_t length )
           return;
         }
       d->outsize *= 2;
-      RECREATE( d->outbuf, char, d->outsize );
+      ReAllocateMemory( d->outbuf, char, d->outsize );
     }
 
   /*
@@ -1376,7 +1376,7 @@ bool check_reconnect( Descriptor *d, char *name, bool fConn )
             }
           if ( fConn == false )
             {
-              DISPOSE( d->character->pcdata->pwd );
+              FreeMemory( d->character->pcdata->pwd );
               d->character->pcdata->pwd = CopyString( ch->pcdata->pwd );
             }
           else
@@ -1557,7 +1557,7 @@ void write_to_pager( Descriptor *d, const char *txt, size_t length )
   if ( !d->pager.pagebuf )
     {
       d->pager.pagesize = MAX_STRING_LENGTH;
-      CREATE( d->pager.pagebuf, char, d->pager.pagesize );
+      AllocateMemory( d->pager.pagebuf, char, d->pager.pagesize );
     }
 
   if ( !d->pager.pagepoint )
@@ -1581,13 +1581,13 @@ void write_to_pager( Descriptor *d, const char *txt, size_t length )
           bug( "Pager overflow. Ignoring.\r\n" );
           d->pager.pagetop = 0;
           d->pager.pagepoint = NULL;
-          DISPOSE(d->pager.pagebuf);
+          FreeMemory(d->pager.pagebuf);
           d->pager.pagesize = MAX_STRING_LENGTH;
           return;
         }
 
       d->pager.pagesize *= 2;
-      RECREATE(d->pager.pagebuf, char, d->pager.pagesize);
+      ReAllocateMemory(d->pager.pagebuf, char, d->pager.pagesize);
     }
 
   strncpy(d->pager.pagebuf + d->pager.pagetop, txt, length);
@@ -2310,7 +2310,7 @@ bool pager_output( Descriptor *d )
       d->pager.pagetop = 0;
       d->pager.pagepoint = NULL;
       flush_buffer(d, true);
-      DISPOSE(d->pager.pagebuf);
+      FreeMemory(d->pager.pagebuf);
       d->pager.pagesize = MAX_STRING_LENGTH;
       return true;
     }
@@ -2353,7 +2353,7 @@ bool pager_output( Descriptor *d )
       d->pager.pagetop = 0;
       d->pager.pagepoint = NULL;
       flush_buffer(d, true);
-      DISPOSE(d->pager.pagebuf);
+      FreeMemory(d->pager.pagebuf);
       d->pager.pagesize = MAX_STRING_LENGTH;
       return true;
     }

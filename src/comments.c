@@ -85,12 +85,12 @@ void comment_remove( Character *ch, Character *victim, NOTE_DATA *pnote )
   else
     pnote->prev->next = pnote->next;
 
-  DISPOSE( pnote->text    );
-  DISPOSE( pnote->subject );
-  DISPOSE( pnote->to_list );
-  DISPOSE( pnote->date    );
-  DISPOSE( pnote->sender  );
-  DISPOSE( pnote );
+  FreeMemory( pnote->text    );
+  FreeMemory( pnote->subject );
+  FreeMemory( pnote->to_list );
+  FreeMemory( pnote->date    );
+  FreeMemory( pnote->sender  );
+  FreeMemory( pnote );
 
   /*
    * Rewrite entire list.
@@ -143,7 +143,7 @@ void do_comment( Character *ch, char *argument )
         }
       if ( ch->dest_buf != ch->pcdata->pnote )
         bug( "do_comment: sub_writing_note: ch->dest_buf != ch->pnote", 0 );
-      DISPOSE( ch->pcdata->pnote->text );
+      FreeMemory( ch->pcdata->pnote->text );
       ch->pcdata->pnote->text = CopyBuffer( ch );
       StopEditing( ch );
       return;
@@ -301,7 +301,7 @@ void do_comment( Character *ch, char *argument )
   if ( !StrCmp( arg, "subject" ) )
     {
       note_attach( ch );
-      DISPOSE( ch->pcdata->pnote->subject );
+      FreeMemory( ch->pcdata->pnote->subject );
       ch->pcdata->pnote->subject = CopyString( argument );
       send_to_char( "Ok.\r\n", ch );
       return;
@@ -310,7 +310,7 @@ void do_comment( Character *ch, char *argument )
   if ( !StrCmp( arg, "to" ) )
     {
       note_attach( ch );
-      DISPOSE( ch->pcdata->pnote->to_list );
+      FreeMemory( ch->pcdata->pnote->to_list );
       ch->pcdata->pnote->to_list = CopyString( argument );
       send_to_char( "Ok.\r\n", ch );
       return;
@@ -320,12 +320,12 @@ void do_comment( Character *ch, char *argument )
     {
       if ( ch->pcdata->pnote )
         {
-          DISPOSE( ch->pcdata->pnote->text );
-          DISPOSE( ch->pcdata->pnote->subject );
-          DISPOSE( ch->pcdata->pnote->to_list );
-          DISPOSE( ch->pcdata->pnote->date );
-          DISPOSE( ch->pcdata->pnote->sender );
-          DISPOSE( ch->pcdata->pnote );
+          FreeMemory( ch->pcdata->pnote->text );
+          FreeMemory( ch->pcdata->pnote->subject );
+          FreeMemory( ch->pcdata->pnote->to_list );
+          FreeMemory( ch->pcdata->pnote->date );
+          FreeMemory( ch->pcdata->pnote->sender );
+          FreeMemory( ch->pcdata->pnote );
         }
       ch->pcdata->pnote = NULL;
 
@@ -521,7 +521,7 @@ void fread_comment( Character *ch, FILE *fp )
       while ( isspace(letter) );
       ungetc( letter, fp );
 
-      CREATE( pnote, NOTE_DATA, 1 );
+      AllocateMemory( pnote, NOTE_DATA, 1 );
 
       if ( StrCmp( ReadWord( fp ), "sender" ) )
         break;

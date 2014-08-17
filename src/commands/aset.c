@@ -55,7 +55,7 @@ void do_aset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "name" ) )
     {
-      DISPOSE( tarea->name );
+      FreeMemory( tarea->name );
       tarea->name = CopyString( argument );
       send_to_char( "Done.\r\n", ch );
       return;
@@ -84,7 +84,7 @@ void do_aset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "filename" ) )
     {
-      DISPOSE( tarea->filename );
+      FreeMemory( tarea->filename );
       tarea->filename = CopyString( argument );
       write_area_list();
       fold_area( tarea, tarea->filename, true );
@@ -202,7 +202,7 @@ void do_aset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "author" ) )
     {
-      DISPOSE( tarea->author );
+      FreeMemory( tarea->author );
       tarea->author = CopyString( argument );
       send_to_char( "Done.\r\n", ch );
       return;
@@ -211,7 +211,7 @@ void do_aset( Character *ch, char *argument )
   if ( !StrCmp( arg2, "resetmsg" ) )
     {
       if ( tarea->resetmsg )
-        DISPOSE( tarea->resetmsg );
+        FreeMemory( tarea->resetmsg );
       if ( StrCmp( argument, "clear" ) )
         tarea->resetmsg = CopyString( argument );
       send_to_char( "Done.\r\n", ch );

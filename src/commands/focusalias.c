@@ -47,7 +47,7 @@ static void set_target( Character *ch, const char *target )
   strcpy( buf, target );
 
   if (ch->pcdata->target && ch->pcdata->target[0] != '\0')
-    DISPOSE( ch->pcdata->target );
+    FreeMemory( ch->pcdata->target );
 
   ch->pcdata->target = CopyString( buf );
 }

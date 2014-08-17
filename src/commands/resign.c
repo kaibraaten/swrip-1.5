@@ -35,19 +35,19 @@ void do_resign( Character *ch, char *argument )
 
   if ( !StrCmp( ch->name, ch->pcdata->clan->leadership.number1 ) )
     {
-      DISPOSE( ch->pcdata->clan->leadership.number1 );
+      FreeMemory( ch->pcdata->clan->leadership.number1 );
       ch->pcdata->clan->leadership.number1 = CopyString( "" );
     }
 
   if ( !StrCmp( ch->name, ch->pcdata->clan->leadership.number2 ) )
     {
-      DISPOSE( ch->pcdata->clan->leadership.number2 );
+      FreeMemory( ch->pcdata->clan->leadership.number2 );
       ch->pcdata->clan->leadership.number2 = CopyString( "" );
     }
 
   remove_member( ch );
   ch->pcdata->clan = NULL;
-  DISPOSE(ch->pcdata->clan_name);
+  FreeMemory(ch->pcdata->clan_name);
   ch->pcdata->clan_name = CopyString( "" );
   act( AT_MAGIC, "You resign your position in $t", ch, clan->name, NULL , TO_CHAR );
 
@@ -55,7 +55,7 @@ void do_resign( Character *ch, char *argument )
   xp_actually_lost = lose_exp( ch, DIPLOMACY_ABILITY, xp_to_lose );
   ch_printf( ch, "You lose %ld diplomacy experience.\r\n", xp_actually_lost );
 
-  DISPOSE( ch->pcdata->bestowments );
+  FreeMemory( ch->pcdata->bestowments );
   ch->pcdata->bestowments = CopyString("");
 
   save_char_obj( ch );  /* clan gets saved when pfile is saved */

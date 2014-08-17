@@ -19,9 +19,9 @@ void do_allow( Character *ch, char *argument )
         {
           UNLINK( pban, first_ban, last_ban, next, prev );
           if ( pban->ban_time )
-            DISPOSE(pban->ban_time);
-          DISPOSE( pban->name );
-          DISPOSE( pban );
+            FreeMemory(pban->ban_time);
+          FreeMemory( pban->name );
+          FreeMemory( pban );
           save_banlist( );
           send_to_char( "Site no longer banned.\r\n", ch );
           return;

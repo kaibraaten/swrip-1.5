@@ -220,7 +220,7 @@ HelpFile *CreateHelpFile( char *keyword, short level )
 {
   HelpFile *help = NULL;
   
-  CREATE( help, HelpFile, 1 );
+  AllocateMemory( help, HelpFile, 1 );
   SetHelpFileKeyword( help, keyword );
   SetHelpFileText( help, "" );
   SetHelpLevel( help, level );
@@ -230,9 +230,9 @@ HelpFile *CreateHelpFile( char *keyword, short level )
 
 void DestroyHelpFile( HelpFile *help )
 {
-  DISPOSE( help->keyword );
-  DISPOSE( help->text );
-  DISPOSE( help );
+  FreeMemory( help->keyword );
+  FreeMemory( help->text );
+  FreeMemory( help );
 }
 
 /*
@@ -280,7 +280,7 @@ void SetHelpFileKeyword( HelpFile *help, char *keyword )
 {
   if( help->keyword )
     {
-      DISPOSE( help->keyword );
+      FreeMemory( help->keyword );
     }
 
   help->keyword = CopyString( StringToUppercase( keyword ) );
@@ -295,7 +295,7 @@ void SetHelpFileText( HelpFile *help, char *text )
 {
   if( help->text )
     {
-      DISPOSE( help->text );
+      FreeMemory( help->text );
     }
 
   help->text = CopyString( text );

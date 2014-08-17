@@ -39,7 +39,7 @@ void do_rempilot(Character *ch, char *argument )
 
   if ( !StrCmp( ship->pilot , argument ) )
     {
-      DISPOSE( ship->pilot );
+      FreeMemory( ship->pilot );
       ship->pilot = CopyString( "" );
       send_to_char( "Pilot Removed.\r\n", ch );
       SaveShip( ship );
@@ -48,7 +48,7 @@ void do_rempilot(Character *ch, char *argument )
 
   if ( !StrCmp( ship->copilot , argument ) )
     {
-      DISPOSE( ship->copilot );
+      FreeMemory( ship->copilot );
       ship->copilot = CopyString( "" );
       send_to_char( "Copilot Removed.\r\n", ch );
       SaveShip( ship );

@@ -154,7 +154,7 @@ static void fread_planet( PLANET_DATA *planet, FILE *fp )
               char *tmp = ReadStringToTilde(fp);
 
               sprintf (aName, "%s", tmp);
-              DISPOSE(tmp);
+              FreeMemory(tmp);
 
               for( pArea = first_area; pArea; pArea = pArea->next )
                 {
@@ -213,7 +213,7 @@ static void fread_planet( PLANET_DATA *planet, FILE *fp )
               char *tmp = ReadStringToTilde(fp);
 
               planet->spaceobject = spaceobject_from_name( tmp );
-              DISPOSE(tmp);
+              FreeMemory(tmp);
 
 	      if (planet->spaceobject)
                 {
@@ -245,7 +245,7 @@ static bool load_planet_file( const char *planetfile )
   FILE *fp = NULL;
   bool found = false;
 
-  CREATE( planet, PLANET_DATA, 1 );
+  AllocateMemory( planet, PLANET_DATA, 1 );
 
   sprintf( filename, "%s%s", PLANET_DIR, planetfile );
 
@@ -293,7 +293,7 @@ static bool load_planet_file( const char *planetfile )
 
   if ( !found )
     {
-      DISPOSE( planet );
+      FreeMemory( planet );
     }
   else
     {

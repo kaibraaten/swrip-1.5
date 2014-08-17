@@ -34,7 +34,7 @@ void do_makeblade( Character *ch, char *argument )
 					     CRAFTFLAG_NEED_WORKSHOP );
   CraftingSession *session = AllocateCraftingSession( recipe, ch, argument );
 
-  CREATE( data, struct UserData, 1 );
+  AllocateMemory( data, struct UserData, 1 );
 
   AddInterpretArgumentsCraftingHandler( session, data, InterpretArgumentsHandler );
   AddMaterialFoundCraftingHandler( session, data, MaterialFoundHandler );
@@ -87,7 +87,7 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   SetBit( weapon->wear_flags, ITEM_TAKE );
   weapon->weight = 3;
 
-  DISPOSE( weapon->name );
+  FreeMemory( weapon->name );
   strcpy( buf, ud->ItemName );
 
   if (!ud->HasStaff )
@@ -102,14 +102,14 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   weapon->name = CopyString( buf );
 
   strcpy( buf, ud->ItemName );
-  DISPOSE( weapon->short_descr );
+  FreeMemory( weapon->short_descr );
   weapon->short_descr = CopyString( buf );
 
-  DISPOSE( weapon->description );
+  FreeMemory( weapon->description );
   strcat( buf, " was left here." );
   weapon->description = CopyString( Capitalize( buf ) );
 
-  CREATE( paf, Affect, 1 );
+  AllocateMemory( paf, Affect, 1 );
   paf->type               = -1;
   paf->duration           = -1;
   paf->location           = get_affecttype( "backstab" );
@@ -123,7 +123,7 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
     {
       Affect *hitroll = NULL;
 
-      CREATE( hitroll, Affect, 1 );
+      AllocateMemory( hitroll, Affect, 1 );
       hitroll->type               = -1;
       hitroll->duration           = -1;
       hitroll->location           = get_affecttype( "hitroll" );
@@ -169,8 +169,8 @@ static void FreeUserData( struct UserData *ud )
 {
   if( ud->ItemName )
     {
-      DISPOSE( ud->ItemName );
+      FreeMemory( ud->ItemName );
     }
 
-  DISPOSE( ud );
+  FreeMemory( ud );
 }

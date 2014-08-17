@@ -419,7 +419,7 @@ void boot_db( bool fCopyOver )
   quitting_char       = NULL;
   loading_char        = NULL;
   saving_char         = NULL;
-  CREATE( auction, Auction, 1);
+  AllocateMemory( auction, Auction, 1);
   auction->item       = NULL;
 
   for ( wear = 0; wear < MAX_WEAR; wear++ )
@@ -734,7 +734,7 @@ void load_area( FILE *fp )
 {
   Area *pArea;
 
-  CREATE( pArea, Area, 1 );
+  AllocateMemory( pArea, Area, 1 );
   pArea->name           = ReadStringToTildeNoHash( fp );
   pArea->author       = CopyString( "unknown" );
   pArea->filename       = CopyString( strArea );
@@ -767,7 +767,7 @@ void load_author( Area *tarea, FILE *fp )
     }
 
   if ( tarea->author )
-    DISPOSE( tarea->author );
+    FreeMemory( tarea->author );
 
   tarea->author   = ReadStringToTilde( fp );
 }
@@ -815,7 +815,7 @@ void load_resetmsg( Area *tarea, FILE *fp )
     }
 
   if ( tarea->resetmsg )
-    DISPOSE( tarea->resetmsg );
+    FreeMemory( tarea->resetmsg );
 
   tarea->resetmsg = ReadStringToTildeNoHash( fp );
 }
@@ -938,7 +938,7 @@ void load_mobiles( Area *tarea, FILE *fp )
       else
         {
           oldmob = false;
-          CREATE( pMobIndex, ProtoMobile, 1 );
+          AllocateMemory( pMobIndex, ProtoMobile, 1 );
         }
 
       fBootDb = tmpBootDb;
@@ -1173,7 +1173,7 @@ void load_objects( Area *tarea, FILE *fp )
       else
         {
           oldobj = false;
-          CREATE( pObjIndex, OBJ_INDEX_DATA, 1 );
+          AllocateMemory( pObjIndex, OBJ_INDEX_DATA, 1 );
         }
 
       fBootDb = tmpBootDb;
@@ -1231,7 +1231,7 @@ void load_objects( Area *tarea, FILE *fp )
             {
               Affect *paf;
 
-              CREATE( paf, Affect, 1 );
+              AllocateMemory( paf, Affect, 1 );
               paf->type         = -1;
               paf->duration             = -1;
               paf->location             = ReadInt( fp );
@@ -1252,7 +1252,7 @@ void load_objects( Area *tarea, FILE *fp )
             {
               ExtraDescription *ed;
 
-              CREATE( ed, ExtraDescription, 1 );
+              AllocateMemory( ed, ExtraDescription, 1 );
               ed->keyword               = ReadStringToTilde( fp );
               ed->description           = ReadStringToTilde( fp );
               LINK( ed, pObjIndex->first_extradesc, pObjIndex->last_extradesc,
@@ -1567,7 +1567,7 @@ void load_rooms( Area *tarea, FILE *fp )
       else
         {
           oldroom = false;
-          CREATE( pRoomIndex, Room, 1 );
+          AllocateMemory( pRoomIndex, Room, 1 );
         }
 
       fBootDb = tmpBootDb;
@@ -1670,7 +1670,7 @@ void load_rooms( Area *tarea, FILE *fp )
             {
               ExtraDescription *ed;
 
-              CREATE( ed, ExtraDescription, 1 );
+              AllocateMemory( ed, ExtraDescription, 1 );
               ed->keyword               = ReadStringToTilde( fp );
               ed->description           = ReadStringToTilde( fp );
               LINK( ed, pRoomIndex->first_extradesc, pRoomIndex->last_extradesc,
@@ -1714,7 +1714,7 @@ void load_shops( Area *tarea, FILE *fp )
       int iTrade = 0;
       SHOP_DATA *pShop = NULL;
 
-      CREATE( pShop, SHOP_DATA, 1 );
+      AllocateMemory( pShop, SHOP_DATA, 1 );
       pShop->keeper             = ReadInt( fp );
 
       if ( pShop->keeper == INVALID_VNUM )
@@ -1755,7 +1755,7 @@ void load_repairs( Area *tarea, FILE *fp )
       int iFix;
       REPAIR_DATA *rShop = NULL;
 
-      CREATE( rShop, REPAIR_DATA, 1 );
+      AllocateMemory( rShop, REPAIR_DATA, 1 );
       rShop->keeper             = ReadInt( fp );
 
       if ( rShop->keeper == 0 )
@@ -2156,7 +2156,7 @@ Character *create_mobile( ProtoMobile *pMobIndex )
       exit( 1 );
     }
 
-  CREATE( mob, Character, 1 );
+  AllocateMemory( mob, Character, 1 );
   clear_char( mob );
   mob->pIndexData               = pMobIndex;
 
@@ -2260,7 +2260,7 @@ OBJ_DATA *create_object( OBJ_INDEX_DATA *pObjIndex, int level )
       exit( 1 );
     }
 
-  CREATE( obj, OBJ_DATA, 1 );
+  AllocateMemory( obj, OBJ_DATA, 1 );
 
   obj->pIndexData       = pObjIndex;
   obj->in_room  = NULL;
@@ -2562,10 +2562,10 @@ void free_char( Character *ch )
   while ( (timer = ch->first_timer) != NULL )
     extract_timer( ch, timer );
 
-  DISPOSE( ch->name             );
-  DISPOSE( ch->short_descr      );
-  DISPOSE( ch->long_descr       );
-  DISPOSE( ch->description      );
+  FreeMemory( ch->name             );
+  FreeMemory( ch->short_descr      );
+  FreeMemory( ch->long_descr       );
+  FreeMemory( ch->description      );
 
   if ( ch->editor )
     StopEditing( ch );
@@ -2586,45 +2586,45 @@ void free_char( Character *ch )
 	  FreeCraftingSession( ch->pcdata->CraftingSession );
 	}
 
-      DISPOSE( ch->pcdata->clan_name    );
-      DISPOSE( ch->pcdata->pwd  );  /* no hash */
-      DISPOSE( ch->pcdata->email        );  /* no hash */
-      DISPOSE( ch->pcdata->bamfin       );  /* no hash */
-      DISPOSE( ch->pcdata->bamfout      );  /* no hash */
-      DISPOSE( ch->pcdata->rank );
-      DISPOSE( ch->pcdata->title        );
-      DISPOSE( ch->pcdata->bio  );
-      DISPOSE( ch->pcdata->bestowments ); /* no hash */
-      DISPOSE( ch->pcdata->homepage     );  /* no hash */
-      DISPOSE( ch->pcdata->authed_by    );
-      DISPOSE( ch->pcdata->prompt       );
+      FreeMemory( ch->pcdata->clan_name    );
+      FreeMemory( ch->pcdata->pwd  );  /* no hash */
+      FreeMemory( ch->pcdata->email        );  /* no hash */
+      FreeMemory( ch->pcdata->bamfin       );  /* no hash */
+      FreeMemory( ch->pcdata->bamfout      );  /* no hash */
+      FreeMemory( ch->pcdata->rank );
+      FreeMemory( ch->pcdata->title        );
+      FreeMemory( ch->pcdata->bio  );
+      FreeMemory( ch->pcdata->bestowments ); /* no hash */
+      FreeMemory( ch->pcdata->homepage     );  /* no hash */
+      FreeMemory( ch->pcdata->authed_by    );
+      FreeMemory( ch->pcdata->prompt       );
       if ( ch->pcdata->subprompt )
-        DISPOSE( ch->pcdata->subprompt );
+        FreeMemory( ch->pcdata->subprompt );
       FreeAliases( ch );
 #ifdef SWRIP_USE_IMC
       imc_freechardata( ch );
 #endif
-      DISPOSE( ch->pcdata );
+      FreeMemory( ch->pcdata );
     }
 
   for ( mpact = ch->mprog.mpact; mpact; mpact = mpact_next )
     {
       mpact_next = mpact->next;
-      DISPOSE( mpact->buf );
-      DISPOSE( mpact        );
+      FreeMemory( mpact->buf );
+      FreeMemory( mpact        );
     }
   if( ch->pcdata )
     for ( comments = ch->pcdata->comments; comments; comments = comments_next )
       {
         comments_next = comments->next;
-        DISPOSE( comments->text    );
-        DISPOSE( comments->to_list );
-        DISPOSE( comments->subject );
-        DISPOSE( comments->sender  );
-        DISPOSE( comments->date    );
-        DISPOSE( comments          );
+        FreeMemory( comments->text    );
+        FreeMemory( comments->to_list );
+        FreeMemory( comments->subject );
+        FreeMemory( comments->sender  );
+        FreeMemory( comments->date    );
+        FreeMemory( comments          );
       }
-  DISPOSE( ch );
+  FreeMemory( ch );
   return;
 }
 
@@ -2950,7 +2950,7 @@ void add_to_wizlist( char *name, int level )
   log_string( "Adding to wizlist..." );
 #endif
 
-  CREATE( wiz, WIZENT, 1 );
+  AllocateMemory( wiz, WIZENT, 1 );
   wiz->name     = CopyString( name );
   wiz->level    = level;
 
@@ -3079,8 +3079,8 @@ void make_wizlist( )
   for ( wiz = first_wiz; wiz; wiz = wiznext )
     {
       wiznext = wiz->next;
-      DISPOSE(wiz->name);
-      DISPOSE(wiz);
+      FreeMemory(wiz->name);
+      FreeMemory(wiz);
     }
   first_wiz = NULL;
   last_wiz = NULL;
@@ -3187,7 +3187,7 @@ MPROG_DATA *mprog_file_read( char *f, MPROG_DATA *mprg,
           switch ( letter = ReadChar( progfile ) )
             {
             case '>':
-              CREATE( mprg_next, MPROG_DATA, 1 );
+              AllocateMemory( mprg_next, MPROG_DATA, 1 );
               mprg_next->next = mprg2;
               mprg2 = mprg_next;
               break;
@@ -3245,7 +3245,7 @@ void load_mudprogs( Area *tarea, FILE *fp )
         if ( (original = iMob->mprog.mudprogs) != NULL )
           for ( ; original->next; original = original->next );
 
-        CREATE( working, MPROG_DATA, 1 );
+        AllocateMemory( working, MPROG_DATA, 1 );
         if ( original )
           original->next = working;
         else
@@ -3274,7 +3274,7 @@ void mprog_read_programs( FILE *fp, ProtoMobile *pMobIndex)
       bug( "Load_mobiles: vnum %d MUDPROG char", pMobIndex->vnum );
       exit( 1 );
     }
-  CREATE( mprg, MPROG_DATA, 1 );
+  AllocateMemory( mprg, MPROG_DATA, 1 );
   pMobIndex->mprog.mudprogs = mprg;
 
   while ( !done )
@@ -3292,7 +3292,7 @@ void mprog_read_programs( FILE *fp, ProtoMobile *pMobIndex)
           switch ( letter = ReadChar( fp ) )
             {
             case '>':
-              CREATE( mprg->next, MPROG_DATA, 1 );
+              AllocateMemory( mprg->next, MPROG_DATA, 1 );
               mprg = mprg->next;
               break;
             case '|':
@@ -3315,7 +3315,7 @@ void mprog_read_programs( FILE *fp, ProtoMobile *pMobIndex)
           switch ( letter = ReadChar( fp ) )
             {
             case '>':
-              CREATE( mprg->next, MPROG_DATA, 1 );
+              AllocateMemory( mprg->next, MPROG_DATA, 1 );
               mprg = mprg->next;
               break;
             case '|':
@@ -3402,7 +3402,7 @@ MPROG_DATA *oprog_file_read( char *f, MPROG_DATA *mprg,
           switch ( letter = ReadChar( progfile ) )
             {
             case '>':
-              CREATE( mprg_next, MPROG_DATA, 1 );
+              AllocateMemory( mprg_next, MPROG_DATA, 1 );
               mprg_next->next = mprg2;
               mprg2 = mprg_next;
               break;
@@ -3460,7 +3460,7 @@ void load_objprogs( Area *tarea, FILE *fp )
         if ( (original = iObj->mprog.mudprogs) != NULL )
           for ( ; original->next; original = original->next );
 
-        CREATE( working, MPROG_DATA, 1 );
+        AllocateMemory( working, MPROG_DATA, 1 );
         if ( original )
           original->next = working;
         else
@@ -3489,7 +3489,7 @@ void oprog_read_programs( FILE *fp, OBJ_INDEX_DATA *pObjIndex)
       bug( "Load_objects: vnum %d OBJPROG char", pObjIndex->vnum );
       exit( 1 );
     }
-  CREATE( mprg, MPROG_DATA, 1 );
+  AllocateMemory( mprg, MPROG_DATA, 1 );
   pObjIndex->mprog.mudprogs = mprg;
 
   while ( !done )
@@ -3507,7 +3507,7 @@ void oprog_read_programs( FILE *fp, OBJ_INDEX_DATA *pObjIndex)
           switch ( letter = ReadChar( fp ) )
             {
             case '>':
-              CREATE( mprg->next, MPROG_DATA, 1 );
+              AllocateMemory( mprg->next, MPROG_DATA, 1 );
               mprg = mprg->next;
               break;
             case '|':
@@ -3530,7 +3530,7 @@ void oprog_read_programs( FILE *fp, OBJ_INDEX_DATA *pObjIndex)
           switch ( letter = ReadChar( fp ) )
             {
             case '>':
-              CREATE( mprg->next, MPROG_DATA, 1 );
+              AllocateMemory( mprg->next, MPROG_DATA, 1 );
               mprg = mprg->next;
               break;
             case '|':
@@ -3614,7 +3614,7 @@ MPROG_DATA *rprog_file_read( char *f, MPROG_DATA *mprg,
           switch ( letter = ReadChar( progfile ) )
             {
             case '>':
-              CREATE( mprg_next, MPROG_DATA, 1 );
+              AllocateMemory( mprg_next, MPROG_DATA, 1 );
               mprg_next->next = mprg2;
               mprg2 = mprg_next;
               break;
@@ -3672,7 +3672,7 @@ void load_roomprogs( Area *tarea, FILE *fp )
         if ( (original = iRoom->mprog.mudprogs) != NULL )
           for ( ; original->next; original = original->next );
 
-        CREATE( working, MPROG_DATA, 1 );
+        AllocateMemory( working, MPROG_DATA, 1 );
         if ( original )
           original->next = working;
         else
@@ -3701,7 +3701,7 @@ void rprog_read_programs( FILE *fp, Room *pRoomIndex)
       bug( "Load_rooms: vnum %d ROOMPROG char", pRoomIndex->vnum );
       exit( 1 );
     }
-  CREATE( mprg, MPROG_DATA, 1 );
+  AllocateMemory( mprg, MPROG_DATA, 1 );
   pRoomIndex->mprog.mudprogs = mprg;
 
   while ( !done )
@@ -3719,7 +3719,7 @@ void rprog_read_programs( FILE *fp, Room *pRoomIndex)
           switch ( letter = ReadChar( fp ) )
             {
             case '>':
-              CREATE( mprg->next, MPROG_DATA, 1 );
+              AllocateMemory( mprg->next, MPROG_DATA, 1 );
               mprg = mprg->next;
               break;
             case '|':
@@ -3742,7 +3742,7 @@ void rprog_read_programs( FILE *fp, Room *pRoomIndex)
           switch ( letter = ReadChar( fp ) )
             {
             case '>':
-              CREATE( mprg->next, MPROG_DATA, 1 );
+              AllocateMemory( mprg->next, MPROG_DATA, 1 );
               mprg = mprg->next;
               break;
             case '|':
@@ -3797,8 +3797,8 @@ bool delete_room( Room *room )
     }
 
   /* Free up the ram for all strings attached to the room. */
-  DISPOSE( room->name );
-  DISPOSE( room->description );
+  FreeMemory( room->name );
+  FreeMemory( room->description );
 
   /* Free up the ram held by the room index itself. */
   free( room );
@@ -3827,7 +3827,7 @@ Room *make_room( vnum_t vnum )
   Room *pRoomIndex;
   int   iHash;
 
-  CREATE( pRoomIndex, Room, 1 );
+  AllocateMemory( pRoomIndex, Room, 1 );
   pRoomIndex->first_person      = NULL;
   pRoomIndex->last_person               = NULL;
   pRoomIndex->first_content     = NULL;
@@ -3869,7 +3869,7 @@ OBJ_INDEX_DATA *make_object( vnum_t vnum, vnum_t cvnum, char *name )
       cObjIndex = get_obj_index( cvnum );
     }
 
-  CREATE( pObjIndex, OBJ_INDEX_DATA, 1 );
+  AllocateMemory( pObjIndex, OBJ_INDEX_DATA, 1 );
 
   pObjIndex->vnum = vnum;
   pObjIndex->name = CopyString( name );
@@ -3910,7 +3910,7 @@ OBJ_INDEX_DATA *make_object( vnum_t vnum, vnum_t cvnum, char *name )
 
       for ( ced = cObjIndex->first_extradesc; ced; ced = ced->next )
         {
-          CREATE( ed, ExtraDescription, 1 );
+          AllocateMemory( ed, ExtraDescription, 1 );
           ed->keyword           = CopyString( ced->keyword );
           ed->description               = CopyString( ced->description );
           LINK( ed, pObjIndex->first_extradesc, pObjIndex->last_extradesc,
@@ -3920,7 +3920,7 @@ OBJ_INDEX_DATA *make_object( vnum_t vnum, vnum_t cvnum, char *name )
 
       for ( cpaf = cObjIndex->first_affect; cpaf; cpaf = cpaf->next )
         {
-          CREATE( paf, Affect, 1 );
+          AllocateMemory( paf, Affect, 1 );
           paf->type             = cpaf->type;
           paf->duration         = cpaf->duration;
           paf->location         = cpaf->location;
@@ -3954,7 +3954,7 @@ ProtoMobile *make_mobile( vnum_t vnum, vnum_t cvnum, char *name )
     cMobIndex = get_mob_index( cvnum );
   else
     cMobIndex = NULL;
-  CREATE( pMobIndex, ProtoMobile, 1 );
+  AllocateMemory( pMobIndex, ProtoMobile, 1 );
   pMobIndex->vnum                       = vnum;
   pMobIndex->count              = 0;
   pMobIndex->killed             = 0;
@@ -4070,7 +4070,7 @@ Exit *make_exit( Room *pRoomIndex, Room *to_room, short door )
   Exit *pexit, *texit;
   bool broke;
 
-  CREATE( pexit, Exit, 1 );
+  AllocateMemory( pexit, Exit, 1 );
   pexit->vdir           = door;
   pexit->rvnum          = pRoomIndex->vnum;
   pexit->to_room                = to_room;
@@ -4216,7 +4216,7 @@ void load_area_file( Area *tarea, char *filename )
             }
           else
             {
-              DISPOSE( tarea->name );
+              FreeMemory( tarea->name );
               tarea->name = ReadStringToTildeNoHash( fpArea );
             }
         }
@@ -4354,7 +4354,7 @@ void load_buildlist( void )
                   continue;
                 }
 #endif
-              CREATE( pArea, Area, 1 );
+              AllocateMemory( pArea, Area, 1 );
               sprintf( buf, "%s.are", dentry->d_name );
               pArea->author = CopyString( dentry->d_name );
               pArea->filename = CopyString( buf );
@@ -4752,7 +4752,7 @@ void load_banlist( void )
           fclose( fp );
           return;
         }
-      CREATE( pban, Ban, 1 );
+      AllocateMemory( pban, Ban, 1 );
       pban->level = number;
       pban->name = ReadStringToTildeNoHash( fp );
       if ( (letter = ReadChar(fp)) == '~' )

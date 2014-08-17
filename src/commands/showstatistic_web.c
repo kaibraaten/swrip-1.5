@@ -33,10 +33,10 @@ void do_showstatistic_web( Character *ch, char *argument )
       return;
     }
 
-  CREATE( raceCh, Character, 1 );
+  AllocateMemory( raceCh, Character, 1 );
   raceCh->top_level = 1;
   raceCh->trust = 0;
-  CREATE( pcdata, PC_DATA, 1 );
+  AllocateMemory( pcdata, PC_DATA, 1 );
   raceCh->pcdata = pcdata;
   raceCh->in_room = get_room_index( ROOM_VNUM_LIMBO );
   raceCh->stats.perm_str = 20;
@@ -114,6 +114,6 @@ void do_showstatistic_web( Character *ch, char *argument )
         }
     }
 
-  DISPOSE( raceCh->pcdata );
-  DISPOSE( raceCh );
+  FreeMemory( raceCh->pcdata );
+  FreeMemory( raceCh );
 }

@@ -42,7 +42,7 @@ void do_addpilot(Character *ch, char *argument )
           return;
         }
 
-      DISPOSE( ship->copilot );
+      FreeMemory( ship->copilot );
       ship->copilot = CopyString( argument );
       send_to_char( "Copilot Added.\r\n", ch );
       SaveShip( ship );
@@ -51,7 +51,7 @@ void do_addpilot(Character *ch, char *argument )
       return;
     }
 
-  DISPOSE( ship->pilot );
+  FreeMemory( ship->pilot );
   ship->pilot = CopyString( argument );
   send_to_char( "Pilot Added.\r\n", ch );
   SaveShip( ship );

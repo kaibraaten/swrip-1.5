@@ -12,7 +12,7 @@ void do_makeboard( Character *ch, char *argument )
 
   SmashTilde( argument );
 
-  CREATE( board, BOARD_DATA, 1 );
+  AllocateMemory( board, BOARD_DATA, 1 );
 
   LINK( board, first_board, last_board, next, prev );
   board->note_file       = CopyString( StringToLowercase( argument ) );

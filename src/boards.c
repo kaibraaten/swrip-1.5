@@ -179,7 +179,7 @@ void note_attach( Character *ch )
   if ( ch->pcdata->pnote )
     return;
 
-  CREATE( pnote, NOTE_DATA, 1 );
+  AllocateMemory( pnote, NOTE_DATA, 1 );
   pnote->sender = CopyString( ch->name );
   pnote->date           = CopyString( "" );
   pnote->to_list        = CopyString( "" );
@@ -227,22 +227,22 @@ void write_board( BOARD_DATA *board )
 
 void free_note( NOTE_DATA *pnote )
 {
-  DISPOSE( pnote->text    );
-  DISPOSE( pnote->subject );
-  DISPOSE( pnote->to_list );
-  DISPOSE( pnote->date    );
-  DISPOSE( pnote->sender  );
+  FreeMemory( pnote->text    );
+  FreeMemory( pnote->subject );
+  FreeMemory( pnote->to_list );
+  FreeMemory( pnote->date    );
+  FreeMemory( pnote->sender  );
 
   if ( pnote->yesvotes )
-    DISPOSE( pnote->yesvotes );
+    FreeMemory( pnote->yesvotes );
 
   if ( pnote->novotes )
-    DISPOSE( pnote->novotes );
+    FreeMemory( pnote->novotes );
 
   if ( pnote->abstentions )
-    DISPOSE( pnote->abstentions );
+    FreeMemory( pnote->abstentions );
 
-  DISPOSE( pnote );
+  FreeMemory( pnote );
 }
 
 static void note_remove( BOARD_DATA *board, NOTE_DATA *pnote )
@@ -324,7 +324,7 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
         }
 
       ed = (ExtraDescription*)ch->dest_buf;
-      DISPOSE( ed->description );
+      FreeMemory( ed->description );
       ed->description = CopyBuffer( ch );
       StopEditing( ch );
       return;
@@ -604,7 +604,7 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
       if ( !StrCmp( arg_passed, "yes" ) )
         {
           sprintf( buf, "%s %s", pnote->yesvotes, ch->name );
-          DISPOSE( pnote->yesvotes );
+          FreeMemory( pnote->yesvotes );
           pnote->yesvotes = CopyString( buf );
           act( AT_ACTION, "$n votes on a note.", ch, NULL, NULL, TO_ROOM );
           send_to_char( "Ok.\r\n", ch );
@@ -615,7 +615,7 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
       if ( !StrCmp( arg_passed, "no" ) )
         {
           sprintf( buf, "%s %s", pnote->novotes, ch->name );
-          DISPOSE( pnote->novotes );
+          FreeMemory( pnote->novotes );
           pnote->novotes = CopyString( buf );
           act( AT_ACTION, "$n votes on a note.", ch, NULL, NULL, TO_ROOM );
           send_to_char( "Ok.\r\n", ch );
@@ -626,7 +626,7 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
       if ( !StrCmp( arg_passed, "abstain" ) )
         {
           sprintf( buf, "%s %s", pnote->abstentions, ch->name );
-          DISPOSE( pnote->abstentions );
+          FreeMemory( pnote->abstentions );
           pnote->abstentions = CopyString( buf );
           act( AT_ACTION, "$n votes on a note.", ch, NULL, NULL, TO_ROOM );
           send_to_char( "Ok.\r\n", ch );
@@ -748,7 +748,7 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
         {
           paper->value[OVAL_PAPER_1] = 1;
           ed = SetOExtra(paper, "_subject_");
-          DISPOSE( ed->description );
+          FreeMemory( ed->description );
           ed->description = CopyString( arg_passed );
           send_to_char("Ok.\r\n", ch);
           return;
@@ -812,7 +812,7 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
         {
           paper->value[OVAL_PAPER_2] = 1;
           ed = SetOExtra(paper, "_to_");
-          DISPOSE( ed->description );
+          FreeMemory( ed->description );
           ed->description = CopyString( arg_passed );
           send_to_char("Ok.\r\n",ch);
           return;
@@ -873,7 +873,7 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
           send_to_char("This message has no subject... using 'none'.\r\n", ch);
           paper->value[OVAL_PAPER_1] = 1;
           ed = SetOExtra(paper, "_subject_");
-          DISPOSE( ed->description );
+          FreeMemory( ed->description );
           ed->description = CopyString( "none" );
         }
 
@@ -889,7 +889,7 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
               send_to_char("This message is addressed to no one... sending to 'all'!\r\n", ch);
               paper->value[OVAL_PAPER_2] = 1;
               ed = SetOExtra(paper, "_to_");
-              DISPOSE( ed->description );
+              FreeMemory( ed->description );
               ed->description = CopyString( "All" );
             }
         }
@@ -916,7 +916,7 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
 
       strtime                           = ctime( &current_time );
       strtime[strlen(strtime)-1]        = '\0';
-      CREATE( pnote, NOTE_DATA, 1 );
+      AllocateMemory( pnote, NOTE_DATA, 1 );
       pnote->date                       = CopyString( strtime );
 
       text = get_extra_descr( "_text_", paper->first_extradesc );
@@ -1013,22 +1013,22 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
                     ch->gold -= 50;
                   paper = create_object( get_obj_index(OBJ_VNUM_NOTE), 0 );
                   ed = SetOExtra( paper, "_sender_" );
-                  DISPOSE( ed->description );
+                  FreeMemory( ed->description );
                   ed->description = CopyString(pnote->sender);
                   ed = SetOExtra( paper, "_text_" );
-                  DISPOSE( ed->description );
+                  FreeMemory( ed->description );
                   ed->description = CopyString(pnote->text);
                   ed = SetOExtra( paper, "_to_" );
-                  DISPOSE( ed->description );
+                  FreeMemory( ed->description );
                   ed->description = CopyString( pnote->to_list );
                   ed = SetOExtra( paper, "_subject_" );
-                  DISPOSE( ed->description );
+                  FreeMemory( ed->description );
                   ed->description = CopyString( pnote->subject );
                   ed = SetOExtra( paper, "_date_" );
-                  DISPOSE( ed->description );
+                  FreeMemory( ed->description );
                   ed->description = CopyString( pnote->date );
                   ed = SetOExtra( paper, "note" );
-                  DISPOSE( ed->description );
+                  FreeMemory( ed->description );
                   sprintf(notebuf, "From: ");
                   strcat(notebuf, pnote->sender);
                   strcat(notebuf, "\r\nTo: ");
@@ -1044,15 +1044,15 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
                   paper->value[OVAL_PAPER_2] = 2;
                   sprintf(short_desc_buf, "a note from %s to %s",
                           pnote->sender, pnote->to_list);
-                  DISPOSE(paper->short_descr);
+                  FreeMemory(paper->short_descr);
                   paper->short_descr = CopyString(short_desc_buf);
                   sprintf(long_desc_buf, "A note from %s to %s lies on the ground.",
                           pnote->sender, pnote->to_list);
-                  DISPOSE(paper->description);
+                  FreeMemory(paper->description);
                   paper->description = CopyString(long_desc_buf);
                   sprintf(keyword_buf, "note parchment paper %s",
                           pnote->to_list);
-                  DISPOSE(paper->name);
+                  FreeMemory(paper->name);
                   paper->name = CopyString(keyword_buf);
                 }
               if ( take != 2 )
@@ -1103,7 +1103,7 @@ BOARD_DATA *read_board( char *boardfile, FILE *fp )
 
   ungetc( letter, fp );
 
-  CREATE( board, BOARD_DATA, 1 );
+  AllocateMemory( board, BOARD_DATA, 1 );
 
   for ( ; ; )
     {
@@ -1184,7 +1184,7 @@ NOTE_DATA *read_note( const char *notefile, FILE *fp )
 
       ungetc( letter, fp );
 
-      CREATE( pnote, NOTE_DATA, 1 );
+      AllocateMemory( pnote, NOTE_DATA, 1 );
 
       if ( StrCmp( ReadWord( fp ), "sender" ) )
         break;

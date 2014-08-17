@@ -83,7 +83,7 @@ static void bfs_enqueue(Room *room, char dir)
 {
   struct bfs_queue_struct *curr = NULL;
 
-  CREATE( curr, struct bfs_queue_struct, 1 );
+  AllocateMemory( curr, struct bfs_queue_struct, 1 );
   curr->room = room;
   curr->dir = dir;
 
@@ -107,7 +107,7 @@ static void bfs_dequeue( void )
       queue_tail = NULL;
     }
 
-  DISPOSE(curr);
+  FreeMemory(curr);
 }
 
 static void bfs_clear_queue(void)
@@ -122,7 +122,7 @@ static void room_enqueue(Room *room)
 {
   struct bfs_queue_struct *curr = NULL;
 
-  CREATE( curr, struct bfs_queue_struct, 1 );
+  AllocateMemory( curr, struct bfs_queue_struct, 1 );
   curr->room = room;
   curr->next = room_queue;
 
@@ -138,7 +138,7 @@ static void clean_room_queue(void)
     {
       UNMARK( curr->room );
       curr_next = curr->next;
-      DISPOSE( curr );
+      FreeMemory( curr );
     }
 
   room_queue = NULL;

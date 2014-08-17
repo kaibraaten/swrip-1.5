@@ -112,10 +112,10 @@ void add_reinforcements( Character *ch )
         {
           char tmpbuf[MAX_STRING_LENGTH];
 
-          DISPOSE( mob->name );
+          FreeMemory( mob->name );
           mob->name = CopyString( ch->pcdata->clan->name );
           sprintf( tmpbuf , "(%s) %s" , ch->pcdata->clan->name  , mob->long_descr );
-          DISPOSE( mob->long_descr );
+          FreeMemory( mob->long_descr );
           mob->long_descr = CopyString( tmpbuf );
         }
 
@@ -145,7 +145,7 @@ void add_reinforcements( Character *ch )
 
       if ( mob->mob_clan )
 	{
-	  DISPOSE ( mob->mob_clan );
+	  FreeMemory( mob->mob_clan );
 	}
 
       if ( ch->pcdata && ch->pcdata->clan )

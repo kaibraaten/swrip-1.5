@@ -52,9 +52,9 @@ static void decorate_room( Room *room )
   int sector = room->sector_type;
 
   if ( room->name )
-    DISPOSE( room->name );
+    FreeMemory( room->name );
   if ( room->description )
-    DISPOSE( room->description );
+    FreeMemory( room->description );
 
   room->name    = CopyString( sect_names[sector][0] );
   buf[0] = '\0';
@@ -116,7 +116,7 @@ void clear_vrooms( void )
           room = vroom_hash[hash];
           vroom_hash[hash] = room->next;
           clean_room( room );
-          DISPOSE( room );
+          FreeMemory( room );
           --top_vroom;
         }
 
@@ -134,7 +134,7 @@ void clear_vrooms( void )
 		}
 
               clean_room( room );
-              DISPOSE( room );
+              FreeMemory( room );
               --top_vroom;
             }
 
@@ -351,7 +351,7 @@ Room *generate_exit( Room *in_room, Exit **pexit )
 
   if ( !found )
     {
-      CREATE( room, Room, 1 );
+      AllocateMemory( room, Room, 1 );
       room->area          = in_room->area;
       room->vnum          = serial;
       room->tele_vnum     = roomnum;

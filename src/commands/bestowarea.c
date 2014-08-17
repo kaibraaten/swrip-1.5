@@ -62,7 +62,7 @@ void do_bestowarea( Character *ch, char *argument )
   if ( !StrCmp (argument, "none") )
     {
       remove_area_names (victim->pcdata->bestowments, buf);
-      DISPOSE( victim->pcdata->bestowments );
+      FreeMemory( victim->pcdata->bestowments );
       victim->pcdata->bestowments = CopyString( buf );
       send_to_char( "Done.\r\n", ch);
       return;
@@ -79,7 +79,7 @@ void do_bestowarea( Character *ch, char *argument )
     }
 
   sprintf( buf, "%s %s", victim->pcdata->bestowments, argument );
-  DISPOSE( victim->pcdata->bestowments );
+  FreeMemory( victim->pcdata->bestowments );
   victim->pcdata->bestowments = CopyString( buf );
   ch_printf( victim, "%s has bestowed on you the area: %s\r\n",
              ch->name, argument );

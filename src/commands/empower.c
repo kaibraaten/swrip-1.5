@@ -83,7 +83,7 @@ void do_empower ( Character *ch , char *argument )
 
   if ( !StrCmp( arg2, "none" ) )
     {
-      DISPOSE( victim->pcdata->bestowments );
+      FreeMemory( victim->pcdata->bestowments );
       victim->pcdata->bestowments = CopyString("");
       ch_printf( ch, "Bestowments removed from %s.\r\n", victim->name );
       ch_printf( victim, "%s has removed your bestowed clan abilities.\r\n", ch->name );
@@ -92,7 +92,7 @@ void do_empower ( Character *ch , char *argument )
   else if ( !StrCmp( arg2, "pilot" ) )
     {
       sprintf( buf, "%s %s", victim->pcdata->bestowments, arg2 );
-      DISPOSE( victim->pcdata->bestowments );
+      FreeMemory( victim->pcdata->bestowments );
       victim->pcdata->bestowments = CopyString( buf );
       ch_printf( victim, "%s has given you permission to fly clan ships.\r\n",
                  ch->name );
@@ -101,7 +101,7 @@ void do_empower ( Character *ch , char *argument )
   else if ( !StrCmp( arg2, "withdraw" ) )
     {
       sprintf( buf, "%s %s", victim->pcdata->bestowments, arg2 );
-      DISPOSE( victim->pcdata->bestowments );
+      FreeMemory( victim->pcdata->bestowments );
       victim->pcdata->bestowments = CopyString( buf );
       ch_printf( victim, "%s has given you permission to withdraw clan funds.\r\n",
                  ch->name );
@@ -110,7 +110,7 @@ void do_empower ( Character *ch , char *argument )
   else if ( !StrCmp( arg2, "clanbuyship" ) )
     {
       sprintf( buf, "%s %s", victim->pcdata->bestowments, arg2 );
-      DISPOSE( victim->pcdata->bestowments );
+      FreeMemory( victim->pcdata->bestowments );
       victim->pcdata->bestowments = CopyString( buf );
       ch_printf( victim, "%s has given you permission to buy clan ships.\r\n",
                  ch->name );
@@ -119,7 +119,7 @@ void do_empower ( Character *ch , char *argument )
   else if ( !StrCmp( arg2, "induct" ) )
     {
       sprintf( buf, "%s %s", victim->pcdata->bestowments, arg2 );
-      DISPOSE( victim->pcdata->bestowments );
+      FreeMemory( victim->pcdata->bestowments );
       victim->pcdata->bestowments = CopyString( buf );
       ch_printf( victim, "%s has given you permission to induct new members.\r\n",
                  ch->name );
@@ -128,7 +128,7 @@ void do_empower ( Character *ch , char *argument )
   else if ( !StrCmp( arg2, "empower" ) )
     {
       sprintf( buf, "%s %s", victim->pcdata->bestowments, arg2 );
-      DISPOSE( victim->pcdata->bestowments );
+      FreeMemory( victim->pcdata->bestowments );
       victim->pcdata->bestowments = CopyString( buf );
       ch_printf( victim, "%s has given you permission to empower members.\r\n",
                  ch->name );
@@ -137,7 +137,7 @@ void do_empower ( Character *ch , char *argument )
   else if ( !StrCmp( arg2, "salary" ) )
     {
       sprintf( buf, "%s %s", victim->pcdata->bestowments, arg2 );
-      DISPOSE( victim->pcdata->bestowments );
+      FreeMemory( victim->pcdata->bestowments );
       victim->pcdata->bestowments = CopyString( buf );
       ch_printf( victim, "%s has given you permission to assign salaries.\r\n",
                  ch->name );
@@ -146,7 +146,7 @@ void do_empower ( Character *ch , char *argument )
   else if ( !StrCmp( arg2, "roster" ) )
     {
       sprintf( buf, "%s %s", victim->pcdata->bestowments, arg2 );
-      DISPOSE( victim->pcdata->bestowments );
+      FreeMemory( victim->pcdata->bestowments );
       victim->pcdata->bestowments = CopyString( buf );
       ch_printf( victim, "%s has given you permission to access the roster.\r\n",
                  ch->name );

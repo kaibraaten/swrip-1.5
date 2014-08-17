@@ -168,7 +168,7 @@ void do_cast( Character *ch, char *argument )
       ch->tempnum = sn;
       return;
     case SUB_TIMER_DO_ABORT:
-      DISPOSE( ch->dest_buf );
+      FreeMemory( ch->dest_buf );
       if ( IS_VALID_SN((sn = ch->tempnum)) )
         {
           if ( (skill=get_skilltype(sn)) == NULL )
@@ -203,7 +203,7 @@ void do_cast( Character *ch, char *argument )
       mana = IsNpc(ch) ? 0 : skill->min_mana;
       strcpy( staticbuf, (const char*)ch->dest_buf );
       spell_target_name = OneArgument(staticbuf, arg2);
-      DISPOSE( ch->dest_buf );
+      FreeMemory( ch->dest_buf );
       ch->substate = SUB_NONE;
       if ( skill->participants > 1 )
         {
@@ -237,7 +237,7 @@ void do_cast( Character *ch, char *argument )
                     tmp->mana -= mana;
                     tmp->substate = SUB_NONE;
                     tmp->tempnum = -1;
-                    DISPOSE( tmp->dest_buf );
+                    FreeMemory( tmp->dest_buf );
                   }
               dont_wait = true;
               send_to_char( "You concentrate all the energy into a burst of force!\r\n", ch );

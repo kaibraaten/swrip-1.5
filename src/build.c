@@ -161,18 +161,18 @@ bool can_medit( const Character *ch, const ProtoMobile *mob )
 void free_reset( Area *are, Reset *res )
 {
   UNLINK( res, are->first_reset, are->last_reset, next, prev );
-  DISPOSE( res );
+  FreeMemory( res );
 }
 
 void free_area( Area *are )
 {
-  DISPOSE( are->name );
-  DISPOSE( are->filename );
+  FreeMemory( are->name );
+  FreeMemory( are->filename );
 
   while ( are->first_reset )
     free_reset( are, are->first_reset );
 
-  DISPOSE( are );
+  FreeMemory( are );
   are = NULL;
 }
 
@@ -205,7 +205,7 @@ void assign_area( Character *ch )
         {
           sprintf( buf, "Creating area entry for %s", ch->name );
           log_string_plus( buf, LOG_NORMAL, ch->top_level );
-          CREATE( tarea, Area, 1 );
+          AllocateMemory( tarea, Area, 1 );
           LINK( tarea, first_build, last_build, next, prev );
           tarea->first_reset    = NULL;
           tarea->last_reset     = NULL;
@@ -247,7 +247,7 @@ ExtraDescription *SetRExtra( Room *room, char *keywords )
     }
   if ( !ed )
     {
-      CREATE( ed, ExtraDescription, 1 );
+      AllocateMemory( ed, ExtraDescription, 1 );
       LINK( ed, room->first_extradesc, room->last_extradesc, next, prev );
       ed->keyword       = CopyString( keywords );
       ed->description   = CopyString( "" );
@@ -268,9 +268,9 @@ bool DelRExtra( Room *room, char *keywords )
   if ( !rmed )
     return false;
   UNLINK( rmed, room->first_extradesc, room->last_extradesc, next, prev );
-  DISPOSE( rmed->keyword );
-  DISPOSE( rmed->description );
-  DISPOSE( rmed );
+  FreeMemory( rmed->keyword );
+  FreeMemory( rmed->description );
+  FreeMemory( rmed );
   top_ed--;
   return true;
 }
@@ -286,7 +286,7 @@ ExtraDescription *SetOExtra( OBJ_DATA *obj, char *keywords )
     }
   if ( !ed )
     {
-      CREATE( ed, ExtraDescription, 1 );
+      AllocateMemory( ed, ExtraDescription, 1 );
       LINK( ed, obj->first_extradesc, obj->last_extradesc, next, prev );
       ed->keyword       = CopyString( keywords );
       ed->description   = CopyString( "" );
@@ -307,9 +307,9 @@ bool DelOExtra( OBJ_DATA *obj, char *keywords )
   if ( !rmed )
     return false;
   UNLINK( rmed, obj->first_extradesc, obj->last_extradesc, next, prev );
-  DISPOSE( rmed->keyword );
-  DISPOSE( rmed->description );
-  DISPOSE( rmed );
+  FreeMemory( rmed->keyword );
+  FreeMemory( rmed->description );
+  FreeMemory( rmed );
   top_ed--;
   return true;
 }
@@ -325,7 +325,7 @@ ExtraDescription *SetOExtraProto( OBJ_INDEX_DATA *obj, char *keywords )
     }
   if ( !ed )
     {
-      CREATE( ed, ExtraDescription, 1 );
+      AllocateMemory( ed, ExtraDescription, 1 );
       LINK( ed, obj->first_extradesc, obj->last_extradesc, next, prev );
       ed->keyword       = CopyString( keywords );
       ed->description   = CopyString( "" );
@@ -346,9 +346,9 @@ bool DelOExtraProto( OBJ_INDEX_DATA *obj, char *keywords )
   if ( !rmed )
     return false;
   UNLINK( rmed, obj->first_extradesc, obj->last_extradesc, next, prev );
-  DISPOSE( rmed->keyword );
-  DISPOSE( rmed->description );
-  DISPOSE( rmed );
+  FreeMemory( rmed->keyword );
+  FreeMemory( rmed->description );
+  FreeMemory( rmed );
   top_ed--;
   return true;
 }
@@ -1052,7 +1052,7 @@ void mpedit( Character *ch, MPROG_DATA *mprg, int mptype, char *argument )
 
       if ( mprg->arglist )
 	{
-	  DISPOSE( mprg->arglist );
+	  FreeMemory( mprg->arglist );
 	}
 
       mprg->arglist = CopyString( argument );
@@ -1081,7 +1081,7 @@ void rpedit( Character *ch, MPROG_DATA *mprg, int mptype, char *argument )
 
       if ( mprg->arglist )
 	{
-	  DISPOSE( mprg->arglist );
+	  FreeMemory( mprg->arglist );
 	}
 
       mprg->arglist = CopyString( argument );

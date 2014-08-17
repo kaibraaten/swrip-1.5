@@ -49,7 +49,7 @@ void do_cedit( Character *ch, char *argument )
           return;
         }
 
-      CREATE( command, CMDTYPE, 1 );
+      AllocateMemory( command, CMDTYPE, 1 );
       command->name = CopyString( arg1 );
       command->level = GetTrustLevel(ch);
 
@@ -124,7 +124,7 @@ void do_cedit( Character *ch, char *argument )
         }
 
       command->do_fun = fun;
-      DISPOSE( command->fun_name );
+      FreeMemory( command->fun_name );
       command->fun_name = CopyString( argument );
       send_to_char( "Done.\r\n", ch );
       return;
@@ -191,7 +191,7 @@ void do_cedit( Character *ch, char *argument )
       else
         relocate = false;
       if ( command->name )
-        DISPOSE( command->name );
+        FreeMemory( command->name );
       command->name = CopyString( arg1 );
       if ( relocate )
         add_command( command );

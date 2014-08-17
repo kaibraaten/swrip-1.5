@@ -171,7 +171,7 @@ static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *
 
   learn_from_success( ch, data->Recipe->Skill );
 
-  DISPOSE( data );
+  FreeMemory( data );
 }
 
 static void CheckRequirementsHandler( void *userData, CheckRequirementsEventArgs *args )
@@ -217,7 +217,7 @@ CraftRecipe *AllocateCraftRecipe( int sn, const CraftingMaterial *materialList, 
 				  vnum_t prototypeObject, long flags )
 {
   CraftRecipe *recipe = NULL;
-  CREATE( recipe, CraftRecipe, 1 );
+  AllocateMemory( recipe, CraftRecipe, 1 );
 
   recipe->Skill      = sn;
   recipe->Materials  = materialList;
@@ -240,7 +240,7 @@ CraftRecipe *AllocateCraftRecipe( int sn, const CraftingMaterial *materialList, 
 
 void FreeCraftRecipe( CraftRecipe *recipe )
 {
-  DISPOSE( recipe );
+  FreeMemory( recipe );
 }
 
 static size_t CountCraftingMaterials( const CraftingMaterial *material )
@@ -264,7 +264,7 @@ static struct FoundMaterial *AllocateFoundMaterials( const CraftingMaterial *rec
   size_t i = 0;
   struct FoundMaterial *foundMaterials = NULL;
 
-  CREATE( foundMaterials, struct FoundMaterial, numberOfElements );
+  AllocateMemory( foundMaterials, struct FoundMaterial, numberOfElements );
 
   for( i = 0; i < numberOfElements; ++i )
     {
@@ -282,7 +282,7 @@ CraftingSession *AllocateCraftingSession( CraftRecipe *recipe, Character *engine
   CraftingSession *session = NULL;
   struct FinishedCraftingUserData *finishedCraftingUserData = NULL;
 
-  CREATE( session, CraftingSession, 1 );
+  AllocateMemory( session, CraftingSession, 1 );
   session->OnInterpretArguments = CreateEvent();
   session->OnCheckRequirements = CreateEvent();
   session->OnMaterialFound = CreateEvent();
@@ -290,7 +290,7 @@ CraftingSession *AllocateCraftingSession( CraftRecipe *recipe, Character *engine
   session->OnFinishedCrafting = CreateEvent();
   session->OnAbort = CreateEvent();
 
-  CREATE( finishedCraftingUserData, struct FinishedCraftingUserData, 1 );
+  AllocateMemory( finishedCraftingUserData, struct FinishedCraftingUserData, 1 );
   finishedCraftingUserData->Recipe = recipe;
   AddFinishedCraftingHandler( session, finishedCraftingUserData, FinishedCraftingHandler );
 
@@ -316,15 +316,15 @@ void FreeCraftingSession( CraftingSession *session )
   DestroyEvent( session->OnAbort );
 
   FreeCraftRecipe( session->Recipe );
-  DISPOSE( session->FoundMaterials );
-  DISPOSE( session->CommandArgument );
+  FreeMemory( session->FoundMaterials );
+  FreeMemory( session->CommandArgument );
 
   if( session->Engineer )
     {
       session->Engineer->pcdata->CraftingSession = NULL;
     }
 
-  DISPOSE( session );
+  FreeMemory( session );
 }
 
 static bool CheckSkill( const CraftingSession *session )
@@ -441,7 +441,7 @@ static bool CheckMaterials( CraftingSession *session, bool extract )
       ++material;
     }
 
-  DISPOSE( session->FoundMaterials );
+  FreeMemory( session->FoundMaterials );
   session->FoundMaterials = AllocateFoundMaterials( session->Recipe->Materials );
 
   return foundAll;

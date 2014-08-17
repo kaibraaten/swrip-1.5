@@ -26,7 +26,7 @@ void do_makebowcaster( Character *ch, char *argument )
   CraftRecipe *recipe = CreateMakeBowcasterCraftRecipe();
   CraftingSession *session = AllocateCraftingSession( recipe, ch, argument );
 
-  CREATE( data, struct UserData, 1 );
+  AllocateMemory( data, struct UserData, 1 );
 
   AddInterpretArgumentsCraftingHandler( session, data, InterpretArgumentsHandler );
   AddCheckRequirementsCraftingHandler( session, data, CheckRequirementsHandler );
@@ -120,20 +120,20 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   SetBit( obj->wear_flags, ITEM_TAKE );
   obj->weight = 2 + obj->level / 7;
 
-  DISPOSE( obj->name );
+  FreeMemory( obj->name );
   strcpy( buf, ud->ItemName );
   strcat( buf, " bowcaster");
   obj->name = CopyString( buf );
 
   strcpy( buf, ud->ItemName );
-  DISPOSE( obj->short_descr );
+  FreeMemory( obj->short_descr );
   obj->short_descr = CopyString( buf );
 
-  DISPOSE( obj->description );
+  FreeMemory( obj->description );
   strcat( buf, " was carefully placed here." );
   obj->description = CopyString( Capitalize( buf ) );
 
-  CREATE( hitroll, Affect, 1 );
+  AllocateMemory( hitroll, Affect, 1 );
   hitroll->type      = -1;
   hitroll->duration  = -1;
   hitroll->location  = get_affecttype( "hitroll" );
@@ -141,7 +141,7 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   LINK( hitroll, obj->first_affect, obj->last_affect, next, prev );
   ++top_affect;
 
-  CREATE( damroll, Affect, 1 );
+  AllocateMemory( damroll, Affect, 1 );
   damroll->type      = -1;
   damroll->duration  = -1;
   damroll->location  = get_affecttype( "damroll" );
@@ -174,8 +174,8 @@ static void FreeUserData( struct UserData *ud )
 {
   if( ud->ItemName )
     {
-      DISPOSE( ud->ItemName );
+      FreeMemory( ud->ItemName );
     }
 
-  DISPOSE( ud );
+  FreeMemory( ud );
 }

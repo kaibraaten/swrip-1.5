@@ -38,7 +38,7 @@ void do_authorize( Character *ch, char *argument )
       victim->pcdata->auth_state = 3;
       RemoveBit(victim->pcdata->flags, PCFLAG_UNAUTHED);
       if ( victim->pcdata->authed_by )
-        DISPOSE( victim->pcdata->authed_by );
+        FreeMemory( victim->pcdata->authed_by );
       victim->pcdata->authed_by = CopyString( ch->name );
       sprintf( buf, "%s authorized %s", ch->name,
                victim->name );

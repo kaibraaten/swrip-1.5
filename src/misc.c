@@ -588,6 +588,6 @@ void set_title( Character *ch, const char *title )
 
   bufptr = TrimString(buf, ' ');
 
-  DISPOSE( ch->pcdata->title );
+  FreeMemory( ch->pcdata->title );
   ch->pcdata->title = CopyString( buf );
 }

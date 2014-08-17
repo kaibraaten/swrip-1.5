@@ -70,18 +70,18 @@ void make_scraps( OBJ_DATA *obj )
   /* don't make scraps of scraps of scraps of ... */
   if ( obj->pIndexData->vnum == OBJ_VNUM_SCRAPS )
     {
-      DISPOSE( scraps->short_descr );
+      FreeMemory( scraps->short_descr );
       scraps->short_descr = CopyString( "some debris" );
-      DISPOSE( scraps->description );
+      FreeMemory( scraps->description );
       scraps->description = CopyString( "Bits of debris lie on the ground here." );
     }
   else
     {
       sprintf( buf, scraps->short_descr, obj->short_descr );
-      DISPOSE( scraps->short_descr );
+      FreeMemory( scraps->short_descr );
       scraps->short_descr = CopyString( buf );
       sprintf( buf, scraps->description, obj->short_descr );
-      DISPOSE( scraps->description );
+      FreeMemory( scraps->description );
       scraps->description = CopyString( buf );
     }
 
@@ -201,15 +201,15 @@ void make_corpse( Character *ch )
 
   /* Added corpse name - make locate easier , other skills */
   sprintf( buf, "corpse %s", name );
-  DISPOSE( corpse->name );
+  FreeMemory( corpse->name );
   corpse->name = CopyString( buf );
 
   sprintf( buf, corpse->short_descr, name );
-  DISPOSE( corpse->short_descr );
+  FreeMemory( corpse->short_descr );
   corpse->short_descr = CopyString( buf );
 
   sprintf( buf, corpse->description, name );
-  DISPOSE( corpse->description );
+  FreeMemory( corpse->description );
   corpse->description = CopyString( buf );
 
   for ( obj = ch->first_carrying; obj; obj = obj_next )
@@ -260,7 +260,7 @@ OBJ_DATA *create_money( int amount )
     {
       obj = create_object( get_obj_index( OBJ_VNUM_MONEY_SOME ), 0 );
       sprintf( buf, obj->short_descr, amount );
-      DISPOSE( obj->short_descr );
+      FreeMemory( obj->short_descr );
       obj->short_descr = CopyString( buf );
       obj->value[OVAL_MONEY_AMOUNT]      = amount;
     }

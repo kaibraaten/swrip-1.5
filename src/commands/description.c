@@ -34,7 +34,7 @@ void do_description( Character *ch, char *argument )
       return;
 
     case SUB_PERSONAL_DESC:
-      DISPOSE( ch->description );
+      FreeMemory( ch->description );
       ch->description = CopyBuffer( ch );
       StopEditing( ch );
       return;

@@ -14,7 +14,7 @@ void do_rank( Character *ch, char *argument )
     }
 
   SmashTilde( argument );
-  DISPOSE( ch->pcdata->rank );
+  FreeMemory( ch->pcdata->rank );
 
   if ( !StrCmp( argument, "none" ) )
     ch->pcdata->rank = CopyString( "" );

@@ -13,7 +13,7 @@ void do_makeclan( Character *ch, char *argument )
 
   sprintf( filename, "%s%s", CLAN_DIR, StringToLowercase(argument) );
 
-  CREATE( clan, CLAN_DATA, 1 );
+  AllocateMemory( clan, CLAN_DATA, 1 );
   LINK( clan, first_clan, last_clan, next, prev );
   clan->next_subclan = NULL;
   clan->prev_subclan = NULL;

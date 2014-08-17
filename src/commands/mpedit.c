@@ -43,7 +43,7 @@ void do_mpedit( Character *ch, char *argument )
       mprog = (MPROG_DATA*)ch->dest_buf;
 
       if ( mprog->comlist )
-        DISPOSE( mprog->comlist );
+        FreeMemory( mprog->comlist );
 
       mprog->comlist = CopyBuffer( ch );
       StopEditing( ch );
@@ -211,9 +211,9 @@ void do_mpedit( Character *ch, char *argument )
                 break;
 	      }
           }
-      DISPOSE( mprg_next->arglist );
-      DISPOSE( mprg_next->comlist );
-      DISPOSE( mprg_next );
+      FreeMemory( mprg_next->arglist );
+      FreeMemory( mprg_next->comlist );
+      FreeMemory( mprg_next );
       if ( num <= 1 )
         RemoveBit( victim->pIndexData->mprog.progtypes, mptype );
       send_to_char( "Program removed.\r\n", ch );
@@ -241,7 +241,7 @@ void do_mpedit( Character *ch, char *argument )
         }
       if ( value == 1 )
         {
-          CREATE( mprg, MPROG_DATA, 1 );
+          AllocateMemory( mprg, MPROG_DATA, 1 );
           victim->pIndexData->mprog.progtypes |= ( 1 << mptype );
           mpedit( ch, mprg, mptype, argument );
           mprg->next = mprog;
@@ -253,7 +253,7 @@ void do_mpedit( Character *ch, char *argument )
         {
           if ( ++cnt == value && mprg->next )
             {
-              CREATE( mprg_next, MPROG_DATA, 1 );
+              AllocateMemory( mprg_next, MPROG_DATA, 1 );
 	      victim->pIndexData->mprog.progtypes |= ( 1 << mptype );
               mpedit( ch, mprg_next, mptype, argument );
               mprg_next->next = mprg->next;
@@ -275,7 +275,7 @@ void do_mpedit( Character *ch, char *argument )
         }
       if ( mprog != NULL )
         for ( ; mprog->next; mprog = mprog->next );
-      CREATE( mprg, MPROG_DATA, 1 );
+      AllocateMemory( mprg, MPROG_DATA, 1 );
       if ( mprog )
         mprog->next                     = mprg;
       else

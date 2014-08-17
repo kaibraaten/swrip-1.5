@@ -59,7 +59,7 @@ void do_setclan( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "leader" ) )
     {
-      DISPOSE( clan->leadership.leader );
+      FreeMemory( clan->leadership.leader );
       clan->leadership.leader = CopyString( argument );
       send_to_char( "Done.\r\n", ch );
       save_clan( clan );
@@ -98,7 +98,7 @@ void do_setclan( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "number1" ) )
     {
-      DISPOSE( clan->leadership.number1 );
+      FreeMemory( clan->leadership.number1 );
       clan->leadership.number1 = CopyString( argument );
       send_to_char( "Done.\r\n", ch );
       save_clan( clan );
@@ -107,7 +107,7 @@ void do_setclan( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "number2" ) )
     {
-      DISPOSE( clan->leadership.number2 );
+      FreeMemory( clan->leadership.number2 );
       clan->leadership.number2 = CopyString( argument );
       send_to_char( "Done.\r\n", ch );
       save_clan( clan );
@@ -236,7 +236,7 @@ void do_setclan( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "name" ) )
     {
-      DISPOSE( clan->name );
+      FreeMemory( clan->name );
       clan->name = CopyString( argument );
       send_to_char( "Done.\r\n", ch );
       save_clan( clan );
@@ -245,7 +245,7 @@ void do_setclan( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "filename" ) )
     {
-      DISPOSE( clan->filename );
+      FreeMemory( clan->filename );
       clan->filename = CopyString( argument );
       send_to_char( "Done.\r\n", ch );
       save_clan( clan );
@@ -255,7 +255,7 @@ void do_setclan( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "desc" ) )
     {
-      DISPOSE( clan->description );
+      FreeMemory( clan->description );
       clan->description = CopyString( argument );
       send_to_char( "Done.\r\n", ch );
       save_clan( clan );

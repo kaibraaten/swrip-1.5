@@ -51,11 +51,11 @@ void do_add_patrol ( Character *ch , char *argument )
       if ( !ch->dest_buf )
         return;
       strcpy(arg, (const char*)ch->dest_buf);
-      DISPOSE( ch->dest_buf);
+      FreeMemory( ch->dest_buf);
       break;
 
     case SUB_TIMER_DO_ABORT:
-      DISPOSE( ch->dest_buf );
+      FreeMemory( ch->dest_buf );
       ch->substate = SUB_NONE;
       send_to_char("&RYou are interupted before you can finish your call.\r\n", ch);
       return;

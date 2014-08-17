@@ -25,7 +25,7 @@ void do_makespice( Character *ch, char *argument )
   CraftRecipe *recipe = MakeCraftRecipe();
   CraftingSession *session = AllocateCraftingSession( recipe, ch, argument );
 
-  CREATE( data, struct UserData, 1 );
+  AllocateMemory( data, struct UserData, 1 );
 
   AddInterpretArgumentsCraftingHandler( session, data, InterpretArgumentsHandler );
   AddCheckRequirementsCraftingHandler( session, data, CheckRequirementsHandler );
@@ -92,17 +92,17 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   spice->value[OVAL_SPICE_GRADE] = urange(10, ud->SpiceGrade, ( IsNpc(ch) ? ch->top_level : (int) (ch->pcdata->learned[gsn_spice_refining]) ) + 10);
 
   strcpy( buf, ud->ItemName );
-  DISPOSE( spice->name );
+  FreeMemory( spice->name );
   strcat( buf, " drug spice " );
   strcat( buf, get_spicetype_name( ud->SpiceType ) );
   spice->name = CopyString( buf );
 
   strcpy( buf, ud->ItemName );
-  DISPOSE( spice->short_descr );
+  FreeMemory( spice->short_descr );
   spice->short_descr = CopyString( buf );
 
   strcat( buf, " was foolishly left lying around here." );
-  DISPOSE( spice->description );
+  FreeMemory( spice->description );
   spice->description = CopyString( Capitalize( buf ) );
 
   spice->item_type = ITEM_SPICE;
@@ -133,8 +133,8 @@ static void FreeUserData( struct UserData *ud )
 {
   if( ud->ItemName )
     {
-      DISPOSE( ud->ItemName );
+      FreeMemory( ud->ItemName );
     }
 
-  DISPOSE( ud );
+  FreeMemory( ud );
 }

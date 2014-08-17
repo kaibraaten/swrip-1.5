@@ -51,11 +51,11 @@ void do_mset( Character *ch, char *argument )
           StopEditing( ch );
           return;
         }
-      DISPOSE( victim->description );
+      FreeMemory( victim->description );
       victim->description = CopyBuffer( ch );
       if ( IsNpc(victim) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
         {
-          DISPOSE( victim->pIndexData->description );
+          FreeMemory( victim->pIndexData->description );
           victim->pIndexData->description = CopyString( victim->description );
         }
       StopEditing( ch );
@@ -90,9 +90,9 @@ void do_mset( Character *ch, char *argument )
         {
           send_to_char( "Mset mode off.\r\n", ch );
           ch->substate = SUB_NONE;
-          DISPOSE(ch->dest_buf);
+          FreeMemory(ch->dest_buf);
           if ( ch->pcdata && ch->pcdata->subprompt )
-            DISPOSE( ch->pcdata->subprompt );
+            FreeMemory( ch->pcdata->subprompt );
           return;
         }
     }
@@ -164,13 +164,13 @@ void do_mset( Character *ch, char *argument )
   if ( GetTrustLevel(ch) < sysdata.level_mset_player && (victim != ch) && !IsNpc( victim ) )
     {
       send_to_char( "You can't do that!\r\n", ch );
-      DISPOSE(ch->dest_buf);
+      FreeMemory(ch->dest_buf);
       return;
     }
   if ( GetTrustLevel( ch ) < GetTrustLevel( victim ) && !IsNpc( victim ) )
     {
       send_to_char( "You can't do that!\r\n", ch );
-      DISPOSE(ch->dest_buf);
+      FreeMemory(ch->dest_buf);
       return;
     }
   if ( lockvictim )
@@ -635,7 +635,7 @@ void do_mset( Character *ch, char *argument )
             }
         }
 
-      DISPOSE( victim->pcdata->pwd );
+      FreeMemory( victim->pcdata->pwd );
       victim->pcdata->pwd = CopyString( pwdnew );
       if ( IsBitSet(sysdata.save_flags, SV_PASSCHG) )
         save_char_obj( victim );
@@ -748,11 +748,11 @@ void do_mset( Character *ch, char *argument )
           return;
         }
 
-      DISPOSE( victim->name );
+      FreeMemory( victim->name );
       victim->name = CopyString( arg3 );
       if ( IsNpc(victim) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
         {
-          DISPOSE( victim->pIndexData->player_name );
+          FreeMemory( victim->pIndexData->player_name );
           victim->pIndexData->player_name = CopyString( victim->name );
         }
       return;
@@ -794,7 +794,7 @@ void do_mset( Character *ch, char *argument )
 
       if ( arg3[0] == '\0' )
         {
-          DISPOSE( victim->pcdata->clan_name );
+          FreeMemory( victim->pcdata->clan_name );
           victim->pcdata->clan_name     = CopyString( "" );
           victim->pcdata->clan  = NULL;
           send_to_char( "Removed from clan.\r\nPlease make sure you adjust that clan's members accordingly.\r\nAlso be sure to remove any bestowments they have been given.\r\n", ch );
@@ -808,7 +808,7 @@ void do_mset( Character *ch, char *argument )
           return;
         }
 
-      DISPOSE( victim->pcdata->clan_name );
+      FreeMemory( victim->pcdata->clan_name );
       victim->pcdata->clan_name = CopyString( clan->name );
       victim->pcdata->clan = clan;
       send_to_char( "Done.\r\nPlease make sure you adjust that clan's members accordingly.\r\n", ch);
@@ -818,11 +818,11 @@ void do_mset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "short" ) )
     {
-      DISPOSE( victim->short_descr );
+      FreeMemory( victim->short_descr );
       victim->short_descr = CopyString( arg3 );
       if ( IsNpc(victim) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
         {
-          DISPOSE( victim->pIndexData->short_descr );
+          FreeMemory( victim->pIndexData->short_descr );
           victim->pIndexData->short_descr = CopyString( victim->short_descr );
         }
       return;
@@ -830,13 +830,13 @@ void do_mset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "long" ) )
     {
-      DISPOSE( victim->long_descr );
+      FreeMemory( victim->long_descr );
       strcpy( buf, arg3 );
       strcat( buf, "\r\n" );
       victim->long_descr = CopyString( buf );
       if ( IsNpc(victim) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
         {
-          DISPOSE( victim->pIndexData->long_descr );
+          FreeMemory( victim->pIndexData->long_descr );
           victim->pIndexData->long_descr = CopyString( victim->long_descr );
         }
       return;
@@ -846,11 +846,11 @@ void do_mset( Character *ch, char *argument )
     {
       if ( arg3[0] )
         {
-          DISPOSE( victim->description );
+          FreeMemory( victim->description );
           victim->description = CopyString( arg3 );
           if ( IsNpc( victim ) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
             {
-              DISPOSE(victim->pIndexData->description );
+              FreeMemory(victim->pIndexData->description );
               victim->pIndexData->description = CopyString( victim->description );
             }
           return;

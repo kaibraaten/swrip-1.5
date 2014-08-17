@@ -45,7 +45,7 @@ void do_bestow( Character *ch, char *argument )
 
   if ( !StrCmp( argument, "none" ) )
     {
-      DISPOSE( victim->pcdata->bestowments );
+      FreeMemory( victim->pcdata->bestowments );
       victim->pcdata->bestowments = CopyString("");
       ch_printf( ch, "Bestowments removed from %s.\r\n", victim->name );
       ch_printf( victim, "%s has removed your bestowed commands.\r\n", ch->name );
@@ -53,7 +53,7 @@ void do_bestow( Character *ch, char *argument )
     }
 
   sprintf( buf, "%s %s", victim->pcdata->bestowments, argument );
-  DISPOSE( victim->pcdata->bestowments );
+  FreeMemory( victim->pcdata->bestowments );
   victim->pcdata->bestowments = CopyString( buf );
   ch_printf( victim, "%s has bestowed on you the command(s): %s\r\n",
              ch->name, argument );

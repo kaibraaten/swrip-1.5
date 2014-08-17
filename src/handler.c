@@ -497,7 +497,7 @@ void affect_to_char( Character *ch, Affect *paf )
       return;
     }
 
-  CREATE( paf_new, Affect, 1 );
+  AllocateMemory( paf_new, Affect, 1 );
   LINK( paf_new, ch->first_affect, ch->last_affect, next, prev );
   paf_new->type = paf->type;
   paf_new->duration     = paf->duration;
@@ -523,7 +523,7 @@ void affect_remove( Character *ch, Affect *paf )
   affect_modify( ch, paf, false );
 
   UNLINK( paf, ch->first_affect, ch->last_affect, next, prev );
-  DISPOSE( paf );
+  FreeMemory( paf );
 }
 
 /*
@@ -661,7 +661,7 @@ void char_to_room( Character *ch, Room *pRoomIndex )
         if ( tele->room == pRoomIndex )
           return;
 
-      CREATE( tele, TELEPORT_DATA, 1 );
+      AllocateMemory( tele, TELEPORT_DATA, 1 );
       LINK( tele, first_teleport, last_teleport, next, prev );
       tele->room                = pRoomIndex;
       tele->timer               = pRoomIndex->tele_delay;
@@ -996,7 +996,7 @@ void extract_obj( OBJ_DATA *obj )
     for ( paf = obj->first_affect; paf; paf = paf_next )
       {
         paf_next    = paf->next;
-        DISPOSE( paf );
+        FreeMemory( paf );
       }
     obj->first_affect = obj->last_affect = NULL;
   }
@@ -1008,9 +1008,9 @@ void extract_obj( OBJ_DATA *obj )
     for ( ed = obj->first_extradesc; ed; ed = ed_next )
       {
         ed_next = ed->next;
-        DISPOSE( ed->description );
-        DISPOSE( ed->keyword     );
-        DISPOSE( ed );
+        FreeMemory( ed->description );
+        FreeMemory( ed->keyword     );
+        FreeMemory( ed );
       }
     obj->first_extradesc = obj->last_extradesc = NULL;
   }
@@ -1908,9 +1908,9 @@ void extract_exit( Room *room, Exit *pexit )
   UNLINK( pexit, room->first_exit, room->last_exit, next, prev );
   if ( pexit->rexit )
     pexit->rexit->rexit = NULL;
-  DISPOSE( pexit->keyword );
-  DISPOSE( pexit->description );
-  DISPOSE( pexit );
+  FreeMemory( pexit->keyword );
+  FreeMemory( pexit->description );
+  FreeMemory( pexit );
 }
 
 /*
@@ -1924,14 +1924,14 @@ void clean_room( Room *room )
   if ( !room )
     return;
 
-  DISPOSE( room->description );
-  DISPOSE( room->name );
+  FreeMemory( room->description );
+  FreeMemory( room->name );
   for ( ed = room->first_extradesc; ed; ed = ed_next )
     {
       ed_next = ed->next;
-      DISPOSE( ed->description );
-      DISPOSE( ed->keyword );
-      DISPOSE( ed );
+      FreeMemory( ed->description );
+      FreeMemory( ed->keyword );
+      FreeMemory( ed );
       top_ed--;
     }
   room->first_extradesc = NULL;
@@ -1939,9 +1939,9 @@ void clean_room( Room *room )
   for ( pexit = room->first_exit; pexit; pexit = pexit_next )
     {
       pexit_next = pexit->next;
-      DISPOSE( pexit->keyword );
-      DISPOSE( pexit->description );
-      DISPOSE( pexit );
+      FreeMemory( pexit->keyword );
+      FreeMemory( pexit->description );
+      FreeMemory( pexit );
       top_exit--;
     }
   room->first_exit = NULL;
@@ -1962,10 +1962,10 @@ void clean_obj( OBJ_INDEX_DATA *obj )
   ExtraDescription *ed_next = 0;
   int oval = 0;
 
-  DISPOSE( obj->name );
-  DISPOSE( obj->short_descr );
-  DISPOSE( obj->description );
-  DISPOSE( obj->action_desc );
+  FreeMemory( obj->name );
+  FreeMemory( obj->short_descr );
+  FreeMemory( obj->description );
+  FreeMemory( obj->action_desc );
   obj->item_type        = 0;
   obj->extra_flags      = 0;
   obj->wear_flags       = 0;
@@ -1981,7 +1981,7 @@ void clean_obj( OBJ_INDEX_DATA *obj )
   for ( paf = obj->first_affect; paf; paf = paf_next )
     {
       paf_next    = paf->next;
-      DISPOSE( paf );
+      FreeMemory( paf );
       top_affect--;
     }
 
@@ -1991,9 +1991,9 @@ void clean_obj( OBJ_INDEX_DATA *obj )
   for ( ed = obj->first_extradesc; ed; ed = ed_next )
     {
       ed_next = ed->next;
-      DISPOSE( ed->description );
-      DISPOSE( ed->keyword     );
-      DISPOSE( ed );
+      FreeMemory( ed->description );
+      FreeMemory( ed->keyword     );
+      FreeMemory( ed );
       top_ed--;
     }
 
@@ -2008,10 +2008,10 @@ void clean_mob( ProtoMobile *mob )
 {
   MPROG_DATA *mprog, *mprog_next;
 
-  DISPOSE( mob->player_name );
-  DISPOSE( mob->short_descr );
-  DISPOSE( mob->long_descr  );
-  DISPOSE( mob->description );
+  FreeMemory( mob->player_name );
+  FreeMemory( mob->short_descr );
+  FreeMemory( mob->long_descr  );
+  FreeMemory( mob->description );
   mob->spec_fun = NULL;
   mob->spec_2   = NULL;
   mob->pShop    = NULL;
@@ -2021,9 +2021,9 @@ void clean_mob( ProtoMobile *mob )
   for ( mprog = mob->mprog.mudprogs; mprog; mprog = mprog_next )
     {
       mprog_next = mprog->next;
-      DISPOSE( mprog->arglist );
-      DISPOSE( mprog->comlist );
-      DISPOSE( mprog );
+      FreeMemory( mprog->arglist );
+      FreeMemory( mprog->comlist );
+      FreeMemory( mprog );
     }
   mob->count     = 0;      mob->killed          = 0;
   mob->sex       = 0;      mob->level           = 0;
@@ -2048,7 +2048,7 @@ void clean_resets( Area *tarea )
   for ( pReset = tarea->first_reset; pReset; pReset = pReset_next )
     {
       pReset_next = pReset->next;
-      DISPOSE( pReset );
+      FreeMemory( pReset );
       --top_reset;
     }
   tarea->first_reset    = NULL;
@@ -2165,10 +2165,10 @@ void clean_obj_queue()
     {
       obj = extracted_obj_queue;
       extracted_obj_queue = extracted_obj_queue->next;
-      DISPOSE( obj->name        );
-      DISPOSE( obj->description );
-      DISPOSE( obj->short_descr );
-      DISPOSE( obj );
+      FreeMemory( obj->name        );
+      FreeMemory( obj->description );
+      FreeMemory( obj->short_descr );
+      FreeMemory( obj );
       --cur_qobjs;
     }
 }
@@ -2213,7 +2213,7 @@ void queue_extracted_char( Character *ch, bool extract )
       bug( "queue_extracted char: ch = NULL", 0 );
       return;
     }
-  CREATE( ccd, ExtractedCharacter, 1 );
+  AllocateMemory( ccd, ExtractedCharacter, 1 );
   ccd->ch                       = ch;
   ccd->room                     = ch->in_room;
   ccd->extract          = extract;
@@ -2238,7 +2238,7 @@ void clean_char_queue()
       extracted_char_queue = ccd->next;
       if ( ccd->extract )
         free_char( ccd->ch );
-      DISPOSE( ccd );
+      FreeMemory( ccd );
       --cur_qchars;
     }
 }
@@ -2261,7 +2261,7 @@ void add_timer( Character *ch, short type, short count, DO_FUN *fun, int value )
       }
   if ( !timer )
     {
-      CREATE( timer, TIMER, 1 );
+      AllocateMemory( timer, TIMER, 1 );
       timer->count      = count;
       timer->type       = type;
       timer->do_fun     = fun;
@@ -2300,7 +2300,7 @@ void extract_timer( Character *ch, TIMER *timer )
     }
 
   UNLINK( timer, ch->first_timer, ch->last_timer, next, prev );
-  DISPOSE( timer );
+  FreeMemory( timer );
 }
 
 void remove_timer( Character *ch, short type )
@@ -2405,7 +2405,7 @@ OBJ_DATA *clone_object( const OBJ_DATA *obj )
   OBJ_DATA *clone = NULL;
   int oval = 0;
 
-  CREATE( clone, OBJ_DATA, 1 );
+  AllocateMemory( clone, OBJ_DATA, 1 );
   clone->pIndexData     = obj->pIndexData;
   clone->name           = CopyString( obj->name );
   clone->short_descr    = CopyString( obj->short_descr );
