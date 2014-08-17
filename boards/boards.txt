@@ -1,1 +1,12 @@
-$
+Filename          immortal~
+Vnum              100
+Min_read_level    101
+Min_post_level    101
+Min_remove_level  105
+Max_posts         1000
+Type              0
+Read_group        ~
+Post_group        ~
+Extra_readers     ~
+Extra_removers    ~
+End
