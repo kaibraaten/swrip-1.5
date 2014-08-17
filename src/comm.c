@@ -785,7 +785,10 @@ void new_descriptor( socket_t new_desc )
   }
 
   if ( ++num_descriptors > sysdata.maxplayers )
-    sysdata.maxplayers = num_descriptors;
+    {
+      sysdata.maxplayers = num_descriptors;
+    }
+
   if ( sysdata.maxplayers > sysdata.alltimemax )
     {
       if ( sysdata.time_of_max )

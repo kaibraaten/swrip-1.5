@@ -2,7 +2,7 @@
 #include "ships.h"
 #include "vector3_aux.h"
 
-void do_ResetShip( Character *ch, char *argument )
+void do_resetship( Character *ch, char *argument )
 {
   Ship *ship = GetShipAnywhere( argument );
 

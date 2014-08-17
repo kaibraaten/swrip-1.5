@@ -73,11 +73,8 @@ void do_copyover( Character * ch, char *argument )
 
   if( !fp )
   {
-    char logbuf[MAX_STRING_LENGTH];
     send_to_char( "Copyover file not writeable, aborted.\r\n", ch );
-    sprintf( "Could not write to copyover file: %s", COPYOVER_FILE );
-    log_string(logbuf);
-    /*log_printf( "Could not write to copyover file: %s", COPYOVER_FILE );*/
+    log_printf( "Could not write to copyover file: %s", COPYOVER_FILE );
     perror( "do_copyover:fopen" );
     return;
   }
@@ -89,11 +86,6 @@ void do_copyover( Character * ch, char *argument )
 #endif
 
   sprintf( buf, "%s", "\r\nA Blinding Flash of light starts heading towards you, before you can think it engulfs you!\r\n" );
-
-  /*
-  for ( tshuttle = first_shuttle; tshuttle; tshuttle = tshuttle->next )
-    save_shuttle(tshuttle);
-  */
 
   /* For each playing descriptor, save its state */
   for( d = first_descriptor; d; d = d_next )
@@ -214,7 +206,9 @@ void copyover_recover( void )
     fscanf( fp, "%d %d %s %s %s\n", &desc, &use_mccp, name, ip, host );
 
     if( desc == -1 || feof( fp ) )
-      break;
+      {
+	break;
+      }
 
 #if defined(AMIGA) || defined(__MORPHOS__)
     desc = ObtainSocket( desc, PF_INET, SOCK_STREAM, IPPROTO_TCP );
@@ -234,7 +228,6 @@ void copyover_recover( void )
     /* Write something, and check if it goes error-free */
     if( !write_to_descriptor( d->descriptor, "\r\nThe surge of Light passes leaving you unscathed and your world reshaped anew\r\n", 0 ) )
     {
-      /*closesocket( desc );*/
       bug("copyover_recover: couldn't write to socket %d", desc);
       free_desc(d);
       continue;
@@ -269,10 +262,15 @@ void copyover_recover( void )
 
       char_to_room( d->character, d->character->in_room );
       do_look( d->character, argument );
-      /*load_home( d->character );*/
+
       act( AT_ACTION, "$n materializes!", d->character, NULL, NULL,
 	  TO_ROOM );
       d->connection_state = CON_PLAYING;
+
+      if ( ++num_descriptors > sysdata.maxplayers )
+	{
+	  sysdata.maxplayers = num_descriptors;
+	}
     }
   }
 

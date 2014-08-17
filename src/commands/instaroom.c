@@ -2,7 +2,7 @@
 #include "mud.h"
 #include "character.h"
 
-void do_InstallRoom( Character *ch, char *argument )
+void do_instaroom( Character *ch, char *argument )
 {
   Area *pArea;
   Room *pRoom;
