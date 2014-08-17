@@ -44,8 +44,6 @@ typedef unsigned char bool;
 #define REMOVE_BIT(var, bit)    ((var) &= ~(bit))
 #define TOGGLE_BIT(var, bit)    ((var) ^= (bit))
 
-  /*#define HASHSTR*/                  /* use string hashing */
-
 /*
  * Memory allocation macros.
  */
@@ -82,23 +80,6 @@ do                                                              \
  point = NULL;                                                 \
  } while(0)
 
-#ifdef HASHSTR
-#define STRALLOC(point)         str_alloc((point))
-#define QUICKLINK(point)        quick_link((point))
-#define QUICKMATCH(p1, p2)      ((int) (p1) == (int) (p2))
-#define STRFREE(point)                                          \
-do                                                              \
-  {                                                               \
- if (!(point))                                                 \
-   {                                                             \
- bug( "Freeing null pointer" );                          \
- fprintf( stderr, "STRFREEing NULL in %s, line %d\n", __FILE__, __LINE__\
-	  ); \
-   }                                                             \
- else if (str_free((point))==-1)                               \
-   fprintf( stderr, "STRFREEing bad pointer in %s, line %d\n", __FILE__, __LINE__ ); \
- } while(0)
-#else
 #define STRALLOC(point)         str_dup((point))
 #define QUICKLINK(point)        str_dup((point))
 #define QUICKMATCH(p1, p2)      (strcmp((p1), (p2)) == 0)
@@ -112,7 +93,6 @@ do                                                              \
    }                                                             \
  else free((point));                                           \
  } while(0)
-#endif
 
 #if defined(KEY)
 #undef KEY
@@ -211,16 +191,6 @@ char *encode_string( const char* );
 char *trim_start( char *string, char junk );
 char *trim_end( char *string, char junk );
 char *trim_string( char *string, char junk );
-
-/* hashstr.c */
-char *str_alloc( const char *str );
-char *quick_link( const char *str );
-int str_free( char *str );
-void show_hash( int count );
-char *hash_stats( void );
-char *check_hash( const char *str );
-void hash_dump( int hash );
-void show_high_hash( int top );
 
 char *scramble( const char *argument, int modifier );
 
