@@ -49,7 +49,7 @@ void do_oset( Character *ch, char *argument )
        * extra_descr lists for a matching pointer...
        */
       ed  = (ExtraDescription*)ch->dest_buf;
-      STRFREE( ed->description );
+      DISPOSE( ed->description );
       ed->description = CopyBuffer( ch );
       tmpobj = (OBJ_DATA*)ch->spare_ptr;
       StopEditing( ch );
@@ -75,13 +75,13 @@ void do_oset( Character *ch, char *argument )
           return;
         }
 
-      STRFREE( obj->description );
+      DISPOSE( obj->description );
       obj->description = CopyBuffer( ch );
 
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
         {
-          STRFREE( obj->pIndexData->description );
-          obj->pIndexData->description = QUICKLINK( obj->description );
+          DISPOSE( obj->pIndexData->description );
+          obj->pIndexData->description = str_dup( obj->description );
 	}
 
       tmpobj = (OBJ_DATA*)ch->spare_ptr;
@@ -119,7 +119,7 @@ void do_oset( Character *ch, char *argument )
           ch->substate = SUB_NONE;
           DISPOSE(ch->dest_buf);
           if ( ch->pcdata && ch->pcdata->subprompt )
-            STRFREE( ch->pcdata->subprompt );
+            DISPOSE( ch->pcdata->subprompt );
           return;
         }
     }
@@ -424,24 +424,24 @@ void do_oset( Character *ch, char *argument )
     {
       if ( !can_omodify( ch, obj ) )
         return;
-      STRFREE( obj->name );
-      obj->name = STRALLOC( arg3 );
+      DISPOSE( obj->name );
+      obj->name = str_dup( arg3 );
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
         {
-          STRFREE(obj->pIndexData->name );
-          obj->pIndexData->name = QUICKLINK( obj->name );
+          DISPOSE(obj->pIndexData->name );
+          obj->pIndexData->name = str_dup( obj->name );
         }
       return;
     }
 
   if ( !str_cmp( arg2, "short" ) )
     {
-      STRFREE( obj->short_descr );
-      obj->short_descr = STRALLOC( arg3 );
+      DISPOSE( obj->short_descr );
+      obj->short_descr = str_dup( arg3 );
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
         {
-          STRFREE(obj->pIndexData->short_descr );
-	  obj->pIndexData->short_descr = QUICKLINK( obj->short_descr );
+          DISPOSE(obj->pIndexData->short_descr );
+	  obj->pIndexData->short_descr = str_dup( obj->short_descr );
         }
       else
         /* Feature added by Narn, Apr/96
@@ -452,8 +452,8 @@ void do_oset( Character *ch, char *argument )
           if ( str_infix( "rename", obj->name ) )
             {
               sprintf( buf, "%s %s", obj->name, "rename" );
-              STRFREE( obj->name );
-              obj->name = STRALLOC( buf );
+              DISPOSE( obj->name );
+              obj->name = str_dup( buf );
             }
         }
       return;
@@ -468,12 +468,12 @@ void do_oset( Character *ch, char *argument )
           send_to_char( "Illegal characters!\r\n", ch );
           return;
         }
-      STRFREE( obj->action_desc );
-      obj->action_desc = STRALLOC( arg3 );
+      DISPOSE( obj->action_desc );
+      obj->action_desc = str_dup( arg3 );
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
         {
-          STRFREE(obj->pIndexData->action_desc );
-          obj->pIndexData->action_desc = QUICKLINK( obj->action_desc );
+          DISPOSE(obj->pIndexData->action_desc );
+          obj->pIndexData->action_desc = str_dup( obj->action_desc );
         }
       return;
     }
@@ -482,12 +482,12 @@ void do_oset( Character *ch, char *argument )
     {
       if ( arg3[0] )
         {
-          STRFREE( obj->description );
-          obj->description = STRALLOC( arg3 );
+          DISPOSE( obj->description );
+          obj->description = str_dup( arg3 );
           if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
             {
-	      STRFREE(obj->pIndexData->description );
-              obj->pIndexData->description = QUICKLINK( obj->description );
+	      DISPOSE(obj->pIndexData->description );
+              obj->pIndexData->description = str_dup( obj->description );
             }
           return;
         }

@@ -73,11 +73,11 @@ void new_missile( Ship *ship , Ship *target , Character *ch , int missiletype )
 
   if ( ch )
     {
-      missile->fired_by = STRALLOC( ch->name );
+      missile->fired_by = str_dup( ch->name );
     }
   else
     {
-      missile->fired_by = STRALLOC( "" );
+      missile->fired_by = str_dup( "" );
     }
 
   missile->missiletype = missiletype;
@@ -125,7 +125,7 @@ void extract_missile( Missile *missile )
 
   if (  missile->fired_by )
     {
-      STRFREE( missile->fired_by );
+      DISPOSE( missile->fired_by );
     }
 
   DISPOSE( missile );

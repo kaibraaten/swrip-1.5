@@ -57,8 +57,8 @@ void do_setship( Character *ch, char *argument )
             clan->vehicles--;
         }
 
-      STRFREE( ship->owner );
-      ship->owner = STRALLOC( argument );
+      DISPOSE( ship->owner );
+      ship->owner = str_dup( argument );
       send_to_char( "Done.\r\n", ch );
       SaveShip( ship );
 
@@ -75,8 +75,8 @@ void do_setship( Character *ch, char *argument )
 
   if ( !str_cmp( arg2, "home" ) )
     {
-      STRFREE( ship->home );
-      ship->home = STRALLOC( argument );
+      DISPOSE( ship->home );
+      ship->home = str_dup( argument );
       send_to_char( "Done.\r\n", ch );
       SaveShip( ship );
       return;
@@ -84,8 +84,8 @@ void do_setship( Character *ch, char *argument )
 
   if ( !str_cmp( arg2, "pilot" ) )
     {
-      STRFREE( ship->pilot );
-      ship->pilot = STRALLOC( argument );
+      DISPOSE( ship->pilot );
+      ship->pilot = str_dup( argument );
       send_to_char( "Done.\r\n", ch );
       SaveShip( ship );
       return;
@@ -93,8 +93,8 @@ void do_setship( Character *ch, char *argument )
 
   if ( !str_cmp( arg2, "copilot" ) )
     {
-      STRFREE( ship->copilot );
-      ship->copilot = STRALLOC( argument );
+      DISPOSE( ship->copilot );
+      ship->copilot = str_dup( argument );
       send_to_char( "Done.\r\n", ch );
       SaveShip( ship );
       return;
@@ -852,8 +852,8 @@ void do_setship( Character *ch, char *argument )
 
   if ( !str_cmp( arg2, "name" ) )
     {
-      STRFREE( ship->name );
-      ship->name = STRALLOC( argument );
+      DISPOSE( ship->name );
+      ship->name = str_dup( argument );
       send_to_char( "Done.\r\n", ch );
       SaveShip( ship );
       return;
@@ -862,9 +862,9 @@ void do_setship( Character *ch, char *argument )
   if ( !str_cmp( arg2, "personalname" ) )
     {
       if ( ship->personalname )
-        STRFREE( ship->personalname );
+        DISPOSE( ship->personalname );
 
-      ship->personalname = STRALLOC( argument );
+      ship->personalname = str_dup( argument );
       send_to_char( "Done.\r\n", ch );
       SaveShip( ship );
       return;
@@ -882,8 +882,8 @@ void do_setship( Character *ch, char *argument )
 
   if ( !str_cmp( arg2, "desc" ) )
     {
-      STRFREE( ship->description );
-      ship->description = STRALLOC( argument );
+      DISPOSE( ship->description );
+      ship->description = str_dup( argument );
       send_to_char( "Done.\r\n", ch );
       SaveShip( ship );
       return;

@@ -47,7 +47,7 @@ static void set_target( Character *ch, const char *target )
   strcpy( buf, target );
 
   if (ch->pcdata->target && ch->pcdata->target[0] != '\0')
-    STRFREE( ch->pcdata->target );
+    DISPOSE( ch->pcdata->target );
 
-  ch->pcdata->target = STRALLOC( buf );
+  ch->pcdata->target = str_dup( buf );
 }

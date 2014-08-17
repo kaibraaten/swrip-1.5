@@ -207,7 +207,7 @@ void do_land( Character *ch, char *argument )
       EchoToDockedShip( AT_YELLOW , ship, "The ship begins to enter the atmosphere." );
 
       EchoToShip( AT_YELLOW , ship , "The ship slowly begins its landing approach.");
-      ship->dest = STRALLOC(arg);
+      ship->dest = str_dup(arg);
       ship->shipstate = SHIP_LAND;
       if ( ship->sclass == FIGHTER_SHIP )
         learn_from_success( ch, gsn_starfighters );

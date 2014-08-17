@@ -31,7 +31,7 @@ void do_hedit( Character *ch, char *argument )
           return;
         }
 
-      STRFREE( pHelp->text );
+      DISPOSE( pHelp->text );
       pHelp->text = CopyBuffer( ch );
       StopEditing( ch );
       return;

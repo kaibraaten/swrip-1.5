@@ -63,8 +63,8 @@ static Shuttle *AllocateShuttle( void )
 Shuttle *MakeShuttle( const char *filename, const char *name )
 {
   Shuttle *shuttle   = AllocateShuttle();
-  shuttle->name      = STRALLOC( name );
-  shuttle->filename  = STRALLOC( filename );
+  shuttle->name      = str_dup( name );
+  shuttle->filename  = str_dup( filename );
 
   if (SaveShuttle( shuttle ))
     {
@@ -73,8 +73,8 @@ Shuttle *MakeShuttle( const char *filename, const char *name )
     }
   else
     {
-      STRFREE(shuttle->name);
-      STRFREE(shuttle->filename);
+      DISPOSE(shuttle->name);
+      DISPOSE(shuttle->filename);
       DISPOSE(shuttle);
       shuttle = NULL;
     }
@@ -675,7 +675,7 @@ static void FreeShuttle( Shuttle *shuttle )
 
       if (stop->stop_name)
         {
-          STRFREE(stop->stop_name);
+          DISPOSE(stop->stop_name);
         }
 
       DISPOSE(stop);
@@ -683,12 +683,12 @@ static void FreeShuttle( Shuttle *shuttle )
 
   if (shuttle->name)
     {
-      STRFREE(shuttle->name);
+      DISPOSE(shuttle->name);
     }
 
   if (shuttle->filename)
     {
-      STRFREE(shuttle->filename);
+      DISPOSE(shuttle->filename);
     }
 
   DISPOSE(shuttle);
@@ -703,7 +703,7 @@ void DestroyShuttle(Shuttle *shuttle)
       char buf[MSL];
       snprintf(buf, MSL, "%s/%s", SHUTTLE_DIR, shuttle->filename);
       unlink(buf);
-      STRFREE(shuttle->filename);
+      DISPOSE(shuttle->filename);
     }
 
   FreeShuttle( shuttle );

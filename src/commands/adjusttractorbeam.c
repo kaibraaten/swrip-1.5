@@ -72,7 +72,7 @@ void do_adjusttractorbeam(Character *ch, char *argument )
       eShip->shipstate = SHIP_TRACTORED;
       eShip->docked = NULL;
       eShip->docking = SHIP_READY;
-      STRFREE(eShip->dest);
+      DISPOSE(eShip->dest);
       return;
     }
   if ( !str_cmp( arg, "abort" ) )
@@ -81,7 +81,7 @@ void do_adjusttractorbeam(Character *ch, char *argument )
       eShip->shipstate = SHIP_TRACTORED;
       eShip->docked = NULL;
       eShip->docking = SHIP_READY;
-      STRFREE(eShip->dest);
+      DISPOSE(eShip->dest);
       return;
     }
 
@@ -133,7 +133,7 @@ void do_adjusttractorbeam(Character *ch, char *argument )
 
       EchoToCockpit( AT_YELLOW, ship, "Tractor Beam set to land target.\r\n" );
       eShip->shipstate = SHIP_LAND;
-      eShip->dest = STRALLOC(ship->name);
+      eShip->dest = str_dup(ship->name);
       return;
     }
 

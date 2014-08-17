@@ -243,14 +243,14 @@ char *fread_string( FILE *fp )
       bug("fread_string: EOF encountered on read.\r\n");
       if ( fBootDb )
 	exit( EXIT_FAILURE );
-      return STRALLOC("");
+      return str_dup("");
     }
     c = fgetc( fp );
   }
   while ( isspace((int)c) );
 
   if ( ( *plast++ = c ) == '~' )
-    return STRALLOC( "" );
+    return str_dup( "" );
 
   for ( ;; )
   {
@@ -258,7 +258,7 @@ char *fread_string( FILE *fp )
     {
       bug( "fread_string: string too long" );
       *plast = '\0';
-      return STRALLOC( buf );
+      return str_dup( buf );
     }
     switch ( (int)( *plast = fgetc( fp ) ) )
     {
@@ -271,7 +271,7 @@ char *fread_string( FILE *fp )
 	if ( fBootDb )
 	  exit( EXIT_FAILURE );
 	*plast = '\0';
-	return STRALLOC(buf);
+	return str_dup(buf);
 	break;
 
       case '\n':
@@ -284,7 +284,7 @@ char *fread_string( FILE *fp )
 
       case '~':
 	*plast = '\0';
-	return STRALLOC( buf );
+	return str_dup( buf );
     }
   }
 }

@@ -35,8 +35,8 @@ void do_setplanet( Character *ch, char *argument )
 
   if ( !str_cmp( arg2, "name" ) )
     {
-      STRFREE( planet->name );
-      planet->name = STRALLOC( argument );
+      DISPOSE( planet->name );
+      planet->name = str_dup( argument );
       send_to_char( "Done.\r\n", ch );
       save_planet( planet );
       return;

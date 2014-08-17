@@ -222,8 +222,8 @@ void copyover_recover( void )
 
     CREATE( d, Descriptor, 1 );
     init_descriptor( d, desc ); /* set up various stuff */
-    d->remote.hostname = STRALLOC( host );
-    d->remote.hostip = STRALLOC( ip );
+    d->remote.hostname = str_dup( host );
+    d->remote.hostip = str_dup( ip );
 
     /* Write something, and check if it goes error-free */
     if( !write_to_descriptor( d->descriptor, "\r\nThe surge of Light passes leaving you unscathed and your world reshaped anew\r\n", 0 ) )

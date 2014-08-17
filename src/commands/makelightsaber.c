@@ -109,21 +109,21 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *even
 
   lightsaber->weight = 5;
 
-  STRFREE( lightsaber->name );
-  lightsaber->name = STRALLOC( "lightsaber saber" );
+  DISPOSE( lightsaber->name );
+  lightsaber->name = str_dup( "lightsaber saber" );
 
   strcpy( buf, ud->ItemName );
-  STRFREE( lightsaber->short_descr );
-  lightsaber->short_descr = STRALLOC( buf );
+  DISPOSE( lightsaber->short_descr );
+  lightsaber->short_descr = str_dup( buf );
 
-  STRFREE( lightsaber->description );
+  DISPOSE( lightsaber->description );
   sprintf( buf, "%s was carelessly misplaced here.", capitalize( ud->ItemName ) );
-  lightsaber->description = STRALLOC( buf );
+  lightsaber->description = str_dup( buf );
 
-  STRFREE( lightsaber->action_desc );
+  DISPOSE( lightsaber->action_desc );
   strcpy( buf, ud->ItemName );
   strcat( buf, " ignites with a hum and a soft glow." );
-  lightsaber->action_desc = STRALLOC( buf );
+  lightsaber->action_desc = str_dup( buf );
 
   CREATE( hitroll, Affect, 1 );
   hitroll->type               = -1;

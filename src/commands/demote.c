@@ -29,15 +29,15 @@ void do_demote ( Character *ch , char *argument )
     {
       send_to_char( "Player Demoted!", ch );
 
-      STRFREE( ch->pcdata->clan->leadership.number1 );
-      ch->pcdata->clan->leadership.number1 = STRALLOC( "" );
+      DISPOSE( ch->pcdata->clan->leadership.number1 );
+      ch->pcdata->clan->leadership.number1 = str_dup( "" );
     }
   else if ( !str_cmp( argument , ch->pcdata->clan->leadership.number2 )  )
     {
       send_to_char( "Player Demoted!", ch );
 
-      STRFREE( ch->pcdata->clan->leadership.number2 );
-      ch->pcdata->clan->leadership.number2 = STRALLOC( "" );
+      DISPOSE( ch->pcdata->clan->leadership.number2 );
+      ch->pcdata->clan->leadership.number2 = str_dup( "" );
     }
   else
     {

@@ -22,7 +22,7 @@ void do_prompt( Character *ch, char *argument )
     }
 
   if (ch->pcdata->prompt)
-    STRFREE(ch->pcdata->prompt);
+    DISPOSE(ch->pcdata->prompt);
 
   if ( strlen(argument) > 128 )
     argument[128] = '\0';
@@ -30,9 +30,9 @@ void do_prompt( Character *ch, char *argument )
   /* Can add a list of pre-set prompts here if wanted.. perhaps
      'prompt 1' brings up a different, pre-set prompt */
   if ( !str_cmp(arg, "default") )
-    ch->pcdata->prompt = STRALLOC("");
+    ch->pcdata->prompt = str_dup("");
   else
-    ch->pcdata->prompt = STRALLOC(argument);
+    ch->pcdata->prompt = str_dup(argument);
 
   send_to_char( "Ok.\r\n", ch );
 }

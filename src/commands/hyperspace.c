@@ -129,8 +129,8 @@ void do_hyperspace(Character *ch, char *argument )
           sprintf( buf ,"%s enters the starsystem at %.0f %.0f %.0f" , ship->name, ship->pos.x, ship->pos.y, ship->pos.z );
           EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );
           ship->shipstate = SHIP_READY;
-          STRFREE( ship->home );
-          ship->home = STRALLOC( ship->spaceobject->name );
+          DISPOSE( ship->home );
+          ship->home = str_dup( ship->spaceobject->name );
 
           if ( str_cmp("Public",ship->owner) )
             SaveShip(ship);
@@ -143,8 +143,8 @@ void do_hyperspace(Character *ch, char *argument )
                 sprintf( buf ,"%s enters the starsystem at %.0f %.0f %.0f" , dship->name, dship->pos.x, dship->pos.y, dship->pos.\
                          z );
                 EchoToNearbyShips( AT_YELLOW, dship, buf , NULL );
-                STRFREE( dship->home );
-                dship->home = STRALLOC( ship->home );
+                DISPOSE( dship->home );
+                dship->home = str_dup( ship->home );
 
                 if ( str_cmp("Public",dship->owner) )
                   SaveShip(dship);

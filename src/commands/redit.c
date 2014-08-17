@@ -38,7 +38,7 @@ void do_redit( Character *ch, char *argument )
           location = ch->in_room;
         }
 
-      STRFREE( location->description );
+      DISPOSE( location->description );
       location->description = CopyBuffer( ch );
       StopEditing( ch );
       ch->substate = ch->tempnum;
@@ -54,7 +54,7 @@ void do_redit( Character *ch, char *argument )
           return;
         }
 
-      STRFREE( ed->description );
+      DISPOSE( ed->description );
       ed->description = CopyBuffer( ch );
       StopEditing( ch );
       ch->substate = ch->tempnum;
@@ -79,7 +79,7 @@ void do_redit( Character *ch, char *argument )
           send_to_char( "Redit mode off.\r\n", ch );
 
 	  if ( ch->pcdata && ch->pcdata->subprompt )
-            STRFREE( ch->pcdata->subprompt );
+            DISPOSE( ch->pcdata->subprompt );
 
           ch->substate = SUB_NONE;
           return;
@@ -114,8 +114,8 @@ void do_redit( Character *ch, char *argument )
           return;
         }
 
-      STRFREE( location->name );
-      location->name = STRALLOC( argument );
+      DISPOSE( location->name );
+      location->name = str_dup( argument );
       return;
     }
 
@@ -381,8 +381,8 @@ void do_redit( Character *ch, char *argument )
           return;
         }
 
-      STRFREE( xit->keyword );
-      xit->keyword = STRALLOC( argument );
+      DISPOSE( xit->keyword );
+      xit->keyword = str_dup( argument );
       send_to_char( "Done.\r\n", ch );
       return;
     }
@@ -545,8 +545,8 @@ void do_redit( Character *ch, char *argument )
             }
 
           xit = make_exit( location, tmp, edir );
-	  xit->keyword          = STRALLOC( "" );
-          xit->description              = STRALLOC( "" );
+	  xit->keyword          = str_dup( "" );
+          xit->description              = str_dup( "" );
           xit->key                      = -1;
           xit->exit_info                = 0;
           act( AT_IMMORT, "$n reveals a hidden passage!", ch, NULL, NULL, TO_ROOM );
@@ -587,8 +587,8 @@ void do_redit( Character *ch, char *argument )
 
           if ( argument && argument[0] != '\0' )
             {
-              STRFREE( xit->keyword );
-              xit->keyword = STRALLOC( argument );
+              DISPOSE( xit->keyword );
+              xit->keyword = str_dup( argument );
             }
         }
 
@@ -751,14 +751,14 @@ void do_redit( Character *ch, char *argument )
 
       if ( xit )
 	{
-          STRFREE( xit->description );
+          DISPOSE( xit->description );
 
           if ( !argument || argument[0] == '\0' )
-            xit->description = STRALLOC( "" );
+            xit->description = str_dup( "" );
           else
             {
               sprintf( buf, "%s\r\n", argument );
-              xit->description = STRALLOC( buf );
+              xit->description = str_dup( buf );
             }
 
           send_to_char( "Done.\r\n", ch );

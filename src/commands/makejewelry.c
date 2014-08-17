@@ -128,17 +128,17 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   SET_BIT( obj->wear_flags, ITEM_TAKE );
   SET_BIT( obj->wear_flags, ud->WearLocation );
 
-  STRFREE( obj->name );
+  DISPOSE( obj->name );
   strcpy( buf, ud->ItemName );
-  obj->name = STRALLOC( buf );
+  obj->name = str_dup( buf );
 
   strcpy( buf, ud->ItemName );
-  STRFREE( obj->short_descr );
-  obj->short_descr = STRALLOC( buf );
+  DISPOSE( obj->short_descr );
+  obj->short_descr = str_dup( buf );
 
-  STRFREE( obj->description );
+  DISPOSE( obj->description );
   strcat( buf, " was dropped here." );
-  obj->description = STRALLOC( capitalize( buf ) );
+  obj->description = str_dup( capitalize( buf ) );
 
   obj->value[OVAL_ARMOR_CONDITION] = obj->value[OVAL_ARMOR_AC];
 

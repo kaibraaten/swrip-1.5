@@ -52,8 +52,8 @@ ch_ret spell_obj_inv( int sn, int level, Character *ch, void *vo )
                   char buf[MAX_STRING_LENGTH];
 
                   sprintf( buf, "%s water", obj->name );
-                  STRFREE( obj->name );
-                  obj->name = STRALLOC( buf );
+                  DISPOSE( obj->name );
+                  obj->name = str_dup( buf );
                 }
             }
           successful_casting( skill, ch, NULL, obj );

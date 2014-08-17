@@ -196,13 +196,13 @@ void fread_spaceobject( Spaceobject *spaceobject, FILE *fp )
           if ( !str_cmp( word, "End" ) )
             {
               if (!spaceobject->name)
-                spaceobject->name               = STRALLOC( "" );
+                spaceobject->name               = str_dup( "" );
               if (!spaceobject->landing_site.locationa)
-                spaceobject->landing_site.locationa            = STRALLOC( "" );
+                spaceobject->landing_site.locationa            = str_dup( "" );
               if (!spaceobject->landing_site.locationb)
-                spaceobject->landing_site.locationb            = STRALLOC( "" );
+                spaceobject->landing_site.locationb            = str_dup( "" );
               if (!spaceobject->landing_site.locationc)
-                spaceobject->landing_site.locationc            = STRALLOC( "" );
+                spaceobject->landing_site.locationc            = str_dup( "" );
               return;
             }
           break;

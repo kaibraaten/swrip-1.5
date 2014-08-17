@@ -69,7 +69,7 @@ void do_buyship(Character *ch, char *argument )
   act( AT_PLAIN, "$n walks over to a terminal and makes a credit transaction.",ch,
        NULL, argument , TO_ROOM );
 
-  STRFREE( ship->owner );
-  ship->owner = STRALLOC( ch->name );
+  DISPOSE( ship->owner );
+  ship->owner = str_dup( ch->name );
   SaveShip( ship );
 }

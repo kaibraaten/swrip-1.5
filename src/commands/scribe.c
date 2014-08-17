@@ -94,14 +94,14 @@ void do_scribe( Character *ch, char *argument )
       scroll->value[1] = sn;
       scroll->value[0] = ch->top_level;
       sprintf(buf1, "scribed book" );
-      STRFREE(scroll->short_descr);
-      scroll->short_descr = STRALLOC( aoran(buf1) );
+      DISPOSE(scroll->short_descr);
+      scroll->short_descr = str_dup( aoran(buf1) );
       sprintf(buf2, "A scribed book lies in the dust." );
-      STRFREE(scroll->description);
-      scroll->description = STRALLOC(buf2);
+      DISPOSE(scroll->description);
+      scroll->description = str_dup(buf2);
       sprintf(buf3, "scroll scribing scribed book %s", skill_table[sn]->name);
-      STRFREE(scroll->name);
-      scroll->name = STRALLOC(buf3);
+      DISPOSE(scroll->name);
+      scroll->name = str_dup(buf3);
 
       act( AT_MAGIC, "$n writes a book.",   ch, scroll, NULL, TO_ROOM );
       act( AT_MAGIC, "You write $p.",   ch, scroll, NULL, TO_CHAR );

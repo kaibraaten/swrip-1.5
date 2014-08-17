@@ -88,8 +88,8 @@ void do_mine( Character *ch, char *argument )
   SET_BIT( obj->extra_flags, ITEM_BURRIED );
   SetWaitState( ch, urange( 10, move / 2, 100 ) );
 
-  STRFREE ( obj->armed_by );
-  obj->armed_by = STRALLOC ( ch->name );
+  DISPOSE ( obj->armed_by );
+  obj->armed_by = str_dup ( ch->name );
 
   ch_printf( ch, "You arm and bury %s.\r\n", obj->short_descr );
   act( AT_PLAIN, "$n arms and buries $p.", ch, obj, NULL, TO_ROOM );

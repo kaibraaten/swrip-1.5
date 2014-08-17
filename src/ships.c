@@ -226,8 +226,8 @@ void UpdateShipMovement( void )
 		  ship->currjump = NULL;
 		  EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );
 		  ship->shipstate = SHIP_READY;
-		  STRFREE( ship->home );
-		  ship->home = STRALLOC( ship->spaceobject->name );
+		  DISPOSE( ship->home );
+		  ship->home = str_dup( ship->spaceobject->name );
 		}
 	    }
 
@@ -253,8 +253,8 @@ void UpdateShipMovement( void )
                   ship->currjump = NULL;
                   EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );
                   ship->shipstate = SHIP_READY;
-                  STRFREE( ship->home );
-                  ship->home = STRALLOC( ship->spaceobject->name );
+                  DISPOSE( ship->home );
+                  ship->home = str_dup( ship->spaceobject->name );
                 }
             }
           else if ( ( ship->count >= (ship->tcount ? ship->tcount : 10 ) )
@@ -278,8 +278,8 @@ void UpdateShipMovement( void )
                   ship->currjump = NULL;
                   EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );
                   ship->shipstate = SHIP_READY;
-                  STRFREE( ship->home );
-                  ship->home = STRALLOC( ship->spaceobject->name );
+                  DISPOSE( ship->home );
+                  ship->home = str_dup( ship->spaceobject->name );
 
                   vector_set( &ship->jump,
                               ship->pos.x + ship->trackvector.x,
@@ -648,10 +648,10 @@ static void MakeDebris( const Ship *ship )
 
   LINK( debris, first_ship, last_ship, next, prev );
 
-  debris->owner       = STRALLOC( "" );
-  debris->copilot     = STRALLOC( "" );
-  debris->pilot       = STRALLOC( "" );
-  debris->home        = STRALLOC( "" );
+  debris->owner       = str_dup( "" );
+  debris->copilot     = str_dup( "" );
+  debris->pilot       = str_dup( "" );
+  debris->home        = str_dup( "" );
   debris->type        = SHIP_CIVILIAN;
 
   if( ship->type != MOB_SHIP )
@@ -682,9 +682,9 @@ static void MakeDebris( const Ship *ship )
 
   strcpy( buf, "Debris of a " );
   strcat( buf, ship->name );
-  debris->name          = STRALLOC( "Debris" );
-  debris->personalname  = STRALLOC( "Debris" );
-  debris->description   = STRALLOC( buf );
+  debris->name          = str_dup( "Debris" );
+  debris->personalname  = str_dup( "Debris" );
+  debris->description   = str_dup( buf );
 
   ShipToSpaceobject( debris, ship->spaceobject );
   vector_copy( &debris->pos, &ship->pos );
@@ -2351,32 +2351,32 @@ static void ReadShip( Ship *ship, FILE *fp )
 
               if (!ship->home)
 		{
-		  ship->home = STRALLOC( "" );
+		  ship->home = str_dup( "" );
 		}
 
               if (!ship->name)
 		{
-		  ship->name = STRALLOC( "" );
+		  ship->name = str_dup( "" );
 		}
 
 	      if (!ship->owner)
 		{
-		  ship->owner = STRALLOC( "" );
+		  ship->owner = str_dup( "" );
 		}
 
               if (!ship->description)
 		{
-		  ship->description = STRALLOC( "" );
+		  ship->description = str_dup( "" );
 		}
 
               if (!ship->copilot)
 		{
-		  ship->copilot = STRALLOC( "" );
+		  ship->copilot = str_dup( "" );
 		}
 
               if (!ship->pilot)
 		{
-		  ship->pilot = STRALLOC( "" );
+		  ship->pilot = str_dup( "" );
 		}
 
               if (!IsShipDisabled( ship ))
@@ -2666,7 +2666,7 @@ static bool LoadShipFile( const char *shipfile )
 
           if( !ship->personalname )
 	    {
-	      ship->personalname = STRALLOC(ship->name);
+	      ship->personalname = str_dup(ship->name);
 	    }
 
           ship->currspeed = 0;
@@ -2849,12 +2849,12 @@ void ResetShip( Ship *ship )
             clan->vehicles--;
         }
 
-      STRFREE( ship->owner );
-      ship->owner = STRALLOC( "" );
-      STRFREE( ship->pilot );
-      ship->pilot = STRALLOC( "" );
-      STRFREE( ship->copilot );
-      ship->copilot = STRALLOC( "" );
+      DISPOSE( ship->owner );
+      ship->owner = str_dup( "" );
+      DISPOSE( ship->pilot );
+      ship->pilot = str_dup( "" );
+      DISPOSE( ship->copilot );
+      ship->copilot = str_dup( "" );
     }
 #endif
 #endif
@@ -2862,18 +2862,18 @@ void ResetShip( Ship *ship )
     {
       if ( ship->type == SHIP_REBEL || ( ship->type == MOB_SHIP && ((!str_cmp( ship->owner , "The Rebel Alliance" )) || (!str_cmp( ship->owner , "The New Republic" )))))
         {
-          STRFREE( ship->home );
-          ship->home = STRALLOC( "Coruscant" );
+          DISPOSE( ship->home );
+          ship->home = str_dup( "Coruscant" );
         }
       else if ( ship->type == SHIP_IMPERIAL || ( ship->type == MOB_SHIP && !str_cmp(ship->owner, "the empire") ))
         {
-          STRFREE( ship->home );
-	  ship->home = STRALLOC( "Byss" );
+          DISPOSE( ship->home );
+	  ship->home = str_dup( "Byss" );
         }
       else if ( ship->type == SHIP_CIVILIAN)
         {
-          STRFREE( ship->home );
-          ship->home = STRALLOC( "corporate" );
+          DISPOSE( ship->home );
+          ship->home = str_dup( "corporate" );
         }
     }
 

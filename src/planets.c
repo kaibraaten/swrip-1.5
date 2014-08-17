@@ -154,7 +154,7 @@ static void fread_planet( PLANET_DATA *planet, FILE *fp )
               char *tmp = fread_string(fp);
 
               sprintf (aName, "%s", tmp);
-              STRFREE(tmp);
+              DISPOSE(tmp);
 
               for( pArea = first_area; pArea; pArea = pArea->next )
                 {
@@ -179,7 +179,7 @@ static void fread_planet( PLANET_DATA *planet, FILE *fp )
             {
               if (!planet->name)
                 {
-                  planet->name = STRALLOC( "" );
+                  planet->name = str_dup( "" );
                 }
 
               return;
@@ -213,7 +213,7 @@ static void fread_planet( PLANET_DATA *planet, FILE *fp )
               char *tmp = fread_string(fp);
 
               planet->spaceobject = spaceobject_from_name( tmp );
-              STRFREE(tmp);
+              DISPOSE(tmp);
 
 	      if (planet->spaceobject)
                 {

@@ -62,11 +62,11 @@ void do_placevendor (Character *ch, char *argument)
   vendor = get_char_room(ch, temp->player_name);
 
   sprintf (buf, vendor->long_descr, ch->name);
-  vendor->long_descr =  STRALLOC( buf );
+  vendor->long_descr =  str_dup( buf );
 
   sprintf (buf, "%s", ch->name);
 
-  vendor->owner = STRALLOC(buf);
+  vendor->owner = str_dup(buf);
   vendor->home = ch->in_room;
 
   SaveVendor (vendor);

@@ -72,20 +72,20 @@ void do_outcast( Character *ch, char *argument )
 
   if ( !str_cmp( victim->name, ch->pcdata->clan->leadership.number1 ) )
     {
-      STRFREE( ch->pcdata->clan->leadership.number1 );
-      ch->pcdata->clan->leadership.number1 = STRALLOC( "" );
+      DISPOSE( ch->pcdata->clan->leadership.number1 );
+      ch->pcdata->clan->leadership.number1 = str_dup( "" );
     }
 
   if ( !str_cmp( victim->name, ch->pcdata->clan->leadership.number2 ) )
     {
-      STRFREE( ch->pcdata->clan->leadership.number2 );
-      ch->pcdata->clan->leadership.number2 = STRALLOC( "" );
+      DISPOSE( ch->pcdata->clan->leadership.number2 );
+      ch->pcdata->clan->leadership.number2 = str_dup( "" );
     }
 
   victim->pcdata->clan = NULL;
   remove_member( victim );
-  STRFREE(victim->pcdata->clan_name);
-  victim->pcdata->clan_name = STRALLOC( "" );
+  DISPOSE(victim->pcdata->clan_name);
+  victim->pcdata->clan_name = str_dup( "" );
   act( AT_MAGIC, "You outcast $N from $t", ch, clan->name, victim, TO_CHAR );
   act( AT_MAGIC, "$n outcasts $N from $t", ch, clan->name, victim, TO_ROOM );
   act( AT_MAGIC, "$n outcasts you from $t", ch, clan->name, victim, TO_VICT );

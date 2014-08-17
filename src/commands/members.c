@@ -30,7 +30,7 @@ void do_members( Character *ch, char *argument )
       MEMBER_LIST *members_list;
 
       CREATE( members_list, MEMBER_LIST, 1 );
-      members_list->name = STRALLOC( argument );
+      members_list->name = str_dup( argument );
       LINK( members_list, first_member_list, last_member_list, next, prev );
       save_member_list( members_list );
       ch_printf( ch, "Member lists \"%s\" created.\r\n", argument );
@@ -48,13 +48,13 @@ void do_members( Character *ch, char *argument )
 	    while( members_list->first_member )
               {
                 member = members_list->first_member;
-                STRFREE( member->name );
-                STRFREE( member->since );
+                DISPOSE( member->name );
+                DISPOSE( member->since );
                 UNLINK( member, members_list->first_member, members_list->last_member, next, prev);
                 DISPOSE( member );
               }
 
-            STRFREE( members_list->name );
+            DISPOSE( members_list->name );
             UNLINK( members_list, first_member_list, last_member_list, next, prev );
             DISPOSE( members_list );
             ch_printf( ch, "Member list \"%s\" destroyed.\r\n", argument );

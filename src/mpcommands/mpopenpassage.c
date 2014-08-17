@@ -84,8 +84,8 @@ void do_mp_open_passage( Character *ch, char *argument )
     }
 
   pexit = make_exit( fromRoom, targetRoom, exit_num );
-  pexit->keyword                = STRALLOC( "" );
-  pexit->description            = STRALLOC( "" );
+  pexit->keyword                = str_dup( "" );
+  pexit->description            = str_dup( "" );
   pexit->key                    = -1;
   pexit->exit_info              = EX_PASSAGE;
 }

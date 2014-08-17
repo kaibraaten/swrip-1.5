@@ -18,11 +18,11 @@ void do_makespaceobject( Character *ch, char *argument )
   CREATE( spaceobject, Spaceobject, 1 );
   LINK( spaceobject, first_spaceobject, last_spaceobject, next, prev );
 
-  spaceobject->name      = STRALLOC( argument );
+  spaceobject->name      = str_dup( argument );
 
-  spaceobject->landing_site.locationa = STRALLOC( "" );
-  spaceobject->landing_site.locationb = STRALLOC( "" );
-  spaceobject->landing_site.locationc = STRALLOC( "" );
+  spaceobject->landing_site.locationa = str_dup( "" );
+  spaceobject->landing_site.locationb = str_dup( "" );
+  spaceobject->landing_site.locationc = str_dup( "" );
 
   argument = one_argument( argument, arg );
   sprintf( filename, "%s" , strlower(arg) );

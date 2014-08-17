@@ -230,8 +230,8 @@ HelpFile *CreateHelpFile( char *keyword, short level )
 
 void DestroyHelpFile( HelpFile *help )
 {
-  STRFREE( help->keyword );
-  STRFREE( help->text );
+  DISPOSE( help->keyword );
+  DISPOSE( help->text );
   DISPOSE( help );
 }
 
@@ -280,10 +280,10 @@ void SetHelpFileKeyword( HelpFile *help, char *keyword )
 {
   if( help->keyword )
     {
-      STRFREE( help->keyword );
+      DISPOSE( help->keyword );
     }
 
-  help->keyword = STRALLOC( strupper( keyword ) );
+  help->keyword = str_dup( strupper( keyword ) );
 }
 
 char *GetHelpFileText( const HelpFile *help )
@@ -295,9 +295,9 @@ void SetHelpFileText( HelpFile *help, char *text )
 {
   if( help->text )
     {
-      STRFREE( help->text );
+      DISPOSE( help->text );
     }
 
-  help->text = STRALLOC( text );
+  help->text = str_dup( text );
 }
 

@@ -104,7 +104,7 @@ void load_bounties( void )
         break;
       CREATE( bounty, BOUNTY_DATA, 1 );
       LINK( bounty, first_disintegration, last_disintegration, next, prev );
-      bounty->target = STRALLOC(target);
+      bounty->target = str_dup(target);
 
       amount = fread_number( fpList );
       bounty->amount = amount;
@@ -113,7 +113,7 @@ void load_bounties( void )
       if ( poster[0] == '$' )
         break;
 
-      bounty->poster = STRALLOC(poster);
+      bounty->poster = str_dup(poster);
 
     }
 
@@ -143,9 +143,9 @@ void disintegration ( const Character *ch , const Character *victim , long amoun
       CREATE( bounty, BOUNTY_DATA, 1 );
       LINK( bounty, first_disintegration, last_disintegration, next, prev );
 
-      bounty->target = STRALLOC( victim->name );
+      bounty->target = str_dup( victim->name );
       bounty->amount = 0;
-      bounty->poster = STRALLOC( ch->name );
+      bounty->poster = str_dup( ch->name );
     }
 
   bounty->amount = bounty->amount + amount;
@@ -174,8 +174,8 @@ void disintegration ( const Character *ch , const Character *victim , long amoun
 void remove_disintegration( BOUNTY_DATA *bounty )
 {
   UNLINK( bounty, first_disintegration, last_disintegration, next, prev );
-  STRFREE( bounty->target );
-  STRFREE( bounty->poster );
+  DISPOSE( bounty->target );
+  DISPOSE( bounty->poster );
   DISPOSE( bounty );
 
   save_disintegrations();

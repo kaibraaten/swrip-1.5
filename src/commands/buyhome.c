@@ -48,8 +48,8 @@ void do_buyhome( Character *ch, char *argument )
       return;
     }
 
-  STRFREE( room->name );
-  room->name = STRALLOC( argument );
+  DISPOSE( room->name );
+  room->name = str_dup( argument );
 
   ch->gold -= 100000;
 

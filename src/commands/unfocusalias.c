@@ -16,5 +16,5 @@ void do_unfocusalias(Character *ch, char *argument)
     }
 
   send_to_char("You remove your current alias focus.\r\n", ch);
-  ch->pcdata->target = STRALLOC("");
+  ch->pcdata->target = str_dup("");
 }

@@ -73,7 +73,7 @@ void do_cset( Character *ch, char *argument )
 
   if (!str_prefix( arg, "guild_overseer" ) )
     {
-      STRFREE( sysdata.guild_overseer );
+      DISPOSE( sysdata.guild_overseer );
       sysdata.guild_overseer = str_dup( argument );
       send_to_char("Ok.\r\n", ch);
       return;
@@ -81,7 +81,7 @@ void do_cset( Character *ch, char *argument )
 
   if (!str_prefix( arg, "guild_advisor" ) )
     {
-      STRFREE( sysdata.guild_advisor );
+      DISPOSE( sysdata.guild_advisor );
       sysdata.guild_advisor = str_dup( argument );
       send_to_char("Ok.\r\n", ch);
       return;

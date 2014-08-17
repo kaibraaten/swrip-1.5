@@ -33,8 +33,8 @@ void do_renameship( Character *ch, char *argument )
     }
 
   ch->gold -= 50000;
-  STRFREE( ship->personalname );
-  ship->personalname            = STRALLOC( argument );
+  DISPOSE( ship->personalname );
+  ship->personalname            = str_dup( argument );
   SaveShip( ship );
   send_to_char( "&RImperial Database: &WTransaction Complete. Name changed.", ch );
 }

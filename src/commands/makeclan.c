@@ -20,10 +20,10 @@ void do_makeclan( Character *ch, char *argument )
   clan->last_subclan = NULL;
   clan->first_subclan = NULL;
   clan->mainclan     = NULL;
-  clan->name            = STRALLOC( argument );
-  clan->description     = STRALLOC( "" );
-  clan->leadership.leader  = STRALLOC( "" );
-  clan->leadership.number1 = STRALLOC( "" );
-  clan->leadership.number2 = STRALLOC( "" );
-  clan->tmpstr  = STRALLOC( "" );
+  clan->name            = str_dup( argument );
+  clan->description     = str_dup( "" );
+  clan->leadership.leader  = str_dup( "" );
+  clan->leadership.number1 = str_dup( "" );
+  clan->leadership.number2 = str_dup( "" );
+  clan->tmpstr  = str_dup( "" );
 }

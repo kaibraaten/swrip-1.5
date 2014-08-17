@@ -736,7 +736,7 @@ void load_area( FILE *fp )
 
   CREATE( pArea, Area, 1 );
   pArea->name           = fread_string_nohash( fp );
-  pArea->author       = STRALLOC( "unknown" );
+  pArea->author       = str_dup( "unknown" );
   pArea->filename       = str_dup( strArea );
   pArea->age            = 15;
   pArea->hi_soft_range  = MAX_LEVEL;
@@ -767,7 +767,7 @@ void load_author( Area *tarea, FILE *fp )
     }
 
   if ( tarea->author )
-    STRFREE( tarea->author );
+    DISPOSE( tarea->author );
 
   tarea->author   = fread_string( fp );
 }
@@ -2161,10 +2161,10 @@ Character *create_mobile( ProtoMobile *pMobIndex )
   mob->pIndexData               = pMobIndex;
 
   mob->editor                   = NULL;
-  mob->name                     = QUICKLINK( pMobIndex->player_name );
-  mob->short_descr              = QUICKLINK( pMobIndex->short_descr );
-  mob->long_descr               = QUICKLINK( pMobIndex->long_descr  );
-  mob->description              = QUICKLINK( pMobIndex->description );
+  mob->name                     = str_dup( pMobIndex->player_name );
+  mob->short_descr              = str_dup( pMobIndex->short_descr );
+  mob->long_descr               = str_dup( pMobIndex->long_descr  );
+  mob->description              = str_dup( pMobIndex->description );
   mob->spec_fun         = pMobIndex->spec_fun;
   mob->spec_2           = pMobIndex->spec_2;
   mob->mprog.mpscriptpos              = 0;
@@ -2179,7 +2179,7 @@ Character *create_mobile( ProtoMobile *pMobIndex )
   mob->alignment                = pMobIndex->alignment;
   mob->sex                      = pMobIndex->sex;
   mob->ability.main             = 0;
-  mob->mob_clan               = STRALLOC( "" );
+  mob->mob_clan               = str_dup( "" );
   mob->was_sentinel           = NULL;
   mob->plr_home               = NULL;
   mob->guard_data             = NULL;
@@ -2270,11 +2270,11 @@ OBJ_DATA *create_object( OBJ_INDEX_DATA *pObjIndex, int level )
   cur_obj_serial = umax((cur_obj_serial + 1 ) & (BV30-1), 1);
   obj->serial = obj->pIndexData->serial = cur_obj_serial;
 
-  obj->armed_by       = STRALLOC( "" );
-  obj->name             = QUICKLINK( pObjIndex->name     );
-  obj->short_descr      = QUICKLINK( pObjIndex->short_descr );
-  obj->description      = QUICKLINK( pObjIndex->description );
-  obj->action_desc      = QUICKLINK( pObjIndex->action_desc );
+  obj->armed_by       = str_dup( "" );
+  obj->name             = str_dup( pObjIndex->name     );
+  obj->short_descr      = str_dup( pObjIndex->short_descr );
+  obj->description      = str_dup( pObjIndex->description );
+  obj->action_desc      = str_dup( pObjIndex->action_desc );
   obj->item_type        = pObjIndex->item_type;
   obj->extra_flags      = pObjIndex->extra_flags;
   obj->wear_flags       = pObjIndex->wear_flags;
@@ -2562,10 +2562,10 @@ void free_char( Character *ch )
   while ( (timer = ch->first_timer) != NULL )
     extract_timer( ch, timer );
 
-  STRFREE( ch->name             );
-  STRFREE( ch->short_descr      );
-  STRFREE( ch->long_descr       );
-  STRFREE( ch->description      );
+  DISPOSE( ch->name             );
+  DISPOSE( ch->short_descr      );
+  DISPOSE( ch->long_descr       );
+  DISPOSE( ch->description      );
 
   if ( ch->editor )
     StopEditing( ch );
@@ -2586,20 +2586,20 @@ void free_char( Character *ch )
 	  FreeCraftingSession( ch->pcdata->CraftingSession );
 	}
 
-      STRFREE( ch->pcdata->clan_name    );
+      DISPOSE( ch->pcdata->clan_name    );
       DISPOSE( ch->pcdata->pwd  );  /* no hash */
       DISPOSE( ch->pcdata->email        );  /* no hash */
       DISPOSE( ch->pcdata->bamfin       );  /* no hash */
       DISPOSE( ch->pcdata->bamfout      );  /* no hash */
       DISPOSE( ch->pcdata->rank );
-      STRFREE( ch->pcdata->title        );
-      STRFREE( ch->pcdata->bio  );
+      DISPOSE( ch->pcdata->title        );
+      DISPOSE( ch->pcdata->bio  );
       DISPOSE( ch->pcdata->bestowments ); /* no hash */
       DISPOSE( ch->pcdata->homepage     );  /* no hash */
-      STRFREE( ch->pcdata->authed_by    );
-      STRFREE( ch->pcdata->prompt       );
+      DISPOSE( ch->pcdata->authed_by    );
+      DISPOSE( ch->pcdata->prompt       );
       if ( ch->pcdata->subprompt )
-        STRFREE( ch->pcdata->subprompt );
+        DISPOSE( ch->pcdata->subprompt );
       FreeAliases( ch );
 #ifdef SWRIP_USE_IMC
       imc_freechardata( ch );
@@ -2617,11 +2617,11 @@ void free_char( Character *ch )
     for ( comments = ch->pcdata->comments; comments; comments = comments_next )
       {
         comments_next = comments->next;
-        STRFREE( comments->text    );
-        STRFREE( comments->to_list );
-        STRFREE( comments->subject );
-        STRFREE( comments->sender  );
-        STRFREE( comments->date    );
+        DISPOSE( comments->text    );
+        DISPOSE( comments->to_list );
+        DISPOSE( comments->subject );
+        DISPOSE( comments->sender  );
+        DISPOSE( comments->date    );
         DISPOSE( comments          );
       }
   DISPOSE( ch );
@@ -3797,8 +3797,8 @@ bool delete_room( Room *room )
     }
 
   /* Free up the ram for all strings attached to the room. */
-  STRFREE( room->name );
-  STRFREE( room->description );
+  DISPOSE( room->name );
+  DISPOSE( room->description );
 
   /* Free up the ram held by the room index itself. */
   free( room );
@@ -3838,8 +3838,8 @@ Room *make_room( vnum_t vnum )
   pRoomIndex->last_ship         = NULL;
   pRoomIndex->area              = NULL;
   pRoomIndex->vnum              = vnum;
-  pRoomIndex->name              = STRALLOC("Floating in a void");
-  pRoomIndex->description               = STRALLOC("");
+  pRoomIndex->name              = str_dup("Floating in a void");
+  pRoomIndex->description               = str_dup("");
   pRoomIndex->room_flags                = ROOM_PROTOTYPE;
   pRoomIndex->sector_type               = 1;
   pRoomIndex->light             = 0;
@@ -3872,15 +3872,15 @@ OBJ_INDEX_DATA *make_object( vnum_t vnum, vnum_t cvnum, char *name )
   CREATE( pObjIndex, OBJ_INDEX_DATA, 1 );
 
   pObjIndex->vnum = vnum;
-  pObjIndex->name = STRALLOC( name );
+  pObjIndex->name = str_dup( name );
 
   if ( !cObjIndex )
     {
       sprintf( buf, "A %s", name );
-      pObjIndex->short_descr    = STRALLOC( buf  );
+      pObjIndex->short_descr    = str_dup( buf  );
       sprintf( buf, "A %s is here.", name );
-      pObjIndex->description    = STRALLOC( buf );
-      pObjIndex->action_desc    = STRALLOC( "" );
+      pObjIndex->description    = str_dup( buf );
+      pObjIndex->action_desc    = str_dup( "" );
       pObjIndex->short_descr[0] = LOWER(pObjIndex->short_descr[0]);
       pObjIndex->description[0] = UPPER(pObjIndex->description[0]);
       pObjIndex->item_type      = ITEM_TRASH;
@@ -3893,9 +3893,9 @@ OBJ_INDEX_DATA *make_object( vnum_t vnum, vnum_t cvnum, char *name )
       Affect *paf = NULL, *cpaf = NULL;
       int oval = 0;
 
-      pObjIndex->short_descr    = QUICKLINK( cObjIndex->short_descr );
-      pObjIndex->description    = QUICKLINK( cObjIndex->description );
-      pObjIndex->action_desc    = QUICKLINK( cObjIndex->action_desc );
+      pObjIndex->short_descr    = str_dup( cObjIndex->short_descr );
+      pObjIndex->description    = str_dup( cObjIndex->description );
+      pObjIndex->action_desc    = str_dup( cObjIndex->action_desc );
       pObjIndex->item_type      = cObjIndex->item_type;
       pObjIndex->extra_flags    = cObjIndex->extra_flags | ITEM_PROTOTYPE;
       pObjIndex->wear_flags     = cObjIndex->wear_flags;
@@ -3911,8 +3911,8 @@ OBJ_INDEX_DATA *make_object( vnum_t vnum, vnum_t cvnum, char *name )
       for ( ced = cObjIndex->first_extradesc; ced; ced = ced->next )
         {
           CREATE( ed, ExtraDescription, 1 );
-          ed->keyword           = QUICKLINK( ced->keyword );
-          ed->description               = QUICKLINK( ced->description );
+          ed->keyword           = str_dup( ced->keyword );
+          ed->description               = str_dup( ced->description );
           LINK( ed, pObjIndex->first_extradesc, pObjIndex->last_extradesc,
                 next, prev );
           top_ed++;
@@ -3958,14 +3958,14 @@ ProtoMobile *make_mobile( vnum_t vnum, vnum_t cvnum, char *name )
   pMobIndex->vnum                       = vnum;
   pMobIndex->count              = 0;
   pMobIndex->killed             = 0;
-  pMobIndex->player_name                = STRALLOC( name );
+  pMobIndex->player_name                = str_dup( name );
   if ( !cMobIndex )
     {
       sprintf( buf, "A newly created %s", name );
-      pMobIndex->short_descr    = STRALLOC( buf  );
+      pMobIndex->short_descr    = str_dup( buf  );
       sprintf( buf, "Some god abandoned a newly created %s here.\r\n", name );
-      pMobIndex->long_descr             = STRALLOC( buf );
-      pMobIndex->description    = STRALLOC( "" );
+      pMobIndex->long_descr             = str_dup( buf );
+      pMobIndex->description    = str_dup( "" );
       pMobIndex->short_descr[0] = LOWER(pMobIndex->short_descr[0]);
       pMobIndex->long_descr[0]  = UPPER(pMobIndex->long_descr[0]);
       pMobIndex->description[0] = UPPER(pMobIndex->description[0]);
@@ -4010,9 +4010,9 @@ ProtoMobile *make_mobile( vnum_t vnum, vnum_t cvnum, char *name )
     }
   else
     {
-      pMobIndex->short_descr    = QUICKLINK( cMobIndex->short_descr );
-      pMobIndex->long_descr             = QUICKLINK( cMobIndex->long_descr  );
-      pMobIndex->description    = QUICKLINK( cMobIndex->description );
+      pMobIndex->short_descr    = str_dup( cMobIndex->short_descr );
+      pMobIndex->long_descr             = str_dup( cMobIndex->long_descr  );
+      pMobIndex->description    = str_dup( cMobIndex->description );
       pMobIndex->act            = cMobIndex->act | ACT_PROTOTYPE;
       pMobIndex->affected_by    = cMobIndex->affected_by;
       pMobIndex->pShop          = NULL;
@@ -4262,7 +4262,7 @@ void load_area_file( Area *tarea, char *filename )
                tarea->low_o_vnum, tarea->hi_o_vnum,
                tarea->low_m_vnum, tarea->hi_m_vnum );
       if ( !tarea->author )
-        tarea->author = STRALLOC( "" );
+        tarea->author = str_dup( "" );
       SET_BIT( tarea->status, AREA_LOADED );
     }
   else
@@ -4356,7 +4356,7 @@ void load_buildlist( void )
 #endif
               CREATE( pArea, Area, 1 );
               sprintf( buf, "%s.are", dentry->d_name );
-              pArea->author = STRALLOC( dentry->d_name );
+              pArea->author = str_dup( dentry->d_name );
               pArea->filename = str_dup( buf );
 #if !defined(READ_AREA)
               pArea->name = fread_string_nohash( fp );

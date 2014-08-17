@@ -208,8 +208,8 @@ void do_setspaceobject( Character *ch, char *argument )
 
   if ( !str_cmp( arg2, "name" ) )
     {
-      STRFREE( spaceobject->name );
-      spaceobject->name = STRALLOC( argument );
+      DISPOSE( spaceobject->name );
+      spaceobject->name = str_dup( argument );
       send_to_char( "Done.\r\n", ch );
       save_spaceobject( spaceobject );
       return;
@@ -226,24 +226,24 @@ void do_setspaceobject( Character *ch, char *argument )
 
   if ( !str_cmp( arg2, "locationa" ) )
     {
-      STRFREE( spaceobject->landing_site.locationa );
-      spaceobject->landing_site.locationa = STRALLOC( argument );
+      DISPOSE( spaceobject->landing_site.locationa );
+      spaceobject->landing_site.locationa = str_dup( argument );
       send_to_char( "Done.\r\n", ch );
       save_spaceobject( spaceobject );
       return;
     }
   if ( !str_cmp( arg2, "locationb" ) )
     {
-      STRFREE( spaceobject->landing_site.locationb );
-      spaceobject->landing_site.locationb = STRALLOC( argument );
+      DISPOSE( spaceobject->landing_site.locationb );
+      spaceobject->landing_site.locationb = str_dup( argument );
       send_to_char( "Done.\r\n", ch );
       save_spaceobject( spaceobject );
       return;
     }
   if ( !str_cmp( arg2, "locationc" ) )
     {
-      STRFREE( spaceobject->landing_site.locationc );
-      spaceobject->landing_site.locationc = STRALLOC( argument );
+      DISPOSE( spaceobject->landing_site.locationc );
+      spaceobject->landing_site.locationc = str_dup( argument );
       send_to_char( "Done.\r\n", ch );
       save_spaceobject( spaceobject );
       return;

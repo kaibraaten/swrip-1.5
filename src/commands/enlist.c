@@ -37,8 +37,8 @@ void do_enlist( Character *ch, char *argument )
             }
           SET_BIT( ch->speaks, LANG_CLAN );
           ++clan->members;
-          STRFREE( ch->pcdata->clan_name );
-          ch->pcdata->clan_name = QUICKLINK( clan->name );
+          DISPOSE( ch->pcdata->clan_name );
+          ch->pcdata->clan_name = str_dup( clan->name );
           ch->pcdata->clan = clan;
           ch_printf( ch, "Welcome to %s.\r\n", clan->name );
           update_member( ch );

@@ -94,18 +94,18 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   SET_BIT( glowrod->wear_flags, ITEM_TAKE );
   glowrod->weight = 3;
 
-  STRFREE( glowrod->name );
+  DISPOSE( glowrod->name );
   strcpy( buf, ud->ItemName );
   strcat( buf, " glowrod");
-  glowrod->name = STRALLOC( buf );
+  glowrod->name = str_dup( buf );
 
   strcpy( buf, ud->ItemName );
-  STRFREE( glowrod->short_descr );
-  glowrod->short_descr = STRALLOC( buf );
+  DISPOSE( glowrod->short_descr );
+  glowrod->short_descr = str_dup( buf );
 
-  STRFREE( glowrod->description );
+  DISPOSE( glowrod->description );
   strcat( buf, " was carelessly misplaced here." );
-  glowrod->description = STRALLOC( capitalize( buf ) );
+  glowrod->description = str_dup( capitalize( buf ) );
 
   glowrod->value[OVAL_LIGHT_POWER] = ud->Charge;
   glowrod->cost = glowrod->value[OVAL_LIGHT_POWER];

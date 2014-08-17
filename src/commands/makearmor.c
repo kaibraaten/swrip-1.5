@@ -114,15 +114,15 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *even
   SET_BIT( armor->wear_flags, ITEM_TAKE );
   SET_BIT( armor->wear_flags, ud->WearLocation );
 
-  STRFREE( armor->name );
-  armor->name = STRALLOC( ud->ItemName );
+  DISPOSE( armor->name );
+  armor->name = str_dup( ud->ItemName );
 
-  STRFREE( armor->short_descr );
-  armor->short_descr = STRALLOC( ud->ItemName );
+  DISPOSE( armor->short_descr );
+  armor->short_descr = str_dup( ud->ItemName );
 
-  STRFREE( armor->description );
+  DISPOSE( armor->description );
   sprintf( description, "%s was dropped here.", capitalize( ud->ItemName ) );
-  armor->description = STRALLOC( description );
+  armor->description = str_dup( description );
 
   armor->value[OVAL_ARMOR_CONDITION] = armor->value[OVAL_ARMOR_AC] = ud->ArmorValue;
   armor->cost *= 10;

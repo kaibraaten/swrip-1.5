@@ -87,7 +87,7 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   SET_BIT( weapon->wear_flags, ITEM_TAKE );
   weapon->weight = 3;
 
-  STRFREE( weapon->name );
+  DISPOSE( weapon->name );
   strcpy( buf, ud->ItemName );
 
   if (!ud->HasStaff )
@@ -99,15 +99,15 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
       strcat( buf, " force pike" );
     }
 
-  weapon->name = STRALLOC( buf );
+  weapon->name = str_dup( buf );
 
   strcpy( buf, ud->ItemName );
-  STRFREE( weapon->short_descr );
-  weapon->short_descr = STRALLOC( buf );
+  DISPOSE( weapon->short_descr );
+  weapon->short_descr = str_dup( buf );
 
-  STRFREE( weapon->description );
+  DISPOSE( weapon->description );
   strcat( buf, " was left here." );
-  weapon->description = STRALLOC( capitalize( buf ) );
+  weapon->description = str_dup( capitalize( buf ) );
 
   CREATE( paf, Affect, 1 );
   paf->type               = -1;

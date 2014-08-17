@@ -738,7 +738,7 @@ static void nanny_read_motd( Descriptor *d, char *argument )
       OBJ_DATA *obj;
       int iLang;
 
-      ch->pcdata->clan_name = STRALLOC( "" );
+      ch->pcdata->clan_name = str_dup( "" );
       ch->pcdata->clan        = NULL;
 
       ch->stats.perm_lck = number_range(6, 20);
@@ -775,7 +775,7 @@ static void nanny_read_motd( Descriptor *d, char *argument )
             if (ch->race == RACE_NOGHRI )
             {
             ch->pcdata->clan = get_clan( "The Death Commandos");
-            ch->pcdata->clan_name = QUICKLINK( ch->pcdata->clan->name );
+            ch->pcdata->clan_name = str_dup( ch->pcdata->clan->name );
             }
       */
       /* took out automaticly knowing common
@@ -896,7 +896,7 @@ if ( (iLang = skill_lookup( "common" )) < 0 )
 	  SET_BIT(ch->pcdata->flags, PCFLAG_UNAUTHED);
 	}
       /* Display_prompt interprets blank as default */
-      ch->pcdata->prompt = STRALLOC("");
+      ch->pcdata->prompt = str_dup("");
     }
   else if ( !IsImmortal(ch) && ch->pcdata->release_date > current_time )
     {

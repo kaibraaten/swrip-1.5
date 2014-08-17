@@ -35,12 +35,12 @@ void do_copyship( Character *ch, char *argument )
       ship->turret[turret_num] = AllocateTurret( ship );
     }
 
-  ship->name            = STRALLOC( argument );
-  ship->description     = STRALLOC( "" );
-  ship->owner   = STRALLOC( "" );
-  ship->copilot       = STRALLOC( "" );
-  ship->pilot         = STRALLOC( "" );
-  ship->home          = STRALLOC( "" );
+  ship->name            = str_dup( argument );
+  ship->description     = str_dup( "" );
+  ship->owner   = str_dup( "" );
+  ship->copilot       = str_dup( "" );
+  ship->pilot         = str_dup( "" );
+  ship->home          = str_dup( "" );
   ship->type          = old->type;
   ship->sclass         = old->sclass;
   ship->lasers        = old->lasers;

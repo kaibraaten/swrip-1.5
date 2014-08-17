@@ -80,19 +80,7 @@ do                                                              \
  point = NULL;                                                 \
  } while(0)
 
-#define STRALLOC(point)         str_dup((point))
-#define QUICKLINK(point)        str_dup((point))
 #define QUICKMATCH(p1, p2)      (strcmp((p1), (p2)) == 0)
-#define STRFREE(point)                                          \
-do                                                              \
-  {                                                               \
- if (!(point))                                                 \
-   {                                                             \
- bug( "Freeing null pointer" );                          \
- fprintf( stderr, "STRFREEing NULL in %s, line %d\n", __FILE__, __LINE__ ); \
-   }                                                             \
- else free((point));                                           \
- } while(0)
 
 #if defined(KEY)
 #undef KEY

@@ -154,14 +154,14 @@ void do_clone( Character *ch, char *argument )
   if ( ch->pcdata->clan_name && ch->pcdata->clan_name[0] != '\0' )
     {
       strcpy( clanname, ch->pcdata->clan_name);
-      STRFREE( ch->pcdata->clan_name );
-      ch->pcdata->clan_name = STRALLOC( "" );
+      DISPOSE( ch->pcdata->clan_name );
+      ch->pcdata->clan_name = str_dup( "" );
       strcpy( bestowments, ch->pcdata->bestowments);
       DISPOSE( ch->pcdata->bestowments );
       ch->pcdata->bestowments = str_dup( "" );
       save_clone(ch);
-      STRFREE( ch->pcdata->clan_name );
-      ch->pcdata->clan_name = STRALLOC( clanname );
+      DISPOSE( ch->pcdata->clan_name );
+      ch->pcdata->clan_name = str_dup( clanname );
       DISPOSE( ch->pcdata->bestowments );
       ch->pcdata->bestowments = str_dup( clanname );
     }

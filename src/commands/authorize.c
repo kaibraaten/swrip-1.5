@@ -38,8 +38,8 @@ void do_authorize( Character *ch, char *argument )
       victim->pcdata->auth_state = 3;
       REMOVE_BIT(victim->pcdata->flags, PCFLAG_UNAUTHED);
       if ( victim->pcdata->authed_by )
-        STRFREE( victim->pcdata->authed_by );
-      victim->pcdata->authed_by = QUICKLINK( ch->name );
+        DISPOSE( victim->pcdata->authed_by );
+      victim->pcdata->authed_by = str_dup( ch->name );
       sprintf( buf, "%s authorized %s", ch->name,
                victim->name );
       to_channel( buf, CHANNEL_MONITOR, "Monitor", ch->top_level );

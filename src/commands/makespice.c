@@ -92,18 +92,18 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   spice->value[OVAL_SPICE_GRADE] = urange(10, ud->SpiceGrade, ( IsNpc(ch) ? ch->top_level : (int) (ch->pcdata->learned[gsn_spice_refining]) ) + 10);
 
   strcpy( buf, ud->ItemName );
-  STRFREE( spice->name );
+  DISPOSE( spice->name );
   strcat( buf, " drug spice " );
   strcat( buf, get_spicetype_name( ud->SpiceType ) );
-  spice->name = STRALLOC( buf );
+  spice->name = str_dup( buf );
 
   strcpy( buf, ud->ItemName );
-  STRFREE( spice->short_descr );
-  spice->short_descr = STRALLOC( buf );
+  DISPOSE( spice->short_descr );
+  spice->short_descr = str_dup( buf );
 
   strcat( buf, " was foolishly left lying around here." );
-  STRFREE( spice->description );
-  spice->description = STRALLOC( capitalize( buf ) );
+  DISPOSE( spice->description );
+  spice->description = str_dup( capitalize( buf ) );
 
   spice->item_type = ITEM_SPICE;
   spice->value[OVAL_SPICE_TYPE] = ud->SpiceType;

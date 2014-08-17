@@ -504,7 +504,7 @@ Character *ReadVendor( FILE *fp )
 	      sprintf(vnum1,"%ld", mob->pIndexData->vnum);
 	      do_makeshop (mob, vnum1 );
 	      sprintf (buf, mob->long_descr, mob->owner);
-	      mob->long_descr = STRALLOC( buf );
+	      mob->long_descr = str_dup( buf );
 	      mob->hit = 10000;
 	      mob->max_hit = 10000;
 	      return mob;

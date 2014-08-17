@@ -120,18 +120,18 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   SET_BIT( obj->wear_flags, ITEM_TAKE );
   obj->weight = 2 + obj->level / 7;
 
-  STRFREE( obj->name );
+  DISPOSE( obj->name );
   strcpy( buf, ud->ItemName );
   strcat( buf, " bowcaster");
-  obj->name = STRALLOC( buf );
+  obj->name = str_dup( buf );
 
   strcpy( buf, ud->ItemName );
-  STRFREE( obj->short_descr );
-  obj->short_descr = STRALLOC( buf );
+  DISPOSE( obj->short_descr );
+  obj->short_descr = str_dup( buf );
 
-  STRFREE( obj->description );
+  DISPOSE( obj->description );
   strcat( buf, " was carefully placed here." );
-  obj->description = STRALLOC( capitalize( buf ) );
+  obj->description = str_dup( capitalize( buf ) );
 
   CREATE( hitroll, Affect, 1 );
   hitroll->type      = -1;

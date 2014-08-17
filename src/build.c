@@ -213,7 +213,7 @@ void assign_area( Character *ch )
           tarea->name           = str_dup( buf );
           tarea->filename       = str_dup( taf );
           sprintf( buf2, "%s", ch->name );
-          tarea->author         = STRALLOC( buf2 );
+          tarea->author         = str_dup( buf2 );
           tarea->age            = 0;
           tarea->nplayer        = 0;
 
@@ -249,8 +249,8 @@ ExtraDescription *SetRExtra( Room *room, char *keywords )
     {
       CREATE( ed, ExtraDescription, 1 );
       LINK( ed, room->first_extradesc, room->last_extradesc, next, prev );
-      ed->keyword       = STRALLOC( keywords );
-      ed->description   = STRALLOC( "" );
+      ed->keyword       = str_dup( keywords );
+      ed->description   = str_dup( "" );
       top_ed++;
     }
   return ed;
@@ -268,8 +268,8 @@ bool DelRExtra( Room *room, char *keywords )
   if ( !rmed )
     return false;
   UNLINK( rmed, room->first_extradesc, room->last_extradesc, next, prev );
-  STRFREE( rmed->keyword );
-  STRFREE( rmed->description );
+  DISPOSE( rmed->keyword );
+  DISPOSE( rmed->description );
   DISPOSE( rmed );
   top_ed--;
   return true;
@@ -288,8 +288,8 @@ ExtraDescription *SetOExtra( OBJ_DATA *obj, char *keywords )
     {
       CREATE( ed, ExtraDescription, 1 );
       LINK( ed, obj->first_extradesc, obj->last_extradesc, next, prev );
-      ed->keyword       = STRALLOC( keywords );
-      ed->description   = STRALLOC( "" );
+      ed->keyword       = str_dup( keywords );
+      ed->description   = str_dup( "" );
       top_ed++;
     }
   return ed;
@@ -307,8 +307,8 @@ bool DelOExtra( OBJ_DATA *obj, char *keywords )
   if ( !rmed )
     return false;
   UNLINK( rmed, obj->first_extradesc, obj->last_extradesc, next, prev );
-  STRFREE( rmed->keyword );
-  STRFREE( rmed->description );
+  DISPOSE( rmed->keyword );
+  DISPOSE( rmed->description );
   DISPOSE( rmed );
   top_ed--;
   return true;
@@ -327,8 +327,8 @@ ExtraDescription *SetOExtraProto( OBJ_INDEX_DATA *obj, char *keywords )
     {
       CREATE( ed, ExtraDescription, 1 );
       LINK( ed, obj->first_extradesc, obj->last_extradesc, next, prev );
-      ed->keyword       = STRALLOC( keywords );
-      ed->description   = STRALLOC( "" );
+      ed->keyword       = str_dup( keywords );
+      ed->description   = str_dup( "" );
       top_ed++;
     }
   return ed;
@@ -346,8 +346,8 @@ bool DelOExtraProto( OBJ_INDEX_DATA *obj, char *keywords )
   if ( !rmed )
     return false;
   UNLINK( rmed, obj->first_extradesc, obj->last_extradesc, next, prev );
-  STRFREE( rmed->keyword );
-  STRFREE( rmed->description );
+  DISPOSE( rmed->keyword );
+  DISPOSE( rmed->description );
   DISPOSE( rmed );
   top_ed--;
   return true;
@@ -1052,10 +1052,10 @@ void mpedit( Character *ch, MPROG_DATA *mprg, int mptype, char *argument )
 
       if ( mprg->arglist )
 	{
-	  STRFREE( mprg->arglist );
+	  DISPOSE( mprg->arglist );
 	}
 
-      mprg->arglist = STRALLOC( argument );
+      mprg->arglist = str_dup( argument );
     }
 
   ch->substate = SUB_MPROG_EDIT;
@@ -1063,7 +1063,7 @@ void mpedit( Character *ch, MPROG_DATA *mprg, int mptype, char *argument )
 
   if ( !mprg->comlist )
     {
-      mprg->comlist = STRALLOC( "" );
+      mprg->comlist = str_dup( "" );
     }
 
   StartEditing( ch, mprg->comlist );
@@ -1081,10 +1081,10 @@ void rpedit( Character *ch, MPROG_DATA *mprg, int mptype, char *argument )
 
       if ( mprg->arglist )
 	{
-	  STRFREE( mprg->arglist );
+	  DISPOSE( mprg->arglist );
 	}
 
-      mprg->arglist = STRALLOC( argument );
+      mprg->arglist = str_dup( argument );
     }
 
   ch->substate = SUB_MPROG_EDIT;
@@ -1092,7 +1092,7 @@ void rpedit( Character *ch, MPROG_DATA *mprg, int mptype, char *argument )
 
   if(!mprg->comlist)
     {
-      mprg->comlist = STRALLOC("");
+      mprg->comlist = str_dup("");
     }
 
   StartEditing( ch, mprg->comlist );

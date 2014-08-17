@@ -57,8 +57,8 @@ void do_hset( Character *ch, char *argument )
 
   if ( !str_cmp( arg1, "keyword" ) )
     {
-      STRFREE( pHelp->keyword );
-      pHelp->keyword = STRALLOC( strupper(arg2) );
+      DISPOSE( pHelp->keyword );
+      pHelp->keyword = str_dup( strupper(arg2) );
       send_to_char( "Done.\r\n", ch );
       return;
     }

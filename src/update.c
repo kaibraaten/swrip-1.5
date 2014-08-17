@@ -1915,8 +1915,8 @@ void obj_update( void )
 			   capitalize( bufptr ) );
 		}
 
-              STRFREE( obj->description );
-              obj->description = STRALLOC( buf );
+              DISPOSE( obj->description );
+              obj->description = str_dup( buf );
             }
         }
 

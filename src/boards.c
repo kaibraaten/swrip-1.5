@@ -180,11 +180,11 @@ void note_attach( Character *ch )
     return;
 
   CREATE( pnote, NOTE_DATA, 1 );
-  pnote->sender = QUICKLINK( ch->name );
-  pnote->date           = STRALLOC( "" );
-  pnote->to_list        = STRALLOC( "" );
-  pnote->subject        = STRALLOC( "" );
-  pnote->text           = STRALLOC( "" );
+  pnote->sender = str_dup( ch->name );
+  pnote->date           = str_dup( "" );
+  pnote->to_list        = str_dup( "" );
+  pnote->subject        = str_dup( "" );
+  pnote->text           = str_dup( "" );
   ch->pcdata->pnote     = pnote;
 }
 
@@ -227,11 +227,11 @@ void write_board( BOARD_DATA *board )
 
 void free_note( NOTE_DATA *pnote )
 {
-  STRFREE( pnote->text    );
-  STRFREE( pnote->subject );
-  STRFREE( pnote->to_list );
-  STRFREE( pnote->date    );
-  STRFREE( pnote->sender  );
+  DISPOSE( pnote->text    );
+  DISPOSE( pnote->subject );
+  DISPOSE( pnote->to_list );
+  DISPOSE( pnote->date    );
+  DISPOSE( pnote->sender  );
 
   if ( pnote->yesvotes )
     DISPOSE( pnote->yesvotes );
@@ -324,7 +324,7 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
         }
 
       ed = (ExtraDescription*)ch->dest_buf;
-      STRFREE( ed->description );
+      DISPOSE( ed->description );
       ed->description = CopyBuffer( ch );
       StopEditing( ch );
       return;
@@ -748,8 +748,8 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
         {
           paper->value[OVAL_PAPER_1] = 1;
           ed = SetOExtra(paper, "_subject_");
-          STRFREE( ed->description );
-          ed->description = STRALLOC( arg_passed );
+          DISPOSE( ed->description );
+          ed->description = str_dup( arg_passed );
           send_to_char("Ok.\r\n", ch);
           return;
         }
@@ -812,8 +812,8 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
         {
           paper->value[OVAL_PAPER_2] = 1;
           ed = SetOExtra(paper, "_to_");
-          STRFREE( ed->description );
-          ed->description = STRALLOC( arg_passed );
+          DISPOSE( ed->description );
+          ed->description = str_dup( arg_passed );
           send_to_char("Ok.\r\n",ch);
           return;
         }
@@ -873,8 +873,8 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
           send_to_char("This message has no subject... using 'none'.\r\n", ch);
           paper->value[OVAL_PAPER_1] = 1;
           ed = SetOExtra(paper, "_subject_");
-          STRFREE( ed->description );
-          ed->description = STRALLOC( "none" );
+          DISPOSE( ed->description );
+          ed->description = str_dup( "none" );
         }
 
       if (paper->value[OVAL_PAPER_2] == 0)
@@ -889,8 +889,8 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
               send_to_char("This message is addressed to no one... sending to 'all'!\r\n", ch);
               paper->value[OVAL_PAPER_2] = 1;
               ed = SetOExtra(paper, "_to_");
-              STRFREE( ed->description );
-              ed->description = STRALLOC( "All" );
+              DISPOSE( ed->description );
+              ed->description = str_dup( "All" );
             }
         }
 
@@ -917,15 +917,15 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
       strtime                           = ctime( &current_time );
       strtime[strlen(strtime)-1]        = '\0';
       CREATE( pnote, NOTE_DATA, 1 );
-      pnote->date                       = STRALLOC( strtime );
+      pnote->date                       = str_dup( strtime );
 
       text = get_extra_descr( "_text_", paper->first_extradesc );
-      pnote->text = text ? STRALLOC( text ) : STRALLOC( "" );
+      pnote->text = text ? str_dup( text ) : str_dup( "" );
       text = get_extra_descr( "_to_", paper->first_extradesc );
-      pnote->to_list = text ? STRALLOC( text ) : STRALLOC( "all" );
+      pnote->to_list = text ? str_dup( text ) : str_dup( "all" );
       text = get_extra_descr( "_subject_", paper->first_extradesc );
-      pnote->subject = text ? STRALLOC( text ) : STRALLOC( "" );
-      pnote->sender  = QUICKLINK( ch->name );
+      pnote->subject = text ? str_dup( text ) : str_dup( "" );
+      pnote->sender  = str_dup( ch->name );
       pnote->voting      = 0;
       pnote->yesvotes    = str_dup( "" );
       pnote->novotes     = str_dup( "" );
@@ -1013,22 +1013,22 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
                     ch->gold -= 50;
                   paper = create_object( get_obj_index(OBJ_VNUM_NOTE), 0 );
                   ed = SetOExtra( paper, "_sender_" );
-                  STRFREE( ed->description );
-                  ed->description = QUICKLINK(pnote->sender);
+                  DISPOSE( ed->description );
+                  ed->description = str_dup(pnote->sender);
                   ed = SetOExtra( paper, "_text_" );
-                  STRFREE( ed->description );
-                  ed->description = QUICKLINK(pnote->text);
+                  DISPOSE( ed->description );
+                  ed->description = str_dup(pnote->text);
                   ed = SetOExtra( paper, "_to_" );
-                  STRFREE( ed->description );
-                  ed->description = QUICKLINK( pnote->to_list );
+                  DISPOSE( ed->description );
+                  ed->description = str_dup( pnote->to_list );
                   ed = SetOExtra( paper, "_subject_" );
-                  STRFREE( ed->description );
-                  ed->description = QUICKLINK( pnote->subject );
+                  DISPOSE( ed->description );
+                  ed->description = str_dup( pnote->subject );
                   ed = SetOExtra( paper, "_date_" );
-                  STRFREE( ed->description );
-                  ed->description = QUICKLINK( pnote->date );
+                  DISPOSE( ed->description );
+                  ed->description = str_dup( pnote->date );
                   ed = SetOExtra( paper, "note" );
-                  STRFREE( ed->description );
+                  DISPOSE( ed->description );
                   sprintf(notebuf, "From: ");
                   strcat(notebuf, pnote->sender);
                   strcat(notebuf, "\r\nTo: ");
@@ -1038,22 +1038,22 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
                   strcat(notebuf, "\r\n\r\n");
                   strcat(notebuf, pnote->text);
                   strcat(notebuf, "\r\n");
-                  ed->description = STRALLOC(notebuf);
+                  ed->description = str_dup(notebuf);
                   paper->value[OVAL_PAPER_0] = 2;
                   paper->value[OVAL_PAPER_1] = 2;
                   paper->value[OVAL_PAPER_2] = 2;
                   sprintf(short_desc_buf, "a note from %s to %s",
                           pnote->sender, pnote->to_list);
-                  STRFREE(paper->short_descr);
-                  paper->short_descr = STRALLOC(short_desc_buf);
+                  DISPOSE(paper->short_descr);
+                  paper->short_descr = str_dup(short_desc_buf);
                   sprintf(long_desc_buf, "A note from %s to %s lies on the ground.",
                           pnote->sender, pnote->to_list);
-                  STRFREE(paper->description);
-                  paper->description = STRALLOC(long_desc_buf);
+                  DISPOSE(paper->description);
+                  paper->description = str_dup(long_desc_buf);
                   sprintf(keyword_buf, "note parchment paper %s",
                           pnote->to_list);
-                  STRFREE(paper->name);
-                  paper->name = STRALLOC(keyword_buf);
+                  DISPOSE(paper->name);
+                  paper->name = str_dup(keyword_buf);
                 }
               if ( take != 2 )
                 note_remove( board, pnote );

@@ -70,19 +70,19 @@ void make_scraps( OBJ_DATA *obj )
   /* don't make scraps of scraps of scraps of ... */
   if ( obj->pIndexData->vnum == OBJ_VNUM_SCRAPS )
     {
-      STRFREE( scraps->short_descr );
-      scraps->short_descr = STRALLOC( "some debris" );
-      STRFREE( scraps->description );
-      scraps->description = STRALLOC( "Bits of debris lie on the ground here." );
+      DISPOSE( scraps->short_descr );
+      scraps->short_descr = str_dup( "some debris" );
+      DISPOSE( scraps->description );
+      scraps->description = str_dup( "Bits of debris lie on the ground here." );
     }
   else
     {
       sprintf( buf, scraps->short_descr, obj->short_descr );
-      STRFREE( scraps->short_descr );
-      scraps->short_descr = STRALLOC( buf );
+      DISPOSE( scraps->short_descr );
+      scraps->short_descr = str_dup( buf );
       sprintf( buf, scraps->description, obj->short_descr );
-      STRFREE( scraps->description );
-      scraps->description = STRALLOC( buf );
+      DISPOSE( scraps->description );
+      scraps->description = str_dup( buf );
     }
 
   if ( obj->carried_by )
@@ -201,16 +201,16 @@ void make_corpse( Character *ch )
 
   /* Added corpse name - make locate easier , other skills */
   sprintf( buf, "corpse %s", name );
-  STRFREE( corpse->name );
-  corpse->name = STRALLOC( buf );
+  DISPOSE( corpse->name );
+  corpse->name = str_dup( buf );
 
   sprintf( buf, corpse->short_descr, name );
-  STRFREE( corpse->short_descr );
-  corpse->short_descr = STRALLOC( buf );
+  DISPOSE( corpse->short_descr );
+  corpse->short_descr = str_dup( buf );
 
   sprintf( buf, corpse->description, name );
-  STRFREE( corpse->description );
-  corpse->description = STRALLOC( buf );
+  DISPOSE( corpse->description );
+  corpse->description = str_dup( buf );
 
   for ( obj = ch->first_carrying; obj; obj = obj_next )
     {
@@ -260,8 +260,8 @@ OBJ_DATA *create_money( int amount )
     {
       obj = create_object( get_obj_index( OBJ_VNUM_MONEY_SOME ), 0 );
       sprintf( buf, obj->short_descr, amount );
-      STRFREE( obj->short_descr );
-      obj->short_descr = STRALLOC( buf );
+      DISPOSE( obj->short_descr );
+      obj->short_descr = str_dup( buf );
       obj->value[OVAL_MONEY_AMOUNT]      = amount;
     }
 

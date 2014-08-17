@@ -182,33 +182,33 @@ static void fread_clan( CLAN_DATA *clan, FILE *fp )
             {
               if (!clan->name)
 		{
-		  clan->name = STRALLOC( "" );
+		  clan->name = str_dup( "" );
 		}
 
               if (!clan->leadership.leader)
 		{
-		  clan->leadership.leader = STRALLOC( "" );
+		  clan->leadership.leader = str_dup( "" );
 		}
 
               if (!clan->description)
 		{
-		  clan->description = STRALLOC( "" );
+		  clan->description = str_dup( "" );
 		}
 
               if (!clan->leadership.number1)
 		{
-		  clan->leadership.number1 = STRALLOC( "" );
+		  clan->leadership.number1 = str_dup( "" );
 		}
 
 
               if (!clan->leadership.number2)
 		{
-		  clan->leadership.number2 = STRALLOC( "" );
+		  clan->leadership.number2 = str_dup( "" );
 		}
 
               if (!clan->tmpstr)
 		{
-		  clan->tmpstr = STRALLOC( "" );
+		  clan->tmpstr = str_dup( "" );
 		}
 
               return;
@@ -346,7 +346,7 @@ static bool load_clan_file( const char *clanfile )
 
           log_string( "No memberlist found, creating new list" );
           CREATE( members_list, MEMBER_LIST, 1 );
-          members_list->name = STRALLOC( clan->name );
+          members_list->name = str_dup( clan->name );
           LINK( members_list, first_member_list, last_member_list, next, prev );
           save_member_list( members_list );
         }
@@ -657,8 +657,8 @@ void remove_member( const Character *ch )
             if( !str_cmp( member->name, ch->name ) )
               {
                 UNLINK( member, members_list->first_member, members_list->last_member, next, prev );
-                STRFREE( member->name );
-                STRFREE( member->since );
+                DISPOSE( member->name );
+                DISPOSE( member->since );
                 DISPOSE( member );
                 save_member_list( members_list );
                 break;
@@ -734,8 +734,8 @@ bool load_member_list( const char *filename )
         if( !str_cmp( word, "Member" ) )
           {
             CREATE( member, MEMBER_DATA, 1 );
-            member->name = STRALLOC( fread_word( fp ) );
-            member->since = STRALLOC( fread_word( fp ) );
+            member->name = str_dup( fread_word( fp ) );
+            member->since = str_dup( fread_word( fp ) );
             member->kills = fread_number( fp );
             member->deaths = fread_number( fp );
             member->level = fread_number( fp );
@@ -799,11 +799,11 @@ void update_member( const Character *ch )
 	      char buf[MAX_STRING_LENGTH];
 
 	      CREATE( member, MEMBER_DATA, 1 );
-	      member->name = STRALLOC( ch->name );
+	      member->name = str_dup( ch->name );
 	      member->level = ch->top_level;
 	      member->mclass = ch->ability.main;
 	      sprintf( buf, "[%02d|%02d|%04d]", t->tm_mon+1, t->tm_mday, t->tm_year+1900 );
-	      member->since = STRALLOC( buf );
+	      member->since = str_dup( buf );
 
 	      if( ch->pcdata->clan->clan_type == CLAN_PLAIN )
 		{

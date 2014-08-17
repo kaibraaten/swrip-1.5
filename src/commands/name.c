@@ -49,8 +49,8 @@ void do_name( Character *ch, char *argument )
       return;
     }
 
-  STRFREE( ch->name );
-  ch->name = STRALLOC( argument );
+  DISPOSE( ch->name );
+  ch->name = str_dup( argument );
   sprintf( buf, "%s the %s",ch->name,
            race_table[ch->race].race_name );
   set_title( ch, buf );

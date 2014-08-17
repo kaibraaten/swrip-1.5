@@ -142,7 +142,7 @@ void do_jail ( Character *ch , char *argument )
     tms->tm_mday += jail_time;
 
   victim->pcdata->release_date = mktime(tms);
-  victim->pcdata->helled_by = STRALLOC(ch->name);
+  victim->pcdata->helled_by = str_dup(ch->name);
   victim->pcdata->jail_vnum = jail->vnum;
   ch_printf(ch, "%s will be released from jail at %24.24s.\r\n", victim->name,
             ctime(&victim->pcdata->release_date));

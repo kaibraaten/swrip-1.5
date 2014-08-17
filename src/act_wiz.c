@@ -228,16 +228,16 @@ void close_area( Area *pArea )
               exit_next = exit_iter->next;
               if ( rid->area == pArea || exit_iter->to_room->area == pArea )
                 {
-                  STRFREE( exit_iter->keyword );
-                  STRFREE( exit_iter->description );
+                  DISPOSE( exit_iter->keyword );
+                  DISPOSE( exit_iter->description );
                   UNLINK( exit_iter, rid->first_exit, rid->last_exit, next, prev );
                   DISPOSE( exit_iter );
                 }
             }
           if ( rid->area != pArea )
             continue;
-          STRFREE(rid->name);
-          STRFREE(rid->description);
+          DISPOSE(rid->name);
+          DISPOSE(rid->description);
           if ( rid->first_person )
             {
               bug( "close_area: room with people #%d", rid->vnum );
@@ -264,21 +264,21 @@ void close_area( Area *pArea )
           for ( eed = rid->first_extradesc; eed; eed = eed_next )
             {
               eed_next = eed->next;
-              STRFREE( eed->keyword );
-              STRFREE( eed->description );
+              DISPOSE( eed->keyword );
+              DISPOSE( eed->description );
               DISPOSE( eed );
             }
           for ( mpact = rid->mprog.mpact; mpact; mpact = mpact_next )
             {
               mpact_next = mpact->next;
-              STRFREE( mpact->buf );
+              DISPOSE( mpact->buf );
               DISPOSE( mpact );
             }
           for ( mprog = rid->mprog.mudprogs; mprog; mprog = mprog_next )
             {
               mprog_next = mprog->next;
-              STRFREE( mprog->arglist );
-              STRFREE( mprog->comlist );
+              DISPOSE( mprog->arglist );
+              DISPOSE( mprog->comlist );
               DISPOSE( mprog );
             }
           if ( rid == room_index_hash[icnt] )
@@ -305,10 +305,10 @@ void close_area( Area *pArea )
           if ( mid->vnum < pArea->low_m_vnum || mid->vnum > pArea->hi_m_vnum )
             continue;
 
-          STRFREE( mid->player_name );
-          STRFREE( mid->short_descr );
-          STRFREE( mid->long_descr  );
-          STRFREE( mid->description );
+          DISPOSE( mid->player_name );
+          DISPOSE( mid->short_descr );
+          DISPOSE( mid->long_descr  );
+          DISPOSE( mid->description );
           if ( mid->pShop )
             {
               UNLINK( mid->pShop, first_shop, last_shop, next, prev );
@@ -322,8 +322,8 @@ void close_area( Area *pArea )
           for ( mprog = mid->mprog.mudprogs; mprog; mprog = mprog_next )
             {
               mprog_next = mprog->next;
-              STRFREE(mprog->arglist);
-              STRFREE(mprog->comlist);
+              DISPOSE(mprog->arglist);
+              DISPOSE(mprog->comlist);
               DISPOSE(mprog);
             }
           if ( mid == mob_index_hash[icnt] )
@@ -350,16 +350,16 @@ void close_area( Area *pArea )
           if ( oid->vnum < pArea->low_o_vnum || oid->vnum > pArea->hi_o_vnum )
             continue;
 
-          STRFREE(oid->name);
-          STRFREE(oid->short_descr);
-          STRFREE(oid->description);
-          STRFREE(oid->action_desc);
+          DISPOSE(oid->name);
+          DISPOSE(oid->short_descr);
+          DISPOSE(oid->description);
+          DISPOSE(oid->action_desc);
 
           for ( eed = oid->first_extradesc; eed; eed = eed_next )
             {
               eed_next = eed->next;
-              STRFREE(eed->keyword);
-              STRFREE(eed->description);
+              DISPOSE(eed->keyword);
+              DISPOSE(eed->description);
               DISPOSE(eed);
             }
           for ( paf = oid->first_affect; paf; paf = paf_next )
@@ -370,8 +370,8 @@ void close_area( Area *pArea )
           for ( mprog = oid->mprog.mudprogs; mprog; mprog = mprog_next )
             {
               mprog_next = mprog->next;
-              STRFREE(mprog->arglist);
-              STRFREE(mprog->comlist);
+              DISPOSE(mprog->arglist);
+              DISPOSE(mprog->comlist);
               DISPOSE(mprog);
             }
           if ( oid == obj_index_hash[icnt] )
@@ -398,7 +398,7 @@ void close_area( Area *pArea )
     }
   DISPOSE(pArea->name);
   DISPOSE(pArea->filename);
-  STRFREE(pArea->author);
+  DISPOSE(pArea->author);
   UNLINK( pArea, first_build, last_build, next, prev );
   UNLINK( pArea, first_asort, last_asort, next_sort, prev_sort );
   DISPOSE( pArea );

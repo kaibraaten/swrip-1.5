@@ -104,18 +104,18 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   SET_BIT( blaster->wear_flags, ITEM_TAKE );
   blaster->weight = 2 + blaster->level / 10;
 
-  STRFREE( blaster->name );
+  DISPOSE( blaster->name );
   strcpy( buf, ud->ItemName );
   strcat( buf, " blaster");
-  blaster->name = STRALLOC( buf );
+  blaster->name = str_dup( buf );
 
   strcpy( buf, ud->ItemName );
-  STRFREE( blaster->short_descr );
-  blaster->short_descr = STRALLOC( buf );
+  DISPOSE( blaster->short_descr );
+  blaster->short_descr = str_dup( buf );
 
-  STRFREE( blaster->description );
+  DISPOSE( blaster->description );
   strcat( buf, " was carelessly misplaced here." );
-  blaster->description = STRALLOC( capitalize( buf ) );
+  blaster->description = str_dup( capitalize( buf ) );
 
   CREATE( hitroll, Affect, 1 );
   hitroll->type       = -1;

@@ -1008,8 +1008,8 @@ void extract_obj( OBJ_DATA *obj )
     for ( ed = obj->first_extradesc; ed; ed = ed_next )
       {
         ed_next = ed->next;
-        STRFREE( ed->description );
-        STRFREE( ed->keyword     );
+        DISPOSE( ed->description );
+        DISPOSE( ed->keyword     );
         DISPOSE( ed );
       }
     obj->first_extradesc = obj->last_extradesc = NULL;
@@ -1908,8 +1908,8 @@ void extract_exit( Room *room, Exit *pexit )
   UNLINK( pexit, room->first_exit, room->last_exit, next, prev );
   if ( pexit->rexit )
     pexit->rexit->rexit = NULL;
-  STRFREE( pexit->keyword );
-  STRFREE( pexit->description );
+  DISPOSE( pexit->keyword );
+  DISPOSE( pexit->description );
   DISPOSE( pexit );
 }
 
@@ -1924,13 +1924,13 @@ void clean_room( Room *room )
   if ( !room )
     return;
 
-  STRFREE( room->description );
-  STRFREE( room->name );
+  DISPOSE( room->description );
+  DISPOSE( room->name );
   for ( ed = room->first_extradesc; ed; ed = ed_next )
     {
       ed_next = ed->next;
-      STRFREE( ed->description );
-      STRFREE( ed->keyword );
+      DISPOSE( ed->description );
+      DISPOSE( ed->keyword );
       DISPOSE( ed );
       top_ed--;
     }
@@ -1939,8 +1939,8 @@ void clean_room( Room *room )
   for ( pexit = room->first_exit; pexit; pexit = pexit_next )
     {
       pexit_next = pexit->next;
-      STRFREE( pexit->keyword );
-      STRFREE( pexit->description );
+      DISPOSE( pexit->keyword );
+      DISPOSE( pexit->description );
       DISPOSE( pexit );
       top_exit--;
     }
@@ -1962,10 +1962,10 @@ void clean_obj( OBJ_INDEX_DATA *obj )
   ExtraDescription *ed_next = 0;
   int oval = 0;
 
-  STRFREE( obj->name );
-  STRFREE( obj->short_descr );
-  STRFREE( obj->description );
-  STRFREE( obj->action_desc );
+  DISPOSE( obj->name );
+  DISPOSE( obj->short_descr );
+  DISPOSE( obj->description );
+  DISPOSE( obj->action_desc );
   obj->item_type        = 0;
   obj->extra_flags      = 0;
   obj->wear_flags       = 0;
@@ -1991,8 +1991,8 @@ void clean_obj( OBJ_INDEX_DATA *obj )
   for ( ed = obj->first_extradesc; ed; ed = ed_next )
     {
       ed_next = ed->next;
-      STRFREE( ed->description );
-      STRFREE( ed->keyword     );
+      DISPOSE( ed->description );
+      DISPOSE( ed->keyword     );
       DISPOSE( ed );
       top_ed--;
     }
@@ -2008,10 +2008,10 @@ void clean_mob( ProtoMobile *mob )
 {
   MPROG_DATA *mprog, *mprog_next;
 
-  STRFREE( mob->player_name );
-  STRFREE( mob->short_descr );
-  STRFREE( mob->long_descr  );
-  STRFREE( mob->description );
+  DISPOSE( mob->player_name );
+  DISPOSE( mob->short_descr );
+  DISPOSE( mob->long_descr  );
+  DISPOSE( mob->description );
   mob->spec_fun = NULL;
   mob->spec_2   = NULL;
   mob->pShop    = NULL;
@@ -2021,8 +2021,8 @@ void clean_mob( ProtoMobile *mob )
   for ( mprog = mob->mprog.mudprogs; mprog; mprog = mprog_next )
     {
       mprog_next = mprog->next;
-      STRFREE( mprog->arglist );
-      STRFREE( mprog->comlist );
+      DISPOSE( mprog->arglist );
+      DISPOSE( mprog->comlist );
       DISPOSE( mprog );
     }
   mob->count     = 0;      mob->killed          = 0;
@@ -2165,9 +2165,9 @@ void clean_obj_queue()
     {
       obj = extracted_obj_queue;
       extracted_obj_queue = extracted_obj_queue->next;
-      STRFREE( obj->name        );
-      STRFREE( obj->description );
-      STRFREE( obj->short_descr );
+      DISPOSE( obj->name        );
+      DISPOSE( obj->description );
+      DISPOSE( obj->short_descr );
       DISPOSE( obj );
       --cur_qobjs;
     }
@@ -2407,10 +2407,10 @@ OBJ_DATA *clone_object( const OBJ_DATA *obj )
 
   CREATE( clone, OBJ_DATA, 1 );
   clone->pIndexData     = obj->pIndexData;
-  clone->name           = QUICKLINK( obj->name );
-  clone->short_descr    = QUICKLINK( obj->short_descr );
-  clone->description    = QUICKLINK( obj->description );
-  clone->action_desc    = QUICKLINK( obj->action_desc );
+  clone->name           = str_dup( obj->name );
+  clone->short_descr    = str_dup( obj->short_descr );
+  clone->description    = str_dup( obj->description );
+  clone->action_desc    = str_dup( obj->action_desc );
   clone->item_type      = obj->item_type;
   clone->extra_flags    = obj->extra_flags;
   clone->magic_flags    = obj->magic_flags;

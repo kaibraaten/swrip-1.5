@@ -1083,7 +1083,7 @@ bool load_char_obj( Descriptor *d, char *name, bool preload )
   d->character                = ch;
   ch->on                              = NULL;
   ch->desc                            = d;
-  ch->name                            = STRALLOC( name );
+  ch->name                            = str_dup( name );
   ch->act                             = PLR_BLANK | PLR_COMBINE | PLR_PROMPT;
   ch->stats.perm_str                  = 10;
   ch->stats.perm_int                  = 10;
@@ -1114,7 +1114,7 @@ bool load_char_obj( Descriptor *d, char *name, bool preload )
   ch->saving.spell_staff    = 0;
   ch->pcdata->comments      = NULL;
   ch->pcdata->pagerlen      = 24;
-  ch->mob_clan              = STRALLOC( "" );
+  ch->mob_clan              = str_dup( "" );
   ch->was_sentinel          = NULL;
   ch->plr_home              = NULL;
 
@@ -1220,14 +1220,14 @@ bool load_char_obj( Descriptor *d, char *name, bool preload )
 
   if ( !found )
     {
-      ch->short_descr           = STRALLOC( "" );
-      ch->long_descr            = STRALLOC( "" );
-      ch->description           = STRALLOC( "" );
-      ch->pcdata->target        = STRALLOC( "" );
+      ch->short_descr           = str_dup( "" );
+      ch->long_descr            = str_dup( "" );
+      ch->description           = str_dup( "" );
+      ch->pcdata->target        = str_dup( "" );
       ch->editor                = NULL;
       ch->pcdata->clones        = 0;
       ch->pcdata->jail_vnum     = 0;
-      ch->pcdata->clan_name     = STRALLOC( "" );
+      ch->pcdata->clan_name     = str_dup( "" );
       ch->pcdata->clan          = NULL;
       ch->pcdata->pwd           = str_dup( "" );
       ch->pcdata->email         = str_dup( "" );
@@ -1235,11 +1235,11 @@ bool load_char_obj( Descriptor *d, char *name, bool preload )
       ch->pcdata->bamfout       = str_dup( "" );
       ch->pcdata->rank          = str_dup( "" );
       ch->pcdata->bestowments   = str_dup( "" );
-      ch->pcdata->title         = STRALLOC( "" );
+      ch->pcdata->title         = str_dup( "" );
       ch->pcdata->homepage      = str_dup( "" );
-      ch->pcdata->bio           = STRALLOC( "" );
-      ch->pcdata->authed_by     = STRALLOC( "" );
-      ch->pcdata->prompt        = STRALLOC( "" );
+      ch->pcdata->bio           = str_dup( "" );
+      ch->pcdata->authed_by     = str_dup( "" );
+      ch->pcdata->prompt        = str_dup( "" );
       ch->pcdata->r_range_lo    = 0;
       ch->pcdata->r_range_hi    = 0;
       ch->pcdata->m_range_lo    = 0;
@@ -1258,18 +1258,18 @@ bool load_char_obj( Descriptor *d, char *name, bool preload )
 
       if ( !ch->pcdata->clan_name )
         {
-          ch->pcdata->clan_name = STRALLOC( "" );
+          ch->pcdata->clan_name = str_dup( "" );
           ch->pcdata->clan      = NULL;
         }
 
       if ( !ch->pcdata->bio )
 	{
-	  ch->pcdata->bio  = STRALLOC( "" );
+	  ch->pcdata->bio  = str_dup( "" );
 	}
 
       if ( !ch->pcdata->authed_by )
 	{
-	  ch->pcdata->authed_by    = STRALLOC( "" );
+	  ch->pcdata->authed_by    = str_dup( "" );
 	}
 
       if ( !IsNpc( ch ) && GetTrustLevel( ch ) > LEVEL_AVATAR )
@@ -1502,9 +1502,9 @@ void fread_char( Character *ch, FILE *fp, bool preload )
                    && ( ch->pcdata->clan = get_clan( ch->pcdata->clan_name )) == NULL )
                 {
                   ch_printf( ch, "Warning: the organization %s no longer exists, and therefore you no longer\r\nbelong to that organization.\r\n", ch->pcdata->clan_name );
-                  STRFREE( ch->pcdata->clan_name );
+                  DISPOSE( ch->pcdata->clan_name );
                   remove_member(ch);
-                  ch->pcdata->clan_name = STRALLOC( "" );
+                  ch->pcdata->clan_name = str_dup( "" );
                 }
               else
 		{
@@ -1591,8 +1591,8 @@ void fread_char( Character *ch, FILE *fp, bool preload )
                 {
                   ch_printf( ch, "Warning: the organization %s no longer exists, and therefore you no longer\r\nbelong to that organization.\r\n",
                            ch->pcdata->clan_name );
-                  STRFREE( ch->pcdata->clan_name );
-                  ch->pcdata->clan_name = STRALLOC( "" );
+                  DISPOSE( ch->pcdata->clan_name );
+                  ch->pcdata->clan_name = str_dup( "" );
                 }
 
               fMatch = true;
@@ -1608,7 +1608,7 @@ void fread_char( Character *ch, FILE *fp, bool preload )
 
               if ( ch->pcdata->release_date < current_time )
                 {
-                  STRFREE(ch->pcdata->helled_by);
+                  DISPOSE(ch->pcdata->helled_by);
                   ch->pcdata->helled_by = NULL;
                   ch->pcdata->release_date = 0;
                   ch->pcdata->jail_vnum = 0;
@@ -1924,13 +1924,13 @@ void fread_char( Character *ch, FILE *fp, bool preload )
           if ( !str_cmp( word, "End" ) )
             {
               if (!ch->short_descr)
-                ch->short_descr = STRALLOC( "" );
+                ch->short_descr = str_dup( "" );
 
               if (!ch->long_descr)
-                ch->long_descr  = STRALLOC( "" );
+                ch->long_descr  = str_dup( "" );
 
               if (!ch->description)
-                ch->description = STRALLOC( "" );
+                ch->description = str_dup( "" );
 
               if (!ch->pcdata->pwd)
                 ch->pcdata->pwd = str_dup( "" );
@@ -1945,7 +1945,7 @@ void fread_char( Character *ch, FILE *fp, bool preload )
                 ch->pcdata->bamfout     = str_dup( "" );
 
               if (!ch->pcdata->bio)
-                ch->pcdata->bio = STRALLOC( "" );
+                ch->pcdata->bio = str_dup( "" );
 
               if (!ch->pcdata->rank)
                 ch->pcdata->rank        = str_dup( "" );
@@ -1954,16 +1954,16 @@ void fread_char( Character *ch, FILE *fp, bool preload )
                 ch->pcdata->bestowments = str_dup( "" );
 
               if (!ch->pcdata->title)
-                ch->pcdata->title       = STRALLOC( "" );
+                ch->pcdata->title       = str_dup( "" );
 
               if (!ch->pcdata->homepage)
                 ch->pcdata->homepage    = str_dup( "" );
 
               if (!ch->pcdata->authed_by)
-                ch->pcdata->authed_by = STRALLOC( "" );
+                ch->pcdata->authed_by = str_dup( "" );
 
               if (!ch->pcdata->prompt )
-                ch->pcdata->prompt      = STRALLOC( "" );
+                ch->pcdata->prompt      = str_dup( "" );
 
               ch->editor                = NULL;
               killcnt = urange( 2, ((ch->top_level+3) * MAX_KILLTRACK)/LEVEL_AVATAR, MAX_KILLTRACK );
@@ -1996,7 +1996,7 @@ void fread_char( Character *ch, FILE *fp, bool preload )
 
               if ( !ch->pcdata->prompt )
 		{
-		  ch->pcdata->prompt = STRALLOC("");
+		  ch->pcdata->prompt = str_dup("");
 		}
 
               if ( lastplayed != 0 )
@@ -2085,9 +2085,9 @@ void fread_char( Character *ch, FILE *fp, bool preload )
                   sprintf( buf, "%s", ch->pcdata->title );
 
                   if ( ch->pcdata->title )
-                    STRFREE( ch->pcdata->title );
+                    DISPOSE( ch->pcdata->title );
 
-                  ch->pcdata->title = STRALLOC( buf );
+                  ch->pcdata->title = str_dup( buf );
                 }
 
               fMatch = true;
@@ -2252,13 +2252,13 @@ void fread_obj( Character *ch, FILE *fp, short os_type )
                   bug( "Fread_obj: incomplete object.", 0 );
 
                   if ( obj->name )
-                    STRFREE( obj->name );
+                    DISPOSE( obj->name );
 
                   if ( obj->description )
-                    STRFREE( obj->description );
+                    DISPOSE( obj->description );
 
                   if ( obj->short_descr )
-                    STRFREE( obj->short_descr );
+                    DISPOSE( obj->short_descr );
 
                   DISPOSE( obj );
                   return;
@@ -2268,16 +2268,16 @@ void fread_obj( Character *ch, FILE *fp, short os_type )
                   short wear_loc = obj->wear_loc;
 
                   if ( !obj->name )
-                    obj->name = QUICKLINK( obj->pIndexData->name );
+                    obj->name = str_dup( obj->pIndexData->name );
 
                   if ( !obj->description )
-                    obj->description = QUICKLINK( obj->pIndexData->description );
+                    obj->description = str_dup( obj->pIndexData->description );
 
                   if ( !obj->short_descr )
-                    obj->short_descr = QUICKLINK( obj->pIndexData->short_descr );
+                    obj->short_descr = str_dup( obj->pIndexData->short_descr );
 
                   if ( !obj->action_desc )
-                    obj->action_desc = QUICKLINK( obj->pIndexData->action_desc );
+                    obj->action_desc = str_dup( obj->pIndexData->action_desc );
 
                   LINK(obj, first_object, last_object, next, prev );
                   obj->pIndexData->count += obj->count;
@@ -2489,18 +2489,18 @@ void fread_obj( Character *ch, FILE *fp, short os_type )
           fread_to_eol( fp );
 
           if ( obj->name )
-            STRFREE( obj->name        );
+            DISPOSE( obj->name        );
 
           if ( obj->description )
-            STRFREE( obj->description );
+            DISPOSE( obj->description );
 
           if ( obj->short_descr )
-            STRFREE( obj->short_descr );
+            DISPOSE( obj->short_descr );
 
           while ( (ed=obj->first_extradesc) != NULL )
             {
-              STRFREE( ed->keyword );
-              STRFREE( ed->description );
+              DISPOSE( ed->keyword );
+              DISPOSE( ed->description );
               UNLINK( ed, obj->first_extradesc, obj->last_extradesc, next, prev );
               DISPOSE( ed );
             }

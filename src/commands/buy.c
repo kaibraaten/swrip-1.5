@@ -77,14 +77,14 @@ void do_buy( Character *ch, char *argument )
       if ( arg[0] != '\0' )
         {
           sprintf( buf, "%s %s", pet->name, arg );
-          STRFREE( pet->name );
-          pet->name = STRALLOC( buf );
+          DISPOSE( pet->name );
+          pet->name = str_dup( buf );
         }
 
       sprintf( buf, "%sA neck tag says 'I belong to %s'.\r\n",
                pet->description, ch->name );
-      STRFREE( pet->description );
-      pet->description = STRALLOC( buf );
+      DISPOSE( pet->description );
+      pet->description = str_dup( buf );
 
       if( ch->pcdata )
         ch->pcdata->pet = pet;

@@ -72,7 +72,7 @@ void do_hell( Character *ch, char *argument )
     tms->tm_mday += hell_time;
 
   victim->pcdata->release_date = mktime(tms);
-  victim->pcdata->helled_by = STRALLOC(ch->name);
+  victim->pcdata->helled_by = str_dup(ch->name);
   ch_printf(ch, "%s will be released from hell at %24.24s.\r\n", victim->name,
             ctime(&victim->pcdata->release_date));
   act(AT_MAGIC, "$n disappears in a cloud of hellish light.", victim, NULL, ch, TO_NOTVICT);

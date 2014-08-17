@@ -84,7 +84,7 @@ void stop_hunting( Character *ch )
 {
   if ( ch->hhf.hunting )
     {
-      STRFREE( ch->hhf.hunting->name );
+      DISPOSE( ch->hhf.hunting->name );
       DISPOSE( ch->hhf.hunting );
       ch->hhf.hunting = NULL;
     }
@@ -94,7 +94,7 @@ void stop_hating( Character *ch )
 {
   if ( ch->hhf.hating )
     {
-      STRFREE( ch->hhf.hating->name );
+      DISPOSE( ch->hhf.hating->name );
       DISPOSE( ch->hhf.hating );
       ch->hhf.hating = NULL;
     }
@@ -104,7 +104,7 @@ void stop_fearing( Character *ch )
 {
   if ( ch->hhf.fearing )
     {
-      STRFREE( ch->hhf.fearing->name );
+      DISPOSE( ch->hhf.fearing->name );
       DISPOSE( ch->hhf.fearing );
       ch->hhf.fearing = NULL;
     }
@@ -116,7 +116,7 @@ void start_hunting( Character *ch, Character *victim )
     stop_hunting( ch );
 
   CREATE( ch->hhf.hunting, HuntHateFear, 1 );
-  ch->hhf.hunting->name = QUICKLINK( victim->name );
+  ch->hhf.hunting->name = str_dup( victim->name );
   ch->hhf.hunting->who  = victim;
 }
 
@@ -126,7 +126,7 @@ void start_hating( Character *ch, Character *victim )
     stop_hating( ch );
 
   CREATE( ch->hhf.hating, HuntHateFear, 1 );
-  ch->hhf.hating->name = QUICKLINK( victim->name );
+  ch->hhf.hating->name = str_dup( victim->name );
   ch->hhf.hating->who  = victim;
 }
 
@@ -136,7 +136,7 @@ void start_fearing( Character *ch, Character *victim )
     stop_fearing( ch );
 
   CREATE( ch->hhf.fearing, HuntHateFear, 1 );
-  ch->hhf.fearing->name = QUICKLINK( victim->name );
+  ch->hhf.fearing->name = str_dup( victim->name );
   ch->hhf.fearing->who  = victim;
 }
 
@@ -1242,8 +1242,8 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
             {
               if ( victim->hhf.hunting->who != ch )
                 {
-                  STRFREE( victim->hhf.hunting->name );
-                  victim->hhf.hunting->name = QUICKLINK( ch->name );
+                  DISPOSE( victim->hhf.hunting->name );
+                  victim->hhf.hunting->name = str_dup( ch->name );
                   victim->hhf.hunting->who  = ch;
                 }
             }
@@ -1255,8 +1255,8 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
         {
           if ( victim->hhf.hating->who != ch )
             {
-              STRFREE( victim->hhf.hating->name );
-              victim->hhf.hating->name = QUICKLINK( ch->name );
+              DISPOSE( victim->hhf.hating->name );
+              victim->hhf.hating->name = str_dup( ch->name );
               victim->hhf.hating->who  = ch;
             }
         }
@@ -2125,12 +2125,12 @@ void raw_kill( Character *killer, Character *victim )
     {
       if ( !str_cmp( ship->owner, victim->name ) )
         {
-          STRFREE( ship->owner );
-          ship->owner = STRALLOC( "" );
-          STRFREE( ship->pilot );
-          ship->pilot = STRALLOC( "" );
-          STRFREE( ship->copilot );
-          ship->copilot = STRALLOC( "" );
+          DISPOSE( ship->owner );
+          ship->owner = str_dup( "" );
+          DISPOSE( ship->pilot );
+          ship->pilot = str_dup( "" );
+          DISPOSE( ship->copilot );
+          ship->copilot = str_dup( "" );
 
           SaveShip( ship );
         }
@@ -2140,8 +2140,8 @@ void raw_kill( Character *killer, Character *victim )
     {
       Room *room = victim->plr_home;
 
-      STRFREE( room->name );
-      room->name = STRALLOC( "An Empty Apartment" );
+      DISPOSE( room->name );
+      room->name = str_dup( "An Empty Apartment" );
 
       REMOVE_BIT( room->room_flags , ROOM_PLR_HOME );
       SET_BIT( room->room_flags , ROOM_EMPTY_HOME );
@@ -2153,40 +2153,40 @@ void raw_kill( Character *killer, Character *victim )
     {
       if ( !str_cmp( victim->name, victim->pcdata->clan->leadership.leader ) )
         {
-          STRFREE( victim->pcdata->clan->leadership.leader );
+          DISPOSE( victim->pcdata->clan->leadership.leader );
           if ( victim->pcdata->clan->leadership.number1 )
             {
-              victim->pcdata->clan->leadership.leader = STRALLOC( victim->pcdata->clan->leadership.number1 );
-              STRFREE( victim->pcdata->clan->leadership.number1 );
-              victim->pcdata->clan->leadership.number1 = STRALLOC( "" );
+              victim->pcdata->clan->leadership.leader = str_dup( victim->pcdata->clan->leadership.number1 );
+              DISPOSE( victim->pcdata->clan->leadership.number1 );
+              victim->pcdata->clan->leadership.number1 = str_dup( "" );
             }
           else if ( victim->pcdata->clan->leadership.number2 )
             {
-              victim->pcdata->clan->leadership.leader = STRALLOC( victim->pcdata->clan->leadership.number2 );
-              STRFREE( victim->pcdata->clan->leadership.number2 );
-              victim->pcdata->clan->leadership.number2 = STRALLOC( "" );
+              victim->pcdata->clan->leadership.leader = str_dup( victim->pcdata->clan->leadership.number2 );
+              DISPOSE( victim->pcdata->clan->leadership.number2 );
+              victim->pcdata->clan->leadership.number2 = str_dup( "" );
             }
           else
-            victim->pcdata->clan->leadership.leader = STRALLOC( "" );
+            victim->pcdata->clan->leadership.leader = str_dup( "" );
         }
 
       if ( !str_cmp( victim->name, victim->pcdata->clan->leadership.number1 ) )
         {
-          STRFREE( victim->pcdata->clan->leadership.number1 );
+          DISPOSE( victim->pcdata->clan->leadership.number1 );
           if ( victim->pcdata->clan->leadership.number2 )
             {
-              victim->pcdata->clan->leadership.number1 = STRALLOC( victim->pcdata->clan->leadership.number2 );
-              STRFREE( victim->pcdata->clan->leadership.number2 );
-              victim->pcdata->clan->leadership.number2 = STRALLOC( "" );
+              victim->pcdata->clan->leadership.number1 = str_dup( victim->pcdata->clan->leadership.number2 );
+              DISPOSE( victim->pcdata->clan->leadership.number2 );
+              victim->pcdata->clan->leadership.number2 = str_dup( "" );
             }
           else
-            victim->pcdata->clan->leadership.number1 = STRALLOC( "" );
+            victim->pcdata->clan->leadership.number1 = str_dup( "" );
         }
 
       if ( !str_cmp( victim->name, victim->pcdata->clan->leadership.number2 ) )
         {
-          STRFREE( victim->pcdata->clan->leadership.number2 );
-          victim->pcdata->clan->leadership.number1 = STRALLOC( "" );
+          DISPOSE( victim->pcdata->clan->leadership.number2 );
+          victim->pcdata->clan->leadership.number1 = str_dup( "" );
         }
 
       victim->pcdata->clan->members--;

@@ -101,16 +101,16 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   SET_BIT( shield->wear_flags, ITEM_WEAR_SHIELD );
   shield->weight = 2;
 
-  STRFREE( shield->name );
-  shield->name = STRALLOC( "energy shield" );
+  DISPOSE( shield->name );
+  shield->name = str_dup( "energy shield" );
 
   strcpy( buf, ud->ItemName );
-  STRFREE( shield->short_descr );
-  shield->short_descr = STRALLOC( buf );
+  DISPOSE( shield->short_descr );
+  shield->short_descr = str_dup( buf );
 
-  STRFREE( shield->description );
+  DISPOSE( shield->description );
   strcat( buf, " was carelessly misplaced here." );
-  shield->description = STRALLOC( capitalize( buf ) );
+  shield->description = str_dup( capitalize( buf ) );
 
   shield->value[OVAL_ARMOR_CONDITION] = (int) (shield->level / 10 + ud->GemType * 2);
   shield->value[OVAL_ARMOR_AC] = (int) (shield->level / 10 + ud->GemType * 2);

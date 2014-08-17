@@ -39,8 +39,8 @@ void do_rempilot(Character *ch, char *argument )
 
   if ( !str_cmp( ship->pilot , argument ) )
     {
-      STRFREE( ship->pilot );
-      ship->pilot = STRALLOC( "" );
+      DISPOSE( ship->pilot );
+      ship->pilot = str_dup( "" );
       send_to_char( "Pilot Removed.\r\n", ch );
       SaveShip( ship );
       return;
@@ -48,8 +48,8 @@ void do_rempilot(Character *ch, char *argument )
 
   if ( !str_cmp( ship->copilot , argument ) )
     {
-      STRFREE( ship->copilot );
-      ship->copilot = STRALLOC( "" );
+      DISPOSE( ship->copilot );
+      ship->copilot = str_dup( "" );
       send_to_char( "Copilot Removed.\r\n", ch );
       SaveShip( ship );
       return;

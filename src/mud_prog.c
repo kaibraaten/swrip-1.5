@@ -118,9 +118,9 @@ void init_supermob()
   clear_char( supermob );
 
   SET_BIT(supermob->act,ACT_IsNpc);
-  supermob->name                = STRALLOC("supermob");
-  supermob->short_descr         = STRALLOC(".");
-  supermob->long_descr  = STRALLOC(".");
+  supermob->name                = str_dup("supermob");
+  supermob->short_descr         = str_dup(".");
+  supermob->long_descr  = str_dup(".");
 
   CREATE( supermob_index, ProtoMobile, 1 )
 #endif
@@ -2384,8 +2384,8 @@ void mprog_bribe_trigger( Character *mob, Character *ch, int amount )
 
       obj = create_object( get_obj_index( OBJ_VNUM_MONEY_SOME ), 0 );
       sprintf( buf, obj->short_descr, amount );
-      STRFREE( obj->short_descr );
-      obj->short_descr = STRALLOC( buf );
+      DISPOSE( obj->short_descr );
+      obj->short_descr = str_dup( buf );
       obj->value[OVAL_MONEY_AMOUNT] = amount;
       obj = obj_to_char( obj, mob );
       mob->gold -= amount;
@@ -2648,16 +2648,16 @@ void set_supermob( OBJ_DATA *obj)
     return;
 
   if (supermob->short_descr)
-    STRFREE(supermob->short_descr);
+    DISPOSE(supermob->short_descr);
 
-  supermob->short_descr = QUICKLINK(obj->short_descr);
+  supermob->short_descr = str_dup(obj->short_descr);
   supermob->mprog.mpscriptpos = obj->mprog.mpscriptpos;
 
   /* Added by Jenny to allow bug messages to show the vnum
      of the object, and not just supermob's vnum */
   sprintf( buf, "Object #%ld", obj->pIndexData->vnum );
-  STRFREE( supermob->description );
-  supermob->description = STRALLOC( buf );
+  DISPOSE( supermob->description );
+  supermob->description = str_dup( buf );
 
   if(room != NULL)
     {
@@ -3051,18 +3051,18 @@ void rset_supermob( Room *room)
 
   if (room)
     {
-      STRFREE(supermob->short_descr);
-      supermob->short_descr = QUICKLINK(room->name);
-      STRFREE(supermob->name);
-      supermob->name        = QUICKLINK(room->name);
+      DISPOSE(supermob->short_descr);
+      supermob->short_descr = str_dup(room->name);
+      DISPOSE(supermob->name);
+      supermob->name        = str_dup(room->name);
 
       supermob->mprog.mpscriptpos = room->mprog.mpscriptpos;
 
       /* Added by Jenny to allow bug messages to show the vnum
          of the room, and not just supermob's vnum */
       sprintf( buf, "Room #%ld", room->vnum );
-      STRFREE( supermob->description );
-      supermob->description = STRALLOC( buf );
+      DISPOSE( supermob->description );
+      supermob->description = str_dup( buf );
 
       char_from_room (supermob );
       char_to_room( supermob, room);

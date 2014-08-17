@@ -28,9 +28,9 @@ void do_sellship(Character *ch, char *argument )
   act( AT_PLAIN, "$n walks over to a terminal and makes a credit transaction.",ch,
        NULL, argument , TO_ROOM );
 
-  STRFREE( ship->owner );
-  ship->owner = STRALLOC( "" );
-  ship->pilot = STRALLOC( "" );
-  ship->copilot = STRALLOC( "" );
+  DISPOSE( ship->owner );
+  ship->owner = str_dup( "" );
+  ship->pilot = str_dup( "" );
+  ship->copilot = str_dup( "" );
   SaveShip( ship );
 }

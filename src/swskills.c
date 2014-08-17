@@ -112,11 +112,11 @@ void add_reinforcements( Character *ch )
         {
           char tmpbuf[MAX_STRING_LENGTH];
 
-          STRFREE( mob->name );
-          mob->name = STRALLOC( ch->pcdata->clan->name );
+          DISPOSE( mob->name );
+          mob->name = str_dup( ch->pcdata->clan->name );
           sprintf( tmpbuf , "(%s) %s" , ch->pcdata->clan->name  , mob->long_descr );
-          STRFREE( mob->long_descr );
-          mob->long_descr = STRALLOC( tmpbuf );
+          DISPOSE( mob->long_descr );
+          mob->long_descr = str_dup( tmpbuf );
         }
 
       act( AT_IMMORT, "$N has arrived.", ch, NULL, mob, TO_ROOM );
@@ -145,12 +145,12 @@ void add_reinforcements( Character *ch )
 
       if ( mob->mob_clan )
 	{
-	  STRFREE ( mob->mob_clan );
+	  DISPOSE ( mob->mob_clan );
 	}
 
       if ( ch->pcdata && ch->pcdata->clan )
 	{
-	  mob->mob_clan = STRALLOC( ch->pcdata->clan->name );
+	  mob->mob_clan = str_dup( ch->pcdata->clan->name );
 	}
     }
 }

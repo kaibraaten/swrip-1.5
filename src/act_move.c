@@ -52,11 +52,11 @@ static void decorate_room( Room *room )
   int sector = room->sector_type;
 
   if ( room->name )
-    STRFREE( room->name );
+    DISPOSE( room->name );
   if ( room->description )
-    STRFREE( room->description );
+    DISPOSE( room->description );
 
-  room->name    = STRALLOC( sect_names[sector][0] );
+  room->name    = str_dup( sect_names[sector][0] );
   buf[0] = '\0';
   nRand = number_range( 1, umin(8,sent_total[sector]) );
 
@@ -94,7 +94,7 @@ static void decorate_room( Room *room )
         }
     }
   sprintf( buf2, "%s\r\n", wordwrap(buf, 78) );
-  room->description = STRALLOC( buf2 );
+  room->description = str_dup( buf2 );
 }
 
 /*
@@ -366,8 +366,8 @@ Room *generate_exit( Room *in_room, Exit **pexit )
   if ( !found || (xit=get_exit(room, vdir))==NULL )
     {
       xit = make_exit(room, orig_exit->to_room, vdir);
-      xit->keyword              = STRALLOC( "" );
-      xit->description  = STRALLOC( "" );
+      xit->keyword              = str_dup( "" );
+      xit->description  = str_dup( "" );
       xit->key          = -1;
       xit->distance = distance;
     }
@@ -375,8 +375,8 @@ Room *generate_exit( Room *in_room, Exit **pexit )
   if ( !found )
     {
       bxit = make_exit(room, backroom, get_rev_dir(vdir));
-      bxit->keyword             = STRALLOC( "" );
-      bxit->description = STRALLOC( "" );
+      bxit->keyword             = str_dup( "" );
+      bxit->description = str_dup( "" );
       bxit->key         = -1;
 
       if ( (serial & 65535) != orig_exit->vnum )

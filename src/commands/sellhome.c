@@ -29,8 +29,8 @@ void do_sellhome (Character *ch, char *argument)
       return;
     }
 
-  STRFREE(room->name);
-  room->name = STRALLOC("An Empty Apartment");
+  DISPOSE(room->name);
+  room->name = str_dup("An Empty Apartment");
   ch->gold += sellHomeCreditReturn;
   REMOVE_BIT(room->room_flags,ROOM_PLR_HOME);
   SET_BIT(room->room_flags,ROOM_EMPTY_HOME);

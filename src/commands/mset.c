@@ -51,12 +51,12 @@ void do_mset( Character *ch, char *argument )
           StopEditing( ch );
           return;
         }
-      STRFREE( victim->description );
+      DISPOSE( victim->description );
       victim->description = CopyBuffer( ch );
       if ( IsNpc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
         {
-          STRFREE( victim->pIndexData->description );
-          victim->pIndexData->description = QUICKLINK( victim->description );
+          DISPOSE( victim->pIndexData->description );
+          victim->pIndexData->description = str_dup( victim->description );
         }
       StopEditing( ch );
       ch->substate = ch->tempnum;
@@ -92,7 +92,7 @@ void do_mset( Character *ch, char *argument )
           ch->substate = SUB_NONE;
           DISPOSE(ch->dest_buf);
           if ( ch->pcdata && ch->pcdata->subprompt )
-            STRFREE( ch->pcdata->subprompt );
+            DISPOSE( ch->pcdata->subprompt );
           return;
         }
     }
@@ -748,12 +748,12 @@ void do_mset( Character *ch, char *argument )
           return;
         }
 
-      STRFREE( victim->name );
-      victim->name = STRALLOC( arg3 );
+      DISPOSE( victim->name );
+      victim->name = str_dup( arg3 );
       if ( IsNpc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
         {
-          STRFREE( victim->pIndexData->player_name );
-          victim->pIndexData->player_name = QUICKLINK( victim->name );
+          DISPOSE( victim->pIndexData->player_name );
+          victim->pIndexData->player_name = str_dup( victim->name );
         }
       return;
     }
@@ -794,8 +794,8 @@ void do_mset( Character *ch, char *argument )
 
       if ( arg3[0] == '\0' )
         {
-          STRFREE( victim->pcdata->clan_name );
-          victim->pcdata->clan_name     = STRALLOC( "" );
+          DISPOSE( victim->pcdata->clan_name );
+          victim->pcdata->clan_name     = str_dup( "" );
           victim->pcdata->clan  = NULL;
           send_to_char( "Removed from clan.\r\nPlease make sure you adjust that clan's members accordingly.\r\nAlso be sure to remove any bestowments they have been given.\r\n", ch );
           return;
@@ -808,8 +808,8 @@ void do_mset( Character *ch, char *argument )
           return;
         }
 
-      STRFREE( victim->pcdata->clan_name );
-      victim->pcdata->clan_name = QUICKLINK( clan->name );
+      DISPOSE( victim->pcdata->clan_name );
+      victim->pcdata->clan_name = str_dup( clan->name );
       victim->pcdata->clan = clan;
       send_to_char( "Done.\r\nPlease make sure you adjust that clan's members accordingly.\r\n", ch);
       return;
@@ -818,26 +818,26 @@ void do_mset( Character *ch, char *argument )
 
   if ( !str_cmp( arg2, "short" ) )
     {
-      STRFREE( victim->short_descr );
-      victim->short_descr = STRALLOC( arg3 );
+      DISPOSE( victim->short_descr );
+      victim->short_descr = str_dup( arg3 );
       if ( IsNpc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
         {
-          STRFREE( victim->pIndexData->short_descr );
-          victim->pIndexData->short_descr = QUICKLINK( victim->short_descr );
+          DISPOSE( victim->pIndexData->short_descr );
+          victim->pIndexData->short_descr = str_dup( victim->short_descr );
         }
       return;
     }
 
   if ( !str_cmp( arg2, "long" ) )
     {
-      STRFREE( victim->long_descr );
+      DISPOSE( victim->long_descr );
       strcpy( buf, arg3 );
       strcat( buf, "\r\n" );
-      victim->long_descr = STRALLOC( buf );
+      victim->long_descr = str_dup( buf );
       if ( IsNpc(victim) && IS_SET( victim->act, ACT_PROTOTYPE ) )
         {
-          STRFREE( victim->pIndexData->long_descr );
-          victim->pIndexData->long_descr = QUICKLINK( victim->long_descr );
+          DISPOSE( victim->pIndexData->long_descr );
+          victim->pIndexData->long_descr = str_dup( victim->long_descr );
         }
       return;
     }
@@ -846,12 +846,12 @@ void do_mset( Character *ch, char *argument )
     {
       if ( arg3[0] )
         {
-          STRFREE( victim->description );
-          victim->description = STRALLOC( arg3 );
+          DISPOSE( victim->description );
+          victim->description = str_dup( arg3 );
           if ( IsNpc( victim ) && IS_SET( victim->act, ACT_PROTOTYPE ) )
             {
-              STRFREE(victim->pIndexData->description );
-              victim->pIndexData->description = QUICKLINK( victim->description );
+              DISPOSE(victim->pIndexData->description );
+              victim->pIndexData->description = str_dup( victim->description );
             }
           return;
         }

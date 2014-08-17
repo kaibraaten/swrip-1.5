@@ -202,8 +202,8 @@ void do_aset( Character *ch, char *argument )
 
   if ( !str_cmp( arg2, "author" ) )
     {
-      STRFREE( tarea->author );
-      tarea->author = STRALLOC( argument );
+      DISPOSE( tarea->author );
+      tarea->author = str_dup( argument );
       send_to_char( "Done.\r\n", ch );
       return;
     }

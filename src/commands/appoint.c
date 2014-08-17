@@ -36,8 +36,8 @@ void do_appoint ( Character *ch , char *argument )
           return;
         }
 
-      STRFREE( ch->pcdata->clan->leadership.number1 );
-      ch->pcdata->clan->leadership.number1 = STRALLOC( arg );
+      DISPOSE( ch->pcdata->clan->leadership.number1 );
+      ch->pcdata->clan->leadership.number1 = str_dup( arg );
     }
   else if ( !str_cmp( argument , "second" )  )
     {
@@ -47,8 +47,8 @@ void do_appoint ( Character *ch , char *argument )
           return;
         }
 
-      STRFREE( ch->pcdata->clan->leadership.number2 );
-      ch->pcdata->clan->leadership.number2 = STRALLOC( arg );
+      DISPOSE( ch->pcdata->clan->leadership.number2 );
+      ch->pcdata->clan->leadership.number2 = str_dup( arg );
     }
   else
     do_appoint( ch , "" );

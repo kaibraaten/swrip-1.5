@@ -162,7 +162,7 @@ static void discard_editdata( Editor *edd )
 
   if( edd->desc )
     {
-      STRFREE( edd->desc );
+      DISPOSE( edd->desc );
     }
 
   DISPOSE( edd );
@@ -193,7 +193,7 @@ static Editor *clone_editdata( Editor *edd )
   new_edd->text_size = edd->text_size;
   new_edd->line_count = edd->line_count;
   new_edd->first_line = root_line.next;
-  new_edd->desc = STRALLOC( edd->desc );
+  new_edd->desc = str_dup( edd->desc );
 
   return new_edd;
 }
@@ -305,7 +305,7 @@ static char *editdata_to_str( Editor *edd )
   buf[i++] = '\0';
   used++;
 
-  tmp = STRALLOC( buf );
+  tmp = str_dup( buf );
   DISPOSE(buf);
   smush_tilde(tmp);
   return tmp;
@@ -336,10 +336,10 @@ void SetEditorDescription( Character *ch, const char *desc_fmt, ... )
 
   if( ch->editor->desc )
     {
-      STRFREE( ch->editor->desc );
+      DISPOSE( ch->editor->desc );
     }
 
-  ch->editor->desc = STRALLOC( buf );
+  ch->editor->desc = str_dup( buf );
 }
 
 static void StartEditing_nolimit( Character *ch, char *old_text, short max_total )
@@ -365,7 +365,7 @@ static void StartEditing_nolimit( Character *ch, char *old_text, short max_total
     }
 
   ch->editor = str_to_editdata( old_text, max_total );
-  ch->editor->desc = STRALLOC( "Unknown buffer" );
+  ch->editor->desc = str_dup( "Unknown buffer" );
   ch->desc->connection_state = CON_EDITING;
 
   send_to_char( "> ", ch );
@@ -378,13 +378,13 @@ char *CopyBuffer( Character *ch )
   if ( !ch )
     {
       bug( "CopyBuffer: null ch", 0 );
-      return STRALLOC( "" );
+      return str_dup( "" );
     }
 
   if ( !ch->editor )
     {
       bug( "CopyBuffer: null editor", 0 );
-      return STRALLOC( "" );
+      return str_dup( "" );
     }
 
   buf = editdata_to_str( ch->editor );
@@ -673,7 +673,7 @@ static void editor_help( Character *ch, Editor *edd, char *argument )
 
 static void editor_clear_buf( Character *ch, Editor *edd, char *argument )
 {
-  char *desc = STRALLOC( edd->desc );
+  char *desc = str_dup( edd->desc );
   short max_size = edd->max_size;
 
   discard_editdata( edd );

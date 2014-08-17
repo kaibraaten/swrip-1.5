@@ -119,17 +119,17 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   SET_BIT( disguise->wear_flags, ITEM_DISGUISE );
   SET_BIT( disguise->wear_flags, ITEM_TAKE );
 
-  STRFREE( disguise->name );
+  DISPOSE( disguise->name );
   strcpy( buf, ud->Name );
   strcat( buf, " disguise");
-  disguise->name = STRALLOC( buf );
+  disguise->name = str_dup( buf );
 
   strcpy( buf, ud->Name );
-  STRFREE( disguise->short_descr );
-  disguise->short_descr = STRALLOC( buf );
+  DISPOSE( disguise->short_descr );
+  disguise->short_descr = str_dup( buf );
 
-  STRFREE( disguise->description );
-  disguise->description = STRALLOC( "" );
+  DISPOSE( disguise->description );
+  disguise->description = str_dup( "" );
 
   disguise->value[OVAL_DISGUISE_MAX_CONDITION] = INIT_WEAPON_CONDITION;
   disguise->value[OVAL_DISGUISE_CONDITION] = INIT_WEAPON_CONDITION;

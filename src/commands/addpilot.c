@@ -42,8 +42,8 @@ void do_addpilot(Character *ch, char *argument )
           return;
         }
 
-      STRFREE( ship->copilot );
-      ship->copilot = STRALLOC( argument );
+      DISPOSE( ship->copilot );
+      ship->copilot = str_dup( argument );
       send_to_char( "Copilot Added.\r\n", ch );
       SaveShip( ship );
       return;
@@ -51,8 +51,8 @@ void do_addpilot(Character *ch, char *argument )
       return;
     }
 
-  STRFREE( ship->pilot );
-  ship->pilot = STRALLOC( argument );
+  DISPOSE( ship->pilot );
+  ship->pilot = str_dup( argument );
   send_to_char( "Pilot Added.\r\n", ch );
   SaveShip( ship );
 }

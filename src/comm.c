@@ -726,7 +726,7 @@ void new_descriptor( socket_t new_desc )
            buf, dnew->remote.port );
   log_string_plus( log_buf, LOG_COMM, sysdata.log_level );
 
-  dnew->remote.hostip = STRALLOC( buf );
+  dnew->remote.hostip = str_dup( buf );
 
   if ( !sysdata.NO_NAME_RESOLVING )
     {
@@ -738,7 +738,7 @@ void new_descriptor( socket_t new_desc )
       from = NULL;
     }
 
-  dnew->remote.hostname = STRALLOC( (char *)( from ? from->h_name : buf) );
+  dnew->remote.hostname = str_dup( (char *)( from ? from->h_name : buf) );
 
   for ( pban = first_ban; pban; pban = pban->next )
     {
@@ -808,7 +808,7 @@ void new_descriptor( socket_t new_desc )
 void free_desc( Descriptor *d )
 {
   closesocket( d->descriptor );
-  STRFREE( d->remote.hostname );
+  DISPOSE( d->remote.hostname );
   DISPOSE( d->outbuf );
 
   if ( d->pager.pagebuf )

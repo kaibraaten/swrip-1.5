@@ -262,8 +262,8 @@ void pullorpush( Character *ch, OBJ_DATA *obj, bool pull )
             }
 
           pexit = make_exit( room, to_room, edir );
-          pexit->keyword        = STRALLOC( "" );
-          pexit->description    = STRALLOC( "" );
+          pexit->keyword        = str_dup( "" );
+          pexit->description    = str_dup( "" );
           pexit->key            = -1;
           pexit->exit_info      = 0;
           top_exit++;
@@ -588,6 +588,6 @@ void set_title( Character *ch, const char *title )
 
   bufptr = trim_string(buf, ' ');
 
-  STRFREE( ch->pcdata->title );
-  ch->pcdata->title = STRALLOC( buf );
+  DISPOSE( ch->pcdata->title );
+  ch->pcdata->title = str_dup( buf );
 }

@@ -85,11 +85,11 @@ void comment_remove( Character *ch, Character *victim, NOTE_DATA *pnote )
   else
     pnote->prev->next = pnote->next;
 
-  STRFREE( pnote->text    );
-  STRFREE( pnote->subject );
-  STRFREE( pnote->to_list );
-  STRFREE( pnote->date    );
-  STRFREE( pnote->sender  );
+  DISPOSE( pnote->text    );
+  DISPOSE( pnote->subject );
+  DISPOSE( pnote->to_list );
+  DISPOSE( pnote->date    );
+  DISPOSE( pnote->sender  );
   DISPOSE( pnote );
 
   /*
@@ -143,7 +143,7 @@ void do_comment( Character *ch, char *argument )
         }
       if ( ch->dest_buf != ch->pcdata->pnote )
         bug( "do_comment: sub_writing_note: ch->dest_buf != ch->pnote", 0 );
-      STRFREE( ch->pcdata->pnote->text );
+      DISPOSE( ch->pcdata->pnote->text );
       ch->pcdata->pnote->text = CopyBuffer( ch );
       StopEditing( ch );
       return;
@@ -301,8 +301,8 @@ void do_comment( Character *ch, char *argument )
   if ( !str_cmp( arg, "subject" ) )
     {
       note_attach( ch );
-      STRFREE( ch->pcdata->pnote->subject );
-      ch->pcdata->pnote->subject = STRALLOC( argument );
+      DISPOSE( ch->pcdata->pnote->subject );
+      ch->pcdata->pnote->subject = str_dup( argument );
       send_to_char( "Ok.\r\n", ch );
       return;
     }
@@ -310,8 +310,8 @@ void do_comment( Character *ch, char *argument )
   if ( !str_cmp( arg, "to" ) )
     {
       note_attach( ch );
-      STRFREE( ch->pcdata->pnote->to_list );
-      ch->pcdata->pnote->to_list = STRALLOC( argument );
+      DISPOSE( ch->pcdata->pnote->to_list );
+      ch->pcdata->pnote->to_list = str_dup( argument );
       send_to_char( "Ok.\r\n", ch );
       return;
     }
@@ -320,11 +320,11 @@ void do_comment( Character *ch, char *argument )
     {
       if ( ch->pcdata->pnote )
         {
-          STRFREE( ch->pcdata->pnote->text );
-          STRFREE( ch->pcdata->pnote->subject );
-          STRFREE( ch->pcdata->pnote->to_list );
-          STRFREE( ch->pcdata->pnote->date );
-          STRFREE( ch->pcdata->pnote->sender );
+          DISPOSE( ch->pcdata->pnote->text );
+          DISPOSE( ch->pcdata->pnote->subject );
+          DISPOSE( ch->pcdata->pnote->to_list );
+          DISPOSE( ch->pcdata->pnote->date );
+          DISPOSE( ch->pcdata->pnote->sender );
           DISPOSE( ch->pcdata->pnote );
         }
       ch->pcdata->pnote = NULL;
@@ -385,7 +385,7 @@ void do_comment( Character *ch, char *argument )
 
       strtime                           = ctime( &current_time );
       strtime[strlen(strtime)-1]        = '\0';
-      ch->pcdata->pnote->date                   = STRALLOC( strtime );
+      ch->pcdata->pnote->date                   = str_dup( strtime );
 
       pnote             = ch->pcdata->pnote;
       ch->pcdata->pnote = NULL;

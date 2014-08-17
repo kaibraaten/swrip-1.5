@@ -95,10 +95,10 @@ void do_setshuttle(Character * ch, char * argument)
     {
       if (shuttle->name)
 	{
-	  STRFREE(shuttle->name);
+	  DISPOSE(shuttle->name);
 	}
 
-      shuttle->name = STRALLOC(argument);
+      shuttle->name = str_dup(argument);
     }
   else if (!str_cmp(arg2, "filename"))
     {
@@ -107,10 +107,10 @@ void do_setshuttle(Character * ch, char * argument)
           char filename[MSL];
           snprintf(filename, MSL, "%s/%s", SHUTTLE_DIR, shuttle->filename);
           unlink(filename);
-          STRFREE(shuttle->filename);
+          DISPOSE(shuttle->filename);
         }
 
-      shuttle->filename = STRALLOC(argument);
+      shuttle->filename = str_dup(argument);
       WriteShuttleList();
     }
   else if (!str_cmp(arg2, "type"))
@@ -159,10 +159,10 @@ void do_setshuttle(Character * ch, char * argument)
 
           if ( stop->stop_name )
 	    {
-	      STRFREE( stop->stop_name );
+	      DISPOSE( stop->stop_name );
 	    }
 
-          stop->stop_name = STRALLOC("Stopless Name");
+          stop->stop_name = str_dup("Stopless Name");
           stop->room = 2;
           LINK( stop, shuttle->first_stop, shuttle->last_stop, next, prev );
 
@@ -205,10 +205,10 @@ void do_setshuttle(Character * ch, char * argument)
 	    {
 	      if (stop->stop_name)
 		{
-		  STRFREE(stop->stop_name);
+		  DISPOSE(stop->stop_name);
 		}
 
-	      stop->stop_name = STRALLOC(argument);
+	      stop->stop_name = str_dup(argument);
 	    }
 	  else if (!str_cmp(arg2, "room"))
 	    {
@@ -221,7 +221,7 @@ void do_setshuttle(Character * ch, char * argument)
 
 	      if (stop->stop_name)
 		{
-		  STRFREE(stop->stop_name);
+		  DISPOSE(stop->stop_name);
 		}
 
 	      DISPOSE(stop);

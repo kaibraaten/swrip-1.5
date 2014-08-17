@@ -95,8 +95,8 @@ void do_induct( Character *ch, char *argument )
   clan->members++;
 
   victim->pcdata->clan = clan;
-  STRFREE(victim->pcdata->clan_name);
-  victim->pcdata->clan_name = QUICKLINK( clan->name );
+  DISPOSE(victim->pcdata->clan_name);
+  victim->pcdata->clan_name = str_dup( clan->name );
   update_member( victim );
   act( AT_MAGIC, "You induct $N into $t", ch, clan->name, victim, TO_CHAR );
   act( AT_MAGIC, "$n inducts $N into $t", ch, clan->name, victim, TO_NOTVICT );

@@ -40,7 +40,7 @@ void do_opedit( Character *ch, char *argument )
       mprog = (MPROG_DATA*)ch->dest_buf;
 
       if ( mprog->comlist )
-        STRFREE( mprog->comlist );
+        DISPOSE( mprog->comlist );
 
       mprog->comlist = CopyBuffer( ch );
       StopEditing( ch );
@@ -205,8 +205,8 @@ void do_opedit( Character *ch, char *argument )
                 break;
               }
           }
-      STRFREE( mprg_next->arglist );
-      STRFREE( mprg_next->comlist );
+      DISPOSE( mprg_next->arglist );
+      DISPOSE( mprg_next->comlist );
       DISPOSE( mprg_next );
       if ( num <= 1 )
         REMOVE_BIT( obj->pIndexData->mprog.progtypes, mptype );
