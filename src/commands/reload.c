@@ -39,7 +39,7 @@ void do_reload( Character *ch, char *argument )
     {
       const Turret *turret = ship->turret[turret_num];
 
-      if( is_turret_damaged( turret ) )
+      if( IsTurretDamaged( turret ) )
 	{
 	  price += 50;
 	}
@@ -82,7 +82,7 @@ void do_reload( Character *ch, char *argument )
   for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
     {
       Turret *turret = ship->turret[turret_num];
-      set_turret_ready( turret );
+      SetTurretReady( turret );
     }
 
   ship->shipstate = SHIP_LANDED;

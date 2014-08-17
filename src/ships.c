@@ -471,7 +471,7 @@ static void LandShip( Ship *ship, const char *arg )
       for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
 	{
 	  Turret *turret = ship->turret[turret_num];
-	  reset_turret( turret );
+	  ResetTurret( turret );
 	}
 
       ship->shipstate = SHIP_LANDED;
@@ -677,7 +677,7 @@ static void MakeDebris( const Ship *ship )
 
   for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
     {
-      debris->turret[turret_num] = copy_turret( ship->turret[turret_num], debris );
+      debris->turret[turret_num] = CopyTurret( ship->turret[turret_num], debris );
     }
 
   strcpy( buf, "Debris of a " );
@@ -1235,7 +1235,7 @@ void RechargeShips( void )
       for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
 	{
 	  Turret *turret = ship->turret[turret_num];
-	  ship->energy -= get_energy_draw( turret );
+	  ship->energy -= GetTurretEnergyDraw( turret );
 	}
 
       if( ship->docked && ship->docked->sclass == SHIP_PLATFORM )
@@ -1648,19 +1648,19 @@ void UpdateShips( void )
 	{
 	  Turret *turret = ship->turret[turret_num];
 
-	  if ( turret_has_target( turret ) && ship->sclass <= SHIP_PLATFORM)
+	  if ( TurretHasTarget( turret ) && ship->sclass <= SHIP_PLATFORM)
 	    {
-	      const  Ship *turret_target = get_turret_target( turret );
+	      const  Ship *turret_target = GetTurretTarget( turret );
 
 	      sprintf( buf, "%s   %.0f %.0f %.0f", turret_target->name,
 		       turret_target->pos.x, turret_target->pos.y,
 		       turret_target->pos.z );
-	      echo_to_room_dnr( AT_BLUE , get_room_index(get_turret_room( turret ) ), "Target: " );
-	      echo_to_room( AT_LBLUE , get_room_index(get_turret_room( turret ) ),  buf );
+	      echo_to_room_dnr( AT_BLUE , get_room_index(GetTurretRoom( turret ) ), "Target: " );
+	      echo_to_room( AT_LBLUE , get_room_index(GetTurretRoom( turret ) ),  buf );
 
 	      if (!IsShipInCombatRange( ship, turret_target ) )
 		{
-		  clear_turret_target( turret );
+		  ClearTurretTarget( turret );
 		}
 	    }
 	}
@@ -1972,16 +1972,16 @@ void EchoToCockpit( int color, const Ship *ship, const char *argument )
       if ( room == ship->room.cockpit || room == ship->room.navseat
            || room == ship->room.pilotseat || room == ship->room.coseat
            || room == ship->room.gunseat || room == ship->room.engine
-           || room == get_turret_room( ship->turret[0] )
-	   || room == get_turret_room( ship->turret[1] )
-	   || room == get_turret_room( ship->turret[2] )
-	   || room == get_turret_room( ship->turret[3] )
-	   || room == get_turret_room( ship->turret[4] )
-	   || room == get_turret_room( ship->turret[5] )
-	   || room == get_turret_room( ship->turret[6] )
-	   || room == get_turret_room( ship->turret[7] )
-	   || room == get_turret_room( ship->turret[8] )
-	   || room == get_turret_room( ship->turret[9] ) )
+           || room == GetTurretRoom( ship->turret[0] )
+	   || room == GetTurretRoom( ship->turret[1] )
+	   || room == GetTurretRoom( ship->turret[2] )
+	   || room == GetTurretRoom( ship->turret[3] )
+	   || room == GetTurretRoom( ship->turret[4] )
+	   || room == GetTurretRoom( ship->turret[5] )
+	   || room == GetTurretRoom( ship->turret[6] )
+	   || room == GetTurretRoom( ship->turret[7] )
+	   || room == GetTurretRoom( ship->turret[8] )
+	   || room == GetTurretRoom( ship->turret[9] ) )
 	{
 	  echo_to_room( color, get_room_index(room), argument );
 	}
@@ -2127,7 +2127,7 @@ long int GetShipValue( const Ship *ship )
     {
       const Turret *turret = ship->turret[turret_num];
 
-      if( is_turret_installed( turret ) )
+      if( IsTurretInstalled( turret ) )
 	{
 	  price += 5000;
 	}
@@ -2221,39 +2221,39 @@ void SaveShip( const Ship *ship )
       fprintf( fp, "Vx            %.0f\n", ship->pos.x                       );
       fprintf( fp, "Vy            %.0f\n", ship->pos.y                       );
       fprintf( fp, "Vz            %.0f\n", ship->pos.z                       );
-      fprintf( fp, "Turret1       %ld\n",  get_turret_room( ship->turret[0] ));
-      fprintf( fp, "Turret2       %ld\n",  get_turret_room( ship->turret[0] ));
-      fprintf( fp, "Turret3       %ld\n",  get_turret_room( ship->turret[0] ));
-      fprintf( fp, "Turret4       %ld\n",  get_turret_room( ship->turret[0] ));
-      fprintf( fp, "Turret5       %ld\n",  get_turret_room( ship->turret[0] ));
-      fprintf( fp, "Turret6       %ld\n",  get_turret_room( ship->turret[0] ));
-      fprintf( fp, "Turret7       %ld\n",  get_turret_room( ship->turret[0] ));
-      fprintf( fp, "Turret8       %ld\n",  get_turret_room( ship->turret[0] ));
-      fprintf( fp, "Turret9       %ld\n",  get_turret_room( ship->turret[0] ));
-      fprintf( fp, "Turret0       %ld\n",  get_turret_room( ship->turret[0] ));
+      fprintf( fp, "Turret1       %ld\n",  GetTurretRoom( ship->turret[0] ));
+      fprintf( fp, "Turret2       %ld\n",  GetTurretRoom( ship->turret[0] ));
+      fprintf( fp, "Turret3       %ld\n",  GetTurretRoom( ship->turret[0] ));
+      fprintf( fp, "Turret4       %ld\n",  GetTurretRoom( ship->turret[0] ));
+      fprintf( fp, "Turret5       %ld\n",  GetTurretRoom( ship->turret[0] ));
+      fprintf( fp, "Turret6       %ld\n",  GetTurretRoom( ship->turret[0] ));
+      fprintf( fp, "Turret7       %ld\n",  GetTurretRoom( ship->turret[0] ));
+      fprintf( fp, "Turret8       %ld\n",  GetTurretRoom( ship->turret[0] ));
+      fprintf( fp, "Turret9       %ld\n",  GetTurretRoom( ship->turret[0] ));
+      fprintf( fp, "Turret0       %ld\n",  GetTurretRoom( ship->turret[0] ));
       fprintf( fp, "Statet0       %d\n",   ship->statet0                     );
       fprintf( fp, "Statei0       %d\n",   ship->statei0                     );
 
       fprintf( fp, "Statet1       %d\n",
-	       is_turret_damaged( ship->turret[0] ) ? LASER_DAMAGED : LASER_READY );
+	       IsTurretDamaged( ship->turret[0] ) ? LASER_DAMAGED : LASER_READY );
       fprintf( fp, "Statet2       %d\n",
-               is_turret_damaged( ship->turret[1] ) ? LASER_DAMAGED : LASER_READY );
+               IsTurretDamaged( ship->turret[1] ) ? LASER_DAMAGED : LASER_READY );
       fprintf( fp, "Statet3       %d\n",
-               is_turret_damaged( ship->turret[2] ) ? LASER_DAMAGED : LASER_READY );
+               IsTurretDamaged( ship->turret[2] ) ? LASER_DAMAGED : LASER_READY );
       fprintf( fp, "Statet4       %d\n",
-               is_turret_damaged( ship->turret[3] ) ? LASER_DAMAGED : LASER_READY );
+               IsTurretDamaged( ship->turret[3] ) ? LASER_DAMAGED : LASER_READY );
       fprintf( fp, "Statet5       %d\n",
-               is_turret_damaged( ship->turret[4] ) ? LASER_DAMAGED : LASER_READY );
+               IsTurretDamaged( ship->turret[4] ) ? LASER_DAMAGED : LASER_READY );
       fprintf( fp, "Statet6       %d\n",
-               is_turret_damaged( ship->turret[5] ) ? LASER_DAMAGED : LASER_READY );
+               IsTurretDamaged( ship->turret[5] ) ? LASER_DAMAGED : LASER_READY );
       fprintf( fp, "Statet7       %d\n",
-               is_turret_damaged( ship->turret[6] ) ? LASER_DAMAGED : LASER_READY );
+               IsTurretDamaged( ship->turret[6] ) ? LASER_DAMAGED : LASER_READY );
       fprintf( fp, "Statet8       %d\n",
-               is_turret_damaged( ship->turret[7] ) ? LASER_DAMAGED : LASER_READY );
+               IsTurretDamaged( ship->turret[7] ) ? LASER_DAMAGED : LASER_READY );
       fprintf( fp, "Statet9       %d\n",
-               is_turret_damaged( ship->turret[8] ) ? LASER_DAMAGED : LASER_READY );
+               IsTurretDamaged( ship->turret[8] ) ? LASER_DAMAGED : LASER_READY );
       fprintf( fp, "Statet0       %d\n",
-               is_turret_damaged( ship->turret[9] ) ? LASER_DAMAGED : LASER_READY );
+               IsTurretDamaged( ship->turret[9] ) ? LASER_DAMAGED : LASER_READY );
 
       fprintf( fp, "Lasers        %d\n",   ship->lasers                      );
       fprintf( fp, "Missiles      %d\n",   ship->missiles                    );
@@ -2398,15 +2398,15 @@ static void FReadShip( Ship *ship, FILE *fp )
 		{
 		  Turret *turret = ship->turret[turret_num];
 
-		  set_turret_room( turret, turret_placeholder[turret_num].room_vnum );
+		  SetTurretRoom( turret, turret_placeholder[turret_num].room_vnum );
 
 		  if( turret_placeholder[turret_num].weapon_state == LASER_DAMAGED )
 		    {
-		      set_turret_damaged( turret );
+		      SetTurretDamaged( turret );
 		    }
 		  else
 		    {
-		      set_turret_ready( turret );
+		      SetTurretReady( turret );
 		    }
 		}
 
@@ -2588,7 +2588,7 @@ static bool LoadShipFile( const char *shipfile )
 
   for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
     {
-      ship->turret[turret_num] = create_turret( ship );
+      ship->turret[turret_num] = AllocateTurret( ship );
     }
 
   sprintf( filename, "%s%s", SHIP_DIR, shipfile );
@@ -2638,7 +2638,7 @@ static bool LoadShipFile( const char *shipfile )
       for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
 	{
 	  Turret *turret = ship->turret[turret_num];
-	  destroy_turret( turret );
+	  FreeTurret( turret );
 	}
 
       DISPOSE( ship );
@@ -2819,7 +2819,7 @@ void ResetShip( Ship *ship )
   for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
     {
       Turret *turret = ship->turret[turret_num];
-      reset_turret( turret );
+      ResetTurret( turret );
     }
 
   ship->statet0 = LASER_READY;
@@ -3067,16 +3067,16 @@ Ship *GetShipFromCockpit( vnum_t vnum )
   for ( ship = first_ship; ship; ship = ship->next )
     {
       if ( vnum == ship->room.cockpit
-	   || vnum == get_turret_room( ship->turret[0] )
-	   || vnum == get_turret_room( ship->turret[1] )
-	   || vnum == get_turret_room( ship->turret[2] )
-	   || vnum == get_turret_room( ship->turret[3] )
-	   || vnum == get_turret_room( ship->turret[4] )
-	   || vnum == get_turret_room( ship->turret[5] )
-	   || vnum == get_turret_room( ship->turret[6] )
-	   || vnum == get_turret_room( ship->turret[7] )
-	   || vnum == get_turret_room( ship->turret[8] )
-	   || vnum == get_turret_room( ship->turret[9] )
+	   || vnum == GetTurretRoom( ship->turret[0] )
+	   || vnum == GetTurretRoom( ship->turret[1] )
+	   || vnum == GetTurretRoom( ship->turret[2] )
+	   || vnum == GetTurretRoom( ship->turret[3] )
+	   || vnum == GetTurretRoom( ship->turret[4] )
+	   || vnum == GetTurretRoom( ship->turret[5] )
+	   || vnum == GetTurretRoom( ship->turret[6] )
+	   || vnum == GetTurretRoom( ship->turret[7] )
+	   || vnum == GetTurretRoom( ship->turret[8] )
+	   || vnum == GetTurretRoom( ship->turret[9] )
            || vnum == ship->room.hanger
            || vnum == ship->room.pilotseat
            || vnum == ship->room.coseat
@@ -3183,16 +3183,16 @@ Ship *GetShipFromTurret( vnum_t vnum )
   for ( ship = first_ship; ship; ship = ship->next )
     {
       if ( vnum == ship->room.gunseat
-	   || vnum == get_turret_room( ship->turret[0] )
-           || vnum == get_turret_room( ship->turret[1] )
-           || vnum == get_turret_room( ship->turret[2] )
-           || vnum == get_turret_room( ship->turret[3] )
-           || vnum == get_turret_room( ship->turret[4] )
-           || vnum == get_turret_room( ship->turret[5] )
-           || vnum == get_turret_room( ship->turret[6] )
-           || vnum == get_turret_room( ship->turret[7] )
-           || vnum == get_turret_room( ship->turret[8] )
-           || vnum == get_turret_room( ship->turret[9] ) )
+	   || vnum == GetTurretRoom( ship->turret[0] )
+           || vnum == GetTurretRoom( ship->turret[1] )
+           || vnum == GetTurretRoom( ship->turret[2] )
+           || vnum == GetTurretRoom( ship->turret[3] )
+           || vnum == GetTurretRoom( ship->turret[4] )
+           || vnum == GetTurretRoom( ship->turret[5] )
+           || vnum == GetTurretRoom( ship->turret[6] )
+           || vnum == GetTurretRoom( ship->turret[7] )
+           || vnum == GetTurretRoom( ship->turret[8] )
+           || vnum == GetTurretRoom( ship->turret[9] ) )
         {
           return ship;
         }
@@ -3483,11 +3483,11 @@ void DamageShip( Ship *ship, int min, int max, Character *ch, const Ship *assaul
 	{
 	  Turret *turret = ship->turret[turret_num];
 
-	  if ( number_range(1, 100) <= 5 * ionFactor && !is_turret_damaged( turret ) )
+	  if ( number_range(1, 100) <= 5 * ionFactor && !IsTurretDamaged( turret ) )
 	    {
-	      echo_to_room( AT_BLOOD + AT_BLINK, get_room_index( get_turret_room( turret ) ),
+	      echo_to_room( AT_BLOOD + AT_BLINK, get_room_index( GetTurretRoom( turret ) ),
 			    "Turret DAMAGED!" );
-	      set_turret_damaged( turret );
+	      SetTurretDamaged( turret );
 	    }
 	}
 

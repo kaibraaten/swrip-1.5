@@ -32,7 +32,7 @@ void do_copyship( Character *ch, char *argument )
 
   for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
     {
-      ship->turret[turret_num] = create_turret( ship );
+      ship->turret[turret_num] = AllocateTurret( ship );
     }
 
   ship->name            = STRALLOC( argument );

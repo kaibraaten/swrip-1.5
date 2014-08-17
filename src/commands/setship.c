@@ -125,7 +125,7 @@ void do_setship( Character *ch, char *argument )
       for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
 	{
 	  Turret *turret = ship->turret[turret_num];
-	  set_turret_room( turret, 0 );
+	  SetTurretRoom( turret, 0 );
 	}
 
       ship->room.hanger = 0;
@@ -378,7 +378,7 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      set_turret_room( ship->turret[0], tempnum );
+      SetTurretRoom( ship->turret[0], tempnum );
       send_to_char( "Done.\r\n", ch );
       SaveShip( ship );
       return;
@@ -413,7 +413,7 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      set_turret_room( ship->turret[1], tempnum );
+      SetTurretRoom( ship->turret[1], tempnum );
       send_to_char( "Done.\r\n", ch );
       SaveShip( ship );
       return;
@@ -454,7 +454,7 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      set_turret_room( ship->turret[2], tempnum );
+      SetTurretRoom( ship->turret[2], tempnum );
       send_to_char( "Done.\r\n", ch );
       SaveShip( ship );
       return;
@@ -495,7 +495,7 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      set_turret_room( ship->turret[3], tempnum );
+      SetTurretRoom( ship->turret[3], tempnum );
       send_to_char( "Done.\r\n", ch );
       SaveShip( ship );
       return;
@@ -537,7 +537,7 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      set_turret_room( ship->turret[4], tempnum );
+      SetTurretRoom( ship->turret[4], tempnum );
       send_to_char( "Done.\r\n", ch );
       SaveShip( ship );
       return;
@@ -578,7 +578,7 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      set_turret_room( ship->turret[5], tempnum );
+      SetTurretRoom( ship->turret[5], tempnum );
       send_to_char( "Done.\r\n", ch );
       SaveShip( ship );
       return;
@@ -619,7 +619,7 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      set_turret_room( ship->turret[6], tempnum );
+      SetTurretRoom( ship->turret[6], tempnum );
       send_to_char( "Done.\r\n", ch );
       SaveShip( ship );
       return;
@@ -660,7 +660,7 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      set_turret_room( ship->turret[7], tempnum );
+      SetTurretRoom( ship->turret[7], tempnum );
       send_to_char( "Done.\r\n", ch );
       SaveShip( ship );
       return;
@@ -701,7 +701,7 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      set_turret_room( ship->turret[8], tempnum );
+      SetTurretRoom( ship->turret[8], tempnum );
       send_to_char( "Done.\r\n", ch );
       SaveShip( ship );
       return;
@@ -742,7 +742,7 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      set_turret_room( ship->turret[9], tempnum );
+      SetTurretRoom( ship->turret[9], tempnum );
       send_to_char( "Done.\r\n", ch );
       SaveShip( ship );
       return;
@@ -1107,7 +1107,7 @@ static bool room_is_in_use( const Ship *ship, int room_vnum )
 	{
 	  const Turret *turret = ship->turret[turret_num];
 
-	  if( get_turret_room( turret ) == room_vnum )
+	  if( GetTurretRoom( turret ) == room_vnum )
 	    {
 	      return true;
 	    }

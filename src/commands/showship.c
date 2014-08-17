@@ -82,12 +82,12 @@ void do_showship( Character *ch, char *argument )
 	{ "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten" };
       const Turret *turret = ship->turret[turret_num];
 
-      if ( is_turret_installed( turret ) )
+      if ( IsTurretInstalled( turret ) )
 	{
 	  ch_printf( ch, "Turret %s: %d  Condition: %s\r\n",
 		     literal_number[turret_num],
-		     get_turret_room( turret ),
-		     is_turret_damaged( turret ) ? "Damaged" : "Good");
+		     GetTurretRoom( turret ),
+		     IsTurretDamaged( turret ) ? "Damaged" : "Good");
 	}
     }
 

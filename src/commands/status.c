@@ -70,11 +70,11 @@ void do_status(Character *ch, char *argument )
       static const char * const literal_number[MAX_NUMBER_OF_TURRETS_IN_SHIP] =
 	{ "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten" };
       const Turret *turret = target->turret[turret_num];
-      const Ship *turret_target = turret_has_target( turret ) ? get_turret_target( turret ) : NULL;
+      const Ship *turret_target = TurretHasTarget( turret ) ? GetTurretTarget( turret ) : NULL;
       const char *turret_target_name = turret_target ? turret_target->name : "none";
-      const char *turret_status = is_turret_damaged( turret ) ? "Damaged" : "Good";
+      const char *turret_status = IsTurretDamaged( turret ) ? "Damaged" : "Good";
 
-      if( is_turret_installed( turret ) )
+      if( IsTurretInstalled( turret ) )
 	{
 	  ch_printf( ch, "&OTurret %s:  &Y %s  &OCurrent Target:&Y %s\r\n",
 		     literal_number[turret_num], turret_status, turret_target_name );

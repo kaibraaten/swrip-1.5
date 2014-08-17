@@ -63,9 +63,9 @@ void do_target(Character *ch, char *argument )
 	    {
 	      Turret *turret = ship->turret[turret_num];
 
-	      if( ch->in_room->vnum == get_turret_room( turret ) )
+	      if( ch->in_room->vnum == GetTurretRoom( turret ) )
 		{
-		  clear_turret_target( turret );
+		  ClearTurretTarget( turret );
 		}
 	    }
 
@@ -164,9 +164,9 @@ void do_target(Character *ch, char *argument )
     {
       Turret *turret = ship->turret[turret_num];
 
-      if( ch->in_room->vnum == get_turret_room( turret ) )
+      if( ch->in_room->vnum == GetTurretRoom( turret ) )
 	{
-	  set_turret_target( turret, target );
+	  SetTurretTarget( turret, target );
 	}
     }
 

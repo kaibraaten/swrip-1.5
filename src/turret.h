@@ -25,31 +25,31 @@
 
 #include "types.h"
 
-Turret *create_turret( Ship *owner );
-void destroy_turret( Turret *turret );
-Turret *copy_turret( const Turret *old_turret, Ship *owner_of_new_turret );
+Turret *AllocateTurret( Ship *owner );
+void FreeTurret( Turret *turret );
+Turret *CopyTurret( const Turret *old_turret, Ship *owner_of_new_turret );
 
-bool is_turret_installed( const Turret *turret );
+bool IsTurretInstalled( const Turret *turret );
 
-void reset_turret( Turret *turret );
+void ResetTurret( Turret *turret );
 
-void set_turret_ready( Turret *turret );
-bool is_turret_ready( const Turret *turret );
+void SetTurretReady( Turret *turret );
+bool IsTurretReady( const Turret *turret );
 
-void set_turret_damaged( Turret *turret );
-bool is_turret_damaged( const Turret *turret );
+void SetTurretDamaged( Turret *turret );
+bool IsTurretDamaged( const Turret *turret );
 
-bool is_turret_recharging( const Turret *turret );
-void fire_turret( Turret *turret );
+bool IsTurretRecharging( const Turret *turret );
+void FireTurret( Turret *turret );
 
-void clear_turret_target( Turret *turret );
-void set_turret_target( Turret *turret, Ship *target );
-Ship *get_turret_target( const Turret *turret );
-bool turret_has_target( const Turret *turret );
+void ClearTurretTarget( Turret *turret );
+void SetTurretTarget( Turret *turret, Ship *target );
+Ship *GetTurretTarget( const Turret *turret );
+bool TurretHasTarget( const Turret *turret );
 
-void set_turret_room( Turret *turret, vnum_t room_vnum );
-vnum_t get_turret_room( const Turret *turret );
+void SetTurretRoom( Turret *turret, vnum_t room_vnum );
+vnum_t GetTurretRoom( const Turret *turret );
 
-int get_energy_draw( const Turret *turret );
+int GetTurretEnergyDraw( const Turret *turret );
 
 #endif

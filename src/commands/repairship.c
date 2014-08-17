@@ -134,13 +134,13 @@ void do_repairship(Character *ch, char *argument )
 
       turret = ship->turret[turret_number - 1];
 
-      if( !is_turret_installed( turret ) )
+      if( !IsTurretInstalled( turret ) )
 	{
 	  ch_printf( ch, "This ship doesn't have that many turrets installed.\r\n" );
 	  return;
 	}
 
-      reset_turret( turret );
+      ResetTurret( turret );
       ch_printf( ch, "&GLaser Turret %d repaired.\r\n", turret_number );
     }
 

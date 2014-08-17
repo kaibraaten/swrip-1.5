@@ -567,32 +567,32 @@ void do_fire(Character *ch, char *argument )
     {
       Turret *turret = ship->turret[turret_num];
 
-      if ( ch->in_room->vnum == get_turret_room( turret ) && !str_prefix( argument , "lasers") )
+      if ( ch->in_room->vnum == GetTurretRoom( turret ) && !str_prefix( argument , "lasers") )
 	{
-	  if ( is_turret_damaged( turret ) )
+	  if ( IsTurretDamaged( turret ) )
 	    {
 	      send_to_char("&RThe ships turret is damaged.\r\n",ch);
 	      return;
 	    }
 
-	  if ( is_turret_recharging( turret ) )
+	  if ( IsTurretRecharging( turret ) )
 	    {
 	      send_to_char("&RThe turbolaser is recharging.\r\n",ch);
 	      return;
 	    }
 
-	  if ( !turret_has_target( turret ) )
+	  if ( !TurretHasTarget( turret ) )
 	    {
 	      send_to_char("&RYou need to choose a target first.\r\n",ch);
 	      return;
 	    }
 
-	  target = get_turret_target( turret );
+	  target = GetTurretTarget( turret );
 
 	  if (ship->sclass <= SHIP_PLATFORM && !IsShipInCombatRange( ship, target) )
 	    {
 	      send_to_char("&RYour target seems to have left.\r\n",ch);
-	      clear_turret_target( turret );
+	      ClearTurretTarget( turret );
 	      return;
 	    }
 
@@ -608,7 +608,7 @@ void do_fire(Character *ch, char *argument )
 	  /* At this point this function just increases turret's weapon_state,
 	   * but as we refactor further it will handle the actual firing as well.
 	   */
-	  fire_turret( turret );
+	  FireTurret( turret );
 
 	  the_chance += target->sclass - CAPITAL_SHIP+1;
 	  the_chance += ship->currspeed - target->currspeed;
