@@ -33,16 +33,15 @@ Ship *last_ship = NULL;
 
 static int baycount = 0;
 
-static void fread_ship( Ship *ship, FILE *fp );
-static bool load_ship_file( const char *shipfile );
-static void approachland( Ship *ship, const char *arg );
-static void landship( Ship *ship, const char *arg );
-static void launchship( Ship *ship );
-static void makedebris( Ship *ship );
+static void FReadShip( Ship *ship, FILE *fp );
+static bool LoadShipFile( const char *shipfile );
+static void ApproachLandingSite( Ship *ship, const char *arg );
+static void LandShip( Ship *ship, const char *arg );
+static void LaunchShip( Ship *ship );
+static void MakeDebris( const Ship *ship );
 static bool CaughtInGravity( const Ship *ship, const Spaceobject *space);
 
-static bool will_collide_with_sun( const Ship *ship,
-				   const Spaceobject *sun )
+static bool WillCollideWithSun( const Ship *ship, const Spaceobject *sun )
 {
   if ( sun->name
        && str_cmp( sun->name, "" )
@@ -54,22 +53,22 @@ static bool will_collide_with_sun( const Ship *ship,
   return false;
 }
 
-static bool ship_has_state( const Ship *ship, short state )
+static bool ShipHasState( const Ship *ship, short state )
 {
   return ship->shipstate == state;
 }
 
 bool IsShipInHyperspace( const Ship *ship )
 {
-  return ship_has_state( ship, SHIP_HYPERSPACE );
+  return ShipHasState( ship, SHIP_HYPERSPACE );
 }
 
 bool IsShipDisabled( const Ship *ship )
 {
-  return ship_has_state( ship, SHIP_DISABLED );
+  return ShipHasState( ship, SHIP_DISABLED );
 }
 
-static void evade_collision_with_sun( Ship *ship, const Spaceobject *sun )
+static void EvadeCollisionWithSun( Ship *ship, const Spaceobject *sun )
 {
   ship->head.x = 10 * ship->pos.x;
   ship->head.y = 10 * ship->pos.y;
@@ -157,9 +156,9 @@ void UpdateShipMovement( void )
         {
 
           if ( spaceobj->type == SPACE_SUN
-	       && will_collide_with_sun( ship, spaceobj ) )
+	       && WillCollideWithSun( ship, spaceobj ) )
             {
-	      evade_collision_with_sun( ship, spaceobj );
+	      EvadeCollisionWithSun( ship, spaceobj );
             }
 
           if ( ship->currspeed > 0 )
@@ -367,7 +366,7 @@ void UpdateShipMovement( void )
     }
 }
 
-static void landship( Ship *ship, const char *arg )
+static void LandShip( Ship *ship, const char *arg )
 {
   Ship *target = NULL;
   char buf[MAX_STRING_LENGTH];
@@ -483,7 +482,7 @@ static void landship( Ship *ship, const char *arg )
   SaveShip(ship);
 }
 
-static void approachland( Ship *ship, const char *arg)
+static void ApproachLandingSite( Ship *ship, const char *arg)
 {
   Spaceobject *spaceobj = NULL;
   char buf[MAX_STRING_LENGTH];
@@ -541,7 +540,7 @@ static void approachland( Ship *ship, const char *arg)
   EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );
 }
 
-static void launchship( Ship *ship )
+static void LaunchShip( Ship *ship )
 {
   char buf[MAX_STRING_LENGTH];
   Ship *target = NULL;
@@ -634,7 +633,7 @@ static void launchship( Ship *ship )
   echo_to_room( AT_YELLOW , get_room_index(ship->lastdoc) , buf );
 }
 
-static void makedebris( Ship *ship )
+static void MakeDebris( const Ship *ship )
 {
   Ship *debris = NULL;
   char buf[MAX_STRING_LENGTH];
@@ -1486,18 +1485,18 @@ void UpdateShips( void )
 
       if (ship->shipstate == SHIP_LAND_2)
 	{
-	  landship( ship , ship->dest );
+	  LandShip( ship , ship->dest );
 	}
 
       if (ship->shipstate == SHIP_LAND)
         {
-          approachland( ship, ship->dest );
+          ApproachLandingSite( ship, ship->dest );
           ship->shipstate = SHIP_LAND_2;
         }
 
       if (ship->shipstate == SHIP_LAUNCH_2)
 	{
-	  launchship( ship );
+	  LaunchShip( ship );
 	}
 
       if (ship->shipstate == SHIP_LAUNCH)
@@ -2291,7 +2290,7 @@ void SaveShip( const Ship *ship )
   fclose( fp );
 }
 
-static void fread_ship( Ship *ship, FILE *fp )
+static void FReadShip( Ship *ship, FILE *fp )
 {
   for ( ; ; )
     {
@@ -2564,7 +2563,7 @@ static void fread_ship( Ship *ship, FILE *fp )
  * Load a ship file
  */
 
-static bool load_ship_file( const char *shipfile )
+static bool LoadShipFile( const char *shipfile )
 {
   char filename[256];
   Ship *ship = NULL;
@@ -2607,7 +2606,7 @@ static bool load_ship_file( const char *shipfile )
           word = fread_word( fp );
 	  if ( !str_cmp( word, "SHIP"   ) )
             {
-              fread_ship( ship, fp );
+              FReadShip( ship, fp );
             }
           else if ( !str_cmp( word, "END"  ) )
             {
@@ -2766,7 +2765,7 @@ void LoadShips( )
 	  break;
 	}
 
-      if ( !load_ship_file( filename ) )
+      if ( !LoadShipFile( filename ) )
         {
           bug( "Cannot load ship file: %s", filename );
         }
@@ -3543,12 +3542,12 @@ void DestroyShip( Ship *ship , Character *ch )
 
 #ifdef NODEATH
   ResetShip(ship);
-  makedebris(ship);
+  MakeDebris(ship);
   return;
 #endif
 #ifdef NODEATHSHIP
   ResetShip(ship);
-  makedebris(ship);
+  MakeDebris(ship);
   return;
 #endif
 
@@ -3558,7 +3557,7 @@ void DestroyShip( Ship *ship , Character *ch )
       return;
     }
 
-  makedebris(ship);
+  MakeDebris(ship);
 
   for ( roomnum = ship->room.first; roomnum <= ship->room.last; roomnum++ )
     {
