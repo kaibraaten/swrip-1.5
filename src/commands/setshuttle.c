@@ -9,7 +9,7 @@
 
 void do_setshuttle(Character * ch, char * argument)
 {
-  SHUTTLE_DATA *shuttle = NULL;
+  Shuttle *shuttle = NULL;
   char arg1[MIL];
   char arg2[MIL];
   int value = 0;
@@ -34,7 +34,7 @@ void do_setshuttle(Character * ch, char * argument)
       return;
     }
 
-  shuttle = get_shuttle(arg1);
+  shuttle = GetShuttle(arg1);
 
   if ( !shuttle )
     {
@@ -111,7 +111,7 @@ void do_setshuttle(Character * ch, char * argument)
         }
 
       shuttle->filename = STRALLOC(argument);
-      write_shuttle_list();
+      WriteShuttleList();
     }
   else if (!str_cmp(arg2, "type"))
     {
@@ -135,13 +135,13 @@ void do_setshuttle(Character * ch, char * argument)
     }
   else if (!str_cmp(arg2, "remove"))
     {
-      destroy_shuttle(shuttle);
+      DestroyShuttle(shuttle);
       send_to_char("Shuttle Removed.\r\n", ch);
       return;
     }
   else if (!str_cmp(arg2, "stop"))
     {
-      STOP_DATA * stop = NULL;
+      ShuttleStop * stop = NULL;
       argument = one_argument(argument, arg1);
 
       if (arg1[0] == '\0' || argument[0] == '\0')
@@ -155,7 +155,7 @@ void do_setshuttle(Character * ch, char * argument)
 
       if (!str_cmp(arg1, "add"))
         {
-          stop = create_stop();
+          stop = AllocateShuttleStop();
 
           if ( stop->stop_name )
 	    {
@@ -241,6 +241,6 @@ void do_setshuttle(Character * ch, char * argument)
       return;
     }
 
-  save_shuttle(shuttle);
+  SaveShuttle(shuttle);
   send_to_char("Ok.\r\n", ch);
 }

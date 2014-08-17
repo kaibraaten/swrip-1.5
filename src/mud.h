@@ -1113,8 +1113,8 @@ struct Room
   vnum_t            tele_vnum;
   short             tele_delay;
   short             tunnel;              /* max people that will fit */
-  SHUTTLE_DATA     *first_shuttle;
-  SHUTTLE_DATA     *last_shuttle;
+  Shuttle     *first_shuttle;
+  Shuttle     *last_shuttle;
 
   struct
   {

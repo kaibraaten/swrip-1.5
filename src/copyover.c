@@ -68,7 +68,7 @@ void do_copyover( Character * ch, char *argument )
   char filename[256];
 
   /*
-    SHUTTLE_DATA * tshuttle;
+    Shuttle * tshuttle;
   */
 
   if( !fp )

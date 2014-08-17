@@ -926,7 +926,7 @@ static void show_no_arg( Character *ch, bool is_auto )
     }
 
   show_ships_to_char( ch->in_room->first_ship, ch );
-  show_shuttles_to_char( ch->in_room->first_shuttle, ch );
+  ShowShuttlesToCharacter( ch->in_room->first_shuttle, ch );
   show_list_to_char( ch->in_room->first_content, ch, false, false );
   show_char_to_char( ch->in_room->first_person,  ch );
 

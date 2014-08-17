@@ -3,9 +3,9 @@
 
 void do_showshuttle (Character * ch, char * argument)
 {
-  STOP_DATA * stop = NULL;
+  ShuttleStop * stop = NULL;
   int count = 0;
-  SHUTTLE_DATA * shuttle = get_shuttle(argument);
+  Shuttle * shuttle = GetShuttle(argument);
 
   if ( !shuttle )
     {

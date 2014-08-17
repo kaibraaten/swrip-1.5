@@ -8,7 +8,7 @@ void do_leaveship( Character *ch, char *argument )
   Room *fromroom = NULL;
   Room *toroom = NULL;
   Ship *ship = NULL;
-  SHUTTLE_DATA * shuttle = NULL;
+  Shuttle * shuttle = NULL;
 
   fromroom = ch->in_room;
 
@@ -46,7 +46,7 @@ void do_leaveship( Character *ch, char *argument )
           return;
         }
     }
-  else if  ( (shuttle = shuttle_from_entrance(fromroom->vnum)) != NULL )
+  else if  ( (shuttle = GetShuttleFromEntrance(fromroom->vnum)) != NULL )
     {
       if ( !shuttle->in_room || ( toroom = get_room_index( shuttle->in_room->vnum ) ) == NULL )
         {

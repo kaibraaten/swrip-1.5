@@ -2,11 +2,11 @@
 #include "mud.h"
 #include "shuttle.h"
 
-static void output_shuttle(Character * ch, SHUTTLE_DATA * shuttle);
+static void output_shuttle(Character * ch, Shuttle * shuttle);
 
 void do_pluogus( Character *ch, char *argument )
 {
-  SHUTTLE_DATA * shuttle = NULL;
+  Shuttle * shuttle = NULL;
 
   if ( !HasComlink( ch ) )
     {
@@ -14,22 +14,22 @@ void do_pluogus( Character *ch, char *argument )
       return;
     }
 
-  if ((shuttle = get_shuttle("Serin Pluogus")) != NULL)
+  if ((shuttle = GetShuttle("Serin Pluogus")) != NULL)
     {
       output_shuttle(ch, shuttle);
       send_to_char("\r\n", ch);
     }
 
-  if ((shuttle = get_shuttle("Serin Tocca")) != NULL)
+  if ((shuttle = GetShuttle("Serin Tocca")) != NULL)
     {
       output_shuttle(ch, shuttle);
       send_to_char("\r\n", ch);
     }
 }
 
-static void output_shuttle(Character * ch, SHUTTLE_DATA * shuttle)
+static void output_shuttle(Character * ch, Shuttle * shuttle)
 {
-  STOP_DATA * stop = NULL;
+  ShuttleStop * stop = NULL;
   int itt = 0;
 
   if (shuttle == NULL) return;

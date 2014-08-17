@@ -28,10 +28,10 @@
 #define SHUTTLE_DIR     "./shuttle/"
 #define SHUTTLE_LIST    "shuttle.lst"
 
-struct stop_data
+struct ShuttleStop
 {
-  STOP_DATA *prev; /* Previous Stop */
-  STOP_DATA *next; /* Next Stop */
+  ShuttleStop *prev; /* Previous Stop */
+  ShuttleStop *next; /* Next Stop */
   char      *stop_name; /* Name of the Stop, ie 'Coruscant' or 'Monument Plaza' */
   vnum_t     room;
 };
@@ -51,24 +51,24 @@ typedef enum {
   SHUTTLE_HYPERSPACE
 } SHUTTLE_CLASS;
 
-struct shuttle_data
+struct Shuttle
 {
-  SHUTTLE_DATA* prev;
-  SHUTTLE_DATA* next;
+  Shuttle* prev;
+  Shuttle* next;
 
-  SHUTTLE_DATA* next_in_room;
-  SHUTTLE_DATA* prev_in_room;
+  Shuttle* next_in_room;
+  Shuttle* prev_in_room;
 
   Room* in_room;
 
   /* HOTBOOT info, save vnum of current, then loop through on load to find it */
-  STOP_DATA *current;
+  ShuttleStop *current;
   int current_number;
 
   int state;
 
-  STOP_DATA *first_stop;
-  STOP_DATA *last_stop;
+  ShuttleStop *first_stop;
+  ShuttleStop *last_stop;
 
   SHUTTLE_CLASS type;
 
@@ -98,30 +98,30 @@ struct shuttle_data
 #endif
 
 /* Used for double linked list */
-extern SHUTTLE_DATA *first_shuttle;
-extern SHUTTLE_DATA *last_shuttle;
+extern Shuttle *first_shuttle;
+extern Shuttle *last_shuttle;
 
 /* Function prototypes */
 
-void update_shuttle(void);
-SHUTTLE_DATA *get_shuttle( const char *argument );
-void write_shuttle_list( void );
-bool save_shuttle( const SHUTTLE_DATA *shuttle );
-SHUTTLE_DATA *make_shuttle( const char *filename, const char *name );
-bool extract_shuttle( SHUTTLE_DATA *shuttle );
-bool insert_shuttle( SHUTTLE_DATA *shuttle, Room *room );
-void load_shuttles(void);
-bool load_shuttle_file( const char *shuttlefile );
-void fread_shuttle( SHUTTLE_DATA *shuttle, FILE *fp );
-void fread_stop( STOP_DATA * stop, FILE *fp );
-void destroy_shuttle( SHUTTLE_DATA *shuttle );
-void show_shuttles_to_char( const SHUTTLE_DATA *shuttle, Character *ch );
-SHUTTLE_DATA *shuttle_in_room( const Room *room, const char *name );
-SHUTTLE_DATA *shuttle_from_entrance( vnum_t vnum );
-STOP_DATA *create_stop( void );
+void UpdateShuttle(void);
+Shuttle *GetShuttle( const char *argument );
+void WriteShuttleList( void );
+bool SaveShuttle( const Shuttle *shuttle );
+Shuttle *MakeShuttle( const char *filename, const char *name );
+bool ExtractShuttle( Shuttle *shuttle );
+bool InsertShuttle( Shuttle *shuttle, Room *room );
+void LoadShuttles(void);
+bool LoadShuttleFile( const char *shuttlefile );
+void ReadShuttle( Shuttle *shuttle, FILE *fp );
+void ReadShuttleStop( ShuttleStop * stop, FILE *fp );
+void DestroyShuttle( Shuttle *shuttle );
+void ShowShuttlesToCharacter( const Shuttle *shuttle, Character *ch );
+Shuttle *GetShuttleInRoom( const Room *room, const char *name );
+Shuttle *GetShuttleFromEntrance( vnum_t vnum );
+ShuttleStop *AllocateShuttleStop( void );
 
-DECLARE_DO_FUN( do_showshuttle          );
-DECLARE_DO_FUN( do_makeshuttle          );
-DECLARE_DO_FUN( do_setshuttle           );
+DECLARE_DO_FUN( do_showshuttle );
+DECLARE_DO_FUN( do_makeshuttle );
+DECLARE_DO_FUN( do_setshuttle  );
 
 #endif

@@ -3,7 +3,7 @@
 
 void do_makeshuttle (Character * ch, char * argument)
 {
-  SHUTTLE_DATA * shuttle;
+  Shuttle * shuttle;
   char arg[MAX_INPUT_LENGTH];
 
   argument = one_argument( argument, arg );
@@ -13,7 +13,7 @@ void do_makeshuttle (Character * ch, char * argument)
       send_to_char( "Usage: makeshuttle <filename> <shuttle name>\r\n", ch );
       return;
     }
-  shuttle = make_shuttle(arg, argument);
+  shuttle = MakeShuttle(arg, argument);
   if (shuttle)
     send_to_char( "Shuttle Created", ch);
   else

@@ -708,7 +708,7 @@ void boot_db( bool fCopyOver )
   load_planets();
 
   log_string( "Loading shuttles" );
-  load_shuttles();
+  LoadShuttles();
 
   log_string( "Loading Hall of Fame" );
   LoadHallOfFame();

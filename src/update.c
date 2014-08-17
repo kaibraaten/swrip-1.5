@@ -2642,7 +2642,7 @@ void update_handler( void )
     {
       pulse_space = PULSE_SPACE;
       UpdateShips();
-      update_shuttle();
+      UpdateShuttle();
     }
 
   if ( --pulse_recharge <= 0 )

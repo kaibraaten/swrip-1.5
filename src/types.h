@@ -187,11 +187,11 @@ typedef struct member_list             MEMBER_LIST; /* List of members in clan *
 struct membersort_data;
 typedef struct membersort_data         MS_DATA;     /* List for sorted roster list */
 
-struct shuttle_data;
-typedef struct shuttle_data SHUTTLE_DATA;
+struct Shuttle;
+typedef struct Shuttle Shuttle;
 
-struct stop_data;
-typedef struct stop_data STOP_DATA;
+struct ShuttleStop;
+typedef struct ShuttleStop ShuttleStop;
 
 struct CraftingSession;
 typedef struct CraftingSession CraftingSession;

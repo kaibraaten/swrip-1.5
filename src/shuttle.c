@@ -32,24 +32,24 @@
 #include "shuttle.h"
 #include "ships.h"
 
-SHUTTLE_DATA *first_shuttle = NULL;
-SHUTTLE_DATA *last_shuttle = NULL;
+Shuttle *first_shuttle = NULL;
+Shuttle *last_shuttle = NULL;
 
-STOP_DATA *create_stop( void )
+ShuttleStop *AllocateShuttleStop( void )
 {
-  STOP_DATA * stop = NULL;
+  ShuttleStop *stop = NULL;
 
-  CREATE( stop, STOP_DATA, 1);
+  CREATE( stop, ShuttleStop, 1);
   stop->room = INVALID_VNUM;
 
   return stop;
 }
 
-SHUTTLE_DATA * create_shuttle( void )
+static Shuttle *AllocateShuttle( void )
 {
-  SHUTTLE_DATA * shuttle = NULL;
+  Shuttle *shuttle = NULL;
 
-  CREATE(shuttle, SHUTTLE_DATA, 1);
+  CREATE(shuttle, Shuttle, 1);
   shuttle->current_number = -1;
   shuttle->state          = SHUTTLE_STATE_LANDED;
   shuttle->first_stop     = shuttle->last_stop = NULL;
@@ -60,16 +60,16 @@ SHUTTLE_DATA * create_shuttle( void )
   return shuttle;
 }
 
-SHUTTLE_DATA * make_shuttle( const char *filename, const char *name )
+Shuttle *MakeShuttle( const char *filename, const char *name )
 {
-  SHUTTLE_DATA * shuttle = create_shuttle();
-  shuttle->name          = STRALLOC( name );
-  shuttle->filename      = STRALLOC( filename );
+  Shuttle *shuttle   = AllocateShuttle();
+  shuttle->name      = STRALLOC( name );
+  shuttle->filename  = STRALLOC( filename );
 
-  if (save_shuttle( shuttle ))
+  if (SaveShuttle( shuttle ))
     {
       LINK( shuttle, first_shuttle, last_shuttle, next, prev );
-      write_shuttle_list();
+      WriteShuttleList();
     }
   else
     {
@@ -82,9 +82,9 @@ SHUTTLE_DATA * make_shuttle( const char *filename, const char *name )
   return shuttle;
 }
 
-SHUTTLE_DATA *get_shuttle(const char *name)
+Shuttle *GetShuttle(const char *name)
 {
-  SHUTTLE_DATA *shuttle = NULL;
+  Shuttle *shuttle = NULL;
 
   for ( shuttle = first_shuttle; shuttle; shuttle = shuttle->next )
     {
@@ -105,9 +105,9 @@ SHUTTLE_DATA *get_shuttle(const char *name)
   return NULL;
 }
 
-void write_shuttle_list( void )
+void WriteShuttleList( void )
 {
-  SHUTTLE_DATA *shuttle = NULL;
+  const Shuttle *shuttle = NULL;
   FILE *fpout = NULL;
   char filename[256];
 
@@ -129,21 +129,21 @@ void write_shuttle_list( void )
   fclose( fpout );
 }
 
-bool save_shuttle( const SHUTTLE_DATA * shuttle )
+bool SaveShuttle( const Shuttle * shuttle )
 {
   FILE *fp = NULL;
   char filename[256];
-  STOP_DATA *stop = NULL;
+  const ShuttleStop *stop = NULL;
 
   if ( !shuttle )
     {
-      bug( "save_shuttle: null shuttle pointer!" );
+      bug( "SaveShuttle: null shuttle pointer!" );
       return false;
     }
 
   if ( !shuttle->filename || shuttle->filename[0] == '\0' )
     {
-      bug( "save_shuttle: %s has no filename", shuttle->name );
+      bug( "SaveShuttle: %s has no filename", shuttle->name );
       return false;
     }
 
@@ -151,8 +151,8 @@ bool save_shuttle( const SHUTTLE_DATA * shuttle )
 
   if ( ( fp = fopen( filename, "w" ) ) == NULL )
     {
-      bug( "save_shuttle: fopen" );
-      perror( "save_shuttle: fopen" );
+      bug( "SaveShuttle: fopen" );
+      perror( "SaveShuttle: fopen" );
       return false;
     }
 
@@ -189,10 +189,10 @@ bool save_shuttle( const SHUTTLE_DATA * shuttle )
   return true;
 }
 
-void update_shuttle( void )
+void UpdateShuttle( void )
 {
   char buf[MSL];
-  SHUTTLE_DATA *shuttle = NULL;
+  Shuttle *shuttle = NULL;
 
   for ( shuttle = first_shuttle; shuttle; shuttle = shuttle->next )
     {
@@ -274,7 +274,7 @@ void update_shuttle( void )
 		}
 
               echo_to_room( AT_YELLOW , shuttle->in_room , buf );
-              extract_shuttle( shuttle );
+              ExtractShuttle( shuttle );
 
               if (shuttle->type == SHUTTLE_TURBOCAR || shuttle->type == SHUTTLE_SPACE)
 		{
@@ -327,7 +327,7 @@ void update_shuttle( void )
                         shuttle->current->stop_name,
                         shuttle->type == SHUTTLE_TURBOCAR ? "doors" : "main ramp" );
 
-              insert_shuttle(shuttle, get_room_index(shuttle->current->room));
+              InsertShuttle(shuttle, get_room_index(shuttle->current->room));
 
               for (room = shuttle->room.first; room <= shuttle->room.last; ++room)
                 {
@@ -375,7 +375,7 @@ void update_shuttle( void )
     }
 }
 
-void show_shuttles_to_char( const SHUTTLE_DATA *shuttle, Character *ch )
+void ShowShuttlesToCharacter( const Shuttle *shuttle, Character *ch )
 {
   while (shuttle)
     {
@@ -393,7 +393,7 @@ void show_shuttles_to_char( const SHUTTLE_DATA *shuttle, Character *ch )
     }
 }
 
-bool extract_shuttle( SHUTTLE_DATA * shuttle )
+bool ExtractShuttle( Shuttle * shuttle )
 {
   Room *room = NULL;
 
@@ -406,7 +406,7 @@ bool extract_shuttle( SHUTTLE_DATA * shuttle )
   return true;
 }
 
-bool insert_shuttle( SHUTTLE_DATA *shuttle, Room *room )
+bool InsertShuttle( Shuttle *shuttle, Room *room )
 {
   if (room == NULL)
     {
@@ -416,7 +416,7 @@ bool insert_shuttle( SHUTTLE_DATA *shuttle, Room *room )
 
   if (shuttle->in_room)
     {
-      extract_shuttle(shuttle);
+      ExtractShuttle(shuttle);
     }
 
   shuttle->in_room = room;
@@ -427,7 +427,7 @@ bool insert_shuttle( SHUTTLE_DATA *shuttle, Room *room )
 /*
  * Load in all the ship files.
  */
-void load_shuttles( void )
+void LoadShuttles( void )
 {
   FILE *fpList = NULL;
   char shuttlelist[256];
@@ -449,7 +449,7 @@ void load_shuttles( void )
 	  break;
 	}
 
-      if ( !load_shuttle_file( (char*)filename ) )
+      if ( !LoadShuttleFile( (char*)filename ) )
 	{
 	  bug( "Cannot load shuttle file: %s", filename );
 	}
@@ -463,10 +463,10 @@ void load_shuttles( void )
  * Load a ship file
  */
 
-bool load_shuttle_file( const char * shuttlefile )
+bool LoadShuttleFile( const char * shuttlefile )
 {
   char filename[256];
-  SHUTTLE_DATA * shuttle = create_shuttle();
+  Shuttle *shuttle = AllocateShuttle();
   FILE *fp = NULL;
   bool found = false;
 
@@ -497,7 +497,7 @@ bool load_shuttle_file( const char * shuttlefile )
 
           if ( !str_cmp( word, "SHUTTLE") )
             {
-              fread_shuttle( shuttle, fp );
+              ReadShuttle( shuttle, fp );
 
               if (shuttle->room.entrance == INVALID_VNUM)
 		{
@@ -509,8 +509,8 @@ bool load_shuttle_file( const char * shuttlefile )
             }
           else if ( !str_cmp( word, "STOP") )
             {
-              STOP_DATA * stop = create_stop();
-              fread_stop( stop, fp );
+              ShuttleStop * stop = AllocateShuttleStop();
+              ReadShuttleStop( stop, fp );
               LINK( stop, shuttle->first_stop, shuttle->last_stop, next, prev );
               continue;
             }
@@ -539,7 +539,7 @@ bool load_shuttle_file( const char * shuttlefile )
       if (shuttle->current_number != -1)
         {
           int count = 0;
-          STOP_DATA * stop = NULL;
+          ShuttleStop * stop = NULL;
 
           for (stop = shuttle->first_stop; stop; stop = stop->next)
             {
@@ -559,14 +559,14 @@ bool load_shuttle_file( const char * shuttlefile )
 
       if (shuttle->current)
 	{
-	  insert_shuttle(shuttle, get_room_index(shuttle->current->room));
+	  InsertShuttle(shuttle, get_room_index(shuttle->current->room));
 	}
     }
 
   return found;
 }
 
-void fread_shuttle( SHUTTLE_DATA *shuttle, FILE *fp )
+void ReadShuttle( Shuttle *shuttle, FILE *fp )
 {
   shuttle->delay = 2;
 
@@ -627,7 +627,7 @@ void fread_shuttle( SHUTTLE_DATA *shuttle, FILE *fp )
     }
 }
 
-void fread_stop( STOP_DATA * stop, FILE *fp )
+void ReadShuttleStop( ShuttleStop * stop, FILE *fp )
 {
   for ( ; ; )
     {
@@ -664,29 +664,19 @@ void fread_stop( STOP_DATA * stop, FILE *fp )
     }
 }
 
-void destroy_shuttle(SHUTTLE_DATA * shuttle)
+static void FreeShuttle( Shuttle *shuttle )
 {
-  STOP_DATA *stop = NULL;
-  STOP_DATA *stop_next = NULL;
-
-  UNLINK( shuttle, first_shuttle, last_shuttle, next, prev );
-
-  if (shuttle->filename)
-    {
-      char buf[MSL];
-      snprintf(buf, MSL,  "%s/%s", SHUTTLE_DIR, shuttle->filename);
-      unlink(buf);
-      STRFREE(shuttle->filename);
-    }
+  ShuttleStop *stop = NULL;
+  ShuttleStop *stop_next = NULL;
 
   for ( stop =  shuttle->first_stop; stop ; stop = stop_next)
     {
       stop_next = stop->next;
 
       if (stop->stop_name)
-	{
-	  STRFREE(stop->stop_name);
-	}
+        {
+          STRFREE(stop->stop_name);
+        }
 
       DISPOSE(stop);
     }
@@ -702,12 +692,28 @@ void destroy_shuttle(SHUTTLE_DATA * shuttle)
     }
 
   DISPOSE(shuttle);
-  write_shuttle_list();
 }
 
-SHUTTLE_DATA *shuttle_in_room( const Room *room, const char *name )
+void DestroyShuttle(Shuttle *shuttle)
 {
-  SHUTTLE_DATA *shuttle = NULL;
+  UNLINK( shuttle, first_shuttle, last_shuttle, next, prev );
+
+  if (shuttle->filename)
+    {
+      char buf[MSL];
+      snprintf(buf, MSL, "%s/%s", SHUTTLE_DIR, shuttle->filename);
+      unlink(buf);
+      STRFREE(shuttle->filename);
+    }
+
+  FreeShuttle( shuttle );
+
+  WriteShuttleList();
+}
+
+Shuttle *GetShuttleInRoom( const Room *room, const char *name )
+{
+  Shuttle *shuttle = NULL;
 
   if ( !room )
     {
@@ -733,9 +739,9 @@ SHUTTLE_DATA *shuttle_in_room( const Room *room, const char *name )
   return NULL;
 }
 
-SHUTTLE_DATA *shuttle_from_entrance( vnum_t vnum )
+Shuttle *GetShuttleFromEntrance( vnum_t vnum )
 {
-  SHUTTLE_DATA *shuttle = NULL;
+  Shuttle *shuttle = NULL;
 
   for ( shuttle = first_shuttle; shuttle; shuttle = shuttle->next )
     {
