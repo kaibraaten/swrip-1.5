@@ -45,11 +45,11 @@ void do_rpedit( Character *ch, char *argument )
       return;
     }
 
-  smash_tilde( argument );
-  argument = one_argument( argument, arg1 );
-  argument = one_argument( argument, arg2 );
+  SmashTilde( argument );
+  argument = OneArgument( argument, arg1 );
+  argument = OneArgument( argument, arg2 );
   value = atoi( arg2 );
-  /* argument = one_argument( argument, arg3 ); */
+  /* argument = OneArgument( argument, arg3 ); */
 
   if ( arg1[0] == '\0' )
     {
@@ -72,7 +72,7 @@ void do_rpedit( Character *ch, char *argument )
 
   set_char_color( AT_GREEN, ch );
 
-  if ( !str_cmp( arg1, "list" ) )
+  if ( !StrCmp( arg1, "list" ) )
     {
       cnt = 0;
       if ( !mprog )
@@ -89,14 +89,14 @@ void do_rpedit( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg1, "edit" ) )
+  if ( !StrCmp( arg1, "edit" ) )
     {
       if ( !mprog )
         {
           send_to_char( "This room has no room programs.\r\n", ch );
           return;
         }
-      argument = one_argument( argument, arg3 );
+      argument = OneArgument( argument, arg3 );
       if ( arg3[0] != '\0' )
         {
           mptype = get_mpflag( arg3 );
@@ -129,7 +129,7 @@ void do_rpedit( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg1, "delete" ) )
+  if ( !StrCmp( arg1, "delete" ) )
     {
       int num;
       bool found;
@@ -139,7 +139,7 @@ void do_rpedit( Character *ch, char *argument )
           send_to_char( "That room has no room programs.\r\n", ch );
           return;
         }
-      argument = one_argument( argument, arg3 );
+      argument = OneArgument( argument, arg3 );
       if ( value < 1 )
         {
           send_to_char( "Program not found.\r\n", ch );
@@ -188,14 +188,14 @@ void do_rpedit( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "insert" ) )
+  if ( !StrCmp( arg2, "insert" ) )
     {
       if ( !mprog )
         {
           send_to_char( "That room has no room programs.\r\n", ch );
           return;
         }
-      argument = one_argument( argument, arg3 );
+      argument = OneArgument( argument, arg3 );
       mptype = get_mpflag( arg2 );
       if ( mptype == -1 )
         {
@@ -233,7 +233,7 @@ void do_rpedit( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg1, "add" ) )
+  if ( !StrCmp( arg1, "add" ) )
     {
       mptype = get_mpflag( arg2 );
       if ( mptype == -1 )

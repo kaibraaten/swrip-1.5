@@ -12,7 +12,7 @@ void do_ban( Character *ch, char *argument )
   if ( IsNpc(ch) )
     return;
 
-  argument = one_argument( argument, arg );
+  argument = OneArgument( argument, arg );
 
   set_pager_color( AT_PLAIN, ch );
   if ( arg[0] == '\0' )
@@ -28,7 +28,7 @@ void do_ban( Character *ch, char *argument )
 
   /* People are gonna need .# instead of just # to ban by just last
      number in the site ip.                               -- Altrag */
-  if ( is_number(arg) )
+  if ( IsNumber(arg) )
     {
       for ( pban = first_ban, bnum = 1; pban; pban = pban->next, bnum++ )
         if ( bnum == atoi(arg) )
@@ -38,16 +38,16 @@ void do_ban( Character *ch, char *argument )
           do_ban(ch, "");
           return;
         }
-      argument = one_argument(argument, arg);
+      argument = OneArgument(argument, arg);
       if ( arg[0] == '\0' )
         {
           do_ban( ch, "help" );
           return;
         }
-      if ( !str_cmp(arg, "level") )
+      if ( !StrCmp(arg, "level") )
         {
-          argument = one_argument(argument, arg);
-          if ( arg[0] == '\0' || !is_number(arg) )
+          argument = OneArgument(argument, arg);
+          if ( arg[0] == '\0' || !IsNumber(arg) )
             {
               do_ban( ch, "help" );
               return;
@@ -60,17 +60,17 @@ void do_ban( Character *ch, char *argument )
           pban->level = atoi(arg);
           send_to_char( "Ban level set.\r\n", ch );
         }
-      else if ( !str_cmp(arg, "newban") )
+      else if ( !StrCmp(arg, "newban") )
         {
           pban->level = 1;
           send_to_char( "New characters banned.\r\n", ch );
         }
-      else if ( !str_cmp(arg, "mortal") )
+      else if ( !StrCmp(arg, "mortal") )
         {
           pban->level = LEVEL_AVATAR;
           send_to_char( "All mortals banned.\r\n", ch );
         }
-      else if ( !str_cmp(arg, "total") )
+      else if ( !StrCmp(arg, "total") )
         {
           pban->level = LEVEL_IMPLEMENTOR;
           send_to_char( "Everyone banned.\r\n", ch );
@@ -84,7 +84,7 @@ void do_ban( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp(arg, "help") )
+  if ( !StrCmp(arg, "help") )
     {
       send_to_char( "Syntax: ban <site address>\r\n", ch );
       send_to_char( "Syntax: ban <ban number> <level <lev>|newban|mortal|"
@@ -94,7 +94,7 @@ void do_ban( Character *ch, char *argument )
 
   for ( pban = first_ban; pban; pban = pban->next )
     {
-      if ( !str_cmp( arg, pban->name ) )
+      if ( !StrCmp( arg, pban->name ) )
         {
           send_to_char( "That site is already banned!\r\n", ch );
           return;
@@ -103,10 +103,10 @@ void do_ban( Character *ch, char *argument )
 
   CREATE( pban, Ban, 1 );
   LINK( pban, first_ban, last_ban, next, prev );
-  pban->name    = str_dup( arg );
+  pban->name    = CopyString( arg );
   pban->level = LEVEL_AVATAR;
   sprintf(buf, "%24.24s", ctime(&current_time));
-  pban->ban_time = str_dup( buf );
+  pban->ban_time = CopyString( buf );
   save_banlist( );
   send_to_char( "Ban created.  Mortals banned from site.\r\n", ch );
 }

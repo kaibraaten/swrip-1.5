@@ -75,7 +75,7 @@ void do_ogrub (Character *ch, char *argument)
   bool d2_sw    = false;                   /* alternate display format    */
 
   go_init();                              /* initialize data structures  */
-  argument = one_argument (argument, arg1);
+  argument = OneArgument (argument, arg1);
 
   if ( !*arg1 )
     {
@@ -96,7 +96,7 @@ void do_ogrub (Character *ch, char *argument)
       return;
     }
 
-  argument = one_argument (argument, arg1);
+  argument = OneArgument (argument, arg1);
   while ( *arg1 )                      /* build the operand table        */
     {
       if ( op_num >= MAX_NUM_OPS )
@@ -108,7 +108,7 @@ void do_ogrub (Character *ch, char *argument)
       if ( !go_parse_operand (ch, arg1, &op_num, &sor_ind, &sor_dir,
                               &or_sw, &np_sw, &nm_sw, &ng_sw, &do_sw, &d2_sw ) )
         return;
-      argument = one_argument (argument, arg1);
+      argument = OneArgument (argument, arg1);
     }
   if (op_num <= 0)
     {
@@ -184,12 +184,12 @@ static bool go_parse_operand (Character *ch, const char *arg, int *op_num, int *
 {
   int cou;
 
-  if ( !str_cmp(arg, "or"    ) ) return *or_sw    = true;
-  if ( !str_cmp(arg, "np"    ) ) return *np_sw    = true;
-  if ( !str_cmp(arg, "nm"    ) ) return *nm_sw    = true;
-  if ( !str_cmp(arg, "ng"    ) ) return *ng_sw    = true;
-  if ( !str_cmp(arg, "do"    ) ) return *do_sw    = true;
-  if ( !str_cmp(arg, "d2"    ) ) return *d2_sw = true;
+  if ( !StrCmp(arg, "or"    ) ) return *or_sw    = true;
+  if ( !StrCmp(arg, "np"    ) ) return *np_sw    = true;
+  if ( !StrCmp(arg, "nm"    ) ) return *nm_sw    = true;
+  if ( !StrCmp(arg, "ng"    ) ) return *ng_sw    = true;
+  if ( !StrCmp(arg, "do"    ) ) return *do_sw    = true;
+  if ( !StrCmp(arg, "d2"    ) ) return *d2_sw = true;
 
   if ( arg[0]=='+' || arg[0]=='-')
     {
@@ -211,7 +211,7 @@ static bool go_parse_operand (Character *ch, const char *arg, int *op_num, int *
     }
 
   for (cou=0; cou<GO_NUM_FIELDS; cou++)           /* check field name    */
-    if ( !str_prefix( go_fd[cou].nam, arg ) )
+    if ( !StringPrefix( go_fd[cou].nam, arg ) )
       {
         arg += strlen( go_fd[cou].nam );         /* advance to operator */
         go_op[ *op_num ].field = cou;
@@ -229,7 +229,7 @@ static int go_fnam_to_num( const char *arg )
   int cou;
 
   for (cou=0; cou<GO_NUM_FIELDS; cou++)
-    if ( !str_cmp(arg, go_fd[cou].nam) )
+    if ( !StrCmp(arg, go_fd[cou].nam) )
       return cou;
   return -1;
 }
@@ -248,7 +248,7 @@ static bool go_parse_operator (Character *ch, const char *pch, int *op_num)
 
   go_op[*op_num].op = -1;
   for (cou=0; cou<7; cou++)
-    if ( !str_prefix(opstr[cou], pch) )
+    if ( !StringPrefix(opstr[cou], pch) )
       {
         go_op[*op_num].op = cou;
         break;
@@ -291,25 +291,25 @@ static bool go_parse_operator (Character *ch, const char *pch, int *op_num)
 
 static int owear_to_num (const char *arg)
 {
-  if ( !str_cmp( arg, "take"    ) ) return  1;
-  if ( !str_cmp( arg, "finger"  ) ) return  2;
-  if ( !str_cmp( arg, "neck"    ) ) return  3;
-  if ( !str_cmp( arg, "body"    ) ) return  4;
-  if ( !str_cmp( arg, "head"    ) ) return  5;
-  if ( !str_cmp( arg, "legs"    ) ) return  6;
-  if ( !str_cmp( arg, "feet"    ) ) return  7;
-  if ( !str_cmp( arg, "hands"   ) ) return  8;
-  if ( !str_cmp( arg, "arms"    ) ) return  9;
-  if ( !str_cmp( arg, "shield"  ) ) return 10;
-  if ( !str_cmp( arg, "about"   ) ) return 11;
-  if ( !str_cmp( arg, "waist"   ) ) return 12;
-  if ( !str_cmp( arg, "wrist"   ) ) return 13;
-  if ( !str_cmp( arg, "wield"   ) ) return 14;
-  if ( !str_cmp( arg, "hold"    ) ) return 15;
-  if ( !str_cmp( arg, "dual"    ) ) return 16;
-  if ( !str_cmp( arg, "ears"    ) ) return 17;
-  if ( !str_cmp( arg, "eyes"    ) ) return 18;
-  if ( !str_cmp( arg, "missile" ) ) return 19;
+  if ( !StrCmp( arg, "take"    ) ) return  1;
+  if ( !StrCmp( arg, "finger"  ) ) return  2;
+  if ( !StrCmp( arg, "neck"    ) ) return  3;
+  if ( !StrCmp( arg, "body"    ) ) return  4;
+  if ( !StrCmp( arg, "head"    ) ) return  5;
+  if ( !StrCmp( arg, "legs"    ) ) return  6;
+  if ( !StrCmp( arg, "feet"    ) ) return  7;
+  if ( !StrCmp( arg, "hands"   ) ) return  8;
+  if ( !StrCmp( arg, "arms"    ) ) return  9;
+  if ( !StrCmp( arg, "shield"  ) ) return 10;
+  if ( !StrCmp( arg, "about"   ) ) return 11;
+  if ( !StrCmp( arg, "waist"   ) ) return 12;
+  if ( !StrCmp( arg, "wrist"   ) ) return 13;
+  if ( !StrCmp( arg, "wield"   ) ) return 14;
+  if ( !StrCmp( arg, "hold"    ) ) return 15;
+  if ( !StrCmp( arg, "dual"    ) ) return 16;
+  if ( !StrCmp( arg, "ears"    ) ) return 17;
+  if ( !StrCmp( arg, "eyes"    ) ) return 18;
+  if ( !StrCmp( arg, "missile" ) ) return 19;
   return 0;
 }
 

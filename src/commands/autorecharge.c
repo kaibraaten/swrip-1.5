@@ -28,7 +28,7 @@ void do_autorecharge(Character *ch, char *argument )
 
   the_chance = IsNpc(ch) ? ch->top_level
     : (int)  (ch->pcdata->learned[gsn_shipsystems]) ;
-  if ( number_percent( ) > the_chance )
+  if ( GetRandomPercent( ) > the_chance )
     {
       send_to_char("&RYou fail to work the controls properly.\r\n",ch);
       learn_from_failure( ch, gsn_shipsystems );
@@ -38,20 +38,20 @@ void do_autorecharge(Character *ch, char *argument )
   act( AT_PLAIN, "$n flips a switch on the control panell.", ch,
        NULL, argument , TO_ROOM );
 
-  if ( !str_cmp(argument,"on" ) )
+  if ( !StrCmp(argument,"on" ) )
     {
       ship->autorecharge=true;
       send_to_char( "&GYou power up the shields.\r\n", ch);
       EchoToCockpit( AT_YELLOW , ship , "Shields ON. Autorecharge ON.");
     }
-  else if ( !str_cmp(argument,"off" ) )
+  else if ( !StrCmp(argument,"off" ) )
     {
       ship->autorecharge=false;
       send_to_char( "&GYou shutdown the shields.\r\n", ch);
       EchoToCockpit( AT_YELLOW , ship , "Shields OFF. Shield strength set to 0. Autorecharge OFF.");
       ship->shield = 0;
     }
-  else if ( !str_cmp(argument,"idle" ) )
+  else if ( !StrCmp(argument,"idle" ) )
     {
       ship->autorecharge=false;
       send_to_char( "&GYou let the shields idle.\r\n", ch);

@@ -6,10 +6,10 @@ void do_invis( Character *ch, char *argument )
   char arg[MAX_INPUT_LENGTH];
   short level = 0;
 
-  argument = one_argument( argument, arg );
+  argument = OneArgument( argument, arg );
   if ( arg[0] != '\0' )
     {
-      if ( !is_number( arg ) )
+      if ( !IsNumber( arg ) )
         {
           send_to_char( "Usage: invis | invis <level>\r\n", ch );
           return;

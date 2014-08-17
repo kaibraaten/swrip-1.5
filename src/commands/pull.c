@@ -6,7 +6,7 @@ void do_pull( Character *ch, char *argument )
   char arg[MAX_INPUT_LENGTH];
   OBJ_DATA *obj;
 
-  one_argument( argument, arg );
+  OneArgument( argument, arg );
   if ( arg[0] == '\0' )
     {
       send_to_char( "Pull what?\r\n", ch );

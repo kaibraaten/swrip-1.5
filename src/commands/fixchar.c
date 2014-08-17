@@ -6,7 +6,7 @@ void do_fixchar( Character *ch, char *argument )
   char name[MAX_STRING_LENGTH];
   Character *victim;
 
-  one_argument( argument, name );
+  OneArgument( argument, name );
   if ( name[0] == '\0' )
     {
       send_to_char( "Usage: fixchar <playername>\r\n", ch );

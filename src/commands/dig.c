@@ -23,7 +23,7 @@ void do_dig( Character *ch, char *argument )
           send_to_char( "You can't do that while mounted.\r\n", ch );
           return;
         }
-      one_argument( argument, arg );
+      OneArgument( argument, arg );
       if ( arg[0] != '\0' )
         {
 	  if ( ( pexit = find_door( ch, arg, true ) ) == NULL
@@ -61,7 +61,7 @@ void do_dig( Character *ch, char *argument )
             }
         }
       add_timer( ch, TIMER_DO_FUN, umin(skill_table[gsn_dig]->beats / 10, 3), do_dig, SUB_PAUSE);
-      ch->dest_buf = str_dup( arg );
+      ch->dest_buf = CopyString( arg );
       send_to_char( "You begin digging...\r\n", ch );
       act( AT_PLAIN, "$n begins digging...", ch, NULL, NULL, TO_ROOM );
       return;
@@ -105,7 +105,7 @@ void do_dig( Character *ch, char *argument )
            &&     IsBitSet( pexit->exit_info, EX_CLOSED ) )
         {
           /* 4 times harder to dig open a passage without a shovel */
-          if ( (number_percent() * (shovel ? 1 : 4)) <
+          if ( (GetRandomPercent() * (shovel ? 1 : 4)) <
                (IsNpc(ch) ? 80 : ch->pcdata->learned[gsn_dig]) )
             {
               RemoveBit( pexit->exit_info, EX_CLOSED );
@@ -128,7 +128,7 @@ void do_dig( Character *ch, char *argument )
     {
       /* twice as hard to find something without a shovel */
       if ( IS_OBJ_STAT( obj, ITEM_BURRIED )
-           &&  (number_percent() * (shovel ? 1 : 2)) <
+           &&  (GetRandomPercent() * (shovel ? 1 : 2)) <
            (IsNpc(ch) ? 80 : ch->pcdata->learned[gsn_dig]) )
         {
           found = true;

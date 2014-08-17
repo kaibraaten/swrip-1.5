@@ -22,7 +22,7 @@ void do_torture( Character *ch, char *argument )
       return;
     }
 
-  one_argument( argument, arg );
+  OneArgument( argument, arg );
 
   if ( ch->mount )
     {
@@ -83,7 +83,7 @@ void do_torture( Character *ch, char *argument )
 
   if ( !fail
        && (  IsNpc(ch)
-             || (number_percent( ) + the_chance) < ch->pcdata->learned[gsn_torture] ) )
+             || (GetRandomPercent( ) + the_chance) < ch->pcdata->learned[gsn_torture] ) )
     {
       learn_from_success( ch, gsn_torture );
       SetWaitState( ch,     2 * PULSE_VIOLENCE );
@@ -92,7 +92,7 @@ void do_torture( Character *ch, char *argument )
       act( AT_SKILL, "You torture $N, leaving $M screaming in pain.", ch, NULL, victim, TO_CHAR );
       act( AT_SKILL, "$n tortures $N, leaving $M screaming in agony!", ch, NULL, victim, TO_NOTVICT );
 
-      dam = dice( GetAbilityLevel( ch, LEADERSHIP_ABILITY ) / 80 , 4 );
+      dam = RollDice( GetAbilityLevel( ch, LEADERSHIP_ABILITY ) / 80 , 4 );
       dam = urange( 0, victim->max_hit-10, dam );
       victim->hit -= dam;
       victim->max_hit -= dam;

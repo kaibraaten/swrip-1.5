@@ -80,7 +80,7 @@ void do_trajectory_actual( Character *ch, char *argument )
   if ( ship->sclass == CAPITAL_SHIP )
     the_chance = IsNpc(ch) ? 0
       : (int) (ch->pcdata->learned[gsn_capitalships]);
-  if ( number_percent( ) > the_chance )
+  if ( GetRandomPercent( ) > the_chance )
     {
       send_to_char("&RYou fail to work the controls properly.\r\n",ch);
       if ( ship->sclass == FIGHTER_SHIP )
@@ -92,10 +92,10 @@ void do_trajectory_actual( Character *ch, char *argument )
       return;
     }
 
-  argument = one_argument( argument, arg2 );
-  argument = one_argument( argument, arg3 );
+  argument = OneArgument( argument, arg2 );
+  argument = OneArgument( argument, arg3 );
 
-  vector_set( &argvec, atof( arg2 ), atof( arg3 ), atof( argument ) );
+  SetVector( &argvec, atof( arg2 ), atof( arg3 ), atof( argument ) );
 
   if ( argvec.x == ship->pos.x
        && argvec.y == ship->pos.y

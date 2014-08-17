@@ -5,7 +5,7 @@ void do_appoint ( Character *ch , char *argument )
 {
   char arg[MAX_STRING_LENGTH];
 
-  argument = one_argument( argument, arg );
+  argument = OneArgument( argument, arg );
 
   if ( IsNpc( ch ) || !ch->pcdata )
     return;
@@ -16,7 +16,7 @@ void do_appoint ( Character *ch , char *argument )
       return;
     }
 
-  if (  str_cmp( ch->name, ch->pcdata->clan->leadership.leader  )  )
+  if (  StrCmp( ch->name, ch->pcdata->clan->leadership.leader  )  )
     {
       send_to_char( "Only your leader can do that!\r\n", ch );
       return;
@@ -28,27 +28,27 @@ void do_appoint ( Character *ch , char *argument )
       return;
     }
 
-  if ( !str_cmp( argument , "first" )  )
+  if ( !StrCmp( argument , "first" )  )
     {
-      if ( ch->pcdata->clan->leadership.number1 && str_cmp( ch->pcdata->clan->leadership.number1 , "" ) )
+      if ( ch->pcdata->clan->leadership.number1 && StrCmp( ch->pcdata->clan->leadership.number1 , "" ) )
         {
           send_to_char( "You already have someone in that position... demote them first.\r\n", ch);
           return;
         }
 
       DISPOSE( ch->pcdata->clan->leadership.number1 );
-      ch->pcdata->clan->leadership.number1 = str_dup( arg );
+      ch->pcdata->clan->leadership.number1 = CopyString( arg );
     }
-  else if ( !str_cmp( argument , "second" )  )
+  else if ( !StrCmp( argument , "second" )  )
     {
-      if ( ch->pcdata->clan->leadership.number2 && str_cmp( ch->pcdata->clan->leadership.number2 , "" ))
+      if ( ch->pcdata->clan->leadership.number2 && StrCmp( ch->pcdata->clan->leadership.number2 , "" ))
         {
           send_to_char( "You already have someone in that position... demote them first.\r\n", ch);
           return;
         }
 
       DISPOSE( ch->pcdata->clan->leadership.number2 );
-      ch->pcdata->clan->leadership.number2 = str_dup( arg );
+      ch->pcdata->clan->leadership.number2 = CopyString( arg );
     }
   else
     do_appoint( ch , "" );

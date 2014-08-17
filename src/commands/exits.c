@@ -11,7 +11,7 @@ void do_exits( Character *ch, char *argument )
 
   set_char_color( AT_EXITS, ch );
   buf[0] = '\0';
-  fAuto  = !str_cmp( argument, "auto" );
+  fAuto  = !StrCmp( argument, "auto" );
 
   if ( !check_blind( ch ) )
     return;
@@ -30,24 +30,24 @@ void do_exits( Character *ch, char *argument )
               if ( IsBitSet(pexit->exit_info, EX_CLOSED) )
                 {
                   sprintf( buf + strlen(buf), "%-5s - (closed)\r\n",
-                           capitalize( get_dir_name(pexit->vdir) ) );
+                           Capitalize( get_dir_name(pexit->vdir) ) );
                 }
               else if ( IsBitSet(pexit->exit_info, EX_WINDOW) )
                 {
                   sprintf( buf + strlen(buf), "%-5s - (window)\r\n",
-			   capitalize( get_dir_name(pexit->vdir) ) );
+			   Capitalize( get_dir_name(pexit->vdir) ) );
                 }
               else if ( IsBitSet(pexit->exit_info, EX_xAUTO) )
                 {
                   sprintf( buf + strlen(buf), "%-5s - %s\r\n",
-                           capitalize( pexit->keyword ),
+                           Capitalize( pexit->keyword ),
                            room_is_dark( pexit->to_room )
                            ?  "Too dark to tell"
                            : pexit->to_room->name );
                 }
               else
                 sprintf( buf + strlen(buf), "%-5s - %s\r\n",
-                         capitalize( get_dir_name(pexit->vdir) ),
+                         Capitalize( get_dir_name(pexit->vdir) ),
                          room_is_dark( pexit->to_room )
                          ?  "Too dark to tell"
                          : pexit->to_room->name );
@@ -55,7 +55,7 @@ void do_exits( Character *ch, char *argument )
           else
             {
               sprintf( buf + strlen(buf), " %s",
-                       capitalize( get_dir_name(pexit->vdir) ) );
+                       Capitalize( get_dir_name(pexit->vdir) ) );
             }
         }
     }

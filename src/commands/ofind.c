@@ -10,7 +10,7 @@ void do_ofind( Character *ch, char *argument )
   int nMatch;
   bool fAll;
 
-  one_argument( argument, arg );
+  OneArgument( argument, arg );
   if ( arg[0] == '\0' )
     {
       send_to_char( "Ofind what?\r\n", ch );
@@ -18,18 +18,18 @@ void do_ofind( Character *ch, char *argument )
     }
 
   set_pager_color( AT_PLAIN, ch );
-  fAll  = !str_cmp( arg, "all" );
+  fAll  = !StrCmp( arg, "all" );
   nMatch        = 0;
 
   for ( hash = 0; hash < MAX_KEY_HASH; hash++ )
     for ( pObjIndex = obj_index_hash[hash];
           pObjIndex;
           pObjIndex = pObjIndex->next )
-      if ( fAll || nifty_is_name( arg, pObjIndex->name ) )
+      if ( fAll || NiftyIsName( arg, pObjIndex->name ) )
         {
           nMatch++;
           pager_printf( ch, "[%5d] %s\r\n",
-                        pObjIndex->vnum, capitalize( pObjIndex->short_descr ) );
+                        pObjIndex->vnum, Capitalize( pObjIndex->short_descr ) );
         }
 
   if ( nMatch )

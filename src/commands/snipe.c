@@ -40,8 +40,8 @@ void do_snipe( Character *ch, char *argument )
   if ( !IsNpc(ch) && ch->pcdata->learned[gsn_snipe]> 100)
     max_dist += (ch->pcdata->learned[gsn_snipe]) / 15;
 
-  argument = one_argument( argument, arg );
-  argument = one_argument( argument, arg2 );
+  argument = OneArgument( argument, arg );
+  argument = OneArgument( argument, arg2 );
 
   if ( ( dir = get_dir( arg ) ) == -1 || arg2[0] == '\0' )
     {
@@ -177,7 +177,7 @@ void do_snipe( Character *ch, char *argument )
   char_from_room( ch );
   char_to_room( ch, victim->in_room );
 
-  if ( number_percent() < the_chance )
+  if ( GetRandomPercent() < the_chance )
     {
       sprintf( buf , "A blaster shot fires at you from the %s." , get_dir_name(dir) );
       act( AT_ACTION, buf , victim, NULL, ch, TO_CHAR );
@@ -209,9 +209,9 @@ void do_snipe( Character *ch, char *argument )
     SetWaitState( ch, 1 * PULSE_VIOLENCE );
   else
     {
-      if ( number_percent() < ch->pcdata->learned[gsn_third_attack] )
+      if ( GetRandomPercent() < ch->pcdata->learned[gsn_third_attack] )
         SetWaitState( ch, 1 * PULSE_PER_SECOND );
-      else if ( number_percent() < ch->pcdata->learned[gsn_second_attack] )
+      else if ( GetRandomPercent() < ch->pcdata->learned[gsn_second_attack] )
 	SetWaitState( ch, 2 * PULSE_PER_SECOND );
       else
         SetWaitState( ch, 3 * PULSE_PER_SECOND );

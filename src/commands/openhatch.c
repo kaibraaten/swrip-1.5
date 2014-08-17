@@ -7,7 +7,7 @@ void do_openhatch(Character *ch, char *argument )
   Ship *ship;
   char buf[MAX_STRING_LENGTH];
 
-  if ( !argument || argument[0] == '\0' || !str_cmp(argument,"hatch") )
+  if ( !argument || argument[0] == '\0' || !StrCmp(argument,"hatch") )
     {
       ship = GetShipFromEntrance( ch->in_room->vnum );
       if( ship == NULL)

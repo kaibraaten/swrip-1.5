@@ -18,7 +18,7 @@ void do_rempilot(Character *ch, char *argument )
       send_to_char( "&RYou can't do that here.\r\n" , ch );
       return;
     }
-  the_chance = number_percent( );
+  the_chance = GetRandomPercent( );
   if ( IsNpc(ch) || the_chance >= ch->pcdata->learned[gsn_slicing] )
     {
       if ( !CheckPilot( ch , ship ) )
@@ -37,19 +37,19 @@ void do_rempilot(Character *ch, char *argument )
   if ( the_chance < ch->pcdata->learned[gsn_slicing] )
     learn_from_success( ch, gsn_slicing );
 
-  if ( !str_cmp( ship->pilot , argument ) )
+  if ( !StrCmp( ship->pilot , argument ) )
     {
       DISPOSE( ship->pilot );
-      ship->pilot = str_dup( "" );
+      ship->pilot = CopyString( "" );
       send_to_char( "Pilot Removed.\r\n", ch );
       SaveShip( ship );
       return;
     }
 
-  if ( !str_cmp( ship->copilot , argument ) )
+  if ( !StrCmp( ship->copilot , argument ) )
     {
       DISPOSE( ship->copilot );
-      ship->copilot = str_dup( "" );
+      ship->copilot = CopyString( "" );
       send_to_char( "Copilot Removed.\r\n", ch );
       SaveShip( ship );
       return;

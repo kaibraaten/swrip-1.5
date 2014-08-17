@@ -10,14 +10,14 @@ void do_mfind( Character *ch, char *argument )
   int nMatch;
   bool fAll;
 
-  one_argument( argument, arg );
+  OneArgument( argument, arg );
   if ( arg[0] == '\0' )
     {
       send_to_char( "Mfind whom?\r\n", ch );
       return;
     }
 
-  fAll  = !str_cmp( arg, "all" );
+  fAll  = !StrCmp( arg, "all" );
   nMatch        = 0;
   set_pager_color( AT_PLAIN, ch );
 
@@ -25,11 +25,11 @@ void do_mfind( Character *ch, char *argument )
     for ( pMobIndex = mob_index_hash[hash];
 	  pMobIndex;
 	  pMobIndex = pMobIndex->next )
-      if ( fAll || nifty_is_name( arg, pMobIndex->player_name ) )
+      if ( fAll || NiftyIsName( arg, pMobIndex->player_name ) )
 	{
 	  nMatch++;
 	  pager_printf( ch, "[%5d] %s\r\n",
-			pMobIndex->vnum, capitalize( pMobIndex->short_descr ) );
+			pMobIndex->vnum, Capitalize( pMobIndex->short_descr ) );
 	}
 
   if ( nMatch )

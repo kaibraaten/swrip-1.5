@@ -10,11 +10,11 @@ void do_use( Character *ch, char *argument )
   OBJ_DATA *obj;
   ch_ret retcode;
 
-  argument = one_argument( argument, argd );
-  argument = one_argument( argument, arg );
+  argument = OneArgument( argument, argd );
+  argument = OneArgument( argument, arg );
 
-  if ( !str_cmp( arg , "on" ) )
-    argument = one_argument( argument, arg );
+  if ( !StrCmp( arg , "on" ) )
+    argument = OneArgument( argument, arg );
 
   if ( argd[0] == '\0' )
     {
@@ -23,7 +23,7 @@ void do_use( Character *ch, char *argument )
     }
 
   if ( ( device = GetEquipmentOnCharacter( ch, WEAR_HOLD ) ) == NULL ||
-       !nifty_is_name(argd, device->name) )
+       !NiftyIsName(argd, device->name) )
     {
       do_takedrug( ch , argd );
       return;

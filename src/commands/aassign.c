@@ -15,9 +15,9 @@ void do_aassign( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( "none", argument )
-       ||   !str_cmp( "null", argument )
-       ||   !str_cmp( "clear", argument ) )
+  if ( !StrCmp( "none", argument )
+       ||   !StrCmp( "null", argument )
+       ||   !StrCmp( "clear", argument ) )
     {
       ch->pcdata->area = NULL;
       assign_area( ch );
@@ -33,10 +33,10 @@ void do_aassign( Character *ch, char *argument )
   tarea = NULL;
 
   if ( GetTrustLevel(ch) >= LEVEL_GREATER
-       ||  (is_name( buf, ch->pcdata->bestowments )
+       ||  (IsName( buf, ch->pcdata->bestowments )
             &&   GetTrustLevel(ch) >= sysdata.level_modify_proto) )
     for ( tmp = first_area; tmp; tmp = tmp->next )
-      if ( !str_cmp( buf, tmp->filename ) )
+      if ( !StrCmp( buf, tmp->filename ) )
         {
           tarea = tmp;
           break;
@@ -44,11 +44,11 @@ void do_aassign( Character *ch, char *argument )
 
   if ( !tarea )
     for ( tmp = first_build; tmp; tmp = tmp->next )
-      if ( !str_cmp( buf, tmp->filename ) )
+      if ( !StrCmp( buf, tmp->filename ) )
         {
           /*            if ( GetTrustLevel(ch) >= sysdata.level_modify_proto  */
           if ( GetTrustLevel(ch) >= LEVEL_GREATER
-               ||   is_name( tmp->filename, ch->pcdata->bestowments ) )
+               ||   IsName( tmp->filename, ch->pcdata->bestowments ) )
             {
               tarea = tmp;
               break;
@@ -60,7 +60,7 @@ void do_aassign( Character *ch, char *argument )
             }
         }
 
-  if( !str_cmp( buf, "this" ) )
+  if( !StrCmp( buf, "this" ) )
     {
       tarea = ch->in_room->area;
     }

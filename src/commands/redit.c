@@ -63,8 +63,8 @@ void do_redit( Character *ch, char *argument )
 
   location = ch->in_room;
 
-  smash_tilde( argument );
-  argument = one_argument( argument, arg );
+  SmashTilde( argument );
+  argument = OneArgument( argument, arg );
 
   if ( ch->substate == SUB_REPEATCMD )
     {
@@ -74,7 +74,7 @@ void do_redit( Character *ch, char *argument )
           return;
         }
 
-      if ( !str_cmp( arg, "done" ) || !str_cmp( arg, "off" ) )
+      if ( !StrCmp( arg, "done" ) || !StrCmp( arg, "off" ) )
         {
           send_to_char( "Redit mode off.\r\n", ch );
 
@@ -86,7 +86,7 @@ void do_redit( Character *ch, char *argument )
         }
     }
 
-  if ( arg[0] == '\0' || !str_cmp( arg, "?" ) )
+  if ( arg[0] == '\0' || !StrCmp( arg, "?" ) )
     {
       if ( ch->substate == SUB_REPEATCMD )
         send_to_char( "Syntax: <field> value\r\n",                      ch );
@@ -105,7 +105,7 @@ void do_redit( Character *ch, char *argument )
   if ( !can_rmodify( ch, location ) )
     return;
 
-  if ( !str_cmp( arg, "name" ) )
+  if ( !StrCmp( arg, "name" ) )
     {
       if ( argument[0] == '\0' )
         {
@@ -115,11 +115,11 @@ void do_redit( Character *ch, char *argument )
         }
 
       DISPOSE( location->name );
-      location->name = str_dup( argument );
+      location->name = CopyString( argument );
       return;
     }
 
-  if ( !str_cmp( arg, "desc" ) )
+  if ( !StrCmp( arg, "desc" ) )
     {
       if ( ch->substate == SUB_REPEATCMD )
         ch->tempnum = SUB_REPEATCMD;
@@ -134,7 +134,7 @@ void do_redit( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg, "tunnel" ) )
+  if ( !StrCmp( arg, "tunnel" ) )
     {
       if ( !argument || argument[0] == '\0' )
         {
@@ -148,7 +148,7 @@ void do_redit( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg, "ed" ) )
+  if ( !StrCmp( arg, "ed" ) )
     {
       if ( !argument || argument[0] == '\0' )
         {
@@ -173,7 +173,7 @@ void do_redit( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg, "rmed" ) )
+  if ( !StrCmp( arg, "rmed" ) )
     {
       if ( !argument || argument[0] == '\0' )
         {
@@ -190,7 +190,7 @@ void do_redit( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg, "rlist" ) )
+  if ( !StrCmp( arg, "rlist" ) )
     {
       Reset *pReset = NULL;
       Area *tarea = location->area;
@@ -216,7 +216,7 @@ void do_redit( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg, "flags" ) )
+  if ( !StrCmp( arg, "flags" ) )
     {
       if ( !argument || argument[0] == '\0' )
         {
@@ -233,7 +233,7 @@ void do_redit( Character *ch, char *argument )
 
       while ( argument[0] != '\0' )
         {
-          argument = one_argument( argument, arg2 );
+          argument = OneArgument( argument, arg2 );
           value = get_roomflag( arg2 );
 
           if ( value < 0 || value > 31 )
@@ -249,7 +249,7 @@ void do_redit( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg, "teledelay" ) )
+  if ( !StrCmp( arg, "teledelay" ) )
     {
       if ( !argument || argument[0] == '\0' )
         {
@@ -263,7 +263,7 @@ void do_redit( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg, "televnum" ) )
+  if ( !StrCmp( arg, "televnum" ) )
     {
       vnum_t televnum = INVALID_VNUM;
 
@@ -290,7 +290,7 @@ void do_redit( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg, "sector" ) )
+  if ( !StrCmp( arg, "sector" ) )
     {
       if ( !argument || argument[0] == '\0' )
         {
@@ -316,12 +316,12 @@ void do_redit( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg, "exkey" ) )
+  if ( !StrCmp( arg, "exkey" ) )
     {
       vnum_t keyvnum = INVALID_VNUM;
 
-      argument = one_argument( argument, arg2 );
-      argument = one_argument( argument, arg3 );
+      argument = OneArgument( argument, arg2 );
+      argument = OneArgument( argument, arg3 );
 
       if ( arg2[0] == '\0' || arg3[0] == '\0' )
         {
@@ -353,9 +353,9 @@ void do_redit( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg, "exname" ) )
+  if ( !StrCmp( arg, "exname" ) )
     {
-      argument = one_argument( argument, arg2 );
+      argument = OneArgument( argument, arg2 );
 
       if ( arg2[0] == '\0' )
         {
@@ -382,12 +382,12 @@ void do_redit( Character *ch, char *argument )
         }
 
       DISPOSE( xit->keyword );
-      xit->keyword = str_dup( argument );
+      xit->keyword = CopyString( argument );
       send_to_char( "Done.\r\n", ch );
       return;
     }
 
-  if ( !str_cmp( arg, "exflags" ) )
+  if ( !StrCmp( arg, "exflags" ) )
     {
       if ( !argument || argument[0] == '\0' )
         {
@@ -402,7 +402,7 @@ void do_redit( Character *ch, char *argument )
           return;
         }
 
-      argument = one_argument( argument, arg2 );
+      argument = OneArgument( argument, arg2 );
 
       if ( arg2[0] == '#' )
         {
@@ -442,7 +442,7 @@ void do_redit( Character *ch, char *argument )
 
       while ( argument[0] != '\0' )
         {
-          argument = one_argument( argument, arg2 );
+          argument = OneArgument( argument, arg2 );
           value = get_exitflag( arg2 );
 
           if ( value < 0 || value > MAX_EXFLAG )
@@ -454,13 +454,13 @@ void do_redit( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg, "exit" ) )
+  if ( !StrCmp( arg, "exit" ) )
     {
       bool addexit = false;
       bool numnotdir = false;
 
-      argument = one_argument( argument, arg2 );
-      argument = one_argument( argument, arg3 );
+      argument = OneArgument( argument, arg2 );
+      argument = OneArgument( argument, arg3 );
 
       if ( arg2[0] == '\0' )
         {
@@ -545,8 +545,8 @@ void do_redit( Character *ch, char *argument )
             }
 
           xit = make_exit( location, tmp, edir );
-	  xit->keyword          = str_dup( "" );
-          xit->description              = str_dup( "" );
+	  xit->keyword          = CopyString( "" );
+          xit->description              = CopyString( "" );
           xit->key                      = -1;
           xit->exit_info                = 0;
           act( AT_IMMORT, "$n reveals a hidden passage!", ch, NULL, NULL, TO_ROOM );
@@ -567,7 +567,7 @@ void do_redit( Character *ch, char *argument )
             }
         }
 
-      argument = one_argument( argument, arg3 );
+      argument = OneArgument( argument, arg3 );
 
       if ( arg3[0] != '\0' )
         xit->exit_info = atoi( arg3 );
@@ -576,19 +576,19 @@ void do_redit( Character *ch, char *argument )
         {
 	  vnum_t ekey = INVALID_VNUM;
 
-          one_argument( argument, arg3 );
+          OneArgument( argument, arg3 );
           ekey = atoi( arg3 );
 
           if ( ekey != 0 || arg3[0] == '0' )
             {
-              argument = one_argument( argument, arg3 );
+              argument = OneArgument( argument, arg3 );
               xit->key = ekey;
             }
 
           if ( argument && argument[0] != '\0' )
             {
               DISPOSE( xit->keyword );
-              xit->keyword = str_dup( argument );
+              xit->keyword = CopyString( argument );
             }
         }
 
@@ -600,7 +600,7 @@ void do_redit( Character *ch, char *argument )
    * Twisted and evil, but works                                -Thoric
    * Makes an exit, and the reverse in one shot.
    */
-  if ( !str_cmp( arg, "bexit" ) )
+  if ( !StrCmp( arg, "bexit" ) )
     {
       Exit *this_exit = NULL, *rxit = NULL;
       char tmpcmd[MAX_INPUT_LENGTH];
@@ -610,8 +610,8 @@ void do_redit( Character *ch, char *argument )
       char rvnum[MAX_INPUT_LENGTH];
       bool numnotdir = false;
 
-      argument = one_argument( argument, arg2 );
-      argument = one_argument( argument, arg3 );
+      argument = OneArgument( argument, arg2 );
+      argument = OneArgument( argument, arg3 );
 
       if ( arg2[0] == '\0' )
         {
@@ -695,9 +695,9 @@ void do_redit( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg, "exdistance" ) )
+  if ( !StrCmp( arg, "exdistance" ) )
     {
-      argument = one_argument( argument, arg2 );
+      argument = OneArgument( argument, arg2 );
 
       if ( arg2[0] == '\0' )
         {
@@ -727,9 +727,9 @@ void do_redit( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg, "exdesc" ) )
+  if ( !StrCmp( arg, "exdesc" ) )
     {
-      argument = one_argument( argument, arg2 );
+      argument = OneArgument( argument, arg2 );
 
       if ( arg2[0] == '\0' )
         {
@@ -754,11 +754,11 @@ void do_redit( Character *ch, char *argument )
           DISPOSE( xit->description );
 
           if ( !argument || argument[0] == '\0' )
-            xit->description = str_dup( "" );
+            xit->description = CopyString( "" );
           else
             {
               sprintf( buf, "%s\r\n", argument );
-              xit->description = str_dup( buf );
+              xit->description = CopyString( buf );
             }
 
           send_to_char( "Done.\r\n", ch );

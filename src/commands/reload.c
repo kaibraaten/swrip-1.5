@@ -45,7 +45,7 @@ void do_reload( Character *ch, char *argument )
 	}
     }
 
-  if ( ch->pcdata && ch->pcdata->clan && !str_cmp(ch->pcdata->clan->name,ship->owner) )
+  if ( ch->pcdata && ch->pcdata->clan && !StrCmp(ch->pcdata->clan->name,ship->owner) )
     {
       if ( ch->pcdata->clan->funds < price )
         {
@@ -57,7 +57,7 @@ void do_reload( Character *ch, char *argument )
       ch->pcdata->clan->funds -= price;
       ch_printf(ch, "&GIt costs %s %ld credits to ready this ship for launch.\r\n", ch->pcdata->clan->name, price );
     }
-  else if ( str_cmp( ship->owner , "Public" ) )
+  else if ( StrCmp( ship->owner , "Public" ) )
     {
       if ( ch->gold < price )
         {

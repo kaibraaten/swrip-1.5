@@ -8,7 +8,7 @@ void do_close( Character *ch, char *argument )
   Exit *pexit = NULL;
   int door = 0;
 
-  one_argument( argument, arg );
+  OneArgument( argument, arg );
 
   if ( arg[0] == '\0' )
     {
@@ -76,21 +76,21 @@ void do_close( Character *ch, char *argument )
             }
 
           ch_printf( ch, "%s isn't a container.\r\n",
-		     capitalize( obj->short_descr ) );
+		     Capitalize( obj->short_descr ) );
           return;
         }
 
       if ( IsBitSet(obj->value[1], CONT_CLOSED) )
         {
           ch_printf( ch, "%s is already closed.\r\n",
-		     capitalize( obj->short_descr ) );
+		     Capitalize( obj->short_descr ) );
           return;
         }
 
       if ( !IsBitSet(obj->value[1], CONT_CLOSEABLE) )
         {
           ch_printf( ch, "%s cannot be opened or closed.\r\n",
-		     capitalize( obj->short_descr ) );
+		     Capitalize( obj->short_descr ) );
 	  return;
         }
 
@@ -101,7 +101,7 @@ void do_close( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg , "hatch" ) )
+  if ( !StrCmp( arg , "hatch" ) )
     {
       do_closehatch( ch , argument );
       return;

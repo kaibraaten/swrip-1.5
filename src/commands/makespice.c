@@ -63,7 +63,7 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
       return;
     }
 
-  ud->ItemName = str_dup( args->CommandArguments );
+  ud->ItemName = CopyString( args->CommandArguments );
 }
 
 static void CheckRequirementsHandler( void *userData, CheckRequirementsEventArgs *args )
@@ -95,15 +95,15 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   DISPOSE( spice->name );
   strcat( buf, " drug spice " );
   strcat( buf, get_spicetype_name( ud->SpiceType ) );
-  spice->name = str_dup( buf );
+  spice->name = CopyString( buf );
 
   strcpy( buf, ud->ItemName );
   DISPOSE( spice->short_descr );
-  spice->short_descr = str_dup( buf );
+  spice->short_descr = CopyString( buf );
 
   strcat( buf, " was foolishly left lying around here." );
   DISPOSE( spice->description );
-  spice->description = str_dup( capitalize( buf ) );
+  spice->description = CopyString( Capitalize( buf ) );
 
   spice->item_type = ITEM_SPICE;
   spice->value[OVAL_SPICE_TYPE] = ud->SpiceType;

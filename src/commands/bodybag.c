@@ -8,7 +8,7 @@ void do_bodybag( Character *ch, char *argument )
   OBJ_DATA *obj;
   bool found;
 
-  one_argument( argument, arg );
+  OneArgument( argument, arg );
   if ( arg[0] == '\0' )
     {
       send_to_char( "Bodybag whom?\r\n", ch );
@@ -23,7 +23,7 @@ void do_bodybag( Character *ch, char *argument )
   for ( obj = first_object; obj; obj = obj->next )
     {
       if ( obj->in_room
-           && !str_cmp( buf2, obj->short_descr )
+           && !StrCmp( buf2, obj->short_descr )
            && (obj->pIndexData->vnum == 11 ) )
         {
           found = true;

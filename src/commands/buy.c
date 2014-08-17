@@ -8,7 +8,7 @@ void do_buy( Character *ch, char *argument )
   char arg[MAX_INPUT_LENGTH];
   int maxgold;
 
-  argument = one_argument( argument, arg );
+  argument = OneArgument( argument, arg );
 
   if ( arg[0] == '\0' )
     {
@@ -72,19 +72,19 @@ void do_buy( Character *ch, char *argument )
       SetBit(pet->act, ACT_PET);
       SetBit(pet->affected_by, AFF_CHARM);
 
-      argument = one_argument( argument, arg );
+      argument = OneArgument( argument, arg );
 
       if ( arg[0] != '\0' )
         {
           sprintf( buf, "%s %s", pet->name, arg );
           DISPOSE( pet->name );
-          pet->name = str_dup( buf );
+          pet->name = CopyString( buf );
         }
 
       sprintf( buf, "%sA neck tag says 'I belong to %s'.\r\n",
                pet->description, ch->name );
       DISPOSE( pet->description );
-      pet->description = str_dup( buf );
+      pet->description = CopyString( buf );
 
       if( ch->pcdata )
         ch->pcdata->pet = pet;
@@ -111,10 +111,10 @@ void do_buy( Character *ch, char *argument )
 
       maxgold = keeper->top_level * 10;
 
-      if ( is_number( arg ) )
+      if ( IsNumber( arg ) )
         {
           noi = atoi( arg );
-          argument = one_argument( argument, arg );
+          argument = OneArgument( argument, arg );
           if ( noi > mnoi )
             {
               act( AT_TELL, "$n tells you 'I don't sell that many items at"

@@ -21,13 +21,13 @@ void do_repairship(Character *ch, char *argument )
           return;
         }
 
-      if ( str_cmp( argument , "hull" )
-	   && str_cmp( argument , "drive" )
-           && str_cmp( argument , "launcher" )
-	   && str_cmp( argument , "laser" )
-           && str_prefix( "turret ", argument )
-           && str_cmp( argument , "docking" )
-	   && str_cmp( argument , "tractor" ) )
+      if ( StrCmp( argument , "hull" )
+	   && StrCmp( argument , "drive" )
+           && StrCmp( argument , "launcher" )
+	   && StrCmp( argument , "laser" )
+           && StringPrefix( "turret ", argument )
+           && StrCmp( argument , "docking" )
+	   && StrCmp( argument , "tractor" ) )
         {
           send_to_char("&RYou need to spceify something to repair:\r\n",ch);
           ch_printf( ch, "&rTry: hull, drive, launcher, laser, docking, tractor or turret <1 - %d>\r\n", MAX_NUMBER_OF_TURRETS_IN_SHIP);
@@ -36,16 +36,16 @@ void do_repairship(Character *ch, char *argument )
 
       the_chance = IsNpc(ch) ? ch->top_level
         : (int) (ch->pcdata->learned[gsn_shipmaintenance]);
-      if ( number_percent( ) < the_chance )
+      if ( GetRandomPercent( ) < the_chance )
         {
           send_to_char( "&GYou begin your repairs\r\n", ch);
           act( AT_PLAIN, "$n begins repairing the ships $T.", ch,
                NULL, argument , TO_ROOM );
-          if ( !str_cmp(arg,"hull") )
+          if ( !StrCmp(arg,"hull") )
             add_timer ( ch , TIMER_DO_FUN , 15 , do_repairship , SUB_PAUSE );
           else
             add_timer ( ch , TIMER_DO_FUN , 5 , do_repairship , SUB_PAUSE );
-          ch->dest_buf = str_dup(arg);
+          ch->dest_buf = CopyString(arg);
           return;
         }
       send_to_char("&RYou fail to locate the source of the problem.\r\n",ch);
@@ -75,16 +75,16 @@ void do_repairship(Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp(arg,"hull") )
+  if ( !StrCmp(arg,"hull") )
     {
       change = urange( 0 ,
-                       number_range( (int) ( ch->pcdata->learned[gsn_shipmaintenance] / 2 ) , (int) (ch->pcdata->learned[gsn_shipmaintenance]) ),
+                       GetRandomNumberFromRange( (int) ( ch->pcdata->learned[gsn_shipmaintenance] / 2 ) , (int) (ch->pcdata->learned[gsn_shipmaintenance]) ),
                        ( ship->maxhull - ship->hull ) );
       ship->hull += change;
       ch_printf( ch, "&GRepair complete. Hull strength inreased by %d points.\r\n", change );
     }
 
-  if ( !str_cmp(arg,"drive") )
+  if ( !StrCmp(arg,"drive") )
     {
       if (ship->location == ship->lastdoc)
         ship->shipstate = SHIP_LANDED;
@@ -95,35 +95,35 @@ void do_repairship(Character *ch, char *argument )
       send_to_char("&GShips drive repaired.\r\n", ch);
     }
 
-  if ( !str_cmp(arg,"docking") )
+  if ( !StrCmp(arg,"docking") )
     {
       ship->statetdocking = SHIP_READY;
       send_to_char("&GDocking bay repaired.\r\n", ch);
     }
-  if ( !str_cmp(arg,"tractor") )
+  if ( !StrCmp(arg,"tractor") )
     {
       ship->statettractor = SHIP_READY;
       send_to_char("&GTractorbeam repaired.\r\n", ch);
     }
-  if ( !str_cmp(arg,"launcher") )
+  if ( !StrCmp(arg,"launcher") )
     {
       ship->missilestate = MISSILE_READY;
       send_to_char("&GMissile launcher repaired.\r\n", ch);
     }
 
-  if ( !str_cmp(arg,"laser") )
+  if ( !StrCmp(arg,"laser") )
     {
       ship->statet0 = LASER_READY;
       send_to_char("&GMain laser repaired.\r\n", ch);
     }
 
-  if( !str_prefix( "turret ", arg ) )
+  if( !StringPrefix( "turret ", arg ) )
     {
       char number_string[MAX_INPUT_LENGTH];
       long turret_number = 0;
       Turret *turret = NULL;
 
-      argument = one_argument( arg, number_string );
+      argument = OneArgument( arg, number_string );
       turret_number = strtol( number_string, 0, 10 );
 
       if( turret_number < 1 || turret_number > MAX_NUMBER_OF_TURRETS_IN_SHIP )

@@ -63,8 +63,8 @@ static Shuttle *AllocateShuttle( void )
 Shuttle *MakeShuttle( const char *filename, const char *name )
 {
   Shuttle *shuttle   = AllocateShuttle();
-  shuttle->name      = str_dup( name );
-  shuttle->filename  = str_dup( filename );
+  shuttle->name      = CopyString( name );
+  shuttle->filename  = CopyString( filename );
 
   if (SaveShuttle( shuttle ))
     {
@@ -88,7 +88,7 @@ Shuttle *GetShuttle(const char *name)
 
   for ( shuttle = first_shuttle; shuttle; shuttle = shuttle->next )
     {
-      if ( !str_cmp( name, shuttle->name ) )
+      if ( !StrCmp( name, shuttle->name ) )
 	{
 	  return shuttle;
 	}
@@ -96,7 +96,7 @@ Shuttle *GetShuttle(const char *name)
 
   for ( shuttle = first_shuttle; shuttle; shuttle = shuttle->next )
     {
-      if ( nifty_is_name_prefix( name, shuttle->name ) )
+      if ( NiftyIsNamePrefix( name, shuttle->name ) )
 	{
 	  return shuttle;
 	}
@@ -442,7 +442,7 @@ void LoadShuttles( void )
 
   for ( ; ; )
     {
-      const char *filename = feof( fpList ) ? "$" : fread_word( fpList );
+      const char *filename = feof( fpList ) ? "$" : ReadWord( fpList );
 
       if ( filename[0] == '$' )
 	{
@@ -479,11 +479,11 @@ bool LoadShuttleFile( const char * shuttlefile )
       for ( ; ; )
         {
 	  const char *word = NULL;
-          char letter = fread_letter( fp );
+          char letter = ReadChar( fp );
 
           if ( letter == '*' )
             {
-              fread_to_eol( fp );
+              ReadToEndOfLine( fp );
               continue;
             }
 
@@ -493,9 +493,9 @@ bool LoadShuttleFile( const char * shuttlefile )
               break;
             }
 
-          word = fread_word( fp );
+          word = ReadWord( fp );
 
-          if ( !str_cmp( word, "SHUTTLE") )
+          if ( !StrCmp( word, "SHUTTLE") )
             {
               ReadShuttle( shuttle, fp );
 
@@ -507,14 +507,14 @@ bool LoadShuttleFile( const char * shuttlefile )
               shuttle->in_room = NULL;
               continue;
             }
-          else if ( !str_cmp( word, "STOP") )
+          else if ( !StrCmp( word, "STOP") )
             {
               ShuttleStop * stop = AllocateShuttleStop();
               ReadShuttleStop( stop, fp );
               LINK( stop, shuttle->first_stop, shuttle->last_stop, next, prev );
               continue;
             }
-          else if ( !str_cmp( word, "END" ) )
+          else if ( !StrCmp( word, "END" ) )
             {
               break;
             }
@@ -572,30 +572,30 @@ void ReadShuttle( Shuttle *shuttle, FILE *fp )
 
   for ( ; ; )
     {
-      const char *word = feof( fp ) ? "End" : fread_word( fp );
+      const char *word = feof( fp ) ? "End" : ReadWord( fp );
       bool fMatch = false;
 
       switch ( CharToUppercase(word[0]) )
         {
         case '*':
           fMatch = true;
-          fread_to_eol( fp );
+          ReadToEndOfLine( fp );
           break;
 
         case 'C':
-          KEY( "Current", shuttle->current_number, fread_number(fp));
-          KEY( "CurrentDelay", shuttle->current_delay, fread_number(fp));
+          KEY( "Current", shuttle->current_number, ReadInt(fp));
+          KEY( "CurrentDelay", shuttle->current_delay, ReadInt(fp));
           break;
 
         case 'D':
-          KEY( "Delay", shuttle->delay, fread_number(fp));
+          KEY( "Delay", shuttle->delay, ReadInt(fp));
           break;
 
         case 'E':
-          KEY( "EndRoom", shuttle->room.last, fread_number(fp));
-          KEY( "Entrance", shuttle->room.entrance, fread_number(fp));
+          KEY( "EndRoom", shuttle->room.last, ReadInt(fp));
+          KEY( "Entrance", shuttle->room.entrance, ReadInt(fp));
 
-          if ( !str_cmp( word, "End" ) )
+          if ( !StrCmp( word, "End" ) )
             {
               shuttle->current_delay = shuttle->delay;
               return;
@@ -603,20 +603,20 @@ void ReadShuttle( Shuttle *shuttle, FILE *fp )
           break;
 
         case 'F':
-          KEY( "Filename", shuttle->filename, fread_string_nohash(fp));
+          KEY( "Filename", shuttle->filename, ReadStringToTildeNoHash(fp));
           break;
 
         case 'N':
-          KEY( "Name",  shuttle->name, fread_string(fp));
+          KEY( "Name",  shuttle->name, ReadStringToTilde(fp));
           break;
 
         case 'S':
-          KEY( "StartRoom", shuttle->room.first, fread_number(fp));
-          KEY( "State", shuttle->state, fread_number(fp));
+          KEY( "StartRoom", shuttle->room.first, ReadInt(fp));
+          KEY( "State", shuttle->state, ReadInt(fp));
           break;
 
         case 'T':
-          KEY( "Type", shuttle->type, (SHUTTLE_CLASS) fread_number(fp));
+          KEY( "Type", shuttle->type, (SHUTTLE_CLASS) ReadInt(fp));
           break;
         }
 
@@ -631,29 +631,29 @@ void ReadShuttleStop( ShuttleStop * stop, FILE *fp )
 {
   for ( ; ; )
     {
-      const char *word = feof( fp ) ? "End" : fread_word( fp );
+      const char *word = feof( fp ) ? "End" : ReadWord( fp );
       bool fMatch = false;
 
       switch ( CharToUppercase(word[0]) )
         {
         case '*':
           fMatch = true;
-          fread_to_eol( fp );
+          ReadToEndOfLine( fp );
           break;
 
         case 'E':
-          if ( !str_cmp( word, "End" ) )
+          if ( !StrCmp( word, "End" ) )
             {
               return;
             }
           break;
 
         case 'R':
-          KEY( "Room",  stop->room, fread_number(fp));
+          KEY( "Room",  stop->room, ReadInt(fp));
           break;
 
         case 'S':
-          KEY( "StopName", stop->stop_name, fread_string_nohash(fp));
+          KEY( "StopName", stop->stop_name, ReadStringToTildeNoHash(fp));
           break;
         }
 
@@ -722,7 +722,7 @@ Shuttle *GetShuttleInRoom( const Room *room, const char *name )
 
   for ( shuttle = room->first_shuttle ; shuttle ; shuttle = shuttle->next_in_room )
     {
-      if ( !str_cmp( name, shuttle->name ) )
+      if ( !StrCmp( name, shuttle->name ) )
 	{
 	  return shuttle;
 	}
@@ -730,7 +730,7 @@ Shuttle *GetShuttleInRoom( const Room *room, const char *name )
 
   for ( shuttle = room->first_shuttle ; shuttle ; shuttle = shuttle->next_in_room )
     {
-      if ( nifty_is_name_prefix( name, shuttle->name ) )
+      if ( NiftyIsNamePrefix( name, shuttle->name ) )
 	{
 	  return shuttle;
 	}

@@ -195,7 +195,7 @@ SPELL_FUN *spell_function( const char *name )
 
   for( i = 0; i < spell_fun_table_size(); ++i )
     {
-      if( !str_cmp( name, spell_fun_table[ i ].fun_name ) )
+      if( !StrCmp( name, spell_fun_table[ i ].fun_name ) )
         {
           fun_ptr = spell_fun_table[ i ].fun_ptr;
           break;
@@ -215,581 +215,581 @@ static const DO_FUN_ENTRY command_fun_table[] = {
   { "do_aassign", do_aassign }
 }
 
-      if ( !str_cmp( name, "do_aassign" ))              return do_aassign;
-      if ( !str_cmp( name, "do_addbounty" ))          return do_addbounty;
-      if ( !str_cmp( name, "do_addresident" ))  return do_addresident;
-      if ( !str_cmp( name, "do_addsalary" ))            return do_addsalary;
-      if ( !str_cmp( name, "do_addpilot" ))             return do_addpilot;
-      if ( !str_cmp( name, "do_add_patrol" ))   return do_add_patrol;
-      if ( !str_cmp( name, "do_adjusttractorbeam" ))    return do_adjusttractorbeam;
-      if ( !str_cmp( name, "do_accelerate" ))         return do_accelerate;
-      if ( !str_cmp( name, "do_accept" ))             return do_accept;
-      if ( !str_cmp( name, "do_advance" ))              return do_advance;
-      if ( !str_cmp( name, "do_affected" ))             return do_affected;
-      if ( !str_cmp( name, "do_afk" ))          return do_afk;
-      if ( !str_cmp( name, "do_ahall" ))              return do_ahall;
-      if ( !str_cmp( name, "do_aid" ))          return do_aid;
-      if ( !str_cmp( name, "do_alias" ))                return do_alias;
-      if ( !str_cmp( name, "do_allclantalk" ))  return do_allclantalk;
-      if ( !str_cmp( name, "do_allow" ))                return do_allow;
-      if ( !str_cmp( name, "do_allships" ))             return do_allships;
-      if ( !str_cmp( name, "do_allspeeders" ))  return do_allspeeders;
-      if ( !str_cmp( name, "do_ammo" ))         return do_ammo;
-      if ( !str_cmp( name, "do_ansi" ))         return do_ansi;
-      if ( !str_cmp( name, "do_answer" ))               return do_answer;
-      if ( !str_cmp( name, "do_apply" ))                return do_apply;
-      if ( !str_cmp( name, "do_appraise" ))             return do_appraise;
-      if ( !str_cmp( name, "do_appoint" ))              return do_appoint;
-      if ( !str_cmp( name, "do_areas" ))                return do_areas;
-      if ( !str_cmp( name, "do_arena" ))              return do_arena;
-      if ( !str_cmp( name, "do_arm" ))          return do_arm;
-      if ( !str_cmp( name, "do_aset" ))         return do_aset;
-      if ( !str_cmp( name, "do_ask" ))          return do_ask;
-      if ( !str_cmp( name, "do_astat" ))                return do_astat;
-      if ( !str_cmp( name, "do_at" ))                   return do_at;
-      if ( !str_cmp( name, "do_auction" ))              return do_auction;
-      if ( !str_cmp( name, "do_authorize" ))            return do_authorize;
-      if ( !str_cmp( name, "do_autorecharge" ))       return do_autorecharge;
-      if ( !str_cmp( name, "do_autotrack"))           return do_autotrack;
-      if ( !str_cmp( name, "do_autopilot"))           return do_autopilot;
-      if ( !str_cmp( name, "do_avtalk" ))               return do_avtalk;
-      if ( !str_cmp( name, "do_awho" ))               return do_awho;
+      if ( !StrCmp( name, "do_aassign" ))              return do_aassign;
+      if ( !StrCmp( name, "do_addbounty" ))          return do_addbounty;
+      if ( !StrCmp( name, "do_addresident" ))  return do_addresident;
+      if ( !StrCmp( name, "do_addsalary" ))            return do_addsalary;
+      if ( !StrCmp( name, "do_addpilot" ))             return do_addpilot;
+      if ( !StrCmp( name, "do_add_patrol" ))   return do_add_patrol;
+      if ( !StrCmp( name, "do_adjusttractorbeam" ))    return do_adjusttractorbeam;
+      if ( !StrCmp( name, "do_accelerate" ))         return do_accelerate;
+      if ( !StrCmp( name, "do_accept" ))             return do_accept;
+      if ( !StrCmp( name, "do_advance" ))              return do_advance;
+      if ( !StrCmp( name, "do_affected" ))             return do_affected;
+      if ( !StrCmp( name, "do_afk" ))          return do_afk;
+      if ( !StrCmp( name, "do_ahall" ))              return do_ahall;
+      if ( !StrCmp( name, "do_aid" ))          return do_aid;
+      if ( !StrCmp( name, "do_alias" ))                return do_alias;
+      if ( !StrCmp( name, "do_allclantalk" ))  return do_allclantalk;
+      if ( !StrCmp( name, "do_allow" ))                return do_allow;
+      if ( !StrCmp( name, "do_allships" ))             return do_allships;
+      if ( !StrCmp( name, "do_allspeeders" ))  return do_allspeeders;
+      if ( !StrCmp( name, "do_ammo" ))         return do_ammo;
+      if ( !StrCmp( name, "do_ansi" ))         return do_ansi;
+      if ( !StrCmp( name, "do_answer" ))               return do_answer;
+      if ( !StrCmp( name, "do_apply" ))                return do_apply;
+      if ( !StrCmp( name, "do_appraise" ))             return do_appraise;
+      if ( !StrCmp( name, "do_appoint" ))              return do_appoint;
+      if ( !StrCmp( name, "do_areas" ))                return do_areas;
+      if ( !StrCmp( name, "do_arena" ))              return do_arena;
+      if ( !StrCmp( name, "do_arm" ))          return do_arm;
+      if ( !StrCmp( name, "do_aset" ))         return do_aset;
+      if ( !StrCmp( name, "do_ask" ))          return do_ask;
+      if ( !StrCmp( name, "do_astat" ))                return do_astat;
+      if ( !StrCmp( name, "do_at" ))                   return do_at;
+      if ( !StrCmp( name, "do_auction" ))              return do_auction;
+      if ( !StrCmp( name, "do_authorize" ))            return do_authorize;
+      if ( !StrCmp( name, "do_autorecharge" ))       return do_autorecharge;
+      if ( !StrCmp( name, "do_autotrack"))           return do_autotrack;
+      if ( !StrCmp( name, "do_autopilot"))           return do_autopilot;
+      if ( !StrCmp( name, "do_avtalk" ))               return do_avtalk;
+      if ( !StrCmp( name, "do_awho" ))               return do_awho;
       break;
     case 'b':
-      if ( !str_cmp( name, "do_backstab" ))             return do_backstab;
-      if ( !str_cmp( name, "do_badname" ))           return do_badname;
-      if ( !str_cmp( name, "do_balzhur" ))              return do_balzhur;
-      if ( !str_cmp( name, "do_bamfin" ))               return do_bamfin;
-      if ( !str_cmp( name, "do_bamfout" ))              return do_bamfout;
-      if ( !str_cmp( name, "do_ban" ))          return do_ban;
-      if ( !str_cmp( name, "do_bank" ))         return do_bank;
-      if ( !str_cmp( name, "do_bash" ))         return do_bash;
-      if ( !str_cmp( name, "do_bashdoor" ))             return do_bashdoor;
-      if ( !str_cmp( name, "do_beep" ))               return do_beep;
-      if ( !str_cmp( name, "do_beg" ))                return do_beg;
-      if ( !str_cmp( name, "do_berserk" ))              return do_berserk;
-      if ( !str_cmp( name, "do_bestow" ))               return do_bestow;
-      if ( !str_cmp( name, "do_bestowarea" ))           return do_bestowarea;
-      if ( !str_cmp( name, "do_bet" ))                return do_bet;
-      if ( !str_cmp( name, "do_bind" ))         return do_bind;
-      if ( !str_cmp( name, "do_bio" ))          return do_bio;
-      if ( !str_cmp( name, "do_board" ))              return do_board;
-      if ( !str_cmp( name, "do_boards" ))               return do_boards;
-      if ( !str_cmp( name, "do_bodybag" ))              return do_bodybag;
-      if ( !str_cmp( name, "do_bomb" ))         return do_bomb;
-      if ( !str_cmp( name, "do_bounties" ))             return do_bounties;
-      if ( !str_cmp( name, "do_brandish" ))             return do_brandish;
-      if ( !str_cmp( name, "do_brew" ))         return do_brew;
-      if ( !str_cmp( name, "do_bribe" ))                return do_bribe;
-      if ( !str_cmp( name, "do_bset" ))         return do_bset;
-      if ( !str_cmp( name, "do_bstat" ))                return do_bstat;
-      if ( !str_cmp( name, "do_bug" ))          return do_bug;
-      if ( !str_cmp( name, "do_bury" ))         return do_bury;
-      if ( !str_cmp( name, "do_buy" ))          return do_buy;
-      if ( !str_cmp( name, "do_buyhome" ))            return do_buyhome;
-      if ( !str_cmp( name, "do_buyship" ))            return do_buyship;
-      if ( !str_cmp( name, "do_buyvendor" ))            return do_buyvendor;
-      if ( !str_cmp( name, "do_buzz" ))         return do_buzz;
+      if ( !StrCmp( name, "do_backstab" ))             return do_backstab;
+      if ( !StrCmp( name, "do_badname" ))           return do_badname;
+      if ( !StrCmp( name, "do_balzhur" ))              return do_balzhur;
+      if ( !StrCmp( name, "do_bamfin" ))               return do_bamfin;
+      if ( !StrCmp( name, "do_bamfout" ))              return do_bamfout;
+      if ( !StrCmp( name, "do_ban" ))          return do_ban;
+      if ( !StrCmp( name, "do_bank" ))         return do_bank;
+      if ( !StrCmp( name, "do_bash" ))         return do_bash;
+      if ( !StrCmp( name, "do_bashdoor" ))             return do_bashdoor;
+      if ( !StrCmp( name, "do_beep" ))               return do_beep;
+      if ( !StrCmp( name, "do_beg" ))                return do_beg;
+      if ( !StrCmp( name, "do_berserk" ))              return do_berserk;
+      if ( !StrCmp( name, "do_bestow" ))               return do_bestow;
+      if ( !StrCmp( name, "do_bestowarea" ))           return do_bestowarea;
+      if ( !StrCmp( name, "do_bet" ))                return do_bet;
+      if ( !StrCmp( name, "do_bind" ))         return do_bind;
+      if ( !StrCmp( name, "do_bio" ))          return do_bio;
+      if ( !StrCmp( name, "do_board" ))              return do_board;
+      if ( !StrCmp( name, "do_boards" ))               return do_boards;
+      if ( !StrCmp( name, "do_bodybag" ))              return do_bodybag;
+      if ( !StrCmp( name, "do_bomb" ))         return do_bomb;
+      if ( !StrCmp( name, "do_bounties" ))             return do_bounties;
+      if ( !StrCmp( name, "do_brandish" ))             return do_brandish;
+      if ( !StrCmp( name, "do_brew" ))         return do_brew;
+      if ( !StrCmp( name, "do_bribe" ))                return do_bribe;
+      if ( !StrCmp( name, "do_bset" ))         return do_bset;
+      if ( !StrCmp( name, "do_bstat" ))                return do_bstat;
+      if ( !StrCmp( name, "do_bug" ))          return do_bug;
+      if ( !StrCmp( name, "do_bury" ))         return do_bury;
+      if ( !StrCmp( name, "do_buy" ))          return do_buy;
+      if ( !StrCmp( name, "do_buyhome" ))            return do_buyhome;
+      if ( !StrCmp( name, "do_buyship" ))            return do_buyship;
+      if ( !StrCmp( name, "do_buyvendor" ))            return do_buyvendor;
+      if ( !StrCmp( name, "do_buzz" ))         return do_buzz;
       break;
     case 'c':
-      if ( !str_cmp( name, "do_calculate" ))          return do_calculate;
-      if ( !str_cmp( name, "do_calculate_diff" ))     return do_calculate_diff;
-      if ( !str_cmp( name, "do_capture" ))            return do_capture;
-      if ( !str_cmp( name, "do_cast" ))         return do_cast;
-      if ( !str_cmp( name, "do_cedit" ))                return do_cedit;
-      if ( !str_cmp( name, "do_chaff" ))                return do_chaff;
-      if ( !str_cmp( name, "do_challenge" ))          return do_challenge;
-      if ( !str_cmp( name, "do_channels" ))             return do_channels;
-      if ( !str_cmp( name, "do_chaos" ))              return do_chaos;
-      if ( !str_cmp( name, "do_chat" ))         return do_chat;
-      if ( !str_cmp( name, "do_check_vnums" ))  return do_check_vnums;
-      if ( !str_cmp( name, "do_circle" ))               return do_circle;
-      if ( !str_cmp( name, "do_clanfunds" ))            return do_clanfunds;
-      if ( !str_cmp( name, "do_clans" ))                return do_clans;
-      if ( !str_cmp( name, "do_clan_donate" ))  return do_clan_donate;
-      if ( !str_cmp( name, "do_clan_withdraw" ))        return do_clan_withdraw;
-      if ( !str_cmp( name, "do_clantalk" ))             return do_clantalk;
-      if ( !str_cmp( name, "do_clanbuyship" ))        return do_clanbuyship;
-      if ( !str_cmp( name, "do_clansellship" ))        return do_clansellship;
-      if ( !str_cmp( name, "do_climb" ))                return do_climb;
-      if ( !str_cmp( name, "do_close" ))                return do_close;
-      if ( !str_cmp( name, "do_clone" ))                return do_clone;
-      if ( !str_cmp( name, "do_closebay" ))             return do_closebay;
-      if ( !str_cmp( name, "do_closehatch"  ))        return do_closehatch;
-      if ( !str_cmp( name, "do_cmdtable" ))             return do_cmdtable;
-      if ( !str_cmp( name, "do_collectgold" ))  return do_collectgold;
-      if ( !str_cmp( name, "do_commands" ))             return do_commands;
-      if ( !str_cmp( name, "do_comment" ))              return do_comment;
-      if ( !str_cmp( name, "do_compare" ))              return do_compare;
-      if ( !str_cmp( name, "do_config" ))               return do_config;
-      if ( !str_cmp( name, "do_consider" ))             return do_consider;
-      if ( !str_cmp( name, "do_copyover" ))           return do_copyover;
-      if ( !str_cmp( name, "do_copyship" ))             return do_copyship;
-      if ( !str_cmp( name, "do_credits" ))              return do_credits;
-      if ( !str_cmp( name, "do_cset" ))         return do_cset;
-      if ( !str_cmp( name, "do_cutdoor" ))              return do_cutdoor;
+      if ( !StrCmp( name, "do_calculate" ))          return do_calculate;
+      if ( !StrCmp( name, "do_calculate_diff" ))     return do_calculate_diff;
+      if ( !StrCmp( name, "do_capture" ))            return do_capture;
+      if ( !StrCmp( name, "do_cast" ))         return do_cast;
+      if ( !StrCmp( name, "do_cedit" ))                return do_cedit;
+      if ( !StrCmp( name, "do_chaff" ))                return do_chaff;
+      if ( !StrCmp( name, "do_challenge" ))          return do_challenge;
+      if ( !StrCmp( name, "do_channels" ))             return do_channels;
+      if ( !StrCmp( name, "do_chaos" ))              return do_chaos;
+      if ( !StrCmp( name, "do_chat" ))         return do_chat;
+      if ( !StrCmp( name, "do_check_vnums" ))  return do_check_vnums;
+      if ( !StrCmp( name, "do_circle" ))               return do_circle;
+      if ( !StrCmp( name, "do_clanfunds" ))            return do_clanfunds;
+      if ( !StrCmp( name, "do_clans" ))                return do_clans;
+      if ( !StrCmp( name, "do_clan_donate" ))  return do_clan_donate;
+      if ( !StrCmp( name, "do_clan_withdraw" ))        return do_clan_withdraw;
+      if ( !StrCmp( name, "do_clantalk" ))             return do_clantalk;
+      if ( !StrCmp( name, "do_clanbuyship" ))        return do_clanbuyship;
+      if ( !StrCmp( name, "do_clansellship" ))        return do_clansellship;
+      if ( !StrCmp( name, "do_climb" ))                return do_climb;
+      if ( !StrCmp( name, "do_close" ))                return do_close;
+      if ( !StrCmp( name, "do_clone" ))                return do_clone;
+      if ( !StrCmp( name, "do_closebay" ))             return do_closebay;
+      if ( !StrCmp( name, "do_closehatch"  ))        return do_closehatch;
+      if ( !StrCmp( name, "do_cmdtable" ))             return do_cmdtable;
+      if ( !StrCmp( name, "do_collectgold" ))  return do_collectgold;
+      if ( !StrCmp( name, "do_commands" ))             return do_commands;
+      if ( !StrCmp( name, "do_comment" ))              return do_comment;
+      if ( !StrCmp( name, "do_compare" ))              return do_compare;
+      if ( !StrCmp( name, "do_config" ))               return do_config;
+      if ( !StrCmp( name, "do_consider" ))             return do_consider;
+      if ( !StrCmp( name, "do_copyover" ))           return do_copyover;
+      if ( !StrCmp( name, "do_copyship" ))             return do_copyship;
+      if ( !StrCmp( name, "do_credits" ))              return do_credits;
+      if ( !StrCmp( name, "do_cset" ))         return do_cset;
+      if ( !StrCmp( name, "do_cutdoor" ))              return do_cutdoor;
       break;
     case 'd':
-      if ( !str_cmp( name, "do_decline" ))            return do_decline;
-      if ( !str_cmp( name, "do_delay" ))                return do_delay;
-      if ( !str_cmp( name, "do_demote" ))               return do_demote;
-      if ( !str_cmp( name, "do_deny" ))         return do_deny;
-      if ( !str_cmp( name, "do_description" ))  return do_description;
-      if ( !str_cmp( name, "do_destro" ))               return do_destro;
-      if ( !str_cmp( name, "do_destroy" ))              return do_destroy;
-      if ( !str_cmp( name, "do_detrap" ))               return do_detrap;
-      if ( !str_cmp( name, "do_diagnose" ))             return do_diagnose;
-      if ( !str_cmp( name, "do_dig" ))          return do_dig;
-      if ( !str_cmp( name, "do_disarm" ))               return do_disarm;
-      if ( !str_cmp( name, "do_disconnect" ))           return do_disconnect;
-      if ( !str_cmp( name, "do_disguise" ))           return do_disguise;
-      if ( !str_cmp( name, "do_dismount" ))             return do_dismount;
-      if ( !str_cmp( name, "do_dismiss" ))              return do_dismiss;
-      if ( !str_cmp( name, "do_dmesg" ))                return do_dmesg;
-      if ( !str_cmp( name, "do_dock" ))         return do_dock;
-      if ( !str_cmp( name, "do_down" ))         return do_down;
-      if ( !str_cmp( name, "do_drag" ))         return do_drag;
-      if ( !str_cmp( name, "do_draw" ))         return do_draw;
-      if ( !str_cmp( name, "do_drink" ))                return do_drink;
-      if ( !str_cmp( name, "do_drive" ))                return do_drive;
-      if ( !str_cmp( name, "do_drop" ))         return do_drop;
+      if ( !StrCmp( name, "do_decline" ))            return do_decline;
+      if ( !StrCmp( name, "do_delay" ))                return do_delay;
+      if ( !StrCmp( name, "do_demote" ))               return do_demote;
+      if ( !StrCmp( name, "do_deny" ))         return do_deny;
+      if ( !StrCmp( name, "do_description" ))  return do_description;
+      if ( !StrCmp( name, "do_destro" ))               return do_destro;
+      if ( !StrCmp( name, "do_destroy" ))              return do_destroy;
+      if ( !StrCmp( name, "do_detrap" ))               return do_detrap;
+      if ( !StrCmp( name, "do_diagnose" ))             return do_diagnose;
+      if ( !StrCmp( name, "do_dig" ))          return do_dig;
+      if ( !StrCmp( name, "do_disarm" ))               return do_disarm;
+      if ( !StrCmp( name, "do_disconnect" ))           return do_disconnect;
+      if ( !StrCmp( name, "do_disguise" ))           return do_disguise;
+      if ( !StrCmp( name, "do_dismount" ))             return do_dismount;
+      if ( !StrCmp( name, "do_dismiss" ))              return do_dismiss;
+      if ( !StrCmp( name, "do_dmesg" ))                return do_dmesg;
+      if ( !StrCmp( name, "do_dock" ))         return do_dock;
+      if ( !StrCmp( name, "do_down" ))         return do_down;
+      if ( !StrCmp( name, "do_drag" ))         return do_drag;
+      if ( !StrCmp( name, "do_draw" ))         return do_draw;
+      if ( !StrCmp( name, "do_drink" ))                return do_drink;
+      if ( !StrCmp( name, "do_drive" ))                return do_drive;
+      if ( !StrCmp( name, "do_drop" ))         return do_drop;
       break;
     case 'e':
-      if ( !str_cmp( name, "do_east" ))         return do_east;
-      if ( !str_cmp( name, "do_eat" ))          return do_eat;
-      if ( !str_cmp( name, "do_echo" ))         return do_echo;
-      if ( !str_cmp( name, "do_elite_guard" ))  return do_elite_guard;
-      if ( !str_cmp( name, "do_emote" ))                return do_emote;
-      if ( !str_cmp( name, "do_empty" ))                return do_empty;
-      if ( !str_cmp( name, "do_empower" ))              return do_empower;
-      if ( !str_cmp( name, "do_enlist" ))               return do_enlist;
-      if ( !str_cmp( name, "do_enter" ))                return do_enter;
-      if ( !str_cmp( name, "do_equipment" ))            return do_equipment;
-      if ( !str_cmp( name, "do_examine" ))              return do_examine;
-      if ( !str_cmp( name, "do_exits" ))                return do_exits;
+      if ( !StrCmp( name, "do_east" ))         return do_east;
+      if ( !StrCmp( name, "do_eat" ))          return do_eat;
+      if ( !StrCmp( name, "do_echo" ))         return do_echo;
+      if ( !StrCmp( name, "do_elite_guard" ))  return do_elite_guard;
+      if ( !StrCmp( name, "do_emote" ))                return do_emote;
+      if ( !StrCmp( name, "do_empty" ))                return do_empty;
+      if ( !StrCmp( name, "do_empower" ))              return do_empower;
+      if ( !StrCmp( name, "do_enlist" ))               return do_enlist;
+      if ( !StrCmp( name, "do_enter" ))                return do_enter;
+      if ( !StrCmp( name, "do_equipment" ))            return do_equipment;
+      if ( !StrCmp( name, "do_examine" ))              return do_examine;
+      if ( !StrCmp( name, "do_exits" ))                return do_exits;
       break;
     case 'f':
-      if ( !str_cmp( name, "do_feed" ))         return do_feed;
-      if ( !str_cmp( name, "do_fill" ))         return do_fill;
-      if ( !str_cmp( name, "do_findserin" ))            return do_findserin;
-      if ( !str_cmp( name, "do_fire" ))               return do_fire;
-      if ( !str_cmp( name, "do_first_aid" ))          return do_first_aid;
-      if ( !str_cmp( name, "do_fixchar" ))              return do_fixchar;
-      if ( !str_cmp( name, "do_flee" ))         return do_flee;
-      if ( !str_cmp( name, "do_fly" ))          return do_fly;
-      if ( !str_cmp( name, "do_focusalias" ))           return do_focusalias;
-      if ( !str_cmp( name, "do_foldarea" ))             return do_foldarea;
-      if ( !str_cmp( name, "do_follow" ))               return do_follow;
-      if ( !str_cmp( name, "do_for" ))          return do_for;
-      if ( !str_cmp( name, "do_force" ))                return do_force;
-      if ( !str_cmp( name, "do_forceclose" ))           return do_forceclose;
-      if ( !str_cmp( name, "do_form_password" ))        return do_form_password;
-      if ( !str_cmp( name, "do_fuel" ))         return do_fuel;
-      if ( !str_cmp( name, "do_fquit" ))                return do_fquit;
-      if ( !str_cmp( name, "do_freeze" ))               return do_freeze;
+      if ( !StrCmp( name, "do_feed" ))         return do_feed;
+      if ( !StrCmp( name, "do_fill" ))         return do_fill;
+      if ( !StrCmp( name, "do_findserin" ))            return do_findserin;
+      if ( !StrCmp( name, "do_fire" ))               return do_fire;
+      if ( !StrCmp( name, "do_first_aid" ))          return do_first_aid;
+      if ( !StrCmp( name, "do_fixchar" ))              return do_fixchar;
+      if ( !StrCmp( name, "do_flee" ))         return do_flee;
+      if ( !StrCmp( name, "do_fly" ))          return do_fly;
+      if ( !StrCmp( name, "do_focusalias" ))           return do_focusalias;
+      if ( !StrCmp( name, "do_foldarea" ))             return do_foldarea;
+      if ( !StrCmp( name, "do_follow" ))               return do_follow;
+      if ( !StrCmp( name, "do_for" ))          return do_for;
+      if ( !StrCmp( name, "do_force" ))                return do_force;
+      if ( !StrCmp( name, "do_forceclose" ))           return do_forceclose;
+      if ( !StrCmp( name, "do_form_password" ))        return do_form_password;
+      if ( !StrCmp( name, "do_fuel" ))         return do_fuel;
+      if ( !StrCmp( name, "do_fquit" ))                return do_fquit;
+      if ( !StrCmp( name, "do_freeze" ))               return do_freeze;
       break;
     case 'g':
-      if ( !str_cmp( name, "do_gather_intelligence" )) return do_gather_intelligence;
-      if ( !str_cmp( name, "do_get" ))          return do_get;
-      if ( !str_cmp( name, "do_gemcutting" ))           return do_gemcutting;
-      if ( !str_cmp( name, "do_give" ))         return do_give;
-      if ( !str_cmp( name, "do_glance" ))               return do_glance;
-      if ( !str_cmp( name, "do_gold" ))               return do_gold;
-      if ( !str_cmp( name, "do_goto" ))         return do_goto;
-      if ( !str_cmp( name, "do_gouge" ))                return do_gouge;
-      if ( !str_cmp( name, "do_group" ))                return do_group;
-      if ( !str_cmp( name, "do_grub" ))         return do_grub;
-      if ( !str_cmp( name, "do_gtell" ))                return do_gtell;
-      if ( !str_cmp( name, "do_guard" ))                return do_guard;
+      if ( !StrCmp( name, "do_gather_intelligence" )) return do_gather_intelligence;
+      if ( !StrCmp( name, "do_get" ))          return do_get;
+      if ( !StrCmp( name, "do_gemcutting" ))           return do_gemcutting;
+      if ( !StrCmp( name, "do_give" ))         return do_give;
+      if ( !StrCmp( name, "do_glance" ))               return do_glance;
+      if ( !StrCmp( name, "do_gold" ))               return do_gold;
+      if ( !StrCmp( name, "do_goto" ))         return do_goto;
+      if ( !StrCmp( name, "do_gouge" ))                return do_gouge;
+      if ( !StrCmp( name, "do_group" ))                return do_group;
+      if ( !StrCmp( name, "do_grub" ))         return do_grub;
+      if ( !StrCmp( name, "do_gtell" ))                return do_gtell;
+      if ( !StrCmp( name, "do_guard" ))                return do_guard;
       break;
     case 'h':
-      if ( !str_cmp( name, "do_hail" ))         return do_hail;
-      if ( !str_cmp( name, "do_hedit" ))                return do_hedit;
-      if ( !str_cmp( name, "do_hell" ))         return do_hell;
-      if ( !str_cmp( name, "do_help" ))         return do_help;
-      if ( !str_cmp( name, "do_hide" ))         return do_hide;
-      if ( !str_cmp( name, "do_hijack" ))               return do_hijack;
-      if ( !str_cmp( name, "do_hitall" ))               return do_hitall;
-      if ( !str_cmp( name, "do_hlist" ))                return do_hlist;
-      if ( !str_cmp( name, "do_holylight" ))            return do_holylight;
-      if ( !str_cmp( name, "do_homepage" ))             return do_homepage;
-      if ( !str_cmp( name, "do_hset" ))         return do_hset;
-      if ( !str_cmp( name, "do_hyperspace" ))         return do_hyperspace;
+      if ( !StrCmp( name, "do_hail" ))         return do_hail;
+      if ( !StrCmp( name, "do_hedit" ))                return do_hedit;
+      if ( !StrCmp( name, "do_hell" ))         return do_hell;
+      if ( !StrCmp( name, "do_help" ))         return do_help;
+      if ( !StrCmp( name, "do_hide" ))         return do_hide;
+      if ( !StrCmp( name, "do_hijack" ))               return do_hijack;
+      if ( !StrCmp( name, "do_hitall" ))               return do_hitall;
+      if ( !StrCmp( name, "do_hlist" ))                return do_hlist;
+      if ( !StrCmp( name, "do_holylight" ))            return do_holylight;
+      if ( !StrCmp( name, "do_homepage" ))             return do_homepage;
+      if ( !StrCmp( name, "do_hset" ))         return do_hset;
+      if ( !StrCmp( name, "do_hyperspace" ))         return do_hyperspace;
       break;
     case 'i':
-      if ( !str_cmp( name, "do_i103" ))         return do_i103;
-      if ( !str_cmp( name, "do_i104" ))         return do_i104;
-      if ( !str_cmp( name, "do_i105" ))         return do_i105;
-      if ( !str_cmp( name, "do_ide" ))          return do_ide;
-      if ( !str_cmp( name, "do_idea" ))         return do_idea;
-      if ( !str_cmp( name, "do_immortalize" ))  return do_immortalize;
-      if ( !str_cmp( name, "do_immtalk" ))              return do_immtalk;
-      if ( !str_cmp( name, "do_info" ))               return do_info;
-      if ( !str_cmp( name, "do_induct" ))               return do_induct;
-      if ( !str_cmp( name, "do_installarea" ))  return do_installarea;
-      if ( !str_cmp( name, "do_InstallRoom" ))            return do_InstallRoom;
-      if ( !str_cmp( name, "do_instazone" ))            return do_instazone;
-      if ( !str_cmp( name, "do_inventory" ))            return do_inventory;
-      if ( !str_cmp( name, "do_invis" ))                return do_invis;
-      if ( !str_cmp( name, "do_invite" ))               return do_invite;
+      if ( !StrCmp( name, "do_i103" ))         return do_i103;
+      if ( !StrCmp( name, "do_i104" ))         return do_i104;
+      if ( !StrCmp( name, "do_i105" ))         return do_i105;
+      if ( !StrCmp( name, "do_ide" ))          return do_ide;
+      if ( !StrCmp( name, "do_idea" ))         return do_idea;
+      if ( !StrCmp( name, "do_immortalize" ))  return do_immortalize;
+      if ( !StrCmp( name, "do_immtalk" ))              return do_immtalk;
+      if ( !StrCmp( name, "do_info" ))               return do_info;
+      if ( !StrCmp( name, "do_induct" ))               return do_induct;
+      if ( !StrCmp( name, "do_installarea" ))  return do_installarea;
+      if ( !StrCmp( name, "do_InstallRoom" ))            return do_InstallRoom;
+      if ( !StrCmp( name, "do_instazone" ))            return do_instazone;
+      if ( !StrCmp( name, "do_inventory" ))            return do_inventory;
+      if ( !StrCmp( name, "do_invis" ))                return do_invis;
+      if ( !StrCmp( name, "do_invite" ))               return do_invite;
       break;
     case 'j':
-      if ( !str_cmp( name, "do_jumpvector" ))   return do_jumpvector;
-      if ( !str_cmp( name, "do_jail" ))                 return do_jail;
+      if ( !StrCmp( name, "do_jumpvector" ))   return do_jumpvector;
+      if ( !StrCmp( name, "do_jail" ))                 return do_jail;
       break;
     case 'k':
-      if ( !str_cmp( name, "do_kick" ))         return do_kick;
-      if ( !str_cmp( name, "do_kill" ))         return do_kill;
+      if ( !StrCmp( name, "do_kick" ))         return do_kick;
+      if ( !StrCmp( name, "do_kill" ))         return do_kill;
       break;
     case 'l':
-      if ( !str_cmp( name, "do_languages" ))            return do_languages;
-      if ( !str_cmp( name, "do_last" ))         return do_last;
-      if ( !str_cmp( name, "do_land"))                return do_land;
-      if ( !str_cmp( name, "do_launch"))              return do_launch;
-      if ( !str_cmp( name, "do_leave" ))                return do_leave;
-      if ( !str_cmp( name, "do_leaveship" ))            return do_leaveship;
-      if ( !str_cmp( name, "do_level" ))                return do_level;
-      if ( !str_cmp( name, "do_light" ))                return do_light;
-      if ( !str_cmp( name, "do_list" ))         return do_list;
-      if ( !str_cmp( name, "do_litterbug" ))            return do_litterbug;
-      if ( !str_cmp( name, "do_loadarea" ))             return do_loadarea;
-      if ( !str_cmp( name, "do_loadup" ))               return do_loadup;
-      if ( !str_cmp( name, "do_lock" ))         return do_lock;
-      if ( !str_cmp( name, "do_log" ))          return do_log;
-      if ( !str_cmp( name, "do_look" ))         return do_look;
-      if ( !str_cmp( name, "do_low_purge" ))            return do_low_purge;
+      if ( !StrCmp( name, "do_languages" ))            return do_languages;
+      if ( !StrCmp( name, "do_last" ))         return do_last;
+      if ( !StrCmp( name, "do_land"))                return do_land;
+      if ( !StrCmp( name, "do_launch"))              return do_launch;
+      if ( !StrCmp( name, "do_leave" ))                return do_leave;
+      if ( !StrCmp( name, "do_leaveship" ))            return do_leaveship;
+      if ( !StrCmp( name, "do_level" ))                return do_level;
+      if ( !StrCmp( name, "do_light" ))                return do_light;
+      if ( !StrCmp( name, "do_list" ))         return do_list;
+      if ( !StrCmp( name, "do_litterbug" ))            return do_litterbug;
+      if ( !StrCmp( name, "do_loadarea" ))             return do_loadarea;
+      if ( !StrCmp( name, "do_loadup" ))               return do_loadup;
+      if ( !StrCmp( name, "do_lock" ))         return do_lock;
+      if ( !StrCmp( name, "do_log" ))          return do_log;
+      if ( !StrCmp( name, "do_look" ))         return do_look;
+      if ( !StrCmp( name, "do_low_purge" ))            return do_low_purge;
       break;
     case 'm':
-      if ( !str_cmp( name, "do_mailroom" ))             return do_mailroom;
-      if ( !str_cmp( name, "do_make" ))         return do_make;
-      if ( !str_cmp( name, "do_makearmor" ))            return do_makearmor;
-      if ( !str_cmp( name, "do_makeblade" ))          return do_makeblade;
-      if ( !str_cmp( name, "do_makeblaster" ))        return do_makeblaster;
-      if ( !str_cmp( name, "do_makebowcaster" ))      return do_makebowcaster;
-      if ( !str_cmp( name, "do_makedisguise" ))           return do_makedisguise;
-      if ( !str_cmp( name, "do_makelightsaber" ))     return do_makelightsaber;
-      if ( !str_cmp( name, "do_makespice" ))          return do_makespice;
-      if ( !str_cmp( name, "do_makegrenade" ))  return do_makegrenade;
-      if ( !str_cmp( name, "do_makelight" ))            return do_makelight;
-      if ( !str_cmp( name, "do_makelandmine" )) return do_makelandmine;
-      if ( !str_cmp( name, "do_makecomlink" ))  return do_makecomlink;
-      if ( !str_cmp( name, "do_makeshield" ))           return do_makeshield;
-      if ( !str_cmp( name, "do_makecontainer" ))        return do_makecontainer;
-      if ( !str_cmp( name, "do_makejewelry" ))  return do_makejewelry;
-      if ( !str_cmp( name, "do_makeboard" ))            return do_makeboard;
-      if ( !str_cmp( name, "do_makeclan" ))             return do_makeclan;
-      if ( !str_cmp( name, "do_makemissile" ))  return do_makemissile;
-      if ( !str_cmp( name, "do_makeship" ))           return do_makeship;
-      if ( !str_cmp( name, "do_makerepair" ))           return do_makerepair;
-      if ( !str_cmp( name, "do_makeshop" ))             return do_makeshop;
-      if ( !str_cmp( name, "do_makespaceobject" ))     return do_makespaceobject;
-      if ( !str_cmp( name, "do_makewizlist" ))  return do_makewizlist;
-      if ( !str_cmp( name, "do_makeplanet" ))           return do_makeplanet;
-      if ( !str_cmp( name, "do_massign" ))              return do_massign;
-      if ( !str_cmp( name, "do_mass_propaganda" ))      return do_mass_propaganda;
-      if ( !str_cmp( name, "do_mcreate" ))              return do_mcreate;
-      if ( !str_cmp( name, "do_memory" ))               return do_memory;
-      if ( !str_cmp( name, "do_members" ))              return do_members;
-      if ( !str_cmp( name, "do_mfind" ))                return do_mfind;
-      if ( !str_cmp( name, "do_minvoke" ))              return do_minvoke;
-      if ( !str_cmp( name, "do_mine" ))         return do_mine;
-      if ( !str_cmp( name, "do_mlist" ))                return do_mlist;
-      if ( !str_cmp( name, "do_mortalize" ))            return do_mortalize;
-      if ( !str_cmp( name, "do_mount" ))                return do_mount;
-      if ( !str_cmp( name, "do_mp_close_passage" ))     return do_mp_close_passage;
-      if ( !str_cmp( name, "do_mp_damage" ))            return do_mp_damage;
-      if ( !str_cmp( name, "do_mp_deposit" ))           return do_mp_deposit;
-      if ( !str_cmp( name, "do_mp_open_passage" ))      return do_mp_open_passage;
-      if ( !str_cmp( name, "do_mp_practice" ))  return do_mp_practice;
-      if ( !str_cmp( name, "do_mp_restore" ))           return do_mp_restore;
-      if ( !str_cmp( name, "do_mp_slay" ))              return do_mp_slay;
-      if ( !str_cmp( name, "do_mp_withdraw" ))  return do_mp_withdraw;
-      if ( !str_cmp( name, "do_mpadvance" ))            return do_mpadvance;
-      if ( !str_cmp( name, "do_mpapply" ))              return do_mpapply;
-      if ( !str_cmp( name, "do_mpapplyb" ))             return do_mpapplyb;
-      if ( !str_cmp( name, "do_mpasound" ))             return do_mpasound;
-      if ( !str_cmp( name, "do_mpat" ))         return do_mpat;
-      if ( !str_cmp( name, "do_mpdream" ))              return do_mpdream;
-      if ( !str_cmp( name, "do_mpecho" ))               return do_mpecho;
-      if ( !str_cmp( name, "do_mpechoaround" )) return do_mpechoaround;
-      if ( !str_cmp( name, "do_mpechoat" ))             return do_mpechoat;
-      if ( !str_cmp( name, "do_mpedit" ))               return do_mpedit;
-      if ( !str_cmp( name, "do_mpfind" ))               return do_mpfind;
-      if ( !str_cmp( name, "do_mpgain" ))               return do_mpgain;
-      if ( !str_cmp( name, "do_mpforce" ))              return do_mpforce;
-      if ( !str_cmp( name, "do_mpgoto" ))               return do_mpgoto;
-      if ( !str_cmp( name, "do_mpinvis" ))              return do_mpinvis;
-      if ( !str_cmp( name, "do_mpjunk" ))               return do_mpjunk;
-      if ( !str_cmp( name, "do_mpkill" ))               return do_mpkill;
-      if ( !str_cmp( name, "do_mpmload" ))              return do_mpmload;
-      if ( !str_cmp( name, "do_mpnothing" ))            return do_mpnothing;
-      if ( !str_cmp( name, "do_mpoload" ))              return do_mpoload;
-      if ( !str_cmp( name, "do_mppkset" ))              return do_mppkset;
-      if ( !str_cmp( name, "do_mppurge" ))              return do_mppurge;
-      if ( !str_cmp( name, "do_mpstat" ))               return do_mpstat;
-      if ( !str_cmp( name, "do_mptransfer" ))           return do_mptransfer;
-      if ( !str_cmp( name, "do_mrange" ))               return do_mrange;
-      if ( !str_cmp( name, "do_mset" ))         return do_mset;
-      if ( !str_cmp( name, "do_mstat" ))                return do_mstat;
-      if ( !str_cmp( name, "do_murde" ))                return do_murde;
-      if ( !str_cmp( name, "do_murder" ))               return do_murder;
-      if ( !str_cmp( name, "do_music" ))                return do_music;
-      if ( !str_cmp( name, "do_mwhere" ))               return do_mwhere;
+      if ( !StrCmp( name, "do_mailroom" ))             return do_mailroom;
+      if ( !StrCmp( name, "do_make" ))         return do_make;
+      if ( !StrCmp( name, "do_makearmor" ))            return do_makearmor;
+      if ( !StrCmp( name, "do_makeblade" ))          return do_makeblade;
+      if ( !StrCmp( name, "do_makeblaster" ))        return do_makeblaster;
+      if ( !StrCmp( name, "do_makebowcaster" ))      return do_makebowcaster;
+      if ( !StrCmp( name, "do_makedisguise" ))           return do_makedisguise;
+      if ( !StrCmp( name, "do_makelightsaber" ))     return do_makelightsaber;
+      if ( !StrCmp( name, "do_makespice" ))          return do_makespice;
+      if ( !StrCmp( name, "do_makegrenade" ))  return do_makegrenade;
+      if ( !StrCmp( name, "do_makelight" ))            return do_makelight;
+      if ( !StrCmp( name, "do_makelandmine" )) return do_makelandmine;
+      if ( !StrCmp( name, "do_makecomlink" ))  return do_makecomlink;
+      if ( !StrCmp( name, "do_makeshield" ))           return do_makeshield;
+      if ( !StrCmp( name, "do_makecontainer" ))        return do_makecontainer;
+      if ( !StrCmp( name, "do_makejewelry" ))  return do_makejewelry;
+      if ( !StrCmp( name, "do_makeboard" ))            return do_makeboard;
+      if ( !StrCmp( name, "do_makeclan" ))             return do_makeclan;
+      if ( !StrCmp( name, "do_makemissile" ))  return do_makemissile;
+      if ( !StrCmp( name, "do_makeship" ))           return do_makeship;
+      if ( !StrCmp( name, "do_makerepair" ))           return do_makerepair;
+      if ( !StrCmp( name, "do_makeshop" ))             return do_makeshop;
+      if ( !StrCmp( name, "do_makespaceobject" ))     return do_makespaceobject;
+      if ( !StrCmp( name, "do_makewizlist" ))  return do_makewizlist;
+      if ( !StrCmp( name, "do_makeplanet" ))           return do_makeplanet;
+      if ( !StrCmp( name, "do_massign" ))              return do_massign;
+      if ( !StrCmp( name, "do_mass_propaganda" ))      return do_mass_propaganda;
+      if ( !StrCmp( name, "do_mcreate" ))              return do_mcreate;
+      if ( !StrCmp( name, "do_memory" ))               return do_memory;
+      if ( !StrCmp( name, "do_members" ))              return do_members;
+      if ( !StrCmp( name, "do_mfind" ))                return do_mfind;
+      if ( !StrCmp( name, "do_minvoke" ))              return do_minvoke;
+      if ( !StrCmp( name, "do_mine" ))         return do_mine;
+      if ( !StrCmp( name, "do_mlist" ))                return do_mlist;
+      if ( !StrCmp( name, "do_mortalize" ))            return do_mortalize;
+      if ( !StrCmp( name, "do_mount" ))                return do_mount;
+      if ( !StrCmp( name, "do_mp_close_passage" ))     return do_mp_close_passage;
+      if ( !StrCmp( name, "do_mp_damage" ))            return do_mp_damage;
+      if ( !StrCmp( name, "do_mp_deposit" ))           return do_mp_deposit;
+      if ( !StrCmp( name, "do_mp_open_passage" ))      return do_mp_open_passage;
+      if ( !StrCmp( name, "do_mp_practice" ))  return do_mp_practice;
+      if ( !StrCmp( name, "do_mp_restore" ))           return do_mp_restore;
+      if ( !StrCmp( name, "do_mp_slay" ))              return do_mp_slay;
+      if ( !StrCmp( name, "do_mp_withdraw" ))  return do_mp_withdraw;
+      if ( !StrCmp( name, "do_mpadvance" ))            return do_mpadvance;
+      if ( !StrCmp( name, "do_mpapply" ))              return do_mpapply;
+      if ( !StrCmp( name, "do_mpapplyb" ))             return do_mpapplyb;
+      if ( !StrCmp( name, "do_mpasound" ))             return do_mpasound;
+      if ( !StrCmp( name, "do_mpat" ))         return do_mpat;
+      if ( !StrCmp( name, "do_mpdream" ))              return do_mpdream;
+      if ( !StrCmp( name, "do_mpecho" ))               return do_mpecho;
+      if ( !StrCmp( name, "do_mpechoaround" )) return do_mpechoaround;
+      if ( !StrCmp( name, "do_mpechoat" ))             return do_mpechoat;
+      if ( !StrCmp( name, "do_mpedit" ))               return do_mpedit;
+      if ( !StrCmp( name, "do_mpfind" ))               return do_mpfind;
+      if ( !StrCmp( name, "do_mpgain" ))               return do_mpgain;
+      if ( !StrCmp( name, "do_mpforce" ))              return do_mpforce;
+      if ( !StrCmp( name, "do_mpgoto" ))               return do_mpgoto;
+      if ( !StrCmp( name, "do_mpinvis" ))              return do_mpinvis;
+      if ( !StrCmp( name, "do_mpjunk" ))               return do_mpjunk;
+      if ( !StrCmp( name, "do_mpkill" ))               return do_mpkill;
+      if ( !StrCmp( name, "do_mpmload" ))              return do_mpmload;
+      if ( !StrCmp( name, "do_mpnothing" ))            return do_mpnothing;
+      if ( !StrCmp( name, "do_mpoload" ))              return do_mpoload;
+      if ( !StrCmp( name, "do_mppkset" ))              return do_mppkset;
+      if ( !StrCmp( name, "do_mppurge" ))              return do_mppurge;
+      if ( !StrCmp( name, "do_mpstat" ))               return do_mpstat;
+      if ( !StrCmp( name, "do_mptransfer" ))           return do_mptransfer;
+      if ( !StrCmp( name, "do_mrange" ))               return do_mrange;
+      if ( !StrCmp( name, "do_mset" ))         return do_mset;
+      if ( !StrCmp( name, "do_mstat" ))                return do_mstat;
+      if ( !StrCmp( name, "do_murde" ))                return do_murde;
+      if ( !StrCmp( name, "do_murder" ))               return do_murder;
+      if ( !StrCmp( name, "do_music" ))                return do_music;
+      if ( !StrCmp( name, "do_mwhere" ))               return do_mwhere;
       break;
     case 'n':
-      if ( !str_cmp( name, "do_name" ))         return do_name;
-      if ( !str_cmp( name, "do_newbiechat" ))           return do_newbiechat;
-      if ( !str_cmp( name, "do_newbieset" ))            return do_newbieset;
-      if ( !str_cmp( name, "do_newzones" ))             return do_newzones;
-      if ( !str_cmp( name, "do_noemote" ))              return do_noemote;
-      if ( !str_cmp( name, "do_nohelps" ))              return do_nohelps;
-      if ( !str_cmp( name, "do_noresolve" ))            return do_noresolve;
-      if ( !str_cmp( name, "do_north" ))                return do_north;
-      if ( !str_cmp( name, "do_northeast" ))            return do_northeast;
-      if ( !str_cmp( name, "do_northwest" ))            return do_northwest;
-      if ( !str_cmp( name, "do_notell" ))               return do_notell;
-      if ( !str_cmp( name, "do_notitle" ))            return do_notitle;
-      if ( !str_cmp( name, "do_noteroom" ))             return do_noteroom;
+      if ( !StrCmp( name, "do_name" ))         return do_name;
+      if ( !StrCmp( name, "do_newbiechat" ))           return do_newbiechat;
+      if ( !StrCmp( name, "do_newbieset" ))            return do_newbieset;
+      if ( !StrCmp( name, "do_newzones" ))             return do_newzones;
+      if ( !StrCmp( name, "do_noemote" ))              return do_noemote;
+      if ( !StrCmp( name, "do_nohelps" ))              return do_nohelps;
+      if ( !StrCmp( name, "do_noresolve" ))            return do_noresolve;
+      if ( !StrCmp( name, "do_north" ))                return do_north;
+      if ( !StrCmp( name, "do_northeast" ))            return do_northeast;
+      if ( !StrCmp( name, "do_northwest" ))            return do_northwest;
+      if ( !StrCmp( name, "do_notell" ))               return do_notell;
+      if ( !StrCmp( name, "do_notitle" ))            return do_notitle;
+      if ( !StrCmp( name, "do_noteroom" ))             return do_noteroom;
       break;
     case 'o':
-      if ( !str_cmp( name, "do_oassign" ))              return do_oassign;
-      if ( !str_cmp( name, "do_ocreate" ))              return do_ocreate;
-      if ( !str_cmp( name, "do_ofind" ))                return do_ofind;
-      if ( !str_cmp( name, "do_ogrub" ))                return do_ogrub;
-      if ( !str_cmp( name, "do_oinvoke" ))              return do_oinvoke;
-      if ( !str_cmp( name, "do_oldscore" ))             return do_oldscore;
-      if ( !str_cmp( name, "do_olist" ))                return do_olist;
-      if ( !str_cmp( name, "do_ooc" ))          return do_ooc;
-      if ( !str_cmp( name, "do_opedit" ))               return do_opedit;
-      if ( !str_cmp( name, "do_opfind" ))               return do_opfind;
-      if ( !str_cmp( name, "do_open" ))         return do_open;
-      if ( !str_cmp( name, "do_openbay" ))              return do_openbay;
-      if ( !str_cmp( name, "do_openhatch" ))          return do_openhatch;
-      /*        if ( !str_cmp( name, "do_opentourney" ))        return do_opentourney; */
-      if ( !str_cmp( name, "do_opstat" ))               return do_opstat;
-      if ( !str_cmp( name, "do_orange" ))               return do_orange;
-      if ( !str_cmp( name, "do_order" ))                return do_order;
-      if ( !str_cmp( name, "do_oset" ))         return do_oset;
-      if ( !str_cmp( name, "do_ostat" ))                return do_ostat;
-      if ( !str_cmp( name, "do_outcast" ))              return do_outcast;
-      if ( !str_cmp( name, "do_override" ))             return do_override;
-      if ( !str_cmp( name, "do_owhere" ))               return do_owhere;
+      if ( !StrCmp( name, "do_oassign" ))              return do_oassign;
+      if ( !StrCmp( name, "do_ocreate" ))              return do_ocreate;
+      if ( !StrCmp( name, "do_ofind" ))                return do_ofind;
+      if ( !StrCmp( name, "do_ogrub" ))                return do_ogrub;
+      if ( !StrCmp( name, "do_oinvoke" ))              return do_oinvoke;
+      if ( !StrCmp( name, "do_oldscore" ))             return do_oldscore;
+      if ( !StrCmp( name, "do_olist" ))                return do_olist;
+      if ( !StrCmp( name, "do_ooc" ))          return do_ooc;
+      if ( !StrCmp( name, "do_opedit" ))               return do_opedit;
+      if ( !StrCmp( name, "do_opfind" ))               return do_opfind;
+      if ( !StrCmp( name, "do_open" ))         return do_open;
+      if ( !StrCmp( name, "do_openbay" ))              return do_openbay;
+      if ( !StrCmp( name, "do_openhatch" ))          return do_openhatch;
+      /*        if ( !StrCmp( name, "do_opentourney" ))        return do_opentourney; */
+      if ( !StrCmp( name, "do_opstat" ))               return do_opstat;
+      if ( !StrCmp( name, "do_orange" ))               return do_orange;
+      if ( !StrCmp( name, "do_order" ))                return do_order;
+      if ( !StrCmp( name, "do_oset" ))         return do_oset;
+      if ( !StrCmp( name, "do_ostat" ))                return do_ostat;
+      if ( !StrCmp( name, "do_outcast" ))              return do_outcast;
+      if ( !StrCmp( name, "do_override" ))             return do_override;
+      if ( !StrCmp( name, "do_owhere" ))               return do_owhere;
       break;
     case 'p':
-      if ( !str_cmp( name, "do_pager" ))                return do_pager;
-      if ( !str_cmp( name, "do_pardon" ))               return do_pardon;
-      if ( !str_cmp( name, "do_password" ))             return do_password;
-      if ( !str_cmp( name, "do_peace" ))                return do_peace;
-      if ( !str_cmp( name, "do_pick" ))         return do_pick;
-      if ( !str_cmp( name, "do_pickshiplock" )) return do_pickshiplock;
-      if ( !str_cmp( name, "do_placevendor" ))  return do_placevendor;
-      if ( !str_cmp( name, "do_planets" ))              return do_planets;
-      if ( !str_cmp( name, "do_pluogus" ))              return do_pluogus;
-      if ( !str_cmp( name, "do_poison_weapon" ))        return do_poison_weapon;
-      if ( !str_cmp( name, "do_postguard" ))            return do_postguard;
-      if ( !str_cmp( name, "do_practice" ))             return do_practice;
-      if ( !str_cmp( name, "do_pricevendor" ))  return do_pricevendor;
-      if ( !str_cmp( name, "do_prompt" ))               return do_prompt;
-      if ( !str_cmp( name, "do_propaganda" ))           return do_propaganda;
-      if ( !str_cmp( name, "do_pull" ))         return do_pull;
-      if ( !str_cmp( name, "do_punch" ))                return do_punch;
-      if ( !str_cmp( name, "do_purge" ))                return do_purge;
-      if ( !str_cmp( name, "do_push" ))         return do_push;
-      if ( !str_cmp( name, "do_put" ))          return do_put;
+      if ( !StrCmp( name, "do_pager" ))                return do_pager;
+      if ( !StrCmp( name, "do_pardon" ))               return do_pardon;
+      if ( !StrCmp( name, "do_password" ))             return do_password;
+      if ( !StrCmp( name, "do_peace" ))                return do_peace;
+      if ( !StrCmp( name, "do_pick" ))         return do_pick;
+      if ( !StrCmp( name, "do_pickshiplock" )) return do_pickshiplock;
+      if ( !StrCmp( name, "do_placevendor" ))  return do_placevendor;
+      if ( !StrCmp( name, "do_planets" ))              return do_planets;
+      if ( !StrCmp( name, "do_pluogus" ))              return do_pluogus;
+      if ( !StrCmp( name, "do_poison_weapon" ))        return do_poison_weapon;
+      if ( !StrCmp( name, "do_postguard" ))            return do_postguard;
+      if ( !StrCmp( name, "do_practice" ))             return do_practice;
+      if ( !StrCmp( name, "do_pricevendor" ))  return do_pricevendor;
+      if ( !StrCmp( name, "do_prompt" ))               return do_prompt;
+      if ( !StrCmp( name, "do_propaganda" ))           return do_propaganda;
+      if ( !StrCmp( name, "do_pull" ))         return do_pull;
+      if ( !StrCmp( name, "do_punch" ))                return do_punch;
+      if ( !StrCmp( name, "do_purge" ))                return do_purge;
+      if ( !StrCmp( name, "do_push" ))         return do_push;
+      if ( !StrCmp( name, "do_put" ))          return do_put;
       break;
     case 'q':
-      if ( !str_cmp( name, "do_quaff" ))                return do_quaff;
-      if ( !str_cmp( name, "do_qui" ))          return do_qui;
-      if ( !str_cmp( name, "do_quit" ))         return do_quit;
+      if ( !StrCmp( name, "do_quaff" ))                return do_quaff;
+      if ( !StrCmp( name, "do_qui" ))          return do_qui;
+      if ( !StrCmp( name, "do_quit" ))         return do_quit;
       break;
     case 'r':
-      if ( !str_cmp( name, "do_radar" ))                return do_radar;
-      if ( !str_cmp( name, "do_rank" ))         return do_rank;
-      if ( !str_cmp( name, "do_rassign" ))              return do_rassign;
-      if ( !str_cmp( name, "do_rat" ))          return do_rat;
-      if ( !str_cmp( name, "do_rdelete" ))              return do_rdelete;
-      if ( !str_cmp( name, "do_reboo" ))                return do_reboo;
-      if ( !str_cmp( name, "do_reboot" ))               return do_reboot;
-      if ( !str_cmp( name, "do_recharge" ))           return do_recharge;
-      if ( !str_cmp( name, "do_recho" ))                return do_recho;
-      if ( !str_cmp( name, "do_recall" ))              return do_recall;
-      if ( !str_cmp( name, "do_recite" ))               return do_recite;
-      if ( !str_cmp( name, "do_recite" ))             return do_recite;
-      if ( !str_cmp( name, "do_redit" ))              return do_redit;
-      if ( !str_cmp( name, "do_refuel" ))             return do_refuel;
-      if ( !str_cmp( name, "do_reinforcements" ))       return do_reinforcements;
-      if ( !str_cmp( name, "do_regoto" ))               return do_regoto;
-      if ( !str_cmp( name, "do_reload" ))               return do_reload;
-      if ( !str_cmp( name, "do_rembounty" ))          return do_rembounty;
-      if ( !str_cmp( name, "do_remove" ))               return do_remove;
-      if ( !str_cmp( name, "do_rempilot" ))           return do_rempilot;
-      if ( !str_cmp( name, "do_remresident" ))  return do_remresident;
-      if ( !str_cmp( name, "do_renameship" ))           return do_renameship;
-      if ( !str_cmp( name, "do_rent" ))         return do_rent;
-      if ( !str_cmp( name, "do_repair" ))               return do_repair;
-      if ( !str_cmp( name, "do_repairset" ))            return do_repairset;
-      if ( !str_cmp( name, "do_repairship" ))         return do_repairship;
-      if ( !str_cmp( name, "do_repairshops" ))  return do_repairshops;
-      if ( !str_cmp( name, "do_repairstat" ))           return do_repairstat;
-      if ( !str_cmp( name, "do_reply" ))                return do_reply;
-      if ( !str_cmp( name, "do_report" ))               return do_report;
-      if ( !str_cmp( name, "do_request"))               return do_request;
-      if ( !str_cmp( name, "do_rescue" ))               return do_rescue;
-      if ( !str_cmp( name, "do_reset" ))                return do_reset;
-      if ( !str_cmp( name, "do_ResetShip" ))            return do_ResetShip;
-      if ( !str_cmp( name, "do_resign" ))               return do_resign;
-      if ( !str_cmp( name, "do_rest" ))         return do_rest;
-      if ( !str_cmp( name, "do_restore" ))              return do_restore;
-      if ( !str_cmp( name, "do_restoretime" ))  return do_restoretime;
-      if ( !str_cmp( name, "do_restrict" ))             return do_restrict;
-      if ( !str_cmp( name, "do_retire" ))               return do_retire;
-      if ( !str_cmp( name, "do_retran" ))               return do_retran;
-      if ( !str_cmp( name, "do_return" ))               return do_return;
-      if ( !str_cmp( name, "do_revert" ))               return do_revert;
-      if ( !str_cmp( name, "do_rgrub" ))                return do_rgrub;
-      if ( !str_cmp( name, "do_rlist" ))                return do_rlist;
-      if ( !str_cmp( name, "do_roster" ))             return do_roster;
-      if ( !str_cmp( name, "do_rpedit" ))               return do_rpedit;
-      if ( !str_cmp( name, "do_rpfind" ))               return do_rpfind;
-      if ( !str_cmp( name, "do_rpstat" ))               return do_rpstat;
-      if ( !str_cmp( name, "do_rreset" ))               return do_rreset;
-      if ( !str_cmp( name, "do_rset" ))         return do_rset;
-      if ( !str_cmp( name, "do_rstat" ))                return do_rstat;
+      if ( !StrCmp( name, "do_radar" ))                return do_radar;
+      if ( !StrCmp( name, "do_rank" ))         return do_rank;
+      if ( !StrCmp( name, "do_rassign" ))              return do_rassign;
+      if ( !StrCmp( name, "do_rat" ))          return do_rat;
+      if ( !StrCmp( name, "do_rdelete" ))              return do_rdelete;
+      if ( !StrCmp( name, "do_reboo" ))                return do_reboo;
+      if ( !StrCmp( name, "do_reboot" ))               return do_reboot;
+      if ( !StrCmp( name, "do_recharge" ))           return do_recharge;
+      if ( !StrCmp( name, "do_recho" ))                return do_recho;
+      if ( !StrCmp( name, "do_recall" ))              return do_recall;
+      if ( !StrCmp( name, "do_recite" ))               return do_recite;
+      if ( !StrCmp( name, "do_recite" ))             return do_recite;
+      if ( !StrCmp( name, "do_redit" ))              return do_redit;
+      if ( !StrCmp( name, "do_refuel" ))             return do_refuel;
+      if ( !StrCmp( name, "do_reinforcements" ))       return do_reinforcements;
+      if ( !StrCmp( name, "do_regoto" ))               return do_regoto;
+      if ( !StrCmp( name, "do_reload" ))               return do_reload;
+      if ( !StrCmp( name, "do_rembounty" ))          return do_rembounty;
+      if ( !StrCmp( name, "do_remove" ))               return do_remove;
+      if ( !StrCmp( name, "do_rempilot" ))           return do_rempilot;
+      if ( !StrCmp( name, "do_remresident" ))  return do_remresident;
+      if ( !StrCmp( name, "do_renameship" ))           return do_renameship;
+      if ( !StrCmp( name, "do_rent" ))         return do_rent;
+      if ( !StrCmp( name, "do_repair" ))               return do_repair;
+      if ( !StrCmp( name, "do_repairset" ))            return do_repairset;
+      if ( !StrCmp( name, "do_repairship" ))         return do_repairship;
+      if ( !StrCmp( name, "do_repairshops" ))  return do_repairshops;
+      if ( !StrCmp( name, "do_repairstat" ))           return do_repairstat;
+      if ( !StrCmp( name, "do_reply" ))                return do_reply;
+      if ( !StrCmp( name, "do_report" ))               return do_report;
+      if ( !StrCmp( name, "do_request"))               return do_request;
+      if ( !StrCmp( name, "do_rescue" ))               return do_rescue;
+      if ( !StrCmp( name, "do_reset" ))                return do_reset;
+      if ( !StrCmp( name, "do_ResetShip" ))            return do_ResetShip;
+      if ( !StrCmp( name, "do_resign" ))               return do_resign;
+      if ( !StrCmp( name, "do_rest" ))         return do_rest;
+      if ( !StrCmp( name, "do_restore" ))              return do_restore;
+      if ( !StrCmp( name, "do_restoretime" ))  return do_restoretime;
+      if ( !StrCmp( name, "do_restrict" ))             return do_restrict;
+      if ( !StrCmp( name, "do_retire" ))               return do_retire;
+      if ( !StrCmp( name, "do_retran" ))               return do_retran;
+      if ( !StrCmp( name, "do_return" ))               return do_return;
+      if ( !StrCmp( name, "do_revert" ))               return do_revert;
+      if ( !StrCmp( name, "do_rgrub" ))                return do_rgrub;
+      if ( !StrCmp( name, "do_rlist" ))                return do_rlist;
+      if ( !StrCmp( name, "do_roster" ))             return do_roster;
+      if ( !StrCmp( name, "do_rpedit" ))               return do_rpedit;
+      if ( !StrCmp( name, "do_rpfind" ))               return do_rpfind;
+      if ( !StrCmp( name, "do_rpstat" ))               return do_rpstat;
+      if ( !StrCmp( name, "do_rreset" ))               return do_rreset;
+      if ( !StrCmp( name, "do_rset" ))         return do_rset;
+      if ( !StrCmp( name, "do_rstat" ))                return do_rstat;
       break;
     case 's':
-      if ( !str_cmp( name, "do_sacrifice" ))            return do_sacrifice;
-      if ( !str_cmp( name, "do_save" ))         return do_save;
-      if ( !str_cmp( name, "do_savearea" ))             return do_savearea;
-      if ( !str_cmp( name, "do_say" ))          return do_say;
-      if ( !str_cmp( name, "do_sabotage" ))             return do_sabotage;
-      if ( !str_cmp( name, "do_scan" ))         return do_scan;
-      if ( !str_cmp( name, "do_scatter" ))              return do_scatter;
-      if ( !str_cmp( name, "do_score" ))                return do_score;
-      if ( !str_cmp( name, "do_scribe" ))               return do_scribe;
-      if ( !str_cmp( name, "do_search" ))               return do_search;
-      if ( !str_cmp( name, "do_sedit" ))                return do_sedit;
-      if ( !str_cmp( name, "do_seduce" ))               return do_seduce;
-      if ( !str_cmp( name, "do_sell" ))         return do_sell;
-      if ( !str_cmp( name, "do_sellship" ))           return do_sellship;
-      if ( !str_cmp( name, "do_setblaster" ))           return do_setblaster;
-      if ( !str_cmp( name, "do_sellhome" ))             return do_sellhome;
-      if ( !str_cmp( name, "do_set_boot_time" ))        return do_set_boot_time;
-      if ( !str_cmp( name, "do_setclan" ))              return do_setclan;
-      if ( !str_cmp( name, "do_setship" ))            return do_setship;
-      if ( !str_cmp( name, "do_setspaceobject" ))      return do_setspaceobject;
-      if ( !str_cmp( name, "do_setplanet" ))            return do_setplanet;
-      if ( !str_cmp( name, "do_ships" ))              return do_ships;
-      if ( !str_cmp( name, "do_shiptrack" ))          return do_shiptrack;
-      if ( !str_cmp( name, "do_shops" ))                return do_shops;
-      if ( !str_cmp( name, "do_shopset" ))              return do_shopset;
-      if ( !str_cmp( name, "do_shopstat" ))             return do_shopstat;
-      if ( !str_cmp( name, "do_shout" ))                return do_shout;
-      if ( !str_cmp( name, "do_shove" ))                return do_shove;
-      if ( !str_cmp( name, "do_showclan" ))             return do_showclan;
-      if ( !str_cmp( name, "do_showlayers" ))           return do_showlayers;
-      if ( !str_cmp( name, "do_showplanet" ))           return do_showplanet;
-      if ( !str_cmp( name, "do_showship" ))           return do_showship;
-      if ( !str_cmp( name, "do_showspaceobject" ))     return do_showspaceobject;
-      if ( !str_cmp( name, "do_showstatistic" ))     return do_showstatistic;
-      if ( !str_cmp( name, "do_shutdow" ))              return do_shutdow;
-      if ( !str_cmp( name, "do_shutdown" ))             return do_shutdown;
-      if ( !str_cmp( name, "do_silence" ))              return do_silence;
-      if ( !str_cmp( name, "do_sit" ))          return do_sit;
-      if ( !str_cmp( name, "do_skin" ))         return do_skin;
-      if ( !str_cmp( name, "do_sla" ))          return do_sla;
-      if ( !str_cmp( name, "do_slay" ))         return do_slay;
-      if ( !str_cmp( name, "do_sleep" ))                return do_sleep;
-      if ( !str_cmp( name, "do_slice" ))                return do_slice;
-      if ( !str_cmp( name, "do_slist" ))                return do_slist;
-      if ( !str_cmp( name, "do_slookup" ))              return do_slookup;
-      if ( !str_cmp( name, "do_smalltalk" ))            return do_smalltalk;
-      if ( !str_cmp( name, "do_smoke" ))                return do_smoke;
-      if ( !str_cmp( name, "do_snipe" ))                return do_snipe;
-      if ( !str_cmp( name, "do_snoop" ))                return do_snoop;
-      if ( !str_cmp( name, "do_sober" ))                return do_sober;
-      if ( !str_cmp( name, "do_socials" ))              return do_socials;
-      if ( !str_cmp( name, "do_south" ))                return do_south;
-      if ( !str_cmp( name, "do_southeast" ))            return do_southeast;
-      if ( !str_cmp( name, "do_southwest" ))            return do_southwest;
-      if ( !str_cmp( name, "do_speak" ))                return do_speak;
-      if ( !str_cmp( name, "do_speeders" ))             return do_speeders;
-      if ( !str_cmp( name, "do_split" ))                return do_split;
-      if ( !str_cmp( name, "do_sset" ))         return do_sset;
-      if ( !str_cmp( name, "do_stand" ))                return do_stand;
-      if ( !str_cmp( name, "do_spaceobjects" ))        return do_spaceobjects;
-      if ( !str_cmp( name, "do_status" ))             return do_status;
-      if ( !str_cmp( name, "do_steal" ))                return do_steal;
-      if ( !str_cmp( name, "do_study" ))                return do_study;
-      if ( !str_cmp( name, "do_stun" ))         return do_stun;
-      if ( !str_cmp( name, "do_switch" ))               return do_switch;
-      if ( !str_cmp( name, "do_shiptalk" ))             return do_shiptalk;
-      if ( !str_cmp( name, "do_spacetalk" ))            return do_spacetalk;
-      if ( !str_cmp( name, "do_special_forces" ))       return do_special_forces;
-      if ( !str_cmp( name, "do_suicide" ))              return do_suicide;
-      if ( !str_cmp( name, "do_systemtalk" ))           return do_systemtalk;
+      if ( !StrCmp( name, "do_sacrifice" ))            return do_sacrifice;
+      if ( !StrCmp( name, "do_save" ))         return do_save;
+      if ( !StrCmp( name, "do_savearea" ))             return do_savearea;
+      if ( !StrCmp( name, "do_say" ))          return do_say;
+      if ( !StrCmp( name, "do_sabotage" ))             return do_sabotage;
+      if ( !StrCmp( name, "do_scan" ))         return do_scan;
+      if ( !StrCmp( name, "do_scatter" ))              return do_scatter;
+      if ( !StrCmp( name, "do_score" ))                return do_score;
+      if ( !StrCmp( name, "do_scribe" ))               return do_scribe;
+      if ( !StrCmp( name, "do_search" ))               return do_search;
+      if ( !StrCmp( name, "do_sedit" ))                return do_sedit;
+      if ( !StrCmp( name, "do_seduce" ))               return do_seduce;
+      if ( !StrCmp( name, "do_sell" ))         return do_sell;
+      if ( !StrCmp( name, "do_sellship" ))           return do_sellship;
+      if ( !StrCmp( name, "do_setblaster" ))           return do_setblaster;
+      if ( !StrCmp( name, "do_sellhome" ))             return do_sellhome;
+      if ( !StrCmp( name, "do_set_boot_time" ))        return do_set_boot_time;
+      if ( !StrCmp( name, "do_setclan" ))              return do_setclan;
+      if ( !StrCmp( name, "do_setship" ))            return do_setship;
+      if ( !StrCmp( name, "do_setspaceobject" ))      return do_setspaceobject;
+      if ( !StrCmp( name, "do_setplanet" ))            return do_setplanet;
+      if ( !StrCmp( name, "do_ships" ))              return do_ships;
+      if ( !StrCmp( name, "do_shiptrack" ))          return do_shiptrack;
+      if ( !StrCmp( name, "do_shops" ))                return do_shops;
+      if ( !StrCmp( name, "do_shopset" ))              return do_shopset;
+      if ( !StrCmp( name, "do_shopstat" ))             return do_shopstat;
+      if ( !StrCmp( name, "do_shout" ))                return do_shout;
+      if ( !StrCmp( name, "do_shove" ))                return do_shove;
+      if ( !StrCmp( name, "do_showclan" ))             return do_showclan;
+      if ( !StrCmp( name, "do_showlayers" ))           return do_showlayers;
+      if ( !StrCmp( name, "do_showplanet" ))           return do_showplanet;
+      if ( !StrCmp( name, "do_showship" ))           return do_showship;
+      if ( !StrCmp( name, "do_showspaceobject" ))     return do_showspaceobject;
+      if ( !StrCmp( name, "do_showstatistic" ))     return do_showstatistic;
+      if ( !StrCmp( name, "do_shutdow" ))              return do_shutdow;
+      if ( !StrCmp( name, "do_shutdown" ))             return do_shutdown;
+      if ( !StrCmp( name, "do_silence" ))              return do_silence;
+      if ( !StrCmp( name, "do_sit" ))          return do_sit;
+      if ( !StrCmp( name, "do_skin" ))         return do_skin;
+      if ( !StrCmp( name, "do_sla" ))          return do_sla;
+      if ( !StrCmp( name, "do_slay" ))         return do_slay;
+      if ( !StrCmp( name, "do_sleep" ))                return do_sleep;
+      if ( !StrCmp( name, "do_slice" ))                return do_slice;
+      if ( !StrCmp( name, "do_slist" ))                return do_slist;
+      if ( !StrCmp( name, "do_slookup" ))              return do_slookup;
+      if ( !StrCmp( name, "do_smalltalk" ))            return do_smalltalk;
+      if ( !StrCmp( name, "do_smoke" ))                return do_smoke;
+      if ( !StrCmp( name, "do_snipe" ))                return do_snipe;
+      if ( !StrCmp( name, "do_snoop" ))                return do_snoop;
+      if ( !StrCmp( name, "do_sober" ))                return do_sober;
+      if ( !StrCmp( name, "do_socials" ))              return do_socials;
+      if ( !StrCmp( name, "do_south" ))                return do_south;
+      if ( !StrCmp( name, "do_southeast" ))            return do_southeast;
+      if ( !StrCmp( name, "do_southwest" ))            return do_southwest;
+      if ( !StrCmp( name, "do_speak" ))                return do_speak;
+      if ( !StrCmp( name, "do_speeders" ))             return do_speeders;
+      if ( !StrCmp( name, "do_split" ))                return do_split;
+      if ( !StrCmp( name, "do_sset" ))         return do_sset;
+      if ( !StrCmp( name, "do_stand" ))                return do_stand;
+      if ( !StrCmp( name, "do_spaceobjects" ))        return do_spaceobjects;
+      if ( !StrCmp( name, "do_status" ))             return do_status;
+      if ( !StrCmp( name, "do_steal" ))                return do_steal;
+      if ( !StrCmp( name, "do_study" ))                return do_study;
+      if ( !StrCmp( name, "do_stun" ))         return do_stun;
+      if ( !StrCmp( name, "do_switch" ))               return do_switch;
+      if ( !StrCmp( name, "do_shiptalk" ))             return do_shiptalk;
+      if ( !StrCmp( name, "do_spacetalk" ))            return do_spacetalk;
+      if ( !StrCmp( name, "do_special_forces" ))       return do_special_forces;
+      if ( !StrCmp( name, "do_suicide" ))              return do_suicide;
+      if ( !StrCmp( name, "do_systemtalk" ))           return do_systemtalk;
       break;
     case 't':
-      if ( !str_cmp( name, "do_takedrug" ))             return do_takedrug;
-      if ( !str_cmp( name, "do_tamp" ))         return do_tamp;
-      if ( !str_cmp( name, "do_target" ))             return do_target;
-      if ( !str_cmp( name, "do_teach" ))                return do_teach;
-      if ( !str_cmp( name, "do_tell" ))         return do_tell;
-      if ( !str_cmp( name, "do_throw" ))                return do_throw;
-      if ( !str_cmp( name, "do_time" ))         return do_time;
-      if ( !str_cmp( name, "do_timecmd" ))              return do_timecmd;
-      if ( !str_cmp( name, "do_title" ))                return do_title;
-      if ( !str_cmp( name, "do_torture" ))              return do_torture;
-      if ( !str_cmp( name, "do_toplevel" ))             return do_toplevel;
-      if ( !str_cmp( name, "do_track" ))                return do_track;
-      if ( !str_cmp( name, "do_tractorbeam" ))  return do_tractorbeam;
-      if ( !str_cmp( name, "do_train" ))                return do_train;
-      if ( !str_cmp( name, "do_trajectory" ))           return do_trajectory;
-      if ( !str_cmp( name, "do_trajectory_actual" ))    return do_trajectory_actual;
-      if ( !str_cmp( name, "do_transfer" ))             return do_transfer;
-      if ( !str_cmp( name, "do_TransferShip" ))            return do_TransferShip;
-      if ( !str_cmp( name, "do_trust" ))                return do_trust;
-      if ( !str_cmp( name, "do_typo" ))         return do_typo;
+      if ( !StrCmp( name, "do_takedrug" ))             return do_takedrug;
+      if ( !StrCmp( name, "do_tamp" ))         return do_tamp;
+      if ( !StrCmp( name, "do_target" ))             return do_target;
+      if ( !StrCmp( name, "do_teach" ))                return do_teach;
+      if ( !StrCmp( name, "do_tell" ))         return do_tell;
+      if ( !StrCmp( name, "do_throw" ))                return do_throw;
+      if ( !StrCmp( name, "do_time" ))         return do_time;
+      if ( !StrCmp( name, "do_timecmd" ))              return do_timecmd;
+      if ( !StrCmp( name, "do_title" ))                return do_title;
+      if ( !StrCmp( name, "do_torture" ))              return do_torture;
+      if ( !StrCmp( name, "do_toplevel" ))             return do_toplevel;
+      if ( !StrCmp( name, "do_track" ))                return do_track;
+      if ( !StrCmp( name, "do_tractorbeam" ))  return do_tractorbeam;
+      if ( !StrCmp( name, "do_train" ))                return do_train;
+      if ( !StrCmp( name, "do_trajectory" ))           return do_trajectory;
+      if ( !StrCmp( name, "do_trajectory_actual" ))    return do_trajectory_actual;
+      if ( !StrCmp( name, "do_transfer" ))             return do_transfer;
+      if ( !StrCmp( name, "do_TransferShip" ))            return do_TransferShip;
+      if ( !StrCmp( name, "do_trust" ))                return do_trust;
+      if ( !StrCmp( name, "do_typo" ))         return do_typo;
       break;
     case 'u':
-      if ( !str_cmp( name, "do_unfocusalias" )) return do_unfocusalias;
-      if ( !str_cmp( name, "do_unfoldarea" ))           return do_unfoldarea;
-      if ( !str_cmp( name, "do_unhell" ))               return do_unhell;
-      if ( !str_cmp( name, "do_undock" ))               return do_undock;
-      if ( !str_cmp( name, "do_unjail" ))               return do_unjail;
-      if ( !str_cmp( name, "do_unlock" ))               return do_unlock;
-      if ( !str_cmp( name, "do_unsilence" ))          return do_unsilence;
-      if ( !str_cmp( name, "do_up" ))                   return do_up;
-      if ( !str_cmp( name, "do_use" ))          return do_use;
-      if ( !str_cmp( name, "do_users" ))                return do_users;
+      if ( !StrCmp( name, "do_unfocusalias" )) return do_unfocusalias;
+      if ( !StrCmp( name, "do_unfoldarea" ))           return do_unfoldarea;
+      if ( !StrCmp( name, "do_unhell" ))               return do_unhell;
+      if ( !StrCmp( name, "do_undock" ))               return do_undock;
+      if ( !StrCmp( name, "do_unjail" ))               return do_unjail;
+      if ( !StrCmp( name, "do_unlock" ))               return do_unlock;
+      if ( !StrCmp( name, "do_unsilence" ))          return do_unsilence;
+      if ( !StrCmp( name, "do_up" ))                   return do_up;
+      if ( !StrCmp( name, "do_use" ))          return do_use;
+      if ( !StrCmp( name, "do_users" ))                return do_users;
       break;
     case 'v':
-      if ( !str_cmp( name, "do_value" ))                return do_value;
-      if ( !str_cmp( name, "do_vassign" ))            return do_vassign;
-      if ( !str_cmp( name, "do_visible" ))              return do_visible;
-      if ( !str_cmp( name, "do_viewskills" ))           return do_viewskills;
-      if ( !str_cmp( name, "do_vnums" ))                return do_vnums;
-      if ( !str_cmp( name, "do_vsearch" ))              return do_vsearch;
+      if ( !StrCmp( name, "do_value" ))                return do_value;
+      if ( !StrCmp( name, "do_vassign" ))            return do_vassign;
+      if ( !StrCmp( name, "do_visible" ))              return do_visible;
+      if ( !StrCmp( name, "do_viewskills" ))           return do_viewskills;
+      if ( !StrCmp( name, "do_vnums" ))                return do_vnums;
+      if ( !StrCmp( name, "do_vsearch" ))              return do_vsearch;
       break;
     case 'w':
-      if ( !str_cmp( name, "do_wake" ))         return do_wake;
-      if ( !str_cmp( name, "do_wartalk" ))              return do_wartalk;
-      if ( !str_cmp( name, "do_wear" ))         return do_wear;
-      if ( !str_cmp( name, "do_weather" ))              return do_weather;
-      if ( !str_cmp( name, "do_west" ))         return do_west;
-      if ( !str_cmp( name, "do_where" ))                return do_where;
-      if ( !str_cmp( name, "do_who" ))          return do_who;
-      if ( !str_cmp( name, "do_whois" ))                return do_whois;
-      if ( !str_cmp( name, "do_wimpy" ))                return do_wimpy;
-      if ( !str_cmp( name, "do_wizhelp" ))              return do_wizhelp;
-      if ( !str_cmp( name, "do_wizlist" ))              return do_wizlist;
-      if ( !str_cmp( name, "do_wizlock" ))              return do_wizlock;
+      if ( !StrCmp( name, "do_wake" ))         return do_wake;
+      if ( !StrCmp( name, "do_wartalk" ))              return do_wartalk;
+      if ( !StrCmp( name, "do_wear" ))         return do_wear;
+      if ( !StrCmp( name, "do_weather" ))              return do_weather;
+      if ( !StrCmp( name, "do_west" ))         return do_west;
+      if ( !StrCmp( name, "do_where" ))                return do_where;
+      if ( !StrCmp( name, "do_who" ))          return do_who;
+      if ( !StrCmp( name, "do_whois" ))                return do_whois;
+      if ( !StrCmp( name, "do_wimpy" ))                return do_wimpy;
+      if ( !StrCmp( name, "do_wizhelp" ))              return do_wizhelp;
+      if ( !StrCmp( name, "do_wizlist" ))              return do_wizlist;
+      if ( !StrCmp( name, "do_wizlock" ))              return do_wizlock;
       break;
     case 'y':
-      if ( !str_cmp( name, "do_yell" ))         return do_yell;
+      if ( !StrCmp( name, "do_yell" ))         return do_yell;
       break;
     case 'z':
-      if ( !str_cmp( name, "do_zap" ))          return do_zap;
-      if ( !str_cmp( name, "do_zones" ))                return do_zones;
+      if ( !StrCmp( name, "do_zap" ))          return do_zap;
+      if ( !StrCmp( name, "do_zones" ))                return do_zones;
 
 static size_t command_fun_table_size( void )
 {
@@ -803,7 +803,7 @@ DO_FUN *skill_function( const char *name )
 
   for( i = 0; i < command_fun_table_size(); ++i )
     {
-      if( !str_cmp( name, command_fun_table[ i ].fun_name ) )
+      if( !StrCmp( name, command_fun_table[ i ].fun_name ) )
         {
           fun_ptr = command_fun_table[ i ].fun_ptr;
           break;
@@ -1167,27 +1167,27 @@ void save_socials()
 
 int get_skill( char *skilltype )
 {
-  if ( !str_cmp( skilltype, "Spell" ) )
+  if ( !StrCmp( skilltype, "Spell" ) )
     {
       return SKILL_SPELL;
     }
 
-  if ( !str_cmp( skilltype, "Skill" ) )
+  if ( !StrCmp( skilltype, "Skill" ) )
     {
       return SKILL_SKILL;
     }
 
-  if ( !str_cmp( skilltype, "Weapon" ) )
+  if ( !StrCmp( skilltype, "Weapon" ) )
     {
       return SKILL_WEAPON;
     }
 
-  if ( !str_cmp( skilltype, "Tongue" ) )
+  if ( !StrCmp( skilltype, "Tongue" ) )
     {
       return SKILL_TONGUE;
     }
 
-  if ( !str_cmp( skilltype, "Herb" ) )
+  if ( !StrCmp( skilltype, "Herb" ) )
     {
       return SKILL_HERB;
     }
@@ -1244,28 +1244,28 @@ SKILLTYPE *fread_skill( FILE *fp )
 
   for ( ; ; )
     {
-      const char *word = feof( fp ) ? "End" : fread_word( fp );
+      const char *word = feof( fp ) ? "End" : ReadWord( fp );
       bool fMatch = false;
 
       switch ( CharToUppercase(word[0]) )
         {
         case '*':
           fMatch = true;
-          fread_to_eol( fp );
+          ReadToEndOfLine( fp );
           break;
 
         case 'A':
-          KEY( "Alignment",     skill->alignment,       fread_number( fp ) );
+          KEY( "Alignment",     skill->alignment,       ReadInt( fp ) );
 
-          if ( !str_cmp( word, "Affect" ) )
+          if ( !StrCmp( word, "Affect" ) )
             {
               SMAUG_AFF *aff = NULL;
 
               CREATE( aff, SMAUG_AFF, 1 );
-              aff->duration = str_dup( fread_word( fp ) );
-              aff->location = fread_number( fp );
-              aff->modifier = str_dup( fread_word( fp ) );
-              aff->bitvector = fread_number( fp );
+              aff->duration = CopyString( ReadWord( fp ) );
+              aff->location = ReadInt( fp );
+              aff->modifier = CopyString( ReadWord( fp ) );
+              aff->bitvector = ReadInt( fp );
               aff->next = skill->affects;
               skill->affects = aff;
               fMatch = true;
@@ -1274,49 +1274,49 @@ SKILLTYPE *fread_skill( FILE *fp )
           break;
 
         case 'C':
-          if ( !str_cmp( word, "Code" ) )
+          if ( !StrCmp( word, "Code" ) )
             {
 	      SPELL_FUN *spellfun = NULL;
 	      DO_FUN *dofun = NULL;
-	      const char *w = fread_word( fp );
+	      const char *w = ReadWord( fp );
 
 	      fMatch = true;
 
 	      if( ( spellfun = spell_function( w ) ) != spell_notfound
-		  && !str_prefix( "spell_", w ) )
+		  && !StringPrefix( "spell_", w ) )
 		{
 		  skill->spell_fun = spellfun;
-		  skill->fun_name = str_dup( w );
+		  skill->fun_name = CopyString( w );
 		}
 	      else if( ( dofun = skill_function( w ) ) != skill_notfound
-		       && !str_prefix( "do_", w ) )
+		       && !StringPrefix( "do_", w ) )
 		{
 		  skill->skill_fun = dofun;
-		  skill->fun_name = str_dup( w );
+		  skill->fun_name = CopyString( w );
 		}
 	      else
 		{
 		  bug( "fread_skill: unknown skill/spell %s", w );
-		  skill->fun_name = str_dup( "" );
+		  skill->fun_name = CopyString( "" );
 		}
 
 	      break;
             }
 
-          KEY( "Components",    skill->components,      fread_string_nohash( fp ) );
+          KEY( "Components",    skill->components,      ReadStringToTildeNoHash( fp ) );
           break;
 
         case 'D':
-          KEY( "Dammsg",        skill->noun_damage,     fread_string_nohash( fp ) );
-          KEY( "Dice",  skill->dice,            fread_string_nohash( fp ) );
-          KEY( "Diechar",       skill->die_char,        fread_string_nohash( fp ) );
-          KEY( "Dieroom",       skill->die_room,        fread_string_nohash( fp ) );
-          KEY( "Dievict",       skill->die_vict,        fread_string_nohash( fp ) );
-          KEY( "Difficulty",    skill->difficulty,      fread_number( fp ) );
+          KEY( "Dammsg",        skill->noun_damage,     ReadStringToTildeNoHash( fp ) );
+          KEY( "Dice",  skill->dice,            ReadStringToTildeNoHash( fp ) );
+          KEY( "Diechar",       skill->die_char,        ReadStringToTildeNoHash( fp ) );
+          KEY( "Dieroom",       skill->die_room,        ReadStringToTildeNoHash( fp ) );
+          KEY( "Dievict",       skill->die_vict,        ReadStringToTildeNoHash( fp ) );
+          KEY( "Difficulty",    skill->difficulty,      ReadInt( fp ) );
           break;
 
         case 'E':
-          if ( !str_cmp( word, "End" ) )
+          if ( !StrCmp( word, "End" ) )
 	    {
 	      return skill;
 	    }
@@ -1324,63 +1324,63 @@ SKILLTYPE *fread_skill( FILE *fp )
           break;
 
         case 'F':
-          KEY( "Flags", skill->flags,           fread_number( fp ) );
+          KEY( "Flags", skill->flags,           ReadInt( fp ) );
           break;
 
         case 'G':
-          KEY( "Guild", skill->guild,           fread_number( fp ) );
+          KEY( "Guild", skill->guild,           ReadInt( fp ) );
           break;
 
         case 'H':
-          KEY( "Hitchar",       skill->hit_char,        fread_string_nohash( fp ) );
-          KEY( "Hitroom",       skill->hit_room,        fread_string_nohash( fp ) );
-          KEY( "Hitvict",       skill->hit_vict,        fread_string_nohash( fp ) );
+          KEY( "Hitchar",       skill->hit_char,        ReadStringToTildeNoHash( fp ) );
+          KEY( "Hitroom",       skill->hit_room,        ReadStringToTildeNoHash( fp ) );
+          KEY( "Hitvict",       skill->hit_vict,        ReadStringToTildeNoHash( fp ) );
           break;
 
         case 'I':
-          KEY( "Immchar",       skill->imm_char,        fread_string_nohash( fp ) );
-          KEY( "Immroom",       skill->imm_room,        fread_string_nohash( fp ) );
-          KEY( "Immvict",       skill->imm_vict,        fread_string_nohash( fp ) );
+          KEY( "Immchar",       skill->imm_char,        ReadStringToTildeNoHash( fp ) );
+          KEY( "Immroom",       skill->imm_room,        ReadStringToTildeNoHash( fp ) );
+          KEY( "Immvict",       skill->imm_vict,        ReadStringToTildeNoHash( fp ) );
           break;
 
         case 'M':
-          KEY( "Mana",  skill->min_mana,        fread_number( fp ) );
-          KEY( "Minlevel",      skill->min_level,       fread_number( fp ) );
-          KEY( "Minpos",        skill->minimum_position, fread_number( fp ) );
-          KEY( "Misschar",      skill->miss_char,       fread_string_nohash( fp ) );
-          KEY( "Missroom",      skill->miss_room,       fread_string_nohash( fp ) );
-          KEY( "Missvict",      skill->miss_vict,       fread_string_nohash( fp ) );
+          KEY( "Mana",  skill->min_mana,        ReadInt( fp ) );
+          KEY( "Minlevel",      skill->min_level,       ReadInt( fp ) );
+          KEY( "Minpos",        skill->minimum_position, ReadInt( fp ) );
+          KEY( "Misschar",      skill->miss_char,       ReadStringToTildeNoHash( fp ) );
+          KEY( "Missroom",      skill->miss_room,       ReadStringToTildeNoHash( fp ) );
+          KEY( "Missvict",      skill->miss_vict,       ReadStringToTildeNoHash( fp ) );
           break;
 
         case 'N':
-          KEY( "Name",  skill->name,            fread_string_nohash( fp ) );
+          KEY( "Name",  skill->name,            ReadStringToTildeNoHash( fp ) );
           break;
 
         case 'P':
-          KEY( "Participants",skill->participants,      fread_number( fp ) );
+          KEY( "Participants",skill->participants,      ReadInt( fp ) );
           break;
 
         case 'R':
-          KEY( "Rounds",        skill->beats,           fread_number( fp ) );
+          KEY( "Rounds",        skill->beats,           ReadInt( fp ) );
           break;
 
         case 'S':
-          KEY( "Slot",  skill->slot,            fread_number( fp ) );
-          KEY( "Saves", skill->saves,           fread_number( fp ) );
+          KEY( "Slot",  skill->slot,            ReadInt( fp ) );
+          KEY( "Saves", skill->saves,           ReadInt( fp ) );
           break;
 
         case 'T':
-          KEY( "Target",        skill->target,          fread_number( fp ) );
-          KEY( "Teachers",      skill->teachers,        fread_string_nohash( fp ) );
-          KEY( "Type",  skill->type,  get_skill(fread_word( fp ))  );
+          KEY( "Target",        skill->target,          ReadInt( fp ) );
+          KEY( "Teachers",      skill->teachers,        ReadStringToTildeNoHash( fp ) );
+          KEY( "Type",  skill->type,  get_skill(ReadWord( fp ))  );
           break;
 
         case 'V':
-          KEY( "Value", skill->value,           fread_number( fp ) );
+          KEY( "Value", skill->value,           ReadInt( fp ) );
           break;
 
         case 'W':
-          KEY( "Wearoff",       skill->msg_off,         fread_string_nohash( fp ) );
+          KEY( "Wearoff",       skill->msg_off,         ReadStringToTildeNoHash( fp ) );
           break;
         }
 
@@ -1402,11 +1402,11 @@ void load_skill_table()
       for ( ;; )
         {
           const char *word = NULL;
-          char letter = fread_letter( fp );
+          char letter = ReadChar( fp );
 
           if ( letter == '*' )
             {
-              fread_to_eol( fp );
+              ReadToEndOfLine( fp );
               continue;
             }
 
@@ -1416,9 +1416,9 @@ void load_skill_table()
               break;
             }
 
-          word = fread_word( fp );
+          word = ReadWord( fp );
 
-          if ( !str_cmp( word, "SKILL" ) )
+          if ( !StrCmp( word, "SKILL" ) )
             {
               if ( top_sn >= MAX_SKILL )
                 {
@@ -1430,7 +1430,7 @@ void load_skill_table()
               skill_table[top_sn++] = fread_skill( fp );
               continue;
             }
-          else if ( !str_cmp( word, "END"  ) )
+          else if ( !StrCmp( word, "END"  ) )
 	    {
               break;
 	    }
@@ -1461,11 +1461,11 @@ void load_herb_table()
       for ( ;; )
         {
           const char *word = NULL;
-          char letter = fread_letter( fp );
+          char letter = ReadChar( fp );
 
           if ( letter == '*' )
             {
-              fread_to_eol( fp );
+              ReadToEndOfLine( fp );
               continue;
             }
 
@@ -1475,9 +1475,9 @@ void load_herb_table()
               break;
             }
 
-          word = fread_word( fp );
+          word = ReadWord( fp );
 
-          if ( !str_cmp( word, "HERB"      ) )
+          if ( !StrCmp( word, "HERB"      ) )
             {
               if ( top_herb >= MAX_HERB )
                 {
@@ -1495,7 +1495,7 @@ void load_herb_table()
 
               continue;
             }
-          else if ( !str_cmp( word, "END"  ) )
+          else if ( !StrCmp( word, "END"  ) )
 	    {
 	      break;
 	    }
@@ -1523,24 +1523,24 @@ void fread_social( FILE *fp )
 
   for ( ;; )
     {
-      const char *word = feof( fp ) ? "End" : fread_word( fp );
+      const char *word = feof( fp ) ? "End" : ReadWord( fp );
       bool fMatch = false;
 
       switch ( CharToUppercase(word[0]) )
         {
         case '*':
           fMatch = true;
-          fread_to_eol( fp );
+          ReadToEndOfLine( fp );
           break;
 
         case 'C':
-          KEY( "CharNoArg",     social->char_no_arg,    fread_string_nohash(fp) );
-          KEY( "CharFound",     social->char_found,     fread_string_nohash(fp) );
-          KEY( "CharAuto",      social->char_auto,      fread_string_nohash(fp) );
+          KEY( "CharNoArg",     social->char_no_arg,    ReadStringToTildeNoHash(fp) );
+          KEY( "CharFound",     social->char_found,     ReadStringToTildeNoHash(fp) );
+          KEY( "CharAuto",      social->char_auto,      ReadStringToTildeNoHash(fp) );
           break;
 
         case 'E':
-          if ( !str_cmp( word, "End" ) )
+          if ( !StrCmp( word, "End" ) )
             {
               if ( !social->name )
                 {
@@ -1562,17 +1562,17 @@ void fread_social( FILE *fp )
           break;
 
         case 'N':
-          KEY( "Name",  social->name,           fread_string_nohash(fp) );
+          KEY( "Name",  social->name,           ReadStringToTildeNoHash(fp) );
           break;
 
         case 'O':
-          KEY( "OthersNoArg",   social->others_no_arg,  fread_string_nohash(fp) );
-          KEY( "OthersFound",   social->others_found,   fread_string_nohash(fp) );
-          KEY( "OthersAuto",    social->others_auto,    fread_string_nohash(fp) );
+          KEY( "OthersNoArg",   social->others_no_arg,  ReadStringToTildeNoHash(fp) );
+          KEY( "OthersFound",   social->others_found,   ReadStringToTildeNoHash(fp) );
+          KEY( "OthersAuto",    social->others_auto,    ReadStringToTildeNoHash(fp) );
           break;
 
         case 'V':
-          KEY( "VictFound",     social->vict_found,     fread_string_nohash(fp) );
+          KEY( "VictFound",     social->vict_found,     ReadStringToTildeNoHash(fp) );
           break;
         }
 
@@ -1594,11 +1594,11 @@ void load_socials()
       for ( ;; )
         {
           const char *word = NULL;
-          char letter = fread_letter( fp );
+          char letter = ReadChar( fp );
 
           if ( letter == '*' )
             {
-              fread_to_eol( fp );
+              ReadToEndOfLine( fp );
               continue;
             }
 
@@ -1608,14 +1608,14 @@ void load_socials()
               break;
             }
 
-          word = fread_word( fp );
+          word = ReadWord( fp );
 
-          if ( !str_cmp( word, "SOCIAL" ) )
+          if ( !StrCmp( word, "SOCIAL" ) )
             {
               fread_social( fp );
               continue;
             }
-          else if ( !str_cmp( word, "END" ) )
+          else if ( !StrCmp( word, "END" ) )
 	    {
 	      break;
 	    }
@@ -1643,31 +1643,31 @@ void fread_command( FILE *fp )
 
   for ( ;; )
     {
-      const char *word = feof( fp ) ? "End" : fread_word( fp );
+      const char *word = feof( fp ) ? "End" : ReadWord( fp );
       bool fMatch = false;
 
       switch ( CharToUppercase(word[0]) )
         {
         case '*':
           fMatch = true;
-          fread_to_eol( fp );
+          ReadToEndOfLine( fp );
           break;
 
         case 'C':
-	  if( !str_cmp( "Code", word ) )
+	  if( !StrCmp( "Code", word ) )
 	    {
-	      const char *symbol_name = fread_word( fp );
+	      const char *symbol_name = ReadWord( fp );
 
 	      command->do_fun = skill_function( symbol_name );
 	      fMatch = true;
 
 	      if( command->do_fun != skill_notfound )
 		{
-		  command->fun_name = str_dup( symbol_name );
+		  command->fun_name = CopyString( symbol_name );
 		}
 	      else
 		{
-		  command->fun_name = str_dup( "" );
+		  command->fun_name = CopyString( "" );
 		}
 
 	      break;
@@ -1675,7 +1675,7 @@ void fread_command( FILE *fp )
           break;
 
         case 'E':
-          if ( !str_cmp( word, "End" ) )
+          if ( !StrCmp( word, "End" ) )
             {
               if ( !command->name )
                 {
@@ -1697,16 +1697,16 @@ void fread_command( FILE *fp )
           break;
 
         case 'L':
-          KEY( "Level", command->level,         fread_number(fp) );
-          KEY( "Log",           command->log,           fread_number(fp) );
+          KEY( "Level", command->level,         ReadInt(fp) );
+          KEY( "Log",           command->log,           ReadInt(fp) );
           break;
 
         case 'N':
-          KEY( "Name",  command->name,          fread_string_nohash(fp) );
+          KEY( "Name",  command->name,          ReadStringToTildeNoHash(fp) );
           break;
 
         case 'P':
-          KEY( "Position",      command->position,      fread_number(fp) );
+          KEY( "Position",      command->position,      ReadInt(fp) );
           break;
         }
 
@@ -1728,11 +1728,11 @@ void load_commands()
       for ( ;; )
         {
 	  const char *word = NULL;
-          char letter = fread_letter( fp );
+          char letter = ReadChar( fp );
 
           if ( letter == '*' )
             {
-              fread_to_eol( fp );
+              ReadToEndOfLine( fp );
               continue;
             }
 
@@ -1742,14 +1742,14 @@ void load_commands()
               break;
             }
 
-          word = fread_word( fp );
+          word = ReadWord( fp );
 
-          if ( !str_cmp( word, "COMMAND" ) )
+          if ( !StrCmp( word, "COMMAND" ) )
             {
               fread_command( fp );
               continue;
             }
-          else if ( !str_cmp( word, "END" ) )
+          else if ( !StrCmp( word, "END" ) )
 	    {
               break;
 	    }

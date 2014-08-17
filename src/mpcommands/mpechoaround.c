@@ -19,7 +19,7 @@ void do_mpechoaround( Character *ch, char *argument )
       return;
     }
 
-  argument = one_argument( argument, arg );
+  argument = OneArgument( argument, arg );
 
   if ( arg[0] == '\0' )
     {
@@ -38,7 +38,7 @@ void do_mpechoaround( Character *ch, char *argument )
 
   if ( (color = get_color(argument)) )
     {
-      argument = one_argument( argument, arg );
+      argument = OneArgument( argument, arg );
       act( color, argument, ch, NULL, victim, TO_NOTVICT );
     }
   else

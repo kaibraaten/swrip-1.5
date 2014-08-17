@@ -9,7 +9,7 @@ void do_viewskills( Character *ch, char *argument )
   int sn;
   int col;
 
-  argument = one_argument( argument, arg );
+  argument = OneArgument( argument, arg );
   if ( arg[0] == '\0' )
     {
       send_to_char( "&zSyntax: skills <player>.\r\n", ch );

@@ -7,25 +7,25 @@ void do_buzz (Character *ch, char *arg)
   Room *home;
   Exit *exitdat;
 
-  if ( !str_cmp( arg, "n"  ) || !str_cmp( arg, "north"     ) )
+  if ( !StrCmp( arg, "n"  ) || !StrCmp( arg, "north"     ) )
     exit_dir = DIR_NORTH;
-  else if ( !str_cmp( arg, "e"  ) || !str_cmp( arg, "east"      ) )
+  else if ( !StrCmp( arg, "e"  ) || !StrCmp( arg, "east"      ) )
     exit_dir = DIR_EAST;
-  else if ( !str_cmp( arg, "s"  ) || !str_cmp( arg, "south"     ) )
+  else if ( !StrCmp( arg, "s"  ) || !StrCmp( arg, "south"     ) )
     exit_dir = DIR_SOUTH;
-  else if ( !str_cmp( arg, "w"  ) || !str_cmp( arg, "west"      ) )
+  else if ( !StrCmp( arg, "w"  ) || !StrCmp( arg, "west"      ) )
     exit_dir = DIR_WEST;
-  else if ( !str_cmp( arg, "u"  ) || !str_cmp( arg, "up"        ) )
+  else if ( !StrCmp( arg, "u"  ) || !StrCmp( arg, "up"        ) )
     exit_dir = DIR_UP;
-  else if ( !str_cmp( arg, "d"  ) || !str_cmp( arg, "down"      ) )
+  else if ( !StrCmp( arg, "d"  ) || !StrCmp( arg, "down"      ) )
     exit_dir = DIR_DOWN;
-  else if ( !str_cmp( arg, "ne" ) || !str_cmp( arg, "northeast" ) )
+  else if ( !StrCmp( arg, "ne" ) || !StrCmp( arg, "northeast" ) )
     exit_dir = DIR_NORTHEAST;
-  else if ( !str_cmp( arg, "nw" ) || !str_cmp( arg, "northwest" ) )
+  else if ( !StrCmp( arg, "nw" ) || !StrCmp( arg, "northwest" ) )
     exit_dir = DIR_NORTHWEST;
-  else if ( !str_cmp( arg, "se" ) || !str_cmp( arg, "southeast" ) )
+  else if ( !StrCmp( arg, "se" ) || !StrCmp( arg, "southeast" ) )
     exit_dir = DIR_SOUTHEAST;
-  else if ( !str_cmp( arg, "sw" ) || !str_cmp( arg, "southwest" ) )
+  else if ( !StrCmp( arg, "sw" ) || !StrCmp( arg, "southwest" ) )
     exit_dir = DIR_SOUTHWEST;
   else
     {

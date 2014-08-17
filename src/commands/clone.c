@@ -66,9 +66,9 @@ void do_clone( Character *ch, char *argument )
 
   if(ch->stats.perm_frc > 0)
     {
-      change = number_range(-2, ch->stats.perm_frc);
+      change = GetRandomNumberFromRange(-2, ch->stats.perm_frc);
       change = urange( -2 , change , 0 );
-      change2 = number_range( -1000, ch->stats.perm_frc );
+      change2 = GetRandomNumberFromRange( -1000, ch->stats.perm_frc );
       change2 = urange(0, change2, 1);
       ch->stats.perm_frc = urange( low_frc, ch->stats.perm_frc + change + change2, 20);
     }
@@ -76,7 +76,7 @@ void do_clone( Character *ch, char *argument )
     {
       /* a character with no force has a 1/100 chance of gaining it */
 
-      change = number_range(-500, 2);
+      change = GetRandomNumberFromRange(-500, 2);
       change = urange( 0, change, 2);
       ch->stats.perm_frc = urange( low_frc, ch->stats.perm_frc + change, 20);
 
@@ -155,15 +155,15 @@ void do_clone( Character *ch, char *argument )
     {
       strcpy( clanname, ch->pcdata->clan_name);
       DISPOSE( ch->pcdata->clan_name );
-      ch->pcdata->clan_name = str_dup( "" );
+      ch->pcdata->clan_name = CopyString( "" );
       strcpy( bestowments, ch->pcdata->bestowments);
       DISPOSE( ch->pcdata->bestowments );
-      ch->pcdata->bestowments = str_dup( "" );
+      ch->pcdata->bestowments = CopyString( "" );
       save_clone(ch);
       DISPOSE( ch->pcdata->clan_name );
-      ch->pcdata->clan_name = str_dup( clanname );
+      ch->pcdata->clan_name = CopyString( clanname );
       DISPOSE( ch->pcdata->bestowments );
-      ch->pcdata->bestowments = str_dup( clanname );
+      ch->pcdata->bestowments = CopyString( clanname );
     }
   else
     save_clone( ch );
@@ -187,7 +187,7 @@ void do_clone( Character *ch, char *argument )
   ch->gold = credits;
   ch->pcdata->bank = bank;
   ch->act = flags;
-  ch->pcdata->bestowments=str_dup( oldbestowments);
+  ch->pcdata->bestowments=CopyString( oldbestowments);
   char_from_room( ch );
   char_to_room( ch, get_room_index( 10002 ) );
   do_look( ch , "" );

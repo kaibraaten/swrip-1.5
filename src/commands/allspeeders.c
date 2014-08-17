@@ -28,11 +28,11 @@ void do_allspeeders( Character *ch, char *argument )
       sprintf( buf, "%s(%s)", ship->name, ship->personalname );
       pager_printf( ch, "%-35s%-15s ", buf, ship->owner );
 
-      if ( !str_cmp(ship->owner, "Public") )
+      if ( !StrCmp(ship->owner, "Public") )
         {
           pager_printf( ch, "%ld to rent.\r\n", GetShipValue(ship)/100 );
         }
-      else if ( str_cmp(ship->owner, "") )
+      else if ( StrCmp(ship->owner, "") )
         pager_printf( ch, "%s", "\r\n" );
       else
         pager_printf( ch, "%ld to buy.\r\n", GetShipValue(ship) );

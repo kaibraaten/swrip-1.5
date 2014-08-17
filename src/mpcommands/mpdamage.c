@@ -21,8 +21,8 @@ void do_mp_damage( Character *ch, char *argument )
       send_to_char( "Huh?\r\n", ch );
       return;
     }
-  argument = one_argument( argument, arg1 );
-  argument = one_argument( argument, arg2 );
+  argument = OneArgument( argument, arg1 );
+  argument = OneArgument( argument, arg2 );
 
   if ( arg1[0] == '\0' )
     {
@@ -161,7 +161,7 @@ static ch_ret simple_damage( Character *ch, Character *victim, int dam, int dt )
   if (dam > 10)
     {
       /* get a random body eq part */
-      dameq  = number_range(WEAR_LIGHT, WEAR_EYES);
+      dameq  = GetRandomNumberFromRange(WEAR_LIGHT, WEAR_EYES);
       damobj = GetEquipmentOnCharacter(victim, dameq);
       if ( damobj )
         {
@@ -261,7 +261,7 @@ static ch_ret simple_damage( Character *ch, Character *victim, int dam, int dt )
    */
   if ( !npcvict && !victim->desc )
     {
-      if ( number_range( 0, victim->wait ) == 0 )
+      if ( GetRandomNumberFromRange( 0, victim->wait ) == 0 )
         {
           do_recall( victim, "" );
           return rNONE;
@@ -273,7 +273,7 @@ static ch_ret simple_damage( Character *ch, Character *victim, int dam, int dt )
    */
   if ( npcvict && dam > 0 )
     {
-      if ( ( IsBitSet(victim->act, ACT_WIMPY) && number_bits( 1 ) == 0
+      if ( ( IsBitSet(victim->act, ACT_WIMPY) && NumberBits( 1 ) == 0
              &&   victim->hit < victim->max_hit / 2 )
            ||   ( IsAffectedBy(victim, AFF_CHARM) && victim->master
                   &&     victim->master->in_room != victim->in_room ) )

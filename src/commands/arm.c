@@ -27,7 +27,7 @@ void do_arm( Character *ch, char *argument )
 
   obj->timer = 1;
   DISPOSE ( obj->armed_by );
-  obj->armed_by = str_dup ( ch->name );
+  obj->armed_by = CopyString ( ch->name );
 
   ch_printf( ch, "You arm %s.\r\n", obj->short_descr );
   act( AT_PLAIN, "$n arms $p.", ch, obj, NULL, TO_ROOM );

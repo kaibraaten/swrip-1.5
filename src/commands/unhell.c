@@ -7,7 +7,7 @@ void do_unhell( Character *ch, char *argument )
   char arg[MAX_INPUT_LENGTH];
   Room *location;
 
-  argument = one_argument(argument, arg);
+  argument = OneArgument(argument, arg);
   if ( !*arg )
     {
       send_to_char( "Unhell whom..?\r\n", ch );
@@ -35,7 +35,7 @@ void do_unhell( Character *ch, char *argument )
 
   if ( victim->pcdata->helled_by )
     {
-      if( str_cmp(ch->name, victim->pcdata->helled_by) )
+      if( StrCmp(ch->name, victim->pcdata->helled_by) )
         ch_printf(ch, "(You should probably write a note to %s, explaining the early release.)\r\n",
                   victim->pcdata->helled_by);
       DISPOSE(victim->pcdata->helled_by);

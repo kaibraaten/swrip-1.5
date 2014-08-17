@@ -8,7 +8,7 @@ void do_open( Character *ch, char *argument )
   Exit *pexit = NULL;
   int door = 0;
 
-  one_argument( argument, arg );
+  OneArgument( argument, arg );
 
   if ( arg[0] == '\0' )
     {
@@ -39,7 +39,7 @@ void do_open( Character *ch, char *argument )
 	}
 
       if ( !IsBitSet(pexit->exit_info, EX_SECRET)
-           || (pexit->keyword && nifty_is_name( arg, pexit->keyword )) )
+           || (pexit->keyword && NiftyIsName( arg, pexit->keyword )) )
         {
           act( AT_ACTION, "$n opens the $d.",
 	       ch, NULL, pexit->keyword, TO_ROOM );
@@ -85,27 +85,27 @@ void do_open( Character *ch, char *argument )
             }
 
           ch_printf( ch, "%s isn't a container.\r\n",
-		     capitalize( obj->short_descr ) );
+		     Capitalize( obj->short_descr ) );
           return;
         }
 
       if ( !IsBitSet(obj->value[1], CONT_CLOSED) )
         {
 	  ch_printf( ch, "%s is already open.\r\n",
-		     capitalize( obj->short_descr ) );
+		     Capitalize( obj->short_descr ) );
           return;
         }
 
       if ( !IsBitSet(obj->value[1], CONT_CLOSEABLE) )
         {
           ch_printf( ch, "%s cannot be opened or closed.\r\n",
-		     capitalize( obj->short_descr ) );
+		     Capitalize( obj->short_descr ) );
           return;
         }
 
       if ( IsBitSet(obj->value[1], CONT_LOCKED) )
         {
-          ch_printf( ch, "%s is locked.\r\n", capitalize( obj->short_descr ) );
+          ch_printf( ch, "%s is locked.\r\n", Capitalize( obj->short_descr ) );
           return;
         }
 
@@ -116,7 +116,7 @@ void do_open( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp(arg , "hatch") )
+  if ( !StrCmp(arg , "hatch") )
     {
       do_openhatch( ch , argument );
       return;

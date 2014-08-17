@@ -11,7 +11,7 @@ void do_sell( Character *ch, char *argument )
   int cost;
   bool spice = false;
 
-  one_argument( argument, arg );
+  OneArgument( argument, arg );
 
   if ( arg[0] == '\0' )
     {

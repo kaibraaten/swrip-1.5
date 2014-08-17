@@ -16,9 +16,9 @@ void do_speeders( Character *ch, char *argument )
 
       for ( ship = first_ship; ship; ship = ship->next )
         {
-          if ( str_cmp(ship->owner, ch->name) )
+          if ( StrCmp(ship->owner, ch->name) )
             {
-              if ( !ch->pcdata || !ch->pcdata->clan || str_cmp(ship->owner,ch->pcdata->clan->name) || ship->sclass <= SHIP_PLATFORM )
+              if ( !ch->pcdata || !ch->pcdata->clan || StrCmp(ship->owner,ch->pcdata->clan->name) || ship->sclass <= SHIP_PLATFORM )
                 continue;
             }
 
@@ -67,11 +67,11 @@ void do_speeders( Character *ch, char *argument )
       sprintf( buf, "%s(%s)", ship->name, ship->personalname );
       pager_printf( ch, "%-35s%-15s ", buf, ship->owner );
 
-      if ( !str_cmp(ship->owner, "Public") )
+      if ( !StrCmp(ship->owner, "Public") )
         {
           pager_printf( ch, "%ld to rent.\r\n", GetShipValue(ship)/100 );
         }
-      else if ( str_cmp(ship->owner, "") )
+      else if ( StrCmp(ship->owner, "") )
         pager_printf( ch, "%s", "\r\n" );
       else
         pager_printf( ch, "%ld to buy.\r\n", GetShipValue(ship) );

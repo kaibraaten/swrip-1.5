@@ -15,7 +15,7 @@ void do_smalltalk ( Character *ch , char *argument )
       send_to_char( "What would be the point of that.\r\n", ch );
     }
 
-  argument = one_argument( argument, arg1 );
+  argument = OneArgument( argument, arg1 );
 
   if ( ch->mount )
     {

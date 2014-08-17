@@ -8,7 +8,7 @@ void do_fquit( Character *ch, char *argument )
 {
   Character *victim;
   char arg1[MAX_INPUT_LENGTH];
-  argument = one_argument( argument, arg1 );
+  argument = OneArgument( argument, arg1 );
 
   if ( arg1[0] == '\0' )
     {

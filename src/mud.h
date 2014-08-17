@@ -2636,7 +2636,7 @@ extern "C" {
   SOCIALTYPE *find_social( const char *command );
   CMDTYPE *find_command( const char *command );
   void  hash_commands( void );
-  void  send_timer( struct timerset *vtime, Character *ch );
+  void  sStopTimer( struct timerset *vtime, Character *ch );
   void  update_userec( struct timeval *time_used, struct timerset *userec );
 
   /* magic.c */

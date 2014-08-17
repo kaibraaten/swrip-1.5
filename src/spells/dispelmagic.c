@@ -41,7 +41,7 @@ ch_ret spell_dispel_magic( int sn, int level, Character *ch, void *vo )
 
   for ( ;; )
     {
-      affected_by = 1 << number_bits( 5 );
+      affected_by = 1 << NumberBits( 5 );
       if ( IsBitSet(victim->affected_by, affected_by) )
         break;
       if ( cnt++ > 30 )

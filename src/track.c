@@ -245,12 +245,12 @@ void FoundPrey( Character *ch, Character *victim )
 
   if ( !CanSeeCharacter(ch, victim) )
     {
-      if ( number_percent( ) < 90 )
+      if ( GetRandomPercent( ) < 90 )
 	{
 	  return;
 	}
 
-      switch( number_bits( 2 ) )
+      switch( NumberBits( 2 ) )
         {
         case 0:
 	  sprintf( buf, "Don't make me find you!" );
@@ -280,12 +280,12 @@ void FoundPrey( Character *ch, Character *victim )
 
   if ( IsBitSet( ch->in_room->room_flags, ROOM_SAFE ) )
     {
-      if ( number_percent( ) < 90 )
+      if ( GetRandomPercent( ) < 90 )
 	{
 	  return;
 	}
 
-      switch( number_bits( 2 ) )
+      switch( NumberBits( 2 ) )
         {
         case 0:
 	  do_say( ch, "C'mon out, you coward!" );
@@ -312,7 +312,7 @@ void FoundPrey( Character *ch, Character *victim )
       return;
     }
 
-  switch( number_bits( 2 ) )
+  switch( NumberBits( 2 ) )
     {
     case 0:
       sprintf( buf, "Your blood is mine!" );
@@ -405,7 +405,7 @@ void HuntVictim( Character *ch )
 
       for ( attempt = 0; attempt < 25; attempt++ )
         {
-          ret = number_door();
+          ret = GetRandomDoor();
 
           if ( ( pexit = get_exit(ch->in_room, ret) ) == NULL
                || !pexit->to_room

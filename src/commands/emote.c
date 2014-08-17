@@ -50,6 +50,6 @@ void do_emote( Character *ch, char *argument )
     {
       sprintf( buf, "%s %s (emote)", IsNpc( ch ) ? ch->short_descr : ch->name,
                argument );
-      append_to_file( LOG_FILE, buf );
+      AppendToFile( LOG_FILE, buf );
     }
 }

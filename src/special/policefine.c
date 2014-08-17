@@ -18,7 +18,7 @@ bool spec_police_fine( Character *ch )
         continue;
       if ( !CanSeeCharacter( ch, victim ) )
         continue;
-      if ( number_bits ( 1 ) == 0 )
+      if ( NumberBits ( 1 ) == 0 )
         continue;
       for ( vip = 0 ; vip <= 31 ; vip++ )
         if ( IsBitSet ( ch->vip_flags , 1 << vip ) &&  IsBitSet( victim->pcdata->wanted_flags , 1 << vip) )

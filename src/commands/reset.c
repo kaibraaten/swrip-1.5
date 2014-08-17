@@ -8,7 +8,7 @@ void do_reset( Character *ch, char *argument )
   char arg[MAX_INPUT_LENGTH];
   char *parg;
 
-  parg = one_argument(argument, arg);
+  parg = OneArgument(argument, arg);
 
   if ( ch->substate == SUB_REPEATCMD )
     {
@@ -41,7 +41,7 @@ void do_reset( Character *ch, char *argument )
           return;
         }
 
-      if ( !str_cmp(arg, "done") || !str_cmp(arg, "off") )
+      if ( !StrCmp(arg, "done") || !StrCmp(arg, "off") )
         {
           send_to_char( "Reset mode off.\r\n", ch );
           ch->substate = SUB_NONE;
@@ -53,11 +53,11 @@ void do_reset( Character *ch, char *argument )
     {
       char fname[80];
 
-      sprintf(fname, "%s.are", capitalize(arg));
+      sprintf(fname, "%s.are", Capitalize(arg));
 
       for ( pArea = first_build; pArea; pArea = pArea->next )
 	{
-	  if ( !str_cmp(fname, pArea->filename) )
+	  if ( !StrCmp(fname, pArea->filename) )
 	    {
 	      argument = parg;
 	      break;

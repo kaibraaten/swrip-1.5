@@ -30,7 +30,7 @@ void do_glance( Character *ch, char *argument )
   if ( !check_blind( ch ) )
     return;
 
-  argument = one_argument( argument, arg1 );
+  argument = OneArgument( argument, arg1 );
 
   if ( arg1[0] == '\0' )
     {

@@ -11,8 +11,8 @@ void do_compare( Character *ch, char *argument )
   int value2;
   char *msg;
 
-  argument = one_argument( argument, arg1 );
-  argument = one_argument( argument, arg2 );
+  argument = OneArgument( argument, arg1 );
+  argument = OneArgument( argument, arg2 );
   if ( arg1[0] == '\0' )
     {
       send_to_char( "Compare what to what?\r\n", ch );

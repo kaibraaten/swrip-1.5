@@ -14,7 +14,7 @@ bool spec_dark_jedi( Character *ch )
   for ( victim = ch->in_room->first_person; victim; victim = v_next )
     {
       v_next = victim->next_in_room;
-      if ( who_fighting( victim ) && number_bits( 2 ) == 0 )
+      if ( who_fighting( victim ) && NumberBits( 2 ) == 0 )
         break;
     }
 
@@ -25,7 +25,7 @@ bool spec_dark_jedi( Character *ch )
     {
       int min_level;
 
-      switch ( number_bits( 4 ) )
+      switch ( NumberBits( 4 ) )
         {
         case  0:
 	  min_level =  5;

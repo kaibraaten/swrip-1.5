@@ -5,7 +5,7 @@ void do_force( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   bool mobsonly;
-  argument = one_argument( argument, arg );
+  argument = OneArgument( argument, arg );
 
   if ( arg[0] == '\0' || argument[0] == '\0' )
     {
@@ -15,7 +15,7 @@ void do_force( Character *ch, char *argument )
 
   mobsonly = GetTrustLevel( ch ) < sysdata.level_forcepc;
 
-  if ( !str_cmp( arg, "all" ) )
+  if ( !StrCmp( arg, "all" ) )
     {
       Character *vch;
       Character *vch_next;

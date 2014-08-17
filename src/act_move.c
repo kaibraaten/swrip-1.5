@@ -56,9 +56,9 @@ static void decorate_room( Room *room )
   if ( room->description )
     DISPOSE( room->description );
 
-  room->name    = str_dup( sect_names[sector][0] );
+  room->name    = CopyString( sect_names[sector][0] );
   buf[0] = '\0';
-  nRand = number_range( 1, umin(8,sent_total[sector]) );
+  nRand = GetRandomNumberFromRange( 1, umin(8,sent_total[sector]) );
 
   for ( iRand = 0; iRand < nRand; iRand++ )
     previous[iRand] = -1;
@@ -69,7 +69,7 @@ static void decorate_room( Room *room )
         {
           int x, z;
 
-          x = number_range( 0, sent_total[sector]-1 );
+          x = GetRandomNumberFromRange( 0, sent_total[sector]-1 );
 
           for ( z = 0; z < iRand; z++ )
             if ( previous[z] == x )
@@ -93,8 +93,8 @@ static void decorate_room( Room *room )
           strcat( buf, buf2 );
         }
     }
-  sprintf( buf2, "%s\r\n", wordwrap(buf, 78) );
-  room->description = str_dup( buf2 );
+  sprintf( buf2, "%s\r\n", WordWrap(buf, 78) );
+  room->description = CopyString( buf2 );
 }
 
 /*
@@ -366,8 +366,8 @@ Room *generate_exit( Room *in_room, Exit **pexit )
   if ( !found || (xit=get_exit(room, vdir))==NULL )
     {
       xit = make_exit(room, orig_exit->to_room, vdir);
-      xit->keyword              = str_dup( "" );
-      xit->description  = str_dup( "" );
+      xit->keyword              = CopyString( "" );
+      xit->description  = CopyString( "" );
       xit->key          = -1;
       xit->distance = distance;
     }
@@ -375,8 +375,8 @@ Room *generate_exit( Room *in_room, Exit **pexit )
   if ( !found )
     {
       bxit = make_exit(room, backroom, get_rev_dir(vdir));
-      bxit->keyword             = str_dup( "" );
-      bxit->description = str_dup( "" );
+      bxit->keyword             = CopyString( "" );
+      bxit->description = CopyString( "" );
       bxit->key         = -1;
 
       if ( (serial & 65535) != orig_exit->vnum )
@@ -417,7 +417,7 @@ ch_ret move_char( Character *ch, Exit *pexit, int fall )
 
   if ( drunk && !fall )
     {
-      door = number_door();
+      door = GetRandomDoor();
       pexit = get_exit( ch->in_room, door );
     }
 
@@ -638,7 +638,7 @@ ch_ret move_char( Character *ch, Exit *pexit, int fall )
           if ( !found && !ch->mount )
             {
 
-              if ( ( !IsNpc(ch) && number_percent( ) > ch->pcdata->learned[gsn_climb] )
+              if ( ( !IsNpc(ch) && GetRandomPercent( ) > ch->pcdata->learned[gsn_climb] )
                    ||      drunk || ch->mental_state < -90 )
                 {
                   OBJ_DATA *obj;
@@ -1065,47 +1065,47 @@ Exit *find_door( Character *ch, const char *arg, bool quiet )
   Exit *pexit;
   int door;
 
-  if (arg == NULL || !str_cmp(arg,""))
+  if (arg == NULL || !StrCmp(arg,""))
     return NULL;
 
   pexit = NULL;
-  if ( !str_cmp( arg, "n" ) || !str_cmp( arg, "north" ) )
+  if ( !StrCmp( arg, "n" ) || !StrCmp( arg, "north" ) )
     {
       door = DIR_NORTH;
     }
-  else if ( !str_cmp( arg, "e" ) || !str_cmp( arg, "east" ) )
+  else if ( !StrCmp( arg, "e" ) || !StrCmp( arg, "east" ) )
     {
       door = DIR_EAST;
     }
-  else if ( !str_cmp( arg, "s" ) || !str_cmp( arg, "south" ) )
+  else if ( !StrCmp( arg, "s" ) || !StrCmp( arg, "south" ) )
     {
       door = DIR_SOUTH;
     }
-  else if ( !str_cmp( arg, "w" ) || !str_cmp( arg, "west" ) )
+  else if ( !StrCmp( arg, "w" ) || !StrCmp( arg, "west" ) )
     {
       door = DIR_WEST;
     }
-  else if ( !str_cmp( arg, "u" ) || !str_cmp( arg, "up" ) )
+  else if ( !StrCmp( arg, "u" ) || !StrCmp( arg, "up" ) )
     {
       door = DIR_UP;
     }
-  else if ( !str_cmp( arg, "d" ) || !str_cmp( arg, "down" ) )
+  else if ( !StrCmp( arg, "d" ) || !StrCmp( arg, "down" ) )
     {
       door = DIR_DOWN;
     }
-  else if ( !str_cmp( arg, "ne" ) || !str_cmp( arg, "northeast" ) )
+  else if ( !StrCmp( arg, "ne" ) || !StrCmp( arg, "northeast" ) )
     {
       door = DIR_NORTHEAST;
     }
-  else if ( !str_cmp( arg, "nw" ) || !str_cmp( arg, "northwest" ) )
+  else if ( !StrCmp( arg, "nw" ) || !StrCmp( arg, "northwest" ) )
     {
       door = DIR_NORTHWEST;
     }
-  else if ( !str_cmp( arg, "se" ) || !str_cmp( arg, "southeast" ) )
+  else if ( !StrCmp( arg, "se" ) || !StrCmp( arg, "southeast" ) )
     {
       door = DIR_SOUTHEAST;
     }
-  else if ( !str_cmp( arg, "sw" ) || !str_cmp( arg, "southwest" ) )
+  else if ( !StrCmp( arg, "sw" ) || !StrCmp( arg, "southwest" ) )
     {
       door = DIR_SOUTHWEST;
     }
@@ -1115,7 +1115,7 @@ Exit *find_door( Character *ch, const char *arg, bool quiet )
         {
           if ( (quiet || IsBitSet(pexit->exit_info, EX_ISDOOR))
                && pexit->keyword
-               && nifty_is_name( arg, pexit->keyword ) )
+               && NiftyIsName( arg, pexit->keyword ) )
 	    {
 	      return pexit;
 	    }

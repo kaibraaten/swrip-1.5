@@ -47,7 +47,7 @@ void do_list( Character *ch, char *argument )
       int oref = 0;
       bool found;
 
-      one_argument( argument, arg );
+      OneArgument( argument, arg );
 
       if ( ( keeper = FindKeeper( ch ) ) == NULL )
         return;
@@ -60,7 +60,7 @@ void do_list( Character *ch, char *argument )
             {
               oref++;
               if ( ( cost = GetObjectCost( ch, keeper, obj, true ) ) > 0
-                   && ( arg[0] == '\0' || nifty_is_name( arg, obj->name ) ) )
+                   && ( arg[0] == '\0' || NiftyIsName( arg, obj->name ) ) )
                 {
                   if (keeper->home != NULL)
                     cost = obj->cost;
@@ -70,7 +70,7 @@ void do_list( Character *ch, char *argument )
                       send_to_char( "[Price] {ref} Item\r\n", ch );
                     }
                   ch_printf( ch, "[%5d] {%3d} %s%s.\r\n",
-                             cost, oref, capitalize( obj->short_descr ),
+                             cost, oref, Capitalize( obj->short_descr ),
                              IsBitSet(obj->extra_flags, ITEM_HUTT_SIZE) ? " (hutt size)" :
                              ( IsBitSet(obj->extra_flags, ITEM_LARGE_SIZE) ? " (large)" :
 			       ( IsBitSet(obj->extra_flags, ITEM_HUMAN_SIZE) ? " (medium)" :

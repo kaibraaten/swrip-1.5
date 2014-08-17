@@ -26,7 +26,7 @@ ch_ret spell_attack( int sn, int level, Character *ch, void *vo )
   if ( skill->dice )
     dam = umax( 0, dice_parse( ch, level, skill->dice ) );
   else
-    dam = dice( 1, level );
+    dam = RollDice( 1, level );
 
   if ( saved )
     dam /= 2;

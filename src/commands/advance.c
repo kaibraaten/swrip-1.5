@@ -10,11 +10,11 @@ void do_advance( Character *ch, char *argument )
   int level, ability;
   int iLevel, iAbility;
 
-  argument = one_argument( argument, arg1 );
-  argument = one_argument( argument, arg3 );
-  argument = one_argument( argument, arg2 );
+  argument = OneArgument( argument, arg1 );
+  argument = OneArgument( argument, arg3 );
+  argument = OneArgument( argument, arg2 );
 
-  if ( arg1[0] == '\0' || arg2[0] == '\0' || arg3[0] == '\0' || !is_number( arg2 ) )
+  if ( arg1[0] == '\0' || arg2[0] == '\0' || arg3[0] == '\0' || !IsNumber( arg2 ) )
     {
       send_to_char( "Syntax: advance <char> <ability> <level>.\r\n", ch );
       return;
@@ -30,7 +30,7 @@ void do_advance( Character *ch, char *argument )
 
   for ( iAbility = 0 ; iAbility < MAX_ABILITY ; iAbility++ )
     {
-      if ( !str_prefix( arg3 , ability_name[iAbility] ) )
+      if ( !StringPrefix( arg3 , ability_name[iAbility] ) )
         {
           ability = iAbility;
           break;

@@ -6,7 +6,7 @@ void do_quaff( Character *ch, char *argument )
   OBJ_DATA *obj;
   ch_ret retcode;
 
-  if ( argument[0] == '\0' || !str_cmp(argument, "") )
+  if ( argument[0] == '\0' || !StrCmp(argument, "") )
     {
       send_to_char( "Quaff what?\r\n", ch );
       return;
@@ -48,7 +48,7 @@ void do_quaff( Character *ch, char *argument )
   /*
    * If fighting, chance of dropping potion                     -Thoric
    */
-  if ( ch->fighting && number_percent( ) > (GetCurrentDexterity(ch) * 2 + 48) )
+  if ( ch->fighting && GetRandomPercent( ) > (GetCurrentDexterity(ch) * 2 + 48) )
     {
       act( AT_MAGIC, "$n accidentally drops $p and it smashes into a thousand fragments.", ch, obj, NULL, TO_ROOM );
       act( AT_MAGIC, "Oops... $p gets knocked from your hands and smashes into pieces!", ch, obj, NULL ,TO_CHAR );

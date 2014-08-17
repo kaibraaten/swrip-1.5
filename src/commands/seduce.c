@@ -7,7 +7,7 @@ void do_seduce ( Character *ch , char *argument )
   char buf[MAX_INPUT_LENGTH];
   Character *victim;
 
-  one_argument( argument, arg );
+  OneArgument( argument, arg );
 
   if ( arg[0] == '\0' )
     {

@@ -34,19 +34,19 @@ void do_diagnose( Character *ch, char *argument )
   int   num = 20;                               /* display lines requested */
   int   cou;
 
-  argument = one_argument( argument, arg1 );
-  argument = one_argument( argument, arg2 );
-  argument = one_argument( argument, arg3 );
-  argument = one_argument( argument, arg4 );
-  argument = one_argument( argument, arg5 );
-  argument = one_argument( argument, arg6 );
+  argument = OneArgument( argument, arg1 );
+  argument = OneArgument( argument, arg2 );
+  argument = OneArgument( argument, arg3 );
+  argument = OneArgument( argument, arg4 );
+  argument = OneArgument( argument, arg5 );
+  argument = OneArgument( argument, arg6 );
 
   if (!*arg1) {                                 /* empty arg gets help screen */
     diagnose_help(ch);
     return;
   }
 
-  if ( !str_cmp(arg1, "time") )
+  if ( !StrCmp(arg1, "time") )
     {
       struct tm *t = localtime(&current_time);
 
@@ -55,7 +55,7 @@ void do_diagnose( Character *ch, char *argument )
       return;
     }
 
-  if (!str_cmp(arg1, "rf"))
+  if (!StrCmp(arg1, "rf"))
     {
 #define DIAG_RF_MAX_SIZE 5000
       Room *pRoom;
@@ -92,7 +92,7 @@ void do_diagnose( Character *ch, char *argument )
       return;
     }
 
-  if (!str_cmp(arg1, "of")) {
+  if (!StrCmp(arg1, "of")) {
     if (*arg2)                                    /* empty arg gets dft number */
       num = atoi (arg2);
     if (num > DIAG_MAX_SIZE  || num < 1) {        /* display num out of bounds */
@@ -115,7 +115,7 @@ void do_diagnose( Character *ch, char *argument )
     return;
   }
 
-  if (!str_cmp(arg1, "mm")) {
+  if (!StrCmp(arg1, "mm")) {
     Descriptor *d;
     Character *victim;
 
@@ -163,7 +163,7 @@ void do_diagnose( Character *ch, char *argument )
     return;
   }
 
-  if (!str_cmp(arg1, "zero"))
+  if (!StrCmp(arg1, "zero"))
     {
 #define ZERO_MAX   1500
       int vnums[ZERO_MAX];
@@ -197,14 +197,14 @@ void do_diagnose( Character *ch, char *argument )
       return;
     }
 
-  if (!str_cmp(arg1, "visit"))
+  if (!StrCmp(arg1, "visit"))
     {
       diag_visit_obj( ch, ch->first_carrying);
       return;
     }
 
 
-  if (!str_cmp(arg1, "xxxobxxx"))
+  if (!StrCmp(arg1, "xxxobxxx"))
     {
       OBJ_DATA       *po, *pt = NULL;
       int            i=0;
@@ -250,7 +250,7 @@ void do_diagnose( Character *ch, char *argument )
       return;
     }
 
-  if (!str_cmp(arg1, "mrc"))
+  if (!StrCmp(arg1, "mrc"))
     {
       ProtoMobile *pm;
       short race_num, dis_num, vnum1, vnum2, dis_cou = 0;

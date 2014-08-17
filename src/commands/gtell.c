@@ -32,7 +32,7 @@ void do_gtell( Character *ch, char *argument )
                ||  (IsNpc(ch) && !ch->speaking) )
             ch_printf( gch, "%s tells the group '%s'.\r\n", ch->name, argument );
           else
-            ch_printf( gch, "%s tells the group '%s'.\r\n", ch->name, scramble(argument, ch->speaking) );
+            ch_printf( gch, "%s tells the group '%s'.\r\n", ch->name, Scramble(argument, ch->speaking) );
         }
     }
 }

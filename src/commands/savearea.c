@@ -25,7 +25,7 @@ void do_savearea( Character *ch, char *argument )
           return;
         }
       for ( found = false, tarea = first_build; tarea; tarea = tarea->next )
-        if ( !str_cmp( tarea->filename, argument ) )
+        if ( !StrCmp( tarea->filename, argument ) )
           {
             found = true;
             break;

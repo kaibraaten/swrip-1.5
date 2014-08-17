@@ -10,7 +10,7 @@ void do_astat( Character *ch, char *argument )
   char filename_buf[MAX_INPUT_LENGTH];
   char *filename = filename_buf;
 
-  if( !str_cmp( argument, "this" ) )
+  if( !StrCmp( argument, "this" ) )
     {
       strcpy( filename, ch->in_room->area->filename );
     }
@@ -20,7 +20,7 @@ void do_astat( Character *ch, char *argument )
     }
 
   for ( tarea = first_area; tarea; tarea = tarea->next )
-    if ( !str_cmp( tarea->filename, filename ) )
+    if ( !StrCmp( tarea->filename, filename ) )
       {
         found = true;
         break;
@@ -28,7 +28,7 @@ void do_astat( Character *ch, char *argument )
 
   if ( !found )
     for ( tarea = first_build; tarea; tarea = tarea->next )
-      if ( !str_cmp( tarea->filename, filename ) )
+      if ( !StrCmp( tarea->filename, filename ) )
         {
           found = true;
           proto = true;
@@ -78,7 +78,7 @@ void do_astat( Character *ch, char *argument )
              tarea->author,
              tarea->age,
              tarea->nplayer );
-  ch_printf( ch, "Area flags: %s\r\n", flag_string(tarea->flags, area_flags) );
+  ch_printf( ch, "Area flags: %s\r\n", FlagString(tarea->flags, area_flags) );
   ch_printf( ch, "low_room: %5d  hi_room: %d\r\n",
              tarea->low_r_vnum,
 	     tarea->hi_r_vnum );

@@ -36,7 +36,7 @@ void do_repair( Character *ch, char *argument )
       break;
     }
 
-  if ( !str_cmp( argument, "all" ) )
+  if ( !StrCmp( argument, "all" ) )
     {
       for ( obj = ch->first_carrying; obj ; obj = obj->next_content )
         {
@@ -80,7 +80,7 @@ static void repair_one_obj( Character *ch, Character *keeper, OBJ_DATA *obj,
     }
   /* "repair all" gets a 10% surcharge - Gorog */
 
-  else if ( (cost = str_cmp("all",arg) ? cost : 11*cost/10) > ch->gold )
+  else if ( (cost = StrCmp("all",arg) ? cost : 11*cost/10) > ch->gold )
     {
       sprintf( buf,
                "$N tells you, 'It will cost %d credit%s to %s %s...'", cost,

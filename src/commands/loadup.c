@@ -11,7 +11,7 @@ void do_loadup( Character *ch, char *argument )
   int old_room_vnum;
   char buf[MAX_STRING_LENGTH];
 
-  one_argument( argument, name );
+  OneArgument( argument, name );
   if ( name[0] == '\0' )
     {
       send_to_char( "Usage: loadup <playername>\r\n", ch );
@@ -21,7 +21,7 @@ void do_loadup( Character *ch, char *argument )
   name[0] = CharToUppercase(name[0]);
 
   sprintf( fname, "%s%c/%s", PLAYER_DIR, tolower(name[0]),
-           capitalize( name ) );
+           Capitalize( name ) );
   if ( stat( fname, &fst ) != -1 )
     {
       CREATE( d, Descriptor, 1 );
@@ -50,7 +50,7 @@ void do_loadup( Character *ch, char *argument )
             }
 
           sprintf( filename, "%s%c/%s.home", PLAYER_DIR, tolower(d->character->name[0]),
-                   capitalize( d->character->name ) );
+                   Capitalize( d->character->name ) );
           if ( ( fph = fopen( filename, "r" ) ) != NULL )
             {
               OBJ_DATA *tobj, *tobj_next;
@@ -62,10 +62,10 @@ void do_loadup( Character *ch, char *argument )
                   char letter;
                   const char *word;
 
-                  letter = fread_letter( fph );
+                  letter = ReadChar( fph );
                   if ( letter == '*' )
                     {
-                      fread_to_eol( fph );
+                      ReadToEndOfLine( fph );
                       continue;
                     }
 
@@ -76,11 +76,11 @@ void do_loadup( Character *ch, char *argument )
                       break;
                     }
 
-                  word = fread_word( fph );
-                  if ( !str_cmp( word, "OBJECT" ) )     /* Objects      */
+                  word = ReadWord( fph );
+                  if ( !StrCmp( word, "OBJECT" ) )     /* Objects      */
                     fread_obj  ( supermob, fph, OS_CARRY );
                   else
-                    if ( !str_cmp( word, "END"    ) )   /* Done         */
+                    if ( !StrCmp( word, "END"    ) )   /* Done         */
                       break;
                     else
 		      {
@@ -119,8 +119,8 @@ void do_loadup( Character *ch, char *argument )
       d->character              = NULL;
       DISPOSE( d->outbuf );
       DISPOSE( d );
-      ch_printf(ch, "Player %s loaded from room %d.\r\n", capitalize( name ),old_room_vnum );
-      sprintf(buf, "%s appears from nowhere, eyes glazed over.\r\n", capitalize( name ) );
+      ch_printf(ch, "Player %s loaded from room %d.\r\n", Capitalize( name ),old_room_vnum );
+      sprintf(buf, "%s appears from nowhere, eyes glazed over.\r\n", Capitalize( name ) );
       act( AT_IMMORT, buf, ch, NULL, NULL, TO_ROOM );
 
       send_to_char( "Done.\r\n", ch );

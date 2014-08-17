@@ -13,7 +13,7 @@ void do_addbounty( Character *ch, char *argument )
       return;
     }
 
-  argument = one_argument(argument, arg);
+  argument = OneArgument(argument, arg);
 
   if (argument[0] == '\0' )
     {
@@ -22,8 +22,8 @@ void do_addbounty( Character *ch, char *argument )
     }
 
   if ( ch->pcdata && ch->pcdata->clan
-       && ( !str_cmp(ch->pcdata->clan->name, "the hunters guild")
-            || !str_cmp(ch->pcdata->clan->name, "the assassins guild") ) )
+       && ( !StrCmp(ch->pcdata->clan->name, "the hunters guild")
+            || !StrCmp(ch->pcdata->clan->name, "the assassins guild") ) )
     {
       send_to_char( "Your job is to collect bounties not post them.", ch );
       return;
@@ -58,7 +58,7 @@ void do_addbounty( Character *ch, char *argument )
       return;
     }
   if ( victim->pcdata && victim->pcdata->clan
-       && !str_cmp(victim->pcdata->clan->name, "the hunters guild"))
+       && !StrCmp(victim->pcdata->clan->name, "the hunters guild"))
     {
       send_to_char( "&RYou can not post bounties on bounty hunters!\r\n", ch);
       return;

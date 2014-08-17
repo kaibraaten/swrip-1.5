@@ -14,7 +14,7 @@ void do_appraise( Character *ch, char *argument )
   int cost;
   char *fixstr;
 
-  one_argument( argument, arg );
+  OneArgument( argument, arg );
 
   if ( arg[0] == '\0' )
     {
@@ -36,7 +36,7 @@ void do_appraise( Character *ch, char *argument )
       break;
     }
 
-  if ( !str_cmp( arg, "all") )
+  if ( !StrCmp( arg, "all") )
     {
       appraise_all( ch, keeper, fixstr );
       return;

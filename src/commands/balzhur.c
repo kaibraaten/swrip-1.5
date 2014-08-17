@@ -10,7 +10,7 @@ void do_balzhur( Character *ch, char *argument )
   Character *victim;
   int sn;
 
-  argument = one_argument( argument, arg );
+  argument = OneArgument( argument, arg );
 
   if ( arg[0] == '\0' )
     {
@@ -64,7 +64,7 @@ void do_balzhur( Character *ch, char *argument )
   victim->move     = victim->max_move;
 
 
-  sprintf( buf, "%s%s", GOD_DIR, capitalize(victim->name) );
+  sprintf( buf, "%s%s", GOD_DIR, Capitalize(victim->name) );
 
   if ( !remove( buf ) )
     send_to_char( "Player's immortal data destroyed.\r\n", ch );
@@ -76,7 +76,7 @@ void do_balzhur( Character *ch, char *argument )
       perror( buf2 );
     }
 
-  sprintf( buf2, "%s.are", capitalize(arg) );
+  sprintf( buf2, "%s.are", Capitalize(arg) );
   make_wizlist();
   do_help(victim, "M_BALZHUR_" );
   set_char_color( AT_WHITE, victim );

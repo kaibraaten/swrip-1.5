@@ -28,7 +28,7 @@ ch_ret spell_dispel_evil( int sn, int level, Character *ch, void *vo )
       return rSPELL_FAILED;
     }
 
-  dam = dice( level, 4 );
+  dam = RollDice( level, 4 );
 
   if ( saves_spell_staff( level, victim ) )
     dam /= 2;

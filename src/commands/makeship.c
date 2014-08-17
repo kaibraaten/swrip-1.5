@@ -8,7 +8,7 @@ void do_makeship( Character *ch, char *argument )
   char arg[MAX_INPUT_LENGTH];
   int turret_num = 0;
 
-  argument = one_argument( argument, arg );
+  argument = OneArgument( argument, arg );
 
   if ( !argument || argument[0] == '\0' )
     {
@@ -24,18 +24,18 @@ void do_makeship( Character *ch, char *argument )
       ship->turret[turret_num] = AllocateTurret( ship );
     }
 
-  ship->name            = str_dup( argument );
-  ship->personalname            = str_dup( argument );
-  ship->description     = str_dup( "" );
-  ship->owner   = str_dup( "" );
-  ship->copilot       = str_dup( "" );
-  ship->pilot         = str_dup( "" );
-  ship->home          = str_dup( "" );
+  ship->name            = CopyString( argument );
+  ship->personalname            = CopyString( argument );
+  ship->description     = CopyString( "" );
+  ship->owner   = CopyString( "" );
+  ship->copilot       = CopyString( "" );
+  ship->pilot         = CopyString( "" );
+  ship->home          = CopyString( "" );
   ship->type          = SHIP_CIVILIAN;
   ship->energy = ship->maxenergy;
   ship->hull = ship->maxhull;
 
-  ship->filename = str_dup( arg );
+  ship->filename = CopyString( arg );
   SaveShip( ship );
   WriteShipList();
 }

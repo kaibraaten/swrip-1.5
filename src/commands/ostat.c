@@ -9,7 +9,7 @@ void do_ostat( Character *ch, char *argument )
   OBJ_DATA *obj = NULL;
   const char *pdesc = NULL;
 
-  one_argument( argument, arg );
+  OneArgument( argument, arg );
 
   if ( arg[0] == '\0' )
     {
@@ -52,8 +52,8 @@ void do_ostat( Character *ch, char *argument )
   if ( obj->action_desc[0] != '\0' )
     ch_printf( ch, "Action description: %s.\r\n", obj->action_desc );
 
-  ch_printf( ch, "Wear flags : %s\r\n", flag_string(obj->wear_flags, wear_flags) );
-  ch_printf( ch, "Extra flags: %s\r\n", flag_string(obj->extra_flags, object_flags) );
+  ch_printf( ch, "Wear flags : %s\r\n", FlagString(obj->wear_flags, wear_flags) );
+  ch_printf( ch, "Extra flags: %s\r\n", FlagString(obj->extra_flags, object_flags) );
 
   ch_printf( ch, "Number: %d/%d.  Weight: %d/%d.  Layers: %d\r\n",
              1,           get_obj_number( obj ),

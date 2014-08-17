@@ -52,7 +52,7 @@ void do_for(Character *ch, char *argument)
   Character *p, *p_prev;  /* p_next to p_prev -- TRI */
   int i;
 
-  argument = one_argument (argument, range);
+  argument = OneArgument (argument, range);
 
   if (!range[0] || !argument[0]) /* invalid usage? */
     {
@@ -60,25 +60,25 @@ void do_for(Character *ch, char *argument)
       return;
     }
 
-  if (!str_prefix("quit", argument))
+  if (!StringPrefix("quit", argument))
     {
       send_to_char ("Are you trying to crash the MUD or something?\r\n",ch);
       return;
     }
 
 
-  if (!str_cmp (range, "all"))
+  if (!StrCmp (range, "all"))
     {
       fMortals = true;
       fGods = true;
     }
-  else if (!str_cmp (range, "gods"))
+  else if (!StrCmp (range, "gods"))
     fGods = true;
-  else if (!str_cmp (range, "mortals"))
+  else if (!StrCmp (range, "mortals"))
     fMortals = true;
-  else if (!str_cmp (range, "mobs"))
+  else if (!StrCmp (range, "mobs"))
     fMobs = true;
-  else if (!str_cmp (range, "everywhere"))
+  else if (!StrCmp (range, "everywhere"))
     fEverywhere = true;
   else
     do_help (ch, "for"); /* show syntax */
@@ -206,7 +206,7 @@ static const char * name_expand (Character *ch)
   if (!IsNpc(ch))
     return ch->name;
 
-  one_argument (ch->name, name); /* copy the first word into name */
+  OneArgument (ch->name, name); /* copy the first word into name */
 
   if (!name[0]) /* weird mob .. no keywords */
     {
@@ -217,7 +217,7 @@ static const char * name_expand (Character *ch)
   /* ->people changed to ->first_person -- TRI */
   for (rch = ch->in_room->first_person; rch && (rch != ch);rch =
          rch->next_in_room)
-    if (is_name (name, rch->name))
+    if ( IsName(name, rch->name))
       count++;
 
   sprintf (outbuf, "%d.%s", count, name);

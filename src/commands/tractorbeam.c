@@ -63,7 +63,7 @@ void do_tractorbeam(Character *ch, char *argument )
           return;
         }
 
-      if ( !str_cmp( arg, "none") )
+      if ( !StrCmp( arg, "none") )
         {
           send_to_char("&GTractorbeam set to no target.\r\n",ch);
           if( ship->tractored && ship->tractored->tractoredby == ship )
@@ -106,12 +106,12 @@ void do_tractorbeam(Character *ch, char *argument )
           return;
         }
 
-      if ( !str_cmp(ship->owner, "Trainer") && str_cmp(target->owner, "Trainer") )
+      if ( !StrCmp(ship->owner, "Trainer") && StrCmp(target->owner, "Trainer") )
         {
           send_to_char("&RTrainers can only target other trainers!\r\n",ch);
           return;
         }
-      if ( str_cmp(ship->owner, "Trainer") && !str_cmp(target->owner, "Trainer") )
+      if ( StrCmp(ship->owner, "Trainer") && !StrCmp(target->owner, "Trainer") )
         {
           send_to_char("&ROnly trainers can target other trainers!\r\n",ch);
           return;
@@ -135,13 +135,13 @@ void do_tractorbeam(Character *ch, char *argument )
       the_chance = IsNpc(ch) ? ch->top_level
         : (int)  (ch->pcdata->learned[gsn_tractorbeams]) ;
 
-      if ( number_percent( ) < the_chance )
+      if ( GetRandomPercent( ) < the_chance )
         {
           send_to_char( "&GTracking target.\r\n", ch);
           act( AT_PLAIN, "$n makes some adjustments on the targeting computer.", ch,
                NULL, argument , TO_ROOM );
           add_timer ( ch , TIMER_DO_FUN , 1 , do_tractorbeam , SUB_PAUSE );
-          ch->dest_buf = str_dup(arg);
+          ch->dest_buf = CopyString(arg);
           return;
         }
       send_to_char("&RYou fail to work the controls properly.\r\n",ch);
@@ -188,7 +188,7 @@ void do_tractorbeam(Character *ch, char *argument )
   the_chance /= 2;
   the_chance = urange( 1 , the_chance , 99 );
 
-  if ( number_percent( ) >= the_chance )
+  if ( GetRandomPercent( ) >= the_chance )
     {
       send_to_char("&RYou fail to work the controls properly.\r\n",ch);
       learn_from_failure( ch, gsn_tractorbeams );
@@ -218,7 +218,7 @@ void do_tractorbeam(Character *ch, char *argument )
 
   learn_from_success( ch, gsn_tractorbeams );
 
-  if ( IsShipAutoflying(target) && !target->target0 && str_cmp( target->owner, ship->owner ) )
+  if ( IsShipAutoflying(target) && !target->target0 && StrCmp( target->owner, ship->owner ) )
     {
       sprintf( buf , "You are being targetted by %s." , target->name);
       EchoToCockpit( AT_BLOOD , ship , buf );

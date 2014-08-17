@@ -9,8 +9,8 @@ void do_repairset( Character *ch, char *argument )
   short vnum;
   int value;
 
-  argument = one_argument( argument, arg1 );
-  argument = one_argument( argument, arg2 );
+  argument = OneArgument( argument, arg1 );
+  argument = OneArgument( argument, arg2 );
 
   if ( arg1[0] == '\0' || arg2[0] == '\0' )
     {
@@ -39,9 +39,9 @@ void do_repairset( Character *ch, char *argument )
   repair = mob->rShop;
   value = atoi( argument );
 
-  if ( !str_cmp( arg2, "fix0" ) )
+  if ( !StrCmp( arg2, "fix0" ) )
     {
-      if ( !is_number(argument) )
+      if ( !IsNumber(argument) )
         value = get_objecttype(argument);
       if ( value < 0 || value > MAX_ITEM_TYPE )
         {
@@ -53,9 +53,9 @@ void do_repairset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "fix1" ) )
+  if ( !StrCmp( arg2, "fix1" ) )
     {
-      if ( !is_number(argument) )
+      if ( !IsNumber(argument) )
         value = get_objecttype(argument);
       if ( value < 0 || value > MAX_ITEM_TYPE )
         {
@@ -67,9 +67,9 @@ void do_repairset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "fix2" ) )
+  if ( !StrCmp( arg2, "fix2" ) )
     {
-      if ( !is_number(argument) )
+      if ( !IsNumber(argument) )
         value = get_objecttype(argument);
       if ( value < 0 || value > MAX_ITEM_TYPE )
         {
@@ -81,7 +81,7 @@ void do_repairset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "profit" ) )
+  if ( !StrCmp( arg2, "profit" ) )
     {
       if ( value < 1 || value > 1000 )
         {
@@ -93,7 +93,7 @@ void do_repairset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "type" ) )
+  if ( !StrCmp( arg2, "type" ) )
     {
       if ( value < 1 || value > 2 )
         {
@@ -105,7 +105,7 @@ void do_repairset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "open" ) )
+  if ( !StrCmp( arg2, "open" ) )
     {
       if ( value < 0 || value > 23 )
         {
@@ -117,7 +117,7 @@ void do_repairset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "close" ) )
+  if ( !StrCmp( arg2, "close" ) )
     {
       if ( value < 0 || value > 23 )
         {
@@ -129,7 +129,7 @@ void do_repairset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "keeper" ) )
+  if ( !StrCmp( arg2, "keeper" ) )
     {
       if ( (mob2 = get_mob_index(vnum)) == NULL )
         {

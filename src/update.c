@@ -743,7 +743,7 @@ void gain_condition( Character *ch, int iCond, int value )
               set_char_color( AT_HUNGRY, ch );
               send_to_char( "You are really hungry.\r\n",  ch );
 
-              if ( number_bits(1) == 0 )
+              if ( NumberBits(1) == 0 )
 		{
 		  WorsenMentalState( ch, 1 );
 		}
@@ -1032,7 +1032,7 @@ void mobile_update( void )
       /* Scavenge */
       if ( IsBitSet(ch->act, ACT_SCAVENGER)
            && ch->in_room->first_content
-           && number_bits( 2 ) == 0 )
+           && NumberBits( 2 ) == 0 )
         {
           OBJ_DATA *obj = NULL;
           OBJ_DATA *obj_best = NULL;
@@ -1060,7 +1060,7 @@ void mobile_update( void )
       if ( !IsBitSet(ch->act, ACT_RUNNING)
            && !IsBitSet(ch->act, ACT_SENTINEL)
            && !IsBitSet(ch->act, ACT_PROTOTYPE)
-           && ( door = number_bits( 5 ) ) <= 9
+           && ( door = NumberBits( 5 ) ) <= 9
            && ( pexit = get_exit(ch->in_room, door) ) != NULL
            && pexit->to_room
            && !IsBitSet(pexit->exit_info, EX_CLOSED)
@@ -1088,7 +1088,7 @@ void mobile_update( void )
 
       /* Flee */
       if ( ch->hit < ch->max_hit / 2
-           && ( door = number_bits( 4 ) ) <= 9
+           && ( door = NumberBits( 4 ) ) <= 9
            && ( pexit = get_exit(ch->in_room,door) ) != NULL
            && pexit->to_room
            && !IsBitSet(pexit->exit_info, EX_CLOSED)
@@ -1103,7 +1103,7 @@ void mobile_update( void )
             {
               if ( is_fearing(ch, rch) )
                 {
-                  switch( number_bits(2) )
+                  switch( NumberBits(2) )
                     {
                     case 0:
                       sprintf( buf, "Get away from me, %s!", rch->name );
@@ -1287,7 +1287,7 @@ void weather_update( void )
       diff = weather_info.mmhg > 1015 ? -2 : 2;
     }
 
-  weather_info.change += diff * dice(1, 4) + dice(2, 6) - dice(2, 6);
+  weather_info.change += diff * RollDice(1, 4) + RollDice(2, 6) - RollDice(2, 6);
   weather_info.change  = umax(weather_info.change, -12);
   weather_info.change  = umin(weather_info.change,  12);
 
@@ -1306,7 +1306,7 @@ void weather_update( void )
 
     case SKY_CLOUDLESS:
       if ( weather_info.mmhg <  990
-           || ( weather_info.mmhg < 1010 && number_bits( 2 ) == 0 ) )
+           || ( weather_info.mmhg < 1010 && NumberBits( 2 ) == 0 ) )
         {
           strcat( buf, "The sky is getting cloudy." );
           weather_info.sky = SKY_CLOUDY;
@@ -1316,14 +1316,14 @@ void weather_update( void )
 
     case SKY_CLOUDY:
       if ( weather_info.mmhg <  970
-           || ( weather_info.mmhg <  990 && number_bits( 2 ) == 0 ) )
+           || ( weather_info.mmhg <  990 && NumberBits( 2 ) == 0 ) )
         {
           strcat( buf, "It starts to rain." );
           weather_info.sky = SKY_RAINING;
           AT_TEMP = AT_BLUE;
         }
 
-      if ( weather_info.mmhg > 1030 && number_bits( 2 ) == 0 )
+      if ( weather_info.mmhg > 1030 && NumberBits( 2 ) == 0 )
         {
           strcat( buf, "The clouds disappear." );
           weather_info.sky = SKY_CLOUDLESS;
@@ -1332,7 +1332,7 @@ void weather_update( void )
       break;
 
     case SKY_RAINING:
-      if ( weather_info.mmhg <  970 && number_bits( 2 ) == 0 )
+      if ( weather_info.mmhg <  970 && NumberBits( 2 ) == 0 )
         {
           strcat( buf, "Lightning flashes in the sky." );
           weather_info.sky = SKY_LIGHTNING;
@@ -1340,7 +1340,7 @@ void weather_update( void )
         }
 
       if ( weather_info.mmhg > 1030
-           || ( weather_info.mmhg > 1010 && number_bits( 2 ) == 0 ) )
+           || ( weather_info.mmhg > 1010 && NumberBits( 2 ) == 0 ) )
         {
           strcat( buf, "The rain stopped." );
           weather_info.sky = SKY_CLOUDY;
@@ -1350,7 +1350,7 @@ void weather_update( void )
 
     case SKY_LIGHTNING:
       if ( weather_info.mmhg > 1010
-           || ( weather_info.mmhg >  990 && number_bits( 2 ) == 0 ) )
+           || ( weather_info.mmhg >  990 && NumberBits( 2 ) == 0 ) )
         {
           strcat( buf, "The lightning has stopped." );
           weather_info.sky = SKY_RAINING;
@@ -1513,7 +1513,7 @@ void char_update( void )
 		  break;
 
                 case POS_FIGHTING:
-                  if ( number_bits(2) == 0 )
+                  if ( NumberBits(2) == 0 )
 		    {
 		      ImproveMentalState( ch, 1 );
 		    }
@@ -1543,7 +1543,7 @@ void char_update( void )
 		  break;
 
                 case POS_FIGHTING:
-                  if ( number_bits(2) == 0 )
+                  if ( NumberBits(2) == 0 )
 		    {
 		      ImproveMentalState( ch, 1 );
 		    }
@@ -1569,7 +1569,7 @@ void char_update( void )
 
 		case SECT_UNDERWATER:
 		case SECT_OCEANFLOOR:
-		  if ( number_bits(1) == 0 )
+		  if ( NumberBits(1) == 0 )
 		    {
 		      gain_condition( ch, COND_THIRST, -1 );
 		    }
@@ -1662,7 +1662,7 @@ void char_update( void )
                   {
                     if ( (ch->position == POS_STANDING
                           || ch->position < POS_FIGHTING)
-                         && number_percent()+10 < abs(ch->mental_state) )
+                         && GetRandomPercent()+10 < abs(ch->mental_state) )
 		      {
 			do_sleep( ch, "" );
 		      }
@@ -1678,7 +1678,7 @@ void char_update( void )
                   {
                     if ( (ch->position == POS_STANDING
                           || ch->position < POS_FIGHTING)
-                         && (number_percent()+20) < abs(ch->mental_state) )
+                         && (GetRandomPercent()+20) < abs(ch->mental_state) )
 		      {
 			do_sleep( ch, "" );
 		      }
@@ -1693,7 +1693,7 @@ void char_update( void )
                 if ( ch->position > POS_SLEEPING )
                   {
                     if ( ch->position < POS_SITTING
-                         &&  (number_percent()+30) < abs(ch->mental_state) )
+                         &&  (GetRandomPercent()+30) < abs(ch->mental_state) )
 		      {
 			do_sleep( ch, "" );
 		      }
@@ -1897,9 +1897,9 @@ void obj_update( void )
               char name[MAX_STRING_LENGTH];
               char *bufptr = NULL;
 
-              bufptr = one_argument( obj->short_descr, name );
-              bufptr = one_argument( bufptr, name );
-              bufptr = one_argument( bufptr, name );
+              bufptr = OneArgument( obj->short_descr, name );
+              bufptr = OneArgument( bufptr, name );
+              bufptr = OneArgument( bufptr, name );
 
               separate_obj(obj);
               obj->value[OVAL_CORPSE_DECAY] = timerfrac;
@@ -1912,11 +1912,11 @@ void obj_update( void )
               else
 		{
 		  sprintf( buf, corpse_descs[ umin( timerfrac - 1, 4 ) ],
-			   capitalize( bufptr ) );
+			   Capitalize( bufptr ) );
 		}
 
               DISPOSE( obj->description );
-              obj->description = str_dup( buf );
+              obj->description = CopyString( buf );
             }
         }
 
@@ -2150,7 +2150,7 @@ void char_check( void )
 
               if ( !IsBitSet(ch->act, ACT_SENTINEL)
                    && !IsBitSet(ch->act, ACT_PROTOTYPE)
-                   && ( door = number_bits( 4 ) ) <= 9
+                   && ( door = NumberBits( 4 ) ) <= 9
                    && ( pexit = get_exit(ch->in_room, door) ) != NULL
                    && pexit->to_room
                    && !IsBitSet(pexit->exit_info, EX_CLOSED)
@@ -2193,7 +2193,7 @@ void char_check( void )
                 {
                   if ( GetTrustLevel(ch) < LEVEL_IMMORTAL )
                     {
-		      int dam = number_range( ch->max_hit / 50 , ch->max_hit / 30 );
+		      int dam = GetRandomNumberFromRange( ch->max_hit / 50 , ch->max_hit / 30 );
                       dam = umax( 1, dam );
 
                       if(  ch->hit <= 0 )
@@ -2201,7 +2201,7 @@ void char_check( void )
 			  dam = umin( 10, dam );
 			}
 
-                      if ( number_bits(3) == 0 )
+                      if ( NumberBits(3) == 0 )
 			{
 			  send_to_char( "You cough and choke as you try to breathe water!\r\n", ch );
 			}
@@ -2235,7 +2235,7 @@ void char_check( void )
 			}
                       else
                         {
-                          dam = number_range( ch->max_hit / 50, ch->max_hit / 30 );
+                          dam = GetRandomNumberFromRange( ch->max_hit / 50, ch->max_hit / 30 );
                           dam = umax( 1, dam );
 
                           if( ch->hit <= 0 )
@@ -2243,7 +2243,7 @@ void char_check( void )
 			      dam = umin( 10, dam );
 			    }
 
-                          if ( number_bits(3) == 0 )
+                          if ( NumberBits(3) == 0 )
 			    {
 			      send_to_char( "Struggling with exhaustion, you choke on a mouthful of water.\r\n", ch );
 			    }
@@ -2383,7 +2383,7 @@ void aggr_update( void )
                   SetWaitState( ch, skill_table[gsn_backstab]->beats );
 
                   if ( !IsAwake(victim)
-                       || number_percent( )+5 < ch->top_level )
+                       || GetRandomPercent( )+5 < ch->top_level )
                     {
                       global_retcode = multi_hit( ch, victim, gsn_backstab );
                       continue;
@@ -2425,7 +2425,7 @@ void drunk_randoms( Character *ch )
       return;
     }
 
-  if ( number_percent() < 30 )
+  if ( GetRandomPercent() < 30 )
     {
       return;
     }
@@ -2434,30 +2434,30 @@ void drunk_randoms( Character *ch )
   position = ch->position;
   ch->position = POS_STANDING;
 
-  if ( number_percent() < (2*drunk / 20) )
+  if ( GetRandomPercent() < (2*drunk / 20) )
     {
       check_social( ch, "burp", "" );
     }
-  else if ( number_percent() < (2*drunk / 20) )
+  else if ( GetRandomPercent() < (2*drunk / 20) )
     {
       check_social( ch, "hiccup", "" );
     }
-  else if ( number_percent() < (2*drunk / 20) )
+  else if ( GetRandomPercent() < (2*drunk / 20) )
     {
       check_social( ch, "drool", "" );
     }
-  else if ( number_percent() < (2*drunk / 20) )
+  else if ( GetRandomPercent() < (2*drunk / 20) )
     {
       check_social( ch, "fart", "" );
     }
   else if ( drunk > (10+(GetCurrentConstitution(ch)/5))
-	    && number_percent() < ( 2 * drunk / 18 ) )
+	    && GetRandomPercent() < ( 2 * drunk / 18 ) )
     {
       char name[MAX_STRING_LENGTH];
 
       for ( vch = ch->in_room->first_person; vch; vch = vch->next_in_room )
 	{
-	  if ( number_percent() < 10 )
+	  if ( GetRandomPercent() < 10 )
 	    {
 	      rvch = vch;
 	    }
@@ -2473,11 +2473,11 @@ void drunk_randoms( Character *ch )
 void halucinations( Character *ch )
 {
   if ( ch->mental_state >= 30
-       && number_bits(5 - (ch->mental_state >= 50) - (ch->mental_state >= 75)) == 0 )
+       && NumberBits(5 - (ch->mental_state >= 50) - (ch->mental_state >= 75)) == 0 )
     {
       const char *t;
 
-      switch( number_range( 1, umin(20, (ch->mental_state+5) / 5)) )
+      switch( GetRandomNumberFromRange( 1, umin(20, (ch->mental_state+5) / 5)) )
         {
         default:
         case 1:
@@ -2623,7 +2623,7 @@ void update_handler( void )
 
   if ( --pulse_area <= 0 )
     {
-      pulse_area = number_range( PULSE_AREA / 2, 3 * PULSE_AREA / 2 );
+      pulse_area = GetRandomNumberFromRange( PULSE_AREA / 2, 3 * PULSE_AREA / 2 );
       area_update();
     }
 
@@ -2668,7 +2668,7 @@ void update_handler( void )
 
   if ( --pulse_point <= 0 )
     {
-      pulse_point = number_range( PULSE_TICK * 0.75, PULSE_TICK * 1.25 );
+      pulse_point = GetRandomNumberFromRange( PULSE_TICK * 0.75, PULSE_TICK * 1.25 );
 
       weather_update();
       char_update();
@@ -2719,7 +2719,7 @@ void update_handler( void )
       gettimeofday(&etime, NULL);
       set_char_color(AT_PLAIN, timechar);
       send_to_char( "Update timing complete.\r\n", timechar );
-      subtract_times(&etime, &start_time);
+      SubtractTimes(&etime, &start_time);
       ch_printf( timechar, "Timing took %d.%06d seconds.\r\n",
                  etime.tv_sec, etime.tv_usec );
       timechar = NULL;
@@ -2803,7 +2803,7 @@ void reboot_check( time_t reset )
   if ( (current_time % 1800) == 0 )
     {
       sprintf(buf, "%.24s: %d players", ctime(&current_time), num_descriptors);
-      append_to_file(USAGE_FILE, buf);
+      AppendToFile(USAGE_FILE, buf);
     }
 
   if ( new_boot_time_t - boot_time < 60 * 60 * 18

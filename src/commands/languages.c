@@ -7,15 +7,15 @@ void do_languages( Character *ch, char *argument )
   int lang;
   int sn;
 
-  argument = one_argument( argument, arg );
-  if ( arg[0] != '\0' && !str_prefix( arg, "learn" ) &&
+  argument = OneArgument( argument, arg );
+  if ( arg[0] != '\0' && !StringPrefix( arg, "learn" ) &&
        !IsImmortal(ch) && !IsNpc(ch) )
     {
       Character *sch;
       char arg2[MAX_INPUT_LENGTH];
       int prct;
 
-      argument = one_argument( argument, arg2 );
+      argument = OneArgument( argument, arg2 );
       if ( arg2[0] == '\0' )
         {
           send_to_char( "Learn which language?\r\n", ch );
@@ -25,7 +25,7 @@ void do_languages( Character *ch, char *argument )
         {
           if ( lang_array[lang] == LANG_CLAN )
             continue;
-          if ( !str_prefix( arg2, lang_names[lang] ) )
+          if ( !StringPrefix( arg2, lang_names[lang] ) )
             break;
         }
       if ( lang_array[lang] == LANG_UNKNOWN )

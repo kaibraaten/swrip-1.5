@@ -42,7 +42,7 @@ void do_placevendor (Character *ch, char *argument)
       return;
     }
 
-  sprintf( strsave, "%s/%s", VENDOR_DIR, capitalize( ch->name ) );
+  sprintf( strsave, "%s/%s", VENDOR_DIR, Capitalize( ch->name ) );
 
   if ( stat( strsave, &fst ) != -1 )
     {
@@ -62,11 +62,11 @@ void do_placevendor (Character *ch, char *argument)
   vendor = get_char_room(ch, temp->player_name);
 
   sprintf (buf, vendor->long_descr, ch->name);
-  vendor->long_descr =  str_dup( buf );
+  vendor->long_descr =  CopyString( buf );
 
   sprintf (buf, "%s", ch->name);
 
-  vendor->owner = str_dup(buf);
+  vendor->owner = CopyString(buf);
   vendor->home = ch->in_room;
 
   SaveVendor (vendor);

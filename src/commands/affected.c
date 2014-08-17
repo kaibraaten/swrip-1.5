@@ -10,14 +10,14 @@ void do_affected ( Character *ch, char *argument )
   if ( IsNpc(ch) )
     return;
 
-  argument = one_argument( argument, arg );
+  argument = OneArgument( argument, arg );
 
-  if ( !str_cmp( arg, "by" ) )
+  if ( !StrCmp( arg, "by" ) )
     {
       set_char_color( AT_BLUE, ch );
       send_to_char( "\r\nImbued with:\r\n", ch );
       set_char_color( AT_SCORE, ch );
-      ch_printf( ch, "%s\r\n", flag_string( ch->affected_by, affected_flags ) );
+      ch_printf( ch, "%s\r\n", FlagString( ch->affected_by, affected_flags ) );
       if ( ch->top_level >= 20 )
         {
           send_to_char( "\r\n", ch );
@@ -26,21 +26,21 @@ void do_affected ( Character *ch, char *argument )
               set_char_color ( AT_BLUE, ch );
               send_to_char( "Resistances:  ", ch );
               set_char_color( AT_SCORE, ch );
-              ch_printf( ch, "%s\r\n", flag_string(ch->resistant, ris_flags) );
+              ch_printf( ch, "%s\r\n", FlagString(ch->resistant, ris_flags) );
             }
           if ( ch->immune > 0 )
             {
               set_char_color( AT_BLUE, ch );
               send_to_char( "Immunities:   ", ch);
 	      set_char_color( AT_SCORE, ch );
-              ch_printf( ch, "%s\r\n", flag_string(ch->immune, ris_flags) );
+              ch_printf( ch, "%s\r\n", FlagString(ch->immune, ris_flags) );
             }
           if ( ch->susceptible > 0 )
             {
               set_char_color( AT_BLUE, ch );
               send_to_char( "Suscepts:     ", ch );
               set_char_color( AT_SCORE, ch );
-              ch_printf( ch, "%s\r\n", flag_string(ch->susceptible, ris_flags) );
+              ch_printf( ch, "%s\r\n", FlagString(ch->susceptible, ris_flags) );
             }
         }
       return;

@@ -20,8 +20,8 @@ void do_setshuttle(Character * ch, char * argument)
       return;
     }
 
-  argument = one_argument( argument, arg1 );
-  argument = one_argument( argument, arg2 );
+  argument = OneArgument( argument, arg1 );
+  argument = OneArgument( argument, arg2 );
 
   if ( arg1[0] == '\0' || arg2[0] == '\0' || argument[0] == '\0')
     {
@@ -53,9 +53,9 @@ void do_setshuttle(Character * ch, char * argument)
       return;
     }
 
-  value = is_number( argument ) ? atoi( argument ) : -1;
+  value = IsNumber( argument ) ? atoi( argument ) : -1;
 
-  if (!str_cmp(arg2, "firstroom"))
+  if (!StrCmp(arg2, "firstroom"))
     {
       if (value > shuttle->room.last)
         {
@@ -65,7 +65,7 @@ void do_setshuttle(Character * ch, char * argument)
 
       shuttle->room.first = value;
     }
-  else if (!str_cmp(arg2, "lastroom"))
+  else if (!StrCmp(arg2, "lastroom"))
     {
       if (value < shuttle->room.first)
         {
@@ -75,7 +75,7 @@ void do_setshuttle(Character * ch, char * argument)
 
       shuttle->room.last = value;
     }
-  else if (!str_cmp(arg2, "entrance"))
+  else if (!StrCmp(arg2, "entrance"))
     {
       if (value > shuttle->room.last
           || value < shuttle->room.first )
@@ -86,21 +86,21 @@ void do_setshuttle(Character * ch, char * argument)
 
       shuttle->room.entrance = value;
     }
-  else if (!str_cmp(arg2, "delay"))
+  else if (!StrCmp(arg2, "delay"))
     {
       shuttle->delay = value;
       shuttle->current_delay = shuttle->delay;
     }
-  else if (!str_cmp(arg2, "name"))
+  else if (!StrCmp(arg2, "name"))
     {
       if (shuttle->name)
 	{
 	  DISPOSE(shuttle->name);
 	}
 
-      shuttle->name = str_dup(argument);
+      shuttle->name = CopyString(argument);
     }
-  else if (!str_cmp(arg2, "filename"))
+  else if (!StrCmp(arg2, "filename"))
     {
       if (shuttle->filename && shuttle->filename[0] != '\0')
         {
@@ -110,20 +110,20 @@ void do_setshuttle(Character * ch, char * argument)
           DISPOSE(shuttle->filename);
         }
 
-      shuttle->filename = str_dup(argument);
+      shuttle->filename = CopyString(argument);
       WriteShuttleList();
     }
-  else if (!str_cmp(arg2, "type"))
+  else if (!StrCmp(arg2, "type"))
     {
-      if (!str_cmp(argument, "turbocar"))
+      if (!StrCmp(argument, "turbocar"))
 	{
 	  shuttle->type = SHUTTLE_TURBOCAR;
 	}
-      else if (!str_cmp(argument, "space"))
+      else if (!StrCmp(argument, "space"))
 	{
 	  shuttle->type = SHUTTLE_SPACE;
 	}
-      else if (!str_cmp(argument, "hyperspace"))
+      else if (!StrCmp(argument, "hyperspace"))
 	{
 	  shuttle->type = SHUTTLE_HYPERSPACE;
 	}
@@ -133,16 +133,16 @@ void do_setshuttle(Character * ch, char * argument)
           return;
         }
     }
-  else if (!str_cmp(arg2, "remove"))
+  else if (!StrCmp(arg2, "remove"))
     {
       DestroyShuttle(shuttle);
       send_to_char("Shuttle Removed.\r\n", ch);
       return;
     }
-  else if (!str_cmp(arg2, "stop"))
+  else if (!StrCmp(arg2, "stop"))
     {
       ShuttleStop * stop = NULL;
-      argument = one_argument(argument, arg1);
+      argument = OneArgument(argument, arg1);
 
       if (arg1[0] == '\0' || argument[0] == '\0')
         {
@@ -153,7 +153,7 @@ void do_setshuttle(Character * ch, char * argument)
           return;
         }
 
-      if (!str_cmp(arg1, "add"))
+      if (!StrCmp(arg1, "add"))
         {
           stop = AllocateShuttleStop();
 
@@ -162,7 +162,7 @@ void do_setshuttle(Character * ch, char * argument)
 	      DISPOSE( stop->stop_name );
 	    }
 
-          stop->stop_name = str_dup("Stopless Name");
+          stop->stop_name = CopyString("Stopless Name");
           stop->room = 2;
           LINK( stop, shuttle->first_stop, shuttle->last_stop, next, prev );
 
@@ -181,7 +181,7 @@ void do_setshuttle(Character * ch, char * argument)
 	      return;
 	    }
 
-	  value = is_number( arg1 ) ? atoi( arg1 ) : -1;
+	  value = IsNumber( arg1 ) ? atoi( arg1 ) : -1;
 
 	  for (stop = shuttle->first_stop; stop; stop = stop->next)
 	    {
@@ -199,23 +199,23 @@ void do_setshuttle(Character * ch, char * argument)
 	      return;
 	    }
 
-	  argument = one_argument(argument, arg2);
+	  argument = OneArgument(argument, arg2);
 
-	  if (!str_cmp(arg2, "name"))
+	  if (!StrCmp(arg2, "name"))
 	    {
 	      if (stop->stop_name)
 		{
 		  DISPOSE(stop->stop_name);
 		}
 
-	      stop->stop_name = str_dup(argument);
+	      stop->stop_name = CopyString(argument);
 	    }
-	  else if (!str_cmp(arg2, "room"))
+	  else if (!StrCmp(arg2, "room"))
 	    {
-	      value = is_number( argument ) ? atoi( argument ) : -1;
+	      value = IsNumber( argument ) ? atoi( argument ) : -1;
 	      stop->room = value;
 	    }
-	  else if (!str_cmp(arg2, "remove"))
+	  else if (!StrCmp(arg2, "remove"))
 	    {
 	      UNLINK(stop, shuttle->first_stop, shuttle->last_stop, next, prev);
 

@@ -15,8 +15,8 @@ void do_drag( Character *ch, char *argument )
   Room *fromroom;
   Ship *ship;
 
-  argument = one_argument( argument, arg );
-  argument = one_argument( argument, arg2 );
+  argument = OneArgument( argument, arg );
+  argument = OneArgument( argument, arg2 );
 
   if ( arg[0] == '\0' )
     {
@@ -66,7 +66,7 @@ void do_drag( Character *ch, char *argument )
   nogo = false;
   if ((pexit = get_exit(ch->in_room, exit_dir)) == NULL )
     {
-      if (!str_cmp( arg2, "in" ))
+      if (!StrCmp( arg2, "in" ))
         {
           if ( !argument || argument[0] == '\0')
             {
@@ -141,7 +141,7 @@ void do_drag( Character *ch, char *argument )
               return;
             }
         }
-      if (!str_cmp( arg2, "out" ))
+      if (!StrCmp( arg2, "out" ))
         {
           fromroom = ch->in_room;
 
@@ -252,7 +252,7 @@ void do_drag( Character *ch, char *argument )
     sprintf(buf, "Drag percentage of %s = %d", ch->name, drag_chance);
     act( AT_ACTION, buf, ch, NULL, NULL, TO_ROOM );
   */
-  if (drag_chance < number_percent( ))
+  if (drag_chance < GetRandomPercent( ))
     {
       send_to_char("You failed.\r\n", ch);
       return;

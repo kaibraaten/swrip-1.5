@@ -15,11 +15,11 @@ bool spec_thief( Character *ch )
       v_next = victim->next_in_room;
 
       if ( GetTrustLevel(victim) >= LEVEL_IMMORTAL
-           ||   number_bits( 2 ) != 0
+           ||   NumberBits( 2 ) != 0
            ||   !CanSeeCharacter( ch, victim ) )        /* Thx Glop */
         continue;
 
-      if ( IsAwake(victim) && number_range( 0, ch->top_level ) == 0 )
+      if ( IsAwake(victim) && GetRandomNumberFromRange( 0, ch->top_level ) == 0 )
         {
           act( AT_ACTION, "You discover $n's hands in your wallet!",
                ch, NULL, victim, TO_VICT );
@@ -30,7 +30,7 @@ bool spec_thief( Character *ch )
       else
         {
           maxgold = 1000;
-	  gold = victim->gold * number_range( 1, urange(2, ch->top_level/4, 10) ) / 100;
+	  gold = victim->gold * GetRandomNumberFromRange( 1, urange(2, ch->top_level/4, 10) ) / 100;
 	  ch->gold     += 9 * gold / 10;
 	  victim->gold -= gold;
 	  if ( ch->gold > maxgold )

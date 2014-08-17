@@ -18,8 +18,8 @@ void do_empower ( Character *ch , char *argument )
   clan = ch->pcdata->clan;
 
   if ( (ch->pcdata && ch->pcdata->bestowments
-        &&    is_name("empower", ch->pcdata->bestowments))
-       || !str_cmp( ch->name, clan->leadership.leader  ) )
+        &&    IsName("empower", ch->pcdata->bestowments))
+       || !StrCmp( ch->name, clan->leadership.leader  ) )
     ;
   else
     {
@@ -27,8 +27,8 @@ void do_empower ( Character *ch , char *argument )
       return;
     }
 
-  argument = one_argument( argument, arg );
-  argument = one_argument( argument, arg2 );
+  argument = OneArgument( argument, arg );
+  argument = OneArgument( argument, arg2 );
 
   if ( arg[0] == '\0' )
     {
@@ -61,9 +61,9 @@ void do_empower ( Character *ch , char *argument )
     }
 
   if (!victim->pcdata->bestowments)
-    victim->pcdata->bestowments = str_dup("");
+    victim->pcdata->bestowments = CopyString("");
 
-  if ( arg2[0] == '\0' || !str_cmp( arg2, "list" ) )
+  if ( arg2[0] == '\0' || !StrCmp( arg2, "list" ) )
     {
       ch_printf( ch, "Current bestowed commands on %s: %s.\r\n",
                  victim->name, victim->pcdata->bestowments );
@@ -74,80 +74,80 @@ void do_empower ( Character *ch , char *argument )
     }
 
   if ( (victim->pcdata && victim->pcdata->bestowments
-        &&    is_name(arg2, victim->pcdata->bestowments)) )
+        &&    IsName(arg2, victim->pcdata->bestowments)) )
     {
       send_to_char( "That player already has that power.\r\n", ch );
       return;
     }
 
 
-  if ( !str_cmp( arg2, "none" ) )
+  if ( !StrCmp( arg2, "none" ) )
     {
       DISPOSE( victim->pcdata->bestowments );
-      victim->pcdata->bestowments = str_dup("");
+      victim->pcdata->bestowments = CopyString("");
       ch_printf( ch, "Bestowments removed from %s.\r\n", victim->name );
       ch_printf( victim, "%s has removed your bestowed clan abilities.\r\n", ch->name );
       return;
     }
-  else if ( !str_cmp( arg2, "pilot" ) )
+  else if ( !StrCmp( arg2, "pilot" ) )
     {
       sprintf( buf, "%s %s", victim->pcdata->bestowments, arg2 );
       DISPOSE( victim->pcdata->bestowments );
-      victim->pcdata->bestowments = str_dup( buf );
+      victim->pcdata->bestowments = CopyString( buf );
       ch_printf( victim, "%s has given you permission to fly clan ships.\r\n",
                  ch->name );
       send_to_char( "Ok, they now have the ability to fly clan ships.\r\n", ch );
     }
-  else if ( !str_cmp( arg2, "withdraw" ) )
+  else if ( !StrCmp( arg2, "withdraw" ) )
     {
       sprintf( buf, "%s %s", victim->pcdata->bestowments, arg2 );
       DISPOSE( victim->pcdata->bestowments );
-      victim->pcdata->bestowments = str_dup( buf );
+      victim->pcdata->bestowments = CopyString( buf );
       ch_printf( victim, "%s has given you permission to withdraw clan funds.\r\n",
                  ch->name );
       send_to_char( "Ok, they now have the ablitity to withdraw clan funds.\r\n", ch );
     }
-  else if ( !str_cmp( arg2, "clanbuyship" ) )
+  else if ( !StrCmp( arg2, "clanbuyship" ) )
     {
       sprintf( buf, "%s %s", victim->pcdata->bestowments, arg2 );
       DISPOSE( victim->pcdata->bestowments );
-      victim->pcdata->bestowments = str_dup( buf );
+      victim->pcdata->bestowments = CopyString( buf );
       ch_printf( victim, "%s has given you permission to buy clan ships.\r\n",
                  ch->name );
       send_to_char( "Ok, they now have the ablitity to use clanbuyship.\r\n", ch );
     }
-  else if ( !str_cmp( arg2, "induct" ) )
+  else if ( !StrCmp( arg2, "induct" ) )
     {
       sprintf( buf, "%s %s", victim->pcdata->bestowments, arg2 );
       DISPOSE( victim->pcdata->bestowments );
-      victim->pcdata->bestowments = str_dup( buf );
+      victim->pcdata->bestowments = CopyString( buf );
       ch_printf( victim, "%s has given you permission to induct new members.\r\n",
                  ch->name );
       send_to_char( "Ok, they now have the ablitity to induct new members.\r\n", ch );
     }
-  else if ( !str_cmp( arg2, "empower" ) )
+  else if ( !StrCmp( arg2, "empower" ) )
     {
       sprintf( buf, "%s %s", victim->pcdata->bestowments, arg2 );
       DISPOSE( victim->pcdata->bestowments );
-      victim->pcdata->bestowments = str_dup( buf );
+      victim->pcdata->bestowments = CopyString( buf );
       ch_printf( victim, "%s has given you permission to empower members.\r\n",
                  ch->name );
       send_to_char( "Ok, they now have the ablitity to empower members.\r\n", ch );
     }
-  else if ( !str_cmp( arg2, "salary" ) )
+  else if ( !StrCmp( arg2, "salary" ) )
     {
       sprintf( buf, "%s %s", victim->pcdata->bestowments, arg2 );
       DISPOSE( victim->pcdata->bestowments );
-      victim->pcdata->bestowments = str_dup( buf );
+      victim->pcdata->bestowments = CopyString( buf );
       ch_printf( victim, "%s has given you permission to assign salaries.\r\n",
                  ch->name );
       send_to_char( "Ok, they now have the ablitity to assign salaries.\r\n", ch );
     }
-  else if ( !str_cmp( arg2, "roster" ) )
+  else if ( !StrCmp( arg2, "roster" ) )
     {
       sprintf( buf, "%s %s", victim->pcdata->bestowments, arg2 );
       DISPOSE( victim->pcdata->bestowments );
-      victim->pcdata->bestowments = str_dup( buf );
+      victim->pcdata->bestowments = CopyString( buf );
       ch_printf( victim, "%s has given you permission to access the roster.\r\n",
                  ch->name );
       send_to_char( "Ok, they now have the ablitity to access the roster.\r\n", ch );

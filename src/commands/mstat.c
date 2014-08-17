@@ -13,7 +13,7 @@ void do_mstat( Character *ch, char *argument )
 
   set_char_color( AT_PLAIN, ch );
 
-  one_argument( argument, arg );
+  OneArgument( argument, arg );
 
   if ( arg[0] == '\0' )
     {
@@ -134,8 +134,8 @@ void do_mstat( Character *ch, char *argument )
 
   if ( IsNpc( victim ) )
     {
-      ch_printf( ch, "Act flags: %s\r\n", flag_string(victim->act, act_flags) );
-      ch_printf( ch, "VIP flags: %s\r\n", flag_string(victim->vip_flags, planet_flags) );
+      ch_printf( ch, "Act flags: %s\r\n", FlagString(victim->act, act_flags) );
+      ch_printf( ch, "VIP flags: %s\r\n", FlagString(victim->vip_flags, planet_flags) );
     }
   else
     {
@@ -143,15 +143,15 @@ void do_mstat( Character *ch, char *argument )
                  GetAge( victim ), (int) victim->pcdata->played, victim->timer, victim->act );
 
       ch_printf( ch, "Player flags: %s\r\n",
-                 flag_string(victim->act, plr_flags) );
+                 FlagString(victim->act, plr_flags) );
       ch_printf( ch, "Pcflags: %s\r\n",
-                 flag_string(victim->pcdata->flags, pc_flags) );
+                 FlagString(victim->pcdata->flags, pc_flags) );
       ch_printf( ch, "Wanted flags: %s\r\n",
-                 flag_string(victim->pcdata->wanted_flags, planet_flags) );
+                 FlagString(victim->pcdata->wanted_flags, planet_flags) );
     }
 
   ch_printf( ch, "Affected by: %s\r\n",
-             flag_string( victim->affected_by, affected_flags ) );
+             FlagString( victim->affected_by, affected_flags ) );
   ch_printf( ch, "Speaks: %d   Speaking: %d\r\n",
              victim->speaks, victim->speaking );
   send_to_char( "Languages: ", ch );
@@ -200,17 +200,17 @@ void do_mstat( Character *ch, char *argument )
     }
 
   ch_printf( ch, "Body Parts : %s\r\n",
-             flag_string(victim->xflags, part_flags) );
+             FlagString(victim->xflags, part_flags) );
   ch_printf( ch, "Resistant  : %s\r\n",
-             flag_string(victim->resistant, ris_flags) );
+             FlagString(victim->resistant, ris_flags) );
   ch_printf( ch, "Immune     : %s\r\n",
-             flag_string(victim->immune, ris_flags) );
+             FlagString(victim->immune, ris_flags) );
   ch_printf( ch, "Susceptible: %s\r\n",
-             flag_string(victim->susceptible, ris_flags) );
+             FlagString(victim->susceptible, ris_flags) );
   ch_printf( ch, "Attacks    : %s\r\n",
-             flag_string(victim->attacks, attack_flags) );
+             FlagString(victim->attacks, attack_flags) );
   ch_printf( ch, "Defenses   : %s\r\n",
-             flag_string(victim->defenses, defense_flags) );
+             FlagString(victim->defenses, defense_flags) );
 
   for ( paf = victim->first_affect; paf; paf = paf->next )
     {
@@ -223,7 +223,7 @@ void do_mstat( Character *ch, char *argument )
 		     affect_loc_name( paf->location ),
 		     paf->modifier,
 		     paf->duration,
-		     flag_string( paf->bitvector, affected_flags )
+		     FlagString( paf->bitvector, affected_flags )
 		     );
 	}
     }

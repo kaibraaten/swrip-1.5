@@ -13,8 +13,8 @@ void do_setplanet( Character *ch, char *argument )
       return;
     }
 
-  argument = one_argument( argument, arg1 );
-  argument = one_argument( argument, arg2 );
+  argument = OneArgument( argument, arg1 );
+  argument = OneArgument( argument, arg2 );
 
   if ( arg1[0] == '\0' )
     {
@@ -33,16 +33,16 @@ void do_setplanet( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "name" ) )
+  if ( !StrCmp( arg2, "name" ) )
     {
       DISPOSE( planet->name );
-      planet->name = str_dup( argument );
+      planet->name = CopyString( argument );
       send_to_char( "Done.\r\n", ch );
       save_planet( planet );
       return;
     }
 
-  if ( !str_cmp( arg2, "governed_by" ) )
+  if ( !StrCmp( arg2, "governed_by" ) )
     {
       CLAN_DATA *clan = get_clan( argument );
 
@@ -60,7 +60,7 @@ void do_setplanet( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "spaceobject" ) )
+  if ( !StrCmp( arg2, "spaceobject" ) )
     {
       if ( (planet->spaceobject = spaceobject_from_name(argument)) )
         {
@@ -81,17 +81,17 @@ void do_setplanet( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "filename" ) )
+  if ( !StrCmp( arg2, "filename" ) )
     {
       DISPOSE( planet->filename );
-      planet->filename = str_dup( argument );
+      planet->filename = CopyString( argument );
       send_to_char( "Done.\r\n", ch );
       save_planet( planet );
       write_planet_list( );
       return;
     }
 
-  if ( !str_cmp( arg2, "base_value" ) )
+  if ( !StrCmp( arg2, "base_value" ) )
     {
       planet->base_value = atoi( argument );
       send_to_char( "Done.\r\n", ch );
@@ -99,11 +99,11 @@ void do_setplanet( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "flags" ) )
+  if ( !StrCmp( arg2, "flags" ) )
     {
       char farg[MAX_INPUT_LENGTH];
 
-      argument = one_argument( argument, farg);
+      argument = OneArgument( argument, farg);
 
       if ( farg[0] == '\0' )
         {
@@ -111,9 +111,9 @@ void do_setplanet( Character *ch, char *argument )
           return;
         }
 
-      for ( ; farg[0] != '\0'; argument = one_argument( argument, farg) )
+      for ( ; farg[0] != '\0'; argument = OneArgument( argument, farg) )
 	{
-          if ( !str_cmp( farg, "nocapture" ) )
+          if ( !StrCmp( farg, "nocapture" ) )
             {
               ToggleBit( planet->flags, PLANET_NOCAPTURE );
             }

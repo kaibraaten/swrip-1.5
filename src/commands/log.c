@@ -6,7 +6,7 @@ void do_log( Character *ch, char *argument )
   char arg[MAX_INPUT_LENGTH];
   Character *victim;
 
-  one_argument( argument, arg );
+  OneArgument( argument, arg );
 
   if ( arg[0] == '\0' )
     {
@@ -14,7 +14,7 @@ void do_log( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg, "all" ) )
+  if ( !StrCmp( arg, "all" ) )
     {
       if ( fLogAll )
         {

@@ -7,10 +7,10 @@ void do_drink( Character *ch, char *argument )
   OBJ_DATA *obj = NULL;
   int liquid = 0;
 
-  argument = one_argument( argument, arg );
+  argument = OneArgument( argument, arg );
   /* munch optional words */
-  if ( !str_cmp( arg, "from" ) && argument[0] != '\0' )
-    argument = one_argument( argument, arg );
+  if ( !StrCmp( arg, "from" ) && argument[0] != '\0' )
+    argument = OneArgument( argument, arg );
 
   if ( arg[0] == '\0' )
     {

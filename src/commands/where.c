@@ -14,7 +14,7 @@ void do_where( Character *ch, char *argument )
       return;
     }
 
-  one_argument( argument, arg );
+  OneArgument( argument, arg );
 
   set_pager_color( AT_PERSON, ch );
   if ( arg[0] == '\0' )
@@ -49,7 +49,7 @@ void do_where( Character *ch, char *argument )
              &&   !IsAffectedBy(victim, AFF_HIDE)
              &&   !IsAffectedBy(victim, AFF_SNEAK)
              &&   CanSeeCharacter( ch, victim )
-             &&   is_name( arg, victim->name ) )
+             &&   IsName( arg, victim->name ) )
           {
             found = true;
             pager_printf( ch, "%-28s %s\r\n",

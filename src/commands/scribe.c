@@ -16,7 +16,7 @@ void do_scribe( Character *ch, char *argument )
   if ( IsNpc(ch) )
     return;
 
-  if ( argument[0] == '\0' || !str_cmp(argument, "") )
+  if ( argument[0] == '\0' || !StrCmp(argument, "") )
     {
       send_to_char( "Scribe what?\r\n", ch );
       return;
@@ -79,7 +79,7 @@ void do_scribe( Character *ch, char *argument )
       return;
     }
 
-  if ( !IsNpc(ch) && number_percent( ) > ch->pcdata->learned[gsn_scribe] )
+  if ( !IsNpc(ch) && GetRandomPercent( ) > ch->pcdata->learned[gsn_scribe] )
     {
       set_char_color ( AT_MAGIC, ch );
       send_to_char("The magic surges outof control and destroys the scroll!.\r\n", ch);
@@ -95,13 +95,13 @@ void do_scribe( Character *ch, char *argument )
       scroll->value[0] = ch->top_level;
       sprintf(buf1, "scribed book" );
       DISPOSE(scroll->short_descr);
-      scroll->short_descr = str_dup( aoran(buf1) );
+      scroll->short_descr = CopyString( AOrAn(buf1) );
       sprintf(buf2, "A scribed book lies in the dust." );
       DISPOSE(scroll->description);
-      scroll->description = str_dup(buf2);
+      scroll->description = CopyString(buf2);
       sprintf(buf3, "scroll scribing scribed book %s", skill_table[sn]->name);
       DISPOSE(scroll->name);
-      scroll->name = str_dup(buf3);
+      scroll->name = CopyString(buf3);
 
       act( AT_MAGIC, "$n writes a book.",   ch, scroll, NULL, TO_ROOM );
       act( AT_MAGIC, "You write $p.",   ch, scroll, NULL, TO_CHAR );
@@ -113,7 +113,7 @@ void do_scribe( Character *ch, char *argument )
 
   if ( scroll->value[2] == -1 )
     {
-      if ( number_percent( ) > 50 )
+      if ( GetRandomPercent( ) > 50 )
         {
           set_char_color ( AT_MAGIC, ch );
           send_to_char("The magic surges out of control and destroys the book!.\r\n", ch);
@@ -138,7 +138,7 @@ void do_scribe( Character *ch, char *argument )
 
   if ( scroll->value[3] == -1 )
     {
-      if ( number_percent( ) > 30 )
+      if ( GetRandomPercent( ) > 30 )
         {
           set_char_color ( AT_MAGIC, ch );
           send_to_char("The magic surges outof control and destroys the scroll!.\r\n", ch);

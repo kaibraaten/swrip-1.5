@@ -44,7 +44,7 @@ static bool CaughtInGravity( const Ship *ship, const Spaceobject *space);
 static bool WillCollideWithSun( const Ship *ship, const Spaceobject *sun )
 {
   if ( sun->name
-       && str_cmp( sun->name, "" )
+       && StrCmp( sun->name, "" )
        && GetShipDistanceToSpaceobject( ship, sun ) < 10 )
     {
       return true;
@@ -130,7 +130,7 @@ void UpdateShipMovement( void )
 
 	      if( GetShipDistanceToShip( ship, ship->tractoredby ) < 10 )
                 {
-                  vector_copy( &ship->tractoredby->pos, &ship->pos );
+                  CopyVector( &ship->tractoredby->pos, &ship->pos );
                 }
             }
 
@@ -142,7 +142,7 @@ void UpdateShipMovement( void )
 
               if( GetShipDistanceToShip( ship, ship->tractoredby ) < 10 )
                 {
-                  vector_copy( &ship->pos, &ship->tractoredby->pos );
+                  CopyVector( &ship->pos, &ship->tractoredby->pos );
                 }
             }
         }
@@ -164,7 +164,7 @@ void UpdateShipMovement( void )
           if ( ship->currspeed > 0 )
             {
               if ( spaceobj->type >= SPACE_PLANET
-                   && spaceobj->name && str_cmp(spaceobj->name,"")
+                   && spaceobj->name && StrCmp(spaceobj->name,"")
                    && GetShipDistanceToSpaceobject( ship, spaceobj ) < 10 )
                 {
                   sprintf( buf, "You begin orbitting %s.", spaceobj->name);
@@ -195,11 +195,11 @@ void UpdateShipMovement( void )
 	  if ( dist == 0)
             dist = -1;
 
-          vector_set( &tmp,
+          SetVector( &tmp,
                       ship->pos.x - ship->jump.x,
                       ship->pos.y - ship->jump.y,
                       ship->pos.z - ship->jump.z );
-          vector_set( &ship->hyperpos,
+          SetVector( &ship->hyperpos,
                       ship->pos.x - ( tmp.x * ( dist / origdist ) ),
                       ship->pos.y - ( tmp.y * ( dist / origdist ) ),
                       ship->pos.z - ( tmp.z * ( dist / origdist ) ) );
@@ -217,17 +217,17 @@ void UpdateShipMovement( void )
 		  EchoToShip( AT_YELLOW, ship,
 				"The ship slams to a halt as it comes out of hyperspace." );
 		  sprintf( buf ,"%s enters the starsystem at %.0f %.0f %.0f" , ship->name, ship->pos.x, ship->pos.y, ship->pos.z );
-		  dmg = 15 * number_range( 1, 4 );
+		  dmg = 15 * GetRandomNumberFromRange( 1, 4 );
 		  ship->hull -= dmg;
 		  EchoToShip( AT_YELLOW, ship,
 				"The hull cracks from the pressure." );
-		  vector_copy( &ship->pos, &ship->hyperpos );
+		  CopyVector( &ship->pos, &ship->hyperpos );
 		  ShipToSpaceobject( ship, ship->currjump );
 		  ship->currjump = NULL;
 		  EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );
 		  ship->shipstate = SHIP_READY;
 		  DISPOSE( ship->home );
-		  ship->home = str_dup( ship->spaceobject->name );
+		  ship->home = CopyString( ship->spaceobject->name );
 		}
 	    }
 
@@ -248,13 +248,13 @@ void UpdateShipMovement( void )
                   EchoToShip( AT_YELLOW, ship, "The ship lurches slightly as it comes out of hyperspace.");
                   sprintf( buf ,"%s enters the starsystem at %.0f %.0f %.0f",
                            ship->name, ship->pos.x, ship->pos.y, ship->pos.z );
-                  vector_copy( &ship->hyperpos, &ship->pos );
+                  CopyVector( &ship->hyperpos, &ship->pos );
                   ShipToSpaceobject( ship, ship->currjump );
                   ship->currjump = NULL;
                   EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );
                   ship->shipstate = SHIP_READY;
                   DISPOSE( ship->home );
-                  ship->home = str_dup( ship->spaceobject->name );
+                  ship->home = CopyString( ship->spaceobject->name );
                 }
             }
           else if ( ( ship->count >= (ship->tcount ? ship->tcount : 10 ) )
@@ -273,15 +273,15 @@ void UpdateShipMovement( void )
                   EchoToShip( AT_YELLOW, ship, "The ship lurches slightly as it comes out of hyperspace.");
                   sprintf( buf ,"%s enters the starsystem at %.0f %.0f %.0f",
 			   ship->name, ship->pos.x, ship->pos.y, ship->pos.z );
-                  vector_copy( &ship->pos, &ship->hyperpos );
+                  CopyVector( &ship->pos, &ship->hyperpos );
                   ShipToSpaceobject( ship, ship->currjump );
                   ship->currjump = NULL;
                   EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );
                   ship->shipstate = SHIP_READY;
                   DISPOSE( ship->home );
-                  ship->home = str_dup( ship->spaceobject->name );
+                  ship->home = CopyString( ship->spaceobject->name );
 
-                  vector_set( &ship->jump,
+                  SetVector( &ship->jump,
                               ship->pos.x + ship->trackvector.x,
                               ship->pos.y + ship->trackvector.y,
                               ship->pos.z + ship->trackvector.z );
@@ -300,7 +300,7 @@ void UpdateShipMovement( void )
 		      ship->currjump = ship->spaceobject;
 		    }
 
-                  ship->hyperdistance = vector_distance( &ship->pos, &ship->jump ) / 50;
+                  ship->hyperdistance = GetDistanceBetweenVectors( &ship->pos, &ship->jump ) / 50;
                   ship->orighyperdistance = ship->hyperdistance;
                   ship->count = 0;
                   do_radar( ship->ch, "" );
@@ -330,11 +330,11 @@ void UpdateShipMovement( void )
       if( ship->docked )
         {
           Ship *docked = ship->docked;
-          vector_copy( &ship->pos, &docked->pos );
-          vector_copy( &ship->hyperpos, &docked->hyperpos );
-          vector_copy( &ship->originpos, &docked->originpos );
-          vector_copy( &ship->jump, &docked->jump );
-          vector_copy( &ship->head, &docked->head );
+          CopyVector( &ship->pos, &docked->pos );
+          CopyVector( &ship->hyperpos, &docked->hyperpos );
+          CopyVector( &ship->originpos, &docked->originpos );
+          CopyVector( &ship->jump, &docked->jump );
+          CopyVector( &ship->head, &docked->head );
 
           ship->shipstate = ship->docked->shipstate;
           ship->hyperdistance = ship->docked->hyperdistance;
@@ -373,17 +373,17 @@ static void LandShip( Ship *ship, const char *arg )
   vnum_t destination = INVALID_VNUM;
   Character *ch = NULL;
 
-  if ( !str_prefix(arg,ship->spaceobject->landing_site.locationa) )
+  if ( !StringPrefix(arg,ship->spaceobject->landing_site.locationa) )
     {
       destination = ship->spaceobject->landing_site.doca;
     }
 
-  if ( !str_prefix(arg,ship->spaceobject->landing_site.locationb) )
+  if ( !StringPrefix(arg,ship->spaceobject->landing_site.locationb) )
     {
       destination = ship->spaceobject->landing_site.docb;
     }
 
-  if ( !str_prefix(arg,ship->spaceobject->landing_site.locationc) )
+  if ( !StringPrefix(arg,ship->spaceobject->landing_site.locationc) )
     {
       destination = ship->spaceobject->landing_site.docc;
     }
@@ -452,8 +452,8 @@ static void LandShip( Ship *ship, const char *arg )
 
   ship->energy = ship->energy - 25 - 25*ship->sclass;
 
-  if ( !str_cmp("Public",ship->owner)
-       || !str_cmp("trainer",ship->owner)
+  if ( !StrCmp("Public",ship->owner)
+       || !StrCmp("trainer",ship->owner)
        || ship->sclass == SHIP_TRAINER )
     {
       int turret_num = 0;
@@ -494,9 +494,9 @@ static void ApproachLandingSite( Ship *ship, const char *arg)
     {
       if( IsSpaceobjectInRange( ship, spaceobj ) )
 	{
-	  if ( !str_prefix(arg,spaceobj->landing_site.locationa) ||
-	       !str_prefix(arg,spaceobj->landing_site.locationb) ||
-	       !str_prefix(arg,spaceobj->landing_site.locationc))
+	  if ( !StringPrefix(arg,spaceobj->landing_site.locationa) ||
+	       !StringPrefix(arg,spaceobj->landing_site.locationb) ||
+	       !StringPrefix(arg,spaceobj->landing_site.locationc))
 	    {
 	      found = true;
 	      break;
@@ -506,15 +506,15 @@ static void ApproachLandingSite( Ship *ship, const char *arg)
 
   if( found )
     {
-      if ( !str_prefix(arg, spaceobj->landing_site.locationa) )
+      if ( !StringPrefix(arg, spaceobj->landing_site.locationa) )
 	{
 	  strcpy( buf2, spaceobj->landing_site.locationa);
 	}
-      else if ( !str_prefix(arg, spaceobj->landing_site.locationb) )
+      else if ( !StringPrefix(arg, spaceobj->landing_site.locationb) )
 	{
 	  strcpy( buf2, spaceobj->landing_site.locationb);
 	}
-      else if ( !str_prefix(arg, spaceobj->landing_site.locationc) )
+      else if ( !StringPrefix(arg, spaceobj->landing_site.locationc) )
 	{
 	  strcpy( buf2, spaceobj->landing_site.locationc);
 	}
@@ -567,7 +567,7 @@ static void LaunchShip( Ship *ship )
       ship->shipstate = SHIP_READY;
     }
 
-  plusminus = number_range ( -1 , 2 );
+  plusminus = GetRandomNumberFromRange ( -1 , 2 );
 
   if (plusminus > 0 )
     {
@@ -578,7 +578,7 @@ static void LaunchShip( Ship *ship )
       ship->head.x = -1;
     }
 
-  plusminus = number_range ( -1 , 2 );
+  plusminus = GetRandomNumberFromRange ( -1 , 2 );
 
   if (plusminus > 0 )
     {
@@ -589,7 +589,7 @@ static void LaunchShip( Ship *ship )
       ship->head.y = -1;
     }
 
-  plusminus = number_range ( -1 , 2 );
+  plusminus = GetRandomNumberFromRange ( -1 , 2 );
 
   if (plusminus > 0 )
     {
@@ -605,7 +605,7 @@ static void LaunchShip( Ship *ship )
 	   || ship->lastdoc == ship->spaceobject->landing_site.docb
 	   || ship->lastdoc == ship->spaceobject->landing_site.docc ) )
     {
-      vector_copy( &ship->pos, &ship->spaceobject->pos );
+      CopyVector( &ship->pos, &ship->spaceobject->pos );
     }
   else
     {
@@ -613,7 +613,7 @@ static void LaunchShip( Ship *ship )
         {
           if (ship->lastdoc == target->room.hanger)
             {
-              vector_copy( &ship->pos, &target->pos );
+              CopyVector( &ship->pos, &target->pos );
             }
         }
     }
@@ -648,10 +648,10 @@ static void MakeDebris( const Ship *ship )
 
   LINK( debris, first_ship, last_ship, next, prev );
 
-  debris->owner       = str_dup( "" );
-  debris->copilot     = str_dup( "" );
-  debris->pilot       = str_dup( "" );
-  debris->home        = str_dup( "" );
+  debris->owner       = CopyString( "" );
+  debris->copilot     = CopyString( "" );
+  debris->pilot       = CopyString( "" );
+  debris->home        = CopyString( "" );
   debris->type        = SHIP_CIVILIAN;
 
   if( ship->type != MOB_SHIP )
@@ -682,13 +682,13 @@ static void MakeDebris( const Ship *ship )
 
   strcpy( buf, "Debris of a " );
   strcat( buf, ship->name );
-  debris->name          = str_dup( "Debris" );
-  debris->personalname  = str_dup( "Debris" );
-  debris->description   = str_dup( buf );
+  debris->name          = CopyString( "Debris" );
+  debris->personalname  = CopyString( "Debris" );
+  debris->description   = CopyString( buf );
 
   ShipToSpaceobject( debris, ship->spaceobject );
-  vector_copy( &debris->pos, &ship->pos );
-  vector_copy( &debris->head, &ship->head );
+  CopyVector( &debris->pos, &ship->pos );
+  CopyVector( &debris->head, &ship->head );
 }
 
 void DockShip( Character *ch, Ship *ship )
@@ -716,7 +716,7 @@ void DockShip( Character *ch, Ship *ship )
 
   ship->docking = SHIP_DOCKED;
   ship->currspeed = 0;
-  vector_copy( &ship->pos, &ship->docked->pos );
+  CopyVector( &ship->pos, &ship->docked->pos );
 
   if( ch )
     {
@@ -796,10 +796,10 @@ bool CheckHostile( Ship *ship )
       if( !IsShipInCombatRange( ship, target ) )
         continue;
 
-      if ( !str_cmp( ship->owner, "The Empire" ) )
+      if ( !StrCmp( ship->owner, "The Empire" ) )
         {
-          if ( !str_cmp( target->owner , "The Rebel Alliance" )
-	       || !str_cmp( target->owner , "The New Republic"))
+          if ( !StrCmp( target->owner , "The Rebel Alliance" )
+	       || !StrCmp( target->owner , "The New Republic"))
             {
               tempdistance = GetShipDistanceToShip( ship, target );
 
@@ -811,10 +811,10 @@ bool CheckHostile( Ship *ship )
             }
         }
 
-      if ( (!str_cmp( ship->owner, "The Rebel Alliance" ))
-	   || (!str_cmp( ship->owner , "The New Republic" )))
+      if ( (!StrCmp( ship->owner, "The Rebel Alliance" ))
+	   || (!StrCmp( ship->owner , "The New Republic" )))
         {
-          if ( !str_cmp( target->owner, "The Empire" ) )
+          if ( !StrCmp( target->owner, "The Empire" ) )
             {
               tempdistance = GetShipDistanceToShip( ship, target );
 
@@ -826,9 +826,9 @@ bool CheckHostile( Ship *ship )
             }
         }
 
-      if ( !str_cmp( ship->owner , "Pirates" ) )
+      if ( !StrCmp( ship->owner , "Pirates" ) )
         {
-          if ( str_cmp(target->owner, "Pirates") )
+          if ( StrCmp(target->owner, "Pirates") )
             {
               tempdistance = GetShipDistanceToShip( ship, target );
 
@@ -876,7 +876,7 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
 
   if ( drunk && !fall )
     {
-      door = number_door();
+      door = GetRandomDoor();
       pexit = get_exit( get_room_index(ship->location), door );
     }
 
@@ -1082,7 +1082,7 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
 
   the_chance = IsNpc(ch) ? ch->top_level : (int) (ch->pcdata->learned[gsn_speeders]) ;
 
-  if ( number_percent() > the_chance )
+  if ( GetRandomPercent() > the_chance )
     {
       send_to_char("&RYou can't figure out which switch it is.\r\n",ch);
       learn_from_failure( ch, gsn_speeders );
@@ -1315,7 +1315,7 @@ void RechargeShips( void )
                               the_chance += origchance;
                               the_chance = urange( 1 , the_chance , 99 );
 
-                              if ( number_percent( ) > the_chance )
+                              if ( GetRandomPercent( ) > the_chance )
                                 {
                                   sprintf( buf , "%s fires at you but misses." , ship->name);
                                   EchoToCockpit( AT_ORANGE , target , buf );
@@ -1585,7 +1585,7 @@ void UpdateShips( void )
 
           for( spaceobj = first_spaceobject; spaceobj; spaceobj = spaceobj->next )
 	    {
-	      if( spaceobj->name &&  str_cmp(spaceobj->name,"")
+	      if( spaceobj->name &&  StrCmp(spaceobj->name,"")
 		  && GetShipDistanceToSpaceobject( ship, spaceobj ) < too_close )
 		{
 		  sprintf( buf, "Proximity alert: %s  %.0f %.0f %.0f", spaceobj->name,
@@ -1764,7 +1764,7 @@ void UpdateShips( void )
 			       && target->docked == NULL
 			       && target->shipstate != SHIP_DOCKED )
 			    {
-			      if ( !str_cmp ( target->owner , ship->owner ) && target != ship )
+			      if ( !StrCmp ( target->owner , ship->owner ) && target != ship )
 				{
 				  if ( target->target0 == NULL && ship->target0 != target )
 				    {
@@ -1838,7 +1838,7 @@ void UpdateShips( void )
 			      projectiles = -1;
 			    }
 
-                          if ( number_percent() > the_chance || projectiles == -1 )
+                          if ( GetRandomPercent() > the_chance || projectiles == -1 )
                             {
 
                             }
@@ -1906,15 +1906,15 @@ void UpdateShips( void )
             }
           else
             {
-              if ( number_range(1, 25) == 25 )
+              if ( GetRandomNumberFromRange(1, 25) == 25 )
                 {
                   ShipToSpaceobject(ship, spaceobject_from_name(ship->home));
-                  vector_init( &ship->pos );
-                  vector_set( &ship->head, 1, 1, 1 );
+                  InitializeVector( &ship->pos );
+                  SetVector( &ship->head, 1, 1, 1 );
 
                   if( ship->spaceobject )
                     {
-                      vector_copy( &ship->pos, &ship->spaceobject->pos );
+                      CopyVector( &ship->pos, &ship->spaceobject->pos );
                     }
 
                   RandomizeVector( &ship->pos, -5000, 5000 );
@@ -2024,7 +2024,7 @@ bool IsSpaceobjectInCaptureRange( const Ship *ship, const Spaceobject *object )
 static bool CaughtInGravity( const Ship *ship, const Spaceobject *object )
 {
   return object && ship
-    && vector_distance( &object->pos, &ship->hyperpos ) < object->gravity * 5;
+    && GetDistanceBetweenVectors( &object->pos, &ship->hyperpos ) < object->gravity * 5;
 }
 
 long int GetShipValue( const Ship *ship )
@@ -2305,7 +2305,7 @@ static void ReadShip( Ship *ship, FILE *fp )
 {
   for ( ; ; )
     {
-      const char *word = feof( fp ) ? "End" : fread_word( fp );
+      const char *word = feof( fp ) ? "End" : ReadWord( fp );
       bool fMatch = false;
 
       struct
@@ -2318,65 +2318,65 @@ static void ReadShip( Ship *ship, FILE *fp )
         {
         case '*':
           fMatch = true;
-          fread_to_eol( fp );
+          ReadToEndOfLine( fp );
           break;
 
         case 'A':
-          KEY( "Astro_array",      ship->astro_array,       fread_number( fp ) );
-          KEY( "Alarm",            ship->alarm,             fread_number( fp ) );
+          KEY( "Astro_array",      ship->astro_array,       ReadInt( fp ) );
+          KEY( "Alarm",            ship->alarm,             ReadInt( fp ) );
           break;
 
         case 'C':
-          KEY( "Cockpit",     ship->room.cockpit,          fread_number( fp ) );
-          KEY( "Coseat",     ship->room.coseat,          fread_number( fp ) );
-          KEY( "Class",       ship->sclass,            fread_number( fp ) );
-          KEY( "Copilot",     ship->copilot,          fread_string( fp ) );
-          KEY( "Comm",        ship->comm,      fread_number( fp ) );
-          KEY( "Chaff",       ship->chaff,      fread_number( fp ) );
+          KEY( "Cockpit",     ship->room.cockpit,          ReadInt( fp ) );
+          KEY( "Coseat",     ship->room.coseat,          ReadInt( fp ) );
+          KEY( "Class",       ship->sclass,            ReadInt( fp ) );
+          KEY( "Copilot",     ship->copilot,          ReadStringToTilde( fp ) );
+          KEY( "Comm",        ship->comm,      ReadInt( fp ) );
+          KEY( "Chaff",       ship->chaff,      ReadInt( fp ) );
           break;
 
         case 'D':
-          KEY( "Description",   ship->description,      fread_string( fp ) );
-          KEY( "DockingPorts",    ship->dockingports,      fread_number( fp ) );
+          KEY( "Description",   ship->description,      ReadStringToTilde( fp ) );
+          KEY( "DockingPorts",    ship->dockingports,      ReadInt( fp ) );
           break;
 
         case 'E':
-          KEY( "Engineroom",    ship->room.engine,      fread_number( fp ) );
-          KEY( "Entrance",      ship->room.entrance,         fread_number( fp ) );
-          KEY( "Energy",      ship->energy,        fread_number( fp ) );
+          KEY( "Engineroom",    ship->room.engine,      ReadInt( fp ) );
+          KEY( "Entrance",      ship->room.entrance,         ReadInt( fp ) );
+          KEY( "Energy",      ship->energy,        ReadInt( fp ) );
 
-          if ( !str_cmp( word, "End" ) )
+          if ( !StrCmp( word, "End" ) )
             {
 	      int turret_num = 0;
 
               if (!ship->home)
 		{
-		  ship->home = str_dup( "" );
+		  ship->home = CopyString( "" );
 		}
 
               if (!ship->name)
 		{
-		  ship->name = str_dup( "" );
+		  ship->name = CopyString( "" );
 		}
 
 	      if (!ship->owner)
 		{
-		  ship->owner = str_dup( "" );
+		  ship->owner = CopyString( "" );
 		}
 
               if (!ship->description)
 		{
-		  ship->description = str_dup( "" );
+		  ship->description = CopyString( "" );
 		}
 
               if (!ship->copilot)
 		{
-		  ship->copilot = str_dup( "" );
+		  ship->copilot = CopyString( "" );
 		}
 
               if (!ship->pilot)
 		{
-		  ship->pilot = str_dup( "" );
+		  ship->pilot = CopyString( "" );
 		}
 
               if (!IsShipDisabled( ship ))
@@ -2461,106 +2461,106 @@ static void ReadShip( Ship *ship, FILE *fp )
           break;
 
         case 'F':
-          KEY( "Filename",      ship->filename,         fread_string_nohash( fp ) );
-          KEY( "Firstroom",   ship->room.first,        fread_number( fp ) );
+          KEY( "Filename",      ship->filename,         ReadStringToTildeNoHash( fp ) );
+          KEY( "Firstroom",   ship->room.first,        ReadInt( fp ) );
           break;
 
         case 'G':
-          KEY( "Guard",     ship->guard,          fread_number( fp ) );
-          KEY( "Gunseat",     ship->room.gunseat,          fread_number( fp ) );
+          KEY( "Guard",     ship->guard,          ReadInt( fp ) );
+          KEY( "Gunseat",     ship->room.gunseat,          ReadInt( fp ) );
           break;
 
         case 'H':
-          KEY( "Home" , ship->home, fread_string( fp ) );
-          KEY( "Hyperspeed",   ship->hyperspeed,      fread_number( fp ) );
-          KEY( "Hull",      ship->hull,        fread_number( fp ) );
-          KEY( "Hanger",  ship->room.hanger,      fread_number( fp ) );
+          KEY( "Home" , ship->home, ReadStringToTilde( fp ) );
+          KEY( "Hyperspeed",   ship->hyperspeed,      ReadInt( fp ) );
+          KEY( "Hull",      ship->hull,        ReadInt( fp ) );
+          KEY( "Hanger",  ship->room.hanger,      ReadInt( fp ) );
           break;
 
         case 'I':
-          KEY( "Ions" , ship->ions, fread_number( fp ) );
+          KEY( "Ions" , ship->ions, ReadInt( fp ) );
           break;
 
         case 'L':
-          KEY( "Laserstr",   ship->lasers,   (short)  ( fread_number( fp )/10 ) );
-          KEY( "Lasers",   ship->lasers,      fread_number( fp ) );
-          KEY( "Lastdoc",    ship->lastdoc,       fread_number( fp ) );
-          KEY( "Lastroom",   ship->room.last,        fread_number( fp ) );
+          KEY( "Laserstr",   ship->lasers,   (short)  ( ReadInt( fp )/10 ) );
+          KEY( "Lasers",   ship->lasers,      ReadInt( fp ) );
+          KEY( "Lastdoc",    ship->lastdoc,       ReadInt( fp ) );
+          KEY( "Lastroom",   ship->room.last,        ReadInt( fp ) );
           break;
 
         case 'M':
-          KEY( "Manuever",   ship->manuever,      fread_number( fp ) );
-          KEY( "Maxmissiles",   ship->maxmissiles,      fread_number( fp ) );
-          KEY( "Maxtorpedos",   ship->maxtorpedos,      fread_number( fp ) );
-          KEY( "Maxrockets",   ship->maxrockets,      fread_number( fp ) );
-          KEY( "Missiles",   ship->missiles,      fread_number( fp ) );
-          KEY( "Missiletype",   ship->missiletype,      fread_number( fp ) );
-          KEY( "Maxshield",      ship->maxshield,        fread_number( fp ) );
-          KEY( "Maxenergy",      ship->maxenergy,        fread_number( fp ) );
-          KEY( "Missilestate",   ship->missilestate,        fread_number( fp ) );
-	  KEY( "Maxhull",      ship->maxhull,        fread_number( fp ) );
-          KEY( "Maxchaff",       ship->maxchaff,      fread_number( fp ) );
+          KEY( "Manuever",   ship->manuever,      ReadInt( fp ) );
+          KEY( "Maxmissiles",   ship->maxmissiles,      ReadInt( fp ) );
+          KEY( "Maxtorpedos",   ship->maxtorpedos,      ReadInt( fp ) );
+          KEY( "Maxrockets",   ship->maxrockets,      ReadInt( fp ) );
+          KEY( "Missiles",   ship->missiles,      ReadInt( fp ) );
+          KEY( "Missiletype",   ship->missiletype,      ReadInt( fp ) );
+          KEY( "Maxshield",      ship->maxshield,        ReadInt( fp ) );
+          KEY( "Maxenergy",      ship->maxenergy,        ReadInt( fp ) );
+          KEY( "Missilestate",   ship->missilestate,        ReadInt( fp ) );
+	  KEY( "Maxhull",      ship->maxhull,        ReadInt( fp ) );
+          KEY( "Maxchaff",       ship->maxchaff,      ReadInt( fp ) );
           break;
 
         case 'N':
-          KEY( "Name",  ship->name,             fread_string( fp ) );
-          KEY( "Navseat",     ship->room.navseat,          fread_number( fp ) );
+          KEY( "Name",  ship->name,             ReadStringToTilde( fp ) );
+          KEY( "Navseat",     ship->room.navseat,          ReadInt( fp ) );
           break;
 
         case 'O':
-          KEY( "Owner",            ship->owner,            fread_string( fp ) );
+          KEY( "Owner",            ship->owner,            ReadStringToTilde( fp ) );
           break;
 
         case 'P':
-          KEY( "PersonalName",  ship->personalname,             fread_string( fp ) );
-          KEY( "Pilot",            ship->pilot,            fread_string( fp ) );
-          KEY( "Pilotseat",     ship->room.pilotseat,          fread_number( fp ) );
+          KEY( "PersonalName",  ship->personalname,             ReadStringToTilde( fp ) );
+          KEY( "Pilot",            ship->pilot,            ReadStringToTilde( fp ) );
+          KEY( "Pilotseat",     ship->room.pilotseat,          ReadInt( fp ) );
           break;
 
         case 'R':
-          KEY( "Realspeed",   ship->realspeed,       fread_number( fp ) );
-          KEY( "Rockets",     ship->rockets,         fread_number( fp ) );
+          KEY( "Realspeed",   ship->realspeed,       ReadInt( fp ) );
+          KEY( "Rockets",     ship->rockets,         ReadInt( fp ) );
           break;
 
         case 'S':
-          KEY( "Shipyard",    ship->shipyard,      fread_number( fp ) );
-          KEY( "Sensor",      ship->sensor,       fread_number( fp ) );
-          KEY( "Shield",      ship->shield,        fread_number( fp ) );
-          KEY( "Shipstate",   ship->shipstate,        fread_number( fp ) );
-          KEY( "Statei0",   ship->statei0,        fread_number( fp ) );
-          KEY( "Statet0",   ship->statet0,        fread_number( fp ) );
-          KEY( "Statet1",   turret_placeholder[0].weapon_state,        fread_number( fp ) );
-          KEY( "Statet2",   turret_placeholder[1].weapon_state,        fread_number( fp ) );
-          KEY( "Statet3",   turret_placeholder[2].weapon_state,        fread_number( fp ) );
-          KEY( "Statet4",   turret_placeholder[3].weapon_state,        fread_number( fp ) );
-          KEY( "Statet5",   turret_placeholder[4].weapon_state,        fread_number( fp ) );
-          KEY( "Statet6",   turret_placeholder[5].weapon_state,        fread_number( fp ) );
-          KEY( "Statet7",   turret_placeholder[6].weapon_state,        fread_number( fp ) );
-          KEY( "Statet8",   turret_placeholder[7].weapon_state,        fread_number( fp ) );
-          KEY( "Statet9",   turret_placeholder[8].weapon_state,        fread_number( fp ) );
-          KEY( "Statet10",  turret_placeholder[9].weapon_state,        fread_number( fp ) );
+          KEY( "Shipyard",    ship->shipyard,      ReadInt( fp ) );
+          KEY( "Sensor",      ship->sensor,       ReadInt( fp ) );
+          KEY( "Shield",      ship->shield,        ReadInt( fp ) );
+          KEY( "Shipstate",   ship->shipstate,        ReadInt( fp ) );
+          KEY( "Statei0",   ship->statei0,        ReadInt( fp ) );
+          KEY( "Statet0",   ship->statet0,        ReadInt( fp ) );
+          KEY( "Statet1",   turret_placeholder[0].weapon_state,        ReadInt( fp ) );
+          KEY( "Statet2",   turret_placeholder[1].weapon_state,        ReadInt( fp ) );
+          KEY( "Statet3",   turret_placeholder[2].weapon_state,        ReadInt( fp ) );
+          KEY( "Statet4",   turret_placeholder[3].weapon_state,        ReadInt( fp ) );
+          KEY( "Statet5",   turret_placeholder[4].weapon_state,        ReadInt( fp ) );
+          KEY( "Statet6",   turret_placeholder[5].weapon_state,        ReadInt( fp ) );
+          KEY( "Statet7",   turret_placeholder[6].weapon_state,        ReadInt( fp ) );
+          KEY( "Statet8",   turret_placeholder[7].weapon_state,        ReadInt( fp ) );
+          KEY( "Statet9",   turret_placeholder[8].weapon_state,        ReadInt( fp ) );
+          KEY( "Statet10",  turret_placeholder[9].weapon_state,        ReadInt( fp ) );
           break;
 
         case 'T':
-          KEY( "Type",  ship->type,     fread_number( fp ) );
-	  KEY( "Tractorbeam", ship->tractorbeam,      fread_number( fp ) );
-          KEY( "Turret1",     turret_placeholder[0].room_vnum,  fread_number( fp ) );
-          KEY( "Turret2",     turret_placeholder[1].room_vnum,  fread_number( fp ) );
-          KEY( "Turret3",     turret_placeholder[2].room_vnum, fread_number( fp ) );
-          KEY( "Turret4",     turret_placeholder[3].room_vnum, fread_number( fp ) );
-          KEY( "Turret5",     turret_placeholder[4].room_vnum, fread_number( fp ) );
-          KEY( "Turret6",     turret_placeholder[5].room_vnum, fread_number( fp ) );
-          KEY( "Turret7",     turret_placeholder[6].room_vnum, fread_number( fp ) );
-          KEY( "Turret8",     turret_placeholder[7].room_vnum, fread_number( fp ) );
-          KEY( "Turret9",     turret_placeholder[8].room_vnum, fread_number( fp ) );
-          KEY( "Turret0",     turret_placeholder[9].room_vnum, fread_number( fp ) );
-          KEY( "Torpedos",    ship->torpedos, fread_number( fp ) );
+          KEY( "Type",  ship->type,     ReadInt( fp ) );
+	  KEY( "Tractorbeam", ship->tractorbeam,      ReadInt( fp ) );
+          KEY( "Turret1",     turret_placeholder[0].room_vnum,  ReadInt( fp ) );
+          KEY( "Turret2",     turret_placeholder[1].room_vnum,  ReadInt( fp ) );
+          KEY( "Turret3",     turret_placeholder[2].room_vnum, ReadInt( fp ) );
+          KEY( "Turret4",     turret_placeholder[3].room_vnum, ReadInt( fp ) );
+          KEY( "Turret5",     turret_placeholder[4].room_vnum, ReadInt( fp ) );
+          KEY( "Turret6",     turret_placeholder[5].room_vnum, ReadInt( fp ) );
+          KEY( "Turret7",     turret_placeholder[6].room_vnum, ReadInt( fp ) );
+          KEY( "Turret8",     turret_placeholder[7].room_vnum, ReadInt( fp ) );
+          KEY( "Turret9",     turret_placeholder[8].room_vnum, ReadInt( fp ) );
+          KEY( "Turret0",     turret_placeholder[9].room_vnum, ReadInt( fp ) );
+          KEY( "Torpedos",    ship->torpedos, ReadInt( fp ) );
           break;
 
         case 'V':
-          KEY( "Vx",          ship->pos.x,     fread_number( fp ) );
-          KEY( "Vy",          ship->pos.y,     fread_number( fp ) );
-          KEY( "Vz",          ship->pos.z,     fread_number( fp ) );
+          KEY( "Vx",          ship->pos.x,     ReadInt( fp ) );
+          KEY( "Vy",          ship->pos.y,     ReadInt( fp ) );
+          KEY( "Vz",          ship->pos.z,     ReadInt( fp ) );
         }
 
       if ( !fMatch )
@@ -2600,11 +2600,11 @@ static bool LoadShipFile( const char *shipfile )
       for ( ; ; )
         {
           const char *word = NULL;
-          char letter = fread_letter( fp );
+          char letter = ReadChar( fp );
 
           if ( letter == '*' )
             {
-              fread_to_eol( fp );
+              ReadToEndOfLine( fp );
               continue;
             }
 
@@ -2614,12 +2614,12 @@ static bool LoadShipFile( const char *shipfile )
               break;
             }
 
-          word = fread_word( fp );
-	  if ( !str_cmp( word, "SHIP"   ) )
+          word = ReadWord( fp );
+	  if ( !StrCmp( word, "SHIP"   ) )
             {
               ReadShip( ship, fp );
             }
-          else if ( !str_cmp( word, "END"  ) )
+          else if ( !StrCmp( word, "END"  ) )
             {
               break;
             }
@@ -2649,8 +2649,8 @@ static bool LoadShipFile( const char *shipfile )
 
       ship->docking = SHIP_READY;
 
-      if ( ( !str_cmp("Trainer", ship->owner)
-             || !str_cmp("Public",ship->owner)
+      if ( ( !StrCmp("Trainer", ship->owner)
+             || !StrCmp("Public",ship->owner)
              || ship->type == MOB_SHIP ) )
         {
           if ( ship->sclass != SHIP_PLATFORM && ship->type != MOB_SHIP && ship->sclass != CAPITAL_SHIP )
@@ -2666,7 +2666,7 @@ static bool LoadShipFile( const char *shipfile )
 
           if( !ship->personalname )
 	    {
-	      ship->personalname = str_dup(ship->name);
+	      ship->personalname = CopyString(ship->name);
 	    }
 
           ship->currspeed = 0;
@@ -2703,18 +2703,18 @@ static bool LoadShipFile( const char *shipfile )
 	   || ship->sclass == CAPITAL_SHIP )
         {
           ShipToSpaceobject(ship, spaceobject_from_name(ship->home) );
-          vector_set( &ship->head, 1, 1, 1 );
+          SetVector( &ship->head, 1, 1, 1 );
 
           if( ship->pos.x == 0 && ship->pos.y == 0 && ship->pos.z == 0 )
             {
               if ( ship->home )
                 {
                   ShipToSpaceobject(ship, spaceobject_from_name(ship->home));
-                  vector_init( &ship->pos );
+                  InitializeVector( &ship->pos );
 
                   if( ship->spaceobject )
                     {
-                      vector_copy( &ship->pos, &ship->spaceobject->pos );
+                      CopyVector( &ship->pos, &ship->spaceobject->pos );
                     }
 
                   RandomizeVector( &ship->pos, -5000, 5000 );
@@ -2769,7 +2769,7 @@ void LoadShips( )
 
   for ( ; ; )
     {
-      const char *filename = feof( fpList ) ? "$" : fread_word( fpList );
+      const char *filename = feof( fpList ) ? "$" : ReadWord( fpList );
 
       if ( filename[0] == '$' )
 	{
@@ -2837,7 +2837,7 @@ void ResetShip( Ship *ship )
 
 #ifndef NODEATH
 #ifndef NODEATHSHIP
-  if ( str_cmp("Trainer", ship->owner) && str_cmp("Public",ship->owner) && ship->type != MOB_SHIP )
+  if ( StrCmp("Trainer", ship->owner) && StrCmp("Public",ship->owner) && ship->type != MOB_SHIP )
     {
       CLAN_DATA *clan = NULL;
 
@@ -2850,30 +2850,30 @@ void ResetShip( Ship *ship )
         }
 
       DISPOSE( ship->owner );
-      ship->owner = str_dup( "" );
+      ship->owner = CopyString( "" );
       DISPOSE( ship->pilot );
-      ship->pilot = str_dup( "" );
+      ship->pilot = CopyString( "" );
       DISPOSE( ship->copilot );
-      ship->copilot = str_dup( "" );
+      ship->copilot = CopyString( "" );
     }
 #endif
 #endif
   if (!(ship->home))
     {
-      if ( ship->type == SHIP_REBEL || ( ship->type == MOB_SHIP && ((!str_cmp( ship->owner , "The Rebel Alliance" )) || (!str_cmp( ship->owner , "The New Republic" )))))
+      if ( ship->type == SHIP_REBEL || ( ship->type == MOB_SHIP && ((!StrCmp( ship->owner , "The Rebel Alliance" )) || (!StrCmp( ship->owner , "The New Republic" )))))
         {
           DISPOSE( ship->home );
-          ship->home = str_dup( "Coruscant" );
+          ship->home = CopyString( "Coruscant" );
         }
-      else if ( ship->type == SHIP_IMPERIAL || ( ship->type == MOB_SHIP && !str_cmp(ship->owner, "the empire") ))
+      else if ( ship->type == SHIP_IMPERIAL || ( ship->type == MOB_SHIP && !StrCmp(ship->owner, "the empire") ))
         {
           DISPOSE( ship->home );
-	  ship->home = str_dup( "Byss" );
+	  ship->home = CopyString( "Byss" );
         }
       else if ( ship->type == SHIP_CIVILIAN)
         {
           DISPOSE( ship->home );
-          ship->home = str_dup( "corporate" );
+          ship->home = CopyString( "corporate" );
         }
     }
 
@@ -2916,12 +2916,12 @@ Ship *GetShipInRoom( const Room *room, const char *name )
 
   for ( ship = room->first_ship ; ship ; ship = ship->next_in_room )
     {
-      if( ship->personalname && !str_cmp( name, ship->personalname ) )
+      if( ship->personalname && !StrCmp( name, ship->personalname ) )
         {
           return ship;
         }
 
-      if ( !str_cmp( name, ship->name ) )
+      if ( !StrCmp( name, ship->name ) )
         {
           return ship;
         }
@@ -2929,12 +2929,12 @@ Ship *GetShipInRoom( const Room *room, const char *name )
 
   for ( ship = room->first_ship ; ship ; ship = ship->next_in_room )
     {
-      if( ship->personalname && nifty_is_name_prefix( name, ship->personalname ) )
+      if( ship->personalname && NiftyIsNamePrefix( name, ship->personalname ) )
         {
           return ship;
         }
 
-      if ( nifty_is_name_prefix( name, ship->name ) )
+      if ( NiftyIsNamePrefix( name, ship->name ) )
         {
           return ship;
         }
@@ -2952,22 +2952,22 @@ Ship *GetShipAnywhere( const char *name )
 
   for ( ship = first_ship; ship; ship = ship->next )
     {
-      if( ship->personalname && !str_cmp( name, ship->personalname ) )
+      if( ship->personalname && !StrCmp( name, ship->personalname ) )
 	{
 	  return ship;
 	}
 
-      if ( !str_cmp( name, ship->name ) )
+      if ( !StrCmp( name, ship->name ) )
 	{
 	  return ship;
 	}
 
-      if( ship->personalname && nifty_is_name_prefix( name, ship->personalname ) )
+      if( ship->personalname && NiftyIsNamePrefix( name, ship->personalname ) )
 	{
 	  return ship;
 	}
 
-      if ( nifty_is_name_prefix( name, ship->name ) )
+      if ( NiftyIsNamePrefix( name, ship->name ) )
 	{
 	  return ship;
 	}
@@ -2983,7 +2983,7 @@ Ship *GetShipInRange( const char *name, const Ship *eShip)
 {
   Ship *ship = NULL;
   char arg[MAX_INPUT_LENGTH];
-  int number = number_argument( name, arg );
+  int number = NumberArgument( name, arg );
   int count = 0;
 
   if ( eShip == NULL )
@@ -3003,7 +3003,7 @@ Ship *GetShipInRange( const char *name, const Ship *eShip)
 	  continue;
 	}
 
-      if( ship->personalname && !str_cmp( arg, ship->personalname ) )
+      if( ship->personalname && !StrCmp( arg, ship->personalname ) )
         {
           count++;
 
@@ -3013,7 +3013,7 @@ Ship *GetShipInRange( const char *name, const Ship *eShip)
 	    }
         }
 
-      if ( !str_cmp( arg, ship->name ) )
+      if ( !StrCmp( arg, ship->name ) )
         {
           count++;
 
@@ -3033,7 +3033,7 @@ Ship *GetShipInRange( const char *name, const Ship *eShip)
 	  continue;
 	}
 
-      if( ship->personalname && nifty_is_name_prefix( arg, ship->personalname ) )
+      if( ship->personalname && NiftyIsNamePrefix( arg, ship->personalname ) )
 	{
 	  count++;
 
@@ -3043,7 +3043,7 @@ Ship *GetShipInRange( const char *name, const Ship *eShip)
 	    }
 	}
 
-      if ( nifty_is_name_prefix( arg, ship->name ) )
+      if ( NiftyIsNamePrefix( arg, ship->name ) )
         {
           count++;
 
@@ -3256,12 +3256,12 @@ void ShipFromSpaceobject( Ship *ship, Spaceobject *spaceobject )
 
 bool IsShipRental( const Character *ch, const Ship *ship )
 {
-  if ( !str_cmp("Public",ship->owner) )
+  if ( !StrCmp("Public",ship->owner) )
     {
       return true;
     }
 
-  if ( !str_cmp("Trainer",ship->owner) )
+  if ( !StrCmp("Trainer",ship->owner) )
     {
       return true;
     }
@@ -3318,81 +3318,81 @@ bool CanDock( const Ship *ship )
 
 bool CheckPilot( const Character *ch, const Ship *ship )
 {
-  if ( !str_cmp(ch->name,ship->owner)
-       || !str_cmp(ch->name,ship->pilot)
-       || !str_cmp(ch->name,ship->copilot)
-       || !str_cmp("Public",ship->owner)
-       || !str_cmp("Trainer", ship->owner) )
+  if ( !StrCmp(ch->name,ship->owner)
+       || !StrCmp(ch->name,ship->pilot)
+       || !StrCmp(ch->name,ship->copilot)
+       || !StrCmp("Public",ship->owner)
+       || !StrCmp("Trainer", ship->owner) )
     {
       return true;
     }
 
   if ( !IsNpc(ch) && ch->pcdata && ch->pcdata->clan )
     {
-      if ( !str_cmp(ch->pcdata->clan->name,ship->owner) )
+      if ( !StrCmp(ch->pcdata->clan->name,ship->owner) )
         {
-          if ( !str_cmp(ch->pcdata->clan->leadership.leader,ch->name) )
+          if ( !StrCmp(ch->pcdata->clan->leadership.leader,ch->name) )
 	    {
 	      return true;
 	    }
 
-          if ( !str_cmp(ch->pcdata->clan->leadership.number1,ch->name) )
+          if ( !StrCmp(ch->pcdata->clan->leadership.number1,ch->name) )
 	    {
 	      return true;
 	    }
 
-          if ( !str_cmp(ch->pcdata->clan->leadership.number2,ch->name) )
+          if ( !StrCmp(ch->pcdata->clan->leadership.number2,ch->name) )
 	    {
 	      return true;
 	    }
 
-          if ( ch->pcdata->bestowments && is_name( "pilot", ch->pcdata->bestowments) )
+          if ( ch->pcdata->bestowments && IsName( "pilot", ch->pcdata->bestowments) )
 	    {
 	      return true;
 	    }
         }
 
-      if ( !str_cmp(ch->pcdata->clan->name,ship->pilot) )
+      if ( !StrCmp(ch->pcdata->clan->name,ship->pilot) )
         {
-          if ( !str_cmp(ch->pcdata->clan->leadership.leader,ch->name) )
+          if ( !StrCmp(ch->pcdata->clan->leadership.leader,ch->name) )
 	    {
 	      return true;
 	    }
 
-          if ( !str_cmp(ch->pcdata->clan->leadership.number1,ch->name) )
+          if ( !StrCmp(ch->pcdata->clan->leadership.number1,ch->name) )
 	    {
 	      return true;
 	    }
 
-          if ( !str_cmp(ch->pcdata->clan->leadership.number2,ch->name) )
+          if ( !StrCmp(ch->pcdata->clan->leadership.number2,ch->name) )
 	    {
 	      return true;
 	    }
 
-          if ( ch->pcdata->bestowments && is_name( "pilot", ch->pcdata->bestowments) )
+          if ( ch->pcdata->bestowments && IsName( "pilot", ch->pcdata->bestowments) )
 	    {
 	      return true;
 	    }
         }
 
-      if ( !str_cmp(ch->pcdata->clan->name,ship->copilot) )
+      if ( !StrCmp(ch->pcdata->clan->name,ship->copilot) )
         {
-          if ( !str_cmp(ch->pcdata->clan->leadership.leader,ch->name) )
+          if ( !StrCmp(ch->pcdata->clan->leadership.leader,ch->name) )
 	    {
 	      return true;
 	    }
 
-          if ( !str_cmp(ch->pcdata->clan->leadership.number1,ch->name) )
+          if ( !StrCmp(ch->pcdata->clan->leadership.number1,ch->name) )
 	    {
 	      return true;
 	    }
 
-          if ( !str_cmp(ch->pcdata->clan->leadership.number2,ch->name) )
+          if ( !StrCmp(ch->pcdata->clan->leadership.number2,ch->name) )
 	    {
 	      return true;
 	    }
 
-          if ( ch->pcdata->bestowments && is_name( "pilot", ch->pcdata->bestowments) )
+          if ( ch->pcdata->bestowments && IsName( "pilot", ch->pcdata->bestowments) )
 	    {
 	      return true;
 	    }
@@ -3426,11 +3426,11 @@ void DamageShip( Ship *ship, int min, int max, Character *ch, const Ship *assaul
   if ( min < 0 && max < 0 )
     {
       ions = true;
-      dmg = number_range( max*(-1), min*(-1) );
+      dmg = GetRandomNumberFromRange( max*(-1), min*(-1) );
     }
   else
     {
-      dmg = number_range( min , max );
+      dmg = GetRandomNumberFromRange( min , max );
     }
 
   if ( ions == true )
@@ -3461,19 +3461,19 @@ void DamageShip( Ship *ship, int min, int max, Character *ch, const Ship *assaul
     {
       int turret_num = 0;
 
-      if ( number_range(1, 100) <= 5*ionFactor && !IsShipDisabled( ship ) )
+      if ( GetRandomNumberFromRange(1, 100) <= 5*ionFactor && !IsShipDisabled( ship ) )
         {
           EchoToCockpit( AT_BLOOD + AT_BLINK, ship, "Ships Drive DAMAGED!" );
           ship->shipstate = SHIP_DISABLED;
         }
 
-      if ( number_range(1, 100) <= 5*ionFactor && ship->missilestate != MISSILE_DAMAGED )
+      if ( GetRandomNumberFromRange(1, 100) <= 5*ionFactor && ship->missilestate != MISSILE_DAMAGED )
         {
           echo_to_room( AT_BLOOD + AT_BLINK , get_room_index(ship->room.gunseat) , "Ships Missile Launcher DAMAGED!" );
           ship->missilestate = MISSILE_DAMAGED;
         }
 
-      if ( number_range(1, 100) <= 2*ionFactor && ship->statet0 != LASER_DAMAGED )
+      if ( GetRandomNumberFromRange(1, 100) <= 2*ionFactor && ship->statet0 != LASER_DAMAGED )
         {
           echo_to_room( AT_BLOOD + AT_BLINK , get_room_index(ship->room.gunseat) , "Lasers DAMAGED!" );
           ship->statet0 = LASER_DAMAGED;
@@ -3483,7 +3483,7 @@ void DamageShip( Ship *ship, int min, int max, Character *ch, const Ship *assaul
 	{
 	  Turret *turret = ship->turret[turret_num];
 
-	  if ( number_range(1, 100) <= 5 * ionFactor && !IsTurretDamaged( turret ) )
+	  if ( GetRandomNumberFromRange(1, 100) <= 5 * ionFactor && !IsTurretDamaged( turret ) )
 	    {
 	      echo_to_room( AT_BLOOD + AT_BLINK, get_room_index( GetTurretRoom( turret ) ),
 			    "Turret DAMAGED!" );
@@ -3491,7 +3491,7 @@ void DamageShip( Ship *ship, int min, int max, Character *ch, const Ship *assaul
 	    }
 	}
 
-      if ( number_range(1, 100) <= 5*ionFactor && ship->statettractor != LASER_DAMAGED && ship->tractorbeam )
+      if ( GetRandomNumberFromRange(1, 100) <= 5*ionFactor && ship->statettractor != LASER_DAMAGED && ship->tractorbeam )
         {
           echo_to_room( AT_BLOOD + AT_BLINK , get_room_index(ship->room.pilotseat) , "Tractorbeam DAMAGED!" );
           ship->statettractor = LASER_DAMAGED;
@@ -3562,7 +3562,7 @@ void DestroyShip( Ship *ship, Character *killer )
   return;
 #endif
 
-  if ( !str_cmp("Trainer", ship->owner))
+  if ( !StrCmp("Trainer", ship->owner))
     {
       ResetShip(ship);
       return;

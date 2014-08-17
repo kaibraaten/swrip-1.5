@@ -84,11 +84,11 @@ void do_who( Character *ch, char *argument )
   for ( ;; )
     {
       char arg[MAX_STRING_LENGTH];
-      argument = one_argument( argument, arg );
+      argument = OneArgument( argument, arg );
       if ( arg[0] == '\0' )
         break;
 
-      if ( is_number( arg ) )
+      if ( IsNumber( arg ) )
         {
           if (ch->top_level >= LEVEL_IMMORTAL)
             {
@@ -110,7 +110,7 @@ void do_who( Character *ch, char *argument )
       else
         {
           /* activate/deactivate whoCloak Darrik Vequir */
-          if ( !str_cmp( arg, "on" ) && ch->pcdata )
+          if ( !StrCmp( arg, "on" ) && ch->pcdata )
             {
               if (!ch->pcdata->whoCloak)
                 {
@@ -124,7 +124,7 @@ void do_who( Character *ch, char *argument )
                   return;
 		}
             }
-          if ( !str_cmp( arg, "off" ) && ch->pcdata )
+          if ( !StrCmp( arg, "off" ) && ch->pcdata )
             {
               if (ch->pcdata->whoCloak)
                 { send_to_char( "Who Cloaking is off.\r\n", ch );
@@ -148,21 +148,21 @@ void do_who( Character *ch, char *argument )
            * Look for classes to turn on.
            */
 
-          if ( !str_cmp( arg, "imm" ) || !str_cmp( arg, "gods" ) )
+          if ( !StrCmp( arg, "imm" ) || !StrCmp( arg, "gods" ) )
             fImmortalOnly = true;
           else
             {
-              if ( !str_cmp( arg, "www" ) )
+              if ( !StrCmp( arg, "www" ) )
                 fShowHomepage = true;
               else               /* SB who clan (order), guild */
                 {
-                  if (!str_cmp( arg, "clan" ) && ch->pcdata && ch->pcdata->clan)
+                  if (!StrCmp( arg, "clan" ) && ch->pcdata && ch->pcdata->clan)
                     strcpy(arg, ch->pcdata->clan->name);
                   if ( (pClan = get_clan (arg)) && (fClanMatch != true))
                     {
                       if ((ch->top_level >= LEVEL_IMMORTAL)
 			  || (ch->pcdata && ch->pcdata->clan
-			      && !str_cmp(ch->pcdata->clan->name,pClan->name)))
+			      && !StrCmp(ch->pcdata->clan->name,pClan->name)))
                         {
                           fClanMatch = true;
                         }
@@ -176,7 +176,7 @@ void do_who( Character *ch, char *argument )
                     {
                       for ( iRace = 0; iRace < MAX_RACE; iRace++ )
                         {
-                          if ( IsGreater(ch) && (!str_cmp( arg, race_table[iRace].race_name ) ) )
+                          if ( IsGreater(ch) && (!StrCmp( arg, race_table[iRace].race_name ) ) )
                             {
                               rgfRace[iRace] = true;
                               break;
@@ -238,7 +238,7 @@ void do_who( Character *ch, char *argument )
            &&   wch->pcdata->homepage
            &&   wch->pcdata->homepage[0] != '\0' )
         sprintf( char_name, "<A HREF=\"%s\">%s</A>",
-                 show_tilde( wch->pcdata->homepage ), wch->name );
+                 ShowTilde( wch->pcdata->homepage ), wch->name );
       else
         strcpy( char_name, "") ;
 
@@ -268,7 +268,7 @@ void do_who( Character *ch, char *argument )
         case MAX_LEVEL -  4: race = "Builder";  break;
         }
 
-      if ( !nifty_is_name(wch->name, wch->pcdata->title) && ch->top_level > wch->top_level )
+      if ( !NiftyIsName(wch->name, wch->pcdata->title) && ch->top_level > wch->top_level )
         sprintf( extra_title , " [%s]" , wch->name );
       else
         strcpy(extra_title, "");
@@ -286,11 +286,11 @@ void do_who( Character *ch, char *argument )
 
           strcpy( clan_name, " (" );
 
-          if ( !str_cmp( wch->name, pclan->leadership.leader ) )
+          if ( !StrCmp( wch->name, pclan->leadership.leader ) )
             strcat( clan_name, "Leader, " );
-          if ( !str_cmp( wch->name, pclan->leadership.number1 ) )
+          if ( !StrCmp( wch->name, pclan->leadership.number1 ) )
             strcat( clan_name, "First, " );
-          if ( !str_cmp( wch->name, pclan->leadership.number2 ) )
+          if ( !StrCmp( wch->name, pclan->leadership.number2 ) )
             strcat( clan_name, "Second, " );
 
           strcat( clan_name, pclan->name );
@@ -324,7 +324,7 @@ void do_who( Character *ch, char *argument )
 
       /* First make the structure. */
       CREATE( cur_who, WHO_DATA, 1 );
-      cur_who->text = str_dup( buf );
+      cur_who->text = CopyString( buf );
       if ( IsImmortal( wch ) )
         cur_who->type = WT_IMM;
       else if ( GetTrustLevel( wch ) <= 5 )

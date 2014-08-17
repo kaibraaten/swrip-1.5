@@ -11,7 +11,7 @@ void do_makeplanet( Character *ch, char *argument )
       return;
     }
 
-  sprintf( filename, "%s%s", PLANET_DIR, strlower(argument) );
+  sprintf( filename, "%s%s", PLANET_DIR, StringToLowercase(argument) );
 
   CREATE( planet, PLANET_DATA, 1 );
   LINK( planet, first_planet, last_planet, next, prev );
@@ -23,6 +23,6 @@ void do_makeplanet( Character *ch, char *argument )
   planet->last_area = NULL;
   planet->first_guard = NULL;
   planet->last_guard = NULL;
-  planet->name          = str_dup( argument );
+  planet->name          = CopyString( argument );
   planet->flags               = 0;
 }

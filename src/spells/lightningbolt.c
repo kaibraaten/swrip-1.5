@@ -25,7 +25,7 @@ ch_ret spell_lightning_bolt( int sn, int level, Character *ch, void *vo )
 
   level = umin(level, sizeof(dam_each)/sizeof(dam_each[0]) - 1);
   level = umax(0, level);
-  dam           = number_range( dam_each[level] / 2, dam_each[level] * 2 );
+  dam           = GetRandomNumberFromRange( dam_each[level] / 2, dam_each[level] * 2 );
   if ( saves_spell_staff( level, victim ) )
     dam /= 2;
   if ( IsAffectedBy(victim, AFF_PROTECT) && IsEvil(ch) )

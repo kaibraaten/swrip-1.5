@@ -11,8 +11,8 @@ void do_rat( Character *ch, char *argument )
   int End = 0;
   int vnum = 0;
 
-  argument = one_argument( argument, arg1 );
-  argument = one_argument( argument, arg2 );
+  argument = OneArgument( argument, arg1 );
+  argument = OneArgument( argument, arg2 );
 
   if ( arg1[0] == '\0' || arg2[0] == '\0' || argument[0] == '\0' )
     {
@@ -28,7 +28,7 @@ void do_rat( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( argument, "quit" ) )
+  if ( !StrCmp( argument, "quit" ) )
     {
       send_to_char( "I don't think so!\r\n", ch );
       return;

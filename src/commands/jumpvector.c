@@ -14,7 +14,7 @@ void do_jumpvector( Character *ch, char *argument )
   Ship *target;
   char buf[MAX_STRING_LENGTH];
 
-  num = number_range( 1, 16 );
+  num = GetRandomNumberFromRange( 1, 16 );
   randnum = 1.0/(float) num;
 
   if (  (ship = GetShipFromCockpit(ch->in_room->vnum))  == NULL )
@@ -56,7 +56,7 @@ void do_jumpvector( Character *ch, char *argument )
 
   the_chance = IsNpc(ch) ? ch->top_level
     : (int)  (ch->pcdata->learned[gsn_jumpvector]) ;
-  if ( number_percent( ) > the_chance )
+  if ( GetRandomPercent( ) > the_chance )
     {
       send_to_char("&RYou cant figure out the course vectors correctly.\r\n",ch);
       learn_from_failure( ch, gsn_shipsystems );

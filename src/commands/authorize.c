@@ -11,8 +11,8 @@ void do_authorize( Character *ch, char *argument )
   Character *victim;
   Descriptor *d;
 
-  argument = one_argument( argument, arg1 );
-  argument = one_argument( argument, arg2 );
+  argument = OneArgument( argument, arg1 );
+  argument = OneArgument( argument, arg2 );
 
   if ( arg1[0] == '\0' )
     {
@@ -33,13 +33,13 @@ void do_authorize( Character *ch, char *argument )
   if ( victim == NULL )
     return;
 
-  if ( arg2[0]=='\0' || !str_cmp( arg2,"accept" ) || !str_cmp( arg2,"yes" ))
+  if ( arg2[0]=='\0' || !StrCmp( arg2,"accept" ) || !StrCmp( arg2,"yes" ))
     {
       victim->pcdata->auth_state = 3;
       RemoveBit(victim->pcdata->flags, PCFLAG_UNAUTHED);
       if ( victim->pcdata->authed_by )
         DISPOSE( victim->pcdata->authed_by );
-      victim->pcdata->authed_by = str_dup( ch->name );
+      victim->pcdata->authed_by = CopyString( ch->name );
       sprintf( buf, "%s authorized %s", ch->name,
                victim->name );
       to_channel( buf, CHANNEL_MONITOR, "Monitor", ch->top_level );
@@ -52,7 +52,7 @@ void do_authorize( Character *ch, char *argument )
                  "You are now fully authorized to play Rise in Power.\r\n",victim->name);                               /* B */
       return;
     }
-  else if ( !str_cmp( arg2, "no" ) || !str_cmp( arg2, "deny" ) )
+  else if ( !StrCmp( arg2, "no" ) || !StrCmp( arg2, "deny" ) )
     {
       send_to_char( "You have been denied access.\r\n", victim);
       sprintf( buf, "%s denied authorization to %s", ch->name,
@@ -62,7 +62,7 @@ void do_authorize( Character *ch, char *argument )
       do_quit(victim, "");
     }
 
-  else if ( !str_cmp( arg2, "name" ) || !str_cmp(arg2, "n" ) )
+  else if ( !StrCmp( arg2, "name" ) || !StrCmp(arg2, "n" ) )
     {
       sprintf( buf, "%s has denied %s's name", ch->name,
                victim->name );
@@ -96,7 +96,7 @@ static Character *get_waiting_desc( const Character *ch, const char *name )
 
   for ( d = first_descriptor; d; d = d->next )
     {
-      if ( d->character && (!str_prefix( name, d->character->name )) &&
+      if ( d->character && (!StringPrefix( name, d->character->name )) &&
            IsWaitingForAuth(d->character) )
         {
           if ( ++number_of_hits > 1 )

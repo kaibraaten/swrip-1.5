@@ -105,7 +105,7 @@ static void execute_on_exit( void )
 #endif
 #endif
 
-  os_cleanup();
+  OsCleanup();
 }
 
 int main( int argc, char **argv )
@@ -129,7 +129,7 @@ int main( int argc, char **argv )
   sysdata.NO_NAME_RESOLVING     = true;
   sysdata.WAIT_FOR_AUTH = true;
 
-  os_setup();
+  OsSetup();
   /*CREATE( sysdata.mccp_buf, unsigned char, COMPRESS_BUF_SIZE );*/
 
   atexit( execute_on_exit );
@@ -171,7 +171,7 @@ int main( int argc, char **argv )
       set_boot_time->sec    = 0;*/
   set_boot_time->manual = 0;
 
-  new_boot_time = update_time(localtime(&current_time));
+  new_boot_time = UpdateTime(localtime(&current_time));
   /* Copies *new_boot_time to new_boot_struct, and then points
      new_boot_time to new_boot_struct again. -- Alty */
   new_boot_struct = *new_boot_time;
@@ -184,7 +184,7 @@ int main( int argc, char **argv )
   new_boot_time->tm_hour = 6;
 
   /* Update new_boot_time (due to day increment) */
-  new_boot_time = update_time(new_boot_time);
+  new_boot_time = UpdateTime(new_boot_time);
   new_boot_struct = *new_boot_time;
   new_boot_time = &new_boot_struct;
 
@@ -197,7 +197,7 @@ int main( int argc, char **argv )
   sysdata.port = 4000;
   if ( argc > 1 )
     {
-      if ( !is_number( argv[1] ) )
+      if ( !IsNumber( argv[1] ) )
         {
           fprintf( stderr, "Usage: %s [port #]\n", argv[0] );
           exit( 1 );
@@ -726,7 +726,7 @@ void new_descriptor( socket_t new_desc )
            buf, dnew->remote.port );
   log_string_plus( log_buf, LOG_COMM, sysdata.log_level );
 
-  dnew->remote.hostip = str_dup( buf );
+  dnew->remote.hostip = CopyString( buf );
 
   if ( !sysdata.NO_NAME_RESOLVING )
     {
@@ -738,14 +738,14 @@ void new_descriptor( socket_t new_desc )
       from = NULL;
     }
 
-  dnew->remote.hostname = str_dup( (char *)( from ? from->h_name : buf) );
+  dnew->remote.hostname = CopyString( (char *)( from ? from->h_name : buf) );
 
   for ( pban = first_ban; pban; pban = pban->next )
     {
       if (
           (
-           !str_prefix( pban->name, dnew->remote.hostname )
-           || !str_suffix ( pban->name , dnew->remote.hostname )
+           !StringPrefix( pban->name, dnew->remote.hostname )
+           || !StringSuffix ( pban->name , dnew->remote.hostname )
            )
           &&  pban->level >= LEVEL_IMPLEMENTOR
           )
@@ -794,7 +794,7 @@ void new_descriptor( socket_t new_desc )
       if ( sysdata.time_of_max )
         DISPOSE(sysdata.time_of_max);
       sprintf(buf, "%24.24s", ctime(&current_time));
-      sysdata.time_of_max = str_dup(buf);
+      sysdata.time_of_max = CopyString(buf);
       sysdata.alltimemax = sysdata.maxplayers;
       sprintf( log_buf, "Broke all-time maximum player record: %d", sysdata.alltimemax );
       log_string_plus( log_buf, LOG_COMM, sysdata.log_level );
@@ -1066,7 +1066,7 @@ void read_from_buffer( Descriptor *d )
    */
   if ( k > 1 || d->incomm[0] == '!' )
     {
-      if ( d->incomm[0] != '!' && str_cmp( d->incomm, d->inlast ) )
+      if ( d->incomm[0] != '!' && StrCmp( d->incomm, d->inlast ) )
         {
           d->repeat = 0;
         }
@@ -1317,7 +1317,7 @@ bool check_parse_name( const char *name )
   /*
    * Reserved words.
    */
-  if ( is_name( name, "all auto someone immortal self god supreme demigod dog guard cityguard cat cornholio spock hicaine hithoric death ass fuck shit piss crap quit" ) )
+  if ( IsName( name, "all auto someone immortal self god supreme demigod dog guard cityguard cat cornholio spock hicaine hithoric death ass fuck shit piss crap quit" ) )
     return false;
 
   /*
@@ -1359,7 +1359,7 @@ bool check_reconnect( Descriptor *d, char *name, bool fConn )
       if ( !IsNpc(ch)
            && ( !fConn || !ch->desc )
            &&    ch->name
-           &&   !str_cmp( name, ch->name ) )
+           &&   !StrCmp( name, ch->name ) )
         {
           if ( fConn && ch->switched )
             {
@@ -1377,7 +1377,7 @@ bool check_reconnect( Descriptor *d, char *name, bool fConn )
           if ( fConn == false )
             {
               DISPOSE( d->character->pcdata->pwd );
-              d->character->pcdata->pwd = str_dup( ch->pcdata->pwd );
+              d->character->pcdata->pwd = CopyString( ch->pcdata->pwd );
             }
           else
             {
@@ -1414,9 +1414,9 @@ bool check_multi( Descriptor *d , char *name )
     {
       if ( dold != d
            && (  dold->character || dold->original )
-           &&   str_cmp( name, dold->original
+           &&   StrCmp( name, dold->original
                          ? dold->original->name : dold->character->name )
-           && !str_cmp(dold->remote.hostname , d->remote.hostname ) )
+           && !StrCmp(dold->remote.hostname , d->remote.hostname ) )
         {
           if ( d->character->top_level >= LEVEL_CREATOR
                || ( dold->original ? dold->original : dold->character )->top_level >= LEVEL_CREATOR )
@@ -1448,7 +1448,7 @@ bool check_playing( Descriptor *d, char *name, bool kick )
     {
       if ( dold != d
            && (  dold->character || dold->original )
-           &&   !str_cmp( name, dold->original
+           &&   !StrCmp( name, dold->original
                           ? dold->original->name : dold->character->name ) )
         {
           cstate = dold->connection_state;
@@ -1844,7 +1844,7 @@ char *act_string(const char *format, Character *to, Character *ch,
                 i = "door";
               else
                 {
-                  one_argument((char *) arg2, fname);
+                  OneArgument((char *) arg2, fname);
                   i = fname;
                 }
               break;

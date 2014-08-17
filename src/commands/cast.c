@@ -42,8 +42,8 @@ void do_cast( Character *ch, char *argument )
           return;
         }
 
-      spell_target_name = one_argument( argument, arg1 );
-      one_argument( spell_target_name, arg2 );
+      spell_target_name = OneArgument( argument, arg1 );
+      OneArgument( spell_target_name, arg2 );
 
       if ( arg1[0] == '\0' )
         {
@@ -164,7 +164,7 @@ void do_cast( Character *ch, char *argument )
 	   ch, NULL, NULL, TO_CHAR );
       act( AT_MAGIC, "$n reaches out with the force to those around...", ch, NULL, NULL, TO_ROOM );
       sprintf( staticbuf, "%s %s", arg2, spell_target_name );
-      ch->dest_buf = str_dup( staticbuf );
+      ch->dest_buf = CopyString( staticbuf );
       ch->tempnum = sn;
       return;
     case SUB_TIMER_DO_ABORT:
@@ -202,7 +202,7 @@ void do_cast( Character *ch, char *argument )
         }
       mana = IsNpc(ch) ? 0 : skill->min_mana;
       strcpy( staticbuf, (const char*)ch->dest_buf );
-      spell_target_name = one_argument(staticbuf, arg2);
+      spell_target_name = OneArgument(staticbuf, arg2);
       DISPOSE( ch->dest_buf );
       ch->substate = SUB_NONE;
       if ( skill->participants > 1 )
@@ -216,7 +216,7 @@ void do_cast( Character *ch, char *argument )
 		  &&   (t = get_timerptr( tmp, TIMER_DO_FUN )) != NULL
                   &&    t->count >= 1 && t->do_fun == do_cast
                   &&    tmp->tempnum == sn && tmp->dest_buf
-                  &&   !str_cmp( (const char*)tmp->dest_buf, staticbuf ) )
+                  &&   !StrCmp( (const char*)tmp->dest_buf, staticbuf ) )
               ++cnt;
           if ( cnt >= skill->participants )
             {
@@ -225,7 +225,7 @@ void do_cast( Character *ch, char *argument )
                       &&   (t = get_timerptr( tmp, TIMER_DO_FUN )) != NULL
                       &&    t->count >= 1 && t->do_fun == do_cast
                       &&    tmp->tempnum == sn && tmp->dest_buf
-                      &&   !str_cmp( (const char*)tmp->dest_buf, staticbuf ) )
+                      &&   !StrCmp( (const char*)tmp->dest_buf, staticbuf ) )
                   {
                     extract_timer( tmp, t );
                     act( AT_MAGIC, "Channeling your energy into $n, you help direct the force",
@@ -291,10 +291,10 @@ void do_cast( Character *ch, char *argument )
         }
     }
   if ( !IsNpc(ch)
-       &&   (number_percent( ) + skill->difficulty * 5) > ch->pcdata->learned[sn] )
+       &&   (GetRandomPercent( ) + skill->difficulty * 5) > ch->pcdata->learned[sn] )
     {
       /* Some more interesting loss of concentration messages  -Thoric */
-      switch( number_bits(2) )
+      switch( NumberBits(2) )
         {
         case 0: /* too busy */
           if ( ch->fighting )
@@ -303,9 +303,9 @@ void do_cast( Character *ch, char *argument )
 	    send_to_char( "You lost your concentration.\r\n", ch );
           break;
         case 1: /* irritation */
-          if ( number_bits(2) == 0 )
+          if ( NumberBits(2) == 0 )
             {
-              switch( number_bits(2) )
+              switch( NumberBits(2) )
                 {
                 case 0: send_to_char( "A tickle in your nose prevents you from keeping your concentration.\r\n", ch ); break;
                 case 1: send_to_char( "An itch on your leg keeps you from properly using the force.\r\n", ch ); break;
@@ -351,9 +351,9 @@ void do_cast( Character *ch, char *argument )
         }
       else
         {
-          start_timer(&time_used);
+          StartTimer(&time_used);
           retcode = (*skill->spell_fun) ( sn, GetAbilityLevel( ch, FORCE_ABILITY ), ch, vo );
-          end_timer(&time_used);
+          StopTimer(&time_used);
           update_userec(&time_used, &skill->userec);
         }
     }

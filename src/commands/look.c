@@ -41,12 +41,12 @@ void do_look( Character *ch, char *argument )
       return;
     }
 
-  argument = one_argument( argument, arg1 );
-  argument = one_argument( argument, arg2 );
-  argument = one_argument( argument, arg3 );
+  argument = OneArgument( argument, arg1 );
+  argument = OneArgument( argument, arg2 );
+  argument = OneArgument( argument, arg3 );
 
-  doexaprog = str_cmp( "noprog", arg2 ) && str_cmp( "noprog", arg3 );
-  is_auto = !str_cmp( arg1, "auto" );
+  doexaprog = StrCmp( "noprog", arg2 ) && StrCmp( "noprog", arg3 );
+  is_auto = !StrCmp( arg1, "auto" );
 
   if ( arg1[0] == '\0' || is_auto )
     {
@@ -54,13 +54,13 @@ void do_look( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg1, "under" ) )
+  if ( !StrCmp( arg1, "under" ) )
     {
       look_under( ch, arg2, doexaprog );
       return;
     }
 
-  if ( !str_cmp( arg1, "i" ) || !str_cmp( arg1, "in" ) )
+  if ( !StrCmp( arg1, "i" ) || !StrCmp( arg1, "in" ) )
     {
       look_in( ch, arg2, doexaprog );
       return;
@@ -98,7 +98,7 @@ void do_look( Character *ch, char *argument )
       return;
     }
 
-  number = number_argument( arg1, arg );
+  number = NumberArgument( arg1, arg );
 
   for ( cnt = 0, obj = ch->last_carrying; obj; obj = obj->prev_content )
     {
@@ -122,7 +122,7 @@ void do_look( Character *ch, char *argument )
               return;
             }
 
-          if ( nifty_is_name_prefix( arg, obj->name ) )
+          if ( NiftyIsNamePrefix( arg, obj->name ) )
             {
               if ( (cnt += obj->count) < number )
                 continue;
@@ -168,7 +168,7 @@ void do_look( Character *ch, char *argument )
               return;
             }
 
-          if ( nifty_is_name_prefix( arg, obj->name ) )
+          if ( NiftyIsNamePrefix( arg, obj->name ) )
 	    {
               if ( (cnt += obj->count) < number )
                 continue;
@@ -509,7 +509,7 @@ static void show_char_to_char_1( Character *victim, Character *ch )
   if ( IsNpc(ch) || victim == ch )
     return;
 
-  if ( number_percent( ) < ch->pcdata->learned[gsn_peek] )
+  if ( GetRandomPercent( ) < ch->pcdata->learned[gsn_peek] )
     {
       send_to_char( "\r\nYou peek at the inventory:\r\n", ch );
       show_list_to_char( victim->first_carrying, ch, true, true );
@@ -572,7 +572,7 @@ static void show_visible_affects_to_char( Character *victim, Character *ch )
     {
       set_char_color( AT_MAGIC, ch );
       ch_printf( ch, "%s looks ahead free of expression.\r\n",
-                 IsNpc( victim ) ? capitalize(victim->short_descr) : (victim->name) );
+                 IsNpc( victim ) ? Capitalize(victim->short_descr) : (victim->name) );
     }
   if ( !IsNpc(victim) && !victim->desc
        &&    victim->switched && IsAffectedBy(victim->switched, AFF_POSSESS) )
@@ -848,7 +848,7 @@ static void show_exit_to_char( Character *ch, Exit *pexit, short door )
 	    {
 	      int percent = 99;
 
-	      if( number_percent() > percent )
+	      if( GetRandomPercent() > percent )
 		{
 		  send_to_char( "You fail.\r\n", ch );
 		  return;
@@ -908,7 +908,7 @@ static void show_no_arg( Character *ch, bool is_auto )
 	  ch_printf(ch, "{%d:%s}", ch->in_room->vnum, ch->in_room->area->filename);
 
 	  set_char_color(AT_CYAN, ch);
-	  ch_printf( ch, "[%s]", flag_string(ch->in_room->room_flags, room_flags ) );
+	  ch_printf( ch, "[%s]", FlagString(ch->in_room->room_flags, room_flags ) );
 	}
     }
 
@@ -970,7 +970,7 @@ static void show_no_arg( Character *ch, bool is_auto )
 		{
 		  if ( IsSpaceobjectInRange( ship, spaceobject)
 		       && spaceobject->name
-		       && str_cmp(spaceobject->name,"") )
+		       && StrCmp(spaceobject->name,"") )
 		    {
 		      ch_printf(ch, "%s\r\n", spaceobject->name);
 		    }

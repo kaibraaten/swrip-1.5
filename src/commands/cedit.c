@@ -10,9 +10,9 @@ void do_cedit( Character *ch, char *argument )
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
 
-  smash_tilde( argument );
-  argument = one_argument( argument, arg1 );
-  argument = one_argument( argument, arg2 );
+  SmashTilde( argument );
+  argument = OneArgument( argument, arg1 );
+  argument = OneArgument( argument, arg2 );
 
   set_char_color( AT_IMMORT, ch );
 
@@ -32,7 +32,7 @@ void do_cedit( Character *ch, char *argument )
       return;
     }
 
-  if ( GetTrustLevel(ch) > LEVEL_GREATER && !str_cmp( arg1, "save" ) )
+  if ( GetTrustLevel(ch) > LEVEL_GREATER && !StrCmp( arg1, "save" ) )
     {
       save_commands();
       send_to_char( "Saved.\r\n", ch );
@@ -41,7 +41,7 @@ void do_cedit( Character *ch, char *argument )
 
   command = find_command( arg1 );
 
-  if ( GetTrustLevel(ch) > LEVEL_SUB_IMPLEM && !str_cmp( arg2, "create" ) )
+  if ( GetTrustLevel(ch) > LEVEL_SUB_IMPLEM && !StrCmp( arg2, "create" ) )
     {
       if ( command )
         {
@@ -50,11 +50,11 @@ void do_cedit( Character *ch, char *argument )
         }
 
       CREATE( command, CMDTYPE, 1 );
-      command->name = str_dup( arg1 );
+      command->name = CopyString( arg1 );
       command->level = GetTrustLevel(ch);
 
       if ( *argument )
-        one_argument(argument, arg2);
+        OneArgument(argument, arg2);
       else
         sprintf( arg2, "do_%s", arg1 );
 
@@ -65,11 +65,11 @@ void do_cedit( Character *ch, char *argument )
       if ( command->do_fun == skill_notfound )
         {
           ch_printf( ch, "Code %s not found.  Set to no code.\r\n", arg2 );
-          command->fun_name = str_dup( "" );
+          command->fun_name = CopyString( "" );
         }
       else
         {
-          command->fun_name = str_dup( arg2 );
+          command->fun_name = CopyString( arg2 );
         }
 
       return;
@@ -87,14 +87,14 @@ void do_cedit( Character *ch, char *argument )
         return;
       }
 
-  if ( arg2[0] == '\0' || !str_cmp( arg2, "show" ) )
+  if ( arg2[0] == '\0' || !StrCmp( arg2, "show" ) )
     {
       ch_printf( ch, "Command:  %s\r\nLevel:    %d\r\nPosition: %d\r\nLog:      %d\r\nCode:     %s\r\n",
                  command->name, command->level, command->position, command->log,
                  command->fun_name);
 
       if ( command->userec.num_uses )
-        send_timer(&command->userec, ch);
+        sStopTimer(&command->userec, ch);
 
       return;
     }
@@ -105,7 +105,7 @@ void do_cedit( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "delete" ) )
+  if ( !StrCmp( arg2, "delete" ) )
     {
       unlink_command( command );
       free_command( command );
@@ -113,11 +113,11 @@ void do_cedit( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "code" ) )
+  if ( !StrCmp( arg2, "code" ) )
     {
       DO_FUN *fun = skill_function( argument );
 
-      if ( str_prefix( "do_", argument ) || fun == skill_notfound )
+      if ( StringPrefix( "do_", argument ) || fun == skill_notfound )
         {
 	  send_to_char( "Code not found.\r\n", ch );
           return;
@@ -125,12 +125,12 @@ void do_cedit( Character *ch, char *argument )
 
       command->do_fun = fun;
       DISPOSE( command->fun_name );
-      command->fun_name = str_dup( argument );
+      command->fun_name = CopyString( argument );
       send_to_char( "Done.\r\n", ch );
       return;
     }
 
-  if ( !str_cmp( arg2, "level" ) )
+  if ( !StrCmp( arg2, "level" ) )
     {
       int level = atoi( argument );
 
@@ -144,7 +144,7 @@ void do_cedit( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "log" ) )
+  if ( !StrCmp( arg2, "log" ) )
     {
       int log_type = atoi( argument );
 
@@ -159,7 +159,7 @@ void do_cedit( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "position" ) )
+  if ( !StrCmp( arg2, "position" ) )
     {
       int position = atoi( argument );
 
@@ -173,11 +173,11 @@ void do_cedit( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "name" ) )
+  if ( !StrCmp( arg2, "name" ) )
     {
       bool relocate;
 
-      one_argument( argument, arg1 );
+      OneArgument( argument, arg1 );
       if ( arg1[0] == '\0' )
         {
           send_to_char( "Cannot clear name field!\r\n", ch );
@@ -192,7 +192,7 @@ void do_cedit( Character *ch, char *argument )
         relocate = false;
       if ( command->name )
         DISPOSE( command->name );
-      command->name = str_dup( arg1 );
+      command->name = CopyString( arg1 );
       if ( relocate )
         add_command( command );
       send_to_char( "Done.\r\n", ch );

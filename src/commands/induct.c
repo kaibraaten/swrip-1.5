@@ -16,10 +16,10 @@ void do_induct( Character *ch, char *argument )
   clan = ch->pcdata->clan;
 
   if ( (ch->pcdata && ch->pcdata->bestowments
-        && is_name("induct", ch->pcdata->bestowments))
-       || !str_cmp( ch->name, clan->leadership.leader  )
-       || !str_cmp( ch->name, clan->leadership.number1 )
-       || !str_cmp( ch->name, clan->leadership.number2 ) )
+        && IsName("induct", ch->pcdata->bestowments))
+       || !StrCmp( ch->name, clan->leadership.leader  )
+       || !StrCmp( ch->name, clan->leadership.number1 )
+       || !StrCmp( ch->name, clan->leadership.number2 ) )
     {
       ;
     }
@@ -29,7 +29,7 @@ void do_induct( Character *ch, char *argument )
       return;
     }
 
-  argument = one_argument( argument, arg );
+  argument = OneArgument( argument, arg );
 
   if ( arg[0] == '\0' )
     {
@@ -96,7 +96,7 @@ void do_induct( Character *ch, char *argument )
 
   victim->pcdata->clan = clan;
   DISPOSE(victim->pcdata->clan_name);
-  victim->pcdata->clan_name = str_dup( clan->name );
+  victim->pcdata->clan_name = CopyString( clan->name );
   update_member( victim );
   act( AT_MAGIC, "You induct $N into $t", ch, clan->name, victim, TO_CHAR );
   act( AT_MAGIC, "$n inducts $N into $t", ch, clan->name, victim, TO_NOTVICT );

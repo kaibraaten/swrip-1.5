@@ -10,7 +10,7 @@ void do_alias( Character *ch, char *argument )
   if (!ch || !ch->pcdata)
     return;
 
-  argument = one_argument(argument, arg);
+  argument = OneArgument(argument, arg);
 
   if ( !*arg )
     {
@@ -44,8 +44,8 @@ void do_alias( Character *ch, char *argument )
   if ( (pal=FindAlias(ch, arg)) == NULL )
     {
       CREATE(pal, Alias, 1);
-      pal->name = str_dup(arg);
-      pal->cmd  = str_dup(argument);
+      pal->name = CopyString(arg);
+      pal->cmd  = CopyString(argument);
       LINK(pal, ch->pcdata->first_alias, ch->pcdata->last_alias, next, prev);
       send_to_char("Created Alias.\r\n", ch);
     }
@@ -54,7 +54,7 @@ void do_alias( Character *ch, char *argument )
       if (pal->cmd)
         DISPOSE(pal->cmd);
 
-      pal->cmd  = str_dup(argument);
+      pal->cmd  = CopyString(argument);
       send_to_char("Modified Alias.\r\n", ch);
     }
 }

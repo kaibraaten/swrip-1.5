@@ -14,7 +14,7 @@ void do_sellship(Character *ch, char *argument )
       return;
     }
 
-  if ( str_cmp( ship->owner , ch->name ) )
+  if ( StrCmp( ship->owner , ch->name ) )
     {
       send_to_char( "&RThat isn't your ship!" ,ch );
       return;
@@ -29,8 +29,8 @@ void do_sellship(Character *ch, char *argument )
        NULL, argument , TO_ROOM );
 
   DISPOSE( ship->owner );
-  ship->owner = str_dup( "" );
-  ship->pilot = str_dup( "" );
-  ship->copilot = str_dup( "" );
+  ship->owner = CopyString( "" );
+  ship->pilot = CopyString( "" );
+  ship->copilot = CopyString( "" );
   SaveShip( ship );
 }

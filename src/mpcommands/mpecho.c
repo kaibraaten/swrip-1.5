@@ -29,7 +29,7 @@ void do_mpecho( Character *ch, char *argument )
 
   if ( (color = get_color(argument)) )
     {
-      argument = one_argument ( argument, arg1 );
+      argument = OneArgument ( argument, arg1 );
       act( color, argument, ch, NULL, NULL, TO_ROOM );
     }
   else

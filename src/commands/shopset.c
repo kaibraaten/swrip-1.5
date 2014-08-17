@@ -9,8 +9,8 @@ void do_shopset( Character *ch, char *argument )
   short vnum;
   int value;
 
-  argument = one_argument( argument, arg1 );
-  argument = one_argument( argument, arg2 );
+  argument = OneArgument( argument, arg1 );
+  argument = OneArgument( argument, arg2 );
 
   if ( arg1[0] == '\0' || arg2[0] == '\0' )
     {
@@ -39,9 +39,9 @@ void do_shopset( Character *ch, char *argument )
   shop = mob->pShop;
   value = atoi( argument );
 
-  if ( !str_cmp( arg2, "buy0" ) )
+  if ( !StrCmp( arg2, "buy0" ) )
     {
-      if ( !is_number(argument) )
+      if ( !IsNumber(argument) )
         value = get_objecttype(argument);
       if ( value < 0 || value > MAX_ITEM_TYPE )
         {
@@ -53,9 +53,9 @@ void do_shopset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "buy1" ) )
+  if ( !StrCmp( arg2, "buy1" ) )
     {
-      if ( !is_number(argument) )
+      if ( !IsNumber(argument) )
         value = get_objecttype(argument);
       if ( value < 0 || value > MAX_ITEM_TYPE )
         {
@@ -67,9 +67,9 @@ void do_shopset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "buy2" ) )
+  if ( !StrCmp( arg2, "buy2" ) )
     {
-      if ( !is_number(argument) )
+      if ( !IsNumber(argument) )
         value = get_objecttype(argument);
       if ( value < 0 || value > MAX_ITEM_TYPE )
         {
@@ -81,9 +81,9 @@ void do_shopset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "buy3" ) )
+  if ( !StrCmp( arg2, "buy3" ) )
     {
-      if ( !is_number(argument) )
+      if ( !IsNumber(argument) )
         value = get_objecttype(argument);
 
       if ( value < 0 || value > MAX_ITEM_TYPE )
@@ -96,9 +96,9 @@ void do_shopset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "buy4" ) )
+  if ( !StrCmp( arg2, "buy4" ) )
     {
-      if ( !is_number(argument) )
+      if ( !IsNumber(argument) )
         value = get_objecttype(argument);
       if ( value < 0 || value > MAX_ITEM_TYPE )
         {
@@ -110,7 +110,7 @@ void do_shopset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "buy" ) )
+  if ( !StrCmp( arg2, "buy" ) )
     {
       if ( value <= (shop->profit_sell+5) || value > 1000 )
         {
@@ -122,7 +122,7 @@ void do_shopset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "sell" ) )
+  if ( !StrCmp( arg2, "sell" ) )
     {
       if ( value < 0 || value >= (shop->profit_buy-5) )
         {
@@ -134,7 +134,7 @@ void do_shopset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "open" ) )
+  if ( !StrCmp( arg2, "open" ) )
     {
       if ( value < 0 || value > 23 )
         {
@@ -146,7 +146,7 @@ void do_shopset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "close" ) )
+  if ( !StrCmp( arg2, "close" ) )
     {
       if ( value < 0 || value > 23 )
         {
@@ -158,7 +158,7 @@ void do_shopset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "keeper" ) )
+  if ( !StrCmp( arg2, "keeper" ) )
     {
       if ( (mob2 = get_mob_index(vnum)) == NULL )
         {

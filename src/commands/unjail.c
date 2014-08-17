@@ -6,7 +6,7 @@ void do_unjail ( Character *ch , char *argument )
   Character *victim =NULL;
   char arg[MAX_INPUT_LENGTH];
 
-  argument = one_argument(argument, arg);
+  argument = OneArgument(argument, arg);
 
   if ( ( victim = get_char_room( ch, arg ) ) == NULL )
     {

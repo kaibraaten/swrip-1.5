@@ -66,7 +66,7 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
       return;
     }
 
-  ud->ItemName = str_dup( eventArgs->CommandArguments );
+  ud->ItemName = CopyString( eventArgs->CommandArguments );
 }
 
 static void MaterialFoundHandler( void *userData, MaterialFoundEventArgs *eventArgs )
@@ -110,20 +110,20 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *even
   lightsaber->weight = 5;
 
   DISPOSE( lightsaber->name );
-  lightsaber->name = str_dup( "lightsaber saber" );
+  lightsaber->name = CopyString( "lightsaber saber" );
 
   strcpy( buf, ud->ItemName );
   DISPOSE( lightsaber->short_descr );
-  lightsaber->short_descr = str_dup( buf );
+  lightsaber->short_descr = CopyString( buf );
 
   DISPOSE( lightsaber->description );
-  sprintf( buf, "%s was carelessly misplaced here.", capitalize( ud->ItemName ) );
-  lightsaber->description = str_dup( buf );
+  sprintf( buf, "%s was carelessly misplaced here.", Capitalize( ud->ItemName ) );
+  lightsaber->description = CopyString( buf );
 
   DISPOSE( lightsaber->action_desc );
   strcpy( buf, ud->ItemName );
   strcat( buf, " ignites with a hum and a soft glow." );
-  lightsaber->action_desc = str_dup( buf );
+  lightsaber->action_desc = CopyString( buf );
 
   CREATE( hitroll, Affect, 1 );
   hitroll->type               = -1;

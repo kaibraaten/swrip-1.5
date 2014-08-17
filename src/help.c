@@ -47,7 +47,7 @@ HelpFile *GetHelpFile( const Character *ch, char *argument )
 
   if ( isdigit(argument[0]) )
     {
-      lev = number_argument( argument, argnew );
+      lev = NumberArgument( argument, argnew );
       argument = argnew;
     }
   else
@@ -62,7 +62,7 @@ HelpFile *GetHelpFile( const Character *ch, char *argument )
 
   while ( argument[0] != '\0' )
     {
-      argument = one_argument( argument, argone );
+      argument = OneArgument( argument, argone );
 
       if ( argall[0] != '\0' )
 	{
@@ -84,7 +84,7 @@ HelpFile *GetHelpFile( const Character *ch, char *argument )
 	  continue;
 	}
 
-      if ( is_name( argall, GetHelpFileKeyword( pHelp ) ) )
+      if ( IsName( argall, GetHelpFileKeyword( pHelp ) ) )
 	{
 	  return pHelp;
 	}
@@ -106,13 +106,13 @@ void AddHelpFile( HelpFile *pHelp )
   for ( tHelp = first_help; tHelp; tHelp = tHelp->next )
     {
       if ( pHelp->level == tHelp->level
-	   &&   str_cmp(pHelp->keyword, tHelp->keyword) == 0 )
+	   &&   StrCmp(pHelp->keyword, tHelp->keyword) == 0 )
 	{
 	  bug( "AddHelpFile: duplicate: %s. Deleting.", pHelp->keyword );
 	  DestroyHelpFile( pHelp );
 	  return;
 	}
-      else if ( (match=str_cmp(pHelp->keyword[0]=='\'' ? pHelp->keyword+1 : pHelp->keyword,
+      else if ( (match=StrCmp(pHelp->keyword[0]=='\'' ? pHelp->keyword+1 : pHelp->keyword,
 			       tHelp->keyword[0]=='\'' ? tHelp->keyword+1 : tHelp->keyword)) < 0
 		|| (match == 0 && pHelp->level > tHelp->level) )
 	{
@@ -161,8 +161,8 @@ void LoadHelpFiles( void )
 
   for ( ; ; )
     {
-      short level = fread_number( fp );
-      char *keyword = fread_string( fp );
+      short level = ReadInt( fp );
+      char *keyword = ReadStringToTilde( fp );
       HelpFile *pHelp = CreateHelpFile( keyword, level );
 
       if ( keyword[0] == '$' )
@@ -171,7 +171,7 @@ void LoadHelpFiles( void )
 	  break;
 	}
 
-      pHelp->text = fread_string( fp );
+      pHelp->text = ReadStringToTilde( fp );
 
       if ( pHelp->keyword[0] == '\0' )
 	{
@@ -179,7 +179,7 @@ void LoadHelpFiles( void )
           continue;
         }
 
-      if ( !str_cmp( GetHelpFileKeyword( pHelp ), "greeting" ) )
+      if ( !StrCmp( GetHelpFileKeyword( pHelp ), "greeting" ) )
 	{
 	  help_greeting = GetHelpFileText( pHelp );
 	}
@@ -245,7 +245,7 @@ static char *MunchLeadingSpace( char *text )
   if ( !text )
     return "";
 
-  fixed = strip_cr(text);
+  fixed = StripCarriageReturn(text);
 
   if ( fixed[0] == ' ' )
     fixed[0] = '.';
@@ -283,7 +283,7 @@ void SetHelpFileKeyword( HelpFile *help, char *keyword )
       DISPOSE( help->keyword );
     }
 
-  help->keyword = str_dup( strupper( keyword ) );
+  help->keyword = CopyString( StringToUppercase( keyword ) );
 }
 
 char *GetHelpFileText( const HelpFile *help )
@@ -298,6 +298,6 @@ void SetHelpFileText( HelpFile *help, char *text )
       DISPOSE( help->text );
     }
 
-  help->text = str_dup( text );
+  help->text = CopyString( text );
 }
 

@@ -37,7 +37,7 @@ ch_ret spell_energy_drain( int sn, int level, Character *ch, void *vo )
     {
       victim->mana      /= 2;
       victim->move      /= 2;
-      dam                = dice(1, level);
+      dam                = RollDice(1, level);
       ch->hit           += dam;
     }
 

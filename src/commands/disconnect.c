@@ -7,7 +7,7 @@ void do_disconnect( Character *ch, char *argument )
   Descriptor *d;
   Character *victim;
 
-  one_argument( argument, arg );
+  OneArgument( argument, arg );
   if ( arg[0] == '\0' )
     {
       send_to_char( "Disconnect whom?\r\n", ch );

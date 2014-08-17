@@ -254,7 +254,7 @@ void interpret( Character *ch, char *argument )
   if ( !cmd )
     {
       /* Changed the order of these ifchecks to prevent crashing. */
-      if ( !argument || !str_cmp(argument,"") )
+      if ( !argument || !StrCmp(argument,"") )
         {
           bug( "interpret: null argument!", 0 );
           return;
@@ -321,7 +321,7 @@ void interpret( Character *ch, char *argument )
         }
       else
 	{
-	  argument = one_argument( argument, command );
+	  argument = OneArgument( argument, command );
 	}
 
       /*
@@ -332,10 +332,10 @@ void interpret( Character *ch, char *argument )
       trust = GetTrustLevel( ch );
 
       for ( cmd = command_hash[CharToLowercase(command[0])%126]; cmd; cmd = cmd->next )
-        if ( !str_prefix( command, cmd->name )
+        if ( !StringPrefix( command, cmd->name )
              && (cmd->level <= trust
 		 ||(!IsNpc(ch) && ch->pcdata->bestowments && ch->pcdata->bestowments[0] != '\0'
-		    && is_name( cmd->name, ch->pcdata->bestowments )
+		    && IsName( cmd->name, ch->pcdata->bestowments )
 		    && cmd->level <= (trust + 5) ) ) )
           {
             found = true;
@@ -345,7 +345,7 @@ void interpret( Character *ch, char *argument )
       /*
        * Turn off afk bit when any command performed.
        */
-      if ( IsBitSet ( ch->act, PLR_AFK)  && (str_cmp(command, "AFK")))
+      if ( IsBitSet ( ch->act, PLR_AFK)  && (StrCmp(command, "AFK")))
         {
           RemoveBit( ch->act, PLR_AFK );
           act( AT_GREY, "$n is no longer afk.", ch, NULL, NULL, TO_ROOM );
@@ -483,7 +483,7 @@ void interpret( Character *ch, char *argument )
 
   /* Berserk check for flee.. maybe add drunk to this?.. but too much
      hardcoding is annoying.. -- Altrag */
-  if ( !str_cmp(cmd->name, "flee")
+  if ( !StrCmp(cmd->name, "flee")
        && IsAffectedBy(ch, AFF_BERSERK) )
     {
       send_to_char( "You aren't thinking very clearly...\r\n", ch);
@@ -495,9 +495,9 @@ void interpret( Character *ch, char *argument )
    */
   ch->prev_cmd = ch->last_cmd;    /* haus, for automapping */
   ch->last_cmd = cmd->do_fun;
-  start_timer(&time_used);
+  StartTimer(&time_used);
   cmd->do_fun( ch, argument );
-  end_timer(&time_used);
+  StopTimer(&time_used);
 
   /*
    * Update the record of how many times this command has been used (haus)
@@ -526,7 +526,7 @@ CMDTYPE *find_command( const char *command )
 
   for ( cmd = command_hash[hash]; cmd; cmd = cmd->next )
     {
-      if ( !str_prefix( command, cmd->name ) )
+      if ( !StringPrefix( command, cmd->name ) )
 	{
 	  return cmd;
 	}
@@ -551,7 +551,7 @@ SOCIALTYPE *find_social( const char *command )
 
   for ( social = social_index[hash]; social; social = social->next )
     {
-      if ( !str_prefix( command, social->name ) )
+      if ( !StringPrefix( command, social->name ) )
 	{
 	  return social;
 	}
@@ -597,7 +597,7 @@ bool check_social( Character *ch, const char *command, char *argument )
        * I just know this is the path to a 12" 'if' statement.  :(
        * But two players asked for it already!  -- Furey
        */
-      if ( !str_cmp( social->name, "snore" ) )
+      if ( !StrCmp( social->name, "snore" ) )
 	{
 	  break;
 	}
@@ -607,7 +607,7 @@ bool check_social( Character *ch, const char *command, char *argument )
 
     }
 
-  one_argument( argument, arg );
+  OneArgument( argument, arg );
 
   if ( arg[0] == '\0' )
     {
@@ -634,13 +634,13 @@ bool check_social( Character *ch, const char *command, char *argument )
            && IsAwake(victim)
            && !IsBitSet( victim->pIndexData->mprog.progtypes, ACT_PROG ) )
         {
-          switch ( number_bits( 4 ) )
+          switch ( NumberBits( 4 ) )
             {
             case 0:
               if ( !IsBitSet(ch->in_room->room_flags, ROOM_SAFE )
                    && IsEvil(ch) )
                 {
-                  if ( !str_cmp( social->name, "slap" ) || !str_cmp( social->name, "punch" ) )
+                  if ( !StrCmp( social->name, "slap" ) || !StrCmp( social->name, "punch" ) )
 		    {
 		      multi_hit( victim, ch, TYPE_UNDEFINED );
 		    }
@@ -687,7 +687,7 @@ bool check_social( Character *ch, const char *command, char *argument )
   return true;
 }
 
-void send_timer(struct timerset *vtime, Character *ch)
+void sStopTimer(struct timerset *vtime, Character *ch)
 {
   struct timeval ntime;
   int carry = 0;

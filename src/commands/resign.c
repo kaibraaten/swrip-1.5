@@ -21,7 +21,7 @@ void do_resign( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( ch->name, ch->pcdata->clan->leadership.leader ) )
+  if ( !StrCmp( ch->name, ch->pcdata->clan->leadership.leader ) )
     {
       ch_printf( ch, "You can't resign from %s ... you are the leader!\r\n", clan->name );
       return;
@@ -33,22 +33,22 @@ void do_resign( Character *ch, char *argument )
   RemoveBit( ch->speaks, LANG_CLAN );
   --clan->members;
 
-  if ( !str_cmp( ch->name, ch->pcdata->clan->leadership.number1 ) )
+  if ( !StrCmp( ch->name, ch->pcdata->clan->leadership.number1 ) )
     {
       DISPOSE( ch->pcdata->clan->leadership.number1 );
-      ch->pcdata->clan->leadership.number1 = str_dup( "" );
+      ch->pcdata->clan->leadership.number1 = CopyString( "" );
     }
 
-  if ( !str_cmp( ch->name, ch->pcdata->clan->leadership.number2 ) )
+  if ( !StrCmp( ch->name, ch->pcdata->clan->leadership.number2 ) )
     {
       DISPOSE( ch->pcdata->clan->leadership.number2 );
-      ch->pcdata->clan->leadership.number2 = str_dup( "" );
+      ch->pcdata->clan->leadership.number2 = CopyString( "" );
     }
 
   remove_member( ch );
   ch->pcdata->clan = NULL;
   DISPOSE(ch->pcdata->clan_name);
-  ch->pcdata->clan_name = str_dup( "" );
+  ch->pcdata->clan_name = CopyString( "" );
   act( AT_MAGIC, "You resign your position in $t", ch, clan->name, NULL , TO_CHAR );
 
   xp_to_lose = umax( GetExperience( ch, DIPLOMACY_ABILITY ) - exp_level( GetAbilityLevel( ch, DIPLOMACY_ABILITY ) ), 0 );
@@ -56,7 +56,7 @@ void do_resign( Character *ch, char *argument )
   ch_printf( ch, "You lose %ld diplomacy experience.\r\n", xp_actually_lost );
 
   DISPOSE( ch->pcdata->bestowments );
-  ch->pcdata->bestowments = str_dup("");
+  ch->pcdata->bestowments = CopyString("");
 
   save_char_obj( ch );  /* clan gets saved when pfile is saved */
 }

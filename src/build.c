@@ -191,11 +191,11 @@ void assign_area( Character *ch )
        &&   ch->pcdata->r_range_hi )
     {
       tarea = ch->pcdata->area;
-      sprintf( taf, "%s.are", capitalize( ch->name ) );
+      sprintf( taf, "%s.are", Capitalize( ch->name ) );
       if ( !tarea )
         {
           for ( tmp = first_build; tmp; tmp = tmp->next )
-            if ( !str_cmp( taf, tmp->filename ) )
+            if ( !StrCmp( taf, tmp->filename ) )
               {
                 tarea = tmp;
                 break;
@@ -210,10 +210,10 @@ void assign_area( Character *ch )
           tarea->first_reset    = NULL;
           tarea->last_reset     = NULL;
           sprintf( buf, "{PROTO} %s's area in progress", ch->name );
-          tarea->name           = str_dup( buf );
-          tarea->filename       = str_dup( taf );
+          tarea->name           = CopyString( buf );
+          tarea->filename       = CopyString( taf );
           sprintf( buf2, "%s", ch->name );
-          tarea->author         = str_dup( buf2 );
+          tarea->author         = CopyString( buf2 );
           tarea->age            = 0;
           tarea->nplayer        = 0;
 
@@ -242,15 +242,15 @@ ExtraDescription *SetRExtra( Room *room, char *keywords )
 
   for ( ed = room->first_extradesc; ed; ed = ed->next )
     {
-      if ( is_name( keywords, ed->keyword ) )
+      if ( IsName( keywords, ed->keyword ) )
         break;
     }
   if ( !ed )
     {
       CREATE( ed, ExtraDescription, 1 );
       LINK( ed, room->first_extradesc, room->last_extradesc, next, prev );
-      ed->keyword       = str_dup( keywords );
-      ed->description   = str_dup( "" );
+      ed->keyword       = CopyString( keywords );
+      ed->description   = CopyString( "" );
       top_ed++;
     }
   return ed;
@@ -262,7 +262,7 @@ bool DelRExtra( Room *room, char *keywords )
 
   for ( rmed = room->first_extradesc; rmed; rmed = rmed->next )
     {
-      if ( is_name( keywords, rmed->keyword ) )
+      if ( IsName( keywords, rmed->keyword ) )
         break;
     }
   if ( !rmed )
@@ -281,15 +281,15 @@ ExtraDescription *SetOExtra( OBJ_DATA *obj, char *keywords )
 
   for ( ed = obj->first_extradesc; ed; ed = ed->next )
     {
-      if ( is_name( keywords, ed->keyword ) )
+      if ( IsName( keywords, ed->keyword ) )
         break;
     }
   if ( !ed )
     {
       CREATE( ed, ExtraDescription, 1 );
       LINK( ed, obj->first_extradesc, obj->last_extradesc, next, prev );
-      ed->keyword       = str_dup( keywords );
-      ed->description   = str_dup( "" );
+      ed->keyword       = CopyString( keywords );
+      ed->description   = CopyString( "" );
       top_ed++;
     }
   return ed;
@@ -301,7 +301,7 @@ bool DelOExtra( OBJ_DATA *obj, char *keywords )
 
   for ( rmed = obj->first_extradesc; rmed; rmed = rmed->next )
     {
-      if ( is_name( keywords, rmed->keyword ) )
+      if ( IsName( keywords, rmed->keyword ) )
         break;
     }
   if ( !rmed )
@@ -320,15 +320,15 @@ ExtraDescription *SetOExtraProto( OBJ_INDEX_DATA *obj, char *keywords )
 
   for ( ed = obj->first_extradesc; ed; ed = ed->next )
     {
-      if ( is_name( keywords, ed->keyword ) )
+      if ( IsName( keywords, ed->keyword ) )
         break;
     }
   if ( !ed )
     {
       CREATE( ed, ExtraDescription, 1 );
       LINK( ed, obj->first_extradesc, obj->last_extradesc, next, prev );
-      ed->keyword       = str_dup( keywords );
-      ed->description   = str_dup( "" );
+      ed->keyword       = CopyString( keywords );
+      ed->description   = CopyString( "" );
       top_ed++;
     }
   return ed;
@@ -340,7 +340,7 @@ bool DelOExtraProto( OBJ_INDEX_DATA *obj, char *keywords )
 
   for ( rmed = obj->first_extradesc; rmed; rmed = rmed->next )
     {
-      if ( is_name( keywords, rmed->keyword ) )
+      if ( IsName( keywords, rmed->keyword ) )
         break;
     }
   if ( !rmed )
@@ -432,8 +432,8 @@ void fold_area( Area *tarea, char *filename, bool install )
       fprintf( fpout, "#%ld\n",  vnum                            );
       fprintf( fpout, "%s~\n",  pMobIndex->player_name          );
       fprintf( fpout,   "%s~\n",        pMobIndex->short_descr          );
-      fprintf( fpout,   "%s~\n",        strip_cr(pMobIndex->long_descr) );
-      fprintf( fpout, "%s~\n",  strip_cr(pMobIndex->description));
+      fprintf( fpout,   "%s~\n",        StripCarriageReturn(pMobIndex->long_descr) );
+      fprintf( fpout, "%s~\n",  StripCarriageReturn(pMobIndex->description));
       fprintf( fpout, "%d %d %d %c\n",pMobIndex->act,
                pMobIndex->affected_by,
                pMobIndex->alignment,
@@ -493,7 +493,7 @@ void fold_area( Area *tarea, char *filename, bool install )
           for ( mprog = pMobIndex->mprog.mudprogs; mprog; mprog = mprog->next )
             fprintf( fpout, "> %s %s~\n%s~\n",
                      mprog_type_to_name( mprog->type ),
-                     mprog->arglist, strip_cr(mprog->comlist) );
+                     mprog->arglist, StripCarriageReturn(mprog->comlist) );
           fprintf( fpout, "|\n" );
         }
     }
@@ -568,7 +568,7 @@ void fold_area( Area *tarea, char *filename, bool install )
 
       for ( ed = pObjIndex->first_extradesc; ed; ed = ed->next )
         fprintf( fpout, "E\n%s~\n%s~\n",
-                 ed->keyword, strip_cr( ed->description )       );
+                 ed->keyword, StripCarriageReturn( ed->description )       );
 
       for ( paf = pObjIndex->first_affect; paf; paf = paf->next )
         fprintf( fpout, "A\n%d %d\n", paf->location,
@@ -584,7 +584,7 @@ void fold_area( Area *tarea, char *filename, bool install )
           for ( mprog = pObjIndex->mprog.mudprogs; mprog; mprog = mprog->next )
             fprintf( fpout, "> %s %s~\n%s~\n",
                      mprog_type_to_name( mprog->type ),
-                     mprog->arglist, strip_cr(mprog->comlist) );
+                     mprog->arglist, StripCarriageReturn(mprog->comlist) );
           fprintf( fpout, "|\n" );
         }
     }
@@ -621,7 +621,7 @@ void fold_area( Area *tarea, char *filename, bool install )
         }
       fprintf( fpout, "#%ld\n",  vnum                            );
       fprintf( fpout, "%s~\n",  room->name                      );
-      fprintf( fpout, "%s~\n",  strip_cr( room->description )   );
+      fprintf( fpout, "%s~\n",  StripCarriageReturn( room->description )   );
       if ( (room->tele_delay > 0 && room->tele_vnum > 0) || room->tunnel > 0 )
         fprintf( fpout, "0 %d %d %d %ld %d\n",   room->room_flags,
                  room->sector_type,
@@ -636,8 +636,8 @@ void fold_area( Area *tarea, char *filename, bool install )
           if ( IsBitSet(xit->exit_info, EX_PORTAL) ) /* don't fold portals */
             continue;
           fprintf( fpout, "D%d\n",              xit->vdir );
-          fprintf( fpout, "%s~\n",              strip_cr( xit->description ) );
-          fprintf( fpout, "%s~\n",              strip_cr( xit->keyword ) );
+          fprintf( fpout, "%s~\n",              StripCarriageReturn( xit->description ) );
+          fprintf( fpout, "%s~\n",              StripCarriageReturn( xit->keyword ) );
           if ( xit->distance > 1 )
             fprintf( fpout, "%d %ld %ld %d\n",
 		     xit->exit_info & ~EX_BASHED,
@@ -652,14 +652,14 @@ void fold_area( Area *tarea, char *filename, bool install )
         }
       for ( ed = room->first_extradesc; ed; ed = ed->next )
         fprintf( fpout, "E\n%s~\n%s~\n",
-                 ed->keyword, strip_cr( ed->description ));
+                 ed->keyword, StripCarriageReturn( ed->description ));
 
       if ( room->mprog.mudprogs )
         {
           for ( mprog = room->mprog.mudprogs; mprog; mprog = mprog->next )
             fprintf( fpout, "> %s %s~\n%s~\n",
                      mprog_type_to_name( mprog->type ),
-                     mprog->arglist, strip_cr(mprog->comlist) );
+                     mprog->arglist, StripCarriageReturn(mprog->comlist) );
           fprintf( fpout, "|\n" );
         }
       fprintf( fpout, "S\n" );
@@ -812,10 +812,10 @@ Reset *ParseReset( Area *tarea, char *argument, Character *ch )
   Room *room;
   Exit *pexit;
 
-  argument = one_argument( argument, arg1 );
-  argument = one_argument( argument, arg2 );
-  argument = one_argument( argument, arg3 );
-  argument = one_argument( argument, arg4 );
+  argument = OneArgument( argument, arg1 );
+  argument = OneArgument( argument, arg2 );
+  argument = OneArgument( argument, arg3 );
+  argument = OneArgument( argument, arg4 );
   extra = 0; letter = '*';
   val1 = atoi( arg2 );
   val2 = atoi( arg3 );
@@ -826,7 +826,7 @@ Reset *ParseReset( Area *tarea, char *argument, Character *ch )
       return NULL;
     }
 
-  if ( !str_cmp( arg1, "hide" ) )
+  if ( !StrCmp( arg1, "hide" ) )
     {
       if ( arg2[0] != '\0' && !get_obj_index(val1) )
         {
@@ -853,7 +853,7 @@ Reset *ParseReset( Area *tarea, char *argument, Character *ch )
           return NULL;
         }
       else
-        if ( !str_cmp( arg1, "mob" ) )
+        if ( !StrCmp( arg1, "mob" ) )
           {
             if ( !get_mob_index(val1) )
               {
@@ -870,7 +870,7 @@ Reset *ParseReset( Area *tarea, char *argument, Character *ch )
             letter = 'M';
           }
         else
-          if ( !str_cmp( arg1, "obj" ) )
+          if ( !StrCmp( arg1, "obj" ) )
             {
               if ( !get_obj_index(val1) )
                 {
@@ -887,7 +887,7 @@ Reset *ParseReset( Area *tarea, char *argument, Character *ch )
               letter = 'O';
             }
           else
-            if ( !str_cmp( arg1, "give" ) )
+            if ( !StrCmp( arg1, "give" ) )
               {
                 if ( !get_obj_index(val1) )
                   {
@@ -902,14 +902,14 @@ Reset *ParseReset( Area *tarea, char *argument, Character *ch )
                 letter = 'G';
               }
             else
-              if ( !str_cmp( arg1, "equip" ) )
+              if ( !StrCmp( arg1, "equip" ) )
                 {
                   if ( !get_obj_index(val1) )
                     {
                       send_to_char( "Reset: EQUIP: no such object\r\n", ch );
                       return NULL;
                     }
-                  if ( !is_number(arg3) )
+                  if ( !IsNumber(arg3) )
                     val2 = get_wearloc(arg3);
                   if ( val2 < 0 || val2 >= MAX_WEAR )
                     {
@@ -922,7 +922,7 @@ Reset *ParseReset( Area *tarea, char *argument, Character *ch )
                   letter = 'E';
                 }
               else
-                if ( !str_cmp( arg1, "put" ) )
+                if ( !StrCmp( arg1, "put" ) )
                   {
                     if ( !get_obj_index(val1) )
                       {
@@ -935,14 +935,14 @@ Reset *ParseReset( Area *tarea, char *argument, Character *ch )
                         return NULL;
                       }
                     extra = umax(val3, 0);
-                    argument = one_argument(argument, arg4);
-                    val3 = (is_number(argument) ? atoi(arg4) : 0);
+                    argument = OneArgument(argument, arg4);
+                    val3 = (IsNumber(argument) ? atoi(arg4) : 0);
                     if ( val3 < 0 )
                       val3 = 0;
                     letter = 'P';
                   }
                 else
-                  if ( !str_cmp( arg1, "door" ) )
+                  if ( !StrCmp( arg1, "door" ) )
                     {
                       if ( (room = get_room_index(val1)) == NULL )
                         {
@@ -971,7 +971,7 @@ Reset *ParseReset( Area *tarea, char *argument, Character *ch )
                       val2  = value;
                     }
                   else
-                    if ( !str_cmp( arg1, "rand" ) )
+                    if ( !StrCmp( arg1, "rand" ) )
                       {
                         if ( !get_room_index(val1) )
                           {
@@ -988,7 +988,7 @@ Reset *ParseReset( Area *tarea, char *argument, Character *ch )
                         letter = 'R';
                       }
                     else
-                      if ( !str_cmp( arg1, "trap" ) )
+                      if ( !StrCmp( arg1, "trap" ) )
                         {
                           if ( val2 < 1 || val2 > MAX_TRAPTYPE )
                             {
@@ -1002,7 +1002,7 @@ Reset *ParseReset( Area *tarea, char *argument, Character *ch )
                             }
                           while ( argument[0] != '\0' )
                             {
-                              argument = one_argument( argument, arg4 );
+                              argument = OneArgument( argument, arg4 );
                               value = get_trapflag( arg4 );
                               if ( value >= 0 || value < 32 )
                                 SetBit( extra, 1 << value );
@@ -1055,7 +1055,7 @@ void mpedit( Character *ch, MPROG_DATA *mprg, int mptype, char *argument )
 	  DISPOSE( mprg->arglist );
 	}
 
-      mprg->arglist = str_dup( argument );
+      mprg->arglist = CopyString( argument );
     }
 
   ch->substate = SUB_MPROG_EDIT;
@@ -1063,7 +1063,7 @@ void mpedit( Character *ch, MPROG_DATA *mprg, int mptype, char *argument )
 
   if ( !mprg->comlist )
     {
-      mprg->comlist = str_dup( "" );
+      mprg->comlist = CopyString( "" );
     }
 
   StartEditing( ch, mprg->comlist );
@@ -1084,7 +1084,7 @@ void rpedit( Character *ch, MPROG_DATA *mprg, int mptype, char *argument )
 	  DISPOSE( mprg->arglist );
 	}
 
-      mprg->arglist = str_dup( argument );
+      mprg->arglist = CopyString( argument );
     }
 
   ch->substate = SUB_MPROG_EDIT;
@@ -1092,7 +1092,7 @@ void rpedit( Character *ch, MPROG_DATA *mprg, int mptype, char *argument )
 
   if(!mprg->comlist)
     {
-      mprg->comlist = str_dup("");
+      mprg->comlist = CopyString("");
     }
 
   StartEditing( ch, mprg->comlist );

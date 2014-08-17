@@ -18,7 +18,7 @@ ch_ret spell_farsight( int sn, int level, Character *ch, void *vo )
      flag on the caster is not the same as on the victim.  Got it?
   */
 
-  saving = number_percent();
+  saving = GetRandomPercent();
 
   if ( ( victim = get_char_world( ch, spell_target_name ) ) == NULL
        ||   victim == ch

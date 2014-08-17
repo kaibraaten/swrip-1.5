@@ -22,13 +22,13 @@ void do_loadarea( Character *ch, char *argument )
       bool found;
 
       for ( found = false, tarea = first_build; tarea; tarea = tarea->next )
-        if ( !str_cmp( tarea->filename, argument ) )
+        if ( !StrCmp( tarea->filename, argument ) )
           {
             found = true;
             break;
 	  }
       if ( IsNpc(ch) || ( GetTrustLevel(ch) < LEVEL_GREATER
-                           &&   tarea && !is_name( tarea->filename, ch->pcdata->bestowments ) ) )
+                           &&   tarea && !IsName( tarea->filename, ch->pcdata->bestowments ) ) )
         {
           send_to_char( "You can only load areas you have permission for.\r\n", ch );
           return;

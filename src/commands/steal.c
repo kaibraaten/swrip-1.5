@@ -10,8 +10,8 @@ void do_steal( Character *ch, char *argument )
   OBJ_DATA *obj , *obj_next;
   int percent, xp;
 
-  argument = one_argument( argument, arg1 );
-  argument = one_argument( argument, arg2 );
+  argument = OneArgument( argument, arg1 );
+  argument = OneArgument( argument, arg2 );
 
   if ( ch->mount )
     {
@@ -48,7 +48,7 @@ void do_steal( Character *ch, char *argument )
     }
 
   SetWaitState( ch, skill_table[gsn_steal]->beats );
-  percent  = number_percent( ) + ( IsAwake(victim) ? 10 : -50 )
+  percent  = GetRandomPercent( ) + ( IsAwake(victim) ? 10 : -50 )
     - (GetCurrentLuck(ch) - 15) + (GetCurrentLuck(victim) - 13)
     + TimesKilled( ch, victim )*7;
 
@@ -99,13 +99,13 @@ void do_steal( Character *ch, char *argument )
   if ( IsNpc(victim) )
     AddKill( ch, victim );  /* makes it harder to steal from same char */
 
-  if ( !str_cmp( arg1, "credits"  )
-       ||   !str_cmp( arg1, "credit" )
-       ||   !str_cmp( arg1, "money"  ) )
+  if ( !StrCmp( arg1, "credits"  )
+       ||   !StrCmp( arg1, "credit" )
+       ||   !StrCmp( arg1, "money"  ) )
     {
       int amount;
 
-      amount = (int) (victim->gold * number_range(1, 10) / 100);
+      amount = (int) (victim->gold * GetRandomNumberFromRange(1, 10) / 100);
       if ( amount <= 0 )
         {
           send_to_char( "You couldn't get any credits.\r\n", ch );

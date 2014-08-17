@@ -9,7 +9,7 @@ void do_nohelps(Character *ch, char *argument)
   char arg[MAX_STRING_LENGTH];
   int hash, col=0, sn=0;
 
-  argument = one_argument( argument, arg );
+  argument = OneArgument( argument, arg );
 
   if(!IsImmortal(ch) || IsNpc(ch) )
     {
@@ -17,7 +17,7 @@ void do_nohelps(Character *ch, char *argument)
       return;
     }
 
-  if ( arg[0] == '\0' || !str_cmp(arg, "all") )
+  if ( arg[0] == '\0' || !StrCmp(arg, "all") )
     {
       do_nohelps(ch, "commands");
       send_to_char( "\r\n", ch);
@@ -28,7 +28,7 @@ void do_nohelps(Character *ch, char *argument)
       return;
     }
 
-  if(!str_cmp(arg, "commands") )
+  if(!StrCmp(arg, "commands") )
     {
       send_to_char("&C&YCommands for which there are no help files:\r\n\r\n", ch);
 
@@ -52,7 +52,7 @@ void do_nohelps(Character *ch, char *argument)
       return;
     }
 
-  if(!str_cmp(arg, "skills") || !str_cmp(arg, "spells") )
+  if(!StrCmp(arg, "skills") || !StrCmp(arg, "spells") )
     {
       send_to_char("&CSkills/Spells for which there are no help files:\r\n\r\n", ch);
 
@@ -73,7 +73,7 @@ void do_nohelps(Character *ch, char *argument)
       return;
     }
 
-  if(!str_cmp(arg, "areas") )
+  if(!StrCmp(arg, "areas") )
     {
       send_to_char("&GAreas for which there are no help files:\r\n\r\n", ch);
 

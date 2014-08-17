@@ -6,12 +6,12 @@ void do_junk( Character *ch, char *argument )
   char arg[MAX_INPUT_LENGTH];
   OBJ_DATA *obj = NULL;
 
-  one_argument( argument, arg );
+  OneArgument( argument, arg );
 
   if( !ch || !ch->in_room )
     return;
 
-  if ( arg[0] == '\0' || !str_cmp( arg, ch->name ) )
+  if ( arg[0] == '\0' || !StrCmp( arg, ch->name ) )
     {
       send_to_char( "Junk what?", ch );
       return;

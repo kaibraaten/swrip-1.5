@@ -19,10 +19,10 @@ void do_mpoload( Character *ch, char *argument )
       return;
     }
 
-  argument = one_argument( argument, arg1 );
-  argument = one_argument( argument, arg2 );
+  argument = OneArgument( argument, arg1 );
+  argument = OneArgument( argument, arg2 );
 
-  if ( arg1[0] == '\0' || !is_number( arg1 ) )
+  if ( arg1[0] == '\0' || !IsNumber( arg1 ) )
     {
       progbug( "Mpoload - Bad syntax", ch );
       return;
@@ -35,7 +35,7 @@ void do_mpoload( Character *ch, char *argument )
       /*
        * New feature from Alander.
        */
-      if ( !is_number( arg2 ) )
+      if ( !IsNumber( arg2 ) )
         {
           progbug( "Mpoload - Bad level syntax", ch );
           return;

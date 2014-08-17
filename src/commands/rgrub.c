@@ -13,12 +13,12 @@ void do_rgrub (Character *ch, char *argument)
   char arg3[MAX_STRING_LENGTH];
   char arg4[MAX_STRING_LENGTH];
 
-  argument = one_argument (argument, arg1);
-  argument = one_argument (argument, arg2);
-  argument = one_argument (argument, arg3);
-  argument = one_argument (argument, arg4);
+  argument = OneArgument (argument, arg1);
+  argument = OneArgument (argument, arg2);
+  argument = OneArgument (argument, arg3);
+  argument = OneArgument (argument, arg4);
 
-  if (!str_cmp(arg1, "st"))
+  if (!StrCmp(arg1, "st"))
     {
 #define RGRUB_ST_MAX_SIZE 5000
       Room *pRoom;

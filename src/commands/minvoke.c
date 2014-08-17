@@ -10,7 +10,7 @@ void do_minvoke( Character *ch, char *argument )
   Character *victim;
   short vnum;
 
-  one_argument( argument, arg );
+  OneArgument( argument, arg );
 
   if ( arg[0] == '\0' )
     {
@@ -18,18 +18,18 @@ void do_minvoke( Character *ch, char *argument )
       return;
     }
 
-  if ( !is_number( arg ) )
+  if ( !IsNumber( arg ) )
     {
       char arg2[MAX_INPUT_LENGTH];
       int  hash, cnt;
-      int  count = number_argument( arg, arg2 );
+      int  count = NumberArgument( arg, arg2 );
 
       vnum = -1;
       for ( hash = cnt = 0; hash < MAX_KEY_HASH; hash++ )
         for ( pMobIndex = mob_index_hash[hash];
               pMobIndex;
               pMobIndex = pMobIndex->next )
-          if ( nifty_is_name( arg2, pMobIndex->player_name )
+          if ( NiftyIsName( arg2, pMobIndex->player_name )
                &&   ++cnt == count )
             {
               vnum = pMobIndex->vnum;

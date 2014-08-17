@@ -430,7 +430,7 @@ void boot_db( bool fCopyOver )
    * Init random number generator.
    */
   log_string("Initializing random number generator");
-  init_mm();
+  InitMM();
   srand( time(0) );
 
   /*
@@ -464,9 +464,9 @@ void boot_db( bool fCopyOver )
     weather_info.mmhg   = 960;
 
     if ( time_info.month >= 7 && time_info.month <=12 )
-      weather_info.mmhg += number_range( 1, 50 );
+      weather_info.mmhg += GetRandomNumberFromRange( 1, 50 );
     else
-      weather_info.mmhg += number_range( 1, 80 );
+      weather_info.mmhg += GetRandomNumberFromRange( 1, 80 );
 
     if ( weather_info.mmhg <=  980 )
       weather_info.sky = SKY_LIGHTNING;
@@ -640,7 +640,7 @@ void boot_db( bool fCopyOver )
 
     for ( ; ; )
       {
-        strcpy( strArea, fread_word( fpList ) );
+        strcpy( strArea, ReadWord( fpList ) );
 
         if ( strArea[0] == '$' )
           break;
@@ -735,9 +735,9 @@ void load_area( FILE *fp )
   Area *pArea;
 
   CREATE( pArea, Area, 1 );
-  pArea->name           = fread_string_nohash( fp );
-  pArea->author       = str_dup( "unknown" );
-  pArea->filename       = str_dup( strArea );
+  pArea->name           = ReadStringToTildeNoHash( fp );
+  pArea->author       = CopyString( "unknown" );
+  pArea->filename       = CopyString( strArea );
   pArea->age            = 15;
   pArea->hi_soft_range  = MAX_LEVEL;
   pArea->hi_hard_range  = MAX_LEVEL;
@@ -769,7 +769,7 @@ void load_author( Area *tarea, FILE *fp )
   if ( tarea->author )
     DISPOSE( tarea->author );
 
-  tarea->author   = fread_string( fp );
+  tarea->author   = ReadStringToTilde( fp );
 }
 
 /*
@@ -792,8 +792,8 @@ void load_economy( Area *tarea, FILE *fp )
 	}
     }
 
-  tarea->high_economy   = fread_number( fp );
-  tarea->low_economy    = fread_number( fp );
+  tarea->high_economy   = ReadInt( fp );
+  tarea->low_economy    = ReadInt( fp );
 }
 
 /* Reset Message Load, Rennard */
@@ -817,7 +817,7 @@ void load_resetmsg( Area *tarea, FILE *fp )
   if ( tarea->resetmsg )
     DISPOSE( tarea->resetmsg );
 
-  tarea->resetmsg = fread_string_nohash( fp );
+  tarea->resetmsg = ReadStringToTildeNoHash( fp );
 }
 
 /*
@@ -843,7 +843,7 @@ void load_flags( Area *tarea, FILE *fp )
 	}
     }
 
-  ln = fread_line( fp );
+  ln = ReadLine( fp );
   x1 = x2 = 0;
   sscanf( ln, "%d %d",
           &x1, &x2 );
@@ -893,7 +893,7 @@ void load_mobiles( Area *tarea, FILE *fp )
       int iHash = 0;
       bool oldmob = false;
       bool tmpBootDb = false;
-      char letter = fread_letter( fp );
+      char letter = ReadChar( fp );
 
       if ( letter != '#' )
         {
@@ -910,7 +910,7 @@ void load_mobiles( Area *tarea, FILE *fp )
 	    }
         }
 
-      vnum = fread_number( fp );
+      vnum = ReadInt( fp );
 
       if ( vnum == INVALID_VNUM )
         break;
@@ -953,43 +953,43 @@ void load_mobiles( Area *tarea, FILE *fp )
             tarea->hi_m_vnum    = vnum;
         }
 
-      pMobIndex->player_name     = fread_string( fp );
-      pMobIndex->short_descr     = fread_string( fp );
-      pMobIndex->long_descr      = fread_string( fp );
-      pMobIndex->description     = fread_string( fp );
+      pMobIndex->player_name     = ReadStringToTilde( fp );
+      pMobIndex->short_descr     = ReadStringToTilde( fp );
+      pMobIndex->long_descr      = ReadStringToTilde( fp );
+      pMobIndex->description     = ReadStringToTilde( fp );
 
       pMobIndex->long_descr[0]   = CharToUppercase(pMobIndex->long_descr[0]);
       pMobIndex->description[0]  = CharToUppercase(pMobIndex->description[0]);
 
-      pMobIndex->act             = fread_number( fp ) | ACT_IsNpc;
-      pMobIndex->affected_by     = fread_number( fp );
+      pMobIndex->act             = ReadInt( fp ) | ACT_IsNpc;
+      pMobIndex->affected_by     = ReadInt( fp );
       pMobIndex->pShop           = NULL;
       pMobIndex->rShop           = NULL;
-      pMobIndex->alignment       = fread_number( fp );
-      letter                     = fread_letter( fp );
-      pMobIndex->level           = fread_number( fp );
+      pMobIndex->alignment       = ReadInt( fp );
+      letter                     = ReadChar( fp );
+      pMobIndex->level           = ReadInt( fp );
 
-      pMobIndex->mobthac0        = fread_number( fp );
-      pMobIndex->ac              = fread_number( fp );
-      pMobIndex->hitnodice       = fread_number( fp );
-      /* 'd'            */         fread_letter( fp );
-      pMobIndex->hitsizedice     = fread_number( fp );
-      /* '+'            */         fread_letter( fp );
-      pMobIndex->hitplus         = fread_number( fp );
-      pMobIndex->damnodice       = fread_number( fp );
-      /* 'd'            */         fread_letter( fp );
-      pMobIndex->damsizedice     = fread_number( fp );
-      /* '+'            */         fread_letter( fp );
-      pMobIndex->damplus         = fread_number( fp );
-      pMobIndex->gold            = fread_number( fp );
-      pMobIndex->exp             = fread_number( fp );
-      pMobIndex->position        = fread_number( fp );
-      pMobIndex->defposition     = fread_number( fp );
+      pMobIndex->mobthac0        = ReadInt( fp );
+      pMobIndex->ac              = ReadInt( fp );
+      pMobIndex->hitnodice       = ReadInt( fp );
+      /* 'd'            */         ReadChar( fp );
+      pMobIndex->hitsizedice     = ReadInt( fp );
+      /* '+'            */         ReadChar( fp );
+      pMobIndex->hitplus         = ReadInt( fp );
+      pMobIndex->damnodice       = ReadInt( fp );
+      /* 'd'            */         ReadChar( fp );
+      pMobIndex->damsizedice     = ReadInt( fp );
+      /* '+'            */         ReadChar( fp );
+      pMobIndex->damplus         = ReadInt( fp );
+      pMobIndex->gold            = ReadInt( fp );
+      pMobIndex->exp             = ReadInt( fp );
+      pMobIndex->position        = ReadInt( fp );
+      pMobIndex->defposition     = ReadInt( fp );
 
       /*
        * Back to meaningful values.
        */
-      pMobIndex->sex             = fread_number( fp );
+      pMobIndex->sex             = ReadInt( fp );
 
       if ( letter != 'S' && letter != 'C' && letter != 'Z' )
         {
@@ -1001,20 +1001,20 @@ void load_mobiles( Area *tarea, FILE *fp )
 
       if ( letter == 'C' || letter == 'Z' ) /* Realms complex mob       -Thoric  */
         {
-          pMobIndex->stats.perm_str       = fread_number( fp );
-          pMobIndex->stats.perm_int       = fread_number( fp );
-          pMobIndex->stats.perm_wis       = fread_number( fp );
-          pMobIndex->stats.perm_dex       = fread_number( fp );
-          pMobIndex->stats.perm_con       = fread_number( fp );
-          pMobIndex->stats.perm_cha       = fread_number( fp );
-          pMobIndex->stats.perm_lck       = fread_number( fp );
-          pMobIndex->saving.poison_death  = fread_number( fp );
-          pMobIndex->saving.wand          = fread_number( fp );
-          pMobIndex->saving.para_petri    = fread_number( fp );
-          pMobIndex->saving.breath        = fread_number( fp );
-          pMobIndex->saving.spell_staff   = fread_number( fp );
+          pMobIndex->stats.perm_str       = ReadInt( fp );
+          pMobIndex->stats.perm_int       = ReadInt( fp );
+          pMobIndex->stats.perm_wis       = ReadInt( fp );
+          pMobIndex->stats.perm_dex       = ReadInt( fp );
+          pMobIndex->stats.perm_con       = ReadInt( fp );
+          pMobIndex->stats.perm_cha       = ReadInt( fp );
+          pMobIndex->stats.perm_lck       = ReadInt( fp );
+          pMobIndex->saving.poison_death  = ReadInt( fp );
+          pMobIndex->saving.wand          = ReadInt( fp );
+          pMobIndex->saving.para_petri    = ReadInt( fp );
+          pMobIndex->saving.breath        = ReadInt( fp );
+          pMobIndex->saving.spell_staff   = ReadInt( fp );
 
-          ln = fread_line( fp );
+          ln = ReadLine( fp );
           x1=x2=x3=x4=x5=x6=x7=0;
           sscanf( ln, "%d %d %d %d %d %d %d",
                   &x1, &x2, &x3, &x4, &x5, &x6, &x7 );
@@ -1032,7 +1032,7 @@ void load_mobiles( Area *tarea, FILE *fp )
           if ( !pMobIndex->speaking )
             pMobIndex->speaking = race_table[pMobIndex->race].language;
 
-          ln = fread_line( fp );
+          ln = ReadLine( fp );
           x1=x2=x3=x4=x5=x6=x7=x8=0;
           sscanf( ln, "%d %d %d %d %d %d %d %d",
                   &x1, &x2, &x3, &x4, &x5, &x6, &x7, &x8 );
@@ -1067,14 +1067,14 @@ void load_mobiles( Area *tarea, FILE *fp )
 
       if ( letter == 'Z' ) /*  STar Wars Reality Complex Mob  */
         {
-          ln = fread_line( fp );
+          ln = ReadLine( fp );
           x1 = x2 = x3 = x4 = x5 = x6 = x7 = x8 = 0;
           sscanf( ln, "%d %d %d %d %d %d %d %d",
                   &x1, &x2, &x3, &x4, &x5,  &x6,  &x7,  &x8);
           pMobIndex->vip_flags = x1;
         }
 
-      letter = fread_letter( fp );
+      letter = ReadChar( fp );
 
       if ( letter == '>' )
         {
@@ -1128,7 +1128,7 @@ void load_objects( Area *tarea, FILE *fp )
       int iHash = 0;
       bool tmpBootDb = false;
       bool oldobj = false;
-      char letter = fread_letter( fp );
+      char letter = ReadChar( fp );
 
       if ( letter != '#' )
         {
@@ -1145,7 +1145,7 @@ void load_objects( Area *tarea, FILE *fp )
 	    }
         }
 
-      vnum = fread_number( fp );
+      vnum = ReadInt( fp );
 
       if ( vnum == INVALID_VNUM )
         break;
@@ -1189,17 +1189,17 @@ void load_objects( Area *tarea, FILE *fp )
             tarea->hi_o_vnum = vnum;
         }
 
-      pObjIndex->name         = fread_string( fp );
-      pObjIndex->short_descr  = fread_string( fp );
-      pObjIndex->description  = fread_string( fp );
-      pObjIndex->action_desc  = fread_string( fp );
+      pObjIndex->name         = ReadStringToTilde( fp );
+      pObjIndex->short_descr  = ReadStringToTilde( fp );
+      pObjIndex->description  = ReadStringToTilde( fp );
+      pObjIndex->action_desc  = ReadStringToTilde( fp );
 
       /* Commented out by Narn, Apr/96 to allow item short descs like
          Bonecrusher and Oblivion */
       /*pObjIndex->short_descr[0]       = CharToLowercase(pObjIndex->short_descr[0]);*/
       pObjIndex->description[0] = CharToUppercase(pObjIndex->description[0]);
 
-      ln = fread_line( fp );
+      ln = ReadLine( fp );
       x1=x2=x3=x4=0;
       sscanf( ln, "%d %d %d %d",
               &x1, &x2, &x3, &x4 );
@@ -1208,7 +1208,7 @@ void load_objects( Area *tarea, FILE *fp )
       pObjIndex->wear_flags             = x3;
       pObjIndex->layers         = x4;
 
-      ln = fread_line( fp );
+      ln = ReadLine( fp );
       x1=x2=x3=x4=x5=x6=0;
       sscanf( ln, "%d %d %d %d %d %d",
               &x1, &x2, &x3, &x4, &x5, &x6 );
@@ -1218,14 +1218,14 @@ void load_objects( Area *tarea, FILE *fp )
       pObjIndex->value[3]               = x4;
       pObjIndex->value[4]               = x5;
       pObjIndex->value[5]               = x6;
-      pObjIndex->weight         = fread_number( fp );
+      pObjIndex->weight         = ReadInt( fp );
       pObjIndex->weight = umax( 1, pObjIndex->weight );
-      pObjIndex->cost                   = fread_number( fp );
-      pObjIndex->rent                   = fread_number( fp ); /* unused */
+      pObjIndex->cost                   = ReadInt( fp );
+      pObjIndex->rent                   = ReadInt( fp ); /* unused */
 
       for ( ; ; )
         {
-          letter = fread_letter( fp );
+          letter = ReadChar( fp );
 
           if ( letter == 'A' )
             {
@@ -1234,14 +1234,14 @@ void load_objects( Area *tarea, FILE *fp )
               CREATE( paf, Affect, 1 );
               paf->type         = -1;
               paf->duration             = -1;
-              paf->location             = fread_number( fp );
+              paf->location             = ReadInt( fp );
               if ( paf->location == APPLY_WEAPONSPELL
                    ||   paf->location == APPLY_WEARSPELL
                    ||   paf->location == APPLY_REMOVESPELL
                    ||   paf->location == APPLY_STRIPSN )
-                paf->modifier           = slot_lookup( fread_number(fp) );
+                paf->modifier           = slot_lookup( ReadInt(fp) );
               else
-                paf->modifier           = fread_number( fp );
+                paf->modifier           = ReadInt( fp );
               paf->bitvector            = 0;
               LINK( paf, pObjIndex->first_affect, pObjIndex->last_affect,
                     next, prev );
@@ -1253,8 +1253,8 @@ void load_objects( Area *tarea, FILE *fp )
               ExtraDescription *ed;
 
               CREATE( ed, ExtraDescription, 1 );
-              ed->keyword               = fread_string( fp );
-              ed->description           = fread_string( fp );
+              ed->keyword               = ReadStringToTilde( fp );
+              ed->description           = ReadStringToTilde( fp );
               LINK( ed, pObjIndex->first_extradesc, pObjIndex->last_extradesc,
                     next, prev );
               top_ed++;
@@ -1355,21 +1355,21 @@ void load_resets( Area *tarea, FILE *fp )
       char letter;
       int extra, arg1, arg2, arg3;
 
-      if ( ( letter = fread_letter( fp ) ) == 'S' )
+      if ( ( letter = ReadChar( fp ) ) == 'S' )
         break;
 
       if ( letter == '*' )
         {
-          fread_to_eol( fp );
+          ReadToEndOfLine( fp );
           continue;
         }
 
-      extra     = fread_number( fp );
-      arg1      = fread_number( fp );
-      arg2      = fread_number( fp );
+      extra     = ReadInt( fp );
+      arg1      = ReadInt( fp );
+      arg2      = ReadInt( fp );
       arg3      = (letter == 'G' || letter == 'R')
-        ? 0 : fread_number( fp );
-      fread_to_eol( fp );
+        ? 0 : ReadInt( fp );
+      ReadToEndOfLine( fp );
 
       ++count;
 
@@ -1522,7 +1522,7 @@ void load_rooms( Area *tarea, FILE *fp )
       bool tmpBootDb = false;
       bool oldroom = false;
       int x1, x2, x3, x4, x5, x6;
-      char letter = fread_letter( fp );
+      char letter = ReadChar( fp );
 
       if ( letter != '#' )
         {
@@ -1539,7 +1539,7 @@ void load_rooms( Area *tarea, FILE *fp )
 	    }
         }
 
-      vnum = fread_number( fp );
+      vnum = ReadInt( fp );
 
       if ( vnum == INVALID_VNUM )
         break;
@@ -1585,11 +1585,11 @@ void load_rooms( Area *tarea, FILE *fp )
             tarea->hi_r_vnum = vnum;
         }
 
-      pRoomIndex->name         = fread_string( fp );
-      pRoomIndex->description  = fread_string( fp );
+      pRoomIndex->name         = ReadStringToTilde( fp );
+      pRoomIndex->description  = ReadStringToTilde( fp );
 
-      /* Area number                      fread_number( fp ); */
-      ln = fread_line( fp );
+      /* Area number                      ReadInt( fp ); */
+      ln = ReadLine( fp );
       x1=x2=x3=x4=x5=x6=0;
       sscanf( ln, "%d %d %d %d %d %d",
               &x1, &x2, &x3, &x4, &x5, &x6 );
@@ -1613,7 +1613,7 @@ void load_rooms( Area *tarea, FILE *fp )
 
       for ( ; ; )
         {
-          letter = fread_letter( fp );
+          letter = ReadChar( fp );
 
           if ( letter == 'S' )
             break;
@@ -1623,7 +1623,7 @@ void load_rooms( Area *tarea, FILE *fp )
               Exit *pexit;
               int locks;
 
-              door = fread_number( fp );
+              door = ReadInt( fp );
 
               if ( door < 0 || door > 10 )
                 {
@@ -1636,10 +1636,10 @@ void load_rooms( Area *tarea, FILE *fp )
               else
                 {
                   pexit = make_exit( pRoomIndex, NULL, door );
-                  pexit->description    = fread_string( fp );
-                  pexit->keyword        = fread_string( fp );
+                  pexit->description    = ReadStringToTilde( fp );
+                  pexit->keyword        = ReadStringToTilde( fp );
                   pexit->exit_info      = 0;
-                  ln = fread_line( fp );
+                  ln = ReadLine( fp );
                   x1=x2=x3=x4=0;
                   sscanf( ln, "%d %d %d %d",
                           &x1, &x2, &x3, &x4 );
@@ -1671,8 +1671,8 @@ void load_rooms( Area *tarea, FILE *fp )
               ExtraDescription *ed;
 
               CREATE( ed, ExtraDescription, 1 );
-              ed->keyword               = fread_string( fp );
-              ed->description           = fread_string( fp );
+              ed->keyword               = ReadStringToTilde( fp );
+              ed->description           = ReadStringToTilde( fp );
               LINK( ed, pRoomIndex->first_extradesc, pRoomIndex->last_extradesc,
                     next, prev );
               top_ed++;
@@ -1715,21 +1715,21 @@ void load_shops( Area *tarea, FILE *fp )
       SHOP_DATA *pShop = NULL;
 
       CREATE( pShop, SHOP_DATA, 1 );
-      pShop->keeper             = fread_number( fp );
+      pShop->keeper             = ReadInt( fp );
 
       if ( pShop->keeper == INVALID_VNUM )
         break;
 
       for ( iTrade = 0; iTrade < MAX_TRADE; iTrade++ )
-        pShop->buy_type[iTrade] = fread_number( fp );
+        pShop->buy_type[iTrade] = ReadInt( fp );
 
-      pShop->profit_buy = fread_number( fp );
-      pShop->profit_sell        = fread_number( fp );
+      pShop->profit_buy = ReadInt( fp );
+      pShop->profit_sell        = ReadInt( fp );
       pShop->profit_buy = urange( pShop->profit_sell+5, pShop->profit_buy, 1000 );
       pShop->profit_sell        = urange( 0, pShop->profit_sell, pShop->profit_buy-5 );
-      pShop->business_hours.open  = fread_number( fp );
-      pShop->business_hours.close = fread_number( fp );
-      fread_to_eol( fp );
+      pShop->business_hours.open  = ReadInt( fp );
+      pShop->business_hours.close = ReadInt( fp );
+      ReadToEndOfLine( fp );
       pMobIndex         = get_mob_index( pShop->keeper );
       pMobIndex->pShop  = pShop;
 
@@ -1756,19 +1756,19 @@ void load_repairs( Area *tarea, FILE *fp )
       REPAIR_DATA *rShop = NULL;
 
       CREATE( rShop, REPAIR_DATA, 1 );
-      rShop->keeper             = fread_number( fp );
+      rShop->keeper             = ReadInt( fp );
 
       if ( rShop->keeper == 0 )
         break;
 
       for ( iFix = 0; iFix < MAX_FIX; iFix++ )
-        rShop->fix_type[iFix] = fread_number( fp );
+        rShop->fix_type[iFix] = ReadInt( fp );
 
-      rShop->profit_fix = fread_number( fp );
-      rShop->shop_type  = fread_number( fp );
-      rShop->business_hours.open  = fread_number( fp );
-      rShop->business_hours.close = fread_number( fp );
-      fread_to_eol( fp );
+      rShop->profit_fix = ReadInt( fp );
+      rShop->shop_type  = ReadInt( fp );
+      rShop->business_hours.open  = ReadInt( fp );
+      rShop->business_hours.close = ReadInt( fp );
+      ReadToEndOfLine( fp );
       pMobIndex         = get_mob_index( rShop->keeper );
       pMobIndex->rShop  = rShop;
 
@@ -1795,7 +1795,7 @@ void load_specials( Area *tarea, FILE *fp )
       ProtoMobile *pMobIndex;
       char letter;
 
-      switch ( letter = fread_letter( fp ) )
+      switch ( letter = ReadChar( fp ) )
         {
         default:
           bug( "Load_specials: letter '%c' not *MS.", letter );
@@ -1808,11 +1808,11 @@ void load_specials( Area *tarea, FILE *fp )
           break;
 
         case 'M':
-          pMobIndex = get_mob_index( fread_number ( fp ) );
+          pMobIndex = get_mob_index( ReadInt ( fp ) );
 
           if ( !pMobIndex->spec_fun )
             {
-              pMobIndex->spec_fun = spec_lookup( fread_word   ( fp ) );
+              pMobIndex->spec_fun = spec_lookup( ReadWord   ( fp ) );
 
               if ( pMobIndex->spec_fun == 0 )
                 {
@@ -1822,7 +1822,7 @@ void load_specials( Area *tarea, FILE *fp )
             }
           else if ( !pMobIndex->spec_2 )
             {
-              pMobIndex->spec_2 = spec_lookup( fread_word( fp ) );
+              pMobIndex->spec_2 = spec_lookup( ReadWord( fp ) );
 
               if ( pMobIndex->spec_2 == 0 )
                 {
@@ -1834,7 +1834,7 @@ void load_specials( Area *tarea, FILE *fp )
           break;
         }
 
-      fread_to_eol( fp );
+      ReadToEndOfLine( fp );
     }
 }
 
@@ -1854,7 +1854,7 @@ void load_ranges( Area *tarea, FILE *fp )
   for ( ; ; )
     {
       int x1, x2, x3, x4;
-      const char *ln = fread_line( fp );
+      const char *ln = ReadLine( fp );
 
       if (ln[0] == '$')
         break;
@@ -2062,7 +2062,7 @@ void randomize_exits( Room *room, short maxdir )
       if ( vdirs[d0] > maxdir )
         continue;
       count = 0;
-      while ( vdirs[(d1 = number_range( d0, nexits - 1 ))] > maxdir
+      while ( vdirs[(d1 = GetRandomNumberFromRange( d0, nexits - 1 ))] > maxdir
               ||      ++count > 5 );
       if ( vdirs[d1] > maxdir )
         continue;
@@ -2132,7 +2132,7 @@ void area_update( void )
           if ( reset_age == -1 )
             pArea->age = -1;
           else
-            pArea->age = number_range( 0, reset_age / 5 );
+            pArea->age = GetRandomNumberFromRange( 0, reset_age / 5 );
           pRoomIndex = get_room_index( ROOM_VNUM_SCHOOL );
           if ( pRoomIndex != NULL && pArea == pRoomIndex->area
                &&   pArea->reset_frequency == 0 )
@@ -2161,14 +2161,14 @@ Character *create_mobile( ProtoMobile *pMobIndex )
   mob->pIndexData               = pMobIndex;
 
   mob->editor                   = NULL;
-  mob->name                     = str_dup( pMobIndex->player_name );
-  mob->short_descr              = str_dup( pMobIndex->short_descr );
-  mob->long_descr               = str_dup( pMobIndex->long_descr  );
-  mob->description              = str_dup( pMobIndex->description );
+  mob->name                     = CopyString( pMobIndex->player_name );
+  mob->short_descr              = CopyString( pMobIndex->short_descr );
+  mob->long_descr               = CopyString( pMobIndex->long_descr  );
+  mob->description              = CopyString( pMobIndex->description );
   mob->spec_fun         = pMobIndex->spec_fun;
   mob->spec_2           = pMobIndex->spec_2;
   mob->mprog.mpscriptpos              = 0;
-  mob->top_level                = number_fuzzy( pMobIndex->level );
+  mob->top_level                = NumberFuzzy( pMobIndex->level );
   {
     int ability;
     for ( ability = 0 ; ability < MAX_ABILITY ; ability++ )
@@ -2179,7 +2179,7 @@ Character *create_mobile( ProtoMobile *pMobIndex )
   mob->alignment                = pMobIndex->alignment;
   mob->sex                      = pMobIndex->sex;
   mob->ability.main             = 0;
-  mob->mob_clan               = str_dup( "" );
+  mob->mob_clan               = CopyString( "" );
   mob->was_sentinel           = NULL;
   mob->plr_home               = NULL;
   mob->guard_data             = NULL;
@@ -2190,11 +2190,11 @@ Character *create_mobile( ProtoMobile *pMobIndex )
     mob->armor          = 100 - mob->top_level*2.5 ;
 
   if ( !pMobIndex->hitnodice )
-    mob->max_hit                = mob->top_level * 10 + number_range(
+    mob->max_hit                = mob->top_level * 10 + GetRandomNumberFromRange(
                                                                      mob->top_level ,
                                                                      mob->top_level * 10 );
   else
-    mob->max_hit                = pMobIndex->hitnodice * number_range(1, pMobIndex->hitsizedice )
+    mob->max_hit                = pMobIndex->hitnodice * GetRandomNumberFromRange(1, pMobIndex->hitsizedice )
       + pMobIndex->hitplus;
   mob->hit                      = mob->max_hit;
   /* lets put things back the way they used to be! -Thoric */
@@ -2270,11 +2270,11 @@ OBJ_DATA *create_object( OBJ_INDEX_DATA *pObjIndex, int level )
   cur_obj_serial = umax((cur_obj_serial + 1 ) & (BV30-1), 1);
   obj->serial = obj->pIndexData->serial = cur_obj_serial;
 
-  obj->armed_by       = str_dup( "" );
-  obj->name             = str_dup( pObjIndex->name     );
-  obj->short_descr      = str_dup( pObjIndex->short_descr );
-  obj->description      = str_dup( pObjIndex->description );
-  obj->action_desc      = str_dup( pObjIndex->action_desc );
+  obj->armed_by       = CopyString( "" );
+  obj->name             = CopyString( pObjIndex->name     );
+  obj->short_descr      = CopyString( pObjIndex->short_descr );
+  obj->description      = CopyString( pObjIndex->description );
+  obj->action_desc      = CopyString( pObjIndex->action_desc );
   obj->item_type        = pObjIndex->item_type;
   obj->extra_flags      = pObjIndex->extra_flags;
   obj->wear_flags       = pObjIndex->wear_flags;
@@ -2287,8 +2287,8 @@ OBJ_DATA *create_object( OBJ_INDEX_DATA *pObjIndex, int level )
   obj->weight           = pObjIndex->weight;
   obj->cost             = pObjIndex->cost;
   /*
-    obj->cost           = number_fuzzy( 10 )
-    * number_fuzzy( level ) * number_fuzzy( level );
+    obj->cost           = NumberFuzzy( 10 )
+    * NumberFuzzy( level ) * NumberFuzzy( level );
     */
 
   /*
@@ -2375,30 +2375,30 @@ OBJ_DATA *create_object( OBJ_INDEX_DATA *pObjIndex, int level )
       break;
 
     case ITEM_SALVE:
-      obj->value[OVAL_SALVE_DELAY] = number_fuzzy( obj->value[OVAL_SALVE_DELAY] );
+      obj->value[OVAL_SALVE_DELAY] = NumberFuzzy( obj->value[OVAL_SALVE_DELAY] );
       break;
 
     case ITEM_DEVICE:
-      obj->value[OVAL_DEVICE_LEVEL] = number_fuzzy( obj->value[OVAL_DEVICE_LEVEL] );
-      obj->value[OVAL_DEVICE_MAX_CHARGES] = number_fuzzy( obj->value[OVAL_DEVICE_MAX_CHARGES] );
+      obj->value[OVAL_DEVICE_LEVEL] = NumberFuzzy( obj->value[OVAL_DEVICE_LEVEL] );
+      obj->value[OVAL_DEVICE_MAX_CHARGES] = NumberFuzzy( obj->value[OVAL_DEVICE_MAX_CHARGES] );
       break;
 
     case ITEM_BATTERY:
       if ( obj->value[OVAL_BATTERY_CHARGE] <= 0 )
-        obj->value[OVAL_BATTERY_CHARGE] = number_fuzzy(95);
+        obj->value[OVAL_BATTERY_CHARGE] = NumberFuzzy(95);
 
       break;
 
 
     case ITEM_BOLT:
       if ( obj->value[OVAL_BOLT_CHARGE] <= 0 )
-        obj->value[OVAL_BOLT_CHARGE] = number_fuzzy(95);
+        obj->value[OVAL_BOLT_CHARGE] = NumberFuzzy(95);
 
       break;
 
     case ITEM_AMMO:
       if ( obj->value[OVAL_AMMO_CHARGE] <=0 )
-        obj->value[OVAL_AMMO_CHARGE] = number_fuzzy(495);
+        obj->value[OVAL_AMMO_CHARGE] = NumberFuzzy(495);
 
       break;
 
@@ -2409,8 +2409,8 @@ OBJ_DATA *create_object( OBJ_INDEX_DATA *pObjIndex, int level )
 	}
       else
         {
-          obj->value[OVAL_WEAPON_NUM_DAM_DIE] = number_fuzzy( number_fuzzy( 1 + level/20 ) );
-          obj->value[OVAL_WEAPON_SIZE_DAM_DIE] = number_fuzzy( number_fuzzy( 10 + level/10 ) );
+          obj->value[OVAL_WEAPON_NUM_DAM_DIE] = NumberFuzzy( NumberFuzzy( 1 + level/20 ) );
+          obj->value[OVAL_WEAPON_SIZE_DAM_DIE] = NumberFuzzy( NumberFuzzy( 10 + level/10 ) );
         }
 
       if ( obj->value[OVAL_WEAPON_NUM_DAM_DIE] > obj->value[OVAL_WEAPON_SIZE_DAM_DIE] )
@@ -2432,7 +2432,7 @@ OBJ_DATA *create_object( OBJ_INDEX_DATA *pObjIndex, int level )
         case WEAPON_BOWCASTER:
           if ( obj->value[OVAL_WEAPON_MAX_CHARGE] <=0 )
 	    {
-	      obj->value[OVAL_WEAPON_MAX_CHARGE] = number_fuzzy(1000);
+	      obj->value[OVAL_WEAPON_MAX_CHARGE] = NumberFuzzy(1000);
 	    }
         }
 
@@ -2448,7 +2448,7 @@ OBJ_DATA *create_object( OBJ_INDEX_DATA *pObjIndex, int level )
 
     case ITEM_POTION:
     case ITEM_PILL:
-      obj->value[OVAL_PILL_LEVEL] = number_fuzzy( number_fuzzy( obj->value[OVAL_PILL_LEVEL] ) );
+      obj->value[OVAL_PILL_LEVEL] = NumberFuzzy( NumberFuzzy( obj->value[OVAL_PILL_LEVEL] ) );
       break;
 
     case ITEM_MONEY:
@@ -2636,7 +2636,7 @@ void free_char( Character *ch )
 char *get_extra_descr( const char *name, ExtraDescription *ed )
 {
   for ( ; ed; ed = ed->next )
-    if ( is_name( name, ed->keyword ) )
+    if ( IsName( name, ed->keyword ) )
       return ed->description;
 
   return NULL;
@@ -2951,7 +2951,7 @@ void add_to_wizlist( char *name, int level )
 #endif
 
   CREATE( wiz, WIZENT, 1 );
-  wiz->name     = str_dup( name );
+  wiz->name     = CopyString( name );
   wiz->level    = level;
 
   if ( !first_wiz )
@@ -3012,12 +3012,12 @@ void make_wizlist( )
           gfp = fopen( buf, "r" );
           if ( gfp )
             {
-              word = feof( gfp ) ? "End" : fread_word( gfp );
-              ilevel = fread_number( gfp );
-              fread_to_eol( gfp );
-              word = feof( gfp ) ? "End" : fread_word( gfp );
-              if ( !str_cmp( word, "Pcflags" ) )
-                iflags = fread_number( gfp );
+              word = feof( gfp ) ? "End" : ReadWord( gfp );
+              ilevel = ReadInt( gfp );
+              ReadToEndOfLine( gfp );
+              word = feof( gfp ) ? "End" : ReadWord( gfp );
+              if ( !StrCmp( word, "Pcflags" ) )
+                iflags = ReadInt( gfp );
               else
                 iflags = 0;
               fclose( gfp );
@@ -3093,43 +3093,43 @@ void make_wizlist( )
 
 int mprog_name_to_type ( const char *name )
 {
-  if ( !str_cmp( name, "in_file_prog"   ) )     return IN_FILE_PROG;
-  if ( !str_cmp( name, "act_prog"       ) )    return ACT_PROG;
-  if ( !str_cmp( name, "speech_prog"    ) )     return SPEECH_PROG;
-  if ( !str_cmp( name, "rand_prog"      ) )     return RAND_PROG;
-  if ( !str_cmp( name, "fight_prog"     ) )     return FIGHT_PROG;
-  if ( !str_cmp( name, "hitprcnt_prog"  ) )     return HITPRCNT_PROG;
-  if ( !str_cmp( name, "death_prog"     ) )     return DEATH_PROG;
-  if ( !str_cmp( name, "entry_prog"     ) )     return ENTRY_PROG;
-  if ( !str_cmp( name, "greet_prog"     ) )     return GREET_PROG;
-  if ( !str_cmp( name, "all_greet_prog" ) )     return ALL_GREET_PROG;
-  if ( !str_cmp( name, "give_prog"      ) )     return GIVE_PROG;
-  if ( !str_cmp( name, "bribe_prog"     ) )     return BRIBE_PROG;
-  if ( !str_cmp( name, "time_prog"     ) )      return TIME_PROG;
-  if ( !str_cmp( name, "hour_prog"     ) )      return HOUR_PROG;
-  if ( !str_cmp( name, "wear_prog"     ) )      return WEAR_PROG;
-  if ( !str_cmp( name, "remove_prog"   ) )      return REMOVE_PROG;
-  if ( !str_cmp( name, "sac_prog"      ) )      return SAC_PROG;
-  if ( !str_cmp( name, "look_prog"     ) )      return LOOK_PROG;
-  if ( !str_cmp( name, "exa_prog"      ) )      return EXA_PROG;
-  if ( !str_cmp( name, "zap_prog"      ) )      return ZAP_PROG;
-  if ( !str_cmp( name, "get_prog"      ) )      return GET_PROG;
-  if ( !str_cmp( name, "drop_prog"     ) )      return DROP_PROG;
-  if ( !str_cmp( name, "damage_prog"   ) )      return DAMAGE_PROG;
-  if ( !str_cmp( name, "repair_prog"   ) )      return REPAIR_PROG;
-  if ( !str_cmp( name, "greet_prog"    ) )      return GREET_PROG;
-  if ( !str_cmp( name, "randiw_prog"   ) )      return RANDIW_PROG;
-  if ( !str_cmp( name, "speechiw_prog" ) )      return SPEECHIW_PROG;
-  if ( !str_cmp( name, "pull_prog"      ) )     return PULL_PROG;
-  if ( !str_cmp( name, "push_prog"      ) )     return PUSH_PROG;
-  if ( !str_cmp( name, "sleep_prog"    ) )      return SLEEP_PROG;
-  if ( !str_cmp( name, "rest_prog"      ) )     return REST_PROG;
-  if ( !str_cmp( name, "rfight_prog"   ) )      return FIGHT_PROG;
-  if ( !str_cmp( name, "enter_prog"    ) )      return ENTRY_PROG;
-  if ( !str_cmp( name, "leave_prog"    ) )      return LEAVE_PROG;
-  if ( !str_cmp( name, "rdeath_prog"    ) )     return DEATH_PROG;
-  if ( !str_cmp( name, "script_prog"    ) )     return SCRIPT_PROG;
-  if ( !str_cmp( name, "use_prog"       ) )     return USE_PROG;
+  if ( !StrCmp( name, "in_file_prog"   ) )     return IN_FILE_PROG;
+  if ( !StrCmp( name, "act_prog"       ) )    return ACT_PROG;
+  if ( !StrCmp( name, "speech_prog"    ) )     return SPEECH_PROG;
+  if ( !StrCmp( name, "rand_prog"      ) )     return RAND_PROG;
+  if ( !StrCmp( name, "fight_prog"     ) )     return FIGHT_PROG;
+  if ( !StrCmp( name, "hitprcnt_prog"  ) )     return HITPRCNT_PROG;
+  if ( !StrCmp( name, "death_prog"     ) )     return DEATH_PROG;
+  if ( !StrCmp( name, "entry_prog"     ) )     return ENTRY_PROG;
+  if ( !StrCmp( name, "greet_prog"     ) )     return GREET_PROG;
+  if ( !StrCmp( name, "all_greet_prog" ) )     return ALL_GREET_PROG;
+  if ( !StrCmp( name, "give_prog"      ) )     return GIVE_PROG;
+  if ( !StrCmp( name, "bribe_prog"     ) )     return BRIBE_PROG;
+  if ( !StrCmp( name, "time_prog"     ) )      return TIME_PROG;
+  if ( !StrCmp( name, "hour_prog"     ) )      return HOUR_PROG;
+  if ( !StrCmp( name, "wear_prog"     ) )      return WEAR_PROG;
+  if ( !StrCmp( name, "remove_prog"   ) )      return REMOVE_PROG;
+  if ( !StrCmp( name, "sac_prog"      ) )      return SAC_PROG;
+  if ( !StrCmp( name, "look_prog"     ) )      return LOOK_PROG;
+  if ( !StrCmp( name, "exa_prog"      ) )      return EXA_PROG;
+  if ( !StrCmp( name, "zap_prog"      ) )      return ZAP_PROG;
+  if ( !StrCmp( name, "get_prog"      ) )      return GET_PROG;
+  if ( !StrCmp( name, "drop_prog"     ) )      return DROP_PROG;
+  if ( !StrCmp( name, "damage_prog"   ) )      return DAMAGE_PROG;
+  if ( !StrCmp( name, "repair_prog"   ) )      return REPAIR_PROG;
+  if ( !StrCmp( name, "greet_prog"    ) )      return GREET_PROG;
+  if ( !StrCmp( name, "randiw_prog"   ) )      return RANDIW_PROG;
+  if ( !StrCmp( name, "speechiw_prog" ) )      return SPEECHIW_PROG;
+  if ( !StrCmp( name, "pull_prog"      ) )     return PULL_PROG;
+  if ( !StrCmp( name, "push_prog"      ) )     return PUSH_PROG;
+  if ( !StrCmp( name, "sleep_prog"    ) )      return SLEEP_PROG;
+  if ( !StrCmp( name, "rest_prog"      ) )     return REST_PROG;
+  if ( !StrCmp( name, "rfight_prog"   ) )      return FIGHT_PROG;
+  if ( !StrCmp( name, "enter_prog"    ) )      return ENTRY_PROG;
+  if ( !StrCmp( name, "leave_prog"    ) )      return LEAVE_PROG;
+  if ( !StrCmp( name, "rdeath_prog"    ) )     return DEATH_PROG;
+  if ( !StrCmp( name, "script_prog"    ) )     return SCRIPT_PROG;
+  if ( !StrCmp( name, "use_prog"       ) )     return USE_PROG;
   return( ERROR_PROG );
 }
 
@@ -3153,7 +3153,7 @@ MPROG_DATA *mprog_file_read( char *f, MPROG_DATA *mprg,
     }
 
   mprg2 = mprg;
-  switch ( letter = fread_letter( progfile ) )
+  switch ( letter = ReadChar( progfile ) )
     {
     case '>':
       break;
@@ -3169,7 +3169,7 @@ MPROG_DATA *mprog_file_read( char *f, MPROG_DATA *mprg,
 
   while ( !done )
     {
-      mprg2->type = mprog_name_to_type( fread_word( progfile ) );
+      mprg2->type = mprog_name_to_type( ReadWord( progfile ) );
       switch ( mprg2->type )
         {
         case ERROR_PROG:
@@ -3182,9 +3182,9 @@ MPROG_DATA *mprog_file_read( char *f, MPROG_DATA *mprg,
           break;
         default:
           pMobIndex->mprog.progtypes = pMobIndex->mprog.progtypes | mprg2->type;
-          mprg2->arglist       = fread_string( progfile );
-          mprg2->comlist       = fread_string( progfile );
-          switch ( letter = fread_letter( progfile ) )
+          mprg2->arglist       = ReadStringToTilde( progfile );
+          mprg2->comlist       = ReadStringToTilde( progfile );
+          switch ( letter = ReadChar( progfile ) )
             {
             case '>':
               CREATE( mprg_next, MPROG_DATA, 1 );
@@ -3217,7 +3217,7 @@ void load_mudprogs( Area *tarea, FILE *fp )
   int             value;
 
   for ( ; ; )
-    switch ( letter = fread_letter( fp ) )
+    switch ( letter = ReadChar( fp ) )
       {
       default:
         bug( "Load_mudprogs: bad command '%c'.",letter);
@@ -3225,14 +3225,14 @@ void load_mudprogs( Area *tarea, FILE *fp )
         break;
       case 'S':
       case 's':
-        fread_to_eol( fp );
+        ReadToEndOfLine( fp );
         return;
       case '*':
-        fread_to_eol( fp );
+        ReadToEndOfLine( fp );
         break;
       case 'M':
       case 'm':
-        value = fread_number( fp );
+        value = ReadInt( fp );
         if ( ( iMob = get_mob_index( value ) ) == NULL )
           {
             bug( "Load_mudprogs: vnum %d doesnt exist", value );
@@ -3250,9 +3250,9 @@ void load_mudprogs( Area *tarea, FILE *fp )
           original->next = working;
         else
           iMob->mprog.mudprogs = working;
-        working = mprog_file_read( fread_word( fp ), working, iMob );
+        working = mprog_file_read( ReadWord( fp ), working, iMob );
         working->next = NULL;
-        fread_to_eol( fp );
+        ReadToEndOfLine( fp );
         break;
       }
 
@@ -3269,7 +3269,7 @@ void mprog_read_programs( FILE *fp, ProtoMobile *pMobIndex)
   char        letter;
   bool        done = false;
 
-  if ( ( letter = fread_letter( fp ) ) != '>' )
+  if ( ( letter = ReadChar( fp ) ) != '>' )
     {
       bug( "Load_mobiles: vnum %d MUDPROG char", pMobIndex->vnum );
       exit( 1 );
@@ -3279,7 +3279,7 @@ void mprog_read_programs( FILE *fp, ProtoMobile *pMobIndex)
 
   while ( !done )
     {
-      mprg->type = mprog_name_to_type( fread_word( fp ) );
+      mprg->type = mprog_name_to_type( ReadWord( fp ) );
       switch ( mprg->type )
         {
         case ERROR_PROG:
@@ -3287,9 +3287,9 @@ void mprog_read_programs( FILE *fp, ProtoMobile *pMobIndex)
           exit( 1 );
           break;
         case IN_FILE_PROG:
-          mprg = mprog_file_read( fread_string( fp ), mprg,pMobIndex );
-          fread_to_eol( fp );
-          switch ( letter = fread_letter( fp ) )
+          mprg = mprog_file_read( ReadStringToTilde( fp ), mprg,pMobIndex );
+          ReadToEndOfLine( fp );
+          switch ( letter = ReadChar( fp ) )
             {
             case '>':
               CREATE( mprg->next, MPROG_DATA, 1 );
@@ -3297,7 +3297,7 @@ void mprog_read_programs( FILE *fp, ProtoMobile *pMobIndex)
               break;
             case '|':
               mprg->next = NULL;
-              fread_to_eol( fp );
+              ReadToEndOfLine( fp );
               done = true;
               break;
             default:
@@ -3308,11 +3308,11 @@ void mprog_read_programs( FILE *fp, ProtoMobile *pMobIndex)
           break;
         default:
           pMobIndex->mprog.progtypes = pMobIndex->mprog.progtypes | mprg->type;
-          mprg->arglist        = fread_string( fp );
-          fread_to_eol( fp );
-          mprg->comlist        = fread_string( fp );
-          fread_to_eol( fp );
-          switch ( letter = fread_letter( fp ) )
+          mprg->arglist        = ReadStringToTilde( fp );
+          ReadToEndOfLine( fp );
+          mprg->comlist        = ReadStringToTilde( fp );
+          ReadToEndOfLine( fp );
+          switch ( letter = ReadChar( fp ) )
             {
             case '>':
               CREATE( mprg->next, MPROG_DATA, 1 );
@@ -3320,7 +3320,7 @@ void mprog_read_programs( FILE *fp, ProtoMobile *pMobIndex)
               break;
             case '|':
               mprg->next = NULL;
-              fread_to_eol( fp );
+              ReadToEndOfLine( fp );
               done = true;
               break;
             default:
@@ -3368,7 +3368,7 @@ MPROG_DATA *oprog_file_read( char *f, MPROG_DATA *mprg,
     }
 
   mprg2 = mprg;
-  switch ( letter = fread_letter( progfile ) )
+  switch ( letter = ReadChar( progfile ) )
     {
     case '>':
       break;
@@ -3384,7 +3384,7 @@ MPROG_DATA *oprog_file_read( char *f, MPROG_DATA *mprg,
 
   while ( !done )
     {
-      mprg2->type = mprog_name_to_type( fread_word( progfile ) );
+      mprg2->type = mprog_name_to_type( ReadWord( progfile ) );
       switch ( mprg2->type )
         {
         case ERROR_PROG:
@@ -3397,9 +3397,9 @@ MPROG_DATA *oprog_file_read( char *f, MPROG_DATA *mprg,
           break;
         default:
           pObjIndex->mprog.progtypes = pObjIndex->mprog.progtypes | mprg2->type;
-          mprg2->arglist       = fread_string( progfile );
-          mprg2->comlist       = fread_string( progfile );
-          switch ( letter = fread_letter( progfile ) )
+          mprg2->arglist       = ReadStringToTilde( progfile );
+          mprg2->comlist       = ReadStringToTilde( progfile );
+          switch ( letter = ReadChar( progfile ) )
             {
             case '>':
               CREATE( mprg_next, MPROG_DATA, 1 );
@@ -3432,7 +3432,7 @@ void load_objprogs( Area *tarea, FILE *fp )
   int             value;
 
   for ( ; ; )
-    switch ( letter = fread_letter( fp ) )
+    switch ( letter = ReadChar( fp ) )
       {
       default:
         bug( "Load_objprogs: bad command '%c'.",letter);
@@ -3440,14 +3440,14 @@ void load_objprogs( Area *tarea, FILE *fp )
         break;
       case 'S':
       case 's':
-        fread_to_eol( fp );
+        ReadToEndOfLine( fp );
         return;
       case '*':
-        fread_to_eol( fp );
+        ReadToEndOfLine( fp );
         break;
       case 'M':
       case 'm':
-        value = fread_number( fp );
+        value = ReadInt( fp );
         if ( ( iObj = get_obj_index( value ) ) == NULL )
           {
             bug( "Load_objprogs: vnum %d doesnt exist", value );
@@ -3465,9 +3465,9 @@ void load_objprogs( Area *tarea, FILE *fp )
           original->next = working;
         else
           iObj->mprog.mudprogs = working;
-        working = oprog_file_read( fread_word( fp ), working, iObj );
+        working = oprog_file_read( ReadWord( fp ), working, iObj );
         working->next = NULL;
-        fread_to_eol( fp );
+        ReadToEndOfLine( fp );
         break;
       }
 
@@ -3484,7 +3484,7 @@ void oprog_read_programs( FILE *fp, OBJ_INDEX_DATA *pObjIndex)
   char        letter;
   bool        done = false;
 
-  if ( ( letter = fread_letter( fp ) ) != '>' )
+  if ( ( letter = ReadChar( fp ) ) != '>' )
     {
       bug( "Load_objects: vnum %d OBJPROG char", pObjIndex->vnum );
       exit( 1 );
@@ -3494,7 +3494,7 @@ void oprog_read_programs( FILE *fp, OBJ_INDEX_DATA *pObjIndex)
 
   while ( !done )
     {
-      mprg->type = mprog_name_to_type( fread_word( fp ) );
+      mprg->type = mprog_name_to_type( ReadWord( fp ) );
       switch ( mprg->type )
         {
         case ERROR_PROG:
@@ -3502,9 +3502,9 @@ void oprog_read_programs( FILE *fp, OBJ_INDEX_DATA *pObjIndex)
           exit( 1 );
           break;
         case IN_FILE_PROG:
-          mprg = oprog_file_read( fread_string( fp ), mprg,pObjIndex );
-          fread_to_eol( fp );
-          switch ( letter = fread_letter( fp ) )
+          mprg = oprog_file_read( ReadStringToTilde( fp ), mprg,pObjIndex );
+          ReadToEndOfLine( fp );
+          switch ( letter = ReadChar( fp ) )
             {
             case '>':
               CREATE( mprg->next, MPROG_DATA, 1 );
@@ -3512,7 +3512,7 @@ void oprog_read_programs( FILE *fp, OBJ_INDEX_DATA *pObjIndex)
               break;
             case '|':
               mprg->next = NULL;
-              fread_to_eol( fp );
+              ReadToEndOfLine( fp );
               done = true;
               break;
             default:
@@ -3523,11 +3523,11 @@ void oprog_read_programs( FILE *fp, OBJ_INDEX_DATA *pObjIndex)
           break;
         default:
           pObjIndex->mprog.progtypes = pObjIndex->mprog.progtypes | mprg->type;
-          mprg->arglist        = fread_string( fp );
-          fread_to_eol( fp );
-          mprg->comlist        = fread_string( fp );
-          fread_to_eol( fp );
-          switch ( letter = fread_letter( fp ) )
+          mprg->arglist        = ReadStringToTilde( fp );
+          ReadToEndOfLine( fp );
+          mprg->comlist        = ReadStringToTilde( fp );
+          ReadToEndOfLine( fp );
+          switch ( letter = ReadChar( fp ) )
             {
             case '>':
               CREATE( mprg->next, MPROG_DATA, 1 );
@@ -3535,7 +3535,7 @@ void oprog_read_programs( FILE *fp, OBJ_INDEX_DATA *pObjIndex)
               break;
             case '|':
               mprg->next = NULL;
-              fread_to_eol( fp );
+              ReadToEndOfLine( fp );
               done = true;
               break;
             default:
@@ -3580,7 +3580,7 @@ MPROG_DATA *rprog_file_read( char *f, MPROG_DATA *mprg,
     }
 
   mprg2 = mprg;
-  switch ( letter = fread_letter( progfile ) )
+  switch ( letter = ReadChar( progfile ) )
     {
     case '>':
       break;
@@ -3596,7 +3596,7 @@ MPROG_DATA *rprog_file_read( char *f, MPROG_DATA *mprg,
 
   while ( !done )
     {
-      mprg2->type = mprog_name_to_type( fread_word( progfile ) );
+      mprg2->type = mprog_name_to_type( ReadWord( progfile ) );
       switch ( mprg2->type )
         {
         case ERROR_PROG:
@@ -3609,9 +3609,9 @@ MPROG_DATA *rprog_file_read( char *f, MPROG_DATA *mprg,
           break;
         default:
           RoomIndex->mprog.progtypes = RoomIndex->mprog.progtypes | mprg2->type;
-          mprg2->arglist       = fread_string( progfile );
-          mprg2->comlist       = fread_string( progfile );
-          switch ( letter = fread_letter( progfile ) )
+          mprg2->arglist       = ReadStringToTilde( progfile );
+          mprg2->comlist       = ReadStringToTilde( progfile );
+          switch ( letter = ReadChar( progfile ) )
             {
             case '>':
               CREATE( mprg_next, MPROG_DATA, 1 );
@@ -3644,7 +3644,7 @@ void load_roomprogs( Area *tarea, FILE *fp )
   int             value;
 
   for ( ; ; )
-    switch ( letter = fread_letter( fp ) )
+    switch ( letter = ReadChar( fp ) )
       {
       default:
         bug( "Load_objprogs: bad command '%c'.",letter);
@@ -3652,14 +3652,14 @@ void load_roomprogs( Area *tarea, FILE *fp )
         break;
       case 'S':
       case 's':
-        fread_to_eol( fp );
+        ReadToEndOfLine( fp );
         return;
       case '*':
-        fread_to_eol( fp );
+        ReadToEndOfLine( fp );
         break;
       case 'M':
       case 'm':
-        value = fread_number( fp );
+        value = ReadInt( fp );
         if ( ( iRoom = get_room_index( value ) ) == NULL )
           {
             bug( "Load_roomprogs: vnum %d doesnt exist", value );
@@ -3677,9 +3677,9 @@ void load_roomprogs( Area *tarea, FILE *fp )
           original->next = working;
         else
           iRoom->mprog.mudprogs = working;
-        working = rprog_file_read( fread_word( fp ), working, iRoom );
+        working = rprog_file_read( ReadWord( fp ), working, iRoom );
         working->next = NULL;
-        fread_to_eol( fp );
+        ReadToEndOfLine( fp );
         break;
       }
 
@@ -3696,7 +3696,7 @@ void rprog_read_programs( FILE *fp, Room *pRoomIndex)
   char        letter;
   bool        done = false;
 
-  if ( ( letter = fread_letter( fp ) ) != '>' )
+  if ( ( letter = ReadChar( fp ) ) != '>' )
     {
       bug( "Load_rooms: vnum %d ROOMPROG char", pRoomIndex->vnum );
       exit( 1 );
@@ -3706,7 +3706,7 @@ void rprog_read_programs( FILE *fp, Room *pRoomIndex)
 
   while ( !done )
     {
-      mprg->type = mprog_name_to_type( fread_word( fp ) );
+      mprg->type = mprog_name_to_type( ReadWord( fp ) );
       switch ( mprg->type )
         {
         case ERROR_PROG:
@@ -3714,9 +3714,9 @@ void rprog_read_programs( FILE *fp, Room *pRoomIndex)
           exit( 1 );
           break;
         case IN_FILE_PROG:
-          mprg = rprog_file_read( fread_string( fp ), mprg,pRoomIndex );
-          fread_to_eol( fp );
-          switch ( letter = fread_letter( fp ) )
+          mprg = rprog_file_read( ReadStringToTilde( fp ), mprg,pRoomIndex );
+          ReadToEndOfLine( fp );
+          switch ( letter = ReadChar( fp ) )
             {
             case '>':
               CREATE( mprg->next, MPROG_DATA, 1 );
@@ -3724,7 +3724,7 @@ void rprog_read_programs( FILE *fp, Room *pRoomIndex)
               break;
             case '|':
               mprg->next = NULL;
-              fread_to_eol( fp );
+              ReadToEndOfLine( fp );
               done = true;
               break;
             default:
@@ -3735,11 +3735,11 @@ void rprog_read_programs( FILE *fp, Room *pRoomIndex)
           break;
         default:
           pRoomIndex->mprog.progtypes = pRoomIndex->mprog.progtypes | mprg->type;
-          mprg->arglist        = fread_string( fp );
-          fread_to_eol( fp );
-          mprg->comlist        = fread_string( fp );
-          fread_to_eol( fp );
-          switch ( letter = fread_letter( fp ) )
+          mprg->arglist        = ReadStringToTilde( fp );
+          ReadToEndOfLine( fp );
+          mprg->comlist        = ReadStringToTilde( fp );
+          ReadToEndOfLine( fp );
+          switch ( letter = ReadChar( fp ) )
             {
             case '>':
               CREATE( mprg->next, MPROG_DATA, 1 );
@@ -3747,7 +3747,7 @@ void rprog_read_programs( FILE *fp, Room *pRoomIndex)
               break;
             case '|':
               mprg->next = NULL;
-              fread_to_eol( fp );
+              ReadToEndOfLine( fp );
               done = true;
               break;
             default:
@@ -3838,8 +3838,8 @@ Room *make_room( vnum_t vnum )
   pRoomIndex->last_ship         = NULL;
   pRoomIndex->area              = NULL;
   pRoomIndex->vnum              = vnum;
-  pRoomIndex->name              = str_dup("Floating in a void");
-  pRoomIndex->description               = str_dup("");
+  pRoomIndex->name              = CopyString("Floating in a void");
+  pRoomIndex->description               = CopyString("");
   pRoomIndex->room_flags                = ROOM_PROTOTYPE;
   pRoomIndex->sector_type               = 1;
   pRoomIndex->light             = 0;
@@ -3872,15 +3872,15 @@ OBJ_INDEX_DATA *make_object( vnum_t vnum, vnum_t cvnum, char *name )
   CREATE( pObjIndex, OBJ_INDEX_DATA, 1 );
 
   pObjIndex->vnum = vnum;
-  pObjIndex->name = str_dup( name );
+  pObjIndex->name = CopyString( name );
 
   if ( !cObjIndex )
     {
       sprintf( buf, "A %s", name );
-      pObjIndex->short_descr    = str_dup( buf  );
+      pObjIndex->short_descr    = CopyString( buf  );
       sprintf( buf, "A %s is here.", name );
-      pObjIndex->description    = str_dup( buf );
-      pObjIndex->action_desc    = str_dup( "" );
+      pObjIndex->description    = CopyString( buf );
+      pObjIndex->action_desc    = CopyString( "" );
       pObjIndex->short_descr[0] = CharToLowercase(pObjIndex->short_descr[0]);
       pObjIndex->description[0] = CharToUppercase(pObjIndex->description[0]);
       pObjIndex->item_type      = ITEM_TRASH;
@@ -3893,9 +3893,9 @@ OBJ_INDEX_DATA *make_object( vnum_t vnum, vnum_t cvnum, char *name )
       Affect *paf = NULL, *cpaf = NULL;
       int oval = 0;
 
-      pObjIndex->short_descr    = str_dup( cObjIndex->short_descr );
-      pObjIndex->description    = str_dup( cObjIndex->description );
-      pObjIndex->action_desc    = str_dup( cObjIndex->action_desc );
+      pObjIndex->short_descr    = CopyString( cObjIndex->short_descr );
+      pObjIndex->description    = CopyString( cObjIndex->description );
+      pObjIndex->action_desc    = CopyString( cObjIndex->action_desc );
       pObjIndex->item_type      = cObjIndex->item_type;
       pObjIndex->extra_flags    = cObjIndex->extra_flags | ITEM_PROTOTYPE;
       pObjIndex->wear_flags     = cObjIndex->wear_flags;
@@ -3911,8 +3911,8 @@ OBJ_INDEX_DATA *make_object( vnum_t vnum, vnum_t cvnum, char *name )
       for ( ced = cObjIndex->first_extradesc; ced; ced = ced->next )
         {
           CREATE( ed, ExtraDescription, 1 );
-          ed->keyword           = str_dup( ced->keyword );
-          ed->description               = str_dup( ced->description );
+          ed->keyword           = CopyString( ced->keyword );
+          ed->description               = CopyString( ced->description );
           LINK( ed, pObjIndex->first_extradesc, pObjIndex->last_extradesc,
                 next, prev );
           top_ed++;
@@ -3958,14 +3958,14 @@ ProtoMobile *make_mobile( vnum_t vnum, vnum_t cvnum, char *name )
   pMobIndex->vnum                       = vnum;
   pMobIndex->count              = 0;
   pMobIndex->killed             = 0;
-  pMobIndex->player_name                = str_dup( name );
+  pMobIndex->player_name                = CopyString( name );
   if ( !cMobIndex )
     {
       sprintf( buf, "A newly created %s", name );
-      pMobIndex->short_descr    = str_dup( buf  );
+      pMobIndex->short_descr    = CopyString( buf  );
       sprintf( buf, "Some god abandoned a newly created %s here.\r\n", name );
-      pMobIndex->long_descr             = str_dup( buf );
-      pMobIndex->description    = str_dup( "" );
+      pMobIndex->long_descr             = CopyString( buf );
+      pMobIndex->description    = CopyString( "" );
       pMobIndex->short_descr[0] = CharToLowercase(pMobIndex->short_descr[0]);
       pMobIndex->long_descr[0]  = CharToUppercase(pMobIndex->long_descr[0]);
       pMobIndex->description[0] = CharToUppercase(pMobIndex->description[0]);
@@ -4010,9 +4010,9 @@ ProtoMobile *make_mobile( vnum_t vnum, vnum_t cvnum, char *name )
     }
   else
     {
-      pMobIndex->short_descr    = str_dup( cMobIndex->short_descr );
-      pMobIndex->long_descr             = str_dup( cMobIndex->long_descr  );
-      pMobIndex->description    = str_dup( cMobIndex->description );
+      pMobIndex->short_descr    = CopyString( cMobIndex->short_descr );
+      pMobIndex->long_descr             = CopyString( cMobIndex->long_descr  );
+      pMobIndex->description    = CopyString( cMobIndex->description );
       pMobIndex->act            = cMobIndex->act | ACT_PROTOTYPE;
       pMobIndex->affected_by    = cMobIndex->affected_by;
       pMobIndex->pShop          = NULL;
@@ -4197,17 +4197,17 @@ void load_area_file( Area *tarea, char *filename )
     {
       char *word;
 
-      if ( fread_letter( fpArea ) != '#' )
+      if ( ReadChar( fpArea ) != '#' )
         {
           bug( tarea->filename );
           bug( "load_area: # not found." );
           exit( 1 );
         }
 
-      word = fread_word( fpArea );
+      word = ReadWord( fpArea );
 
       if ( word[0] == '$'               )                 break;
-      else if ( !str_cmp( word, "AREA"     ) )
+      else if ( !StrCmp( word, "AREA"     ) )
         {
           if ( fBootDb )
             {
@@ -4217,24 +4217,24 @@ void load_area_file( Area *tarea, char *filename )
           else
             {
               DISPOSE( tarea->name );
-              tarea->name = fread_string_nohash( fpArea );
+              tarea->name = ReadStringToTildeNoHash( fpArea );
             }
         }
-      else if ( !str_cmp( word, "AUTHOR"   ) ) load_author  (tarea, fpArea);
-      else if ( !str_cmp( word, "FLAGS"    ) ) load_flags   (tarea, fpArea);
-      else if ( !str_cmp( word, "RANGES"   ) ) load_ranges  (tarea, fpArea);
-      else if ( !str_cmp( word, "ECONOMY"  ) ) load_economy (tarea, fpArea);
-      else if ( !str_cmp( word, "RESETMSG" ) ) load_resetmsg(tarea, fpArea);
+      else if ( !StrCmp( word, "AUTHOR"   ) ) load_author  (tarea, fpArea);
+      else if ( !StrCmp( word, "FLAGS"    ) ) load_flags   (tarea, fpArea);
+      else if ( !StrCmp( word, "RANGES"   ) ) load_ranges  (tarea, fpArea);
+      else if ( !StrCmp( word, "ECONOMY"  ) ) load_economy (tarea, fpArea);
+      else if ( !StrCmp( word, "RESETMSG" ) ) load_resetmsg(tarea, fpArea);
       /* Rennard */
-      else if ( !str_cmp( word, "MOBILES"  ) ) load_mobiles (tarea, fpArea);
-      else if ( !str_cmp( word, "MUDPROGS" ) ) load_mudprogs(tarea, fpArea);
-      else if ( !str_cmp( word, "OBJECTS"  ) ) load_objects (tarea, fpArea);
-      else if ( !str_cmp( word, "OBJPROGS" ) ) load_objprogs(tarea, fpArea);
-      else if ( !str_cmp( word, "RESETS"   ) ) load_resets  (tarea, fpArea);
-      else if ( !str_cmp( word, "ROOMS"    ) ) load_rooms   (tarea, fpArea);
-      else if ( !str_cmp( word, "SHOPS"    ) ) load_shops   (tarea, fpArea);
-      else if ( !str_cmp( word, "REPAIRS"  ) ) load_repairs (tarea, fpArea);
-      else if ( !str_cmp( word, "SPECIALS" ) ) load_specials(tarea, fpArea);
+      else if ( !StrCmp( word, "MOBILES"  ) ) load_mobiles (tarea, fpArea);
+      else if ( !StrCmp( word, "MUDPROGS" ) ) load_mudprogs(tarea, fpArea);
+      else if ( !StrCmp( word, "OBJECTS"  ) ) load_objects (tarea, fpArea);
+      else if ( !StrCmp( word, "OBJPROGS" ) ) load_objprogs(tarea, fpArea);
+      else if ( !StrCmp( word, "RESETS"   ) ) load_resets  (tarea, fpArea);
+      else if ( !StrCmp( word, "ROOMS"    ) ) load_rooms   (tarea, fpArea);
+      else if ( !StrCmp( word, "SHOPS"    ) ) load_shops   (tarea, fpArea);
+      else if ( !StrCmp( word, "REPAIRS"  ) ) load_repairs (tarea, fpArea);
+      else if ( !StrCmp( word, "SPECIALS" ) ) load_specials(tarea, fpArea);
       else
         {
           bug( tarea->filename );
@@ -4262,7 +4262,7 @@ void load_area_file( Area *tarea, char *filename )
                tarea->low_o_vnum, tarea->hi_o_vnum,
                tarea->low_m_vnum, tarea->hi_m_vnum );
       if ( !tarea->author )
-        tarea->author = str_dup( "" );
+        tarea->author = CopyString( "" );
       SetBit( tarea->status, AREA_LOADED );
     }
   else
@@ -4316,7 +4316,7 @@ void load_buildlist( void )
 
               fgets(line, 80, fp);
               sscanf( line, "%s %d %d", word, &low, &hi );
-              if ( !str_cmp( word, "Level" ) )
+              if ( !StrCmp( word, "Level" ) )
                 {
                   if ( low < LEVEL_AVATAR )
                     {
@@ -4325,11 +4325,11 @@ void load_buildlist( void )
                       badfile = true;
                     }
                 }
-              if ( !str_cmp( word, "RoomRange" ) )
+              if ( !StrCmp( word, "RoomRange" ) )
                 rlow = low, rhi = hi;
-              else if ( !str_cmp( word, "MobRange" ) )
+              else if ( !StrCmp( word, "MobRange" ) )
                 mlow = low, mhi = hi;
-              else if ( !str_cmp( word, "ObjRange" ) )
+              else if ( !StrCmp( word, "ObjRange" ) )
                 olow = low, ohi = hi;
             }
           fclose( fp );
@@ -4344,8 +4344,8 @@ void load_buildlist( void )
                 }
 #if !defined(READ_AREA)  /* Dont always want to read stuff.. dunno.. shrug */
 
-              strcpy( word, fread_word( fp ) );
-              if ( word[0] != '#' || str_cmp( &word[1], "AREA" ) )
+              strcpy( word, ReadWord( fp ) );
+              if ( word[0] != '#' || StrCmp( &word[1], "AREA" ) )
                 {
                   sprintf( buf, "Make_buildlist: %s.are: no #AREA found.",
                            dentry->d_name );
@@ -4356,13 +4356,13 @@ void load_buildlist( void )
 #endif
               CREATE( pArea, Area, 1 );
               sprintf( buf, "%s.are", dentry->d_name );
-              pArea->author = str_dup( dentry->d_name );
-              pArea->filename = str_dup( buf );
+              pArea->author = CopyString( dentry->d_name );
+              pArea->filename = CopyString( buf );
 #if !defined(READ_AREA)
-              pArea->name = fread_string_nohash( fp );
+              pArea->name = ReadStringToTildeNoHash( fp );
 #else
               sprintf( buf, "{PROTO} %s's area in progress", dentry->d_name );
-              pArea->name = str_dup( buf );
+              pArea->name = CopyString( buf );
 #endif
               fclose( fp );
               pArea->low_r_vnum = rlow; pArea->hi_r_vnum = rhi;
@@ -4568,92 +4568,92 @@ void fread_sysdata( SYSTEM_DATA *sys, FILE *fp )
   sys->time_of_max = NULL;
   for ( ; ; )
     {
-      word   = feof( fp ) ? "End" : fread_word( fp );
+      word   = feof( fp ) ? "End" : ReadWord( fp );
       fMatch = false;
 
       switch ( CharToUppercase(word[0]) )
         {
         case '*':
           fMatch = true;
-          fread_to_eol( fp );
+          ReadToEndOfLine( fp );
           break;
         case 'B':
-          KEY( "Build",    sys->build_level,      fread_number( fp ) );
+          KEY( "Build",    sys->build_level,      ReadInt( fp ) );
           break;
 
         case 'D':
-          KEY( "Damplrvsplr",      sys->dam_plr_vs_plr,   fread_number( fp ) );
-          KEY( "Damplrvsmob",      sys->dam_plr_vs_mob,   fread_number( fp ) );
-          KEY( "Dammobvsplr",      sys->dam_mob_vs_plr,   fread_number( fp ) );
-          KEY( "Dammobvsmob",      sys->dam_mob_vs_mob,   fread_number( fp ) );
-	  KEY( "DisableHunger",    sys->disable_hunger,   fread_number( fp ) );
+          KEY( "Damplrvsplr",      sys->dam_plr_vs_plr,   ReadInt( fp ) );
+          KEY( "Damplrvsmob",      sys->dam_plr_vs_mob,   ReadInt( fp ) );
+          KEY( "Dammobvsplr",      sys->dam_mob_vs_plr,   ReadInt( fp ) );
+          KEY( "Dammobvsmob",      sys->dam_mob_vs_mob,   ReadInt( fp ) );
+	  KEY( "DisableHunger",    sys->disable_hunger,   ReadInt( fp ) );
           break;
 
         case 'E':
-          if ( !str_cmp( word, "End" ) )
+          if ( !StrCmp( word, "End" ) )
             {
               if ( !sys->time_of_max )
-                sys->time_of_max = str_dup("(not recorded)");
+                sys->time_of_max = CopyString("(not recorded)");
               return;
             }
           break;
 
         case 'F':
-          KEY( "Forcepc",          sys->level_forcepc,    fread_number( fp ) );
+          KEY( "Forcepc",          sys->level_forcepc,    ReadInt( fp ) );
           break;
 
         case 'G':
-          KEY( "Guildoverseer",  sys->guild_overseer,  fread_string( fp ) );
-          KEY( "Guildadvisor",   sys->guild_advisor,   fread_string( fp ) );
+          KEY( "Guildoverseer",  sys->guild_overseer,  ReadStringToTilde( fp ) );
+          KEY( "Guildadvisor",   sys->guild_advisor,   ReadStringToTilde( fp ) );
           break;
 
         case 'H':
-          KEY( "Highplayers",      sys->alltimemax,       fread_number( fp ) );
-          KEY( "Highplayertime", sys->time_of_max,      fread_string_nohash( fp ) );
+          KEY( "Highplayers",      sys->alltimemax,       ReadInt( fp ) );
+          KEY( "Highplayertime", sys->time_of_max,      ReadStringToTildeNoHash( fp ) );
           break;
 
         case 'L':
-          KEY( "Log",              sys->log_level,        fread_number( fp ) );
+          KEY( "Log",              sys->log_level,        ReadInt( fp ) );
           break;
 
         case 'M':
-          KEY( "Msetplayer",       sys->level_mset_player, fread_number( fp ) );
-          KEY( "Muse",     sys->muse_level,        fread_number( fp ) );
+          KEY( "Msetplayer",       sys->level_mset_player, ReadInt( fp ) );
+          KEY( "Muse",     sys->muse_level,        ReadInt( fp ) );
           break;
 
         case 'N':
-          KEY( "Nameresolving",  sys->NO_NAME_RESOLVING, fread_number( fp ) );
+          KEY( "Nameresolving",  sys->NO_NAME_RESOLVING, ReadInt( fp ) );
           break;
 
         case 'O':
-          KEY( "Overridepriv",   sys->level_override_private, fread_number( fp ) );
+          KEY( "Overridepriv",   sys->level_override_private, ReadInt( fp ) );
           break;
 
         case 'P':
-          KEY( "Protoflag",        sys->level_modify_proto, fread_number( fp ) );
+          KEY( "Protoflag",        sys->level_modify_proto, ReadInt( fp ) );
           break;
 
         case 'R':
-          KEY( "Readallmail",      sys->read_all_mail,  fread_number( fp ) );
-          KEY( "Readmailfree",   sys->read_mail_free,   fread_number( fp ) );
+          KEY( "Readallmail",      sys->read_all_mail,  ReadInt( fp ) );
+          KEY( "Readmailfree",   sys->read_mail_free,   ReadInt( fp ) );
           break;
 
         case 'S':
-          KEY( "Stunplrvsplr",   sys->stun_plr_vs_plr, fread_number( fp ) );
-          KEY( "Stunregular",    sys->stun_regular,     fread_number( fp ) );
-          KEY( "Saveflags",        sys->save_flags,     fread_number( fp ) );
-          KEY( "Savefreq",         sys->save_frequency, fread_number( fp ) );
+          KEY( "Stunplrvsplr",   sys->stun_plr_vs_plr, ReadInt( fp ) );
+          KEY( "Stunregular",    sys->stun_regular,     ReadInt( fp ) );
+          KEY( "Saveflags",        sys->save_flags,     ReadInt( fp ) );
+          KEY( "Savefreq",         sys->save_frequency, ReadInt( fp ) );
           break;
 
         case 'T':
-          KEY( "Takeothersmail", sys->take_others_mail, fread_number( fp ) );
-          KEY( "Think",    sys->think_level,    fread_number( fp ) );
+          KEY( "Takeothersmail", sys->take_others_mail, ReadInt( fp ) );
+          KEY( "Think",    sys->think_level,    ReadInt( fp ) );
           break;
 
 
         case 'W':
-          KEY( "Waitforauth",      sys->WAIT_FOR_AUTH,    fread_number( fp ) );
-          KEY( "Writemailfree",  sys->write_mail_free,  fread_number( fp ) );
+          KEY( "Waitforauth",      sys->WAIT_FOR_AUTH,    ReadInt( fp ) );
+          KEY( "Writemailfree",  sys->write_mail_free,  ReadInt( fp ) );
           break;
         }
 
@@ -4688,10 +4688,10 @@ bool load_systemdata( SYSTEM_DATA *sys )
           char letter;
           char *word;
 
-          letter = fread_letter( fp );
+          letter = ReadChar( fp );
           if ( letter == '*' )
             {
-              fread_to_eol( fp );
+              ReadToEndOfLine( fp );
               continue;
             }
 
@@ -4701,14 +4701,14 @@ bool load_systemdata( SYSTEM_DATA *sys )
               break;
             }
 
-          word = fread_word( fp );
-          if ( !str_cmp( word, "SYSTEM" ) )
+          word = ReadWord( fp );
+          if ( !StrCmp( word, "SYSTEM" ) )
             {
               fread_sysdata( sys, fp );
               break;
             }
           else
-            if ( !str_cmp( word, "END"  ) )
+            if ( !StrCmp( word, "END"  ) )
               break;
             else
               {
@@ -4720,10 +4720,10 @@ bool load_systemdata( SYSTEM_DATA *sys )
     }
 
   if ( !sysdata.guild_overseer )
-    sysdata.guild_overseer = str_dup( "" );
+    sysdata.guild_overseer = CopyString( "" );
 
   if ( !sysdata.guild_advisor  )
-    sysdata.guild_advisor  = str_dup( "" );
+    sysdata.guild_advisor  = CopyString( "" );
 
   return found;
 }
@@ -4746,7 +4746,7 @@ void load_banlist( void )
           fclose( fp );
           return;
         }
-      number = fread_number( fp );
+      number = ReadInt( fp );
       if ( number == -1 )
         {
           fclose( fp );
@@ -4754,13 +4754,13 @@ void load_banlist( void )
         }
       CREATE( pban, Ban, 1 );
       pban->level = number;
-      pban->name = fread_string_nohash( fp );
-      if ( (letter = fread_letter(fp)) == '~' )
-        pban->ban_time = fread_string_nohash( fp );
+      pban->name = ReadStringToTildeNoHash( fp );
+      if ( (letter = ReadChar(fp)) == '~' )
+        pban->ban_time = ReadStringToTildeNoHash( fp );
       else
         {
           ungetc(letter, fp);
-          pban->ban_time = str_dup( "(unrecorded)" );
+          pban->ban_time = CopyString( "(unrecorded)" );
         }
       LINK( pban, first_ban, last_ban, next, prev );
     }

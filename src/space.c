@@ -73,11 +73,11 @@ void new_missile( Ship *ship , Ship *target , Character *ch , int missiletype )
 
   if ( ch )
     {
-      missile->fired_by = str_dup( ch->name );
+      missile->fired_by = CopyString( ch->name );
     }
   else
     {
-      missile->fired_by = str_dup( "" );
+      missile->fired_by = CopyString( "" );
     }
 
   missile->missiletype = missiletype;
@@ -100,7 +100,7 @@ void new_missile( Ship *ship , Ship *target , Character *ch , int missiletype )
       missile->speed = 50;
     }
 
-  vector_copy( &missile->pos, &ship->pos );
+  CopyVector( &missile->pos, &ship->pos );
   missile->spaceobject = spaceobject;
 }
 
@@ -167,7 +167,7 @@ void update_missiles( void )
 
                   for ( ch = first_char; ch; ch = ch->next )
 		    {
-		      if ( !IsNpc( ch ) && nifty_is_name( missile->fired_by, ch->name ) )
+		      if ( !IsNpc( ch ) && NiftyIsName( missile->fired_by, ch->name ) )
 			{
 			  ch_found = true;
 			  DamageShip( target, 30 + missile->missiletype * missile->missiletype * 30, 50 + missile->missiletype * missile->missiletype * missile->missiletype * 50, ch, NULL );

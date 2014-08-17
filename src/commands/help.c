@@ -26,7 +26,7 @@ void do_help( Character *ch, char *argument )
       return;
     }
 
-  if ( GetHelpLevel( pHelp ) >= 0 && str_cmp( argument, "imotd" ) )
+  if ( GetHelpLevel( pHelp ) >= 0 && StrCmp( argument, "imotd" ) )
     {
       pager_printf( ch, "%s\r\n", GetHelpFileKeyword( pHelp ) );
     }
@@ -85,7 +85,7 @@ static void similar_help_files(Character *ch, char *argument)
 
       while ( extension[0] != '\0' )
         {
-          extension= one_argument(extension, buf);
+          extension= OneArgument(extension, buf);
 
           if ( str_similarity(argument, buf) > level)
             {
@@ -112,7 +112,7 @@ static void similar_help_files(Character *ch, char *argument)
 
       while ( extension[0] != '\0' )
         {
-          extension=one_argument(extension, buf);
+          extension=OneArgument(extension, buf);
 
           if ( str_similarity(argument, buf) >= level
                && pHelp->level <= GetTrustLevel(ch))

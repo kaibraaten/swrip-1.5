@@ -28,7 +28,7 @@ void do_enlist( Character *ch, char *argument )
       if ( ( ch->in_room->vnum == clan->enlistroom1 ||
              ch->in_room->vnum == clan->enlistroom2 ) )
         {
-          if( !str_cmp( clan->name, "The Empire" )
+          if( !StrCmp( clan->name, "The Empire" )
 	      && ch->race != RACE_HUMAN
 	      && ch->race != RACE_DEFEL )
             {
@@ -38,7 +38,7 @@ void do_enlist( Character *ch, char *argument )
           SetBit( ch->speaks, LANG_CLAN );
           ++clan->members;
           DISPOSE( ch->pcdata->clan_name );
-          ch->pcdata->clan_name = str_dup( clan->name );
+          ch->pcdata->clan_name = CopyString( clan->name );
           ch->pcdata->clan = clan;
           ch_printf( ch, "Welcome to %s.\r\n", clan->name );
           update_member( ch );

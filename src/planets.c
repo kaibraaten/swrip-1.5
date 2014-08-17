@@ -39,7 +39,7 @@ PLANET_DATA *get_planet( const char *name )
 
   for ( planet = first_planet; planet; planet = planet->next )
     {
-      if ( !str_cmp( name, planet->name ) )
+      if ( !StrCmp( name, planet->name ) )
         {
           return planet;
         }
@@ -136,29 +136,29 @@ static void fread_planet( PLANET_DATA *planet, FILE *fp )
 {
   for ( ; ; )
     {
-      const char *word = feof( fp ) ? "End" : fread_word( fp );
+      const char *word = feof( fp ) ? "End" : ReadWord( fp );
       bool fMatch = false;
 
       switch ( CharToUppercase(word[0]) )
         {
         case '*':
           fMatch = true;
-          fread_to_eol( fp );
+          ReadToEndOfLine( fp );
           break;
 
         case 'A':
-          if ( !str_cmp( word, "Area" ) )
+          if ( !StrCmp( word, "Area" ) )
             {
               char aName[MAX_STRING_LENGTH];
               Area *pArea;
-              char *tmp = fread_string(fp);
+              char *tmp = ReadStringToTilde(fp);
 
               sprintf (aName, "%s", tmp);
               DISPOSE(tmp);
 
               for( pArea = first_area; pArea; pArea = pArea->next )
                 {
-                  if (pArea->filename && !str_cmp(pArea->filename , aName ) )
+                  if (pArea->filename && !StrCmp(pArea->filename , aName ) )
                     {
                       pArea->planet = planet;
                       LINK( pArea, planet->first_area, planet->last_area,
@@ -171,15 +171,15 @@ static void fread_planet( PLANET_DATA *planet, FILE *fp )
           break;
 
 	case 'B':
-          KEY( "BaseValue", planet->base_value, fread_number( fp ) );
+          KEY( "BaseValue", planet->base_value, ReadInt( fp ) );
           break;
 
         case 'E':
-          if ( !str_cmp( word, "End" ) )
+          if ( !StrCmp( word, "End" ) )
             {
               if (!planet->name)
                 {
-                  planet->name = str_dup( "" );
+                  planet->name = CopyString( "" );
                 }
 
               return;
@@ -187,30 +187,30 @@ static void fread_planet( PLANET_DATA *planet, FILE *fp )
           break;
 
         case 'F':
-          KEY( "Filename", planet->filename, fread_string_nohash( fp ) );
-          KEY( "Flags",    planet->flags,    fread_number( fp ) );
+          KEY( "Filename", planet->filename, ReadStringToTildeNoHash( fp ) );
+          KEY( "Flags",    planet->flags,    ReadInt( fp ) );
           break;
 
         case 'G':
-          if ( !str_cmp( word, "GovernedBy" ) )
+          if ( !StrCmp( word, "GovernedBy" ) )
             {
-              planet->governed_by = get_clan ( fread_string(fp) );
+              planet->governed_by = get_clan ( ReadStringToTilde(fp) );
               fMatch = true;
             }
           break;
 
         case 'N':
-          KEY( "Name",  planet->name, fread_string( fp ) );
+          KEY( "Name",  planet->name, ReadStringToTilde( fp ) );
           break;
 
         case 'P':
-          KEY( "PopSupport", planet->pop_support, fread_float( fp ) );
+          KEY( "PopSupport", planet->pop_support, ReadFloat( fp ) );
           break;
 
         case 'S':
-          if ( !str_cmp( word, "spaceobject" ) )
+          if ( !StrCmp( word, "spaceobject" ) )
             {
-              char *tmp = fread_string(fp);
+              char *tmp = ReadStringToTilde(fp);
 
               planet->spaceobject = spaceobject_from_name( tmp );
               DISPOSE(tmp);
@@ -227,7 +227,7 @@ static void fread_planet( PLANET_DATA *planet, FILE *fp )
           break;
 
         case 'T':
-          KEY( "Taxes", planet->base_value, fread_number( fp ) );
+          KEY( "Taxes", planet->base_value, ReadInt( fp ) );
           break;
         }
 
@@ -256,11 +256,11 @@ static bool load_planet_file( const char *planetfile )
       for ( ; ; )
         {
           const char *word = NULL;
-          char letter = fread_letter( fp );
+          char letter = ReadChar( fp );
 
 	  if ( letter == '*' )
             {
-              fread_to_eol( fp );
+              ReadToEndOfLine( fp );
               continue;
             }
 
@@ -270,14 +270,14 @@ static bool load_planet_file( const char *planetfile )
               break;
             }
 
-          word = fread_word( fp );
+          word = ReadWord( fp );
 
-          if ( !str_cmp( word, "PLANET" ) )
+          if ( !StrCmp( word, "PLANET" ) )
             {
               fread_planet( planet, fp );
               break;
             }
-          else if ( !str_cmp( word, "END"  ) )
+          else if ( !StrCmp( word, "END"  ) )
             {
               break;
             }
@@ -319,7 +319,7 @@ void load_planets( void )
 
   for ( ; ; )
     {
-      const char *filename = feof( fpList ) ? "$" : fread_word( fpList );
+      const char *filename = feof( fpList ) ? "$" : ReadWord( fpList );
       log_string( filename );
 
       if ( filename[0] == '$' )

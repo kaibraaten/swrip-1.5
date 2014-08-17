@@ -54,7 +54,7 @@ void do_bind ( Character *ch , char *argument )
 
   SetWaitState( ch, 1 * PULSE_VIOLENCE );
 
-  if ( IsNpc(victim) || number_percent( ) > ch->pcdata->learned[gsn_bind] )
+  if ( IsNpc(victim) || GetRandomPercent( ) > ch->pcdata->learned[gsn_bind] )
     {
       send_to_char( "You fail.\r\n", ch );
       return;

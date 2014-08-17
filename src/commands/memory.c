@@ -5,7 +5,7 @@ void do_memory( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
 
-  argument = one_argument( argument, arg );
+  argument = OneArgument( argument, arg );
   ch_printf( ch, "Affects %5d    Areas   %5d\r\n",  top_affect, top_area   );
   ch_printf( ch, "ExtDes  %5d    Exits   %5d\r\n", top_ed,       top_exit   );
   ch_printf( ch, "Helps   %5d    Resets  %5d\r\n", top_help,   top_reset  );
@@ -18,7 +18,7 @@ void do_memory( Character *ch, char *argument )
   ch_printf( ch, "MaxEver %5d    Topsn   %5d (%d)\r\n", sysdata.alltimemax, top_sn, MAX_SKILL );
   ch_printf( ch, "MaxEver time recorded at:   %s\r\n", sysdata.time_of_max );
 
-  if ( !str_cmp( arg, "check" ) )
+  if ( !StrCmp( arg, "check" ) )
     {
 #ifdef HASHSTR
       send_to_char( check_hash(argument), ch );
@@ -28,7 +28,7 @@ void do_memory( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg, "showhigh" ) )
+  if ( !StrCmp( arg, "showhigh" ) )
     {
 #ifdef HASHSTR
       show_high_hash( atoi(argument) );
@@ -38,7 +38,7 @@ void do_memory( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg, "hash" ) )
+  if ( !StrCmp( arg, "hash" ) )
     {
 #ifdef HASHSTR
       int hash = 0;

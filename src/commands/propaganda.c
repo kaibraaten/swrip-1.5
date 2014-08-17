@@ -16,7 +16,7 @@ void do_propaganda ( Character *ch , char *argument )
     }
 
   planet = ch->in_room->area->planet;
-  argument = one_argument( argument, arg1 );
+  argument = OneArgument( argument, arg1 );
 
   if ( ch->mount )
     {

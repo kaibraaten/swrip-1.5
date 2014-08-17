@@ -50,10 +50,10 @@ void do_mpedit( Character *ch, char *argument )
       return;
     }
 
-  smash_tilde( argument );
-  argument = one_argument( argument, arg1 );
-  argument = one_argument( argument, arg2 );
-  argument = one_argument( argument, arg3 );
+  SmashTilde( argument );
+  argument = OneArgument( argument, arg1 );
+  argument = OneArgument( argument, arg2 );
+  argument = OneArgument( argument, arg3 );
   value = atoi( arg3 );
 
   if ( arg1[0] == '\0' || arg2[0] == '\0' )
@@ -104,7 +104,7 @@ void do_mpedit( Character *ch, char *argument )
 
   set_char_color( AT_GREEN, ch );
 
-  if ( !str_cmp( arg2, "list" ) )
+  if ( !StrCmp( arg2, "list" ) )
     {
       cnt = 0;
       if ( !mprog )
@@ -121,14 +121,14 @@ void do_mpedit( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "edit" ) )
+  if ( !StrCmp( arg2, "edit" ) )
     {
       if ( !mprog )
         {
           send_to_char( "That mobile has no mob programs.\r\n", ch );
           return;
         }
-      argument = one_argument( argument, arg4 );
+      argument = OneArgument( argument, arg4 );
       if ( arg4[0] != '\0' )
         {
           mptype = get_mpflag( arg4 );
@@ -161,7 +161,7 @@ void do_mpedit( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "delete" ) )
+  if ( !StrCmp( arg2, "delete" ) )
     {
       int num;
       bool found;
@@ -171,7 +171,7 @@ void do_mpedit( Character *ch, char *argument )
           send_to_char( "That mobile has no mob programs.\r\n", ch );
           return;
         }
-      argument = one_argument( argument, arg4 );
+      argument = OneArgument( argument, arg4 );
       if ( value < 1 )
         {
           send_to_char( "Program not found.\r\n", ch );
@@ -220,14 +220,14 @@ void do_mpedit( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "insert" ) )
+  if ( !StrCmp( arg2, "insert" ) )
     {
       if ( !mprog )
         {
           send_to_char( "That mobile has no mob programs.\r\n", ch );
           return;
         }
-      argument = one_argument( argument, arg4 );
+      argument = OneArgument( argument, arg4 );
       mptype = get_mpflag( arg4 );
       if ( mptype == -1 )
         {
@@ -265,7 +265,7 @@ void do_mpedit( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "add" ) )
+  if ( !StrCmp( arg2, "add" ) )
     {
       mptype = get_mpflag( arg3 );
       if ( mptype == -1 )

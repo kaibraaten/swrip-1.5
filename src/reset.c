@@ -202,9 +202,9 @@ Room *FindRoom( Character *ch, char *argument,
       return pRoom;
     }
 
-  one_argument(argument, arg);
+  OneArgument(argument, arg);
 
-  if ( !is_number(arg) && arg[0] != '\0' )
+  if ( !IsNumber(arg) && arg[0] != '\0' )
     {
       send_to_char( "Reset to which room?\r\n", ch );
       return NULL;
@@ -362,7 +362,7 @@ static Reset *FindObjectReset(Character *ch, Area *pArea,
   else
     {
       char arg[MAX_INPUT_LENGTH];
-      int cnt = 0, num = number_argument(name, arg);
+      int cnt = 0, num = NumberArgument(name, arg);
       OBJ_INDEX_DATA *pObjTo = NULL;
 
       for ( reset = pArea->first_reset; reset; reset = reset->next )
@@ -385,7 +385,7 @@ static Reset *FindObjectReset(Character *ch, Area *pArea,
             }
 
           if ( (pObjTo = get_obj_index(reset->arg1)) &&
-               is_name(arg, pObjTo->name) && ++cnt == num )
+               IsName(arg, pObjTo->name) && ++cnt == num )
 	    {
 	      break;
 	    }
@@ -436,7 +436,7 @@ static Reset *FindMobileReset(Character *ch, Area *pArea,
   else
     {
       char arg[MAX_INPUT_LENGTH];
-      int cnt = 0, num = number_argument(name, arg);
+      int cnt = 0, num = NumberArgument(name, arg);
       ProtoMobile *pMob = NULL;
 
       for ( reset = pArea->first_reset; reset; reset = reset->next )
@@ -456,7 +456,7 @@ static Reset *FindMobileReset(Character *ch, Area *pArea,
             }
 
           if ( (pMob = get_mob_index(reset->arg1)) &&
-               is_name(arg, pMob->player_name) && ++cnt == num )
+               IsName(arg, pMob->player_name) && ++cnt == num )
 	    {
 	      break;
 	    }
@@ -484,9 +484,9 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
   vnum_t vnum = INVALID_VNUM;
   char *origarg = argument;
 
-  argument = one_argument(argument, arg);
+  argument = OneArgument(argument, arg);
 
-  if ( !*arg || !str_cmp(arg, "?") )
+  if ( !*arg || !StrCmp(arg, "?") )
     {
       const char *nm = (ch->substate == SUB_REPEATCMD ? "" : (aRoom ? "rreset "
                                                         : "reset "));
@@ -524,7 +524,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
       return;
     }
 
-  if ( !str_cmp(arg, "on") )
+  if ( !StrCmp(arg, "on") )
     {
       ch->substate = SUB_REPEATCMD;
       ch->dest_buf = (aRoom ? (void *)aRoom : (void *)pArea);
@@ -532,7 +532,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
       return;
     }
 
-  if ( !aRoom && !str_cmp(arg, "area") )
+  if ( !aRoom && !StrCmp(arg, "area") )
     {
       if ( !pArea->first_reset )
         {
@@ -548,25 +548,25 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
       return;
     }
 
-  if ( !str_cmp(arg, "list") )
+  if ( !StrCmp(arg, "list") )
     {
       int start = 0, end = 0;
 
-      argument = one_argument(argument, arg);
-      start = is_number(arg) ? atoi(arg) : -1;
+      argument = OneArgument(argument, arg);
+      start = IsNumber(arg) ? atoi(arg) : -1;
 
-      argument = one_argument(argument, arg);
-      end = is_number(arg) ? atoi(arg) : -1;
+      argument = OneArgument(argument, arg);
+      end = IsNumber(arg) ? atoi(arg) : -1;
 
       ListResets(ch, pArea, aRoom, start, end);
       return;
     }
 
-  if ( !str_cmp(arg, "edit") )
+  if ( !StrCmp(arg, "edit") )
     {
-      argument = one_argument(argument, arg);
+      argument = OneArgument(argument, arg);
 
-      if ( !*arg || !is_number(arg) )
+      if ( !*arg || !IsNumber(arg) )
         {
           send_to_char( "Usage: reset edit <number> <command>\r\n", ch );
           return;
@@ -610,7 +610,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
       return;
     }
 
-  if ( !str_cmp(arg, "add") )
+  if ( !StrCmp(arg, "add") )
     {
       if ( (pReset = ParseReset(pArea, argument, ch)) == NULL )
         {
@@ -625,7 +625,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
       return;
     }
 
-  if ( !str_cmp(arg, "place") )
+  if ( !StrCmp(arg, "place") )
     {
       if ( (pReset = ParseReset(pArea, argument, ch)) == NULL )
         {
@@ -640,11 +640,11 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
       return;
     }
 
-  if ( !str_cmp(arg, "insert") )
+  if ( !StrCmp(arg, "insert") )
     {
-      argument = one_argument(argument, arg);
+      argument = OneArgument(argument, arg);
 
-      if ( !*arg || !is_number(arg) )
+      if ( !*arg || !IsNumber(arg) )
         {
           send_to_char( "Usage: reset insert <number> <command>\r\n", ch );
           return;
@@ -669,7 +669,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
       return;
     }
 
-  if ( !str_cmp(arg, "delete") )
+  if ( !StrCmp(arg, "delete") )
     {
       int start = 0, end = 0;
       bool found = false;
@@ -680,9 +680,9 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
           return;
         }
 
-      argument = one_argument(argument, arg);
-      start = is_number(arg) ? atoi(arg) : -1;
-      end   = is_number(arg) ? atoi(arg) : -1;
+      argument = OneArgument(argument, arg);
+      start = IsNumber(arg) ? atoi(arg) : -1;
+      end   = IsNumber(arg) ? atoi(arg) : -1;
       num = 0;
 
       for ( pReset = pArea->first_reset; pReset; pReset = reset )
@@ -728,13 +728,13 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
       return;
     }
 
-  if ( !str_cmp(arg, "remove") )
+  if ( !StrCmp(arg, "remove") )
     {
       int iarg = 0;
 
-      argument = one_argument(argument, arg);
+      argument = OneArgument(argument, arg);
 
-      if ( arg[0] == '\0' || !is_number(arg) )
+      if ( arg[0] == '\0' || !IsNumber(arg) )
         {
           send_to_char( "Delete which reset?\r\n", ch );
           return;
@@ -761,11 +761,11 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
       return;
     }
 
-  if ( !str_prefix( arg, "mobile" ) )
+  if ( !StringPrefix( arg, "mobile" ) )
     {
-      argument = one_argument(argument, arg);
+      argument = OneArgument(argument, arg);
 
-      if ( arg[0] == '\0' || !is_number(arg) )
+      if ( arg[0] == '\0' || !IsNumber(arg) )
         {
           send_to_char( "Reset which mobile vnum?\r\n", ch );
           return;
@@ -777,13 +777,13 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
           return;
         }
 
-      argument = one_argument(argument, arg);
+      argument = OneArgument(argument, arg);
 
       if ( arg[0] == '\0' )
 	{
 	  num = 1;
 	}
-      else if ( !is_number(arg) )
+      else if ( !IsNumber(arg) )
         {
           send_to_char( "Reset how many mobiles?\r\n", ch );
           return;
@@ -804,11 +804,11 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
       return;
     }
 
-  if ( !str_prefix(arg, "object") )
+  if ( !StringPrefix(arg, "object") )
     {
-      argument = one_argument(argument, arg);
+      argument = OneArgument(argument, arg);
 
-      if ( arg[0] == '\0' || !is_number(arg) )
+      if ( arg[0] == '\0' || !IsNumber(arg) )
         {
           send_to_char( "Reset which object vnum?\r\n", ch );
           return;
@@ -820,14 +820,14 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
           return;
         }
 
-      argument = one_argument(argument, arg);
+      argument = OneArgument(argument, arg);
 
       if ( arg[0] == '\0' )
         strcpy(arg, "room");
 
-      if ( !str_prefix( arg, "put" ) )
+      if ( !StringPrefix( arg, "put" ) )
         {
-          argument = one_argument(argument, arg);
+          argument = OneArgument(argument, arg);
 
           if ( !(reset = FindObjectReset(ch, pArea, aRoom, arg)) )
 	    {
@@ -842,7 +842,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
 	      reset = reset->next;
 	    }
 
-          argument = one_argument(argument, arg);
+          argument = OneArgument(argument, arg);
 
           if ( (vnum = atoi(arg)) < 1 )
 	    {
@@ -857,9 +857,9 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
           return;
         }
 
-      if ( !str_prefix( arg, "give" ) )
+      if ( !StringPrefix( arg, "give" ) )
         {
-          argument = one_argument(argument, arg);
+          argument = OneArgument(argument, arg);
 
           if ( !(reset = FindMobileReset(ch, pArea, aRoom, arg)) )
 	    {
@@ -871,7 +871,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
 	      reset = reset->next;
 	    }
 
-          argument = one_argument(argument, arg);
+          argument = OneArgument(argument, arg);
 
           if ( (vnum = atoi(arg)) < 1 )
 	    {
@@ -884,9 +884,9 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
           return;
         }
 
-      if ( !str_prefix( arg, "equip" ) )
+      if ( !StringPrefix( arg, "equip" ) )
         {
-          argument = one_argument(argument, arg);
+          argument = OneArgument(argument, arg);
 
           if ( !(reset = FindMobileReset(ch, pArea, aRoom, arg)) )
 	    {
@@ -920,7 +920,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
                 }
             }
 
-          argument = one_argument(argument, arg);
+          argument = OneArgument(argument, arg);
 
           if ( (vnum = atoi(arg)) < 1 )
 	    {
@@ -933,12 +933,12 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
           return;
         }
 
-      if ( arg[0] == '\0' || !(num = (int)str_cmp(arg, "room"))
-	   || is_number(arg) )
+      if ( arg[0] == '\0' || !(num = (int)StrCmp(arg, "room"))
+	   || IsNumber(arg) )
         {
           if ( !(bool)num )
 	    {
-	      argument = one_argument(argument, arg);
+	      argument = OneArgument(argument, arg);
 	    }
 
           if ( !(pRoom = FindRoom(ch, argument, aRoom)) )
@@ -967,11 +967,11 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
       return;
     }
 
-  if ( !str_cmp(arg, "random") )
+  if ( !StrCmp(arg, "random") )
     {
       DirectionType direction = DIR_INVALID;
 
-      argument = one_argument(argument, arg);
+      argument = OneArgument(argument, arg);
       direction = get_dir( arg );
 
       if ( direction <= DIR_INVALID || direction > DIR_SOUTHWEST )
@@ -1000,33 +1000,33 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
       return;
     }
 
-  if ( !str_cmp(arg, "trap") )
+  if ( !StrCmp(arg, "trap") )
     {
       char oname[MAX_INPUT_LENGTH];
       int chrg, value, extra = 0;
       bool isobj;
 
-      argument = one_argument(argument, oname);
-      argument = one_argument(argument, arg);
-      num = is_number(arg) ? atoi(arg) : -1;
-      argument = one_argument(argument, arg);
-      chrg = is_number(arg) ? atoi(arg) : -1;
-      isobj = is_name(argument, "obj");
+      argument = OneArgument(argument, oname);
+      argument = OneArgument(argument, arg);
+      num = IsNumber(arg) ? atoi(arg) : -1;
+      argument = OneArgument(argument, arg);
+      chrg = IsNumber(arg) ? atoi(arg) : -1;
+      isobj = IsName(argument, "obj");
 
-      if ( isobj == is_name(argument, "room") )
+      if ( isobj == IsName(argument, "room") )
         {
           send_to_char( "Reset: TRAP: Must specify ROOM or OBJECT\r\n", ch );
           return;
         }
 
-      if ( !str_cmp(oname, "room") && !isobj )
+      if ( !StrCmp(oname, "room") && !isobj )
         {
           vnum = (aRoom ? aRoom->vnum : ch->in_room->vnum);
           extra = TRAP_ROOM;
         }
       else
         {
-          if ( is_number(oname) && !isobj )
+          if ( IsNumber(oname) && !isobj )
             {
               vnum = atoi(oname);
               if ( !get_room_index(vnum) )
@@ -1061,7 +1061,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
 
       while ( *argument )
         {
-          argument = one_argument(argument, arg);
+          argument = OneArgument(argument, arg);
           value = get_trapflag(arg);
 
           if ( value < 0 || value > 31 )
@@ -1084,14 +1084,14 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
       return;
     }
 
-  if ( !str_cmp(arg, "bit") )
+  if ( !StrCmp(arg, "bit") )
     {
       int (*flfunc)(const char *type);
       int flags = 0;
       char option[MAX_INPUT_LENGTH];
       char *parg;
 
-      argument = one_argument(argument, option);
+      argument = OneArgument(argument, option);
 
       if ( !*option )
         {
@@ -1101,23 +1101,23 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
 
       num = 0;
 
-      if ( !str_prefix(option, "set") )
+      if ( !StringPrefix(option, "set") )
 	{
 	  SetBit(num, BIT_RESET_SET);
 	}
-      else if ( !str_prefix(option, "toggle") )
+      else if ( !StringPrefix(option, "toggle") )
 	{
 	  SetBit(num, BIT_RESET_TOGGLE);
 	}
-      else if ( str_prefix(option, "remove") )
+      else if ( StringPrefix(option, "remove") )
         {
           send_to_char( "You must specify SET, REMOVE, or TOGGLE.\r\n", ch );
           return;
         }
 
-      argument = one_argument(argument, option);
+      argument = OneArgument(argument, option);
       parg = argument;
-      argument = one_argument(argument, arg);
+      argument = OneArgument(argument, arg);
 
       if ( !*option )
         {
@@ -1125,7 +1125,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
           return;
         }
 
-      if ( !str_prefix(option, "door") )
+      if ( !StringPrefix(option, "door") )
         {
           SetBit(num, BIT_RESET_DOOR);
 
@@ -1134,7 +1134,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
               pRoom = aRoom;
               argument = parg;
             }
-          else if ( !is_number(arg) )
+          else if ( !IsNumber(arg) )
             {
               pRoom = ch->in_room;
               argument = parg;
@@ -1144,7 +1144,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
 	      return;
 	    }
 
-          argument = one_argument(argument, arg);
+          argument = OneArgument(argument, arg);
 
           if ( !*arg )
             {
@@ -1158,7 +1158,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
           flfunc = &get_exitflag;
           reset = NULL;
         }
-      else if ( !str_prefix(option, "object") )
+      else if ( !StringPrefix(option, "object") )
         {
           SetBit(num, BIT_RESET_OBJECT);
           vnum = 0;
@@ -1169,7 +1169,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
 	      return;
 	    }
         }
-      else if ( !str_prefix(option, "mobile") )
+      else if ( !StringPrefix(option, "mobile") )
         {
           SetBit(num, BIT_RESET_MOBILE);
           vnum = 0;
@@ -1180,7 +1180,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
 	      return;
 	    }
         }
-      else if ( !str_prefix(option, "room") )
+      else if ( !StringPrefix(option, "room") )
         {
           SetBit(num, BIT_RESET_ROOM);
 
@@ -1189,7 +1189,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
               pRoom = aRoom;
               argument = parg;
             }
-          else if ( !is_number(arg) )
+          else if ( !IsNumber(arg) )
             {
               pRoom = ch->in_room;
               argument = parg;
@@ -1212,7 +1212,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
       while ( *argument )
         {
           int value;
-          argument = one_argument(argument, arg);
+          argument = OneArgument(argument, arg);
           value = flfunc(arg);
 
           if ( value < 0 || value > 31 )
@@ -1241,9 +1241,9 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
       return;
     }
 
-  if ( !str_cmp(arg, "hide") )
+  if ( !StrCmp(arg, "hide") )
     {
-      argument = one_argument(argument, arg);
+      argument = OneArgument(argument, arg);
 
       if ( !(reset = FindObjectReset(ch, pArea, aRoom, arg)) )
         return;
@@ -1426,23 +1426,23 @@ static int GenerateItemLevel( Area *pArea, OBJ_INDEX_DATA *pObjIndex )
 	  break;
 
 	case ITEM_PILL:
-	  olevel = number_range(  min, max );
+	  olevel = GetRandomNumberFromRange(  min, max );
 	  break;
 
 	case ITEM_POTION:
-	  olevel = number_range(  min, max );
+	  olevel = GetRandomNumberFromRange(  min, max );
 	  break;
 
 	case ITEM_DEVICE:
-	  olevel = number_range(  min, max );
+	  olevel = GetRandomNumberFromRange(  min, max );
 	  break;
 
 	case ITEM_ARMOR:
-	  olevel = number_range( min+4, max+1 );
+	  olevel = GetRandomNumberFromRange( min+4, max+1 );
 	  break;
 
 	case ITEM_WEAPON:
-	  olevel = number_range( min+4, max+1 );
+	  olevel = GetRandomNumberFromRange( min+4, max+1 );
 	  break;
 	}
     }
@@ -1579,7 +1579,7 @@ void ResetArea( Area *pArea )
             }
           else
 	    {
-	      obj = create_object(pObjIndex, number_fuzzy(level));
+	      obj = create_object(pObjIndex, NumberFuzzy(level));
 	    }
 
           obj->level = urange(0, obj->level, LEVEL_AVATAR);
@@ -1627,7 +1627,7 @@ void ResetArea( Area *pArea )
               break;
             }
 
-          obj = create_object(pObjIndex, number_fuzzy(GenerateItemLevel(pArea, pObjIndex)));
+          obj = create_object(pObjIndex, NumberFuzzy(GenerateItemLevel(pArea, pObjIndex)));
           obj->level = umin(obj->level, LEVEL_AVATAR);
           obj->cost = 0;
           obj_to_room(obj, pRoomIndex);
@@ -1699,7 +1699,7 @@ void ResetArea( Area *pArea )
 		}
             }
 
-          obj = create_object(pObjIndex, number_fuzzy(umax(GenerateItemLevel(pArea, pObjIndex),to_obj->level)));
+          obj = create_object(pObjIndex, NumberFuzzy(umax(GenerateItemLevel(pArea, pObjIndex),to_obj->level)));
           obj->level = umin(obj->level, LEVEL_AVATAR);
           obj_to_obj(obj, to_obj);
           break;
@@ -1743,7 +1743,7 @@ void ResetArea( Area *pArea )
                 }
 
               pobj = make_trap( pReset->arg2, pReset->arg1,
-                                number_fuzzy(to_obj->level), pReset->extra );
+                                NumberFuzzy(to_obj->level), pReset->extra );
               obj_to_obj(pobj, to_obj);
             }
           else
@@ -2157,7 +2157,7 @@ void ListResets( Character *ch, Area *pArea, Room *pRoom,
 
         case 'T':
           sprintf(pbuf, "TRAP: %d %d %d %d (%s)\r\n", pReset->extra, pReset->arg1,
-                  pReset->arg2, pReset->arg3, flag_string(pReset->extra, trap_flags));
+                  pReset->arg2, pReset->arg3, FlagString(pReset->extra, trap_flags));
           break;
 
         case 'H':
@@ -2272,7 +2272,7 @@ void ListResets( Character *ch, Area *pArea, Room *pRoom,
 
             if ( flagarray )
               sprintf(pbuf, "; flags: %s [%d]\r\n",
-                      flag_string(pReset->arg3, flagarray), pReset->arg3);
+                      FlagString(pReset->arg3, flagarray), pReset->arg3);
             else
               sprintf(pbuf, "; flags %d\r\n", pReset->arg3);
           }
@@ -2908,7 +2908,7 @@ char *SPrintReset( Character *ch, Reset *pReset, short num, bool rlist )
                pReset->arg1,
                pReset->arg2,
                pReset->arg3,
-               flag_string(pReset->extra, trap_flags) );
+               FlagString(pReset->extra, trap_flags) );
       break;
     }
 

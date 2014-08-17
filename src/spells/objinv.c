@@ -47,13 +47,13 @@ ch_ret spell_obj_inv( int sn, int level, Character *ch, void *vo )
               separate_obj(obj);
               obj->value[2] = LIQ_WATER;
               obj->value[1] += water;
-              if ( !is_name( "water", obj->name ) )
+              if ( !IsName( "water", obj->name ) )
                 {
                   char buf[MAX_STRING_LENGTH];
 
                   sprintf( buf, "%s water", obj->name );
                   DISPOSE( obj->name );
-                  obj->name = str_dup( buf );
+                  obj->name = CopyString( buf );
                 }
             }
           successful_casting( skill, ch, NULL, obj );

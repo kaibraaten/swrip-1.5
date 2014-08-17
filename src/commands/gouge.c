@@ -32,11 +32,11 @@ void do_gouge( Character *ch, char *argument )
       return;
     }
 
-  percent = number_percent( ) - (GetCurrentLuck(ch) - 13);
+  percent = GetRandomPercent( ) - (GetCurrentLuck(ch) - 13);
 
   if ( IsNpc(ch) || percent < ch->pcdata->learned[gsn_gouge] )
     {
-      dam = number_range( 1, GetAbilityLevel( ch, COMBAT_ABILITY ) );
+      dam = GetRandomNumberFromRange( 1, GetAbilityLevel( ch, COMBAT_ABILITY ) );
       global_retcode = damage( ch, victim, dam, gsn_gouge );
 
       if ( global_retcode == rNONE )

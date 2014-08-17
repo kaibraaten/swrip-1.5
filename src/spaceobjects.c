@@ -67,11 +67,11 @@ Spaceobject *spaceobject_from_name( const char *name )
   Spaceobject *spaceobject = NULL;
 
   for ( spaceobject = first_spaceobject; spaceobject; spaceobject = spaceobject->next )
-    if ( !str_cmp( name, spaceobject->name ) )
+    if ( !StrCmp( name, spaceobject->name ) )
       return spaceobject;
 
   for ( spaceobject = first_spaceobject; spaceobject; spaceobject = spaceobject->next )
-    if ( !str_prefix( name, spaceobject->name ) )
+    if ( !StringPrefix( name, spaceobject->name ) )
       return spaceobject;
 
   return NULL;
@@ -176,79 +176,79 @@ void fread_spaceobject( Spaceobject *spaceobject, FILE *fp )
 {
   for ( ; ; )
     {
-      const char *word = feof( fp ) ? "End" : fread_word( fp );
+      const char *word = feof( fp ) ? "End" : ReadWord( fp );
       bool fMatch = false;
 
       switch ( CharToUppercase(word[0]) )
         {
         case '*':
           fMatch = true;
-          fread_to_eol( fp );
+          ReadToEndOfLine( fp );
           break;
 
         case 'D':
-          KEY( "Doca",  spaceobject->landing_site.doca,          fread_number( fp ) );
-          KEY( "Docb",  spaceobject->landing_site.docb,          fread_number( fp ) );
-          KEY( "Docc",  spaceobject->landing_site.docc,          fread_number( fp ) );
+          KEY( "Doca",  spaceobject->landing_site.doca,          ReadInt( fp ) );
+          KEY( "Docb",  spaceobject->landing_site.docb,          ReadInt( fp ) );
+          KEY( "Docc",  spaceobject->landing_site.docc,          ReadInt( fp ) );
           break;
 
         case 'E':
-          if ( !str_cmp( word, "End" ) )
+          if ( !StrCmp( word, "End" ) )
             {
               if (!spaceobject->name)
-                spaceobject->name               = str_dup( "" );
+                spaceobject->name               = CopyString( "" );
               if (!spaceobject->landing_site.locationa)
-                spaceobject->landing_site.locationa            = str_dup( "" );
+                spaceobject->landing_site.locationa            = CopyString( "" );
               if (!spaceobject->landing_site.locationb)
-                spaceobject->landing_site.locationb            = str_dup( "" );
+                spaceobject->landing_site.locationb            = CopyString( "" );
               if (!spaceobject->landing_site.locationc)
-                spaceobject->landing_site.locationc            = str_dup( "" );
+                spaceobject->landing_site.locationc            = CopyString( "" );
               return;
             }
           break;
 
         case 'F':
-          KEY( "Filename",      spaceobject->filename,          fread_string_nohash( fp ) );
+          KEY( "Filename",      spaceobject->filename,          ReadStringToTildeNoHash( fp ) );
           break;
 
         case 'G':
-          KEY( "Gravity",  spaceobject->gravity,     fread_number( fp ) );
+          KEY( "Gravity",  spaceobject->gravity,     ReadInt( fp ) );
           break;
 
         case 'H':
-          KEY( "HX",  spaceobject->head.x,     fread_number( fp ) );
-          KEY( "HY",  spaceobject->head.y,     fread_number( fp ) );
-          KEY( "HZ",  spaceobject->head.z,     fread_number( fp ) );
+          KEY( "HX",  spaceobject->head.x,     ReadInt( fp ) );
+          KEY( "HY",  spaceobject->head.y,     ReadInt( fp ) );
+          KEY( "HZ",  spaceobject->head.z,     ReadInt( fp ) );
           break;
 
         case 'L':
-          KEY( "Locationa",     spaceobject->landing_site.locationa,         fread_string( fp ) );
-          KEY( "Locationb",     spaceobject->landing_site.locationb,         fread_string( fp ) );
-          KEY( "Locationc",     spaceobject->landing_site.locationc,         fread_string( fp ) );
+          KEY( "Locationa",     spaceobject->landing_site.locationa,         ReadStringToTilde( fp ) );
+          KEY( "Locationb",     spaceobject->landing_site.locationb,         ReadStringToTilde( fp ) );
+          KEY( "Locationc",     spaceobject->landing_site.locationc,         ReadStringToTilde( fp ) );
           break;
 
         case 'N':
-          KEY( "Name",  spaceobject->name,              fread_string( fp ) );
+          KEY( "Name",  spaceobject->name,              ReadStringToTilde( fp ) );
           break;
 
         case 'S':
-          KEY( "Seca", spaceobject->landing_site.seca,               fread_number( fp ) );
-          KEY( "Secb", spaceobject->landing_site.secb,               fread_number( fp ) );
-          KEY( "Secc", spaceobject->landing_site.secc,               fread_number( fp ) );
-          KEY( "SP", spaceobject->speed,                fread_number( fp ) );
+          KEY( "Seca", spaceobject->landing_site.seca,               ReadInt( fp ) );
+          KEY( "Secb", spaceobject->landing_site.secb,               ReadInt( fp ) );
+          KEY( "Secc", spaceobject->landing_site.secc,               ReadInt( fp ) );
+          KEY( "SP", spaceobject->speed,                ReadInt( fp ) );
 
         case 'T':
-          KEY( "Trainer",  spaceobject->trainer,     fread_number( fp ) );
-          KEY( "Type",  spaceobject->type,             fread_number( fp ) );
+          KEY( "Trainer",  spaceobject->trainer,     ReadInt( fp ) );
+          KEY( "Type",  spaceobject->type,             ReadInt( fp ) );
 
         case 'X':
-          KEY( "Xpos",  spaceobject->pos.x,     fread_number( fp ) );
+          KEY( "Xpos",  spaceobject->pos.x,     ReadInt( fp ) );
 
         case 'Y':
-          KEY( "Ypos",  spaceobject->pos.y,     fread_number( fp ) );
+          KEY( "Ypos",  spaceobject->pos.y,     ReadInt( fp ) );
 
         case 'Z':
-          KEY( "Zpos",  spaceobject->pos.z,     fread_number( fp ) );
+          KEY( "Zpos",  spaceobject->pos.z,     ReadInt( fp ) );
 
         }
 
@@ -280,11 +280,11 @@ bool load_one_spaceobject( const char *spaceobjectfile )
       for ( ; ; )
         {
 	  const char *word = NULL;
-          char letter = fread_letter( fp );
+          char letter = ReadChar( fp );
 
           if ( letter == '*' )
             {
-              fread_to_eol( fp );
+              ReadToEndOfLine( fp );
               continue;
             }
 
@@ -294,14 +294,14 @@ bool load_one_spaceobject( const char *spaceobjectfile )
               break;
             }
 
-          word = fread_word( fp );
+          word = ReadWord( fp );
 
-          if ( !str_cmp( word, "SPACE"  ) )
+          if ( !StrCmp( word, "SPACE"  ) )
             {
               fread_spaceobject( spaceobject, fp );
               break;
             }
-          else if ( !str_cmp( word, "END"  ) )
+          else if ( !StrCmp( word, "END"  ) )
 	    {
               break;
 	    }
@@ -339,7 +339,7 @@ void load_spaceobjects( void )
 
   for ( ; ; )
     {
-      const char *filename = feof( fpList ) ? "$" : fread_word( fpList );
+      const char *filename = feof( fpList ) ? "$" : ReadWord( fpList );
 
       if ( filename[0] == '$' )
         break;

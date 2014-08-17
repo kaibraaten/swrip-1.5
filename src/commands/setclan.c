@@ -13,8 +13,8 @@ void do_setclan( Character *ch, char *argument )
       return;
     }
 
-  argument = one_argument( argument, arg1 );
-  argument = one_argument( argument, arg2 );
+  argument = OneArgument( argument, arg1 );
+  argument = OneArgument( argument, arg2 );
 
   if ( arg1[0] == '\0' )
     {
@@ -41,7 +41,7 @@ void do_setclan( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "enlistroom1" ) )
+  if ( !StrCmp( arg2, "enlistroom1" ) )
     {
       clan->enlistroom1 = atoi( argument );
       send_to_char( "Done.\r\n", ch );
@@ -49,7 +49,7 @@ void do_setclan( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "enlistroom2" ) )
+  if ( !StrCmp( arg2, "enlistroom2" ) )
     {
       clan->enlistroom2 = atoi( argument );
       send_to_char( "Done.\r\n", ch );
@@ -57,16 +57,16 @@ void do_setclan( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "leader" ) )
+  if ( !StrCmp( arg2, "leader" ) )
     {
       DISPOSE( clan->leadership.leader );
-      clan->leadership.leader = str_dup( argument );
+      clan->leadership.leader = CopyString( argument );
       send_to_char( "Done.\r\n", ch );
       save_clan( clan );
       return;
     }
 
-  if ( !str_cmp( arg2, "subclan" ) )
+  if ( !StrCmp( arg2, "subclan" ) )
     {
       CLAN_DATA *subclan = get_clan( argument );
 
@@ -96,25 +96,25 @@ void do_setclan( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "number1" ) )
+  if ( !StrCmp( arg2, "number1" ) )
     {
       DISPOSE( clan->leadership.number1 );
-      clan->leadership.number1 = str_dup( argument );
+      clan->leadership.number1 = CopyString( argument );
       send_to_char( "Done.\r\n", ch );
       save_clan( clan );
       return;
     }
 
-  if ( !str_cmp( arg2, "number2" ) )
+  if ( !StrCmp( arg2, "number2" ) )
     {
       DISPOSE( clan->leadership.number2 );
-      clan->leadership.number2 = str_dup( argument );
+      clan->leadership.number2 = CopyString( argument );
       send_to_char( "Done.\r\n", ch );
       save_clan( clan );
       return;
     }
 
-  if ( !str_cmp( arg2, "board" ) )
+  if ( !StrCmp( arg2, "board" ) )
     {
       clan->board = atoi( argument );
       send_to_char( "Done.\r\n", ch );
@@ -122,7 +122,7 @@ void do_setclan( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "members" ) )
+  if ( !StrCmp( arg2, "members" ) )
     {
       clan->members = atoi( argument );
       send_to_char( "Done.\r\n", ch );
@@ -130,7 +130,7 @@ void do_setclan( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "funds" ) )
+  if ( !StrCmp( arg2, "funds" ) )
     {
       clan->funds = atoi( argument );
       send_to_char( "Done.\r\n", ch );
@@ -138,7 +138,7 @@ void do_setclan( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "storage" ) )
+  if ( !StrCmp( arg2, "storage" ) )
     {
       clan->storeroom = atoi( argument );
       send_to_char( "Done.\r\n", ch );
@@ -146,7 +146,7 @@ void do_setclan( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "guard1" ) )
+  if ( !StrCmp( arg2, "guard1" ) )
     {
       clan->guard1 = atoi( argument );
       send_to_char( "Done.\r\n", ch );
@@ -154,7 +154,7 @@ void do_setclan( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "jail" ) )
+  if ( !StrCmp( arg2, "jail" ) )
     {
       clan->jail = atoi( argument );
       send_to_char( "Done.\r\n", ch );
@@ -162,7 +162,7 @@ void do_setclan( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "guard2" ) )
+  if ( !StrCmp( arg2, "guard2" ) )
     {
       clan->guard2 = atoi( argument );
       send_to_char( "Done.\r\n", ch );
@@ -170,7 +170,7 @@ void do_setclan( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "trooper1" ) )
+  if ( !StrCmp( arg2, "trooper1" ) )
     {
       clan->trooper1 = atoi( argument );
       send_to_char( "Done.\r\n", ch );
@@ -178,14 +178,14 @@ void do_setclan( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "trooper2" ) )
+  if ( !StrCmp( arg2, "trooper2" ) )
     {
       clan->trooper2 = atoi( argument );
       send_to_char( "Done.\r\n", ch );
       save_clan( clan );
       return;
     }
-  if ( !str_cmp( arg2, "patrol1" ) )
+  if ( !StrCmp( arg2, "patrol1" ) )
     {
       clan->patrol1 = atoi( argument );
       send_to_char( "Done.\r\n", ch );
@@ -193,7 +193,7 @@ void do_setclan( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "patrol2" ) )
+  if ( !StrCmp( arg2, "patrol2" ) )
     {
       clan->patrol2 = atoi( argument );
       send_to_char( "Done.\r\n", ch );
@@ -207,7 +207,7 @@ void do_setclan( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "type" ) )
+  if ( !StrCmp( arg2, "type" ) )
     {
       if ( clan->mainclan )
         {
@@ -216,11 +216,11 @@ void do_setclan( Character *ch, char *argument )
           clan->mainclan = NULL;
         }
 
-      if ( !str_cmp( argument, "crime" ) || !str_cmp( argument, "crime family" ) )
+      if ( !StrCmp( argument, "crime" ) || !StrCmp( argument, "crime family" ) )
         {
           clan->clan_type = CLAN_CRIME;
         }
-      else if ( !str_cmp( argument, "guild" ) )
+      else if ( !StrCmp( argument, "guild" ) )
         {
           clan->clan_type = CLAN_GUILD;
         }
@@ -234,29 +234,29 @@ void do_setclan( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "name" ) )
+  if ( !StrCmp( arg2, "name" ) )
     {
       DISPOSE( clan->name );
-      clan->name = str_dup( argument );
+      clan->name = CopyString( argument );
       send_to_char( "Done.\r\n", ch );
       save_clan( clan );
       return;
     }
 
-  if ( !str_cmp( arg2, "filename" ) )
+  if ( !StrCmp( arg2, "filename" ) )
     {
       DISPOSE( clan->filename );
-      clan->filename = str_dup( argument );
+      clan->filename = CopyString( argument );
       send_to_char( "Done.\r\n", ch );
       save_clan( clan );
       write_clan_list();
       return;
     }
 
-  if ( !str_cmp( arg2, "desc" ) )
+  if ( !StrCmp( arg2, "desc" ) )
     {
       DISPOSE( clan->description );
-      clan->description = str_dup( argument );
+      clan->description = CopyString( argument );
       send_to_char( "Done.\r\n", ch );
       save_clan( clan );
       return;

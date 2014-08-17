@@ -14,8 +14,8 @@ void do_sset( Character *ch, char *argument )
   int sn;
   bool fAll;
 
-  argument = one_argument( argument, arg1 );
-  argument = one_argument( argument, arg2 );
+  argument = OneArgument( argument, arg1 );
+  argument = OneArgument( argument, arg2 );
 
   if ( arg1[0] == '\0' || arg2[0] == '\0' || argument[0] == '\0' )
     {
@@ -44,16 +44,16 @@ void do_sset( Character *ch, char *argument )
     }
 
   if ( GetTrustLevel(ch) > LEVEL_SUB_IMPLEM
-       &&  !str_cmp( arg1, "save" )
-       &&       !str_cmp( argument, "table" ) )
+       &&  !StrCmp( arg1, "save" )
+       &&       !StrCmp( argument, "table" ) )
     {
-      if ( !str_cmp( arg2, "skill" ) )
+      if ( !StrCmp( arg2, "skill" ) )
         {
           send_to_char( "Saving skill table...\r\n", ch );
           save_skill_table();
           return;
         }
-      if ( !str_cmp( arg2, "herb" ) )
+      if ( !StrCmp( arg2, "herb" ) )
         {
           send_to_char( "Saving herb table...\r\n", ch );
           save_herb_table();
@@ -61,13 +61,13 @@ void do_sset( Character *ch, char *argument )
         }
     }
   if ( GetTrustLevel(ch) > LEVEL_SUB_IMPLEM
-       &&  !str_cmp( arg1, "create" )
-       && (!str_cmp( arg2, "skill" ) || !str_cmp( arg2, "herb" )) )
+       &&  !StrCmp( arg1, "create" )
+       && (!StrCmp( arg2, "skill" ) || !StrCmp( arg2, "herb" )) )
     {
       struct skill_type *skill;
       short type = SKILL_UNKNOWN;
 
-      if ( !str_cmp( arg2, "herb" ) )
+      if ( !StrCmp( arg2, "herb" ) )
         {
           type = SKILL_HERB;
           if ( top_herb >= MAX_HERB )
@@ -104,10 +104,10 @@ void do_sset( Character *ch, char *argument )
       else
         skill_table[top_sn++] = skill;
 
-      skill->name = str_dup( argument );
-      skill->fun_name = str_dup( "" );
-      skill->noun_damage = str_dup( "" );
-      skill->msg_off = str_dup( "" );
+      skill->name = CopyString( argument );
+      skill->fun_name = CopyString( "" );
+      skill->noun_damage = CopyString( "" );
+      skill->msg_off = CopyString( "" );
       skill->spell_fun = spell_smaug;
       skill->type = type;
       send_to_char( "Done.\r\n", ch );
@@ -119,8 +119,8 @@ void do_sset( Character *ch, char *argument )
   else
     sn = atoi( arg1 );
   if ( GetTrustLevel(ch) > LEVEL_GREATER
-       && ((arg1[0] == 'h' && is_number(arg1+1) && (sn=atoi(arg1+1))>=0)
-           ||  (is_number(arg1) && (sn=atoi(arg1)) >= 0)) )
+       && ((arg1[0] == 'h' && IsNumber(arg1+1) && (sn=atoi(arg1+1))>=0)
+           ||  (IsNumber(arg1) && (sn=atoi(arg1)) >= 0)) )
     {
       struct skill_type *skill;
 
@@ -143,25 +143,25 @@ void do_sset( Character *ch, char *argument )
           sn %= 1000;
         }
 
-      if ( !str_cmp( arg2, "difficulty" ) )
+      if ( !StrCmp( arg2, "difficulty" ) )
         {
           skill->difficulty = atoi( argument );
           send_to_char( "Ok.\r\n", ch );
           return;
         }
-      if ( !str_cmp( arg2, "participants" ) )
+      if ( !StrCmp( arg2, "participants" ) )
         {
           skill->participants = atoi( argument );
           send_to_char( "Ok.\r\n", ch );
           return;
         }
-      if ( !str_cmp( arg2, "alignment" ) )
+      if ( !StrCmp( arg2, "alignment" ) )
         {
           skill->alignment = atoi( argument );
           send_to_char( "Ok.\r\n", ch );
           return;
         }
-      if ( !str_cmp( arg2, "damtype" ) )
+      if ( !StrCmp( arg2, "damtype" ) )
         {
           int x = get_spelldamage( argument );
 
@@ -174,7 +174,7 @@ void do_sset( Character *ch, char *argument )
             }
           return;
         }
-      if ( !str_cmp( arg2, "acttype" ) )
+      if ( !StrCmp( arg2, "acttype" ) )
         {
           int x = get_spellaction( argument );
 
@@ -187,7 +187,7 @@ void do_sset( Character *ch, char *argument )
             }
           return;
         }
-      if ( !str_cmp( arg2, "classtype" ) )
+      if ( !StrCmp( arg2, "classtype" ) )
         {
           int x = get_spellclass( argument );
 
@@ -200,7 +200,7 @@ void do_sset( Character *ch, char *argument )
             }
           return;
         }
-      if ( !str_cmp( arg2, "powertype" ) )
+      if ( !StrCmp( arg2, "powertype" ) )
         {
           int x = get_spellpower( argument );
 
@@ -213,7 +213,7 @@ void do_sset( Character *ch, char *argument )
             }
           return;
         }
-      if ( !str_cmp( arg2, "flag" ) )
+      if ( !StrCmp( arg2, "flag" ) )
         {
           int x = get_spellflag( argument );
 
@@ -226,7 +226,7 @@ void do_sset( Character *ch, char *argument )
             }
           return;
         }
-      if ( !str_cmp( arg2, "saves" ) )
+      if ( !StrCmp( arg2, "saves" ) )
         {
           int x = get_spellsave( argument );
 
@@ -240,26 +240,26 @@ void do_sset( Character *ch, char *argument )
           return;
         }
 
-      if ( !str_cmp( arg2, "code" ) )
+      if ( !StrCmp( arg2, "code" ) )
         {
           SPELL_FUN *spellfun;
           DO_FUN    *dofun;
 
-          if ( !str_prefix( "spell_", argument )
+          if ( !StringPrefix( "spell_", argument )
                && (spellfun=spell_function(argument)) != spell_notfound )
             {
               skill->spell_fun = spellfun;
               skill->skill_fun = NULL;
               DISPOSE( skill->fun_name );
-              skill->fun_name = str_dup( argument );
+              skill->fun_name = CopyString( argument );
             }
-          else if ( !str_prefix( "do_", argument )
+          else if ( !StringPrefix( "do_", argument )
 		    && (dofun=skill_function(argument)) != skill_notfound )
             {
               skill->skill_fun = dofun;
               skill->spell_fun = NULL;
               DISPOSE( skill->fun_name );
-              skill->fun_name = str_dup( argument );
+              skill->fun_name = CopyString( argument );
             }
           else
             {
@@ -271,7 +271,7 @@ void do_sset( Character *ch, char *argument )
           return;
         }
 
-      if ( !str_cmp( arg2, "target" ) )
+      if ( !StrCmp( arg2, "target" ) )
         {
           int x = get_spelltarget( argument );
 
@@ -284,55 +284,55 @@ void do_sset( Character *ch, char *argument )
             }
           return;
         }
-      if ( !str_cmp( arg2, "minpos" ) )
+      if ( !StrCmp( arg2, "minpos" ) )
         {
           skill->minimum_position = urange( POS_DEAD, atoi( argument ), POS_DRAG );
           send_to_char( "Ok.\r\n", ch );
           return;
         }
-      if ( !str_cmp( arg2, "minlevel" ) )
+      if ( !StrCmp( arg2, "minlevel" ) )
         {
           skill->min_level = urange( 1, atoi( argument ), MAX_ABILITY_LEVEL );
           send_to_char( "Ok.\r\n", ch );
           return;
         }
-      if ( !str_cmp( arg2, "slot" ) )
+      if ( !StrCmp( arg2, "slot" ) )
         {
           skill->slot = urange( 0, atoi( argument ), 30000 );
 	  send_to_char( "Ok.\r\n", ch );
           return;
         }
-      if ( !str_cmp( arg2, "mana" ) )
+      if ( !StrCmp( arg2, "mana" ) )
         {
           skill->min_mana = urange( 0, atoi( argument ), 2000 );
           send_to_char( "Ok.\r\n", ch );
           return;
         }
-      if ( !str_cmp( arg2, "beats" ) )
+      if ( !StrCmp( arg2, "beats" ) )
         {
           skill->beats = urange( 0, atoi( argument ), 120 );
           send_to_char( "Ok.\r\n", ch );
           return;
         }
-      if ( !str_cmp( arg2, "guild" ) )
+      if ( !StrCmp( arg2, "guild" ) )
         {
           skill->guild = atoi( argument );
           send_to_char( "Ok.\r\n", ch );
           return;
         }
-      if ( !str_cmp( arg2, "value" ) )
+      if ( !StrCmp( arg2, "value" ) )
         {
           skill->value = atoi( argument );
           send_to_char( "Ok.\r\n", ch );
           return;
         }
-      if ( !str_cmp( arg2, "type" ) )
+      if ( !StrCmp( arg2, "type" ) )
         {
           skill->type = get_skill( argument );
           send_to_char( "Ok.\r\n", ch );
           return;
         }
-      if ( !str_cmp( arg2, "rmaffect" ) )
+      if ( !StrCmp( arg2, "rmaffect" ) )
         {
           SMAUG_AFF *aff = skill->affects;
           SMAUG_AFF *aff_next;
@@ -371,7 +371,7 @@ void do_sset( Character *ch, char *argument )
       /*
        * affect <location> <modifier> <duration> <bitvector>
        */
-      if ( !str_cmp( arg2, "affect" ) )
+      if ( !StrCmp( arg2, "affect" ) )
         {
           char location[MAX_INPUT_LENGTH];
           char modifier[MAX_INPUT_LENGTH];
@@ -380,9 +380,9 @@ void do_sset( Character *ch, char *argument )
           int loc, bit, tmpbit;
           SMAUG_AFF *aff;
 
-          argument = one_argument( argument, location );
-          argument = one_argument( argument, modifier );
-          argument = one_argument( argument, duration );
+          argument = OneArgument( argument, location );
+          argument = OneArgument( argument, modifier );
+          argument = OneArgument( argument, duration );
 
           if ( location[0] == '!' )
             loc = get_affecttype( location+1 ) + REVERSE_APPLY;
@@ -397,193 +397,193 @@ void do_sset( Character *ch, char *argument )
           bit = 0;
           while ( argument[0] != 0 )
             {
-              argument = one_argument( argument, bitvector );
+              argument = OneArgument( argument, bitvector );
               if ( (tmpbit=get_affectedflag( bitvector )) == -1 )
                 ch_printf( ch, "Unknown bitvector: %s.  See AFFECTED_BY\r\n", bitvector );
               else
                 bit |= (1 << tmpbit);
             }
           CREATE( aff, SMAUG_AFF, 1 );
-          if ( !str_cmp( duration, "0" ) )
+          if ( !StrCmp( duration, "0" ) )
             duration[0] = '\0';
-          if ( !str_cmp( modifier, "0" ) )
+          if ( !StrCmp( modifier, "0" ) )
             modifier[0] = '\0';
-          aff->duration = str_dup( duration );
+          aff->duration = CopyString( duration );
           aff->location = loc;
-          aff->modifier = str_dup( modifier );
+          aff->modifier = CopyString( modifier );
           aff->bitvector = bit;
           aff->next = skill->affects;
           skill->affects = aff;
           send_to_char( "Ok.\r\n", ch );
           return;
         }
-      if ( !str_cmp( arg2, "level" ) )
+      if ( !StrCmp( arg2, "level" ) )
         {
           skill->min_level = urange( 1, atoi( argument ), MAX_ABILITY_LEVEL );
           send_to_char( "Ok.\r\n", ch );
           return;
         }
-      if ( !str_cmp( arg2, "adept" ) )
+      if ( !StrCmp( arg2, "adept" ) )
         {
           return;
         }
-      if ( !str_cmp( arg2, "name" ) )
+      if ( !StrCmp( arg2, "name" ) )
         {
           DISPOSE(skill->name);
-          skill->name = str_dup( argument );
+          skill->name = CopyString( argument );
           send_to_char( "Ok.\r\n", ch );
           return;
         }
-      if ( !str_cmp( arg2, "dammsg" ) )
+      if ( !StrCmp( arg2, "dammsg" ) )
         {
           DISPOSE(skill->noun_damage);
-          if ( !str_cmp( argument, "clear" ) )
-            skill->noun_damage = str_dup( "" );
+          if ( !StrCmp( argument, "clear" ) )
+            skill->noun_damage = CopyString( "" );
           else
-            skill->noun_damage = str_dup( argument );
+            skill->noun_damage = CopyString( argument );
           send_to_char( "Ok.\r\n", ch );
           return;
         }
-      if ( !str_cmp( arg2, "wearoff" ) )
+      if ( !StrCmp( arg2, "wearoff" ) )
         {
           DISPOSE(skill->msg_off);
-          if ( str_cmp( argument, "clear" ) )
-            skill->msg_off = str_dup( argument );
+          if ( StrCmp( argument, "clear" ) )
+            skill->msg_off = CopyString( argument );
           send_to_char( "Ok.\r\n", ch );
           return;
         }
-      if ( !str_cmp( arg2, "hitchar" ) )
+      if ( !StrCmp( arg2, "hitchar" ) )
         {
           if ( skill->hit_char )
             DISPOSE(skill->hit_char);
-          if ( str_cmp( argument, "clear" ) )
-            skill->hit_char = str_dup( argument );
+          if ( StrCmp( argument, "clear" ) )
+            skill->hit_char = CopyString( argument );
           send_to_char( "Ok.\r\n", ch );
           return;
         }
-      if ( !str_cmp( arg2, "hitvict" ) )
+      if ( !StrCmp( arg2, "hitvict" ) )
         {
           if ( skill->hit_vict )
             DISPOSE(skill->hit_vict);
-          if ( str_cmp( argument, "clear" ) )
-            skill->hit_vict = str_dup( argument );
+          if ( StrCmp( argument, "clear" ) )
+            skill->hit_vict = CopyString( argument );
           send_to_char( "Ok.\r\n", ch );
           return;
         }
-      if ( !str_cmp( arg2, "hitroom" ) )
+      if ( !StrCmp( arg2, "hitroom" ) )
         {
           if ( skill->hit_room )
             DISPOSE(skill->hit_room);
-          if ( str_cmp( argument, "clear" ) )
-            skill->hit_room = str_dup( argument );
+          if ( StrCmp( argument, "clear" ) )
+            skill->hit_room = CopyString( argument );
           send_to_char( "Ok.\r\n", ch );
           return;
         }
-      if ( !str_cmp( arg2, "misschar" ) )
+      if ( !StrCmp( arg2, "misschar" ) )
         {
           if ( skill->miss_char )
             DISPOSE(skill->miss_char);
-          if ( str_cmp( argument, "clear" ) )
-            skill->miss_char = str_dup( argument );
+          if ( StrCmp( argument, "clear" ) )
+            skill->miss_char = CopyString( argument );
           send_to_char( "Ok.\r\n", ch );
           return;
         }
-      if ( !str_cmp( arg2, "missvict" ) )
+      if ( !StrCmp( arg2, "missvict" ) )
         {
           if ( skill->miss_vict )
             DISPOSE(skill->miss_vict);
-          if ( str_cmp( argument, "clear" ) )
-            skill->miss_vict = str_dup( argument );
+          if ( StrCmp( argument, "clear" ) )
+            skill->miss_vict = CopyString( argument );
           send_to_char( "Ok.\r\n", ch );
           return;
         }
-      if ( !str_cmp( arg2, "missroom" ) )
+      if ( !StrCmp( arg2, "missroom" ) )
         {
           if ( skill->miss_room )
             DISPOSE(skill->miss_room);
-          if ( str_cmp( argument, "clear" ) )
-            skill->miss_room = str_dup( argument );
+          if ( StrCmp( argument, "clear" ) )
+            skill->miss_room = CopyString( argument );
           send_to_char( "Ok.\r\n", ch );
           return;
         }
-      if ( !str_cmp( arg2, "diechar" ) )
+      if ( !StrCmp( arg2, "diechar" ) )
         {
           if ( skill->die_char )
             DISPOSE(skill->die_char);
-          if ( str_cmp( argument, "clear" ) )
-            skill->die_char = str_dup( argument );
+          if ( StrCmp( argument, "clear" ) )
+            skill->die_char = CopyString( argument );
           send_to_char( "Ok.\r\n", ch );
           return;
         }
-      if ( !str_cmp( arg2, "dievict" ) )
+      if ( !StrCmp( arg2, "dievict" ) )
         {
           if ( skill->die_vict )
             DISPOSE(skill->die_vict);
-          if ( str_cmp( argument, "clear" ) )
-            skill->die_vict = str_dup( argument );
+          if ( StrCmp( argument, "clear" ) )
+            skill->die_vict = CopyString( argument );
           send_to_char( "Ok.\r\n", ch );
           return;
         }
-      if ( !str_cmp( arg2, "dieroom" ) )
+      if ( !StrCmp( arg2, "dieroom" ) )
         {
           if ( skill->die_room )
             DISPOSE(skill->die_room);
-          if ( str_cmp( argument, "clear" ) )
-            skill->die_room = str_dup( argument );
+          if ( StrCmp( argument, "clear" ) )
+            skill->die_room = CopyString( argument );
           send_to_char( "Ok.\r\n", ch );
           return;
         }
-      if ( !str_cmp( arg2, "immchar" ) )
+      if ( !StrCmp( arg2, "immchar" ) )
         {
           if ( skill->imm_char )
             DISPOSE(skill->imm_char);
-          if ( str_cmp( argument, "clear" ) )
-            skill->imm_char = str_dup( argument );
+          if ( StrCmp( argument, "clear" ) )
+            skill->imm_char = CopyString( argument );
           send_to_char( "Ok.\r\n", ch );
           return;
         }
-      if ( !str_cmp( arg2, "immvict" ) )
+      if ( !StrCmp( arg2, "immvict" ) )
         {
           if ( skill->imm_vict )
             DISPOSE(skill->imm_vict);
-          if ( str_cmp( argument, "clear" ) )
-            skill->imm_vict = str_dup( argument );
+          if ( StrCmp( argument, "clear" ) )
+            skill->imm_vict = CopyString( argument );
           send_to_char( "Ok.\r\n", ch );
           return;
         }
-      if ( !str_cmp( arg2, "immroom" ) )
+      if ( !StrCmp( arg2, "immroom" ) )
         {
           if ( skill->imm_room )
             DISPOSE(skill->imm_room);
-          if ( str_cmp( argument, "clear" ) )
-            skill->imm_room = str_dup( argument );
+          if ( StrCmp( argument, "clear" ) )
+            skill->imm_room = CopyString( argument );
           send_to_char( "Ok.\r\n", ch );
           return;
         }
-      if ( !str_cmp( arg2, "dice" ) )
+      if ( !StrCmp( arg2, "dice" ) )
         {
           if ( skill->dice )
             DISPOSE(skill->dice);
-          if ( str_cmp( argument, "clear" ) )
-            skill->dice = str_dup( argument );
+          if ( StrCmp( argument, "clear" ) )
+            skill->dice = CopyString( argument );
           send_to_char( "Ok.\r\n", ch );
           return;
         }
-      if ( !str_cmp( arg2, "components" ) )
+      if ( !StrCmp( arg2, "components" ) )
         {
           if ( skill->components )
             DISPOSE(skill->components);
-          if ( str_cmp( argument, "clear" ) )
-            skill->components = str_dup( argument );
+          if ( StrCmp( argument, "clear" ) )
+            skill->components = CopyString( argument );
           send_to_char( "Ok.\r\n", ch );
           return;
         }
-      if ( !str_cmp( arg2, "teachers" ) )
+      if ( !StrCmp( arg2, "teachers" ) )
         {
           if ( skill->teachers )
             DISPOSE(skill->teachers);
-          if ( str_cmp( argument, "clear" ) )
-            skill->teachers = str_dup( argument );
+          if ( StrCmp( argument, "clear" ) )
+            skill->teachers = CopyString( argument );
           send_to_char( "Ok.\r\n", ch );
           return;
         }
@@ -618,7 +618,7 @@ void do_sset( Character *ch, char *argument )
       return;
     }
 
-  fAll = !str_cmp( arg2, "all" );
+  fAll = !StrCmp( arg2, "all" );
   sn   = 0;
   if ( !fAll && ( sn = skill_lookup( arg2 ) ) < 0 )
     {
@@ -629,7 +629,7 @@ void do_sset( Character *ch, char *argument )
   /*
    * Snarf the value.
    */
-  if ( !is_number( argument ) )
+  if ( !IsNumber( argument ) )
     {
       send_to_char( "Value must be numeric.\r\n", ch );
       return;

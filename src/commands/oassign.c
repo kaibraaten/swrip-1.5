@@ -9,9 +9,9 @@ void do_oassign( Character *ch, char *argument )
   short  o_lo, o_hi;
   Character *victim;
 
-  argument = one_argument( argument, arg1 );
-  argument = one_argument( argument, arg2 );
-  argument = one_argument( argument, arg3 );
+  argument = OneArgument( argument, arg1 );
+  argument = OneArgument( argument, arg2 );
+  argument = OneArgument( argument, arg3 );
   o_lo = atoi( arg2 );  o_hi = atoi( arg3 );
 
   if ( arg1[0] == '\0' || o_lo < 0 || o_hi < 0 )

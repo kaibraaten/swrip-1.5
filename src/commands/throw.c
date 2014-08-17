@@ -15,9 +15,9 @@ void do_throw( Character *ch, char *argument )
   Character       * victim;
   char              buf[MAX_STRING_LENGTH];
 
-  argument = one_argument( argument, arg );
-  argument = one_argument( argument, arg2 );
-  argument = one_argument( argument, arg3 );
+  argument = OneArgument( argument, arg );
+  argument = OneArgument( argument, arg2 );
+  argument = OneArgument( argument, arg3 );
 
   was_in_room = ch->in_room;
 
@@ -29,20 +29,20 @@ void do_throw( Character *ch, char *argument )
 
   obj = GetEquipmentOnCharacter( ch, WEAR_MISSILE_WIELD );
 
-  if ( !obj || !nifty_is_name( arg, obj->name ) )
+  if ( !obj || !NiftyIsName( arg, obj->name ) )
     obj = GetEquipmentOnCharacter( ch, WEAR_HOLD );
-  if ( !obj || !nifty_is_name( arg, obj->name ) )
+  if ( !obj || !NiftyIsName( arg, obj->name ) )
     obj = GetEquipmentOnCharacter( ch, WEAR_WIELD );
-  if ( !obj || !nifty_is_name( arg, obj->name ) )
+  if ( !obj || !NiftyIsName( arg, obj->name ) )
     obj = GetEquipmentOnCharacter( ch, WEAR_DUAL_WIELD );
-  if ( !obj || !nifty_is_name( arg, obj->name ) )
-    if ( !obj || !nifty_is_name_prefix( arg, obj->name ) )
+  if ( !obj || !NiftyIsName( arg, obj->name ) )
+    if ( !obj || !NiftyIsNamePrefix( arg, obj->name ) )
       obj = GetEquipmentOnCharacter( ch, WEAR_HOLD );
-  if ( !obj || !nifty_is_name_prefix( arg, obj->name ) )
+  if ( !obj || !NiftyIsNamePrefix( arg, obj->name ) )
     obj = GetEquipmentOnCharacter( ch, WEAR_WIELD );
-  if ( !obj || !nifty_is_name_prefix( arg, obj->name ) )
+  if ( !obj || !NiftyIsNamePrefix( arg, obj->name ) )
     obj = GetEquipmentOnCharacter( ch, WEAR_DUAL_WIELD );
-  if ( !obj || !nifty_is_name_prefix( arg, obj->name ) )
+  if ( !obj || !NiftyIsNamePrefix( arg, obj->name ) )
     {
       ch_printf( ch, "You don't seem to be holding or wielding %s.\r\n", arg );
       return;
@@ -233,10 +233,10 @@ void do_throw( Character *ch, char *argument )
     {
 
       SetWaitState( ch, skill_table[gsn_throw]->beats );
-      if ( IsNpc(ch) || number_percent( ) < ch->pcdata->learned[gsn_throw] )
+      if ( IsNpc(ch) || GetRandomPercent( ) < ch->pcdata->learned[gsn_throw] )
         {
           learn_from_success( ch, gsn_throw );
-          global_retcode = damage( ch, victim, number_range( obj->weight*2 , (obj->weight*2 + ch->stats.perm_str) ), TYPE_HIT );
+          global_retcode = damage( ch, victim, GetRandomNumberFromRange( obj->weight*2 , (obj->weight*2 + ch->stats.perm_str) ), TYPE_HIT );
         }
       else
         {

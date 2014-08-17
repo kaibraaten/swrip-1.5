@@ -31,7 +31,7 @@ void do_tell( Character *ch, char *argument )
       return;
     }
 
-  argument = one_argument( argument, arg );
+  argument = OneArgument( argument, arg );
 
   if ( arg[0] == '\0' || argument[0] == '\0' )
     {
@@ -150,7 +150,7 @@ void do_tell( Character *ch, char *argument )
   else
     {
       act( AT_TELL, "(&CIncoming Message&B) $n: '$t'",
-	   ch, scramble(argument, ch->speaking), victim, TO_VICT );
+	   ch, Scramble(argument, ch->speaking), victim, TO_VICT );
     }
 
   victim->position = position;
@@ -162,7 +162,7 @@ void do_tell( Character *ch, char *argument )
                IsNpc( ch ) ? ch->short_descr : ch->name,
                argument,
                IsNpc( victim ) ? victim->short_descr : victim->name );
-      append_to_file( LOG_FILE, buf );
+      AppendToFile( LOG_FILE, buf );
     }
 
   if( !IsImmortal(ch) && !sameroom )
@@ -176,7 +176,7 @@ void do_tell( Character *ch, char *argument )
 
           if ( !knows_language(vch, ch->speaking, ch) &&
                (!IsNpc(ch) || ch->speaking != 0) )
-            sbuf = scramble(argument, ch->speaking);
+            sbuf = Scramble(argument, ch->speaking);
 
           sbuf = drunk_speech( sbuf, ch );
 

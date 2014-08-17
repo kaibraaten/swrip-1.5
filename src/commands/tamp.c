@@ -6,7 +6,7 @@ void do_tamp( Character *ch, char *argument )
   OBJ_DATA *pipe_obj;
   char arg[MAX_INPUT_LENGTH];
 
-  one_argument( argument, arg );
+  OneArgument( argument, arg );
 
   if ( arg[0] == '\0' )
     {

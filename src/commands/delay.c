@@ -9,7 +9,7 @@ void do_delay( Character *ch, char *argument )
 
   set_char_color( AT_IMMORT, ch );
 
-  argument = one_argument( argument, arg );
+  argument = OneArgument( argument, arg );
 
   if ( !*arg )
     {
@@ -35,7 +35,7 @@ void do_delay( Character *ch, char *argument )
       return;
     }
 
-  argument = one_argument(argument, arg);
+  argument = OneArgument(argument, arg);
 
   if ( !*arg )
     {
@@ -43,7 +43,7 @@ void do_delay( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg, "none" ) )
+  if ( !StrCmp( arg, "none" ) )
     {
       send_to_char( "All character delay removed.\r\n", ch );
       victim->wait = 0;

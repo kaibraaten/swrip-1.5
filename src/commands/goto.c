@@ -11,7 +11,7 @@ void do_goto( Character *ch, char *argument )
   Area *pArea;
   short vnum;
 
-  one_argument( argument, arg );
+  OneArgument( argument, arg );
   if ( arg[0] == '\0' )
     {
       send_to_char( "Goto where?\r\n", ch );
@@ -33,7 +33,7 @@ void do_goto( Character *ch, char *argument )
           return;
         }
       if ( GetTrustLevel( ch ) < sysdata.level_modify_proto &&
-           !( ch->pcdata->bestowments && is_name( "intergoto", ch->pcdata->bestowments) ))
+           !( ch->pcdata->bestowments && IsName( "intergoto", ch->pcdata->bestowments) ))
 
         {
           if ( !ch->pcdata || !(pArea=ch->pcdata->area) )
@@ -65,7 +65,7 @@ void do_goto( Character *ch, char *argument )
     }
 
   if ( GetTrustLevel( ch ) < LEVEL_GREATER &&
-       !( ch->pcdata->bestowments && is_name( "intergoto", ch->pcdata->bestowments) ))
+       !( ch->pcdata->bestowments && IsName( "intergoto", ch->pcdata->bestowments) ))
     {
       vnum = atoi( arg );
 

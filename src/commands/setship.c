@@ -19,8 +19,8 @@ void do_setship( Character *ch, char *argument )
       return;
     }
 
-  argument = one_argument( argument, arg1 );
-  argument = one_argument( argument, arg2 );
+  argument = OneArgument( argument, arg1 );
+  argument = OneArgument( argument, arg2 );
 
   if ( arg1[0] == '\0' || arg2[0] == '\0' || arg1[0] == '\0' )
     {
@@ -45,7 +45,7 @@ void do_setship( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "owner" ) )
+  if ( !StrCmp( arg2, "owner" ) )
     {
       CLAN_DATA *clan = NULL;
 
@@ -58,7 +58,7 @@ void do_setship( Character *ch, char *argument )
         }
 
       DISPOSE( ship->owner );
-      ship->owner = str_dup( argument );
+      ship->owner = CopyString( argument );
       send_to_char( "Done.\r\n", ch );
       SaveShip( ship );
 
@@ -73,34 +73,34 @@ void do_setship( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "home" ) )
+  if ( !StrCmp( arg2, "home" ) )
     {
       DISPOSE( ship->home );
-      ship->home = str_dup( argument );
+      ship->home = CopyString( argument );
       send_to_char( "Done.\r\n", ch );
       SaveShip( ship );
       return;
     }
 
-  if ( !str_cmp( arg2, "pilot" ) )
+  if ( !StrCmp( arg2, "pilot" ) )
     {
       DISPOSE( ship->pilot );
-      ship->pilot = str_dup( argument );
+      ship->pilot = CopyString( argument );
       send_to_char( "Done.\r\n", ch );
       SaveShip( ship );
       return;
     }
 
-  if ( !str_cmp( arg2, "copilot" ) )
+  if ( !StrCmp( arg2, "copilot" ) )
     {
       DISPOSE( ship->copilot );
-      ship->copilot = str_dup( argument );
+      ship->copilot = CopyString( argument );
       send_to_char( "Done.\r\n", ch );
       SaveShip( ship );
       return;
     }
 
-  if ( !str_cmp( arg2, "firstroom" ) )
+  if ( !StrCmp( arg2, "firstroom" ) )
     {
       int turret_num = 0;
 
@@ -134,7 +134,7 @@ void do_setship( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "lastroom" ) )
+  if ( !StrCmp( arg2, "lastroom" ) )
     {
       tempnum = atoi(argument);
       roomindex = get_room_index(tempnum);
@@ -175,7 +175,7 @@ void do_setship( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "cockpit" ) )
+  if ( !StrCmp( arg2, "cockpit" ) )
     {
       tempnum = atoi(argument);
       roomindex = get_room_index(tempnum);
@@ -204,7 +204,7 @@ void do_setship( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "pilotseat" ) )
+  if ( !StrCmp( arg2, "pilotseat" ) )
     {
       tempnum = atoi(argument);
       roomindex = get_room_index(tempnum);
@@ -233,7 +233,7 @@ void do_setship( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "coseat" ) )
+  if ( !StrCmp( arg2, "coseat" ) )
     {
       tempnum = atoi(argument);
       roomindex = get_room_index(tempnum);
@@ -262,7 +262,7 @@ void do_setship( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "navseat" ) )
+  if ( !StrCmp( arg2, "navseat" ) )
     {
       tempnum = atoi(argument);
       roomindex = get_room_index(tempnum);
@@ -291,7 +291,7 @@ void do_setship( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "gunseat" ) )
+  if ( !StrCmp( arg2, "gunseat" ) )
     {
       tempnum = atoi(argument);
       roomindex = get_room_index(tempnum);
@@ -320,7 +320,7 @@ void do_setship( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "entrance" ) )
+  if ( !StrCmp( arg2, "entrance" ) )
     {
       tempnum = atoi(argument);
       roomindex = get_room_index(tempnum);
@@ -349,7 +349,7 @@ void do_setship( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "turret1" ) )
+  if ( !StrCmp( arg2, "turret1" ) )
     {
       tempnum = atoi(argument);
       roomindex = get_room_index(tempnum);
@@ -384,7 +384,7 @@ void do_setship( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "turret2" ) )
+  if ( !StrCmp( arg2, "turret2" ) )
     {
       tempnum = atoi(argument);
       roomindex = get_room_index(tempnum);
@@ -419,7 +419,7 @@ void do_setship( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "turret3" ) )
+  if ( !StrCmp( arg2, "turret3" ) )
     {
       tempnum = atoi(argument);
       roomindex = get_room_index(tempnum);
@@ -460,7 +460,7 @@ void do_setship( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "turret4" ) )
+  if ( !StrCmp( arg2, "turret4" ) )
     {
       tempnum = atoi(argument);
       roomindex = get_room_index(tempnum);
@@ -502,7 +502,7 @@ void do_setship( Character *ch, char *argument )
     }
 
 
-  if ( !str_cmp( arg2, "turret5" ) )
+  if ( !StrCmp( arg2, "turret5" ) )
     {
       tempnum = atoi(argument);
       roomindex = get_room_index(tempnum);
@@ -543,7 +543,7 @@ void do_setship( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "turret6" ) )
+  if ( !StrCmp( arg2, "turret6" ) )
     {
       tempnum = atoi(argument);
       roomindex = get_room_index(tempnum);
@@ -584,7 +584,7 @@ void do_setship( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "turret7" ) )
+  if ( !StrCmp( arg2, "turret7" ) )
     {
       tempnum = atoi(argument);
       roomindex = get_room_index(tempnum);
@@ -625,7 +625,7 @@ void do_setship( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "turret8" ) )
+  if ( !StrCmp( arg2, "turret8" ) )
     {
       tempnum = atoi(argument);
       roomindex = get_room_index(tempnum);
@@ -666,7 +666,7 @@ void do_setship( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "turret9" ) )
+  if ( !StrCmp( arg2, "turret9" ) )
     {
       tempnum = atoi(argument);
       roomindex = get_room_index(tempnum);
@@ -707,7 +707,7 @@ void do_setship( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "turret0" ) )
+  if ( !StrCmp( arg2, "turret0" ) )
     {
       tempnum = atoi(argument);
       roomindex = get_room_index(tempnum);
@@ -748,7 +748,7 @@ void do_setship( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "hanger" ) )
+  if ( !StrCmp( arg2, "hanger" ) )
     {
       tempnum = atoi(argument);
       roomindex = get_room_index(tempnum);
@@ -783,7 +783,7 @@ void do_setship( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "engineroom" ) )
+  if ( !StrCmp( arg2, "engineroom" ) )
     {
       tempnum = atoi(argument);
       roomindex = get_room_index(tempnum);
@@ -812,7 +812,7 @@ void do_setship( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "shipyard" ) )
+  if ( !StrCmp( arg2, "shipyard" ) )
     {
       tempnum = atoi(argument);
       roomindex = get_room_index(tempnum);
@@ -829,15 +829,15 @@ void do_setship( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "type" ) )
+  if ( !StrCmp( arg2, "type" ) )
     {
-      if ( !str_cmp( argument, "rebel" ) )
+      if ( !StrCmp( argument, "rebel" ) )
         ship->type = SHIP_REBEL;
-      else if ( !str_cmp( argument, "imperial" ) )
+      else if ( !StrCmp( argument, "imperial" ) )
         ship->type = SHIP_IMPERIAL;
-      else if ( !str_cmp( argument, "civilian" ) )
+      else if ( !StrCmp( argument, "civilian" ) )
         ship->type = SHIP_CIVILIAN;
-      else if ( !str_cmp( argument, "mob" ) )
+      else if ( !StrCmp( argument, "mob" ) )
         ship->type = MOB_SHIP;
       else
         {
@@ -850,46 +850,46 @@ void do_setship( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "name" ) )
+  if ( !StrCmp( arg2, "name" ) )
     {
       DISPOSE( ship->name );
-      ship->name = str_dup( argument );
+      ship->name = CopyString( argument );
       send_to_char( "Done.\r\n", ch );
       SaveShip( ship );
       return;
     }
 
-  if ( !str_cmp( arg2, "personalname" ) )
+  if ( !StrCmp( arg2, "personalname" ) )
     {
       if ( ship->personalname )
         DISPOSE( ship->personalname );
 
-      ship->personalname = str_dup( argument );
+      ship->personalname = CopyString( argument );
       send_to_char( "Done.\r\n", ch );
       SaveShip( ship );
       return;
     }
 
-  if ( !str_cmp( arg2, "filename" ) )
+  if ( !StrCmp( arg2, "filename" ) )
     {
       DISPOSE( ship->filename );
-      ship->filename = str_dup( argument );
+      ship->filename = CopyString( argument );
       send_to_char( "Done.\r\n", ch );
       SaveShip( ship );
       WriteShipList( );
       return;
     }
 
-  if ( !str_cmp( arg2, "desc" ) )
+  if ( !StrCmp( arg2, "desc" ) )
     {
       DISPOSE( ship->description );
-      ship->description = str_dup( argument );
+      ship->description = CopyString( argument );
       send_to_char( "Done.\r\n", ch );
       SaveShip( ship );
       return;
     }
 
-  if ( !str_cmp( arg2, "dockingports" ) )
+  if ( !StrCmp( arg2, "dockingports" ) )
     {
       ship->dockingports = urange( -1, atoi(argument) , 20 );
       send_to_char( "Done.\r\n", ch );
@@ -897,7 +897,7 @@ void do_setship( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "guard" ) )
+  if ( !StrCmp( arg2, "guard" ) )
     {
       ship->guard = urange( -1, atoi(argument) , 1 );
       send_to_char( "Done.\r\n", ch );
@@ -905,7 +905,7 @@ void do_setship( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "manuever" ) )
+  if ( !StrCmp( arg2, "manuever" ) )
     {
       ship->manuever = urange( 0, atoi(argument) , 250 );
       send_to_char( "Done.\r\n", ch );
@@ -913,7 +913,7 @@ void do_setship( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "lasers" ) )
+  if ( !StrCmp( arg2, "lasers" ) )
     {
       if ( ch->top_level == 105 )
         ship->lasers = urange( 0, atoi(argument) , 20 );
@@ -925,7 +925,7 @@ void do_setship( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "ions" ) )
+  if ( !StrCmp( arg2, "ions" ) )
     {
       if ( ch->top_level == 105 )
         ship->ions = urange( 0, atoi(argument) , 20 );
@@ -937,7 +937,7 @@ void do_setship( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "class" ) )
+  if ( !StrCmp( arg2, "class" ) )
     {
       ship->sclass = urange( 0, atoi(argument) , WALKER );
       send_to_char( "Done.\r\n", ch );
@@ -945,7 +945,7 @@ void do_setship( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "missiles" ) )
+  if ( !StrCmp( arg2, "missiles" ) )
     {
       ship->missiles = urange( 0, atoi(argument) , 255 );
       send_to_char( "Done.\r\n", ch );
@@ -953,7 +953,7 @@ void do_setship( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "torpedos" ) )
+  if ( !StrCmp( arg2, "torpedos" ) )
     {
       ship->torpedos = urange( 0, atoi(argument) , 255 );
       send_to_char( "Done.\r\n", ch );
@@ -961,7 +961,7 @@ void do_setship( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "rockets" ) )
+  if ( !StrCmp( arg2, "rockets" ) )
     {
       ship->rockets = urange( 0, atoi(argument) , 255 );
       send_to_char( "Done.\r\n", ch );
@@ -969,7 +969,7 @@ void do_setship( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "speed" ) )
+  if ( !StrCmp( arg2, "speed" ) )
     {
       if ( ch->top_level == 105 )
         ship->realspeed = urange( 0, atoi(argument) , 255 );
@@ -981,7 +981,7 @@ void do_setship( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "tractorbeam" ) )
+  if ( !StrCmp( arg2, "tractorbeam" ) )
     {
       ship->tractorbeam = urange( 0, atoi(argument) , 255 );
       send_to_char( "Done.\r\n", ch );
@@ -989,7 +989,7 @@ void do_setship( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "hyperspeed" ) )
+  if ( !StrCmp( arg2, "hyperspeed" ) )
     {
       ship->hyperspeed = urange( 0, atoi(argument) , 255 );
       send_to_char( "Done.\r\n", ch );
@@ -997,7 +997,7 @@ void do_setship( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "shield" ) )
+  if ( !StrCmp( arg2, "shield" ) )
     {
       if ( ch->top_level == 105 )
         ship->maxshield = urange( 0, atoi(argument) , 30000 );
@@ -1009,7 +1009,7 @@ void do_setship( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "hull" ) )
+  if ( !StrCmp( arg2, "hull" ) )
     {
       if ( ch->top_level == 105 )
         {
@@ -1027,7 +1027,7 @@ void do_setship( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "energy" ) )
+  if ( !StrCmp( arg2, "energy" ) )
     {
       ship->energy = urange( 1, atoi(argument) , 30000 );
       ship->maxenergy = urange( 1, atoi(argument) , 30000 );
@@ -1036,7 +1036,7 @@ void do_setship( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "sensor" ) )
+  if ( !StrCmp( arg2, "sensor" ) )
     {
       ship->sensor = urange( 0, atoi(argument) , 255 );
       send_to_char( "Done.\r\n", ch );
@@ -1044,7 +1044,7 @@ void do_setship( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "astroarray" ) )
+  if ( !StrCmp( arg2, "astroarray" ) )
     {
       ship->astro_array = urange( 0, atoi(argument) , 255 );
       send_to_char( "Done.\r\n", ch );
@@ -1052,7 +1052,7 @@ void do_setship( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "comm" ) )
+  if ( !StrCmp( arg2, "comm" ) )
     {
       ship->comm = urange( 0, atoi(argument) , 255 );
       send_to_char( "Done.\r\n", ch );
@@ -1060,7 +1060,7 @@ void do_setship( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "chaff" ) )
+  if ( !StrCmp( arg2, "chaff" ) )
     {
       if ( ch->top_level == 105 )
         {
@@ -1076,7 +1076,7 @@ void do_setship( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp(arg2,"alarm") )
+  if ( !StrCmp(arg2,"alarm") )
     {
       ship->alarm = urange(0,atoi(argument),5);
       send_to_char("Done.\r\n",ch);

@@ -15,7 +15,7 @@ void do_mp_withdraw( Character *ch, char *argument )
       return;
     }
 
-  one_argument(argument, arg);
+  OneArgument(argument, arg);
 
   if ( arg[0] == '\0' )
     {

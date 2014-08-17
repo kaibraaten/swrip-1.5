@@ -85,7 +85,7 @@ void save_home( Character *ch )
 
 
       sprintf( filename, "%s%c/%s.home", PLAYER_DIR, tolower(ch->name[0]),
-               capitalize( ch->name ) );
+               Capitalize( ch->name ) );
 
       if ( ( fp = fopen( filename, "w" ) ) )
         {
@@ -215,7 +215,7 @@ void save_char_obj( Character *ch )
 
   ch->pcdata->save_time = current_time;
   sprintf( strsave, "%s%c/%s", PLAYER_DIR, tolower(ch->name[0]),
-           capitalize( ch->name ) );
+           Capitalize( ch->name ) );
 
   /*
    * Auto-backup pfile (can cause lag with high disk access situtations
@@ -223,7 +223,7 @@ void save_char_obj( Character *ch )
   if ( IsBitSet( sysdata.save_flags, SV_BACKUP ) )
     {
       sprintf( strback, "%s%c/%s", BACKUP_DIR, tolower(ch->name[0]),
-               capitalize( ch->name ) );
+               Capitalize( ch->name ) );
       rename( strsave, strback );
     }
 
@@ -236,7 +236,7 @@ void save_char_obj( Character *ch )
    */
   if ( GetTrustLevel(ch) > LEVEL_AVATAR )
     {
-      sprintf( strback, "%s%s", GOD_DIR, capitalize( ch->name ) );
+      sprintf( strback, "%s%s", GOD_DIR, Capitalize( ch->name ) );
 
       if ( ( fp = fopen( strback, "w" ) ) == NULL )
         {
@@ -332,7 +332,7 @@ void save_clone( Character *ch )
 
   ch->pcdata->save_time = current_time;
   sprintf( strsave, "%s%c/%s.clone", PLAYER_DIR, tolower(ch->name[0]),
-           capitalize( ch->name ) );
+           Capitalize( ch->name ) );
 
   /*
    * Auto-backup pfile (can cause lag with high disk access situtations
@@ -340,7 +340,7 @@ void save_clone( Character *ch )
   if ( IsBitSet( sysdata.save_flags, SV_BACKUP ) )
     {
       sprintf( strback, "%s%c/%s", BACKUP_DIR, tolower(ch->name[0]),
-               capitalize( ch->name ) );
+               Capitalize( ch->name ) );
       rename( strsave, strback );
     }
 
@@ -863,22 +863,22 @@ void fwrite_obj( const Character *ch, const OBJ_DATA *obj, FILE *fp, int iNest,
       fprintf( fp, "Count        %d\n",   obj->count           );
     }
 
-  if ( str_cmp( obj->name, obj->pIndexData->name ) )
+  if ( StrCmp( obj->name, obj->pIndexData->name ) )
     {
       fprintf( fp, "Name         %s~\n",  obj->name            );
     }
 
-  if ( str_cmp( obj->short_descr, obj->pIndexData->short_descr ) )
+  if ( StrCmp( obj->short_descr, obj->pIndexData->short_descr ) )
     {
       fprintf( fp, "ShortDescr   %s~\n",  obj->short_descr     );
     }
 
-  if ( str_cmp( obj->description, obj->pIndexData->description ) )
+  if ( StrCmp( obj->description, obj->pIndexData->description ) )
     {
       fprintf( fp, "Description  %s~\n",  obj->description     );
     }
 
-  if ( str_cmp( obj->action_desc, obj->pIndexData->action_desc ) )
+  if ( StrCmp( obj->action_desc, obj->pIndexData->action_desc ) )
     {
       fprintf( fp, "ActionDesc   %s~\n",  obj->action_desc     );
     }
@@ -1083,7 +1083,7 @@ bool load_char_obj( Descriptor *d, char *name, bool preload )
   d->character                = ch;
   ch->on                              = NULL;
   ch->desc                            = d;
-  ch->name                            = str_dup( name );
+  ch->name                            = CopyString( name );
   ch->act                             = PLR_BLANK | PLR_COMBINE | PLR_PROMPT;
   ch->stats.perm_str                  = 10;
   ch->stats.perm_int                  = 10;
@@ -1114,7 +1114,7 @@ bool load_char_obj( Descriptor *d, char *name, bool preload )
   ch->saving.spell_staff    = 0;
   ch->pcdata->comments      = NULL;
   ch->pcdata->pagerlen      = 24;
-  ch->mob_clan              = str_dup( "" );
+  ch->mob_clan              = CopyString( "" );
   ch->was_sentinel          = NULL;
   ch->plr_home              = NULL;
 
@@ -1123,14 +1123,14 @@ bool load_char_obj( Descriptor *d, char *name, bool preload )
 #endif
 
   sprintf( strsave, "%s%c/%s", PLAYER_DIR, tolower(name[0]),
-           capitalize( name ) );
+           Capitalize( name ) );
 
   if ( stat( strsave, &fst ) != -1 )
     {
       if ( fst.st_size == 0 )
         {
           sprintf( strsave, "%s%c/%s", BACKUP_DIR, tolower(name[0]),
-                   capitalize( name ) );
+                   Capitalize( name ) );
           send_to_char( "Restoring your backup player file...", ch );
         }
       else
@@ -1160,11 +1160,11 @@ bool load_char_obj( Descriptor *d, char *name, bool preload )
       for ( ; ; )
         {
 	  const char *word;
-          char letter = fread_letter( fp );
+          char letter = ReadChar( fp );
 
           if ( letter == '*' )
             {
-              fread_to_eol( fp );
+              ReadToEndOfLine( fp );
               continue;
             }
 
@@ -1175,9 +1175,9 @@ bool load_char_obj( Descriptor *d, char *name, bool preload )
               break;
             }
 
-          word = fread_word( fp );
+          word = ReadWord( fp );
 
-          if ( !str_cmp( word, "PLAYER" ) )
+          if ( !StrCmp( word, "PLAYER" ) )
             {
               fread_char ( ch, fp, preload );
 
@@ -1186,22 +1186,22 @@ bool load_char_obj( Descriptor *d, char *name, bool preload )
 		  break;
 		}
             }
-          else if ( !str_cmp( word, "OBJECT" ) )
+          else if ( !StrCmp( word, "OBJECT" ) )
 	    {
 	      fread_obj  ( ch, fp, OS_CARRY );
 	    }
-	  else if ( !str_cmp( word, "COMMENT") )
+	  else if ( !StrCmp( word, "COMMENT") )
 	    {
 	      fread_comment(ch, fp );
 	    }
-	  else if ( !str_cmp( word, "MOBILE") )
+	  else if ( !StrCmp( word, "MOBILE") )
 	    {
 	      Character *mob = fread_mobile( fp );
 	      ch->pcdata->pet = mob;
 	      mob->master = ch;
 	      SetBit(mob->affected_by, AFF_CHARM);
 	    }
-	  else if ( !str_cmp( word, "END"    ) )
+	  else if ( !StrCmp( word, "END"    ) )
 	    {
 	      break;
 	    }
@@ -1220,26 +1220,26 @@ bool load_char_obj( Descriptor *d, char *name, bool preload )
 
   if ( !found )
     {
-      ch->short_descr           = str_dup( "" );
-      ch->long_descr            = str_dup( "" );
-      ch->description           = str_dup( "" );
-      ch->pcdata->target        = str_dup( "" );
+      ch->short_descr           = CopyString( "" );
+      ch->long_descr            = CopyString( "" );
+      ch->description           = CopyString( "" );
+      ch->pcdata->target        = CopyString( "" );
       ch->editor                = NULL;
       ch->pcdata->clones        = 0;
       ch->pcdata->jail_vnum     = 0;
-      ch->pcdata->clan_name     = str_dup( "" );
+      ch->pcdata->clan_name     = CopyString( "" );
       ch->pcdata->clan          = NULL;
-      ch->pcdata->pwd           = str_dup( "" );
-      ch->pcdata->email         = str_dup( "" );
-      ch->pcdata->bamfin        = str_dup( "" );
-      ch->pcdata->bamfout       = str_dup( "" );
-      ch->pcdata->rank          = str_dup( "" );
-      ch->pcdata->bestowments   = str_dup( "" );
-      ch->pcdata->title         = str_dup( "" );
-      ch->pcdata->homepage      = str_dup( "" );
-      ch->pcdata->bio           = str_dup( "" );
-      ch->pcdata->authed_by     = str_dup( "" );
-      ch->pcdata->prompt        = str_dup( "" );
+      ch->pcdata->pwd           = CopyString( "" );
+      ch->pcdata->email         = CopyString( "" );
+      ch->pcdata->bamfin        = CopyString( "" );
+      ch->pcdata->bamfout       = CopyString( "" );
+      ch->pcdata->rank          = CopyString( "" );
+      ch->pcdata->bestowments   = CopyString( "" );
+      ch->pcdata->title         = CopyString( "" );
+      ch->pcdata->homepage      = CopyString( "" );
+      ch->pcdata->bio           = CopyString( "" );
+      ch->pcdata->authed_by     = CopyString( "" );
+      ch->pcdata->prompt        = CopyString( "" );
       ch->pcdata->r_range_lo    = 0;
       ch->pcdata->r_range_hi    = 0;
       ch->pcdata->m_range_lo    = 0;
@@ -1258,18 +1258,18 @@ bool load_char_obj( Descriptor *d, char *name, bool preload )
 
       if ( !ch->pcdata->clan_name )
         {
-          ch->pcdata->clan_name = str_dup( "" );
+          ch->pcdata->clan_name = CopyString( "" );
           ch->pcdata->clan      = NULL;
         }
 
       if ( !ch->pcdata->bio )
 	{
-	  ch->pcdata->bio  = str_dup( "" );
+	  ch->pcdata->bio  = CopyString( "" );
 	}
 
       if ( !ch->pcdata->authed_by )
 	{
-	  ch->pcdata->authed_by    = str_dup( "" );
+	  ch->pcdata->authed_by    = CopyString( "" );
 	}
 
       if ( !IsNpc( ch ) && GetTrustLevel( ch ) > LEVEL_AVATAR )
@@ -1321,25 +1321,25 @@ void fread_char( Character *ch, FILE *fp, bool preload )
       short killcnt = 0;
       time_t lastplayed = 0;
       int sn = 0;
-      const char *word = feof( fp ) ? "End" : fread_word( fp );
+      const char *word = feof( fp ) ? "End" : ReadWord( fp );
       bool fMatch = false;
 
       switch ( CharToUppercase(word[0]) )
         {
         case '*':
           fMatch = true;
-          fread_to_eol( fp );
+          ReadToEndOfLine( fp );
           break;
 
         case 'A':
-          KEY( "Act",           ch->act,                fread_number( fp ) );
-          KEY( "AffectedBy",    ch->affected_by,        fread_number( fp ) );
-          KEY( "Alignment",     ch->alignment,          fread_number( fp ) );
-          KEY( "Armor", ch->armor,              fread_number( fp ) );
+          KEY( "Act",           ch->act,                ReadInt( fp ) );
+          KEY( "AffectedBy",    ch->affected_by,        ReadInt( fp ) );
+          KEY( "Alignment",     ch->alignment,          ReadInt( fp ) );
+          KEY( "Armor", ch->armor,              ReadInt( fp ) );
 
-          if ( !str_cmp( word, "Addiction"  ) )
+          if ( !StrCmp( word, "Addiction"  ) )
             {
-              line = fread_line( fp );
+              line = ReadLine( fp );
               x0 = x1 = x2 = x3 = x4 = x5 = x6 = x7 = x8 = x9 = 0;
               sscanf( line, "%d %d %d %d %d %d %d %d %d %d",
                       &x0, &x1, &x2, &x3, &x4, &x5, &x6, &x7, &x8, &x9 );
@@ -1357,9 +1357,9 @@ void fread_char( Character *ch, FILE *fp, bool preload )
               break;
             }
 
-          if ( !str_cmp( word, "Ability"  ) )
+          if ( !StrCmp( word, "Ability"  ) )
             {
-              line = fread_line( fp );
+              line = ReadLine( fp );
               x0=x1=x2=0;
               sscanf( line, "%d %d %d",
                       &x0, &x1, &x2 );
@@ -1374,26 +1374,26 @@ void fread_char( Character *ch, FILE *fp, bool preload )
               break;
             }
 
-          if ( !str_cmp( word, "Affect" ) || !str_cmp( word, "AffectData" ) )
+          if ( !StrCmp( word, "Affect" ) || !StrCmp( word, "AffectData" ) )
             {
               Affect *paf = NULL;
 
               if ( preload )
                 {
                   fMatch = true;
-                  fread_to_eol( fp );
+                  ReadToEndOfLine( fp );
                   break;
                 }
 
               CREATE( paf, Affect, 1 );
 
-              if ( !str_cmp( word, "Affect" ) )
+              if ( !StrCmp( word, "Affect" ) )
                 {
-                  paf->type = fread_number( fp );
+                  paf->type = ReadInt( fp );
                 }
               else
                 {
-                  const char *sname = fread_word(fp);
+                  const char *sname = ReadWord(fp);
 
                   if ( (sn=skill_lookup(sname)) < 0 )
                     {
@@ -1410,18 +1410,18 @@ void fread_char( Character *ch, FILE *fp, bool preload )
                   paf->type = sn;
                 }
 
-              paf->duration   = fread_number( fp );
-              paf->modifier   = fread_number( fp );
-              paf->location   = fread_number( fp );
-              paf->bitvector  = fread_number( fp );
+              paf->duration   = ReadInt( fp );
+              paf->modifier   = ReadInt( fp );
+              paf->location   = ReadInt( fp );
+              paf->bitvector  = ReadInt( fp );
               LINK(paf, ch->first_affect, ch->last_affect, next, prev );
               fMatch = true;
               break;
             }
 
-          if ( !str_cmp( word, "AttrMod"  ) )
+          if ( !StrCmp( word, "AttrMod"  ) )
             {
-              line = fread_line( fp );
+              line = ReadLine( fp );
               x1=x2=x3=x4=x5=x6=x7=13;
               sscanf( line, "%d %d %d %d %d %d %d",
                       &x1, &x2, &x3, &x4, &x5, &x6, &x7 );
@@ -1438,29 +1438,29 @@ void fread_char( Character *ch, FILE *fp, bool preload )
               break;
             }
 
-          if ( !str_cmp( word, "Alias" ) )
+          if ( !StrCmp( word, "Alias" ) )
             {
               Alias *pal = NULL;
 
               if ( preload )
                 {
                   fMatch = true;
-                  fread_to_eol( fp );
+                  ReadToEndOfLine( fp );
                   break;
 
                 }
               CREATE( pal, Alias, 1 );
 
-              pal->name = fread_string_nohash( fp );
-              pal->cmd  = fread_string_nohash( fp );
+              pal->name = ReadStringToTildeNoHash( fp );
+              pal->cmd  = ReadStringToTildeNoHash( fp );
               LINK(pal, ch->pcdata->first_alias, ch->pcdata->last_alias, next, prev );
               fMatch = true;
               break;
             }
 
-          if ( !str_cmp( word, "AttrPerm" ) )
+          if ( !StrCmp( word, "AttrPerm" ) )
             {
-              line = fread_line( fp );
+              line = ReadLine( fp );
               x1=x2=x3=x4=x5=x6=x7=0;
               sscanf( line, "%d %d %d %d %d %d %d",
                       &x1, &x2, &x3, &x4, &x5, &x6, &x7 );
@@ -1481,21 +1481,21 @@ void fread_char( Character *ch, FILE *fp, bool preload )
               break;
             }
 
-          KEY( "AuthedBy",      ch->pcdata->authed_by,  fread_string( fp ) );
+          KEY( "AuthedBy",      ch->pcdata->authed_by,  ReadStringToTilde( fp ) );
           break;
 
         case 'B':
-          KEY( "Bamfin",        ch->pcdata->bamfin,     fread_string_nohash( fp ) );
-          KEY( "Bamfout",       ch->pcdata->bamfout,    fread_string_nohash( fp ) );
-          KEY( "Bestowments", ch->pcdata->bestowments, fread_string_nohash( fp ) );
-          KEY( "Bio",           ch->pcdata->bio,        fread_string( fp ) );
-          KEY( "Bank",  ch->pcdata->bank,       fread_number( fp ) );
+          KEY( "Bamfin",        ch->pcdata->bamfin,     ReadStringToTildeNoHash( fp ) );
+          KEY( "Bamfout",       ch->pcdata->bamfout,    ReadStringToTildeNoHash( fp ) );
+          KEY( "Bestowments", ch->pcdata->bestowments, ReadStringToTildeNoHash( fp ) );
+          KEY( "Bio",           ch->pcdata->bio,        ReadStringToTilde( fp ) );
+          KEY( "Bank",  ch->pcdata->bank,       ReadInt( fp ) );
           break;
 
         case 'C':
-          if ( !str_cmp( word, "Clan" ) )
+          if ( !StrCmp( word, "Clan" ) )
             {
-              ch->pcdata->clan_name = fread_string( fp );
+              ch->pcdata->clan_name = ReadStringToTilde( fp );
 
               if ( !preload
                    &&   ch->pcdata->clan_name[0] != '\0'
@@ -1504,7 +1504,7 @@ void fread_char( Character *ch, FILE *fp, bool preload )
                   ch_printf( ch, "Warning: the organization %s no longer exists, and therefore you no longer\r\nbelong to that organization.\r\n", ch->pcdata->clan_name );
                   DISPOSE( ch->pcdata->clan_name );
                   remove_member(ch);
-                  ch->pcdata->clan_name = str_dup( "" );
+                  ch->pcdata->clan_name = CopyString( "" );
                 }
               else
 		{
@@ -1515,11 +1515,11 @@ void fread_char( Character *ch, FILE *fp, bool preload )
               break;
             }
 
-          KEY( "Clones",        ch->pcdata->clones,             fread_number( fp ) );
+          KEY( "Clones",        ch->pcdata->clones,             ReadInt( fp ) );
 
-          if ( !str_cmp( word, "Condition" ) )
+          if ( !StrCmp( word, "Condition" ) )
             {
-              line = fread_line( fp );
+              line = ReadLine( fp );
               sscanf( line, "%d %d %d %d",
                       &x1, &x2, &x3, &x4 );
               ch->pcdata->condition[0] = x1;
@@ -1533,13 +1533,13 @@ void fread_char( Character *ch, FILE *fp, bool preload )
           break;
 
         case 'D':
-          KEY( "Damroll",       ch->damroll,            fread_number( fp ) );
-          KEY( "Deaf",  ch->deaf,               fread_number( fp ) );
-          KEY( "Description",   ch->description,        fread_string( fp ) );
+          KEY( "Damroll",       ch->damroll,            ReadInt( fp ) );
+          KEY( "Deaf",  ch->deaf,               ReadInt( fp ) );
+          KEY( "Description",   ch->description,        ReadStringToTilde( fp ) );
 
-          if ( !str_cmp( word, "Druglevel"  ) )
+          if ( !StrCmp( word, "Druglevel"  ) )
             {
-              line = fread_line( fp );
+              line = ReadLine( fp );
               x0=x1=x2=x3=x4=x5=x6=x7=x8=x9=0;
               sscanf( line, "%d %d %d %d %d %d %d %d %d %d",
                       &x0, &x1, &x2, &x3, &x4, &x5, &x6, &x7, &x8, &x9 );
@@ -1561,11 +1561,11 @@ void fread_char( Character *ch, FILE *fp, bool preload )
 
           /* 'E' was moved to after 'S' */
         case 'F':
-          KEY( "Flags", ch->pcdata->flags,      fread_number( fp ) );
+          KEY( "Flags", ch->pcdata->flags,      ReadInt( fp ) );
 
-          if ( !str_cmp( word, "Force" ) )
+          if ( !StrCmp( word, "Force" ) )
             {
-              line = fread_line( fp );
+              line = ReadLine( fp );
               x1=x2=x3=x4=x5=x6=0;
               sscanf( line, "%d %d %d %d",
                       &x1, &x2, &x3, &x4);
@@ -1579,11 +1579,11 @@ void fread_char( Character *ch, FILE *fp, bool preload )
           break;
 
         case 'G':
-          KEY( "Gold",  ch->gold,               fread_number( fp ) );
+          KEY( "Gold",  ch->gold,               ReadInt( fp ) );
           /* temporary measure */
-          if ( !str_cmp( word, "Guild" ) )
+          if ( !StrCmp( word, "Guild" ) )
             {
-              ch->pcdata->clan_name = fread_string( fp );
+              ch->pcdata->clan_name = ReadStringToTilde( fp );
 
               if ( !preload
                    &&   ch->pcdata->clan_name[0] != '\0'
@@ -1592,7 +1592,7 @@ void fread_char( Character *ch, FILE *fp, bool preload )
                   ch_printf( ch, "Warning: the organization %s no longer exists, and therefore you no longer\r\nbelong to that organization.\r\n",
                            ch->pcdata->clan_name );
                   DISPOSE( ch->pcdata->clan_name );
-                  ch->pcdata->clan_name = str_dup( "" );
+                  ch->pcdata->clan_name = CopyString( "" );
                 }
 
               fMatch = true;
@@ -1601,10 +1601,10 @@ void fread_char( Character *ch, FILE *fp, bool preload )
           break;
 
         case 'H':
-          if ( !str_cmp(word, "Helled") )
+          if ( !StrCmp(word, "Helled") )
             {
-              ch->pcdata->release_date = fread_number(fp);
-              ch->pcdata->helled_by = fread_string(fp);
+              ch->pcdata->release_date = ReadInt(fp);
+              ch->pcdata->helled_by = ReadStringToTilde(fp);
 
               if ( ch->pcdata->release_date < current_time )
                 {
@@ -1618,12 +1618,12 @@ void fread_char( Character *ch, FILE *fp, bool preload )
               break;
             }
 
-          KEY( "Hitroll",       ch->hitroll,            fread_number( fp ) );
-          KEY( "Homepage",      ch->pcdata->homepage,   fread_string_nohash( fp ) );
+          KEY( "Hitroll",       ch->hitroll,            ReadInt( fp ) );
+          KEY( "Homepage",      ch->pcdata->homepage,   ReadStringToTildeNoHash( fp ) );
 
-          if ( !str_cmp( word, "HpManaMove" ) )
+          if ( !StrCmp( word, "HpManaMove" ) )
             {
-              line = fread_line( fp );
+              line = ReadLine( fp );
               x1=x2=x3=x4=x5=x6=0;
               sscanf( line, "%d %d %d %d %d %d",
                       &x1, &x2, &x3, &x4, &x5, &x6 );
@@ -1634,7 +1634,7 @@ void fread_char( Character *ch, FILE *fp, bool preload )
 
               if ( x4 >= 100 )
                 {
-                  ch->stats.perm_frc = number_range( 1 , 20 );
+                  ch->stats.perm_frc = GetRandomNumberFromRange( 1 , 20 );
                   ch->max_mana = x4;
                   ch->mana     = x4;
                 }
@@ -1651,8 +1651,8 @@ void fread_char( Character *ch, FILE *fp, bool preload )
           break;
 
         case 'I':
-          KEY( "IllegalPK",     ch->pcdata->illegal_pk, fread_number( fp ) );
-          KEY( "Immune",        ch->immune,             fread_number( fp ) );
+          KEY( "IllegalPK",     ch->pcdata->illegal_pk, ReadInt( fp ) );
+          KEY( "Immune",        ch->immune,             ReadInt( fp ) );
 
 #ifdef SWRIP_USE_IMC
 	  if( ( fMatch = imc_loadchar( ch, fp, word ) ) )
@@ -1662,11 +1662,11 @@ void fread_char( Character *ch, FILE *fp, bool preload )
 #endif
           break;
         case 'J':
-          KEY( "Jailvnum",    ch->pcdata->jail_vnum,          fread_number( fp ) );
+          KEY( "Jailvnum",    ch->pcdata->jail_vnum,          ReadInt( fp ) );
           break;
 
         case 'K':
-          if ( !str_cmp( word, "Killed" ) )
+          if ( !StrCmp( word, "Killed" ) )
             {
               fMatch = true;
 
@@ -1676,90 +1676,90 @@ void fread_char( Character *ch, FILE *fp, bool preload )
 		}
               else
                 {
-                  ch->pcdata->killed[killcnt].vnum    = fread_number( fp );
-                  ch->pcdata->killed[killcnt++].count = fread_number( fp );
+                  ch->pcdata->killed[killcnt].vnum    = ReadInt( fp );
+                  ch->pcdata->killed[killcnt++].count = ReadInt( fp );
                 }
             }
           break;
 
         case 'L':
-          if ( !str_cmp(word, "Lastplayed") )
+          if ( !StrCmp(word, "Lastplayed") )
             {
-              lastplayed = fread_number(fp);
+              lastplayed = ReadInt(fp);
               fMatch = true;
               break;
             }
 
-          KEY( "LongDescr",     ch->long_descr,         fread_string( fp ) );
+          KEY( "LongDescr",     ch->long_descr,         ReadStringToTilde( fp ) );
 
-          if ( !str_cmp( word, "Languages" ) )
+          if ( !StrCmp( word, "Languages" ) )
             {
-              ch->speaks = fread_number( fp );
-              ch->speaking = fread_number( fp );
+              ch->speaks = ReadInt( fp );
+              ch->speaking = ReadInt( fp );
               fMatch = true;
             }
 
           break;
 
         case 'M':
-          KEY( "MainAbility",   ch->ability.main,               fread_number( fp ) );
-          KEY( "MDeaths",       ch->pcdata->mdeaths,    fread_number( fp ) );
-          KEY( "Mentalstate", ch->mental_state, fread_number( fp ) );
-          KEY( "Minsnoop",      ch->pcdata->min_snoop,  fread_number( fp ) );
-          KEY( "MKills",        ch->pcdata->mkills,     fread_number( fp ) );
-          KEY( "Mobinvis",      ch->mobinvis,           fread_number( fp ) );
+          KEY( "MainAbility",   ch->ability.main,               ReadInt( fp ) );
+          KEY( "MDeaths",       ch->pcdata->mdeaths,    ReadInt( fp ) );
+          KEY( "Mentalstate", ch->mental_state, ReadInt( fp ) );
+          KEY( "Minsnoop",      ch->pcdata->min_snoop,  ReadInt( fp ) );
+          KEY( "MKills",        ch->pcdata->mkills,     ReadInt( fp ) );
+          KEY( "Mobinvis",      ch->mobinvis,           ReadInt( fp ) );
 
-          if ( !str_cmp( word, "MobRange" ) )
+          if ( !StrCmp( word, "MobRange" ) )
             {
-              ch->pcdata->m_range_lo = fread_number( fp );
-              ch->pcdata->m_range_hi = fread_number( fp );
+              ch->pcdata->m_range_lo = ReadInt( fp );
+              ch->pcdata->m_range_hi = ReadInt( fp );
               fMatch = true;
             }
 
           break;
 
         case 'N':
-          if ( !str_cmp( word, "Name" ) )
+          if ( !StrCmp( word, "Name" ) )
             {
               /*
                * Name already set externally.
                */
-              fread_to_eol( fp );
+              ReadToEndOfLine( fp );
               fMatch = true;
               break;
             }
           break;
 
         case 'O':
-          KEY( "Outcast_time", ch->pcdata->outcast_time, fread_number( fp ) );
+          KEY( "Outcast_time", ch->pcdata->outcast_time, ReadInt( fp ) );
 
-          if ( !str_cmp( word, "ObjRange" ) )
+          if ( !StrCmp( word, "ObjRange" ) )
             {
-              ch->pcdata->o_range_lo = fread_number( fp );
-              ch->pcdata->o_range_hi = fread_number( fp );
+              ch->pcdata->o_range_lo = ReadInt( fp );
+              ch->pcdata->o_range_hi = ReadInt( fp );
               fMatch = true;
             }
           break;
 
         case 'P':
-          KEY( "Pagerlen",      ch->pcdata->pagerlen,   fread_number( fp ) );
-          KEY( "Password",      ch->pcdata->pwd,        fread_string_nohash( fp ) );
-          KEY( "PDeaths",       ch->pcdata->pdeaths,    fread_number( fp ) );
-          KEY( "PKills",        ch->pcdata->pkills,     fread_number( fp ) );
-          KEY( "Played",        ch->pcdata->played,     fread_number( fp ) );
-          KEY( "Position",      ch->position,           fread_number( fp ) );
-          KEY( "Prompt",        ch->pcdata->prompt,     fread_string( fp ) );
+          KEY( "Pagerlen",      ch->pcdata->pagerlen,   ReadInt( fp ) );
+          KEY( "Password",      ch->pcdata->pwd,        ReadStringToTildeNoHash( fp ) );
+          KEY( "PDeaths",       ch->pcdata->pdeaths,    ReadInt( fp ) );
+          KEY( "PKills",        ch->pcdata->pkills,     ReadInt( fp ) );
+          KEY( "Played",        ch->pcdata->played,     ReadInt( fp ) );
+          KEY( "Position",      ch->position,           ReadInt( fp ) );
+          KEY( "Prompt",        ch->pcdata->prompt,     ReadStringToTilde( fp ) );
 
-          if (!str_cmp ( word, "PTimer" ) )
+          if (!StrCmp ( word, "PTimer" ) )
             {
-              add_timer( ch , TIMER_PKILLED, fread_number(fp), NULL, SUB_NONE );
+              add_timer( ch , TIMER_PKILLED, ReadInt(fp), NULL, SUB_NONE );
               fMatch = true;
               break;
             }
 
-          if ( !str_cmp( word, "PlrHome" ) )
+          if ( !StrCmp( word, "PlrHome" ) )
             {
-              ch->plr_home = get_room_index( fread_number( fp ) );
+              ch->plr_home = get_room_index( ReadInt( fp ) );
 
               if ( !ch->plr_home )
 		{
@@ -1773,14 +1773,14 @@ void fread_char( Character *ch, FILE *fp, bool preload )
           break;
 
         case 'R':
-          KEY( "Race",        ch->race,         fread_number( fp ) );
-          KEY( "Rank",        ch->pcdata->rank, fread_string_nohash( fp ) );
-          KEY( "Resistant",     ch->resistant,          fread_number( fp ) );
-          KEY( "Restore_time",ch->pcdata->restore_time, fread_number( fp ) );
+          KEY( "Race",        ch->race,         ReadInt( fp ) );
+          KEY( "Rank",        ch->pcdata->rank, ReadStringToTildeNoHash( fp ) );
+          KEY( "Resistant",     ch->resistant,          ReadInt( fp ) );
+          KEY( "Restore_time",ch->pcdata->restore_time, ReadInt( fp ) );
 
-          if ( !str_cmp( word, "Room" ) )
+          if ( !StrCmp( word, "Room" ) )
             {
-              ch->in_room = get_room_index( fread_number( fp ) );
+              ch->in_room = get_room_index( ReadInt( fp ) );
 
               if ( !ch->in_room )
 		{
@@ -1791,25 +1791,25 @@ void fread_char( Character *ch, FILE *fp, bool preload )
               break;
             }
 
-          if ( !str_cmp( word, "RoomRange" ) )
+          if ( !StrCmp( word, "RoomRange" ) )
             {
-              ch->pcdata->r_range_lo = fread_number( fp );
-              ch->pcdata->r_range_hi = fread_number( fp );
+              ch->pcdata->r_range_lo = ReadInt( fp );
+              ch->pcdata->r_range_hi = ReadInt( fp );
               fMatch = true;
             }
 
           break;
 
         case 'S':
-          KEY( "Salary",      ch->pcdata->salary,               fread_number( fp ) );
-          KEY( "Salary_time",ch->pcdata->salary_date, fread_number( fp ) );
-          KEY( "Sex",           ch->sex,                fread_number( fp ) );
-          KEY( "ShortDescr",    ch->short_descr,        fread_string( fp ) );
-          KEY( "Susceptible",   ch->susceptible,        fread_number( fp ) );
+          KEY( "Salary",      ch->pcdata->salary,               ReadInt( fp ) );
+          KEY( "Salary_time",ch->pcdata->salary_date, ReadInt( fp ) );
+          KEY( "Sex",           ch->sex,                ReadInt( fp ) );
+          KEY( "ShortDescr",    ch->short_descr,        ReadStringToTilde( fp ) );
+          KEY( "Susceptible",   ch->susceptible,        ReadInt( fp ) );
 
-          if ( !str_cmp( word, "SavingThrow" ) )
+          if ( !StrCmp( word, "SavingThrow" ) )
             {
-              ch->saving.wand   = fread_number( fp );
+              ch->saving.wand   = ReadInt( fp );
               ch->saving.poison_death = ch->saving.wand;
               ch->saving.para_petri     = ch->saving.wand;
               ch->saving.breath         = ch->saving.wand;
@@ -1818,26 +1818,26 @@ void fread_char( Character *ch, FILE *fp, bool preload )
               break;
             }
 
-          if ( !str_cmp( word, "SavingThrows" ) )
+          if ( !StrCmp( word, "SavingThrows" ) )
             {
-              ch->saving.poison_death = fread_number( fp );
-              ch->saving.wand   = fread_number( fp );
-              ch->saving.para_petri     = fread_number( fp );
-              ch->saving.breath         = fread_number( fp );
-              ch->saving.spell_staff    = fread_number( fp );
+              ch->saving.poison_death = ReadInt( fp );
+              ch->saving.wand   = ReadInt( fp );
+              ch->saving.para_petri     = ReadInt( fp );
+              ch->saving.breath         = ReadInt( fp );
+              ch->saving.spell_staff    = ReadInt( fp );
               fMatch = true;
               break;
             }
 
-          if ( !str_cmp( word, "Site" ) )
+          if ( !StrCmp( word, "Site" ) )
             {
               if ( !preload )
                 {
-                  ch_printf( ch, "Last connected from: %s\r\n", fread_word( fp ) );
+                  ch_printf( ch, "Last connected from: %s\r\n", ReadWord( fp ) );
                 }
               else
 		{
-		  fread_to_eol( fp );
+		  ReadToEndOfLine( fp );
 		}
 
               fMatch = true;
@@ -1852,7 +1852,7 @@ void fread_char( Character *ch, FILE *fp, bool preload )
 		}
             }
 
-          if ( !str_cmp( word, "Skill" ) )
+          if ( !StrCmp( word, "Skill" ) )
             {
               int value;
 
@@ -1862,15 +1862,15 @@ void fread_char( Character *ch, FILE *fp, bool preload )
 		}
               else
                 {
-                  value = fread_number( fp );
+                  value = ReadInt( fp );
 
                   if ( file_ver < 3 )
 		    {
-		      sn = skill_lookup( fread_word( fp ) );
+		      sn = skill_lookup( ReadWord( fp ) );
 		    }
                   else
 		    {
-                    sn = bsearch_skill_exact( fread_word( fp ), gsn_first_skill, gsn_first_weapon-1 );
+                    sn = bsearch_skill_exact( ReadWord( fp ), gsn_first_skill, gsn_first_weapon-1 );
 		    }
 
                   if ( sn < 0 )
@@ -1888,7 +1888,7 @@ void fread_char( Character *ch, FILE *fp, bool preload )
                 }
             }
 
-          if ( !str_cmp( word, "Spell" ) )
+          if ( !StrCmp( word, "Spell" ) )
             {
               int value = 0;
 
@@ -1898,8 +1898,8 @@ void fread_char( Character *ch, FILE *fp, bool preload )
 		}
               else
                 {
-                  value = fread_number( fp );
-                  sn = bsearch_skill_exact( fread_word( fp ), gsn_first_spell, gsn_first_skill-1 );
+                  value = ReadInt( fp );
+                  sn = bsearch_skill_exact( ReadWord( fp ), gsn_first_spell, gsn_first_skill-1 );
 
                   if ( sn < 0 )
 		    {
@@ -1915,55 +1915,55 @@ void fread_char( Character *ch, FILE *fp, bool preload )
                 }
             }
 
-          if ( str_cmp( word, "End" ) )
+          if ( StrCmp( word, "End" ) )
 	    {
 	      break;
 	    }
 
         case 'E':
-          if ( !str_cmp( word, "End" ) )
+          if ( !StrCmp( word, "End" ) )
             {
               if (!ch->short_descr)
-                ch->short_descr = str_dup( "" );
+                ch->short_descr = CopyString( "" );
 
               if (!ch->long_descr)
-                ch->long_descr  = str_dup( "" );
+                ch->long_descr  = CopyString( "" );
 
               if (!ch->description)
-                ch->description = str_dup( "" );
+                ch->description = CopyString( "" );
 
               if (!ch->pcdata->pwd)
-                ch->pcdata->pwd = str_dup( "" );
+                ch->pcdata->pwd = CopyString( "" );
 
               if (!ch->pcdata->email)
-                ch->pcdata->email       = str_dup( "" );
+                ch->pcdata->email       = CopyString( "" );
 
               if (!ch->pcdata->bamfin)
-                ch->pcdata->bamfin      = str_dup( "" );
+                ch->pcdata->bamfin      = CopyString( "" );
 
               if (!ch->pcdata->bamfout)
-                ch->pcdata->bamfout     = str_dup( "" );
+                ch->pcdata->bamfout     = CopyString( "" );
 
               if (!ch->pcdata->bio)
-                ch->pcdata->bio = str_dup( "" );
+                ch->pcdata->bio = CopyString( "" );
 
               if (!ch->pcdata->rank)
-                ch->pcdata->rank        = str_dup( "" );
+                ch->pcdata->rank        = CopyString( "" );
 
               if (!ch->pcdata->bestowments)
-                ch->pcdata->bestowments = str_dup( "" );
+                ch->pcdata->bestowments = CopyString( "" );
 
               if (!ch->pcdata->title)
-                ch->pcdata->title       = str_dup( "" );
+                ch->pcdata->title       = CopyString( "" );
 
               if (!ch->pcdata->homepage)
-                ch->pcdata->homepage    = str_dup( "" );
+                ch->pcdata->homepage    = CopyString( "" );
 
               if (!ch->pcdata->authed_by)
-                ch->pcdata->authed_by = str_dup( "" );
+                ch->pcdata->authed_by = CopyString( "" );
 
               if (!ch->pcdata->prompt )
-                ch->pcdata->prompt      = str_dup( "" );
+                ch->pcdata->prompt      = CopyString( "" );
 
               ch->editor                = NULL;
               killcnt = urange( 2, ((ch->top_level+3) * MAX_KILLTRACK)/LEVEL_AVATAR, MAX_KILLTRACK );
@@ -1996,7 +1996,7 @@ void fread_char( Character *ch, FILE *fp, bool preload )
 
               if ( !ch->pcdata->prompt )
 		{
-		  ch->pcdata->prompt = str_dup("");
+		  ch->pcdata->prompt = CopyString("");
 		}
 
               if ( lastplayed != 0 )
@@ -2036,14 +2036,14 @@ void fread_char( Character *ch, FILE *fp, bool preload )
               return;
             }
 
-          KEY( "Email", ch->pcdata->email,      fread_string_nohash( fp ) );
+          KEY( "Email", ch->pcdata->email,      ReadStringToTildeNoHash( fp ) );
           break;
 
         case 'T':
-          KEY( "Targ",  ch->pcdata->target,     fread_string( fp ) );
-          KEY( "Toplevel",      ch->top_level,          fread_number( fp ) );
+          KEY( "Targ",  ch->pcdata->target,     ReadStringToTilde( fp ) );
+          KEY( "Toplevel",      ch->top_level,          ReadInt( fp ) );
 
-          if ( !str_cmp( word, "Tongue" ) )
+          if ( !StrCmp( word, "Tongue" ) )
             {
               int value  = 0;
 
@@ -2053,8 +2053,8 @@ void fread_char( Character *ch, FILE *fp, bool preload )
 		}
               else
                 {
-                  value = fread_number( fp );
-                  sn = bsearch_skill_exact( fread_word( fp ), gsn_first_tongue, gsn_top_sn-1 );
+                  value = ReadInt( fp );
+                  sn = bsearch_skill_exact( ReadWord( fp ), gsn_first_tongue, gsn_top_sn-1 );
 
                   if ( sn < 0 )
 		    {
@@ -2071,13 +2071,13 @@ void fread_char( Character *ch, FILE *fp, bool preload )
               break;
             }
 
-          KEY( "Trust", ch->trust, fread_number( fp ) );
+          KEY( "Trust", ch->trust, ReadInt( fp ) );
           /* Let no character be trusted higher than one below maxlevel -- Narn */
           ch->trust = umin( ch->trust, MAX_LEVEL - 1 );
 
-          if ( !str_cmp( word, "Title" ) )
+          if ( !StrCmp( word, "Title" ) )
             {
-              ch->pcdata->title = fread_string( fp );
+              ch->pcdata->title = ReadStringToTilde( fp );
 
               if ( isalpha(ch->pcdata->title[0])
                    || isdigit(ch->pcdata->title[0]) )
@@ -2087,7 +2087,7 @@ void fread_char( Character *ch, FILE *fp, bool preload )
                   if ( ch->pcdata->title )
                     DISPOSE( ch->pcdata->title );
 
-                  ch->pcdata->title = str_dup( buf );
+                  ch->pcdata->title = CopyString( buf );
                 }
 
               fMatch = true;
@@ -2097,18 +2097,18 @@ void fread_char( Character *ch, FILE *fp, bool preload )
           break;
 
         case 'V':
-          if ( !str_cmp( word, "Vnum" ) )
+          if ( !StrCmp( word, "Vnum" ) )
             {
-              ch->pIndexData = get_mob_index( fread_number( fp ) );
+              ch->pIndexData = get_mob_index( ReadInt( fp ) );
               fMatch = true;
               break;
             }
 
-          KEY( "Version",       file_ver,               fread_number( fp ) );
+          KEY( "Version",       file_ver,               ReadInt( fp ) );
           break;
 
         case 'W':
-          if ( !str_cmp( word, "Weapon" ) )
+          if ( !StrCmp( word, "Weapon" ) )
             {
               int value = 0;
 
@@ -2118,8 +2118,8 @@ void fread_char( Character *ch, FILE *fp, bool preload )
 		}
               else
                 {
-                  value = fread_number( fp );
-                  sn = bsearch_skill_exact( fread_word( fp ), gsn_first_weapon, gsn_first_tongue-1 );
+                  value = ReadInt( fp );
+                  sn = bsearch_skill_exact( ReadWord( fp ), gsn_first_weapon, gsn_first_tongue-1 );
                   if ( sn < 0 )
 		    {
 		      bug( "Fread_char: unknown weapon.", 0 );
@@ -2134,9 +2134,9 @@ void fread_char( Character *ch, FILE *fp, bool preload )
               break;
             }
 
-          KEY( "Wimpy", ch->wimpy,              fread_number( fp ) );
-          KEY( "WizInvis",      ch->pcdata->wizinvis,   fread_number( fp ) );
-          KEY( "Wanted",        ch->pcdata->wanted_flags,  fread_number( fp ) );
+          KEY( "Wimpy", ch->wimpy,              ReadInt( fp ) );
+          KEY( "WizInvis",      ch->pcdata->wizinvis,   ReadInt( fp ) );
+          KEY( "Wanted",        ch->pcdata->wanted_flags,  ReadInt( fp ) );
           break;
         }
 
@@ -2162,31 +2162,31 @@ void fread_obj( Character *ch, FILE *fp, short os_type )
 
   for ( ; ; )
     {
-      const char *word = feof( fp ) ? "End" : fread_word( fp );
+      const char *word = feof( fp ) ? "End" : ReadWord( fp );
       bool fMatch = false;
 
       switch ( CharToUppercase(word[0]) )
         {
         case '*':
           fMatch = true;
-          fread_to_eol( fp );
+          ReadToEndOfLine( fp );
           break;
 
         case 'A':
-          if ( !str_cmp( word, "Affect" ) || !str_cmp( word, "AffectData" ) )
+          if ( !StrCmp( word, "Affect" ) || !StrCmp( word, "AffectData" ) )
             {
               Affect *paf = NULL;
               int pafmod = 0;
 
               CREATE( paf, Affect, 1 );
 
-              if ( !str_cmp( word, "Affect" ) )
+              if ( !StrCmp( word, "Affect" ) )
                 {
-                  paf->type = fread_number( fp );
+                  paf->type = ReadInt( fp );
                 }
               else
                 {
-                  int sn = skill_lookup( fread_word( fp ) );
+                  int sn = skill_lookup( ReadWord( fp ) );
 
                   if ( sn < 0 )
 		    {
@@ -2198,10 +2198,10 @@ void fread_obj( Character *ch, FILE *fp, short os_type )
 		    }
                 }
 
-              paf->duration     = fread_number( fp );
-              pafmod            = fread_number( fp );
-              paf->location     = fread_number( fp );
-              paf->bitvector    = fread_number( fp );
+              paf->duration     = ReadInt( fp );
+              pafmod            = ReadInt( fp );
+              paf->location     = ReadInt( fp );
+              paf->bitvector    = ReadInt( fp );
 
               if ( paf->location == APPLY_WEAPONSPELL
                    || paf->location == APPLY_WEARSPELL
@@ -2219,33 +2219,33 @@ void fread_obj( Character *ch, FILE *fp, short os_type )
               break;
             }
 
-          KEY( "Actiondesc",    obj->action_desc,       fread_string( fp ) );
+          KEY( "Actiondesc",    obj->action_desc,       ReadStringToTilde( fp ) );
           break;
 
         case 'C':
-          KEY( "Cost",  obj->cost,              fread_number( fp ) );
-          KEY( "Count", obj->count,             fread_number( fp ) );
+          KEY( "Cost",  obj->cost,              ReadInt( fp ) );
+          KEY( "Count", obj->count,             ReadInt( fp ) );
           break;
 
         case 'D':
-          KEY( "Description",   obj->description,       fread_string( fp ) );
+          KEY( "Description",   obj->description,       ReadStringToTilde( fp ) );
           break;
 
         case 'E':
-          KEY( "ExtraFlags",    obj->extra_flags,       fread_number( fp ) );
+          KEY( "ExtraFlags",    obj->extra_flags,       ReadInt( fp ) );
 
-          if ( !str_cmp( word, "ExtraDescr" ) )
+          if ( !StrCmp( word, "ExtraDescr" ) )
             {
               ExtraDescription *ed = NULL;
 
               CREATE( ed, ExtraDescription, 1 );
-              ed->keyword = fread_string( fp );
-              ed->description = fread_string( fp );
+              ed->keyword = ReadStringToTilde( fp );
+              ed->description = ReadStringToTilde( fp );
               LINK(ed, obj->first_extradesc, obj->last_extradesc, next, prev );
               fMatch = true;
             }
 
-          if ( !str_cmp( word, "End" ) )
+          if ( !StrCmp( word, "End" ) )
             {
               if ( !fNest || !fVnum )
                 {
@@ -2268,16 +2268,16 @@ void fread_obj( Character *ch, FILE *fp, short os_type )
                   short wear_loc = obj->wear_loc;
 
                   if ( !obj->name )
-                    obj->name = str_dup( obj->pIndexData->name );
+                    obj->name = CopyString( obj->pIndexData->name );
 
                   if ( !obj->description )
-                    obj->description = str_dup( obj->pIndexData->description );
+                    obj->description = CopyString( obj->pIndexData->description );
 
                   if ( !obj->short_descr )
-                    obj->short_descr = str_dup( obj->pIndexData->short_descr );
+                    obj->short_descr = CopyString( obj->pIndexData->short_descr );
 
                   if ( !obj->action_desc )
-                    obj->action_desc = str_dup( obj->pIndexData->action_desc );
+                    obj->action_desc = CopyString( obj->pIndexData->action_desc );
 
                   LINK(obj, first_object, last_object, next, prev );
                   obj->pIndexData->count += obj->count;
@@ -2370,19 +2370,19 @@ void fread_obj( Character *ch, FILE *fp, short os_type )
           break;
 
         case 'I':
-          KEY( "ItemType",      obj->item_type,         fread_number( fp ) );
+          KEY( "ItemType",      obj->item_type,         ReadInt( fp ) );
           break;
 
         case 'L':
-          KEY( "Level", obj->level,             fread_number( fp ) );
+          KEY( "Level", obj->level,             ReadInt( fp ) );
           break;
 
         case 'N':
-          KEY( "Name",  obj->name,              fread_string( fp ) );
+          KEY( "Name",  obj->name,              ReadStringToTilde( fp ) );
 
-          if ( !str_cmp( word, "Nest" ) )
+          if ( !StrCmp( word, "Nest" ) )
             {
-              iNest = fread_number( fp );
+              iNest = ReadInt( fp );
 
               if ( iNest < 0 || iNest >= MAX_NEST )
                 {
@@ -2396,15 +2396,15 @@ void fread_obj( Character *ch, FILE *fp, short os_type )
           break;
 
         case 'R':
-          KEY( "Room", room, get_room_index(fread_number(fp)) );
+          KEY( "Room", room, get_room_index(ReadInt(fp)) );
 
         case 'S':
-          KEY( "ShortDescr",    obj->short_descr,       fread_string( fp ) );
+          KEY( "ShortDescr",    obj->short_descr,       ReadStringToTilde( fp ) );
 
-          if ( !str_cmp( word, "Spell" ) )
+          if ( !StrCmp( word, "Spell" ) )
             {
-              int iValue = fread_number( fp );
-              int sn     = skill_lookup( fread_word( fp ) );
+              int iValue = ReadInt( fp );
+              int sn     = skill_lookup( ReadWord( fp ) );
 
               if ( iValue < 0 || iValue > 5 )
 		{
@@ -2426,14 +2426,14 @@ void fread_obj( Character *ch, FILE *fp, short os_type )
           break;
 
         case 'T':
-          KEY( "Timer", obj->timer,             fread_number( fp ) );
+          KEY( "Timer", obj->timer,             ReadInt( fp ) );
           break;
 
         case 'V':
-          if ( !str_cmp( word, "Values" ) )
+          if ( !StrCmp( word, "Values" ) )
             {
               int x1 = 0, x2 = 0, x3 = 0, x4 = 0, x5 = 0, x6 = 0;
-              const char *ln = fread_line( fp );
+              const char *ln = ReadLine( fp );
 
               sscanf( ln, "%d %d %d %d %d %d", &x1, &x2, &x3, &x4, &x5, &x6 );
 
@@ -2447,9 +2447,9 @@ void fread_obj( Character *ch, FILE *fp, short os_type )
               break;
             }
 
-          if ( !str_cmp( word, "Vnum" ) )
+          if ( !StrCmp( word, "Vnum" ) )
             {
-              vnum_t vnum = fread_number( fp );
+              vnum_t vnum = ReadInt( fp );
 
               if ( ( obj->pIndexData = get_obj_index( vnum ) ) == NULL )
                 {
@@ -2472,9 +2472,9 @@ void fread_obj( Character *ch, FILE *fp, short os_type )
           break;
 
         case 'W':
-          KEY( "WearFlags",     obj->wear_flags,        fread_number( fp ) );
-          KEY( "WearLoc",       obj->wear_loc,          fread_number( fp ) );
-          KEY( "Weight",        obj->weight,            fread_number( fp ) );
+          KEY( "WearFlags",     obj->wear_flags,        ReadInt( fp ) );
+          KEY( "WearLoc",       obj->wear_loc,          ReadInt( fp ) );
+          KEY( "Weight",        obj->weight,            ReadInt( fp ) );
           break;
 
         }
@@ -2486,7 +2486,7 @@ void fread_obj( Character *ch, FILE *fp, short os_type )
 
           bug( "Fread_obj: no match." );
           bug( word );
-          fread_to_eol( fp );
+          ReadToEndOfLine( fp );
 
           if ( obj->name )
             DISPOSE( obj->name        );
@@ -2545,13 +2545,13 @@ void write_corpses( Character *ch, const char *name )
     {
       if ( corpse->pIndexData->vnum == OBJ_VNUM_CORPSE_PC
 	   && corpse->in_room != NULL && corpse->value[OVAL_CORPSE_1] != 1
-	   && !str_cmp(corpse->short_descr+14, name) )
+	   && !StrCmp(corpse->short_descr+14, name) )
 	{
 	  if ( !fp )
 	    {
 	      char buf[127];
 
-	      sprintf(buf, "%s%s", CORPSE_DIR, capitalize(name));
+	      sprintf(buf, "%s%s", CORPSE_DIR, Capitalize(name));
 
 	      if ( !(fp = fopen(buf, "w")) )
 		{
@@ -2574,7 +2574,7 @@ void write_corpses( Character *ch, const char *name )
     {
       char buf[127];
 
-      sprintf(buf, "%s%s", CORPSE_DIR, capitalize(name));
+      sprintf(buf, "%s%s", CORPSE_DIR, Capitalize(name));
       remove(buf);
     }
 }
@@ -2609,11 +2609,11 @@ void load_corpses( void )
           for ( ; ; )
             {
               const char *word;
-              char letter = fread_letter( fpArea );
+              char letter = ReadChar( fpArea );
 
               if ( letter == '*' )
                 {
-                  fread_to_eol(fpArea);
+                  ReadToEndOfLine(fpArea);
                   continue;
                 }
 
@@ -2623,17 +2623,17 @@ void load_corpses( void )
                   break;
                 }
 
-              word = fread_word( fpArea );
+              word = ReadWord( fpArea );
 
-              if ( !str_cmp(word, "CORPSE" ) )
+              if ( !StrCmp(word, "CORPSE" ) )
 		{
 		  fread_obj( NULL, fpArea, OS_CORPSE );
 		}
-              else if ( !str_cmp(word, "OBJECT" ) )
+              else if ( !StrCmp(word, "OBJECT" ) )
 		{
 		  fread_obj( NULL, fpArea, OS_CARRY );
 		}
-              else if ( !str_cmp( word, "END" ) )
+              else if ( !StrCmp( word, "END" ) )
 		{
 		  break;
 		}
@@ -2714,11 +2714,11 @@ void load_storerooms( void )
           for ( ; ; )
             {
               const char *word = NULL;
-              char letter = fread_letter( fpArea );
+              char letter = ReadChar( fpArea );
 
               if ( letter == '*' )
                 {
-                  fread_to_eol( fpArea );
+                  ReadToEndOfLine( fpArea );
                   continue;
                 }
 
@@ -2729,13 +2729,13 @@ void load_storerooms( void )
                   break;
                 }
 
-              word = fread_word( fpArea );
+              word = ReadWord( fpArea );
 
-              if ( !str_cmp( word, "OBJECT" ) ) /* Objects      */
+              if ( !StrCmp( word, "OBJECT" ) ) /* Objects      */
 		{
 		  fread_obj( supermob, fpArea, OS_CARRY );
 		}
-              else if ( !str_cmp( word, "END"    ) )       /* Done         */
+              else if ( !StrCmp( word, "END"    ) )       /* Done         */
 		{
                   break;
 		}
@@ -2838,11 +2838,11 @@ void load_vendors( void )
           for ( ; ; )
             {
               const char *word = NULL;
-	      char letter = fread_letter( fpArea );
+	      char letter = ReadChar( fpArea );
 
               if ( letter == '*' )
                 {
-                  fread_to_eol(fpArea);
+                  ReadToEndOfLine(fpArea);
                   continue;
                 }
 
@@ -2852,17 +2852,17 @@ void load_vendors( void )
                   break;
                 }
 
-              word = fread_word( fpArea );
+              word = ReadWord( fpArea );
 
-              if ( !str_cmp(word, "VENDOR" ) )
+              if ( !StrCmp(word, "VENDOR" ) )
 		{
 		  mob = ReadVendor( fpArea );
 		}
-              else if ( !str_cmp(word, "OBJECT" ) )
+              else if ( !StrCmp(word, "OBJECT" ) )
 		{
 		  fread_obj( mob, fpArea, OS_CARRY );
 		}
-              else if ( !str_cmp( word, "END" ) )
+              else if ( !StrCmp( word, "END" ) )
 		{
 		  break;
 		}
@@ -2900,22 +2900,22 @@ void fwrite_mobile( FILE *fp, Character *mob )
 	       : mob->in_room->vnum );
     }
 
-  if ( str_cmp( mob->name, mob->pIndexData->player_name) )
+  if ( StrCmp( mob->name, mob->pIndexData->player_name) )
     {
       fprintf( fp, "Name     %s~\n", mob->name );
     }
 
-  if ( str_cmp( mob->short_descr, mob->pIndexData->short_descr) )
+  if ( StrCmp( mob->short_descr, mob->pIndexData->short_descr) )
     {
       fprintf( fp, "Short %s~\n", mob->short_descr );
     }
 
-  if ( str_cmp( mob->long_descr, mob->pIndexData->long_descr) )
+  if ( StrCmp( mob->long_descr, mob->pIndexData->long_descr) )
     {
       fprintf( fp, "Long  %s~\n", mob->long_descr );
     }
 
-  if ( str_cmp( mob->description, mob->pIndexData->description) )
+  if ( StrCmp( mob->description, mob->pIndexData->description) )
     {
       fprintf( fp, "Description %s~\n", mob->description );
     }
@@ -2943,11 +2943,11 @@ Character *fread_mobile( FILE *fp )
   bool fMatch = false;
   int inroom = 0;
   Room *pRoomIndex = NULL;
-  const char *word = feof( fp ) ? "EndMobile" : fread_word( fp );
+  const char *word = feof( fp ) ? "EndMobile" : ReadWord( fp );
 
-  if ( !str_cmp(word, "Vnum") )
+  if ( !StrCmp(word, "Vnum") )
     {
-      int vnum = fread_number( fp );
+      int vnum = ReadInt( fp );
 
       mob = create_mobile( get_mob_index(vnum) );
 
@@ -2955,11 +2955,11 @@ Character *fread_mobile( FILE *fp )
         {
           for ( ; ; )
 	    {
-	      word = feof( fp ) ? "EndMobile" : fread_word( fp );
+	      word = feof( fp ) ? "EndMobile" : ReadWord( fp );
 	      /* So we don't get so many bug messages when something messes up
 	       * --Shaddai
 	       */
-	      if ( !str_cmp( word, "EndMobile" ) )
+	      if ( !StrCmp( word, "EndMobile" ) )
 		break;
 	    }
 
@@ -2971,11 +2971,11 @@ Character *fread_mobile( FILE *fp )
     {
       for ( ; ; )
 	{
-	  word = feof( fp ) ? "EndMobile" : fread_word( fp );
+	  word = feof( fp ) ? "EndMobile" : ReadWord( fp );
 	  /* So we don't get so many bug messages when something messes up
 	   * --Shaddai
 	   */
-	  if ( !str_cmp( word, "EndMobile" ) )
+	  if ( !StrCmp( word, "EndMobile" ) )
 	    {
 	      break;
 	    }
@@ -2988,25 +2988,25 @@ Character *fread_mobile( FILE *fp )
 
   for ( ; ;)
     {
-      word = feof( fp ) ? "EndMobile" : fread_word( fp );
+      word = feof( fp ) ? "EndMobile" : ReadWord( fp );
       fMatch = false;
 
       switch ( CharToUppercase(word[0]) )
 	{
 	case '*':
 	  fMatch = true;
-	  fread_to_eol( fp );
+	  ReadToEndOfLine( fp );
 	  break;
 
 	case '#':
-	  if ( !str_cmp( word, "#OBJECT" ) )
+	  if ( !StrCmp( word, "#OBJECT" ) )
 	    fread_obj ( mob, fp, OS_CARRY );
 	case 'D':
-	  KEY( "Description", mob->description, fread_string(fp));
+	  KEY( "Description", mob->description, ReadStringToTilde(fp));
 	  break;
 
 	case 'E':
-	  if ( !str_cmp( word, "EndMobile" ) )
+	  if ( !StrCmp( word, "EndMobile" ) )
 	    {
 	      if ( inroom == 0 )
 		{
@@ -3026,27 +3026,27 @@ Character *fread_mobile( FILE *fp )
 	  break;
 
 	case 'F':
-	  KEY( "Flags", mob->act, fread_number( fp ));
+	  KEY( "Flags", mob->act, ReadInt( fp ));
 	  break;
 
 	case 'L':
-	  KEY( "Long", mob->long_descr, fread_string(fp ) );
+	  KEY( "Long", mob->long_descr, ReadStringToTilde(fp ) );
 	  break;
 
 	case 'N':
-	  KEY( "Name", mob->name, fread_string( fp ) );
+	  KEY( "Name", mob->name, ReadStringToTilde( fp ) );
 	  break;
 
 	case 'P':
-	  KEY( "Position", mob->position, fread_number( fp ) );
+	  KEY( "Position", mob->position, ReadInt( fp ) );
 	  break;
 
 	case 'R':
-	  KEY( "Room",  inroom, fread_number(fp));
+	  KEY( "Room",  inroom, ReadInt(fp));
 	  break;
 
 	case 'S':
-	  KEY( "Short", mob->short_descr, fread_string(fp));
+	  KEY( "Short", mob->short_descr, ReadStringToTilde(fp));
 	  break;
 	}
 

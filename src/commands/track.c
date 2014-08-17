@@ -15,7 +15,7 @@ void do_track( Character *ch, char *argument )
       return;
     }
 
-  one_argument(argument, arg);
+  OneArgument(argument, arg);
   if ( arg[0]=='\0' ) {
     send_to_char("Whom are you trying to track?\r\n", ch);
     return;

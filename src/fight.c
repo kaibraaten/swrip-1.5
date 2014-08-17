@@ -116,7 +116,7 @@ void start_hunting( Character *ch, Character *victim )
     stop_hunting( ch );
 
   CREATE( ch->hhf.hunting, HuntHateFear, 1 );
-  ch->hhf.hunting->name = str_dup( victim->name );
+  ch->hhf.hunting->name = CopyString( victim->name );
   ch->hhf.hunting->who  = victim;
 }
 
@@ -126,7 +126,7 @@ void start_hating( Character *ch, Character *victim )
     stop_hating( ch );
 
   CREATE( ch->hhf.hating, HuntHateFear, 1 );
-  ch->hhf.hating->name = str_dup( victim->name );
+  ch->hhf.hating->name = CopyString( victim->name );
   ch->hhf.hating->who  = victim;
 }
 
@@ -136,7 +136,7 @@ void start_fearing( Character *ch, Character *victim )
     stop_fearing( ch );
 
   CREATE( ch->hhf.fearing, HuntHateFear, 1 );
-  ch->hhf.fearing->name = str_dup( victim->name );
+  ch->hhf.fearing->name = CopyString( victim->name );
   ch->hhf.fearing->who  = victim;
 }
 
@@ -330,7 +330,7 @@ void violence_update( void )
                   if ( char_died(ch) )
                     break;
                   if ( rch->pIndexData == ch->pIndexData
-                       ||   number_bits( 3 ) == 0 )
+                       ||   NumberBits( 3 ) == 0 )
                     {
                       Character *vch;
                       Character *target;
@@ -343,7 +343,7 @@ void violence_update( void )
 			{
 			  if ( CanSeeCharacter( rch, vch )
 			       &&   is_same_group( vch, victim )
-			       &&   number_range( 0, number ) == 0 )
+			       &&   GetRandomNumberFromRange( 0, number ) == 0 )
 			    {
 			      target = vch;
 			      number++;
@@ -388,7 +388,7 @@ ch_ret multi_hit( Character *ch, Character *victim, int dt )
   /* -- Altrag */
   hit_chance = IsNpc(ch) ? 100 : (ch->pcdata->learned[gsn_berserk]*5/2);
 
-  if ( IsAffectedBy(ch, AFF_BERSERK) && number_percent() < hit_chance )
+  if ( IsAffectedBy(ch, AFF_BERSERK) && GetRandomPercent() < hit_chance )
     if ( (retcode = one_hit( ch, victim, dt )) != rNONE ||
          who_fighting( ch ) != victim )
       return retcode;
@@ -397,7 +397,7 @@ ch_ret multi_hit( Character *ch, Character *victim, int dt )
     {
       dual_bonus = IsNpc(ch) ? (GetAbilityLevel( ch, COMBAT_ABILITY ) / 10) : (ch->pcdata->learned[gsn_dual_wield] / 10);
       hit_chance = IsNpc(ch) ? ch->top_level : ch->pcdata->learned[gsn_dual_wield];
-      if ( number_percent( ) < hit_chance )
+      if ( GetRandomPercent( ) < hit_chance )
         {
           learn_from_success( ch, gsn_dual_wield );
           retcode = one_hit( ch, victim, dt );
@@ -429,7 +429,7 @@ ch_ret multi_hit( Character *ch, Character *victim, int dt )
 
   hit_chance = IsNpc(ch) ? ch->top_level
     : (int) ((ch->pcdata->learned[gsn_second_attack]+dual_bonus)/1.5);
-  if ( number_percent( ) < hit_chance )
+  if ( GetRandomPercent( ) < hit_chance )
     {
       learn_from_success( ch, gsn_second_attack );
       retcode = one_hit( ch, victim, dt );
@@ -441,7 +441,7 @@ ch_ret multi_hit( Character *ch, Character *victim, int dt )
 
   hit_chance = IsNpc(ch) ? ch->top_level
     : (int) ((ch->pcdata->learned[gsn_third_attack]+(dual_bonus*1.5))/2);
-  if ( number_percent( ) < hit_chance )
+  if ( GetRandomPercent( ) < hit_chance )
     {
       learn_from_success( ch, gsn_third_attack );
       retcode = one_hit( ch, victim, dt );
@@ -453,7 +453,7 @@ ch_ret multi_hit( Character *ch, Character *victim, int dt )
 
   hit_chance = IsNpc(ch) ? ch->top_level
     : (int) ((ch->pcdata->learned[gsn_fourth_attack]+(dual_bonus*1.5))/2);
-  if ( number_percent( ) < hit_chance )
+  if ( GetRandomPercent( ) < hit_chance )
     {
       learn_from_success( ch, gsn_fourth_attack );
       retcode = one_hit( ch, victim, dt );
@@ -465,7 +465,7 @@ ch_ret multi_hit( Character *ch, Character *victim, int dt )
 
   hit_chance = IsNpc(ch) ? ch->top_level
     : (int) ((ch->pcdata->learned[gsn_fifth_attack]+(dual_bonus*1.5))/2);
-  if ( number_percent( ) < hit_chance )
+  if ( GetRandomPercent( ) < hit_chance )
     {
       learn_from_success( ch, gsn_fifth_attack );
       retcode = one_hit( ch, victim, dt );
@@ -478,7 +478,7 @@ ch_ret multi_hit( Character *ch, Character *victim, int dt )
   retcode = rNONE;
 
   hit_chance = IsNpc(ch) ? (int) (ch->top_level / 4) : 0;
-  if ( number_percent( ) < hit_chance )
+  if ( GetRandomPercent( ) < hit_chance )
     retcode = one_hit( ch, victim, dt );
 
   if ( retcode == rNONE )
@@ -589,7 +589,7 @@ short off_shld_lvl( Character *ch, Character *victim )
   if ( !IsNpc(ch) )            /* players get much less effect */
     {
       lvl = umax( 1, (GetAbilityLevel( ch, FORCE_ABILITY ) ) );
-      if ( number_percent() + (GetAbilityLevel( victim, COMBAT_ABILITY ) - lvl) < 35 )
+      if ( GetRandomPercent() + (GetAbilityLevel( victim, COMBAT_ABILITY ) - lvl) < 35 )
         return lvl;
       else
         return 0;
@@ -597,7 +597,7 @@ short off_shld_lvl( Character *ch, Character *victim )
   else
     {
       lvl = ch->top_level;
-      if ( number_percent() + (GetAbilityLevel( victim, COMBAT_ABILITY ) - lvl) < 70 )
+      if ( GetRandomPercent() + (GetAbilityLevel( victim, COMBAT_ABILITY ) - lvl) < 70 )
         return lvl;
       else
         return 0;
@@ -660,7 +660,7 @@ ch_ret one_hit( Character *ch, Character *victim, int dt )
       cnt = 0;
       for ( ;; )
         {
-          x = number_range( 0, 6 );
+          x = GetRandomNumberFromRange( 0, 6 );
           attacktype = 1 << x;
           if ( IsBitSet( ch->attacks, attacktype ) )
             break;
@@ -673,7 +673,7 @@ ch_ret one_hit( Character *ch, Character *victim, int dt )
       if ( attacktype == ATCK_BACKSTAB )
         attacktype = 0;
 
-      if ( wield && number_percent( ) > 25 )
+      if ( wield && GetRandomPercent( ) > 25 )
         attacktype = 0;
 
       switch ( attacktype )
@@ -720,7 +720,7 @@ ch_ret one_hit( Character *ch, Character *victim, int dt )
    */
   thac0_00 = 20;
   thac0_32 = 10;
-  thac0     = interpolate( GetAbilityLevel( ch, COMBAT_ABILITY ), thac0_00, thac0_32 ) - GetHitRoll(ch);
+  thac0     = Interpolate( GetAbilityLevel( ch, COMBAT_ABILITY ), thac0_00, thac0_32 ) - GetHitRoll(ch);
   victim_ac = (int) (GetArmorClass(victim) / 10);
 
   /* if you can't see what's coming... */
@@ -741,7 +741,7 @@ ch_ret one_hit( Character *ch, Character *victim, int dt )
   /*
    * The moment of excitement!
    */
-  diceroll = number_range( 1,20 );
+  diceroll = GetRandomNumberFromRange( 1,20 );
 
   if ( diceroll == 1
        || ( diceroll < 20 && diceroll < thac0 - victim_ac ) )
@@ -760,11 +760,11 @@ ch_ret one_hit( Character *ch, Character *victim, int dt )
 
   if ( !wield )       /* dice formula fixed by Thoric */
     {
-      dam = number_range( ch->barenumdie, ch->baresizedie * ch->barenumdie );
+      dam = GetRandomNumberFromRange( ch->barenumdie, ch->baresizedie * ch->barenumdie );
     }
   else
     {
-      dam = number_range( wield->value[OVAL_WEAPON_NUM_DAM_DIE],
+      dam = GetRandomNumberFromRange( wield->value[OVAL_WEAPON_NUM_DAM_DIE],
 			  wield->value[OVAL_WEAPON_SIZE_DAM_DIE] );
     }
 
@@ -902,7 +902,7 @@ ch_ret one_hit( Character *ch, Character *victim, int dt )
 
           hit_chance = urange( 5, hit_chance, 95 );
 
-          if ( !fail && number_percent() < hit_chance )
+          if ( !fail && GetRandomPercent() < hit_chance )
             {
               SetWaitState( victim, PULSE_VIOLENCE );
               act( AT_BLUE, "Blue rings of energy from $N's blaster knock you down leaving you stunned!", victim, NULL, ch, TO_CHAR );
@@ -1243,7 +1243,7 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
               if ( victim->hhf.hunting->who != ch )
                 {
                   DISPOSE( victim->hhf.hunting->name );
-                  victim->hhf.hunting->name = str_dup( ch->name );
+                  victim->hhf.hunting->name = CopyString( ch->name );
                   victim->hhf.hunting->who  = ch;
                 }
             }
@@ -1256,7 +1256,7 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
           if ( victim->hhf.hating->who != ch )
             {
               DISPOSE( victim->hhf.hating->name );
-              victim->hhf.hating->name = str_dup( ch->name );
+              victim->hhf.hating->name = CopyString( ch->name );
               victim->hhf.hating->who  = ch;
             }
         }
@@ -1295,7 +1295,7 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
                &&   IsAffectedBy(victim, AFF_CHARM)
                &&   victim->master
                &&   victim->master->in_room == ch->in_room
-               &&   number_bits( 3 ) == 0 )
+               &&   NumberBits( 3 ) == 0 )
             {
               stop_fighting( ch, false );
               retcode = multi_hit( ch, victim->master, TYPE_UNDEFINED );
@@ -1344,12 +1344,12 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
         {
           if ( IsNpc(ch)
                &&   IsBitSet( ch->attacks, DFND_DISARM )
-               &&   number_percent( ) < GetAbilityLevel( ch, COMBAT_ABILITY ) / 2 )
+               &&   GetRandomPercent( ) < GetAbilityLevel( ch, COMBAT_ABILITY ) / 2 )
             disarm( ch, victim );
 
           if ( IsNpc(ch)
                &&   IsBitSet( ch->attacks, ATCK_TRIP )
-               &&   number_percent( ) < GetAbilityLevel( ch, COMBAT_ABILITY ) )
+               &&   GetRandomPercent( ) < GetAbilityLevel( ch, COMBAT_ABILITY ) )
             trip( ch, victim );
 
           if ( check_parry( ch, victim ) )
@@ -1392,7 +1392,7 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
   if (dam > 10 && dt != TYPE_UNDEFINED)
     {
       /* get a random body eq part */
-      dameq  = number_range(WEAR_LIGHT, WEAR_EYES);
+      dameq  = GetRandomNumberFromRange(WEAR_LIGHT, WEAR_EYES);
       damobj = GetEquipmentOnCharacter(victim, dameq);
       if ( damobj )
         {
@@ -1527,7 +1527,7 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
       if ( dam > victim->max_hit / 4 )
         {
           act( AT_HURT, "That really did HURT!", victim, 0, 0, TO_CHAR );
-          if ( number_bits(3) == 0 )
+          if ( NumberBits(3) == 0 )
             WorsenMentalState( ch, 1 );
         }
       if ( victim->hit < victim->max_hit / 4 )
@@ -1535,7 +1535,7 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
         {
           act( AT_DANGER, "You wish that your wounds would stop BLEEDING so much!",
                victim, 0, 0, TO_CHAR );
-          if ( number_bits(2) == 0 )
+          if ( NumberBits(2) == 0 )
             WorsenMentalState( ch, 1 );
         }
       break;
@@ -1704,7 +1704,7 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
    */
   if ( !npcvict && !victim->desc && !victim->switched )
     {
-      if ( number_range( 0, victim->wait ) == 0)
+      if ( GetRandomNumberFromRange( 0, victim->wait ) == 0)
         {
           do_flee( victim, "" );
           do_flee( victim, "" );
@@ -1722,7 +1722,7 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
    */
   if ( npcvict && dam > 0 )
     {
-      if ( ( IsBitSet(victim->act, ACT_WIMPY) && number_bits( 1 ) == 0
+      if ( ( IsBitSet(victim->act, ACT_WIMPY) && NumberBits( 1 ) == 0
              &&   victim->hit < victim->max_hit / 2 )
            ||   ( IsAffectedBy(victim, AFF_CHARM) && victim->master
                   &&     victim->master->in_room != victim->in_room ) )
@@ -2123,14 +2123,14 @@ void raw_kill( Character *killer, Character *victim )
   /* swreality chnages begin here */
   for ( ship = first_ship; ship; ship = ship->next )
     {
-      if ( !str_cmp( ship->owner, victim->name ) )
+      if ( !StrCmp( ship->owner, victim->name ) )
         {
           DISPOSE( ship->owner );
-          ship->owner = str_dup( "" );
+          ship->owner = CopyString( "" );
           DISPOSE( ship->pilot );
-          ship->pilot = str_dup( "" );
+          ship->pilot = CopyString( "" );
           DISPOSE( ship->copilot );
-          ship->copilot = str_dup( "" );
+          ship->copilot = CopyString( "" );
 
           SaveShip( ship );
         }
@@ -2141,7 +2141,7 @@ void raw_kill( Character *killer, Character *victim )
       Room *room = victim->plr_home;
 
       DISPOSE( room->name );
-      room->name = str_dup( "An Empty Apartment" );
+      room->name = CopyString( "An Empty Apartment" );
 
       RemoveBit( room->room_flags , ROOM_PLR_HOME );
       SetBit( room->room_flags , ROOM_EMPTY_HOME );
@@ -2151,42 +2151,42 @@ void raw_kill( Character *killer, Character *victim )
 
   if ( victim->pcdata && victim->pcdata->clan )
     {
-      if ( !str_cmp( victim->name, victim->pcdata->clan->leadership.leader ) )
+      if ( !StrCmp( victim->name, victim->pcdata->clan->leadership.leader ) )
         {
           DISPOSE( victim->pcdata->clan->leadership.leader );
           if ( victim->pcdata->clan->leadership.number1 )
             {
-              victim->pcdata->clan->leadership.leader = str_dup( victim->pcdata->clan->leadership.number1 );
+              victim->pcdata->clan->leadership.leader = CopyString( victim->pcdata->clan->leadership.number1 );
               DISPOSE( victim->pcdata->clan->leadership.number1 );
-              victim->pcdata->clan->leadership.number1 = str_dup( "" );
+              victim->pcdata->clan->leadership.number1 = CopyString( "" );
             }
           else if ( victim->pcdata->clan->leadership.number2 )
             {
-              victim->pcdata->clan->leadership.leader = str_dup( victim->pcdata->clan->leadership.number2 );
+              victim->pcdata->clan->leadership.leader = CopyString( victim->pcdata->clan->leadership.number2 );
               DISPOSE( victim->pcdata->clan->leadership.number2 );
-              victim->pcdata->clan->leadership.number2 = str_dup( "" );
+              victim->pcdata->clan->leadership.number2 = CopyString( "" );
             }
           else
-            victim->pcdata->clan->leadership.leader = str_dup( "" );
+            victim->pcdata->clan->leadership.leader = CopyString( "" );
         }
 
-      if ( !str_cmp( victim->name, victim->pcdata->clan->leadership.number1 ) )
+      if ( !StrCmp( victim->name, victim->pcdata->clan->leadership.number1 ) )
         {
           DISPOSE( victim->pcdata->clan->leadership.number1 );
           if ( victim->pcdata->clan->leadership.number2 )
             {
-              victim->pcdata->clan->leadership.number1 = str_dup( victim->pcdata->clan->leadership.number2 );
+              victim->pcdata->clan->leadership.number1 = CopyString( victim->pcdata->clan->leadership.number2 );
               DISPOSE( victim->pcdata->clan->leadership.number2 );
-              victim->pcdata->clan->leadership.number2 = str_dup( "" );
+              victim->pcdata->clan->leadership.number2 = CopyString( "" );
             }
           else
-            victim->pcdata->clan->leadership.number1 = str_dup( "" );
+            victim->pcdata->clan->leadership.number1 = CopyString( "" );
         }
 
-      if ( !str_cmp( victim->name, victim->pcdata->clan->leadership.number2 ) )
+      if ( !StrCmp( victim->name, victim->pcdata->clan->leadership.number2 ) )
         {
           DISPOSE( victim->pcdata->clan->leadership.number2 );
-          victim->pcdata->clan->leadership.number1 = str_dup( "" );
+          victim->pcdata->clan->leadership.number1 = CopyString( "" );
         }
 
       victim->pcdata->clan->members--;
@@ -2217,20 +2217,20 @@ void raw_kill( Character *killer, Character *victim )
     }
 
   sprintf( buf, "%s%c/%s", PLAYER_DIR, tolower(arg[0]),
-           capitalize( arg ) );
+           Capitalize( arg ) );
   sprintf( buf2, "%s%c/%s", BACKUP_DIR, tolower(arg[0]),
-           capitalize( arg ) );
+           Capitalize( arg ) );
 
   rename( buf, buf2 );
 
   sprintf( buf, "%s%c/%s.clone", PLAYER_DIR, tolower(arg[0]),
-           capitalize( arg ) );
+           Capitalize( arg ) );
   sprintf( buf2, "%s%c/%s", PLAYER_DIR, tolower(arg[0]),
-           capitalize( arg ) );
+           Capitalize( arg ) );
 
   rename( buf, buf2 );
 
-  sprintf( buf, "%s%s", GOD_DIR, capitalize(victim->name) );
+  sprintf( buf, "%s%s", GOD_DIR, Capitalize(victim->name) );
 
   if ( !remove( buf ) )
     {
@@ -2245,7 +2245,7 @@ void raw_kill( Character *killer, Character *victim )
     }
 
   sprintf( buf, "%s%c/%s.home", PLAYER_DIR, tolower(arg[0]),
-           capitalize( arg ) );
+           Capitalize( arg ) );
   remove( buf );
 }
 
@@ -2293,7 +2293,7 @@ void group_gain( Character *ch, Character *victim )
       gch->alignment = align_compute( gch, victim );
 
       if ( !IsNpc(gch) && IsNpc(victim) && gch->pcdata && gch->pcdata->clan
-           && !str_cmp ( gch->pcdata->clan->name , victim->mob_clan ) )
+           && !StrCmp ( gch->pcdata->clan->name , victim->mob_clan ) )
         {
           xp = 0;
           sprintf( buf, "You receive no experience for killing your organizations resources.\r\n");
@@ -2366,7 +2366,7 @@ int xp_compute( const Character *gch, const Character *victim )
     if ( gch->alignment > 300 && align < 250 )
       xp = (xp*3) >> 2;
 
-  xp = number_range( (xp*3) >> 2, (xp*5) >> 2 );
+  xp = GetRandomNumberFromRange( (xp*3) >> 2, (xp*5) >> 2 );
 
   /* reduce exp for killing the same mob repeatedly             -Thoric */
   if ( !IsNpc( gch ) && IsNpc( victim ) )
@@ -2540,7 +2540,7 @@ void dam_message( Character *ch, Character *victim, int dam, int dt )
 
 bool in_arena( Character *ch )
 {
-  if ( !str_cmp( ch->in_room->area->filename, "arena.are" ) )
+  if ( !StrCmp( ch->in_room->area->filename, "arena.are" ) )
     return true;
 
   if ( ch->in_room->vnum < 29 || ch->in_room->vnum > 43 )
@@ -2567,7 +2567,7 @@ bool get_cover( Character *ch )
   for ( attempt = 0; attempt < 10; attempt++ )
     {
 
-      door = number_door( );
+      door = GetRandomDoor( );
       if ( ( pexit = get_exit(was_in, door) ) == NULL
            ||   !pexit->to_room
            || ( IsBitSet(pexit->exit_info, EX_CLOSED)

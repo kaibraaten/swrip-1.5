@@ -28,7 +28,7 @@ void do_guard( Character *ch, char *argument )
 
   the_chance = IsNpc(ch) ? ch->top_level
     : (int)  (ch->pcdata->learned[gsn_shipsystems]) ;
-  if ( number_percent( ) > the_chance )
+  if ( GetRandomPercent( ) > the_chance )
     {
       send_to_char("&RYou fail to work the controls properly.\r\n",ch);
       learn_from_failure( ch, gsn_shipsystems );
@@ -38,14 +38,14 @@ void do_guard( Character *ch, char *argument )
   act( AT_PLAIN, "$n flips a switch on the control panel.", ch,
        NULL, argument , TO_ROOM );
 
-  if ( !str_cmp(argument,"on" ) )
+  if ( !StrCmp(argument,"on" ) )
     {
       ship->guard=true;
       send_to_char( "&GYou activate the guard system.\r\n", ch);
       EchoToCockpit( AT_YELLOW , ship , "Guard System: ACTIVATED.");
       ship->currspeed = 0;
     }
-  else if ( !str_cmp(argument,"off" ) )
+  else if ( !StrCmp(argument,"off" ) )
     {
       ship->guard=false;
       send_to_char( "&GYou shutdown the guard system.\r\n", ch);

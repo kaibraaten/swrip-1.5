@@ -16,7 +16,7 @@ void do_hail( Character *ch , char *argument )
   Ship *ship;
   Ship *target = NULL;
 
-  argument = one_argument( argument, arg );
+  argument = OneArgument( argument, arg );
   strcpy ( arg2, argument);
 
   if ( arg[0] != '\0' )
@@ -127,7 +127,7 @@ void do_hail( Character *ch , char *argument )
       return;
     }
 
-  if ( gold && number_range( 1, 10 ) == 1 )
+  if ( gold && GetRandomNumberFromRange( 1, 10 ) == 1 )
     steal = true;
 
   vnum = ch->in_room->vnum;

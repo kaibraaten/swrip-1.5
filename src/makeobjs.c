@@ -33,7 +33,7 @@ void make_fire(Room *in_room, short timer)
 {
   OBJ_DATA *fire = create_object( get_obj_index( OBJ_VNUM_FIRE ), 0 );
 
-  fire->timer = number_fuzzy(timer);
+  fire->timer = NumberFuzzy(timer);
   obj_to_room( fire, in_room );
 }
 
@@ -65,24 +65,24 @@ void make_scraps( OBJ_DATA *obj )
   Character *ch = NULL;
 
   separate_obj( obj );
-  scraps->timer = number_range( 5, 15 );
+  scraps->timer = GetRandomNumberFromRange( 5, 15 );
 
   /* don't make scraps of scraps of scraps of ... */
   if ( obj->pIndexData->vnum == OBJ_VNUM_SCRAPS )
     {
       DISPOSE( scraps->short_descr );
-      scraps->short_descr = str_dup( "some debris" );
+      scraps->short_descr = CopyString( "some debris" );
       DISPOSE( scraps->description );
-      scraps->description = str_dup( "Bits of debris lie on the ground here." );
+      scraps->description = CopyString( "Bits of debris lie on the ground here." );
     }
   else
     {
       sprintf( buf, scraps->short_descr, obj->short_descr );
       DISPOSE( scraps->short_descr );
-      scraps->short_descr = str_dup( buf );
+      scraps->short_descr = CopyString( buf );
       sprintf( buf, scraps->description, obj->short_descr );
       DISPOSE( scraps->description );
-      scraps->description = str_dup( buf );
+      scraps->description = CopyString( buf );
     }
 
   if ( obj->carried_by )
@@ -202,15 +202,15 @@ void make_corpse( Character *ch )
   /* Added corpse name - make locate easier , other skills */
   sprintf( buf, "corpse %s", name );
   DISPOSE( corpse->name );
-  corpse->name = str_dup( buf );
+  corpse->name = CopyString( buf );
 
   sprintf( buf, corpse->short_descr, name );
   DISPOSE( corpse->short_descr );
-  corpse->short_descr = str_dup( buf );
+  corpse->short_descr = CopyString( buf );
 
   sprintf( buf, corpse->description, name );
   DISPOSE( corpse->description );
-  corpse->description = str_dup( buf );
+  corpse->description = CopyString( buf );
 
   for ( obj = ch->first_carrying; obj; obj = obj_next )
     {
@@ -234,7 +234,7 @@ void make_corpse( Character *ch )
 void make_bloodstain( Character *ch )
 {
   OBJ_DATA *obj = create_object( get_obj_index( OBJ_VNUM_BLOODSTAIN ), 0 );
-  obj->timer = number_range( 1, 2 );
+  obj->timer = GetRandomNumberFromRange( 1, 2 );
   obj_to_room( obj, ch->in_room );
 }
 
@@ -261,7 +261,7 @@ OBJ_DATA *create_money( int amount )
       obj = create_object( get_obj_index( OBJ_VNUM_MONEY_SOME ), 0 );
       sprintf( buf, obj->short_descr, amount );
       DISPOSE( obj->short_descr );
-      obj->short_descr = str_dup( buf );
+      obj->short_descr = CopyString( buf );
       obj->value[OVAL_MONEY_AMOUNT]      = amount;
     }
 

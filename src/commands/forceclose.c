@@ -7,7 +7,7 @@ void do_forceclose( Character *ch, char *argument )
   Descriptor *d;
   int desc;
 
-  one_argument( argument, arg );
+  OneArgument( argument, arg );
 
   if ( arg[0] == '\0' )
     {

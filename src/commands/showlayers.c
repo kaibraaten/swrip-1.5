@@ -19,7 +19,7 @@ void do_showlayers( Character *ch, char *argument )
   int cou = 0;                                        /* display counter */
   int display_limit;                                  /* display limit */
 
-  argument = one_argument (argument, arg1);
+  argument = OneArgument (argument, arg1);
 
   if ( !*arg1 )
     {

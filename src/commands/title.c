@@ -20,7 +20,7 @@ void do_title( Character *ch, char *argument )
       return;
     }
 
-  if ((GetTrustLevel(ch) <= LEVEL_IMMORTAL) && (!nifty_is_name(ch->name, argument)))
+  if ((GetTrustLevel(ch) <= LEVEL_IMMORTAL) && (!NiftyIsName(ch->name, argument)))
     {
       send_to_char("You must include your name somewhere in your title!", ch);
       return;
@@ -32,7 +32,7 @@ void do_title( Character *ch, char *argument )
       return;
     }
 
-  smash_tilde( argument );
+  SmashTilde( argument );
   set_title( ch, argument );
   send_to_char( "Ok.\r\n", ch );
 }

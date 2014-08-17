@@ -6,7 +6,7 @@ void do_makeshuttle (Character * ch, char * argument)
   Shuttle * shuttle;
   char arg[MAX_INPUT_LENGTH];
 
-  argument = one_argument( argument, arg );
+  argument = OneArgument( argument, arg );
 
   if ( !argument || arg[0] == '\0' || argument[0] == '\0' )
     {

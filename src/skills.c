@@ -59,7 +59,7 @@ bool check_skill( Character *ch, const char *command, char *argument )
       sn = (first + top) >> 1;
 
       if ( CharToLowercase(command[0]) == CharToLowercase(skill_table[sn]->name[0])
-           &&  !str_prefix(command, skill_table[sn]->name)
+           &&  !StringPrefix(command, skill_table[sn]->name)
            &&  (skill_table[sn]->skill_fun || skill_table[sn]->spell_fun != spell_null)
            &&  (IsNpc(ch)
                 ||  ( ch->pcdata->learned[sn] > 0 )) )
@@ -149,7 +149,7 @@ bool check_skill( Character *ch, const char *command, char *argument )
           if ( argument[0] == '\0'
                && (victim=who_fighting(ch)) == NULL )
             {
-              ch_printf( ch, "%s who?\r\n", capitalize( skill_table[sn]->name ) );
+              ch_printf( ch, "%s who?\r\n", Capitalize( skill_table[sn]->name ) );
               return true;
             }
           else  if ( argument[0] != '\0'
@@ -202,7 +202,7 @@ bool check_skill( Character *ch, const char *command, char *argument )
       SetWaitState( ch, skill_table[sn]->beats );
 
       /* check for failure */
-      if ( (number_percent( ) + skill_table[sn]->difficulty * 5)
+      if ( (GetRandomPercent( ) + skill_table[sn]->difficulty * 5)
            > (IsNpc(ch) ? 75 : ch->pcdata->learned[sn]) )
         {
           failed_casting( skill_table[sn], ch, vo, obj );
@@ -221,9 +221,9 @@ bool check_skill( Character *ch, const char *command, char *argument )
           ch->mana -= mana;
         }
 
-      start_timer(&time_used);
+      StartTimer(&time_used);
       retcode = skill_table[sn]->spell_fun( sn, ch->top_level, ch, vo );
-      end_timer(&time_used);
+      StopTimer(&time_used);
       update_userec(&time_used, &skill_table[sn]->userec);
 
       if ( retcode == rCHAR_DIED || retcode == rERROR )
@@ -275,9 +275,9 @@ bool check_skill( Character *ch, const char *command, char *argument )
 
   ch->prev_cmd = ch->last_cmd;    /* haus, for automapping */
   ch->last_cmd = skill_table[sn]->skill_fun;
-  start_timer(&time_used);
+  StartTimer(&time_used);
   skill_table[sn]->skill_fun( ch, argument );
-  end_timer(&time_used);
+  StopTimer(&time_used);
   update_userec(&time_used, &skill_table[sn]->userec);
 
   return true;
@@ -328,7 +328,7 @@ void learn_from_success( Character *ch, int sn )
   if ( ch->pcdata->learned[sn] < 100 )
     {
       learn_chance = ch->pcdata->learned[sn] + (5 * skill_table[sn]->difficulty);
-      percent = number_percent();
+      percent = GetRandomPercent();
 
       if ( percent >= learn_chance )
 	{
@@ -389,20 +389,20 @@ void disarm( Character *ch, Character *victim )
     }
 
   if ( ( tmpobj = GetEquipmentOnCharacter( victim, WEAR_DUAL_WIELD ) ) != NULL
-       && number_bits( 1 ) == 0 )
+       && NumberBits( 1 ) == 0 )
     {
       obj = tmpobj;
     }
 
   if ( GetEquipmentOnCharacter( ch, WEAR_WIELD ) == NULL
-       && number_bits( 1 ) == 0 )
+       && NumberBits( 1 ) == 0 )
     {
       learn_from_failure( ch, gsn_disarm );
       return;
     }
 
   if ( IsNpc( ch ) && !CanSeeObject( ch, obj )
-       && number_bits( 1 ) == 0)
+       && NumberBits( 1 ) == 0)
     {
       learn_from_failure( ch, gsn_disarm );
       return;
@@ -540,7 +540,7 @@ bool check_parry( Character *ch, Character *victim )
 
   chances = urange ( 10 , chances , 90 );
 
-  if ( number_range( 1, 100 ) > chances )
+  if ( GetRandomNumberFromRange( 1, 100 ) > chances )
     {
       learn_from_failure( victim, gsn_parry );
       return false;
@@ -590,7 +590,7 @@ bool check_dodge( Character *ch, Character *victim )
 
   chances += 5*(GetCurrentDexterity(victim) - 20);
 
-  if ( number_range( 1, 100 ) > chances )
+  if ( GetRandomNumberFromRange( 1, 100 ) > chances )
     {
       learn_from_failure( victim, gsn_dodge );
       return false;
@@ -636,7 +636,7 @@ bool check_grip( Character *ch, Character *victim )
   /* Consider luck as a factor */
   grip_chance += (2 * (GetCurrentLuck(victim) - 13 ) );
 
-  if ( number_percent( ) >= grip_chance + victim->top_level - ch->top_level )
+  if ( GetRandomPercent( ) >= grip_chance + victim->top_level - ch->top_level )
     {
       learn_from_failure( victim, gsn_grip );
       return false;

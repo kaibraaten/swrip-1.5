@@ -7,7 +7,7 @@ void do_mwhere( Character *ch, char *argument )
   Character *victim;
   bool found;
 
-  one_argument( argument, arg );
+  OneArgument( argument, arg );
   if ( arg[0] == '\0' )
     {
       send_to_char( "Mwhere whom?\r\n", ch );
@@ -20,7 +20,7 @@ void do_mwhere( Character *ch, char *argument )
     {
       if ( IsNpc(victim)
            &&   victim->in_room
-           &&   nifty_is_name( arg, victim->name ) )
+           &&   NiftyIsName( arg, victim->name ) )
         {
           found = true;
           pager_printf( ch, "[%5d] %-28s [%5d] %s\r\n",

@@ -79,7 +79,7 @@ void do_eat( Character *ch, char *argument )
         }
 
       if (  obj->value[3] != 0
-            ||   (foodcond < 4 && number_range( 0, foodcond + 1 ) == 0) )
+            ||   (foodcond < 4 && GetRandomNumberFromRange( 0, foodcond + 1 ) == 0) )
         {
           /* The food was poisoned! */
           Affect af;

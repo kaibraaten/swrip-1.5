@@ -5,7 +5,7 @@ static void showspaceobject( Character *ch , Spaceobject *spaceobject )
   ch_printf( ch, "Space object: %s\r\n", spaceobject->name);
   ch_printf( ch, "Filename:     %s\r\n", spaceobject->filename);
   ch_printf( ch, "Trainer:      %s\r\n", spaceobject->trainer ? "Yes" : "No");
-  ch_printf( ch, "Type:         %s (%d)\r\n", capitalize(get_spaceobj_type(spaceobject->type)), spaceobject->type);
+  ch_printf( ch, "Type:         %s (%d)\r\n", Capitalize(get_spaceobj_type(spaceobject->type)), spaceobject->type);
 
   ch_printf( ch, "Coordinates:  %.0f %0.f %.0f\r\n",
              spaceobject->pos.x, spaceobject->pos.y, spaceobject->pos.z);

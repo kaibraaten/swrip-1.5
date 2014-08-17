@@ -7,7 +7,7 @@ void do_murder( Character *ch, char *argument )
   Character *victim;
   char  logbuf[MAX_STRING_LENGTH];
 
-  one_argument( argument, arg );
+  OneArgument( argument, arg );
 
   if ( arg[0] == '\0' )
     {

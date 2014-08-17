@@ -15,8 +15,8 @@ void do_transship(Character *ch, char *argument)
       return;
     }
 
-  argument = one_argument( argument, arg1 );
-  argument = one_argument( argument, arg2 );
+  argument = OneArgument( argument, arg1 );
+  argument = OneArgument( argument, arg2 );
 
   ship = GetShipAnywhere( arg1 );
   if ( !ship )

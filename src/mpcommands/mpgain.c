@@ -18,9 +18,9 @@ void do_mpgain( Character *ch, char *argument )
       send_to_char( "Huh?\r\n", ch );
       return;
     }
-  argument = one_argument( argument, arg1 );
-  argument = one_argument( argument, arg2 );
-  argument = one_argument( argument, arg3 );
+  argument = OneArgument( argument, arg1 );
+  argument = OneArgument( argument, arg2 );
+  argument = OneArgument( argument, arg3 );
 
   if ( arg1[0] == '\0' )
     {

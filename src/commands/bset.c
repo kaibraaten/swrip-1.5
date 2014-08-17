@@ -9,8 +9,8 @@ void do_bset( Character *ch, char *argument )
   char buf[MAX_STRING_LENGTH];
   int value = 0;
 
-  argument = one_argument( argument, arg1 );
-  argument = one_argument( argument, arg2 );
+  argument = OneArgument( argument, arg1 );
+  argument = OneArgument( argument, arg2 );
 
   if ( arg1[0] == '\0' || arg2[0] == '\0' )
     {
@@ -25,7 +25,7 @@ void do_bset( Character *ch, char *argument )
 
   for ( board = first_board; board; board = board->next )
     {
-      if ( !str_cmp( arg1, board->note_file ) )
+      if ( !StrCmp( arg1, board->note_file ) )
 	{
 	  found = true;
 	  break;
@@ -38,7 +38,7 @@ void do_bset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "vnum" ) )
+  if ( !StrCmp( arg2, "vnum" ) )
     {
       if ( !get_obj_index(value) )
         {
@@ -52,7 +52,7 @@ void do_bset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "read" ) )
+  if ( !StrCmp( arg2, "read" ) )
     {
       if ( value < 0 || value > MAX_LEVEL )
         {
@@ -66,7 +66,7 @@ void do_bset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "read_group" ) )
+  if ( !StrCmp( arg2, "read_group" ) )
     {
       if ( !argument || argument[0] == '\0' )
         {
@@ -76,17 +76,17 @@ void do_bset( Character *ch, char *argument )
 
       DISPOSE( board->read_group );
 
-      if ( !str_cmp( argument, "none" ) )
-	board->read_group = str_dup( "" );
+      if ( !StrCmp( argument, "none" ) )
+	board->read_group = CopyString( "" );
       else
-        board->read_group = str_dup( argument );
+        board->read_group = CopyString( argument );
 
       write_boards_txt();
       send_to_char( "Done.\r\n", ch );
       return;
     }
 
-  if ( !str_cmp( arg2, "post_group" ) )
+  if ( !StrCmp( arg2, "post_group" ) )
     {
       if ( !argument || argument[0] == '\0' )
         {
@@ -96,17 +96,17 @@ void do_bset( Character *ch, char *argument )
 
       DISPOSE( board->post_group );
 
-      if ( !str_cmp( argument, "none" ) )
-        board->post_group = str_dup( "" );
+      if ( !StrCmp( argument, "none" ) )
+        board->post_group = CopyString( "" );
       else
-        board->post_group = str_dup( argument );
+        board->post_group = CopyString( argument );
 
       write_boards_txt();
       send_to_char( "Done.\r\n", ch );
       return;
     }
 
-  if ( !str_cmp( arg2, "extra_removers" ) )
+  if ( !StrCmp( arg2, "extra_removers" ) )
     {
       if ( !argument || argument[0] == '\0' )
         {
@@ -114,7 +114,7 @@ void do_bset( Character *ch, char *argument )
           return;
         }
 
-      if ( !str_cmp( argument, "none" ) )
+      if ( !StrCmp( argument, "none" ) )
 	{
 	  buf[0] = '\0';
 	}
@@ -124,13 +124,13 @@ void do_bset( Character *ch, char *argument )
 	}
 
       DISPOSE( board->extra_removers );
-      board->extra_removers = str_dup( buf );
+      board->extra_removers = CopyString( buf );
       write_boards_txt();
       send_to_char( "Done.\r\n", ch );
       return;
     }
 
-  if ( !str_cmp( arg2, "extra_readers" ) )
+  if ( !StrCmp( arg2, "extra_readers" ) )
     {
       if ( !argument || argument[0] == '\0' )
         {
@@ -138,7 +138,7 @@ void do_bset( Character *ch, char *argument )
           return;
         }
 
-      if ( !str_cmp( argument, "none" ) )
+      if ( !StrCmp( argument, "none" ) )
 	{
 	  buf[0] = '\0';
 	}
@@ -148,13 +148,13 @@ void do_bset( Character *ch, char *argument )
 	}
 
       DISPOSE( board->extra_readers );
-      board->extra_readers = str_dup( buf );
+      board->extra_readers = CopyString( buf );
       write_boards_txt();
       send_to_char( "Done.\r\n", ch );
       return;
     }
 
-  if ( !str_cmp( arg2, "filename" ) )
+  if ( !StrCmp( arg2, "filename" ) )
     {
       if ( !argument || argument[0] == '\0' )
         {
@@ -163,13 +163,13 @@ void do_bset( Character *ch, char *argument )
         }
 
       DISPOSE( board->note_file );
-      board->note_file = str_dup( argument );
+      board->note_file = CopyString( argument );
       write_boards_txt();
       send_to_char( "Done.\r\n", ch );
       return;
     }
 
-  if ( !str_cmp( arg2, "post" ) )
+  if ( !StrCmp( arg2, "post" ) )
     {
       if ( value < 0 || value > MAX_LEVEL )
         {
@@ -183,7 +183,7 @@ void do_bset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "remove" ) )
+  if ( !StrCmp( arg2, "remove" ) )
     {
       if ( value < 0 || value > MAX_LEVEL )
         {
@@ -197,7 +197,7 @@ void do_bset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "maxpost" ) )
+  if ( !StrCmp( arg2, "maxpost" ) )
     {
       if ( value < 1 || value > 1000 )
         {
@@ -210,7 +210,7 @@ void do_bset( Character *ch, char *argument )
       send_to_char( "Done.\r\n", ch );
       return;
     }
-  if ( !str_cmp( arg2, "type" ) )
+  if ( !StrCmp( arg2, "type" ) )
     {
       if ( value < 0 || value > 1 )
         {

@@ -7,14 +7,14 @@ void do_restore( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
 
-  one_argument( argument, arg );
+  OneArgument( argument, arg );
   if ( arg[0] == '\0' )
     {
       send_to_char( "Restore whom?\r\n", ch );
       return;
     }
 
-  if ( !str_cmp( arg, "all" ) )
+  if ( !StrCmp( arg, "all" ) )
     {
       Character *vch;
       Character *vch_next;

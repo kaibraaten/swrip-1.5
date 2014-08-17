@@ -12,8 +12,8 @@ void do_oinvoke( Character *ch, char *argument )
   short vnum;
   int level;
 
-  argument = one_argument( argument, arg1 );
-  argument = one_argument( argument, arg2 );
+  argument = OneArgument( argument, arg1 );
+  argument = OneArgument( argument, arg2 );
 
   if ( arg1[0] == '\0' )
     {
@@ -27,7 +27,7 @@ void do_oinvoke( Character *ch, char *argument )
     }
   else
     {
-      if ( !is_number( arg2 ) )
+      if ( !IsNumber( arg2 ) )
         {
           send_to_char( "Syntax: oinvoke <vnum> <level>.\r\n", ch );
           return;
@@ -41,18 +41,18 @@ void do_oinvoke( Character *ch, char *argument )
         }
     }
 
-  if ( !is_number( arg1 ) )
+  if ( !IsNumber( arg1 ) )
     {
       char arg[MAX_INPUT_LENGTH];
       int  hash, cnt;
-      int  count = number_argument( arg1, arg );
+      int  count = NumberArgument( arg1, arg );
 
       vnum = -1;
       for ( hash = cnt = 0; hash < MAX_KEY_HASH; hash++ )
         for ( pObjIndex = obj_index_hash[hash];
               pObjIndex;
               pObjIndex = pObjIndex->next )
-          if ( nifty_is_name( arg, pObjIndex->name )
+          if ( NiftyIsName( arg, pObjIndex->name )
                &&   ++cnt == count )
             {
               vnum = pObjIndex->vnum;

@@ -18,7 +18,7 @@ bool spec_police( Character *ch )
         continue;
       if ( !CanSeeCharacter( ch, victim ) )
         continue;
-      if ( number_bits ( 1 ) == 0 )
+      if ( NumberBits ( 1 ) == 0 )
         continue;
       for ( vip = 0 ; vip < 32 ; vip++ )
         if ( IsBitSet ( ch->vip_flags , 1 << vip ) &&  IsBitSet( victim->pcdata->wanted_flags , 1 << vip) )
@@ -34,7 +34,7 @@ bool spec_police( Character *ch )
             else if( 1 << vip == VIP_ADARI )
               jail = get_room_index( ROOM_JAIL_ADARI );
 	    else if( 1 << vip == VIP_MON_CALAMARI )
-              switch ( number_range(1,4) )
+              switch ( GetRandomNumberFromRange(1,4) )
                 {
                 case 1:
                   jail = get_room_index( ROOM_JAIL_MON_CALAMARI_1 );

@@ -9,15 +9,15 @@ void do_chaos(Character *ch, char *argument)
   char purse[MAX_INPUT_LENGTH];
   /*Usage: chaos lo hi start_delay cost/lev length*/
 
-  argument = one_argument(argument, lolimit);
+  argument = OneArgument(argument, lolimit);
   arena.lo_lim = atoi(lolimit);
-  argument = one_argument(argument, hilimit);
+  argument = OneArgument(argument, hilimit);
   arena.hi_lim = atoi(hilimit);
-  argument = one_argument(argument, start_delay);
+  argument = OneArgument(argument, start_delay);
   arena.start_time = atoi(start_delay);
-  argument = one_argument(argument, length);
+  argument = OneArgument(argument, length);
   arena.game_length = atoi(length);
-  one_argument(argument, purse);
+  OneArgument(argument, purse);
   arena.arena_pot = atoi(purse);
 
   sprintf(buf,"LowLim %d HiLim %d Delay %d Length %d\r\n", arena.lo_lim,

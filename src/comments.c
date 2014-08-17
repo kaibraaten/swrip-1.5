@@ -38,7 +38,7 @@
  * save.c:411:    ch->pcdata->comments                        = NULL;                   (* nulls ch->pcdata->comments *)
  *
  *
- * save.c:457:         else if ( !str_cmp( word, "COMMENT") ) fread_comment(ch, fp ); (*snags #COMMENT*)
+ * save.c:457:         else if ( !StrCmp( word, "COMMENT") ) fread_comment(ch, fp ); (*snags #COMMENT*)
  *
  *                4) That looks like it to these eyes.  Lemme know if i forgot anything.
  *
@@ -150,10 +150,10 @@ void do_comment( Character *ch, char *argument )
     }
 
   set_char_color( AT_NOTE, ch );
-  argument = one_argument( argument, arg );
-  smash_tilde( argument );
+  argument = OneArgument( argument, arg );
+  SmashTilde( argument );
 
-  if ( !str_cmp( arg, "about" ) )
+  if ( !StrCmp( arg, "about" ) )
     {
       victim = get_char_world(ch, argument);
 
@@ -171,7 +171,7 @@ void do_comment( Character *ch, char *argument )
     }
 
 
-  if ( !str_cmp( arg, "list" ) )
+  if ( !StrCmp( arg, "list" ) )
     {
       victim = get_char_world(ch, argument);
 
@@ -215,11 +215,11 @@ void do_comment( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg, "read" ) )
+  if ( !StrCmp( arg, "read" ) )
     {
       bool fAll = false;
 
-      argument = one_argument( argument, arg1 );
+      argument = OneArgument( argument, arg1 );
       victim = get_char_world(ch, arg1);
 
       if (!victim)
@@ -246,12 +246,12 @@ void do_comment( Character *ch, char *argument )
           return;
         }
 
-      if ( !str_cmp( argument, "all" ) )
+      if ( !StrCmp( argument, "all" ) )
         {
           fAll = true;
           anum = 0;
         }
-      else if ( is_number( argument ) )
+      else if ( IsNumber( argument ) )
 	{
 	  fAll = false;
 	  anum = atoi( argument );
@@ -288,7 +288,7 @@ void do_comment( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg, "write" ) )
+  if ( !StrCmp( arg, "write" ) )
     {
       note_attach( ch );
       ch->substate = SUB_WRITING_NOTE;
@@ -298,25 +298,25 @@ void do_comment( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg, "subject" ) )
+  if ( !StrCmp( arg, "subject" ) )
     {
       note_attach( ch );
       DISPOSE( ch->pcdata->pnote->subject );
-      ch->pcdata->pnote->subject = str_dup( argument );
+      ch->pcdata->pnote->subject = CopyString( argument );
       send_to_char( "Ok.\r\n", ch );
       return;
     }
 
-  if ( !str_cmp( arg, "to" ) )
+  if ( !StrCmp( arg, "to" ) )
     {
       note_attach( ch );
       DISPOSE( ch->pcdata->pnote->to_list );
-      ch->pcdata->pnote->to_list = str_dup( argument );
+      ch->pcdata->pnote->to_list = CopyString( argument );
       send_to_char( "Ok.\r\n", ch );
       return;
     }
 
-  if ( !str_cmp( arg, "clear" ) )
+  if ( !StrCmp( arg, "clear" ) )
     {
       if ( ch->pcdata->pnote )
         {
@@ -333,7 +333,7 @@ void do_comment( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg, "show" ) )
+  if ( !StrCmp( arg, "show" ) )
     {
       if ( !ch->pcdata->pnote )
         {
@@ -351,7 +351,7 @@ void do_comment( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg, "post" ) )
+  if ( !StrCmp( arg, "post" ) )
     {
       char *strtime;
 
@@ -361,7 +361,7 @@ void do_comment( Character *ch, char *argument )
           return;
         }
 
-      argument = one_argument(argument, arg1);
+      argument = OneArgument(argument, arg1);
       victim = get_char_world(ch, arg1);
       if (!victim)
         {
@@ -385,7 +385,7 @@ void do_comment( Character *ch, char *argument )
 
       strtime                           = ctime( &current_time );
       strtime[strlen(strtime)-1]        = '\0';
-      ch->pcdata->pnote->date                   = str_dup( strtime );
+      ch->pcdata->pnote->date                   = CopyString( strtime );
 
       pnote             = ch->pcdata->pnote;
       ch->pcdata->pnote = NULL;
@@ -425,9 +425,9 @@ void do_comment( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg, "remove" ) )
+  if ( !StrCmp( arg, "remove" ) )
     {
-      argument = one_argument(argument, arg1);
+      argument = OneArgument(argument, arg1);
       victim = get_char_world(ch, arg1);
       if (!victim)
         {
@@ -448,8 +448,8 @@ void do_comment( Character *ch, char *argument )
           return;
         }
 
-      /*argument = one_argument(argument, arg); */
-      if ( !is_number( argument ) )
+      /*argument = OneArgument(argument, arg); */
+      if ( !IsNumber( argument ) )
         {
           send_to_char( "Comment remove which number?\r\n", ch );
           return;
@@ -523,25 +523,25 @@ void fread_comment( Character *ch, FILE *fp )
 
       CREATE( pnote, NOTE_DATA, 1 );
 
-      if ( str_cmp( fread_word( fp ), "sender" ) )
+      if ( StrCmp( ReadWord( fp ), "sender" ) )
         break;
-      pnote->sender     = fread_string( fp );
+      pnote->sender     = ReadStringToTilde( fp );
 
-      if ( str_cmp( fread_word( fp ), "date" ) )
+      if ( StrCmp( ReadWord( fp ), "date" ) )
         break;
-      pnote->date       = fread_string( fp );
+      pnote->date       = ReadStringToTilde( fp );
 
-      if ( str_cmp( fread_word( fp ), "to" ) )
+      if ( StrCmp( ReadWord( fp ), "to" ) )
         break;
-      pnote->to_list    = fread_string( fp );
+      pnote->to_list    = ReadStringToTilde( fp );
 
-      if ( str_cmp( fread_word( fp ), "subject" ) )
+      if ( StrCmp( ReadWord( fp ), "subject" ) )
         break;
-      pnote->subject    = fread_string( fp );
+      pnote->subject    = ReadStringToTilde( fp );
 
-      if ( str_cmp( fread_word( fp ), "text" ) )
+      if ( StrCmp( ReadWord( fp ), "text" ) )
         break;
-      pnote->text       = fread_string( fp );
+      pnote->text       = ReadStringToTilde( fp );
 
       pnote->next               = ch->pcdata->comments;
       pnote->prev               = NULL;

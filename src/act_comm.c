@@ -70,7 +70,7 @@ char *drunk_speech( const char *argument, Character *ch )
     {
       if ( toupper(*arg) == 'S' )
         {
-          if ( number_percent() < ( drunk * 2 ) )               /* add 'h' after an 's' */
+          if ( GetRandomPercent() < ( drunk * 2 ) )               /* add 'h' after an 's' */
             {
               *txt++ = *arg;
               *txt++ = 'h';
@@ -80,16 +80,16 @@ char *drunk_speech( const char *argument, Character *ch )
         }
       else if ( toupper(*arg) == 'X' )
         {
-          if ( number_percent() < ( drunk * 2 / 2 ) )
+          if ( GetRandomPercent() < ( drunk * 2 / 2 ) )
             {
               *txt++ = 'c', *txt++ = 's', *txt++ = 'h';
             }
           else
             *txt++ = *arg;
         }
-      else if ( number_percent() < ( drunk * 2 / 5 ) )  /* slurred letters */
+      else if ( GetRandomPercent() < ( drunk * 2 / 5 ) )  /* slurred letters */
         {
-          short slurn = number_range( 1, 2 );
+          short slurn = GetRandomNumberFromRange( 1, 2 );
           short currslur = 0;
 
           while ( currslur < slurn )
@@ -107,7 +107,7 @@ char *drunk_speech( const char *argument, Character *ch )
 
   while ( *txt != '\0' )   /* Let's mess with the string's caps */
     {
-      if ( number_percent() < ( 2 * drunk / 2.5 ) )
+      if ( GetRandomPercent() < ( 2 * drunk / 2.5 ) )
         {
           if ( isupper(*txt) )
             *txt1 = tolower( *txt );
@@ -135,9 +135,9 @@ char *drunk_speech( const char *argument, Character *ch )
           while ( *txt1 == ' ' )  /* Don't stutter on spaces */
             *txt++ = *txt1++;
 
-          if ( ( number_percent() < ( 2 * drunk / 4 ) ) && *txt1 != '\0' )
+          if ( ( GetRandomPercent() < ( 2 * drunk / 4 ) ) && *txt1 != '\0' )
             {
-              short offset = number_range( 0, 2 );
+              short offset = GetRandomNumberFromRange( 0, 2 );
               short pos = 0;
 
               while ( *txt1 != '\0' && pos < offset )
@@ -150,7 +150,7 @@ char *drunk_speech( const char *argument, Character *ch )
                 }
 
               pos = 0;
-              offset = number_range( 2, 4 );
+              offset = GetRandomNumberFromRange( 2, 4 );
               while (   *txt1 != '\0' && pos < offset )
                 {
                   *txt++ = *txt1;
@@ -337,7 +337,7 @@ void talk_channel( Character *ch, const char *argument, int channel, const char 
     {
       sprintf( buf2, "%s: %s (%s)", IsNpc( ch ) ? ch->short_descr : ch->name,
                argument, verb );
-      append_to_file( LOG_FILE, buf2 );
+      AppendToFile( LOG_FILE, buf2 );
     }
 
   for ( d = first_descriptor; d; d = d->next )
@@ -448,7 +448,7 @@ void talk_channel( Character *ch, const char *argument, int channel, const char 
                  channel != CHANNEL_ASK &&
                  channel != CHANNEL_AVTALK
                  )  )
-            sbuf = scramble(argument, ch->speaking);
+            sbuf = Scramble(argument, ch->speaking);
           MOBtrigger = false;
           if ( channel == CHANNEL_IMMTALK || channel == CHANNEL_AVTALK
                || channel == CHANNEL_103 || channel == CHANNEL_104 || channel == CHANNEL_105 )
@@ -664,7 +664,7 @@ bool knows_language( const Character *ch, int language, const Character *cch )
           {
             if ( (sn = skill_lookup(lang_names[lang])) != -1 )
               {
-                if( number_percent()-1 < ch->pcdata->learned[sn] )
+                if( GetRandomPercent()-1 < ch->pcdata->learned[sn] )
                   return true;
               }
           }

@@ -30,7 +30,7 @@ void do_sellhome (Character *ch, char *argument)
     }
 
   DISPOSE(room->name);
-  room->name = str_dup("An Empty Apartment");
+  room->name = CopyString("An Empty Apartment");
   ch->gold += sellHomeCreditReturn;
   RemoveBit(room->room_flags,ROOM_PLR_HOME);
   SetBit(room->room_flags,ROOM_EMPTY_HOME);

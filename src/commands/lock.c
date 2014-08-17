@@ -6,7 +6,7 @@ void do_lock( Character *ch, char *argument )
   OBJ_DATA *obj;
   Exit *pexit;
 
-  one_argument( argument, arg );
+  OneArgument( argument, arg );
 
   if ( arg[0] == '\0' )
     {
@@ -47,7 +47,7 @@ void do_lock( Character *ch, char *argument )
 	}
 
       if ( !IsBitSet(pexit->exit_info, EX_SECRET)
-           || (pexit->keyword && nifty_is_name( arg, pexit->keyword )) )
+           || (pexit->keyword && NiftyIsName( arg, pexit->keyword )) )
         {
           send_to_char( "*Click*\r\n", ch );
 	  act( AT_ACTION, "$n locks the $d.",

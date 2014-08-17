@@ -8,7 +8,7 @@ void do_pager( Character *ch, char *argument )
   if ( IsNpc(ch) )
     return;
 
-  argument = one_argument(argument, arg);
+  argument = OneArgument(argument, arg);
 
   if ( !*arg )
     {
@@ -19,7 +19,7 @@ void do_pager( Character *ch, char *argument )
       return;
     }
 
-  if ( !is_number(arg) )
+  if ( !IsNumber(arg) )
     {
       send_to_char( "Set page pausing to how many lines?\r\n", ch );
       return;

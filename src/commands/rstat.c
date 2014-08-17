@@ -12,7 +12,7 @@ void do_rstat( Character *ch, char *argument )
   int cnt = 0;
   static const char * const dir_text[] = { "n", "e", "s", "w", "u", "d", "ne", "nw", "se", "sw", "?" };
 
-  one_argument( argument, arg );
+  OneArgument( argument, arg );
 
   if ( GetTrustLevel( ch ) < LEVEL_IMMORTAL )
     {
@@ -32,7 +32,7 @@ void do_rstat( Character *ch, char *argument )
 	}
     }
 
-  if ( !str_cmp( arg, "exits" ) )
+  if ( !StrCmp( arg, "exits" ) )
     {
       location = ch->in_room;
 
@@ -94,7 +94,7 @@ void do_rstat( Character *ch, char *argument )
              location->tunnel );
 
   ch_printf( ch, "Room flags: %s\r\n",
-             flag_string(location->room_flags, room_flags) );
+             FlagString(location->room_flags, room_flags) );
   ch_printf( ch, "Description:\r\n%s", location->description );
 
   if ( location->first_extradesc )
@@ -121,7 +121,7 @@ void do_rstat( Character *ch, char *argument )
       if ( CanSeeCharacter( ch, rch ) )
         {
           send_to_char( " ", ch );
-          one_argument( rch->name, buf );
+          OneArgument( rch->name, buf );
 	  send_to_char( buf, ch );
         }
     }
@@ -131,7 +131,7 @@ void do_rstat( Character *ch, char *argument )
   for ( obj = location->first_content; obj; obj = obj->next_content )
     {
       send_to_char( " ", ch );
-      one_argument( obj->name, buf );
+      OneArgument( obj->name, buf );
       send_to_char( buf, ch );
     }
   send_to_char( ".\r\n", ch );

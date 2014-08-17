@@ -25,7 +25,7 @@
 
 void jedi_bonus( Character *ch )
 {
-  if ( number_range( 1 , 100 ) == 1 )
+  if ( GetRandomNumberFromRange( 1 , 100 ) == 1 )
     {
       ch->max_mana++;
       send_to_char("&YYou are wise in your use of the force.\r\n", ch);
@@ -35,7 +35,7 @@ void jedi_bonus( Character *ch )
 
 void sith_penalty( Character *ch )
 {
-  if ( number_range( 1 , 100 ) == 1 )
+  if ( GetRandomNumberFromRange( 1 , 100 ) == 1 )
     {
       ch->max_mana++;
 
@@ -262,8 +262,8 @@ void pullorpush( Character *ch, OBJ_DATA *obj, bool pull )
             }
 
           pexit = make_exit( room, to_room, edir );
-          pexit->keyword        = str_dup( "" );
-          pexit->description    = str_dup( "" );
+          pexit->keyword        = CopyString( "" );
+          pexit->description    = CopyString( "" );
           pexit->key            = -1;
           pexit->exit_info      = 0;
           top_exit++;
@@ -467,15 +467,15 @@ bool check_bad_name( const char *name )
 
   while (!feof(fp))
     {
-      const char *ln = fread_string_nohash(fp);
+      const char *ln = ReadStringToTildeNoHash(fp);
 
-      if (is_name(name,ln))
+      if (IsName(name,ln))
         {
           fclose(fp);
           return true;
         }
 
-      if (is_name("$",ln))
+      if (IsName("$",ln))
         {
           fclose(fp);
           return false;
@@ -503,11 +503,11 @@ int add_bad_name(const char *name)
       return -1;
     }
 
-  ln = fread_string_nohash(fp);
+  ln = ReadStringToTildeNoHash(fp);
 
-  while(!is_name("$",ln) && !feof(fp))
+  while(!IsName("$",ln) && !feof(fp))
     {
-      ln = fread_string_nohash(fp);
+      ln = ReadStringToTildeNoHash(fp);
     }
 
   /* Delete the $~ from the end of the file */
@@ -536,7 +536,7 @@ int get_color(const char *origarg)    /* get color code from command string */
     "*bla*red*dgr*bro*dbl*pur*cya*cha*dch*ora*gre*yel*blu*pin*lbl*whi";
 
   strcpy(argument, origarg);
-  one_argument (argument, color);
+  OneArgument (argument, color);
 
   if (color[0]!='_' && color[0]!='*')
     return 0;
@@ -586,8 +586,8 @@ void set_title( Character *ch, const char *title )
 
   strcpy(bufptr, title);
 
-  bufptr = trim_string(buf, ' ');
+  bufptr = TrimString(buf, ' ');
 
   DISPOSE( ch->pcdata->title );
-  ch->pcdata->title = str_dup( buf );
+  ch->pcdata->title = CopyString( buf );
 }

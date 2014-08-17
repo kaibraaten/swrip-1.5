@@ -16,10 +16,10 @@ void do_opfind( Character *ch, char *argument )   /* Gorog */
   int                 tot_vnum, tot_hits=0;
   int                 i, disp_cou=0, disp_limit;
 
-  argument = one_argument( argument, arg1 );   /* display_limit */
-  argument = one_argument( argument, arg2 );
+  argument = OneArgument( argument, arg1 );   /* display_limit */
+  argument = OneArgument( argument, arg2 );
 
-  if ( arg1[0]=='\0' || arg2[0]=='\0' || !is_number(arg1) )
+  if ( arg1[0]=='\0' || arg2[0]=='\0' || !IsNumber(arg1) )
     {
       opfind_help(ch);
       return;
@@ -28,11 +28,11 @@ void do_opfind( Character *ch, char *argument )   /* Gorog */
   disp_limit = atoi (arg1);
   disp_limit = umax(0, disp_limit);
 
-  if ( str_cmp(arg2, "mud") )
+  if ( StrCmp(arg2, "mud") )
     {
-      argument = one_argument( argument, arg3 );
+      argument = OneArgument( argument, arg3 );
       if ( arg3[0]=='\0' || argument[0]=='\0'
-           ||   !is_number(arg2) || !is_number(arg3) )
+           ||   !IsNumber(arg2) || !IsNumber(arg3) )
 	{
           opfind_help(ch);
           return;

@@ -10,7 +10,7 @@ void do_hell( Character *ch, char *argument )
   bool h_d = false;
   struct tm *tms;
 
-  argument = one_argument(argument, arg);
+  argument = OneArgument(argument, arg);
   if ( !*arg )
     {
       send_to_char( "Hell who, and for how long?\r\n", ch );
@@ -33,9 +33,9 @@ void do_hell( Character *ch, char *argument )
       return;
     }
 
-  argument = one_argument(argument, arg);
+  argument = OneArgument(argument, arg);
 
-  if ( !*arg || !is_number(arg) )
+  if ( !*arg || !IsNumber(arg) )
     {
       send_to_char( "Hell them for how long?\r\n", ch );
       return;
@@ -49,13 +49,13 @@ void do_hell( Character *ch, char *argument )
       return;
     }
 
-  argument = one_argument(argument, arg);
+  argument = OneArgument(argument, arg);
 
-  if ( !*arg || !str_prefix(arg, "hours") )
+  if ( !*arg || !StringPrefix(arg, "hours") )
     {
       h_d = true;
     }
-  else if ( str_prefix(arg, "days") )
+  else if ( StringPrefix(arg, "days") )
     {
       send_to_char( "Is that value in hours or days?\r\n", ch );
       return;
@@ -72,7 +72,7 @@ void do_hell( Character *ch, char *argument )
     tms->tm_mday += hell_time;
 
   victim->pcdata->release_date = mktime(tms);
-  victim->pcdata->helled_by = str_dup(ch->name);
+  victim->pcdata->helled_by = CopyString(ch->name);
   ch_printf(ch, "%s will be released from hell at %24.24s.\r\n", victim->name,
             ctime(&victim->pcdata->release_date));
   act(AT_MAGIC, "$n disappears in a cloud of hellish light.", victim, NULL, ch, TO_NOTVICT);

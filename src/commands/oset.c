@@ -81,7 +81,7 @@ void do_oset( Character *ch, char *argument )
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
         {
           DISPOSE( obj->pIndexData->description );
-          obj->pIndexData->description = str_dup( obj->description );
+          obj->pIndexData->description = CopyString( obj->description );
 	}
 
       tmpobj = (OBJ_DATA*)ch->spare_ptr;
@@ -92,7 +92,7 @@ void do_oset( Character *ch, char *argument )
     }
 
   obj = NULL;
-  smash_tilde( argument );
+  SmashTilde( argument );
 
   if ( ch->substate == SUB_REPEATCMD )
     {
@@ -104,8 +104,8 @@ void do_oset( Character *ch, char *argument )
           obj = NULL;
           argument = "done";
         }
-      if ( argument[0] == '\0' || !str_cmp( argument, " " )
-           ||   !str_cmp( argument, "stat" ) )
+      if ( argument[0] == '\0' || !StrCmp( argument, " " )
+           ||   !StrCmp( argument, "stat" ) )
         {
           if ( obj )
             do_ostat( ch, obj->name );
@@ -113,7 +113,7 @@ void do_oset( Character *ch, char *argument )
             send_to_char( "No object selected.  Type '?' for help.\r\n", ch );
           return;
         }
-      if ( !str_cmp( argument, "done" ) || !str_cmp( argument, "off" ) )
+      if ( !StrCmp( argument, "done" ) || !StrCmp( argument, "off" ) )
         {
           send_to_char( "Oset mode off.\r\n", ch );
           ch->substate = SUB_NONE;
@@ -127,18 +127,18 @@ void do_oset( Character *ch, char *argument )
     {
       lockobj = true;
       strcpy( arg1, obj->name );
-      argument = one_argument( argument, arg2 );
+      argument = OneArgument( argument, arg2 );
       strcpy( arg3, argument );
     }
   else
     {
       lockobj = false;
-      argument = one_argument( argument, arg1 );
-      argument = one_argument( argument, arg2 );
+      argument = OneArgument( argument, arg1 );
+      argument = OneArgument( argument, arg2 );
       strcpy( arg3, argument );
     }
 
-  if ( arg1[0] == '\0' || arg2[0] == '\0' || !str_cmp( arg1, "?" ) )
+  if ( arg1[0] == '\0' || arg2[0] == '\0' || !StrCmp( arg1, "?" ) )
     {
       if ( ch->substate == SUB_REPEATCMD )
         {
@@ -199,7 +199,7 @@ void do_oset( Character *ch, char *argument )
   separate_obj( obj );
   value = atoi( arg3 );
 
-  if ( !str_cmp( arg2, "value0" ) || !str_cmp( arg2, "v0" ) )
+  if ( !StrCmp( arg2, "value0" ) || !StrCmp( arg2, "v0" ) )
     {
       if ( !can_omodify( ch, obj ) )
         return;
@@ -209,7 +209,7 @@ void do_oset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "value1" ) || !str_cmp( arg2, "v1" ) )
+  if ( !StrCmp( arg2, "value1" ) || !StrCmp( arg2, "v1" ) )
     {
       if ( !can_omodify( ch, obj ) )
         return;
@@ -219,7 +219,7 @@ void do_oset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "value2" ) || !str_cmp( arg2, "v2" ) )
+  if ( !StrCmp( arg2, "value2" ) || !StrCmp( arg2, "v2" ) )
     {
       if ( !can_omodify( ch, obj ) )
         return;
@@ -233,7 +233,7 @@ void do_oset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "value3" ) || !str_cmp( arg2, "v3" ) )
+  if ( !StrCmp( arg2, "value3" ) || !StrCmp( arg2, "v3" ) )
     {
       if ( !can_omodify( ch, obj ) )
         return;
@@ -243,7 +243,7 @@ void do_oset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "value4" ) || !str_cmp( arg2, "v4" ) )
+  if ( !StrCmp( arg2, "value4" ) || !StrCmp( arg2, "v4" ) )
     {
       if ( !can_omodify( ch, obj ) )
         return;
@@ -253,7 +253,7 @@ void do_oset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "value5" ) || !str_cmp( arg2, "v5" ) )
+  if ( !StrCmp( arg2, "value5" ) || !StrCmp( arg2, "v5" ) )
     {
       if ( !can_omodify( ch, obj ) )
         return;
@@ -263,7 +263,7 @@ void do_oset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "type" ) )
+  if ( !StrCmp( arg2, "type" ) )
     {
       if ( !can_omodify( ch, obj ) )
         return;
@@ -298,7 +298,7 @@ void do_oset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "flags" ) )
+  if ( !StrCmp( arg2, "flags" ) )
     {
       if ( !can_omodify( ch, obj ) )
         return;
@@ -316,7 +316,7 @@ void do_oset( Character *ch, char *argument )
 
       while ( argument[0] != '\0' )
         {
-          argument = one_argument( argument, arg3 );
+          argument = OneArgument( argument, arg3 );
           value = get_objectflag( arg3 );
           if ( value < 0 || value > 31 )
             ch_printf( ch, "Unknown flag: %s\r\n", arg3 );
@@ -332,7 +332,7 @@ void do_oset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "wear" ) )
+  if ( !StrCmp( arg2, "wear" ) )
     {
       if ( !can_omodify( ch, obj ) )
         return;
@@ -348,7 +348,7 @@ void do_oset( Character *ch, char *argument )
         }
       while ( argument[0] != '\0' )
         {
-          argument = one_argument( argument, arg3 );
+          argument = OneArgument( argument, arg3 );
           value = get_wearflag( arg3 );
 
 	  if ( value < 0 || value > 31 )
@@ -362,7 +362,7 @@ void do_oset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "level" ) )
+  if ( !StrCmp( arg2, "level" ) )
     {
       if ( !can_omodify( ch, obj ) )
         return;
@@ -370,7 +370,7 @@ void do_oset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "weight" ) )
+  if ( !StrCmp( arg2, "weight" ) )
     {
       if ( !can_omodify( ch, obj ) )
         return;
@@ -380,7 +380,7 @@ void do_oset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "cost" ) )
+  if ( !StrCmp( arg2, "cost" ) )
     {
       if ( !can_omodify( ch, obj ) )
         return;
@@ -390,7 +390,7 @@ void do_oset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "rent" ) )
+  if ( !StrCmp( arg2, "rent" ) )
     {
       if ( !can_omodify( ch, obj ) )
         return;
@@ -401,7 +401,7 @@ void do_oset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "layers" ) )
+  if ( !StrCmp( arg2, "layers" ) )
     {
       if ( !can_omodify( ch, obj ) )
         return;
@@ -412,7 +412,7 @@ void do_oset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "timer" ) )
+  if ( !StrCmp( arg2, "timer" ) )
     {
       if ( !can_omodify( ch, obj ) )
         return;
@@ -420,28 +420,28 @@ void do_oset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "name" ) )
+  if ( !StrCmp( arg2, "name" ) )
     {
       if ( !can_omodify( ch, obj ) )
         return;
       DISPOSE( obj->name );
-      obj->name = str_dup( arg3 );
+      obj->name = CopyString( arg3 );
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
         {
           DISPOSE(obj->pIndexData->name );
-          obj->pIndexData->name = str_dup( obj->name );
+          obj->pIndexData->name = CopyString( obj->name );
         }
       return;
     }
 
-  if ( !str_cmp( arg2, "short" ) )
+  if ( !StrCmp( arg2, "short" ) )
     {
       DISPOSE( obj->short_descr );
-      obj->short_descr = str_dup( arg3 );
+      obj->short_descr = CopyString( arg3 );
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
         {
           DISPOSE(obj->pIndexData->short_descr );
-	  obj->pIndexData->short_descr = str_dup( obj->short_descr );
+	  obj->pIndexData->short_descr = CopyString( obj->short_descr );
         }
       else
         /* Feature added by Narn, Apr/96
@@ -449,17 +449,17 @@ void do_oset( Character *ch, char *argument )
          * if it is not already there.
          */
         {
-          if ( str_infix( "rename", obj->name ) )
+          if ( StringInfix( "rename", obj->name ) )
             {
               sprintf( buf, "%s %s", obj->name, "rename" );
               DISPOSE( obj->name );
-              obj->name = str_dup( buf );
+              obj->name = CopyString( buf );
             }
         }
       return;
     }
 
-  if ( !str_cmp( arg2, "actiondesc" ) )
+  if ( !StrCmp( arg2, "actiondesc" ) )
     {
       if ( strstr( arg3, "%n" )
            ||   strstr( arg3, "%d" )
@@ -469,25 +469,25 @@ void do_oset( Character *ch, char *argument )
           return;
         }
       DISPOSE( obj->action_desc );
-      obj->action_desc = str_dup( arg3 );
+      obj->action_desc = CopyString( arg3 );
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
         {
           DISPOSE(obj->pIndexData->action_desc );
-          obj->pIndexData->action_desc = str_dup( obj->action_desc );
+          obj->pIndexData->action_desc = CopyString( obj->action_desc );
         }
       return;
     }
 
-  if ( !str_cmp( arg2, "long" ) )
+  if ( !StrCmp( arg2, "long" ) )
     {
       if ( arg3[0] )
         {
           DISPOSE( obj->description );
-          obj->description = str_dup( arg3 );
+          obj->description = CopyString( arg3 );
           if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
             {
 	      DISPOSE(obj->pIndexData->description );
-              obj->pIndexData->description = str_dup( obj->description );
+              obj->pIndexData->description = CopyString( obj->description );
             }
           return;
         }
@@ -508,13 +508,13 @@ void do_oset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "affect" ) )
+  if ( !StrCmp( arg2, "affect" ) )
     {
       Affect *paf;
       short loc;
       int bitv;
 
-      argument = one_argument( argument, arg2 );
+      argument = OneArgument( argument, arg2 );
       if ( arg2[0] == '\0' || !argument || argument[0] == 0 )
         {
           send_to_char( "Usage: oset <object> affect <field> <value>\r\n", ch );
@@ -545,7 +545,7 @@ void do_oset( Character *ch, char *argument )
           bitv = 0;
           while ( argument[0] != '\0' )
             {
-              argument = one_argument( argument, arg3 );
+              argument = OneArgument( argument, arg3 );
               if ( loc == APPLY_AFFECT )
                 value = get_affectedflag( arg3 );
               else
@@ -561,7 +561,7 @@ void do_oset( Character *ch, char *argument )
         }
       else
         {
-          argument = one_argument( argument, arg3 );
+          argument = OneArgument( argument, arg3 );
           value = atoi( arg3 );
         }
       CREATE( paf, Affect, 1 );
@@ -581,7 +581,7 @@ void do_oset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "rmaffect" ) )
+  if ( !StrCmp( arg2, "rmaffect" ) )
     {
       Affect *paf;
       short loc, count;
@@ -637,7 +637,7 @@ void do_oset( Character *ch, char *argument )
         }
     }
 
-  if ( !str_cmp( arg2, "ed" ) )
+  if ( !StrCmp( arg2, "ed" ) )
     {
       if ( arg3[0] == '\0' )
         {
@@ -676,7 +676,7 @@ void do_oset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "desc" ) )
+  if ( !StrCmp( arg2, "desc" ) )
     {
       CHECK_SUBRESTRICTED( ch );
       if ( obj->timer )
@@ -709,7 +709,7 @@ void do_oset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "rmed" ) )
+  if ( !StrCmp( arg2, "rmed" ) )
     {
       if ( arg3[0] == '\0' )
         {
@@ -733,7 +733,7 @@ void do_oset( Character *ch, char *argument )
   /*
    * save some finger-leather
    */
-  if ( !str_cmp( arg2, "ris" ) )
+  if ( !StrCmp( arg2, "ris" ) )
     {
       sprintf(outbuf, "%s affect resistant %s", arg1, arg3);
       do_oset( ch, outbuf );
@@ -744,27 +744,27 @@ void do_oset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "r" ) )
+  if ( !StrCmp( arg2, "r" ) )
     {
       sprintf(outbuf, "%s affect resistant %s", arg1, arg3);
       do_oset( ch, outbuf );
       return;
     }
 
-  if ( !str_cmp( arg2, "i" ) )
+  if ( !StrCmp( arg2, "i" ) )
     {
       sprintf(outbuf, "%s affect immune %s", arg1, arg3);
       do_oset( ch, outbuf );
       return;
     }
-  if ( !str_cmp( arg2, "s" ) )
+  if ( !StrCmp( arg2, "s" ) )
     {
       sprintf(outbuf, "%s affect susceptible %s", arg1, arg3);
       do_oset( ch, outbuf );
       return;
     }
 
-  if ( !str_cmp( arg2, "ri" ) )
+  if ( !StrCmp( arg2, "ri" ) )
     {
       sprintf(outbuf, "%s affect resistant %s", arg1, arg3);
       do_oset( ch, outbuf );
@@ -773,7 +773,7 @@ void do_oset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "rs" ) )
+  if ( !StrCmp( arg2, "rs" ) )
     {
       sprintf(outbuf, "%s affect resistant %s", arg1, arg3);
       do_oset( ch, outbuf );
@@ -782,7 +782,7 @@ void do_oset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "is" ) )
+  if ( !StrCmp( arg2, "is" ) )
     {
       sprintf(outbuf, "%s affect immune %s", arg1, arg3);
       do_oset( ch, outbuf );
@@ -799,7 +799,7 @@ void do_oset( Character *ch, char *argument )
   switch( obj->item_type )
     {
     case ITEM_WEAPON:
-      if ( !str_cmp( arg2, "weapontype" ) )
+      if ( !StrCmp( arg2, "weapontype" ) )
         {
           value = get_weapontype( arg3 );
 
@@ -823,27 +823,27 @@ void do_oset( Character *ch, char *argument )
           tmp = 3;
           break;
         }
-      if ( !str_cmp( arg2, "condition" ) )      tmp = 0;
-      if ( !str_cmp( arg2, "numdamdie" ) )        tmp = 1;
-      if ( !str_cmp( arg2, "sizedamdie" ) )       tmp = 2;
-      if ( !str_cmp( arg2, "charges" ) )          tmp = 4;
-      if ( !str_cmp( arg2, "maxcharges" ) )       tmp = 5;
-      if ( !str_cmp( arg2, "charge" ) )          tmp = 4;
-      if ( !str_cmp( arg2, "maxcharge" ) )       tmp = 5;
+      if ( !StrCmp( arg2, "condition" ) )      tmp = 0;
+      if ( !StrCmp( arg2, "numdamdie" ) )        tmp = 1;
+      if ( !StrCmp( arg2, "sizedamdie" ) )       tmp = 2;
+      if ( !StrCmp( arg2, "charges" ) )          tmp = 4;
+      if ( !StrCmp( arg2, "maxcharges" ) )       tmp = 5;
+      if ( !StrCmp( arg2, "charge" ) )          tmp = 4;
+      if ( !StrCmp( arg2, "maxcharge" ) )       tmp = 5;
       break;
     case ITEM_BOLT:
     case ITEM_AMMO:
-      if ( !str_cmp( arg2, "charges" ) )          tmp = 0;
-      if ( !str_cmp( arg2, "charge" ) )          tmp = 0;
+      if ( !StrCmp( arg2, "charges" ) )          tmp = 0;
+      if ( !StrCmp( arg2, "charge" ) )          tmp = 0;
       break;
     case ITEM_BATTERY:
-      if ( !str_cmp( arg2, "charges" ) )          tmp = 0;
-      if ( !str_cmp( arg2, "charge" ) )          tmp = 0;
+      if ( !StrCmp( arg2, "charges" ) )          tmp = 0;
+      if ( !StrCmp( arg2, "charge" ) )          tmp = 0;
       break;
     case ITEM_RAWSPICE:
     case ITEM_SPICE:
-      if ( !str_cmp( arg2, "grade" ) )          tmp = 1;
-      if ( !str_cmp( arg2, "spicetype" ) )
+      if ( !StrCmp( arg2, "grade" ) )          tmp = 1;
+      if ( !StrCmp( arg2, "spicetype" ) )
         {
           value = get_spicetype( arg3 );
 
@@ -868,7 +868,7 @@ void do_oset( Character *ch, char *argument )
         }
       break;
     case ITEM_CRYSTAL:
-      if ( !str_cmp( arg2, "gemtype" ) )
+      if ( !StrCmp( arg2, "gemtype" ) )
         {
           value = get_crystaltype( arg3 );
 
@@ -893,45 +893,45 @@ void do_oset( Character *ch, char *argument )
         }
       break;
     case ITEM_ARMOR:
-      if ( !str_cmp( arg2, "condition" ) )      tmp = 0;
-      if ( !str_cmp( arg2, "ac" )       )               tmp = 1;
+      if ( !StrCmp( arg2, "condition" ) )      tmp = 0;
+      if ( !StrCmp( arg2, "ac" )       )               tmp = 1;
       break;
     case ITEM_SALVE:
-      if ( !str_cmp( arg2, "slevel"   ) )               tmp = 0;
-      if ( !str_cmp( arg2, "maxdoses" ) )               tmp = 1;
-      if ( !str_cmp( arg2, "doses"    ) )               tmp = 2;
-      if ( !str_cmp( arg2, "delay"    ) )               tmp = 3;
-      if ( !str_cmp( arg2, "spell1"   ) )               tmp = 4;
-      if ( !str_cmp( arg2, "spell2"   ) )               tmp = 5;
+      if ( !StrCmp( arg2, "slevel"   ) )               tmp = 0;
+      if ( !StrCmp( arg2, "maxdoses" ) )               tmp = 1;
+      if ( !StrCmp( arg2, "doses"    ) )               tmp = 2;
+      if ( !StrCmp( arg2, "delay"    ) )               tmp = 3;
+      if ( !StrCmp( arg2, "spell1"   ) )               tmp = 4;
+      if ( !StrCmp( arg2, "spell2"   ) )               tmp = 5;
       if ( tmp >=4 && tmp <= 5 )                        value = skill_lookup(arg3);
       break;
     case ITEM_POTION:
     case ITEM_PILL:
-      if ( !str_cmp( arg2, "slevel" ) )         tmp = 0;
-      if ( !str_cmp( arg2, "spell1" ) )         tmp = 1;
-      if ( !str_cmp( arg2, "spell2" ) )         tmp = 2;
-      if ( !str_cmp( arg2, "spell3" ) )         tmp = 3;
+      if ( !StrCmp( arg2, "slevel" ) )         tmp = 0;
+      if ( !StrCmp( arg2, "spell1" ) )         tmp = 1;
+      if ( !StrCmp( arg2, "spell2" ) )         tmp = 2;
+      if ( !StrCmp( arg2, "spell3" ) )         tmp = 3;
       if ( tmp >=1 && tmp <= 3 )                        value = skill_lookup(arg3);
       break;
     case ITEM_DEVICE:
-      if ( !str_cmp( arg2, "slevel" ) )         tmp = 0;
-      if ( !str_cmp( arg2, "spell" ) )
+      if ( !StrCmp( arg2, "slevel" ) )         tmp = 0;
+      if ( !StrCmp( arg2, "spell" ) )
         {
           tmp = 3;
           value = skill_lookup(arg3);
         }
-      if ( !str_cmp( arg2, "maxcharges" )       )       tmp = 1;
-      if ( !str_cmp( arg2, "charges" ) )                tmp = 2;
+      if ( !StrCmp( arg2, "maxcharges" )       )       tmp = 1;
+      if ( !StrCmp( arg2, "charges" ) )                tmp = 2;
       break;
     case ITEM_CONTAINER:
-      if ( !str_cmp( arg2, "capacity" ) )               tmp = 0;
-      if ( !str_cmp( arg2, "cflags" ) )         tmp = 1;
-      if ( !str_cmp( arg2, "key" ) )            tmp = 2;
+      if ( !StrCmp( arg2, "capacity" ) )               tmp = 0;
+      if ( !StrCmp( arg2, "cflags" ) )         tmp = 1;
+      if ( !StrCmp( arg2, "key" ) )            tmp = 2;
       break;
     case ITEM_SWITCH:
     case ITEM_LEVER:
     case ITEM_BUTTON:
-      if ( !str_cmp( arg2, "tflags" ) )
+      if ( !StrCmp( arg2, "tflags" ) )
         {
 	  tmp = 0;
           value = get_trigflag(arg3);

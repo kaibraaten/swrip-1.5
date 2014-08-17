@@ -14,7 +14,7 @@ void do_mine( Character *ch, char *argument )
       return;
     }
 
-  one_argument( argument, arg );
+  OneArgument( argument, arg );
 
   if ( arg[0] == '\0' )
     {
@@ -89,7 +89,7 @@ void do_mine( Character *ch, char *argument )
   SetWaitState( ch, urange( 10, move / 2, 100 ) );
 
   DISPOSE ( obj->armed_by );
-  obj->armed_by = str_dup ( ch->name );
+  obj->armed_by = CopyString ( ch->name );
 
   ch_printf( ch, "You arm and bury %s.\r\n", obj->short_descr );
   act( AT_PLAIN, "$n arms and buries $p.", ch, obj, NULL, TO_ROOM );

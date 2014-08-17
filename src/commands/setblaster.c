@@ -34,7 +34,7 @@ void do_setblaster( Character *ch, char *argument )
   if ( wield2 )
     act( AT_PLAIN, "$n adjusts the settings on $p.", ch, wield2, NULL, TO_ROOM );
 
-  if ( !str_cmp( argument, "full" ) )
+  if ( !StrCmp( argument, "full" ) )
     {
       if (wield)
         {
@@ -51,7 +51,7 @@ void do_setblaster( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( argument, "high" ) )
+  if ( !StrCmp( argument, "high" ) )
     {
       if (wield)
         {
@@ -68,7 +68,7 @@ void do_setblaster( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( argument, "normal" ) )
+  if ( !StrCmp( argument, "normal" ) )
     {
       if (wield)
         {
@@ -84,7 +84,7 @@ void do_setblaster( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( argument, "half" ) )
+  if ( !StrCmp( argument, "half" ) )
     {
       if (wield)
         {
@@ -101,7 +101,7 @@ void do_setblaster( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( argument, "low" ) )
+  if ( !StrCmp( argument, "low" ) )
     {
       if (wield)
         {
@@ -118,7 +118,7 @@ void do_setblaster( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( argument, "stun" ) )
+  if ( !StrCmp( argument, "stun" ) )
     {
       if (wield)
         {

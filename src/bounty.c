@@ -61,7 +61,7 @@ bool is_disintegration( const Character *victim )
   BOUNTY_DATA *bounty = NULL;
 
   for ( bounty = first_disintegration; bounty; bounty = bounty->next )
-    if ( !str_cmp( victim->name , bounty->target ) )
+    if ( !StrCmp( victim->name , bounty->target ) )
       return true;
 
   return false;
@@ -72,7 +72,7 @@ BOUNTY_DATA *get_disintegration( const char *target )
   BOUNTY_DATA *bounty = NULL;
 
   for ( bounty = first_disintegration; bounty; bounty = bounty->next )
-    if ( !str_cmp( target, bounty->target ) )
+    if ( !StrCmp( target, bounty->target ) )
       return bounty;
 
   return NULL;
@@ -99,21 +99,21 @@ void load_bounties( void )
 
   for ( ; ; )
     {
-      target = feof( fpList ) ? "$" : fread_word( fpList );
+      target = feof( fpList ) ? "$" : ReadWord( fpList );
       if ( target[0] == '$' )
         break;
       CREATE( bounty, BOUNTY_DATA, 1 );
       LINK( bounty, first_disintegration, last_disintegration, next, prev );
-      bounty->target = str_dup(target);
+      bounty->target = CopyString(target);
 
-      amount = fread_number( fpList );
+      amount = ReadInt( fpList );
       bounty->amount = amount;
-      poster = feof( fpList ) ? "$" : fread_word( fpList );
+      poster = feof( fpList ) ? "$" : ReadWord( fpList );
 
       if ( poster[0] == '$' )
         break;
 
-      bounty->poster = str_dup(poster);
+      bounty->poster = CopyString(poster);
 
     }
 
@@ -131,7 +131,7 @@ void disintegration ( const Character *ch , const Character *victim , long amoun
 
   for ( bounty = first_disintegration; bounty; bounty = bounty->next )
     {
-      if ( !str_cmp( bounty->target , victim->name ))
+      if ( !StrCmp( bounty->target , victim->name ))
         {
           found = true;
           break;
@@ -143,9 +143,9 @@ void disintegration ( const Character *ch , const Character *victim , long amoun
       CREATE( bounty, BOUNTY_DATA, 1 );
       LINK( bounty, first_disintegration, last_disintegration, next, prev );
 
-      bounty->target = str_dup( victim->name );
+      bounty->target = CopyString( victim->name );
       bounty->amount = 0;
-      bounty->poster = str_dup( ch->name );
+      bounty->poster = CopyString( ch->name );
     }
 
   bounty->amount = bounty->amount + amount;
@@ -160,8 +160,8 @@ void disintegration ( const Character *ch , const Character *victim , long amoun
       p_prev = p->prev;
 
       if ( ch->pcdata && ch->pcdata->clan
-	   && ( !str_cmp(ch->pcdata->clan->name, "the hunters guild")
-		|| !str_cmp(ch->pcdata->clan->name, "the assassins guild") ) )
+	   && ( !StrCmp(ch->pcdata->clan->name, "the hunters guild")
+		|| !StrCmp(ch->pcdata->clan->name, "the assassins guild") ) )
         ch_printf(p, buf);
       else if (!IsNpc(p) && GetTrustLevel(p) >= LEVEL_IMMORTAL)
         ch_printf(p, buf);
@@ -201,8 +201,8 @@ void claim_disintegration( Character *ch, const Character *victim )
 
   if (bounty &&
       (!ch->pcdata || !ch->pcdata->clan
-       || ( str_cmp(ch->pcdata->clan->name, "the hunters guild")
-	    || str_cmp(ch->pcdata->clan->name, "the assassins guild") ) ) )
+       || ( StrCmp(ch->pcdata->clan->name, "the hunters guild")
+	    || StrCmp(ch->pcdata->clan->name, "the assassins guild") ) ) )
     {
       remove_disintegration(bounty);
       bounty = NULL;

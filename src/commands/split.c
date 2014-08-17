@@ -14,7 +14,7 @@ void do_split( Character *ch, char *argument )
   int share = 0;
   int extra = 0;
 
-  one_argument( argument, arg );
+  OneArgument( argument, arg );
 
   if ( arg[0] == '\0' )
     {

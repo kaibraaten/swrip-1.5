@@ -9,9 +9,9 @@ void do_bank( Character *ch, char *argument )
   long amount = 0;
   Character *victim;
 
-  argument = one_argument( argument , arg1 );
-  argument = one_argument( argument , arg2 );
-  argument = one_argument( argument , arg3 );
+  argument = OneArgument( argument , arg1 );
+  argument = OneArgument( argument , arg2 );
+  argument = OneArgument( argument , arg3 );
 
   if ( IsNpc(ch) || !ch->pcdata )
     return;
@@ -40,7 +40,7 @@ void do_bank( Character *ch, char *argument )
   if (arg2[0] != '\0' )
     amount = atoi(arg2);
 
-  if ( !str_prefix( arg1 , "deposit" ) )
+  if ( !StringPrefix( arg1 , "deposit" ) )
     {
       if ( amount  <= 0 )
         {
@@ -61,7 +61,7 @@ void do_bank( Character *ch, char *argument )
       ch_printf( ch , "You deposit %ld credits into your account.\r\n" ,amount );
       return;
     }
-  else if ( !str_prefix( arg1 , "withdrawl" ) )
+  else if ( !StringPrefix( arg1 , "withdrawl" ) )
     {
       if ( amount  <= 0 )
         {
@@ -83,12 +83,12 @@ void do_bank( Character *ch, char *argument )
       return;
 
     }
-  else if ( !str_prefix( arg1 , "balance" ) )
+  else if ( !StringPrefix( arg1 , "balance" ) )
     {
       ch_printf( ch , "You have %ld credits in your account.\r\n" , ch->pcdata->bank );
       return;
     }
-  else if ( !str_prefix( arg1 , "transfer" ) )
+  else if ( !StringPrefix( arg1 , "transfer" ) )
     {
       if( ( ( victim = get_char_world(ch, arg3) ) == NULL ))
         {

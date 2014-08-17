@@ -18,8 +18,8 @@ void do_addsalary ( Character *ch , char *argument )
   clan = ch->pcdata->clan;
 
   if ( (ch->pcdata && ch->pcdata->bestowments
-        &&    is_name("salary", ch->pcdata->bestowments))
-       || !str_cmp( ch->name, clan->leadership.leader  ) )
+        &&    IsName("salary", ch->pcdata->bestowments))
+       || !StrCmp( ch->name, clan->leadership.leader  ) )
     ;
   else
     {
@@ -27,8 +27,8 @@ void do_addsalary ( Character *ch , char *argument )
       return;
     }
 
-  argument = one_argument( argument, arg );
-  argument = one_argument( argument, arg2 );
+  argument = OneArgument( argument, arg );
+  argument = OneArgument( argument, arg2 );
 
   salary = atoi(arg2);
 

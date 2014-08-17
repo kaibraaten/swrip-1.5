@@ -18,15 +18,15 @@ void do_makespaceobject( Character *ch, char *argument )
   CREATE( spaceobject, Spaceobject, 1 );
   LINK( spaceobject, first_spaceobject, last_spaceobject, next, prev );
 
-  spaceobject->name      = str_dup( argument );
+  spaceobject->name      = CopyString( argument );
 
-  spaceobject->landing_site.locationa = str_dup( "" );
-  spaceobject->landing_site.locationb = str_dup( "" );
-  spaceobject->landing_site.locationc = str_dup( "" );
+  spaceobject->landing_site.locationa = CopyString( "" );
+  spaceobject->landing_site.locationb = CopyString( "" );
+  spaceobject->landing_site.locationc = CopyString( "" );
 
-  argument = one_argument( argument, arg );
-  sprintf( filename, "%s" , strlower(arg) );
-  spaceobject->filename = str_dup( filename );
+  argument = OneArgument( argument, arg );
+  sprintf( filename, "%s" , StringToLowercase(arg) );
+  spaceobject->filename = CopyString( filename );
   save_spaceobject( spaceobject );
   write_spaceobject_list();
 }

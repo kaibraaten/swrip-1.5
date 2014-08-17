@@ -12,7 +12,7 @@ void do_bestowarea( Character *ch, char *argument )
   Character *victim;
   int  arg_len;
 
-  argument = one_argument( argument, arg );
+  argument = OneArgument( argument, arg );
 
   if ( GetTrustLevel (ch) < LEVEL_SUB_IMPLEM )
     {
@@ -50,20 +50,20 @@ void do_bestowarea( Character *ch, char *argument )
     }
 
   if (!victim->pcdata->bestowments)
-    victim->pcdata->bestowments = str_dup("");
+    victim->pcdata->bestowments = CopyString("");
 
-  if ( !*argument || !str_cmp (argument, "list") )
+  if ( !*argument || !StrCmp (argument, "list") )
     {
       extract_area_names (victim->pcdata->bestowments, buf);
       ch_printf( ch, "Bestowed areas: %s\r\n", buf);
       return;
     }
 
-  if ( !str_cmp (argument, "none") )
+  if ( !StrCmp (argument, "none") )
     {
       remove_area_names (victim->pcdata->bestowments, buf);
       DISPOSE( victim->pcdata->bestowments );
-      victim->pcdata->bestowments = str_dup( buf );
+      victim->pcdata->bestowments = CopyString( buf );
       send_to_char( "Done.\r\n", ch);
       return;
     }
@@ -80,7 +80,7 @@ void do_bestowarea( Character *ch, char *argument )
 
   sprintf( buf, "%s %s", victim->pcdata->bestowments, argument );
   DISPOSE( victim->pcdata->bestowments );
-  victim->pcdata->bestowments = str_dup( buf );
+  victim->pcdata->bestowments = CopyString( buf );
   ch_printf( victim, "%s has bestowed on you the area: %s\r\n",
              ch->name, argument );
   send_to_char( "Done.\r\n", ch );
@@ -100,9 +100,9 @@ static void extract_area_names (char *inp, char *out)
 
   while (inp && *inp)
     {
-      inp = one_argument(inp, buf);
+      inp = OneArgument(inp, buf);
 
-      if ( (len=strlen(buf)) >= 5 && !str_cmp(".are", pbuf+len-4) )
+      if ( (len=strlen(buf)) >= 5 && !StrCmp(".are", pbuf+len-4) )
         {
           if (*out)
 	    strcat (out, " ");
@@ -126,9 +126,9 @@ static void remove_area_names (char *inp, char *out)
 
   while (inp && *inp)
     {
-      inp = one_argument(inp, buf);
+      inp = OneArgument(inp, buf);
 
-      if ( (len=strlen(buf)) < 5 || str_cmp(".are", pbuf+len-4) )
+      if ( (len=strlen(buf)) < 5 || StrCmp(".are", pbuf+len-4) )
         {
           if (*out)
 	    strcat (out, " ");

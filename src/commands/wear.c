@@ -13,15 +13,15 @@ void do_wear( Character *ch, char *argument )
   OBJ_DATA *obj;
   short wear_bit;
 
-  argument = one_argument( argument, arg1 );
-  argument = one_argument( argument, arg2 );
+  argument = OneArgument( argument, arg1 );
+  argument = OneArgument( argument, arg2 );
 
-  if ( (!str_cmp(arg2, "on")
-	|| !str_cmp(arg2, "upon")
-	|| !str_cmp(arg2, "around"))
+  if ( (!StrCmp(arg2, "on")
+	|| !StrCmp(arg2, "upon")
+	|| !StrCmp(arg2, "around"))
        && argument[0] != '\0' )
     {
-      argument = one_argument( argument, arg2 );
+      argument = OneArgument( argument, arg2 );
     }
 
   if ( arg1[0] == '\0' )
@@ -33,7 +33,7 @@ void do_wear( Character *ch, char *argument )
   if ( ms_find_obj(ch) )
     return;
 
-  if ( !str_cmp( arg1, "all" ) )
+  if ( !StrCmp( arg1, "all" ) )
     {
       OBJ_DATA *obj_next;
 

@@ -7,10 +7,10 @@ void do_empty( Character *ch, char *argument )
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
 
-  argument = one_argument( argument, arg1 );
-  argument = one_argument( argument, arg2 );
-  if ( !str_cmp( arg2, "into" ) && argument[0] != '\0' )
-    argument = one_argument( argument, arg2 );
+  argument = OneArgument( argument, arg1 );
+  argument = OneArgument( argument, arg2 );
+  if ( !StrCmp( arg2, "into" ) && argument[0] != '\0' )
+    argument = OneArgument( argument, arg2 );
 
   if ( arg1[0] == '\0' )
     {

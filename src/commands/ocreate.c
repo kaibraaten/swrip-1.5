@@ -15,9 +15,9 @@ void do_ocreate( Character *ch, char *argument )
       return;
     }
 
-  argument = one_argument( argument, arg );
+  argument = OneArgument( argument, arg );
 
-  vnum = is_number( arg ) ? atoi( arg ) : -1;
+  vnum = IsNumber( arg ) ? atoi( arg ) : -1;
 
   if ( vnum == -1 || !argument || argument[0] == '\0' )
     {
@@ -31,11 +31,11 @@ void do_ocreate( Character *ch, char *argument )
       return;
     }
 
-  one_argument( argument, arg2 );
+  OneArgument( argument, arg2 );
   cvnum = atoi( arg2 );
 
   if ( cvnum != 0 )
-    argument = one_argument( argument, arg2 );
+    argument = OneArgument( argument, arg2 );
 
   if ( cvnum < 1 )
     cvnum = 0;

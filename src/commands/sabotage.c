@@ -21,9 +21,9 @@ void do_sabotage(Character *ch, char *argument )
           return;
         }
 
-      if ( str_cmp( argument , "hull" ) && str_cmp( argument , "drive" ) &&
-           str_cmp( argument , "launcher" ) && str_cmp( argument , "laser" ) &&
-           str_cmp( argument , "docking" ) && str_cmp( argument , "tractor" ) )
+      if ( StrCmp( argument , "hull" ) && StrCmp( argument , "drive" ) &&
+           StrCmp( argument , "launcher" ) && StrCmp( argument , "laser" ) &&
+           StrCmp( argument , "docking" ) && StrCmp( argument , "tractor" ) )
         {
           send_to_char("&RYou need to specify something to sabotage:\r\n",ch);
           send_to_char("&rTry: hull, drive, launcher, laser, docking, or tractor.\r\n",ch);
@@ -32,16 +32,16 @@ void do_sabotage(Character *ch, char *argument )
 
       the_chance = IsNpc(ch) ? ch->top_level
         : (int) (ch->pcdata->learned[gsn_sabotage]);
-      if ( number_percent( ) < the_chance )
+      if ( GetRandomPercent( ) < the_chance )
         {
           send_to_char( "&GYou begin your work.\r\n", ch);
           act( AT_PLAIN, "$n begins working on the ship's $T.", ch,
                NULL, argument , TO_ROOM );
-          if ( !str_cmp(arg,"hull") )
+          if ( !StrCmp(arg,"hull") )
             add_timer ( ch , TIMER_DO_FUN , 15 , do_sabotage , SUB_PAUSE );
           else
             add_timer ( ch , TIMER_DO_FUN , 15 , do_sabotage , SUB_PAUSE );
-          ch->dest_buf = str_dup(arg);
+          ch->dest_buf = CopyString(arg);
 	  return;
         }
       send_to_char("&RYou fail to figure out where to start.\r\n",ch);
@@ -71,16 +71,16 @@ void do_sabotage(Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp(arg,"hull") )
+  if ( !StrCmp(arg,"hull") )
     {
       change = urange( 0 ,
-                       number_range( (int) ( ch->pcdata->learned[gsn_sabotage] / 2 ) , (int) (ch->pcdata->learned[gsn_sabotage]) ),
+                       GetRandomNumberFromRange( (int) ( ch->pcdata->learned[gsn_sabotage] / 2 ) , (int) (ch->pcdata->learned[gsn_sabotage]) ),
                        ( ship->hull ) );
       ship->hull -= change;
       ch_printf( ch, "&GSabotage complete.. Hull strength decreased by %d points.\r\n", change );
     }
 
-  if ( !str_cmp(arg,"drive") )
+  if ( !StrCmp(arg,"drive") )
     {
       if (ship->location == ship->lastdoc)
         ship->shipstate = SHIP_DISABLED;
@@ -91,23 +91,23 @@ void do_sabotage(Character *ch, char *argument )
       send_to_char("&GShips drive damaged.\r\n", ch);
     }
 
-  if ( !str_cmp(arg,"docking") )
+  if ( !StrCmp(arg,"docking") )
     {
       ship->statetdocking = SHIP_DISABLED;
       send_to_char("&GDocking bay sabotaged.\r\n", ch);
     }
-  if ( !str_cmp(arg,"tractor") )
+  if ( !StrCmp(arg,"tractor") )
     {
       ship->statettractor = SHIP_DISABLED;
       send_to_char("&GTractorbeam sabotaged.\r\n", ch);
     }
-  if ( !str_cmp(arg,"launcher") )
+  if ( !StrCmp(arg,"launcher") )
     {
       ship->missilestate = MISSILE_DAMAGED;
       send_to_char("&GMissile launcher sabotaged.\r\n", ch);
     }
 
-  if ( !str_cmp(arg,"laser") )
+  if ( !StrCmp(arg,"laser") )
     {
       ship->statet0 = LASER_DAMAGED;
       send_to_char("&GMain laser sabotaged.\r\n", ch);

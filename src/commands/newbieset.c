@@ -8,8 +8,8 @@ void do_newbieset( Character *ch, char *argument )
   OBJ_DATA *obj;
   Character *victim;
 
-  argument = one_argument( argument, arg1 );
-  argument = one_argument (argument, arg2);
+  argument = OneArgument( argument, arg1 );
+  argument = OneArgument (argument, arg2);
 
   if ( arg1[0] == '\0' )
     {

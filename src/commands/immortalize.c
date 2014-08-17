@@ -6,7 +6,7 @@ void do_immortalize( Character *ch, char *argument )
   char arg[MAX_INPUT_LENGTH];
   Character *victim;
 
-  argument = one_argument( argument, arg );
+  argument = OneArgument( argument, arg );
 
   if ( arg[0] == '\0' )
     {

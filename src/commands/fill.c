@@ -15,13 +15,13 @@ void do_fill( Character *ch, char *argument )
   int       diff;
   bool      all = false;
 
-  argument = one_argument( argument, arg1 );
-  argument = one_argument( argument, arg2 );
+  argument = OneArgument( argument, arg1 );
+  argument = OneArgument( argument, arg2 );
 
   /* munch optional words */
-  if ( (!str_cmp( arg2, "from" ) || !str_cmp( arg2, "with" ))
+  if ( (!StrCmp( arg2, "from" ) || !StrCmp( arg2, "with" ))
        &&    argument[0] != '\0' )
-    argument = one_argument( argument, arg2 );
+    argument = OneArgument( argument, arg2 );
 
   if ( arg1[0] == '\0' )
     {
@@ -107,7 +107,7 @@ void do_fill( Character *ch, char *argument )
   if ( arg2[0] != '\0' )
     {
       if ( dest_item == ITEM_CONTAINER
-           && (!str_cmp( arg2, "all" ) || !str_prefix( "all.", arg2 )) )
+           && (!StrCmp( arg2, "all" ) || !StringPrefix( "all.", arg2 )) )
         {
           all = true;
           source = NULL;
@@ -170,7 +170,7 @@ void do_fill( Character *ch, char *argument )
                    > obj->value[OVAL_CONTAINER_CAPACITY] )
                 continue;
               if ( all && arg2[3] == '.'
-                   &&  !nifty_is_name( &arg2[4], source->name ) )
+                   &&  !NiftyIsName( &arg2[4], source->name ) )
                 continue;
               obj_from_room(source);
               if ( source->item_type == ITEM_MONEY )
@@ -265,11 +265,11 @@ void do_fill( Character *ch, char *argument )
             }
 
           pd = source->short_descr;
-          pd = one_argument( pd, name );
-          pd = one_argument( pd, name );
-          pd = one_argument( pd, name );
+          pd = OneArgument( pd, name );
+          pd = OneArgument( pd, name );
+          pd = OneArgument( pd, name );
 
-	  if ( str_cmp( name, ch->name ) && !IsImmortal(ch) )
+	  if ( StrCmp( name, ch->name ) && !IsImmortal(ch) )
             {
               bool fGroup;
 
@@ -278,7 +278,7 @@ void do_fill( Character *ch, char *argument )
                 {
                   if ( !IsNpc(gch)
                        &&   is_same_group( ch, gch )
-                       &&   !str_cmp( name, gch->name ) )
+                       &&   !StrCmp( name, gch->name ) )
                     {
                       fGroup = true;
                       break;

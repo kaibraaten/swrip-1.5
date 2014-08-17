@@ -67,7 +67,7 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
       return;
     }
 
-  ud->ItemName = str_dup( args->CommandArguments );
+  ud->ItemName = CopyString( args->CommandArguments );
 }
 
 static void CheckRequirementsHandler( void *userData, CheckRequirementsEventArgs *args )
@@ -102,15 +102,15 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   shield->weight = 2;
 
   DISPOSE( shield->name );
-  shield->name = str_dup( "energy shield" );
+  shield->name = CopyString( "energy shield" );
 
   strcpy( buf, ud->ItemName );
   DISPOSE( shield->short_descr );
-  shield->short_descr = str_dup( buf );
+  shield->short_descr = CopyString( buf );
 
   DISPOSE( shield->description );
   strcat( buf, " was carelessly misplaced here." );
-  shield->description = str_dup( capitalize( buf ) );
+  shield->description = CopyString( Capitalize( buf ) );
 
   shield->value[OVAL_ARMOR_CONDITION] = (int) (shield->level / 10 + ud->GemType * 2);
   shield->value[OVAL_ARMOR_AC] = (int) (shield->level / 10 + ud->GemType * 2);

@@ -9,9 +9,9 @@ void do_massign( Character *ch, char *argument )
   short  m_lo, m_hi;
   Character *victim;
 
-  argument = one_argument( argument, arg1 );
-  argument = one_argument( argument, arg2 );
-  argument = one_argument( argument, arg3 );
+  argument = OneArgument( argument, arg1 );
+  argument = OneArgument( argument, arg2 );
+  argument = OneArgument( argument, arg3 );
   m_lo = atoi( arg2 );  m_hi = atoi( arg3 );
 
   if ( arg1[0] == '\0' || m_lo < 0 || m_hi < 0 )

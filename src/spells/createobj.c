@@ -29,9 +29,9 @@ ch_ret spell_create_obj( int sn, int level, Character *ch, void *vo )
   /*
   if ( vnum == 0 )
     {
-      if ( !str_cmp( spell_target_name, "sword" ) )
+      if ( !StrCmp( spell_target_name, "sword" ) )
         vnum = OBJ_VNUM_SCHOOL_SWORD;
-      if ( !str_cmp( spell_target_name, "shield" ) )
+      if ( !StrCmp( spell_target_name, "shield" ) )
         vnum = OBJ_VNUM_SCHOOL_SHIELD;
     }
   */

@@ -14,8 +14,8 @@ void do_launch( Character *ch, char *argument )
   char buf[MAX_STRING_LENGTH];
   Room *room;
 
-  argument = one_argument( argument , arg1);
-  argument = one_argument( argument , arg2);
+  argument = OneArgument( argument , arg1);
+  argument = OneArgument( argument , arg2);
 
   if ( (ship = GetShipFromCockpit(ch->in_room->vnum)) == NULL )
     {
@@ -91,7 +91,7 @@ void do_launch( Character *ch, char *argument )
   if ( ship->sclass == CAPITAL_SHIP )
     the_chance = IsNpc(ch) ? ch->top_level
       : (int) (ch->pcdata->learned[gsn_capitalships]);
-  if ( number_percent( ) < the_chance )
+  if ( GetRandomPercent( ) < the_chance )
     {
       if ( IsShipRental(ch,ship) )
         if( !RentShip(ch,ship) )
@@ -143,7 +143,7 @@ void do_launch( Character *ch, char *argument )
           price = 100;
         }
 
-      if ( ch->pcdata && ch->pcdata->clan && !str_cmp(ch->pcdata->clan->name,ship->owner) )
+      if ( ch->pcdata && ch->pcdata->clan && !StrCmp(ch->pcdata->clan->name,ship->owner) )
         {
           if ( ch->pcdata->clan->funds < price )
             {
@@ -157,7 +157,7 @@ void do_launch( Character *ch, char *argument )
             boost_economy( room->area, price );
           ch_printf(ch, "&GIt costs %s %ld credits to ready this ship for launch.\r\n", ch->pcdata->clan->name, price );
         }
-      else if ( str_cmp( ship->owner , "Public" ) )
+      else if ( StrCmp( ship->owner , "Public" ) )
         {
           if ( ch->gold < price )
             {

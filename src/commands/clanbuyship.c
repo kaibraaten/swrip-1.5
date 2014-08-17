@@ -24,8 +24,8 @@ void do_clanbuyship(Character *ch, char *argument )
   mainclan = ch->pcdata->clan->mainclan ? ch->pcdata->clan->mainclan : clan;
 
   if ( ( ch->pcdata->bestowments
-         &&    is_name("clanbuyship", ch->pcdata->bestowments))
-       ||   !str_cmp( ch->name, clan->leadership.leader  ))
+         &&    IsName("clanbuyship", ch->pcdata->bestowments))
+       ||   !StrCmp( ch->name, clan->leadership.leader  ))
     ;
   else
     {
@@ -45,27 +45,27 @@ void do_clanbuyship(Character *ch, char *argument )
         }
     }
 
-  if ( str_cmp( ship->owner , "" )  || ship->type == MOB_SHIP )
+  if ( StrCmp( ship->owner , "" )  || ship->type == MOB_SHIP )
     {
       send_to_char( "&RThat ship isn't for sale!\r\n" ,ch );
       return;
     }
 
-  if ( str_cmp( mainclan->name , "The Empire" )  && ship->type == SHIP_IMPERIAL )
+  if ( StrCmp( mainclan->name , "The Empire" )  && ship->type == SHIP_IMPERIAL )
     {
       send_to_char( "&RThat ship may only be purchaced by the Empire!\r\n" ,ch );
       return;
     }
 
-  if ( (str_cmp( mainclan->name , "The Rebel Alliance" )
-	&& str_cmp( mainclan->name , "The New Republic" ) )
+  if ( (StrCmp( mainclan->name , "The Rebel Alliance" )
+	&& StrCmp( mainclan->name , "The New Republic" ) )
        && ship->type == SHIP_REBEL )
     {
       send_to_char( "&RThat ship may only be purchaced by The Rebel Alliance!\r\n" ,ch );
       return;
     }
 
-  if ( !str_cmp( clan->name , "The Empire" )  && ship->type != SHIP_IMPERIAL )
+  if ( !StrCmp( clan->name , "The Empire" )  && ship->type != SHIP_IMPERIAL )
     {
       send_to_char( "&RDue to contractual agreements that ship may not be purchaced by the empire!\r\n" ,ch );
       return;
@@ -86,7 +86,7 @@ void do_clanbuyship(Character *ch, char *argument )
        NULL, argument , TO_ROOM );
 
   DISPOSE( ship->owner );
-  ship->owner = str_dup( clan->name );
+  ship->owner = CopyString( clan->name );
   SaveShip( ship );
 
   if ( ship->sclass <= SHIP_PLATFORM )

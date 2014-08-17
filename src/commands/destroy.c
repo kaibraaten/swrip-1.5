@@ -10,7 +10,7 @@ void do_destroy( Character *ch, char *argument )
   char buf2[MAX_STRING_LENGTH];
   char arg[MAX_INPUT_LENGTH];
 
-  one_argument( argument, arg );
+  OneArgument( argument, arg );
   if ( arg[0] == '\0' )
     {
       send_to_char( "Destroy what player file?\r\n", ch );
@@ -18,7 +18,7 @@ void do_destroy( Character *ch, char *argument )
     }
 
   for ( victim = first_char; victim; victim = victim->next )
-    if ( !IsNpc(victim) && !str_cmp(victim->name, arg) )
+    if ( !IsNpc(victim) && !StrCmp(victim->name, arg) )
       break;
   if ( !victim )
     {
@@ -27,7 +27,7 @@ void do_destroy( Character *ch, char *argument )
       /* Make sure they aren't halfway logged in. */
       for ( d = first_descriptor; d; d = d->next )
         if ( (victim = d->character) && !IsNpc(victim) &&
-	     !str_cmp(victim->name, arg) )
+	     !StrCmp(victim->name, arg) )
           break;
       if ( d )
         close_socket( d, true );
@@ -46,16 +46,16 @@ void do_destroy( Character *ch, char *argument )
     }
 
   sprintf( buf, "%s%c/%s", PLAYER_DIR, tolower(arg[0]),
-           capitalize( arg ) );
+           Capitalize( arg ) );
   sprintf( buf2, "%s%c/%s", BACKUP_DIR, tolower(arg[0]),
-           capitalize( arg ) );
+           Capitalize( arg ) );
   if ( !rename( buf, buf2 ) )
     {
       Area *pArea;
 
       set_char_color( AT_RED, ch );
       send_to_char( "Player destroyed.  Pfile saved in backup directory.\r\n", ch );
-      sprintf( buf, "%s%s", GOD_DIR, capitalize(arg) );
+      sprintf( buf, "%s%s", GOD_DIR, Capitalize(arg) );
       if ( !remove( buf ) )
         send_to_char( "Player's immortal data destroyed.\r\n", ch );
       else if ( errno != ENOENT )
@@ -66,9 +66,9 @@ void do_destroy( Character *ch, char *argument )
           perror( buf2 );
         }
 
-      sprintf( buf2, "%s.are", capitalize(arg) );
+      sprintf( buf2, "%s.are", Capitalize(arg) );
       for ( pArea = first_build; pArea; pArea = pArea->next )
-        if ( !str_cmp( pArea->filename, buf2 ) )
+        if ( !StrCmp( pArea->filename, buf2 ) )
           {
             sprintf( buf, "%s%s", BUILD_DIR, buf2 );
             if ( IsBitSet( pArea->status, AREA_LOADED ) )

@@ -52,7 +52,7 @@ void do_target(Character *ch, char *argument )
           return;
         }
 
-      if ( !str_cmp( arg, "none") )
+      if ( !StrCmp( arg, "none") )
         {
           send_to_char("&GTarget set to none.\r\n",ch);
 
@@ -89,12 +89,12 @@ void do_target(Character *ch, char *argument )
           return;
         }
 
-      if ( !str_cmp(ship->owner, "Trainer") && str_cmp(target->owner, "Trainer") )
+      if ( !StrCmp(ship->owner, "Trainer") && StrCmp(target->owner, "Trainer") )
         {
           send_to_char("&RTrainers can only target other trainers!!\r\n",ch);
           return;
         }
-      if ( str_cmp(ship->owner, "Trainer") && !str_cmp(target->owner, "Trainer") )
+      if ( StrCmp(ship->owner, "Trainer") && !StrCmp(target->owner, "Trainer") )
         {
           send_to_char("&ROnly trainers can target other trainers!!\r\n",ch);
           return;
@@ -111,13 +111,13 @@ void do_target(Character *ch, char *argument )
 
       the_chance = IsNpc(ch) ? ch->top_level
         : (int)  (ch->pcdata->learned[gsn_weaponsystems]) ;
-      if ( number_percent( ) < the_chance )
+      if ( GetRandomPercent( ) < the_chance )
         {
 	  send_to_char( "&GTracking target.\r\n", ch);
           act( AT_PLAIN, "$n makes some adjustments on the targeting computer.", ch,
                NULL, argument , TO_ROOM );
           add_timer ( ch , TIMER_DO_FUN , 1 , do_target , SUB_PAUSE );
-          ch->dest_buf = str_dup(arg);
+          ch->dest_buf = CopyString(arg);
           return;
         }
       send_to_char("&RYou fail to work the controls properly.\r\n",ch);

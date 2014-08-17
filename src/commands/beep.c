@@ -7,7 +7,7 @@ void do_beep( Character *ch, char *argument )
   char arg[MAX_STRING_LENGTH];
   bool ch_comlink = false, victim_comlink = false;
 
-  argument = one_argument( argument, arg );
+  argument = OneArgument( argument, arg );
 
   RemoveBit( ch->deaf, CHANNEL_TELLS );
   if ( IsBitSet( ch->in_room->room_flags, ROOM_SILENCE ) )
@@ -119,5 +119,5 @@ void do_beep( Character *ch, char *argument )
        ||  (IsNpc(ch) && !ch->speaking) )
     act( AT_WHITE, "$n beeps: '$t'", ch, argument, victim, TO_VICT );
   else
-    act( AT_WHITE, "$n beeps: '$t'", ch, scramble(argument, ch->speaking), victim, TO_VICT );
+    act( AT_WHITE, "$n beeps: '$t'", ch, Scramble(argument, ch->speaking), victim, TO_VICT );
 }

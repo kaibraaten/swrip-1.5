@@ -14,7 +14,7 @@ void do_circle( Character *ch, char *argument )
       return;
     }
 
-  one_argument( argument, arg );
+  OneArgument( argument, arg );
 
   if ( ch->mount )
     {
@@ -69,7 +69,7 @@ void do_circle( Character *ch, char *argument )
       return;
     }
 
-  percent = number_percent( ) - (GetCurrentLuck(ch) - 16)
+  percent = GetRandomPercent( ) - (GetCurrentLuck(ch) - 16)
     + (GetCurrentLuck(victim) - 13);
 
   SetWaitState( ch, skill_table[gsn_circle]->beats );

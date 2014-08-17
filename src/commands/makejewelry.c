@@ -65,7 +65,7 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
   char name[MAX_STRING_LENGTH];
 
   strcpy( argument, args->CommandArguments );
-  argument = one_argument( argument, wearLoc );
+  argument = OneArgument( argument, wearLoc );
   strcpy( name, argument );
 
   if ( name[0] == '\0' )
@@ -95,7 +95,7 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
       return;
     }
 
-  ud->ItemName = str_dup( name );
+  ud->ItemName = CopyString( name );
 }
 
 static void CheckRequirementsHandler( void *userData, CheckRequirementsEventArgs *args )
@@ -130,15 +130,15 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
 
   DISPOSE( obj->name );
   strcpy( buf, ud->ItemName );
-  obj->name = str_dup( buf );
+  obj->name = CopyString( buf );
 
   strcpy( buf, ud->ItemName );
   DISPOSE( obj->short_descr );
-  obj->short_descr = str_dup( buf );
+  obj->short_descr = CopyString( buf );
 
   DISPOSE( obj->description );
   strcat( buf, " was dropped here." );
-  obj->description = str_dup( capitalize( buf ) );
+  obj->description = CopyString( Capitalize( buf ) );
 
   obj->value[OVAL_ARMOR_CONDITION] = obj->value[OVAL_ARMOR_AC];
 

@@ -13,13 +13,13 @@ void do_mpinvis( Character *ch, char *argument )
       return;
     }
 
-  argument = one_argument( argument, arg );
+  argument = OneArgument( argument, arg );
 
   if ( arg[0] != '\0' )
     {
       short level = 0;
 
-      if ( !is_number( arg ) )
+      if ( !IsNumber( arg ) )
         {
           progbug( "Mpinvis - Non numeric argument ", ch );
           return;

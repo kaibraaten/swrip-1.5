@@ -16,7 +16,7 @@ void do_instazone( Character *ch, char *argument )
                     ch );
       return;
     }
-  if ( !str_cmp(argument, "nodoors") )
+  if ( !StrCmp(argument, "nodoors") )
     dodoors = false;
   else
     dodoors = true;

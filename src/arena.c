@@ -39,7 +39,7 @@
 
 Arena arena;
 
-#define ARENA_START number_range( 29, 41)    /* vnum of first real arena room*/
+#define ARENA_START GetRandomNumberFromRange( 29, 41)    /* vnum of first real arena room*/
 #define ARENA_END   41   /* vnum of last real arena room*/
 #define HALL_FAME_FILE  SYSTEM_DIR "halloffame.lst"
 

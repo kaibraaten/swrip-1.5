@@ -18,11 +18,11 @@ void do_noteroom( Character *ch, char *argument )
 
     default:
 
-      argument = one_argument(argument, arg);
-      smash_tilde( argument );
+      argument = OneArgument(argument, arg);
+      SmashTilde( argument );
 
-      if (!str_cmp(arg, "write") || !str_cmp(arg, "to")
-          || !str_cmp(arg, "subject") || !str_cmp(arg, "show"))
+      if (!StrCmp(arg, "write") || !StrCmp(arg, "to")
+          || !StrCmp(arg, "subject") || !StrCmp(arg, "show"))
         {
           operate_on_note(ch, arg_passed, false);
           return;

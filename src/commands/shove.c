@@ -12,8 +12,8 @@ void do_shove( Character *ch, char *argument )
   bool nogo = false;
   int shove_chance = 0;
 
-  argument = one_argument( argument, arg );
-  argument = one_argument( argument, arg2 );
+  argument = OneArgument( argument, arg );
+  argument = OneArgument( argument, arg2 );
 
   if ( arg[0] == '\0' )
     {
@@ -58,7 +58,7 @@ void do_shove( Character *ch, char *argument )
 
   if ((pexit = get_exit(ch->in_room, exit_dir)) == NULL )
     {
-      if (!str_cmp( arg2, "in" ))
+      if (!StrCmp( arg2, "in" ))
         {
 	  Room *to_room = NULL;
 	  Ship *ship = NULL;
@@ -145,7 +145,7 @@ void do_shove( Character *ch, char *argument )
             }
         }
 
-      if (!str_cmp( arg2, "out" ))
+      if (!StrCmp( arg2, "out" ))
         {
 	  Room *to_room = NULL;
           Room *fromroom = ch->in_room;
@@ -268,7 +268,7 @@ void do_shove( Character *ch, char *argument )
   shove_chance += ((GetCurrentStrength(ch) - 15) * 3);
   shove_chance += (ch->top_level - victim->top_level);
 
-  if (shove_chance < number_percent( ))
+  if (shove_chance < GetRandomPercent( ))
     {
       send_to_char("You failed.\r\n", ch);
       victim->position = POS_STANDING;

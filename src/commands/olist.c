@@ -21,8 +21,8 @@ void do_olist( Character *ch, char *argument )
       return;
     }
   tarea = ch->pcdata->area;
-  argument = one_argument( argument, arg1 );
-  argument = one_argument( argument, arg2 );
+  argument = OneArgument( argument, arg1 );
+  argument = OneArgument( argument, arg2 );
 
   if ( tarea )
     {
@@ -44,8 +44,8 @@ void do_olist( Character *ch, char *argument )
     }
   else
     {
-      lrange = ( is_number( arg1 ) ? atoi( arg1 ) : 1 );
-      trange = ( is_number( arg2 ) ? atoi( arg2 ) : 3 );
+      lrange = ( IsNumber( arg1 ) ? atoi( arg1 ) : 1 );
+      trange = ( IsNumber( arg2 ) ? atoi( arg2 ) : 3 );
     }
 
   for ( vnum = lrange; vnum <= trange; vnum++ )

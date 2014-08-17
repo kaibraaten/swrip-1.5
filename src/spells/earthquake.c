@@ -44,7 +44,7 @@ ch_ret spell_earthquake( int sn, int level, Character *ch, void *vo )
           if  (ch == vch )
             continue;
 
-          retcode = damage( ch, vch, level + dice(2, 8), sn );
+          retcode = damage( ch, vch, level + RollDice(2, 8), sn );
           if ( retcode == rCHAR_DIED || char_died(ch) )
             {
               ch_died = true;

@@ -57,7 +57,7 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
       return;
     }
 
-  ud->ItemName = str_dup( args->CommandArguments );
+  ud->ItemName = CopyString( args->CommandArguments );
 }
 
 static void MaterialFoundHandler( void *userData, MaterialFoundEventArgs *args )
@@ -99,15 +99,15 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
       strcat( buf, " force pike" );
     }
 
-  weapon->name = str_dup( buf );
+  weapon->name = CopyString( buf );
 
   strcpy( buf, ud->ItemName );
   DISPOSE( weapon->short_descr );
-  weapon->short_descr = str_dup( buf );
+  weapon->short_descr = CopyString( buf );
 
   DISPOSE( weapon->description );
   strcat( buf, " was left here." );
-  weapon->description = str_dup( capitalize( buf ) );
+  weapon->description = CopyString( Capitalize( buf ) );
 
   CREATE( paf, Affect, 1 );
   paf->type               = -1;

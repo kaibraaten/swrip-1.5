@@ -47,7 +47,7 @@ CLAN_DATA *get_clan( const char *name )
 
   for ( clan = first_clan; clan; clan = clan->next )
     {
-      if ( !str_cmp( name, clan->name ) )
+      if ( !StrCmp( name, clan->name ) )
 	{
 	  return clan;
 	}
@@ -156,59 +156,59 @@ static void fread_clan( CLAN_DATA *clan, FILE *fp )
 {
   for ( ; ; )
     {
-      const char *word = feof( fp ) ? "End" : fread_word( fp );
+      const char *word = feof( fp ) ? "End" : ReadWord( fp );
       bool fMatch = false;
 
       switch ( CharToUppercase(word[0]) )
         {
         case '*':
           fMatch = true;
-          fread_to_eol( fp );
+          ReadToEndOfLine( fp );
           break;
 
         case 'B':
-          KEY( "Board", clan->board, fread_number( fp ) );
+          KEY( "Board", clan->board, ReadInt( fp ) );
           break;
 
         case 'D':
-          KEY( "Description", clan->description, fread_string( fp ) );
+          KEY( "Description", clan->description, ReadStringToTilde( fp ) );
           break;
 
         case 'E':
-          KEY( "Enlist1", clan->enlistroom1, fread_number( fp ) );
-          KEY( "Enlist2", clan->enlistroom2, fread_number( fp ) );
+          KEY( "Enlist1", clan->enlistroom1, ReadInt( fp ) );
+          KEY( "Enlist2", clan->enlistroom2, ReadInt( fp ) );
 
-          if ( !str_cmp( word, "End" ) )
+          if ( !StrCmp( word, "End" ) )
             {
               if (!clan->name)
 		{
-		  clan->name = str_dup( "" );
+		  clan->name = CopyString( "" );
 		}
 
               if (!clan->leadership.leader)
 		{
-		  clan->leadership.leader = str_dup( "" );
+		  clan->leadership.leader = CopyString( "" );
 		}
 
               if (!clan->description)
 		{
-		  clan->description = str_dup( "" );
+		  clan->description = CopyString( "" );
 		}
 
               if (!clan->leadership.number1)
 		{
-		  clan->leadership.number1 = str_dup( "" );
+		  clan->leadership.number1 = CopyString( "" );
 		}
 
 
               if (!clan->leadership.number2)
 		{
-		  clan->leadership.number2 = str_dup( "" );
+		  clan->leadership.number2 = CopyString( "" );
 		}
 
               if (!clan->tmpstr)
 		{
-		  clan->tmpstr = str_dup( "" );
+		  clan->tmpstr = CopyString( "" );
 		}
 
               return;
@@ -216,51 +216,51 @@ static void fread_clan( CLAN_DATA *clan, FILE *fp )
           break;
 
         case 'F':
-          KEY( "Funds",    clan->funds,    fread_number( fp ) );
-          KEY( "Filename", clan->filename, fread_string_nohash( fp ) );
+          KEY( "Funds",    clan->funds,    ReadInt( fp ) );
+          KEY( "Filename", clan->filename, ReadStringToTildeNoHash( fp ) );
           break;
 
         case 'G':
-          KEY( "GuardOne", clan->guard1, fread_number( fp ) );
-          KEY( "GuardTwo", clan->guard2, fread_number( fp ) );
+          KEY( "GuardOne", clan->guard1, ReadInt( fp ) );
+          KEY( "GuardTwo", clan->guard2, ReadInt( fp ) );
           break;
 
         case 'J':
-          KEY( "Jail", clan->jail, fread_number( fp ) );
+          KEY( "Jail", clan->jail, ReadInt( fp ) );
           break;
 
         case 'L':
-          KEY( "Leader", clan->leadership.leader, fread_string( fp ) );
+          KEY( "Leader", clan->leadership.leader, ReadStringToTilde( fp ) );
           break;
 
         case 'M':
-          KEY( "MDeaths",  clan->mdeaths, fread_number( fp ) );
-          KEY( "Members",  clan->members, fread_number( fp ) );
-          KEY( "MKills",   clan->mkills,  fread_number( fp ) );
-          KEY( "MainClan", clan->tmpstr,  fread_string( fp ) );
+          KEY( "MDeaths",  clan->mdeaths, ReadInt( fp ) );
+          KEY( "Members",  clan->members, ReadInt( fp ) );
+          KEY( "MKills",   clan->mkills,  ReadInt( fp ) );
+          KEY( "MainClan", clan->tmpstr,  ReadStringToTilde( fp ) );
           break;
 
         case 'N':
-          KEY( "Name",      clan->name,    fread_string( fp ) );
-          KEY( "NumberOne", clan->leadership.number1, fread_string( fp ) );
-          KEY( "NumberTwo", clan->leadership.number2, fread_string( fp ) );
+          KEY( "Name",      clan->name,    ReadStringToTilde( fp ) );
+          KEY( "NumberOne", clan->leadership.number1, ReadStringToTilde( fp ) );
+          KEY( "NumberTwo", clan->leadership.number2, ReadStringToTilde( fp ) );
           break;
 
         case 'P':
-          KEY( "PDeaths",   clan->pdeaths, fread_number( fp ) );
-          KEY( "PKills",    clan->pkills,  fread_number( fp ) );
-          KEY( "PatrolOne", clan->patrol1, fread_number( fp ) );
-          KEY( "PatrolTwo", clan->patrol2, fread_number( fp ) );
+          KEY( "PDeaths",   clan->pdeaths, ReadInt( fp ) );
+          KEY( "PKills",    clan->pkills,  ReadInt( fp ) );
+          KEY( "PatrolOne", clan->patrol1, ReadInt( fp ) );
+          KEY( "PatrolTwo", clan->patrol2, ReadInt( fp ) );
           break;
 
         case 'S':
-          KEY( "Storeroom", clan->storeroom, fread_number( fp ) );
+          KEY( "Storeroom", clan->storeroom, ReadInt( fp ) );
           break;
 
         case 'T':
-          KEY( "Type", clan->clan_type, fread_number( fp ) );
-          KEY( "TrooperOne", clan->trooper1, fread_number( fp ) );
-          KEY( "TrooperTwo", clan->trooper2, fread_number( fp ) );
+          KEY( "Type", clan->clan_type, ReadInt( fp ) );
+          KEY( "TrooperOne", clan->trooper1, ReadInt( fp ) );
+          KEY( "TrooperTwo", clan->trooper2, ReadInt( fp ) );
           break;
         }
 
@@ -299,11 +299,11 @@ static bool load_clan_file( const char *clanfile )
       for ( ; ; )
         {
 	  const char *word;
-          char letter = fread_letter( fp );
+          char letter = ReadChar( fp );
 
           if ( letter == '*' )
             {
-              fread_to_eol( fp );
+              ReadToEndOfLine( fp );
               continue;
             }
 
@@ -313,14 +313,14 @@ static bool load_clan_file( const char *clanfile )
               break;
             }
 
-          word = fread_word( fp );
+          word = ReadWord( fp );
 
-          if ( !str_cmp( word, "CLAN"   ) )
+          if ( !StrCmp( word, "CLAN"   ) )
             {
               fread_clan( clan, fp );
               break;
             }
-          else if ( !str_cmp( word, "END"  ) )
+          else if ( !StrCmp( word, "END"  ) )
 	    {
               break;
 	    }
@@ -346,7 +346,7 @@ static bool load_clan_file( const char *clanfile )
 
           log_string( "No memberlist found, creating new list" );
           CREATE( members_list, MEMBER_LIST, 1 );
-          members_list->name = str_dup( clan->name );
+          members_list->name = CopyString( clan->name );
           LINK( members_list, first_member_list, last_member_list, next, prev );
           save_member_list( members_list );
         }
@@ -378,11 +378,11 @@ static bool load_clan_file( const char *clanfile )
           for ( ; ; )
             {
 	      const char *word = NULL;
-              char letter = fread_letter( fp );
+              char letter = ReadChar( fp );
 
               if ( letter == '*' )
                 {
-                  fread_to_eol( fp );
+                  ReadToEndOfLine( fp );
                   continue;
                 }
 
@@ -393,13 +393,13 @@ static bool load_clan_file( const char *clanfile )
                   break;
                 }
 
-              word = fread_word( fp );
+              word = ReadWord( fp );
 
-              if ( !str_cmp( word, "OBJECT" ) )
+              if ( !StrCmp( word, "OBJECT" ) )
 		{
 		  fread_obj  ( supermob, fp, OS_CARRY );
 		}
-              else if ( !str_cmp( word, "END"    ) )
+              else if ( !StrCmp( word, "END"    ) )
 		{
                   break;
 		}
@@ -455,7 +455,7 @@ void load_clans( void )
 
   for ( ; ; )
     {
-      const char *filename = feof( fpList ) ? "$" : fread_word( fpList );
+      const char *filename = feof( fpList ) ? "$" : ReadWord( fpList );
       log_string( filename );
 
       if ( filename[0] == '$' )
@@ -500,7 +500,7 @@ void show_members( const Character *ch, const char *argument, const char *format
 
   for( members_list = first_member_list; members_list; members_list = members_list->next )
     {
-      if( !str_cmp( members_list->name, argument ) )
+      if( !StrCmp( members_list->name, argument ) )
         break;
     }
 
@@ -525,9 +525,9 @@ void show_members( const Character *ch, const char *argument, const char *format
 
   if( format && format[0] != '\0' )
     {
-      if( !str_cmp( format, "kills" )
-          || !str_cmp( format, "deaths" )
-          || !str_cmp( format, "alpha" ))
+      if( !StrCmp( format, "kills" )
+          || !StrCmp( format, "deaths" )
+          || !StrCmp( format, "alpha" ))
         {
           MS_DATA *insert = NULL;
           MS_DATA *sort = NULL;
@@ -543,7 +543,7 @@ void show_members( const Character *ch, const char *argument, const char *format
               insert = NULL;
               for( sort = first_member; sort; sort = sort->next )
                 {
-                  if( !str_cmp( format, "kills" ))
+                  if( !StrCmp( format, "kills" ))
                     {
                       if( member->kills > sort->member->kills )
                         {
@@ -553,7 +553,7 @@ void show_members( const Character *ch, const char *argument, const char *format
                           break;
                         }
                     }
-                  else if( !str_cmp( format, "deaths" ))
+                  else if( !StrCmp( format, "deaths" ))
                     {
                       if( member->deaths > sort->member->deaths )
                         {
@@ -563,7 +563,7 @@ void show_members( const Character *ch, const char *argument, const char *format
                           break;
                         }
                     }
-                  else if( !str_cmp( format, "alpha" ))
+                  else if( !StrCmp( format, "alpha" ))
                     {
                       if( strcmp( member->name, sort->member->name ) < 0 )
                         {
@@ -586,14 +586,14 @@ void show_members( const Character *ch, const char *argument, const char *format
 
           for( sort = first_member; sort; sort = sort->next )
 	    {
-	      if( str_cmp( sort->member->name, clan->leadership.leader )
-		  && str_cmp( sort->member->name, clan->leadership.number1 )
-		  && str_cmp( sort->member->name, clan->leadership.number2 ) )
+	      if( StrCmp( sort->member->name, clan->leadership.leader )
+		  && StrCmp( sort->member->name, clan->leadership.number1 )
+		  && StrCmp( sort->member->name, clan->leadership.number2 ) )
 		{
 		  members++;
 		  pager_printf( ch, "[%3d] %12s %15s %7d %7d %10s\r\n",
 				sort->member->level,
-				capitalize(sort->member->name ),
+				Capitalize(sort->member->name ),
 				ability_name[sort->member->mclass],
 				sort->member->kills,
 				sort->member->deaths,
@@ -603,12 +603,12 @@ void show_members( const Character *ch, const char *argument, const char *format
         }
 
       for( member = members_list->first_member; member; member = member->next )
-        if( !str_prefix( format, member->name ) )
+        if( !StringPrefix( format, member->name ) )
           {
             members++;
             pager_printf( ch, "[%3d] %12s %15s %7d %7d %10s\r\n",
                           member->level,
-                          capitalize(member->name ),
+                          Capitalize(member->name ),
                           ability_name[member->mclass],
                           member->kills,
                           member->deaths,
@@ -620,13 +620,13 @@ void show_members( const Character *ch, const char *argument, const char *format
     {
 
       for( member = members_list->first_member; member; member = member->next )
-        if( str_cmp( member->name, clan->leadership.leader ) && str_cmp( member->name, clan->leadership.number1 )
-            && str_cmp( member->name, clan->leadership.number2 ) )
+        if( StrCmp( member->name, clan->leadership.leader ) && StrCmp( member->name, clan->leadership.number1 )
+            && StrCmp( member->name, clan->leadership.number2 ) )
           {
             members++;
             pager_printf( ch, "[%3d] %12s %15s %7d %7d %10s\r\n",
                           member->level,
-                          capitalize(member->name),
+                          Capitalize(member->name),
                           ability_name[member->mclass],
                           member->kills,
                           member->deaths,
@@ -651,10 +651,10 @@ void remove_member( const Character *ch )
 
   for( members_list = first_member_list; members_list; members_list = members_list->next )
     {
-      if( !str_cmp( members_list->name, ch->pcdata->clan_name ) )
+      if( !StrCmp( members_list->name, ch->pcdata->clan_name ) )
         for( member = members_list->first_member; member; member = member->next )
           {
-            if( !str_cmp( member->name, ch->name ) )
+            if( !StrCmp( member->name, ch->name ) )
               {
                 UNLINK( member, members_list->first_member, members_list->last_member, next, prev );
                 DISPOSE( member->name );
@@ -723,28 +723,28 @@ bool load_member_list( const char *filename )
 
   for( ; ; )
     {
-      const char *word = fread_word( fp );
+      const char *word = ReadWord( fp );
 
-      if( !str_cmp( word, "Name" ) )
+      if( !StrCmp( word, "Name" ) )
         {
-          members_list->name = fread_string( fp );
+          members_list->name = ReadStringToTilde( fp );
           continue;
         }
       else
-        if( !str_cmp( word, "Member" ) )
+        if( !StrCmp( word, "Member" ) )
           {
             CREATE( member, MEMBER_DATA, 1 );
-            member->name = str_dup( fread_word( fp ) );
-            member->since = str_dup( fread_word( fp ) );
-            member->kills = fread_number( fp );
-            member->deaths = fread_number( fp );
-            member->level = fread_number( fp );
-            member->mclass = fread_number( fp );
+            member->name = CopyString( ReadWord( fp ) );
+            member->since = CopyString( ReadWord( fp ) );
+            member->kills = ReadInt( fp );
+            member->deaths = ReadInt( fp );
+            member->level = ReadInt( fp );
+            member->mclass = ReadInt( fp );
             LINK( member, members_list->first_member, members_list->last_member, next, prev );
             continue;
           }
         else
-          if( !str_cmp( word, "End" ) )
+          if( !StrCmp( word, "End" ) )
             {
               LINK( members_list, first_member_list, last_member_list, next, prev );
               fclose( fp );
@@ -770,11 +770,11 @@ void update_member( const Character *ch )
 
   for( members_list = first_member_list; members_list; members_list = members_list->next )
     {
-      if( !str_cmp( members_list->name, ch->pcdata->clan_name ) )
+      if( !StrCmp( members_list->name, ch->pcdata->clan_name ) )
 	{
 	  for( member = members_list->first_member; member; member = member->next )
 	    {
-	      if ( !str_cmp( member->name, ch->name ) )
+	      if ( !StrCmp( member->name, ch->name ) )
 		{
 		  if( ch->pcdata->clan->clan_type == CLAN_PLAIN )
 		    {
@@ -799,11 +799,11 @@ void update_member( const Character *ch )
 	      char buf[MAX_STRING_LENGTH];
 
 	      CREATE( member, MEMBER_DATA, 1 );
-	      member->name = str_dup( ch->name );
+	      member->name = CopyString( ch->name );
 	      member->level = ch->top_level;
 	      member->mclass = ch->ability.main;
 	      sprintf( buf, "[%02d|%02d|%04d]", t->tm_mon+1, t->tm_mday, t->tm_year+1900 );
-	      member->since = str_dup( buf );
+	      member->since = CopyString( buf );
 
 	      if( ch->pcdata->clan->clan_type == CLAN_PLAIN )
 		{

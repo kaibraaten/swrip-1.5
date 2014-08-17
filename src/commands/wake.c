@@ -6,7 +6,7 @@ void do_wake( Character *ch, char *argument )
   char arg[MAX_INPUT_LENGTH];
   Character *victim = NULL;
 
-  one_argument( argument, arg );
+  OneArgument( argument, arg );
 
   if ( arg[0] == '\0' )
     {

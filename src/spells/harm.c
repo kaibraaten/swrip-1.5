@@ -19,7 +19,7 @@ ch_ret spell_harm( int sn, int level, Character *ch, void *vo )
   sith_penalty( ch );
 
 
-  dam = umax(  20, victim->hit - dice(1,4) );
+  dam = umax(  20, victim->hit - RollDice(1,4) );
 
   if ( saves_spell_staff( level, victim ) )
     dam = umin( 50, dam / 4 );

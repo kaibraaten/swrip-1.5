@@ -11,7 +11,7 @@ void do_beg( Character *ch, char *argument )
 
   if ( IsNpc (ch) ) return;
 
-  argument = one_argument( argument, arg1 );
+  argument = OneArgument( argument, arg1 );
 
   if ( ch->mount )
     {
@@ -80,7 +80,7 @@ void do_beg( Character *ch, char *argument )
     }
 
   SetWaitState( ch, skill_table[gsn_beg]->beats );
-  percent  = number_percent( ) + GetAbilityLevel( ch, SMUGGLING_ABILITY ) + victim->top_level;
+  percent  = GetRandomPercent( ) + GetAbilityLevel( ch, SMUGGLING_ABILITY ) + victim->top_level;
 
   if ( percent > ch->pcdata->learned[gsn_beg]  )
     {
@@ -107,7 +107,7 @@ void do_beg( Character *ch, char *argument )
   act( AT_ACTION, "$n begs $N for money.\r\n",  ch, NULL, victim, TO_NOTVICT );
   act( AT_ACTION, "$n begs you for money!\r\n", ch, NULL, victim, TO_VICT    );
 
-  amount = umin( victim->gold , number_range(1, 10) );
+  amount = umin( victim->gold , GetRandomNumberFromRange(1, 10) );
   if ( amount <= 0 )
     {
       do_look( victim , ch->name );

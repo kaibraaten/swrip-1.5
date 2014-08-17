@@ -42,9 +42,9 @@ bool go_eval_str (const char *lval, int op, const char *rval)
 
   switch (op)
     {
-    case EQ: if ( !str_cmp(lval, rval) ) return true;
+    case EQ: if ( !StrCmp(lval, rval) ) return true;
       else return false;
-    case NE: if (  str_cmp(lval, rval) ) return true;
+    case NE: if (  StrCmp(lval, rval) ) return true;
       else return false;
     case GT: if (  go_strcmp(lval, rval) >  0 ) return true;
       else return false;

@@ -18,16 +18,16 @@ void do_recho( Character *ch, char *argument )
       return;
     }
 
-  one_argument( argument, arg );
+  OneArgument( argument, arg );
 
-  if ( !str_cmp( arg, "Thoric" )
-       || !str_cmp( arg, "Dominus" )
-       || !str_cmp( arg, "Circe" )
-       || !str_cmp( arg, "Haus" )
-       || !str_cmp( arg, "Narn" )
-       || !str_cmp( arg, "Scryn" )
-       || !str_cmp( arg, "Blodkai" )
-       || !str_cmp( arg, "Damian" ) )
+  if ( !StrCmp( arg, "Thoric" )
+       || !StrCmp( arg, "Dominus" )
+       || !StrCmp( arg, "Circe" )
+       || !StrCmp( arg, "Haus" )
+       || !StrCmp( arg, "Narn" )
+       || !StrCmp( arg, "Scryn" )
+       || !StrCmp( arg, "Blodkai" )
+       || !StrCmp( arg, "Damian" ) )
     {
       ch_printf( ch, "I don't think %s would like that!\r\n", arg );
       return;
@@ -35,7 +35,7 @@ void do_recho( Character *ch, char *argument )
 
   if ( (color = get_color ( argument )) )
     {
-      argument = one_argument ( argument, arg );
+      argument = OneArgument ( argument, arg );
       echo_to_room ( color, ch->in_room, argument );
     }
   else

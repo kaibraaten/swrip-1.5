@@ -6,7 +6,7 @@ void do_rdelete( Character *ch, char *argument )
   char arg[MAX_INPUT_LENGTH];
   Room *location;
 
-  argument = one_argument( argument, arg );
+  argument = OneArgument( argument, arg );
 
   if ( arg[0] == '\0' )
     {

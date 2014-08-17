@@ -9,7 +9,7 @@ void do_users( Character *ch, char *argument )
   int count = 0;
   char arg[MAX_INPUT_LENGTH];
 
-  one_argument (argument, arg);
+  OneArgument (argument, arg);
   set_pager_color( AT_PLAIN, ch );
   sprintf(buf,
           "Desc|Con|Idle| Port | Player@HostIP                 ");
@@ -45,8 +45,8 @@ void do_users( Character *ch, char *argument )
         {
           if ( (GetTrustLevel(ch) >= LEVEL_IMPLEMENTOR
                 ||   (d->character && CanSeeCharacter( ch, d->character )) )
-               &&   ( !str_prefix( arg, d->remote.hostname )
-                      ||   ( d->character && !str_prefix( arg, d->character->name ) ) ) )
+               &&   ( !StringPrefix( arg, d->remote.hostname )
+                      ||   ( d->character && !StringPrefix( arg, d->character->name ) ) ) )
             {
               count++;
               pager_printf( ch,

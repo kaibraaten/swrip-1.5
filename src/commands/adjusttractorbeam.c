@@ -48,7 +48,7 @@ void do_adjusttractorbeam(Character *ch, char *argument )
   act( AT_PLAIN, "$n flips a switch on the control panell.", ch,
        NULL, argument , TO_ROOM );
 
-  if( str_cmp( arg, "undock" ) && eShip->docked && eShip->docked != ship)
+  if( StrCmp( arg, "undock" ) && eShip->docked && eShip->docked != ship)
     {
       EchoToCockpit( AT_YELLOW, ship, "Tractor Beam set on docked ship. Undock it first.\r\n" );
       return;
@@ -66,7 +66,7 @@ void do_adjusttractorbeam(Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg, "pull") || !str_cmp( arg, "none" ) )
+  if ( !StrCmp( arg, "pull") || !StrCmp( arg, "none" ) )
     {
       EchoToCockpit( AT_YELLOW, ship, "Tractor Beam set to pull target.\r\n" );
       eShip->shipstate = SHIP_TRACTORED;
@@ -75,7 +75,7 @@ void do_adjusttractorbeam(Character *ch, char *argument )
       DISPOSE(eShip->dest);
       return;
     }
-  if ( !str_cmp( arg, "abort" ) )
+  if ( !StrCmp( arg, "abort" ) )
     {
       EchoToCockpit( AT_YELLOW, ship, "Manuever aborted. Tractor beam returned to default setting.\r\n" );
       eShip->shipstate = SHIP_TRACTORED;
@@ -85,7 +85,7 @@ void do_adjusttractorbeam(Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg, "dock") )
+  if ( !StrCmp( arg, "dock") )
     {
       if ( GetShipDistanceToShip(ship, eShip) > 100 )
 	{
@@ -105,7 +105,7 @@ void do_adjusttractorbeam(Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg, "land") )
+  if ( !StrCmp( arg, "land") )
     {
       if ( GetShipDistanceToShip(ship, eShip) > 100 )
         {
@@ -133,11 +133,11 @@ void do_adjusttractorbeam(Character *ch, char *argument )
 
       EchoToCockpit( AT_YELLOW, ship, "Tractor Beam set to land target.\r\n" );
       eShip->shipstate = SHIP_LAND;
-      eShip->dest = str_dup(ship->name);
+      eShip->dest = CopyString(ship->name);
       return;
     }
 
-  if ( !str_cmp( arg, "undock" ) )
+  if ( !StrCmp( arg, "undock" ) )
     {
       if ( GetShipDistanceToShip(ship, eShip) > 100 )
         {

@@ -16,7 +16,7 @@ void do_password( Character *ch, char *argument )
     return;
 
   /*
-   * Can't use one_argument here because it smashes case.
+   * Can't use OneArgument here because it smashes case.
    * So we just steal all its code.  Bleagh.
    */
   pArg = arg1;
@@ -62,7 +62,7 @@ void do_password( Character *ch, char *argument )
       return;
     }
 
-  if ( str_cmp( encode_string( arg1 ), ch->pcdata->pwd ) )
+  if ( StrCmp( EncodeString( arg1 ), ch->pcdata->pwd ) )
     {
       SetWaitState( ch, 40 );
       send_to_char( "Wrong password.  Wait 10 seconds.\r\n", ch );
@@ -79,7 +79,7 @@ void do_password( Character *ch, char *argument )
   /*
    * No tilde allowed because of player file format.
    */
-  pwdnew = encode_string( arg2 );
+  pwdnew = EncodeString( arg2 );
   for ( p = pwdnew; *p != '\0'; p++ )
     {
       if ( *p == '~' )
@@ -91,7 +91,7 @@ void do_password( Character *ch, char *argument )
     }
 
   DISPOSE( ch->pcdata->pwd );
-  ch->pcdata->pwd = str_dup( pwdnew );
+  ch->pcdata->pwd = CopyString( pwdnew );
   if ( IsBitSet(sysdata.save_flags, SV_PASSCHG) )
     save_char_obj( ch );
   send_to_char( "Ok.\r\n", ch );

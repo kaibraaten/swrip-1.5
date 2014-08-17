@@ -11,7 +11,7 @@ void do_makeclan( Character *ch, char *argument )
       return;
     }
 
-  sprintf( filename, "%s%s", CLAN_DIR, strlower(argument) );
+  sprintf( filename, "%s%s", CLAN_DIR, StringToLowercase(argument) );
 
   CREATE( clan, CLAN_DATA, 1 );
   LINK( clan, first_clan, last_clan, next, prev );
@@ -20,10 +20,10 @@ void do_makeclan( Character *ch, char *argument )
   clan->last_subclan = NULL;
   clan->first_subclan = NULL;
   clan->mainclan     = NULL;
-  clan->name            = str_dup( argument );
-  clan->description     = str_dup( "" );
-  clan->leadership.leader  = str_dup( "" );
-  clan->leadership.number1 = str_dup( "" );
-  clan->leadership.number2 = str_dup( "" );
-  clan->tmpstr  = str_dup( "" );
+  clan->name            = CopyString( argument );
+  clan->description     = CopyString( "" );
+  clan->leadership.leader  = CopyString( "" );
+  clan->leadership.number1 = CopyString( "" );
+  clan->leadership.number2 = CopyString( "" );
+  clan->tmpstr  = CopyString( "" );
 }

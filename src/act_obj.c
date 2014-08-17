@@ -27,14 +27,14 @@
  */
 short get_obj_resistance( const OBJ_DATA *obj )
 {
-  short resist = number_fuzzy(MAX_ITEM_IMPACT);
+  short resist = NumberFuzzy(MAX_ITEM_IMPACT);
 
   /* magical items are more resistant */
   if ( IS_OBJ_STAT( obj, ITEM_MAGIC ) )
-    resist += number_fuzzy(12);
+    resist += NumberFuzzy(12);
   /* blessed objects should have a little bonus */
   if ( IS_OBJ_STAT( obj, ITEM_BLESS ) )
-    resist += number_fuzzy(5);
+    resist += NumberFuzzy(5);
   /* lets make store inventory pretty tough */
   if ( IS_OBJ_STAT( obj, ITEM_INVENTORY ) )
     resist += 20;
@@ -236,7 +236,7 @@ void obj_fall( OBJ_DATA *obj, bool through )
           /*            int dam = (int)9.81*sqrt(fall_count*2/9.81)*obj->weight/2;
            */           int dam = fall_count*obj->weight/2;
           /* Damage players */
-          if ( obj->in_room->first_person && number_percent() > 15 )
+          if ( obj->in_room->first_person && GetRandomPercent() > 15 )
             {
               Character *rch;
               Character *vch = NULL;
@@ -244,7 +244,7 @@ void obj_fall( OBJ_DATA *obj, bool through )
 
               for ( rch = obj->in_room->first_person; rch;
                     rch = rch->next_in_room, chcnt++ )
-                if ( number_range( 0, chcnt ) == 0 )
+                if ( GetRandomNumberFromRange( 0, chcnt ) == 0 )
                   vch = rch;
               act( AT_WHITE, "$p falls on $n!", vch, obj, NULL, TO_ROOM );
               act( AT_WHITE, "$p falls on you!", vch, obj, NULL, TO_CHAR );

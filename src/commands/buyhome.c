@@ -49,7 +49,7 @@ void do_buyhome( Character *ch, char *argument )
     }
 
   DISPOSE( room->name );
-  room->name = str_dup( argument );
+  room->name = CopyString( argument );
 
   ch->gold -= 100000;
 

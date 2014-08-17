@@ -17,12 +17,12 @@ void do_resetship( Character *ch, char *argument )
   if ( ( ship->sclass == SHIP_PLATFORM || ship->type == MOB_SHIP || ship->sclass == CAPITAL_SHIP )
        && ship->home )
     {
-      vector_init( &ship->pos );
+      InitializeVector( &ship->pos );
       ShipToSpaceobject(ship, spaceobject_from_name(ship->home) );
 
       if( ship->spaceobject )
         {
-          vector_copy( &ship->pos, &ship->spaceobject->pos );
+          CopyVector( &ship->pos, &ship->spaceobject->pos );
         }
 
       RandomizeVector( &ship->pos, -5000, 5000 );

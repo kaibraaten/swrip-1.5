@@ -8,7 +8,7 @@ void do_bury( Character *ch, char *argument )
   bool shovel = false;
   short move = 0;
 
-  one_argument( argument, arg );
+  OneArgument( argument, arg );
 
   if ( arg[0] == '\0' )
     {

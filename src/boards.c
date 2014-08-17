@@ -45,7 +45,7 @@ static bool can_remove( const Character *ch, const BOARD_DATA *board )
 
   if ( board->extra_removers[0] != '\0' )
     {
-      if ( is_name( ch->name, board->extra_removers ) )
+      if ( IsName( ch->name, board->extra_removers ) )
         return true;
     }
 
@@ -62,17 +62,17 @@ static bool can_read( const Character *ch, const BOARD_DATA *board )
      readers have been set up. */
   if ( board->read_group[0] != '\0' )
     {
-      if ( ch->pcdata->clan && !str_cmp( ch->pcdata->clan->name, board->read_group ) )
+      if ( ch->pcdata->clan && !StrCmp( ch->pcdata->clan->name, board->read_group ) )
         return true;
 
-      if ( ch->pcdata->clan && ch->pcdata->clan->mainclan && !str_cmp( ch->pcdata->clan->mainclan->name, board->read_group ) )
+      if ( ch->pcdata->clan && ch->pcdata->clan->mainclan && !StrCmp( ch->pcdata->clan->mainclan->name, board->read_group ) )
         return true;
 
     }
 
   if ( board->extra_readers[0] != '\0' )
     {
-      if ( is_name( ch->name, board->extra_readers ) )
+      if ( IsName( ch->name, board->extra_readers ) )
         return true;
     }
 
@@ -88,10 +88,10 @@ static bool can_post( const Character *ch, const BOARD_DATA *board )
   /* Your trust wasn't high enough, so check if a post_group has been set up. */
   if ( board->post_group[0] != '\0' )
     {
-      if ( ch->pcdata->clan && !str_cmp( ch->pcdata->clan->name, board->post_group ) )
+      if ( ch->pcdata->clan && !StrCmp( ch->pcdata->clan->name, board->post_group ) )
         return true;
 
-      if ( ch->pcdata->clan && ch->pcdata->clan->mainclan && !str_cmp( ch->pcdata->clan->mainclan->name, board->post_group ) )
+      if ( ch->pcdata->clan && ch->pcdata->clan->mainclan && !StrCmp( ch->pcdata->clan->mainclan->name, board->post_group ) )
         return true;
     }
 
@@ -154,16 +154,16 @@ BOARD_DATA *get_board( const OBJ_DATA *obj )
 
 static bool is_note_to( const Character *ch, const NOTE_DATA *pnote )
 {
-  if ( !str_cmp( ch->name, pnote->sender ) )
+  if ( !StrCmp( ch->name, pnote->sender ) )
     return true;
 
-  if ( is_name( "all", pnote->to_list ) )
+  if ( IsName( "all", pnote->to_list ) )
     return true;
 
-  if ( IsAvatar(ch) && is_name( "immortal", pnote->to_list ) )
+  if ( IsAvatar(ch) && IsName( "immortal", pnote->to_list ) )
     return true;
 
-  if ( is_name( ch->name, pnote->to_list ) )
+  if ( IsName( ch->name, pnote->to_list ) )
     return true;
 
   return false;
@@ -180,11 +180,11 @@ void note_attach( Character *ch )
     return;
 
   CREATE( pnote, NOTE_DATA, 1 );
-  pnote->sender = str_dup( ch->name );
-  pnote->date           = str_dup( "" );
-  pnote->to_list        = str_dup( "" );
-  pnote->subject        = str_dup( "" );
-  pnote->text           = str_dup( "" );
+  pnote->sender = CopyString( ch->name );
+  pnote->date           = CopyString( "" );
+  pnote->to_list        = CopyString( "" );
+  pnote->subject        = CopyString( "" );
+  pnote->text           = CopyString( "" );
   ch->pcdata->pnote     = pnote;
 }
 
@@ -331,10 +331,10 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
     }
 
   set_char_color( AT_NOTE, ch );
-  arg_passed = one_argument( arg_passed, arg );
-  smash_tilde( arg_passed );
+  arg_passed = OneArgument( arg_passed, arg );
+  SmashTilde( arg_passed );
 
-  if ( !str_cmp( arg, "list" ) )
+  if ( !StrCmp( arg, "list" ) )
     {
       board = find_board( ch );
       if ( !board )
@@ -412,7 +412,7 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
         }
     }
 
-  if ( !str_cmp( arg, "read" ) )
+  if ( !StrCmp( arg, "read" ) )
     {
       bool fAll;
 
@@ -428,13 +428,13 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
           return;
         }
 
-      if ( !str_cmp( arg_passed, "all" ) )
+      if ( !StrCmp( arg_passed, "all" ) )
         {
           fAll = true;
           anum = 0;
         }
       else
-        if ( is_number( arg_passed ) )
+        if ( IsNumber( arg_passed ) )
           {
             fAll = false;
             anum = atoi( arg_passed );
@@ -516,10 +516,10 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
     }
 
   /* Voting added by Narn, June '96 */
-  if ( !str_cmp( arg, "vote" ) )
+  if ( !StrCmp( arg, "vote" ) )
     {
       char arg2[MAX_INPUT_LENGTH];
-      arg_passed = one_argument( arg_passed, arg2 );
+      arg_passed = OneArgument( arg_passed, arg2 );
 
       board = find_board( ch );
       if ( !board )
@@ -533,7 +533,7 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
           return;
         }
 
-      if ( is_number( arg2 ) )
+      if ( IsNumber( arg2 ) )
         anum = atoi( arg2 );
       else
         {
@@ -556,9 +556,9 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
       /* If you're the author of the note and can read the board you can open
          and close voting, if you can read it and voting is open you can vote.
       */
-      if ( !str_cmp( arg_passed, "open" ) )
+      if ( !StrCmp( arg_passed, "open" ) )
         {
-          if ( str_cmp( ch->name, pnote->sender ) )
+          if ( StrCmp( ch->name, pnote->sender ) )
             {
               send_to_char( "You are not the author of this message.\r\n", ch );
               return;
@@ -570,9 +570,9 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
           return;
         }
 
-      if ( !str_cmp( arg_passed, "close" ) )
+      if ( !StrCmp( arg_passed, "close" ) )
         {
-          if ( str_cmp( ch->name, pnote->sender ) )
+          if ( StrCmp( ch->name, pnote->sender ) )
             {
               send_to_char( "You are not the author of this message.\r\n", ch );
               return;
@@ -595,39 +595,39 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
       sprintf( buf, "%s %s %s",
                pnote->yesvotes, pnote->novotes, pnote->abstentions );
 
-      if ( is_name( ch->name, buf ) )
+      if ( IsName( ch->name, buf ) )
         {
           send_to_char( "You have already voted on this note.\r\n", ch );
           return;
         }
 
-      if ( !str_cmp( arg_passed, "yes" ) )
+      if ( !StrCmp( arg_passed, "yes" ) )
         {
           sprintf( buf, "%s %s", pnote->yesvotes, ch->name );
           DISPOSE( pnote->yesvotes );
-          pnote->yesvotes = str_dup( buf );
+          pnote->yesvotes = CopyString( buf );
           act( AT_ACTION, "$n votes on a note.", ch, NULL, NULL, TO_ROOM );
           send_to_char( "Ok.\r\n", ch );
           write_board( board );
           return;
         }
 
-      if ( !str_cmp( arg_passed, "no" ) )
+      if ( !StrCmp( arg_passed, "no" ) )
         {
           sprintf( buf, "%s %s", pnote->novotes, ch->name );
           DISPOSE( pnote->novotes );
-          pnote->novotes = str_dup( buf );
+          pnote->novotes = CopyString( buf );
           act( AT_ACTION, "$n votes on a note.", ch, NULL, NULL, TO_ROOM );
           send_to_char( "Ok.\r\n", ch );
           write_board( board );
           return;
         }
 
-      if ( !str_cmp( arg_passed, "abstain" ) )
+      if ( !StrCmp( arg_passed, "abstain" ) )
         {
           sprintf( buf, "%s %s", pnote->abstentions, ch->name );
           DISPOSE( pnote->abstentions );
-          pnote->abstentions = str_dup( buf );
+          pnote->abstentions = CopyString( buf );
           act( AT_ACTION, "$n votes on a note.", ch, NULL, NULL, TO_ROOM );
           send_to_char( "Ok.\r\n", ch );
           write_board( board );
@@ -637,7 +637,7 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
       operate_on_note( ch, "", false );
     }
 
-  if ( !str_cmp( arg, "write" ) )
+  if ( !StrCmp( arg, "write" ) )
     {
       if ( ch->substate == SUB_RESTRICTED )
         {
@@ -700,7 +700,7 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
         }
     }
 
-  if ( !str_cmp( arg, "subject" ) )
+  if ( !StrCmp( arg, "subject" ) )
     {
       if(GetTrustLevel(ch) < sysdata.write_mail_free)
         {
@@ -749,13 +749,13 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
           paper->value[OVAL_PAPER_1] = 1;
           ed = SetOExtra(paper, "_subject_");
           DISPOSE( ed->description );
-          ed->description = str_dup( arg_passed );
+          ed->description = CopyString( arg_passed );
           send_to_char("Ok.\r\n", ch);
           return;
         }
     }
 
-  if ( !str_cmp( arg, "to" ) )
+  if ( !StrCmp( arg, "to" ) )
     {
       struct stat fst;
       char fname[1024];
@@ -806,14 +806,14 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
       arg_passed[0] = CharToUppercase(arg_passed[0]);
 
       sprintf( fname, "%s%c/%s", PLAYER_DIR, tolower(arg_passed[0]),
-               capitalize( arg_passed ) );
+               Capitalize( arg_passed ) );
 
-      if ( !IS_MAIL || stat( fname, &fst ) != -1 || !str_cmp(arg_passed, "all") )
+      if ( !IS_MAIL || stat( fname, &fst ) != -1 || !StrCmp(arg_passed, "all") )
         {
           paper->value[OVAL_PAPER_2] = 1;
           ed = SetOExtra(paper, "_to_");
           DISPOSE( ed->description );
-          ed->description = str_dup( arg_passed );
+          ed->description = CopyString( arg_passed );
           send_to_char("Ok.\r\n",ch);
           return;
         }
@@ -825,7 +825,7 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
 
     }
 
-  if ( !str_cmp( arg, "show" ) )
+  if ( !StrCmp( arg, "show" ) )
     {
       char *subject, *to_list, *text;
 
@@ -851,7 +851,7 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
       return;
     }
 
-  if ( !str_cmp( arg, "post" ) )
+  if ( !StrCmp( arg, "post" ) )
     {
       char *strtime, *text;
 
@@ -874,7 +874,7 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
           paper->value[OVAL_PAPER_1] = 1;
           ed = SetOExtra(paper, "_subject_");
           DISPOSE( ed->description );
-          ed->description = str_dup( "none" );
+          ed->description = CopyString( "none" );
         }
 
       if (paper->value[OVAL_PAPER_2] == 0)
@@ -890,7 +890,7 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
               paper->value[OVAL_PAPER_2] = 1;
               ed = SetOExtra(paper, "_to_");
               DISPOSE( ed->description );
-              ed->description = str_dup( "All" );
+              ed->description = CopyString( "All" );
             }
         }
 
@@ -917,19 +917,19 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
       strtime                           = ctime( &current_time );
       strtime[strlen(strtime)-1]        = '\0';
       CREATE( pnote, NOTE_DATA, 1 );
-      pnote->date                       = str_dup( strtime );
+      pnote->date                       = CopyString( strtime );
 
       text = get_extra_descr( "_text_", paper->first_extradesc );
-      pnote->text = text ? str_dup( text ) : str_dup( "" );
+      pnote->text = text ? CopyString( text ) : CopyString( "" );
       text = get_extra_descr( "_to_", paper->first_extradesc );
-      pnote->to_list = text ? str_dup( text ) : str_dup( "all" );
+      pnote->to_list = text ? CopyString( text ) : CopyString( "all" );
       text = get_extra_descr( "_subject_", paper->first_extradesc );
-      pnote->subject = text ? str_dup( text ) : str_dup( "" );
-      pnote->sender  = str_dup( ch->name );
+      pnote->subject = text ? CopyString( text ) : CopyString( "" );
+      pnote->sender  = CopyString( ch->name );
       pnote->voting      = 0;
-      pnote->yesvotes    = str_dup( "" );
-      pnote->novotes     = str_dup( "" );
-      pnote->abstentions = str_dup( "" );
+      pnote->yesvotes    = CopyString( "" );
+      pnote->novotes     = CopyString( "" );
+      pnote->abstentions = CopyString( "" );
 
       LINK( pnote, board->first_note, board->last_note, next, prev );
       board->num_posts++;
@@ -939,9 +939,9 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
       return;
     }
 
-  if ( !str_cmp( arg, "remove" )
-       ||   !str_cmp( arg, "take" )
-       ||   !str_cmp( arg, "copy" ) )
+  if ( !StrCmp( arg, "remove" )
+       ||   !StrCmp( arg, "take" )
+       ||   !StrCmp( arg, "copy" ) )
     {
       char take;
 
@@ -951,9 +951,9 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
           send_to_char( "There is no terminal here to download a note from!\r\n", ch );
           return;
         }
-      if ( !str_cmp( arg, "take" ) )
+      if ( !StrCmp( arg, "take" ) )
         take = 1;
-      else if ( !str_cmp( arg, "copy" ) )
+      else if ( !StrCmp( arg, "copy" ) )
         {
           if ( !IsImmortal(ch) )
             {
@@ -965,7 +965,7 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
       else
         take = 0;
 
-      if ( !is_number( arg_passed ) )
+      if ( !IsNumber( arg_passed ) )
         {
           send_to_char( "Note remove which number?\r\n", ch );
           return;
@@ -991,7 +991,7 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
                  ||         can_remove (ch, board))
                &&   ( vnum == anum ) )
             {
-              if ( (is_name("all", pnote->to_list))
+              if ( (IsName("all", pnote->to_list))
                    &&   (GetTrustLevel( ch ) < sysdata.take_others_mail)
                    &&   (take != 2) )
                 {
@@ -1014,19 +1014,19 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
                   paper = create_object( get_obj_index(OBJ_VNUM_NOTE), 0 );
                   ed = SetOExtra( paper, "_sender_" );
                   DISPOSE( ed->description );
-                  ed->description = str_dup(pnote->sender);
+                  ed->description = CopyString(pnote->sender);
                   ed = SetOExtra( paper, "_text_" );
                   DISPOSE( ed->description );
-                  ed->description = str_dup(pnote->text);
+                  ed->description = CopyString(pnote->text);
                   ed = SetOExtra( paper, "_to_" );
                   DISPOSE( ed->description );
-                  ed->description = str_dup( pnote->to_list );
+                  ed->description = CopyString( pnote->to_list );
                   ed = SetOExtra( paper, "_subject_" );
                   DISPOSE( ed->description );
-                  ed->description = str_dup( pnote->subject );
+                  ed->description = CopyString( pnote->subject );
                   ed = SetOExtra( paper, "_date_" );
                   DISPOSE( ed->description );
-                  ed->description = str_dup( pnote->date );
+                  ed->description = CopyString( pnote->date );
                   ed = SetOExtra( paper, "note" );
                   DISPOSE( ed->description );
                   sprintf(notebuf, "From: ");
@@ -1038,22 +1038,22 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
                   strcat(notebuf, "\r\n\r\n");
                   strcat(notebuf, pnote->text);
                   strcat(notebuf, "\r\n");
-                  ed->description = str_dup(notebuf);
+                  ed->description = CopyString(notebuf);
                   paper->value[OVAL_PAPER_0] = 2;
                   paper->value[OVAL_PAPER_1] = 2;
                   paper->value[OVAL_PAPER_2] = 2;
                   sprintf(short_desc_buf, "a note from %s to %s",
                           pnote->sender, pnote->to_list);
                   DISPOSE(paper->short_descr);
-                  paper->short_descr = str_dup(short_desc_buf);
+                  paper->short_descr = CopyString(short_desc_buf);
                   sprintf(long_desc_buf, "A note from %s to %s lies on the ground.",
                           pnote->sender, pnote->to_list);
                   DISPOSE(paper->description);
-                  paper->description = str_dup(long_desc_buf);
+                  paper->description = CopyString(long_desc_buf);
                   sprintf(keyword_buf, "note parchment paper %s",
                           pnote->to_list);
                   DISPOSE(paper->name);
-                  paper->name = str_dup(keyword_buf);
+                  paper->name = CopyString(keyword_buf);
                 }
               if ( take != 2 )
                 note_remove( board, pnote );
@@ -1107,19 +1107,19 @@ BOARD_DATA *read_board( char *boardfile, FILE *fp )
 
   for ( ; ; )
     {
-      const char *word = feof( fp ) ? "End" : fread_word( fp );
+      const char *word = feof( fp ) ? "End" : ReadWord( fp );
       bool fMatch = false;
 
       switch ( CharToUppercase(word[0]) )
         {
         case '*':
           fMatch = true;
-          fread_to_eol( fp );
+          ReadToEndOfLine( fp );
           break;
         case 'E':
-          KEY( "Extra_readers", board->extra_readers,   fread_string_nohash( fp ) );
-          KEY( "Extra_removers",       board->extra_removers,   fread_string_nohash( fp ) );
-          if ( !str_cmp( word, "End" ) )
+          KEY( "Extra_readers", board->extra_readers,   ReadStringToTildeNoHash( fp ) );
+          KEY( "Extra_removers",       board->extra_removers,   ReadStringToTildeNoHash( fp ) );
+          if ( !StrCmp( word, "End" ) )
             {
               board->num_posts  = 0;
               board->first_note = NULL;
@@ -1127,30 +1127,30 @@ BOARD_DATA *read_board( char *boardfile, FILE *fp )
               board->next       = NULL;
               board->prev       = NULL;
               if ( !board->read_group )
-                board->read_group    = str_dup( "" );
+                board->read_group    = CopyString( "" );
               if ( !board->post_group )
-                board->post_group    = str_dup( "" );
+                board->post_group    = CopyString( "" );
               if ( !board->extra_readers )
-                board->extra_readers = str_dup( "" );
+                board->extra_readers = CopyString( "" );
               if ( !board->extra_removers )
-                board->extra_removers = str_dup( "" );
+                board->extra_removers = CopyString( "" );
               return board;
             }
         case 'F':
-          KEY( "Filename",      board->note_file,       fread_string_nohash( fp ) );
+          KEY( "Filename",      board->note_file,       ReadStringToTildeNoHash( fp ) );
         case 'M':
-          KEY( "Min_read_level",        board->min_read_level,  fread_number( fp ) );
-          KEY( "Min_post_level",        board->min_post_level,  fread_number( fp ) );
-          KEY( "Min_remove_level",      board->min_remove_level,fread_number( fp ) );
-          KEY( "Max_posts",             board->max_posts,       fread_number( fp ) );
+          KEY( "Min_read_level",        board->min_read_level,  ReadInt( fp ) );
+          KEY( "Min_post_level",        board->min_post_level,  ReadInt( fp ) );
+          KEY( "Min_remove_level",      board->min_remove_level,ReadInt( fp ) );
+          KEY( "Max_posts",             board->max_posts,       ReadInt( fp ) );
         case 'P':
-          KEY( "Post_group",    board->post_group,      fread_string_nohash( fp ) );
+          KEY( "Post_group",    board->post_group,      ReadStringToTildeNoHash( fp ) );
         case 'R':
-          KEY( "Read_group",    board->read_group,      fread_string_nohash( fp ) );
+          KEY( "Read_group",    board->read_group,      ReadStringToTildeNoHash( fp ) );
         case 'T':
-          KEY( "Type",  board->type,            fread_number( fp ) );
+          KEY( "Type",  board->type,            ReadInt( fp ) );
         case 'V':
-          KEY( "Vnum",  board->board_obj,       fread_number( fp ) );
+          KEY( "Vnum",  board->board_obj,       ReadInt( fp ) );
         }
 
       if ( !fMatch )
@@ -1186,63 +1186,63 @@ NOTE_DATA *read_note( const char *notefile, FILE *fp )
 
       CREATE( pnote, NOTE_DATA, 1 );
 
-      if ( str_cmp( fread_word( fp ), "sender" ) )
+      if ( StrCmp( ReadWord( fp ), "sender" ) )
         break;
 
-      pnote->sender     = fread_string( fp );
+      pnote->sender     = ReadStringToTilde( fp );
 
-      if ( str_cmp( fread_word( fp ), "date" ) )
+      if ( StrCmp( ReadWord( fp ), "date" ) )
         break;
 
-      pnote->date       = fread_string( fp );
+      pnote->date       = ReadStringToTilde( fp );
 
-      if ( str_cmp( fread_word( fp ), "to" ) )
+      if ( StrCmp( ReadWord( fp ), "to" ) )
         break;
 
-      pnote->to_list    = fread_string( fp );
+      pnote->to_list    = ReadStringToTilde( fp );
 
-      if ( str_cmp( fread_word( fp ), "subject" ) )
+      if ( StrCmp( ReadWord( fp ), "subject" ) )
         break;
 
-      pnote->subject    = fread_string( fp );
+      pnote->subject    = ReadStringToTilde( fp );
 
-      word = fread_word( fp );
+      word = ReadWord( fp );
 
-      if ( !str_cmp( word, "voting" ) )
+      if ( !StrCmp( word, "voting" ) )
         {
-          pnote->voting = fread_number( fp );
+          pnote->voting = ReadInt( fp );
 
-          if ( str_cmp( fread_word( fp ), "yesvotes" ) )
+          if ( StrCmp( ReadWord( fp ), "yesvotes" ) )
             break;
 
-          pnote->yesvotes       = fread_string_nohash( fp );
+          pnote->yesvotes       = ReadStringToTildeNoHash( fp );
 
-          if ( str_cmp( fread_word( fp ), "novotes" ) )
+          if ( StrCmp( ReadWord( fp ), "novotes" ) )
             break;
 
-          pnote->novotes        = fread_string_nohash( fp );
+          pnote->novotes        = ReadStringToTildeNoHash( fp );
 
-          if ( str_cmp( fread_word( fp ), "abstentions" ) )
+          if ( StrCmp( ReadWord( fp ), "abstentions" ) )
             break;
 
-          pnote->abstentions    = fread_string_nohash( fp );
+          pnote->abstentions    = ReadStringToTildeNoHash( fp );
 
-          word = fread_word( fp );
+          word = ReadWord( fp );
         }
 
-      if ( str_cmp( word, "text" ) )
+      if ( StrCmp( word, "text" ) )
         break;
 
-      pnote->text       = fread_string( fp );
+      pnote->text       = ReadStringToTilde( fp );
 
       if ( !pnote->yesvotes )
-	pnote->yesvotes        = str_dup( "" );
+	pnote->yesvotes        = CopyString( "" );
 
       if ( !pnote->novotes )
-	pnote->novotes = str_dup( "" );
+	pnote->novotes = CopyString( "" );
 
       if ( !pnote->abstentions )
-	pnote->abstentions     = str_dup( "" );
+	pnote->abstentions     = CopyString( "" );
 
       return pnote;
     }

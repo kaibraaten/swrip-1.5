@@ -10,10 +10,10 @@ void do_give( Character *ch, char *argument )
   Character *victim;
   OBJ_DATA  *obj;
 
-  argument = one_argument( argument, arg1 );
-  argument = one_argument( argument, arg2 );
-  if ( !str_cmp( arg2, "to" ) && argument[0] != '\0' )
-    argument = one_argument( argument, arg2 );
+  argument = OneArgument( argument, arg1 );
+  argument = OneArgument( argument, arg2 );
+  if ( !StrCmp( arg2, "to" ) && argument[0] != '\0' )
+    argument = OneArgument( argument, arg2 );
 
   if ( arg1[0] == '\0' || arg2[0] == '\0' )
     {
@@ -24,22 +24,22 @@ void do_give( Character *ch, char *argument )
   if ( ms_find_obj(ch) )
     return;
 
-  if ( is_number( arg1 ) )
+  if ( IsNumber( arg1 ) )
     {
       /* 'give NNNN coins victim' */
       int amount;
 
       amount   = atoi(arg1);
       if ( amount <= 0
-           || ( str_cmp( arg2, "credits" ) && str_cmp( arg2, "credit" ) ) )
+           || ( StrCmp( arg2, "credits" ) && StrCmp( arg2, "credit" ) ) )
         {
           send_to_char( "Sorry, you can't do that.\r\n", ch );
           return;
         }
 
-      argument = one_argument( argument, arg2 );
-      if ( !str_cmp( arg2, "to" ) && argument[0] != '\0' )
-        argument = one_argument( argument, arg2 );
+      argument = OneArgument( argument, arg2 );
+      if ( !StrCmp( arg2, "to" ) && argument[0] != '\0' )
+        argument = OneArgument( argument, arg2 );
       if ( arg2[0] == '\0' )
         {
 	  send_to_char( "Give what to whom?\r\n", ch );
@@ -121,7 +121,7 @@ void do_give( Character *ch, char *argument )
   if ( IsNpc(victim) && victim->pIndexData && victim->pIndexData->pShop )
     {
 
-      if ( victim->owner && str_cmp( ch->name, victim->owner ) )
+      if ( victim->owner && StrCmp( ch->name, victim->owner ) )
         {
           send_to_char ("This isnt your vendor!\r\n",ch);
           return;

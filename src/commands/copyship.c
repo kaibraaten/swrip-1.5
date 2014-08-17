@@ -10,8 +10,8 @@ void do_copyship( Character *ch, char *argument )
   char arg2[MAX_INPUT_LENGTH];
   int turret_num = 0;
 
-  argument = one_argument( argument, arg );
-  argument = one_argument( argument, arg2 );
+  argument = OneArgument( argument, arg );
+  argument = OneArgument( argument, arg2 );
 
   if ( !argument || argument[0] == '\0' )
     {
@@ -35,12 +35,12 @@ void do_copyship( Character *ch, char *argument )
       ship->turret[turret_num] = AllocateTurret( ship );
     }
 
-  ship->name            = str_dup( argument );
-  ship->description     = str_dup( "" );
-  ship->owner   = str_dup( "" );
-  ship->copilot       = str_dup( "" );
-  ship->pilot         = str_dup( "" );
-  ship->home          = str_dup( "" );
+  ship->name            = CopyString( argument );
+  ship->description     = CopyString( "" );
+  ship->owner   = CopyString( "" );
+  ship->copilot       = CopyString( "" );
+  ship->pilot         = CopyString( "" );
+  ship->home          = CopyString( "" );
   ship->type          = old->type;
   ship->sclass         = old->sclass;
   ship->lasers        = old->lasers;
@@ -51,7 +51,7 @@ void do_copyship( Character *ch, char *argument )
   ship->realspeed        = old->realspeed  ;
   ship->manuever        = old->manuever  ;
 
-  ship->filename         = str_dup(arg2);
+  ship->filename         = CopyString(arg2);
   SaveShip( ship );
   WriteShipList();
 }

@@ -53,15 +53,15 @@ static int GetSexFromName( const char *sexName )
 {
   int sex = -1;
 
-  if( !str_cmp( sexName, "male" ) )
+  if( !StrCmp( sexName, "male" ) )
     {
       sex = SEX_MALE;
     }
-  else if( !str_cmp( sexName, "female" ) )
+  else if( !StrCmp( sexName, "female" ) )
     {
       sex = SEX_FEMALE;
     }
-  else if( !str_cmp( sexName, "neutral" ) )
+  else if( !StrCmp( sexName, "neutral" ) )
     {
       sex = SEX_NEUTRAL;
     }
@@ -79,8 +79,8 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
   char race[MAX_INPUT_LENGTH];
 
   strcpy( argumentBuf, args->CommandArguments );
-  argument = one_argument( argument, sex );
-  argument = one_argument( argument, race );
+  argument = OneArgument( argument, sex );
+  argument = OneArgument( argument, race );
 
   if ( argument[0] == '\0' || sex[0] == '\0' || race[0] == '\0' )
     {
@@ -107,7 +107,7 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
       return;
     }
 
-  ud->Name = str_dup( argument );
+  ud->Name = CopyString( argument );
 }
 
 static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args )
@@ -122,14 +122,14 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   DISPOSE( disguise->name );
   strcpy( buf, ud->Name );
   strcat( buf, " disguise");
-  disguise->name = str_dup( buf );
+  disguise->name = CopyString( buf );
 
   strcpy( buf, ud->Name );
   DISPOSE( disguise->short_descr );
-  disguise->short_descr = str_dup( buf );
+  disguise->short_descr = CopyString( buf );
 
   DISPOSE( disguise->description );
-  disguise->description = str_dup( "" );
+  disguise->description = CopyString( "" );
 
   disguise->value[OVAL_DISGUISE_MAX_CONDITION] = INIT_WEAPON_CONDITION;
   disguise->value[OVAL_DISGUISE_CONDITION] = INIT_WEAPON_CONDITION;

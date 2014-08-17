@@ -18,7 +18,7 @@ void do_detrap( Character *ch, char *argument )
           send_to_char( "You can't concentrate enough for that.\r\n", ch );
           return;
         }
-      argument = one_argument( argument, arg );
+      argument = OneArgument( argument, arg );
       if ( !IsNpc(ch) && !ch->pcdata->learned[gsn_detrap] )
         {
           send_to_char("You do not yet know of this skill.\r\n", ch );
@@ -44,7 +44,7 @@ void do_detrap( Character *ch, char *argument )
         }
       for ( obj = ch->in_room->first_content; obj; obj = obj->next_content )
         {
-          if ( CanSeeObject( ch, obj ) && nifty_is_name( arg, obj->name ) )
+          if ( CanSeeObject( ch, obj ) && NiftyIsName( arg, obj->name ) )
             {
               found = true;
               break;
@@ -57,7 +57,7 @@ void do_detrap( Character *ch, char *argument )
         }
       act( AT_ACTION, "You carefully begin your attempt to remove a trap from $p...", ch, obj, NULL, TO_CHAR );
       act( AT_ACTION, "$n carefully attempts to remove a trap from $p...", ch, obj, NULL, TO_ROOM );
-      ch->dest_buf = str_dup( obj->name );
+      ch->dest_buf = CopyString( obj->name );
       add_timer( ch, TIMER_DO_FUN, 3, do_detrap, SUB_PAUSE );
       return;
 
@@ -87,7 +87,7 @@ void do_detrap( Character *ch, char *argument )
     }
   for ( obj = ch->in_room->first_content; obj; obj = obj->next_content )
     {
-      if ( CanSeeObject( ch, obj ) && nifty_is_name( arg, obj->name ) )
+      if ( CanSeeObject( ch, obj ) && NiftyIsName( arg, obj->name ) )
         {
           found = true;
           break;
@@ -104,7 +104,7 @@ void do_detrap( Character *ch, char *argument )
       return;
     }
 
-  percent  = number_percent() - ( GetAbilityLevel( ch, SMUGGLING_ABILITY ) / 20 )
+  percent  = GetRandomPercent() - ( GetAbilityLevel( ch, SMUGGLING_ABILITY ) / 20 )
     - (GetCurrentLuck(ch) - 16);
 
   separate_obj(obj);

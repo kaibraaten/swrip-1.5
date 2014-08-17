@@ -16,7 +16,7 @@ void do_mass_propaganda ( Character *ch , char *argument )
       return;
     }
 
-  argument = one_argument( argument, arg1 );
+  argument = OneArgument( argument, arg1 );
 
   if ( arg1[0] == '\0' )
     {

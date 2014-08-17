@@ -71,7 +71,7 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
       return;
     }
 
-  ud->ItemName = str_dup( args->CommandArguments );
+  ud->ItemName = CopyString( args->CommandArguments );
 }
 
 static void CheckRequirementsHandler( void *userData, CheckRequirementsEventArgs *args )
@@ -123,15 +123,15 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   DISPOSE( obj->name );
   strcpy( buf, ud->ItemName );
   strcat( buf, " bowcaster");
-  obj->name = str_dup( buf );
+  obj->name = CopyString( buf );
 
   strcpy( buf, ud->ItemName );
   DISPOSE( obj->short_descr );
-  obj->short_descr = str_dup( buf );
+  obj->short_descr = CopyString( buf );
 
   DISPOSE( obj->description );
   strcat( buf, " was carefully placed here." );
-  obj->description = str_dup( capitalize( buf ) );
+  obj->description = CopyString( Capitalize( buf ) );
 
   CREATE( hitroll, Affect, 1 );
   hitroll->type      = -1;

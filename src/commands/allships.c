@@ -10,17 +10,17 @@ void do_allships( Character *ch, char *argument )
   bool unowned = false, mobship = false, checkowner = false;
   int type = -1;
 
-  if ( !str_cmp( argument, "unowned" ) )
+  if ( !StrCmp( argument, "unowned" ) )
     unowned = true;
-  else if ( !str_cmp( argument, "imperial" ) )
+  else if ( !StrCmp( argument, "imperial" ) )
     type = SHIP_IMPERIAL;
-  else if ( !str_cmp( argument, "rebel" ) )
+  else if ( !StrCmp( argument, "rebel" ) )
     type = SHIP_REBEL;
-  else if ( !str_cmp( argument, "civilian" ) )
+  else if ( !StrCmp( argument, "civilian" ) )
     type = SHIP_CIVILIAN;
-  else if ( !str_cmp( argument, "mob" ) )
+  else if ( !StrCmp( argument, "mob" ) )
     mobship = true;
-  else if ( !argument || argument[0] == '\0' || !str_cmp( argument, "" ) )
+  else if ( !argument || argument[0] == '\0' || !StrCmp( argument, "" ) )
     ;
   else
     checkowner = true;
@@ -45,9 +45,9 @@ void do_allships( Character *ch, char *argument )
         if ( ship->sclass > SHIP_PLATFORM )
           continue;
 
-        if( unowned && str_cmp(ship->owner, "") )
+        if( unowned && StrCmp(ship->owner, "") )
           continue;
-        if( checkowner && str_cmp(ship->owner, argument) )
+        if( checkowner && StrCmp(ship->owner, argument) )
           continue;
 
         if( type >= 0 && ship->type != type )
@@ -68,11 +68,11 @@ void do_allships( Character *ch, char *argument )
             pager_printf( ch, "\r\n");
             continue;
           }
-        if ( !str_cmp(ship->owner, "Public") )
+        if ( !StrCmp(ship->owner, "Public") )
           {
             pager_printf( ch, "%ld to rent.\r\n", GetShipValue(ship)/100 );
 	  }
-        else if ( str_cmp(ship->owner, "") )
+        else if ( StrCmp(ship->owner, "") )
           pager_printf( ch, "%s", "\r\n" );
         else
           pager_printf( ch, "&W%-10s%ld to buy.&R&w\r\n", "", GetShipValue(ship) );

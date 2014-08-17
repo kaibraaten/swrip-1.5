@@ -96,7 +96,7 @@ SPEC_FUN *spec_lookup( const char *name )
 
   for( i = 0; i < spec_fun_table_size(); ++i )
     {
-      if( !str_cmp( name, spec_fun_table[i].fun_name ) )
+      if( !StrCmp( name, spec_fun_table[i].fun_name ) )
         {
           fun_ptr = spec_fun_table[i].fun_ptr;
           break;

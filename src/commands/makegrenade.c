@@ -99,13 +99,13 @@ static void OnStart( Character *ch, char *argument )
   the_chance = IsNpc(ch) ? ch->top_level
     : (int) (ch->pcdata->learned[gsn_makegrenade]);
 
-  if ( number_percent( ) < the_chance )
+  if ( GetRandomPercent( ) < the_chance )
     {
       send_to_char( "&GYou begin the long process of making a grenade.\r\n", ch);
       act( AT_PLAIN, "$n takes $s tools and a drink container and begins to work on something.", ch,
 	   NULL, NULL , TO_ROOM );
       add_timer ( ch , TIMER_DO_FUN , 25 , do_makegrenade , SUB_PAUSE );
-      ch->dest_buf   = str_dup(arg);
+      ch->dest_buf   = CopyString(arg);
       return;
     }
   else
@@ -188,7 +188,7 @@ static void OnFinished( Character *ch )
   the_chance = IsNpc(ch) ? ch->top_level
     : (int) (ch->pcdata->learned[gsn_makegrenade]) ;
 
-  if ( number_percent( ) > the_chance*2  || ( !checktool ) || ( !checkdrink ) || ( !checkbatt ) || ( !checkchem ) || ( !checkcirc) )
+  if ( GetRandomPercent( ) > the_chance*2  || ( !checktool ) || ( !checkdrink ) || ( !checkbatt ) || ( !checkchem ) || ( !checkcirc) )
     {
       send_to_char( "&RJust as you are about to finish your work,\r\nyour newly created grenade explodes in your hands...doh!\r\n", ch);
       learn_from_failure( ch, gsn_makegrenade );
@@ -205,13 +205,13 @@ static void OnFinished( Character *ch )
   DISPOSE( obj->name );
   strcpy( buf , arg );
   strcat( buf , " grenade");
-  obj->name = str_dup( buf );
+  obj->name = CopyString( buf );
   strcpy( buf, arg );
   DISPOSE( obj->short_descr );
-  obj->short_descr = str_dup( buf );
+  obj->short_descr = CopyString( buf );
   DISPOSE( obj->description );
   strcat( buf, " was carelessly misplaced here." );
-  obj->description = str_dup( buf );
+  obj->description = CopyString( buf );
   obj->value[OVAL_EXPLOSIVE_MIN_DMG] = strength/2;
   obj->value[OVAL_EXPLOSIVE_MAX_DMG] = strength;
   obj->cost = obj->value[OVAL_EXPLOSIVE_MAX_DMG]*5;

@@ -10,9 +10,9 @@ void do_sedit( Character *ch, char *argument )
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
 
-  smash_tilde( argument );
-  argument = one_argument( argument, arg1 );
-  argument = one_argument( argument, arg2 );
+  SmashTilde( argument );
+  argument = OneArgument( argument, arg1 );
+  argument = OneArgument( argument, arg2 );
 
   set_char_color( AT_SOCIAL, ch );
 
@@ -29,7 +29,7 @@ void do_sedit( Character *ch, char *argument )
       return;
     }
 
-  if ( GetTrustLevel(ch) > LEVEL_CREATOR && !str_cmp( arg1, "save" ) )
+  if ( GetTrustLevel(ch) > LEVEL_CREATOR && !StrCmp( arg1, "save" ) )
     {
       save_socials();
       send_to_char( "Saved.\r\n", ch );
@@ -38,7 +38,7 @@ void do_sedit( Character *ch, char *argument )
 
   social = find_social( arg1 );
 
-  if ( !str_cmp( arg2, "create" ) )
+  if ( !StrCmp( arg2, "create" ) )
     {
       if ( social )
         {
@@ -46,9 +46,9 @@ void do_sedit( Character *ch, char *argument )
           return;
         }
       CREATE( social, SOCIALTYPE, 1 );
-      social->name = str_dup( arg1 );
+      social->name = CopyString( arg1 );
       sprintf( arg2, "You %s.", arg1 );
-      social->char_no_arg = str_dup( arg2 );
+      social->char_no_arg = CopyString( arg2 );
       add_social( social );
       send_to_char( "Social added.\r\n", ch );
       return;
@@ -60,7 +60,7 @@ void do_sedit( Character *ch, char *argument )
       return;
     }
 
-  if ( arg2[0] == '\0' || !str_cmp( arg2, "show" ) )
+  if ( arg2[0] == '\0' || !StrCmp( arg2, "show" ) )
     {
       ch_printf( ch, "Social: %s\r\n\r\nCNoArg: %s\r\n",
                  social->name,  social->char_no_arg );
@@ -75,7 +75,7 @@ void do_sedit( Character *ch, char *argument )
       return;
     }
 
-  if ( GetTrustLevel(ch) > LEVEL_GREATER && !str_cmp( arg2, "delete" ) )
+  if ( GetTrustLevel(ch) > LEVEL_GREATER && !StrCmp( arg2, "delete" ) )
     {
       unlink_social( social );
       free_social( social );
@@ -83,85 +83,85 @@ void do_sedit( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "cnoarg" ) )
+  if ( !StrCmp( arg2, "cnoarg" ) )
     {
-      if ( argument[0] == '\0' || !str_cmp( argument, "clear" ) )
+      if ( argument[0] == '\0' || !StrCmp( argument, "clear" ) )
         {
           send_to_char( "You cannot clear this field.  It must have a message.\r\n", ch );
           return;
         }
       if ( social->char_no_arg )
         DISPOSE( social->char_no_arg );
-      social->char_no_arg = str_dup( argument );
+      social->char_no_arg = CopyString( argument );
       send_to_char( "Done.\r\n", ch );
       return;
     }
 
-  if ( !str_cmp( arg2, "onoarg" ) )
+  if ( !StrCmp( arg2, "onoarg" ) )
     {
       if ( social->others_no_arg )
         DISPOSE( social->others_no_arg );
-      if ( argument[0] != '\0' && str_cmp( argument, "clear" ) )
-        social->others_no_arg = str_dup( argument );
+      if ( argument[0] != '\0' && StrCmp( argument, "clear" ) )
+        social->others_no_arg = CopyString( argument );
       send_to_char( "Done.\r\n", ch );
       return;
     }
 
-  if ( !str_cmp( arg2, "cfound" ) )
+  if ( !StrCmp( arg2, "cfound" ) )
     {
       if ( social->char_found )
         DISPOSE( social->char_found );
-      if ( argument[0] != '\0' && str_cmp( argument, "clear" ) )
-        social->char_found = str_dup( argument );
+      if ( argument[0] != '\0' && StrCmp( argument, "clear" ) )
+        social->char_found = CopyString( argument );
       send_to_char( "Done.\r\n", ch );
       return;
     }
 
-  if ( !str_cmp( arg2, "ofound" ) )
+  if ( !StrCmp( arg2, "ofound" ) )
     {
       if ( social->others_found )
         DISPOSE( social->others_found );
-      if ( argument[0] != '\0' && str_cmp( argument, "clear" ) )
-        social->others_found = str_dup( argument );
+      if ( argument[0] != '\0' && StrCmp( argument, "clear" ) )
+        social->others_found = CopyString( argument );
       send_to_char( "Done.\r\n", ch );
       return;
     }
 
-  if ( !str_cmp( arg2, "vfound" ) )
+  if ( !StrCmp( arg2, "vfound" ) )
     {
       if ( social->vict_found )
         DISPOSE( social->vict_found );
-      if ( argument[0] != '\0' && str_cmp( argument, "clear" ) )
-        social->vict_found = str_dup( argument );
+      if ( argument[0] != '\0' && StrCmp( argument, "clear" ) )
+        social->vict_found = CopyString( argument );
       send_to_char( "Done.\r\n", ch );
       return;
     }
 
-  if ( !str_cmp( arg2, "cauto" ) )
+  if ( !StrCmp( arg2, "cauto" ) )
     {
       if ( social->char_auto )
         DISPOSE( social->char_auto );
-      if ( argument[0] != '\0' && str_cmp( argument, "clear" ) )
-        social->char_auto = str_dup( argument );
+      if ( argument[0] != '\0' && StrCmp( argument, "clear" ) )
+        social->char_auto = CopyString( argument );
       send_to_char( "Done.\r\n", ch );
       return;
     }
 
-  if ( !str_cmp( arg2, "oauto" ) )
+  if ( !StrCmp( arg2, "oauto" ) )
     {
       if ( social->others_auto )
         DISPOSE( social->others_auto );
-      if ( argument[0] != '\0' && str_cmp( argument, "clear" ) )
-        social->others_auto = str_dup( argument );
+      if ( argument[0] != '\0' && StrCmp( argument, "clear" ) )
+        social->others_auto = CopyString( argument );
       send_to_char( "Done.\r\n", ch );
       return;
     }
 
-  if ( GetTrustLevel(ch) > LEVEL_GREATER && !str_cmp( arg2, "name" ) )
+  if ( GetTrustLevel(ch) > LEVEL_GREATER && !StrCmp( arg2, "name" ) )
     {
       bool relocate;
 
-      one_argument( argument, arg1 );
+      OneArgument( argument, arg1 );
       if ( arg1[0] == '\0' )
         {
 	  send_to_char( "Cannot clear name field!\r\n", ch );
@@ -176,7 +176,7 @@ void do_sedit( Character *ch, char *argument )
         relocate = false;
       if ( social->name )
         DISPOSE( social->name );
-      social->name = str_dup( arg1 );
+      social->name = CopyString( arg1 );
       if ( relocate )
         add_social( social );
       send_to_char( "Done.\r\n", ch );

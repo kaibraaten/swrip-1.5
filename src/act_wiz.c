@@ -84,7 +84,7 @@ Room *find_location( Character *ch, char *arg )
   Character *victim;
   OBJ_DATA *obj;
 
-  if ( is_number(arg) )
+  if ( IsNumber(arg) )
     return get_room_index( atoi( arg ) );
 
   if ( ( victim = get_char_world( ch, arg ) ) != NULL )
@@ -102,8 +102,8 @@ Room *find_location( Character *ch, char *arg )
  * bstr in the string pointed to by astr. It returns a null pointer
  * if no match is found.  --  Gorog (with help from Thoric)
  *
- * Note I made a change when modifying str_infix. If the target string is
- * null, I return NULL (meaning no match was found). str_infix returns
+ * Note I made a change when modifying StringInfix. If the target string is
+ * null, I return NULL (meaning no match was found). StringInfix returns
  * false (meaning a match was found).  *grumble*
  */
 static const char *str_str( const char *astr, const char *bstr )
@@ -118,7 +118,7 @@ static const char *str_str( const char *astr, const char *bstr )
   sstr2 = strlen(bstr);
 
   for ( ichar = 0; ichar <= sstr1 - sstr2; ichar++ )
-    if ( c0 == CharToLowercase(astr[ichar]) && !str_prefix(bstr, astr+ichar) )
+    if ( c0 == CharToLowercase(astr[ichar]) && !StringPrefix(bstr, astr+ichar) )
       return (astr+ichar);
 
   return NULL;
@@ -513,7 +513,7 @@ void add_social( SOCIALTYPE *social )
 
   for ( ; tmp; tmp = tmp->next )
     {
-      if ( (x=str_cmp(social->name, tmp->name)) == 0 )
+      if ( (x=StrCmp(social->name, tmp->name)) == 0 )
         {
           bug( "Add_social: trying to add duplicate name to bucket %d", hash );
           free_social( social );

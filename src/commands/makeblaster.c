@@ -63,7 +63,7 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
       return;
     }
 
-  ud->ItemName = str_dup( args->CommandArguments );
+  ud->ItemName = CopyString( args->CommandArguments );
 }
 
 static void MaterialFoundHandler( void *userData, MaterialFoundEventArgs *args )
@@ -107,15 +107,15 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   DISPOSE( blaster->name );
   strcpy( buf, ud->ItemName );
   strcat( buf, " blaster");
-  blaster->name = str_dup( buf );
+  blaster->name = CopyString( buf );
 
   strcpy( buf, ud->ItemName );
   DISPOSE( blaster->short_descr );
-  blaster->short_descr = str_dup( buf );
+  blaster->short_descr = CopyString( buf );
 
   DISPOSE( blaster->description );
   strcat( buf, " was carelessly misplaced here." );
-  blaster->description = str_dup( capitalize( buf ) );
+  blaster->description = CopyString( Capitalize( buf ) );
 
   CREATE( hitroll, Affect, 1 );
   hitroll->type       = -1;

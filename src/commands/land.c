@@ -136,9 +136,9 @@ void do_land( Character *ch, char *argument )
 
   for( spaceobj = first_spaceobject; spaceobj; spaceobj = spaceobj->next )
     if( IsSpaceobjectInRange( ship, spaceobj ) )
-      if ( !str_prefix(argument,spaceobj->landing_site.locationa) ||
-           !str_prefix(argument,spaceobj->landing_site.locationb) ||
-           !str_prefix(argument,spaceobj->landing_site.locationc))
+      if ( !StringPrefix(argument,spaceobj->landing_site.locationa) ||
+           !StringPrefix(argument,spaceobj->landing_site.locationb) ||
+           !StringPrefix(argument,spaceobj->landing_site.locationc))
         {
           found = true;
           break;
@@ -196,7 +196,7 @@ void do_land( Character *ch, char *argument )
   if ( ship->sclass == MIDSIZE_SHIP )
     the_chance = IsNpc(ch) ? ch->top_level
       : (int)  (ch->pcdata->learned[gsn_midships]) ;
-  if ( number_percent( ) < the_chance )
+  if ( GetRandomPercent( ) < the_chance )
     {
       set_char_color( AT_GREEN, ch );
       send_to_char( "Landing sequence initiated.\r\n", ch);
@@ -207,7 +207,7 @@ void do_land( Character *ch, char *argument )
       EchoToDockedShip( AT_YELLOW , ship, "The ship begins to enter the atmosphere." );
 
       EchoToShip( AT_YELLOW , ship , "The ship slowly begins its landing approach.");
-      ship->dest = str_dup(arg);
+      ship->dest = CopyString(arg);
       ship->shipstate = SHIP_LAND;
       if ( ship->sclass == FIGHTER_SHIP )
         learn_from_success( ch, gsn_starfighters );

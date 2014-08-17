@@ -7,7 +7,7 @@ void do_purge( Character *ch, char *argument )
   Character *victim;
   OBJ_DATA *obj;
 
-  one_argument( argument, arg );
+  OneArgument( argument, arg );
 
   if ( arg[0] == '\0' )
     {

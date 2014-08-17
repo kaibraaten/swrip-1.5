@@ -32,7 +32,7 @@ int get_race_from_name( const char *arg )
   for ( iRace = 0; iRace < MAX_RACE; iRace++ )
     {
       if ( toupper(arg[0]) == toupper(race_table[iRace].race_name[0])
-           &&   !str_prefix( arg, race_table[iRace].race_name ) )
+           &&   !StringPrefix( arg, race_table[iRace].race_name ) )
         break;
     }
   if( iRace == MAX_RACE )
@@ -47,7 +47,7 @@ int get_class_from_name( const char *arg )
   for ( iClass = 0; iClass < MAX_ABILITY; iClass++ )
     {
       if ( toupper(arg[0]) == toupper(ability_name[iClass][0])
-           &&   !str_prefix( arg, ability_name[iClass] ) )
+           &&   !StringPrefix( arg, ability_name[iClass] ) )
         break;
     }
   if( iClass == MAX_ABILITY )
@@ -95,7 +95,7 @@ char *halucinated_object( int ms, bool fShort )
   int sms = urange( 1, (ms+10)/5, 20 );
 
   if ( fShort )
-    switch( number_range( 6-urange(1,sms/2,5), sms ) )
+    switch( GetRandomNumberFromRange( 6-urange(1,sms/2,5), sms ) )
       {
       case  1: return "a sword";
       case  2: return "a stick";
@@ -118,7 +118,7 @@ char *halucinated_object( int ms, bool fShort )
       case 19: return "the answer";
       case 20: return "the key to life, the universe and everything";
       }
-  switch( number_range( 6-urange(1,sms/2,5), sms ) )
+  switch( GetRandomNumberFromRange( 6-urange(1,sms/2,5), sms ) )
     {
     case  1: return "A nice looking sword catches your eye.";
     case  2: return "The ground is covered in small sticks.";
@@ -194,10 +194,10 @@ void show_list_to_char( const OBJ_DATA *list, Character *ch, bool fShort, bool f
     {
       offcount = urange( -(count), (count * ms) / 100, count*2 );
       if ( offcount < 0 )
-        offcount += number_range(0, abs(offcount));
+        offcount += GetRandomNumberFromRange(0, abs(offcount));
       else
         if ( offcount > 0 )
-          offcount -= number_range(0, offcount);
+          offcount -= GetRandomNumberFromRange(0, offcount);
     }
   else
     offcount = 0;
@@ -227,11 +227,11 @@ void show_list_to_char( const OBJ_DATA *list, Character *ch, bool fShort, bool f
     {
       if ( offcount < 0 && ++cnt > (count + offcount) )
         break;
-      if ( tmp > 0 && number_bits(1) == 0 )
+      if ( tmp > 0 && NumberBits(1) == 0 )
         {
-          prgpstrShow [nShow] = str_dup( halucinated_object(ms, fShort) );
+          prgpstrShow [nShow] = CopyString( halucinated_object(ms, fShort) );
           prgnShow      [nShow] = 1;
-          pitShow       [nShow] = number_range( ITEM_LIGHT, ITEM_BOOK );
+          pitShow       [nShow] = GetRandomNumberFromRange( ITEM_LIGHT, ITEM_BOOK );
           nShow++;
           --tmp;
         }
@@ -251,7 +251,7 @@ void show_list_to_char( const OBJ_DATA *list, Character *ch, bool fShort, bool f
                */
               for ( iShow = nShow - 1; iShow >= 0; iShow-- )
                 {
-                  if ( !str_cmp( prgpstrShow[iShow], pstrShow ) )
+                  if ( !StrCmp( prgpstrShow[iShow], pstrShow ) )
                     {
                       prgnShow[iShow] += obj->count;
                       fCombine = true;
@@ -266,7 +266,7 @@ void show_list_to_char( const OBJ_DATA *list, Character *ch, bool fShort, bool f
            */
           if ( !fCombine )
             {
-              prgpstrShow [nShow] = str_dup( pstrShow );
+              prgpstrShow [nShow] = CopyString( pstrShow );
               prgnShow    [nShow] = obj->count;
               nShow++;
             }
@@ -277,9 +277,9 @@ void show_list_to_char( const OBJ_DATA *list, Character *ch, bool fShort, bool f
       int x;
       for ( x = 0; x < tmp; x++ )
         {
-          prgpstrShow [nShow] = str_dup( halucinated_object(ms, fShort) );
+          prgpstrShow [nShow] = CopyString( halucinated_object(ms, fShort) );
           prgnShow      [nShow] = 1;
-          pitShow       [nShow] = number_range( ITEM_LIGHT, ITEM_BOOK );
+          pitShow       [nShow] = GetRandomNumberFromRange( ITEM_LIGHT, ITEM_BOOK );
           nShow++;
         }
     }

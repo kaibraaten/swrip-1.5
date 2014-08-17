@@ -16,7 +16,7 @@ void do_bribe ( Character *ch , char *argument )
       return;
     }
 
-  argument = one_argument( argument, arg1 );
+  argument = OneArgument( argument, arg1 );
 
   if ( ch->mount )
     {

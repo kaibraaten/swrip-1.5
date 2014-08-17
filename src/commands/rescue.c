@@ -14,7 +14,7 @@ void do_rescue( Character *ch, char *argument )
       return;
     }
 
-  one_argument( argument, arg );
+  OneArgument( argument, arg );
   if ( arg[0] == '\0' )
     {
       send_to_char( "Rescue whom?\r\n", ch );
@@ -60,7 +60,7 @@ void do_rescue( Character *ch, char *argument )
   ch->alignment = ch->alignment + 5;
   ch->alignment = urange( -1000, ch->alignment, 1000 );
 
-  percent = number_percent( ) - (GetCurrentLuck(ch) - 14)
+  percent = GetRandomPercent( ) - (GetCurrentLuck(ch) - 14)
     - (GetCurrentLuck(victim) - 16);
 
   SetWaitState( ch, skill_table[gsn_rescue]->beats );

@@ -13,13 +13,13 @@ void do_rank( Character *ch, char *argument )
       return;
     }
 
-  smash_tilde( argument );
+  SmashTilde( argument );
   DISPOSE( ch->pcdata->rank );
 
-  if ( !str_cmp( argument, "none" ) )
-    ch->pcdata->rank = str_dup( "" );
+  if ( !StrCmp( argument, "none" ) )
+    ch->pcdata->rank = CopyString( "" );
   else
-    ch->pcdata->rank = str_dup( argument );
+    ch->pcdata->rank = CopyString( argument );
 
   send_to_char( "Ok.\r\n", ch );
 }

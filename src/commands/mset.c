@@ -56,7 +56,7 @@ void do_mset( Character *ch, char *argument )
       if ( IsNpc(victim) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
         {
           DISPOSE( victim->pIndexData->description );
-          victim->pIndexData->description = str_dup( victim->description );
+          victim->pIndexData->description = CopyString( victim->description );
         }
       StopEditing( ch );
       ch->substate = ch->tempnum;
@@ -65,7 +65,7 @@ void do_mset( Character *ch, char *argument )
 
   victim = NULL;
   lockvictim = false;
-  smash_tilde( argument );
+  SmashTilde( argument );
 
   if ( ch->substate == SUB_REPEATCMD )
     {
@@ -77,8 +77,8 @@ void do_mset( Character *ch, char *argument )
           victim = NULL;
           argument = "done";
         }
-      if ( argument[0] == '\0' || !str_cmp( argument, " " )
-           ||   !str_cmp( argument, "stat" ) )
+      if ( argument[0] == '\0' || !StrCmp( argument, " " )
+           ||   !StrCmp( argument, "stat" ) )
         {
           if ( victim )
             do_mstat( ch, victim->name );
@@ -86,7 +86,7 @@ void do_mset( Character *ch, char *argument )
             send_to_char( "No victim selected.  Type '?' for help.\r\n", ch );
           return;
         }
-      if ( !str_cmp( argument, "done" ) || !str_cmp( argument, "off" ) )
+      if ( !StrCmp( argument, "done" ) || !StrCmp( argument, "off" ) )
         {
           send_to_char( "Mset mode off.\r\n", ch );
           ch->substate = SUB_NONE;
@@ -100,19 +100,19 @@ void do_mset( Character *ch, char *argument )
     {
       lockvictim = true;
       strcpy( arg1, victim->name );
-      argument = one_argument( argument, arg2 );
+      argument = OneArgument( argument, arg2 );
       strcpy( arg3, argument );
     }
   else
     {
       lockvictim = false;
-      argument = one_argument( argument, arg1 );
-      argument = one_argument( argument, arg2 );
+      argument = OneArgument( argument, arg1 );
+      argument = OneArgument( argument, arg2 );
       strcpy( arg3, argument );
     }
 
   if ( arg1[0] == '\0' || (arg2[0] == '\0' && ch->substate != SUB_REPEATCMD)
-       ||   !str_cmp( arg1, "?" ) )
+       ||   !StrCmp( arg1, "?" ) )
     {
       if ( ch->substate == SUB_REPEATCMD )
         {
@@ -187,12 +187,12 @@ void do_mset( Character *ch, char *argument )
       maxattr = 25;
     }
 
-  value = is_number( arg3 ) ? atoi( arg3 ) : -1;
+  value = IsNumber( arg3 ) ? atoi( arg3 ) : -1;
 
   if ( atoi(arg3) < -1 && value == -1 )
     value = atoi(arg3);
 
-  if ( !str_cmp( arg2, "str" ) )
+  if ( !StrCmp( arg2, "str" ) )
     {
       if ( !can_mmodify( ch, victim ) )
         return;
@@ -207,7 +207,7 @@ void do_mset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "int" ) )
+  if ( !StrCmp( arg2, "int" ) )
     {
       if ( !can_mmodify( ch, victim ) )
         return;
@@ -222,7 +222,7 @@ void do_mset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "wis" ) )
+  if ( !StrCmp( arg2, "wis" ) )
     {
       if ( !can_mmodify( ch, victim ) )
         return;
@@ -237,7 +237,7 @@ void do_mset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "dex" ) )
+  if ( !StrCmp( arg2, "dex" ) )
     {
       if ( !can_mmodify( ch, victim ) )
         return;
@@ -252,7 +252,7 @@ void do_mset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "con" ) )
+  if ( !StrCmp( arg2, "con" ) )
     {
       if ( !can_mmodify( ch, victim ) )
         return;
@@ -267,7 +267,7 @@ void do_mset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "cha" ) )
+  if ( !StrCmp( arg2, "cha" ) )
     {
       if ( !can_mmodify( ch, victim ) )
         return;
@@ -282,7 +282,7 @@ void do_mset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "lck" ) )
+  if ( !StrCmp( arg2, "lck" ) )
     {
       if ( !can_mmodify( ch, victim ) )
         return;
@@ -297,7 +297,7 @@ void do_mset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "frc" ) )
+  if ( !StrCmp( arg2, "frc" ) )
     {
       if ( !can_mmodify( ch, victim ) )
         return;
@@ -313,7 +313,7 @@ void do_mset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "sav1" ) )
+  if ( !StrCmp( arg2, "sav1" ) )
     {
       if ( !can_mmodify( ch, victim ) )
         return;
@@ -328,7 +328,7 @@ void do_mset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "sav2" ) )
+  if ( !StrCmp( arg2, "sav2" ) )
     {
       if ( !can_mmodify( ch, victim ) )
         return;
@@ -343,7 +343,7 @@ void do_mset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "sav3" ) )
+  if ( !StrCmp( arg2, "sav3" ) )
     {
       if ( !can_mmodify( ch, victim ) )
         return;
@@ -358,7 +358,7 @@ void do_mset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "sav4" ) )
+  if ( !StrCmp( arg2, "sav4" ) )
     {
       if ( !can_mmodify( ch, victim ) )
         return;
@@ -373,7 +373,7 @@ void do_mset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "sav5" ) )
+  if ( !StrCmp( arg2, "sav5" ) )
     {
       if ( !can_mmodify( ch, victim ) )
         return;
@@ -388,7 +388,7 @@ void do_mset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "sex" ) )
+  if ( !StrCmp( arg2, "sex" ) )
     {
       if ( !can_mmodify( ch, victim ) )
         return;
@@ -403,7 +403,7 @@ void do_mset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "race" ) )
+  if ( !StrCmp( arg2, "race" ) )
     {
       if ( !can_mmodify( ch, victim ) )
         return;
@@ -426,7 +426,7 @@ void do_mset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "armor" ) )
+  if ( !StrCmp( arg2, "armor" ) )
     {
       if ( !can_mmodify( ch, victim ) )
         return;
@@ -441,7 +441,7 @@ void do_mset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "level" ) )
+  if ( !StrCmp( arg2, "level" ) )
     {
       if ( !can_mmodify( ch, victim ) )
         return;
@@ -493,7 +493,7 @@ void do_mset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "numattacks" ) )
+  if ( !StrCmp( arg2, "numattacks" ) )
     {
       if ( !can_mmodify( ch, victim ) )
         return;
@@ -514,7 +514,7 @@ void do_mset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "credits" ) )
+  if ( !StrCmp( arg2, "credits" ) )
     {
       if ( !can_mmodify( ch, victim ) )
         return;
@@ -524,7 +524,7 @@ void do_mset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "hitroll" ) )
+  if ( !StrCmp( arg2, "hitroll" ) )
     {
       if ( !can_mmodify( ch, victim ) )
         return;
@@ -534,7 +534,7 @@ void do_mset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "damroll" ) )
+  if ( !StrCmp( arg2, "damroll" ) )
     {
       if ( !can_mmodify( ch, victim ) )
         return;
@@ -544,7 +544,7 @@ void do_mset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "hp" ) )
+  if ( !StrCmp( arg2, "hp" ) )
     {
       if ( !can_mmodify( ch, victim ) )
         return;
@@ -557,7 +557,7 @@ void do_mset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "force" ) )
+  if ( !StrCmp( arg2, "force" ) )
     {
       if ( !can_mmodify( ch, victim ) )
         return;
@@ -570,7 +570,7 @@ void do_mset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "move" ) )
+  if ( !StrCmp( arg2, "move" ) )
     {
       if ( !can_mmodify( ch, victim ) )
         return;
@@ -583,7 +583,7 @@ void do_mset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "align" ) )
+  if ( !StrCmp( arg2, "align" ) )
     {
       if ( !can_mmodify( ch, victim ) )
         return;
@@ -598,7 +598,7 @@ void do_mset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "password" ) )
+  if ( !StrCmp( arg2, "password" ) )
     {
       char *pwdnew;
       char *p;
@@ -624,7 +624,7 @@ void do_mset( Character *ch, char *argument )
       /*
        * No tilde allowed because of player file format.
        */
-      pwdnew = encode_string( arg3 );
+      pwdnew = EncodeString( arg3 );
       for ( p = pwdnew; *p != '\0'; p++ )
         {
           if ( *p == '~' )
@@ -636,7 +636,7 @@ void do_mset( Character *ch, char *argument )
         }
 
       DISPOSE( victim->pcdata->pwd );
-      victim->pcdata->pwd = str_dup( pwdnew );
+      victim->pcdata->pwd = CopyString( pwdnew );
       if ( IsBitSet(sysdata.save_flags, SV_PASSCHG) )
         save_char_obj( victim );
       send_to_char( "Ok.\r\n", ch );
@@ -644,7 +644,7 @@ void do_mset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "mentalstate" ) )
+  if ( !StrCmp( arg2, "mentalstate" ) )
     {
       if ( value < -100 || value > 100 )
         {
@@ -655,7 +655,7 @@ void do_mset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "emotion" ) )
+  if ( !StrCmp( arg2, "emotion" ) )
     {
       if ( value < -100 || value > 100 )
         {
@@ -666,7 +666,7 @@ void do_mset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "thirst" ) )
+  if ( !StrCmp( arg2, "thirst" ) )
     {
       if ( IsNpc(victim) )
         {
@@ -684,7 +684,7 @@ void do_mset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "drunk" ) )
+  if ( !StrCmp( arg2, "drunk" ) )
     {
       if ( IsNpc(victim) )
         {
@@ -702,7 +702,7 @@ void do_mset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "full" ) )
+  if ( !StrCmp( arg2, "full" ) )
     {
       if ( IsNpc(victim) )
         {
@@ -720,7 +720,7 @@ void do_mset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "blood" ) )
+  if ( !StrCmp( arg2, "blood" ) )
     {
       if ( IsNpc(victim) )
         {
@@ -738,7 +738,7 @@ void do_mset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "name" ) )
+  if ( !StrCmp( arg2, "name" ) )
     {
       if ( !can_mmodify( ch, victim ) )
         return;
@@ -749,16 +749,16 @@ void do_mset( Character *ch, char *argument )
         }
 
       DISPOSE( victim->name );
-      victim->name = str_dup( arg3 );
+      victim->name = CopyString( arg3 );
       if ( IsNpc(victim) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
         {
           DISPOSE( victim->pIndexData->player_name );
-          victim->pIndexData->player_name = str_dup( victim->name );
+          victim->pIndexData->player_name = CopyString( victim->name );
         }
       return;
     }
 
-  if ( !str_cmp( arg2, "minsnoop" ) )
+  if ( !StrCmp( arg2, "minsnoop" ) )
     {
       if ( GetTrustLevel( ch ) < LEVEL_SUB_IMPLEM )
         {
@@ -777,7 +777,7 @@ void do_mset( Character *ch, char *argument )
         }
     }
 
-  if ( !str_cmp( arg2, "clan" ) )
+  if ( !StrCmp( arg2, "clan" ) )
     {
       CLAN_DATA *clan;
 
@@ -795,7 +795,7 @@ void do_mset( Character *ch, char *argument )
       if ( arg3[0] == '\0' )
         {
           DISPOSE( victim->pcdata->clan_name );
-          victim->pcdata->clan_name     = str_dup( "" );
+          victim->pcdata->clan_name     = CopyString( "" );
           victim->pcdata->clan  = NULL;
           send_to_char( "Removed from clan.\r\nPlease make sure you adjust that clan's members accordingly.\r\nAlso be sure to remove any bestowments they have been given.\r\n", ch );
           return;
@@ -809,49 +809,49 @@ void do_mset( Character *ch, char *argument )
         }
 
       DISPOSE( victim->pcdata->clan_name );
-      victim->pcdata->clan_name = str_dup( clan->name );
+      victim->pcdata->clan_name = CopyString( clan->name );
       victim->pcdata->clan = clan;
       send_to_char( "Done.\r\nPlease make sure you adjust that clan's members accordingly.\r\n", ch);
       return;
     }
 
 
-  if ( !str_cmp( arg2, "short" ) )
+  if ( !StrCmp( arg2, "short" ) )
     {
       DISPOSE( victim->short_descr );
-      victim->short_descr = str_dup( arg3 );
+      victim->short_descr = CopyString( arg3 );
       if ( IsNpc(victim) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
         {
           DISPOSE( victim->pIndexData->short_descr );
-          victim->pIndexData->short_descr = str_dup( victim->short_descr );
+          victim->pIndexData->short_descr = CopyString( victim->short_descr );
         }
       return;
     }
 
-  if ( !str_cmp( arg2, "long" ) )
+  if ( !StrCmp( arg2, "long" ) )
     {
       DISPOSE( victim->long_descr );
       strcpy( buf, arg3 );
       strcat( buf, "\r\n" );
-      victim->long_descr = str_dup( buf );
+      victim->long_descr = CopyString( buf );
       if ( IsNpc(victim) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
         {
           DISPOSE( victim->pIndexData->long_descr );
-          victim->pIndexData->long_descr = str_dup( victim->long_descr );
+          victim->pIndexData->long_descr = CopyString( victim->long_descr );
         }
       return;
     }
 
-  if ( !str_cmp( arg2, "description" ) )
+  if ( !StrCmp( arg2, "description" ) )
     {
       if ( arg3[0] )
         {
           DISPOSE( victim->description );
-          victim->description = str_dup( arg3 );
+          victim->description = CopyString( arg3 );
           if ( IsNpc( victim ) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
             {
               DISPOSE(victim->pIndexData->description );
-              victim->pIndexData->description = str_dup( victim->description );
+              victim->pIndexData->description = CopyString( victim->description );
             }
           return;
         }
@@ -869,7 +869,7 @@ void do_mset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "title" ) )
+  if ( !StrCmp( arg2, "title" ) )
     {
       if ( IsNpc(victim) )
         {
@@ -881,7 +881,7 @@ void do_mset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "spec" ) )
+  if ( !StrCmp( arg2, "spec" ) )
     {
       if ( !can_mmodify( ch, victim ) )
         return;
@@ -891,7 +891,7 @@ void do_mset( Character *ch, char *argument )
           return;
         }
 
-      if ( !str_cmp( arg3, "none" ) )
+      if ( !StrCmp( arg3, "none" ) )
         {
           victim->spec_fun = NULL;
           send_to_char( "Special function removed.\r\n", ch );
@@ -910,7 +910,7 @@ void do_mset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "spec2" ) )
+  if ( !StrCmp( arg2, "spec2" ) )
     {
       if ( !can_mmodify( ch, victim ) )
         return;
@@ -920,7 +920,7 @@ void do_mset( Character *ch, char *argument )
           return;
         }
 
-      if ( !str_cmp( arg3, "none" ) )
+      if ( !StrCmp( arg3, "none" ) )
         {
           victim->spec_2 = NULL;
           send_to_char( "Special function removed.\r\n", ch );
@@ -938,7 +938,7 @@ void do_mset( Character *ch, char *argument )
         victim->pIndexData->spec_2 = victim->spec_2;
       return;
     }
-  if ( !str_cmp( arg2, "whoCloak" ) )
+  if ( !StrCmp( arg2, "whoCloak" ) )
     {
       if ( IsNpc(victim) )
         {
@@ -962,7 +962,7 @@ void do_mset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "flags" ) )
+  if ( !StrCmp( arg2, "flags" ) )
     {
       bool pcflag;
       if ( !IsNpc( victim ) && GetTrustLevel( ch ) < LEVEL_GREATER )
@@ -983,7 +983,7 @@ void do_mset( Character *ch, char *argument )
       while ( argument[0] != '\0' )
         {
           pcflag = false;
-          argument = one_argument( argument, arg3 );
+          argument = OneArgument( argument, arg3 );
           value = IsNpc( victim) ? get_actflag( arg3 ) : get_plrflag( arg3 );
 
           if ( !IsNpc( victim ) && ( value < 0 || value > 31 ) )
@@ -1019,7 +1019,7 @@ void do_mset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "wanted" ) )
+  if ( !StrCmp( arg2, "wanted" ) )
     {
       if ( IsNpc( victim ) )
         {
@@ -1043,7 +1043,7 @@ void do_mset( Character *ch, char *argument )
 
       while ( argument[0] != '\0' )
         {
-          argument = one_argument( argument, arg3 );
+          argument = OneArgument( argument, arg3 );
           value = get_wanted_flag( arg3 );
           if ( value < 0 || value > 31 )
             ch_printf( ch, "Unknown flag: %s\r\n", arg3 );
@@ -1053,7 +1053,7 @@ void do_mset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "vip" ) )
+  if ( !StrCmp( arg2, "vip" ) )
     {
       if ( !IsNpc( victim ))
         {
@@ -1072,7 +1072,7 @@ void do_mset( Character *ch, char *argument )
 
       while ( argument[0] != '\0' )
         {
-          argument = one_argument( argument, arg3 );
+          argument = OneArgument( argument, arg3 );
           value = get_vip_flag( arg3 );
           if ( value < 0 || value > 31 )
             ch_printf( ch, "Unknown flag: %s\r\n", arg3 );
@@ -1084,7 +1084,7 @@ void do_mset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "affected" ) )
+  if ( !StrCmp( arg2, "affected" ) )
     {
       if ( !IsNpc( victim ) && GetTrustLevel( ch ) < LEVEL_CREATOR )
         {
@@ -1101,7 +1101,7 @@ void do_mset( Character *ch, char *argument )
         }
       while ( argument[0] != '\0' )
         {
-          argument = one_argument( argument, arg3 );
+          argument = OneArgument( argument, arg3 );
           value = get_affectedflag( arg3 );
           if ( value < 0 || value > 31 )
             ch_printf( ch, "Unknown flag: %s\r\n", arg3 );
@@ -1116,7 +1116,7 @@ void do_mset( Character *ch, char *argument )
   /*
    * save some more finger-leather for setting RIS stuff
    */
-  if ( !str_cmp( arg2, "r" ) )
+  if ( !StrCmp( arg2, "r" ) )
     {
       if ( !IsNpc( victim ) && GetTrustLevel( ch ) < LEVEL_CREATOR )
         {
@@ -1130,7 +1130,7 @@ void do_mset( Character *ch, char *argument )
       do_mset( ch, outbuf );
       return;
     }
-  if ( !str_cmp( arg2, "i" ) )
+  if ( !StrCmp( arg2, "i" ) )
     {
       if ( !IsNpc( victim ) && GetTrustLevel( ch ) < LEVEL_CREATOR )
         {
@@ -1145,7 +1145,7 @@ void do_mset( Character *ch, char *argument )
       do_mset( ch, outbuf );
       return;
     }
-  if ( !str_cmp( arg2, "s" ) )
+  if ( !StrCmp( arg2, "s" ) )
     {
       if ( !IsNpc( victim ) && GetTrustLevel( ch ) < LEVEL_CREATOR )
         {
@@ -1159,7 +1159,7 @@ void do_mset( Character *ch, char *argument )
       do_mset( ch, outbuf );
       return;
     }
-  if ( !str_cmp( arg2, "ri" ) )
+  if ( !StrCmp( arg2, "ri" ) )
     {
       if ( !IsNpc( victim ) && GetTrustLevel( ch ) < LEVEL_CREATOR )
         {
@@ -1176,7 +1176,7 @@ void do_mset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "rs" ) )
+  if ( !StrCmp( arg2, "rs" ) )
     {
       if ( !IsNpc( victim ) && GetTrustLevel( ch ) < LEVEL_CREATOR )
         {
@@ -1192,7 +1192,7 @@ void do_mset( Character *ch, char *argument )
       do_mset( ch, outbuf );
       return;
     }
-  if ( !str_cmp( arg2, "is" ) )
+  if ( !StrCmp( arg2, "is" ) )
     {
       if ( !IsNpc( victim ) && GetTrustLevel( ch ) < LEVEL_CREATOR )
         {
@@ -1208,7 +1208,7 @@ void do_mset( Character *ch, char *argument )
       do_mset( ch, outbuf );
       return;
     }
-  if ( !str_cmp( arg2, "ris" ) )
+  if ( !StrCmp( arg2, "ris" ) )
     {
       if ( !IsNpc( victim ) && GetTrustLevel( ch ) < LEVEL_CREATOR )
         {
@@ -1227,7 +1227,7 @@ void do_mset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "resistant" ) )
+  if ( !StrCmp( arg2, "resistant" ) )
     {
       if ( !IsNpc( victim ) && GetTrustLevel( ch ) < LEVEL_CREATOR )
         {
@@ -1243,7 +1243,7 @@ void do_mset( Character *ch, char *argument )
         }
       while ( argument[0] != '\0' )
         {
-          argument = one_argument( argument, arg3 );
+          argument = OneArgument( argument, arg3 );
           value = get_risflag( arg3 );
           if ( value < 0 || value > 31 )
             ch_printf( ch, "Unknown flag: %s\r\n", arg3 );
@@ -1255,7 +1255,7 @@ void do_mset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "immune" ) )
+  if ( !StrCmp( arg2, "immune" ) )
     {
       if ( !IsNpc( victim ) && GetTrustLevel( ch ) < LEVEL_CREATOR )
         {
@@ -1272,7 +1272,7 @@ void do_mset( Character *ch, char *argument )
         }
       while ( argument[0] != '\0' )
         {
-          argument = one_argument( argument, arg3 );
+          argument = OneArgument( argument, arg3 );
           value = get_risflag( arg3 );
           if ( value < 0 || value > 31 )
             ch_printf( ch, "Unknown flag: %s\r\n", arg3 );
@@ -1284,7 +1284,7 @@ void do_mset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "susceptible" ) )
+  if ( !StrCmp( arg2, "susceptible" ) )
     {
       if ( !IsNpc( victim ) && GetTrustLevel( ch ) < LEVEL_CREATOR )
         {
@@ -1300,7 +1300,7 @@ void do_mset( Character *ch, char *argument )
         }
       while ( argument[0] != '\0' )
         {
-          argument = one_argument( argument, arg3 );
+          argument = OneArgument( argument, arg3 );
           value = get_risflag( arg3 );
           if ( value < 0 || value > 31 )
             ch_printf( ch, "Unknown flag: %s\r\n", arg3 );
@@ -1313,7 +1313,7 @@ void do_mset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "part" ) )
+  if ( !StrCmp( arg2, "part" ) )
     {
       if ( !IsNpc( victim ) && GetTrustLevel( ch ) < LEVEL_CREATOR )
         {
@@ -1329,7 +1329,7 @@ void do_mset( Character *ch, char *argument )
         }
       while ( argument[0] != '\0' )
         {
-          argument = one_argument( argument, arg3 );
+          argument = OneArgument( argument, arg3 );
           value = get_partflag( arg3 );
           if ( value < 0 || value > 31 )
             ch_printf( ch, "Unknown flag: %s\r\n", arg3 );
@@ -1341,7 +1341,7 @@ void do_mset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "attack" ) )
+  if ( !StrCmp( arg2, "attack" ) )
     {
       if ( !IsNpc( victim ) )
         {
@@ -1360,7 +1360,7 @@ void do_mset( Character *ch, char *argument )
         }
       while ( argument[0] != '\0' )
         {
-          argument = one_argument( argument, arg3 );
+          argument = OneArgument( argument, arg3 );
           value = get_attackflag( arg3 );
           if ( value < 0 || value > 31 )
             ch_printf( ch, "Unknown flag: %s\r\n", arg3 );
@@ -1372,7 +1372,7 @@ void do_mset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "defense" ) )
+  if ( !StrCmp( arg2, "defense" ) )
     {
       if ( !IsNpc( victim ) )
         {
@@ -1389,7 +1389,7 @@ void do_mset( Character *ch, char *argument )
         }
       while ( argument[0] != '\0' )
         {
-          argument = one_argument( argument, arg3 );
+          argument = OneArgument( argument, arg3 );
           value = get_defenseflag( arg3 );
           if ( value < 0 || value > 31 )
             ch_printf( ch, "Unknown flag: %s\r\n", arg3 );
@@ -1401,7 +1401,7 @@ void do_mset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "pos" ) )
+  if ( !StrCmp( arg2, "pos" ) )
     {
       if ( !IsNpc(victim) )
         {
@@ -1422,7 +1422,7 @@ void do_mset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "defpos" ) )
+  if ( !StrCmp( arg2, "defpos" ) )
     {
       if ( !IsNpc(victim) )
         {
@@ -1446,7 +1446,7 @@ void do_mset( Character *ch, char *argument )
   /*
    * save some finger-leather
    */
-  if ( !str_cmp( arg2, "hitdie" ) )
+  if ( !StrCmp( arg2, "hitdie" ) )
     {
       if ( !IsNpc(victim) )
         {
@@ -1470,7 +1470,7 @@ void do_mset( Character *ch, char *argument )
   /*
    * save some more finger-leather
    */
-  if ( !str_cmp( arg2, "damdie" ) )
+  if ( !StrCmp( arg2, "damdie" ) )
     {
       if ( !IsNpc(victim) )
         {
@@ -1490,7 +1490,7 @@ void do_mset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "hitnumdie" ) )
+  if ( !StrCmp( arg2, "hitnumdie" ) )
     {
       if ( !IsNpc(victim) )
         {
@@ -1510,7 +1510,7 @@ void do_mset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "hitsizedie" ) )
+  if ( !StrCmp( arg2, "hitsizedie" ) )
     {
       if ( !IsNpc(victim) )
         {
@@ -1530,7 +1530,7 @@ void do_mset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "hitplus" ) )
+  if ( !StrCmp( arg2, "hitplus" ) )
     {
       if ( !IsNpc(victim) )
         {
@@ -1550,7 +1550,7 @@ void do_mset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "damnumdie" ) )
+  if ( !StrCmp( arg2, "damnumdie" ) )
     {
       if ( !IsNpc(victim) )
         {
@@ -1570,7 +1570,7 @@ void do_mset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "damsizedie" ) )
+  if ( !StrCmp( arg2, "damsizedie" ) )
     {
       if ( !IsNpc(victim) )
         {
@@ -1591,7 +1591,7 @@ void do_mset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "damplus" ) )
+  if ( !StrCmp( arg2, "damplus" ) )
     {
       if ( !IsNpc(victim) )
         {
@@ -1614,7 +1614,7 @@ void do_mset( Character *ch, char *argument )
     }
 
 
-  if ( !str_cmp( arg2, "aloaded" ) )
+  if ( !StrCmp( arg2, "aloaded" ) )
     {
       if ( IsNpc(victim) )
         {
@@ -1643,7 +1643,7 @@ void do_mset( Character *ch, char *argument )
         }
     }
 
-  if ( !str_cmp( arg2, "speaks" ) )
+  if ( !StrCmp( arg2, "speaks" ) )
     {
       if ( !can_mmodify( ch, victim ) )
         return;
@@ -1654,7 +1654,7 @@ void do_mset( Character *ch, char *argument )
         }
       while ( argument[0] != '\0' )
         {
-          argument = one_argument( argument, arg3 );
+          argument = OneArgument( argument, arg3 );
           value = get_langflag( arg3 );
           if ( value == LANG_UNKNOWN )
             ch_printf( ch, "Unknown language: %s\r\n", arg3 );
@@ -1688,7 +1688,7 @@ void do_mset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "speaking" ) )
+  if ( !StrCmp( arg2, "speaking" ) )
     {
       if ( !IsNpc( victim ) )
         {
@@ -1704,7 +1704,7 @@ void do_mset( Character *ch, char *argument )
         }
       while ( argument[0] != '\0' )
         {
-          argument = one_argument( argument, arg3 );
+          argument = OneArgument( argument, arg3 );
           value = get_langflag( arg3 );
           if ( value == LANG_UNKNOWN )
             ch_printf( ch, "Unknown language: %s\r\n", arg3 );

@@ -11,7 +11,7 @@ void do_mpstat( Character *ch, char *argument )
   MPROG_DATA *mprg;
   Character  *victim;
 
-  one_argument( argument, arg );
+  OneArgument( argument, arg );
 
   if ( arg[0] == '\0' )
     {

@@ -6,7 +6,7 @@ void do_bstat( Character *ch, char *argument )
   bool found = false;
   char arg[MAX_INPUT_LENGTH];
 
-  argument = one_argument( argument, arg );
+  argument = OneArgument( argument, arg );
 
   if ( arg[0] == '\0' )
     {
@@ -16,7 +16,7 @@ void do_bstat( Character *ch, char *argument )
 
   for ( board = first_board; board; board = board->next )
     {
-      if ( !str_cmp( arg, board->note_file ) )
+      if ( !StrCmp( arg, board->note_file ) )
 	{
 	  found = true;
 	  break;

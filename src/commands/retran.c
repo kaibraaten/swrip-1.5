@@ -7,7 +7,7 @@ void do_retran( Character *ch, char *argument )
   Character *victim;
   char buf[MAX_STRING_LENGTH];
 
-  argument = one_argument( argument, arg );
+  argument = OneArgument( argument, arg );
 
   if ( arg[0] == '\0' )
     {

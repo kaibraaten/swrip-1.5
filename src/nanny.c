@@ -141,7 +141,7 @@ static void nanny_get_name( Descriptor *d, char *argument )
       return;
     }
 
-  if ( !str_cmp( argument, "New" ) )
+  if ( !StrCmp( argument, "New" ) )
     {
       if (d->newstate == 0)
 	{
@@ -196,8 +196,8 @@ static void nanny_get_name( Descriptor *d, char *argument )
 
   for ( pban = first_ban; pban; pban = pban->next )
     {
-      if ( ( !str_prefix( pban->name, d->remote.hostname )
-	     || !str_suffix( pban->name, d->remote.hostname ) )
+      if ( ( !StringPrefix( pban->name, d->remote.hostname )
+	     || !StringSuffix( pban->name, d->remote.hostname ) )
 	   && pban->level >= ch->top_level )
 	{
 	  write_to_buffer( d,
@@ -288,7 +288,7 @@ static void nanny_get_old_password( Descriptor *d, char *argument )
 
   write_to_buffer( d, "\r\n", 2 );
 
-  if ( str_cmp( encode_string( argument ), ch->pcdata->pwd ) )
+  if ( StrCmp( EncodeString( argument ), ch->pcdata->pwd ) )
     {
       write_to_buffer( d, "Wrong password.\r\n", 0 );
       /* clear descriptor pointer to get rid of bug message in log */
@@ -397,7 +397,7 @@ static void nanny_get_new_password( Descriptor *d, char *argument )
       return;
     }
 
-  pwdnew = encode_string( argument );
+  pwdnew = EncodeString( argument );
 
   for ( p = pwdnew; *p != '\0'; p++ )
     {
@@ -409,7 +409,7 @@ static void nanny_get_new_password( Descriptor *d, char *argument )
     }
 
   DISPOSE( ch->pcdata->pwd );
-  ch->pcdata->pwd   = str_dup( pwdnew );
+  ch->pcdata->pwd   = CopyString( pwdnew );
   write_to_buffer( d, "\r\nPlease retype the password to confirm: ", 0 );
   d->connection_state = CON_CONFIRM_NEW_PASSWORD;
 }
@@ -420,7 +420,7 @@ static void nanny_confirm_new_password( Descriptor *d, char *argument )
 
   write_to_buffer( d, "\r\n", 2 );
 
-  if ( str_cmp( encode_string( argument ), ch->pcdata->pwd ) )
+  if ( StrCmp( EncodeString( argument ), ch->pcdata->pwd ) )
     {
       write_to_buffer( d, "Passwords don't match.\r\nRetype password: ", 0 );
       d->connection_state = CON_GET_NEW_PASSWORD;
@@ -505,16 +505,16 @@ static void nanny_get_new_race( Descriptor *d, char *argument )
   Character *ch = d->character;
   int iRace = 0, iClass = 0, halfmax = 0;
 
-  argument = one_argument(argument, arg);
+  argument = OneArgument(argument, arg);
 
-  if (!str_cmp( arg, "help") )
+  if (!StrCmp( arg, "help") )
     {
       do_help(ch, argument);
       write_to_buffer( d, "Please choose a race: ", 0);
       return;
     }
 
-  if (!str_cmp( arg, "showstat") )
+  if (!StrCmp( arg, "showstat") )
     {
       do_showstatistic(ch, argument);
       write_to_buffer( d, "Please choose a race: ", 0);
@@ -524,7 +524,7 @@ static void nanny_get_new_race( Descriptor *d, char *argument )
   for ( iRace = 0; iRace < MAX_RACE; iRace++ )
     {
       if ( toupper(arg[0]) == toupper(race_table[iRace].race_name[0])
-	   &&   !str_prefix( arg, race_table[iRace].race_name ) )
+	   &&   !StringPrefix( arg, race_table[iRace].race_name ) )
 	{
 	  ch->race = iRace;
 	  break;
@@ -574,9 +574,9 @@ static void nanny_get_new_class( Descriptor *d, char *argument )
   Character *ch = d->character;
   int iClass = 0;
 
-  argument = one_argument(argument, arg);
+  argument = OneArgument(argument, arg);
 
-  if (!str_cmp( arg, "help") )
+  if (!StrCmp( arg, "help") )
     {
       do_help(ch, argument);
       write_to_buffer( d, "Please choose an ability class: ", 0);
@@ -586,7 +586,7 @@ static void nanny_get_new_class( Descriptor *d, char *argument )
   for ( iClass = 0; iClass < MAX_ABILITY; iClass++ )
     {
       if ( toupper(arg[0]) == toupper(ability_name[iClass][0])
-	   && !str_prefix( arg, ability_name[iClass] ) )
+	   && !StringPrefix( arg, ability_name[iClass] ) )
 	{
 	  ch->ability.main = iClass;
 	  break;
@@ -602,12 +602,12 @@ static void nanny_get_new_class( Descriptor *d, char *argument )
 
   write_to_buffer( d, "\r\nRolling stats....\r\n", 0 );
 
-  ch->stats.perm_str = number_range(1, 6)+number_range(1, 6)+number_range(1, 6);
-  ch->stats.perm_int = number_range(3, 6)+number_range(1, 6)+number_range(1, 6);
-  ch->stats.perm_wis = number_range(3, 6)+number_range(1, 6)+number_range(1, 6);
-  ch->stats.perm_dex = number_range(3, 6)+number_range(1, 6)+number_range(1, 6);
-  ch->stats.perm_con = number_range(3, 6)+number_range(1, 6)+number_range(1, 6);
-  ch->stats.perm_cha = number_range(3, 6)+number_range(1, 6)+number_range(1, 6);
+  ch->stats.perm_str = GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
+  ch->stats.perm_int = GetRandomNumberFromRange(3, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
+  ch->stats.perm_wis = GetRandomNumberFromRange(3, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
+  ch->stats.perm_dex = GetRandomNumberFromRange(3, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
+  ch->stats.perm_con = GetRandomNumberFromRange(3, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
+  ch->stats.perm_cha = GetRandomNumberFromRange(3, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
 
   ch->stats.perm_str       += race_table[ch->race].stats.mod_str;
   ch->stats.perm_int       += race_table[ch->race].stats.mod_int;
@@ -639,12 +639,12 @@ static void nanny_stats_ok( Descriptor *d, char *argument )
 
     case 'n':
     case 'N':
-      ch->stats.perm_str = number_range(1, 6)+number_range(1, 6)+number_range(1, 6);
-      ch->stats.perm_int = number_range(3, 6)+number_range(1, 6)+number_range(1, 6);
-      ch->stats.perm_wis = number_range(3, 6)+number_range(1, 6)+number_range(1, 6);
-      ch->stats.perm_dex = number_range(3, 6)+number_range(1, 6)+number_range(1, 6);
-      ch->stats.perm_con = number_range(3, 6)+number_range(1, 6)+number_range(1, 6);
-      ch->stats.perm_cha = number_range(3, 6)+number_range(1, 6)+number_range(1, 6);
+      ch->stats.perm_str = GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
+      ch->stats.perm_int = GetRandomNumberFromRange(3, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
+      ch->stats.perm_wis = GetRandomNumberFromRange(3, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
+      ch->stats.perm_dex = GetRandomNumberFromRange(3, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
+      ch->stats.perm_con = GetRandomNumberFromRange(3, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
+      ch->stats.perm_cha = GetRandomNumberFromRange(3, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
 
       ch->stats.perm_str   += race_table[ch->race].stats.mod_str;
       ch->stats.perm_int   += race_table[ch->race].stats.mod_int;
@@ -738,11 +738,11 @@ static void nanny_read_motd( Descriptor *d, char *argument )
       OBJ_DATA *obj;
       int iLang;
 
-      ch->pcdata->clan_name = str_dup( "" );
+      ch->pcdata->clan_name = CopyString( "" );
       ch->pcdata->clan        = NULL;
 
-      ch->stats.perm_lck = number_range(6, 20);
-      ch->stats.perm_frc = number_range(-800, 20);
+      ch->stats.perm_lck = GetRandomNumberFromRange(6, 20);
+      ch->stats.perm_frc = GetRandomNumberFromRange(-800, 20);
       ch->affected_by         = race_table[ch->race].affected;
       ch->stats.perm_lck   += race_table[ch->race].stats.mod_lck;
       ch->stats.perm_frc   += race_table[ch->race].stats.mod_frc;
@@ -775,7 +775,7 @@ static void nanny_read_motd( Descriptor *d, char *argument )
             if (ch->race == RACE_NOGHRI )
             {
             ch->pcdata->clan = get_clan( "The Death Commandos");
-            ch->pcdata->clan_name = str_dup( ch->pcdata->clan->name );
+            ch->pcdata->clan_name = CopyString( ch->pcdata->clan->name );
             }
       */
       /* took out automaticly knowing common
@@ -896,7 +896,7 @@ if ( (iLang = skill_lookup( "common" )) < 0 )
 	  SetBit(ch->pcdata->flags, PCFLAG_UNAUTHED);
 	}
       /* Display_prompt interprets blank as default */
-      ch->pcdata->prompt = str_dup("");
+      ch->pcdata->prompt = CopyString("");
     }
   else if ( !IsImmortal(ch) && ch->pcdata->release_date > current_time )
     {
@@ -962,7 +962,7 @@ if ( (iLang = skill_lookup( "common" )) < 0 )
 	}
 
       sprintf( filename, "%s%c/%s.home", PLAYER_DIR, tolower(ch->name[0]),
-	       capitalize( ch->name ) );
+	       Capitalize( ch->name ) );
       if ( ( fph = fopen( filename, "r" ) ) != NULL )
 	{
 	  OBJ_DATA *tobj, *tobj_next;
@@ -974,11 +974,11 @@ if ( (iLang = skill_lookup( "common" )) < 0 )
 	      char letter;
 	      char *word;
 
-	      letter = fread_letter( fph );
+	      letter = ReadChar( fph );
 
 	      if ( letter == '*' )
 		{
-		  fread_to_eol( fph );
+		  ReadToEndOfLine( fph );
 		  continue;
 		}
 
@@ -989,14 +989,14 @@ if ( (iLang = skill_lookup( "common" )) < 0 )
 		  break;
 		}
 
-	      word = fread_word( fph );
+	      word = ReadWord( fph );
 
-	      if ( !str_cmp( word, "OBJECT" ) )     /* Objects      */
+	      if ( !StrCmp( word, "OBJECT" ) )     /* Objects      */
 		{
 		  fread_obj  ( supermob, fph, OS_CARRY );
 		}
 	      else
-		if ( !str_cmp( word, "END"    ) )   /* Done         */
+		if ( !StrCmp( word, "END"    ) )   /* Done         */
 		  {
 		    break;
 		  }

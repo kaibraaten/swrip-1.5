@@ -67,7 +67,7 @@ void do_hijack( Character *ch, char *argument )
 
   the_chance = IsNpc(ch) ? ch->top_level
     : (int)  (ch->pcdata->learned[gsn_hijack]) ;
-  if ( number_percent( ) > the_chance )
+  if ( GetRandomPercent( ) > the_chance )
     {
       send_to_char("You fail to figure out the correct launch code.\r\n",ch);
       learn_from_failure( ch, gsn_hijack );
@@ -83,7 +83,7 @@ void do_hijack( Character *ch, char *argument )
   if ( ship->sclass == CAPITAL_SHIP )
     the_chance = IsNpc(ch) ? ch->top_level
       : (int) (ch->pcdata->learned[gsn_capitalships]);
-  if ( number_percent( ) < the_chance )
+  if ( GetRandomPercent( ) < the_chance )
     {
 
       if (ship->hatchopen)
@@ -124,7 +124,7 @@ void do_hijack( Character *ch, char *argument )
 
       if ( ship->alarm == 0 )
 	return;
-      if ( !str_cmp("Public",ship->owner) )
+      if ( !StrCmp("Public",ship->owner) )
         return;
       for ( victim = first_char; victim; victim = victim->next )
         {

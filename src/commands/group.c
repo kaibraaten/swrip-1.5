@@ -6,7 +6,7 @@ void do_group( Character *ch, char *argument )
   char arg[MAX_INPUT_LENGTH];
   Character *victim = NULL;
 
-  one_argument( argument, arg );
+  OneArgument( argument, arg );
 
   if ( arg[0] == '\0' )
     {
@@ -26,7 +26,7 @@ void do_group( Character *ch, char *argument )
                            "[%2d %s] %-16s %4s/%4s hp %4s/%4s mv %5s xp\r\n",
                            gch->top_level,
                            IsNpc(gch) ? "Mob" : race_table[gch->race].race_name,
-                           capitalize( PERS(gch, ch) ),
+                           Capitalize( PERS(gch, ch) ),
 			   "????",
                            "????",
                            "????",
@@ -38,7 +38,7 @@ void do_group( Character *ch, char *argument )
                            "[%2d %s] %-16s %4d/%4d hp %4d/%4d mv\r\n",
                            gch->top_level,
                            IsNpc(gch) ? "Mob" : race_table[gch->race].race_name,
-                           capitalize( PERS(gch, ch) ),
+                           Capitalize( PERS(gch, ch) ),
                            gch->hit,
                            gch->max_hit,
                            gch->move,
@@ -48,7 +48,7 @@ void do_group( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg, "disband" ))
+  if ( !StrCmp( arg, "disband" ))
     {
       Character *gch = NULL;
       int count = 0;
@@ -79,7 +79,7 @@ void do_group( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg, "all" ) )
+  if ( !StrCmp( arg, "all" ) )
     {
       Character *rch = NULL;
       int count = 0;

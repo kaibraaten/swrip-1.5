@@ -23,7 +23,7 @@ void do_punch( Character *ch, char *argument )
   if ( ( victim = who_fighting( ch ) ) == NULL )
     {
 
-      one_argument( argument, arg );
+      OneArgument( argument, arg );
 
       if ( arg[0] == '\0' )
         {
@@ -65,10 +65,10 @@ void do_punch( Character *ch, char *argument )
 
   SetWaitState( ch, skill_table[gsn_punch]->beats );
 
-  if ( IsNpc(ch) || number_percent( ) < ch->pcdata->learned[gsn_punch] )
+  if ( IsNpc(ch) || GetRandomPercent( ) < ch->pcdata->learned[gsn_punch] )
     {
       learn_from_success( ch, gsn_punch );
-      global_retcode = damage( ch, victim, number_range( 1, GetAbilityLevel(ch, COMBAT_ABILITY ) ), gsn_punch );
+      global_retcode = damage( ch, victim, GetRandomNumberFromRange( 1, GetAbilityLevel(ch, COMBAT_ABILITY ) ), gsn_punch );
     }
   else
     {

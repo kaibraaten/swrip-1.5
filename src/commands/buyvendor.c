@@ -14,13 +14,13 @@ void do_buyvendor (Character *ch, char *argument)
   if (IsNpc(ch))
     return;
 
-  if ( !str_cmp( argument, "yes" ) )
+  if ( !StrCmp( argument, "yes" ) )
     {
-      sprintf( buf, "%s/%s", VENDOR_DIR, capitalize( ch->name ) );
+      sprintf( buf, "%s/%s", VENDOR_DIR, Capitalize( ch->name ) );
       remove( buf );
     }
 
-  sprintf( strsave, "%s/%s", VENDOR_DIR, capitalize( ch->name ) );
+  sprintf( strsave, "%s/%s", VENDOR_DIR, Capitalize( ch->name ) );
 
   if ( stat( strsave, &fst ) != -1 )
     {

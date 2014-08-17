@@ -12,14 +12,14 @@ void do_slookup( Character *ch, char *argument )
   int sn;
   SKILLTYPE *skill = NULL;
 
-  one_argument( argument, arg );
+  OneArgument( argument, arg );
   if ( arg[0] == '\0' )
     {
       send_to_char( "Slookup what?\r\n", ch );
       return;
     }
 
-  if ( !str_cmp( arg, "all" ) )
+  if ( !StrCmp( arg, "all" ) )
     {
       for ( sn = 0; sn < top_sn && skill_table[sn] && skill_table[sn]->name; sn++ )
         pager_printf( ch, "Sn: %4d Slot: %4d Skill/spell: '%-20s' Damtype: %s\r\n",
@@ -27,7 +27,7 @@ void do_slookup( Character *ch, char *argument )
                       get_spelldamage_name(SPELL_DAMAGE( skill_table[sn] )) );
     }
   else
-    if ( !str_cmp( arg, "herbs" ) )
+    if ( !StrCmp( arg, "herbs" ) )
       {
 	for ( sn = 0; sn < top_herb && herb_table[sn] && herb_table[sn]->name; sn++ )
           pager_printf( ch, "%d) %s\r\n", sn, herb_table[sn]->name );
@@ -37,7 +37,7 @@ void do_slookup( Character *ch, char *argument )
         SMAUG_AFF *aff;
         int cnt = 0;
 
-        if ( arg[0] == 'h' && is_number(arg+1) )
+        if ( arg[0] == 'h' && IsNumber(arg+1) )
           {
             sn = atoi(arg+1);
             if ( !IS_VALID_HERB(sn) )
@@ -48,7 +48,7 @@ void do_slookup( Character *ch, char *argument )
             skill = herb_table[sn];
           }
         else
-          if ( is_number(arg) )
+          if ( IsNumber(arg) )
             {
               sn = atoi(arg);
               if ( (skill=get_skilltype(sn)) == NULL )
@@ -129,7 +129,7 @@ void do_slookup( Character *ch, char *argument )
         if ( skill->participants )
           ch_printf( ch, "Participants: %d\r\n", (int) skill->participants );
         if ( skill->userec.num_uses )
-          send_timer(&skill->userec, ch);
+          sStopTimer(&skill->userec, ch);
         for ( aff = skill->affects; aff; aff = aff->next )
           {
             if ( aff == skill->affects )

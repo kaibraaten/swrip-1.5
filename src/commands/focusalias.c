@@ -8,8 +8,8 @@ void do_focusalias( Character *ch, char *argument)
 {
   char arg[MAX_INPUT_LENGTH], buf[MAX_STRING_LENGTH];
 
-  smash_tilde(argument);
-  one_argument( argument, arg );
+  SmashTilde(argument);
+  OneArgument( argument, arg );
 
   if ( IsNpc(ch) )
     {
@@ -49,5 +49,5 @@ static void set_target( Character *ch, const char *target )
   if (ch->pcdata->target && ch->pcdata->target[0] != '\0')
     DISPOSE( ch->pcdata->target );
 
-  ch->pcdata->target = str_dup( buf );
+  ch->pcdata->target = CopyString( buf );
 }

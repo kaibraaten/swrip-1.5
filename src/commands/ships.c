@@ -20,9 +20,9 @@ void do_ships( Character *ch, char *argument )
       for ( ship = first_ship; ship; ship = ship->next )
         {
           owned = false, set = false;
-          if ( str_cmp(ship->owner, ch->name) )
+          if ( StrCmp(ship->owner, ch->name) )
             {
-              if ( !CheckPilot( ch, ship ) || !str_cmp(ship->owner, "public") || !str_cmp(ship->owner, "trainer") )
+              if ( !CheckPilot( ch, ship ) || !StrCmp(ship->owner, "public") || !StrCmp(ship->owner, "trainer") )
                 continue;
             }
 
@@ -38,20 +38,20 @@ void do_ships( Character *ch, char *argument )
           else
             set_pager_color( AT_BLUE, ch );
 
-          if( !str_cmp(ship->owner, ch->name ) )
+          if( !StrCmp(ship->owner, ch->name ) )
             {
               strcpy( pilottype2, "Owner" );
               owned = true;
               set = true;
             }
 
-          if( !set && !str_cmp( ship->pilot, ch->name ) )
+          if( !set && !StrCmp( ship->pilot, ch->name ) )
             {
               strcpy( pilottype2, "Pilot" );
               set = true;
             }
 
-          if( !set && !str_cmp( ship->pilot, ch->name ) )
+          if( !set && !StrCmp( ship->pilot, ch->name ) )
             {
               strcpy( pilottype2, "Co-Pilot" );
               set = true;
@@ -111,11 +111,11 @@ void do_ships( Character *ch, char *argument )
           continue;
         }
 
-      if ( !str_cmp(ship->owner, "Public") )
+      if ( !StrCmp(ship->owner, "Public") )
         {
           pager_printf( ch, "%ld to rent.\r\n", GetShipValue(ship)/100 );
         }
-      else if ( str_cmp(ship->owner, "") )
+      else if ( StrCmp(ship->owner, "") )
         pager_printf( ch, "%s", "\r\n" );
       else
         pager_printf( ch, "%ld to buy.\r\n", GetShipValue(ship) );

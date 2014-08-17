@@ -14,7 +14,7 @@ void do_bashdoor( Character *ch, char *argument )
       return;
     }
 
-  one_argument( argument, arg );
+  OneArgument( argument, arg );
 
   if ( arg[0] == '\0' )
     {
@@ -55,7 +55,7 @@ void do_bashdoor( Character *ch, char *argument )
 
       if ( !IsBitSet( pexit->exit_info, EX_BASHPROOF )
            && ch->move >= 15
-           && number_percent() < ( bash_chance + 4 * ( GetCurrentStrength( ch ) - 19 ) ) )
+           && GetRandomPercent() < ( bash_chance + 4 * ( GetCurrentStrength( ch ) - 19 ) ) )
         {
           RemoveBit( pexit->exit_info, EX_CLOSED );
 
@@ -119,7 +119,7 @@ void do_bashdoor( Character *ch, char *argument )
 	       && !gch->fighting
 	       && ( IsNpc( gch ) && !IsAffectedBy( gch, AFF_CHARM ) )
 	       && ( ch->top_level - gch->top_level <= 4 )
-	       && number_bits( 2 ) == 0 )
+	       && NumberBits( 2 ) == 0 )
 	    {
 	      multi_hit( gch, ch, TYPE_UNDEFINED );
 	    }

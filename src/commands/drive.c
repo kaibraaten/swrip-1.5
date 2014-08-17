@@ -11,7 +11,7 @@ void do_drive( Character *ch, char *argument )
   char arg2[MAX_INPUT_LENGTH];
   char buf[MAX_INPUT_LENGTH];
 
-  argument = one_argument( argument, arg );
+  argument = OneArgument( argument, arg );
   strcpy ( arg2, argument);
 
 
@@ -40,7 +40,7 @@ void do_drive( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg, "in" ))
+  if ( !StrCmp( arg, "in" ))
     {
       target = GetShipInRoom( ship->in_room , arg2 );
 
@@ -81,7 +81,7 @@ void do_drive( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg, "out" ))
+  if ( !StrCmp( arg, "out" ))
     {
       target = GetShipFromHangar(ship->in_room->vnum);
 

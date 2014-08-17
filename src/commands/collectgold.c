@@ -31,13 +31,13 @@ void do_collectgold (Character *ch, char *argument)
       send_to_char ("Trying to steal huh?\r\n",ch);
       return;
     }
-  if ( str_cmp( ch1->name, vendor->owner ) )
+  if ( StrCmp( ch1->name, vendor->owner ) )
     {
       send_to_char ("Trying to steal huh?\r\n",ch);
       tms = localtime(&current_time);
       tms->tm_hour += 24;
       ch->pcdata->release_date = mktime(tms);
-      ch->pcdata->helled_by = str_dup("VendorCheat");
+      ch->pcdata->helled_by = CopyString("VendorCheat");
       act(AT_MAGIC, "$n disappears in a cloud of hellish light.", ch, NULL, ch, TO_NOTVICT);
       char_from_room(ch);
       char_to_room(ch, get_room_index(6));

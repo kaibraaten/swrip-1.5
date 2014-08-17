@@ -20,7 +20,7 @@ void do_mpdream( Character *ch, char *argument )
       return;
     }
 
-  argument = one_argument( argument, arg1 );
+  argument = OneArgument( argument, arg1 );
 
   if (  (vict =get_char_world(ch, arg1)) == NULL )
     {

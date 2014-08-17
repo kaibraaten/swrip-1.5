@@ -15,9 +15,9 @@ void do_get( Character *ch, char *argument )
   bool foundowner = false;
   Character *p = NULL, *p_prev = NULL;
 
-  argument = one_argument( argument, arg1 );
+  argument = OneArgument( argument, arg1 );
 
-  if ( is_number(arg1) )
+  if ( IsNumber(arg1) )
     {
       number = atoi(arg1);
 
@@ -33,19 +33,19 @@ void do_get( Character *ch, char *argument )
           return;
         }
 
-      argument = one_argument( argument, arg1 );
+      argument = OneArgument( argument, arg1 );
     }
   else
     {
       number = 0;
     }
 
-  argument = one_argument( argument, arg2 );
+  argument = OneArgument( argument, arg2 );
 
   /* munch optional words */
-  if ( !str_cmp( arg2, "from" ) && argument[0] != '\0' )
+  if ( !StrCmp( arg2, "from" ) && argument[0] != '\0' )
     {
-      argument = one_argument( argument, arg2 );
+      argument = OneArgument( argument, arg2 );
     }
 
   /* Get type. */
@@ -85,8 +85,8 @@ void do_get( Character *ch, char *argument )
 
   if ( arg2[0] == '\0' )
     {
-      if ( number <= 1 && str_cmp( arg1, "all" )
-	   && str_prefix( "all.", arg1 ) )
+      if ( number <= 1 && StrCmp( arg1, "all" )
+	   && StringPrefix( "all.", arg1 ) )
         {
           /* 'get obj' */
           obj = get_obj_list( ch, arg1, ch->in_room->first_content );
@@ -126,7 +126,7 @@ void do_get( Character *ch, char *argument )
               return;
             }
 
-          if ( !str_cmp(arg1, "all") )
+          if ( !StrCmp(arg1, "all") )
             fAll = true;
           else
             fAll = false;
@@ -141,7 +141,7 @@ void do_get( Character *ch, char *argument )
             {
               obj_next = obj->next_content;
 
-              if ( ( fAll || nifty_is_name( chk, obj->name ) )
+              if ( ( fAll || NiftyIsName( chk, obj->name ) )
                    && CanSeeObject( ch, obj ) )
                 {
                   found = true;
@@ -196,7 +196,7 @@ void do_get( Character *ch, char *argument )
   else
     {
       /* 'get ... container' */
-      if ( !str_cmp( arg2, "all" ) || !str_prefix( "all.", arg2 ) )
+      if ( !StrCmp( arg2, "all" ) || !StringPrefix( "all.", arg2 ) )
         {
           send_to_char( "You can't do that.\r\n", ch );
           return;
@@ -239,8 +239,8 @@ void do_get( Character *ch, char *argument )
           return;
         }
 
-      if ( number <= 1 && str_cmp( arg1, "all" )
-	   && str_prefix( "all.", arg1 ) )
+      if ( number <= 1 && StrCmp( arg1, "all" )
+	   && StringPrefix( "all.", arg1 ) )
         {
           /* 'get obj container' */
           obj = get_obj_list( ch, arg1, container->first_content );
@@ -280,7 +280,7 @@ void do_get( Character *ch, char *argument )
               return;
             }
 
-          if ( !str_cmp(arg1, "all") )
+          if ( !StrCmp(arg1, "all") )
             fAll = true;
           else
             fAll = false;
@@ -295,7 +295,7 @@ void do_get( Character *ch, char *argument )
           for ( obj = container->first_content; obj; obj = obj_next )
             {
               obj_next = obj->next_content;
-              if ( ( fAll || nifty_is_name( chk, obj->name ) )
+              if ( ( fAll || NiftyIsName( chk, obj->name ) )
                    &&   CanSeeObject( ch, obj ) )
                 {
                   found = true;

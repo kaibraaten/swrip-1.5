@@ -10,8 +10,8 @@ void do_drop( Character *ch, char *argument )
   CLAN_DATA *clan;
   int number;
 
-  argument = one_argument( argument, arg );
-  if ( is_number(arg) )
+  argument = OneArgument( argument, arg );
+  if ( IsNumber(arg) )
     {
       number = atoi(arg);
       if ( number < 1 )
@@ -19,7 +19,7 @@ void do_drop( Character *ch, char *argument )
           send_to_char( "That was easy...\r\n", ch );
           return;
         }
-      argument = one_argument( argument, arg );
+      argument = OneArgument( argument, arg );
     }
   else
     number = 0;
@@ -47,7 +47,7 @@ void do_drop( Character *ch, char *argument )
     {
       /* 'drop NNNN coins' */
 
-      if ( !str_cmp( arg, "credits" ) || !str_cmp( arg, "credit" ) )
+      if ( !StrCmp( arg, "credits" ) || !StrCmp( arg, "credit" ) )
         {
           if ( ch->gold < number )
             {
@@ -91,7 +91,7 @@ void do_drop( Character *ch, char *argument )
         }
     }
 
-  if ( number <= 1 && str_cmp( arg, "all" ) && str_prefix( "all.", arg ) )
+  if ( number <= 1 && StrCmp( arg, "all" ) && StringPrefix( "all.", arg ) )
     {
       /* 'drop obj' */
       if ( ( obj = GetCarriedObject( ch, arg ) ) == NULL )
@@ -129,7 +129,7 @@ void do_drop( Character *ch, char *argument )
       char *chk;
       bool fAll;
 
-      if ( !str_cmp(arg, "all") )
+      if ( !StrCmp(arg, "all") )
         fAll = true;
       else
 	fAll = false;
@@ -148,7 +148,7 @@ void do_drop( Character *ch, char *argument )
         {
           obj_next = obj->next_content;
 
-          if ( (fAll || nifty_is_name( chk, obj->name ) )
+          if ( (fAll || NiftyIsName( chk, obj->name ) )
                &&   CanSeeObject( ch, obj )
                &&   obj->wear_loc == WEAR_NONE
                &&   CanDropObject( ch, obj ) )

@@ -8,7 +8,7 @@ void do_config( Character *ch, char *argument )
   if ( IsNpc(ch) )
     return;
 
-  one_argument( argument, arg );
+  OneArgument( argument, arg );
 
   set_char_color( AT_WHITE, ch );
 
@@ -160,39 +160,39 @@ void do_config( Character *ch, char *argument )
           return;
         }
 
-      if ( !str_prefix( arg+1, "autoexit" ) )
+      if ( !StringPrefix( arg+1, "autoexit" ) )
 	bit = PLR_AUTOEXIT;
-      else if ( !str_prefix( arg+1, "autoloot" ) )
+      else if ( !StringPrefix( arg+1, "autoloot" ) )
 	bit = PLR_AUTOLOOT;
-      else if ( !str_prefix( arg+1, "autosac"  ) )
+      else if ( !StringPrefix( arg+1, "autosac"  ) )
 	bit = PLR_AUTOSAC;
-      else if ( !str_prefix( arg+1, "autocred" ) )
+      else if ( !StringPrefix( arg+1, "autocred" ) )
 	bit = PLR_AUTOGOLD;
-      else if ( !str_prefix( arg+1, "blank"    ) )
+      else if ( !StringPrefix( arg+1, "blank"    ) )
 	bit = PLR_BLANK;
-      else if ( !str_prefix( arg+1, "brief"    ) )
+      else if ( !StringPrefix( arg+1, "brief"    ) )
 	bit = PLR_BRIEF;
-      else if ( !str_prefix( arg+1, "combine"  ) )
+      else if ( !StringPrefix( arg+1, "combine"  ) )
 	bit = PLR_COMBINE;
-      else if ( !str_prefix( arg+1, "prompt"   ) )
+      else if ( !StringPrefix( arg+1, "prompt"   ) )
 	bit = PLR_PROMPT;
-      else if ( !str_prefix( arg+1, "telnetga" ) )
+      else if ( !StringPrefix( arg+1, "telnetga" ) )
 	bit = PLR_TELNET_GA;
-      else if ( !str_prefix( arg+1, "ansi"     ) )
+      else if ( !StringPrefix( arg+1, "ansi"     ) )
 	bit = PLR_ANSI;
-      else if ( !str_prefix( arg+1, "flee"     ) )
+      else if ( !StringPrefix( arg+1, "flee"     ) )
 	bit = PLR_FLEE;
-      else if ( !str_prefix( arg+1, "nice"     ) )
+      else if ( !StringPrefix( arg+1, "nice"     ) )
 	bit = PLR_NICE;
-      else if ( !str_prefix( arg+1, "shovedrag") )
+      else if ( !StringPrefix( arg+1, "shovedrag") )
 	bit = PLR_SHOVEDRAG;
-      else if ( !str_prefix( arg+1, "dontautofuel") )
+      else if ( !StringPrefix( arg+1, "dontautofuel") )
 	bit = PLR_DONTAUTOFUEL;
       else if ( IsImmortal( ch )
-                &&   !str_prefix( arg+1, "vnum"     ) )
+                &&   !StringPrefix( arg+1, "vnum"     ) )
 	bit = PLR_ROOMVNUM;
       else if ( IsImmortal( ch )
-                &&   !str_prefix( arg+1, "map"      ) )
+                &&   !StringPrefix( arg+1, "map"      ) )
 	bit = PLR_AUTOMAP;
 
       if (bit)
@@ -208,17 +208,17 @@ void do_config( Character *ch, char *argument )
         }
       else
         {
-          if ( !str_prefix( arg+1, "norecall" ) )
+          if ( !StringPrefix( arg+1, "norecall" ) )
 	    bit = PCFLAG_NORECALL;
-          else if ( !str_prefix( arg+1, "nointro"  ) )
+          else if ( !StringPrefix( arg+1, "nointro"  ) )
 	    bit = PCFLAG_NOINTRO;
-          else if ( !str_prefix( arg+1, "nosummon" ) )
+          else if ( !StringPrefix( arg+1, "nosummon" ) )
 	    bit = PCFLAG_NOSUMMON;
-          else if ( !str_prefix( arg+1, "gag"      ) )
+          else if ( !StringPrefix( arg+1, "gag"      ) )
 	    bit = PCFLAG_GAG;
-          else if ( !str_prefix( arg+1, "pager"    ) )
+          else if ( !StringPrefix( arg+1, "pager"    ) )
 	    bit = PCFLAG_PAGERON;
-          else if ( !str_prefix( arg+1, "roomflags")
+          else if ( !StringPrefix( arg+1, "roomflags")
                     && (IsImmortal(ch)))
 	    bit = PCFLAG_ROOM;
           else

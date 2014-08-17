@@ -9,9 +9,9 @@ void do_rassign( Character *ch, char *argument )
   short  r_lo, r_hi;
   Character *victim;
 
-  argument = one_argument( argument, arg1 );
-  argument = one_argument( argument, arg2 );
-  argument = one_argument( argument, arg3 );
+  argument = OneArgument( argument, arg1 );
+  argument = OneArgument( argument, arg2 );
+  argument = OneArgument( argument, arg3 );
   r_lo = atoi( arg2 );
   r_hi = atoi( arg3 );
 

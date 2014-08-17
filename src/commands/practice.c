@@ -35,7 +35,7 @@ void do_practice( Character *ch, char *argument )
 	      continue;
 	    }
 
-          if ( !str_cmp(skill_table[sn]->name, "reserved") && IsImmortal(ch) )
+          if ( !StrCmp(skill_table[sn]->name, "reserved") && IsImmortal(ch) )
             {
               if ( col % 3 != 0 )
                 send_to_pager( "&r\r\n", ch );
@@ -73,12 +73,12 @@ void do_practice( Character *ch, char *argument )
           if ( ch->pcdata->learned[sn] >= 100 )
             {
               pager_printf( ch, "&R%18s %3d%%  &r",
-                            capitalize(skill_table[sn]->name),
+                            Capitalize(skill_table[sn]->name),
 			    ch->pcdata->learned[sn] );
             }
           else
             pager_printf( ch, "&r%18s %3d%%  ",
-                          capitalize(skill_table[sn]->name),
+                          Capitalize(skill_table[sn]->name),
 			  ch->pcdata->learned[sn] );
           if ( ++col % 3 == 0 )
             send_to_pager( "\r\n&r", ch );
@@ -134,7 +134,7 @@ void do_practice( Character *ch, char *argument )
           return;
 	}
 
-      if ( is_name( skill_tname[skill_table[sn]->type], CANT_PRAC ) )
+      if ( IsName( skill_tname[skill_table[sn]->type], CANT_PRAC ) )
         {
           act( AT_TELL, "$n tells you 'I do not know how to teach that.'",
                mob, NULL, ch, TO_VICT );
@@ -148,7 +148,7 @@ void do_practice( Character *ch, char *argument )
         {
           sprintf( buf, "%ld", mob->pIndexData->vnum );
 
-          if ( !is_name( buf, skill_table[sn]->teachers ) )
+          if ( !IsName( buf, skill_table[sn]->teachers ) )
             {
               act( AT_TELL, "$n tells you, 'I do not know how to teach that.'",
                    mob, NULL, ch, TO_VICT );

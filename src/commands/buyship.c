@@ -25,7 +25,7 @@ void do_buyship(Character *ch, char *argument )
         }
     }
 
-  if ( str_cmp( ship->owner , "" )  || ship->type == MOB_SHIP )
+  if ( StrCmp( ship->owner , "" )  || ship->type == MOB_SHIP )
     {
       send_to_char( "&RThat ship isn't for sale!" ,ch );
       return;
@@ -34,9 +34,9 @@ void do_buyship(Character *ch, char *argument )
 
   if ( ship->type == SHIP_IMPERIAL )
     {
-      if ( !ch->pcdata->clan || str_cmp( ch->pcdata->clan->name , "the empire" ) )
+      if ( !ch->pcdata->clan || StrCmp( ch->pcdata->clan->name , "the empire" ) )
         {
-          if ( !ch->pcdata->clan || !ch->pcdata->clan->mainclan || str_cmp( ch->pcdata->clan->mainclan->name , "The Empire" ) )
+          if ( !ch->pcdata->clan || !ch->pcdata->clan->mainclan || StrCmp( ch->pcdata->clan->mainclan->name , "The Empire" ) )
             {
               send_to_char( "&RThat ship may only be purchaced by the Empire!\r\n" ,ch );
               return;
@@ -45,9 +45,9 @@ void do_buyship(Character *ch, char *argument )
     }
   else if ( ship->type == SHIP_REBEL )
     {
-      if ( !ch->pcdata->clan || (str_cmp( ch->pcdata->clan->name , "the rebel alliance" ) && str_cmp( ch->pcdata->clan->name , "The New Republic")))
+      if ( !ch->pcdata->clan || (StrCmp( ch->pcdata->clan->name , "the rebel alliance" ) && StrCmp( ch->pcdata->clan->name , "The New Republic")))
         {
-          if ( !ch->pcdata->clan ||  !ch->pcdata->clan->mainclan || str_cmp( ch->pcdata->clan->mainclan->name , "The Rebel Alliance" ) )
+          if ( !ch->pcdata->clan ||  !ch->pcdata->clan->mainclan || StrCmp( ch->pcdata->clan->mainclan->name , "The Rebel Alliance" ) )
             {
               send_to_char( "&RThat ship may only be purchaced by The Rebel Alliance!\r\n" ,ch );
               return;
@@ -70,6 +70,6 @@ void do_buyship(Character *ch, char *argument )
        NULL, argument , TO_ROOM );
 
   DISPOSE( ship->owner );
-  ship->owner = str_dup( ch->name );
+  ship->owner = CopyString( ch->name );
   SaveShip( ship );
 }

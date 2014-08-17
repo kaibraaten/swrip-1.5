@@ -6,7 +6,7 @@ void do_remove( Character *ch, char *argument )
   char arg[MAX_INPUT_LENGTH];
   OBJ_DATA *obj = NULL, *obj_next = NULL;
 
-  one_argument( argument, arg );
+  OneArgument( argument, arg );
 
   if ( arg[0] == '\0' )
     {
@@ -17,7 +17,7 @@ void do_remove( Character *ch, char *argument )
   if ( ms_find_obj(ch) )
     return;
 
-  if ( !str_cmp( arg, "all" ) )  /* SB Remove all */
+  if ( !StrCmp( arg, "all" ) )  /* SB Remove all */
     {
       for ( obj = ch->first_carrying; obj != NULL ; obj = obj_next )
         {

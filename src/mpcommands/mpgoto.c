@@ -17,7 +17,7 @@ void do_mpgoto( Character *ch, char *argument )
       return;
     }
 
-  one_argument( argument, arg );
+  OneArgument( argument, arg );
   if ( arg[0] == '\0' )
     {
       progbug( "Mpgoto - No argument", ch );

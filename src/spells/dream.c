@@ -8,7 +8,7 @@ ch_ret spell_dream( int sn, int level, Character *ch, void *vo )
   Character *victim;
   char arg[MAX_INPUT_LENGTH];
 
-  spell_target_name = one_argument(spell_target_name, arg);
+  spell_target_name = OneArgument(spell_target_name, arg);
   set_char_color(AT_MAGIC, ch);
   if ( !(victim = get_char_world(ch, arg)) )
     {

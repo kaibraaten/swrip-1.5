@@ -36,7 +36,7 @@ void do_status(Character *ch, char *argument )
 
   the_chance = IsNpc(ch) ? ch->top_level
     : (int)  (ch->pcdata->learned[gsn_shipsystems]) ;
-  if ( number_percent( ) > the_chance )
+  if ( GetRandomPercent( ) > the_chance )
     {
       send_to_char("&RYou cant figure out what the readout means.\r\n",ch);
       learn_from_failure( ch, gsn_shipsystems );

@@ -606,7 +606,7 @@ static char *imcstrrep( const char *src, const char *sch, const char *rep )
    return newsrc;
 }
 
-static const char *imcone_argument( const char *argument, char *arg_first )
+static const char *imcOneArgument( const char *argument, char *arg_first )
 {
    char cEnd;
    int count = 0;
@@ -993,7 +993,7 @@ static bool imc_isignoring( Character * ch, const char *ignore )
             return true;
       }
 
-      if( !str_prefix( ignore, temp->name ) )
+      if( !StringPrefix( ignore, temp->name ) )
          return true;
    }
    return false;
@@ -1326,13 +1326,13 @@ static void imc_new_channel( const char *chan, const char *owner,
 }
 
 /*
- * Read to end of line into static buffer [Taken from Smaug's fread_line]
+ * Read to end of line into static buffer [Taken from Smaug's ReadLine]
  */
 /*
- * Standard fread_line returns static buffer, while this one returns
+ * Standard ReadLine returns static buffer, while this one returns
  * dynamically allocated, which is why this must stay.
  */
-static char *imcfread_line( FILE * fp )
+static char *imcReadLine( FILE * fp )
 {
   char line[LGST];
   char *pline = line;
@@ -1349,7 +1349,7 @@ static char *imcfread_line( FILE * fp )
     {
       if( feof( fp ) )
 	{
-	  imcbug( "%s", "imcfread_line: EOF encountered on read." );
+	  imcbug( "%s", "imcReadLine: EOF encountered on read." );
 	  strncpy( line, "", LGST );
 	  return IMCSTRALLOC( line );
 	}
@@ -1364,7 +1364,7 @@ static char *imcfread_line( FILE * fp )
     {
       if( feof( fp ) )
 	{
-	  imcbug( "%s", "imcfread_line: EOF encountered on read." );
+	  imcbug( "%s", "imcReadLine: EOF encountered on read." );
 	  *pline = '\0';
 	  return IMCSTRALLOC( line );
 	}
@@ -1375,7 +1375,7 @@ static char *imcfread_line( FILE * fp )
 
       if( ln >= ( LGST - 1 ) )
 	{
-	  imcbug( "%s", "imcfread_line: line too long" );
+	  imcbug( "%s", "imcReadLine: line too long" );
 	  break;
 	}
     }
@@ -2405,7 +2405,7 @@ static void imc_process_finger( const char *from, const char *type )
    if( !type || type[0] == '\0' )
       return;
 
-   type = imcone_argument( type, to );
+   type = imcOneArgument( type, to );
    if( !( victim = imc_find_user( type ) ) )
    {
       imc_send_whoreply( from, "No such player is online.\r\n" );
@@ -3012,13 +3012,13 @@ static void imc_parse_packet( const char *packet )
 
    IMCCREATE( p, IMC_PACKET, 1 );
 
-   packet = imcone_argument( packet, p->from );
-   packet = imcone_argument( packet, arg );
+   packet = imcOneArgument( packet, p->from );
+   packet = imcOneArgument( packet, arg );
    seq = atol( arg );
 
-   packet = imcone_argument( packet, p->route );
-   packet = imcone_argument( packet, p->type );
-   packet = imcone_argument( packet, p->to );
+   packet = imcOneArgument( packet, p->route );
+   packet = imcOneArgument( packet, p->type );
+   packet = imcOneArgument( packet, p->to );
 
    /*
     * Banned muds are silently dropped - thanks to WynterNyght@IoG for noticing this was missing. 
@@ -3179,12 +3179,12 @@ static void imc_process_authentication( const char *packet )
    char command[SMST], rname[SMST], pw[SMST], version[SMST], netname[SMST], encrypt[SMST];
    char response[LGST];
 
-   packet = imcone_argument( packet, command );
-   packet = imcone_argument( packet, rname );
-   packet = imcone_argument( packet, pw );
-   packet = imcone_argument( packet, version ); /* This is more or less ignored */
-   packet = imcone_argument( packet, netname );
-   packet = imcone_argument( packet, encrypt );
+   packet = imcOneArgument( packet, command );
+   packet = imcOneArgument( packet, rname );
+   packet = imcOneArgument( packet, pw );
+   packet = imcOneArgument( packet, version ); /* This is more or less ignored */
+   packet = imcOneArgument( packet, netname );
+   packet = imcOneArgument( packet, encrypt );
 
    if( rname[0] == '\0' )
    {
@@ -3552,17 +3552,17 @@ bool imc_loadchar( Character * ch, FILE * fp, const char *word )
    switch ( word[0] )
    {
       case 'I':
-         KEY( "IMCPerm", IMCPERM( ch ), fread_number( fp ) );
-         KEY( "IMCEmail", IMC_EMAIL( ch ), imcfread_line( fp ) );
-         KEY( "IMCAIM", IMC_AIM( ch ), imcfread_line( fp ) );
-         KEY( "IMCICQ", IMC_ICQ( ch ), fread_number( fp ) );
-         KEY( "IMCYahoo", IMC_YAHOO( ch ), imcfread_line( fp ) );
-         KEY( "IMCMSN", IMC_MSN( ch ), imcfread_line( fp ) );
-         KEY( "IMCHomepage", IMC_HOMEPAGE( ch ), imcfread_line( fp ) );
-         KEY( "IMCComment", IMC_COMMENT( ch ), imcfread_line( fp ) );
+         KEY( "IMCPerm", IMCPERM( ch ), ReadInt( fp ) );
+         KEY( "IMCEmail", IMC_EMAIL( ch ), imcReadLine( fp ) );
+         KEY( "IMCAIM", IMC_AIM( ch ), imcReadLine( fp ) );
+         KEY( "IMCICQ", IMC_ICQ( ch ), ReadInt( fp ) );
+         KEY( "IMCYahoo", IMC_YAHOO( ch ), imcReadLine( fp ) );
+         KEY( "IMCMSN", IMC_MSN( ch ), imcReadLine( fp ) );
+         KEY( "IMCHomepage", IMC_HOMEPAGE( ch ), imcReadLine( fp ) );
+         KEY( "IMCComment", IMC_COMMENT( ch ), imcReadLine( fp ) );
          if( !strcasecmp( word, "IMCFlags" ) )
          {
-            IMCFLAG( ch ) = fread_number( fp );
+            IMCFLAG( ch ) = ReadInt( fp );
             imc_char_login( ch );
             fMatch = true;
             break;
@@ -3570,7 +3570,7 @@ bool imc_loadchar( Character * ch, FILE * fp, const char *word )
 
          if( !strcasecmp( word, "IMClisten" ) )
          {
-            IMC_LISTEN( ch ) = imcfread_line( fp );
+            IMC_LISTEN( ch ) = imcReadLine( fp );
             if( IMC_LISTEN( ch ) != NULL && this_imcmud->state == IMC_ONLINE )
             {
                IMC_CHANNEL *channel = NULL;
@@ -3581,7 +3581,7 @@ bool imc_loadchar( Character * ch, FILE * fp, const char *word )
                {
                   if( channels[0] == '\0' )
                      break;
-                  channels = imcone_argument( channels, arg );
+                  channels = imcOneArgument( channels, arg );
 
                   if( !( channel = imc_findchannel( arg ) ) )
                      imc_removename( &IMC_LISTEN( ch ), arg );
@@ -3595,7 +3595,7 @@ bool imc_loadchar( Character * ch, FILE * fp, const char *word )
 
          if( !strcasecmp( word, "IMCdeny" ) )
          {
-            IMC_DENY( ch ) = imcfread_line( fp );
+            IMC_DENY( ch ) = imcReadLine( fp );
             if( IMC_DENY( ch ) != NULL && this_imcmud->state == IMC_ONLINE )
             {
                IMC_CHANNEL *channel = NULL;
@@ -3606,7 +3606,7 @@ bool imc_loadchar( Character * ch, FILE * fp, const char *word )
                {
                   if( channels[0] == '\0' )
                      break;
-                  channels = imcone_argument( channels, arg );
+                  channels = imcOneArgument( channels, arg );
 
                   if( !( channel = imc_findchannel( arg ) ) )
                      imc_removename( &IMC_DENY( ch ), arg );
@@ -3623,7 +3623,7 @@ bool imc_loadchar( Character * ch, FILE * fp, const char *word )
             IMC_IGNORE *temp;
 
             IMCCREATE( temp, IMC_IGNORE, 1 );
-            temp->name = imcfread_line( fp );
+            temp->name = imcReadLine( fp );
             IMCLINK( temp, FIRST_IMCIGNORE( ch ), LAST_IMCIGNORE( ch ), next, prev );
             fMatch = true;
             break;
@@ -3746,7 +3746,7 @@ static void imc_loadhistory( void )
          if( feof( tempfile ) )
             tempchan->history[x] = NULL;
          else
-            tempchan->history[x] = imcfread_line( tempfile );
+            tempchan->history[x] = imcReadLine( tempfile );
       }
       IMCFCLOSE( tempfile );
       remove( filename );
@@ -3818,23 +3818,23 @@ static void imc_readchannel( IMC_CHANNEL * channel, FILE * fp )
 
    for( ;; )
    {
-      word = feof( fp ) ? "End" : fread_word( fp );
+      word = feof( fp ) ? "End" : ReadWord( fp );
       fMatch = false;
 
       switch ( word[0] )
       {
          case '*':
             fMatch = true;
-            fread_to_eol( fp );
+            ReadToEndOfLine( fp );
             break;
 
          case 'C':
-            KEY( "ChanName", channel->name, imcfread_line( fp ) );
-            KEY( "ChanLocal", channel->local_name, imcfread_line( fp ) );
-            KEY( "ChanRegF", channel->regformat, imcfread_line( fp ) );
-            KEY( "ChanEmoF", channel->emoteformat, imcfread_line( fp ) );
-            KEY( "ChanSocF", channel->socformat, imcfread_line( fp ) );
-            KEY( "ChanLevel", channel->level, fread_number( fp ) );
+            KEY( "ChanName", channel->name, imcReadLine( fp ) );
+            KEY( "ChanLocal", channel->local_name, imcReadLine( fp ) );
+            KEY( "ChanRegF", channel->regformat, imcReadLine( fp ) );
+            KEY( "ChanEmoF", channel->emoteformat, imcReadLine( fp ) );
+            KEY( "ChanSocF", channel->socformat, imcReadLine( fp ) );
+            KEY( "ChanLevel", channel->level, ReadInt( fp ) );
             break;
 
          case 'E':
@@ -3890,10 +3890,10 @@ static void imc_loadchannels( void )
       char letter;
       char *word;
 
-      letter = fread_letter( fp );
+      letter = ReadChar( fp );
       if( letter == '*' )
       {
-         fread_to_eol( fp );
+         ReadToEndOfLine( fp );
          continue;
       }
 
@@ -3903,7 +3903,7 @@ static void imc_loadchannels( void )
          break;
       }
 
-      word = fread_word( fp );
+      word = ReadWord( fp );
       if( !strcasecmp( word, "IMCCHAN" ) )
       {
          int x;
@@ -3966,7 +3966,7 @@ static void imc_readbans( void )
       return;
    }
 
-   word = fread_word( inf );
+   word = ReadWord( inf );
    if( strcasecmp( word, "#IGNORES" ) )
    {
       imcbug( "%s", "imc_readbans: Corrupt file" );
@@ -3976,7 +3976,7 @@ static void imc_readbans( void )
 
    while( !feof( inf ) && !ferror( inf ) )
    {
-      strncpy( temp, fread_word( inf ), SMST );
+      strncpy( temp, ReadWord( inf ), SMST );
       if( !strcasecmp( temp, "#END" ) )
       {
          IMCFCLOSE( inf );
@@ -4002,14 +4002,14 @@ static void imc_readcolor( IMC_COLOR * color, FILE * fp )
 
    for( ;; )
    {
-      word = feof( fp ) ? "End" : fread_word( fp );
+      word = feof( fp ) ? "End" : ReadWord( fp );
       fMatch = false;
 
       switch ( word[0] )
       {
          case '*':
             fMatch = true;
-            fread_to_eol( fp );
+            ReadToEndOfLine( fp );
             break;
 
          case 'E':
@@ -4018,15 +4018,15 @@ static void imc_readcolor( IMC_COLOR * color, FILE * fp )
             break;
 
          case 'I':
-            KEY( "IMCtag", color->imctag, imcfread_line( fp ) );
+            KEY( "IMCtag", color->imctag, imcReadLine( fp ) );
             break;
 
          case 'M':
-            KEY( "Mudtag", color->mudtag, imcfread_line( fp ) );
+            KEY( "Mudtag", color->mudtag, imcReadLine( fp ) );
             break;
 
          case 'N':
-            KEY( "Name", color->name, imcfread_line( fp ) );
+            KEY( "Name", color->name, imcReadLine( fp ) );
             break;
       }
       if( !fMatch )
@@ -4054,10 +4054,10 @@ static void imc_load_color_table( void )
       char letter;
       char *word;
 
-      letter = fread_letter( fp );
+      letter = ReadChar( fp );
       if( letter == '*' )
       {
-         fread_to_eol( fp );
+         ReadToEndOfLine( fp );
          continue;
       }
 
@@ -4067,7 +4067,7 @@ static void imc_load_color_table( void )
          break;
       }
 
-      word = fread_word( fp );
+      word = ReadWord( fp );
       if( !strcasecmp( word, "COLOR" ) )
       {
          IMCCREATE( color, IMC_COLOR, 1 );
@@ -4118,14 +4118,14 @@ static void imc_readhelp( IMC_HelpFile * help, FILE * fp )
 
    for( ;; )
    {
-      word = feof( fp ) ? "End" : fread_word( fp );
+      word = feof( fp ) ? "End" : ReadWord( fp );
       fMatch = false;
 
       switch ( word[0] )
       {
          case '*':
             fMatch = true;
-            fread_to_eol( fp );
+            ReadToEndOfLine( fp );
             break;
 
          case 'E':
@@ -4134,13 +4134,13 @@ static void imc_readhelp( IMC_HelpFile * help, FILE * fp )
             break;
 
          case 'N':
-            KEY( "Name", help->name, imcfread_line( fp ) );
+            KEY( "Name", help->name, imcReadLine( fp ) );
             break;
 
          case 'P':
             if( !strcasecmp( word, "Perm" ) )
             {
-               word = fread_word( fp );
+               word = ReadWord( fp );
                permvalue = get_imcpermvalue( word );
 
                if( permvalue < 0 || permvalue > IMCPERM_IMP )
@@ -4195,10 +4195,10 @@ static void imc_LoadHelpFiles( void )
       char letter;
       char *word;
 
-      letter = fread_letter( fp );
+      letter = ReadChar( fp );
       if( letter == '*' )
       {
-         fread_to_eol( fp );
+         ReadToEndOfLine( fp );
          continue;
       }
 
@@ -4208,7 +4208,7 @@ static void imc_LoadHelpFiles( void )
          break;
       }
 
-      word = fread_word( fp );
+      word = ReadWord( fp );
       if( !strcasecmp( word, "HELP" ) )
       {
          IMCCREATE( help, IMC_HelpFile, 1 );
@@ -4266,14 +4266,14 @@ static void imc_readcommand( IMC_CMD_DATA * cmd, FILE * fp )
 
    for( ;; )
    {
-      word = feof( fp ) ? "End" : fread_word( fp );
+      word = feof( fp ) ? "End" : ReadWord( fp );
       fMatch = false;
 
       switch ( word[0] )
       {
          case '*':
             fMatch = true;
-            fread_to_eol( fp );
+            ReadToEndOfLine( fp );
             break;
 
          case 'E':
@@ -4285,7 +4285,7 @@ static void imc_readcommand( IMC_CMD_DATA * cmd, FILE * fp )
             if( !strcasecmp( word, "Alias" ) )
             {
                IMCCREATE( alias, IMC_ALIAS, 1 );
-               alias->name = imcfread_line( fp );
+               alias->name = imcReadLine( fp );
                IMCLINK( alias, cmd->first_alias, cmd->last_alias, next, prev );
                fMatch = true;
                break;
@@ -4293,10 +4293,10 @@ static void imc_readcommand( IMC_CMD_DATA * cmd, FILE * fp )
             break;
 
          case 'C':
-            KEY( "Connected", cmd->connected, fread_number( fp ) );
+            KEY( "Connected", cmd->connected, ReadInt( fp ) );
             if( !strcasecmp( word, "Code" ) )
             {
-               word = fread_word( fp );
+               word = ReadWord( fp );
                cmd->function = imc_function( word );
                if( cmd->function == NULL )
                   imcbug( "imc_readcommand: Command %s loaded with invalid function. Set to NULL.", cmd->name );
@@ -4306,13 +4306,13 @@ static void imc_readcommand( IMC_CMD_DATA * cmd, FILE * fp )
             break;
 
          case 'N':
-            KEY( "Name", cmd->name, imcfread_line( fp ) );
+            KEY( "Name", cmd->name, imcReadLine( fp ) );
             break;
 
          case 'P':
             if( !strcasecmp( word, "Perm" ) )
             {
-               word = fread_word( fp );
+               word = ReadWord( fp );
                permvalue = get_imcpermvalue( word );
 
                if( permvalue < 0 || permvalue > IMCPERM_IMP )
@@ -4352,10 +4352,10 @@ static bool imc_load_commands( void )
       char letter;
       char *word;
 
-      letter = fread_letter( fp );
+      letter = ReadChar( fp );
       if( letter == '*' )
       {
-         fread_to_eol( fp );
+         ReadToEndOfLine( fp );
          continue;
       }
 
@@ -4365,7 +4365,7 @@ static bool imc_load_commands( void )
          break;
       }
 
-      word = fread_word( fp );
+      word = ReadWord( fp );
       if( !strcasecmp( word, "COMMAND" ) )
       {
          IMCCREATE( cmd, IMC_CMD_DATA, 1 );
@@ -4392,26 +4392,26 @@ static void imc_readucache( IMCUCACHE_DATA * user, FILE * fp )
 
    for( ;; )
    {
-      word = feof( fp ) ? "End" : fread_word( fp );
+      word = feof( fp ) ? "End" : ReadWord( fp );
       fMatch = false;
 
       switch ( word[0] )
       {
          case '*':
             fMatch = true;
-            fread_to_eol( fp );
+            ReadToEndOfLine( fp );
             break;
 
          case 'N':
-            KEY( "Name", user->name, imcfread_line( fp ) );
+            KEY( "Name", user->name, imcReadLine( fp ) );
             break;
 
          case 'S':
-            KEY( "Sex", user->gender, fread_number( fp ) );
+            KEY( "Sex", user->gender, ReadInt( fp ) );
             break;
 
          case 'T':
-            KEY( "Time", user->time, fread_number( fp ) );
+            KEY( "Time", user->time, ReadInt( fp ) );
             break;
 
          case 'E':
@@ -4442,10 +4442,10 @@ static void imc_load_ucache( void )
       char letter;
       char *word;
 
-      letter = fread_letter( fp );
+      letter = ReadChar( fp );
       if( letter == '*' )
       {
-         fread_to_eol( fp );
+         ReadToEndOfLine( fp );
          continue;
       }
 
@@ -4455,7 +4455,7 @@ static void imc_load_ucache( void )
          break;
       }
 
-      word = fread_word( fp );
+      word = ReadWord( fp );
       if( !strcasecmp( word, "UCACHE" ) )
       {
          IMCCREATE( user, IMCUCACHE_DATA, 1 );
@@ -4529,23 +4529,23 @@ static void imcfread_config_file( FILE * fin )
 
    for( ;; )
    {
-      word = feof( fin ) ? "end" : fread_word( fin );
+      word = feof( fin ) ? "end" : ReadWord( fin );
       fMatch = false;
 
       switch ( word[0] )
       {
          case '#':
             fMatch = true;
-            fread_to_eol( fin );
+            ReadToEndOfLine( fin );
             break;
 
          case 'A':
-            KEY( "Autoconnect", this_imcmud->autoconnect, fread_number( fin ) );
-            KEY( "AdminLevel", this_imcmud->adminlevel, fread_number( fin ) );
+            KEY( "Autoconnect", this_imcmud->autoconnect, ReadInt( fin ) );
+            KEY( "AdminLevel", this_imcmud->adminlevel, ReadInt( fin ) );
             break;
 
          case 'C':
-            KEY( "ClientPwd", this_imcmud->clientpw, imcfread_line( fin ) );
+            KEY( "ClientPwd", this_imcmud->clientpw, imcReadLine( fin ) );
             break;
 
          case 'E':
@@ -4567,36 +4567,36 @@ static void imcfread_config_file( FILE * fin )
             break;
 
          case 'I':
-            KEY( "Implevel", this_imcmud->implevel, fread_number( fin ) );
-            KEY( "InfoName", this_imcmud->fullname, imcfread_line( fin ) );
-            KEY( "InfoHost", this_imcmud->ihost, imcfread_line( fin ) );
-            KEY( "InfoPort", this_imcmud->iport, fread_number( fin ) );
-            KEY( "InfoEmail", this_imcmud->email, imcfread_line( fin ) );
-            KEY( "InfoWWW", this_imcmud->www, imcfread_line( fin ) );
-            KEY( "InfoBase", this_imcmud->base, imcfread_line( fin ) );
-            KEY( "InfoDetails", this_imcmud->details, imcfread_line( fin ) );
+            KEY( "Implevel", this_imcmud->implevel, ReadInt( fin ) );
+            KEY( "InfoName", this_imcmud->fullname, imcReadLine( fin ) );
+            KEY( "InfoHost", this_imcmud->ihost, imcReadLine( fin ) );
+            KEY( "InfoPort", this_imcmud->iport, ReadInt( fin ) );
+            KEY( "InfoEmail", this_imcmud->email, imcReadLine( fin ) );
+            KEY( "InfoWWW", this_imcmud->www, imcReadLine( fin ) );
+            KEY( "InfoBase", this_imcmud->base, imcReadLine( fin ) );
+            KEY( "InfoDetails", this_imcmud->details, imcReadLine( fin ) );
             break;
 
          case 'L':
-            KEY( "LocalName", this_imcmud->localname, imcfread_line( fin ) );
+            KEY( "LocalName", this_imcmud->localname, imcReadLine( fin ) );
             break;
 
          case 'M':
-            KEY( "MinImmLevel", this_imcmud->immlevel, fread_number( fin ) );
-            KEY( "MinPlayerLevel", this_imcmud->minlevel, fread_number( fin ) );
+            KEY( "MinImmLevel", this_imcmud->immlevel, ReadInt( fin ) );
+            KEY( "MinPlayerLevel", this_imcmud->minlevel, ReadInt( fin ) );
             break;
 
          case 'R':
-            KEY( "RouterAddr", this_imcmud->rhost, imcfread_line( fin ) );
-            KEY( "RouterPort", this_imcmud->rport, fread_number( fin ) );
+            KEY( "RouterAddr", this_imcmud->rhost, imcReadLine( fin ) );
+            KEY( "RouterPort", this_imcmud->rport, ReadInt( fin ) );
             break;
 
          case 'S':
-            KEY( "ServerPwd", this_imcmud->serverpw, imcfread_line( fin ) );
-            KEY( "ServerAddr", this_imcmud->rhost, imcfread_line( fin ) );
-            KEY( "ServerPort", this_imcmud->rport, fread_number( fin ) );
-            KEY( "SHA256", this_imcmud->sha256, fread_number( fin ) );
-            KEY( "SHA256Pwd", this_imcmud->sha256pass, fread_number( fin ) );
+            KEY( "ServerPwd", this_imcmud->serverpw, imcReadLine( fin ) );
+            KEY( "ServerAddr", this_imcmud->rhost, imcReadLine( fin ) );
+            KEY( "ServerPort", this_imcmud->rport, ReadInt( fin ) );
+            KEY( "SHA256", this_imcmud->sha256, ReadInt( fin ) );
+            KEY( "SHA256Pwd", this_imcmud->sha256pass, ReadInt( fin ) );
             break;
       }
       if( !fMatch )
@@ -4627,11 +4627,11 @@ static bool imc_read_config( socket_t desc )
       char letter;
       char *word;
 
-      letter = fread_letter( fin );
+      letter = ReadChar( fin );
 
       if( letter == '#' )
       {
-         fread_to_eol( fin );
+         ReadToEndOfLine( fin );
          continue;
       }
 
@@ -4641,7 +4641,7 @@ static bool imc_read_config( socket_t desc )
          break;
       }
 
-      word = fread_word( fin );
+      word = ReadWord( fin );
       if( !strcasecmp( word, "IMCCONFIG" ) && this_imcmud == NULL )
       {
          IMCCREATE( this_imcmud, SITEINFO, 1 );
@@ -4794,7 +4794,7 @@ static void imc_load_who_template( void )
 
    do
    {
-      word = fread_word( fp );
+      word = ReadWord( fp );
       hbuf[0] = '\0';
       num = 0;
 
@@ -4897,7 +4897,7 @@ static socket_t ipv4_connect( void )
       return INVALID_SOCKET;
    }
 
-   if( set_nonblocking( desc ) == SOCKET_ERROR )
+   if( SetNonBlockingSocket( desc ) == SOCKET_ERROR )
    {
       perror( "imc_connect: ioctlsocket failed" );
       closesocket( desc );
@@ -5270,8 +5270,8 @@ IMC_CMD( imccommand )
    IMC_PACKET *p;
    IMC_CHANNEL *c;
 
-   argument = imcone_argument( argument, cmd );
-   argument = imcone_argument( argument, chan );
+   argument = imcOneArgument( argument, cmd );
+   argument = imcOneArgument( argument, chan );
 
    if( !cmd[0] || !chan[0] )
    {
@@ -5334,9 +5334,9 @@ IMC_CMD( imcsetup )
    int x;
    bool all = false;
 
-   argument = imcone_argument( argument, imccmd );
-   argument = imcone_argument( argument, chan );
-   argument = imcone_argument( argument, arg1 );
+   argument = imcOneArgument( argument, imccmd );
+   argument = imcOneArgument( argument, chan );
+   argument = imcOneArgument( argument, arg1 );
 
    if( imccmd[0] == '\0' || chan[0] == '\0' )
    {
@@ -5735,7 +5735,7 @@ IMC_CMD( imctell )
       return;
    }
 
-   argument = imcone_argument( argument, buf );
+   argument = imcOneArgument( argument, buf );
 
    if( !argument || argument[0] == '\0' )
    {
@@ -5950,7 +5950,7 @@ IMC_CMD( imcfinger )
       return;
    }
 
-   argument = imcone_argument( argument, arg );
+   argument = imcOneArgument( argument, arg );
 
    if( arg[0] == '\0' )
    {
@@ -6217,7 +6217,7 @@ IMC_CMD( imcconfig )
 {
    char arg1[SMST];
 
-   argument = imcone_argument( argument, arg1 );
+   argument = imcOneArgument( argument, arg1 );
 
    if( arg1[0] == '\0' )
    {
@@ -6487,7 +6487,7 @@ IMC_CMD( imcignore )
    IMC_IGNORE *ign;
    char arg[SMST];
 
-   argument = imcone_argument( argument, arg );
+   argument = imcOneArgument( argument, arg );
 
    if( arg[0] == '\0' )
    {
@@ -6554,7 +6554,7 @@ IMC_CMD( imcban )
    IMC_BAN *ban;
    char arg[SMST];
 
-   argument = imcone_argument( argument, arg );
+   argument = imcOneArgument( argument, arg );
 
    if( arg[0] == '\0' )
    {
@@ -6612,7 +6612,7 @@ IMC_CMD( imc_deny_channel )
    Character *victim;
    IMC_CHANNEL *channel;
 
-   argument = imcone_argument( argument, vic_name );
+   argument = imcOneArgument( argument, vic_name );
 
    if( vic_name[0] == '\0' || !argument || argument[0] == '\0' )
    {
@@ -6726,7 +6726,7 @@ IMC_CMD( imcpermset )
    char arg[SMST];
    int permvalue;
 
-   argument = imcone_argument( argument, arg );
+   argument = imcOneArgument( argument, arg );
 
    if( arg[0] == '\0' )
    {
@@ -6786,7 +6786,7 @@ IMC_CMD( imcpermset )
       {
          if( channels[0] == '\0' )
             break;
-         channels = imcone_argument( channels, arg );
+         channels = imcOneArgument( channels, arg );
 
          if( !( channel = imc_findchannel( arg ) ) )
             imc_removename( &IMC_LISTEN( victim ), arg );
@@ -6826,7 +6826,7 @@ IMC_CMD( imcchanwho )
       return;
    }
 
-   argument = imcone_argument( argument, chan );
+   argument = imcOneArgument( argument, chan );
 
    if( !( c = imc_findchannel( chan ) ) )
    {
@@ -6850,7 +6850,7 @@ IMC_CMD( imcchanwho )
    {
       while( argument[0] != '\0' )
       {
-         argument = imcone_argument( argument, mud );
+         argument = imcOneArgument( argument, mud );
 
          if( !check_mud( ch, mud ) )
             continue;
@@ -6880,9 +6880,9 @@ IMC_CMD( imcremoteadmin )
    char pwd[LGST];
    IMC_PACKET *p;
 
-   argument = imcone_argument( argument, server );
-   argument = imcone_argument( argument, pwd );
-   argument = imcone_argument( argument, cmd );
+   argument = imcOneArgument( argument, server );
+   argument = imcOneArgument( argument, pwd );
+   argument = imcOneArgument( argument, cmd );
 
    if( server[0] == '\0' || cmd[0] == '\0' )
    {
@@ -7028,8 +7028,8 @@ IMC_CMD( imccedit )
    char name[SMST], option[SMST];
    bool found = false, aliasfound = false;
 
-   argument = imcone_argument( argument, name );
-   argument = imcone_argument( argument, option );
+   argument = imcOneArgument( argument, name );
+   argument = imcOneArgument( argument, option );
 
    if( name[0] == '\0' || option[0] == '\0' )
    {
@@ -7244,8 +7244,8 @@ IMC_CMD( imchedit )
    char name[SMST], cmd[SMST];
    bool found = false;
 
-   argument = imcone_argument( argument, name );
-   argument = imcone_argument( argument, cmd );
+   argument = imcOneArgument( argument, name );
+   argument = imcOneArgument( argument, cmd );
 
    if( name[0] == '\0' || cmd[0] == '\0' || !argument || argument[0] == '\0' )
    {
@@ -7485,40 +7485,40 @@ static char *imc_act_string( const char *format, Character * ch, Character * vic
 
             case 'e':
                i = should_upper ?
-                  capitalize( he_she[urange( 0, CH_IMCSEX( ch ), 2 )] ) : he_she[urange( 0, CH_IMCSEX( ch ), 2 )];
+                  Capitalize( he_she[urange( 0, CH_IMCSEX( ch ), 2 )] ) : he_she[urange( 0, CH_IMCSEX( ch ), 2 )];
                break;
 
             case 'E':
                i = should_upper ?
-                  capitalize( he_she[urange( 0, CH_IMCSEX( vic ), 2 )] ) : he_she[urange( 0, CH_IMCSEX( vic ), 2 )];
+                  Capitalize( he_she[urange( 0, CH_IMCSEX( vic ), 2 )] ) : he_she[urange( 0, CH_IMCSEX( vic ), 2 )];
                break;
 
             case 'm':
                i = should_upper ?
-                  capitalize( him_her[urange( 0, CH_IMCSEX( ch ), 2 )] ) : him_her[urange( 0, CH_IMCSEX( ch ), 2 )];
+                  Capitalize( him_her[urange( 0, CH_IMCSEX( ch ), 2 )] ) : him_her[urange( 0, CH_IMCSEX( ch ), 2 )];
                break;
 
             case 'M':
                i = should_upper ?
-                  capitalize( him_her[urange( 0, CH_IMCSEX( vic ), 2 )] ) : him_her[urange( 0, CH_IMCSEX( vic ), 2 )];
+                  Capitalize( him_her[urange( 0, CH_IMCSEX( vic ), 2 )] ) : him_her[urange( 0, CH_IMCSEX( vic ), 2 )];
                break;
 
             case 's':
                i = should_upper ?
-                  capitalize( his_her[urange( 0, CH_IMCSEX( ch ), 2 )] ) : his_her[urange( 0, CH_IMCSEX( ch ), 2 )];
+                  Capitalize( his_her[urange( 0, CH_IMCSEX( ch ), 2 )] ) : his_her[urange( 0, CH_IMCSEX( ch ), 2 )];
                break;
 
             case 'S':
                i = should_upper ?
-                  capitalize( his_her[urange( 0, CH_IMCSEX( vic ), 2 )] ) : his_her[urange( 0, CH_IMCSEX( vic ), 2 )];
+                  Capitalize( his_her[urange( 0, CH_IMCSEX( vic ), 2 )] ) : his_her[urange( 0, CH_IMCSEX( vic ), 2 )];
                break;
 
             case 'k':
-               imcone_argument( CH_IMCNAME( ch ), tmp_str );
+               imcOneArgument( CH_IMCNAME( ch ), tmp_str );
                i = ( char * )tmp_str;
                break;
             case 'K':
-               imcone_argument( CH_IMCNAME( vic ), tmp_str );
+               imcOneArgument( CH_IMCNAME( vic ), tmp_str );
                i = ( char * )tmp_str;
                break;
          }
@@ -7576,7 +7576,7 @@ static const char *imc_send_social( Character * ch, const char *argument, int te
    /*
     * Name of social, remainder of argument is assumed to hold the target 
     */
-   argument = imcone_argument( argument, arg1 );
+   argument = imcOneArgument( argument, arg1 );
 
    if( argument && argument[0] != '\0' )
    {

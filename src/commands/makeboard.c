@@ -10,14 +10,14 @@ void do_makeboard( Character *ch, char *argument )
       return;
     }
 
-  smash_tilde( argument );
+  SmashTilde( argument );
 
   CREATE( board, BOARD_DATA, 1 );
 
   LINK( board, first_board, last_board, next, prev );
-  board->note_file       = str_dup( strlower( argument ) );
-  board->read_group      = str_dup( "" );
-  board->post_group      = str_dup( "" );
-  board->extra_readers   = str_dup( "" );
-  board->extra_removers  = str_dup( "" );
+  board->note_file       = CopyString( StringToLowercase( argument ) );
+  board->read_group      = CopyString( "" );
+  board->post_group      = CopyString( "" );
+  board->extra_readers   = CopyString( "" );
+  board->extra_removers  = CopyString( "" );
 }

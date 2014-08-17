@@ -11,13 +11,13 @@ void do_timecmd( Character *ch, char *argument )
   send_to_char("Timing\r\n",ch);
   if ( timing )
     return;
-  one_argument(argument, arg);
+  OneArgument(argument, arg);
   if ( !*arg )
     {
       send_to_char( "No command to time.\r\n", ch );
       return;
     }
-  if ( !str_cmp(arg, "update") )
+  if ( !StrCmp(arg, "update") )
     {
       if ( timechar )
         send_to_char( "Another person is already timing updates.\r\n", ch );
@@ -37,7 +37,7 @@ void do_timecmd( Character *ch, char *argument )
   timing = false;
   set_char_color(AT_PLAIN, ch);
   send_to_char( "Timing complete.\r\n", ch );
-  subtract_times(&etime, &start_time);
+  SubtractTimes(&etime, &start_time);
   ch_printf( ch, "Timing took %d.%06d seconds.\r\n",
              etime.tv_sec, etime.tv_usec );
 }

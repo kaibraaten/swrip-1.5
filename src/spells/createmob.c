@@ -38,9 +38,9 @@ ch_ret spell_create_mob( int sn, int level, Character *ch, void *vo )
       return rNONE;
     }
   mob->top_level   = umin( lvl, skill->dice ? dice_parse(ch, level, skill->dice) : mob->top_level );
-  mob->armor     = interpolate( mob->top_level, 100, -100 );
+  mob->armor     = Interpolate( mob->top_level, 100, -100 );
 
-  mob->max_hit = mob->top_level * 8 + number_range(
+  mob->max_hit = mob->top_level * 8 + GetRandomNumberFromRange(
                                                    mob->top_level * mob->top_level / 4,
                                                    mob->top_level * mob->top_level );
   mob->hit       = mob->max_hit;
@@ -49,7 +49,7 @@ ch_ret spell_create_mob( int sn, int level, Character *ch, void *vo )
   char_to_room( mob, ch->in_room );
   add_follower( mob, ch );
   af.type      = sn;
-  af.duration  = (number_fuzzy( (level + 1) / 3 ) + 1) * DUR_CONV;
+  af.duration  = (NumberFuzzy( (level + 1) / 3 ) + 1) * DUR_CONV;
   af.location  = 0;
   af.modifier  = 0;
   af.bitvector = AFF_CHARM;

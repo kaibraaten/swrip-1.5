@@ -33,7 +33,7 @@ void do_commands( Character *ch, char *argument )
         for ( command = command_hash[hash]; command; command = command->next )
           if ( command->level <  LEVEL_AVATAR
                &&   command->level <= GetTrustLevel( ch )
-               &&  !str_prefix(argument, command->name)
+               &&  !StringPrefix(argument, command->name)
                &&  (command->name[0] != 'm'
                     &&   command->name[1] != 'p') )
 	    {

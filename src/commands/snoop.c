@@ -7,7 +7,7 @@ void do_snoop( Character *ch, char *argument )
   Descriptor *d;
   Character *victim;
 
-  one_argument( argument, arg );
+  OneArgument( argument, arg );
 
   if ( arg[0] == '\0' )
     {

@@ -13,7 +13,7 @@ void do_last( Character *ch, char *argument )
   char name[MAX_INPUT_LENGTH];
   struct stat fst;
 
-  one_argument( argument, arg );
+  OneArgument( argument, arg );
 
   if ( arg[0] == '\0' )
     {
@@ -21,7 +21,7 @@ void do_last( Character *ch, char *argument )
       return;
     }
 
-  strcpy( name, capitalize(arg) );
+  strcpy( name, Capitalize(arg) );
   sprintf( buf, "%s%c/%s", PLAYER_DIR, tolower(arg[0]), name );
 
   if ( stat( buf, &fst ) != -1 )

@@ -29,7 +29,7 @@ void do_scan( Character *ch, char *argument )
   act( AT_GREY, "$n scans $t.", ch, get_dir_name(dir), NULL, TO_ROOM );
 
   if ( IsNpc( ch )
-       || ( number_percent() > ch->pcdata->learned[gsn_scan] ) )
+       || ( GetRandomPercent() > ch->pcdata->learned[gsn_scan] ) )
     {
       act( AT_GREY, "You stop scanning $t as your vision blurs.", ch,
            get_dir_name(dir), NULL, TO_CHAR );
@@ -86,7 +86,7 @@ void do_scan( Character *ch, char *argument )
         {
         default: dist++; break;
         case SECT_AIR:
-          if ( number_percent() < 80 ) dist++; break;
+          if ( GetRandomPercent() < 80 ) dist++; break;
         case SECT_INSIDE:
         case SECT_FIELD:
         case SECT_UNDERGROUND:

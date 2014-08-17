@@ -47,7 +47,7 @@ ch_ret spell_charm_person( int sn, int level, Character *ch, void *vo )
 
   add_follower( victim, ch );
   af.type      = sn;
-  af.duration  = (number_fuzzy( (level + 1) / 3 ) + 1) * DUR_CONV;
+  af.duration  = (NumberFuzzy( (level + 1) / 3 ) + 1) * DUR_CONV;
   af.location  = 0;
   af.modifier  = 0;
   af.bitvector = AFF_CHARM;

@@ -12,8 +12,8 @@ void do_prompt( Character *ch, char *argument )
       return;
     }
 
-  smash_tilde( argument );
-  one_argument( argument, arg );
+  SmashTilde( argument );
+  OneArgument( argument, arg );
 
   if ( !*arg )
     {
@@ -29,10 +29,10 @@ void do_prompt( Character *ch, char *argument )
 
   /* Can add a list of pre-set prompts here if wanted.. perhaps
      'prompt 1' brings up a different, pre-set prompt */
-  if ( !str_cmp(arg, "default") )
-    ch->pcdata->prompt = str_dup("");
+  if ( !StrCmp(arg, "default") )
+    ch->pcdata->prompt = CopyString("");
   else
-    ch->pcdata->prompt = str_dup(argument);
+    ch->pcdata->prompt = CopyString(argument);
 
   send_to_char( "Ok.\r\n", ch );
 }

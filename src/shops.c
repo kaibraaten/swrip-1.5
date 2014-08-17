@@ -381,7 +381,7 @@ void WriteVendor( FILE *fp, Character *mob )
       fprintf (fp, "Owner     %s~\n", mob->owner );
     }
 
-  if ( str_cmp( mob->short_descr, mob->pIndexData->short_descr) )
+  if ( StrCmp( mob->short_descr, mob->pIndexData->short_descr) )
     {
       fprintf( fp, "Short     %s~\n", mob->short_descr );
     }
@@ -397,11 +397,11 @@ Character *ReadVendor( FILE *fp )
   Character *mob = NULL;
   const char *word = NULL;
 
-  word = feof( fp ) ? "END" : fread_word( fp );
+  word = feof( fp ) ? "END" : ReadWord( fp );
 
-  if ( !str_cmp(word, "Vnum") )
+  if ( !StrCmp(word, "Vnum") )
     {
-      vnum_t vnum = fread_number( fp );
+      vnum_t vnum = ReadInt( fp );
 
       mob = create_mobile( get_mob_index(vnum));
 
@@ -409,9 +409,9 @@ Character *ReadVendor( FILE *fp )
         {
           for ( ; ; )
             {
-              word = feof( fp ) ? "END" : fread_word( fp );
+              word = feof( fp ) ? "END" : ReadWord( fp );
 
-              if ( !str_cmp( word, "END" ) )
+              if ( !StrCmp( word, "END" ) )
 		{
 		  break;
 		}
@@ -425,9 +425,9 @@ Character *ReadVendor( FILE *fp )
     {
       for ( ; ; )
         {
-          word = feof( fp ) ? "END" : fread_word( fp );
+          word = feof( fp ) ? "END" : ReadWord( fp );
 
-          if ( !str_cmp( word, "END" ) )
+          if ( !StrCmp( word, "END" ) )
 	    {
 	      break;
 	    }
@@ -443,28 +443,28 @@ Character *ReadVendor( FILE *fp )
       vnum_t inroom = 0;
       Room *pRoomIndex = NULL;
 
-      word = feof( fp ) ? "END" : fread_word( fp );
+      word = feof( fp ) ? "END" : ReadWord( fp );
 
       switch ( CharToUppercase(word[0]) )
 	{
 	case '*':
 	  fMatch = true;
-	  fread_to_eol( fp );
+	  ReadToEndOfLine( fp );
 	  break;
 
 	case '#':
-	  if ( !str_cmp( word, "#OBJECT" ) )
+	  if ( !StrCmp( word, "#OBJECT" ) )
 	    {
 	      fread_obj ( mob, fp, OS_CARRY );
 	    }
 	  break;
 
 	case 'D':
-	  KEY( "Description", mob->description, fread_string(fp));
+	  KEY( "Description", mob->description, ReadStringToTilde(fp));
 	  break;
 
 	case 'E':
-	  if ( !str_cmp( word, "END" ) )
+	  if ( !StrCmp( word, "END" ) )
 	    {
 	      Character *victim = NULL;
 	      Character *vnext = NULL;
@@ -504,7 +504,7 @@ Character *ReadVendor( FILE *fp )
 	      sprintf(vnum1,"%ld", mob->pIndexData->vnum);
 	      do_makeshop (mob, vnum1 );
 	      sprintf (buf, mob->long_descr, mob->owner);
-	      mob->long_descr = str_dup( buf );
+	      mob->long_descr = CopyString( buf );
 	      mob->hit = 10000;
 	      mob->max_hit = 10000;
 	      return mob;
@@ -512,15 +512,15 @@ Character *ReadVendor( FILE *fp )
 	  break;
 
 	case 'F':
-	  KEY( "Flags", mob->act, fread_number(fp));
+	  KEY( "Flags", mob->act, ReadInt(fp));
 	  break;
 
 	case 'G':
-	  KEY("Gold", mob->gold, fread_number(fp));
+	  KEY("Gold", mob->gold, ReadInt(fp));
 	  break;
 
 	case 'H':
-	  KEY("Home", inroom, fread_number(fp) );
+	  KEY("Home", inroom, ReadInt(fp) );
 	  break;
 
 	case 'L':
@@ -530,15 +530,15 @@ Character *ReadVendor( FILE *fp )
 	  break;
 
 	case 'O':
-	  KEY ("Owner", mob->owner, fread_string (fp) );
+	  KEY ("Owner", mob->owner, ReadStringToTilde (fp) );
 	  break;
 
 	case 'P':
-	  KEY( "Position", mob->position, fread_number( fp ) );
+	  KEY( "Position", mob->position, ReadInt( fp ) );
 	  break;
 
 	case 'S':
-	  KEY( "Short", mob->short_descr, fread_string(fp));
+	  KEY( "Short", mob->short_descr, ReadStringToTilde(fp));
 	  break;
 	}
 
@@ -566,7 +566,7 @@ void SaveVendor( Character *ch )
   de_EquipCharacter( ch );
 
 
-  sprintf( strsave, "%s%s",VENDOR_DIR, capitalize( ch->owner ) );
+  sprintf( strsave, "%s%s",VENDOR_DIR, Capitalize( ch->owner ) );
 
   if ( ( fp = fopen( strsave, "w" ) ) == NULL )
     {

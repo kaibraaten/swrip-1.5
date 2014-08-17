@@ -44,7 +44,7 @@ void do_radar( Character *ch, char *argument )
 
   the_chance = IsNpc(ch) ? ch->top_level
     : (int)  (ch->pcdata->learned[gsn_navigation]) ;
-  if ( number_percent( ) > the_chance )
+  if ( GetRandomPercent( ) > the_chance )
     {
       send_to_char("&RYou fail to work the controls properly.\r\n",ch);
       learn_from_failure( ch, gsn_navigation );
@@ -61,7 +61,7 @@ void do_radar( Character *ch, char *argument )
     {
       if ( IsSpaceobjectInRange( ship, spaceobj )
 	   && spaceobj->type == SPACE_SUN
-	   && str_cmp(spaceobj->name,"") )
+	   && StrCmp(spaceobj->name,"") )
         ch_printf(ch, "%-15s%.0f %.0f %.0f\r\n%-15s%.0f %.0f %.0f\r\n" ,
                   spaceobj->name,
                   spaceobj->pos.x,
@@ -79,7 +79,7 @@ void do_radar( Character *ch, char *argument )
     {
       if ( IsSpaceobjectInRange( ship, spaceobj )
 	   && spaceobj->type == SPACE_PLANET
-	   && str_cmp(spaceobj->name,"") )
+	   && StrCmp(spaceobj->name,"") )
 	ch_printf(ch, "%-15s%.0f %.0f %.0f\r\n%-15s%.0f %.0f %.0f\r\n" ,
                   spaceobj->name,
                   spaceobj->pos.x,
@@ -95,7 +95,7 @@ void do_radar( Character *ch, char *argument )
   set_char_color(  AT_WHITE, ch );
   for ( spaceobj = first_spaceobject; spaceobj; spaceobj = spaceobj->next )
     {
-      if ( IsSpaceobjectInRange( ship, spaceobj ) && spaceobj->type > SPACE_PLANET && str_cmp(spaceobj->name,"") )
+      if ( IsSpaceobjectInRange( ship, spaceobj ) && spaceobj->type > SPACE_PLANET && StrCmp(spaceobj->name,"") )
         ch_printf(ch, "%-15s%.0f %.0f %.0f\r\n%-15s%.0f %.0f %.0f\r\n" ,
                   spaceobj->name,
                   spaceobj->pos.x,

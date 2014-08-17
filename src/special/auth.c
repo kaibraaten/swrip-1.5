@@ -38,7 +38,7 @@ bool spec_auth( Character *ch )
       RemoveBit(victim->pcdata->flags, PCFLAG_UNAUTHED);
       if ( victim->pcdata->authed_by )
         DISPOSE( victim->pcdata->authed_by );
-      victim->pcdata->authed_by = str_dup( ch->name );
+      victim->pcdata->authed_by = CopyString( ch->name );
       sprintf( buf, "%s authorized %s", ch->name,
                victim->name );
       to_channel( buf, CHANNEL_MONITOR, "Monitor", ch->top_level );

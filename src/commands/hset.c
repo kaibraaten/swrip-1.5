@@ -7,8 +7,8 @@ void do_hset( Character *ch, char *argument )
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
 
-  smash_tilde( argument );
-  argument = one_argument( argument, arg1 );
+  SmashTilde( argument );
+  argument = OneArgument( argument, arg1 );
 
   if ( arg1[0] == '\0' )
     {
@@ -19,7 +19,7 @@ void do_hset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg1, "save" ) )
+  if ( !StrCmp( arg1, "save" ) )
     {
       log_string_plus( "Saving help files.", LOG_NORMAL, LEVEL_GREATER );
       SaveHelpFiles();
@@ -27,9 +27,9 @@ void do_hset( Character *ch, char *argument )
       return;
     }
 
-  if ( str_cmp( arg1, "remove" ) )
+  if ( StrCmp( arg1, "remove" ) )
     {
-      argument = one_argument( argument, arg2 );
+      argument = OneArgument( argument, arg2 );
     }
 
   pHelp = GetHelpFile( ch, argument );
@@ -40,7 +40,7 @@ void do_hset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg1, "remove" ) )
+  if ( !StrCmp( arg1, "remove" ) )
     {
       UnlinkHelpFile( pHelp );
       DestroyHelpFile( pHelp );
@@ -48,17 +48,17 @@ void do_hset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg1, "level" ) )
+  if ( !StrCmp( arg1, "level" ) )
     {
       pHelp->level = atoi( arg2 );
       send_to_char( "Done.\r\n", ch );
       return;
     }
 
-  if ( !str_cmp( arg1, "keyword" ) )
+  if ( !StrCmp( arg1, "keyword" ) )
     {
       DISPOSE( pHelp->keyword );
-      pHelp->keyword = str_dup( strupper(arg2) );
+      pHelp->keyword = CopyString( StringToUppercase(arg2) );
       send_to_char( "Done.\r\n", ch );
       return;
     }

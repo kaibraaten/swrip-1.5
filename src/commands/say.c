@@ -31,7 +31,7 @@ void do_say( Character *ch, char *argument )
 
       if ( !knows_language(vch, ch->speaking, ch)
 	   && ( !IsNpc(ch) || ch->speaking != 0 ) )
-        sbuf = scramble(argument, ch->speaking);
+        sbuf = Scramble(argument, ch->speaking);
 
       sbuf = drunk_speech( sbuf, ch );
 
@@ -47,7 +47,7 @@ void do_say( Character *ch, char *argument )
     {
       sprintf( buf, "%s: %s", IsNpc( ch ) ? ch->short_descr : ch->name,
                argument );
-      append_to_file( LOG_FILE, buf );
+      AppendToFile( LOG_FILE, buf );
     }
 
   mprog_speech_trigger( argument, ch );

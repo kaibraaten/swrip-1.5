@@ -8,7 +8,7 @@ void do_study( Character *ch, char *argument ) /* study by Absalom */
   OBJ_DATA *obj;
   int sn = 0, bookskills = 0, book;
 
-  one_argument( argument, arg );
+  OneArgument( argument, arg );
 
   if ( arg[0] == '\0' )
     {
@@ -41,7 +41,7 @@ void do_study( Character *ch, char *argument ) /* study by Absalom */
         bookskills++;
       if( obj->value[3] >= 0 )
         bookskills++;
-      book = number_range( 1, bookskills );
+      book = GetRandomNumberFromRange( 1, bookskills );
       sn = obj->value[book];
 
       if ( sn < 0 || sn >= MAX_SKILL )
@@ -50,7 +50,7 @@ void do_study( Character *ch, char *argument ) /* study by Absalom */
           return;
         }
       SetWaitState( ch, skill_table[gsn_study]->beats );
-      if ( number_percent() >= 55 + ch->pcdata->learned[gsn_study] * 4/5)
+      if ( GetRandomPercent() >= 55 + ch->pcdata->learned[gsn_study] * 4/5)
         {
           send_to_char("You cannot glean any knowledge from it.\r\n",ch);
           learn_from_failure( ch, gsn_study );

@@ -55,7 +55,7 @@ void do_hyperspace(Character *ch, char *argument )
       return;
     }
 
-  if ( argument && !str_cmp( argument, "off" )
+  if ( argument && !StrCmp( argument, "off" )
        && !IsShipInHyperspace( ship ) )
     {
       send_to_char("&RHyperdrive not active.\r\n",ch);
@@ -98,7 +98,7 @@ void do_hyperspace(Character *ch, char *argument )
       return;
     }
 
-  if ( argument && !str_cmp( argument, "off" )
+  if ( argument && !StrCmp( argument, "off" )
        && IsShipInHyperspace( ship ) )
     {
       ShipToSpaceobject (ship, ship->currjump);
@@ -119,9 +119,9 @@ void do_hyperspace(Character *ch, char *argument )
           if( !spaceobject )
 	    ship->currjump = ship->spaceobject;
 
-          vector_copy( &tmp, &ship->pos );
-          vector_copy( &ship->pos, &ship->hyperpos );
-          vector_copy( &ship->hyperpos, &tmp );
+          CopyVector( &tmp, &ship->pos );
+          CopyVector( &ship->pos, &ship->hyperpos );
+          CopyVector( &ship->hyperpos, &tmp );
           ship->currjump = NULL;
 
           echo_to_room( AT_YELLOW, get_room_index(ship->room.pilotseat), "Hyperjump complete.");
@@ -130,9 +130,9 @@ void do_hyperspace(Character *ch, char *argument )
           EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );
           ship->shipstate = SHIP_READY;
           DISPOSE( ship->home );
-          ship->home = str_dup( ship->spaceobject->name );
+          ship->home = CopyString( ship->spaceobject->name );
 
-          if ( str_cmp("Public",ship->owner) )
+          if ( StrCmp("Public",ship->owner) )
             SaveShip(ship);
 
           for( dship = first_ship; dship; dship = dship->next )
@@ -144,9 +144,9 @@ void do_hyperspace(Character *ch, char *argument )
                          z );
                 EchoToNearbyShips( AT_YELLOW, dship, buf , NULL );
                 DISPOSE( dship->home );
-                dship->home = str_dup( ship->home );
+                dship->home = CopyString( ship->home );
 
-                if ( str_cmp("Public",dship->owner) )
+                if ( StrCmp("Public",dship->owner) )
                   SaveShip(dship);
               }
 
@@ -198,7 +198,7 @@ void do_hyperspace(Character *ch, char *argument )
     the_chance = IsNpc(ch) ? 0
       : (int) (ch->pcdata->learned[gsn_capitalships]);
 
-  if ( number_percent( ) > the_chance )
+  if ( GetRandomPercent( ) > the_chance )
     {
       send_to_char("&RYou can't figure out which lever to use.\r\n",ch);
       if ( ship->sclass == FIGHTER_SHIP )
@@ -225,11 +225,11 @@ void do_hyperspace(Character *ch, char *argument )
 
   ship->energy -= 100;
 
-  vector_copy( &tmp, &ship->pos );
-  vector_copy( &ship->pos, &ship->jump );
-  vector_copy( &ship->hyperpos, &tmp );
-  vector_copy( &ship->jump, &tmp );
-  vector_copy( &ship->originpos, &tmp );
+  CopyVector( &tmp, &ship->pos );
+  CopyVector( &ship->pos, &ship->jump );
+  CopyVector( &ship->hyperpos, &tmp );
+  CopyVector( &ship->jump, &tmp );
+  CopyVector( &ship->originpos, &tmp );
 
   if ( ship->sclass == FIGHTER_SHIP )
     learn_from_success( ch, gsn_starfighters );

@@ -38,7 +38,7 @@ void do_grub (Character *ch, char *argument)
   int  op_num = 0;                          /* num of operands on cmd line  */
 
   gr_init();                                /* initialize data structures   */
-  argument = one_argument (argument, arg1);
+  argument = OneArgument (argument, arg1);
   if ( !*arg1 )
     {
       ch_printf(ch, "Syntax <max results> [keywords] [operands].\r\n");
@@ -52,12 +52,12 @@ void do_grub (Character *ch, char *argument)
       return;
     }
 
-  argument = one_argument (argument, arg1);
+  argument = OneArgument (argument, arg1);
   while ( *arg1 )
     {                                           /* build the operand table */
       if ( !gr_parse_operand (ch, arg1, &or_sw, &op_num) )
         return;
-      argument = one_argument (argument, arg1);
+      argument = OneArgument (argument, arg1);
     }
   /*display_operand_table (op_num);*/
   gr_read( ch, op_num, or_sw, dis_num );      /* read the input file     */
@@ -226,7 +226,7 @@ static bool gr_parse_operator (Character *ch, const char *pch, int *op_num)
 
   gr_op[*op_num].op = -1;
   for (cou=0; cou<7; cou++)
-    if ( !str_prefix(opstr[cou], pch) )
+    if ( !StringPrefix(opstr[cou], pch) )
       {
         gr_op[*op_num].op = cou;
         break;
@@ -266,11 +266,11 @@ static bool gr_parse_operand (Character *ch, const char *arg, bool *or_sw, int *
 {
   int cou;
 
-  if ( !str_cmp(arg, "or") )
+  if ( !StrCmp(arg, "or") )
     return *or_sw = true;
 
   for (cou=1; cou<=GR_NUM_FIELDS; cou++)          /* check field name    */
-    if ( !str_prefix( gr_fd[cou-1].nam, arg ) )
+    if ( !StringPrefix( gr_fd[cou-1].nam, arg ) )
       {
         arg += strlen( gr_fd[ cou-1 ].nam );     /* advance to operator */
         gr_op[ *op_num ].field = cou-1;          /* store field name    */

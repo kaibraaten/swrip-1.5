@@ -5,9 +5,9 @@ void do_bamfout( Character *ch, char *argument )
 {
   if ( !IsNpc(ch) )
     {
-      smash_tilde( argument );
+      SmashTilde( argument );
       DISPOSE( ch->pcdata->bamfout );
-      ch->pcdata->bamfout = str_dup( argument );
+      ch->pcdata->bamfout = CopyString( argument );
       send_to_char( "Ok.\r\n", ch );
     }
 }

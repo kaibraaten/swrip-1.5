@@ -19,7 +19,7 @@ void do_mpat( Character *ch, char *argument )
       return;
     }
 
-  argument = one_argument( argument, arg );
+  argument = OneArgument( argument, arg );
 
   if ( arg[0] == '\0' || argument[0] == '\0' )
     {

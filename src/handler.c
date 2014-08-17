@@ -56,7 +56,7 @@ void explode( OBJ_DATA *obj )
         objcont = objcont->in_obj;
 
       for ( xch = first_char; xch; xch = xch->next )
-        if ( !IsNpc( xch ) && nifty_is_name( obj->armed_by, xch->name ) )
+        if ( !IsNpc( xch ) && NiftyIsName( obj->armed_by, xch->name ) )
           {
             if ( objcont->carried_by )
               {
@@ -105,7 +105,7 @@ void room_explode_1( OBJ_DATA *obj, Character *xch, Room *room, int blast )
     {
       rnext = rch->next_in_room;
       act( AT_WHITE, "The shockwave from a massive explosion rips through your body!", room->first_person , obj, NULL, TO_ROOM );
-      dam = number_range ( obj->value[OVAL_EXPLOSIVE_MIN_DMG] , obj->value[OVAL_EXPLOSIVE_MAX_DMG] );
+      dam = GetRandomNumberFromRange ( obj->value[OVAL_EXPLOSIVE_MIN_DMG] , obj->value[OVAL_EXPLOSIVE_MAX_DMG] );
       damage( rch, rch , dam, TYPE_UNDEFINED );
       if ( !char_died(rch) )
         {
@@ -1181,19 +1181,19 @@ Character *get_char_room( const Character *ch, const char *argument )
   int number, count;
   vnum_t vnum = INVALID_VNUM;
 
-  number = number_argument( argument, arg );
+  number = NumberArgument( argument, arg );
 
-  if ( !str_cmp( arg, "self" ) )
+  if ( !StrCmp( arg, "self" ) )
     return (Character*)ch;
 
-  if ( GetTrustLevel(ch) >= LEVEL_CREATOR && is_number( arg ) )
+  if ( GetTrustLevel(ch) >= LEVEL_CREATOR && IsNumber( arg ) )
     vnum = atoi( arg );
 
   count  = 0;
 
   for ( rch = ch->in_room->first_person; rch; rch = rch->next_in_room )
     if ( CanSeeCharacter( ch, rch )
-         &&  (( (nifty_is_name( arg, rch->name ) || (!IsNpc(rch) && nifty_is_name( arg, rch->pcdata->title )))
+         &&  (( (NiftyIsName( arg, rch->name ) || (!IsNpc(rch) && NiftyIsName( arg, rch->pcdata->title )))
                 ||  (IsNpc(rch) && vnum == rch->pIndexData->vnum))) )
       {
         if ( number == 0 && !IsNpc(rch) )
@@ -1214,8 +1214,8 @@ Character *get_char_room( const Character *ch, const char *argument )
   for ( rch = ch->in_room->first_person; rch; rch = rch->next_in_room )
     {
       if ( !CanSeeCharacter( ch, rch ) ||
-           (!nifty_is_name_prefix( arg, rch->name ) &&
-            (IsNpc(rch) || (!IsNpc(rch) && !nifty_is_name_prefix( arg, rch->pcdata->title )))
+           (!NiftyIsNamePrefix( arg, rch->name ) &&
+            (IsNpc(rch) || (!IsNpc(rch) && !NiftyIsNamePrefix( arg, rch->pcdata->title )))
             )
            )
         continue;
@@ -1239,21 +1239,21 @@ Character *get_char_world( const Character *ch, const char *argument )
   int number, count;
   vnum_t vnum = INVALID_VNUM;
 
-  number = number_argument( argument, arg );
+  number = NumberArgument( argument, arg );
   count  = 0;
 
-  if ( !str_cmp( arg, "self" ) )
+  if ( !StrCmp( arg, "self" ) )
     return (Character*)ch;
 
   /*
    * Allow reference by vnum for saints+                        -Thoric
    */
-  if ( GetTrustLevel(ch) >= LEVEL_CREATOR && is_number( arg ) )
+  if ( GetTrustLevel(ch) >= LEVEL_CREATOR && IsNumber( arg ) )
     vnum = atoi( arg );
 
   /* check the room for an exact match */
   for ( wch = ch->in_room->first_person; wch; wch = wch->next_in_room )
-    if ( (nifty_is_name( arg, wch->name )
+    if ( (NiftyIsName( arg, wch->name )
           ||  (IsNpc(wch) && vnum == wch->pIndexData->vnum)) && IsWizVis(ch,wch))
       {
         if ( number == 0 && !IsNpc(wch) )
@@ -1267,7 +1267,7 @@ Character *get_char_world( const Character *ch, const char *argument )
 
   /* check the world for an exact match */
   for ( wch = first_char; wch; wch = wch->next )
-    if ( (nifty_is_name( arg, wch->name )
+    if ( (NiftyIsName( arg, wch->name )
           ||  (IsNpc(wch) && vnum == wch->pIndexData->vnum)) && IsWizVis(ch,wch) )
       {
         if ( number == 0 && !IsNpc(wch) )
@@ -1289,7 +1289,7 @@ Character *get_char_world( const Character *ch, const char *argument )
   count  = 0;
   for ( wch = ch->in_room->first_person; wch; wch = wch->next_in_room )
     {
-      if ( !nifty_is_name_prefix( arg, wch->name ) )
+      if ( !NiftyIsNamePrefix( arg, wch->name ) )
         continue;
       if ( number == 0 && !IsNpc(wch) && IsWizVis(ch,wch))
         return wch;
@@ -1306,7 +1306,7 @@ Character *get_char_world( const Character *ch, const char *argument )
   count  = 0;
   for ( wch = first_char; wch; wch = wch->next )
     {
-      if ( !nifty_is_name_prefix( arg, wch->name ) )
+      if ( !NiftyIsNamePrefix( arg, wch->name ) )
         continue;
       if ( number == 0 && !IsNpc(wch) && IsWizVis(ch, wch) )
         return wch;
@@ -1340,11 +1340,11 @@ OBJ_DATA *get_obj_list( const Character *ch, const char *argument, OBJ_DATA *lis
 {
   char arg[MAX_INPUT_LENGTH];
   OBJ_DATA *obj = NULL;
-  int number = number_argument( argument, arg );
+  int number = NumberArgument( argument, arg );
   int count  = 0;
 
   for ( obj = list; obj; obj = obj->next_content )
-    if ( CanSeeObject( ch, obj ) && nifty_is_name( arg, obj->name ) )
+    if ( CanSeeObject( ch, obj ) && NiftyIsName( arg, obj->name ) )
       if ( (count += obj->count) >= number )
         return obj;
 
@@ -1355,7 +1355,7 @@ OBJ_DATA *get_obj_list( const Character *ch, const char *argument, OBJ_DATA *lis
   count = 0;
 
   for ( obj = list; obj; obj = obj->next_content )
-    if ( CanSeeObject( ch, obj ) && nifty_is_name_prefix( arg, obj->name ) )
+    if ( CanSeeObject( ch, obj ) && NiftyIsNamePrefix( arg, obj->name ) )
       if ( (count += obj->count) >= number )
         return obj;
 
@@ -1372,10 +1372,10 @@ OBJ_DATA *get_obj_list_rev( const Character *ch, const char *argument, OBJ_DATA 
   int number;
   int count;
 
-  number = number_argument( argument, arg );
+  number = NumberArgument( argument, arg );
   count  = 0;
   for ( obj = list; obj; obj = obj->prev_content )
-    if ( CanSeeObject( ch, obj ) && nifty_is_name( arg, obj->name ) )
+    if ( CanSeeObject( ch, obj ) && NiftyIsName( arg, obj->name ) )
       if ( (count += obj->count) >= number )
         return obj;
 
@@ -1385,7 +1385,7 @@ OBJ_DATA *get_obj_list_rev( const Character *ch, const char *argument, OBJ_DATA 
   */
   count = 0;
   for ( obj = list; obj; obj = obj->prev_content )
-    if ( CanSeeObject( ch, obj ) && nifty_is_name_prefix( arg, obj->name ) )
+    if ( CanSeeObject( ch, obj ) && NiftyIsNamePrefix( arg, obj->name ) )
       if ( (count += obj->count) >= number )
         return obj;
 
@@ -1431,18 +1431,18 @@ OBJ_DATA *get_obj_world( const Character *ch, const char *argument )
   if ( ( obj = get_obj_here( ch, argument ) ) != NULL )
     return obj;
 
-  number = number_argument( argument, arg );
+  number = NumberArgument( argument, arg );
 
   /*
    * Allow reference by vnum for saints+                        -Thoric
    */
-  if ( GetTrustLevel(ch) >= LEVEL_CREATOR && is_number( arg ) )
+  if ( GetTrustLevel(ch) >= LEVEL_CREATOR && IsNumber( arg ) )
     vnum = atoi( arg );
 
   count  = 0;
 
   for ( obj = first_object; obj; obj = obj->next )
-    if ( CanSeeObject( ch, obj ) && (nifty_is_name( arg, obj->name )
+    if ( CanSeeObject( ch, obj ) && (NiftyIsName( arg, obj->name )
                                     ||   vnum == obj->pIndexData->vnum) )
       if ( (count += obj->count) >= number )
         return obj;
@@ -1457,7 +1457,7 @@ OBJ_DATA *get_obj_world( const Character *ch, const char *argument )
   */
   count  = 0;
   for ( obj = first_object; obj; obj = obj->next )
-    if ( CanSeeObject( ch, obj ) && nifty_is_name_prefix( arg, obj->name ) )
+    if ( CanSeeObject( ch, obj ) && NiftyIsNamePrefix( arg, obj->name ) )
       if ( (count += obj->count) >= number )
         return obj;
 
@@ -1477,12 +1477,12 @@ OBJ_DATA *find_obj( Character *ch, const char *orig_argument, bool carryonly )
   OBJ_DATA *obj;
 
   strcpy(argument, orig_argument);
-  argument = one_argument( argument, arg1 );
-  argument = one_argument( argument, arg2 );
+  argument = OneArgument( argument, arg1 );
+  argument = OneArgument( argument, arg2 );
 
-  if ( !str_cmp( arg2, "from" )
+  if ( !StrCmp( arg2, "from" )
        &&   argument[0] != '\0' )
-    argument = one_argument( argument, arg2 );
+    argument = OneArgument( argument, arg2 );
 
   if ( arg2[0] == '\0' )
     {
@@ -1759,7 +1759,7 @@ ch_ret spring_trap( Character *ch, OBJ_DATA *obj )
       txt = "surrounded by a mysterious aura";          break;
     }
 
-  dam = number_range( obj->value[OVAL_TRAP_STRENGTH], obj->value[OVAL_TRAP_STRENGTH] * 2);
+  dam = GetRandomNumberFromRange( obj->value[OVAL_TRAP_STRENGTH], obj->value[OVAL_TRAP_STRENGTH] * 2);
   sprintf( buf, "You are %s!", txt );
   act( AT_HITME, buf, ch, NULL, NULL, TO_CHAR );
   sprintf( buf, "$n is %s.", txt );
@@ -2376,7 +2376,7 @@ bool chance( const Character *ch, short percent )
 
   ms = 10 - abs(ch->mental_state);
 
-  if ( (number_percent() - GetCurrentLuck(ch) + 13 - ms) <= percent )
+  if ( (GetRandomPercent() - GetCurrentLuck(ch) + 13 - ms) <= percent )
     return true;
   else
     return false;
@@ -2390,7 +2390,7 @@ bool chance_attrib( const Character *ch, short percent, short attrib )
       return false;
     }
 
-  if (number_percent() - GetCurrentLuck(ch) + 13 - attrib + 13 <= percent )
+  if (GetRandomPercent() - GetCurrentLuck(ch) + 13 - attrib + 13 <= percent )
     return true;
   else
     return false;
@@ -2407,10 +2407,10 @@ OBJ_DATA *clone_object( const OBJ_DATA *obj )
 
   CREATE( clone, OBJ_DATA, 1 );
   clone->pIndexData     = obj->pIndexData;
-  clone->name           = str_dup( obj->name );
-  clone->short_descr    = str_dup( obj->short_descr );
-  clone->description    = str_dup( obj->description );
-  clone->action_desc    = str_dup( obj->action_desc );
+  clone->name           = CopyString( obj->name );
+  clone->short_descr    = CopyString( obj->short_descr );
+  clone->description    = CopyString( obj->description );
+  clone->action_desc    = CopyString( obj->action_desc );
   clone->item_type      = obj->item_type;
   clone->extra_flags    = obj->extra_flags;
   clone->magic_flags    = obj->magic_flags;
@@ -2468,10 +2468,10 @@ OBJ_DATA *group_object( OBJ_DATA *obj1, OBJ_DATA *obj2 )
     return obj1;
 
   if ( obj1->pIndexData == obj2->pIndexData
-       && !str_cmp( obj1->name,         obj2->name )
-       && !str_cmp( obj1->short_descr,  obj2->short_descr )
-       && !str_cmp( obj1->description,  obj2->description )
-       && !str_cmp( obj1->action_desc,  obj2->action_desc )
+       && !StrCmp( obj1->name,         obj2->name )
+       && !StrCmp( obj1->short_descr,  obj2->short_descr )
+       && !StrCmp( obj1->description,  obj2->description )
+       && !StrCmp( obj1->action_desc,  obj2->action_desc )
        && obj1->item_type    == obj2->item_type
        && obj1->extra_flags  == obj2->extra_flags
        && obj1->magic_flags  == obj2->magic_flags

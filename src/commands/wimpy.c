@@ -6,7 +6,7 @@ void do_wimpy( Character *ch, char *argument )
   char arg[MAX_INPUT_LENGTH];
   int wimpy;
 
-  one_argument( argument, arg );
+  OneArgument( argument, arg );
 
   if ( arg[0] == '\0' )
     wimpy = (int) ch->max_hit / 5;

@@ -5,7 +5,7 @@ void do_channels( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
 
-  one_argument( argument, arg );
+  OneArgument( argument, arg );
 
   if ( arg[0] == '\0' )
     {
@@ -150,49 +150,49 @@ void do_channels( Character *ch, char *argument )
           return;
         }
 
-      if ( !str_cmp( arg+1, "auction"  ) )
+      if ( !StrCmp( arg+1, "auction"  ) )
 	bit = CHANNEL_AUCTION;
-      else if ( !str_cmp( arg+1, "chat"     ) )
+      else if ( !StrCmp( arg+1, "chat"     ) )
 	bit = CHANNEL_CHAT;
-      else if ( !str_cmp( arg+1, "ooc"      ) )
+      else if ( !StrCmp( arg+1, "ooc"      ) )
 	bit = CHANNEL_OOC;
-      else if ( !str_cmp( arg+1, "clan"     ) )
+      else if ( !StrCmp( arg+1, "clan"     ) )
 	bit = CHANNEL_CLAN;
-      else if ( !str_cmp( arg+1, "guild"    ) )
+      else if ( !StrCmp( arg+1, "guild"    ) )
 	bit = CHANNEL_GUILD;
-      else if ( !str_cmp( arg+1, "tells"    ) )
+      else if ( !StrCmp( arg+1, "tells"    ) )
 	bit = CHANNEL_TELLS;
-      else if ( !str_cmp( arg+1, "immtalk"  ) )
+      else if ( !StrCmp( arg+1, "immtalk"  ) )
 	bit = CHANNEL_IMMTALK;
-      else if ( !str_cmp( arg+1, "log"      ) )
+      else if ( !StrCmp( arg+1, "log"      ) )
 	bit = CHANNEL_LOG;
-      else if ( !str_cmp( arg+1, "build"    ) )
+      else if ( !StrCmp( arg+1, "build"    ) )
 	bit = CHANNEL_BUILD;
-      else if ( !str_cmp( arg+1, "pray"     ) )
+      else if ( !StrCmp( arg+1, "pray"     ) )
 	bit = CHANNEL_PRAY;
-      else if ( !str_cmp( arg+1, "avatar"   ) )
+      else if ( !StrCmp( arg+1, "avatar"   ) )
 	bit = CHANNEL_AVTALK;
-      else if ( !str_cmp( arg+1, "monitor"  ) )
+      else if ( !StrCmp( arg+1, "monitor"  ) )
 	bit = CHANNEL_MONITOR;
-      else if ( !str_cmp( arg+1, "newbie"   ) )
+      else if ( !StrCmp( arg+1, "newbie"   ) )
 	bit = CHANNEL_NEWBIE;
-      else if ( !str_cmp( arg+1, "music"    ) )
+      else if ( !StrCmp( arg+1, "music"    ) )
 	bit = CHANNEL_MUSIC;
-      else if ( !str_cmp( arg+1, "ask"      ) )
+      else if ( !StrCmp( arg+1, "ask"      ) )
 	bit = CHANNEL_ASK;
-      else if ( !str_cmp( arg+1, "shout"    ) )
+      else if ( !StrCmp( arg+1, "shout"    ) )
 	bit = CHANNEL_SHOUT;
-      else if ( !str_cmp( arg+1, "yell"     ) )
+      else if ( !StrCmp( arg+1, "yell"     ) )
 	bit = CHANNEL_YELL;
-      else if ( !str_cmp( arg+1, "comm"     ) )
+      else if ( !StrCmp( arg+1, "comm"     ) )
 	bit = CHANNEL_COMM;
-      else if ( !str_cmp( arg+1, "order"    ) )
+      else if ( !StrCmp( arg+1, "order"    ) )
 	bit = CHANNEL_ORDER;
-      else if ( !str_cmp( arg+1, "wartalk"  ) )
+      else if ( !StrCmp( arg+1, "wartalk"  ) )
 	bit = CHANNEL_WARTALK;
-      else if ( !str_cmp( arg+1, "arena"  ) )
+      else if ( !StrCmp( arg+1, "arena"  ) )
 	bit = CHANNEL_ARENA;
-      else if ( !str_cmp( arg+1, "all"      ) )
+      else if ( !StrCmp( arg+1, "all"      ) )
 	ClearAll = true;
       else
         {

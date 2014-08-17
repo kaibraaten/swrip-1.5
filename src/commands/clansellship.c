@@ -22,8 +22,8 @@ void do_clansellship(Character *ch, char *argument )
   clan = ch->pcdata->clan;
 
   if ( ( ch->pcdata->bestowments
-         &&    is_name("clanbuyship", ch->pcdata->bestowments))
-       ||   !str_cmp( ch->name, clan->leadership.leader  ))
+         &&    IsName("clanbuyship", ch->pcdata->bestowments))
+       ||   !StrCmp( ch->name, clan->leadership.leader  ))
     ;
   else
     {
@@ -43,13 +43,13 @@ void do_clansellship(Character *ch, char *argument )
         }
     }
 
-  if ( !str_cmp( ship->owner , "" )  || ship->type == MOB_SHIP )
+  if ( !StrCmp( ship->owner , "" )  || ship->type == MOB_SHIP )
     {
       send_to_char( "&RThat ship is not owned!\r\n" ,ch );
       return;
     }
 
-  if ( str_cmp( ship->owner , ch->pcdata->clan->name ) )
+  if ( StrCmp( ship->owner , ch->pcdata->clan->name ) )
     {
       send_to_char( "&RThat isn't your ship!" ,ch );
       return;
@@ -64,8 +64,8 @@ void do_clansellship(Character *ch, char *argument )
        NULL, argument , TO_ROOM );
 
   DISPOSE( ship->owner );
-  ship->owner = str_dup( "" );
-  ship->pilot = str_dup( "" );
-  ship->copilot = str_dup( "" );
+  ship->owner = CopyString( "" );
+  ship->pilot = CopyString( "" );
+  ship->copilot = CopyString( "" );
   SaveShip( ship );
 }

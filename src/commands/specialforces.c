@@ -35,13 +35,13 @@ void do_special_forces ( Character *ch , char *argument )
 
       the_chance = (int) (ch->pcdata->learned[gsn_specialforces]);
 
-      if ( number_percent( ) < the_chance )
+      if ( GetRandomPercent( ) < the_chance )
         {
           send_to_char( "&GYou begin making the call for reinforcements.\r\n", ch);
           act( AT_PLAIN, "$n begins issuing orders int $s comlink.", ch,
                NULL, argument , TO_ROOM );
           add_timer ( ch , TIMER_DO_FUN , 1 , do_special_forces , SUB_PAUSE );
-          ch->dest_buf = str_dup(arg);
+          ch->dest_buf = CopyString(arg);
           return;
         }
       send_to_char("&RYou call for reinforcements but nobody answers.\r\n",ch);
@@ -71,12 +71,12 @@ void do_special_forces ( Character *ch , char *argument )
 
   learn_from_success( ch, gsn_specialforces );
 
-  if ( nifty_is_name( "empire" , ch->pcdata->clan->name ) )
+  if ( NiftyIsName( "empire" , ch->pcdata->clan->name ) )
     ch->backup_mob = MOB_VNUM_IMP_FORCES;
-  else if ( nifty_is_name( "rebel" , ch->pcdata->clan->name ) )
+  else if ( NiftyIsName( "rebel" , ch->pcdata->clan->name ) )
     ch->backup_mob = MOB_VNUM_NR_FORCES;
   else
     ch->backup_mob = MOB_VNUM_MERC_FORCES;
 
-  ch->backup_wait = number_range(1,2);
+  ch->backup_wait = GetRandomNumberFromRange(1,2);
 }

@@ -14,7 +14,7 @@ void do_backstab( Character *ch, char *argument )
       return;
     }
 
-  one_argument( argument, arg );
+  OneArgument( argument, arg );
 
   if ( ch->mount )
     {
@@ -67,7 +67,7 @@ void do_backstab( Character *ch, char *argument )
       return;
     }
 
-  percent = number_percent( ) - (GetCurrentLuck(ch) - 14)
+  percent = GetRandomPercent( ) - (GetCurrentLuck(ch) - 14)
     + (GetCurrentLuck(victim) - 13);
 
   SetWaitState( ch, skill_table[gsn_backstab]->beats );

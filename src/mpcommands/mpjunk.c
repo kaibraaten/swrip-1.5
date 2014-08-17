@@ -20,7 +20,7 @@ void do_mpjunk( Character *ch, char *argument )
       return;
     }
 
-  one_argument( argument, arg );
+  OneArgument( argument, arg );
 
   if ( arg[0] == '\0')
     {
@@ -28,7 +28,7 @@ void do_mpjunk( Character *ch, char *argument )
       return;
     }
 
-  if ( str_cmp( arg, "all" ) && str_prefix( "all.", arg ) )
+  if ( StrCmp( arg, "all" ) && StringPrefix( "all.", arg ) )
     {
       if ( ( obj = GetWornObject( ch, arg ) ) != NULL )
         {
@@ -44,7 +44,7 @@ void do_mpjunk( Character *ch, char *argument )
     for ( obj = ch->first_carrying; obj; obj = obj_next )
       {
         obj_next = obj->next_content;
-        if ( arg[3] == '\0' || is_name( &arg[4], obj->name ) )
+        if ( arg[3] == '\0' || IsName( &arg[4], obj->name ) )
           {
             if ( obj->wear_loc != WEAR_NONE)
               UnequipCharacter( ch, obj );

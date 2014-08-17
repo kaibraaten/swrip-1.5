@@ -38,7 +38,7 @@ void do_first_aid( Character *ch, char *argument )
       return;
     }
 
-  heal = number_range( 1, 150 );
+  heal = GetRandomNumberFromRange( 1, 150 );
 
   if ( heal > ch->pcdata->learned[gsn_first_aid]*2 )
     {

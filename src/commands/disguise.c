@@ -29,7 +29,7 @@ void do_disguise( Character *ch, char *argument )
 
   the_chance = (int) (ch->pcdata->learned[gsn]);
 
-  if ( number_percent( ) > the_chance )
+  if ( GetRandomPercent( ) > the_chance )
     {
       send_to_char( "You try to disguise yourself but fail.\r\n", ch );
       return;
@@ -38,7 +38,7 @@ void do_disguise( Character *ch, char *argument )
   if ( strlen(argument) > 50 )
     argument[50] = '\0';
 
-  smash_tilde( argument );
+  SmashTilde( argument );
   set_title( ch, argument );
   learn_from_success( ch, gsn );
   send_to_char( "Ok.\r\n", ch );

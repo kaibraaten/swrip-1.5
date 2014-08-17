@@ -14,7 +14,7 @@ void do_owhere( Character *ch, char *argument )
   const char *heading =
     "    Vnum  Short Desc        Vnum  Room/Char          Vnum  Container\r\n";
 
-  argument = one_argument( argument, arg );
+  argument = OneArgument( argument, arg );
 
   if ( arg[0] == '\0' )
     {
@@ -22,7 +22,7 @@ void do_owhere( Character *ch, char *argument )
       return;
     }
 
-  if ( is_number(arg) )
+  if ( IsNumber(arg) )
     vnum=atoi(arg);
 
   for ( obj = first_object; obj; obj = obj->next )
@@ -32,7 +32,7 @@ void do_owhere( Character *ch, char *argument )
           if ( vnum!=obj->pIndexData->vnum)
             continue;
         }
-      else if ( !nifty_is_name( arg, obj->name ) )
+      else if ( !NiftyIsName( arg, obj->name ) )
 	{
 	  continue;
 	}

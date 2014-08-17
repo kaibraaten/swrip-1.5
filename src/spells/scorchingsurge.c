@@ -24,7 +24,7 @@ ch_ret spell_scorching_surge( int sn, int level, Character *ch, void *vo )
 
   level       = umin(level/2, sizeof(dam_each)/sizeof(dam_each[0]) - 1);
   level       = umax(0, level);
-  dam         = number_range( dam_each[level] , dam_each[level] * 10 );
+  dam         = GetRandomNumberFromRange( dam_each[level] , dam_each[level] * 10 );
 
   if ( saves_spell_staff( level, victim ) )
     dam /= 2;

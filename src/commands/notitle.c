@@ -7,7 +7,7 @@ void do_notitle( Character *ch, char *argument )
   char arg[MAX_INPUT_LENGTH];
   Character *victim;
 
-  one_argument( argument, arg );
+  OneArgument( argument, arg );
 
   if ( arg[0] == '\0' )
     {

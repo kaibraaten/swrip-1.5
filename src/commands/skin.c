@@ -61,20 +61,20 @@ void do_skin( Character *ch, char *argument)
   name                = IsNpc(ch) ? korps->short_descr : corpse->short_descr;
   sprintf( buf, skin->short_descr, name );
   DISPOSE( skin->short_descr );
-  skin->short_descr = str_dup( buf );
+  skin->short_descr = CopyString( buf );
   sprintf( buf, skin->description, name );
   DISPOSE( skin->description );
-  skin->description = str_dup( buf );
+  skin->description = CopyString( buf );
 
   sprintf( buf, "The skinned bones of %s", name );
   DISPOSE( corpse->name );
-  corpse->name = str_dup( buf );
+  corpse->name = CopyString( buf );
   sprintf( buf, "The skinned bones of %s", name );
   DISPOSE( corpse->description );
-  corpse->description = str_dup( buf );
+  corpse->description = CopyString( buf );
   sprintf( buf, "The skinned bones of %s", name );
   DISPOSE( corpse->short_descr );
-  corpse->short_descr = str_dup( buf );
+  corpse->short_descr = CopyString( buf );
   corpse->value[1] = 1;
   corpse->value[2] = -1;
   corpse->timer = -1;

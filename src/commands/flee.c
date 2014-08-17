@@ -37,7 +37,7 @@ void do_flee( Character *ch, char *argument )
   for ( attempt = 0; attempt < 8; attempt++ )
     {
 
-      door = number_door( );
+      door = GetRandomDoor( );
       if ( ( pexit = get_exit(was_in, door) ) == NULL
            ||   !pexit->to_room
            || ( IsBitSet(pexit->exit_info, EX_CLOSED)

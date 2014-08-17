@@ -5,7 +5,7 @@ void do_allow( Character *ch, char *argument )
   char arg[MAX_INPUT_LENGTH];
   Ban *pban;
 
-  one_argument( argument, arg );
+  OneArgument( argument, arg );
 
   if ( arg[0] == '\0' )
     {
@@ -15,7 +15,7 @@ void do_allow( Character *ch, char *argument )
 
   for ( pban = first_ban; pban; pban = pban->next )
     {
-      if ( !str_cmp( arg, pban->name ) )
+      if ( !StrCmp( arg, pban->name ) )
         {
           UNLINK( pban, first_ban, last_ban, next, prev );
           if ( pban->ban_time )

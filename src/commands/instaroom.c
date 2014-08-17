@@ -16,8 +16,8 @@ void do_instaroom( Character *ch, char *argument )
                     ch );
       return;
     }
-  argument = one_argument(argument, arg);
-  if ( !str_cmp(argument, "nodoors") )
+  argument = OneArgument(argument, arg);
+  if ( !StrCmp(argument, "nodoors") )
     dodoors = false;
   else
     dodoors = true;

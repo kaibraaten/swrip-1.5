@@ -16,7 +16,7 @@ void do_pick( Character *ch, char *argument )
       return;
     }
 
-  one_argument( argument, arg );
+  OneArgument( argument, arg );
 
   if ( arg[0] == '\0' )
     {
@@ -67,7 +67,7 @@ void do_pick( Character *ch, char *argument )
           return;
         }
 
-      if ( !IsNpc(ch) && number_percent( ) > ch->pcdata->learned[gsn_pick_lock] )
+      if ( !IsNpc(ch) && GetRandomPercent( ) > ch->pcdata->learned[gsn_pick_lock] )
         {
           send_to_char( "You failed.\r\n", ch);
           learn_from_failure( ch, gsn_pick_lock );
@@ -106,7 +106,7 @@ void do_pick( Character *ch, char *argument )
           return;
         }
 
-      if ( !IsNpc(ch) && number_percent( ) > ch->pcdata->learned[gsn_pick_lock] )
+      if ( !IsNpc(ch) && GetRandomPercent( ) > ch->pcdata->learned[gsn_pick_lock] )
         {
           send_to_char( "You failed.\r\n", ch);
           learn_from_failure( ch, gsn_pick_lock );
@@ -140,13 +140,13 @@ void do_pick( Character *ch, char *argument )
 
       SetWaitState( ch, skill_table[gsn_pickshiplock]->beats );
 
-      if ( IsNpc(ch) || !ch->pcdata || number_percent( ) > ch->pcdata->learned[gsn_pickshiplock] )
+      if ( IsNpc(ch) || !ch->pcdata || GetRandomPercent( ) > ch->pcdata->learned[gsn_pickshiplock] )
         {
           send_to_char( "You failed.\r\n", ch);
           learn_from_failure( ch, gsn_pickshiplock );
           if ( ship->alarm == 0 )
             return;
-          if ( !str_cmp("Public",ship->owner) )
+          if ( !StrCmp("Public",ship->owner) )
             return;
           for ( d = first_descriptor; d; d = d->next )
             {
@@ -190,7 +190,7 @@ void do_pick( Character *ch, char *argument )
           learn_from_success( ch, gsn_pickshiplock );
           if ( ship->alarm == 0 )
             return;
-          if ( !str_cmp("Public",ship->owner) )
+          if ( !StrCmp("Public",ship->owner) )
             return;
           for ( d = first_descriptor; d; d = d->next )
             {

@@ -9,7 +9,7 @@ void do_shutdown( Character *ch, char *argument )
   Character *vch;
   Ship *ship;
 
-  if ( str_cmp( argument, "mud now" ) && str_cmp(argument, "nosave") )
+  if ( StrCmp( argument, "mud now" ) && StrCmp(argument, "nosave") )
     {
       send_to_char( "Syntax: 'shutdown mud now' or 'shutdown nosave'\r\n", ch );
       return;
@@ -24,7 +24,7 @@ void do_shutdown( Character *ch, char *argument )
   do_echo( ch, buf );
 
   /* Save all characters before booting. */
-  if ( str_cmp(argument, "nosave") )
+  if ( StrCmp(argument, "nosave") )
     {
       for ( vch = first_char; vch; vch = vch->next )
         if ( !IsNpc( vch ) )

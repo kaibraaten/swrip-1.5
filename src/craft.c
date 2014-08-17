@@ -124,7 +124,7 @@ static void AfterDelay( CraftingSession *session )
 
   ch->substate = SUB_NONE;
 
-  if ( number_percent() > the_chance * 2  || !hasMaterials )
+  if ( GetRandomPercent() > the_chance * 2  || !hasMaterials )
     {
       ch_printf( ch, "&RYou hold up your newly created %s.\r\n", itemType );
       ch_printf( ch, "&RIt suddenly dawns upon you that you have created the most useless\r\n" );
@@ -297,7 +297,7 @@ CraftingSession *AllocateCraftingSession( CraftRecipe *recipe, Character *engine
   session->Engineer = engineer;
   session->Recipe = recipe;
   session->FoundMaterials = AllocateFoundMaterials( recipe->Materials );
-  session->CommandArgument = str_dup( commandArgument );
+  session->CommandArgument = CopyString( commandArgument );
 
   engineer->pcdata->CraftingSession = session;
 
@@ -332,7 +332,7 @@ static bool CheckSkill( const CraftingSession *session )
   Character *ch = session->Engineer;
   int the_chance = IsNpc(ch) ? ch->top_level : (int) (ch->pcdata->learned[session->Recipe->Skill]);
 
-  if( number_percent() >= the_chance )
+  if( GetRandomPercent() >= the_chance )
     {
       ch_printf( ch, "&RYou can't figure out what to do.\r\n" );
       learn_from_failure( ch, session->Recipe->Skill );
@@ -379,7 +379,7 @@ void StartCrafting( CraftingSession *session )
   obj = get_obj_index( session->Recipe->Prototype );
 
   ch_printf( ch, "&GYou begin the long process of creating %s.\r\n",
-	     aoran( GetItemTypeName( obj->item_type, obj->value[OVAL_WEAPON_TYPE] ) ) );
+	     AOrAn( GetItemTypeName( obj->item_type, obj->value[OVAL_WEAPON_TYPE] ) ) );
 
   act( AT_PLAIN, "$n takes $s tools and some material and begins to work.",
        ch, NULL, NULL, TO_ROOM );
@@ -434,7 +434,7 @@ static bool CheckMaterials( CraftingSession *session, bool extract )
 
 	  foundAll = false;
 	  ch_printf( ch, "&RYou need %s to complete the %s.\r\n",
-		     aoran( GetItemTypeName( material->Material.ItemType, 0 ) ),
+		     AOrAn( GetItemTypeName( material->Material.ItemType, 0 ) ),
 		     GetItemTypeName( proto->item_type, proto->value[OVAL_WEAPON_TYPE] ) );
 	}
 

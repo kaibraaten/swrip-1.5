@@ -8,7 +8,7 @@ void do_takedrug( Character *ch, char *argument )
   int drug;
   int sn;
 
-  if ( argument[0] == '\0' || !str_cmp(argument, "") )
+  if ( argument[0] == '\0' || !StrCmp(argument, "") )
     {
       send_to_char( "Use what?\r\n", ch );
       return;
@@ -44,7 +44,7 @@ void do_takedrug( Character *ch, char *argument )
       act( AT_PLAIN, "$n takes $p from $P.", ch, obj, obj->in_obj, TO_ROOM );
     }
 
-  if ( ch->fighting && number_percent( ) > (GetCurrentDexterity(ch) * 2 + 48) )
+  if ( ch->fighting && GetRandomPercent( ) > (GetCurrentDexterity(ch) * 2 + 48) )
     {
       act( AT_MAGIC, "$n accidentally drops $p rendering it useless.", ch, obj, NULL, TO_ROOM );
       act( AT_MAGIC, "Oops... $p gets knocked from your hands rendering it completely useless!",

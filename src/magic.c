@@ -111,7 +111,7 @@ int ch_slookup( const Character *ch, const char *name )
 
       if ( ch->pcdata->learned[sn] > 0
 	   && CharToLowercase(name[0]) == CharToLowercase(skill_table[sn]->name[0])
-	   &&!str_prefix( name, skill_table[sn]->name ) )
+	   &&!StringPrefix( name, skill_table[sn]->name ) )
 	{
 	  return sn;
 	}
@@ -135,7 +135,7 @@ int herb_lookup( const char *name )
 	}
 
       if ( CharToLowercase( name[0] ) == CharToLowercase( herb_table[sn]->name[0] )
-           && !str_prefix( name, herb_table[sn]->name ) )
+           && !StringPrefix( name, herb_table[sn]->name ) )
 	{
 	  return sn;
 	}
@@ -168,7 +168,7 @@ int skill_lookup( const char *name )
 			}
 
 		      if ( CharToLowercase( name[0] ) == CharToLowercase( skill_table[sn]->name[0] )
-			   &&!str_prefix( name, skill_table[sn]->name ) )
+			   &&!StringPrefix( name, skill_table[sn]->name ) )
 			{
 			  return sn;
 			}
@@ -218,7 +218,7 @@ int bsearch_skill( const char *name, int first, int top )
       int sn = (first + top) >> 1;
 
       if ( CharToLowercase( name[0] ) == CharToLowercase( skill_table[sn]->name[0] )
-           && !str_prefix( name, skill_table[sn]->name ) )
+           && !StringPrefix( name, skill_table[sn]->name ) )
 	{
 	  return sn;
 	}
@@ -252,7 +252,7 @@ int bsearch_skill_exact( const char *name, int first, int top )
     {
       int sn = (first + top) >> 1;
 
-      if ( !str_prefix(name, skill_table[sn]->name) )
+      if ( !StringPrefix(name, skill_table[sn]->name) )
 	{
 	  return sn;
 	}
@@ -287,7 +287,7 @@ int ch_bsearch_skill( const Character *ch, const char *name, int first, int top 
       int sn = (first + top) >> 1;
 
       if ( CharToLowercase(name[0]) == CharToLowercase(skill_table[sn]->name[0])
-           && !str_prefix(name, skill_table[sn]->name)
+           && !StringPrefix(name, skill_table[sn]->name)
            && ch->pcdata->learned[sn] > 0 )
 	{
 	  return sn;
@@ -795,7 +795,7 @@ int rd_parse(const Character *ch, int level, char *expr)
 
     case 'd':
     case 'D':
-      total = dice( total, rd_parse(ch, level, sexp[1]) );
+      total = RollDice( total, rd_parse(ch, level, sexp[1]) );
     break;
 
     case '^':
@@ -1000,7 +1000,7 @@ void *locate_targets( Character *ch, char *arg, int sn, Character **victim, OBJ_
       break;
 
     case TAR_CHAR_SELF:
-      if ( arg[0] != '\0' && !nifty_is_name( arg, ch->name ) )
+      if ( arg[0] != '\0' && !NiftyIsName( arg, ch->name ) )
         {
           send_to_char( "You cannot cast this spell on another.\r\n", ch );
           return &pAbort;
@@ -1063,11 +1063,11 @@ ch_ret obj_cast_spell( int sn, int level, Character *ch, Character *victim, OBJ_
    * 40 scrolls in battle too often ;)          -Thoric
    */
   if ( (skill->target == TAR_CHAR_OFFENSIVE
-        || number_bits(7) == 1)      /* 1/128 chance if non-offensive */
+        || NumberBits(7) == 1)      /* 1/128 chance if non-offensive */
        && skill->type != SKILL_HERB
        && !chance( ch, 95 + levdiff ) )
     {
-      switch( number_bits(2) )
+      switch( NumberBits(2) )
         {
         case 0:
 	  failed_casting( skill, ch, victim, NULL );
@@ -1082,7 +1082,7 @@ ch_ret obj_cast_spell( int sn, int level, Character *ch, Character *victim, OBJ_
 	    }
 
           act( AT_MAGIC, "$n's $t backfires!", ch, skill->name, victim, TO_NOTVICT );
-          return damage( ch, ch, number_range( 1, level ), TYPE_UNDEFINED );
+          return damage( ch, ch, GetRandomNumberFromRange( 1, level ), TYPE_UNDEFINED );
 
         case 2:
 	  failed_casting( skill, ch, victim, NULL );
@@ -1097,7 +1097,7 @@ ch_ret obj_cast_spell( int sn, int level, Character *ch, Character *victim, OBJ_
 	    }
 
           act( AT_MAGIC, "$n's $t backfires!", ch, skill->name, victim, TO_NOTVICT );
-          return damage( ch, ch, number_range( 1, level ), TYPE_UNDEFINED );
+          return damage( ch, ch, GetRandomNumberFromRange( 1, level ), TYPE_UNDEFINED );
         }
 
       return rNONE;
@@ -1185,9 +1185,9 @@ ch_ret obj_cast_spell( int sn, int level, Character *ch, Character *victim, OBJ_
       break;
     }
 
-  start_timer(&time_used);
+  StartTimer(&time_used);
   retcode = skill->spell_fun( sn, level, ch, vo );
-  end_timer(&time_used);
+  StopTimer(&time_used);
   update_userec(&time_used, &skill->userec);
 
   if ( retcode == rSPELL_FAILED )

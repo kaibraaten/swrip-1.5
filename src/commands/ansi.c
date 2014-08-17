@@ -5,7 +5,7 @@ void do_ansi( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
 
-  one_argument( argument, arg );
+  OneArgument( argument, arg );
 
   if ( arg[0] == '\0' )
     {
@@ -13,7 +13,7 @@ void do_ansi( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp(arg,"on") )
+  if ( !StrCmp(arg,"on") )
     {
       SetBit(ch->act,PLR_ANSI);
       set_char_color( AT_WHITE + AT_BLINK, ch);
@@ -21,7 +21,7 @@ void do_ansi( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp(arg,"off") )
+  if ( !StrCmp(arg,"off") )
     {
       RemoveBit(ch->act,PLR_ANSI);
       send_to_char( "Okay... ANSI support is now off\r\n", ch );

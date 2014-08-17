@@ -85,7 +85,7 @@ void do_trajectory( Character *ch, char *argument )
   if ( ship->sclass == CAPITAL_SHIP )
     the_chance = IsNpc(ch) ? 0
       : (int) (ch->pcdata->learned[gsn_capitalships]);
-  if ( number_percent( ) > the_chance )
+  if ( GetRandomPercent( ) > the_chance )
     {
       send_to_char("&RYou fail to work the controls properly.\r\n",ch);
       if ( ship->sclass == FIGHTER_SHIP )
@@ -97,9 +97,9 @@ void do_trajectory( Character *ch, char *argument )
       return;
     }
 
-  argument = one_argument( argument, arg2 );
-  argument = one_argument( argument, arg3 );
-  vector_init( &argvec );
+  argument = OneArgument( argument, arg2 );
+  argument = OneArgument( argument, arg3 );
+  InitializeVector( &argvec );
 
   if( arg2[0] != '\0' )
     argvec.x = atof( arg2 );
@@ -114,7 +114,7 @@ void do_trajectory( Character *ch, char *argument )
   else
     argvec.z = 1;
 
-  vector_copy( &ship->head, &argvec );
+  CopyVector( &ship->head, &argvec );
   ship->energy -= (ship->currspeed/10);
 
   ch_printf( ch ,"&GNew course set, approaching %.0f %.0f %.0f.\r\n",

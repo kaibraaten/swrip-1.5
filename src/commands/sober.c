@@ -11,8 +11,8 @@ void do_sober( Character *ch, char *argument )
   Character *victim;
   char arg1 [MAX_INPUT_LENGTH];
 
-  smash_tilde( argument );
-  argument = one_argument( argument, arg1 );
+  SmashTilde( argument );
+  argument = OneArgument( argument, arg1 );
 
   if ( ( victim = get_char_room( ch, arg1 ) ) == NULL )
     {

@@ -62,7 +62,7 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
   Character *ch = GetEngineer( session );
 
   strcpy( argument, eventArgs->CommandArguments );
-  argument = one_argument( argument, wearLoc );
+  argument = OneArgument( argument, wearLoc );
   strcpy( name, argument );
 
   if ( name[0] == '\0' )
@@ -92,7 +92,7 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
       return;
     }
 
-  ud->ItemName = str_dup( name );
+  ud->ItemName = CopyString( name );
 }
 
 static void MaterialFoundHandler( void *userData, MaterialFoundEventArgs *eventArgs )
@@ -115,14 +115,14 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *even
   SetBit( armor->wear_flags, ud->WearLocation );
 
   DISPOSE( armor->name );
-  armor->name = str_dup( ud->ItemName );
+  armor->name = CopyString( ud->ItemName );
 
   DISPOSE( armor->short_descr );
-  armor->short_descr = str_dup( ud->ItemName );
+  armor->short_descr = CopyString( ud->ItemName );
 
   DISPOSE( armor->description );
-  sprintf( description, "%s was dropped here.", capitalize( ud->ItemName ) );
-  armor->description = str_dup( description );
+  sprintf( description, "%s was dropped here.", Capitalize( ud->ItemName ) );
+  armor->description = CopyString( description );
 
   armor->value[OVAL_ARMOR_CONDITION] = armor->value[OVAL_ARMOR_AC] = ud->ArmorValue;
   armor->cost *= 10;

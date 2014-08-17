@@ -3,7 +3,7 @@
 void do_members( Character *ch, char *argument )
 {
   char arg1[MAX_STRING_LENGTH];
-  argument = one_argument( argument, arg1 );
+  argument = OneArgument( argument, arg1 );
 
   if( argument[0] == '\0' || arg1[0] == '\0' )
     {
@@ -11,9 +11,9 @@ void do_members( Character *ch, char *argument )
       return;
     }
 
-  if( !str_cmp( arg1, "show" ) )
+  if( !StrCmp( arg1, "show" ) )
     {
-      if( !str_cmp( argument, "all" ) )
+      if( !StrCmp( argument, "all" ) )
         {
           MEMBER_LIST *members_list;
           for( members_list = first_member_list; members_list; members_list = members_list->next )
@@ -25,25 +25,25 @@ void do_members( Character *ch, char *argument )
       return;
     }
 
-  if( !str_cmp( arg1, "create" ) )
+  if( !StrCmp( arg1, "create" ) )
     {
       MEMBER_LIST *members_list;
 
       CREATE( members_list, MEMBER_LIST, 1 );
-      members_list->name = str_dup( argument );
+      members_list->name = CopyString( argument );
       LINK( members_list, first_member_list, last_member_list, next, prev );
       save_member_list( members_list );
       ch_printf( ch, "Member lists \"%s\" created.\r\n", argument );
       return;
     }
 
-  if( !str_cmp( arg1, "delete" ) )
+  if( !StrCmp( arg1, "delete" ) )
     {
       MEMBER_LIST *members_list;
       MEMBER_DATA *member;
 
       for( members_list = first_member_list; members_list; members_list = members_list->next )
-        if( !str_cmp( argument, members_list->name ) )
+        if( !StrCmp( argument, members_list->name ) )
           {
 	    while( members_list->first_member )
               {

@@ -25,7 +25,7 @@ void do_score(Character * ch, char *argument)
   send_to_char("&C----------------------------------------------------------------------------\r\n", ch);
 
   ch_printf(ch,   "&cRace: %-17.10s                &cLog In:  &C%s\r",
-            capitalize(get_race(ch)), ( IsNpc(ch) ? "(null)" : ctime(&(ch->pcdata->logon)) ) );
+            Capitalize(get_race(ch)), ( IsNpc(ch) ? "(null)" : ctime(&(ch->pcdata->logon)) ) );
 
   ch_printf(ch,   "&cHitroll: &C%-2.2d  &cDamroll: &C%-2.2d   &cArmor: &C%-4d        &cSaved:  &C%s\r",
             GetHitRoll(ch), GetDamageRoll(ch), GetArmorClass(ch),
@@ -66,7 +66,7 @@ void do_score(Character * ch, char *argument)
 	      }
 
 	    ch_printf( ch, "&c%-15s   &CLevel: %-3d   Max: %-3s   Exp: %-10ld   Next: %-10ld\r\n",
-		       capitalize(ability_name[ability]),
+		       Capitalize(ability_name[ability]),
 		       GetAbilityLevel( ch, ability ), maxbuf,
 		       GetExperience( ch, ability ),
 		       exp_level( GetAbilityLevel( ch, ability ) + 1 ) );
@@ -74,7 +74,7 @@ void do_score(Character * ch, char *argument)
 	else
 	  {
 	    ch_printf( ch, "&c%-15s   &CLevel: %-3d   Max: ???   Exp: ???          Next: ???\r\n",
-		       capitalize(ability_name[ability]), GetAbilityLevel( ch, ability ), GetExperience( ch, ability ) );
+		       Capitalize(ability_name[ability]), GetAbilityLevel( ch, ability ), GetExperience( ch, ability ) );
 	  }
       }
   }
@@ -210,7 +210,7 @@ void do_score(Character * ch, char *argument)
 
   send_to_char( "\r\n", ch );
   ch_printf( ch, "&cWANTED ON: &C%s\r\n",
-             flag_string(ch->pcdata->wanted_flags, planet_flags) );
+             FlagString(ch->pcdata->wanted_flags, planet_flags) );
 
   if ( ch->pcdata->bestowments && ch->pcdata->bestowments[0] != '\0' )
     ch_printf( ch, "&cYou are bestowed with the command(s): &C%s.\r\n",
@@ -260,7 +260,7 @@ void do_score(Character * ch, char *argument)
             continue;
           if (ch->top_level < 20)
             {
-              ch_printf(ch, "&c[&C%-34.34s&c]    ", capitalize(sktmp->name));
+              ch_printf(ch, "&c[&C%-34.34s&c]    ", Capitalize(sktmp->name));
 
               if (i == 0)
                 i = 2;
@@ -271,17 +271,17 @@ void do_score(Character * ch, char *argument)
             {
               if (paf->modifier == 0)
                 ch_printf(ch, "&c[&C%-24.24s&c;&C%5d rds&c]    ",
-                          capitalize(sktmp->name),
+                          Capitalize(sktmp->name),
                           paf->duration);
               else
                 if (paf->modifier > 999)
 		  ch_printf(ch, "&c[&C%-15.15s&c; &C%7.7s;%5d rds&c]    ",
-                            capitalize(sktmp->name),
+                            Capitalize(sktmp->name),
                             tiny_affect_loc_name(paf->location),
                             paf->duration);
                 else
                   ch_printf(ch, "&c[&C%-11.11s&c;&C%+-3.3d %7.7s&c;&C%5d rds&c]    ",
-                            capitalize(sktmp->name),
+                            Capitalize(sktmp->name),
                             paf->modifier,
                             tiny_affect_loc_name(paf->location),
                             paf->duration);

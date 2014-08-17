@@ -86,7 +86,7 @@ void do_showstatistic( Character *ch, char *argument )
 	    }
 
           raceCh->ability.main = iC;
-	  sprintf( buf, "\r\n&c%-20s &B| &C", capitalize( ability_name[iC] ) );
+	  sprintf( buf, "\r\n&c%-20s &B| &C", Capitalize( ability_name[iC] ) );
 
           for( iC2 = 0; iC2 < MAX_ABILITY; iC2++ )
             {
@@ -109,7 +109,7 @@ void do_showstatistic( Character *ch, char *argument )
     }
   else
     {
-      sprintf( buf, "&R%s Statistics\r\n", capitalize(ability_name[pclass]));
+      sprintf( buf, "&R%s Statistics\r\n", Capitalize(ability_name[pclass]));
       send_to_pager( buf, ch );
 
       pager_printf( ch, "                     &B| &CCMB &B| &CPIL &B| &CENG &B| &CBH  &B| &CSMUG &B| &CDIP &B| &CLEA &B|" );

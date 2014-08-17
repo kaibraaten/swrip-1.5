@@ -7,7 +7,7 @@ void do_opstat( Character *ch, char *argument )
   MPROG_DATA *mprg;
   OBJ_DATA   *obj;
 
-  one_argument( argument, arg );
+  OneArgument( argument, arg );
 
   if ( arg[0] == '\0' )
     {

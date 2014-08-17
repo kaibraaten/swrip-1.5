@@ -12,10 +12,10 @@ void do_shiptrack( Character *ch, char *argument)
   char arg3[MAX_INPUT_LENGTH];
   char buf[MAX_STRING_LENGTH];
 
-  argument = one_argument( argument , arg);
-  argument = one_argument( argument , arg1);
-  argument = one_argument( argument , arg2);
-  argument = one_argument( argument , arg3);
+  argument = OneArgument( argument , arg);
+  argument = OneArgument( argument , arg1);
+  argument = OneArgument( argument , arg2);
+  argument = OneArgument( argument , arg3);
 
   if ( (ship = GetShipFromCockpit(ch->in_room->vnum)) == NULL )
     {
@@ -35,14 +35,14 @@ void do_shiptrack( Character *ch, char *argument)
       return;
     }
 
-  if( !str_cmp( arg, "dist" ) )
+  if( !StrCmp( arg, "dist" ) )
     {
       ship->tcount = atoi(arg1);
       send_to_char("&RJump distance set!\r\n",ch);
       return;
     }
 
-  if( !str_cmp( arg, "set" ) )
+  if( !StrCmp( arg, "set" ) )
     {
       Vector3 head;
 
@@ -52,13 +52,13 @@ void do_shiptrack( Character *ch, char *argument)
           return;
         }
 
-      if( !is_number(arg1) || !is_number(arg2) || !is_number(arg3) )
+      if( !IsNumber(arg1) || !IsNumber(arg2) || !IsNumber(arg3) )
         {
           send_to_char( "Syntax: shiptrack set <X Heading> <Y Heading> <Z Heading>.\r\n", ch);
           return;
         }
 
-      vector_set( &head, atoi(arg1), atoi(arg2), atoi(arg3) );
+      SetVector( &head, atoi(arg1), atoi(arg2), atoi(arg3) );
       sprintf( buf, "%.0f %.0f %.0f", ship->pos.x + head.x,
                ship->pos.y + head.y, ship->pos.z + head.z );
 
@@ -79,7 +79,7 @@ void do_shiptrack( Character *ch, char *argument)
       ship->ch = ch;
       do_trajectory( ch, buf);
 
-      vector_set( &ship->jump, ship->pos.x + head.x,
+      SetVector( &ship->jump, ship->pos.x + head.x,
                   ship->pos.y + head.y, ship->pos.z + head.z );
 
       for( spaceobject = first_spaceobject; spaceobject; spaceobject = spaceobject->next )
@@ -105,14 +105,14 @@ void do_shiptrack( Character *ch, char *argument)
           return;
         }
 
-      ship->hyperdistance = vector_distance( &ship->pos, &ship->jump ) / 50;
+      ship->hyperdistance = GetDistanceBetweenVectors( &ship->pos, &ship->jump ) / 50;
       ship->orighyperdistance = ship->hyperdistance;
 
       send_to_char( "Course laid in. Beginning tracking program.\r\n", ch);
       return;
     }
 
-  if( !str_cmp( arg, "stop" ) || !str_cmp( arg, "halt" ))
+  if( !StrCmp( arg, "stop" ) || !StrCmp( arg, "halt" ))
     {
       ship->tracking = false;
       send_to_char( "Tracking program cancelled.\r\n", ch);

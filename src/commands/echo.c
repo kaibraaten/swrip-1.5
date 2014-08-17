@@ -22,17 +22,17 @@ void do_echo( Character *ch, char *argument )
 
   if ( (color = get_color(argument)) )
     {
-      argument = one_argument(argument, arg);
+      argument = OneArgument(argument, arg);
     }
 
   parg = argument;
-  argument = one_argument(argument, arg);
+  argument = OneArgument(argument, arg);
 
-  if ( !str_cmp( arg, "PC" ) || !str_cmp( arg, "player" ) )
+  if ( !StrCmp( arg, "PC" ) || !StrCmp( arg, "player" ) )
     {
       target = ECHOTAR_PC;
     }
-  else if ( !str_cmp( arg, "imm" ) )
+  else if ( !StrCmp( arg, "imm" ) )
     {
       target = ECHOTAR_IMM;
     }
@@ -43,15 +43,15 @@ void do_echo( Character *ch, char *argument )
     }
 
   if ( !color && (color = get_color(argument)) )
-    argument = one_argument(argument, arg);
+    argument = OneArgument(argument, arg);
 
   if ( !color )
     color = AT_IMMORT;
 
-  one_argument(argument, arg);
+  OneArgument(argument, arg);
 
-  if ( !str_cmp( arg, "Merth" )
-       || !str_cmp( arg, "Durga" ))
+  if ( !StrCmp( arg, "Merth" )
+       || !StrCmp( arg, "Durga" ))
     {
       ch_printf( ch, "I don't think %s would like that!\r\n", arg );
       return;

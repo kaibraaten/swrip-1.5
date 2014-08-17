@@ -50,7 +50,7 @@ ch_ret spell_area_attack( int sn, int level, Character *ch, void *vo )
             if ( skill->dice )
               dam = dice_parse(ch, level, skill->dice);
             else
-              dam = dice( 1, level );
+              dam = RollDice( 1, level );
           if ( saved && SPELL_FLAG( skill, SF_SAVE_HALF_DAMAGE ) )
             dam /= 2;
           if ( IsAffectedBy(vch, AFF_PROTECT) && IsEvil(ch) )

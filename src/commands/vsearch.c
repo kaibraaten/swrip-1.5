@@ -10,7 +10,7 @@ void do_vsearch( Character *ch, char *argument )
   int obj_counter = 1;
   int argi;
 
-  one_argument( argument, arg );
+  OneArgument( argument, arg );
 
   if( arg[0] == '\0' )
     {

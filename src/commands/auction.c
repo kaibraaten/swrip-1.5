@@ -9,7 +9,7 @@ void do_auction (Character *ch, char *argument)
   char arg2[MAX_INPUT_LENGTH];
   char buf[MAX_STRING_LENGTH];
 
-  argument = one_argument (argument, arg1);
+  argument = OneArgument (argument, arg1);
 
   if (IsNpc(ch)) /* NPC can be extracted at any time and thus can't auction! */
     return;
@@ -47,16 +47,16 @@ void do_auction (Character *ch, char *argument)
           sprintf( buf,
                    "Object '%s' is %s, special properties: %s %s.\r\nIts weight is %d, value is %d.\r\n",
                    obj->name,
-                   aoran( item_type_name( obj ) ),
-                   flag_string( obj->extra_flags, object_flags ),
-                   flag_string( obj->magic_flags, mag_flags ),
+                   AOrAn( item_type_name( obj ) ),
+                   FlagString( obj->extra_flags, object_flags ),
+                   FlagString( obj->magic_flags, mag_flags ),
                    obj->weight,
                    obj->cost );
           set_char_color( AT_LBLUE, ch );
           send_to_char( buf, ch );
 
           sprintf( buf, "Worn on: %s\r\n",
-                   flag_string(obj->wear_flags -1, wear_flags ) );
+                   FlagString(obj->wear_flags -1, wear_flags ) );
           send_to_char( buf, ch );
 
           set_char_color( AT_BLUE, ch );
@@ -101,7 +101,7 @@ void do_auction (Character *ch, char *argument)
         }
     }
 
-  if ( IsImmortal(ch) && !str_cmp(arg1,"stop"))
+  if ( IsImmortal(ch) && !StrCmp(arg1,"stop"))
     {
       if (auction->item == NULL)
         {
@@ -127,7 +127,7 @@ void do_auction (Character *ch, char *argument)
         }
     }
 
-  if (!str_cmp(arg1,"bid") )
+  if (!StrCmp(arg1,"bid") )
     {
       if (auction->item != NULL)
         {
@@ -146,7 +146,7 @@ void do_auction (Character *ch, char *argument)
               return;
             }
 
-          newbet = parsebet (auction->bet, argument);
+          newbet = ParseBet (auction->bet, argument);
           /*        ch_printf( ch, "Bid: %d\r\n",newbet);       */
 
           if (newbet < auction->starting)
@@ -222,7 +222,7 @@ void do_auction (Character *ch, char *argument)
       return;
     }
 
-  argument = one_argument (argument, arg2);
+  argument = OneArgument (argument, arg2);
 
   if (arg2[0] == '\0')
     {
@@ -230,7 +230,7 @@ void do_auction (Character *ch, char *argument)
       strcpy(arg2, "0");
     }
 
-  if ( !is_number(arg2) )
+  if ( !IsNumber(arg2) )
     {
       send_to_char("You must input a number at which to start the auction.\r\n", ch);
       return;

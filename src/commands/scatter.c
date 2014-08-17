@@ -8,7 +8,7 @@ void do_scatter( Character *ch, char *argument )
   Room *pRoomIndex;
 
   set_char_color( AT_IMMORT, ch );
-  one_argument( argument, arg );
+  OneArgument( argument, arg );
 
   if ( arg[0] == '\0' )
     {
@@ -36,7 +36,7 @@ void do_scatter( Character *ch, char *argument )
 
   for ( ; ; )
     {
-      pRoomIndex = get_room_index( number_range( 0, 32767 ) );
+      pRoomIndex = get_room_index( GetRandomNumberFromRange( 0, 32767 ) );
 
       if ( pRoomIndex
 	   && !IsBitSet(pRoomIndex->room_flags, ROOM_PRIVATE)

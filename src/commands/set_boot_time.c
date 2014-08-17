@@ -12,7 +12,7 @@ void do_set_boot_time( Character *ch, char *argument)
 
   check = false;
 
-  argument = one_argument(argument, arg);
+  argument = OneArgument(argument, arg);
 
   if ( arg[0] == '\0' )
     {
@@ -24,13 +24,13 @@ void do_set_boot_time( Character *ch, char *argument)
       return;
     }
 
-  if ( !str_cmp(arg, "time") )
+  if ( !StrCmp(arg, "time") )
     {
       struct tm *now_time;
 
-      argument = one_argument(argument, arg);
-      argument = one_argument(argument, arg1);
-      if ( !*arg || !*arg1 || !is_number(arg) || !is_number(arg1) )
+      argument = OneArgument(argument, arg);
+      argument = OneArgument(argument, arg1);
+      if ( !*arg || !*arg1 || !IsNumber(arg) || !IsNumber(arg1) )
         {
           send_to_char("You must input a value for hour and minute.\r\n", ch);
           return;
@@ -49,16 +49,16 @@ void do_set_boot_time( Character *ch, char *argument)
           return;
         }
 
-      argument = one_argument(argument, arg);
-      if ( *arg != '\0' && is_number(arg) )
+      argument = OneArgument(argument, arg);
+      if ( *arg != '\0' && IsNumber(arg) )
         {
           if ( (now_time->tm_mday = atoi(arg)) < 1 || now_time->tm_mday > 31 )
             {
               send_to_char("Valid range for day is 1 to 31.\r\n", ch);
               return;
             }
-          argument = one_argument(argument, arg);
-          if ( *arg != '\0' && is_number(arg) )
+          argument = OneArgument(argument, arg);
+          if ( *arg != '\0' && IsNumber(arg) )
             {
               if ( (now_time->tm_mon = atoi(arg)) < 1 || now_time->tm_mon > 12 )
                 {
@@ -66,7 +66,7 @@ void do_set_boot_time( Character *ch, char *argument)
                   return;
                 }
               now_time->tm_mon--;
-              argument = one_argument(argument, arg);
+              argument = OneArgument(argument, arg);
               if ( (now_time->tm_year = atoi(arg)-1900) < 0 ||
                    now_time->tm_year > 199 )
                 {
@@ -83,7 +83,7 @@ void do_set_boot_time( Character *ch, char *argument)
         }
       if (set_boot_time->manual == 0)
         set_boot_time->manual = 1;
-      new_boot_time = update_time(now_time);
+      new_boot_time = UpdateTime(now_time);
       new_boot_struct = *new_boot_time;
       new_boot_time = &new_boot_struct;
       reboot_check(mktime(new_boot_time));
@@ -92,16 +92,16 @@ void do_set_boot_time( Character *ch, char *argument)
       ch_printf(ch, "Boot time set to %s\r\n", reboot_time);
       check = true;
     }
-  else if ( !str_cmp(arg, "manual") )
+  else if ( !StrCmp(arg, "manual") )
     {
-      argument = one_argument(argument, arg1);
+      argument = OneArgument(argument, arg1);
       if (arg1[0] == '\0')
         {
           send_to_char("Please enter a value for manual boot on/off\r\n", ch);
           return;
         }
 
-      if ( !is_number(arg1))
+      if ( !IsNumber(arg1))
         {
           send_to_char("Value for manual must be 0 (off) or 1 (on)\r\n", ch);
           return;
@@ -120,7 +120,7 @@ void do_set_boot_time( Character *ch, char *argument)
       return;
     }
 
-  else if (!str_cmp( arg, "default" ))
+  else if (!StrCmp( arg, "default" ))
     {
       set_boot_time->manual = 0;
       /* Reinitialize new_boot_time */
@@ -131,7 +131,7 @@ void do_set_boot_time( Character *ch, char *argument)
       new_boot_time->tm_hour = 6;
       new_boot_time->tm_min = 0;
       new_boot_time->tm_sec = 0;
-      new_boot_time = update_time(new_boot_time);
+      new_boot_time = UpdateTime(new_boot_time);
 
       sysdata.DENY_NEW_PLAYERS = false;
 

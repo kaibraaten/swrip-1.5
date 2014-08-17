@@ -11,7 +11,7 @@ ch_ret spell_flamestrike( int sn, int level, Character *ch, void *vo )
   ch->alignment = urange( -1000, ch->alignment, 1000 );
   sith_penalty( ch );
 
-  dam = dice(6, 8);
+  dam = RollDice(6, 8);
 
   if ( saves_spell_staff( level, victim ) )
     dam /= 2;

@@ -8,7 +8,7 @@ void do_consider( Character *ch, char *argument )
   char *msg;
   int diff;
 
-  one_argument( argument, arg );
+  OneArgument( argument, arg );
 
   if ( arg[0] == '\0' )
     {

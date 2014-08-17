@@ -53,14 +53,14 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *even
   SetBit( container->wear_flags, ud->WearLocation );
 
   DISPOSE( container->name );
-  container->name = str_dup( ud->ItemName );
+  container->name = CopyString( ud->ItemName );
 
   DISPOSE( container->short_descr );
-  container->short_descr = str_dup( ud->ItemName );
+  container->short_descr = CopyString( ud->ItemName );
 
   DISPOSE( container->description );
-  sprintf( description, "%s was dropped here.", capitalize( ud->ItemName ) );
-  container->description = str_dup( description );
+  sprintf( description, "%s was dropped here.", Capitalize( ud->ItemName ) );
+  container->description = CopyString( description );
 
   container->value[0] = container->level;
   container->value[1] = 0;
@@ -79,7 +79,7 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
   Character *ch = GetEngineer( session );
 
   strcpy( argument, eventArgs->CommandArguments );
-  argument = one_argument( argument, wearLoc );
+  argument = OneArgument( argument, wearLoc );
   strcpy( itemName, argument );
 
   if ( itemName[0] == '\0' )
@@ -109,7 +109,7 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
       return;
     }
 
-  ud->ItemName = str_dup( itemName );
+  ud->ItemName = CopyString( itemName );
 }
 
 static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *args )

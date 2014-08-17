@@ -44,18 +44,18 @@ void do_train( Character *ch, char *argument )
           return;
         }
 
-      if ( str_cmp( arg, "str" ) && str_cmp( arg, "strength" )
-           && str_cmp( arg, "dex" ) && str_cmp( arg, "dexterity" )
-           && str_cmp( arg, "con" ) && str_cmp( arg, "constitution" )
-           && str_cmp( arg, "cha" ) && str_cmp( arg, "charisma" )
-           && str_cmp( arg, "wis" ) && str_cmp( arg, "wisdom" )
-           && str_cmp( arg, "int" ) && str_cmp( arg, "intelligence" ) )
+      if ( StrCmp( arg, "str" ) && StrCmp( arg, "strength" )
+           && StrCmp( arg, "dex" ) && StrCmp( arg, "dexterity" )
+           && StrCmp( arg, "con" ) && StrCmp( arg, "constitution" )
+           && StrCmp( arg, "cha" ) && StrCmp( arg, "charisma" )
+           && StrCmp( arg, "wis" ) && StrCmp( arg, "wisdom" )
+           && StrCmp( arg, "int" ) && StrCmp( arg, "intelligence" ) )
         {
           do_train ( ch , "" );
           return;
         }
 
-      if ( !str_cmp( arg, "str" ) || !str_cmp( arg, "strength" ) )
+      if ( !StrCmp( arg, "str" ) || !StrCmp( arg, "strength" ) )
         {
           if( mob->stats.perm_str <= ch->stats.perm_str || ch->stats.perm_str >= 20 + race_table[ch->race].stats.mod_str || ch->stats.perm_str >= 25 )
             {
@@ -65,7 +65,7 @@ void do_train( Character *ch, char *argument )
             }
           send_to_char("&GYou begin your weight training.\r\n", ch);
         }
-      if ( !str_cmp( arg, "dex" ) || !str_cmp( arg, "dexterity" ) )
+      if ( !StrCmp( arg, "dex" ) || !StrCmp( arg, "dexterity" ) )
         {
           if( mob->stats.perm_dex <= ch->stats.perm_dex || ch->stats.perm_dex >= 20 + race_table[ch->race].stats.mod_dex || ch->stats.perm_dex >= 25 )
             {
@@ -75,7 +75,7 @@ void do_train( Character *ch, char *argument )
             }
           send_to_char("&GYou begin to work at some challenging tests of coordination.\r\n", ch);
         }
-      if ( !str_cmp( arg, "int" ) || !str_cmp( arg, "intelligence" ) )
+      if ( !StrCmp( arg, "int" ) || !StrCmp( arg, "intelligence" ) )
         {
           if( mob->stats.perm_int <= ch->stats.perm_int || ch->stats.perm_int >= 20 + race_table[ch->race].stats.mod_int || ch->stats.perm_int >= 25 )
             {
@@ -85,7 +85,7 @@ void do_train( Character *ch, char *argument )
             }
           send_to_char("&GYou begin your studies.\r\n", ch);
         }
-      if ( !str_cmp( arg, "wis" ) || !str_cmp( arg, "wisdom" ) )
+      if ( !StrCmp( arg, "wis" ) || !StrCmp( arg, "wisdom" ) )
         {
           if( mob->stats.perm_wis <= ch->stats.perm_wis || ch->stats.perm_wis >= 20 + race_table[ch->race].stats.mod_wis || ch->stats.perm_wis >= 25 )
             {
@@ -95,7 +95,7 @@ void do_train( Character *ch, char *argument )
             }
           send_to_char("&GYou begin contemplating several ancient texts in an effort to gain wisdom.\r\n", ch);
         }
-      if ( !str_cmp( arg, "con" ) || !str_cmp( arg, "constitution" ) )
+      if ( !StrCmp( arg, "con" ) || !StrCmp( arg, "constitution" ) )
         {
           if( mob->stats.perm_con <= ch->stats.perm_con || ch->stats.perm_con >= 20 + race_table[ch->race].stats.mod_con || ch->stats.perm_con >= 25 )
             {
@@ -105,7 +105,7 @@ void do_train( Character *ch, char *argument )
             }
           send_to_char("&GYou begin your endurance training.\r\n", ch);
         }
-      if ( !str_cmp( arg, "cha" ) || !str_cmp( arg, "charisma" ) )
+      if ( !StrCmp( arg, "cha" ) || !StrCmp( arg, "charisma" ) )
         {
           if( mob->stats.perm_cha <= ch->stats.perm_cha || ch->stats.perm_cha >= 20 + race_table[ch->race].stats.mod_cha || ch->stats.perm_cha >= 25 )
             {
@@ -116,7 +116,7 @@ void do_train( Character *ch, char *argument )
           send_to_char("&GYou begin lessons in maners and ettiquite.\r\n", ch);
         }
       add_timer ( ch , TIMER_DO_FUN , 10 , do_train , SUB_PAUSE );
-      ch->dest_buf = str_dup(arg);
+      ch->dest_buf = CopyString(arg);
       return;
 
     case SUB_PAUSE:
@@ -135,12 +135,12 @@ void do_train( Character *ch, char *argument )
 
   ch->substate = SUB_NONE;
 
-  if ( number_bits ( 2 ) == 0 )
+  if ( NumberBits ( 2 ) == 0 )
     {
       successful = true;
     }
 
-  if ( !str_cmp( arg, "str" ) || !str_cmp( arg, "strength" ) )
+  if ( !StrCmp( arg, "str" ) || !StrCmp( arg, "strength" ) )
     {
       if ( !successful )
         {
@@ -152,7 +152,7 @@ void do_train( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg, "dex" ) || !str_cmp( arg, "dexterity" ) )
+  if ( !StrCmp( arg, "dex" ) || !StrCmp( arg, "dexterity" ) )
     {
       if ( !successful )
         {
@@ -164,7 +164,7 @@ void do_train( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg, "int" ) || !str_cmp( arg, "intelligence" ) )
+  if ( !StrCmp( arg, "int" ) || !StrCmp( arg, "intelligence" ) )
     {
       if ( !successful )
         {
@@ -176,7 +176,7 @@ void do_train( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg, "wis" ) || !str_cmp( arg, "wisdom" ) )
+  if ( !StrCmp( arg, "wis" ) || !StrCmp( arg, "wisdom" ) )
     {
       if ( !successful )
         {
@@ -189,7 +189,7 @@ verse.\r\n", ch);
       return;
     }
 
-  if ( !str_cmp( arg, "con" ) || !str_cmp( arg, "constitution" ) )
+  if ( !StrCmp( arg, "con" ) || !StrCmp( arg, "constitution" ) )
     {
       if ( !successful )
         {
@@ -202,7 +202,7 @@ verse.\r\n", ch);
     }
 
 
-  if ( !str_cmp( arg, "cha" ) || !str_cmp( arg, "charisma" ) )
+  if ( !StrCmp( arg, "cha" ) || !StrCmp( arg, "charisma" ) )
     {
       if ( !successful )
         {

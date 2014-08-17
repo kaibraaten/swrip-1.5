@@ -106,7 +106,7 @@ static char *editdata_to_str( Editor *edd );
 static void StartEditing_nolimit( Character *ch, char *old_text, short max_total );
 
 /* misc functions */
-static char *finer_one_argument( char *argument, char *arg_first );
+static char *finer_OneArgument( char *argument, char *arg_first );
 static char *text_replace( char *src, char *word_src, char *word_dst, short *pnew_size, short *prepl_count );
 
 /* editor sub functions */
@@ -193,7 +193,7 @@ static Editor *clone_editdata( Editor *edd )
   new_edd->text_size = edd->text_size;
   new_edd->line_count = edd->line_count;
   new_edd->first_line = root_line.next;
-  new_edd->desc = str_dup( edd->desc );
+  new_edd->desc = CopyString( edd->desc );
 
   return new_edd;
 }
@@ -305,9 +305,9 @@ static char *editdata_to_str( Editor *edd )
   buf[i++] = '\0';
   used++;
 
-  tmp = str_dup( buf );
+  tmp = CopyString( buf );
   DISPOSE(buf);
-  smush_tilde(tmp);
+  SmushTilde(tmp);
   return tmp;
 }
 
@@ -339,7 +339,7 @@ void SetEditorDescription( Character *ch, const char *desc_fmt, ... )
       DISPOSE( ch->editor->desc );
     }
 
-  ch->editor->desc = str_dup( buf );
+  ch->editor->desc = CopyString( buf );
 }
 
 static void StartEditing_nolimit( Character *ch, char *old_text, short max_total )
@@ -365,7 +365,7 @@ static void StartEditing_nolimit( Character *ch, char *old_text, short max_total
     }
 
   ch->editor = str_to_editdata( old_text, max_total );
-  ch->editor->desc = str_dup( "Unknown buffer" );
+  ch->editor->desc = CopyString( "Unknown buffer" );
   ch->desc->connection_state = CON_EDITING;
 
   send_to_char( "> ", ch );
@@ -378,13 +378,13 @@ char *CopyBuffer( Character *ch )
   if ( !ch )
     {
       bug( "CopyBuffer: null ch", 0 );
-      return str_dup( "" );
+      return CopyString( "" );
     }
 
   if ( !ch->editor )
     {
       bug( "CopyBuffer: null editor", 0 );
-      return str_dup( "" );
+      return CopyString( "" );
     }
 
   buf = editdata_to_str( ch->editor );
@@ -457,7 +457,7 @@ void EditBuffer( Character *ch, char *argument )
     {
       char editor_command = 0;
 
-      argument = one_argument( argument, cmd );
+      argument = OneArgument( argument, cmd );
       editor_command = tolower(cmd[1]);
 
       switch( editor_command )
@@ -521,7 +521,7 @@ void EditBuffer( Character *ch, char *argument )
 
   /* Kludgy fix. Read_from_buffer in comm.c adds a space on
    * empty lines. Don't let this fill up usable buffer space.. */
-  if( !str_cmp( argument, " " ) )
+  if( !StrCmp( argument, " " ) )
     {
       strcpy( argument, "" );
     }
@@ -655,7 +655,7 @@ static void editor_help( Character *ch, Editor *edd, char *argument )
 
   for( i = 0; arg[i] != NULL ; i++ )
     {
-      if( !str_cmp( argument, arg[i] ) )
+      if( !StrCmp( argument, arg[i] ) )
 	{
 	  break;
 	}
@@ -673,7 +673,7 @@ static void editor_help( Character *ch, Editor *edd, char *argument )
 
 static void editor_clear_buf( Character *ch, Editor *edd, char *argument )
 {
-  char *desc = str_dup( edd->desc );
+  char *desc = CopyString( edd->desc );
   short max_size = edd->max_size;
 
   discard_editdata( edd );
@@ -690,8 +690,8 @@ static void editor_search_and_replace( Character *ch, Editor *edd, char *argumen
   EditorLine *eline = NULL;
   short repl_count = 0;
 
-  argument = finer_one_argument( argument, word_src );
-  argument = finer_one_argument( argument, word_dst );
+  argument = finer_OneArgument( argument, word_src );
+  argument = finer_OneArgument( argument, word_dst );
 
   if ( word_src[0] == '\0' || word_dst[0] == '\0' )
     {
@@ -754,7 +754,7 @@ static void editor_insert_line( Character *ch, Editor *edd, char *argument )
   short lineindex = 0;
   EditorLine *newline = NULL;
 
-  if( argument[0] == '\0' || !is_number(argument) )
+  if( argument[0] == '\0' || !IsNumber(argument) )
     {
       send_to_char( "Must supply the line number.\r\n", ch );
       return;
@@ -801,7 +801,7 @@ static void editor_delete_line( Character *ch, Editor *edd, char *argument )
   EditorLine *prev_line = NULL;
   EditorLine *del_line = NULL;
 
-  if( argument[0] == '\0' || !is_number(argument) )
+  if( argument[0] == '\0' || !IsNumber(argument) )
     {
       send_to_char( "Must supply the line number.\r\n", ch );
       return;
@@ -881,7 +881,7 @@ static void editor_goto_line( Character *ch, Editor *edd, char *argument )
   short lineindex = 0;
   short num = 0;
 
-  if( argument[0] == '\0' || !is_number(argument) )
+  if( argument[0] == '\0' || !IsNumber(argument) )
     {
       send_to_char( "Must supply the line number.\r\n", ch );
       return;
@@ -915,9 +915,9 @@ static void editor_list( Character *ch, Editor *edd, char *argument )
   short to = 0;
   char arg1[ MAX_INPUT_LENGTH ];
 
-  argument = one_argument( argument, arg1 );
+  argument = OneArgument( argument, arg1 );
 
-  if( arg1[0] != '\0' && is_number(arg1) )
+  if( arg1[0] != '\0' && IsNumber(arg1) )
     {
       from = atoi(arg1);
     }
@@ -926,9 +926,9 @@ static void editor_list( Character *ch, Editor *edd, char *argument )
       from = 1;
     }
 
-  argument = one_argument( argument, arg1 );
+  argument = OneArgument( argument, arg1 );
 
-  if( arg1[0] != '\0' && is_number(arg1) )
+  if( arg1[0] != '\0' && IsNumber(arg1) )
     {
       to = atoi(arg1);
     }
@@ -1058,11 +1058,11 @@ static char *text_replace( char *src, char *word_src, char *word_dst, short *pne
 /*
  * Pick off one argument from a string and return the rest.
  * Understands quotes.
- * A pickier version than regular one_argument, it will not
+ * A pickier version than regular OneArgument, it will not
  * convert to lowercase, and it can handle the (') character
  * when it's escaped inside '.
  */
-static char *finer_one_argument( char *argument, char *arg_first )
+static char *finer_OneArgument( char *argument, char *arg_first )
 {
   char cEnd = ' ';
   short count = 0;

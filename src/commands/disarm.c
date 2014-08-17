@@ -39,7 +39,7 @@ void do_disarm( Character *ch, char *argument )
     }
 
   SetWaitState( ch, skill_table[gsn_disarm]->beats );
-  percent = number_percent() + GetAbilityLevel( victim, COMBAT_ABILITY )
+  percent = GetRandomPercent() + GetAbilityLevel( victim, COMBAT_ABILITY )
     - GetAbilityLevel( ch, COMBAT_ABILITY )
     - (GetCurrentLuck(ch) - 15) + (GetCurrentLuck(victim) - 15);
 

@@ -16,10 +16,10 @@ void do_outcast( Character *ch, char *argument )
   clan = ch->pcdata->clan;
 
   if ( (ch->pcdata && ch->pcdata->bestowments
-        && is_name("outcast", ch->pcdata->bestowments))
-       || !str_cmp( ch->name, clan->leadership.leader  )
-       || !str_cmp( ch->name, clan->leadership.number1 )
-       || !str_cmp( ch->name, clan->leadership.number2 ) )
+        && IsName("outcast", ch->pcdata->bestowments))
+       || !StrCmp( ch->name, clan->leadership.leader  )
+       || !StrCmp( ch->name, clan->leadership.number1 )
+       || !StrCmp( ch->name, clan->leadership.number2 ) )
     {
       ;
     }
@@ -29,7 +29,7 @@ void do_outcast( Character *ch, char *argument )
       return;
     }
 
-  argument = one_argument( argument, arg );
+  argument = OneArgument( argument, arg );
 
   if ( arg[0] == '\0' )
     {
@@ -70,28 +70,28 @@ void do_outcast( Character *ch, char *argument )
   RemoveBit( victim->speaks, LANG_CLAN );
   --clan->members;
 
-  if ( !str_cmp( victim->name, ch->pcdata->clan->leadership.number1 ) )
+  if ( !StrCmp( victim->name, ch->pcdata->clan->leadership.number1 ) )
     {
       DISPOSE( ch->pcdata->clan->leadership.number1 );
-      ch->pcdata->clan->leadership.number1 = str_dup( "" );
+      ch->pcdata->clan->leadership.number1 = CopyString( "" );
     }
 
-  if ( !str_cmp( victim->name, ch->pcdata->clan->leadership.number2 ) )
+  if ( !StrCmp( victim->name, ch->pcdata->clan->leadership.number2 ) )
     {
       DISPOSE( ch->pcdata->clan->leadership.number2 );
-      ch->pcdata->clan->leadership.number2 = str_dup( "" );
+      ch->pcdata->clan->leadership.number2 = CopyString( "" );
     }
 
   victim->pcdata->clan = NULL;
   remove_member( victim );
   DISPOSE(victim->pcdata->clan_name);
-  victim->pcdata->clan_name = str_dup( "" );
+  victim->pcdata->clan_name = CopyString( "" );
   act( AT_MAGIC, "You outcast $N from $t", ch, clan->name, victim, TO_CHAR );
   act( AT_MAGIC, "$n outcasts $N from $t", ch, clan->name, victim, TO_ROOM );
   act( AT_MAGIC, "$n outcasts you from $t", ch, clan->name, victim, TO_VICT );
 
   DISPOSE( victim->pcdata->bestowments );
-  victim->pcdata->bestowments = str_dup("");
+  victim->pcdata->bestowments = CopyString("");
 
   save_char_obj( victim );      /* clan gets saved when pfile is saved */
 }

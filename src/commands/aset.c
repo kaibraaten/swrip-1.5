@@ -10,8 +10,8 @@ void do_aset( Character *ch, char *argument )
   bool found = false;
   int value = 0;
 
-  argument = one_argument( argument, arg1 );
-  argument = one_argument( argument, arg2 );
+  argument = OneArgument( argument, arg1 );
+  argument = OneArgument( argument, arg2 );
   value = atoi( argument );
 
   if ( arg1[0] == '\0' || arg2[0] == '\0' )
@@ -27,7 +27,7 @@ void do_aset( Character *ch, char *argument )
   found = false;
 
   for ( tarea = first_area; tarea; tarea = tarea->next )
-    if ( !str_cmp( tarea->filename, arg1 ) )
+    if ( !StrCmp( tarea->filename, arg1 ) )
       {
         found = true;
         break;
@@ -35,13 +35,13 @@ void do_aset( Character *ch, char *argument )
 
   if ( !found )
     for ( tarea = first_build; tarea; tarea = tarea->next )
-      if ( !str_cmp( tarea->filename, arg1 ) )
+      if ( !StrCmp( tarea->filename, arg1 ) )
         {
           found = true;
           break;
         }
 
-  if( !str_cmp( arg1, "this" ) )
+  if( !StrCmp( arg1, "this" ) )
     {
       tarea = ch->in_room->area;
       found = true;
@@ -53,15 +53,15 @@ void do_aset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "name" ) )
+  if ( !StrCmp( arg2, "name" ) )
     {
       DISPOSE( tarea->name );
-      tarea->name = str_dup( argument );
+      tarea->name = CopyString( argument );
       send_to_char( "Done.\r\n", ch );
       return;
     }
 
-  if ( !str_cmp( arg2, "planet" ) )
+  if ( !StrCmp( arg2, "planet" ) )
     {
       PLANET_DATA *planet;
       planet = get_planet(argument);
@@ -82,73 +82,73 @@ void do_aset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "filename" ) )
+  if ( !StrCmp( arg2, "filename" ) )
     {
       DISPOSE( tarea->filename );
-      tarea->filename = str_dup( argument );
+      tarea->filename = CopyString( argument );
       write_area_list();
       fold_area( tarea, tarea->filename, true );
       send_to_char( "Done.\r\n", ch );
       return;
     }
 
-  if ( !str_cmp( arg2, "low_economy" ) )
+  if ( !StrCmp( arg2, "low_economy" ) )
     {
       tarea->low_economy = value;
       send_to_char( "Done.\r\n", ch );
       return;
     }
 
-  if ( !str_cmp( arg2, "high_economy" ) )
+  if ( !StrCmp( arg2, "high_economy" ) )
     {
       tarea->high_economy = value;
       send_to_char( "Done.\r\n", ch );
       return;
     }
 
-  if ( !str_cmp( arg2, "low_room" ) )
+  if ( !StrCmp( arg2, "low_room" ) )
     {
       tarea->low_r_vnum = value;
       send_to_char( "Done.\r\n", ch );
       return;
     }
 
-  if ( !str_cmp( arg2, "hi_room" ) )
+  if ( !StrCmp( arg2, "hi_room" ) )
     {
       tarea->hi_r_vnum = value;
       send_to_char( "Done.\r\n", ch );
       return;
     }
 
-  if ( !str_cmp( arg2, "low_obj" ) )
+  if ( !StrCmp( arg2, "low_obj" ) )
     {
       tarea->low_o_vnum = value;
       send_to_char( "Done.\r\n", ch );
       return;
     }
 
-  if ( !str_cmp( arg2, "hi_obj" ) )
+  if ( !StrCmp( arg2, "hi_obj" ) )
     {
       tarea->hi_o_vnum = value;
       send_to_char( "Done.\r\n", ch );
       return;
     }
 
-  if ( !str_cmp( arg2, "low_mob" ) )
+  if ( !StrCmp( arg2, "low_mob" ) )
     {
       tarea->low_m_vnum = value;
       send_to_char( "Done.\r\n", ch );
       return;
     }
 
-  if ( !str_cmp( arg2, "hi_mob" ) )
+  if ( !StrCmp( arg2, "hi_mob" ) )
     {
       tarea->hi_m_vnum = value;
       send_to_char( "Done.\r\n", ch );
       return;
     }
 
-  if ( !str_cmp( arg2, "low_soft" ) )
+  if ( !StrCmp( arg2, "low_soft" ) )
     {
       if ( value < 0 || value > MAX_LEVEL )
         {
@@ -161,7 +161,7 @@ void do_aset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "hi_soft" ) )
+  if ( !StrCmp( arg2, "hi_soft" ) )
     {
       if ( value < 0 || value > MAX_LEVEL )
         {
@@ -174,7 +174,7 @@ void do_aset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "low_hard" ) )
+  if ( !StrCmp( arg2, "low_hard" ) )
     {
       if ( value < 0 || value > MAX_LEVEL )
         {
@@ -187,7 +187,7 @@ void do_aset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "hi_hard" ) )
+  if ( !StrCmp( arg2, "hi_hard" ) )
     {
       if ( value < 0 || value > MAX_LEVEL )
         {
@@ -200,32 +200,32 @@ void do_aset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "author" ) )
+  if ( !StrCmp( arg2, "author" ) )
     {
       DISPOSE( tarea->author );
-      tarea->author = str_dup( argument );
+      tarea->author = CopyString( argument );
       send_to_char( "Done.\r\n", ch );
       return;
     }
 
-  if ( !str_cmp( arg2, "resetmsg" ) )
+  if ( !StrCmp( arg2, "resetmsg" ) )
     {
       if ( tarea->resetmsg )
         DISPOSE( tarea->resetmsg );
-      if ( str_cmp( argument, "clear" ) )
-        tarea->resetmsg = str_dup( argument );
+      if ( StrCmp( argument, "clear" ) )
+        tarea->resetmsg = CopyString( argument );
       send_to_char( "Done.\r\n", ch );
       return;
     } /* Rennard */
 
-  if ( !str_cmp( arg2, "resetfreq" ) )
+  if ( !StrCmp( arg2, "resetfreq" ) )
     {
       tarea->reset_frequency = value;
       send_to_char( "Done.\r\n", ch );
       return;
     }
 
-  if ( !str_cmp( arg2, "flags" ) )
+  if ( !StrCmp( arg2, "flags" ) )
     {
       if ( !argument || argument[0] == '\0' )
         {
@@ -234,7 +234,7 @@ void do_aset( Character *ch, char *argument )
         }
       while ( argument[0] != '\0' )
         {
-          argument = one_argument( argument, arg3 );
+          argument = OneArgument( argument, arg3 );
           value = get_areaflag( arg3 );
           if ( value < 0 || value > 31 )
             ch_printf( ch, "Unknown flag: %s\r\n", arg3 );

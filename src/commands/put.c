@@ -13,8 +13,8 @@ void do_put( Character *ch, char *argument )
   int           number;
   bool  save_char = false;
 
-  argument = one_argument( argument, arg1 );
-  if ( is_number(arg1) )
+  argument = OneArgument( argument, arg1 );
+  if ( IsNumber(arg1) )
     {
       number = atoi(arg1);
       if ( number < 1 )
@@ -22,15 +22,15 @@ void do_put( Character *ch, char *argument )
           send_to_char( "That was easy...\r\n", ch );
           return;
         }
-      argument = one_argument( argument, arg1 );
+      argument = OneArgument( argument, arg1 );
     }
   else
     number = 0;
-  argument = one_argument( argument, arg2 );
+  argument = OneArgument( argument, arg2 );
   /* munch optional words */
-  if ( (!str_cmp(arg2, "into") || !str_cmp(arg2, "inside") || !str_cmp(arg2, "in"))
+  if ( (!StrCmp(arg2, "into") || !StrCmp(arg2, "inside") || !StrCmp(arg2, "in"))
        &&   argument[0] != '\0' )
-    argument = one_argument( argument, arg2 );
+    argument = OneArgument( argument, arg2 );
 
   if ( arg1[0] == '\0' || arg2[0] == '\0' )
     {
@@ -41,7 +41,7 @@ void do_put( Character *ch, char *argument )
   if ( ms_find_obj(ch) )
     return;
 
-  if ( !str_cmp( arg2, "all" ) || !str_prefix( "all.", arg2 ) )
+  if ( !StrCmp( arg2, "all" ) || !StringPrefix( "all.", arg2 ) )
     {
       send_to_char( "You can't do that.\r\n", ch );
       return;
@@ -79,7 +79,7 @@ void do_put( Character *ch, char *argument )
         }
     }
 
-  if ( number <= 1 && str_cmp( arg1, "all" ) && str_prefix( "all.", arg1 ) )
+  if ( number <= 1 && StrCmp( arg1, "all" ) && StringPrefix( "all.", arg1 ) )
     {
       /* 'put obj container' */
       if ( ( obj = GetCarriedObject( ch, arg1 ) ) == NULL )
@@ -156,7 +156,7 @@ void do_put( Character *ch, char *argument )
       bool fAll;
       char *chk;
 
-      if ( !str_cmp(arg1, "all") )
+      if ( !StrCmp(arg1, "all") )
         fAll = true;
       else
         fAll = false;
@@ -171,7 +171,7 @@ void do_put( Character *ch, char *argument )
         {
           obj_next = obj->next_content;
 
-          if ( ( fAll || nifty_is_name( chk, obj->name ) )
+          if ( ( fAll || NiftyIsName( chk, obj->name ) )
                &&   CanSeeObject( ch, obj )
                &&   obj->wear_loc == WEAR_NONE
                &&   obj != container

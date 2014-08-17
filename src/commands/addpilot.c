@@ -13,7 +13,7 @@ void do_addpilot(Character *ch, char *argument )
       return;
     }
 
-  the_chance = number_percent( );
+  the_chance = GetRandomPercent( );
 
   if ( IsNpc(ch) || the_chance >= ch->pcdata->learned[gsn_slicing] )
     {
@@ -33,9 +33,9 @@ void do_addpilot(Character *ch, char *argument )
   if ( the_chance < ch->pcdata->learned[gsn_slicing] )
     learn_from_success( ch, gsn_slicing );
 
-  if ( str_cmp( ship->pilot , "" ) )
+  if ( StrCmp( ship->pilot , "" ) )
     {
-      if ( str_cmp( ship->copilot , "" ) )
+      if ( StrCmp( ship->copilot , "" ) )
         {
           send_to_char( "&RYou already have a pilot and copilot..\r\n" ,ch );
           send_to_char( "&RTry rempilot first.\r\n" ,ch );
@@ -43,7 +43,7 @@ void do_addpilot(Character *ch, char *argument )
         }
 
       DISPOSE( ship->copilot );
-      ship->copilot = str_dup( argument );
+      ship->copilot = CopyString( argument );
       send_to_char( "Copilot Added.\r\n", ch );
       SaveShip( ship );
       return;
@@ -52,7 +52,7 @@ void do_addpilot(Character *ch, char *argument )
     }
 
   DISPOSE( ship->pilot );
-  ship->pilot = str_dup( argument );
+  ship->pilot = CopyString( argument );
   send_to_char( "Pilot Added.\r\n", ch );
   SaveShip( ship );
 }

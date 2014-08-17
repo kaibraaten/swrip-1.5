@@ -13,9 +13,9 @@ void do_rset( Character *ch, char *argument )
   int value;
   bool proto;
 
-  smash_tilde( argument );
-  argument = one_argument( argument, arg1 );
-  argument = one_argument( argument, arg2 );
+  SmashTilde( argument );
+  argument = OneArgument( argument, arg1 );
+  argument = OneArgument( argument, arg2 );
   strcpy( arg3, argument );
 
   if ( arg1[0] == '\0' || arg2[0] == '\0' || arg3[0] == '\0' )
@@ -36,7 +36,7 @@ void do_rset( Character *ch, char *argument )
   if ( !can_rmodify( ch, location ) )
     return;
 
-  if ( !is_number( arg3 ) )
+  if ( !IsNumber( arg3 ) )
     {
       send_to_char( "Value must be numeric.\r\n", ch );
       return;
@@ -46,7 +46,7 @@ void do_rset( Character *ch, char *argument )
   /*
    * Set something.
    */
-  if ( !str_cmp( arg2, "flags" ) )
+  if ( !StrCmp( arg2, "flags" ) )
     {
       /*
        * Protect from messing up prototype flag
@@ -61,7 +61,7 @@ void do_rset( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg2, "sector" ) )
+  if ( !StrCmp( arg2, "sector" ) )
     {
       location->sector_type     = value;
       return;

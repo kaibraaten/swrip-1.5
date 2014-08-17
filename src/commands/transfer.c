@@ -9,8 +9,8 @@ void do_transfer( Character *ch, char *argument )
   Descriptor *d;
   Character *victim;
 
-  argument = one_argument( argument, arg1 );
-  argument = one_argument( argument, arg2 );
+  argument = OneArgument( argument, arg1 );
+  argument = OneArgument( argument, arg2 );
 
   if ( arg1[0] == '\0' )
     {
@@ -18,7 +18,7 @@ void do_transfer( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg1, "all" ) )
+  if ( !StrCmp( arg1, "all" ) )
     {
       for ( d = first_descriptor; d; d = d->next )
         {

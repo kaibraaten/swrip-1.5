@@ -9,7 +9,7 @@ void do_foldarea( Character *ch, char *argument )
   bool fold_all_areas = false;
   bool found = false;
 
-  argument = one_argument( argument, arg );
+  argument = OneArgument( argument, arg );
 
   if ( arg[0] == '\0' )
     {
@@ -17,18 +17,18 @@ void do_foldarea( Character *ch, char *argument )
       return;
     }
 
-  if( !str_cmp( arg, "this" ) )
+  if( !StrCmp( arg, "this" ) )
     {
       strcpy( arg, ch->in_room->area->filename );
     }
 
-  fold_all_areas = !str_cmp( arg, "all" );
+  fold_all_areas = !StrCmp( arg, "all" );
 
   for ( tarea = first_area; tarea; tarea = tarea->next )
     {
-      if ( !str_cmp( tarea->filename, arg ) || fold_all_areas )
+      if ( !StrCmp( tarea->filename, arg ) || fold_all_areas )
         {
-          if (!str_cmp( argument, "remproto") )
+          if (!StrCmp( argument, "remproto") )
             fold_area( tarea, tarea->filename, true );
           else
             fold_area( tarea, tarea->filename, false );

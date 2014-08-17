@@ -20,7 +20,7 @@ void do_hide( Character *ch, char *argument )
   if ( IsAffectedBy(ch, AFF_HIDE) )
     RemoveBit(ch->affected_by, AFF_HIDE);
 
-  if ( IsNpc(ch) || number_percent( ) < ch->pcdata->learned[gsn_hide] )
+  if ( IsNpc(ch) || GetRandomPercent( ) < ch->pcdata->learned[gsn_hide] )
     {
       SetBit(ch->affected_by, AFF_HIDE);
       learn_from_success( ch, gsn_hide );

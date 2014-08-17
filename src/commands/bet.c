@@ -9,8 +9,8 @@ void do_bet(Character *ch, char *argument)
   char buf1[MAX_INPUT_LENGTH];
   int newbet;
 
-  argument = one_argument(argument,arg);
-  one_argument(argument,buf1);
+  argument = OneArgument(argument,arg);
+  OneArgument(argument,buf1);
 
   if (IsNpc(ch))
     {
@@ -53,7 +53,7 @@ void do_bet(Character *ch, char *argument)
           return;
         }
       GET_BETTED_ON(ch) = ch->betted_on;
-      newbet=parsebet(arena.bet_pot,buf1);
+      newbet=ParseBet(arena.bet_pot,buf1);
       if(newbet == 0)
         {
           send_to_char("Bet some gold why dont you!\r\n", ch);

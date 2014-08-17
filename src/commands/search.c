@@ -26,7 +26,7 @@ void do_search( Character *ch, char *argument )
           return;
         }
 
-      argument = one_argument( argument, arg );
+      argument = OneArgument( argument, arg );
 
       if ( arg[0] != '\0' && (door = get_dir( arg )) == -1 )
         {
@@ -49,7 +49,7 @@ void do_search( Character *ch, char *argument )
         }
       add_timer( ch, TIMER_DO_FUN, umin(skill_table[gsn_search]->beats / 10, 3), do_search, SUB_PAUSE );
       send_to_char( "You begin your search...\r\n", ch );
-      ch->dest_buf = str_dup( arg );
+      ch->dest_buf = CopyString( arg );
       return;
 
     case SUB_PAUSE:
@@ -98,7 +98,7 @@ void do_search( Character *ch, char *argument )
       return;
     }
 
-  percent  = number_percent( );
+  percent  = GetRandomPercent( );
 
   if ( door != -1 )
     {

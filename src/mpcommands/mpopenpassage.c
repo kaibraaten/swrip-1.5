@@ -26,9 +26,9 @@ void do_mp_open_passage( Character *ch, char *argument )
       return;
     }
 
-  argument = one_argument( argument, arg1 );
-  argument = one_argument( argument, arg2 );
-  argument = one_argument( argument, arg3 );
+  argument = OneArgument( argument, arg1 );
+  argument = OneArgument( argument, arg2 );
+  argument = OneArgument( argument, arg3 );
 
   if ( arg1[0] == '\0' || arg2[0] == '\0' || arg3[0] == '\0' )
     {
@@ -36,7 +36,7 @@ void do_mp_open_passage( Character *ch, char *argument )
       return;
     }
 
-  if( !is_number(arg1) )
+  if( !IsNumber(arg1) )
     {
       progbug( "MpOpenPassage - Bad syntax", ch );
       return;
@@ -49,7 +49,7 @@ void do_mp_open_passage( Character *ch, char *argument )
       return;
     }
 
-  if( !is_number(arg2) )
+  if( !IsNumber(arg2) )
     {
       progbug( "MpOpenPassage - Bad syntax", ch );
       return;
@@ -62,7 +62,7 @@ void do_mp_open_passage( Character *ch, char *argument )
       return;
     }
 
-  if( !is_number(arg3) )
+  if( !IsNumber(arg3) )
     {
       progbug( "MpOpenPassage - Bad syntax", ch );
       return;
@@ -84,8 +84,8 @@ void do_mp_open_passage( Character *ch, char *argument )
     }
 
   pexit = make_exit( fromRoom, targetRoom, exit_num );
-  pexit->keyword                = str_dup( "" );
-  pexit->description            = str_dup( "" );
+  pexit->keyword                = CopyString( "" );
+  pexit->description            = CopyString( "" );
   pexit->key                    = -1;
   pexit->exit_info              = EX_PASSAGE;
 }

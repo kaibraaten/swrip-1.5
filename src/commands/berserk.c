@@ -30,7 +30,7 @@ void do_berserk( Character *ch, char *argument )
   /* Hmmm.. 10-20 combat rounds at level 50.. good enough for most mobs,
      and if not they can always go berserk again.. shrug.. maybe even
      too high. -- Altrag */
-  af.duration = number_range(ch->top_level/5, ch->top_level*2/5);
+  af.duration = GetRandomNumberFromRange(ch->top_level/5, ch->top_level*2/5);
   /* Hmm.. you get stronger when yer really enraged.. mind over matter
      type thing.. */
   af.location = APPLY_STR;

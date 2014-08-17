@@ -12,18 +12,18 @@ void do_homepage( Character *ch, char *argument )
   if ( argument[0] == '\0' )
     {
       if ( !ch->pcdata->homepage )
-        ch->pcdata->homepage = str_dup( "" );
+        ch->pcdata->homepage = CopyString( "" );
 
       ch_printf( ch, "Your homepage is: %s\r\n",
-                 show_tilde( ch->pcdata->homepage ) );
+                 ShowTilde( ch->pcdata->homepage ) );
       return;
     }
 
-  if ( !str_cmp( argument, "clear" ) )
+  if ( !StrCmp( argument, "clear" ) )
     {
       if ( ch->pcdata->homepage )
         DISPOSE(ch->pcdata->homepage);
-      ch->pcdata->homepage = str_dup("");
+      ch->pcdata->homepage = CopyString("");
       send_to_char( "Homepage cleared.\r\n", ch );
       return;
     }
@@ -36,11 +36,11 @@ void do_homepage( Character *ch, char *argument )
   if ( strlen(buf) > 70 )
     buf[70] = '\0';
 
-  hide_tilde( buf );
+  HideTilde( buf );
 
   if ( ch->pcdata->homepage )
     DISPOSE(ch->pcdata->homepage);
 
-  ch->pcdata->homepage = str_dup(buf);
+  ch->pcdata->homepage = CopyString(buf);
   send_to_char( "Homepage set.\r\n", ch );
 }

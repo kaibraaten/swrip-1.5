@@ -14,7 +14,7 @@ void do_installarea( Character *ch, char *argument )
   int           num;
   Descriptor *d;
 
-  argument = one_argument( argument, arg );
+  argument = OneArgument( argument, arg );
   if ( arg[0] == '\0' )
     {
       send_to_char( "Syntax: installarea <filename> [Area title]\r\n", ch );
@@ -23,12 +23,12 @@ void do_installarea( Character *ch, char *argument )
 
   for ( tarea = first_build; tarea; tarea = tarea->next )
     {
-      if ( !str_cmp( tarea->filename, arg ) )
+      if ( !StrCmp( tarea->filename, arg ) )
         {
           if ( argument && argument[0] != '\0' )
             {
               DISPOSE( tarea->name );
-              tarea->name = str_dup( argument );
+              tarea->name = CopyString( argument );
             }
 
 	  /* Fold area with install flag -- auto-removes prototype flags */

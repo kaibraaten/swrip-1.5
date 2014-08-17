@@ -9,7 +9,7 @@ void do_zap( Character *ch, char *argument )
   OBJ_DATA *obj;
   ch_ret retcode;
 
-  one_argument( argument, arg );
+  OneArgument( argument, arg );
   if ( arg[0] == '\0' && !ch->fighting )
     {
       send_to_char( "Zap whom or what?\r\n", ch );

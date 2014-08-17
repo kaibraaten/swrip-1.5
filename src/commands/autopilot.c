@@ -44,8 +44,8 @@ void do_autopilot(Character *ch, char *argument )
   act( AT_PLAIN, "$n flips a switch on the control panel.", ch,
        NULL, argument , TO_ROOM );
 
-  if ( ( ship->autopilot == true && str_cmp(argument,"on") )
-       || !str_cmp(argument,"off") )
+  if ( ( ship->autopilot == true && StrCmp(argument,"on") )
+       || !StrCmp(argument,"off") )
     {
       ship->autopilot=false;
       send_to_char( "&GYou toggle the autopilot.\r\n", ch);

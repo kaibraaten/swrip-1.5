@@ -26,9 +26,9 @@ void do_mp_close_passage( Character *ch, char *argument )
       return;
     }
 
-  argument = one_argument( argument, arg1 );
-  argument = one_argument( argument, arg2 );
-  argument = one_argument( argument, arg3 );
+  argument = OneArgument( argument, arg1 );
+  argument = OneArgument( argument, arg2 );
+  argument = OneArgument( argument, arg3 );
 
   if ( arg1[0] == '\0' || arg2[0] == '\0' || arg2[0] == '\0' )
     {
@@ -36,7 +36,7 @@ void do_mp_close_passage( Character *ch, char *argument )
       return;
     }
 
-  if( !is_number(arg1) )
+  if( !IsNumber(arg1) )
     {
       progbug( "MpClosePassage - Bad syntax", ch );
       return;
@@ -49,7 +49,7 @@ void do_mp_close_passage( Character *ch, char *argument )
       return;
     }
 
-  if( !is_number(arg2) )
+  if( !IsNumber(arg2) )
     {
       progbug( "MpClosePassage - Bad syntax", ch );
       return;

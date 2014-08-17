@@ -60,7 +60,7 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
   char itemName[MAX_STRING_LENGTH];
 
   strcpy( argument, args->CommandArguments );
-  argument = one_argument( argument, wearLoc );
+  argument = OneArgument( argument, wearLoc );
   strcpy( itemName, argument );
 
   if ( itemName[0] == '\0' )
@@ -90,7 +90,7 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
       return;
     }
 
-  ud->ItemName = str_dup( itemName );
+  ud->ItemName = CopyString( itemName );
 }
 
 static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args )
@@ -107,15 +107,15 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   DISPOSE( comlink->name );
   strcpy( buf, ud->ItemName );
   strcat( buf, " comlink" );
-  comlink->name = str_dup( buf );
+  comlink->name = CopyString( buf );
 
   strcpy( buf, ud->ItemName );
   DISPOSE( comlink->short_descr );
-  comlink->short_descr = str_dup( buf );
+  comlink->short_descr = CopyString( buf );
 
   DISPOSE( comlink->description );
   strcat( buf, " was left here." );
-  comlink->description = str_dup( capitalize( buf ) );
+  comlink->description = CopyString( Capitalize( buf ) );
 
   comlink->cost = 50;
 }

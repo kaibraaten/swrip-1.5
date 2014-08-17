@@ -9,7 +9,7 @@ void do_fuel(Character *ch, char *argument )
   char arg1[MAX_INPUT_LENGTH];
   char buf[MAX_STRING_LENGTH];
 
-  argument = one_argument( argument, arg1 );
+  argument = OneArgument( argument, arg1 );
 
   if (  (ship = GetShipFromHangar(ch->in_room->vnum))  == NULL )
     {
@@ -20,13 +20,13 @@ void do_fuel(Character *ch, char *argument )
         }
     }
 
-  if( arg1[0] == '\0' || !is_number(arg1) )
+  if( arg1[0] == '\0' || !IsNumber(arg1) )
     {
       send_to_char( "Syntax: Fuel <amount> <ship>", ch);
       return;
     }
 
-  if( argument[0] == '\0' || !str_cmp(argument, "" ))
+  if( argument[0] == '\0' || !StrCmp(argument, "" ))
     {
       if( !ship->docked )
         {

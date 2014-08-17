@@ -442,15 +442,15 @@ OBJ_DATA *GetCarriedObject( const Character *ch, const char *argument )
   int number = 0, count = 0;
   vnum_t vnum = INVALID_VNUM;
 
-  number = number_argument( argument, arg );
+  number = NumberArgument( argument, arg );
 
-  if ( GetTrustLevel(ch) >= LEVEL_CREATOR && is_number( arg ) )
+  if ( GetTrustLevel(ch) >= LEVEL_CREATOR && IsNumber( arg ) )
     vnum = atoi( arg );
 
   for ( obj = ch->last_carrying; obj; obj = obj->prev_content )
     if ( obj->wear_loc == WEAR_NONE
          &&   CanSeeObject( ch, obj )
-         &&  (nifty_is_name( arg, obj->name ) || obj->pIndexData->vnum == vnum) )
+         &&  (NiftyIsName( arg, obj->name ) || obj->pIndexData->vnum == vnum) )
       if ( (count += obj->count) >= number )
         return obj;
 
@@ -466,7 +466,7 @@ OBJ_DATA *GetCarriedObject( const Character *ch, const char *argument )
   for ( obj = ch->last_carrying; obj; obj = obj->prev_content )
     if ( obj->wear_loc == WEAR_NONE
          &&   CanSeeObject( ch, obj )
-         &&   nifty_is_name_prefix( arg, obj->name ) )
+         &&   NiftyIsNamePrefix( arg, obj->name ) )
       if ( (count += obj->count) >= number )
         return obj;
 
@@ -488,15 +488,15 @@ OBJ_DATA *GetWornObject( const Character *ch, const char *argument )
       bug( "GetWornObject: null ch" );
     }
 
-  number = number_argument( argument, arg );
+  number = NumberArgument( argument, arg );
 
-  if ( GetTrustLevel(ch) >= LEVEL_CREATOR && is_number( arg ) )
+  if ( GetTrustLevel(ch) >= LEVEL_CREATOR && IsNumber( arg ) )
     vnum = atoi( arg );
 
   for ( obj = ch->last_carrying; obj; obj = obj->prev_content )
     if ( obj->wear_loc != WEAR_NONE
          &&   CanSeeObject( ch, obj )
-         &&  (nifty_is_name( arg, obj->name ) || obj->pIndexData->vnum == vnum) )
+         &&  (NiftyIsName( arg, obj->name ) || obj->pIndexData->vnum == vnum) )
       if ( ++count == number )
         return obj;
 
@@ -511,7 +511,7 @@ OBJ_DATA *GetWornObject( const Character *ch, const char *argument )
   for ( obj = ch->last_carrying; obj; obj = obj->prev_content )
     if ( obj->wear_loc != WEAR_NONE
          &&   CanSeeObject( ch, obj )
-         &&   nifty_is_name_prefix( arg, obj->name ) )
+         &&   NiftyIsNamePrefix( arg, obj->name ) )
       if ( ++count == number )
         return obj;
 
@@ -538,12 +538,12 @@ bool ms_find_obj( const Character *ch )
   if ( abs(ms) + (drunk/3) < 30 )
     return false;
 
-  if ( (number_percent() + (ms < 0 ? 15 : 5))> abs(ms)/2 + drunk/4 )
+  if ( (GetRandomPercent() + (ms < 0 ? 15 : 5))> abs(ms)/2 + drunk/4 )
     return false;
 
   if ( ms > 15 )        /* range 1 to 20 */
     {
-      switch( number_range( umax(1, (ms/5-15)), (ms+4) / 5 ) )
+      switch( GetRandomNumberFromRange( umax(1, (ms/5-15)), (ms+4) / 5 ) )
 	{
 	default:
 	case 1:
@@ -631,7 +631,7 @@ bool ms_find_obj( const Character *ch )
     {
       int sub = urange(1, abs(ms)/2 + drunk, 60);
 
-      switch( number_range( 1, sub/10 ) )
+      switch( GetRandomNumberFromRange( 1, sub/10 ) )
         {
         default:
         case 1:
@@ -856,7 +856,7 @@ void ImproveMentalState( Character *ch, int mod )
   int c = urange( 0, abs(mod), 20 );
   int con = GetCurrentConstitution(ch);
 
-  c += number_percent() < con ? 1 : 0;
+  c += GetRandomPercent() < con ? 1 : 0;
 
   if ( ch->mental_state < 0 )
     ch->mental_state = urange( -100, ch->mental_state + c, 0 );
@@ -873,7 +873,7 @@ void WorsenMentalState( Character *ch, int mod )
   int c   = urange( 0, abs(mod), 20 );
   int con = GetCurrentConstitution(ch);
 
-  c -= number_percent() < con ? 1 : 0;
+  c -= GetRandomPercent() < con ? 1 : 0;
 
   if ( c < 1 )
     return;
@@ -1003,7 +1003,7 @@ int GetDamageRoll( const Character *ch )
 
 bool IsDrunk( const Character *ch )
 {
-  return number_percent() < ch->pcdata->condition[COND_DRUNK];
+  return GetRandomPercent() < ch->pcdata->condition[COND_DRUNK];
 }
 
 bool IsRetiredImmortal( const Character *ch )
@@ -1029,7 +1029,7 @@ bool IsWaitingForAuth( const Character *ch )
     && IsBitSet(ch->pcdata->flags, PCFLAG_UNAUTHED);
 }
 
-#define DISGUISE(ch)            ((!nifty_is_name((ch)->name, (ch)->pcdata->title)) ? 1 : 0)
+#define DISGUISE(ch)            ((!NiftyIsName((ch)->name, (ch)->pcdata->title)) ? 1 : 0)
 
 const char *PERS( const Character *ch, const Character *looker )
 {

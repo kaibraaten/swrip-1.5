@@ -23,7 +23,7 @@ void do_name( Character *ch, char *argument )
       return;
     }
 
-  if (!str_cmp(ch->name, argument))
+  if (!StrCmp(ch->name, argument))
     {
       send_to_char("That's already your name!\r\n", ch);
       return;
@@ -31,7 +31,7 @@ void do_name( Character *ch, char *argument )
 
   for ( tmp = first_char; tmp; tmp = tmp->next )
     {
-      if (!str_cmp(argument, tmp->name))
+      if (!StrCmp(argument, tmp->name))
         break;
     }
 
@@ -42,7 +42,7 @@ void do_name( Character *ch, char *argument )
     }
 
   sprintf( fname, "%s%c/%s", PLAYER_DIR, tolower(argument[0]),
-           capitalize( argument ) );
+           Capitalize( argument ) );
   if ( stat( fname, &fst ) != -1 )
     {
       send_to_char("That name is already taken.  Please choose another.\r\n", ch);
@@ -50,7 +50,7 @@ void do_name( Character *ch, char *argument )
     }
 
   DISPOSE( ch->name );
-  ch->name = str_dup( argument );
+  ch->name = CopyString( argument );
   sprintf( buf, "%s the %s",ch->name,
            race_table[ch->race].race_name );
   set_title( ch, buf );

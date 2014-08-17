@@ -51,7 +51,7 @@ void do_fire(Character *ch, char *argument )
   if ( ship->sclass > SHIP_PLATFORM && !IsNpc(ch))
     ((ch->pcdata->learned[gsn_speeders] == 100) ? (the_chance -= 100 - ch->pcdata->learned[gsn_speedercombat]) : (the_chance = 0) );
 
-  if ( ch->in_room->vnum == ship->room.gunseat && !str_prefix( argument , "lasers"))
+  if ( ch->in_room->vnum == ship->room.gunseat && !StringPrefix( argument , "lasers"))
     {
 
       if (ship->statet0 == LASER_DAMAGED)
@@ -112,7 +112,7 @@ void do_fire(Character *ch, char *argument )
 
       act( AT_PLAIN, "$n presses the fire button.", ch,
            NULL, argument , TO_ROOM );
-      if ( number_percent( ) > the_chance )
+      if ( GetRandomPercent( ) > the_chance )
         {
           sprintf( buf , "Lasers fire from %s at you but miss." , ship->name);
           EchoToCockpit( AT_ORANGE , target , buf );
@@ -161,7 +161,7 @@ void do_fire(Character *ch, char *argument )
       return;
     }
 
-  if ( ch->in_room->vnum == ship->room.gunseat && !str_prefix( argument , "ions") )
+  if ( ch->in_room->vnum == ship->room.gunseat && !StringPrefix( argument , "ions") )
     {
 
       if (ship->statet0 == LASER_DAMAGED)
@@ -217,7 +217,7 @@ void do_fire(Character *ch, char *argument )
 
       act( AT_PLAIN, "$n presses the fire button.", ch,
            NULL, argument , TO_ROOM );
-      if ( number_percent( ) > the_chance )
+      if ( GetRandomPercent( ) > the_chance )
         {
           sprintf( buf , "Ion cannons fire from %s at you, but the blue plasma narrowly misses." , ship->name);
           EchoToCockpit( AT_ORANGE , target , buf );
@@ -266,7 +266,7 @@ void do_fire(Character *ch, char *argument )
       return;
     }
 
-  if ( ch->in_room->vnum == ship->room.gunseat && !str_prefix( argument , "missile") )
+  if ( ch->in_room->vnum == ship->room.gunseat && !StringPrefix( argument , "missile") )
     {
       if (ship->missilestate == MISSILE_DAMAGED)
 	{
@@ -324,7 +324,7 @@ void do_fire(Character *ch, char *argument )
 
       act( AT_PLAIN, "$n presses the fire button.", ch,
            NULL, argument , TO_ROOM );
-      if ( number_percent( ) > the_chance )
+      if ( GetRandomPercent( ) > the_chance )
         {
           send_to_char( "&RYou fail to lock onto your target!", ch );
           ship->missilestate = MISSILE_RELOAD_2;
@@ -365,7 +365,7 @@ void do_fire(Character *ch, char *argument )
 
       return;
     }
-  if ( ch->in_room->vnum == ship->room.gunseat && !str_prefix( argument , "torpedo") )
+  if ( ch->in_room->vnum == ship->room.gunseat && !StringPrefix( argument , "torpedo") )
     {
       if (ship->missilestate == MISSILE_DAMAGED)
         {
@@ -423,7 +423,7 @@ void do_fire(Character *ch, char *argument )
 
       act( AT_PLAIN, "$n presses the fire button.", ch,
            NULL, argument , TO_ROOM );
-      if ( number_percent( ) > the_chance )
+      if ( GetRandomPercent( ) > the_chance )
         {
           send_to_char( "&RYou fail to lock onto your target!", ch );
           ship->missilestate = MISSILE_RELOAD_2;
@@ -463,7 +463,7 @@ void do_fire(Character *ch, char *argument )
       return;
     }
 
-  if ( ch->in_room->vnum == ship->room.gunseat && !str_prefix( argument , "rocket") )
+  if ( ch->in_room->vnum == ship->room.gunseat && !StringPrefix( argument , "rocket") )
     {
       if (ship->missilestate == MISSILE_DAMAGED)
         {
@@ -521,7 +521,7 @@ void do_fire(Character *ch, char *argument )
 
       act( AT_PLAIN, "$n presses the fire button.", ch,
            NULL, argument , TO_ROOM );
-      if ( number_percent( ) > the_chance )
+      if ( GetRandomPercent( ) > the_chance )
         {
           send_to_char( "&RYou fail to lock onto your target!", ch );
           ship->missilestate = MISSILE_RELOAD_2;
@@ -567,7 +567,7 @@ void do_fire(Character *ch, char *argument )
     {
       Turret *turret = ship->turret[turret_num];
 
-      if ( ch->in_room->vnum == GetTurretRoom( turret ) && !str_prefix( argument , "lasers") )
+      if ( ch->in_room->vnum == GetTurretRoom( turret ) && !StringPrefix( argument , "lasers") )
 	{
 	  if ( IsTurretDamaged( turret ) )
 	    {
@@ -622,7 +622,7 @@ void do_fire(Character *ch, char *argument )
 	  act( AT_PLAIN, "$n presses the fire button.", ch,
 	       NULL, argument , TO_ROOM );
 
-	  if ( number_percent() > the_chance )
+	  if ( GetRandomPercent() > the_chance )
 	    {
 	      sprintf( buf , "Turbolasers fire from %s at you but miss." , ship->name);
 	      EchoToCockpit( AT_ORANGE , target , buf );

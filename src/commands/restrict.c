@@ -10,7 +10,7 @@ void do_restrict( Character *ch, char *argument )
   CMDTYPE *cmd;
   bool found = false;
 
-  argument = one_argument( argument, arg );
+  argument = OneArgument( argument, arg );
 
   if ( arg[0] == '\0' )
     {
@@ -18,7 +18,7 @@ void do_restrict( Character *ch, char *argument )
       return;
     }
 
-  argument = one_argument ( argument, arg2 );
+  argument = OneArgument ( argument, arg2 );
 
   if ( arg2[0] == '\0' )
     level = GetTrustLevel( ch );
@@ -31,7 +31,7 @@ void do_restrict( Character *ch, char *argument )
 
   for ( cmd = command_hash[hash]; cmd; cmd = cmd->next )
     {
-      if ( !str_prefix( arg, cmd->name )
+      if ( !StringPrefix( arg, cmd->name )
            &&    cmd->level <= GetTrustLevel( ch ) )
         {
           found = true;
@@ -41,7 +41,7 @@ void do_restrict( Character *ch, char *argument )
 
   if ( found )
     {
-      if ( !str_prefix( arg2, "show" ) )
+      if ( !StringPrefix( arg2, "show" ) )
         {
           sprintf(buf, "%s show", cmd->name);
           do_cedit(ch, buf);

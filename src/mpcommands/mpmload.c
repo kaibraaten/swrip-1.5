@@ -20,9 +20,9 @@ void do_mpmload( Character *ch, char *argument )
       return;
     }
 
-  one_argument( argument, arg );
+  OneArgument( argument, arg );
 
-  if ( arg[0] == '\0' || !is_number(arg) )
+  if ( arg[0] == '\0' || !IsNumber(arg) )
     {
       progbug( "Mpmload - Bad vnum as arg", ch );
       return;

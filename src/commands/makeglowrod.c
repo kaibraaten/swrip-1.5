@@ -66,7 +66,7 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
       return;
     }
 
-  ud->ItemName = str_dup( args->CommandArguments );
+  ud->ItemName = CopyString( args->CommandArguments );
 }
 
 static void CheckRequirementsHandler( void *userData, CheckRequirementsEventArgs *args )
@@ -97,15 +97,15 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   DISPOSE( glowrod->name );
   strcpy( buf, ud->ItemName );
   strcat( buf, " glowrod");
-  glowrod->name = str_dup( buf );
+  glowrod->name = CopyString( buf );
 
   strcpy( buf, ud->ItemName );
   DISPOSE( glowrod->short_descr );
-  glowrod->short_descr = str_dup( buf );
+  glowrod->short_descr = CopyString( buf );
 
   DISPOSE( glowrod->description );
   strcat( buf, " was carelessly misplaced here." );
-  glowrod->description = str_dup( capitalize( buf ) );
+  glowrod->description = CopyString( Capitalize( buf ) );
 
   glowrod->value[OVAL_LIGHT_POWER] = ud->Charge;
   glowrod->cost = glowrod->value[OVAL_LIGHT_POWER];

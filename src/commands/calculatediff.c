@@ -14,9 +14,9 @@ void do_calculate_diff(Character *ch, char *argument )
   Spaceobject *spaceobj, *spaceobject;
   bool found = false;
 
-  argument = one_argument( argument , arg1);
-  argument = one_argument( argument , arg2);
-  argument = one_argument( argument , arg3);
+  argument = OneArgument( argument , arg1);
+  argument = OneArgument( argument , arg2);
+  argument = OneArgument( argument , arg3);
 
 
   if (  (ship = GetShipFromCockpit(ch->in_room->vnum))  == NULL )
@@ -70,7 +70,7 @@ void do_calculate_diff(Character *ch, char *argument )
     }
   the_chance = IsNpc(ch) ? ch->top_level
     : (int)  (ch->pcdata->learned[gsn_navigation]) ;
-  if ( number_percent( ) > the_chance )
+  if ( GetRandomPercent( ) > the_chance )
     {
       send_to_char("&RYou cant seem to figure the charts out today.\r\n",ch);
       learn_from_failure( ch, gsn_navigation );
@@ -105,8 +105,8 @@ void do_calculate_diff(Character *ch, char *argument )
   ship->jump.z += (distance ? distance : (spaceobject && spaceobject->gravity ? spaceobject->gravity : 0 ) );
 
   for ( spaceobj = first_spaceobject; spaceobj; spaceobj = spaceobj->next )
-    if ( !spaceobj->trainer && distance && str_cmp(spaceobj->name,"")
-         && vector_distance( &ship->jump, &spaceobj->pos ) < spaceobj->gravity * 4 )
+    if ( !spaceobj->trainer && distance && StrCmp(spaceobj->name,"")
+         && GetDistanceBetweenVectors( &ship->jump, &spaceobj->pos ) < spaceobj->gravity * 4 )
       {
         EchoToCockpit( AT_RED, ship, "WARNING.. Jump coordinates too close to stellar object.");
         EchoToCockpit( AT_RED, ship, "WARNING.. Hyperjump NOT set.");
@@ -133,7 +133,7 @@ void do_calculate_diff(Character *ch, char *argument )
       return;
     }
 
-  ship->hyperdistance = vector_distance( &ship->pos, &ship->jump ) / 200;
+  ship->hyperdistance = GetDistanceBetweenVectors( &ship->pos, &ship->jump ) / 200;
 
   if (ship->hyperdistance<100)
     ship->hyperdistance = 100;

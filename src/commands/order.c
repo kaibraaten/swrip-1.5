@@ -13,7 +13,7 @@ void do_order( Character *ch, char *argument )
   bool fAll = false;
 
   strcpy( argbuf, argument );
-  argument = one_argument( argument, arg );
+  argument = OneArgument( argument, arg );
 
   if ( arg[0] == '\0' || argument[0] == '\0' )
     {
@@ -27,7 +27,7 @@ void do_order( Character *ch, char *argument )
       return;
     }
 
-  if ( !str_cmp( arg, "all" ) )
+  if ( !StrCmp( arg, "all" ) )
     {
       fAll = true;
     }
@@ -52,7 +52,7 @@ void do_order( Character *ch, char *argument )
         }
     }
 
-  if ( !str_prefix("mp",argument) )
+  if ( !StringPrefix("mp",argument) )
     {
       send_to_char( "But that's cheating!\r\n", ch );
       return;

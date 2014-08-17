@@ -12,14 +12,14 @@ bool spec_jedi( Character *ch )
   for ( victim = ch->in_room->first_person; victim; victim = v_next )
     {
       v_next = victim->next_in_room;
-      if ( victim != ch && CanSeeCharacter( ch, victim ) && number_bits( 1 ) == 0 )
+      if ( victim != ch && CanSeeCharacter( ch, victim ) && NumberBits( 1 ) == 0 )
         break;
     }
 
   if ( !victim )
     return false;
 
-  switch ( number_bits( 3 ) )
+  switch ( NumberBits( 3 ) )
     {
     case 0:
       spell_smaug( skill_lookup( "armor" ), ch->top_level, ch, victim );

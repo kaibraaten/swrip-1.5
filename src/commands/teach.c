@@ -10,7 +10,7 @@ void do_teach( Character *ch, char *argument )
   if ( IsNpc(ch) )
     return;
 
-  argument = one_argument(argument, arg);
+  argument = OneArgument(argument, arg);
 
   if ( argument[0] == '\0' )
     {
@@ -63,7 +63,7 @@ void do_teach( Character *ch, char *argument )
           return;
         }
 
-      if ( is_name( skill_tname[skill_table[sn]->type], CANT_PRAC ) )
+      if ( IsName( skill_tname[skill_table[sn]->type], CANT_PRAC ) )
         {
           act( AT_TELL, "You are unable to teach that skill.",
                victim, NULL, ch, TO_VICT );

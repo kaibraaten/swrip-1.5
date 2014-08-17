@@ -6,7 +6,7 @@ void do_smoke( Character *ch, char *argument )
   OBJ_DATA *pipe_obj;
   char arg[MAX_INPUT_LENGTH];
 
-  one_argument( argument, arg );
+  OneArgument( argument, arg );
   if ( arg[0] == '\0' )
     {
       send_to_char( "Smoke what?\r\n", ch );

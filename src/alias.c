@@ -39,10 +39,10 @@ Alias *FindAlias( const Character *ch, const char *original_argument )
     return(NULL);
 
   strcpy(argument, original_argument);
-  one_argument(argument, alias_name);
+  OneArgument(argument, alias_name);
 
   for (pal=ch->pcdata->first_alias;pal;pal=pal->next)
-    if ( !str_prefix(alias_name, pal->name) )
+    if ( !StringPrefix(alias_name, pal->name) )
       return(pal);
 
   return(NULL);
