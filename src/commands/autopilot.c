@@ -6,19 +6,19 @@ void do_autopilot(Character *ch, char *argument )
 {
   Ship *ship;
 
-  if (  (ship = ship_from_cockpit(ch->in_room->vnum))  == NULL )
+  if (  (ship = GetShipFromCockpit(ch->in_room->vnum))  == NULL )
     {
       send_to_char("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
       return;
     }
 
-  if (  (ship = ship_from_pilotseat(ch->in_room->vnum))  == NULL )
+  if (  (ship = GetShipFromPilotSeat(ch->in_room->vnum))  == NULL )
     {
       send_to_char("&RYou must be in the pilots seat!\r\n",ch);
       return;
     }
 
-  if ( ! check_pilot(ch,ship) )
+  if ( ! CheckPilot(ch,ship) )
     {
       send_to_char("&RHey! Thats not your ship!\r\n",ch);
       return;
@@ -49,7 +49,7 @@ void do_autopilot(Character *ch, char *argument )
     {
       ship->autopilot=false;
       send_to_char( "&GYou toggle the autopilot.\r\n", ch);
-      echo_to_cockpit( AT_YELLOW , ship , "Autopilot OFF.");
+      EchoToCockpit( AT_YELLOW , ship , "Autopilot OFF.");
     }
   else
     {
@@ -61,6 +61,6 @@ void do_autopilot(Character *ch, char *argument )
       ship->autopilot=true;
       ship->autorecharge = true;
       send_to_char( "&GYou toggle the autopilot.\r\n", ch);
-      echo_to_cockpit( AT_YELLOW , ship , "Autopilot ON.");
+      EchoToCockpit( AT_YELLOW , ship , "Autopilot ON.");
     }
 }

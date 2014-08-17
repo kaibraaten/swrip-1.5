@@ -4,7 +4,7 @@
 /* Prints the argument to all the rooms around the mobile */
 void do_mpasound( Character *ch, char *argument )
 {
-  ROOM_INDEX_DATA *was_in_room;
+  Room *was_in_room;
   Exit       *pexit;
   int                actflags;
 

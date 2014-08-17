@@ -744,7 +744,7 @@ static void look_in( Character *ch, char *what, bool doexaprog )
 	  if ( pexit->vdir == DIR_PORTAL
 	       &&   IS_SET(pexit->exit_info, EX_PORTAL) )
 	    {
-	      ROOM_INDEX_DATA *original = NULL;
+	      Room *original = NULL;
 
 	      if ( room_is_private( ch, pexit->to_room )
 		   && GetTrustLevel(ch) < sysdata.level_override_private )
@@ -836,7 +836,7 @@ static void show_exit_to_char( Character *ch, Exit *pexit, short door )
 	    || IS_SET( pexit->exit_info, EX_xLOOK )
 	    || GetTrustLevel(ch) >= LEVEL_IMMORTAL ) )
     {
-      ROOM_INDEX_DATA *original = NULL;
+      Room *original = NULL;
 
       if ( !IS_SET( pexit->exit_info, EX_xLOOK )
 	   && GetTrustLevel( ch ) < LEVEL_IMMORTAL )
@@ -868,7 +868,7 @@ static void show_exit_to_char( Character *ch, Exit *pexit, short door )
 
       if ( pexit->distance > 1 )
 	{
-	  ROOM_INDEX_DATA *to_room = generate_exit( ch->in_room, &pexit );
+	  Room *to_room = generate_exit( ch->in_room, &pexit );
 
 	  if ( to_room )
 	    {
@@ -932,7 +932,7 @@ static void show_no_arg( Character *ch, bool is_auto )
 
   if ( !is_auto )
     {
-      Ship *ship = ship_from_cockpit(ch->in_room->vnum);
+      Ship *ship = GetShipFromCockpit(ch->in_room->vnum);
 
       if ( ship )
 	{
@@ -941,11 +941,11 @@ static void show_no_arg( Character *ch, bool is_auto )
 
 	  if ( ship->location || ship->shipstate == SHIP_LANDED )
 	    {
-	      ROOM_INDEX_DATA *to_room = get_room_index( ship->location );
+	      Room *to_room = get_room_index( ship->location );
 
 	      if ( to_room )
 		{
-		  ROOM_INDEX_DATA *original = ch->in_room;
+		  Room *original = ch->in_room;
 
 		  ch_printf( ch, "\r\n" );
 		  char_from_room( ch );
@@ -962,13 +962,13 @@ static void show_no_arg( Character *ch, bool is_auto )
 	  else if (ship->spaceobject )
 	    {
 	      Ship *target = NULL;
-	      SPACE_DATA *spaceobject = NULL;
+	      Spaceobject *spaceobject = NULL;
 
 	      set_char_color(  AT_GREEN, ch );
 
 	      for( spaceobject = first_spaceobject; spaceobject; spaceobject = spaceobject->next )
 		{
-		  if ( space_in_range( ship, spaceobject)
+		  if ( IsSpaceobjectInRange( ship, spaceobject)
 		       && spaceobject->name
 		       && str_cmp(spaceobject->name,"") )
 		    {

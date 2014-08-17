@@ -5,7 +5,7 @@
 void do_shiptrack( Character *ch, char *argument)
 {
   Ship *ship;
-  SPACE_DATA *spaceobject;
+  Spaceobject *spaceobject;
   char arg[MAX_INPUT_LENGTH];
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
@@ -17,7 +17,7 @@ void do_shiptrack( Character *ch, char *argument)
   argument = one_argument( argument , arg2);
   argument = one_argument( argument , arg3);
 
-  if ( (ship = ship_from_cockpit(ch->in_room->vnum)) == NULL )
+  if ( (ship = GetShipFromCockpit(ch->in_room->vnum)) == NULL )
     {
       send_to_char("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
       return;
@@ -46,7 +46,7 @@ void do_shiptrack( Character *ch, char *argument)
     {
       Vector3 head;
 
-      if ( ship_is_in_hyperspace( ship ) )
+      if ( IsShipInHyperspace( ship ) )
         {
           send_to_char("&RYou can only do that in realspace!\r\n",ch);
           return;
@@ -83,7 +83,7 @@ void do_shiptrack( Character *ch, char *argument)
                   ship->pos.y + head.y, ship->pos.z + head.z );
 
       for( spaceobject = first_spaceobject; spaceobject; spaceobject = spaceobject->next )
-        if( space_in_range( ship, spaceobject ) )
+        if( IsSpaceobjectInRange( ship, spaceobject ) )
           {
             ship->currjump = spaceobject;
 	    break;
@@ -98,8 +98,8 @@ void do_shiptrack( Character *ch, char *argument)
           || ship->head.x > MAX_COORD || ship->head.y > MAX_COORD || ship->head.z > MAX_COORD
           || ship->head.x < -MAX_COORD || ship->head.y < -MAX_COORD || ship->head.z < -MAX_COORD )
         {
-          echo_to_cockpit( AT_RED, ship, "WARNING... Jump coordinates outside of the known galaxy.");
-          echo_to_cockpit( AT_RED, ship, "WARNING... Hyperjump NOT set.");
+          EchoToCockpit( AT_RED, ship, "WARNING... Jump coordinates outside of the known galaxy.");
+          EchoToCockpit( AT_RED, ship, "WARNING... Hyperjump NOT set.");
           ship->currjump = NULL;
           ship->tracking = false;
           return;
@@ -117,7 +117,7 @@ void do_shiptrack( Character *ch, char *argument)
       ship->tracking = false;
       send_to_char( "Tracking program cancelled.\r\n", ch);
 
-      if( ship_is_in_hyperspace( ship ) )
+      if( IsShipInHyperspace( ship ) )
         do_hyperspace( ch, "off" );
     }
 }

@@ -9,8 +9,8 @@ void do_snipe( Character *ch, char *argument )
   short            dir, dist;
   short            max_dist = 1;
   Exit       * pexit;
-  ROOM_INDEX_DATA * was_in_room;
-  ROOM_INDEX_DATA * to_room;
+  Room * was_in_room;
+  Room * to_room;
   Character       * victim = NULL;
   int               the_chance;
   char              buf[MAX_STRING_LENGTH];

@@ -11,7 +11,7 @@ void do_calculate(Character *ch, char *argument )
   char buf[MAX_INPUT_LENGTH];
   int the_chance , distance = 0;
   Ship *ship;
-  SPACE_DATA *spaceobj, *spaceobject;
+  Spaceobject *spaceobj, *spaceobject;
   bool found = false;
 
   argument = one_argument( argument , arg1);
@@ -19,7 +19,7 @@ void do_calculate(Character *ch, char *argument )
   argument = one_argument( argument , arg3);
 
 
-  if (  (ship = ship_from_cockpit(ch->in_room->vnum))  == NULL )
+  if (  (ship = GetShipFromCockpit(ch->in_room->vnum))  == NULL )
     {
       send_to_char("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
       return;
@@ -31,13 +31,13 @@ void do_calculate(Character *ch, char *argument )
       return;
     }
 
-  if (  (ship = ship_from_navseat(ch->in_room->vnum))  == NULL )
+  if (  (ship = GetShipFromNavSeat(ch->in_room->vnum))  == NULL )
     {
       send_to_char("&RYou must be at a nav computer to calculate jumps.\r\n",ch);
       return;
     }
 
-  if ( is_autoflying(ship)  )
+  if ( IsShipAutoflying(ship)  )
     {
       send_to_char("&RYou'll have to turn off the ships autopilot first....\r\n",ch);
       return;
@@ -130,14 +130,14 @@ void do_calculate(Character *ch, char *argument )
     if ( !spaceobj->trainer && distance && str_cmp(spaceobj->name,"")
          && vector_distance( &ship->jump, &spaceobj->pos ) <  spaceobj->gravity * 4 )
       {
-        echo_to_cockpit( AT_RED, ship, "WARNING.. Jump coordinates too close to stellar object.");
-        echo_to_cockpit( AT_RED, ship, "WARNING.. Hyperjump NOT set.");
+        EchoToCockpit( AT_RED, ship, "WARNING.. Jump coordinates too close to stellar object.");
+        EchoToCockpit( AT_RED, ship, "WARNING.. Hyperjump NOT set.");
         ship->currjump = NULL;
         return;
       }
 
   for( spaceobject = first_spaceobject; spaceobject; spaceobject = spaceobject->next )
-    if( space_in_range( ship, spaceobject ) )
+    if( IsSpaceobjectInRange( ship, spaceobject ) )
       {
         ship->currjump = spaceobject;
         break;
@@ -148,8 +148,8 @@ void do_calculate(Character *ch, char *argument )
   if( ship->jump.x > MAX_COORD_S || ship->jump.y > MAX_COORD_S || ship->jump.z > MAX_COORD_S ||
       ship->jump.x < -MAX_COORD_S || ship->jump.y < -MAX_COORD_S || ship->jump.z < -MAX_COORD_S )
     {
-      echo_to_cockpit( AT_RED, ship, "WARNING.. Jump coordinates outside of the known galaxy.");
-      echo_to_cockpit( AT_RED, ship, "WARNING.. Hyperjump NOT set.");
+      EchoToCockpit( AT_RED, ship, "WARNING.. Jump coordinates outside of the known galaxy.");
+      EchoToCockpit( AT_RED, ship, "WARNING.. Hyperjump NOT set.");
       ship->currjump = NULL;
       return;
     }
@@ -163,7 +163,7 @@ void do_calculate(Character *ch, char *argument )
 
   sprintf(buf, "&GHyperspace course set. Estimated distance: %d\r\nReady for the jump to lightspeed.\r\n", ship->hyperdistance );
   send_to_char( buf, ch);
-  echo_to_docked( AT_YELLOW , ship, "The docking port link shows a new course being calculated." );
+  EchoToDockedShip( AT_YELLOW , ship, "The docking port link shows a new course being calculated." );
 
   act( AT_PLAIN, "$n does some calculations using the ships computer.", ch,
        NULL, argument , TO_ROOM );

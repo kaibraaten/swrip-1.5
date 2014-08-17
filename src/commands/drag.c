@@ -9,10 +9,10 @@ void do_drag( Character *ch, char *argument )
   int exit_dir;
   Character *victim;
   Exit *pexit;
-  ROOM_INDEX_DATA *to_room;
+  Room *to_room;
   bool nogo;
   int drag_chance;
-  ROOM_INDEX_DATA *fromroom;
+  Room *fromroom;
   Ship *ship;
 
   argument = one_argument( argument, arg );
@@ -74,7 +74,7 @@ void do_drag( Character *ch, char *argument )
               return;
             }
 
-          if ( ( ship = ship_in_room( ch->in_room , argument ) ) == NULL )
+          if ( ( ship = GetShipInRoom( ch->in_room , argument ) ) == NULL )
             {
               act( AT_PLAIN, "I see no $T here.", ch, NULL, argument, TO_CHAR );
               return;
@@ -145,7 +145,7 @@ void do_drag( Character *ch, char *argument )
         {
           fromroom = ch->in_room;
 
-          if  ( (ship = ship_from_entrance(fromroom->vnum)) == NULL )
+          if  ( (ship = GetShipFromEntrance(fromroom->vnum)) == NULL )
             {
               send_to_char( "I see no exit here.\r\n" , ch );
               return;
@@ -163,7 +163,7 @@ void do_drag( Character *ch, char *argument )
               return;
             }
 
-          if ( ship->shipstate != SHIP_LANDED && !ship_is_disabled( ship ) )
+          if ( ship->shipstate != SHIP_LANDED && !IsShipDisabled( ship ) )
             {
               send_to_char("&rPlease wait till the ship is properly docked.\r\n",ch);
               return;

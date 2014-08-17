@@ -217,7 +217,7 @@ static void fread_planet( PLANET_DATA *planet, FILE *fp )
 
 	      if (planet->spaceobject)
                 {
-                  SPACE_DATA *spaceobject = planet->spaceobject;
+                  Spaceobject *spaceobject = planet->spaceobject;
 
                   spaceobject->planet = planet;
                 }

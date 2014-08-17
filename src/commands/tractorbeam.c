@@ -17,7 +17,7 @@ void do_tractorbeam(Character *ch, char *argument )
   switch( ch->substate )
     {
     default:
-      if (  (ship = ship_from_coseat(ch->in_room->vnum))  == NULL )
+      if (  (ship = GetShipFromCoSeat(ch->in_room->vnum))  == NULL )
         {
           send_to_char("&RYou must be in the copilot's seat of a ship to do that!\r\n",ch);
           return;
@@ -34,7 +34,7 @@ void do_tractorbeam(Character *ch, char *argument )
           return;
 	}
 
-      if ( ship_is_in_hyperspace( ship ) || !ship->spaceobject )
+      if ( IsShipInHyperspace( ship ) || !ship->spaceobject )
         {
           send_to_char("&RYou can only do that in realspace!\r\n",ch);
           return;
@@ -51,7 +51,7 @@ void do_tractorbeam(Character *ch, char *argument )
           return;
         }
 
-      if ( is_autoflying(ship) )
+      if ( IsShipAutoflying(ship) )
         {
           send_to_char("&RYou'll have to turn off the ships autopilot first....\r\n",ch);
           return;
@@ -72,7 +72,7 @@ void do_tractorbeam(Character *ch, char *argument )
               if( ship->tractored->location )
                 ship->tractored->shipstate = SHIP_LANDED;
               else if ( ship->tractored->shipstate != SHIP_DOCKED ||
-                        !ship_is_disabled( ship->tractored ) )
+                        !IsShipDisabled( ship->tractored ) )
                 ship->tractored->shipstate = SHIP_READY;
 	    }
           ship->tractored = NULL;
@@ -86,12 +86,12 @@ void do_tractorbeam(Character *ch, char *argument )
           if( ship->tractored->location )
             ship->tractored->shipstate = SHIP_LANDED;
           else if ( ship->tractored->shipstate != SHIP_DOCKED ||
-                    !ship_is_disabled( ship->tractored ) )
+                    !IsShipDisabled( ship->tractored ) )
             ship->tractored->shipstate = SHIP_READY;
         }
 
 
-      target = get_ship_here( arg, ship );
+      target = GetShipInRange( arg, ship );
 
 
       if (  target == NULL )
@@ -158,7 +158,7 @@ void do_tractorbeam(Character *ch, char *argument )
     case SUB_TIMER_DO_ABORT:
       DISPOSE( ch->dest_buf );
       ch->substate = SUB_NONE;
-      if ( (ship = ship_from_cockpit(ch->in_room->vnum)) == NULL )
+      if ( (ship = GetShipFromCockpit(ch->in_room->vnum)) == NULL )
         return;
       send_to_char("&RYour concentration is broken. You fail to lock onto your target.\r\n", ch);
       return;
@@ -166,11 +166,11 @@ void do_tractorbeam(Character *ch, char *argument )
 
   ch->substate = SUB_NONE;
 
-  if ( (ship = ship_from_coseat(ch->in_room->vnum)) == NULL )
+  if ( (ship = GetShipFromCoSeat(ch->in_room->vnum)) == NULL )
     {
       return;
     }
-  target = get_ship_here( arg, ship );
+  target = GetShipInRange( arg, ship );
 
   if (  target == NULL || target == ship)
     {
@@ -214,14 +214,14 @@ void do_tractorbeam(Character *ch, char *argument )
 
   send_to_char( "&GTarget Locked.\r\n", ch);
   sprintf( buf , "You have been locked in a tractor beam by %s." , ship->name);
-  echo_to_cockpit( AT_BLOOD , target , buf );
+  EchoToCockpit( AT_BLOOD , target , buf );
 
   learn_from_success( ch, gsn_tractorbeams );
 
-  if ( is_autoflying(target) && !target->target0 && str_cmp( target->owner, ship->owner ) )
+  if ( IsShipAutoflying(target) && !target->target0 && str_cmp( target->owner, ship->owner ) )
     {
       sprintf( buf , "You are being targetted by %s." , target->name);
-      echo_to_cockpit( AT_BLOOD , ship , buf );
+      EchoToCockpit( AT_BLOOD , ship , buf );
       target->target0 = ship;
     }
 }

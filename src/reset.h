@@ -26,10 +26,10 @@
 #include <utility/utility.h>
 #include "types.h"
 
-ROOM_INDEX_DATA *FindRoom( Character *ch, char *argument, ROOM_INDEX_DATA *pRoom );
-void WipeResets( Area *pArea, ROOM_INDEX_DATA *pRoom );
-void InstallRoom( Area *pArea, ROOM_INDEX_DATA *pRoom, bool dodoors );
-void EditReset( Character *ch, char *argument, Area *pArea, ROOM_INDEX_DATA *aRoom );
+Room *FindRoom( Character *ch, char *argument, Room *pRoom );
+void WipeResets( Area *pArea, Room *pRoom );
+void InstallRoom( Area *pArea, Room *pRoom, bool dodoors );
+void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom );
 void ResetArea( Area *pArea );
 char *SPrintReset( Character *ch, Reset *pReset, short num, bool rlist );
 Reset *MakeReset( char letter, int extra, int arg1, int arg2, int arg3 );

@@ -3,7 +3,7 @@
 
 void do_spaceobjects( Character *ch, char *argument )
 {
-  SPACE_DATA *spaceobject;
+  Spaceobject *spaceobject;
   int count = 0;
 
   set_char_color( AT_RED, ch );

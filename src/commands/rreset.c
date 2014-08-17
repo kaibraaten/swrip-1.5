@@ -4,11 +4,11 @@
 
 void do_rreset( Character *ch, char *argument )
 {
-  ROOM_INDEX_DATA *pRoom;
+  Room *pRoom;
 
   if ( ch->substate == SUB_REPEATCMD )
     {
-      pRoom = (ROOM_INDEX_DATA*)ch->dest_buf;
+      pRoom = (Room*)ch->dest_buf;
       if ( !pRoom )
         {
           send_to_char( "Your room pointer got lost.  Reset mode off.\r\n", ch);

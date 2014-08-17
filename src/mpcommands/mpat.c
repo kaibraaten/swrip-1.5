@@ -6,8 +6,8 @@
 void do_mpat( Character *ch, char *argument )
 {
   char             arg[ MAX_INPUT_LENGTH ];
-  ROOM_INDEX_DATA *location;
-  ROOM_INDEX_DATA *original;
+  Room *location;
+  Room *original;
   Character       *wch;
 
   if ( IsAffectedBy( ch, AFF_CHARM ) )

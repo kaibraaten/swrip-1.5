@@ -30,7 +30,7 @@ void do_shutdown( Character *ch, char *argument )
         if ( !IsNpc( vch ) )
           save_char_obj( vch );
       for ( ship = first_ship; ship; ship = ship->next )
-        save_ship( ship );
+        SaveShip( ship );
     }
 
   mud_down = true;

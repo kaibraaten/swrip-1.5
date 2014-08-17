@@ -5,7 +5,7 @@ void do_scatter( Character *ch, char *argument )
 {
   Character *victim;
   char arg[MAX_INPUT_LENGTH];
-  ROOM_INDEX_DATA *pRoomIndex;
+  Room *pRoomIndex;
 
   set_char_color( AT_IMMORT, ch );
   one_argument( argument, arg );

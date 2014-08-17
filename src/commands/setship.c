@@ -11,7 +11,7 @@ void do_setship( Character *ch, char *argument )
   char arg2[MAX_INPUT_LENGTH];
   Ship *ship = NULL;
   int tempnum = 0;
-  ROOM_INDEX_DATA *roomindex = NULL;
+  Room *roomindex = NULL;
 
   if ( IsNpc( ch ) )
     {
@@ -37,7 +37,7 @@ void do_setship( Character *ch, char *argument )
       return;
     }
 
-  ship = get_ship( arg1 );
+  ship = GetShipAnywhere( arg1 );
 
   if ( !ship )
     {
@@ -60,7 +60,7 @@ void do_setship( Character *ch, char *argument )
       STRFREE( ship->owner );
       ship->owner = STRALLOC( argument );
       send_to_char( "Done.\r\n", ch );
-      save_ship( ship );
+      SaveShip( ship );
 
       if ( ship->type != MOB_SHIP && (clan = get_clan( ship->owner )) != NULL )
         {
@@ -78,7 +78,7 @@ void do_setship( Character *ch, char *argument )
       STRFREE( ship->home );
       ship->home = STRALLOC( argument );
       send_to_char( "Done.\r\n", ch );
-      save_ship( ship );
+      SaveShip( ship );
       return;
     }
 
@@ -87,7 +87,7 @@ void do_setship( Character *ch, char *argument )
       STRFREE( ship->pilot );
       ship->pilot = STRALLOC( argument );
       send_to_char( "Done.\r\n", ch );
-      save_ship( ship );
+      SaveShip( ship );
       return;
     }
 
@@ -96,7 +96,7 @@ void do_setship( Character *ch, char *argument )
       STRFREE( ship->copilot );
       ship->copilot = STRALLOC( argument );
       send_to_char( "Done.\r\n", ch );
-      save_ship( ship );
+      SaveShip( ship );
       return;
     }
 
@@ -130,7 +130,7 @@ void do_setship( Character *ch, char *argument )
 
       ship->room.hanger = 0;
       send_to_char( "You will now need to set the other rooms in the ship.\r\n", ch );
-      save_ship( ship );
+      SaveShip( ship );
       return;
     }
 
@@ -171,7 +171,7 @@ void do_setship( Character *ch, char *argument )
 
       ship->room.last = tempnum;
       send_to_char( "Done.\r\n", ch );
-      save_ship( ship );
+      SaveShip( ship );
       return;
     }
 
@@ -200,7 +200,7 @@ void do_setship( Character *ch, char *argument )
 
       ship->room.cockpit = tempnum;
       send_to_char( "Done.\r\n", ch );
-      save_ship( ship );
+      SaveShip( ship );
       return;
     }
 
@@ -229,7 +229,7 @@ void do_setship( Character *ch, char *argument )
 
       ship->room.pilotseat = tempnum;
       send_to_char( "Done.\r\n", ch );
-      save_ship( ship );
+      SaveShip( ship );
       return;
     }
 
@@ -258,7 +258,7 @@ void do_setship( Character *ch, char *argument )
 
       ship->room.coseat = tempnum;
       send_to_char( "Done.\r\n", ch );
-      save_ship( ship );
+      SaveShip( ship );
       return;
     }
 
@@ -287,7 +287,7 @@ void do_setship( Character *ch, char *argument )
 
       ship->room.navseat = tempnum;
       send_to_char( "Done.\r\n", ch );
-      save_ship( ship );
+      SaveShip( ship );
       return;
     }
 
@@ -316,7 +316,7 @@ void do_setship( Character *ch, char *argument )
 
       ship->room.gunseat = tempnum;
       send_to_char( "Done.\r\n", ch );
-      save_ship( ship );
+      SaveShip( ship );
       return;
     }
 
@@ -345,7 +345,7 @@ void do_setship( Character *ch, char *argument )
 
       ship->room.entrance = tempnum;
       send_to_char( "Done.\r\n", ch );
-      save_ship( ship );
+      SaveShip( ship );
       return;
     }
 
@@ -380,7 +380,7 @@ void do_setship( Character *ch, char *argument )
 
       set_turret_room( ship->turret[0], tempnum );
       send_to_char( "Done.\r\n", ch );
-      save_ship( ship );
+      SaveShip( ship );
       return;
     }
 
@@ -415,7 +415,7 @@ void do_setship( Character *ch, char *argument )
 
       set_turret_room( ship->turret[1], tempnum );
       send_to_char( "Done.\r\n", ch );
-      save_ship( ship );
+      SaveShip( ship );
       return;
     }
 
@@ -456,7 +456,7 @@ void do_setship( Character *ch, char *argument )
 
       set_turret_room( ship->turret[2], tempnum );
       send_to_char( "Done.\r\n", ch );
-      save_ship( ship );
+      SaveShip( ship );
       return;
     }
 
@@ -497,7 +497,7 @@ void do_setship( Character *ch, char *argument )
 
       set_turret_room( ship->turret[3], tempnum );
       send_to_char( "Done.\r\n", ch );
-      save_ship( ship );
+      SaveShip( ship );
       return;
     }
 
@@ -539,7 +539,7 @@ void do_setship( Character *ch, char *argument )
 
       set_turret_room( ship->turret[4], tempnum );
       send_to_char( "Done.\r\n", ch );
-      save_ship( ship );
+      SaveShip( ship );
       return;
     }
 
@@ -580,7 +580,7 @@ void do_setship( Character *ch, char *argument )
 
       set_turret_room( ship->turret[5], tempnum );
       send_to_char( "Done.\r\n", ch );
-      save_ship( ship );
+      SaveShip( ship );
       return;
     }
 
@@ -621,7 +621,7 @@ void do_setship( Character *ch, char *argument )
 
       set_turret_room( ship->turret[6], tempnum );
       send_to_char( "Done.\r\n", ch );
-      save_ship( ship );
+      SaveShip( ship );
       return;
     }
 
@@ -662,7 +662,7 @@ void do_setship( Character *ch, char *argument )
 
       set_turret_room( ship->turret[7], tempnum );
       send_to_char( "Done.\r\n", ch );
-      save_ship( ship );
+      SaveShip( ship );
       return;
     }
 
@@ -703,7 +703,7 @@ void do_setship( Character *ch, char *argument )
 
       set_turret_room( ship->turret[8], tempnum );
       send_to_char( "Done.\r\n", ch );
-      save_ship( ship );
+      SaveShip( ship );
       return;
     }
 
@@ -744,7 +744,7 @@ void do_setship( Character *ch, char *argument )
 
       set_turret_room( ship->turret[9], tempnum );
       send_to_char( "Done.\r\n", ch );
-      save_ship( ship );
+      SaveShip( ship );
       return;
     }
 
@@ -779,7 +779,7 @@ void do_setship( Character *ch, char *argument )
 
       ship->room.hanger = tempnum;
       send_to_char( "Done.\r\n", ch );
-      save_ship( ship );
+      SaveShip( ship );
       return;
     }
 
@@ -808,7 +808,7 @@ void do_setship( Character *ch, char *argument )
 
       ship->room.engine = tempnum;
       send_to_char( "Done.\r\n", ch );
-      save_ship( ship );
+      SaveShip( ship );
       return;
     }
 
@@ -825,7 +825,7 @@ void do_setship( Character *ch, char *argument )
 
       ship->shipyard = tempnum;
       send_to_char( "Done.\r\n", ch );
-      save_ship( ship );
+      SaveShip( ship );
       return;
     }
 
@@ -846,7 +846,7 @@ void do_setship( Character *ch, char *argument )
         }
 
       send_to_char( "Done.\r\n", ch );
-      save_ship( ship );
+      SaveShip( ship );
       return;
     }
 
@@ -855,7 +855,7 @@ void do_setship( Character *ch, char *argument )
       STRFREE( ship->name );
       ship->name = STRALLOC( argument );
       send_to_char( "Done.\r\n", ch );
-      save_ship( ship );
+      SaveShip( ship );
       return;
     }
 
@@ -866,7 +866,7 @@ void do_setship( Character *ch, char *argument )
 
       ship->personalname = STRALLOC( argument );
       send_to_char( "Done.\r\n", ch );
-      save_ship( ship );
+      SaveShip( ship );
       return;
     }
 
@@ -875,8 +875,8 @@ void do_setship( Character *ch, char *argument )
       DISPOSE( ship->filename );
       ship->filename = str_dup( argument );
       send_to_char( "Done.\r\n", ch );
-      save_ship( ship );
-      write_ship_list( );
+      SaveShip( ship );
+      WriteShipList( );
       return;
     }
 
@@ -885,7 +885,7 @@ void do_setship( Character *ch, char *argument )
       STRFREE( ship->description );
       ship->description = STRALLOC( argument );
       send_to_char( "Done.\r\n", ch );
-      save_ship( ship );
+      SaveShip( ship );
       return;
     }
 
@@ -893,7 +893,7 @@ void do_setship( Character *ch, char *argument )
     {
       ship->dockingports = urange( -1, atoi(argument) , 20 );
       send_to_char( "Done.\r\n", ch );
-      save_ship( ship );
+      SaveShip( ship );
       return;
     }
 
@@ -901,7 +901,7 @@ void do_setship( Character *ch, char *argument )
     {
       ship->guard = urange( -1, atoi(argument) , 1 );
       send_to_char( "Done.\r\n", ch );
-      save_ship( ship );
+      SaveShip( ship );
       return;
     }
 
@@ -909,7 +909,7 @@ void do_setship( Character *ch, char *argument )
     {
       ship->manuever = urange( 0, atoi(argument) , 250 );
       send_to_char( "Done.\r\n", ch );
-      save_ship( ship );
+      SaveShip( ship );
       return;
     }
 
@@ -921,7 +921,7 @@ void do_setship( Character *ch, char *argument )
         ship->lasers = urange( 0, atoi(argument) , 10 );
 
       send_to_char( "Done.\r\n", ch );
-      save_ship( ship );
+      SaveShip( ship );
       return;
     }
 
@@ -933,7 +933,7 @@ void do_setship( Character *ch, char *argument )
         ship->ions = urange( 0, atoi(argument) , 10 );
 
       send_to_char( "Done.\r\n", ch );
-      save_ship( ship );
+      SaveShip( ship );
       return;
     }
 
@@ -941,7 +941,7 @@ void do_setship( Character *ch, char *argument )
     {
       ship->sclass = urange( 0, atoi(argument) , WALKER );
       send_to_char( "Done.\r\n", ch );
-      save_ship( ship );
+      SaveShip( ship );
       return;
     }
 
@@ -949,7 +949,7 @@ void do_setship( Character *ch, char *argument )
     {
       ship->missiles = urange( 0, atoi(argument) , 255 );
       send_to_char( "Done.\r\n", ch );
-      save_ship( ship );
+      SaveShip( ship );
       return;
     }
 
@@ -957,7 +957,7 @@ void do_setship( Character *ch, char *argument )
     {
       ship->torpedos = urange( 0, atoi(argument) , 255 );
       send_to_char( "Done.\r\n", ch );
-      save_ship( ship );
+      SaveShip( ship );
       return;
     }
 
@@ -965,7 +965,7 @@ void do_setship( Character *ch, char *argument )
     {
       ship->rockets = urange( 0, atoi(argument) , 255 );
       send_to_char( "Done.\r\n", ch );
-      save_ship( ship );
+      SaveShip( ship );
       return;
     }
 
@@ -977,7 +977,7 @@ void do_setship( Character *ch, char *argument )
         ship->realspeed = urange( 0, atoi(argument) , 150 );
 
       send_to_char( "Done.\r\n", ch );
-      save_ship( ship );
+      SaveShip( ship );
       return;
     }
 
@@ -985,7 +985,7 @@ void do_setship( Character *ch, char *argument )
     {
       ship->tractorbeam = urange( 0, atoi(argument) , 255 );
       send_to_char( "Done.\r\n", ch );
-      save_ship( ship );
+      SaveShip( ship );
       return;
     }
 
@@ -993,7 +993,7 @@ void do_setship( Character *ch, char *argument )
     {
       ship->hyperspeed = urange( 0, atoi(argument) , 255 );
       send_to_char( "Done.\r\n", ch );
-      save_ship( ship );
+      SaveShip( ship );
       return;
     }
 
@@ -1005,7 +1005,7 @@ void do_setship( Character *ch, char *argument )
         ship->maxshield = urange( 0, atoi(argument) , 1000 );
 
       send_to_char( "Done.\r\n", ch );
-      save_ship( ship );
+      SaveShip( ship );
       return;
     }
 
@@ -1023,7 +1023,7 @@ void do_setship( Character *ch, char *argument )
         }
 
       send_to_char( "Done.\r\n", ch );
-      save_ship( ship );
+      SaveShip( ship );
       return;
     }
 
@@ -1032,7 +1032,7 @@ void do_setship( Character *ch, char *argument )
       ship->energy = urange( 1, atoi(argument) , 30000 );
       ship->maxenergy = urange( 1, atoi(argument) , 30000 );
       send_to_char( "Done.\r\n", ch );
-      save_ship( ship );
+      SaveShip( ship );
       return;
     }
 
@@ -1040,7 +1040,7 @@ void do_setship( Character *ch, char *argument )
     {
       ship->sensor = urange( 0, atoi(argument) , 255 );
       send_to_char( "Done.\r\n", ch );
-      save_ship( ship );
+      SaveShip( ship );
       return;
     }
 
@@ -1048,7 +1048,7 @@ void do_setship( Character *ch, char *argument )
     {
       ship->astro_array = urange( 0, atoi(argument) , 255 );
       send_to_char( "Done.\r\n", ch );
-      save_ship( ship );
+      SaveShip( ship );
       return;
     }
 
@@ -1056,7 +1056,7 @@ void do_setship( Character *ch, char *argument )
     {
       ship->comm = urange( 0, atoi(argument) , 255 );
       send_to_char( "Done.\r\n", ch );
-      save_ship( ship );
+      SaveShip( ship );
       return;
     }
 
@@ -1072,7 +1072,7 @@ void do_setship( Character *ch, char *argument )
         }
 
       send_to_char( "Done.\r\n", ch );
-      save_ship( ship );
+      SaveShip( ship );
       return;
     }
 
@@ -1080,7 +1080,7 @@ void do_setship( Character *ch, char *argument )
     {
       ship->alarm = urange(0,atoi(argument),5);
       send_to_char("Done.\r\n",ch);
-      save_ship(ship);
+      SaveShip(ship);
       return;
     }
 

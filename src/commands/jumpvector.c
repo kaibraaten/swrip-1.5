@@ -17,7 +17,7 @@ void do_jumpvector( Character *ch, char *argument )
   num = number_range( 1, 16 );
   randnum = 1.0/(float) num;
 
-  if (  (ship = ship_from_cockpit(ch->in_room->vnum))  == NULL )
+  if (  (ship = GetShipFromCockpit(ch->in_room->vnum))  == NULL )
     {
       send_to_char("&RYou must be in the cockpit, turret or engineroom of a ship to do that!\r\n",ch);
       return;
@@ -29,7 +29,7 @@ void do_jumpvector( Character *ch, char *argument )
       return;
     }
 
-  target = get_ship( argument );
+  target = GetShipAnywhere( argument );
 
   if ( !target )
     {
@@ -63,7 +63,7 @@ void do_jumpvector( Character *ch, char *argument )
       return;
     }
 
-  if( ship_is_in_hyperspace( ship ) )
+  if( IsShipInHyperspace( ship ) )
     {
       projected.x = (target->pos.x - target->originpos.x)*randnum;
       projected.y = (target->pos.y - target->originpos.y)*randnum;
@@ -72,7 +72,7 @@ void do_jumpvector( Character *ch, char *argument )
       send_to_char("After some deliberation, you figure out its projected course.\r\n", ch);
       sprintf(buf, "%s Heading: %.0f, %.0f, %.0f",
               target->name, projected.x, projected.y, projected.z );
-      echo_to_cockpit( AT_BLOOD, ship , buf );
+      EchoToCockpit( AT_BLOOD, ship , buf );
       learn_from_success( ch, gsn_jumpvector );
       return;
     }
@@ -84,7 +84,7 @@ void do_jumpvector( Character *ch, char *argument )
   send_to_char("After some deliberation, you figure out its projected course.\r\n", ch);
   sprintf(buf, "%s Heading: %.0f, %.0f, %.0f",
           target->name, projected.x, projected.y, projected.z  );
-  echo_to_cockpit( AT_BLOOD, ship , buf );
+  EchoToCockpit( AT_BLOOD, ship , buf );
   learn_from_success( ch, gsn_jumpvector );
 }
 

@@ -8,19 +8,19 @@ void do_autorecharge(Character *ch, char *argument )
   Ship *ship;
   int recharge;
 
-  if (  (ship = ship_from_cockpit(ch->in_room->vnum))  == NULL )
+  if (  (ship = GetShipFromCockpit(ch->in_room->vnum))  == NULL )
     {
       send_to_char("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
       return;
     }
 
-  if (  (ship = ship_from_coseat(ch->in_room->vnum))  == NULL )
+  if (  (ship = GetShipFromCoSeat(ch->in_room->vnum))  == NULL )
     {
       send_to_char("&RYou must be in the co-pilots seat!\r\n",ch);
       return;
     }
 
-  if ( is_autoflying(ship)  )
+  if ( IsShipAutoflying(ship)  )
     {
       send_to_char("&RYou'll have to turn off the ships autopilot first.\r\n",ch);
       return;
@@ -42,20 +42,20 @@ void do_autorecharge(Character *ch, char *argument )
     {
       ship->autorecharge=true;
       send_to_char( "&GYou power up the shields.\r\n", ch);
-      echo_to_cockpit( AT_YELLOW , ship , "Shields ON. Autorecharge ON.");
+      EchoToCockpit( AT_YELLOW , ship , "Shields ON. Autorecharge ON.");
     }
   else if ( !str_cmp(argument,"off" ) )
     {
       ship->autorecharge=false;
       send_to_char( "&GYou shutdown the shields.\r\n", ch);
-      echo_to_cockpit( AT_YELLOW , ship , "Shields OFF. Shield strength set to 0. Autorecharge OFF.");
+      EchoToCockpit( AT_YELLOW , ship , "Shields OFF. Shield strength set to 0. Autorecharge OFF.");
       ship->shield = 0;
     }
   else if ( !str_cmp(argument,"idle" ) )
     {
       ship->autorecharge=false;
       send_to_char( "&GYou let the shields idle.\r\n", ch);
-      echo_to_cockpit( AT_YELLOW , ship , "Autorecharge OFF. Shields IDLEING.");
+      EchoToCockpit( AT_YELLOW , ship , "Autorecharge OFF. Shields IDLEING.");
     }
   else
     {
@@ -63,13 +63,13 @@ void do_autorecharge(Character *ch, char *argument )
         {
           ship->autorecharge=false;
           send_to_char( "&GYou toggle the shields.\r\n", ch);
-          echo_to_cockpit( AT_YELLOW , ship , "Autorecharge OFF. Shields IDLEING.");
+          EchoToCockpit( AT_YELLOW , ship , "Autorecharge OFF. Shields IDLEING.");
         }
       else
         {
           ship->autorecharge=true;
           send_to_char( "&GYou toggle the shields.\r\n", ch);
-          echo_to_cockpit( AT_YELLOW , ship , "Shields ON. Autorecharge ON");
+          EchoToCockpit( AT_YELLOW , ship , "Shields ON. Autorecharge ON");
         }
     }
 

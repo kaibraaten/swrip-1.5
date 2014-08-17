@@ -15,7 +15,7 @@ void do_override(Character *ch, char *argument)
   argument = one_argument( argument, arg );
   strcpy ( arg2, argument);
 
-  if ( (ship = ship_from_cockpit(ch->in_room->vnum)) == NULL )
+  if ( (ship = GetShipFromCockpit(ch->in_room->vnum)) == NULL )
     {
       send_to_char("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
       return;
@@ -33,7 +33,7 @@ void do_override(Character *ch, char *argument)
       return;
     }
 
-  if ( ship_is_in_hyperspace( ship ) )
+  if ( IsShipInHyperspace( ship ) )
     {
       send_to_char("&RYou can only do that in realspace!\r\n",ch);
       return;
@@ -45,7 +45,7 @@ void do_override(Character *ch, char *argument)
       return;
     }
 
-  eShip = get_ship_here(arg,ship);
+  eShip = GetShipInRange(arg,ship);
 
   if ( eShip == NULL )
     {
@@ -65,7 +65,7 @@ void do_override(Character *ch, char *argument)
       return;
     }
 
-  if ( !check_pilot(ch,eShip) )
+  if ( !CheckPilot(ch,eShip) )
     {
       send_to_char("&RHey! That's not your ship!",ch);
       return;
@@ -77,7 +77,7 @@ void do_override(Character *ch, char *argument)
         {
           eShip->autorecharge=true;
           send_to_char( "&GShields on. Confirmed.\r\n", ch);
-          echo_to_cockpit( AT_YELLOW , eShip , "Shields ON. Autorecharge ON.");
+          EchoToCockpit( AT_YELLOW , eShip , "Shields ON. Autorecharge ON.");
           return;
         }
       else
@@ -92,9 +92,9 @@ void do_override(Character *ch, char *argument)
     {
       eShip->bayopen=false;
       send_to_char( "&GBays Close. Confirmed.\r\n", ch);
-      echo_to_cockpit( AT_YELLOW , eShip , "Bays Open");
+      EchoToCockpit( AT_YELLOW , eShip , "Bays Open");
       sprintf( buf ,"%s's bay doors close." , eShip->name );
-      echo_to_nearby_ships( AT_YELLOW, eShip, buf , NULL );
+      EchoToNearbyShips( AT_YELLOW, eShip, buf , NULL );
       return;
     }
 
@@ -102,9 +102,9 @@ void do_override(Character *ch, char *argument)
     {
       eShip->currspeed = 0;
       send_to_char( "&GBraking Thrusters. Confirmed.\r\n", ch);
-      echo_to_cockpit( AT_GREY , eShip , "Braking thrusters fire and the ship stops");
+      EchoToCockpit( AT_GREY , eShip , "Braking thrusters fire and the ship stops");
       sprintf( buf ,"%s decelerates." , eShip->name );
-      echo_to_nearby_ships( AT_GREY, eShip, buf , NULL );
+      EchoToNearbyShips( AT_GREY, eShip, buf , NULL );
       return;
     }
 
@@ -114,14 +114,14 @@ void do_override(Character *ch, char *argument)
         {
           eShip->autopilot=false;
           send_to_char( "&GYou toggle the autopilot.\r\n", ch);
-          echo_to_cockpit( AT_YELLOW , eShip , "Autopilot OFF.");
+          EchoToCockpit( AT_YELLOW , eShip , "Autopilot OFF.");
           return;
         }
       else if ( !ship->autopilot )
         {
           eShip->autopilot=true;
           send_to_char( "&GYou toggle the autopilot.\r\n", ch);
-          echo_to_cockpit( AT_YELLOW , eShip , "Autopilot ON.");
+          EchoToCockpit( AT_YELLOW , eShip , "Autopilot ON.");
           return;
         }
     }
@@ -132,7 +132,7 @@ void do_override(Character *ch, char *argument)
       act(AT_PLAIN,"$n flips a switch on the control panel.",ch,NULL,argument,TO_ROOM);
       eShip->bayopen = true;
       sprintf( buf ,"%s's bay doors open." , eShip->name );
-      echo_to_nearby_ships( AT_YELLOW, ship, buf , NULL );
+      EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );
       return;
     }
 

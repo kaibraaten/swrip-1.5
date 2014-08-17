@@ -5,7 +5,7 @@ void do_unhell( Character *ch, char *argument )
 {
   Character *victim;
   char arg[MAX_INPUT_LENGTH];
-  ROOM_INDEX_DATA *location;
+  Room *location;
 
   argument = one_argument(argument, arg);
   if ( !*arg )

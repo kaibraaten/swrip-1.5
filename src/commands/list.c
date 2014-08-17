@@ -6,7 +6,7 @@ void do_list( Character *ch, char *argument )
 {
   if ( IS_SET(ch->in_room->room_flags, ROOM_PET_SHOP) )
     {
-      ROOM_INDEX_DATA *pRoomIndexNext;
+      Room *pRoomIndexNext;
       Character *pet;
       bool found;
 

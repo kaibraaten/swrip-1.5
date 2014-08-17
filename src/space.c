@@ -28,7 +28,7 @@
 Missile *first_missile = NULL;
 Missile *last_missile = NULL;
 
-void echo_to_room_dnr( int ecolor, ROOM_INDEX_DATA *room,
+void echo_to_room_dnr( int ecolor, Room *room,
 		       const char *argument )
 {
   Character *vic = NULL;
@@ -47,7 +47,7 @@ void echo_to_room_dnr( int ecolor, ROOM_INDEX_DATA *room,
 
 void new_missile( Ship *ship , Ship *target , Character *ch , int missiletype )
 {
-  SPACE_DATA *spaceobject = NULL;
+  Spaceobject *spaceobject = NULL;
   Missile *missile = NULL;
 
   if ( ship  == NULL )
@@ -106,7 +106,7 @@ void new_missile( Ship *ship , Ship *target , Character *ch , int missiletype )
 
 void extract_missile( Missile *missile )
 {
-  SPACE_DATA *spaceobject = NULL;
+  Spaceobject *spaceobject = NULL;
 
   if ( missile == NULL )
     {
@@ -143,7 +143,7 @@ void update_missiles( void )
 
       m_next = missile->next;
 
-      if ( target->spaceobject && missile_in_range( ship, missile ) )
+      if ( target->spaceobject && IsMissileInRange( ship, missile ) )
         {
           missile_set_course_to_ship( missile, target );
           move_missile( missile );
@@ -158,26 +158,26 @@ void update_missiles( void )
 
                   echo_to_room( AT_YELLOW, get_room_index(ship->room.gunseat),
 				"Your missile hits its target dead on!" );
-                  echo_to_cockpit( AT_BLOOD, target,
+                  EchoToCockpit( AT_BLOOD, target,
 				   "The ship is hit by a missile.");
-                  echo_to_ship( AT_RED, target,
+                  EchoToShip( AT_RED, target,
 				"A loud explosion shakes thee ship violently!" );
                   sprintf( buf, "You see a small explosion as %s is hit by a missile", target->name );
-                  echo_to_nearby_ships( AT_ORANGE, target, buf, ship );
+                  EchoToNearbyShips( AT_ORANGE, target, buf, ship );
 
                   for ( ch = first_char; ch; ch = ch->next )
 		    {
 		      if ( !IsNpc( ch ) && nifty_is_name( missile->fired_by, ch->name ) )
 			{
 			  ch_found = true;
-			  damage_ship_ch( target, 30 + missile->missiletype * missile->missiletype * 30, 50 + missile->missiletype * missile->missiletype * missile->missiletype * 50, ch );
+			  DamageShip( target, 30 + missile->missiletype * missile->missiletype * 30, 50 + missile->missiletype * missile->missiletype * missile->missiletype * 50, ch, NULL );
 			}
 		    }
 
 		  if ( !ch_found )
 		    {
-		      damage_ship( target , ship, 20+missile->missiletype*missile->missiletype*20 ,
-				   30+missile->missiletype*missile->missiletype*ship->missiletype*30 );
+		      DamageShip( target, 20+missile->missiletype*missile->missiletype*20 ,
+				   30+missile->missiletype*missile->missiletype*ship->missiletype*30, NULL, ship );
 		    }
 
                   extract_missile( missile );
@@ -185,7 +185,7 @@ void update_missiles( void )
               else
                 {
                   echo_to_room( AT_YELLOW , get_room_index(ship->room.gunseat), "Your missile explodes harmlessly in a cloud of chaff!" );
-                  echo_to_cockpit( AT_YELLOW, target, "A missile explodes in your chaff.");
+                  EchoToCockpit( AT_YELLOW, target, "A missile explodes in your chaff.");
                   extract_missile( missile );
                 }
 

@@ -1,7 +1,7 @@
 #include "mud.h"
 #include "grub.h"
 
-extern ROOM_INDEX_DATA *room_index_hash[MAX_KEY_HASH];
+extern Room *room_index_hash[MAX_KEY_HASH];
 
 static int rgrub_int_comp(const void *i, const void *j);
 static void rgrub_help (Character *ch);
@@ -21,7 +21,7 @@ void do_rgrub (Character *ch, char *argument)
   if (!str_cmp(arg1, "st"))
     {
 #define RGRUB_ST_MAX_SIZE 5000
-      ROOM_INDEX_DATA *pRoom;
+      Room *pRoom;
       int match, lo, hi, hit_cou, cou, vnum[RGRUB_ST_MAX_SIZE];
 
       if (!*arg2)                                   /* empty arg gets help scrn */

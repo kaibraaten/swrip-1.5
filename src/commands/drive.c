@@ -15,7 +15,7 @@ void do_drive( Character *ch, char *argument )
   strcpy ( arg2, argument);
 
 
-  if (  (ship = ship_from_cockpit(ch->in_room->vnum))  == NULL )
+  if (  (ship = GetShipFromCockpit(ch->in_room->vnum))  == NULL )
     {
       send_to_char("&RYou must be in the drivers seat of a land vehicle to do that!\r\n",ch);
       return;
@@ -28,7 +28,7 @@ void do_drive( Character *ch, char *argument )
     }
 
 
-  if (ship_is_disabled( ship ))
+  if (IsShipDisabled( ship ))
     {
       send_to_char("&RThe drive is disabled.\r\n",ch);
       return;
@@ -42,7 +42,7 @@ void do_drive( Character *ch, char *argument )
 
   if ( !str_cmp( arg, "in" ))
     {
-      target = ship_in_room( ship->in_room , arg2 );
+      target = GetShipInRoom( ship->in_room , arg2 );
 
       if ( !target )
         {
@@ -73,7 +73,7 @@ void do_drive( Character *ch, char *argument )
       sprintf( buf, "%s drives into %s.", ship->name, target->name);
       echo_to_room( AT_GREY,  ship->in_room, buf);
 
-      transship(ship, target->room.hanger);
+      TransferShip(ship, target->room.hanger);
 
       sprintf( buf, "%s drives into the bay", ship->name);
       echo_to_room( AT_GREY, ship->in_room, buf);
@@ -83,7 +83,7 @@ void do_drive( Character *ch, char *argument )
 
   if ( !str_cmp( arg, "out" ))
     {
-      target = ship_from_hanger(ship->in_room->vnum);
+      target = GetShipFromHangar(ship->in_room->vnum);
 
       if (!target)
 	{
@@ -114,7 +114,7 @@ void do_drive( Character *ch, char *argument )
       sprintf( buf, "%s drives out of the ship.", ship->name);
       echo_to_room( AT_GREY,  ship->in_room, buf);
 
-      transship(ship, target->in_room->vnum);
+      TransferShip(ship, target->in_room->vnum);
 
       sprintf( buf, "%s drives out of %s", ship->name, target->name);
       echo_to_room( AT_GREY, ship->in_room, buf);
@@ -130,5 +130,5 @@ void do_drive( Character *ch, char *argument )
       return;
     }
 
-  drive_ship( ch, ship, get_exit(get_room_index(ship->location), dir), 0 );
+  DriveShip( ch, ship, get_exit(get_room_index(ship->location), dir), 0 );
 }

@@ -64,7 +64,7 @@ void do_setplanet( Character *ch, char *argument )
     {
       if ( (planet->spaceobject = spaceobject_from_name(argument)) )
         {
-          SPACE_DATA *spaceobject = planet->spaceobject;
+          Spaceobject *spaceobject = planet->spaceobject;
 
           if (spaceobject != NULL)
 	    {

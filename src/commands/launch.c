@@ -12,12 +12,12 @@ void do_launch( Character *ch, char *argument )
   long price = 0;
   Ship *ship;
   char buf[MAX_STRING_LENGTH];
-  ROOM_INDEX_DATA *room;
+  Room *room;
 
   argument = one_argument( argument , arg1);
   argument = one_argument( argument , arg2);
 
-  if ( (ship = ship_from_cockpit(ch->in_room->vnum)) == NULL )
+  if ( (ship = GetShipFromCockpit(ch->in_room->vnum)) == NULL )
     {
       send_to_char("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
       return;
@@ -29,13 +29,13 @@ void do_launch( Character *ch, char *argument )
       return;
     }
 
-  if ( (ship = ship_from_pilotseat(ch->in_room->vnum)) == NULL )
+  if ( (ship = GetShipFromPilotSeat(ch->in_room->vnum)) == NULL )
     {
       send_to_char("&RYou don't seem to be in the pilot seat!\r\n",ch);
       return;
     }
 
-  if ( is_autoflying(ship) )
+  if ( IsShipAutoflying(ship) )
     {
       send_to_char("&RThe ship is set on autopilot, you'll have to turn it off first.\r\n",ch);
       return;
@@ -47,7 +47,7 @@ void do_launch( Character *ch, char *argument )
       return;
     }
 
-  if ( !check_pilot( ch , ship ) )
+  if ( !CheckPilot( ch , ship ) )
     {
       send_to_char("&RHey, thats not your ship! Try renting a public one.\r\n",ch);
       return;
@@ -70,7 +70,7 @@ void do_launch( Character *ch, char *argument )
       send_to_char("&RYou can't do that while docked to another ship!\r\n",ch);
       return;
     }
-  if ( ship->shipstate != SHIP_LANDED && !ship_is_disabled( ship ) )
+  if ( ship->shipstate != SHIP_LANDED && !IsShipDisabled( ship ) )
     {
       send_to_char("The ship is not docked right now.\r\n",ch);
       return;
@@ -93,11 +93,11 @@ void do_launch( Character *ch, char *argument )
       : (int) (ch->pcdata->learned[gsn_capitalships]);
   if ( number_percent( ) < the_chance )
     {
-      if ( is_rental(ch,ship) )
-        if( !rent_ship(ch,ship) )
+      if ( IsShipRental(ch,ship) )
+        if( !RentShip(ch,ship) )
           return;
 
-      if ( !is_rental(ch,ship) )
+      if ( !IsShipRental(ch,ship) )
         {
 	  int turret_num = 0;
 
@@ -112,7 +112,7 @@ void do_launch( Character *ch, char *argument )
 
           price += ( ship->maxhull-ship->hull );
 
-          if (ship_is_disabled( ship ) )
+          if (IsShipDisabled( ship ) )
             price += 10000;
 
           if ( ship->missilestate == MISSILE_DAMAGED )
@@ -134,7 +134,7 @@ void do_launch( Character *ch, char *argument )
 
       if( IS_SET( ch->act, PLR_DONTAUTOFUEL ) )
         {
-          if( ship_is_disabled( ship ) )
+          if( IsShipDisabled( ship ) )
             {
               ch_printf(ch, "Your ship is disabled. You must repair it.\r\n");
               return;
@@ -177,7 +177,7 @@ void do_launch( Character *ch, char *argument )
         {
 	  int turret_num = 0;
 
-          if( ship_from_hanger(ship->in_room->vnum) == NULL || ship->sclass == SHIP_PLATFORM )
+          if( GetShipFromHangar(ship->in_room->vnum) == NULL || ship->sclass == SHIP_PLATFORM )
             ship->energy = ship->maxenergy;
 
           ship->shield = 0;
@@ -210,10 +210,10 @@ void do_launch( Character *ch, char *argument )
       send_to_char( "Launch sequence initiated.\r\n", ch);
       act( AT_PLAIN, "$n starts up the ship and begins the launch sequence.", ch,
            NULL, argument , TO_ROOM );
-      echo_to_ship( AT_YELLOW , ship , "The ship hums as it lifts off the ground.");
+      EchoToShip( AT_YELLOW , ship , "The ship hums as it lifts off the ground.");
       sprintf( buf, "%s begins to launch.", ship->name );
       echo_to_room( AT_YELLOW , get_room_index(ship->location) , buf );
-      echo_to_docked( AT_YELLOW , ship, "The ship shudders as it lifts off the ground." );
+      EchoToDockedShip( AT_YELLOW , ship, "The ship shudders as it lifts off the ground." );
       ship->shipstate = SHIP_LAUNCH;
       ship->currspeed = ship->realspeed;
 

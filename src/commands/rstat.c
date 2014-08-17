@@ -5,7 +5,7 @@ void do_rstat( Character *ch, char *argument )
 {
   char buf[MAX_STRING_LENGTH];
   char arg[MAX_INPUT_LENGTH];
-  ROOM_INDEX_DATA *location = NULL;
+  Room *location = NULL;
   OBJ_DATA *obj = NULL;
   Character *rch = NULL;
   Exit *pexit = NULL;

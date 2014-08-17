@@ -3,7 +3,7 @@
 
 void do_recall( Character *ch, char *argument )
 {
-  ROOM_INDEX_DATA *location;
+  Room *location;
   Character *opponent;
 
   location = NULL;

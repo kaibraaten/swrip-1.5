@@ -70,12 +70,12 @@ void do_allships( Character *ch, char *argument )
           }
         if ( !str_cmp(ship->owner, "Public") )
           {
-            pager_printf( ch, "%ld to rent.\r\n", get_ship_value(ship)/100 );
+            pager_printf( ch, "%ld to rent.\r\n", GetShipValue(ship)/100 );
 	  }
         else if ( str_cmp(ship->owner, "") )
           pager_printf( ch, "%s", "\r\n" );
         else
-          pager_printf( ch, "&W%-10s%ld to buy.&R&w\r\n", "", get_ship_value(ship) );
+          pager_printf( ch, "&W%-10s%ld to buy.&R&w\r\n", "", GetShipValue(ship) );
 
         count++;
       }

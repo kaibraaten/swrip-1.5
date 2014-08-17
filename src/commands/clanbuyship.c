@@ -33,10 +33,10 @@ void do_clanbuyship(Character *ch, char *argument )
       return;
     }
 
-  ship = ship_in_room( ch->in_room , argument );
+  ship = GetShipInRoom( ch->in_room , argument );
   if ( !ship )
     {
-      ship = ship_from_cockpit( ch->in_room->vnum );
+      ship = GetShipFromCockpit( ch->in_room->vnum );
 
       if ( !ship )
         {
@@ -71,7 +71,7 @@ void do_clanbuyship(Character *ch, char *argument )
       return;
     }
 
-  price = get_ship_value( ship );
+  price = GetShipValue( ship );
 
   if ( ch->pcdata->clan->funds < price )
     {
@@ -87,7 +87,7 @@ void do_clanbuyship(Character *ch, char *argument )
 
   STRFREE( ship->owner );
   ship->owner = STRALLOC( clan->name );
-  save_ship( ship );
+  SaveShip( ship );
 
   if ( ship->sclass <= SHIP_PLATFORM )
     clan->spacecraft++;

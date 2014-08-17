@@ -39,7 +39,7 @@ target in them. Private rooms are not violated.
 #include "mud.h"
 #include "character.h"
 
-extern ROOM_INDEX_DATA *room_index_hash[MAX_KEY_HASH];
+extern Room *room_index_hash[MAX_KEY_HASH];
 
 static const char * name_expand (Character *ch);
 
@@ -48,7 +48,7 @@ void do_for(Character *ch, char *argument)
   char range[MAX_INPUT_LENGTH];
   char buf[MAX_STRING_LENGTH];
   bool fGods = false, fMortals = false, fMobs = false, fEverywhere = false, found;
-  ROOM_INDEX_DATA *room, *old_room;
+  Room *room, *old_room;
   Character *p, *p_prev;  /* p_next to p_prev -- TRI */
   int i;
 

@@ -6,7 +6,7 @@
 #include "character.h"
 
 extern OBJ_INDEX_DATA *obj_index_hash[MAX_KEY_HASH];
-extern ROOM_INDEX_DATA *room_index_hash[MAX_KEY_HASH];
+extern Room *room_index_hash[MAX_KEY_HASH];
 extern ProtoMobile *mob_index_hash[MAX_KEY_HASH];
 
 static int diag_int_comp(const void *i, const void *j);
@@ -58,7 +58,7 @@ void do_diagnose( Character *ch, char *argument )
   if (!str_cmp(arg1, "rf"))
     {
 #define DIAG_RF_MAX_SIZE 5000
-      ROOM_INDEX_DATA *pRoom;
+      Room *pRoom;
       int match, lo, hi, hit_cou, vnum[DIAG_RF_MAX_SIZE];
 
       if (!*arg2)                                   /* empty arg gets help scrn */

@@ -54,7 +54,7 @@ void pullorpush( Character *ch, OBJ_DATA *obj, bool pull )
 {
   char buf[MAX_STRING_LENGTH];
   Character *rch = NULL;
-  ROOM_INDEX_DATA *room = NULL,  *to_room = NULL;
+  Room *room = NULL,  *to_room = NULL;
   Exit *pexit = NULL, *pexit_rev = NULL;
   DirectionType edir = DIR_INVALID;
   char *txt = NULL;

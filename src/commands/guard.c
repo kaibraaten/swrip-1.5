@@ -8,13 +8,13 @@ void do_guard( Character *ch, char *argument )
   Ship *ship;
 
 
-  if (  (ship = ship_from_cockpit(ch->in_room->vnum))  == NULL )
+  if (  (ship = GetShipFromCockpit(ch->in_room->vnum))  == NULL )
     {
       send_to_char("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
       return;
     }
 
-  if (  (ship = ship_from_pilotseat(ch->in_room->vnum))  == NULL )
+  if (  (ship = GetShipFromPilotSeat(ch->in_room->vnum))  == NULL )
     {
       send_to_char("&RYou must be in the pilots seat!\r\n",ch);
       return;
@@ -42,14 +42,14 @@ void do_guard( Character *ch, char *argument )
     {
       ship->guard=true;
       send_to_char( "&GYou activate the guard system.\r\n", ch);
-      echo_to_cockpit( AT_YELLOW , ship , "Guard System: ACTIVATED.");
+      EchoToCockpit( AT_YELLOW , ship , "Guard System: ACTIVATED.");
       ship->currspeed = 0;
     }
   else if ( !str_cmp(argument,"off" ) )
     {
       ship->guard=false;
       send_to_char( "&GYou shutdown the guard system.\r\n", ch);
-      echo_to_cockpit( AT_YELLOW , ship , "Guard System: DEACTIVATED.");
+      EchoToCockpit( AT_YELLOW , ship , "Guard System: DEACTIVATED.");
     }
   else
     {
@@ -57,13 +57,13 @@ void do_guard( Character *ch, char *argument )
         {
           ship->guard=false;
           send_to_char( "&GYou shutdown the guard system.\r\n", ch);
-          echo_to_cockpit( AT_YELLOW , ship , "Guard System: DEACTIVATED.");
+          EchoToCockpit( AT_YELLOW , ship , "Guard System: DEACTIVATED.");
         }
       else
         {
           ship->guard=true;
           send_to_char( "&GYou activate the guard system.\r\n", ch);
-          echo_to_cockpit( AT_YELLOW , ship , "Guard System: ACTIVATED.");
+          EchoToCockpit( AT_YELLOW , ship , "Guard System: ACTIVATED.");
           ship->currspeed = 0;
         }
     }

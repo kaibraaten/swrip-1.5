@@ -59,7 +59,7 @@ struct shuttle_data
   SHUTTLE_DATA* next_in_room;
   SHUTTLE_DATA* prev_in_room;
 
-  ROOM_INDEX_DATA* in_room;
+  Room* in_room;
 
   /* HOTBOOT info, save vnum of current, then loop through on load to find it */
   STOP_DATA *current;
@@ -109,14 +109,14 @@ void write_shuttle_list( void );
 bool save_shuttle( const SHUTTLE_DATA *shuttle );
 SHUTTLE_DATA *make_shuttle( const char *filename, const char *name );
 bool extract_shuttle( SHUTTLE_DATA *shuttle );
-bool insert_shuttle( SHUTTLE_DATA *shuttle, ROOM_INDEX_DATA *room );
+bool insert_shuttle( SHUTTLE_DATA *shuttle, Room *room );
 void load_shuttles(void);
 bool load_shuttle_file( const char *shuttlefile );
 void fread_shuttle( SHUTTLE_DATA *shuttle, FILE *fp );
 void fread_stop( STOP_DATA * stop, FILE *fp );
 void destroy_shuttle( SHUTTLE_DATA *shuttle );
 void show_shuttles_to_char( const SHUTTLE_DATA *shuttle, Character *ch );
-SHUTTLE_DATA *shuttle_in_room( const ROOM_INDEX_DATA *room, const char *name );
+SHUTTLE_DATA *shuttle_in_room( const Room *room, const char *name );
 SHUTTLE_DATA *shuttle_from_entrance( vnum_t vnum );
 STOP_DATA *create_stop( void );
 

@@ -7,7 +7,7 @@ void do_sellship(Character *ch, char *argument )
   long         price;
   Ship   *ship;
 
-  ship = ship_in_room( ch->in_room , argument );
+  ship = GetShipInRoom( ch->in_room , argument );
   if ( !ship )
     {
       act( AT_PLAIN, "I see no $T here.", ch, NULL, argument, TO_CHAR );
@@ -20,7 +20,7 @@ void do_sellship(Character *ch, char *argument )
       return;
     }
 
-  price = get_ship_value( ship );
+  price = GetShipValue( ship );
 
   ch->gold += ( price - price/10 );
   ch_printf(ch, "&GYou receive %ld credits from selling your ship.\r\n" , price - price/10 );
@@ -32,5 +32,5 @@ void do_sellship(Character *ch, char *argument )
   ship->owner = STRALLOC( "" );
   ship->pilot = STRALLOC( "" );
   ship->copilot = STRALLOC( "" );
-  save_ship( ship );
+  SaveShip( ship );
 }

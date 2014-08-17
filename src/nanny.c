@@ -951,7 +951,7 @@ if ( (iLang = skill_lookup( "common" )) < 0 )
     {
       char filename[256];
       FILE *fph;
-      ROOM_INDEX_DATA *storeroom = ch->plr_home;
+      Room *storeroom = ch->plr_home;
       OBJ_DATA *obj;
       OBJ_DATA *obj_next;
 

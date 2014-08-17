@@ -254,7 +254,7 @@ void update_shuttle( void )
 
               for (room = shuttle->room.first; room <= shuttle->room.last; ++room)
                 {
-                  ROOM_INDEX_DATA * iRoom = get_room_index(room);
+                  Room * iRoom = get_room_index(room);
                   echo_to_room( AT_CYAN , iRoom , buf );
 
                   if (shuttle->type != SHUTTLE_TURBOCAR)
@@ -331,7 +331,7 @@ void update_shuttle( void )
 
               for (room = shuttle->room.first; room <= shuttle->room.last; ++room)
                 {
-                  ROOM_INDEX_DATA * iRoom = get_room_index(room);
+                  Room * iRoom = get_room_index(room);
                   echo_to_room( AT_CYAN , iRoom , buf );
 
                   if (shuttle->type != SHUTTLE_TURBOCAR)
@@ -395,7 +395,7 @@ void show_shuttles_to_char( const SHUTTLE_DATA *shuttle, Character *ch )
 
 bool extract_shuttle( SHUTTLE_DATA * shuttle )
 {
-  ROOM_INDEX_DATA *room = NULL;
+  Room *room = NULL;
 
   if ( ( room = shuttle->in_room ) != NULL )
     {
@@ -406,7 +406,7 @@ bool extract_shuttle( SHUTTLE_DATA * shuttle )
   return true;
 }
 
-bool insert_shuttle( SHUTTLE_DATA *shuttle, ROOM_INDEX_DATA *room )
+bool insert_shuttle( SHUTTLE_DATA *shuttle, Room *room )
 {
   if (room == NULL)
     {
@@ -705,7 +705,7 @@ void destroy_shuttle(SHUTTLE_DATA * shuttle)
   write_shuttle_list();
 }
 
-SHUTTLE_DATA *shuttle_in_room( const ROOM_INDEX_DATA *room, const char *name )
+SHUTTLE_DATA *shuttle_in_room( const Room *room, const char *name )
 {
   SHUTTLE_DATA *shuttle = NULL;
 

@@ -24,7 +24,7 @@
 #include "character.h"
 #include "mud.h"
 
-ROOM_INDEX_DATA *vroom_hash[64];
+Room *vroom_hash[64];
 
 vnum_t wherehome( const Character *ch)
 {
@@ -42,7 +42,7 @@ vnum_t wherehome( const Character *ch)
     }
 }
 
-static void decorate_room( ROOM_INDEX_DATA *room )
+static void decorate_room( Room *room )
 {
   char buf[MAX_STRING_LENGTH];
   char buf2[MAX_STRING_LENGTH];
@@ -103,9 +103,9 @@ static void decorate_room( ROOM_INDEX_DATA *room )
 void clear_vrooms( void )
 {
   int hash = 0;
-  ROOM_INDEX_DATA *room = NULL;
-  ROOM_INDEX_DATA *room_next = NULL;
-  ROOM_INDEX_DATA *prev = NULL;
+  Room *room = NULL;
+  Room *room_next = NULL;
+  Room *prev = NULL;
 
   for ( hash = 0; hash < 64; hash++ )
     {
@@ -150,7 +150,7 @@ void clear_vrooms( void )
  * Function to get the equivelant exit of DIR 0-MAXDIR out of linked list.
  * Made to allow old-style diku-merc exit functions to work.    -Thoric
  */
-Exit *get_exit( const ROOM_INDEX_DATA *room, short dir )
+Exit *get_exit( const Room *room, short dir )
 {
   Exit *xit = NULL;
 
@@ -174,7 +174,7 @@ Exit *get_exit( const ROOM_INDEX_DATA *room, short dir )
 /*
  * Function to get an exit, leading the the specified room
  */
-Exit *get_exit_to( const ROOM_INDEX_DATA *room, short dir, vnum_t vnum )
+Exit *get_exit_to( const Room *room, short dir, vnum_t vnum )
 {
   Exit *xit = NULL;
 
@@ -198,7 +198,7 @@ Exit *get_exit_to( const ROOM_INDEX_DATA *room, short dir, vnum_t vnum )
 /*
  * Function to get the nth exit of a room                       -Thoric
  */
-Exit *get_exit_num( const ROOM_INDEX_DATA *room, short count )
+Exit *get_exit_num( const Room *room, short count )
 {
   Exit *xit = NULL;
   int cnt = 0;
@@ -292,12 +292,12 @@ bool will_fall( Character *ch, int fall )
 /*
  * create a 'virtual' room                                      -Thoric
  */
-ROOM_INDEX_DATA *generate_exit( ROOM_INDEX_DATA *in_room, Exit **pexit )
+Room *generate_exit( Room *in_room, Exit **pexit )
 {
   Exit *xit = NULL, *bxit = NULL;
   Exit *orig_exit = (Exit *) *pexit;
-  ROOM_INDEX_DATA *room = NULL;
-  ROOM_INDEX_DATA *backroom = NULL;
+  Room *room = NULL;
+  Room *backroom = NULL;
   vnum_t brvnum = INVALID_VNUM;
   vnum_t serial = INVALID_VNUM;
   vnum_t roomnum = INVALID_VNUM;
@@ -351,7 +351,7 @@ ROOM_INDEX_DATA *generate_exit( ROOM_INDEX_DATA *in_room, Exit **pexit )
 
   if ( !found )
     {
-      CREATE( room, ROOM_INDEX_DATA, 1 );
+      CREATE( room, Room, 1 );
       room->area          = in_room->area;
       room->vnum          = serial;
       room->tele_vnum     = roomnum;
@@ -398,9 +398,9 @@ ROOM_INDEX_DATA *generate_exit( ROOM_INDEX_DATA *in_room, Exit **pexit )
 
 ch_ret move_char( Character *ch, Exit *pexit, int fall )
 {
-  ROOM_INDEX_DATA *in_room;
-  ROOM_INDEX_DATA *to_room;
-  ROOM_INDEX_DATA *from_room;
+  Room *in_room;
+  Room *to_room;
+  Room *from_room;
   char buf[MAX_STRING_LENGTH];
   const char *txt;
   const char *dtxt;
@@ -1205,7 +1205,7 @@ bool has_key( const Character *ch, vnum_t key )
 /*
  * teleport a character to another room
  */
-void teleportch( Character *ch, ROOM_INDEX_DATA *room, bool show )
+void teleportch( Character *ch, Room *room, bool show )
 {
   if ( room_is_private( ch, room ) )
     return;
@@ -1222,7 +1222,7 @@ void teleportch( Character *ch, ROOM_INDEX_DATA *room, bool show )
 void teleport( Character *ch, vnum_t room, int flags )
 {
   Character *nch = NULL, *nch_next = NULL;
-  ROOM_INDEX_DATA *pRoomIndex = get_room_index( room );
+  Room *pRoomIndex = get_room_index( room );
   bool show = false;
 
   if ( !pRoomIndex )

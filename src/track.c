@@ -38,7 +38,7 @@ static bool mob_snipe( Character *ch, Character *victim);
 */
 
 struct bfs_queue_struct {
-  ROOM_INDEX_DATA *room;
+  Room *room;
   char dir;
   struct bfs_queue_struct *next;
 };
@@ -52,15 +52,15 @@ static struct bfs_queue_struct *room_queue = NULL;
 #define UNMARK(room)    (REMOVE_BIT(    (room)->room_flags, BFS_MARK) )
 #define IS_MARKED(room) (IS_SET(        (room)->room_flags, BFS_MARK) )
 
-static ROOM_INDEX_DATA *toroom( ROOM_INDEX_DATA *room, DirectionType door )
+static Room *toroom( Room *room, DirectionType door )
 {
   return (get_exit( room, door )->to_room);
 }
 
-static bool valid_edge( ROOM_INDEX_DATA *room, short door )
+static bool valid_edge( Room *room, short door )
 {
   Exit *pexit = NULL;
-  ROOM_INDEX_DATA *to_room = NULL;
+  Room *to_room = NULL;
 
   pexit = get_exit( room, door );
 
@@ -79,7 +79,7 @@ static bool valid_edge( ROOM_INDEX_DATA *room, short door )
     }
 }
 
-static void bfs_enqueue(ROOM_INDEX_DATA *room, char dir)
+static void bfs_enqueue(Room *room, char dir)
 {
   struct bfs_queue_struct *curr = NULL;
 
@@ -118,7 +118,7 @@ static void bfs_clear_queue(void)
     }
 }
 
-static void room_enqueue(ROOM_INDEX_DATA *room)
+static void room_enqueue(Room *room)
 {
   struct bfs_queue_struct *curr = NULL;
 
@@ -144,7 +144,7 @@ static void clean_room_queue(void)
   room_queue = NULL;
 }
 
-int find_first_step(ROOM_INDEX_DATA *src, ROOM_INDEX_DATA *target, int maxdist )
+int find_first_step(Room *src, Room *target, int maxdist )
 {
   DirectionType curr_dir = DIR_INVALID;
   int count = 0;
@@ -460,8 +460,8 @@ static bool mob_snipe( Character *ch, Character *victim )
   short dist = 0;
   short max_dist = 3;
   Exit *pexit = NULL;
-  ROOM_INDEX_DATA *was_in_room = NULL;
-  ROOM_INDEX_DATA *to_room = NULL;
+  Room *was_in_room = NULL;
+  Room *to_room = NULL;
   char buf[MAX_STRING_LENGTH];
   bool pfound = false;
 

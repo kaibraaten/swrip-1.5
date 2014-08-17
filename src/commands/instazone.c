@@ -6,7 +6,7 @@ void do_instazone( Character *ch, char *argument )
 {
   Area *pArea;
   int vnum;
-  ROOM_INDEX_DATA *pRoom;
+  Room *pRoom;
   bool dodoors;
 
   if ( IsNpc(ch) || GetTrustLevel(ch) < LEVEL_CREATOR || !ch->pcdata ||

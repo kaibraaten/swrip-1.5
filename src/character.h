@@ -47,10 +47,10 @@ struct Character
   Affect * last_affect;
   OBJ_DATA *            first_carrying;
   OBJ_DATA *            last_carrying;
-  ROOM_INDEX_DATA *     in_room;
-  ROOM_INDEX_DATA *     was_in_room;
-  ROOM_INDEX_DATA *   was_sentinel;
-  ROOM_INDEX_DATA *   plr_home;
+  Room *     in_room;
+  Room *     was_in_room;
+  Room *   was_sentinel;
+  Room *   plr_home;
   PC_DATA *             pcdata;
   DO_FUN *              last_cmd;
   DO_FUN *              prev_cmd;   /* mapping */
@@ -124,13 +124,13 @@ struct Character
   short              was_stunned;
   char            *   mob_clan;    /* for spec_clan_guard.. set by postguard */
   GUARD_DATA      *   guard_data;
-  ROOM_INDEX_DATA *   buzzed_home;
-  ROOM_INDEX_DATA *   buzzed_from_room;
+  Room *   buzzed_home;
+  Room *   buzzed_from_room;
   Character           *   challenged;
   Character *         betted_on;
   int                 bet_amt;
   char      *   owner;
-  ROOM_INDEX_DATA *   home;
+  Room *   home;
   short   cmd_recurse;
   OBJ_DATA          *   on;
   Character         *   pet;

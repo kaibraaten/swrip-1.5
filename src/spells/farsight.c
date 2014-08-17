@@ -5,8 +5,8 @@ extern char *spell_target_name;
 
 ch_ret spell_farsight( int sn, int level, Character *ch, void *vo )
 {
-  ROOM_INDEX_DATA *location;
-  ROOM_INDEX_DATA *original;
+  Room *location;
+  Room *original;
   Character *victim;
   SKILLTYPE *skill = get_skilltype(sn);
   int saving;

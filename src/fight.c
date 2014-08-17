@@ -2132,13 +2132,13 @@ void raw_kill( Character *ch, Character *victim )
           STRFREE( ship->copilot );
           ship->copilot = STRALLOC( "" );
 
-          save_ship( ship );
+          SaveShip( ship );
         }
     }
 
   if ( victim->plr_home )
     {
-      ROOM_INDEX_DATA *room = victim->plr_home;
+      Room *room = victim->plr_home;
 
       STRFREE( room->name );
       room->name = STRALLOC( "An Empty Apartment" );
@@ -2549,8 +2549,8 @@ bool in_arena( Character *ch )
 
 bool get_cover( Character *ch )
 {
-  ROOM_INDEX_DATA *was_in;
-  ROOM_INDEX_DATA *now_in;
+  Room *was_in;
+  Room *now_in;
   int attempt;
   short door;
   Exit *pexit;

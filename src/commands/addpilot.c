@@ -7,7 +7,7 @@ void do_addpilot(Character *ch, char *argument )
   Ship *ship;
   int the_chance;
 
-  if (  (ship = ship_from_cockpit(ch->in_room->vnum))  == NULL )
+  if (  (ship = GetShipFromCockpit(ch->in_room->vnum))  == NULL )
     {
       send_to_char("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
       return;
@@ -17,7 +17,7 @@ void do_addpilot(Character *ch, char *argument )
 
   if ( IsNpc(ch) || the_chance >= ch->pcdata->learned[gsn_slicing] )
     {
-      if ( !check_pilot( ch , ship ) )
+      if ( !CheckPilot( ch , ship ) )
         {
           send_to_char( "&RThat isn't your ship!" ,ch );
           return;
@@ -45,7 +45,7 @@ void do_addpilot(Character *ch, char *argument )
       STRFREE( ship->copilot );
       ship->copilot = STRALLOC( argument );
       send_to_char( "Copilot Added.\r\n", ch );
-      save_ship( ship );
+      SaveShip( ship );
       return;
 
       return;
@@ -54,5 +54,5 @@ void do_addpilot(Character *ch, char *argument )
   STRFREE( ship->pilot );
   ship->pilot = STRALLOC( argument );
   send_to_char( "Pilot Added.\r\n", ch );
-  save_ship( ship );
+  SaveShip( ship );
 }

@@ -9,7 +9,7 @@ void do_rset( Character *ch, char *argument )
   char arg1 [MAX_INPUT_LENGTH];
   char arg2 [MAX_INPUT_LENGTH];
   char arg3 [MAX_INPUT_LENGTH];
-  ROOM_INDEX_DATA *location;
+  Room *location;
   int value;
   bool proto;
 

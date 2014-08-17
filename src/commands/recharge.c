@@ -8,18 +8,18 @@ void do_recharge(Character *ch, char *argument )
   int the_chance;
   Ship *ship;
 
-  if (  (ship = ship_from_cockpit(ch->in_room->vnum))  == NULL )
+  if (  (ship = GetShipFromCockpit(ch->in_room->vnum))  == NULL )
     {
       send_to_char("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
       return;
     }
-  if (  (ship = ship_from_coseat(ch->in_room->vnum))  == NULL )
+  if (  (ship = GetShipFromCoSeat(ch->in_room->vnum))  == NULL )
     {
       send_to_char("&RThe controls must be at the co-pilot station.\r\n",ch);
       return;
     }
 
-  if (ship_is_disabled( ship ))
+  if (IsShipDisabled( ship ))
     {
       send_to_char("&RThe ships drive is disabled. Unable to power a recharge order.\r\n",ch);
       return;

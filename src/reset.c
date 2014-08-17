@@ -39,15 +39,15 @@
 /* Externals */
 Reset *ParseReset( Area *tarea, char *argument, Character *ch );
 
-bool IsRoomReset( Reset *pReset, ROOM_INDEX_DATA *aRoom,
+bool IsRoomReset( Reset *pReset, Room *aRoom,
 		    Area *pArea );
 void AddObjectReset( Area *pArea, char cm, OBJ_DATA *obj, int v2, int v3 );
 void DeleteReset( Area *pArea, Reset *pReset );
-Reset *FindReset( Area *pArea, ROOM_INDEX_DATA *pRoom, int num );
+Reset *FindReset( Area *pArea, Room *pRoom, int num );
 void ListResets( Character *ch, Area *pArea,
-		  ROOM_INDEX_DATA *pRoom, int start, int end );
+		  Room *pRoom, int start, int end );
 
-Reset *FindReset(Area *pArea, ROOM_INDEX_DATA *pRoom, int numb)
+Reset *FindReset(Area *pArea, Room *pRoom, int numb)
 {
   Reset *pReset = NULL;
   int num = 0;
@@ -60,10 +60,10 @@ Reset *FindReset(Area *pArea, ROOM_INDEX_DATA *pRoom, int numb)
 }
 
 /* This is one loopy function.  Ugh. -- Altrag */
-bool IsRoomReset( Reset *pReset, ROOM_INDEX_DATA *aRoom,
+bool IsRoomReset( Reset *pReset, Room *aRoom,
                     Area *pArea )
 {
-  ROOM_INDEX_DATA *pRoom = NULL;
+  Room *pRoom = NULL;
   Reset *reset = NULL;
   int pr = 0;
 
@@ -192,8 +192,8 @@ bool IsRoomReset( Reset *pReset, ROOM_INDEX_DATA *aRoom,
   return false;
 }
 
-ROOM_INDEX_DATA *FindRoom( Character *ch, char *argument,
-                            ROOM_INDEX_DATA *pRoom )
+Room *FindRoom( Character *ch, char *argument,
+                            Room *pRoom )
 {
   char arg[MAX_INPUT_LENGTH];
 
@@ -324,7 +324,7 @@ void DeleteReset( Area *pArea, Reset *pReset )
 #undef DEL_RESET
 
 static Reset *FindObjectReset(Character *ch, Area *pArea,
-                        ROOM_INDEX_DATA *pRoom, char *name)
+                        Room *pRoom, char *name)
 {
   Reset *reset = NULL;
 
@@ -402,7 +402,7 @@ static Reset *FindObjectReset(Character *ch, Area *pArea,
 }
 
 static Reset *FindMobileReset(Character *ch, Area *pArea,
-			      ROOM_INDEX_DATA *pRoom, char *name)
+			      Room *pRoom, char *name)
 {
   Reset *reset = NULL;
 
@@ -472,13 +472,13 @@ static Reset *FindMobileReset(Character *ch, Area *pArea,
   return reset;
 }
 
-void EditReset( Character *ch, char *argument, Area *pArea, ROOM_INDEX_DATA *aRoom )
+void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
 {
   char arg[MAX_INPUT_LENGTH];
   Reset *pReset = NULL;
   Reset *reset = NULL;
   ProtoMobile *pMob = NULL;
-  ROOM_INDEX_DATA *pRoom = NULL;
+  Room *pRoom = NULL;
   OBJ_INDEX_DATA *pObj = NULL;
   int num = 0;
   vnum_t vnum = INVALID_VNUM;
@@ -1317,7 +1317,7 @@ void AddObjectReset( Area *pArea, char cm, OBJ_DATA *obj, int v2, int v3 )
     }
 }
 
-void InstallRoom( Area *pArea, ROOM_INDEX_DATA *pRoom, bool dodoors )
+void InstallRoom( Area *pArea, Room *pRoom, bool dodoors )
 {
   Character *rch = NULL;
   OBJ_DATA *obj = NULL;
@@ -1385,7 +1385,7 @@ void InstallRoom( Area *pArea, ROOM_INDEX_DATA *pRoom, bool dodoors )
     }
 }
 
-void WipeResets( Area *pArea, ROOM_INDEX_DATA *pRoom )
+void WipeResets( Area *pArea, Room *pRoom )
 {
   Reset *pReset = NULL;
 
@@ -1460,7 +1460,7 @@ void ResetArea( Area *pArea )
   Character *mob = NULL;
   OBJ_DATA *obj = NULL;
   OBJ_DATA *lastobj = NULL;
-  ROOM_INDEX_DATA *pRoomIndex = NULL;
+  Room *pRoomIndex = NULL;
   ProtoMobile *pMobIndex = NULL;
   OBJ_INDEX_DATA *pObjIndex = NULL;
   OBJ_INDEX_DATA *pObjToIndex = NULL;
@@ -1526,7 +1526,7 @@ void ResetArea( Area *pArea )
           mob = create_mobile(pMobIndex);
 
           {
-            ROOM_INDEX_DATA *pRoomPrev = get_room_index(pReset->arg3 - 1);
+            Room *pRoomPrev = get_room_index(pReset->arg3 - 1);
 
             if ( pRoomPrev && IS_SET(pRoomPrev->room_flags, ROOM_PET_SHOP) )
 	      {
@@ -1991,11 +1991,11 @@ void ResetArea( Area *pArea )
     }
 }
 
-void ListResets( Character *ch, Area *pArea, ROOM_INDEX_DATA *pRoom,
+void ListResets( Character *ch, Area *pArea, Room *pRoom,
 		 int start, int end )
 {
   Reset *pReset = NULL;
-  ROOM_INDEX_DATA *room = NULL;
+  Room *room = NULL;
   ProtoMobile *mob = NULL;
   OBJ_INDEX_DATA *obj = NULL;
   OBJ_INDEX_DATA *obj2 = NULL;
@@ -2695,7 +2695,7 @@ char *SPrintReset( Character *ch, Reset *pReset, short num, bool rlist )
   char mobname[MAX_STRING_LENGTH];
   char roomname[MAX_STRING_LENGTH];
   char objname[MAX_STRING_LENGTH];
-  static ROOM_INDEX_DATA *room = NULL;
+  static Room *room = NULL;
   static OBJ_INDEX_DATA *obj = NULL, *obj2 = NULL;
   static ProtoMobile *mob = NULL;
   vnum_t rvnum = INVALID_VNUM;

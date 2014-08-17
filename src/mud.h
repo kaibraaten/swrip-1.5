@@ -317,10 +317,10 @@ struct member_list
   MEMBER_LIST   *prev;          /* Prev clan */
 };
 
-struct space_data
+struct Spaceobject
 {
-  SPACE_DATA  *next;
-  SPACE_DATA  *prev;
+  Spaceobject  *next;
+  Spaceobject  *prev;
   PLANET_DATA *planet;
   char        *filename;
   char        *name;
@@ -361,7 +361,7 @@ struct guard_data
   GUARD_DATA      *next_on_planet;
   GUARD_DATA      *prev_on_planet;
   Character       *mob;
-  ROOM_INDEX_DATA *reset_loc;
+  Room *reset_loc;
   PLANET_DATA     *planet;
 };
 
@@ -370,7 +370,7 @@ struct storeroom
   STOREROOM       *next;
   STOREROOM       *prev;
   vnum_t           vnum;
-  ROOM_INDEX_DATA *room;
+  Room *room;
 };
 
 struct planet_data
@@ -381,7 +381,7 @@ struct planet_data
   PLANET_DATA *prev_in_system;
   GUARD_DATA  *first_guard;
   GUARD_DATA  *last_guard;
-  SPACE_DATA  *spaceobject;
+  Spaceobject  *spaceobject;
   Area   *first_area;
   Area   *last_area;
   char        *name;
@@ -443,9 +443,9 @@ struct Ship
   Ship       *prev_in_spaceobject;
   Ship       *next_in_room;
   Ship       *prev_in_room;
-  ROOM_INDEX_DATA *in_room;
-  SPACE_DATA      *spaceobject;
-  SPACE_DATA      *destin;
+  Room *in_room;
+  Spaceobject      *spaceobject;
+  Spaceobject      *destin;
   char            *filename;
   char            *name;
   char            *personalname;
@@ -528,8 +528,8 @@ struct Ship
   Ship       *target0; /* target of main weapon systems (ie, not turrest) */
   Ship       *tractoredby;
   Ship       *tractored;
-  SPACE_DATA      *currjump;
-  SPACE_DATA      *lastsystem;
+  Spaceobject      *currjump;
+  Spaceobject      *lastsystem;
   short            chaff;
   short            maxchaff;
   bool             chaff_released;
@@ -539,7 +539,7 @@ struct Ship
   short            alarm;
   short            ions;
   Character       *ch;
-  SPACE_DATA      *inorbitof;
+  Spaceobject      *inorbitof;
   int              count;
   Turret *turret[MAX_NUMBER_OF_TURRETS_IN_SHIP];
 };
@@ -550,7 +550,7 @@ struct Missile
   Missile *prev;
   Missile *next_in_spaceobject;
   Missile *prev_in_spaceobject;
-  SPACE_DATA   *spaceobject;
+  Spaceobject   *spaceobject;
   Ship    *target;
   Ship    *fired_from;
   char         *fired_by;
@@ -737,7 +737,7 @@ struct ExtractedCharacter
 {
   ExtractedCharacter *next;
   Character         *ch;
-  ROOM_INDEX_DATA   *room;
+  Room   *room;
   ch_ret             retcode;
   bool               extract;
 };
@@ -900,7 +900,7 @@ struct obj_data
   Affect      *first_affect;
   Affect      *last_affect;
   OBJ_INDEX_DATA   *pIndexData;
-  ROOM_INDEX_DATA  *in_room;
+  Room  *in_room;
   char             *armed_by;
   char             *name;
   char             *short_descr;
@@ -937,7 +937,7 @@ struct Exit
   Exit       *prev;           /* previous exit in linked list */
   Exit       *next;           /* next exit in linked list     */
   Exit       *rexit;          /* Reverse exit pointer         */
-  ROOM_INDEX_DATA *to_room;        /* Pointer to destination room  */
+  Room *to_room;        /* Pointer to destination room  */
   char            *keyword;        /* Keywords for exit or door    */
   char            *description;    /* Description of exit          */
   vnum_t           vnum;           /* Vnum of room exit leads to   */
@@ -1089,10 +1089,10 @@ struct system_data
 /*
  * Room type.
  */
-struct room_index_data
+struct Room
 {
-  ROOM_INDEX_DATA  *next;
-  ROOM_INDEX_DATA  *next_sort;
+  Room  *next;
+  Room  *next_sort;
   Character        *first_person;
   Character        *last_person;
   OBJ_DATA         *first_content;
@@ -1133,7 +1133,7 @@ struct teleport_data
 {
   TELEPORT_DATA   *next;
   TELEPORT_DATA   *prev;
-  ROOM_INDEX_DATA *room;
+  Room *room;
   short            timer;
 };
 
@@ -1559,7 +1559,7 @@ extern CMDTYPE              *command_hash[126];
 extern SKILLTYPE            *skill_table[MAX_SKILL];
 extern SOCIALTYPE           *social_index[27];
 extern Character            *cur_char;
-extern ROOM_INDEX_DATA      *cur_room;
+extern Room      *cur_room;
 extern bool                  cur_char_died;
 extern ch_ret                global_retcode;
 extern SKILLTYPE            *herb_table[MAX_HERB];
@@ -1593,8 +1593,8 @@ extern Ship            *first_ship;
 extern Ship            *last_ship;
 extern Missile         *first_missile;
 extern Missile         *last_missile;
-extern SPACE_DATA           *first_spaceobject;
-extern SPACE_DATA           *last_spaceobject;
+extern Spaceobject           *first_spaceobject;
+extern Spaceobject           *last_spaceobject;
 extern PLANET_DATA          *first_planet;
 extern PLANET_DATA          *last_planet;
 extern BOUNTY_DATA          *first_bounty;
@@ -2014,7 +2014,7 @@ DECLARE_DO_FUN( do_request      );
 DECLARE_DO_FUN( do_rescue       );
 DECLARE_DO_FUN( do_rest         );
 DECLARE_DO_FUN( do_reset        );
-DECLARE_DO_FUN( do_resetship    );
+DECLARE_DO_FUN( do_ResetShip    );
 DECLARE_DO_FUN( do_restore      );
 DECLARE_DO_FUN( do_restoretime  );
 DECLARE_DO_FUN( do_restrict     );
@@ -2084,7 +2084,7 @@ DECLARE_DO_FUN( do_title        );
 DECLARE_DO_FUN( do_track        );
 DECLARE_DO_FUN( do_toplevel     );
 DECLARE_DO_FUN( do_transfer     );
-DECLARE_DO_FUN( do_transship    );
+DECLARE_DO_FUN( do_TransferShip    );
 DECLARE_DO_FUN( do_trust        );
 DECLARE_DO_FUN( do_typo         );
 DECLARE_DO_FUN( do_unfoldarea   );
@@ -2244,12 +2244,12 @@ extern "C" {
   bool has_key( const Character *ch, vnum_t key );
   void set_bexit_flag( Exit *pexit, int flag );
   void remove_bexit_flag( Exit *pexit, int flag );
-  ROOM_INDEX_DATA *generate_exit( ROOM_INDEX_DATA *in_room, Exit **pexit );
+  Room *generate_exit( Room *in_room, Exit **pexit );
   void  clear_vrooms( void );
   Exit *find_door( Character *ch, const char *arg, bool quiet );
-  Exit *get_exit( const ROOM_INDEX_DATA *room, short dir );
-  Exit *get_exit_to( const ROOM_INDEX_DATA *room, short dir, vnum_t vnum );
-  Exit *get_exit_num( const ROOM_INDEX_DATA *room, short count );
+  Exit *get_exit( const Room *room, short dir );
+  Exit *get_exit_to( const Room *room, short dir, vnum_t vnum );
+  Exit *get_exit_num( const Room *room, short count );
   ch_ret move_char( Character *ch, Exit *pexit, int fall );
   void teleport( Character *ch, vnum_t room, int flags );
   short encumbrance( const Character *ch, short move );
@@ -2267,8 +2267,8 @@ extern "C" {
   void save_banlist( void );
   int str_count(const char *psource, const char *ptarget);
   void close_area( Area *pArea );
-  ROOM_INDEX_DATA *find_location( Character *ch, char *arg );
-  void echo_to_room( short AT_COLOR, ROOM_INDEX_DATA *room,
+  Room *find_location( Character *ch, char *arg );
+  void echo_to_room( short AT_COLOR, Room *room,
 		     const char *argument );
   void echo_to_all( short AT_COLOR, const char *argument, short tar );
   void get_reboot_string( void );
@@ -2384,11 +2384,11 @@ extern "C" {
   int get_spelltarget( const char *txt  );
 
   /* space.c */
-  void echo_to_room_dnr( int ecolor, ROOM_INDEX_DATA *room, const char *argument );
+  void echo_to_room_dnr( int ecolor, Room *room, const char *argument );
   void         load_spaceobjects( void );
-  void         save_spaceobject( SPACE_DATA *spaceobject );
-  SPACE_DATA * spaceobject_from_name( const char *name );
-  SPACE_DATA * spaceobject_from_vnum( vnum_t vnum );
+  void         save_spaceobject( Spaceobject *spaceobject );
+  Spaceobject * spaceobject_from_name( const char *name );
+  Spaceobject * spaceobject_from_vnum( vnum_t vnum );
   void update_spaceobjects( void );
   void update_missiles( void );
   void         new_missile( Ship *ship, Ship *target, Character *ch,
@@ -2426,19 +2426,19 @@ extern "C" {
   char *        get_extra_descr( const char *name, ExtraDescription *ed );
   ProtoMobile *get_mob_index( vnum_t vnum );
   OBJ_INDEX_DATA *get_obj_index( vnum_t vnum );
-  ROOM_INDEX_DATA *get_room_index( vnum_t vnum );
+  Room *get_room_index( vnum_t vnum );
   void  bug( const char *str, ... );
   void log_printf( const char *fmt, ... );
   void log_string_plus( const char *str, short log_type, short level );
-  ROOM_INDEX_DATA *make_room( vnum_t vnum );
+  Room *make_room( vnum_t vnum );
   OBJ_INDEX_DATA *make_object( vnum_t vnum, vnum_t cvnum, char *name );
   ProtoMobile *make_mobile( vnum_t vnum, vnum_t cvnum, char *name );
-  Exit *make_exit( ROOM_INDEX_DATA *pRoomIndex, ROOM_INDEX_DATA *to_room, short door );
+  Exit *make_exit( Room *pRoomIndex, Room *to_room, short door );
   void  fix_area_exits( Area *tarea );
   void  load_area_file( Area *tarea, char *filename );
-  void  randomize_exits( ROOM_INDEX_DATA *room, short maxdir );
+  void  randomize_exits( Room *room, short maxdir );
   void  make_wizlist( void );
-  bool    delete_room( ROOM_INDEX_DATA *room );
+  bool    delete_room( Room *room );
   bool    delete_obj( OBJ_INDEX_DATA *obj );
   bool    delete_mob( ProtoMobile *mob );
 
@@ -2449,15 +2449,15 @@ extern "C" {
   void rpedit( Character *ch, MPROG_DATA *mprg, int mptype, char *argument );
   void write_area_list( void );
 
-  bool can_rmodify( const Character *ch, const ROOM_INDEX_DATA *room );
+  bool can_rmodify( const Character *ch, const Room *room );
   bool can_omodify( const Character *ch, const OBJ_DATA *obj  );
   bool can_mmodify( const Character *ch, const Character *mob );
   bool can_medit( const Character *ch, const ProtoMobile *mob );
   void free_reset( Area *are, Reset *res );
   void free_area( Area *are );
   void assign_area( Character *ch );
-  ExtraDescription *SetRExtra( ROOM_INDEX_DATA *room, char *keywords );
-  bool DelRExtra( ROOM_INDEX_DATA *room, char *keywords );
+  ExtraDescription *SetRExtra( Room *room, char *keywords );
+  bool DelRExtra( Room *room, char *keywords );
   ExtraDescription *SetOExtra( OBJ_DATA *obj, char *keywords );
   bool DelOExtra( OBJ_DATA *obj, char *keywords );
   ExtraDescription *SetOExtraProto( OBJ_INDEX_DATA *obj, char *keywords );
@@ -2501,7 +2501,7 @@ extern "C" {
   void  make_corpse( Character *ch );
   void  make_bloodstain( Character *ch );
   void  make_scraps( OBJ_DATA *obj );
-  void  make_fire( ROOM_INDEX_DATA *in_room, short timer );
+  void  make_fire( Room *in_room, short timer );
   OBJ_DATA *make_trap( int v0, int v1, int v2, int v3 );
   OBJ_DATA *create_money( int amount );
 
@@ -2539,7 +2539,7 @@ extern "C" {
   void mprog_hour_trigger( Character *mob );
   void mprog_time_trigger( Character *mob );
   void progbug( char *str, Character *mob );
-  void rset_supermob( ROOM_INDEX_DATA *room );
+  void rset_supermob( Room *room );
   void release_supermob( void );
 
   /* player.c */
@@ -2566,19 +2566,19 @@ extern "C" {
   void affect_strip( Character *ch, int sn );
   void affect_join( Character *ch, Affect *paf );
   void char_from_room( Character *ch );
-  void char_to_room( Character *ch, ROOM_INDEX_DATA *pRoomIndex );
+  void char_to_room( Character *ch, Room *pRoomIndex );
   OBJ_DATA *obj_to_char( OBJ_DATA *obj, Character *ch );
   void obj_from_char( OBJ_DATA *obj );
   int apply_ac( const OBJ_DATA *obj, int iWear );
   int count_obj_list( const OBJ_INDEX_DATA *obj, const OBJ_DATA *list );
   void obj_from_room( OBJ_DATA *obj );
-  OBJ_DATA *obj_to_room( OBJ_DATA *obj, ROOM_INDEX_DATA *pRoomIndex );
+  OBJ_DATA *obj_to_room( OBJ_DATA *obj, Room *pRoomIndex );
   OBJ_DATA *obj_to_obj( OBJ_DATA *obj, OBJ_DATA *obj_to );
   void obj_from_obj( OBJ_DATA *obj );
   void extract_obj( OBJ_DATA *obj );
-  void extract_exit( ROOM_INDEX_DATA *room, Exit *pexit );
-  void extract_room( ROOM_INDEX_DATA *room );
-  void clean_room( ROOM_INDEX_DATA *room );
+  void extract_exit( Room *room, Exit *pexit );
+  void extract_room( Room *room );
+  void clean_room( Room *room );
   void clean_obj( OBJ_INDEX_DATA *obj );
   void clean_mob( ProtoMobile *mob );
   void clean_resets( Area *tarea );
@@ -2592,8 +2592,8 @@ extern "C" {
   OBJ_DATA *get_obj_world( const Character *ch, const char *argument );
   int get_obj_number( const OBJ_DATA *obj );
   int get_obj_weight( const OBJ_DATA *obj );
-  bool room_is_dark( const ROOM_INDEX_DATA *pRoomIndex );
-  bool room_is_private( const Character *ch, const ROOM_INDEX_DATA *pRoomIndex );
+  bool room_is_dark( const Room *pRoomIndex );
+  bool room_is_private( const Character *ch, const Room *pRoomIndex );
   const char *item_type_name( const OBJ_DATA *obj );
   const char *affect_loc_name( int location );
   ch_ret check_for_trap( Character *ch, const OBJ_DATA *obj, int flag );
@@ -2622,7 +2622,7 @@ extern "C" {
   OBJ_DATA *clone_object( const OBJ_DATA *obj );
   void split_obj( OBJ_DATA *obj, int num );
   void separate_obj( OBJ_DATA *obj );
-  bool empty_obj( OBJ_DATA *obj,OBJ_DATA *destobj,ROOM_INDEX_DATA *destroom );
+  bool empty_obj( OBJ_DATA *obj,OBJ_DATA *destobj,Room *destroom );
   OBJ_DATA *find_obj( Character *ch, const char *argument, bool carryonly );
   void boost_economy( Area *tarea, int gold );
   void lower_economy( Area *tarea, int gold );
@@ -2684,7 +2684,7 @@ extern "C" {
   void  de_EquipCharacter( Character *ch );
   void  re_EquipCharacter( Character *ch );
   void  save_home( Character *ch );
-  void save_storeroom( ROOM_INDEX_DATA *room );
+  void save_storeroom( Room *room );
   void load_storerooms( void );
 
   /* shops.c */
@@ -2849,7 +2849,7 @@ extern "C" {
 #endif
 #define RPROG_ACT_TRIGGER
 #ifdef RPROG_ACT_TRIGGER
-  void rprog_act_trigger( char *buf, ROOM_INDEX_DATA *room, Character *ch,
+  void rprog_act_trigger( char *buf, Room *room, Character *ch,
                           OBJ_DATA *obj, void *vo );
 #endif
 

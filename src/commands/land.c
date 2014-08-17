@@ -11,12 +11,12 @@ void do_land( Character *ch, char *argument )
   Ship *ship;
   Ship *target;
   char buf[MAX_STRING_LENGTH];
-  SPACE_DATA *spaceobj;
+  Spaceobject *spaceobj;
   bool found = false;
 
   strcpy( arg, argument );
 
-  if ( (ship = ship_from_cockpit(ch->in_room->vnum)) == NULL )
+  if ( (ship = GetShipFromCockpit(ch->in_room->vnum)) == NULL )
     {
       send_to_char("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
       return;
@@ -28,13 +28,13 @@ void do_land( Character *ch, char *argument )
       return;
     }
 
-  if ( (ship = ship_from_pilotseat(ch->in_room->vnum)) == NULL )
+  if ( (ship = GetShipFromPilotSeat(ch->in_room->vnum)) == NULL )
     {
       send_to_char("&RYou need to be in the pilot seat!\r\n",ch);
       return;
     }
 
-  if ( is_autoflying(ship) )
+  if ( IsShipAutoflying(ship) )
     {
       send_to_char("&RYou'll have to turn off the ships autopilot first.\r\n",ch);
       return;
@@ -51,7 +51,7 @@ void do_land( Character *ch, char *argument )
       send_to_char("&RCapital ships are to big to land. You'll have to take a shuttle.\r\n",ch);
       return;
     }
-  if (ship_is_disabled( ship ))
+  if (IsShipDisabled( ship ))
     {
       send_to_char("&RThe ships drive is disabled. Unable to land.\r\n",ch);
       return;
@@ -70,7 +70,7 @@ void do_land( Character *ch, char *argument )
       return;
     }
 
-  if ( ship_is_in_hyperspace( ship ) )
+  if ( IsShipInHyperspace( ship ) )
     {
       send_to_char("&RYou can only do that in realspace!\r\n",ch);
       return;
@@ -104,7 +104,7 @@ void do_land( Character *ch, char *argument )
       ch_printf(ch, "%s" , "Land where?\r\n\r\nChoices: ");
       for( spaceobj = first_spaceobject; spaceobj; spaceobj = spaceobj->next )
         {
-          if( space_in_range( ship, spaceobj ) )
+          if( IsSpaceobjectInRange( ship, spaceobj ) )
             {
               if ( spaceobj->landing_site.doca && !spaceobj->landing_site.seca)
                 ch_printf(ch, "%s (%s)  %.0f %.0f %.0f\r\n         " ,
@@ -135,7 +135,7 @@ void do_land( Character *ch, char *argument )
     }
 
   for( spaceobj = first_spaceobject; spaceobj; spaceobj = spaceobj->next )
-    if( space_in_range( ship, spaceobj ) )
+    if( IsSpaceobjectInRange( ship, spaceobj ) )
       if ( !str_prefix(argument,spaceobj->landing_site.locationa) ||
            !str_prefix(argument,spaceobj->landing_site.locationb) ||
            !str_prefix(argument,spaceobj->landing_site.locationc))
@@ -146,7 +146,7 @@ void do_land( Character *ch, char *argument )
 
   if( !found )
     {
-      target = get_ship_here( argument , ship );
+      target = GetShipInRange( argument , ship );
       if ( target == NULL )
         {
           send_to_char("&RI don't see that here. Type land by itself for a list\r\n",ch);
@@ -203,10 +203,10 @@ void do_land( Character *ch, char *argument )
       act( AT_PLAIN, "$n begins the landing sequence.", ch,
            NULL, argument , TO_ROOM );
       sprintf( buf ,"%s begins its landing sequence." , ship->name );
-      echo_to_nearby_ships( AT_YELLOW, ship, buf , NULL );
-      echo_to_docked( AT_YELLOW , ship, "The ship begins to enter the atmosphere." );
+      EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );
+      EchoToDockedShip( AT_YELLOW , ship, "The ship begins to enter the atmosphere." );
 
-      echo_to_ship( AT_YELLOW , ship , "The ship slowly begins its landing approach.");
+      EchoToShip( AT_YELLOW , ship , "The ship slowly begins its landing approach.");
       ship->dest = STRALLOC(arg);
       ship->shipstate = SHIP_LAND;
       if ( ship->sclass == FIGHTER_SHIP )

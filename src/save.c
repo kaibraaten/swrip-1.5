@@ -2153,7 +2153,7 @@ void fread_obj( Character *ch, FILE *fp, short os_type )
   int iNest = 0;
   bool fNest = true; /* Yes, these should             */
   bool fVnum = true; /* indeed be initialized as true */
-  ROOM_INDEX_DATA *room = NULL;
+  Room *room = NULL;
 
   CREATE( obj, OBJ_DATA, 1 );
   obj->count     = 1;
@@ -2676,7 +2676,7 @@ void load_storerooms( void )
           int iNest = 0;
           OBJ_DATA *tobj = NULL;
 	  OBJ_DATA *tobj_next = NULL;
-          ROOM_INDEX_DATA *storeroom = NULL;
+          Room *storeroom = NULL;
 
           sprintf(strArea, "%s%s", STOREROOM_DIR, de->d_name );
           fprintf(stderr, "STOREROOM -> %s\n", strArea);
@@ -2770,7 +2770,7 @@ void load_storerooms( void )
   falling = 0;
 }
 
-void save_storeroom( ROOM_INDEX_DATA *room )
+void save_storeroom( Room *room )
 {
   char strsave[MAX_INPUT_LENGTH];
   FILE *fp = NULL;
@@ -2942,7 +2942,7 @@ Character *fread_mobile( FILE *fp )
   Character *mob = NULL;
   bool fMatch = false;
   int inroom = 0;
-  ROOM_INDEX_DATA *pRoomIndex = NULL;
+  Room *pRoomIndex = NULL;
   const char *word = feof( fp ) ? "EndMobile" : fread_word( fp );
 
   if ( !str_cmp(word, "Vnum") )

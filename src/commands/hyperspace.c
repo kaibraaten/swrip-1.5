@@ -9,10 +9,10 @@ void do_hyperspace(Character *ch, char *argument )
   Vector3 tmp;
   Ship *ship;
   Ship *dship;
-  SPACE_DATA *spaceobject;
+  Spaceobject *spaceobject;
   char buf[MAX_STRING_LENGTH];
 
-  if (  (ship = ship_from_cockpit(ch->in_room->vnum))  == NULL )
+  if (  (ship = GetShipFromCockpit(ch->in_room->vnum))  == NULL )
     {
       send_to_char("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
       return;
@@ -25,13 +25,13 @@ void do_hyperspace(Character *ch, char *argument )
     }
 
 
-  if (  (ship = ship_from_pilotseat(ch->in_room->vnum))  == NULL )
+  if (  (ship = GetShipFromPilotSeat(ch->in_room->vnum))  == NULL )
     {
       send_to_char("&RYou aren't in the pilots seat.\r\n",ch);
       return;
     }
 
-  if ( is_autoflying(ship)  )
+  if ( IsShipAutoflying(ship)  )
     {
       send_to_char("&RYou'll have to turn off the ships autopilot first.\r\n",ch);
       return;
@@ -49,20 +49,20 @@ void do_hyperspace(Character *ch, char *argument )
       return;
     }
 
-  if (( !argument || argument[0] == '\0' ) && ship_is_in_hyperspace( ship ) )
+  if (( !argument || argument[0] == '\0' ) && IsShipInHyperspace( ship ) )
     {
       send_to_char("&RYou are already travelling lightspeed!\r\n",ch);
       return;
     }
 
   if ( argument && !str_cmp( argument, "off" )
-       && !ship_is_in_hyperspace( ship ) )
+       && !IsShipInHyperspace( ship ) )
     {
       send_to_char("&RHyperdrive not active.\r\n",ch);
       return;
     }
 
-  if (ship_is_disabled( ship ))
+  if (IsShipDisabled( ship ))
     {
       send_to_char("&RThe ships drive is disabled. Unable to manuever.\r\n",ch);
       return;
@@ -92,26 +92,26 @@ void do_hyperspace(Character *ch, char *argument )
       return;
     }
 
-  if (ship->shipstate != SHIP_READY && !ship_is_in_hyperspace( ship ) )
+  if (ship->shipstate != SHIP_READY && !IsShipInHyperspace( ship ) )
     {
       send_to_char("&RPlease wait until the ship has finished its current manouver.\r\n",ch);
       return;
     }
 
   if ( argument && !str_cmp( argument, "off" )
-       && ship_is_in_hyperspace( ship ) )
+       && IsShipInHyperspace( ship ) )
     {
-      ship_to_spaceobject (ship, ship->currjump);
+      ShipToSpaceobject (ship, ship->currjump);
 
       if (ship->spaceobject == NULL)
         {
-          echo_to_cockpit( AT_RED, ship, "Ship lost in Hyperspace. Make new calculations.");
+          EchoToCockpit( AT_RED, ship, "Ship lost in Hyperspace. Make new calculations.");
           return;
         }
       else
         {
           for( spaceobject = first_spaceobject; spaceobject; spaceobject = spaceobject->next )
-            if( space_in_range( ship, spaceobject ) )
+            if( IsSpaceobjectInRange( ship, spaceobject ) )
               {
                 ship->currjump = spaceobject;
                 break;
@@ -125,29 +125,29 @@ void do_hyperspace(Character *ch, char *argument )
           ship->currjump = NULL;
 
           echo_to_room( AT_YELLOW, get_room_index(ship->room.pilotseat), "Hyperjump complete.");
-          echo_to_ship( AT_YELLOW, ship, "The ship lurches slightly as it comes out of hyperspace.");
+          EchoToShip( AT_YELLOW, ship, "The ship lurches slightly as it comes out of hyperspace.");
           sprintf( buf ,"%s enters the starsystem at %.0f %.0f %.0f" , ship->name, ship->pos.x, ship->pos.y, ship->pos.z );
-          echo_to_nearby_ships( AT_YELLOW, ship, buf , NULL );
+          EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );
           ship->shipstate = SHIP_READY;
           STRFREE( ship->home );
           ship->home = STRALLOC( ship->spaceobject->name );
 
           if ( str_cmp("Public",ship->owner) )
-            save_ship(ship);
+            SaveShip(ship);
 
           for( dship = first_ship; dship; dship = dship->next )
             if ( dship->docked && dship->docked == ship )
               {
                 echo_to_room( AT_YELLOW, get_room_index(dship->room.pilotseat), "Hyperjump complete.");
-                echo_to_ship( AT_YELLOW, dship, "The ship lurches slightly as it comes out of hyperspace.");
+                EchoToShip( AT_YELLOW, dship, "The ship lurches slightly as it comes out of hyperspace.");
                 sprintf( buf ,"%s enters the starsystem at %.0f %.0f %.0f" , dship->name, dship->pos.x, dship->pos.y, dship->pos.\
                          z );
-                echo_to_nearby_ships( AT_YELLOW, dship, buf , NULL );
+                EchoToNearbyShips( AT_YELLOW, dship, buf , NULL );
                 STRFREE( dship->home );
                 dship->home = STRALLOC( ship->home );
 
                 if ( str_cmp("Public",dship->owner) )
-                  save_ship(dship);
+                  SaveShip(dship);
               }
 
 
@@ -210,18 +210,18 @@ void do_hyperspace(Character *ch, char *argument )
       return;
     }
   sprintf( buf ,"%s enters hyperspace." , ship->name );
-  echo_to_nearby_ships( AT_YELLOW, ship, buf , NULL );
+  EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );
 
   ship->lastsystem = ship->spaceobject;
-  ship_from_spaceobject( ship , ship->spaceobject );
+  ShipFromSpaceobject( ship , ship->spaceobject );
   ship->shipstate = SHIP_HYPERSPACE;
 
   send_to_char( "&GYou push forward the hyperspeed lever.\r\n", ch);
   act( AT_PLAIN, "$n pushes a lever forward on the control panel.", ch,
        NULL, argument , TO_ROOM );
-  echo_to_ship( AT_YELLOW , ship , "The ship lurches slightly as it makes the jump to lightspeed." );
-  echo_to_cockpit( AT_YELLOW , ship , "The stars become streaks of light as you enter hyperspace.");
-  echo_to_docked( AT_YELLOW , ship, "The stars become streaks of light as you enter hyperspace." );
+  EchoToShip( AT_YELLOW , ship , "The ship lurches slightly as it makes the jump to lightspeed." );
+  EchoToCockpit( AT_YELLOW , ship , "The stars become streaks of light as you enter hyperspace.");
+  EchoToDockedShip( AT_YELLOW , ship, "The stars become streaks of light as you enter hyperspace." );
 
   ship->energy -= 100;
 

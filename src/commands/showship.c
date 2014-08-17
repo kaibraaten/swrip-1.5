@@ -20,7 +20,7 @@ void do_showship( Character *ch, char *argument )
       return;
     }
 
-  ship = get_ship( argument );
+  ship = GetShipAnywhere( argument );
 
   if ( !ship )
     {
@@ -99,7 +99,7 @@ void do_showship( Character *ch, char *argument )
   ch_printf( ch, "Hull: %d/%d  Ship Condition: %s\r\n",
              ship->hull,
              ship->maxhull,
-             ship_is_disabled( ship ) ? "Disabled" : "Running");
+             IsShipDisabled( ship ) ? "Disabled" : "Running");
 
   ch_printf( ch, "Shields: %d/%d   Energy(fuel): %d/%d   Chaff: %d \r\n",
              ship->shield,

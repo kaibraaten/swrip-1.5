@@ -9,7 +9,7 @@ void do_info(Character *ch, char *argument )
   Ship *target;
   bool fromafar = true;
 
-  if (  (ship = ship_from_cockpit(ch->in_room->vnum))  == NULL )
+  if (  (ship = GetShipFromCockpit(ch->in_room->vnum))  == NULL )
     {
       if ( argument[0] == '\0' )
         {
@@ -17,7 +17,7 @@ void do_info(Character *ch, char *argument )
           return;
         }
 
-      ship = ship_in_room( ch->in_room , argument );
+      ship = GetShipInRoom( ch->in_room , argument );
       if ( !ship )
         {
           act( AT_PLAIN, "I see no $T here.", ch, NULL, argument, TO_CHAR );
@@ -33,7 +33,7 @@ void do_info(Character *ch, char *argument )
           return;
         }
 
-      ship = ship_in_room( ch->in_room , argument );
+      ship = GetShipInRoom( ch->in_room , argument );
       if ( !ship )
         {
           act( AT_PLAIN, "I see no $T here.", ch, NULL, argument, TO_CHAR );
@@ -48,7 +48,7 @@ void do_info(Character *ch, char *argument )
       fromafar = false;
     }
   else
-    target = get_ship_here( argument , ship );
+    target = GetShipInRange( argument , ship );
 
   if ( target == NULL )
     {
@@ -56,7 +56,7 @@ void do_info(Character *ch, char *argument )
       return;
     }
 
-  if ( check_pilot( ch , target ) )
+  if ( CheckPilot( ch , target ) )
     fromafar = false;
 
   if( ship_distance_to_ship( ship, target ) > 500 + ship->sensor * 2 )
@@ -92,7 +92,7 @@ void do_info(Character *ch, char *argument )
   ch_printf( ch, "Max Shields: %d   Max Energy(fuel): %d\r\n",
              target->maxshield, target->maxenergy);
   ch_printf( ch, "Maximum Speed: %d   Hyperspeed: %d  Value: %d\r\n",
-             target->realspeed, target->hyperspeed, get_ship_value( target ));
+             target->realspeed, target->hyperspeed, GetShipValue( target ));
 
   act( AT_PLAIN, "$n checks various gages and displays on the control panel.",
        ch, NULL, argument , TO_ROOM );

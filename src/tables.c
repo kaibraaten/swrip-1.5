@@ -636,7 +636,7 @@ static const DO_FUN_ENTRY command_fun_table[] = {
       if ( !str_cmp( name, "do_request"))               return do_request;
       if ( !str_cmp( name, "do_rescue" ))               return do_rescue;
       if ( !str_cmp( name, "do_reset" ))                return do_reset;
-      if ( !str_cmp( name, "do_resetship" ))            return do_resetship;
+      if ( !str_cmp( name, "do_ResetShip" ))            return do_ResetShip;
       if ( !str_cmp( name, "do_resign" ))               return do_resign;
       if ( !str_cmp( name, "do_rest" ))         return do_rest;
       if ( !str_cmp( name, "do_restore" ))              return do_restore;
@@ -746,7 +746,7 @@ static const DO_FUN_ENTRY command_fun_table[] = {
       if ( !str_cmp( name, "do_trajectory" ))           return do_trajectory;
       if ( !str_cmp( name, "do_trajectory_actual" ))    return do_trajectory_actual;
       if ( !str_cmp( name, "do_transfer" ))             return do_transfer;
-      if ( !str_cmp( name, "do_transship" ))            return do_transship;
+      if ( !str_cmp( name, "do_TransferShip" ))            return do_TransferShip;
       if ( !str_cmp( name, "do_trust" ))                return do_trust;
       if ( !str_cmp( name, "do_typo" ))         return do_typo;
       break;

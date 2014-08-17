@@ -12,7 +12,7 @@ void do_trajectory_actual( Character *ch, char *argument )
   Vector3 argvec;
   Ship *ship;
 
-  if (  (ship = ship_from_cockpit(ch->in_room->vnum))  == NULL )
+  if (  (ship = GetShipFromCockpit(ch->in_room->vnum))  == NULL )
     {
       send_to_char("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
       return;
@@ -24,19 +24,19 @@ void do_trajectory_actual( Character *ch, char *argument )
       return;
     }
 
-  if (  (ship = ship_from_pilotseat(ch->in_room->vnum))  == NULL )
+  if (  (ship = GetShipFromPilotSeat(ch->in_room->vnum))  == NULL )
     {
       send_to_char("&RYour not in the pilots seat.\r\n",ch);
       return;
     }
 
-  if ( is_autoflying(ship))
+  if ( IsShipAutoflying(ship))
     {
       send_to_char("&RYou'll have to turn off the ships autopilot first.\r\n",ch);
       return;
     }
 
-  if (ship_is_disabled( ship ))
+  if (IsShipDisabled( ship ))
     {
       send_to_char("&RThe ships drive is disabled. Unable to manuever.\r\n",ch);
       return;
@@ -47,7 +47,7 @@ void do_trajectory_actual( Character *ch, char *argument )
       return;
     }
 
-  if ( ship_is_in_hyperspace( ship ) )
+  if ( IsShipInHyperspace( ship ) )
     {
       send_to_char("&RYou can only do that in realspace!\r\n",ch);
       return;
@@ -116,9 +116,9 @@ void do_trajectory_actual( Character *ch, char *argument )
              argvec.x, argvec.y, argvec.z );
   act( AT_PLAIN, "$n manipulates the ships controls.", ch, NULL, argument , TO_ROOM );
 
-  echo_to_cockpit( AT_YELLOW ,ship, "The ship begins to turn.\r\n" );
+  EchoToCockpit( AT_YELLOW ,ship, "The ship begins to turn.\r\n" );
   sprintf( buf, "%s turns altering its present course." , ship->name );
-  echo_to_nearby_ships( AT_ORANGE , ship , buf , NULL );
+  EchoToNearbyShips( AT_ORANGE , ship , buf , NULL );
 
   if ( ship->sclass == FIGHTER_SHIP || ( ship->sclass == MIDSIZE_SHIP && ship->manuever > 50 ) )
     ship->shipstate = SHIP_BUSY_3;

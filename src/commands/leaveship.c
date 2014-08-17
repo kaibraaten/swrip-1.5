@@ -5,14 +5,14 @@
 
 void do_leaveship( Character *ch, char *argument )
 {
-  ROOM_INDEX_DATA *fromroom = NULL;
-  ROOM_INDEX_DATA *toroom = NULL;
+  Room *fromroom = NULL;
+  Room *toroom = NULL;
   Ship *ship = NULL;
   SHUTTLE_DATA * shuttle = NULL;
 
   fromroom = ch->in_room;
 
-  if  ( (ship = ship_from_entrance(fromroom->vnum)) != NULL )
+  if  ( (ship = GetShipFromEntrance(fromroom->vnum)) != NULL )
     {
       if  ( ship->sclass == SHIP_PLATFORM )
         {
@@ -28,7 +28,7 @@ void do_leaveship( Character *ch, char *argument )
 
       if ( ship->shipstate != SHIP_LANDED
 	   && ship->shipstate != SHIP_DOCKED
-	   && !ship_is_disabled( ship ) )
+	   && !IsShipDisabled( ship ) )
         {
           send_to_char("&rPlease wait till the ship is properly docked.\r\n",ch);
           return;

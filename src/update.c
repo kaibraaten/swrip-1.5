@@ -1949,7 +1949,7 @@ void obj_update( void )
               && obj->in_room->sector_type == SECT_AIR
               && (obj->wear_flags & ITEM_TAKE) )
             {
-              ROOM_INDEX_DATA *new_room = NULL;
+              Room *new_room = NULL;
               Exit *xit = NULL;
 
               for (xit = obj->in_room->first_exit; xit; xit = xit->next )
@@ -2641,14 +2641,14 @@ void update_handler( void )
   if ( --pulse_space <= 0 )
     {
       pulse_space = PULSE_SPACE;
-      update_ships();
+      UpdateShips();
       update_shuttle();
     }
 
   if ( --pulse_recharge <= 0 )
     {
       pulse_recharge = PULSE_SPACE/3;
-      recharge_ships();
+      RechargeShips();
     }
 
   if ( --pulse_ship <= 0 )
@@ -2656,7 +2656,7 @@ void update_handler( void )
       pulse_ship = PULSE_SPACE / 10;
       update_spaceobjects();
       update_missiles();
-      update_shipmovement();
+      UpdateShipMovement();
     }
 
   if ( --pulse_violence <= 0 )
@@ -2727,8 +2727,8 @@ void update_handler( void )
 
 void remove_portal( OBJ_DATA *portal )
 {
-  ROOM_INDEX_DATA *fromRoom = portal->in_room;
-  ROOM_INDEX_DATA *toRoom = NULL;
+  Room *fromRoom = portal->in_room;
+  Room *toRoom = NULL;
   Character *ch = NULL;
   Exit *pexit = NULL;
   bool found = false;
@@ -2843,7 +2843,7 @@ void reboot_check( time_t reset )
 
       for ( ship = first_ship; ship; ship = ship->next )
 	{
-	  save_ship( ship );
+	  SaveShip( ship );
 	}
 
       mud_down = true;

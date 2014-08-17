@@ -13,7 +13,7 @@ void do_undock(Character *ch, char *argument)
 
   strcpy( arg, argument );
 
-  if (  (ship = ship_from_cockpit(ch->in_room->vnum))  == NULL )
+  if (  (ship = GetShipFromCockpit(ch->in_room->vnum))  == NULL )
     {
       send_to_char("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
       return;
@@ -25,7 +25,7 @@ void do_undock(Character *ch, char *argument)
       return;
     }
 
-  if (  (ship = ship_from_pilotseat(ch->in_room->vnum))  == NULL )
+  if (  (ship = GetShipFromPilotSeat(ch->in_room->vnum))  == NULL )
     {
       send_to_char("&RYou aren't in the pilots seat.\r\n",ch);
       return;
@@ -43,7 +43,7 @@ void do_undock(Character *ch, char *argument)
       return;
     }
 
-  if ( ship_is_in_hyperspace( ship ) )
+  if ( IsShipInHyperspace( ship ) )
     {
       send_to_char("&RYou can only do that in realspace!\r\n",ch);
       return;
@@ -94,9 +94,9 @@ void do_undock(Character *ch, char *argument)
       return;
     }
   if( ship->docking == SHIP_DOCKED )
-    echo_to_ship( AT_YELLOW , ship , "The ship unlocks the clamps and begins to drift away.");
+    EchoToShip( AT_YELLOW , ship , "The ship unlocks the clamps and begins to drift away.");
   else
-    echo_to_ship( AT_YELLOW , ship , "You abort the docking manuever.");
+    EchoToShip( AT_YELLOW , ship , "You abort the docking manuever.");
 
   if ( ship->location )
     ship->shipstate = SHIP_LANDED;
@@ -108,7 +108,7 @@ void do_undock(Character *ch, char *argument)
 
   if( eShip )
     {
-      echo_to_ship( AT_YELLOW , eShip , "Ship undocking. Clamps released.");
+      EchoToShip( AT_YELLOW , eShip , "Ship undocking. Clamps released.");
       eShip->docked = NULL;
       eShip->currspeed = 0;
       if ( eShip->location )

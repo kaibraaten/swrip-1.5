@@ -20,8 +20,8 @@ void do_buy( Character *ch, char *argument )
     {
       char buf[MAX_STRING_LENGTH];
       Character *pet;
-      ROOM_INDEX_DATA *pRoomIndexNext;
-      ROOM_INDEX_DATA *in_room;
+      Room *pRoomIndexNext;
+      Room *in_room;
 
       if ( IsNpc(ch) )
         return;

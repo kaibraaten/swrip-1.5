@@ -3,7 +3,7 @@
 
 void do_addresident(Character *ch, char *argument)
 {
-  ROOM_INDEX_DATA *home;
+  Room *home;
   Character *victim;
 
   home = ch->in_room;

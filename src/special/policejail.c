@@ -4,7 +4,7 @@
 bool spec_police_jail( Character *ch )
 {
 
-  ROOM_INDEX_DATA *jail = NULL;
+  Room *jail = NULL;
   Character *victim;
   Character *v_next;
   int vip;

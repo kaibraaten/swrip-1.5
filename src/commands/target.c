@@ -20,7 +20,7 @@ void do_target(Character *ch, char *argument )
   switch( ch->substate )
     {
     default:
-      if (  (ship = ship_from_turret(ch->in_room->vnum))  == NULL )
+      if (  (ship = GetShipFromTurret(ch->in_room->vnum))  == NULL )
         {
           send_to_char("&RYou must be in the gunners seat or turret of a ship to do that!\r\n",ch);
           return;
@@ -29,7 +29,7 @@ void do_target(Character *ch, char *argument )
       if ( ship->room.gunseat != ch->in_room->vnum )
         is_turret = true;
 
-      if ( ship_is_in_hyperspace( ship ) && ship->sclass <= SHIP_PLATFORM)
+      if ( IsShipInHyperspace( ship ) && ship->sclass <= SHIP_PLATFORM)
         {
 	  send_to_char("&RYou can only do that in realspace!\r\n",ch);
           return;
@@ -40,7 +40,7 @@ void do_target(Character *ch, char *argument )
           return;
         }
 
-      if ( is_autoflying(ship) && ( !is_turret || !check_pilot( ch, ship ) ) )
+      if ( IsShipAutoflying(ship) && ( !is_turret || !CheckPilot( ch, ship ) ) )
         {
           send_to_char("&RYou'll have to turn off the ships autopilot first....\r\n",ch);
           return;
@@ -73,9 +73,9 @@ void do_target(Character *ch, char *argument )
         }
 
       if (ship->sclass > SHIP_PLATFORM)
-        target = ship_in_room( ship->in_room , arg );
+        target = GetShipInRoom( ship->in_room , arg );
       else
-        target = get_ship_here( arg, ship );
+        target = GetShipInRange( arg, ship );
 
       if (  target == NULL )
         {
@@ -134,7 +134,7 @@ void do_target(Character *ch, char *argument )
     case SUB_TIMER_DO_ABORT:
       DISPOSE( ch->dest_buf );
       ch->substate = SUB_NONE;
-      if ( (ship = ship_from_cockpit(ch->in_room->vnum)) == NULL )
+      if ( (ship = GetShipFromCockpit(ch->in_room->vnum)) == NULL )
         return;
       send_to_char("&RYour concentration is broken. You fail to lock onto your target.\r\n", ch);
       return;
@@ -142,14 +142,14 @@ void do_target(Character *ch, char *argument )
 
   ch->substate = SUB_NONE;
 
-  if ( (ship = ship_from_turret(ch->in_room->vnum)) == NULL )
+  if ( (ship = GetShipFromTurret(ch->in_room->vnum)) == NULL )
     {
       return;
     }
   if (ship->sclass > SHIP_PLATFORM)
-    target = ship_in_room( ship->in_room , arg );
+    target = GetShipInRoom( ship->in_room , arg );
   else
-    target = get_ship_here( arg, ship );
+    target = GetShipInRange( arg, ship );
 
   if (  target == NULL || target == ship)
     {
@@ -172,8 +172,8 @@ void do_target(Character *ch, char *argument )
 
   send_to_char( "&GTarget Locked.\r\n", ch);
   sprintf( buf , "You are being targetted by %s." , ship->name);
-  echo_to_cockpit( AT_BLOOD , target , buf );
-  echo_to_docked( AT_YELLOW , ship, "The ship's computer receives targetting data through the docking port link." );
+  EchoToCockpit( AT_BLOOD , target , buf );
+  EchoToDockedShip( AT_YELLOW , ship, "The ship's computer receives targetting data through the docking port link." );
 
   if ( ch->in_room->vnum == ship->room.gunseat )
     for( dship = first_ship; dship; dship = dship->next )
@@ -182,10 +182,10 @@ void do_target(Character *ch, char *argument )
 
   learn_from_success( ch, gsn_weaponsystems );
 
-  if ( is_autoflying(target) && !target->target0)
+  if ( IsShipAutoflying(target) && !target->target0)
     {
       sprintf( buf , "You are being targetted by %s." , target->name);
-      echo_to_cockpit( AT_BLOOD , ship , buf );
+      EchoToCockpit( AT_BLOOD , ship , buf );
       target->target0 = ship;
     }
 }

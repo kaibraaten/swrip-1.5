@@ -28,7 +28,7 @@
  * behaviour in three dimensional space.
  *
  * The code assumes that you have replaced the old position and
- * heading variables in SPACE_DATA like this:
+ * heading variables in Spaceobject like this:
  *
  * struct ship_data
  * {
@@ -103,7 +103,7 @@ bool ship_is_facing_ship( const Ship * const ship,
 }
 
 bool ship_is_facing_spaceobject( const Ship * const ship,
-				 const SPACE_DATA * const target )
+				 const Spaceobject * const target )
 {
   return ship_is_facing( ship, &target->pos );
 }
@@ -145,7 +145,7 @@ void ship_set_course_to_ship( Ship * const ship,
 }
 
 void ship_set_course_to_spaceobject( Ship * const ship,
-				     const SPACE_DATA * const target )
+				     const Spaceobject * const target )
 {
   ship_set_course( ship, &target->pos );
 }
@@ -192,7 +192,7 @@ static void handle_movement( Vector3 * const pos,
   }
 }
 
-void move_spaceobject( SPACE_DATA * const spaceobj )
+void move_spaceobject( Spaceobject * const spaceobj )
 {
   handle_movement( &spaceobj->pos, &spaceobj->head, spaceobj->speed );
 }
@@ -214,7 +214,7 @@ double ship_distance_to_ship( const Ship * const ship,
 }
 
 double ship_distance_to_spaceobject( const Ship * const ship,
-				     const SPACE_DATA * const spaceobject )
+				     const Spaceobject * const spaceobject )
 {
   return vector_distance( &ship->pos, &spaceobject->pos );
 }

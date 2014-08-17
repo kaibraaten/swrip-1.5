@@ -50,7 +50,7 @@ void do_pick( Character *ch, char *argument )
   if ( ( pexit = find_door( ch, arg, true ) ) != NULL )
     {
       /* 'pick door' */
-      /*        ROOM_INDEX_DATA *to_room; */ /* Unused */
+      /*        Room *to_room; */ /* Unused */
       Exit *pexit_rev;
 
       if ( !IS_SET(pexit->exit_info, EX_CLOSED) )
@@ -122,17 +122,17 @@ void do_pick( Character *ch, char *argument )
       return;
     }
 
-  if ( ( ship = ship_in_room(ch->in_room, arg ) ) != NULL )
+  if ( ( ship = GetShipInRoom(ch->in_room, arg ) ) != NULL )
     {
       Descriptor *d;
 
-      if ( check_pilot( ch , ship ) )
+      if ( CheckPilot( ch , ship ) )
         {
           send_to_char("&RWhat would be the point of that!\r\n",ch);
           return;
         }
 
-      if ( ship->shipstate != SHIP_LANDED && !ship_is_disabled( ship ) )
+      if ( ship->shipstate != SHIP_LANDED && !IsShipDisabled( ship ) )
         {
           send_to_char( "&RThat ship has already started to launch",ch);
           return;
@@ -155,7 +155,7 @@ void do_pick( Character *ch, char *argument )
               if ( d->connection_state != CON_PLAYING )
                 continue;
 
-              if ( !check_pilot(victim,ship) )
+              if ( !CheckPilot(victim,ship) )
                 continue;
 
               if ( !HasComlink( victim ) )
@@ -199,7 +199,7 @@ void do_pick( Character *ch, char *argument )
               if ( d->connection_state != CON_PLAYING )
                 continue;
 
-              if ( !check_pilot(victim,ship) )
+              if ( !CheckPilot(victim,ship) )
                 continue;
 
               if ( !HasComlink( victim ) )

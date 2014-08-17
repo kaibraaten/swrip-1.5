@@ -173,7 +173,7 @@ void save_clan_storeroom( Character *ch, const CLAN_DATA *clan )
 void obj_fall( OBJ_DATA *obj, bool through )
 {
   Exit *pexit;
-  ROOM_INDEX_DATA *to_room;
+  Room *to_room;
   static int fall_count;
   char buf[MAX_STRING_LENGTH];
   static bool is_falling; /* Stop loops from the call to obj_to_room()  -- Altrag */

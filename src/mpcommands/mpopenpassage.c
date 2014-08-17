@@ -13,7 +13,7 @@ void do_mp_open_passage( Character *ch, char *argument )
   char arg1[ MAX_INPUT_LENGTH ];
   char arg2[ MAX_INPUT_LENGTH ];
   char arg3[ MAX_INPUT_LENGTH ];
-  ROOM_INDEX_DATA *targetRoom, *fromRoom;
+  Room *targetRoom, *fromRoom;
   int targetRoomVnum, fromRoomVnum, exit_num;
   Exit *pexit;
 

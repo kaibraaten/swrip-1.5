@@ -24,16 +24,16 @@
 #include "mud.h"
 #include "vector3_aux.h"
 
-SPACE_DATA *first_spaceobject = NULL;
-SPACE_DATA *last_spaceobject = NULL;
+Spaceobject *first_spaceobject = NULL;
+Spaceobject *last_spaceobject = NULL;
 
 /* local routines */
-void fread_spaceobject( SPACE_DATA *spaceobject, FILE *fp );
+void fread_spaceobject( Spaceobject *spaceobject, FILE *fp );
 bool load_one_spaceobject( const char *spaceobjectfile );
 
 void update_spaceobjects( void )
 {
-  SPACE_DATA *spaceobj = NULL;
+  Spaceobject *spaceobj = NULL;
 
   for( spaceobj = first_spaceobject; spaceobj; spaceobj = spaceobj->next )
     {
@@ -62,9 +62,9 @@ void update_spaceobjects( void )
 /*
  * Get pointer to space structure from spaceobject name.
  */
-SPACE_DATA *spaceobject_from_name( const char *name )
+Spaceobject *spaceobject_from_name( const char *name )
 {
-  SPACE_DATA *spaceobject = NULL;
+  Spaceobject *spaceobject = NULL;
 
   for ( spaceobject = first_spaceobject; spaceobject; spaceobject = spaceobject->next )
     if ( !str_cmp( name, spaceobject->name ) )
@@ -80,9 +80,9 @@ SPACE_DATA *spaceobject_from_name( const char *name )
 /*
  * Get pointer to space structure from the dock vnun.
  */
-SPACE_DATA *spaceobject_from_vnum( vnum_t vnum )
+Spaceobject *spaceobject_from_vnum( vnum_t vnum )
 {
-  SPACE_DATA *spaceobject = NULL;
+  Spaceobject *spaceobject = NULL;
   Ship *ship = NULL;
 
   for ( spaceobject = first_spaceobject; spaceobject; spaceobject = spaceobject->next )
@@ -114,7 +114,7 @@ SPACE_DATA *spaceobject_from_vnum( vnum_t vnum )
 /*
  * Save a spaceobject's data to its data file
  */
-void save_spaceobject( SPACE_DATA *spaceobject )
+void save_spaceobject( Spaceobject *spaceobject )
 {
   FILE *fp = NULL;
   char filename[256];
@@ -172,7 +172,7 @@ void save_spaceobject( SPACE_DATA *spaceobject )
 /*
  * Read in actual spaceobject data.
  */
-void fread_spaceobject( SPACE_DATA *spaceobject, FILE *fp )
+void fread_spaceobject( Spaceobject *spaceobject, FILE *fp )
 {
   for ( ; ; )
     {
@@ -265,11 +265,11 @@ void fread_spaceobject( SPACE_DATA *spaceobject, FILE *fp )
 bool load_one_spaceobject( const char *spaceobjectfile )
 {
   char filename[256];
-  SPACE_DATA *spaceobject = NULL;
+  Spaceobject *spaceobject = NULL;
   FILE *fp = NULL;
   bool found = false;
 
-  CREATE( spaceobject, SPACE_DATA, 1 );
+  CREATE( spaceobject, Spaceobject, 1 );
   sprintf( filename, "%s%s", SPACE_DIR, spaceobjectfile );
 
   if ( ( fp = fopen( filename, "r" ) ) != NULL )

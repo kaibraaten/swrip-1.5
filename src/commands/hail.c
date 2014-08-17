@@ -9,7 +9,7 @@ void do_hail( Character *ch , char *argument )
   int vnum;
   long gold = 1;
   bool steal = false;
-  ROOM_INDEX_DATA *room;
+  Room *room;
   char arg[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
   char buf[MAX_STRING_LENGTH];
@@ -21,7 +21,7 @@ void do_hail( Character *ch , char *argument )
 
   if ( arg[0] != '\0' )
     {
-      if ( (ship = ship_from_cockpit(ch->in_room->vnum)) == NULL )
+      if ( (ship = GetShipFromCockpit(ch->in_room->vnum)) == NULL )
 
         {
           send_to_char("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
@@ -40,7 +40,7 @@ void do_hail( Character *ch , char *argument )
           return;
         }
 
-      target = get_ship_here( arg,ship );
+      target = GetShipInRange( arg,ship );
 
 
       if (  target == NULL )
@@ -68,14 +68,14 @@ void do_hail( Character *ch , char *argument )
       strcat( buf , arg2 );
       strcat( buf , "&w\r\n" );
 
-      echo_to_ship( AT_WHITE , ship , buf);
+      EchoToShip( AT_WHITE , ship , buf);
 
       strcpy( buf , ship->name );
       strcat( buf , " hails you: &C" );
       strcat( buf , arg2 );
       strcat( buf , "&w\r\n" );
 
-      echo_to_ship( AT_WHITE , target , buf);
+      EchoToShip( AT_WHITE , target , buf);
 
       return;
     }

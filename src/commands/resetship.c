@@ -2,9 +2,9 @@
 #include "ships.h"
 #include "vector3_aux.h"
 
-void do_resetship( Character *ch, char *argument )
+void do_ResetShip( Character *ch, char *argument )
 {
-  Ship *ship = get_ship( argument );
+  Ship *ship = GetShipAnywhere( argument );
 
   if (ship == NULL)
     {
@@ -12,13 +12,13 @@ void do_resetship( Character *ch, char *argument )
       return;
     }
 
-  resetship( ship );
+  ResetShip( ship );
 
   if ( ( ship->sclass == SHIP_PLATFORM || ship->type == MOB_SHIP || ship->sclass == CAPITAL_SHIP )
        && ship->home )
     {
       vector_init( &ship->pos );
-      ship_to_spaceobject(ship, spaceobject_from_name(ship->home) );
+      ShipToSpaceobject(ship, spaceobject_from_name(ship->home) );
 
       if( ship->spaceobject )
         {

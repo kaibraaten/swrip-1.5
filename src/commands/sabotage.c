@@ -15,7 +15,7 @@ void do_sabotage(Character *ch, char *argument )
   switch( ch->substate )
     {
     default:
-      if (  (ship = ship_from_engine(ch->in_room->vnum))  == NULL )
+      if (  (ship = GetShipFromEngine(ch->in_room->vnum))  == NULL )
         {
           send_to_char("&RYou must be in the engine room of a ship to do that!\r\n",ch);
           return;
@@ -58,7 +58,7 @@ void do_sabotage(Character *ch, char *argument )
     case SUB_TIMER_DO_ABORT:
       DISPOSE( ch->dest_buf );
       ch->substate = SUB_NONE;
-      if ( (ship = ship_from_cockpit(ch->in_room->vnum)) == NULL )
+      if ( (ship = GetShipFromCockpit(ch->in_room->vnum)) == NULL )
         return;
       send_to_char("&RYou are distracted and fail to finish your work.\r\n", ch);
       return;
@@ -66,7 +66,7 @@ void do_sabotage(Character *ch, char *argument )
 
   ch->substate = SUB_NONE;
 
-  if ( (ship = ship_from_engine(ch->in_room->vnum)) == NULL )
+  if ( (ship = GetShipFromEngine(ch->in_room->vnum)) == NULL )
     {
       return;
     }
@@ -84,7 +84,7 @@ void do_sabotage(Character *ch, char *argument )
     {
       if (ship->location == ship->lastdoc)
         ship->shipstate = SHIP_DISABLED;
-      else if ( ship_is_in_hyperspace( ship ) )
+      else if ( IsShipInHyperspace( ship ) )
         send_to_char("You realize after working that it would be a bad idea to do this while in hyperspace.\r\n", ch);
       else
 	ship->shipstate = SHIP_DISABLED;

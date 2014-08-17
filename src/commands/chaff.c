@@ -7,7 +7,7 @@ void do_chaff( Character *ch, char *argument )
   int the_chance;
   Ship *ship;
 
-  if (  (ship = ship_from_cockpit(ch->in_room->vnum))  == NULL )
+  if (  (ship = GetShipFromCockpit(ch->in_room->vnum))  == NULL )
     {
       send_to_char("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
       return;
@@ -20,19 +20,19 @@ void do_chaff( Character *ch, char *argument )
     }
 
 
-  if (  (ship = ship_from_coseat(ch->in_room->vnum))  == NULL )
+  if (  (ship = GetShipFromCoSeat(ch->in_room->vnum))  == NULL )
     {
       send_to_char("&RThe controls are at the copilots seat!\r\n",ch);
       return;
     }
 
-  if ( is_autoflying(ship) )
+  if ( IsShipAutoflying(ship) )
     {
       send_to_char("&RYou'll have to turn the autopilot off first...\r\n",ch);
       return;
     }
 
-  if ( ship_is_in_hyperspace( ship ) )
+  if ( IsShipInHyperspace( ship ) )
     {
       send_to_char("&RYou can only do that in realspace!\r\n",ch);
       return;
@@ -63,7 +63,7 @@ void do_chaff( Character *ch, char *argument )
   send_to_char( "You flip the chaff release switch.\r\n", ch);
   act( AT_PLAIN, "$n flips a switch on the control pannel", ch,
        NULL, argument , TO_ROOM );
-  echo_to_cockpit( AT_YELLOW , ship , "A burst of chaff is released from the ship.");
+  EchoToCockpit( AT_YELLOW , ship , "A burst of chaff is released from the ship.");
 
   learn_from_success( ch, gsn_weaponsystems );
 }

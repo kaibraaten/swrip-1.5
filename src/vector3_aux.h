@@ -45,7 +45,7 @@ bool ship_is_facing_ship( const Ship * const ship,
 			  const Ship * const target );
 
 bool ship_is_facing_spaceobject( const Ship * const ship,
-				 const SPACE_DATA * const spaceobject );
+				 const Spaceobject * const spaceobject );
 
 /*
  * Flip the trajectory to head the opposite way (180 degrees).
@@ -70,7 +70,7 @@ void ship_set_course_to_ship( Ship * const ship,
 			      const Ship * const target );
 
 void ship_set_course_to_spaceobject( Ship * const ship,
-				     const SPACE_DATA * const spaceobject );
+				     const Spaceobject * const spaceobject );
 void missile_set_course_to_ship( Missile * const m,
 				 const Ship * const target );
 
@@ -86,12 +86,12 @@ void ship_align_heading( Ship * const ship,
  */
 void move_ship( Ship * const ship );
 void move_missile( Missile * const m );
-void move_spaceobject( SPACE_DATA * const spaceobj );
+void move_spaceobject( Spaceobject * const spaceobj );
 
 double ship_distance_to_ship( const Ship * const ship,
 			      const Ship * const target );
 double ship_distance_to_spaceobject( const Ship * const ship,
-				     const SPACE_DATA * const spaceobject );
+				     const Spaceobject * const spaceobject );
 double missile_distance_to_ship( const Missile * const m,
 				 const Ship * const s );
 void vector_randomize( Vector3 * const vec, int from, int to );

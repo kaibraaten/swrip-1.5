@@ -10,8 +10,8 @@ void do_throw( Character *ch, char *argument )
   char              arg3[MAX_INPUT_LENGTH];
   short            dir;
   Exit       * pexit;
-  ROOM_INDEX_DATA * was_in_room;
-  ROOM_INDEX_DATA * to_room;
+  Room * was_in_room;
+  Room * to_room;
   Character       * victim;
   char              buf[MAX_STRING_LENGTH];
 

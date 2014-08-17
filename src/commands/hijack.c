@@ -11,7 +11,7 @@ void do_hijack( Character *ch, char *argument )
   Character *p, *p_prev, *victim;
 
 
-  if ( (ship = ship_from_cockpit(ch->in_room->vnum)) == NULL )
+  if ( (ship = GetShipFromCockpit(ch->in_room->vnum)) == NULL )
     {
       send_to_char("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
       return;
@@ -23,13 +23,13 @@ void do_hijack( Character *ch, char *argument )
       return;
     }
 
-  if ( (ship = ship_from_pilotseat(ch->in_room->vnum)) == NULL )
+  if ( (ship = GetShipFromPilotSeat(ch->in_room->vnum)) == NULL )
     {
       send_to_char("&RYou don't seem to be in the pilot seat!\r\n",ch);
       return;
     }
 
-  if ( check_pilot( ch , ship ) )
+  if ( CheckPilot( ch , ship ) )
     {
       send_to_char("&RWhat would be the point of that!\r\n",ch);
       return;
@@ -53,13 +53,13 @@ void do_hijack( Character *ch, char *argument )
       return;
     }
 
-  if ( ship->shipstate != SHIP_LANDED && !ship_is_disabled( ship ) )
+  if ( ship->shipstate != SHIP_LANDED && !IsShipDisabled( ship ) )
     {
       send_to_char("The ship is not docked right now.\r\n",ch);
       return;
     }
 
-  if ( ship_is_disabled( ship ) )
+  if ( IsShipDisabled( ship ) )
     {
       send_to_char("The ship's drive is disabled .\r\n",ch);
       return;
@@ -97,7 +97,7 @@ void do_hijack( Character *ch, char *argument )
       send_to_char( "Launch sequence initiated.\r\n", ch);
       act( AT_PLAIN, "$n starts up the ship and begins the launch sequence.", ch,
            NULL, argument , TO_ROOM );
-      echo_to_ship( AT_YELLOW , ship , "The ship hums as it lifts off the ground.");
+      EchoToShip( AT_YELLOW , ship , "The ship hums as it lifts off the ground.");
       sprintf( buf, "%s begins to launch.", ship->name );
       echo_to_room( AT_YELLOW , get_room_index(ship->location) , buf );
       ship->shipstate = SHIP_LAUNCH;
@@ -128,7 +128,7 @@ void do_hijack( Character *ch, char *argument )
         return;
       for ( victim = first_char; victim; victim = victim->next )
         {
-          if ( !check_pilot(victim,ship) )
+          if ( !CheckPilot(victim,ship) )
             continue;
 
           if ( !HasComlink( victim ) )

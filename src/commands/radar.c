@@ -9,8 +9,8 @@ void do_radar( Character *ch, char *argument )
   int the_chance;
   Ship *ship;
   Missile *missile;
-  SPACE_DATA *spaceobj;
-  if (   (ship = ship_from_cockpit(ch->in_room->vnum))  == NULL )
+  Spaceobject *spaceobj;
+  if (   (ship = GetShipFromCockpit(ch->in_room->vnum))  == NULL )
     {
       send_to_char("&RYou must be in the cockpit or turret of a ship to do that!\r\n",ch);
       return;
@@ -30,7 +30,7 @@ void do_radar( Character *ch, char *argument )
       }
     }
 
-  if ( ship_is_in_hyperspace( ship ) )
+  if ( IsShipInHyperspace( ship ) )
     {
       send_to_char("&RYou can only do that in realspace!\r\n",ch);
       return;
@@ -59,7 +59,7 @@ void do_radar( Character *ch, char *argument )
 
   for ( spaceobj = first_spaceobject; spaceobj; spaceobj = spaceobj->next )
     {
-      if ( space_in_range( ship, spaceobj )
+      if ( IsSpaceobjectInRange( ship, spaceobj )
 	   && spaceobj->type == SPACE_SUN
 	   && str_cmp(spaceobj->name,"") )
         ch_printf(ch, "%-15s%.0f %.0f %.0f\r\n%-15s%.0f %.0f %.0f\r\n" ,
@@ -77,7 +77,7 @@ void do_radar( Character *ch, char *argument )
 
   for ( spaceobj = first_spaceobject; spaceobj; spaceobj = spaceobj->next )
     {
-      if ( space_in_range( ship, spaceobj )
+      if ( IsSpaceobjectInRange( ship, spaceobj )
 	   && spaceobj->type == SPACE_PLANET
 	   && str_cmp(spaceobj->name,"") )
 	ch_printf(ch, "%-15s%.0f %.0f %.0f\r\n%-15s%.0f %.0f %.0f\r\n" ,
@@ -95,7 +95,7 @@ void do_radar( Character *ch, char *argument )
   set_char_color(  AT_WHITE, ch );
   for ( spaceobj = first_spaceobject; spaceobj; spaceobj = spaceobj->next )
     {
-      if ( space_in_range( ship, spaceobj ) && spaceobj->type > SPACE_PLANET && str_cmp(spaceobj->name,"") )
+      if ( IsSpaceobjectInRange( ship, spaceobj ) && spaceobj->type > SPACE_PLANET && str_cmp(spaceobj->name,"") )
         ch_printf(ch, "%-15s%.0f %.0f %.0f\r\n%-15s%.0f %.0f %.0f\r\n" ,
                   spaceobj->name,
                   spaceobj->pos.x,

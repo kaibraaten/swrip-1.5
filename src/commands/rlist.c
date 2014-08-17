@@ -3,7 +3,7 @@
 
 void do_rlist( Character *ch, char *argument )
 {
-  ROOM_INDEX_DATA       *room;
+  Room       *room;
   int                    vnum;
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];

@@ -9,7 +9,7 @@ void do_accelerate( Character *ch, char *argument )
   Ship *ship;
   char buf[MAX_STRING_LENGTH];
 
-  if (  (ship = ship_from_cockpit(ch->in_room->vnum))  == NULL )
+  if (  (ship = GetShipFromCockpit(ch->in_room->vnum))  == NULL )
     {
       send_to_char("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
       return;
@@ -21,13 +21,13 @@ void do_accelerate( Character *ch, char *argument )
       return;
     }
 
-  if (  (ship = ship_from_pilotseat(ch->in_room->vnum))  == NULL )
+  if (  (ship = GetShipFromPilotSeat(ch->in_room->vnum))  == NULL )
     {
       send_to_char("&RThe controls must be at the pilots chair...\r\n",ch);
       return;
     }
 
-  if ( is_autoflying(ship) )
+  if ( IsShipAutoflying(ship) )
     {
       send_to_char("&RYou'll have to turn off the ships autopilot first.\r\n",ch);
       return;
@@ -39,13 +39,13 @@ void do_accelerate( Character *ch, char *argument )
       return;
     }
 
-  if ( ship_is_in_hyperspace( ship ) )
+  if ( IsShipInHyperspace( ship ) )
     {
       send_to_char("&RYou can only do that in realspace!\r\n",ch);
       return;
     }
 
-  if (ship_is_disabled( ship ))
+  if (IsShipDisabled( ship ))
     {
       send_to_char("&RThe ships drive is disabled. Unable to accelerate.\r\n",ch);
       return;
@@ -108,19 +108,19 @@ void do_accelerate( Character *ch, char *argument )
     {
       ship->inorbitof = NULL;
       send_to_char( "&GAccelerating\r\n", ch);
-      echo_to_cockpit( AT_YELLOW , ship , "The ship begins to accelerate.");
-      echo_to_docked( AT_YELLOW , ship, "The hull groans at an increase in speed." );
+      EchoToCockpit( AT_YELLOW , ship , "The ship begins to accelerate.");
+      EchoToDockedShip( AT_YELLOW , ship, "The hull groans at an increase in speed." );
       sprintf( buf, "%s begins to speed up." , ship->name );
-      echo_to_nearby_ships( AT_ORANGE , ship , buf , NULL );
+      EchoToNearbyShips( AT_ORANGE , ship , buf , NULL );
     }
 
   if ( change < ship->currspeed )
     {
       send_to_char( "&GDecelerating\r\n", ch);
-      echo_to_cockpit( AT_YELLOW , ship , "The ship begins to slow down.");
-      echo_to_docked( AT_YELLOW , ship, "The hull groans as the ship slows." );
+      EchoToCockpit( AT_YELLOW , ship , "The ship begins to slow down.");
+      EchoToDockedShip( AT_YELLOW , ship, "The hull groans as the ship slows." );
       sprintf( buf, "%s begins to slow down." , ship->name );
-      echo_to_nearby_ships( AT_ORANGE , ship , buf , NULL );
+      EchoToNearbyShips( AT_ORANGE , ship , buf , NULL );
     }
 
   ship->energy -= abs((change-abs(ship->currspeed))/10);

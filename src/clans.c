@@ -336,7 +336,7 @@ static bool load_clan_file( const char *clanfile )
 
   if ( found )
     {
-      ROOM_INDEX_DATA *storeroom = NULL;
+      Room *storeroom = NULL;
 
       LINK( clan, first_clan, last_clan, next, prev );
 

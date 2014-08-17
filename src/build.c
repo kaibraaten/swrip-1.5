@@ -26,7 +26,7 @@
 #include "character.h"
 #include "editor.h"
 
-bool can_rmodify( const Character *ch, const ROOM_INDEX_DATA *room )
+bool can_rmodify( const Character *ch, const Room *room )
 {
   vnum_t vnum = room->vnum;
   Area *pArea;
@@ -236,7 +236,7 @@ void assign_area( Character *ch )
     }
 }
 
-ExtraDescription *SetRExtra( ROOM_INDEX_DATA *room, char *keywords )
+ExtraDescription *SetRExtra( Room *room, char *keywords )
 {
   ExtraDescription *ed;
 
@@ -256,7 +256,7 @@ ExtraDescription *SetRExtra( ROOM_INDEX_DATA *room, char *keywords )
   return ed;
 }
 
-bool DelRExtra( ROOM_INDEX_DATA *room, char *keywords )
+bool DelRExtra( Room *room, char *keywords )
 {
   ExtraDescription *rmed;
 
@@ -356,7 +356,7 @@ bool DelOExtraProto( OBJ_INDEX_DATA *obj, char *keywords )
 void fold_area( Area *tarea, char *filename, bool install )
 {
   Reset            *treset;
-  ROOM_INDEX_DATA       *room;
+  Room       *room;
   ProtoMobile        *pMobIndex;
   OBJ_INDEX_DATA        *pObjIndex;
   MPROG_DATA            *mprog;
@@ -809,7 +809,7 @@ Reset *ParseReset( Area *tarea, char *argument, Character *ch )
   char letter;
   int extra, val1, val2, val3;
   int value;
-  ROOM_INDEX_DATA *room;
+  Room *room;
   Exit *pexit;
 
   argument = one_argument( argument, arg1 );

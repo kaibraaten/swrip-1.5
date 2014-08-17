@@ -441,7 +441,7 @@ Character *fread_vendor( FILE *fp )
     {
       bool fMatch = false;
       vnum_t inroom = 0;
-      ROOM_INDEX_DATA *pRoomIndex = NULL;
+      Room *pRoomIndex = NULL;
 
       word = feof( fp ) ? "END" : fread_word( fp );
 

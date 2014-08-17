@@ -29,7 +29,7 @@
 /*
  * Make a fire.
  */
-void make_fire(ROOM_INDEX_DATA *in_room, short timer)
+void make_fire(Room *in_room, short timer)
 {
   OBJ_DATA *fire = create_object( get_obj_index( OBJ_VNUM_FIRE ), 0 );
 

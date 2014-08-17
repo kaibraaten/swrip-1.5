@@ -36,7 +36,7 @@ char reboot_time[50];
 time_t new_boot_time_t;
 extern OBJ_INDEX_DATA *obj_index_hash[MAX_KEY_HASH];
 extern ProtoMobile *mob_index_hash[MAX_KEY_HASH];
-extern ROOM_INDEX_DATA *room_index_hash[MAX_KEY_HASH];
+extern Room *room_index_hash[MAX_KEY_HASH];
 
 void echo_to_all( short AT_COLOR, const char *argument, short tar )
 {
@@ -63,7 +63,7 @@ void echo_to_all( short AT_COLOR, const char *argument, short tar )
     }
 }
 
-void echo_to_room( short AT_COLOR, ROOM_INDEX_DATA *room, const char *argument )
+void echo_to_room( short AT_COLOR, Room *room, const char *argument )
 {
   Character *vic;
 
@@ -79,7 +79,7 @@ void echo_to_room( short AT_COLOR, ROOM_INDEX_DATA *room, const char *argument )
     }
 }
 
-ROOM_INDEX_DATA *find_location( Character *ch, char *arg )
+Room *find_location( Character *ch, char *arg )
 {
   Character *victim;
   OBJ_DATA *obj;
@@ -171,8 +171,8 @@ void close_area( Area *pArea )
   OBJ_DATA *eobj;
   OBJ_DATA *eobj_next;
   int icnt;
-  ROOM_INDEX_DATA *rid;
-  ROOM_INDEX_DATA *rid_next;
+  Room *rid;
+  Room *rid_next;
   OBJ_INDEX_DATA *oid;
   OBJ_INDEX_DATA *oid_next;
   ProtoMobile *mid;
@@ -285,7 +285,7 @@ void close_area( Area *pArea )
             room_index_hash[icnt] = rid->next;
           else
             {
-              ROOM_INDEX_DATA *trid;
+              Room *trid;
 
               for ( trid = room_index_hash[icnt]; trid; trid = trid->next )
                 if ( trid->next == rid )

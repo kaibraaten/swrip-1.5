@@ -6,7 +6,7 @@ void do_makespaceobject( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   char filename[256];
-  SPACE_DATA *spaceobject;
+  Spaceobject *spaceobject;
 
   if ( !argument || argument[0] == '\0' )
     {
@@ -15,7 +15,7 @@ void do_makespaceobject( Character *ch, char *argument )
     }
 
 
-  CREATE( spaceobject, SPACE_DATA, 1 );
+  CREATE( spaceobject, Spaceobject, 1 );
   LINK( spaceobject, first_spaceobject, last_spaceobject, next, prev );
 
   spaceobject->name      = STRALLOC( argument );
@@ -33,7 +33,7 @@ void do_makespaceobject( Character *ch, char *argument )
 
 static void write_spaceobject_list( void )
 {
-  SPACE_DATA *tspaceobject = NULL;
+  Spaceobject *tspaceobject = NULL;
   FILE *fpout = NULL;
   char filename[256];
 

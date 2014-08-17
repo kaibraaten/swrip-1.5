@@ -4,8 +4,8 @@
 void do_at( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  ROOM_INDEX_DATA *location = NULL;
-  ROOM_INDEX_DATA *original = NULL;
+  Room *location = NULL;
+  Room *original = NULL;
   Character *wch = NULL;
 
   argument = one_argument( argument, arg );

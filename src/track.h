@@ -30,6 +30,6 @@
 #define BFS_NO_PATH        -3
 #define BFS_MARK         BV01
 
-int find_first_step(ROOM_INDEX_DATA *src, ROOM_INDEX_DATA *target, int maxdist );
+int find_first_step(Room *src, Room *target, int maxdist );
 
 #endif

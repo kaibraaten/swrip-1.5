@@ -31,10 +31,10 @@ void do_clansellship(Character *ch, char *argument )
       return;
     }
 
-  ship = ship_in_room( ch->in_room , argument );
+  ship = GetShipInRoom( ch->in_room , argument );
   if ( !ship )
     {
-      ship = ship_from_cockpit( ch->in_room->vnum );
+      ship = GetShipFromCockpit( ch->in_room->vnum );
 
       if ( !ship )
         {
@@ -55,7 +55,7 @@ void do_clansellship(Character *ch, char *argument )
       return;
     }
 
-  price = get_ship_value( ship );
+  price = GetShipValue( ship );
 
   ch->pcdata->clan->funds += ( price - price/10 );
   ch_printf(ch, "&GYour clan receives %ld credits from selling your ship.\r\n" , price - price/10 );
@@ -67,5 +67,5 @@ void do_clansellship(Character *ch, char *argument )
   ship->owner = STRALLOC( "" );
   ship->pilot = STRALLOC( "" );
   ship->copilot = STRALLOC( "" );
-  save_ship( ship );
+  SaveShip( ship );
 }

@@ -5,8 +5,8 @@ void do_rat( Character *ch, char *argument )
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
-  ROOM_INDEX_DATA *location = NULL;
-  ROOM_INDEX_DATA *original = NULL;
+  Room *location = NULL;
+  Room *original = NULL;
   int Start = 0;
   int End = 0;
   int vnum = 0;

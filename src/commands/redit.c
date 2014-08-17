@@ -10,7 +10,7 @@ void do_redit( Character *ch, char *argument )
   char arg2[MAX_INPUT_LENGTH];
   char arg3[MAX_INPUT_LENGTH];
   char buf[MAX_STRING_LENGTH];
-  ROOM_INDEX_DATA *location = NULL, *tmp = NULL;
+  Room *location = NULL, *tmp = NULL;
   ExtraDescription *ed = NULL;
   Exit *xit = NULL, *texit = NULL;
   int value = 0;
@@ -30,7 +30,7 @@ void do_redit( Character *ch, char *argument )
       break;
 
     case SUB_ROOM_DESC:
-      location = (ROOM_INDEX_DATA*)ch->dest_buf;
+      location = (Room*)ch->dest_buf;
 
       if ( !location )
         {
@@ -600,7 +600,7 @@ void do_redit( Character *ch, char *argument )
     {
       Exit *this_exit = NULL, *rxit = NULL;
       char tmpcmd[MAX_INPUT_LENGTH];
-      ROOM_INDEX_DATA *tmploc = NULL;
+      Room *tmploc = NULL;
       vnum_t vnum = INVALID_VNUM;
       int exnum = 0;
       char rvnum[MAX_INPUT_LENGTH];

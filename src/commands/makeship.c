@@ -36,6 +36,6 @@ void do_makeship( Character *ch, char *argument )
   ship->hull = ship->maxhull;
 
   ship->filename = str_dup( arg );
-  save_ship( ship );
-  write_ship_list();
+  SaveShip( ship );
+  WriteShipList();
 }

@@ -28,7 +28,7 @@ extern Character *gch_prev;
 extern OBJ_DATA *gobj_prev;
 
 Character *cur_char = NULL;
-ROOM_INDEX_DATA *cur_room = NULL;
+Room *cur_room = NULL;
 bool cur_char_died = false;
 ch_ret global_retcode = rNONE;
 
@@ -39,15 +39,15 @@ obj_ret global_objcode = rNONE;
 
 OBJ_DATA *group_object( OBJ_DATA *obj1, OBJ_DATA *obj2 );
 
-static void room_explode( OBJ_DATA *obj , Character *xch, ROOM_INDEX_DATA *room );
-static void room_explode_1( OBJ_DATA *obj , Character *xch, ROOM_INDEX_DATA *room , int blast );
-static void room_explode_2( ROOM_INDEX_DATA *room , int blast );
+static void room_explode( OBJ_DATA *obj , Character *xch, Room *room );
+static void room_explode_1( OBJ_DATA *obj , Character *xch, Room *room , int blast );
+static void room_explode_2( Room *room , int blast );
 
 void explode( OBJ_DATA *obj )
 {
   if ( obj->armed_by )
     {
-      ROOM_INDEX_DATA *room;
+      Room *room;
       Character *xch;
       bool held = false;
       OBJ_DATA *objcont = obj;
@@ -81,14 +81,14 @@ void explode( OBJ_DATA *obj )
   make_scraps(obj);
 }
 
-void room_explode( OBJ_DATA *obj, Character *xch, ROOM_INDEX_DATA *room )
+void room_explode( OBJ_DATA *obj, Character *xch, Room *room )
 {
   int blast = (int) (obj->value[OVAL_EXPLOSIVE_MAX_DMG] / 500) ;
   room_explode_1( obj , xch, room , blast );
   room_explode_2( room , blast );
 }
 
-void room_explode_1( OBJ_DATA *obj, Character *xch, ROOM_INDEX_DATA *room, int blast )
+void room_explode_1( OBJ_DATA *obj, Character *xch, Room *room, int blast )
 {
   Character *rch;
   Character *rnext;
@@ -152,7 +152,7 @@ void room_explode_1( OBJ_DATA *obj, Character *xch, ROOM_INDEX_DATA *room, int b
   }
 }
 
-void room_explode_2( ROOM_INDEX_DATA *room , int blast )
+void room_explode_2( Room *room , int blast )
 {
 
   if ( !IS_SET( room->room_flags, BFS_MARK ) )
@@ -612,7 +612,7 @@ void char_from_room( Character *ch )
 /*
  * Move a char into a room.
  */
-void char_to_room( Character *ch, ROOM_INDEX_DATA *pRoomIndex )
+void char_to_room( Character *ch, Room *pRoomIndex )
 {
   OBJ_DATA *obj;
 
@@ -831,7 +831,7 @@ int falling = 0;
 
 void obj_from_room( OBJ_DATA *obj )
 {
-  ROOM_INDEX_DATA *in_room;
+  Room *in_room;
 
   if ( ( in_room = obj->in_room ) == NULL )
     {
@@ -859,7 +859,7 @@ void obj_from_room( OBJ_DATA *obj )
 /*
  * Move an obj into a room.
  */
-OBJ_DATA *obj_to_room( OBJ_DATA *obj, ROOM_INDEX_DATA *pRoomIndex )
+OBJ_DATA *obj_to_room( OBJ_DATA *obj, Room *pRoomIndex )
 {
   OBJ_DATA *otmp, *oret;
   short count = obj->count;
@@ -1045,7 +1045,7 @@ void extract_char( Character *ch, bool fPull )
   Character *wch;
   OBJ_DATA *obj;
   char buf[MAX_STRING_LENGTH];
-  ROOM_INDEX_DATA *location;
+  Room *location;
 
   if ( !ch )
     {
@@ -1557,7 +1557,7 @@ int get_obj_weight( const OBJ_DATA *obj )
 /*
  * True if room is dark.
  */
-bool room_is_dark( const ROOM_INDEX_DATA *pRoomIndex )
+bool room_is_dark( const Room *pRoomIndex )
 {
   if ( !pRoomIndex )
     {
@@ -1587,7 +1587,7 @@ bool room_is_dark( const ROOM_INDEX_DATA *pRoomIndex )
 /*
  * True if room is private.
  */
-bool room_is_private( const Character *ch, const ROOM_INDEX_DATA *pRoomIndex )
+bool room_is_private( const Character *ch, const Room *pRoomIndex )
 {
   Character *rch;
   int count;
@@ -1903,7 +1903,7 @@ OBJ_DATA *get_trap( const OBJ_DATA *obj )
 /*
  * Remove an exit from a room                                   -Thoric
  */
-void extract_exit( ROOM_INDEX_DATA *room, Exit *pexit )
+void extract_exit( Room *room, Exit *pexit )
 {
   UNLINK( pexit, room->first_exit, room->last_exit, next, prev );
   if ( pexit->rexit )
@@ -1916,7 +1916,7 @@ void extract_exit( ROOM_INDEX_DATA *room, Exit *pexit )
 /*
  * clean out a room (leave list pointers intact )               -Thoric
  */
-void clean_room( ROOM_INDEX_DATA *room )
+void clean_room( Room *room )
 {
   ExtraDescription      *ed, *ed_next;
   Exit             *pexit, *pexit_next;
@@ -2561,7 +2561,7 @@ void separate_obj( OBJ_DATA *obj )
 /*
  * Empty an obj's contents... optionally into another obj, or a room
  */
-bool empty_obj( OBJ_DATA *obj, OBJ_DATA *destobj, ROOM_INDEX_DATA *destroom )
+bool empty_obj( OBJ_DATA *obj, OBJ_DATA *destobj, Room *destroom )
 {
   OBJ_DATA *otmp, *otmp_next;
   Character *ch = obj->carried_by;

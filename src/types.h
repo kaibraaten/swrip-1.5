@@ -88,8 +88,8 @@ typedef struct pc_data                 PC_DATA;
 struct Reset;
 typedef struct Reset                   Reset;
 
-struct room_index_data;
-typedef struct room_index_data         ROOM_INDEX_DATA;
+struct Room;
+typedef struct Room                    Room;
 
 struct shop_data;
 typedef struct shop_data               SHOP_DATA;
@@ -118,8 +118,8 @@ typedef struct storeroom               STOREROOM;
 struct guard_data;
 typedef struct guard_data              GUARD_DATA;
 
-struct space_data;
-typedef struct space_data              SPACE_DATA;
+struct Spaceobject;
+typedef struct Spaceobject             Spaceobject;
 
 struct clan_data;
 typedef struct clan_data               CLAN_DATA;

@@ -9,7 +9,7 @@ void do_closehatch(Character *ch, char *argument )
 
   if ( !argument || argument[0] == '\0' || !str_cmp(argument,"hatch") )
     {
-      ship = ship_from_entrance( ch->in_room->vnum );
+      ship = GetShipFromEntrance( ch->in_room->vnum );
       if( ship == NULL)
         {
           send_to_char( "&RClose what?\r\n", ch );
@@ -40,7 +40,7 @@ void do_closehatch(Character *ch, char *argument )
         }
     }
 
-  ship = ship_in_room( ch->in_room , argument );
+  ship = GetShipInRoom( ch->in_room , argument );
 
   if ( !ship )
     {
@@ -48,7 +48,7 @@ void do_closehatch(Character *ch, char *argument )
       return;
     }
 
-  if ( ship->shipstate != SHIP_LANDED && !ship_is_disabled( ship ) )
+  if ( ship->shipstate != SHIP_LANDED && !IsShipDisabled( ship ) )
     {
       send_to_char( "&RThat ship has already started to launch",ch);
       return;

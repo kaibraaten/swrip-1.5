@@ -11,9 +11,9 @@ void do_fuel(Character *ch, char *argument )
 
   argument = one_argument( argument, arg1 );
 
-  if (  (ship = ship_from_hanger(ch->in_room->vnum))  == NULL )
+  if (  (ship = GetShipFromHangar(ch->in_room->vnum))  == NULL )
     {
-      if ( (ship = ship_from_entrance(ch->in_room->vnum)) == NULL )
+      if ( (ship = GetShipFromEntrance(ch->in_room->vnum)) == NULL )
         {
           send_to_char("&RYou must be in the hanger or the entrance of a ship to do that!\r\n",ch);
           return;
@@ -64,9 +64,9 @@ void do_fuel(Character *ch, char *argument )
   eShip->energy += amount;
 
   sprintf( buf, "&YFuel order filled: &O%s: %d\r\n", eShip->name, amount );
-  echo_to_cockpit( AT_YELLOW, ship, buf );
+  EchoToCockpit( AT_YELLOW, ship, buf );
   send_to_char( buf, ch );
   sprintf( buf, "&YFuel remaining: %d\r\n", ship->energy );
-  echo_to_cockpit( AT_YELLOW, ship, buf );
+  EchoToCockpit( AT_YELLOW, ship, buf );
   send_to_char( buf, ch );
 }

@@ -7,7 +7,7 @@ static void rpfind_help (Character *ch);
  */
 void do_rpfind( Character *ch, char *argument )   /* Gorog */
 {
-  ROOM_INDEX_DATA *   pRoom;
+  Room *   pRoom;
   MPROG_DATA      *   pProg;
   char                arg1 [MAX_INPUT_LENGTH];
   char                arg2 [MAX_INPUT_LENGTH];

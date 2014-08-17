@@ -7,7 +7,7 @@ void do_autotrack( Character *ch, char *argument )
   Ship *ship;
   int the_chance;
 
-  if (  (ship = ship_from_cockpit(ch->in_room->vnum))  == NULL )
+  if (  (ship = GetShipFromCockpit(ch->in_room->vnum))  == NULL )
     {
       send_to_char("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
       return;
@@ -36,13 +36,13 @@ void do_autotrack( Character *ch, char *argument )
       return;
     }
 
-  if (  (ship = ship_from_pilotseat(ch->in_room->vnum))  == NULL )
+  if (  (ship = GetShipFromPilotSeat(ch->in_room->vnum))  == NULL )
     {
       send_to_char("&RYou aren't in the pilots chair!\r\n",ch);
       return;
     }
 
-  if ( is_autoflying(ship)  )
+  if ( IsShipAutoflying(ship)  )
     {
       send_to_char("&RYou'll have to turn off the ships autopilot first....\r\n",ch);
       return;
@@ -62,12 +62,12 @@ void do_autotrack( Character *ch, char *argument )
   if (ship->autotrack)
     {
       ship->autotrack = false;
-      echo_to_cockpit( AT_YELLOW , ship, "Autotracking off.");
+      EchoToCockpit( AT_YELLOW , ship, "Autotracking off.");
     }
   else
     {
       ship->autotrack = true;
-      echo_to_cockpit( AT_YELLOW , ship, "Autotracking on.");
+      EchoToCockpit( AT_YELLOW , ship, "Autotracking on.");
     }
 
   learn_from_success( ch, gsn_shipsystems );

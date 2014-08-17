@@ -12,7 +12,7 @@ void do_adjusttractorbeam(Character *ch, char *argument )
 
   strcpy( arg, argument );
 
-  if (  (ship = ship_from_coseat(ch->in_room->vnum))  == NULL )
+  if (  (ship = GetShipFromCoSeat(ch->in_room->vnum))  == NULL )
     {
       send_to_char("&RYou must be in the copilot's seat of a ship to do that!\r\n",ch);
       return;
@@ -50,25 +50,25 @@ void do_adjusttractorbeam(Character *ch, char *argument )
 
   if( str_cmp( arg, "undock" ) && eShip->docked && eShip->docked != ship)
     {
-      echo_to_cockpit( AT_YELLOW, ship, "Tractor Beam set on docked ship. Undock it first.\r\n" );
+      EchoToCockpit( AT_YELLOW, ship, "Tractor Beam set on docked ship. Undock it first.\r\n" );
       return;
     }
 
   if( eShip->sclass >= ship->sclass )
     {
-      echo_to_cockpit( AT_YELLOW, ship, "Tractor Beam set on ship of a greater or equal mass as our own. It will not move.\r\n" );
+      EchoToCockpit( AT_YELLOW, ship, "Tractor Beam set on ship of a greater or equal mass as our own. It will not move.\r\n" );
       return;
     }
 
   if ( !eShip->spaceobject )
     {
-      echo_to_cockpit( AT_YELLOW, ship, "Target is on the ground. There is no need to adjust the tractor beam.\r\n" );
+      EchoToCockpit( AT_YELLOW, ship, "Target is on the ground. There is no need to adjust the tractor beam.\r\n" );
       return;
     }
 
   if ( !str_cmp( arg, "pull") || !str_cmp( arg, "none" ) )
     {
-      echo_to_cockpit( AT_YELLOW, ship, "Tractor Beam set to pull target.\r\n" );
+      EchoToCockpit( AT_YELLOW, ship, "Tractor Beam set to pull target.\r\n" );
       eShip->shipstate = SHIP_TRACTORED;
       eShip->docked = NULL;
       eShip->docking = SHIP_READY;
@@ -77,7 +77,7 @@ void do_adjusttractorbeam(Character *ch, char *argument )
     }
   if ( !str_cmp( arg, "abort" ) )
     {
-      echo_to_cockpit( AT_YELLOW, ship, "Manuever aborted. Tractor beam returned to default setting.\r\n" );
+      EchoToCockpit( AT_YELLOW, ship, "Manuever aborted. Tractor beam returned to default setting.\r\n" );
       eShip->shipstate = SHIP_TRACTORED;
       eShip->docked = NULL;
       eShip->docking = SHIP_READY;
@@ -93,13 +93,13 @@ void do_adjusttractorbeam(Character *ch, char *argument )
           return;
         }
 
-      if ( !candock( eShip ) || !candock( ship ) )
+      if ( !CanDock( eShip ) || !CanDock( ship ) )
         {
           send_to_char("&RYou have no empty docking port.\r\n",ch);
           return;
         }
 
-      echo_to_cockpit( AT_YELLOW, ship, "Tractor Beam set to dock target.\r\n" );
+      EchoToCockpit( AT_YELLOW, ship, "Tractor Beam set to dock target.\r\n" );
       eShip->docking = SHIP_DOCK;
       eShip->docked = ship;
       return;
@@ -131,7 +131,7 @@ void do_adjusttractorbeam(Character *ch, char *argument )
           return;
         }
 
-      echo_to_cockpit( AT_YELLOW, ship, "Tractor Beam set to land target.\r\n" );
+      EchoToCockpit( AT_YELLOW, ship, "Tractor Beam set to land target.\r\n" );
       eShip->shipstate = SHIP_LAND;
       eShip->dest = STRALLOC(ship->name);
       return;
@@ -150,12 +150,12 @@ void do_adjusttractorbeam(Character *ch, char *argument )
           send_to_char("&RYour target is not docked.\r\n",ch);
           return;
         }
-      echo_to_cockpit( AT_YELLOW, ship, "Tractor beam set to undock target.\r\n" );
+      EchoToCockpit( AT_YELLOW, ship, "Tractor beam set to undock target.\r\n" );
       eShip->shipstate = SHIP_TRACTORED;
       eShip->docked->statettractor = SHIP_DISABLED;
       eShip->statettractor = SHIP_DISABLED;
-      echo_to_cockpit( AT_RED, eShip, "As a ship is torn from your docking bay, the clamps are damaged!." );
-      echo_to_cockpit( AT_RED, ship, "As your ship is torn from the docking bay, the clamps are damaged!." );
+      EchoToCockpit( AT_RED, eShip, "As a ship is torn from your docking bay, the clamps are damaged!." );
+      EchoToCockpit( AT_RED, ship, "As your ship is torn from the docking bay, the clamps are damaged!." );
       eShip->docked = NULL;
       eShip->docking = SHIP_READY;
       return;

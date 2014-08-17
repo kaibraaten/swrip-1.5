@@ -6,7 +6,7 @@ void do_renameship( Character *ch, char *argument )
 {
   Ship *ship;
   CLAN_DATA *clan;
-  if ( (ship = ship_from_cockpit( ch->in_room->vnum ) ) == NULL)
+  if ( (ship = GetShipFromCockpit( ch->in_room->vnum ) ) == NULL)
     {
       send_to_char( "You must be in the cockpit of a ship to do that!\r\n", ch);
       return;
@@ -19,7 +19,7 @@ void do_renameship( Character *ch, char *argument )
         return;
       }
 
-  if( get_ship( argument ) != NULL )
+  if( GetShipAnywhere( argument ) != NULL )
     {
       send_to_char( "&RImperial Database: &WA ship already exists of that name.\r\n", ch);
       return;
@@ -35,6 +35,6 @@ void do_renameship( Character *ch, char *argument )
   ch->gold -= 50000;
   STRFREE( ship->personalname );
   ship->personalname            = STRALLOC( argument );
-  save_ship( ship );
+  SaveShip( ship );
   send_to_char( "&RImperial Database: &WTransaction Complete. Name changed.", ch );
 }

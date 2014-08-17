@@ -11,7 +11,7 @@ void do_status(Character *ch, char *argument )
   Ship *target;
   size_t turret_num = 0;
 
-  if (  (ship = ship_from_cockpit(ch->in_room->vnum))  == NULL )
+  if (  (ship = GetShipFromCockpit(ch->in_room->vnum))  == NULL )
     {
       send_to_char("&RYou must be in the cockpit, turret or engineroom of a ship to do that!\r\n",ch);
       return;
@@ -20,7 +20,7 @@ void do_status(Character *ch, char *argument )
   if (argument[0] == '\0')
     target = ship;
   else
-    target = get_ship_here( argument , ship );
+    target = GetShipInRange( argument , ship );
 
   if ( target == NULL )
     {
@@ -56,7 +56,7 @@ void do_status(Character *ch, char *argument )
   ch_printf( ch, "&OHull:&Y %d&O/%d  Ship Condition:&Y %s\r\n",
              target->hull,
              target->maxhull,
-             ship_is_disabled( target ) ? "Disabled" : "Running");
+             IsShipDisabled( target ) ? "Disabled" : "Running");
   ch_printf( ch, "&OShields:&Y %d&O/%d   Energy(fuel):&Y %d&O/%d\r\n",
              target->shield,
              target->maxshield,

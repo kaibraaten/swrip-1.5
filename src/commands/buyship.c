@@ -13,10 +13,10 @@ void do_buyship(Character *ch, char *argument )
       return;
     }
 
-  ship = ship_in_room( ch->in_room , argument );
+  ship = GetShipInRoom( ch->in_room , argument );
   if ( !ship )
     {
-      ship = ship_from_cockpit( ch->in_room->vnum );
+      ship = GetShipFromCockpit( ch->in_room->vnum );
 
       if ( !ship )
         {
@@ -55,7 +55,7 @@ void do_buyship(Character *ch, char *argument )
         }
     }
 
-  price = get_ship_value( ship );
+  price = GetShipValue( ship );
 
   if ( ch->gold < price )
     {
@@ -71,5 +71,5 @@ void do_buyship(Character *ch, char *argument )
 
   STRFREE( ship->owner );
   ship->owner = STRALLOC( ch->name );
-  save_ship( ship );
+  SaveShip( ship );
 }

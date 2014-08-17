@@ -1,6 +1,6 @@
 #include "mud.h"
 
-static void showspaceobject( Character *ch , SPACE_DATA *spaceobject )
+static void showspaceobject( Character *ch , Spaceobject *spaceobject )
 {
   ch_printf( ch, "Space object: %s\r\n", spaceobject->name);
   ch_printf( ch, "Filename:     %s\r\n", spaceobject->filename);
@@ -20,7 +20,7 @@ static void showspaceobject( Character *ch , SPACE_DATA *spaceobject )
 
 void do_showspaceobject( Character *ch, char *argument )
 {
-  SPACE_DATA *spaceobject = spaceobject_from_name( argument );
+  Spaceobject *spaceobject = spaceobject_from_name( argument );
 
   if ( spaceobject == NULL )
     send_to_char("&RNo such spaceobject.\r\n",ch);

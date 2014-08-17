@@ -3,8 +3,8 @@
 
 void do_flee( Character *ch, char *argument )
 {
-  ROOM_INDEX_DATA *was_in;
-  ROOM_INDEX_DATA *now_in;
+  Room *was_in;
+  Room *now_in;
   char buf[MAX_STRING_LENGTH];
   int attempt;
   short door;

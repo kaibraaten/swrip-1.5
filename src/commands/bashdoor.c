@@ -30,7 +30,7 @@ void do_bashdoor( Character *ch, char *argument )
 
   if ( ( pexit = find_door( ch, arg, false ) ) != NULL )
     {
-      ROOM_INDEX_DATA *to_room = NULL;
+      Room *to_room = NULL;
       Exit *pexit_rev = NULL;
       int bash_chance = 0;
       char *keyword = NULL;

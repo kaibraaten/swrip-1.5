@@ -6,7 +6,7 @@
 void do_mpgoto( Character *ch, char *argument )
 {
   char arg[ MAX_INPUT_LENGTH ];
-  ROOM_INDEX_DATA *location;
+  Room *location;
 
   if ( IsAffectedBy( ch, AFF_CHARM ) )
     return;

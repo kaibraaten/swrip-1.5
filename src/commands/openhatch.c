@@ -9,7 +9,7 @@ void do_openhatch(Character *ch, char *argument )
 
   if ( !argument || argument[0] == '\0' || !str_cmp(argument,"hatch") )
     {
-      ship = ship_from_entrance( ch->in_room->vnum );
+      ship = GetShipFromEntrance( ch->in_room->vnum );
       if( ship == NULL)
         {
           send_to_char( "&ROpen what?\r\n", ch );
@@ -26,7 +26,7 @@ void do_openhatch(Character *ch, char *argument )
                   return;
                 }
               if ( ship->location != ship->lastdoc ||
-		   ( ship->shipstate != SHIP_LANDED && !ship_is_disabled( ship ) ) )
+		   ( ship->shipstate != SHIP_LANDED && !IsShipDisabled( ship ) ) )
                 {
                   send_to_char("&RPlease wait till the ship lands!\r\n",ch);
                   return;
@@ -46,20 +46,20 @@ void do_openhatch(Character *ch, char *argument )
         }
     }
 
-  ship = ship_in_room( ch->in_room , argument );
+  ship = GetShipInRoom( ch->in_room , argument );
   if ( !ship )
     {
       act( AT_PLAIN, "I see no $T here.", ch, NULL, argument, TO_CHAR );
       return;
     }
 
-  if ( ship->shipstate != SHIP_LANDED && !ship_is_disabled( ship ) )
+  if ( ship->shipstate != SHIP_LANDED && !IsShipDisabled( ship ) )
     {
       send_to_char( "&RThat ship has already started to launch",ch);
       return;
     }
 
-  if ( ! check_pilot(ch,ship) )
+  if ( ! CheckPilot(ch,ship) )
     {
       send_to_char("&RHey! Thats not your ship!\r\n",ch);
       return;

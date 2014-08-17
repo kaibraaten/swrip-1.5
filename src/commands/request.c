@@ -14,7 +14,7 @@ void do_request(Character *ch, char *argument)
 
   strcpy( arg, argument );
 
-  if ( (ship = ship_from_cockpit(ch->in_room->vnum)) == NULL )
+  if ( (ship = GetShipFromCockpit(ch->in_room->vnum)) == NULL )
     {
       send_to_char("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
       return;
@@ -32,7 +32,7 @@ void do_request(Character *ch, char *argument)
       return;
     }
 
-  if ( ship_is_in_hyperspace( ship ) )
+  if ( IsShipInHyperspace( ship ) )
     {
       send_to_char("&RYou can only do that in realspace!\r\n",ch);
       return;
@@ -44,7 +44,7 @@ void do_request(Character *ch, char *argument)
       return;
     }
 
-  eShip = get_ship_here(arg,ship);
+  eShip = GetShipInRange(arg,ship);
 
   if ( eShip == NULL )
     {
@@ -64,7 +64,7 @@ void do_request(Character *ch, char *argument)
       return;
     }
 
-  if ( !is_autoflying(eShip) )
+  if ( !IsShipAutoflying(eShip) )
     {
       send_to_char("&RThe other ship needs to have its autopilot turned on.\r\n",ch);
       return;
@@ -83,7 +83,7 @@ void do_request(Character *ch, char *argument)
     }
 
   the_chance = IsNpc(ch) ? ch->top_level : (int) (ch->pcdata->learned[gsn_fake_signal]);
-  if ( (eShip->sclass == SHIP_PLATFORM ? 1 : (number_percent( ) >= the_chance)) && !check_pilot(ch,eShip) )
+  if ( (eShip->sclass == SHIP_PLATFORM ? 1 : (number_percent( ) >= the_chance)) && !CheckPilot(ch,eShip) )
     {
       send_to_char("&RHey! That's not your ship!",ch);
       return;
@@ -94,12 +94,12 @@ void do_request(Character *ch, char *argument)
       send_to_char("&RThat ship's bay doors are already open!\r\n",ch);
       return;
     }
-  if ( the_chance && !check_pilot(ch, eShip) )
+  if ( the_chance && !CheckPilot(ch, eShip) )
     learn_from_success(ch, gsn_fake_signal);
 
   send_to_char("&RYou open the bay doors of the remote ship.",ch);
   act(AT_PLAIN,"$n flips a switch on the control panel.",ch,NULL,argument,TO_ROOM);
   eShip->bayopen = true;
   sprintf( buf ,"%s's bay doors open." , eShip->name );
-  echo_to_nearby_ships( AT_YELLOW, ship, buf , NULL );
+  EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );
 }

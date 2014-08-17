@@ -2,7 +2,7 @@
 #include "mud.h"
 #include "ships.h"
 
-void do_transship(Character *ch, char *argument)
+void do_TransferShip(Character *ch, char *argument)
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
@@ -18,7 +18,7 @@ void do_transship(Character *ch, char *argument)
   argument = one_argument( argument, arg1 );
   argument = one_argument( argument, arg2 );
 
-  ship = get_ship( arg1 );
+  ship = GetShipAnywhere( arg1 );
   if ( !ship )
     {
       send_to_char( "No such ship.\r\n", ch );
@@ -29,7 +29,7 @@ void do_transship(Character *ch, char *argument)
 
   if ( arg1[0] == '\0' || arg2[0] == '\0' || arg1[0] == '\0' )
     {
-      send_to_char( "Usage: transship <ship> <vnum>\r\n", ch );
+      send_to_char( "Usage: TransferShip <ship> <vnum>\r\n", ch );
       return;
     }
 
@@ -44,8 +44,8 @@ void do_transship(Character *ch, char *argument)
       return;
     }
 
-  extract_ship( ship );
-  ship_to_room( ship , ship->shipyard );
+  ExtractShip( ship );
+  ShipToRoom( ship , ship->shipyard );
 
   ship->location = ship->shipyard;
   ship->lastdoc = ship->shipyard;
@@ -53,8 +53,8 @@ void do_transship(Character *ch, char *argument)
   ship->shipyard = origShipyard;
 
   if (ship->spaceobject)
-    ship_from_spaceobject( ship, ship->spaceobject );
+    ShipFromSpaceobject( ship, ship->spaceobject );
 
-  save_ship(ship);
+  SaveShip(ship);
   send_to_char( "Ship Transfered.\r\n", ch );
 }

@@ -5,7 +5,7 @@
 void do_InstallRoom( Character *ch, char *argument )
 {
   Area *pArea;
-  ROOM_INDEX_DATA *pRoom;
+  Room *pRoom;
   bool dodoors;
   char arg[MAX_INPUT_LENGTH];
 

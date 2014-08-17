@@ -14,7 +14,7 @@ void do_dock(Character *ch, char *argument)
 
   strcpy( arg, argument );
 
-  if (  (ship = ship_from_cockpit(ch->in_room->vnum))  == NULL )
+  if (  (ship = GetShipFromCockpit(ch->in_room->vnum))  == NULL )
     {
       send_to_char("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
       return;
@@ -33,7 +33,7 @@ void do_dock(Character *ch, char *argument)
       return;
     }
 
-  if (  (ship = ship_from_pilotseat(ch->in_room->vnum))  == NULL )
+  if (  (ship = GetShipFromPilotSeat(ch->in_room->vnum))  == NULL )
     {
       send_to_char("&RYou aren't in the pilots seat.\r\n",ch);
       return;
@@ -51,13 +51,13 @@ void do_dock(Character *ch, char *argument)
       return;
     }
 
-  if ( ship_is_in_hyperspace( ship ) )
+  if ( IsShipInHyperspace( ship ) )
     {
       send_to_char("&RYou can only do that in realspace!\r\n",ch);
       return;
     }
 
-  if (ship_is_disabled( ship ))
+  if (IsShipDisabled( ship ))
     {
       send_to_char("&RThe ships drive is disabled. Unable to manuever.\r\n",ch);
       return;
@@ -73,7 +73,7 @@ void do_dock(Character *ch, char *argument)
       send_to_char("&RTry undocking first!\r\n",ch);
       return;
     }
-  if (!candock(ship))
+  if (!CanDock(ship))
     {
       send_to_char("&RTry undocking first!\r\n",ch);
       return;
@@ -116,7 +116,7 @@ void do_dock(Character *ch, char *argument)
       return;
     }
 
-  eShip = get_ship_here( arg, ship );
+  eShip = GetShipInRange( arg, ship );
 
   if (  eShip == NULL )
     {
@@ -134,7 +134,7 @@ void do_dock(Character *ch, char *argument)
       return;
     }
 
-  if (!candock(eShip))
+  if (!CanDock(eShip))
     {
       send_to_char("&RYou can not seem to find an open docking port.\r\n",ch);
       return;
@@ -147,7 +147,7 @@ void do_dock(Character *ch, char *argument)
       return;
     }
 
-  if ( is_autoflying(eShip)  )
+  if ( IsShipAutoflying(eShip)  )
     {
       send_to_char("&RThe other ship needs to turn their autopilot off.\r\n",ch);
       return;
@@ -191,8 +191,8 @@ void do_dock(Character *ch, char *argument)
         }
       return;
     }
-  echo_to_ship( AT_YELLOW , ship , "The ship slowly begins its docking maneveurs.");
-  echo_to_ship( AT_YELLOW , eShip , "The ship slowly begins its docking maneveurs.");
+  EchoToShip( AT_YELLOW , ship , "The ship slowly begins its docking maneveurs.");
+  EchoToShip( AT_YELLOW , eShip , "The ship slowly begins its docking maneveurs.");
   ship->docked = eShip;
   ship->docking= SHIP_DOCK;
   ship->ch = ch;

@@ -4,7 +4,7 @@
 void do_rdelete( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  ROOM_INDEX_DATA *location;
+  Room *location;
 
   argument = one_argument( argument, arg );
 

@@ -9,7 +9,7 @@ void do_sellhome (Character *ch, char *argument)
 
   int sellHomeCreditReturn = 50000;
 
-  ROOM_INDEX_DATA *room;
+  Room *room;
 
   if ( ch->plr_home == NULL )
     {

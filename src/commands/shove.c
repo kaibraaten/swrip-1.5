@@ -60,7 +60,7 @@ void do_shove( Character *ch, char *argument )
     {
       if (!str_cmp( arg2, "in" ))
         {
-	  ROOM_INDEX_DATA *to_room = NULL;
+	  Room *to_room = NULL;
 	  Ship *ship = NULL;
 
           if ( !argument || argument[0] == '\0')
@@ -69,7 +69,7 @@ void do_shove( Character *ch, char *argument )
               return;
             }
 
-	  ship = ship_in_room( ch->in_room , argument );
+	  ship = GetShipInRoom( ch->in_room , argument );
 
           if ( !ship )
             {
@@ -147,9 +147,9 @@ void do_shove( Character *ch, char *argument )
 
       if (!str_cmp( arg2, "out" ))
         {
-	  ROOM_INDEX_DATA *to_room = NULL;
-          ROOM_INDEX_DATA *fromroom = ch->in_room;
-	  Ship *ship = ship_from_entrance(fromroom->vnum);
+	  Room *to_room = NULL;
+          Room *fromroom = ch->in_room;
+	  Ship *ship = GetShipFromEntrance(fromroom->vnum);
 
           if ( !ship )
             {
@@ -169,7 +169,7 @@ void do_shove( Character *ch, char *argument )
               return;
             }
 
-          if ( ship->shipstate != SHIP_LANDED && !ship_is_disabled( ship ) )
+          if ( ship->shipstate != SHIP_LANDED && !IsShipDisabled( ship ) )
             {
               send_to_char("&rPlease wait till the ship is properly docked.\r\n",ch);
               return;

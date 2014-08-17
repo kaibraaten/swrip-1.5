@@ -5,7 +5,7 @@
 
 void do_board( Character *ch, char *argument )
 {
-  ROOM_INDEX_DATA *toroom;
+  Room *toroom;
   Ship *ship;
   char * name = NULL;
   SHUTTLE_DATA *shuttle;
@@ -22,7 +22,7 @@ void do_board( Character *ch, char *argument )
       return;
     }
 
-  if ( ( ship = ship_in_room( ch->in_room , argument ) ) != NULL )
+  if ( ( ship = GetShipInRoom( ch->in_room , argument ) ) != NULL )
     {
 
       if ( ( toroom = get_room_index( ship->room.entrance ) ) == NULL )

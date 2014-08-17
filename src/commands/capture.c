@@ -65,10 +65,10 @@ void do_capture ( Character *ch , char *argument )
           if( !ship->spaceobject )
             continue;
 
-          if( ship_is_in_hyperspace( ship ) || ship_is_disabled( ship ) )
+          if( IsShipInHyperspace( ship ) || IsShipDisabled( ship ) )
             continue;
 
-          if( !space_in_range_c( ship, planet->spaceobject ) )
+          if( !IsSpaceobjectInCaptureRange( ship, planet->spaceobject ) )
             continue;
 
 	  sClan = get_clan(ship->owner);

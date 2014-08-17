@@ -7,17 +7,17 @@ void do_openbay( Character *ch, char *argument )
   Ship *ship;
   char buf[MAX_STRING_LENGTH];
 
-  if ( ship_from_pilotseat(ch->in_room->vnum) == NULL
-       && ship_from_hanger(ch->in_room->vnum) == NULL )
+  if ( GetShipFromPilotSeat(ch->in_room->vnum) == NULL
+       && GetShipFromHangar(ch->in_room->vnum) == NULL )
     {
       send_to_char("&RYou aren't in the pilots chair or hanger of a ship!\r\n",ch);
       return;
     }
 
-  if ( ship_from_pilotseat(ch->in_room->vnum) )
-    ship = ship_from_pilotseat(ch->in_room->vnum);
+  if ( GetShipFromPilotSeat(ch->in_room->vnum) )
+    ship = GetShipFromPilotSeat(ch->in_room->vnum);
   else
-    ship = ship_from_hanger(ch->in_room->vnum);
+    ship = GetShipFromHangar(ch->in_room->vnum);
 
   if ( ship->room.hanger == 0 )
     {
@@ -35,8 +35,8 @@ void do_openbay( Character *ch, char *argument )
        NULL, argument , TO_ROOM );
   ship->bayopen = true;
 
-  echo_to_cockpit( AT_YELLOW , ship, "Bay Doors Open");
+  EchoToCockpit( AT_YELLOW , ship, "Bay Doors Open");
   send_to_char("You open the bay doors", ch);
   sprintf( buf ,"%s's bay doors open." , ship->name );
-  echo_to_nearby_ships( AT_YELLOW, ship, buf , NULL );
+  EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );
 }

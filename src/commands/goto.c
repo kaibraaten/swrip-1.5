@@ -4,10 +4,10 @@
 void do_goto( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  ROOM_INDEX_DATA *location;
+  Room *location;
   Character *fch;
   Character *fch_next;
-  ROOM_INDEX_DATA *in_room;
+  Room *in_room;
   Area *pArea;
   short vnum;
 

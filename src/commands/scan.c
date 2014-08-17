@@ -5,8 +5,8 @@ void show_char_to_char( Character *list, Character *ch );
 
 void do_scan( Character *ch, char *argument )
 {
-  ROOM_INDEX_DATA *was_in_room;
-  ROOM_INDEX_DATA *to_room;
+  Room *was_in_room;
+  Room *to_room;
   Exit *pexit;
   short dir = -1;
   short dist;

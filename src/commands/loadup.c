@@ -39,7 +39,7 @@ void do_loadup( Character *ch, char *argument )
         {
           char filename[256];
 	  FILE *fph;
-          ROOM_INDEX_DATA *storeroom = d->character->plr_home;
+          Room *storeroom = d->character->plr_home;
           OBJ_DATA *obj;
           OBJ_DATA *obj_next;
 

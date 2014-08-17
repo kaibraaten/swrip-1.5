@@ -20,13 +20,13 @@ void do_reload( Character *ch, char *argument )
       return;
     }
 
-  if ( ( ship = ship_in_room( ch->in_room , argument ) ) == NULL )
+  if ( ( ship = GetShipInRoom( ch->in_room , argument ) ) == NULL )
     {
       act( AT_PLAIN, "I see no $T here.", ch, NULL, argument, TO_CHAR );
       return;
     }
 
-  if (ship_is_disabled( ship ) )
+  if (IsShipDisabled( ship ) )
     price += 200;
 
   if ( ship->missilestate == MISSILE_DAMAGED )

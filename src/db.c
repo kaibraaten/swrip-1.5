@@ -244,7 +244,7 @@ short gsn_top_sn = 0;
  */
 ProtoMobile *mob_index_hash[MAX_KEY_HASH];
 OBJ_INDEX_DATA *obj_index_hash[MAX_KEY_HASH];
-ROOM_INDEX_DATA *room_index_hash[MAX_KEY_HASH];
+Room *room_index_hash[MAX_KEY_HASH];
 
 Area *first_area = NULL;
 Area *last_area = NULL;
@@ -314,13 +314,13 @@ MPROG_DATA *    mprog_file_read( char* f, MPROG_DATA* mprg,
 MPROG_DATA *    oprog_file_read( char* f, MPROG_DATA* mprg,
 				 OBJ_INDEX_DATA *pObjIndex );
 MPROG_DATA *    rprog_file_read( char* f, MPROG_DATA* mprg,
-				 ROOM_INDEX_DATA *pRoomIndex );
+				 Room *pRoomIndex );
 void            load_mudprogs( Area *tarea, FILE* fp );
 void            load_objprogs( Area *tarea, FILE* fp );
 void            load_roomprogs( Area *tarea, FILE* fp );
 void            mprog_read_programs( FILE* fp, ProtoMobile *pMobIndex );
 void            oprog_read_programs( FILE* fp, OBJ_INDEX_DATA *pObjIndex );
-void            rprog_read_programs( FILE* fp, ROOM_INDEX_DATA *pRoomIndex );
+void            rprog_read_programs( FILE* fp, Room *pRoomIndex );
 
 void shutdown_mud( const char *reason )
 {
@@ -699,7 +699,7 @@ void boot_db( bool fCopyOver )
   load_spaceobjects();
 
   log_string( "Loading ships" );
-  load_ships();
+  LoadShips();
 
   log_string( "Loading bounties" );
   load_bounties();
@@ -1351,7 +1351,7 @@ void load_resets( Area *tarea, FILE *fp )
 
   for ( ; ; )
     {
-      ROOM_INDEX_DATA *pRoomIndex;
+      Room *pRoomIndex;
       Exit *pexit;
       char letter;
       int extra, arg1, arg2, arg3;
@@ -1504,7 +1504,7 @@ void load_resets( Area *tarea, FILE *fp )
  */
 void load_rooms( Area *tarea, FILE *fp )
 {
-  ROOM_INDEX_DATA *pRoomIndex;
+  Room *pRoomIndex;
   char buf[MAX_STRING_LENGTH];
   const char *ln;
 
@@ -1568,7 +1568,7 @@ void load_rooms( Area *tarea, FILE *fp )
       else
         {
           oldroom = false;
-          CREATE( pRoomIndex, ROOM_INDEX_DATA, 1 );
+          CREATE( pRoomIndex, Room, 1 );
         }
 
       fBootDb = tmpBootDb;
@@ -1915,7 +1915,7 @@ void fix_exits( void )
 
   for ( iHash = 0; iHash < MAX_KEY_HASH; iHash++ )
     {
-      ROOM_INDEX_DATA *pRoomIndex;
+      Room *pRoomIndex;
 
       for ( pRoomIndex  = room_index_hash[iHash];
             pRoomIndex;
@@ -1953,7 +1953,7 @@ void fix_exits( void )
   /* Set all the rexit pointers         -Thoric */
   for ( iHash = 0; iHash < MAX_KEY_HASH; iHash++ )
     {
-      ROOM_INDEX_DATA *pRoomIndex;
+      Room *pRoomIndex;
 
       for ( pRoomIndex  = room_index_hash[iHash];
             pRoomIndex;
@@ -1981,7 +1981,7 @@ void fix_exits( void )
 /*
  * Get diku-compatable exit by number                           -Thoric
  */
-Exit *get_exit_number( ROOM_INDEX_DATA *room, int xit )
+Exit *get_exit_number( Room *room, int xit )
 {
   Exit *pexit;
   int count;
@@ -2011,7 +2011,7 @@ int exit_comp( Exit **xit1, Exit **xit2 )
   return 0;
 }
 
-void sort_exits( ROOM_INDEX_DATA *room )
+void sort_exits( Room *room )
 {
   Exit *pexit; /* *texit */ /* Unused */
   Exit *exits[MAX_REXITS];
@@ -2048,7 +2048,7 @@ void sort_exits( ROOM_INDEX_DATA *room )
     }
 }
 
-void randomize_exits( ROOM_INDEX_DATA *room, short maxdir )
+void randomize_exits( Room *room, short maxdir )
 {
   Exit *pexit;
   int nexits, /* maxd, */ d0, d1, count, door; /* Maxd unused */
@@ -2126,7 +2126,7 @@ void area_update( void )
        */
       if ( pArea->nplayer == 0 || pArea->age >= reset_age )
         {
-          ROOM_INDEX_DATA *pRoomIndex;
+          Room *pRoomIndex;
 
           fprintf( stderr, "Resetting: %s\n", pArea->filename );
           ResetArea( pArea );
@@ -2697,9 +2697,9 @@ OBJ_INDEX_DATA *get_obj_index( vnum_t vnum )
  * Translates room virtual number to its room index struct.
  * Hash table lookup.
  */
-ROOM_INDEX_DATA *get_room_index( vnum_t vnum )
+Room *get_room_index( vnum_t vnum )
 {
-  ROOM_INDEX_DATA *pRoomIndex;
+  Room *pRoomIndex;
 
   if ( vnum < 0 )
     vnum = 0;
@@ -3562,7 +3562,7 @@ void oprog_read_programs( FILE *fp, OBJ_INDEX_DATA *pObjIndex)
 
 /* This routine reads in scripts of OBJprograms from a file */
 MPROG_DATA *rprog_file_read( char *f, MPROG_DATA *mprg,
-                             ROOM_INDEX_DATA *RoomIndex )
+                             Room *RoomIndex )
 {
 
   char        MUDProgfile[ MAX_INPUT_LENGTH ];
@@ -3638,7 +3638,7 @@ MPROG_DATA *rprog_file_read( char *f, MPROG_DATA *mprg,
  */
 void load_roomprogs( Area *tarea, FILE *fp )
 {
-  ROOM_INDEX_DATA *iRoom;
+  Room *iRoom;
   MPROG_DATA     *original;
   MPROG_DATA     *working;
   char            letter;
@@ -3691,7 +3691,7 @@ void load_roomprogs( Area *tarea, FILE *fp )
 /* This procedure is responsible for reading any in_file ROOMprograms.
  */
 
-void rprog_read_programs( FILE *fp, ROOM_INDEX_DATA *pRoomIndex)
+void rprog_read_programs( FILE *fp, Room *pRoomIndex)
 {
   MPROG_DATA *mprg;
   char        letter;
@@ -3769,10 +3769,10 @@ void rprog_read_programs( FILE *fp, ROOM_INDEX_DATA *pRoomIndex)
 /* Function to delete a room index.  Called from do_rdelete in build.c
    Narn, May/96
 */
-bool delete_room( ROOM_INDEX_DATA *room )
+bool delete_room( Room *room )
 {
   int iHash;
-  ROOM_INDEX_DATA *tmp, *prev;
+  Room *tmp, *prev;
 
   iHash = room->vnum % MAX_KEY_HASH;
 
@@ -3823,12 +3823,12 @@ bool delete_mob( ProtoMobile *mob )
 /*
  * Creat a new room (for online building)                       -Thoric
  */
-ROOM_INDEX_DATA *make_room( vnum_t vnum )
+Room *make_room( vnum_t vnum )
 {
-  ROOM_INDEX_DATA *pRoomIndex;
+  Room *pRoomIndex;
   int   iHash;
 
-  CREATE( pRoomIndex, ROOM_INDEX_DATA, 1 );
+  CREATE( pRoomIndex, Room, 1 );
   pRoomIndex->first_person      = NULL;
   pRoomIndex->last_person               = NULL;
   pRoomIndex->first_content     = NULL;
@@ -4066,7 +4066,7 @@ ProtoMobile *make_mobile( vnum_t vnum, vnum_t cvnum, char *name )
  * to_room and vnum.                                            -Thoric
  * Exits are inserted into the linked list based on vdir.
  */
-Exit *make_exit( ROOM_INDEX_DATA *pRoomIndex, ROOM_INDEX_DATA *to_room, short door )
+Exit *make_exit( Room *pRoomIndex, Room *to_room, short door )
 {
   Exit *pexit, *texit;
   bool broke;
@@ -4121,7 +4121,7 @@ Exit *make_exit( ROOM_INDEX_DATA *pRoomIndex, ROOM_INDEX_DATA *to_room, short do
 
 void fix_area_exits( Area *tarea )
 {
-  ROOM_INDEX_DATA *pRoomIndex;
+  Room *pRoomIndex;
   Exit *pexit, *rev_exit;
   int rnum;
   bool fexit;

@@ -15,7 +15,7 @@ void do_clone( Character *ch, char *argument )
   int skill_level[MAX_ABILITY];
   int flags, ability;
   short frc, change, change2, frc_level, low_frc = 0, mana;
-  ROOM_INDEX_DATA *home;
+  Room *home;
 
   if ( IsNpc(ch) )
     {

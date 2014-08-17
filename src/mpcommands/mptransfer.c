@@ -9,7 +9,7 @@ void do_mptransfer( Character *ch, char *argument )
   char             arg1[ MAX_INPUT_LENGTH ];
   char             arg2[ MAX_INPUT_LENGTH ];
   char buf[MAX_STRING_LENGTH];
-  ROOM_INDEX_DATA *location;
+  Room *location;
   Character       *victim;
   Character       *nextinroom;
 

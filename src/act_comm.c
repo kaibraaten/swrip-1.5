@@ -29,7 +29,7 @@
  *  Externals
  */
 void send_obj_page_to_char(Character * ch, OBJ_INDEX_DATA * idx, char page);
-void send_room_page_to_char(Character * ch, ROOM_INDEX_DATA * idx, char page);
+void send_room_page_to_char(Character * ch, Room * idx, char page);
 void send_page_to_char(Character * ch, ProtoMobile * idx, char page);
 void send_control_page_to_char(Character * ch, char page);
 
@@ -409,7 +409,7 @@ void talk_channel( Character *ch, const char *argument, int channel, const char 
 
           if ( channel == CHANNEL_SHIP || channel == CHANNEL_SPACE || channel == CHANNEL_SYSTEM )
             {
-              Ship *ship = ship_from_cockpit( ch->in_room->vnum );
+              Ship *ship = GetShipFromCockpit( ch->in_room->vnum );
               Ship *target;
 
               if ( !ship )
@@ -422,12 +422,12 @@ void talk_channel( Character *ch, const char *argument, int channel, const char 
                 if ( vch->in_room->vnum > ship->room.last || vch->in_room->vnum < ship->room.first )
                   continue;
 
-              target = ship_from_cockpit( vch->in_room->vnum );
+              target = GetShipFromCockpit( vch->in_room->vnum );
 
               if (!target) continue;
 
               if ( channel == CHANNEL_SYSTEM )
-                if (!ship_in_range( ship, target ) )
+                if (!IsShipInCombatRange( ship, target ) )
                   continue;
 
 	      if( ship_distance_to_ship( target, ship ) > 100 * ( ship->sensor + 10 ) * ( ( target->sclass ) + 1 )

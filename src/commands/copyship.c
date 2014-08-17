@@ -19,7 +19,7 @@ void do_copyship( Character *ch, char *argument )
       return;
     }
 
-  old = get_ship ( arg );
+  old = GetShipAnywhere ( arg );
 
   if (!old)
     {
@@ -52,6 +52,6 @@ void do_copyship( Character *ch, char *argument )
   ship->manuever        = old->manuever  ;
 
   ship->filename         = str_dup(arg2);
-  save_ship( ship );
-  write_ship_list();
+  SaveShip( ship );
+  WriteShipList();
 }

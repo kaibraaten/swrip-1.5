@@ -97,13 +97,13 @@ void set_supermob(OBJ_DATA *obj);
 bool oprog_percent_check( Character *mob, Character *actor, OBJ_DATA *obj, void *vo, int type);
 void rprog_percent_check( Character *mob, Character *actor, OBJ_DATA *obj, void *vo, int type);
 void rprog_wordlist_check( char *arg, Character *mob, Character *actor,
-                           OBJ_DATA *obj, void *vo, int type, ROOM_INDEX_DATA *room );
+                           OBJ_DATA *obj, void *vo, int type, Room *room );
 
 /***************************************************************************
  * Local function code and brief comments.
  */
 
-#define RID ROOM_INDEX_DATA
+#define RID Room
 
 void init_supermob()
 {
@@ -381,7 +381,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
   if ( !str_cmp(chck, "economy") )
     {
       int idx = atoi(cvar);
-      ROOM_INDEX_DATA *room = NULL;
+      Room *room = NULL;
 
       if ( !idx )
         {
@@ -2592,7 +2592,7 @@ void oprog_script_trigger( OBJ_DATA *obj )
     }
 }
 
-void rprog_script_trigger( ROOM_INDEX_DATA *room )
+void rprog_script_trigger( Room *room )
 {
   MPROG_DATA * mprg;
 
@@ -2622,7 +2622,7 @@ void rprog_script_trigger( ROOM_INDEX_DATA *room )
  */
 void set_supermob( OBJ_DATA *obj)
 {
-  ROOM_INDEX_DATA *room;
+  Room *room;
   OBJ_DATA *in_obj;
   char buf[200];
 
@@ -3045,7 +3045,7 @@ void oprog_wordlist_check( char *arg, Character *mob, Character *actor,
  *
  *
  */
-void rset_supermob( ROOM_INDEX_DATA *room)
+void rset_supermob( Room *room)
 {
   char buf[200];
 
@@ -3099,8 +3099,8 @@ void rprog_percent_check( Character *mob, Character *actor, OBJ_DATA *obj,
  *  Hold on this
  * Unhold. -- Alty
  */
-void room_act_add( ROOM_INDEX_DATA *room );
-void rprog_act_trigger( char *buf, ROOM_INDEX_DATA *room, Character *ch,
+void room_act_add( Room *room );
+void rprog_act_trigger( char *buf, Room *room, Character *ch,
                         OBJ_DATA *obj, void *vo )
 {
   if ( room->mprog.progtypes & ACT_PROG )
@@ -3208,7 +3208,7 @@ void rprog_random_trigger( Character *ch )
 }
 
 void rprog_wordlist_check( char *arg, Character *mob, Character *actor,
-                           OBJ_DATA *obj, void *vo, int type, ROOM_INDEX_DATA *room )
+                           OBJ_DATA *obj, void *vo, int type, Room *room )
 {
   MPROG_DATA *mprg;
 
@@ -3303,7 +3303,7 @@ void rprog_wordlist_check( char *arg, Character *mob, Character *actor,
 void rprog_time_check( Character *mob, Character *actor, OBJ_DATA *obj,
                        void *vo, int type )
 {
-  ROOM_INDEX_DATA * room = (ROOM_INDEX_DATA *) vo;
+  Room * room = (Room *) vo;
   MPROG_DATA * mprg;
 
   for ( mprg = room->mprog.mudprogs; mprg; mprg = mprg->next )
@@ -3370,7 +3370,7 @@ void progbug( char *str, Character *mob )
 /* Room act prog updates.  Use a separate list cuz we dont really wanna go
    thru 5-10000 rooms every pulse.. can we say lag? -- Alty */
 
-void room_act_add( ROOM_INDEX_DATA *room )
+void room_act_add( Room *room )
 {
   struct act_prog_data *runner;
 
@@ -3394,7 +3394,7 @@ void room_act_update( void )
 
   while ( (runner = room_act_list) != NULL )
     {
-      ROOM_INDEX_DATA *room = (ROOM_INDEX_DATA*)runner->vo;
+      Room *room = (Room*)runner->vo;
       MPROG_ACT_LIST *mpact;
 
       while ( (mpact = room->mprog.mpact) != NULL )

@@ -23,7 +23,7 @@ bool spec_police( Character *ch )
       for ( vip = 0 ; vip < 32 ; vip++ )
         if ( IS_SET ( ch->vip_flags , 1 << vip ) &&  IS_SET( victim->pcdata->wanted_flags , 1 << vip) )
           {
-            ROOM_INDEX_DATA *jail = NULL;
+            Room *jail = NULL;
 
             sprintf( buf , "Hey you're wanted on %s!", planet_flags[vip] );
             do_say( ch , buf );

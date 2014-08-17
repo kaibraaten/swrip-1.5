@@ -138,7 +138,7 @@ static void clear_room( int x, int y )
 }
 
 /* This function is recursive, ie it calls itself */
-static void map_exits( Character *ch, ROOM_INDEX_DATA *pRoom,
+static void map_exits( Character *ch, Room *pRoom,
 		       int x, int y, int depth )
 {
   int door = 0;
