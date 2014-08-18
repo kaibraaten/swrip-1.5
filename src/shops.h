@@ -32,5 +32,9 @@ int GetRepairCost( const Character *keeper, const Object *obj );
 Character *FindKeeper( const Character *ch );
 Character *FindKeeperQ( const Character *ch, bool message );
 int GetObjectCost( const Character *ch, const Character *keeper, const Object *obj, bool fBuy );
+void WriteVendor( FILE *fp, Character *mob );
+Character *ReadVendor( FILE *fp );
+void LoadVendors( void );
+void SaveVendor( Character *ch );
 
 #endif

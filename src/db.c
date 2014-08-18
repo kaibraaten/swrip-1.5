@@ -32,6 +32,7 @@
 #include "help.h"
 #include "craft.h"
 #include "reset.h"
+#include "shops.h"
 
 void init_supermob(void);
 
@@ -674,7 +675,7 @@ void boot_db( bool fCopyOver )
 
   /*loads vendors on each reboot -Legonas*/
   log_string ( "Reading in Vendors" );
-  load_vendors ();
+  LoadVendors ();
 
   log_string ( "Reading in Storerooms" );
   load_storerooms();

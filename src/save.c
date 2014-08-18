@@ -32,6 +32,7 @@
 #include <ctype.h>
 #include "mud.h"
 #include "character.h"
+#include "shops.h"
 
 /*
  * Increment with every major format change.
@@ -2807,7 +2808,7 @@ void save_storeroom( Room *room )
     }
 }
 
-void load_vendors( void )
+void LoadVendors( void )
 {
   DIR *dp = NULL;
   Character *mob = NULL;

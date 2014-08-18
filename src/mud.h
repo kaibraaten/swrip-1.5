@@ -2733,58 +2733,6 @@ extern "C" {
   bool  check_bad_name( const char *name );
   int   add_bad_name( const char *name );
 
-  /* vendor.c*/
-  void WriteVendor( FILE *fp, Character *mob );
-  Character *ReadVendor( FILE *fp );
-  void load_vendors( void );
-  void SaveVendor( Character *ch );
-
-  /*
-#define SHORT 1
-#define INT 2
-#define CHAR 3
-#define STRING 4
-#define SPECIAL 5
-
-
-#define NO_PAGE    0
-#define MOB_PAGE_A 1
-#define MOB_PAGE_B 2
-#define MOB_PAGE_C 3
-#define MOB_PAGE_D 4
-#define MOB_PAGE_E 5
-#define MOB_PAGE_F 17
-#define MOB_HELP_PAGE 14
-#define ROOM_PAGE_A 6
-#define ROOM_PAGE_B 7
-#define ROOM_PAGE_C 8
-#define ROOM_HELP_PAGE 15
-#define OBJ_PAGE_A 9
-#define OBJ_PAGE_B 10
-#define OBJ_PAGE_C 11
-#define OBJ_PAGE_D 12
-#define OBJ_PAGE_E 13
-#define OBJ_HELP_PAGE 16
-#define CONTROL_PAGE_A 18
-#define CONTROL_HELP_PAGE 19
-
-#define NO_TYPE   0
-#define MOB_TYPE  1
-#define OBJ_TYPE  2
-#define ROOM_TYPE 3
-#define CONTROL_TYPE 4
-
-#define SUB_NORTH DIR_NORTH
-#define SUB_EAST  DIR_EAST
-#define SUB_SOUTH DIR_SOUTH
-#define SUB_WEST  DIR_WEST
-#define SUB_UP    DIR_UP
-#define SUB_DOWN  DIR_DOWN
-#define SUB_NE    DIR_NORTHEAST
-#define SUB_NW    DIR_NORTHWEST
-#define SUB_SE    DIR_SOUTHEAST
-#define SUB_SW    DIR_SOUTHWEST
-  */
   /*
    * defines for use with this get_affect function
    */
