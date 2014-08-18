@@ -475,7 +475,7 @@ static void show_char_to_char_1( Character *victim, Character *ch )
       act( AT_PLAIN, "You see nothing special about $M.", ch, NULL, victim, TO_CHAR );
     }
 
-  show_condition( ch, victim );
+  ShowCharacterCondition( ch, victim );
 
   found = false;
 
@@ -665,8 +665,9 @@ static bool requirements_are_met( Character *ch )
       return false;
     }
 
-  if ( !check_blind( ch ) )
+  if ( IsBlind( ch ) )
     {
+      ch_printf( ch, "You can't see a thing!\r\n" );
       return false;
     }
 

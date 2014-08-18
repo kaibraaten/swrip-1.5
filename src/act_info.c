@@ -25,7 +25,7 @@
 #include "mud.h"
 #include "vector3_aux.h"
 
-int get_race_from_name( const char *arg )
+int GetRaceFromName( const char *arg )
 {
   int iRace;
 
@@ -40,7 +40,7 @@ int get_race_from_name( const char *arg )
   return iRace;
 }
 
-int get_class_from_name( const char *arg )
+int GetClassFromName( const char *arg )
 {
   int iClass;
 
@@ -343,24 +343,23 @@ void show_list_to_char( const Object *list, Character *ch, bool fShort, bool fSh
   FreeMemory( pitShow );
 }
 
-bool check_blind( const Character *ch )
+bool IsBlind( const Character *ch )
 {
   if ( !IsNpc(ch) && IsBitSet(ch->act, PLR_HOLYLIGHT) )
-    return true;
+    return false;
 
   if ( IsAffectedBy(ch, AFF_TRUESIGHT) )
-    return true;
+    return false;
 
   if ( IsAffectedBy(ch, AFF_BLIND) )
     {
-      send_to_char( "You can't see a thing!\r\n", ch );
-      return false;
+      return true;
     }
 
-  return true;
+  return false;
 }
 
-void show_condition( const Character *ch, const Character *victim )
+void ShowCharacterCondition( const Character *ch, const Character *victim )
 {
   char buf[MAX_STRING_LENGTH];
   int percent;

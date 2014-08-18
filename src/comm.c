@@ -1111,7 +1111,7 @@ bool flush_buffer( Descriptor *d, bool fPrompt )
   ch = d->original ? d->original : d->character;
 
   if( ch && ch->fighting && ch->fighting->who )
-    show_condition( ch, ch->fighting->who );
+    ShowCharacterCondition( ch, ch->fighting->who );
 
   /*
    * If buffer has more than 4K inside, spit out .5K at a time   -Thoric

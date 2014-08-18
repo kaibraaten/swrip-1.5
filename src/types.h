@@ -40,6 +40,9 @@ typedef struct Auction            Auction;
 struct Ban;
 typedef struct Ban                Ban;
 
+struct Race;
+typedef struct Race Race;
+
 struct ExtractedCharacter;
 typedef struct ExtractedCharacter     ExtractedCharacter;
 

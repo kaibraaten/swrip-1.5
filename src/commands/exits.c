@@ -13,8 +13,11 @@ void do_exits( Character *ch, char *argument )
   buf[0] = '\0';
   fAuto  = !StrCmp( argument, "auto" );
 
-  if ( !check_blind( ch ) )
-    return;
+  if ( IsBlind( ch ) )
+    {
+      ch_printf( ch, "You can't see a thing!\r\n" );
+      return;
+    }
 
   strcpy( buf, fAuto ? "Exits:" : "Obvious exits:\r\n" );
 

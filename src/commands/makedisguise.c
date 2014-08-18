@@ -98,7 +98,7 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
       return;
     }
 
-  ud->Race = get_race_from_name( race );
+  ud->Race = GetRaceFromName( race );
 
   if( ud->Race < 0 )
     {

@@ -2237,10 +2237,10 @@ extern "C" {
   int CountLanguages( int languages );
 
   /* act_info.c */
-  int get_race_from_name( const char *arg );
-  int get_class_from_name( const char *arg );
-  void show_condition( const Character *ch, const Character *victim );
-  bool check_blind( const Character *ch );
+  int GetRaceFromName( const char *arg );
+  int GetClassFromName( const char *arg );
+  void ShowCharacterCondition( const Character *ch, const Character *victim );
+  bool IsBlind( const Character *ch );
   char *format_obj_to_char( const Object *obj, const Character *ch, bool fShort );
   void show_list_to_char( const Object *list, Character *ch,
 			  bool fShort, bool fShowNothing );

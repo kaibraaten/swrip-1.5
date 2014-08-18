@@ -15,9 +15,9 @@ void do_showstatistic_web( Character *ch, char *argument )
   if( !whoout )
     bug( "fopen: WEBWHO won't open" );
 
-  race = get_race_from_name( argument );
+  race = GetRaceFromName( argument );
   if ( race < 0 )
-    pclass = get_class_from_name( argument );
+    pclass = GetClassFromName( argument );
   else
     chk_race = true;
 

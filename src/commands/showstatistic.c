@@ -6,7 +6,8 @@ void do_showstatistic( Character *ch, char *argument )
 {
   PCData *pcdata;
   Character *raceCh;
-  int race, pclass, iR, iC, iC2;
+  int raceIndex, pclass, iR, iC, iC2;
+  const Race *race = NULL;
   bool chk_race = false;
   char buf[MAX_INPUT_LENGTH];
   char buf2[MAX_INPUT_LENGTH];
@@ -16,24 +17,25 @@ void do_showstatistic( Character *ch, char *argument )
       do_showstatistic_web( NULL, argument );
     }
 
-  race = get_race_from_name( argument );
+  raceIndex = GetRaceFromName( argument );
 
-  if ( race < 0 )
+  if ( raceIndex < 0 )
     {
-      pclass = get_class_from_name( argument );
+      pclass = GetClassFromName( argument );
     }
   else
     {
       chk_race = true;
+      race = &RaceTable[raceIndex];
     }
 
-  if( race < 0 && pclass < 0 )
+  if( !race && pclass < 0 )
     {
       send_to_char( "No such race or class.\r\n", ch );
       return;
     }
 
-  if ( race == RACE_GOD )
+  if ( raceIndex == RACE_GOD )
     {
       send_to_char("Gods are indefeasible...\r\n",ch);
       return;
@@ -55,7 +57,7 @@ void do_showstatistic( Character *ch, char *argument )
 
   if( chk_race )
     {
-      raceCh->race = race;
+      raceCh->race = raceIndex;
     }
   else
     {
@@ -63,16 +65,16 @@ void do_showstatistic( Character *ch, char *argument )
       raceCh->race = 0;
     }
 
-  raceCh->stats.perm_str       += RaceTable[raceCh->race].stats.mod_str;
-  raceCh->stats.perm_int       += RaceTable[raceCh->race].stats.mod_int;
-  raceCh->stats.perm_wis       += RaceTable[raceCh->race].stats.mod_wis;
-  raceCh->stats.perm_dex       += RaceTable[raceCh->race].stats.mod_dex;
-  raceCh->stats.perm_con       += RaceTable[raceCh->race].stats.mod_con;
-  raceCh->stats.perm_cha       += RaceTable[raceCh->race].stats.mod_cha;
+  raceCh->stats.perm_str       += race->stats.mod_str;
+  raceCh->stats.perm_int       += race->stats.mod_int;
+  raceCh->stats.perm_wis       += race->stats.mod_wis;
+  raceCh->stats.perm_dex       += race->stats.mod_dex;
+  raceCh->stats.perm_con       += race->stats.mod_con;
+  raceCh->stats.perm_cha       += race->stats.mod_cha;
 
   if( chk_race )
     {
-      pager_printf( ch, "&R%s Statistics\r\n", RaceTable[race].race_name );
+      pager_printf( ch, "&R%s Statistics\r\n", race->race_name );
       pager_printf( ch, "&cStr: &C%d  &cWis: &C%d  &cInt: &C%d  &cDex: &C%d  &cCon: &C%d  &cCha: &C%d\r\n",
                raceCh->stats.perm_str, raceCh->stats.perm_wis, raceCh->stats.perm_int,
                raceCh->stats.perm_dex, raceCh->stats.perm_con, raceCh->stats.perm_cha );

@@ -27,8 +27,11 @@ void do_glance( Character *ch, char *argument )
       return;
     }
 
-  if ( !check_blind( ch ) )
-    return;
+  if ( IsBlind( ch ) )
+    {
+      ch_printf( ch, "You can't see a thing!\r\n" );
+      return;
+    }
 
   argument = OneArgument( argument, arg1 );
 
@@ -54,7 +57,7 @@ void do_glance( Character *ch, char *argument )
           act( AT_ACTION, "$n glances at $N.",  ch, NULL, victim, TO_NOTVICT );
         }
 
-      show_condition( ch, victim );
+      ShowCharacterCondition( ch, victim );
       return;
     }
 }
