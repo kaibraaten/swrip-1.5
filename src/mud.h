@@ -1051,7 +1051,7 @@ struct godlist_data
 /*
  * Used to keep track of system settings and statistics         -Thoric
  */
-struct system_data
+struct SystemData
 {
   int    maxplayers;             /* Maximum players this boot   */
   int    alltimemax;             /* Maximum players ever   */
@@ -1137,10 +1137,10 @@ struct Room
 /*
  * Delayed teleport type.
  */
-struct teleport_data
+struct TeleportData
 {
-  TELEPORT_DATA   *next;
-  TELEPORT_DATA   *prev;
+  TeleportData   *next;
+  TeleportData   *prev;
   Room *room;
   short            timer;
 };
@@ -1153,12 +1153,10 @@ struct timerset
   struct timeval max_time;
 };
 
-
-
 /*
  * Skills include spells as a particular case.
  */
-struct skill_type
+struct Skill
 {
   char      *name;                   /* Name of skill                */
   SPELL_FUN *spell_fun;              /* Spell pointer (for spells)   */
@@ -1544,7 +1542,7 @@ extern int numobjsloaded;
 extern int nummobsloaded;
 extern int physicalobjects;
 extern int num_descriptors;
-extern struct system_data sysdata;
+extern struct SystemData sysdata;
 extern int top_sn;
 extern int top_vroom;
 extern int top_herb;
@@ -1564,13 +1562,13 @@ extern long long high_galaxy_cash;
 extern long long low_galaxy_cash;
 
 extern CMDTYPE              *command_hash[126];
-extern SKILLTYPE            *skill_table[MAX_SKILL];
+extern Skill            *skill_table[MAX_SKILL];
 extern SOCIALTYPE           *social_index[27];
 extern Character            *cur_char;
 extern Room      *cur_room;
 extern bool                  cur_char_died;
 extern ch_ret                global_retcode;
-extern SKILLTYPE            *herb_table[MAX_HERB];
+extern Skill            *herb_table[MAX_HERB];
 
 extern int                   cur_obj;
 extern int                   cur_obj_serial;
@@ -1617,8 +1615,8 @@ extern Area            *first_asort;
 extern Area            *last_asort;
 extern Area            *first_bsort;
 extern Area            *last_bsort;
-extern TELEPORT_DATA        *first_teleport;
-extern TELEPORT_DATA        *last_teleport;
+extern TeleportData        *first_teleport;
+extern TeleportData        *last_teleport;
 extern Object             *extracted_obj_queue;
 extern ExtractedCharacter    *extracted_char_queue;
 extern Object             *save_equipment[MAX_WEAR][MAX_LAYERS];
@@ -2421,7 +2419,7 @@ extern "C" {
   /* db.c */
   void show_vnums( Character *ch, vnum_t low, vnum_t high, bool proto, bool shownl,
 		   const char *loadst, const char *notloadst );
-  void save_sysdata( SYSTEM_DATA sys );
+  void save_sysdata( SystemData sys );
   void append_file( Character *ch, const char *file, const char *str );
   void  show_file( Character *ch, const char *filename );
   void  boot_db( bool fCopyover );
@@ -2649,13 +2647,13 @@ extern "C" {
 
   /* magic.c */
   int ris_save( const Character *ch, int save_chance, int ris );
-  void successful_casting( SKILLTYPE *skill, Character *ch,
+  void successful_casting( Skill *skill, Character *ch,
 			   Character *victim, Object *obj );
-  void failed_casting( SKILLTYPE *skill, Character *ch,
+  void failed_casting( Skill *skill, Character *ch,
 		       Character *victim, Object *obj );
   bool is_immune( const Character *ch, short damtype );
   bool check_save( int sn, int level, const Character *ch, const Character *victim );
-  void immune_casting( SKILLTYPE *skill, Character *ch, Character *victim, Object *obj );
+  void immune_casting( Skill *skill, Character *ch, Character *victim, Object *obj );
   void *locate_targets( Character *ch, char *arg, int sn, Character **victim, Object **obj );
   bool  process_spell_components( Character *ch, int sn );
   int   ch_slookup( const Character *ch, const char *name );
@@ -2675,7 +2673,7 @@ extern "C" {
   bool  saves_spell_staff( int level, const Character *victim );
   ch_ret obj_cast_spell( int sn, int level, Character *ch, Character *victim, Object *obj );
   int dice_parse( const Character *ch, int level, char *exp );
-  SKILLTYPE *get_skilltype( int sn );
+  Skill *get_skilltype( int sn );
 
   /* save.c */
   /* object saving defines for fread/write_obj. -- Altrag */

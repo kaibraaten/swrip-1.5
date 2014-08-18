@@ -10,7 +10,7 @@ void do_slookup( Character *ch, char *argument )
   char buf[MAX_STRING_LENGTH];
   char arg[MAX_INPUT_LENGTH];
   int sn;
-  SKILLTYPE *skill = NULL;
+  Skill *skill = NULL;
 
   OneArgument( argument, arg );
   if ( arg[0] == '\0' )

@@ -2567,8 +2567,8 @@ void halucinations( Character *ch )
 
 void tele_update( void )
 {
-  TELEPORT_DATA *tele = NULL;
-  TELEPORT_DATA *tele_next = NULL;
+  TeleportData *tele = NULL;
+  TeleportData *tele_next = NULL;
 
   if ( !first_teleport )
     {

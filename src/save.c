@@ -380,7 +380,7 @@ void fwrite_char( Character *ch, FILE *fp )
   int sn = 0;
   int track = 0;
   int drug = 0;
-  SKILLTYPE *skill = NULL;
+  Skill *skill = NULL;
 
   fprintf( fp, "#%s\n", IsNpc(ch) ? "MOB" : "PLAYER"           );
 

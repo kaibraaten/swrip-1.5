@@ -18,7 +18,7 @@ void do_practice( Character *ch, char *argument )
 
       for ( sn = 0; sn < top_sn; sn++ )
         {
-	  SKILLTYPE *skill = skill_table[sn];
+	  Skill *skill = skill_table[sn];
 
           if ( !skill->name )
             break;

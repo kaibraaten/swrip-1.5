@@ -249,7 +249,7 @@ void do_score(Character * ch, char *argument)
   if (ch->first_affect)
     {
       int i;
-      SKILLTYPE *sktmp;
+      Skill *sktmp;
 
       i = 0;
       send_to_char( "&C----------------------------------------------------------------------------\r\n", ch);

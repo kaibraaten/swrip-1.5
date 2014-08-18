@@ -64,7 +64,7 @@ void do_sset( Character *ch, char *argument )
        &&  !StrCmp( arg1, "create" )
        && (!StrCmp( arg2, "skill" ) || !StrCmp( arg2, "herb" )) )
     {
-      struct skill_type *skill;
+      Skill *skill;
       short type = SKILL_UNKNOWN;
 
       if ( !StrCmp( arg2, "herb" ) )
@@ -89,7 +89,7 @@ void do_sset( Character *ch, char *argument )
             return;
           }
 
-      AllocateMemory( skill, struct skill_type, 1 );
+      AllocateMemory( skill, Skill, 1 );
 
       if ( type == SKILL_HERB )
         {
@@ -122,7 +122,7 @@ void do_sset( Character *ch, char *argument )
        && ((arg1[0] == 'h' && IsNumber(arg1+1) && (sn=atoi(arg1+1))>=0)
            ||  (IsNumber(arg1) && (sn=atoi(arg1)) >= 0)) )
     {
-      struct skill_type *skill;
+      Skill *skill;
 
       if ( arg1[0] == 'h' )
         {

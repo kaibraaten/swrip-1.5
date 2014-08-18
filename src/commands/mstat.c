@@ -8,7 +8,7 @@ void do_mstat( Character *ch, char *argument )
   char arg[MAX_INPUT_LENGTH];
   Affect *paf = NULL;
   Character *victim = NULL;
-  SKILLTYPE *skill = NULL;
+  Skill *skill = NULL;
   int x = 0;
 
   set_char_color( AT_PLAIN, ch );

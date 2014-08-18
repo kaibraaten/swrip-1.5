@@ -208,7 +208,7 @@ void affect_modify( Character *ch, Affect *paf, bool fAdd )
 {
   Object *wield;
   int mod;
-  struct skill_type *skill;
+  Skill *skill;
   ch_ret retcode;
 
   mod = paf->modifier;
@@ -655,13 +655,13 @@ void char_to_room( Character *ch, Room *pRoomIndex )
   if ( IsBitSet( ch->in_room->room_flags, ROOM_TELEPORT )
        &&        ch->in_room->tele_delay > 0 )
     {
-      TELEPORT_DATA *tele;
+      TeleportData *tele;
 
       for ( tele = first_teleport; tele; tele = tele->next )
         if ( tele->room == pRoomIndex )
           return;
 
-      AllocateMemory( tele, TELEPORT_DATA, 1 );
+      AllocateMemory( tele, TeleportData, 1 );
       LINK( tele, first_teleport, last_teleport, next, prev );
       tele->room                = pRoomIndex;
       tele->timer               = pRoomIndex->tele_delay;

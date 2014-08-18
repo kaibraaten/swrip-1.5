@@ -50,8 +50,8 @@ SHOP_DATA *last_shop = NULL;
 REPAIR_DATA *first_repair = NULL;
 REPAIR_DATA *last_repair = NULL;
 
-TELEPORT_DATA *first_teleport = NULL;
-TELEPORT_DATA *last_teleport = NULL;
+TeleportData *first_teleport = NULL;
+TeleportData *last_teleport = NULL;
 
 Object *extracted_obj_queue = NULL;
 ExtractedCharacter *extracted_char_queue = NULL;
@@ -255,7 +255,7 @@ Area *last_asort = NULL;
 Area *first_bsort = NULL;
 Area *last_bsort = NULL;
 
-SYSTEM_DATA sysdata;
+SystemData sysdata;
 
 int top_affect = 0;
 int top_area = 0;
@@ -294,7 +294,7 @@ void load_repairs( Area *tarea, FILE *fp );
 void load_specials( Area *tarea, FILE *fp );
 void load_ranges( Area *tarea, FILE *fp );
 void load_buildlist( void );
-bool load_systemdata( SYSTEM_DATA *sys );
+bool load_systemdata( SystemData *sys );
 void load_banlist( void );
 void initialize_economy( void );
 void fix_exits( void );
@@ -4511,7 +4511,7 @@ void show_vnums( Character *ch, vnum_t low, vnum_t high, bool proto, bool shownl
 /*
  * Save system info to data file
  */
-void save_sysdata( SYSTEM_DATA sys )
+void save_sysdata( SystemData sys )
 {
   FILE *fp;
   char filename[MAX_INPUT_LENGTH];
@@ -4560,7 +4560,7 @@ void save_sysdata( SYSTEM_DATA sys )
 }
 
 
-void fread_sysdata( SYSTEM_DATA *sys, FILE *fp )
+void fread_sysdata( SystemData *sys, FILE *fp )
 {
   const char *word;
   bool fMatch;
@@ -4670,7 +4670,7 @@ void fread_sysdata( SYSTEM_DATA *sys, FILE *fp )
 /*
  * Load the sysdata file
  */
-bool load_systemdata( SYSTEM_DATA *sys )
+bool load_systemdata( SystemData *sys )
 {
   char filename[MAX_INPUT_LENGTH];
   FILE *fp;

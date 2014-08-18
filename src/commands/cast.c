@@ -20,7 +20,7 @@ void do_cast( Character *ch, char *argument )
   int sn;
   ch_ret retcode;
   bool dont_wait = false;
-  SKILLTYPE *skill = NULL;
+  Skill *skill = NULL;
   struct timeval time_used;
 
   retcode = rNONE;

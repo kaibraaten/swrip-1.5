@@ -163,7 +163,7 @@ void violence_update( void )
   Affect *paf, *paf_next;
   Timer *timer, *timer_next;
   ch_ret     retcode;
-  SKILLTYPE     *skill;
+  Skill     *skill;
 
   lst_ch = NULL;
   for ( ch = last_char; ch; lst_ch = ch, ch = gch_prev )
@@ -1018,7 +1018,7 @@ ch_ret one_hit( Character *ch, Character *victim, int dt )
     {
       if ( dt >= 0 && dt < top_sn )
         {
-          SKILLTYPE *skill = skill_table[dt];
+          Skill *skill = skill_table[dt];
           bool found = false;
 
           if ( skill->imm_char && skill->imm_char[0] != '\0' )
@@ -1210,7 +1210,7 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
           if ( dt >= 0 && dt < top_sn )
             {
               bool found = false;
-              SKILLTYPE *skill = skill_table[dt];
+              Skill *skill = skill_table[dt];
 
               if ( skill->imm_char && skill->imm_char[0] != '\0' )
                 {
@@ -1505,7 +1505,7 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
     case POS_DEAD:
       if ( dt >= 0 && dt < top_sn )
         {
-          SKILLTYPE *skill = skill_table[dt];
+          Skill *skill = skill_table[dt];
 
           if ( skill->die_char && skill->die_char[0] != '\0' )
             act( AT_DEAD, skill->die_char, ch, NULL, victim, TO_CHAR );
@@ -2396,7 +2396,7 @@ void dam_message( Character *ch, Character *victim, int dam, int dt )
   const char *attack;
   char punct;
   short dampc;
-  struct skill_type *skill = NULL;
+  Skill *skill = NULL;
   bool gcflag = false;
   bool gvflag = false;
 

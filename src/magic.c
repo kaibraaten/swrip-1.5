@@ -187,7 +187,7 @@ int skill_lookup( const char *name )
  * Return a skilltype pointer based on sn                       -Thoric
  * Returns NULL if bad, unused or personal sn.
  */
-SKILLTYPE *get_skilltype( int sn )
+Skill *get_skilltype( int sn )
 {
   if ( sn >= TYPE_PERSONAL )
     {
@@ -394,7 +394,7 @@ int slot_lookup( int slot )
 /*
  * Fancy message handling for a successful casting              -Thoric
  */
-void successful_casting( SKILLTYPE *skill, Character *ch,
+void successful_casting( Skill *skill, Character *ch,
                          Character *victim, Object *obj )
 {
   short chitroom = (skill->type == SKILL_SPELL ? AT_MAGIC : AT_ACTION);
@@ -444,7 +444,7 @@ void successful_casting( SKILLTYPE *skill, Character *ch,
 /*
  * Fancy message handling for a failed casting                  -Thoric
  */
-void failed_casting( SKILLTYPE *skill, Character *ch,
+void failed_casting( Skill *skill, Character *ch,
                      Character *victim, Object *obj )
 {
   short chitroom = (skill->type == SKILL_SPELL ? AT_MAGIC : AT_ACTION);
@@ -501,7 +501,7 @@ void failed_casting( SKILLTYPE *skill, Character *ch,
 /*
  * Fancy message handling for being immune to something         -Thoric
  */
-void immune_casting( SKILLTYPE *skill, Character *ch,
+void immune_casting( Skill *skill, Character *ch,
                      Character *victim, Object *obj )
 {
   short chitroom = (skill->type == SKILL_SPELL ? AT_MAGIC : AT_ACTION);
@@ -912,7 +912,7 @@ bool process_spell_components( Character *ch, int sn )
  */
 void *locate_targets( Character *ch, char *arg, int sn, Character **victim, Object **obj )
 {
-  SKILLTYPE *skill = get_skilltype( sn );
+  Skill *skill = get_skilltype( sn );
   void *vo = NULL;
 
   *victim = NULL;
@@ -1037,7 +1037,7 @@ ch_ret obj_cast_spell( int sn, int level, Character *ch, Character *victim, Obje
   void *vo = NULL;
   ch_ret retcode = rNONE;
   int levdiff = ch->top_level - level;
-  SKILLTYPE *skill = get_skilltype( sn );
+  Skill *skill = get_skilltype( sn );
   struct timeval time_used;
 
   if ( sn == -1 )
@@ -1236,7 +1236,7 @@ ch_ret obj_cast_spell( int sn, int level, Character *ch, Character *victim, Obje
  */
 bool check_save( int sn, int level, const Character *ch, const Character *victim )
 {
-  SKILLTYPE *skill = get_skilltype(sn);
+  Skill *skill = get_skilltype(sn);
   bool saved = false;
 
   if ( SPELL_FLAG(skill, SF_PKSENSITIVE)

@@ -142,8 +142,8 @@ typedef struct mob_prog_act_list       MPROG_ACT_LIST;
 struct Editor;
 typedef struct Editor                  Editor;
 
-struct teleport_data;
-typedef struct teleport_data           TELEPORT_DATA;
+struct TeleportData;
+typedef struct TeleportData            TeleportData;
 
 struct Timer;
 typedef struct Timer                   Timer;
@@ -151,8 +151,8 @@ typedef struct Timer                   Timer;
 struct godlist_data;
 typedef struct godlist_data            GOD_DATA;
 
-struct system_data;
-typedef struct system_data             SYSTEM_DATA;
+struct SystemData;
+typedef struct SystemData              SystemData;
 
 struct SmaugAffect;
 typedef struct SmaugAffect             SmaugAffect;
@@ -160,8 +160,8 @@ typedef struct SmaugAffect             SmaugAffect;
 struct who_data;
 typedef struct who_data                WHO_DATA;
 
-struct skill_type;
-typedef struct skill_type              SKILLTYPE;
+struct Skill;
+typedef struct Skill                   Skill;
 
 struct social_type;
 typedef struct social_type             SOCIALTYPE;

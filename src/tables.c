@@ -31,8 +31,8 @@
 int top_sn = 0;
 int top_herb = 0;
 
-SKILLTYPE *skill_table[MAX_SKILL];
-SKILLTYPE *herb_table[MAX_HERB];
+Skill *skill_table[MAX_SKILL];
+Skill *herb_table[MAX_HERB];
 
 #ifdef SWRIP_USE_DLSYM
 
@@ -818,10 +818,10 @@ DO_FUN *skill_function( const char *name )
 /*
  * Function used by qsort to sort skills
  */
-int skill_comp( SKILLTYPE **sk1, SKILLTYPE **sk2 )
+int skill_comp( Skill **sk1, Skill **sk2 )
 {
-  SKILLTYPE *skill1 = (*sk1);
-  SKILLTYPE *skill2 = (*sk2);
+  Skill *skill1 = (*sk1);
+  Skill *skill2 = (*sk2);
 
   if ( !skill1 && skill2 )
     {
@@ -857,14 +857,14 @@ int skill_comp( SKILLTYPE **sk1, SKILLTYPE **sk2 )
 void sort_skill_table()
 {
   log_string( "Sorting skill table..." );
-  qsort( &skill_table[1], top_sn-1, sizeof( SKILLTYPE * ),
+  qsort( &skill_table[1], top_sn-1, sizeof( Skill * ),
          (int(*)(const void *, const void *)) skill_comp );
 }
 
 /*
  * Write skill data to a file
  */
-void fwrite_skill( FILE *fpout, SKILLTYPE *skill )
+void fwrite_skill( FILE *fpout, Skill *skill )
 {
   SmaugAffect *aff = NULL;
 
@@ -1235,10 +1235,10 @@ void save_commands( void )
   fclose( fpout );
 }
 
-SKILLTYPE *fread_skill( FILE *fp )
+Skill *fread_skill( FILE *fp )
 {
-  SKILLTYPE *skill = NULL;
-  AllocateMemory( skill, SKILLTYPE, 1 );
+  Skill *skill = NULL;
+  AllocateMemory( skill, Skill, 1 );
 
   skill->guild = -1;
 
