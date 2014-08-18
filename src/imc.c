@@ -1903,7 +1903,7 @@ static void imc_display_channel( IMC_CHANNEL * c, const char *from, char *txt, i
          continue;
 
       /*
-       * Freaking stupid PC_DATA crap! 
+       * Freaking stupid PCData crap! 
        */
       if( IsNpc( ch ) )
          continue;

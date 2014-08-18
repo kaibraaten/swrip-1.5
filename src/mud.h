@@ -755,7 +755,7 @@ struct killed_data
 /*
  * Data which only PC's have.
  */
-struct pc_data
+struct PCData
 {
   Clan  *clan;
   Area  *area;

@@ -79,8 +79,8 @@ typedef struct obj_data                OBJ_DATA;
 struct obj_index_data;
 typedef struct obj_index_data          OBJ_INDEX_DATA;
 
-struct pc_data;
-typedef struct pc_data                 PC_DATA;
+struct PCData;
+typedef struct PCData                  PCData;
 
 struct Reset;
 typedef struct Reset                   Reset;

@@ -43,7 +43,7 @@ void do_who( Character *ch, char *argument )
   bool NullCh = false;
   Clan *pClan;
   FILE *whoout;
-  PC_DATA *pcdata;
+  PCData *pcdata;
   WHO_DATA *cur_who = NULL;
   WHO_DATA *next_who = NULL;
   WHO_DATA *first_mortal = NULL;
@@ -71,7 +71,7 @@ void do_who( Character *ch, char *argument )
       AllocateMemory( ch, Character, 1 );
       ch->top_level = 1;
       ch->trust = 0;
-      AllocateMemory( pcdata, PC_DATA, 1 );
+      AllocateMemory( pcdata, PCData, 1 );
       ch->pcdata = pcdata;
       ch->in_room = get_room_index( ROOM_VNUM_LIMBO );
     }

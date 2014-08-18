@@ -4,7 +4,7 @@
 
 void do_showstatistic( Character *ch, char *argument )
 {
-  PC_DATA *pcdata;
+  PCData *pcdata;
   Character *raceCh;
   int race, pclass, iR, iC, iC2;
   bool chk_race = false;
@@ -42,7 +42,7 @@ void do_showstatistic( Character *ch, char *argument )
   AllocateMemory( raceCh, Character, 1 );
   raceCh->top_level = 1;
   raceCh->trust = 0;
-  AllocateMemory( pcdata, PC_DATA, 1 );
+  AllocateMemory( pcdata, PCData, 1 );
   raceCh->pcdata = pcdata;
   raceCh->in_room = get_room_index( ROOM_VNUM_LIMBO );
   raceCh->stats.perm_str = 20;

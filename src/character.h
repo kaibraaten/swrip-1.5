@@ -51,7 +51,7 @@ struct Character
   Room *     was_in_room;
   Room *   was_sentinel;
   Room *   plr_home;
-  PC_DATA *             pcdata;
+  PCData *             pcdata;
   DO_FUN *              last_cmd;
   DO_FUN *              prev_cmd;   /* mapping */
   void *                dest_buf;

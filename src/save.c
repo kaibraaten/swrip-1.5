@@ -1079,7 +1079,7 @@ bool load_char_obj( Descriptor *d, char *name, bool preload )
   clear_char( ch );
   loading_char = ch;
 
-  AllocateMemory( ch->pcdata, PC_DATA, 1 );
+  AllocateMemory( ch->pcdata, PCData, 1 );
   d->character                = ch;
   ch->on                              = NULL;
   ch->desc                            = d;
