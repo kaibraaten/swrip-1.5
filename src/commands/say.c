@@ -29,7 +29,7 @@ void do_say( Character *ch, char *argument )
       if ( vch == ch )
         continue;
 
-      if ( !knows_language(vch, ch->speaking, ch)
+      if ( !CharacterKnowsLanguage(vch, ch->speaking, ch)
 	   && ( !IsNpc(ch) || ch->speaking != 0 ) )
         sbuf = Scramble(argument, ch->speaking);
 

@@ -53,9 +53,9 @@ void do_languages( Character *ch, char *argument )
         }
       for ( sch = ch->in_room->first_person; sch; sch = sch->next )
         if ( IsNpc(sch) && IsBitSet(sch->act, ACT_SCHOLAR) &&
-             knows_language( sch, ch->speaking, ch ) &&
-             knows_language( sch, lang_array[lang], sch ) &&
-             (!sch->speaking || knows_language( ch, sch->speaking, sch )) )
+             CharacterKnowsLanguage( sch, ch->speaking, ch ) &&
+             CharacterKnowsLanguage( sch, lang_array[lang], sch ) &&
+             (!sch->speaking || CharacterKnowsLanguage( ch, sch->speaking, sch )) )
           break;
       if ( !sch )
         {

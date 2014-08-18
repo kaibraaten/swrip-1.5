@@ -113,7 +113,7 @@ void do_auction (Character *ch, char *argument)
           set_char_color ( AT_LBLUE, ch );
           sprintf (buf,"Sale of %s has been stopped by an Immortal.",
                    auction->item->short_descr);
-          talk_auction (buf);
+          TalkAuction (buf);
           obj_to_char (auction->item, auction->seller);
           if ( IsBitSet( sysdata.save_flags, SV_AUCTION ) )
 	    save_char_obj(auction->seller);
@@ -192,7 +192,7 @@ void do_auction (Character *ch, char *argument)
           auction->pulse = PULSE_AUCTION; /* start the auction over again */
 
           sprintf (buf,"A bid of %d credits has been received on %s.\r\n",newbet,auction->item->short_descr);
-          talk_auction (buf);
+          TalkAuction (buf);
           return;
 
 
@@ -279,7 +279,7 @@ void do_auction (Character *ch, char *argument)
 	    auction->bet = auction->starting;
 
 	  sprintf (buf, "A new item is being auctioned: %s at %d credits.", obj->short_descr, auction->starting);
-	  talk_auction (buf);
+	  TalkAuction (buf);
 	}
     }
   else

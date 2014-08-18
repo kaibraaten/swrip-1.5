@@ -197,7 +197,7 @@ void do_score(Character * ch, char *argument)
       }
   send_to_char("\r\n&cLanguages: &c", ch );
   for ( iLang = 0; lang_array[iLang] != LANG_UNKNOWN; iLang++ )
-    if ( knows_language( ch, lang_array[iLang], ch )
+    if ( CharacterKnowsLanguage( ch, lang_array[iLang], ch )
          ||  (IsNpc(ch) && ch->speaks == 0) )
       {
         if ( lang_array[iLang] & ch->speaking

@@ -2231,10 +2231,10 @@ extern "C" {
   bool IsInSameGroup( const Character *ach, const Character *bch );
   void ToChannel( const char *argument, int channel,
 		   const char *verb, short level );
-  void talk_auction( const char *argument );
-  bool knows_language( const Character *ch, int language, const Character *cch );
-  bool can_learn_lang( const Character *ch, int language );
-  int countlangs( int languages );
+  void TalkAuction( const char *argument );
+  bool CharacterKnowsLanguage( const Character *ch, int language, const Character *cch );
+  bool CharacterCanLearnLanguage( const Character *ch, int language );
+  int CountLanguages( int languages );
 
   /* act_info.c */
   int get_race_from_name( const char *arg );

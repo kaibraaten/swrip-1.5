@@ -2820,7 +2820,7 @@ void reboot_check( time_t reset )
         {
           sprintf(buf, "Sale of %s has been stopped by mud.",
                   auction->item->short_descr);
-          talk_auction(buf);
+          TalkAuction(buf);
           obj_to_char(auction->item, auction->seller);
           auction->item = NULL;
 
@@ -2888,7 +2888,7 @@ void auction_update (void)
 		   ((auction->going == 1) ? "once" : "twice"));
 	}
 
-      talk_auction (buf);
+      TalkAuction (buf);
       break;
 
     case 3 : /* SOLD! */
@@ -2904,7 +2904,7 @@ void auction_update (void)
                    auction->item->short_descr,
                    IsNpc(auction->buyer) ? auction->buyer->short_descr : auction->buyer->name,
                    auction->bet);
-          talk_auction(buf);
+          TalkAuction(buf);
 
           act(AT_ACTION, "The auctioneer materializes before you, and hands you $p.",
               auction->buyer, auction->item, NULL, TO_CHAR);
@@ -2943,7 +2943,7 @@ void auction_update (void)
         {
           sprintf (buf, "No bids received for %s - object has been removed from auction\r\n.",
 		   auction->item->short_descr);
-          talk_auction(buf);
+          TalkAuction(buf);
           act (AT_ACTION, "The auctioneer appears before you to return $p to you.",
                auction->seller,auction->item,NULL,TO_CHAR);
           act (AT_ACTION, "The auctioneer appears before $n to return $p to $m.",

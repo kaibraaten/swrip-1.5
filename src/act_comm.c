@@ -440,7 +440,7 @@ void TalkChannel( Character *ch, const char *argument, int channel, const char *
           position              = vch->position;
           if ( channel != CHANNEL_SHOUT && channel != CHANNEL_YELL )
             vch->position       = POS_STANDING;
-          if ( !knows_language( vch, ch->speaking, ch ) &&
+          if ( !CharacterKnowsLanguage( vch, ch->speaking, ch ) &&
                (!IsNpc(ch) || ch->speaking != 0)   &&
                ( channel != CHANNEL_NEWBIE &&
                  channel != CHANNEL_OOC &&
@@ -622,7 +622,7 @@ bool IsInSameGroup( const Character *ach, const Character *bch )
  * I am not too sure if this method is right..
  */
 
-void talk_auction (const char *argument)
+void TalkAuction (const char *argument)
 {
   Descriptor *d;
   char buf[MAX_STRING_LENGTH];
@@ -645,7 +645,7 @@ void talk_auction (const char *argument)
  * Language support functions. -- Altrag
  * 07/01/96
  */
-bool knows_language( const Character *ch, int language, const Character *cch )
+bool CharacterKnowsLanguage( const Character *ch, int language, const Character *cch )
 {
   short sn;
 
@@ -690,7 +690,7 @@ bool knows_language( const Character *ch, int language, const Character *cch )
   return false;
 }
 
-bool can_learn_lang( const Character *ch, int language )
+bool CharacterCanLearnLanguage( const Character *ch, int language )
 {
   if ( language & LANG_CLAN )
     return false;
@@ -727,17 +727,23 @@ bool can_learn_lang( const Character *ch, int language )
 }
 
 /* Note: does not count racial language.  This is intentional (for now). */
-int countlangs( int languages )
+int CountLanguages( int languages )
 {
   int numlangs = 0;
-  int looper;
+  int looper = 0;
 
   for ( looper = 0; lang_array[looper] != LANG_UNKNOWN; looper++ )
     {
       if ( lang_array[looper] == LANG_CLAN )
-        continue;
+	{
+	  continue;
+	}
+
       if ( languages & lang_array[looper] )
-        numlangs++;
+	{
+	  numlangs++;
+	}
     }
+
   return numlangs;
 }

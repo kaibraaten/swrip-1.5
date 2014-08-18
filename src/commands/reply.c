@@ -69,7 +69,7 @@ void do_reply( Character *ch, char *argument )
   position = victim->position;
   victim->position = POS_STANDING;
 
-  if ( knows_language( victim, ch->speaking, ch ) ||
+  if ( CharacterKnowsLanguage( victim, ch->speaking, ch ) ||
        (IsNpc(ch) && !ch->speaking) )
     {
       act( AT_TELL, "(&CIncoming Message&B) $n: '$t'", ch, argument, victim, TO_VICT );
@@ -100,7 +100,7 @@ void do_reply( Character *ch, char *argument )
           if ( vch == ch )
             continue;
 
-          if ( !knows_language(vch, ch->speaking, ch) &&
+          if ( !CharacterKnowsLanguage(vch, ch->speaking, ch) &&
                (!IsNpc(ch) || ch->speaking != 0) )
             sbuf = Scramble(argument, ch->speaking);
 

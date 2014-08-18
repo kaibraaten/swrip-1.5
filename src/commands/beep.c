@@ -115,7 +115,7 @@ void do_beep( Character *ch, char *argument )
   ch_printf(ch , "&WYou beep %s: %s\r\n\a" , victim->name, argument );
   send_to_char("\a",victim);
 
-  if ( knows_language( victim, ch->speaking, ch )
+  if ( CharacterKnowsLanguage( victim, ch->speaking, ch )
        ||  (IsNpc(ch) && !ch->speaking) )
     act( AT_WHITE, "$n beeps: '$t'", ch, argument, victim, TO_VICT );
   else

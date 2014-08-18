@@ -28,7 +28,7 @@ void do_gtell( Character *ch, char *argument )
 	  set_char_color( AT_GTELL, gch );
           /* Groups unscrambled regardless of clan language.  Other languages
              still garble though. -- Altrag */
-          if ( knows_language( gch, ch->speaking, gch )
+          if ( CharacterKnowsLanguage( gch, ch->speaking, gch )
                ||  (IsNpc(ch) && !ch->speaking) )
             ch_printf( gch, "%s tells the group '%s'.\r\n", ch->name, argument );
           else

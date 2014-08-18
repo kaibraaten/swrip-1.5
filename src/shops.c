@@ -105,7 +105,7 @@ Character *FindKeeperQ( const Character *ch, bool message )
             return NULL;
           }
       }
-  if ( !knows_language( keeper, ch->speaking, ch ) )
+  if ( !CharacterKnowsLanguage( keeper, ch->speaking, ch ) )
     {
       do_say( keeper, "I can't understand you." );
       return NULL;
@@ -154,7 +154,7 @@ Character *FindFixer( const Character *ch )
     }
 
 
-  if ( !knows_language( keeper, ch->speaking, ch ) )
+  if ( !CharacterKnowsLanguage( keeper, ch->speaking, ch ) )
     {
       do_say( keeper, "I can't understand you." );
       return NULL;

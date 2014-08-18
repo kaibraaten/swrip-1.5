@@ -158,7 +158,7 @@ void do_mstat( Character *ch, char *argument )
 
   for ( x = 0; lang_array[x] != LANG_UNKNOWN; x++ )
     {
-      if ( knows_language( victim, lang_array[x], victim )
+      if ( CharacterKnowsLanguage( victim, lang_array[x], victim )
 	   || (IsNpc(victim) && victim->speaks == 0) )
 	{
 	  if ( IsBitSet(lang_array[x], victim->speaking)

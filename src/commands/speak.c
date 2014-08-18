@@ -99,7 +99,7 @@ void do_speak( Character *ch, char *argument )
     {
       if ( !StringPrefix( arg, lang_names[langs] ) )
 	{
-	  if ( knows_language( ch, lang_array[langs], ch ) )
+	  if ( CharacterKnowsLanguage( ch, lang_array[langs], ch ) )
 	    {
 	      if ( lang_array[langs] == LANG_CLAN &&
 		   (IsNpc(ch) || !ch->pcdata->clan) )
