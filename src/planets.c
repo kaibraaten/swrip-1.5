@@ -24,18 +24,18 @@
 #include <string.h>
 #include "mud.h"
 
-PLANET_DATA * first_planet = NULL;
-PLANET_DATA * last_planet = NULL;
+Planet * first_planet = NULL;
+Planet * last_planet = NULL;
 
 GUARD_DATA * first_guard = NULL;
 GUARD_DATA * last_guard = NULL;
 
-static void fread_planet( PLANET_DATA *planet, FILE *fp );
+static void fread_planet( Planet *planet, FILE *fp );
 static bool load_planet_file( const char *planetfile );
 
-PLANET_DATA *get_planet( const char *name )
+Planet *get_planet( const char *name )
 {
-  PLANET_DATA *planet;
+  Planet *planet;
 
   for ( planet = first_planet; planet; planet = planet->next )
     {
@@ -50,7 +50,7 @@ PLANET_DATA *get_planet( const char *name )
 
 void write_planet_list( void )
 {
-  PLANET_DATA *tplanet = NULL;
+  Planet *tplanet = NULL;
   FILE *fpout = NULL;
   char filename[256];
 
@@ -72,7 +72,7 @@ void write_planet_list( void )
   fclose( fpout );
 }
 
-void save_planet( const PLANET_DATA *planet )
+void save_planet( const Planet *planet )
 {
   FILE *fp = NULL;
   char filename[256];
@@ -132,7 +132,7 @@ void save_planet( const PLANET_DATA *planet )
   fclose( fp );
 }
 
-static void fread_planet( PLANET_DATA *planet, FILE *fp )
+static void fread_planet( Planet *planet, FILE *fp )
 {
   for ( ; ; )
     {
@@ -241,11 +241,11 @@ static void fread_planet( PLANET_DATA *planet, FILE *fp )
 static bool load_planet_file( const char *planetfile )
 {
   char filename[256];
-  PLANET_DATA *planet = NULL;
+  Planet *planet = NULL;
   FILE *fp = NULL;
   bool found = false;
 
-  AllocateMemory( planet, PLANET_DATA, 1 );
+  AllocateMemory( planet, Planet, 1 );
 
   sprintf( filename, "%s%s", PLANET_DIR, planetfile );
 
@@ -337,7 +337,7 @@ void load_planets( void )
   log_string(" Done planets " );
 }
 
-long get_taxes( const PLANET_DATA *planet )
+long get_taxes( const Planet *planet )
 {
   long gain = planet->base_value;
   gain += planet->base_value*planet->pop_support/100;

@@ -10,7 +10,7 @@ void do_clans( Character *ch, char *argument )
       int pCount = 0;
       int support = 0;
       long revenue = 0;
-      PLANET_DATA *planet = NULL;
+      Planet *planet = NULL;
 
       if ( clan->clan_type == CLAN_CRIME
 	   || clan->clan_type == CLAN_GUILD

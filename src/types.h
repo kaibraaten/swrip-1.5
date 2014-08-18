@@ -109,8 +109,8 @@ typedef struct weather_data            WEATHER_DATA;
 struct Bounty;
 typedef struct Bounty                  Bounty;
 
-struct planet_data;
-typedef struct planet_data             PLANET_DATA;
+struct Planet;
+typedef struct Planet                  Planet;
 
 struct Storeroom;
 typedef struct Storeroom               Storeroom;

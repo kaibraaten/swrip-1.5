@@ -7,7 +7,7 @@ void do_gather_intelligence ( Character *ch , char *argument )
   Character *victim;
   char buf[MAX_STRING_LENGTH];
   int percent, the_chance;
-  PLANET_DATA *planet;
+  Planet *planet;
 
   buf[0] = '\0';
 

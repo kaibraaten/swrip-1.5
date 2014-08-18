@@ -3,7 +3,7 @@
 
 void do_planets( Character *ch, char *argument )
 {
-  PLANET_DATA *planet;
+  Planet *planet;
   int count = 0;
   Area   *area;
 

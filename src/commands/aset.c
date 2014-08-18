@@ -63,13 +63,13 @@ void do_aset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "planet" ) )
     {
-      PLANET_DATA *planet;
+      Planet *planet;
       planet = get_planet(argument);
       if (planet)
         {
           if (tarea->planet)
             {
-              PLANET_DATA *old_planet;
+              Planet *old_planet;
 
               old_planet=tarea->planet;
               UNLINK(tarea, old_planet->first_area, old_planet->last_area, next_on_planet, prev_on_planet);

@@ -1138,7 +1138,7 @@ void mobile_update( void )
 
 void update_taxes( void )
 {
-  const PLANET_DATA *planet = NULL;
+  const Planet *planet = NULL;
   const Descriptor *d = NULL;
 
   for ( planet = first_planet; planet; planet = planet->next )

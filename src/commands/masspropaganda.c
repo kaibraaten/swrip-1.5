@@ -6,7 +6,7 @@ void do_mass_propaganda ( Character *ch , char *argument )
   char buf  [MAX_STRING_LENGTH];
   char arg1 [MAX_INPUT_LENGTH];
   Character *victim;
-  PLANET_DATA *planet;
+  Planet *planet;
   CLAN_DATA   *clan;
   int percent = 0;
 

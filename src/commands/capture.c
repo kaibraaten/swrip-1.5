@@ -5,8 +5,8 @@
 void do_capture ( Character *ch , char *argument )
 {
   CLAN_DATA *clan;
-  PLANET_DATA *planet;
-  PLANET_DATA *cPlanet;
+  Planet *planet;
+  Planet *cPlanet;
   float support = 0.0;
   int pCount = 0;
   char buf[MAX_STRING_LENGTH];

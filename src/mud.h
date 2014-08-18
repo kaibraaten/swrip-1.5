@@ -321,7 +321,7 @@ struct Spaceobject
 {
   Spaceobject  *next;
   Spaceobject  *prev;
-  PLANET_DATA *planet;
+  Planet *planet;
   char        *filename;
   char        *name;
   int          type;
@@ -362,7 +362,7 @@ struct guard_data
   GUARD_DATA      *prev_on_planet;
   Character       *mob;
   Room *reset_loc;
-  PLANET_DATA     *planet;
+  Planet     *planet;
 };
 
 struct Storeroom
@@ -373,12 +373,12 @@ struct Storeroom
   Room *room;
 };
 
-struct planet_data
+struct Planet
 {
-  PLANET_DATA *next;
-  PLANET_DATA *prev;
-  PLANET_DATA *next_in_system;
-  PLANET_DATA *prev_in_system;
+  Planet *next;
+  Planet *prev;
+  Planet *next_in_system;
+  Planet *prev_in_system;
   GUARD_DATA  *first_guard;
   GUARD_DATA  *last_guard;
   Spaceobject  *spaceobject;
@@ -989,7 +989,7 @@ struct Area
   Area   *prev_sort;
   Reset  *first_reset;
   Reset  *last_reset;
-  PLANET_DATA *planet;
+  Planet *planet;
   Area   *next_on_planet;
   Area   *prev_on_planet;
   char        *name;
@@ -1595,8 +1595,8 @@ extern Missile         *first_missile;
 extern Missile         *last_missile;
 extern Spaceobject           *first_spaceobject;
 extern Spaceobject           *last_spaceobject;
-extern PLANET_DATA          *first_planet;
-extern PLANET_DATA          *last_planet;
+extern Planet          *first_planet;
+extern Planet          *last_planet;
 extern Bounty          *first_bounty;
 extern Bounty          *last_bounty;
 extern Bounty          *first_disintegration;
@@ -2300,10 +2300,10 @@ extern "C" {
 
   /* planets.c */
   void write_planet_list( void );
-  PLANET_DATA *get_planet( const char *name );
+  Planet *get_planet( const char *name );
   void  load_planets( void );
-  void  save_planet( const PLANET_DATA *planet );
-  long get_taxes( const PLANET_DATA *planet );
+  void  save_planet( const Planet *planet );
+  long get_taxes( const Planet *planet );
 
   /* bounty.c */
   void disintegration( const Character *ch, const Character *victim, long amount );

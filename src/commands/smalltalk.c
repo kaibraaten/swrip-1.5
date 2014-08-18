@@ -6,7 +6,7 @@ void do_smalltalk ( Character *ch , char *argument )
   char buf  [MAX_STRING_LENGTH];
   char arg1 [MAX_INPUT_LENGTH];
   Character *victim = NULL;
-  PLANET_DATA *planet = NULL;
+  Planet *planet = NULL;
   CLAN_DATA   *clan = NULL;
   int percent = 0;
 
