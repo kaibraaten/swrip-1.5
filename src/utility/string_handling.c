@@ -688,3 +688,49 @@ char *TrimString( char *string, char junk )
 
   return string;
 }
+
+/*
+ * Find the position of a target substring in a source string.
+ * Returns pointer to the first occurrence of the string pointed to
+ * bstr in the string pointed to by astr. It returns a null pointer
+ * if no match is found.  --  Gorog (with help from Thoric)
+ *
+ * Note I made a change when modifying StringInfix. If the target string is
+ * null, I return NULL (meaning no match was found). StringInfix returns
+ * false (meaning a match was found).  *grumble*
+ */
+static const char *str_str( const char *astr, const char *bstr )
+{
+  int sstr1, sstr2, ichar;
+  char c0;
+
+  if ( ( c0 = CharToLowercase(bstr[0]) ) == '\0' )
+    return NULL;
+
+  sstr1 = strlen(astr);
+  sstr2 = strlen(bstr);
+
+  for ( ichar = 0; ichar <= sstr1 - sstr2; ichar++ )
+    if ( c0 == CharToLowercase(astr[ichar]) && !StringPrefix(bstr, astr+ichar) )
+      return (astr+ichar);
+
+  return NULL;
+}
+
+/*
+ * Counts the number of times a target string occurs in a source string.
+ * case insensitive -- Gorog
+ */
+int CountStringOccurances(const char *psource, const char *ptarget)
+{
+  const char *ptemp = psource;
+  int count=0;
+
+  while ( (ptemp = str_str(ptemp, ptarget)) )
+    {
+      ptemp++;
+      count++;
+    }
+
+  return count;
+}

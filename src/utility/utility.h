@@ -160,14 +160,7 @@ char *StringToUppercase( const char *str );
 const char *AOrAn( const char *str );
 char *StripCarriageReturn( const char *str  );
 char *CopyString( const char *str );
-char ReadChar( FILE *fp );
-float ReadFloat( FILE *fp );
-int ReadInt( FILE *fp );
-char *ReadStringToTilde( FILE *fp );
-char *ReadStringToTildeNoHash( FILE *fp );
-void ReadToEndOfLine( FILE *fp );
-char *ReadWord( FILE *fp );
-char *ReadLine( FILE *fp );
+int CountStringOccurances(const char *psource, const char *ptarget);
 void SmashTilde( char *str );
 void SmushTilde( char* );
 void HideTilde( char *str );
@@ -177,8 +170,17 @@ char *EncodeString( const char* );
 char *TrimStringStart( char *string, char junk );
 char *TrimStringEnd( char *string, char junk );
 char *TrimString( char *string, char junk );
-
 char *Scramble( const char *argument, int modifier );
+
+/* file_io.c */
+char ReadChar( FILE *fp );
+float ReadFloat( FILE *fp );
+int ReadInt( FILE *fp );
+char *ReadStringToTilde( FILE *fp );
+char *ReadStringToTildeNoHash( FILE *fp );
+void ReadToEndOfLine( FILE *fp );
+char *ReadWord( FILE *fp );
+char *ReadLine( FILE *fp );
 
 /* Random number stuff */
 void InitMM( void );
