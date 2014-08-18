@@ -22,16 +22,16 @@
 #include "character.h"
 #include "mud.h"
 
-BOUNTY_DATA *first_bounty = NULL;
-BOUNTY_DATA *last_bounty = NULL;
-BOUNTY_DATA *first_disintegration = NULL;
-BOUNTY_DATA *last_disintegration = NULL;
+Bounty *first_bounty = NULL;
+Bounty *last_bounty = NULL;
+Bounty *first_disintegration = NULL;
+Bounty *last_disintegration = NULL;
 
 void nodisintegration( Character *ch , Character *victim , long amount );
 
 void save_disintegrations()
 {
-  BOUNTY_DATA *tbounty = NULL;
+  Bounty *tbounty = NULL;
   FILE *fpout = NULL;
   char filename[256];
 
@@ -58,7 +58,7 @@ void save_disintegrations()
 
 bool is_disintegration( const Character *victim )
 {
-  BOUNTY_DATA *bounty = NULL;
+  Bounty *bounty = NULL;
 
   for ( bounty = first_disintegration; bounty; bounty = bounty->next )
     if ( !StrCmp( victim->name , bounty->target ) )
@@ -67,9 +67,9 @@ bool is_disintegration( const Character *victim )
   return false;
 }
 
-BOUNTY_DATA *get_disintegration( const char *target )
+Bounty *get_disintegration( const char *target )
 {
-  BOUNTY_DATA *bounty = NULL;
+  Bounty *bounty = NULL;
 
   for ( bounty = first_disintegration; bounty; bounty = bounty->next )
     if ( !StrCmp( target, bounty->target ) )
@@ -84,7 +84,7 @@ void load_bounties( void )
   const char *target = NULL;
   const char *poster = NULL;
   char bountylist[256];
-  BOUNTY_DATA *bounty = NULL;
+  Bounty *bounty = NULL;
   long amount = 0;
 
   log_string( "Loading disintegrations..." );
@@ -102,7 +102,7 @@ void load_bounties( void )
       target = feof( fpList ) ? "$" : ReadWord( fpList );
       if ( target[0] == '$' )
         break;
-      AllocateMemory( bounty, BOUNTY_DATA, 1 );
+      AllocateMemory( bounty, Bounty, 1 );
       LINK( bounty, first_disintegration, last_disintegration, next, prev );
       bounty->target = CopyString(target);
 
@@ -123,7 +123,7 @@ void load_bounties( void )
 
 void disintegration ( const Character *ch , const Character *victim , long amount )
 {
-  BOUNTY_DATA *bounty = NULL;
+  Bounty *bounty = NULL;
   bool found = false;
   char buf[MAX_STRING_LENGTH];
   Character *p = NULL;
@@ -140,7 +140,7 @@ void disintegration ( const Character *ch , const Character *victim , long amoun
 
   if (! found)
     {
-      AllocateMemory( bounty, BOUNTY_DATA, 1 );
+      AllocateMemory( bounty, Bounty, 1 );
       LINK( bounty, first_disintegration, last_disintegration, next, prev );
 
       bounty->target = CopyString( victim->name );
@@ -171,7 +171,7 @@ void disintegration ( const Character *ch , const Character *victim , long amoun
     }
 }
 
-void remove_disintegration( BOUNTY_DATA *bounty )
+void remove_disintegration( Bounty *bounty )
 {
   UNLINK( bounty, first_disintegration, last_disintegration, next, prev );
   FreeMemory( bounty->target );
@@ -183,7 +183,7 @@ void remove_disintegration( BOUNTY_DATA *bounty )
 
 void claim_disintegration( Character *ch, const Character *victim )
 {
-  BOUNTY_DATA *bounty = NULL;
+  Bounty *bounty = NULL;
   long xp = 0;
   char buf[MAX_STRING_LENGTH];
 

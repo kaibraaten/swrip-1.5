@@ -106,8 +106,8 @@ typedef struct hour_min_sec            HOUR_MIN_SEC;
 struct weather_data;
 typedef struct weather_data            WEATHER_DATA;
 
-struct bounty_data;
-typedef struct bounty_data             BOUNTY_DATA;
+struct Bounty;
+typedef struct Bounty                  Bounty;
 
 struct planet_data;
 typedef struct planet_data             PLANET_DATA;

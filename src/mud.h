@@ -262,7 +262,7 @@ extern bool MOBtrigger;
 extern bool mud_down;
 
 /* race dedicated stuff */
-struct race_type
+struct Race
 {
   char race_name[20];   /* Race name                    */
   int  affected;               /* Default affect bitvectors    */
@@ -345,10 +345,10 @@ struct Spaceobject
   } landing_site;
 };
 
-struct bounty_data
+struct Bounty
 {
-  BOUNTY_DATA *next;
-  BOUNTY_DATA *prev;
+  Bounty *next;
+  Bounty *prev;
   char        *target;
   long         amount;
   char        *poster;
@@ -1488,7 +1488,7 @@ extern const struct cha_app_type cha_app[];
 extern const struct lck_app_type lck_app[];
 extern const struct frc_app_type frc_app[];
 
-extern const struct race_type race_table[];
+extern const struct Race RaceTable[];
 extern const struct liq_type liq_table[];
 extern const char* const ability_name[];
 
@@ -1597,10 +1597,10 @@ extern Spaceobject           *first_spaceobject;
 extern Spaceobject           *last_spaceobject;
 extern PLANET_DATA          *first_planet;
 extern PLANET_DATA          *last_planet;
-extern BOUNTY_DATA          *first_bounty;
-extern BOUNTY_DATA          *last_bounty;
-extern BOUNTY_DATA          *first_disintegration;
-extern BOUNTY_DATA          *last_disintegration;
+extern Bounty          *first_bounty;
+extern Bounty          *last_bounty;
+extern Bounty          *first_disintegration;
+extern Bounty          *last_disintegration;
 extern Area            *first_area;
 extern Area            *last_area;
 extern Area            *first_build;
@@ -2307,11 +2307,11 @@ extern "C" {
 
   /* bounty.c */
   void disintegration( const Character *ch, const Character *victim, long amount );
-  BOUNTY_DATA *get_disintegration( const char *target );
+  Bounty *get_disintegration( const char *target );
   void load_bounties( void );
   void save_bounties( void );
   void save_disintegrations( void );
-  void remove_disintegration( BOUNTY_DATA *bounty );
+  void remove_disintegration( Bounty *bounty );
   void claim_disintegration( Character *ch , const Character *victim );
   bool is_disintegration( const Character *victim );
 

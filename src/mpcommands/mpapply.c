@@ -37,7 +37,7 @@ void do_mpapply( Character *ch, char *argument )
 
   sprintf( log_buf, "%s@%s new %s applying for authorization...",
            victim->name, victim->desc->remote.hostname,
-           race_table[victim->race].race_name);
+           RaceTable[victim->race].race_name);
   log_string( log_buf );
   to_channel( log_buf, CHANNEL_MONITOR, "Monitor", LEVEL_IMMORTAL );
   victim->pcdata->auth_state = 1;

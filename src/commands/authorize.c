@@ -25,7 +25,7 @@ void do_authorize( Character *ch, char *argument )
           ch_printf( ch, " %s@%s new %s...\r\n",
                      victim->name,
                      victim->desc->remote.hostname,
-                     race_table[victim->race].race_name );
+                     RaceTable[victim->race].race_name );
       return;
     }
 

@@ -985,7 +985,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
           if ( IsNpc(chkchar) )
             return mprog_seval((char*)npc_race[chkchar->race], opr, rval, mob);
 
-          return mprog_seval((char *)race_table[chkchar->race].race_name, opr,
+          return mprog_seval((char *)RaceTable[chkchar->race].race_name, opr,
                              rval, mob);
         }
 

@@ -1982,7 +1982,7 @@ void fread_char( Character *ch, FILE *fp, bool preload )
               }
 
               if ( !IsImmortal( ch ) && !ch->speaking )
-                ch->speaking = race_table[ch->race].language;
+                ch->speaking = RaceTable[ch->race].language;
 
               if ( IsImmortal( ch ) )
                 {

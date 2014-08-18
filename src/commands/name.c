@@ -52,7 +52,7 @@ void do_name( Character *ch, char *argument )
   FreeMemory( ch->name );
   ch->name = CopyString( argument );
   sprintf( buf, "%s the %s",ch->name,
-           race_table[ch->race].race_name );
+           RaceTable[ch->race].race_name );
   set_title( ch, buf );
 
   send_to_char("Your name has been changed.  Please apply again.\r\n", ch);

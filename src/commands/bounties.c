@@ -3,7 +3,7 @@
 
 void do_bounties( Character *ch, char *argument )
 {
-  BOUNTY_DATA *bounty = NULL;
+  Bounty *bounty = NULL;
   int count = 0;
 
   if ( ( GetTrustLevel(ch) < LEVEL_IMMORTAL)

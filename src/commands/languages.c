@@ -44,7 +44,7 @@ void do_languages( Character *ch, char *argument )
           send_to_char( "That is not a language.\r\n", ch );
 	  return;
         }
-      if ( race_table[ch->race].language & lang_array[lang] ||
+      if ( RaceTable[ch->race].language & lang_array[lang] ||
            ch->pcdata->learned[sn] >= 99 )
         {
           act( AT_PLAIN, "You are already fluent in $t.", ch,

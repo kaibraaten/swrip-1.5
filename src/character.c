@@ -188,7 +188,7 @@ short GetCurrentForce( const Character *ch )
 
   if (!IsNpc(ch))
     {
-      max = 20 + race_table[ch->race].stats.mod_frc;
+      max = 20 + RaceTable[ch->race].stats.mod_frc;
       max = umin(max,25);
     }
   else
@@ -814,7 +814,7 @@ void FixCharacterStats( Character *ch )
       affect_modify( ch, aff, false );
     }
 
-  ch->affected_by          = race_table[ch->race].affected;
+  ch->affected_by          = RaceTable[ch->race].affected;
   ch->mental_state         = 0;
   ch->hit                  = umax( 1, ch->hit  );
   ch->mana                 = umax( 1, ch->mana );

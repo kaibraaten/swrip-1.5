@@ -1027,10 +1027,10 @@ void load_mobiles( Area *tarea, FILE *fp )
           pMobIndex->numattacks         = x7;
 
           if ( !pMobIndex->speaks )
-            pMobIndex->speaks = race_table[pMobIndex->race].language | LANG_COMMON;
+            pMobIndex->speaks = RaceTable[pMobIndex->race].language | LANG_COMMON;
 
           if ( !pMobIndex->speaking )
-            pMobIndex->speaking = race_table[pMobIndex->race].language;
+            pMobIndex->speaking = RaceTable[pMobIndex->race].language;
 
           ln = ReadLine( fp );
           x1=x2=x3=x4=x5=x6=x7=x8=0;

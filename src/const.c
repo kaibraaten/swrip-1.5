@@ -38,7 +38,7 @@ static int get_in_array( const char *name, const char * const * array,
 /*
  * Race table.
  */
-const struct race_type race_table[MAX_RACE] =
+const struct Race RaceTable[MAX_RACE] =
   {
     {
       "Human",    /* race_name          */

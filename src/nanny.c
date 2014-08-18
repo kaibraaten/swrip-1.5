@@ -473,16 +473,16 @@ static void nanny_get_new_sex( Descriptor *d, char *argument )
 	  continue;
 	}
 
-      if(race_table[iRace].race_name && race_table[iRace].race_name[0] != '\0')
+      if(RaceTable[iRace].race_name && RaceTable[iRace].race_name[0] != '\0')
 	{
-	  sprintf( buf2, "%-20s", race_table[iRace].race_name );
+	  sprintf( buf2, "%-20s", RaceTable[iRace].race_name );
 	  strcat( buf, buf2 );
-	  sprintf( buf2, "%-20s", race_table[iRace+halfmax].race_name );
+	  sprintf( buf2, "%-20s", RaceTable[iRace+halfmax].race_name );
 	  strcat( buf, buf2 );
 
 	  if( iRace + (halfmax*2) < MAX_RACE )
 	    {
-	      sprintf( buf2, "%s", race_table[iRace+(halfmax*2)].race_name );
+	      sprintf( buf2, "%s", RaceTable[iRace+(halfmax*2)].race_name );
 	      strcat( buf, buf2 );
 	    }
 
@@ -523,8 +523,8 @@ static void nanny_get_new_race( Descriptor *d, char *argument )
 
   for ( iRace = 0; iRace < MAX_RACE; iRace++ )
     {
-      if ( toupper(arg[0]) == toupper(race_table[iRace].race_name[0])
-	   &&   !StringPrefix( arg, race_table[iRace].race_name ) )
+      if ( toupper(arg[0]) == toupper(RaceTable[iRace].race_name[0])
+	   &&   !StringPrefix( arg, RaceTable[iRace].race_name ) )
 	{
 	  ch->race = iRace;
 	  break;
@@ -532,8 +532,8 @@ static void nanny_get_new_race( Descriptor *d, char *argument )
     }
 
   if ( iRace == MAX_RACE || iRace == RACE_GOD
-       || !race_table[iRace].race_name
-       || race_table[iRace].race_name[0] == '\0')
+       || !RaceTable[iRace].race_name
+       || RaceTable[iRace].race_name[0] == '\0')
     {
       write_to_buffer( d, "That's not a race.\r\nWhat IS your race? ", 0 );
       return;
@@ -609,12 +609,12 @@ static void nanny_get_new_class( Descriptor *d, char *argument )
   ch->stats.perm_con = GetRandomNumberFromRange(3, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
   ch->stats.perm_cha = GetRandomNumberFromRange(3, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
 
-  ch->stats.perm_str       += race_table[ch->race].stats.mod_str;
-  ch->stats.perm_int       += race_table[ch->race].stats.mod_int;
-  ch->stats.perm_wis       += race_table[ch->race].stats.mod_wis;
-  ch->stats.perm_dex       += race_table[ch->race].stats.mod_dex;
-  ch->stats.perm_con       += race_table[ch->race].stats.mod_con;
-  ch->stats.perm_cha       += race_table[ch->race].stats.mod_cha;
+  ch->stats.perm_str       += RaceTable[ch->race].stats.mod_str;
+  ch->stats.perm_int       += RaceTable[ch->race].stats.mod_int;
+  ch->stats.perm_wis       += RaceTable[ch->race].stats.mod_wis;
+  ch->stats.perm_dex       += RaceTable[ch->race].stats.mod_dex;
+  ch->stats.perm_con       += RaceTable[ch->race].stats.mod_con;
+  ch->stats.perm_cha       += RaceTable[ch->race].stats.mod_cha;
 
   sprintf( buf, "\r\nSTR: %d  INT: %d  WIS: %d  DEX: %d  CON: %d  CHA: %d\r\n",
 	   ch->stats.perm_str, ch->stats.perm_int, ch->stats.perm_wis,
@@ -646,12 +646,12 @@ static void nanny_stats_ok( Descriptor *d, char *argument )
       ch->stats.perm_con = GetRandomNumberFromRange(3, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
       ch->stats.perm_cha = GetRandomNumberFromRange(3, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
 
-      ch->stats.perm_str   += race_table[ch->race].stats.mod_str;
-      ch->stats.perm_int   += race_table[ch->race].stats.mod_int;
-      ch->stats.perm_wis   += race_table[ch->race].stats.mod_wis;
-      ch->stats.perm_dex   += race_table[ch->race].stats.mod_dex;
-      ch->stats.perm_con   += race_table[ch->race].stats.mod_con;
-      ch->stats.perm_cha   += race_table[ch->race].stats.mod_cha;
+      ch->stats.perm_str   += RaceTable[ch->race].stats.mod_str;
+      ch->stats.perm_int   += RaceTable[ch->race].stats.mod_int;
+      ch->stats.perm_wis   += RaceTable[ch->race].stats.mod_wis;
+      ch->stats.perm_dex   += RaceTable[ch->race].stats.mod_dex;
+      ch->stats.perm_con   += RaceTable[ch->race].stats.mod_con;
+      ch->stats.perm_cha   += RaceTable[ch->race].stats.mod_cha;
 
       sprintf( buf, "\r\nSTR: %d  INT: %d  WIS: %d  DEX: %d  CON: %d  CHA: %d\r\n" ,
 	       ch->stats.perm_str, ch->stats.perm_int, ch->stats.perm_wis,
@@ -668,7 +668,7 @@ static void nanny_stats_ok( Descriptor *d, char *argument )
   SetBit( ch->act, PLR_ANSI );
 
   sprintf( log_buf, "%s@%s new %s.", ch->name, d->remote.hostname,
-	   race_table[ch->race].race_name);
+	   RaceTable[ch->race].race_name);
   log_string_plus( log_buf, LOG_COMM, sysdata.log_level);
   to_channel( log_buf, CHANNEL_MONITOR, "Monitor", LEVEL_IMMORTAL );
   write_to_buffer( d, "Press [ENTER] ", 0 );
@@ -743,9 +743,9 @@ static void nanny_read_motd( Descriptor *d, char *argument )
 
       ch->stats.perm_lck = GetRandomNumberFromRange(6, 20);
       ch->stats.perm_frc = GetRandomNumberFromRange(-800, 20);
-      ch->affected_by         = race_table[ch->race].affected;
-      ch->stats.perm_lck   += race_table[ch->race].stats.mod_lck;
-      ch->stats.perm_frc   += race_table[ch->race].stats.mod_frc;
+      ch->affected_by         = RaceTable[ch->race].affected;
+      ch->stats.perm_lck   += RaceTable[ch->race].stats.mod_lck;
+      ch->stats.perm_frc   += RaceTable[ch->race].stats.mod_frc;
 
       if ( ch->ability.main == FORCE_ABILITY )
 	{
@@ -787,7 +787,7 @@ if ( (iLang = skill_lookup( "common" )) < 0 )
 
       for ( iLang = 0; lang_array[iLang] != LANG_UNKNOWN; iLang++ )
 	{
-	  if ( lang_array[iLang] == race_table[ch->race].language )
+	  if ( lang_array[iLang] == RaceTable[ch->race].language )
 	    {
 	      break;
 	    }
@@ -806,7 +806,7 @@ if ( (iLang = skill_lookup( "common" )) < 0 )
 	  else
 	    {
 	      ch->pcdata->learned[iLang] = 100;
-	      ch->speaking  =  race_table[ch->race].language;
+	      ch->speaking  =  RaceTable[ch->race].language;
 
 	      if ( ch->race == RACE_QUARREN
 		   && (iLang = skill_lookup( "quarren" )) >= 0 )
@@ -823,8 +823,8 @@ if ( (iLang = skill_lookup( "common" )) < 0 )
 	    }
 	}
 
-      ch->resistant           += race_table[ch->race].resist;
-      ch->susceptible     += race_table[ch->race].suscept;
+      ch->resistant           += RaceTable[ch->race].resist;
+      ch->susceptible     += RaceTable[ch->race].suscept;
 
       {
 	int ability;
@@ -838,8 +838,8 @@ if ( (iLang = skill_lookup( "common" )) < 0 )
 
       ch->top_level = 1;
       ch->hit        = ch->max_hit;
-      ch->hit     += race_table[ch->race].hit;
-      ch->max_hit += race_table[ch->race].hit;
+      ch->hit     += RaceTable[ch->race].hit;
+      ch->max_hit += RaceTable[ch->race].hit;
       ch->move       = ch->max_move;
       ch->gold     = NEW_CHARACTER_START_CREDITS;
 
@@ -852,9 +852,9 @@ if ( (iLang = skill_lookup( "common" )) < 0 )
 	  ch->max_mana = 0;
 	}
 
-      ch->max_mana += race_table[ch->race].mana;
+      ch->max_mana += RaceTable[ch->race].mana;
       ch->mana      = ch->max_mana;
-      sprintf( buf, "%s the %s",ch->name, race_table[ch->race].race_name );
+      sprintf( buf, "%s the %s",ch->name, RaceTable[ch->race].race_name );
       set_title( ch, buf );
 
       /* Added by Narn.  Start new characters with autoexit and autgold

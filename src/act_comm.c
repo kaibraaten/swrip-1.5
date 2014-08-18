@@ -655,7 +655,7 @@ bool knows_language( const Character *ch, int language, const Character *cch )
       int lang;
 
       /* Racial languages for PCs */
-      if ( IsBitSet(race_table[ch->race].language, language) )
+      if ( IsBitSet(RaceTable[ch->race].language, language) )
         return true;
 
       for ( lang = 0; lang_array[lang] != LANG_UNKNOWN; lang++ )
@@ -678,7 +678,7 @@ bool can_learn_lang( const Character *ch, int language )
     return false;
   if ( IsNpc(ch) || IsImmortal(ch) )
     return false;
-  if ( race_table[ch->race].language & language )
+  if ( RaceTable[ch->race].language & language )
     return false;
   if ( ch->speaks & language )
     {

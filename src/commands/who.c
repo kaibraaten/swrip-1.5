@@ -176,7 +176,7 @@ void do_who( Character *ch, char *argument )
                     {
                       for ( iRace = 0; iRace < MAX_RACE; iRace++ )
                         {
-                          if ( IsGreater(ch) && (!StrCmp( arg, race_table[iRace].race_name ) ) )
+                          if ( IsGreater(ch) && (!StrCmp( arg, RaceTable[iRace].race_name ) ) )
                             {
                               rgfRace[iRace] = true;
                               break;
@@ -243,7 +243,7 @@ void do_who( Character *ch, char *argument )
         strcpy( char_name, "") ;
 
       if ( IsGreater(ch) )
-        sprintf( race_text, "(%s) ", race_table[wch->race].race_name);
+        sprintf( race_text, "(%s) ", RaceTable[wch->race].race_name);
       else
         strcpy( race_text, "" );
 

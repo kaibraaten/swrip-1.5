@@ -181,7 +181,7 @@ static int GetMaxCombatLevel( const Character *ch )
       break;
     }
 
-  level += race_table[ch->race].AbilityMod[COMBAT_ABILITY];
+  level += RaceTable[ch->race].AbilityMod[COMBAT_ABILITY];
   level += ch->stats.perm_con + ch->stats.perm_dex + ch->stats.perm_str;
 
   return urange( 1, level, 150 );
@@ -209,7 +209,7 @@ static int GetMaxPilotingLevel( const Character *ch )
   if ( ch->ability.main == COMMANDO_ABILITY )
     level = 25;
 
-  level += race_table[ch->race].AbilityMod[PILOTING_ABILITY];
+  level += RaceTable[ch->race].AbilityMod[PILOTING_ABILITY];
   level += ch->stats.perm_dex * 2;
 
   return urange( 1, level, 150 );
@@ -225,7 +225,7 @@ static int GetMaxEngineeringLevel( const Character *ch )
   if ( ch->ability.main == PILOTING_ABILITY )
     level = 20;
 
-  level += race_table[ch->race].AbilityMod[ENGINEERING_ABILITY];
+  level += RaceTable[ch->race].AbilityMod[ENGINEERING_ABILITY];
   level += ch->stats.perm_int * 2;
 
   return urange( 1, level, 150 );
@@ -238,7 +238,7 @@ static int GetMaxBountyHuntingLevel( const Character *ch )
   if ( ch->ability.main == HUNTING_ABILITY )
     level = 100;
 
-  level += race_table[ch->race].AbilityMod[HUNTING_ABILITY];
+  level += RaceTable[ch->race].AbilityMod[HUNTING_ABILITY];
 
   return urange( 1, level, 150 );
 }
@@ -259,7 +259,7 @@ static int GetMaxSmugglingLevel( const Character *ch )
   if ( ch->ability.main == COMMANDO_ABILITY )
     level = 50;
 
-  level += race_table[ch->race].AbilityMod[SMUGGLING_ABILITY];
+  level += RaceTable[ch->race].AbilityMod[SMUGGLING_ABILITY];
   level += ch->stats.perm_lck * 2;
 
   return urange( 1, level, 150 );
@@ -278,7 +278,7 @@ static int GetMaxLeadershipLevel( const Character *ch )
   if ( ch->ability.main == DIPLOMACY_ABILITY )
     level = 50;
 
-  level += race_table[ch->race].AbilityMod[LEADERSHIP_ABILITY];
+  level += RaceTable[ch->race].AbilityMod[LEADERSHIP_ABILITY];
   level += ch->stats.perm_wis + ch->stats.perm_cha + ch->stats.perm_int;
 
   return urange( 1, level, 150 );
@@ -297,7 +297,7 @@ static int GetMaxDiplomacyLevel( const Character *ch )
   if ( ch->ability.main == LEADERSHIP_ABILITY )
     level = 50;
 
-  level += race_table[ch->race].AbilityMod[DIPLOMACY_ABILITY];
+  level += RaceTable[ch->race].AbilityMod[DIPLOMACY_ABILITY];
   level += ch->stats.perm_cha * 3;
 
   return urange( 1, level, 150 );

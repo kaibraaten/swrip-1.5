@@ -70,7 +70,7 @@ bool spec_newbie_pilot( Character *ch )
           break;
 
         default:
-          sprintf ( buf , "Hmm, a %s." , race_table[victim->race].race_name );
+          sprintf ( buf , "Hmm, a %s." , RaceTable[victim->race].race_name );
           do_look ( ch, victim->name );
           do_say ( ch, buf );
           do_say ( ch, "You're home planet is a little hard to get to right now." );

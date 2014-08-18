@@ -31,8 +31,8 @@ int get_race_from_name( const char *arg )
 
   for ( iRace = 0; iRace < MAX_RACE; iRace++ )
     {
-      if ( toupper(arg[0]) == toupper(race_table[iRace].race_name[0])
-           &&   !StringPrefix( arg, race_table[iRace].race_name ) )
+      if ( toupper(arg[0]) == toupper(RaceTable[iRace].race_name[0])
+           &&   !StringPrefix( arg, RaceTable[iRace].race_name ) )
         break;
     }
   if( iRace == MAX_RACE )
