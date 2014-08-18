@@ -169,8 +169,8 @@ typedef struct social_type             SOCIALTYPE;
 struct cmd_type;
 typedef struct cmd_type                CMDTYPE;
 
-struct killed_data;
-typedef struct killed_data             KILLED_DATA;
+struct KilledData;
+typedef struct KilledData              KilledData;
 
 struct wizent;
 typedef struct wizent                  WIZENT;

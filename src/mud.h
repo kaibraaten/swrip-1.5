@@ -742,7 +742,7 @@ struct ExtractedCharacter
   bool               extract;
 };
 
-struct killed_data
+struct KilledData
 {
   vnum_t vnum;
   char  count;
@@ -757,36 +757,44 @@ struct killed_data
  */
 struct PCData
 {
+  char       *pwd;
   Clan  *clan;
   Area  *area;
-  char       *homepage;
   char       *clan_name;
-  char       *pwd;
+
+  char       *homepage;
   char       *email;
+
   char       *bamfin;
   char       *bamfout;
+
   char       *rank;
   char       *title;
+
   char       *bestowments;    /* Special bestowed commands       */
   int         flags;            /* Whether the player is deadly and whatever else we add.      */
+
   int         pkills;         /* Number of pkills on behalf of clan */
   int         pdeaths;        /* Number of times pkilled (legally)  */
   int         mkills;         /* Number of mobs killed                   */
   int         mdeaths;        /* Number of deaths due to mobs       */
   int         illegal_pk;     /* Number of illegal pk's committed   */
+
   long        outcast_time;     /* The time at which the char was outcast */
   long        restore_time;     /* The last time the char did a restore all */
+
   vnum_t      r_range_lo;     /* room range */
   vnum_t      r_range_hi;
   vnum_t      m_range_lo;     /* mob range  */
   vnum_t      m_range_hi;
   vnum_t      o_range_lo;     /* obj range  */
   vnum_t      o_range_hi;
+
   short       wizinvis;       /* wizinvis level */
   short       min_snoop;      /* minimum snoop level */
   short       condition[MAX_CONDS];
   short       learned[MAX_SKILL];
-  KILLED_DATA killed[MAX_KILLTRACK];
+  KilledData killed[MAX_KILLTRACK];
   int         auth_state;
   time_t      release_date;   /* Auto-helling.. Altrag */
   vnum_t      jail_vnum;

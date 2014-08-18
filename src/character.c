@@ -226,8 +226,8 @@ void AddKill( Character *ch, const Character *mob )
     else
       if ( ch->pcdata->killed[x].vnum == 0 )
         break;
-  memmove( (char *) ch->pcdata->killed+sizeof(KILLED_DATA),
-           ch->pcdata->killed, (track-1) * sizeof(KILLED_DATA) );
+  memmove( (char *) ch->pcdata->killed+sizeof(KilledData),
+           ch->pcdata->killed, (track-1) * sizeof(KilledData) );
   ch->pcdata->killed[0].vnum  = vnum;
   ch->pcdata->killed[0].count = 1;
   if ( track < MAX_KILLTRACK )
