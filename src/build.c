@@ -50,7 +50,7 @@ bool can_rmodify( const Character *ch, const Room *room )
   return false;
 }
 
-bool can_omodify( const Character *ch, const OBJ_DATA *obj )
+bool can_omodify( const Character *ch, const Object *obj )
 {
   vnum_t vnum = obj->pIndexData->vnum;
   Area *pArea;
@@ -74,7 +74,7 @@ bool can_omodify( const Character *ch, const OBJ_DATA *obj )
   return false;
 }
 
-bool can_oedit( const Character *ch, const OBJ_INDEX_DATA *obj )
+bool can_oedit( const Character *ch, const ProtoObject *obj )
 {
   vnum_t vnum = obj->vnum;
   Area *pArea;
@@ -275,7 +275,7 @@ bool DelRExtra( Room *room, char *keywords )
   return true;
 }
 
-ExtraDescription *SetOExtra( OBJ_DATA *obj, char *keywords )
+ExtraDescription *SetOExtra( Object *obj, char *keywords )
 {
   ExtraDescription *ed;
 
@@ -295,7 +295,7 @@ ExtraDescription *SetOExtra( OBJ_DATA *obj, char *keywords )
   return ed;
 }
 
-bool DelOExtra( OBJ_DATA *obj, char *keywords )
+bool DelOExtra( Object *obj, char *keywords )
 {
   ExtraDescription *rmed;
 
@@ -314,7 +314,7 @@ bool DelOExtra( OBJ_DATA *obj, char *keywords )
   return true;
 }
 
-ExtraDescription *SetOExtraProto( OBJ_INDEX_DATA *obj, char *keywords )
+ExtraDescription *SetOExtraProto( ProtoObject *obj, char *keywords )
 {
   ExtraDescription *ed;
 
@@ -334,7 +334,7 @@ ExtraDescription *SetOExtraProto( OBJ_INDEX_DATA *obj, char *keywords )
   return ed;
 }
 
-bool DelOExtraProto( OBJ_INDEX_DATA *obj, char *keywords )
+bool DelOExtraProto( ProtoObject *obj, char *keywords )
 {
   ExtraDescription *rmed;
 
@@ -358,7 +358,7 @@ void fold_area( Area *tarea, char *filename, bool install )
   Reset            *treset;
   Room       *room;
   ProtoMobile        *pMobIndex;
-  OBJ_INDEX_DATA        *pObjIndex;
+  ProtoObject        *pObjIndex;
   MPROG_DATA            *mprog;
   Exit             *xit;
   ExtraDescription      *ed;
@@ -601,7 +601,7 @@ void fold_area( Area *tarea, char *filename, bool install )
       if ( install )
         {
           Character *victim, *vnext;
-          OBJ_DATA  *obj, *obj_next;
+          Object  *obj, *obj_next;
 
           /* remove prototype flag from room */
           RemoveBit( room->room_flags, ROOM_PROTOTYPE );
@@ -778,7 +778,7 @@ void write_area_list( void )
   fclose( fpout );
 }
 
-void AddReset_nested( Area *tarea, OBJ_DATA *obj )
+void AddReset_nested( Area *tarea, Object *obj )
 {
   int limit;
 

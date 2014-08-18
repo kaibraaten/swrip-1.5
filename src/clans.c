@@ -26,7 +26,7 @@
 #include "character.h"
 
 #define MAX_NEST        100
-static  OBJ_DATA *rgObjNest[MAX_NEST];
+static  Object *rgObjNest[MAX_NEST];
 
 Clan * first_clan = NULL;
 Clan * last_clan = NULL;
@@ -363,7 +363,7 @@ static bool load_clan_file( const char *clanfile )
       if ( ( fp = fopen( filename, "r" ) ) != NULL )
         {
           int iNest = 0;
-          OBJ_DATA *tobj = NULL, *tobj_next = NULL;
+          Object *tobj = NULL, *tobj_next = NULL;
 
           log_string( "Loading clan storage room" );
           rset_supermob(storeroom);

@@ -395,7 +395,7 @@ int slot_lookup( int slot )
  * Fancy message handling for a successful casting              -Thoric
  */
 void successful_casting( SKILLTYPE *skill, Character *ch,
-                         Character *victim, OBJ_DATA *obj )
+                         Character *victim, Object *obj )
 {
   short chitroom = (skill->type == SKILL_SPELL ? AT_MAGIC : AT_ACTION);
   short chit = (skill->type == SKILL_SPELL ? AT_MAGIC : AT_HIT);
@@ -445,7 +445,7 @@ void successful_casting( SKILLTYPE *skill, Character *ch,
  * Fancy message handling for a failed casting                  -Thoric
  */
 void failed_casting( SKILLTYPE *skill, Character *ch,
-                     Character *victim, OBJ_DATA *obj )
+                     Character *victim, Object *obj )
 {
   short chitroom = (skill->type == SKILL_SPELL ? AT_MAGIC : AT_ACTION);
   short chit = (skill->type == SKILL_SPELL ? AT_MAGIC : AT_HIT);
@@ -502,7 +502,7 @@ void failed_casting( SKILLTYPE *skill, Character *ch,
  * Fancy message handling for being immune to something         -Thoric
  */
 void immune_casting( SKILLTYPE *skill, Character *ch,
-                     Character *victim, OBJ_DATA *obj )
+                     Character *victim, Object *obj )
 {
   short chitroom = (skill->type == SKILL_SPELL ? AT_MAGIC : AT_ACTION);
   short chit = (skill->type == SKILL_SPELL ? AT_MAGIC : AT_HIT);
@@ -910,7 +910,7 @@ bool process_spell_components( Character *ch, int sn )
 /*
  * Locate targets.
  */
-void *locate_targets( Character *ch, char *arg, int sn, Character **victim, OBJ_DATA **obj )
+void *locate_targets( Character *ch, char *arg, int sn, Character **victim, Object **obj )
 {
   SKILLTYPE *skill = get_skilltype( sn );
   void *vo = NULL;
@@ -1032,7 +1032,7 @@ void *locate_targets( Character *ch, char *arg, int sn, Character **victim, OBJ_
 /*
  * Cast spells at targets using a magical object.
  */
-ch_ret obj_cast_spell( int sn, int level, Character *ch, Character *victim, OBJ_DATA *obj )
+ch_ret obj_cast_spell( int sn, int level, Character *ch, Character *victim, Object *obj )
 {
   void *vo = NULL;
   ch_ret retcode = rNONE;

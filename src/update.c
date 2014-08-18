@@ -68,7 +68,7 @@ static int GetMaxForceLevel( const Character *ch );
  */
 
 Character *gch_prev = NULL;
-OBJ_DATA *gobj_prev = NULL;
+Object *gobj_prev = NULL;
 
 Character *timechar = NULL;
 
@@ -1034,8 +1034,8 @@ void mobile_update( void )
            && ch->in_room->first_content
            && NumberBits( 2 ) == 0 )
         {
-          OBJ_DATA *obj = NULL;
-          OBJ_DATA *obj_best = NULL;
+          Object *obj = NULL;
+          Object *obj_best = NULL;
           int max = 1;
 
           for ( obj = ch->in_room->first_content; obj; obj = obj->next_content )
@@ -1465,7 +1465,7 @@ void char_update( void )
 
       if ( !IsNpc(ch) && ch->top_level < LEVEL_IMMORTAL )
         {
-          OBJ_DATA *obj = NULL;
+          Object *obj = NULL;
 
           if ( ( obj = GetEquipmentOnCharacter( ch, WEAR_LIGHT ) ) != NULL
                && obj->item_type == ITEM_LIGHT
@@ -1781,8 +1781,8 @@ void char_update( void )
  */
 void obj_update( void )
 {
-  OBJ_DATA *obj = NULL;
-  OBJ_DATA *wield = NULL;
+  Object *obj = NULL;
+  Object *wield = NULL;
   short AT_TEMP = 0;
 
   for ( obj = last_object; obj; obj = gobj_prev )
@@ -2372,7 +2372,7 @@ void aggr_update( void )
 
           if ( IsNpc(ch) && IsBitSet(ch->attacks, ATCK_BACKSTAB ) )
             {
-              OBJ_DATA *obj = NULL;
+              Object *obj = NULL;
 
               if ( !ch->mount
                    && (obj = GetEquipmentOnCharacter( ch, WEAR_WIELD )) != NULL
@@ -2726,7 +2726,7 @@ void update_handler( void )
     }
 }
 
-void remove_portal( OBJ_DATA *portal )
+void remove_portal( Object *portal )
 {
   Room *fromRoom = portal->in_room;
   Room *toRoom = NULL;

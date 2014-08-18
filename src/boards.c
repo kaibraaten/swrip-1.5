@@ -137,7 +137,7 @@ void write_boards_txt( void )
   fclose( fpout );
 }
 
-Board *get_board( const OBJ_DATA *obj )
+Board *get_board( const Object *obj )
 {
   Board *board = NULL;
 
@@ -270,9 +270,9 @@ static void note_remove( Board *board, Note *pnote )
 }
 
 
-static OBJ_DATA *find_quill( const Character *ch )
+static Object *find_quill( const Character *ch )
 {
-  OBJ_DATA *quill = false;
+  Object *quill = false;
 
   for ( quill = ch->last_carrying; quill; quill = quill->prev_content )
     if ( quill->item_type == ITEM_PEN
@@ -291,7 +291,7 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
   vnum_t vnum = INVALID_VNUM;
   int anum = 0;
   int first_list = 0;
-  OBJ_DATA *quill = NULL, *paper = NULL, *tmpobj = NULL;
+  Object *quill = NULL, *paper = NULL, *tmpobj = NULL;
   ExtraDescription *ed = NULL;
   char notebuf[MAX_STRING_LENGTH];
   char short_desc_buf[MAX_STRING_LENGTH];
@@ -1314,7 +1314,7 @@ void mail_count(Character *ch)
 
 Board *find_board( const Character *ch )
 {
-  const OBJ_DATA *obj;
+  const Object *obj;
   Board *board = NULL;
 
   for ( obj = ch->in_room->first_content; obj; obj = obj->next_content )

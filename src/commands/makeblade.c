@@ -80,7 +80,7 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   struct UserData *ud = (struct UserData*) userData;
   char buf[MAX_STRING_LENGTH];
   Affect *paf = NULL;
-  OBJ_DATA *weapon = args->Object;
+  Object *weapon = args->Object;
 
   weapon->item_type = ITEM_WEAPON;
   SetBit( weapon->wear_flags, ITEM_WIELD );

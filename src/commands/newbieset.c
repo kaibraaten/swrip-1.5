@@ -5,7 +5,7 @@ void do_newbieset( Character *ch, char *argument )
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
-  OBJ_DATA *obj;
+  Object *obj;
   Character *victim;
 
   argument = OneArgument( argument, arg1 );

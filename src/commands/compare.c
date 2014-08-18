@@ -5,8 +5,8 @@ void do_compare( Character *ch, char *argument )
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
-  OBJ_DATA *obj1;
-  OBJ_DATA *obj2;
+  Object *obj1;
+  Object *obj2;
   int value1;
   int value2;
   char *msg;

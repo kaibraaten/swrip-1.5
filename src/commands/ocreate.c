@@ -5,8 +5,8 @@ void do_ocreate( Character *ch, char *argument )
 {
   char arg [MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
-  OBJ_INDEX_DATA *pObjIndex = NULL;
-  OBJ_DATA *obj = NULL;
+  ProtoObject *pObjIndex = NULL;
+  Object *obj = NULL;
   int vnum = 0, cvnum = 0;
 
   if ( IsNpc(ch) )

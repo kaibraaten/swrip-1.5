@@ -3,7 +3,7 @@
 
 void do_eat( Character *ch, char *argument )
 {
-  OBJ_DATA *obj;
+  Object *obj;
   ch_ret retcode;
   int foodcond;
 

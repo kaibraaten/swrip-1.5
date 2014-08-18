@@ -88,7 +88,7 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
 {
   struct UserData *ud = (struct UserData*) userData;
   char buf[MAX_STRING_LENGTH];
-  OBJ_DATA *glowrod = args->Object;
+  Object *glowrod = args->Object;
 
   glowrod->item_type = ITEM_LIGHT;
   SetBit( glowrod->wear_flags, ITEM_TAKE );

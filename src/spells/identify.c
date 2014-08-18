@@ -6,7 +6,7 @@ extern char *spell_target_name;
 ch_ret spell_identify( int sn, int level, Character *ch, void *vo )
 {
   /* Modified by Scryn to work on mobs/players/objs */
-  OBJ_DATA *obj;
+  Object *obj;
   Character *victim;
   Affect *paf;
   SKILLTYPE *sktmp;

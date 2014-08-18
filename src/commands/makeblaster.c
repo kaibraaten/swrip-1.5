@@ -93,7 +93,7 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   char buf[MAX_STRING_LENGTH];
   Affect *hitroll = NULL;
   Affect *damroll = NULL;
-  OBJ_DATA *blaster = args->Object;
+  Object *blaster = args->Object;
 
   if( ud->Scope )
     {

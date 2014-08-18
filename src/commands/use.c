@@ -6,8 +6,8 @@ void do_use( Character *ch, char *argument )
   char arg[MAX_INPUT_LENGTH];
   char argd[MAX_INPUT_LENGTH];
   Character *victim;
-  OBJ_DATA *device;
-  OBJ_DATA *obj;
+  Object *device;
+  Object *obj;
   ch_ret retcode;
 
   argument = OneArgument( argument, argd );

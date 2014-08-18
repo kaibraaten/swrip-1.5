@@ -8,7 +8,7 @@ void do_placevendor (Character *ch, char *argument)
   struct stat fst;
   Character *vendor;
   ProtoMobile *temp;
-  OBJ_DATA *obj;
+  Object *obj;
   char vnum1[MAX_INPUT_LENGTH];
   char buf [MAX_INPUT_LENGTH];
 

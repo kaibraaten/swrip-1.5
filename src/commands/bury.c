@@ -4,7 +4,7 @@
 void do_bury( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  OBJ_DATA *obj = NULL;
+  Object *obj = NULL;
   bool shovel = false;
   short move = 0;
 

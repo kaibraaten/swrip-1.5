@@ -5,8 +5,8 @@ void do_zap( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   Character *victim;
-  OBJ_DATA *wand;
-  OBJ_DATA *obj;
+  Object *wand;
+  Object *obj;
   ch_ret retcode;
 
   OneArgument( argument, arg );

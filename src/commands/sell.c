@@ -7,7 +7,7 @@ void do_sell( Character *ch, char *argument )
   char buf[MAX_STRING_LENGTH];
   char arg[MAX_INPUT_LENGTH];
   Character *keeper;
-  OBJ_DATA *obj;
+  Object *obj;
   int cost;
   bool spice = false;
 

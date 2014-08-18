@@ -5,8 +5,8 @@
 void do_detrap( Character *ch, char *argument )
 {
   char arg  [MAX_INPUT_LENGTH];
-  OBJ_DATA *obj;
-  OBJ_DATA *trap;
+  Object *obj;
+  Object *trap;
   int percent;
   bool found;
 

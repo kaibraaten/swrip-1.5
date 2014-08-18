@@ -31,7 +31,7 @@
  */
 void make_fire(Room *in_room, short timer)
 {
-  OBJ_DATA *fire = create_object( get_obj_index( OBJ_VNUM_FIRE ), 0 );
+  Object *fire = create_object( get_obj_index( OBJ_VNUM_FIRE ), 0 );
 
   fire->timer = NumberFuzzy(timer);
   obj_to_room( fire, in_room );
@@ -40,9 +40,9 @@ void make_fire(Room *in_room, short timer)
 /*
  * Make a trap.
  */
-OBJ_DATA *make_trap(int v0, int v1, int v2, int v3)
+Object *make_trap(int v0, int v1, int v2, int v3)
 {
-  OBJ_DATA *trap = create_object( get_obj_index( OBJ_VNUM_TRAP ), 0 );
+  Object *trap = create_object( get_obj_index( OBJ_VNUM_TRAP ), 0 );
 
   trap->timer = 0;
   trap->value[OVAL_TRAP_CHARGE] = v0;
@@ -57,11 +57,11 @@ OBJ_DATA *make_trap(int v0, int v1, int v2, int v3)
 /*
  * Turn an object into scraps.          -Thoric
  */
-void make_scraps( OBJ_DATA *obj )
+void make_scraps( Object *obj )
 {
   char buf[MAX_STRING_LENGTH];
-  OBJ_DATA *scraps = create_object( get_obj_index( OBJ_VNUM_SCRAPS ), 0 );
-  OBJ_DATA *tmpobj = NULL;
+  Object *scraps = create_object( get_obj_index( OBJ_VNUM_SCRAPS ), 0 );
+  Object *tmpobj = NULL;
   Character *ch = NULL;
 
   separate_obj( obj );
@@ -145,9 +145,9 @@ void make_scraps( OBJ_DATA *obj )
 void make_corpse( Character *ch )
 {
   char buf[MAX_STRING_LENGTH];
-  OBJ_DATA *corpse = NULL;
-  OBJ_DATA *obj = NULL;
-  OBJ_DATA *obj_next = NULL;
+  Object *corpse = NULL;
+  Object *obj = NULL;
+  Object *obj_next = NULL;
   char *name = NULL;
 
   if ( IsNpc(ch) )
@@ -233,7 +233,7 @@ void make_corpse( Character *ch )
 
 void make_bloodstain( Character *ch )
 {
-  OBJ_DATA *obj = create_object( get_obj_index( OBJ_VNUM_BLOODSTAIN ), 0 );
+  Object *obj = create_object( get_obj_index( OBJ_VNUM_BLOODSTAIN ), 0 );
   obj->timer = GetRandomNumberFromRange( 1, 2 );
   obj_to_room( obj, ch->in_room );
 }
@@ -241,10 +241,10 @@ void make_bloodstain( Character *ch )
 /*
  * make some coinage
  */
-OBJ_DATA *create_money( int amount )
+Object *create_money( int amount )
 {
   char buf[MAX_STRING_LENGTH];
-  OBJ_DATA *obj = NULL;
+  Object *obj = NULL;
 
   if ( amount <= 0 )
     {

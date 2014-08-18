@@ -6,7 +6,7 @@ void do_pick( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   Character *gch;
-  OBJ_DATA *obj;
+  Object *obj;
   Exit *pexit;
   Ship *ship;
 

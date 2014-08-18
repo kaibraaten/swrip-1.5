@@ -244,7 +244,7 @@ struct mob_prog_act_list
   MPROG_ACT_LIST *next;
   char           *buf;
   Character      *ch;
-  OBJ_DATA       *obj;
+  Object       *obj;
   void           *vo;
 };
 
@@ -835,9 +835,9 @@ struct PCData
  */
 struct LiquidType
 {
-  char *        liq_name;
-  char *        liq_color;
-  short liq_affect[3];
+  char  *liq_name;
+  char  *liq_color;
+  short  liq_affect[3];
 };
 
 /*
@@ -856,10 +856,10 @@ struct ExtraDescription
 /*
  * Prototype for an object.
  */
-struct obj_index_data
+struct ProtoObject
 {
-  OBJ_INDEX_DATA   *next;
-  OBJ_INDEX_DATA   *next_sort;
+  ProtoObject   *next;
+  ProtoObject   *next_sort;
   ExtraDescription *first_extradesc;
   ExtraDescription *last_extradesc;
   Affect      *first_affect;
@@ -893,21 +893,21 @@ struct obj_index_data
 /*
  * One object.
  */
-struct obj_data
+struct Object
 {
-  OBJ_DATA         *next;
-  OBJ_DATA         *prev;
-  OBJ_DATA         *next_content;
-  OBJ_DATA         *prev_content;
-  OBJ_DATA         *first_content;
-  OBJ_DATA         *last_content;
-  OBJ_DATA         *in_obj;
+  Object         *next;
+  Object         *prev;
+  Object         *next_content;
+  Object         *prev_content;
+  Object         *first_content;
+  Object         *last_content;
+  Object         *in_obj;
   Character        *carried_by;
   ExtraDescription *first_extradesc;
   ExtraDescription *last_extradesc;
   Affect      *first_affect;
   Affect      *last_affect;
-  OBJ_INDEX_DATA   *pIndexData;
+  ProtoObject   *pIndexData;
   Room  *in_room;
   char             *armed_by;
   char             *name;
@@ -1103,8 +1103,8 @@ struct Room
   Room  *next_sort;
   Character        *first_person;
   Character        *last_person;
-  OBJ_DATA         *first_content;
-  OBJ_DATA         *last_content;
+  Object         *first_content;
+  Object         *last_content;
   ExtraDescription *first_extradesc;
   ExtraDescription *last_extradesc;
   Area        *area;
@@ -1202,7 +1202,7 @@ struct skill_type
 
 struct Auction
 {
-  OBJ_DATA  *item;   /* a pointer to the item */
+  Object  *item;   /* a pointer to the item */
   Character *seller; /* a pointer to the seller - which may NOT quit */
   Character *buyer;  /* a pointer to the buyer - which may NOT quit */
   int        bet;    /* last bet - or 0 if noone has bet anything */
@@ -1589,8 +1589,8 @@ extern Descriptor      *first_descriptor;
 extern Descriptor      *last_descriptor;
 extern Board           *first_board;
 extern Board           *last_board;
-extern OBJ_DATA             *first_object;
-extern OBJ_DATA             *last_object;
+extern Object             *first_object;
+extern Object             *last_object;
 extern Clan            *first_clan;
 extern Clan            *last_clan;
 extern MEMBER_LIST          *first_member_list;
@@ -1619,13 +1619,13 @@ extern Area            *first_bsort;
 extern Area            *last_bsort;
 extern TELEPORT_DATA        *first_teleport;
 extern TELEPORT_DATA        *last_teleport;
-extern OBJ_DATA             *extracted_obj_queue;
+extern Object             *extracted_obj_queue;
 extern ExtractedCharacter    *extracted_char_queue;
-extern OBJ_DATA             *save_equipment[MAX_WEAR][MAX_LAYERS];
+extern Object             *save_equipment[MAX_WEAR][MAX_LAYERS];
 extern Character            *quitting_char;
 extern Character            *loading_char;
 extern Character            *saving_char;
-extern OBJ_DATA             *all_obj;
+extern Object             *all_obj;
 extern time_t                current_time;
 extern bool                  fLogAll;
 extern char                  log_buf         [];
@@ -2244,8 +2244,8 @@ extern "C" {
   int get_class_from_name( const char *arg );
   void show_condition( const Character *ch, const Character *victim );
   bool check_blind( const Character *ch );
-  char *format_obj_to_char( const OBJ_DATA *obj, const Character *ch, bool fShort );
-  void show_list_to_char( const OBJ_DATA *list, Character *ch,
+  char *format_obj_to_char( const Object *obj, const Character *ch, bool fShort );
+  void show_list_to_char( const Object *list, Character *ch,
 			  bool fShort, bool fShowNothing );
 
   /* act_move.c */
@@ -2266,10 +2266,10 @@ extern "C" {
 
   /* act_obj.c */
   bool remove_obj( Character *ch, int iWear, bool fReplace );
-  obj_ret damage_obj( OBJ_DATA *obj );
-  short get_obj_resistance( const OBJ_DATA *obj );
+  obj_ret damage_obj( Object *obj );
+  short get_obj_resistance( const Object *obj );
   void save_clan_storeroom( Character *ch, const Clan *clan );
-  void obj_fall( OBJ_DATA *obj, bool through );
+  void obj_fall( Object *obj, bool through );
 
   /* act_wiz.c */
   void save_banlist( void );
@@ -2289,7 +2289,7 @@ extern "C" {
 
   /* boards.c */
   void load_boards( void );
-  Board *get_board( const OBJ_DATA *obj );
+  Board *get_board( const Object *obj );
   Board *find_board( const Character *ch );
   void free_note( Note *pnote );
   void write_boards_txt( void );
@@ -2404,7 +2404,7 @@ extern "C" {
   void         extract_missile( Missile *missile );
 
   /* comm.c */
-  char *obj_short( const OBJ_DATA *obj );
+  char *obj_short( const Object *obj );
   void close_socket( Descriptor *dclose, bool force );
   bool write_to_descriptor( socket_t desc, char *txt, int length );
   void write_to_buffer( Descriptor *d, const char *txt, size_t length );
@@ -2428,18 +2428,18 @@ extern "C" {
   void  area_update( void );
   void  add_char( Character *ch );
   Character *create_mobile( ProtoMobile *pMobIndex );
-  OBJ_DATA *create_object( OBJ_INDEX_DATA *pObjIndex, int level );
+  Object *create_object( ProtoObject *pObjIndex, int level );
   void  clear_char( Character *ch );
   void  free_char( Character *ch );
   char *        get_extra_descr( const char *name, ExtraDescription *ed );
   ProtoMobile *get_mob_index( vnum_t vnum );
-  OBJ_INDEX_DATA *get_obj_index( vnum_t vnum );
+  ProtoObject *get_obj_index( vnum_t vnum );
   Room *get_room_index( vnum_t vnum );
   void  bug( const char *str, ... );
   void log_printf( const char *fmt, ... );
   void log_string_plus( const char *str, short log_type, short level );
   Room *make_room( vnum_t vnum );
-  OBJ_INDEX_DATA *make_object( vnum_t vnum, vnum_t cvnum, char *name );
+  ProtoObject *make_object( vnum_t vnum, vnum_t cvnum, char *name );
   ProtoMobile *make_mobile( vnum_t vnum, vnum_t cvnum, char *name );
   Exit *make_exit( Room *pRoomIndex, Room *to_room, short door );
   void  fix_area_exits( Area *tarea );
@@ -2447,7 +2447,7 @@ extern "C" {
   void  randomize_exits( Room *room, short maxdir );
   void  make_wizlist( void );
   bool    delete_room( Room *room );
-  bool    delete_obj( OBJ_INDEX_DATA *obj );
+  bool    delete_obj( ProtoObject *obj );
   bool    delete_mob( ProtoMobile *mob );
 
   void  sort_area( Area *pArea, bool proto );
@@ -2458,7 +2458,7 @@ extern "C" {
   void write_area_list( void );
 
   bool can_rmodify( const Character *ch, const Room *room );
-  bool can_omodify( const Character *ch, const OBJ_DATA *obj  );
+  bool can_omodify( const Character *ch, const Object *obj  );
   bool can_mmodify( const Character *ch, const Character *mob );
   bool can_medit( const Character *ch, const ProtoMobile *mob );
   void free_reset( Area *are, Reset *res );
@@ -2466,10 +2466,10 @@ extern "C" {
   void assign_area( Character *ch );
   ExtraDescription *SetRExtra( Room *room, char *keywords );
   bool DelRExtra( Room *room, char *keywords );
-  ExtraDescription *SetOExtra( OBJ_DATA *obj, char *keywords );
-  bool DelOExtra( OBJ_DATA *obj, char *keywords );
-  ExtraDescription *SetOExtraProto( OBJ_INDEX_DATA *obj, char *keywords );
-  bool DelOExtraProto( OBJ_INDEX_DATA *obj, char *keywords );
+  ExtraDescription *SetOExtra( Object *obj, char *keywords );
+  bool DelOExtra( Object *obj, char *keywords );
+  ExtraDescription *SetOExtraProto( ProtoObject *obj, char *keywords );
+  bool DelOExtraProto( ProtoObject *obj, char *keywords );
   void fold_area( Area *tarea, char *filename, bool install );
 
   /* fight.c */
@@ -2508,15 +2508,15 @@ extern "C" {
   /* makeobjs.c */
   void  make_corpse( Character *ch );
   void  make_bloodstain( Character *ch );
-  void  make_scraps( OBJ_DATA *obj );
+  void  make_scraps( Object *obj );
   void  make_fire( Room *in_room, short timer );
-  OBJ_DATA *make_trap( int v0, int v1, int v2, int v3 );
-  OBJ_DATA *create_money( int amount );
+  Object *make_trap( int v0, int v1, int v2, int v3 );
+  Object *create_money( int amount );
 
   /* misc.c */
   bool is_valid_language( int language );
-  void pullorpush( Character *ch, OBJ_DATA *obj, bool pull );
-  void actiondesc( Character *ch, OBJ_DATA *obj, void *vo );
+  void pullorpush( Character *ch, Object *obj, bool pull );
+  void actiondesc( Character *ch, Object *obj, void *vo );
   void jedi_checks( Character *ch );
   void jedi_bonus( Character *ch );
   void sith_penalty( Character *ch );
@@ -2528,15 +2528,15 @@ extern "C" {
 
   /* mud_prog.c */
   void mprog_wordlist_check( char * arg, Character *mob,
-			     Character* actor, OBJ_DATA* object,
+			     Character* actor, Object* object,
 			     void* vo, int type );
   void mprog_percent_check( Character *mob, Character* actor,
-			    OBJ_DATA* object, void* vo, int type );
+			    Object* object, void* vo, int type );
   void mprog_act_trigger( char* buf, Character* mob,
-			  Character* ch, OBJ_DATA* obj, void* vo );
+			  Character* ch, Object* obj, void* vo );
   void mprog_bribe_trigger( Character* mob, Character* ch, int amount );
   void mprog_entry_trigger( Character* mob );
-  void mprog_give_trigger( Character* mob, Character* ch, OBJ_DATA* obj );
+  void mprog_give_trigger( Character* mob, Character* ch, Object* obj );
   void mprog_greet_trigger( Character* mob );
   void mprog_fight_trigger( Character* mob, Character* ch );
   void mprog_hitprcnt_trigger( Character* mob, Character* ch );
@@ -2566,7 +2566,7 @@ extern "C" {
 
   /* handler.c */
   bool can_take_proto( const Character *ch );
-  void explode( OBJ_DATA *obj );
+  void explode( Object *obj );
   int exp_level( short level );
   void affect_modify( Character *ch, Affect *paf, bool fAdd );
   void affect_to_char( Character *ch, Affect *paf );
@@ -2575,44 +2575,44 @@ extern "C" {
   void affect_join( Character *ch, Affect *paf );
   void char_from_room( Character *ch );
   void char_to_room( Character *ch, Room *pRoomIndex );
-  OBJ_DATA *obj_to_char( OBJ_DATA *obj, Character *ch );
-  void obj_from_char( OBJ_DATA *obj );
-  int apply_ac( const OBJ_DATA *obj, int iWear );
-  int count_obj_list( const OBJ_INDEX_DATA *obj, const OBJ_DATA *list );
-  void obj_from_room( OBJ_DATA *obj );
-  OBJ_DATA *obj_to_room( OBJ_DATA *obj, Room *pRoomIndex );
-  OBJ_DATA *obj_to_obj( OBJ_DATA *obj, OBJ_DATA *obj_to );
-  void obj_from_obj( OBJ_DATA *obj );
-  void extract_obj( OBJ_DATA *obj );
+  Object *obj_to_char( Object *obj, Character *ch );
+  void obj_from_char( Object *obj );
+  int apply_ac( const Object *obj, int iWear );
+  int count_obj_list( const ProtoObject *obj, const Object *list );
+  void obj_from_room( Object *obj );
+  Object *obj_to_room( Object *obj, Room *pRoomIndex );
+  Object *obj_to_obj( Object *obj, Object *obj_to );
+  void obj_from_obj( Object *obj );
+  void extract_obj( Object *obj );
   void extract_exit( Room *room, Exit *pexit );
   void extract_room( Room *room );
   void clean_room( Room *room );
-  void clean_obj( OBJ_INDEX_DATA *obj );
+  void clean_obj( ProtoObject *obj );
   void clean_mob( ProtoMobile *mob );
   void clean_resets( Area *tarea );
   void extract_char( Character *ch, bool fPull );
   Character *get_char_room( const Character *ch, const char *argument );
   Character *get_char_world( const Character *ch, const char *argument );
-  OBJ_DATA *get_obj_type( const OBJ_INDEX_DATA *pObjIndexData );
-  OBJ_DATA *get_obj_list( const Character *ch, const char *argument, OBJ_DATA *list );
-  OBJ_DATA *get_obj_list_rev( const Character *ch, const char *argument, OBJ_DATA *list );
-  OBJ_DATA *get_obj_here( const Character *ch, const char *argument );
-  OBJ_DATA *get_obj_world( const Character *ch, const char *argument );
-  int get_obj_number( const OBJ_DATA *obj );
-  int get_obj_weight( const OBJ_DATA *obj );
+  Object *get_obj_type( const ProtoObject *pObjIndexData );
+  Object *get_obj_list( const Character *ch, const char *argument, Object *list );
+  Object *get_obj_list_rev( const Character *ch, const char *argument, Object *list );
+  Object *get_obj_here( const Character *ch, const char *argument );
+  Object *get_obj_world( const Character *ch, const char *argument );
+  int get_obj_number( const Object *obj );
+  int get_obj_weight( const Object *obj );
   bool room_is_dark( const Room *pRoomIndex );
   bool room_is_private( const Character *ch, const Room *pRoomIndex );
-  const char *item_type_name( const OBJ_DATA *obj );
+  const char *item_type_name( const Object *obj );
   const char *affect_loc_name( int location );
-  ch_ret check_for_trap( Character *ch, const OBJ_DATA *obj, int flag );
+  ch_ret check_for_trap( Character *ch, const Object *obj, int flag );
   ch_ret check_room_for_traps( Character *ch, int flag );
-  bool is_trapped( const OBJ_DATA *obj );
-  OBJ_DATA *get_trap( const OBJ_DATA *obj );
-  ch_ret spring_trap( Character *ch, OBJ_DATA *obj );
+  bool is_trapped( const Object *obj );
+  Object *get_trap( const Object *obj );
+  ch_ret spring_trap( Character *ch, Object *obj );
   void showaffect( const Character *ch, const Affect *paf );
-  void set_cur_obj( OBJ_DATA *obj );
-  bool obj_extracted( const OBJ_DATA *obj );
-  void queue_extracted_obj( OBJ_DATA *obj );
+  void set_cur_obj( Object *obj );
+  bool obj_extracted( const Object *obj );
+  void queue_extracted_obj( Object *obj );
   void clean_obj_queue( void );
   void set_cur_char( Character *ch );
   bool char_died( const Character *ch );
@@ -2627,16 +2627,16 @@ extern "C" {
   bool in_hard_range( const Character *ch, const Area *tarea );
   bool chance( const Character *ch, short percent );
   bool chance_attrib( const Character *ch, short percent, short attrib );
-  OBJ_DATA *clone_object( const OBJ_DATA *obj );
-  void split_obj( OBJ_DATA *obj, int num );
-  void separate_obj( OBJ_DATA *obj );
-  bool empty_obj( OBJ_DATA *obj,OBJ_DATA *destobj,Room *destroom );
-  OBJ_DATA *find_obj( Character *ch, const char *argument, bool carryonly );
+  Object *clone_object( const Object *obj );
+  void split_obj( Object *obj, int num );
+  void separate_obj( Object *obj );
+  bool empty_obj( Object *obj,Object *destobj,Room *destroom );
+  Object *find_obj( Character *ch, const char *argument, bool carryonly );
   void boost_economy( Area *tarea, int gold );
   void lower_economy( Area *tarea, int gold );
   void economize_mobgold( Character *mob );
   bool economy_has( const Area *tarea, int gold );
-  int count_users(const OBJ_DATA *obj);
+  int count_users(const Object *obj);
 
   /* interp.c */
   bool  check_pos( Character *ch, int position );
@@ -2650,13 +2650,13 @@ extern "C" {
   /* magic.c */
   int ris_save( const Character *ch, int save_chance, int ris );
   void successful_casting( SKILLTYPE *skill, Character *ch,
-			   Character *victim, OBJ_DATA *obj );
+			   Character *victim, Object *obj );
   void failed_casting( SKILLTYPE *skill, Character *ch,
-		       Character *victim, OBJ_DATA *obj );
+		       Character *victim, Object *obj );
   bool is_immune( const Character *ch, short damtype );
   bool check_save( int sn, int level, const Character *ch, const Character *victim );
-  void immune_casting( SKILLTYPE *skill, Character *ch, Character *victim, OBJ_DATA *obj );
-  void *locate_targets( Character *ch, char *arg, int sn, Character **victim, OBJ_DATA **obj );
+  void immune_casting( SKILLTYPE *skill, Character *ch, Character *victim, Object *obj );
+  void *locate_targets( Character *ch, char *arg, int sn, Character **victim, Object **obj );
   bool  process_spell_components( Character *ch, int sn );
   int   ch_slookup( const Character *ch, const char *name );
   int   find_spell( const Character *ch, const char *name, bool know );
@@ -2673,7 +2673,7 @@ extern "C" {
   bool  saves_para_petri( int level, const Character *victim );
   bool  saves_breath( int level, const Character *victim );
   bool  saves_spell_staff( int level, const Character *victim );
-  ch_ret obj_cast_spell( int sn, int level, Character *ch, Character *victim, OBJ_DATA *obj );
+  ch_ret obj_cast_spell( int sn, int level, Character *ch, Character *victim, Object *obj );
   int dice_parse( const Character *ch, int level, char *exp );
   SKILLTYPE *get_skilltype( int sn );
 
@@ -2686,7 +2686,7 @@ extern "C" {
   bool  load_char_obj( Descriptor *d, char *name, bool preload );
   void  set_alarm ( long seconds );
   void  rEquipCharacter( Character *ch );
-  void fwrite_obj( const Character *ch, const OBJ_DATA *obj, FILE *fp,
+  void fwrite_obj( const Character *ch, const Object *obj, FILE *fp,
 		   int iNest, short os_type );
   void  fread_obj( Character *ch,  FILE *fp, short os_type );
   void  de_EquipCharacter( Character *ch );
@@ -2729,7 +2729,7 @@ extern "C" {
   void update_handler( void );
   void reboot_check( time_t reset );
   void auction_update( void );
-  void remove_portal( OBJ_DATA *portal );
+  void remove_portal( Object *portal );
   int max_level( const Character *ch, int ability );
   bool IsDroid( const Character *ch );
 
@@ -2817,22 +2817,22 @@ extern "C" {
   extern        Character *supermob;
 
   void oprog_speech_trigger( char *txt, Character *ch );
-  void oprog_random_trigger( OBJ_DATA *obj );
-  void oprog_wear_trigger( Character *ch, OBJ_DATA *obj );
-  bool oprog_use_trigger( Character *ch, OBJ_DATA *obj,
-                          Character *vict, OBJ_DATA *targ, void *vo );
-  void oprog_remove_trigger( Character *ch, OBJ_DATA *obj );
-  void oprog_examine_trigger( Character *ch, OBJ_DATA *obj );
-  void oprog_sac_trigger( Character *ch, OBJ_DATA *obj );
-  void oprog_damage_trigger( Character *ch, OBJ_DATA *obj );
-  void oprog_repair_trigger( Character *ch, OBJ_DATA *obj );
-  void oprog_drop_trigger( Character *ch, OBJ_DATA *obj );
-  void oprog_zap_trigger( Character *ch, OBJ_DATA *obj );
+  void oprog_random_trigger( Object *obj );
+  void oprog_wear_trigger( Character *ch, Object *obj );
+  bool oprog_use_trigger( Character *ch, Object *obj,
+                          Character *vict, Object *targ, void *vo );
+  void oprog_remove_trigger( Character *ch, Object *obj );
+  void oprog_examine_trigger( Character *ch, Object *obj );
+  void oprog_sac_trigger( Character *ch, Object *obj );
+  void oprog_damage_trigger( Character *ch, Object *obj );
+  void oprog_repair_trigger( Character *ch, Object *obj );
+  void oprog_drop_trigger( Character *ch, Object *obj );
+  void oprog_zap_trigger( Character *ch, Object *obj );
   void oprog_greet_trigger( Character *ch );
-  void oprog_get_trigger( Character *ch, OBJ_DATA *obj );
+  void oprog_get_trigger( Character *ch, Object *obj );
   char *oprog_type_to_name( int type );
-  void oprog_pull_trigger( Character *ch, OBJ_DATA *obj );
-  void oprog_push_trigger( Character *ch, OBJ_DATA *obj );
+  void oprog_pull_trigger( Character *ch, Object *obj );
+  void oprog_push_trigger( Character *ch, Object *obj );
 
   void rprog_leave_trigger( Character *ch );
   void rprog_enter_trigger( Character *ch );
@@ -2848,13 +2848,13 @@ extern "C" {
 
 #define OPROG_ACT_TRIGGER
 #ifdef OPROG_ACT_TRIGGER
-  void oprog_act_trigger( char *buf, OBJ_DATA *mobj, Character *ch,
-                          OBJ_DATA *obj, void *vo );
+  void oprog_act_trigger( char *buf, Object *mobj, Character *ch,
+                          Object *obj, void *vo );
 #endif
 #define RPROG_ACT_TRIGGER
 #ifdef RPROG_ACT_TRIGGER
   void rprog_act_trigger( char *buf, Room *room, Character *ch,
-                          OBJ_DATA *obj, void *vo );
+                          Object *obj, void *vo );
 #endif
 
 #define GET_BETTED_ON(ch)    ((ch)->betted_on)

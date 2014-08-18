@@ -98,7 +98,7 @@ void do_buy( Character *ch, char *argument )
   else
     {
       Character *keeper;
-      OBJ_DATA *obj;
+      Object *obj;
       int cost;
       int noi = 1;              /* Number of items */
       short mnoi = 20;  /* Max number of items to be bought at once */
@@ -243,7 +243,7 @@ void do_buy( Character *ch, char *argument )
 
       if ( IS_OBJ_STAT( obj, ITEM_INVENTORY ) && ( keeper->home == NULL ) )
         {
-          OBJ_DATA *buy_obj, *bag;
+          Object *buy_obj, *bag;
 
           buy_obj = create_object( obj->pIndexData, obj->level );
 

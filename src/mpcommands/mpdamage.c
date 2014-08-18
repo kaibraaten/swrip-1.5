@@ -85,7 +85,7 @@ static ch_ret simple_damage( Character *ch, Character *victim, int dam, int dt )
 {
   short dameq;
   bool npcvict;
-  OBJ_DATA *damobj;
+  Object *damobj;
 
   if ( !ch )
     {

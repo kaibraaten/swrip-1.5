@@ -114,7 +114,7 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
 {
   struct UserData *ud = (struct UserData*) userData;
   char buf[MAX_STRING_LENGTH];
-  OBJ_DATA *disguise = args->Object;
+  Object *disguise = args->Object;
 
   SetBit( disguise->wear_flags, ITEM_DISGUISE );
   SetBit( disguise->wear_flags, ITEM_TAKE );

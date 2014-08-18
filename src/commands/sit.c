@@ -3,7 +3,7 @@
 
 void do_sit (Character *ch, char *argument )
 {
-  OBJ_DATA *obj = NULL;
+  Object *obj = NULL;
 
   if (ch->position == POS_FIGHTING)
     {

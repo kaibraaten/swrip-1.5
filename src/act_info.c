@@ -55,7 +55,7 @@ int get_class_from_name( const char *arg )
   return iClass;
 }
 
-char *format_obj_to_char( const OBJ_DATA *obj, const Character *ch, bool fShort )
+char *format_obj_to_char( const Object *obj, const Character *ch, bool fShort )
 {
   static char buf[MAX_STRING_LENGTH];
 
@@ -149,13 +149,13 @@ char *halucinated_object( int ms, bool fShort )
  * Show a list to a character.
  * Can coalesce duplicated items.
  */
-void show_list_to_char( const OBJ_DATA *list, Character *ch, bool fShort, bool fShowNothing )
+void show_list_to_char( const Object *list, Character *ch, bool fShort, bool fShowNothing )
 {
   char **prgpstrShow;
   int *prgnShow;
   int *pitShow;
   char *pstrShow;
-  const OBJ_DATA *obj;
+  const Object *obj;
   int nShow;
   int iShow;
   int count, offcount, tmp, ms, cnt;

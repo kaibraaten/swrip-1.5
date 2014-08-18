@@ -6,7 +6,7 @@ void do_value( Character *ch, char *argument )
 {
   char buf[MAX_STRING_LENGTH];
   Character *keeper;
-  OBJ_DATA *obj;
+  Object *obj;
   int cost;
 
   if ( argument[0] == '\0' )

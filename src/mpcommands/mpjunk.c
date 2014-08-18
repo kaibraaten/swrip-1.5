@@ -8,8 +8,8 @@
 void do_mpjunk( Character *ch, char *argument )
 {
   char      arg[ MAX_INPUT_LENGTH ];
-  OBJ_DATA *obj;
-  OBJ_DATA *obj_next;
+  Object *obj;
+  Object *obj_next;
 
   if ( IsAffectedBy( ch, AFF_CHARM ) )
     return;

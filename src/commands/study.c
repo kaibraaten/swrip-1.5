@@ -5,7 +5,7 @@
 void do_study( Character *ch, char *argument ) /* study by Absalom */
 {
   char arg[MAX_INPUT_LENGTH];
-  OBJ_DATA *obj;
+  Object *obj;
   int sn = 0, bookskills = 0, book;
 
   OneArgument( argument, arg );

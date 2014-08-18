@@ -1,7 +1,7 @@
 #include "mud.h"
 #include "grub.h"
 
-extern OBJ_INDEX_DATA *obj_index_hash[MAX_KEY_HASH];
+extern ProtoObject *obj_index_hash[MAX_KEY_HASH];
 
 /*
  * The "showlayers" command is used to list all layerable eq in the
@@ -12,7 +12,7 @@ extern OBJ_INDEX_DATA *obj_index_hash[MAX_KEY_HASH];
 
 void do_showlayers( Character *ch, char *argument )
 {
-  OBJ_INDEX_DATA *pObj;
+  ProtoObject *pObj;
   char arg1[MAX_STRING_LENGTH];
 
   int hash;                                           /* hash counter */

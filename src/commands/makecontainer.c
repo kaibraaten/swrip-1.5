@@ -46,7 +46,7 @@ void do_makecontainer( Character *ch, char *argument )
 static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *eventArgs )
 {
   struct UserData *ud = (struct UserData*) userData;
-  OBJ_DATA *container = eventArgs->Object;
+  Object *container = eventArgs->Object;
   char description[MAX_STRING_LENGTH];
 
   SetBit( container->wear_flags, ITEM_TAKE );

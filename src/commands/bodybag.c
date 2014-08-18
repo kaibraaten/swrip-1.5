@@ -5,7 +5,7 @@ void do_bodybag( Character *ch, char *argument )
   char buf2[MAX_STRING_LENGTH];
   char buf3[MAX_STRING_LENGTH];
   char arg[MAX_INPUT_LENGTH];
-  OBJ_DATA *obj;
+  Object *obj;
   bool found;
 
   OneArgument( argument, arg );

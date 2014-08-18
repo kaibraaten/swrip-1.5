@@ -4,7 +4,7 @@
 void do_open( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  OBJ_DATA *obj = NULL;
+  Object *obj = NULL;
   Exit *pexit = NULL;
   int door = 0;
 

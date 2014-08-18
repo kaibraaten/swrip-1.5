@@ -7,7 +7,7 @@ static void opfind_help (Character *ch);
  */
 void do_opfind( Character *ch, char *argument )   /* Gorog */
 {
-  OBJ_INDEX_DATA  *   pObj;
+  ProtoObject  *   pObj;
   MPROG_DATA      *   pProg;
   char                arg1 [MAX_INPUT_LENGTH];
   char                arg2 [MAX_INPUT_LENGTH];

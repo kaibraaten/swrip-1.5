@@ -4,7 +4,7 @@
 void do_disarm( Character *ch, char *argument )
 {
   Character *victim;
-  OBJ_DATA *obj;
+  Object *obj;
   int percent;
 
   if ( IsNpc(ch) && IsAffectedBy( ch, AFF_CHARM ) )

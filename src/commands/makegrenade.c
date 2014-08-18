@@ -35,7 +35,7 @@ static void OnStart( Character *ch, char *argument )
   bool checkbatt = false;
   bool checkchem = false;
   bool checkcirc = false;
-  OBJ_DATA *obj = NULL;
+  Object *obj = NULL;
 
   strcpy( arg , argument );
 
@@ -128,8 +128,8 @@ static void OnFinished( Character *ch )
   bool checkbatt = false;
   bool checkchem = false;
   bool checkcirc = false;
-  OBJ_DATA *obj = NULL;
-  OBJ_INDEX_DATA *pObjIndex = NULL;
+  Object *obj = NULL;
+  ProtoObject *pObjIndex = NULL;
   vnum_t vnum = INVALID_VNUM;
   long xpgain = 0;
 

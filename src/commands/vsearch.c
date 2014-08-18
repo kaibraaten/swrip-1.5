@@ -5,8 +5,8 @@ void do_vsearch( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   bool found = false;
-  OBJ_DATA *obj;
-  OBJ_DATA *in_obj;
+  Object *obj;
+  Object *in_obj;
   int obj_counter = 1;
   int argi;
 

@@ -4,7 +4,7 @@
 
 void do_auction (Character *ch, char *argument)
 {
-  OBJ_DATA *obj;
+  Object *obj;
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
   char buf[MAX_STRING_LENGTH];

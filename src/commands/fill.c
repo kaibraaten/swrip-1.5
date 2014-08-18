@@ -9,8 +9,8 @@ void do_fill( Character *ch, char *argument )
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
-  OBJ_DATA *obj;
-  OBJ_DATA *source;
+  Object *obj;
+  Object *source;
   short    dest_item, src_item1, src_item2, src_item3, src_item4;
   int       diff;
   bool      all = false;
@@ -152,7 +152,7 @@ void do_fill( Character *ch, char *argument )
   if ( !source )
     {
       bool      found = false;
-      OBJ_DATA *src_next;
+      Object *src_next;
 
       found = false;
       separate_obj( obj );
@@ -223,7 +223,7 @@ void do_fill( Character *ch, char *argument )
 
   if (dest_item == ITEM_CONTAINER)
     {
-      OBJ_DATA *otmp, *otmp_next;
+      Object *otmp, *otmp_next;
       char name[MAX_INPUT_LENGTH];
       Character *gch;
       char *pd;

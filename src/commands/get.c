@@ -1,15 +1,15 @@
 #include "character.h"
 #include "mud.h"
 
-static void get_obj( Character *ch, OBJ_DATA *obj, OBJ_DATA *container );
+static void get_obj( Character *ch, Object *obj, Object *container );
 
 void do_get( Character *ch, char *argument )
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
-  OBJ_DATA *obj = NULL;
-  OBJ_DATA *obj_next = NULL;
-  OBJ_DATA *container = NULL;
+  Object *obj = NULL;
+  Object *obj_next = NULL;
+  Object *container = NULL;
   short number = 0;
   bool found = false;
   bool foundowner = false;
@@ -340,7 +340,7 @@ void do_get( Character *ch, char *argument )
     }
 }
 
-static void get_obj( Character *ch, OBJ_DATA *obj, OBJ_DATA *container )
+static void get_obj( Character *ch, Object *obj, Object *container )
 {
   Clan *clan;
   int weight;

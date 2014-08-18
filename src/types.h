@@ -62,10 +62,10 @@ struct ExtraDescription;
 typedef struct ExtraDescription        ExtraDescription;
 
 struct HelpFile;
-typedef struct HelpFile               HelpFile;
+typedef struct HelpFile                HelpFile;
 
 struct ProtoMobile;
-typedef struct ProtoMobile          ProtoMobile;
+typedef struct ProtoMobile             ProtoMobile;
 
 struct Note;
 typedef struct Note                    Note;
@@ -73,11 +73,11 @@ typedef struct Note                    Note;
 struct Board;
 typedef struct Board                   Board;
 
-struct obj_data;
-typedef struct obj_data                OBJ_DATA;
+struct Object;
+typedef struct Object                  Object;
 
-struct obj_index_data;
-typedef struct obj_index_data          OBJ_INDEX_DATA;
+struct ProtoObject;
+typedef struct ProtoObject             ProtoObject;
 
 struct PCData;
 typedef struct PCData                  PCData;

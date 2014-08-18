@@ -6,7 +6,7 @@
  */
 ch_ret spell_obj_inv( int sn, int level, Character *ch, void *vo )
 {
-  OBJ_DATA *obj = (OBJ_DATA *) vo;
+  Object *obj = (Object *) vo;
   SKILLTYPE *skill = get_skilltype(sn);
 
   if ( !obj )
@@ -105,7 +105,7 @@ ch_ret spell_obj_inv( int sn, int level, Character *ch, void *vo )
         }
       switch( SPELL_POWER(skill) )              /* clone object */
         {
-          OBJ_DATA *clone;
+          Object *clone;
 
         default:
         case SP_NONE:

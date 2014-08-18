@@ -62,7 +62,7 @@
 bool MOBtrigger;
 
 int mprog_do_command( char *cmnd, Character *mob, Character *actor,
-                      OBJ_DATA *obj, void *vo, Character *rndm,
+                      Object *obj, void *vo, Character *rndm,
                       bool ignore, bool ignore_ors );
 
 /*
@@ -81,23 +81,23 @@ char *mprog_next_command( char* clist );
 bool mprog_seval( const char* lhs, const char* opr, const char* rhs, Character *mob );
 bool mprog_veval( int lhs, const char* opr, int rhs, Character *mob );
 int mprog_do_ifcheck( const char* ifcheck, Character* mob, Character* actor,
-		      OBJ_DATA* obj, void* vo, Character* rndm );
+		      Object* obj, void* vo, Character* rndm );
 void mprog_translate( char ch, char* t, Character* mob,
-		      Character* actor, OBJ_DATA* obj,
+		      Character* actor, Object* obj,
 		      void* vo, Character* rndm );
 void mprog_driver( char* com_list, Character* mob,
-		   Character* actor, OBJ_DATA* obj,
+		   Character* actor, Object* obj,
 		   void* vo, bool single_step );
 
 bool mprog_keyword_check( const char *argu, const char *argl );
 
 
-void oprog_wordlist_check( char *arg, Character *mob, Character *actor, OBJ_DATA *obj, void *vo, int type, OBJ_DATA *iobj );
-void set_supermob(OBJ_DATA *obj);
-bool oprog_percent_check( Character *mob, Character *actor, OBJ_DATA *obj, void *vo, int type);
-void rprog_percent_check( Character *mob, Character *actor, OBJ_DATA *obj, void *vo, int type);
+void oprog_wordlist_check( char *arg, Character *mob, Character *actor, Object *obj, void *vo, int type, Object *iobj );
+void set_supermob(Object *obj);
+bool oprog_percent_check( Character *mob, Character *actor, Object *obj, void *vo, int type);
+void rprog_percent_check( Character *mob, Character *actor, Object *obj, void *vo, int type);
 void rprog_wordlist_check( char *arg, Character *mob, Character *actor,
-                           OBJ_DATA *obj, void *vo, int type, Room *room );
+                           Object *obj, void *vo, int type, Room *room );
 
 /***************************************************************************
  * Local function code and brief comments.
@@ -223,7 +223,7 @@ bool mprog_veval( int lhs, const char *opr, int rhs, Character *mob )
  * same action on each variable..
  */
 int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
-                      OBJ_DATA *obj, void *vo, Character *rndm )
+                      Object *obj, void *vo, Character *rndm )
 {
   char cvar[MAX_INPUT_LENGTH];
   char chck[MAX_INPUT_LENGTH];
@@ -232,7 +232,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
   const char *point = ifcheck;
   char *pchck = chck;
   Character *chkchar = NULL;
-  OBJ_DATA *chkobj = NULL;
+  Object *chkobj = NULL;
   int lhsvl = 0, rhsvl = 0;
 
   if ( !*point )
@@ -358,7 +358,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
 	  break;
 
         case 'p':
-	  chkobj = (OBJ_DATA *)vo;
+	  chkobj = (Object *)vo;
 	  break;
 
         default:
@@ -465,7 +465,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
 
   if ( !StrCmp(chck, "ovnumhere") )
     {
-      OBJ_DATA *pObj = NULL;
+      Object *pObj = NULL;
       int vnum = atoi(cvar);
 
       if ( vnum < MIN_VNUM || vnum > MAX_VNUM )
@@ -510,7 +510,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
 
   if ( !StrCmp(chck, "otypehere") )
     {
-      OBJ_DATA *pObj = NULL;
+      Object *pObj = NULL;
       int type = 0;
 
       if ( IsNumber(cvar) )
@@ -560,7 +560,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
 
   if ( !StrCmp(chck, "ovnumroom") )
     {
-      OBJ_DATA *pObj = NULL;
+      Object *pObj = NULL;
       int vnum = atoi(cvar);
 
       if ( vnum < MIN_VNUM || vnum > MAX_VNUM )
@@ -597,7 +597,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
 
   if ( !StrCmp(chck, "otyperoom") )
     {
-      OBJ_DATA *pObj = NULL;
+      Object *pObj = NULL;
       int type = 0;
 
       if ( IsNumber(cvar) )
@@ -643,7 +643,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
 
   if ( !StrCmp(chck, "ovnumcarry") )
     {
-      OBJ_DATA *pObj = NULL;
+      Object *pObj = NULL;
       int vnum = atoi(cvar);
 
       if ( vnum < MIN_VNUM || vnum > MAX_VNUM )
@@ -679,7 +679,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
 
   if ( !StrCmp(chck, "otypecarry") )
     {
-      OBJ_DATA *pObj = NULL;
+      Object *pObj = NULL;
       int type = 0;
 
       if ( IsNumber(cvar) )
@@ -723,7 +723,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
     }
   if ( !StrCmp(chck, "ovnumwear") )
     {
-      OBJ_DATA *pObj;
+      Object *pObj;
       int vnum = atoi(cvar);
 
       if ( vnum < MIN_VNUM || vnum > MAX_VNUM )
@@ -760,7 +760,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
 
   if ( !StrCmp(chck, "otypewear") )
     {
-      OBJ_DATA *pObj;
+      Object *pObj;
       int type;
 
       if ( IsNumber(cvar) )
@@ -794,7 +794,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
 
   if ( !StrCmp(chck, "ovnuminv") )
     {
-      OBJ_DATA *pObj;
+      Object *pObj;
       int vnum = atoi(cvar);
 
       if ( vnum < MIN_VNUM || vnum > MAX_VNUM )
@@ -823,7 +823,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
 
   if ( !StrCmp(chck, "otypeinv") )
     {
-      OBJ_DATA *pObj;
+      Object *pObj;
       int type;
 
       if ( IsNumber(cvar) )
@@ -1056,7 +1056,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
 
       if (!StrCmp(chck, "iscarrying"))
         {
-          OBJ_DATA *pObj;
+          Object *pObj;
           int vnum = atoi(rval);
 
           if (vnum < 1 || vnum > 2097152000)
@@ -1080,7 +1080,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
 
       if ( !StrCmp(chck, "iswearing") )
 	{
-	  OBJ_DATA *pObj;
+	  Object *pObj;
 	  int vnum = atoi(rval);
 	  int iWear;
 
@@ -1206,13 +1206,13 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
  *  Added char_died and obj_extracted checks    -Thoric
  */
 void mprog_translate( char ch, char *t, Character *mob, Character *actor,
-                      OBJ_DATA *obj, void *vo, Character *rndm )
+                      Object *obj, void *vo, Character *rndm )
 {
   static char *he_she[] = { "it",  "he",  "she" };
   static char *him_her[] = { "it",  "him", "her" };
   static char *his_her[] = { "its", "his", "her" };
   Character   *vict = (Character *) vo;
-  OBJ_DATA    *v_obj = (OBJ_DATA  *) vo;
+  Object    *v_obj = (Object  *) vo;
 
   *t = '\0';
   switch ( ch ) {
@@ -1679,7 +1679,7 @@ void mprog_translate( char ch, char *t, Character *mob, Character *actor,
  *
  */
 void mprog_driver ( char *com_list, Character *mob, Character *actor,
-                    OBJ_DATA *obj, void *vo, bool single_step)
+                    Object *obj, void *vo, bool single_step)
 {
   char tmpcmndlst[ MAX_STRING_LENGTH ];
   char *command_list = NULL;
@@ -1982,7 +1982,7 @@ void mprog_driver ( char *com_list, Character *mob, Character *actor,
  * to perform the the commands.  Written by Narn, Dec 95.
  */
 int mprog_do_command( char *cmnd, Character *mob, Character *actor,
-                      OBJ_DATA *obj, void *vo, Character *rndm,
+                      Object *obj, void *vo, Character *rndm,
                       bool ignore, bool ignore_ors )
 {
   char firstword[MAX_INPUT_LENGTH];
@@ -2169,7 +2169,7 @@ bool mprog_keyword_check( const char *argu, const char *argl )
  *  To see how this works, look at the various trigger routines..
  */
 void mprog_wordlist_check( char *arg, Character *mob, Character *actor,
-                           OBJ_DATA *obj, void *vo, int type )
+                           Object *obj, void *vo, int type )
 {
 
   char        temp1[ MAX_STRING_LENGTH ];
@@ -2251,7 +2251,7 @@ void mprog_wordlist_check( char *arg, Character *mob, Character *actor,
     }
 }
 
-void mprog_percent_check( Character *mob, Character *actor, OBJ_DATA *obj,
+void mprog_percent_check( Character *mob, Character *actor, Object *obj,
                           void *vo, int type)
 {
   MPROG_DATA * mprg;
@@ -2269,7 +2269,7 @@ void mprog_percent_check( Character *mob, Character *actor, OBJ_DATA *obj,
     }
 }
 
-void mprog_time_check( Character *mob, Character *actor, OBJ_DATA *obj,
+void mprog_time_check( Character *mob, Character *actor, Object *obj,
                        void *vo, int type)
 {
   MPROG_DATA * mprg;
@@ -2322,7 +2322,7 @@ void mob_act_add( Character *mob )
  * trigger calls.
  */
 void mprog_act_trigger( char *buf, Character *mob, Character *ch,
-                        OBJ_DATA *obj, void *vo)
+                        Object *obj, void *vo)
 {
   MPROG_ACT_LIST * tmp_act = NULL;
   MPROG_DATA *mprg = NULL;
@@ -2372,7 +2372,7 @@ void mprog_bribe_trigger( Character *mob, Character *ch, int amount )
 
   char buf[ MAX_STRING_LENGTH ];
   MPROG_DATA *mprg = NULL;
-  OBJ_DATA   *obj = NULL;
+  Object   *obj = NULL;
 
   if ( IsNpc( mob )
        && ( mob->pIndexData->mprog.progtypes & BRIBE_PROG ) )
@@ -2431,7 +2431,7 @@ void mprog_fight_trigger( Character *mob, Character *ch )
     }
 }
 
-void mprog_give_trigger( Character *mob, Character *ch, OBJ_DATA *obj )
+void mprog_give_trigger( Character *mob, Character *ch, Object *obj )
 {
   char buf[MAX_INPUT_LENGTH];
   MPROG_DATA *mprg = NULL;
@@ -2568,7 +2568,7 @@ void mprog_script_trigger( Character *mob )
     }
 }
 
-void oprog_script_trigger( OBJ_DATA *obj )
+void oprog_script_trigger( Object *obj )
 {
   MPROG_DATA * mprg;
 
@@ -2620,10 +2620,10 @@ void rprog_script_trigger( Room *room )
 /*
  *  Mudprogram additions begin here
  */
-void set_supermob( OBJ_DATA *obj)
+void set_supermob( Object *obj)
 {
   Room *room;
-  OBJ_DATA *in_obj;
+  Object *in_obj;
   char buf[200];
 
   if ( !supermob )
@@ -2672,7 +2672,7 @@ void release_supermob( )
   char_to_room( supermob, get_room_index( 3 ) );
 }
 
-bool oprog_percent_check( Character *mob, Character *actor, OBJ_DATA *obj,
+bool oprog_percent_check( Character *mob, Character *actor, Object *obj,
                           void *vo, int type)
 {
   MPROG_DATA * mprg;
@@ -2700,7 +2700,7 @@ bool oprog_percent_check( Character *mob, Character *actor, OBJ_DATA *obj,
 
 void oprog_greet_trigger( Character *ch )
 {
-  OBJ_DATA *vobj;
+  Object *vobj;
 
   for ( vobj=ch->in_room->first_content; vobj; vobj = vobj->next_content )
     {
@@ -2715,7 +2715,7 @@ void oprog_greet_trigger( Character *ch )
 
 void oprog_speech_trigger( char *txt, Character *ch )
 {
-  OBJ_DATA *vobj;
+  Object *vobj;
 
   /* supermob is set and released in oprog_wordlist_check */
   for ( vobj=ch->in_room->first_content; vobj; vobj = vobj->next_content )
@@ -2732,7 +2732,7 @@ void oprog_speech_trigger( char *txt, Character *ch )
  * make sure to put an if(!obj) continue
  * after it
  */
-void oprog_random_trigger( OBJ_DATA *obj )
+void oprog_random_trigger( Object *obj )
 {
   if (!obj || !obj->pIndexData)
     return;
@@ -2749,7 +2749,7 @@ void oprog_random_trigger( OBJ_DATA *obj )
  * in wear_obj, between each successful EquipCharacter
  * the subsequent return
  */
-void oprog_wear_trigger( Character *ch, OBJ_DATA *obj )
+void oprog_wear_trigger( Character *ch, Object *obj )
 {
   if ( obj->pIndexData->mprog.progtypes & WEAR_PROG )
     {
@@ -2759,8 +2759,8 @@ void oprog_wear_trigger( Character *ch, OBJ_DATA *obj )
     }
 }
 
-bool oprog_use_trigger( Character *ch, OBJ_DATA *obj, Character *vict,
-                        OBJ_DATA *targ, void *vo )
+bool oprog_use_trigger( Character *ch, Object *obj, Character *vict,
+                        Object *targ, void *vo )
 {
   bool executed = false;
 
@@ -2795,7 +2795,7 @@ bool oprog_use_trigger( Character *ch, OBJ_DATA *obj, Character *vict,
  * do a if(!ch) return right after, and return true (?)
  * if !ch
  */
-void oprog_remove_trigger( Character *ch, OBJ_DATA *obj )
+void oprog_remove_trigger( Character *ch, Object *obj )
 {
   if ( obj->pIndexData->mprog.progtypes & REMOVE_PROG )
     {
@@ -2808,7 +2808,7 @@ void oprog_remove_trigger( Character *ch, OBJ_DATA *obj )
 /*
  * call in do_sac, right before extract_obj
  */
-void oprog_sac_trigger( Character *ch, OBJ_DATA *obj )
+void oprog_sac_trigger( Character *ch, Object *obj )
 {
   if ( obj->pIndexData->mprog.progtypes & SAC_PROG )
     {
@@ -2822,7 +2822,7 @@ void oprog_sac_trigger( Character *ch, OBJ_DATA *obj )
  * call in do_get, right before check_for_trap
  * do a if(!ch) return right after
  */
-void oprog_get_trigger( Character *ch, OBJ_DATA *obj )
+void oprog_get_trigger( Character *ch, Object *obj )
 {
   if ( obj->pIndexData->mprog.progtypes & GET_PROG )
     {
@@ -2835,7 +2835,7 @@ void oprog_get_trigger( Character *ch, OBJ_DATA *obj )
 /*
  * called in damage_obj in act_obj.c
  */
-void oprog_damage_trigger( Character *ch, OBJ_DATA *obj )
+void oprog_damage_trigger( Character *ch, Object *obj )
 {
   if ( obj->pIndexData->mprog.progtypes & DAMAGE_PROG )
     {
@@ -2848,7 +2848,7 @@ void oprog_damage_trigger( Character *ch, OBJ_DATA *obj )
 /*
  * called in do_repair in shops.c
  */
-void oprog_repair_trigger( Character *ch, OBJ_DATA *obj )
+void oprog_repair_trigger( Character *ch, Object *obj )
 {
   if ( obj->pIndexData->mprog.progtypes & REPAIR_PROG )
     {
@@ -2862,7 +2862,7 @@ void oprog_repair_trigger( Character *ch, OBJ_DATA *obj )
  * call twice in do_drop, right after the act( AT_ACTION,...)
  * do a if(!ch) return right after
  */
-void oprog_drop_trigger( Character *ch, OBJ_DATA *obj )
+void oprog_drop_trigger( Character *ch, Object *obj )
 {
   if ( obj->pIndexData->mprog.progtypes & DROP_PROG )
     {
@@ -2875,7 +2875,7 @@ void oprog_drop_trigger( Character *ch, OBJ_DATA *obj )
 /*
  * call towards end of do_examine, right before check_for_trap
  */
-void oprog_examine_trigger( Character *ch, OBJ_DATA *obj )
+void oprog_examine_trigger( Character *ch, Object *obj )
 {
   if ( obj->pIndexData->mprog.progtypes & EXA_PROG )
     {
@@ -2888,7 +2888,7 @@ void oprog_examine_trigger( Character *ch, OBJ_DATA *obj )
 /*
  * call in fight.c, group_gain, after (?) the obj_to_room
  */
-void oprog_zap_trigger( Character *ch, OBJ_DATA *obj )
+void oprog_zap_trigger( Character *ch, Object *obj )
 {
   if ( obj->pIndexData->mprog.progtypes & ZAP_PROG )
     {
@@ -2902,7 +2902,7 @@ void oprog_zap_trigger( Character *ch, OBJ_DATA *obj )
  * call in levers.c, towards top of do_push_or_pull
  *  see note there
  */
-void oprog_pull_trigger( Character *ch, OBJ_DATA *obj )
+void oprog_pull_trigger( Character *ch, Object *obj )
 {
   if ( obj->pIndexData->mprog.progtypes & PULL_PROG )
     {
@@ -2916,7 +2916,7 @@ void oprog_pull_trigger( Character *ch, OBJ_DATA *obj )
  * call in levers.c, towards top of do_push_or_pull
  *  see note there
  */
-void oprog_push_trigger( Character *ch, OBJ_DATA *obj )
+void oprog_push_trigger( Character *ch, Object *obj )
 {
   if ( obj->pIndexData->mprog.progtypes & PUSH_PROG )
     {
@@ -2926,10 +2926,10 @@ void oprog_push_trigger( Character *ch, OBJ_DATA *obj )
     }
 }
 
-void obj_act_add( OBJ_DATA *obj );
+void obj_act_add( Object *obj );
 
-void oprog_act_trigger( char *buf, OBJ_DATA *mobj, Character *ch,
-                        OBJ_DATA *obj, void *vo )
+void oprog_act_trigger( char *buf, Object *mobj, Character *ch,
+                        Object *obj, void *vo )
 {
   if ( mobj->pIndexData->mprog.progtypes & ACT_PROG )
     {
@@ -2953,7 +2953,7 @@ void oprog_act_trigger( char *buf, OBJ_DATA *mobj, Character *ch,
 }
 
 void oprog_wordlist_check( char *arg, Character *mob, Character *actor,
-                           OBJ_DATA *obj, void *vo, int type, OBJ_DATA *iobj )
+                           Object *obj, void *vo, int type, Object *iobj )
 {
   MPROG_DATA *mprg;
 
@@ -3069,7 +3069,7 @@ void rset_supermob( Room *room)
     }
 }
 
-void rprog_percent_check( Character *mob, Character *actor, OBJ_DATA *obj,
+void rprog_percent_check( Character *mob, Character *actor, Object *obj,
                           void *vo, int type)
 {
   MPROG_DATA * mprg;
@@ -3101,7 +3101,7 @@ void rprog_percent_check( Character *mob, Character *actor, OBJ_DATA *obj,
  */
 void room_act_add( Room *room );
 void rprog_act_trigger( char *buf, Room *room, Character *ch,
-                        OBJ_DATA *obj, void *vo )
+                        Object *obj, void *vo )
 {
   if ( room->mprog.progtypes & ACT_PROG )
     {
@@ -3208,7 +3208,7 @@ void rprog_random_trigger( Character *ch )
 }
 
 void rprog_wordlist_check( char *arg, Character *mob, Character *actor,
-                           OBJ_DATA *obj, void *vo, int type, Room *room )
+                           Object *obj, void *vo, int type, Room *room )
 {
   MPROG_DATA *mprg;
 
@@ -3300,7 +3300,7 @@ void rprog_wordlist_check( char *arg, Character *mob, Character *actor,
     }
 }
 
-void rprog_time_check( Character *mob, Character *actor, OBJ_DATA *obj,
+void rprog_time_check( Character *mob, Character *actor, Object *obj,
                        void *vo, int type )
 {
   Room * room = (Room *) vo;
@@ -3417,7 +3417,7 @@ void room_act_update( void )
     }
 }
 
-void obj_act_add( OBJ_DATA *obj )
+void obj_act_add( Object *obj )
 {
   struct act_prog_data *runner;
 
@@ -3441,7 +3441,7 @@ void obj_act_update( void )
 
   while ( (runner = obj_act_list) != NULL )
     {
-      OBJ_DATA *obj = (OBJ_DATA*)runner->vo;
+      Object *obj = (Object*)runner->vo;
       MPROG_ACT_LIST *mpact;
 
       while ( (mpact = obj->mprog.mpact) != NULL )

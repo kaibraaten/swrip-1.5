@@ -10,7 +10,7 @@ void do_oset( Character *ch, char *argument )
   char arg3 [MAX_INPUT_LENGTH];
   char buf  [MAX_STRING_LENGTH];
   char outbuf  [MAX_STRING_LENGTH];
-  OBJ_DATA *obj, *tmpobj;
+  Object *obj, *tmpobj;
   ExtraDescription *ed;
   bool lockobj;
   char *origarg = argument;
@@ -51,7 +51,7 @@ void do_oset( Character *ch, char *argument )
       ed  = (ExtraDescription*)ch->dest_buf;
       FreeMemory( ed->description );
       ed->description = CopyBuffer( ch );
-      tmpobj = (OBJ_DATA*)ch->spare_ptr;
+      tmpobj = (Object*)ch->spare_ptr;
       StopEditing( ch );
       ch->dest_buf = tmpobj;
       ch->substate = ch->tempnum;
@@ -66,7 +66,7 @@ void do_oset( Character *ch, char *argument )
           return;
         }
 
-      obj = (OBJ_DATA*)ch->dest_buf;
+      obj = (Object*)ch->dest_buf;
 
       if ( obj && obj_extracted(obj) )
         {
@@ -84,7 +84,7 @@ void do_oset( Character *ch, char *argument )
           obj->pIndexData->description = CopyString( obj->description );
 	}
 
-      tmpobj = (OBJ_DATA*)ch->spare_ptr;
+      tmpobj = (Object*)ch->spare_ptr;
       StopEditing( ch );
       ch->substate = ch->tempnum;
       ch->dest_buf = tmpobj;
@@ -96,7 +96,7 @@ void do_oset( Character *ch, char *argument )
 
   if ( ch->substate == SUB_REPEATCMD )
     {
-      obj = (OBJ_DATA*)ch->dest_buf;
+      obj = (Object*)ch->dest_buf;
 
       if ( obj && obj_extracted(obj) )
         {
@@ -602,7 +602,7 @@ void do_oset( Character *ch, char *argument )
 
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
         {
-          OBJ_INDEX_DATA *pObjIndex;
+          ProtoObject *pObjIndex;
 
           pObjIndex = obj->pIndexData;
           for ( paf = pObjIndex->first_affect; paf; paf = paf->next )

@@ -28,7 +28,7 @@
 /*
  *  Externals
  */
-void send_obj_page_to_char(Character * ch, OBJ_INDEX_DATA * idx, char page);
+void send_obj_page_to_char(Character * ch, ProtoObject * idx, char page);
 void send_room_page_to_char(Character * ch, Room * idx, char page);
 void send_page_to_char(Character * ch, ProtoMobile * idx, char page);
 void send_control_page_to_char(Character * ch, char page);

@@ -3,7 +3,7 @@
 
 void do_tamp( Character *ch, char *argument )
 {
-  OBJ_DATA *pipe_obj;
+  Object *pipe_obj;
   char arg[MAX_INPUT_LENGTH];
 
   OneArgument( argument, arg );

@@ -41,7 +41,7 @@ Reset *ParseReset( Area *tarea, char *argument, Character *ch );
 
 bool IsRoomReset( Reset *pReset, Room *aRoom,
 		    Area *pArea );
-void AddObjectReset( Area *pArea, char cm, OBJ_DATA *obj, int v2, int v3 );
+void AddObjectReset( Area *pArea, char cm, Object *obj, int v2, int v3 );
 void DeleteReset( Area *pArea, Reset *pReset );
 Reset *FindReset( Area *pArea, Room *pRoom, int num );
 void ListResets( Character *ch, Area *pArea,
@@ -363,7 +363,7 @@ static Reset *FindObjectReset(Character *ch, Area *pArea,
     {
       char arg[MAX_INPUT_LENGTH];
       int cnt = 0, num = NumberArgument(name, arg);
-      OBJ_INDEX_DATA *pObjTo = NULL;
+      ProtoObject *pObjTo = NULL;
 
       for ( reset = pArea->first_reset; reset; reset = reset->next )
         {
@@ -479,7 +479,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
   Reset *reset = NULL;
   ProtoMobile *pMob = NULL;
   Room *pRoom = NULL;
-  OBJ_INDEX_DATA *pObj = NULL;
+  ProtoObject *pObj = NULL;
   int num = 0;
   vnum_t vnum = INVALID_VNUM;
   char *origarg = argument;
@@ -1267,9 +1267,9 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
     }
 }
 
-void AddObjectReset( Area *pArea, char cm, OBJ_DATA *obj, int v2, int v3 )
+void AddObjectReset( Area *pArea, char cm, Object *obj, int v2, int v3 )
 {
-  OBJ_DATA *inobj;
+  Object *inobj;
   static int iNest;
 
   if ( (cm == 'O' || cm == 'P') && obj->pIndexData->vnum == OBJ_VNUM_TRAP )
@@ -1320,7 +1320,7 @@ void AddObjectReset( Area *pArea, char cm, OBJ_DATA *obj, int v2, int v3 )
 void InstallRoom( Area *pArea, Room *pRoom, bool dodoors )
 {
   Character *rch = NULL;
-  OBJ_DATA *obj = NULL;
+  Object *obj = NULL;
 
   for ( rch = pRoom->first_person; rch; rch = rch->next_in_room )
     {
@@ -1407,7 +1407,7 @@ void WipeResets( Area *pArea, Room *pRoom )
     }
 }
 
-static int GenerateItemLevel( Area *pArea, OBJ_INDEX_DATA *pObjIndex )
+static int GenerateItemLevel( Area *pArea, ProtoObject *pObjIndex )
 {
   int olevel = 0;
   int min = umax(pArea->low_soft_range, 1);
@@ -1458,14 +1458,14 @@ void ResetArea( Area *pArea )
   Reset *pReset = NULL;
   Reset *next_reset = NULL;
   Character *mob = NULL;
-  OBJ_DATA *obj = NULL;
-  OBJ_DATA *lastobj = NULL;
+  Object *obj = NULL;
+  Object *lastobj = NULL;
   Room *pRoomIndex = NULL;
   ProtoMobile *pMobIndex = NULL;
-  OBJ_INDEX_DATA *pObjIndex = NULL;
-  OBJ_INDEX_DATA *pObjToIndex = NULL;
+  ProtoObject *pObjIndex = NULL;
+  ProtoObject *pObjToIndex = NULL;
   Exit *pexit = NULL;
-  OBJ_DATA *to_obj = NULL;
+  Object *to_obj = NULL;
   int level = 0;
   int *plc = 0;
 
@@ -1708,7 +1708,7 @@ void ResetArea( Area *pArea )
           if ( IsBitSet(pReset->extra, TRAP_OBJ) )
             {
               /* We need to preserve obj for future 'T' and 'H' checks */
-              OBJ_DATA *pobj = NULL;
+              Object *pobj = NULL;
 
               if ( pReset->arg3 > 0 )
                 {
@@ -1997,9 +1997,9 @@ void ListResets( Character *ch, Area *pArea, Room *pRoom,
   Reset *pReset = NULL;
   Room *room = NULL;
   ProtoMobile *mob = NULL;
-  OBJ_INDEX_DATA *obj = NULL;
-  OBJ_INDEX_DATA *obj2 = NULL;
-  OBJ_INDEX_DATA *lastobj = NULL;
+  ProtoObject *obj = NULL;
+  ProtoObject *obj2 = NULL;
+  ProtoObject *lastobj = NULL;
   Reset *lo_reset = NULL;
   int num = 0;
   const char *rname = NULL;
@@ -2696,7 +2696,7 @@ char *SPrintReset( Character *ch, Reset *pReset, short num, bool rlist )
   char roomname[MAX_STRING_LENGTH];
   char objname[MAX_STRING_LENGTH];
   static Room *room = NULL;
-  static OBJ_INDEX_DATA *obj = NULL, *obj2 = NULL;
+  static ProtoObject *obj = NULL, *obj2 = NULL;
   static ProtoMobile *mob = NULL;
   vnum_t rvnum = INVALID_VNUM;
 

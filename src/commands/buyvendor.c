@@ -5,7 +5,7 @@
 void do_buyvendor (Character *ch, char *argument)
 {
   Character *keeper;
-  OBJ_DATA *deed;
+  Object *deed;
   char buf[MAX_STRING_LENGTH];
   char buf1[MAX_STRING_LENGTH];
   char strsave[MAX_INPUT_LENGTH];

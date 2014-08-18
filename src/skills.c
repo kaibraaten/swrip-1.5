@@ -119,7 +119,7 @@ bool check_skill( Character *ch, const char *command, char *argument )
       ch_ret retcode = rNONE;
       void *vo = NULL;
       Character *victim = NULL;
-      OBJ_DATA *obj = NULL;
+      Object *obj = NULL;
 
       spell_target_name = "";
 
@@ -380,8 +380,8 @@ void learn_from_failure( Character *ch, int sn )
  */
 void disarm( Character *ch, Character *victim )
 {
-  OBJ_DATA *obj = NULL;
-  OBJ_DATA *tmpobj = NULL;
+  Object *obj = NULL;
+  Object *tmpobj = NULL;
 
   if ( ( obj = GetEquipmentOnCharacter( victim, WEAR_WIELD ) ) == NULL )
     {
@@ -507,7 +507,7 @@ bool permsneak( const Character *ch )
 bool check_parry( Character *ch, Character *victim )
 {
   int chances = 0;
-  OBJ_DATA *wield = NULL;
+  Object *wield = NULL;
 
   if ( !IsAwake(victim) )
     {

@@ -94,7 +94,7 @@ static void MaterialFoundHandler( void *userData, MaterialFoundEventArgs *eventA
 static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *eventArgs )
 {
   struct UserData *ud = (struct UserData*) userData;
-  OBJ_DATA *lightsaber = eventArgs->Object;
+  Object *lightsaber = eventArgs->Object;
   char buf[MAX_STRING_LENGTH];
   Affect *hitroll = NULL;
   Affect *parry = NULL;

@@ -28,9 +28,9 @@
 #define VENDOR_FEE  .05 /*fee vendor charges, taken out of all gode with teh GETGOLD command*/
 
 Character *FindFixer( const Character *ch );
-int GetRepairCost( const Character *keeper, const OBJ_DATA *obj );
+int GetRepairCost( const Character *keeper, const Object *obj );
 Character *FindKeeper( const Character *ch );
 Character *FindKeeperQ( const Character *ch, bool message );
-int GetObjectCost( const Character *ch, const Character *keeper, const OBJ_DATA *obj, bool fBuy );
+int GetObjectCost( const Character *ch, const Character *keeper, const Object *obj, bool fBuy );
 
 #endif

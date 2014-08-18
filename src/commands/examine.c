@@ -5,7 +5,7 @@ void do_examine( Character *ch, char *argument )
 {
   char buf[MAX_STRING_LENGTH];
   char arg[MAX_INPUT_LENGTH];
-  OBJ_DATA *obj;
+  Object *obj;
   Board *board;
   short dam;
 

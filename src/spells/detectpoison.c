@@ -2,7 +2,7 @@
 
 ch_ret spell_detect_poison( int sn, int level, Character *ch, void *vo )
 {
-  OBJ_DATA *obj = (OBJ_DATA *) vo;
+  Object *obj = (Object *) vo;
 
   set_char_color( AT_MAGIC, ch);
   if ( obj->item_type == ITEM_DRINK_CON || obj->item_type == ITEM_FOOD )

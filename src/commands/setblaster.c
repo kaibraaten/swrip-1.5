@@ -3,8 +3,8 @@
 
 void do_setblaster( Character *ch, char *argument )
 {
-  OBJ_DATA *wield;
-  OBJ_DATA *wield2;
+  Object *wield;
+  Object *wield2;
 
   wield = GetEquipmentOnCharacter( ch, WEAR_WIELD );
 

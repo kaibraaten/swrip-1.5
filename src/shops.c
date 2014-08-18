@@ -36,7 +36,7 @@
 
 #define COST_EQUATION  (int) (cost*CostEquation( obj ))
 
-static float CostEquation( const OBJ_DATA *obj )
+static float CostEquation( const Object *obj )
 {
   float count = obj->pIndexData->count;
 
@@ -191,7 +191,7 @@ int GetCostToQuit( const Character *ch )
   return (int) cost;
 }
 
-int GetObjectCost( const Character *ch, const Character *keeper, const OBJ_DATA *obj, bool fBuy )
+int GetObjectCost( const Character *ch, const Character *keeper, const Object *obj, bool fBuy )
 {
   const SHOP_DATA *pShop = NULL;
   int cost = 0;
@@ -224,7 +224,7 @@ int GetObjectCost( const Character *ch, const Character *keeper, const OBJ_DATA 
     }
   else
     {
-      const OBJ_DATA *obj2 = NULL;
+      const Object *obj2 = NULL;
       int itype = 0;
 
       profitmod = GetCurrentCharisma(ch) - 13 - (richcustomer ? 15 : 0);
@@ -283,7 +283,7 @@ int GetObjectCost( const Character *ch, const Character *keeper, const OBJ_DATA 
   return cost;
 }
 
-int GetRepairCost( const Character *keeper, const OBJ_DATA *obj )
+int GetRepairCost( const Character *keeper, const Object *obj )
 {
   const REPAIR_DATA *rShop = NULL;
   int cost = 0;

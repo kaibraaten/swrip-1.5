@@ -3537,7 +3537,7 @@ void DestroyShip( Ship *ship, Character *killer )
   char buf[MAX_STRING_LENGTH];
   vnum_t roomnum = INVALID_VNUM;
   Room *room = NULL;
-  OBJ_DATA *robj = NULL;
+  Object *robj = NULL;
   Character *rch = NULL;
   Ship *lship = NULL;
 

@@ -1,8 +1,8 @@
 #include "character.h"
 #include "mud.h"
 
-static void wear_obj( Character *ch, OBJ_DATA *obj, bool fReplace, short wear_bit);
-static bool can_layer( const Character *ch, const OBJ_DATA *obj, short wear_loc );
+static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit);
+static bool can_layer( const Character *ch, const Object *obj, short wear_loc );
 static bool can_dual( const Character *ch );
 static bool could_dual( const Character *ch );
 
@@ -10,7 +10,7 @@ void do_wear( Character *ch, char *argument )
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
-  OBJ_DATA *obj;
+  Object *obj;
   short wear_bit;
 
   argument = OneArgument( argument, arg1 );
@@ -35,7 +35,7 @@ void do_wear( Character *ch, char *argument )
 
   if ( !StrCmp( arg1, "all" ) )
     {
-      OBJ_DATA *obj_next;
+      Object *obj_next;
 
       for ( obj = ch->first_carrying; obj; obj = obj_next )
         {
@@ -69,10 +69,10 @@ void do_wear( Character *ch, char *argument )
  * Big repetitive code, ick.
  * Restructured a bit to allow for specifying body location     -Thoric
  */
-static void wear_obj( Character *ch, OBJ_DATA *obj, bool fReplace, short wear_bit )
+static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit )
 {
   char buf[MAX_STRING_LENGTH];
-  OBJ_DATA *tmpobj = NULL;
+  Object *tmpobj = NULL;
   short bit = 0;
   short tmp = 0;
   bool check_size = false;
@@ -767,9 +767,9 @@ static void wear_obj( Character *ch, OBJ_DATA *obj, bool fReplace, short wear_bi
  * Check to see if there is room to wear another object on this location
  * (Layered clothing support)
  */
-static bool can_layer( const Character *ch, const OBJ_DATA *obj, short wear_loc )
+static bool can_layer( const Character *ch, const Object *obj, short wear_loc )
 {
-  OBJ_DATA *otmp;
+  Object *otmp;
   short bitlayers = 0;
   short objlayers = obj->pIndexData->layers;
 

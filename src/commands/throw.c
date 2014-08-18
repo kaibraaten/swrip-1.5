@@ -3,8 +3,8 @@
 
 void do_throw( Character *ch, char *argument )
 {
-  OBJ_DATA        * obj;
-  OBJ_DATA        * tmpobj;
+  Object        * obj;
+  Object        * tmpobj;
   char              arg[MAX_INPUT_LENGTH];
   char              arg2[MAX_INPUT_LENGTH];
   char              arg3[MAX_INPUT_LENGTH];

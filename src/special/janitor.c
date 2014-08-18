@@ -3,8 +3,8 @@
 
 bool spec_janitor( Character *ch )
 {
-  OBJ_DATA *trash;
-  OBJ_DATA *trash_next;
+  Object *trash;
+  Object *trash_next;
 
   if ( !IsAwake(ch) )
     return false;

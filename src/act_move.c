@@ -583,7 +583,7 @@ ch_ret move_char( Character *ch, Exit *pexit, int fall )
       if ( in_room->sector_type == SECT_WATER_NOSWIM
            ||   to_room->sector_type == SECT_WATER_NOSWIM )
         {
-          OBJ_DATA *obj = NULL;
+          Object *obj = NULL;
           bool found = false;
 
           if ( ch->mount )
@@ -641,7 +641,7 @@ ch_ret move_char( Character *ch, Exit *pexit, int fall )
               if ( ( !IsNpc(ch) && GetRandomPercent( ) > ch->pcdata->learned[gsn_climb] )
                    ||      drunk || ch->mental_state < -90 )
                 {
-                  OBJ_DATA *obj;
+                  Object *obj;
                   bool ch_rope = false;
                   for ( obj = ch->last_carrying; obj; obj = obj->prev_content )
                     {
@@ -1189,7 +1189,7 @@ void remove_bexit_flag( Exit *pexit, int flag )
 
 bool has_key( const Character *ch, vnum_t key )
 {
-  OBJ_DATA *obj = NULL;
+  Object *obj = NULL;
 
   for ( obj = ch->first_carrying; obj; obj = obj->next_content )
     {

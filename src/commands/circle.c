@@ -5,7 +5,7 @@ void do_circle( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   Character *victim;
-  OBJ_DATA *obj;
+  Object *obj;
   int percent;
 
   if ( IsNpc(ch) && IsAffectedBy( ch, AFF_CHARM ) )

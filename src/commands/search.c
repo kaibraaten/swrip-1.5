@@ -5,9 +5,9 @@
 void do_search( Character *ch, char *argument )
 {
   char arg  [MAX_INPUT_LENGTH];
-  OBJ_DATA *obj;
-  OBJ_DATA *container;
-  OBJ_DATA *startobj;
+  Object *obj;
+  Object *container;
+  Object *startobj;
   int percent, door;
   bool found;
 

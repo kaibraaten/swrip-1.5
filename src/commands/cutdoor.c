@@ -6,7 +6,7 @@ void do_cutdoor( Character *ch, char *argument )
   Character *gch;
   Exit *pexit;
   char       arg [ MAX_INPUT_LENGTH ];
-  OBJ_DATA *wield;
+  Object *wield;
   int whichweap;
   int SABER = 1;
   int PIKE = 0;

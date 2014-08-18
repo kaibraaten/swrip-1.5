@@ -7,7 +7,7 @@ bool spec_newbie_pilot( Character *ch )
   int           home = 32149;
   Character   * victim;
   Character   * v_next;
-  OBJ_DATA    * obj;
+  Object    * obj;
   char          buf[MAX_STRING_LENGTH];
   bool          diploma = false;
 

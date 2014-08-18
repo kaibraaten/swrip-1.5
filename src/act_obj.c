@@ -25,7 +25,7 @@
 /*
  * how resistant an object is to damage                         -Thoric
  */
-short get_obj_resistance( const OBJ_DATA *obj )
+short get_obj_resistance( const Object *obj )
 {
   short resist = NumberFuzzy(MAX_ITEM_IMPACT);
 
@@ -61,7 +61,7 @@ short get_obj_resistance( const OBJ_DATA *obj )
  * Make object into scraps if necessary.
  * Send message about damaged object.
  */
-obj_ret damage_obj( OBJ_DATA *obj )
+obj_ret damage_obj( Object *obj )
 {
   Character *ch;
   obj_ret objcode;
@@ -133,7 +133,7 @@ void save_clan_storeroom( Character *ch, const Clan *clan )
   FILE *fp;
   char filename[256];
   short templvl;
-  const OBJ_DATA *contents;
+  const Object *contents;
 
   if ( !clan )
     {
@@ -170,7 +170,7 @@ void save_clan_storeroom( Character *ch, const Clan *clan )
 
 /* Make objects in rooms that are nofloor fall - Scryn 1/23/96 */
 
-void obj_fall( OBJ_DATA *obj, bool through )
+void obj_fall( Object *obj, bool through )
 {
   Exit *pexit;
   Room *to_room;
@@ -290,7 +290,7 @@ void obj_fall( OBJ_DATA *obj, bool through )
 
 bool remove_obj( Character *ch, int iWear, bool fReplace )
 {
-  OBJ_DATA *obj, *tmpobj;
+  Object *obj, *tmpobj;
 
   if ( ( obj = GetEquipmentOnCharacter( ch, iWear ) ) == NULL )
     return true;

@@ -3,8 +3,8 @@
 
 void do_ammo( Character *ch, char *argument )
 {
-  OBJ_DATA *wield;
-  OBJ_DATA *obj;
+  Object *wield;
+  Object *obj;
   bool checkammo = false;
   int charge =0;
 

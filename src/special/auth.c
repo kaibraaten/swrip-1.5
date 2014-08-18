@@ -6,8 +6,8 @@ bool spec_auth( Character *ch )
   Character *victim;
   Character *v_next;
   char buf[MAX_STRING_LENGTH];
-  OBJ_INDEX_DATA *pObjIndex;
-  OBJ_DATA *obj;
+  ProtoObject *pObjIndex;
+  Object *obj;
   bool hasdiploma;
 
   for ( victim = ch->in_room->first_person; victim; victim = v_next )

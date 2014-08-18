@@ -263,7 +263,7 @@ void draw_map( Character *ch, char *desc )
 {
   int x, y;
   static char buf[MAX_STRING_LENGTH];
-  OBJ_DATA *device = NULL;
+  Object *device = NULL;
 
   if ( ( device = GetEquipmentOnCharacter( ch, WEAR_HOLD ) ) == NULL )
     {

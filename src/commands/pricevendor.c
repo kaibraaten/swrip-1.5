@@ -10,7 +10,7 @@ void do_pricevendor (Character *ch, char *argument)
   char arg1 [MAX_INPUT_LENGTH];
   char arg2 [MAX_INPUT_LENGTH];
   char logbuf[MAX_INPUT_LENGTH];
-  OBJ_DATA *obj;
+  Object *obj;
   struct tm *tms;
 
   argument = OneArgument (argument, arg1);

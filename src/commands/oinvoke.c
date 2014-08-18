@@ -1,14 +1,14 @@
 #include "character.h"
 #include "mud.h"
 
-extern OBJ_INDEX_DATA *obj_index_hash[MAX_KEY_HASH];
+extern ProtoObject *obj_index_hash[MAX_KEY_HASH];
 
 void do_oinvoke( Character *ch, char *argument )
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
-  OBJ_INDEX_DATA *pObjIndex;
-  OBJ_DATA *obj;
+  ProtoObject *pObjIndex;
+  Object *obj;
   short vnum;
   int level;
 

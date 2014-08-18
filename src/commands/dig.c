@@ -5,8 +5,8 @@
 void do_dig( Character *ch, char *argument )
 {
   char arg [MAX_INPUT_LENGTH];
-  OBJ_DATA *obj;
-  OBJ_DATA *startobj;
+  Object *obj;
+  Object *startobj;
   bool found, shovel;
   Exit *pexit;
 

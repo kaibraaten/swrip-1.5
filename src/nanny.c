@@ -735,7 +735,7 @@ static void nanny_read_motd( Descriptor *d, char *argument )
 
   if ( ch->top_level == 0 )
     {
-      OBJ_DATA *obj;
+      Object *obj;
       int iLang;
 
       ch->pcdata->clan_name = CopyString( "" );
@@ -875,7 +875,7 @@ if ( (iLang = skill_lookup( "common" )) < 0 )
       /* comlink */
 
       {
-	OBJ_INDEX_DATA *obj_ind = get_obj_index( OBJ_VNUM_SCHOOL_COMLINK );
+	ProtoObject *obj_ind = get_obj_index( OBJ_VNUM_SCHOOL_COMLINK );
 
 	if ( obj_ind != NULL )
 	  {
@@ -952,8 +952,8 @@ if ( (iLang = skill_lookup( "common" )) < 0 )
       char filename[256];
       FILE *fph;
       Room *storeroom = ch->plr_home;
-      OBJ_DATA *obj;
-      OBJ_DATA *obj_next;
+      Object *obj;
+      Object *obj_next;
 
       for ( obj = storeroom->first_content; obj; obj = obj_next )
 	{
@@ -965,7 +965,7 @@ if ( (iLang = skill_lookup( "common" )) < 0 )
 	       Capitalize( ch->name ) );
       if ( ( fph = fopen( filename, "r" ) ) != NULL )
 	{
-	  OBJ_DATA *tobj, *tobj_next;
+	  Object *tobj, *tobj_next;
 
 	  rset_supermob(storeroom);
 

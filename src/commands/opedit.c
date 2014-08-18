@@ -8,7 +8,7 @@ void do_opedit( Character *ch, char *argument )
   char arg2 [MAX_INPUT_LENGTH];
   char arg3 [MAX_INPUT_LENGTH];
   char arg4 [MAX_INPUT_LENGTH];
-  OBJ_DATA   *obj;
+  Object   *obj;
   MPROG_DATA *mprog, *mprg, *mprg_next;
   int value, mptype, cnt;
 

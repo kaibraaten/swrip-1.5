@@ -2,13 +2,13 @@
 #include "mud.h"
 #include "character.h"
 
-static void repair_one_obj( Character *ch, Character *keeper, OBJ_DATA *obj,
+static void repair_one_obj( Character *ch, Character *keeper, Object *obj,
 			    char *arg, int maxgold, char *fixstr, char *fixstr2 );
 
 void do_repair( Character *ch, char *argument )
 {
   Character *keeper;
-  OBJ_DATA *obj;
+  Object *obj;
   char *fixstr;
   char *fixstr2;
   int maxgold;
@@ -62,7 +62,7 @@ void do_repair( Character *ch, char *argument )
   repair_one_obj( ch, keeper, obj, argument, maxgold, fixstr, fixstr2);
 }
 
-static void repair_one_obj( Character *ch, Character *keeper, OBJ_DATA *obj,
+static void repair_one_obj( Character *ch, Character *keeper, Object *obj,
 			    char *arg, int maxgold, char *fixstr, char*fixstr2 )
 {
   char buf[MAX_STRING_LENGTH];

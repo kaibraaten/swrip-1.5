@@ -42,7 +42,7 @@ void do_list( Character *ch, char *argument )
     {
       char arg[MAX_INPUT_LENGTH];
       Character *keeper;
-      OBJ_DATA *obj;
+      Object *obj;
       int cost;
       int oref = 0;
       bool found;

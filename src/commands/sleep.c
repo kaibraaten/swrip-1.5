@@ -3,7 +3,7 @@
 
 void do_sleep( Character *ch, char *argument )
 {
-  OBJ_DATA *obj = NULL;
+  Object *obj = NULL;
 
   switch ( ch->position )
     {

@@ -40,8 +40,8 @@ void do_loadup( Character *ch, char *argument )
           char filename[256];
 	  FILE *fph;
           Room *storeroom = d->character->plr_home;
-          OBJ_DATA *obj;
-          OBJ_DATA *obj_next;
+          Object *obj;
+          Object *obj_next;
 
           for ( obj = storeroom->first_content; obj; obj = obj_next )
             {
@@ -53,7 +53,7 @@ void do_loadup( Character *ch, char *argument )
                    Capitalize( d->character->name ) );
           if ( ( fph = fopen( filename, "r" ) ) != NULL )
             {
-              OBJ_DATA *tobj, *tobj_next;
+              Object *tobj, *tobj_next;
 
               rset_supermob(storeroom);
 

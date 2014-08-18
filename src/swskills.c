@@ -26,8 +26,8 @@
 void add_reinforcements( Character *ch )
 {
   ProtoMobile *pMobIndex = NULL;
-  OBJ_DATA *blaster = NULL;
-  OBJ_INDEX_DATA *pObjIndex = NULL;
+  Object *blaster = NULL;
+  ProtoObject *pObjIndex = NULL;
   int multiplier = 1;
 
   if ( ( pMobIndex = get_mob_index( ch->backup_mob ) ) == NULL )

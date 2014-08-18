@@ -5,7 +5,7 @@ void do_brandish( Character *ch, char *argument )
 {
   Character *vch = NULL;
   Character *vch_next = NULL;
-  OBJ_DATA *staff = NULL;
+  Object *staff = NULL;
   ch_ret retcode = rNONE;
   int sn = 0;
 

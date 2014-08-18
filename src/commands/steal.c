@@ -7,7 +7,7 @@ void do_steal( Character *ch, char *argument )
   char arg1 [MAX_INPUT_LENGTH];
   char arg2 [MAX_INPUT_LENGTH];
   Character *victim, *mst;
-  OBJ_DATA *obj , *obj_next;
+  Object *obj , *obj_next;
   int percent, xp;
 
   argument = OneArgument( argument, arg1 );

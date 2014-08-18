@@ -41,7 +41,7 @@
 /*
  * Array to keep track of equipment temporarily.                -Thoric
  */
-OBJ_DATA *save_equipment[MAX_WEAR][8];
+Object *save_equipment[MAX_WEAR][8];
 Character *quitting_char = NULL;
 Character *loading_char = NULL;
 Character *saving_char = NULL;
@@ -61,12 +61,12 @@ extern int falling;
 /*
  * Array of containers read for proper re-nesting of objects.
  */
-static OBJ_DATA *rgObjNest[MAX_NEST];
+static Object *rgObjNest[MAX_NEST];
 
 /*
  * Local functions.
  */
-static bool HasAnyOvalues( const OBJ_DATA *obj );
+static bool HasAnyOvalues( const Object *obj );
 void fwrite_char( Character *ch, FILE *fp );
 void fread_char( Character *ch, FILE *fp, bool preload );
 void write_corpses( Character *ch, const char *name );
@@ -81,7 +81,7 @@ void save_home( Character *ch )
       FILE *fp = NULL;
       char filename[256];
       short templvl = 0;
-      OBJ_DATA *contents = NULL;
+      Object *contents = NULL;
 
 
       sprintf( filename, "%s%c/%s.home", PLAYER_DIR, tolower(ch->name[0]),
@@ -111,7 +111,7 @@ void save_home( Character *ch )
  */
 void de_EquipCharacter( Character *ch )
 {
-  OBJ_DATA *obj = NULL;
+  Object *obj = NULL;
   int x = 0;
   int y = 0;
 
@@ -786,7 +786,7 @@ void fwrite_char( Character *ch, FILE *fp )
   fprintf( fp, "End\n\n" );
 }
 
-static bool HasAnyOvalues( const OBJ_DATA *obj )
+static bool HasAnyOvalues( const Object *obj )
 {
   int oval = 0;
 
@@ -804,7 +804,7 @@ static bool HasAnyOvalues( const OBJ_DATA *obj )
 /*
  * Write an object and its contents.
  */
-void fwrite_obj( const Character *ch, const OBJ_DATA *obj, FILE *fp, int iNest,
+void fwrite_obj( const Character *ch, const Object *obj, FILE *fp, int iNest,
                  short os_type )
 {
   ExtraDescription *ed = NULL;
@@ -2149,13 +2149,13 @@ void fread_char( Character *ch, FILE *fp, bool preload )
 
 void fread_obj( Character *ch, FILE *fp, short os_type )
 {
-  OBJ_DATA *obj = NULL;
+  Object *obj = NULL;
   int iNest = 0;
   bool fNest = true; /* Yes, these should             */
   bool fVnum = true; /* indeed be initialized as true */
   Room *room = NULL;
 
-  AllocateMemory( obj, OBJ_DATA, 1 );
+  AllocateMemory( obj, Object, 1 );
   obj->count     = 1;
   obj->wear_loc  = -1;
   obj->weight    = 1;
@@ -2524,7 +2524,7 @@ void set_alarm( long seconds )
 
 void write_corpses( Character *ch, const char *name )
 {
-  OBJ_DATA *corpse = NULL;
+  Object *corpse = NULL;
   FILE *fp = NULL;
 
   /* Name and ch support so that we dont have to have a char to save their
@@ -2674,8 +2674,8 @@ void load_storerooms( void )
       if ( de->d_name[0] != '.' )
         {
           int iNest = 0;
-          OBJ_DATA *tobj = NULL;
-	  OBJ_DATA *tobj_next = NULL;
+          Object *tobj = NULL;
+	  Object *tobj_next = NULL;
           Room *storeroom = NULL;
 
           sprintf(strArea, "%s%s", STOREROOM_DIR, de->d_name );
@@ -2774,7 +2774,7 @@ void save_storeroom( Room *room )
 {
   char strsave[MAX_INPUT_LENGTH];
   FILE *fp = NULL;
-  OBJ_DATA *contents = NULL;
+  Object *contents = NULL;
 
   if ( !room )
     {

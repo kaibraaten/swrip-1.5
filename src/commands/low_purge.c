@@ -5,7 +5,7 @@ void do_low_purge( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   Character *victim;
-  OBJ_DATA *obj;
+  Object *obj;
 
   OneArgument( argument, arg );
 

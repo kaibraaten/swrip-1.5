@@ -27,7 +27,7 @@ static bool go_eval_or (Character *ch, GO_STRUCT *r, int op_num);
 static void go_display( Character *ch, int dis_num, int tot_match, bool d2_sw, GO_STRUCT **p);
 static const char *go_otype_to_disp (int arg);
 static const char *owear_to_disp (short arg);
-static bool go_read_names( Character *ch, OBJ_DATA *po, GO_STRUCT *r, bool np_sw,
+static bool go_read_names( Character *ch, Object *po, GO_STRUCT *r, bool np_sw,
                            bool nm_sw, bool ng_sw );
 
 /*
@@ -320,8 +320,8 @@ static bool go_read( Character *ch, int dis_num, int op_num, int sor_ind,
   enum {OCOUNT, OVNUM, OTYPE, OLEVEL, OWEAR, OAVG, OHR, ODR, OHP, OMP, OAC,
         OSTR, ODEX, OCON, OWIS, OINT, OLUCK,
         OSAV0, OSAV1, OSAV2, OSAV3, OSAV4};
-  OBJ_INDEX_DATA  *px;
-  OBJ_DATA        *po;
+  ProtoObject  *px;
+  Object        *po;
   Affect     *pa;
   GO_STRUCT         r;                 /* input (physical record)         */
   GO_STRUCT     a[MAX_DISPLAY_LINES];  /* array of records                */
@@ -651,11 +651,11 @@ static const char *owear_to_disp (short arg)
  * it could be on the ground ... but ... growl ... it could also be
  * in a container carried by someone - or in a container on the ground.
  */
-static bool go_read_names( Character *ch, OBJ_DATA *po, GO_STRUCT *r, bool np_sw,
+static bool go_read_names( Character *ch, Object *po, GO_STRUCT *r, bool np_sw,
                            bool nm_sw, bool ng_sw )
 {
   enum {CNAME, ONAME};
-  OBJ_DATA *pt;
+  Object *pt;
   const char *ground = "(none)";
   const char *ack    = "(error in data structure)";
 

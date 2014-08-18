@@ -45,8 +45,8 @@ struct Character
   Descriptor *     desc;
   Affect * first_affect;
   Affect * last_affect;
-  OBJ_DATA *            first_carrying;
-  OBJ_DATA *            last_carrying;
+  Object *            first_carrying;
+  Object *            last_carrying;
   Room *     in_room;
   Room *     was_in_room;
   Room *   was_sentinel;
@@ -132,7 +132,7 @@ struct Character
   char      *   owner;
   Room *   home;
   short   cmd_recurse;
-  OBJ_DATA          *   on;
+  Object          *   on;
   Character         *   pet;
 
   struct
@@ -280,27 +280,27 @@ bool IsAffectedBy( const Character *ch, int affected_by_bit );
  * Find a piece of eq on a character.
  * Will pick the top layer if clothing is layered.              -Thoric
  */
-OBJ_DATA *GetEquipmentOnCharacter( const Character *ch, int iWear );
+Object *GetEquipmentOnCharacter( const Character *ch, int iWear );
 
 /*
  * Equip a char with an obj.
  */
-void EquipCharacter( Character *ch, OBJ_DATA *obj, int iWear );
+void EquipCharacter( Character *ch, Object *obj, int iWear );
 
 /*
  * Unequip a char with an obj.
  */
-void UnequipCharacter( Character *ch, OBJ_DATA *obj );
+void UnequipCharacter( Character *ch, Object *obj );
 
 /*
  * Find an obj in player's inventory.
  */
-OBJ_DATA *GetCarriedObject( const Character *ch, const char *argument );
+Object *GetCarriedObject( const Character *ch, const char *argument );
 
 /*
  * Find an obj in player's equipment.
  */
-OBJ_DATA *GetWornObject( const Character *ch, const char *argument );
+Object *GetWornObject( const Character *ch, const char *argument );
 
 /*
  * How mental state could affect finding an object              -Thoric
@@ -317,12 +317,12 @@ bool CanSeeCharacter( const Character *ch, const Character *victim );
 /*
  * True if char can see obj.
  */
-bool CanSeeObject( const Character *ch, const OBJ_DATA *obj );
+bool CanSeeObject( const Character *ch, const Object *obj );
 
 /*
  * True if char can drop obj.
  */
-bool CanDropObject( const Character *ch, const OBJ_DATA *obj );
+bool CanDropObject( const Character *ch, const Object *obj );
 
 /*
  * "Fix" a character's stats                                    -Thoric

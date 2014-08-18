@@ -34,7 +34,7 @@ Ban *last_ban = NULL;
 
 char reboot_time[50];
 time_t new_boot_time_t;
-extern OBJ_INDEX_DATA *obj_index_hash[MAX_KEY_HASH];
+extern ProtoObject *obj_index_hash[MAX_KEY_HASH];
 extern ProtoMobile *mob_index_hash[MAX_KEY_HASH];
 extern Room *room_index_hash[MAX_KEY_HASH];
 
@@ -82,7 +82,7 @@ void echo_to_room( short AT_COLOR, Room *room, const char *argument )
 Room *find_location( Character *ch, char *arg )
 {
   Character *victim;
-  OBJ_DATA *obj;
+  Object *obj;
 
   if ( IsNumber(arg) )
     return get_room_index( atoi( arg ) );
@@ -168,13 +168,13 @@ void close_area( Area *pArea )
 {
   Character *ech;
   Character *ech_next;
-  OBJ_DATA *eobj;
-  OBJ_DATA *eobj_next;
+  Object *eobj;
+  Object *eobj_next;
   int icnt;
   Room *rid;
   Room *rid_next;
-  OBJ_INDEX_DATA *oid;
-  OBJ_INDEX_DATA *oid_next;
+  ProtoObject *oid;
+  ProtoObject *oid_next;
   ProtoMobile *mid;
   ProtoMobile *mid_next;
   Reset *ereset;
@@ -378,7 +378,7 @@ void close_area( Area *pArea )
             obj_index_hash[icnt] = oid->next;
           else
             {
-              OBJ_INDEX_DATA *toid;
+              ProtoObject *toid;
 
               for ( toid = obj_index_hash[icnt]; toid; toid = toid->next )
                 if ( toid->next == oid )

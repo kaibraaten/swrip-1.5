@@ -5,8 +5,8 @@ void do_mpoload( Character *ch, char *argument )
 {
   char arg1[ MAX_INPUT_LENGTH ];
   char arg2[ MAX_INPUT_LENGTH ];
-  OBJ_INDEX_DATA *pObjIndex;
-  OBJ_DATA       *obj;
+  ProtoObject *pObjIndex;
+  Object       *obj;
   int             level;
   int               timer = 0;
 

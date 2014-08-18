@@ -3,7 +3,7 @@
 
 void do_olist( Character *ch, char *argument )
 {
-  OBJ_INDEX_DATA        *obj;
+  ProtoObject        *obj;
   int                    vnum;
   Area             *tarea;
   char arg1[MAX_INPUT_LENGTH];

@@ -5,15 +5,15 @@
 #include "grub.h"
 #include "character.h"
 
-extern OBJ_INDEX_DATA *obj_index_hash[MAX_KEY_HASH];
+extern ProtoObject *obj_index_hash[MAX_KEY_HASH];
 extern Room *room_index_hash[MAX_KEY_HASH];
 extern ProtoMobile *mob_index_hash[MAX_KEY_HASH];
 
 static int diag_int_comp(const void *i, const void *j);
 static void diagnose_help (Character *ch);
-static void diag_ins (OBJ_INDEX_DATA *p, int siz, OBJ_INDEX_DATA **f, Character *ch);
+static void diag_ins (ProtoObject *p, int siz, ProtoObject **f, Character *ch);
 static void zero_sort( int *vnums, int *count, int left, int right );
-static void diag_visit_obj( Character *ch, OBJ_DATA *obj );
+static void diag_visit_obj( Character *ch, Object *obj );
 
 /*
  * The "diagnose" command is designed to be expandable and take different
@@ -23,8 +23,8 @@ static void diag_visit_obj( Character *ch, OBJ_DATA *obj );
 void do_diagnose( Character *ch, char *argument )
 {
 #define   DIAG_MAX_SIZE  1000
-  OBJ_INDEX_DATA *pObj;
-  OBJ_INDEX_DATA **freq;                        /* dynamic array of pointers */
+  ProtoObject *pObj;
+  ProtoObject **freq;                        /* dynamic array of pointers */
   char arg1 [MAX_INPUT_LENGTH];
   char arg2 [MAX_INPUT_LENGTH];
   char arg3 [MAX_INPUT_LENGTH];
@@ -99,7 +99,7 @@ void do_diagnose( Character *ch, char *argument )
       diagnose_help(ch);
       return;
     }
-    AllocateMemory(freq, OBJ_INDEX_DATA *, num);           /* dynamic freq array */
+    AllocateMemory(freq, ProtoObject *, num);           /* dynamic freq array */
     for (cou = 0; cou < num; cou++)                /* initialize freq array */
       freq[cou] = NULL;                          /* to NULL pointers */
     for (cou = 0; cou < MAX_KEY_HASH; cou++) {     /* loop thru obj_index_hash */
@@ -206,7 +206,7 @@ void do_diagnose( Character *ch, char *argument )
 
   if (!StrCmp(arg1, "xxxobxxx"))
     {
-      OBJ_DATA       *po, *pt = NULL;
+      Object       *po, *pt = NULL;
       int            i=0;
       char           buf[MAX_STRING_LENGTH];
 
@@ -320,7 +320,7 @@ static void diagnose_help (Character *ch)
  * frequency table which contains the "top n" frequently occurring objects.
  */
 
-static void diag_ins (OBJ_INDEX_DATA *p, int siz, OBJ_INDEX_DATA **f, Character *ch)
+static void diag_ins (ProtoObject *p, int siz, ProtoObject **f, Character *ch)
 {
   int  cou =  0;                             /* temporary counter */
   int  ins = -1;                             /* insert pos in dynamic f array */
@@ -359,7 +359,7 @@ static void zero_sort( int *vnums, int *count, int left, int right )
   if (i < right) zero_sort (vnums, count, i, right);
 }
 
-static void diag_visit_obj( Character *ch, OBJ_DATA *obj )
+static void diag_visit_obj( Character *ch, Object *obj )
 {
   pager_printf(ch, "***obj=%s\r\n", obj->name );
 

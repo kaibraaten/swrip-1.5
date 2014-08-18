@@ -3,10 +3,10 @@
 
 void do_skin( Character *ch, char *argument)
 {
-  OBJ_DATA *korps;
-  OBJ_DATA *corpse;
-  OBJ_DATA *obj;
-  OBJ_DATA *skin;
+  Object *korps;
+  Object *corpse;
+  Object *obj;
+  Object *skin;
   char *name;
   char buf[MAX_STRING_LENGTH];
 

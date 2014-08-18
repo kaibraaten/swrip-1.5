@@ -53,15 +53,15 @@ REPAIR_DATA *last_repair = NULL;
 TELEPORT_DATA *first_teleport = NULL;
 TELEPORT_DATA *last_teleport = NULL;
 
-OBJ_DATA *extracted_obj_queue = NULL;
+Object *extracted_obj_queue = NULL;
 ExtractedCharacter *extracted_char_queue = NULL;
 
 Character *first_char = NULL;
 Character *last_char = NULL;
 char log_buf[2*MAX_INPUT_LENGTH];
 
-OBJ_DATA *first_object = NULL;
-OBJ_DATA *last_object = NULL;
+Object *first_object = NULL;
+Object *last_object = NULL;
 TIME_INFO_DATA time_info;
 WEATHER_DATA weather_info;
 
@@ -243,7 +243,7 @@ short gsn_top_sn = 0;
  * Locals.
  */
 ProtoMobile *mob_index_hash[MAX_KEY_HASH];
-OBJ_INDEX_DATA *obj_index_hash[MAX_KEY_HASH];
+ProtoObject *obj_index_hash[MAX_KEY_HASH];
 Room *room_index_hash[MAX_KEY_HASH];
 
 Area *first_area = NULL;
@@ -312,14 +312,14 @@ int             mprog_name_to_type( const char* name );
 MPROG_DATA *    mprog_file_read( char* f, MPROG_DATA* mprg,
 				 ProtoMobile *pMobIndex );
 MPROG_DATA *    oprog_file_read( char* f, MPROG_DATA* mprg,
-				 OBJ_INDEX_DATA *pObjIndex );
+				 ProtoObject *pObjIndex );
 MPROG_DATA *    rprog_file_read( char* f, MPROG_DATA* mprg,
 				 Room *pRoomIndex );
 void            load_mudprogs( Area *tarea, FILE* fp );
 void            load_objprogs( Area *tarea, FILE* fp );
 void            load_roomprogs( Area *tarea, FILE* fp );
 void            mprog_read_programs( FILE* fp, ProtoMobile *pMobIndex );
-void            oprog_read_programs( FILE* fp, OBJ_INDEX_DATA *pObjIndex );
+void            oprog_read_programs( FILE* fp, ProtoObject *pObjIndex );
 void            rprog_read_programs( FILE* fp, Room *pRoomIndex );
 
 void shutdown_mud( const char *reason )
@@ -1120,7 +1120,7 @@ void load_objects( Area *tarea, FILE *fp )
 
   for ( ; ; )
     {
-      OBJ_INDEX_DATA *pObjIndex;
+      ProtoObject *pObjIndex;
       const char *ln;
       int x1, x2, x3, x4, x5, x6;
       char buf[MAX_STRING_LENGTH];
@@ -1173,7 +1173,7 @@ void load_objects( Area *tarea, FILE *fp )
       else
         {
           oldobj = false;
-          AllocateMemory( pObjIndex, OBJ_INDEX_DATA, 1 );
+          AllocateMemory( pObjIndex, ProtoObject, 1 );
         }
 
       fBootDb = tmpBootDb;
@@ -2249,9 +2249,9 @@ Character *create_mobile( ProtoMobile *pMobIndex )
 /*
  * Create an instance of an object.
  */
-OBJ_DATA *create_object( OBJ_INDEX_DATA *pObjIndex, int level )
+Object *create_object( ProtoObject *pObjIndex, int level )
 {
-  OBJ_DATA *obj = NULL;
+  Object *obj = NULL;
   int oval = 0;
 
   if ( !pObjIndex )
@@ -2260,7 +2260,7 @@ OBJ_DATA *create_object( OBJ_INDEX_DATA *pObjIndex, int level )
       exit( 1 );
     }
 
-  AllocateMemory( obj, OBJ_DATA, 1 );
+  AllocateMemory( obj, Object, 1 );
 
   obj->pIndexData       = pObjIndex;
   obj->in_room  = NULL;
@@ -2538,7 +2538,7 @@ void clear_char( Character *ch )
  */
 void free_char( Character *ch )
 {
-  OBJ_DATA *obj;
+  Object *obj;
   Affect *paf;
   Timer *timer;
   MPROG_ACT_LIST *mpact, *mpact_next;
@@ -2673,9 +2673,9 @@ ProtoMobile *get_mob_index( vnum_t vnum )
  * Translates obj virtual number to its obj index struct.
  * Hash table lookup.
  */
-OBJ_INDEX_DATA *get_obj_index( vnum_t vnum )
+ProtoObject *get_obj_index( vnum_t vnum )
 {
-  OBJ_INDEX_DATA *pObjIndex;
+  ProtoObject *pObjIndex;
 
   if ( vnum < 0 )
     vnum = 0;
@@ -3349,7 +3349,7 @@ void mprog_read_programs( FILE *fp, ProtoMobile *pMobIndex)
 
 
 MPROG_DATA *oprog_file_read( char *f, MPROG_DATA *mprg,
-                             OBJ_INDEX_DATA *pObjIndex )
+                             ProtoObject *pObjIndex )
 {
 
   char        MUDProgfile[ MAX_INPUT_LENGTH ];
@@ -3425,7 +3425,7 @@ MPROG_DATA *oprog_file_read( char *f, MPROG_DATA *mprg,
  */
 void load_objprogs( Area *tarea, FILE *fp )
 {
-  OBJ_INDEX_DATA *iObj;
+  ProtoObject *iObj;
   MPROG_DATA     *original;
   MPROG_DATA     *working;
   char            letter;
@@ -3478,7 +3478,7 @@ void load_objprogs( Area *tarea, FILE *fp )
 /* This procedure is responsible for reading any in_file OBJprograms.
  */
 
-void oprog_read_programs( FILE *fp, OBJ_INDEX_DATA *pObjIndex)
+void oprog_read_programs( FILE *fp, ProtoObject *pObjIndex)
 {
   MPROG_DATA *mprg;
   char        letter;
@@ -3808,7 +3808,7 @@ bool delete_room( Room *room )
 }
 
 /* See comment on delete_room. */
-bool delete_obj( OBJ_INDEX_DATA *obj )
+bool delete_obj( ProtoObject *obj )
 {
   return true;
 }
@@ -3858,9 +3858,9 @@ Room *make_room( vnum_t vnum )
  * Create a new INDEX object (for online building)              -Thoric
  * Option to clone an existing index object.
  */
-OBJ_INDEX_DATA *make_object( vnum_t vnum, vnum_t cvnum, char *name )
+ProtoObject *make_object( vnum_t vnum, vnum_t cvnum, char *name )
 {
-  OBJ_INDEX_DATA *pObjIndex = NULL, *cObjIndex = NULL;
+  ProtoObject *pObjIndex = NULL, *cObjIndex = NULL;
   char buf[MAX_STRING_LENGTH];
   int iHash = 0;
 
@@ -3869,7 +3869,7 @@ OBJ_INDEX_DATA *make_object( vnum_t vnum, vnum_t cvnum, char *name )
       cObjIndex = get_obj_index( cvnum );
     }
 
-  AllocateMemory( pObjIndex, OBJ_INDEX_DATA, 1 );
+  AllocateMemory( pObjIndex, ProtoObject, 1 );
 
   pObjIndex->vnum = vnum;
   pObjIndex->name = CopyString( name );

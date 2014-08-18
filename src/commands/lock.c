@@ -3,7 +3,7 @@
 void do_lock( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  OBJ_DATA *obj;
+  Object *obj;
   Exit *pexit;
 
   OneArgument( argument, arg );

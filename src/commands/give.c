@@ -8,7 +8,7 @@ void do_give( Character *ch, char *argument )
   char arg2 [MAX_INPUT_LENGTH];
   char buf  [MAX_INPUT_LENGTH];
   Character *victim;
-  OBJ_DATA  *obj;
+  Object  *obj;
 
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );

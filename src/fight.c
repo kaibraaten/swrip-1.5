@@ -34,7 +34,7 @@ extern Character *gch_prev;
 void dam_message( Character *ch, Character *victim, int dam, int dt );
 void group_gain( Character *ch, Character *victim );
 int align_compute( Character *gch, Character *victim );
-int obj_hitroll( OBJ_DATA *obj );
+int obj_hitroll( Object *obj );
 bool get_cover( Character *ch );
 bool dual_flip = false;
 
@@ -43,7 +43,7 @@ bool dual_flip = false;
  */
 bool is_wielding_poisoned( Character *ch )
 {
-  OBJ_DATA *obj;
+  Object *obj;
 
   if ( ( obj = GetEquipmentOnCharacter( ch, WEAR_WIELD )    )
        &&   (IsBitSet( obj->extra_flags, ITEM_POISONED) ) )
@@ -501,7 +501,7 @@ ch_ret multi_hit( Character *ch, Character *victim, int dt )
 /*
  * Weapon types, haus
  */
-int weapon_prof_bonus_check( Character *ch, OBJ_DATA *wield, int *gsn_ptr )
+int weapon_prof_bonus_check( Character *ch, Object *wield, int *gsn_ptr )
 {
   int bonus;
 
@@ -565,7 +565,7 @@ int weapon_prof_bonus_check( Character *ch, OBJ_DATA *wield, int *gsn_ptr )
  * Calculate the tohit bonus on the object and return RIS values.
  * -- Altrag
  */
-int obj_hitroll( OBJ_DATA *obj )
+int obj_hitroll( Object *obj )
 {
   int tohit = 0;
   Affect *paf;
@@ -609,7 +609,7 @@ short off_shld_lvl( Character *ch, Character *victim )
  */
 ch_ret one_hit( Character *ch, Character *victim, int dt )
 {
-  OBJ_DATA *wield;
+  Object *wield;
   int victim_ac;
   int thac0;
   int thac0_00;
@@ -1098,7 +1098,7 @@ ch_ret one_hit( Character *ch, Character *victim, int dt )
    */
   if ( IsNpc(victim) )
     {
-      OBJ_DATA *wielding = GetEquipmentOnCharacter( victim, WEAR_WIELD );
+      Object *wielding = GetEquipmentOnCharacter( victim, WEAR_WIELD );
       if ( wielding != NULL
 	   && wielding->value[OVAL_WEAPON_TYPE] == WEAPON_BLASTER
 	   && get_cover( victim ) == true )
@@ -1144,7 +1144,7 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
   bool npcvict;
   bool loot;
   int  xp_gain;
-  OBJ_DATA *damobj;
+  Object *damobj;
   ch_ret retcode;
   short dampmod;
 
@@ -1562,8 +1562,8 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
 
   if ( victim->hit <=0 && !IsNpc(victim))
     {
-      OBJ_DATA *obj;
-      OBJ_DATA *obj_next;
+      Object *obj;
+      Object *obj_next;
       int cnt=0;
 
       /* RemoveBit( victim->act, PLR_ATTACKER ); Removed to add PLR_DONTAUTOFUEL */
@@ -2045,7 +2045,7 @@ void raw_kill( Character *killer, Character *victim )
   char buf[MAX_STRING_LENGTH];
   char buf2[MAX_STRING_LENGTH];
   char arg[MAX_STRING_LENGTH];
-  OBJ_DATA *obj, *obj_next;
+  Object *obj, *obj_next;
   Ship *ship;
 
   if ( !victim )
@@ -2282,8 +2282,8 @@ void group_gain( Character *ch, Character *victim )
 
   for ( gch = ch->in_room->first_person; gch; gch = gch->next_in_room )
     {
-      OBJ_DATA *obj;
-      OBJ_DATA *obj_next;
+      Object *obj;
+      Object *obj_next;
 
       if ( !is_same_group( gch, ch ) )
         continue;

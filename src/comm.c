@@ -1722,7 +1722,7 @@ void pager_printf(const Character *ch, const char *fmt, ...)
 
 
 
-char *obj_short( const OBJ_DATA *obj )
+char *obj_short( const Object *obj )
 {
   static char buf[MAX_STRING_LENGTH];
 
@@ -1751,8 +1751,8 @@ char *act_string(const char *format, Character *to, Character *ch,
   const char *str = format;
   const char *i;
   Character *vch = (Character *) arg2;
-  OBJ_DATA *obj1 = (OBJ_DATA  *) arg1;
-  OBJ_DATA *obj2 = (OBJ_DATA  *) arg2;
+  Object *obj1 = (Object  *) arg1;
+  Object *obj2 = (Object  *) arg2;
 
   while ( *str != '\0' )
     {
@@ -1911,15 +1911,15 @@ void act( short AType, const char *format, Character *ch, const void *arg1, cons
 
   if ( MOBtrigger && type != TO_CHAR && type != TO_VICT && to )
     {
-      OBJ_DATA *to_obj;
+      Object *to_obj;
 
       txt = act_string(format, NULL, ch, arg1, arg2);
       if ( IsBitSet(to->in_room->mprog.progtypes, ACT_PROG) )
-        rprog_act_trigger(txt, to->in_room, ch, (OBJ_DATA *)arg1, (void *)arg2);
+        rprog_act_trigger(txt, to->in_room, ch, (Object *)arg1, (void *)arg2);
       for ( to_obj = to->in_room->first_content; to_obj;
             to_obj = to_obj->next_content )
         if ( IsBitSet(to_obj->pIndexData->mprog.progtypes, ACT_PROG) )
-          oprog_act_trigger(txt, to_obj, ch, (OBJ_DATA *)arg1, (void *)arg2);
+          oprog_act_trigger(txt, to_obj, ch, (Object *)arg1, (void *)arg2);
     }
 
   /* Anyone feel like telling me the point of looping through the whole
@@ -1957,7 +1957,7 @@ void act( short AType, const char *format, Character *ch, const void *arg1, cons
       if (MOBtrigger)
         {
           /* Note: use original string, not string with ANSI. -- Alty */
-          mprog_act_trigger( txt, to, ch, (OBJ_DATA *)arg1, (void *)arg2 );
+          mprog_act_trigger( txt, to, ch, (Object *)arg1, (void *)arg2 );
         }
     }
   MOBtrigger = true;

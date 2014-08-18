@@ -10,7 +10,7 @@ void do_appraise( Character *ch, char *argument )
   char buf[MAX_STRING_LENGTH];
   char arg[MAX_INPUT_LENGTH];
   Character *keeper;
-  OBJ_DATA *obj;
+  Object *obj;
   int cost;
   char *fixstr;
 
@@ -76,7 +76,7 @@ void do_appraise( Character *ch, char *argument )
 
 static void appraise_all( Character *ch, Character *keeper, char *fixstr )
 {
-  OBJ_DATA *obj;
+  Object *obj;
   char buf[MAX_STRING_LENGTH], *pbuf=buf;
   int cost, total=0;
 

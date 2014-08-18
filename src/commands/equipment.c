@@ -4,7 +4,7 @@
 
 void do_equipment( Character *ch, char *argument )
 {
-  OBJ_DATA *obj;
+  Object *obj;
   int iWear, dam;
   bool found;
   char buf[MAX_STRING_LENGTH];

@@ -5,7 +5,7 @@ bool spec_customs_smut( Character *ch )
 {
   Character *victim;
   Character *v_next;
-  OBJ_DATA  *obj;
+  Object  *obj;
   char       buf[MAX_STRING_LENGTH];
   long       ch_exp;
 
@@ -66,7 +66,7 @@ bool spec_customs_smut( Character *ch )
             }
           else if ( obj->item_type == ITEM_CONTAINER )
             {
-              OBJ_DATA *content;
+              Object *content;
               for ( content = obj->first_content; content; content = content->next_content )
                 {
                   if (content->pIndexData->item_type == ITEM_SMUT

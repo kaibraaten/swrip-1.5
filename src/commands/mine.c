@@ -4,7 +4,7 @@
 void do_mine( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  OBJ_DATA *obj;
+  Object *obj;
   bool shovel;
   short move;
 

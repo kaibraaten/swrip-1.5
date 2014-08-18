@@ -3,7 +3,7 @@
 
 void do_arm( Character *ch, char *argument )
 {
-  OBJ_DATA *obj;
+  Object *obj;
 
   if ( IsNpc(ch) || !ch->pcdata )
     {

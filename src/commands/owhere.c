@@ -8,7 +8,7 @@ void do_owhere( Character *ch, char *argument )
 {
   char buf[MAX_STRING_LENGTH], field[MAX_INPUT_LENGTH];
   char arg[MAX_INPUT_LENGTH];
-  OBJ_DATA *obj, *outer_obj;
+  Object *obj, *outer_obj;
   bool found = false;
   int icnt=0, vnum=0;
   const char *heading =

@@ -3,7 +3,7 @@
 
 void do_first_aid( Character *ch, char *argument )
 {
-  OBJ_DATA   *medpac;
+  Object   *medpac;
   Character  *victim;
   int         heal;
   char        buf[MAX_STRING_LENGTH];

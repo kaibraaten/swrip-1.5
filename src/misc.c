@@ -50,7 +50,7 @@ void sith_penalty( Character *ch )
 /*
  * Function to handle the state changing of a triggerobject (lever)  -Thoric
  */
-void pullorpush( Character *ch, OBJ_DATA *obj, bool pull )
+void pullorpush( Character *ch, Object *obj, bool pull )
 {
   char buf[MAX_STRING_LENGTH];
   Character *rch = NULL;
@@ -352,7 +352,7 @@ void pullorpush( Character *ch, OBJ_DATA *obj, bool pull )
     }
 }
 
-void actiondesc( Character *ch, OBJ_DATA *obj, void *vo )
+void actiondesc( Character *ch, Object *obj, void *vo )
 {
   char charbuf[MAX_STRING_LENGTH];
   char roombuf[MAX_STRING_LENGTH];

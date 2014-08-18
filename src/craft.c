@@ -68,7 +68,7 @@ static size_t CountCraftingMaterials( const CraftingMaterial *material );
 static struct FoundMaterial *AllocateFoundMaterials( const CraftingMaterial *recipeMaterials );
 static bool CheckSkill( const CraftingSession *session );
 static const char *GetItemTypeName( int itemType, int extraInfo );
-static struct FoundMaterial *GetUnfoundMaterial( const CraftingSession *session, const OBJ_DATA *obj );
+static struct FoundMaterial *GetUnfoundMaterial( const CraftingSession *session, const Object *obj );
 static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *eventArgs );
 static void CheckRequirementsHandler( void *userData, CheckRequirementsEventArgs *args );
 
@@ -116,8 +116,8 @@ static void AfterDelay( CraftingSession *session )
   int the_chance = ch->pcdata->learned[recipe->Skill];
   bool hasMaterials = CheckMaterials( session, true );
   int level = ch->pcdata->learned[recipe->Skill];
-  OBJ_DATA *object = NULL;
-  OBJ_INDEX_DATA *proto = get_obj_index( recipe->Prototype );
+  Object *object = NULL;
+  ProtoObject *proto = get_obj_index( recipe->Prototype );
   const char *itemType = GetItemTypeName( proto->item_type, proto->value[OVAL_WEAPON_TYPE] );
   SetObjectStatsEventArgs eventArgs;
   FinishedCraftingEventArgs finishedCraftingEventArgs;
@@ -345,7 +345,7 @@ static bool CheckSkill( const CraftingSession *session )
 void StartCrafting( CraftingSession *session )
 {
   Character *ch = session->Engineer;
-  OBJ_INDEX_DATA *obj = NULL;
+  ProtoObject *obj = NULL;
   InterpretArgumentsEventArgs interpretArgumentsEventArgs;
   CheckRequirementsEventArgs checkRequirementsEventArgs;
 
@@ -388,7 +388,7 @@ void StartCrafting( CraftingSession *session )
 
 static bool CheckMaterials( CraftingSession *session, bool extract )
 {
-  OBJ_DATA *obj = NULL;
+  Object *obj = NULL;
   Character *ch = GetEngineer( session );
   bool foundAll = true;
   struct FoundMaterial *material = NULL;
@@ -430,7 +430,7 @@ static bool CheckMaterials( CraftingSession *session, bool extract )
       if( !material->Found
 	  && !IsBitSet( material->Material.Flags, CRAFTFLAG_OPTIONAL ) )
 	{
-	  OBJ_INDEX_DATA *proto = get_obj_index( session->Recipe->Prototype );
+	  ProtoObject *proto = get_obj_index( session->Recipe->Prototype );
 
 	  foundAll = false;
 	  ch_printf( ch, "&RYou need %s to complete the %s.\r\n",
@@ -447,7 +447,7 @@ static bool CheckMaterials( CraftingSession *session, bool extract )
   return foundAll;
 }
 
-static struct FoundMaterial *GetUnfoundMaterial( const CraftingSession *session, const OBJ_DATA *obj )
+static struct FoundMaterial *GetUnfoundMaterial( const CraftingSession *session, const Object *obj )
 {
   struct FoundMaterial *material = session->FoundMaterials;
 

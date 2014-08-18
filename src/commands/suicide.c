@@ -5,7 +5,7 @@ void do_suicide( Character *ch, char *argument )
 {
   char  logbuf[MAX_STRING_LENGTH];
 
-  OBJ_DATA *obj;
+  Object *obj;
 
   if ( IsNpc(ch) || !ch->pcdata )
     {

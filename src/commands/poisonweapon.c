@@ -3,9 +3,9 @@
 
 void do_poison_weapon( Character *ch, char *argument )
 {
-  OBJ_DATA *obj;
-  OBJ_DATA *pobj;
-  OBJ_DATA *wobj;
+  Object *obj;
+  Object *pobj;
+  Object *wobj;
   char      arg [ MAX_INPUT_LENGTH ];
   int       percent;
 

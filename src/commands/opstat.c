@@ -5,7 +5,7 @@ void do_opstat( Character *ch, char *argument )
 {
   char        arg[MAX_INPUT_LENGTH];
   MPROG_DATA *mprg;
-  OBJ_DATA   *obj;
+  Object   *obj;
 
   OneArgument( argument, arg );
 

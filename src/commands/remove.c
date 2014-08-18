@@ -4,7 +4,7 @@
 void do_remove( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  OBJ_DATA *obj = NULL, *obj_next = NULL;
+  Object *obj = NULL, *obj_next = NULL;
 
   OneArgument( argument, arg );
 

@@ -6,7 +6,7 @@
  */
 void do_apply( Character *ch, char *argument )
 {
-  OBJ_DATA *obj;
+  Object *obj;
   ch_ret retcode;
 
   if ( argument[0] == '\0' )

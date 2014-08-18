@@ -5,7 +5,7 @@ void do_purge( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   Character *victim;
-  OBJ_DATA *obj;
+  Object *obj;
 
   OneArgument( argument, arg );
 
@@ -13,7 +13,7 @@ void do_purge( Character *ch, char *argument )
     {
       /* 'purge' */
       Character *vnext;
-      OBJ_DATA  *obj_next;
+      Object  *obj_next;
 
       for ( victim = ch->in_room->first_person; victim; victim = vnext )
         {

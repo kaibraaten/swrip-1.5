@@ -29,7 +29,7 @@ void do_look( Character *ch, char *argument )
   char arg3 [MAX_INPUT_LENGTH];
   Exit *pexit;
   Character *victim;
-  OBJ_DATA *obj;
+  Object *obj;
   char *pdesc;
   bool doexaprog;
   short door;
@@ -454,7 +454,7 @@ static void show_char_to_char_0( Character *victim, Character *ch )
 
 static void show_char_to_char_1( Character *victim, Character *ch )
 {
-  OBJ_DATA *obj;
+  Object *obj;
   int iWear;
   bool found;
 
@@ -601,7 +601,7 @@ static char *get_sex( Character *ch )
 static void look_under( Character *ch, char *what, bool doexaprog )
 {
   int count = 0;
-  OBJ_DATA *obj = NULL;
+  Object *obj = NULL;
 
   if ( what[0] == '\0' )
     {
@@ -688,7 +688,7 @@ static bool requirements_are_met( Character *ch )
 static void look_in( Character *ch, char *what, bool doexaprog )
 {
   int count = 0;
-  OBJ_DATA *obj = NULL;
+  Object *obj = NULL;
   Exit *pexit = NULL;
 
   if ( what[0] == '\0' )

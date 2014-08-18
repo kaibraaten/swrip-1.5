@@ -123,7 +123,7 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
 {
   struct UserData *ud = (struct UserData*) userData;
   char buf[MAX_STRING_LENGTH];
-  OBJ_DATA *obj = args->Object;
+  Object *obj = args->Object;
 
   SetBit( obj->wear_flags, ITEM_TAKE );
   SetBit( obj->wear_flags, ud->WearLocation );

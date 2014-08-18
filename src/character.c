@@ -262,7 +262,7 @@ int TimesKilled( const Character *ch, const Character *mob )
 
 bool HasComlink( const Character *ch )
 {
-  OBJ_DATA *obj = NULL;
+  Object *obj = NULL;
 
   if( IsImmortal( ch ) )
     {
@@ -322,9 +322,9 @@ bool IsAffectedBy( const Character *ch, int affected_by_bit )
  * Find a piece of eq on a character.
  * Will pick the top layer if clothing is layered.              -Thoric
  */
-OBJ_DATA *GetEquipmentOnCharacter( const Character *ch, int iWear )
+Object *GetEquipmentOnCharacter( const Character *ch, int iWear )
 {
-  OBJ_DATA *obj, *maxobj = NULL;
+  Object *obj, *maxobj = NULL;
 
   for ( obj = ch->first_carrying; obj; obj = obj->next_content )
     if ( obj->wear_loc == iWear )
@@ -343,10 +343,10 @@ OBJ_DATA *GetEquipmentOnCharacter( const Character *ch, int iWear )
 /*
  * Equip a char with an obj.
  */
-void EquipCharacter( Character *ch, OBJ_DATA *obj, int iWear )
+void EquipCharacter( Character *ch, Object *obj, int iWear )
 {
   Affect *paf;
-  OBJ_DATA      *otmp;
+  Object      *otmp;
 
   if ( (otmp=GetEquipmentOnCharacter( ch, iWear )) != NULL
        &&   (!otmp->pIndexData->layers || !obj->pIndexData->layers) )
@@ -399,7 +399,7 @@ void EquipCharacter( Character *ch, OBJ_DATA *obj, int iWear )
 /*
  * Unequip a char with an obj.
  */
-void UnequipCharacter( Character *ch, OBJ_DATA *obj )
+void UnequipCharacter( Character *ch, Object *obj )
 {
   Affect *paf;
 
@@ -435,10 +435,10 @@ void UnequipCharacter( Character *ch, OBJ_DATA *obj )
 /*
  * Find an obj in player's inventory.
  */
-OBJ_DATA *GetCarriedObject( const Character *ch, const char *argument )
+Object *GetCarriedObject( const Character *ch, const char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  OBJ_DATA *obj = NULL;
+  Object *obj = NULL;
   int number = 0, count = 0;
   vnum_t vnum = INVALID_VNUM;
 
@@ -476,10 +476,10 @@ OBJ_DATA *GetCarriedObject( const Character *ch, const char *argument )
 /*
  * Find an obj in player's equipment.
  */
-OBJ_DATA *GetWornObject( const Character *ch, const char *argument )
+Object *GetWornObject( const Character *ch, const char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  OBJ_DATA *obj = NULL;
+  Object *obj = NULL;
   int number = 0, count = 0;
   vnum_t vnum = INVALID_VNUM;
 
@@ -744,7 +744,7 @@ bool CanSeeCharacter( const Character *ch, const Character *victim )
 /*
  * True if char can see obj.
  */
-bool CanSeeObject( const Character *ch, const OBJ_DATA *obj )
+bool CanSeeObject( const Character *ch, const Object *obj )
 {
   if ( !IsNpc(ch) && IsBitSet(ch->act, PLR_HOLYLIGHT) )
     return true;
@@ -776,7 +776,7 @@ bool CanSeeObject( const Character *ch, const OBJ_DATA *obj )
 /*
  * True if char can drop obj.
  */
-bool CanDropObject( const Character *ch, const OBJ_DATA *obj )
+bool CanDropObject( const Character *ch, const Object *obj )
 {
   if ( !IS_OBJ_STAT(obj, ITEM_NODROP) )
     return true;
@@ -796,8 +796,8 @@ bool CanDropObject( const Character *ch, const OBJ_DATA *obj )
 void FixCharacterStats( Character *ch )
 {
   Affect *aff = NULL;
-  OBJ_DATA *carry[MAX_LEVEL*200];
-  OBJ_DATA *obj = NULL;
+  Object *carry[MAX_LEVEL*200];
+  Object *obj = NULL;
   int x = 0;
   int ncarry = 0;
 

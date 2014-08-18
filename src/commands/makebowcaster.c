@@ -111,7 +111,7 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
 {
   struct UserData *ud = (struct UserData*) userData;
   char buf[MAX_STRING_LENGTH];
-  OBJ_DATA *obj = args->Object;
+  Object *obj = args->Object;
   Affect *hitroll = NULL;
   Affect *damroll = NULL;
 

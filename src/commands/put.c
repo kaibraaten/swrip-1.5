@@ -5,9 +5,9 @@ void do_put( Character *ch, char *argument )
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
-  OBJ_DATA *container;
-  OBJ_DATA *obj;
-  OBJ_DATA *obj_next;
+  Object *container;
+  Object *obj;
+  Object *obj_next;
   Clan *clan;
   short count;
   int           number;

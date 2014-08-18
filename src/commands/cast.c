@@ -14,7 +14,7 @@ void do_cast( Character *ch, char *argument )
   char arg2[MAX_INPUT_LENGTH];
   static char staticbuf[MAX_INPUT_LENGTH];
   Character *victim;
-  OBJ_DATA *obj;
+  Object *obj;
   void *vo;
   int mana;
   int sn;

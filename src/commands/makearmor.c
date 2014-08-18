@@ -107,7 +107,7 @@ static void MaterialFoundHandler( void *userData, MaterialFoundEventArgs *eventA
 static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *eventArgs )
 {
   struct UserData *ud = (struct UserData*) userData;
-  OBJ_DATA *armor = eventArgs->Object;
+  Object *armor = eventArgs->Object;
   char description[MAX_STRING_LENGTH];
 
   armor->item_type = ITEM_ARMOR;

@@ -3,7 +3,7 @@
 
 void do_empty( Character *ch, char *argument )
 {
-  OBJ_DATA *obj;
+  Object *obj;
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
 
@@ -91,7 +91,7 @@ void do_empty( Character *ch, char *argument )
         }
       else
         {
-          OBJ_DATA *dest = get_obj_here( ch, arg2 );
+          Object *dest = get_obj_here( ch, arg2 );
 
           if ( !dest )
             {

@@ -94,7 +94,7 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
 {
   struct UserData *ud = (struct UserData*) userData;
   char buf[MAX_STRING_LENGTH];
-  OBJ_DATA *shield = args->Object;
+  Object *shield = args->Object;
 
   shield->item_type = ITEM_ARMOR;
   SetBit( shield->wear_flags, ITEM_WIELD );

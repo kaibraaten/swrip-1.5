@@ -6,7 +6,7 @@
  * destroying the scroll.  --Sadiq                                      */
 void do_scribe( Character *ch, char *argument )
 {
-  OBJ_DATA *scroll;
+  Object *scroll;
   int sn;
   char buf1[MAX_STRING_LENGTH];
   char buf2[MAX_STRING_LENGTH];

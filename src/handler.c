@@ -25,7 +25,7 @@
 #include "track.h"
 
 extern Character *gch_prev;
-extern OBJ_DATA *gobj_prev;
+extern Object *gobj_prev;
 
 Character *cur_char = NULL;
 Room *cur_room = NULL;
@@ -37,20 +37,20 @@ int cur_obj_serial = 0;
 bool cur_obj_extracted = false;
 obj_ret global_objcode = rNONE;
 
-OBJ_DATA *group_object( OBJ_DATA *obj1, OBJ_DATA *obj2 );
+Object *group_object( Object *obj1, Object *obj2 );
 
-static void room_explode( OBJ_DATA *obj , Character *xch, Room *room );
-static void room_explode_1( OBJ_DATA *obj , Character *xch, Room *room , int blast );
+static void room_explode( Object *obj , Character *xch, Room *room );
+static void room_explode_1( Object *obj , Character *xch, Room *room , int blast );
 static void room_explode_2( Room *room , int blast );
 
-void explode( OBJ_DATA *obj )
+void explode( Object *obj )
 {
   if ( obj->armed_by )
     {
       Room *room;
       Character *xch;
       bool held = false;
-      OBJ_DATA *objcont = obj;
+      Object *objcont = obj;
 
       while ( objcont->in_obj && !obj->carried_by )
         objcont = objcont->in_obj;
@@ -81,19 +81,19 @@ void explode( OBJ_DATA *obj )
   make_scraps(obj);
 }
 
-void room_explode( OBJ_DATA *obj, Character *xch, Room *room )
+void room_explode( Object *obj, Character *xch, Room *room )
 {
   int blast = (int) (obj->value[OVAL_EXPLOSIVE_MAX_DMG] / 500) ;
   room_explode_1( obj , xch, room , blast );
   room_explode_2( room , blast );
 }
 
-void room_explode_1( OBJ_DATA *obj, Character *xch, Room *room, int blast )
+void room_explode_1( Object *obj, Character *xch, Room *room, int blast )
 {
   Character *rch;
   Character *rnext;
-  OBJ_DATA  *robj;
-  OBJ_DATA  *robj_next;
+  Object  *robj;
+  Object  *robj_next;
   int dam;
 
   if ( IsBitSet( room->room_flags, BFS_MARK ) )
@@ -206,7 +206,7 @@ bool can_take_proto( const Character *ch )
  */
 void affect_modify( Character *ch, Affect *paf, bool fAdd )
 {
-  OBJ_DATA *wield;
+  Object *wield;
   int mod;
   struct skill_type *skill;
   ch_ret retcode;
@@ -573,7 +573,7 @@ void affect_join( Character *ch, Affect *paf )
  */
 void char_from_room( Character *ch )
 {
-  OBJ_DATA *obj;
+  Object *obj;
 
   if ( !ch )
     {
@@ -614,7 +614,7 @@ void char_from_room( Character *ch )
  */
 void char_to_room( Character *ch, Room *pRoomIndex )
 {
-  OBJ_DATA *obj;
+  Object *obj;
 
   if ( !ch )
     {
@@ -671,10 +671,10 @@ void char_to_room( Character *ch, Room *pRoomIndex )
 /*
  * Give an obj to a char.
  */
-OBJ_DATA *obj_to_char( OBJ_DATA *obj, Character *ch )
+Object *obj_to_char( Object *obj, Character *ch )
 {
-  OBJ_DATA *otmp = NULL;
-  OBJ_DATA *oret = obj;
+  Object *otmp = NULL;
+  Object *oret = obj;
   bool skipgroup = false, grouped = false;
   int oweight = get_obj_weight( obj );
   int onum = get_obj_number( obj );
@@ -731,7 +731,7 @@ OBJ_DATA *obj_to_char( OBJ_DATA *obj, Character *ch )
 /*
  * Take an obj from its character.
  */
-void obj_from_char( OBJ_DATA *obj )
+void obj_from_char( Object *obj )
 {
   Character *ch;
 
@@ -759,7 +759,7 @@ void obj_from_char( OBJ_DATA *obj )
   ch->carry_weight      -= get_obj_weight( obj );
 }
 
-int count_users(const OBJ_DATA *obj)
+int count_users(const Object *obj)
 {
   const Character *fch = NULL;
   int count = 0;
@@ -778,7 +778,7 @@ int count_users(const OBJ_DATA *obj)
 /*
  * Find the ac value of an obj, including position effect.
  */
-int apply_ac( const OBJ_DATA *obj, int iWear )
+int apply_ac( const Object *obj, int iWear )
 {
   if ( obj->item_type != ITEM_ARMOR )
     return 0;
@@ -810,9 +810,9 @@ int apply_ac( const OBJ_DATA *obj, int iWear )
 /*
  * Count occurrences of an obj in a list.
  */
-int count_obj_list( const OBJ_INDEX_DATA *pObjIndex, const OBJ_DATA *list )
+int count_obj_list( const ProtoObject *pObjIndex, const Object *list )
 {
-  const OBJ_DATA *obj = NULL;
+  const Object *obj = NULL;
   int nMatch = 0;
 
   for ( obj = list; obj; obj = obj->next_content )
@@ -829,7 +829,7 @@ void write_corpses( Character *ch, const char *name );
 
 int falling = 0;
 
-void obj_from_room( OBJ_DATA *obj )
+void obj_from_room( Object *obj )
 {
   Room *in_room;
 
@@ -859,9 +859,9 @@ void obj_from_room( OBJ_DATA *obj )
 /*
  * Move an obj into a room.
  */
-OBJ_DATA *obj_to_room( OBJ_DATA *obj, Room *pRoomIndex )
+Object *obj_to_room( Object *obj, Room *pRoomIndex )
 {
-  OBJ_DATA *otmp, *oret;
+  Object *otmp, *oret;
   short count = obj->count;
   short item_type = obj->item_type;
 
@@ -895,9 +895,9 @@ OBJ_DATA *obj_to_room( OBJ_DATA *obj, Room *pRoomIndex )
 /*
  * Move an object into an object.
  */
-OBJ_DATA *obj_to_obj( OBJ_DATA *obj, OBJ_DATA *obj_to )
+Object *obj_to_obj( Object *obj, Object *obj_to )
 {
-  OBJ_DATA *otmp, *oret;
+  Object *otmp, *oret;
 
   if ( obj == obj_to )
     {
@@ -930,9 +930,9 @@ OBJ_DATA *obj_to_obj( OBJ_DATA *obj, OBJ_DATA *obj_to )
 /*
  * Move an object out of an object.
  */
-void obj_from_obj( OBJ_DATA *obj )
+void obj_from_obj( Object *obj )
 {
-  OBJ_DATA *obj_from;
+  Object *obj_from;
 
   if ( ( obj_from = obj->in_obj ) == NULL )
     {
@@ -958,9 +958,9 @@ void obj_from_obj( OBJ_DATA *obj )
 /*
  * Extract an obj from the world.
  */
-void extract_obj( OBJ_DATA *obj )
+void extract_obj( Object *obj )
 {
-  OBJ_DATA *obj_content;
+  Object *obj_content;
 
   if ( !obj )
     {
@@ -1043,7 +1043,7 @@ void extract_obj( OBJ_DATA *obj )
 void extract_char( Character *ch, bool fPull )
 {
   Character *wch;
-  OBJ_DATA *obj;
+  Object *obj;
   char buf[MAX_STRING_LENGTH];
   Room *location;
 
@@ -1322,9 +1322,9 @@ Character *get_char_world( const Character *ch, const char *argument )
  * Find some object with a given index data.
  * Used by area-reset 'P', 'T' and 'H' commands.
  */
-OBJ_DATA *get_obj_type( const OBJ_INDEX_DATA *pObjIndex )
+Object *get_obj_type( const ProtoObject *pObjIndex )
 {
-  OBJ_DATA *obj;
+  Object *obj;
 
   for ( obj = last_object; obj; obj = obj->prev )
     if ( obj->pIndexData == pObjIndex )
@@ -1336,10 +1336,10 @@ OBJ_DATA *get_obj_type( const OBJ_INDEX_DATA *pObjIndex )
 /*
  * Find an obj in a list.
  */
-OBJ_DATA *get_obj_list( const Character *ch, const char *argument, OBJ_DATA *list )
+Object *get_obj_list( const Character *ch, const char *argument, Object *list )
 {
   char arg[MAX_INPUT_LENGTH];
-  OBJ_DATA *obj = NULL;
+  Object *obj = NULL;
   int number = NumberArgument( argument, arg );
   int count  = 0;
 
@@ -1365,10 +1365,10 @@ OBJ_DATA *get_obj_list( const Character *ch, const char *argument, OBJ_DATA *lis
 /*
  * Find an obj in a list...going the other way                  -Thoric
  */
-OBJ_DATA *get_obj_list_rev( const Character *ch, const char *argument, OBJ_DATA *list )
+Object *get_obj_list_rev( const Character *ch, const char *argument, Object *list )
 {
   char arg[MAX_INPUT_LENGTH];
-  OBJ_DATA *obj;
+  Object *obj;
   int number;
   int count;
 
@@ -1395,9 +1395,9 @@ OBJ_DATA *get_obj_list_rev( const Character *ch, const char *argument, OBJ_DATA 
 /*
  * Find an obj in the room or in inventory.
  */
-OBJ_DATA *get_obj_here( const Character *ch, const char *argument )
+Object *get_obj_here( const Character *ch, const char *argument )
 {
-  OBJ_DATA *obj;
+  Object *obj;
 
   if ( !ch || !ch->in_room )
     return NULL;
@@ -1418,10 +1418,10 @@ OBJ_DATA *get_obj_here( const Character *ch, const char *argument )
 /*
  * Find an obj in the world.
  */
-OBJ_DATA *get_obj_world( const Character *ch, const char *argument )
+Object *get_obj_world( const Character *ch, const char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  OBJ_DATA *obj;
+  Object *obj;
   int number, count;
   vnum_t vnum = INVALID_VNUM;
 
@@ -1468,13 +1468,13 @@ OBJ_DATA *get_obj_world( const Character *ch, const char *argument )
  * Generic get obj function that supports optional containers.  -Thoric
  * currently only used for "eat" and "quaff".
  */
-OBJ_DATA *find_obj( Character *ch, const char *orig_argument, bool carryonly )
+Object *find_obj( Character *ch, const char *orig_argument, bool carryonly )
 {
   char argument_buffer[MAX_INPUT_LENGTH];
   char *argument = argument_buffer;
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
-  OBJ_DATA *obj;
+  Object *obj;
 
   strcpy(argument, orig_argument);
   argument = OneArgument( argument, arg1 );
@@ -1501,7 +1501,7 @@ OBJ_DATA *find_obj( Character *ch, const char *orig_argument, bool carryonly )
     }
   else
     {
-      OBJ_DATA *container;
+      Object *container;
 
       if ( carryonly
            && ( container = GetCarriedObject( ch, arg2 ) ) == NULL
@@ -1536,7 +1536,7 @@ OBJ_DATA *find_obj( Character *ch, const char *orig_argument, bool carryonly )
   return NULL;
 }
 
-int get_obj_number( const OBJ_DATA *obj )
+int get_obj_number( const Object *obj )
 {
   return obj->count;
 }
@@ -1544,7 +1544,7 @@ int get_obj_number( const OBJ_DATA *obj )
 /*
  * Return weight of an object, including weight of contents.
  */
-int get_obj_weight( const OBJ_DATA *obj )
+int get_obj_weight( const Object *obj )
 {
   int weight = obj->count * obj->weight;
 
@@ -1624,7 +1624,7 @@ bool room_is_private( const Character *ch, const Room *pRoomIndex )
 /*
  * Return ascii name of an item type.
  */
-const char *item_type_name( const OBJ_DATA *obj )
+const char *item_type_name( const Object *obj )
 {
   if ( obj->item_type < 1 || obj->item_type > MAX_ITEM_TYPE )
     {
@@ -1718,7 +1718,7 @@ const char *affect_loc_name( int location )
 /*
  * Set off a trap (obj) upon character (ch)                     -Thoric
  */
-ch_ret spring_trap( Character *ch, OBJ_DATA *obj )
+ch_ret spring_trap( Character *ch, Object *obj )
 {
   int dam;
   char *txt;
@@ -1811,9 +1811,9 @@ ch_ret spring_trap( Character *ch, OBJ_DATA *obj )
 /*
  * Check an object for a trap                                   -Thoric
  */
-ch_ret check_for_trap( Character *ch, const OBJ_DATA *obj, int flag )
+ch_ret check_for_trap( Character *ch, const Object *obj, int flag )
 {
-  OBJ_DATA *check;
+  Object *check;
   ch_ret retcode = rNONE;
 
   if ( !obj->first_content )
@@ -1837,7 +1837,7 @@ ch_ret check_for_trap( Character *ch, const OBJ_DATA *obj, int flag )
  */
 ch_ret check_room_for_traps( Character *ch, int flag )
 {
-  OBJ_DATA *check;
+  Object *check;
   ch_ret retcode = rNONE;
 
   if ( !ch )
@@ -1869,9 +1869,9 @@ ch_ret check_room_for_traps( Character *ch, int flag )
 /*
  * return true if an object contains a trap                     -Thoric
  */
-bool is_trapped( const OBJ_DATA *obj )
+bool is_trapped( const Object *obj )
 {
-  OBJ_DATA *check;
+  Object *check;
 
   if ( !obj->first_content )
     return false;
@@ -1886,9 +1886,9 @@ bool is_trapped( const OBJ_DATA *obj )
 /*
  * If an object contains a trap, return the pointer to the trap -Thoric
  */
-OBJ_DATA *get_trap( const OBJ_DATA *obj )
+Object *get_trap( const Object *obj )
 {
-  OBJ_DATA *check;
+  Object *check;
 
   if ( !obj->first_content )
     return NULL;
@@ -1954,7 +1954,7 @@ void clean_room( Room *room )
 /*
  * clean out an object (index) (leave list pointers intact )    -Thoric
  */
-void clean_obj( OBJ_INDEX_DATA *obj )
+void clean_obj( ProtoObject *obj )
 {
   Affect *paf = NULL;
   Affect *paf_next = NULL;
@@ -2116,7 +2116,7 @@ void showaffect( const Character *ch, const Affect *paf )
 /*
  * Set the current global object to obj                         -Thoric
  */
-void set_cur_obj( OBJ_DATA *obj )
+void set_cur_obj( Object *obj )
 {
   cur_obj = obj->serial;
   cur_obj_extracted = false;
@@ -2126,9 +2126,9 @@ void set_cur_obj( OBJ_DATA *obj )
 /*
  * Check the recently extracted object queue for obj            -Thoric
  */
-bool obj_extracted( const OBJ_DATA *obj )
+bool obj_extracted( const Object *obj )
 {
-  OBJ_DATA *cod;
+  Object *cod;
 
   if ( !obj )
     return true;
@@ -2146,7 +2146,7 @@ bool obj_extracted( const OBJ_DATA *obj )
 /*
  * Stick obj onto extraction queue
  */
-void queue_extracted_obj( OBJ_DATA *obj )
+void queue_extracted_obj( Object *obj )
 {
 
   ++cur_qobjs;
@@ -2159,7 +2159,7 @@ void queue_extracted_obj( OBJ_DATA *obj )
  */
 void clean_obj_queue()
 {
-  OBJ_DATA *obj;
+  Object *obj;
 
   while ( extracted_obj_queue )
     {
@@ -2400,12 +2400,12 @@ bool chance_attrib( const Character *ch, short percent, short attrib )
 /*
  * Make a simple clone of an object (no extras...yet)           -Thoric
  */
-OBJ_DATA *clone_object( const OBJ_DATA *obj )
+Object *clone_object( const Object *obj )
 {
-  OBJ_DATA *clone = NULL;
+  Object *clone = NULL;
   int oval = 0;
 
-  AllocateMemory( clone, OBJ_DATA, 1 );
+  AllocateMemory( clone, Object, 1 );
   clone->pIndexData     = obj->pIndexData;
   clone->name           = CopyString( obj->name );
   clone->short_descr    = CopyString( obj->short_descr );
@@ -2436,7 +2436,7 @@ OBJ_DATA *clone_object( const OBJ_DATA *obj )
   return clone;
 }
 
-static bool HasSameOvalues( const OBJ_DATA *a, const OBJ_DATA *b )
+static bool HasSameOvalues( const Object *a, const Object *b )
 {
   int oval = 0;
 
@@ -2459,7 +2459,7 @@ static bool HasSameOvalues( const OBJ_DATA *a, const OBJ_DATA *b )
  * as this will allow them to be grouped together both in memory, and in
  * the player files.
  */
-OBJ_DATA *group_object( OBJ_DATA *obj1, OBJ_DATA *obj2 )
+Object *group_object( Object *obj1, Object *obj2 )
 {
   if ( !obj1 || !obj2 )
     return NULL;
@@ -2503,10 +2503,10 @@ OBJ_DATA *group_object( OBJ_DATA *obj1, OBJ_DATA *obj2 )
  * Split off a grouped object                                   -Thoric
  * decreased obj's count to num, and creates a new object containing the rest
  */
-void split_obj( OBJ_DATA *obj, int num )
+void split_obj( Object *obj, int num )
 {
   int count = 0;
-  OBJ_DATA *rest = NULL;
+  Object *rest = NULL;
 
   if (!obj)
     {
@@ -2553,7 +2553,7 @@ void split_obj( OBJ_DATA *obj, int num )
         }
 }
 
-void separate_obj( OBJ_DATA *obj )
+void separate_obj( Object *obj )
 {
   split_obj( obj, 1 );
 }
@@ -2561,9 +2561,9 @@ void separate_obj( OBJ_DATA *obj )
 /*
  * Empty an obj's contents... optionally into another obj, or a room
  */
-bool empty_obj( OBJ_DATA *obj, OBJ_DATA *destobj, Room *destroom )
+bool empty_obj( Object *obj, Object *destobj, Room *destroom )
 {
-  OBJ_DATA *otmp, *otmp_next;
+  Object *otmp, *otmp_next;
   Character *ch = obj->carried_by;
   bool movedsome = false;
 

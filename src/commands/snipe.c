@@ -3,7 +3,7 @@
 
 void do_snipe( Character *ch, char *argument )
 {
-  OBJ_DATA        * wield;
+  Object        * wield;
   char              arg[MAX_INPUT_LENGTH];
   char              arg2[MAX_INPUT_LENGTH];
   short            dir, dist;

@@ -381,7 +381,7 @@ void HuntVictim( Character *ch )
 
   /* hunting with snipe */
   {
-    OBJ_DATA *wield = GetEquipmentOnCharacter( ch, WEAR_WIELD );
+    Object *wield = GetEquipmentOnCharacter( ch, WEAR_WIELD );
 
     if ( wield != NULL && wield->value[OVAL_WEAPON_TYPE] == WEAPON_BLASTER  )
       {

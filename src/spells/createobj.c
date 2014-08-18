@@ -11,8 +11,8 @@ ch_ret spell_create_obj( int sn, int level, Character *ch, void *vo )
   SKILLTYPE *skill = get_skilltype(sn);
   int lvl;
   int vnum = skill->value;
-  OBJ_DATA *obj;
-  OBJ_INDEX_DATA *oi;
+  Object *obj;
+  ProtoObject *oi;
 
   switch( SPELL_POWER(skill) )
     {

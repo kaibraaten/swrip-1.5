@@ -97,7 +97,7 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
 {
   struct UserData *ud = (struct UserData*) userData;
   char buf[MAX_STRING_LENGTH];
-  OBJ_DATA *comlink = args->Object;
+  Object *comlink = args->Object;
 
   SetBit( comlink->wear_flags, ITEM_TAKE );
   SetBit( comlink->wear_flags, ud->WearLocation );

@@ -5,8 +5,8 @@ extern char *spell_target_name;
 
 ch_ret spell_remove_trap( int sn, int level, Character *ch, void *vo )
 {
-  OBJ_DATA *obj;
-  OBJ_DATA *trap;
+  Object *obj;
+  Object *trap;
   bool found;
   int retcode;
   SKILLTYPE *skill = get_skilltype(sn);

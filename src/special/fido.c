@@ -3,10 +3,10 @@
 
 bool spec_fido( Character *ch )
 {
-  OBJ_DATA *corpse;
-  OBJ_DATA *c_next;
-  OBJ_DATA *obj;
-  OBJ_DATA *obj_next;
+  Object *corpse;
+  Object *c_next;
+  Object *obj;
+  Object *obj_next;
 
   if ( !IsAwake(ch) )
     return false;
