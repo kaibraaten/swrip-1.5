@@ -2249,7 +2249,7 @@ void clean_char_queue()
  */
 void add_timer( Character *ch, short type, short count, DO_FUN *fun, int value )
 {
-  TIMER *timer;
+  Timer *timer;
 
   for ( timer = ch->first_timer; timer; timer = timer->next )
     if ( timer->type == type )
@@ -2261,7 +2261,7 @@ void add_timer( Character *ch, short type, short count, DO_FUN *fun, int value )
       }
   if ( !timer )
     {
-      AllocateMemory( timer, TIMER, 1 );
+      AllocateMemory( timer, Timer, 1 );
       timer->count      = count;
       timer->type       = type;
       timer->do_fun     = fun;
@@ -2270,9 +2270,9 @@ void add_timer( Character *ch, short type, short count, DO_FUN *fun, int value )
     }
 }
 
-TIMER *get_timerptr( const Character *ch, short type )
+Timer *get_timerptr( const Character *ch, short type )
 {
-  TIMER *timer;
+  Timer *timer;
 
   for ( timer = ch->first_timer; timer; timer = timer->next )
     if ( timer->type == type )
@@ -2283,7 +2283,7 @@ TIMER *get_timerptr( const Character *ch, short type )
 
 short get_timer( const Character *ch, short type )
 {
-  TIMER *timer;
+  Timer *timer;
 
   if ( (timer = get_timerptr( ch, type )) != NULL )
     return timer->count;
@@ -2291,7 +2291,7 @@ short get_timer( const Character *ch, short type )
     return 0;
 }
 
-void extract_timer( Character *ch, TIMER *timer )
+void extract_timer( Character *ch, Timer *timer )
 {
   if ( !timer )
     {
@@ -2305,7 +2305,7 @@ void extract_timer( Character *ch, TIMER *timer )
 
 void remove_timer( Character *ch, short type )
 {
-  TIMER *timer;
+  Timer *timer;
 
   for ( timer = ch->first_timer; timer; timer = timer->next )
     if ( timer->type == type )

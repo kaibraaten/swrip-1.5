@@ -192,7 +192,7 @@ void interpret( Character *ch, char *argument )
   char command[MAX_INPUT_LENGTH];
   char logline[MAX_INPUT_LENGTH];
   char logname[MAX_INPUT_LENGTH];
-  TIMER *timer = NULL;
+  Timer *timer = NULL;
   CMDTYPE *cmd = NULL;
   int trust = 0;
   int loglvl = 0;

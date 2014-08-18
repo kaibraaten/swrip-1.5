@@ -209,7 +209,7 @@ void do_cast( Character *ch, char *argument )
         {
           int cnt = 1;
           Character *tmp;
-          TIMER *t;
+          Timer *t;
 
           for ( tmp = ch->in_room->first_person; tmp; tmp = tmp->next_in_room )
             if (  tmp != ch

@@ -2540,7 +2540,7 @@ void free_char( Character *ch )
 {
   OBJ_DATA *obj;
   Affect *paf;
-  TIMER *timer;
+  Timer *timer;
   MPROG_ACT_LIST *mpact, *mpact_next;
   Note *comments, *comments_next;
 

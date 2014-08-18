@@ -145,8 +145,8 @@ typedef struct Editor                  Editor;
 struct teleport_data;
 typedef struct teleport_data           TELEPORT_DATA;
 
-struct timer_data;
-typedef struct timer_data              TIMER;
+struct Timer;
+typedef struct Timer                   Timer;
 
 struct godlist_data;
 typedef struct godlist_data            GOD_DATA;

@@ -59,8 +59,8 @@ struct Character
   void *                spare_ptr;
   int                   tempnum;
   Editor * editor;
-  TIMER *       first_timer;
-  TIMER *       last_timer;
+  Timer *       first_timer;
+  Timer *       last_timer;
   char *                name;
   char *                short_descr;
   char *                long_descr;

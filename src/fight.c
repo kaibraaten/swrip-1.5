@@ -161,7 +161,7 @@ void violence_update( void )
   Character *victim;
   Character *rch, *rch_next;
   Affect *paf, *paf_next;
-  TIMER *timer, *timer_next;
+  Timer *timer, *timer_next;
   ch_ret     retcode;
   SKILLTYPE     *skill;
 

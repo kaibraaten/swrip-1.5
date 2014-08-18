@@ -627,10 +627,10 @@ struct SmaugAffect
   int        bitvector;
 };
 
-struct timer_data
+struct Timer
 {
-  TIMER  *prev;
-  TIMER  *next;
+  Timer  *prev;
+  Timer  *next;
   DO_FUN *do_fun;
   int     value;
   short   type;
@@ -2611,9 +2611,9 @@ extern "C" {
   void queue_extracted_char( Character *ch, bool extract );
   void clean_char_queue( void );
   void add_timer( Character *ch, short type, short count, DO_FUN *fun, int value );
-  TIMER * get_timerptr( const Character *ch, short type );
+  Timer * get_timerptr( const Character *ch, short type );
   short get_timer( const Character *ch, short type );
-  void extract_timer( Character *ch, TIMER *timer );
+  void extract_timer( Character *ch, Timer *timer );
   void remove_timer( Character *ch, short type );
   bool in_soft_range( const Character *ch, const Area *tarea );
   bool in_hard_range( const Character *ch, const Area *tarea );
