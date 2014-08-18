@@ -4,7 +4,7 @@
 ch_ret spell_affectchar( int sn, int level, Character *ch, void *vo )
 {
   Affect af;
-  SMAUG_AFF *saf;
+  SmaugAffect *saf;
   SKILLTYPE *skill = get_skilltype(sn);
   Character *victim = (Character *) vo;
   int aff_chance;

@@ -34,7 +34,7 @@ void do_slookup( Character *ch, char *argument )
       }
     else
       {
-        SMAUG_AFF *aff;
+        SmaugAffect *aff;
         int cnt = 0;
 
         if ( arg[0] == 'h' && IsNumber(arg+1) )

@@ -334,8 +334,8 @@ void do_sset( Character *ch, char *argument )
         }
       if ( !StrCmp( arg2, "rmaffect" ) )
         {
-          SMAUG_AFF *aff = skill->affects;
-          SMAUG_AFF *aff_next;
+          SmaugAffect *aff = skill->affects;
+          SmaugAffect *aff_next;
           int num = atoi( argument );
           int cnt = 1;
 
@@ -378,7 +378,7 @@ void do_sset( Character *ch, char *argument )
           char duration[MAX_INPUT_LENGTH];
           char bitvector[MAX_INPUT_LENGTH];
           int loc, bit, tmpbit;
-          SMAUG_AFF *aff;
+          SmaugAffect *aff;
 
           argument = OneArgument( argument, location );
           argument = OneArgument( argument, modifier );
@@ -403,7 +403,7 @@ void do_sset( Character *ch, char *argument )
               else
                 bit |= (1 << tmpbit);
             }
-          AllocateMemory( aff, SMAUG_AFF, 1 );
+          AllocateMemory( aff, SmaugAffect, 1 );
           if ( !StrCmp( duration, "0" ) )
             duration[0] = '\0';
           if ( !StrCmp( modifier, "0" ) )

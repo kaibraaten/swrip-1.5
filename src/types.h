@@ -154,8 +154,8 @@ typedef struct godlist_data            GOD_DATA;
 struct system_data;
 typedef struct system_data             SYSTEM_DATA;
 
-struct smaug_affect;
-typedef struct smaug_affect            SMAUG_AFF;
+struct SmaugAffect;
+typedef struct SmaugAffect             SmaugAffect;
 
 struct who_data;
 typedef struct who_data                WHO_DATA;

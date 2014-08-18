@@ -866,7 +866,7 @@ void sort_skill_table()
  */
 void fwrite_skill( FILE *fpout, SKILLTYPE *skill )
 {
-  SMAUG_AFF *aff = NULL;
+  SmaugAffect *aff = NULL;
 
   fprintf( fpout, "Name         %s~\n", skill->name     );
   fprintf( fpout, "Type         %s\n",  skill_tname[skill->type]);
@@ -1259,9 +1259,9 @@ SKILLTYPE *fread_skill( FILE *fp )
 
           if ( !StrCmp( word, "Affect" ) )
             {
-              SMAUG_AFF *aff = NULL;
+              SmaugAffect *aff = NULL;
 
-              AllocateMemory( aff, SMAUG_AFF, 1 );
+              AllocateMemory( aff, SmaugAffect, 1 );
               aff->duration = CopyString( ReadWord( fp ) );
               aff->location = ReadInt( fp );
               aff->modifier = CopyString( ReadWord( fp ) );

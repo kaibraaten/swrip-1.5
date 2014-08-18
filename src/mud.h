@@ -618,9 +618,9 @@ struct Affect
 /*
  * A SMAUG spell
  */
-struct smaug_affect
+struct SmaugAffect
 {
-  SMAUG_AFF *next;
+  SmaugAffect *next;
   char      *duration;
   short      location;
   char      *modifier;
@@ -1183,7 +1183,7 @@ struct skill_type
   int        value;                  /* Misc value                   */
   char       saves;                  /* What saving spell applies    */
   char       difficulty;             /* Difficulty of casting/learning */
-  SMAUG_AFF *affects;                /* Spell affects, if any        */
+  SmaugAffect *affects;                /* Spell affects, if any        */
   char      *components;             /* Spell components, if any     */
   char      *teachers;               /* Skill requires a special teacher */
   char       participants;           /* # of required participants   */
