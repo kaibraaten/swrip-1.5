@@ -59,5 +59,5 @@ void do_clan_withdraw( Character *ch, char *argument )
 
   clan->funds -= amount;
   ch->gold += amount;
-  save_clan ( clan );
+  SaveClan ( clan );
 }

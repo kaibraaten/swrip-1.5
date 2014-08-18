@@ -71,7 +71,7 @@ void do_capture ( Character *ch , char *argument )
           if( !IsSpaceobjectInCaptureRange( ship, planet->spaceobject ) )
             continue;
 
-	  sClan = get_clan(ship->owner);
+	  sClan = GetClan(ship->owner);
 
           if ( !sClan )
             continue;
@@ -118,5 +118,5 @@ void do_capture ( Character *ch , char *argument )
   sprintf( buf , "%s has claimed the planet %s!", clan->name, planet->name );
   EchoToAll( AT_RED , buf , 0 );
 
-  save_planet( planet );
+  SavePlanet( planet );
 }

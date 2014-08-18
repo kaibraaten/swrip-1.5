@@ -53,5 +53,5 @@ void do_appoint ( Character *ch , char *argument )
   else
     do_appoint( ch , "" );
 
-  save_clan ( ch->pcdata->clan );
+  SaveClan ( ch->pcdata->clan );
 }

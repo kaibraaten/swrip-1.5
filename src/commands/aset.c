@@ -64,7 +64,7 @@ void do_aset( Character *ch, char *argument )
   if ( !StrCmp( arg2, "planet" ) )
     {
       Planet *planet;
-      planet = get_planet(argument);
+      planet = GetPlanet(argument);
       if (planet)
         {
           if (tarea->planet)
@@ -77,7 +77,7 @@ void do_aset( Character *ch, char *argument )
 
           tarea->planet=planet;
 	  LINK(tarea, planet->first_area, planet->last_area, next_on_planet, prev_on_planet);
-          save_planet(planet);
+          SavePlanet(planet);
         }
       return;
     }

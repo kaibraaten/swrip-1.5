@@ -1641,9 +1641,9 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
       check_killer( ch, victim );
 
       if ( !IsNpc( ch ) && ch->pcdata->clan )
-        update_member( ch );
+        UpdateClanMember( ch );
       if ( !IsNpc( victim ) && victim->pcdata->clan )
-        update_member( victim );
+        UpdateClanMember( victim );
 
       if ( victim->in_room != ch->in_room || !IsNpc(victim) || !IsBitSet( victim->act, ACT_NOKILL )  )
         loot = legal_loot( ch, victim );
@@ -2057,7 +2057,7 @@ void raw_kill( Character *killer, Character *victim )
   strcpy( arg , victim->name );
 
   if ( !IsNpc( victim ) && victim->pcdata->clan )
-    remove_member( victim );
+    RemoveClanMember( victim );
 
   stop_fighting( victim, true );
 

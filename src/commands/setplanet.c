@@ -25,7 +25,7 @@ void do_setplanet( Character *ch, char *argument )
       return;
     }
 
-  planet = get_planet( arg1 );
+  planet = GetPlanet( arg1 );
 
   if ( !planet )
     {
@@ -38,19 +38,19 @@ void do_setplanet( Character *ch, char *argument )
       FreeMemory( planet->name );
       planet->name = CopyString( argument );
       send_to_char( "Done.\r\n", ch );
-      save_planet( planet );
+      SavePlanet( planet );
       return;
     }
 
   if ( !StrCmp( arg2, "governed_by" ) )
     {
-      Clan *clan = get_clan( argument );
+      Clan *clan = GetClan( argument );
 
       if ( clan )
         {
           planet->governed_by = clan;
           send_to_char( "Done.\r\n", ch );
-          save_planet( planet );
+          SavePlanet( planet );
         }
       else
         {
@@ -70,7 +70,7 @@ void do_setplanet( Character *ch, char *argument )
 	    {
               spaceobject->planet = planet;
               send_to_char( "Done.\r\n", ch );
-              save_planet(planet);
+              SavePlanet(planet);
             }
           else
             {
@@ -86,8 +86,8 @@ void do_setplanet( Character *ch, char *argument )
       FreeMemory( planet->filename );
       planet->filename = CopyString( argument );
       send_to_char( "Done.\r\n", ch );
-      save_planet( planet );
-      write_planet_list( );
+      SavePlanet( planet );
+      WritePlanetList( );
       return;
     }
 
@@ -95,7 +95,7 @@ void do_setplanet( Character *ch, char *argument )
     {
       planet->base_value = atoi( argument );
       send_to_char( "Done.\r\n", ch );
-      save_planet( planet );
+      SavePlanet( planet );
       return;
     }
 
@@ -124,7 +124,7 @@ void do_setplanet( Character *ch, char *argument )
         }
 
       send_to_char( "Done.\r\n", ch );
-      save_planet( planet );
+      SavePlanet( planet );
       return;
     }
 

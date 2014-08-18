@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-static const char *get_clan_type(const Clan *const clan);
+static const char *GetClan_type(const Clan *const clan);
 
 void do_showclan( Character *ch, char *argument )
 {
@@ -19,7 +19,7 @@ void do_showclan( Character *ch, char *argument )
       return;
     }
 
-  clan = get_clan( argument );
+  clan = GetClan( argument );
 
   if ( !clan )
     {
@@ -28,7 +28,7 @@ void do_showclan( Character *ch, char *argument )
     }
 
   ch_printf( ch, "%s       : %s\r\nFilename: %s\r\n",
-             get_clan_type(clan),
+             GetClan_type(clan),
              clan->name,
              clan->filename);
   ch_printf( ch, "Description: %s\r\nLeader: %s\r\n",
@@ -63,7 +63,7 @@ void do_showclan( Character *ch, char *argument )
              clan->enlistroom1, clan->enlistroom2 );
 }
 
-static const char *get_clan_type(const Clan *const clan)
+static const char *GetClan_type(const Clan *const clan)
 {
   return clan->clan_type == CLAN_CRIME ? "Crime Family" :
     clan->clan_type == CLAN_GUILD ? "Guild" : "Organization";

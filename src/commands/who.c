@@ -158,7 +158,7 @@ void do_who( Character *ch, char *argument )
                 {
                   if (!StrCmp( arg, "clan" ) && ch->pcdata && ch->pcdata->clan)
                     strcpy(arg, ch->pcdata->clan->name);
-                  if ( (pClan = get_clan (arg)) && (fClanMatch != true))
+                  if ( (pClan = GetClan (arg)) && (fClanMatch != true))
                     {
                       if ((ch->top_level >= LEVEL_IMMORTAL)
 			  || (ch->pcdata && ch->pcdata->clan

@@ -22,7 +22,7 @@ void do_clans( Character *ch, char *argument )
           {
             support += planet->pop_support;
             pCount++;
-	    revenue += get_taxes(planet);
+	    revenue += GetTaxes(planet);
           }
 
       if ( pCount > 1 )

@@ -41,7 +41,7 @@ static bool load_clan_file( const char *clanfile );
 /*
  * Get pointer to clan structure from clan name.
  */
-Clan *get_clan( const char *name )
+Clan *GetClan( const char *name )
 {
   Clan *clan = NULL;
 
@@ -56,7 +56,7 @@ Clan *get_clan( const char *name )
   return NULL;
 }
 
-void write_clan_list( void )
+void WriteClanList( void )
 {
   const Clan *tclan = NULL;
   FILE *fpout;
@@ -83,7 +83,7 @@ void write_clan_list( void )
 /*
  * Save a clan's data to its data file
  */
-void save_clan( const Clan *clan )
+void SaveClan( const Clan *clan )
 {
   FILE *fp;
   char filename[256];
@@ -91,13 +91,13 @@ void save_clan( const Clan *clan )
 
   if ( !clan )
     {
-      bug( "save_clan: null clan pointer!", 0 );
+      bug( "SaveClan: null clan pointer!", 0 );
       return;
     }
 
   if ( !clan->filename || clan->filename[0] == '\0' )
     {
-      sprintf( buf, "save_clan: %s has no filename", clan->name );
+      sprintf( buf, "SaveClan: %s has no filename", clan->name );
       bug( buf, 0 );
       return;
     }
@@ -106,7 +106,7 @@ void save_clan( const Clan *clan )
 
   if ( ( fp = fopen( filename, "w" ) ) == NULL )
     {
-      bug( "save_clan: fopen", 0 );
+      bug( "SaveClan: fopen", 0 );
       perror( filename );
     }
   else
@@ -340,7 +340,7 @@ static bool load_clan_file( const char *clanfile )
 
       LINK( clan, first_clan, last_clan, next, prev );
 
-      if( !load_member_list( clan->filename ) )
+      if( !LoadClanMemberList( clan->filename ) )
         {
           MEMBER_LIST *members_list = NULL;
 
@@ -348,7 +348,7 @@ static bool load_clan_file( const char *clanfile )
           AllocateMemory( members_list, MEMBER_LIST, 1 );
           members_list->name = CopyString( clan->name );
           LINK( members_list, first_member_list, last_member_list, next, prev );
-          save_member_list( members_list );
+          SaveClanMemberList( members_list );
         }
 
       if ( clan->storeroom == 0
@@ -438,7 +438,7 @@ static bool load_clan_file( const char *clanfile )
 /*
  * Load in all the clan files.
  */
-void load_clans( void )
+void LoadClans( void )
 {
   FILE *fpList = NULL;
   char clanlist[256];
@@ -479,7 +479,7 @@ void load_clans( void )
       if ( !clan->tmpstr || clan->tmpstr[0] == '\0' )
         continue;
 
-      bosclan = get_clan ( clan->tmpstr );
+      bosclan = GetClan ( clan->tmpstr );
 
       if ( !bosclan )
         continue;
@@ -491,7 +491,7 @@ void load_clans( void )
   log_string(" Done sorting" );
 }
 
-void show_members( const Character *ch, const char *argument, const char *format )
+void ShowClanMembers( const Character *ch, const char *argument, const char *format )
 {
   MEMBER_LIST *members_list = NULL;
   MEMBER_DATA *member = NULL;
@@ -507,7 +507,7 @@ void show_members( const Character *ch, const char *argument, const char *format
   if( !members_list )
     return;
 
-  clan = get_clan( argument );
+  clan = GetClan( argument );
 
   if ( !clan  )
     return;
@@ -641,7 +641,7 @@ void show_members( const Character *ch, const char *argument, const char *format
                 "------------------------------------------------------------\r\n" );
 }
 
-void remove_member( const Character *ch )
+void RemoveClanMember( const Character *ch )
 {
   MEMBER_LIST   *members_list;
   MEMBER_DATA   *member;
@@ -660,14 +660,14 @@ void remove_member( const Character *ch )
                 FreeMemory( member->name );
                 FreeMemory( member->since );
                 FreeMemory( member );
-                save_member_list( members_list );
+                SaveClanMemberList( members_list );
                 break;
               }
           }
     }
 }
 
-void save_member_list( const MEMBER_LIST *members_list )
+void SaveClanMemberList( const MEMBER_LIST *members_list )
 {
   MEMBER_DATA   *member;
   FILE          *fp;
@@ -676,13 +676,13 @@ void save_member_list( const MEMBER_LIST *members_list )
 
   if( !members_list )
     {
-      bug( "save_member_list: NULL members_list" );
+      bug( "SaveClanMemberList: NULL members_list" );
       return;
     }
 
-  if( ( clan = get_clan( members_list->name )) == NULL )
+  if( ( clan = GetClan( members_list->name )) == NULL )
     {
-      bug( "save_member_list: no such clan: %s", members_list->name );
+      bug( "SaveClanMemberList: no such clan: %s", members_list->name );
       return;
     }
 
@@ -704,7 +704,7 @@ void save_member_list( const MEMBER_LIST *members_list )
 
 }
 
-bool load_member_list( const char *filename )
+bool LoadClanMemberList( const char *filename )
 {
   FILE *fp;
   char buf[MAX_STRING_LENGTH];
@@ -760,7 +760,7 @@ bool load_member_list( const char *filename )
 
 }
 
-void update_member( const Character *ch )
+void UpdateClanMember( const Character *ch )
 {
   MEMBER_LIST *members_list;
   MEMBER_DATA *member;
@@ -817,7 +817,7 @@ void update_member( const Character *ch )
 		}
 
 	      LINK( member, members_list->first_member, members_list->last_member, next, prev );
-	      save_member_list( members_list );
+	      SaveClanMemberList( members_list );
 	    }
 	}
     }

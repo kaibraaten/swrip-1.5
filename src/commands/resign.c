@@ -45,7 +45,7 @@ void do_resign( Character *ch, char *argument )
       ch->pcdata->clan->leadership.number2 = CopyString( "" );
     }
 
-  remove_member( ch );
+  RemoveClanMember( ch );
   ch->pcdata->clan = NULL;
   FreeMemory(ch->pcdata->clan_name);
   ch->pcdata->clan_name = CopyString( "" );

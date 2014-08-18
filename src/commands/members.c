@@ -17,11 +17,11 @@ void do_members( Character *ch, char *argument )
         {
           MEMBER_LIST *members_list;
           for( members_list = first_member_list; members_list; members_list = members_list->next )
-            show_members( ch, members_list->name, NULL );
+            ShowClanMembers( ch, members_list->name, NULL );
           return;
         }
 
-      show_members( ch, argument, NULL );
+      ShowClanMembers( ch, argument, NULL );
       return;
     }
 
@@ -32,7 +32,7 @@ void do_members( Character *ch, char *argument )
       AllocateMemory( members_list, MEMBER_LIST, 1 );
       members_list->name = CopyString( argument );
       LINK( members_list, first_member_list, last_member_list, next, prev );
-      save_member_list( members_list );
+      SaveClanMemberList( members_list );
       ch_printf( ch, "Member lists \"%s\" created.\r\n", argument );
       return;
     }

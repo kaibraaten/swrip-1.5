@@ -12,7 +12,7 @@ void do_renameship( Character *ch, char *argument )
       return;
     }
 
-  if( ( (clan = get_clan(ship->owner)) == NULL ) || StrCmp( clan->leadership.leader, ch->name ) )
+  if( ( (clan = GetClan(ship->owner)) == NULL ) || StrCmp( clan->leadership.leader, ch->name ) )
     if( StrCmp( ship->owner, ch->name ) )
       {
         send_to_char( "&RImperial Database: &WYou do not own this ship.\r\n", ch);

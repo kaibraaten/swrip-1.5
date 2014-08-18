@@ -15,7 +15,7 @@ void do_planets( Character *ch, char *argument )
                     planet->governed_by ? planet->governed_by->name : "",
                     IsBitSet(planet->flags, PLANET_NOCAPTURE ) ? "(permanent)" : "" );
       pager_printf( ch, "&WValue: &O%-10ld&W/&O%-10d   ",
-                    get_taxes(planet) , planet->base_value);
+                    GetTaxes(planet) , planet->base_value);
       pager_printf( ch, "&WPopulation: &O%-5d   &W Pop Support: &R%.1f\r\n",
                     planet->population , planet->pop_support );
       if ( IsImmortal(ch) )

@@ -17,7 +17,7 @@ void do_showplanet( Character *ch, char *argument )
       return;
     }
 
-  planet = get_planet( argument );
+  planet = GetPlanet( argument );
 
   if ( !planet )
     {

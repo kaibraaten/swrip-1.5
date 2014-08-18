@@ -33,7 +33,7 @@ GuardData * last_guard = NULL;
 static void fread_planet( Planet *planet, FILE *fp );
 static bool load_planet_file( const char *planetfile );
 
-Planet *get_planet( const char *name )
+Planet *GetPlanet( const char *name )
 {
   Planet *planet;
 
@@ -48,7 +48,7 @@ Planet *get_planet( const char *name )
   return NULL;
 }
 
-void write_planet_list( void )
+void WritePlanetList( void )
 {
   Planet *tplanet = NULL;
   FILE *fpout = NULL;
@@ -72,20 +72,20 @@ void write_planet_list( void )
   fclose( fpout );
 }
 
-void save_planet( const Planet *planet )
+void SavePlanet( const Planet *planet )
 {
   FILE *fp = NULL;
   char filename[256];
 
   if ( !planet )
     {
-      bug( "save_planet: null planet pointer!", 0 );
+      bug( "SavePlanet: null planet pointer!", 0 );
       return;
     }
 
   if ( !planet->filename || planet->filename[0] == '\0' )
     {
-      bug( "save_planet: %s has no filename", planet->name );
+      bug( "SavePlanet: %s has no filename", planet->name );
       return;
     }
 
@@ -93,7 +93,7 @@ void save_planet( const Planet *planet )
 
   if ( ( fp = fopen( filename, "w" ) ) == NULL )
     {
-      bug( "save_planet: fopen" );
+      bug( "SavePlanet: fopen" );
       perror( filename );
     }
   else
@@ -194,7 +194,7 @@ static void fread_planet( Planet *planet, FILE *fp )
         case 'G':
           if ( !StrCmp( word, "GovernedBy" ) )
             {
-              planet->governed_by = get_clan ( ReadStringToTilde(fp) );
+              planet->governed_by = GetClan ( ReadStringToTilde(fp) );
               fMatch = true;
             }
           break;
@@ -303,7 +303,7 @@ static bool load_planet_file( const char *planetfile )
   return found;
 }
 
-void load_planets( void )
+void LoadPlanets( void )
 {
   FILE *fpList = NULL;
   char planetlist[256];
@@ -337,7 +337,7 @@ void load_planets( void )
   log_string(" Done planets " );
 }
 
-long get_taxes( const Planet *planet )
+long GetTaxes( const Planet *planet )
 {
   long gain = planet->base_value;
   gain += planet->base_value*planet->pop_support/100;

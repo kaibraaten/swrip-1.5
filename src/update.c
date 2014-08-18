@@ -1159,20 +1159,20 @@ void update_taxes( void )
 
               for ( subclan = clan->first_subclan ; subclan ; subclan = subclan->next_subclan )
                 {
-                  subclan->funds += get_taxes(planet)/1440/sCount;
-                  save_clan (subclan);
+                  subclan->funds += GetTaxes(planet)/1440/sCount;
+                  SaveClan (subclan);
                 }
 
-              clan->funds += get_taxes(planet)/1440;
-              save_clan (clan);
+              clan->funds += GetTaxes(planet)/1440;
+              SaveClan (clan);
             }
           else
             {
-              clan->funds += get_taxes(planet)/720;
-              save_clan( clan );
+              clan->funds += GetTaxes(planet)/720;
+              SaveClan( clan );
             }
 
-          save_planet( planet );
+          SavePlanet( planet );
         }
     }
 

@@ -83,7 +83,7 @@ void do_outcast( Character *ch, char *argument )
     }
 
   victim->pcdata->clan = NULL;
-  remove_member( victim );
+  RemoveClanMember( victim );
   FreeMemory(victim->pcdata->clan_name);
   victim->pcdata->clan_name = CopyString( "" );
   act( AT_MAGIC, "You outcast $N from $t", ch, clan->name, victim, TO_CHAR );

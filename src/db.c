@@ -686,7 +686,7 @@ void boot_db( bool fCopyOver )
   LoadBoards();
 
   log_string( "Loading clans" );
-  load_clans();
+  LoadClans();
 
   log_string( "Loading bans" );
   load_banlist();
@@ -704,7 +704,7 @@ void boot_db( bool fCopyOver )
   load_bounties();
 
   log_string( "Loading governments" );
-  load_planets();
+  LoadPlanets();
 
   log_string( "Loading shuttles" );
   LoadShuttles();

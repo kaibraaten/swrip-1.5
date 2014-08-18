@@ -774,7 +774,7 @@ static void nanny_read_motd( Descriptor *d, char *argument )
       /*
             if (ch->race == RACE_NOGHRI )
             {
-            ch->pcdata->clan = get_clan( "The Death Commandos");
+            ch->pcdata->clan = GetClan( "The Death Commandos");
             ch->pcdata->clan_name = CopyString( ch->pcdata->clan->name );
             }
       */

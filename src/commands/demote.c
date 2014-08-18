@@ -45,5 +45,5 @@ void do_demote ( Character *ch , char *argument )
       return;
     }
 
-  save_clan ( ch->pcdata->clan );
+  SaveClan ( ch->pcdata->clan );
 }

@@ -41,8 +41,8 @@ void do_enlist( Character *ch, char *argument )
           ch->pcdata->clan_name = CopyString( clan->name );
           ch->pcdata->clan = clan;
           ch_printf( ch, "Welcome to %s.\r\n", clan->name );
-          update_member( ch );
-          save_clan ( clan );
+          UpdateClanMember( ch );
+          SaveClan ( clan );
           return;
         }
     }
