@@ -2582,7 +2582,7 @@ static bool LoadShipFile( const char *shipfile )
   bool found = false;
   int turret_num = 0;
   Room *pRoomIndex = NULL;
-  CLAN_DATA *clan = NULL;
+  Clan *clan = NULL;
 
   AllocateMemory( ship, Ship, 1 );
 
@@ -2839,7 +2839,7 @@ void ResetShip( Ship *ship )
 #ifndef NODEATHSHIP
   if ( StrCmp("Trainer", ship->owner) && StrCmp("Public",ship->owner) && ship->type != MOB_SHIP )
     {
-      CLAN_DATA *clan = NULL;
+      Clan *clan = NULL;
 
       if ( ship->type != MOB_SHIP && (clan = get_clan( ship->owner )) != NULL )
         {

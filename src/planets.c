@@ -27,8 +27,8 @@
 Planet * first_planet = NULL;
 Planet * last_planet = NULL;
 
-GUARD_DATA * first_guard = NULL;
-GUARD_DATA * last_guard = NULL;
+GuardData * first_guard = NULL;
+GuardData * last_guard = NULL;
 
 static void fread_planet( Planet *planet, FILE *fp );
 static bool load_planet_file( const char *planetfile );

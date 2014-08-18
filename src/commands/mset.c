@@ -779,7 +779,7 @@ void do_mset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "clan" ) )
     {
-      CLAN_DATA *clan;
+      Clan *clan;
 
       if ( GetTrustLevel( ch ) < LEVEL_GREATER )
         {

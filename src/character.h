@@ -123,7 +123,7 @@ struct Character
   int                 backup_mob;     /* reinforcements */
   short              was_stunned;
   char            *   mob_clan;    /* for spec_clan_guard.. set by postguard */
-  GUARD_DATA      *   guard_data;
+  GuardData      *   guard_data;
   Room *   buzzed_home;
   Room *   buzzed_from_room;
   Character           *   challenged;

@@ -6,7 +6,7 @@ void do_empower ( Character *ch , char *argument )
   char arg[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
   Character *victim;
-  CLAN_DATA *clan;
+  Clan *clan;
   char buf[MAX_STRING_LENGTH];
 
   if ( IsNpc( ch ) || !ch->pcdata->clan )

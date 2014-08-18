@@ -1143,12 +1143,12 @@ void update_taxes( void )
 
   for ( planet = first_planet; planet; planet = planet->next )
     {
-      CLAN_DATA *clan = planet->governed_by;
+      Clan *clan = planet->governed_by;
 
       if ( clan )
         {
           int sCount = 0;
-          CLAN_DATA * subclan = NULL;
+          Clan * subclan = NULL;
 
           if ( clan->first_subclan )
             {

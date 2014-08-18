@@ -3,7 +3,7 @@
 
 void do_resign( Character *ch, char *argument )
 {
-  CLAN_DATA *clan = NULL;
+  Clan *clan = NULL;
   long xp_to_lose = 0;
   long xp_actually_lost = 0;
 

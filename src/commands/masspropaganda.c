@@ -7,7 +7,7 @@ void do_mass_propaganda ( Character *ch , char *argument )
   char arg1 [MAX_INPUT_LENGTH];
   Character *victim;
   Planet *planet;
-  CLAN_DATA   *clan;
+  Clan   *clan;
   int percent = 0;
 
   if ( IsNpc(ch) || !ch->pcdata || !ch->pcdata->clan || !ch->in_room->area || !ch->in_room->area->planet )

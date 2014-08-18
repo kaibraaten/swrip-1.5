@@ -115,14 +115,14 @@ typedef struct Planet                  Planet;
 struct Storeroom;
 typedef struct Storeroom               Storeroom;
 
-struct guard_data;
-typedef struct guard_data              GUARD_DATA;
+struct GuardData;
+typedef struct GuardData               GuardData;
 
 struct Spaceobject;
 typedef struct Spaceobject             Spaceobject;
 
-struct clan_data;
-typedef struct clan_data               CLAN_DATA;
+struct Clan;
+typedef struct Clan                    Clan;
 
 struct Ship;
 typedef struct Ship                    Ship;

@@ -4,7 +4,7 @@
 
 void do_capture ( Character *ch , char *argument )
 {
-  CLAN_DATA *clan;
+  Clan *clan;
   Planet *planet;
   Planet *cPlanet;
   float support = 0.0;
@@ -58,7 +58,7 @@ void do_capture ( Character *ch , char *argument )
   if ( planet->spaceobject )
     {
       Ship *ship;
-      CLAN_DATA *sClan;
+      Clan *sClan;
 
       for ( ship = first_ship ; ship ; ship = ship->next )
         {

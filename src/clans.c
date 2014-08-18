@@ -28,22 +28,22 @@
 #define MAX_NEST        100
 static  OBJ_DATA *rgObjNest[MAX_NEST];
 
-CLAN_DATA * first_clan = NULL;
-CLAN_DATA * last_clan = NULL;
+Clan * first_clan = NULL;
+Clan * last_clan = NULL;
 
 MEMBER_LIST * first_member_list = NULL;
 MEMBER_LIST * last_member_list = NULL;
 
 /* local routines */
-static void fread_clan( CLAN_DATA *clan, FILE *fp );
+static void fread_clan( Clan *clan, FILE *fp );
 static bool load_clan_file( const char *clanfile );
 
 /*
  * Get pointer to clan structure from clan name.
  */
-CLAN_DATA *get_clan( const char *name )
+Clan *get_clan( const char *name )
 {
-  CLAN_DATA *clan = NULL;
+  Clan *clan = NULL;
 
   for ( clan = first_clan; clan; clan = clan->next )
     {
@@ -58,7 +58,7 @@ CLAN_DATA *get_clan( const char *name )
 
 void write_clan_list( void )
 {
-  const CLAN_DATA *tclan = NULL;
+  const Clan *tclan = NULL;
   FILE *fpout;
   char filename[256];
 
@@ -83,7 +83,7 @@ void write_clan_list( void )
 /*
  * Save a clan's data to its data file
  */
-void save_clan( const CLAN_DATA *clan )
+void save_clan( const Clan *clan )
 {
   FILE *fp;
   char filename[256];
@@ -152,7 +152,7 @@ void save_clan( const CLAN_DATA *clan )
 /*
  * Read in actual clan data.
  */
-static void fread_clan( CLAN_DATA *clan, FILE *fp )
+static void fread_clan( Clan *clan, FILE *fp )
 {
   for ( ; ; )
     {
@@ -278,11 +278,11 @@ static void fread_clan( CLAN_DATA *clan, FILE *fp )
 static bool load_clan_file( const char *clanfile )
 {
   char filename[256];
-  CLAN_DATA *clan;
+  Clan *clan;
   FILE *fp;
   bool found = false;
 
-  AllocateMemory( clan, CLAN_DATA, 1 );
+  AllocateMemory( clan, Clan, 1 );
   clan->next_subclan = NULL;
   clan->prev_subclan = NULL;
   clan->last_subclan = NULL;
@@ -442,7 +442,7 @@ void load_clans( void )
 {
   FILE *fpList = NULL;
   char clanlist[256];
-  CLAN_DATA *clan = NULL;
+  Clan *clan = NULL;
 
   log_string( "Loading clans..." );
   sprintf( clanlist, "%s%s", CLAN_DIR, CLAN_LIST );
@@ -474,7 +474,7 @@ void load_clans( void )
 
   for ( clan=first_clan; clan; clan = clan->next )
     {
-      CLAN_DATA *bosclan = NULL;
+      Clan *bosclan = NULL;
 
       if ( !clan->tmpstr || clan->tmpstr[0] == '\0' )
         continue;
@@ -495,7 +495,7 @@ void show_members( const Character *ch, const char *argument, const char *format
 {
   MEMBER_LIST *members_list = NULL;
   MEMBER_DATA *member = NULL;
-  const CLAN_DATA *clan = NULL;
+  const Clan *clan = NULL;
   int members = 0;
 
   for( members_list = first_member_list; members_list; members_list = members_list->next )
@@ -671,7 +671,7 @@ void save_member_list( const MEMBER_LIST *members_list )
 {
   MEMBER_DATA   *member;
   FILE          *fp;
-  CLAN_DATA    *clan;
+  Clan    *clan;
   char         buf[MAX_STRING_LENGTH];
 
   if( !members_list )

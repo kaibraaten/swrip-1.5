@@ -1,11 +1,11 @@
 #include "character.h"
 #include "mud.h"
 
-static const char *get_clan_type(const CLAN_DATA *const clan);
+static const char *get_clan_type(const Clan *const clan);
 
 void do_showclan( Character *ch, char *argument )
 {
-  CLAN_DATA *clan;
+  Clan *clan;
 
   if ( IsNpc( ch ) )
     {
@@ -63,7 +63,7 @@ void do_showclan( Character *ch, char *argument )
              clan->enlistroom1, clan->enlistroom2 );
 }
 
-static const char *get_clan_type(const CLAN_DATA *const clan)
+static const char *get_clan_type(const Clan *const clan)
 {
   return clan->clan_type == CLAN_CRIME ? "Crime Family" :
     clan->clan_type == CLAN_GUILD ? "Guild" : "Organization";

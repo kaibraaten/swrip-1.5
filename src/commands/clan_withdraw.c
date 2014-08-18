@@ -3,7 +3,7 @@
 
 void do_clan_withdraw( Character *ch, char *argument )
 {
-  CLAN_DATA *clan = NULL;
+  Clan *clan = NULL;
   long amount = 0;
 
   if ( IsNpc( ch ) || !ch->pcdata->clan )

@@ -3,7 +3,7 @@
 void do_makeclan( Character *ch, char *argument )
 {
   char filename[256];
-  CLAN_DATA *clan;
+  Clan *clan;
 
   if ( !argument || argument[0] == '\0' )
     {
@@ -13,7 +13,7 @@ void do_makeclan( Character *ch, char *argument )
 
   sprintf( filename, "%s%s", CLAN_DIR, StringToLowercase(argument) );
 
-  AllocateMemory( clan, CLAN_DATA, 1 );
+  AllocateMemory( clan, Clan, 1 );
   LINK( clan, first_clan, last_clan, next, prev );
   clan->next_subclan = NULL;
   clan->prev_subclan = NULL;

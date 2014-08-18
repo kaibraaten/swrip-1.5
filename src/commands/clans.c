@@ -2,7 +2,7 @@
 
 void do_clans( Character *ch, char *argument )
 {
-  CLAN_DATA *clan = NULL;
+  Clan *clan = NULL;
   int count = 0;
 
   for ( clan = first_clan; clan; clan = clan->next )
@@ -57,7 +57,7 @@ void do_clans( Character *ch, char *argument )
 
       if ( clan->first_subclan )
         {
-          CLAN_DATA *subclan;
+          Clan *subclan;
           ch_printf( ch, "  &z&wSubclans             Leader\r\n");
 
           for ( subclan = clan->first_subclan ; subclan ; subclan = subclan->next_subclan )

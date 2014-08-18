@@ -5,7 +5,7 @@
 void do_jail ( Character *ch , char *argument )
 {
   Character *victim =NULL;
-  CLAN_DATA   *clan =NULL;
+  Clan   *clan =NULL;
   Room *jail =NULL;
   char arg[MAX_INPUT_LENGTH];
   short jail_time;

@@ -6,7 +6,7 @@ void do_bribe ( Character *ch , char *argument )
   char arg1 [MAX_INPUT_LENGTH];
   Character *victim;
   Planet *planet;
-  CLAN_DATA   *clan;
+  Clan   *clan;
   int percent = 0;
   int amount = 0;
 

@@ -354,12 +354,12 @@ struct Bounty
   char        *poster;
 };
 
-struct guard_data
+struct GuardData
 {
-  GUARD_DATA      *next;
-  GUARD_DATA      *prev;
-  GUARD_DATA      *next_on_planet;
-  GUARD_DATA      *prev_on_planet;
+  GuardData      *next;
+  GuardData      *prev;
+  GuardData      *next_on_planet;
+  GuardData      *prev_on_planet;
   Character       *mob;
   Room *reset_loc;
   Planet     *planet;
@@ -379,29 +379,29 @@ struct Planet
   Planet *prev;
   Planet *next_in_system;
   Planet *prev_in_system;
-  GUARD_DATA  *first_guard;
-  GUARD_DATA  *last_guard;
+  GuardData  *first_guard;
+  GuardData  *last_guard;
   Spaceobject  *spaceobject;
   Area   *first_area;
   Area   *last_area;
   char        *name;
   char        *filename;
   long         base_value;
-  CLAN_DATA   *governed_by;
+  Clan   *governed_by;
   int          population;
   bool         flags;
   float        pop_support;
 };
 
-struct clan_data
+struct Clan
 {
-  CLAN_DATA *next;             /* next clan in list                    */
-  CLAN_DATA *prev;             /* previous clan in list                */
-  CLAN_DATA *next_subclan;
-  CLAN_DATA *prev_subclan;
-  CLAN_DATA *first_subclan;
-  CLAN_DATA *last_subclan;
-  CLAN_DATA *mainclan;
+  Clan *next;             /* next clan in list                    */
+  Clan *prev;             /* previous clan in list                */
+  Clan *next_subclan;
+  Clan *prev_subclan;
+  Clan *first_subclan;
+  Clan *last_subclan;
+  Clan *mainclan;
   char      *filename;       /* Clan filename                        */
   char      *name;           /* Clan name                            */
   char      *description;    /* A brief description of the clan      */
@@ -757,7 +757,7 @@ struct killed_data
  */
 struct pc_data
 {
-  CLAN_DATA  *clan;
+  Clan  *clan;
   Area  *area;
   char       *homepage;
   char       *clan_name;
@@ -1583,12 +1583,12 @@ extern BOARD_DATA           *first_board;
 extern BOARD_DATA           *last_board;
 extern OBJ_DATA             *first_object;
 extern OBJ_DATA             *last_object;
-extern CLAN_DATA            *first_clan;
-extern CLAN_DATA            *last_clan;
+extern Clan            *first_clan;
+extern Clan            *last_clan;
 extern MEMBER_LIST          *first_member_list;
 extern MEMBER_LIST          *last_member_list;
-extern GUARD_DATA           *first_guard;
-extern GUARD_DATA           *last_guard;
+extern GuardData           *first_guard;
+extern GuardData           *last_guard;
 extern Ship            *first_ship;
 extern Ship            *last_ship;
 extern Missile         *first_missile;
@@ -2260,7 +2260,7 @@ extern "C" {
   bool remove_obj( Character *ch, int iWear, bool fReplace );
   obj_ret damage_obj( OBJ_DATA *obj );
   short get_obj_resistance( const OBJ_DATA *obj );
-  void save_clan_storeroom( Character *ch, const CLAN_DATA *clan );
+  void save_clan_storeroom( Character *ch, const Clan *clan );
   void obj_fall( OBJ_DATA *obj, bool through );
 
   /* act_wiz.c */
@@ -2291,9 +2291,9 @@ extern "C" {
   void save_member_list( const MEMBER_LIST *members_list );
   void show_members( const Character *ch, const char *argument, const char *format );
   void write_clan_list( void );
-  CLAN_DATA *get_clan( const char *name );
+  Clan *get_clan( const char *name );
   void load_clans( void );
-  void save_clan( const CLAN_DATA *clan );
+  void save_clan( const Clan *clan );
   bool load_member_list( const char *filename );
   void update_member( const Character *ch );
   void remove_member( const Character *ch );

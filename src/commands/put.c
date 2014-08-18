@@ -8,7 +8,7 @@ void do_put( Character *ch, char *argument )
   OBJ_DATA *container;
   OBJ_DATA *obj;
   OBJ_DATA *obj_next;
-  CLAN_DATA *clan;
+  Clan *clan;
   short count;
   int           number;
   bool  save_char = false;

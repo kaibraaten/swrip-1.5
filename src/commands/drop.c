@@ -7,7 +7,7 @@ void do_drop( Character *ch, char *argument )
   OBJ_DATA *obj;
   OBJ_DATA *obj_next;
   bool found;
-  CLAN_DATA *clan;
+  Clan *clan;
   int number;
 
   argument = OneArgument( argument, arg );

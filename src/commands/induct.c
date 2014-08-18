@@ -5,7 +5,7 @@ void do_induct( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   Character *victim;
-  CLAN_DATA *clan;
+  Clan *clan;
 
   if ( IsNpc( ch ) || !ch->pcdata->clan )
     {

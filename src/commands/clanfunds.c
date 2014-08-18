@@ -3,7 +3,7 @@
 
 void do_clanfunds( Character *ch, char *argument )
 {
-  CLAN_DATA *clan;
+  Clan *clan;
 
   if ( IsNpc( ch ) || !ch->pcdata->clan )
     {

@@ -342,7 +342,7 @@ void do_get( Character *ch, char *argument )
 
 static void get_obj( Character *ch, OBJ_DATA *obj, OBJ_DATA *container )
 {
-  CLAN_DATA *clan;
+  Clan *clan;
   int weight;
 
   if ( !CAN_WEAR(obj, ITEM_TAKE)

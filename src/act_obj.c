@@ -128,7 +128,7 @@ obj_ret damage_obj( OBJ_DATA *obj )
 /*
  * Save items in a clan storage room                    -Scryn & Thoric
  */
-void save_clan_storeroom( Character *ch, const CLAN_DATA *clan )
+void save_clan_storeroom( Character *ch, const Clan *clan )
 {
   FILE *fp;
   char filename[256];

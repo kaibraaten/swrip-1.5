@@ -41,7 +41,7 @@ void do_who( Character *ch, char *argument )
   bool fShowHomepage;
   bool fClanMatch;
   bool NullCh = false;
-  CLAN_DATA *pClan;
+  Clan *pClan;
   FILE *whoout;
   PC_DATA *pcdata;
   WHO_DATA *cur_who = NULL;
@@ -282,7 +282,7 @@ void do_who( Character *ch, char *argument )
                                    && ch->pcdata->clan == wch->pcdata->clan )
                                   || IsGreater( ch ) ) )
         {
-          CLAN_DATA *pclan = wch->pcdata->clan;
+          Clan *pclan = wch->pcdata->clan;
 
           strcpy( clan_name, " (" );
 

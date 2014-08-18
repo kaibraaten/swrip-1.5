@@ -44,7 +44,7 @@ void do_setplanet( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "governed_by" ) )
     {
-      CLAN_DATA *clan = get_clan( argument );
+      Clan *clan = get_clan( argument );
 
       if ( clan )
         {

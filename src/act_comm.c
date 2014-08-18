@@ -184,7 +184,7 @@ void talk_channel( Character *ch, const char *argument, int channel, const char 
   char buf2[MAX_STRING_LENGTH];
   Descriptor *d;
   int position;
-  CLAN_DATA *clan = NULL;
+  Clan *clan = NULL;
 
   if ( channel != CHANNEL_SHOUT && channel != CHANNEL_YELL && channel != CHANNEL_IMMTALK && channel != CHANNEL_OOC
        && channel != CHANNEL_ASK && channel != CHANNEL_NEWBIE && channel != CHANNEL_AVTALK
