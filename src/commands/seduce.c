@@ -28,7 +28,7 @@ void do_seduce ( Character *ch , char *argument )
       return;
     }
 
-  if ( circle_follow( victim, ch ) )
+  if ( IsFollowingInCircle( victim, ch ) )
     {
       send_to_char( "Following in loops is not allowed... sorry.\r\n", ch );
       return;
@@ -48,8 +48,8 @@ void do_seduce ( Character *ch , char *argument )
 
 
   if ( victim->master )
-    stop_follower( victim );
+    StopFollowing( victim );
 
   learn_from_success( ch, gsn_seduce );
-  add_follower( victim, ch );
+  StartFollowing( victim, ch );
 }

@@ -178,7 +178,7 @@ void do_tell( Character *ch, char *argument )
                (!IsNpc(ch) || ch->speaking != 0) )
             sbuf = Scramble(argument, ch->speaking);
 
-          sbuf = drunk_speech( sbuf, ch );
+          sbuf = DrunkSpeech( sbuf, ch );
 
           MOBtrigger = false;
           act( AT_SAY, "$n says quietly into $s comlink '$t'",

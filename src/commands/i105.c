@@ -9,5 +9,5 @@ void do_i105( Character *ch, char *argument )
       return;
     }
 
-  talk_channel( ch, argument, CHANNEL_105, "i105" );
+  TalkToChannel( ch, argument, CHANNEL_105, "i105" );
 }

@@ -17,7 +17,7 @@ void do_group( Character *ch, char *argument )
 
       for ( gch = first_char; gch; gch = gch->next )
         {
-          if ( is_same_group( gch, ch ) )
+          if ( IsInSameGroup( gch, ch ) )
             {
               set_char_color( AT_DGREEN, ch );
 
@@ -61,7 +61,7 @@ void do_group( Character *ch, char *argument )
 
       for ( gch = first_char; gch; gch = gch->next )
         {
-          if ( is_same_group( ch, gch )
+          if ( IsInSameGroup( ch, gch )
                && ( ch != gch ) )
             {
               gch->leader = NULL;
@@ -91,7 +91,7 @@ void do_group( Character *ch, char *argument )
                && rch->master == ch
                && !ch->master
                && !ch->leader
-               && !is_same_group( rch, ch )
+               && !IsInSameGroup( rch, ch )
                )
             {
               rch->leader = ch;
@@ -130,7 +130,7 @@ void do_group( Character *ch, char *argument )
       return;
     }
 
-  if ( is_same_group( victim, ch ) && ch != victim )
+  if ( IsInSameGroup( victim, ch ) && ch != victim )
     {
       victim->leader = NULL;
       act( AT_ACTION, "$n removes $N from $s group.",

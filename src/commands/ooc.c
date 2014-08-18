@@ -2,5 +2,5 @@
 
 void do_ooc( Character *ch, char *argument )
 {
-  talk_channel( ch, argument, CHANNEL_OOC, "ooc" );
+  TalkToChannel( ch, argument, CHANNEL_OOC, "ooc" );
 }

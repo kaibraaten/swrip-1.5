@@ -33,7 +33,7 @@ void do_say( Character *ch, char *argument )
 	   && ( !IsNpc(ch) || ch->speaking != 0 ) )
         sbuf = Scramble(argument, ch->speaking);
 
-      sbuf = drunk_speech( sbuf, ch );
+      sbuf = DrunkSpeech( sbuf, ch );
 
       MOBtrigger = false;
       act( AT_SAY, "$n says '$t'", ch, sbuf, vch, TO_VICT );
@@ -41,7 +41,7 @@ void do_say( Character *ch, char *argument )
 
   ch->act = actflags;
   MOBtrigger = false;
-  act( AT_SAY, "You say '$T'", ch, NULL, drunk_speech( argument, ch ), TO_CHAR );
+  act( AT_SAY, "You say '$T'", ch, NULL, DrunkSpeech( argument, ch ), TO_CHAR );
 
   if ( IsBitSet( ch->in_room->room_flags, ROOM_LOGSPEECH ) )
     {

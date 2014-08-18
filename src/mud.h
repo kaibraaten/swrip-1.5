@@ -1561,46 +1561,46 @@ extern int cur_qchars;
 extern long long high_galaxy_cash;
 extern long long low_galaxy_cash;
 
-extern Command              *command_hash[126];
-extern Skill            *skill_table[MAX_SKILL];
-extern Social           *social_index[27];
-extern Character            *cur_char;
-extern Room      *cur_room;
-extern bool                  cur_char_died;
-extern ch_ret                global_retcode;
-extern Skill            *herb_table[MAX_HERB];
+extern Command         *command_hash[126];
+extern Skill           *skill_table[MAX_SKILL];
+extern Social          *social_index[27];
+extern Character       *cur_char;
+extern Room            *cur_room;
+extern bool             cur_char_died;
+extern ch_ret           global_retcode;
+extern Skill           *herb_table[MAX_HERB];
 
-extern int                   cur_obj;
-extern int                   cur_obj_serial;
-extern bool                  cur_obj_extracted;
-extern obj_ret               global_objcode;
+extern int              cur_obj;
+extern int              cur_obj_serial;
+extern bool             cur_obj_extracted;
+extern obj_ret          global_objcode;
 
-extern SHOP_DATA            *first_shop;
-extern SHOP_DATA            *last_shop;
-extern REPAIR_DATA          *first_repair;
-extern REPAIR_DATA          *last_repair;
+extern SHOP_DATA       *first_shop;
+extern SHOP_DATA       *last_shop;
+extern REPAIR_DATA     *first_repair;
+extern REPAIR_DATA     *last_repair;
 extern Ban             *first_ban;
 extern Ban             *last_ban;
-extern Character            *first_char;
-extern Character            *last_char;
+extern Character       *first_char;
+extern Character       *last_char;
 extern Descriptor      *first_descriptor;
 extern Descriptor      *last_descriptor;
 extern Board           *first_board;
 extern Board           *last_board;
-extern Object             *first_object;
-extern Object             *last_object;
+extern Object          *first_object;
+extern Object          *last_object;
 extern Clan            *first_clan;
 extern Clan            *last_clan;
-extern MEMBER_LIST          *first_member_list;
-extern MEMBER_LIST          *last_member_list;
-extern GuardData           *first_guard;
-extern GuardData           *last_guard;
+extern MEMBER_LIST     *first_member_list;
+extern MEMBER_LIST     *last_member_list;
+extern GuardData       *first_guard;
+extern GuardData       *last_guard;
 extern Ship            *first_ship;
 extern Ship            *last_ship;
 extern Missile         *first_missile;
 extern Missile         *last_missile;
-extern Spaceobject           *first_spaceobject;
-extern Spaceobject           *last_spaceobject;
+extern Spaceobject     *first_spaceobject;
+extern Spaceobject     *last_spaceobject;
 extern Planet          *first_planet;
 extern Planet          *last_planet;
 extern Bounty          *first_bounty;
@@ -1615,20 +1615,20 @@ extern Area            *first_asort;
 extern Area            *last_asort;
 extern Area            *first_bsort;
 extern Area            *last_bsort;
-extern TeleportData        *first_teleport;
-extern TeleportData        *last_teleport;
-extern Object             *extracted_obj_queue;
-extern ExtractedCharacter    *extracted_char_queue;
-extern Object             *save_equipment[MAX_WEAR][MAX_LAYERS];
-extern Character            *quitting_char;
-extern Character            *loading_char;
-extern Character            *saving_char;
-extern Object             *all_obj;
-extern time_t                current_time;
-extern bool                  fLogAll;
-extern char                  log_buf         [];
-extern TIME_INFO_DATA        time_info;
-extern WEATHER_DATA          weather_info;
+extern TeleportData    *first_teleport;
+extern TeleportData    *last_teleport;
+extern Object          *extracted_obj_queue;
+extern ExtractedCharacter *extracted_char_queue;
+extern Object          *save_equipment[MAX_WEAR][MAX_LAYERS];
+extern Character       *quitting_char;
+extern Character       *loading_char;
+extern Character       *saving_char;
+extern Object          *all_obj;
+extern time_t           current_time;
+extern bool             fLogAll;
+extern char             log_buf[];
+extern TIME_INFO_DATA   time_info;
+extern WEATHER_DATA     weather_info;
 extern Auction         *auction;
 extern struct act_prog_data *mob_act_list;
 
@@ -2218,18 +2218,18 @@ extern "C" {
 #endif
 
   /* copyover.c */
-  void copyover_recover( void );
+  void RecoverFromCopyover( void );
 
-  /* act_comm.c */
-  bool check_parse_name( const char *name );
-  char *drunk_speech( const char *argument, Character *ch );
-  void talk_channel( Character *ch, const char *argument,
+  /* to_channel */
+  bool IsNameAcceptable( const char *name );
+  char *DrunkSpeech( const char *argument, Character *ch );
+  void TalkToChannel( Character *ch, const char *argument,
 		     int channel, const char *verb );
-  bool circle_follow( const Character *ch, const Character *victim );
-  void add_follower( Character *ch, Character *master );
-  void stop_follower( Character *ch );
-  void die_follower( Character *ch );
-  bool is_same_group( const Character *ach, const Character *bch );
+  bool IsFollowingInCircle( const Character *ch, const Character *victim );
+  void StartFollowing( Character *ch, Character *master );
+  void StopFollowing( Character *ch );
+  void DieFollower( Character *ch );
+  bool IsInSameGroup( const Character *ach, const Character *bch );
   void to_channel( const char *argument, int channel,
 		   const char *verb, short level );
   void talk_auction( const char *argument );

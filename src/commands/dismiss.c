@@ -24,7 +24,7 @@ void do_dismiss( Character *ch, char *argument )
        && IsNpc( victim )
        && victim->master == ch )
     {
-      stop_follower( victim );
+      StopFollowing( victim );
       stop_hating( victim );
       stop_hunting( victim );
       stop_fearing( victim );

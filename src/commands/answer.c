@@ -9,5 +9,5 @@ void do_answer( Character *ch, char *argument )
       return;
     }
 
-  talk_channel( ch, argument, CHANNEL_ASK, "answer" );
+  TalkToChannel( ch, argument, CHANNEL_ASK, "answer" );
 }

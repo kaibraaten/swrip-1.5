@@ -85,10 +85,10 @@ void add_reinforcements( Character *ch )
 
           if ( mob[mob_cnt]->master )
 	    {
-	      stop_follower( mob[mob_cnt] );
+	      StopFollowing( mob[mob_cnt] );
 	    }
 
-          add_follower( mob[mob_cnt], ch );
+          StartFollowing( mob[mob_cnt], ch );
           SetBit( mob[mob_cnt]->affected_by, AFF_CHARM );
           do_setblaster( mob[mob_cnt] , "full" );
         }

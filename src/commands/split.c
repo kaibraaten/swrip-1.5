@@ -44,7 +44,7 @@ void do_split( Character *ch, char *argument )
 
   for ( gch = ch->in_room->first_person; gch; gch = gch->next_in_room )
     {
-      if ( is_same_group( gch, ch ) )
+      if ( IsInSameGroup( gch, ch ) )
 	{
 	  members++;
 	}
@@ -84,7 +84,7 @@ void do_split( Character *ch, char *argument )
 
   for ( gch = ch->in_room->first_person; gch; gch = gch->next_in_room )
     {
-      if ( gch != ch && is_same_group( gch, ch ) )
+      if ( gch != ch && IsInSameGroup( gch, ch ) )
         {
           act( AT_GOLD, buf, ch, NULL, gch, TO_VICT );
           gch->gold += share;

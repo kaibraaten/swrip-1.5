@@ -1082,7 +1082,7 @@ void extract_char( Character *ch, bool fPull )
     gch_prev = ch->prev;
 
   if ( fPull && !IsBitSet(ch->act, ACT_POLYMORPHED))
-    die_follower( ch );
+    DieFollower( ch );
 
   stop_fighting( ch, true );
 

@@ -9,5 +9,5 @@ void do_yell( Character *ch, char *argument )
       return;
     }
 
-  talk_channel( ch, drunk_speech( argument, ch ), CHANNEL_YELL, "yell" );
+  TalkToChannel( ch, DrunkSpeech( argument, ch ), CHANNEL_YELL, "yell" );
 }

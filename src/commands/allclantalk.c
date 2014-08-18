@@ -15,5 +15,5 @@ void do_allclantalk( Character *ch, char *argument )
       return;
     }
 
-  talk_channel( ch, argument, CHANNEL_ALLCLAN, "allclantalk" );
+  TalkToChannel( ch, argument, CHANNEL_ALLCLAN, "allclantalk" );
 }

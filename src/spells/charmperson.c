@@ -35,7 +35,7 @@ ch_ret spell_charm_person( int sn, int level, Character *ch, void *vo )
        ||   charm_chance == 1000
        ||   IsAffectedBy(ch, AFF_CHARM)
        ||   level < victim->top_level
-       ||        circle_follow( victim, ch )
+       ||        IsFollowingInCircle( victim, ch )
        ||   saves_spell_staff( charm_chance, victim ) )
     {
       failed_casting( skill, ch, victim, NULL );
@@ -43,9 +43,9 @@ ch_ret spell_charm_person( int sn, int level, Character *ch, void *vo )
     }
 
   if ( victim->master )
-    stop_follower( victim );
+    StopFollowing( victim );
 
-  add_follower( victim, ch );
+  StartFollowing( victim, ch );
   af.type      = sn;
   af.duration  = (NumberFuzzy( (level + 1) / 3 ) + 1) * DUR_CONV;
   af.location  = 0;

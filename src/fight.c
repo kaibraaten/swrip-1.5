@@ -316,7 +316,7 @@ void violence_update( void )
               if ( !IsNpc(ch) || IsAffectedBy(ch, AFF_CHARM) )
                 {
                   if ( ( !IsNpc(rch) || IsAffectedBy(rch, AFF_CHARM) )
-                       &&   is_same_group(ch, rch) )
+                       &&   IsInSameGroup(ch, rch) )
                     multi_hit( rch, victim, TYPE_UNDEFINED );
                   continue;
                 }
@@ -342,7 +342,7 @@ void violence_update( void )
 		      for ( vch = ch->in_room->first_person; vch; vch = vch->next )
 			{
 			  if ( CanSeeCharacter( rch, vch )
-			       &&   is_same_group( vch, victim )
+			       &&   IsInSameGroup( vch, victim )
 			       &&   GetRandomNumberFromRange( 0, number ) == 0 )
 			    {
 			      target = vch;
@@ -1308,7 +1308,7 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
        * More charm stuff.
        */
       if ( victim->master == ch )
-        stop_follower( victim );
+        StopFollowing( victim );
 
 
       /*
@@ -1823,7 +1823,7 @@ void check_killer( Character *ch, Character *victim )
           return;
         }
 
-      /* stop_follower( ch ); */
+      /* StopFollowing( ch ); */
       if ( ch->master )
         check_killer( ch->master, victim );
     }
@@ -2268,7 +2268,7 @@ void group_gain( Character *ch, Character *victim )
 
   for ( gch = ch->in_room->first_person; gch; gch = gch->next_in_room )
     {
-      if ( is_same_group( gch, ch ) )
+      if ( IsInSameGroup( gch, ch ) )
         members++;
     }
 
@@ -2285,7 +2285,7 @@ void group_gain( Character *ch, Character *victim )
       Object *obj;
       Object *obj_next;
 
-      if ( !is_same_group( gch, ch ) )
+      if ( !IsInSameGroup( gch, ch ) )
         continue;
 
       xp = (int) (xp_compute( gch, victim ) / members);

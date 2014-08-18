@@ -1310,7 +1310,7 @@ bool write_to_descriptor( socket_t desc, char *txt, int length )
 /*
  * Parse a name for acceptability.
  */
-bool check_parse_name( const char *name )
+bool IsNameAcceptable( const char *name )
 {
   const char *pc = NULL;
   bool fIll = true;

@@ -33,7 +33,7 @@ void send_room_page_to_char(Character * ch, Room * idx, char page);
 void send_page_to_char(Character * ch, ProtoMobile * idx, char page);
 void send_control_page_to_char(Character * ch, char page);
 
-char *drunk_speech( const char *argument, Character *ch )
+char *DrunkSpeech( const char *argument, Character *ch )
 {
   const char *arg = argument;
   static char buf[MAX_INPUT_LENGTH*2];
@@ -178,7 +178,7 @@ char *drunk_speech( const char *argument, Character *ch )
 /*
  * Generic channel function.
  */
-void talk_channel( Character *ch, const char *argument, int channel, const char *verb )
+void TalkToChannel( Character *ch, const char *argument, int channel, const char *verb )
 {
   char buf[MAX_STRING_LENGTH];
   char buf2[MAX_STRING_LENGTH];
@@ -510,7 +510,7 @@ void to_channel( const char *argument, int channel, const char *verb, short leve
  * follow in a loop through an exit leading back into the same room
  * (Which exists in many maze areas)                    -Thoric
  */
-bool circle_follow( const Character *ch, const Character *victim )
+bool IsFollowingInCircle( const Character *ch, const Character *victim )
 {
   const Character *tmp;
 
@@ -521,35 +521,42 @@ bool circle_follow( const Character *ch, const Character *victim )
   return false;
 }
 
-void add_follower( Character *ch, Character *master )
+void StartFollowing( Character *ch, Character *master )
 {
   if ( ch->master )
     {
-      bug( "Add_follower: non-null master.", 0 );
+      bug( "%s: non-null master.", __FUNCTION__ );
       return;
     }
 
-  ch->master        = master;
-  ch->leader        = NULL;
+  ch->master = master;
+  ch->leader = NULL;
+
   if ( IsNpc(ch) && IsBitSet(ch->act, ACT_PET) && !IsNpc(master) )
-    master->pcdata->pet = ch;
+    {
+      master->pcdata->pet = ch;
+    }
 
   if ( CanSeeCharacter( master, ch ) )
-    act( AT_ACTION, "$n now follows you.", ch, NULL, master, TO_VICT );
+    {
+      act( AT_ACTION, "$n now follows you.", ch, NULL, master, TO_VICT );
+    }
 
   act( AT_ACTION, "You now follow $N.",  ch, NULL, master, TO_CHAR );
 }
 
-void stop_follower( Character *ch )
+void StopFollowing( Character *ch )
 {
   if ( !ch->master )
     {
-      bug( "Stop_follower: null master.", 0 );
+      bug( "%s: null master.", __FUNCTION__ );
       return;
     }
 
   if ( IsNpc(ch) && !IsNpc(ch->master) && ch->master->pcdata->pet == ch )
-    ch->master->pcdata->pet = NULL;
+    {
+      ch->master->pcdata->pet = NULL;
+    }
 
   if ( IsAffectedBy(ch, AFF_CHARM) )
     {
@@ -558,30 +565,39 @@ void stop_follower( Character *ch )
     }
 
   if ( CanSeeCharacter( ch->master, ch ) )
-    act( AT_ACTION, "$n stops following you.",     ch, NULL, ch->master, TO_VICT    );
-  act( AT_ACTION, "You stop following $N.",      ch, NULL, ch->master, TO_CHAR    );
+    {
+      act( AT_ACTION, "$n stops following you.", ch, NULL, ch->master, TO_VICT );
+    }
+
+  act( AT_ACTION, "You stop following $N.", ch, NULL, ch->master, TO_CHAR );
 
   ch->master = NULL;
   ch->leader = NULL;
 }
 
-void die_follower( Character *ch )
+void DieFollower( Character *ch )
 {
-  Character *fch;
+  Character *fch = NULL;
 
   if ( ch->master )
-    stop_follower( ch );
+    {
+      StopFollowing( ch );
+    }
 
   ch->leader = NULL;
 
   for ( fch = first_char; fch; fch = fch->next )
     {
       if ( fch->master == ch )
-        stop_follower( fch );
+	{
+	  StopFollowing( fch );
+	}
+
       if ( fch->leader == ch )
-        fch->leader = fch;
+	{
+	  fch->leader = fch;
+	}
     }
-  return;
 }
 
 /*
@@ -590,7 +606,7 @@ void die_follower( Character *ch )
  * (2) if A ~ B then B ~ A
  * (3) if A ~ B  and B ~ C, then A ~ C
  */
-bool is_same_group( const Character *ach, const Character *bch )
+bool IsInSameGroup( const Character *ach, const Character *bch )
 {
   if ( ach->leader )
     ach = ach->leader;

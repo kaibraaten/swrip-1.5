@@ -90,7 +90,7 @@ void do_buy( Character *ch, char *argument )
         ch->pcdata->pet = pet;
 
       char_to_room( pet, ch->in_room );
-      add_follower( pet, ch );
+      StartFollowing( pet, ch );
       send_to_char( "Enjoy your pet.\r\n", ch );
       act( AT_ACTION, "$n bought $N as a pet.", ch, NULL, pet, TO_ROOM );
       return;

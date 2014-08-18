@@ -722,8 +722,8 @@ void boot_db( bool fCopyOver )
 
   if( fCopyOver )
     {
-      log_string( "Running copyover_recover." );
-      copyover_recover();
+      log_string( "Running RecoverFromCopyover." );
+      RecoverFromCopyover();
     }
 }
 

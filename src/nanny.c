@@ -135,7 +135,7 @@ static void nanny_get_name( Descriptor *d, char *argument )
 
   argument[0] = CharToUppercase(argument[0]);
 
-  if ( !check_parse_name( argument ) )
+  if ( !IsNameAcceptable( argument ) )
     {
       write_to_buffer( d, "Illegal name, try another.\r\nName: ", 0 );
       return;

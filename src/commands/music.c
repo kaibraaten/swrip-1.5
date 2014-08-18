@@ -9,5 +9,5 @@ void do_music( Character *ch, char *argument )
       return;
     }
 
-  talk_channel( ch, argument, CHANNEL_MUSIC, "sing" );
+  TalkToChannel( ch, argument, CHANNEL_MUSIC, "sing" );
 }

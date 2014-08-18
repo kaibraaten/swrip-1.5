@@ -33,18 +33,18 @@ void do_follow( Character *ch, char *argument )
           send_to_char( "You already follow yourself.\r\n", ch );
           return;
         }
-      stop_follower( ch );
+      StopFollowing( ch );
       return;
     }
 
-  if ( circle_follow( ch, victim ) )
+  if ( IsFollowingInCircle( ch, victim ) )
     {
       send_to_char( "Following in loops is not allowed... sorry.\r\n", ch );
       return;
     }
 
   if ( ch->master )
-    stop_follower( ch );
+    StopFollowing( ch );
 
-  add_follower( ch, victim );
+  StartFollowing( ch, victim );
 }

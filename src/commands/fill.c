@@ -277,7 +277,7 @@ void do_fill( Character *ch, char *argument )
               for ( gch = first_char; gch; gch = gch->next )
                 {
                   if ( !IsNpc(gch)
-                       &&   is_same_group( ch, gch )
+                       &&   IsInSameGroup( ch, gch )
                        &&   !StrCmp( name, gch->name ) )
                     {
                       fGroup = true;

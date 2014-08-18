@@ -12,5 +12,5 @@ void do_spacetalk( Character *ch, char *argument )
       return;
     }
 
-  talk_channel( ch, argument, CHANNEL_SPACE, "spacetalk" );
+  TalkToChannel( ch, argument, CHANNEL_SPACE, "spacetalk" );
 }

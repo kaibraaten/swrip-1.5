@@ -23,7 +23,7 @@ void do_gtell( Character *ch, char *argument )
   /*    sprintf( buf, "%s tells the group '%s'.\r\n", ch->name, argument );*/
   for ( gch = first_char; gch; gch = gch->next )
     {
-      if ( is_same_group( gch, ch ) )
+      if ( IsInSameGroup( gch, ch ) )
         {
 	  set_char_color( AT_GTELL, gch );
           /* Groups unscrambled regardless of clan language.  Other languages

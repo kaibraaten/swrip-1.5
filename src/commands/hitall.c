@@ -30,7 +30,7 @@ void do_hitall( Character *ch, char *argument )
     {
       vch_next = vch->next_in_room;
 
-      if ( is_same_group(ch, vch) || !is_legal_kill(ch, vch) ||
+      if ( IsInSameGroup(ch, vch) || !is_legal_kill(ch, vch) ||
            !CanSeeCharacter(ch, vch) || is_safe(ch, vch) )
         continue;
 

@@ -177,7 +177,7 @@ void do_copyover( Character * ch, char *argument )
 }
 
 /* Recover from a copyover - load players */
-void copyover_recover( void )
+void RecoverFromCopyover( void )
 {
   Descriptor *d = NULL;
   FILE *fp = NULL;
@@ -194,7 +194,7 @@ void copyover_recover( void )
 
   if( !fp )
   {
-    perror( "copyover_recover:fopen" );
+    perror( "RecoverFromCopyover:fopen" );
     log_string( "Copyover file not found. Exitting.\r\n" );
     exit( 1 );
   }
@@ -228,7 +228,7 @@ void copyover_recover( void )
     /* Write something, and check if it goes error-free */
     if( !write_to_descriptor( d->descriptor, "\r\nThe surge of Light passes leaving you unscathed and your world reshaped anew\r\n", 0 ) )
     {
-      bug("copyover_recover: couldn't write to socket %d", desc);
+      bug("RecoverFromCopyover: couldn't write to socket %d", desc);
       free_desc(d);
       continue;
     }

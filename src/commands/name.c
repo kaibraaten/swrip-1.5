@@ -17,7 +17,7 @@ void do_name( Character *ch, char *argument )
 
   argument[0] = CharToUppercase(argument[0]);
 
-  if (!check_parse_name(argument))
+  if (!IsNameAcceptable(argument))
     {
       send_to_char("Illegal name, try another.\r\n", ch);
       return;

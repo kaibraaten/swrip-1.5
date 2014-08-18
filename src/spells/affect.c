@@ -103,7 +103,7 @@ ch_ret spell_affect( int sn, int level, Character *ch, void *vo )
     {
       if ( groupsp || areasp )
         {
-          if ((groupsp && !is_same_group( victim, ch ))
+          if ((groupsp && !IsInSameGroup( victim, ch ))
               ||         IsBitSet( victim->immune, RIS_MAGIC )
               ||   is_immune( victim, SPELL_DAMAGE(skill) )
               ||   check_save(sn, level, ch, victim)
