@@ -116,7 +116,7 @@ void do_capture ( Character *ch , char *argument )
   planet->pop_support = 50;
 
   sprintf( buf , "%s has claimed the planet %s!", clan->name, planet->name );
-  echo_to_all( AT_RED , buf , 0 );
+  EchoToAll( AT_RED , buf , 0 );
 
   save_planet( planet );
 }

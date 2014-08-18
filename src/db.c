@@ -683,7 +683,7 @@ void boot_db( bool fCopyOver )
   load_buildlist();
 
   log_string( "Loading boards" );
-  load_boards();
+  LoadBoards();
 
   log_string( "Loading clans" );
   load_clans();
@@ -2579,7 +2579,7 @@ void free_char( Character *ch )
   if ( ch->pcdata )
     {
       if ( ch->pcdata->pnote )
-        free_note( ch->pcdata->pnote );
+        FreeNote( ch->pcdata->pnote );
 
       if( ch->pcdata->CraftingSession )
 	{

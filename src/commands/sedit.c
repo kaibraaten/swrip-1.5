@@ -49,7 +49,7 @@ void do_sedit( Character *ch, char *argument )
       social->name = CopyString( arg1 );
       sprintf( arg2, "You %s.", arg1 );
       social->char_no_arg = CopyString( arg2 );
-      add_social( social );
+      AddSocial( social );
       send_to_char( "Social added.\r\n", ch );
       return;
     }
@@ -77,8 +77,8 @@ void do_sedit( Character *ch, char *argument )
 
   if ( GetTrustLevel(ch) > LEVEL_GREATER && !StrCmp( arg2, "delete" ) )
     {
-      unlink_social( social );
-      free_social( social );
+      UnlinkSocial( social );
+      FreeSocial( social );
       send_to_char( "Deleted.\r\n", ch );
       return;
     }
@@ -169,7 +169,7 @@ void do_sedit( Character *ch, char *argument )
         }
       if ( arg1[0] != social->name[0] )
         {
-          unlink_social( social );
+          UnlinkSocial( social );
           relocate = true;
         }
       else
@@ -178,7 +178,7 @@ void do_sedit( Character *ch, char *argument )
         FreeMemory( social->name );
       social->name = CopyString( arg1 );
       if ( relocate )
-        add_social( social );
+        AddSocial( social );
       send_to_char( "Done.\r\n", ch );
       return;
     }

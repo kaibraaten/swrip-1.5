@@ -13,7 +13,7 @@ void do_mailroom(Character *ch, char *argument)
   switch( ch->substate )
     {
     case SUB_WRITING_NOTE:
-      operate_on_note(ch, arg_passed, true);
+      OperateOnNote(ch, arg_passed, true);
       break;
 
     default:
@@ -24,11 +24,11 @@ void do_mailroom(Character *ch, char *argument)
       if (!StrCmp(arg, "write") || !StrCmp(arg, "to")
           ||  !StrCmp(arg, "subject") || !StrCmp(arg, "show"))
         {
-          operate_on_note(ch, arg_passed, true);
+          OperateOnNote(ch, arg_passed, true);
           return;
         }
 
-      board = find_board( ch );
+      board = FindBoardHere( ch );
 
       if ( !board )
         {
@@ -43,7 +43,7 @@ void do_mailroom(Character *ch, char *argument)
         }
       else
         {
-          operate_on_note(ch, arg_passed, true);
+          OperateOnNote(ch, arg_passed, true);
           return;
         }
     }

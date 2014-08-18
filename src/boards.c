@@ -102,7 +102,7 @@ static bool can_post( const Character *ch, const Board *board )
 /*
  * board commands.
  */
-void write_boards_txt( void )
+void WriteBoardFile( void )
 {
   const Board *tboard = NULL;
   FILE *fpout = NULL;
@@ -137,7 +137,7 @@ void write_boards_txt( void )
   fclose( fpout );
 }
 
-Board *get_board( const Object *obj )
+Board *GetBoardFromObject( const Object *obj )
 {
   Board *board = NULL;
 
@@ -225,7 +225,7 @@ void write_board( Board *board )
 }
 
 
-void free_note( Note *pnote )
+void FreeNote( Note *pnote )
 {
   FreeMemory( pnote->text    );
   FreeMemory( pnote->subject );
@@ -265,7 +265,7 @@ static void note_remove( Board *board, Note *pnote )
   UNLINK( pnote, board->first_note, board->last_note, next, prev );
 
   --board->num_posts;
-  free_note( pnote );
+  FreeNote( pnote );
   write_board( board );
 }
 
@@ -282,7 +282,7 @@ static Object *find_quill( const Character *ch )
   return quill;
 }
 
-void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
+void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
 {
   char buf[MAX_STRING_LENGTH];
   char arg[MAX_INPUT_LENGTH];
@@ -336,7 +336,7 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
 
   if ( !StrCmp( arg, "list" ) )
     {
-      board = find_board( ch );
+      board = FindBoardHere( ch );
       if ( !board )
         {
           send_to_char( "There is no board here to look at.\r\n", ch );
@@ -416,7 +416,7 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
     {
       bool fAll;
 
-      board = find_board( ch );
+      board = FindBoardHere( ch );
       if ( !board )
         {
           send_to_char( "There is no board here to look at.\r\n", ch );
@@ -521,7 +521,7 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
       char arg2[MAX_INPUT_LENGTH];
       arg_passed = OneArgument( arg_passed, arg2 );
 
-      board = find_board( ch );
+      board = FindBoardHere( ch );
       if ( !board )
         {
           send_to_char( "There is no bulletin board here.\r\n", ch );
@@ -634,7 +634,7 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
           return;
         }
 
-      operate_on_note( ch, "", false );
+      OperateOnNote( ch, "", false );
     }
 
   if ( !StrCmp( arg, "write" ) )
@@ -894,7 +894,7 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
             }
         }
 
-      board = find_board( ch );
+      board = FindBoardHere( ch );
       if ( !board )
         {
           send_to_char( "There is no terminal here to upload your message to.\r\n", ch );
@@ -945,7 +945,7 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
     {
       char take;
 
-      board = find_board( ch );
+      board = FindBoardHere( ch );
       if ( !board )
         {
           send_to_char( "There is no terminal here to download a note from!\r\n", ch );
@@ -1254,7 +1254,7 @@ Note *read_note( const char *notefile, FILE *fp )
 /*
  * Load boards file.
  */
-void load_boards( void )
+void LoadBoards( void )
 {
   FILE *board_fp = NULL;
   Board *board = NULL;
@@ -1312,14 +1312,14 @@ void mail_count(Character *ch)
     }
 }
 
-Board *find_board( const Character *ch )
+Board *FindBoardHere( const Character *ch )
 {
   const Object *obj;
   Board *board = NULL;
 
   for ( obj = ch->in_room->first_content; obj; obj = obj->next_content )
     {
-      if ( (board = get_board(obj)) != NULL )
+      if ( (board = GetBoardFromObject(obj)) != NULL )
 	{
 	  return board;
 	}

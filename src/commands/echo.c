@@ -57,5 +57,5 @@ void do_echo( Character *ch, char *argument )
       return;
     }
 
-  echo_to_all ( color, argument, target );
+  EchoToAll ( color, argument, target );
 }

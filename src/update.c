@@ -2831,7 +2831,7 @@ void reboot_check( time_t reset )
             }
         }
 
-      echo_to_all(AT_YELLOW, "You are forced from these realms by a strong "
+      EchoToAll(AT_YELLOW, "You are forced from these realms by a strong "
                   "presence\r\nas life here is reconstructed.", ECHOTAR_ALL);
 
       for ( vch = first_char; vch; vch = vch->next )
@@ -2853,7 +2853,7 @@ void reboot_check( time_t reset )
 
   if ( trun != -1 && new_boot_time_t - current_time <= times[trun] )
     {
-      echo_to_all(AT_YELLOW, tmsg[trun], ECHOTAR_ALL);
+      EchoToAll(AT_YELLOW, tmsg[trun], ECHOTAR_ALL);
 
       if ( trun <= 5 )
 	{

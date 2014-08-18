@@ -42,7 +42,7 @@ void do_balzhur( Character *ch, char *argument )
   set_char_color( AT_IMMORT, victim );
   send_to_char( "You hear an ungodly sound in the distance that makes your blood run cold!\r\n", victim );
   sprintf( buf, "Balzhur screams, 'You are MINE %s!!!'", victim->name );
-  echo_to_all( AT_IMMORT, buf, ECHOTAR_ALL );
+  EchoToAll( AT_IMMORT, buf, ECHOTAR_ALL );
   victim->top_level =1;
   victim->trust  = 0;
   {

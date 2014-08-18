@@ -2274,22 +2274,22 @@ extern "C" {
   Room *FindLocation( const Character *ch, const char *arg );
   void EchoToRoom( short AT_COLOR, Room *room, const char *argument );
   void RealEchoToRoom( short color, Room *room, const char *text, bool sendNewline );
-  void echo_to_all( short AT_COLOR, const char *argument, short tar );
-  void get_reboot_string( void );
-  void free_social( Social *social );
-  void unlink_social( Social *social );
-  void add_social( Social *social );
-  void free_command( Command *command );
-  void unlink_command( Command *command );
-  void add_command( Command *command );
+  void EchoToAll( short AT_COLOR, const char *argument, short tar );
+  void GenerateRebootString( void );
+  void FreeSocial( Social *social );
+  void UnlinkSocial( Social *social );
+  void AddSocial( Social *social );
+  void FreeCommand( Command *command );
+  void UnlinkCommand( Command *command );
+  void AddCommand( Command *command );
 
   /* boards.c */
-  void load_boards( void );
-  Board *get_board( const Object *obj );
-  Board *find_board( const Character *ch );
-  void free_note( Note *pnote );
-  void write_boards_txt( void );
-  void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL );
+  void LoadBoards( void );
+  Board *GetBoardFromObject( const Object *obj );
+  Board *FindBoardHere( const Character *ch );
+  void FreeNote( Note *pnote );
+  void WriteBoardFile( void );
+  void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL );
 
   /* clans.c */
   void save_member_list( const MEMBER_LIST *members_list );

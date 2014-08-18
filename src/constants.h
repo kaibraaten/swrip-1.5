@@ -171,7 +171,7 @@ typedef enum
     rERROR = 255
   } ret_types;
 
-/* Echo types for echo_to_all */
+/* Echo types for EchoToAll */
 #define ECHOTAR_ALL  0
 #define ECHOTAR_PC   1
 #define ECHOTAR_IMM  2

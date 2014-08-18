@@ -38,7 +38,7 @@ extern ProtoObject *obj_index_hash[MAX_KEY_HASH];
 extern ProtoMobile *mob_index_hash[MAX_KEY_HASH];
 extern Room *room_index_hash[MAX_KEY_HASH];
 
-void echo_to_all( short AT_COLOR, const char *argument, short tar )
+void EchoToAll( short AT_COLOR, const char *argument, short tar )
 {
   Descriptor *d;
 
@@ -366,7 +366,7 @@ void CloseArea( Area *pArea )
   FreeMemory( pArea );
 }
 
-void get_reboot_string(void)
+void GenerateRebootString(void)
 {
   sprintf(reboot_time, "%s", asctime(new_boot_time));
 }
@@ -374,7 +374,7 @@ void get_reboot_string(void)
 /*
  * Free a social structure                                      -Thoric
  */
-void free_social( Social *social )
+void FreeSocial( Social *social )
 {
   if ( social->name )
     FreeMemory( social->name );
@@ -398,7 +398,7 @@ void free_social( Social *social )
 /*
  * Remove a social from it's hash index                         -Thoric
  */
-void unlink_social( Social *social )
+void UnlinkSocial( Social *social )
 {
   Social *tmp, *tmp_next;
   int hash;
@@ -434,7 +434,7 @@ void unlink_social( Social *social )
  * Add a social to the social index table                       -Thoric
  * Hashed and insert sorted
  */
-void add_social( Social *social )
+void AddSocial( Social *social )
 {
   int hash, x;
   Social *tmp, *prev;
@@ -478,7 +478,7 @@ void add_social( Social *social )
       if ( (x=StrCmp(social->name, tmp->name)) == 0 )
         {
           bug( "Add_social: trying to add duplicate name to bucket %d", hash );
-          free_social( social );
+          FreeSocial( social );
           return;
         }
       else
@@ -505,7 +505,7 @@ void add_social( Social *social )
 /*
  * Free a command structure                                     -Thoric
  */
-void free_command( Command *command )
+void FreeCommand( Command *command )
 {
   if ( command->name )
     FreeMemory( command->name );
@@ -519,7 +519,7 @@ void free_command( Command *command )
 /*
  * Remove a command from it's hash index                        -Thoric
  */
-void unlink_command( Command *command )
+void UnlinkCommand( Command *command )
 {
   Command *tmp, *tmp_next;
   int hash;
@@ -551,7 +551,7 @@ void unlink_command( Command *command )
 /*
  * Add a command to the command hash table                      -Thoric
  */
-void add_command( Command *command )
+void AddCommand( Command *command )
 {
   int hash, x;
   Command *tmp, *prev;

@@ -59,7 +59,7 @@ void do_cedit( Character *ch, char *argument )
         sprintf( arg2, "do_%s", arg1 );
 
       command->do_fun = skill_function( arg2 );
-      add_command( command );
+      AddCommand( command );
       send_to_char( "Command added.\r\n", ch );
 
       if ( command->do_fun == skill_notfound )
@@ -107,8 +107,8 @@ void do_cedit( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "delete" ) )
     {
-      unlink_command( command );
-      free_command( command );
+      UnlinkCommand( command );
+      FreeCommand( command );
       send_to_char( "Deleted.\r\n", ch );
       return;
     }
@@ -185,7 +185,7 @@ void do_cedit( Character *ch, char *argument )
         }
       if ( arg1[0] != command->name[0] )
         {
-          unlink_command( command );
+          UnlinkCommand( command );
           relocate = true;
         }
       else
@@ -194,7 +194,7 @@ void do_cedit( Character *ch, char *argument )
         FreeMemory( command->name );
       command->name = CopyString( arg1 );
       if ( relocate )
-        add_command( command );
+        AddCommand( command );
       send_to_char( "Done.\r\n", ch );
       return;
     }

@@ -38,7 +38,7 @@ void do_examine( Character *ch, char *argument )
    */
   if ( ( obj = get_obj_here( ch, arg ) ) != NULL )
     {
-      if ( (board = get_board( obj )) != NULL )
+      if ( (board = GetBoardFromObject( obj )) != NULL )
         {
           if ( board->num_posts )
             ch_printf( ch, "There are about %d notes posted here.  Type 'note list' to list them.\r\n", board->num_posts );

@@ -189,7 +189,7 @@ int main( int argc, char **argv )
   new_boot_time = &new_boot_struct;
 
   /* Set reboot time string for do_time */
-  get_reboot_string();
+  GenerateRebootString();
 
   /*
    * Get the port number.
@@ -336,7 +336,7 @@ static void caught_alarm( int dummy )
   char buf[MAX_STRING_LENGTH];
   bug( "ALARM CLOCK!" );
   strcpy( buf, "Alas, the hideous mandalorian entity known only as 'Lag' rises once more!\r\n" );
-  echo_to_all( AT_IMMORT, buf, ECHOTAR_ALL );
+  EchoToAll( AT_IMMORT, buf, ECHOTAR_ALL );
   if ( newdesc )
     {
       FD_CLR( newdesc, &in_set );

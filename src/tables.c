@@ -1545,18 +1545,18 @@ void fread_social( FILE *fp )
               if ( !social->name )
                 {
                   bug( "Fread_social: Name not found" );
-                  free_social( social );
+                  FreeSocial( social );
                   return;
                 }
 
               if ( !social->char_no_arg )
                 {
                   bug( "Fread_social: CharNoArg not found" );
-                  free_social( social );
+                  FreeSocial( social );
                   return;
                 }
 
-              add_social( social );
+              AddSocial( social );
               return;
             }
           break;
@@ -1680,18 +1680,18 @@ void fread_command( FILE *fp )
               if ( !command->name )
                 {
                   bug( "Fread_command: Name not found", 0 );
-                  free_command( command );
+                  FreeCommand( command );
                   return;
                 }
 
               if ( !command->do_fun )
                 {
                   bug( "Fread_command: Function not found", 0 );
-                  free_command( command );
+                  FreeCommand( command );
                   return;
                 }
 
-              add_command( command );
+              AddCommand( command );
               return;
             }
           break;

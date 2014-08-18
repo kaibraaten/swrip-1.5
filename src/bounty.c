@@ -235,7 +235,7 @@ void claim_disintegration( Character *ch, const Character *victim )
   ch_printf( ch, "You receive %ld experience and %ld credits,\r\n from the bounty on %s\r\n", exp, bounty->amount, bounty->target );
 
   sprintf( buf, "The disintegration bounty on %s has been claimed!",victim->name );
-  echo_to_all ( AT_RED , buf, 0 );
+  EchoToAll ( AT_RED , buf, 0 );
 
   if ( !IsBitSet(victim->act , PLR_KILLER ) )
     SetBit(ch->act, PLR_KILLER );

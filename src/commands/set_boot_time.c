@@ -87,7 +87,7 @@ void do_set_boot_time( Character *ch, char *argument)
       new_boot_struct = *new_boot_time;
       new_boot_time = &new_boot_struct;
       reboot_check(mktime(new_boot_time));
-      get_reboot_string();
+      GenerateRebootString();
 
       ch_printf(ch, "Boot time set to %s\r\n", reboot_time);
       check = true;
@@ -116,7 +116,7 @@ void do_set_boot_time( Character *ch, char *argument)
       set_boot_time->manual = atoi(arg1);
       ch_printf(ch, "Manual bit set to %s\r\n", arg1);
       check = true;
-      get_reboot_string();
+      GenerateRebootString();
       return;
     }
 
@@ -147,7 +147,7 @@ void do_set_boot_time( Character *ch, char *argument)
 
   else
     {
-      get_reboot_string();
+      GenerateRebootString();
       new_boot_time_t = mktime(new_boot_time);
     }
 }
