@@ -412,7 +412,7 @@ void get_reboot_string(void)
 /*
  * Free a social structure                                      -Thoric
  */
-void free_social( SOCIALTYPE *social )
+void free_social( Social *social )
 {
   if ( social->name )
     FreeMemory( social->name );
@@ -436,9 +436,9 @@ void free_social( SOCIALTYPE *social )
 /*
  * Remove a social from it's hash index                         -Thoric
  */
-void unlink_social( SOCIALTYPE *social )
+void unlink_social( Social *social )
 {
-  SOCIALTYPE *tmp, *tmp_next;
+  Social *tmp, *tmp_next;
   int hash;
 
   if ( !social )
@@ -472,10 +472,10 @@ void unlink_social( SOCIALTYPE *social )
  * Add a social to the social index table                       -Thoric
  * Hashed and insert sorted
  */
-void add_social( SOCIALTYPE *social )
+void add_social( Social *social )
 {
   int hash, x;
-  SOCIALTYPE *tmp, *prev;
+  Social *tmp, *prev;
 
   if ( !social )
     {
@@ -543,7 +543,7 @@ void add_social( SOCIALTYPE *social )
 /*
  * Free a command structure                                     -Thoric
  */
-void free_command( CMDTYPE *command )
+void free_command( Command *command )
 {
   if ( command->name )
     FreeMemory( command->name );
@@ -557,9 +557,9 @@ void free_command( CMDTYPE *command )
 /*
  * Remove a command from it's hash index                        -Thoric
  */
-void unlink_command( CMDTYPE *command )
+void unlink_command( Command *command )
 {
-  CMDTYPE *tmp, *tmp_next;
+  Command *tmp, *tmp_next;
   int hash;
 
   if ( !command )
@@ -589,10 +589,10 @@ void unlink_command( CMDTYPE *command )
 /*
  * Add a command to the command hash table                      -Thoric
  */
-void add_command( CMDTYPE *command )
+void add_command( Command *command )
 {
   int hash, x;
-  CMDTYPE *tmp, *prev;
+  Command *tmp, *prev;
 
   if ( !command )
     {

@@ -6,7 +6,7 @@
  */
 void do_cedit( Character *ch, char *argument )
 {
-  CMDTYPE *command;
+  Command *command;
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
 
@@ -49,7 +49,7 @@ void do_cedit( Character *ch, char *argument )
           return;
         }
 
-      AllocateMemory( command, CMDTYPE, 1 );
+      AllocateMemory( command, Command, 1 );
       command->name = CopyString( arg1 );
       command->level = GetTrustLevel(ch);
 

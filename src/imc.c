@@ -128,7 +128,7 @@ typedef enum
 #define CH_IMCNAME(ch)           ((ch)->name)
 #define CH_IMCSEX(ch)            ((ch)->sex)
 #define CH_IMCTITLE(ch)          ((ch)->pcdata->title)
-#define SOCIAL_DATA SOCIALTYPE
+#define SOCIAL_DATA Social
 #define CH_IMCRANK(ch)           ((ch)->pcdata->rank)
 
 /* Macro taken from DOTD codebase. Fcloses a file, then nulls its pointer for safety. */

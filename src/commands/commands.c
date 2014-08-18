@@ -6,7 +6,7 @@ void do_commands( Character *ch, char *argument )
   int col;
   bool found;
   int hash;
-  CMDTYPE *command;
+  Command *command;
 
   col = 0;
   set_pager_color( AT_PLAIN, ch );

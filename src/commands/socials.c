@@ -4,7 +4,7 @@ void do_socials( Character *ch, char *argument )
 {
   int iHash;
   int col = 0;
-  SOCIALTYPE *social;
+  Social *social;
 
   set_pager_color( AT_PLAIN, ch );
   for ( iHash = 0; iHash < 27; iHash++ )

@@ -163,11 +163,11 @@ typedef struct who_data                WHO_DATA;
 struct Skill;
 typedef struct Skill                   Skill;
 
-struct social_type;
-typedef struct social_type             SOCIALTYPE;
+struct Social;
+typedef struct Social                  Social;
 
-struct cmd_type;
-typedef struct cmd_type                CMDTYPE;
+struct Command;
+typedef struct Command                 Command;
 
 struct KilledData;
 typedef struct KilledData              KilledData;

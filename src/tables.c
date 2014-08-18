@@ -1095,7 +1095,7 @@ void save_herb_table()
 void save_socials()
 {
   FILE *fpout = NULL;
-  SOCIALTYPE *social = NULL;
+  Social *social = NULL;
   int x = 0;
 
   if ( (fpout=fopen( SOCIAL_FILE, "w" )) == NULL )
@@ -1201,7 +1201,7 @@ int get_skill( char *skilltype )
 void save_commands( void )
 {
   FILE *fpout = NULL;
-  CMDTYPE *command = NULL;
+  Command *command = NULL;
   int x = 0;
 
   if ( (fpout=fopen( COMMAND_FILE, "w" )) == NULL )
@@ -1517,9 +1517,9 @@ void load_herb_table()
 
 void fread_social( FILE *fp )
 {
-  SOCIALTYPE *social = NULL;
+  Social *social = NULL;
 
-  AllocateMemory( social, SOCIALTYPE, 1 );
+  AllocateMemory( social, Social, 1 );
 
   for ( ;; )
     {
@@ -1637,9 +1637,9 @@ void load_socials()
 
 void fread_command( FILE *fp )
 {
-  CMDTYPE *command = NULL;
+  Command *command = NULL;
 
-  AllocateMemory( command, CMDTYPE, 1 );
+  AllocateMemory( command, Command, 1 );
 
   for ( ;; )
     {

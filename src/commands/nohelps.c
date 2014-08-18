@@ -4,7 +4,7 @@
 
 void do_nohelps(Character *ch, char *argument)
 {
-  CMDTYPE *command;
+  Command *command;
   Area *tArea;
   char arg[MAX_STRING_LENGTH];
   int hash, col=0, sn=0;

@@ -1448,9 +1448,9 @@ extern short gsn_yevethan;
 /*
  * Structure for a command in the command lookup table.
  */
-struct cmd_type
+struct Command
 {
-  CMDTYPE *next;
+  Command *next;
   char    *name;
   DO_FUN  *do_fun;
   char    *fun_name;
@@ -1463,9 +1463,9 @@ struct cmd_type
 /*
  * Structure for a social in the socials table.
  */
-struct social_type
+struct Social
 {
-  SOCIALTYPE *next;
+  Social *next;
   char       *name;
   char       *char_no_arg;
   char       *others_no_arg;
@@ -1561,9 +1561,9 @@ extern int cur_qchars;
 extern long long high_galaxy_cash;
 extern long long low_galaxy_cash;
 
-extern CMDTYPE              *command_hash[126];
+extern Command              *command_hash[126];
 extern Skill            *skill_table[MAX_SKILL];
-extern SOCIALTYPE           *social_index[27];
+extern Social           *social_index[27];
 extern Character            *cur_char;
 extern Room      *cur_room;
 extern bool                  cur_char_died;
@@ -2278,12 +2278,12 @@ extern "C" {
 		     const char *argument );
   void echo_to_all( short AT_COLOR, const char *argument, short tar );
   void get_reboot_string( void );
-  void free_social( SOCIALTYPE *social );
-  void unlink_social( SOCIALTYPE *social );
-  void add_social( SOCIALTYPE *social );
-  void free_command( CMDTYPE *command );
-  void unlink_command( CMDTYPE *command );
-  void add_command( CMDTYPE *command );
+  void free_social( Social *social );
+  void unlink_social( Social *social );
+  void add_social( Social *social );
+  void free_command( Command *command );
+  void unlink_command( Command *command );
+  void add_command( Command *command );
 
   /* boards.c */
   void load_boards( void );
@@ -2639,8 +2639,8 @@ extern "C" {
   /* interp.c */
   bool  check_pos( Character *ch, int position );
   void  interpret( Character *ch, char *argument );
-  SOCIALTYPE *find_social( const char *command );
-  CMDTYPE *find_command( const char *command );
+  Social *find_social( const char *command );
+  Command *find_command( const char *command );
   void  hash_commands( void );
   void  sStopTimer( struct timerset *vtime, Character *ch );
   void  update_userec( struct timeval *time_used, struct timerset *userec );

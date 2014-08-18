@@ -3,7 +3,7 @@
 void do_cmdtable( Character *ch, char *argument )
 {
   int hash, cnt;
-  CMDTYPE *cmd;
+  Command *cmd;
 
   set_pager_color( AT_PLAIN, ch );
   send_to_pager("Commands and Number of Uses This Run\r\n", ch);

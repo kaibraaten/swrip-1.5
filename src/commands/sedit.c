@@ -6,7 +6,7 @@
  */
 void do_sedit( Character *ch, char *argument )
 {
-  SOCIALTYPE *social;
+  Social *social;
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
 
@@ -45,7 +45,7 @@ void do_sedit( Character *ch, char *argument )
           send_to_char( "That social already exists!\r\n", ch );
           return;
         }
-      AllocateMemory( social, SOCIALTYPE, 1 );
+      AllocateMemory( social, Social, 1 );
       social->name = CopyString( arg1 );
       sprintf( arg2, "You %s.", arg1 );
       social->char_no_arg = CopyString( arg2 );

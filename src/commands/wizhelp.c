@@ -11,7 +11,7 @@ void do_wizhelp( Character *ch, char *argument )
 
   for ( hash = 0; hash < 126; hash++ )
     {
-      CMDTYPE *cmd = NULL;
+      Command *cmd = NULL;
 
       for ( cmd = command_hash[hash]; cmd; cmd = cmd->next )
 	{

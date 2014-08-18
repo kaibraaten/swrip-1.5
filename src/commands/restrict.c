@@ -7,7 +7,7 @@ void do_restrict( Character *ch, char *argument )
   char arg2[MAX_INPUT_LENGTH];
   char buf[MAX_STRING_LENGTH];
   short level, hash;
-  CMDTYPE *cmd;
+  Command *cmd;
   bool found = false;
 
   argument = OneArgument( argument, arg );

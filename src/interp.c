@@ -37,8 +37,8 @@ bool check_social( Character *ch, const char *command, char *argument );
 bool fLogAll = false;
 
 
-CMDTYPE    *command_hash[126];  /* hash table for cmd_table */
-SOCIALTYPE *social_index[27];   /* hash table for socials   */
+Command    *command_hash[126];  /* hash table for cmd_table */
+Social *social_index[27];   /* hash table for socials   */
 
 /*
  * Character not in position for command?
@@ -193,7 +193,7 @@ void interpret( Character *ch, char *argument )
   char logline[MAX_INPUT_LENGTH];
   char logname[MAX_INPUT_LENGTH];
   Timer *timer = NULL;
-  CMDTYPE *cmd = NULL;
+  Command *cmd = NULL;
   int trust = 0;
   int loglvl = 0;
   bool found = false;
@@ -519,9 +519,9 @@ void interpret( Character *ch, char *argument )
     }
 }
 
-CMDTYPE *find_command( const char *command )
+Command *find_command( const char *command )
 {
-  CMDTYPE *cmd = NULL;
+  Command *cmd = NULL;
   int hash = CharToLowercase(command[0]) % 126;
 
   for ( cmd = command_hash[hash]; cmd; cmd = cmd->next )
@@ -535,9 +535,9 @@ CMDTYPE *find_command( const char *command )
   return NULL;
 }
 
-SOCIALTYPE *find_social( const char *command )
+Social *find_social( const char *command )
 {
-  SOCIALTYPE *social = NULL;
+  Social *social = NULL;
   int hash = 0;
 
   if ( command[0] < 'a' || command[0] > 'z' )
@@ -564,7 +564,7 @@ bool check_social( Character *ch, const char *command, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   Character *victim = NULL;
-  SOCIALTYPE *social = NULL;
+  Social *social = NULL;
 
   if ( !( social = find_social( command ) ) )
     {
