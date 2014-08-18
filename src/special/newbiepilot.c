@@ -19,7 +19,7 @@ bool spec_newbie_pilot( Character *ch )
         continue;
 
       for ( obj = victim->last_carrying; obj; obj = obj->prev_content )
-        if ( obj->pIndexData->vnum == OBJ_VNUM_SCHOOL_DIPLOMA )
+        if ( obj->Prototype->vnum == OBJ_VNUM_SCHOOL_DIPLOMA )
           diploma = true;
 
       if ( !diploma )

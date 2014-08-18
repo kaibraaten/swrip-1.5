@@ -21,7 +21,7 @@ bool spec_customs_spice( Character *ch )
 
       for ( obj = victim->last_carrying; obj; obj = obj->prev_content )
         {
-          if (obj->pIndexData->item_type == ITEM_SPICE || obj->pIndexData->item_type  == ITEM_RAWSPICE)
+          if (obj->Prototype->item_type == ITEM_SPICE || obj->Prototype->item_type  == ITEM_RAWSPICE)
             {
               if ( victim != ch && CanSeeCharacter( ch, victim ) && CanSeeObject( ch,obj ) )
                 {
@@ -66,7 +66,7 @@ bool spec_customs_spice( Character *ch )
               Object *content;
               for ( content = obj->first_content; content; content = content->next_content )
                 {
-                  if (content->pIndexData->item_type == ITEM_SPICE
+                  if (content->Prototype->item_type == ITEM_SPICE
                       && !IsBitSet( content->extra_flags , ITEM_CONTRABAND ) )
 		    {
                       ch_exp = umin( content->cost*10 , ( exp_level( GetAbilityLevel( victim, SMUGGLING_ABILITY ) + 1) - exp_level( GetAbilityLevel( victim, SMUGGLING_ABILITY ) ) ) );

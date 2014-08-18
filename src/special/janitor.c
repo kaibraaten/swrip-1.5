@@ -18,7 +18,7 @@ bool spec_janitor( Character *ch )
       if ( trash->item_type == ITEM_DRINK_CON
            ||   trash->item_type == ITEM_TRASH
            ||   trash->cost < 10
-           ||  (trash->pIndexData->vnum == OBJ_VNUM_SHOPPING_BAG
+           ||  (trash->Prototype->vnum == OBJ_VNUM_SHOPPING_BAG
                 &&  !trash->first_content) )
         {
           act( AT_ACTION, "$n picks up some trash.", ch, NULL, NULL, TO_ROOM );

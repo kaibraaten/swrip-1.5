@@ -113,7 +113,7 @@ void do_look( Character *ch, char *argument )
               return;
             }
 
-          if ( (pdesc=get_extra_descr(arg, obj->pIndexData->first_extradesc)) != NULL )
+          if ( (pdesc=get_extra_descr(arg, obj->Prototype->first_extradesc)) != NULL )
             {
               if ( (cnt += obj->count) < number )
 		continue;
@@ -126,7 +126,7 @@ void do_look( Character *ch, char *argument )
             {
               if ( (cnt += obj->count) < number )
                 continue;
-              pdesc = get_extra_descr( obj->name, obj->pIndexData->first_extradesc );
+              pdesc = get_extra_descr( obj->name, obj->Prototype->first_extradesc );
               if ( !pdesc )
                 pdesc = get_extra_descr( obj->name, obj->first_extradesc );
               if ( !pdesc )
@@ -156,7 +156,7 @@ void do_look( Character *ch, char *argument )
               return;
             }
 
-          if ( (pdesc=get_extra_descr(arg, obj->pIndexData->first_extradesc)) != NULL )
+          if ( (pdesc=get_extra_descr(arg, obj->Prototype->first_extradesc)) != NULL )
             {
               if ( (cnt += obj->count) < number )
                 continue;
@@ -172,7 +172,7 @@ void do_look( Character *ch, char *argument )
 	    {
               if ( (cnt += obj->count) < number )
                 continue;
-              pdesc = get_extra_descr( obj->name, obj->pIndexData->first_extradesc );
+              pdesc = get_extra_descr( obj->name, obj->Prototype->first_extradesc );
               if ( !pdesc )
                 pdesc = get_extra_descr( obj->name, obj->first_extradesc );
               if ( !pdesc )
@@ -494,7 +494,7 @@ static void show_char_to_char_1( Character *victim, Character *ch )
                   found = true;
                 }
               send_to_char( where_name[iWear], ch );
-              send_to_char( format_obj_to_char( obj, ch, true ), ch );
+              send_to_char( FormatObjectToCharacter( obj, ch, true ), ch );
               send_to_char( "\r\n", ch );
             }
         }
@@ -502,7 +502,7 @@ static void show_char_to_char_1( Character *victim, Character *ch )
   else
     {
       send_to_char( where_name[WEAR_OVER], ch );
-      send_to_char( format_obj_to_char( obj, ch, true ), ch );
+      send_to_char( FormatObjectToCharacter( obj, ch, true ), ch );
       send_to_char( "\r\n", ch );
     }
 
@@ -512,7 +512,7 @@ static void show_char_to_char_1( Character *victim, Character *ch )
   if ( GetRandomPercent( ) < ch->pcdata->learned[gsn_peek] )
     {
       send_to_char( "\r\nYou peek at the inventory:\r\n", ch );
-      show_list_to_char( victim->first_carrying, ch, true, true );
+      ShowObjectListToCharacter( victim->first_carrying, ch, true, true );
       learn_from_success( ch, gsn_peek );
     }
   else
@@ -631,7 +631,7 @@ static void look_under( Character *ch, char *what, bool doexaprog )
 
   if ( IS_OBJ_STAT( obj, ITEM_COVERING ) )
     {
-      show_list_to_char( obj->first_content, ch, true, true );
+      ShowObjectListToCharacter( obj->first_content, ch, true, true );
     }
   else
     {
@@ -782,7 +782,7 @@ static void look_in( Character *ch, char *what, bool doexaprog )
       obj->count = 1;
       act( AT_PLAIN, "$p contains:", ch, obj, NULL, TO_CHAR );
       obj->count = count;
-      show_list_to_char( obj->first_content, ch, true, true );
+      ShowObjectListToCharacter( obj->first_content, ch, true, true );
 
       if ( doexaprog )
 	{
@@ -928,7 +928,7 @@ static void show_no_arg( Character *ch, bool is_auto )
 
   show_ships_to_char( ch->in_room->first_ship, ch );
   ShowShuttlesToCharacter( ch->in_room->first_shuttle, ch );
-  show_list_to_char( ch->in_room->first_content, ch, false, false );
+  ShowObjectListToCharacter( ch->in_room->first_content, ch, false, false );
   show_char_to_char( ch->in_room->first_person,  ch );
 
   if ( !is_auto )

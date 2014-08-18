@@ -41,7 +41,7 @@ struct Character
   SPEC_FUN *            spec_fun;
   SPEC_FUN *            spec_2;
 
-  ProtoMobile *      pIndexData;
+  ProtoMobile *      Prototype;
   Descriptor *     desc;
   Affect * first_affect;
   Affect * last_affect;

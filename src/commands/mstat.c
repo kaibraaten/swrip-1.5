@@ -54,12 +54,12 @@ void do_mstat( Character *ch, char *argument )
               victim->pcdata->helled_by);
 
   ch_printf( ch, "Vnum: %d   Sex: %s   Room: %d   Count: %d  Killed: %d\r\n",
-             IsNpc(victim) ? victim->pIndexData->vnum : 0,
+             IsNpc(victim) ? victim->Prototype->vnum : 0,
              victim->sex == SEX_MALE    ? "male"   :
              victim->sex == SEX_FEMALE  ? "female" : "neutral",
              victim->in_room == NULL    ?        0 : victim->in_room->vnum,
-             IsNpc(victim) ? victim->pIndexData->count : 1,
-             IsNpc(victim) ? victim->pIndexData->killed
+             IsNpc(victim) ? victim->Prototype->count : 1,
+             IsNpc(victim) ? victim->Prototype->killed
              : victim->pcdata->mdeaths + victim->pcdata->pdeaths
              );
 
@@ -114,12 +114,12 @@ void do_mstat( Character *ch, char *argument )
                victim->pcdata->condition[COND_DRUNK] );
   else
     ch_printf( ch, "Hit dice: %dd%d+%d.  Damage dice: %dd%d+%d.\r\n",
-               victim->pIndexData->hitnodice,
-               victim->pIndexData->hitsizedice,
-               victim->pIndexData->hitplus,
-               victim->pIndexData->damnodice,
-               victim->pIndexData->damsizedice,
-               victim->pIndexData->damplus );
+               victim->Prototype->hitnodice,
+               victim->Prototype->hitsizedice,
+               victim->Prototype->hitplus,
+               victim->Prototype->damnodice,
+               victim->Prototype->damsizedice,
+               victim->Prototype->damplus );
 
   ch_printf( ch, "MentalState: %d   EmotionalState: %d\r\n",
              victim->mental_state, victim->emotional_state );

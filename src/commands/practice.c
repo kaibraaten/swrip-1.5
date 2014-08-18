@@ -146,7 +146,7 @@ void do_practice( Character *ch, char *argument )
        */
       if ( skill_table[sn]->teachers && skill_table[sn]->teachers[0] != '\0' )
         {
-          sprintf( buf, "%ld", mob->pIndexData->vnum );
+          sprintf( buf, "%ld", mob->Prototype->vnum );
 
           if ( !IsName( buf, skill_table[sn]->teachers ) )
             {

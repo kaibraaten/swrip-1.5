@@ -55,7 +55,7 @@ void do_poison_weapon( Character *ch, char *argument )
   /* Now we have a valid weapon...check to see if we have the powder. */
   for ( pobj = ch->first_carrying; pobj; pobj = pobj->next_content )
     {
-      if ( pobj->pIndexData->vnum == OBJ_VNUM_BLACK_POWDER )
+      if ( pobj->Prototype->vnum == OBJ_VNUM_BLACK_POWDER )
         break;
     }
   if ( !pobj )

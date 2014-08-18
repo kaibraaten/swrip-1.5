@@ -68,7 +68,7 @@ void make_scraps( Object *obj )
   scraps->timer = GetRandomNumberFromRange( 5, 15 );
 
   /* don't make scraps of scraps of scraps of ... */
-  if ( obj->pIndexData->vnum == OBJ_VNUM_SCRAPS )
+  if ( obj->Prototype->vnum == OBJ_VNUM_SCRAPS )
     {
       FreeMemory( scraps->short_descr );
       scraps->short_descr = CopyString( "some debris" );
@@ -177,7 +177,7 @@ void make_corpse( Character *ch )
         }
 
       /* Using corpse cost to cheat, since corpses not sellable */
-      corpse->cost     = (-(int)ch->pIndexData->vnum);
+      corpse->cost     = (-(int)ch->Prototype->vnum);
       corpse->value[OVAL_CORPSE_DECAY] = corpse->timer;
     }
   else

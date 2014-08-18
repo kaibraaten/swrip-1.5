@@ -23,7 +23,7 @@ void do_repair( Character *ch, char *argument )
     return;
 
   maxgold = keeper->top_level * 10;
-  switch( keeper->pIndexData->rShop->shop_type )
+  switch( keeper->Prototype->rShop->shop_type )
     {
     default:
     case SHOP_FIX:

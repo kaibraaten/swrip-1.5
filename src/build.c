@@ -52,7 +52,7 @@ bool can_rmodify( const Character *ch, const Room *room )
 
 bool can_omodify( const Character *ch, const Object *obj )
 {
-  vnum_t vnum = obj->pIndexData->vnum;
+  vnum_t vnum = obj->Prototype->vnum;
   Area *pArea;
 
   if ( IsNpc( ch ) )
@@ -117,7 +117,7 @@ bool can_mmodify( const Character *ch, const Character *mob )
       return false;
     }
 
-  vnum = mob->pIndexData->vnum;
+  vnum = mob->Prototype->vnum;
 
   if ( IsNpc( ch ) )
     return false;
@@ -784,13 +784,13 @@ void AddReset_nested( Area *tarea, Object *obj )
 
   for ( obj = obj->first_content; obj; obj = obj->next_content )
     {
-      limit = obj->pIndexData->count;
+      limit = obj->Prototype->count;
 
       if ( limit < 1 )
         limit = 1;
 
-      AddReset( tarea, 'P', 1, obj->pIndexData->vnum, limit,
-                 obj->in_obj->pIndexData->vnum );
+      AddReset( tarea, 'P', 1, obj->Prototype->vnum, limit,
+                 obj->in_obj->Prototype->vnum );
 
       if ( obj->first_content )
         AddReset_nested( tarea, obj );

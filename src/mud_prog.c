@@ -425,7 +425,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
       for ( oMob = mob->in_room->first_person; oMob;
             oMob = oMob->next_in_room )
 	{
-	  if ( IsNpc(oMob) && oMob->pIndexData->vnum == vnum )
+	  if ( IsNpc(oMob) && oMob->Prototype->vnum == vnum )
 	    {
 	      lhsvl++;
 	    }
@@ -452,7 +452,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
 
       if ( chkchar )
 	{
-	  pMob = chkchar->pIndexData;
+	  pMob = chkchar->Prototype;
 	}
       else if ( !(pMob = get_mob_index(atoi(cvar))) )
         {
@@ -478,7 +478,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
 
       for ( pObj = mob->first_carrying; pObj; pObj = pObj->next_content )
 	{
-	  if ( CanSeeObject(mob, pObj) && pObj->pIndexData->vnum == vnum )
+	  if ( CanSeeObject(mob, pObj) && pObj->Prototype->vnum == vnum )
 	    {
 	      lhsvl++;
 	    }
@@ -487,7 +487,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
       for ( pObj = mob->in_room->first_content; pObj;
             pObj = pObj->next_content )
 	{
-	  if ( CanSeeObject(mob, pObj) && pObj->pIndexData->vnum == vnum )
+	  if ( CanSeeObject(mob, pObj) && pObj->Prototype->vnum == vnum )
 	    {
 	      lhsvl++;
 	    }
@@ -574,7 +574,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
       for ( pObj = mob->in_room->first_content; pObj;
             pObj = pObj->next_content )
 	{
-	  if ( CanSeeObject(mob, pObj) && pObj->pIndexData->vnum == vnum )
+	  if ( CanSeeObject(mob, pObj) && pObj->Prototype->vnum == vnum )
 	    {
 	      lhsvl++;
 	    }
@@ -656,7 +656,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
 
       for ( pObj = mob->first_carrying; pObj; pObj = pObj->next_content )
 	{
-	  if ( CanSeeObject(mob, pObj) && pObj->pIndexData->vnum == vnum )
+	  if ( CanSeeObject(mob, pObj) && pObj->Prototype->vnum == vnum )
 	    {
 	      lhsvl++;
 	    }
@@ -737,7 +737,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
       for ( pObj = mob->first_carrying; pObj; pObj = pObj->next_content )
 	{
 	  if ( pObj->wear_loc != WEAR_NONE && CanSeeObject(mob, pObj) &&
-	       pObj->pIndexData->vnum == vnum )
+	       pObj->Prototype->vnum == vnum )
 	    {
 	      lhsvl++;
 	    }
@@ -807,7 +807,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
 
       for ( pObj = mob->first_carrying; pObj; pObj = pObj->next_content )
         if ( pObj->wear_loc == WEAR_NONE && CanSeeObject(mob, pObj) &&
-             pObj->pIndexData->vnum == vnum )
+             pObj->Prototype->vnum == vnum )
           lhsvl++;
 
       rhsvl = IsNumber(rval) ? atoi(rval) : -1;
@@ -1072,7 +1072,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
             }
 
           for (pObj = chkchar->first_carrying; pObj; pObj = pObj->next_content)
-            if (pObj->pIndexData->vnum == vnum)
+            if (pObj->Prototype->vnum == vnum)
               return true ;
 
           return false ;
@@ -1101,7 +1101,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
 	      {
 		if ( pObj->wear_loc == iWear )
 		  {
-		    if (pObj->pIndexData->vnum == vnum)
+		    if (pObj->Prototype->vnum == vnum)
 		      {
 			return true ;
 		      }
@@ -1160,11 +1160,11 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
           if ( !IsNpc(chkchar) )
             return false;
 
-          lhsvl = (chkchar == mob) ? chkchar->gold : chkchar->pIndexData->vnum;
+          lhsvl = (chkchar == mob) ? chkchar->gold : chkchar->Prototype->vnum;
           return mprog_veval(lhsvl, opr, atoi(rval), mob);
         }
 
-      return mprog_veval(chkobj->pIndexData->vnum, opr, atoi(rval), mob);
+      return mprog_veval(chkobj->Prototype->vnum, opr, atoi(rval), mob);
     }
 
   if ( !StrCmp(chck, "name") )
@@ -2182,7 +2182,7 @@ void mprog_wordlist_check( char *arg, Character *mob, Character *actor,
   char       *end = NULL;
   size_t      i = 0;
 
-  for ( mprg = mob->pIndexData->mprog.mudprogs; mprg; mprg = mprg->next )
+  for ( mprg = mob->Prototype->mprog.mudprogs; mprg; mprg = mprg->next )
     {
       if ( mprg->type & type )
 	{
@@ -2256,7 +2256,7 @@ void mprog_percent_check( Character *mob, Character *actor, Object *obj,
 {
   MPROG_DATA * mprg;
 
-  for ( mprg = mob->pIndexData->mprog.mudprogs; mprg; mprg = mprg->next )
+  for ( mprg = mob->Prototype->mprog.mudprogs; mprg; mprg = mprg->next )
     {
       if ( ( mprg->type & type )
 	   && ( GetRandomPercent( ) <= atoi( mprg->arglist ) ) )
@@ -2274,7 +2274,7 @@ void mprog_time_check( Character *mob, Character *actor, Object *obj,
 {
   MPROG_DATA * mprg;
 
-  for ( mprg = mob->pIndexData->mprog.mudprogs; mprg; mprg = mprg->next )
+  for ( mprg = mob->Prototype->mprog.mudprogs; mprg; mprg = mprg->next )
     {
       bool trigger_time = ( time_info.hour == atoi( mprg->arglist ) );
 
@@ -2329,15 +2329,15 @@ void mprog_act_trigger( char *buf, Character *mob, Character *ch,
   bool found = false;
 
   if ( IsNpc( mob )
-       && IsBitSet( mob->pIndexData->mprog.progtypes, ACT_PROG ) )
+       && IsBitSet( mob->Prototype->mprog.progtypes, ACT_PROG ) )
     {
       /* Don't let a mob trigger itself, nor one instance of a mob
          trigger another instance. */
-      if ( IsNpc( ch ) && ch->pIndexData == mob->pIndexData )
+      if ( IsNpc( ch ) && ch->Prototype == mob->Prototype )
         return;
 
       /* make sure this is a matching trigger */
-      for ( mprg = mob->pIndexData->mprog.mudprogs; mprg; mprg = mprg->next )
+      for ( mprg = mob->Prototype->mprog.mudprogs; mprg; mprg = mprg->next )
 	{
 	  if ( mprg->type & ACT_PROG
 	       && mprog_keyword_check( buf, mprg->arglist ) )
@@ -2375,11 +2375,11 @@ void mprog_bribe_trigger( Character *mob, Character *ch, int amount )
   Object   *obj = NULL;
 
   if ( IsNpc( mob )
-       && ( mob->pIndexData->mprog.progtypes & BRIBE_PROG ) )
+       && ( mob->Prototype->mprog.progtypes & BRIBE_PROG ) )
     {
       /* Don't let a mob trigger itself, nor one instance of a mob
          trigger another instance. */
-      if ( IsNpc( ch ) && ch->pIndexData == mob->pIndexData )
+      if ( IsNpc( ch ) && ch->Prototype == mob->Prototype )
         return;
 
       obj = create_object( get_obj_index( OBJ_VNUM_MONEY_SOME ), 0 );
@@ -2390,7 +2390,7 @@ void mprog_bribe_trigger( Character *mob, Character *ch, int amount )
       obj = obj_to_char( obj, mob );
       mob->gold -= amount;
 
-      for ( mprg = mob->pIndexData->mprog.mudprogs; mprg; mprg = mprg->next )
+      for ( mprg = mob->Prototype->mprog.mudprogs; mprg; mprg = mprg->next )
 	{
 	  if ( ( mprg->type & BRIBE_PROG )
 	       && ( amount >= atoi( mprg->arglist ) ) )
@@ -2405,7 +2405,7 @@ void mprog_bribe_trigger( Character *mob, Character *ch, int amount )
 void mprog_death_trigger( Character *killer, Character *mob )
 {
   if ( IsNpc( mob ) && killer != mob
-       && ( mob->pIndexData->mprog.progtypes & DEATH_PROG ) )
+       && ( mob->Prototype->mprog.progtypes & DEATH_PROG ) )
     {
       mprog_percent_check( mob, killer, NULL, NULL, DEATH_PROG );
     }
@@ -2416,7 +2416,7 @@ void mprog_death_trigger( Character *killer, Character *mob )
 void mprog_entry_trigger( Character *mob )
 {
   if ( IsNpc( mob )
-       && ( mob->pIndexData->mprog.progtypes & ENTRY_PROG ) )
+       && ( mob->Prototype->mprog.progtypes & ENTRY_PROG ) )
     {
       mprog_percent_check( mob, NULL, NULL, NULL, ENTRY_PROG );
     }
@@ -2425,7 +2425,7 @@ void mprog_entry_trigger( Character *mob )
 void mprog_fight_trigger( Character *mob, Character *ch )
 {
   if ( IsNpc( mob )
-       && ( mob->pIndexData->mprog.progtypes & FIGHT_PROG ) )
+       && ( mob->Prototype->mprog.progtypes & FIGHT_PROG ) )
     {
       mprog_percent_check( mob, ch, NULL, NULL, FIGHT_PROG );
     }
@@ -2437,16 +2437,16 @@ void mprog_give_trigger( Character *mob, Character *ch, Object *obj )
   MPROG_DATA *mprg = NULL;
 
   if ( IsNpc( mob )
-       && ( mob->pIndexData->mprog.progtypes & GIVE_PROG ) )
+       && ( mob->Prototype->mprog.progtypes & GIVE_PROG ) )
     {
       /* Don't let a mob trigger itself, nor one instance of a mob
          trigger another instance. */
-      if ( IsNpc( ch ) && ch->pIndexData == mob->pIndexData )
+      if ( IsNpc( ch ) && ch->Prototype == mob->Prototype )
 	{
 	  return;
 	}
 
-      for ( mprg = mob->pIndexData->mprog.mudprogs; mprg; mprg = mprg->next )
+      for ( mprg = mob->Prototype->mprog.mudprogs; mprg; mprg = mprg->next )
         {
           OneArgument( mprg->arglist, buf );
 
@@ -2479,16 +2479,16 @@ void mprog_greet_trigger( Character *ch )
 
       /* Don't let a mob trigger itself, nor one instance of a mob
          trigger another instance. */
-      if ( IsNpc( ch ) && ch->pIndexData == vmob->pIndexData )
+      if ( IsNpc( ch ) && ch->Prototype == vmob->Prototype )
 	{
 	  continue;
 	}
 
-      if ( vmob->pIndexData->mprog.progtypes & GREET_PROG )
+      if ( vmob->Prototype->mprog.progtypes & GREET_PROG )
 	{
 	  mprog_percent_check( vmob, ch, NULL, NULL, GREET_PROG );
 	}
-      else if ( vmob->pIndexData->mprog.progtypes & ALL_GREET_PROG )
+      else if ( vmob->Prototype->mprog.progtypes & ALL_GREET_PROG )
 	{
 	  mprog_percent_check(vmob,ch,NULL,NULL,ALL_GREET_PROG);
 	}
@@ -2501,9 +2501,9 @@ void mprog_hitprcnt_trigger( Character *mob, Character *ch)
   MPROG_DATA *mprg;
 
   if ( IsNpc( mob )
-       && ( mob->pIndexData->mprog.progtypes & HITPRCNT_PROG ) )
+       && ( mob->Prototype->mprog.progtypes & HITPRCNT_PROG ) )
     {
-      for ( mprg = mob->pIndexData->mprog.mudprogs; mprg; mprg = mprg->next )
+      for ( mprg = mob->Prototype->mprog.mudprogs; mprg; mprg = mprg->next )
 	{
 	  if ( ( mprg->type & HITPRCNT_PROG )
 	       && ( ( 100*mob->hit / mob->max_hit ) < atoi( mprg->arglist ) ) )
@@ -2517,19 +2517,19 @@ void mprog_hitprcnt_trigger( Character *mob, Character *ch)
 
 void mprog_random_trigger( Character *mob )
 {
-  if ( mob->pIndexData->mprog.progtypes & RAND_PROG)
+  if ( mob->Prototype->mprog.progtypes & RAND_PROG)
     mprog_percent_check(mob,NULL,NULL,NULL,RAND_PROG);
 }
 
 void mprog_time_trigger( Character *mob )
 {
-  if ( mob->pIndexData->mprog.progtypes & TIME_PROG)
+  if ( mob->Prototype->mprog.progtypes & TIME_PROG)
     mprog_time_check(mob,NULL,NULL,NULL,TIME_PROG);
 }
 
 void mprog_hour_trigger( Character *mob )
 {
-  if ( mob->pIndexData->mprog.progtypes & HOUR_PROG)
+  if ( mob->Prototype->mprog.progtypes & HOUR_PROG)
     mprog_time_check(mob,NULL,NULL,NULL,HOUR_PROG);
 }
 
@@ -2539,9 +2539,9 @@ void mprog_speech_trigger( char *txt, Character *actor )
 
   for ( vmob = actor->in_room->first_person; vmob; vmob = vmob->next_in_room )
     {
-      if ( IsNpc( vmob ) && ( vmob->pIndexData->mprog.progtypes & SPEECH_PROG ) )
+      if ( IsNpc( vmob ) && ( vmob->Prototype->mprog.progtypes & SPEECH_PROG ) )
         {
-          if ( IsNpc( actor ) && actor->pIndexData == vmob->pIndexData )
+          if ( IsNpc( actor ) && actor->Prototype == vmob->Prototype )
             continue;
 
           mprog_wordlist_check( txt, vmob, actor, NULL, NULL, SPEECH_PROG );
@@ -2553,9 +2553,9 @@ void mprog_script_trigger( Character *mob )
 {
   MPROG_DATA * mprg;
 
-  if ( mob->pIndexData->mprog.progtypes & SCRIPT_PROG)
+  if ( mob->Prototype->mprog.progtypes & SCRIPT_PROG)
     {
-      for ( mprg = mob->pIndexData->mprog.mudprogs; mprg; mprg = mprg->next )
+      for ( mprg = mob->Prototype->mprog.mudprogs; mprg; mprg = mprg->next )
 	{
 	  if ( ( mprg->type & SCRIPT_PROG ) )
 	    {
@@ -2572,9 +2572,9 @@ void oprog_script_trigger( Object *obj )
 {
   MPROG_DATA * mprg;
 
-  if ( obj->pIndexData->mprog.progtypes & SCRIPT_PROG)
+  if ( obj->Prototype->mprog.progtypes & SCRIPT_PROG)
     {
-      for ( mprg = obj->pIndexData->mprog.mudprogs; mprg; mprg = mprg->next )
+      for ( mprg = obj->Prototype->mprog.mudprogs; mprg; mprg = mprg->next )
 	{
 	  if ( ( mprg->type & SCRIPT_PROG ) )
 	    {
@@ -2655,7 +2655,7 @@ void set_supermob( Object *obj)
 
   /* Added by Jenny to allow bug messages to show the vnum
      of the object, and not just supermob's vnum */
-  sprintf( buf, "Object #%ld", obj->pIndexData->vnum );
+  sprintf( buf, "Object #%ld", obj->Prototype->vnum );
   FreeMemory( supermob->description );
   supermob->description = CopyString( buf );
 
@@ -2678,7 +2678,7 @@ bool oprog_percent_check( Character *mob, Character *actor, Object *obj,
   MPROG_DATA * mprg;
   bool executed = false;
 
-  for ( mprg = obj->pIndexData->mprog.mudprogs; mprg; mprg = mprg->next )
+  for ( mprg = obj->Prototype->mprog.mudprogs; mprg; mprg = mprg->next )
     {
       if ( ( mprg->type & type )
 	   && ( GetRandomPercent( ) <= atoi( mprg->arglist ) ) )
@@ -2704,7 +2704,7 @@ void oprog_greet_trigger( Character *ch )
 
   for ( vobj=ch->in_room->first_content; vobj; vobj = vobj->next_content )
     {
-      if  ( vobj->pIndexData->mprog.progtypes & GREET_PROG )
+      if  ( vobj->Prototype->mprog.progtypes & GREET_PROG )
 	{
 	  set_supermob( vobj );  /* not very efficient to do here */
 	  oprog_percent_check( supermob, ch, vobj, NULL, GREET_PROG );
@@ -2720,7 +2720,7 @@ void oprog_speech_trigger( char *txt, Character *ch )
   /* supermob is set and released in oprog_wordlist_check */
   for ( vobj=ch->in_room->first_content; vobj; vobj = vobj->next_content )
     {
-      if  ( vobj->pIndexData->mprog.progtypes & SPEECH_PROG )
+      if  ( vobj->Prototype->mprog.progtypes & SPEECH_PROG )
 	{
 	  oprog_wordlist_check( txt, supermob, ch, vobj, NULL, SPEECH_PROG, vobj );
 	}
@@ -2734,10 +2734,10 @@ void oprog_speech_trigger( char *txt, Character *ch )
  */
 void oprog_random_trigger( Object *obj )
 {
-  if (!obj || !obj->pIndexData)
+  if (!obj || !obj->Prototype)
     return;
 
-  if ( obj->pIndexData->mprog.progtypes & RAND_PROG)
+  if ( obj->Prototype->mprog.progtypes & RAND_PROG)
     {
       set_supermob( obj );
       oprog_percent_check(supermob,NULL,obj,NULL,RAND_PROG);
@@ -2751,7 +2751,7 @@ void oprog_random_trigger( Object *obj )
  */
 void oprog_wear_trigger( Character *ch, Object *obj )
 {
-  if ( obj->pIndexData->mprog.progtypes & WEAR_PROG )
+  if ( obj->Prototype->mprog.progtypes & WEAR_PROG )
     {
       set_supermob( obj );
       oprog_percent_check( supermob, ch, obj, NULL, WEAR_PROG );
@@ -2764,7 +2764,7 @@ bool oprog_use_trigger( Character *ch, Object *obj, Character *vict,
 {
   bool executed = false;
 
-  if ( obj->pIndexData->mprog.progtypes & USE_PROG )
+  if ( obj->Prototype->mprog.progtypes & USE_PROG )
     {
       set_supermob( obj );
 
@@ -2797,7 +2797,7 @@ bool oprog_use_trigger( Character *ch, Object *obj, Character *vict,
  */
 void oprog_remove_trigger( Character *ch, Object *obj )
 {
-  if ( obj->pIndexData->mprog.progtypes & REMOVE_PROG )
+  if ( obj->Prototype->mprog.progtypes & REMOVE_PROG )
     {
       set_supermob( obj );
       oprog_percent_check( supermob, ch, obj, NULL, REMOVE_PROG );
@@ -2810,7 +2810,7 @@ void oprog_remove_trigger( Character *ch, Object *obj )
  */
 void oprog_sac_trigger( Character *ch, Object *obj )
 {
-  if ( obj->pIndexData->mprog.progtypes & SAC_PROG )
+  if ( obj->Prototype->mprog.progtypes & SAC_PROG )
     {
       set_supermob( obj );
       oprog_percent_check( supermob, ch, obj, NULL, SAC_PROG );
@@ -2824,7 +2824,7 @@ void oprog_sac_trigger( Character *ch, Object *obj )
  */
 void oprog_get_trigger( Character *ch, Object *obj )
 {
-  if ( obj->pIndexData->mprog.progtypes & GET_PROG )
+  if ( obj->Prototype->mprog.progtypes & GET_PROG )
     {
       set_supermob( obj );
       oprog_percent_check( supermob, ch, obj, NULL, GET_PROG );
@@ -2837,7 +2837,7 @@ void oprog_get_trigger( Character *ch, Object *obj )
  */
 void oprog_damage_trigger( Character *ch, Object *obj )
 {
-  if ( obj->pIndexData->mprog.progtypes & DAMAGE_PROG )
+  if ( obj->Prototype->mprog.progtypes & DAMAGE_PROG )
     {
       set_supermob( obj );
       oprog_percent_check( supermob, ch, obj, NULL, DAMAGE_PROG );
@@ -2850,7 +2850,7 @@ void oprog_damage_trigger( Character *ch, Object *obj )
  */
 void oprog_repair_trigger( Character *ch, Object *obj )
 {
-  if ( obj->pIndexData->mprog.progtypes & REPAIR_PROG )
+  if ( obj->Prototype->mprog.progtypes & REPAIR_PROG )
     {
       set_supermob( obj );
       oprog_percent_check( supermob, ch, obj, NULL, REPAIR_PROG );
@@ -2864,7 +2864,7 @@ void oprog_repair_trigger( Character *ch, Object *obj )
  */
 void oprog_drop_trigger( Character *ch, Object *obj )
 {
-  if ( obj->pIndexData->mprog.progtypes & DROP_PROG )
+  if ( obj->Prototype->mprog.progtypes & DROP_PROG )
     {
       set_supermob( obj );
       oprog_percent_check( supermob, ch, obj, NULL, DROP_PROG );
@@ -2877,7 +2877,7 @@ void oprog_drop_trigger( Character *ch, Object *obj )
  */
 void oprog_examine_trigger( Character *ch, Object *obj )
 {
-  if ( obj->pIndexData->mprog.progtypes & EXA_PROG )
+  if ( obj->Prototype->mprog.progtypes & EXA_PROG )
     {
       set_supermob( obj );
       oprog_percent_check( supermob, ch, obj, NULL, EXA_PROG );
@@ -2890,7 +2890,7 @@ void oprog_examine_trigger( Character *ch, Object *obj )
  */
 void oprog_zap_trigger( Character *ch, Object *obj )
 {
-  if ( obj->pIndexData->mprog.progtypes & ZAP_PROG )
+  if ( obj->Prototype->mprog.progtypes & ZAP_PROG )
     {
       set_supermob( obj );
       oprog_percent_check( supermob, ch, obj, NULL, ZAP_PROG );
@@ -2904,7 +2904,7 @@ void oprog_zap_trigger( Character *ch, Object *obj )
  */
 void oprog_pull_trigger( Character *ch, Object *obj )
 {
-  if ( obj->pIndexData->mprog.progtypes & PULL_PROG )
+  if ( obj->Prototype->mprog.progtypes & PULL_PROG )
     {
       set_supermob( obj );
       oprog_percent_check( supermob, ch, obj, NULL, PULL_PROG );
@@ -2918,7 +2918,7 @@ void oprog_pull_trigger( Character *ch, Object *obj )
  */
 void oprog_push_trigger( Character *ch, Object *obj )
 {
-  if ( obj->pIndexData->mprog.progtypes & PUSH_PROG )
+  if ( obj->Prototype->mprog.progtypes & PUSH_PROG )
     {
       set_supermob( obj );
       oprog_percent_check( supermob, ch, obj, NULL, PUSH_PROG );
@@ -2931,7 +2931,7 @@ void obj_act_add( Object *obj );
 void oprog_act_trigger( char *buf, Object *mobj, Character *ch,
                         Object *obj, void *vo )
 {
-  if ( mobj->pIndexData->mprog.progtypes & ACT_PROG )
+  if ( mobj->Prototype->mprog.progtypes & ACT_PROG )
     {
       MPROG_ACT_LIST *tmp_act;
 
@@ -2957,7 +2957,7 @@ void oprog_wordlist_check( char *arg, Character *mob, Character *actor,
 {
   MPROG_DATA *mprg;
 
-  for ( mprg = iobj->pIndexData->mprog.mudprogs; mprg; mprg = mprg->next )
+  for ( mprg = iobj->Prototype->mprog.mudprogs; mprg; mprg = mprg->next )
     {
       if ( mprg->type & type )
 	{
@@ -3352,7 +3352,7 @@ void progbug( char *str, Character *mob )
 {
   /* Check if we're dealing with supermob, which means the bug occurred
      in a room or obj prog. */
-  if ( mob->pIndexData->vnum == 3 )
+  if ( mob->Prototype->vnum == 3 )
     {
       /* It's supermob.  In set_supermob and rset_supermob, the description
          was set to indicate the object or room, so we just need to show
@@ -3362,7 +3362,7 @@ void progbug( char *str, Character *mob )
     }
   else
     {
-      bug( "%s, Mob #%ld.", str, mob->pIndexData->vnum );
+      bug( "%s, Mob #%ld.", str, mob->Prototype->vnum );
     }
 }
 
@@ -3585,7 +3585,7 @@ Character *get_char_room_mp( Character *ch, char *argument )
   for ( rch = ch->in_room->first_person; rch; rch = rch->next_in_room )
     {
       if ( (NiftyIsName( arg, rch->name )
-	    ||  (IsNpc(rch) && vnum == rch->pIndexData->vnum)) )
+	    ||  (IsNpc(rch) && vnum == rch->Prototype->vnum)) )
 	{
 	  if ( number == 0 && !IsNpc(rch) )
 	    {

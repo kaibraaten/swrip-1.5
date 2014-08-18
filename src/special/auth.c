@@ -19,7 +19,7 @@ bool spec_auth( Character *ch )
           hasdiploma = false;
 
           for ( obj = victim->last_carrying; obj; obj = obj->prev_content )
-            if (obj->pIndexData == get_obj_index( OBJ_VNUM_SCHOOL_DIPLOMA ) )
+            if (obj->Prototype == get_obj_index( OBJ_VNUM_SCHOOL_DIPLOMA ) )
               hasdiploma = true;
 
           if ( !hasdiploma )

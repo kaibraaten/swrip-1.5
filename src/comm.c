@@ -1918,7 +1918,7 @@ void act( short AType, const char *format, Character *ch, const void *arg1, cons
         rprog_act_trigger(txt, to->in_room, ch, (Object *)arg1, (void *)arg2);
       for ( to_obj = to->in_room->first_content; to_obj;
             to_obj = to_obj->next_content )
-        if ( IsBitSet(to_obj->pIndexData->mprog.progtypes, ACT_PROG) )
+        if ( IsBitSet(to_obj->Prototype->mprog.progtypes, ACT_PROG) )
           oprog_act_trigger(txt, to_obj, ch, (Object *)arg1, (void *)arg2);
     }
 
@@ -1928,7 +1928,7 @@ void act( short AType, const char *format, Character *ch, const void *arg1, cons
           ? NULL : to->next_in_room )
     {
       if (((!to || !to->desc)
-           && (  IsNpc(to) && !IsBitSet(to->pIndexData->mprog.progtypes, ACT_PROG) ))
+           && (  IsNpc(to) && !IsBitSet(to->Prototype->mprog.progtypes, ACT_PROG) ))
           ||   !IsAwake(to) )
         continue;
 

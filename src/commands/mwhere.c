@@ -24,7 +24,7 @@ void do_mwhere( Character *ch, char *argument )
         {
           found = true;
           pager_printf( ch, "[%5d] %-28s [%5d] %s\r\n",
-                        victim->pIndexData->vnum,
+                        victim->Prototype->vnum,
                         victim->short_descr,
                         victim->in_room->vnum,
                         victim->in_room->name );

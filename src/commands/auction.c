@@ -70,7 +70,7 @@ void do_auction (Character *ch, char *argument)
               break;
             }
 
-          for ( paf = obj->pIndexData->first_affect; paf; paf = paf->next )
+          for ( paf = obj->Prototype->first_affect; paf; paf = paf->next )
 	    showaffect( ch, paf );
 
           for ( paf = obj->first_affect; paf; paf = paf->next )
@@ -79,7 +79,7 @@ void do_auction (Character *ch, char *argument)
             {
               set_char_color( AT_OBJECT, ch );
               send_to_char( "Contents:\r\n", ch );
-              show_list_to_char( obj->first_content, ch, true, false );
+              ShowObjectListToCharacter( obj->first_content, ch, true, false );
             }
 
           if (IsImmortal(ch))

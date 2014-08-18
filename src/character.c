@@ -214,7 +214,7 @@ void AddKill( Character *ch, const Character *mob )
   if ( !IsNpc(mob) )
     return;
 
-  vnum = mob->pIndexData->vnum;
+  vnum = mob->Prototype->vnum;
   track = urange( 2, ((GetAbilityLevel( ch, COMBAT_ABILITY ) + 3) * MAX_KILLTRACK)/LEVEL_AVATAR, MAX_KILLTRACK );
   for ( x = 0; x < track; x++ )
     if ( ch->pcdata->killed[x].vnum == vnum )
@@ -249,7 +249,7 @@ int TimesKilled( const Character *ch, const Character *mob )
   if ( !IsNpc(mob) )
     return 0;
 
-  vnum = mob->pIndexData->vnum;
+  vnum = mob->Prototype->vnum;
   track = urange( 2, ((GetAbilityLevel( ch, COMBAT_ABILITY ) + 3) * MAX_KILLTRACK)/LEVEL_AVATAR, MAX_KILLTRACK );
   for ( x = 0; x < track; x++ )
     if ( ch->pcdata->killed[x].vnum == vnum )
@@ -271,7 +271,7 @@ bool HasComlink( const Character *ch )
 
   for( obj = ch->last_carrying; obj; obj = obj->prev_content )
     {
-      if( obj->pIndexData->item_type == ITEM_COMLINK )
+      if( obj->Prototype->item_type == ITEM_COMLINK )
         {
           return true;
         }
@@ -329,11 +329,11 @@ Object *GetEquipmentOnCharacter( const Character *ch, int iWear )
   for ( obj = ch->first_carrying; obj; obj = obj->next_content )
     if ( obj->wear_loc == iWear )
       {
-        if ( !obj->pIndexData->layers )
+        if ( !obj->Prototype->layers )
           return obj;
         else
           if ( !maxobj
-               ||    obj->pIndexData->layers > maxobj->pIndexData->layers )
+               ||    obj->Prototype->layers > maxobj->Prototype->layers )
             maxobj = obj;
       }
 
@@ -349,7 +349,7 @@ void EquipCharacter( Character *ch, Object *obj, int iWear )
   Object      *otmp;
 
   if ( (otmp=GetEquipmentOnCharacter( ch, iWear )) != NULL
-       &&   (!otmp->pIndexData->layers || !obj->pIndexData->layers) )
+       &&   (!otmp->Prototype->layers || !obj->Prototype->layers) )
     {
       bug( "Equip_char: already equipped (%d).", iWear );
       return;
@@ -384,7 +384,7 @@ void EquipCharacter( Character *ch, Object *obj, int iWear )
   if ( IsBitSet( obj->extra_flags, ITEM_MAGIC ) || obj->wear_loc == WEAR_FLOATING )
     ch->carry_weight  -= get_obj_weight( obj );
 
-  for ( paf = obj->pIndexData->first_affect; paf; paf = paf->next )
+  for ( paf = obj->Prototype->first_affect; paf; paf = paf->next )
     affect_modify( ch, paf, true );
 
   for ( paf = obj->first_affect; paf; paf = paf->next )
@@ -416,7 +416,7 @@ void UnequipCharacter( Character *ch, Object *obj )
   ch->armor             += apply_ac( obj, obj->wear_loc );
   obj->wear_loc  = -1;
 
-  for ( paf = obj->pIndexData->first_affect; paf; paf = paf->next )
+  for ( paf = obj->Prototype->first_affect; paf; paf = paf->next )
     affect_modify( ch, paf, false );
   if ( obj->carried_by )
     for ( paf = obj->first_affect; paf; paf = paf->next )
@@ -450,7 +450,7 @@ Object *GetCarriedObject( const Character *ch, const char *argument )
   for ( obj = ch->last_carrying; obj; obj = obj->prev_content )
     if ( obj->wear_loc == WEAR_NONE
          &&   CanSeeObject( ch, obj )
-         &&  (NiftyIsName( arg, obj->name ) || obj->pIndexData->vnum == vnum) )
+         &&  (NiftyIsName( arg, obj->name ) || obj->Prototype->vnum == vnum) )
       if ( (count += obj->count) >= number )
         return obj;
 
@@ -496,7 +496,7 @@ Object *GetWornObject( const Character *ch, const char *argument )
   for ( obj = ch->last_carrying; obj; obj = obj->prev_content )
     if ( obj->wear_loc != WEAR_NONE
          &&   CanSeeObject( ch, obj )
-         &&  (NiftyIsName( arg, obj->name ) || obj->pIndexData->vnum == vnum) )
+         &&  (NiftyIsName( arg, obj->name ) || obj->Prototype->vnum == vnum) )
       if ( ++count == number )
         return obj;
 
@@ -784,7 +784,7 @@ bool CanDropObject( const Character *ch, const Object *obj )
   if ( !IsNpc(ch) && GetTrustLevel(ch) >= LEVEL_IMMORTAL )
     return true;
 
-  if ( IsNpc(ch) && ch->pIndexData->vnum == 3 )
+  if ( IsNpc(ch) && ch->Prototype->vnum == 3 )
     return true;
 
   return false;

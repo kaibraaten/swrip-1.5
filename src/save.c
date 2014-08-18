@@ -511,7 +511,7 @@ void fwrite_char( Character *ch, FILE *fp )
 
   if ( IsNpc(ch) )
     {
-      fprintf( fp, "Vnum         %ld\n", ch->pIndexData->vnum    );
+      fprintf( fp, "Vnum         %ld\n", ch->Prototype->vnum    );
       fprintf( fp, "Mobinvis     %d\n", ch->mobinvis            );
     }
   else
@@ -863,39 +863,39 @@ void fwrite_obj( const Character *ch, const Object *obj, FILE *fp, int iNest,
       fprintf( fp, "Count        %d\n",   obj->count           );
     }
 
-  if ( StrCmp( obj->name, obj->pIndexData->name ) )
+  if ( StrCmp( obj->name, obj->Prototype->name ) )
     {
       fprintf( fp, "Name         %s~\n",  obj->name            );
     }
 
-  if ( StrCmp( obj->short_descr, obj->pIndexData->short_descr ) )
+  if ( StrCmp( obj->short_descr, obj->Prototype->short_descr ) )
     {
       fprintf( fp, "ShortDescr   %s~\n",  obj->short_descr     );
     }
 
-  if ( StrCmp( obj->description, obj->pIndexData->description ) )
+  if ( StrCmp( obj->description, obj->Prototype->description ) )
     {
       fprintf( fp, "Description  %s~\n",  obj->description     );
     }
 
-  if ( StrCmp( obj->action_desc, obj->pIndexData->action_desc ) )
+  if ( StrCmp( obj->action_desc, obj->Prototype->action_desc ) )
     {
       fprintf( fp, "ActionDesc   %s~\n",  obj->action_desc     );
     }
 
-  fprintf( fp, "Vnum         %ld\n",     obj->pIndexData->vnum );
+  fprintf( fp, "Vnum         %ld\n",     obj->Prototype->vnum );
 
   if ( os_type == OS_CORPSE && obj->in_room )
     {
       fprintf( fp, "Room         %ld\n",   obj->in_room->vnum  );
     }
 
-  if ( obj->extra_flags != obj->pIndexData->extra_flags )
+  if ( obj->extra_flags != obj->Prototype->extra_flags )
     {
       fprintf( fp, "ExtraFlags   %d\n",   obj->extra_flags     );
     }
 
-  if ( obj->wear_flags != obj->pIndexData->wear_flags )
+  if ( obj->wear_flags != obj->Prototype->wear_flags )
     {
       fprintf( fp, "WearFlags    %d\n",   obj->wear_flags      );
     }
@@ -923,12 +923,12 @@ void fwrite_obj( const Character *ch, const Object *obj, FILE *fp, int iNest,
       fprintf( fp, "WearLoc      %d\n",   wear_loc             );
     }
 
-  if ( obj->item_type != obj->pIndexData->item_type )
+  if ( obj->item_type != obj->Prototype->item_type )
     {
       fprintf( fp, "ItemType     %d\n",   obj->item_type       );
     }
 
-  if ( obj->weight != obj->pIndexData->weight )
+  if ( obj->weight != obj->Prototype->weight )
     {
       fprintf( fp, "Weight       %d\n",   obj->weight                  );
     }
@@ -943,7 +943,7 @@ void fwrite_obj( const Character *ch, const Object *obj, FILE *fp, int iNest,
       fprintf( fp, "Timer        %d\n",   obj->timer                   );
     }
 
-  if ( obj->cost != obj->pIndexData->cost )
+  if ( obj->cost != obj->Prototype->cost )
     {
       fprintf( fp, "Cost         %d\n",   obj->cost                    );
     }
@@ -2099,7 +2099,7 @@ void fread_char( Character *ch, FILE *fp, bool preload )
         case 'V':
           if ( !StrCmp( word, "Vnum" ) )
             {
-              ch->pIndexData = get_mob_index( ReadInt( fp ) );
+              ch->Prototype = get_mob_index( ReadInt( fp ) );
               fMatch = true;
               break;
             }
@@ -2268,24 +2268,24 @@ void fread_obj( Character *ch, FILE *fp, short os_type )
                   short wear_loc = obj->wear_loc;
 
                   if ( !obj->name )
-                    obj->name = CopyString( obj->pIndexData->name );
+                    obj->name = CopyString( obj->Prototype->name );
 
                   if ( !obj->description )
-                    obj->description = CopyString( obj->pIndexData->description );
+                    obj->description = CopyString( obj->Prototype->description );
 
                   if ( !obj->short_descr )
-                    obj->short_descr = CopyString( obj->pIndexData->short_descr );
+                    obj->short_descr = CopyString( obj->Prototype->short_descr );
 
                   if ( !obj->action_desc )
-                    obj->action_desc = CopyString( obj->pIndexData->action_desc );
+                    obj->action_desc = CopyString( obj->Prototype->action_desc );
 
                   LINK(obj, first_object, last_object, next, prev );
-                  obj->pIndexData->count += obj->count;
+                  obj->Prototype->count += obj->count;
 
                   if ( !obj->serial )
                     {
                       cur_obj_serial = umax((cur_obj_serial + 1 ) & (BV30-1), 1);
-                      obj->serial = obj->pIndexData->serial = cur_obj_serial;
+                      obj->serial = obj->Prototype->serial = cur_obj_serial;
                     }
 
                   if ( fNest )
@@ -2451,7 +2451,7 @@ void fread_obj( Character *ch, FILE *fp, short os_type )
             {
               vnum_t vnum = ReadInt( fp );
 
-              if ( ( obj->pIndexData = get_obj_index( vnum ) ) == NULL )
+              if ( ( obj->Prototype = get_obj_index( vnum ) ) == NULL )
                 {
                   fVnum = false;
                   bug( "Fread_obj: bad vnum %d.", vnum );
@@ -2459,11 +2459,11 @@ void fread_obj( Character *ch, FILE *fp, short os_type )
               else
                 {
                   fVnum = true;
-                  obj->cost = obj->pIndexData->cost;
-                  obj->weight = obj->pIndexData->weight;
-                  obj->item_type = obj->pIndexData->item_type;
-                  obj->wear_flags = obj->pIndexData->wear_flags;
-                  obj->extra_flags = obj->pIndexData->extra_flags;
+                  obj->cost = obj->Prototype->cost;
+                  obj->weight = obj->Prototype->weight;
+                  obj->item_type = obj->Prototype->item_type;
+                  obj->wear_flags = obj->Prototype->wear_flags;
+                  obj->extra_flags = obj->Prototype->extra_flags;
                 }
 
               fMatch = true;
@@ -2543,7 +2543,7 @@ void write_corpses( Character *ch, const char *name )
   /* Go by vnum, less chance of screwups. -- Altrag */
   for ( corpse = first_object; corpse; corpse = corpse->next )
     {
-      if ( corpse->pIndexData->vnum == OBJ_VNUM_CORPSE_PC
+      if ( corpse->Prototype->vnum == OBJ_VNUM_CORPSE_PC
 	   && corpse->in_room != NULL && corpse->value[OVAL_CORPSE_1] != 1
 	   && !StrCmp(corpse->short_descr+14, name) )
 	{
@@ -2889,7 +2889,7 @@ void fwrite_mobile( FILE *fp, Character *mob )
     }
 
   fprintf( fp, "#MOBILE\n" );
-  fprintf( fp, "Vnum    %ld\n", mob->pIndexData->vnum );
+  fprintf( fp, "Vnum    %ld\n", mob->Prototype->vnum );
 
   if ( mob->in_room )
     {
@@ -2900,22 +2900,22 @@ void fwrite_mobile( FILE *fp, Character *mob )
 	       : mob->in_room->vnum );
     }
 
-  if ( StrCmp( mob->name, mob->pIndexData->player_name) )
+  if ( StrCmp( mob->name, mob->Prototype->player_name) )
     {
       fprintf( fp, "Name     %s~\n", mob->name );
     }
 
-  if ( StrCmp( mob->short_descr, mob->pIndexData->short_descr) )
+  if ( StrCmp( mob->short_descr, mob->Prototype->short_descr) )
     {
       fprintf( fp, "Short %s~\n", mob->short_descr );
     }
 
-  if ( StrCmp( mob->long_descr, mob->pIndexData->long_descr) )
+  if ( StrCmp( mob->long_descr, mob->Prototype->long_descr) )
     {
       fprintf( fp, "Long  %s~\n", mob->long_descr );
     }
 
-  if ( StrCmp( mob->description, mob->pIndexData->description) )
+  if ( StrCmp( mob->description, mob->Prototype->description) )
     {
       fprintf( fp, "Description %s~\n", mob->description );
     }

@@ -32,11 +32,17 @@ int GetRaceFromName( const char *arg )
   for ( iRace = 0; iRace < MAX_RACE; iRace++ )
     {
       if ( toupper(arg[0]) == toupper(RaceTable[iRace].race_name[0])
-           &&   !StringPrefix( arg, RaceTable[iRace].race_name ) )
-        break;
+           && !StringPrefix( arg, RaceTable[iRace].race_name ) )
+	{
+	  break;
+	}
     }
+
   if( iRace == MAX_RACE )
-    return -1;
+    {
+      return -1;
+    }
+
   return iRace;
 }
 
@@ -47,40 +53,81 @@ int GetClassFromName( const char *arg )
   for ( iClass = 0; iClass < MAX_ABILITY; iClass++ )
     {
       if ( toupper(arg[0]) == toupper(ability_name[iClass][0])
-           &&   !StringPrefix( arg, ability_name[iClass] ) )
-        break;
+           && !StringPrefix( arg, ability_name[iClass] ) )
+	{
+	  break;
+	}
     }
+
   if( iClass == MAX_ABILITY )
-    return -1;
+    {
+      return -1;
+    }
+
   return iClass;
 }
 
-char *format_obj_to_char( const Object *obj, const Character *ch, bool fShort )
+char *FormatObjectToCharacter( const Object *obj, const Character *ch, bool fShort )
 {
   static char buf[MAX_STRING_LENGTH];
 
   buf[0] = '\0';
-  if ( IS_OBJ_STAT(obj, ITEM_INVIS)     )   strcat( buf, "(Invis) "     );
+
+  if ( IS_OBJ_STAT(obj, ITEM_INVIS) )
+    {
+      strcat( buf, "(Invis) " );
+    }
+
   if ( ( IsAffectedBy(ch, AFF_DETECT_MAGIC) || IsImmortal(ch) )
-       && IS_OBJ_STAT(obj, ITEM_MAGIC)  )   strcat( buf, "&B(Blue Aura)&w "   );
-  if ( IS_OBJ_STAT(obj, ITEM_GLOW)      )   strcat( buf, "(Glowing) "   );
-  if ( IS_OBJ_STAT(obj, ITEM_HUM)       )   strcat( buf, "(Humming) "   );
-  if ( IS_OBJ_STAT(obj, ITEM_HIDDEN)      )   strcat( buf, "(Hidden) "    );
-  if ( IS_OBJ_STAT(obj, ITEM_BURRIED)     )   strcat( buf, "(Burried) "   );
+       && IS_OBJ_STAT(obj, ITEM_MAGIC) )
+    {
+      strcat( buf, "&B(Blue Aura)&w " );
+    }
+
+  if ( IS_OBJ_STAT(obj, ITEM_GLOW) )
+    {    
+      strcat( buf, "(Glowing) " );
+    }
+
+  if ( IS_OBJ_STAT(obj, ITEM_HUM) )
+    {
+      strcat( buf, "(Humming) " );
+    }
+
+  if ( IS_OBJ_STAT(obj, ITEM_HIDDEN) )
+    {
+      strcat( buf, "(Hidden) " );
+    }
+
+  if ( IS_OBJ_STAT(obj, ITEM_BURRIED) )
+    {
+      strcat( buf, "(Burried) " );
+    }
+
   if ( IsImmortal(ch)
-       && IS_OBJ_STAT(obj, ITEM_PROTOTYPE) ) strcat( buf, "(PROTO) "      );
-  if ( IsAffectedBy(ch, AFF_DETECTTRAPS)
-       && is_trapped(obj)   )   strcat( buf, "(Trap) "  );
+       && IS_OBJ_STAT(obj, ITEM_PROTOTYPE) )
+    {
+      strcat( buf, "(PROTO) " );
+    }
+
+  if ( IsAffectedBy(ch, AFF_DETECTTRAPS) && is_trapped(obj) )
+    {
+      strcat( buf, "(Trap) "  );
+    }
 
   if ( fShort )
     {
       if ( obj->short_descr )
-        strcat( buf, obj->short_descr );
+	{
+	  strcat( buf, obj->short_descr );
+	}
     }
   else
     {
       if ( obj->description )
-        strcat( buf, obj->description );
+	{
+	  strcat( buf, obj->description );
+	}
     }
 
   return buf;
@@ -118,6 +165,7 @@ char *halucinated_object( int ms, bool fShort )
       case 19: return "the answer";
       case 20: return "the key to life, the universe and everything";
       }
+
   switch( GetRandomNumberFromRange( 6-urange(1,sms/2,5), sms ) )
     {
     case  1: return "A nice looking sword catches your eye.";
@@ -141,6 +189,7 @@ char *halucinated_object( int ms, bool fShort )
     case 19: return "The answer.  One.  It's always been One.";
     case 20: return "The key to life, the universe and everything awaits your hand.";
     }
+
   return "Whoa!!!";
 }
 
@@ -149,7 +198,7 @@ char *halucinated_object( int ms, bool fShort )
  * Show a list to a character.
  * Can coalesce duplicated items.
  */
-void show_list_to_char( const Object *list, Character *ch, bool fShort, bool fShowNothing )
+void ShowObjectListToCharacter( const Object *list, Character *ch, bool fShort, bool fShowNothing )
 {
   char **prgpstrShow;
   int *prgnShow;
@@ -240,7 +289,7 @@ void show_list_to_char( const Object *list, Character *ch, bool fShort, bool fSh
            && ( ( obj->description && obj->description[0] != '\0' ) || ( IsBitSet(ch->act, PLR_HOLYLIGHT) || IsNpc(ch) ) )
            && (obj->item_type != ITEM_TRAP || IsAffectedBy(ch, AFF_DETECTTRAPS) ) )
         {
-          pstrShow = format_obj_to_char( obj, ch, fShort );
+          pstrShow = FormatObjectToCharacter( obj, ch, fShort );
           fCombine = false;
 
           if ( IsNpc(ch) || IsBitSet(ch->act, PLR_COMBINE) )
@@ -289,40 +338,51 @@ void show_list_to_char( const Object *list, Character *ch, bool fShort, bool fSh
    */
   for ( iShow = 0; iShow < nShow; iShow++ )
     {
-      switch(pitShow[iShow]) {
-      default:
-        set_char_color( AT_OBJECT, ch );
-        break;
-      case ITEM_BLOOD:
-        set_char_color( AT_BLOOD, ch );
-        break;
-      case ITEM_MONEY:
-      case ITEM_TREASURE:
-        set_char_color( AT_YELLOW, ch );
-        break;
-      case ITEM_FOOD:
-        set_char_color( AT_HUNGRY, ch );
-        break;
-      case ITEM_DRINK_CON:
-      case ITEM_FOUNTAIN:
-        set_char_color( AT_THIRSTY, ch );
-        break;
-      case ITEM_FIRE:
-        set_char_color( AT_FIRE, ch );
-        break;
-      case ITEM_SCROLL:
-      case ITEM_WAND:
-      case ITEM_STAFF:
-        break;
-      }
+      switch(pitShow[iShow])
+	{
+	default:
+	  set_char_color( AT_OBJECT, ch );
+	  break;
+
+	case ITEM_BLOOD:
+	  set_char_color( AT_BLOOD, ch );
+	  break;
+
+	case ITEM_MONEY:
+	case ITEM_TREASURE:
+	  set_char_color( AT_YELLOW, ch );
+	  break;
+
+	case ITEM_FOOD:
+	  set_char_color( AT_HUNGRY, ch );
+	  break;
+
+	case ITEM_DRINK_CON:
+	case ITEM_FOUNTAIN:
+	  set_char_color( AT_THIRSTY, ch );
+	  break;
+
+	case ITEM_FIRE:
+	  set_char_color( AT_FIRE, ch );
+	  break;
+
+	case ITEM_SCROLL:
+	case ITEM_WAND:
+	case ITEM_STAFF:
+	  break;
+	}
+
       if ( fShowNothing )
-        send_to_char( "     ", ch );
+	{
+	  send_to_char( "     ", ch );
+	}
+
       send_to_char( prgpstrShow[iShow], ch );
-      /*        if ( IsNpc(ch) || IsBitSet(ch->act, PLR_COMBINE) ) */
-      {
-        if ( prgnShow[iShow] != 1 )
-          ch_printf( ch, " (%d)", prgnShow[iShow] );
-      }
+
+      if ( prgnShow[iShow] != 1 )
+	{
+	  ch_printf( ch, " (%d)", prgnShow[iShow] );
+	}
 
       send_to_char( "\r\n", ch );
       FreeMemory( prgpstrShow[iShow] );
@@ -331,7 +391,10 @@ void show_list_to_char( const Object *list, Character *ch, bool fShort, bool fSh
   if ( fShowNothing && nShow == 0 )
     {
       if ( IsNpc(ch) || IsBitSet(ch->act, PLR_COMBINE) )
-        send_to_char( "     ", ch );
+	{
+	  send_to_char( "     ", ch );
+	}
+
       send_to_char( "Nothing.\r\n", ch );
     }
 

@@ -771,15 +771,15 @@ static bool can_layer( const Character *ch, const Object *obj, short wear_loc )
 {
   Object *otmp;
   short bitlayers = 0;
-  short objlayers = obj->pIndexData->layers;
+  short objlayers = obj->Prototype->layers;
 
   for ( otmp = ch->first_carrying; otmp; otmp = otmp->next_content )
     if ( otmp->wear_loc == wear_loc )
       {
-        if ( !otmp->pIndexData->layers )
+        if ( !otmp->Prototype->layers )
           return false;
         else
-          bitlayers |= otmp->pIndexData->layers;
+          bitlayers |= otmp->Prototype->layers;
       }
 
   if ( (bitlayers && !objlayers) || bitlayers > objlayers )

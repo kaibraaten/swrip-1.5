@@ -89,7 +89,7 @@ void pullorpush( Character *ch, Object *obj, bool pull )
       break;
     }
 
-  if( pull && IsBitSet(obj->pIndexData->mprog.progtypes,PULL_PROG) )
+  if( pull && IsBitSet(obj->Prototype->mprog.progtypes,PULL_PROG) )
     {
       if ( !IsBitSet(obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_AUTORETURN ) )
 	{
@@ -100,7 +100,7 @@ void pullorpush( Character *ch, Object *obj, bool pull )
       return;
     }
 
-  if( !pull && IsBitSet(obj->pIndexData->mprog.progtypes,PUSH_PROG) )
+  if( !pull && IsBitSet(obj->Prototype->mprog.progtypes,PUSH_PROG) )
     {
       if ( !IsBitSet(obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_AUTORETURN ) )
 	{

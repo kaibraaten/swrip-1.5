@@ -1193,7 +1193,7 @@ bool has_key( const Character *ch, vnum_t key )
 
   for ( obj = ch->first_carrying; obj; obj = obj->next_content )
     {
-      if ( obj->pIndexData->vnum == key || obj->value[OVAL_KEY_UNLOCKS_VNUM] == key )
+      if ( obj->Prototype->vnum == key || obj->value[OVAL_KEY_UNLOCKS_VNUM] == key )
 	{
 	  return true;
 	}

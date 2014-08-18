@@ -21,7 +21,7 @@ void do_equipment( Character *ch, char *argument )
             send_to_char( where_name[iWear], ch );
             if ( CanSeeObject( ch, obj ) )
               {
-                send_to_char( format_obj_to_char( obj, ch, true ), ch );
+                send_to_char( FormatObjectToCharacter( obj, ch, true ), ch );
                 strcpy( buf , "" );
                 switch ( obj->item_type )
                   {

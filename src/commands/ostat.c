@@ -30,21 +30,21 @@ void do_ostat( Character *ch, char *argument )
 
   pdesc=get_extra_descr(arg, obj->first_extradesc);
   if ( !pdesc )
-    pdesc=get_extra_descr(arg, obj->pIndexData->first_extradesc);
+    pdesc=get_extra_descr(arg, obj->Prototype->first_extradesc);
   if ( !pdesc )
     pdesc = get_extra_descr( obj->name, obj->first_extradesc );
   if ( !pdesc )
-    pdesc = get_extra_descr( obj->name, obj->pIndexData->first_extradesc );
+    pdesc = get_extra_descr( obj->name, obj->Prototype->first_extradesc );
   if ( pdesc )
     send_to_char( pdesc, ch );
 
 
   ch_printf( ch, "Vnum: %d.  Type: %s.  Count: %d  Gcount: %d\r\n",
-             obj->pIndexData->vnum, item_type_name( obj ), obj->pIndexData->count,
+             obj->Prototype->vnum, item_type_name( obj ), obj->Prototype->count,
              obj->count );
 
   ch_printf( ch, "Serial#: %d  TopIdxSerial#: %d  TopSerial#: %d\r\n",
-             obj->serial, obj->pIndexData->serial, cur_obj_serial );
+             obj->serial, obj->Prototype->serial, cur_obj_serial );
 
   ch_printf( ch, "Short description: %s.\r\nLong description: %s\r\n",
              obj->short_descr, obj->description );
@@ -57,10 +57,10 @@ void do_ostat( Character *ch, char *argument )
 
   ch_printf( ch, "Number: %d/%d.  Weight: %d/%d.  Layers: %d\r\n",
              1,           get_obj_number( obj ),
-             obj->weight, get_obj_weight( obj ), obj->pIndexData->layers );
+             obj->weight, get_obj_weight( obj ), obj->Prototype->layers );
 
   ch_printf( ch, "Cost: %d.  Rent: %d.  Timer: %d.  Level: %d.\r\n",
-             obj->cost, obj->pIndexData->rent, obj->timer, obj->level );
+             obj->cost, obj->Prototype->rent, obj->timer, obj->level );
 
   ch_printf( ch,
              "In room: %d.  In object: %s.  Carried by: %s.  Wear_loc: %d.\r\n",
@@ -70,19 +70,19 @@ void do_ostat( Character *ch, char *argument )
              obj->wear_loc );
 
   ch_printf( ch, "Index Values : %d %d %d %d %d %d.\r\n",
-             obj->pIndexData->value[0], obj->pIndexData->value[1],
-             obj->pIndexData->value[2], obj->pIndexData->value[3],
-             obj->pIndexData->value[4], obj->pIndexData->value[5] );
+             obj->Prototype->value[0], obj->Prototype->value[1],
+             obj->Prototype->value[2], obj->Prototype->value[3],
+             obj->Prototype->value[4], obj->Prototype->value[5] );
   ch_printf( ch, "Object Values: %d %d %d %d %d %d.\r\n",
              obj->value[0], obj->value[1], obj->value[2], obj->value[3], obj->value[4], obj->value[5] );
 
-  if ( obj->pIndexData->first_extradesc )
+  if ( obj->Prototype->first_extradesc )
     {
       ExtraDescription *ed;
 
       send_to_char( "Primary description keywords:   '", ch );
 
-      for ( ed = obj->pIndexData->first_extradesc; ed; ed = ed->next )
+      for ( ed = obj->Prototype->first_extradesc; ed; ed = ed->next )
         {
           send_to_char( ed->keyword, ch );
 
@@ -114,7 +114,7 @@ void do_ostat( Character *ch, char *argument )
     ch_printf( ch, "Affects %s by %d. (extra)\r\n",
                affect_loc_name( paf->location ), paf->modifier );
 
-  for ( paf = obj->pIndexData->first_affect; paf; paf = paf->next )
+  for ( paf = obj->Prototype->first_affect; paf; paf = paf->next )
     ch_printf( ch, "Affects %s by %d.\r\n",
                affect_loc_name( paf->location ), paf->modifier );
 }

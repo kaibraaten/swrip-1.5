@@ -31,14 +31,14 @@ void do_mpstat( Character *ch, char *argument )
       return;
     }
 
-  if ( !( victim->pIndexData->mprog.progtypes ) )
+  if ( !( victim->Prototype->mprog.progtypes ) )
     {
       send_to_char( "That Mobile has no Programs set.\r\n", ch);
       return;
     }
 
   ch_printf( ch, "Name: %s.  Vnum: %d.\r\n",
-             victim->name, victim->pIndexData->vnum );
+             victim->name, victim->Prototype->vnum );
 
   ch_printf( ch, "Short description: %s.\r\nLong  description: %s",
              victim->short_descr,
@@ -55,7 +55,7 @@ void do_mpstat( Character *ch, char *argument )
              victim->top_level,        victim->alignment,
              GetArmorClass( victim ),    victim->gold);
 
-  for ( mprg = victim->pIndexData->mprog.mudprogs; mprg; mprg = mprg->next )
+  for ( mprg = victim->Prototype->mprog.mudprogs; mprg; mprg = mprg->next )
     ch_printf( ch, ">%s %s\r\n%s\r\n",
                mprog_type_to_name( mprg->type ),
                mprg->arglist,

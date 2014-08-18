@@ -437,7 +437,7 @@ void HuntVictim( Character *ch )
           if ( !ch->in_room )
             {
               bug( "Hunt_victim: no ch->in_room! Mob #%ld, name: %s. Placing mob in limbo.",
-		   ch->pIndexData->vnum, ch->name );
+		   ch->Prototype->vnum, ch->name );
               char_to_room( ch, get_room_index( ROOM_VNUM_LIMBO ) );
               return;
             }

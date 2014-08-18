@@ -143,7 +143,7 @@ Board *get_board( const Object *obj )
 
   for ( board = first_board; board; board = board->next )
     {
-      if ( board->board_obj == obj->pIndexData->vnum )
+      if ( board->board_obj == obj->Prototype->vnum )
 	{
 	  return board;
 	}

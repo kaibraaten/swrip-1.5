@@ -22,7 +22,7 @@ bool spec_customs_alcohol( Character *ch )
 
       for ( obj = victim->last_carrying; obj; obj = obj->prev_content )
         {
-          if (obj->pIndexData->item_type == ITEM_DRINK_CON)
+          if (obj->Prototype->item_type == ITEM_DRINK_CON)
             {
               if ( ( liquid = obj->value[2] ) >= LIQ_MAX )
                 liquid = obj->value[2] = 0;
@@ -75,7 +75,7 @@ bool spec_customs_alcohol( Character *ch )
               Object *content;
               for ( content = obj->first_content; content; content = content->next_content )
                 {
-                  if (content->pIndexData->item_type == ITEM_DRINK_CON
+                  if (content->Prototype->item_type == ITEM_DRINK_CON
 		      && !IsBitSet( content->extra_flags , ITEM_CONTRABAND ) )
                     {
                       if ( ( liquid = obj->value[2] ) >= LIQ_MAX )

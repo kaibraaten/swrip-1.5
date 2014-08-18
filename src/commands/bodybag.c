@@ -24,11 +24,11 @@ void do_bodybag( Character *ch, char *argument )
     {
       if ( obj->in_room
            && !StrCmp( buf2, obj->short_descr )
-           && (obj->pIndexData->vnum == 11 ) )
+           && (obj->Prototype->vnum == 11 ) )
         {
           found = true;
           ch_printf( ch, "Bagging body: [%5d] %-28s [%5d] %s\r\n",
-                     obj->pIndexData->vnum,
+                     obj->Prototype->vnum,
                      obj->short_descr,
                      obj->in_room->vnum,
                      obj->in_room->name );

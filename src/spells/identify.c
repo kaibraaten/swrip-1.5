@@ -134,7 +134,7 @@ ch_ret spell_identify( int sn, int level, Character *ch, void *vo )
           break;
         }
 
-      for ( paf = obj->pIndexData->first_affect; paf; paf = paf->next )
+      for ( paf = obj->Prototype->first_affect; paf; paf = paf->next )
         showaffect( ch, paf );
 
       for ( paf = obj->first_affect; paf; paf = paf->next )

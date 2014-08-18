@@ -61,7 +61,7 @@ void do_drop( Character *ch, char *argument )
             {
               obj_next = obj->next_content;
 
-              switch ( obj->pIndexData->vnum )
+              switch ( obj->Prototype->vnum )
                 {
                 case OBJ_VNUM_MONEY_ONE:
                   number += 1;
@@ -154,7 +154,7 @@ void do_drop( Character *ch, char *argument )
                &&   CanDropObject( ch, obj ) )
             {
               found = true;
-              if ( obj->pIndexData->mprog.progtypes & DROP_PROG && obj->count > 1 )
+              if ( obj->Prototype->mprog.progtypes & DROP_PROG && obj->count > 1 )
                 {
                   ++cnt;
                   separate_obj( obj );

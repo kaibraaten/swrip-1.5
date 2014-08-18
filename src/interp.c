@@ -632,7 +632,7 @@ bool check_social( Character *ch, const char *command, char *argument )
       if ( !IsNpc(ch) && IsNpc(victim)
            && !IsAffectedBy(victim, AFF_CHARM)
            && IsAwake(victim)
-           && !IsBitSet( victim->pIndexData->mprog.progtypes, ACT_PROG ) )
+           && !IsBitSet( victim->Prototype->mprog.progtypes, ACT_PROG ) )
         {
           switch ( NumberBits( 4 ) )
             {

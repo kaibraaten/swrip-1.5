@@ -30,7 +30,7 @@ void do_placevendor (Character *ch, char *argument)
       return;
     }
 
-  if (obj->pIndexData->vnum != OBJ_VNUM_DEED)
+  if (obj->Prototype->vnum != OBJ_VNUM_DEED)
     {
       send_to_char( "You do not have a deed!.\r\n", ch );
       return;
@@ -76,7 +76,7 @@ void do_placevendor (Character *ch, char *argument)
 
   act( AT_ACTION, "$n appears in a swirl of smoke.\n", vendor, NULL, NULL, TO_ROOM );
 
-  sprintf(vnum1,"%ld", vendor->pIndexData->vnum);
+  sprintf(vnum1,"%ld", vendor->Prototype->vnum);
   do_makeshop (vendor, vnum1 ); /*makes the vendor a shop.. there has to be a
                                   better way to do it but hell if i know what it is!*/
 }

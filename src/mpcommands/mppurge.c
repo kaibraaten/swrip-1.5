@@ -61,7 +61,7 @@ void do_mppurge( Character *ch, char *argument )
       return;
     }
 
-  if ( IsNpc( victim ) && victim->pIndexData->vnum == 3 )
+  if ( IsNpc( victim ) && victim->Prototype->vnum == 3 )
     {
       progbug( "Mppurge: trying to purge supermob", ch );
       return;

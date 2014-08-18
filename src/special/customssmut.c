@@ -21,7 +21,7 @@ bool spec_customs_smut( Character *ch )
 
       for ( obj = victim->last_carrying; obj; obj = obj->prev_content )
         {
-          if (obj->pIndexData->item_type == ITEM_SMUT)
+          if (obj->Prototype->item_type == ITEM_SMUT)
             {
               if ( victim != ch && CanSeeCharacter( ch, victim ) && CanSeeObject( ch,obj ) )
                 {
@@ -69,7 +69,7 @@ bool spec_customs_smut( Character *ch )
               Object *content;
               for ( content = obj->first_content; content; content = content->next_content )
                 {
-                  if (content->pIndexData->item_type == ITEM_SMUT
+                  if (content->Prototype->item_type == ITEM_SMUT
                       && !IsBitSet( content->extra_flags , ITEM_CONTRABAND ) )
                     {
                       ch_exp = umin( content->cost*10 , ( exp_level( GetAbilityLevel( victim, SMUGGLING_ABILITY ) + 1 ) - exp_level( GetAbilityLevel( victim, SMUGGLING_ABILITY ) ) ) );

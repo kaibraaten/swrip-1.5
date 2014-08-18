@@ -100,7 +100,7 @@ void do_mpedit( Character *ch, char *argument )
       return;
     }
 
-  mprog = victim->pIndexData->mprog.mudprogs;
+  mprog = victim->Prototype->mprog.mudprogs;
 
   set_char_color( AT_GREEN, ch );
 
@@ -151,9 +151,9 @@ void do_mpedit( Character *ch, char *argument )
           if ( ++cnt == value )
             {
               mpedit( ch, mprg, mptype, argument );
-              victim->pIndexData->mprog.progtypes = 0;
+              victim->Prototype->mprog.progtypes = 0;
               for ( mprg = mprog; mprg; mprg = mprg->next )
-                victim->pIndexData->mprog.progtypes |= mprg->type;
+                victim->Prototype->mprog.progtypes |= mprg->type;
               return;
             }
         }
@@ -198,8 +198,8 @@ void do_mpedit( Character *ch, char *argument )
           num++;
       if ( value == 1 )
         {
-          mprg_next = victim->pIndexData->mprog.mudprogs;
-          victim->pIndexData->mprog.mudprogs = mprg_next->next;
+          mprg_next = victim->Prototype->mprog.mudprogs;
+          victim->Prototype->mprog.mudprogs = mprg_next->next;
         }
       else
         for ( mprg = mprog; mprg; mprg = mprg_next )
@@ -215,7 +215,7 @@ void do_mpedit( Character *ch, char *argument )
       FreeMemory( mprg_next->comlist );
       FreeMemory( mprg_next );
       if ( num <= 1 )
-        RemoveBit( victim->pIndexData->mprog.progtypes, mptype );
+        RemoveBit( victim->Prototype->mprog.progtypes, mptype );
       send_to_char( "Program removed.\r\n", ch );
       return;
     }
@@ -242,10 +242,10 @@ void do_mpedit( Character *ch, char *argument )
       if ( value == 1 )
         {
           AllocateMemory( mprg, MPROG_DATA, 1 );
-          victim->pIndexData->mprog.progtypes |= ( 1 << mptype );
+          victim->Prototype->mprog.progtypes |= ( 1 << mptype );
           mpedit( ch, mprg, mptype, argument );
           mprg->next = mprog;
-          victim->pIndexData->mprog.mudprogs = mprg;
+          victim->Prototype->mprog.mudprogs = mprg;
           return;
         }
       cnt = 1;
@@ -254,7 +254,7 @@ void do_mpedit( Character *ch, char *argument )
           if ( ++cnt == value && mprg->next )
             {
               AllocateMemory( mprg_next, MPROG_DATA, 1 );
-	      victim->pIndexData->mprog.progtypes |= ( 1 << mptype );
+	      victim->Prototype->mprog.progtypes |= ( 1 << mptype );
               mpedit( ch, mprg_next, mptype, argument );
               mprg_next->next = mprg->next;
               mprg->next        = mprg_next;
@@ -279,8 +279,8 @@ void do_mpedit( Character *ch, char *argument )
       if ( mprog )
         mprog->next                     = mprg;
       else
-        victim->pIndexData->mprog.mudprogs    = mprg;
-      victim->pIndexData->mprog.progtypes     |= ( 1 << mptype );
+        victim->Prototype->mprog.mudprogs    = mprg;
+      victim->Prototype->mprog.progtypes     |= ( 1 << mptype );
       mpedit( ch, mprg, mptype, argument );
       mprg->next = NULL;
       return;

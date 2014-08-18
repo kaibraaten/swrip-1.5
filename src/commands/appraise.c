@@ -25,7 +25,7 @@ void do_appraise( Character *ch, char *argument )
   if ( ( keeper = FindFixer( ch ) ) == NULL )
     return;
 
-  switch( keeper->pIndexData->rShop->shop_type )
+  switch( keeper->Prototype->rShop->shop_type )
     {
     default:
     case SHOP_FIX:

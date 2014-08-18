@@ -29,7 +29,7 @@ void do_owhere( Character *ch, char *argument )
     {
       if ( vnum )
         {
-          if ( vnum!=obj->pIndexData->vnum)
+          if ( vnum!=obj->Prototype->vnum)
             continue;
         }
       else if ( !NiftyIsName( arg, obj->name ) )
@@ -48,7 +48,7 @@ void do_owhere( Character *ch, char *argument )
 
       sprintf(field, "%-18s", obj_short(obj));
       trunc1(field, 18);
-      sprintf(buf, "%3d &R&w%5ld &R&w%-18s &R&w", ++icnt, obj->pIndexData->vnum, field);
+      sprintf(buf, "%3d &R&w%5ld &R&w%-18s &R&w", ++icnt, obj->Prototype->vnum, field);
 
       if ( outer_obj->carried_by )
         {
@@ -56,14 +56,14 @@ void do_owhere( Character *ch, char *argument )
           trunc1(field, 18);
           sprintf(buf+strlen(buf), "%5ld %-18s &R&w",
                   (IsNpc(outer_obj->carried_by) ?
-                   outer_obj->carried_by->pIndexData->vnum : INVALID_VNUM), field);
+                   outer_obj->carried_by->Prototype->vnum : INVALID_VNUM), field);
 
           if ( outer_obj!=obj )
             {
               sprintf(field, "%-18s", obj->in_obj->name);
               trunc1(field, 18);
               sprintf(buf+strlen(buf), "%5ld %-18s &R&w",
-                      obj->in_obj->pIndexData->vnum, field);
+                      obj->in_obj->Prototype->vnum, field);
             }
 
           sprintf(buf+strlen(buf), "&R&w\r\n");
@@ -81,7 +81,7 @@ void do_owhere( Character *ch, char *argument )
               sprintf(field, "%-18s", obj->in_obj->name);
               trunc1(field, 18);
               sprintf(buf+strlen(buf), "%5ld %-18s &R&w",
-                      obj->in_obj->pIndexData->vnum, field);
+                      obj->in_obj->Prototype->vnum, field);
             }
 
           sprintf(buf+strlen(buf), "&R&w\r\n");

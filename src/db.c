@@ -2158,7 +2158,7 @@ Character *create_mobile( ProtoMobile *pMobIndex )
 
   AllocateMemory( mob, Character, 1 );
   clear_char( mob );
-  mob->pIndexData               = pMobIndex;
+  mob->Prototype               = pMobIndex;
 
   mob->editor                   = NULL;
   mob->name                     = CopyString( pMobIndex->player_name );
@@ -2262,13 +2262,13 @@ Object *create_object( ProtoObject *pObjIndex, int level )
 
   AllocateMemory( obj, Object, 1 );
 
-  obj->pIndexData       = pObjIndex;
+  obj->Prototype       = pObjIndex;
   obj->in_room  = NULL;
   obj->level            = level;
   obj->wear_loc = -1;
   obj->count            = 1;
   cur_obj_serial = umax((cur_obj_serial + 1 ) & (BV30-1), 1);
-  obj->serial = obj->pIndexData->serial = cur_obj_serial;
+  obj->serial = obj->Prototype->serial = cur_obj_serial;
 
   obj->armed_by       = CopyString( "" );
   obj->name             = CopyString( pObjIndex->name     );

@@ -329,7 +329,7 @@ void violence_update( void )
                 {
                   if ( char_died(ch) )
                     break;
-                  if ( rch->pIndexData == ch->pIndexData
+                  if ( rch->Prototype == ch->Prototype
                        ||   NumberBits( 3 ) == 0 )
                     {
                       Character *vch;
@@ -570,7 +570,7 @@ int obj_hitroll( Object *obj )
   int tohit = 0;
   Affect *paf;
 
-  for ( paf = obj->pIndexData->first_affect; paf; paf = paf->next )
+  for ( paf = obj->Prototype->first_affect; paf; paf = paf->next )
     if ( paf->location == APPLY_HITROLL )
       tohit += paf->modifier;
   for ( paf = obj->first_affect; paf; paf = paf->next )
@@ -1059,7 +1059,7 @@ ch_ret one_hit( Character *ch, Character *victim, int dt )
     {
       Affect *aff;
 
-      for ( aff = wield->pIndexData->first_affect; aff; aff = aff->next )
+      for ( aff = wield->Prototype->first_affect; aff; aff = aff->next )
         if ( aff->location == APPLY_WEAPONSPELL
              &&   IS_VALID_SN(aff->modifier)
              &&   skill_table[aff->modifier]->spell_fun )
@@ -1587,7 +1587,7 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
 
           if ( obj->wear_loc == WEAR_NONE )
             {
-              if ( obj->pIndexData->mprog.progtypes & DROP_PROG && obj->count > 1 )
+              if ( obj->Prototype->mprog.progtypes & DROP_PROG && obj->count > 1 )
                 {
                   ++cnt;
                   separate_obj( obj );
@@ -2111,7 +2111,7 @@ void raw_kill( Character *killer, Character *victim )
 
   if ( IsNpc(victim) )
     {
-      victim->pIndexData->killed++;
+      victim->Prototype->killed++;
       extract_char( victim, true );
       victim = NULL;
       return;

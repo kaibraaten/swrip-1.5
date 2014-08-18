@@ -816,7 +816,7 @@ int count_obj_list( const ProtoObject *pObjIndex, const Object *list )
   int nMatch = 0;
 
   for ( obj = list; obj; obj = obj->next_content )
-    if ( obj->pIndexData == pObjIndex )
+    if ( obj->Prototype == pObjIndex )
       nMatch++;
 
   return nMatch;
@@ -852,7 +852,7 @@ void obj_from_room( Object *obj )
   obj->in_obj         = NULL;
   obj->in_room      = NULL;
 
-  if ( obj->pIndexData->vnum == OBJ_VNUM_CORPSE_PC && falling == 0 )
+  if ( obj->Prototype->vnum == OBJ_VNUM_CORPSE_PC && falling == 0 )
     write_corpses( NULL, obj->short_descr+14 );
 }
 
@@ -886,7 +886,7 @@ Object *obj_to_room( Object *obj, Room *pRoomIndex )
   obj_fall( obj, false );
   falling--;
 
-  if ( obj->pIndexData->vnum == OBJ_VNUM_CORPSE_PC && falling == 0 )
+  if ( obj->Prototype->vnum == OBJ_VNUM_CORPSE_PC && falling == 0 )
     write_corpses( NULL, obj->short_descr+14 );
 
   return obj;
@@ -901,7 +901,7 @@ Object *obj_to_obj( Object *obj, Object *obj_to )
 
   if ( obj == obj_to )
     {
-      bug( "Obj_to_obj: trying to put object inside itself: vnum %ld", obj->pIndexData->vnum );
+      bug( "Obj_to_obj: trying to put object inside itself: vnum %ld", obj->Prototype->vnum );
       return obj;
     }
   /* Big carry_weight bug fix here by Thoric */
@@ -970,7 +970,7 @@ void extract_obj( Object *obj )
 
   if ( obj_extracted(obj) )
     {
-      bug( "extract_obj: obj %d already extracted!", obj->pIndexData->vnum );
+      bug( "extract_obj: obj %d already extracted!", obj->Prototype->vnum );
       return;
     }
 
@@ -1022,7 +1022,7 @@ void extract_obj( Object *obj )
   /* shove onto extraction queue */
   queue_extracted_obj( obj );
 
-  obj->pIndexData->count -= obj->count;
+  obj->Prototype->count -= obj->count;
   numobjsloaded -= obj->count;
   --physicalobjects;
 
@@ -1142,7 +1142,7 @@ void extract_char( Character *ch, bool fPull )
 
   if ( IsNpc(ch) )
     {
-      --ch->pIndexData->count;
+      --ch->Prototype->count;
       --nummobsloaded;
     }
 
@@ -1194,7 +1194,7 @@ Character *get_char_room( const Character *ch, const char *argument )
   for ( rch = ch->in_room->first_person; rch; rch = rch->next_in_room )
     if ( CanSeeCharacter( ch, rch )
          &&  (( (NiftyIsName( arg, rch->name ) || (!IsNpc(rch) && NiftyIsName( arg, rch->pcdata->title )))
-                ||  (IsNpc(rch) && vnum == rch->pIndexData->vnum))) )
+                ||  (IsNpc(rch) && vnum == rch->Prototype->vnum))) )
       {
         if ( number == 0 && !IsNpc(rch) )
           return rch;
@@ -1254,7 +1254,7 @@ Character *get_char_world( const Character *ch, const char *argument )
   /* check the room for an exact match */
   for ( wch = ch->in_room->first_person; wch; wch = wch->next_in_room )
     if ( (NiftyIsName( arg, wch->name )
-          ||  (IsNpc(wch) && vnum == wch->pIndexData->vnum)) && IsWizVis(ch,wch))
+          ||  (IsNpc(wch) && vnum == wch->Prototype->vnum)) && IsWizVis(ch,wch))
       {
         if ( number == 0 && !IsNpc(wch) )
           return wch;
@@ -1268,7 +1268,7 @@ Character *get_char_world( const Character *ch, const char *argument )
   /* check the world for an exact match */
   for ( wch = first_char; wch; wch = wch->next )
     if ( (NiftyIsName( arg, wch->name )
-          ||  (IsNpc(wch) && vnum == wch->pIndexData->vnum)) && IsWizVis(ch,wch) )
+          ||  (IsNpc(wch) && vnum == wch->Prototype->vnum)) && IsWizVis(ch,wch) )
       {
         if ( number == 0 && !IsNpc(wch) )
           return wch;
@@ -1327,7 +1327,7 @@ Object *get_obj_type( const ProtoObject *pObjIndex )
   Object *obj;
 
   for ( obj = last_object; obj; obj = obj->prev )
-    if ( obj->pIndexData == pObjIndex )
+    if ( obj->Prototype == pObjIndex )
       return obj;
 
   return NULL;
@@ -1443,7 +1443,7 @@ Object *get_obj_world( const Character *ch, const char *argument )
 
   for ( obj = first_object; obj; obj = obj->next )
     if ( CanSeeObject( ch, obj ) && (NiftyIsName( arg, obj->name )
-                                    ||   vnum == obj->pIndexData->vnum) )
+                                    ||   vnum == obj->Prototype->vnum) )
       if ( (count += obj->count) >= number )
         return obj;
 
@@ -2406,7 +2406,7 @@ Object *clone_object( const Object *obj )
   int oval = 0;
 
   AllocateMemory( clone, Object, 1 );
-  clone->pIndexData     = obj->pIndexData;
+  clone->Prototype     = obj->Prototype;
   clone->name           = CopyString( obj->name );
   clone->short_descr    = CopyString( obj->short_descr );
   clone->description    = CopyString( obj->description );
@@ -2427,11 +2427,11 @@ Object *clone_object( const Object *obj )
     }
 
   clone->count  = 1;
-  ++obj->pIndexData->count;
+  ++obj->Prototype->count;
   ++numobjsloaded;
   ++physicalobjects;
   cur_obj_serial = umax((cur_obj_serial + 1 ) & (BV30-1), 1);
-  clone->serial = clone->pIndexData->serial = cur_obj_serial;
+  clone->serial = clone->Prototype->serial = cur_obj_serial;
   LINK( clone, first_object, last_object, next, prev );
   return clone;
 }
@@ -2467,7 +2467,7 @@ Object *group_object( Object *obj1, Object *obj2 )
   if ( obj1 == obj2 )
     return obj1;
 
-  if ( obj1->pIndexData == obj2->pIndexData
+  if ( obj1->Prototype == obj2->Prototype
        && !StrCmp( obj1->name,         obj2->name )
        && !StrCmp( obj1->short_descr,  obj2->short_descr )
        && !StrCmp( obj1->description,  obj2->description )
@@ -2490,7 +2490,7 @@ Object *group_object( Object *obj1, Object *obj2 )
        && !obj2->first_content )
     {
       obj1->count += obj2->count;
-      obj1->pIndexData->count += obj2->count;   /* to be decremented in */
+      obj1->Prototype->count += obj2->count;   /* to be decremented in */
       numobjsloaded += obj2->count;             /* extract_obj */
       extract_obj( obj2 );
       return obj1;
@@ -2519,7 +2519,7 @@ void split_obj( Object *obj, int num )
     return;
 
   rest = clone_object(obj);
-  --obj->pIndexData->count;     /* since clone_object() ups this value */
+  --obj->Prototype->count;     /* since clone_object() ups this value */
   --numobjsloaded;
   rest->count = obj->count - num;
   obj->count = num;
@@ -2596,7 +2596,7 @@ bool empty_obj( Object *obj, Object *destobj, Room *destroom )
       for ( otmp = obj->first_content; otmp; otmp = otmp_next )
         {
           otmp_next = otmp->next_content;
-          if ( ch && (otmp->pIndexData->mprog.progtypes & DROP_PROG) && otmp->count > 1 )
+          if ( ch && (otmp->Prototype->mprog.progtypes & DROP_PROG) && otmp->count > 1 )
             {
               separate_obj( otmp );
               obj_from_obj( otmp );
@@ -2628,7 +2628,7 @@ bool empty_obj( Object *obj, Object *destobj, Room *destroom )
       return movedsome;
     }
   bug( "empty_obj: could not determine a destination for vnum %ld",
-       obj->pIndexData->vnum );
+       obj->Prototype->vnum );
   return false;
 }
 

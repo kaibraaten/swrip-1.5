@@ -1272,7 +1272,7 @@ void AddObjectReset( Area *pArea, char cm, Object *obj, int v2, int v3 )
   Object *inobj;
   static int iNest;
 
-  if ( (cm == 'O' || cm == 'P') && obj->pIndexData->vnum == OBJ_VNUM_TRAP )
+  if ( (cm == 'O' || cm == 'P') && obj->Prototype->vnum == OBJ_VNUM_TRAP )
     {
       if ( cm == 'O' )
 	{
@@ -1282,7 +1282,7 @@ void AddObjectReset( Area *pArea, char cm, Object *obj, int v2, int v3 )
       return;
     }
 
-  AddReset( pArea, cm, (cm == 'P' ? iNest : 1), obj->pIndexData->vnum,
+  AddReset( pArea, cm, (cm == 'P' ? iNest : 1), obj->Prototype->vnum,
              v2, v3 );
 
   /* Only add hide for in-room objects that are hidden and cant be moved, as
@@ -1295,7 +1295,7 @@ void AddObjectReset( Area *pArea, char cm, Object *obj, int v2, int v3 )
 
   for ( inobj = obj->first_content; inobj; inobj = inobj->next_content )
     {
-      if ( inobj->pIndexData->vnum == OBJ_VNUM_TRAP )
+      if ( inobj->Prototype->vnum == OBJ_VNUM_TRAP )
 	{
 	  AddObjectReset(pArea, 'O', inobj, 0, 0);
 	}
@@ -1329,7 +1329,7 @@ void InstallRoom( Area *pArea, Room *pRoom, bool dodoors )
 	  continue;
 	}
 
-      AddReset( pArea, 'M', 1, rch->pIndexData->vnum, rch->pIndexData->count,
+      AddReset( pArea, 'M', 1, rch->Prototype->vnum, rch->Prototype->count,
                  pRoom->vnum );
 
       for ( obj = rch->first_carrying; obj; obj = obj->next_content )
@@ -1571,7 +1571,7 @@ void ResetArea( Area *pArea )
               break;
             }
 
-          if ( mob->pIndexData->pShop )
+          if ( mob->Prototype->pShop )
             {
               int olevel = GenerateItemLevel( pArea, pObjIndex );
               obj = create_object(pObjIndex, olevel);

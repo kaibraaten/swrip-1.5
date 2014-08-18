@@ -38,7 +38,7 @@
 
 static float CostEquation( const Object *obj )
 {
-  float count = obj->pIndexData->count;
+  float count = obj->Prototype->count;
 
   count = urange( 50, count, 500 );
 
@@ -62,7 +62,7 @@ Character *FindKeeperQ( const Character *ch, bool message )
         keeper;
         keeper = keeper->next_in_room )
     {
-      if ( IsNpc(keeper) && (pShop = keeper->pIndexData->pShop) != NULL )
+      if ( IsNpc(keeper) && (pShop = keeper->Prototype->pShop) != NULL )
 	{
 	  break;
 	}
@@ -126,7 +126,7 @@ Character *FindFixer( const Character *ch )
         keeper;
         keeper = keeper->next_in_room )
     {
-      if ( IsNpc(keeper) && (rShop = keeper->pIndexData->rShop) != NULL )
+      if ( IsNpc(keeper) && (rShop = keeper->Prototype->rShop) != NULL )
 	{
 	  break;
 	}
@@ -198,7 +198,7 @@ int GetObjectCost( const Character *ch, const Character *keeper, const Object *o
   bool richcustomer = false;
   int profitmod = 0;
 
-  if ( !obj || ( pShop = keeper->pIndexData->pShop ) == NULL )
+  if ( !obj || ( pShop = keeper->Prototype->pShop ) == NULL )
     {
       return 0;
     }
@@ -242,7 +242,7 @@ int GetObjectCost( const Character *ch, const Character *keeper, const Object *o
         }
       for ( obj2 = keeper->first_carrying; obj2; obj2 = obj2->next_content )
         {
-          if ( obj->pIndexData == obj2->pIndexData )
+          if ( obj->Prototype == obj2->Prototype )
             {
               cost /= (obj2->count+1);
               break;
@@ -290,7 +290,7 @@ int GetRepairCost( const Character *keeper, const Object *obj )
   int itype = 0;
   bool found = false;
 
-  if ( !obj || ( rShop = keeper->pIndexData->rShop ) == NULL )
+  if ( !obj || ( rShop = keeper->Prototype->rShop ) == NULL )
     {
       return 0;
     }
@@ -364,7 +364,7 @@ void WriteVendor( FILE *fp, Character *mob )
       return;
     }
 
-  fprintf( fp, "Vnum     %ld\n", mob->pIndexData->vnum );
+  fprintf( fp, "Vnum     %ld\n", mob->Prototype->vnum );
 
   if (mob->gold > 0)
     {
@@ -381,7 +381,7 @@ void WriteVendor( FILE *fp, Character *mob )
       fprintf (fp, "Owner     %s~\n", mob->owner );
     }
 
-  if ( StrCmp( mob->short_descr, mob->pIndexData->short_descr) )
+  if ( StrCmp( mob->short_descr, mob->Prototype->short_descr) )
     {
       fprintf( fp, "Short     %s~\n", mob->short_descr );
     }
@@ -501,7 +501,7 @@ Character *ReadVendor( FILE *fp )
 		}
 
 	      char_to_room(mob, pRoomIndex);
-	      sprintf(vnum1,"%ld", mob->pIndexData->vnum);
+	      sprintf(vnum1,"%ld", mob->Prototype->vnum);
 	      do_makeshop (mob, vnum1 );
 	      sprintf (buf, mob->long_descr, mob->owner);
 	      mob->long_descr = CopyString( buf );

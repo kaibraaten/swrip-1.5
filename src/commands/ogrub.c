@@ -343,7 +343,7 @@ static bool go_read( Character *ch, int dis_num, int op_num, int sor_ind,
       memset(&r, 0, sizeof r);
       if ( !go_read_names( ch, po, &r, np_sw, nm_sw, ng_sw ) )
         continue;
-      px          = po->pIndexData;
+      px          = po->Prototype;
       r.n[OCOUNT] = po->count;
       r.n[OVNUM]  = px->vnum;
       r.n[OTYPE]  = po->item_type;

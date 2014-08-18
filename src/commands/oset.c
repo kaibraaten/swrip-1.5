@@ -80,8 +80,8 @@ void do_oset( Character *ch, char *argument )
 
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
         {
-          FreeMemory( obj->pIndexData->description );
-          obj->pIndexData->description = CopyString( obj->description );
+          FreeMemory( obj->Prototype->description );
+          obj->Prototype->description = CopyString( obj->description );
 	}
 
       tmpobj = (Object*)ch->spare_ptr;
@@ -205,7 +205,7 @@ void do_oset( Character *ch, char *argument )
         return;
       obj->value[0] = value;
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
-        obj->pIndexData->value[0] = value;
+        obj->Prototype->value[0] = value;
       return;
     }
 
@@ -215,7 +215,7 @@ void do_oset( Character *ch, char *argument )
         return;
       obj->value[1] = value;
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
-	obj->pIndexData->value[1] = value;
+	obj->Prototype->value[1] = value;
       return;
     }
 
@@ -226,9 +226,9 @@ void do_oset( Character *ch, char *argument )
       obj->value[2] = value;
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
         {
-          obj->pIndexData->value[2] = value;
+          obj->Prototype->value[2] = value;
           if ( obj->item_type == ITEM_WEAPON && value != 0 )
-            obj->value[2] = obj->pIndexData->value[1] * obj->pIndexData->value[2];
+            obj->value[2] = obj->Prototype->value[1] * obj->Prototype->value[2];
         }
       return;
     }
@@ -239,7 +239,7 @@ void do_oset( Character *ch, char *argument )
         return;
       obj->value[3] = value;
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
-        obj->pIndexData->value[3] = value;
+        obj->Prototype->value[3] = value;
       return;
     }
 
@@ -249,7 +249,7 @@ void do_oset( Character *ch, char *argument )
         return;
       obj->value[4] = value;
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
-        obj->pIndexData->value[4] = value;
+        obj->Prototype->value[4] = value;
       return;
     }
 
@@ -259,7 +259,7 @@ void do_oset( Character *ch, char *argument )
         return;
       obj->value[5] = value;
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
-        obj->pIndexData->value[5] = value;
+        obj->Prototype->value[5] = value;
       return;
     }
 
@@ -294,7 +294,7 @@ void do_oset( Character *ch, char *argument )
         }
       obj->item_type = (short) value;
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
-        obj->pIndexData->item_type = obj->item_type;
+        obj->Prototype->item_type = obj->item_type;
       return;
     }
 
@@ -324,11 +324,11 @@ void do_oset( Character *ch, char *argument )
             {
               ToggleBit(obj->extra_flags, 1 << value);
               if ( 1 << value == ITEM_PROTOTYPE )
-                obj->pIndexData->extra_flags = obj->extra_flags;
+                obj->Prototype->extra_flags = obj->extra_flags;
             }
         }
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
-        obj->pIndexData->extra_flags = obj->extra_flags;
+        obj->Prototype->extra_flags = obj->extra_flags;
       return;
     }
 
@@ -358,7 +358,7 @@ void do_oset( Character *ch, char *argument )
         }
 
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
-        obj->pIndexData->wear_flags = obj->wear_flags;
+        obj->Prototype->wear_flags = obj->wear_flags;
       return;
     }
 
@@ -376,7 +376,7 @@ void do_oset( Character *ch, char *argument )
         return;
       obj->weight = value;
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
-        obj->pIndexData->weight = value;
+        obj->Prototype->weight = value;
       return;
     }
 
@@ -386,7 +386,7 @@ void do_oset( Character *ch, char *argument )
         return;
       obj->cost = value;
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
-        obj->pIndexData->cost = value;
+        obj->Prototype->cost = value;
       return;
     }
 
@@ -395,7 +395,7 @@ void do_oset( Character *ch, char *argument )
       if ( !can_omodify( ch, obj ) )
         return;
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
-        obj->pIndexData->rent = value;
+        obj->Prototype->rent = value;
       else
         send_to_char( "Item must have prototype flag to set this value.\r\n", ch );
       return;
@@ -406,7 +406,7 @@ void do_oset( Character *ch, char *argument )
       if ( !can_omodify( ch, obj ) )
         return;
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
-        obj->pIndexData->layers = value;
+        obj->Prototype->layers = value;
       else
         send_to_char( "Item must have prototype flag to set this value.\r\n", ch );
       return;
@@ -428,8 +428,8 @@ void do_oset( Character *ch, char *argument )
       obj->name = CopyString( arg3 );
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
         {
-          FreeMemory(obj->pIndexData->name );
-          obj->pIndexData->name = CopyString( obj->name );
+          FreeMemory(obj->Prototype->name );
+          obj->Prototype->name = CopyString( obj->name );
         }
       return;
     }
@@ -440,8 +440,8 @@ void do_oset( Character *ch, char *argument )
       obj->short_descr = CopyString( arg3 );
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
         {
-          FreeMemory(obj->pIndexData->short_descr );
-	  obj->pIndexData->short_descr = CopyString( obj->short_descr );
+          FreeMemory(obj->Prototype->short_descr );
+	  obj->Prototype->short_descr = CopyString( obj->short_descr );
         }
       else
         /* Feature added by Narn, Apr/96
@@ -472,8 +472,8 @@ void do_oset( Character *ch, char *argument )
       obj->action_desc = CopyString( arg3 );
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
         {
-          FreeMemory(obj->pIndexData->action_desc );
-          obj->pIndexData->action_desc = CopyString( obj->action_desc );
+          FreeMemory(obj->Prototype->action_desc );
+          obj->Prototype->action_desc = CopyString( obj->action_desc );
         }
       return;
     }
@@ -486,8 +486,8 @@ void do_oset( Character *ch, char *argument )
           obj->description = CopyString( arg3 );
           if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
             {
-	      FreeMemory(obj->pIndexData->description );
-              obj->pIndexData->description = CopyString( obj->description );
+	      FreeMemory(obj->Prototype->description );
+              obj->Prototype->description = CopyString( obj->description );
             }
           return;
         }
@@ -504,7 +504,7 @@ void do_oset( Character *ch, char *argument )
       ch->dest_buf = obj;
       StartEditing( ch, obj->description );
       SetEditorDescription( ch, "Object %d (%s) long description",
-			    obj->pIndexData->vnum, obj->name );
+			    obj->Prototype->vnum, obj->name );
       return;
     }
 
@@ -572,8 +572,8 @@ void do_oset( Character *ch, char *argument )
       paf->bitvector            = 0;
       paf->next         = NULL;
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
-        LINK( paf, obj->pIndexData->first_affect,
-              obj->pIndexData->last_affect, next, prev );
+        LINK( paf, obj->Prototype->first_affect,
+              obj->Prototype->last_affect, next, prev );
       else
         LINK( paf, obj->first_affect, obj->last_affect, next, prev );
       ++top_affect;
@@ -604,7 +604,7 @@ void do_oset( Character *ch, char *argument )
         {
           ProtoObject *pObjIndex;
 
-          pObjIndex = obj->pIndexData;
+          pObjIndex = obj->Prototype;
           for ( paf = pObjIndex->first_affect; paf; paf = paf->next )
             {
               if ( ++count == loc )
@@ -657,7 +657,7 @@ void do_oset( Character *ch, char *argument )
           return;
         }
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
-        ed = SetOExtraProto( obj->pIndexData, arg3 );
+        ed = SetOExtraProto( obj->Prototype, arg3 );
       else
         ed = SetOExtra( obj, arg3 );
       if ( ch->substate == SUB_REPEATCMD )
@@ -672,7 +672,7 @@ void do_oset( Character *ch, char *argument )
       ch->dest_buf = ed;
       StartEditing( ch, ed->description );
       SetEditorDescription( ch, "Object %d (%s) extra description: %s",
-			    obj->pIndexData->vnum, obj->name, arg3 );
+			    obj->Prototype->vnum, obj->name, arg3 );
       return;
     }
 
@@ -690,7 +690,7 @@ void do_oset( Character *ch, char *argument )
           return;
         }
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
-        ed = SetOExtraProto( obj->pIndexData, obj->name );
+        ed = SetOExtraProto( obj->Prototype, obj->name );
       else
         ed = SetOExtra( obj, obj->name );
       if ( ch->substate == SUB_REPEATCMD )
@@ -705,7 +705,7 @@ void do_oset( Character *ch, char *argument )
       ch->dest_buf = ed;
       StartEditing( ch, ed->description );
       SetEditorDescription( ch, "Object %d (%s) description",
-                            obj->pIndexData->vnum, obj->name );
+                            obj->Prototype->vnum, obj->name );
       return;
     }
 
@@ -718,7 +718,7 @@ void do_oset( Character *ch, char *argument )
         }
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
         {
-          if ( DelOExtraProto( obj->pIndexData, arg3 ) )
+          if ( DelOExtraProto( obj->Prototype, arg3 ) )
             send_to_char( "Deleted.\r\n", ch );
           else
             send_to_char( "Not found.\r\n", ch );
@@ -944,7 +944,7 @@ void do_oset( Character *ch, char *argument )
         return;
       obj->value[tmp] = value;
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
-        obj->pIndexData->value[tmp] = value;
+        obj->Prototype->value[tmp] = value;
       return;
     }
 

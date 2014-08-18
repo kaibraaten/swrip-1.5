@@ -58,7 +58,7 @@ void do_scribe( Character *ch, char *argument )
       return;
     }
 
-  if( scroll->pIndexData->vnum != OBJ_VNUM_SCROLL_SCRIBING )
+  if( scroll->Prototype->vnum != OBJ_VNUM_SCROLL_SCRIBING )
     {
       send_to_char( "You must be holding a blank scroll to scribe it.\r\n", ch );
       return;
@@ -66,7 +66,7 @@ void do_scribe( Character *ch, char *argument )
 
   if ( ( scroll->value[1] != -1 ) && ( scroll->value[2] != -1)
        && ( scroll->value[3] != -1)
-       && ( scroll->pIndexData->vnum == OBJ_VNUM_SCROLL_SCRIBING ) )
+       && ( scroll->Prototype->vnum == OBJ_VNUM_SCROLL_SCRIBING ) )
     {
       send_to_char( "That scroll has already contains as much magic as it can hold.\r\n", ch);
       return;
