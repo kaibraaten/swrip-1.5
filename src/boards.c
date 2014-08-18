@@ -1117,8 +1117,8 @@ Board *read_board( char *boardfile, FILE *fp )
           ReadToEndOfLine( fp );
           break;
         case 'E':
-          KEY( "Extra_readers", board->extra_readers,   ReadStringToTildeNoHash( fp ) );
-          KEY( "Extra_removers",       board->extra_removers,   ReadStringToTildeNoHash( fp ) );
+          KEY( "Extra_readers", board->extra_readers,   ReadStringToTilde( fp ) );
+          KEY( "Extra_removers",       board->extra_removers,   ReadStringToTilde( fp ) );
           if ( !StrCmp( word, "End" ) )
             {
               board->num_posts  = 0;
@@ -1137,16 +1137,16 @@ Board *read_board( char *boardfile, FILE *fp )
               return board;
             }
         case 'F':
-          KEY( "Filename",      board->note_file,       ReadStringToTildeNoHash( fp ) );
+          KEY( "Filename",      board->note_file,       ReadStringToTilde( fp ) );
         case 'M':
           KEY( "Min_read_level",        board->min_read_level,  ReadInt( fp ) );
           KEY( "Min_post_level",        board->min_post_level,  ReadInt( fp ) );
           KEY( "Min_remove_level",      board->min_remove_level,ReadInt( fp ) );
           KEY( "Max_posts",             board->max_posts,       ReadInt( fp ) );
         case 'P':
-          KEY( "Post_group",    board->post_group,      ReadStringToTildeNoHash( fp ) );
+          KEY( "Post_group",    board->post_group,      ReadStringToTilde( fp ) );
         case 'R':
-          KEY( "Read_group",    board->read_group,      ReadStringToTildeNoHash( fp ) );
+          KEY( "Read_group",    board->read_group,      ReadStringToTilde( fp ) );
         case 'T':
           KEY( "Type",  board->type,            ReadInt( fp ) );
         case 'V':
@@ -1215,17 +1215,17 @@ Note *read_note( const char *notefile, FILE *fp )
           if ( StrCmp( ReadWord( fp ), "yesvotes" ) )
             break;
 
-          pnote->yesvotes       = ReadStringToTildeNoHash( fp );
+          pnote->yesvotes       = ReadStringToTilde( fp );
 
           if ( StrCmp( ReadWord( fp ), "novotes" ) )
             break;
 
-          pnote->novotes        = ReadStringToTildeNoHash( fp );
+          pnote->novotes        = ReadStringToTilde( fp );
 
           if ( StrCmp( ReadWord( fp ), "abstentions" ) )
             break;
 
-          pnote->abstentions    = ReadStringToTildeNoHash( fp );
+          pnote->abstentions    = ReadStringToTilde( fp );
 
           word = ReadWord( fp );
         }

@@ -603,7 +603,7 @@ void ReadShuttle( Shuttle *shuttle, FILE *fp )
           break;
 
         case 'F':
-          KEY( "Filename", shuttle->filename, ReadStringToTildeNoHash(fp));
+          KEY( "Filename", shuttle->filename, ReadStringToTilde(fp));
           break;
 
         case 'N':
@@ -653,7 +653,7 @@ void ReadShuttleStop( ShuttleStop * stop, FILE *fp )
           break;
 
         case 'S':
-          KEY( "StopName", stop->stop_name, ReadStringToTildeNoHash(fp));
+          KEY( "StopName", stop->stop_name, ReadStringToTilde(fp));
           break;
         }
 

@@ -1303,15 +1303,15 @@ Skill *fread_skill( FILE *fp )
 	      break;
             }
 
-          KEY( "Components",    skill->components,      ReadStringToTildeNoHash( fp ) );
+          KEY( "Components",    skill->components,      ReadStringToTilde( fp ) );
           break;
 
         case 'D':
-          KEY( "Dammsg",        skill->noun_damage,     ReadStringToTildeNoHash( fp ) );
-          KEY( "Dice",  skill->dice,            ReadStringToTildeNoHash( fp ) );
-          KEY( "Diechar",       skill->die_char,        ReadStringToTildeNoHash( fp ) );
-          KEY( "Dieroom",       skill->die_room,        ReadStringToTildeNoHash( fp ) );
-          KEY( "Dievict",       skill->die_vict,        ReadStringToTildeNoHash( fp ) );
+          KEY( "Dammsg",        skill->noun_damage,     ReadStringToTilde( fp ) );
+          KEY( "Dice",  skill->dice,            ReadStringToTilde( fp ) );
+          KEY( "Diechar",       skill->die_char,        ReadStringToTilde( fp ) );
+          KEY( "Dieroom",       skill->die_room,        ReadStringToTilde( fp ) );
+          KEY( "Dievict",       skill->die_vict,        ReadStringToTilde( fp ) );
           KEY( "Difficulty",    skill->difficulty,      ReadInt( fp ) );
           break;
 
@@ -1332,28 +1332,28 @@ Skill *fread_skill( FILE *fp )
           break;
 
         case 'H':
-          KEY( "Hitchar",       skill->hit_char,        ReadStringToTildeNoHash( fp ) );
-          KEY( "Hitroom",       skill->hit_room,        ReadStringToTildeNoHash( fp ) );
-          KEY( "Hitvict",       skill->hit_vict,        ReadStringToTildeNoHash( fp ) );
+          KEY( "Hitchar",       skill->hit_char,        ReadStringToTilde( fp ) );
+          KEY( "Hitroom",       skill->hit_room,        ReadStringToTilde( fp ) );
+          KEY( "Hitvict",       skill->hit_vict,        ReadStringToTilde( fp ) );
           break;
 
         case 'I':
-          KEY( "Immchar",       skill->imm_char,        ReadStringToTildeNoHash( fp ) );
-          KEY( "Immroom",       skill->imm_room,        ReadStringToTildeNoHash( fp ) );
-          KEY( "Immvict",       skill->imm_vict,        ReadStringToTildeNoHash( fp ) );
+          KEY( "Immchar",       skill->imm_char,        ReadStringToTilde( fp ) );
+          KEY( "Immroom",       skill->imm_room,        ReadStringToTilde( fp ) );
+          KEY( "Immvict",       skill->imm_vict,        ReadStringToTilde( fp ) );
           break;
 
         case 'M':
           KEY( "Mana",  skill->min_mana,        ReadInt( fp ) );
           KEY( "Minlevel",      skill->min_level,       ReadInt( fp ) );
           KEY( "Minpos",        skill->minimum_position, ReadInt( fp ) );
-          KEY( "Misschar",      skill->miss_char,       ReadStringToTildeNoHash( fp ) );
-          KEY( "Missroom",      skill->miss_room,       ReadStringToTildeNoHash( fp ) );
-          KEY( "Missvict",      skill->miss_vict,       ReadStringToTildeNoHash( fp ) );
+          KEY( "Misschar",      skill->miss_char,       ReadStringToTilde( fp ) );
+          KEY( "Missroom",      skill->miss_room,       ReadStringToTilde( fp ) );
+          KEY( "Missvict",      skill->miss_vict,       ReadStringToTilde( fp ) );
           break;
 
         case 'N':
-          KEY( "Name",  skill->name,            ReadStringToTildeNoHash( fp ) );
+          KEY( "Name",  skill->name,            ReadStringToTilde( fp ) );
           break;
 
         case 'P':
@@ -1371,7 +1371,7 @@ Skill *fread_skill( FILE *fp )
 
         case 'T':
           KEY( "Target",        skill->target,          ReadInt( fp ) );
-          KEY( "Teachers",      skill->teachers,        ReadStringToTildeNoHash( fp ) );
+          KEY( "Teachers",      skill->teachers,        ReadStringToTilde( fp ) );
           KEY( "Type",  skill->type,  get_skill(ReadWord( fp ))  );
           break;
 
@@ -1380,7 +1380,7 @@ Skill *fread_skill( FILE *fp )
           break;
 
         case 'W':
-          KEY( "Wearoff",       skill->msg_off,         ReadStringToTildeNoHash( fp ) );
+          KEY( "Wearoff",       skill->msg_off,         ReadStringToTilde( fp ) );
           break;
         }
 
@@ -1534,9 +1534,9 @@ void fread_social( FILE *fp )
           break;
 
         case 'C':
-          KEY( "CharNoArg",     social->char_no_arg,    ReadStringToTildeNoHash(fp) );
-          KEY( "CharFound",     social->char_found,     ReadStringToTildeNoHash(fp) );
-          KEY( "CharAuto",      social->char_auto,      ReadStringToTildeNoHash(fp) );
+          KEY( "CharNoArg",     social->char_no_arg,    ReadStringToTilde(fp) );
+          KEY( "CharFound",     social->char_found,     ReadStringToTilde(fp) );
+          KEY( "CharAuto",      social->char_auto,      ReadStringToTilde(fp) );
           break;
 
         case 'E':
@@ -1562,17 +1562,17 @@ void fread_social( FILE *fp )
           break;
 
         case 'N':
-          KEY( "Name",  social->name,           ReadStringToTildeNoHash(fp) );
+          KEY( "Name",  social->name,           ReadStringToTilde(fp) );
           break;
 
         case 'O':
-          KEY( "OthersNoArg",   social->others_no_arg,  ReadStringToTildeNoHash(fp) );
-          KEY( "OthersFound",   social->others_found,   ReadStringToTildeNoHash(fp) );
-          KEY( "OthersAuto",    social->others_auto,    ReadStringToTildeNoHash(fp) );
+          KEY( "OthersNoArg",   social->others_no_arg,  ReadStringToTilde(fp) );
+          KEY( "OthersFound",   social->others_found,   ReadStringToTilde(fp) );
+          KEY( "OthersAuto",    social->others_auto,    ReadStringToTilde(fp) );
           break;
 
         case 'V':
-          KEY( "VictFound",     social->vict_found,     ReadStringToTildeNoHash(fp) );
+          KEY( "VictFound",     social->vict_found,     ReadStringToTilde(fp) );
           break;
         }
 
@@ -1702,7 +1702,7 @@ void fread_command( FILE *fp )
           break;
 
         case 'N':
-          KEY( "Name",  command->name,          ReadStringToTildeNoHash(fp) );
+          KEY( "Name",  command->name,          ReadStringToTilde(fp) );
           break;
 
         case 'P':

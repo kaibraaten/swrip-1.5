@@ -208,7 +208,7 @@ void fread_spaceobject( Spaceobject *spaceobject, FILE *fp )
           break;
 
         case 'F':
-          KEY( "Filename",      spaceobject->filename,          ReadStringToTildeNoHash( fp ) );
+          KEY( "Filename",      spaceobject->filename,          ReadStringToTilde( fp ) );
           break;
 
         case 'G':

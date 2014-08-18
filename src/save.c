@@ -1452,8 +1452,8 @@ void fread_char( Character *ch, FILE *fp, bool preload )
                 }
               AllocateMemory( pal, Alias, 1 );
 
-              pal->name = ReadStringToTildeNoHash( fp );
-              pal->cmd  = ReadStringToTildeNoHash( fp );
+              pal->name = ReadStringToTilde( fp );
+              pal->cmd  = ReadStringToTilde( fp );
               LINK(pal, ch->pcdata->first_alias, ch->pcdata->last_alias, next, prev );
               fMatch = true;
               break;
@@ -1486,9 +1486,9 @@ void fread_char( Character *ch, FILE *fp, bool preload )
           break;
 
         case 'B':
-          KEY( "Bamfin",        ch->pcdata->bamfin,     ReadStringToTildeNoHash( fp ) );
-          KEY( "Bamfout",       ch->pcdata->bamfout,    ReadStringToTildeNoHash( fp ) );
-          KEY( "Bestowments", ch->pcdata->bestowments, ReadStringToTildeNoHash( fp ) );
+          KEY( "Bamfin",        ch->pcdata->bamfin,     ReadStringToTilde( fp ) );
+          KEY( "Bamfout",       ch->pcdata->bamfout,    ReadStringToTilde( fp ) );
+          KEY( "Bestowments", ch->pcdata->bestowments, ReadStringToTilde( fp ) );
           KEY( "Bio",           ch->pcdata->bio,        ReadStringToTilde( fp ) );
           KEY( "Bank",  ch->pcdata->bank,       ReadInt( fp ) );
           break;
@@ -1620,7 +1620,7 @@ void fread_char( Character *ch, FILE *fp, bool preload )
             }
 
           KEY( "Hitroll",       ch->hitroll,            ReadInt( fp ) );
-          KEY( "Homepage",      ch->pcdata->homepage,   ReadStringToTildeNoHash( fp ) );
+          KEY( "Homepage",      ch->pcdata->homepage,   ReadStringToTilde( fp ) );
 
           if ( !StrCmp( word, "HpManaMove" ) )
             {
@@ -1744,7 +1744,7 @@ void fread_char( Character *ch, FILE *fp, bool preload )
 
         case 'P':
           KEY( "Pagerlen",      ch->pcdata->pagerlen,   ReadInt( fp ) );
-          KEY( "Password",      ch->pcdata->pwd,        ReadStringToTildeNoHash( fp ) );
+          KEY( "Password",      ch->pcdata->pwd,        ReadStringToTilde( fp ) );
           KEY( "PDeaths",       ch->pcdata->pdeaths,    ReadInt( fp ) );
           KEY( "PKills",        ch->pcdata->pkills,     ReadInt( fp ) );
           KEY( "Played",        ch->pcdata->played,     ReadInt( fp ) );
@@ -1775,7 +1775,7 @@ void fread_char( Character *ch, FILE *fp, bool preload )
 
         case 'R':
           KEY( "Race",        ch->race,         ReadInt( fp ) );
-          KEY( "Rank",        ch->pcdata->rank, ReadStringToTildeNoHash( fp ) );
+          KEY( "Rank",        ch->pcdata->rank, ReadStringToTilde( fp ) );
           KEY( "Resistant",     ch->resistant,          ReadInt( fp ) );
           KEY( "Restore_time",ch->pcdata->restore_time, ReadInt( fp ) );
 
@@ -2037,7 +2037,7 @@ void fread_char( Character *ch, FILE *fp, bool preload )
               return;
             }
 
-          KEY( "Email", ch->pcdata->email,      ReadStringToTildeNoHash( fp ) );
+          KEY( "Email", ch->pcdata->email,      ReadStringToTilde( fp ) );
           break;
 
         case 'T':

@@ -2461,7 +2461,7 @@ static void ReadShip( Ship *ship, FILE *fp )
           break;
 
         case 'F':
-          KEY( "Filename",      ship->filename,         ReadStringToTildeNoHash( fp ) );
+          KEY( "Filename",      ship->filename,         ReadStringToTilde( fp ) );
           KEY( "Firstroom",   ship->room.first,        ReadInt( fp ) );
           break;
 

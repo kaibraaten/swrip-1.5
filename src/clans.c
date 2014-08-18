@@ -217,7 +217,7 @@ static void fread_clan( Clan *clan, FILE *fp )
 
         case 'F':
           KEY( "Funds",    clan->funds,    ReadInt( fp ) );
-          KEY( "Filename", clan->filename, ReadStringToTildeNoHash( fp ) );
+          KEY( "Filename", clan->filename, ReadStringToTilde( fp ) );
           break;
 
         case 'G':

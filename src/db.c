@@ -736,7 +736,7 @@ void load_area( FILE *fp )
   Area *pArea;
 
   AllocateMemory( pArea, Area, 1 );
-  pArea->name           = ReadStringToTildeNoHash( fp );
+  pArea->name           = ReadStringToTilde( fp );
   pArea->author       = CopyString( "unknown" );
   pArea->filename       = CopyString( strArea );
   pArea->age            = 15;
@@ -818,7 +818,7 @@ void load_resetmsg( Area *tarea, FILE *fp )
   if ( tarea->resetmsg )
     FreeMemory( tarea->resetmsg );
 
-  tarea->resetmsg = ReadStringToTildeNoHash( fp );
+  tarea->resetmsg = ReadStringToTilde( fp );
 }
 
 /*
@@ -4218,7 +4218,7 @@ void load_area_file( Area *tarea, char *filename )
           else
             {
               FreeMemory( tarea->name );
-              tarea->name = ReadStringToTildeNoHash( fpArea );
+              tarea->name = ReadStringToTilde( fpArea );
             }
         }
       else if ( !StrCmp( word, "AUTHOR"   ) ) load_author  (tarea, fpArea);
@@ -4360,7 +4360,7 @@ void load_buildlist( void )
               pArea->author = CopyString( dentry->d_name );
               pArea->filename = CopyString( buf );
 #if !defined(READ_AREA)
-              pArea->name = ReadStringToTildeNoHash( fp );
+              pArea->name = ReadStringToTilde( fp );
 #else
               sprintf( buf, "{PROTO} %s's area in progress", dentry->d_name );
               pArea->name = CopyString( buf );
@@ -4610,7 +4610,7 @@ void fread_sysdata( SystemData *sys, FILE *fp )
 
         case 'H':
           KEY( "Highplayers",      sys->alltimemax,       ReadInt( fp ) );
-          KEY( "Highplayertime", sys->time_of_max,      ReadStringToTildeNoHash( fp ) );
+          KEY( "Highplayertime", sys->time_of_max,      ReadStringToTilde( fp ) );
           break;
 
         case 'L':
@@ -4755,9 +4755,9 @@ void load_banlist( void )
         }
       AllocateMemory( pban, Ban, 1 );
       pban->level = number;
-      pban->name = ReadStringToTildeNoHash( fp );
+      pban->name = ReadStringToTilde( fp );
       if ( (letter = ReadChar(fp)) == '~' )
-        pban->ban_time = ReadStringToTildeNoHash( fp );
+        pban->ban_time = ReadStringToTilde( fp );
       else
         {
           ungetc(letter, fp);

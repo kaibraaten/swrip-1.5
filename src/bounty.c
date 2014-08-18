@@ -44,7 +44,6 @@ void SaveBounties( void )
     {
       fprintf( fpout, "%s\n", tbounty->target );
       fprintf( fpout, "%ld\n", tbounty->amount );
-
       fprintf( fpout, "%s\n", tbounty->poster );
     }
 
@@ -57,8 +56,12 @@ bool IsBountyOn( const Character *victim )
   Bounty *bounty = NULL;
 
   for ( bounty = first_bounty; bounty; bounty = bounty->next )
-    if ( !StrCmp( victim->name , bounty->target ) )
-      return true;
+    {
+      if ( !StrCmp( victim->name , bounty->target ) )
+	{
+	  return true;
+	}
+    }
 
   return false;
 }
@@ -68,8 +71,12 @@ Bounty *GetBounty( const char *target )
   Bounty *bounty = NULL;
 
   for ( bounty = first_bounty; bounty; bounty = bounty->next )
-    if ( !StrCmp( target, bounty->target ) )
-      return bounty;
+    {
+      if ( !StrCmp( target, bounty->target ) )
+	{
+	  return bounty;
+	}
+    }
 
   return NULL;
 }
@@ -77,11 +84,7 @@ Bounty *GetBounty( const char *target )
 void LoadBounties( void )
 {
   FILE *fpList = NULL;
-  const char *target = NULL;
-  const char *poster = NULL;
   char bountylist[256];
-  Bounty *bounty = NULL;
-  long amount = 0;
 
   log_string( "Loading bounties..." );
 
@@ -95,9 +98,16 @@ void LoadBounties( void )
 
   for ( ; ; )
     {
-      target = feof( fpList ) ? "$" : ReadWord( fpList );
+      const char *target = feof( fpList ) ? "$" : ReadWord( fpList );
+      const char *poster = NULL;
+      Bounty *bounty = NULL;
+      long amount = 0;
+
       if ( target[0] == '$' )
-        break;
+	{
+	  break;
+	}
+
       AllocateMemory( bounty, Bounty, 1 );
       LINK( bounty, first_bounty, last_bounty, next, prev );
       bounty->target = CopyString(target);
@@ -107,10 +117,11 @@ void LoadBounties( void )
       poster = feof( fpList ) ? "$" : ReadWord( fpList );
 
       if ( poster[0] == '$' )
-        break;
+	{
+	  break;
+	}
 
       bounty->poster = CopyString(poster);
-
     }
 
   fclose( fpList );
@@ -134,7 +145,7 @@ void AddBounty( const Character *ch , const Character *victim , long amount )
         }
     }
 
-  if (! found)
+  if (!found)
     {
       AllocateMemory( bounty, Bounty, 1 );
       LINK( bounty, first_bounty, last_bounty, next, prev );
@@ -187,7 +198,9 @@ void ClaimBounty( Character *ch, const Character *victim )
   char buf[MAX_STRING_LENGTH];
 
   if ( IsNpc(victim) )
-    return;
+    {
+      return;
+    }
 
   bounty = GetBounty( victim->name );
 
@@ -237,7 +250,9 @@ void ClaimBounty( Character *ch, const Character *victim )
   EchoToAll ( AT_RED , buf, 0 );
 
   if ( !IsBitSet(victim->act , PLR_KILLER ) )
-    SetBit(ch->act, PLR_KILLER );
+    {
+      SetBit(ch->act, PLR_KILLER );
+    }
 
   RemoveBounty(bounty);
 }

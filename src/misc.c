@@ -467,7 +467,7 @@ bool check_bad_name( const char *name )
 
   while (!feof(fp))
     {
-      const char *ln = ReadStringToTildeNoHash(fp);
+      const char *ln = ReadStringToTilde(fp);
 
       if (IsName(name,ln))
         {
@@ -503,11 +503,11 @@ int add_bad_name(const char *name)
       return -1;
     }
 
-  ln = ReadStringToTildeNoHash(fp);
+  ln = ReadStringToTilde(fp);
 
   while(!IsName("$",ln) && !feof(fp))
     {
-      ln = ReadStringToTildeNoHash(fp);
+      ln = ReadStringToTilde(fp);
     }
 
   /* Delete the $~ from the end of the file */

@@ -187,7 +187,7 @@ static void fread_planet( Planet *planet, FILE *fp )
           break;
 
         case 'F':
-          KEY( "Filename", planet->filename, ReadStringToTildeNoHash( fp ) );
+          KEY( "Filename", planet->filename, ReadStringToTilde( fp ) );
           KEY( "Flags",    planet->flags,    ReadInt( fp ) );
           break;
 
