@@ -177,7 +177,6 @@ char ReadChar( FILE *fp );
 float ReadFloat( FILE *fp );
 int ReadInt( FILE *fp );
 char *ReadStringToTilde( FILE *fp );
-char *ReadStringToTildeNoHash( FILE *fp );
 void ReadToEndOfLine( FILE *fp );
 char *ReadWord( FILE *fp );
 char *ReadLine( FILE *fp );
