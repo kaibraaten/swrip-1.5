@@ -729,7 +729,7 @@ static void look_in( Character *ch, char *what, bool doexaprog )
 		 ? "less than" :
                      obj->value[1] < 3 * obj->value[0] / 4
 		 ? "about"     : "more than",
-                     liq_table[obj->value[2]].liq_color
+                     LiquidTable[obj->value[2]].liq_color
 		 );
 
       if ( doexaprog )

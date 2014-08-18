@@ -833,7 +833,7 @@ struct PCData
 /*
  * Liquids.
  */
-struct liq_type
+struct LiquidType
 {
   char *        liq_name;
   char *        liq_color;
@@ -1497,7 +1497,7 @@ extern const struct lck_app_type lck_app[];
 extern const struct frc_app_type frc_app[];
 
 extern const struct Race RaceTable[];
-extern const struct liq_type liq_table[];
+extern const struct LiquidType LiquidTable[];
 extern const char* const ability_name[];
 
 extern const char * const skill_tname[];

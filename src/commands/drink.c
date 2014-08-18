@@ -92,17 +92,17 @@ void do_drink( Character *ch, char *argument )
       if ( !oprog_use_trigger( ch, obj, NULL, NULL, NULL ) )
         {
           act( AT_ACTION, "$n drinks $T from $p.",
-               ch, obj, liq_table[liquid].liq_name, TO_ROOM );
+               ch, obj, LiquidTable[liquid].liq_name, TO_ROOM );
           act( AT_ACTION, "You drink $T from $p.",
-               ch, obj, liq_table[liquid].liq_name, TO_CHAR );
+               ch, obj, LiquidTable[liquid].liq_name, TO_CHAR );
         }
 
       gain_condition( ch, COND_DRUNK,
-                      liq_table[liquid].liq_affect[COND_DRUNK  ] );
+                      LiquidTable[liquid].liq_affect[COND_DRUNK  ] );
       gain_condition( ch, COND_FULL,
-                      liq_table[liquid].liq_affect[COND_FULL   ] );
+                      LiquidTable[liquid].liq_affect[COND_FULL   ] );
       gain_condition( ch, COND_THIRST,
-                      liq_table[liquid].liq_affect[COND_THIRST ] );
+                      LiquidTable[liquid].liq_affect[COND_THIRST ] );
 
       if ( !IsNpc(ch) )
         {

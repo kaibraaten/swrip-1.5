@@ -430,9 +430,9 @@ void actiondesc( Character *ch, OBJ_DATA *obj, void *vo )
     {
     case ITEM_DRINK_CON:
       act( AT_ACTION, charbuf, ch, obj,
-	   liq_table[obj->value[OVAL_DRINK_CON_LIQUID_TYPE]].liq_name, TO_CHAR );
+	   LiquidTable[obj->value[OVAL_DRINK_CON_LIQUID_TYPE]].liq_name, TO_CHAR );
       act( AT_ACTION, roombuf, ch, obj,
-	   liq_table[obj->value[OVAL_DRINK_CON_LIQUID_TYPE]].liq_name, TO_ROOM );
+	   LiquidTable[obj->value[OVAL_DRINK_CON_LIQUID_TYPE]].liq_name, TO_ROOM );
       return;
 
     case ITEM_ARMOR:

@@ -1569,7 +1569,7 @@ const struct frc_app_type frc_app[] =
  * Liquid properties.
  * Used in #OBJECT section of area file.
  */
-const struct liq_type liq_table[LIQ_MAX] =
+const struct LiquidType LiquidTable[LIQ_MAX] =
   {
     { "water",                  "clear",        {  0, 1, 10 }   },  /*  0 */
     { "beer",                   "amber",        {  3, 2,  5 }   },

@@ -27,7 +27,7 @@ bool spec_customs_alcohol( Character *ch )
               if ( ( liquid = obj->value[2] ) >= LIQ_MAX )
                 liquid = obj->value[2] = 0;
 
-              if ( liq_table[ liquid ].liq_affect[COND_DRUNK] > 0 )
+              if ( LiquidTable[ liquid ].liq_affect[COND_DRUNK] > 0 )
                 {
                   if ( victim != ch && CanSeeCharacter( ch, victim ) && CanSeeObject( ch,obj ) )
                     {
@@ -80,7 +80,7 @@ bool spec_customs_alcohol( Character *ch )
                     {
                       if ( ( liquid = obj->value[2] ) >= LIQ_MAX )
                         liquid = obj->value[2] = 0;
-                      if ( liq_table[ liquid ].liq_affect[COND_DRUNK] <= 0 )
+                      if ( LiquidTable[ liquid ].liq_affect[COND_DRUNK] <= 0 )
                         continue;
                       ch_exp = umin( content->cost*10 , ( exp_level( GetAbilityLevel( victim, SMUGGLING_ABILITY ) + 1) - exp_level( GetAbilityLevel( victim, SMUGGLING_ABILITY ) ) ) );
                       ch_printf( victim, "You receive %ld experience for smuggling %d.\r\n " , ch_exp , content->short_descr);
