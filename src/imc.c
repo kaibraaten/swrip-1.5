@@ -481,7 +481,7 @@ const char *const imcperm_names[] = {
    "Notset", "None", "Mort", "Imm", "Admin", "Imp"
 };
 
-SITEINFO *this_imcmud;
+SiteInfo *this_imcmud;
 IMC_CHANNEL *first_imc_channel;
 IMC_CHANNEL *last_imc_channel;
 REMOTEINFO *first_rinfo;
@@ -3080,30 +3080,30 @@ static void imc_handle_autosetup( char *source, char *servername, char *cmd, cha
       if( !strcasecmp( txt, "connected" ) )
       {
          imclog( "There is already a mud named %s connected to the network.", this_imcmud->localname );
-         imc_shutdown( false );
+         ImcShutdown( false );
          return;
       }
       if( !strcasecmp( txt, "private" ) )
       {
          imclog( "%s is a private server. Autosetup denied.", servername );
-         imc_shutdown( false );
+         ImcShutdown( false );
          return;
       }
       if( !strcasecmp( txt, "full" ) )
       {
          imclog( "%s has reached its connection limit. Autosetup denied.", servername );
-         imc_shutdown( false );
+         ImcShutdown( false );
          return;
       }
       if( !strcasecmp( txt, "ban" ) )
       {
          imclog( "%s has banned your connection. Autosetup denied.", servername );
-         imc_shutdown( false );
+         ImcShutdown( false );
          return;
       }
       imclog( "%s: Invalid 'reject' response. Autosetup failed.", servername );
       imclog( "Data received: %s %s %s %s %s", source, servername, cmd, txt, encrypt );
-      imc_shutdown( false );
+      ImcShutdown( false );
       return;
    }
 
@@ -3122,7 +3122,7 @@ static void imc_handle_autosetup( char *source, char *servername, char *cmd, cha
 
    imclog( "%s: Invalid autosetup response.", servername );
    imclog( "Data received: %s %s %s %s %s", source, servername, cmd, txt, encrypt );
-   imc_shutdown( false );
+   ImcShutdown( false );
 }
 
 static bool imc_write_socket( void )
@@ -3157,7 +3157,7 @@ static bool imc_write_socket( void )
          else
             imclog( "%s", "Connection close detected on socket write." );
 
-         imc_shutdown( true );
+         ImcShutdown( true );
          return false;
       }
       nleft -= nwritten;
@@ -3189,7 +3189,7 @@ static void imc_process_authentication( const char *packet )
    if( rname[0] == '\0' )
    {
       imclog( "%s", "Incomplete authentication packet. Unable to connect." );
-      imc_shutdown( false );
+      ImcShutdown( false );
       return;
    }
 
@@ -3202,7 +3202,7 @@ static void imc_process_authentication( const char *packet )
       if( pw[0] == '\0' )
       {
          imclog( "SHA-256 Authentication failure: No auth_value was returned by %s.", rname );
-         imc_shutdown( false );
+         ImcShutdown( false );
          return;
       }
 
@@ -3237,7 +3237,7 @@ static void imc_process_authentication( const char *packet )
       if( strcasecmp( this_imcmud->serverpw, pw ) )
       {
          imclog( "%s sent an improper serverpassword.", rname );
-         imc_shutdown( false );
+         ImcShutdown( false );
          return;
       }
 
@@ -3264,7 +3264,7 @@ static void imc_process_authentication( const char *packet )
 
    imclog( "Invalid authentication response received from %s!!", rname );
    imclog( "Data received: %s %s %s %s %s", command, rname, pw, version, netname );
-   imc_shutdown( false );
+   ImcShutdown( false );
 }
 
 /*
@@ -3351,7 +3351,7 @@ static bool imc_read_socket( void )
    return true;
 }
 
-void imc_loop( void )
+void ImcLoop( void )
 {
    fd_set in_set, out_set;
    struct timeval last_time, null_time;
@@ -3383,7 +3383,7 @@ void imc_loop( void )
             return;
          }
       }
-      imc_startup( true, INVALID_SOCKET, false );
+      ImcStartup( true, INVALID_SOCKET, false );
       return;
    }
 
@@ -3412,8 +3412,8 @@ void imc_loop( void )
    if( select( this_imcmud->desc + 1, &in_set, &out_set, NULL, &null_time ) == SOCKET_ERROR )
 #endif
    {
-      perror( "imc_loop: select: poll" );
-      imc_shutdown( true );
+      perror( "ImcLoop: select: poll" );
+      ImcShutdown( true );
       return;
    }
 
@@ -3436,7 +3436,7 @@ void imc_loop( void )
             }
          }
          FD_CLR( this_imcmud->desc, &out_set );
-         imc_shutdown( true );
+         ImcShutdown( true );
          return;
       }
 
@@ -3472,7 +3472,7 @@ void imc_loop( void )
        && !imc_write_socket(  ) )
    {
       this_imcmud->outtop = 0;
-      imc_shutdown( true );
+      ImcShutdown( true );
    }
 }
 
@@ -3539,7 +3539,7 @@ static void imc_char_login( Character * ch )
       imc_send_ucache_update( CH_IMCNAME( ch ), sex );
 }
 
-bool imc_loadchar( Character * ch, FILE * fp, const char *word )
+bool ImcLoadCharacter( Character * ch, FILE * fp, const char *word )
 {
    bool fMatch = false;
 
@@ -3633,7 +3633,7 @@ bool imc_loadchar( Character * ch, FILE * fp, const char *word )
    return fMatch;
 }
 
-void imc_savechar( const Character * ch, FILE * fp )
+void ImcSaveCharacter( const Character * ch, FILE * fp )
 {
    IMC_IGNORE *temp;
 
@@ -3664,7 +3664,7 @@ void imc_savechar( const Character * ch, FILE * fp )
       fprintf( fp, "IMCignore    %s\n", temp->name );
 }
 
-void imc_freechardata( Character * ch )
+void ImcFreeCharacter( Character * ch )
 {
    IMC_IGNORE *ign, *ign_next;
    int x;
@@ -3697,7 +3697,7 @@ void imc_freechardata( Character * ch )
    IMCDISPOSE( CH_IMCDATA( ch ) );
 }
 
-void imc_initchar( Character * ch )
+void ImcInitializeCharacter( Character * ch )
 {
    if( IsNpc( ch ) )
       return;
@@ -4644,7 +4644,7 @@ static bool imc_read_config( socket_t desc )
       word = ReadWord( fin );
       if( !strcasecmp( word, "IMCCONFIG" ) && this_imcmud == NULL )
       {
-         IMCCREATE( this_imcmud, SITEINFO, 1 );
+         IMCCREATE( this_imcmud, SiteInfo, 1 );
 
          /*
           * If someone can think of better default values, I'm all ears. Until then, keep your bitching to yourselves. 
@@ -4879,7 +4879,7 @@ static socket_t ipv4_connect( void )
       if( !hostp )
       {
          imclog( "%s", "imc_connect_to: Cannot resolve server hostname." );
-         imc_shutdown( false );
+         ImcShutdown( false );
          return INVALID_SOCKET;
       }
       memcpy( &sa.sin_addr, hostp->h_addr, hostp->h_length );
@@ -5096,7 +5096,7 @@ static void free_imcdata( bool complete )
    }
 }
 
-void imc_hotboot( void )
+void ImcCopyover( void )
 {
    FILE *fp;
 
@@ -5115,7 +5115,7 @@ void imc_hotboot( void )
 }
 
 /* Shutdown IMC2 */
-void imc_shutdown( bool reconnect )
+void ImcShutdown( bool reconnect )
 {
    if( this_imcmud && this_imcmud->state == IMC_OFFLINE )
       return;
@@ -5138,7 +5138,7 @@ void imc_shutdown( bool reconnect )
 }
 
 /* Startup IMC2 */
-static bool imc_startup_network( bool connected )
+static bool ImcStartup_network( bool connected )
 {
    imclog( "%s", "IMC2 Network Initializing..." );
 
@@ -5185,7 +5185,7 @@ static bool imc_startup_network( bool connected )
    return true;
 }
 
-void imc_startup( bool force, socket_t desc, bool connected )
+void ImcStartup( bool force, socket_t desc, bool connected )
 {
    imcwait = 0;
 
@@ -5249,7 +5249,7 @@ void imc_startup( bool force, socket_t desc, bool connected )
 
    if( this_imcmud->autoconnect || force || connected )
    {
-      if( imc_startup_network( connected ) )
+      if( ImcStartup_network( connected ) )
       {
          imc_loadchannels(  );
          imc_loadhistory(  );
@@ -6200,7 +6200,7 @@ IMC_CMD( imcconnect )
    }
    imcconnect_attempts = 0;
    imcwait = 0;
-   imc_startup( true, -1, false );
+   ImcStartup( true, -1, false );
 }
 
 IMC_CMD( imcdisconnect )
@@ -6210,7 +6210,7 @@ IMC_CMD( imcdisconnect )
       imc_to_char( "The IMC2 network connection does not appear to be engaged!\r\n", ch );
       return;
    }
-   imc_shutdown( false );
+   ImcShutdown( false );
 }
 
 IMC_CMD( imcconfig )
@@ -7801,7 +7801,7 @@ static IMC_FUN *imc_function( const char *func )
 }
 
 /* Check for IMC channels, return true to stop command processing, false otherwise */
-bool imc_command_hook( Character * ch, const char *command, const char *argument )
+bool ImcCommandHook( Character * ch, const char *command, const char *argument )
 {
    IMC_CMD_DATA *cmd;
    IMC_ALIAS *alias;
@@ -7855,7 +7855,7 @@ bool imc_command_hook( Character * ch, const char *command, const char *argument
          if( cmd->function == NULL )
          {
             imc_to_char( "That command has no code set. Inform the administration.\r\n", ch );
-            imcbug( "imc_command_hook: Command %s has no code set!", cmd->name );
+            imcbug( "ImcCommandHook: Command %s has no code set!", cmd->name );
             return true;
          }
 
@@ -7953,7 +7953,7 @@ bool imc_command_hook( Character * ch, const char *command, const char *argument
    return true;
 }
 
-socket_t imc_getsocket( SITEINFO *site )
+socket_t ImcGetSocket( SiteInfo *site )
 {
   return site ? site->desc : INVALID_SOCKET;
 }

@@ -2603,7 +2603,7 @@ void free_char( Character *ch )
         FreeMemory( ch->pcdata->subprompt );
       FreeAliases( ch );
 #ifdef SWRIP_USE_IMC
-      imc_freechardata( ch );
+      ImcFreeCharacter( ch );
 #endif
       FreeMemory( ch->pcdata );
     }

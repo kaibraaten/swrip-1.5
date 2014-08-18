@@ -132,8 +132,8 @@ void do_copyover( Character * ch, char *argument )
   fclose( fp );
 
 #ifdef SWRIP_USE_IMC
-  imc_hotboot();
-  sprintf( buf3, "%d", imc_getsocket( this_imcmud ) );
+  ImcCopyover();
+  sprintf( buf3, "%d", ImcGetSocket( this_imcmud ) );
 #else
   sprintf( buf3, "%d", -1 );
 #endif

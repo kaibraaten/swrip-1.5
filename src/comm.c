@@ -238,7 +238,7 @@ int main( int argc, char **argv )
   log_string(log_buf);
 #ifdef SWRIP_USE_IMC
   log_string( "Starting IMC2" );
-  imc_startup( false, imcsocket, fCopyOver );
+  ImcStartup( false, imcsocket, fCopyOver );
 #endif
   log_string("Booting Database");
   boot_db(fCopyOver);
@@ -255,7 +255,7 @@ int main( int argc, char **argv )
   game_loop( );
   closesocket( control  );
 #ifdef SWRIP_USE_IMC
-  imc_shutdown( false );
+  ImcShutdown( false );
 #endif
   /*
    * That's all, folks.
@@ -556,7 +556,7 @@ void game_loop( )
       update_handler( );
 
 #ifdef SWRIP_USE_IMC
-      imc_loop();
+      ImcLoop();
 #endif
 
       /*

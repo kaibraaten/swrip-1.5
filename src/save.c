@@ -781,7 +781,7 @@ void fwrite_char( Character *ch, FILE *fp )
     }
 
 #ifdef SWRIP_USE_IMC
-  imc_savechar( ch, fp );
+  ImcSaveCharacter( ch, fp );
 #endif
 
   fprintf( fp, "End\n\n" );
@@ -1120,7 +1120,7 @@ bool load_char_obj( Descriptor *d, char *name, bool preload )
   ch->plr_home              = NULL;
 
 #ifdef SWRIP_USE_IMC
-  imc_initchar( ch );
+  ImcInitializeCharacter( ch );
 #endif
 
   sprintf( strsave, "%s%c/%s", PLAYER_DIR, tolower(name[0]),
@@ -1656,7 +1656,7 @@ void fread_char( Character *ch, FILE *fp, bool preload )
           KEY( "Immune",        ch->immune,             ReadInt( fp ) );
 
 #ifdef SWRIP_USE_IMC
-	  if( ( fMatch = imc_loadchar( ch, fp, word ) ) )
+	  if( ( fMatch = ImcLoadCharacter( ch, fp, word ) ) )
 	    {
 	      break;
 	    }

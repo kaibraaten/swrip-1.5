@@ -437,7 +437,7 @@ void interpret( Character *ch, char *argument )
            && !CheckAlias( ch, command, argument )
            && !check_social( ch, command, argument )
 #ifdef SWRIP_USE_IMC
-	   && !imc_command_hook( ch, command, argument )
+	   && !ImcCommandHook( ch, command, argument )
 #endif
 	   )
         {
