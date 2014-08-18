@@ -31,13 +31,13 @@
 #define VOTE_OPEN 1
 #define VOTE_CLOSED 2
 
-BOARD_DATA *first_board = NULL;
-BOARD_DATA *last_board = NULL;
+Board *first_board = NULL;
+Board *last_board = NULL;
 
-static bool is_note_to( const Character *ch, const NOTE_DATA *pnote );
-static void note_remove( BOARD_DATA *board, NOTE_DATA *pnote );
+static bool is_note_to( const Character *ch, const Note *pnote );
+static void note_remove( Board *board, Note *pnote );
 
-static bool can_remove( const Character *ch, const BOARD_DATA *board )
+static bool can_remove( const Character *ch, const Board *board )
 {
   /* If your trust is high enough, you can remove it. */
   if ( GetTrustLevel( ch ) >= board->min_remove_level )
@@ -52,7 +52,7 @@ static bool can_remove( const Character *ch, const BOARD_DATA *board )
   return false;
 }
 
-static bool can_read( const Character *ch, const BOARD_DATA *board )
+static bool can_read( const Character *ch, const Board *board )
 {
   /* If your trust is high enough, you can read it. */
   if ( GetTrustLevel( ch ) >= board->min_read_level )
@@ -79,7 +79,7 @@ static bool can_read( const Character *ch, const BOARD_DATA *board )
   return false;
 }
 
-static bool can_post( const Character *ch, const BOARD_DATA *board )
+static bool can_post( const Character *ch, const Board *board )
 {
   /* If your trust is high enough, you can post. */
   if ( GetTrustLevel( ch ) >= board->min_post_level )
@@ -104,7 +104,7 @@ static bool can_post( const Character *ch, const BOARD_DATA *board )
  */
 void write_boards_txt( void )
 {
-  const BOARD_DATA *tboard = NULL;
+  const Board *tboard = NULL;
   FILE *fpout = NULL;
   char filename[256];
 
@@ -137,9 +137,9 @@ void write_boards_txt( void )
   fclose( fpout );
 }
 
-BOARD_DATA *get_board( const OBJ_DATA *obj )
+Board *get_board( const OBJ_DATA *obj )
 {
-  BOARD_DATA *board = NULL;
+  Board *board = NULL;
 
   for ( board = first_board; board; board = board->next )
     {
@@ -152,7 +152,7 @@ BOARD_DATA *get_board( const OBJ_DATA *obj )
   return NULL;
 }
 
-static bool is_note_to( const Character *ch, const NOTE_DATA *pnote )
+static bool is_note_to( const Character *ch, const Note *pnote )
 {
   if ( !StrCmp( ch->name, pnote->sender ) )
     return true;
@@ -171,7 +171,7 @@ static bool is_note_to( const Character *ch, const NOTE_DATA *pnote )
 
 void note_attach( Character *ch )
 {
-  NOTE_DATA *pnote = NULL;
+  Note *pnote = NULL;
 
   if ( IsNpc( ch ) )
     return;
@@ -179,7 +179,7 @@ void note_attach( Character *ch )
   if ( ch->pcdata->pnote )
     return;
 
-  AllocateMemory( pnote, NOTE_DATA, 1 );
+  AllocateMemory( pnote, Note, 1 );
   pnote->sender = CopyString( ch->name );
   pnote->date           = CopyString( "" );
   pnote->to_list        = CopyString( "" );
@@ -188,11 +188,11 @@ void note_attach( Character *ch )
   ch->pcdata->pnote     = pnote;
 }
 
-void write_board( BOARD_DATA *board )
+void write_board( Board *board )
 {
   FILE *fp = NULL;
   char filename[256];
-  const NOTE_DATA *pnote = NULL;
+  const Note *pnote = NULL;
 
   /*
    * Rewrite entire list.
@@ -225,7 +225,7 @@ void write_board( BOARD_DATA *board )
 }
 
 
-void free_note( NOTE_DATA *pnote )
+void free_note( Note *pnote )
 {
   FreeMemory( pnote->text    );
   FreeMemory( pnote->subject );
@@ -245,7 +245,7 @@ void free_note( NOTE_DATA *pnote )
   FreeMemory( pnote );
 }
 
-static void note_remove( BOARD_DATA *board, NOTE_DATA *pnote )
+static void note_remove( Board *board, Note *pnote )
 {
   if ( !board )
     {
@@ -286,8 +286,8 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
 {
   char buf[MAX_STRING_LENGTH];
   char arg[MAX_INPUT_LENGTH];
-  NOTE_DATA  *pnote = NULL;
-  BOARD_DATA *board = NULL;
+  Note  *pnote = NULL;
+  Board *board = NULL;
   vnum_t vnum = INVALID_VNUM;
   int anum = 0;
   int first_list = 0;
@@ -916,7 +916,7 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
 
       strtime                           = ctime( &current_time );
       strtime[strlen(strtime)-1]        = '\0';
-      AllocateMemory( pnote, NOTE_DATA, 1 );
+      AllocateMemory( pnote, Note, 1 );
       pnote->date                       = CopyString( strtime );
 
       text = get_extra_descr( "_text_", paper->first_extradesc );
@@ -1084,9 +1084,9 @@ void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL )
 
 
 
-BOARD_DATA *read_board( char *boardfile, FILE *fp )
+Board *read_board( char *boardfile, FILE *fp )
 {
-  BOARD_DATA *board = NULL;
+  Board *board = NULL;
   char letter = '\0';
 
   do
@@ -1103,7 +1103,7 @@ BOARD_DATA *read_board( char *boardfile, FILE *fp )
 
   ungetc( letter, fp );
 
-  AllocateMemory( board, BOARD_DATA, 1 );
+  AllocateMemory( board, Board, 1 );
 
   for ( ; ; )
     {
@@ -1162,11 +1162,11 @@ BOARD_DATA *read_board( char *boardfile, FILE *fp )
   return board;
 }
 
-NOTE_DATA *read_note( const char *notefile, FILE *fp )
+Note *read_note( const char *notefile, FILE *fp )
 {
   for ( ; ; )
     {
-      NOTE_DATA *pnote = NULL;
+      Note *pnote = NULL;
       char letter = '\0';
       const char *word = NULL;
 
@@ -1184,7 +1184,7 @@ NOTE_DATA *read_note( const char *notefile, FILE *fp )
 
       ungetc( letter, fp );
 
-      AllocateMemory( pnote, NOTE_DATA, 1 );
+      AllocateMemory( pnote, Note, 1 );
 
       if ( StrCmp( ReadWord( fp ), "sender" ) )
         break;
@@ -1257,7 +1257,7 @@ NOTE_DATA *read_note( const char *notefile, FILE *fp )
 void load_boards( void )
 {
   FILE *board_fp = NULL;
-  BOARD_DATA *board = NULL;
+  Board *board = NULL;
   char boardfile[256];
 
   sprintf( boardfile, "%s%s", BOARD_DIR, BOARD_FILE );
@@ -1268,7 +1268,7 @@ void load_boards( void )
   while ( (board = read_board( boardfile, board_fp )) != NULL )
     {
       FILE *note_fp = NULL;
-      NOTE_DATA *pnote = NULL;
+      Note *pnote = NULL;
       char notefile[256];
 
       LINK( board, first_board, last_board, next, prev );
@@ -1288,8 +1288,8 @@ void load_boards( void )
 
 void mail_count(Character *ch)
 {
-  const BOARD_DATA *board = NULL;
-  const NOTE_DATA *note = NULL;
+  const Board *board = NULL;
+  const Note *note = NULL;
   int cnt = 0;
 
   for ( board = first_board; board; board = board->next )
@@ -1312,10 +1312,10 @@ void mail_count(Character *ch)
     }
 }
 
-BOARD_DATA *find_board( const Character *ch )
+Board *find_board( const Character *ch )
 {
   const OBJ_DATA *obj;
-  BOARD_DATA *board = NULL;
+  Board *board = NULL;
 
   for ( obj = ch->in_room->first_content; obj; obj = obj->next_content )
     {

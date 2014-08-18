@@ -2,7 +2,7 @@
 
 void do_bset( Character *ch, char *argument )
 {
-  BOARD_DATA *board = NULL;
+  Board *board = NULL;
   bool found = false;
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];

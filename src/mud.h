@@ -564,10 +564,10 @@ struct Missile
 /*
  * Data structure for notes.
  */
-struct note_data
+struct Note
 {
-  NOTE_DATA *next;
-  NOTE_DATA *prev;
+  Note *next;
+  Note *prev;
   char      *sender;
   char      *date;
   char      *to_list;
@@ -579,12 +579,12 @@ struct note_data
   char      *text;
 };
 
-struct board_data
+struct Board
 {
-  BOARD_DATA *next;                    /* Next board in list              */
-  BOARD_DATA *prev;                    /* Previous board in list          */
-  NOTE_DATA  *first_note;              /* First note on board             */
-  NOTE_DATA  *last_note;               /* Last note on board              */
+  Board *next;                    /* Next board in list              */
+  Board *prev;                    /* Previous board in list          */
+  Note  *first_note;              /* First note on board             */
+  Note  *last_note;               /* Last note on board              */
   char       *note_file;             /* Filename to save notes to       */
   char       *read_group;            /* Can restrict a board to a       */
   char       *post_group;            /* council, clan, guild etc        */
@@ -810,8 +810,8 @@ struct pc_data
   Alias *last_alias;
   Character  *pet;
   char       *target;
-  NOTE_DATA  *pnote;
-  NOTE_DATA  *comments;
+  Note  *pnote;
+  Note  *comments;
   short       clones;
   int         played;
   time_t      logon;
@@ -1579,8 +1579,8 @@ extern Character            *first_char;
 extern Character            *last_char;
 extern Descriptor      *first_descriptor;
 extern Descriptor      *last_descriptor;
-extern BOARD_DATA           *first_board;
-extern BOARD_DATA           *last_board;
+extern Board           *first_board;
+extern Board           *last_board;
 extern OBJ_DATA             *first_object;
 extern OBJ_DATA             *last_object;
 extern Clan            *first_clan;
@@ -2281,9 +2281,9 @@ extern "C" {
 
   /* boards.c */
   void load_boards( void );
-  BOARD_DATA *get_board( const OBJ_DATA *obj );
-  BOARD_DATA *find_board( const Character *ch );
-  void free_note( NOTE_DATA *pnote );
+  Board *get_board( const OBJ_DATA *obj );
+  Board *find_board( const Character *ch );
+  void free_note( Note *pnote );
   void write_boards_txt( void );
   void operate_on_note( Character *ch, char *arg_passed, bool IS_MAIL );
 

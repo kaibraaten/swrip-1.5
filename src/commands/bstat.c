@@ -2,7 +2,7 @@
 
 void do_bstat( Character *ch, char *argument )
 {
-  BOARD_DATA *board = NULL;
+  Board *board = NULL;
   bool found = false;
   char arg[MAX_INPUT_LENGTH];
 

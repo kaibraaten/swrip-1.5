@@ -67,14 +67,11 @@ typedef struct HelpFile               HelpFile;
 struct ProtoMobile;
 typedef struct ProtoMobile          ProtoMobile;
 
-struct note_data;
-typedef struct note_data               NOTE_DATA;
+struct Note;
+typedef struct Note                    Note;
 
-struct comment_data;
-typedef struct comment_data            COMMENT_DATA;
-
-struct board_data;
-typedef struct board_data              BOARD_DATA;
+struct Board;
+typedef struct Board                   Board;
 
 struct obj_data;
 typedef struct obj_data                OBJ_DATA;

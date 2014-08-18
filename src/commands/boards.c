@@ -2,7 +2,7 @@
 
 void do_boards( Character *ch, char *argument )
 {
-  BOARD_DATA *board = NULL;
+  Board *board = NULL;
 
   if ( !first_board )
     {

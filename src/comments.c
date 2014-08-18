@@ -24,7 +24,7 @@
 
 /*  INSTALLATION: 1) Add following stuff to mud.h
  *
- *  NOTE_DATA *      comments;   (* inside char_data definition *)
+ *  Note *      comments;   (* inside char_data definition *)
  *  DECLARE_DO_FUN( do_comment      );
  *
  *                2) Add do_comment to interp.c, as usual
@@ -58,7 +58,7 @@
 
 void note_attach(Character *ch);
 
-void comment_remove( Character *ch, Character *victim, NOTE_DATA *pnote )
+void comment_remove( Character *ch, Character *victim, Note *pnote )
 {
   if ( IsNpc( victim ) )
     {
@@ -103,7 +103,7 @@ void do_comment( Character *ch, char *argument )
   char buf[MAX_STRING_LENGTH];
   char arg[MAX_INPUT_LENGTH];
   char arg1[MAX_INPUT_LENGTH];
-  NOTE_DATA *pnote = NULL;
+  Note *pnote = NULL;
   Character *victim = NULL;
   int noteNumber = 0;
   int anum = 0;
@@ -482,7 +482,7 @@ void do_comment( Character *ch, char *argument )
 
 void fwrite_comments( Character *ch, FILE *fp )
 {
-  NOTE_DATA *pnote = NULL;
+  Note *pnote = NULL;
 
   if( !ch->pcdata || !ch->pcdata->comments)
     return;
@@ -500,7 +500,7 @@ void fwrite_comments( Character *ch, FILE *fp )
 
 void fread_comment( Character *ch, FILE *fp )
 {
-  NOTE_DATA *pnote;
+  Note *pnote;
 
   if( IsNpc( ch ) )
     return;
@@ -521,7 +521,7 @@ void fread_comment( Character *ch, FILE *fp )
       while ( isspace(letter) );
       ungetc( letter, fp );
 
-      AllocateMemory( pnote, NOTE_DATA, 1 );
+      AllocateMemory( pnote, Note, 1 );
 
       if ( StrCmp( ReadWord( fp ), "sender" ) )
         break;

@@ -2542,7 +2542,7 @@ void free_char( Character *ch )
   Affect *paf;
   TIMER *timer;
   MPROG_ACT_LIST *mpact, *mpact_next;
-  NOTE_DATA *comments, *comments_next;
+  Note *comments, *comments_next;
 
   if ( !ch )
     {

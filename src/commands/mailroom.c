@@ -4,7 +4,7 @@
 
 void do_mailroom(Character *ch, char *argument)
 {
-  BOARD_DATA *board;
+  Board *board;
   char arg[MAX_STRING_LENGTH];
   char arg_passed[MAX_STRING_LENGTH];
 
