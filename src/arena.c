@@ -90,9 +90,9 @@ void StartArena(void)
             }
 
           sprintf(buf1, "%sType &Rarena &Wto enter.\r\n", buf1);
-          to_channel(buf1,CHANNEL_ARENA,"&RArena&W",arena.lo_lim);
+          ToChannel(buf1,CHANNEL_ARENA,"&RArena&W",arena.lo_lim);
           sprintf(buf2,"%sPlace your bets!!!\r\n",buf2);
-          to_channel(buf2,CHANNEL_ARENA,"&RArena&W",5);
+          ToChannel(buf2,CHANNEL_ARENA,"&RArena&W",5);
           arena.time_to_start--;
         }
     }
@@ -118,7 +118,7 @@ void StartArena(void)
 	      sprintf(buf1, "The duel will start in 1 hour. Place your bets!");
 	    }
 
-	  to_channel(buf1,CHANNEL_ARENA,"&RArena&W",5);
+	  ToChannel(buf1,CHANNEL_ARENA,"&RArena&W",5);
 	  arena.time_to_start--;
 	}
     }
@@ -176,19 +176,19 @@ void UpdateArena(void)
     {
       sprintf(buf, "With %d hours left in the game there are %d players left.",
               arena.time_left_in_game, CharactersInArena());
-      to_channel(buf,CHANNEL_ARENA,"&RArena&W",5);
+      ToChannel(buf,CHANNEL_ARENA,"&RArena&W",5);
     }
   else if(arena.time_left_in_game == 1)
     {
       sprintf(buf, "With 1 hour left in the game there are %d players left.",
               CharactersInArena());
-      to_channel(buf,CHANNEL_ARENA,"&RArena&W",5);
+      ToChannel(buf,CHANNEL_ARENA,"&RArena&W",5);
     }
   else if(arena.time_left_in_game <= 4)
     {
       sprintf(buf, "With %d hours left in the game there are %d players left.",
               arena.time_left_in_game, CharactersInArena());
-      to_channel(buf,CHANNEL_ARENA,"&RArena&W",5);
+      ToChannel(buf,CHANNEL_ARENA,"&RArena&W",5);
     }
 
   arena.time_left_in_game--;
@@ -224,13 +224,13 @@ static void FindGameWinner(void)
               if(arena.time_left_in_game == 1)
                 {
                   sprintf(buf, "After 1 hour of battle %s is declared the winner",i->name);
-                  to_channel(buf,CHANNEL_ARENA,"&RArena&W",5);
+                  ToChannel(buf,CHANNEL_ARENA,"&RArena&W",5);
                 }
               else
                 {
                   sprintf(buf, "After %d hours of battle %s is declared the winner",
                           arena.game_length - arena.time_left_in_game, i->name);
-                  to_channel(buf,CHANNEL_ARENA,"&RArena&W",5);
+                  ToChannel(buf,CHANNEL_ARENA,"&RArena&W",5);
                 }
 
               i->gold += arena.arena_pot/2;
@@ -271,7 +271,7 @@ static void ShowJackpot(void)
   sprintf(buf1, "%sThe jack pot for this arena is %d credits\r\n",
           buf1, arena.arena_pot);
   sprintf(buf1, "%s%d credits have been bet on this arena.\r\n",buf1, arena.bet_pot);
-  to_channel(buf1,CHANNEL_ARENA,"&RArena&W",5);
+  ToChannel(buf1,CHANNEL_ARENA,"&RArena&W",5);
 }
 
 static void SilentEnd(void)
@@ -288,7 +288,7 @@ static void SilentEnd(void)
   arena.arena_pot = 0;
   arena.bet_pot = 0;
   sprintf(buf, "It looks like no one was brave enough to enter the Arena.");
-  to_channel(buf,CHANNEL_ARENA,"&RArena&W",5);
+  ToChannel(buf,CHANNEL_ARENA,"&RArena&W",5);
   ResetBets();
 }
 
@@ -324,7 +324,7 @@ static void DoEndGame(void)
     }
 
   sprintf(buf, "After %d hours of battle the Match is a draw",arena.game_length);
-  to_channel(buf,CHANNEL_ARENA,"&RArena&W",5);
+  ToChannel(buf,CHANNEL_ARENA,"&RArena&W",5);
   arena.time_left_in_game = 0;
   arena.ppl_in_arena=0;
   arena.ppl_challenged = 0;

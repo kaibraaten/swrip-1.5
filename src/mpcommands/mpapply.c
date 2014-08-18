@@ -39,6 +39,6 @@ void do_mpapply( Character *ch, char *argument )
            victim->name, victim->desc->remote.hostname,
            RaceTable[victim->race].race_name);
   log_string( log_buf );
-  to_channel( log_buf, CHANNEL_MONITOR, "Monitor", LEVEL_IMMORTAL );
+  ToChannel( log_buf, CHANNEL_MONITOR, "Monitor", LEVEL_IMMORTAL );
   victim->pcdata->auth_state = 1;
 }

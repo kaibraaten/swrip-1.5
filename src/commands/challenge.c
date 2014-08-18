@@ -71,6 +71,6 @@ void do_challenge(Character *ch, char *argument)
   send_to_char(buf,victim);
   send_to_char("&WPlease either accept or decline the challenge.\r\n\r\n",victim);
   sprintf(buf,"%s has challenged %s to a dual!!\r\n",ch->name,victim->name);
-  to_channel(buf,CHANNEL_ARENA,"&RArena&W",5);
+  ToChannel(buf,CHANNEL_ARENA,"&RArena&W",5);
   victim->challenged = ch;
 }

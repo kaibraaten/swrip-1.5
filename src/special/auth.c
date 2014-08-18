@@ -41,7 +41,7 @@ bool spec_auth( Character *ch )
       victim->pcdata->authed_by = CopyString( ch->name );
       sprintf( buf, "%s authorized %s", ch->name,
                victim->name );
-      to_channel( buf, CHANNEL_MONITOR, "Monitor", ch->top_level );
+      ToChannel( buf, CHANNEL_MONITOR, "Monitor", ch->top_level );
     }
 
   return false;

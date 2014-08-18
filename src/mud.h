@@ -2220,17 +2220,16 @@ extern "C" {
   /* copyover.c */
   void RecoverFromCopyover( void );
 
-  /* to_channel */
   bool IsNameAcceptable( const char *name );
   char *DrunkSpeech( const char *argument, Character *ch );
-  void TalkToChannel( Character *ch, const char *argument,
+  void TalkChannel( Character *ch, const char *argument,
 		     int channel, const char *verb );
   bool IsFollowingInCircle( const Character *ch, const Character *victim );
   void StartFollowing( Character *ch, Character *master );
   void StopFollowing( Character *ch );
   void DieFollower( Character *ch );
   bool IsInSameGroup( const Character *ach, const Character *bch );
-  void to_channel( const char *argument, int channel,
+  void ToChannel( const char *argument, int channel,
 		   const char *verb, short level );
   void talk_auction( const char *argument );
   bool knows_language( const Character *ch, int language, const Character *cch );

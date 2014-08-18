@@ -9,5 +9,5 @@ void do_avtalk( Character *ch, char *argument )
       return;
     }
 
-  TalkToChannel( ch, DrunkSpeech( argument, ch ), CHANNEL_AVTALK, "avtalk" );
+  TalkChannel( ch, DrunkSpeech( argument, ch ), CHANNEL_AVTALK, "avtalk" );
 }

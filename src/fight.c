@@ -1441,7 +1441,7 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
           victim->mana = victim->max_mana;
           victim->move = victim->max_move;
           sprintf(buf,"%s is out of the fight.",victim->name);
-          to_channel(buf,CHANNEL_ARENA,"&RArena&W",5);
+          ToChannel(buf,CHANNEL_ARENA,"&RArena&W",5);
           stop_fighting(victim, true);
 
         }
@@ -1631,7 +1631,7 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
                    (IsNpc(ch) ? ch->short_descr : ch->name),
                    victim->in_room->vnum );
           log_string( log_buf );
-          to_channel( log_buf, CHANNEL_MONITOR, "Monitor", LEVEL_IMMORTAL );
+          ToChannel( log_buf, CHANNEL_MONITOR, "Monitor", LEVEL_IMMORTAL );
 
         }
       else

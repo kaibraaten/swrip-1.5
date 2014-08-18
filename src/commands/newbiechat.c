@@ -9,5 +9,5 @@ void do_newbiechat( Character *ch, char *argument )
       return;
     }
 
-  TalkToChannel( ch, argument, CHANNEL_NEWBIE, "newbiechat" );
+  TalkChannel( ch, argument, CHANNEL_NEWBIE, "newbiechat" );
 }

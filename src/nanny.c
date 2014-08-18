@@ -337,7 +337,7 @@ static void nanny_get_old_password( Descriptor *d, char *argument )
 
   if ( ch->top_level < LEVEL_CREATOR )
     {
-      /*to_channel( log_buf, CHANNEL_MONITOR, "Monitor", ch->top_level );*/
+      /*ToChannel( log_buf, CHANNEL_MONITOR, "Monitor", ch->top_level );*/
       log_string_plus( log_buf, LOG_COMM, sysdata.log_level );
     }
   else
@@ -670,7 +670,7 @@ static void nanny_stats_ok( Descriptor *d, char *argument )
   sprintf( log_buf, "%s@%s new %s.", ch->name, d->remote.hostname,
 	   RaceTable[ch->race].race_name);
   log_string_plus( log_buf, LOG_COMM, sysdata.log_level);
-  to_channel( log_buf, CHANNEL_MONITOR, "Monitor", LEVEL_IMMORTAL );
+  ToChannel( log_buf, CHANNEL_MONITOR, "Monitor", LEVEL_IMMORTAL );
   write_to_buffer( d, "Press [ENTER] ", 0 );
   write_to_buffer( d, "Press enter...\r\n", 0 );
 

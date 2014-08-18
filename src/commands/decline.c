@@ -9,7 +9,7 @@ void do_decline(Character *ch, char *argument)
   if (ch->challenged)
     {
       sprintf(buf,"%s has DECLINED %s's challenge! WHAT A WUSS!!!\r\n",ch->name,ch->challenged->name);
-      to_channel(buf,CHANNEL_ARENA,"&RArena&W",5);
+      ToChannel(buf,CHANNEL_ARENA,"&RArena&W",5);
       ch->challenged=NULL;
       return;
     }

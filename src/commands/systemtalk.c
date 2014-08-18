@@ -12,5 +12,5 @@ void do_systemtalk( Character *ch, char *argument )
       return;
     }
 
-  TalkToChannel( ch, argument, CHANNEL_SYSTEM, "systemtalk" );
+  TalkChannel( ch, argument, CHANNEL_SYSTEM, "systemtalk" );
 }

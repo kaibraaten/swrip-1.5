@@ -178,7 +178,7 @@ char *DrunkSpeech( const char *argument, Character *ch )
 /*
  * Generic channel function.
  */
-void TalkToChannel( Character *ch, const char *argument, int channel, const char *verb )
+void TalkChannel( Character *ch, const char *argument, int channel, const char *verb )
 {
   char buf[MAX_STRING_LENGTH];
   char buf2[MAX_STRING_LENGTH];
@@ -468,7 +468,7 @@ void TalkToChannel( Character *ch, const char *argument, int channel, const char
     }
 }
 
-void to_channel( const char *argument, int channel, const char *verb, short level )
+void ToChannel( const char *argument, int channel, const char *verb, short level )
 {
   char buf[MAX_STRING_LENGTH];
   Descriptor *d;
@@ -480,23 +480,23 @@ void to_channel( const char *argument, int channel, const char *verb, short leve
 
   for ( d = first_descriptor; d; d = d->next )
     {
-      Character *och;
-      Character *vch;
-
-      och = d->original ? d->original : d->character;
-      vch = d->character;
+      Character *och = d->original ? d->original : d->character;
+      Character *vch = d->character;
 
       if ( !och || !vch )
         continue;
+
       if ( ( !IsImmortal(vch) && channel != CHANNEL_ARENA )
            || ( vch->top_level < sysdata.build_level && channel == CHANNEL_BUILD )
            || ( vch->top_level < sysdata.log_level
                 && ( channel == CHANNEL_LOG || channel == CHANNEL_COMM) ) )
-        continue;
+	{
+	  continue;
+	}
 
       if ( d->connection_state == CON_PLAYING
-           &&  !IsBitSet(och->deaf, channel)
-           &&   vch->top_level >= level )
+           && !IsBitSet(och->deaf, channel)
+           && vch->top_level >= level )
         {
           set_char_color( AT_LOG, vch );
           send_to_char( buf, vch );
@@ -626,16 +626,18 @@ void talk_auction (const char *argument)
 {
   Descriptor *d;
   char buf[MAX_STRING_LENGTH];
-  Character *original;
 
   sprintf (buf,"Auction: %s", argument); /* last %s to reset color */
 
   for (d = first_descriptor; d; d = d->next)
     {
-      original = d->original ? d->original : d->character; /* if switched */
+      Character *original = d->original ? d->original : d->character; /* if switched */
+
       if ((d->connection_state == CON_PLAYING) && !IsBitSet(original->deaf,CHANNEL_AUCTION)
           && !IsBitSet(original->in_room->room_flags, ROOM_SILENCE) && IsAuthed(original))
-        act( AT_GOSSIP, buf, original, NULL, NULL, TO_CHAR );
+	{
+	  act( AT_GOSSIP, buf, original, NULL, NULL, TO_CHAR );
+	}
     }
 }
 

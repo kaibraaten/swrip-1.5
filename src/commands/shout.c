@@ -9,6 +9,6 @@ void do_shout( Character *ch, char *argument )
       return;
     }
 
-  TalkToChannel( ch, DrunkSpeech( argument, ch ), CHANNEL_SHOUT, "shout" );
+  TalkChannel( ch, DrunkSpeech( argument, ch ), CHANNEL_SHOUT, "shout" );
   SetWaitState( ch, 12 );
 }

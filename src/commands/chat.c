@@ -11,5 +11,5 @@ void do_chat( Character *ch, char *argument )
 
   ch->gold -= 1;
 
-  TalkToChannel( ch, argument, CHANNEL_CHAT, "chat" );
+  TalkChannel( ch, argument, CHANNEL_CHAT, "chat" );
 }

@@ -798,7 +798,7 @@ void new_descriptor( socket_t new_desc )
       sysdata.alltimemax = sysdata.maxplayers;
       sprintf( log_buf, "Broke all-time maximum player record: %d", sysdata.alltimemax );
       log_string_plus( log_buf, LOG_COMM, sysdata.log_level );
-      to_channel( log_buf, CHANNEL_MONITOR, "Monitor", LEVEL_IMMORTAL );
+      ToChannel( log_buf, CHANNEL_MONITOR, "Monitor", LEVEL_IMMORTAL );
       save_sysdata( sysdata );
     }
   set_alarm(0);
@@ -912,7 +912,7 @@ void close_socket( Descriptor *dclose, bool force )
       log_string_plus( log_buf, LOG_COMM, umax( sysdata.log_level, ch->top_level ) );
       /*
         if ( ch->top_level < LEVEL_CREATOR )
-        to_channel( log_buf, CHANNEL_MONITOR, "Monitor", ch->top_level );
+        ToChannel( log_buf, CHANNEL_MONITOR, "Monitor", ch->top_level );
       */
       if ( dclose->connection_state == CON_PLAYING
            ||   dclose->connection_state == CON_EDITING )

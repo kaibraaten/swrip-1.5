@@ -42,7 +42,7 @@ void do_authorize( Character *ch, char *argument )
       victim->pcdata->authed_by = CopyString( ch->name );
       sprintf( buf, "%s authorized %s", ch->name,
                victim->name );
-      to_channel( buf, CHANNEL_MONITOR, "Monitor", ch->top_level );
+      ToChannel( buf, CHANNEL_MONITOR, "Monitor", ch->top_level );
       ch_printf( ch, "You have authorized %s.\r\n", victim->name);
 
       /* Below sends a message to player when name is accepted - Brittany   */
@@ -57,7 +57,7 @@ void do_authorize( Character *ch, char *argument )
       send_to_char( "You have been denied access.\r\n", victim);
       sprintf( buf, "%s denied authorization to %s", ch->name,
                victim->name );
-      to_channel( buf, CHANNEL_MONITOR, "Monitor", ch->top_level );
+      ToChannel( buf, CHANNEL_MONITOR, "Monitor", ch->top_level );
       ch_printf( ch, "You have denied %s.\r\n", victim->name);
       do_quit(victim, "");
     }
@@ -66,7 +66,7 @@ void do_authorize( Character *ch, char *argument )
     {
       sprintf( buf, "%s has denied %s's name", ch->name,
                victim->name );
-      to_channel( buf, CHANNEL_MONITOR, "Monitor", ch->top_level );
+      ToChannel( buf, CHANNEL_MONITOR, "Monitor", ch->top_level );
       ch_printf (victim,
                  "The MUD Administrators have found the name %s "
                  "to be unacceptable.\r\n"

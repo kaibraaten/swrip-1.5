@@ -2862,18 +2862,18 @@ void log_string_plus( const char *str, short log_type, short level )
   switch( log_type )
     {
     case LOG_BUILD:
-      to_channel( buf, CHANNEL_BUILD, "Build", level );
+      ToChannel( buf, CHANNEL_BUILD, "Build", level );
       break;
 
     case LOG_COMM:
-      to_channel( buf, CHANNEL_COMM, "Comm", level );
+      ToChannel( buf, CHANNEL_COMM, "Comm", level );
       break;
 
     case LOG_ALL:
       break;
 
     default:
-      /* to_channel( str + offset, CHANNEL_LOG, "Log", level ); */
+      /* ToChannel( str + offset, CHANNEL_LOG, "Log", level ); */
       lognone = true;
       break;
     }

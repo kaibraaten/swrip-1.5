@@ -9,5 +9,5 @@ void do_immtalk( Character *ch, char *argument )
       return;
     }
 
-  TalkToChannel( ch, argument, CHANNEL_IMMTALK, "immtalk" );
+  TalkChannel( ch, argument, CHANNEL_IMMTALK, "immtalk" );
 }

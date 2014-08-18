@@ -81,7 +81,7 @@ void do_quit( Character *ch, char *argument )
     {
       sprintf(qbuf,"%s has quit! Challenge is void. WHAT A WUSS!",ch->name);
       ch->challenged=NULL;
-      to_channel(qbuf,CHANNEL_ARENA,"&RArena&W",5);
+      ToChannel(qbuf,CHANNEL_ARENA,"&RArena&W",5);
     }
 
   set_char_color( AT_WHITE, ch );

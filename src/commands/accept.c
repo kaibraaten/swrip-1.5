@@ -37,7 +37,7 @@ void do_accept(Character *ch, char *argument)
         }
 
       sprintf(buf,"%s has accepted %s's challenge!\r\n",ch->name,dch->name);
-      to_channel(buf,CHANNEL_ARENA,"&RArena&W",5);
+      ToChannel(buf,CHANNEL_ARENA,"&RArena&W",5);
       ch->challenged = NULL;
       ch->retran = ch->in_room->vnum;
       char_from_room(ch);

@@ -14,5 +14,5 @@ void do_clantalk( Character *ch, char *argument )
       send_to_char( "Huh?\r\n", ch );
       return;
     }
-  TalkToChannel( ch, argument, CHANNEL_CLAN, "clantalk" );
+  TalkChannel( ch, argument, CHANNEL_CLAN, "clantalk" );
 }

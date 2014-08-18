@@ -47,7 +47,7 @@ void do_arena(Character *ch, char *argument)
       send_to_char("You have been taken to the killing fields\r\n",ch);
       do_look(ch, "auto");
       sprintf(buf, "%s has joined the blood bath.", ch->name);
-      to_channel(buf,CHANNEL_ARENA,"&RArena&W",5);
+      ToChannel(buf,CHANNEL_ARENA,"&RArena&W",5);
       send_to_char(buf, ch);
       ch->hit = ch->max_hit;
       ch->mana = ch->max_mana;

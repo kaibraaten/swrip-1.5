@@ -9,5 +9,5 @@ void do_wartalk( Character *ch, char *argument )
       return;
     }
 
-  TalkToChannel( ch, argument, CHANNEL_WARTALK, "war" );
+  TalkChannel( ch, argument, CHANNEL_WARTALK, "war" );
 }

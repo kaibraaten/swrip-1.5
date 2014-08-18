@@ -12,5 +12,5 @@ void do_shiptalk( Character *ch, char *argument )
       return;
     }
 
-  TalkToChannel( ch, argument, CHANNEL_SHIP, "shiptalk" );
+  TalkChannel( ch, argument, CHANNEL_SHIP, "shiptalk" );
 }

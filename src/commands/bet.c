@@ -78,6 +78,6 @@ void do_bet(Character *ch, char *argument)
       send_to_char(buf, ch);
       sprintf(buf,"%s has placed %d credits on %s.", ch->name,
               newbet, ch->betted_on->name);
-      to_channel(buf,CHANNEL_ARENA,"&RArena&W",5);
+      ToChannel(buf,CHANNEL_ARENA,"&RArena&W",5);
     }
 }
