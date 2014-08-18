@@ -26,7 +26,7 @@ bool spec_newbie_pilot( Character *ch )
         continue;
 
       strcpy( buf, "After a brief journey you arrive at Coruscant's Manari Spaceport.\r\n\r\n" );
-      echo_to_room( AT_ACTION , ch->in_room, buf );
+      EchoToRoom( AT_ACTION , ch->in_room, buf );
 
       char_from_room( victim );
       char_to_room( victim, get_room_index( ROOM_START_PLAYER ) );
@@ -34,7 +34,7 @@ bool spec_newbie_pilot( Character *ch )
       do_look( victim , "" );
 
       sprintf( buf, "%s steps out and the shuttle quickly returns to the academy.\r\n", victim->name );
-      echo_to_room( AT_ACTION , ch->in_room, buf );
+      EchoToRoom( AT_ACTION , ch->in_room, buf );
     }
 
   return false;

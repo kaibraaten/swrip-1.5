@@ -16,7 +16,7 @@ void do_at( Character *ch, char *argument )
       return;
     }
 
-  if ( ( location = find_location( ch, arg ) ) == NULL )
+  if ( ( location = FindLocation( ch, arg ) ) == NULL )
     {
       send_to_char( "No such location.\r\n", ch );
       return;

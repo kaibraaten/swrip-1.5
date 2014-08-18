@@ -15,7 +15,7 @@ void do_rdelete( Character *ch, char *argument )
     }
 
   /* Find the room. */
-  if ( ( location = find_location( ch, arg ) ) == NULL )
+  if ( ( location = FindLocation( ch, arg ) ) == NULL )
     {
       send_to_char( "No such location.\r\n", ch );
       return;

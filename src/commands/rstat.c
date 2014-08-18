@@ -58,7 +58,7 @@ void do_rstat( Character *ch, char *argument )
       return;
     }
 
-  location = ( arg[0] == '\0' ) ? ch->in_room : find_location( ch, arg );
+  location = ( arg[0] == '\0' ) ? ch->in_room : FindLocation( ch, arg );
 
   if ( !location )
     {

@@ -56,7 +56,7 @@ void do_mptransfer( Character *ch, char *argument )
     }
   else
     {
-      if ( ( location = find_location( ch, arg2 ) ) == NULL )
+      if ( ( location = FindLocation( ch, arg2 ) ) == NULL )
         {
           progbug( "Mptransfer - No such location", ch );
           return;

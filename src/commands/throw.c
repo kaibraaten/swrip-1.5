@@ -214,7 +214,7 @@ void do_throw( Character *ch, char *argument )
   obj = obj_to_room( obj, ch->in_room );
 
   if ( obj->item_type != ITEM_GRENADE )
-    damage_obj ( obj );
+    DamageObject ( obj );
 
   /* NOT NEEDED UNLESS REFERING TO OBJECT AGAIN
 

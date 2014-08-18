@@ -63,26 +63,34 @@ void echo_to_all( short AT_COLOR, const char *argument, short tar )
     }
 }
 
-void echo_to_room( short AT_COLOR, Room *room, const char *argument )
+void EchoToRoom( short AT_COLOR, Room *room, const char *argument )
 {
-  Character *vic;
+  RealEchoToRoom( AT_COLOR, room, argument, true );
+}
+
+void RealEchoToRoom( short color, Room *room, const char *text, bool sendNewline )
+{
+  Character *vic = NULL;
 
   if ( room == NULL )
     return;
 
-
   for ( vic = room->first_person; vic; vic = vic->next_in_room )
     {
-      set_char_color( AT_COLOR, vic );
-      send_to_char( argument, vic );
-      send_to_char( "\r\n",   vic );
+      set_char_color( color, vic );
+      ch_printf( vic, text );
+
+      if( sendNewline )
+	{
+	  ch_printf( vic, "\r\n" );
+	}
     }
 }
 
-Room *find_location( Character *ch, char *arg )
+Room *FindLocation( const Character *ch, const char *arg )
 {
-  Character *victim;
-  Object *obj;
+  const Character *victim = NULL;
+  const Object *obj = NULL;
 
   if ( IsNumber(arg) )
     return get_room_index( atoi( arg ) );
@@ -96,53 +104,7 @@ Room *find_location( Character *ch, char *arg )
   return NULL;
 }
 
-/*
- * Find the position of a target substring in a source string.
- * Returns pointer to the first occurrence of the string pointed to
- * bstr in the string pointed to by astr. It returns a null pointer
- * if no match is found.  --  Gorog (with help from Thoric)
- *
- * Note I made a change when modifying StringInfix. If the target string is
- * null, I return NULL (meaning no match was found). StringInfix returns
- * false (meaning a match was found).  *grumble*
- */
-static const char *str_str( const char *astr, const char *bstr )
-{
-  int sstr1, sstr2, ichar;
-  char c0;
-
-  if ( ( c0 = CharToLowercase(bstr[0]) ) == '\0' )
-    return NULL;
-
-  sstr1 = strlen(astr);
-  sstr2 = strlen(bstr);
-
-  for ( ichar = 0; ichar <= sstr1 - sstr2; ichar++ )
-    if ( c0 == CharToLowercase(astr[ichar]) && !StringPrefix(bstr, astr+ichar) )
-      return (astr+ichar);
-
-  return NULL;
-}
-
-/*
- * Counts the number of times a target string occurs in a source string.
- * case insensitive -- Gorog
- */
-int str_count(const char *psource, const char *ptarget)
-{
-  const char *ptemp = psource;
-  int count=0;
-
-  while ( (ptemp = str_str(ptemp, ptarget)) )
-    {
-      ptemp++;
-      count++;
-    }
-
-  return count;
-}
-
-void save_banlist( void )
+void SaveBanlist( void )
 {
   Ban *pban;
   FILE *fp;
@@ -164,7 +126,7 @@ void save_banlist( void )
 /*
  * This could have other applications too.. move if needed. -- Altrag
  */
-void close_area( Area *pArea )
+void CloseArea( Area *pArea )
 {
   Character *ech;
   Character *ech_next;
@@ -240,7 +202,7 @@ void close_area( Area *pArea )
           FreeMemory(rid->description);
           if ( rid->first_person )
             {
-              bug( "close_area: room with people #%d", rid->vnum );
+              bug( "CloseArea: room with people #%d", rid->vnum );
               for ( ech = rid->first_person; ech; ech = ech_next )
                 {
                   ech_next = ech->next_in_room;
@@ -254,7 +216,7 @@ void close_area( Area *pArea )
             }
           if ( rid->first_content )
             {
-              bug( "close_area: room with contents #%d", rid->vnum );
+              bug( "CloseArea: room with contents #%d", rid->vnum );
               for ( eobj = rid->first_content; eobj; eobj = eobj_next )
                 {
                   eobj_next = eobj->next_content;

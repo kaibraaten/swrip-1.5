@@ -216,7 +216,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
   /* currently cannot have a light in non-light position */
   if ( obj->item_type == ITEM_LIGHT )
     {
-      if ( !remove_obj( ch, WEAR_LIGHT, fReplace ) )
+      if ( !RemoveObject( ch, WEAR_LIGHT, fReplace ) )
         return;
       if ( !oprog_use_trigger( ch, obj, NULL, NULL, NULL ) )
         {
@@ -251,8 +251,8 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
     case ITEM_WEAR_FINGER:
       if ( GetEquipmentOnCharacter( ch, WEAR_FINGER_L )
            &&   GetEquipmentOnCharacter( ch, WEAR_FINGER_R )
-           &&   !remove_obj( ch, WEAR_FINGER_L, fReplace )
-           &&   !remove_obj( ch, WEAR_FINGER_R, fReplace ) )
+           &&   !RemoveObject( ch, WEAR_FINGER_L, fReplace )
+           &&   !RemoveObject( ch, WEAR_FINGER_R, fReplace ) )
         return;
 
       if ( !GetEquipmentOnCharacter( ch, WEAR_FINGER_L ) )
@@ -297,8 +297,8 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
     case ITEM_WEAR_NECK:
       if ( GetEquipmentOnCharacter( ch, WEAR_NECK_1 ) != NULL
            &&   GetEquipmentOnCharacter( ch, WEAR_NECK_2 ) != NULL
-           &&   !remove_obj( ch, WEAR_NECK_1, fReplace )
-           &&   !remove_obj( ch, WEAR_NECK_2, fReplace ) )
+           &&   !RemoveObject( ch, WEAR_NECK_1, fReplace )
+           &&   !RemoveObject( ch, WEAR_NECK_2, fReplace ) )
         return;
 
       if ( !GetEquipmentOnCharacter( ch, WEAR_NECK_1 ) )
@@ -341,7 +341,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
 
     case ITEM_WEAR_BODY:
       /*
-        if ( !remove_obj( ch, WEAR_BODY, fReplace ) )
+        if ( !RemoveObject( ch, WEAR_BODY, fReplace ) )
         return;
       */
       if ( !can_layer( ch, obj, WEAR_BODY ) )
@@ -369,7 +369,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
           send_to_char( "You cant wear anything on your head.\r\n", ch );
           return;
         }
-      if ( !remove_obj( ch, WEAR_HEAD, fReplace ) )
+      if ( !RemoveObject( ch, WEAR_HEAD, fReplace ) )
         return;
       if ( !oprog_use_trigger( ch, obj, NULL, NULL, NULL ) )
         {
@@ -386,7 +386,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
       return;
 
     case ITEM_WEAR_EYES:
-      if ( !remove_obj( ch, WEAR_EYES, fReplace ) )
+      if ( !RemoveObject( ch, WEAR_EYES, fReplace ) )
         return;
       if ( !oprog_use_trigger( ch, obj, NULL, NULL, NULL ) )
         {
@@ -408,7 +408,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
           send_to_char( "What ears?.\r\n", ch );
           return;
         }
-      if ( !remove_obj( ch, WEAR_EARS, fReplace ) )
+      if ( !RemoveObject( ch, WEAR_EARS, fReplace ) )
         return;
       if ( !oprog_use_trigger( ch, obj, NULL, NULL, NULL ) )
         {
@@ -427,7 +427,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
 
     case ITEM_WEAR_LEGS:
       /*
-        if ( !remove_obj( ch, WEAR_LEGS, fReplace ) )
+        if ( !RemoveObject( ch, WEAR_LEGS, fReplace ) )
         return;
       */
       if ( ch->race == RACE_HUTT )
@@ -456,7 +456,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
 
     case ITEM_WEAR_FEET:
       /*
-        if ( !remove_obj( ch, WEAR_FEET, fReplace ) )
+        if ( !RemoveObject( ch, WEAR_FEET, fReplace ) )
         return;
       */
       if ( ch->race == RACE_HUTT )
@@ -485,7 +485,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
 
     case ITEM_WEAR_HANDS:
       /*
-        if ( !remove_obj( ch, WEAR_HANDS, fReplace ) )
+        if ( !RemoveObject( ch, WEAR_HANDS, fReplace ) )
         return;
       */
       if ( !can_layer( ch, obj, WEAR_HANDS ) )
@@ -529,7 +529,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
 
     case ITEM_WEAR_ABOUT:
       /*
-        if ( !remove_obj( ch, WEAR_ABOUT, fReplace ) )
+        if ( !RemoveObject( ch, WEAR_ABOUT, fReplace ) )
         return;
       */
       if ( !can_layer( ch, obj, WEAR_ABOUT ) )
@@ -574,8 +574,8 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
     case ITEM_WEAR_WRIST:
       if ( GetEquipmentOnCharacter( ch, WEAR_WRIST_L )
            &&   GetEquipmentOnCharacter( ch, WEAR_WRIST_R )
-           &&   !remove_obj( ch, WEAR_WRIST_L, fReplace )
-           &&   !remove_obj( ch, WEAR_WRIST_R, fReplace ) )
+           &&   !RemoveObject( ch, WEAR_WRIST_L, fReplace )
+           &&   !RemoveObject( ch, WEAR_WRIST_R, fReplace ) )
         return;
 
       if ( !GetEquipmentOnCharacter( ch, WEAR_WRIST_L ) )
@@ -621,7 +621,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
       return;
 
     case ITEM_WEAR_SHIELD:
-      if ( !remove_obj( ch, WEAR_SHIELD, fReplace ) )
+      if ( !RemoveObject( ch, WEAR_SHIELD, fReplace ) )
         return;
       if ( !oprog_use_trigger( ch, obj, NULL, NULL, NULL ) )
         {
@@ -706,7 +706,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
           send_to_char( "You cannot hold something AND two weapons!\r\n", ch );
           return;
         }
-      if ( !remove_obj( ch, WEAR_HOLD, fReplace ) )
+      if ( !RemoveObject( ch, WEAR_HOLD, fReplace ) )
         return;
       if ( obj->item_type == ITEM_DEVICE
            || obj->item_type == ITEM_GRENADE
@@ -745,7 +745,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
       oprog_wear_trigger( ch, obj );
       return;
     case ITEM_WEAR_OVER:
-      if ( !remove_obj( ch, WEAR_OVER, fReplace ) )
+      if ( !RemoveObject( ch, WEAR_OVER, fReplace ) )
         return;
       if ( !oprog_use_trigger( ch, obj, NULL, NULL, NULL ) )
         {

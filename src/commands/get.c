@@ -400,7 +400,7 @@ static void get_obj( Character *ch, Object *obj, Object *container )
        && (!container || container->carried_by == NULL) )
     for ( clan = first_clan; clan; clan = clan->next )
       if ( clan->storeroom == ch->in_room->vnum )
-        save_clan_storeroom(ch, clan);
+        SaveClanStoreroom(ch, clan);
 
   if ( obj->item_type != ITEM_CONTAINER )
     check_for_trap( ch, obj, TRAP_GET );

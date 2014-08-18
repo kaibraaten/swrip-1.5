@@ -28,7 +28,7 @@ bool spec_customs_spice( Character *ch )
                   sprintf( buf , "%s is illegal contraband. I'm going to have to confiscate that.", obj->short_descr );
 		  do_say( ch , buf );
                   if ( obj->wear_loc != WEAR_NONE )
-                    remove_obj( victim, obj->wear_loc, true );
+                    RemoveObject( victim, obj->wear_loc, true );
                   separate_obj( obj );
                   obj_from_char( obj );
                   act( AT_ACTION, "$n confiscates $p from $N.", ch, obj, victim, TO_NOTVICT );

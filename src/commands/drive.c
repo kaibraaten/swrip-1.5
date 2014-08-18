@@ -71,12 +71,12 @@ void do_drive( Character *ch, char *argument )
 
       send_to_char("You drive the vehicle into the bay.\r\n", ch);
       sprintf( buf, "%s drives into %s.", ship->name, target->name);
-      echo_to_room( AT_GREY,  ship->in_room, buf);
+      EchoToRoom( AT_GREY,  ship->in_room, buf);
 
       TransferShip(ship, target->room.hanger);
 
       sprintf( buf, "%s drives into the bay", ship->name);
-      echo_to_room( AT_GREY, ship->in_room, buf);
+      EchoToRoom( AT_GREY, ship->in_room, buf);
       learn_from_success( ch, gsn_speeders );
       return;
     }
@@ -112,12 +112,12 @@ void do_drive( Character *ch, char *argument )
 
       send_to_char("You drive the vehicle out of the bay.\r\n", ch);
       sprintf( buf, "%s drives out of the ship.", ship->name);
-      echo_to_room( AT_GREY,  ship->in_room, buf);
+      EchoToRoom( AT_GREY,  ship->in_room, buf);
 
       TransferShip(ship, target->in_room->vnum);
 
       sprintf( buf, "%s drives out of %s", ship->name, target->name);
-      echo_to_room( AT_GREY, ship->in_room, buf);
+      EchoToRoom( AT_GREY, ship->in_room, buf);
       learn_from_success( ch, gsn_speeders );
       return;
     }

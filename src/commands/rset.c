@@ -27,7 +27,7 @@ void do_rset( Character *ch, char *argument )
       return;
     }
 
-  if ( ( location = find_location( ch, arg1 ) ) == NULL )
+  if ( ( location = FindLocation( ch, arg1 ) ) == NULL )
     {
       send_to_char( "No such location.\r\n", ch );
       return;

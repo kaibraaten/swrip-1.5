@@ -255,12 +255,12 @@ void UpdateShuttle( void )
               for (room = shuttle->room.first; room <= shuttle->room.last; ++room)
                 {
                   Room * iRoom = get_room_index(room);
-                  echo_to_room( AT_CYAN , iRoom , buf );
+                  EchoToRoom( AT_CYAN , iRoom , buf );
 
                   if (shuttle->type != SHUTTLE_TURBOCAR)
                     {
-                      echo_to_room( AT_YELLOW, iRoom, "The hatch slides shut.");
-                      echo_to_room( AT_YELLOW, iRoom, "The ship begins to launch.");
+                      EchoToRoom( AT_YELLOW, iRoom, "The hatch slides shut.");
+                      EchoToRoom( AT_YELLOW, iRoom, "The ship begins to launch.");
                     }
                 }
 
@@ -273,7 +273,7 @@ void UpdateShuttle( void )
 		  snprintf(buf, MSL, "%s speeds out of the station.", shuttle->name );
 		}
 
-              echo_to_room( AT_YELLOW , shuttle->in_room , buf );
+              EchoToRoom( AT_YELLOW , shuttle->in_room , buf );
               ExtractShuttle( shuttle );
 
               if (shuttle->type == SHUTTLE_TURBOCAR || shuttle->type == SHUTTLE_SPACE)
@@ -293,7 +293,7 @@ void UpdateShuttle( void )
             {
               for (room = shuttle->room.first; room <= shuttle->room.last; ++room)
 		{
-		  echo_to_room( AT_YELLOW, get_room_index(room),
+		  EchoToRoom( AT_YELLOW, get_room_index(room),
 				"The ship lurches slightly as it makes the jump to lightspeed.");
 		}
 
@@ -304,7 +304,7 @@ void UpdateShuttle( void )
             {
               for (room = shuttle->room.first; room <= shuttle->room.last; ++room)
 		{
-		  echo_to_room( AT_YELLOW, get_room_index(room),
+		  EchoToRoom( AT_YELLOW, get_room_index(room),
 				"The ship lurches slightly as it comes out of hyperspace.");
 		}
 
@@ -332,12 +332,12 @@ void UpdateShuttle( void )
               for (room = shuttle->room.first; room <= shuttle->room.last; ++room)
                 {
                   Room * iRoom = get_room_index(room);
-                  echo_to_room( AT_CYAN , iRoom , buf );
+                  EchoToRoom( AT_CYAN , iRoom , buf );
 
                   if (shuttle->type != SHUTTLE_TURBOCAR)
 		    {
-		      echo_to_room( AT_YELLOW , iRoom, "You feel a slight thud as the ship sets down on the ground.");
-		      echo_to_room( AT_YELLOW , iRoom , "The hatch opens." );
+		      EchoToRoom( AT_YELLOW , iRoom, "You feel a slight thud as the ship sets down on the ground.");
+		      EchoToRoom( AT_YELLOW , iRoom , "The hatch opens." );
 		    }
                 }
 
@@ -350,12 +350,12 @@ void UpdateShuttle( void )
 		  snprintf(buf, MSL, "%s arrives at the station.", shuttle->name );
 		}
 
-              echo_to_room( AT_YELLOW , shuttle->in_room , buf );
+              EchoToRoom( AT_YELLOW , shuttle->in_room , buf );
 
               if (shuttle->type != SHUTTLE_TURBOCAR)
                 {
                   snprintf(buf, MSL, "The hatch on %s opens.", shuttle->name );
-                  echo_to_room( AT_YELLOW , shuttle->in_room , buf );
+                  EchoToRoom( AT_YELLOW , shuttle->in_room , buf );
                 }
 
               shuttle->state = SHUTTLE_STATE_LANDED;

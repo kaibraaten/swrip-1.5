@@ -165,10 +165,10 @@ static ch_ret simple_damage( Character *ch, Character *victim, int dam, int dt )
       damobj = GetEquipmentOnCharacter(victim, dameq);
       if ( damobj )
         {
-          if ( dam > get_obj_resistance(damobj) )
+          if ( dam > GetObjectResistance(damobj) )
             {
               set_cur_obj(damobj);
-              damage_obj(damobj);
+              DamageObject(damobj);
             }
         }
     }

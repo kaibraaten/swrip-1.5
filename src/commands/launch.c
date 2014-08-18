@@ -202,8 +202,8 @@ void do_launch( Character *ch, char *argument )
         {
           ship->hatchopen = false;
           sprintf( buf , "The hatch on %s closes." , ship->name);
-          echo_to_room( AT_YELLOW , get_room_index(ship->location) , buf );
-          echo_to_room( AT_YELLOW , get_room_index(ship->room.entrance) , "The hatch slides shut." );
+          EchoToRoom( AT_YELLOW , get_room_index(ship->location) , buf );
+          EchoToRoom( AT_YELLOW , get_room_index(ship->room.entrance) , "The hatch slides shut." );
         }
 
       set_char_color( AT_GREEN, ch );
@@ -212,7 +212,7 @@ void do_launch( Character *ch, char *argument )
            NULL, argument , TO_ROOM );
       EchoToShip( AT_YELLOW , ship , "The ship hums as it lifts off the ground.");
       sprintf( buf, "%s begins to launch.", ship->name );
-      echo_to_room( AT_YELLOW , get_room_index(ship->location) , buf );
+      EchoToRoom( AT_YELLOW , get_room_index(ship->location) , buf );
       EchoToDockedShip( AT_YELLOW , ship, "The ship shudders as it lifts off the ground." );
       ship->shipstate = SHIP_LAUNCH;
       ship->currspeed = ship->realspeed;

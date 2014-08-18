@@ -59,7 +59,7 @@ void do_mpfind( Character *ch, char *argument )   /* Gorog */
         {
           tot_vnum = 0;
           for ( ; pProg; pProg=pProg->next)
-            tot_vnum += str_count(pProg->comlist, argument);
+            tot_vnum += CountStringOccurances(pProg->comlist, argument);
           tot_hits += tot_vnum;
           if ( tot_vnum && ++disp_cou <= disp_limit)
             pager_printf( ch, "%5d %5d %5d\r\n", disp_cou, i, tot_vnum);

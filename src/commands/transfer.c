@@ -46,7 +46,7 @@ void do_transfer( Character *ch, char *argument )
     }
   else
     {
-      if ( ( location = find_location( ch, arg2 ) ) == NULL )
+      if ( ( location = FindLocation( ch, arg2 ) ) == NULL )
         {
           send_to_char( "No such location.\r\n", ch );
           return;

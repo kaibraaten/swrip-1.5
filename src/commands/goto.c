@@ -18,7 +18,7 @@ void do_goto( Character *ch, char *argument )
       return;
     }
 
-  if ( ( location = find_location( ch, arg ) ) == NULL )
+  if ( ( location = FindLocation( ch, arg ) ) == NULL )
     {
       vnum = atoi( arg );
       if ( vnum < 0 || get_room_index( vnum ) )

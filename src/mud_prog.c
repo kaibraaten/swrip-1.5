@@ -2791,7 +2791,7 @@ bool oprog_use_trigger( Character *ch, Object *obj, Character *vict,
 }
 
 /*
- * call in remove_obj, right after UnequipCharacter
+ * call in RemoveObject, right after UnequipCharacter
  * do a if(!ch) return right after, and return true (?)
  * if !ch
  */
@@ -2833,7 +2833,7 @@ void oprog_get_trigger( Character *ch, Object *obj )
 }
 
 /*
- * called in damage_obj in act_obj.c
+ * called in DamageObject in act_obj.c
  */
 void oprog_damage_trigger( Character *ch, Object *obj )
 {

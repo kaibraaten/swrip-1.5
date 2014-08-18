@@ -2097,7 +2097,7 @@ void char_check( void )
 
       set_cur_char(ch);
       ch_next = ch->next;
-      FallIfNoFloor(ch, 0);
+      CharacterFallIfNoFloor(ch, 0);
 
       if ( char_died( ch ) )
 	{

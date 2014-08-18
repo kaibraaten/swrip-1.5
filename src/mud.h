@@ -2258,23 +2258,22 @@ extern "C" {
   ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall );
   void Teleport( Character *ch, vnum_t room, int flags );
   short GetCarryEncumbrance( const Character *ch, short move );
-  bool FallIfNoFloor( Character *ch, int fall );
-  vnum_t wherehome( const Character *ch );
+  bool CharacterFallIfNoFloor( Character *ch, int fall );
+  vnum_t WhereHome( const Character *ch );
 
   /* act_obj.c */
-  bool remove_obj( Character *ch, int iWear, bool fReplace );
-  obj_ret damage_obj( Object *obj );
-  short get_obj_resistance( const Object *obj );
-  void save_clan_storeroom( Character *ch, const Clan *clan );
-  void obj_fall( Object *obj, bool through );
+  bool RemoveObject( Character *ch, int iWear, bool fReplace );
+  obj_ret DamageObject( Object *obj );
+  short GetObjectResistance( const Object *obj );
+  void SaveClanStoreroom( Character *ch, const Clan *clan );
+  void ObjectFallIfNoFloor( Object *obj, bool through );
 
   /* act_wiz.c */
-  void save_banlist( void );
-  int str_count(const char *psource, const char *ptarget);
-  void close_area( Area *pArea );
-  Room *find_location( Character *ch, char *arg );
-  void echo_to_room( short AT_COLOR, Room *room,
-		     const char *argument );
+  void SaveBanlist( void );
+  void CloseArea( Area *pArea );
+  Room *FindLocation( const Character *ch, const char *arg );
+  void EchoToRoom( short AT_COLOR, Room *room, const char *argument );
+  void RealEchoToRoom( short color, Room *room, const char *text, bool sendNewline );
   void echo_to_all( short AT_COLOR, const char *argument, short tar );
   void get_reboot_string( void );
   void free_social( Social *social );
@@ -2389,7 +2388,7 @@ extern "C" {
   int get_spelltarget( const char *txt  );
 
   /* space.c */
-  void echo_to_room_dnr( int ecolor, Room *room, const char *argument );
+  void EchoToRoomNoNewline( int ecolor, Room *room, const char *argument );
   void         load_spaceobjects( void );
   void         save_spaceobject( Spaceobject *spaceobject );
   Spaceobject * spaceobject_from_name( const char *name );

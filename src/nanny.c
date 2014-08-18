@@ -935,7 +935,7 @@ if ( (iLang = skill_lookup( "common" )) < 0 )
     }
   else
     {
-      char_to_room( ch, get_room_index( wherehome(ch) ) );
+      char_to_room( ch, get_room_index( WhereHome(ch) ) );
     }
 
   if ( IsBitSet(ch->act, ACT_POLYMORPHED) )

@@ -22,7 +22,7 @@ void do_unhell( Character *ch, char *argument )
       send_to_char( "No one like that is in hell.\r\n", ch );
       return;
     }
-  location = get_room_index( wherehome(victim) );
+  location = get_room_index( WhereHome(victim) );
   if ( !location )
     location = ch->in_room;
   MOBtrigger = false;

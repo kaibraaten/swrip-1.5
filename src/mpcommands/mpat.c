@@ -27,7 +27,7 @@ void do_mpat( Character *ch, char *argument )
       return;
     }
 
-  if ( ( location = find_location( ch, arg ) ) == NULL )
+  if ( ( location = FindLocation( ch, arg ) ) == NULL )
     {
       progbug( "Mpat - No such location", ch );
       return;

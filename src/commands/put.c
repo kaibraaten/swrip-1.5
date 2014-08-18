@@ -147,7 +147,7 @@ void do_put( Character *ch, char *argument )
            &&   container->carried_by == NULL)
         for ( clan = first_clan; clan; clan = clan->next )
           if ( clan->storeroom == ch->in_room->vnum )
-            save_clan_storeroom(ch, clan);
+            SaveClanStoreroom(ch, clan);
     }
   else
     {
@@ -223,6 +223,6 @@ void do_put( Character *ch, char *argument )
            && container->carried_by == NULL )
 	for ( clan = first_clan; clan; clan = clan->next )
           if ( clan->storeroom == ch->in_room->vnum )
-            save_clan_storeroom(ch, clan);
+            SaveClanStoreroom(ch, clan);
     }
 }

@@ -25,7 +25,7 @@
 /*
  * how resistant an object is to damage                         -Thoric
  */
-short get_obj_resistance( const Object *obj )
+short GetObjectResistance( const Object *obj )
 {
   short resist = NumberFuzzy(MAX_ITEM_IMPACT);
 
@@ -61,7 +61,7 @@ short get_obj_resistance( const Object *obj )
  * Make object into scraps if necessary.
  * Send message about damaged object.
  */
-obj_ret damage_obj( Object *obj )
+obj_ret DamageObject( Object *obj )
 {
   Character *ch;
   obj_ret objcode;
@@ -128,7 +128,7 @@ obj_ret damage_obj( Object *obj )
 /*
  * Save items in a clan storage room                    -Scryn & Thoric
  */
-void save_clan_storeroom( Character *ch, const Clan *clan )
+void SaveClanStoreroom( Character *ch, const Clan *clan )
 {
   FILE *fp;
   char filename[256];
@@ -137,20 +137,20 @@ void save_clan_storeroom( Character *ch, const Clan *clan )
 
   if ( !clan )
     {
-      bug( "save_clan_storeroom: Null clan pointer!", 0 );
+      bug( "SaveClanStoreroom: Null clan pointer!", 0 );
       return;
     }
 
   if ( !ch )
     {
-      bug ("save_clan_storeroom: Null ch pointer!", 0);
+      bug ("SaveClanStoreroom: Null ch pointer!", 0);
       return;
     }
 
   sprintf( filename, "%s%s.vault", CLAN_DIR, clan->filename );
   if ( ( fp = fopen( filename, "w" ) ) == NULL )
     {
-      bug( "save_clan_storeroom: fopen", 0 );
+      bug( "SaveClanStoreroom: fopen", 0 );
       perror( filename );
     }
   else
@@ -170,7 +170,7 @@ void save_clan_storeroom( Character *ch, const Clan *clan )
 
 /* Make objects in rooms that are nofloor fall - Scryn 1/23/96 */
 
-void obj_fall( Object *obj, bool through )
+void ObjectFallIfNoFloor( Object *obj, bool through )
 {
   Exit *pexit;
   Room *to_room;
@@ -270,7 +270,7 @@ void obj_fall( Object *obj, bool through )
                 obj->value[OVAL_ARMOR_CONDITION] -= dam;
               break;
             default:
-              if ( (dam*15) > get_obj_resistance(obj) )
+              if ( (dam*15) > GetObjectResistance(obj) )
                 {
                   if (obj->in_room->first_person)
                     {
@@ -284,11 +284,11 @@ void obj_fall( Object *obj, bool through )
               break;
             }
         }
-      obj_fall( obj, true );
+      ObjectFallIfNoFloor( obj, true );
     }
 }
 
-bool remove_obj( Character *ch, int iWear, bool fReplace )
+bool RemoveObject( Character *ch, int iWear, bool fReplace )
 {
   Object *obj, *tmpobj;
 

@@ -123,14 +123,14 @@ void do_fire(Character *ch, char *argument )
           learn_from_failure( ch, gsn_spacecombat3 );
           sprintf( buf, "Laserfire from %s barely misses %s." , ship->name , target->name );
           if(ship->sclass > SHIP_PLATFORM)
-            echo_to_room(AT_ORANGE, ship->in_room, buf);
+            EchoToRoom(AT_ORANGE, ship->in_room, buf);
           else
             EchoToNearbyShips( AT_ORANGE , ship , buf , target );
           return;
         }
       sprintf( buf, "Laserfire from %s hits %s." , ship->name, target->name );
       if(ship->sclass > SHIP_PLATFORM)
-        echo_to_room(AT_ORANGE, ship->in_room, buf);
+        EchoToRoom(AT_ORANGE, ship->in_room, buf);
       else
         EchoToNearbyShips( AT_ORANGE , ship , buf , target );
       sprintf( buf , "You are hit by lasers from %s!" , ship->name);
@@ -228,14 +228,14 @@ void do_fire(Character *ch, char *argument )
           learn_from_failure( ch, gsn_spacecombat3 );
           sprintf( buf, "Blue ion plasma from %s narrowly misses %s." , ship->name , target->name );
           if(ship->sclass > SHIP_PLATFORM)
-            echo_to_room(AT_ORANGE, ship->in_room, buf);
+            EchoToRoom(AT_ORANGE, ship->in_room, buf);
           else
             EchoToNearbyShips( AT_ORANGE , ship , buf , target );
           return;
         }
       sprintf( buf, "Blue plasma from %s engulfs %s." , ship->name, target->name );
       if(ship->sclass > SHIP_PLATFORM)
-        echo_to_room(AT_ORANGE, ship->in_room, buf);
+        EchoToRoom(AT_ORANGE, ship->in_room, buf);
       else
         EchoToNearbyShips( AT_ORANGE , ship , buf , target );
       sprintf( buf , "You are engulfed by ion energy from %s!" , ship->name);
@@ -347,7 +347,7 @@ void do_fire(Character *ch, char *argument )
       EchoToCockpit( AT_BLOOD , target , buf );
       sprintf( buf, "%s fires a missile towards %s." , ship->name, target->name );
       if(ship->sclass > SHIP_PLATFORM)
-        echo_to_room(AT_ORANGE, ship->in_room, buf);
+        EchoToRoom(AT_ORANGE, ship->in_room, buf);
       else
         EchoToNearbyShips( AT_ORANGE , ship , buf , target );
       learn_from_success( ch, gsn_weaponsystems );
@@ -442,7 +442,7 @@ void do_fire(Character *ch, char *argument )
       sprintf( buf, "%s fires a torpedo towards %s." , ship->name, target->name );
       if(ship->sclass > SHIP_PLATFORM)
         {
-          echo_to_room(AT_ORANGE, ship->in_room, buf);
+          EchoToRoom(AT_ORANGE, ship->in_room, buf);
           EchoToShip( AT_RED , target , "A large explosion vibrates through the ship." );
         }
       else
@@ -541,7 +541,7 @@ void do_fire(Character *ch, char *argument )
       sprintf( buf, "%s fires a heavy rocket towards %s." , ship->name, target->name );
       if(ship->sclass > SHIP_PLATFORM)
         {
-	  echo_to_room(AT_ORANGE, ship->in_room, buf);
+	  EchoToRoom(AT_ORANGE, ship->in_room, buf);
           EchoToShip( AT_RED , target , "A large explosion vibrates through the ship." );
         }
       else
@@ -631,7 +631,7 @@ void do_fire(Character *ch, char *argument )
 	      sprintf( buf, "%s fires at %s but misses." , ship->name, target->name );
 
 	      if(ship->sclass > SHIP_PLATFORM)
-		echo_to_room(AT_ORANGE, ship->in_room, buf);
+		EchoToRoom(AT_ORANGE, ship->in_room, buf);
 	      else
 		EchoToNearbyShips( AT_ORANGE , ship , buf , target );
 
@@ -644,7 +644,7 @@ void do_fire(Character *ch, char *argument )
 	  sprintf( buf, "Turboasers fire from %s, hitting %s." , ship->name, target->name );
 
 	  if(ship->sclass > SHIP_PLATFORM)
-	    echo_to_room(AT_ORANGE, ship->in_room, buf);
+	    EchoToRoom(AT_ORANGE, ship->in_room, buf);
 	  else
 	    EchoToNearbyShips( AT_ORANGE, ship, buf, target );
 

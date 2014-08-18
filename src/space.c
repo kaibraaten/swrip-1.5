@@ -28,21 +28,10 @@
 Missile *first_missile = NULL;
 Missile *last_missile = NULL;
 
-void echo_to_room_dnr( int ecolor, Room *room,
+void EchoToRoomNoNewline( int ecolor, Room *room,
 		       const char *argument )
 {
-  Character *vic = NULL;
-
-  if ( room == NULL )
-    {
-      return;
-    }
-
-  for ( vic = room->first_person; vic; vic = vic->next_in_room )
-    {
-      set_char_color( ecolor, vic );
-      send_to_char( argument, vic );
-    }
+  RealEchoToRoom( ecolor, room, argument, false );
 }
 
 void new_missile( Ship *ship , Ship *target , Character *ch , int missiletype )
@@ -156,7 +145,7 @@ void update_missiles( void )
 		  Character *ch = NULL;
 		  char buf[MAX_STRING_LENGTH];
 
-                  echo_to_room( AT_YELLOW, get_room_index(ship->room.gunseat),
+                  EchoToRoom( AT_YELLOW, get_room_index(ship->room.gunseat),
 				"Your missile hits its target dead on!" );
                   EchoToCockpit( AT_BLOOD, target,
 				   "The ship is hit by a missile.");
@@ -184,7 +173,7 @@ void update_missiles( void )
                 }
               else
                 {
-                  echo_to_room( AT_YELLOW , get_room_index(ship->room.gunseat), "Your missile explodes harmlessly in a cloud of chaff!" );
+                  EchoToRoom( AT_YELLOW , get_room_index(ship->room.gunseat), "Your missile explodes harmlessly in a cloud of chaff!" );
                   EchoToCockpit( AT_YELLOW, target, "A missile explodes in your chaff.");
                   extract_missile( missile );
                 }

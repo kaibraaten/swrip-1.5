@@ -146,7 +146,7 @@ void room_explode_1( Object *obj, Character *xch, Room *room, int blast )
                 room_explode_1( obj , xch, pexit->to_room , roomblast );
               }
             else
-              echo_to_room( AT_WHITE, pexit->to_room , "You hear a loud EXPLOSION not to far from here." );
+              EchoToRoom( AT_WHITE, pexit->to_room , "You hear a loud EXPLOSION not to far from here." );
           }
       }
   }
@@ -883,7 +883,7 @@ Object *obj_to_room( Object *obj, Room *pRoomIndex )
     pRoomIndex->light += count;
 
   falling++;
-  obj_fall( obj, false );
+  ObjectFallIfNoFloor( obj, false );
   falling--;
 
   if ( obj->Prototype->vnum == OBJ_VNUM_CORPSE_PC && falling == 0 )
@@ -1128,7 +1128,7 @@ void extract_char( Character *ch, bool fPull )
       location = NULL;
 
       if ( !location )
-        location = get_room_index( wherehome( ch ) );
+        location = get_room_index( WhereHome( ch ) );
 
       if ( !location )
         location = get_room_index( ROOM_VNUM_LIMBO );

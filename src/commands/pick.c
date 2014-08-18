@@ -186,7 +186,7 @@ void do_pick( Character *ch, char *argument )
           ship->hatchopen = true;
           act( AT_PLAIN, "You pick the lock and open the hatch on $T.", ch, NULL, ship->name, TO_CHAR );
           act( AT_PLAIN, "$n picks open the hatch on $T.", ch, NULL, ship->name, TO_ROOM );
-          echo_to_room( AT_YELLOW , get_room_index(ship->room.entrance) , "The hatch opens from the outside." );
+          EchoToRoom( AT_YELLOW , get_room_index(ship->room.entrance) , "The hatch opens from the outside." );
           learn_from_success( ch, gsn_pickshiplock );
           if ( ship->alarm == 0 )
             return;

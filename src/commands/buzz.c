@@ -57,7 +57,7 @@ void do_buzz (Character *ch, char *arg)
 
   ch->buzzed_from_room = ch->in_room;
 
-  echo_to_room(AT_WHITE,home,"The door buzzer sounds.\r\n");
+  EchoToRoom(AT_WHITE,home,"The door buzzer sounds.\r\n");
   send_to_char("You press the door buzzer.\r\n",ch);
   act(AT_ACTION,"$n presses a door buzzer.",ch,NULL,NULL,TO_ROOM);
 }

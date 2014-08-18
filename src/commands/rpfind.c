@@ -64,7 +64,7 @@ void do_rpfind( Character *ch, char *argument )   /* Gorog */
           tot_vnum = 0;
 
           for ( ; pProg; pProg=pProg->next)
-            tot_vnum += str_count(pProg->comlist, argument);
+            tot_vnum += CountStringOccurances(pProg->comlist, argument);
 
           tot_hits += tot_vnum;
 

@@ -26,7 +26,7 @@
 
 Room *vroom_hash[64];
 
-vnum_t wherehome( const Character *ch)
+vnum_t WhereHome( const Character *ch)
 {
   if( ch->plr_home )
     {
@@ -263,7 +263,7 @@ short GetCarryEncumbrance( const Character *ch, short move )
 /*
  * Check to see if a character can fall down, checks for looping   -Thoric
  */
-bool FallIfNoFloor( Character *ch, int fall )
+bool CharacterFallIfNoFloor( Character *ch, int fall )
 {
   if ( IsBitSet( ch->in_room->room_flags, ROOM_NOFLOOR )
        && CAN_GO(ch, DIR_DOWN)
@@ -274,7 +274,7 @@ bool FallIfNoFloor( Character *ch, int fall )
         {
           bug( "Falling (in a loop?) more than 80 rooms: vnum %d", ch->in_room->vnum );
           char_from_room( ch );
-          char_to_room( ch, get_room_index( wherehome(ch) ) );
+          char_to_room( ch, get_room_index( WhereHome(ch) ) );
           fall = 0;
           return true;
         }
@@ -1040,7 +1040,7 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
   if ( char_died(ch) )
     return retcode;
 
-  if (!FallIfNoFloor( ch, fall )
+  if (!CharacterFallIfNoFloor( ch, fall )
       &&   fall > 0 )
     {
       if (!IsAffectedBy( ch, AFF_FLOATING )
