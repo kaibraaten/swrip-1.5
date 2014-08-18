@@ -2679,7 +2679,7 @@ void load_storerooms( void )
           Room *storeroom = NULL;
 
           sprintf(strArea, "%s%s", STOREROOM_DIR, de->d_name );
-          fprintf(stderr, "STOREROOM -> %s\n", strArea);
+          fprintf(stderr, "Storeroom -> %s\n", strArea);
 
           if ( !(fpArea = fopen(strArea, "r")) )
             {

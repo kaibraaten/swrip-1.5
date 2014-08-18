@@ -112,8 +112,8 @@ typedef struct Bounty                  Bounty;
 struct planet_data;
 typedef struct planet_data             PLANET_DATA;
 
-struct storeroom;
-typedef struct storeroom               STOREROOM;
+struct Storeroom;
+typedef struct Storeroom               Storeroom;
 
 struct guard_data;
 typedef struct guard_data              GUARD_DATA;

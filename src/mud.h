@@ -365,10 +365,10 @@ struct guard_data
   PLANET_DATA     *planet;
 };
 
-struct storeroom
+struct Storeroom
 {
-  STOREROOM       *next;
-  STOREROOM       *prev;
+  Storeroom       *next;
+  Storeroom       *prev;
   vnum_t           vnum;
   Room *room;
 };
