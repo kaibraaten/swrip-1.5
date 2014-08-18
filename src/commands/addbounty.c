@@ -77,5 +77,5 @@ void do_addbounty( Character *ch, char *argument )
     }
   ch->gold = ch->gold - amount;
 
-  disintegration( ch, victim, amount);
+  AddBounty( ch, victim, amount);
 }

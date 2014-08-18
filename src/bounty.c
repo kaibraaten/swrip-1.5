@@ -24,27 +24,23 @@
 
 Bounty *first_bounty = NULL;
 Bounty *last_bounty = NULL;
-Bounty *first_disintegration = NULL;
-Bounty *last_disintegration = NULL;
 
-void nodisintegration( Character *ch , Character *victim , long amount );
-
-void save_disintegrations()
+void SaveBounties( void )
 {
   Bounty *tbounty = NULL;
   FILE *fpout = NULL;
   char filename[256];
 
-  sprintf( filename, "%s%s", SYSTEM_DIR, DISINTEGRATION_LIST );
+  sprintf( filename, "%s%s", SYSTEM_DIR, BOUNTY_LIST );
   fpout = fopen( filename, "w" );
 
   if ( !fpout )
     {
-      bug( "FATAL: cannot open disintegration.lst for writing!\r\n", 0 );
+      bug( "FATAL: cannot open bounty.lst for writing!\r\n", 0 );
       return;
     }
 
-  for ( tbounty = first_disintegration; tbounty; tbounty = tbounty->next )
+  for ( tbounty = first_bounty; tbounty; tbounty = tbounty->next )
     {
       fprintf( fpout, "%s\n", tbounty->target );
       fprintf( fpout, "%ld\n", tbounty->amount );
@@ -56,29 +52,29 @@ void save_disintegrations()
   fclose( fpout );
 }
 
-bool is_disintegration( const Character *victim )
+bool IsBountyOn( const Character *victim )
 {
   Bounty *bounty = NULL;
 
-  for ( bounty = first_disintegration; bounty; bounty = bounty->next )
+  for ( bounty = first_bounty; bounty; bounty = bounty->next )
     if ( !StrCmp( victim->name , bounty->target ) )
       return true;
 
   return false;
 }
 
-Bounty *get_disintegration( const char *target )
+Bounty *GetBounty( const char *target )
 {
   Bounty *bounty = NULL;
 
-  for ( bounty = first_disintegration; bounty; bounty = bounty->next )
+  for ( bounty = first_bounty; bounty; bounty = bounty->next )
     if ( !StrCmp( target, bounty->target ) )
       return bounty;
 
   return NULL;
 }
 
-void load_bounties( void )
+void LoadBounties( void )
 {
   FILE *fpList = NULL;
   const char *target = NULL;
@@ -87,9 +83,9 @@ void load_bounties( void )
   Bounty *bounty = NULL;
   long amount = 0;
 
-  log_string( "Loading disintegrations..." );
+  log_string( "Loading bounties..." );
 
-  sprintf( bountylist, "%s%s", SYSTEM_DIR, DISINTEGRATION_LIST );
+  sprintf( bountylist, "%s%s", SYSTEM_DIR, BOUNTY_LIST );
 
   if ( ( fpList = fopen( bountylist, "r" ) ) == NULL )
     {
@@ -103,7 +99,7 @@ void load_bounties( void )
       if ( target[0] == '$' )
         break;
       AllocateMemory( bounty, Bounty, 1 );
-      LINK( bounty, first_disintegration, last_disintegration, next, prev );
+      LINK( bounty, first_bounty, last_bounty, next, prev );
       bounty->target = CopyString(target);
 
       amount = ReadInt( fpList );
@@ -121,7 +117,7 @@ void load_bounties( void )
   log_string(" Done bounties " );
 }
 
-void disintegration ( const Character *ch , const Character *victim , long amount )
+void AddBounty( const Character *ch , const Character *victim , long amount )
 {
   Bounty *bounty = NULL;
   bool found = false;
@@ -129,7 +125,7 @@ void disintegration ( const Character *ch , const Character *victim , long amoun
   Character *p = NULL;
   Character *p_prev = NULL;
 
-  for ( bounty = first_disintegration; bounty; bounty = bounty->next )
+  for ( bounty = first_bounty; bounty; bounty = bounty->next )
     {
       if ( !StrCmp( bounty->target , victim->name ))
         {
@@ -141,7 +137,7 @@ void disintegration ( const Character *ch , const Character *victim , long amoun
   if (! found)
     {
       AllocateMemory( bounty, Bounty, 1 );
-      LINK( bounty, first_disintegration, last_disintegration, next, prev );
+      LINK( bounty, first_bounty, last_bounty, next, prev );
 
       bounty->target = CopyString( victim->name );
       bounty->amount = 0;
@@ -149,7 +145,7 @@ void disintegration ( const Character *ch , const Character *victim , long amoun
     }
 
   bounty->amount = bounty->amount + amount;
-  save_disintegrations();
+  SaveBounties();
 
   sprintf( buf, "&R%s has added %ld credits to the bounty on %s.\r\n",
 	   ch->name, amount, victim->name );
@@ -159,29 +155,32 @@ void disintegration ( const Character *ch , const Character *victim , long amoun
     {
       p_prev = p->prev;
 
-      if ( ch->pcdata && ch->pcdata->clan
+      if ( ( ch->pcdata && ch->pcdata->clan
 	   && ( !StrCmp(ch->pcdata->clan->name, "the hunters guild")
 		|| !StrCmp(ch->pcdata->clan->name, "the assassins guild") ) )
-        ch_printf(p, buf);
-      else if (!IsNpc(p) && GetTrustLevel(p) >= LEVEL_IMMORTAL)
-        ch_printf(p, buf);
+	   || IsImmortal(p) )
+	{
+	  ch_printf(p, buf);
+	}
 
       if (victim == p)
-        ch_printf(p, "&RSomeone has added %ld credits to the bounty on you!\r\n", amount );
+	{
+	  ch_printf(p, "&RSomeone has added %ld credits to the bounty on you!\r\n", amount );
+	}
     }
 }
 
-void remove_disintegration( Bounty *bounty )
+void RemoveBounty( Bounty *bounty )
 {
-  UNLINK( bounty, first_disintegration, last_disintegration, next, prev );
+  UNLINK( bounty, first_bounty, last_bounty, next, prev );
   FreeMemory( bounty->target );
   FreeMemory( bounty->poster );
   FreeMemory( bounty );
 
-  save_disintegrations();
+  SaveBounties();
 }
 
-void claim_disintegration( Character *ch, const Character *victim )
+void ClaimBounty( Character *ch, const Character *victim )
 {
   Bounty *bounty = NULL;
   long xp = 0;
@@ -190,12 +189,12 @@ void claim_disintegration( Character *ch, const Character *victim )
   if ( IsNpc(victim) )
     return;
 
-  bounty = get_disintegration( victim->name );
+  bounty = GetBounty( victim->name );
 
   if ( ch == victim )
     {
       if ( bounty != NULL )
-        remove_disintegration(bounty);
+        RemoveBounty(bounty);
       return;
     }
 
@@ -204,7 +203,7 @@ void claim_disintegration( Character *ch, const Character *victim )
        || ( StrCmp(ch->pcdata->clan->name, "the hunters guild")
 	    || StrCmp(ch->pcdata->clan->name, "the assassins guild") ) ) )
     {
-      remove_disintegration(bounty);
+      RemoveBounty(bounty);
       bounty = NULL;
     }
 
@@ -232,7 +231,7 @@ void claim_disintegration( Character *ch, const Character *victim )
   gain_exp( ch, HUNTING_ABILITY, xp );
 
   set_char_color( AT_BLOOD, ch );
-  ch_printf( ch, "You receive %ld experience and %ld credits,\r\n from the bounty on %s\r\n", exp, bounty->amount, bounty->target );
+  ch_printf( ch, "You receive %ld experience and %ld credits,\r\n from the bounty on %s.\r\n", exp, bounty->amount, bounty->target );
 
   sprintf( buf, "The disintegration bounty on %s has been claimed!",victim->name );
   EchoToAll ( AT_RED , buf, 0 );
@@ -240,5 +239,5 @@ void claim_disintegration( Character *ch, const Character *victim )
   if ( !IsBitSet(victim->act , PLR_KILLER ) )
     SetBit(ch->act, PLR_KILLER );
 
-  remove_disintegration(bounty);
+  RemoveBounty(bounty);
 }

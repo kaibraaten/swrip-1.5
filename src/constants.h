@@ -1913,7 +1913,6 @@ typedef enum
 #define PLANET_LIST      "planet.lst"
 #define SPACE_LIST      "space.lst"
 #define BOUNTY_LIST     "bounty.lst"
-#define DISINTEGRATION_LIST     "disintegration.lst"
 #define GOD_LIST        "gods.lst"      /* List of gods                 */
 #define GUARD_LIST      "guard.lst"
 

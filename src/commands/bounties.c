@@ -18,7 +18,7 @@ void do_bounties( Character *ch, char *argument )
   set_char_color( AT_WHITE, ch );
   send_to_char( "\r\nBounty                      Amount          Poster\r\n", ch );
 
-  for ( bounty = first_disintegration; bounty; bounty = bounty->next )
+  for ( bounty = first_bounty; bounty; bounty = bounty->next )
     {
       set_char_color( AT_RED, ch );
       ch_printf( ch, "%-26s %-14ld %-20s\r\n", bounty->target, bounty->amount, bounty->poster );

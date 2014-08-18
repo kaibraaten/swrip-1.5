@@ -2062,7 +2062,7 @@ void raw_kill( Character *killer, Character *victim )
   stop_fighting( victim, true );
 
   if ( killer && !IsNpc(killer) && !IsNpc(victim) )
-    claim_disintegration( killer, victim );
+    ClaimBounty( killer, victim );
 
   /* Take care of polymorphed chars */
   if(IsNpc(victim) && IsBitSet(victim->act, ACT_POLYMORPHED))

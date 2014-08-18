@@ -701,7 +701,7 @@ void boot_db( bool fCopyOver )
   LoadShips();
 
   log_string( "Loading bounties" );
-  load_bounties();
+  LoadBounties();
 
   log_string( "Loading governments" );
   LoadPlanets();

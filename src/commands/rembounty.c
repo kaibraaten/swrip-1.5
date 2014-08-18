@@ -2,8 +2,8 @@
 
 void do_rembounty(  Character *ch, char *argument )
 {
-  Bounty *bounty = get_disintegration( argument );
+  Bounty *bounty = GetBounty( argument );
 
   if ( bounty != NULL )
-    remove_disintegration(bounty);
+    RemoveBounty(bounty);
 }

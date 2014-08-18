@@ -1605,8 +1605,6 @@ extern Planet          *first_planet;
 extern Planet          *last_planet;
 extern Bounty          *first_bounty;
 extern Bounty          *last_bounty;
-extern Bounty          *first_disintegration;
-extern Bounty          *last_disintegration;
 extern Area            *first_area;
 extern Area            *last_area;
 extern Area            *first_build;
@@ -2310,14 +2308,13 @@ extern "C" {
   long GetTaxes( const Planet *planet );
 
   /* bounty.c */
-  void disintegration( const Character *ch, const Character *victim, long amount );
-  Bounty *get_disintegration( const char *target );
-  void load_bounties( void );
-  void save_bounties( void );
-  void save_disintegrations( void );
-  void remove_disintegration( Bounty *bounty );
-  void claim_disintegration( Character *ch , const Character *victim );
-  bool is_disintegration( const Character *victim );
+  void AddBounty( const Character *ch, const Character *victim, long amount );
+  Bounty *GetBounty( const char *target );
+  void LoadBounties( void );
+  void SaveBounties( void );
+  void RemoveBounty( Bounty *bounty );
+  void ClaimBounty( Character *ch , const Character *victim );
+  bool IsBountyOn( const Character *victim );
 
   /* const.c */
   int get_saveflag(const char*);
