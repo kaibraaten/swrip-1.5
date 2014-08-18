@@ -56,7 +56,7 @@ void do_shove( Character *ch, char *argument )
 
   victim->position = POS_SHOVE;
 
-  if ((pexit = get_exit(ch->in_room, exit_dir)) == NULL )
+  if ((pexit = GetExit(ch->in_room, exit_dir)) == NULL )
     {
       if (!StrCmp( arg2, "in" ))
         {
@@ -277,7 +277,7 @@ void do_shove( Character *ch, char *argument )
 
   act( AT_ACTION, "You shove $M.", ch, NULL, victim, TO_CHAR );
   act( AT_ACTION, "$n shoves you.", ch, NULL, victim, TO_VICT );
-  move_char( victim, get_exit(ch->in_room,exit_dir), 0);
+  MoveCharacter( victim, GetExit(ch->in_room,exit_dir), 0);
 
   if ( !char_died(victim) )
     {

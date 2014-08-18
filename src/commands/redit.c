@@ -332,12 +332,12 @@ void do_redit( Character *ch, char *argument )
       if ( arg2[0] == '#' )
         {
 	  edir = atoi( arg2+1 );
-          xit = get_exit_num( location, edir );
+          xit = GetExitNumber( location, edir );
         }
       else
         {
           edir = get_dir( arg2 );
-          xit = get_exit( location, edir );
+          xit = GetExit( location, edir );
         }
 
       keyvnum = atoi( arg3 );
@@ -367,12 +367,12 @@ void do_redit( Character *ch, char *argument )
       if ( arg2[0] == '#' )
         {
           edir = atoi( arg2+1 );
-          xit = get_exit_num( location, edir );
+          xit = GetExitNumber( location, edir );
         }
       else
         {
           edir = get_dir( arg2 );
-          xit = get_exit( location, edir );
+          xit = GetExit( location, edir );
         }
 
       if ( !xit )
@@ -407,12 +407,12 @@ void do_redit( Character *ch, char *argument )
       if ( arg2[0] == '#' )
         {
           edir = atoi( arg2+1 );
-          xit = get_exit_num( location, edir );
+          xit = GetExitNumber( location, edir );
         }
       else
         {
           edir = get_dir( arg2 );
-          xit = get_exit( location, edir );
+          xit = GetExit( location, edir );
         }
 
       if ( !xit )
@@ -443,7 +443,7 @@ void do_redit( Character *ch, char *argument )
       while ( argument[0] != '\0' )
         {
           argument = OneArgument( argument, arg2 );
-          value = get_exitflag( arg2 );
+          value = GetExitFlag( arg2 );
 
           if ( value < 0 || value > MAX_EXFLAG )
             ch_printf( ch, "Unknown flag: %s\r\n", arg2 );
@@ -493,11 +493,11 @@ void do_redit( Character *ch, char *argument )
 
       if ( numnotdir )
         {
-	  if ( (xit = get_exit_num(location, edir)) != NULL )
+	  if ( (xit = GetExitNumber(location, edir)) != NULL )
             edir = xit->vdir;
         }
       else
-        xit = get_exit(location, edir);
+        xit = GetExit(location, edir);
 
       if ( evnum == INVALID_VNUM )
         {
@@ -538,7 +538,7 @@ void do_redit( Character *ch, char *argument )
               return;
             }
 
-          if ( addexit && xit && get_exit_to(location, edir, tmp->vnum) )
+          if ( addexit && xit && GetExitTo(location, edir, tmp->vnum) )
             {
               send_to_char( "There is already an exit in that direction leading to that location.\r\n", ch );
               return;
@@ -558,7 +558,7 @@ void do_redit( Character *ch, char *argument )
         {
           xit->to_room = tmp;
           xit->vnum = evnum;
-          texit = get_exit_to( xit->to_room, get_rev_dir(edir), location->vnum );
+          texit = GetExitTo( xit->to_room, get_rev_dir(edir), location->vnum );
 
           if ( texit )
             {
@@ -641,14 +641,14 @@ void do_redit( Character *ch, char *argument )
 
       if ( numnotdir )
         {
-          if ( (this_exit = get_exit_num(tmploc, edir)) != NULL )
+          if ( (this_exit = GetExitNumber(tmploc, edir)) != NULL )
 	    {
 	      edir = this_exit->vdir;
 	    }
         }
       else
 	{
-	  this_exit = get_exit(tmploc, edir);
+	  this_exit = GetExit(tmploc, edir);
 	}
 
       if ( this_exit )
@@ -659,7 +659,7 @@ void do_redit( Character *ch, char *argument )
             sprintf( rvnum, "%ld", tmploc->vnum );
 
           if ( this_exit->to_room )
-            rxit = get_exit(this_exit->to_room, get_rev_dir(edir));
+            rxit = GetExit(this_exit->to_room, get_rev_dir(edir));
           else
             rxit = NULL;
         }
@@ -668,9 +668,9 @@ void do_redit( Character *ch, char *argument )
       do_redit( ch, tmpcmd );
 
       if ( numnotdir )
-        this_exit = get_exit_num(tmploc, exnum);
+        this_exit = GetExitNumber(tmploc, exnum);
       else
-        this_exit = get_exit(tmploc, edir);
+        this_exit = GetExit(tmploc, edir);
 
       if ( !rxit && this_exit )
         {
@@ -680,7 +680,7 @@ void do_redit( Character *ch, char *argument )
             sprintf( rvnum, "%ld", tmploc->vnum );
 
           if ( this_exit->to_room )
-            rxit = get_exit(this_exit->to_room, get_rev_dir(edir));
+            rxit = GetExit(this_exit->to_room, get_rev_dir(edir));
           else
             rxit = NULL;
         }
@@ -709,12 +709,12 @@ void do_redit( Character *ch, char *argument )
       if ( arg2[0] == '#' )
         {
           edir = atoi( arg2+1 );
-          xit = get_exit_num( location, edir );
+          xit = GetExitNumber( location, edir );
         }
       else
         {
           edir = get_dir( arg2 );
-          xit = get_exit( location, edir );
+          xit = GetExit( location, edir );
         }
 
       if ( xit )
@@ -741,12 +741,12 @@ void do_redit( Character *ch, char *argument )
       if ( arg2[0] == '#' )
         {
           edir = atoi( arg2+1 );
-          xit = get_exit_num( location, edir );
+          xit = GetExitNumber( location, edir );
         }
       else
         {
           edir = get_dir( arg2 );
-          xit = get_exit( location, edir );
+          xit = GetExit( location, edir );
         }
 
       if ( xit )

@@ -194,7 +194,7 @@ void obj_fall( Object *obj, bool through )
        &&   !IS_OBJ_STAT( obj, ITEM_MAGIC ) )
     {
 
-      pexit = get_exit( obj->in_room, DIR_DOWN );
+      pexit = GetExit( obj->in_room, DIR_DOWN );
       to_room = pexit->to_room;
 
       if (through)

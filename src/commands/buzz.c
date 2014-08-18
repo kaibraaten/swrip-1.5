@@ -33,7 +33,7 @@ void do_buzz (Character *ch, char *arg)
       return;
     }
 
-  exitdat = get_exit(ch->in_room, exit_dir);
+  exitdat = GetExit(ch->in_room, exit_dir);
 
   if ( exitdat == NULL )
     {

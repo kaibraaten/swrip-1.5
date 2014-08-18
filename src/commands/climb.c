@@ -10,18 +10,18 @@ void do_climb( Character *ch, char *argument )
       for ( pexit = ch->in_room->first_exit; pexit; pexit = pexit->next )
         if ( IsBitSet( pexit->exit_info, EX_xCLIMB ) )
           {
-            move_char( ch, pexit, 0 );
+            MoveCharacter( ch, pexit, 0 );
             return;
           }
       send_to_char( "You cannot climb here.\r\n", ch );
       return;
     }
 
-  pexit = find_door( ch, argument, true );
+  pexit = FindDoor( ch, argument, true );
 
   if ( pexit && IsBitSet( pexit->exit_info, EX_xCLIMB ) )
     {
-      move_char( ch, pexit, 0 );
+      MoveCharacter( ch, pexit, 0 );
       return;
     }
 

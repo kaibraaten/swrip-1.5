@@ -51,7 +51,7 @@ char map_chars[] = "|-|-";
 struct map_type map[MAPX + 1][MAPY + 1];
 
 /* Take care of some repetitive code for later */
-static void get_exit_dir( int dir, int *x, int *y, int xorig, int yorig )
+static void GetExitDirection( int dir, int *x, int *y, int xorig, int yorig )
 {
   /* Get the next coord based on direction */
   switch( dir )
@@ -129,7 +129,7 @@ static void clear_room( int x, int y )
       int exity = 0;
 
       /* Find next coord in this direction */
-      get_exit_dir( dir, &exitx, &exity, x, y );
+      GetExitDirection( dir, &exitx, &exity, x, y );
 
       /* If coord is valid, clear it */
       if ( !BOUNDARY( exitx, exity ) )
@@ -162,12 +162,12 @@ static void map_exits( Character *ch, Room *pRoom,
       Exit *pExit = NULL;
 
       /* Skip if there is no exit in this direction */
-      if ( ( pExit = get_exit( pRoom, door ) )== NULL )
+      if ( ( pExit = GetExit( pRoom, door ) )== NULL )
         continue;
 
       /* Get the coords for the next exit and room in this direction */
-      get_exit_dir( door, &exitx, &exity, x, y );
-      get_exit_dir( door, &roomx, &roomy, exitx, exity );
+      GetExitDirection( door, &exitx, &exity, x, y );
+      GetExitDirection( door, &roomx, &roomy, exitx, exity );
 
       /* Skip if coords fall outside map */
       if ( BOUNDARY( exitx, exity ) || BOUNDARY( roomx, roomy ) )

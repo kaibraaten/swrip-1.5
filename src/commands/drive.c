@@ -130,5 +130,5 @@ void do_drive( Character *ch, char *argument )
       return;
     }
 
-  DriveShip( ch, ship, get_exit(get_room_index(ship->location), dir), 0 );
+  DriveShip( ch, ship, GetExit(get_room_index(ship->location), dir), 0 );
 }

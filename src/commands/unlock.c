@@ -14,7 +14,7 @@ void do_unlock( Character *ch, char *argument )
       return;
     }
 
-  if ( ( pexit = find_door( ch, arg, true ) ) != NULL )
+  if ( ( pexit = FindDoor( ch, arg, true ) ) != NULL )
     {
       if ( !IsBitSet(pexit->exit_info, EX_ISDOOR) )
         {
@@ -34,7 +34,7 @@ void do_unlock( Character *ch, char *argument )
 	  return;
 	}
 
-      if ( !has_key( ch, pexit->key) )
+      if ( !HasKey( ch, pexit->key) )
         {
 	  send_to_char( "You lack the key.\r\n", ch );
 	  return;
@@ -52,7 +52,7 @@ void do_unlock( Character *ch, char *argument )
           send_to_char( "*Click*\r\n", ch );
           act( AT_ACTION, "$n unlocks the $d.",
 	       ch, NULL, pexit->keyword, TO_ROOM );
-	  remove_bexit_flag( pexit, EX_LOCKED );
+	  RemoveBExitFlag( pexit, EX_LOCKED );
           return;
         }
     }
@@ -78,7 +78,7 @@ void do_unlock( Character *ch, char *argument )
 	  return;
 	}
 
-      if ( !has_key( ch, obj->value[2] ) )
+      if ( !HasKey( ch, obj->value[2] ) )
         {
 	  send_to_char( "You lack the key.\r\n", ch );
 	  return;

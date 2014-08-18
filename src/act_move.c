@@ -32,7 +32,7 @@ vnum_t wherehome( const Character *ch)
     {
       return ch->plr_home->vnum;
     }
-  else if( GetTrustLevel(ch) >= LEVEL_IMMORTAL )
+  else if( IsImmortal(ch)  )
     {
       return ROOM_START_IMMORTAL;
     }
@@ -100,7 +100,7 @@ static void decorate_room( Room *room )
 /*
  * Remove any unused virtual rooms                              -Thoric
  */
-void clear_vrooms( void )
+void ClearVirtualRooms( void )
 {
   int hash = 0;
   Room *room = NULL;
@@ -150,7 +150,7 @@ void clear_vrooms( void )
  * Function to get the equivelant exit of DIR 0-MAXDIR out of linked list.
  * Made to allow old-style diku-merc exit functions to work.    -Thoric
  */
-Exit *get_exit( const Room *room, short dir )
+Exit *GetExit( const Room *room, short dir )
 {
   Exit *xit = NULL;
 
@@ -174,7 +174,7 @@ Exit *get_exit( const Room *room, short dir )
 /*
  * Function to get an exit, leading the the specified room
  */
-Exit *get_exit_to( const Room *room, short dir, vnum_t vnum )
+Exit *GetExitTo( const Room *room, short dir, vnum_t vnum )
 {
   Exit *xit = NULL;
 
@@ -198,7 +198,7 @@ Exit *get_exit_to( const Room *room, short dir, vnum_t vnum )
 /*
  * Function to get the nth exit of a room                       -Thoric
  */
-Exit *get_exit_num( const Room *room, short count )
+Exit *GetExitNumber( const Room *room, short count )
 {
   Exit *xit = NULL;
   int cnt = 0;
@@ -224,7 +224,7 @@ Exit *get_exit_num( const Room *room, short count )
 /*
  * Modify movement due to encumbrance                           -Thoric
  */
-short encumbrance( const Character *ch, short move )
+short GetCarryEncumbrance( const Character *ch, short move )
 {
   int max = GetCarryCapacityWeight(ch);
   int cur = ch->carry_weight;
@@ -263,7 +263,7 @@ short encumbrance( const Character *ch, short move )
 /*
  * Check to see if a character can fall down, checks for looping   -Thoric
  */
-bool will_fall( Character *ch, int fall )
+bool FallIfNoFloor( Character *ch, int fall )
 {
   if ( IsBitSet( ch->in_room->room_flags, ROOM_NOFLOOR )
        && CAN_GO(ch, DIR_DOWN)
@@ -281,7 +281,7 @@ bool will_fall( Character *ch, int fall )
 
       set_char_color( AT_FALLING, ch );
       send_to_char( "You're falling down...\r\n", ch );
-      move_char( ch, get_exit(ch->in_room, DIR_DOWN), ++fall );
+      MoveCharacter( ch, GetExit(ch->in_room, DIR_DOWN), ++fall );
       return true;
     }
 
@@ -292,7 +292,7 @@ bool will_fall( Character *ch, int fall )
 /*
  * create a 'virtual' room                                      -Thoric
  */
-Room *generate_exit( Room *in_room, Exit **pexit )
+Room *GenerateExit( Room *in_room, Exit **pexit )
 {
   Exit *xit = NULL, *bxit = NULL;
   Exit *orig_exit = (Exit *) *pexit;
@@ -363,7 +363,7 @@ Room *generate_exit( Room *in_room, Exit **pexit )
       ++top_vroom;
     }
 
-  if ( !found || (xit=get_exit(room, vdir))==NULL )
+  if ( !found || (xit=GetExit(room, vdir))==NULL )
     {
       xit = make_exit(room, orig_exit->to_room, vdir);
       xit->keyword              = CopyString( "" );
@@ -385,7 +385,7 @@ Room *generate_exit( Room *in_room, Exit **pexit )
 	}
       else
         {
-          Exit *tmp = get_exit( backroom, vdir );
+          Exit *tmp = GetExit( backroom, vdir );
           int fulldist = tmp->distance;
 
           bxit->distance = fulldist - distance;
@@ -396,7 +396,7 @@ Room *generate_exit( Room *in_room, Exit **pexit )
   return room;
 }
 
-ch_ret move_char( Character *ch, Exit *pexit, int fall )
+ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
 {
   Room *in_room;
   Room *to_room;
@@ -418,13 +418,13 @@ ch_ret move_char( Character *ch, Exit *pexit, int fall )
   if ( drunk && !fall )
     {
       door = GetRandomDoor();
-      pexit = get_exit( ch->in_room, door );
+      pexit = GetExit( ch->in_room, door );
     }
 
 #ifdef DEBUG
   if ( pexit )
     {
-      sprintf( buf, "move_char: %s to door %d", ch->name, pexit->vdir );
+      sprintf( buf, "MoveCharacter: %s to door %d", ch->name, pexit->vdir );
       log_string( buf );
     }
 #endif
@@ -507,7 +507,7 @@ ch_ret move_char( Character *ch, Exit *pexit, int fall )
    */
   if ( distance > 1 )
     {
-      if ( (to_room=generate_exit(in_room, &pexit)) == NULL )
+      if ( (to_room=GenerateExit(in_room, &pexit)) == NULL )
 	{
 	  send_to_char( "Alas, you cannot go that way.\r\n", ch );
 	}
@@ -657,7 +657,7 @@ ch_ret move_char( Character *ch, Exit *pexit, int fall )
                       learn_from_failure( ch, gsn_climb );
                       if ( pexit->vdir == DIR_DOWN )
                         {
-                          retcode = move_char( ch, pexit, 1 );
+                          retcode = MoveCharacter( ch, pexit, 1 );
                           return retcode;
                         }
                       set_char_color( AT_HURT, ch );
@@ -738,7 +738,7 @@ ch_ret move_char( Character *ch, Exit *pexit, int fall )
 
           if ( !IsAffectedBy(ch, AFF_FLYING)
                &&   !IsAffectedBy(ch, AFF_FLOATING) )
-            move = hpmove*encumbrance( ch, movement_loss[umin(SECT_MAX-1, in_room->sector_type)] );
+            move = hpmove*GetCarryEncumbrance( ch, movement_loss[umin(SECT_MAX-1, in_room->sector_type)] );
           else
             move = 1;
 
@@ -1011,7 +1011,7 @@ ch_ret move_char( Character *ch, Exit *pexit, int fall )
                && fch->position == POS_STANDING )
             {
               act( AT_ACTION, "You follow $N.", fch, NULL, ch, TO_CHAR );
-              move_char( fch, pexit, 0 );
+              MoveCharacter( fch, pexit, 0 );
             }
         }
     }
@@ -1040,7 +1040,7 @@ ch_ret move_char( Character *ch, Exit *pexit, int fall )
   if ( char_died(ch) )
     return retcode;
 
-  if (!will_fall( ch, fall )
+  if (!FallIfNoFloor( ch, fall )
       &&   fall > 0 )
     {
       if (!IsAffectedBy( ch, AFF_FLOATING )
@@ -1060,7 +1060,7 @@ ch_ret move_char( Character *ch, Exit *pexit, int fall )
   return retcode;
 }
 
-Exit *find_door( Character *ch, const char *arg, bool quiet )
+Exit *FindDoor( Character *ch, const char *arg, bool quiet )
 {
   Exit *pexit;
   int door;
@@ -1129,7 +1129,7 @@ Exit *find_door( Character *ch, const char *arg, bool quiet )
       return NULL;
     }
 
-  if ( (pexit = get_exit( ch->in_room, door )) == NULL )
+  if ( (pexit = GetExit( ch->in_room, door )) == NULL )
     {
       if ( !quiet)
         act( AT_PLAIN, "You see no $T here.", ch, NULL, arg, TO_CHAR );
@@ -1165,7 +1165,7 @@ void toggle_bexit_flag( Exit *pexit, int flag )
     ToggleBit( pexit_rev->exit_info, flag );
 }
 
-void set_bexit_flag( Exit *pexit, int flag )
+void SetBExitFlag( Exit *pexit, int flag )
 {
   Exit *pexit_rev;
 
@@ -1176,7 +1176,7 @@ void set_bexit_flag( Exit *pexit, int flag )
     SetBit( pexit_rev->exit_info, flag );
 }
 
-void remove_bexit_flag( Exit *pexit, int flag )
+void RemoveBExitFlag( Exit *pexit, int flag )
 {
   Exit *pexit_rev;
 
@@ -1187,7 +1187,7 @@ void remove_bexit_flag( Exit *pexit, int flag )
     RemoveBit( pexit_rev->exit_info, flag );
 }
 
-bool has_key( const Character *ch, vnum_t key )
+bool HasKey( const Character *ch, vnum_t key )
 {
   Object *obj = NULL;
 
@@ -1219,7 +1219,7 @@ void teleportch( Character *ch, Room *room, bool show )
     do_look( ch, "auto" );
 }
 
-void teleport( Character *ch, vnum_t room, int flags )
+void Teleport( Character *ch, vnum_t room, int flags )
 {
   Character *nch = NULL, *nch_next = NULL;
   Room *pRoomIndex = get_room_index( room );

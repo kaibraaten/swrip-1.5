@@ -2627,7 +2627,7 @@ int get_wearloc( const char *type )
   return get_in_array( type, wear_locs, MAX_WEAR, StrCmp );
 }
 
-int get_exitflag( const char *flag )
+int GetExitFlag( const char *flag )
 {
   return get_in_array( flag, exit_flags, MAX_EXFLAG, StrCmp );
 }

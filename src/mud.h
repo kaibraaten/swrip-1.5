@@ -1393,7 +1393,7 @@ extern short gsn_yevethan;
                                                                   (ch)->in_room->room_flags, \
                                                                   ROOM_SPACECRAFT) )
 
-#define EXIT(ch, door)          ( get_exit( (ch)->in_room, door ) )
+#define EXIT(ch, door)          ( GetExit( (ch)->in_room, door ) )
 
 #define CAN_GO(ch, door)        (EXIT((ch),(door))                      \
                                  && (EXIT((ch),(door))->to_room != NULL) \
@@ -2246,19 +2246,19 @@ extern "C" {
 				  bool fShort, bool fShowNothing );
 
   /* act_move.c */
-  bool has_key( const Character *ch, vnum_t key );
-  void set_bexit_flag( Exit *pexit, int flag );
-  void remove_bexit_flag( Exit *pexit, int flag );
-  Room *generate_exit( Room *in_room, Exit **pexit );
-  void  clear_vrooms( void );
-  Exit *find_door( Character *ch, const char *arg, bool quiet );
-  Exit *get_exit( const Room *room, short dir );
-  Exit *get_exit_to( const Room *room, short dir, vnum_t vnum );
-  Exit *get_exit_num( const Room *room, short count );
-  ch_ret move_char( Character *ch, Exit *pexit, int fall );
-  void teleport( Character *ch, vnum_t room, int flags );
-  short encumbrance( const Character *ch, short move );
-  bool will_fall( Character *ch, int fall );
+  bool HasKey( const Character *ch, vnum_t key );
+  void SetBExitFlag( Exit *pexit, int flag );
+  void RemoveBExitFlag( Exit *pexit, int flag );
+  Room *GenerateExit( Room *in_room, Exit **pexit );
+  void  ClearVirtualRooms( void );
+  Exit *FindDoor( Character *ch, const char *arg, bool quiet );
+  Exit *GetExit( const Room *room, short dir );
+  Exit *GetExitTo( const Room *room, short dir, vnum_t vnum );
+  Exit *GetExitNumber( const Room *room, short count );
+  ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall );
+  void Teleport( Character *ch, vnum_t room, int flags );
+  short GetCarryEncumbrance( const Character *ch, short move );
+  bool FallIfNoFloor( Character *ch, int fall );
   vnum_t wherehome( const Character *ch );
 
   /* act_obj.c */
@@ -2367,7 +2367,7 @@ extern "C" {
   int get_langflag( const char* );
   int get_trigflag( const char* );
   int get_roomflag( const char* );
-  int get_exitflag( const char* );
+  int GetExitFlag( const char* );
   int get_wearloc( const char* );
   int get_trapflag( const char* );
   int get_areaflag( const char* );

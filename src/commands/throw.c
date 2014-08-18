@@ -73,7 +73,7 @@ void do_throw( Character *ch, char *argument )
     }
   else  if ( ( dir = get_dir( arg2 ) ) != -1 )
     {
-      if ( ( pexit = get_exit( ch->in_room, dir ) ) == NULL )
+      if ( ( pexit = GetExit( ch->in_room, dir ) ) == NULL )
 	{
           send_to_char( "Are you expecting to throw it through a wall!?\r\n", ch );
           return;
@@ -115,7 +115,7 @@ void do_throw( Character *ch, char *argument )
 
       to_room = NULL;
       if ( pexit->distance > 1 )
-        to_room = generate_exit( ch->in_room , &pexit );
+        to_room = GenerateExit( ch->in_room , &pexit );
 
       if ( to_room == NULL )
         to_room = pexit->to_room;
@@ -155,7 +155,7 @@ void do_throw( Character *ch, char *argument )
 
           to_room = NULL;
           if ( pexit->distance > 1 )
-            to_room = generate_exit( ch->in_room , &pexit );
+            to_room = GenerateExit( ch->in_room , &pexit );
 
           if ( to_room == NULL )
             to_room = pexit->to_room;

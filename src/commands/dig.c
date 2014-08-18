@@ -26,7 +26,7 @@ void do_dig( Character *ch, char *argument )
       OneArgument( argument, arg );
       if ( arg[0] != '\0' )
         {
-	  if ( ( pexit = find_door( ch, arg, true ) ) == NULL
+	  if ( ( pexit = FindDoor( ch, arg, true ) ) == NULL
                &&     get_dir(arg) == -1 )
             {
               send_to_char( "What direction is that?\r\n", ch );
@@ -100,7 +100,7 @@ void do_dig( Character *ch, char *argument )
   /* dig out an EX_DIG exit... */
   if ( arg[0] != '\0' )
     {
-      if ( ( pexit = find_door( ch, arg, true ) ) != NULL
+      if ( ( pexit = FindDoor( ch, arg, true ) ) != NULL
            &&     IsBitSet( pexit->exit_info, EX_DIG )
            &&     IsBitSet( pexit->exit_info, EX_CLOSED ) )
         {

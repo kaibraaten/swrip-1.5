@@ -954,7 +954,7 @@ Reset *ParseReset( Area *tarea, char *argument, Character *ch )
                           send_to_char( "Reset: DOOR: invalid exit\r\n", ch );
                           return NULL;
                         }
-                      if ( (pexit = get_exit(room, val2)) == NULL
+                      if ( (pexit = GetExit(room, val2)) == NULL
                            ||   !IsBitSet( pexit->exit_info, EX_ISDOOR ) )
                         {
                           send_to_char( "Reset: DOOR: no such door\r\n", ch );

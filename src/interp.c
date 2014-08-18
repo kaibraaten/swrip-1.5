@@ -444,7 +444,7 @@ void interpret( Character *ch, char *argument )
           Exit *pexit = NULL;
 
           /* check for an auto-matic exit command */
-          if ( ( pexit = find_door( ch, command, true ) ) != NULL
+          if ( ( pexit = FindDoor( ch, command, true ) ) != NULL
                && IsBitSet( pexit->exit_info, EX_xAUTO ) )
             {
               if ( IsBitSet( pexit->exit_info, EX_CLOSED )
@@ -463,7 +463,7 @@ void interpret( Character *ch, char *argument )
                   return;
                 }
 
-              move_char( ch, pexit, 0 );
+              MoveCharacter( ch, pexit, 0 );
               return;
             }
 

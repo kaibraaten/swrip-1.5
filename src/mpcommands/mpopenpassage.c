@@ -75,7 +75,7 @@ void do_mp_open_passage( Character *ch, char *argument )
       return;
     }
 
-  if( (pexit = get_exit( fromRoom, exit_num )) != NULL )
+  if( (pexit = GetExit( fromRoom, exit_num )) != NULL )
     {
       if( !IsBitSet( pexit->exit_info, EX_PASSAGE) )
         return;

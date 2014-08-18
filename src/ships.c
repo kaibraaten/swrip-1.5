@@ -877,7 +877,7 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
   if ( drunk && !fall )
     {
       door = GetRandomDoor();
-      pexit = get_exit( get_room_index(ship->location), door );
+      pexit = GetExit( get_room_index(ship->location), door );
     }
 
   in_room = get_room_index(ship->location);

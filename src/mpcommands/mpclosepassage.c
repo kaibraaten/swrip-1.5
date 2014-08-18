@@ -62,7 +62,7 @@ void do_mp_close_passage( Character *ch, char *argument )
       return;
     }
 
-  if( ( pexit = get_exit(fromRoom, exit_num) ) == NULL )
+  if( ( pexit = GetExit(fromRoom, exit_num) ) == NULL )
     {
       return;    /* already closed, ignore...  so rand_progs */
       /*                            can close without spam */

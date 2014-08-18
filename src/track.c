@@ -54,7 +54,7 @@ static struct bfs_queue_struct *room_queue = NULL;
 
 static Room *ToRoom( const Room *room, DirectionType door )
 {
-  return (get_exit( room, door )->to_room);
+  return (GetExit( room, door )->to_room);
 }
 
 static bool IsValidEdge( const Room *room, short door )
@@ -62,7 +62,7 @@ static bool IsValidEdge( const Room *room, short door )
   const Exit *pexit = NULL;
   const Room *to_room = NULL;
 
-  pexit = get_exit( room, door );
+  pexit = GetExit( room, door );
 
   if ( pexit
        &&  (to_room = pexit->to_room) != NULL
@@ -407,7 +407,7 @@ void HuntVictim( Character *ch )
         {
           ret = GetRandomDoor();
 
-          if ( ( pexit = get_exit(ch->in_room, ret) ) == NULL
+          if ( ( pexit = GetExit(ch->in_room, ret) ) == NULL
                || !pexit->to_room
                || IsBitSet(pexit->exit_info, EX_CLOSED)
                || IsBitSet(pexit->to_room->room_flags, ROOM_NO_MOB) )
@@ -425,7 +425,7 @@ void HuntVictim( Character *ch )
     }
   else
     {
-      move_char( ch, get_exit( ch->in_room, ret), false );
+      MoveCharacter( ch, GetExit( ch->in_room, ret), false );
 
       if ( char_died(ch) )
 	{
@@ -477,7 +477,7 @@ static bool MobSnipe( Character *ch, Character *victim )
 
   for ( dir = 0 ; dir <= 10 ; dir++ )
     {
-      if ( ( pexit = get_exit( ch->in_room, dir ) ) == NULL )
+      if ( ( pexit = GetExit( ch->in_room, dir ) ) == NULL )
 	{
 	  continue;
 	}
@@ -505,7 +505,7 @@ static bool MobSnipe( Character *ch, Character *victim )
 
           if ( pexit->distance > 1 )
 	    {
-	      to_room = generate_exit( ch->in_room , &pexit );
+	      to_room = GenerateExit( ch->in_room , &pexit );
 	    }
 
           if ( to_room == NULL )
@@ -522,7 +522,7 @@ static bool MobSnipe( Character *ch, Character *victim )
               break;
             }
 
-          if ( ( pexit = get_exit( ch->in_room, dir ) ) == NULL )
+          if ( ( pexit = GetExit( ch->in_room, dir ) ) == NULL )
 	    {
 	      break;
 	    }

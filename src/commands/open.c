@@ -16,7 +16,7 @@ void do_open( Character *ch, char *argument )
       return;
     }
 
-  if ( ( pexit = find_door( ch, arg, true ) ) != NULL )
+  if ( ( pexit = FindDoor( ch, arg, true ) ) != NULL )
     {
       Exit *pexit_rev = NULL;
 
@@ -58,7 +58,7 @@ void do_open( Character *ch, char *argument )
 		}
             }
 
-          remove_bexit_flag( pexit, EX_CLOSED );
+          RemoveBExitFlag( pexit, EX_CLOSED );
 	  door = pexit->vdir;
 
           if ( door >= TRAP_N && door <= TRAP_SW )

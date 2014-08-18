@@ -11,7 +11,7 @@ void do_leave( Character *ch, char *argument )
 	{
 	  if ( IsBitSet( pexit->exit_info, EX_xLEAVE ) )
 	    {
-	      move_char( ch, pexit, 0 );
+	      MoveCharacter( ch, pexit, 0 );
 	      return;
 	    }
 	}
@@ -20,11 +20,11 @@ void do_leave( Character *ch, char *argument )
       return;
     }
 
-  pexit = find_door( ch, argument, true );
+  pexit = FindDoor( ch, argument, true );
 
   if ( pexit && IsBitSet( pexit->exit_info, EX_xLEAVE ) )
     {
-      move_char( ch, pexit, 0 );
+      MoveCharacter( ch, pexit, 0 );
       return;
     }
 

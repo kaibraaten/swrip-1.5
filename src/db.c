@@ -1450,7 +1450,7 @@ void load_resets( Area *tarea, FILE *fp )
 
           if ( arg2 < 0
                ||   arg2 > MAX_DIR+1
-               || ( pexit = get_exit(pRoomIndex, arg2)) == NULL
+               || ( pexit = GetExit(pRoomIndex, arg2)) == NULL
                || !IsBitSet( pexit->exit_info, EX_ISDOOR ) )
             {
               bug( "Load_resets: 'D': exit %d not door.", arg2 );
@@ -1964,7 +1964,7 @@ void fix_exits( void )
             {
               if ( pexit->to_room && !pexit->rexit )
                 {
-                  Exit *rev_exit = get_exit_to( pexit->to_room, get_rev_dir(pexit->vdir), pRoomIndex->vnum );
+                  Exit *rev_exit = GetExitTo( pexit->to_room, get_rev_dir(pexit->vdir), pRoomIndex->vnum );
                   if ( rev_exit )
                     {
                       pexit->rexit      = rev_exit;
@@ -1980,7 +1980,7 @@ void fix_exits( void )
 /*
  * Get diku-compatable exit by number                           -Thoric
  */
-Exit *get_exit_number( Room *room, int xit )
+Exit *GetExitNumberber( Room *room, int xit )
 {
   Exit *pexit;
   int count;
@@ -4078,7 +4078,7 @@ Exit *make_exit( Room *pRoomIndex, Room *to_room, short door )
   if ( to_room )
     {
       pexit->vnum = to_room->vnum;
-      texit = get_exit_to( to_room, get_rev_dir(door), pRoomIndex->vnum );
+      texit = GetExitTo( to_room, get_rev_dir(door), pRoomIndex->vnum );
       if ( texit )      /* assign reverse exit pointers */
         {
           texit->rexit = pexit;
@@ -4154,7 +4154,7 @@ void fix_area_exits( Area *tarea )
         {
           if ( pexit->to_room && !pexit->rexit )
             {
-              rev_exit = get_exit_to( pexit->to_room, get_rev_dir(pexit->vdir), pRoomIndex->vnum );
+              rev_exit = GetExitTo( pexit->to_room, get_rev_dir(pexit->vdir), pRoomIndex->vnum );
               if ( rev_exit )
                 {
                   pexit->rexit  = rev_exit;

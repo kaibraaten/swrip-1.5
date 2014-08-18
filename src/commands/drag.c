@@ -64,7 +64,7 @@ void do_drag( Character *ch, char *argument )
     }
 
   nogo = false;
-  if ((pexit = get_exit(ch->in_room, exit_dir)) == NULL )
+  if ((pexit = GetExit(ch->in_room, exit_dir)) == NULL )
     {
       if (!StrCmp( arg2, "in" ))
         {
@@ -265,11 +265,11 @@ void do_drag( Character *ch, char *argument )
       victim->position = POS_DRAG;
       act( AT_ACTION, "You drag $M into the next room.", ch, NULL, victim, TO_CHAR );
       act( AT_ACTION, "$n grabs your hair and drags you.", ch, NULL, victim, TO_VICT );
-      move_char( victim, get_exit(ch->in_room,exit_dir), 0);
+      MoveCharacter( victim, GetExit(ch->in_room,exit_dir), 0);
       if ( !char_died(victim) )
         victim->position = temp;
       /* Move ch to the room too.. they are doing dragging - Scryn */
-      move_char( ch, get_exit(ch->in_room,exit_dir), 0);
+      MoveCharacter( ch, GetExit(ch->in_room,exit_dir), 0);
       SetWaitState(ch, 12);
       return;
     }

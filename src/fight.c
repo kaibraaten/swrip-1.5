@@ -487,9 +487,9 @@ ch_ret multi_hit( Character *ch, Character *victim, int dt )
 
       if ( !IsAffectedBy(ch, AFF_FLYING)
            &&   !IsAffectedBy(ch, AFF_FLOATING) )
-        move = encumbrance( ch, movement_loss[umin(SECT_MAX-1, ch->in_room->sector_type)] );
+        move = GetCarryEncumbrance( ch, movement_loss[umin(SECT_MAX-1, ch->in_room->sector_type)] );
       else
-        move = encumbrance( ch, 1 );
+        move = GetCarryEncumbrance( ch, 1 );
       if ( ch->move )
         ch->move = umax( 0, ch->move - move );
     }
@@ -2568,7 +2568,7 @@ bool get_cover( Character *ch )
     {
 
       door = GetRandomDoor( );
-      if ( ( pexit = get_exit(was_in, door) ) == NULL
+      if ( ( pexit = GetExit(was_in, door) ) == NULL
            ||   !pexit->to_room
            || ( IsBitSet(pexit->exit_info, EX_CLOSED)
                 &&   !IsAffectedBy( ch, AFF_PASS_DOOR ) )
@@ -2580,7 +2580,7 @@ bool get_cover( Character *ch )
       RemoveBit   ( ch->affected_by, AFF_SNEAK );
       if ( ch->mount && ch->mount->fighting )
         stop_fighting( ch->mount, true );
-      move_char( ch, pexit, 0 );
+      MoveCharacter( ch, pexit, 0 );
       if ( ( now_in = ch->in_room ) == was_in )
         continue;
 

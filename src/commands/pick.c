@@ -47,7 +47,7 @@ void do_pick( Character *ch, char *argument )
     }
 
 
-  if ( ( pexit = find_door( ch, arg, true ) ) != NULL )
+  if ( ( pexit = FindDoor( ch, arg, true ) ) != NULL )
     {
       /* 'pick door' */
       /*        Room *to_room; */ /* Unused */

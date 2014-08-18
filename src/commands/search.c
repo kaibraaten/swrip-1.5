@@ -104,7 +104,7 @@ void do_search( Character *ch, char *argument )
     {
       Exit *pexit;
 
-      if ( (pexit = get_exit( ch->in_room, door )) != NULL
+      if ( (pexit = GetExit( ch->in_room, door )) != NULL
            &&   IsBitSet( pexit->exit_info, EX_SECRET )
            &&   IsBitSet( pexit->exit_info, EX_xSEARCHABLE )
            &&   percent < (IsNpc(ch) ? 80 : ch->pcdata->learned[gsn_search]) )

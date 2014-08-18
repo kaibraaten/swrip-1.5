@@ -159,7 +159,7 @@ void pullorpush( Character *ch, Object *obj, bool pull )
 	  SetBit( flags, TELE_TRANSALLPLUS );
 	}
 
-      teleport( ch, obj->value[OVAL_BUTTON_TELEPORT_DESTINATION], flags );
+      Teleport( ch, obj->value[OVAL_BUTTON_TELEPORT_DESTINATION], flags );
       return;
     }
 
@@ -241,7 +241,7 @@ void pullorpush( Character *ch, Object *obj, bool pull )
 	  return;
 	}
 
-      pexit = get_exit( room, edir );
+      pexit = GetExit( room, edir );
 
       if ( !pexit )
         {

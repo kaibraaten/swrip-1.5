@@ -76,7 +76,7 @@ void do_look( Character *ch, char *argument )
     }
 
   door = get_dir( arg1 );
-  pexit = find_door( ch, arg1, true );
+  pexit = FindDoor( ch, arg1, true );
 
   if ( pexit )
     {
@@ -869,7 +869,7 @@ static void show_exit_to_char( Character *ch, Exit *pexit, short door )
 
       if ( pexit->distance > 1 )
 	{
-	  Room *to_room = generate_exit( ch->in_room, &pexit );
+	  Room *to_room = GenerateExit( ch->in_room, &pexit );
 
 	  if ( to_room )
 	    {

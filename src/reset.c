@@ -1155,7 +1155,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
           vnum = get_dir(arg);
           SetBit(num, vnum << BIT_RESET_DOOR_THRESHOLD);
           vnum = pRoom->vnum;
-          flfunc = &get_exitflag;
+          flfunc = &GetExitFlag;
           reset = NULL;
         }
       else if ( !StringPrefix(option, "object") )
@@ -1833,7 +1833,7 @@ void ResetArea( Area *pArea )
 
                 doornum = (pReset->arg2 & BIT_RESET_DOOR_MASK) >> BIT_RESET_DOOR_THRESHOLD;
 
-                if ( !(pexit = get_exit(pRoomIndex, doornum)) )
+                if ( !(pexit = GetExit(pRoomIndex, doornum)) )
 		  {
 		    break;
 		  }
@@ -1937,7 +1937,7 @@ void ResetArea( Area *pArea )
               continue;
             }
 
-          if ( !(pexit = get_exit(pRoomIndex, pReset->arg2)) )
+          if ( !(pexit = GetExit(pRoomIndex, pReset->arg2)) )
 	    {
 	      break;
 	    }
@@ -2212,7 +2212,7 @@ void ListResets( Character *ch, Area *pArea, Room *pRoom,
                   door = urange(0, door, MAX_DIR+1);
                   sprintf(pbuf, "Exit %s%s (%d), Room %s (%d)",
 			  get_dir_name(door),
-                          (room && get_exit(room, door) ? "" : " (NO EXIT!)"), door,
+                          (room && GetExit(room, door) ? "" : " (NO EXIT!)"), door,
                           rname, pReset->arg1);
                 }
                 flagarray = exit_flags;
@@ -2310,7 +2310,7 @@ void ListResets( Character *ch, Area *pArea, Room *pRoom,
 
             sprintf(pbuf, "%s [%d] the %s%s [%d] door %s (%d)\r\n", ef_name,
                     pReset->arg3, get_dir_name(pReset->arg2),
-                    (room && get_exit(room, pReset->arg2) ? "" : " (NO EXIT!)"),
+                    (room && GetExit(room, pReset->arg2) ? "" : " (NO EXIT!)"),
                     pReset->arg2, rname, pReset->arg1);
           }
           break;
@@ -2856,7 +2856,7 @@ char *SPrintReset( Character *ch, Reset *pReset, short num, bool rlist )
           strcpy( roomname, room->name );
           sprintf( objname, "%s%s",
                    get_dir_name(pReset->arg2),
-                   get_exit(room,pReset->arg2) ? "" : " (NO EXIT!)" );
+                   GetExit(room,pReset->arg2) ? "" : " (NO EXIT!)" );
         }
 
       switch( pReset->arg3 )

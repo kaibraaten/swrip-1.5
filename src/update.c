@@ -1061,14 +1061,14 @@ void mobile_update( void )
            && !IsBitSet(ch->act, ACT_SENTINEL)
            && !IsBitSet(ch->act, ACT_PROTOTYPE)
            && ( door = NumberBits( 5 ) ) <= 9
-           && ( pexit = get_exit(ch->in_room, door) ) != NULL
+           && ( pexit = GetExit(ch->in_room, door) ) != NULL
            && pexit->to_room
            && !IsBitSet(pexit->exit_info, EX_CLOSED)
            && !IsBitSet(pexit->to_room->room_flags, ROOM_NO_MOB)
            && ( !IsBitSet(ch->act, ACT_STAY_AREA)
                 ||   pexit->to_room->area == ch->in_room->area ) )
         {
-          retcode = move_char( ch, pexit, 0 );
+          retcode = MoveCharacter( ch, pexit, 0 );
 
           /* If ch changes position due
              to it's or someother mob's
@@ -1089,7 +1089,7 @@ void mobile_update( void )
       /* Flee */
       if ( ch->hit < ch->max_hit / 2
            && ( door = NumberBits( 4 ) ) <= 9
-           && ( pexit = get_exit(ch->in_room,door) ) != NULL
+           && ( pexit = GetExit(ch->in_room,door) ) != NULL
            && pexit->to_room
            && !IsBitSet(pexit->exit_info, EX_CLOSED)
            && !IsBitSet(pexit->to_room->room_flags, ROOM_NO_MOB) )
@@ -1130,7 +1130,7 @@ void mobile_update( void )
 
           if ( found )
 	    {
-	      retcode = move_char( ch, pexit, 0 );
+	      retcode = MoveCharacter( ch, pexit, 0 );
 	    }
         }
     }
@@ -2097,7 +2097,7 @@ void char_check( void )
 
       set_cur_char(ch);
       ch_next = ch->next;
-      will_fall(ch, 0);
+      FallIfNoFloor(ch, 0);
 
       if ( char_died( ch ) )
 	{
@@ -2151,14 +2151,14 @@ void char_check( void )
               if ( !IsBitSet(ch->act, ACT_SENTINEL)
                    && !IsBitSet(ch->act, ACT_PROTOTYPE)
                    && ( door = NumberBits( 4 ) ) <= 9
-                   && ( pexit = get_exit(ch->in_room, door) ) != NULL
+                   && ( pexit = GetExit(ch->in_room, door) ) != NULL
                    && pexit->to_room
                    && !IsBitSet(pexit->exit_info, EX_CLOSED)
                    && !IsBitSet(pexit->to_room->room_flags, ROOM_NO_MOB)
                    && ( !IsBitSet(ch->act, ACT_STAY_AREA)
                         || pexit->to_room->area == ch->in_room->area ) )
                 {
-                  retcode = move_char( ch, pexit, 0 );
+                  retcode = MoveCharacter( ch, pexit, 0 );
 
                   if ( char_died(ch) )
 		    {
@@ -2583,7 +2583,7 @@ void tele_update( void )
         {
           if ( tele->room->first_person )
             {
-              teleport( tele->room->first_person, tele->room->tele_vnum,
+              Teleport( tele->room->first_person, tele->room->tele_vnum,
                         TELE_TRANSALL );
             }
 
@@ -2673,7 +2673,7 @@ void update_handler( void )
       weather_update();
       char_update();
       obj_update();
-      clear_vrooms();
+      ClearVirtualRooms();
     }
 
   if ( --pulse_second   <= 0 )

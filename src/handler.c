@@ -1131,7 +1131,7 @@ void extract_char( Character *ch, bool fPull )
         location = get_room_index( wherehome( ch ) );
 
       if ( !location )
-        location = get_room_index( 1 );
+        location = get_room_index( ROOM_VNUM_LIMBO );
 
       char_to_room( ch, location );
 

@@ -28,7 +28,7 @@ void do_bashdoor( Character *ch, char *argument )
       return;
     }
 
-  if ( ( pexit = find_door( ch, arg, false ) ) != NULL )
+  if ( ( pexit = FindDoor( ch, arg, false ) ) != NULL )
     {
       Room *to_room = NULL;
       Exit *pexit_rev = NULL;

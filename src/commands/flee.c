@@ -38,7 +38,7 @@ void do_flee( Character *ch, char *argument )
     {
 
       door = GetRandomDoor( );
-      if ( ( pexit = get_exit(was_in, door) ) == NULL
+      if ( ( pexit = GetExit(was_in, door) ) == NULL
            ||   !pexit->to_room
            || ( IsBitSet(pexit->exit_info, EX_CLOSED)
                 &&   !IsAffectedBy( ch, AFF_PASS_DOOR ) )
@@ -53,7 +53,7 @@ void do_flee( Character *ch, char *argument )
         }
       if ( ch->mount && ch->mount->fighting )
         stop_fighting( ch->mount, true );
-      move_char( ch, pexit, 0 );
+      MoveCharacter( ch, pexit, 0 );
 
       mprog_entry_trigger( ch );
       if ( char_died(ch) )

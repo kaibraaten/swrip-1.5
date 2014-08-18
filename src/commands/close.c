@@ -16,7 +16,7 @@ void do_close( Character *ch, char *argument )
       return;
     }
 
-  if ( ( pexit = find_door( ch, arg, true ) ) != NULL )
+  if ( ( pexit = FindDoor( ch, arg, true ) ) != NULL )
     {
       /* 'close door' */
       Exit *pexit_rev = NULL;
@@ -51,7 +51,7 @@ void do_close( Character *ch, char *argument )
 	    }
         }
 
-      set_bexit_flag( pexit, EX_CLOSED );
+      SetBExitFlag( pexit, EX_CLOSED );
 
       if ( (door=pexit->vdir) >= 0 && door < 10 )
 	{

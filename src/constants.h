@@ -143,7 +143,7 @@ typedef enum
   } log_types;
 
 /*
- * Return types for move_char, damage, greet_trigger, etc, etc
+ * Return types for MoveCharacter, damage, greet_trigger, etc, etc
  * Added by Thoric to get rid of bugs
  */
 typedef enum
