@@ -6,7 +6,7 @@ extern char *spell_target_name;
 ch_ret spell_invis( int sn, int level, Character *ch, void *vo )
 {
   Character *victim;
-  SKILLTYPE *skill = get_skilltype(sn);
+  Skill *skill = get_skilltype(sn);
 
   /* Modifications on 1/2/96 to work on player/object - Scryn */
 

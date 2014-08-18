@@ -7,7 +7,7 @@
 ch_ret spell_obj_inv( int sn, int level, Character *ch, void *vo )
 {
   Object *obj = (Object *) vo;
-  SKILLTYPE *skill = get_skilltype(sn);
+  Skill *skill = get_skilltype(sn);
 
   if ( !obj )
     {

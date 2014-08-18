@@ -5,7 +5,7 @@ ch_ret spell_dispel_evil( int sn, int level, Character *ch, void *vo )
 {
   Character *victim = (Character *) vo;
   int dam;
-  SKILLTYPE *skill = get_skilltype(sn);
+  Skill *skill = get_skilltype(sn);
 
   if ( !IsNpc(ch) && IsEvil(ch) )
     victim = ch;

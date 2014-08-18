@@ -7,7 +7,7 @@ ch_ret spell_charm_person( int sn, int level, Character *ch, void *vo )
   Affect af;
   int charm_chance;
   char buf[MAX_STRING_LENGTH];
-  SKILLTYPE *skill = get_skilltype(sn);
+  Skill *skill = get_skilltype(sn);
 
   if ( victim == ch )
     {

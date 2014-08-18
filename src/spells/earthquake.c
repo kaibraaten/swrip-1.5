@@ -7,7 +7,7 @@ ch_ret spell_earthquake( int sn, int level, Character *ch, void *vo )
   Character *vch_next;
   bool ch_died;
   ch_ret retcode;
-  SKILLTYPE *skill = get_skilltype(sn);
+  Skill *skill = get_skilltype(sn);
 
   ch_died = false;
   retcode = rNONE;

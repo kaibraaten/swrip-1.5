@@ -10,7 +10,7 @@ ch_ret spell_sleep( int sn, int level, Character *ch, void *vo )
   int sleep_chance;
   int tmp;
   Character *victim;
-  SKILLTYPE *skill = get_skilltype(sn);
+  Skill *skill = get_skilltype(sn);
 
   if ( ( victim = get_char_room( ch, spell_target_name ) ) == NULL )
     {

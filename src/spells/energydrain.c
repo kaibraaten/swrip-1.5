@@ -10,7 +10,7 @@ ch_ret spell_energy_drain( int sn, int level, Character *ch, void *vo )
   Character *victim = (Character *) vo;
   int dam;
   int drain_chance;
-  SKILLTYPE *skill = get_skilltype(sn);
+  Skill *skill = get_skilltype(sn);
 
   if ( IsBitSet( victim->immune, RIS_MAGIC ) )
     {

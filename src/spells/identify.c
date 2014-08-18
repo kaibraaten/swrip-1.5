@@ -9,8 +9,8 @@ ch_ret spell_identify( int sn, int level, Character *ch, void *vo )
   Object *obj;
   Character *victim;
   Affect *paf;
-  SKILLTYPE *sktmp;
-  SKILLTYPE *skill = get_skilltype(sn);
+  Skill *sktmp;
+  Skill *skill = get_skilltype(sn);
 
   if ( spell_target_name[0] == '\0' )
     {

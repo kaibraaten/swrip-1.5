@@ -6,7 +6,7 @@
  */
 ch_ret spell_create_mob( int sn, int level, Character *ch, void *vo )
 {
-  SKILLTYPE *skill = get_skilltype(sn);
+  Skill *skill = get_skilltype(sn);
   int lvl;
   int vnum = skill->value;
   Character *mob;

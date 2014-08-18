@@ -5,7 +5,7 @@ ch_ret spell_dispel_magic( int sn, int level, Character *ch, void *vo )
 {
   Character *victim = (Character *) vo;
   int affected_by, cnt;
-  SKILLTYPE *skill = get_skilltype(sn);
+  Skill *skill = get_skilltype(sn);
 
   if ( IsBitSet( victim->immune, RIS_MAGIC ) )
     {

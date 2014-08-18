@@ -7,7 +7,7 @@
 ch_ret spell_attack( int sn, int level, Character *ch, void *vo )
 {
   Character *victim = (Character *) vo;
-  SKILLTYPE *skill = get_skilltype(sn);
+  Skill *skill = get_skilltype(sn);
   bool saved = check_save( sn, level, ch, victim );
   int dam;
   ch_ret retcode;

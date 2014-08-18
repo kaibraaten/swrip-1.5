@@ -7,7 +7,7 @@
 ch_ret spell_area_attack( int sn, int level, Character *ch, void *vo )
 {
   Character *vch, *vch_next;
-  SKILLTYPE *skill = get_skilltype(sn);
+  Skill *skill = get_skilltype(sn);
   bool saved;
   bool affects;
   int dam;

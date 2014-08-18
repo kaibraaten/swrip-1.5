@@ -6,7 +6,7 @@ ch_ret spell_know_alignment( int sn, int level, Character *ch, void *vo )
   Character *victim = (Character *) vo;
   char *msg;
   int ap;
-  SKILLTYPE *skill = get_skilltype(sn);
+  Skill *skill = get_skilltype(sn);
 
   if ( !victim )
     {

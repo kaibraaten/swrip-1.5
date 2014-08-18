@@ -8,7 +8,7 @@ ch_ret spell_farsight( int sn, int level, Character *ch, void *vo )
   Room *location;
   Room *original;
   Character *victim;
-  SKILLTYPE *skill = get_skilltype(sn);
+  Skill *skill = get_skilltype(sn);
   int saving;
 
   /* The spell fails if the victim isn't playing, the victim is the caster,

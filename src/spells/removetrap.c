@@ -9,7 +9,7 @@ ch_ret spell_remove_trap( int sn, int level, Character *ch, void *vo )
   Object *trap;
   bool found;
   int retcode;
-  SKILLTYPE *skill = get_skilltype(sn);
+  Skill *skill = get_skilltype(sn);
 
   if ( !spell_target_name || spell_target_name[0] == '\0' )
     {
