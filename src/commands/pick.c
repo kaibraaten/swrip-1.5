@@ -62,7 +62,7 @@ void do_pick( Character *ch, char *argument )
       if ( IsBitSet(pexit->exit_info, EX_PICKPROOF) )
         {
           SendToCharacter( "You failed.\r\n", ch );
-          learn_from_failure( ch, gsn_pick_lock );
+          LearnFromFailure( ch, gsn_pick_lock );
           check_room_for_traps( ch, TRAP_PICK | trap_door[pexit->vdir] );
           return;
         }
@@ -70,14 +70,14 @@ void do_pick( Character *ch, char *argument )
       if ( !IsNpc(ch) && GetRandomPercent( ) > ch->pcdata->learned[gsn_pick_lock] )
         {
           SendToCharacter( "You failed.\r\n", ch);
-          learn_from_failure( ch, gsn_pick_lock );
+          LearnFromFailure( ch, gsn_pick_lock );
 	  return;
         }
 
       RemoveBit(pexit->exit_info, EX_LOCKED);
       SendToCharacter( "*Click*\r\n", ch );
       Act( AT_ACTION, "$n picks the $d.", ch, NULL, pexit->keyword, TO_ROOM );
-      learn_from_success( ch, gsn_pick_lock );
+      LearnFromSuccess( ch, gsn_pick_lock );
       /* pick the other side */
       if ( ( pexit_rev = pexit->rexit ) != NULL
            &&   pexit_rev->to_room == ch->in_room )
@@ -101,7 +101,7 @@ void do_pick( Character *ch, char *argument )
       if ( IsBitSet(obj->value[1], CONT_PICKPROOF) )
         {
           SendToCharacter( "You failed.\r\n", ch );
-          learn_from_failure( ch, gsn_pick_lock );
+          LearnFromFailure( ch, gsn_pick_lock );
           check_for_trap( ch, obj, TRAP_PICK );
           return;
         }
@@ -109,7 +109,7 @@ void do_pick( Character *ch, char *argument )
       if ( !IsNpc(ch) && GetRandomPercent( ) > ch->pcdata->learned[gsn_pick_lock] )
         {
           SendToCharacter( "You failed.\r\n", ch);
-          learn_from_failure( ch, gsn_pick_lock );
+          LearnFromFailure( ch, gsn_pick_lock );
           return;
         }
 
@@ -117,7 +117,7 @@ void do_pick( Character *ch, char *argument )
       RemoveBit(obj->value[1], CONT_LOCKED);
       SendToCharacter( "*Click*\r\n", ch );
       Act( AT_ACTION, "$n picks $p.", ch, obj, NULL, TO_ROOM );
-      learn_from_success( ch, gsn_pick_lock );
+      LearnFromSuccess( ch, gsn_pick_lock );
       check_for_trap( ch, obj, TRAP_PICK );
       return;
     }
@@ -143,7 +143,7 @@ void do_pick( Character *ch, char *argument )
       if ( IsNpc(ch) || !ch->pcdata || GetRandomPercent( ) > ch->pcdata->learned[gsn_pickshiplock] )
         {
           SendToCharacter( "You failed.\r\n", ch);
-          learn_from_failure( ch, gsn_pickshiplock );
+          LearnFromFailure( ch, gsn_pickshiplock );
           if ( ship->alarm == 0 )
             return;
           if ( !StrCmp("Public",ship->owner) )
@@ -187,7 +187,7 @@ void do_pick( Character *ch, char *argument )
           Act( AT_PLAIN, "You pick the lock and open the hatch on $T.", ch, NULL, ship->name, TO_CHAR );
           Act( AT_PLAIN, "$n picks open the hatch on $T.", ch, NULL, ship->name, TO_ROOM );
           EchoToRoom( AT_YELLOW , GetRoom(ship->room.entrance) , "The hatch opens from the outside." );
-          learn_from_success( ch, gsn_pickshiplock );
+          LearnFromSuccess( ch, gsn_pickshiplock );
           if ( ship->alarm == 0 )
             return;
           if ( !StrCmp("Public",ship->owner) )

@@ -145,7 +145,7 @@ void do_tractorbeam(Character *ch, char *argument )
           return;
         }
       SendToCharacter("&RYou fail to work the controls properly.\r\n",ch);
-      learn_from_failure( ch, gsn_tractorbeams );
+      LearnFromFailure( ch, gsn_tractorbeams );
       return;
 
     case SUB_PAUSE:
@@ -191,7 +191,7 @@ void do_tractorbeam(Character *ch, char *argument )
   if ( GetRandomPercent( ) >= the_chance )
     {
       SendToCharacter("&RYou fail to work the controls properly.\r\n",ch);
-      learn_from_failure( ch, gsn_tractorbeams );
+      LearnFromFailure( ch, gsn_tractorbeams );
       return;
     }
 
@@ -216,7 +216,7 @@ void do_tractorbeam(Character *ch, char *argument )
   sprintf( buf , "You have been locked in a tractor beam by %s." , ship->name);
   EchoToCockpit( AT_BLOOD , target , buf );
 
-  learn_from_success( ch, gsn_tractorbeams );
+  LearnFromSuccess( ch, gsn_tractorbeams );
 
   if ( IsShipAutoflying(target) && !target->target0 && StrCmp( target->owner, ship->owner ) )
     {

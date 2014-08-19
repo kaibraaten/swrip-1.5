@@ -60,7 +60,7 @@ void do_aid( Character *ch, char *argument )
   if ( !IsNpc(ch) && percent > ch->pcdata->learned[gsn_aid] )
     {
       SendToCharacter( "You fail.\r\n", ch );
-      learn_from_failure( ch, gsn_aid );
+      LearnFromFailure( ch, gsn_aid );
       return;
     }
 
@@ -69,7 +69,7 @@ void do_aid( Character *ch, char *argument )
 
   Act( AT_SKILL, "You aid $N!",  ch, NULL, victim, TO_CHAR    );
   Act( AT_SKILL, "$n aids $N!",  ch, NULL, victim, TO_NOTVICT );
-  learn_from_success( ch, gsn_aid );
+  LearnFromSuccess( ch, gsn_aid );
 
   if ( victim->hit < 1 )
     victim->hit = 1;

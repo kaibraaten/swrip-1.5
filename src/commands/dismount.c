@@ -20,14 +20,14 @@ void do_dismount( Character *ch, char *argument )
       RemoveBit( victim->act, ACT_MOUNTED );
       ch->mount = NULL;
       ch->position = POS_STANDING;
-      learn_from_success( ch, gsn_mount );
+      LearnFromSuccess( ch, gsn_mount );
     }
   else
     {
       Act( AT_SKILL, "You fall off while dismounting $N.  Ouch!", ch, NULL, victim, TO_CHAR );
       Act( AT_SKILL, "$n falls off of $N while dismounting.", ch, NULL, victim, TO_NOTVICT );
       Act( AT_SKILL, "$n falls off your back.", ch, NULL, victim, TO_VICT );
-      learn_from_failure( ch, gsn_mount );
+      LearnFromFailure( ch, gsn_mount );
       RemoveBit( victim->act, ACT_MOUNTED );
       ch->mount = NULL;
       ch->position = POS_SITTING;

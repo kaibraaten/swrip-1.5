@@ -855,7 +855,7 @@ if ( (iLang = skill_lookup( "common" )) < 0 )
       ch->max_mana += RaceTable[ch->race].mana;
       ch->mana      = ch->max_mana;
       sprintf( buf, "%s the %s",ch->name, RaceTable[ch->race].race_name );
-      set_title( ch, buf );
+      SetCharacterTitle( ch, buf );
 
       /* Added by Narn.  Start new characters with autoexit and autgold
 	 already turned on.  Very few people don't use those. */

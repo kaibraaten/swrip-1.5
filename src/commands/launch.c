@@ -218,13 +218,13 @@ void do_launch( Character *ch, char *argument )
       ship->currspeed = ship->realspeed;
 
       if ( ship->sclass == FIGHTER_SHIP )
-        learn_from_success( ch, gsn_starfighters );
+        LearnFromSuccess( ch, gsn_starfighters );
 
       if ( ship->sclass == MIDSIZE_SHIP )
-        learn_from_success( ch, gsn_midships );
+        LearnFromSuccess( ch, gsn_midships );
 
       if ( ship->sclass == CAPITAL_SHIP )
-        learn_from_success( ch, gsn_capitalships );
+        LearnFromSuccess( ch, gsn_capitalships );
 
       return;
     }
@@ -233,11 +233,11 @@ void do_launch( Character *ch, char *argument )
   SendToCharacter("You fail to work the controls properly!\r\n",ch);
 
   if ( ship->sclass == FIGHTER_SHIP )
-    learn_from_failure( ch, gsn_starfighters );
+    LearnFromFailure( ch, gsn_starfighters );
 
   if ( ship->sclass == MIDSIZE_SHIP )
-    learn_from_failure( ch, gsn_midships );
+    LearnFromFailure( ch, gsn_midships );
 
   if ( ship->sclass == CAPITAL_SHIP )
-    learn_from_failure( ch, gsn_capitalships );
+    LearnFromFailure( ch, gsn_capitalships );
 }

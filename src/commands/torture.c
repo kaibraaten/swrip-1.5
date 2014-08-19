@@ -85,7 +85,7 @@ void do_torture( Character *ch, char *argument )
        && (  IsNpc(ch)
              || (GetRandomPercent( ) + the_chance) < ch->pcdata->learned[gsn_torture] ) )
     {
-      learn_from_success( ch, gsn_torture );
+      LearnFromSuccess( ch, gsn_torture );
       SetWaitState( ch,     2 * PULSE_VIOLENCE );
       SetWaitState( victim, PULSE_VIOLENCE );
       Act( AT_SKILL, "$N slowly tortures you. The pain is excruciating.", victim, NULL, ch, TO_CHAR );

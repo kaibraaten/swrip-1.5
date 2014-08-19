@@ -75,13 +75,13 @@ void do_circle( Character *ch, char *argument )
   SetWaitState( ch, skill_table[gsn_circle]->beats );
   if ( percent < (IsNpc(ch) ? (GetAbilityLevel( ch, HUNTING_ABILITY ) * 1.5) : ch->pcdata->learned[gsn_circle]) )
     {
-      learn_from_success( ch, gsn_circle );
+      LearnFromSuccess( ch, gsn_circle );
       global_retcode = HitMultipleTimes( ch, victim, gsn_circle );
 
     }
   else
     {
-      learn_from_failure( ch, gsn_circle );
+      LearnFromFailure( ch, gsn_circle );
       global_retcode = InflictDamage( ch, victim, 0, gsn_circle );
     }
 }

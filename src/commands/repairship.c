@@ -49,7 +49,7 @@ void do_repairship(Character *ch, char *argument )
           return;
         }
       SendToCharacter("&RYou fail to locate the source of the problem.\r\n",ch);
-      learn_from_failure( ch, gsn_shipmaintenance );
+      LearnFromFailure( ch, gsn_shipmaintenance );
       return;
 
     case SUB_PAUSE:
@@ -147,5 +147,5 @@ void do_repairship(Character *ch, char *argument )
   Act( AT_PLAIN, "$n finishes the repairs.", ch,
        NULL, argument , TO_ROOM );
 
-  learn_from_success( ch, gsn_shipmaintenance );
+  LearnFromSuccess( ch, gsn_shipmaintenance );
 }

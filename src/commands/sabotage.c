@@ -45,7 +45,7 @@ void do_sabotage(Character *ch, char *argument )
 	  return;
         }
       SendToCharacter("&RYou fail to figure out where to start.\r\n",ch);
-      learn_from_failure( ch, gsn_sabotage );
+      LearnFromFailure( ch, gsn_sabotage );
       return;
 
     case SUB_PAUSE:
@@ -119,5 +119,5 @@ void do_sabotage(Character *ch, char *argument )
   sprintf(buf, "%s has sabotaged %s!", ch->name, ship->name );
   Bug(buf, 0);
 
-  learn_from_success( ch, gsn_sabotage );
+  LearnFromSuccess( ch, gsn_sabotage );
 }

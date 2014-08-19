@@ -33,7 +33,7 @@ void do_scan( Character *ch, char *argument )
     {
       Act( AT_GREY, "You stop scanning $t as your vision blurs.", ch,
            GetDirectionName(dir), NULL, TO_CHAR );
-      learn_from_failure( ch, gsn_scan );
+      LearnFromFailure( ch, gsn_scan );
       return;
     }
 
@@ -121,5 +121,5 @@ void do_scan( Character *ch, char *argument )
 
   char_from_room( ch );
   char_to_room( ch, was_in_room );
-  learn_from_success( ch, gsn_scan );
+  LearnFromSuccess( ch, gsn_scan );
 }

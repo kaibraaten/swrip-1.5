@@ -398,13 +398,13 @@ ch_ret HitMultipleTimes( Character *ch, Character *victim, int dt )
       hit_chance = IsNpc(ch) ? ch->top_level : ch->pcdata->learned[gsn_dual_wield];
       if ( GetRandomPercent( ) < hit_chance )
         {
-          learn_from_success( ch, gsn_dual_wield );
+          LearnFromSuccess( ch, gsn_dual_wield );
           retcode = HitOnce( ch, victim, dt );
           if ( retcode != rNONE || GetFightingOpponent( ch ) != victim )
             return retcode;
         }
       else
-        learn_from_failure( ch, gsn_dual_wield );
+        LearnFromFailure( ch, gsn_dual_wield );
     }
   else
     dual_bonus = 0;
@@ -430,49 +430,49 @@ ch_ret HitMultipleTimes( Character *ch, Character *victim, int dt )
     : (int) ((ch->pcdata->learned[gsn_second_attack]+dual_bonus)/1.5);
   if ( GetRandomPercent( ) < hit_chance )
     {
-      learn_from_success( ch, gsn_second_attack );
+      LearnFromSuccess( ch, gsn_second_attack );
       retcode = HitOnce( ch, victim, dt );
       if ( retcode != rNONE || GetFightingOpponent( ch ) != victim )
         return retcode;
     }
   else
-    learn_from_failure( ch, gsn_second_attack );
+    LearnFromFailure( ch, gsn_second_attack );
 
   hit_chance = IsNpc(ch) ? ch->top_level
     : (int) ((ch->pcdata->learned[gsn_third_attack]+(dual_bonus*1.5))/2);
   if ( GetRandomPercent( ) < hit_chance )
     {
-      learn_from_success( ch, gsn_third_attack );
+      LearnFromSuccess( ch, gsn_third_attack );
       retcode = HitOnce( ch, victim, dt );
       if ( retcode != rNONE || GetFightingOpponent( ch ) != victim )
         return retcode;
     }
   else
-    learn_from_failure( ch, gsn_third_attack );
+    LearnFromFailure( ch, gsn_third_attack );
 
   hit_chance = IsNpc(ch) ? ch->top_level
     : (int) ((ch->pcdata->learned[gsn_fourth_attack]+(dual_bonus*1.5))/2);
   if ( GetRandomPercent( ) < hit_chance )
     {
-      learn_from_success( ch, gsn_fourth_attack );
+      LearnFromSuccess( ch, gsn_fourth_attack );
       retcode = HitOnce( ch, victim, dt );
       if ( retcode != rNONE || GetFightingOpponent( ch ) != victim )
         return retcode;
     }
   else
-    learn_from_failure( ch, gsn_fourth_attack );
+    LearnFromFailure( ch, gsn_fourth_attack );
 
   hit_chance = IsNpc(ch) ? ch->top_level
     : (int) ((ch->pcdata->learned[gsn_fifth_attack]+(dual_bonus*1.5))/2);
   if ( GetRandomPercent( ) < hit_chance )
     {
-      learn_from_success( ch, gsn_fifth_attack );
+      LearnFromSuccess( ch, gsn_fifth_attack );
       retcode = HitOnce( ch, victim, dt );
       if ( retcode != rNONE || GetFightingOpponent( ch ) != victim )
         return retcode;
     }
   else
-    learn_from_failure( ch, gsn_fifth_attack );
+    LearnFromFailure( ch, gsn_fifth_attack );
 
   retcode = rNONE;
 
@@ -747,7 +747,7 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
     {
       /* Miss. */
       if ( prof_gsn != -1 )
-        learn_from_failure( ch, prof_gsn );
+        LearnFromFailure( ch, prof_gsn );
       InflictDamage( ch, victim, 0, dt );
       return rNONE;
     }
@@ -780,7 +780,7 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
   if ( !IsNpc(ch) && ch->pcdata->learned[gsn_enhanced_damage] > 0 )
     {
       dam += (int) (dam * ch->pcdata->learned[gsn_enhanced_damage] / 120);
-      learn_from_success( ch, gsn_enhanced_damage );
+      LearnFromSuccess( ch, gsn_enhanced_damage );
     }
 
 
@@ -1007,9 +1007,9 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
   if ( prof_gsn != -1 )
     {
       if ( dam > 0 )
-        learn_from_success( ch, prof_gsn );
+        LearnFromSuccess( ch, prof_gsn );
       else
-        learn_from_failure( ch, prof_gsn );
+        LearnFromFailure( ch, prof_gsn );
     }
 
   /* immune to damage */
@@ -1344,17 +1344,17 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
           if ( IsNpc(ch)
                &&   IsBitSet( ch->attacks, DFND_DISARM )
                &&   GetRandomPercent( ) < GetAbilityLevel( ch, COMBAT_ABILITY ) / 2 )
-            disarm( ch, victim );
+            Disarm( ch, victim );
 
           if ( IsNpc(ch)
                &&   IsBitSet( ch->attacks, ATCK_TRIP )
                &&   GetRandomPercent( ) < GetAbilityLevel( ch, COMBAT_ABILITY ) )
-            trip( ch, victim );
+            Trip( ch, victim );
 
-          if ( check_parry( ch, victim ) )
+          if ( CheckParry( ch, victim ) )
             return rNONE;
 
-          if ( check_dodge( ch, victim ) )
+          if ( CheckDodge( ch, victim ) )
             return rNONE;
         }
 

@@ -94,7 +94,7 @@ void do_search( Character *ch, char *argument )
   if ( (!startobj && door == -1) || IsNpc(ch) )
     {
       SendToCharacter( "You find nothing.\r\n", ch );
-      learn_from_failure( ch, gsn_search );
+      LearnFromFailure( ch, gsn_search );
       return;
     }
 
@@ -112,7 +112,7 @@ void do_search( Character *ch, char *argument )
           Act( AT_SKILL, "Your search reveals the $d!", ch, NULL, pexit->keyword, TO_CHAR );
           Act( AT_SKILL, "$n finds the $d!", ch, NULL, pexit->keyword, TO_ROOM );
           RemoveBit( pexit->exit_info, EX_SECRET );
-          learn_from_success( ch, gsn_search );
+          LearnFromSuccess( ch, gsn_search );
           return;
         }
     }
@@ -130,7 +130,7 @@ void do_search( Character *ch, char *argument )
   if ( !found )
     {
       SendToCharacter( "You find nothing.\r\n", ch );
-      learn_from_failure( ch, gsn_search );
+      LearnFromFailure( ch, gsn_search );
       return;
     }
 
@@ -138,5 +138,5 @@ void do_search( Character *ch, char *argument )
   RemoveBit( obj->extra_flags, ITEM_HIDDEN );
   Act( AT_SKILL, "Your search reveals $p!", ch, obj, NULL, TO_CHAR );
   Act( AT_SKILL, "$n finds $p!", ch, obj, NULL, TO_ROOM );
-  learn_from_success( ch, gsn_search );
+  LearnFromSuccess( ch, gsn_search );
 }

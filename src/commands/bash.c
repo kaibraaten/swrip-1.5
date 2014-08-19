@@ -39,7 +39,7 @@ void do_bash( Character *ch, char *argument )
   if ( IsNpc(ch)
        || (GetRandomPercent( ) + bash_chance) < ch->pcdata->learned[gsn_bash] )
     {
-      learn_from_success( ch, gsn_bash );
+      LearnFromSuccess( ch, gsn_bash );
       /* do not change anything here!  -Thoric */
       SetWaitState( ch,     2 * PULSE_VIOLENCE );
       SetWaitState( victim, 2 * PULSE_VIOLENCE );
@@ -49,7 +49,7 @@ void do_bash( Character *ch, char *argument )
   else
     {
       SetWaitState( ch,     2 * PULSE_VIOLENCE );
-      learn_from_failure( ch, gsn_bash );
+      LearnFromFailure( ch, gsn_bash );
       global_retcode = InflictDamage( ch, victim, 0, gsn_bash );
     }
 }

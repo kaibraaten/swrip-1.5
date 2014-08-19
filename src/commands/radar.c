@@ -47,7 +47,7 @@ void do_radar( Character *ch, char *argument )
   if ( GetRandomPercent( ) > the_chance )
     {
       SendToCharacter("&RYou fail to work the controls properly.\r\n",ch);
-      learn_from_failure( ch, gsn_navigation );
+      LearnFromFailure( ch, gsn_navigation );
       return;
     }
 
@@ -162,5 +162,5 @@ void do_radar( Character *ch, char *argument )
   ChPrintf(ch, "\r\n&WYour Coordinates: %.0f %.0f %.0f\r\n" ,
             ship->pos.x , ship->pos.y, ship->pos.z);
 
-  learn_from_success( ch, gsn_navigation );
+  LearnFromSuccess( ch, gsn_navigation );
 }

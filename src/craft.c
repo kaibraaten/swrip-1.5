@@ -66,7 +66,7 @@ static void AbortSession( CraftingSession *session );
 static bool CheckMaterials( CraftingSession *session, bool extract );
 static size_t CountCraftingMaterials( const CraftingMaterial *material );
 static struct FoundMaterial *AllocateFoundMaterials( const CraftingMaterial *recipeMaterials );
-static bool CheckSkill( const CraftingSession *session );
+static bool CheckSkillLevel( const CraftingSession *session );
 static const char *GetItemTypeName( int itemType, int extraInfo );
 static struct FoundMaterial *GetUnfoundMaterial( const CraftingSession *session, const Object *obj );
 static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *eventArgs );
@@ -129,7 +129,7 @@ static void AfterDelay( CraftingSession *session )
       ChPrintf( ch, "&RYou hold up your newly created %s.\r\n", itemType );
       ChPrintf( ch, "&RIt suddenly dawns upon you that you have created the most useless\r\n" );
       ChPrintf( ch, "&R%s you've ever seen. You quickly hide your mistake...&w\r\n", itemType);
-      learn_from_failure( ch, recipe->Skill );
+      LearnFromFailure( ch, recipe->Skill );
       FreeCraftingSession( session );
       return;
     }
@@ -169,7 +169,7 @@ static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *
   gain_exp(ch, skill->guild, xpgain );
   ChPrintf( ch , "You gain %d %s experience.", xpgain, ability_name[skill->guild] );
 
-  learn_from_success( ch, data->Recipe->Skill );
+  LearnFromSuccess( ch, data->Recipe->Skill );
 
   FreeMemory( data );
 }
@@ -327,7 +327,7 @@ void FreeCraftingSession( CraftingSession *session )
   FreeMemory( session );
 }
 
-static bool CheckSkill( const CraftingSession *session )
+static bool CheckSkillLevel( const CraftingSession *session )
 {
   Character *ch = session->Engineer;
   int the_chance = IsNpc(ch) ? ch->top_level : (int) (ch->pcdata->learned[session->Recipe->Skill]);
@@ -335,7 +335,7 @@ static bool CheckSkill( const CraftingSession *session )
   if( GetRandomPercent() >= the_chance )
     {
       ChPrintf( ch, "&RYou can't figure out what to do.\r\n" );
-      learn_from_failure( ch, session->Recipe->Skill );
+      LearnFromFailure( ch, session->Recipe->Skill );
       return false;
     }
 
@@ -366,7 +366,7 @@ void StartCrafting( CraftingSession *session )
   if( interpretArgumentsEventArgs.AbortSession
       || checkRequirementsEventArgs.AbortSession
       || !CheckMaterials( session, false )
-      || !CheckSkill( session ) )
+      || !CheckSkillLevel( session ) )
     {
       AbortCraftingEventArgs abortEventArgs;
       abortEventArgs.CraftingSession = session;

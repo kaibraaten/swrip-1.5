@@ -67,7 +67,7 @@ void do_bashdoor( Character *ch, char *argument )
 	      ch, NULL, keyword, TO_CHAR );
           Act(AT_SKILL, "$n bashes open the $d!",
 	      ch, NULL, keyword, TO_ROOM );
-          learn_from_success(ch, gsn_bashdoor);
+          LearnFromSuccess(ch, gsn_bashdoor);
 
           if ( (to_room = pexit->to_room) != NULL
                &&   (pexit_rev = pexit->rexit) != NULL
@@ -98,7 +98,7 @@ void do_bashdoor( Character *ch, char *argument )
           Act(AT_SKILL, "WHAAAAM!!! $n bashes against the $d, but it holds strong.",
               ch, NULL, keyword, TO_ROOM );
           InflictDamage( ch, ch, ( ch->max_hit / 20 ) + 10, gsn_bashdoor );
-          learn_from_failure(ch, gsn_bashdoor);
+          LearnFromFailure(ch, gsn_bashdoor);
         }
     }
   else
@@ -108,7 +108,7 @@ void do_bashdoor( Character *ch, char *argument )
       Act(AT_SKILL, "WHAAAAM!!! $n bashes against the wall, but it holds strong.",
           ch, NULL, NULL, TO_ROOM );
       InflictDamage( ch, ch, ( ch->max_hit / 20 ) + 10, gsn_bashdoor );
-      learn_from_failure(ch, gsn_bashdoor);
+      LearnFromFailure(ch, gsn_bashdoor);
     }
 
   if ( !char_died( ch ) )

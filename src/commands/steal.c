@@ -69,7 +69,7 @@ void do_steal( Character *ch, char *argument )
           do_yell( victim, buf );
         }
 
-      learn_from_failure( ch, gsn_steal );
+      LearnFromFailure( ch, gsn_steal );
       if ( !IsNpc(ch) )
         {
           if ( CanLootVictim( ch, victim ) )
@@ -109,7 +109,7 @@ void do_steal( Character *ch, char *argument )
       if ( amount <= 0 )
         {
           SendToCharacter( "You couldn't get any credits.\r\n", ch );
-	  learn_from_failure( ch, gsn_steal );
+	  LearnFromFailure( ch, gsn_steal );
           return;
         }
 
@@ -117,7 +117,7 @@ void do_steal( Character *ch, char *argument )
       victim->gold -= amount;
       ChPrintf( ch, "Aha!  You got %d credits.\r\n", amount );
       if ( !IsNpc(victim) || (ch->pcdata->learned[gsn_steal] < 50 ) )
-        learn_from_success( ch, gsn_steal );
+        LearnFromSuccess( ch, gsn_steal );
 
       if ( IsNpc( victim ) )
 	{
@@ -139,7 +139,7 @@ void do_steal( Character *ch, char *argument )
                 {
                   ChPrintf( ch, "They are wearing %s on top of %s.\r\n", obj_next->short_descr, obj->short_descr);
                   SendToCharacter( "You'll have to steal that first.\r\n", ch );
-                  learn_from_failure( ch, gsn_steal );
+                  LearnFromFailure( ch, gsn_steal );
                   return;
                 }
               else
@@ -148,7 +148,7 @@ void do_steal( Character *ch, char *argument )
         }
 
       SendToCharacter( "You can't seem to find it.\r\n", ch );
-      learn_from_failure( ch, gsn_steal );
+      LearnFromFailure( ch, gsn_steal );
       return;
     }
 
@@ -157,27 +157,27 @@ void do_steal( Character *ch, char *argument )
        ||        IS_OBJ_STAT(obj, ITEM_PROTOTYPE))
     {
       SendToCharacter( "You can't manage to pry it away.\r\n", ch );
-      learn_from_failure( ch, gsn_steal );
+      LearnFromFailure( ch, gsn_steal );
       return;
     }
 
   if ( ch->carry_number + (get_obj_number(obj)/obj->count) > GetCarryCapacityNumber( ch ) )
     {
       SendToCharacter( "You have your hands full.\r\n", ch );
-      learn_from_failure( ch, gsn_steal );
+      LearnFromFailure( ch, gsn_steal );
       return;
     }
 
   if ( ch->carry_weight + (get_obj_weight(obj)/obj->count) > GetCarryCapacityWeight( ch ) )
     {
       SendToCharacter( "You can't carry that much weight.\r\n", ch );
-      learn_from_failure( ch, gsn_steal );
+      LearnFromFailure( ch, gsn_steal );
       return;
     }
 
   SendToCharacter( "Ok.\r\n", ch );
   if ( IsNpc(victim)  || ch->pcdata->learned[gsn_steal] )
-    learn_from_success( ch, gsn_steal );
+    LearnFromSuccess( ch, gsn_steal );
   if ( IsNpc( victim ) )
     {
       xp = umin( obj->cost*10 , ( exp_level( GetAbilityLevel(ch, SMUGGLING_ABILITY) + 1) - exp_level( GetAbilityLevel( ch, SMUGGLING_ABILITY) ) ) / 10  );

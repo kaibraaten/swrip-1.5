@@ -156,5 +156,5 @@ void do_jail ( Character *ch , char *argument )
             (h_d ? "hour" : "day"), (jail_time == 1 ? "" : "s"));
   save_char_obj(victim);        /* used to save ch, fixed by Thoric 09/17/96 */
 
-  learn_from_success( ch , gsn_jail );
+  LearnFromSuccess( ch , gsn_jail );
 }

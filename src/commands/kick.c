@@ -29,12 +29,12 @@ void do_kick( Character *ch, char *argument )
 
   if ( IsNpc(ch) || GetRandomPercent( ) < ch->pcdata->learned[gsn_kick] )
     {
-      learn_from_success( ch, gsn_kick );
+      LearnFromSuccess( ch, gsn_kick );
       global_retcode = InflictDamage( ch, victim, GetRandomNumberFromRange( 1, GetAbilityLevel(ch, COMBAT_ABILITY ) ), gsn_kick );
     }
   else
     {
-      learn_from_failure( ch, gsn_kick );
+      LearnFromFailure( ch, gsn_kick );
       global_retcode = InflictDamage( ch, victim, 0, gsn_kick );
     }
 }

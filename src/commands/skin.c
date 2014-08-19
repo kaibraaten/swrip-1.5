@@ -52,7 +52,7 @@ void do_skin( Character *ch, char *argument)
       return;
     }
 
-  learn_from_success( ch, gsn_punch );
+  LearnFromSuccess( ch, gsn_punch );
 
   Act( AT_BLOOD, "$n strips the skin from $p.", ch, corpse, NULL, TO_ROOM);
   Act( AT_BLOOD, "You strip the skin from $p.", ch, corpse, NULL, TO_CHAR);

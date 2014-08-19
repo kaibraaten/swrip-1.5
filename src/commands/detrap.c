@@ -113,11 +113,11 @@ void do_detrap( Character *ch, char *argument )
     {
       SendToCharacter( "Ooops!\r\n", ch );
       spring_trap( ch, trap );
-      learn_from_failure( ch, gsn_detrap );
+      LearnFromFailure( ch, gsn_detrap );
       return;
     }
   extract_obj( trap );
 
   SendToCharacter( "You successfully remove a trap.\r\n", ch );
-  learn_from_success( ch, gsn_detrap );
+  LearnFromSuccess( ch, gsn_detrap );
 }

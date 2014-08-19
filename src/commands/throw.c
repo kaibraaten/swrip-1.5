@@ -228,19 +228,19 @@ void do_throw( Character *ch, char *argument )
     }
 
   if ( !victim || char_died( victim ) )
-    learn_from_failure( ch, gsn_throw );
+    LearnFromFailure( ch, gsn_throw );
   else
     {
 
       SetWaitState( ch, skill_table[gsn_throw]->beats );
       if ( IsNpc(ch) || GetRandomPercent( ) < ch->pcdata->learned[gsn_throw] )
         {
-          learn_from_success( ch, gsn_throw );
+          LearnFromSuccess( ch, gsn_throw );
           global_retcode = InflictDamage( ch, victim, GetRandomNumberFromRange( obj->weight*2 , (obj->weight*2 + ch->stats.perm_str) ), TYPE_HIT );
         }
       else
         {
-          learn_from_failure( ch, gsn_throw );
+          LearnFromFailure( ch, gsn_throw );
           global_retcode = InflictDamage( ch, victim, 0, TYPE_HIT );
         }
 

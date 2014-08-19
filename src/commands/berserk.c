@@ -23,7 +23,7 @@ void do_berserk( Character *ch, char *argument )
   if ( !chance(ch, percent) )
     {
       SendToCharacter( "You couldn't build up enough rage.\r\n", ch);
-      learn_from_failure(ch, gsn_berserk);
+      LearnFromFailure(ch, gsn_berserk);
       return;
     }
   af.type = gsn_berserk;
@@ -38,5 +38,5 @@ void do_berserk( Character *ch, char *argument )
   af.bitvector = AFF_BERSERK;
   affect_to_char(ch, &af);
   SendToCharacter( "You start to lose control..\r\n", ch );
-  learn_from_success(ch, gsn_berserk);
+  LearnFromSuccess(ch, gsn_berserk);
 }

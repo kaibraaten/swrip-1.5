@@ -69,7 +69,7 @@ void do_rescue( Character *ch, char *argument )
       SendToCharacter( "You fail the rescue.\r\n", ch );
       Act( AT_SKILL, "$n tries to rescue you!", ch, NULL, victim, TO_VICT   );
       Act( AT_SKILL, "$n tries to rescue $N!", ch, NULL, victim, TO_NOTVICT );
-      learn_from_failure( ch, gsn_rescue );
+      LearnFromFailure( ch, gsn_rescue );
       return;
     }
 
@@ -80,7 +80,7 @@ void do_rescue( Character *ch, char *argument )
   ch->alignment = ch->alignment + 50;
   ch->alignment = urange( -1000, ch->alignment, 1000 );
 
-  learn_from_success( ch, gsn_rescue );
+  LearnFromSuccess( ch, gsn_rescue );
   StopFighting( fch, false );
   StopFighting( victim, false );
 

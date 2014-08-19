@@ -2248,7 +2248,7 @@ extern "C" {
   void SetBExitFlag( Exit *pexit, int flag );
   void RemoveBExitFlag( Exit *pexit, int flag );
   Room *GenerateExit( Room *in_room, Exit **pexit );
-  void  ClearVirtualRooms( void );
+  void ClearVirtualRooms( void );
   Exit *FindDoor( Character *ch, const char *arg, bool quiet );
   Exit *GetExit( const Room *room, short dir );
   Exit *GetExitTo( const Room *room, short dir, vnum_t vnum );
@@ -2503,10 +2503,10 @@ extern "C" {
   bool IsInArena( const Character *ch );
 
   /* makeobjs.c */
-  void  MakeCorpse( Character *ch );
-  void  MakeBloodstain( Character *ch );
-  void  MakeScraps( Object *obj );
-  void  MakeFire( Room *in_room, short timer );
+  void MakeCorpse( Character *ch );
+  void MakeBloodstain( Character *ch );
+  void MakeScraps( Object *obj );
+  void MakeFire( Room *in_room, short timer );
   Object *MakeTrap( int v0, int v1, int v2, int v3 );
   Object *CreateMoney( int amount );
 
@@ -2547,18 +2547,18 @@ extern "C" {
   void ReleaseSupermob( void );
 
   /* player.c */
-  void  set_title( Character *ch, const char *title );
+  void  SetCharacterTitle( Character *ch, const char *title );
 
   /* skills.c */
-  bool  check_skill( Character *ch, const char *command, char *argument );
-  void  learn_from_success( Character *ch, int sn );
-  void  learn_from_failure( Character *ch, int sn );
-  bool  check_parry( Character *ch, Character *victim );
-  bool  check_dodge( Character *ch, Character *victim );
-  bool  check_grip( Character *ch, Character *victim );
-  void  disarm( Character *ch, Character *victim );
-  void  trip( Character *ch, Character *victim );
-  bool permsneak( const Character *ch );
+  bool CheckSkill( Character *ch, const char *command, char *argument );
+  void LearnFromSuccess( Character *ch, int sn );
+  void LearnFromFailure( Character *ch, int sn );
+  bool CheckParry( Character *ch, Character *victim );
+  bool CheckDodge( Character *ch, Character *victim );
+  bool CheckGrip( Character *ch, Character *victim );
+  void Disarm( Character *ch, Character *victim );
+  void Trip( Character *ch, Character *victim );
+  bool HasPermanentSneak( const Character *ch );
 
   /* handler.c */
   bool can_take_proto( const Character *ch );

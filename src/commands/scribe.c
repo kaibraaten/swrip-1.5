@@ -74,7 +74,7 @@ void do_scribe( Character *ch, char *argument )
 
   if ( !process_spell_components( ch, sn ) )
     {
-      learn_from_failure( ch, gsn_scribe );
+      LearnFromFailure( ch, gsn_scribe );
       ch->mana -= (mana / 2);
       return;
     }
@@ -83,7 +83,7 @@ void do_scribe( Character *ch, char *argument )
     {
       SetCharacterColor ( AT_MAGIC, ch );
       SendToCharacter("The magic surges outof control and destroys the scroll!.\r\n", ch);
-      learn_from_failure( ch, gsn_scribe );
+      LearnFromFailure( ch, gsn_scribe );
       ch->mana -= (mana / 2);
       extract_obj(scroll);
       return;
@@ -106,7 +106,7 @@ void do_scribe( Character *ch, char *argument )
       Act( AT_MAGIC, "$n writes a book.",   ch, scroll, NULL, TO_ROOM );
       Act( AT_MAGIC, "You write $p.",   ch, scroll, NULL, TO_CHAR );
 
-      learn_from_success( ch, gsn_scribe );
+      LearnFromSuccess( ch, gsn_scribe );
       ch->mana -= mana;
       return;
     }
@@ -117,7 +117,7 @@ void do_scribe( Character *ch, char *argument )
         {
           SetCharacterColor ( AT_MAGIC, ch );
           SendToCharacter("The magic surges out of control and destroys the book!.\r\n", ch);
-          learn_from_failure( ch, gsn_scribe );
+          LearnFromFailure( ch, gsn_scribe );
           ch->mana -= (mana / 2);
           extract_obj(scroll);
           return;
@@ -131,7 +131,7 @@ void do_scribe( Character *ch, char *argument )
       scroll->value[2] = sn;
       SetCharacterColor(AT_MAGIC, ch);
       ChPrintf( ch, "You imbue the scroll with %s.\r\n", skill_table[sn]->name);
-      learn_from_success(ch, gsn_scribe);
+      LearnFromSuccess(ch, gsn_scribe);
       ch->mana -= mana;
       return;
     }
@@ -142,7 +142,7 @@ void do_scribe( Character *ch, char *argument )
         {
           SetCharacterColor ( AT_MAGIC, ch );
           SendToCharacter("The magic surges outof control and destroys the scroll!.\r\n", ch);
-          learn_from_failure( ch, gsn_scribe );
+          LearnFromFailure( ch, gsn_scribe );
           ch->mana -= (mana / 2);
           extract_obj(scroll);
           return;
@@ -156,7 +156,7 @@ void do_scribe( Character *ch, char *argument )
       scroll->value[3] = sn;
       SetCharacterColor(AT_MAGIC, ch);
       ChPrintf( ch, "You imbue the scroll with %s.\r\n", skill_table[sn]->name);
-      learn_from_success(ch, gsn_scribe);
+      LearnFromSuccess(ch, gsn_scribe);
       ch->mana -= mana;
       return;
     }

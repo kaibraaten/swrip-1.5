@@ -45,7 +45,7 @@ void do_gather_intelligence ( Character *ch , char *argument )
           return;
         }
 
-      learn_from_success( ch, gsn_gather_intelligence );
+      LearnFromSuccess( ch, gsn_gather_intelligence );
 
       the_chance = GetRandomPercent( );
 

@@ -43,7 +43,7 @@ void do_first_aid( Character *ch, char *argument )
   if ( heal > ch->pcdata->learned[gsn_first_aid]*2 )
     {
       ChPrintf( ch, "You fail in your attempt at first aid.\r\n");
-      learn_from_failure( ch , gsn_first_aid );
+      LearnFromFailure( ch , gsn_first_aid );
       return;
     }
 
@@ -66,5 +66,5 @@ void do_first_aid( Character *ch, char *argument )
   --medpac->value[0];
   victim->hit += urange ( 0, heal , victim->max_hit - victim->hit );
 
-  learn_from_success( ch , gsn_first_aid );
+  LearnFromSuccess( ch , gsn_first_aid );
 }

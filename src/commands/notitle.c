@@ -43,7 +43,7 @@ void do_notitle( Character *ch, char *argument )
     {
       SetBit(victim->pcdata->flags, PCFLAG_NOTITLE);
       sprintf( buf, "%s", victim->name );
-      set_title( victim, buf );
+      SetCharacterTitle( victim, buf );
       SendToCharacter( "You can't set your own title!\r\n", victim );
       SendToCharacter( "NOTITLE set.\r\n", ch );
     }

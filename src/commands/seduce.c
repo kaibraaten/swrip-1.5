@@ -50,6 +50,6 @@ void do_seduce ( Character *ch , char *argument )
   if ( victim->master )
     StopFollowing( victim );
 
-  learn_from_success( ch, gsn_seduce );
+  LearnFromSuccess( ch, gsn_seduce );
   StartFollowing( victim, ch );
 }

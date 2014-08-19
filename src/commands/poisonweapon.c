@@ -100,7 +100,7 @@ void do_poison_weapon( Character *ch, char *argument )
       Act(AT_RED, "$n spills the poison all over!", ch, NULL, NULL, TO_ROOM );
       extract_obj( pobj );
       extract_obj( wobj );
-      learn_from_failure( ch, gsn_poison_weapon );
+      LearnFromFailure( ch, gsn_poison_weapon );
       return;
     }
   separate_obj( obj );
@@ -126,5 +126,5 @@ void do_poison_weapon( Character *ch, char *argument )
   Act(AT_BLUE, "The remainder of the poison eats through $p.", ch, wobj, NULL, TO_ROOM );
   extract_obj( pobj );
   extract_obj( wobj );
-  learn_from_success( ch, gsn_poison_weapon );
+  LearnFromSuccess( ch, gsn_poison_weapon );
 }

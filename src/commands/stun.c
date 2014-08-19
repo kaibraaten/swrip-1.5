@@ -57,7 +57,7 @@ void do_stun( Character *ch, char *argument )
        && (  IsNpc(ch)
              || (GetRandomPercent( ) + stun_chance) < ch->pcdata->learned[gsn_stun] ) )
     {
-      learn_from_success( ch, gsn_stun );
+      LearnFromSuccess( ch, gsn_stun );
       /*    DO *NOT* CHANGE!    -Thoric    */
       ch->move -= 15;
       SetWaitState( ch,     2 * PULSE_VIOLENCE );
@@ -80,7 +80,7 @@ void do_stun( Character *ch, char *argument )
     {
       SetWaitState( ch,     2 * PULSE_VIOLENCE );
       ch->move -= 5;
-      learn_from_failure( ch, gsn_stun );
+      LearnFromFailure( ch, gsn_stun );
       Act( AT_SKILL, "$N charges at you screaming, but you dodge out of the way.", victim, NULL, ch, TO_CHAR );
       Act( AT_SKILL, "Your attempt to stun $N leaves you racing past $E as $e laughs.", ch, NULL, victim, TO_CHAR );
       Act( AT_SKILL, "$n charges screaming at $N, but keeps going right on past.", ch, NULL, victim, TO_NOTVICT );

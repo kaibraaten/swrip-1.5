@@ -78,7 +78,7 @@ void do_cutdoor( Character *ch, char *argument )
 
           Act(AT_SKILL, "You cut open the $d!", ch, NULL, keyword, TO_CHAR );
           Act(AT_SKILL, "$n cuts open the $d!",          ch, NULL, keyword, TO_ROOM );
-	  learn_from_success(ch, gsn_cutdoor);
+	  LearnFromSuccess(ch, gsn_cutdoor);
 
           if ( (to_room = pexit->to_room) != NULL
                &&   (pexit_rev = pexit->rexit) != NULL
@@ -107,7 +107,7 @@ void do_cutdoor( Character *ch, char *argument )
           Act(AT_SKILL, "$n cuts at the $d, but just scores it.",
               ch, NULL, keyword, TO_ROOM );
           InflictDamage( ch, ch, ( ch->max_hit / 20 ) + 10, gsn_cutdoor );
-          learn_from_failure(ch, gsn_cutdoor);
+          LearnFromFailure(ch, gsn_cutdoor);
         }
     }
   else
@@ -117,7 +117,7 @@ void do_cutdoor( Character *ch, char *argument )
       Act(AT_SKILL, "$n cuts at the wall, but just scores it.",
           ch, NULL, NULL, TO_ROOM );
       InflictDamage( ch, ch, ( ch->max_hit / 20 ) + 10, gsn_cutdoor );
-      learn_from_failure(ch, gsn_cutdoor);
+      LearnFromFailure(ch, gsn_cutdoor);
     }
   if ( !char_died( ch ) )
     for ( gch = ch->in_room->first_person; gch; gch = gch->next_in_room )

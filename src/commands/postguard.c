@@ -44,7 +44,7 @@ void do_postguard( Character *ch, char *argument )
           return;
         }
       SendToCharacter("&RYou call for a guard but nobody answers.\r\n",ch);
-      learn_from_failure( ch, gsn_postguard );
+      LearnFromFailure( ch, gsn_postguard );
       return;
 
     case SUB_PAUSE:
@@ -69,7 +69,7 @@ void do_postguard( Character *ch, char *argument )
   ChPrintf( ch, "It cost you %d credits.\r\n", credits);
   ch->gold -= umin( credits , ch->gold );
 
-  learn_from_success( ch, gsn_postguard );
+  LearnFromSuccess( ch, gsn_postguard );
 
   if ( NiftyIsName( "empire" , ch->pcdata->clan->name ) )
     ch->backup_mob = MOB_VNUM_IMP_GUARD;

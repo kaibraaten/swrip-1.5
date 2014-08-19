@@ -78,18 +78,18 @@ void do_undock(Character *ch, char *argument)
       SendToCharacter("&RYou can't figure out which lever to use.\r\n",ch);
       if ( ship->sclass == FIGHTER_SHIP )
         {
-          learn_from_failure( ch, gsn_starfighters );
-          learn_from_failure( ch, gsn_shipdocking);
+          LearnFromFailure( ch, gsn_starfighters );
+          LearnFromFailure( ch, gsn_shipdocking);
         }
       if ( ship->sclass == MIDSIZE_SHIP )
         {
-          learn_from_failure( ch, gsn_midships );
-          learn_from_failure( ch, gsn_shipdocking);
+          LearnFromFailure( ch, gsn_midships );
+          LearnFromFailure( ch, gsn_shipdocking);
         }
       if ( ship->sclass == CAPITAL_SHIP )
 	{
-          learn_from_failure( ch, gsn_capitalships );
-          learn_from_failure( ch, gsn_shipdocking);
+          LearnFromFailure( ch, gsn_capitalships );
+          LearnFromFailure( ch, gsn_shipdocking);
         }
       return;
     }
@@ -120,17 +120,17 @@ void do_undock(Character *ch, char *argument)
 
   if ( ship->sclass == FIGHTER_SHIP )
     {
-      learn_from_success( ch, gsn_starfighters );
-      learn_from_success( ch, gsn_shipdocking);
+      LearnFromSuccess( ch, gsn_starfighters );
+      LearnFromSuccess( ch, gsn_shipdocking);
     }
   if ( ship->sclass == MIDSIZE_SHIP )
     {
-      learn_from_success( ch, gsn_midships );
-      learn_from_success( ch, gsn_shipdocking);
+      LearnFromSuccess( ch, gsn_midships );
+      LearnFromSuccess( ch, gsn_shipdocking);
     }
   if ( ship->sclass == CAPITAL_SHIP )
     {
-      learn_from_success( ch, gsn_capitalships );
-      learn_from_success( ch, gsn_shipdocking);
+      LearnFromSuccess( ch, gsn_capitalships );
+      LearnFromSuccess( ch, gsn_shipdocking);
     }
 }

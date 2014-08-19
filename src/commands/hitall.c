@@ -63,9 +63,9 @@ void do_hitall( Character *ch, char *argument )
   ch->move = umax(0, ch->move-nvict*3+nhit);
 
   if ( nhit )
-    learn_from_success(ch, gsn_hitall);
+    LearnFromSuccess(ch, gsn_hitall);
   else
-    learn_from_failure(ch, gsn_hitall);
+    LearnFromFailure(ch, gsn_hitall);
 }
 
 static bool is_legal_kill(Character *ch, Character *vch)

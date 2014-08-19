@@ -59,7 +59,7 @@ void do_jumpvector( Character *ch, char *argument )
   if ( GetRandomPercent( ) > the_chance )
     {
       SendToCharacter("&RYou cant figure out the course vectors correctly.\r\n",ch);
-      learn_from_failure( ch, gsn_shipsystems );
+      LearnFromFailure( ch, gsn_shipsystems );
       return;
     }
 
@@ -73,7 +73,7 @@ void do_jumpvector( Character *ch, char *argument )
       sprintf(buf, "%s Heading: %.0f, %.0f, %.0f",
               target->name, projected.x, projected.y, projected.z );
       EchoToCockpit( AT_BLOOD, ship , buf );
-      learn_from_success( ch, gsn_jumpvector );
+      LearnFromSuccess( ch, gsn_jumpvector );
       return;
     }
 
@@ -85,7 +85,7 @@ void do_jumpvector( Character *ch, char *argument )
   sprintf(buf, "%s Heading: %.0f, %.0f, %.0f",
           target->name, projected.x, projected.y, projected.z  );
   EchoToCockpit( AT_BLOOD, ship , buf );
-  learn_from_success( ch, gsn_jumpvector );
+  LearnFromSuccess( ch, gsn_jumpvector );
 }
 
 static bool ship_was_in_range( Ship *ship, Ship *target )

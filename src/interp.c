@@ -433,7 +433,7 @@ void interpret( Character *ch, char *argument )
    */
   if ( !found )
     {
-      if ( !check_skill( ch, command, argument )
+      if ( !CheckSkill( ch, command, argument )
            && !CheckAlias( ch, command, argument )
            && !check_social( ch, command, argument )
 #ifdef SWRIP_USE_IMC

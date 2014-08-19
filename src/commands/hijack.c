@@ -70,7 +70,7 @@ void do_hijack( Character *ch, char *argument )
   if ( GetRandomPercent( ) > the_chance )
     {
       SendToCharacter("You fail to figure out the correct launch code.\r\n",ch);
-      learn_from_failure( ch, gsn_hijack );
+      LearnFromFailure( ch, gsn_hijack );
       return;
     }
 
@@ -103,13 +103,13 @@ void do_hijack( Character *ch, char *argument )
       ship->shipstate = SHIP_LAUNCH;
       ship->currspeed = ship->realspeed;
       if ( ship->sclass == FIGHTER_SHIP )
-        learn_from_success( ch, gsn_starfighters );
+        LearnFromSuccess( ch, gsn_starfighters );
       if ( ship->sclass == MIDSIZE_SHIP )
-        learn_from_success( ch, gsn_midships );
+        LearnFromSuccess( ch, gsn_midships );
       if ( ship->sclass == CAPITAL_SHIP )
-        learn_from_success( ch, gsn_capitalships );
+        LearnFromSuccess( ch, gsn_capitalships );
 
-      learn_from_success( ch, gsn_hijack );
+      LearnFromSuccess( ch, gsn_hijack );
 
       for (p = last_char; p ; p = p_prev )
 
@@ -149,9 +149,9 @@ void do_hijack( Character *ch, char *argument )
   SetCharacterColor( AT_RED, ch );
   SendToCharacter("You fail to work the controls properly!\r\n",ch);
   if ( ship->sclass == FIGHTER_SHIP )
-    learn_from_failure( ch, gsn_starfighters );
+    LearnFromFailure( ch, gsn_starfighters );
   if ( ship->sclass == MIDSIZE_SHIP )
-    learn_from_failure( ch, gsn_midships );
+    LearnFromFailure( ch, gsn_midships );
   if ( ship->sclass == CAPITAL_SHIP )
-    learn_from_failure( ch, gsn_capitalships );
+    LearnFromFailure( ch, gsn_capitalships );
 }

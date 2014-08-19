@@ -513,11 +513,11 @@ static void show_char_to_char_1( Character *victim, Character *ch )
     {
       SendToCharacter( "\r\nYou peek at the inventory:\r\n", ch );
       ShowObjectListToCharacter( victim->first_carrying, ch, true, true );
-      learn_from_success( ch, gsn_peek );
+      LearnFromSuccess( ch, gsn_peek );
     }
   else
     if ( ch->pcdata->learned[gsn_peek] )
-      learn_from_failure( ch, gsn_peek );
+      LearnFromFailure( ch, gsn_peek );
 }
 
 static void show_ships_to_char( Ship *ship, Character *ch )

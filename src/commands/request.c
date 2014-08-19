@@ -95,7 +95,7 @@ void do_request(Character *ch, char *argument)
       return;
     }
   if ( the_chance && !CheckPilot(ch, eShip) )
-    learn_from_success(ch, gsn_fake_signal);
+    LearnFromSuccess(ch, gsn_fake_signal);
 
   SendToCharacter("&RYou open the bay doors of the remote ship.",ch);
   Act(AT_PLAIN,"$n flips a switch on the control panel.",ch,NULL,argument,TO_ROOM);

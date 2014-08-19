@@ -124,7 +124,7 @@ void do_bribe ( Character *ch , char *argument )
       gain_exp( ch, DIPLOMACY_ABILITY, amount );
       ChPrintf( ch, "You gain %d diplomacy experience.\r\n", amount );
 
-      learn_from_success( ch, gsn_bribe );
+      LearnFromSuccess( ch, gsn_bribe );
     }
 
   if ( planet->pop_support > 100 )

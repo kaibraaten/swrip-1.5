@@ -77,7 +77,7 @@ void do_drive( Character *ch, char *argument )
 
       sprintf( buf, "%s drives into the bay", ship->name);
       EchoToRoom( AT_GREY, ship->in_room, buf);
-      learn_from_success( ch, gsn_speeders );
+      LearnFromSuccess( ch, gsn_speeders );
       return;
     }
 
@@ -118,7 +118,7 @@ void do_drive( Character *ch, char *argument )
 
       sprintf( buf, "%s drives out of %s", ship->name, target->name);
       EchoToRoom( AT_GREY, ship->in_room, buf);
-      learn_from_success( ch, gsn_speeders );
+      LearnFromSuccess( ch, gsn_speeders );
       return;
     }
 

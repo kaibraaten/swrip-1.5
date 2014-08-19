@@ -94,5 +94,5 @@ void do_mine( Character *ch, char *argument )
   ChPrintf( ch, "You arm and bury %s.\r\n", obj->short_descr );
   Act( AT_PLAIN, "$n arms and buries $p.", ch, obj, NULL, TO_ROOM );
 
-  learn_from_success( ch, gsn_mine );
+  LearnFromSuccess( ch, gsn_mine );
 }

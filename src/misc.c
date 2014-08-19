@@ -575,7 +575,7 @@ const char *get_race( const Character *ch)
   return "Unknown";
 }
 
-void set_title( Character *ch, const char *title )
+void SetCharacterTitle( Character *ch, const char *title )
 {
   char buf[MAX_STRING_LENGTH];
   char *bufptr = buf;

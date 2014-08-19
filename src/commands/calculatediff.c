@@ -73,7 +73,7 @@ void do_calculate_diff(Character *ch, char *argument )
   if ( GetRandomPercent( ) > the_chance )
     {
       SendToCharacter("&RYou cant seem to figure the charts out today.\r\n",ch);
-      learn_from_failure( ch, gsn_navigation );
+      LearnFromFailure( ch, gsn_navigation );
       return;
     }
 
@@ -147,7 +147,7 @@ void do_calculate_diff(Character *ch, char *argument )
   Act( AT_PLAIN, "$n does some calculations using the ships computer.", ch,
        NULL, argument , TO_ROOM );
 
-  learn_from_success( ch, gsn_navigation );
+  LearnFromSuccess( ch, gsn_navigation );
 
   SetWaitState( ch , 2*PULSE_VIOLENCE );
 }

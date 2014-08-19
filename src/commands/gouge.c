@@ -65,12 +65,12 @@ void do_gouge( Character *ch, char *argument )
                  ch, NULL, NULL, TO_CHAR );
           }
       if ( global_retcode != rCHAR_DIED && global_retcode != rBOTH_DIED )
-        learn_from_success( ch, gsn_gouge );
+        LearnFromSuccess( ch, gsn_gouge );
     }
   else
     {
       SetWaitState( ch, skill_table[gsn_gouge]->beats );
       global_retcode = InflictDamage( ch, victim, 0, gsn_gouge );
-      learn_from_failure( ch, gsn_gouge );
+      LearnFromFailure( ch, gsn_gouge );
     }
 }

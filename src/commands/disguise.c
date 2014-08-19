@@ -39,7 +39,7 @@ void do_disguise( Character *ch, char *argument )
     argument[50] = '\0';
 
   SmashTilde( argument );
-  set_title( ch, argument );
-  learn_from_success( ch, gsn );
+  SetCharacterTitle( ch, argument );
+  LearnFromSuccess( ch, gsn );
   SendToCharacter( "Ok.\r\n", ch );
 }

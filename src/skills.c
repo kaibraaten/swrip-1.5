@@ -45,7 +45,7 @@ extern char *spell_target_name;       /* from magic.c */
  * Each different section of the skill table is sorted alphabetically
  * Only match skills player knows                               -Thoric
  */
-bool check_skill( Character *ch, const char *command, char *argument )
+bool CheckSkill( Character *ch, const char *command, char *argument )
 {
   int sn = 0;
   int first = gsn_first_skill;
@@ -206,7 +206,7 @@ bool check_skill( Character *ch, const char *command, char *argument )
            > (IsNpc(ch) ? 75 : ch->pcdata->learned[sn]) )
         {
           failed_casting( skill_table[sn], ch, vo, obj );
-          learn_from_failure( ch, sn );
+          LearnFromFailure( ch, sn );
 
           if ( mana )
             {
@@ -238,12 +238,12 @@ bool check_skill( Character *ch, const char *command, char *argument )
 
       if ( retcode == rSPELL_FAILED )
         {
-          learn_from_failure( ch, sn );
+          LearnFromFailure( ch, sn );
           retcode = rNONE;
         }
       else
 	{
-	  learn_from_success( ch, sn );
+	  LearnFromSuccess( ch, sn );
 	}
 
       if ( skill_table[sn]->target == TAR_CHAR_OFFENSIVE
@@ -283,7 +283,7 @@ bool check_skill( Character *ch, const char *command, char *argument )
   return true;
 }
 
-void learn_from_success( Character *ch, int sn )
+void LearnFromSuccess( Character *ch, int sn )
 {
   int adept = 0;
   int gain = 0;
@@ -368,7 +368,7 @@ void learn_from_success( Character *ch, int sn )
 }
 
 
-void learn_from_failure( Character *ch, int sn )
+void LearnFromFailure( Character *ch, int sn )
 {
 
 }
@@ -378,7 +378,7 @@ void learn_from_failure( Character *ch, int sn )
  * Caller must check for successful attack.
  * Check for loyalty flag (weapon disarms to inventory) for pkillers -Blodkai
  */
-void disarm( Character *ch, Character *victim )
+void Disarm( Character *ch, Character *victim )
 {
   Object *obj = NULL;
   Object *tmpobj = NULL;
@@ -397,27 +397,27 @@ void disarm( Character *ch, Character *victim )
   if ( GetEquipmentOnCharacter( ch, WEAR_WIELD ) == NULL
        && NumberBits( 1 ) == 0 )
     {
-      learn_from_failure( ch, gsn_disarm );
+      LearnFromFailure( ch, gsn_disarm );
       return;
     }
 
   if ( IsNpc( ch ) && !CanSeeObject( ch, obj )
        && NumberBits( 1 ) == 0)
     {
-      learn_from_failure( ch, gsn_disarm );
+      LearnFromFailure( ch, gsn_disarm );
       return;
     }
 
-  if ( check_grip( ch, victim ) )
+  if ( CheckGrip( ch, victim ) )
     {
-      learn_from_failure( ch, gsn_disarm );
+      LearnFromFailure( ch, gsn_disarm );
       return;
     }
 
   Act( AT_SKILL, "$n DISARMS you!", ch, NULL, victim, TO_VICT    );
   Act( AT_SKILL, "You disarm $N!",  ch, NULL, victim, TO_CHAR    );
   Act( AT_SKILL, "$n disarms $N!",  ch, NULL, victim, TO_NOTVICT );
-  learn_from_success( ch, gsn_disarm );
+  LearnFromSuccess( ch, gsn_disarm );
 
   if ( obj == GetEquipmentOnCharacter( victim, WEAR_WIELD )
        &&  (tmpobj = GetEquipmentOnCharacter( victim, WEAR_DUAL_WIELD)) != NULL )
@@ -433,7 +433,7 @@ void disarm( Character *ch, Character *victim )
  * Trip a creature.
  * Caller must check for successful attack.
  */
-void trip( Character *ch, Character *victim )
+void Trip( Character *ch, Character *victim )
 {
   if ( IsAffectedBy( victim, AFF_FLYING )
        ||   IsAffectedBy( victim, AFF_FLOATING ) )
@@ -472,7 +472,7 @@ void trip( Character *ch, Character *victim )
     }
 }
 
-bool permsneak( const Character *ch )
+bool HasPermanentSneak( const Character *ch )
 {
   switch(ch->race)
     {
@@ -504,7 +504,7 @@ bool permsneak( const Character *ch )
 /*
  * Check for parry.
  */
-bool check_parry( Character *ch, Character *victim )
+bool CheckParry( Character *ch, Character *victim )
 {
   int chances = 0;
   Object *wield = NULL;
@@ -542,7 +542,7 @@ bool check_parry( Character *ch, Character *victim )
 
   if ( GetRandomNumberFromRange( 1, 100 ) > chances )
     {
-      learn_from_failure( victim, gsn_parry );
+      LearnFromFailure( victim, gsn_parry );
       return false;
     }
 
@@ -558,14 +558,14 @@ bool check_parry( Character *ch, Character *victim )
       Act( AT_SKILL, "$N parries your attack.", ch, NULL, victim, TO_CHAR    );
     }
 
-  learn_from_success( victim, gsn_parry );
+  LearnFromSuccess( victim, gsn_parry );
   return true;
 }
 
 /*
  * Check for dodge.
  */
-bool check_dodge( Character *ch, Character *victim )
+bool CheckDodge( Character *ch, Character *victim )
 {
   int chances = 0;
 
@@ -592,7 +592,7 @@ bool check_dodge( Character *ch, Character *victim )
 
   if ( GetRandomNumberFromRange( 1, 100 ) > chances )
     {
-      learn_from_failure( victim, gsn_dodge );
+      LearnFromFailure( victim, gsn_dodge );
       return false;
     }
 
@@ -606,11 +606,11 @@ bool check_dodge( Character *ch, Character *victim )
       Act( AT_SKILL, "$N dodges your attack.", ch, NULL, victim, TO_CHAR    );
     }
 
-  learn_from_success( victim, gsn_dodge );
+  LearnFromSuccess( victim, gsn_dodge );
   return true;
 }
 
-bool check_grip( Character *ch, Character *victim )
+bool CheckGrip( Character *ch, Character *victim )
 {
   int grip_chance = 0;
 
@@ -638,13 +638,13 @@ bool check_grip( Character *ch, Character *victim )
 
   if ( GetRandomPercent( ) >= grip_chance + victim->top_level - ch->top_level )
     {
-      learn_from_failure( victim, gsn_grip );
+      LearnFromFailure( victim, gsn_grip );
       return false;
     }
 
   Act( AT_SKILL, "You evade $n's attempt to disarm you.", ch, NULL, victim, TO_VICT    );
   Act( AT_SKILL, "$N holds $S weapon strongly, and is not disarmed.",
        ch, NULL, victim, TO_CHAR    );
-  learn_from_success( victim, gsn_grip );
+  LearnFromSuccess( victim, gsn_grip );
   return true;
 }

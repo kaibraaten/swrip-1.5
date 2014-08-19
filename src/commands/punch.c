@@ -67,12 +67,12 @@ void do_punch( Character *ch, char *argument )
 
   if ( IsNpc(ch) || GetRandomPercent( ) < ch->pcdata->learned[gsn_punch] )
     {
-      learn_from_success( ch, gsn_punch );
+      LearnFromSuccess( ch, gsn_punch );
       global_retcode = InflictDamage( ch, victim, GetRandomNumberFromRange( 1, GetAbilityLevel(ch, COMBAT_ABILITY ) ), gsn_punch );
     }
   else
     {
-      learn_from_failure( ch, gsn_punch );
+      LearnFromFailure( ch, gsn_punch );
       global_retcode = InflictDamage( ch, victim, 0, gsn_punch );
     }
 }

@@ -53,7 +53,7 @@ void do_study( Character *ch, char *argument ) /* study by Absalom */
       if ( GetRandomPercent() >= 55 + ch->pcdata->learned[gsn_study] * 4/5)
         {
           SendToCharacter("You cannot glean any knowledge from it.\r\n",ch);
-          learn_from_failure( ch, gsn_study );
+          LearnFromFailure( ch, gsn_study );
           return;
         }
       if( ch->pcdata->learned[sn] <= 0 )
@@ -65,7 +65,7 @@ void do_study( Character *ch, char *argument ) /* study by Absalom */
 
       ch->pcdata->learned[sn] += urange( 0, 20-ch->pcdata->learned[sn], 5);
       ch->pcdata->learned[sn] += 5;
-      learn_from_success( ch, gsn_study );
+      LearnFromSuccess( ch, gsn_study );
       return;
     }
 }

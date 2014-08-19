@@ -111,7 +111,7 @@ static void OnStart( Character *ch, char *argument )
   else
     {
       SendToCharacter("&RYou can't figure out how to fit the parts together.\r\n",ch);
-      learn_from_failure( ch, gsn_makegrenade );
+      LearnFromFailure( ch, gsn_makegrenade );
     }
 }
 
@@ -191,7 +191,7 @@ static void OnFinished( Character *ch )
   if ( GetRandomPercent( ) > the_chance*2  || ( !checktool ) || ( !checkdrink ) || ( !checkbatt ) || ( !checkchem ) || ( !checkcirc) )
     {
       SendToCharacter( "&RJust as you are about to finish your work,\r\nyour newly created grenade explodes in your hands...doh!\r\n", ch);
-      learn_from_failure( ch, gsn_makegrenade );
+      LearnFromFailure( ch, gsn_makegrenade );
       return;
     }
 
@@ -226,7 +226,7 @@ static void OnFinished( Character *ch )
   gain_exp(ch, ENGINEERING_ABILITY, xpgain );
   ChPrintf( ch , "You gain %d engineering experience.", xpgain );
 
-  learn_from_success( ch, gsn_makegrenade );
+  LearnFromSuccess( ch, gsn_makegrenade );
 }
 
 static void OnAbort( Character *ch )

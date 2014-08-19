@@ -111,11 +111,11 @@ void do_dig( Character *ch, char *argument )
               RemoveBit( pexit->exit_info, EX_CLOSED );
               SendToCharacter( "You dig open a passageway!\r\n", ch );
               Act( AT_PLAIN, "$n digs open a passageway!", ch, NULL, NULL, TO_ROOM );
-              learn_from_success( ch, gsn_dig );
+              LearnFromSuccess( ch, gsn_dig );
               return;
             }
         }
-      learn_from_failure( ch, gsn_dig );
+      LearnFromFailure( ch, gsn_dig );
       SendToCharacter( "Your dig did not discover any exit...\r\n", ch );
       Act( AT_PLAIN, "$n's dig did not discover any exit...", ch, NULL, NULL, TO_ROOM );
       return;
@@ -140,7 +140,7 @@ void do_dig( Character *ch, char *argument )
     {
       SendToCharacter( "Your dig uncovered nothing.\r\n", ch );
       Act( AT_PLAIN, "$n's dig uncovered nothing.", ch, NULL, NULL, TO_ROOM );
-      learn_from_failure( ch, gsn_dig );
+      LearnFromFailure( ch, gsn_dig );
       return;
     }
 
@@ -148,5 +148,5 @@ void do_dig( Character *ch, char *argument )
   RemoveBit( obj->extra_flags, ITEM_BURRIED );
   Act( AT_SKILL, "Your dig uncovered $p!", ch, obj, NULL, TO_CHAR );
   Act( AT_SKILL, "$n's dig uncovered $p!", ch, obj, NULL, TO_ROOM );
-  learn_from_success( ch, gsn_dig );
+  LearnFromSuccess( ch, gsn_dig );
 }

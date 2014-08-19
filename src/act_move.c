@@ -654,7 +654,7 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
                   if( !ch_rope )
                     {
                       SendToCharacter( "You start to climb... but lose your grip and fall!\r\n", ch);
-                      learn_from_failure( ch, gsn_climb );
+                      LearnFromFailure( ch, gsn_climb );
                       if ( pexit->vdir == DIR_DOWN )
                         {
                           retcode = MoveCharacter( ch, pexit, 1 );
@@ -669,7 +669,7 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
                     }
                 }
               found = true;
-              learn_from_success( ch, gsn_climb );
+              LearnFromSuccess( ch, gsn_climb );
               SetWaitState( ch, skill_table[gsn_climb]->beats );
               txt = "climbs";
             }

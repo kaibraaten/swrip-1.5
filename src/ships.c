@@ -722,20 +722,20 @@ void DockShip( Character *ch, Ship *ship )
     {
       if ( ship->sclass == FIGHTER_SHIP )
         {
-          learn_from_success( ch, gsn_starfighters );
-          learn_from_success( ch, gsn_shipdocking);
+          LearnFromSuccess( ch, gsn_starfighters );
+          LearnFromSuccess( ch, gsn_shipdocking);
         }
 
       if ( ship->sclass == MIDSIZE_SHIP )
         {
-          learn_from_success( ch, gsn_midships );
-          learn_from_success( ch, gsn_shipdocking);
+          LearnFromSuccess( ch, gsn_midships );
+          LearnFromSuccess( ch, gsn_shipdocking);
         }
 
       if ( ship->sclass == CAPITAL_SHIP )
         {
-          learn_from_success( ch, gsn_capitalships );
-          learn_from_success( ch, gsn_shipdocking);
+          LearnFromSuccess( ch, gsn_capitalships );
+          LearnFromSuccess( ch, gsn_shipdocking);
         }
     }
 }
@@ -1085,7 +1085,7 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
   if ( GetRandomPercent() > the_chance )
     {
       SendToCharacter("&RYou can't figure out which switch it is.\r\n",ch);
-      learn_from_failure( ch, gsn_speeders );
+      LearnFromFailure( ch, gsn_speeders );
       return retcode;
     }
 
@@ -1148,7 +1148,7 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
       char_to_room( rch, original );
     }
 
-  learn_from_success( ch, gsn_speeders );
+  LearnFromSuccess( ch, gsn_speeders );
   return retcode;
 }
 

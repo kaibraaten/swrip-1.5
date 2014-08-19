@@ -232,7 +232,7 @@ void do_cast( Character *ch, char *argument )
 			 ch, NULL, tmp, TO_VICT );
                     Act( AT_MAGIC, "$N channels $S energy into you!", ch, NULL, tmp, TO_CHAR );
                     Act( AT_MAGIC, "$N channels $S energy into $n!", ch, NULL, tmp, TO_NOTVICT );
-                    learn_from_success( tmp, sn );
+                    LearnFromSuccess( tmp, sn );
 
                     tmp->mana -= mana;
                     tmp->substate = SUB_NONE;
@@ -252,7 +252,7 @@ void do_cast( Character *ch, char *argument )
 
               if (GetTrustLevel(ch)  < LEVEL_IMMORTAL)    /* so imms dont lose mana */
                 ch->mana -= mana / 2;
-              learn_from_failure( ch, sn );
+              LearnFromFailure( ch, sn );
               return;
             }
         }
@@ -269,7 +269,7 @@ void do_cast( Character *ch, char *argument )
 
       if (GetTrustLevel(ch)  < LEVEL_IMMORTAL)    /* so imms dont lose mana */
         ch->mana -= mana / 2;
-      learn_from_failure( ch, sn );
+      LearnFromFailure( ch, sn );
       return;
     }
 
@@ -329,7 +329,7 @@ void do_cast( Character *ch, char *argument )
 
       if (GetTrustLevel(ch)  < LEVEL_IMMORTAL)    /* so imms dont lose mana */
         ch->mana -= mana / 2;
-      learn_from_failure( ch, sn );
+      LearnFromFailure( ch, sn );
       return;
     }
   else
@@ -369,10 +369,10 @@ void do_cast( Character *ch, char *argument )
       if( !ch->fighting  )
         ChPrintf( ch, "You gain %d force experience.\r\n" , force_exp );
       gain_exp(ch, FORCE_ABILITY, force_exp );
-      learn_from_success( ch, sn );
+      LearnFromSuccess( ch, sn );
     }
   else
-    learn_from_failure( ch, sn );
+    LearnFromFailure( ch, sn );
 
   /*
    * Fixed up a weird mess here, and added double safeguards    -Thoric

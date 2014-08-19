@@ -118,9 +118,9 @@ void do_fire(Character *ch, char *argument )
           EchoToCockpit( AT_ORANGE , target , buf );
           sprintf( buf , "The ships lasers fire at %s but miss." , target->name);
           EchoToCockpit( AT_ORANGE , ship , buf );
-          learn_from_failure( ch, gsn_spacecombat );
-          learn_from_failure( ch, gsn_spacecombat2 );
-          learn_from_failure( ch, gsn_spacecombat3 );
+          LearnFromFailure( ch, gsn_spacecombat );
+          LearnFromFailure( ch, gsn_spacecombat2 );
+          LearnFromFailure( ch, gsn_spacecombat3 );
           sprintf( buf, "Laserfire from %s barely misses %s." , ship->name , target->name );
           if(ship->sclass > SHIP_PLATFORM)
             EchoToRoom(AT_ORANGE, ship->in_room, buf);
@@ -137,11 +137,11 @@ void do_fire(Character *ch, char *argument )
       EchoToCockpit( AT_BLOOD , target , buf );
       sprintf( buf , "Your ships lasers hit %s!." , target->name);
       EchoToCockpit( AT_YELLOW , ship , buf );
-      learn_from_success( ch, gsn_spacecombat );
-      learn_from_success( ch, gsn_spacecombat2 );
-      learn_from_success( ch, gsn_spacecombat3 );
+      LearnFromSuccess( ch, gsn_spacecombat );
+      LearnFromSuccess( ch, gsn_spacecombat2 );
+      LearnFromSuccess( ch, gsn_spacecombat3 );
       if (ship->sclass > SHIP_PLATFORM )
-        learn_from_success( ch, gsn_speedercombat );
+        LearnFromSuccess( ch, gsn_speedercombat );
 
       EchoToShip( AT_RED , target , "A small explosion vibrates through the ship." );
       if( ship->sclass == SHIP_PLATFORM )
@@ -223,9 +223,9 @@ void do_fire(Character *ch, char *argument )
           EchoToCockpit( AT_ORANGE , target , buf );
           sprintf( buf , "The ships ion cannons fire at %s but the blue plasma narrowly misses." , target->name);
           EchoToCockpit( AT_ORANGE , ship , buf );
-          learn_from_failure( ch, gsn_spacecombat );
-	  learn_from_failure( ch, gsn_spacecombat2 );
-          learn_from_failure( ch, gsn_spacecombat3 );
+          LearnFromFailure( ch, gsn_spacecombat );
+	  LearnFromFailure( ch, gsn_spacecombat2 );
+          LearnFromFailure( ch, gsn_spacecombat3 );
           sprintf( buf, "Blue ion plasma from %s narrowly misses %s." , ship->name , target->name );
           if(ship->sclass > SHIP_PLATFORM)
             EchoToRoom(AT_ORANGE, ship->in_room, buf);
@@ -242,11 +242,11 @@ void do_fire(Character *ch, char *argument )
       EchoToCockpit( AT_BLOOD , target , buf );
       sprintf( buf , "Blue plasma from your ship engulf %s!." , target->name);
       EchoToCockpit( AT_YELLOW , ship , buf );
-      learn_from_success( ch, gsn_spacecombat );
-      learn_from_success( ch, gsn_spacecombat2 );
-      learn_from_success( ch, gsn_spacecombat3 );
+      LearnFromSuccess( ch, gsn_spacecombat );
+      LearnFromSuccess( ch, gsn_spacecombat2 );
+      LearnFromSuccess( ch, gsn_spacecombat3 );
       if (ship->sclass > SHIP_PLATFORM )
-        learn_from_success( ch, gsn_speedercombat );
+        LearnFromSuccess( ch, gsn_speedercombat );
 
       EchoToShip( AT_RED , target , "A small explosion vibrates through the ship." );
       if( ship->sclass == SHIP_PLATFORM )
@@ -350,7 +350,7 @@ void do_fire(Character *ch, char *argument )
         EchoToRoom(AT_ORANGE, ship->in_room, buf);
       else
         EchoToNearbyShips( AT_ORANGE , ship , buf , target );
-      learn_from_success( ch, gsn_weaponsystems );
+      LearnFromSuccess( ch, gsn_weaponsystems );
       if ( ship->sclass == CAPITAL_SHIP || ship->sclass == SHIP_PLATFORM )
         ship->missilestate = MISSILE_RELOAD;
       else
@@ -447,7 +447,7 @@ void do_fire(Character *ch, char *argument )
         }
       else
         EchoToNearbyShips( AT_ORANGE , ship , buf , target );
-      learn_from_success( ch, gsn_weaponsystems );
+      LearnFromSuccess( ch, gsn_weaponsystems );
       if ( ship->sclass == CAPITAL_SHIP || ship->sclass == SHIP_PLATFORM )
         ship->missilestate = MISSILE_RELOAD;
       else
@@ -546,7 +546,7 @@ void do_fire(Character *ch, char *argument )
         }
       else
         EchoToNearbyShips( AT_ORANGE , ship , buf , target );
-      learn_from_success( ch, gsn_weaponsystems );
+      LearnFromSuccess( ch, gsn_weaponsystems );
       if ( ship->sclass == CAPITAL_SHIP || ship->sclass == SHIP_PLATFORM )
         ship->missilestate = MISSILE_RELOAD;
       else
@@ -635,9 +635,9 @@ void do_fire(Character *ch, char *argument )
 	      else
 		EchoToNearbyShips( AT_ORANGE , ship , buf , target );
 
-	      learn_from_failure( ch, gsn_spacecombat );
-	      learn_from_failure( ch, gsn_spacecombat2 );
-	      learn_from_failure( ch, gsn_spacecombat3 );
+	      LearnFromFailure( ch, gsn_spacecombat );
+	      LearnFromFailure( ch, gsn_spacecombat2 );
+	      LearnFromFailure( ch, gsn_spacecombat3 );
 	      return;
 	    }
 
@@ -652,9 +652,9 @@ void do_fire(Character *ch, char *argument )
 	  EchoToCockpit( AT_BLOOD , target , buf );
 	  sprintf( buf , "Turbolasers fire from the turret, hitting %s!" , target->name);
 	  EchoToCockpit( AT_YELLOW , ship , buf );
-	  learn_from_success( ch, gsn_spacecombat );
-	  learn_from_success( ch, gsn_spacecombat2 );
-	  learn_from_success( ch, gsn_spacecombat3 );
+	  LearnFromSuccess( ch, gsn_spacecombat );
+	  LearnFromSuccess( ch, gsn_spacecombat2 );
+	  LearnFromSuccess( ch, gsn_spacecombat3 );
 	  EchoToShip( AT_RED , target , "A small explosion vibrates through the ship." );
 
 	  if( ship->sclass == SHIP_PLATFORM && target->sclass <= MIDSIZE_SHIP )

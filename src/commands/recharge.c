@@ -36,7 +36,7 @@ void do_recharge(Character *ch, char *argument )
   if ( GetRandomPercent( ) > the_chance )
     {
       SendToCharacter("&RYou fail to work the controls properly.\r\n",ch);
-      learn_from_failure( ch, gsn_shipsystems );
+      LearnFromFailure( ch, gsn_shipsystems );
       return;
     }
 
@@ -44,7 +44,7 @@ void do_recharge(Character *ch, char *argument )
   Act( AT_PLAIN, "$n pulls back a lever on the control panel.", ch,
        NULL, argument , TO_ROOM );
 
-  learn_from_success( ch, gsn_shipsystems );
+  LearnFromSuccess( ch, gsn_shipsystems );
 
   recharge  = 25+ship->sclass*25;
   recharge  = umin(  ship->maxshield-ship->shield , recharge );

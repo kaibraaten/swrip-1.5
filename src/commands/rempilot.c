@@ -35,7 +35,7 @@ void do_rempilot(Character *ch, char *argument )
     }
 
   if ( the_chance < ch->pcdata->learned[gsn_slicing] )
-    learn_from_success( ch, gsn_slicing );
+    LearnFromSuccess( ch, gsn_slicing );
 
   if ( !StrCmp( ship->pilot , argument ) )
     {

@@ -53,7 +53,7 @@ void do_autotrack( Character *ch, char *argument )
   if ( GetRandomPercent( ) > the_chance )
     {
       SendToCharacter("&RYour not sure which switch to flip.\r\n",ch);
-      learn_from_failure( ch, gsn_shipsystems );
+      LearnFromFailure( ch, gsn_shipsystems );
       return;
     }
 
@@ -70,5 +70,5 @@ void do_autotrack( Character *ch, char *argument )
       EchoToCockpit( AT_YELLOW , ship, "Autotracking on.");
     }
 
-  learn_from_success( ch, gsn_shipsystems );
+  LearnFromSuccess( ch, gsn_shipsystems );
 }

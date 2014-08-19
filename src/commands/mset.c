@@ -877,7 +877,7 @@ void do_mset( Character *ch, char *argument )
           return;
         }
 
-      set_title( victim, arg3 );
+      SetCharacterTitle( victim, arg3 );
       return;
     }
 

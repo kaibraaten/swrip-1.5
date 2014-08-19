@@ -121,7 +121,7 @@ void do_smalltalk ( Character *ch , char *argument )
   gain_exp(ch, DIPLOMACY_ABILITY, victim->top_level * 10 );
   ChPrintf( ch , "You gain %d diplomacy experience.\r\n", victim->top_level*10 );
 
-  learn_from_success( ch, gsn_smalltalk );
+  LearnFromSuccess( ch, gsn_smalltalk );
 
   if ( planet->pop_support > 100 )
     planet->pop_support = 100;

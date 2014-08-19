@@ -67,7 +67,7 @@ void do_bind ( Character *ch , char *argument )
   Act( AT_YELLOW, "You bind $N up.", ch, NULL, victim, TO_CHAR    );
   Act( AT_BLUE, "$n quickly binds $N, leaving $M helpless!", ch, NULL, victim, TO_NOTVICT );
   aff_paralysis( ch, victim );
-  learn_from_success( ch, gsn_bind );
+  LearnFromSuccess( ch, gsn_bind );
 }
 
 static bool aff_paralysis( Character *ch, Character *victim )

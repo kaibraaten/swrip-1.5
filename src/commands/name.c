@@ -53,7 +53,7 @@ void do_name( Character *ch, char *argument )
   ch->name = CopyString( argument );
   sprintf( buf, "%s the %s",ch->name,
            RaceTable[ch->race].race_name );
-  set_title( ch, buf );
+  SetCharacterTitle( ch, buf );
 
   SendToCharacter("Your name has been changed.  Please apply again.\r\n", ch);
   ch->pcdata->auth_state = 1;

@@ -44,12 +44,12 @@ void do_track( Character *ch, char *argument )
   case BFS_NO_PATH:
     sprintf(buf, "You can't sense a trail from here.\r\n" );
     SendToCharacter(buf, ch);
-    learn_from_failure( ch, gsn_track );
+    LearnFromFailure( ch, gsn_track );
     break;
   default:
     ChPrintf(ch, "You sense a trail %s from here...\r\n",
 	      GetDirectionName(dir));
-    learn_from_success( ch, gsn_track );
+    LearnFromSuccess( ch, gsn_track );
     break;
   }
 }

@@ -32,5 +32,5 @@ void do_arm( Character *ch, char *argument )
   ChPrintf( ch, "You arm %s.\r\n", obj->short_descr );
   Act( AT_PLAIN, "$n arms $p.", ch, obj, NULL, TO_ROOM );
 
-  learn_from_success( ch , gsn_grenades );
+  LearnFromSuccess( ch , gsn_grenades );
 }

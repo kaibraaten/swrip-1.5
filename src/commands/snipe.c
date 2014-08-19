@@ -192,14 +192,14 @@ void do_snipe( Character *ch, char *argument )
 
       StopFighting( ch , true );
 
-      learn_from_success( ch, gsn_snipe );
+      LearnFromSuccess( ch, gsn_snipe );
     }
   else
     {
       Act( AT_ACTION, "You fire at $N but don't even come close.", ch, NULL, victim, TO_CHAR );
       sprintf( buf, "A blaster shot fired from the %s barely misses you." , GetDirectionName(dir) );
       Act( AT_ACTION, buf, ch, NULL, victim, TO_ROOM );
-      learn_from_failure( ch, gsn_snipe );
+      LearnFromFailure( ch, gsn_snipe );
     }
 
   char_from_room( ch );

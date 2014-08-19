@@ -31,7 +31,7 @@ void do_autorecharge(Character *ch, char *argument )
   if ( GetRandomPercent( ) > the_chance )
     {
       SendToCharacter("&RYou fail to work the controls properly.\r\n",ch);
-      learn_from_failure( ch, gsn_shipsystems );
+      LearnFromFailure( ch, gsn_shipsystems );
       return;
     }
 
@@ -81,5 +81,5 @@ void do_autorecharge(Character *ch, char *argument )
       ship->energy -= ( recharge*2 + recharge * ship->sclass );
     }
 
-  learn_from_success( ch, gsn_shipsystems );
+  LearnFromSuccess( ch, gsn_shipsystems );
 }

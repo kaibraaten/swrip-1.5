@@ -23,10 +23,10 @@ void do_hide( Character *ch, char *argument )
   if ( IsNpc(ch) || GetRandomPercent( ) < ch->pcdata->learned[gsn_hide] )
     {
       SetBit(ch->affected_by, AFF_HIDE);
-      learn_from_success( ch, gsn_hide );
+      LearnFromSuccess( ch, gsn_hide );
     }
   else
     {
-      learn_from_failure( ch, gsn_hide );
+      LearnFromFailure( ch, gsn_hide );
     }
 }

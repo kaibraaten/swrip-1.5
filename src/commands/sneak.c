@@ -28,8 +28,8 @@ void do_sneak( Character *ch, char *argument )
       af.modifier  = 0;
       af.bitvector = AFF_SNEAK;
       affect_to_char( ch, &af );
-      learn_from_success( ch, gsn_sneak );
+      LearnFromSuccess( ch, gsn_sneak );
     }
   else
-    learn_from_failure( ch, gsn_sneak );
+    LearnFromFailure( ch, gsn_sneak );
 }

@@ -114,7 +114,7 @@ void do_mass_propaganda ( Character *ch , char *argument )
   gain_exp(ch, DIPLOMACY_ABILITY, victim->top_level * 100 );
   ChPrintf( ch , "You gain %d diplomacy experience.\r\n", victim->top_level*100 );
 
-  learn_from_success( ch, gsn_masspropaganda );
+  LearnFromSuccess( ch, gsn_masspropaganda );
 
   if ( planet->pop_support > 100 )
     planet->pop_support = 100;

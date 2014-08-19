@@ -98,7 +98,7 @@ void do_beg( Character *ch, char *argument )
           global_retcode = HitMultipleTimes( victim, ch, TYPE_UNDEFINED );
         }
 
-      learn_from_failure( ch, gsn_beg );
+      LearnFromFailure( ch, gsn_beg );
 
       return;
     }
@@ -112,14 +112,14 @@ void do_beg( Character *ch, char *argument )
     {
       do_look( victim , ch->name );
       do_say( victim , "Sorry I have nothing to spare.\r\n" );
-      learn_from_failure( ch, gsn_beg );
+      LearnFromFailure( ch, gsn_beg );
       return;
     }
 
   ch->gold     += amount;
   victim->gold -= amount;
   ChPrintf( ch, "%s gives you %d credits.\r\n", victim->short_descr , amount );
-  learn_from_success( ch, gsn_beg );
+  LearnFromSuccess( ch, gsn_beg );
   xp = umin( amount*10 , ( exp_level( GetAbilityLevel( ch, SMUGGLING_ABILITY ) + 1) - exp_level( GetAbilityLevel( ch, SMUGGLING_ABILITY ) )  )  );
   xp = umin( xp , ComputeXP( ch, victim ) );
   gain_exp( ch, SMUGGLING_ABILITY, xp );

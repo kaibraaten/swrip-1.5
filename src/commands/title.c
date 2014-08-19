@@ -33,6 +33,6 @@ void do_title( Character *ch, char *argument )
     }
 
   SmashTilde( argument );
-  set_title( ch, argument );
+  SetCharacterTitle( ch, argument );
   SendToCharacter( "Ok.\r\n", ch );
 }

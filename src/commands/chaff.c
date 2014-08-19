@@ -52,7 +52,7 @@ void do_chaff( Character *ch, char *argument )
   if ( GetRandomPercent( ) > the_chance )
     {
       SendToCharacter("&RYou can't figure out which switch it is.\r\n",ch);
-      learn_from_failure( ch, gsn_weaponsystems );
+      LearnFromFailure( ch, gsn_weaponsystems );
       return;
     }
 
@@ -65,5 +65,5 @@ void do_chaff( Character *ch, char *argument )
        NULL, argument , TO_ROOM );
   EchoToCockpit( AT_YELLOW , ship , "A burst of chaff is released from the ship.");
 
-  learn_from_success( ch, gsn_weaponsystems );
+  LearnFromSuccess( ch, gsn_weaponsystems );
 }

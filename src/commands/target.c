@@ -121,7 +121,7 @@ void do_target(Character *ch, char *argument )
           return;
         }
       SendToCharacter("&RYou fail to work the controls properly.\r\n",ch);
-      learn_from_failure( ch, gsn_weaponsystems );
+      LearnFromFailure( ch, gsn_weaponsystems );
       return;
 
     case SUB_PAUSE:
@@ -180,7 +180,7 @@ void do_target(Character *ch, char *argument )
       if( dship->docked && dship->docked == ship )
         dship->target0 = target;
 
-  learn_from_success( ch, gsn_weaponsystems );
+  LearnFromSuccess( ch, gsn_weaponsystems );
 
   if ( IsShipAutoflying(target) && !target->target0)
     {

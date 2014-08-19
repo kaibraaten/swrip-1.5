@@ -47,10 +47,10 @@ void do_disarm( Character *ch, char *argument )
     percent += 10;
 
   if ( IsNpc(ch) || percent < ch->pcdata->learned[gsn_disarm] * 2 / 3 )
-    disarm( ch, victim );
+    Disarm( ch, victim );
   else
     {
       SendToCharacter( "You failed.\r\n", ch );
-      learn_from_failure( ch, gsn_disarm );
+      LearnFromFailure( ch, gsn_disarm );
     }
 }
