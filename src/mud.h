@@ -2351,11 +2351,11 @@ extern "C" {
   const char *GetSpellSavesName( size_t type );
   size_t GetSpellTargetSize( void );
   const char *GetSpellTargetName( size_t type );
-  int get_spicetype( const char* );
-  int get_npc_race( const char* );
-  int get_actflag( const char* );
-  int get_plrflag( const char* );
-  int get_pcflag( const char* );
+  int GetSpiceType( const char* );
+  int GetNpcRace( const char* );
+  int GetActFlag( const char* );
+  int GetPlayerFlag( const char* );
+  int GetPcFlag( const char* );
   int get_risflag( const char* );
   int get_partflag( const char* );
   int get_attackflag( const char* );

@@ -845,7 +845,7 @@ void do_oset( Character *ch, char *argument )
       if ( !StrCmp( arg2, "grade" ) )          tmp = 1;
       if ( !StrCmp( arg2, "spicetype" ) )
         {
-          value = get_spicetype( arg3 );
+          value = GetSpiceType( arg3 );
 
           if ( value < 0 )
             {

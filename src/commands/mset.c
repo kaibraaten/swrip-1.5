@@ -407,7 +407,7 @@ void do_mset( Character *ch, char *argument )
     {
       if ( !can_mmodify( ch, victim ) )
         return;
-      value = get_npc_race( arg3 );
+      value = GetNpcRace( arg3 );
       if ( value < 0 )
         value = atoi( arg3 );
       if ( !IsNpc(victim) && (value < 0 || value >= MAX_RACE) )
@@ -984,12 +984,12 @@ void do_mset( Character *ch, char *argument )
         {
           pcflag = false;
           argument = OneArgument( argument, arg3 );
-          value = IsNpc( victim) ? get_actflag( arg3 ) : get_plrflag( arg3 );
+          value = IsNpc( victim) ? GetActFlag( arg3 ) : GetPlayerFlag( arg3 );
 
           if ( !IsNpc( victim ) && ( value < 0 || value > 31 ) )
             {
               pcflag = true;
-              value = get_pcflag( arg3 );
+              value = GetPcFlag( arg3 );
             }
           if ( value < 0 || value > 31 )
             ch_printf( ch, "Unknown flag: %s\r\n", arg3 );

@@ -2617,7 +2617,7 @@ int get_affecttype( const char *type )
   return get_in_array( type, affect_types, MAX_APPLY_TYPE, StrCmp );
 }
 
-int get_npc_race( const char *type )
+int GetNpcRace( const char *type )
 {
   return get_in_array( type, npc_race, MAX_NPC_RACE, StrCmp );
 }
@@ -2667,7 +2667,7 @@ int get_wearflag( const char *flag )
                        StrCmp );
 }
 
-int get_actflag( const char *flag )
+int GetActFlag( const char *flag )
 {
   return get_in_array( flag, act_flags,
                        sizeof( act_flags ) / sizeof( act_flags[0] ),
@@ -2688,14 +2688,14 @@ int get_wanted_flag( const char *flag )
                        StrCmp );
 }
 
-int get_pcflag( const char *flag )
+int GetPcFlag( const char *flag )
 {
   return get_in_array( flag, pc_flags,
                        sizeof( pc_flags ) / sizeof( pc_flags[0] ),
                        StrCmp );
 }
 
-int get_plrflag( const char *flag )
+int GetPlayerFlag( const char *flag )
 {
   return get_in_array( flag, plr_flags,
                        sizeof( plr_flags ) / sizeof( plr_flags[0] ),
@@ -2748,7 +2748,7 @@ int get_langflag( const char *flag )
   return LANG_UNKNOWN;
 }
 
-int get_spicetype( const char *type )
+int GetSpiceType( const char *type )
 {
   return get_in_array( type, spice_table,
                        sizeof( spice_table ) / sizeof( spice_table[0] ),
