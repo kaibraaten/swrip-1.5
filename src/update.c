@@ -344,21 +344,21 @@ void gain_exp( Character *ch, short ability, long gain )
 
   SetAbilityXP( ch, ability, umax( 0, GetAbilityXP( ch, ability ) + gain ) );
 
-  if (!IsAuthed(ch) && GetAbilityXP( ch, ability ) >= exp_level(GetAbilityLevel(ch, ability ) + 1))
+  if (!IsAuthed(ch) && GetAbilityXP( ch, ability ) >= GetRequiredXpForLevel(GetAbilityLevel(ch, ability ) + 1))
     {
       SendToCharacter("You can not ascend to a higher level until you are authorized.\r\n", ch);
-      SetAbilityXP( ch, ability, exp_level( GetAbilityLevel(ch, ability) + 1 ) - 1);
+      SetAbilityXP( ch, ability, GetRequiredXpForLevel( GetAbilityLevel(ch, ability) + 1 ) - 1);
       return;
     }
 
-  while ( GetAbilityXP( ch, ability ) >= exp_level( GetAbilityLevel( ch, ability ) + 1))
+  while ( GetAbilityXP( ch, ability ) >= GetRequiredXpForLevel( GetAbilityLevel( ch, ability ) + 1))
     {
       short current_level = GetAbilityLevel( ch, ability );
       short new_level = 0;
 
       if ( current_level >= max_level( ch, ability ) )
         {
-          SetAbilityXP( ch, ability, exp_level( GetAbilityLevel( ch, ability ) + 1 ) - 1);
+          SetAbilityXP( ch, ability, GetRequiredXpForLevel( GetAbilityLevel( ch, ability ) + 1 ) - 1);
           return;
         }
 
@@ -1999,7 +1999,7 @@ void obj_update( void )
           break;
 
         case ITEM_GRENADE:
-          explode( obj );
+          Explode( obj );
           return;
           break;
 

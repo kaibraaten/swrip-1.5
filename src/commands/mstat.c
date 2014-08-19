@@ -86,7 +86,7 @@ void do_mstat( Character *ch, char *argument )
         ChPrintf( ch, "%-15s   Level: %-3d   Max: %-3d   Exp: %-10ld   Next: %-10ld\r\n",
                    ability_name[ability], GetAbilityLevel( victim, ability ), max_level(victim, ability),
 		   GetAbilityXP( victim, ability ),
-		   exp_level( GetAbilityLevel( victim, ability ) + 1 ) );
+		   GetRequiredXpForLevel( GetAbilityLevel( victim, ability ) + 1 ) );
     }
 
   ChPrintf( ch,

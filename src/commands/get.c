@@ -353,7 +353,7 @@ static void get_obj( Character *ch, Object *obj, Object *container )
     }
 
   if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE )
-       &&  !can_take_proto( ch ) )
+       &&  !CharacterCanTakePrototype( ch ) )
     {
       SendToCharacter( "A godly force prevents you from getting close to it.\r\n", ch );
       return;

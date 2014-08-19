@@ -164,8 +164,8 @@ static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *
   Act( AT_PLAIN, actBuf, ch, NULL, NULL, TO_ROOM );
 
   xpgain = umin( eventArgs->Object->cost * 100,
-                 exp_level(GetAbilityLevel(ch, skill->guild ) + 1)
-                 - exp_level(GetAbilityLevel(ch, skill->guild ) ) );
+                 GetRequiredXpForLevel(GetAbilityLevel(ch, skill->guild ) + 1)
+                 - GetRequiredXpForLevel(GetAbilityLevel(ch, skill->guild ) ) );
   gain_exp(ch, skill->guild, xpgain );
   ChPrintf( ch , "You gain %d %s experience.", xpgain, ability_name[skill->guild] );
 

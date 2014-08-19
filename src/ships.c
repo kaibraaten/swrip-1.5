@@ -419,7 +419,7 @@ static void LandShip( Ship *ship, const char *arg )
       long xp = 0;
 
       ch = ship->ch;
-      xp =  (exp_level( GetAbilityLevel(ch, PILOTING_ABILITY ) + 1) - exp_level( GetAbilityLevel(ch, PILOTING_ABILITY)));
+      xp =  (GetRequiredXpForLevel( GetAbilityLevel(ch, PILOTING_ABILITY ) + 1) - GetRequiredXpForLevel( GetAbilityLevel(ch, PILOTING_ABILITY)));
       xp = umin( GetShipValue( ship ) , xp );
       gain_exp( ch, PILOTING_ABILITY, xp );
       ChPrintf( ch, "&WYou gain %ld points of flight experience!\r\n",
@@ -3440,7 +3440,7 @@ void DamageShip( Ship *ship, int min, int max, Character *ch, const Ship *assaul
 
   if( ch )
     {
-      xp = ( exp_level( GetAbilityLevel(ch, PILOTING_ABILITY ) + 1) - exp_level( GetAbilityLevel( ch, PILOTING_ABILITY ) ) ) / 25;
+      xp = ( GetRequiredXpForLevel( GetAbilityLevel(ch, PILOTING_ABILITY ) + 1) - GetRequiredXpForLevel( GetAbilityLevel( ch, PILOTING_ABILITY ) ) ) / 25;
       xp = umin( GetShipValue( ship ) / 100, xp ) ;
       gain_exp( ch, PILOTING_ABILITY, xp );
     }
@@ -3512,7 +3512,7 @@ void DamageShip( Ship *ship, int min, int max, Character *ch, const Ship *assaul
 	  LogPrintf( "%s(%s) was just destroyed by %s.",
 		      ship->name, ship->personalname, ch->name );
 
-	  xp =  ( exp_level( GetAbilityLevel( ch, PILOTING_ABILITY ) + 1) - exp_level( GetAbilityLevel( ch, PILOTING_ABILITY ) ) );
+	  xp =  ( GetRequiredXpForLevel( GetAbilityLevel( ch, PILOTING_ABILITY ) + 1) - GetRequiredXpForLevel( GetAbilityLevel( ch, PILOTING_ABILITY ) ) );
 	  xp = umin( GetShipValue( ship ) , xp );
 	  gain_exp( ch, PILOTING_ABILITY, xp);
 	  ChPrintf( ch, "&WYou gain %ld piloting experience!\r\n", xp );

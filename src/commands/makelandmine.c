@@ -221,7 +221,7 @@ static void OnFinished( Character *ch )
   Act( AT_PLAIN, "$n finishes making $s new landmine.", ch,
        NULL, NULL, TO_ROOM );
 
-  xpgain = umin( obj->cost*50 ,( exp_level(GetAbilityLevel( ch, ENGINEERING_ABILITY ) + 1) - exp_level(GetAbilityLevel( ch, ENGINEERING_ABILITY ) ) ) );
+  xpgain = umin( obj->cost*50 ,( GetRequiredXpForLevel(GetAbilityLevel( ch, ENGINEERING_ABILITY ) + 1) - GetRequiredXpForLevel(GetAbilityLevel( ch, ENGINEERING_ABILITY ) ) ) );
   gain_exp(ch, ENGINEERING_ABILITY, xpgain );
   ChPrintf( ch , "You gain %d engineering experience.", xpgain );
 

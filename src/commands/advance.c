@@ -92,7 +92,7 @@ void do_advance( Character *ch, char *argument )
 
   for ( iLevel = GetAbilityLevel( victim, ability ) ; iLevel < level; iLevel++ )
     {
-      SetAbilityXP( victim, ability, exp_level(iLevel+1) );
+      SetAbilityXP( victim, ability, GetRequiredXpForLevel(iLevel+1) );
       gain_exp( victim, ability, 0 );
     }
 }

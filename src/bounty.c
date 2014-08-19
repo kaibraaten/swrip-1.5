@@ -224,7 +224,7 @@ void ClaimBounty( Character *ch, const Character *victim )
     {
       if ( IsBitSet(victim->act , PLR_KILLER ) && !IsNpc(ch) )
         {
-          xp = urange(1, ComputeXP(ch, victim) , ( exp_level(GetAbilityLevel( ch, HUNTING_ABILITY ) + 1) - exp_level(GetAbilityLevel( ch, HUNTING_ABILITY ) ) ) );
+          xp = urange(1, ComputeXP(ch, victim) , ( GetRequiredXpForLevel(GetAbilityLevel( ch, HUNTING_ABILITY ) + 1) - GetRequiredXpForLevel(GetAbilityLevel( ch, HUNTING_ABILITY ) ) ) );
           gain_exp( ch, HUNTING_ABILITY, xp );
           SetCharacterColor( AT_BLOOD, ch );
           ChPrintf( ch, "You receive %ld hunting experience for executing a wanted killer.\r\n", xp );
@@ -240,7 +240,7 @@ void ClaimBounty( Character *ch, const Character *victim )
 
   ch->gold += bounty->amount;
 
-  xp = urange(1, bounty->amount + ComputeXP(ch, victim) , ( exp_level(GetAbilityLevel( ch, HUNTING_ABILITY ) + 1) - exp_level(GetAbilityLevel( ch, HUNTING_ABILITY ) ) ) );
+  xp = urange(1, bounty->amount + ComputeXP(ch, victim) , ( GetRequiredXpForLevel(GetAbilityLevel( ch, HUNTING_ABILITY ) + 1) - GetRequiredXpForLevel(GetAbilityLevel( ch, HUNTING_ABILITY ) ) ) );
   gain_exp( ch, HUNTING_ABILITY, xp );
 
   SetCharacterColor( AT_BLOOD, ch );

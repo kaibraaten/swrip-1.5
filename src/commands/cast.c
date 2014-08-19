@@ -365,7 +365,7 @@ void do_cast( Character *ch, char *argument )
       int force_exp;
 
       force_exp = skill->min_level*skill->min_level*10;
-      force_exp = urange( 0 , force_exp, ( exp_level(GetAbilityLevel( ch, FORCE_ABILITY ) + 1 ) - exp_level(GetAbilityLevel(ch, FORCE_ABILITY ) ) )/35 );
+      force_exp = urange( 0 , force_exp, ( GetRequiredXpForLevel(GetAbilityLevel( ch, FORCE_ABILITY ) + 1 ) - GetRequiredXpForLevel(GetAbilityLevel(ch, FORCE_ABILITY ) ) )/35 );
       if( !ch->fighting  )
         ChPrintf( ch, "You gain %d force experience.\r\n" , force_exp );
       gain_exp(ch, FORCE_ABILITY, force_exp );

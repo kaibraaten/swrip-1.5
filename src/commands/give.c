@@ -131,7 +131,7 @@ void do_give( Character *ch, char *argument )
         }
     }
 
-  if (IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) && !can_take_proto( victim ) )
+  if (IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) && !CharacterCanTakePrototype( victim ) )
     {
       Act( AT_PLAIN, "You cannot give that to $N!", ch, NULL, victim, TO_CHAR );
       return;

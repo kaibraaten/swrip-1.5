@@ -1607,7 +1607,7 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
 
       if ( IsNpc( ch ) && !IsNpc( victim ) )
         {
-          long xp_to_lose = umax( ( GetAbilityXP( victim, COMBAT_ABILITY ) - exp_level( GetAbilityLevel( ch, COMBAT_ABILITY ) ) ), 0 );
+          long xp_to_lose = umax( ( GetAbilityXP( victim, COMBAT_ABILITY ) - GetRequiredXpForLevel( GetAbilityLevel( ch, COMBAT_ABILITY ) ) ), 0 );
 	  long xp_actually_lost = lose_exp( victim, COMBAT_ABILITY, xp_to_lose );
 
           ChPrintf( victim, "You lose %ld experience.\r\n", xp_actually_lost );
@@ -2328,7 +2328,7 @@ void group_gain( Character *ch, Character *victim )
 
       if ( lch == gch && members > 1 )
         {
-          xp = urange( members, xp*members, (exp_level( GetAbilityLevel( gch, LEADERSHIP_ABILITY ) + 1) - exp_level(GetAbilityLevel( gch, LEADERSHIP_ABILITY ) ) / 10) );
+          xp = urange( members, xp*members, (GetRequiredXpForLevel( GetAbilityLevel( gch, LEADERSHIP_ABILITY ) + 1) - GetRequiredXpForLevel(GetAbilityLevel( gch, LEADERSHIP_ABILITY ) ) / 10) );
           sprintf( buf, "You get %d leadership experience for leading your group to victory.\r\n", xp );
           SendToCharacter( buf, gch );
           gain_exp( gch, LEADERSHIP_ABILITY, xp );
@@ -2401,7 +2401,7 @@ int ComputeXP( const Character *gch, const Character *victim )
 
   /* new xp cap for swreality */
 
-  return urange(1, xp, ( exp_level( GetAbilityLevel( gch, COMBAT_ABILITY ) + 1 ) - exp_level( GetAbilityLevel( gch, COMBAT_ABILITY ) ) ) );
+  return urange(1, xp, ( GetRequiredXpForLevel( GetAbilityLevel( gch, COMBAT_ABILITY ) + 1 ) - GetRequiredXpForLevel( GetAbilityLevel( gch, COMBAT_ABILITY ) ) ) );
 }
 
 /*

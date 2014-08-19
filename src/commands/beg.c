@@ -120,7 +120,7 @@ void do_beg( Character *ch, char *argument )
   victim->gold -= amount;
   ChPrintf( ch, "%s gives you %d credits.\r\n", victim->short_descr , amount );
   LearnFromSuccess( ch, gsn_beg );
-  xp = umin( amount*10 , ( exp_level( GetAbilityLevel( ch, SMUGGLING_ABILITY ) + 1) - exp_level( GetAbilityLevel( ch, SMUGGLING_ABILITY ) )  )  );
+  xp = umin( amount*10 , ( GetRequiredXpForLevel( GetAbilityLevel( ch, SMUGGLING_ABILITY ) + 1) - GetRequiredXpForLevel( GetAbilityLevel( ch, SMUGGLING_ABILITY ) )  )  );
   xp = umin( xp , ComputeXP( ch, victim ) );
   gain_exp( ch, SMUGGLING_ABILITY, xp );
   ChPrintf( ch, "&WYou gain %ld smuggling experience points!\r\n", xp );

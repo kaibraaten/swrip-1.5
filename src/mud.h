@@ -2561,9 +2561,9 @@ extern "C" {
   bool HasPermanentSneak( const Character *ch );
 
   /* handler.c */
-  bool can_take_proto( const Character *ch );
-  void explode( Object *obj );
-  int exp_level( short level );
+  bool CharacterCanTakePrototype( const Character *ch );
+  void Explode( Object *obj );
+  int GetRequiredXpForLevel( short level );
   void affect_modify( Character *ch, Affect *paf, bool fAdd );
   void affect_to_char( Character *ch, Affect *paf );
   void affect_remove( Character *ch, Affect *paf );

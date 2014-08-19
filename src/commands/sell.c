@@ -80,7 +80,7 @@ void do_sell( Character *ch, char *argument )
     {
       long ch_exp;
 
-      ch_exp = umin( obj->cost*10 , ( exp_level( GetAbilityLevel( ch, SMUGGLING_ABILITY ) + 1) - exp_level( GetAbilityLevel( ch, SMUGGLING_ABILITY ) )  ) / 10  );
+      ch_exp = umin( obj->cost*10 , ( GetRequiredXpForLevel( GetAbilityLevel( ch, SMUGGLING_ABILITY ) + 1) - GetRequiredXpForLevel( GetAbilityLevel( ch, SMUGGLING_ABILITY ) )  ) / 10  );
       ChPrintf( ch, "You receive %ld smuggling experience for unloading your contraband.\r\n " , ch_exp );
       gain_exp( ch, SMUGGLING_ABILITY, ch_exp );
 

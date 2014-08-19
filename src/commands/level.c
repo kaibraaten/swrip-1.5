@@ -24,7 +24,7 @@ void do_level( Character *ch, char *argument )
 		     Capitalize(ability_name[ability]),
 		     GetAbilityLevel( ch, ability ), maxbuf,
 		     GetAbilityXP( ch, ability ),
-		     exp_level( GetAbilityLevel( ch, ability ) + 1 ) );
+		     GetRequiredXpForLevel( GetAbilityLevel( ch, ability ) + 1 ) );
 	}
       else
 	{

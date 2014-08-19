@@ -43,7 +43,7 @@ static void room_explode( Object *obj , Character *xch, Room *room );
 static void room_explode_1( Object *obj , Character *xch, Room *room , int blast );
 static void room_explode_2( Room *room , int blast );
 
-void explode( Object *obj )
+void Explode( Object *obj )
 {
   if ( obj->armed_by )
     {
@@ -181,7 +181,7 @@ void room_explode_2( Room *room , int blast )
 /*                                                              -Thoric
  * Return how much experience is required for ch to get to a certain level
  */
-int exp_level( short level)
+int GetRequiredXpForLevel( short level)
 {
   int lvl = umax(0, level - 1);
 
@@ -191,7 +191,7 @@ int exp_level( short level)
 /*
  * See if a player/mob can take a piece of prototype eq         -Thoric
  */
-bool can_take_proto( const Character *ch )
+bool CharacterCanTakePrototype( const Character *ch )
 {
   if ( IsImmortal(ch) )
     return true;
@@ -1850,7 +1850,7 @@ ch_ret check_room_for_traps( Character *ch, int flag )
     {
       if ( check->item_type == ITEM_LANDMINE && flag == TRAP_ENTER_ROOM )
         {
-          explode (check);
+          Explode(check);
           return rNONE;
         }
       else if ( check->item_type == ITEM_TRAP
