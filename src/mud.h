@@ -2318,8 +2318,8 @@ extern "C" {
 
   /* const.c */
   int get_saveflag(const char*);
-  const char *get_dir_name( int dir );
-  int get_rev_dir( int dir );
+  const char *get_dir_name( DirectionType dir );
+  DirectionType get_rev_dir( DirectionType dir );
   size_t spaceobj_type_size( void );
   const char *get_spaceobj_type(size_t sotype);
   int get_spaceobj_type_from_name(const char *name);
@@ -2373,28 +2373,28 @@ extern "C" {
   int get_objectflag( const char *flag );
   int get_wearflag( const char *flag );
   int get_mpflag( const char *flag );
-  int get_dir( const char *txt  );
+  DirectionType get_dir( const char *txt );
   int get_vip_flag( const char *flag );
   int get_wanted_flag( const char *flag );
-  int get_spelldamage( const char *txt  );
-  int get_spellaction( const char *txt  );
-  int get_spellclass( const char *txt  );
-  int get_spellpower( const char *txt  );
-  int get_spellflag( const char *txt  );
-  int get_spellsave( const char *txt  );
-  int get_spelltarget( const char *txt  );
+  int get_spelldamage( const char *txt );
+  int get_spellaction( const char *txt );
+  int get_spellclass( const char *txt );
+  int get_spellpower( const char *txt );
+  int get_spellflag( const char *txt );
+  int get_spellsave( const char *txt );
+  int get_spelltarget( const char *txt );
 
   /* space.c */
   void EchoToRoomNoNewline( int ecolor, Room *room, const char *argument );
-  void         load_spaceobjects( void );
-  void         save_spaceobject( Spaceobject *spaceobject );
-  Spaceobject * spaceobject_from_name( const char *name );
-  Spaceobject * spaceobject_from_vnum( vnum_t vnum );
+  void load_spaceobjects( void );
+  void save_spaceobject( Spaceobject *spaceobject );
+  Spaceobject *spaceobject_from_name( const char *name );
+  Spaceobject *spaceobject_from_vnum( vnum_t vnum );
   void update_spaceobjects( void );
   void update_missiles( void );
-  void         new_missile( Ship *ship, Ship *target, Character *ch,
-                            int missiletype );
-  void         extract_missile( Missile *missile );
+  void new_missile( Ship *ship, Ship *target, Character *ch,
+		    int missiletype );
+  void extract_missile( Missile *missile );
 
   /* comm.c */
   char *obj_short( const Object *obj );

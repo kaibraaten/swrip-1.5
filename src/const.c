@@ -1681,13 +1681,13 @@ const char * const dir_name[] =
     "northeast", "northwest", "southeast", "southwest", "somewhere"
   };
 
-const short rev_dir[] =
+const DirectionType rev_dir[] =
   {
     DIR_SOUTH, DIR_WEST, DIR_NORTH, DIR_EAST, DIR_DOWN, DIR_UP,
     DIR_SOUTHWEST, DIR_SOUTHEAST, DIR_NORTHWEST, DIR_NORTHEAST, DIR_SOMEWHERE
   };
 
-const char *get_dir_name( int dir )
+const char *get_dir_name( DirectionType dir )
 {
   if( dir > DIR_SOMEWHERE )
     {
@@ -1698,7 +1698,7 @@ const char *get_dir_name( int dir )
   return dir_name[dir];
 }
 
-int get_rev_dir( int dir )
+DirectionType get_rev_dir( DirectionType dir )
 {
   if( dir > DIR_SOMEWHERE )
     {
@@ -1709,9 +1709,9 @@ int get_rev_dir( int dir )
   return rev_dir[dir];
 }
 
-int get_dir( const char *txt )
+DirectionType get_dir( const char *txt )
 {
-  int edir = DIR_INVALID;
+  DirectionType edir = DIR_INVALID;
   char c1 = 0, c2 = 0;
 
   if ( !StrCmp( txt, get_dir_name( DIR_NORTHEAST ) ) )
