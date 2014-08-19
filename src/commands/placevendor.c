@@ -58,7 +58,7 @@ void do_placevendor (Character *ch, char *argument)
       return;
     }
 
-  char_to_room( CreateMobile( temp ), ch->in_room );
+  CharacterToRoom( CreateMobile( temp ), ch->in_room );
   vendor = get_char_room(ch, temp->player_name);
 
   sprintf (buf, vendor->long_descr, ch->name);
@@ -72,7 +72,7 @@ void do_placevendor (Character *ch, char *argument)
   SaveVendor (vendor);
 
   separate_obj( obj );
-  extract_obj( obj );
+  ExtractObject( obj );
 
   Act( AT_ACTION, "$n appears in a swirl of smoke.\n", vendor, NULL, NULL, TO_ROOM );
 

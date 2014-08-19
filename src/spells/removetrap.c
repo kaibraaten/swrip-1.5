@@ -54,7 +54,7 @@ ch_ret spell_remove_trap( int sn, int level, Character *ch, void *vo )
       return retcode;
     }
 
-  extract_obj( trap );
+  ExtractObject( trap );
 
   successful_casting( skill, ch, NULL, NULL );
   return rNONE;

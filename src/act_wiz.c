@@ -163,7 +163,7 @@ void CloseArea( Area *pArea )
           if ( urange(pArea->low_m_vnum, ech->Prototype->vnum,
                       pArea->hi_m_vnum) == ech->Prototype->vnum ||
                (ech->in_room && ech->in_room->area == pArea) )
-            extract_char( ech, true );
+            ExtractCharacter( ech, true );
           continue;
         }
       if ( ech->in_room && ech->in_room->area == pArea )
@@ -176,7 +176,7 @@ void CloseArea( Area *pArea )
       if ( urange(pArea->low_o_vnum, eobj->Prototype->vnum,
                   pArea->hi_o_vnum) == eobj->Prototype->vnum ||
            (eobj->in_room && eobj->in_room->area == pArea) )
-        extract_obj( eobj );
+        ExtractObject( eobj );
     }
   for ( icnt = 0; icnt < MAX_KEY_HASH; icnt++ )
     {
@@ -209,7 +209,7 @@ void CloseArea( Area *pArea )
                   if ( ech->fighting )
                     StopFighting( ech, true );
                   if ( IsNpc(ech) )
-                    extract_char( ech, true );
+                    ExtractCharacter( ech, true );
                   else
                     do_recall( ech, "" );
                 }
@@ -220,7 +220,7 @@ void CloseArea( Area *pArea )
               for ( eobj = rid->first_content; eobj; eobj = eobj_next )
                 {
                   eobj_next = eobj->next_content;
-                  extract_obj( eobj );
+                  ExtractObject( eobj );
                 }
             }
           for ( eed = rid->first_extradesc; eed; eed = eed_next )

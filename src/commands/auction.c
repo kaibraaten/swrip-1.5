@@ -114,7 +114,7 @@ void do_auction (Character *ch, char *argument)
           sprintf (buf,"Sale of %s has been stopped by an Immortal.",
                    auction->item->short_descr);
           TalkAuction (buf);
-          obj_to_char (auction->item, auction->seller);
+          ObjectToCharacter (auction->item, auction->seller);
           if ( IsBitSet( sysdata.save_flags, SV_AUCTION ) )
 	    save_char_obj(auction->seller);
           auction->item = NULL;
@@ -262,7 +262,7 @@ void do_auction (Character *ch, char *argument)
 	case ITEM_ARMOR:
 	case ITEM_CONTAINER:
 	  separate_obj(obj);
-	  obj_from_char (obj);
+	  ObjectFromCharacter (obj);
 
 	  if ( IsBitSet( sysdata.save_flags, SV_AUCTION ) )
 	    save_char_obj(ch);

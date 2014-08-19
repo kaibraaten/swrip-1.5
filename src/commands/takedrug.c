@@ -60,7 +60,7 @@ void do_takedrug( Character *ch, char *argument )
 
       if ( IsNpc(ch) )
         {
-          extract_obj( obj );
+          ExtractObject( obj );
           return;
         }
 
@@ -83,7 +83,7 @@ void do_takedrug( Character *ch, char *argument )
           af.modifier  = -5;
           af.duration  = ch->pcdata->drug_level[drug];
           af.bitvector = AFF_POISON;
-          affect_to_char( ch, &af );
+          AffectToCharacter( ch, &af );
           ch->hit = 1;
         }
 
@@ -100,7 +100,7 @@ void do_takedrug( Character *ch, char *argument )
               af.modifier  = -10;
               af.duration  = urange( 1, ch->pcdata->drug_level[drug] - ch->pcdata->addiction[drug] ,obj->value[1] );
               af.bitvector = AFF_TRUESIGHT;
-              affect_to_char( ch, &af );
+              AffectToCharacter( ch, &af );
             }
           break;
 
@@ -114,7 +114,7 @@ void do_takedrug( Character *ch, char *argument )
               af.modifier  = 0;
               af.duration  = urange( 1, ch->pcdata->drug_level[drug] - ch->pcdata->addiction[drug] ,obj->value[1] );
               af.bitvector = AFF_DETECT_HIDDEN;
-              affect_to_char( ch, &af );
+              AffectToCharacter( ch, &af );
             }
           break;
 
@@ -128,7 +128,7 @@ void do_takedrug( Character *ch, char *argument )
               af.modifier  = 0;
               af.duration  = urange( 1, ch->pcdata->drug_level[drug] - ch->pcdata->addiction[drug] ,obj->value[1] );
               af.bitvector = AFF_SANCTUARY;
-              affect_to_char( ch, &af );
+              AffectToCharacter( ch, &af );
             }
           break;
 
@@ -138,21 +138,21 @@ void do_takedrug( Character *ch, char *argument )
           af.modifier  = 4;
           af.duration  = urange( 1, 2*(ch->pcdata->drug_level[drug] - ch->pcdata->addiction[drug]) ,2*obj->value[1] );
           af.bitvector = AFF_NONE;
-          affect_to_char( ch, &af );
+          AffectToCharacter( ch, &af );
 
           af.type      = -1;
           af.location  = APPLY_IMMUNE;
           af.modifier  = RIS_POISON;
           af.duration  = urange( 1, 2*(ch->pcdata->drug_level[drug] - ch->pcdata->addiction[drug]) ,2*obj->value[1] );
           af.bitvector = AFF_NONE;
-          affect_to_char( ch, &af );
+          AffectToCharacter( ch, &af );
 
           af.type      = -1;
           af.location  = APPLY_HIT;
           af.modifier  = 10;
           af.duration  = urange( 1, 2*(ch->pcdata->drug_level[drug] - ch->pcdata->addiction[drug]) ,2*obj->value[1] );
           af.bitvector = AFF_NONE;
-          affect_to_char( ch, &af );
+          AffectToCharacter( ch, &af );
           break;
 
         case SPICE_ANDRIS:
@@ -161,14 +161,14 @@ void do_takedrug( Character *ch, char *argument )
           af.modifier  = 50;
           af.duration  = urange( 1, 2*(ch->pcdata->drug_level[drug] - ch->pcdata->addiction[drug]) ,2*obj->value[1] );
           af.bitvector = AFF_NONE;
-	  affect_to_char( ch, &af );
+	  AffectToCharacter( ch, &af );
 
           af.type      = -1;
           af.location  = APPLY_DEX;
           af.modifier  = 2;
           af.duration  = urange( 1, 2*(ch->pcdata->drug_level[drug] - ch->pcdata->addiction[drug]) ,2*obj->value[1] );
           af.bitvector = AFF_NONE;
-          affect_to_char( ch, &af );
+          AffectToCharacter( ch, &af );
 
           break;
         }
@@ -177,5 +177,5 @@ void do_takedrug( Character *ch, char *argument )
   if ( cur_obj == obj->serial )
     global_objcode = rOBJ_EATEN;
 
-  extract_obj( obj );
+  ExtractObject( obj );
 }

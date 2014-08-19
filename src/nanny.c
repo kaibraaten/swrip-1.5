@@ -865,11 +865,11 @@ if ( (iLang = skill_lookup( "common" )) < 0 )
       /* New players don't have to earn some eq */
 
       obj = CreateObject( GetProtoObject(OBJ_VNUM_SCHOOL_GLOWROD), 0 );
-      obj_to_char( obj, ch );
+      ObjectToCharacter( obj, ch );
       EquipCharacter( ch, obj, WEAR_LIGHT );
 
       obj = CreateObject( GetProtoObject(OBJ_VNUM_SCHOOL_BLADE), 0 );
-      obj_to_char( obj, ch );
+      ObjectToCharacter( obj, ch );
       EquipCharacter( ch, obj, WEAR_WIELD );
 
       /* comlink */
@@ -880,18 +880,18 @@ if ( (iLang = skill_lookup( "common" )) < 0 )
 	if ( obj_ind != NULL )
 	  {
 	    obj = CreateObject( obj_ind, 0 );
-	    obj_to_char( obj, ch );
+	    ObjectToCharacter( obj, ch );
 	  }
       }
 
       if (!sysdata.WAIT_FOR_AUTH)
 	{
-	  char_to_room( ch, GetRoom( ROOM_VNUM_SCHOOL ) );
+	  CharacterToRoom( ch, GetRoom( ROOM_VNUM_SCHOOL ) );
 	  ch->pcdata->auth_state = 3;
 	}
       else
 	{
-	  char_to_room( ch, GetRoom( ROOM_VNUM_SCHOOL ) );
+	  CharacterToRoom( ch, GetRoom( ROOM_VNUM_SCHOOL ) );
 	  ch->pcdata->auth_state = 1;
 	  SetBit(ch->pcdata->flags, PCFLAG_UNAUTHED);
 	}
@@ -902,18 +902,18 @@ if ( (iLang = skill_lookup( "common" )) < 0 )
     {
       if ( ch->pcdata->jail_vnum )
 	{
-	  char_to_room( ch, GetRoom(ch->pcdata->jail_vnum));
+	  CharacterToRoom( ch, GetRoom(ch->pcdata->jail_vnum));
 	}
       else
 	{
-	  char_to_room( ch, GetRoom(6) );
+	  CharacterToRoom( ch, GetRoom(6) );
 	}
     }
   else if ( ch->in_room && !IsImmortal( ch )
 	    && !IsBitSet( ch->in_room->room_flags, ROOM_SPACECRAFT )
 	    && ch->in_room != GetRoom(6) )
     {
-      char_to_room( ch, ch->in_room );
+      CharacterToRoom( ch, ch->in_room );
     }
   else if ( ch->in_room && !IsImmortal( ch )
 	    && IsBitSet( ch->in_room->room_flags, ROOM_SPACECRAFT )
@@ -928,14 +928,14 @@ if ( (iLang = skill_lookup( "common" )) < 0 )
 	    {
 	      if ( ship->sclass != SHIP_PLATFORM || ship->spaceobject )
 		{
-		  char_to_room( ch, ch->in_room );
+		  CharacterToRoom( ch, ch->in_room );
 		}
 	    }
 	}
     }
   else
     {
-      char_to_room( ch, GetRoom( WhereHome(ch) ) );
+      CharacterToRoom( ch, GetRoom( WhereHome(ch) ) );
     }
 
   if ( IsBitSet(ch->act, ACT_POLYMORPHED) )
@@ -958,7 +958,7 @@ if ( (iLang = skill_lookup( "common" )) < 0 )
       for ( obj = storeroom->first_content; obj; obj = obj_next )
 	{
 	  obj_next = obj->next_content;
-	  extract_obj( obj );
+	  ExtractObject( obj );
 	}
 
       sprintf( filename, "%s%c/%s.home", PLAYER_DIR, tolower(ch->name[0]),
@@ -1013,11 +1013,11 @@ if ( (iLang = skill_lookup( "common" )) < 0 )
 	  for ( tobj = supermob->first_carrying; tobj; tobj = tobj_next )
 	    {
 	      tobj_next = tobj->next_content;
-	      obj_from_char( tobj );
+	      ObjectFromCharacter( tobj );
 
 	      if( tobj->item_type != ITEM_MONEY )
 		{
-		  obj_to_room( tobj, storeroom );
+		  ObjectToRoom( tobj, storeroom );
 		}
 	    }
 

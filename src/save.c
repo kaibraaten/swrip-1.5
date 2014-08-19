@@ -2310,7 +2310,7 @@ void fread_obj( Character *ch, FILE *fp, short os_type )
                           room = GetRoom(ROOM_VNUM_LIMBO);
                         }
 
-                      obj = obj_to_room( obj, room );
+                      obj = ObjectToRoom( obj, room );
                     }
                   else if ( iNest == 0 || rgObjNest[iNest] == NULL )
                     {
@@ -2340,7 +2340,7 @@ void fread_obj( Character *ch, FILE *fp, short os_type )
 			    }
                         }
 
-                      obj = obj_to_char( obj, ch );
+                      obj = ObjectToCharacter( obj, ch );
 
                       if ( reslot )
 			{
@@ -2352,7 +2352,7 @@ void fread_obj( Character *ch, FILE *fp, short os_type )
                       if ( rgObjNest[iNest-1] )
                         {
                           separate_obj( rgObjNest[iNest-1] );
-                          obj = obj_to_obj( obj, rgObjNest[iNest-1] );
+                          obj = ObjectToObject( obj, rgObjNest[iNest-1] );
                         }
                       else
 			{
@@ -2753,11 +2753,11 @@ void load_storerooms( void )
           for ( tobj = supermob->first_carrying; tobj; tobj = tobj_next )
             {
               tobj_next = tobj->next_content;
-              obj_from_char( tobj );
+              ObjectFromCharacter( tobj );
 
               if( tobj->item_type != ITEM_MONEY )
 		{
-		  obj_to_room( tobj, storeroom );
+		  ObjectToRoom( tobj, storeroom );
 		}
             }
 
@@ -2982,7 +2982,7 @@ Character *fread_mobile( FILE *fp )
 	    }
 	}
 
-      extract_char(mob, true);
+      ExtractCharacter(mob, true);
       Bug("Fread_mobile: Vnum not found", 0 );
       return NULL;
     }
@@ -3021,7 +3021,7 @@ Character *fread_mobile( FILE *fp )
 		  pRoomIndex = GetRoom( ROOM_VNUM_TEMPLE );
 		}
 
-	      char_to_room(mob, pRoomIndex);
+	      CharacterToRoom(mob, pRoomIndex);
 	      return mob;
 	    }
 	  break;

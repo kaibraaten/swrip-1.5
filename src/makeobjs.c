@@ -34,7 +34,7 @@ void MakeFire(Room *in_room, short timer)
   Object *fire = CreateObject( GetProtoObject( OBJ_VNUM_FIRE ), 0 );
 
   fire->timer = NumberFuzzy(timer);
-  obj_to_room( fire, in_room );
+  ObjectToRoom( fire, in_room );
 }
 
 /*
@@ -96,7 +96,7 @@ void MakeScraps( Object *obj )
 	  tmpobj->wear_loc = WEAR_WIELD;
 	}
 
-      obj_to_room( scraps, obj->carried_by->in_room);
+      ObjectToRoom( scraps, obj->carried_by->in_room);
     }
   else if ( obj->in_room )
     {
@@ -108,7 +108,7 @@ void MakeScraps( Object *obj )
 	       ch, obj, NULL, TO_CHAR );
 	}
 
-      obj_to_room( scraps, obj->in_room);
+      ObjectToRoom( scraps, obj->in_room);
     }
 
   if ( (obj->item_type == ITEM_CONTAINER
@@ -136,7 +136,7 @@ void MakeScraps( Object *obj )
 	}
     }
 
-  extract_obj( obj );
+  ExtractObject( obj );
 }
 
 /*
@@ -172,7 +172,7 @@ void MakeCorpse( Character *ch )
 	      ch->in_room->area->gold_looted += ch->gold;
 	    }
 
-          obj_to_obj( CreateMoney( ch->gold ), corpse );
+          ObjectToObject( CreateMoney( ch->gold ), corpse );
           ch->gold = 0;
         }
 
@@ -194,7 +194,7 @@ void MakeCorpse( Character *ch )
 	      ch->in_room->area->gold_looted += ch->gold;
 	    }
 
-          obj_to_obj( CreateMoney( ch->gold ), corpse );
+          ObjectToObject( CreateMoney( ch->gold ), corpse );
           ch->gold = 0;
         }
     }
@@ -215,27 +215,27 @@ void MakeCorpse( Character *ch )
   for ( obj = ch->first_carrying; obj; obj = obj_next )
     {
       obj_next = obj->next_content;
-      obj_from_char( obj );
+      ObjectFromCharacter( obj );
 
       if ( IS_OBJ_STAT( obj, ITEM_INVENTORY )
            || IS_OBJ_STAT( obj, ITEM_DEATHROT ) )
 	{
-	  extract_obj( obj );
+	  ExtractObject( obj );
 	}
       else
 	{
-	  obj_to_obj( obj, corpse );
+	  ObjectToObject( obj, corpse );
 	}
     }
 
-  obj_to_room( corpse, ch->in_room );
+  ObjectToRoom( corpse, ch->in_room );
 }
 
 void MakeBloodstain( Character *ch )
 {
   Object *obj = CreateObject( GetProtoObject( OBJ_VNUM_BLOODSTAIN ), 0 );
   obj->timer = GetRandomNumberFromRange( 1, 2 );
-  obj_to_room( obj, ch->in_room );
+  ObjectToRoom( obj, ch->in_room );
 }
 
 /*

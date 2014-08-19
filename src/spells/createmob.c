@@ -46,13 +46,13 @@ ch_ret spell_create_mob( int sn, int level, Character *ch, void *vo )
   mob->hit       = mob->max_hit;
   mob->gold      = 0;
   successful_casting( skill, ch, mob, NULL );
-  char_to_room( mob, ch->in_room );
+  CharacterToRoom( mob, ch->in_room );
   StartFollowing( mob, ch );
   af.type      = sn;
   af.duration  = (NumberFuzzy( (level + 1) / 3 ) + 1) * DUR_CONV;
   af.location  = 0;
   af.modifier  = 0;
   af.bitvector = AFF_CHARM;
-  affect_to_char( mob, &af );
+  AffectToCharacter( mob, &af );
   return rNONE;
 }

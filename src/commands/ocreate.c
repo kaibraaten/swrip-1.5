@@ -80,7 +80,7 @@ void do_ocreate( Character *ch, char *argument )
     }
 
   obj = CreateObject( pObjIndex, GetTrustLevel(ch) );
-  obj_to_char( obj, ch );
+  ObjectToCharacter( obj, ch );
   Act( AT_IMMORT, "$n makes some ancient arcane gestures, and opens $s hands to reveal $p!",
        ch, obj, NULL, TO_ROOM );
   Act( AT_IMMORT, "You make some ancient arcane gestures, and open your hands to reveal $p!",

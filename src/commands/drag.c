@@ -118,8 +118,8 @@ void do_drag( Character *ch, char *argument )
                    NULL, ship->name , TO_ROOM );
               Act( AT_PLAIN, "You enter $T.", ch,
                    NULL, ship->name , TO_CHAR );
-              char_from_room( ch );
-              char_to_room( ch , to_room );
+              CharacterFromRoom( ch );
+              CharacterToRoom( ch , to_room );
               Act( AT_PLAIN, "$n enters the ship.", ch,
                    NULL, argument , TO_ROOM );
               do_look( ch , "auto" );
@@ -128,8 +128,8 @@ void do_drag( Character *ch, char *argument )
                    NULL, ship->name , TO_ROOM );
               Act( AT_PLAIN, "You enter $T.", victim,
 		   NULL, ship->name , TO_CHAR );
-              char_from_room( victim );
-              char_to_room( victim , to_room );
+              CharacterFromRoom( victim );
+              CharacterToRoom( victim , to_room );
               Act( AT_PLAIN, "$n enters the ship.", victim,
                    NULL, argument , TO_ROOM );
               do_look( victim , "auto" );
@@ -200,8 +200,8 @@ void do_drag( Character *ch, char *argument )
                    NULL, ship->name , TO_ROOM );
               Act( AT_PLAIN, "You exits the ship.", ch,
                    NULL, ship->name , TO_CHAR );
-              char_from_room( ch );
-              char_to_room( ch , to_room );
+              CharacterFromRoom( ch );
+              CharacterToRoom( ch , to_room );
               Act( AT_PLAIN, "$n exits $T.", ch,
                    NULL, ship->name , TO_ROOM );
               do_look( ch , "auto" );
@@ -210,8 +210,8 @@ void do_drag( Character *ch, char *argument )
                    NULL, ship->name , TO_ROOM );
               Act( AT_PLAIN, "You exits the ship.", victim,
                    NULL, ship->name , TO_CHAR );
-              char_from_room( victim );
-              char_to_room( victim , to_room );
+              CharacterFromRoom( victim );
+              CharacterToRoom( victim , to_room );
               Act( AT_PLAIN, "$n exits $T.", victim,
                    NULL, ship->name , TO_ROOM );
               do_look( victim , "auto" );

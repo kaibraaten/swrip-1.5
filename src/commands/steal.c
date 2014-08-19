@@ -186,6 +186,6 @@ void do_steal( Character *ch, char *argument )
       ChPrintf( ch, "&WYou gain %ld smuggling experience!\r\n", xp );
     }
   separate_obj( obj );
-  obj_from_char( obj );
-  obj_to_char( obj, ch );
+  ObjectFromCharacter( obj );
+  ObjectToCharacter( obj, ch );
 }

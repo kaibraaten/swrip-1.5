@@ -134,11 +134,11 @@ void do_for(Character *ch, char *argument)
 
               /* Execute */
               old_room = ch->in_room;
-              char_from_room (ch);
-              char_to_room (ch,p->in_room);
+              CharacterFromRoom (ch);
+              CharacterToRoom (ch,p->in_room);
               interpret (ch, buf);
-              char_from_room (ch);
-              char_to_room (ch,old_room);
+              CharacterFromRoom (ch);
+              CharacterToRoom (ch,old_room);
 
             } /* if found */
         } /* for every char */
@@ -182,11 +182,11 @@ void do_for(Character *ch, char *argument)
 		*/
 
                 old_room = ch->in_room;
-                char_from_room (ch);
-                char_to_room (ch, room);
+                CharacterFromRoom (ch);
+                CharacterToRoom (ch, room);
                 interpret (ch, argument);
-                char_from_room (ch);
-                char_to_room (ch, old_room);
+                CharacterFromRoom (ch);
+                CharacterToRoom (ch, old_room);
               } /* if found */
           } /* for every room in a bucket */
     } /* if strchr */

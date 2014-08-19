@@ -120,8 +120,8 @@ void do_throw( Character *ch, char *argument )
       if ( to_room == NULL )
         to_room = pexit->to_room;
 
-      char_from_room( ch );
-      char_to_room( ch, to_room );
+      CharacterFromRoom( ch );
+      CharacterToRoom( ch, to_room );
 
       victim = get_char_room( ch, arg3 );
 
@@ -142,8 +142,8 @@ void do_throw( Character *ch, char *argument )
               return;
             }
 
-          char_from_room( ch );
-          char_to_room( ch, was_in_room );
+          CharacterFromRoom( ch );
+          CharacterToRoom( ch, was_in_room );
 
 
           if ( IsBitSet( ch->in_room->room_flags, ROOM_SAFE ) )
@@ -160,8 +160,8 @@ void do_throw( Character *ch, char *argument )
           if ( to_room == NULL )
             to_room = pexit->to_room;
 
-          char_from_room( ch );
-          char_to_room( ch, to_room );
+          CharacterFromRoom( ch );
+          CharacterToRoom( ch, to_room );
 
 	  sprintf( buf , "Someone throws %s at you from the %s." , obj->short_descr , GetDirectionName(dir) );
           Act( AT_ACTION, buf , victim, NULL, ch, TO_CHAR );
@@ -210,8 +210,8 @@ void do_throw( Character *ch, char *argument )
 
   UnequipCharacter( ch, obj );
   separate_obj( obj );
-  obj_from_char( obj );
-  obj = obj_to_room( obj, ch->in_room );
+  ObjectFromCharacter( obj );
+  obj = ObjectToRoom( obj, ch->in_room );
 
   if ( obj->item_type != ITEM_GRENADE )
     DamageObject ( obj );
@@ -223,8 +223,8 @@ void do_throw( Character *ch, char *argument )
   */
   if ( ch->in_room !=  was_in_room )
     {
-      char_from_room( ch );
-      char_to_room( ch, was_in_room );
+      CharacterFromRoom( ch );
+      CharacterToRoom( ch, was_in_room );
     }
 
   if ( !victim || char_died( victim ) )

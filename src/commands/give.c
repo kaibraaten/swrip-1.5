@@ -138,11 +138,11 @@ void do_give( Character *ch, char *argument )
     }
 
   separate_obj( obj );
-  obj_from_char( obj );
+  ObjectFromCharacter( obj );
   Act( AT_ACTION, "$n gives $p to $N.", ch, obj, victim, TO_NOTVICT );
   Act( AT_ACTION, "$n gives you $p.",   ch, obj, victim, TO_VICT    );
   Act( AT_ACTION, "You give $p to $N.", ch, obj, victim, TO_CHAR    );
-  obj = obj_to_char( obj, victim );
+  obj = ObjectToCharacter( obj, victim );
 
   MobProgGiveTrigger( victim, ch, obj );
 

@@ -21,7 +21,7 @@ void do_return( Character *ch, char *argument )
   SendToCharacter( "You return to your original body.\r\n", ch );
   if ( IsNpc( ch ) && IsAffectedBy( ch, AFF_POSSESS ) )
     {
-      affect_strip( ch, gsn_possess );
+      StripAffect( ch, gsn_possess );
       RemoveBit( ch->affected_by, AFF_POSSESS );
     }
 

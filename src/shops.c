@@ -495,12 +495,12 @@ Character *ReadVendor( FILE *fp )
 
 		  if (victim->home != NULL)
 		    {
-		      extract_char( victim, true);
+		      ExtractCharacter( victim, true);
 		      break;
 		    }
 		}
 
-	      char_to_room(mob, pRoomIndex);
+	      CharacterToRoom(mob, pRoomIndex);
 	      sprintf(vnum1,"%ld", mob->Prototype->vnum);
 	      do_makeshop (mob, vnum1 );
 	      sprintf (buf, mob->long_descr, mob->owner);

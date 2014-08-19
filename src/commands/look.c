@@ -756,11 +756,11 @@ static void look_in( Character *ch, char *what, bool doexaprog )
 		}
 
 	      original = ch->in_room;
-	      char_from_room( ch );
-	      char_to_room( ch, pexit->to_room );
+	      CharacterFromRoom( ch );
+	      CharacterToRoom( ch, pexit->to_room );
 	      do_look( ch, "auto" );
-	      char_from_room( ch );
-	      char_to_room( ch, original );
+	      CharacterFromRoom( ch );
+	      CharacterToRoom( ch, original );
 	      return;
 	    }
 	}
@@ -873,24 +873,24 @@ static void show_exit_to_char( Character *ch, Exit *pexit, short door )
 
 	  if ( to_room )
 	    {
-	      char_from_room( ch );
-	      char_to_room( ch, to_room );
+	      CharacterFromRoom( ch );
+	      CharacterToRoom( ch, to_room );
 	    }
 	  else
 	    {
-	      char_from_room( ch );
-	      char_to_room( ch, pexit->to_room );
+	      CharacterFromRoom( ch );
+	      CharacterToRoom( ch, pexit->to_room );
 	    }
 	}
       else
 	{
-	  char_from_room( ch );
-	  char_to_room( ch, pexit->to_room );
+	  CharacterFromRoom( ch );
+	  CharacterToRoom( ch, pexit->to_room );
 	}
 
       do_look( ch, "auto" );
-      char_from_room( ch );
-      char_to_room( ch, original );
+      CharacterFromRoom( ch );
+      CharacterToRoom( ch, original );
     }
 }
 
@@ -949,11 +949,11 @@ static void show_no_arg( Character *ch, bool is_auto )
 		  Room *original = ch->in_room;
 
 		  ChPrintf( ch, "\r\n" );
-		  char_from_room( ch );
-		  char_to_room( ch, to_room );
+		  CharacterFromRoom( ch );
+		  CharacterToRoom( ch, to_room );
 		  do_glance( ch, "" );
-		  char_from_room( ch );
-		  char_to_room( ch, original );
+		  CharacterFromRoom( ch );
+		  CharacterToRoom( ch, original );
 		}
 	      else
 		{

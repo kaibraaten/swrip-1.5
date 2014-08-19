@@ -1141,11 +1141,11 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
     {
       next_rch = rch->prev_in_room;
       original = rch->in_room;
-      char_from_room( rch );
-      char_to_room( rch, to_room );
+      CharacterFromRoom( rch );
+      CharacterToRoom( rch, to_room );
       do_look( rch, "auto" );
-      char_from_room( rch );
-      char_to_room( rch, original );
+      CharacterFromRoom( rch );
+      CharacterToRoom( rch, original );
     }
 
   LearnFromSuccess( ch, gsn_speeders );
@@ -3582,8 +3582,8 @@ void DestroyShip( Ship *ship, Character *killer )
             {
               if ( IsImmortal(rch) )
                 {
-                  char_from_room(rch);
-                  char_to_room( rch, GetRoom(WhereHome(rch)) );
+                  CharacterFromRoom(rch);
+                  CharacterToRoom( rch, GetRoom(WhereHome(rch)) );
                 }
               else
                 {
@@ -3603,7 +3603,7 @@ void DestroyShip( Ship *ship, Character *killer )
           for ( robj = room->first_content ; robj ; robj = robj->next_content )
             {
               separate_obj( robj );
-              extract_obj( robj );
+              ExtractObject( robj );
             }
         }
 

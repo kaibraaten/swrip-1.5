@@ -36,10 +36,10 @@ void do_newbieset( Character *ch, char *argument )
     }
 
   obj = CreateObject( GetProtoObject(OBJ_VNUM_SCHOOL_GLOWROD), 1 );
-  obj_to_char(obj, victim);
+  ObjectToCharacter(obj, victim);
 
   obj = CreateObject( GetProtoObject(OBJ_VNUM_SCHOOL_BLADE), 1 );
-  obj_to_char(obj, victim);
+  ObjectToCharacter(obj, victim);
 
   Act( AT_IMMORT, "$n has equipped you with a newbieset.", ch, NULL, victim, TO_VICT);
   ChPrintf( ch, "You have re-equipped %s.\r\n", victim->name );

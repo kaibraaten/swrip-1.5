@@ -156,14 +156,14 @@ static void OnFinished( Character *ch )
         {
           checkdrink = true;
           separate_obj( obj );
-          obj_from_char( obj );
-          extract_obj( obj );
+          ObjectFromCharacter( obj );
+          ExtractObject( obj );
         }
       if (obj->item_type == ITEM_BATTERY && checkbatt == false)
         {
           separate_obj( obj );
-          obj_from_char( obj );
-          extract_obj( obj );
+          ObjectFromCharacter( obj );
+          ExtractObject( obj );
           checkbatt = true;
         }
       if (obj->item_type == ITEM_CHEMICAL)
@@ -171,15 +171,15 @@ static void OnFinished( Character *ch )
           strength = urange( 10, obj->value[OVAL_CHEMICAL_STRENGTH], level * 5 );
           weight = obj->weight;
           separate_obj( obj );
-          obj_from_char( obj );
-          extract_obj( obj );
+          ObjectFromCharacter( obj );
+          ExtractObject( obj );
           checkchem = true;
         }
       if (obj->item_type == ITEM_CIRCUIT && checkcirc == false)
         {
           separate_obj( obj );
-          obj_from_char( obj );
-          extract_obj( obj );
+          ObjectFromCharacter( obj );
+          ExtractObject( obj );
           checkcirc = true;
         }
     }
@@ -215,7 +215,7 @@ static void OnFinished( Character *ch )
   obj->value[OVAL_EXPLOSIVE_MAX_DMG] = strength;
   obj->cost = obj->value[OVAL_EXPLOSIVE_MAX_DMG]*5;
 
-  obj = obj_to_char( obj, ch );
+  obj = ObjectToCharacter( obj, ch );
 
   SendToCharacter( "&GYou finish your work and hold up your newly created landmine.&w\r\n", ch);
   Act( AT_PLAIN, "$n finishes making $s new landmine.", ch,

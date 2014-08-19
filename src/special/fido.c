@@ -21,10 +21,10 @@ bool spec_fido( Character *ch )
       for ( obj = corpse->first_content; obj; obj = obj_next )
         {
           obj_next = obj->next_content;
-          obj_from_obj( obj );
-          obj_to_room( obj, ch->in_room );
+          ObjectFromObject( obj );
+          ObjectToRoom( obj, ch->in_room );
         }
-      extract_obj( corpse );
+      ExtractObject( corpse );
       return true;
     }
 

@@ -1539,7 +1539,7 @@ void ResetArea( Area *pArea )
 	      SetBit(mob->affected_by, AFF_INFRARED);
 	    }
 
-          char_to_room(mob, pRoomIndex);
+          CharacterToRoom(mob, pRoomIndex);
           economize_mobgold(mob);
           level = urange(0, mob->top_level - 2, LEVEL_AVATAR);
 
@@ -1583,7 +1583,7 @@ void ResetArea( Area *pArea )
 	    }
 
           obj->level = urange(0, obj->level, LEVEL_AVATAR);
-          obj = obj_to_char(obj, mob);
+          obj = ObjectToCharacter(obj, mob);
 
           if ( pReset->command == 'E' )
 	    {
@@ -1620,7 +1620,7 @@ void ResetArea( Area *pArea )
               continue;
             }
 
-          if ( count_obj_list(pObjIndex, pRoomIndex->first_content) > 0 )
+          if ( CountOccurancesOfObjectInList(pObjIndex, pRoomIndex->first_content) > 0 )
             {
               obj = NULL;
               lastobj = NULL;
@@ -1630,7 +1630,7 @@ void ResetArea( Area *pArea )
           obj = CreateObject(pObjIndex, NumberFuzzy(GenerateItemLevel(pArea, pObjIndex)));
           obj->level = umin(obj->level, LEVEL_AVATAR);
           obj->cost = 0;
-          obj_to_room(obj, pRoomIndex);
+          ObjectToRoom(obj, pRoomIndex);
           lastobj = obj;
           break;
 
@@ -1666,7 +1666,7 @@ void ResetArea( Area *pArea )
               if ( pArea->nplayer > 0 ||
                    !(to_obj = get_obj_type(pObjToIndex)) ||
                    !to_obj->in_room ||
-                   count_obj_list(pObjIndex, to_obj->first_content) > 0 )
+                   CountOccurancesOfObjectInList(pObjIndex, to_obj->first_content) > 0 )
                 {
                   obj = NULL;
                   break;
@@ -1701,7 +1701,7 @@ void ResetArea( Area *pArea )
 
           obj = CreateObject(pObjIndex, NumberFuzzy(umax(GenerateItemLevel(pArea, pObjIndex),to_obj->level)));
           obj->level = umin(obj->level, LEVEL_AVATAR);
-          obj_to_obj(obj, to_obj);
+          ObjectToObject(obj, to_obj);
           break;
 
         case 'T':
@@ -1744,7 +1744,7 @@ void ResetArea( Area *pArea )
 
               pobj = MakeTrap( pReset->arg2, pReset->arg1,
                                 NumberFuzzy(to_obj->level), pReset->extra );
-              obj_to_obj(pobj, to_obj);
+              ObjectToObject(pobj, to_obj);
             }
           else
             {
@@ -1762,14 +1762,14 @@ void ResetArea( Area *pArea )
                 }
 
               if ( pArea->nplayer > 0 ||
-                   count_obj_list(GetProtoObject(OBJ_VNUM_TRAP),
+                   CountOccurancesOfObjectInList(GetProtoObject(OBJ_VNUM_TRAP),
                                   pRoomIndex->first_content) > 0 )
 		{
 		  break;
 		}
 
               to_obj = MakeTrap(pReset->arg1, pReset->arg1, 10, pReset->extra);
-              obj_to_room(to_obj, pRoomIndex);
+              ObjectToRoom(to_obj, pRoomIndex);
             }
 
           break;

@@ -42,10 +42,10 @@ ch_ret spell_farsight( int sn, int level, Character *ch, void *vo )
     }
   successful_casting( skill, ch, victim, NULL );
   original = ch->in_room;
-  char_from_room( ch );
-  char_to_room( ch, location );
+  CharacterFromRoom( ch );
+  CharacterToRoom( ch, location );
   do_look( ch, "auto" );
-  char_from_room( ch );
-  char_to_room( ch, original );
+  CharacterFromRoom( ch );
+  CharacterToRoom( ch, original );
   return rNONE;
 }

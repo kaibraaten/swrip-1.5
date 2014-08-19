@@ -40,12 +40,12 @@ void do_accept(Character *ch, char *argument)
       ToChannel(buf,CHANNEL_ARENA,"&RArena&W",5);
       ch->challenged = NULL;
       ch->retran = ch->in_room->vnum;
-      char_from_room(ch);
-      char_to_room(ch, GetRoom(PREP_END));
+      CharacterFromRoom(ch);
+      CharacterToRoom(ch, GetRoom(PREP_END));
       do_look(ch,"auto");
       dch->retran = dch->in_room->vnum;
-      char_from_room(dch);
-      char_to_room(dch, GetRoom(PREP_START));
+      CharacterFromRoom(dch);
+      CharacterToRoom(dch, GetRoom(PREP_START));
       do_look(dch,"auto");
       arena.ppl_IsInArena = 0;
       arena.ppl_challenged = 1;

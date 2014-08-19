@@ -425,8 +425,8 @@ void Disarm( Character *ch, Character *victim )
       tmpobj->wear_loc = WEAR_WIELD;
     }
 
-  obj_from_char( obj );
-  obj_to_room( obj, victim->in_room );
+  ObjectFromCharacter( obj );
+  ObjectToRoom( obj, victim->in_room );
 }
 
 /*

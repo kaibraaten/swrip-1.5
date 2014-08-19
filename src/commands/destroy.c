@@ -39,7 +39,7 @@ void do_destroy( Character *ch, char *argument )
       quitting_char = victim;
       save_char_obj( victim );
       saving_char = NULL;
-      extract_char( victim, true );
+      ExtractCharacter( victim, true );
       for ( x = 0; x < MAX_WEAR; x++ )
         for ( y = 0; y < MAX_LAYERS; y++ )
           save_equipment[x][y] = NULL;

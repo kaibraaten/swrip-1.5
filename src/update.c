@@ -585,7 +585,7 @@ void gain_addiction( Character *ch )
                   af.modifier  = 10;
                   af.duration  = ch->pcdata->addiction[drug];
                   af.bitvector = AFF_BLIND;
-                  affect_to_char( ch, &af );
+                  AffectToCharacter( ch, &af );
                 }
 
             case SPICE_CARSANUM:
@@ -596,7 +596,7 @@ void gain_addiction( Character *ch )
                   af.modifier  = -10;
                   af.duration  = ch->pcdata->addiction[drug];
                   af.bitvector = AFF_WEAKEN;
-                  affect_to_char( ch, &af );
+                  AffectToCharacter( ch, &af );
                 }
 
             case SPICE_RYLL:
@@ -607,7 +607,7 @@ void gain_addiction( Character *ch )
                   af.modifier  = -5;
                   af.duration  = ch->pcdata->addiction[drug];
                   af.bitvector = AFF_WEAKEN;
-                  affect_to_char( ch, &af );
+                  AffectToCharacter( ch, &af );
                 }
 
             case SPICE_ANDRIS:
@@ -618,7 +618,7 @@ void gain_addiction( Character *ch )
                   af.modifier  = -5;
                   af.duration  = ch->pcdata->addiction[drug];
                   af.bitvector = AFF_WEAKEN;
-                  affect_to_char( ch, &af );
+                  AffectToCharacter( ch, &af );
                 }
             }
         }
@@ -879,7 +879,7 @@ void mobile_update( void )
 
           if(IsNpc(ch)) /* Guard against purging switched? */
 	    {
-	      extract_char(ch, true);
+	      ExtractCharacter(ch, true);
 	    }
 
           continue;
@@ -922,8 +922,8 @@ void mobile_update( void )
                 && ch->was_sentinel && ch->position >= POS_STANDING )
         {
           Act( AT_ACTION, "$n leaves.", ch, NULL, NULL, TO_ROOM );
-          char_from_room( ch );
-          char_to_room( ch , ch->was_sentinel );
+          CharacterFromRoom( ch );
+          CharacterToRoom( ch , ch->was_sentinel );
           Act( AT_ACTION, "$n arrives.", ch, NULL, NULL, TO_ROOM );
           SetBit( ch->act , ACT_SENTINEL );
           ch->was_sentinel = NULL;
@@ -1050,8 +1050,8 @@ void mobile_update( void )
 
           if ( obj_best )
             {
-              obj_from_room( obj_best );
-              obj_to_char( obj_best, ch );
+              ObjectFromRoom( obj_best );
+              ObjectToCharacter( obj_best, ch );
               Act( AT_ACTION, "$n gets $p.", ch, obj_best, NULL, TO_ROOM );
             }
         }
@@ -1482,7 +1482,7 @@ void char_update( void )
 		      global_objcode = rOBJ_EXPIRED;
 		    }
 
-                  extract_obj( obj );
+                  ExtractObject( obj );
                 }
             }
 
@@ -1756,10 +1756,10 @@ void char_update( void )
                 {
                   if ( ch->in_room )
 		    {
-		      char_from_room( ch );
+		      CharacterFromRoom( ch );
 		    }
 
-                  char_to_room( ch, GetRoom( ROOM_PLUOGUS_QUIT ) );
+                  CharacterToRoom( ch, GetRoom( ROOM_PLUOGUS_QUIT ) );
                   ch->position = POS_RESTING;
                   ch->hit = umax ( 1 , ch->hit );
                   save_char_obj( ch );
@@ -1974,8 +1974,8 @@ void obj_update( void )
                   Act( AT_ACTION, "$p falls away.", rch, obj, NULL, TO_CHAR );
                 }
 
-              obj_from_room(obj);
-              obj_to_room(obj, new_room);
+              ObjectFromRoom(obj);
+              ObjectToRoom(obj, new_room);
 
               if (( rch = obj->in_room->first_person) != NULL )
                 {
@@ -2006,7 +2006,7 @@ void obj_update( void )
         case ITEM_PORTAL:
           message = "$p winks out of existence.";
           remove_portal(obj);
-          obj->item_type = ITEM_TRASH;          /* so extract_obj        */
+          obj->item_type = ITEM_TRASH;          /* so ExtractObject        */
           AT_TEMP = AT_MAGIC;                   /* doesn't remove_portal */
           break;
 
@@ -2071,7 +2071,7 @@ void obj_update( void )
 
       if ( obj->serial == cur_obj )
         global_objcode = rOBJ_EXPIRED;
-      extract_obj( obj );
+      ExtractObject( obj );
     }
   return;
 }
@@ -2711,7 +2711,7 @@ void update_handler( void )
   aggr_update();
   obj_act_update();
   room_act_update();
-  clean_obj_queue();            /* dispose of extracted objects */
+  CleanObject_queue();            /* dispose of extracted objects */
   clean_char_queue();           /* dispose of dead mobs/quitting chars */
 
   if ( timechar )
@@ -2759,7 +2759,7 @@ void remove_portal( Object *portal )
       Bug( "remove_portal: toRoom is NULL", 0 );
     }
 
-  extract_exit( fromRoom, pexit );
+  ExtractExit( fromRoom, pexit );
 
   if ( toRoom && (ch = toRoom->first_person) != NULL )
     {
@@ -2821,7 +2821,7 @@ void reboot_check( time_t reset )
           sprintf(buf, "Sale of %s has been stopped by mud.",
                   auction->item->short_descr);
           TalkAuction(buf);
-          obj_to_char(auction->item, auction->seller);
+          ObjectToCharacter(auction->item, auction->seller);
           auction->item = NULL;
 
           if ( auction->buyer && auction->buyer != auction->seller )
@@ -2917,11 +2917,11 @@ void auction_update (void)
             {
               Act( AT_PLAIN, "$p is too heavy for you to carry with your current inventory.", auction->buyer, auction->item, NULL, TO_CHAR );
               Act( AT_PLAIN, "$n is carrying too much to also carry $p, and $e drops it.", auction->buyer, auction->item, NULL, TO_ROOM );
-              obj_to_room( auction->item, auction->buyer->in_room );
+              ObjectToRoom( auction->item, auction->buyer->in_room );
             }
           else
 	    {
-	      obj_to_char( auction->item, auction->buyer );
+	      ObjectToCharacter( auction->item, auction->buyer );
 	    }
 
           pay = (int)auction->bet * 0.9;
@@ -2959,11 +2959,11 @@ void auction_update (void)
               Act( AT_PLAIN, "$n drops $p as it is too much extra weight"
                    " for $m with everything else.", auction->seller,
                    auction->item, NULL, TO_ROOM );
-              obj_to_room( auction->item, auction->seller->in_room );
+              ObjectToRoom( auction->item, auction->seller->in_room );
             }
           else
 	    {
-	      obj_to_char (auction->item,auction->seller);
+	      ObjectToCharacter (auction->item,auction->seller);
 	    }
 
           tax = (int)auction->item->cost * 0.05;

@@ -386,13 +386,13 @@ static void get_obj( Character *ch, Object *obj, Object *container )
       Act( AT_ACTION, IS_OBJ_STAT(container, ITEM_COVERING) ?
            "$n gets $p from beneath $P." : "$n gets $p from $P",
            ch, obj, container, TO_ROOM );
-      obj_from_obj( obj );
+      ObjectFromObject( obj );
     }
   else
     {
       Act( AT_ACTION, "You get $p.", ch, obj, container, TO_CHAR );
       Act( AT_ACTION, "$n gets $p.", ch, obj, container, TO_ROOM );
-      obj_from_room( obj );
+      ObjectFromRoom( obj );
     }
 
   /* Clan storeroom checks */
@@ -410,11 +410,11 @@ static void get_obj( Character *ch, Object *obj, Object *container )
   if ( obj->item_type == ITEM_MONEY )
     {
       ch->gold += obj->value[0];
-      extract_obj( obj );
+      ExtractObject( obj );
     }
   else
     {
-      obj = obj_to_char( obj, ch );
+      obj = ObjectToCharacter( obj, ch );
     }
 
   if ( char_died(ch) || obj_extracted(obj) )

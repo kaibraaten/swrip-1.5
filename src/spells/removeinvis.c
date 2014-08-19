@@ -79,8 +79,8 @@ ch_ret spell_remove_invis( int sn, int level, Character *ch, void *vo )
                 }
             }
 
-          affect_strip ( victim, gsn_invis                        );
-          affect_strip ( victim, gsn_mass_invis                   );
+          StripAffect ( victim, gsn_invis                        );
+          StripAffect ( victim, gsn_mass_invis                   );
           RemoveBit   ( victim->affected_by, AFF_INVISIBLE       );
           SendToCharacter( "Ok.\r\n", ch );
 	  return rNONE;

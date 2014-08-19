@@ -82,8 +82,8 @@ void do_transfer( Character *ch, char *argument )
 
   Act( AT_MAGIC, "$n disappears in a cloud of swirling colors.", victim, NULL, NULL, TO_ROOM );
   victim->retran = victim->in_room->vnum;
-  char_from_room( victim );
-  char_to_room( victim, location );
+  CharacterFromRoom( victim );
+  CharacterToRoom( victim, location );
   Act( AT_MAGIC, "$n arrives from a puff of smoke.", victim, NULL, NULL, TO_ROOM );
 
   if ( ch != victim )

@@ -89,7 +89,7 @@ void do_buy( Character *ch, char *argument )
       if( ch->pcdata )
         ch->pcdata->pet = pet;
 
-      char_to_room( pet, ch->in_room );
+      CharacterToRoom( pet, ch->in_room );
       StartFollowing( pet, ch );
       SendToCharacter( "Enjoy your pet.\r\n", ch );
       Act( AT_ACTION, "$n bought $N as a pet.", ch, NULL, pet, TO_ROOM );
@@ -261,8 +261,8 @@ void do_buy( Character *ch, char *argument )
               buy_obj->count = noi;
               obj->Prototype->count += (noi - 1);
               numobjsloaded += (noi - 1);
-              obj_to_obj( buy_obj, bag );
-              obj_to_char( bag, ch );
+              ObjectToObject( buy_obj, bag );
+              ObjectToCharacter( bag, ch );
 
               /* vendor snippit. Forces vendor to save after anyone buys anything*/
               if (  keeper->home != NULL )
@@ -272,7 +272,7 @@ void do_buy( Character *ch, char *argument )
                 }
             }
           else
-            obj_to_char( buy_obj, ch );
+            ObjectToCharacter( buy_obj, ch );
 
           /* vendor snippit. Forces vendor to save after anyone buys anything*/
           if (  keeper->home != NULL )
@@ -283,8 +283,8 @@ void do_buy( Character *ch, char *argument )
         }
       else
         {
-          obj_from_char( obj );
-          obj_to_char( obj, ch );
+          ObjectFromCharacter( obj );
+          ObjectToCharacter( obj, ch );
 
           /* vendor snippit. Forces vendor to save after anyone buys anything*/
           if (  keeper->home != NULL )

@@ -18,7 +18,7 @@ ch_ret spell_dispel_magic( int sn, int level, Character *ch, void *vo )
       SetCharacterColor( AT_MAGIC, ch );
       SendToCharacter( "You pass your hands around your body...\r\n", ch );
       while ( victim->first_affect )
-        affect_remove( victim, victim->first_affect );
+        RemoveAffect( victim, victim->first_affect );
       victim->affected_by = RaceTable[victim->race].affected;
       return rNONE;
     }

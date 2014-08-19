@@ -21,7 +21,7 @@ ch_ret spell_weaken( int sn, int level, Character *ch, void *vo )
   af.location  = APPLY_STR;
   af.modifier  = -2;
   af.bitvector = 0;
-  affect_to_char( victim, &af );
+  AffectToCharacter( victim, &af );
   SetCharacterColor( AT_MAGIC, victim );
   SendToCharacter( "You feel weaker.\r\n", victim );
   if ( ch != victim )

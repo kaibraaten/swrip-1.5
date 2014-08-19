@@ -11,7 +11,7 @@ ch_ret spell_affectchar( int sn, int level, Character *ch, void *vo )
   ch_ret retcode = rNONE;
 
   if ( SPELL_FLAG( skill, SF_RECASTABLE ) )
-    affect_strip( victim, sn );
+    StripAffect( victim, sn );
   for ( saf = skill->affects; saf; saf = saf->next )
     {
       if ( saf->location >= REVERSE_APPLY )
@@ -24,7 +24,7 @@ ch_ret spell_affectchar( int sn, int level, Character *ch, void *vo )
            &&   !SPELL_FLAG( skill, SF_ACCUMULATIVE ) )
         continue;
       /*
-       * necessary for affect_strip to work properly...
+       * necessary for StripAffect to work properly...
        */
       switch ( af.bitvector )
         {
@@ -133,15 +133,15 @@ ch_ret spell_affectchar( int sn, int level, Character *ch, void *vo )
               UpdatePosition( victim );
               break;
             default:
-              affect_modify( victim, &af, true );
+              ModifyAffect( victim, &af, true );
               break;
             }
         }
       else
         if ( SPELL_FLAG( skill, SF_ACCUMULATIVE ) )
-          affect_join( victim, &af );
+          JoinAffect( victim, &af );
         else
-          affect_to_char( victim, &af );
+          AffectToCharacter( victim, &af );
     }
   UpdatePosition( victim );
   return retcode;

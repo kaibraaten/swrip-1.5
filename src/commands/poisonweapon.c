@@ -98,8 +98,8 @@ void do_poison_weapon( Character *ch, char *argument )
       SetCharacterColor( AT_GREY, ch );
       InflictDamage( ch, ch, GetAbilityLevel( ch, HUNTING_ABILITY ), gsn_poison_weapon );
       Act(AT_RED, "$n spills the poison all over!", ch, NULL, NULL, TO_ROOM );
-      extract_obj( pobj );
-      extract_obj( wobj );
+      ExtractObject( pobj );
+      ExtractObject( wobj );
       LearnFromFailure( ch, gsn_poison_weapon );
       return;
     }
@@ -124,7 +124,7 @@ void do_poison_weapon( Character *ch, char *argument )
   /* WHAT?  All of that, just for that one bit?  How lame. ;) */
   Act(AT_BLUE, "The remainder of the poison eats through $p.", ch, wobj, NULL, TO_CHAR );
   Act(AT_BLUE, "The remainder of the poison eats through $p.", ch, wobj, NULL, TO_ROOM );
-  extract_obj( pobj );
-  extract_obj( wobj );
+  ExtractObject( pobj );
+  ExtractObject( wobj );
   LearnFromSuccess( ch, gsn_poison_weapon );
 }

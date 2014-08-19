@@ -81,7 +81,7 @@ static bool aff_paralysis( Character *ch, Character *victim )
       af.modifier  = 20;
       af.duration  = 30;
       af.bitvector = AFF_PARALYSIS;
-      affect_to_char( victim, &af );
+      AffectToCharacter( victim, &af );
       UpdatePosition( victim );
 
       if ( IsNpc(victim) )

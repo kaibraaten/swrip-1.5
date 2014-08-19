@@ -28,8 +28,8 @@ bool spec_newbie_pilot( Character *ch )
       strcpy( buf, "After a brief journey you arrive at Coruscant's Manari Spaceport.\r\n\r\n" );
       EchoToRoom( AT_ACTION , ch->in_room, buf );
 
-      char_from_room( victim );
-      char_to_room( victim, GetRoom( ROOM_START_PLAYER ) );
+      CharacterFromRoom( victim );
+      CharacterToRoom( victim, GetRoom( ROOM_START_PLAYER ) );
 
       do_look( victim , "" );
 

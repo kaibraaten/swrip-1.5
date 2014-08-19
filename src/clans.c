@@ -416,8 +416,8 @@ static bool load_clan_file( const char *clanfile )
           for ( tobj = supermob->first_carrying; tobj; tobj = tobj_next )
             {
               tobj_next = tobj->next_content;
-              obj_from_char( tobj );
-              obj_to_room( tobj, storeroom );
+              ObjectFromCharacter( tobj );
+              ObjectToRoom( tobj, storeroom );
             }
 
           ReleaseSupermob();

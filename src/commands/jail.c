@@ -147,8 +147,8 @@ void do_jail ( Character *ch , char *argument )
   ChPrintf(ch, "%s will be released from jail at %24.24s.\r\n", victim->name,
             ctime(&victim->pcdata->release_date));
   Act(AT_MAGIC, "$n is dragged away.", victim, NULL, ch, TO_NOTVICT);
-  char_from_room(victim);
-  char_to_room ( victim , jail );
+  CharacterFromRoom(victim);
+  CharacterToRoom ( victim , jail );
   Act(AT_MAGIC, "$n is dragged in.", victim, NULL, ch, TO_NOTVICT);
   do_look(victim, "auto");
   ChPrintf(victim, "Whoops. You broke too many laws.\r\n"

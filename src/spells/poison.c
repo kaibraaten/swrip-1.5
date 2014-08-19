@@ -26,7 +26,7 @@ ch_ret spell_poison( int sn, int level, Character *ch, void *vo )
   af.location  = APPLY_STR;
   af.modifier  = -2;
   af.bitvector = AFF_POISON;
-  affect_join( victim, &af );
+  JoinAffect( victim, &af );
   SetCharacterColor( AT_MAGIC, victim );
   SendToCharacter( "You feel very sick.\r\n", victim );
   victim->mental_state = urange( 20, victim->mental_state

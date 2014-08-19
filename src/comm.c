@@ -1502,8 +1502,8 @@ void stop_idling( Character *ch )
     return;
 
   ch->timer = 0;
-  char_from_room( ch );
-  char_to_room( ch, ch->was_in_room );
+  CharacterFromRoom( ch );
+  CharacterToRoom( ch, ch->was_in_room );
   ch->was_in_room       = NULL;
   Act( AT_ACTION, "$n has returned from the void.", ch, NULL, NULL, TO_ROOM );
   return;

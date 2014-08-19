@@ -75,7 +75,7 @@ void do_sell( Character *ch, char *argument )
     keeper->gold = 0;
 
   if ( obj->item_type == ITEM_TRASH )
-    extract_obj( obj );
+    ExtractObject( obj );
   else  if ( IsBitSet( obj->extra_flags , ITEM_CONTRABAND) )
     {
       long ch_exp;
@@ -85,20 +85,20 @@ void do_sell( Character *ch, char *argument )
       gain_exp( ch, SMUGGLING_ABILITY, ch_exp );
 
       if ( obj->item_type == ITEM_SPICE || obj->item_type == ITEM_RAWSPICE )
-        extract_obj( obj );
+        ExtractObject( obj );
       else
         {
           RemoveBit( obj->extra_flags , ITEM_CONTRABAND );
-          obj_from_char( obj );
-          obj_to_char( obj, keeper );
+          ObjectFromCharacter( obj );
+          ObjectToCharacter( obj, keeper );
         }
     }
   else if ( obj->item_type == ITEM_SPICE || obj->item_type == ITEM_RAWSPICE )
-    extract_obj( obj );
+    ExtractObject( obj );
   else
     {
-      obj_from_char( obj );
-      obj_to_char( obj, keeper );
+      ObjectFromCharacter( obj );
+      ObjectToCharacter( obj, keeper );
     }
 
   return;

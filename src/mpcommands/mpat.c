@@ -34,8 +34,8 @@ void do_mpat( Character *ch, char *argument )
     }
 
   original = ch->in_room;
-  char_from_room( ch );
-  char_to_room( ch, location );
+  CharacterFromRoom( ch );
+  CharacterToRoom( ch, location );
   interpret( ch, argument );
 
   /*
@@ -45,8 +45,8 @@ void do_mpat( Character *ch, char *argument )
   for ( wch = first_char; wch; wch = wch->next )
     if ( wch == ch )
       {
-        char_from_room( ch );
-        char_to_room( ch, original );
+        CharacterFromRoom( ch );
+        CharacterToRoom( ch, original );
         break;
       }
 }

@@ -100,12 +100,12 @@ void do_quit( Character *ch, char *argument )
     {
       Act( AT_BYE, "$N follows $S master out of the game.", ch, NULL,
 	   ch->pcdata->pet, TO_ROOM );
-      extract_char( ch->pcdata->pet, true );
+      ExtractCharacter( ch->pcdata->pet, true );
     }
 
   saving_char = NULL;
   level = GetTrustLevel(ch);
-  extract_char( ch, true );
+  ExtractCharacter( ch, true );
 
   for ( x = 0; x < MAX_WEAR; x++ )
     for ( y = 0; y < MAX_LAYERS; y++ )

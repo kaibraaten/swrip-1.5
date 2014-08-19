@@ -561,7 +561,7 @@ void StopFollowing( Character *ch )
   if ( IsAffectedBy(ch, AFF_CHARM) )
     {
       RemoveBit( ch->affected_by, AFF_CHARM );
-      affect_strip( ch, gsn_charm_person );
+      StripAffect( ch, gsn_charm_person );
     }
 
   if ( CanSeeCharacter( ch->master, ch ) )

@@ -141,7 +141,7 @@ void do_drink( Character *ch, char *argument )
           af.location  = APPLY_NONE;
           af.modifier  = 0;
           af.bitvector = AFF_POISON;
-          affect_join( ch, &af );
+          JoinAffect( ch, &af );
         }
 
       obj->value[OVAL_DRINK_CON_CURRENT_AMOUNT] -= 1;

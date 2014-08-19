@@ -79,5 +79,5 @@ void do_skin( Character *ch, char *argument)
   corpse->value[2] = -1;
   corpse->timer = -1;
 
-  obj_to_char( skin, ch );
+  ObjectToCharacter( skin, ch );
 }

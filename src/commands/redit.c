@@ -503,7 +503,7 @@ void do_redit( Character *ch, char *argument )
         {
           if ( xit )
             {
-              extract_exit(location, xit);
+              ExtractExit(location, xit);
               SendToCharacter( "Exit removed.\r\n", ch );
               return;
             }

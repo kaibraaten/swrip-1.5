@@ -32,8 +32,8 @@ void do_bodybag( Character *ch, char *argument )
                      obj->short_descr,
                      obj->in_room->vnum,
                      obj->in_room->name );
-          obj_from_room(obj);
-          obj = obj_to_char(obj, ch);
+          ObjectFromRoom(obj);
+          obj = ObjectToCharacter(obj, ch);
           obj->timer = -1;
           save_char_obj( ch );
         }

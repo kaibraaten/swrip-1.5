@@ -64,12 +64,12 @@ void do_recall( Character *ch, char *argument )
     }
 
   Act( AT_ACTION, "$n disappears in a swirl of the Force.", ch, NULL, NULL, TO_ROOM );
-  char_from_room( ch );
-  char_to_room( ch, location );
+  CharacterFromRoom( ch );
+  CharacterToRoom( ch, location );
   if ( ch->mount )
     {
-      char_from_room( ch->mount );
-      char_to_room( ch->mount, location );
+      CharacterFromRoom( ch->mount );
+      CharacterToRoom( ch->mount, location );
     }
   Act( AT_ACTION, "$n appears in a swirl of the Force.", ch, NULL, NULL, TO_ROOM );
   do_look( ch, "auto" );

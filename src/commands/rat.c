@@ -41,12 +41,12 @@ void do_rat( Character *ch, char *argument )
       if ( (location = GetRoom(vnum)) == NULL )
         continue;
 
-      char_from_room( ch );
-      char_to_room( ch, location );
+      CharacterFromRoom( ch );
+      CharacterToRoom( ch, location );
       interpret( ch, argument );
     }
 
-  char_from_room( ch );
-  char_to_room( ch, original );
+  CharacterFromRoom( ch );
+  CharacterToRoom( ch, original );
   SendToCharacter( "Done.\r\n", ch );
 }

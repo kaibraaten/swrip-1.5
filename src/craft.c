@@ -140,7 +140,7 @@ static void AfterDelay( CraftingSession *session )
   eventArgs.Object = object;
   RaiseEvent( session->OnSetObjectStats, &eventArgs );
 
-  object = obj_to_char( object, ch );
+  object = ObjectToCharacter( object, ch );
 
   finishedCraftingEventArgs.CraftingSession = session;
   finishedCraftingEventArgs.Object = object;
@@ -414,8 +414,8 @@ static bool CheckMaterials( CraftingSession *session, bool extract )
 	  if( IsBitSet( material->Material.Flags, CRAFTFLAG_EXTRACT ) )
 	    {
 	      separate_obj( obj );
-	      obj_from_char( obj );
-	      extract_obj( obj );
+	      ObjectFromCharacter( obj );
+	      ExtractObject( obj );
 	    }
 
 	  RaiseEvent( session->OnMaterialFound, &args );

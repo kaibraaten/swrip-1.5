@@ -74,8 +74,8 @@ void do_scan( Character *ch, char *argument )
                GetDirectionName(dir), NULL, TO_CHAR );
 	  break;
         }
-      char_from_room( ch );
-      char_to_room( ch, to_room );
+      CharacterFromRoom( ch );
+      CharacterToRoom( ch, to_room );
       SetCharacterColor( AT_RMNAME, ch );
       SendToCharacter( ch->in_room->name, ch );
       SendToCharacter( "\r\n", ch );
@@ -119,7 +119,7 @@ void do_scan( Character *ch, char *argument )
         }
     }
 
-  char_from_room( ch );
-  char_to_room( ch, was_in_room );
+  CharacterFromRoom( ch );
+  CharacterToRoom( ch, was_in_room );
   LearnFromSuccess( ch, gsn_scan );
 }

@@ -18,7 +18,7 @@ void do_sneak( Character *ch, char *argument )
     }
 
   SendToCharacter( "You attempt to move silently.\r\n", ch );
-  affect_strip( ch, gsn_sneak );
+  StripAffect( ch, gsn_sneak );
 
   if ( IsNpc(ch) || GetRandomPercent( ) < ch->pcdata->learned[gsn_sneak] )
     {
@@ -27,7 +27,7 @@ void do_sneak( Character *ch, char *argument )
       af.location  = APPLY_NONE;
       af.modifier  = 0;
       af.bitvector = AFF_SNEAK;
-      affect_to_char( ch, &af );
+      AffectToCharacter( ch, &af );
       LearnFromSuccess( ch, gsn_sneak );
     }
   else

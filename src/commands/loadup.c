@@ -33,7 +33,7 @@ void do_loadup( Character *ch, char *argument )
 
       AddCharacter( d->character );
       old_room_vnum = d->character->in_room->vnum;
-      char_to_room( d->character, ch->in_room );
+      CharacterToRoom( d->character, ch->in_room );
 
       if ( d->character->plr_home != NULL )
         {
@@ -46,7 +46,7 @@ void do_loadup( Character *ch, char *argument )
           for ( obj = storeroom->first_content; obj; obj = obj_next )
             {
               obj_next = obj->next_content;
-              extract_obj( obj );
+              ExtractObject( obj );
             }
 
           sprintf( filename, "%s%c/%s.home", PLAYER_DIR, tolower(d->character->name[0]),
@@ -95,9 +95,9 @@ void do_loadup( Character *ch, char *argument )
               for ( tobj = supermob->first_carrying; tobj; tobj = tobj_next )
                 {
                   tobj_next = tobj->next_content;
-                  obj_from_char( tobj );
+                  ObjectFromCharacter( tobj );
                   if( tobj->item_type != ITEM_MONEY )
-                    obj_to_room( tobj, storeroom );
+                    ObjectToRoom( tobj, storeroom );
                 }
 
               ReleaseSupermob();

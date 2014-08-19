@@ -65,7 +65,7 @@ ch_ret spell_smaug( int sn, int level, Character *ch, void *vo )
             {
               if ( IsAffected( victim, gsn_poison ) )
                 {
-                  affect_strip( victim, gsn_poison );
+                  StripAffect( victim, gsn_poison );
                   victim->mental_state = urange( -100, victim->mental_state, -10 );
                   successful_casting( skill, ch, victim, NULL );
                   return rNONE;
@@ -78,7 +78,7 @@ ch_ret spell_smaug( int sn, int level, Character *ch, void *vo )
             {
               if ( IsAffected( victim, gsn_blindness ) )
 		{
-                  affect_strip( victim, gsn_blindness );
+                  StripAffect( victim, gsn_blindness );
                   successful_casting( skill, ch, victim, NULL );
                   return rNONE;
                 }

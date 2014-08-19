@@ -141,7 +141,7 @@ ch_ret spell_obj_inv( int sn, int level, Character *ch, void *vo )
           break;
           clone = clone_object(obj);
           clone->timer = skill->dice ? dice_parse(ch, level, skill->dice) : 0;
-          obj_to_char( clone, ch );
+          ObjectToCharacter( clone, ch );
           successful_casting( skill, ch, NULL, obj );
         }
       return rNONE;

@@ -116,7 +116,7 @@ void do_detrap( Character *ch, char *argument )
       LearnFromFailure( ch, gsn_detrap );
       return;
     }
-  extract_obj( trap );
+  ExtractObject( trap );
 
   SendToCharacter( "You successfully remove a trap.\r\n", ch );
   LearnFromSuccess( ch, gsn_detrap );

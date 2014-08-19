@@ -60,8 +60,8 @@ void do_mpapplyb( Character *ch, char *argument )
       RemoveBit(victim->pcdata->flags, PCFLAG_UNAUTHED);
       if ( victim->fighting )
         StopFighting( victim, true );
-      char_from_room(victim);
-      char_to_room(victim, GetRoom(ROOM_VNUM_SCHOOL));
+      CharacterFromRoom(victim);
+      CharacterToRoom(victim, GetRoom(ROOM_VNUM_SCHOOL));
       Act( AT_WHITE, "$n enters this world from within a column of blinding light!",
            victim, NULL, NULL, TO_ROOM );
       do_look(victim, "auto");

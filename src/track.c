@@ -129,7 +129,7 @@ static void room_enqueue(Room *room)
   room_queue = curr;
 }
 
-static void clean_room_queue(void)
+static void CleanRoom_queue(void)
 {
   struct bfs_queue_struct *curr = NULL;
   struct bfs_queue_struct *curr_next = NULL;
@@ -186,7 +186,7 @@ int FindFirstStep(Room *src, Room *target, int maxdist )
       if ( ++count > maxdist )
 	{
 	  bfs_clear_queue();
-	  clean_room_queue();
+	  CleanRoom_queue();
 	  return BFS_NO_PATH;
 	}
 
@@ -194,7 +194,7 @@ int FindFirstStep(Room *src, Room *target, int maxdist )
 	{
 	  curr_dir = queue_head->dir;
 	  bfs_clear_queue();
-	  clean_room_queue();
+	  CleanRoom_queue();
 	  return curr_dir;
 	}
       else
@@ -213,7 +213,7 @@ int FindFirstStep(Room *src, Room *target, int maxdist )
 	}
     }
 
-  clean_room_queue();
+  CleanRoom_queue();
 
   return BFS_NO_PATH;
 }
@@ -438,7 +438,7 @@ void HuntVictim( Character *ch )
             {
               Bug( "Hunt_victim: no ch->in_room! Mob #%ld, name: %s. Placing mob in limbo.",
 		   ch->Prototype->vnum, ch->name );
-              char_to_room( ch, GetRoom( ROOM_VNUM_LIMBO ) );
+              CharacterToRoom( ch, GetRoom( ROOM_VNUM_LIMBO ) );
               return;
             }
           do_say( ch, "Damn!  Lost my prey!" );
@@ -513,8 +513,8 @@ static bool MobSnipe( Character *ch, Character *victim )
 	      to_room = pexit->to_room;
 	    }
 
-          char_from_room( ch );
-          char_to_room( ch, to_room );
+          CharacterFromRoom( ch );
+          CharacterToRoom( ch, to_room );
 
           if ( ch->in_room == victim->in_room )
             {
@@ -528,13 +528,13 @@ static bool MobSnipe( Character *ch, Character *victim )
 	    }
         }
 
-      char_from_room( ch );
-      char_to_room( ch, was_in_room );
+      CharacterFromRoom( ch );
+      CharacterToRoom( ch, was_in_room );
 
       if ( !pfound )
         {
-          char_from_room( ch );
-          char_to_room( ch, was_in_room );
+          CharacterFromRoom( ch );
+          CharacterToRoom( ch, was_in_room );
           continue;
         }
 
@@ -597,8 +597,8 @@ static bool MobSnipe( Character *ch, Character *victim )
 	  break;
         }
 
-      char_from_room( ch );
-      char_to_room( ch, victim->in_room );
+      CharacterFromRoom( ch );
+      CharacterToRoom( ch, victim->in_room );
 
       sprintf( buf , "A blaster shot fires at you from the %s.",
                GetDirectionName(dir) );
@@ -623,8 +623,8 @@ static bool MobSnipe( Character *ch, Character *victim )
           StopHating( ch );
         }
 
-      char_from_room( ch );
-      char_to_room( ch, was_in_room );
+      CharacterFromRoom( ch );
+      CharacterToRoom( ch, was_in_room );
 
       return true;
     }

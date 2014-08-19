@@ -105,15 +105,15 @@ void do_goto( Character *ch, char *argument )
     }
 
   ch->regoto = ch->in_room->vnum;
-  char_from_room( ch );
+  CharacterFromRoom( ch );
 
   if ( ch->mount )
     {
-      char_from_room( ch->mount );
-      char_to_room( ch->mount, location );
+      CharacterFromRoom( ch->mount );
+      CharacterToRoom( ch->mount, location );
     }
 
-  char_to_room( ch, location );
+  CharacterToRoom( ch, location );
 
   if ( !IsBitSet(ch->act, PLR_WIZINVIS) )
     {

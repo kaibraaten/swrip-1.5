@@ -172,14 +172,14 @@ void do_fill( Character *ch, char *argument )
               if ( all && arg2[3] == '.'
                    &&  !NiftyIsName( &arg2[4], source->name ) )
                 continue;
-              obj_from_room(source);
+              ObjectFromRoom(source);
               if ( source->item_type == ITEM_MONEY )
                 {
                   ch->gold += source->value[OVAL_MONEY_AMOUNT];
-                  extract_obj( source );
+                  ExtractObject( source );
                 }
 	      else
-                obj_to_obj(source, obj);
+                ObjectToObject(source, obj);
               found = true;
             }
           else
@@ -251,8 +251,8 @@ void do_fill( Character *ch, char *argument )
           separate_obj( obj );
           Act( AT_ACTION, "You take $P and put it inside $p.", ch, obj, source, TO_CHAR );
           Act( AT_ACTION, "$n takes $P and puts it inside $p.", ch, obj, source, TO_ROOM );
-          obj_from_room(source);
-          obj_to_obj(source, obj);
+          ObjectFromRoom(source);
+          ObjectToObject(source, obj);
           break;
         case ITEM_MONEY:
           SendToCharacter( "You can't do that... yet.\r\n", ch );
@@ -318,8 +318,8 @@ void do_fill( Character *ch, char *argument )
                    > obj->value[OVAL_CORPSE_0] )
                 continue;
 
-              obj_from_obj(otmp);
-              obj_to_obj(otmp, obj);
+              ObjectFromObject(otmp);
+              ObjectToObject(otmp, obj);
               found = true;
             }
           if ( found )
@@ -374,7 +374,7 @@ void do_fill( Character *ch, char *argument )
       Act( AT_ACTION, "$n fills $p from $P.", ch, obj, source, TO_ROOM );
       if ( (source->value[1] -= diff) < 1 )
         {
-          extract_obj( source );
+          ExtractObject( source );
           MakeBloodstain( ch );
         }
       return;
@@ -391,7 +391,7 @@ void do_fill( Character *ch, char *argument )
       Act( AT_ACTION, "You fill $p with $P.", ch, obj, source, TO_CHAR );
       Act( AT_ACTION, "$n fills $p with $P.", ch, obj, source, TO_ROOM );
       if ( (source->value[1] -= diff) < 1 )
-        extract_obj( source );
+        ExtractObject( source );
       return;
     case ITEM_HERB_CON:
       if ( obj->value[1] != 0 && obj->value[2] != source->value[2] )

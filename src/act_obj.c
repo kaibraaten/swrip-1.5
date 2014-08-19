@@ -102,7 +102,7 @@ obj_ret DamageObject( Object *obj )
       break;
     case ITEM_ARMOR:
       if ( ch && obj->value[OVAL_ARMOR_CONDITION] >= 1 )
-        ch->armor += apply_ac( obj, obj->wear_loc );
+        ch->armor += GetObjectArmorClass( obj, obj->wear_loc );
 
       if (--obj->value[OVAL_ARMOR_CONDITION] <= 0)
         {
@@ -111,7 +111,7 @@ obj_ret DamageObject( Object *obj )
         }
       else
         if ( ch && obj->value[OVAL_ARMOR_CONDITION] >= 1 )
-          ch->armor -= apply_ac( obj, obj->wear_loc );
+          ch->armor -= GetObjectArmorClass( obj, obj->wear_loc );
 
       break;
     case ITEM_WEAPON:
@@ -176,7 +176,7 @@ void ObjectFallIfNoFloor( Object *obj, bool through )
   Room *to_room;
   static int fall_count;
   char buf[MAX_STRING_LENGTH];
-  static bool is_falling; /* Stop loops from the call to obj_to_room()  -- Altrag */
+  static bool is_falling; /* Stop loops from the call to ObjectToRoom()  -- Altrag */
 
   if ( !obj->in_room || is_falling )
     return;
@@ -184,7 +184,7 @@ void ObjectFallIfNoFloor( Object *obj, bool through )
   if (fall_count > 30)
     {
       Bug( "object falling in loop more than 30 times", 0 );
-      extract_obj(obj);
+      ExtractObject(obj);
       fall_count = 0;
       return;
     }
@@ -207,7 +207,7 @@ void ObjectFallIfNoFloor( Object *obj, bool through )
           sprintf(buf, "Object falling into same room, room %ld",
                   to_room->vnum);
           Bug( buf, 0 );
-          extract_obj( obj );
+          ExtractObject( obj );
           return;
         }
 
@@ -218,9 +218,9 @@ void ObjectFallIfNoFloor( Object *obj, bool through )
           Act( AT_PLAIN, "$p falls far below...",
                obj->in_room->first_person, obj, NULL, TO_CHAR );
         }
-      obj_from_room( obj );
+      ObjectFromRoom( obj );
       is_falling = true;
-      obj = obj_to_room( obj, to_room );
+      obj = ObjectToRoom( obj, to_room );
       is_falling = false;
 
       if (obj->in_room->first_person)

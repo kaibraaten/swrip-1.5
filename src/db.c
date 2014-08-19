@@ -932,7 +932,7 @@ void load_mobiles( Area *tarea, FILE *fp )
               pMobIndex = GetProtoMobile( vnum );
               sprintf( buf, "Cleaning mobile: %ld", vnum );
               LogStringPlus( buf, LOG_BUILD, sysdata.log_level );
-              clean_mob( pMobIndex );
+              CleanMobile( pMobIndex );
               oldmob = true;
             }
         }
@@ -1167,7 +1167,7 @@ void load_objects( Area *tarea, FILE *fp )
               pObjIndex = GetProtoObject( vnum );
               sprintf( buf, "Cleaning object: %ld", vnum );
               LogStringPlus( buf, LOG_BUILD, sysdata.log_level );
-              clean_obj( pObjIndex );
+              CleanObject( pObjIndex );
               oldobj = true;
             }
         }
@@ -1345,7 +1345,7 @@ void load_resets( Area *tarea, FILE *fp )
 	  char buf[MAX_STRING_LENGTH];
           sprintf( buf, "Cleaning resets: %s", tarea->name );
           LogStringPlus( buf, LOG_BUILD, sysdata.log_level );
-          clean_resets( tarea );
+          CleanResets( tarea );
         }
     }
 
@@ -1561,7 +1561,7 @@ void load_rooms( Area *tarea, FILE *fp )
               pRoomIndex = GetRoom( vnum );
               sprintf( buf, "Cleaning room: %ld", vnum );
               LogStringPlus( buf, LOG_BUILD, sysdata.log_level );
-              clean_room( pRoomIndex );
+              CleanRoom( pRoomIndex );
               oldroom = true;
             }
         }
@@ -1939,7 +1939,7 @@ void fix_exits( void )
 
                   Bug( "Deleting %s exit in room %ld",
 		       GetDirectionName(pexit->vdir), pRoomIndex->vnum );
-                  extract_exit( pRoomIndex, pexit );
+                  ExtractExit( pRoomIndex, pexit );
                 }
               else
                 fexit = true;
@@ -2572,10 +2572,10 @@ void FreeCharacter( Character *ch )
     Bug( "Free_char: char still has descriptor." );
 
   while ( (obj = ch->last_carrying) != NULL )
-    extract_obj( obj );
+    ExtractObject( obj );
 
   while ( (paf = ch->last_affect) != NULL )
-    affect_remove( ch, paf );
+    RemoveAffect( ch, paf );
 
   while ( (timer = ch->first_timer) != NULL )
     extract_timer( ch, timer );

@@ -45,8 +45,8 @@ ch_ret spell_create_obj( int sn, int level, Character *ch, void *vo )
   obj->timer = skill->dice ? dice_parse( ch, level, skill->dice ) : 0;
   successful_casting( skill, ch, NULL, obj );
   if ( CAN_WEAR(obj, ITEM_TAKE) )
-    obj_to_char( obj, ch );
+    ObjectToCharacter( obj, ch );
   else
-    obj_to_room( obj, ch->in_room );
+    ObjectToRoom( obj, ch->in_room );
   return rNONE;
 }

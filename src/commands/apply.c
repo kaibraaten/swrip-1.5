@@ -55,5 +55,5 @@ void do_apply( Character *ch, char *argument )
     retcode = obj_cast_spell( obj->value[5], obj->value[0], ch, ch, NULL );
 
   if ( !obj_extracted(obj) && obj->value[1] <= 0 )
-    extract_obj( obj );
+    ExtractObject( obj );
 }

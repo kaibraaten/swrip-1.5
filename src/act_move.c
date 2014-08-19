@@ -115,7 +115,7 @@ void ClearVirtualRooms( void )
         {
           room = vroom_hash[hash];
           vroom_hash[hash] = room->next;
-          clean_room( room );
+          CleanRoom( room );
           FreeMemory( room );
           --top_vroom;
         }
@@ -133,7 +133,7 @@ void ClearVirtualRooms( void )
 		  prev->next = room_next;
 		}
 
-              clean_room( room );
+              CleanRoom( room );
               FreeMemory( room );
               --top_vroom;
             }
@@ -273,8 +273,8 @@ bool CharacterFallIfNoFloor( Character *ch, int fall )
       if ( fall > 80 )
         {
           Bug( "Falling (in a loop?) more than 80 rooms: vnum %d", ch->in_room->vnum );
-          char_from_room( ch );
-          char_to_room( ch, GetRoom( WhereHome(ch) ) );
+          CharacterFromRoom( ch );
+          CharacterToRoom( ch, GetRoom( WhereHome(ch) ) );
           fall = 0;
           return true;
         }
@@ -844,7 +844,7 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
   if( char_died(ch) )
     return global_retcode;
 
-  char_from_room( ch );
+  CharacterFromRoom( ch );
 
   if ( ch->mount )
     {
@@ -853,13 +853,13 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
         return global_retcode;
       if( ch->mount )
         {
-          char_from_room( ch->mount );
-          char_to_room( ch->mount, to_room );
+          CharacterFromRoom( ch->mount );
+          CharacterToRoom( ch->mount, to_room );
         }
     }
 
 
-  char_to_room( ch, to_room );
+  CharacterToRoom( ch, to_room );
   if ( !IsAffectedBy(ch, AFF_SNEAK)
        && ( IsNpc(ch) || !IsBitSet(ch->act, PLR_WIZINVIS) ) )
     {
@@ -1214,8 +1214,8 @@ void teleportch( Character *ch, Room *room, bool show )
     return;
 
   Act( AT_ACTION, "$n disappears suddenly!", ch, NULL, NULL, TO_ROOM );
-  char_from_room( ch );
-  char_to_room( ch, room );
+  CharacterFromRoom( ch );
+  CharacterToRoom( ch, room );
   Act( AT_ACTION, "$n arrives suddenly!", ch, NULL, NULL, TO_ROOM );
 
   if ( show )

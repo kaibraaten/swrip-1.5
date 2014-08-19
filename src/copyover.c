@@ -260,7 +260,7 @@ void RecoverFromCopyover( void )
       /* Insert in the char_list */
       LINK( d->character, first_char, last_char, next, prev );
 
-      char_to_room( d->character, d->character->in_room );
+      CharacterToRoom( d->character, d->character->in_room );
       do_look( d->character, argument );
 
       Act( AT_ACTION, "$n materializes!", d->character, NULL, NULL,

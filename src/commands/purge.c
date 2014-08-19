@@ -19,7 +19,7 @@ void do_purge( Character *ch, char *argument )
         {
           vnext = victim->next_in_room;
           if ( IsNpc(victim) && victim != ch && !IsBitSet(victim->act, ACT_POLYMORPHED))
-            extract_char( victim, true );
+            ExtractCharacter( victim, true );
         }
 
       for ( obj = ch->in_room->first_content; obj; obj = obj_next )
@@ -27,7 +27,7 @@ void do_purge( Character *ch, char *argument )
           obj_next = obj->next_content;
           if ( obj->item_type == ITEM_SPACECRAFT )
             continue;
-          extract_obj( obj );
+          ExtractObject( obj );
         }
 
       Act( AT_IMMORT, "$n purges the room!", ch, NULL, NULL, TO_ROOM);
@@ -56,7 +56,7 @@ void do_purge( Character *ch, char *argument )
       separate_obj( obj );
       Act( AT_IMMORT, "$n purges $p.", ch, obj, NULL, TO_ROOM);
       Act( AT_IMMORT, "You make $p disappear in a puff of smoke!", ch, obj, NULL, TO_CHAR);
-      extract_obj( obj );
+      ExtractObject( obj );
       return;
     }
 
@@ -80,5 +80,5 @@ void do_purge( Character *ch, char *argument )
     }
 
   Act( AT_IMMORT, "$n purges $N.", ch, NULL, victim, TO_NOTVICT );
-  extract_char( victim, true );
+  ExtractCharacter( victim, true );
 }

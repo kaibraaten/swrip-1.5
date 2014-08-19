@@ -37,7 +37,7 @@ ch_ret spell_invis( int sn, int level, Character *ch, void *vo )
       af.location  = APPLY_NONE;
       af.modifier  = 0;
       af.bitvector = AFF_INVISIBLE;
-      affect_to_char( victim, &af );
+      AffectToCharacter( victim, &af );
       Act( AT_MAGIC, "You fade out of existence.", victim, NULL, NULL, TO_CHAR );
       return rNONE;
     }

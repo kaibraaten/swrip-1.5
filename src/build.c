@@ -634,13 +634,13 @@ void FoldArea( Area *tarea, char *filename, bool install )
             {
               vnext = victim->next_in_room;
               if ( IsNpc(victim) )
-                extract_char( victim, true );
+                ExtractCharacter( victim, true );
             }
           /* purge room of (prototyped) objects */
           for ( obj = room->first_content; obj; obj = obj_next )
             {
               obj_next = obj->next_content;
-              extract_obj( obj );
+              ExtractObject( obj );
             }
         }
       fprintf( fpout, "#%ld\n",  vnum                            );

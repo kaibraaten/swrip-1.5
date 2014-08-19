@@ -369,15 +369,15 @@ void EquipCharacter( Character *ch, Object *obj, int iWear )
           Act( AT_MAGIC, "$n is zapped by $p and drops it.",  ch, obj, NULL, TO_ROOM );
         }
       if ( obj->carried_by )
-        obj_from_char( obj );
-      obj_to_room( obj, ch->in_room );
+        ObjectFromCharacter( obj );
+      ObjectToRoom( obj, ch->in_room );
       oprog_zap_trigger( ch, obj);
       if ( IsBitSet(sysdata.save_flags, SV_ZAPDROP) && !char_died(ch) )
         save_char_obj( ch );
       return;
     }
 
-  ch->armor             -= apply_ac( obj, iWear );
+  ch->armor             -= GetObjectArmorClass( obj, iWear );
   obj->wear_loc  = iWear;
 
   ch->carry_number      -= get_obj_number( obj );
@@ -385,10 +385,10 @@ void EquipCharacter( Character *ch, Object *obj, int iWear )
     ch->carry_weight  -= get_obj_weight( obj );
 
   for ( paf = obj->Prototype->first_affect; paf; paf = paf->next )
-    affect_modify( ch, paf, true );
+    ModifyAffect( ch, paf, true );
 
   for ( paf = obj->first_affect; paf; paf = paf->next )
-    affect_modify( ch, paf, true );
+    ModifyAffect( ch, paf, true );
 
   if ( obj->item_type == ITEM_LIGHT
        && obj->value[OVAL_LIGHT_POWER] != 0
@@ -413,14 +413,14 @@ void UnequipCharacter( Character *ch, Object *obj )
   if ( IsBitSet( obj->extra_flags, ITEM_MAGIC ) || obj->wear_loc == WEAR_FLOATING )
     ch->carry_weight  += get_obj_weight( obj );
 
-  ch->armor             += apply_ac( obj, obj->wear_loc );
+  ch->armor             += GetObjectArmorClass( obj, obj->wear_loc );
   obj->wear_loc  = -1;
 
   for ( paf = obj->Prototype->first_affect; paf; paf = paf->next )
-    affect_modify( ch, paf, false );
+    ModifyAffect( ch, paf, false );
   if ( obj->carried_by )
     for ( paf = obj->first_affect; paf; paf = paf->next )
-      affect_modify( ch, paf, false );
+      ModifyAffect( ch, paf, false );
 
   if ( !obj->carried_by )
     return;
@@ -806,12 +806,12 @@ void FixCharacterStats( Character *ch )
   while ( (obj=ch->first_carrying) != NULL )
     {
       carry[ncarry++]  = obj;
-      obj_from_char( obj );
+      ObjectFromCharacter( obj );
     }
 
   for ( aff = ch->first_affect; aff; aff = aff->next )
     {
-      affect_modify( ch, aff, false );
+      ModifyAffect( ch, aff, false );
     }
 
   ch->affected_by          = RaceTable[ch->race].affected;
@@ -840,10 +840,10 @@ void FixCharacterStats( Character *ch )
   ch->carry_number         = 0;
 
   for ( aff = ch->first_affect; aff; aff = aff->next )
-    affect_modify( ch, aff, true );
+    ModifyAffect( ch, aff, true );
 
   for ( x = 0; x < ncarry; x++ )
-    obj_to_char( carry[x], ch );
+    ObjectToCharacter( carry[x], ch );
 
   re_EquipCharacter( ch );
 }

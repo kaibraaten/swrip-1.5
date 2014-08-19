@@ -76,8 +76,8 @@ void do_hell( Character *ch, char *argument )
   ChPrintf(ch, "%s will be released from hell at %24.24s.\r\n", victim->name,
             ctime(&victim->pcdata->release_date));
   Act(AT_MAGIC, "$n disappears in a cloud of hellish light.", victim, NULL, ch, TO_NOTVICT);
-  char_from_room(victim);
-  char_to_room(victim, GetRoom(6));
+  CharacterFromRoom(victim);
+  CharacterToRoom(victim, GetRoom(6));
   Act(AT_MAGIC, "$n appears in a could of hellish light.", victim, NULL, ch, TO_NOTVICT);
   do_look(victim, "auto");
   ChPrintf(victim, "The immortals are not pleased with your actions.\r\n"

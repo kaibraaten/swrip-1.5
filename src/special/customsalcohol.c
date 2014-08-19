@@ -38,10 +38,10 @@ bool spec_customs_alcohol( Character *ch )
                         RemoveObject( victim, obj->wear_loc, true );
 
                       separate_obj( obj );
-                      obj_from_char( obj );
+                      ObjectFromCharacter( obj );
                       Act( AT_ACTION, "$n confiscates $p from $N.", ch, obj, victim, TO_NOTVICT );
                       Act( AT_ACTION, "$n takes $p from you.",   ch, obj, victim, TO_VICT    );
-                      obj = obj_to_char( obj, ch );
+                      obj = ObjectToCharacter( obj, ch );
                       SetBit( obj->extra_flags , ITEM_CONTRABAND);
                       ch_exp = umin( obj->cost*10 , ( GetRequiredXpForLevel( GetAbilityLevel(victim, SMUGGLING_ABILITY ) + 1) - GetRequiredXpForLevel( GetAbilityLevel( victim, SMUGGLING_ABILITY ) ) ) );
                       ChPrintf( victim, "You lose %ld experience. \r\n" , ch_exp );

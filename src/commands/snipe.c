@@ -78,8 +78,8 @@ void do_snipe( Character *ch, char *argument )
       if ( to_room == NULL )
         to_room = pexit->to_room;
 
-      char_from_room( ch );
-      char_to_room( ch, to_room );
+      CharacterFromRoom( ch );
+      CharacterToRoom( ch, to_room );
 
 
       if ( IsNpc(ch) && ( victim = GetCharacterInRoomMudProg( ch, arg2 ) ) != NULL )
@@ -99,15 +99,15 @@ void do_snipe( Character *ch, char *argument )
 
     }
 
-  char_from_room( ch );
-  char_to_room( ch, was_in_room );
+  CharacterFromRoom( ch );
+  CharacterToRoom( ch, was_in_room );
 
   if ( !pfound )
     {
       ChPrintf( ch, "You don't see that person to the %s!\r\n",
                  GetDirectionName(dir) );
-      char_from_room( ch );
-      char_to_room( ch, was_in_room );
+      CharacterFromRoom( ch );
+      CharacterToRoom( ch, was_in_room );
       return;
     }
 
@@ -174,8 +174,8 @@ void do_snipe( Character *ch, char *argument )
       break;
     }
 
-  char_from_room( ch );
-  char_to_room( ch, victim->in_room );
+  CharacterFromRoom( ch );
+  CharacterToRoom( ch, victim->in_room );
 
   if ( GetRandomPercent() < the_chance )
     {
@@ -202,8 +202,8 @@ void do_snipe( Character *ch, char *argument )
       LearnFromFailure( ch, gsn_snipe );
     }
 
-  char_from_room( ch );
-  char_to_room( ch, was_in_room );
+  CharacterFromRoom( ch );
+  CharacterToRoom( ch, was_in_room );
 
   if ( IsNpc(ch) )
     SetWaitState( ch, 1 * PULSE_VIOLENCE );

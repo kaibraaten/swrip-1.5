@@ -27,8 +27,8 @@ void do_unhell( Character *ch, char *argument )
     location = ch->in_room;
   MOBtrigger = false;
   Act( AT_MAGIC, "$n disappears in a cloud of godly light.", victim, NULL, ch, TO_NOTVICT );
-  char_from_room(victim);
-  char_to_room(victim, location);
+  CharacterFromRoom(victim);
+  CharacterToRoom(victim, location);
   SendToCharacter( "The gods have smiled on you and released you from hell early!\r\n", victim );
   do_look(victim, "auto");
   SendToCharacter( "They have been released.\r\n", ch );

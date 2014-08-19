@@ -74,5 +74,5 @@ void do_mp_close_passage( Character *ch, char *argument )
       return;
     }
 
-  extract_exit( fromRoom, pexit );
+  ExtractExit( fromRoom, pexit );
 }

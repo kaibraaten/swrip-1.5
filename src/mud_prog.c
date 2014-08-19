@@ -111,7 +111,7 @@ void init_supermob()
 
   supermob = CreateMobile(GetProtoMobile( MOB_VNUM_SUPERMOB ));
   office = GetRoom ( ROOM_VNUM_POLY );
-  char_to_room( supermob, office );
+  CharacterToRoom( supermob, office );
 
 #ifdef NOTDEFD
   AllocateMemory( supermob, Character, 1 );
@@ -2387,7 +2387,7 @@ void MobProgBribeTrigger( Character *mob, Character *ch, int amount )
       FreeMemory( obj->short_descr );
       obj->short_descr = CopyString( buf );
       obj->value[OVAL_MONEY_AMOUNT] = amount;
-      obj = obj_to_char( obj, mob );
+      obj = ObjectToCharacter( obj, mob );
       mob->gold -= amount;
 
       for ( mprg = mob->Prototype->mprog.mudprogs; mprg; mprg = mprg->next )
@@ -2659,15 +2659,15 @@ void MudProgSetSupermob( Object *obj)
 
   if(room != NULL)
     {
-      char_from_room (supermob );
-      char_to_room( supermob, room);
+      CharacterFromRoom (supermob );
+      CharacterToRoom( supermob, room);
     }
 }
 
 void ReleaseSupermob( )
 {
-  char_from_room( supermob );
-  char_to_room( supermob, GetRoom( ROOM_VNUM_POLY ) );
+  CharacterFromRoom( supermob );
+  CharacterToRoom( supermob, GetRoom( ROOM_VNUM_POLY ) );
 }
 
 bool oprog_percent_check( Character *mob, Character *actor, Object *obj,
@@ -2804,7 +2804,7 @@ void oprog_remove_trigger( Character *ch, Object *obj )
 }
 
 /*
- * call in do_sac, right before extract_obj
+ * call in do_sac, right before ExtractObject
  */
 void oprog_sac_trigger( Character *ch, Object *obj )
 {
@@ -2884,7 +2884,7 @@ void oprog_examine_trigger( Character *ch, Object *obj )
 }
 
 /*
- * call in fight.c, group_gain, after (?) the obj_to_room
+ * call in fight.c, group_gain, after (?) the ObjectToRoom
  */
 void oprog_zap_trigger( Character *ch, Object *obj )
 {
@@ -3061,8 +3061,8 @@ void RoomProgSetSupermob( Room *room)
       FreeMemory( supermob->description );
       supermob->description = CopyString( buf );
 
-      char_from_room (supermob );
-      char_to_room( supermob, room);
+      CharacterFromRoom (supermob );
+      CharacterToRoom( supermob, room);
     }
 }
 

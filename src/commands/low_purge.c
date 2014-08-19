@@ -28,7 +28,7 @@ void do_low_purge( Character *ch, char *argument )
       separate_obj( obj );
       Act( AT_IMMORT, "$n purges $p!", ch, obj, NULL, TO_ROOM );
       Act( AT_IMMORT, "You make $p disappear in a puff of smoke!", ch, obj, NULL, TO_CHAR );
-      extract_obj( obj );
+      ExtractObject( obj );
       return;
     }
 
@@ -47,5 +47,5 @@ void do_low_purge( Character *ch, char *argument )
   Act( AT_IMMORT, "$n purges $N.", ch, NULL, victim, TO_NOTVICT );
   Act( AT_IMMORT, "You make $N disappear in a puff of smoke!",
        ch, NULL, victim, TO_CHAR );
-  extract_char( victim, true );
+  ExtractCharacter( victim, true );
 }

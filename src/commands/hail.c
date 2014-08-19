@@ -157,8 +157,8 @@ void do_hail( Character *ch , char *argument )
 
   Act( AT_ACTION, "$n hails a speederbike, and drives off to seek shelter.", ch, NULL, NULL,  TO_ROOM );
 
-  char_from_room( ch );
-  char_to_room( ch, room );
+  CharacterFromRoom( ch );
+  CharacterToRoom( ch, room );
 
   ChPrintf( ch, "A speederbike picks you up and drives you to a safe location.\r\nYou pay the driver %d credits.\r\n", gold );
 

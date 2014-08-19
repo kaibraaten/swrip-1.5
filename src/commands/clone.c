@@ -48,8 +48,8 @@ void do_clone( Character *ch, char *argument )
       ChPrintf( ch, "You are escorted into a small room.\r\n\r\n" );
     }
 
-  char_from_room( ch );
-  char_to_room( ch, GetRoom( 10000 ) );
+  CharacterFromRoom( ch );
+  CharacterToRoom( ch, GetRoom( 10000 ) );
 
   /* random force change on cloning */
   frc = ch->stats.perm_frc;
@@ -188,8 +188,8 @@ void do_clone( Character *ch, char *argument )
   ch->pcdata->bank = bank;
   ch->act = flags;
   ch->pcdata->bestowments=CopyString( oldbestowments);
-  char_from_room( ch );
-  char_to_room( ch, GetRoom( 10002 ) );
+  CharacterFromRoom( ch );
+  CharacterToRoom( ch, GetRoom( 10002 ) );
   do_look( ch , "" );
 
   ChPrintf( ch, "\r\n&WA small tissue sample is taken from your arm.\r\n" );

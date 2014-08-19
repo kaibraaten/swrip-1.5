@@ -100,11 +100,11 @@ void do_oinvoke( Character *ch, char *argument )
 
   if ( CAN_WEAR(obj, ITEM_TAKE) )
     {
-      obj = obj_to_char( obj, ch );
+      obj = ObjectToCharacter( obj, ch );
     }
   else
     {
-      obj = obj_to_room( obj, ch->in_room );
+      obj = ObjectToRoom( obj, ch->in_room );
       Act( AT_IMMORT, "$n has created $p!", ch, obj, NULL, TO_ROOM );
     }
 

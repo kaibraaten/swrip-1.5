@@ -48,7 +48,7 @@ void do_gouge( Character *ch, char *argument )
               af.modifier  = -6;
               af.duration  = 3 + (GetAbilityLevel(ch, COMBAT_ABILITY ) / 20);
               af.bitvector = AFF_BLIND;
-              affect_to_char( victim, &af );
+              AffectToCharacter( victim, &af );
               Act( AT_SKILL, "You can't see a thing!", victim, NULL, NULL, TO_CHAR );
             }
           SetWaitState( ch,     PULSE_VIOLENCE );

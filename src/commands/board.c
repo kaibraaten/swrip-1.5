@@ -83,8 +83,8 @@ void do_board( Character *ch, char *argument )
 
   Act( AT_PLAIN, "$n enters $T.", ch, NULL, name , TO_ROOM );
   Act( AT_PLAIN, "You enter $T.", ch, NULL, name , TO_CHAR );
-  char_from_room( ch );
-  char_to_room( ch , toroom );
+  CharacterFromRoom( ch );
+  CharacterToRoom( ch , toroom );
   Act( AT_PLAIN, "$n enters the ship.", ch, NULL, NULL , TO_ROOM );
   do_look( ch , "auto" );
 }

@@ -36,7 +36,7 @@ void do_berserk( Character *ch, char *argument )
   af.location = APPLY_STR;
   af.modifier = 1;
   af.bitvector = AFF_BERSERK;
-  affect_to_char(ch, &af);
+  AffectToCharacter(ch, &af);
   SendToCharacter( "You start to lose control..\r\n", ch );
   LearnFromSuccess(ch, gsn_berserk);
 }

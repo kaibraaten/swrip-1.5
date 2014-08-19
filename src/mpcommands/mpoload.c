@@ -67,7 +67,7 @@ void do_mpoload( Character *ch, char *argument )
   obj = CreateObject( pObjIndex, level );
   obj->timer = timer;
   if ( CAN_WEAR(obj, ITEM_TAKE) )
-    obj_to_char( obj, ch );
+    ObjectToCharacter( obj, ch );
   else
-    obj_to_room( obj, ch->in_room );
+    ObjectToRoom( obj, ch->in_room );
 }

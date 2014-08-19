@@ -72,7 +72,7 @@ void do_stun( Character *ch, char *argument )
           af.modifier  = 20;
 	  af.duration  = 3;
           af.bitvector = AFF_PARALYSIS;
-          affect_to_char( victim, &af );
+          AffectToCharacter( victim, &af );
           UpdatePosition( victim );
         }
     }

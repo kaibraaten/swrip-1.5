@@ -144,8 +144,8 @@ static void StartGame(void)
 	  if (i->in_room && IsBitSet(i->in_room->room_flags, ROOM_ARENA))
 	    {
 	      SendToCharacter("\r\nThe floor falls out from below, dropping you in the arena.\r\n", i);
-	      char_from_room(i);
-	      char_to_room(i, GetRoom( ARENA_START));
+	      CharacterFromRoom(i);
+	      CharacterToRoom(i, GetRoom( ARENA_START));
 	      do_look(i,"auto");
 	    }
 	}
@@ -212,8 +212,8 @@ static void FindGameWinner(void)
       if (i->in_room && IsBitSet(i->in_room->room_flags,ROOM_ARENA)
           && !IsImmortal(i))
         {
-          char_from_room(i);
-          char_to_room(i,GetRoom(i->retran));
+          CharacterFromRoom(i);
+          CharacterToRoom(i,GetRoom(i->retran));
           do_look(i, "auto");
           Act(AT_YELLOW,"$n falls from the sky.", i, NULL, NULL, TO_ROOM);
           StopFighting( i, true );
@@ -317,8 +317,8 @@ static void DoEndGame(void)
 	      i->move = i->max_move;
 	      i->challenged = NULL;
 	      StopFighting(i, true);
-	      char_from_room(i);
-	      char_to_room(i, GetRoom(i->retran));
+	      CharacterFromRoom(i);
+	      CharacterToRoom(i, GetRoom(i->retran));
 	      do_look(i,"auto");
 	      Act(AT_TELL,"$n falls from the sky.", i, NULL, NULL, TO_ROOM);
 	    }

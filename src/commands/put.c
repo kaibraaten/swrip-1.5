@@ -119,8 +119,8 @@ void do_put( Character *ch, char *argument )
 
       separate_obj(obj);
       separate_obj(container);
-      obj_from_char( obj );
-      obj = obj_to_obj( obj, container );
+      ObjectFromCharacter( obj );
+      obj = ObjectToObject( obj, container );
       check_for_trap ( ch, container, TRAP_PUT );
       if ( char_died(ch) )
         return;
@@ -182,10 +182,10 @@ void do_put( Character *ch, char *argument )
               if ( number && (cnt + obj->count) > number )
                 split_obj( obj, number - cnt );
               cnt += obj->count;
-              obj_from_char( obj );
+              ObjectFromCharacter( obj );
               Act( AT_ACTION, "$n puts $p in $P.", ch, obj, container, TO_ROOM );
               Act( AT_ACTION, "You put $p in $P.", ch, obj, container, TO_CHAR );
-              obj = obj_to_obj( obj, container );
+              obj = ObjectToObject( obj, container );
               found = true;
 
               check_for_trap( ch, container, TRAP_PUT );

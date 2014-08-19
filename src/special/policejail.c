@@ -52,8 +52,8 @@ bool spec_police_jail( Character *ch )
                 RemoveBit( victim->pcdata->wanted_flags , 1 << vip );
                 Act( AT_ACTION, "$n ushers $N off to jail.", ch, NULL, victim, TO_NOTVICT );
                 Act( AT_ACTION, "$n escorts you to jail.",   ch, NULL, victim, TO_VICT    );
-                char_from_room( victim );
-                char_to_room( victim , jail );
+                CharacterFromRoom( victim );
+                CharacterToRoom( victim , jail );
               }
 
             return true;

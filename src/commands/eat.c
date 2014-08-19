@@ -103,7 +103,7 @@ void do_eat( Character *ch, char *argument )
           af.location  = APPLY_NONE;
           af.modifier  = 0;
           af.bitvector = AFF_POISON;
-          affect_join( ch, &af );
+          JoinAffect( ch, &af );
         }
       break;
 
@@ -131,5 +131,5 @@ void do_eat( Character *ch, char *argument )
   if ( obj->serial == cur_obj )
     global_objcode = rOBJ_EATEN;
 
-  extract_obj( obj );
+  ExtractObject( obj );
 }

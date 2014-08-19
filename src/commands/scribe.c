@@ -85,7 +85,7 @@ void do_scribe( Character *ch, char *argument )
       SendToCharacter("The magic surges outof control and destroys the scroll!.\r\n", ch);
       LearnFromFailure( ch, gsn_scribe );
       ch->mana -= (mana / 2);
-      extract_obj(scroll);
+      ExtractObject(scroll);
       return;
     }
 
@@ -119,7 +119,7 @@ void do_scribe( Character *ch, char *argument )
           SendToCharacter("The magic surges out of control and destroys the book!.\r\n", ch);
           LearnFromFailure( ch, gsn_scribe );
           ch->mana -= (mana / 2);
-          extract_obj(scroll);
+          ExtractObject(scroll);
           return;
         }
 
@@ -144,7 +144,7 @@ void do_scribe( Character *ch, char *argument )
           SendToCharacter("The magic surges outof control and destroys the scroll!.\r\n", ch);
           LearnFromFailure( ch, gsn_scribe );
           ch->mana -= (mana / 2);
-          extract_obj(scroll);
+          ExtractObject(scroll);
           return;
         }
 

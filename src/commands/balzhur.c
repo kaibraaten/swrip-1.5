@@ -83,5 +83,5 @@ void do_balzhur( Character *ch, char *argument )
   SendToCharacter( "You awake after a long period of time...\r\n", victim );
 
   while ( victim->first_carrying )
-    extract_obj( victim->first_carrying );
+    ExtractObject( victim->first_carrying );
 }

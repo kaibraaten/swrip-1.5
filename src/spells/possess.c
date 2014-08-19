@@ -71,7 +71,7 @@ ch_ret spell_possess( int sn, int level, Character *ch, void *vo )
   af.location  = 0;
   af.modifier  = 0;
   af.bitvector = AFF_POSSESS;
-  affect_to_char( victim, &af );
+  AffectToCharacter( victim, &af );
 
   sprintf(buf, "You have possessed %s!\r\n", victim->short_descr);
 

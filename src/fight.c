@@ -250,7 +250,7 @@ void ViolenceUpdate( void )
                     ch->desc->character->switched = NULL;
                     ch->desc                  = NULL;
                   }
-                affect_remove( ch, paf );
+                RemoveAffect( ch, paf );
               }
         }
 
@@ -915,7 +915,7 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
                   af.modifier  = 20;
                   af.duration  = 7;
                   af.bitvector = AFF_PARALYSIS;
-                  affect_to_char( victim, &af );
+                  AffectToCharacter( victim, &af );
                   UpdatePosition( victim );
                   if ( IsNpc(victim) )
                     {
@@ -1315,8 +1315,8 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
        */
       if ( IsAffectedBy(ch, AFF_INVISIBLE))
         {
-          affect_strip( ch, gsn_invis );
-          affect_strip( ch, gsn_mass_invis );
+          StripAffect( ch, gsn_invis );
+          StripAffect( ch, gsn_mass_invis );
           RemoveBit( ch->affected_by, AFF_INVISIBLE );
           Act( AT_MAGIC, "$n fades into existence.", ch, NULL, NULL, TO_ROOM );
         }
@@ -1432,8 +1432,8 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
       if (IsBitSet(victim->in_room->room_flags, ROOM_ARENA) )
         {
           char buf[MAX_STRING_LENGTH];
-          char_from_room(victim);
-          char_to_room(victim,GetRoom(victim->retran));
+          CharacterFromRoom(victim);
+          CharacterToRoom(victim,GetRoom(victim->retran));
           do_look(victim, "auto");
           Act(AT_YELLOW,"$n falls from the sky.", victim, NULL, NULL, TO_ROOM);
           victim->hit = victim->max_hit;
@@ -1467,7 +1467,7 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
       af.location  = APPLY_STR;
       af.modifier  = -2;
       af.bitvector = AFF_POISON;
-      affect_join( victim, &af );
+      JoinAffect( victim, &af );
       ch->mental_state = urange( 20, ch->mental_state + 2, 100 );
     }
 
@@ -1590,18 +1590,18 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
                 {
                   ++cnt;
                   separate_obj( obj );
-                  obj_from_char( obj );
+                  ObjectFromCharacter( obj );
                   if ( !obj_next )
                     obj_next = victim->first_carrying;
                 }
               else
                 {
                   cnt += obj->count;
-                  obj_from_char( obj );
+                  ObjectFromCharacter( obj );
                 }
               Act( AT_ACTION, "$n drops $p.", victim, obj, NULL, TO_ROOM );
               Act( AT_ACTION, "You drop $p.", victim, obj, NULL, TO_CHAR );
-              obj = obj_to_room( obj, victim->in_room );
+              obj = ObjectToRoom( obj, victim->in_room );
             }
         }
 
@@ -1794,7 +1794,7 @@ static void ApplyWantedFlags( Character *ch, const Character *victim )
         {
           Bug( "%s: %s bad AFF_CHARM",
                __FUNCTION__, IsNpc(ch) ? ch->short_descr : ch->name );
-          affect_strip( ch, gsn_charm_person );
+          StripAffect( ch, gsn_charm_person );
           RemoveBit( ch->affected_by, AFF_CHARM );
           return;
         }
@@ -1828,7 +1828,7 @@ static void UpdateKillStats( Character *ch, Character *victim )
         {
           Bug( "%s: %s bad AFF_CHARM",
                __FUNCTION__, IsNpc(ch) ? ch->short_descr : ch->name );
-          affect_strip( ch, gsn_charm_person );
+          StripAffect( ch, gsn_charm_person );
           RemoveBit( ch->affected_by, AFF_CHARM );
           return;
         }
@@ -1959,7 +1959,7 @@ void StartFighting( Character *ch, Character *victim )
     }
 
   if ( IsAffectedBy(ch, AFF_SLEEP) )
-    affect_strip( ch, gsn_sleep );
+    StripAffect( ch, gsn_sleep );
 
   /* Limit attackers -Thoric */
   if ( victim->num_fighting > MAX_NUMBER_OF_FIGHTERS )
@@ -2028,7 +2028,7 @@ void FreeFight( Character *ch )
   /* Berserk wears off after combat. -- Altrag */
   if ( IsAffectedBy(ch, AFF_BERSERK) )
     {
-      affect_strip(ch, gsn_berserk);
+      StripAffect(ch, gsn_berserk);
       SetCharacterColor(AT_WEAROFF, ch);
       SendToCharacter(skill_table[gsn_berserk]->msg_off, ch);
       SendToCharacter("\r\n", ch);
@@ -2086,8 +2086,8 @@ void RawKill( Character *killer, Character *victim )
   /* Take care of polymorphed chars */
   if(IsNpc(victim) && IsBitSet(victim->act, ACT_POLYMORPHED))
     {
-      char_from_room(victim->desc->original);
-      char_to_room(victim->desc->original, victim->in_room);
+      CharacterFromRoom(victim->desc->original);
+      CharacterToRoom(victim->desc->original, victim->in_room);
       victmp = victim->desc->original;
       do_revert(victim, "");
       RawKill(killer, victmp);
@@ -2123,15 +2123,15 @@ void RawKill( Character *killer, Character *victim )
       for ( obj = victim->last_carrying; obj; obj = obj_next )
         {
           obj_next = obj->prev_content;
-          obj_from_char( obj );
-          extract_obj( obj );
+          ObjectFromCharacter( obj );
+          ExtractObject( obj );
         }
     }
 
   if ( IsNpc(victim) )
     {
       victim->Prototype->killed++;
-      extract_char( victim, true );
+      ExtractCharacter( victim, true );
       victim = NULL;
       return;
     }
@@ -2229,7 +2229,7 @@ void RawKill( Character *killer, Character *victim )
       quitting_char = victim;
       save_char_obj( victim );
       saving_char = NULL;
-      extract_char( victim, true );
+      ExtractCharacter( victim, true );
       for ( x = 0; x < MAX_WEAR; x++ )
         for ( y = 0; y < MAX_LAYERS; y++ )
           save_equipment[x][y] = NULL;
@@ -2348,8 +2348,8 @@ void group_gain( Character *ch, Character *victim )
               Act( AT_MAGIC, "You are zapped by $p.", ch, obj, NULL, TO_CHAR );
               Act( AT_MAGIC, "$n is zapped by $p.",   ch, obj, NULL, TO_ROOM );
 
-              obj_from_char( obj );
-              obj = obj_to_room( obj, ch->in_room );
+              ObjectFromCharacter( obj );
+              obj = ObjectToRoom( obj, ch->in_room );
               oprog_zap_trigger(ch, obj);  /* mudprogs */
               if ( char_died(ch) )
                 return;
@@ -2596,7 +2596,7 @@ bool get_cover( Character *ch )
                 &&   IsBitSet(pexit->to_room->room_flags, ROOM_NO_MOB) ) )
         continue;
 
-      affect_strip ( ch, gsn_sneak );
+      StripAffect ( ch, gsn_sneak );
       RemoveBit   ( ch->affected_by, AFF_SNEAK );
       if ( ch->mount && ch->mount->fighting )
         StopFighting( ch->mount, true );

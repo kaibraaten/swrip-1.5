@@ -22,8 +22,8 @@ bool spec_janitor( Character *ch )
                 &&  !trash->first_content) )
         {
           Act( AT_ACTION, "$n picks up some trash.", ch, NULL, NULL, TO_ROOM );
-          obj_from_room( trash );
-          obj_to_char( trash, ch );
+          ObjectFromRoom( trash );
+          ObjectToCharacter( trash, ch );
           return true;
         }
     }

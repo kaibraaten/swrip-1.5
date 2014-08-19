@@ -212,7 +212,7 @@ static void ApplySkillAffect( Character *ch, int sn, int mod )
 /*
  * Apply or remove an affect to a character.
  */
-void affect_modify( Character *ch, Affect *paf, bool fAdd )
+void ModifyAffect( Character *ch, Affect *paf, bool fAdd )
 {
   Object *wield = NULL;
   int mod = paf->modifier;
@@ -438,7 +438,7 @@ void affect_modify( Character *ch, Affect *paf, bool fAdd )
     case APPLY_STRIPSN:
       if ( IS_VALID_SN(mod) )
 	{
-	  affect_strip( ch, mod );
+	  StripAffect( ch, mod );
 	}
       else
 	{
@@ -597,7 +597,7 @@ void affect_modify( Character *ch, Affect *paf, bool fAdd )
 /*
  * Give an affect to a char.
  */
-void affect_to_char( Character *ch, Affect *paf )
+void AffectToCharacter( Character *ch, Affect *paf )
 {
   Affect *paf_new;
 
@@ -621,22 +621,22 @@ void affect_to_char( Character *ch, Affect *paf )
   paf_new->modifier     = paf->modifier;
   paf_new->bitvector    = paf->bitvector;
 
-  affect_modify( ch, paf_new, true );
+  ModifyAffect( ch, paf_new, true );
 }
 
 
 /*
  * Remove an affect from a char.
  */
-void affect_remove( Character *ch, Affect *paf )
+void RemoveAffect( Character *ch, Affect *paf )
 {
   if ( !ch->first_affect )
     {
-      Bug( "Affect_remove: no affect." );
+      Bug( "%s: no affect.", __FUNCTION__ );
       return;
     }
 
-  affect_modify( ch, paf, false );
+  ModifyAffect( ch, paf, false );
 
   UNLINK( paf, ch->first_affect, ch->last_affect, next, prev );
   FreeMemory( paf );
@@ -645,7 +645,7 @@ void affect_remove( Character *ch, Affect *paf )
 /*
  * Strip all affects of a given sn.
  */
-void affect_strip( Character *ch, int sn )
+void StripAffect( Character *ch, int sn )
 {
   Affect *paf;
   Affect *paf_next;
@@ -655,7 +655,7 @@ void affect_strip( Character *ch, int sn )
       paf_next = paf->next;
 
       if ( paf->type == sn )
-        affect_remove( ch, paf );
+        RemoveAffect( ch, paf );
     }
 }
 
@@ -664,30 +664,37 @@ void affect_strip( Character *ch, int sn )
  * Limitations put in place by Thoric, they may be high... but at least
  * they're there :)
  */
-void affect_join( Character *ch, Affect *paf )
+void JoinAffect( Character *ch, Affect *paf )
 {
-  Affect *paf_old;
+  Affect *paf_old = NULL;
 
   for ( paf_old = ch->first_affect; paf_old; paf_old = paf_old->next )
-    if ( paf_old->type == paf->type )
-      {
-        paf->duration = umin( 1000000, paf->duration + paf_old->duration );
-        if ( paf->modifier )
-          paf->modifier = umin( 5000, paf->modifier + paf_old->modifier );
-        else
-          paf->modifier = paf_old->modifier;
-        affect_remove( ch, paf_old );
-        break;
-      }
+    {
+      if ( paf_old->type == paf->type )
+	{
+	  paf->duration = umin( 1000000, paf->duration + paf_old->duration );
 
-  affect_to_char( ch, paf );
+	  if ( paf->modifier )
+	    {
+	      paf->modifier = umin( 5000, paf->modifier + paf_old->modifier );
+	    }
+	  else
+	    {
+	      paf->modifier = paf_old->modifier;
+	    }
+
+	  RemoveAffect( ch, paf_old );
+	  break;
+	}
+    }
+
+  AffectToCharacter( ch, paf );
 }
-
 
 /*
  * Move a char out of a room.
  */
-void char_from_room( Character *ch )
+void CharacterFromRoom( Character *ch )
 {
   Object *obj;
 
@@ -728,7 +735,7 @@ void char_from_room( Character *ch )
 /*
  * Move a char into a room.
  */
-void char_to_room( Character *ch, Room *pRoomIndex )
+void CharacterToRoom( Character *ch, Room *pRoomIndex )
 {
   Object *obj;
 
@@ -787,7 +794,7 @@ void char_to_room( Character *ch, Room *pRoomIndex )
 /*
  * Give an obj to a char.
  */
-Object *obj_to_char( Object *obj, Character *ch )
+Object *ObjectToCharacter( Object *obj, Character *ch )
 {
   Object *otmp = NULL;
   Object *oret = obj;
@@ -801,7 +808,7 @@ Object *obj_to_char( Object *obj, Character *ch )
     {
       if (!IsImmortal( ch )
           && (IsNpc(ch) && !IsBitSet(ch->act, ACT_PROTOTYPE)) )
-        return obj_to_room( obj, ch->in_room );
+        return ObjectToRoom( obj, ch->in_room );
     }
 
   if ( loading_char == ch )
@@ -847,7 +854,7 @@ Object *obj_to_char( Object *obj, Character *ch )
 /*
  * Take an obj from its character.
  */
-void obj_from_char( Object *obj )
+void ObjectFromCharacter( Object *obj )
 {
   Character *ch;
 
@@ -894,30 +901,63 @@ int count_users(const Object *obj)
 /*
  * Find the ac value of an obj, including position effect.
  */
-int apply_ac( const Object *obj, int iWear )
+int GetObjectArmorClass( const Object *obj, int iWear )
 {
   if ( obj->item_type != ITEM_ARMOR )
     return 0;
 
   switch ( iWear )
     {
-    case WEAR_BODY:     return 3 * obj->value[OVAL_ARMOR_CONDITION];
-    case WEAR_HEAD:     return 2 * obj->value[OVAL_ARMOR_CONDITION];
-    case WEAR_LEGS:     return 2 * obj->value[OVAL_ARMOR_CONDITION];
-    case WEAR_FEET:     return     obj->value[OVAL_ARMOR_CONDITION];
-    case WEAR_HANDS:    return     obj->value[OVAL_ARMOR_CONDITION];
-    case WEAR_ARMS:     return     obj->value[OVAL_ARMOR_CONDITION];
-    case WEAR_SHIELD:   return     obj->value[OVAL_ARMOR_CONDITION];
-    case WEAR_FINGER_L: return     obj->value[OVAL_ARMOR_CONDITION];
-    case WEAR_FINGER_R: return     obj->value[OVAL_ARMOR_CONDITION];
-    case WEAR_NECK_1:   return     obj->value[OVAL_ARMOR_CONDITION];
-    case WEAR_NECK_2:   return     obj->value[OVAL_ARMOR_CONDITION];
-    case WEAR_ABOUT:    return 2 * obj->value[OVAL_ARMOR_CONDITION];
-    case WEAR_WAIST:    return     obj->value[OVAL_ARMOR_CONDITION];
-    case WEAR_WRIST_L:  return     obj->value[OVAL_ARMOR_CONDITION];
-    case WEAR_WRIST_R:  return     obj->value[OVAL_ARMOR_CONDITION];
-    case WEAR_HOLD:     return     obj->value[OVAL_ARMOR_CONDITION];
-    case WEAR_EYES:     return     obj->value[OVAL_ARMOR_CONDITION];
+    case WEAR_BODY:
+      return 3 * obj->value[OVAL_ARMOR_CONDITION];
+
+    case WEAR_HEAD:
+      return 2 * obj->value[OVAL_ARMOR_CONDITION];
+
+    case WEAR_LEGS:
+      return 2 * obj->value[OVAL_ARMOR_CONDITION];
+
+    case WEAR_FEET:
+      return obj->value[OVAL_ARMOR_CONDITION];
+
+    case WEAR_HANDS:
+      return obj->value[OVAL_ARMOR_CONDITION];
+
+    case WEAR_ARMS:
+      return obj->value[OVAL_ARMOR_CONDITION];
+
+    case WEAR_SHIELD:
+      return obj->value[OVAL_ARMOR_CONDITION];
+
+    case WEAR_FINGER_L:
+      return obj->value[OVAL_ARMOR_CONDITION];
+
+    case WEAR_FINGER_R:
+      return obj->value[OVAL_ARMOR_CONDITION];
+
+    case WEAR_NECK_1:
+      return obj->value[OVAL_ARMOR_CONDITION];
+
+    case WEAR_NECK_2:
+      return obj->value[OVAL_ARMOR_CONDITION];
+
+    case WEAR_ABOUT:
+      return 2 * obj->value[OVAL_ARMOR_CONDITION];
+
+    case WEAR_WAIST:
+      return obj->value[OVAL_ARMOR_CONDITION];
+
+    case WEAR_WRIST_L:
+      return obj->value[OVAL_ARMOR_CONDITION];
+
+    case WEAR_WRIST_R:
+      return obj->value[OVAL_ARMOR_CONDITION];
+
+    case WEAR_HOLD:
+      return obj->value[OVAL_ARMOR_CONDITION];
+
+    case WEAR_EYES:
+      return obj->value[OVAL_ARMOR_CONDITION];
     }
 
   return 0;
@@ -926,7 +966,7 @@ int apply_ac( const Object *obj, int iWear )
 /*
  * Count occurrences of an obj in a list.
  */
-int count_obj_list( const ProtoObject *pObjIndex, const Object *list )
+int CountOccurancesOfObjectInList( const ProtoObject *pObjIndex, const Object *list )
 {
   const Object *obj = NULL;
   int nMatch = 0;
@@ -945,13 +985,13 @@ void write_corpses( Character *ch, const char *name );
 
 int falling = 0;
 
-void obj_from_room( Object *obj )
+void ObjectFromRoom( Object *obj )
 {
   Room *in_room;
 
   if ( ( in_room = obj->in_room ) == NULL )
     {
-      Bug( "obj_from_room: NULL." );
+      Bug( "ObjectFromRoom: NULL." );
       return;
     }
 
@@ -975,7 +1015,7 @@ void obj_from_room( Object *obj )
 /*
  * Move an obj into a room.
  */
-Object *obj_to_room( Object *obj, Room *pRoomIndex )
+Object *ObjectToRoom( Object *obj, Room *pRoomIndex )
 {
   Object *otmp, *oret;
   short count = obj->count;
@@ -1011,7 +1051,7 @@ Object *obj_to_room( Object *obj, Room *pRoomIndex )
 /*
  * Move an object into an object.
  */
-Object *obj_to_obj( Object *obj, Object *obj_to )
+Object *ObjectToObject( Object *obj, Object *obj_to )
 {
   Object *otmp, *oret;
 
@@ -1046,7 +1086,7 @@ Object *obj_to_obj( Object *obj, Object *obj_to )
 /*
  * Move an object out of an object.
  */
-void obj_from_obj( Object *obj )
+void ObjectFromObject( Object *obj )
 {
   Object *obj_from;
 
@@ -1074,19 +1114,19 @@ void obj_from_obj( Object *obj )
 /*
  * Extract an obj from the world.
  */
-void extract_obj( Object *obj )
+void ExtractObject( Object *obj )
 {
   Object *obj_content;
 
   if ( !obj )
     {
-      Bug( "extract_obj: !obj" );
+      Bug( "ExtractObject: !obj" );
       return;
     }
 
   if ( obj_extracted(obj) )
     {
-      Bug( "extract_obj: obj %d already extracted!", obj->Prototype->vnum );
+      Bug( "ExtractObject: obj %d already extracted!", obj->Prototype->vnum );
       return;
     }
 
@@ -1094,16 +1134,16 @@ void extract_obj( Object *obj )
     remove_portal( obj );
 
   if ( obj->carried_by )
-    obj_from_char( obj );
+    ObjectFromCharacter( obj );
   else
     if ( obj->in_room )
-      obj_from_room( obj );
+      ObjectFromRoom( obj );
     else
       if ( obj->in_obj )
-        obj_from_obj( obj );
+        ObjectFromObject( obj );
 
   while ( ( obj_content = obj->last_content ) != NULL )
-    extract_obj( obj_content );
+    ExtractObject( obj_content );
 
   {
     Affect *paf;
@@ -1156,7 +1196,7 @@ void extract_obj( Object *obj )
 /*
  * Extract a char from the world.
  */
-void extract_char( Character *ch, bool fPull )
+void ExtractCharacter( Character *ch, bool fPull )
 {
   Character *wch;
   Object *obj;
@@ -1183,7 +1223,7 @@ void extract_char( Character *ch, bool fPull )
 
   if ( char_died(ch) )
     {
-      sprintf( buf, "extract_char: %s already died!", ch->name );
+      sprintf( buf, "ExtractCharacter: %s already died!", ch->name );
       Bug( buf, 0 );
       return;
     }
@@ -1235,9 +1275,9 @@ void extract_char( Character *ch, bool fPull )
   RemoveBit( ch->act, ACT_MOUNTED );
 
   while ( (obj = ch->last_carrying) != NULL )
-    extract_obj( obj );
+    ExtractObject( obj );
 
-  char_from_room( ch );
+  CharacterFromRoom( ch );
 
   if ( !fPull )
     {
@@ -1249,7 +1289,7 @@ void extract_char( Character *ch, bool fPull )
       if ( !location )
         location = GetRoom( ROOM_VNUM_LIMBO );
 
-      char_to_room( ch, location );
+      CharacterToRoom( ch, location );
 
       Act( AT_MAGIC, "$n appears from some strange swirling mists!", ch, NULL, NULL, TO_ROOM );
       ch->position = POS_RESTING;
@@ -1884,7 +1924,7 @@ ch_ret spring_trap( Character *ch, Object *obj )
   --obj->value[OVAL_TRAP_CHARGE];
 
   if ( obj->value[OVAL_TRAP_CHARGE] <= 0 )
-    extract_obj( obj );
+    ExtractObject( obj );
 
   switch(typ)
     {
@@ -2019,7 +2059,7 @@ Object *get_trap( const Object *obj )
 /*
  * Remove an exit from a room                                   -Thoric
  */
-void extract_exit( Room *room, Exit *pexit )
+void ExtractExit( Room *room, Exit *pexit )
 {
   UNLINK( pexit, room->first_exit, room->last_exit, next, prev );
   if ( pexit->rexit )
@@ -2032,7 +2072,7 @@ void extract_exit( Room *room, Exit *pexit )
 /*
  * clean out a room (leave list pointers intact )               -Thoric
  */
-void clean_room( Room *room )
+void CleanRoom( Room *room )
 {
   ExtraDescription      *ed, *ed_next;
   Exit             *pexit, *pexit_next;
@@ -2070,7 +2110,7 @@ void clean_room( Room *room )
 /*
  * clean out an object (index) (leave list pointers intact )    -Thoric
  */
-void clean_obj( ProtoObject *obj )
+void CleanObject( ProtoObject *obj )
 {
   Affect *paf = NULL;
   Affect *paf_next = NULL;
@@ -2120,7 +2160,7 @@ void clean_obj( ProtoObject *obj )
 /*
  * clean out a mobile (index) (leave list pointers intact )     -Thoric
  */
-void clean_mob( ProtoMobile *mob )
+void CleanMobile( ProtoMobile *mob )
 {
   MPROG_DATA *mprog, *mprog_next;
 
@@ -2157,7 +2197,7 @@ void clean_mob( ProtoMobile *mob )
 /*
  * Remove all resets from an area                               -Thoric
  */
-void clean_resets( Area *tarea )
+void CleanResets( Area *tarea )
 {
   Reset *pReset, *pReset_next;
 
@@ -2273,7 +2313,7 @@ void queue_extracted_obj( Object *obj )
 /*
  * Clean out the extracted object queue
  */
-void clean_obj_queue()
+void CleanObject_queue()
 {
   Object *obj;
 
@@ -2607,8 +2647,8 @@ Object *group_object( Object *obj1, Object *obj2 )
     {
       obj1->count += obj2->count;
       obj1->Prototype->count += obj2->count;   /* to be decremented in */
-      numobjsloaded += obj2->count;             /* extract_obj */
-      extract_obj( obj2 );
+      numobjsloaded += obj2->count;             /* ExtractObject */
+      ExtractObject( obj2 );
       return obj1;
     }
 
@@ -2701,8 +2741,8 @@ bool empty_obj( Object *obj, Object *destobj, Room *destroom )
 	      continue;
 	    }
 
-          obj_from_obj( otmp );
-          obj_to_obj( otmp, destobj );
+          ObjectFromObject( otmp );
+          ObjectToObject( otmp, destobj );
           movedsome = true;
         }
       return movedsome;
@@ -2715,13 +2755,13 @@ bool empty_obj( Object *obj, Object *destobj, Room *destroom )
           if ( ch && (otmp->Prototype->mprog.progtypes & DROP_PROG) && otmp->count > 1 )
             {
               separate_obj( otmp );
-              obj_from_obj( otmp );
+              ObjectFromObject( otmp );
               if ( !otmp_next )
                 otmp_next = obj->first_content;
             }
           else
-            obj_from_obj( otmp );
-          otmp = obj_to_room( otmp, destroom );
+            ObjectFromObject( otmp );
+          otmp = ObjectToRoom( otmp, destroom );
           if ( ch )
             {
               oprog_drop_trigger( ch, otmp );           /* mudprogs */
@@ -2737,8 +2777,8 @@ bool empty_obj( Object *obj, Object *destobj, Room *destroom )
       for ( otmp = obj->first_content; otmp; otmp = otmp_next )
         {
           otmp_next = otmp->next_content;
-          obj_from_obj( otmp );
-          obj_to_char( otmp, ch );
+          ObjectFromObject( otmp );
+          ObjectToCharacter( otmp, ch );
           movedsome = true;
         }
       return movedsome;

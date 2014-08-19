@@ -39,8 +39,8 @@ void do_collectgold (Character *ch, char *argument)
       ch->pcdata->release_date = mktime(tms);
       ch->pcdata->helled_by = CopyString("VendorCheat");
       Act(AT_MAGIC, "$n disappears in a cloud of hellish light.", ch, NULL, ch, TO_NOTVICT);
-      char_from_room(ch);
-      char_to_room(ch, GetRoom(6));
+      CharacterFromRoom(ch);
+      CharacterToRoom(ch, GetRoom(6));
       Act(AT_MAGIC, "$n appears in a could of hellish light.", ch, NULL, ch, TO_NOTVICT);
       do_look(ch, "auto");
       ChPrintf(ch, "The immortals are not pleased with your actions.\r\n"

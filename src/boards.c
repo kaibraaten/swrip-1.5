@@ -669,7 +669,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
           paper = CreateObject( GetProtoObject(OBJ_VNUM_NOTE), 0 );
           if ((tmpobj = GetEquipmentOnCharacter(ch, WEAR_HOLD)) != NULL)
             UnequipCharacter(ch, tmpobj);
-          paper = obj_to_char(paper, ch);
+          paper = ObjectToCharacter(paper, ch);
           EquipCharacter(ch, paper, WEAR_HOLD);
           Act(AT_MAGIC, "$n grabs a message tisk to record a note.",
               ch, NULL, NULL, TO_ROOM);
@@ -732,7 +732,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
           paper = CreateObject( GetProtoObject(OBJ_VNUM_NOTE), 0 );
           if ((tmpobj = GetEquipmentOnCharacter(ch, WEAR_HOLD)) != NULL)
             UnequipCharacter(ch, tmpobj);
-          paper = obj_to_char(paper, ch);
+          paper = ObjectToCharacter(paper, ch);
           EquipCharacter(ch, paper, WEAR_HOLD);
           Act(AT_MAGIC, "$n grabs a message disk.",
               ch, NULL, NULL, TO_ROOM);
@@ -789,7 +789,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
           paper = CreateObject( GetProtoObject(OBJ_VNUM_NOTE), 0 );
           if ((tmpobj = GetEquipmentOnCharacter(ch, WEAR_HOLD)) != NULL)
             UnequipCharacter(ch, tmpobj);
-          paper = obj_to_char(paper, ch);
+          paper = ObjectToCharacter(paper, ch);
           EquipCharacter(ch, paper, WEAR_HOLD);
           Act(AT_MAGIC, "$n gets a message disk to record a note.",
               ch, NULL, NULL, TO_ROOM);
@@ -935,7 +935,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
       board->num_posts++;
       write_board( board );
       SendToCharacter( "You upload your message to the terminal.\r\n", ch );
-      extract_obj( paper );
+      ExtractObject( paper );
       return;
     }
 
@@ -1061,12 +1061,12 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
               if ( take == 1 )
                 {
                   Act( AT_ACTION, "$n downloads a message.", ch, NULL, NULL, TO_ROOM );
-                  obj_to_char(paper, ch);
+                  ObjectToCharacter(paper, ch);
                 }
               else if ( take == 2 )
                 {
                   Act( AT_ACTION, "$n copies a message.", ch, NULL, NULL, TO_ROOM );
-                  obj_to_char(paper, ch);
+                  ObjectToCharacter(paper, ch);
                 }
               else
                 Act( AT_ACTION, "$n removes a message.", ch, NULL, NULL, TO_ROOM );

@@ -33,12 +33,12 @@ void do_mpjunk( Character *ch, char *argument )
       if ( ( obj = GetWornObject( ch, arg ) ) != NULL )
         {
           UnequipCharacter( ch, obj );
-          extract_obj( obj );
+          ExtractObject( obj );
           return;
         }
       if ( ( obj = GetCarriedObject( ch, arg ) ) == NULL )
         return;
-      extract_obj( obj );
+      ExtractObject( obj );
     }
   else
     for ( obj = ch->first_carrying; obj; obj = obj_next )
@@ -48,7 +48,7 @@ void do_mpjunk( Character *ch, char *argument )
           {
             if ( obj->wear_loc != WEAR_NONE)
               UnequipCharacter( ch, obj );
-            extract_obj( obj );
+            ExtractObject( obj );
           }
       }
 }

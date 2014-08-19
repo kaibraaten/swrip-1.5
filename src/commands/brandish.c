@@ -88,6 +88,6 @@ void do_brandish( Character *ch, char *argument )
       if ( staff->serial == cur_obj )
         global_objcode = rOBJ_USED;
 
-      extract_obj( staff );
+      ExtractObject( staff );
     }
 }

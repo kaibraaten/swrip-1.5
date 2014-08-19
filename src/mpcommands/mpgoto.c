@@ -33,6 +33,6 @@ void do_mpgoto( Character *ch, char *argument )
   if ( ch->fighting )
     StopFighting( ch, true );
 
-  char_from_room( ch );
-  char_to_room( ch, location );
+  CharacterFromRoom( ch );
+  CharacterToRoom( ch, location );
 }

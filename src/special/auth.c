@@ -25,7 +25,7 @@ bool spec_auth( Character *ch )
           if ( !hasdiploma )
             {
               obj = CreateObject( pObjIndex, 1 );
-              obj = obj_to_char( obj, victim );
+              obj = ObjectToCharacter( obj, victim );
               SendToCharacter( "&cThe schoolmaster gives you a diploma, and shakes your hand.\r\n&w",victim);
             }
         }

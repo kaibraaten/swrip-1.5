@@ -32,10 +32,10 @@ void do_mppurge( Character *ch, char *argument )
         {
 	  vnext = victim->next_in_room;
           if ( IsNpc( victim ) && victim != ch )
-            extract_char( victim, true );
+            ExtractCharacter( victim, true );
         }
       while ( ch->in_room->first_content )
-        extract_obj( ch->in_room->first_content );
+        ExtractObject( ch->in_room->first_content );
 
       return;
     }
@@ -43,7 +43,7 @@ void do_mppurge( Character *ch, char *argument )
   if ( (victim = get_char_room( ch, arg )) == NULL )
     {
       if ( (obj = get_obj_here( ch, arg )) != NULL )
-        extract_obj( obj );
+        ExtractObject( obj );
       else
         ProgBug( "Mppurge - Bad argument", ch );
       return;
@@ -67,5 +67,5 @@ void do_mppurge( Character *ch, char *argument )
       return;
     }
 
-  extract_char( victim, true );
+  ExtractCharacter( victim, true );
 }

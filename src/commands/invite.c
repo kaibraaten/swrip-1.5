@@ -40,8 +40,8 @@ void do_invite(Character *ch, char *argument)
 
   Act(AT_ACTION,"You invite $N to enter, and $E steps inside.",ch,NULL,victim,TO_CHAR);
   Act(AT_ACTION,"$n invites you to enter, and you step inside.",ch,NULL,victim,TO_VICT);
-  char_from_room(victim);
-  char_to_room(victim,home);
+  CharacterFromRoom(victim);
+  CharacterToRoom(victim,home);
   victim->buzzed_home = NULL;
   victim->buzzed_from_room = NULL;
 }

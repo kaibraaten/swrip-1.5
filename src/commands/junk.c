@@ -55,5 +55,5 @@ void do_junk( Character *ch, char *argument )
   if ( cur_obj == obj->serial )
     global_objcode = rOBJ_SACCED;
 
-  extract_obj( obj );
+  ExtractObject( obj );
 }

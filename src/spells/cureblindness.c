@@ -23,7 +23,7 @@ ch_ret spell_cure_blindness( int sn, int level, Character *ch, void *vo )
       ApplyJediBonus(ch);
     }
 
-  affect_strip( victim, gsn_blindness );
+  StripAffect( victim, gsn_blindness );
   SetCharacterColor( AT_MAGIC, victim);
   SendToCharacter( "Your vision returns!\r\n", victim );
 

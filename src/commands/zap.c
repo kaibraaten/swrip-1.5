@@ -87,6 +87,6 @@ void do_zap( Character *ch, char *argument )
       Act( AT_MAGIC, "$p explodes into fragments.", ch, wand, NULL, TO_CHAR );
       if ( wand->serial == cur_obj )
         global_objcode = rOBJ_USED;
-      extract_obj( wand );
+      ExtractObject( wand );
     }
 }

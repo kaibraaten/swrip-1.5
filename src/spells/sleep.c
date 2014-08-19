@@ -60,7 +60,7 @@ ch_ret spell_sleep( int sn, int level, Character *ch, void *vo )
   af.location  = APPLY_NONE;
   af.modifier  = 0;
   af.bitvector = AFF_SLEEP;
-  affect_join( victim, &af );
+  JoinAffect( victim, &af );
 
   /* Added by Narn at the request of Dominus. */
   if ( !IsNpc( victim ) )

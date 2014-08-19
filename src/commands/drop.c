@@ -65,18 +65,18 @@ void do_drop( Character *ch, char *argument )
                 {
                 case OBJ_VNUM_MONEY_ONE:
                   number += 1;
-                  extract_obj( obj );
+                  ExtractObject( obj );
                   break;
 
                 case OBJ_VNUM_MONEY_SOME:
                   number += obj->value[0];
-                  extract_obj( obj );
+                  ExtractObject( obj );
                   break;
                 }
             }
 
           Act( AT_ACTION, "$n drops some credits.", ch, NULL, NULL, TO_ROOM );
-          obj_to_room( CreateMoney( number ), ch->in_room );
+          ObjectToRoom( CreateMoney( number ), ch->in_room );
           SendToCharacter( "OK.\r\n", ch );
           if ( IsBitSet( sysdata.save_flags, SV_DROP ) )
             {
@@ -110,8 +110,8 @@ void do_drop( Character *ch, char *argument )
       Act( AT_ACTION, "$n drops $p.", ch, obj, NULL, TO_ROOM );
       Act( AT_ACTION, "You drop $p.", ch, obj, NULL, TO_CHAR );
 
-      obj_from_char( obj );
-      obj = obj_to_room( obj, ch->in_room );
+      ObjectFromCharacter( obj );
+      obj = ObjectToRoom( obj, ch->in_room );
       oprog_drop_trigger ( ch, obj );   /* mudprogs */
 
       if( char_died(ch) || obj_extracted(obj) )
@@ -158,7 +158,7 @@ void do_drop( Character *ch, char *argument )
                 {
                   ++cnt;
                   separate_obj( obj );
-                  obj_from_char( obj );
+                  ObjectFromCharacter( obj );
                   if ( !obj_next )
                     obj_next = ch->first_carrying;
                 }
@@ -167,11 +167,11 @@ void do_drop( Character *ch, char *argument )
                   if ( number && (cnt + obj->count) > number )
                     split_obj( obj, number - cnt );
                   cnt += obj->count;
-                  obj_from_char( obj );
+                  ObjectFromCharacter( obj );
                 }
               Act( AT_ACTION, "$n drops $p.", ch, obj, NULL, TO_ROOM );
               Act( AT_ACTION, "You drop $p.", ch, obj, NULL, TO_CHAR );
-              obj = obj_to_room( obj, ch->in_room );
+              obj = ObjectToRoom( obj, ch->in_room );
               oprog_drop_trigger( ch, obj );            /* mudprogs */
               if ( char_died(ch) )
                 return;

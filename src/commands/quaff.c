@@ -74,5 +74,5 @@ void do_quaff( Character *ch, char *argument )
   if ( cur_obj == obj->serial )
     global_objcode = rOBJ_QUAFFED;
 
-  extract_obj( obj );
+  ExtractObject( obj );
 }
