@@ -201,17 +201,23 @@ bool CharacterCanTakePrototype( const Character *ch )
     return false;
 }
 
+static void ApplySkillAffect( Character *ch, int sn, int mod )
+{
+  if ( !IsNpc(ch) && ch->pcdata->learned[sn] > 0 )
+    {
+      ch->pcdata->learned[sn] =
+	( ch->pcdata->learned[sn] >= 100 ? 100 : urange( 1, ch->pcdata->learned[sn] + mod, 100 ) );
+    }
+}
 /*
  * Apply or remove an affect to a character.
  */
 void affect_modify( Character *ch, Affect *paf, bool fAdd )
 {
-  Object *wield;
-  int mod;
-  Skill *skill;
-  ch_ret retcode;
-
-  mod = paf->modifier;
+  Object *wield = NULL;
+  int mod = paf->modifier;
+  Skill *skill = NULL;
+  ch_ret retcode = rNONE;
 
   if ( fAdd )
     {
@@ -220,236 +226,348 @@ void affect_modify( Character *ch, Affect *paf, bool fAdd )
   else
     {
       RemoveBit( ch->affected_by, paf->bitvector );
+
       /*
        * might be an idea to have a duration removespell which returns
        * the spell after the duration... but would have to store
        * the removed spell's information somewhere...           -Thoric
        */
       if ( (paf->location % REVERSE_APPLY) == APPLY_REMOVESPELL )
-        return;
+	{
+	  return;
+	}
+
       switch( paf->location % REVERSE_APPLY )
         {
-        case APPLY_AFFECT:        RemoveBit( ch->affected_by, mod );   return;
-        case APPLY_RESISTANT:     RemoveBit( ch->resistant, mod );     return;
-        case APPLY_IMMUNE:        RemoveBit( ch->immune, mod );        return;
-        case APPLY_SUSCEPTIBLE:   RemoveBit( ch->susceptible, mod );   return;
-        case APPLY_WEARSPELL:       /* affect only on wear */           return;
-        case APPLY_REMOVE:          SetBit( ch->affected_by, mod );    return;
+        case APPLY_AFFECT:
+	  RemoveBit( ch->affected_by, mod );
+	  return;
+
+        case APPLY_RESISTANT:
+	  RemoveBit( ch->resistant, mod );
+	  return;
+
+        case APPLY_IMMUNE:
+	  RemoveBit( ch->immune, mod );
+	  return;
+
+        case APPLY_SUSCEPTIBLE:
+	  RemoveBit( ch->susceptible, mod );
+	  return;
+
+        case APPLY_WEARSPELL:
+	  /* affect only on wear */
+	  return;
+
+        case APPLY_REMOVE:
+          SetBit( ch->affected_by, mod );
+	  return;
         }
+
       mod = 0 - mod;
     }
 
   switch ( paf->location % REVERSE_APPLY )
     {
     default:
-      Bug( "Affect_modify: unknown location %d.", paf->location );
+      Bug( "%s: unknown location %d.", __FUNCTION__, paf->location );
       return;
 
-    case APPLY_NONE:                                            break;
-    case APPLY_STR:           ch->stats.mod_str               += mod; break;
-    case APPLY_DEX:           ch->stats.mod_dex               += mod; break;
-    case APPLY_INT:           ch->stats.mod_int               += mod; break;
-    case APPLY_WIS:           ch->stats.mod_wis               += mod; break;
-    case APPLY_CON:           ch->stats.mod_con               += mod; break;
-    case APPLY_CHA:           ch->stats.mod_cha               += mod; break;
-    case APPLY_LCK:           ch->stats.mod_lck               += mod; break;
-    case APPLY_SEX:
-      ch->sex = (ch->sex+mod) % 3;
-      if ( ch->sex < 0 )
-        ch->sex += 2;
-      ch->sex = urange( 0, ch->sex, 2 );
+    case APPLY_NONE:
       break;
-    case APPLY_LEVEL:                                           break;
-    case APPLY_AGE:                                             break;
-    case APPLY_HEIGHT:        ch->height                += mod; break;
-    case APPLY_WEIGHT:        ch->weight                += mod; break;
-    case APPLY_MANA:          ch->max_mana              += mod; break;
-    case APPLY_HIT:           ch->max_hit               += mod; break;
-    case APPLY_MOVE:          ch->max_move              += mod; break;
-    case APPLY_GOLD:                                            break;
-    case APPLY_EXP:                                             break;
-    case APPLY_AC:            ch->armor                 += mod; break;
-    case APPLY_HITROLL:       ch->hitroll               += mod; break;
-    case APPLY_DAMROLL:       ch->damroll               += mod; break;
-    case APPLY_SAVING_POISON: ch->saving.poison_death   += mod; break;
-    case APPLY_SAVING_ROD:    ch->saving.wand           += mod; break;
-    case APPLY_SAVING_PARA:   ch->saving.para_petri     += mod; break;
-    case APPLY_SAVING_BREATH: ch->saving.breath         += mod; break;
-    case APPLY_SAVING_SPELL:  ch->saving.spell_staff    += mod; break;
-    case APPLY_AFFECT:        SetBit( ch->affected_by, mod );  break;
-    case APPLY_RESISTANT:     SetBit( ch->resistant, mod );    break;
-    case APPLY_IMMUNE:        SetBit( ch->immune, mod );       break;
-    case APPLY_SUSCEPTIBLE:   SetBit( ch->susceptible, mod );  break;
-    case APPLY_WEAPONSPELL:     /* see fight.c */               break;
-    case APPLY_REMOVE:        RemoveBit(ch->affected_by, mod); break;
+
+    case APPLY_STR:
+      ch->stats.mod_str += mod;
+      break;
+
+    case APPLY_DEX:
+      ch->stats.mod_dex += mod;
+      break;
+
+    case APPLY_INT:
+      ch->stats.mod_int += mod;
+      break;
+
+    case APPLY_WIS:
+      ch->stats.mod_wis += mod;
+      break;
+
+    case APPLY_CON:
+      ch->stats.mod_con += mod;
+      break;
+
+    case APPLY_CHA:
+      ch->stats.mod_cha += mod;
+      break;
+
+    case APPLY_LCK:
+      ch->stats.mod_lck += mod;
+      break;
+
+    case APPLY_SEX:
+      ch->sex = (ch->sex + mod) % 3;
+
+      if ( ch->sex < SEX_NEUTRAL )
+	{
+	  ch->sex += 2;
+	}
+
+      ch->sex = urange( SEX_NEUTRAL, ch->sex, SEX_FEMALE );
+      break;
+
+    case APPLY_LEVEL:
+      break;
+
+    case APPLY_AGE:
+      break;
+
+    case APPLY_HEIGHT:
+      ch->height += mod;
+      break;
+
+    case APPLY_WEIGHT:
+      ch->weight += mod;
+      break;
+
+    case APPLY_MANA:
+      ch->max_mana += mod;
+      break;
+
+    case APPLY_HIT:
+      ch->max_hit += mod;
+      break;
+
+    case APPLY_MOVE:
+      ch->max_move += mod;
+      break;
+
+    case APPLY_GOLD:
+      break;
+
+    case APPLY_EXP:
+      break;
+
+    case APPLY_AC:
+      ch->armor += mod;
+      break;
+
+    case APPLY_HITROLL:
+      ch->hitroll += mod;
+      break;
+
+    case APPLY_DAMROLL:
+      ch->damroll += mod;
+      break;
+
+    case APPLY_SAVING_POISON:
+      ch->saving.poison_death += mod;
+      break;
+
+    case APPLY_SAVING_ROD:
+      ch->saving.wand += mod;
+      break;
+
+    case APPLY_SAVING_PARA:
+      ch->saving.para_petri += mod;
+      break;
+
+    case APPLY_SAVING_BREATH:
+      ch->saving.breath += mod;
+      break;
+
+    case APPLY_SAVING_SPELL:
+      ch->saving.spell_staff += mod;
+      break;
+
+    case APPLY_AFFECT:
+      SetBit( ch->affected_by, mod );
+      break;
+
+    case APPLY_RESISTANT:
+      SetBit( ch->resistant, mod );
+      break;
+
+    case APPLY_IMMUNE:
+      SetBit( ch->immune, mod );
+      break;
+
+    case APPLY_SUSCEPTIBLE:
+      SetBit( ch->susceptible, mod );
+      break;
+
+    case APPLY_WEAPONSPELL:
+      /* see fight.c */
+      break;
+
+    case APPLY_REMOVE:
+      RemoveBit(ch->affected_by, mod);
+      break;
 
     case APPLY_FULL:
       if ( !IsNpc(ch) )
-        ch->pcdata->condition[COND_FULL] =
-          urange( 0, ch->pcdata->condition[COND_FULL] + mod, 48 );
+	{
+	  ch->pcdata->condition[COND_FULL] =
+	    urange( 0, ch->pcdata->condition[COND_FULL] + mod, 48 );
+	}
       break;
 
     case APPLY_THIRST:
       if ( !IsNpc(ch) )
-        ch->pcdata->condition[COND_THIRST] =
-          urange( 0, ch->pcdata->condition[COND_THIRST] + mod, 48 );
+	{
+	  ch->pcdata->condition[COND_THIRST] =
+	      urange( 0, ch->pcdata->condition[COND_THIRST] + mod, 48 );
+	}
       break;
 
     case APPLY_DRUNK:
       if ( !IsNpc(ch) )
-        ch->pcdata->condition[COND_DRUNK] =
-          urange( 0, ch->pcdata->condition[COND_DRUNK] + mod, 48 );
+	{
+	  ch->pcdata->condition[COND_DRUNK] =
+	    urange( 0, ch->pcdata->condition[COND_DRUNK] + mod, 48 );
+	}
       break;
 
     case APPLY_MENTALSTATE:
-      ch->mental_state  = urange(-100, ch->mental_state + mod, 100);
+      ch->mental_state = urange(-100, ch->mental_state + mod, 100);
       break;
+
     case APPLY_EMOTION:
-      ch->emotional_state       = urange(-100, ch->emotional_state + mod, 100);
+      ch->emotional_state = urange(-100, ch->emotional_state + mod, 100);
       break;
 
     case APPLY_STRIPSN:
       if ( IS_VALID_SN(mod) )
-        affect_strip( ch, mod );
+	{
+	  affect_strip( ch, mod );
+	}
       else
-        Bug( "affect_modify: APPLY_STRIPSN invalid sn %d", mod );
+	{
+	  Bug( "%s: APPLY_STRIPSN invalid sn %d", __FUNCTION__, mod );
+	}
       break;
 
       /* spell cast upon wear/removal of an object      -Thoric */
     case APPLY_WEARSPELL:
     case APPLY_REMOVESPELL:
       if ( IsBitSet(ch->in_room->room_flags, ROOM_NO_MAGIC)
-           ||   IsBitSet(ch->immune, RIS_MAGIC)
-           ||   saving_char == ch               /* so save/quit doesn't trigger */
-           ||   loading_char == ch )    /* so loading doesn't trigger */
-        return;
+           || IsBitSet(ch->immune, RIS_MAGIC)
+           || saving_char == ch               /* so save/quit doesn't trigger */
+           || loading_char == ch )    /* so loading doesn't trigger */
+	{
+	  return;
+	}
 
       mod = abs(mod);
-      if ( IS_VALID_SN(mod)
-           &&  (skill=skill_table[mod]) != NULL
-           &&   skill->type == SKILL_SPELL )
-        if ( (retcode=(*skill->spell_fun) ( mod, GetAbilityLevel( ch, FORCE_ABILITY ), ch, ch )) == rCHAR_DIED || char_died(ch) )
-          return;
-      break;
 
+      if ( IS_VALID_SN(mod)
+           && (skill = skill_table[mod]) != NULL
+           && skill->type == SKILL_SPELL )
+	{
+	  if ( (retcode=skill->spell_fun( mod, GetAbilityLevel( ch, FORCE_ABILITY ), ch, ch ) )
+	       == rCHAR_DIED || char_died(ch) )
+	    {
+	      return;
+	    }
+	}
+
+      break;
 
       /* skill apply types      -Thoric */
 
-    case APPLY_PALM:    /* not implemented yet */               break;
+    case APPLY_PALM:
+      /* not implemented yet */
+      break;
+
     case APPLY_TRACK:
-      if ( !IsNpc(ch) && ch->pcdata->learned[gsn_track]> 0 )
-        ch->pcdata->learned[gsn_track] =
-          ( ch->pcdata->learned[gsn_track] >= 100 ? 100 : urange( 1, ch->pcdata->learned[gsn_track] + mod, 100 ) );
+      ApplySkillAffect( ch, gsn_track, mod );
       break;
+
     case APPLY_HIDE:
-      if ( !IsNpc(ch) && ch->pcdata->learned[gsn_hide]> 0)
-        ch->pcdata->learned[gsn_hide] =
-          ( ch->pcdata->learned[gsn_hide] >= 100 ? 100 : urange( 1, ch->pcdata->learned[gsn_hide] + mod, 100 ) );
+      ApplySkillAffect( ch, gsn_hide, mod );
       break;
+
     case APPLY_STEAL:
-      if ( !IsNpc(ch) && ch->pcdata->learned[gsn_steal] > 0)
-        ch->pcdata->learned[gsn_steal] =
-          ( ch->pcdata->learned[gsn_steal] >= 100 ? 100 : urange( 1, ch->pcdata->learned[gsn_steal] + mod, 100 ) );
+      ApplySkillAffect( ch, gsn_steal, mod );
       break;
+
     case APPLY_SNEAK:
-      if ( !IsNpc(ch) && ch->pcdata->learned[gsn_sneak]> 0)
-        ch->pcdata->learned[gsn_sneak] =
-          ( ch->pcdata->learned[gsn_sneak] >= 100 ? 100 : urange( 1, ch->pcdata->learned[gsn_sneak] + mod, 100 ) );
+      ApplySkillAffect( ch, gsn_sneak, mod );
       break;
+
     case APPLY_PICK:
-      if ( !IsNpc(ch) && ch->pcdata->learned[gsn_pick_lock]> 0)
-        ch->pcdata->learned[gsn_pick_lock] =
-          ( ch->pcdata->learned[gsn_pick_lock] >= 100 ? 100 : urange( 1, ch->pcdata->learned[gsn_pick_lock] + mod, 100 ) );
+      ApplySkillAffect( ch, gsn_pick_lock, mod );
       break;
+
     case APPLY_BACKSTAB:
-      if ( !IsNpc(ch) && ch->pcdata->learned[gsn_backstab]> 0)
-        ch->pcdata->learned[gsn_backstab] =
-          ( ch->pcdata->learned[gsn_backstab] >= 100 ? 100 : urange( 1, ch->pcdata->learned[gsn_backstab] + mod, 100 ) );
+      ApplySkillAffect( ch, gsn_backstab, mod );
       break;
+
     case APPLY_DETRAP:
-      if ( !IsNpc(ch) && ch->pcdata->learned[gsn_detrap]> 0)
-        ch->pcdata->learned[gsn_detrap] =
-          ( ch->pcdata->learned[gsn_detrap] >= 100 ? 100 : urange( 1, ch->pcdata->learned[gsn_detrap] + mod, 100 ) );
+      ApplySkillAffect( ch, gsn_detrap, mod );
       break;
+
     case APPLY_DODGE:
-      if ( !IsNpc(ch) && ch->pcdata->learned[gsn_dodge]> 0)
-        ch->pcdata->learned[gsn_dodge] =
-          ( ch->pcdata->learned[gsn_dodge] >= 100 ? 100 : urange( 1, ch->pcdata->learned[gsn_dodge] + mod, 100 ) );
+      ApplySkillAffect( ch, gsn_dodge, mod );
       break;
+
     case APPLY_PEEK:
-      if ( !IsNpc(ch) && ch->pcdata->learned[gsn_peek]> 0)
-        ch->pcdata->learned[gsn_peek] =
-          ( ch->pcdata->learned[gsn_peek] >= 100 ? 100 : urange( 1, ch->pcdata->learned[gsn_peek] + mod, 100 ) );
+      ApplySkillAffect( ch, gsn_peek, mod );
       break;
+
     case APPLY_SCAN:
-      if ( !IsNpc(ch) && ch->pcdata->learned[gsn_scan]> 0)
-        ch->pcdata->learned[gsn_scan] =
-          ( ch->pcdata->learned[gsn_scan] >= 100 ? 100 : urange( 1, ch->pcdata->learned[gsn_scan] + mod, 100 ) );
+      ApplySkillAffect( ch, gsn_scan, mod );
       break;
+
     case APPLY_GOUGE:
-      if ( !IsNpc(ch) && ch->pcdata->learned[gsn_gouge]> 0)
-        ch->pcdata->learned[gsn_gouge] =
-          ( ch->pcdata->learned[gsn_gouge] >= 100 ? 100 : urange( 1, ch->pcdata->learned[gsn_gouge] + mod, 100 ) );
+      ApplySkillAffect( ch, gsn_gouge, mod );
       break;
+
     case APPLY_SEARCH:
-      if ( !IsNpc(ch) && ch->pcdata->learned[gsn_search]> 0)
-        ch->pcdata->learned[gsn_search] =
-          ( ch->pcdata->learned[gsn_search] >= 100 ? 100 : urange( 1, ch->pcdata->learned[gsn_search] + mod, 100 ) );
+      ApplySkillAffect( ch, gsn_search, mod );
       break;
+
     case APPLY_DIG:
-      if ( !IsNpc(ch) && ch->pcdata->learned[gsn_dig]> 0)
-        ch->pcdata->learned[gsn_dig] =
-          ( ch->pcdata->learned[gsn_dig] >= 100 ? 100 : urange( 1, ch->pcdata->learned[gsn_dig] + mod, 100 ) );
+      ApplySkillAffect( ch, gsn_dig, mod );
       break;
+
     case APPLY_MOUNT:
-      if ( !IsNpc(ch) && ch->pcdata->learned[gsn_mount]> 0 )
-        ch->pcdata->learned[gsn_mount] =
-          ( ch->pcdata->learned[gsn_mount] >= 100 ? 100 : urange( 1, ch->pcdata->learned[gsn_mount] + mod, 100 ) );
+      ApplySkillAffect( ch, gsn_mount, mod );
       break;
+
     case APPLY_DISARM:
-      if ( !IsNpc(ch) && ch->pcdata->learned[gsn_disarm]> 0 )
-        ch->pcdata->learned[gsn_disarm] =
-          ( ch->pcdata->learned[gsn_disarm] >= 100 ? 100 : urange( 1, ch->pcdata->learned[gsn_disarm] + mod, 100 ) );
+      ApplySkillAffect( ch, gsn_disarm, mod );
       break;
+
     case APPLY_KICK:
-      if ( !IsNpc(ch) && ch->pcdata->learned[gsn_kick]> 0)
-        ch->pcdata->learned[gsn_kick] =
-          ( ch->pcdata->learned[gsn_kick] >= 100 ? 100 : urange( 1, ch->pcdata->learned[gsn_kick] + mod, 100 ) );
+      ApplySkillAffect( ch, gsn_kick, mod );
       break;
+
     case APPLY_PARRY:
-      if ( !IsNpc(ch) && ch->pcdata->learned[gsn_parry]> 0)
-        ch->pcdata->learned[gsn_parry] =
-          ( ch->pcdata->learned[gsn_parry] >= 100 ? 100 : urange( 1, ch->pcdata->learned[gsn_parry] + mod, 100 ) );
+      ApplySkillAffect( ch, gsn_parry, mod );
       break;
+
     case APPLY_BASH:
-      if ( !IsNpc(ch) && ch->pcdata->learned[gsn_bash]> 0)
-        ch->pcdata->learned[gsn_bash] =
-          ( ch->pcdata->learned[gsn_bash] >= 100 ? 100 : urange( 1, ch->pcdata->learned[gsn_bash] + mod, 100 ) );
+      ApplySkillAffect( ch, gsn_bash, mod );
       break;
+
     case APPLY_STUN:
-      if ( !IsNpc(ch) && ch->pcdata->learned[gsn_stun]> 0)
-        ch->pcdata->learned[gsn_stun] =
-          ( ch->pcdata->learned[gsn_stun] >= 100 ? 100 : urange( 1, ch->pcdata->learned[gsn_stun] + mod, 100 ) );
+      ApplySkillAffect( ch, gsn_stun, mod );
       break;
+
     case APPLY_PUNCH:
-      if ( !IsNpc(ch) && ch->pcdata->learned[gsn_punch]> 0)
-        ch->pcdata->learned[gsn_punch] =
-          ( ch->pcdata->learned[gsn_punch] >= 100 ? 100 : urange( 1, ch->pcdata->learned[gsn_punch] + mod, 100 ) );
+      ApplySkillAffect( ch, gsn_punch, mod );
       break;
+
     case APPLY_CLIMB:
-      if ( !IsNpc(ch) && ch->pcdata->learned[gsn_climb]> 0)
-        ch->pcdata->learned[gsn_climb] =
-          ( ch->pcdata->learned[gsn_climb] >= 100 ? 100 : urange( 1, ch->pcdata->learned[gsn_climb] + mod, 100 ) );
+      ApplySkillAffect( ch, gsn_climb, mod );
       break;
+
     case APPLY_GRIP:
-      if ( !IsNpc(ch) && ch->pcdata->learned[gsn_grip]> 0)
-        ch->pcdata->learned[gsn_grip] =
-          ( ch->pcdata->learned[gsn_grip] >= 100 ? 100 : urange( 1, ch->pcdata->learned[gsn_grip] + mod, 100 ) );
+      ApplySkillAffect( ch, gsn_grip, mod );
       break;
+
     case APPLY_SNIPE:
-      if ( !IsNpc(ch) && ch->pcdata->learned[gsn_snipe]> 0)
-        ch->pcdata->learned[gsn_snipe] =
-          ( ch->pcdata->learned[gsn_snipe] >= 100 ? 100 : urange( 1, ch->pcdata->learned[gsn_snipe] + mod, 100 ) );
+      ApplySkillAffect( ch, gsn_snipe, mod );
       break;
     }
 
@@ -458,9 +576,9 @@ void affect_modify( Character *ch, Affect *paf, bool fAdd )
    * Guard against recursion (for weapons with affects).
    */
   if ( !IsNpc( ch )
-       &&   saving_char != ch
+       && saving_char != ch
        && ( wield = GetEquipmentOnCharacter( ch, WEAR_WIELD ) ) != NULL
-       &&   get_obj_weight(wield) > str_app[GetCurrentStrength(ch)].wield )
+       && get_obj_weight(wield) > str_app[GetCurrentStrength(ch)].wield )
     {
       static int depth;
 
@@ -475,8 +593,6 @@ void affect_modify( Character *ch, Affect *paf, bool fAdd )
         }
     }
 }
-
-
 
 /*
  * Give an affect to a char.
