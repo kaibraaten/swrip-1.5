@@ -56,19 +56,19 @@ void do_flee( Character *ch, char *argument )
       MoveCharacter( ch, pexit, 0 );
 
       MobProgEntryTrigger( ch );
-      if ( char_died(ch) )
+      if ( CharacterDiedRecently(ch) )
         return;
 
       rprog_enter_trigger( ch );
-      if ( char_died(ch) )
+      if ( CharacterDiedRecently(ch) )
         return;
 
       MobProgGreetTrigger( ch );
-      if ( char_died(ch) )
+      if ( CharacterDiedRecently(ch) )
         return;
 
       oprog_greet_trigger( ch );
-      if ( char_died(ch) )
+      if ( CharacterDiedRecently(ch) )
         return;
 
       if ( ( now_in = ch->in_room ) == was_in )

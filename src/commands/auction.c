@@ -47,7 +47,7 @@ void do_auction (Character *ch, char *argument)
           sprintf( buf,
                    "Object '%s' is %s, special properties: %s %s.\r\nIts weight is %d, value is %d.\r\n",
                    obj->name,
-                   AOrAn( item_type_name( obj ) ),
+                   AOrAn( GetItemTypeName( obj ) ),
                    FlagString( obj->extra_flags, object_flags ),
                    FlagString( obj->magic_flags, mag_flags ),
                    obj->weight,
@@ -71,10 +71,10 @@ void do_auction (Character *ch, char *argument)
             }
 
           for ( paf = obj->Prototype->first_affect; paf; paf = paf->next )
-	    showaffect( ch, paf );
+	    ShowAffectToCharacter( ch, paf );
 
           for ( paf = obj->first_affect; paf; paf = paf->next )
-            showaffect( ch, paf );
+            ShowAffectToCharacter( ch, paf );
           if ( ( obj->item_type == ITEM_CONTAINER ) && ( obj->first_content ) )
             {
               SetCharacterColor( AT_OBJECT, ch );
@@ -247,7 +247,7 @@ void do_auction (Character *ch, char *argument)
       switch (obj->item_type)
 	{
 	default:
-	  Act(AT_TELL, "You cannot auction $Ts.",ch, NULL, item_type_name (obj), TO_CHAR);
+	  Act(AT_TELL, "You cannot auction $Ts.",ch, NULL, GetItemTypeName (obj), TO_CHAR);
 	  return;
 
 	  /* insert any more item types here... items with a timer MAY NOT BE

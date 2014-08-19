@@ -99,7 +99,7 @@ void do_for(Character *ch, char *argument)
           /*    p_next = p->next; */ /* In case someone DOES try to AT MOBS SLAY # */
           found = false;
 
-          if (!(p->in_room) || room_is_private(p, p->in_room) || (p == ch))
+          if (!(p->in_room) || IsRoomPrivate(p, p->in_room) || (p == ch))
             continue;
 
           if (IsNpc(p) && fMobs)
@@ -174,7 +174,7 @@ void do_for(Character *ch, char *argument)
                   found = true;
 	      } /* for everyone inside the room */
 
-            if (found && !room_is_private(p, room)) /* Any of the required type here AND room not private? */
+            if (found && !IsRoomPrivate(p, room)) /* Any of the required type here AND room not private? */
               {
                 /* This may be ineffective. Consider moving character out of old_room
                    once at beginning of command then moving back at the end.

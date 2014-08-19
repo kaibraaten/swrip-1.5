@@ -91,7 +91,7 @@ void do_empty( Character *ch, char *argument )
         }
       else
         {
-          Object *dest = get_obj_here( ch, arg2 );
+          Object *dest = GetObjectHere( ch, arg2 );
 
           if ( !dest )
             {

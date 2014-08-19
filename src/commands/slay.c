@@ -16,7 +16,7 @@ void do_slay( Character *ch, char *argument )
       return;
     }
 
-  if ( ( victim = get_char_room( ch, arg ) ) == NULL )
+  if ( ( victim = GetCharacterInRoom( ch, arg ) ) == NULL )
     {
       SendToCharacter( "They aren't here.\r\n", ch );
       return;
@@ -75,6 +75,6 @@ void do_slay( Character *ch, char *argument )
       Act( AT_IMMORT, "$n slays $N in cold blood!",  ch, NULL, victim, TO_NOTVICT );
     }
 
-  set_cur_char(victim);
+  SetCurrentGlobalCharacter(victim);
   RawKill( ch, victim );
 }

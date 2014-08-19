@@ -33,7 +33,7 @@ void do_order( Character *ch, char *argument )
     }
   else
     {
-      if ( ( victim = get_char_room( ch, arg ) ) == NULL )
+      if ( ( victim = GetCharacterInRoom( ch, arg ) ) == NULL )
         {
           SendToCharacter( "They aren't here.\r\n", ch );
           return;

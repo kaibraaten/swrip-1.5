@@ -32,7 +32,7 @@ void do_mpapplyb( Character *ch, char *argument )
   if( IsAuthed(victim) )
     return;
 
-  if ( get_timer(victim, TIMER_APPLIED) >= 1)
+  if ( GetTimer(victim, TIMER_APPLIED) >= 1)
     return;
 
   switch( victim->pcdata->auth_state )
@@ -46,13 +46,13 @@ void do_mpapplyb( Character *ch, char *argument )
                RaceTable[victim->race].race_name);
       log_string( log_buf );
       ToChannel( log_buf, CHANNEL_MONITOR, "Monitor", LEVEL_IMMORTAL );
-      add_timer(victim, TIMER_APPLIED, 10, NULL, SUB_NONE);
+      AddTimerToCharacter(victim, TIMER_APPLIED, 10, NULL, SUB_NONE);
       victim->pcdata->auth_state = 1;
       break;
 
     case 2:
       SendToCharacter("Your name has been deemed unsuitable by the gods. Please choose a more apropriate name with the 'name' command.\r\n", victim);
-      add_timer(victim, TIMER_APPLIED, 10, NULL, SUB_NONE);
+      AddTimerToCharacter(victim, TIMER_APPLIED, 10, NULL, SUB_NONE);
       break;
 
     case 3:

@@ -16,7 +16,7 @@ void do_pull( Character *ch, char *argument )
   if ( ms_find_obj(ch) )
     return;
 
-  if ( ( obj = get_obj_here( ch, arg ) ) == NULL )
+  if ( ( obj = GetObjectHere( ch, arg ) ) == NULL )
     {
       Act( AT_PLAIN, "I see no $T here.", ch, NULL, arg, TO_CHAR );
       return;

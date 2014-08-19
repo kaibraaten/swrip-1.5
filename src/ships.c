@@ -952,7 +952,7 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
       return rNONE;
     }
 
-  if ( room_is_private( ch, to_room ) )
+  if ( IsRoomPrivate( ch, to_room ) )
     {
       SendToCharacter( "That room is private right now.\r\n", ch );
       return rNONE;

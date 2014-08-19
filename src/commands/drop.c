@@ -114,7 +114,7 @@ void do_drop( Character *ch, char *argument )
       obj = ObjectToRoom( obj, ch->in_room );
       oprog_drop_trigger ( ch, obj );   /* mudprogs */
 
-      if( char_died(ch) || obj_extracted(obj) )
+      if( CharacterDiedRecently(ch) || IsObjectExtracted(obj) )
         return;
 
       /* Clan storeroom saving */
@@ -173,7 +173,7 @@ void do_drop( Character *ch, char *argument )
               Act( AT_ACTION, "You drop $p.", ch, obj, NULL, TO_CHAR );
               obj = ObjectToRoom( obj, ch->in_room );
               oprog_drop_trigger( ch, obj );            /* mudprogs */
-              if ( char_died(ch) )
+              if ( CharacterDiedRecently(ch) )
                 return;
               if ( number && cnt >= number )
                 break;

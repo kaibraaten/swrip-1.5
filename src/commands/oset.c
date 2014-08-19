@@ -68,7 +68,7 @@ void do_oset( Character *ch, char *argument )
 
       obj = (Object*)ch->dest_buf;
 
-      if ( obj && obj_extracted(obj) )
+      if ( obj && IsObjectExtracted(obj) )
         {
           SendToCharacter( "Your object was extracted!\r\n", ch );
           StopEditing( ch );
@@ -98,7 +98,7 @@ void do_oset( Character *ch, char *argument )
     {
       obj = (Object*)ch->dest_buf;
 
-      if ( obj && obj_extracted(obj) )
+      if ( obj && IsObjectExtracted(obj) )
         {
           SendToCharacter( "Your object was extracted!\r\n", ch );
           obj = NULL;
@@ -176,7 +176,7 @@ void do_oset( Character *ch, char *argument )
 
   if ( !obj && GetTrustLevel(ch) <= LEVEL_IMMORTAL )
     {
-      if ( ( obj = get_obj_here( ch, arg1 ) ) == NULL )
+      if ( ( obj = GetObjectHere( ch, arg1 ) ) == NULL )
         {
           SendToCharacter( "You can't find that here.\r\n", ch );
           return;
@@ -185,7 +185,7 @@ void do_oset( Character *ch, char *argument )
   else
     if ( !obj )
       {
-        if ( ( obj = get_obj_world( ch, arg1 ) ) == NULL )
+        if ( ( obj = GetObjectAnywhere( ch, arg1 ) ) == NULL )
           {
             SendToCharacter( "There is nothing like that in all the realms.\r\n", ch );
             return;

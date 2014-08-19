@@ -175,7 +175,7 @@ void do_oldscore( Character *ch, char *argument )
             if ( ch->top_level >= 20 )
               ChPrintf( ch,
                          " modifies %s by %d for %d rounds",
-                         affect_loc_name( paf->location ),
+                         GetAffectLocationName( paf->location ),
                          paf->modifier,
                          paf->duration );
 

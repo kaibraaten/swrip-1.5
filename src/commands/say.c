@@ -52,12 +52,12 @@ void do_say( Character *ch, char *argument )
 
   MobProgSpeechTrigger( argument, ch );
 
-  if ( char_died(ch) )
+  if ( CharacterDiedRecently(ch) )
     return;
 
   oprog_speech_trigger( argument, ch );
 
-  if ( char_died(ch) )
+  if ( CharacterDiedRecently(ch) )
     return;
 
   rprog_speech_trigger( argument, ch );

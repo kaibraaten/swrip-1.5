@@ -111,7 +111,7 @@ void do_bashdoor( Character *ch, char *argument )
       LearnFromFailure(ch, gsn_bashdoor);
     }
 
-  if ( !char_died( ch ) )
+  if ( !CharacterDiedRecently( ch ) )
     {
       for ( gch = ch->in_room->first_person; gch; gch = gch->next_in_room )
 	{

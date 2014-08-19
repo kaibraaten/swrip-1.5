@@ -38,7 +38,7 @@ void do_addsalary ( Character *ch , char *argument )
       return;
     }
 
-  if ( ( victim = get_char_world( ch, arg ) ) == NULL )
+  if ( ( victim = GetCharacterAnywhere( ch, arg ) ) == NULL )
     {
       SendToCharacter( "That player is not here.\r\n", ch);
       return;

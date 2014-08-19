@@ -7,7 +7,7 @@ void do_challenge(Character *ch, char *argument)
   Character *victim;
   char buf[MAX_INPUT_LENGTH];
 
-  if ( ( victim = get_char_world( ch, argument ) ) == NULL)
+  if ( ( victim = GetCharacterAnywhere( ch, argument ) ) == NULL)
     {
       SendToCharacter("&WThat character is not of these realms!\r\n",ch);
       return;
@@ -44,7 +44,7 @@ void do_challenge(Character *ch, char *argument)
       return;
     }
 
-  if (get_timer(victim,TIMER_PKILLED)>0)
+  if (GetTimer(victim,TIMER_PKILLED)>0)
     {
       SendToCharacter("&WThat player has died within the last 5 minutes and cannot be challenged!\r\n",ch);
       return;
@@ -56,7 +56,7 @@ void do_challenge(Character *ch, char *argument)
       return;
     }
 
-  if (get_timer(ch,TIMER_PKILLED)>0)
+  if (GetTimer(ch,TIMER_PKILLED)>0)
     {
       SendToCharacter("&WYou have died within the last 5 minutes and cannot challenge anyone.\r\n",ch);
       return;

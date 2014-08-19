@@ -1534,7 +1534,7 @@ void ResetArea( Area *pArea )
 	      }
           }
 
-          if ( room_is_dark(pRoomIndex) )
+          if ( IsRoomDark(pRoomIndex) )
 	    {
 	      SetBit(mob->affected_by, AFF_INFRARED);
 	    }
@@ -1664,7 +1664,7 @@ void ResetArea( Area *pArea )
                 }
 
               if ( pArea->nplayer > 0 ||
-                   !(to_obj = get_obj_type(pObjToIndex)) ||
+                   !(to_obj = GetInstanceOfObject(pObjToIndex)) ||
                    !to_obj->in_room ||
                    CountOccurancesOfObjectInList(pObjIndex, to_obj->first_content) > 0 )
                 {
@@ -1725,9 +1725,9 @@ void ResetArea( Area *pArea )
                     }
 
                   if ( pArea->nplayer > 0 ||
-                       !(to_obj = get_obj_type(pObjToIndex)) ||
+                       !(to_obj = GetInstanceOfObject(pObjToIndex)) ||
                        (to_obj->carried_by && !IsNpc(to_obj->carried_by)) ||
-                       is_trapped(to_obj) )
+                       IsObjectTrapped(to_obj) )
 		    {
 		      break;
 		    }
@@ -1791,7 +1791,7 @@ void ResetArea( Area *pArea )
                 }
 
               if ( pArea->nplayer > 0 ||
-                   !(to_obj = get_obj_type(pObjToIndex)) ||
+                   !(to_obj = GetInstanceOfObject(pObjToIndex)) ||
                    !to_obj->in_room ||
                    to_obj->in_room->area != pArea ||
                    IS_OBJ_STAT(to_obj, ITEM_HIDDEN) )
@@ -1874,7 +1874,7 @@ void ResetArea( Area *pArea )
                       continue;
                     }
 
-                  if ( !(to_obj = get_obj_type(pObjToIndex)) ||
+                  if ( !(to_obj = GetInstanceOfObject(pObjToIndex)) ||
                        !to_obj->in_room ||
                        to_obj->in_room->area != pArea )
 		    {

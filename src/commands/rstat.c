@@ -66,7 +66,7 @@ void do_rstat( Character *ch, char *argument )
       return;
     }
 
-  if ( ch->in_room != location && room_is_private( ch, location ) )
+  if ( ch->in_room != location && IsRoomPrivate( ch, location ) )
     {
       if ( GetTrustLevel( ch ) < LEVEL_GREATER )
         {

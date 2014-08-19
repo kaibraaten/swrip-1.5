@@ -63,7 +63,7 @@ void do_pick( Character *ch, char *argument )
         {
           SendToCharacter( "You failed.\r\n", ch );
           LearnFromFailure( ch, gsn_pick_lock );
-          check_room_for_traps( ch, TRAP_PICK | trap_door[pexit->vdir] );
+          CheckRoomForTraps( ch, TRAP_PICK | trap_door[pexit->vdir] );
           return;
         }
 
@@ -84,11 +84,11 @@ void do_pick( Character *ch, char *argument )
         {
           RemoveBit( pexit_rev->exit_info, EX_LOCKED );
         }
-      check_room_for_traps( ch, TRAP_PICK | trap_door[pexit->vdir] );
+      CheckRoomForTraps( ch, TRAP_PICK | trap_door[pexit->vdir] );
       return;
     }
 
-  if ( ( obj = get_obj_here( ch, arg ) ) != NULL )
+  if ( ( obj = GetObjectHere( ch, arg ) ) != NULL )
     {
       if ( obj->item_type != ITEM_CONTAINER )
         { SendToCharacter( "You can't pick that.\r\n", ch ); return; }
@@ -102,7 +102,7 @@ void do_pick( Character *ch, char *argument )
         {
           SendToCharacter( "You failed.\r\n", ch );
           LearnFromFailure( ch, gsn_pick_lock );
-          check_for_trap( ch, obj, TRAP_PICK );
+          CheckObjectForTrap( ch, obj, TRAP_PICK );
           return;
         }
 
@@ -118,7 +118,7 @@ void do_pick( Character *ch, char *argument )
       SendToCharacter( "*Click*\r\n", ch );
       Act( AT_ACTION, "$n picks $p.", ch, obj, NULL, TO_ROOM );
       LearnFromSuccess( ch, gsn_pick_lock );
-      check_for_trap( ch, obj, TRAP_PICK );
+      CheckObjectForTrap( ch, obj, TRAP_PICK );
       return;
     }
 

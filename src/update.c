@@ -833,7 +833,7 @@ void mobile_update( void )
   /* Examine all mobs. */
   for ( ch = last_char; ch; ch = gch_prev )
     {
-      set_cur_char( ch );
+      SetCurrentGlobalCharacter( ch );
 
       if ( ch == first_char && ch->prev )
         {
@@ -938,7 +938,7 @@ void mobile_update( void )
 	      continue;
 	    }
 
-          if ( char_died(ch) )
+          if ( CharacterDiedRecently(ch) )
 	    {
 	      continue;
 	    }
@@ -952,7 +952,7 @@ void mobile_update( void )
 	      continue;
 	    }
 
-          if ( char_died(ch) )
+          if ( CharacterDiedRecently(ch) )
 	    {
 	      continue;
 	    }
@@ -998,7 +998,7 @@ void mobile_update( void )
         {
           MobProgRandomTrigger( ch );
 
-          if ( char_died(ch) )
+          if ( CharacterDiedRecently(ch) )
 	    {
 	      continue;
 	    }
@@ -1012,14 +1012,14 @@ void mobile_update( void )
       /* MOBprogram hour trigger: do something for an hour */
       MobProgHourTrigger(ch);
 
-      if ( char_died(ch) )
+      if ( CharacterDiedRecently(ch) )
 	{
 	  continue;
 	}
 
       rprog_hour_trigger(ch);
 
-      if ( char_died(ch) )
+      if ( CharacterDiedRecently(ch) )
 	{
 	  continue;
 	}
@@ -1074,7 +1074,7 @@ void mobile_update( void )
              to it's or someother mob's
              movement via MOBProgs,
              continue - Kahn */
-          if ( char_died(ch) )
+          if ( CharacterDiedRecently(ch) )
 	    {
 	      continue;
 	    }
@@ -1395,7 +1395,7 @@ void char_update( void )
         }
 
       gch_prev = ch->prev;
-      set_cur_char( ch );
+      SetCurrentGlobalCharacter( ch );
 
       if ( gch_prev && gch_prev->next != ch )
         {
@@ -1410,18 +1410,18 @@ void char_update( void )
       if(!IsNpc(ch))
         rprog_random_trigger( ch );
 
-      if( char_died(ch) )
+      if( CharacterDiedRecently(ch) )
         continue;
 
       if(IsNpc(ch))
         MobProgTimeTrigger(ch);
 
-      if( char_died(ch) )
+      if( CharacterDiedRecently(ch) )
         continue;
 
       rprog_time_trigger(ch);
 
-      if( char_died(ch) )
+      if( CharacterDiedRecently(ch) )
         continue;
 
       /*
@@ -1579,7 +1579,7 @@ void char_update( void )
 	    }
         }
 
-      if ( !char_died(ch) )
+      if ( !CharacterDiedRecently(ch) )
         {
           /*
            * Careful with the damages here,
@@ -1603,7 +1603,7 @@ void char_update( void )
 	      InflictDamage( ch, ch, 4, TYPE_UNDEFINED );
 	    }
 
-          if ( char_died(ch) )
+          if ( CharacterDiedRecently(ch) )
 	    {
 	      continue;
 	    }
@@ -1804,7 +1804,7 @@ void obj_update( void )
           return;
         }
 
-      set_cur_obj( obj );
+      SetCurrentGlobalObject( obj );
 
       if ( obj->carried_by )
 	{
@@ -1815,7 +1815,7 @@ void obj_update( void )
 	  oprog_random_trigger( obj );
 	}
 
-      if( obj_extracted(obj) )
+      if( IsObjectExtracted(obj) )
 	{
 	  continue;
 	}
@@ -2095,11 +2095,11 @@ void char_check( void )
       DirectionType door = DIR_INVALID;
       int retcode = rNONE;
 
-      set_cur_char(ch);
+      SetCurrentGlobalCharacter(ch);
       ch_next = ch->next;
       CharacterFallIfNoFloor(ch, 0);
 
-      if ( char_died( ch ) )
+      if ( CharacterDiedRecently( ch ) )
 	{
 	  continue;
 	}
@@ -2129,7 +2129,7 @@ void char_check( void )
 		      continue;
 		    }
 
-                  if ( char_died(ch) )
+                  if ( CharacterDiedRecently(ch) )
 		    {
 		      continue;
 		    }
@@ -2142,7 +2142,7 @@ void char_check( void )
 		      continue;
 		    }
 
-                  if ( char_died(ch) )
+                  if ( CharacterDiedRecently(ch) )
 		    {
 		      continue;
 		    }
@@ -2160,7 +2160,7 @@ void char_check( void )
                 {
                   retcode = MoveCharacter( ch, pexit, 0 );
 
-                  if ( char_died(ch) )
+                  if ( CharacterDiedRecently(ch) )
 		    {
 		      continue;
 		    }
@@ -2211,7 +2211,7 @@ void char_check( void )
                 }
             }
 
-          if ( char_died( ch ) )
+          if ( CharacterDiedRecently( ch ) )
 	    {
 	      continue;
 	    }
@@ -2284,18 +2284,18 @@ void aggr_update( void )
     {
       wch = (Character*)mob_act_list->vo;
 
-      if ( !char_died(wch) && wch->mprog.mpactnum > 0 )
+      if ( !CharacterDiedRecently(wch) && wch->mprog.mpactnum > 0 )
         {
           MPROG_ACT_LIST * tmp_act = NULL;
 
           while ( (tmp_act = wch->mprog.mpact) != NULL )
             {
-              if ( tmp_act->obj && obj_extracted(tmp_act->obj) )
+              if ( tmp_act->obj && IsObjectExtracted(tmp_act->obj) )
 		{
 		  tmp_act->obj = NULL;
 		}
 
-              if ( tmp_act->ch && !char_died(tmp_act->ch) )
+              if ( tmp_act->ch && !CharacterDiedRecently(tmp_act->ch) )
 		{
 		  MudProgWordlistCheck( tmp_act->buf, wch, tmp_act->ch,
 					tmp_act->obj, tmp_act->vo, ACT_PROG );
@@ -2344,7 +2344,7 @@ void aggr_update( void )
               continue;
             }
 
-          if ( char_died(wch)
+          if ( CharacterDiedRecently(wch)
                || wch->top_level >= LEVEL_IMMORTAL
                || !wch->in_room
                || !CanSeeCharacter( ch, wch ) )
@@ -2365,7 +2365,7 @@ void aggr_update( void )
               continue;
             }
 
-          if ( get_timer(victim, TIMER_RECENTFIGHT) > 0 )
+          if ( GetTimer(victim, TIMER_RECENTFIGHT) > 0 )
 	    {
 	      continue;
 	    }
@@ -2711,8 +2711,8 @@ void update_handler( void )
   aggr_update();
   obj_act_update();
   room_act_update();
-  CleanObject_queue();            /* dispose of extracted objects */
-  clean_char_queue();           /* dispose of dead mobs/quitting chars */
+  CleanObjectQueue();            /* dispose of extracted objects */
+  CleanCharacterQueue();           /* dispose of dead mobs/quitting chars */
 
   if ( timechar )
     {
@@ -2912,7 +2912,7 @@ void auction_update (void)
               auction->buyer, auction->item, NULL, TO_ROOM);
 
           if ( (auction->buyer->carry_weight
-                + get_obj_weight( auction->item ))
+                + GetObjectWeight( auction->item ))
                > GetCarryCapacityWeight( auction->buyer ) )
             {
               Act( AT_PLAIN, "$p is too heavy for you to carry with your current inventory.", auction->buyer, auction->item, NULL, TO_CHAR );
@@ -2950,7 +2950,7 @@ void auction_update (void)
                auction->seller,auction->item,NULL,TO_ROOM);
 
           if ( (auction->seller->carry_weight
-                + get_obj_weight( auction->item ))
+                + GetObjectWeight( auction->item ))
                > GetCarryCapacityWeight( auction->seller ) )
             {
               Act( AT_PLAIN, "You drop $p as it is just too much to carry"

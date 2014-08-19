@@ -148,7 +148,7 @@ static void map_exits( Character *ch, Room *pRoom,
   map[x][y].vnum = pRoom->vnum;
   map[x][y].depth = depth;
   map[x][y].info = pRoom->room_flags;
-  map[x][y].CanSeeCharacter = room_is_dark( pRoom );
+  map[x][y].CanSeeCharacter = IsRoomDark( pRoom );
 
   /* Limit recursion */
   if ( depth > MAXDEPTH )

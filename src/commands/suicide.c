@@ -40,6 +40,6 @@ void do_suicide( Character *ch, char *argument )
   sprintf( logbuf , "%s just committed suicide." , ch->name );
   log_string( logbuf );
 
-  set_cur_char(ch);
+  SetCurrentGlobalCharacter(ch);
   RawKill( ch, ch );
 }

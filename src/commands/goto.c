@@ -59,7 +59,7 @@ void do_goto( Character *ch, char *argument )
       SendToCharacter( "Waving your hand, you form order from swirling chaos,\r\nand step into a new reality...\r\n", ch );
     }
 
-  if ( room_is_private(ch, location ) )
+  if ( IsRoomPrivate(ch, location ) )
     {
       SendToCharacter( "Overriding private flag!\r\n", ch );
     }

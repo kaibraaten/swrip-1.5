@@ -153,7 +153,7 @@ bool CheckSkill( Character *ch, const char *command, char *argument )
               return true;
             }
           else  if ( argument[0] != '\0'
-		     && (victim=get_char_room(ch, argument)) == NULL )
+		     && (victim=GetCharacterInRoom(ch, argument)) == NULL )
 	    {
 	      SendToCharacter( "They aren't here.\r\n", ch );
 	      return true;
@@ -169,7 +169,7 @@ bool CheckSkill( Character *ch, const char *command, char *argument )
 
         case TAR_CHAR_DEFENSIVE:
           if ( argument[0] != '\0'
-               &&  (victim=get_char_room(ch, argument)) == NULL )
+               &&  (victim=GetCharacterInRoom(ch, argument)) == NULL )
             {
               SendToCharacter( "They aren't here.\r\n", ch );
               return true;
@@ -231,7 +231,7 @@ bool CheckSkill( Character *ch, const char *command, char *argument )
 	  return true;
 	}
 
-      if ( char_died(ch) )
+      if ( CharacterDiedRecently(ch) )
 	{
 	  return true;
 	}
@@ -248,7 +248,7 @@ bool CheckSkill( Character *ch, const char *command, char *argument )
 
       if ( skill_table[sn]->target == TAR_CHAR_OFFENSIVE
            && victim != ch
-           && !char_died(victim) )
+           && !CharacterDiedRecently(victim) )
         {
           Character *vch = NULL;
           Character *vch_next = NULL;

@@ -33,7 +33,7 @@ void do_mine( Character *ch, char *argument )
         break;
       }
 
-  obj = get_obj_list_rev( ch, arg, ch->in_room->last_content );
+  obj = GetObjectInListReverse( ch, arg, ch->in_room->last_content );
   if ( !obj )
     {
       SendToCharacter( "You don't see on here.\r\n", ch );

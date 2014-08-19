@@ -37,7 +37,7 @@ void do_pricevendor (Character *ch, char *argument)
   if ( !(vendor->owner) )
     return;
 
-  if ( (ch1 = get_char_room(ch, vendor->owner)) == NULL )
+  if ( (ch1 = GetCharacterInRoom(ch, vendor->owner)) == NULL )
     {
       SendToCharacter ("This isnt your vendor!\r\n",ch);
       return;

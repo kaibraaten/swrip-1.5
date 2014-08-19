@@ -15,7 +15,7 @@ void do_unhell( Character *ch, char *argument )
     }
   location = ch->in_room;
   ch->in_room = GetRoom(6);
-  victim = get_char_room(ch, arg);
+  victim = GetCharacterInRoom(ch, arg);
   ch->in_room = location;            /* The case of unhell self, etc. */
   if ( !victim || IsNpc(victim) || victim->in_room->vnum != 6 )
     {

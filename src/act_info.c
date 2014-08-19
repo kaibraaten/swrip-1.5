@@ -110,7 +110,7 @@ char *FormatObjectToCharacter( const Object *obj, const Character *ch, bool fSho
       strcat( buf, "(PROTO) " );
     }
 
-  if ( IsAffectedBy(ch, AFF_DETECTTRAPS) && is_trapped(obj) )
+  if ( IsAffectedBy(ch, AFF_DETECTTRAPS) && IsObjectTrapped(obj) )
     {
       strcat( buf, "(Trap) "  );
     }

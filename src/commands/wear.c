@@ -649,7 +649,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
         {
           if ( can_dual(ch) )
             {
-              if ( get_obj_weight( obj ) + get_obj_weight( tmpobj ) > str_app[GetCurrentStrength(ch)].wield )
+              if ( GetObjectWeight( obj ) + GetObjectWeight( tmpobj ) > str_app[GetCurrentStrength(ch)].wield )
                 {
                   SendToCharacter( "It is too heavy for you to wield.\r\n", ch );
                   return;
@@ -680,7 +680,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
           return;
         }
 
-      if ( get_obj_weight( obj ) > str_app[GetCurrentStrength(ch)].wield )
+      if ( GetObjectWeight( obj ) > str_app[GetCurrentStrength(ch)].wield )
         {
           SendToCharacter( "It is too heavy for you to wield.\r\n", ch );
           return;

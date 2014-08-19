@@ -55,13 +55,13 @@ void do_close( Character *ch, char *argument )
 
       if ( (door=pexit->vdir) >= 0 && door < 10 )
 	{
-	  check_room_for_traps( ch, trap_door[door]);
+	  CheckRoomForTraps( ch, trap_door[door]);
 	}
 
       return;
     }
 
-  if ( ( obj = get_obj_here( ch, arg ) ) != NULL )
+  if ( ( obj = GetObjectHere( ch, arg ) ) != NULL )
     {
       if ( obj->item_type != ITEM_CONTAINER )
         {
@@ -70,7 +70,7 @@ void do_close( Character *ch, char *argument )
               obj->value[2] = 1;
               Act( AT_ACTION, "You closes $p.", ch, obj, NULL, TO_CHAR );
               Act( AT_ACTION, "$n closes $p.", ch, obj, NULL, TO_ROOM );
-              check_for_trap( ch, obj, TRAP_OPEN );
+              CheckObjectForTrap( ch, obj, TRAP_OPEN );
               return;
 
             }
@@ -97,7 +97,7 @@ void do_close( Character *ch, char *argument )
       SetBit(obj->value[1], CONT_CLOSED);
       Act( AT_ACTION, "You close $p.", ch, obj, NULL, TO_CHAR );
       Act( AT_ACTION, "$n closes $p.", ch, obj, NULL, TO_ROOM );
-      check_for_trap( ch, obj, TRAP_CLOSE );
+      CheckObjectForTrap( ch, obj, TRAP_CLOSE );
       return;
     }
 

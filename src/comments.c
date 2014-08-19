@@ -155,7 +155,7 @@ void do_comment( Character *ch, char *argument )
 
   if ( !StrCmp( arg, "about" ) )
     {
-      victim = get_char_world(ch, argument);
+      victim = GetCharacterAnywhere(ch, argument);
 
       if (!victim)
         {
@@ -173,7 +173,7 @@ void do_comment( Character *ch, char *argument )
 
   if ( !StrCmp( arg, "list" ) )
     {
-      victim = get_char_world(ch, argument);
+      victim = GetCharacterAnywhere(ch, argument);
 
       if (!victim)
         {
@@ -220,7 +220,7 @@ void do_comment( Character *ch, char *argument )
       bool fAll = false;
 
       argument = OneArgument( argument, arg1 );
-      victim = get_char_world(ch, arg1);
+      victim = GetCharacterAnywhere(ch, arg1);
 
       if (!victim)
         {
@@ -362,7 +362,7 @@ void do_comment( Character *ch, char *argument )
         }
 
       argument = OneArgument(argument, arg1);
-      victim = get_char_world(ch, arg1);
+      victim = GetCharacterAnywhere(ch, arg1);
       if (!victim)
         {
           SendToCharacter("They're not logged on!\r\n", ch);   /* maybe fix this? */
@@ -428,7 +428,7 @@ void do_comment( Character *ch, char *argument )
   if ( !StrCmp( arg, "remove" ) )
     {
       argument = OneArgument(argument, arg1);
-      victim = get_char_world(ch, arg1);
+      victim = GetCharacterAnywhere(ch, arg1);
       if (!victim)
         {
           SendToCharacter("They're not logged on!\r\n", ch);   /* maybe fix this? */

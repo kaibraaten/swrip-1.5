@@ -43,7 +43,7 @@ void do_hitall( Character *ch, char *argument )
           log_string( logbuf );
         }
 
-      if ( chance(ch, percent) )
+      if ( Chance(ch, percent) )
         {
           nhit++;
           global_retcode = HitOnce(ch, vch, TYPE_UNDEFINED);
@@ -52,7 +52,7 @@ void do_hitall( Character *ch, char *argument )
         global_retcode = InflictDamage(ch, vch, 0, TYPE_UNDEFINED);
       /* Fireshield, etc. could kill ch too.. :>.. -- Altrag */
       if ( global_retcode == rCHAR_DIED || global_retcode == rBOTH_DIED
-           ||   char_died(ch) )
+           ||   CharacterDiedRecently(ch) )
         return;
     }
   if ( !nvict )

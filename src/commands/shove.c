@@ -21,7 +21,7 @@ void do_shove( Character *ch, char *argument )
       return;
     }
 
-  if ( ( victim = get_char_room( ch, arg ) ) == NULL )
+  if ( ( victim = GetCharacterInRoom( ch, arg ) ) == NULL )
     {
       SendToCharacter( "They aren't here.\r\n", ch);
       return;
@@ -48,7 +48,7 @@ void do_shove( Character *ch, char *argument )
   exit_dir = GetDirection( arg2 );
 
   if ( IsBitSet(victim->in_room->room_flags, ROOM_SAFE)
-       &&  get_timer(victim, TIMER_SHOVEDRAG) <= 0)
+       &&  GetTimer(victim, TIMER_SHOVEDRAG) <= 0)
     {
       SendToCharacter("That character cannot be shoved right now.\r\n", ch);
       return;
@@ -257,7 +257,7 @@ void do_shove( Character *ch, char *argument )
     }
 
   if (ch->in_room->area != pexit->to_room->area
-      &&  !in_hard_range( victim, pexit->to_room->area ) )
+      &&  !InHardRange( victim, pexit->to_room->area ) )
     {
       SendToCharacter("That character cannot enter that area.\r\n", ch);
       victim->position = POS_STANDING;
@@ -279,7 +279,7 @@ void do_shove( Character *ch, char *argument )
   Act( AT_ACTION, "$n shoves you.", ch, NULL, victim, TO_VICT );
   MoveCharacter( victim, GetExit(ch->in_room,exit_dir), 0);
 
-  if ( !char_died(victim) )
+  if ( !CharacterDiedRecently(victim) )
     {
       victim->position = POS_STANDING;
     }
@@ -287,8 +287,8 @@ void do_shove( Character *ch, char *argument )
   SetWaitState(ch, 12);
 
   if ( IsBitSet(ch->in_room->room_flags, ROOM_SAFE)
-       && get_timer(ch, TIMER_SHOVEDRAG) <= 0 )
+       && GetTimer(ch, TIMER_SHOVEDRAG) <= 0 )
     {
-      add_timer( ch, TIMER_SHOVEDRAG, 10, NULL, SUB_PAUSE );
+      AddTimerToCharacter( ch, TIMER_SHOVEDRAG, 10, NULL, SUB_PAUSE );
     }
 }

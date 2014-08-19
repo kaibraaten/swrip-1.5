@@ -62,14 +62,14 @@ void do_mptransfer( Character *ch, char *argument )
           return;
         }
 
-      if ( room_is_private( ch, location ) )
+      if ( IsRoomPrivate( ch, location ) )
         {
           ProgBug( "Mptransfer - Private room", ch );
           return;
         }
     }
 
-  if ( ( victim = get_char_world( ch, arg1 ) ) == NULL )
+  if ( ( victim = GetCharacterAnywhere( ch, arg1 ) ) == NULL )
     {
       ProgBug( "Mptransfer - No such person", ch );
       return;
@@ -89,7 +89,7 @@ void do_mptransfer( Character *ch, char *argument )
 
 
   /* If victim not in area's level range, do not transfer */
-  if ( !in_hard_range( victim, location->area )
+  if ( !InHardRange( victim, location->area )
        &&   !IsBitSet( location->room_flags, ROOM_PROTOTYPE ) )
     return;
 

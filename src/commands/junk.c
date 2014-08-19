@@ -20,7 +20,7 @@ void do_junk( Character *ch, char *argument )
   if ( ms_find_obj(ch) )
     return;
 
-  obj = get_obj_list_rev( ch, arg, ch->in_room->last_content );
+  obj = GetObjectInListReverse( ch, arg, ch->in_room->last_content );
 
   if ( !obj )
     {
@@ -49,7 +49,7 @@ void do_junk( Character *ch, char *argument )
 
   oprog_sac_trigger( ch, obj );
 
-  if ( obj_extracted(obj) )
+  if ( IsObjectExtracted(obj) )
     return;
 
   if ( cur_obj == obj->serial )

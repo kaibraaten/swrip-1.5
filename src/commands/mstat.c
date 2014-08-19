@@ -24,7 +24,7 @@ void do_mstat( Character *ch, char *argument )
   if ( arg[0] != '\'' && arg[0] != '"' && strlen(argument) > strlen(arg) )
     strcpy( arg, argument );
 
-  if ( ( victim = get_char_world( ch, arg ) ) == NULL )
+  if ( ( victim = GetCharacterAnywhere( ch, arg ) ) == NULL )
     {
       SendToCharacter( "They aren't here.\r\n", ch );
       return;
@@ -220,7 +220,7 @@ void do_mstat( Character *ch, char *argument )
 		     "%s: '%s' modifies %s by %d for %d rounds with bits %s.\r\n",
 		     skill_tname[skill->type],
 		     skill->name,
-		     affect_loc_name( paf->location ),
+		     GetAffectLocationName( paf->location ),
 		     paf->modifier,
 		     paf->duration,
 		     FlagString( paf->bitvector, affected_flags )

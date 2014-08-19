@@ -47,7 +47,7 @@ void do_put( Character *ch, char *argument )
       return;
     }
 
-  if ( ( container = get_obj_here( ch, arg2 ) ) == NULL )
+  if ( ( container = GetObjectHere( ch, arg2 ) ) == NULL )
     {
       Act( AT_PLAIN, "I see no $T here.", ch, NULL, arg2, TO_CHAR );
       return;
@@ -101,16 +101,16 @@ void do_put( Character *ch, char *argument )
         }
 
       if ( (IS_OBJ_STAT(container, ITEM_COVERING)
-            &&   (get_obj_weight( obj ) / obj->count)
-            > ((get_obj_weight( container ) / container->count)
+            &&   (GetObjectWeight( obj ) / obj->count)
+            > ((GetObjectWeight( container ) / container->count)
                -   container->weight)) )
         {
           SendToCharacter( "It won't fit under there.\r\n", ch );
           return;
         }
 
-      if ( (get_obj_weight( obj ) / obj->count)
-           + (get_obj_weight( container ) / container->count)
+      if ( (GetObjectWeight( obj ) / obj->count)
+           + (GetObjectWeight( container ) / container->count)
            >  container->value[OVAL_CONTAINER_CAPACITY] )
         {
           SendToCharacter( "It won't fit.\r\n", ch );
@@ -121,8 +121,8 @@ void do_put( Character *ch, char *argument )
       separate_obj(container);
       ObjectFromCharacter( obj );
       obj = ObjectToObject( obj, container );
-      check_for_trap ( ch, container, TRAP_PUT );
-      if ( char_died(ch) )
+      CheckObjectForTrap ( ch, container, TRAP_PUT );
+      if ( CharacterDiedRecently(ch) )
         return;
       count = obj->count;
       obj->count = 1;
@@ -176,7 +176,7 @@ void do_put( Character *ch, char *argument )
                &&   obj->wear_loc == WEAR_NONE
                &&   obj != container
                &&   CanDropObject( ch, obj )
-	       &&   get_obj_weight( obj ) + get_obj_weight( container )
+	       &&   GetObjectWeight( obj ) + GetObjectWeight( container )
                <= container->value[OVAL_CONTAINER_CAPACITY] )
             {
               if ( number && (cnt + obj->count) > number )
@@ -188,8 +188,8 @@ void do_put( Character *ch, char *argument )
               obj = ObjectToObject( obj, container );
               found = true;
 
-              check_for_trap( ch, container, TRAP_PUT );
-              if ( char_died(ch) )
+              CheckObjectForTrap( ch, container, TRAP_PUT );
+              if ( CharacterDiedRecently(ch) )
                 return;
               if ( number && cnt >= number )
                 break;

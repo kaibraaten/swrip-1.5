@@ -522,7 +522,7 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
       return rNONE;
     }
 
-  if ( room_is_private( ch, to_room ) )
+  if ( IsRoomPrivate( ch, to_room ) )
     {
       SendToCharacter( "That room is private right now.\r\n", ch );
       return rNONE;
@@ -841,7 +841,7 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
 
   rprog_leave_trigger( ch );
 
-  if( char_died(ch) )
+  if( CharacterDiedRecently(ch) )
     return global_retcode;
 
   CharacterFromRoom( ch );
@@ -849,7 +849,7 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
   if ( ch->mount )
     {
       rprog_leave_trigger( ch->mount );
-      if( char_died(ch) )
+      if( CharacterDiedRecently(ch) )
         return global_retcode;
       if( ch->mount )
         {
@@ -1017,30 +1017,30 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
     }
 
   if ( ch->in_room->first_content )
-    retcode = check_room_for_traps( ch, TRAP_ENTER_ROOM );
+    retcode = CheckRoomForTraps( ch, TRAP_ENTER_ROOM );
   if ( retcode != rNONE )
     return retcode;
 
-  if ( char_died(ch) )
+  if ( CharacterDiedRecently(ch) )
     return retcode;
 
   MobProgEntryTrigger( ch );
 
-  if ( char_died(ch) )
+  if ( CharacterDiedRecently(ch) )
     return retcode;
 
   rprog_enter_trigger( ch );
 
-  if ( char_died(ch) )
+  if ( CharacterDiedRecently(ch) )
     return retcode;
 
   MobProgGreetTrigger( ch );
 
-  if ( char_died(ch) )
+  if ( CharacterDiedRecently(ch) )
     return retcode;
 
   oprog_greet_trigger( ch );
-  if ( char_died(ch) )
+  if ( CharacterDiedRecently(ch) )
     return retcode;
 
   if (!CharacterFallIfNoFloor( ch, fall )
@@ -1210,7 +1210,7 @@ bool HasKey( const Character *ch, vnum_t key )
  */
 void teleportch( Character *ch, Room *room, bool show )
 {
-  if ( room_is_private( ch, room ) )
+  if ( IsRoomPrivate( ch, room ) )
     return;
 
   Act( AT_ACTION, "$n disappears suddenly!", ch, NULL, NULL, TO_ROOM );

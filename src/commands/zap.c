@@ -44,8 +44,8 @@ void do_zap( Character *ch, char *argument )
     }
   else
     {
-      if ( ( victim = get_char_room ( ch, arg ) ) == NULL
-           && ( obj = get_obj_here  ( ch, arg ) ) == NULL )
+      if ( ( victim = GetCharacterInRoom ( ch, arg ) ) == NULL
+           && ( obj = GetObjectHere  ( ch, arg ) ) == NULL )
         {
           SendToCharacter( "You can't find it.\r\n", ch );
           return;

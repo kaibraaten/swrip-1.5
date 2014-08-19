@@ -28,7 +28,7 @@ void do_beg( Character *ch, char *argument )
   if ( ms_find_obj(ch) )
     return;
 
-  if ( ( victim = get_char_room( ch, arg1 ) ) == NULL )
+  if ( ( victim = GetCharacterInRoom( ch, arg1 ) ) == NULL )
     {
       SendToCharacter( "They aren't here.\r\n", ch );
       return;

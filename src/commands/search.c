@@ -30,7 +30,7 @@ void do_search( Character *ch, char *argument )
 
       if ( arg[0] != '\0' && (door = GetDirection( arg )) == -1 )
         {
-          container = get_obj_here( ch, arg );
+          container = GetObjectHere( ch, arg );
           if ( !container )
             {
               SendToCharacter( "You can't find that here.\r\n", ch );
@@ -47,7 +47,7 @@ void do_search( Character *ch, char *argument )
               return;
             }
         }
-      add_timer( ch, TIMER_DO_FUN, umin(skill_table[gsn_search]->beats / 10, 3), do_search, SUB_PAUSE );
+      AddTimerToCharacter( ch, TIMER_DO_FUN, umin(skill_table[gsn_search]->beats / 10, 3), do_search, SUB_PAUSE );
       SendToCharacter( "You begin your search...\r\n", ch );
       ch->dest_buf = CopyString( arg );
       return;
@@ -79,7 +79,7 @@ void do_search( Character *ch, char *argument )
         startobj = NULL;
       else
         {
-          container = get_obj_here( ch, arg );
+          container = GetObjectHere( ch, arg );
           if ( !container )
             {
               SendToCharacter( "You can't find that here.\r\n", ch );

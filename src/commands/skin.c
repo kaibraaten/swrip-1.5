@@ -15,7 +15,7 @@ void do_skin( Character *ch, char *argument)
       SendToCharacter( "Whose corpse do you wish to skin?\r\n", ch );
       return;
     }
-  if ( (corpse=get_obj_here(ch, argument)) == NULL )
+  if ( (corpse=GetObjectHere(ch, argument)) == NULL )
     {
       SendToCharacter( "You cannot find that here.\r\n", ch );
       return;

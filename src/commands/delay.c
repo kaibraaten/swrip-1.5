@@ -17,7 +17,7 @@ void do_delay( Character *ch, char *argument )
       return;
     }
 
-  if ( !( victim = get_char_world( ch, arg ) ) )
+  if ( !( victim = GetCharacterAnywhere( ch, arg ) ) )
     {
       SendToCharacter( "No such character online.\r\n", ch );
       return;

@@ -23,7 +23,7 @@ void do_track( Character *ch, char *argument )
 
   SetWaitState( ch, skill_table[gsn_track]->beats );
 
-  if (!(vict = get_char_world(ch, arg))) {
+  if (!(vict = GetCharacterAnywhere(ch, arg))) {
     SendToCharacter("You can't sense a trail from here.\r\n", ch);
     return;
   }

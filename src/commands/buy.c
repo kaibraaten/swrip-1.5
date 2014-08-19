@@ -37,7 +37,7 @@ void do_buy( Character *ch, char *argument )
 
       in_room     = ch->in_room;
       ch->in_room = pRoomIndexNext;
-      pet         = get_char_room( ch, arg );
+      pet         = GetCharacterInRoom( ch, arg );
       ch->in_room = in_room;
 
       if ( pet == NULL || !IsNpc( pet ) || !IsBitSet(pet->act, ACT_PET) )
@@ -197,13 +197,13 @@ void do_buy( Character *ch, char *argument )
           return;
         }
 
-      if ( ch->carry_number + get_obj_number( obj ) > GetCarryCapacityNumber( ch ) )
+      if ( ch->carry_number + GetObjectCount( obj ) > GetCarryCapacityNumber( ch ) )
         {
           SendToCharacter( "You can't carry that many items.\r\n", ch );
           return;
         }
 
-      if ( ch->carry_weight + ( get_obj_weight( obj ) * noi )
+      if ( ch->carry_weight + ( GetObjectWeight( obj ) * noi )
            + (noi > 1 ? 2 : 0) > GetCarryCapacityWeight( ch ) )
         {
           SendToCharacter( "You can't carry that much weight.\r\n", ch );

@@ -42,9 +42,9 @@ void do_repairship(Character *ch, char *argument )
           Act( AT_PLAIN, "$n begins repairing the ships $T.", ch,
                NULL, argument , TO_ROOM );
           if ( !StrCmp(arg,"hull") )
-            add_timer ( ch , TIMER_DO_FUN , 15 , do_repairship , SUB_PAUSE );
+            AddTimerToCharacter( ch , TIMER_DO_FUN , 15 , do_repairship , SUB_PAUSE );
           else
-            add_timer ( ch , TIMER_DO_FUN , 5 , do_repairship , SUB_PAUSE );
+            AddTimerToCharacter( ch , TIMER_DO_FUN , 5 , do_repairship , SUB_PAUSE );
           ch->dest_buf = CopyString(arg);
           return;
         }

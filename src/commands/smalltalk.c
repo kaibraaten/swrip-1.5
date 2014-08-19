@@ -29,7 +29,7 @@ void do_smalltalk ( Character *ch , char *argument )
       return;
     }
 
-  if ( ( victim = get_char_room( ch, arg1 ) ) == NULL )
+  if ( ( victim = GetCharacterInRoom( ch, arg1 ) ) == NULL )
     {
       SendToCharacter( "They aren't here.\r\n", ch );
       return;

@@ -19,7 +19,7 @@ void do_oassign( Character *ch, char *argument )
       SendToCharacter( "Syntax: oassign <who> <low> <high>\r\n", ch );
       return;
     }
-  if ( (victim = get_char_world( ch, arg1 )) == NULL )
+  if ( (victim = GetCharacterAnywhere( ch, arg1 )) == NULL )
     {
       SendToCharacter( "They don't seem to be around.\r\n", ch );
       return;

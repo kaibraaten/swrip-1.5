@@ -26,7 +26,7 @@ void do_collectgold (Character *ch, char *argument)
 
   sprintf(name, "%s", vendor->owner);
 
-  if ( (ch1 = get_char_room(ch, vendor->owner)) == NULL )
+  if ( (ch1 = GetCharacterInRoom(ch, vendor->owner)) == NULL )
     {
       SendToCharacter ("Trying to steal huh?\r\n",ch);
       return;

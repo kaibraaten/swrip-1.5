@@ -12,7 +12,7 @@ void do_fixchar( Character *ch, char *argument )
       SendToCharacter( "Usage: fixchar <playername>\r\n", ch );
       return;
     }
-  victim = get_char_room( ch, name );
+  victim = GetCharacterInRoom( ch, name );
   if ( !victim )
     {
       SendToCharacter( "They're not here.\r\n", ch );

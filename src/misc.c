@@ -323,7 +323,7 @@ void PullOrPush( Character *ch, Object *obj, bool pull )
 		}
             }
 
-          check_room_for_traps( ch, trap_door[edir]);
+          CheckRoomForTraps( ch, trap_door[edir]);
           return;
         }
 
@@ -348,7 +348,7 @@ void PullOrPush( Character *ch, Object *obj, bool pull )
 		}
             }
 
-          check_room_for_traps( ch, trap_door[edir]);
+          CheckRoomForTraps( ch, trap_door[edir]);
           return;
         }
     }

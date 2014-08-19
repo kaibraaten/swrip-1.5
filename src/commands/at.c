@@ -24,14 +24,14 @@ void do_at( Character *ch, char *argument )
 
   if ( GetTrustLevel( ch ) < LEVEL_GREATER )
     {
-      if ( room_is_private( ch, location ) )
+      if ( IsRoomPrivate( ch, location ) )
         {
           SendToCharacter( "That room is private right now.\r\n", ch );
           return;
         }
     }
 
-  if ( room_is_private( ch, location ) )
+  if ( IsRoomPrivate( ch, location ) )
     {
       SendToCharacter( "Overriding private flag!\r\n", ch );
     }

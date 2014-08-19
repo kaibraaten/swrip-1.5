@@ -15,7 +15,7 @@ void do_opstat( Character *ch, char *argument )
       return;
     }
 
-  if ( ( obj = get_obj_world( ch, arg ) ) == NULL )
+  if ( ( obj = GetObjectAnywhere( ch, arg ) ) == NULL )
     {
       SendToCharacter( "You cannot find that.\r\n", ch );
       return;

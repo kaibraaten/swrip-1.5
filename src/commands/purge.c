@@ -39,11 +39,11 @@ void do_purge( Character *ch, char *argument )
   /* fixed to get things in room first -- i.e., purge portal (obj),
    * no more purging mobs with that keyword in another room first
    * -- Tri */
-  if ( ( victim = get_char_room( ch, arg ) ) == NULL
-       && ( obj = get_obj_here( ch, arg ) ) == NULL )
+  if ( ( victim = GetCharacterInRoom( ch, arg ) ) == NULL
+       && ( obj = GetObjectHere( ch, arg ) ) == NULL )
     {
-      if ( ( victim = get_char_world( ch, arg ) ) == NULL
-           &&   ( obj = get_obj_world( ch, arg ) ) == NULL )  /* no get_obj_room */
+      if ( ( victim = GetCharacterAnywhere( ch, arg ) ) == NULL
+           &&   ( obj = GetObjectAnywhere( ch, arg ) ) == NULL )  /* no get_obj_room */
         {
           SendToCharacter( "They aren't here.\r\n", ch );
           return;

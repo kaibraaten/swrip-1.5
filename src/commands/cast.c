@@ -159,7 +159,7 @@ void do_cast( Character *ch, char *argument )
         break;
 
       /* multi-participant spells                       -Thoric */
-      add_timer( ch, TIMER_DO_FUN, umin(skill->beats / 10, 3), do_cast, SUB_PAUSE );
+      AddTimerToCharacter( ch, TIMER_DO_FUN, umin(skill->beats / 10, 3), do_cast, SUB_PAUSE );
       Act( AT_MAGIC, "You begin to feel the force in yourself and those around you...",
 	   ch, NULL, NULL, TO_CHAR );
       Act( AT_MAGIC, "$n reaches out with the force to those around...", ch, NULL, NULL, TO_ROOM );
@@ -213,7 +213,7 @@ void do_cast( Character *ch, char *argument )
 
           for ( tmp = ch->in_room->first_person; tmp; tmp = tmp->next_in_room )
             if (  tmp != ch
-		  &&   (t = get_timerptr( tmp, TIMER_DO_FUN )) != NULL
+		  &&   (t = GetTimerPointer( tmp, TIMER_DO_FUN )) != NULL
                   &&    t->count >= 1 && t->do_fun == do_cast
                   &&    tmp->tempnum == sn && tmp->dest_buf
                   &&   !StrCmp( (const char*)tmp->dest_buf, staticbuf ) )
@@ -222,12 +222,12 @@ void do_cast( Character *ch, char *argument )
             {
               for ( tmp = ch->in_room->first_person; tmp; tmp = tmp->next_in_room )
                 if (  tmp != ch
-                      &&   (t = get_timerptr( tmp, TIMER_DO_FUN )) != NULL
+                      &&   (t = GetTimerPointer( tmp, TIMER_DO_FUN )) != NULL
                       &&    t->count >= 1 && t->do_fun == do_cast
                       &&    tmp->tempnum == sn && tmp->dest_buf
                       &&   !StrCmp( (const char*)tmp->dest_buf, staticbuf ) )
                   {
-                    extract_timer( tmp, t );
+                    ExtractTimer( tmp, t );
                     Act( AT_MAGIC, "Channeling your energy into $n, you help direct the force",
 			 ch, NULL, tmp, TO_VICT );
                     Act( AT_MAGIC, "$N channels $S energy into you!", ch, NULL, tmp, TO_CHAR );
@@ -358,7 +358,7 @@ void do_cast( Character *ch, char *argument )
         }
     }
 
-  if ( retcode == rCHAR_DIED || retcode == rERROR || char_died(ch) )
+  if ( retcode == rCHAR_DIED || retcode == rERROR || CharacterDiedRecently(ch) )
     return;
   if ( retcode != rSPELL_FAILED )
     {
@@ -379,7 +379,7 @@ void do_cast( Character *ch, char *argument )
    */
   if ( skill->target == TAR_CHAR_OFFENSIVE
        &&   victim
-       &&  !char_died(victim)
+       &&  !CharacterDiedRecently(victim)
        &&        victim != ch )
     {
       Character *vch, *vch_next;

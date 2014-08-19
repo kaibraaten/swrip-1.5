@@ -52,14 +52,14 @@ void do_transfer( Character *ch, char *argument )
           return;
         }
 
-      if ( room_is_private( ch, location ) )
+      if ( IsRoomPrivate( ch, location ) )
         {
           SendToCharacter( "That room is private right now.\r\n", ch );
           return;
         }
     }
 
-  if ( ( victim = get_char_world( ch, arg1 ) ) == NULL )
+  if ( ( victim = GetCharacterAnywhere( ch, arg1 ) ) == NULL )
     {
       SendToCharacter( "They aren't here.\r\n", ch );
       return;
@@ -93,7 +93,7 @@ void do_transfer( Character *ch, char *argument )
   SendToCharacter( "Ok.\r\n", ch );
 
   if (!IsImmortal(victim) && !IsNpc(victim)
-      && !in_hard_range( victim, location->area ) )
+      && !InHardRange( victim, location->area ) )
     {
       SendToCharacter("Warning: the player's level is not within the area's level range.\r\n", ch);
     }

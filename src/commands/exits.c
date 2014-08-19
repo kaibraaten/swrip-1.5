@@ -44,14 +44,14 @@ void do_exits( Character *ch, char *argument )
                 {
                   sprintf( buf + strlen(buf), "%-5s - %s\r\n",
                            Capitalize( pexit->keyword ),
-                           room_is_dark( pexit->to_room )
+                           IsRoomDark( pexit->to_room )
                            ?  "Too dark to tell"
                            : pexit->to_room->name );
                 }
               else
                 sprintf( buf + strlen(buf), "%-5s - %s\r\n",
                          Capitalize( GetDirectionName(pexit->vdir) ),
-                         room_is_dark( pexit->to_room )
+                         IsRoomDark( pexit->to_room )
                          ?  "Too dark to tell"
                          : pexit->to_room->name );
             }

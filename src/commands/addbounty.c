@@ -46,7 +46,7 @@ void do_addbounty( Character *ch, char *argument )
       return;
     }
 
-  if ( !(victim = get_char_world( ch, arg )) )
+  if ( !(victim = GetCharacterAnywhere( ch, arg )) )
     {
       SendToCharacter( "They don't appear to be here .. wait til they log in.\r\n", ch );
       return;

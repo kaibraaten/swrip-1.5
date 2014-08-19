@@ -15,7 +15,7 @@ void do_viewskills( Character *ch, char *argument )
       SendToCharacter( "&zSyntax: skills <player>.\r\n", ch );
       return;
     }
-  if ( ( victim = get_char_world( ch, arg ) ) == NULL )
+  if ( ( victim = GetCharacterAnywhere( ch, arg ) ) == NULL )
     {
       SendToCharacter("No such person in the game.\r\n", ch );
       return;

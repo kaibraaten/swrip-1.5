@@ -50,7 +50,7 @@ void do_smoke( Character *ch, char *argument )
           if ( skill->spell_fun )
             obj_cast_spell( sn, umin(skill->min_level, ch->top_level),
                             ch, ch, NULL );
-          if ( obj_extracted( pipe_obj ) )
+          if ( IsObjectExtracted( pipe_obj ) )
             return;
         }
       else

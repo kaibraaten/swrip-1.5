@@ -22,7 +22,7 @@ void do_mpdream( Character *ch, char *argument )
 
   argument = OneArgument( argument, arg1 );
 
-  if (  (vict =get_char_world(ch, arg1)) == NULL )
+  if (  (vict =GetCharacterAnywhere(ch, arg1)) == NULL )
     {
       ProgBug( "Mpdream: No such character", ch );
       return;

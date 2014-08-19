@@ -63,14 +63,14 @@ void do_open( Character *ch, char *argument )
 
           if ( door >= TRAP_N && door <= TRAP_SW )
 	    {
-	      check_room_for_traps( ch, trap_door[door]);
+	      CheckRoomForTraps( ch, trap_door[door]);
 	    }
 
           return;
         }
     }
 
-  if ( ( obj = get_obj_here( ch, arg ) ) != NULL )
+  if ( ( obj = GetObjectHere( ch, arg ) ) != NULL )
     {
       if ( obj->item_type != ITEM_CONTAINER )
         {
@@ -79,7 +79,7 @@ void do_open( Character *ch, char *argument )
               obj->value[2] = 0;
               Act( AT_ACTION, "You open $p.", ch, obj, NULL, TO_CHAR );
               Act( AT_ACTION, "$n opens $p.", ch, obj, NULL, TO_ROOM );
-              check_for_trap( ch, obj, TRAP_OPEN );
+              CheckObjectForTrap( ch, obj, TRAP_OPEN );
               return;
 
             }
@@ -112,7 +112,7 @@ void do_open( Character *ch, char *argument )
       RemoveBit(obj->value[1], CONT_CLOSED);
       Act( AT_ACTION, "You open $p.", ch, obj, NULL, TO_CHAR );
       Act( AT_ACTION, "$n opens $p.", ch, obj, NULL, TO_ROOM );
-      check_for_trap( ch, obj, TRAP_OPEN );
+      CheckObjectForTrap( ch, obj, TRAP_OPEN );
       return;
     }
 

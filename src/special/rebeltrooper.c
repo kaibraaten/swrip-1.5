@@ -14,7 +14,7 @@ bool spec_rebel_trooper( Character *ch )
       v_next = victim->next_in_room;
       if ( !CanSeeCharacter( ch, victim ) )
         continue;
-      if ( get_timer(victim, TIMER_RECENTFIGHT) > 0 )
+      if ( GetTimer(victim, TIMER_RECENTFIGHT) > 0 )
         continue;
       if ( ( IsNpc( victim ) && NiftyIsName( "imperial" , victim->name )
              && victim->fighting && GetFightingOpponent( victim ) != ch ) ||

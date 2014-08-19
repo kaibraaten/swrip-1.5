@@ -107,7 +107,7 @@ void room_explode_1( Object *obj, Character *xch, Room *room, int blast )
       Act( AT_WHITE, "The shockwave from a massive explosion rips through your body!", room->first_person , obj, NULL, TO_ROOM );
       dam = GetRandomNumberFromRange ( obj->value[OVAL_EXPLOSIVE_MIN_DMG] , obj->value[OVAL_EXPLOSIVE_MAX_DMG] );
       InflictDamage( rch, rch , dam, TYPE_UNDEFINED );
-      if ( !char_died(rch) )
+      if ( !CharacterDiedRecently(rch) )
         {
           if ( IsNpc( rch ) )
             {
@@ -464,7 +464,7 @@ void ModifyAffect( Character *ch, Affect *paf, bool fAdd )
            && skill->type == SKILL_SPELL )
 	{
 	  if ( (retcode=skill->spell_fun( mod, GetAbilityLevel( ch, FORCE_ABILITY ), ch, ch ) )
-	       == rCHAR_DIED || char_died(ch) )
+	       == rCHAR_DIED || CharacterDiedRecently(ch) )
 	    {
 	      return;
 	    }
@@ -578,7 +578,7 @@ void ModifyAffect( Character *ch, Affect *paf, bool fAdd )
   if ( !IsNpc( ch )
        && saving_char != ch
        && ( wield = GetEquipmentOnCharacter( ch, WEAR_WIELD ) ) != NULL
-       && get_obj_weight(wield) > str_app[GetCurrentStrength(ch)].wield )
+       && GetObjectWeight(wield) > str_app[GetCurrentStrength(ch)].wield )
     {
       static int depth;
 
@@ -728,8 +728,8 @@ void CharacterFromRoom( Character *ch )
   ch->prev_in_room = NULL;
 
   if ( !IsNpc(ch)
-       &&   get_timer( ch, TIMER_SHOVEDRAG ) > 0 )
-    remove_timer( ch, TIMER_SHOVEDRAG );
+       &&   GetTimer( ch, TIMER_SHOVEDRAG ) > 0 )
+    RemoveTimer( ch, TIMER_SHOVEDRAG );
 }
 
 /*
@@ -768,8 +768,8 @@ void CharacterToRoom( Character *ch, Room *pRoomIndex )
 
   if ( !IsNpc(ch)
        &&    IsBitSet(ch->in_room->room_flags, ROOM_SAFE)
-       &&    get_timer(ch, TIMER_SHOVEDRAG) <= 0 )
-    add_timer( ch, TIMER_SHOVEDRAG, 10, NULL, SUB_NONE );  /*-30 Seconds-*/
+       &&    GetTimer(ch, TIMER_SHOVEDRAG) <= 0 )
+    AddTimerToCharacter( ch, TIMER_SHOVEDRAG, 10, NULL, SUB_NONE );  /*-30 Seconds-*/
 
   /*
    * Delayed Teleport rooms                                     -Thoric
@@ -799,8 +799,8 @@ Object *ObjectToCharacter( Object *obj, Character *ch )
   Object *otmp = NULL;
   Object *oret = obj;
   bool skipgroup = false, grouped = false;
-  int oweight = get_obj_weight( obj );
-  int onum = get_obj_number( obj );
+  int oweight = GetObjectWeight( obj );
+  int onum = GetObjectCount( obj );
   int wear_loc = obj->wear_loc;
   int extra_flags = obj->extra_flags;
 
@@ -878,8 +878,8 @@ void ObjectFromCharacter( Object *obj )
 
   obj->in_room   = NULL;
   obj->carried_by        = NULL;
-  ch->carry_number      -= get_obj_number( obj );
-  ch->carry_weight      -= get_obj_weight( obj );
+  ch->carry_number      -= GetObjectCount( obj );
+  ch->carry_weight      -= GetObjectWeight( obj );
 }
 
 int count_users(const Object *obj)
@@ -1064,10 +1064,10 @@ Object *ObjectToObject( Object *obj, Object *obj_to )
   if ( obj->carried_by != obj_to->carried_by )
     {
       if ( obj->carried_by )
-        obj->carried_by->carry_weight -= get_obj_weight( obj );
+        obj->carried_by->carry_weight -= GetObjectWeight( obj );
 
       if ( obj_to->carried_by && obj_to->wear_loc != WEAR_FLOATING )
-        obj_to->carried_by->carry_weight += get_obj_weight( obj );
+        obj_to->carried_by->carry_weight += GetObjectWeight( obj );
     }
 
   for ( otmp = obj_to->first_content; otmp; otmp = otmp->next_content )
@@ -1108,7 +1108,7 @@ void ObjectFromObject( Object *obj )
 
   for ( ; obj_from; obj_from = obj_from->in_obj )
     if ( obj_from->carried_by && obj_from->wear_loc != WEAR_FLOATING )
-      obj_from->carried_by->carry_weight -= get_obj_weight( obj );
+      obj_from->carried_by->carry_weight -= GetObjectWeight( obj );
 }
 
 /*
@@ -1124,7 +1124,7 @@ void ExtractObject( Object *obj )
       return;
     }
 
-  if ( obj_extracted(obj) )
+  if ( IsObjectExtracted(obj) )
     {
       Bug( "ExtractObject: obj %d already extracted!", obj->Prototype->vnum );
       return;
@@ -1176,7 +1176,7 @@ void ExtractObject( Object *obj )
 
   UNLINK( obj, first_object, last_object, next, prev );
   /* shove onto extraction queue */
-  queue_extracted_obj( obj );
+  QueueExtractedObject( obj );
 
   obj->Prototype->count -= obj->count;
   numobjsloaded -= obj->count;
@@ -1221,7 +1221,7 @@ void ExtractCharacter( Character *ch, bool fPull )
       return;
     }
 
-  if ( char_died(ch) )
+  if ( CharacterDiedRecently(ch) )
     {
       sprintf( buf, "ExtractCharacter: %s already died!", ch->name );
       Bug( buf, 0 );
@@ -1232,7 +1232,7 @@ void ExtractCharacter( Character *ch, bool fPull )
     cur_char_died = true;
 
   /* shove onto extraction queue */
-  queue_extracted_char( ch, fPull );
+  QueueExtractedCharacter( ch, fPull );
 
   if ( gch_prev == ch )
     gch_prev = ch->prev;
@@ -1330,7 +1330,7 @@ void ExtractCharacter( Character *ch, bool fPull )
 /*
  * Find a char in the room.
  */
-Character *get_char_room( const Character *ch, const char *argument )
+Character *GetCharacterInRoom( const Character *ch, const char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   Character *rch;
@@ -1388,7 +1388,7 @@ Character *get_char_room( const Character *ch, const char *argument )
 /*
  * Find a char in the world.
  */
-Character *get_char_world( const Character *ch, const char *argument )
+Character *GetCharacterAnywhere( const Character *ch, const char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   Character *wch;
@@ -1478,7 +1478,7 @@ Character *get_char_world( const Character *ch, const char *argument )
  * Find some object with a given index data.
  * Used by area-reset 'P', 'T' and 'H' commands.
  */
-Object *get_obj_type( const ProtoObject *pObjIndex )
+Object *GetInstanceOfObject( const ProtoObject *pObjIndex )
 {
   Object *obj;
 
@@ -1492,7 +1492,7 @@ Object *get_obj_type( const ProtoObject *pObjIndex )
 /*
  * Find an obj in a list.
  */
-Object *get_obj_list( const Character *ch, const char *argument, Object *list )
+Object *GetObjectInList( const Character *ch, const char *argument, Object *list )
 {
   char arg[MAX_INPUT_LENGTH];
   Object *obj = NULL;
@@ -1521,7 +1521,7 @@ Object *get_obj_list( const Character *ch, const char *argument, Object *list )
 /*
  * Find an obj in a list...going the other way                  -Thoric
  */
-Object *get_obj_list_rev( const Character *ch, const char *argument, Object *list )
+Object *GetObjectInListReverse( const Character *ch, const char *argument, Object *list )
 {
   char arg[MAX_INPUT_LENGTH];
   Object *obj;
@@ -1551,14 +1551,14 @@ Object *get_obj_list_rev( const Character *ch, const char *argument, Object *lis
 /*
  * Find an obj in the room or in inventory.
  */
-Object *get_obj_here( const Character *ch, const char *argument )
+Object *GetObjectHere( const Character *ch, const char *argument )
 {
   Object *obj;
 
   if ( !ch || !ch->in_room )
     return NULL;
 
-  obj = get_obj_list_rev( ch, argument, ch->in_room->last_content );
+  obj = GetObjectInListReverse( ch, argument, ch->in_room->last_content );
   if ( obj )
     return obj;
 
@@ -1574,7 +1574,7 @@ Object *get_obj_here( const Character *ch, const char *argument )
 /*
  * Find an obj in the world.
  */
-Object *get_obj_world( const Character *ch, const char *argument )
+Object *GetObjectAnywhere( const Character *ch, const char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   Object *obj;
@@ -1584,7 +1584,7 @@ Object *get_obj_world( const Character *ch, const char *argument )
   if (!ch)
     return NULL;
 
-  if ( ( obj = get_obj_here( ch, argument ) ) != NULL )
+  if ( ( obj = GetObjectHere( ch, argument ) ) != NULL )
     return obj;
 
   number = NumberArgument( argument, arg );
@@ -1648,7 +1648,7 @@ Object *find_obj( Character *ch, const char *orig_argument, bool carryonly )
           return NULL;
         }
       else
-        if ( !carryonly && ( obj = get_obj_here( ch, arg1 ) ) == NULL )
+        if ( !carryonly && ( obj = GetObjectHere( ch, arg1 ) ) == NULL )
           {
             Act( AT_PLAIN, "I see no $T here.", ch, NULL, arg1, TO_CHAR );
             return NULL;
@@ -1666,7 +1666,7 @@ Object *find_obj( Character *ch, const char *orig_argument, bool carryonly )
           SendToCharacter( "You do not have that item.\r\n", ch );
           return NULL;
         }
-      if ( !carryonly && ( container = get_obj_here( ch, arg2 ) ) == NULL )
+      if ( !carryonly && ( container = GetObjectHere( ch, arg2 ) ) == NULL )
         {
           Act( AT_PLAIN, "I see no $T here.", ch, NULL, arg2, TO_CHAR );
           return NULL;
@@ -1679,7 +1679,7 @@ Object *find_obj( Character *ch, const char *orig_argument, bool carryonly )
           return NULL;
         }
 
-      obj = get_obj_list( ch, arg1, container->first_content );
+      obj = GetObjectInList( ch, arg1, container->first_content );
 
       if ( !obj )
         Act( AT_PLAIN, IS_OBJ_STAT(container, ITEM_COVERING) ?
@@ -1692,7 +1692,7 @@ Object *find_obj( Character *ch, const char *orig_argument, bool carryonly )
   return NULL;
 }
 
-int get_obj_number( const Object *obj )
+int GetObjectCount( const Object *obj )
 {
   return obj->count;
 }
@@ -1700,12 +1700,12 @@ int get_obj_number( const Object *obj )
 /*
  * Return weight of an object, including weight of contents.
  */
-int get_obj_weight( const Object *obj )
+int GetObjectWeight( const Object *obj )
 {
   int weight = obj->count * obj->weight;
 
   for ( obj = obj->first_content; obj; obj = obj->next_content )
-    weight += get_obj_weight( obj );
+    weight += GetObjectWeight( obj );
 
   return weight;
 }
@@ -1713,11 +1713,11 @@ int get_obj_weight( const Object *obj )
 /*
  * True if room is dark.
  */
-bool room_is_dark( const Room *pRoomIndex )
+bool IsRoomDark( const Room *pRoomIndex )
 {
   if ( !pRoomIndex )
     {
-      Bug( "room_is_dark: NULL pRoomIndex" );
+      Bug( "IsRoomDark: NULL pRoomIndex" );
       return true;
     }
 
@@ -1743,20 +1743,20 @@ bool room_is_dark( const Room *pRoomIndex )
 /*
  * True if room is private.
  */
-bool room_is_private( const Character *ch, const Room *pRoomIndex )
+bool IsRoomPrivate( const Character *ch, const Room *pRoomIndex )
 {
   Character *rch;
   int count;
 
   if ( !ch )
     {
-      Bug( "room_is_private: NULL ch" );
+      Bug( "IsRoomPrivate: NULL ch" );
       return false;
     }
 
   if ( !pRoomIndex )
     {
-      Bug( "room_is_private: NULL pRoomIndex" );
+      Bug( "IsRoomPrivate: NULL pRoomIndex" );
       return false;
     }
 
@@ -1780,11 +1780,11 @@ bool room_is_private( const Character *ch, const Room *pRoomIndex )
 /*
  * Return ascii name of an item type.
  */
-const char *item_type_name( const Object *obj )
+const char *GetItemTypeName( const Object *obj )
 {
   if ( obj->item_type < 1 || obj->item_type > MAX_ITEM_TYPE )
     {
-      Bug( "Item_type_name: unknown type %d.", obj->item_type );
+      Bug( "%s: unknown type %d.", __FUNCTION__, obj->item_type );
       return "(unknown)";
     }
 
@@ -1794,7 +1794,7 @@ const char *item_type_name( const Object *obj )
 /*
  * Return ascii name of an affect location.
  */
-const char *affect_loc_name( int location )
+const char *GetAffectLocationName( int location )
 {
   switch ( location )
     {
@@ -1867,14 +1867,14 @@ const char *affect_loc_name( int location )
     case APPLY_SNIPE:           return "snipe";
     }
 
-  Bug( "Affect_location_name: unknown location %d.", location );
+  Bug( "%s: unknown location %d.", __FUNCTION__, location );
   return "(unknown)";
 }
 
 /*
  * Set off a trap (obj) upon character (ch)                     -Thoric
  */
-ch_ret spring_trap( Character *ch, Object *obj )
+ch_ret SpringTrap( Character *ch, Object *obj )
 {
   int dam;
   char *txt;
@@ -1967,23 +1967,29 @@ ch_ret spring_trap( Character *ch, Object *obj )
 /*
  * Check an object for a trap                                   -Thoric
  */
-ch_ret check_for_trap( Character *ch, const Object *obj, int flag )
+ch_ret CheckObjectForTrap( Character *ch, const Object *obj, int flag )
 {
-  Object *check;
+  Object *check = NULL;
   ch_ret retcode = rNONE;
 
   if ( !obj->first_content )
-    return rNONE;
+    {
+      return rNONE;
+    }
 
   for ( check = obj->first_content; check; check = check->next_content )
-    if ( check->item_type == ITEM_TRAP
-         && IsBitSet(check->value[OVAL_TRAP_FLAGS], flag) )
-      {
-        retcode = spring_trap( ch, check );
+    {
+      if ( check->item_type == ITEM_TRAP
+	   && IsBitSet(check->value[OVAL_TRAP_FLAGS], flag) )
+	{
+	  retcode = SpringTrap( ch, check );
 
-        if ( retcode != rNONE )
-          return retcode;
-      }
+	  if ( retcode != rNONE )
+	    {
+	      return retcode;
+	    }
+	}
+    }
 
   return retcode;
 }
@@ -1991,14 +1997,16 @@ ch_ret check_for_trap( Character *ch, const Object *obj, int flag )
 /*
  * Check the room for a trap                                    -Thoric
  */
-ch_ret check_room_for_traps( Character *ch, int flag )
+ch_ret CheckRoomForTraps( Character *ch, int flag )
 {
-  Object *check;
+  Object *check = NULL;
   ch_ret retcode = rNONE;
 
   if ( !ch )
+    {
+      return rERROR;
+    }
 
-    return rERROR;
   if ( !ch->in_room || !ch->in_room->first_content )
     return rNONE;
 
@@ -2012,10 +2020,12 @@ ch_ret check_room_for_traps( Character *ch, int flag )
       else if ( check->item_type == ITEM_TRAP
                 && IsBitSet(check->value[OVAL_TRAP_FLAGS], flag) )
         {
-          retcode = spring_trap( ch, check );
+          retcode = SpringTrap( ch, check );
 
           if ( retcode != rNONE )
-            return retcode;
+	    {
+	      return retcode;
+	    }
         }
     }
 
@@ -2025,7 +2035,7 @@ ch_ret check_room_for_traps( Character *ch, int flag )
 /*
  * return true if an object contains a trap                     -Thoric
  */
-bool is_trapped( const Object *obj )
+bool IsObjectTrapped( const Object *obj )
 {
   Object *check;
 
@@ -2042,7 +2052,7 @@ bool is_trapped( const Object *obj )
 /*
  * If an object contains a trap, return the pointer to the trap -Thoric
  */
-Object *get_trap( const Object *obj )
+Object *GetTrap( const Object *obj )
 {
   Object *check;
 
@@ -2214,14 +2224,14 @@ void CleanResets( Area *tarea )
 /*
  * Show an affect verbosely to a character                      -Thoric
  */
-void showaffect( const Character *ch, const Affect *paf )
+void ShowAffectToCharacter( const Character *ch, const Affect *paf )
 {
   char buf[MAX_STRING_LENGTH];
   int x;
 
   if ( !paf )
     {
-      Bug( "showaffect: NULL paf", 0 );
+      Bug( "ShowAffectToCharacter: NULL paf", 0 );
       return;
     }
 
@@ -2231,11 +2241,11 @@ void showaffect( const Character *ch, const Affect *paf )
         {
         default:
           sprintf( buf, "Affects %s by %d.\r\n",
-                   affect_loc_name( paf->location ), paf->modifier );
+                   GetAffectLocationName( paf->location ), paf->modifier );
           break;
         case APPLY_AFFECT:
           sprintf( buf, "Affects %s by",
-                   affect_loc_name( paf->location ) );
+                   GetAffectLocationName( paf->location ) );
           for ( x = 0; x < 32 ; x++ )
             if ( IsBitSet( paf->modifier, 1 << x ) )
               {
@@ -2255,7 +2265,7 @@ void showaffect( const Character *ch, const Affect *paf )
         case APPLY_IMMUNE:
         case APPLY_SUSCEPTIBLE:
           sprintf( buf, "Affects %s by",
-                   affect_loc_name( paf->location ) );
+                   GetAffectLocationName( paf->location ) );
           for ( x = 0; x < 32 ; x++ )
             if ( IsBitSet( paf->modifier, 1 << x ) )
               {
@@ -2272,7 +2282,7 @@ void showaffect( const Character *ch, const Affect *paf )
 /*
  * Set the current global object to obj                         -Thoric
  */
-void set_cur_obj( Object *obj )
+void SetCurrentGlobalObject( Object *obj )
 {
   cur_obj = obj->serial;
   cur_obj_extracted = false;
@@ -2282,7 +2292,7 @@ void set_cur_obj( Object *obj )
 /*
  * Check the recently extracted object queue for obj            -Thoric
  */
-bool obj_extracted( const Object *obj )
+bool IsObjectExtracted( const Object *obj )
 {
   Object *cod;
 
@@ -2302,7 +2312,7 @@ bool obj_extracted( const Object *obj )
 /*
  * Stick obj onto extraction queue
  */
-void queue_extracted_obj( Object *obj )
+void QueueExtractedObject( Object *obj )
 {
 
   ++cur_qobjs;
@@ -2313,7 +2323,7 @@ void queue_extracted_obj( Object *obj )
 /*
  * Clean out the extracted object queue
  */
-void CleanObject_queue()
+void CleanObjectQueue()
 {
   Object *obj;
 
@@ -2332,7 +2342,7 @@ void CleanObject_queue()
 /*
  * Set the current global character to ch                       -Thoric
  */
-void set_cur_char( Character *ch )
+void SetCurrentGlobalCharacter( Character *ch )
 {
   cur_char         = ch;
   cur_char_died  = false;
@@ -2343,7 +2353,7 @@ void set_cur_char( Character *ch )
 /*
  * Check to see if ch died recently                             -Thoric
  */
-bool char_died( const Character *ch )
+bool CharacterDiedRecently( const Character *ch )
 {
   ExtractedCharacter *ccd;
 
@@ -2360,7 +2370,7 @@ bool char_died( const Character *ch )
 /*
  * Add ch to the queue of recently extracted characters         -Thoric
  */
-void queue_extracted_char( Character *ch, bool extract )
+void QueueExtractedCharacter( Character *ch, bool extract )
 {
   ExtractedCharacter *ccd;
 
@@ -2385,7 +2395,7 @@ void queue_extracted_char( Character *ch, bool extract )
 /*
  * clean out the extracted character queue
  */
-void clean_char_queue()
+void CleanCharacterQueue()
 {
   ExtractedCharacter *ccd;
 
@@ -2403,7 +2413,7 @@ void clean_char_queue()
  * Add a timer to ch                                            -Thoric
  * Support for "call back" time delayed commands
  */
-void add_timer( Character *ch, short type, short count, DO_FUN *fun, int value )
+void AddTimerToCharacter( Character *ch, short type, short count, DO_FUN *fun, int value )
 {
   Timer *timer;
 
@@ -2426,7 +2436,7 @@ void add_timer( Character *ch, short type, short count, DO_FUN *fun, int value )
     }
 }
 
-Timer *get_timerptr( const Character *ch, short type )
+Timer *GetTimerPointer( const Character *ch, short type )
 {
   Timer *timer;
 
@@ -2437,21 +2447,21 @@ Timer *get_timerptr( const Character *ch, short type )
   return NULL;
 }
 
-short get_timer( const Character *ch, short type )
+short GetTimer( const Character *ch, short type )
 {
   Timer *timer;
 
-  if ( (timer = get_timerptr( ch, type )) != NULL )
+  if ( (timer = GetTimerPointer( ch, type )) != NULL )
     return timer->count;
   else
     return 0;
 }
 
-void extract_timer( Character *ch, Timer *timer )
+void ExtractTimer( Character *ch, Timer *timer )
 {
   if ( !timer )
     {
-      Bug( "extract_timer: NULL timer", 0 );
+      Bug( "ExtractTimer: NULL timer", 0 );
       return;
     }
 
@@ -2459,7 +2469,7 @@ void extract_timer( Character *ch, Timer *timer )
   FreeMemory( timer );
 }
 
-void remove_timer( Character *ch, short type )
+void RemoveTimer( Character *ch, short type )
 {
   Timer *timer;
 
@@ -2468,10 +2478,10 @@ void remove_timer( Character *ch, short type )
       break;
 
   if ( timer )
-    extract_timer( ch, timer );
+    ExtractTimer( ch, timer );
 }
 
-bool in_soft_range( const Character *ch, const Area *tarea )
+bool InSoftRange( const Character *ch, const Area *tarea )
 {
   if ( IsImmortal(ch) )
     return true;
@@ -2483,7 +2493,7 @@ bool in_soft_range( const Character *ch, const Area *tarea )
     return false;
 }
 
-bool in_hard_range( const Character *ch, const Area *tarea )
+bool InHardRange( const Character *ch, const Area *tarea )
 {
   if ( IsImmortal(ch) )
     return true;
@@ -2498,31 +2508,16 @@ bool in_hard_range( const Character *ch, const Area *tarea )
 /*
  * Scryn, standard luck check 2/2/96
  */
-bool chance( const Character *ch, short percent )
+bool Chance( const Character *ch, short percent )
 {
-  short ms;
+  short ms = 0;
 
-  if (!ch)
+  if ( !ch )
     {
-      Bug("Chance: null ch!", 0);
+      Bug( "%s: null ch!", __FUNCTION__ );
       return false;
     }
 
-  /* Code for clan stuff put in by Narn, Feb/96.  The idea is to punish clan
-     members who don't keep their alignment in tune with that of their clan by
-     making it harder for them to succeed at pretty much everything.  Clan_factor
-     will vary from 1 to 3, with 1 meaning there is no effect on the player's
-     change of success, and with 3 meaning they have half the chance of doing
-     whatever they're trying to do.
-
-     Note that since the neutral clannies can only be off by 1000 points, their
-     maximum penalty will only be half that of the other clan types.
-
-     if ( IsClanned( ch ) )
-     clan_factor = 1 + abs( ch->alignment - ch->pcdata->clan->alignment ) / 1000;
-     else
-     clan_factor = 1;
-  */
   /* Mental state bonus/penalty:  Your mental state is a ranged value with
    * zero (0) being at a perfect mental state (bonus of 10).
    * negative values would reflect how sedated one is, and
@@ -2538,11 +2533,12 @@ bool chance( const Character *ch, short percent )
     return false;
 }
 
+/*
 bool chance_attrib( const Character *ch, short percent, short attrib )
 {
   if (!ch)
     {
-      Bug("Chance: null ch!", 0);
+      Bug("%s: null ch!", __FUNCTION__);
       return false;
     }
 
@@ -2551,7 +2547,7 @@ bool chance_attrib( const Character *ch, short percent, short attrib )
   else
     return false;
 }
-
+*/
 
 /*
  * Make a simple clone of an object (no extras...yet)           -Thoric
@@ -2735,7 +2731,7 @@ bool empty_obj( Object *obj, Object *destobj, Room *destroom )
           otmp_next = otmp->next_content;
 
           if ( destobj->item_type == ITEM_CONTAINER
-               &&   get_obj_weight( otmp ) + get_obj_weight( destobj )
+               &&   GetObjectWeight( otmp ) + GetObjectWeight( destobj )
                > destobj->value[OVAL_CONTAINER_CAPACITY] )
 	    {
 	      continue;
@@ -2765,7 +2761,7 @@ bool empty_obj( Object *obj, Object *destobj, Room *destroom )
           if ( ch )
             {
               oprog_drop_trigger( ch, otmp );           /* mudprogs */
-              if ( char_died(ch) )
+              if ( CharacterDiedRecently(ch) )
                 ch = NULL;
             }
           movedsome = true;

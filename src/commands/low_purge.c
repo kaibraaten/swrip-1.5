@@ -16,8 +16,8 @@ void do_low_purge( Character *ch, char *argument )
     }
 
   victim = NULL; obj = NULL;
-  if ( ( victim = get_char_room( ch, arg ) ) == NULL
-       &&        ( obj    = get_obj_here ( ch, arg ) ) == NULL )
+  if ( ( victim = GetCharacterInRoom( ch, arg ) ) == NULL
+       &&        ( obj    = GetObjectHere ( ch, arg ) ) == NULL )
     {
       SendToCharacter( "You can't find that here.\r\n", ch );
       return;

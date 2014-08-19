@@ -273,7 +273,7 @@ void interpret( Character *ch, char *argument )
 	  return;
 	}
 
-      timer = get_timerptr( ch, TIMER_DO_FUN );
+      timer = GetTimerPointer( ch, TIMER_DO_FUN );
 
       /*
        * Implement freeze command.
@@ -411,7 +411,7 @@ void interpret( Character *ch, char *argument )
       ch->substate = SUB_TIMER_DO_ABORT;
       timer->do_fun(ch,"");
 
-      if ( char_died(ch) )
+      if ( CharacterDiedRecently(ch) )
 	{
 	  return;
 	}
@@ -419,7 +419,7 @@ void interpret( Character *ch, char *argument )
       if ( ch->substate != SUB_TIMER_CANT_ABORT )
         {
           ch->substate = tempsub;
-          extract_timer( ch, timer );
+          ExtractTimer( ch, timer );
         }
       else
         {
@@ -614,7 +614,7 @@ bool check_social( Character *ch, const char *command, char *argument )
       Act( AT_SOCIAL, social->others_no_arg, ch, NULL, victim, TO_ROOM    );
       Act( AT_SOCIAL, social->char_no_arg,   ch, NULL, victim, TO_CHAR    );
     }
-  else if ( !( victim = get_char_room( ch, arg ) ) )
+  else if ( !( victim = GetCharacterInRoom( ch, arg ) ) )
     {
       SendToCharacter( "They aren't here.\r\n", ch );
     }

@@ -427,7 +427,7 @@ void HuntVictim( Character *ch )
     {
       MoveCharacter( ch, GetExit( ch->in_room, ret), false );
 
-      if ( char_died(ch) )
+      if ( CharacterDiedRecently(ch) )
 	{
 	  return;
 	}
@@ -610,14 +610,14 @@ static bool MobSnipe( Character *ch, Character *victim )
 
       HitOnce( ch, victim, TYPE_UNDEFINED );
 
-      if ( char_died(ch) )
+      if ( CharacterDiedRecently(ch) )
 	{
 	  return true;
 	}
 
       StopFighting( ch , true );
 
-      if ( victim && !char_died(victim) && victim->hit < 0 )
+      if ( victim && !CharacterDiedRecently(victim) && victim->hit < 0 )
         {
           StopHunting( ch );
           StopHating( ch );

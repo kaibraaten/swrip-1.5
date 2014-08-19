@@ -40,9 +40,9 @@ void do_mppurge( Character *ch, char *argument )
       return;
     }
 
-  if ( (victim = get_char_room( ch, arg )) == NULL )
+  if ( (victim = GetCharacterInRoom( ch, arg )) == NULL )
     {
-      if ( (obj = get_obj_here( ch, arg )) != NULL )
+      if ( (obj = GetObjectHere( ch, arg )) != NULL )
         ExtractObject( obj );
       else
         ProgBug( "Mppurge - Bad argument", ch );

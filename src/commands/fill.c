@@ -79,7 +79,7 @@ void do_fill( Character *ch, char *argument )
           Act( AT_PLAIN, "The $d is closed.", ch, NULL, obj->name, TO_CHAR );
           return;
         }
-      if ( get_obj_weight( obj ) / obj->count
+      if ( GetObjectWeight( obj ) / obj->count
            >= obj->value[OVAL_CONTAINER_CAPACITY] )
         {
           SendToCharacter( "It's already full as it can be.\r\n", ch );
@@ -133,7 +133,7 @@ void do_fill( Character *ch, char *argument )
           }
         else
           {
-	    if ( ( source =  get_obj_here( ch, arg2 ) ) == NULL )
+	    if ( ( source =  GetObjectHere( ch, arg2 ) ) == NULL )
               {
                 SendToCharacter( "You cannot find that item.\r\n", ch );
                 return;
@@ -165,8 +165,8 @@ void do_fill( Character *ch, char *argument )
             {
               if ( !CAN_WEAR(source, ITEM_TAKE)
                    ||   (IS_OBJ_STAT( source, ITEM_PROTOTYPE) && !CharacterCanTakePrototype(ch))
-                   ||    ch->carry_weight + get_obj_weight(source) > GetCarryCapacityWeight(ch)
-                   ||   (get_obj_weight(source) + get_obj_weight(obj)/obj->count)
+                   ||    ch->carry_weight + GetObjectWeight(source) > GetCarryCapacityWeight(ch)
+                   ||   (GetObjectWeight(source) + GetObjectWeight(obj)/obj->count)
                    > obj->value[OVAL_CONTAINER_CAPACITY] )
                 continue;
               if ( all && arg2[3] == '.'
@@ -241,8 +241,8 @@ void do_fill( Character *ch, char *argument )
           if ( !source->in_room /* disallow inventory items */
                ||   !CAN_WEAR(source, ITEM_TAKE)
                ||   (IS_OBJ_STAT( source, ITEM_PROTOTYPE) && !CharacterCanTakePrototype(ch))
-               ||    ch->carry_weight + get_obj_weight(source) > GetCarryCapacityWeight(ch)
-               ||   (get_obj_weight(source) + get_obj_weight(obj)/obj->count)
+               ||    ch->carry_weight + GetObjectWeight(source) > GetCarryCapacityWeight(ch)
+               ||   (GetObjectWeight(source) + GetObjectWeight(obj)/obj->count)
                > obj->value[OVAL_CONTAINER_CAPACITY] )
             {
               SendToCharacter( "You can't do that.\r\n", ch );
@@ -313,8 +313,8 @@ void do_fill( Character *ch, char *argument )
               if ( !CAN_WEAR(otmp, ITEM_TAKE)
                    ||   (IS_OBJ_STAT( otmp, ITEM_PROTOTYPE) && !CharacterCanTakePrototype(ch))
 		   ||    ch->carry_number + otmp->count > GetCarryCapacityNumber(ch)
-                   ||    ch->carry_weight + get_obj_weight(otmp) > GetCarryCapacityWeight(ch)
-                   ||   (get_obj_weight(source) + get_obj_weight(obj)/obj->count)
+                   ||    ch->carry_weight + GetObjectWeight(otmp) > GetCarryCapacityWeight(ch)
+                   ||   (GetObjectWeight(source) + GetObjectWeight(obj)/obj->count)
                    > obj->value[OVAL_CORPSE_0] )
                 continue;
 

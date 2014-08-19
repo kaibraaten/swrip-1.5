@@ -19,7 +19,7 @@ void do_mount( Character *ch, char *argument )
       return;
     }
 
-  if ( ( victim = get_char_room( ch, argument ) ) == NULL )
+  if ( ( victim = GetCharacterInRoom( ch, argument ) ) == NULL )
     {
       SendToCharacter( "You can't find that here.\r\n", ch );
       return;

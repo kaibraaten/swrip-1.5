@@ -30,7 +30,7 @@ void do_bury( Character *ch, char *argument )
 	}
     }
 
-  obj = get_obj_list_rev( ch, arg, ch->in_room->last_content );
+  obj = GetObjectInListReverse( ch, arg, ch->in_room->last_content );
 
   if ( !obj )
     {

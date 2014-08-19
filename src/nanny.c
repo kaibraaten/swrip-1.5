@@ -941,11 +941,11 @@ if ( (iLang = skill_lookup( "common" )) < 0 )
   if ( IsBitSet(ch->act, ACT_POLYMORPHED) )
     RemoveBit(ch->act, ACT_POLYMORPHED);
 
-  if ( get_timer( ch, TIMER_SHOVEDRAG ) > 0 )
-    remove_timer( ch, TIMER_SHOVEDRAG );
+  if ( GetTimer( ch, TIMER_SHOVEDRAG ) > 0 )
+    RemoveTimer( ch, TIMER_SHOVEDRAG );
 
-  if ( get_timer( ch, TIMER_PKILLED ) > 0 )
-    remove_timer( ch, TIMER_PKILLED );
+  if ( GetTimer( ch, TIMER_PKILLED ) > 0 )
+    RemoveTimer( ch, TIMER_PKILLED );
 
   if ( ch->plr_home != NULL )
     {

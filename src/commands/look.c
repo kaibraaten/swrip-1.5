@@ -90,7 +90,7 @@ void do_look( Character *ch, char *argument )
       return;
     }
 
-  victim = get_char_room( ch, arg1 );
+  victim = GetCharacterInRoom( ch, arg1 );
 
   if ( victim )
     {
@@ -555,7 +555,7 @@ void show_char_to_char( Character *list, Character *ch )
           SetCharacterColor( AT_BLOOD, ch );
           SendToCharacter( "You see a pair of red eyes staring back at you.\r\n", ch );
         }
-      else if ( room_is_dark( ch->in_room )
+      else if ( IsRoomDark( ch->in_room )
                 &&        IsAffectedBy(rch, AFF_INFRARED ) )
         {
           SetCharacterColor( AT_BLOOD, ch );
@@ -609,7 +609,7 @@ static void look_under( Character *ch, char *what, bool doexaprog )
       return;
     }
 
-  obj = get_obj_here( ch, what );
+  obj = GetObjectHere( ch, what );
 
   if ( !obj )
     {
@@ -674,7 +674,7 @@ static bool requirements_are_met( Character *ch )
   if ( !IsNpc(ch)
        && !IsBitSet(ch->act, PLR_HOLYLIGHT)
        && !IsAffectedBy(ch, AFF_TRUESIGHT)
-       && room_is_dark( ch->in_room ) )
+       && IsRoomDark( ch->in_room ) )
     {
       SetCharacterColor( AT_DGREY, ch );
       SendToCharacter( "It is pitch black...\r\n", ch );
@@ -698,7 +698,7 @@ static void look_in( Character *ch, char *what, bool doexaprog )
       return;
     }
 
-  obj = get_obj_here( ch, what );
+  obj = GetObjectHere( ch, what );
 
   if ( !obj )
     {
@@ -747,7 +747,7 @@ static void look_in( Character *ch, char *what, bool doexaprog )
 	    {
 	      Room *original = NULL;
 
-	      if ( room_is_private( ch, pexit->to_room )
+	      if ( IsRoomPrivate( ch, pexit->to_room )
 		   && GetTrustLevel(ch) < sysdata.level_override_private )
 		{
 		  SetCharacterColor( AT_WHITE, ch );
@@ -857,7 +857,7 @@ static void show_exit_to_char( Character *ch, Exit *pexit, short door )
 	    }
 	}
 
-      if ( room_is_private( ch, pexit->to_room )
+      if ( IsRoomPrivate( ch, pexit->to_room )
 	   && GetTrustLevel(ch) < sysdata.level_override_private )
 	{
 	  SetCharacterColor( AT_WHITE, ch );

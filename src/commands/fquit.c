@@ -16,7 +16,7 @@ void do_fquit( Character *ch, char *argument )
       return;
     }
 
-  if ( !( victim = get_char_world( ch, arg1 ) ) )
+  if ( !( victim = GetCharacterAnywhere( ch, arg1 ) ) )
     {
       SendToCharacter( "They aren't here.\r\n", ch );
       return;

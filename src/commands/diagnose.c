@@ -125,7 +125,7 @@ void do_diagnose( Character *ch, char *argument )
     if ( GetTrustLevel(ch) < LEVEL_SUB_IMPLEM )
       return;
 
-    if ( ( victim = get_char_world( ch, arg2 ) ) == NULL )
+    if ( ( victim = GetCharacterAnywhere( ch, arg2 ) ) == NULL )
       {
         SendToCharacter( "Not here.\r\n", ch );
         return;

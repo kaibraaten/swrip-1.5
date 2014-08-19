@@ -39,7 +39,7 @@ void do_tell( Character *ch, char *argument )
       return;
     }
 
-  if ( ( victim = get_char_world( ch, arg ) ) == NULL
+  if ( ( victim = GetCharacterAnywhere( ch, arg ) ) == NULL
        || ( IsNpc(victim) && victim->in_room != ch->in_room )
        || (IsAuthed(ch) && !IsAuthed(victim) && !IsImmortal(ch) ) )
     {

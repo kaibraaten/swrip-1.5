@@ -24,7 +24,7 @@ void do_drag( Character *ch, char *argument )
       return;
     }
 
-  if ( ( victim = get_char_room( ch, arg ) ) == NULL )
+  if ( ( victim = GetCharacterInRoom( ch, arg ) ) == NULL )
     {
       SendToCharacter( "They aren't here.\r\n", ch);
       return;
@@ -57,7 +57,7 @@ void do_drag( Character *ch, char *argument )
   exit_dir = GetDirection( arg2 );
 
   if ( IsBitSet(victim->in_room->room_flags, ROOM_SAFE)
-       &&   get_timer( victim, TIMER_SHOVEDRAG ) <= 0)
+       &&   GetTimer( victim, TIMER_SHOVEDRAG ) <= 0)
     {
       SendToCharacter("That character cannot be dragged right now.\r\n", ch);
       return;
@@ -239,7 +239,7 @@ void do_drag( Character *ch, char *argument )
   to_room = pexit->to_room;
 
   if (ch->in_room->area != to_room->area
-      && !in_hard_range( victim, to_room->area ) )
+      && !InHardRange( victim, to_room->area ) )
     {
       SendToCharacter("That character cannot enter that area.\r\n", ch);
       return;
@@ -266,7 +266,7 @@ void do_drag( Character *ch, char *argument )
       Act( AT_ACTION, "You drag $M into the next room.", ch, NULL, victim, TO_CHAR );
       Act( AT_ACTION, "$n grabs your hair and drags you.", ch, NULL, victim, TO_VICT );
       MoveCharacter( victim, GetExit(ch->in_room,exit_dir), 0);
-      if ( !char_died(victim) )
+      if ( !CharacterDiedRecently(victim) )
         victim->position = temp;
       /* Move ch to the room too.. they are doing dragging - Scryn */
       MoveCharacter( ch, GetExit(ch->in_room,exit_dir), 0);

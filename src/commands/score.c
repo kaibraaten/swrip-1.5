@@ -2,7 +2,7 @@
 #include "mud.h"
 #include "character.h"
 
-static char *tiny_affect_loc_name(int location);
+static char *tiny_GetAffectLocationName(int location);
 
 void do_score(Character * ch, char *argument)
 {
@@ -277,13 +277,13 @@ void do_score(Character * ch, char *argument)
                 if (paf->modifier > 999)
 		  ChPrintf(ch, "&c[&C%-15.15s&c; &C%7.7s;%5d rds&c]    ",
                             Capitalize(sktmp->name),
-                            tiny_affect_loc_name(paf->location),
+                            tiny_GetAffectLocationName(paf->location),
                             paf->duration);
                 else
                   ChPrintf(ch, "&c[&C%-11.11s&c;&C%+-3.3d %7.7s&c;&C%5d rds&c]    ",
                             Capitalize(sktmp->name),
                             paf->modifier,
-                            tiny_affect_loc_name(paf->location),
+                            tiny_GetAffectLocationName(paf->location),
                             paf->duration);
               if (i == 0)
                 i = 1;
@@ -295,7 +295,7 @@ void do_score(Character * ch, char *argument)
   SendToCharacter("\r\n", ch);
 }
 
-static char *tiny_affect_loc_name(int location)
+static char *tiny_GetAffectLocationName(int location)
 {
   switch (location) {
   case APPLY_NONE:              return "NIL";

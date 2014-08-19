@@ -104,7 +104,7 @@ static void OnStart( Character *ch, char *argument )
       SendToCharacter( "&GYou begin the long process of making a grenade.\r\n", ch);
       Act( AT_PLAIN, "$n takes $s tools and a drink container and begins to work on something.", ch,
 	   NULL, NULL , TO_ROOM );
-      add_timer ( ch , TIMER_DO_FUN , 25 , do_makegrenade , SUB_PAUSE );
+      AddTimerToCharacter( ch , TIMER_DO_FUN , 25 , do_makegrenade , SUB_PAUSE );
       ch->dest_buf   = CopyString(arg);
       return;
     }

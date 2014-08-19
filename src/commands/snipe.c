@@ -87,7 +87,7 @@ void do_snipe( Character *ch, char *argument )
           pfound = true;
           break;
         }
-      else if ( !IsNpc(ch) && ( victim = get_char_room( ch, arg2 ) ) != NULL )
+      else if ( !IsNpc(ch) && ( victim = GetCharacterInRoom( ch, arg2 ) ) != NULL )
         {
           pfound = true;
           break;
@@ -187,7 +187,7 @@ void do_snipe( Character *ch, char *argument )
 
       HitOnce( ch, victim, TYPE_UNDEFINED );
 
-      if ( char_died(ch) )
+      if ( CharacterDiedRecently(ch) )
         return;
 
       StopFighting( ch , true );
@@ -216,7 +216,7 @@ void do_snipe( Character *ch, char *argument )
       else
         SetWaitState( ch, 3 * PULSE_PER_SECOND );
     }
-  if ( IsNpc( victim ) && !char_died(victim) )
+  if ( IsNpc( victim ) && !CharacterDiedRecently(victim) )
     {
       if ( IsBitSet( victim->act , ACT_SENTINEL ) )
         {

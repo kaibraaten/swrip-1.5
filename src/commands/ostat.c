@@ -19,7 +19,7 @@ void do_ostat( Character *ch, char *argument )
   if ( arg[0] != '\'' && arg[0] != '"' && strlen(argument) > strlen(arg) )
     strcpy( arg, argument );
 
-  if ( ( obj = get_obj_world( ch, arg ) ) == NULL )
+  if ( ( obj = GetObjectAnywhere( ch, arg ) ) == NULL )
     {
       SendToCharacter( "Nothing like that in hell, earth, or heaven.\r\n", ch );
       return;
@@ -40,7 +40,7 @@ void do_ostat( Character *ch, char *argument )
 
 
   ChPrintf( ch, "Vnum: %d.  Type: %s.  Count: %d  Gcount: %d\r\n",
-             obj->Prototype->vnum, item_type_name( obj ), obj->Prototype->count,
+             obj->Prototype->vnum, GetItemTypeName( obj ), obj->Prototype->count,
              obj->count );
 
   ChPrintf( ch, "Serial#: %d  TopIdxSerial#: %d  TopSerial#: %d\r\n",
@@ -56,8 +56,8 @@ void do_ostat( Character *ch, char *argument )
   ChPrintf( ch, "Extra flags: %s\r\n", FlagString(obj->extra_flags, object_flags) );
 
   ChPrintf( ch, "Number: %d/%d.  Weight: %d/%d.  Layers: %d\r\n",
-             1,           get_obj_number( obj ),
-             obj->weight, get_obj_weight( obj ), obj->Prototype->layers );
+             1,           GetObjectCount( obj ),
+             obj->weight, GetObjectWeight( obj ), obj->Prototype->layers );
 
   ChPrintf( ch, "Cost: %d.  Rent: %d.  Timer: %d.  Level: %d.\r\n",
              obj->cost, obj->Prototype->rent, obj->timer, obj->level );
@@ -112,9 +112,9 @@ void do_ostat( Character *ch, char *argument )
 
   for ( paf = obj->first_affect; paf; paf = paf->next )
     ChPrintf( ch, "Affects %s by %d. (extra)\r\n",
-               affect_loc_name( paf->location ), paf->modifier );
+               GetAffectLocationName( paf->location ), paf->modifier );
 
   for ( paf = obj->Prototype->first_affect; paf; paf = paf->next )
     ChPrintf( ch, "Affects %s by %d.\r\n",
-               affect_loc_name( paf->location ), paf->modifier );
+               GetAffectLocationName( paf->location ), paf->modifier );
 }

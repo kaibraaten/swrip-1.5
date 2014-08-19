@@ -57,7 +57,7 @@ void do_throw( Character *ch, char *argument )
   if ( ch->position == POS_FIGHTING )
     {
       victim = GetFightingOpponent( ch );
-      if ( char_died ( victim ) )
+      if ( CharacterDiedRecently( victim ) )
         return;
       Act( AT_ACTION, "You throw $p at $N.", ch, obj, victim, TO_CHAR );
       Act( AT_ACTION, "$n throws $p at $N.", ch, obj, victim, TO_NOTVICT );
@@ -123,7 +123,7 @@ void do_throw( Character *ch, char *argument )
       CharacterFromRoom( ch );
       CharacterToRoom( ch, to_room );
 
-      victim = get_char_room( ch, arg3 );
+      victim = GetCharacterInRoom( ch, arg3 );
 
       if ( victim )
         {
@@ -179,7 +179,7 @@ void do_throw( Character *ch, char *argument )
 
         }
     }
-  else if ( ( victim = get_char_room( ch, arg2 ) ) != NULL )
+  else if ( ( victim = GetCharacterInRoom( ch, arg2 ) ) != NULL )
     {
       if ( IsSafe( ch, victim ) )
         return;
@@ -218,7 +218,7 @@ void do_throw( Character *ch, char *argument )
 
   /* NOT NEEDED UNLESS REFERING TO OBJECT AGAIN
 
-     if( obj_extracted(obj) )
+     if( IsObjectExtracted(obj) )
      return;
   */
   if ( ch->in_room !=  was_in_room )
@@ -227,7 +227,7 @@ void do_throw( Character *ch, char *argument )
       CharacterToRoom( ch, was_in_room );
     }
 
-  if ( !victim || char_died( victim ) )
+  if ( !victim || CharacterDiedRecently( victim ) )
     LearnFromFailure( ch, gsn_throw );
   else
     {
@@ -244,7 +244,7 @@ void do_throw( Character *ch, char *argument )
           global_retcode = InflictDamage( ch, victim, 0, TYPE_HIT );
         }
 
-      if ( IsNpc( victim ) && !char_died ( victim) )
+      if ( IsNpc( victim ) && !CharacterDiedRecently( victim) )
         {
           if ( IsBitSet( victim->act , ACT_SENTINEL ) )
             {

@@ -84,7 +84,7 @@ obj_ret DamageObject( Object *obj )
       }
 
   oprog_damage_trigger(ch, obj);
-  if ( obj_extracted(obj) )
+  if ( IsObjectExtracted(obj) )
     return global_objcode;
 
   switch( obj->item_type )
@@ -296,7 +296,7 @@ bool RemoveObject( Character *ch, int iWear, bool fReplace )
     return true;
 
   if ( !fReplace
-       &&   ch->carry_number + get_obj_number( obj ) > GetCarryCapacityNumber( ch ) )
+       &&   ch->carry_number + GetObjectCount( obj ) > GetCarryCapacityNumber( ch ) )
     {
       Act( AT_PLAIN, "$d: you can't carry that many items.",
            ch, NULL, obj->name, TO_CHAR );

@@ -36,7 +36,7 @@ void do_examine( Character *ch, char *argument )
    * Support for looking at boards, checking equipment conditions,
    * and support for trigger positions by Thoric
    */
-  if ( ( obj = get_obj_here( ch, arg ) ) != NULL )
+  if ( ( obj = GetObjectHere( ch, arg ) ) != NULL )
     {
       if ( (board = GetBoardFromObject( obj )) != NULL )
         {
@@ -256,9 +256,9 @@ void do_examine( Character *ch, char *argument )
         }
       oprog_examine_trigger( ch, obj );
 
-      if( char_died(ch) || obj_extracted(obj) )
+      if( CharacterDiedRecently(ch) || IsObjectExtracted(obj) )
         return;
 
-      check_for_trap( ch, obj, TRAP_EXAMINE );
+      CheckObjectForTrap( ch, obj, TRAP_EXAMINE );
     }
 }

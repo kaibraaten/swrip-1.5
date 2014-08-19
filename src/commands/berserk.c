@@ -20,7 +20,7 @@ void do_berserk( Character *ch, char *argument )
 
   percent = IsNpc(ch) ? 80 : ch->pcdata->learned[gsn_berserk];
   SetWaitState(ch, skill_table[gsn_berserk]->beats);
-  if ( !chance(ch, percent) )
+  if ( !Chance(ch, percent) )
     {
       SendToCharacter( "You couldn't build up enough rage.\r\n", ch);
       LearnFromFailure(ch, gsn_berserk);

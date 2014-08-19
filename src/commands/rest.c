@@ -14,7 +14,7 @@ void do_rest( Character *ch, char *argument )
   /* okay, now that we know we can rest, find an object to rest on */
   if (argument[0] != '\0')
     {
-      obj = get_obj_list(ch,argument,ch->in_room->first_content);
+      obj = GetObjectInList(ch,argument,ch->in_room->first_content);
 
       if (obj == NULL)
         {

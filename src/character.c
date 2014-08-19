@@ -372,7 +372,7 @@ void EquipCharacter( Character *ch, Object *obj, int iWear )
         ObjectFromCharacter( obj );
       ObjectToRoom( obj, ch->in_room );
       oprog_zap_trigger( ch, obj);
-      if ( IsBitSet(sysdata.save_flags, SV_ZAPDROP) && !char_died(ch) )
+      if ( IsBitSet(sysdata.save_flags, SV_ZAPDROP) && !CharacterDiedRecently(ch) )
         save_char_obj( ch );
       return;
     }
@@ -380,9 +380,9 @@ void EquipCharacter( Character *ch, Object *obj, int iWear )
   ch->armor             -= GetObjectArmorClass( obj, iWear );
   obj->wear_loc  = iWear;
 
-  ch->carry_number      -= get_obj_number( obj );
+  ch->carry_number      -= GetObjectCount( obj );
   if ( IsBitSet( obj->extra_flags, ITEM_MAGIC ) || obj->wear_loc == WEAR_FLOATING )
-    ch->carry_weight  -= get_obj_weight( obj );
+    ch->carry_weight  -= GetObjectWeight( obj );
 
   for ( paf = obj->Prototype->first_affect; paf; paf = paf->next )
     ModifyAffect( ch, paf, true );
@@ -409,9 +409,9 @@ void UnequipCharacter( Character *ch, Object *obj )
       return;
     }
 
-  ch->carry_number      += get_obj_number( obj );
+  ch->carry_number      += GetObjectCount( obj );
   if ( IsBitSet( obj->extra_flags, ITEM_MAGIC ) || obj->wear_loc == WEAR_FLOATING )
-    ch->carry_weight  += get_obj_weight( obj );
+    ch->carry_weight  += GetObjectWeight( obj );
 
   ch->armor             += GetObjectArmorClass( obj, obj->wear_loc );
   obj->wear_loc  = -1;
@@ -706,7 +706,7 @@ bool CanSeeCharacter( const Character *ch, const Character *victim )
     return false;
 
   if ( !IsImmortal(ch) && !IsNpc(victim) && !victim->desc
-       && get_timer(victim, TIMER_RECENTFIGHT) > 0
+       && GetTimer(victim, TIMER_RECENTFIGHT) > 0
        && (!victim->switched || !IsAffectedBy(victim->switched, AFF_POSSESS)) )
     return false;
 
@@ -719,7 +719,7 @@ bool CanSeeCharacter( const Character *ch, const Character *victim )
       if ( IsAffectedBy(ch, AFF_BLIND) )
         return false;
 
-      if ( room_is_dark( ch->in_room ) && !IsAffectedBy(ch, AFF_INFRARED) )
+      if ( IsRoomDark( ch->in_room ) && !IsAffectedBy(ch, AFF_INFRARED) )
         return false;
 
       if ( IsAffectedBy(victim, AFF_HIDE)
@@ -764,7 +764,7 @@ bool CanSeeObject( const Character *ch, const Object *obj )
   if ( obj->item_type == ITEM_LIGHT && obj->value[OVAL_LIGHT_POWER] != 0 )
     return true;
 
-  if ( room_is_dark( ch->in_room ) && !IsAffectedBy(ch, AFF_INFRARED) )
+  if ( IsRoomDark( ch->in_room ) && !IsAffectedBy(ch, AFF_INFRARED) )
     return false;
 
   if ( IS_OBJ_STAT(obj, ITEM_INVIS) && !IsAffectedBy(ch, AFF_DETECT_INVIS) )

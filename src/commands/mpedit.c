@@ -70,7 +70,7 @@ void do_mpedit( Character *ch, char *argument )
 
   if ( GetTrustLevel( ch ) < LEVEL_GREATER )
     {
-      if ( ( victim = get_char_room( ch, arg1 ) ) == NULL )
+      if ( ( victim = GetCharacterInRoom( ch, arg1 ) ) == NULL )
         {
           SendToCharacter( "They aren't here.\r\n", ch );
           return;
@@ -78,7 +78,7 @@ void do_mpedit( Character *ch, char *argument )
     }
   else
     {
-      if ( ( victim = get_char_world( ch, arg1 ) ) == NULL )
+      if ( ( victim = GetCharacterAnywhere( ch, arg1 ) ) == NULL )
         {
           SendToCharacter( "No one like that in all the realms.\r\n", ch );
           return;

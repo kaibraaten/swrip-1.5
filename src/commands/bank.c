@@ -90,7 +90,7 @@ void do_bank( Character *ch, char *argument )
     }
   else if ( !StringPrefix( arg1 , "transfer" ) )
     {
-      if( ( ( victim = get_char_world(ch, arg3) ) == NULL ))
+      if( ( ( victim = GetCharacterAnywhere(ch, arg3) ) == NULL ))
         {
           SendToCharacter("No such player online.\r\n", ch);
           return;

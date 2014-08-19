@@ -22,7 +22,7 @@ void do_gather_intelligence ( Character *ch , char *argument )
 
   SetWaitState( ch, skill_table[gsn_gather_intelligence]->beats );
 
-  if( ( ( victim = get_char_world(ch, buf) ) == NULL ))
+  if( ( ( victim = GetCharacterAnywhere(ch, buf) ) == NULL ))
     {
       SendToCharacter("You fail to gather information on that individual.\r\n", ch);
       return;

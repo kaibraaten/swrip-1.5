@@ -20,7 +20,7 @@ void do_invite(Character *ch, char *argument)
       return;
     }
 
-  if ( (victim = get_char_world(ch,argument)) == NULL )
+  if ( (victim = GetCharacterAnywhere(ch,argument)) == NULL )
     {
       SendToCharacter("&RThey aren't here.\r\n",ch);
       return;

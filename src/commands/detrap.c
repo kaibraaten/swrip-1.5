@@ -58,7 +58,7 @@ void do_detrap( Character *ch, char *argument )
       Act( AT_ACTION, "You carefully begin your attempt to remove a trap from $p...", ch, obj, NULL, TO_CHAR );
       Act( AT_ACTION, "$n carefully attempts to remove a trap from $p...", ch, obj, NULL, TO_ROOM );
       ch->dest_buf = CopyString( obj->name );
-      add_timer( ch, TIMER_DO_FUN, 3, do_detrap, SUB_PAUSE );
+      AddTimerToCharacter( ch, TIMER_DO_FUN, 3, do_detrap, SUB_PAUSE );
       return;
 
     case SUB_PAUSE:
@@ -98,7 +98,7 @@ void do_detrap( Character *ch, char *argument )
       SendToCharacter( "You can't find that here.\r\n", ch );
       return;
     }
-  if ( (trap = get_trap( obj )) == NULL )
+  if ( (trap = GetTrap( obj )) == NULL )
     {
       SendToCharacter( "You find no trap on that.\r\n", ch );
       return;
@@ -112,7 +112,7 @@ void do_detrap( Character *ch, char *argument )
   if ( !IsNpc(ch) || percent > ch->pcdata->learned[gsn_detrap] )
     {
       SendToCharacter( "Ooops!\r\n", ch );
-      spring_trap( ch, trap );
+      SpringTrap( ch, trap );
       LearnFromFailure( ch, gsn_detrap );
       return;
     }

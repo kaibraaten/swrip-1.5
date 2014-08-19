@@ -44,7 +44,7 @@ void do_glance( Character *ch, char *argument )
       return;
     }
 
-  if ( ( victim = get_char_room( ch, arg1 ) ) == NULL )
+  if ( ( victim = GetCharacterInRoom( ch, arg1 ) ) == NULL )
     {
       SendToCharacter( "They're not here.", ch );
       return;

@@ -8,7 +8,7 @@ void do_unjail ( Character *ch , char *argument )
 
   argument = OneArgument(argument, arg);
 
-  if ( ( victim = get_char_room( ch, arg ) ) == NULL )
+  if ( ( victim = GetCharacterInRoom( ch, arg ) ) == NULL )
     {
       SendToCharacter( "They aren't here.\r\n", ch );
       return;

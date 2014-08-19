@@ -2578,7 +2578,7 @@ void FreeCharacter( Character *ch )
     RemoveAffect( ch, paf );
 
   while ( (timer = ch->first_timer) != NULL )
-    extract_timer( ch, timer );
+    ExtractTimer( ch, timer );
 
   FreeMemory( ch->name             );
   FreeMemory( ch->short_descr      );

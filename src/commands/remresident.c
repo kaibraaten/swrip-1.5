@@ -26,7 +26,7 @@ void do_remresident(Character *ch, char *argument)
       return;
     }
 
-  if ( (victim = get_char_room(ch,argument)) == NULL )
+  if ( (victim = GetCharacterInRoom(ch,argument)) == NULL )
     {
       SendToCharacter("&RThey aren't here.\r\n",ch);
       return;

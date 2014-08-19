@@ -57,7 +57,7 @@ void do_unlock( Character *ch, char *argument )
         }
     }
 
-  if ( ( obj = get_obj_here( ch, arg ) ) != NULL )
+  if ( ( obj = GetObjectHere( ch, arg ) ) != NULL )
     {
       /* 'unlock object' */
       if ( obj->item_type != ITEM_CONTAINER )

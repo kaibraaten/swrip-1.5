@@ -89,7 +89,7 @@ void do_get( Character *ch, char *argument )
 	   && StringPrefix( "all.", arg1 ) )
         {
           /* 'get obj' */
-          obj = get_obj_list( ch, arg1, ch->in_room->first_content );
+          obj = GetObjectInList( ch, arg1, ch->in_room->first_content );
 
           if ( !obj )
             {
@@ -100,7 +100,7 @@ void do_get( Character *ch, char *argument )
           separate_obj(obj);
           get_obj( ch, obj, NULL );
 
-          if ( char_died(ch) )
+          if ( CharacterDiedRecently(ch) )
             return;
 
           if ( IsBitSet( sysdata.save_flags, SV_GET ) )
@@ -152,13 +152,13 @@ void do_get( Character *ch, char *argument )
                   cnt += obj->count;
                   get_obj( ch, obj, NULL );
 
-                  if ( char_died(ch)
+                  if ( CharacterDiedRecently(ch)
                        || ch->carry_number >= GetCarryCapacityNumber( ch )
                        || ch->carry_weight >= GetCarryCapacityWeight( ch )
                        || (number && cnt >= number) )
                     {
                       if ( IsBitSet(sysdata.save_flags, SV_GET)
-                           &&  !char_died(ch) )
+                           &&  !CharacterDiedRecently(ch) )
                         {
                           save_char_obj( ch );
 
@@ -202,7 +202,7 @@ void do_get( Character *ch, char *argument )
           return;
         }
 
-      if ( ( container = get_obj_here( ch, arg2 ) ) == NULL )
+      if ( ( container = GetObjectHere( ch, arg2 ) ) == NULL )
         {
           Act( AT_PLAIN, "I see no $T here.", ch, NULL, arg2, TO_CHAR );
           return;
@@ -243,7 +243,7 @@ void do_get( Character *ch, char *argument )
 	   && StringPrefix( "all.", arg1 ) )
         {
           /* 'get obj container' */
-          obj = get_obj_list( ch, arg1, container->first_content );
+          obj = GetObjectInList( ch, arg1, container->first_content );
           if ( !obj )
             {
               Act( AT_PLAIN, IS_OBJ_STAT(container, ITEM_COVERING) ?
@@ -255,8 +255,8 @@ void do_get( Character *ch, char *argument )
           separate_obj(obj);
           get_obj( ch, obj, container );
 
-          check_for_trap( ch, container, TRAP_GET );
-          if ( char_died(ch) )
+          CheckObjectForTrap( ch, container, TRAP_GET );
+          if ( CharacterDiedRecently(ch) )
             return;
           if ( IsBitSet( sysdata.save_flags, SV_GET ) )
             {
@@ -303,7 +303,7 @@ void do_get( Character *ch, char *argument )
                     split_obj( obj, number - cnt );
                   cnt += obj->count;
                   get_obj( ch, obj, container );
-                  if ( char_died(ch)
+                  if ( CharacterDiedRecently(ch)
                        ||   ch->carry_number >= GetCarryCapacityNumber( ch )
                        ||   ch->carry_weight >= GetCarryCapacityWeight( ch )
                        ||   (number && cnt >= number) )
@@ -325,8 +325,8 @@ void do_get( Character *ch, char *argument )
                      ch, NULL, arg2, TO_CHAR );
             }
           else
-            check_for_trap( ch, container, TRAP_GET );
-          if ( char_died(ch) )
+            CheckObjectForTrap( ch, container, TRAP_GET );
+          if ( CharacterDiedRecently(ch) )
             return;
           if ( found && IsBitSet( sysdata.save_flags, SV_GET ) )
             {
@@ -359,7 +359,7 @@ static void get_obj( Character *ch, Object *obj, Object *container )
       return;
     }
 
-  if ( ch->carry_number + get_obj_number( obj ) > GetCarryCapacityNumber( ch ) )
+  if ( ch->carry_number + GetObjectCount( obj ) > GetCarryCapacityNumber( ch ) )
     {
       Act( AT_PLAIN, "$d: you can't carry that many items.",
            ch, NULL, obj->name, TO_CHAR );
@@ -369,7 +369,7 @@ static void get_obj( Character *ch, Object *obj, Object *container )
   if ( IS_OBJ_STAT( obj, ITEM_COVERING ) )
     weight = obj->weight;
   else
-    weight = get_obj_weight( obj );
+    weight = GetObjectWeight( obj );
 
   if ( ch->carry_weight + weight > GetCarryCapacityWeight( ch ) )
     {
@@ -403,8 +403,8 @@ static void get_obj( Character *ch, Object *obj, Object *container )
         SaveClanStoreroom(ch, clan);
 
   if ( obj->item_type != ITEM_CONTAINER )
-    check_for_trap( ch, obj, TRAP_GET );
-  if ( char_died(ch) )
+    CheckObjectForTrap( ch, obj, TRAP_GET );
+  if ( CharacterDiedRecently(ch) )
     return;
 
   if ( obj->item_type == ITEM_MONEY )
@@ -417,7 +417,7 @@ static void get_obj( Character *ch, Object *obj, Object *container )
       obj = ObjectToCharacter( obj, ch );
     }
 
-  if ( char_died(ch) || obj_extracted(obj) )
+  if ( CharacterDiedRecently(ch) || IsObjectExtracted(obj) )
     return;
 
   oprog_get_trigger(ch, obj);

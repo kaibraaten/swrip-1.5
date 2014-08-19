@@ -39,7 +39,7 @@ void do_bet(Character *ch, char *argument)
       SendToCharacter("Sorry Arena has already started, no more bets.\r\n", ch);
       return;
     }
-  else if (!(ch->betted_on = get_char_world(ch, arg)))
+  else if (!(ch->betted_on = GetCharacterAnywhere(ch, arg)))
     SendToCharacter("No such person exists in the galaxy.", ch);
   else if (ch->betted_on == ch)
     SendToCharacter("That doesn't make much sense, does it?\r\n", ch);

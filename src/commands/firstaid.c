@@ -30,7 +30,7 @@ void do_first_aid( Character *ch, char *argument )
   if ( argument[0] == '\0' )
     victim = ch;
   else
-    victim = get_char_room( ch, argument );
+    victim = GetCharacterInRoom( ch, argument );
 
   if ( !victim )
     {

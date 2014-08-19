@@ -46,7 +46,7 @@ void do_give( Character *ch, char *argument )
           return;
         }
 
-      if ( ( victim = get_char_room( ch, arg2 ) ) == NULL )
+      if ( ( victim = GetCharacterInRoom( ch, arg2 ) ) == NULL )
         {
           SendToCharacter( "They aren't here.\r\n", ch );
           return;
@@ -70,10 +70,10 @@ void do_give( Character *ch, char *argument )
       SendToCharacter( "OK.\r\n", ch );
       MobProgBribeTrigger( victim, ch, amount );
 
-      if ( IsBitSet( sysdata.save_flags, SV_GIVE ) && !char_died(ch) )
+      if ( IsBitSet( sysdata.save_flags, SV_GIVE ) && !CharacterDiedRecently(ch) )
         save_char_obj(ch);
 
-      if ( IsBitSet( sysdata.save_flags, SV_RECEIVE ) && !char_died(victim) )
+      if ( IsBitSet( sysdata.save_flags, SV_RECEIVE ) && !CharacterDiedRecently(victim) )
         save_char_obj(victim);
 
       return;
@@ -91,7 +91,7 @@ void do_give( Character *ch, char *argument )
       return;
     }
 
-  if ( ( victim = get_char_room( ch, arg2 ) ) == NULL )
+  if ( ( victim = GetCharacterInRoom( ch, arg2 ) ) == NULL )
     {
       SendToCharacter( "They aren't here.\r\n", ch );
       return;
@@ -103,13 +103,13 @@ void do_give( Character *ch, char *argument )
       return;
     }
 
-  if ( victim->carry_number + (get_obj_number(obj)/obj->count) > GetCarryCapacityNumber( victim ) )
+  if ( victim->carry_number + (GetObjectCount(obj)/obj->count) > GetCarryCapacityNumber( victim ) )
     {
       Act( AT_PLAIN, "$N has $S hands full.", ch, NULL, victim, TO_CHAR );
       return;
     }
 
-  if ( victim->carry_weight + (get_obj_weight(obj)/obj->count) > GetCarryCapacityWeight( victim ) )
+  if ( victim->carry_weight + (GetObjectWeight(obj)/obj->count) > GetCarryCapacityWeight( victim ) )
     {
       Act( AT_PLAIN, "$N can't carry that much weight.", ch, NULL, victim, TO_CHAR );
       return;
@@ -146,8 +146,8 @@ void do_give( Character *ch, char *argument )
 
   MobProgGiveTrigger( victim, ch, obj );
 
-  if ( IsBitSet( sysdata.save_flags, SV_GIVE ) && !char_died(ch) )
+  if ( IsBitSet( sysdata.save_flags, SV_GIVE ) && !CharacterDiedRecently(ch) )
     save_char_obj(ch);
-  if ( IsBitSet( sysdata.save_flags, SV_RECEIVE ) && !char_died(victim) )
+  if ( IsBitSet( sysdata.save_flags, SV_RECEIVE ) && !CharacterDiedRecently(victim) )
     save_char_obj(victim);
 }

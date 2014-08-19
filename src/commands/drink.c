@@ -27,7 +27,7 @@ void do_drink( Character *ch, char *argument )
     }
   else
     {
-      if ( ( obj = get_obj_here( ch, arg ) ) == NULL )
+      if ( ( obj = GetObjectHere( ch, arg ) ) == NULL )
         {
           SendToCharacter( "You can't find it.\r\n", ch );
           return;

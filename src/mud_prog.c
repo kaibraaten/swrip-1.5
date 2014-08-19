@@ -1217,7 +1217,7 @@ void mprog_translate( char ch, char *t, Character *mob, Character *actor,
   *t = '\0';
   switch ( ch ) {
   case 'i':
-    if ( mob && !char_died(mob) )
+    if ( mob && !CharacterDiedRecently(mob) )
       {
         if (mob->name)
           OneArgument( mob->name, t );
@@ -1230,7 +1230,7 @@ void mprog_translate( char ch, char *t, Character *mob, Character *actor,
     break;
 
   case 'I':
-    if ( mob && !char_died(mob) )
+    if ( mob && !CharacterDiedRecently(mob) )
       {
         if (mob->short_descr)
           {
@@ -1247,7 +1247,7 @@ void mprog_translate( char ch, char *t, Character *mob, Character *actor,
     break;
 
   case 'n':
-    if ( actor && !char_died(actor) )
+    if ( actor && !CharacterDiedRecently(actor) )
       {
         OneArgument( actor->name, t );
 
@@ -1261,7 +1261,7 @@ void mprog_translate( char ch, char *t, Character *mob, Character *actor,
     break;
 
   case 'N':
-    if( actor && !char_died( actor ) )
+    if( actor && !CharacterDiedRecently( actor ) )
       {
 	if( CanSeeCharacter( mob, actor ) )
 	  {
@@ -1287,7 +1287,7 @@ void mprog_translate( char ch, char *t, Character *mob, Character *actor,
     break;
 
   case 't':
-    if ( vict && !char_died(vict) )
+    if ( vict && !CharacterDiedRecently(vict) )
       {
         OneArgument( vict->name, t );
 
@@ -1304,7 +1304,7 @@ void mprog_translate( char ch, char *t, Character *mob, Character *actor,
     break;
 
   case 'T':
-    if ( vict && !char_died(vict) )
+    if ( vict && !CharacterDiedRecently(vict) )
       {
         if ( CanSeeCharacter( mob, vict ) )
 	  {
@@ -1331,7 +1331,7 @@ void mprog_translate( char ch, char *t, Character *mob, Character *actor,
     break;
 
   case 'r':
-    if ( rndm && !char_died(rndm) )
+    if ( rndm && !CharacterDiedRecently(rndm) )
       {
         OneArgument( rndm->name, t );
 
@@ -1347,7 +1347,7 @@ void mprog_translate( char ch, char *t, Character *mob, Character *actor,
     break;
 
   case 'R':
-    if ( rndm && !char_died(rndm) )
+    if ( rndm && !CharacterDiedRecently(rndm) )
       {
         if ( CanSeeCharacter( mob, rndm ) )
 	  {
@@ -1374,7 +1374,7 @@ void mprog_translate( char ch, char *t, Character *mob, Character *actor,
     break;
 
   case 'e':
-    if ( actor && !char_died(actor) )
+    if ( actor && !CharacterDiedRecently(actor) )
       {
         if( CanSeeCharacter( mob, actor ) )
 	  {
@@ -1392,7 +1392,7 @@ void mprog_translate( char ch, char *t, Character *mob, Character *actor,
     break;
 
   case 'm':
-    if ( actor && !char_died(actor) )
+    if ( actor && !CharacterDiedRecently(actor) )
       {
         if( CanSeeCharacter( mob, actor ) )
 	  {
@@ -1410,7 +1410,7 @@ void mprog_translate( char ch, char *t, Character *mob, Character *actor,
     break;
 
   case 's':
-    if ( actor && !char_died(actor) )
+    if ( actor && !CharacterDiedRecently(actor) )
       {
         if( CanSeeCharacter( mob, actor ) )
 	  {
@@ -1428,7 +1428,7 @@ void mprog_translate( char ch, char *t, Character *mob, Character *actor,
     break;
 
   case 'E':
-    if ( vict && !char_died(vict) )
+    if ( vict && !CharacterDiedRecently(vict) )
       {
         if( CanSeeCharacter( mob, vict ) )
 	  {
@@ -1446,7 +1446,7 @@ void mprog_translate( char ch, char *t, Character *mob, Character *actor,
     break;
 
   case 'M':
-    if ( vict && !char_died(vict) )
+    if ( vict && !CharacterDiedRecently(vict) )
       {
         if( CanSeeCharacter( mob, vict ) )
 	  {
@@ -1464,7 +1464,7 @@ void mprog_translate( char ch, char *t, Character *mob, Character *actor,
     break;
 
   case 'S':
-    if ( vict && !char_died(vict) )
+    if ( vict && !CharacterDiedRecently(vict) )
       {
         if( CanSeeCharacter( mob, vict ) )
 	  {
@@ -1482,7 +1482,7 @@ void mprog_translate( char ch, char *t, Character *mob, Character *actor,
     break;
 
   case 'j':
-    if (mob && !char_died(mob))
+    if (mob && !CharacterDiedRecently(mob))
       {
         strcpy( t, he_she[ mob->sex ] );
       }
@@ -1493,7 +1493,7 @@ void mprog_translate( char ch, char *t, Character *mob, Character *actor,
     break;
 
   case 'k':
-    if( mob && !char_died(mob) )
+    if( mob && !CharacterDiedRecently(mob) )
       {
         strcpy( t, him_her[ mob->sex ] );
       } else {
@@ -1502,7 +1502,7 @@ void mprog_translate( char ch, char *t, Character *mob, Character *actor,
     break;
 
   case 'l':
-    if( mob && !char_died(mob) )
+    if( mob && !CharacterDiedRecently(mob) )
       {
         strcpy( t, his_her[ mob->sex ] );
       }
@@ -1513,7 +1513,7 @@ void mprog_translate( char ch, char *t, Character *mob, Character *actor,
     break;
 
   case 'J':
-    if ( rndm && !char_died(rndm) )
+    if ( rndm && !CharacterDiedRecently(rndm) )
       {
         if( CanSeeCharacter( mob, rndm ) )
 	  {
@@ -1531,7 +1531,7 @@ void mprog_translate( char ch, char *t, Character *mob, Character *actor,
     break;
 
   case 'K':
-    if ( rndm && !char_died(rndm) )
+    if ( rndm && !CharacterDiedRecently(rndm) )
       {
         if( CanSeeCharacter( mob, rndm ) )
 	  {
@@ -1549,7 +1549,7 @@ void mprog_translate( char ch, char *t, Character *mob, Character *actor,
     break;
 
   case 'L':
-    if ( rndm && !char_died(rndm) )
+    if ( rndm && !CharacterDiedRecently(rndm) )
       {
         if( CanSeeCharacter( mob, rndm ) )
 	  {
@@ -1567,7 +1567,7 @@ void mprog_translate( char ch, char *t, Character *mob, Character *actor,
     break;
 
   case 'o':
-    if ( obj && !obj_extracted(obj) )
+    if ( obj && !IsObjectExtracted(obj) )
       {
 	if( CanSeeObject( mob, obj ) )
 	  {
@@ -1585,7 +1585,7 @@ void mprog_translate( char ch, char *t, Character *mob, Character *actor,
     break;
 
   case 'O':
-    if ( obj && !obj_extracted(obj) )
+    if ( obj && !IsObjectExtracted(obj) )
       {
         if( CanSeeObject( mob, obj ) )
 	  {
@@ -1603,7 +1603,7 @@ void mprog_translate( char ch, char *t, Character *mob, Character *actor,
     break;
 
   case 'p':
-    if ( v_obj && !obj_extracted(v_obj) )
+    if ( v_obj && !IsObjectExtracted(v_obj) )
       {
         if( CanSeeObject( mob, v_obj ) )
 	  {
@@ -1621,7 +1621,7 @@ void mprog_translate( char ch, char *t, Character *mob, Character *actor,
     break;
 
   case 'P':
-    if ( v_obj && !obj_extracted(v_obj) )
+    if ( v_obj && !IsObjectExtracted(v_obj) )
       {
         if( CanSeeObject( mob, v_obj ) )
 	  {
@@ -1639,7 +1639,7 @@ void mprog_translate( char ch, char *t, Character *mob, Character *actor,
     break;
 
   case 'a':
-    if ( obj && !obj_extracted(obj) )
+    if ( obj && !IsObjectExtracted(obj) )
       {
         strcpy( t, AOrAn(obj->name) );
       }
@@ -1650,7 +1650,7 @@ void mprog_translate( char ch, char *t, Character *mob, Character *actor,
     break;
 
   case 'A':
-    if ( v_obj && !obj_extracted(v_obj) )
+    if ( v_obj && !IsObjectExtracted(v_obj) )
       {
         strcpy( t, AOrAn(v_obj->name) );
       }
@@ -2084,7 +2084,7 @@ int mprog_do_command( char *cmnd, Character *mob, Character *actor,
 
   /* If the mob is mentally unstable and does things like fireball
      itself, let's make sure it's still alive. */
-  if ( char_died( mob ) )
+  if ( CharacterDiedRecently( mob ) )
     {
       return BERR;
     }
@@ -2817,7 +2817,7 @@ void oprog_sac_trigger( Character *ch, Object *obj )
 }
 
 /*
- * call in do_get, right before check_for_trap
+ * call in do_get, right before CheckObjectForTrap
  * do a if(!ch) return right after
  */
 void oprog_get_trigger( Character *ch, Object *obj )
@@ -2871,7 +2871,7 @@ void oprog_drop_trigger( Character *ch, Object *obj )
 }
 
 /*
- * call towards end of do_examine, right before check_for_trap
+ * call towards end of do_examine, right before CheckObjectForTrap
  */
 void oprog_examine_trigger( Character *ch, Object *obj )
 {
@@ -3209,7 +3209,7 @@ void rprog_wordlist_check( char *arg, Character *mob, Character *actor,
 {
   MPROG_DATA *mprg;
 
-  if ( actor && !char_died(actor) && actor->in_room )
+  if ( actor && !CharacterDiedRecently(actor) && actor->in_room )
     {
       room = actor->in_room;
     }

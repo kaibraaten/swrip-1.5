@@ -32,7 +32,7 @@ void do_bribe ( Character *ch , char *argument )
 
   amount = atoi( argument );
 
-  if ( ( victim = get_char_room( ch, arg1 ) ) == NULL )
+  if ( ( victim = GetCharacterInRoom( ch, arg1 ) ) == NULL )
     {
       SendToCharacter( "They aren't here.\r\n", ch );
       return;

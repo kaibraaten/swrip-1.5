@@ -19,7 +19,7 @@ void do_mpstat( Character *ch, char *argument )
       return;
     }
 
-  if ( ( victim = get_char_world( ch, arg ) ) == NULL )
+  if ( ( victim = GetCharacterAnywhere( ch, arg ) ) == NULL )
     {
       SendToCharacter( "They aren't here.\r\n", ch );
       return;

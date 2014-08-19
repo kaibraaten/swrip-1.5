@@ -57,7 +57,7 @@ void do_lock( Character *ch, char *argument )
         }
     }
 
-  if ( ( obj = get_obj_here( ch, arg ) ) != NULL )
+  if ( ( obj = GetObjectHere( ch, arg ) ) != NULL )
     {
       /* 'lock object' */
       if ( obj->item_type != ITEM_CONTAINER )

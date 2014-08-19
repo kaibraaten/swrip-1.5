@@ -167,7 +167,7 @@ void ViolenceUpdate( void )
   lst_ch = NULL;
   for ( ch = last_char; ch; lst_ch = ch, ch = gch_prev )
     {
-      set_cur_char( ch );
+      SetCurrentGlobalCharacter( ch );
 
       gch_prev  = ch->prev;
 
@@ -178,7 +178,7 @@ void ViolenceUpdate( void )
        * Since he/she's in the char_list, it's likely to be the later...
        * and should not already be in another fight already
        */
-      if ( char_died(ch) )
+      if ( CharacterDiedRecently(ch) )
         continue;
 
 
@@ -203,17 +203,17 @@ void ViolenceUpdate( void )
                   ch->substate = timer->value;
                   timer->do_fun( ch, "" );
 
-                  if ( char_died(ch) )
+                  if ( CharacterDiedRecently(ch) )
                     break;
 
                   ch->substate = tempsub;
                 }
 
-              extract_timer( ch, timer );
+              ExtractTimer( ch, timer );
             }
         }
 
-      if ( char_died(ch) )
+      if ( CharacterDiedRecently(ch) )
         continue;
 
       /*
@@ -273,7 +273,7 @@ void ViolenceUpdate( void )
         else
           StopFighting( ch, false );
 
-      if ( char_died(ch) )
+      if ( CharacterDiedRecently(ch) )
         continue;
 
       if ( retcode == rCHAR_DIED
@@ -291,13 +291,13 @@ void ViolenceUpdate( void )
        *  Mob triggers
        */
       rprog_rfight_trigger( ch );
-      if ( char_died(ch) )
+      if ( CharacterDiedRecently(ch) )
         continue;
       MobProgHitPercentTrigger( ch, victim );
-      if ( char_died(ch) )
+      if ( CharacterDiedRecently(ch) )
         continue;
       MobProgFightTrigger( ch, victim );
-      if ( char_died(ch) )
+      if ( CharacterDiedRecently(ch) )
         continue;
 
       /*
@@ -326,7 +326,7 @@ void ViolenceUpdate( void )
               if ( IsNpc(rch) && !IsAffectedBy(rch, AFF_CHARM)
                    &&  !IsBitSet(rch->act, ACT_NOASSIST) )
                 {
-                  if ( char_died(ch) )
+                  if ( CharacterDiedRecently(ch) )
                     break;
                   if ( rch->Prototype == ch->Prototype
                        ||   NumberBits( 3 ) == 0 )
@@ -371,7 +371,7 @@ ch_ret HitMultipleTimes( Character *ch, Character *victim, int dt )
 
   /* add timer if player is attacking another player */
   if ( !IsNpc(ch) && !IsNpc(victim) )
-    add_timer( ch, TIMER_RECENTFIGHT, 20, NULL, SUB_NONE );
+    AddTimerToCharacter( ch, TIMER_RECENTFIGHT, 20, NULL, SUB_NONE );
 
   if ( !IsNpc(ch) && IsBitSet( ch->act, PLR_NICE ) && !IsNpc( victim ) )
     return rNONE;
@@ -1042,9 +1042,9 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
     }
   if ( (retcode = InflictDamage( ch, victim, dam, dt )) != rNONE )
     return retcode;
-  if ( char_died(ch) )
+  if ( CharacterDiedRecently(ch) )
     return rCHAR_DIED;
-  if ( char_died(victim) )
+  if ( CharacterDiedRecently(victim) )
     return rVICT_DIED;
 
   retcode = rNONE;
@@ -1063,14 +1063,14 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
              &&   IS_VALID_SN(aff->modifier)
              &&   skill_table[aff->modifier]->spell_fun )
           retcode = (*skill_table[aff->modifier]->spell_fun) ( aff->modifier, (wield->level+3)/3, ch, victim );
-      if ( retcode != rNONE || char_died(ch) || char_died(victim) )
+      if ( retcode != rNONE || CharacterDiedRecently(ch) || CharacterDiedRecently(victim) )
         return retcode;
       for ( aff = wield->first_affect; aff; aff = aff->next )
         if ( aff->location == APPLY_WEAPONSPELL
              &&   IS_VALID_SN(aff->modifier)
              &&   skill_table[aff->modifier]->spell_fun )
           retcode = (*skill_table[aff->modifier]->spell_fun) ( aff->modifier, (wield->level+3)/3, ch, victim );
-      if ( retcode != rNONE || char_died(ch) || char_died(victim) )
+      if ( retcode != rNONE || CharacterDiedRecently(ch) || CharacterDiedRecently(victim) )
         return retcode;
     }
 
@@ -1080,16 +1080,16 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
   if ( IsAffectedBy( victim, AFF_FIRESHIELD )
        &&  !IsAffectedBy( ch, AFF_FIRESHIELD ) )
     retcode = spell_fireball( gsn_fireball, off_shld_lvl(victim, ch), victim, ch );
-  if ( retcode != rNONE || char_died(ch) || char_died(victim) )
+  if ( retcode != rNONE || CharacterDiedRecently(ch) || CharacterDiedRecently(victim) )
     return retcode;
 
-  if ( retcode != rNONE || char_died(ch) || char_died(victim) )
+  if ( retcode != rNONE || CharacterDiedRecently(ch) || CharacterDiedRecently(victim) )
     return retcode;
 
   if ( IsAffectedBy( victim, AFF_SHOCKSHIELD )
        &&  !IsAffectedBy( ch, AFF_SHOCKSHIELD ) )
     retcode = spell_lightning_bolt( gsn_lightning_bolt, off_shld_lvl(victim, ch), victim, ch );
-  if ( retcode != rNONE || char_died(ch) || char_died(victim) )
+  if ( retcode != rNONE || CharacterDiedRecently(ch) || CharacterDiedRecently(victim) )
     return retcode;
 
   /*
@@ -1397,7 +1397,7 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
         {
           if ( dam > GetObjectResistance(damobj) )
             {
-              set_cur_obj(damobj);
+              SetCurrentGlobalObject(damobj);
               DamageObject(damobj);
             }
           dam -= 5;  /* add a bonus for having something to block the blow */
@@ -1613,7 +1613,7 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
           ChPrintf( victim, "You lose %ld experience.\r\n", xp_actually_lost );
         }
 
-      add_timer( victim, TIMER_RECENTFIGHT, 100, NULL, SUB_NONE );
+      AddTimerToCharacter( victim, TIMER_RECENTFIGHT, 100, NULL, SUB_NONE );
     }
 
   /*
@@ -1650,7 +1650,7 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
       else
         loot = false;
 
-      set_cur_char(victim);
+      SetCurrentGlobalCharacter(victim);
       RawKill( ch, victim );
       victim = NULL;
 
@@ -2012,7 +2012,7 @@ void FreeFight( Character *ch )
 
   if ( ch->fighting )
     {
-      if ( !char_died(ch->fighting->who) )
+      if ( !CharacterDiedRecently(ch->fighting->who) )
         --ch->fighting->who->num_fighting;
 
       FreeMemory( ch->fighting );
@@ -2107,13 +2107,13 @@ void RawKill( Character *killer, Character *victim )
   if ( !IsNpc(victim) || !IsBitSet( victim->act, ACT_NOKILL  ) )
     MobProgDeathTrigger( killer, victim );
 
-  if ( char_died(victim) )
+  if ( CharacterDiedRecently(victim) )
     return;
 
   if ( !IsNpc(victim) || !IsBitSet( victim->act, ACT_NOKILL  ) )
     rprog_death_trigger( killer, victim );
 
-  if ( char_died(victim) )
+  if ( CharacterDiedRecently(victim) )
     return;
 
   if ( !IsNpc(victim) || ( !IsBitSet( victim->act, ACT_NOKILL  ) && !IsBitSet( victim->act, ACT_NOCORPSE ) ) )
@@ -2351,7 +2351,7 @@ void group_gain( Character *ch, Character *victim )
               ObjectFromCharacter( obj );
               obj = ObjectToRoom( obj, ch->in_room );
               oprog_zap_trigger(ch, obj);  /* mudprogs */
-              if ( char_died(ch) )
+              if ( CharacterDiedRecently(ch) )
                 return;
             }
         }

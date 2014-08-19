@@ -119,7 +119,7 @@ void do_cutdoor( Character *ch, char *argument )
       InflictDamage( ch, ch, ( ch->max_hit / 20 ) + 10, gsn_cutdoor );
       LearnFromFailure(ch, gsn_cutdoor);
     }
-  if ( !char_died( ch ) )
+  if ( !CharacterDiedRecently( ch ) )
     for ( gch = ch->in_room->first_person; gch; gch = gch->next_in_room )
       {
         if ( IsAwake( gch )

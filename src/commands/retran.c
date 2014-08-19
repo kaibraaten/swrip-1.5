@@ -15,7 +15,7 @@ void do_retran( Character *ch, char *argument )
       return;
     }
 
-  if ( !(victim = get_char_world(ch, arg)) )
+  if ( !(victim = GetCharacterAnywhere(ch, arg)) )
     {
       SendToCharacter("They aren't here.\r\n", ch );
       return;

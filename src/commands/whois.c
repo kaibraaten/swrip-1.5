@@ -23,7 +23,7 @@ void do_whois( Character *ch, char *argument)
   strcat(buf, "0.");
   strcat(buf, argument);
 
-  if( ( ( victim = get_char_world(ch, buf) ) == NULL ))
+  if( ( ( victim = GetCharacterAnywhere(ch, buf) ) == NULL ))
     {
       SendToCharacter("No such player online.\r\n", ch);
       return;

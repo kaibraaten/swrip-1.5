@@ -16,7 +16,7 @@ void do_hell( Character *ch, char *argument )
       SendToCharacter( "Hell who, and for how long?\r\n", ch );
       return;
     }
-  if ( !(victim = get_char_world(ch, arg)) || IsNpc(victim) )
+  if ( !(victim = GetCharacterAnywhere(ch, arg)) || IsNpc(victim) )
     {
       SendToCharacter( "They aren't here.\r\n", ch );
       return;

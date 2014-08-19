@@ -660,10 +660,10 @@ void fwrite_char( Character *ch, FILE *fp )
 	  fprintf( fp, "Targ %s~\n",      ch->pcdata->target      );
 	}
 
-      if ( get_timer( ch , TIMER_PKILLED)
-           && ( get_timer( ch , TIMER_PKILLED) > 0 ) )
+      if ( GetTimer( ch , TIMER_PKILLED)
+           && ( GetTimer( ch , TIMER_PKILLED) > 0 ) )
 	{
-	  fprintf( fp, "PTimer       %d\n",     get_timer(ch, TIMER_PKILLED));
+	  fprintf( fp, "PTimer       %d\n",     GetTimer(ch, TIMER_PKILLED));
 	}
 
       fprintf( fp, "MKills       %d\n", ch->pcdata->mkills      );
@@ -838,7 +838,7 @@ void fwrite_obj( const Character *ch, const Object *obj, FILE *fp, int iNest,
   /*
    * Catch deleted objects                                      -Thoric
    */
-  if ( obj_extracted(obj) )
+  if ( IsObjectExtracted(obj) )
     {
       return;
     }
@@ -1753,7 +1753,7 @@ void fread_char( Character *ch, FILE *fp, bool preload )
 
           if (!StrCmp ( word, "PTimer" ) )
             {
-              add_timer( ch , TIMER_PKILLED, ReadInt(fp), NULL, SUB_NONE );
+              AddTimerToCharacter( ch , TIMER_PKILLED, ReadInt(fp), NULL, SUB_NONE );
               fMatch = true;
               break;
             }

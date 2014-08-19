@@ -167,7 +167,7 @@ static ch_ret simple_damage( Character *ch, Character *victim, int dam, int dt )
         {
           if ( dam > GetObjectResistance(damobj) )
             {
-              set_cur_obj(damobj);
+              SetCurrentGlobalObject(damobj);
               DamageObject(damobj);
             }
         }
@@ -246,7 +246,7 @@ static ch_ret simple_damage( Character *ch, Character *victim, int dam, int dt )
 
 
         }
-      set_cur_char(victim);
+      SetCurrentGlobalCharacter(victim);
       RawKill( ch, victim );
       victim = NULL;
 

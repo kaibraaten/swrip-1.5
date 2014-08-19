@@ -591,7 +591,7 @@ void do_sset( Character *ch, char *argument )
       return;
     }
 
-  if ( ( victim = get_char_world( ch, arg1 ) ) == NULL )
+  if ( ( victim = GetCharacterAnywhere( ch, arg1 ) ) == NULL )
     {
       if ( (sn = skill_lookup(arg1)) >= 0 )
         {

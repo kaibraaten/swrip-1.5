@@ -526,7 +526,7 @@ void game_loop( )
                       d->incomm[0] = '\0';
 
                       if ( d->character )
-                        set_cur_char( d->character );
+                        SetCurrentGlobalCharacter( d->character );
 
                       if ( d->pager.pagepoint )
                         set_pager_input(d, cmdline);

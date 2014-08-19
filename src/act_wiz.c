@@ -95,10 +95,10 @@ Room *FindLocation( const Character *ch, const char *arg )
   if ( IsNumber(arg) )
     return GetRoom( atoi( arg ) );
 
-  if ( ( victim = get_char_world( ch, arg ) ) != NULL )
+  if ( ( victim = GetCharacterAnywhere( ch, arg ) ) != NULL )
     return victim->in_room;
 
-  if ( ( obj = get_obj_world( ch, arg ) ) != NULL )
+  if ( ( obj = GetObjectAnywhere( ch, arg ) ) != NULL )
     return obj->in_room;
 
   return NULL;

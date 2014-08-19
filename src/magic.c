@@ -837,7 +837,7 @@ bool saves_poison_death( int level, const Character *victim )
 
   save = urange( 5, save, 95 );
 
-  return chance( victim, save );
+  return Chance( victim, save );
 }
 
 bool saves_wands( int level, const Character *victim )
@@ -852,7 +852,7 @@ bool saves_wands( int level, const Character *victim )
   save = 50 + ( victim->top_level - level - victim->saving.wand ) * 2;
   save = urange( 5, save, 95 );
 
-  return chance( victim, save );
+  return Chance( victim, save );
 }
 
 bool saves_para_petri( int level, const Character *victim )
@@ -865,7 +865,7 @@ bool saves_para_petri( int level, const Character *victim )
     }
 
   save = urange( 5, save, 95 );
-  return chance( victim, save );
+  return Chance( victim, save );
 }
 
 bool saves_breath( int level, const Character *victim )
@@ -874,7 +874,7 @@ bool saves_breath( int level, const Character *victim )
 
   save = urange( 5, save, 95 );
 
-  return chance( victim, save );
+  return Chance( victim, save );
 }
 
 bool saves_spell_staff( int level, const Character *victim )
@@ -899,7 +899,7 @@ bool saves_spell_staff( int level, const Character *victim )
     }
 
   save = urange( 5, save, 95 );
-  return chance( victim, save );
+  return Chance( victim, save );
 }
 
 bool process_spell_components( Character *ch, int sn )
@@ -938,7 +938,7 @@ void *locate_targets( Character *ch, char *arg, int sn, Character **victim, Obje
         }
       else
         {
-          if ( !( *victim = get_char_room( ch, arg ) ) )
+          if ( !( *victim = GetCharacterInRoom( ch, arg ) ) )
             {
               SendToCharacter( "They aren't here.\r\n", ch );
               return &pAbort;
@@ -959,13 +959,13 @@ void *locate_targets( Character *ch, char *arg, int sn, Character **victim, Obje
         {
           if ( !IsNpc(*victim) )
             {
-              if ( get_timer( ch, TIMER_PKILLED ) > 0 )
+              if ( GetTimer( ch, TIMER_PKILLED ) > 0 )
                 {
                   SendToCharacter( "You have been killed in the last 5 minutes.\r\n", ch);
                   return &pAbort;
                 }
 
-              if ( get_timer( *victim, TIMER_PKILLED ) > 0 )
+              if ( GetTimer( *victim, TIMER_PKILLED ) > 0 )
                 {
                   SendToCharacter( "This player has been killed in the last 5 minutes.\r\n", ch );
                   return &pAbort;
@@ -989,7 +989,7 @@ void *locate_targets( Character *ch, char *arg, int sn, Character **victim, Obje
 	}
       else
         {
-          if ( !( *victim = get_char_room( ch, arg ) ) )
+          if ( !( *victim = GetCharacterInRoom( ch, arg ) ) )
             {
               SendToCharacter( "They aren't here.\r\n", ch );
               return &pAbort;
@@ -1065,7 +1065,7 @@ ch_ret obj_cast_spell( int sn, int level, Character *ch, Character *victim, Obje
   if ( (skill->target == TAR_CHAR_OFFENSIVE
         || NumberBits(7) == 1)      /* 1/128 chance if non-offensive */
        && skill->type != SKILL_HERB
-       && !chance( ch, 95 + levdiff ) )
+       && !Chance( ch, 95 + levdiff ) )
     {
       switch( NumberBits(2) )
         {
@@ -1200,14 +1200,14 @@ ch_ret obj_cast_spell( int sn, int level, Character *ch, Character *victim, Obje
       return retcode;
     }
 
-  if ( char_died(ch) )
+  if ( CharacterDiedRecently(ch) )
     {
       return rCHAR_DIED;
     }
 
   if ( skill->target == TAR_CHAR_OFFENSIVE
        && victim != ch
-       && !char_died(victim) )
+       && !CharacterDiedRecently(victim) )
     {
       Character *vch = NULL;
       Character *vch_next = NULL;

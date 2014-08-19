@@ -78,7 +78,7 @@ void do_opedit( Character *ch, char *argument )
     }
   else
     {
-      if ( ( obj = get_obj_world( ch, arg1 ) ) == NULL )
+      if ( ( obj = GetObjectAnywhere( ch, arg1 ) ) == NULL )
         {
           SendToCharacter( "Nothing like that in all the realms.\r\n", ch );
           return;

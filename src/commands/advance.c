@@ -20,7 +20,7 @@ void do_advance( Character *ch, char *argument )
       return;
     }
 
-  if ( ( victim = get_char_room( ch, arg1 ) ) == NULL )
+  if ( ( victim = GetCharacterInRoom( ch, arg1 ) ) == NULL )
     {
       SendToCharacter( "That player is not here.\r\n", ch);
       return;

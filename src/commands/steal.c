@@ -28,7 +28,7 @@ void do_steal( Character *ch, char *argument )
   if ( ms_find_obj(ch) )
     return;
 
-  if ( ( victim = get_char_room( ch, arg2 ) ) == NULL )
+  if ( ( victim = GetCharacterInRoom( ch, arg2 ) ) == NULL )
     {
       SendToCharacter( "They aren't here.\r\n", ch );
       return;
@@ -161,14 +161,14 @@ void do_steal( Character *ch, char *argument )
       return;
     }
 
-  if ( ch->carry_number + (get_obj_number(obj)/obj->count) > GetCarryCapacityNumber( ch ) )
+  if ( ch->carry_number + (GetObjectCount(obj)/obj->count) > GetCarryCapacityNumber( ch ) )
     {
       SendToCharacter( "You have your hands full.\r\n", ch );
       LearnFromFailure( ch, gsn_steal );
       return;
     }
 
-  if ( ch->carry_weight + (get_obj_weight(obj)/obj->count) > GetCarryCapacityWeight( ch ) )
+  if ( ch->carry_weight + (GetObjectWeight(obj)/obj->count) > GetCarryCapacityWeight( ch ) )
     {
       SendToCharacter( "You can't carry that much weight.\r\n", ch );
       LearnFromFailure( ch, gsn_steal );
