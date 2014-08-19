@@ -2502,19 +2502,18 @@ extern "C" {
   void RawKill( Character *killer, Character *victim );
   bool IsInArena( const Character *ch );
 
-
   /* makeobjs.c */
-  void  make_corpse( Character *ch );
-  void  make_bloodstain( Character *ch );
-  void  make_scraps( Object *obj );
-  void  make_fire( Room *in_room, short timer );
-  Object *make_trap( int v0, int v1, int v2, int v3 );
-  Object *create_money( int amount );
+  void  MakeCorpse( Character *ch );
+  void  MakeBloodstain( Character *ch );
+  void  MakeScraps( Object *obj );
+  void  MakeFire( Room *in_room, short timer );
+  Object *MakeTrap( int v0, int v1, int v2, int v3 );
+  Object *CreateMoney( int amount );
 
   /* misc.c */
-  bool is_valid_language( int language );
-  void pullorpush( Character *ch, Object *obj, bool pull );
-  void actiondesc( Character *ch, Object *obj, void *vo );
+  bool IsValidLanguage( int language );
+  void PullOrPush( Character *ch, Object *obj, bool pull );
+  void ActionDescription( Character *ch, Object *obj, void *vo );
   void jedi_checks( Character *ch );
   void jedi_bonus( Character *ch );
   void sith_penalty( Character *ch );

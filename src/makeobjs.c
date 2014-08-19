@@ -29,7 +29,7 @@
 /*
  * Make a fire.
  */
-void make_fire(Room *in_room, short timer)
+void MakeFire(Room *in_room, short timer)
 {
   Object *fire = CreateObject( GetProtoObject( OBJ_VNUM_FIRE ), 0 );
 
@@ -40,7 +40,7 @@ void make_fire(Room *in_room, short timer)
 /*
  * Make a trap.
  */
-Object *make_trap(int v0, int v1, int v2, int v3)
+Object *MakeTrap(int v0, int v1, int v2, int v3)
 {
   Object *trap = CreateObject( GetProtoObject( OBJ_VNUM_TRAP ), 0 );
 
@@ -57,7 +57,7 @@ Object *make_trap(int v0, int v1, int v2, int v3)
 /*
  * Turn an object into scraps.          -Thoric
  */
-void make_scraps( Object *obj )
+void MakeScraps( Object *obj )
 {
   char buf[MAX_STRING_LENGTH];
   Object *scraps = CreateObject( GetProtoObject( OBJ_VNUM_SCRAPS ), 0 );
@@ -142,7 +142,7 @@ void make_scraps( Object *obj )
 /*
  * Make a corpse out of a character.
  */
-void make_corpse( Character *ch )
+void MakeCorpse( Character *ch )
 {
   char buf[MAX_STRING_LENGTH];
   Object *corpse = NULL;
@@ -172,7 +172,7 @@ void make_corpse( Character *ch )
 	      ch->in_room->area->gold_looted += ch->gold;
 	    }
 
-          obj_to_obj( create_money( ch->gold ), corpse );
+          obj_to_obj( CreateMoney( ch->gold ), corpse );
           ch->gold = 0;
         }
 
@@ -194,7 +194,7 @@ void make_corpse( Character *ch )
 	      ch->in_room->area->gold_looted += ch->gold;
 	    }
 
-          obj_to_obj( create_money( ch->gold ), corpse );
+          obj_to_obj( CreateMoney( ch->gold ), corpse );
           ch->gold = 0;
         }
     }
@@ -231,7 +231,7 @@ void make_corpse( Character *ch )
   obj_to_room( corpse, ch->in_room );
 }
 
-void make_bloodstain( Character *ch )
+void MakeBloodstain( Character *ch )
 {
   Object *obj = CreateObject( GetProtoObject( OBJ_VNUM_BLOODSTAIN ), 0 );
   obj->timer = GetRandomNumberFromRange( 1, 2 );
@@ -241,7 +241,7 @@ void make_bloodstain( Character *ch )
 /*
  * make some coinage
  */
-Object *create_money( int amount )
+Object *CreateMoney( int amount )
 {
   char buf[MAX_STRING_LENGTH];
   Object *obj = NULL;

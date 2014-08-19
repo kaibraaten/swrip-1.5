@@ -2117,7 +2117,7 @@ void RawKill( Character *killer, Character *victim )
     return;
 
   if ( !IsNpc(victim) || ( !IsBitSet( victim->act, ACT_NOKILL  ) && !IsBitSet( victim->act, ACT_NOCORPSE ) ) )
-    make_corpse( victim );
+    MakeCorpse( victim );
   else
     {
       for ( obj = victim->last_carrying; obj; obj = obj_next )

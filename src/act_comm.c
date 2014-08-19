@@ -707,7 +707,7 @@ bool CharacterCanLearnLanguage( const Character *ch, int language )
           {
             int sn;
 
-            if ( !is_valid_language( lang_array[lang] ) )
+            if ( !IsValidLanguage( lang_array[lang] ) )
               return false;
 
             if ( ( sn = skill_lookup( lang_names[lang] ) ) < 0 )
@@ -720,7 +720,7 @@ bool CharacterCanLearnLanguage( const Character *ch, int language )
           }
     }
 
-  if( is_valid_language( language ) )
+  if( IsValidLanguage( language ) )
     return true;
 
   return false;

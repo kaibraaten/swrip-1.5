@@ -1742,7 +1742,7 @@ void ResetArea( Area *pArea )
                   to_obj = obj;
                 }
 
-              pobj = make_trap( pReset->arg2, pReset->arg1,
+              pobj = MakeTrap( pReset->arg2, pReset->arg1,
                                 NumberFuzzy(to_obj->level), pReset->extra );
               obj_to_obj(pobj, to_obj);
             }
@@ -1768,7 +1768,7 @@ void ResetArea( Area *pArea )
 		  break;
 		}
 
-              to_obj = make_trap(pReset->arg1, pReset->arg1, 10, pReset->extra);
+              to_obj = MakeTrap(pReset->arg1, pReset->arg1, 10, pReset->extra);
               obj_to_room(to_obj, pRoomIndex);
             }
 

@@ -34,7 +34,7 @@ void do_languages( Character *ch, char *argument )
           return;
         }
 
-      if ( !is_valid_language( lang_array[lang] ) )
+      if ( !IsValidLanguage( lang_array[lang] ) )
         {
           ChPrintf( ch, "You may not learn that language.\r\n" );
           return;
@@ -92,7 +92,7 @@ void do_languages( Character *ch, char *argument )
     }
   for ( lang = 0; lang_array[lang] != LANG_UNKNOWN; lang++ )
     {
-      if ( !is_valid_language( lang_array[lang] ) )
+      if ( !IsValidLanguage( lang_array[lang] ) )
         continue;
 
       if ( ch->speaking & lang_array[lang] ||

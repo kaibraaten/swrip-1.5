@@ -45,7 +45,7 @@ void do_apply( Character *ch, char *argument )
             Act( AT_ACTION, "You apply $p onto your body.", ch, obj, NULL, TO_CHAR );
         }
       else
-        actiondesc( ch, obj, NULL );
+        ActionDescription( ch, obj, NULL );
     }
 
   SetWaitState( ch, obj->value[2] );

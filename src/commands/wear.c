@@ -226,7 +226,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
               Act( AT_ACTION, "You hold $p as your light.",  ch, obj, NULL, TO_CHAR );
             }
           else
-            actiondesc( ch, obj, NULL );
+            ActionDescription( ch, obj, NULL );
         }
       EquipCharacter( ch, obj, WEAR_LIGHT );
       oprog_wear_trigger( ch, obj );
@@ -265,7 +265,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
                   Act( AT_ACTION, "You slip your left finger into $p.",  ch, obj, NULL, TO_CHAR );
                 }
               else
-                actiondesc( ch, obj, NULL );
+                ActionDescription( ch, obj, NULL );
             }
           EquipCharacter( ch, obj, WEAR_FINGER_L );
           oprog_wear_trigger( ch, obj );
@@ -282,7 +282,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
                   Act( AT_ACTION, "You slip your right finger into $p.", ch, obj, NULL, TO_CHAR );
                 }
               else
-                actiondesc( ch, obj, NULL );
+                ActionDescription( ch, obj, NULL );
             }
 
 	  EquipCharacter( ch, obj, WEAR_FINGER_R );
@@ -311,7 +311,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
                   Act( AT_ACTION, "You wear $p around your neck.", ch, obj, NULL, TO_CHAR );
                 }
               else
-                actiondesc( ch, obj, NULL );
+                ActionDescription( ch, obj, NULL );
             }
           EquipCharacter( ch, obj, WEAR_NECK_1 );
           oprog_wear_trigger( ch, obj );
@@ -328,7 +328,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
                   Act( AT_ACTION, "You wear $p around your neck.", ch, obj, NULL, TO_CHAR );
                 }
               else
-                actiondesc( ch, obj, NULL );
+                ActionDescription( ch, obj, NULL );
             }
 	  EquipCharacter( ch, obj, WEAR_NECK_2 );
           oprog_wear_trigger( ch, obj );
@@ -357,7 +357,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
               Act( AT_ACTION, "You fit $p on your body.", ch, obj, NULL, TO_CHAR );
             }
           else
-            actiondesc( ch, obj, NULL );
+            ActionDescription( ch, obj, NULL );
         }
       EquipCharacter( ch, obj, WEAR_BODY );
       oprog_wear_trigger( ch, obj );
@@ -379,7 +379,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
               Act( AT_ACTION, "You don $p upon your head.", ch, obj, NULL, TO_CHAR );
             }
           else
-            actiondesc( ch, obj, NULL );
+            ActionDescription( ch, obj, NULL );
         }
       EquipCharacter( ch, obj, WEAR_HEAD );
       oprog_wear_trigger( ch, obj );
@@ -396,7 +396,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
               Act( AT_ACTION, "You place $p on your eyes.", ch, obj, NULL, TO_CHAR );
             }
           else
-            actiondesc( ch, obj, NULL );
+            ActionDescription( ch, obj, NULL );
         }
       EquipCharacter( ch, obj, WEAR_EYES );
       oprog_wear_trigger( ch, obj );
@@ -418,7 +418,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
               Act( AT_ACTION, "You wear $p on your ears.", ch, obj, NULL, TO_CHAR );
             }
           else
-            actiondesc( ch, obj, NULL );
+            ActionDescription( ch, obj, NULL );
         }
 
       EquipCharacter( ch, obj, WEAR_EARS );
@@ -448,7 +448,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
               Act( AT_ACTION, "You slip into $p.", ch, obj, NULL, TO_CHAR );
             }
           else
-            actiondesc( ch, obj, NULL );
+            ActionDescription( ch, obj, NULL );
         }
       EquipCharacter( ch, obj, WEAR_LEGS );
       oprog_wear_trigger( ch, obj );
@@ -477,7 +477,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
               Act( AT_ACTION, "You wear $p on your feet.", ch, obj, NULL, TO_CHAR );
             }
           else
-            actiondesc( ch, obj, NULL );
+            ActionDescription( ch, obj, NULL );
         }
       EquipCharacter( ch, obj, WEAR_FEET );
       oprog_wear_trigger( ch, obj );
@@ -501,7 +501,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
               Act( AT_ACTION, "You wear $p on your hands.", ch, obj, NULL, TO_CHAR );
             }
           else
-            actiondesc( ch, obj, NULL );
+            ActionDescription( ch, obj, NULL );
         }
       EquipCharacter( ch, obj, WEAR_HANDS );
       oprog_wear_trigger( ch, obj );
@@ -521,7 +521,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
               Act( AT_ACTION, "You wear $p on your arms.", ch, obj, NULL, TO_CHAR );
             }
           else
-            actiondesc( ch, obj, NULL );
+            ActionDescription( ch, obj, NULL );
         }
       EquipCharacter( ch, obj, WEAR_ARMS );
       oprog_wear_trigger( ch, obj );
@@ -545,7 +545,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
               Act( AT_ACTION, "You wear $p about your body.", ch, obj, NULL, TO_CHAR );
             }
           else
-            actiondesc( ch, obj, NULL );
+            ActionDescription( ch, obj, NULL );
         }
       EquipCharacter( ch, obj, WEAR_ABOUT );
       oprog_wear_trigger( ch, obj );
@@ -565,7 +565,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
               Act( AT_ACTION, "You wear $p about your waist.", ch, obj, NULL, TO_CHAR );
             }
           else
-            actiondesc( ch, obj, NULL );
+            ActionDescription( ch, obj, NULL );
         }
       EquipCharacter( ch, obj, WEAR_WAIST );
       oprog_wear_trigger( ch, obj );
@@ -590,7 +590,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
                        ch, obj, NULL, TO_CHAR );
                 }
               else
-                actiondesc( ch, obj, NULL );
+                ActionDescription( ch, obj, NULL );
             }
           EquipCharacter( ch, obj, WEAR_WRIST_L );
 	  oprog_wear_trigger( ch, obj );
@@ -609,7 +609,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
                        ch, obj, NULL, TO_CHAR );
                 }
               else
-                actiondesc( ch, obj, NULL );
+                ActionDescription( ch, obj, NULL );
             }
           EquipCharacter( ch, obj, WEAR_WRIST_R );
           oprog_wear_trigger( ch, obj );
@@ -631,7 +631,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
               Act( AT_ACTION, "You use $p as an energy shield.", ch, obj, NULL, TO_CHAR );
             }
           else
-            actiondesc( ch, obj, NULL );
+            ActionDescription( ch, obj, NULL );
         }
       EquipCharacter( ch, obj, WEAR_SHIELD );
       oprog_wear_trigger( ch, obj );
@@ -670,7 +670,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
                     }
                   else
 		    {
-		      actiondesc( ch, obj, NULL );
+		      ActionDescription( ch, obj, NULL );
 		    }
                 }
 
@@ -694,7 +694,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
               Act( AT_ACTION, "You wield $p.", ch, obj, NULL, TO_CHAR );
             }
 	  else
-            actiondesc( ch, obj, NULL );
+            ActionDescription( ch, obj, NULL );
         }
       EquipCharacter( ch, obj, WEAR_WIELD );
       oprog_wear_trigger( ch, obj );
@@ -739,7 +739,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
               Act( AT_ACTION, "You activate $p and it takes up position behind you.", ch, obj, NULL, TO_CHAR );
             }
 	  else
-            actiondesc( ch, obj, NULL );
+            ActionDescription( ch, obj, NULL );
         }
       EquipCharacter( ch, obj, WEAR_FLOATING );
       oprog_wear_trigger( ch, obj );
@@ -755,7 +755,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
               Act( AT_ACTION, "You wear $p over you.", ch, obj, NULL, TO_CHAR );
             }
           else
-            actiondesc( ch, obj, NULL );
+            ActionDescription( ch, obj, NULL );
         }
       EquipCharacter( ch, obj, WEAR_OVER );
       oprog_wear_trigger( ch, obj );

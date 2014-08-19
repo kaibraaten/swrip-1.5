@@ -78,7 +78,7 @@ void explode( Object *obj )
               }
           }
     }
-  make_scraps(obj);
+  MakeScraps(obj);
 }
 
 void room_explode( Object *obj, Character *xch, Room *room )
@@ -127,7 +127,7 @@ void room_explode_1( Object *obj, Character *xch, Room *room, int blast )
       robj_next = robj->next_content;
       if ( robj != obj && robj->item_type != ITEM_SPACECRAFT && robj->item_type != ITEM_SCRAPS
            && robj->item_type != ITEM_CORPSE_NPC && robj->item_type != ITEM_CORPSE_PC && robj->item_type != ITEM_DROID_CORPSE)
-        make_scraps( robj );
+        MakeScraps( robj );
     }
 
   /* other rooms */

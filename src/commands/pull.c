@@ -22,5 +22,5 @@ void do_pull( Character *ch, char *argument )
       return;
     }
 
-  pullorpush( ch, obj, true );
+  PullOrPush( ch, obj, true );
 }

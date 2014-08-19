@@ -90,13 +90,13 @@ obj_ret DamageObject( Object *obj )
   switch( obj->item_type )
     {
     default:
-      make_scraps( obj );
+      MakeScraps( obj );
       objcode = rOBJ_SCRAPPED;
       break;
     case ITEM_CONTAINER:
       if (--obj->value[OVAL_CONTAINER_CONDITION] <= 0)
         {
-          make_scraps( obj );
+          MakeScraps( obj );
           objcode = rOBJ_SCRAPPED;
         }
       break;
@@ -106,7 +106,7 @@ obj_ret DamageObject( Object *obj )
 
       if (--obj->value[OVAL_ARMOR_CONDITION] <= 0)
         {
-          make_scraps( obj );
+          MakeScraps( obj );
           objcode = rOBJ_SCRAPPED;
         }
       else
@@ -117,7 +117,7 @@ obj_ret DamageObject( Object *obj )
     case ITEM_WEAPON:
       if (--obj->value[OVAL_WEAPON_CONDITION] <= 0)
         {
-          make_scraps( obj );
+          MakeScraps( obj );
           objcode = rOBJ_SCRAPPED;
         }
       break;
@@ -264,7 +264,7 @@ void ObjectFallIfNoFloor( Object *obj, bool through )
                       Act( AT_PLAIN, "$p is destroyed by the fall!",
                            obj->in_room->first_person, obj, NULL, TO_CHAR );
                     }
-                  make_scraps(obj);
+                  MakeScraps(obj);
                 }
               else
                 obj->value[OVAL_ARMOR_CONDITION] -= dam;
@@ -279,7 +279,7 @@ void ObjectFallIfNoFloor( Object *obj, bool through )
                       Act( AT_PLAIN, "$p is destroyed by the fall!",
                            obj->in_room->first_person, obj, NULL, TO_CHAR );
                     }
-                  make_scraps(obj);
+                  MakeScraps(obj);
                 }
               break;
             }

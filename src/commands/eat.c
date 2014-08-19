@@ -54,7 +54,7 @@ void do_eat( Character *ch, char *argument )
           Act( AT_ACTION, "You eat $p.", ch, obj, NULL, TO_CHAR );
         }
       else
-        actiondesc( ch, obj, NULL );
+        ActionDescription( ch, obj, NULL );
     }
 
   switch ( obj->item_type )

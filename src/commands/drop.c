@@ -76,7 +76,7 @@ void do_drop( Character *ch, char *argument )
             }
 
           Act( AT_ACTION, "$n drops some credits.", ch, NULL, NULL, TO_ROOM );
-          obj_to_room( create_money( number ), ch->in_room );
+          obj_to_room( CreateMoney( number ), ch->in_room );
           SendToCharacter( "OK.\r\n", ch );
           if ( IsBitSet( sysdata.save_flags, SV_DROP ) )
             {

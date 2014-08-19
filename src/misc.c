@@ -50,7 +50,7 @@ void sith_penalty( Character *ch )
 /*
  * Function to handle the state changing of a triggerobject (lever)  -Thoric
  */
-void pullorpush( Character *ch, Object *obj, bool pull )
+void PullOrPush( Character *ch, Object *obj, bool pull )
 {
   char buf[MAX_STRING_LENGTH];
   Character *rch = NULL;
@@ -352,7 +352,7 @@ void pullorpush( Character *ch, Object *obj, bool pull )
     }
 }
 
-void actiondesc( Character *ch, Object *obj, void *vo )
+void ActionDescription( Character *ch, Object *obj, void *vo )
 {
   char charbuf[MAX_STRING_LENGTH];
   char roombuf[MAX_STRING_LENGTH];
@@ -560,7 +560,7 @@ static const long VALID_LANGUAGES  = LANG_COMMON
   | LANG_GOTAL | LANG_DEVARONIAN | LANG_FALLEEN | LANG_ITHORIAN
   | LANG_BINARY;
 
-bool is_valid_language( int language )
+bool IsValidLanguage( int language )
 {
   return VALID_LANGUAGES & language ? true : false;
 }

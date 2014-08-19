@@ -375,7 +375,7 @@ void do_fill( Character *ch, char *argument )
       if ( (source->value[1] -= diff) < 1 )
         {
           extract_obj( source );
-          make_bloodstain( ch );
+          MakeBloodstain( ch );
         }
       return;
     case ITEM_HERB:
