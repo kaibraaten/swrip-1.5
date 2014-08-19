@@ -83,7 +83,7 @@ void do_mp_open_passage( Character *ch, char *argument )
       return;
     }
 
-  pexit = make_exit( fromRoom, targetRoom, exit_num );
+  pexit = MakeExit( fromRoom, targetRoom, exit_num );
   pexit->keyword                = CopyString( "" );
   pexit->description            = CopyString( "" );
   pexit->key                    = -1;

@@ -59,7 +59,7 @@ ch_ret spell_charm_person( int sn, int level, Character *ch, void *vo )
     SendToCharacter( "Ok.\r\n", ch );
 
   sprintf( buf, "%s has charmed %s.", ch->name, victim->name);
-  log_string_plus( buf, LOG_NORMAL, ch->top_level );
+  LogStringPlus( buf, LOG_NORMAL, ch->top_level );
 
   return rNONE;
 }

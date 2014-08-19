@@ -513,7 +513,7 @@ static const DO_FUN_ENTRY command_fun_table[] = {
       if ( !StrCmp( name, "do_mpecho" ))               return do_mpecho;
       if ( !StrCmp( name, "do_mpechoaround" )) return do_mpechoaround;
       if ( !StrCmp( name, "do_mpechoat" ))             return do_mpechoat;
-      if ( !StrCmp( name, "do_mpedit" ))               return do_mpedit;
+      if ( !StrCmp( name, "do_EditMobProg" ))               return do_EditMobProg;
       if ( !StrCmp( name, "do_mpfind" ))               return do_mpfind;
       if ( !StrCmp( name, "do_mpgain" ))               return do_mpgain;
       if ( !StrCmp( name, "do_mpforce" ))              return do_mpforce;
@@ -649,7 +649,7 @@ static const DO_FUN_ENTRY command_fun_table[] = {
       if ( !StrCmp( name, "do_rgrub" ))                return do_rgrub;
       if ( !StrCmp( name, "do_rlist" ))                return do_rlist;
       if ( !StrCmp( name, "do_roster" ))             return do_roster;
-      if ( !StrCmp( name, "do_rpedit" ))               return do_rpedit;
+      if ( !StrCmp( name, "do_EditRoomProg" ))               return do_EditRoomProg;
       if ( !StrCmp( name, "do_rpfind" ))               return do_rpfind;
       if ( !StrCmp( name, "do_rpstat" ))               return do_rpstat;
       if ( !StrCmp( name, "do_rreset" ))               return do_rreset;

@@ -41,7 +41,7 @@ void do_rdelete( Character *ch, char *argument )
      player has the authority to delete it, so let's dump the thing.
      The function to do it is in db.c so it can access the top-room
      variable. */
-  delete_room( location );
+  DeleteRoom( location );
 
   SendToCharacter( "Room deleted.\r\n", ch );
 }

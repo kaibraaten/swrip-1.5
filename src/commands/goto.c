@@ -48,10 +48,10 @@ void do_goto( Character *ch, char *argument )
               return;
             }
         }
-      location = make_room( vnum );
+      location = MakeRoom( vnum );
       if ( !location )
         {
-          Bug( "Goto: make_room failed", 0 );
+          Bug( "Goto: MakeRoom failed", 0 );
           return;
         }
       location->area = ch->pcdata->area;

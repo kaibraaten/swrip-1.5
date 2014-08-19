@@ -44,15 +44,15 @@ void do_rassign( Character *ch, char *argument )
 
   victim->pcdata->r_range_lo = r_lo;
   victim->pcdata->r_range_hi = r_hi;
-  assign_area( victim );
+  AssignAreaTo( victim );
   SendToCharacter( "Done.\r\n", ch );
   ChPrintf( victim, "%s has assigned you the room range %d - %d.\r\n",
              ch->name, r_lo, r_hi );
-  assign_area( victim );
+  AssignAreaTo( victim );
 
   if ( !victim->pcdata->area )
     {
-      Bug( "rassign: assign_area failed", 0 );
+      Bug( "rassign: AssignAreaTo failed", 0 );
       return;
     }
 

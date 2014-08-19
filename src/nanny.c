@@ -210,7 +210,7 @@ static void nanny_get_name( Descriptor *d, char *argument )
   if ( IsBitSet(ch->act, PLR_DENY) )
     {
       sprintf( log_buf, "Denying access to %s@%s.", argument, d->remote.hostname );
-      log_string_plus( log_buf, LOG_COMM, sysdata.log_level );
+      LogStringPlus( log_buf, LOG_COMM, sysdata.log_level );
 
       if (d->newstate != 0)
 	{
@@ -338,11 +338,11 @@ static void nanny_get_old_password( Descriptor *d, char *argument )
   if ( ch->top_level < LEVEL_CREATOR )
     {
       /*ToChannel( log_buf, CHANNEL_MONITOR, "Monitor", ch->top_level );*/
-      log_string_plus( log_buf, LOG_COMM, sysdata.log_level );
+      LogStringPlus( log_buf, LOG_COMM, sysdata.log_level );
     }
   else
     {
-      log_string_plus( log_buf, LOG_COMM, ch->top_level );
+      LogStringPlus( log_buf, LOG_COMM, ch->top_level );
     }
 
   WriteToBuffer( d, "Press enter...\r\n", 0 );
@@ -669,7 +669,7 @@ static void nanny_stats_ok( Descriptor *d, char *argument )
 
   sprintf( log_buf, "%s@%s new %s.", ch->name, d->remote.hostname,
 	   RaceTable[ch->race].race_name);
-  log_string_plus( log_buf, LOG_COMM, sysdata.log_level);
+  LogStringPlus( log_buf, LOG_COMM, sysdata.log_level);
   ToChannel( log_buf, CHANNEL_MONITOR, "Monitor", LEVEL_IMMORTAL );
   WriteToBuffer( d, "Press [ENTER] ", 0 );
   WriteToBuffer( d, "Press enter...\r\n", 0 );

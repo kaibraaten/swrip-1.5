@@ -102,7 +102,7 @@ void do_redit( Character *ch, char *argument )
       return;
     }
 
-  if ( !can_rmodify( ch, location ) )
+  if ( !CanModifyRoom( ch, location ) )
     return;
 
   if ( !StrCmp( arg, "name" ) )
@@ -544,7 +544,7 @@ void do_redit( Character *ch, char *argument )
               return;
             }
 
-          xit = make_exit( location, tmp, edir );
+          xit = MakeExit( location, tmp, edir );
 	  xit->keyword          = CopyString( "" );
           xit->description              = CopyString( "" );
           xit->key                      = -1;

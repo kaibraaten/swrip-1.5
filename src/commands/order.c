@@ -76,7 +76,7 @@ void do_order( Character *ch, char *argument )
   if ( found )
     {
       sprintf( log_buf, "%s: order %s.", ch->name, argbuf );
-      log_string_plus( log_buf, LOG_NORMAL, ch->top_level );
+      LogStringPlus( log_buf, LOG_NORMAL, ch->top_level );
       SendToCharacter( "Ok.\r\n", ch );
       SetWaitState( ch, 12 );
     }

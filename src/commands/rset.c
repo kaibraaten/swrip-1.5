@@ -33,7 +33,7 @@ void do_rset( Character *ch, char *argument )
       return;
     }
 
-  if ( !can_rmodify( ch, location ) )
+  if ( !CanModifyRoom( ch, location ) )
     return;
 
   if ( !IsNumber( arg3 ) )

@@ -547,6 +547,7 @@ typedef enum
 #define MOB_VNUM_ANIMATED_CORPSE   5
 #define MOB_VNUM_POLY_WOLF         10
 
+#define MOB_VNUM_SUPERMOB       3
 #define MOB_VNUM_STORMTROOPER  20
 #define MOB_VNUM_IMP_GUARD     21
 #define MOB_VNUM_NR_GUARD      22

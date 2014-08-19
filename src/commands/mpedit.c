@@ -17,7 +17,7 @@ void do_mpedit( Character *ch, char *argument )
 
   if ( IsNpc( ch ) )
     {
-      SendToCharacter( "Mob's can't mpedit\r\n", ch );
+      SendToCharacter( "Mob's can't EditMobProg\r\n", ch );
       return;
     }
 
@@ -35,7 +35,7 @@ void do_mpedit( Character *ch, char *argument )
       if ( !ch->dest_buf )
         {
           SendToCharacter( "Fatal error: report to Thoric.\r\n", ch );
-          Bug( "do_mpedit: sub_mprog_edit: NULL ch->dest_buf", 0 );
+          Bug( "%s: SUB_MPROG_EDIT: NULL ch->dest_buf", __FUNCTION__ );
           ch->substate = SUB_NONE;
           return;
         }
@@ -91,7 +91,7 @@ void do_mpedit( Character *ch, char *argument )
       return;
     }
 
-  if ( !can_mmodify( ch, victim ) )
+  if ( !CanModifyCharacter( ch, victim ) )
     return;
 
   if ( !IsBitSet( victim->act, ACT_PROTOTYPE ) )
@@ -150,7 +150,7 @@ void do_mpedit( Character *ch, char *argument )
         {
           if ( ++cnt == value )
             {
-              mpedit( ch, mprg, mptype, argument );
+              EditMobProg( ch, mprg, mptype, argument );
               victim->Prototype->mprog.progtypes = 0;
               for ( mprg = mprog; mprg; mprg = mprg->next )
                 victim->Prototype->mprog.progtypes |= mprg->type;
@@ -243,7 +243,7 @@ void do_mpedit( Character *ch, char *argument )
         {
           AllocateMemory( mprg, MPROG_DATA, 1 );
           victim->Prototype->mprog.progtypes |= ( 1 << mptype );
-          mpedit( ch, mprg, mptype, argument );
+          EditMobProg( ch, mprg, mptype, argument );
           mprg->next = mprog;
           victim->Prototype->mprog.mudprogs = mprg;
           return;
@@ -255,7 +255,7 @@ void do_mpedit( Character *ch, char *argument )
             {
               AllocateMemory( mprg_next, MPROG_DATA, 1 );
 	      victim->Prototype->mprog.progtypes |= ( 1 << mptype );
-              mpedit( ch, mprg_next, mptype, argument );
+              EditMobProg( ch, mprg_next, mptype, argument );
               mprg_next->next = mprg->next;
               mprg->next        = mprg_next;
               return;
@@ -281,7 +281,7 @@ void do_mpedit( Character *ch, char *argument )
       else
         victim->Prototype->mprog.mudprogs    = mprg;
       victim->Prototype->mprog.progtypes     |= ( 1 << mptype );
-      mpedit( ch, mprg, mptype, argument );
+      EditMobProg( ch, mprg, mptype, argument );
       mprg->next = NULL;
       return;
     }

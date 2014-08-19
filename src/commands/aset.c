@@ -86,8 +86,8 @@ void do_aset( Character *ch, char *argument )
     {
       FreeMemory( tarea->filename );
       tarea->filename = CopyString( argument );
-      write_area_list();
-      fold_area( tarea, tarea->filename, true );
+      WriteAreaList();
+      FoldArea( tarea, tarea->filename, true );
       SendToCharacter( "Done.\r\n", ch );
       return;
     }

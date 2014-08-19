@@ -34,7 +34,7 @@ void do_sellhome (Character *ch, char *argument)
   ch->gold += sellHomeCreditReturn;
   RemoveBit(room->room_flags,ROOM_PLR_HOME);
   SetBit(room->room_flags,ROOM_EMPTY_HOME);
-  fold_area(room->area,room->area->filename,false);
+  FoldArea(room->area,room->area->filename,false);
   ch->plr_home = NULL;
   do_save(ch,"");
   ChPrintf(ch,"You sell your home. You receive %d credits.\r\n",sellHomeCreditReturn);

@@ -20,7 +20,7 @@ void do_makerepair( Character *ch, char *argument )
       return;
     }
 
-  if ( !can_medit(ch, mob) )
+  if ( !CanMedit(ch, mob) )
     return;
 
   if ( mob->rShop )

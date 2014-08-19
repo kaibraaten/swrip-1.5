@@ -180,7 +180,7 @@ void pullorpush( Character *ch, Object *obj, bool pull )
       else
         maxd = 5;
 
-      randomize_exits( room, maxd );
+      RandomizeExits( room, maxd );
 
       for ( rch = room->first_person; rch; rch = rch->next_in_room )
         {
@@ -261,7 +261,7 @@ void pullorpush( Character *ch, Object *obj, bool pull )
               return;
             }
 
-          pexit = make_exit( room, to_room, edir );
+          pexit = MakeExit( room, to_room, edir );
           pexit->keyword        = CopyString( "" );
           pexit->description    = CopyString( "" );
           pexit->key            = -1;

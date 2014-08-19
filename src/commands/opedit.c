@@ -85,7 +85,7 @@ void do_opedit( Character *ch, char *argument )
         }
     }
 
-  if ( !can_omodify( ch, obj ) )
+  if ( !CanModifyObject( ch, obj ) )
     return;
 
   if ( !IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
@@ -144,7 +144,7 @@ void do_opedit( Character *ch, char *argument )
         {
           if ( ++cnt == value )
             {
-              mpedit( ch, mprg, mptype, argument );
+              EditMobProg( ch, mprg, mptype, argument );
               obj->Prototype->mprog.progtypes = 0;
               for ( mprg = mprog; mprg; mprg = mprg->next )
                 obj->Prototype->mprog.progtypes |= mprg->type;
@@ -237,7 +237,7 @@ void do_opedit( Character *ch, char *argument )
         {
           AllocateMemory( mprg, MPROG_DATA, 1 );
           obj->Prototype->mprog.progtypes    |= ( 1 << mptype );
-          mpedit( ch, mprg, mptype, argument );
+          EditMobProg( ch, mprg, mptype, argument );
           mprg->next = mprog;
           obj->Prototype->mprog.mudprogs = mprg;
           return;
@@ -249,7 +249,7 @@ void do_opedit( Character *ch, char *argument )
             {
               AllocateMemory( mprg_next, MPROG_DATA, 1 );
               obj->Prototype->mprog.progtypes |= ( 1 << mptype );
-              mpedit( ch, mprg_next, mptype, argument );
+              EditMobProg( ch, mprg_next, mptype, argument );
               mprg_next->next = mprg->next;
 	      mprg->next        = mprg_next;
               return;
@@ -275,7 +275,7 @@ void do_opedit( Character *ch, char *argument )
       else
         obj->Prototype->mprog.mudprogs        = mprg;
       obj->Prototype->mprog.progtypes        |= ( 1 << mptype );
-      mpedit( ch, mprg, mptype, argument );
+      EditMobProg( ch, mprg, mptype, argument );
       mprg->next = NULL;
       return;
     }

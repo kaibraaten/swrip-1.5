@@ -20,7 +20,7 @@ void do_rreset( Character *ch, char *argument )
     }
   else
     pRoom = ch->in_room;
-  if ( !can_rmodify(ch, pRoom) )
+  if ( !CanModifyRoom(ch, pRoom) )
     return;
   EditReset(ch, argument, pRoom->area, pRoom);
 }

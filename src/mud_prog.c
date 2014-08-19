@@ -109,8 +109,8 @@ void init_supermob()
 {
   RID *office;
 
-  supermob = CreateMobile(GetProtoMobile( 3 ));
-  office = GetRoom ( 3 );
+  supermob = CreateMobile(GetProtoMobile( MOB_VNUM_SUPERMOB ));
+  office = GetRoom ( ROOM_VNUM_POLY );
   char_to_room( supermob, office );
 
 #ifdef NOTDEFD
@@ -2627,7 +2627,7 @@ void set_supermob( Object *obj)
   char buf[200];
 
   if ( !supermob )
-    supermob = CreateMobile(GetProtoMobile( 3 ));
+    supermob = CreateMobile(GetProtoMobile( MOB_VNUM_SUPERMOB ));
 
   if(!obj)
     return;
@@ -2669,7 +2669,7 @@ void set_supermob( Object *obj)
 void release_supermob( )
 {
   char_from_room( supermob );
-  char_to_room( supermob, GetRoom( 3 ) );
+  char_to_room( supermob, GetRoom( ROOM_VNUM_POLY ) );
 }
 
 bool oprog_percent_check( Character *mob, Character *actor, Object *obj,
@@ -3352,7 +3352,7 @@ void progbug( char *str, Character *mob )
 {
   /* Check if we're dealing with supermob, which means the bug occurred
      in a room or obj prog. */
-  if ( mob->Prototype->vnum == 3 )
+  if ( mob->Prototype->vnum == MOB_VNUM_SUPERMOB )
     {
       /* It's supermob.  In set_supermob and rset_supermob, the description
          was set to indicate the object or room, so we just need to show

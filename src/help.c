@@ -155,7 +155,7 @@ void LoadHelpFiles( void )
 
   if( !( fp = fopen( HELP_DATA_FILE, "r" ) ) )
     {
-      log_printf( "Unable to open %s", HELP_DATA_FILE );
+      LogPrintf( "Unable to open %s", HELP_DATA_FILE );
       return;
     }
 

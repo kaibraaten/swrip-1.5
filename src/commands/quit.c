@@ -111,5 +111,5 @@ void do_quit( Character *ch, char *argument )
     for ( y = 0; y < MAX_LAYERS; y++ )
       save_equipment[x][y] = NULL;
 
-  log_string_plus( log_buf, LOG_COMM, level );
+  LogStringPlus( log_buf, LOG_COMM, level );
 }

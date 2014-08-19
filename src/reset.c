@@ -1985,7 +1985,7 @@ void ResetArea( Area *pArea )
               continue;
             }
 
-          randomize_exits(pRoomIndex, pReset->arg2-1);
+          RandomizeExits(pRoomIndex, pReset->arg2-1);
           break;
         }
     }

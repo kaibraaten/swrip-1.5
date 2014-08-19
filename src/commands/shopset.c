@@ -28,7 +28,7 @@ void do_shopset( Character *ch, char *argument )
       return;
     }
 
-  if ( !can_medit(ch, mob) )
+  if ( !CanMedit(ch, mob) )
     return;
 
   if ( !mob->pShop )
@@ -165,7 +165,7 @@ void do_shopset( Character *ch, char *argument )
           SendToCharacter( "Mobile not found.\r\n", ch );
           return;
         }
-      if ( !can_medit(ch, mob) )
+      if ( !CanMedit(ch, mob) )
         return;
       if ( mob2->pShop )
         {

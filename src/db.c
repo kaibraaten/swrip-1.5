@@ -406,7 +406,7 @@ void BootDatabase( bool fCopyOver )
   load_herb_table();
 
   log_string("Making wizlist");
-  make_wizlist();
+  MakeWizlist();
 
   fBootDb             = true;
   sysdata.maxplayers  = 0;
@@ -646,7 +646,7 @@ void BootDatabase( bool fCopyOver )
         if ( strArea[0] == '$' )
           break;
 
-        load_area_file( last_area, strArea );
+        LoadAreaFile( last_area, strArea );
       }
 
     fclose( fpList );
@@ -931,7 +931,7 @@ void load_mobiles( Area *tarea, FILE *fp )
             {
               pMobIndex = GetProtoMobile( vnum );
               sprintf( buf, "Cleaning mobile: %ld", vnum );
-              log_string_plus( buf, LOG_BUILD, sysdata.log_level );
+              LogStringPlus( buf, LOG_BUILD, sysdata.log_level );
               clean_mob( pMobIndex );
               oldmob = true;
             }
@@ -1166,7 +1166,7 @@ void load_objects( Area *tarea, FILE *fp )
             {
               pObjIndex = GetProtoObject( vnum );
               sprintf( buf, "Cleaning object: %ld", vnum );
-              log_string_plus( buf, LOG_BUILD, sysdata.log_level );
+              LogStringPlus( buf, LOG_BUILD, sysdata.log_level );
               clean_obj( pObjIndex );
               oldobj = true;
             }
@@ -1344,7 +1344,7 @@ void load_resets( Area *tarea, FILE *fp )
            */
 	  char buf[MAX_STRING_LENGTH];
           sprintf( buf, "Cleaning resets: %s", tarea->name );
-          log_string_plus( buf, LOG_BUILD, sysdata.log_level );
+          LogStringPlus( buf, LOG_BUILD, sysdata.log_level );
           clean_resets( tarea );
         }
     }
@@ -1560,7 +1560,7 @@ void load_rooms( Area *tarea, FILE *fp )
             {
               pRoomIndex = GetRoom( vnum );
               sprintf( buf, "Cleaning room: %ld", vnum );
-              log_string_plus( buf, LOG_BUILD, sysdata.log_level );
+              LogStringPlus( buf, LOG_BUILD, sysdata.log_level );
               clean_room( pRoomIndex );
               oldroom = true;
             }
@@ -1636,7 +1636,7 @@ void load_rooms( Area *tarea, FILE *fp )
                 }
               else
                 {
-                  pexit = make_exit( pRoomIndex, NULL, door );
+                  pexit = MakeExit( pRoomIndex, NULL, door );
                   pexit->description    = ReadStringToTilde( fp );
                   pexit->keyword        = ReadStringToTilde( fp );
                   pexit->exit_info      = 0;
@@ -2048,7 +2048,7 @@ void sort_exits( Room *room )
     }
 }
 
-void randomize_exits( Room *room, short maxdir )
+void RandomizeExits( Room *room, short maxdir )
 {
   Exit *pexit;
   int nexits, /* maxd, */ d0, d1, count, door; /* Maxd unused */
@@ -2855,7 +2855,7 @@ void ShowFile( Character *ch, const char *filename )
 /*
  * Writes a string to the log, extended version                 -Thoric
  */
-void log_string_plus( const char *str, short log_type, short level )
+void LogStringPlus( const char *str, short log_type, short level )
 {
   char *strtime = ctime( &current_time );
   int offset = 0;
@@ -3004,7 +3004,7 @@ void add_to_wizlist( char *name, int level )
 /*
  * Wizlist builder                                              -Thoric
  */
-void make_wizlist( )
+void MakeWizlist( )
 {
   DIR *dp;
   struct dirent *dentry;
@@ -3785,7 +3785,7 @@ void rprog_read_programs( FILE *fp, Room *pRoomIndex)
 /* Function to delete a room index.  Called from do_rdelete in build.c
    Narn, May/96
 */
-bool delete_room( Room *room )
+bool DeleteRoom( Room *room )
 {
   int iHash;
   Room *tmp, *prev;
@@ -3824,14 +3824,14 @@ bool delete_room( Room *room )
   return true;
 }
 
-/* See comment on delete_room. */
-bool delete_obj( ProtoObject *obj )
+/* See comment on DeleteRoom. */
+bool DeleteObject( ProtoObject *obj )
 {
   return true;
 }
 
-/* See comment on delete_room. */
-bool delete_mob( ProtoMobile *mob )
+/* See comment on DeleteRoom. */
+bool DeleteMobile( ProtoMobile *mob )
 {
   return true;
 }
@@ -3839,7 +3839,7 @@ bool delete_mob( ProtoMobile *mob )
 /*
  * Creat a new room (for online building)                       -Thoric
  */
-Room *make_room( vnum_t vnum )
+Room *MakeRoom( vnum_t vnum )
 {
   Room *pRoomIndex;
   int   iHash;
@@ -3875,7 +3875,7 @@ Room *make_room( vnum_t vnum )
  * Create a new INDEX object (for online building)              -Thoric
  * Option to clone an existing index object.
  */
-ProtoObject *make_object( vnum_t vnum, vnum_t cvnum, char *name )
+ProtoObject *MakeObject( vnum_t vnum, vnum_t cvnum, char *name )
 {
   ProtoObject *pObjIndex = NULL, *cObjIndex = NULL;
   char buf[MAX_STRING_LENGTH];
@@ -3961,7 +3961,7 @@ ProtoObject *make_object( vnum_t vnum, vnum_t cvnum, char *name )
  * Create a new INDEX mobile (for online building)              -Thoric
  * Option to clone an existing index mobile.
  */
-ProtoMobile *make_mobile( vnum_t vnum, vnum_t cvnum, char *name )
+ProtoMobile *MakeMobile( vnum_t vnum, vnum_t cvnum, char *name )
 {
   ProtoMobile *pMobIndex, *cMobIndex;
   char buf[MAX_STRING_LENGTH];
@@ -4082,7 +4082,7 @@ ProtoMobile *make_mobile( vnum_t vnum, vnum_t cvnum, char *name )
  * to_room and vnum.                                            -Thoric
  * Exits are inserted into the linked list based on vdir.
  */
-Exit *make_exit( Room *pRoomIndex, Room *to_room, short door )
+Exit *MakeExit( Room *pRoomIndex, Room *to_room, short door )
 {
   Exit *pexit, *texit;
   bool broke;
@@ -4135,7 +4135,7 @@ Exit *make_exit( Room *pRoomIndex, Room *to_room, short door )
   return pexit;
 }
 
-void fix_area_exits( Area *tarea )
+void FixAreaExits( Area *tarea )
 {
   Room *pRoomIndex;
   Exit *pexit, *rev_exit;
@@ -4182,7 +4182,7 @@ void fix_area_exits( Area *tarea )
     }
 }
 
-void load_area_file( Area *tarea, char *filename )
+void LoadAreaFile( Area *tarea, char *filename )
 {
   /*    FILE *fpin;
         what intelligent person stopped using fpArea?????
@@ -4271,7 +4271,7 @@ void load_area_file( Area *tarea, char *filename )
   if ( tarea )
     {
       if ( fBootDb )
-        sort_area( tarea, false );
+        SortArea( tarea, false );
 
       fprintf( stderr, "%-14s: Rooms: %5ld - %-5ld Objs: %5ld - %-5ld Mobs: %5ld - %ld\n",
                tarea->filename,
@@ -4395,7 +4395,7 @@ void load_buildlist( void )
                        pArea->low_r_vnum, pArea->hi_r_vnum,
                        pArea->low_o_vnum, pArea->hi_o_vnum,
                        pArea->low_m_vnum, pArea->hi_m_vnum );
-              sort_area( pArea, true );
+              SortArea( pArea, true );
             }
         }
       dentry = readdir(dp);
@@ -4407,7 +4407,7 @@ void load_buildlist( void )
 /*
  * Sort by room vnums                                   -Altrag & Thoric
  */
-void sort_area( Area *pArea, bool proto )
+void SortArea( Area *pArea, bool proto )
 {
   Area *area = NULL;
   Area *first_sort, *last_sort;
@@ -4806,7 +4806,7 @@ void AppendFile( Character *ch, const char *file, const char *str )
 }
 
 /* From Erwin */
-void log_printf( const char *fmt, ... )
+void LogPrintf( const char *fmt, ... )
 {
   char buf[MAX_STRING_LENGTH * 2];
   va_list args;
@@ -4814,5 +4814,5 @@ void log_printf( const char *fmt, ... )
   vsprintf( buf, fmt, args );
   va_end( args );
 
-  log_string_plus( buf, LOG_NORMAL, LEVEL_LOG );
+  LogStringPlus( buf, LOG_NORMAL, LEVEL_LOG );
 }

@@ -74,7 +74,7 @@ void do_copyover( Character * ch, char *argument )
   if( !fp )
   {
     SendToCharacter( "Copyover file not writeable, aborted.\r\n", ch );
-    log_printf( "Could not write to copyover file: %s", COPYOVER_FILE );
+    LogPrintf( "Could not write to copyover file: %s", COPYOVER_FILE );
     perror( "do_copyover:fopen" );
     return;
   }

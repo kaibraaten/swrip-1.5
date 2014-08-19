@@ -77,7 +77,7 @@ void do_balzhur( Character *ch, char *argument )
     }
 
   sprintf( buf2, "%s.are", Capitalize(arg) );
-  make_wizlist();
+  MakeWizlist();
   do_help(victim, "M_BALZHUR_" );
   SetCharacterColor( AT_WHITE, victim );
   SendToCharacter( "You awake after a long period of time...\r\n", victim );

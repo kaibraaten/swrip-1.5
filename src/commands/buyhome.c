@@ -56,7 +56,7 @@ void do_buyhome( Character *ch, char *argument )
   RemoveBit( room->room_flags , ROOM_EMPTY_HOME );
   SetBit( room->room_flags , ROOM_PLR_HOME );
 
-  fold_area( room->area, room->area->filename, false );
+  FoldArea( room->area, room->area->filename, false );
 
   ch->plr_home = room;
   do_save( ch , "" );

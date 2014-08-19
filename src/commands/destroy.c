@@ -72,7 +72,7 @@ void do_destroy( Character *ch, char *argument )
           {
             sprintf( buf, "%s%s", BUILD_DIR, buf2 );
             if ( IsBitSet( pArea->status, AREA_LOADED ) )
-	      fold_area( pArea, buf, false );
+	      FoldArea( pArea, buf, false );
             CloseArea( pArea );
             sprintf( buf2, "%s.bak", buf );
             SetCharacterColor( AT_RED, ch ); /* Log message changes colors */

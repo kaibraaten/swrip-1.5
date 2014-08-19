@@ -36,7 +36,7 @@ void do_massign( Character *ch, char *argument )
     }
   victim->pcdata->m_range_lo = m_lo;
   victim->pcdata->m_range_hi = m_hi;
-  assign_area( victim );
+  AssignAreaTo( victim );
   SendToCharacter( "Done.\r\n", ch );
   ChPrintf( victim, "%s has assigned you the monster vnum range %d - %d.\r\n",
              ch->name, m_lo, m_hi );

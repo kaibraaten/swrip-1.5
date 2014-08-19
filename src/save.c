@@ -1139,7 +1139,7 @@ bool load_char_obj( Descriptor *d, char *name, bool preload )
           sprintf( buf, "%s player data for: %s (%dK)",
                    preload ? "Preloading" : "Loading", ch->name,
                    (int) fst.st_size/1024 );
-          log_string_plus( buf, LOG_COMM, LEVEL_GREATER );
+          LogStringPlus( buf, LOG_COMM, LEVEL_GREATER );
         }
     }
   /* else no player file */
@@ -1280,7 +1280,7 @@ bool load_char_obj( Descriptor *d, char *name, bool preload )
 	      ch->pcdata->wizinvis = ch->top_level;
 	    }
 
-          assign_area( ch );
+          AssignAreaTo( ch );
         }
 
       if ( file_ver > 1 )

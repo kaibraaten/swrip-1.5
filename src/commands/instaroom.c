@@ -27,7 +27,7 @@ void do_instaroom( Character *ch, char *argument )
       SendToCharacter( "Room doesn't exist.\r\n", ch );
       return;
     }
-  if ( !can_rmodify(ch, pRoom) )
+  if ( !CanModifyRoom(ch, pRoom) )
     return;
   if ( pRoom->area != pArea && GetTrustLevel(ch) < LEVEL_GREATER )
     {

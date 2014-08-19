@@ -201,7 +201,7 @@ void do_oset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "value0" ) || !StrCmp( arg2, "v0" ) )
     {
-      if ( !can_omodify( ch, obj ) )
+      if ( !CanModifyObject( ch, obj ) )
         return;
       obj->value[0] = value;
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
@@ -211,7 +211,7 @@ void do_oset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "value1" ) || !StrCmp( arg2, "v1" ) )
     {
-      if ( !can_omodify( ch, obj ) )
+      if ( !CanModifyObject( ch, obj ) )
         return;
       obj->value[1] = value;
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
@@ -221,7 +221,7 @@ void do_oset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "value2" ) || !StrCmp( arg2, "v2" ) )
     {
-      if ( !can_omodify( ch, obj ) )
+      if ( !CanModifyObject( ch, obj ) )
         return;
       obj->value[2] = value;
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
@@ -235,7 +235,7 @@ void do_oset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "value3" ) || !StrCmp( arg2, "v3" ) )
     {
-      if ( !can_omodify( ch, obj ) )
+      if ( !CanModifyObject( ch, obj ) )
         return;
       obj->value[3] = value;
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
@@ -245,7 +245,7 @@ void do_oset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "value4" ) || !StrCmp( arg2, "v4" ) )
     {
-      if ( !can_omodify( ch, obj ) )
+      if ( !CanModifyObject( ch, obj ) )
         return;
       obj->value[4] = value;
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
@@ -255,7 +255,7 @@ void do_oset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "value5" ) || !StrCmp( arg2, "v5" ) )
     {
-      if ( !can_omodify( ch, obj ) )
+      if ( !CanModifyObject( ch, obj ) )
         return;
       obj->value[5] = value;
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
@@ -265,7 +265,7 @@ void do_oset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "type" ) )
     {
-      if ( !can_omodify( ch, obj ) )
+      if ( !CanModifyObject( ch, obj ) )
         return;
       if ( !argument || argument[0] == '\0' )
         {
@@ -300,7 +300,7 @@ void do_oset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "flags" ) )
     {
-      if ( !can_omodify( ch, obj ) )
+      if ( !CanModifyObject( ch, obj ) )
         return;
       if ( !argument || argument[0] == '\0' )
         {
@@ -334,7 +334,7 @@ void do_oset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "wear" ) )
     {
-      if ( !can_omodify( ch, obj ) )
+      if ( !CanModifyObject( ch, obj ) )
         return;
       if ( !argument || argument[0] == '\0' )
         {
@@ -364,7 +364,7 @@ void do_oset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "level" ) )
     {
-      if ( !can_omodify( ch, obj ) )
+      if ( !CanModifyObject( ch, obj ) )
         return;
       obj->level = value;
       return;
@@ -372,7 +372,7 @@ void do_oset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "weight" ) )
     {
-      if ( !can_omodify( ch, obj ) )
+      if ( !CanModifyObject( ch, obj ) )
         return;
       obj->weight = value;
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
@@ -382,7 +382,7 @@ void do_oset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "cost" ) )
     {
-      if ( !can_omodify( ch, obj ) )
+      if ( !CanModifyObject( ch, obj ) )
         return;
       obj->cost = value;
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
@@ -392,7 +392,7 @@ void do_oset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "rent" ) )
     {
-      if ( !can_omodify( ch, obj ) )
+      if ( !CanModifyObject( ch, obj ) )
         return;
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
         obj->Prototype->rent = value;
@@ -403,7 +403,7 @@ void do_oset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "layers" ) )
     {
-      if ( !can_omodify( ch, obj ) )
+      if ( !CanModifyObject( ch, obj ) )
         return;
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
         obj->Prototype->layers = value;
@@ -414,7 +414,7 @@ void do_oset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "timer" ) )
     {
-      if ( !can_omodify( ch, obj ) )
+      if ( !CanModifyObject( ch, obj ) )
         return;
       obj->timer = value;
       return;
@@ -422,7 +422,7 @@ void do_oset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "name" ) )
     {
-      if ( !can_omodify( ch, obj ) )
+      if ( !CanModifyObject( ch, obj ) )
         return;
       FreeMemory( obj->name );
       obj->name = CopyString( arg3 );
@@ -940,7 +940,7 @@ void do_oset( Character *ch, char *argument )
     }
   if ( tmp >= 0 && tmp <= 5 )
     {
-      if ( !can_omodify( ch, obj ) )
+      if ( !CanModifyObject( ch, obj ) )
         return;
       obj->value[tmp] = value;
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )

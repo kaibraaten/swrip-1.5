@@ -365,7 +365,7 @@ Room *GenerateExit( Room *in_room, Exit **pexit )
 
   if ( !found || (xit=GetExit(room, vdir))==NULL )
     {
-      xit = make_exit(room, orig_exit->to_room, vdir);
+      xit = MakeExit(room, orig_exit->to_room, vdir);
       xit->keyword              = CopyString( "" );
       xit->description  = CopyString( "" );
       xit->key          = -1;
@@ -374,7 +374,7 @@ Room *GenerateExit( Room *in_room, Exit **pexit )
 
   if ( !found )
     {
-      bxit = make_exit(room, backroom, GetReverseDirection(vdir));
+      bxit = MakeExit(room, backroom, GetReverseDirection(vdir));
       bxit->keyword             = CopyString( "" );
       bxit->description = CopyString( "" );
       bxit->key         = -1;

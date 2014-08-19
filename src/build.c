@@ -26,7 +26,7 @@
 #include "character.h"
 #include "editor.h"
 
-bool can_rmodify( const Character *ch, const Room *room )
+bool CanModifyRoom( const Character *ch, const Room *room )
 {
   vnum_t vnum = room->vnum;
   Area *pArea;
@@ -50,7 +50,7 @@ bool can_rmodify( const Character *ch, const Room *room )
   return false;
 }
 
-bool can_omodify( const Character *ch, const Object *obj )
+bool CanModifyObject( const Character *ch, const Object *obj )
 {
   vnum_t vnum = obj->Prototype->vnum;
   Area *pArea;
@@ -99,84 +99,108 @@ bool can_oedit( const Character *ch, const ProtoObject *obj )
   return false;
 }
 
-bool can_mmodify( const Character *ch, const Character *mob )
+bool CanModifyCharacter( const Character *ch, const Character *mob )
 {
-  vnum_t vnum;
-  Area *pArea;
+  vnum_t vnum = INVALID_VNUM;
+  Area *pArea = NULL;
 
   if ( mob == ch )
-    return true;
+    {
+      return true;
+    }
 
   if ( !IsNpc( mob ) )
     {
       if ( GetTrustLevel( ch ) >= sysdata.level_modify_proto && GetTrustLevel(ch) >
            GetTrustLevel( mob ) )
-        return true;
+	{
+	  return true;
+	}
       else
-        SendToCharacter( "You can't do that.\r\n", ch );
+	{
+	  SendToCharacter( "You can't do that.\r\n", ch );
+	}
+
       return false;
     }
 
   vnum = mob->Prototype->vnum;
 
   if ( IsNpc( ch ) )
-    return false;
+    {
+      return false;
+    }
+
   if ( GetTrustLevel( ch ) >= sysdata.level_modify_proto )
-    return true;
+    {
+      return true;
+    }
+
   if ( !ch->pcdata || !(pArea=ch->pcdata->area) )
     {
       SendToCharacter( "You must have an assigned area to modify this mobile.\r\n", ch );
       return false;
     }
-  if ( vnum >= pArea->low_m_vnum
-       &&   vnum <= pArea->hi_m_vnum )
-    return true;
+
+  if ( vnum >= pArea->low_m_vnum && vnum <= pArea->hi_m_vnum )
+    {
+      return true;
+    }
 
   SendToCharacter( "That mobile is not in your allocated range.\r\n", ch );
   return false;
 }
 
-bool can_medit( const Character *ch, const ProtoMobile *mob )
+bool CanMedit( const Character *ch, const ProtoMobile *mob )
 {
   vnum_t vnum = mob->vnum;
-  Area *pArea;
+  Area *pArea = NULL;
 
   if ( IsNpc( ch ) )
-    return false;
+    {
+      return false;
+    }
+
   if ( GetTrustLevel( ch ) >= LEVEL_GREATER )
-    return true;
-  if ( !ch->pcdata || !(pArea=ch->pcdata->area) )
+    {
+      return true;
+    }
+
+  if ( !ch->pcdata || !( pArea = ch->pcdata->area ) )
     {
       SendToCharacter( "You must have an assigned area to modify this mobile.\r\n", ch );
       return false;
     }
+
   if ( vnum >= pArea->low_m_vnum
-       &&   vnum <= pArea->hi_m_vnum )
-    return true;
+       && vnum <= pArea->hi_m_vnum )
+    {
+      return true;
+    }
 
   SendToCharacter( "That mobile is not in your allocated range.\r\n", ch );
   return false;
 }
 
-void free_reset( Area *are, Reset *res )
+void FreeReset( Area *are, Reset *res )
 {
   UNLINK( res, are->first_reset, are->last_reset, next, prev );
   FreeMemory( res );
 }
 
-void free_area( Area *are )
+void FreeArea( Area *are )
 {
   FreeMemory( are->name );
   FreeMemory( are->filename );
 
   while ( are->first_reset )
-    free_reset( are, are->first_reset );
+    FreeReset( are, are->first_reset );
 
   FreeMemory( are );
   are = NULL;
 }
 
-void assign_area( Character *ch )
+void AssignAreaTo( Character *ch )
 {
   char buf[MAX_STRING_LENGTH];
   char buf2[MAX_STRING_LENGTH];
@@ -204,7 +228,7 @@ void assign_area( Character *ch )
       if ( !tarea )
         {
           sprintf( buf, "Creating area entry for %s", ch->name );
-          log_string_plus( buf, LOG_NORMAL, ch->top_level );
+          LogStringPlus( buf, LOG_NORMAL, ch->top_level );
           AllocateMemory( tarea, Area, 1 );
           LINK( tarea, first_build, last_build, next, prev );
           tarea->first_reset    = NULL;
@@ -222,7 +246,7 @@ void assign_area( Character *ch )
       else
         {
           sprintf( buf, "Updating area entry for %s", ch->name );
-          log_string_plus( buf, LOG_NORMAL, ch->top_level );
+          LogStringPlus( buf, LOG_NORMAL, ch->top_level );
         }
       tarea->low_r_vnum = ch->pcdata->r_range_lo;
       tarea->low_o_vnum = ch->pcdata->o_range_lo;
@@ -232,7 +256,7 @@ void assign_area( Character *ch )
       tarea->hi_m_vnum  = ch->pcdata->m_range_hi;
       ch->pcdata->area  = tarea;
       if ( created )
-        sort_area( tarea, true );
+        SortArea( tarea, true );
     }
 }
 
@@ -353,7 +377,7 @@ bool DelOExtraProto( ProtoObject *obj, char *keywords )
   return true;
 }
 
-void fold_area( Area *tarea, char *filename, bool install )
+void FoldArea( Area *tarea, char *filename, bool install )
 {
   Reset            *treset;
   Room       *room;
@@ -373,7 +397,7 @@ void fold_area( Area *tarea, char *filename, bool install )
   char backup[MAX_STRING_LENGTH];
 
   sprintf( buf, "Saving %s...", tarea->filename );
-  log_string_plus( buf, LOG_NORMAL, LEVEL_GREATER );
+  LogStringPlus( buf, LOG_NORMAL, LEVEL_GREATER );
 
   /*sprintf( buf, "%s.bak", filename );
     rename( filename, buf );*/
@@ -383,7 +407,7 @@ void fold_area( Area *tarea, char *filename, bool install )
 
   if ( ( fpout = fopen( buf, "w" ) ) == NULL )
     {
-      Bug( "fold_area: fopen", 0 );
+      Bug( "FoldArea: fopen", 0 );
       perror( filename );
       return;
     }
@@ -759,7 +783,7 @@ void fold_area( Area *tarea, char *filename, bool install )
   fclose( fpout );
 }
 
-void write_area_list( void )
+void WriteAreaList( void )
 {
   Area *tarea;
   FILE *fpout;
@@ -1044,7 +1068,7 @@ Reset *ParseReset( Area *tarea, char *argument, Character *ch )
     return MakeReset( letter, extra, val1, val3, val2 );
 }
 
-void mpedit( Character *ch, MPROG_DATA *mprg, int mptype, char *argument )
+void EditMobProg( Character *ch, MPROG_DATA *mprg, int mptype, char *argument )
 {
   if ( mptype != -1 )
     {
@@ -1073,7 +1097,7 @@ void mpedit( Character *ch, MPROG_DATA *mprg, int mptype, char *argument )
 /*
  * RoomProg Support
  */
-void rpedit( Character *ch, MPROG_DATA *mprg, int mptype, char *argument )
+void EditRoomProg( Character *ch, MPROG_DATA *mprg, int mptype, char *argument )
 {
   if ( mptype != -1 )
     {

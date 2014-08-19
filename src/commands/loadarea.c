@@ -54,9 +54,9 @@ void do_loadarea( Character *ch, char *argument )
     }
   sprintf( filename, "%s%s", BUILD_DIR, tarea->filename );
   SendToCharacter( "Loading...\r\n", ch );
-  load_area_file( tarea, filename );
+  LoadAreaFile( tarea, filename );
   SendToCharacter( "Linking exits...\r\n", ch );
-  fix_area_exits( tarea );
+  FixAreaExits( tarea );
   if ( tarea->first_reset )
     {
       tmp = tarea->nplayer;

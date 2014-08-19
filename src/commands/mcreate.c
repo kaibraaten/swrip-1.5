@@ -66,12 +66,12 @@ void do_mcreate( Character *ch, char *argument )
         }
     }
 
-  pMobIndex = make_mobile( vnum, cvnum, argument );
+  pMobIndex = MakeMobile( vnum, cvnum, argument );
 
   if ( !pMobIndex )
     {
       SendToCharacter( "Error.\r\n", ch );
-      log_string( "do_mcreate: make_mobile failed." );
+      log_string( "do_mcreate: MakeMobile failed." );
       return;
     }
 

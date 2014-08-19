@@ -2146,7 +2146,7 @@ void raw_kill( Character *killer, Character *victim )
       RemoveBit( room->room_flags , ROOM_PLR_HOME );
       SetBit( room->room_flags , ROOM_EMPTY_HOME );
 
-      fold_area( room->area, room->area->filename, false );
+      FoldArea( room->area, room->area->filename, false );
     }
 
   if ( victim->pcdata && victim->pcdata->clan )

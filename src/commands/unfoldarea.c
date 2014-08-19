@@ -23,6 +23,6 @@ void do_unfoldarea( Character *ch, char *argument )
     }
 
   fBootDb = true;
-  load_area_file( last_area, argument );
+  LoadAreaFile( last_area, argument );
   fBootDb = false;
 }

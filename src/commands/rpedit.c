@@ -30,7 +30,7 @@ void do_rpedit( Character *ch, char *argument )
       if ( !ch->dest_buf )
 	{
           SendToCharacter( "Fatal error: report to Thoric.\r\n", ch );
-          Bug( "do_opedit: sub_oprog_edit: NULL ch->dest_buf", 0 );
+          Bug( "%s: SUB_MPROG_EDIT: NULL ch->dest_buf", __FUNCTION__ );
           ch->substate = SUB_NONE;
           return;
         }
@@ -65,7 +65,7 @@ void do_rpedit( Character *ch, char *argument )
       return;
     }
 
-  if ( !can_rmodify( ch, ch->in_room ) )
+  if ( !CanModifyRoom( ch, ch->in_room ) )
     return;
 
   mprog = ch->in_room->mprog.mudprogs;
@@ -118,7 +118,7 @@ void do_rpedit( Character *ch, char *argument )
         {
           if ( ++cnt == value )
             {
-	      mpedit( ch, mprg, mptype, argument );
+	      EditMobProg( ch, mprg, mptype, argument );
               ch->in_room->mprog.progtypes = 0;
               for ( mprg = mprog; mprg; mprg = mprg->next )
                 ch->in_room->mprog.progtypes |= mprg->type;
@@ -211,7 +211,7 @@ void do_rpedit( Character *ch, char *argument )
 	{
           AllocateMemory( mprg, MPROG_DATA, 1 );
           ch->in_room->mprog.progtypes |= ( 1 << mptype );
-          mpedit( ch, mprg, mptype, argument );
+          EditMobProg( ch, mprg, mptype, argument );
           mprg->next = mprog;
           ch->in_room->mprog.mudprogs = mprg;
           return;
@@ -223,7 +223,7 @@ void do_rpedit( Character *ch, char *argument )
             {
               AllocateMemory( mprg_next, MPROG_DATA, 1 );
               ch->in_room->mprog.progtypes |= ( 1 << mptype );
-              mpedit( ch, mprg_next, mptype, argument );
+              EditMobProg( ch, mprg_next, mptype, argument );
               mprg_next->next = mprg->next;
               mprg->next        = mprg_next;
               return;
@@ -249,7 +249,7 @@ void do_rpedit( Character *ch, char *argument )
       else
         ch->in_room->mprog.mudprogs   = mprg;
       ch->in_room->mprog.progtypes |= ( 1 << mptype );
-      mpedit( ch, mprg, mptype, argument );
+      EditMobProg( ch, mprg, mptype, argument );
       mprg->next = NULL;
       return;
     }

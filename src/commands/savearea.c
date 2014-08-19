@@ -51,6 +51,6 @@ void do_savearea( Character *ch, char *argument )
     }
 
   sprintf( filename, "%s%s", BUILD_DIR, tarea->filename );
-  fold_area( tarea, filename, false );
+  FoldArea( tarea, filename, false );
   SendToCharacter( "Done.\r\n", ch );
 }

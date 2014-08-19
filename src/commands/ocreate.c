@@ -70,12 +70,12 @@ void do_ocreate( Character *ch, char *argument )
   if( cvnum == vnum )
     SendToCharacter( "The vnums must be different!\r\n", ch );
 
-  pObjIndex = make_object( vnum, cvnum, argument );
+  pObjIndex = MakeObject( vnum, cvnum, argument );
 
   if ( !pObjIndex )
     {
       SendToCharacter( "Error.\r\n", ch );
-      log_string( "do_ocreate: make_object failed." );
+      log_string( "do_ocreate: MakeObject failed." );
       return;
     }
 

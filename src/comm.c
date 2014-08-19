@@ -689,7 +689,7 @@ void new_descriptor( socket_t new_desc )
     {
       perror( "New_descriptor: accept");
       /*sprintf(bugbuf, "[*****] BUG: New_descriptor: accept");
-        log_string_plus( bugbuf, LOG_COMM, sysdata.log_level );*/
+        LogStringPlus( bugbuf, LOG_COMM, sysdata.log_level );*/
       set_alarm( 0 );
       return;
     }
@@ -724,7 +724,7 @@ void new_descriptor( socket_t new_desc )
 #endif
   sprintf( log_buf, "Sock.sinaddr:  %s, port %hd.",
            buf, dnew->remote.port );
-  log_string_plus( log_buf, LOG_COMM, sysdata.log_level );
+  LogStringPlus( log_buf, LOG_COMM, sysdata.log_level );
 
   dnew->remote.hostip = CopyString( buf );
 
@@ -797,7 +797,7 @@ void new_descriptor( socket_t new_desc )
       sysdata.time_of_max = CopyString(buf);
       sysdata.alltimemax = sysdata.maxplayers;
       sprintf( log_buf, "Broke all-time maximum player record: %d", sysdata.alltimemax );
-      log_string_plus( log_buf, LOG_COMM, sysdata.log_level );
+      LogStringPlus( log_buf, LOG_COMM, sysdata.log_level );
       ToChannel( log_buf, CHANNEL_MONITOR, "Monitor", LEVEL_IMMORTAL );
       SaveSystemData( sysdata );
     }
@@ -909,7 +909,7 @@ void CloseSocket( Descriptor *dclose, bool force )
   if ( dclose->character )
     {
       sprintf( log_buf, "Closing link to %s.", ch->name );
-      log_string_plus( log_buf, LOG_COMM, umax( sysdata.log_level, ch->top_level ) );
+      LogStringPlus( log_buf, LOG_COMM, umax( sysdata.log_level, ch->top_level ) );
       /*
         if ( ch->top_level < LEVEL_CREATOR )
         ToChannel( log_buf, CHANNEL_MONITOR, "Monitor", ch->top_level );
@@ -974,7 +974,7 @@ bool read_from_descriptor( Descriptor *d )
 
       if ( nRead == 0 )
         {
-          log_string_plus( "EOF encountered on read.", LOG_COMM, sysdata.log_level );
+          LogStringPlus( "EOF encountered on read.", LOG_COMM, sysdata.log_level );
           return false;
         }
 
@@ -986,7 +986,7 @@ bool read_from_descriptor( Descriptor *d )
             }
           else
             {
-              log_string_plus( strerror( GETERROR ), LOG_COMM, sysdata.log_level );
+              LogStringPlus( strerror( GETERROR ), LOG_COMM, sysdata.log_level );
               return false;
             }
         }
@@ -1390,7 +1390,7 @@ bool check_reconnect( Descriptor *d, char *name, bool fConn )
               SendToCharacter( "Reconnecting.\r\n", ch );
               Act( AT_ACTION, "$n has reconnected.", ch, NULL, NULL, TO_ROOM );
               sprintf( log_buf, "%s@%s reconnected.", ch->name, d->remote.hostname );
-              log_string_plus( log_buf, LOG_COMM, umax( sysdata.log_level, ch->top_level ) );
+              LogStringPlus( log_buf, LOG_COMM, umax( sysdata.log_level, ch->top_level ) );
               d->connection_state = CON_PLAYING;
             }
           return true;
@@ -1426,7 +1426,7 @@ bool check_multi( Descriptor *d , char *name )
 
           WriteToBuffer( d, "Sorry multi-playing is not allowed ... have you other character quit first.\r\n", 0 );
           sprintf( log_buf, "%s attempting to multiplay with %s.", dold->original ? dold->original->name : dold->character->name , d->character->name );
-          log_string_plus( log_buf, LOG_COMM, sysdata.log_level );
+          LogStringPlus( log_buf, LOG_COMM, sysdata.log_level );
           d->character = NULL;
           FreeCharacter( d->character );
           return true;
@@ -1458,7 +1458,7 @@ bool check_playing( Descriptor *d, char *name, bool kick )
             {
               WriteToBuffer( d, "Already connected - try again.\r\n", 0 );
               sprintf( log_buf, "%s already connected.", ch->name );
-              log_string_plus( log_buf, LOG_COMM, sysdata.log_level );
+              LogStringPlus( log_buf, LOG_COMM, sysdata.log_level );
               return BERR;
             }
           if ( !kick )
@@ -1480,7 +1480,7 @@ bool check_playing( Descriptor *d, char *name, bool kick )
                ch, NULL, NULL, TO_ROOM );
           sprintf( log_buf, "%s@%s reconnected, kicking off old link.",
                    ch->name, d->remote.hostname );
-          log_string_plus( log_buf, LOG_COMM, umax( sysdata.log_level, ch->top_level ) );
+          LogStringPlus( log_buf, LOG_COMM, umax( sysdata.log_level, ch->top_level ) );
 
           d->connection_state = cstate;
           return true;

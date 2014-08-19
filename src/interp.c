@@ -392,7 +392,7 @@ void interpret( Character *ch, char *argument )
 	  loglvl = LOG_ALL;
 	}
 
-      log_string_plus( log_buf, loglvl, ch->top_level );
+      LogStringPlus( log_buf, loglvl, ch->top_level );
     }
 
   if ( ch->desc && ch->desc->snoop_by )
@@ -515,7 +515,7 @@ void interpret( Character *ch, char *argument )
               ch->in_room ? ch->in_room->vnum : 0,
               (int) (time_used.tv_sec),
 	      (int) (time_used.tv_usec) );
-      log_string_plus(log_buf, LOG_NORMAL, GetTrustLevel(ch));
+      LogStringPlus(log_buf, LOG_NORMAL, GetTrustLevel(ch));
     }
 }
 

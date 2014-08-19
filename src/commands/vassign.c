@@ -49,15 +49,15 @@ void do_vassign( Character *ch, char *argument )
   victim->pcdata->m_range_lo = r_lo;
   victim->pcdata->m_range_hi = r_hi;
 
-  assign_area( victim );
+  AssignAreaTo( victim );
   SendToCharacter( "Done.\r\n", ch );
   ChPrintf( victim, "%s has assigned you the vnum range %d - %d.\r\n",
              ch->name, r_lo, r_hi );
-  assign_area( victim );        /* Put back by Thoric on 02/07/96 */
+  AssignAreaTo( victim );        /* Put back by Thoric on 02/07/96 */
 
   if ( !victim->pcdata->area )
     {
-      Bug( "rassign: assign_area failed", 0 );
+      Bug( "rassign: AssignAreaTo failed", 0 );
       return;
     }
 

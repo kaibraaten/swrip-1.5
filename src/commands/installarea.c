@@ -33,7 +33,7 @@ void do_installarea( Character *ch, char *argument )
 
 	  /* Fold area with install flag -- auto-removes prototype flags */
           SendToCharacter( "Saving and installing file...\r\n", ch );
-          fold_area( tarea, tarea->filename, true );
+          FoldArea( tarea, tarea->filename, true );
 
           /* Remove from prototype area list */
           UNLINK( tarea, first_build, last_build, next, prev );
@@ -60,7 +60,7 @@ void do_installarea( Character *ch, char *argument )
 
           top_area++;
           SendToCharacter( "Writing area.lst...\r\n", ch );
-          write_area_list( );
+          WriteAreaList( );
           SendToCharacter( "Resetting new area.\r\n", ch );
           num = tarea->nplayer;
           tarea->nplayer = 0;

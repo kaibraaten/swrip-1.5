@@ -1443,7 +1443,7 @@ extern short gsn_yevethan;
 #define CAN_WEAR(obj, part)     (IsBitSet((obj)->wear_flags,  (part)))
 #define IS_OBJ_STAT(obj, stat)  (IsBitSet((obj)->extra_flags, (stat)))
 
-#define log_string( txt )       ( log_string_plus( (txt), LOG_NORMAL, LEVEL_LOG ) )
+#define log_string( txt )       ( LogStringPlus( (txt), LOG_NORMAL, LEVEL_LOG ) )
 
 /*
  * Structure for a command in the command lookup table.
@@ -2429,42 +2429,52 @@ extern "C" {
   ProtoMobile *GetProtoMobile( vnum_t vnum );
   ProtoObject *GetProtoObject( vnum_t vnum );
   Room *GetRoom( vnum_t vnum );
-  void  Bug( const char *str, ... );
-  void log_printf( const char *fmt, ... );
-  void log_string_plus( const char *str, short log_type, short level );
-  Room *make_room( vnum_t vnum );
-  ProtoObject *make_object( vnum_t vnum, vnum_t cvnum, char *name );
-  ProtoMobile *make_mobile( vnum_t vnum, vnum_t cvnum, char *name );
-  Exit *make_exit( Room *pRoomIndex, Room *to_room, short door );
-  void  fix_area_exits( Area *tarea );
-  void  load_area_file( Area *tarea, char *filename );
-  void  randomize_exits( Room *room, short maxdir );
-  void  make_wizlist( void );
-  bool    delete_room( Room *room );
-  bool    delete_obj( ProtoObject *obj );
-  bool    delete_mob( ProtoMobile *mob );
+  void Bug( const char *str, ... );
+  void LogPrintf( const char *fmt, ... );
+  void LogStringPlus( const char *str, short log_type, short level );
+  Room *MakeRoom( vnum_t vnum );
+  ProtoObject *MakeObject( vnum_t vnum, vnum_t cvnum, char *name );
+  ProtoMobile *MakeMobile( vnum_t vnum, vnum_t cvnum, char *name );
+  Exit *MakeExit( Room *pRoomIndex, Room *to_room, short door );
+  void FixAreaExits( Area *tarea );
+  void LoadAreaFile( Area *tarea, char *filename );
+  void RandomizeExits( Room *room, short maxdir );
+  void MakeWizlist( void );
+  bool DeleteRoom( Room *room );
+  bool DeleteObject( ProtoObject *obj );
+  bool DeleteMobile( ProtoMobile *mob );
 
-  void  sort_area( Area *pArea, bool proto );
+  void SortArea( Area *pArea, bool proto );
 
   /* build.c */
-  void mpedit( Character *ch, MPROG_DATA *mprg, int mptype, char *argument );
-  void rpedit( Character *ch, MPROG_DATA *mprg, int mptype, char *argument );
-  void write_area_list( void );
+  void EditMobProg( Character *ch, MPROG_DATA *mprg, int mptype, char *argument );
+  void EditRoomProg( Character *ch, MPROG_DATA *mprg, int mptype, char *argument );
+  void WriteAreaList( void );
 
-  bool can_rmodify( const Character *ch, const Room *room );
-  bool can_omodify( const Character *ch, const Object *obj  );
-  bool can_mmodify( const Character *ch, const Character *mob );
-  bool can_medit( const Character *ch, const ProtoMobile *mob );
-  void free_reset( Area *are, Reset *res );
-  void free_area( Area *are );
-  void assign_area( Character *ch );
+  bool CanModifyRoom( const Character *ch, const Room *room );
+  bool CanModifyObject( const Character *ch, const Object *obj  );
+  bool CanModifyCharacter( const Character *ch, const Character *mob );
+
+  /*
+   * This poorly named function is used in commands for setting
+   * shops (do_makerepair, do_makeshop, do_repairset, do_shopset).
+   * It's nearly identical to CanModifyCharacter() except that it
+   * on the ProtoMobile structure.
+   *
+   * TODO: Find some way to avoid this duplicaton and/or
+   *       rename the function.
+   */
+  bool CanMedit( const Character *ch, const ProtoMobile *mob );
+  void FreeReset( Area *are, Reset *res );
+  void FreeArea( Area *are );
+  void AssignAreaTo( Character *ch );
   ExtraDescription *SetRExtra( Room *room, char *keywords );
   bool DelRExtra( Room *room, char *keywords );
   ExtraDescription *SetOExtra( Object *obj, char *keywords );
   bool DelOExtra( Object *obj, char *keywords );
   ExtraDescription *SetOExtraProto( ProtoObject *obj, char *keywords );
   bool DelOExtraProto( ProtoObject *obj, char *keywords );
-  void fold_area( Area *tarea, char *filename, bool install );
+  void FoldArea( Area *tarea, char *filename, bool install );
 
   /* fight.c */
   ch_ret one_hit( Character *ch, Character *victim, int dt );

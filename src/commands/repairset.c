@@ -28,7 +28,7 @@ void do_repairset( Character *ch, char *argument )
       return;
     }
 
-  if ( !can_medit(ch, mob) )
+  if ( !CanMedit(ch, mob) )
     return;
 
   if ( !mob->rShop )
@@ -136,7 +136,7 @@ void do_repairset( Character *ch, char *argument )
           SendToCharacter( "Mobile not found.\r\n", ch );
           return;
         }
-      if ( !can_medit(ch, mob) )
+      if ( !CanMedit(ch, mob) )
         return;
       if ( mob2->rShop )
         {

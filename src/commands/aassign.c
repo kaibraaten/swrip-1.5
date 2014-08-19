@@ -20,7 +20,7 @@ void do_aassign( Character *ch, char *argument )
        ||   !StrCmp( "clear", argument ) )
     {
       ch->pcdata->area = NULL;
-      assign_area( ch );
+      AssignAreaTo( ch );
 
       if ( !ch->pcdata->area )
         SendToCharacter( "Area pointer cleared.\r\n", ch );

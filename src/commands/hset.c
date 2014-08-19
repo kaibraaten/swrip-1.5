@@ -21,7 +21,7 @@ void do_hset( Character *ch, char *argument )
 
   if ( !StrCmp( arg1, "save" ) )
     {
-      log_string_plus( "Saving help files.", LOG_NORMAL, LEVEL_GREATER );
+      LogStringPlus( "Saving help files.", LOG_NORMAL, LEVEL_GREATER );
       SaveHelpFiles();
       SendToCharacter( "Saved.\r\n", ch );
       return;

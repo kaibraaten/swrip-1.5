@@ -194,7 +194,7 @@ void do_mset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "str" ) )
     {
-      if ( !can_mmodify( ch, victim ) )
+      if ( !CanModifyCharacter( ch, victim ) )
         return;
       if ( value < minattr || value > maxattr )
         {
@@ -209,7 +209,7 @@ void do_mset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "int" ) )
     {
-      if ( !can_mmodify( ch, victim ) )
+      if ( !CanModifyCharacter( ch, victim ) )
         return;
       if ( value < minattr || value > maxattr )
         {
@@ -224,7 +224,7 @@ void do_mset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "wis" ) )
     {
-      if ( !can_mmodify( ch, victim ) )
+      if ( !CanModifyCharacter( ch, victim ) )
         return;
       if ( value < minattr || value > maxattr )
         {
@@ -239,7 +239,7 @@ void do_mset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "dex" ) )
     {
-      if ( !can_mmodify( ch, victim ) )
+      if ( !CanModifyCharacter( ch, victim ) )
         return;
       if ( value < minattr || value > maxattr )
         {
@@ -254,7 +254,7 @@ void do_mset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "con" ) )
     {
-      if ( !can_mmodify( ch, victim ) )
+      if ( !CanModifyCharacter( ch, victim ) )
         return;
       if ( value < minattr || value > maxattr )
         {
@@ -269,7 +269,7 @@ void do_mset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "cha" ) )
     {
-      if ( !can_mmodify( ch, victim ) )
+      if ( !CanModifyCharacter( ch, victim ) )
         return;
       if ( value < minattr || value > maxattr )
         {
@@ -284,7 +284,7 @@ void do_mset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "lck" ) )
     {
-      if ( !can_mmodify( ch, victim ) )
+      if ( !CanModifyCharacter( ch, victim ) )
         return;
       if ( value < minattr || value > maxattr )
         {
@@ -299,7 +299,7 @@ void do_mset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "frc" ) )
     {
-      if ( !can_mmodify( ch, victim ) )
+      if ( !CanModifyCharacter( ch, victim ) )
         return;
 
       if ( value < minattr || value > 20 )
@@ -315,7 +315,7 @@ void do_mset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "sav1" ) )
     {
-      if ( !can_mmodify( ch, victim ) )
+      if ( !CanModifyCharacter( ch, victim ) )
         return;
       if ( value < -30 || value > 30 )
         {
@@ -330,7 +330,7 @@ void do_mset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "sav2" ) )
     {
-      if ( !can_mmodify( ch, victim ) )
+      if ( !CanModifyCharacter( ch, victim ) )
         return;
       if ( value < -30 || value > 30 )
         {
@@ -345,7 +345,7 @@ void do_mset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "sav3" ) )
     {
-      if ( !can_mmodify( ch, victim ) )
+      if ( !CanModifyCharacter( ch, victim ) )
         return;
       if ( value < -30 || value > 30 )
         {
@@ -360,7 +360,7 @@ void do_mset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "sav4" ) )
     {
-      if ( !can_mmodify( ch, victim ) )
+      if ( !CanModifyCharacter( ch, victim ) )
         return;
       if ( value < -30 || value > 30 )
         {
@@ -375,7 +375,7 @@ void do_mset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "sav5" ) )
     {
-      if ( !can_mmodify( ch, victim ) )
+      if ( !CanModifyCharacter( ch, victim ) )
         return;
       if ( value < -30 || value > 30 )
         {
@@ -390,7 +390,7 @@ void do_mset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "sex" ) )
     {
-      if ( !can_mmodify( ch, victim ) )
+      if ( !CanModifyCharacter( ch, victim ) )
         return;
       if ( value < 0 || value > 2 )
         {
@@ -405,7 +405,7 @@ void do_mset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "race" ) )
     {
-      if ( !can_mmodify( ch, victim ) )
+      if ( !CanModifyCharacter( ch, victim ) )
         return;
       value = GetNpcRace( arg3 );
       if ( value < 0 )
@@ -428,7 +428,7 @@ void do_mset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "armor" ) )
     {
-      if ( !can_mmodify( ch, victim ) )
+      if ( !CanModifyCharacter( ch, victim ) )
         return;
       if ( value < -300 || value > 300 )
         {
@@ -443,7 +443,7 @@ void do_mset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "level" ) )
     {
-      if ( !can_mmodify( ch, victim ) )
+      if ( !CanModifyCharacter( ch, victim ) )
         return;
       if ( !IsNpc(victim) )
         {
@@ -495,7 +495,7 @@ void do_mset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "numattacks" ) )
     {
-      if ( !can_mmodify( ch, victim ) )
+      if ( !CanModifyCharacter( ch, victim ) )
         return;
       if ( !IsNpc(victim) )
         {
@@ -516,7 +516,7 @@ void do_mset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "credits" ) )
     {
-      if ( !can_mmodify( ch, victim ) )
+      if ( !CanModifyCharacter( ch, victim ) )
         return;
       victim->gold = value;
       if ( IsNpc(victim) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
@@ -526,7 +526,7 @@ void do_mset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "hitroll" ) )
     {
-      if ( !can_mmodify( ch, victim ) )
+      if ( !CanModifyCharacter( ch, victim ) )
         return;
       victim->hitroll = urange(0, value, 85);
       if ( IsNpc(victim) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
@@ -536,7 +536,7 @@ void do_mset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "damroll" ) )
     {
-      if ( !can_mmodify( ch, victim ) )
+      if ( !CanModifyCharacter( ch, victim ) )
         return;
       victim->damroll = urange(0, value, 65);
       if ( IsNpc(victim) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
@@ -546,7 +546,7 @@ void do_mset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "hp" ) )
     {
-      if ( !can_mmodify( ch, victim ) )
+      if ( !CanModifyCharacter( ch, victim ) )
         return;
       if ( value < 1 || value > 32700 )
         {
@@ -559,7 +559,7 @@ void do_mset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "force" ) )
     {
-      if ( !can_mmodify( ch, victim ) )
+      if ( !CanModifyCharacter( ch, victim ) )
         return;
       if ( value < 0 || value > 30000 )
         {
@@ -572,7 +572,7 @@ void do_mset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "move" ) )
     {
-      if ( !can_mmodify( ch, victim ) )
+      if ( !CanModifyCharacter( ch, victim ) )
         return;
       if ( value < 0 || value > 30000 )
         {
@@ -585,7 +585,7 @@ void do_mset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "align" ) )
     {
-      if ( !can_mmodify( ch, victim ) )
+      if ( !CanModifyCharacter( ch, victim ) )
         return;
       if ( value < -1000 || value > 1000 )
         {
@@ -740,7 +740,7 @@ void do_mset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "name" ) )
     {
-      if ( !can_mmodify( ch, victim ) )
+      if ( !CanModifyCharacter( ch, victim ) )
         return;
       if ( !IsNpc(victim) && GetTrustLevel( ch ) < LEVEL_IMPLEMENTOR )
         {
@@ -883,7 +883,7 @@ void do_mset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "spec" ) )
     {
-      if ( !can_mmodify( ch, victim ) )
+      if ( !CanModifyCharacter( ch, victim ) )
         return;
       if ( !IsNpc(victim) )
         {
@@ -912,7 +912,7 @@ void do_mset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "spec2" ) )
     {
-      if ( !can_mmodify( ch, victim ) )
+      if ( !CanModifyCharacter( ch, victim ) )
         return;
       if ( !IsNpc(victim) )
         {
@@ -971,7 +971,7 @@ void do_mset( Character *ch, char *argument )
           return;
         }
 
-      if ( !can_mmodify( ch, victim ) )
+      if ( !CanModifyCharacter( ch, victim ) )
         return;
       if ( !argument || argument[0] == '\0' )
         {
@@ -1033,7 +1033,7 @@ void do_mset( Character *ch, char *argument )
           return;
         }
 
-      if ( !can_mmodify( ch, victim ) )
+      if ( !CanModifyCharacter( ch, victim ) )
         return;
       if ( !argument || argument[0] == '\0' )
         {
@@ -1061,7 +1061,7 @@ void do_mset( Character *ch, char *argument )
           return;
         }
 
-      if ( !can_mmodify( ch, victim ) )
+      if ( !CanModifyCharacter( ch, victim ) )
         return;
 
       if ( !argument || argument[0] == '\0' )
@@ -1092,7 +1092,7 @@ void do_mset( Character *ch, char *argument )
           return;
         }
 
-      if ( !can_mmodify( ch, victim ) )
+      if ( !CanModifyCharacter( ch, victim ) )
         return;
       if ( !argument || argument[0] == '\0' )
         {
@@ -1123,7 +1123,7 @@ void do_mset( Character *ch, char *argument )
           SendToCharacter( "You can only modify a mobile's ris.\r\n", ch );
           return;
         }
-      if ( !can_mmodify( ch, victim ) )
+      if ( !CanModifyCharacter( ch, victim ) )
         return;
 
       sprintf(outbuf,"%s resistant %s",arg1, arg3);
@@ -1137,7 +1137,7 @@ void do_mset( Character *ch, char *argument )
           SendToCharacter( "You can only modify a mobile's ris.\r\n", ch );
           return;
         }
-      if ( !can_mmodify( ch, victim ) )
+      if ( !CanModifyCharacter( ch, victim ) )
         return;
 
 
@@ -1152,7 +1152,7 @@ void do_mset( Character *ch, char *argument )
           SendToCharacter( "You can only modify a mobile's ris.\r\n", ch );
           return;
         }
-      if ( !can_mmodify( ch, victim ) )
+      if ( !CanModifyCharacter( ch, victim ) )
         return;
 
       sprintf(outbuf,"%s susceptible %s",arg1, arg3);
@@ -1166,7 +1166,7 @@ void do_mset( Character *ch, char *argument )
           SendToCharacter( "You can only modify a mobile's ris.\r\n", ch );
           return;
         }
-      if ( !can_mmodify( ch, victim ) )
+      if ( !CanModifyCharacter( ch, victim ) )
         return;
 
       sprintf(outbuf,"%s resistant %s",arg1, arg3);
@@ -1183,7 +1183,7 @@ void do_mset( Character *ch, char *argument )
           SendToCharacter( "You can only modify a mobile's ris.\r\n", ch );
           return;
         }
-      if ( !can_mmodify( ch, victim ) )
+      if ( !CanModifyCharacter( ch, victim ) )
         return;
 
       sprintf(outbuf,"%s resistant %s",arg1, arg3);
@@ -1199,7 +1199,7 @@ void do_mset( Character *ch, char *argument )
           SendToCharacter( "You can only modify a mobile's ris.\r\n", ch );
           return;
         }
-      if ( !can_mmodify( ch, victim ) )
+      if ( !CanModifyCharacter( ch, victim ) )
         return;
 
       sprintf(outbuf,"%s immune %s",arg1, arg3);
@@ -1215,7 +1215,7 @@ void do_mset( Character *ch, char *argument )
           SendToCharacter( "You can only modify a mobile's ris.\r\n", ch );
           return;
         }
-      if ( !can_mmodify( ch, victim ) )
+      if ( !CanModifyCharacter( ch, victim ) )
         return;
 
       sprintf(outbuf,"%s resistant %s",arg1, arg3);
@@ -1234,7 +1234,7 @@ void do_mset( Character *ch, char *argument )
           SendToCharacter( "You can only modify a mobile's resistancies.\r\n", ch );
           return;
         }
-      if ( !can_mmodify( ch, victim ) )
+      if ( !CanModifyCharacter( ch, victim ) )
         return;
       if ( !argument || argument[0] == '\0' )
         {
@@ -1263,7 +1263,7 @@ void do_mset( Character *ch, char *argument )
           return;
         }
 
-      if ( !can_mmodify( ch, victim ) )
+      if ( !CanModifyCharacter( ch, victim ) )
         return;
       if ( !argument || argument[0] == '\0' )
         {
@@ -1291,7 +1291,7 @@ void do_mset( Character *ch, char *argument )
           SendToCharacter( "You can only modify a mobile's susceptibilities.\r\n", ch );
           return;
         }
-      if ( !can_mmodify( ch, victim ) )
+      if ( !CanModifyCharacter( ch, victim ) )
         return;
       if ( !argument || argument[0] == '\0' )
         {
@@ -1320,7 +1320,7 @@ void do_mset( Character *ch, char *argument )
           SendToCharacter( "You can only modify a mobile's parts.\r\n", ch );
           return;
         }
-      if ( !can_mmodify( ch, victim ) )
+      if ( !CanModifyCharacter( ch, victim ) )
         return;
       if ( !argument || argument[0] == '\0' )
         {
@@ -1348,7 +1348,7 @@ void do_mset( Character *ch, char *argument )
           SendToCharacter( "You can only modify a mobile's attacks.\r\n", ch );
           return;
         }
-      if ( !can_mmodify( ch, victim ) )
+      if ( !CanModifyCharacter( ch, victim ) )
         return;
       if ( !argument || argument[0] == '\0' )
         {
@@ -1379,7 +1379,7 @@ void do_mset( Character *ch, char *argument )
           SendToCharacter( "You can only modify a mobile's defenses.\r\n", ch );
           return;
         }
-      if ( !can_mmodify( ch, victim ) )
+      if ( !CanModifyCharacter( ch, victim ) )
         return;
       if ( !argument || argument[0] == '\0' )
         {
@@ -1408,7 +1408,7 @@ void do_mset( Character *ch, char *argument )
           SendToCharacter( "Mobiles only.\r\n", ch );
           return;
         }
-      if ( !can_mmodify( ch, victim ) )
+      if ( !CanModifyCharacter( ch, victim ) )
         return;
       if ( value < 0 || value > POS_STANDING )
         {
@@ -1429,7 +1429,7 @@ void do_mset( Character *ch, char *argument )
           SendToCharacter( "Mobiles only.\r\n", ch );
           return;
         }
-      if ( !can_mmodify( ch, victim ) )
+      if ( !CanModifyCharacter( ch, victim ) )
         return;
       if ( value < 0 || value > POS_STANDING )
         {
@@ -1453,7 +1453,7 @@ void do_mset( Character *ch, char *argument )
           SendToCharacter( "Mobiles only.\r\n", ch );
           return;
         }
-      if ( !can_mmodify( ch, victim ) )
+      if ( !CanModifyCharacter( ch, victim ) )
         return;
 
       sscanf(arg3,"%d %c %d %c %d",&num,&char1,&size,&char2,&plus);
@@ -1477,7 +1477,7 @@ void do_mset( Character *ch, char *argument )
           SendToCharacter( "Mobiles only.\r\n", ch );
           return;
         }
-      if ( !can_mmodify( ch, victim ) )
+      if ( !CanModifyCharacter( ch, victim ) )
         return;
 
       sscanf(arg3,"%d %c %d %c %d",&num,&char1,&size,&char2,&plus);
@@ -1497,7 +1497,7 @@ void do_mset( Character *ch, char *argument )
           SendToCharacter( "Mobiles only.\r\n", ch );
           return;
         }
-      if ( !can_mmodify( ch, victim ) )
+      if ( !CanModifyCharacter( ch, victim ) )
         return;
       if ( value < 0 || value > 32767 )
         {
@@ -1517,7 +1517,7 @@ void do_mset( Character *ch, char *argument )
           SendToCharacter( "Mobiles only.\r\n", ch );
           return;
         }
-      if ( !can_mmodify( ch, victim ) )
+      if ( !CanModifyCharacter( ch, victim ) )
         return;
       if ( value < 0 || value > 32767 )
         {
@@ -1537,7 +1537,7 @@ void do_mset( Character *ch, char *argument )
 	  SendToCharacter( "Mobiles only.\r\n", ch );
           return;
         }
-      if ( !can_mmodify( ch, victim ) )
+      if ( !CanModifyCharacter( ch, victim ) )
         return;
       if ( value < 0 || value > 32767 )
         {
@@ -1557,7 +1557,7 @@ void do_mset( Character *ch, char *argument )
           SendToCharacter( "Mobiles only.\r\n", ch );
           return;
         }
-      if ( !can_mmodify( ch, victim ) )
+      if ( !CanModifyCharacter( ch, victim ) )
         return;
       if ( value < 0 || value > 100 )
         {
@@ -1577,7 +1577,7 @@ void do_mset( Character *ch, char *argument )
           SendToCharacter( "Mobiles only.\r\n", ch );
           return;
         }
-      if ( !can_mmodify( ch, victim ) )
+      if ( !CanModifyCharacter( ch, victim ) )
         return;
 
       if ( value < 0 || value > 100 )
@@ -1598,7 +1598,7 @@ void do_mset( Character *ch, char *argument )
           SendToCharacter( "Mobiles only.\r\n", ch );
           return;
         }
-      if ( !can_mmodify( ch, victim ) )
+      if ( !CanModifyCharacter( ch, victim ) )
         return;
       if ( value < 0 || value > 1000 )
         {
@@ -1622,7 +1622,7 @@ void do_mset( Character *ch, char *argument )
           return;
         }
 
-      if ( !can_mmodify( ch, victim ) )
+      if ( !CanModifyCharacter( ch, victim ) )
         return;
 
       if ( !IsBitSet(victim->pcdata->area->status, AREA_LOADED ) )
@@ -1645,7 +1645,7 @@ void do_mset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "speaks" ) )
     {
-      if ( !can_mmodify( ch, victim ) )
+      if ( !CanModifyCharacter( ch, victim ) )
         return;
       if ( !argument || argument[0] == '\0' )
         {
@@ -1695,7 +1695,7 @@ void do_mset( Character *ch, char *argument )
           SendToCharacter( "Players must choose the language they speak themselves.\r\n", ch );
           return;
         }
-      if ( !can_mmodify( ch, victim ) )
+      if ( !CanModifyCharacter( ch, victim ) )
         return;
       if ( !argument || argument[0] == '\0' )
         {
