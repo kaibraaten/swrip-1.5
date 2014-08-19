@@ -31,12 +31,13 @@ extern Character *gch_prev;
 /*
  * Local functions.
  */
+static void ApplyWantedFlags( Character *ch, const Character *victim );
+static void UpdateKillStats( Character *ch, Character *victim );
 void dam_message( Character *ch, Character *victim, int dam, int dt );
 void group_gain( Character *ch, Character *victim );
 int align_compute( Character *gch, Character *victim );
 int obj_hitroll( Object *obj );
 bool get_cover( Character *ch );
-void check_killer( Character *ch, Character *victim );
 
 bool dual_flip = false;
 
@@ -1635,7 +1636,8 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
         if ( !IsNpc(ch) )              /* keep track of mob vnum killed */
           AddKill( ch, victim );
 
-      check_killer( ch, victim );
+      ApplyWantedFlags( ch, victim );
+      UpdateKillStats( ch, victim );
 
       if ( !IsNpc( ch ) && ch->pcdata->clan )
         UpdateClanMember( ch );
@@ -1794,82 +1796,87 @@ bool legal_loot( Character *ch, Character *victim )
   return false;
 }
 
-/*
-  see if an attack justifies a KILLER flag --- edited so that none do but can't
-  murder a no pk person. --- edited again for planetary wanted flags -- well will be soon :p
-*/
-
-void check_killer( Character *ch, Character *victim )
+static void ApplyWantedFlags( Character *ch, const Character *victim )
 {
-  /*
-   * Charm-o-rama.
-   */
   if ( IsBitSet(ch->affected_by, AFF_CHARM) )
     {
       if ( !ch->master )
         {
           Bug( "%s: %s bad AFF_CHARM",
-	       __FUNCTION__, IsNpc(ch) ? ch->short_descr : ch->name );
+               __FUNCTION__, IsNpc(ch) ? ch->short_descr : ch->name );
           affect_strip( ch, gsn_charm_person );
           RemoveBit( ch->affected_by, AFF_CHARM );
           return;
         }
 
       if ( ch->master )
-	{
-	  check_killer( ch->master, victim );
-	}
+        {
+          ApplyWantedFlags( ch->master, victim );
+        }
     }
 
-  if ( IsNpc(victim) )
+  if ( IsNpc(victim) && !IsNpc( ch ) )
     {
-      if ( !IsNpc( ch ) )
-        {
-	  int x = 0;
+      int x = 0;
 
-          for ( x = 0; x < 32; x++ )
-            {
-              if ( IsBitSet(victim->vip_flags , 1 << x ) )
-                {
-                  SetBit(ch->pcdata->wanted_flags, 1 << x );
-                  ChPrintf( ch, "&YYou are now wanted on %s.&w\r\n", planet_flags[x] );
-                }
-            }
-
-          if ( ch->pcdata->clan )
+      for ( x = 0; x < 32; x++ )
+	{
+	  if ( IsBitSet(victim->vip_flags, 1 << x ) )
 	    {
-	      ch->pcdata->clan->mkills++;
+	      SetBit(ch->pcdata->wanted_flags, 1 << x );
+	      ChPrintf( ch, "&YYou are now wanted on %s.&w\r\n", planet_flags[x] );
 	    }
+	}
+    }
+}
 
-          ch->pcdata->mkills++;
-          ch->in_room->area->mkills++;
+static void UpdateKillStats( Character *ch, Character *victim )
+{
+  if ( IsBitSet(ch->affected_by, AFF_CHARM) )
+    {
+      if ( !ch->master )
+        {
+          Bug( "%s: %s bad AFF_CHARM",
+               __FUNCTION__, IsNpc(ch) ? ch->short_descr : ch->name );
+          affect_strip( ch, gsn_charm_person );
+          RemoveBit( ch->affected_by, AFF_CHARM );
+          return;
         }
 
-      return;
+      if ( ch->master )
+        {
+          UpdateKillStats( ch->master, victim );
+        }
     }
 
-  if ( !IsNpc(ch) && !IsNpc(victim) )
+  if ( !IsNpc(ch) && IsNpc(victim) )
     {
       if ( ch->pcdata->clan )
-	{
-	  ch->pcdata->clan->pkills++;
-	}
+        {
+          ch->pcdata->clan->mkills++;
+        }
+
+      ch->pcdata->mkills++;
+      ch->in_room->area->mkills++;
+    }
+  else if ( !IsNpc(ch) && !IsNpc(victim) )
+    {
+      if ( IsClanned( ch ) )
+        {
+          ch->pcdata->clan->pkills++;
+        }
+
+      if ( IsClanned( victim ) )
+        {
+          victim->pcdata->clan->pdeaths++;
+        }
 
       ch->pcdata->pkills++;
       UpdatePosition(victim);
-
-      if ( victim->pcdata->clan )
-	{
-	  victim->pcdata->clan->pdeaths++;
-	}
     }
-
-  if ( IsNpc(ch) )
+  else if ( IsNpc(ch) && !IsNpc(victim) )
     {
-      if ( !IsNpc(victim) )
-	{
-	  victim->in_room->area->mdeaths++;
-	}
+      victim->in_room->area->mdeaths++;
     }
 }
 
