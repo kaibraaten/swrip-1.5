@@ -21,7 +21,7 @@ ch_ret spell_earthquake( int sn, int level, Character *ch, void *vo )
   SendToCharacter("You feel the hatred grow within you!\r\n", ch);
   ch->alignment = ch->alignment - 100;
   ch->alignment = urange( -1000, ch->alignment, 1000 );
-  sith_penalty( ch );
+  ApplySithPenalty( ch );
 
 
   Act( AT_MAGIC, "The earth trembles beneath your feet!", ch, NULL, NULL, TO_CHAR );

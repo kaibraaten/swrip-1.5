@@ -20,7 +20,7 @@ ch_ret spell_fireball( int sn, int level, Character *ch, void *vo )
   SendToCharacter("You feel the hatred grow within you!\r\n", ch);
   ch->alignment = ch->alignment - 100;
   ch->alignment = urange( -1000, ch->alignment, 1000 );
-  sith_penalty( ch );
+  ApplySithPenalty( ch );
 
   level = umin(level, sizeof(dam_each)/sizeof(dam_each[0]) - 1);
   level = umax(0, level);

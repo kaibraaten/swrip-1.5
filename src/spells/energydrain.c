@@ -21,7 +21,7 @@ ch_ret spell_energy_drain( int sn, int level, Character *ch, void *vo )
   SendToCharacter("You feel the hatred grow within you!\r\n", ch);
   ch->alignment = ch->alignment - 200;
   ch->alignment = urange( -1000, ch->alignment, 1000 );
-  sith_penalty( ch );
+  ApplySithPenalty( ch );
 
   drain_chance = ris_save( victim, victim->top_level, RIS_DRAIN );
 

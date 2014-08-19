@@ -13,7 +13,7 @@ ch_ret spell_black_lightning( int sn, int level, Character *ch, void *vo )
   SendToCharacter("You feel the hatred grow within you!\r\n", ch);
   ch->alignment = ch->alignment - 100;
   ch->alignment = urange( -1000, ch->alignment, 1000 );
-  sith_penalty(ch);
+  ApplySithPenalty(ch);
 
   Act( AT_BLUE, "Bolts of electricity shoot from the fingers of $n, sending $N into a fit of painful spasms."
        , ch, NULL, victim, TO_NOTVICT );

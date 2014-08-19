@@ -11,7 +11,7 @@ ch_ret spell_poison( int sn, int level, Character *ch, void *vo )
   SendToCharacter("You feel the hatred grow within you!\r\n", ch);
   ch->alignment = ch->alignment - 100;
   ch->alignment = urange( -1000, ch->alignment, 1000 );
-  sith_penalty( ch );
+  ApplySithPenalty( ch );
 
   poison_chance = ris_save( victim, level, RIS_POISON );
 

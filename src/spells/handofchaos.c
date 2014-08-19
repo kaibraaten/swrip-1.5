@@ -12,7 +12,7 @@ ch_ret spell_hand_of_chaos( int sn, int level, Character *ch, void *vo )
   SendToCharacter("You feel the hatred grow within you!\r\n", ch);
   ch->alignment = ch->alignment - 100;
   ch->alignment = urange( -1000, ch->alignment, 1000 );
-  sith_penalty( ch );
+  ApplySithPenalty( ch );
 
 
   if ( saves_spell_staff( level, victim ) )

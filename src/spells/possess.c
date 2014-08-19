@@ -64,7 +64,7 @@ ch_ret spell_possess( int sn, int level, Character *ch, void *vo )
   SendToCharacter("You feel the hatred grow within you as you twist your victims mind!\r\n", ch);
   ch->alignment = ch->alignment - 50;
   ch->alignment = urange( -1000, ch->alignment, 1000 );
-  sith_penalty( ch );
+  ApplySithPenalty( ch );
 
   af.type      = sn;
   af.duration  = 20 + (GetAbilityLevel( ch, FORCE_ABILITY ) - victim->top_level) / 2;

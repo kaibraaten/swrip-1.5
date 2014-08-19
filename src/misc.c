@@ -23,27 +23,29 @@
 #include "mud.h"
 #include "character.h"
 
-void jedi_bonus( Character *ch )
+void ApplyJediBonus( Character *ch )
 {
-  if ( GetRandomNumberFromRange( 1 , 100 ) == 1 )
+  if ( GetRandomPercent() == 1 )
     {
       ch->max_mana++;
-      SendToCharacter("&YYou are wise in your use of the force.\r\n", ch);
-      SendToCharacter("You feel a little stronger in your wisdom.&w\r\n", ch);
+      ChPrintf( ch, "&YYou are wise in your use of the force.\r\n" );
+      ChPrintf( ch, "You feel a little stronger in your wisdom.&w\r\n" );
     }
 }
 
-void sith_penalty( Character *ch )
+void ApplySithPenalty( Character *ch )
 {
-  if ( GetRandomNumberFromRange( 1 , 100 ) == 1 )
+  if ( GetRandomPercent() == 1 )
     {
       ch->max_mana++;
 
       if (ch->max_hit > 100)
-        ch->max_hit--;
+	{
+	  ch->max_hit--;
+	}
 
       ch->hit--;
-      SendToCharacter("&zYour body grows weaker as your strength in the dark side grows.&w\r\n",ch);
+      ChPrintf( ch, "&zYour body grows weaker as your strength in the dark side grows.&w\r\n" );
     }
 }
 

@@ -33,7 +33,7 @@ ch_ret spell_affectchar( int sn, int level, Character *ch, void *vo )
 	  SendToCharacter("You feel the hatred grow within you!\r\n", ch);
           ch->alignment = ch->alignment - 100;
           ch->alignment = urange( -1000, ch->alignment, 1000 );
-          sith_penalty( ch );
+          ApplySithPenalty( ch );
           aff_chance = ris_save( victim, level, RIS_POISON );
 
           if ( victim->race == RACE_DROID )
@@ -100,7 +100,7 @@ ch_ret spell_affectchar( int sn, int level, Character *ch, void *vo )
                   SendToCharacter("The noble Jedi use their powers to help others!\r\n", ch);
                   ch->alignment = ch->alignment +20 ;
                   ch->alignment = urange( -1000, ch->alignment, 1000 );
-                  jedi_bonus(ch);
+                  ApplyJediBonus(ch);
                 }
               if  ( af.modifier > 0 && victim->hit >= victim->max_hit )
                 {
@@ -119,7 +119,7 @@ ch_ret spell_affectchar( int sn, int level, Character *ch, void *vo )
                   SendToCharacter("The noble Jedi use their powers to help others!\r\n", ch);
                   ch->alignment = ch->alignment +25 ;
                   ch->alignment = urange( -1000, ch->alignment, 1000 );
-		  jedi_bonus(ch);
+		  ApplyJediBonus(ch);
                 }
               victim->mana = urange( 0, victim->mana + af.modifier, victim->max_mana );
               UpdatePosition( victim );

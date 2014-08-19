@@ -2514,9 +2514,8 @@ extern "C" {
   bool IsValidLanguage( int language );
   void PullOrPush( Character *ch, Object *obj, bool pull );
   void ActionDescription( Character *ch, Object *obj, void *vo );
-  void jedi_checks( Character *ch );
-  void jedi_bonus( Character *ch );
-  void sith_penalty( Character *ch );
+  void ApplyJediBonus( Character *ch );
+  void ApplySithPenalty( Character *ch );
 
   /* mud_comm.c */
   Character *get_char_room_mp( Character *ch, char *argument );

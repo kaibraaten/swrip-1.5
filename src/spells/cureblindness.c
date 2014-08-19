@@ -20,7 +20,7 @@ ch_ret spell_cure_blindness( int sn, int level, Character *ch, void *vo )
       SendToCharacter("The noble Jedi use their powers to help others!\r\n", ch);
       ch->alignment = ch->alignment +25 ;
       ch->alignment = urange( -1000, ch->alignment, 1000 );
-      jedi_bonus(ch);
+      ApplyJediBonus(ch);
     }
 
   affect_strip( victim, gsn_blindness );
